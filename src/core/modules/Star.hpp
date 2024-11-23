@@ -66,11 +66,11 @@ private:
 		qint32  x0;           // 4 bytes, ra in mas
 		qint32  x1;           // 4 bytes, dec in mas
 		qint16  b_v; 		  // 2 byte, B-V in milli-mag
-		qint16  vmag;         //` 2 bytes, V magnitude in milli-mag
+		qint16  vmag;         // 2 bytes, V magnitude in milli-mag
 		quint16 spInt;        // 2 bytes
 		qint32  dx0;          // 4 bytes, pmra in uas/yr
 		qint32  dx1;          // 4 bytes, pmdec in uas/yr
-		qint32  plx;          // 4 bytes, parallax in uas
+		quint16 plx;          // 2 bytes, parallax in 20 uas
 		quint16 plx_err;      // 2 bytes, parallax error in 10 uas
 		qint16  rv;		      // 2 bytes, radial velocity in 10 m/s
 	} d;
@@ -258,7 +258,7 @@ public:
 	inline int getX1() const { return d.x1;}
 	inline int getDx0() const {return d.dx0;}
 	inline int getDx1() const {return d.dx1;}
-	inline int getPlx() const {return d.plx;}
+	inline int getPlx() const {return d.plx * 20;}  // because we store it in 20uas, convert back to 1uas
 	inline int getRV() const {return d.rv;}
 	inline void get6Dsolution(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float dyr) const {
 		RA = getX0() * MAS2RAD;
@@ -270,7 +270,7 @@ public:
 		getJ2000Pos6DTreatment(RA, DE, Plx, pmra, pmdec, vr, dyr);
 	}
 	inline bool getTimeDependence() const {
-		// Flag if the star has time dependent data
+		// Flag if the star should have time dependent astrometry computed
 		// the star need to has parallax, proper motion, or radial velocity
 		// use OR in each in case one of them is actually exactly 0
 		// no point of doing proper propagation if any of them is missing
@@ -294,7 +294,7 @@ public:
 	int hasComponentID(void) const;
 	void print(void) const;
 };
-static_assert(sizeof(Star1) == 42, "Size of Star1 must be 42 bytes");
+static_assert(sizeof(Star1) == 40, "Size of Star1 must be 40 bytes");
 #pragma pack(pop) // Restore the previous packing alignment
 
 #pragma pack(push, 1)
@@ -316,7 +316,6 @@ public:
 	inline int getDx1() const {return d.dx1;}
 	inline int getBVIndex() const {return BVToIndex(getBV());}
 	inline int getMag() const { return d.vmag; }
-
 	enum {MaxPosVal=((1<<19)-1)};
 	StelObjectP createStelObject(const SpecialZoneArray<Star2> *a, const SpecialZoneData<Star2> *z) const;
 	void getJ2000Pos(float dyr, Vec3f& pos) const
@@ -337,6 +336,9 @@ public:
 	QString getDesignation(void) const {return QString();}
 	int hasComponentID(void) const {return 0;}
 	bool hasName() const {return getGaia();}
+	bool getTimeDependence() const { // Flag if the star should have time dependent astrometry computed
+		return false;
+	}
 	void print(void) const;
 };
 static_assert(sizeof(Star2) == 28, "Size of Star2 must be 28 bytes");
@@ -399,6 +401,9 @@ public:
 	QString getDesignation() const {return QString();}
 	int hasComponentID() const {return 0;}
 	bool hasName() const {return false;}
+	bool getTimeDependence() const { // Flag if the star should have time dependent astrometry computed
+		return false;
+	}
 	void print();
 };
 static_assert(sizeof(Star3) == 6, "Size of Star3 must be 6 bytes");
