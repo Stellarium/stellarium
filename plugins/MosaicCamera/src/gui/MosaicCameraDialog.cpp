@@ -33,7 +33,7 @@
 
 MosaicCameraDialog::MosaicCameraDialog()
 	: StelDialog("MosaicCamera")
-	, msm(nullptr)
+	, mc(nullptr)
 {
 	ui = new Ui_mosaicCameraDialog;
 }
@@ -42,6 +42,15 @@ MosaicCameraDialog::~MosaicCameraDialog()
 {
 	delete ui;
 }
+
+void MosaicCameraDialog::updateRA(double ra)
+{}
+
+void MosaicCameraDialog::updateDec(double dec)
+{}
+
+void MosaicCameraDialog::updateRot(double rot)
+{}
 
 void MosaicCameraDialog::retranslate()
 {
@@ -55,7 +64,7 @@ void MosaicCameraDialog::retranslate()
 // Initialize the dialog widgets and connect the signals/slots
 void MosaicCameraDialog::createDialogContent()
 {
-	msm = GETSTELMODULE(MosaicCamera);
+	mc = GETSTELMODULE(MosaicCamera);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
@@ -77,6 +86,11 @@ void MosaicCameraDialog::createDialogContent()
 	setAboutHtml();
 	if(gui!=nullptr)
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+
+	// Location tab
+	connect(ui->RASpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &MosaicCameraDialog::updateRA);
+	connect(ui->DecSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &MosaicCameraDialog::updateDec);
+	connect(ui->RotSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &MosaicCameraDialog::updateRot);
 }
 
 void MosaicCameraDialog::setAboutHtml(void)
