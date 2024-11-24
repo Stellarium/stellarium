@@ -287,6 +287,7 @@ public:
 	}
 
 	float getBV(void) const {return static_cast<float>(d.b_v) / 1000.f;}
+	bool isVIP() const {return true;}
 	bool hasName() const {return getHip();}  // OR gaia??
 	QString getNameI18n(void) const;
 	QString getScreenNameI18n(void) const;
@@ -335,7 +336,11 @@ public:
 	QString getScreenNameI18n(void) const {return QString();}
 	QString getDesignation(void) const {return QString();}
 	int hasComponentID(void) const {return 0;}
+	bool isVIP() const {return false;}
 	bool hasName() const {return getGaia();}
+	int getPlx() const {return 0;}
+	int getPlxErr() const {return 0;}
+	int getRV() const {return 0;}
 	bool getTimeDependence() const { // Flag if the star should have time dependent astrometry computed
 		return false;
 	}
@@ -374,7 +379,6 @@ public:
 		quint32 v = d[2] >> 2 | d[3] << 6 | (d[4] & 0xF) << 14;
 		return (static_cast<qint32>(v)) << 14 >> 14;
 	}
-
 	inline int getBVIndex() const
 	{
 		return d[4] >> 4 | (d[5] & 0x7) << 4;
@@ -384,7 +388,6 @@ public:
 	{
 		return d[5] >> 3;
 	}
-
 	enum {MaxPosVal=((1<<17)-1)};
 	StelObjectP createStelObject(const SpecialZoneArray<Star3> *a, const SpecialZoneData<Star3> *z) const;
 	void getJ2000Pos(float dyr, Vec3f& pos) const
@@ -399,7 +402,13 @@ public:
 	QString getNameI18n() const {return QString();}
 	QString getScreenNameI18n() const {return QString();}
 	QString getDesignation() const {return QString();}
+	bool isVIP() const {return false;}
 	int hasComponentID() const {return 0;}
+	int getDx0() const {return 0;}
+	int getDx1() const {return 0;}
+	int getPlx() const {return 0;}
+	int getPlxErr() const {return 0;}
+	int getRV() const {return 0;}
 	bool hasName() const {return false;}
 	bool getTimeDependence() const { // Flag if the star should have time dependent astrometry computed
 		return false;

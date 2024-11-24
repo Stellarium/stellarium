@@ -435,15 +435,37 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	const Star* lastStar = zoneToDraw->getStars() + zoneToDraw->size;
 	for (const Star* s=zoneToDraw->getStars();s<lastStar;++s)
 	{
-		// Artificial cutoff per magnitude
+		float starMag = s->getMag();
+		if (s->getTimeDependence() && fabs(dyrs) > 3000.) {  // only recompute if has time dependence and time is far away
+			// don't do full solution, can be very slow, just estimate here	
+			// estimate parallax from radial velocity and total proper motion
+			double Plx = s->getPlx() * 0.001;
+			double pmra = s->getDx0() / 1000.;
+			double pmdec = s->getDx1() / 1000.;
+			double vr = s->getRV() / 10.;
+			pmra *= MAS2RAD;
+			pmdec *= MAS2RAD;
+			double pmr0 = vr * Plx / (AU / JYEAR_SECONDS) * MAS2RAD;
+			double pmtotsqr =  (pmra * pmra + pmdec * pmdec);
+			double f = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0*pmr0)*dyrs*dyrs);
+			float magOffset = 5.f * log10(1/f);
+			starMag += magOffset * 1000.;
+		}
 
-		if (mag_steps * (s->getMag() - mag_min) / (mag_range) > cutoffMagStep)
-			break;
-    
+		int magIndex = static_cast<int>((starMag - mag_min) * mag_steps / mag_range);
+
+		// first part is check for Star1, so to keep looping for long-range prediction
+		// second part is // old behavior, to skip stars below you that are too faint to display for Star2 and Star3
+		if ((magIndex > cutoffMagStep && fabs(dyrs) < 3000.) || (magIndex > cutoffMagStep && !s->isVIP()))
+				break;
+
+		// Because of the test above, the star should always be visible from this point.
+		if (magIndex > cutoffMagStep)
+				continue;  // allow continue for other star that might became bright enough in the future
 		// Because of the test above, the star should always be visible from this point.
 		
 		// Array of 2 numbers containing radius and magnitude
-		const RCMag* tmpRcmag = &rcmag_table[mag_steps * (s->getMag() - mag_min) / (mag_range)];
+		const RCMag* tmpRcmag = &rcmag_table[magIndex];
 		
 		// Get the star position from the array
 		s->getJ2000Pos(dyrs, vf);
@@ -475,7 +497,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 				continue;
 		}
 
-		int extinctedMagIndex = mag_steps * (s->getMag() - mag_min) / (mag_range);
+		int extinctedMagIndex = magIndex;
 		float twinkleFactor=1.0f; // allow height-dependent twinkle.
 		if (withExtinction)
 		{
@@ -484,7 +506,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 			float extMagShift=0.0f;
 			extinction.forward(altAz, &extMagShift);
-			extinctedMagIndex = mag_steps * (s->getMag() - mag_min) / (mag_range) + static_cast<int>(extMagShift/k);
+			extinctedMagIndex += static_cast<int>(extMagShift/k);
 			if (extinctedMagIndex >= cutoffMagStep || extinctedMagIndex<0) // i.e., if extincted it is dimmer than cutoff or extinctedMagIndex is negative (missing star catalog), so remove
 				continue;
 			tmpRcmag = &rcmag_table[extinctedMagIndex];
