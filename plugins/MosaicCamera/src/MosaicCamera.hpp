@@ -41,7 +41,14 @@ public:
 
 	bool configureGui(bool show=true) override;
 
+	void setRA(double ra);
+	void setDec(double dec);
+	void setRot(double rot);
+
 private:
+	double ra;
+	double dec;
+	double rot;
 	// Font used for displaying our text
 	QFont font;
 	// GUI
