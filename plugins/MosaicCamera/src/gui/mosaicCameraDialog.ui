@@ -77,6 +77,12 @@
          <height>22</height>
         </rect>
        </property>
+       <property name="minimum">
+        <double>-360.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>360.000000000000000</double>
+       </property>
       </widget>
       <widget class="QDoubleSpinBox" name="DecSpinBox">
        <property name="geometry">
@@ -87,6 +93,12 @@
          <height>22</height>
         </rect>
        </property>
+       <property name="minimum">
+        <double>-90.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>90.000000000000000</double>
+       </property>
       </widget>
       <widget class="QDoubleSpinBox" name="RotSpinBox">
        <property name="geometry">
@@ -96,6 +108,12 @@
          <width>211</width>
          <height>21</height>
         </rect>
+       </property>
+       <property name="minimum">
+        <double>-90.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>90.000000000000000</double>
        </property>
       </widget>
      </widget>
