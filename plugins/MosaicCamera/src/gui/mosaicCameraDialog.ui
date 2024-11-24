@@ -31,13 +31,16 @@
    </property>
    <item>
     <widget class="TitleBar" name="titleBar">
-     <property name="title">
+     <property name="title" stdset="0">
       <string>Mosaic Camera Plug-in Configuration</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QTabWidget" name="tabs">
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
      <property name="documentMode">
       <bool>false</bool>
      </property>
@@ -61,6 +64,41 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="LocationTab">
+      <attribute name="title">
+       <string>Location</string>
+      </attribute>
+      <widget class="QDoubleSpinBox" name="RASpinBox">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>211</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="DecSpinBox">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>211</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="RotSpinBox">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>70</y>
+         <width>211</width>
+         <height>21</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
     </widget>
    </item>
   </layout>
@@ -71,11 +109,6 @@
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>

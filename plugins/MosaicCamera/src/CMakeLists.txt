@@ -20,7 +20,8 @@ SET(MosaicCameraDialog_UIS
 
 SET(MosaicCamera_Qt_Libraries Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Widgets)
 
-ADD_LIBRARY(MosaicCamera-static STATIC ${MosaicCamera_SRCS} ${MosaicCameraDialog_UIS_H})
+ADD_LIBRARY(MosaicCamera-static STATIC ${MosaicCamera_SRCS} ${MosaicCameraDialog_UIS_H}
+    gui/mosaicCameraDialog.ui)
 # The library target "MosaicCamera-static" has a default OUTPUT_NAME of "MosaicCamera-static", so change it.
 SET_TARGET_PROPERTIES(MosaicCamera-static PROPERTIES OUTPUT_NAME "MosaicCamera")
 TARGET_LINK_LIBRARIES(MosaicCamera-static ${StelMain} ${MosaicCamera_Qt_Libraries})
