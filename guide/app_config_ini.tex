@@ -905,8 +905,10 @@ flag\_constellation\_name       & bool  & Display constellation names\\%\midrule
 flag\_constellation\_art        & bool  & Display constellation art\\%\midrule
 flag\_constellation\_boundaries & bool  & Display constellation boundaries \\%\midrule
 flag\_constellation\_isolate\_selected  & bool & If \emph{true}, constellation lines, boundaries and art will be limited to the constellation of the selected star, 
-                                                 if that star is ``on'' one of the constellation lines.\\%\midrule
-flag\_constellation\_pick     & bool & Set to \emph{true} if you only want to see the line drawing, art and name of the selected constellation star\\\midrule
+                                                 if that star is ``on'' one of the constellation lines, adding more constellations as you click more \\%\midrule
+flag\_constellation\_pick     & bool & If flag\_constellation\_isolate\_selected is also true, 
+                                       set to \emph{true} if you only want to see the line drawing, 
+									   art and name of the currently selected constellation\\\midrule
 %
 flag\_isolated\_trails        & bool & Set to \emph{true} if you only want to see the trail line drawn for the selected planet (asteroid, comet, moon)\\%\midrule
 number\_isolated\_trails      & int  & Number of isolated trails for latest selected Solar system bodies [1..5].\\%\midrule
