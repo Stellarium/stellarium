@@ -289,10 +289,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	double RA, DEC, Plx, pmra, pmdec, RadialVel;
 	double PlxErr = s->getPlxErr() * 0.01;
-	static const double d2000 = 2451545.0;
-	float dyr = static_cast<float>(core->getJDE()-d2000)/365.25;
+	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	if (s->getTimeDependence()) {
-		s->get6Dsolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyr);
+		s->get6Dsolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
 	}
 	else {
 		Plx = s->getPlx() * 0.001;

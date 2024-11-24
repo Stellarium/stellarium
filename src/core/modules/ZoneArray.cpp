@@ -412,8 +412,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 {
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	Vec3f vf;
-	static const double d2000 = 2451545.0;
-	const float dyrs = static_cast<float>(core->getJDE()-d2000)/365.25;
+	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 
 	const Extinction& extinction=core->getSkyDrawer()->getExtinction();
 	const bool withExtinction=drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f;
@@ -527,8 +526,7 @@ template<class Star>
 void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const Vec3d &v, double cosLimFov,
 					  QList<StelObjectP > &result)
 {
-	static const double d2000 = 2451545.0;
-	const float dyrs = static_cast<float>(core->getJDE()-d2000)/365.25;
+	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	Vec3f tmp;
 	Vec3f vf = v.toVec3f();

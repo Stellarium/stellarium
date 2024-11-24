@@ -77,9 +77,8 @@ protected:
 		const Star *star) : a(array), z(zone), s(star) {}
 	Vec3d getJ2000EquatorialPos(const StelCore* core) const override
 	{
-		static const double d2000 = 2451545.0;
 		Vec3f v;
-		s->getJ2000Pos((core->getJDE()-d2000)/365.25, v);
+		s->getJ2000Pos((core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25, v);
 
 		// Aberration: Explanatory Supplement 2013, (7.38). We must get the observer planet speed vector in Equatorial J2000 coordinates.
 		if (core->getUseAberration())

@@ -29,6 +29,9 @@
 #include <QtEndian>
 #include <cmath>
 
+// Epoch in JD of the star catalog data
+#define STAR_CATALOG_JDEPOCH 2451545.0
+
 class StelObject;
 
 extern const QString STAR_TYPE;
@@ -79,17 +82,17 @@ public:
 	enum {MaxPosVal=0x7FFFFFFF};
 	StelObjectP createStelObject(const SpecialZoneArray<Star1> *a, const SpecialZoneData<Star1> *z) const;
 
-	void getJ2000withParallaxEffect(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float& dyr) const 
+	void getJ2000withParallaxEffect(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float& dyrs) const 
 	{
 		// RA and DE in radian
 		// Plx in mas
 		// pmra, pmdec in mas/yr
 		// vr in km/s
-		// dyr in Julian year
+		// dyrs in Julian year
 		// cant do this without Anthony Brown's astrometry tutorial
 		// this function assume RA, DE observed at J2000.0
 		static const double refepoch = 2000.0;
-		const double obs_epoch = refepoch + dyr;
+		const double obs_epoch = refepoch + dyrs;
 		static const double au_in_meter = 149597870700.;
 		static const double au_mas_parsec = 1000.;  // AU expressed in mas*pc
 		static const double julian_year_seconds = 365.25 * 86400.;
@@ -136,7 +139,7 @@ public:
 		DE = DEC_obs;
 	}
 
-	void getJ2000pos3D(double& RA, double& DE, double& Plx, double pmra, double pmdec, double vr, float dyr, Vec3f& pos) const {
+	void getJ2000pos3D(double& RA, double& DE, double& Plx, double pmra, double pmdec, double vr, float dyrs, Vec3f& pos) const {
 		// cant do this without Anthony Brown's astrometry tutorial
 
 		double sra = sin(RA);
@@ -157,14 +160,14 @@ public:
 		// proper motion
 		Vec3d pm0 = pmra * p + pmdec * q;
 
-		double f = 1. / sqrt(1. + 2. * pmr0 * dyr + (pmtotsqr + pmr0*pmr0)*dyr*dyr);
-		Vec3d u = (r * (1. + pmr0 * dyr) + pm0 * dyr) * f;
+		double f = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0*pmr0)*dyrs*dyrs);
+		Vec3d u = (r * (1. + pmr0 * dyrs) + pm0 * dyrs) * f;
 
 		pos.set(u[0], u[1], u[2]);
 		// no need to map back to RA/DE
 	}
 
-	void getJ2000Pos6DTreatment(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float& dyr) const {
+	void getJ2000Pos6DTreatment(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float& dyrs) const {
 		// cant do this without Anthony Brown's astrometry tutorial
 
 		double sra = sin(RA);
@@ -185,8 +188,8 @@ public:
 		// proper motion
 		Vec3d pm0 = pmra * p + pmdec * q;
 
-		double f = 1. / sqrt(1. + 2. * pmr0 * dyr + (pmtotsqr + pmr0*pmr0)*dyr*dyr);
-		Vec3d u = (r * (1. + pmr0 * dyr) + pm0 * dyr) * f;
+		double f = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0*pmr0)*dyrs*dyrs);
+		Vec3d u = (r * (1. + pmr0 * dyrs) + pm0 * dyrs) * f;
 
 		// cartesian to spherical
 		double lon = atan2(u[1], u[0]);
@@ -196,9 +199,9 @@ public:
 		// double d = sqrt(u[0] * u[0] + u[1] * u[1] + u[2] * u[2]);
 
 		double Plx2 = Plx * f;
-		double pmr1 = (pmr0 + (pmtotsqr + pmr0 * pmr0) * dyr) * f * f;
-		Vec3d pmvel1 = pm0 * (1 + pmr0 * dyr);
-		pmvel1.set((pmvel1[0] - r[0] * pmr0 * pmr0 * dyr) * f * f * f, (pmvel1[1] - r[1] * pmr0 * pmr0 * dyr) * f * f * f, (pmvel1[2] - r[2] * pmr0 * pmr0 * dyr) * f * f * f);
+		double pmr1 = (pmr0 + (pmtotsqr + pmr0 * pmr0) * dyrs) * f * f;
+		Vec3d pmvel1 = pm0 * (1 + pmr0 * dyrs);
+		pmvel1.set((pmvel1[0] - r[0] * pmr0 * pmr0 * dyrs) * f * f * f, (pmvel1[1] - r[1] * pmr0 * pmr0 * dyrs) * f * f * f, (pmvel1[2] - r[2] * pmr0 * pmr0 * dyrs) * f * f * f);
 
 		double slon = sin(lon);
 		double slat = sin(lat);
@@ -220,7 +223,7 @@ public:
 		vr = (pmr1 / MAS2RAD / Plx) * (AU / JYEAR_SECONDS);
 	}
 
-	void getJ2000Pos(float dyr, Vec3f& pos) const
+	void getJ2000Pos(float dyrs, Vec3f& pos) const
 	{
 		// conversion from mas to rad
 		double RA_rad = getX0() * MAS2RAD;
@@ -232,21 +235,21 @@ public:
 		// 	double pmra = getDx0() / 1000.;
 		// 	double pmdec = getDx1() / 1000.;
 		// 	double vr = getRV() / 100.;
-		// 	getJ2000withParallaxEffect(RA_rad, DE_rad, Plx, pmra, pmdec, vr, dyr);
+		// 	getJ2000withParallaxEffect(RA_rad, DE_rad, Plx, pmra, pmdec, vr, dyrs);
 		// }
 		if (getTimeDependence()){  // 3D astrometry propagation
 			double Plx = getPlx() / 1000.;
 			double pmra = getDx0() / 1000.;
 			double pmdec = getDx1() / 1000.;
 			double vr = getRV() / 10.;
-			getJ2000pos3D(RA_rad, DE_rad, Plx, pmra, pmdec, vr, dyr, pos);
+			getJ2000pos3D(RA_rad, DE_rad, Plx, pmra, pmdec, vr, dyrs, pos);
 		}
 		else {
 			// no parallax no radial velocity, just proper motion
 			// conversion from mas/yr to rad/yr, so dra in rad
 			// getDx0 already has cos(DE) factor
-			RA_rad += dyr * (getDx0() / 1000.f) * MAS2RAD / cos(DE_rad);
-			DE_rad += dyr * (getDx1() / 1000.f) * MAS2RAD;
+			RA_rad += dyrs * (getDx0() / 1000.f) * MAS2RAD / cos(DE_rad);
+			DE_rad += dyrs * (getDx1() / 1000.f) * MAS2RAD;
 			StelUtils::spheToRect(RA_rad, DE_rad, pos);
 		}
 
@@ -260,14 +263,14 @@ public:
 	inline int getDx1() const {return d.dx1;}
 	inline int getPlx() const {return d.plx * 20;}  // because we store it in 20uas, convert back to 1uas
 	inline int getRV() const {return d.rv;}
-	inline void get6Dsolution(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float dyr) const {
+	inline void get6Dsolution(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float dyrs) const {
 		RA = getX0() * MAS2RAD;
 		DE = getX1() * MAS2RAD;
 		Plx = getPlx() * 0.001;
 		pmra = getDx0() / 1000.;
 		pmdec = getDx1() / 1000.;
 		vr = getRV() / 10.;
-		getJ2000Pos6DTreatment(RA, DE, Plx, pmra, pmdec, vr, dyr);
+		getJ2000Pos6DTreatment(RA, DE, Plx, pmra, pmdec, vr, dyrs);
 	}
 	inline bool getTimeDependence() const {
 		// Flag if the star should have time dependent astrometry computed
@@ -319,15 +322,15 @@ public:
 	inline int getMag() const { return d.vmag; }
 	enum {MaxPosVal=((1<<19)-1)};
 	StelObjectP createStelObject(const SpecialZoneArray<Star2> *a, const SpecialZoneData<Star2> *z) const;
-	void getJ2000Pos(float dyr, Vec3f& pos) const
+	void getJ2000Pos(float dyrs, Vec3f& pos) const
 	{
 		// conversion from mas to rad
 		const double RA_rad = getX0() * MAS2RAD;
 		const double DE_rad = getX1() * MAS2RAD;
 		// conversion from mas/yr to rad/yr, so dra in rad
-		const double dra = dyr * (getDx0() / 1000.f) / cos(DE_rad) * MAS2RAD;
+		const double dra = dyrs * (getDx0() / 1000.f) / cos(DE_rad) * MAS2RAD;
 		// getDx1 already in mas/yr, so ddec in rad
-		const double ddec = dyr * (getDx1() / 1000.f) * MAS2RAD;
+		const double ddec = dyrs * (getDx1() / 1000.f) * MAS2RAD;
 		StelUtils::spheToRect(RA_rad + dra, DE_rad + ddec, pos);
 	}
 	inline long getGaia() const { return d.gaia_id; }
@@ -390,9 +393,9 @@ public:
 	}
 	enum {MaxPosVal=((1<<17)-1)};
 	StelObjectP createStelObject(const SpecialZoneArray<Star3> *a, const SpecialZoneData<Star3> *z) const;
-	void getJ2000Pos(float dyr, Vec3f& pos) const
+	void getJ2000Pos(float dyrs, Vec3f& pos) const
 	{
-		Q_UNUSED(dyr);  // they don't have proper motion
+		Q_UNUSED(dyrs);  // they don't have proper motion
 		// conversion from mas to rad
 		const double RA_rad = getX0() * MAS2RAD;
 		const double DE_rad = getX1() * MAS2RAD;
