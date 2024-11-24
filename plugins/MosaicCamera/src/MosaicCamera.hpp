@@ -22,9 +22,13 @@
 #include "StelModule.hpp"
 #include <QFont>
 
+class MosaicCameraDialog;
+
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
 class MosaicCamera : public StelModule
 {
+	Q_OBJECT
+
 public:
 	MosaicCamera();
 	~MosaicCamera() override;
@@ -34,9 +38,14 @@ public:
 	void init() override;
 	void draw(StelCore* core) override;
 	double getCallOrder(StelModuleActionName actionName) const override;
+
+	bool configureGui(bool show=true) override;
+
 private:
 	// Font used for displaying our text
 	QFont font;
+	// GUI
+	MosaicCameraDialog* configDialog;
 };
 
 
