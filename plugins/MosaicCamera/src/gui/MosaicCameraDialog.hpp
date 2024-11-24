@@ -46,9 +46,12 @@ public slots:
 	void retranslate() override;
 
 private:
-	MosaicCamera* msm;
+	MosaicCamera* mc;
 	Ui_mosaicCameraDialog* ui;
 	void setAboutHtml(void);
+	void updateRA(double ra);
+	void updateDec(double ra);
+	void updateRot(double ra);
 };
 
 #endif // MOSAICCAMERADIALOG_HPP
