@@ -53,7 +53,7 @@ StelPluginInfo MosaicCameraStelPluginInterface::getPluginInfo() const
 /*************************************************************************
  Constructor
 *************************************************************************/
-MosaicCamera::MosaicCamera()
+MosaicCamera::MosaicCamera() : ra(0), dec(0), rot(0)
 {
 	setObjectName("MosaicCamera");
 	font.setPixelSize(25);
@@ -87,6 +87,21 @@ void MosaicCamera::init()
 	qDebug() << "init called for MosaicCamera";
 }
 
+
+void MosaicCamera::setRA(double ra)
+{
+    this->ra = ra;
+}
+
+void MosaicCamera::setDec(double dec)
+{
+    this->dec = dec;
+}
+
+void MosaicCamera::setRot(double rot)
+{
+    this->rot = rot;
+}
 
 void MosaicCamera::draw(StelCore* core)
 {
@@ -1352,11 +1367,9 @@ void MosaicCamera::draw(StelCore* core)
         {1.0, 0.0, 0.0, 1.0},    // WF = Red
     };
 
-    double ra = 200.75 / 57.29577951308232;
-    double dec = -64.5 / 57.29577951308232;
-    double alpha = ra + 1.5707963267948966;  // ra=0 isn't along x=0?
-    double beta = 1.5707963267948966 - dec;  // polar angle
-    double rsp = 0.0 / 57.29577951308232;  // rotation wrt current North
+    double alpha = ra / 57.29577951308232 + 1.5707963267948966;  // ra=0 isn't along x=0?
+    double beta = 1.5707963267948966 - dec / 57.29577951308232;  // polar angle
+    double rsp = rot / 57.29577951308232;  // rotation wrt current North
 
     double cosBeta = cos(beta);
     double sinBeta = sin(beta);
