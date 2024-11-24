@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-08-21 11:28+0700\n"
+"POT-Creation-Date: 2024-10-26 14:13+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Empar Montoro <emontra2018@gmail.com>, 2024\n"
 "Language-Team: Catalan (Valencian) (https://app.transifex.com/stellarium/teams/80998/ca@valencia/)\n"
@@ -109,8 +109,8 @@ msgid "Could not retrieve landscape list"
 msgstr "No s'ha pogut recuperar la llista de paisatges"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:731
-#: index.html:793 tablet7in.html:828 tablet7in.html:888
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:745
+#: index.html:807 tablet7in.html:830 tablet7in.html:890
 msgid "-none-"
 msgstr "-cap-"
 
@@ -390,27 +390,35 @@ msgstr ""
 msgid "Scale minor bodies:"
 msgstr "Escala cossos menors:"
 
-#: index.html:358 tablet7in.html:453
+#: index.html:332
+msgid "Mark minor bodies:"
+msgstr ""
+
+#: index.html:360 tablet7in.html:438
+msgid "Bortle class:"
+msgstr ""
+
+#: index.html:377 tablet7in.html:455
 msgid "Extinction Coefficient:"
 msgstr "Coeficient d'extinció:"
 
-#: index.html:359 tablet7in.html:454
+#: index.html:378 tablet7in.html:456
 msgid "Only extinction/refraction, no blue skylight"
 msgstr ""
 
-#: index.html:360 tablet7in.html:455
+#: index.html:378 tablet7in.html:457
 msgid "Suppress scattering"
 msgstr ""
 
-#: index.html:365 tablet7in.html:460
+#: index.html:382 tablet7in.html:462
 msgid "Shooting Stars"
 msgstr "Estreles fugaces"
 
-#: index.html:366 tablet7in.html:461
+#: index.html:383 tablet7in.html:463
 msgid "ZHR:"
 msgstr "THZ:"
 
-#: index.html:413 tablet7in.html:513
+#: index.html:430 tablet7in.html:515
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
@@ -418,184 +426,188 @@ msgstr ""
 "Cercles instantanis d'eix de la Terra en el seu moviment al voltant dels "
 "pols de l'eclíptica. Es mostra només en la Terra."
 
-#: index.html:430 tablet7in.html:530
+#: index.html:447 tablet7in.html:532
 msgid "Center"
 msgstr ""
 
-#: index.html:448 tablet7in.html:548
+#: index.html:463 tablet7in.html:550
 msgid "Solstices"
 msgstr "Solsticis"
 
-#: index.html:449 tablet7in.html:549
+#: index.html:464 tablet7in.html:551
 msgid "Crossquarters"
 msgstr "Crossquarters, punts intermedis entre solstici i equinocci"
 
-#: index.html:450 tablet7in.html:550
+#: index.html:465 tablet7in.html:552
 msgid "Major Standstill"
 msgstr "Lunistici major"
 
-#: index.html:451 tablet7in.html:551
+#: index.html:466 tablet7in.html:553
 msgid "Minor Standstill"
 msgstr "Lunistici menor"
 
-#: index.html:455 tablet7in.html:556
+#: index.html:470 tablet7in.html:558
 msgid "Line width:"
 msgstr ""
 
-#: index.html:465 tablet7in.html:566
+#: index.html:480 tablet7in.html:568
 msgid "Current Planet:"
 msgstr "Planeta actual:"
 
-#: index.html:505 tablet7in.html:606
+#: index.html:520 tablet7in.html:608
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "Catàleg de nebuloses de reflexió (Van den Bergh, 1966)"
 
-#: index.html:552 tablet7in.html:624
+#: index.html:567 tablet7in.html:626
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
 msgstr ""
 
-#: index.html:590
+#: index.html:605
 msgid "Objects without identifier"
 msgstr ""
 
-#: index.html:608
+#: index.html:623
 msgid "Open Star clusters"
 msgstr ""
 
-#: index.html:609 tablet7in.html:692
+#: index.html:624 tablet7in.html:694
 msgid "Globular Star clusters"
 msgstr ""
 
-#: index.html:615 tablet7in.html:698
+#: index.html:630 tablet7in.html:700
 msgid "Bright Nebulae"
 msgstr "Nebuloses brillants"
 
-#: index.html:616 tablet7in.html:699
+#: index.html:631 tablet7in.html:701
 msgid "Dark Nebulae"
 msgstr "Nebuloses fosques"
 
-#: index.html:617 tablet7in.html:700
+#: index.html:632 tablet7in.html:702
 msgid "Planetary Nebulae"
 msgstr "Nebuloses planetàries"
 
-#: index.html:627 tablet7in.html:710
+#: index.html:642 tablet7in.html:712
 msgid "Labels and markers"
 msgstr "Etiquetes i marcadors"
 
-#: index.html:646 tablet7in.html:729
+#: index.html:660 tablet7in.html:731
 msgid "Limit angular size (arcmin):"
 msgstr "Límit de la mida angular (arcmin):"
 
-#: index.html:658 tablet7in.html:743
+#: index.html:672 tablet7in.html:745
 msgid "Use associated planet and position"
 msgstr "Utilitza el planeta i la posició associats"
 
-#: index.html:669 tablet7in.html:752
+#: index.html:682 tablet7in.html:753
+msgid "Show landscape labels"
+msgstr "Mostra les etiquetes del paisatge"
+
+#: index.html:683 tablet7in.html:754
 msgid "Show illumination"
 msgstr "Mostra la il·luminació "
 
-#: index.html:674 tablet7in.html:758
+#: index.html:688 tablet7in.html:760
 msgid "Current landscape"
 msgstr "Paisatge actual"
 
-#: index.html:685 tablet7in.html:770
+#: index.html:699 tablet7in.html:772
 msgid "Label constellations with font size"
 msgstr ""
 
-#: index.html:689 tablet7in.html:774
+#: index.html:703 tablet7in.html:776
 msgid "Show lines with thickness"
 msgstr "Mostra línies amb grossària"
 
-#: index.html:693 tablet7in.html:778
+#: index.html:707 tablet7in.html:780
 msgid "Label asterisms with font size"
 msgstr ""
 
-#: index.html:697 tablet7in.html:782
+#: index.html:711 tablet7in.html:784
 msgid "Show asterisms with thickness"
 msgstr "Mostra asterismes amb grossària"
 
-#: index.html:701 tablet7in.html:786
+#: index.html:715 tablet7in.html:788
 msgid "Show ray helpers with thickness"
 msgstr "Mostra raigs d'ajuda amb grossària"
 
-#: index.html:709 tablet7in.html:794
+#: index.html:723 tablet7in.html:796
 msgid "Show boundaries with thickness"
 msgstr "Mostra els límits amb grossària"
 
-#: index.html:714 tablet7in.html:799
+#: index.html:728 tablet7in.html:801
 msgid "Constellation selection isolated"
 msgstr "Selecció de constel·lació aïllada"
 
-#: index.html:718 tablet7in.html:803
+#: index.html:732 tablet7in.html:805
 msgid "Current sky culture"
 msgstr "Cultura del cel actual"
 
-#: index.html:731 tablet7in.html:828
+#: index.html:745 tablet7in.html:830
 msgid "Active script:"
 msgstr "Script actiu:"
 
-#: index.html:732 tablet7in.html:829
+#: index.html:746 tablet7in.html:831
 msgid "Run selected script"
 msgstr "Executa l'script seleccionat"
 
-#: index.html:732 tablet7in.html:829
+#: index.html:746 tablet7in.html:831
 msgid "Stop current script"
 msgstr "Parar l'script actual"
 
-#: index.html:737 tablet7in.html:43 tablet7in.html:813
+#: index.html:751 tablet7in.html:43 tablet7in.html:815
 msgid "Actions"
 msgstr "Accions"
 
-#: index.html:741 tablet7in.html:817
+#: index.html:755 tablet7in.html:819
 msgid "Run/toggle action"
 msgstr "Executa/commuta l'acció"
 
-#: index.html:752 tablet7in.html:852
+#: index.html:766 tablet7in.html:854
 msgid "Planet map"
 msgstr "Mapa del planeta"
 
-#: index.html:753 tablet7in.html:853
+#: index.html:767 tablet7in.html:855
 msgid "Planet map pointer"
 msgstr "Punter del mapa del planeta"
 
-#: index.html:757 tablet7in.html:857
+#: index.html:771 tablet7in.html:859
 msgid "Type to search location"
 msgstr "Escriviu per buscar la ubicació"
 
-#: index.html:791 tablet7in.html:886
+#: index.html:805 tablet7in.html:888
 msgid "Interaction"
 msgstr "Interacció"
 
-#: index.html:792 tablet7in.html:887
+#: index.html:806 tablet7in.html:889
 msgid "Current scene:"
 msgstr "Escena actual:"
 
-#: index.html:795 tablet7in.html:890
+#: index.html:809 tablet7in.html:892
 msgid "View controls"
 msgstr "Vegeu els controls"
 
-#: index.html:801 tablet7in.html:896
+#: index.html:815 tablet7in.html:898
 msgid "Movement controls"
 msgstr "Controls de moviment"
 
-#: index.html:813 tablet7in.html:908
+#: index.html:827 tablet7in.html:910
 msgid "Torchlight"
 msgstr "Llum de le torxa"
 
-#: index.html:820 tablet7in.html:915
+#: index.html:834 tablet7in.html:917
 msgid "Scene selection"
 msgstr "Selecció d'escena"
 
-#: index.html:824 tablet7in.html:919
+#: index.html:838 tablet7in.html:921
 msgid "Load selected scene"
 msgstr "Carrega l'escena seleccionada"
 
-#: index.html:849 tablet7in.html:945
+#: index.html:864 tablet7in.html:948
 msgid "No response from server"
 msgstr "No hi ha resposta del sevidor"
 
-#: index.html:850 tablet7in.html:946
+#: index.html:865 tablet7in.html:949
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "No hi ha resposta del servidor des de fa %1 segons. Està Stellarium "
@@ -741,18 +753,18 @@ msgstr "Aquari"
 msgid "Pisces"
 msgstr "Pisces, els Peixos"
 
-#: tablet7in.html:837
+#: tablet7in.html:839
 msgid "Favorites"
 msgstr "Favorits"
 
-#: tablet7in.html:839
+#: tablet7in.html:841
 msgid "Show 1"
 msgstr "Mostra 1"
 
-#: tablet7in.html:840
+#: tablet7in.html:842
 msgid "Remove Labels and Images"
 msgstr "Elimina etiquetes i imatges"
 
-#: tablet7in.html:840
+#: tablet7in.html:842
 msgid "Cleanup Screen"
 msgstr "Neteja la pantalla"
