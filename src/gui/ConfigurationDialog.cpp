@@ -305,7 +305,8 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	connectBoolProperty(ui->gravityLabelCheckbox, "StelCore.flagGravityLabels");
 
-	connectBoolProperty(ui->selectSingleConstellationButton, "ConstellationMgr.isolateSelected");
+	ui->selectSingleConstellationButton->hide();
+	//connectBoolProperty(ui->selectSingleConstellationButton, "ConstellationMgr.isolateSelected");
 	ui->diskViewportCheckbox->setChecked(proj->getMaskType() == StelProjector::MaskDisk);
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	connectBoolProperty(ui->autoZoomResetsDirectionCheckbox, "StelMovementMgr.flagAutoZoomOutResetsDirection");
@@ -1014,6 +1015,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_constellation_boundaries",	propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_art",	propMgr->getStelPropertyValue("ConstellationMgr.artDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_isolate_selected",	propMgr->getStelPropertyValue("ConstellationMgr.isolateSelected").toBool());
+	conf->setValue("viewing/flag_asterism_isolate_selected",	propMgr->getStelPropertyValue("AsterismMgr.isolateAsterismSelected").toBool());
 	conf->setValue("viewing/flag_landscape_autoselection",	propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeAutoSelection").toBool());
 	conf->setValue("viewing/flag_light_pollution_database",	propMgr->getStelPropertyValue("LandscapeMgr.flagUseLightPollutionFromDatabase").toBool());
 	conf->setValue("viewing/flag_environment_auto_enable",	propMgr->getStelPropertyValue("LandscapeMgr.flagEnvironmentAutoEnabling").toBool());
