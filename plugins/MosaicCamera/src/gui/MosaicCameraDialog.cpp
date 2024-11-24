@@ -44,13 +44,19 @@ MosaicCameraDialog::~MosaicCameraDialog()
 }
 
 void MosaicCameraDialog::updateRA(double ra)
-{}
+{
+	mc->setRA(ra);
+}
 
 void MosaicCameraDialog::updateDec(double dec)
-{}
+{
+	mc->setDec(dec);
+}
 
 void MosaicCameraDialog::updateRot(double rot)
-{}
+{
+	mc->setRot(rot);
+}
 
 void MosaicCameraDialog::retranslate()
 {
