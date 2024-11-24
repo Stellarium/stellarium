@@ -22,6 +22,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "MosaicCamera.hpp"
+#include "MosaicCameraDialog.hpp"
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
 
@@ -56,6 +57,7 @@ MosaicCamera::MosaicCamera()
 {
 	setObjectName("MosaicCamera");
 	font.setPixelSize(25);
+	configDialog = new MosaicCameraDialog();
 }
 
 /*************************************************************************
@@ -63,6 +65,7 @@ MosaicCamera::MosaicCamera()
 *************************************************************************/
 MosaicCamera::~MosaicCamera()
 {
+    delete configDialog;
 }
 
 /*************************************************************************
@@ -1416,4 +1419,11 @@ void MosaicCamera::draw(StelCore* core)
             }
         }
     }
+}
+
+bool MosaicCamera::configureGui(bool show)
+{
+	if (show)
+		configDialog->setVisible(true);
+	return true;
 }
