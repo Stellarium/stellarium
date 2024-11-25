@@ -462,7 +462,9 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	for (const Star* s=zoneToDraw->getStars();s<lastStar;++s)
 	{
 		float starMag = s->getMag();
-		if (s->getPreciseAstrometricFlag() && fabs(dyrs) > 3000.) {  // only recompute if has time dependence and time is far away
+		// only recompute if has time dependence and time is far away
+		bool recomputeMag = (s->getPreciseAstrometricFlag() && (fabs(dyrs) > 3000.));
+		if (recomputeMag) { 
 			// don't do full solution, can be very slow, just estimate here	
 			// estimate parallax from radial velocity and total proper motion
 			double Plx = s->getPlx();
@@ -474,6 +476,10 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			double f = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0*pmr0)*dyrs*dyrs);
 			float magOffset = 5.f * log10(1/f);
 			starMag += magOffset * 1000.;
+			// if we reach here we might as well compute the position too
+			Vec3d r(s->getX0(), s->getX1(), s->getX2());
+			Vec3d u = (r * (1. + pmr0 * dyrs) + pmvec0 * dyrs) * f;
+			vf.set(u[0], u[1], u[2]);
 		}
 
 		int magIndex = static_cast<int>((starMag - mag_min) * mag_steps / mag_range);
@@ -491,8 +497,10 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		// Array of 2 numbers containing radius and magnitude
 		const RCMag* tmpRcmag = &rcmag_table[magIndex];
 		
-		// Get the star position from the array
-		s->getJ2000Pos(dyrs, vf);
+		// Get the star position from the array, only do it if not already computed
+		if (!recomputeMag) {
+			s->getJ2000Pos(dyrs, vf);
+		}
 
 		// Aberration: vf contains Equatorial J2000 position.
 		if (withAberration)
