@@ -193,19 +193,19 @@ public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods callable from script and GUI
 	//! Set display flag for Stars.
-	void setFlagStars(bool b) {starsFader=b; emit starsDisplayedChanged(b);}
+	void setFlagStars(bool b);
 	//! Get display flag for Stars
 	bool getFlagStars(void) const {return starsFader==true;}
 
 	//! Set display flag for Star names (labels).
-	void setFlagLabels(bool b) {labelsFader=b; emit starLabelsDisplayedChanged(b);}
+	void setFlagLabels(bool b);
 	//! Get display flag for Star names (labels).
 	bool getFlagLabels(void) const {return labelsFader==true;}
 
 	//! Set the amount of star labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the stars magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	void setLabelsAmount(double a) {if(!qFuzzyCompare(a,labelsAmount)){ labelsAmount=a; emit labelsAmountChanged(a);}}
+	void setLabelsAmount(double a);
 	//! Get the amount of star labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
 	double getLabelsAmount(void) const {return labelsAmount;}
@@ -218,27 +218,27 @@ public slots:
 	static bool getFlagSciNames(void) {return flagSciNames;}
 
 	//! Set flag for usage designations of stars for their labels instead common names.
-	void setDesignationUsage(const bool flag) { if(flagDesignations!=flag){ flagDesignations=flag; emit designationUsageChanged(flag);}}
+	void setDesignationUsage(const bool flag);
 	//! Get flag for usage designations of stars for their labels instead common names.
 	static bool getDesignationUsage(void) {return flagDesignations; }
 
 	//! Set flag for usage traditional designations of double stars.
-	void setFlagDblStarsDesignation(const bool flag) { if(flagDblStarsDesignation!=flag){ flagDblStarsDesignation=flag; emit flagDblStarsDesignationChanged(flag);}}
+	void setFlagDblStarsDesignation(const bool flag);
 	//! Get flag for usage traditional designations of double stars.
 	static bool getFlagDblStarsDesignation(void) {return flagDblStarsDesignation; }
 
 	//! Set flag for usage designations of variable stars.
-	void setFlagVarStarsDesignation(const bool flag) { if(flagVarStarsDesignation!=flag){ flagVarStarsDesignation=flag; emit flagVarStarsDesignationChanged(flag);}}
+	void setFlagVarStarsDesignation(const bool flag);
 	//! Get flag for usage designations of variable stars.
 	static bool getFlagVarStarsDesignation(void) {return flagVarStarsDesignation; }
 
 	//! Set flag for usage Hipparcos catalog designations of stars.
-	void setFlagHIPDesignation(const bool flag) { if(flagHIPDesignation!=flag){ flagHIPDesignation=flag; emit flagHIPDesignationChanged(flag);}}
+	void setFlagHIPDesignation(const bool flag);
 	//! Get flag for usage Hipparcos catalog designations of stars.
 	static bool getFlagHIPDesignation(void) {return flagHIPDesignation; }
 
 	//! Show additional star names.
-	void setFlagAdditionalNames(bool flag) { if (flagAdditionalStarNames!=flag){ flagAdditionalStarNames=flag; emit flagAdditionalNamesDisplayedChanged(flag);}}
+	void setFlagAdditionalNames(bool flag);
 	static bool getFlagAdditionalNames(void) { return flagAdditionalStarNames; }
 
 public:

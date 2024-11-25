@@ -76,12 +76,12 @@ public slots:
 	//! Get Milky Way intensity (brightness).
 	double getIntensity() const {return intensity;}
 	//! Set Milky Way intensity. Default value: 1.
-	void setIntensity(double aintensity) {if(!qFuzzyCompare(aintensity, intensity)){ intensity = aintensity; emit intensityChanged(intensity); }}
+	void setIntensity(double aintensity);
 
 	//! Get Milky Way saturation (color strength).
 	double getSaturation()const {return saturation;}
 	//! Set Milky Way saturation (color strength).
-	void setSaturation(double sat) {if(!qFuzzyCompare(sat, saturation)){ saturation = sat; emit saturationChanged(saturation); }}
+	void setSaturation(double sat);
 
 	//! Get the color used for rendering the Milky Way. It is modulated by intensity, light pollution and atmospheric extinction.
 	Vec3f getColor() const {return color;}
@@ -91,7 +91,7 @@ public slots:
 	//! // example of usage in scripts
 	//! MilkyWay.setColor(Vec3f(0.7,1.0,0.8));
 	//! @endcode
-	void setColor(const Vec3f& c) {if (c!=color) { color=c; emit colorChanged(c);}}
+	void setColor(const Vec3f& c);
 	
 	//! Sets whether to show the Milky Way
 	void setFlagShow(bool b);

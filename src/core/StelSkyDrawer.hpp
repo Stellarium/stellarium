@@ -58,6 +58,7 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	Q_PROPERTY(double absoluteStarScale READ getAbsoluteStarScale WRITE setAbsoluteStarScale NOTIFY absoluteStarScaleChanged)
 	Q_PROPERTY(double twinkleAmount READ getTwinkleAmount WRITE setTwinkleAmount NOTIFY twinkleAmountChanged)
 	Q_PROPERTY(bool flagStarTwinkle READ getFlagTwinkle WRITE setFlagTwinkle NOTIFY flagTwinkleChanged)
+	Q_PROPERTY(bool flagForcedTwinkle READ getFlagForcedTwinkle WRITE setFlagForcedTwinkle NOTIFY flagForcedTwinkleChanged)
 	Q_PROPERTY(double lightPollutionLuminance READ getLightPollutionLuminance WRITE setLightPollutionLuminance NOTIFY lightPollutionLuminanceChanged)
 	Q_PROPERTY(bool flagDrawBigStarHalo READ getFlagDrawBigStarHalo WRITE setFlagDrawBigStarHalo NOTIFY flagDrawBigStarHaloChanged)
 	Q_PROPERTY(bool flagStarSpiky READ getFlagStarSpiky WRITE setFlagStarSpiky NOTIFY flagStarSpikyChanged)
@@ -179,28 +180,28 @@ public:
 
 public slots:
 	//! Set the way brighter stars will look bigger as the fainter ones
-	void setRelativeStarScale(double b=1.0) { starRelativeScale=b; emit relativeStarScaleChanged(b);}
+	void setRelativeStarScale(double b=1.0);
 	//! Get the way brighter stars will look bigger as the fainter ones
 	double getRelativeStarScale() const {return starRelativeScale;}
 
 	//! Set the absolute star brightness scale
-	void setAbsoluteStarScale(double b=1.0) { starAbsoluteScaleF=b; emit absoluteStarScaleChanged(b);}
+	void setAbsoluteStarScale(double b=1.0);
 	//! Get the absolute star brightness scale
 	double getAbsoluteStarScale() const {return starAbsoluteScaleF;}
 
 	//! Set source twinkle amount.
-	void setTwinkleAmount(double b) { twinkleAmount=b; emit twinkleAmountChanged(b);}
+	void setTwinkleAmount(double b);
 	//! Get source twinkle amount.
 	double getTwinkleAmount() const {return twinkleAmount;}
 
 	//! Set flag for source twinkling.
-	void setFlagTwinkle(bool b) {if(b!=flagStarTwinkle){ flagStarTwinkle=b; emit flagTwinkleChanged(b);}}
+	void setFlagTwinkle(bool b);
 	//! Get flag for source twinkling.
 	bool getFlagTwinkle() const {return flagStarTwinkle;}
 
 	//! Set flag for enable twinkling of stars without atmosphere.
 	//! @note option for planetariums
-	void setFlagForcedTwinkle(bool b) {if(b!=flagForcedTwinkle){ flagForcedTwinkle=b;}}
+	void setFlagForcedTwinkle(bool b);
 	//! Get flag for enable twinkling of stars without atmosphere.
 	//! @note option for planetariums
 	bool getFlagForcedTwinkle() const {return flagForcedTwinkle;}
@@ -215,7 +216,7 @@ public slots:
 	Q_DECL_DEPRECATED int getBortleScaleIndex() const;
 
 	//! Set flag for drawing a halo around bright stars.
-	void setFlagDrawBigStarHalo(bool b) {if(b!=flagDrawBigStarHalo){ flagDrawBigStarHalo=b; emit flagDrawBigStarHaloChanged(b);}}
+	void setFlagDrawBigStarHalo(bool b);
 	//! Get flag for drawing a halo around bright stars.
 	bool getFlagDrawBigStarHalo() const {return flagDrawBigStarHalo;}
 
@@ -232,19 +233,19 @@ public slots:
 	//! Toggle the application of user-defined star magnitude limit.
 	//! If enabled, stars fainter than the magnitude set with
 	//! setCustomStarMagnitudeLimit() will not be displayed.
-	void setFlagStarMagnitudeLimit(bool b) {if(b!=flagStarMagnitudeLimit){ flagStarMagnitudeLimit = b; emit flagStarMagnitudeLimitChanged(b);}}
+	void setFlagStarMagnitudeLimit(bool b);
 	//! @return true if the user-defined star magnitude limit is in force.
 	bool getFlagStarMagnitudeLimit() const {return flagStarMagnitudeLimit;}
 	//! Toggle the application of user-defined deep-sky object magnitude limit.
 	//! If enabled, deep-sky objects fainter than the magnitude set with
 	//! setCustomNebulaMagnitudeLimit() will not be displayed.
-	void setFlagNebulaMagnitudeLimit(bool b) {if(b!=flagNebulaMagnitudeLimit){ flagNebulaMagnitudeLimit = b; StelApp::immediateSave("astro/flag_nebula_magnitude_limit", b); emit flagNebulaMagnitudeLimitChanged(b);}}
+	void setFlagNebulaMagnitudeLimit(bool b);
 	//! @return true if the user-defined nebula magnitude limit is in force.
 	bool getFlagNebulaMagnitudeLimit() const {return flagNebulaMagnitudeLimit;}
 	//! Toggle the application of user-defined solar system object magnitude limit.
 	//! If enabled, planets, planetary moons, asteroids (KBO, ...) and comets fainter than the magnitude set with
 	//! setCustomPlanetMagnitudeLimit() will not be displayed.
-	void setFlagPlanetMagnitudeLimit(bool b) {if(b!=flagPlanetMagnitudeLimit){ flagPlanetMagnitudeLimit = b; emit flagPlanetMagnitudeLimitChanged(b);}}
+	void setFlagPlanetMagnitudeLimit(bool b);
 	//! @return true if the user-defined nebula magnitude limit is in force.
 	bool getFlagPlanetMagnitudeLimit() const {return flagPlanetMagnitudeLimit;}
 
@@ -252,17 +253,17 @@ public slots:
 	double getCustomStarMagnitudeLimit() const {return customStarMagLimit;}
 	//! Sets a lower limit for star magnitudes (anything fainter is ignored).
 	//! In force only if flagStarMagnitudeLimit is set.
-	void setCustomStarMagnitudeLimit(double limit) { customStarMagLimit=limit; emit customStarMagLimitChanged(limit);}
+	void setCustomStarMagnitudeLimit(double limit);
 	//! Get the value used for forced nebula magnitude limiting.
 	double getCustomNebulaMagnitudeLimit() const {return customNebulaMagLimit;}
 	//! Sets a lower limit for nebula magnitudes (anything fainter is ignored).
 	//! In force only if flagNebulaMagnitudeLimit is set.
-	void setCustomNebulaMagnitudeLimit(double limit) { customNebulaMagLimit=limit; StelApp::immediateSave("astro/nebula_magnitude_limit", limit); emit customNebulaMagLimitChanged(limit);}
+	void setCustomNebulaMagnitudeLimit(double limit);
 	//! Get the value used for forced solar system object magnitude limiting.
 	double getCustomPlanetMagnitudeLimit() const {return customPlanetMagLimit;}
 	//! Sets a lower limit for solar system object magnitudes (anything fainter is ignored).
 	//! In force only if flagPlanetMagnitudeLimit is set.
-	void setCustomPlanetMagnitudeLimit(double limit) { customPlanetMagLimit=limit; emit customPlanetMagLimitChanged(limit);}
+	void setCustomPlanetMagnitudeLimit(double limit);
 
 	//! Get the luminance of the faintest visible object (e.g. RGB<0.05)
 	//! It depends on the zoom level, on the eye adaptation and on the point source rendering parameters
@@ -270,12 +271,12 @@ public slots:
 	float getLimitLuminance() const {return limitLuminance;}
 
 	//! Set the value of the eye adaptation flag
-	void setFlagLuminanceAdaptation(bool b) {if(b!=flagLuminanceAdaptation){ flagLuminanceAdaptation=b; emit flagLuminanceAdaptationChanged(b);}}
+	void setFlagLuminanceAdaptation(bool b);
 	//! Get the current value of eye adaptation flag
 	bool getFlagLuminanceAdaptation() const {return flagLuminanceAdaptation;}
 
 	//! Set the label brightness threshold
-	void setDaylightLabelThreshold(double t) { daylightLabelThreshold=t; emit daylightLabelThresholdChanged(t);}
+	void setDaylightLabelThreshold(double t);
 	//! Get the current label brightness threshold
 	double getDaylightLabelThreshold() const {return daylightLabelThreshold;}
 	//! Return a brightness value based on objects in view (sky, sun, moon, ...)
@@ -283,20 +284,21 @@ public slots:
 
 	//! Informing the drawer whether atmosphere is displayed.
 	//! This is used to avoid twinkling/simulate extinction/refraction.
+	//! Not required as property!
 	void setFlagHasAtmosphere(bool b) {flagHasAtmosphere=b;}
 	//! This is used to decide whether to apply refraction/extinction before rendering point sources et al.
 	bool getFlagHasAtmosphere() const {return flagHasAtmosphere;}
 
 	//! Set extinction coefficient, mag/airmass (for extinction).
-	void setExtinctionCoefficient(double extCoeff) { extinction.setExtinctionCoefficient(static_cast<float>(extCoeff)); emit extinctionCoefficientChanged(static_cast<double>(extinction.getExtinctionCoefficient()));}
+	void setExtinctionCoefficient(double extCoeff);
 	//! Get extinction coefficient, mag/airmass (for extinction).
 	double getExtinctionCoefficient() const {return static_cast<double>(extinction.getExtinctionCoefficient());}
 	//! Set atmospheric (ground) temperature in deg celsius (for refraction).
-	void setAtmosphereTemperature(double celsius) {refraction.setTemperature(static_cast<float>(celsius)); emit atmosphereTemperatureChanged(static_cast<double>(refraction.getTemperature()));}
+	void setAtmosphereTemperature(double celsius);
 	//! Get atmospheric (ground) temperature in deg celsius (for refraction).
 	double getAtmosphereTemperature() const {return static_cast<double>(refraction.getTemperature());}
 	//! Set atmospheric (ground) pressure in mbar (for refraction).
-	void setAtmospherePressure(double mbar) { refraction.setPressure(static_cast<float>(mbar)); emit atmospherePressureChanged(static_cast<double>(refraction.getPressure()));}
+	void setAtmospherePressure(double mbar);
 	//! Get atmospheric (ground) pressure in mbar (for refraction).
 	double getAtmospherePressure() const {return static_cast<double>(refraction.getPressure());}
 
@@ -313,39 +315,16 @@ public slots:
 	// These are to find out the best sky parameters. Program feature for debugging/expert mode.
 	// These will be connected from AtmosphereDialog and forward the settings to SkyLight class.
 
-	void setFlagDrawSunAfterAtmosphere(bool val){
-		flagDrawSunAfterAtmosphere=val;
-		QSettings* conf = StelApp::getInstance().getSettings();
-		 conf->setValue("landscape/draw_sun_after_atmosphere",val);
-		 conf->sync();
-		 emit flagDrawSunAfterAtmosphereChanged(val);
-		}
+	void setFlagDrawSunAfterAtmosphere(bool val);
 	bool getFlagDrawSunAfterAtmosphere() const {return flagDrawSunAfterAtmosphere;}
-	void setFlagEarlySunHalo(bool val){
-		flagEarlySunHalo= val;
-		QSettings* conf = StelApp::getInstance().getSettings();
-		conf->setValue("landscape/early_solar_halo", val);
-		conf->sync();
-		emit flagEarlySunHaloChanged(val);
-		}
+	void setFlagEarlySunHalo(bool val);
 	bool getFlagEarlySunHalo() const {return flagEarlySunHalo;}
 
 	bool getFlagTfromK(void) const {return flagTfromK;}
-	void setFlagTfromK(bool val){
-		flagTfromK=val;
-		QSettings* conf = StelApp::getInstance().getSettings();
-		conf->setValue("landscape/use_T_from_k", val);
-		conf->sync();
-		emit flagTfromKChanged(val);
-		}
+	void setFlagTfromK(bool val);
 
 	double getT(void) const {return static_cast<double>(turbidity);}
-	void setT(double newT){
-	    turbidity=static_cast<float>(newT);
-		QSettings* conf = StelApp::getInstance().getSettings();
-		conf->setValue("landscape/turbidity", newT);
-		emit turbidityChanged(newT);
-		}
+	void setT(double newT);
 
 signals:
 	//! Emitted whenever the relative star scale changed
@@ -356,6 +335,8 @@ signals:
 	void twinkleAmountChanged(double b);
 	//! Emitted whenever the twinkle flag is toggled
 	void flagTwinkleChanged(bool b);
+	//! Emitted whenever the force twinkle flag is toggled
+	void flagForcedTwinkleChanged(bool b);
 	//! Emitted whenever light pollution luminance changed
 	void lightPollutionLuminanceChanged(double luminance);
 	//! Emitted when flag to draw big halo around stars changed
@@ -458,9 +439,9 @@ private:
 	Refraction refraction;
 
 	float maxAdaptFov, minAdaptFov, lnfovFactor;
-	bool flagStarTwinkle;
-	bool flagForcedTwinkle;
-	double twinkleAmount;
+	bool flagStarTwinkle;      //! flickering stars due to atmospheric turbulence
+	bool flagForcedTwinkle;    //! force flickering even if atmosphere is off
+	double twinkleAmount;      //! magnitude range of atmospheric flicker at horizon
 	bool flagDrawBigStarHalo;
 	bool flagStarSpiky;
 

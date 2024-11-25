@@ -88,7 +88,10 @@
 \newcommand{\var}[1]{\texttt{#1}} %% variable name
 
 %% Color boxes for config.ini 
-\newcommand{\ccbox}[1]{#1\quad\colorbox[rgb]{#1}{\makebox(8,8){}}}
+\newcommand{\ccbox}[2][none]{\setlength{\fboxsep}{0mm}\ifthenelse{\equal{#1}{box}}
+{#2\quad\fbox{\colorbox[rgb]{#2}{\makebox(10,10){}}}}
+{#2\quad\colorbox[rgb]{#2}{\makebox(10,10){}}}
+}
 %% Color boxes for descriptions
 \newcommand{\ccboxdsc}[1]{\colorbox[rgb]{#1}{\makebox(4,4){}}}
 
