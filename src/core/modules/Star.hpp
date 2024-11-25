@@ -78,8 +78,6 @@ struct Star {
 	inline double getDx2() const { return static_cast<const Derived*>(this)->getDx2(); }  // should return in mas/yr, 0 means no 3rd proper motion
 	inline double getPlx() const { return static_cast<const Derived*>(this)->getPlx(); }  // should return in mas, 0 means no parallax
 	inline double getPlxErr() const { return static_cast<const Derived*>(this)->getPlxErr(); }  // should return in mas, 0 means no parallax error
-	inline void getRADEC(double& RA, double& DE) const { static_cast<const Derived*>(this)->getRADEC(RA, DE); }  // should return RA/DEC in radian
-	inline void getRADECPM(double& RA, double& DE, double& pmra, double& pmdec) const { static_cast<const Derived*>(this)->getPlxErr(RA, DE, pmra, pmdec); }  // should return RA/DEC in radian and pmra/pmdec in mas/yr
 	inline double getRV() const { return static_cast<const Derived*>(this)->getRV(); }  // should return in km/s, 0 means no parallax error
 	inline bool getPreciseAstrometricFlag() const { return static_cast<const Derived*>(this)->getPreciseAstrometricFlag();}  // should only be true if full astrometric solution is available with getX2(), getDx2() too
 	inline void getJ2000Pos(float dyrs, Vec3f& pos) const
@@ -123,53 +121,61 @@ struct Star {
 	}
 	inline void getFull6DSolution(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& RV, float dyrs) const
 	{
-		double r0 = getX0();
-		double r1 = getX1();
-		double r2 = getX2();
-		double pm0 = getDx0();
-		double pm1 = getDx1();
-		double pm2 = getDx2();
-		double plx = getPlx();
-		double rv = getRV();
-		Vec3d r(r0, r1, r2);
-		// proper motion
-		Vec3d pmvec0(pm0, pm1, pm2);
-		pmvec0 = pmvec0 * MAS2RAD;
-		double pmr0 = rv * plx / (AU / JYEAR_SECONDS) * MAS2RAD;
-		double pmtotsqr =  (pmvec0[0] * pmvec0[0] + pmvec0[1] * pmvec0[1] + pmvec0[2] * pmvec0[2]);
+		if (getPreciseAstrometricFlag()) {
+			double r0 = getX0();
+			double r1 = getX1();
+			double r2 = getX2();
+			double pm0 = getDx0();
+			double pm1 = getDx1();
+			double pm2 = getDx2();
+			double plx = getPlx();
+			double rv = getRV();
+			Vec3d r(r0, r1, r2);
+			// proper motion
+			Vec3d pmvec0(pm0, pm1, pm2);
+			pmvec0 = pmvec0 * MAS2RAD;
+			double pmr0 = rv * plx / (AU / JYEAR_SECONDS) * MAS2RAD;
+			double pmtotsqr =  (pmvec0[0] * pmvec0[0] + pmvec0[1] * pmvec0[1] + pmvec0[2] * pmvec0[2]);
 
-		double f = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0*pmr0)*dyrs*dyrs);
-		Vec3d u = (r * (1. + pmr0 * dyrs) + pmvec0 * dyrs) * f;
+			double f = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0*pmr0)*dyrs*dyrs);
+			Vec3d u = (r * (1. + pmr0 * dyrs) + pmvec0 * dyrs) * f;
 
-		// cartesian to spherical
-		double lon = atan2(u[1], u[0]);
-		// warp pi
-		if (lon < 0.) lon += 2. * M_PI;
-		double lat = atan2(u[2], sqrt(u[0] * u[0] + u[1] * u[1]));
-		// double d = sqrt(u[0] * u[0] + u[1] * u[1] + u[2] * u[2]);
+			// cartesian to spherical
+			double lon = atan2(u[1], u[0]);
+			// warp pi
+			if (lon < 0.) lon += 2. * M_PI;
+			double lat = atan2(u[2], sqrt(u[0] * u[0] + u[1] * u[1]));
+			// double d = sqrt(u[0] * u[0] + u[1] * u[1] + u[2] * u[2]);
 
-		double Plx2 = plx * f;
-		double pmr1 = (pmr0 + (pmtotsqr + pmr0 * pmr0) * dyrs) * f * f;
-		Vec3d pmvel1 = pmvec0 * (1 + pmr0 * dyrs);
-		pmvel1.set((pmvel1[0] - r[0] * pmr0 * pmr0 * dyrs) * f * f * f, (pmvel1[1] - r[1] * pmr0 * pmr0 * dyrs) * f * f * f, (pmvel1[2] - r[2] * pmr0 * pmr0 * dyrs) * f * f * f);
+			double Plx2 = plx * f;
+			double pmr1 = (pmr0 + (pmtotsqr + pmr0 * pmr0) * dyrs) * f * f;
+			Vec3d pmvel1 = pmvec0 * (1 + pmr0 * dyrs);
+			pmvel1.set((pmvel1[0] - r[0] * pmr0 * pmr0 * dyrs) * f * f * f, (pmvel1[1] - r[1] * pmr0 * pmr0 * dyrs) * f * f * f, (pmvel1[2] - r[2] * pmr0 * pmr0 * dyrs) * f * f * f);
 
-		double slon = sin(lon);
-		double slat = sin(lat);
-		double clon = cos(lon);
-		double clat = cos(lat);
+			double slon = sin(lon);
+			double slat = sin(lat);
+			double clon = cos(lon);
+			double clat = cos(lat);
 
-		// normal triad of a spherical coordinate system
-		Vec3d p2(-slon, clon, 0.);
-		Vec3d q2(-slat * clon, -slat * slon, clat);
+			// normal triad of a spherical coordinate system
+			Vec3d p2(-slon, clon, 0.);
+			Vec3d q2(-slat * clon, -slat * slon, clat);
 
-		pmra = p2[0] * pmvel1[0] + p2[1] * pmvel1[1] + p2[2] * pmvel1[2];
-		pmra /= MAS2RAD;
-		pmdec = q2[0] * pmvel1[0] + q2[1] * pmvel1[1] + q2[2] * pmvel1[2];
-		pmdec /= MAS2RAD;
-		RA = lon;
-		DE = lat;
-		Plx = Plx2;
-		RV = (pmr1 / MAS2RAD / plx) * (AU / JYEAR_SECONDS);
+			pmra = p2[0] * pmvel1[0] + p2[1] * pmvel1[1] + p2[2] * pmvel1[2];
+			pmra /= MAS2RAD;
+			pmdec = q2[0] * pmvel1[0] + q2[1] * pmvel1[1] + q2[2] * pmvel1[2];
+			pmdec /= MAS2RAD;
+			RA = lon;
+			DE = lat;
+			Plx = Plx2;
+			RV = (pmr1 / MAS2RAD / plx) * (AU / JYEAR_SECONDS);
+		}
+		else {
+			pmra = getDx0() * cos(DE);
+			pmdec = getDx1();
+			RA = getX0() + dyrs * getDx0() * MAS2RAD;
+			DE = getX1() + dyrs * getDx1() * MAS2RAD;
+		}
 	}
 	// void getJ2000withParallaxEffect(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float& dyrs) const 
 	// {
@@ -261,11 +267,6 @@ public:
 	inline double getDx0() const {return d.dx0 / 1000.;}
 	inline double getDx1() const {return d.dx1 / 1000.;}
 	inline double getDx2() const {return d.dx2 / 1000.;}
-	inline void getRaDec(double& ra, double& dec) const {
-		// return RA and DEC in degree in the catalog
-		ra = atan2(getX1(), getX0()) * 180. / M_PI;
-		dec = atan2(getX2(), sqrt(getX0() * getX0() + getX1() * getX1())) * 180. / M_PI;
-	}
 	inline double getPlx() const {return d.plx * 0.02;}
 	inline double getRV() const {return d.rv / 10.;}
 	inline bool getPreciseAstrometricFlag() const {
@@ -301,10 +302,10 @@ struct Star2 : public Star<Star2> {
 private:
 	struct Data {
 		qint64  gaia_id;	  // 8 bytes
-		qint32  x0;           // 4 bytes
-		qint32  x1;           // 4 bytes
-		qint32  dx0;          // 4 bytes
-		qint32  dx1;          // 4 bytes
+		qint32  x0;           // 4 bytes, RA in mas
+		qint32  x1;           // 4 bytes, DEC in mas
+		qint32  dx0;          // 4 bytes, pmra in uas/yr
+		qint32  dx1;          // 4 bytes, pmdec in uas/yr
 		qint16  b_v; 		  // 2 byte
 		qint16  vmag;         // 2 bytes
 	} d;  // total is 28 bytes
