@@ -38,6 +38,25 @@ static unsigned int stel_bswap_32(unsigned int val)
 	       (((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
 }
 
+static float stel_bswap_32f(int val)
+{
+    // Create a union to access the float as an unsigned int
+    union {
+        float f;
+        unsigned int i;
+    } u;
+
+    // Assign the float value to the union
+    u.i = val;
+
+    // Perform the byte swap on the integer representation
+    u.i = (((u.i) & 0xff000000) >> 24) | (((u.i) & 0x00ff0000) >>  8) |
+          (((u.i) & 0x0000ff00) <<  8) | (((u.i) & 0x000000ff) << 24);
+
+    // Return the float value from the union
+    return u.f;
+}
+
 static const Vec3f north(0,0,1);
 
 void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2)
@@ -83,6 +102,15 @@ static inline int ReadInt(QFile& file, unsigned int &x)
 	return rval;
 }
 
+static inline int ReadFloat(QFile& file, float &x)
+{
+	unsigned int temp;
+	if (4 != file.read(reinterpret_cast<char*>(&temp), 4))
+		return -1;
+	x = *reinterpret_cast<float*>(&temp);
+	return 0;
+}
+
 #if (!defined(__GNUC__))
 #ifndef _MSC_BUILD
 #warning Star catalogue loading has only been tested with gcc
@@ -100,6 +128,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	}
 	dbStr = "Loading star catalog: " + QDir::toNativeSeparators(catalogFilePath) + " - ";
 	unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
+	float epochJD;
 	if (ReadInt(*file,magic) < 0 ||
 			ReadInt(*file,type) < 0 ||
 			ReadInt(*file,major) < 0 ||
@@ -107,7 +136,8 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			ReadInt(*file,level) < 0 ||
 			ReadInt(*file,mag_min) < 0 ||
 			ReadInt(*file,mag_range) < 0 ||
-			ReadInt(*file,mag_steps) < 0)
+			ReadInt(*file,mag_steps) < 0 ||
+			ReadFloat(*file,epochJD) < 0)
 	{
 		dbStr += "error - file format is bad.";
 		qDebug().noquote() << dbStr;
@@ -137,6 +167,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		mag_min = stel_bswap_32(mag_min);
 		mag_range = stel_bswap_32(mag_range);
 		mag_steps = stel_bswap_32(mag_steps);
+		epochJD = stel_bswap_32f(epochJD);
 	}
 	else if (magic == FILE_MAGIC)
 	{
@@ -159,6 +190,13 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	else
 	{
 		dbStr += "error - not a catalogue file.";
+		qDebug().noquote() << dbStr;
+		return Q_NULLPTR;
+	}
+	if (epochJD != STAR_CATALOG_JDEPOCH)
+	{
+		qDebug().noquote() << epochJD << "!=" << STAR_CATALOG_JDEPOCH;
+		dbStr += "warning - Star catalog epoch is not what is expected in Stellarium";
 		qDebug().noquote() << dbStr;
 		return Q_NULLPTR;
 	}
