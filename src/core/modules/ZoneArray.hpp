@@ -111,8 +111,6 @@ public:
 	//! Initialize the ZoneData struct at the given index.
 	void initTriangle(int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2);
 	
-	virtual void scaleAxis() = 0;
-
 	//! File path of the catalog.
 	const QString fname;
 
@@ -188,7 +186,6 @@ protected:
 	          const QVector<SphericalCap>& boundingCaps,
 	          const bool withAberration, const Vec3f vel) const override;
 
-	void scaleAxis() override;
 	void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
 	                  QList<StelObjectP > &result) override;
 

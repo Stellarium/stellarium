@@ -58,138 +58,88 @@ static inline int BVToIndex(int bV)
 	return static_cast<int>(bV+0.5f)*31.75f;
 }
 
-
-#pragma pack(push, 1)
-struct Star1 {
-private:
-	struct Data {
-		quint8  hip[3];	      // 3 bytes
-		qint64  gaia_id;	  // 8 bytes
-		quint8  componentIds; // 1 byte
-		qint32  x0;           // 4 bytes, ra in mas
-		qint32  x1;           // 4 bytes, dec in mas
-		qint16  b_v; 		  // 2 byte, B-V in milli-mag
-		qint16  vmag;         // 2 bytes, V magnitude in milli-mag
-		quint16 spInt;        // 2 bytes
-		qint32  dx0;          // 4 bytes, pmra in uas/yr
-		qint32  dx1;          // 4 bytes, pmdec in uas/yr
-		quint16 plx;          // 2 bytes, parallax in 20 uas
-		quint16 plx_err;      // 2 bytes, parallax error in 10 uas
-		qint16  rv;		      // 2 bytes, radial velocity in 10 m/s
-	} d;
-
-public:
-	enum {MaxPosVal=0x7FFFFFFF};
-	StelObjectP createStelObject(const SpecialZoneArray<Star1> *a, const SpecialZoneData<Star1> *z) const;
-
-	void getJ2000withParallaxEffect(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float& dyrs) const 
+template <typename Derived>
+struct Star {
+	// methods that must be implemented by the derived class are those not returning 0 or False here
+	inline double getX0() const { return static_cast<const Derived*>(this)->getX0(); }  // either in rad or in internal astrometric unit
+	inline double getX1() const { return static_cast<const Derived*>(this)->getX1(); }  // either in rad or in internal astrometric unit
+	inline double getX2() const { return static_cast<const Derived*>(this)->getX2(); }  // either in rad or in internal astrometric unit
+	inline int getBVIndex() const { return static_cast<const Derived*>(this)->getBVIndex(); }
+	inline double getMag() const { return static_cast<const Derived*>(this)->getMag(); }
+	inline double getBV() const { return static_cast<const Derived*>(this)->getBV(); }
+	inline bool isVIP() const { return static_cast<const Derived*>(this)->isVIP(); }
+	inline bool hasName() const { return static_cast<const Derived*>(this)->hasName(); }
+	inline QString getNameI18n() const { return static_cast<const Derived*>(this)->getNameI18n(); }
+	inline QString getScreenNameI18n() const { return static_cast<const Derived*>(this)->getScreenNameI18n(); }
+	inline QString getDesignation() const { return static_cast<const Derived*>(this)->getDesignation(); }
+	inline int hasComponentID() const { return static_cast<const Derived*>(this)->hasComponentID(); }
+	inline double getDx0() const { return static_cast<const Derived*>(this)->getDx0(); }  // should return in mas/yr (if pmra, then without cos(dec) components), 0 means no 1rd proper motion
+	inline double getDx1() const { return static_cast<const Derived*>(this)->getDx1(); }  // should return in mas/yr, 0 means no 2rd proper motion
+	inline double getDx2() const { return static_cast<const Derived*>(this)->getDx2(); }  // should return in mas/yr, 0 means no 3rd proper motion
+	inline double getPlx() const { return static_cast<const Derived*>(this)->getPlx(); }  // should return in mas, 0 means no parallax
+	inline double getPlxErr() const { return static_cast<const Derived*>(this)->getPlxErr(); }  // should return in mas, 0 means no parallax error
+	inline void getRADEC(double& RA, double& DE) const { static_cast<const Derived*>(this)->getRADEC(RA, DE); }  // should return RA/DEC in radian
+	inline void getRADECPM(double& RA, double& DE, double& pmra, double& pmdec) const { static_cast<const Derived*>(this)->getPlxErr(RA, DE, pmra, pmdec); }  // should return RA/DEC in radian and pmra/pmdec in mas/yr
+	inline double getRV() const { return static_cast<const Derived*>(this)->getRV(); }  // should return in km/s, 0 means no parallax error
+	inline bool getPreciseAstrometricFlag() const { return static_cast<const Derived*>(this)->getPreciseAstrometricFlag();}  // should only be true if full astrometric solution is available with getX2(), getDx2() too
+	inline void getJ2000Pos(float dyrs, Vec3f& pos) const
 	{
-		// RA and DE in radian
-		// Plx in mas
-		// pmra, pmdec in mas/yr
-		// vr in km/s
-		// dyrs in Julian year
-		// cant do this without Anthony Brown's astrometry tutorial
-		// this function assume RA, DE observed at J2000.0
-		static const double refepoch = 2000.0;
-		const double obs_epoch = refepoch + dyrs;
-		static const double au_in_meter = 149597870700.;
-		static const double au_mas_parsec = 1000.;  // AU expressed in mas*pc
-		static const double julian_year_seconds = 365.25 * 86400.;
-		static const double au_km_year_per_second = au_in_meter / julian_year_seconds / 1000.;
-		// static const double parsec = au_in_meter / 1000. / MAS2RAD;
-		static const double parsec = 30856775814913670;
-		static const double orbital_period = 1.0;  // in Julian year
-		static const double orbital_radius = 1.0;  // in AU
-
-		double sra = sin(RA);
-		double sde = sin(DE);
-		double cra = cos(RA);
-		double cde = cos(DE);
-
-		// need 3D spherical coordinate system
-		double radius = au_mas_parsec / Plx;
-		Vec3f xyz(radius * cra * cde, radius * sra * cde, radius * sde);
-
-		// normal triad of a spherical coordinate system
-		Vec3d p(-sra, cra, 0.);
-		Vec3d q(-sde * cra, -sde * sra, cde);
-		Vec3d r(cde * cra, cde * sra, sde);
-		Vec3d transverse_motion(pmra * au_km_year_per_second / Plx, pmdec * au_km_year_per_second / Plx, vr);
-		Mat3d md = Mat3d(p, q, r);
-		Vec3d vxvyvz = md.transpose() * transverse_motion;
-
-		// from observer's ephemeris
-		Vec3d bxyz(orbital_radius * cos(2. * M_PI / orbital_period * obs_epoch), orbital_radius * sin(2. * M_PI / orbital_period * obs_epoch), 0.);
-
-		// include Roemer delay
-		double tB = obs_epoch + (r * bxyz) * au_in_meter / julian_year_seconds / SPEED_OF_LIGHT;
-
-		// phase space coordinates
-		double vxyz_factor = (tB - refepoch) * (1000. * julian_year_seconds / parsec);
-		Vec3d bS(xyz[0] + vxvyvz[0] * vxyz_factor, xyz[1] + vxvyvz[1] * vxyz_factor, xyz[2] + vxvyvz[2] * vxyz_factor);
-		Vec3d u0 = bS - bxyz * au_in_meter / parsec;
-		double RA_obs = atan2(u0[1], u0[0]);
-		// wrap pi
-		if (RA_obs < 0.) RA_obs += 2. * M_PI;
-		double DEC_obs = atan2(u0[2], sqrt(u0[0] * u0[0] + u0[1] * u0[1]));
-
-		// change RA, DEC
-		RA = RA_obs;
-		DE = DEC_obs;
+		// ideally whatever computation is done here should be done to get RA, DEC only
+		// dont waste time computing other things because whoever calls this function dont need them
+		if (getPreciseAstrometricFlag()) {
+			getEquatorialPos3D(dyrs, pos);
+		}
+		else {
+			getEquatorialPos2D(dyrs, pos);
+		}
 	}
-
-	void getJ2000pos3D(double& RA, double& DE, double& Plx, double pmra, double pmdec, double vr, float dyrs, Vec3f& pos) const {
-		// cant do this without Anthony Brown's astrometry tutorial
-
-		double sra = sin(RA);
-		double sde = sin(DE);
-		double cra = cos(RA);
-		double cde = cos(DE);
-
-		// normal triad of a spherical coordinate system
-		Vec3d p(-sra, cra, 0.);
-		Vec3d q(-sde * cra, -sde * sra, cde);
-		Vec3d r(cde * cra, cde * sra, sde);
-
-		pmra *= MAS2RAD;
-		pmdec *= MAS2RAD;
-		double pmr0 = vr * Plx / (AU / JYEAR_SECONDS) * MAS2RAD;
-		double pmtotsqr =  (pmra * pmra + pmdec * pmdec);
-
+	// Special thanks to Anthony Brown's astrometry tutorial
+	// This function only compute RA, DEC in rectangular coordinate system
+	inline void getEquatorialPos3D(float dyrs, Vec3f& pos) const 
+	{
+		double r0 = getX0();
+		double r1 = getX1();
+		double r2 = getX2();
+		double pm0 = getDx0();
+		double pm1 = getDx1();
+		double pm2 = getDx2();
+		double plx = getPlx();
+		double vr = getRV();
+		Vec3d r(r0, r1, r2);
 		// proper motion
-		Vec3d pm0 = pmra * p + pmdec * q;
+		Vec3d pmvec0(pm0, pm1, pm2);
+		pmvec0 = pmvec0 * MAS2RAD;
+		double pmr0 = vr * plx / (AU / JYEAR_SECONDS) * MAS2RAD;
+		double pmtotsqr =  (pmvec0[0] * pmvec0[0] + pmvec0[1] * pmvec0[1] + pmvec0[2] * pmvec0[2]);
 
 		double f = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0*pmr0)*dyrs*dyrs);
-		Vec3d u = (r * (1. + pmr0 * dyrs) + pm0 * dyrs) * f;
+		Vec3d u = (r * (1. + pmr0 * dyrs) + pmvec0 * dyrs) * f;
 
 		pos.set(u[0], u[1], u[2]);
-		// no need to map back to RA/DE
 	}
-
-	void getJ2000Pos6DTreatment(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float& dyrs) const {
-		// cant do this without Anthony Brown's astrometry tutorial
-
-		double sra = sin(RA);
-		double sde = sin(DE);
-		double cra = cos(RA);
-		double cde = cos(DE);
-
-		// normal triad of a spherical coordinate system
-		Vec3d p(-sra, cra, 0.);
-		Vec3d q(-sde * cra, -sde * sra, cde);
-		Vec3d r(cde * cra, cde * sra, sde);
-
-		pmra *= MAS2RAD;
-		pmdec *= MAS2RAD;
-		double pmr0 = vr * Plx / (AU / JYEAR_SECONDS) * MAS2RAD;
-		double pmtotsqr =  (pmra * pmra + pmdec * pmdec);
-
+	inline void getEquatorialPos2D(float dyrs, Vec3f& pos) const
+	{
+		StelUtils::spheToRect(getX0() + dyrs * getDx0() * MAS2RAD, getX1() + dyrs * getDx1() * MAS2RAD, pos);
+	}
+	inline void getFull6DSolution(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& RV, float dyrs) const
+	{
+		double r0 = getX0();
+		double r1 = getX1();
+		double r2 = getX2();
+		double pm0 = getDx0();
+		double pm1 = getDx1();
+		double pm2 = getDx2();
+		double plx = getPlx();
+		double rv = getRV();
+		Vec3d r(r0, r1, r2);
 		// proper motion
-		Vec3d pm0 = pmra * p + pmdec * q;
+		Vec3d pmvec0(pm0, pm1, pm2);
+		pmvec0 = pmvec0 * MAS2RAD;
+		double pmr0 = rv * plx / (AU / JYEAR_SECONDS) * MAS2RAD;
+		double pmtotsqr =  (pmvec0[0] * pmvec0[0] + pmvec0[1] * pmvec0[1] + pmvec0[2] * pmvec0[2]);
 
 		double f = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0*pmr0)*dyrs*dyrs);
-		Vec3d u = (r * (1. + pmr0 * dyrs) + pm0 * dyrs) * f;
+		Vec3d u = (r * (1. + pmr0 * dyrs) + pmvec0 * dyrs) * f;
 
 		// cartesian to spherical
 		double lon = atan2(u[1], u[0]);
@@ -198,9 +148,9 @@ public:
 		double lat = atan2(u[2], sqrt(u[0] * u[0] + u[1] * u[1]));
 		// double d = sqrt(u[0] * u[0] + u[1] * u[1] + u[2] * u[2]);
 
-		double Plx2 = Plx * f;
+		double Plx2 = plx * f;
 		double pmr1 = (pmr0 + (pmtotsqr + pmr0 * pmr0) * dyrs) * f * f;
-		Vec3d pmvel1 = pm0 * (1 + pmr0 * dyrs);
+		Vec3d pmvel1 = pmvec0 * (1 + pmr0 * dyrs);
 		pmvel1.set((pmvel1[0] - r[0] * pmr0 * pmr0 * dyrs) * f * f * f, (pmvel1[1] - r[1] * pmr0 * pmr0 * dyrs) * f * f * f, (pmvel1[2] - r[2] * pmr0 * pmr0 * dyrs) * f * f * f);
 
 		double slon = sin(lon);
@@ -211,7 +161,6 @@ public:
 		// normal triad of a spherical coordinate system
 		Vec3d p2(-slon, clon, 0.);
 		Vec3d q2(-slat * clon, -slat * slon, clat);
-		// Vec3d r2(clat * clon, clat * slon, slat);
 
 		pmra = p2[0] * pmvel1[0] + p2[1] * pmvel1[1] + p2[2] * pmvel1[2];
 		pmra /= MAS2RAD;
@@ -220,64 +169,111 @@ public:
 		RA = lon;
 		DE = lat;
 		Plx = Plx2;
-		vr = (pmr1 / MAS2RAD / Plx) * (AU / JYEAR_SECONDS);
+		RV = (pmr1 / MAS2RAD / plx) * (AU / JYEAR_SECONDS);
 	}
+	// void getJ2000withParallaxEffect(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float& dyrs) const 
+	// {
+	// 	// RA and DE in radian
+	// 	// Plx in mas
+	// 	// pmra, pmdec in mas/yr
+	// 	// vr in km/s
+	// 	// dyrs in Julian year
+	// 	// cant do this without Anthony Brown's astrometry tutorial
+	// 	// this function assume RA, DE observed at J2000.0
+	// 	static const double refepoch = 2000.0;
+	// 	const double obs_epoch = refepoch + dyrs;
+	// 	static const double au_in_meter = 149597870700.;
+	// 	static const double au_mas_parsec = 1000.;  // AU expressed in mas*pc
+	// 	static const double julian_year_seconds = 365.25 * 86400.;
+	// 	static const double au_km_year_per_second = au_in_meter / julian_year_seconds / 1000.;
+	// 	// static const double parsec = au_in_meter / 1000. / MAS2RAD;
+	// 	static const double parsec = 30856775814913670;
+	// 	static const double orbital_period = 1.0;  // in Julian year
+	// 	static const double orbital_radius = 1.0;  // in AU
 
-	void getJ2000Pos(float dyrs, Vec3f& pos) const
-	{
-		// conversion from mas to rad
-		double RA_rad = getX0() * MAS2RAD;
-		double DE_rad = getX1() * MAS2RAD;
+	// 	double sra = sin(RA);
+	// 	double sde = sin(DE);
+	// 	double cra = cos(RA);
+	// 	double cde = cos(DE);
 
-		
-		// if (getTimeDependence() && -1 == 0) {  // on top of proper motion, also consider parallax
-		// 	double Plx = getPlx() * 0.01;
-		// 	double pmra = getDx0() / 1000.;
-		// 	double pmdec = getDx1() / 1000.;
-		// 	double vr = getRV() / 100.;
-		// 	getJ2000withParallaxEffect(RA_rad, DE_rad, Plx, pmra, pmdec, vr, dyrs);
-		// }
-		if (getTimeDependence()){  // 3D astrometry propagation
-			double Plx = getPlx() / 1000.;
-			double pmra = getDx0() / 1000.;
-			double pmdec = getDx1() / 1000.;
-			double vr = getRV() / 10.;
-			getJ2000pos3D(RA_rad, DE_rad, Plx, pmra, pmdec, vr, dyrs, pos);
-		}
-		else {
-			// no parallax no radial velocity, just proper motion
-			// conversion from mas/yr to rad/yr, so dra in rad
-			// getDx0 already has cos(DE) factor
-			RA_rad += dyrs * (getDx0() / 1000.f) * MAS2RAD / cos(DE_rad);
-			DE_rad += dyrs * (getDx1() / 1000.f) * MAS2RAD;
-			StelUtils::spheToRect(RA_rad, DE_rad, pos);
-		}
+	// 	// need 3D spherical coordinate system
+	// 	double radius = au_mas_parsec / Plx;
+	// 	Vec3f xyz(radius * cra * cde, radius * sra * cde, radius * sde);
 
-	}
+	// 	// normal triad of a spherical coordinate system
+	// 	Vec3d p(-sra, cra, 0.);
+	// 	Vec3d q(-sde * cra, -sde * sra, cde);
+	// 	Vec3d r(cde * cra, cde * sra, sde);
+	// 	Vec3d transverse_motion(pmra * au_km_year_per_second / Plx, pmdec * au_km_year_per_second / Plx, vr);
+	// 	Mat3d md = Mat3d(p, q, r);
+	// 	Vec3d vxvyvz = md.transpose() * transverse_motion;
+
+	// 	// from observer's ephemeris
+	// 	Vec3d bxyz(orbital_radius * cos(2. * M_PI / orbital_period * obs_epoch), orbital_radius * sin(2. * M_PI / orbital_period * obs_epoch), 0.);
+
+	// 	// include Roemer delay
+	// 	double tB = obs_epoch + (r * bxyz) * au_in_meter / julian_year_seconds / SPEED_OF_LIGHT;
+
+	// 	// phase space coordinates
+	// 	double vxyz_factor = (tB - refepoch) * (1000. * julian_year_seconds / parsec);
+	// 	Vec3d bS(xyz[0] + vxvyvz[0] * vxyz_factor, xyz[1] + vxvyvz[1] * vxyz_factor, xyz[2] + vxvyvz[2] * vxyz_factor);
+	// 	Vec3d u0 = bS - bxyz * au_in_meter / parsec;
+	// 	double RA_obs = atan2(u0[1], u0[0]);
+	// 	// wrap pi
+	// 	if (RA_obs < 0.) RA_obs += 2. * M_PI;
+	// 	double DEC_obs = atan2(u0[2], sqrt(u0[0] * u0[0] + u0[1] * u0[1]));
+
+	// 	// change RA, DEC
+	// 	RA = RA_obs;
+	// 	DE = DEC_obs;
+	// }
+};
+
+#pragma pack(push, 1)
+struct Star1 : public Star<Star1> {
+private:
+	struct Data {
+		quint8  hip[3];	      // 3 bytes
+		qint64  gaia_id;	  // 8 bytes
+		quint8  componentIds; // 1 byte
+		qint32  x0;           // 4 bytes
+		qint32  x1;           // 4 bytes
+		qint32  x2;           // 4 bytes
+		qint16  b_v; 		  // 2 byte, B-V in milli-mag
+		qint16  vmag;         // 2 bytes, V magnitude in milli-mag
+		quint16 spInt;        // 2 bytes
+		qint32  dx0;          // 4 bytes
+		qint32  dx1;          // 4 bytes
+		qint32  dx2;          // 4 bytes
+		quint16 plx;          // 2 bytes, parallax in 20 uas
+		quint16 plx_err;      // 2 bytes, parallax error in 10 uas
+		qint16  rv;		      // 2 bytes, radial velocity in 10 m/s
+	} d;
+
+public:
+	StelObjectP createStelObject(const SpecialZoneArray<Star1> *a, const SpecialZoneData<Star1> *z) const;
 	inline int getBVIndex() const {return BVToIndex(getBV());}
 	inline int getMag() const { return d.vmag; }
 	inline int getSpInt() const {return d.spInt;}
-	inline int getX0() const { return d.x0;}
-	inline int getX1() const { return d.x1;}
-	inline int getDx0() const {return d.dx0;}
-	inline int getDx1() const {return d.dx1;}
-	inline int getPlx() const {return d.plx * 20;}  // because we store it in 20uas, convert back to 1uas
-	inline int getRV() const {return d.rv;}
-	inline void get6Dsolution(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float dyrs) const {
-		RA = getX0() * MAS2RAD;
-		DE = getX1() * MAS2RAD;
-		Plx = getPlx() * 0.001;
-		pmra = getDx0() / 1000.;
-		pmdec = getDx1() / 1000.;
-		vr = getRV() / 10.;
-		getJ2000Pos6DTreatment(RA, DE, Plx, pmra, pmdec, vr, dyrs);
+	inline double getX0() const { return d.x0 / 2.e9;}
+	inline double getX1() const { return d.x1 / 2.e9;}
+	inline double getX2() const { return d.x2 / 2.e9;}
+	inline double getDx0() const {return d.dx0 / 1000.;}
+	inline double getDx1() const {return d.dx1 / 1000.;}
+	inline double getDx2() const {return d.dx2 / 1000.;}
+	inline void getRaDec(double& ra, double& dec) const {
+		// return RA and DEC in degree in the catalog
+		ra = atan2(getX1(), getX0()) * 180. / M_PI;
+		dec = atan2(getX2(), sqrt(getX0() * getX0() + getX1() * getX1())) * 180. / M_PI;
 	}
-	inline bool getTimeDependence() const {
+	inline double getPlx() const {return d.plx * 0.02;}
+	inline double getRV() const {return d.rv / 10.;}
+	inline bool getPreciseAstrometricFlag() const {
 		// Flag if the star should have time dependent astrometry computed
 		// the star need to has parallax, proper motion, or radial velocity
 		// use OR in each in case one of them is actually exactly 0
 		// no point of doing proper propagation if any of them is missing
-		return (getPlx() || getPlxErr()) && (getDx0() || getDx1()) && getRV();
+		return (getPlx() || getPlxErr()) && (getDx0() || getDx1() || getDx2()) && getRV();
 	}
 	inline int getPlxErr() const {return d.plx_err;}
 	inline int getHip() const {
@@ -296,13 +292,12 @@ public:
 	QString getScreenNameI18n(void) const;
 	QString getDesignation(void) const;
 	int hasComponentID(void) const;
-	void print(void) const;
 };
-static_assert(sizeof(Star1) == 40, "Size of Star1 must be 40 bytes");
+static_assert(sizeof(Star1) == 48, "Size of Star1 must be 48 bytes");
 #pragma pack(pop) // Restore the previous packing alignment
 
 #pragma pack(push, 1)
-struct Star2 {  // 20 byte
+struct Star2 : public Star<Star2> {
 private:
 	struct Data {
 		qint64  gaia_id;	  // 8 bytes
@@ -314,25 +309,15 @@ private:
 		qint16  vmag;         // 2 bytes
 	} d;  // total is 28 bytes
 public:
-	inline int getX0() const { return d.x0;}
-	inline int getX1() const { return d.x1;}
-	inline int getDx0() const {return d.dx0;}
-	inline int getDx1() const {return d.dx1;}
+	inline double getX0() const { return d.x0 * MAS2RAD;}
+	inline double getX1() const { return d.x1 * MAS2RAD;}
+	inline double getX2() const {return 0;}
+	inline double getDx0() const {return d.dx0 / 1000.;}
+	inline double getDx1() const {return d.dx1 / 1000.;}
+	inline double getDx2() const {return 0.;}
 	inline int getBVIndex() const {return BVToIndex(getBV());}
 	inline int getMag() const { return d.vmag; }
-	enum {MaxPosVal=((1<<19)-1)};
 	StelObjectP createStelObject(const SpecialZoneArray<Star2> *a, const SpecialZoneData<Star2> *z) const;
-	void getJ2000Pos(float dyrs, Vec3f& pos) const
-	{
-		// conversion from mas to rad
-		const double RA_rad = getX0() * MAS2RAD;
-		const double DE_rad = getX1() * MAS2RAD;
-		// conversion from mas/yr to rad/yr, so dra in rad
-		const double dra = dyrs * (getDx0() / 1000.f) / cos(DE_rad) * MAS2RAD;
-		// getDx1 already in mas/yr, so ddec in rad
-		const double ddec = dyrs * (getDx1() / 1000.f) * MAS2RAD;
-		StelUtils::spheToRect(RA_rad + dra, DE_rad + ddec, pos);
-	}
 	inline long getGaia() const { return d.gaia_id; }
 	float getBV(void) const {return static_cast<float>(d.b_v) / 1000.f;}
 	QString getNameI18n(void) const {return QString();}
@@ -341,10 +326,10 @@ public:
 	int hasComponentID(void) const {return 0;}
 	bool isVIP() const {return false;}
 	bool hasName() const {return getGaia();}
-	int getPlx() const {return 0;}
-	int getPlxErr() const {return 0;}
-	int getRV() const {return 0;}
-	bool getTimeDependence() const { // Flag if the star should have time dependent astrometry computed
+	double getPlx() const {return 0.;}
+	double getPlxErr() const {return 0.;}
+	double getRV() const {return 0.;}
+	bool getPreciseAstrometricFlag() const { // Flag if the star should have time dependent astrometry computed
 		return false;
 	}
 	void print(void) const;
@@ -352,7 +337,7 @@ public:
 static_assert(sizeof(Star2) == 28, "Size of Star2 must be 28 bytes");
 #pragma pack(pop) // Restore the previous packing alignment
 
-struct Star3 {  // 6 byte
+struct Star3 : public Star<Star3> {
 	/*
 	          _______________
 	0     x0 |               |
@@ -371,17 +356,25 @@ private:
 	quint8 d[6];
 
 public:
-	inline int getX0() const
+	StelObjectP createStelObject(const SpecialZoneArray<Star3> *a, const SpecialZoneData<Star3> *z) const;
+	inline double getX0() const
 	{
 		quint32 v = d[0] | d[1] << 8 | (d[2] & 0x3) << 16;
-		return (static_cast<qint32>(v)) << 14 >> 14;
+		return (static_cast<int>(v)) << 14 >> 14;
 	}
 
-	inline int getX1() const
+	inline double getX1() const
 	{
 		quint32 v = d[2] >> 2 | d[3] << 6 | (d[4] & 0xF) << 14;
-		return (static_cast<qint32>(v)) << 14 >> 14;
+		return (static_cast<int>(v)) << 14 >> 14;
 	}
+	inline double getX2() const {return 0.;}
+	inline double getDx0() const {return 0.;}
+	inline double getDx1() const {return 0.;}
+	inline double getDx2() const {return 0.;}
+	double getPlx() const {return 0.;}
+	double getPlxErr() const {return 0.;}
+	double getRV() const {return 0.;}
 	inline int getBVIndex() const
 	{
 		return d[4] >> 4 | (d[5] & 0x7) << 4;
@@ -391,32 +384,17 @@ public:
 	{
 		return d[5] >> 3;
 	}
-	enum {MaxPosVal=((1<<17)-1)};
-	StelObjectP createStelObject(const SpecialZoneArray<Star3> *a, const SpecialZoneData<Star3> *z) const;
-	void getJ2000Pos(float dyrs, Vec3f& pos) const
-	{
-		Q_UNUSED(dyrs);  // they don't have proper motion
-		// conversion from mas to rad
-		const double RA_rad = getX0() * MAS2RAD;
-		const double DE_rad = getX1() * MAS2RAD;
-		StelUtils::spheToRect(RA_rad, DE_rad, pos);
-	}
+
 	float getBV() const {return IndexToBV(getBVIndex());}
 	QString getNameI18n() const {return QString();}
 	QString getScreenNameI18n() const {return QString();}
 	QString getDesignation() const {return QString();}
 	bool isVIP() const {return false;}
 	int hasComponentID() const {return 0;}
-	int getDx0() const {return 0;}
-	int getDx1() const {return 0;}
-	int getPlx() const {return 0;}
-	int getPlxErr() const {return 0;}
-	int getRV() const {return 0;}
 	bool hasName() const {return false;}
-	bool getTimeDependence() const { // Flag if the star should have time dependent astrometry computed
+	bool getPreciseAstrometricFlag() const { // Flag if the star should have time dependent astrometry computed
 		return false;
 	}
-	void print();
 };
 static_assert(sizeof(Star3) == 6, "Size of Star3 must be 6 bytes");
 

@@ -308,17 +308,6 @@ void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::scaleAxis()
-{
-	star_position_scale /= Star::MaxPosVal;
-	for (ZoneData *z=zones+(nr_of_zones-1);z>=zones;z--)
-	{
-		z->axis0 *= star_position_scale;
-		z->axis1 *= star_position_scale;
-	}
-}
-
-template<class Star>
 SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mmap,
 					 int level, int mag_min, int mag_range, int mag_steps)
 		: ZoneArray(file->fileName(), file, level, mag_min, mag_range, mag_steps),
@@ -473,17 +462,15 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	for (const Star* s=zoneToDraw->getStars();s<lastStar;++s)
 	{
 		float starMag = s->getMag();
-		if (s->getTimeDependence() && fabs(dyrs) > 3000.) {  // only recompute if has time dependence and time is far away
+		if (s->getPreciseAstrometricFlag() && fabs(dyrs) > 3000.) {  // only recompute if has time dependence and time is far away
 			// don't do full solution, can be very slow, just estimate here	
 			// estimate parallax from radial velocity and total proper motion
-			double Plx = s->getPlx() * 0.001;
-			double pmra = s->getDx0() / 1000.;
-			double pmdec = s->getDx1() / 1000.;
-			double vr = s->getRV() / 10.;
-			pmra *= MAS2RAD;
-			pmdec *= MAS2RAD;
+			double Plx = s->getPlx();
+			double vr = s->getRV();
+			Vec3d pmvec0(s->getDx0(), s->getDx1(), s->getDx2());
+			pmvec0 = pmvec0 * MAS2RAD;
 			double pmr0 = vr * Plx / (AU / JYEAR_SECONDS) * MAS2RAD;
-			double pmtotsqr =  (pmra * pmra + pmdec * pmdec);
+			double pmtotsqr =  (pmvec0[0] * pmvec0[0] + pmvec0[1] * pmvec0[1] + pmvec0[2] * pmvec0[2]);
 			double f = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0*pmr0)*dyrs*dyrs);
 			float magOffset = 5.f * log10(1/f);
 			starMag += magOffset * 1000.;

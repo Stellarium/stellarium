@@ -358,6 +358,7 @@ QString StelObject::getMagnitudeInfoString(const StelCore *core, const InfoStrin
 }
 
 // Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
+// computing positional info sometimes also compute others like proper motion too, so store them in the object
 QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	StelApp& app = StelApp::getInstance();
