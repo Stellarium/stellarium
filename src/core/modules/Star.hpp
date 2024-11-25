@@ -30,7 +30,7 @@
 #include <cmath>
 
 // Epoch in JD of the star catalog data
-#define STAR_CATALOG_JDEPOCH 2451545.0
+#define STAR_CATALOG_JDEPOCH 2457389.0
 
 class StelObject;
 
@@ -86,7 +86,7 @@ struct Star {
 	{
 		// ideally whatever computation is done here should be done to get RA, DEC only
 		// dont waste time computing other things because whoever calls this function dont need them
-		if (getPreciseAstrometricFlag()) {
+		if (getX2() != 0. || getDx2() != 0.) {  // as long as there is a 3rd component, we need to compute the full 3D position
 			getEquatorialPos3D(dyrs, pos);
 		}
 		else {
@@ -236,18 +236,18 @@ private:
 		quint8  hip[3];	      // 3 bytes
 		qint64  gaia_id;	  // 8 bytes
 		quint8  componentIds; // 1 byte
-		qint32  x0;           // 4 bytes
-		qint32  x1;           // 4 bytes
-		qint32  x2;           // 4 bytes
-		qint16  b_v; 		  // 2 byte, B-V in milli-mag
+		qint32  x0;           // 4 bytes, internal astrometric unit
+		qint32  x1;           // 4 bytes, internal astrometric unit
+		qint32  x2;           // 4 bytes, internal astrometric unit
+		qint16  b_v; 		  // 2 bytea, B-V in milli-mag
 		qint16  vmag;         // 2 bytes, V magnitude in milli-mag
 		quint16 spInt;        // 2 bytes
-		qint32  dx0;          // 4 bytes
-		qint32  dx1;          // 4 bytes
-		qint32  dx2;          // 4 bytes
+		qint32  dx0;          // 4 bytes, uas/yr
+		qint32  dx1;          // 4 bytes, uas/yr
+		qint32  dx2;          // 4 bytes, uas/yr
 		quint16 plx;          // 2 bytes, parallax in 20 uas
 		quint16 plx_err;      // 2 bytes, parallax error in 10 uas
-		qint16  rv;		      // 2 bytes, radial velocity in 10 m/s
+		qint16  rv;		      // 2 bytes, radial velocity in 100 m/s
 	} d;
 
 public:

@@ -292,11 +292,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	double Plx = s->getPlx();
 	double RadialVel = s->getRV();
 	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
-	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
 
-	if (!s->getPreciseAstrometricFlag()) {
-		Plx = s->getPlx();
-		RadialVel = 0.;
+	if (s->getPreciseAstrometricFlag()) {
+		s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
 	}
 
 	float magOffset = 5.f * log10((s->getPlx())/Plx);
