@@ -20,6 +20,7 @@
 #define MOSAICCAMERA_HPP
 
 #include "StelModule.hpp"
+#include "MosaicTcpServer.hpp"
 #include <QFont>
 
 class MosaicCameraDialog;
@@ -45,14 +46,20 @@ public:
 	void setDec(double dec);
 	void setRot(double rot);
 
+public slots:
+    void updateMosaic(double ra, double dec, double rot);  // Slot to update mosaic with received values
+
 private:
 	double ra;
 	double dec;
 	double rot;
+
+	float getParallacticAngle() const;
 	// Font used for displaying our text
 	QFont font;
 	// GUI
 	MosaicCameraDialog* configDialog;
+	MosaicTcpServer* tcpServer;
 };
 
 

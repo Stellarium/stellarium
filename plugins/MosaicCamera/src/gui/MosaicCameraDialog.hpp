@@ -37,6 +37,9 @@ class MosaicCameraDialog : public StelDialog
 public:
 	MosaicCameraDialog();
 	~MosaicCameraDialog() override;
+	void setRA(double ra);
+	void setDec(double dec);
+	void setRot(double rot);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots

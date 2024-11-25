@@ -23,8 +23,10 @@
 #include "StelModuleMgr.hpp"
 #include "MosaicCamera.hpp"
 #include "MosaicCameraDialog.hpp"
+#include "MosaicTcpServer.hpp"
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
+#include "CustomObject.hpp"
 
 #include <QDebug>
 
@@ -58,6 +60,7 @@ MosaicCamera::MosaicCamera() : ra(0), dec(0), rot(0)
 	setObjectName("MosaicCamera");
 	font.setPixelSize(25);
 	configDialog = new MosaicCameraDialog();
+    tcpServer = new MosaicTcpServer();
 }
 
 /*************************************************************************
@@ -66,6 +69,7 @@ MosaicCamera::MosaicCamera() : ra(0), dec(0), rot(0)
 MosaicCamera::~MosaicCamera()
 {
     delete configDialog;
+    delete tcpServer;
 }
 
 /*************************************************************************
@@ -84,23 +88,55 @@ double MosaicCamera::getCallOrder(StelModuleActionName actionName) const
 *************************************************************************/
 void MosaicCamera::init()
 {
+    qDebug() << "\n\n\n\n\n";
 	qDebug() << "init called for MosaicCamera";
+    qDebug() << "Starting TCP server";
+    tcpServer->startServer(5772);
+    connect(tcpServer, &MosaicTcpServer::newValuesReceived, this, &MosaicCamera::updateMosaic);
+    qDebug() << "\n\n\n\n\n";
 }
 
 
 void MosaicCamera::setRA(double ra)
 {
     this->ra = ra;
+    if(configDialog->visible()) {
+        configDialog->setRA(ra);
+    }
 }
 
 void MosaicCamera::setDec(double dec)
 {
     this->dec = dec;
+    if(configDialog->visible()) {
+        configDialog->setDec(dec);
+    }
 }
 
 void MosaicCamera::setRot(double rot)
 {
     this->rot = rot;
+    if(configDialog->visible()) {
+        configDialog->setRot(rot);
+    }
+}
+
+void MosaicCamera::updateMosaic(double ra, double dec, double rot)
+{
+    qDebug() << "Received new values: RA=" << ra << ", Dec=" << dec << ", Rot=" << rot;
+    setRA(ra);
+    setDec(dec);
+    setRot(rot);
+}
+
+float MosaicCamera::getParallacticAngle() const
+{
+    Vec3d v;
+    StelUtils::spheToRect(ra, dec, v);
+    CustomObject obj(QString("test"), v, false);
+    float q = obj.getParallacticAngle(StelApp::getInstance().getCore());
+    qDebug() << "parallactic angle = " << q;
+    return q;
 }
 
 void MosaicCamera::draw(StelCore* core)
@@ -115,8 +151,8 @@ void MosaicCamera::draw(StelCore* core)
 	// Gonna be some projection, but assume rectilinear for current test.
 
 	// const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
-	// const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	// const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 	StelPainter painter(prj);
 
 	std::vector<std::vector<std::vector<Vec2d>>> polygon_sets = {
@@ -1358,18 +1394,78 @@ void MosaicCamera::draw(StelCore* core)
                 {-0.02092088999384325, -0.02273645325221995},
             },
         },
+        {
+            {
+                {0.006039247055728695, 0.006083860090025068},
+                {0.0060394216941745, 0.0021114213952493793},
+                {0.002156096593543867, 0.00211148100951192},
+                {0.0021560343201107073, 0.006084032069300254},
+            },
+            {
+                {0.006039424442582142, 0.0019863082155786456},
+                {0.006039424442582142, -0.0019863082155786456},
+                {0.002156097573583869, -0.0019863642963111844},
+                {0.002156097573583869, 0.0019863642963111844},
+            },
+            {
+                {0.0060394216941745, -0.0021114213952493793},
+                {0.006039247055728695, -0.006083860090025068},
+                {0.0021560343201107073, -0.006084032069300254},
+                {0.002156096593543867, -0.00211148100951192},
+            },
+            {
+                {0.001941693240714674, 0.006084036812688888},
+                {0.001941749321447213, 0.0021114826537415496},
+                {-0.001941749321447213, 0.0021114826537415496},
+                {-0.001941693240714674, 0.006084036812688888},
+            },
+            {
+                {0.0019417502040283943, 0.0019863658430819935},
+                {0.0019417502040283943, -0.0019863658430819935},
+                {-0.0019417502040283943, -0.0019863658430819935},
+                {-0.0019417502040283943, 0.0019863658430819935},
+            },
+            {
+                {0.001941749321447213, -0.0021114826537415496},
+                {0.001941693240714674, -0.006084036812688887},
+                {-0.001941693240714674, -0.006084036812688887},
+                {-0.001941749321447213, -0.0021114826537415496},
+            },
+            {
+                {-0.0021560343201107073, 0.006084032069300254},
+                {-0.002156096593543867, 0.00211148100951192},
+                {-0.0060394216941745, 0.0021114213952493793},
+                {-0.006039247055728695, 0.006083860090025068},
+            },
+            {
+                {-0.002156097573583869, 0.0019863642963111844},
+                {-0.002156097573583869, -0.0019863642963111844},
+                {-0.006039424442582142, -0.0019863082155786456},
+                {-0.006039424442582142, 0.0019863082155786456},
+            },
+            {
+                {-0.002156096593543867, -0.00211148100951192},
+                {-0.0021560343201107073, -0.006084032069300254},
+                {-0.006039247055728695, -0.006083860090025068},
+                {-0.0060394216941745, -0.0021114213952493793},
+            },
+        },
     };
 
     std::vector<std::vector<float>> colors = {
         {0.0, 0.3, 1.0, 1.0},    // E2V = BLUE
         {0.0, 0.7, 1.0, 1.0},    // ITL = Cyan
-        {0.0, 1.0, 0.0, 1.0},  // Guider = Green
+        {0.0, 1.0, 0.0, 1.0},    // Guider = Green
         {1.0, 0.0, 0.0, 1.0},    // WF = Red
+        {1.0, 1.0, 1.0, 1.0},    // ComCam = White
     };
 
     double alpha = ra / 57.29577951308232 + 1.5707963267948966;  // ra=0 isn't along x=0?
     double beta = 1.5707963267948966 - dec / 57.29577951308232;  // polar angle
-    double rsp = rot / 57.29577951308232;  // rotation wrt current North
+    double rtp = rot / 57.29577951308232;  // rotation wrt current North
+    double rsp = rtp + getParallacticAngle();
+    qDebug() << "rsp = " << rsp;
+    qDebug() << "rtp = " << rtp;
 
     double cosBeta = cos(beta);
     double sinBeta = sin(beta);

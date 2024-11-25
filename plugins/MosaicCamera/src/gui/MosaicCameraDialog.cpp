@@ -58,6 +58,21 @@ void MosaicCameraDialog::updateRot(double rot)
 	mc->setRot(rot);
 }
 
+void MosaicCameraDialog::setRA(double ra)
+{
+	ui->RASpinBox->setValue(ra);
+}
+
+void MosaicCameraDialog::setDec(double dec)
+{
+	ui->DecSpinBox->setValue(dec);
+}
+
+void MosaicCameraDialog::setRot(double rot)
+{
+	ui->RotSpinBox->setValue(rot);
+}
+
 void MosaicCameraDialog::retranslate()
 {
 	if (dialog)
