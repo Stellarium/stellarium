@@ -347,7 +347,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	}
 
 	// kinda impossible for both pm to be exactly 0, so they must just be missing
-	if ((flags&ProperMotion) && (pmra) && (pmdec))
+	if ((flags&ProperMotion) && (pmra || pmdec))
 	{
 		float pa = std::atan2(pmra, pmdec)*M_180_PIf;
 		if (pa<0)
@@ -522,6 +522,31 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(getBV(), 'f', 2)) << "<br />";
 	
 	oss << getCommonInfoString(core, flags);
+
+	double RA, DEC, pmra, pmdec;
+	double PlxErr = s->getPlxErr();
+	double Plx = s->getPlx();
+	double RadialVel = s->getRV();
+	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
+	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+
+	// kinda impossible for both pm to be exactly 0, so they must just be missing
+	if ((flags&ProperMotion) && (pmra || pmdec))
+	{
+		float pa = std::atan2(pmra, pmdec)*M_180_PIf;
+		if (pa<0)
+			pa += 360.f;
+		oss << QString("%1: %2 %3 %4 %5°").arg(q_("Proper motion"),
+							QString::number(std::sqrt(pmra * pmra + pmdec * pmdec), 'f', 2),
+							qc_("mas/yr", "milliarc second per year"),
+							qc_("towards", "into the direction of"),
+							QString::number(pa, 'f', 1)) << "<br />";
+		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes"),
+							QString::number(pmra, 'f', 2),
+							QString::number(pmdec, 'f', 2),
+							qc_("mas/yr", "milliarc second per year")) << "<br />";
+	}
+
 	oss << getSolarLunarInfoString(core, flags);
 
 	StelObject::postProcessInfoString(str, flags);
