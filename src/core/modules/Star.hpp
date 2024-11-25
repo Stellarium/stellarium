@@ -313,6 +313,7 @@ public:
    inline double getDx1() const { return d.dx1 / 1000.; }
    inline double getDx2() const { return d.dx2 / 1000.; }
    inline double getPlx() const { return d.plx * 0.02; }
+   inline double getPlxErr() const { return d.plx_err / 100.; }
    inline double getRV() const { return d.rv / 10.; }
    inline bool   getPreciseAstrometricFlag() const
    {
@@ -322,7 +323,6 @@ public:
       // no point of doing proper propagation if any of them is missing
       return (getPlx() || getPlxErr()) &&  (getPlx() / getPlxErr() > 5) && (getDx0() || getDx1() || getDx2()) && getRV();
    }
-   inline int getPlxErr() const { return d.plx_err; }
    inline int getHip() const
    {
       quint32 v = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
