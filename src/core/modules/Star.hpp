@@ -320,7 +320,7 @@ public:
       // the star need to has parallax, proper motion, or radial velocity
       // use OR in each in case one of them is actually exactly 0
       // no point of doing proper propagation if any of them is missing
-      return (getPlx() || getPlxErr()) && (getDx0() || getDx1() || getDx2()) && getRV();
+      return (getPlx() || getPlxErr()) &&  (getPlx() / getPlxErr() > 5) && (getDx0() || getDx1() || getDx2()) && getRV();
    }
    inline int getPlxErr() const { return d.plx_err; }
    inline int getHip() const

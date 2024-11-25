@@ -294,7 +294,11 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
 
-	float magOffset = 5.f * log10((s->getPlx())/Plx);
+	float magOffset = 0.f;
+	if (Plx)
+	{
+		magOffset = 5.f * log10((s->getPlx())/Plx);
+	} 
 	oss << getMagnitudeInfoString(core, flags, 2, magOffset);
 
 	if ((flags&AbsoluteMagnitude) && Plx && !isNan(Plx) && !isInf(Plx))
@@ -524,14 +528,14 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 	oss << getCommonInfoString(core, flags);
 
 	double RA, DEC, pmra, pmdec;
-	double PlxErr = s->getPlxErr();
 	double Plx = s->getPlx();
 	double RadialVel = s->getRV();
 	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+	bool computeAstrometryFlag = (flags&ProperMotion) && (pmra || pmdec);
 
 	// kinda impossible for both pm to be exactly 0, so they must just be missing
-	if ((flags&ProperMotion) && (pmra || pmdec))
+	if (computeAstrometryFlag)
 	{
 		float pa = std::atan2(pmra, pmdec)*M_180_PIf;
 		if (pa<0)
