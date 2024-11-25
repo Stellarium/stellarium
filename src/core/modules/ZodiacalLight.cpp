@@ -88,6 +88,7 @@ void ZodiacalLight::init()
 	mainTex->release();
 	setFlagShow(conf->value("astro/flag_zodiacal_light", true).toBool());
 	setIntensity(conf->value("astro/zodiacal_light_intensity",1.).toDouble());
+	setColor(Vec3f(conf->value("astro/zodiacal_light_color", "1.0,1.0,1.0").toString()));
 
 	vbo.reset(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer));
 	vbo->create();
@@ -212,6 +213,7 @@ void ZodiacalLight::setFlagShow(bool b)
 	if (*fader != b)
 	{
 		*fader = b;
+		StelApp::immediateSave("astro/flag_zodiacal_light", b);
 		emit zodiacalLightDisplayedChanged(b);
 	}
 }
@@ -219,6 +221,16 @@ void ZodiacalLight::setFlagShow(bool b)
 bool ZodiacalLight::getFlagShow() const
 {
 	return *fader;
+}
+
+void ZodiacalLight::setIntensity(double aintensity)
+{
+	if(!qFuzzyCompare(aintensity, intensity))
+	{
+		intensity = aintensity;
+		StelApp::immediateSave("astro/zodiacal_light_intensity", aintensity);
+		emit intensityChanged(intensity);
+	}
 }
 
 void ZodiacalLight::draw(StelCore* core)

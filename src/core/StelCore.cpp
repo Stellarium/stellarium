@@ -128,7 +128,7 @@ StelCore::StelCore()
 	currentProjectorParams.viewportCenter.set(viewportCenterX, viewportCenterY);
 	const qreal viewportCenterOffsetX = conf->value("projection/viewport_center_offset_x",0.).toDouble();
 	const qreal viewportCenterOffsetY = conf->value("projection/viewport_center_offset_y",0.).toDouble();
-	currentProjectorParams.viewportCenterOffset.set(viewportCenterOffsetX, viewportCenterOffsetY);
+	currentProjectorParams.viewportCenterOffset.set(viewportCenterOffsetX/100., viewportCenterOffsetY/100.);
 
 	currentProjectorParams.viewportFovDiameter = conf->value("projection/viewport_fov_diameter", qMin(viewport_width,viewport_height)).toDouble();
 	currentProjectorParams.flipHorz = conf->value("projection/flip_horz",false).toBool();
@@ -607,8 +607,10 @@ void StelCore::setCurrentProjectionTypeKey(QString key)
 	if (newType<0)
 	{
 		qWarning() << "Unknown projection type: " << key << "setting \"ProjectionStereographic\" instead";
+		key="ProjectionStereographic";
 		newType = ProjectionStereographic;
 	}
+	StelApp::immediateSave("projection/type", key);
 	setCurrentProjectionType(newType);
 }
 
