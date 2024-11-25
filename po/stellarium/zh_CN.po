@@ -4254,7 +4254,7 @@ msgid ""
 "This sky culture is provided under MIT License. You can use it for "
 "commercial and non-commercial purposes, freely adapt it and share adapted "
 "work."
-msgstr "此星空文化是根据 MIT 许可提供的，您可以将其用于商业和非商业目的，自由地对其进行改编并分享改编后的作品。"
+msgstr "这个天空文化是在MIT许可证下提供的。您可以将其用于商业和非商业目的，自由改编并分享改编后的作品。"
 
 #: src/core/StelSkyCultureMgr.cpp:254
 msgid "This sky culture is provided under Creative Commons License."
@@ -4349,7 +4349,7 @@ msgstr "版权许可证"
 #: src/core/StelSkyCultureMgr.cpp:302
 msgid ""
 "The region indicates the geographical area of origin of a given sky culture."
-msgstr "区域 指某一特定星空文化的起源地。"
+msgstr "区域指某一特定星空文化的起源地。"
 
 #: src/core/StelSkyCultureMgr.cpp:308
 msgid "World"
@@ -5383,7 +5383,7 @@ msgstr "开发者"
 #: src/gui/HelpDialog.cpp:538
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
-msgstr "计划协调&项目主管：%1"
+msgstr "计划协调或项目主管：%1"
 
 #: src/gui/HelpDialog.cpp:539 src/gui/HelpDialog.cpp:550
 #, qt-format
@@ -8009,7 +8009,7 @@ msgstr "沙罗周期"
 
 #: src/gui/ObsListDialog.cpp:85 src/gui/ObsListDialog.cpp:1113
 msgid "Cannot open observingLists.json to write"
-msgstr "无法写入 observingLists.json 文件"
+msgstr "无法写入observingLists.json文件"
 
 #: src/gui/ObsListDialog.cpp:183
 msgctxt "default name for observing list if none is available"
@@ -9940,15 +9940,15 @@ msgstr "减少(&D)"
 
 #: src/translations.h:673
 msgid "&Rename"
-msgstr "&重命名"
+msgstr "重命名(&R)"
 
 #: src/translations.h:674
 msgid "&Delete"
-msgstr "&删除"
+msgstr "删除(&D)"
 
 #: src/translations.h:675
 msgid "&New Folder"
-msgstr "&新文件夹"
+msgstr "新文件夹(&N)"
 
 #: src/translations.h:676
 msgid "New Folder"
@@ -9956,7 +9956,7 @@ msgstr "新文件夹"
 
 #: src/translations.h:677
 msgid "Show &hidden files"
-msgstr "显示&隐藏文件"
+msgstr "显示隐藏文件(&h)"
 
 #: src/translations.h:678 plugins/MeteorShowers/src/ui_MSSearchDialog.h:139
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:141
@@ -12219,7 +12219,7 @@ msgstr "投影方式"
 
 #: src/ui_viewDialog.h:3579
 msgid "Current FoV"
-msgstr "当前的视场"
+msgstr "当前视场"
 
 #: src/ui_viewDialog.h:3580
 msgid "Vertical viewport offset"
@@ -13901,7 +13901,7 @@ msgstr "启动时的日期及时间"
 
 #: src/ui_configurationDialog.h:1964
 msgid "Stop clock when starting"
-msgstr "启动时停止时间"
+msgstr "软件启动时静止时间"
 
 #: src/ui_configurationDialog.h:1966
 msgid "Use a specific date and time when Stellarium starts up"
@@ -14319,15 +14319,15 @@ msgstr "视觉模型"
 
 #: src/ui_atmosphereDialog.h:352
 msgid "Choose &model:"
-msgstr "选择模型 &model:"
+msgstr "选择模型(&m):"
 
 #: src/ui_atmosphereDialog.h:355
 msgid "Path to &data:"
-msgstr "&data 路径为:"
+msgstr "数据路径为(&d):"
 
 #: src/ui_atmosphereDialog.h:357
 msgid "Eclipse simulation &quality:"
-msgstr "掩食模拟&质量:"
+msgstr "掩食模拟质量(&q):"
 
 #: src/ui_atmosphereDialog.h:358
 msgid "Show debugging options"
