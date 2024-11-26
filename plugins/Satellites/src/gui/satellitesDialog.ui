@@ -88,7 +88,41 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item row="3" column="0">
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayoutAutoAdd">
+            <item>
+             <widget class="QCheckBox" name="checkBoxAutoAdd">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>On update, add all new satellites from the selected source(s)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="jumpToSourcesButton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string notr="true">...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="internetUpdatesCheckbox">
+            <property name="text">
+             <string>Update satellite data from Internet sources</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
            <layout class="QGridLayout" name="gridLayout_7">
             <item row="0" column="1">
              <layout class="QHBoxLayout" name="horizontalLayout_11">
@@ -204,44 +238,17 @@
             </item>
            </layout>
           </item>
-          <item row="1" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayoutAutoAdd">
-            <item>
-             <widget class="QCheckBox" name="checkBoxAutoAdd">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>On update, add all new satellites from the selected source(s)</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="jumpToSourcesButton">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="text">
-               <string notr="true">...</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="internetUpdatesCheckbox">
-            <property name="text">
-             <string>Update satellite data from Internet sources</string>
-            </property>
-           </widget>
-          </item>
           <item row="2" column="0">
            <widget class="QCheckBox" name="checkBoxAutoRemove">
             <property name="text">
              <string>On update, remove the satellites that are no longer listed in the update sources</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="checkBoxAutoDisplay">
+            <property name="text">
+             <string>On update, mark all newly added satellites as displayed</string>
             </property>
            </widget>
           </item>

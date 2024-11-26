@@ -103,6 +103,7 @@ Satellites::Satellites()
 	, updatesEnabled(false)
 	, autoAddEnabled(false)
 	, autoRemoveEnabled(false)
+	, autoDisplayEnabled(true)
 	, updateFrequencyHours(0)
 	, flagUmbraVisible(false)
 	, flagUmbraAtFixedAltitude(false)
@@ -866,6 +867,7 @@ void Satellites::loadSettings()
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	autoAddEnabled = conf->value("auto_add_enabled", true).toBool();
 	autoRemoveEnabled = conf->value("auto_remove_enabled", true).toBool();
+	autoDisplayEnabled = conf->value("auto_display_enabled", true).toBool();
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	iridiumFlaresPredictionDepth = conf->value("flares_prediction_depth", 7).toInt();
 #endif
@@ -962,6 +964,7 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("auto_add_enabled", autoAddEnabled);
 	conf->setValue("auto_remove_enabled", autoRemoveEnabled);
+	conf->setValue("auto_display_enabled", autoDisplayEnabled);
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	conf->setValue("flares_prediction_depth", iridiumFlaresPredictionDepth);
 #endif
@@ -1353,8 +1356,7 @@ bool Satellites::add(const TleData& tleData)
 	satProperties.insert("tle1", tleData.first);
 	satProperties.insert("tle2", tleData.second);
 	satProperties.insert("hintColor", hintColor);	
-	//TODO: Decide if newly added satellites are visible by default --BM
-	satProperties.insert("visible", true);
+	satProperties.insert("visible", autoDisplayEnabled);
 	satProperties.insert("orbitVisible", false);
 
 	QPair<double, double> stdMagRCS = getStdMagRCS(tleData);
@@ -1877,6 +1879,16 @@ void Satellites::setAutoRemoveEnabled(bool enabled)
 	{
 		autoRemoveEnabled = enabled;
 		emit autoRemoveEnabledChanged(enabled);
+		emit settingsChanged();
+	}
+}
+
+void Satellites::setAutoDisplayEnabled(bool enabled)
+{
+	if (autoDisplayEnabled != enabled)
+	{
+		autoDisplayEnabled = enabled;
+		emit autoDisplayEnabledChanged(enabled);
 		emit settingsChanged();
 	}
 }
