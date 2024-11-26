@@ -308,7 +308,7 @@ private:
 public:
    StelObjectP   createStelObject(const SpecialZoneArray<Star1> * a, const SpecialZoneData<Star1> * z) const;
    inline int    getBVIndex() const { return BVToIndex(getBV()); }
-   inline int    getMag() const { return d.vmag; }
+   inline int    getMag() const { return d.vmag; }  // in milli-mag
    inline int    getSpInt() const { return d.spInt; }
    inline double getX0() const { return d.x0 / 2.e9; }
    inline double getX1() const { return d.x1 / 2.e9; }
@@ -370,7 +370,7 @@ public:
    inline double getDx1() const { return d.dx1 / 1000.; }
    inline double getDx2() const { return 0.; }
    inline int    getBVIndex() const { return BVToIndex(getBV()); }
-   inline int    getMag() const { return d.vmag; }
+   inline int    getMag() const { return d.vmag; }    // in milli-mag
    inline double getPMTotal() const { return sqrt((getDx0()*cos(getX1())) * getDx0()*cos(getX1()) + getDx1() * getDx1()); }
    StelObjectP   createStelObject(const SpecialZoneArray<Star2> * a, const SpecialZoneData<Star2> * z) const;
    inline long   getGaia() const { return d.gaia_id; }
@@ -403,7 +403,7 @@ private:
       quint8 x0[3];      // 3 bytes, RA in arcsecond
       quint8 x1[3];      // 3 bytes, DEC in arcsecond
       quint8 b_v;     // 1 byte, B-V in 0.1 mag
-      qint16 vmag;    // 2 bytes, V magnitude in 0.1 mag
+      quint16 vmag;    // 2 bytes, V magnitude in 0.1 mag
    } d;
 
 public:
@@ -417,7 +417,8 @@ public:
 	{ 
 		qint32 x0 = d.x1[0] | (d.x1[1] << 8) | (d.x1[2] << 16);
 		return static_cast<double>(x0) * 1000. * MAS2RAD; 
-	}   inline double getX2() const { return 0.; }
+	}   
+   inline double getX2() const { return 0.; }
    inline double getDx0() const { return 0.; }
    inline double getDx1() const { return 0.; }
    inline double getDx2() const { return 0.; }
@@ -426,8 +427,9 @@ public:
    double        getPlxErr() const { return 0.; }
    double        getRV() const { return 0.; }
    double        getBVIndex() const { return d.b_v / 10.; }
-   double        getMag() const { return d.vmag / 10.; }
+   double        getMag() const { return d.vmag * 100.; }  // in milli-mag
    float         getBV() const { return IndexToBV(getBVIndex()); }
+   inline long   getGaia() const { return d.gaia_id; }
    QString       getNameI18n() const { return QString(); }
    QString       getScreenNameI18n() const { return QString(); }
    QString       getDesignation() const { return QString(); }
