@@ -651,7 +651,7 @@ void StarMgr::populateHipparcosLists()
 	classicalCepheidsTypeStars.clear();
 	carbonStars.clear();
 	bariumStars.clear();
-	const int pmLimit = 1; // arc-second per year!
+	const int pmLimit = 1000; // arc-second per year!
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
 		const Star1 *const s = hipIndex[hip].s;
@@ -696,9 +696,7 @@ void StarMgr::populateHipparcosLists()
 				sd[so] = getWdsLastSeparation(s->getHip());
 				doubleHipStars.push_back(sd);
 			}
-			float pmX = 0.001f * s->getDx0();
-			float pmY = 0.001f * s->getDx0();
-			float pm = 0.001f * std::sqrt((pmX*pmX) + (pmY*pmY));
+			float pm = s->getPMTotal();
 			if (qAbs(pm)>=pmLimit)
 			{
 				QMap<StelObjectP, float> spm;
@@ -1227,6 +1225,14 @@ void StarMgr::draw(StelCore* core)
 				maxMagStarName = x;
 		}
 		int zone;
+
+		for (const auto& star : getHipparcosHighPMStars())
+		{
+			// Process each star as needed
+		}
+
+		// check the length of getHipparcosHighPMStars()
+		qDebug() << "getHipparcosHighPMStars() length:" << getHipparcosHighPMStars().length();
 		
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf);

@@ -84,6 +84,10 @@ struct Star
    inline QString getScreenNameI18n() const { return static_cast<const Derived *>(this)->getScreenNameI18n(); }
    inline QString getDesignation() const { return static_cast<const Derived *>(this)->getDesignation(); }
    inline int     hasComponentID() const { return static_cast<const Derived *>(this)->hasComponentID(); }
+   inline double  getPMTotal() const
+   {
+      return static_cast<const Derived *>(this)->getPMTotal();
+   } // should return in mas/yr
    inline double  getDx0() const
    {
       return static_cast<const Derived *>(this)->getDx0();
@@ -314,6 +318,7 @@ public:
    inline double getDx2() const { return d.dx2 / 1000.; }
    inline double getPlx() const { return d.plx * 0.02; }
    inline double getPlxErr() const { return d.plx_err / 100.; }
+   inline double getPMTotal() const { return getDx0() * getDx0() + getDx1() * getDx2() + getDx2() * getDx2(); }
    inline double getRV() const { return d.rv / 10.; }
    inline bool   getPreciseAstrometricFlag() const
    {
@@ -366,6 +371,7 @@ public:
    inline double getDx2() const { return 0.; }
    inline int    getBVIndex() const { return BVToIndex(getBV()); }
    inline int    getMag() const { return d.vmag; }
+   inline double getPMTotal() const { return sqrt((getDx0()*cos(getX1())) * getDx0()*cos(getX1()) + getDx1() * getDx1()); }
    StelObjectP   createStelObject(const SpecialZoneArray<Star2> * a, const SpecialZoneData<Star2> * z) const;
    inline long   getGaia() const { return d.gaia_id; }
    float         getBV(void) const { return static_cast<float>(d.b_v) / 1000.f; }
@@ -404,22 +410,23 @@ public:
    StelObjectP   createStelObject(const SpecialZoneArray<Star3> * a, const SpecialZoneData<Star3> * z) const;
 	inline double getX0() const 
 	{ 
-		quint32 x0 = d.x0[0] | (d.x0[1] << 8) | (d.x0[2] << 16);
+		qint32 x0 = d.x0[0] | (d.x0[1] << 8) | (d.x0[2] << 16);
 		return static_cast<double>(x0) * 1000. * MAS2RAD; 
 	}
 	inline double getX1() const 
 	{ 
-		quint32 x0 = d.x1[0] | (d.x1[1] << 8) | (d.x1[2] << 16);
+		qint32 x0 = d.x1[0] | (d.x1[1] << 8) | (d.x1[2] << 16);
 		return static_cast<double>(x0) * 1000. * MAS2RAD; 
 	}   inline double getX2() const { return 0.; }
    inline double getDx0() const { return 0.; }
    inline double getDx1() const { return 0.; }
    inline double getDx2() const { return 0.; }
+   inline double getPMTotal() const { return 0.; }
    double        getPlx() const { return 0.; }
    double        getPlxErr() const { return 0.; }
    double        getRV() const { return 0.; }
-   inline int    getBVIndex() const { return d.b_v / 10.; }
-   inline int    getMag() const { return d.vmag / 10.; }
+   double        getBVIndex() const { return d.b_v / 10.; }
+   double        getMag() const { return d.vmag / 10.; }
    float         getBV() const { return IndexToBV(getBVIndex()); }
    QString       getNameI18n() const { return QString(); }
    QString       getScreenNameI18n() const { return QString(); }
