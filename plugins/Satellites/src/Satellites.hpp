@@ -151,6 +151,7 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(int  labelFontSize			READ getLabelFontSize			WRITE setLabelFontSize			NOTIFY labelFontSizeChanged)
 	Q_PROPERTY(bool autoAddEnabled			READ isAutoAddEnabled			WRITE setAutoAddEnabled			NOTIFY autoAddEnabledChanged)
 	Q_PROPERTY(bool autoRemoveEnabled		READ isAutoRemoveEnabled		WRITE setAutoRemoveEnabled		NOTIFY autoRemoveEnabledChanged)
+	Q_PROPERTY(bool autoDisplayEnabled		READ isAutoDisplayEnabled		WRITE setAutoDisplayEnabled		NOTIFY autoDisplayEnabledChanged)
 	Q_PROPERTY(bool flagIconicMode			READ getFlagIconicMode			WRITE setFlagIconicMode			NOTIFY flagIconicModeChanged)
 	Q_PROPERTY(bool flagHideInvisible		READ getFlagHideInvisible		WRITE setFlagHideInvisible		NOTIFY flagHideInvisibleChanged)
 	Q_PROPERTY(bool flagColoredInvisible		READ getFlagColoredInvisible		WRITE setFlagColoredInvisible		NOTIFY flagColoredInvisibleChanged)
@@ -431,6 +432,7 @@ signals:
 	void updateFrequencyHoursChanged(int i);
 	void autoAddEnabledChanged(bool b);
 	void autoRemoveEnabledChanged(bool b);
+	void autoDisplayEnabledChanged(bool b);
 	void orbitLineSegmentsChanged(int i);
 	void orbitLineFadeSegmentsChanged(int i);
 	void orbitLineThicknessChanged(int i);
@@ -513,6 +515,10 @@ public slots:
 	bool isAutoRemoveEnabled() { return autoRemoveEnabled; }
 	//! Emits settingsChanged() if the value changes.
 	void setAutoRemoveEnabled(bool enabled);
+
+	bool isAutoDisplayEnabled() { return autoDisplayEnabled; }
+	//! Emits settingsChanged() if the value changes.
+	void setAutoDisplayEnabled(bool enabled);
 	
 	//! Set whether satellite position hints (icons or star-like dot) should be displayed.
 	//! Note that hint visibility also applies to satellite labels.
@@ -910,6 +916,9 @@ private:
 	bool autoAddEnabled;
 	//! Flag enabling the automatic removal of missing satellites on update.
 	bool autoRemoveEnabled;
+	//! Flag enabling the automatic enabling displaying mode of new satellites on update.
+	//! This will apply only for the selected update sources.
+	bool autoDisplayEnabled;
 	QPair<QDateTime, double> lastUpdate; // Combines previous QDateTime (slow!) with efficient JD (to be checked each frame in isValidRangeDates()) of the same time.
 	int updateFrequencyHours;
 	//@}
