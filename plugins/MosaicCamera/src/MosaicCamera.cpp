@@ -135,7 +135,6 @@ float MosaicCamera::getParallacticAngle() const
     StelUtils::spheToRect(ra, dec, v);
     CustomObject obj(QString("test"), v, false);
     float q = obj.getParallacticAngle(StelApp::getInstance().getCore());
-    qDebug() << "parallactic angle = " << q;
     return q;
 }
 
@@ -1464,8 +1463,6 @@ void MosaicCamera::draw(StelCore* core)
     double beta = 1.5707963267948966 - dec / 57.29577951308232;  // polar angle
     double rtp = rot / 57.29577951308232;  // rotation wrt current North
     double rsp = rtp + getParallacticAngle();
-    qDebug() << "rsp = " << rsp;
-    qDebug() << "rtp = " << rtp;
 
     double cosBeta = cos(beta);
     double sinBeta = sin(beta);
