@@ -623,19 +623,10 @@ void StarMgr::loadData(QVariantMap starsConfig)
 			spectral_array = initStringListFromFile(tmpFic);
 	}
 
-	const QString cat_hip_cids_file_name = starsConfig.value("hipComponentsIdsFile").toString();
-	if (cat_hip_cids_file_name.isEmpty())
-	{
-		qWarning() << "ERROR: stars:cat_hip_cids_file_name not found";
-	}
-	else
-	{
-		QString tmpFic = StelFileMgr::findFile("stars/default/" + cat_hip_cids_file_name);
-		if (tmpFic.isEmpty())
-			qWarning() << "ERROR while loading data from " << QDir::toNativeSeparators(("stars/default/" + cat_hip_cids_file_name));
-		else
-			component_array = initStringListFromFile(tmpFic);
-	}
+	// create an array with the first element being an empty string, and then contain strings A,B,C,...,Z
+	component_array.append("");
+	for (int i=0; i<26; i++)
+		component_array.append(QString(QChar('A'+i)));
 
 	lastMaxSearchLevel = maxGeodesicGridLevel;
 	qDebug() << "Finished loading star catalogue data, max_geodesic_level:" << maxGeodesicGridLevel;
@@ -1225,14 +1216,6 @@ void StarMgr::draw(StelCore* core)
 				maxMagStarName = x;
 		}
 		int zone;
-
-		for (const auto& star : getHipparcosHighPMStars())
-		{
-			// Process each star as needed
-		}
-
-		// check the length of getHipparcosHighPMStars()
-		qDebug() << "getHipparcosHighPMStars() length:" << getHipparcosHighPMStars().length();
 		
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf);

@@ -288,8 +288,6 @@ private:
    struct Data
    {
       qint64  gaia_id;      // 8 bytes
-      quint8  componentIds; // 1 byte
-      quint8  hip[3];       // 3 bytes
       qint32  x0;           // 4 bytes, internal astrometric unit
       qint32  x1;           // 4 bytes, internal astrometric unit
       qint32  x2;           // 4 bytes, internal astrometric unit
@@ -298,10 +296,12 @@ private:
       qint32  dx2;          // 4 bytes, uas/yr
       qint16  b_v;          // 2 bytea, B-V in milli-mag
       qint16  vmag;         // 2 bytes, V magnitude in milli-mag
-      quint16 spInt;        // 2 bytes
       quint16 plx;          // 2 bytes, parallax in 20 uas
       quint16 plx_err;      // 2 bytes, parallax error in 10 uas
       qint16  rv;           // 2 bytes, radial velocity in 100 m/s
+      quint16 spInt;        // 2 bytes
+      quint8  otype;        // 1 byte
+      quint8  hip[3];       // 3 bytes, HIP number combined with component ID (A, B, ...)
    } d;
 
 public:
@@ -329,11 +329,22 @@ public:
    }
    inline int getHip() const
    {
-      quint32 v = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
-      return (static_cast<qint32>(v)) << 8 >> 8;
+      // Combine the 3 bytes into a 24-bit integer (little-endian)
+      quint32 combined_value = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
+      // Extract the 17-bit ID (shift right by 5 bits)
+      qint32 hip_id = combined_value >> 5;
+      return hip_id;
    }
+
    inline long getGaia() const { return d.gaia_id; }
-   inline int  getComponentIds() const { return d.componentIds; }
+   inline int  getComponentIds() const 
+   { 
+      // Combine the 3 bytes into a 24-bit integer (little-endian)
+      quint32 combined_value = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
+      // Extract the 5-bit component ID
+      quint8 letter_value = combined_value & 0x1F;  // 0x1F = 00011111 in binary mask
+      return letter_value;
+   }
 
    float       getBV(void) const { return static_cast<float>(d.b_v) / 1000.f; }
    bool        isVIP() const { return true; }
