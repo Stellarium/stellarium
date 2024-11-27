@@ -337,15 +337,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	// kinda impossible for both parallax and parallax_err to be exactly 0, so they must just be missing
 	if (flags&Distance)
 	{
-		if ((Plx!=0) & (PlxErr!=0))
+		// do parallax SNR cut because we are calculating distance, inverse parallax is bad for >20% uncertainty
+		if ((Plx!=0) && (PlxErr!=0) && (Plx/PlxErr>5))
 		{
 			//TRANSLATORS: Unit of measure for distance - Light Years
 			QString ly = qc_("ly", "distance");
 			double distance = 3.26156 * 1000. / Plx;
-			if ((Plx) && (Plx>PlxErr)) // No distance when error of parallax is bigger than parallax!
-				oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(distance * PlxErr / Plx, 'f', 2), ly) << "<br />";
-			else
-				oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance, 'f', 2), ly) << "<br />";
+			oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(distance * PlxErr / Plx, 'f', 2), ly) << "<br />";
 		}
 		oss << getExtraInfoStrings(Distance).join("");
 	}
@@ -479,11 +477,11 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 
 	map.insert("bV", s->getBV());
 
-	if (s->getPlx() && !isNan(s->getPlx()) && !isInf(s->getPlx()))
+	if (s->getPlx())
 	{
-		map.insert("parallax", 0.000001*s->getPlx());
-		map.insert("absolute-mag", getVMagnitude(core)+5.f*(std::log10(0.00001f*s->getPlx())));
-		map.insert("distance-ly", (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.000001/3600)*(M_PI/180))));
+		map.insert("parallax", 0.001*s->getPlx());
+		map.insert("absolute-mag", getVMagnitude(core)+5.f*(std::log10(0.001*s->getPlx())));
+		map.insert("distance-ly", (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.001/3600)*(M_PI/180))));
 	}
 
 	if (s->getSpInt())
@@ -504,6 +502,8 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 
 QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
+	// maybe never calculate absolute magnitude for Star 2 as it is not
+	// resion: these stars sometimes also have very high extinction (e.g., dust), so absolute magnitude is not very useful
 	QString str;
 	QTextStream oss(&str);
 
@@ -529,6 +529,7 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	double RA, DEC, pmra, pmdec;
 	double Plx = s->getPlx();
+	double PlxErr = s->getPlxErr();
 	double RadialVel = s->getRV();
 	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
@@ -549,6 +550,20 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 							QString::number(pmra, 'f', 2),
 							QString::number(pmdec, 'f', 2),
 							qc_("mas/yr", "milliarc second per year")) << "<br />";
+	}
+
+	// kinda impossible for both parallax and parallax_err to be exactly 0, so they must just be missing
+	if (flags&Distance)
+	{
+		// do parallax SNR cut because we are calculating distance, inverse parallax is bad for >20% uncertainty
+		if ((Plx!=0) && (PlxErr!=0) & (Plx/PlxErr > 5.))
+		{
+			//TRANSLATORS: Unit of measure for distance - Light Years
+			QString ly = qc_("ly", "distance");
+			double distance = 3.26156 * 1000. / Plx;
+			oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(distance * PlxErr / Plx, 'f', 2), ly) << "<br />";
+		}
+		oss << getExtraInfoStrings(Distance).join("");
 	}
 
 	oss << getSolarLunarInfoString(core, flags);
