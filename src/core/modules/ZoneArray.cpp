@@ -298,10 +298,25 @@ void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 				exit(1);
 			}
 			if (hip != 0)
-			{
-				hipIndex[hip].a = this;
-				hipIndex[hip].z = z;
-				hipIndex[hip].s = s;
+			{	
+				// check if a star is there already
+				if (hipIndex[hip].a)
+				{
+					// check if componentid is smaller or higher, we want smaller one (the main one)
+					// otherwise there can be case where Sirius B is stored as main star but not Sirius A
+					if (hipIndex[hip].s->getComponentIds() > s->getComponentIds())
+					{
+						hipIndex[hip].a = this;
+						hipIndex[hip].z = z;
+						hipIndex[hip].s = s;
+					}
+				}
+				else
+				{
+					hipIndex[hip].a = this;
+					hipIndex[hip].z = z;
+					hipIndex[hip].s = s;
+				}
 			}
 		}
 	}
