@@ -54,9 +54,9 @@ static inline float IndexToBV(int bV)
    return static_cast<float>(bV) * (4.f / 127.f) - 0.5f;
 }
 
-static inline int BVToIndex(int bV)
+static inline int BVToIndex(float bV)
 {
-   return static_cast<int>(bV + 0.5f) * 31.75f;
+   return static_cast<int>((bV + 0.5f) * 31.75f);
 }
 
 template<typename Derived>
