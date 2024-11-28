@@ -192,10 +192,10 @@ struct Star
 
          double Plx2   = plx * f;
          double pmr1   = (pmr0 + (pmtotsqr + pmr0 * pmr0) * dyrs) * f * f;
-         Vec3d  pmvel1 = pmvec0 * (1 + pmr0 * dyrs);
-         pmvel1.set((pmvel1[0] - r[0] * pmr0 * pmr0 * dyrs) * f * f * f,
-                    (pmvel1[1] - r[1] * pmr0 * pmr0 * dyrs) * f * f * f,
-                    (pmvel1[2] - r[2] * pmr0 * pmr0 * dyrs) * f * f * f);
+         Vec3d  pmvec1 = pmvec0 * (1 + pmr0 * dyrs);
+         pmvec1.set((pmvec1[0] - r[0] * pmr0 * pmr0 * dyrs) * f * f * f,
+                    (pmvec1[1] - r[1] * pmr0 * pmr0 * dyrs) * f * f * f,
+                    (pmvec1[2] - r[2] * pmr0 * pmr0 * dyrs) * f * f * f);
 
          double slon = sin(lon);
          double slat = sin(lat);
@@ -206,9 +206,9 @@ struct Star
          Vec3d  p2(-slon, clon, 0.);
          Vec3d  q2(-slat * clon, -slat * slon, clat);
 
-         pmra = p2[0] * pmvel1[0] + p2[1] * pmvel1[1] + p2[2] * pmvel1[2];
+         pmra = p2[0] * pmvec1[0] + p2[1] * pmvec1[1] + p2[2] * pmvec1[2];
          pmra /= MAS2RAD;
-         pmdec = q2[0] * pmvel1[0] + q2[1] * pmvel1[1] + q2[2] * pmvel1[2];
+         pmdec = q2[0] * pmvec1[0] + q2[1] * pmvec1[1] + q2[2] * pmvec1[2];
          pmdec /= MAS2RAD;
          RA  = lon;
          DE  = lat;
@@ -287,21 +287,21 @@ struct Star1 : public Star<Star1>
 private:
    struct Data
    {
-      qint64  gaia_id;      // 8 bytes
-      qint32  x0;           // 4 bytes, internal astrometric unit
-      qint32  x1;           // 4 bytes, internal astrometric unit
-      qint32  x2;           // 4 bytes, internal astrometric unit
-      qint32  dx0;          // 4 bytes, uas/yr
-      qint32  dx1;          // 4 bytes, uas/yr
-      qint32  dx2;          // 4 bytes, uas/yr
-      qint16  b_v;          // 2 bytea, B-V in milli-mag
-      qint16  vmag;         // 2 bytes, V magnitude in milli-mag
-      quint16 plx;          // 2 bytes, parallax in 20 uas
-      quint16 plx_err;      // 2 bytes, parallax error in 10 uas
-      qint16  rv;           // 2 bytes, radial velocity in 100 m/s
-      quint16 spInt;        // 2 bytes
-      quint8  otype;        // 1 byte
-      quint8  hip[3];       // 3 bytes, HIP number combined with component ID (A, B, ...)
+      qint64  gaia_id; // 8 bytes
+      qint32  x0;      // 4 bytes, internal astrometric unit
+      qint32  x1;      // 4 bytes, internal astrometric unit
+      qint32  x2;      // 4 bytes, internal astrometric unit
+      qint32  dx0;     // 4 bytes, uas/yr
+      qint32  dx1;     // 4 bytes, uas/yr
+      qint32  dx2;     // 4 bytes, uas/yr
+      qint16  b_v;     // 2 bytea, B-V in milli-mag
+      qint16  vmag;    // 2 bytes, V magnitude in milli-mag
+      quint16 plx;     // 2 bytes, parallax in 20 uas
+      quint16 plx_err; // 2 bytes, parallax error in 10 uas
+      qint16  rv;      // 2 bytes, radial velocity in 100 m/s
+      quint16 spInt;   // 2 bytes
+      quint8  otype;   // 1 byte
+      quint8  hip[3];  // 3 bytes, HIP number combined with component ID (A, B, ...)
    } d;
 
 public:
@@ -317,7 +317,13 @@ public:
    inline double getDx2() const { return d.dx2 / 1000.; }
    inline double getPlx() const { return d.plx * 0.02; }
    inline double getPlxErr() const { return d.plx_err / 100.; }
-   inline double getPMTotal() const { return getDx0() * getDx0() + getDx1() * getDx2() + getDx2() * getDx2(); }
+   inline double getPMTotal() const
+   {
+      // need to go through the calculation to get pmra and pmdec, use dyr = 0
+      double RA, DE, Plx, pmra, pmdec, RV;
+      getFull6DSolution(RA, DE, Plx, pmra, pmdec, RV, 0.);
+      return sqrt(pmra * pmra + pmdec * pmdec);
+   }
    inline double getRV() const { return d.rv / 10.; }
    inline bool   getPreciseAstrometricFlag() const
    {
@@ -332,27 +338,27 @@ public:
       // Combine the 3 bytes into a 24-bit integer (little-endian)
       quint32 combined_value = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
       // Extract the 17-bit ID (shift right by 5 bits)
-      qint32 hip_id = combined_value >> 5;
+      qint32  hip_id         = combined_value >> 5;
       return hip_id;
    }
 
    inline long getGaia() const { return d.gaia_id; }
-   inline int  getComponentIds() const 
-   { 
+   inline int  getComponentIds() const
+   {
       // Combine the 3 bytes into a 24-bit integer (little-endian)
       quint32 combined_value = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
       // Extract the 5-bit component ID
-      quint8 letter_value = combined_value & 0x1F;  // 0x1F = 00011111 in binary mask
+      quint8  letter_value   = combined_value & 0x1F; // 0x1F = 00011111 in binary mask
       return letter_value;
    }
 
-   float       getBV(void) const { return static_cast<float>(d.b_v) / 1000.f; }
-   bool        isVIP() const { return true; }
-   bool        hasName() const { return getHip(); } // OR gaia??
-   QString     getNameI18n(void) const;
-   QString     getScreenNameI18n(void) const;
-   QString     getDesignation(void) const;
-   int         hasComponentID(void) const;
+   float   getBV(void) const { return static_cast<float>(d.b_v) / 1000.f; }
+   bool    isVIP() const { return true; }
+   bool    hasName() const { return getHip(); } // OR gaia??
+   QString getNameI18n(void) const;
+   QString getScreenNameI18n(void) const;
+   QString getDesignation(void) const;
+   int     hasComponentID(void) const;
 };
 static_assert(sizeof(Star1) == 48, "Size of Star1 must be 48 bytes");
 
@@ -383,7 +389,7 @@ public:
    inline int    getMag() const { return d.vmag; } // in milli-mag
    inline double getPMTotal() const
    {
-      return sqrt((getDx0() * cos(getX1())) * getDx0() * cos(getX1()) + getDx1() * getDx1());
+      return sqrt((getDx0() * cos(getX1()) * getDx0() * cos(getX1())) + (getDx1() * getDx1()));
    }
    StelObjectP createStelObject(const SpecialZoneArray<Star2> * a, const SpecialZoneData<Star2> * z) const;
    inline long getGaia() const { return d.gaia_id; }
@@ -410,11 +416,11 @@ struct Star3 : public Star<Star3>
 private:
    struct Data
    {
-      qint64  gaia_id; // 8 bytes
-      quint8  x0[3];   // 3 bytes, RA in arcsecond
-      quint8  x1[3];   // 3 bytes, DEC in arcsecond
-      quint8  b_v;     // 1 byte, B-V in 0.1 mag
-      quint8  vmag;    // 1 bytes, V magnitude in 0.1 mag
+      qint64 gaia_id; // 8 bytes
+      quint8 x0[3];   // 3 bytes, RA in arcsecond
+      quint8 x1[3];   // 3 bytes, DEC in arcsecond
+      quint8 b_v;     // 1 byte, B-V in 0.1 mag
+      quint8 vmag;    // 1 bytes, V magnitude in 0.1 mag
    } d;
 
 public:

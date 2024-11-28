@@ -691,7 +691,7 @@ void StarMgr::populateHipparcosLists()
 			if (qAbs(pm)>=pmLimit)
 			{
 				QMap<StelObjectP, float> spm;
-				spm[so] = pm;
+				spm[so] = pm / 1000.f;  // in arc-seconds per year
 				hipStarsHighPM.push_back(spm);
 			}
 		}
