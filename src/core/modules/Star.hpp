@@ -84,6 +84,7 @@ struct Star
    inline QString getScreenNameI18n() const { return static_cast<const Derived *>(this)->getScreenNameI18n(); }
    inline QString getDesignation() const { return static_cast<const Derived *>(this)->getDesignation(); }
    inline int     hasComponentID() const { return static_cast<const Derived *>(this)->hasComponentID(); }
+   inline int     getObjType() const { return static_cast<const Derived *>(this)->getObjType(); }
    inline double  getPMTotal() const
    {
       return static_cast<const Derived *>(this)->getPMTotal();
@@ -300,7 +301,7 @@ private:
       quint16 plx_err; // 2 bytes, parallax error in 10 uas
       qint16  rv;      // 2 bytes, radial velocity in 100 m/s
       quint16 spInt;   // 2 bytes
-      quint8  otype;   // 1 byte
+      quint8  objtype; // 1 byte
       quint8  hip[3];  // 3 bytes, HIP number combined with component ID (A, B, ...)
    } d;
 
@@ -351,7 +352,7 @@ public:
       quint8  letter_value   = combined_value & 0x1F; // 0x1F = 00011111 in binary mask
       return letter_value;
    }
-
+   inline int getObjType() const { return d.objtype; }
    float   getBV(void) const { return static_cast<float>(d.b_v) / 1000.f; }
    bool    isVIP() const { return true; }
    bool    hasName() const { return getHip(); } // OR gaia??
@@ -374,7 +375,7 @@ private:
       qint32  dx1;     // 4 bytes, pmdec in uas/yr
       qint16  b_v;     // 2 byte
       qint16  vmag;    // 2 bytes
-      quint16 plx;     // 2 bytes, parallax in 20 uas
+      quint16 plx;     // 2 bytes, parallax in 10 uas
       quint16 plx_err; // 2 bytes, parallax error in 10 uas
    } d;
 

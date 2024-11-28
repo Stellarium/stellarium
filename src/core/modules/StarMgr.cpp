@@ -59,6 +59,7 @@
 
 static QStringList spectral_array;
 static QStringList component_array;
+static QStringList objtype_array;
 
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
@@ -129,6 +130,16 @@ QString StarMgr::convertToComponentIds(int index)
 		return "";
 	}
 	return component_array.at(index);
+}
+
+QString StarMgr::convertToOjectTypes(int index)
+{
+	if (index < 0 || index >= objtype_array.size())
+	{
+		qDebug() << "convertToObjTypeIds: bad index: " << index << ", max: " << objtype_array.size();
+		return "";
+	}
+	return objtype_array.at(index);
 }
 
 
@@ -621,6 +632,20 @@ void StarMgr::loadData(QVariantMap starsConfig)
 			qWarning() << "ERROR while loading data from" << QDir::toNativeSeparators(("stars/default/" + cat_hip_sp_file_name));
 		else
 			spectral_array = initStringListFromFile(tmpFic);
+	}
+
+	const QString cat_objtype_file_name = starsConfig.value("objecttypesFile").toString();
+	if (cat_objtype_file_name.isEmpty())
+	{
+		qWarning() << "ERROR: stars:cat_objtype_file_name not found";
+	}
+	else
+	{
+		QString tmpFic = StelFileMgr::findFile("stars/default/" + cat_objtype_file_name);
+		if (tmpFic.isEmpty())
+			qWarning() << "ERROR while loading data from" << QDir::toNativeSeparators(("stars/default/" + cat_objtype_file_name));
+		else
+			objtype_array = initStringListFromFile(tmpFic);
 	}
 
 	// create an array with the first element being an empty string, and then contain strings A,B,C,...,Z

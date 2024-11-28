@@ -378,6 +378,7 @@ public:
 
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
+	static QString convertToOjectTypes(int index);
 
 	QVariantList getCatalogsDescription() const {return catalogsDescription;}
 

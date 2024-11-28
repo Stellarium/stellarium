@@ -86,8 +86,13 @@ QString StarWrapper1::getObjectType() const
 {
 	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
 	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
+	QString otype = StarMgr::convertToOjectTypes(s->getObjType());
 	QString varstartype = "";
 	QString startype = (s->getComponentIds() || wdsObs>0) ? N_("double star") : N_("star");
+	if (!otype.isEmpty())
+	{
+		startype = QString("%1 (%2)").arg(startype, otype);
+	}
 	if(!varType.isEmpty())
 	{
 		// see also http://www.sai.msu.su/gcvs/gcvs/vartype.htm
