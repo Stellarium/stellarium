@@ -500,10 +500,9 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		int magIndex = static_cast<int>((starMag - mag_min) * mag_steps / mag_range);
 
 		// first part is check for Star1, so to keep looping for long-range prediction
-		// second part is // old behavior, to skip stars below you that are too faint to display for Star2 and Star3
+		// second part is old behavior, to skip stars below you that are too faint to display for Star2 and Star3
 		if ((magIndex > cutoffMagStep && fabs(dyrs) < 3000.) || (magIndex > cutoffMagStep && !s->isVIP()))
 				break;
-
 		// Because of the test above, the star should always be visible from this point.
 		if (magIndex > cutoffMagStep)
 				continue;  // allow continue for other star that might became bright enough in the future

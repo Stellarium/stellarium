@@ -1604,10 +1604,11 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Search for sci names
+	// need special character escape because many stars have name starting with "*"
 	QString bayerPattern = objPrefix;
-	QRegularExpression bayerRegEx(bayerPattern);
+	QRegularExpression bayerRegEx(QRegularExpression::escape(bayerPattern));
 	QString bayerPatternCI = objw;
-	QRegularExpression bayerRegExCI(bayerPatternCI);
+	QRegularExpression bayerRegExCI(QRegularExpression::escape(bayerPatternCI));
 
 	// if the first character is a Greek letter, check if there's an index
 	// after it, such as "alpha1 Cen".
