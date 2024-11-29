@@ -56,6 +56,7 @@ static inline float IndexToBV(int bV)
 
 static inline int BVToIndex(float bV)
 {
+   // convert B-V in mag to index understood by internal B-V to color conversion table
    return static_cast<int>((bV + 0.5f) * 31.75f);
 }
 
@@ -66,18 +67,27 @@ struct Star
    inline double getX0() const
    {
       return static_cast<const Derived *>(this)->getX0();
-   } // either in rad or in internal astrometric unit
+   } // either in rad (if no getX2()) or in internal astrometric unit (only if getX2())
    inline double getX1() const
    {
       return static_cast<const Derived *>(this)->getX1();
-   } // either in rad or in internal astrometric unit
+   } // either in rad (if no getX2()) or in internal astrometric unit (only if getX2())
    inline double getX2() const
    {
       return static_cast<const Derived *>(this)->getX2();
-   } // either in rad or in internal astrometric unit
-   inline int     getBVIndex() const { return static_cast<const Derived *>(this)->getBVIndex(); }
+   } // either in rad (if no getX2()) or in internal astrometric unit (only if getX2())
+   inline int getBVIndex() const 
+   { 
+      // need to check because some stars (e.g., Carbon stars) can have really high B-V
+      // BV index to color table has only 128 entries, otherwise those stars will be black or weird color
+      int index = BVToIndex(getBV());
+      if (index < 0) return 0;
+      if (index > 127) return 127;
+      return index;
+   }
    inline double  getMag() const { return static_cast<const Derived *>(this)->getMag(); } // should return in millimag
-   inline double  getBV() const { return static_cast<const Derived *>(this)->getBV(); }   // should return in mag
+   inline float   getBV() const { return static_cast<const Derived *>(this)->getBV(); }   // should return in mag
+   // VIP flag is for situation where it can bypass some check (e.g., magnitude display cutoff for Star1 in far past/future) 
    inline bool    isVIP() const { return static_cast<const Derived *>(this)->isVIP(); }
    inline bool    hasName() const { return static_cast<const Derived *>(this)->hasName(); }
    inline QString getNameI18n() const { return static_cast<const Derived *>(this)->getNameI18n(); }
@@ -92,11 +102,11 @@ struct Star
    inline double getDx0() const
    {
       return static_cast<const Derived *>(this)->getDx0();
-   } // should return in mas/yr (if pmra, then without cos(dec) components), 0 means no 1rd proper motion
+   } // should return in mas/yr (if pmra, then without cos(dec) components), 0 means no 1st proper motion
    inline double getDx1() const
    {
       return static_cast<const Derived *>(this)->getDx1();
-   } // should return in mas/yr, 0 means no 2rd proper motion
+   } // should return in mas/yr, 0 means no 2nd proper motion
    inline double getDx2() const
    {
       return static_cast<const Derived *>(this)->getDx2();
@@ -307,7 +317,6 @@ private:
 
 public:
    StelObjectP   createStelObject(const SpecialZoneArray<Star1> * a, const SpecialZoneData<Star1> * z) const;
-   inline int    getBVIndex() const { return BVToIndex(getBV()); }
    inline int    getMag() const { return d.vmag; } // in milli-mag
    inline int    getSpInt() const { return d.spInt; }
    inline double getX0() const { return d.x0 / 2.e9; }
@@ -386,7 +395,6 @@ public:
    inline double getDx0() const { return d.dx0 / 1000.; }
    inline double getDx1() const { return d.dx1 / 1000.; }
    inline double getDx2() const { return 0.; }
-   inline int    getBVIndex() const { return BVToIndex(getBV()); }
    inline int    getMag() const { return d.vmag; } // in milli-mag
    inline double getPMTotal() const
    {
@@ -418,23 +426,23 @@ private:
    struct Data
    {
       qint64 gaia_id; // 8 bytes
-      quint8 x0[3];   // 3 bytes, RA in arcsecond
-      quint8 x1[3];   // 3 bytes, DEC in arcsecond
-      quint8 b_v;     // 1 byte, B-V in 0.1 mag
-      quint8 vmag;    // 1 bytes, V magnitude in 0.1 mag
+      quint8 x0[3];   // 3 bytes, RA in 0.1 arcsecond
+      quint8 x1[3];   // 3 bytes, DEC in 0.1 arcsecond (offset by +90 degree)
+      qint8 b_v;     // 1 byte, B-V in 0.05 mag
+      quint8 vmag;    // 1 bytes, V magnitude in 0.05 mag (offset by -12.8 mag)
    } d;
 
 public:
    StelObjectP   createStelObject(const SpecialZoneArray<Star3> * a, const SpecialZoneData<Star3> * z) const;
    inline double getX0() const
    {
-      qint32 x0 = d.x0[0] | (d.x0[1] << 8) | (d.x0[2] << 16);
-      return static_cast<double>(x0) * 1000. * MAS2RAD;
+      quint32 x0 = d.x0[0] | (d.x0[1] << 8) | (d.x0[2] << 16);
+      return static_cast<double>(x0) * 100. * MAS2RAD;
    }
    inline double getX1() const
    {
-      qint32 x0 = d.x1[0] | (d.x1[1] << 8) | (d.x1[2] << 16);
-      return static_cast<double>(x0) * 1000. * MAS2RAD;
+      quint32 x1 = d.x1[0] | (d.x1[1] << 8) | (d.x1[2] << 16);
+      return (static_cast<double>(x1) - (90. * 36000.)) * 100. * MAS2RAD;
    }
    inline double getX2() const { return 0.; }
    inline double getDx0() const { return 0.; }
@@ -444,9 +452,8 @@ public:
    double        getPlx() const { return 0.; }
    double        getPlxErr() const { return 0.; }
    double        getRV() const { return 0.; }
-   double        getBVIndex() const { return d.b_v / 10.; }
-   double        getMag() const { return d.vmag * 100.; } // in milli-mag
-   float         getBV() const { return IndexToBV(getBVIndex()); }
+   double        getBV() const { return d.b_v / 10.; }
+   double        getMag() const { return d.vmag * 50 + 12800; } // in milli-mag
    inline long   getGaia() const { return d.gaia_id; }
    QString       getNameI18n() const { return QString(); }
    QString       getScreenNameI18n() const { return QString(); }
