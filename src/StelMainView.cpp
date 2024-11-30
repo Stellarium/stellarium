@@ -1482,6 +1482,7 @@ void StelMainView::setFullScreen(bool b)
 			move(x + screenGeom.x(), y + screenGeom.y());
 		}
 	}
+	StelApp::immediateSave("video/fullscreen", b);
 	emit fullScreenChanged(b);
 }
 
@@ -1526,6 +1527,7 @@ void StelMainView::setFlagCursorTimeout(bool b)
 		cursorTimeoutTimer->stop();
 	}
 	
+	StelApp::immediateSave("gui/flag_mouse_cursor_timeout", b);
 	emit flagCursorTimeoutChanged(b);
 }
 
