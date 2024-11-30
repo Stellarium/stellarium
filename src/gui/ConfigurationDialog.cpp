@@ -538,6 +538,7 @@ void ConfigurationDialog::setDiskViewport(bool b)
 		StelApp::getInstance().getCore()->setMaskType(StelProjector::MaskDisk);
 	else
 		StelApp::getInstance().getCore()->setMaskType(StelProjector::MaskNone);
+	StelApp::immediateSave("projection/viewport", StelProjector::maskTypeToString(StelApp::getInstance().getCore()->getCurrentStelProjectorParams().maskType));
 }
 
 void ConfigurationDialog::setSphericMirror(bool b)
@@ -849,7 +850,8 @@ void ConfigurationDialog::saveAllSettings()
 	const StelProjectorP proj = core->getProjection(StelCore::FrameJ2000);
 	Q_ASSERT(proj);
 
-	conf->setValue("gui/screen_font_size",					propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
+	conf->setValue("gui/immediate_save_details",                    StelApp::getInstance().getFlagImmediateSave());
+	conf->setValue("gui/screen_font_size",				propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
 	conf->setValue("gui/flag_enable_kinetic_scrolling",		propMgr->getStelPropertyValue("StelGui.flagUseKineticScrolling").toBool());
 
 	// view dialog / sky tab settings
@@ -1835,6 +1837,11 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxSiderealTime->setChecked(flags & StelObject::SiderealTime);
 	ui->checkBoxRTSTime->setChecked(flags & StelObject::RTSTime);
 	ui->checkBoxSolarLunarPosition->setChecked(flags & StelObject::SolarLunarPosition);
+
+	if (StelApp::getInstance().getFlagImmediateSave())
+	{
+		saveCustomSelectedInfo();
+	}
 }
 
 void ConfigurationDialog::populateTooltips()

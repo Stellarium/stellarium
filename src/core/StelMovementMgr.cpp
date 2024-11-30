@@ -280,6 +280,7 @@ void StelMovementMgr::bindingFOVActions()
 void StelMovementMgr::setEquatorialMount(bool b)
 {
 	setMountMode(b ? MountEquinoxEquatorial : MountAltAzimuthal);
+	StelApp::immediateSave("navigation/viewing_mode", b ? "equator" : "horizon");
 
 	if (getFlagIndicationMountMode())
 	{

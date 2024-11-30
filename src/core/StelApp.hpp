@@ -292,7 +292,7 @@ public slots:
 	//! Set flag for using calculation of azimuth from south towards west (instead north towards east)
 	bool getFlagSouthAzimuthUsage() const { return flagUseAzimuthFromSouth; }
 	//! Get flag for using calculation of azimuth from south towards west (instead north towards east)
-	void setFlagSouthAzimuthUsage(bool use) { flagUseAzimuthFromSouth=use; emit flagUseAzimuthFromSouthChanged(use);}
+	void setFlagSouthAzimuthUsage(bool use);
 	
 	//! Set flag for using of formatting output for coordinates
 	void setFlagUseFormattingOutput(bool b);
@@ -315,6 +315,8 @@ public slots:
 	Vec3f getDaylightInfoColor() const;
 
 	//! Set flag for storing some settings immediately
+	//! To not accidentally activate this mode permanently, you must use the "save settings" button to activate!
+	//! Switching it off is however stored immediately.
 	void setFlagImmediateSave(bool b);
 	//! Get flag about storing some settings immediately
 	bool getFlagImmediateSave() const {return flagImmediateSave;}

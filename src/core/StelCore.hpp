@@ -536,17 +536,17 @@ public slots:
 	//! @return whether nutation is currently used.
 	bool getUseNutation() const {return flagUseNutation;}
 	//! Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).
-	void setUseNutation(bool use) { if (flagUseNutation != use) { flagUseNutation=use; emit flagUseNutationChanged(use); }}
+	void setUseNutation(bool use) { if (flagUseNutation != use) { flagUseNutation=use; StelApp::immediateSave("astro/flag_nutation", use); emit flagUseNutationChanged(use); }}
 
 	//! @return whether aberration is currently used.
 	bool getUseAberration() const {return flagUseAberration;}
 	//! Set whether you want computation and simulation of aberration (a slight wobble of stellar positions due to finite speed of light, about 20 arcseconds when observing from earth).
-	void setUseAberration(bool use) { if (flagUseAberration != use) { flagUseAberration=use; emit flagUseAberrationChanged(use); }}
+	void setUseAberration(bool use) { if (flagUseAberration != use) { flagUseAberration=use; StelApp::immediateSave("astro/flag_aberration", use); emit flagUseAberrationChanged(use); }}
 
 	//! @return aberration factor. 1 is realistic simulation, but higher values may be useful for didactic purposes.
 	double getAberrationFactor() const {return aberrationFactor;}
 	//! Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
-	void setAberrationFactor(double factor) { if (!fuzzyEquals(aberrationFactor, factor)) { aberrationFactor=qBound(0.,factor, 5.); emit aberrationFactorChanged(factor); }}
+	void setAberrationFactor(double factor) { if (!fuzzyEquals(aberrationFactor, factor)) { aberrationFactor=qBound(0.,factor, 5.); StelApp::immediateSave("astro/aberration_factor", aberrationFactor); emit aberrationFactorChanged(factor); }}
 
 	QByteArray getAberrationShader() const;
 	void setAberrationUniforms(QOpenGLShaderProgram& program) const;
@@ -554,7 +554,7 @@ public slots:
 	//! @return whether topocentric coordinates are currently used.
 	bool getUseTopocentricCoordinates() const {return flagUseTopocentricCoordinates;}
 	//! Set whether you want topocentric or planetocentric data
-	void setUseTopocentricCoordinates(bool use) { if (flagUseTopocentricCoordinates!= use) { flagUseTopocentricCoordinates=use; emit flagUseTopocentricCoordinatesChanged(use); }}
+	void setUseTopocentricCoordinates(bool use) { if (flagUseTopocentricCoordinates!= use) { flagUseTopocentricCoordinates=use; StelApp::immediateSave("astro/flag_topocentric_coordinates", use); emit flagUseTopocentricCoordinatesChanged(use); }}
 
 	//! Return the preset sky time in JD
 	double getPresetSkyTime() const;
@@ -885,6 +885,7 @@ private slots:
 	void updateFixedEquatorialTransformMatrices();
 private:
 	DitheringMode parseDitheringMode(const QString& s);
+	static const QMap<QString, DitheringMode>ditheringMap;
 
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device
