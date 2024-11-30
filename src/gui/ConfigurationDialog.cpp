@@ -1188,8 +1188,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("video/viewport_effect",						StelApp::getInstance().getViewportEffect());
 
 	conf->setValue("projection/viewport",							StelProjector::maskTypeToString(proj->getMaskType()));
-	conf->setValue("projection/viewport_center_offset_x",			core->getCurrentStelProjectorParams().viewportCenterOffset[0]);
-	conf->setValue("projection/viewport_center_offset_y",			core->getCurrentStelProjectorParams().viewportCenterOffset[1]);
+	conf->setValue("projection/viewport_center_offset_x",			core->getCurrentStelProjectorParams().viewportCenterOffset[0]*100.);
+	conf->setValue("projection/viewport_center_offset_y",			core->getCurrentStelProjectorParams().viewportCenterOffset[1]*100.);
 	conf->setValue("projection/flip_horz",							core->getCurrentStelProjectorParams().flipHorz);
 	conf->setValue("projection/flip_vert",							core->getCurrentStelProjectorParams().flipVert);
 	conf->setValue("navigation/max_fov",						mvmgr->getUserMaxFov());
