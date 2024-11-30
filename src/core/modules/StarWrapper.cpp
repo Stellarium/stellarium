@@ -373,10 +373,14 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 							qc_("mas/yr", "milliarc second per year")) << "<br />";
 	}
 
-	if (flags && RadialVel)
+	if (flags&Velocity)
 	{
 		if (RadialVel)
-			oss << QString("%1: %2 %3").arg(q_("Radial velocity"), QString::number(RadialVel, 'f', 1), qc_("km/s", "kilometers per second")) << "<br />";
+		{
+			// TRANSLATORS: Unit of measure for speed - kilometers per second
+			QString kms = qc_("km/s", "speed");
+			oss << QString("%1: %2 %3").arg(q_("Radial velocity"), QString::number(RadialVel, 'f', 1), kms) << "<br />";
+		}
 	}
 
 	if (flags&Extra)
