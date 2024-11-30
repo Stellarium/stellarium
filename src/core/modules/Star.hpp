@@ -233,8 +233,8 @@ struct Star
          DE    = getX1() + dyrs * getDx1() * MAS2RAD;
       }
    }
-   // void getJ2000withParallaxEffect(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr,
-   // float& dyrs) const
+
+   // void getJ2000withParallaxEffect(Vec3f& pos, float dyrs) const
    // {
    // 	// RA and DE in radian
    // 	// Plx in mas
@@ -243,53 +243,41 @@ struct Star
    // 	// dyrs in Julian year
    // 	// cant do this without Anthony Brown's astrometry tutorial
    // 	// this function assume RA, DE observed at J2000.0
-   // 	static const double refepoch = 2000.0;
-   // 	const double obs_epoch = refepoch + dyrs;
-   // 	static const double au_in_meter = 149597870700.;
-   // 	static const double au_mas_parsec = 1000.;  // AU expressed in mas*pc
-   // 	static const double julian_year_seconds = 365.25 * 86400.;
-   // 	static const double au_km_year_per_second = au_in_meter / julian_year_seconds / 1000.;
-   // 	// static const double parsec = au_in_meter / 1000. / MAS2RAD;
-   // 	static const double parsec = 30856775814913670;
    // 	static const double orbital_period = 1.0;  // in Julian year
    // 	static const double orbital_radius = 1.0;  // in AU
 
-   // 	double sra = sin(RA);
-   // 	double sde = sin(DE);
-   // 	double cra = cos(RA);
-   // 	double cde = cos(DE);
+   //    double r0  = getX0();
+   //    double r1  = getX1();
+   //    double r2  = getX2();
+   //    double plx = 100. * getPlx();
+   //    Vec3d  r(r0, r1, r2);
 
    // 	// need 3D spherical coordinate system
-   // 	double radius = au_mas_parsec / Plx;
-   // 	Vec3f xyz(radius * cra * cde, radius * sra * cde, radius * sde);
-
-   // 	// normal triad of a spherical coordinate system
-   // 	Vec3d p(-sra, cra, 0.);
-   // 	Vec3d q(-sde * cra, -sde * sra, cde);
-   // 	Vec3d r(cde * cra, cde * sra, sde);
-   // 	Vec3d transverse_motion(pmra * au_km_year_per_second / Plx, pmdec * au_km_year_per_second / Plx, vr);
-   // 	Mat3d md = Mat3d(p, q, r);
-   // 	Vec3d vxvyvz = md.transpose() * transverse_motion;
+   // 	double radius = 1000. / plx;
+   // 	Vec3d xyz = r * radius;
 
    // 	// from observer's ephemeris
-   // 	Vec3d bxyz(orbital_radius * cos(2. * M_PI / orbital_period * obs_epoch), orbital_radius * sin(2. * M_PI /
-   // orbital_period * obs_epoch), 0.);
-
-   // 	// include Roemer delay
-   // 	double tB = obs_epoch + (r * bxyz) * au_in_meter / julian_year_seconds / SPEED_OF_LIGHT;
+   // 	Vec3d bxyz(orbital_radius * cos(2. * M_PI / orbital_period * dyrs), orbital_radius * sin(2. * M_PI / orbital_period * dyrs), 0.);
 
    // 	// phase space coordinates
-   // 	double vxyz_factor = (tB - refepoch) * (1000. * julian_year_seconds / parsec);
-   // 	Vec3d bS(xyz[0] + vxvyvz[0] * vxyz_factor, xyz[1] + vxvyvz[1] * vxyz_factor, xyz[2] + vxvyvz[2] * vxyz_factor);
-   // 	Vec3d u0 = bS - bxyz * au_in_meter / parsec;
+   // 	Vec3d u0 = xyz - bxyz * AU * 1000. / PARSEC;
    // 	double RA_obs = atan2(u0[1], u0[0]);
+   // 	double RA = atan2(r[1], r[0]);
    // 	// wrap pi
    // 	if (RA_obs < 0.) RA_obs += 2. * M_PI;
+   // 	if (RA < 0.) RA += 2. * M_PI;
    // 	double DEC_obs = atan2(u0[2], sqrt(u0[0] * u0[0] + u0[1] * u0[1]));
-
-   // 	// change RA, DEC
-   // 	RA = RA_obs;
-   // 	DE = DEC_obs;
+   // 	double DEC = atan2(r[2], sqrt(r[0] * r[0] + r[1] * r[1]));
+   //    double D_RA = RA_obs - RA;
+   //    double D_DEC = DEC_obs - DEC;
+   //    double current_RA, current_DEC;
+   //    // StelUtils::rectToSphe(&current_RA, &current_DEC, pos);
+   //    // StelUtils::spheToRect(current_RA+D_RA, current_DEC+D_DEC, pos);
+   //    StelUtils::rectToSphe(&current_RA, &current_DEC, pos);
+   //    qDebug() << "current_RA: " << current_RA << " RA 2: " << D_RA;
+   //    double new_RA = current_RA+D_RA;
+   //    if (new_RA < 0.) new_RA += 2. * M_PI;
+   //    StelUtils::spheToRect(new_RA, current_DEC+D_DEC, pos);
    // }
 };
 
@@ -428,7 +416,7 @@ private:
       qint64 gaia_id; // 8 bytes
       quint8 x0[3];   // 3 bytes, RA in 0.1 arcsecond
       quint8 x1[3];   // 3 bytes, DEC in 0.1 arcsecond (offset by +90 degree)
-      qint8 b_v;     // 1 byte, B-V in 0.05 mag
+      qint8  b_v;     // 1 byte, B-V in 0.05 mag
       quint8 vmag;    // 1 bytes, V magnitude in 0.05 mag (offset by -12.8 mag)
    } d;
 
@@ -452,8 +440,8 @@ public:
    double        getPlx() const { return 0.; }
    double        getPlxErr() const { return 0.; }
    double        getRV() const { return 0.; }
-   double        getBV() const { return d.b_v / 10.; }
-   double        getMag() const { return d.vmag * 50 + 12800; } // in milli-mag
+   double        getBV() const { return (0.025 * d.b_v) - 1.; }  // in mag
+   double        getMag() const { return d.vmag * 20 + 16000; } // in milli-mag
    inline long   getGaia() const { return d.gaia_id; }
    QString       getNameI18n() const { return QString(); }
    QString       getScreenNameI18n() const { return QString(); }
