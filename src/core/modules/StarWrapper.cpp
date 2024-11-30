@@ -86,13 +86,8 @@ QString StarWrapper1::getObjectType() const
 {
 	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
 	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
-	QString otype = StarMgr::convertToOjectTypes(s->getObjType());
 	QString varstartype = "";
 	QString startype = (s->getComponentIds() || wdsObs>0) ? N_("double star") : N_("star");
-	if (!otype.isEmpty())
-	{
-		startype = QString("%1 (%2)").arg(startype, otype);
-	}
 	if(!varType.isEmpty())
 	{
 		// see also http://www.sai.msu.su/gcvs/gcvs/vartype.htm
@@ -281,13 +276,19 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	}
 
 	QString stype = getObjectType();
+	QString otype = StarMgr::convertToOjectTypes(s->getObjType());
+	QString objectTypeI18nStr = getObjectTypeI18n();
+	if (!otype.isEmpty())
+	{
+		objectTypeI18nStr = QString("%1, %2").arg(objectTypeI18nStr, otype);
+	}
 	bool ebsFlag = stype.contains("eclipsing binary system");
 	if (flags&ObjectType)
 	{
 		if (!varType.isEmpty())
-			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getObjectTypeI18n(), varType) << "<br />";
+			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), objectTypeI18nStr, varType) << "<br />";
 		else
-			oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
+			oss << QString("%1: <b>%2</b>").arg(q_("Type"), objectTypeI18nStr) << "<br />";
 
 		oss << getExtraInfoStrings(flags&ObjectType).join("");
 	}
