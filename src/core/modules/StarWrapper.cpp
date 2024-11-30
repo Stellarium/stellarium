@@ -148,6 +148,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	Q_UNUSED(az_app)
 
 	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
+	const QString objType = StarMgr::convertToOjectTypes(s->getObjType());
 	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
 	const float wdsPA = StarMgr::getWdsLastPositionAngle(s->getHip());
 	const float wdsSep = StarMgr::getWdsLastSeparation(s->getHip());
@@ -218,13 +219,14 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			}
 		}
 		else
-			if (s->getGaia()) {
+		{
+			if (s->getGaia())
+			{
 				// Don't add Gaia DR3 if the list already long
-				QString gaia_id;
-				gaia_id = QString("Gaia DR3 %1").arg(s->getGaia());
-				designations.append(gaia_id);
+				designations.append(QString("Gaia DR3 %1").arg(s->getGaia()));
 			}
 			designationsList = designations.join(" - ");
+		}
 
 		if (flags&Name)
 		{
@@ -276,17 +278,17 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	}
 
 	QString stype = getObjectType();
-	QString otype = StarMgr::convertToOjectTypes(s->getObjType());
 	QString objectTypeI18nStr = getObjectTypeI18n();
-	if (!otype.isEmpty())
-	{
-		objectTypeI18nStr = QString("%1, %2").arg(objectTypeI18nStr, otype);
-	}
 	bool ebsFlag = stype.contains("eclipsing binary system");
 	if (flags&ObjectType)
 	{
+		QStringList stypes;
+		if (!objType.isEmpty())
+			stypes.append(objType);
 		if (!varType.isEmpty())
-			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), objectTypeI18nStr, varType) << "<br />";
+			stypes.append(varType);
+		if (stypes.size()>0)
+			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), objectTypeI18nStr, stypes.join(", ")) << "<br />";
 		else
 			oss << QString("%1: <b>%2</b>").arg(q_("Type"), objectTypeI18nStr) << "<br />";
 
