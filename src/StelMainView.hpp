@@ -30,6 +30,7 @@ class QOpenGLDebugLogger;
 class QOpenGLDebugMessage;
 #endif
 #include "VecMath.hpp"
+#include "StelApp.hpp"
 
 class StelGLWidget;
 class StelGraphicsScene;
@@ -157,7 +158,7 @@ public slots:
 	//! Get whether colors are inverted when saving screenshot
 	bool getFlagInvertScreenShotColors() const {return flagInvertScreenShotColors;}
 	//! Set whether colors should be inverted when saving screenshot
-	void setFlagInvertScreenShotColors(bool b) {flagInvertScreenShotColors=b; emit flagInvertScreenShotColorsChanged(b);}
+	void setFlagInvertScreenShotColors(bool b) {flagInvertScreenShotColors=b; StelApp::immediateSave("main/invert_screenshots_colors", b); emit flagInvertScreenShotColorsChanged(b);}
 
 	//! Get whether date and time should be used for screenshot naming
 	bool getFlagScreenshotDateFileName() const {return flagScreenshotDateFileName;}
@@ -168,21 +169,22 @@ public slots:
 
 	//! Get whether existing files are overwritten when saving screenshot
 	bool getFlagOverwriteScreenShots() const {return flagOverwriteScreenshots;}
-	//! Set whether existing files are overwritten when saving screenshot
+	//! Set whether existing files are overwritten when saving screenshot.
+	//! This flag is available for scripting only and initializes to false. There is no config.ini entry.
 	void setFlagOverwriteScreenShots(bool b) {flagOverwriteScreenshots=b; emit flagOverwriteScreenshotsChanged(b);}
 
 	//! Get whether custom size should be used for screenshots
 	bool getFlagUseCustomScreenshotSize() const {return flagUseCustomScreenshotSize;}
 	//! Set whether custom size should be used for screenshots
-	void setFlagUseCustomScreenshotSize(bool b) {flagUseCustomScreenshotSize=b; emit flagUseCustomScreenshotSizeChanged(b);}
+	void setFlagUseCustomScreenshotSize(bool b) {flagUseCustomScreenshotSize=b; StelApp::immediateSave("main/screenshot_custom_size", b); emit flagUseCustomScreenshotSizeChanged(b);}
 	//! Get custom screenshot width
 	int getCustomScreenshotWidth() const {return customScreenshotWidth;}
 	//! Set custom width for screenshots
-	void setCustomScreenshotWidth(int width) {customScreenshotWidth=width; emit customScreenshotWidthChanged(width);}
+	void setCustomScreenshotWidth(int width) {customScreenshotWidth=width; StelApp::immediateSave("main/screenshot_custom_width", width); emit customScreenshotWidthChanged(width);}
 	//! Get custom screenshot height
 	int getCustomScreenshotHeight() const {return customScreenshotHeight;}
 	//! Set custom height for screenshots
-	void setCustomScreenshotHeight(int height) {customScreenshotHeight=height; emit customScreenshotHeightChanged(height);}
+	void setCustomScreenshotHeight(int height) {customScreenshotHeight=height; StelApp::immediateSave("main/screenshot_custom_height", height); emit customScreenshotHeightChanged(height);}
 	//! Get screenshot DPI. This is only an entry in the screenshot image metadata. The raster content is not influenced.
 	int getScreenshotDpi() const {return screenshotDpi;}
 	//! Set screenshot DPI. This is only an entry in the screenshot image metadata. The raster content is not influenced.
@@ -197,23 +199,23 @@ public slots:
 	//! Get the mouse cursor timeout in seconds
 	double getCursorTimeout() const {return cursorTimeoutTimer->interval() / 1000.0;}
 	//! Set the mouse cursor timeout in seconds
-	void setCursorTimeout(double t) {cursorTimeoutTimer->setInterval(static_cast<int>(t * 1000)); emit cursorTimeoutChanged(t);}
+	void setCursorTimeout(double t) {cursorTimeoutTimer->setInterval(static_cast<int>(t * 1000)); StelApp::immediateSave("gui/mouse_cursor_timeout", t); emit cursorTimeoutChanged(t);}
 
 	//! Set the minimum frames per second. Usually this minimum will be switched to after there are no
 	//! user events for some seconds to save power. However, if can be useful to set this to a high
 	//! value to improve playing smoothness in scripts.
 	//! @param m the new minimum fps setting.
-	void setMinFps(float m) {minfps=qMin(m, maxfps); emit minFpsChanged(minfps);}
+	void setMinFps(float m) {minfps=qMin(m, maxfps); StelApp::immediateSave("video/minimum_fps", m); emit minFpsChanged(minfps);}
 	//! Get the current minimum frames per second.
 	float getMinFps() const {return minfps;}
 	//! Set the maximum frames per second.
 	//! @param m the new maximum fps setting.
-	void setMaxFps(float m) {maxfps = qMax(m, minfps);  emit maxFpsChanged(maxfps);}
+	void setMaxFps(float m) {maxfps = qMax(m, minfps); StelApp::immediateSave("video/maximum_fps", m); emit maxFpsChanged(maxfps);}
 	//! Get the current maximum frames per second.
 	float getMaxFps() const {return maxfps;}
 	//! Set the minimum time between frames (in milliseconds).
 	//! @param m the new setting.
-	void setMinTimeBetweenFrames(int m) {minTimeBetweenFrames = qMax(0, m);  emit minTimeBetweenFramesChanged(minTimeBetweenFrames);}
+	void setMinTimeBetweenFrames(int m) {minTimeBetweenFrames = qMax(0, m); StelApp::immediateSave("video/min_time_between_frames", minTimeBetweenFrames); emit minTimeBetweenFramesChanged(minTimeBetweenFrames);}
 	//! Get the current minimum time between frames.
 	int getMinTimeBetweenFrames() const {return minTimeBetweenFrames;}
 
