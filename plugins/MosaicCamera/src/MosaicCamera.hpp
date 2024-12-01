@@ -44,15 +44,15 @@ public:
 
 	void setRA(double ra);
 	void setDec(double dec);
-	void setRot(double rot);
+	void setRSP(double rsp);
 
 public slots:
-    void updateMosaic(double ra, double dec, double rot);  // Slot to update mosaic with received values
+    void updateMosaic(double ra, double dec, double rsp);  // Slot to update mosaic with received values
 
 private:
 	double ra;
 	double dec;
-	double rot;
+	double rsp;
 
 	float getParallacticAngle() const;
 	// Font used for displaying our text

@@ -39,7 +39,7 @@ public:
 	~MosaicCameraDialog() override;
 	void setRA(double ra);
 	void setDec(double dec);
-	void setRot(double rot);
+	void setRSP(double rsp);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -53,8 +53,8 @@ private:
 	Ui_mosaicCameraDialog* ui;
 	void setAboutHtml(void);
 	void updateRA(double ra);
-	void updateDec(double ra);
-	void updateRot(double ra);
+	void updateDec(double dec);
+	void updateRSP(double rsp);
 };
 
 #endif // MOSAICCAMERADIALOG_HPP
