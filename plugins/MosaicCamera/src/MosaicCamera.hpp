@@ -21,7 +21,6 @@
 
 #include "StelModule.hpp"
 #include "MosaicTcpServer.hpp"
-#include <QFont>
 
 class MosaicCameraDialog;
 
@@ -54,9 +53,6 @@ private:
 	double dec;
 	double rsp;
 
-	float getParallacticAngle() const;
-	// Font used for displaying our text
-	QFont font;
 	// GUI
 	MosaicCameraDialog* configDialog;
 	MosaicTcpServer* tcpServer;
@@ -75,7 +71,6 @@ class MosaicCameraStelPluginInterface : public QObject, public StelPluginInterfa
 public:
 	StelModule* getStelModule() const override;
 	StelPluginInfo getPluginInfo() const override;
-	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* MOSAICCAMERA_HPP */
