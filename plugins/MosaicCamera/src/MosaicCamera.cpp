@@ -55,7 +55,7 @@ StelPluginInfo MosaicCameraStelPluginInterface::getPluginInfo() const
 /*************************************************************************
  Constructor
 *************************************************************************/
-MosaicCamera::MosaicCamera() : ra(0), dec(0), rot(0)
+MosaicCamera::MosaicCamera() : ra(0), dec(0), rsp(0)
 {
 	setObjectName("MosaicCamera");
 	font.setPixelSize(25);
@@ -113,20 +113,20 @@ void MosaicCamera::setDec(double dec)
     }
 }
 
-void MosaicCamera::setRot(double rot)
+void MosaicCamera::setRSP(double rsp)
 {
-    this->rot = rot;
+    this->rsp = rsp;
     if(configDialog->visible()) {
-        configDialog->setRot(rot);
+        configDialog->setRSP(rsp);
     }
 }
 
-void MosaicCamera::updateMosaic(double ra, double dec, double rot)
+void MosaicCamera::updateMosaic(double ra, double dec, double rsp)
 {
-    qDebug() << "Received new values: RA=" << ra << ", Dec=" << dec << ", Rot=" << rot;
+    qDebug() << "Received new values: RA=" << ra << ", Dec=" << dec << ", RSP=" << rsp;
     setRA(ra);
     setDec(dec);
-    setRot(rot);
+    setRSP(rsp);
 }
 
 float MosaicCamera::getParallacticAngle() const
@@ -140,18 +140,12 @@ float MosaicCamera::getParallacticAngle() const
 
 void MosaicCamera::draw(StelCore* core)
 {
-	// Input parameters for drawing LSSTCam FoV should be:
-	// altitude
-	// azimuth
-	// rottelpos
-	// Let's start by assuming RTP=0
-	// Center at alt=45 az=180
-	// Need 12-point star coordinates.
-	// Gonna be some projection, but assume rectilinear for current test.
+	// Input parameters for drawing LSSTCam FoV are be:
+	// ra
+	// dec
+	// rotskypos
 
-	// const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	// const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 	StelPainter painter(prj);
 
 	std::vector<std::vector<std::vector<Vec2d>>> polygon_sets = {
@@ -1461,8 +1455,7 @@ void MosaicCamera::draw(StelCore* core)
 
     double alpha = ra / 57.29577951308232 + 1.5707963267948966;  // ra=0 isn't along x=0?
     double beta = 1.5707963267948966 - dec / 57.29577951308232;  // polar angle
-    double rtp = rot / 57.29577951308232;  // rotation wrt current North
-    double rsp = rtp + getParallacticAngle();
+    double rot = rsp / 57.29577951308232;  // rotation angle
 
     double cosBeta = cos(beta);
     double sinBeta = sin(beta);
@@ -1488,10 +1481,10 @@ void MosaicCamera::draw(StelCore* core)
 
                 // Apply camera rotator
 
-                double r1x = cos(rsp) * p1[0] + sin(rsp) * p1[1];
-                double r1y = -sin(rsp) * p1[0] + cos(rsp) * p1[1];
-                double r2x = cos(rsp) * p2[0] + sin(rsp) * p2[1];
-                double r2y = -sin(rsp) * p2[0] + cos(rsp) * p2[1];
+                double r1x = cos(rot) * p1[0] + sin(rot) * p1[1];
+                double r1y = -sin(rot) * p1[0] + cos(rot) * p1[1];
+                double r2x = cos(rot) * p2[0] + sin(rot) * p2[1];
+                double r2y = -sin(rot) * p2[0] + cos(rot) * p2[1];
 
                 double r1z = 1.0;
                 double r2z = 1.0;
