@@ -53,9 +53,9 @@ void MosaicCameraDialog::updateDec(double dec)
 	mc->setDec(dec);
 }
 
-void MosaicCameraDialog::updateRot(double rot)
+void MosaicCameraDialog::updateRSP(double rsp)
 {
-	mc->setRot(rot);
+	mc->setRSP(rsp);
 }
 
 void MosaicCameraDialog::setRA(double ra)
@@ -68,9 +68,9 @@ void MosaicCameraDialog::setDec(double dec)
 	ui->DecSpinBox->setValue(dec);
 }
 
-void MosaicCameraDialog::setRot(double rot)
+void MosaicCameraDialog::setRSP(double rsp)
 {
-	ui->RotSpinBox->setValue(rot);
+	ui->RSPSpinBox->setValue(rsp);
 }
 
 void MosaicCameraDialog::retranslate()
@@ -111,7 +111,7 @@ void MosaicCameraDialog::createDialogContent()
 	// Location tab
 	connect(ui->RASpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &MosaicCameraDialog::updateRA);
 	connect(ui->DecSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &MosaicCameraDialog::updateDec);
-	connect(ui->RotSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &MosaicCameraDialog::updateRot);
+	connect(ui->RSPSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &MosaicCameraDialog::updateRSP);
 }
 
 void MosaicCameraDialog::setAboutHtml(void)
