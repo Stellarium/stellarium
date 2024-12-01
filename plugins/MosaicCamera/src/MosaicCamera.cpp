@@ -58,7 +58,6 @@ StelPluginInfo MosaicCameraStelPluginInterface::getPluginInfo() const
 MosaicCamera::MosaicCamera() : ra(0), dec(0), rsp(0)
 {
 	setObjectName("MosaicCamera");
-	font.setPixelSize(25);
 	configDialog = new MosaicCameraDialog();
     tcpServer = new MosaicTcpServer();
 }
@@ -127,15 +126,6 @@ void MosaicCamera::updateMosaic(double ra, double dec, double rsp)
     setRA(ra);
     setDec(dec);
     setRSP(rsp);
-}
-
-float MosaicCamera::getParallacticAngle() const
-{
-    Vec3d v;
-    StelUtils::spheToRect(ra, dec, v);
-    CustomObject obj(QString("test"), v, false);
-    float q = obj.getParallacticAngle(StelApp::getInstance().getCore());
-    return q;
 }
 
 void MosaicCamera::draw(StelCore* core)
