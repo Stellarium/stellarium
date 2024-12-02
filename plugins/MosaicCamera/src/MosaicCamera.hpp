@@ -21,8 +21,19 @@
 
 #include "StelModule.hpp"
 #include "MosaicTcpServer.hpp"
+#include <QColor>
+#include <QVector>
+#include <QPointF>
+#include <QString>
 
 class MosaicCameraDialog;
+
+struct PolygonSet {
+    QString name;
+    QVector<QVector<QPointF>> corners;
+    QColor color;
+    QString colorComment;
+};
 
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
 class MosaicCamera : public StelModule
@@ -52,6 +63,9 @@ private:
 	double ra;
 	double dec;
 	double rsp;
+	QVector<PolygonSet> polygon_sets;
+
+	static QVector<PolygonSet> readPolygonSetsFromJson(const QString& filename);
 
 	// GUI
 	MosaicCameraDialog* configDialog;
