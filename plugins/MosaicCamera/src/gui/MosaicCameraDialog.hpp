@@ -50,6 +50,7 @@ public slots:
 	void updateRA();
 	void updateDec();
 	void updateRSP();
+    void onCameraSelectionChanged();
 
 private:
 	MosaicCamera* mc;
