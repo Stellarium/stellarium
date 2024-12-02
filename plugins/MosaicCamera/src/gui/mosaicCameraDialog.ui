@@ -68,7 +68,7 @@
       <attribute name="title">
        <string>Location</string>
       </attribute>
-      <widget class="QDoubleSpinBox" name="RASpinBox">
+      <widget class="AngleSpinBox" name="RASpinBox">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -84,7 +84,7 @@
         <double>360.000000000000000</double>
        </property>
       </widget>
-      <widget class="QDoubleSpinBox" name="DecSpinBox">
+      <widget class="AngleSpinBox" name="DecSpinBox">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -100,7 +100,7 @@
         <double>90.000000000000000</double>
        </property>
       </widget>
-      <widget class="QDoubleSpinBox" name="RSPSpinBox">
+      <widget class="AngleSpinBox" name="RSPSpinBox">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -127,6 +127,11 @@
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AngleSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>AngleSpinBox.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>
