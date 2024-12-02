@@ -47,14 +47,14 @@ protected:
 
 public slots:
 	void retranslate() override;
+	void updateRA();
+	void updateDec();
+	void updateRSP();
 
 private:
 	MosaicCamera* mc;
 	Ui_mosaicCameraDialog* ui;
 	void setAboutHtml(void);
-	void updateRA(double ra);
-	void updateDec(double dec);
-	void updateRSP(double rsp);
 };
 
 #endif // MOSAICCAMERADIALOG_HPP

@@ -43,34 +43,37 @@ MosaicCameraDialog::~MosaicCameraDialog()
 	delete ui;
 }
 
-void MosaicCameraDialog::updateRA(double ra)
+void MosaicCameraDialog::updateRA()
 {
-	mc->setRA(ra);
+	qDebug() << "Updating RA";
+	mc->setRA(ui->RASpinBox->valueDegrees());
 }
 
-void MosaicCameraDialog::updateDec(double dec)
+void MosaicCameraDialog::updateDec()
 {
-	mc->setDec(dec);
+	qDebug() << "Updating Dec";
+	mc->setDec(ui->DecSpinBox->valueDegrees());
 }
 
-void MosaicCameraDialog::updateRSP(double rsp)
+void MosaicCameraDialog::updateRSP()
 {
-	mc->setRSP(rsp);
+	qDebug() << "Updating RSP";
+	mc->setRSP(ui->RSPSpinBox->valueDegrees());
 }
 
 void MosaicCameraDialog::setRA(double ra)
 {
-	ui->RASpinBox->setValue(ra);
+	ui->RASpinBox->setDegrees(ra);
 }
 
 void MosaicCameraDialog::setDec(double dec)
 {
-	ui->DecSpinBox->setValue(dec);
+	ui->DecSpinBox->setDegrees(dec);
 }
 
 void MosaicCameraDialog::setRSP(double rsp)
 {
-	ui->RSPSpinBox->setValue(rsp);
+	ui->RSPSpinBox->setDegrees(rsp);
 }
 
 void MosaicCameraDialog::retranslate()
@@ -109,9 +112,9 @@ void MosaicCameraDialog::createDialogContent()
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	// Location tab
-	connect(ui->RASpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &MosaicCameraDialog::updateRA);
-	connect(ui->DecSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &MosaicCameraDialog::updateDec);
-	connect(ui->RSPSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &MosaicCameraDialog::updateRSP);
+	connect(ui->RASpinBox, SIGNAL(valueChanged()), this, SLOT(updateRA()));
+	connect(ui->DecSpinBox, SIGNAL(valueChanged()), this, SLOT(updateDec()));
+	connect(ui->RSPSpinBox, SIGNAL(valueChanged()), this, SLOT(updateRSP()));
 }
 
 void MosaicCameraDialog::setAboutHtml(void)
