@@ -61,6 +61,19 @@ void MosaicCameraDialog::updateRSP()
 	mc->setRSP(ui->RSPSpinBox->valueDegrees());
 }
 
+void MosaicCameraDialog::onCameraSelectionChanged()
+{
+    if (ui->lsstCamRadioButton->isChecked()) {
+		mc->readPolygonSetsFromJson(":/MosaicCamera/RubinMosaic.json");
+    } else if (ui->decamRadioButton->isChecked()) {
+		mc->readPolygonSetsFromJson(":/MosaicCamera/DECam.json");
+    } else if (ui->hscRadioButton->isChecked()) {
+		mc->readPolygonSetsFromJson(":/MosaicCamera/HSC.json");
+    } else if (ui->megaPrimeRadioButton->isChecked()) {
+		mc->readPolygonSetsFromJson(":/MosaicCamera/MegaPrime.json");
+    }
+}
+
 void MosaicCameraDialog::setRA(double ra)
 {
 	ui->RASpinBox->setDegrees(ra);
@@ -91,6 +104,7 @@ void MosaicCameraDialog::createDialogContent()
 	mc = GETSTELMODULE(MosaicCamera);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);
+	ui->lsstCamRadioButton->setChecked(true);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		this, SLOT(retranslate()));
 
@@ -115,6 +129,10 @@ void MosaicCameraDialog::createDialogContent()
 	connect(ui->RASpinBox, SIGNAL(valueChanged()), this, SLOT(updateRA()));
 	connect(ui->DecSpinBox, SIGNAL(valueChanged()), this, SLOT(updateDec()));
 	connect(ui->RSPSpinBox, SIGNAL(valueChanged()), this, SLOT(updateRSP()));
+	connect(ui->lsstCamRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));
+	connect(ui->decamRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));
+	connect(ui->hscRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));
+	connect(ui->megaPrimeRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));
 }
 
 void MosaicCameraDialog::setAboutHtml(void)
