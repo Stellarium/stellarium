@@ -55,6 +55,7 @@ public:
 	void setRA(double ra);
 	void setDec(double dec);
 	void setRSP(double rsp);
+	void readPolygonSetsFromJson(const QString& filename);
 
 public slots:
     void updateMosaic(double ra, double dec, double rsp);  // Slot to update mosaic with received values
@@ -64,8 +65,6 @@ private:
 	double dec;
 	double rsp;
 	QVector<PolygonSet> polygon_sets;
-
-	static QVector<PolygonSet> readPolygonSetsFromJson(const QString& filename);
 
 	// GUI
 	MosaicCameraDialog* configDialog;

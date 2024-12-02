@@ -99,18 +99,17 @@ void MosaicCamera::init()
     connect(tcpServer, &MosaicTcpServer::newValuesReceived, this, &MosaicCamera::updateMosaic);
 
     qDebug() << "Loading Rubin json";
-    polygon_sets = MosaicCamera::readPolygonSetsFromJson(":/MosaicCamera/RubinMosaic.json");
+    readPolygonSetsFromJson(":/MosaicCamera/RubinMosaic.json");
 }
 
 
-QVector<PolygonSet> MosaicCamera::readPolygonSetsFromJson(const QString& filename)
+void MosaicCamera::readPolygonSetsFromJson(const QString& filename)
 {
     QVector<PolygonSet> polygonSets;
 
     QFile file(filename);
     if (!file.open(QIODevice::ReadOnly)) {
         qWarning() << "Couldn't open file:" << file.errorString();
-        return polygonSets;
     }
 
     QByteArray saveData = file.readAll();
@@ -155,7 +154,7 @@ QVector<PolygonSet> MosaicCamera::readPolygonSetsFromJson(const QString& filenam
         polygonSets.append(set);
     }
 
-    return polygonSets;
+    polygon_sets = polygonSets;
 }
 
 void MosaicCamera::setRA(double ra)
