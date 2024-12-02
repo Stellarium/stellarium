@@ -71,6 +71,8 @@ void MosaicCameraDialog::onCameraSelectionChanged()
 		mc->readPolygonSetsFromJson(":/MosaicCamera/HSC.json");
     } else if (ui->megaPrimeRadioButton->isChecked()) {
 		mc->readPolygonSetsFromJson(":/MosaicCamera/MegaPrime.json");
+    } else if (ui->latissPrimeRadioButton->isChecked()) {
+		mc->readPolygonSetsFromJson(":/MosaicCamera/Latiss.json");
     }
 }
 
@@ -133,6 +135,7 @@ void MosaicCameraDialog::createDialogContent()
 	connect(ui->decamRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));
 	connect(ui->hscRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));
 	connect(ui->megaPrimeRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));
+	connect(ui->latissPrimeRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));
 }
 
 void MosaicCameraDialog::setAboutHtml(void)
