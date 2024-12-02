@@ -68,10 +68,23 @@
       <attribute name="title">
        <string>Location</string>
       </attribute>
-      <widget class="AngleSpinBox" name="RASpinBox">
+      <widget class="QLabel" name="RALabel">
        <property name="geometry">
         <rect>
          <x>20</x>
+         <y>10</y>
+         <width>100</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Right Ascension:</string>
+       </property>
+      </widget>
+      <widget class="AngleSpinBox" name="RASpinBox">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
          <y>10</y>
          <width>211</width>
          <height>22</height>
@@ -84,10 +97,23 @@
         <double>360.000000000000000</double>
        </property>
       </widget>
-      <widget class="AngleSpinBox" name="DecSpinBox">
+      <widget class="QLabel" name="DecLabel">
        <property name="geometry">
         <rect>
          <x>20</x>
+         <y>40</y>
+         <width>100</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Declination:</string>
+       </property>
+      </widget>
+      <widget class="AngleSpinBox" name="DecSpinBox">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
          <y>40</y>
          <width>211</width>
          <height>22</height>
@@ -100,10 +126,23 @@
         <double>90.000000000000000</double>
        </property>
       </widget>
-      <widget class="AngleSpinBox" name="RSPSpinBox">
+      <widget class="QLabel" name="RSPLabel">
        <property name="geometry">
         <rect>
          <x>20</x>
+         <y>70</y>
+         <width>100</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>RotSkyPos:</string>
+       </property>
+      </widget>
+      <widget class="AngleSpinBox" name="RSPSpinBox">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
          <y>70</y>
          <width>211</width>
          <height>21</height>
