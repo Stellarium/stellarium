@@ -514,8 +514,6 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 
 QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
-	// maybe never calculate absolute magnitude for Star 2 as it is not
-	// resion: these stars sometimes also have very high extinction (e.g., dust), so absolute magnitude is not very useful
 	QString str;
 	QTextStream oss(&str);
 
@@ -534,11 +532,6 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	oss << getMagnitudeInfoString(core, flags, 2);
 
-	if (flags&Extra)
-		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(getBV(), 'f', 2)) << "<br />";
-	
-	oss << getCommonInfoString(core, flags);
-
 	double RA, DEC, pmra, pmdec;
 	double Plx = s->getPlx();
 	double PlxErr = s->getPlxErr();
@@ -546,6 +539,15 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
 	bool computeAstrometryFlag = (flags&ProperMotion) && (pmra || pmdec);
+
+	if ((flags&AbsoluteMagnitude) && s->getPlx())
+		// should use Plx from getPlx because Plx can change with time, but not absolute magnitude
+		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.001*s->getPlx())), 0, 'f', 2) << "<br />";
+
+	if (flags&Extra)
+		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(getBV(), 'f', 2)) << "<br />";
+	
+	oss << getCommonInfoString(core, flags);
 
 	// kinda impossible for both pm to be exactly 0, so they must just be missing
 	if (computeAstrometryFlag)
@@ -574,6 +576,15 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 			QString ly = qc_("ly", "distance");
 			double distance = 3.26156 * 1000. / Plx;
 			oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(distance * PlxErr / Plx, 'f', 2), ly) << "<br />";
+		}
+		if ((Plx!=0) && (PlxErr!=0))  // as long as having parallax, display it (but not neccessarily displaying inverse parallax)
+		{
+			QString plx = q_("Parallax");
+			if (PlxErr>0.f)
+				oss <<  QString("%1: %2%3%4 ").arg(plx, QString::number(Plx, 'f', 3), QChar(0x00B1), QString::number(PlxErr, 'f', 3));
+			else
+				oss << QString("%1: %2 ").arg(plx, QString::number(Plx, 'f', 3));
+			oss  << qc_("mas", "parallax") << "<br />";
 		}
 		oss << getExtraInfoStrings(Distance).join("");
 	}
