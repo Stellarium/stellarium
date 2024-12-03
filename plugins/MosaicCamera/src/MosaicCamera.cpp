@@ -48,10 +48,10 @@ StelPluginInfo MosaicCameraStelPluginInterface::getPluginInfo() const
 {
 	StelPluginInfo info;
 	info.id = "MosaicCamera";
-	info.displayedName = "Mosaic Camera plugin";
+	info.displayedName = "Mosaic Camera";
 	info.authors = "Josh Meyers";
 	info.contact = "jmeyers314@gmail.com";
-	info.description = "Mosaic Camera Overlay plugin.";
+	info.description = "Mosaic Camera Overlay";
 	info.version = MOSAICCAMERA_PLUGIN_VERSION;
 	info.license = MOSAICCAMERA_PLUGIN_LICENSE;
 	return info;
@@ -98,7 +98,7 @@ void MosaicCamera::init()
     tcpServer->startServer(5772);
     connect(tcpServer, &MosaicTcpServer::newValuesReceived, this, &MosaicCamera::updateMosaic);
 
-    qDebug() << "Loading Rubin json";
+    qDebug() << "Loading camera mosaic";
     readPolygonSetsFromJson(":/MosaicCamera/RubinMosaic.json");
 }
 

@@ -18,7 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-// #include <QDebug>
 // #include <QFileDialog>
 
 #include "StelApp.hpp"
@@ -45,19 +44,16 @@ MosaicCameraDialog::~MosaicCameraDialog()
 
 void MosaicCameraDialog::updateRA()
 {
-	qDebug() << "Updating RA";
 	mc->setRA(ui->RASpinBox->valueDegrees());
 }
 
 void MosaicCameraDialog::updateDec()
 {
-	qDebug() << "Updating Dec";
 	mc->setDec(ui->DecSpinBox->valueDegrees());
 }
 
 void MosaicCameraDialog::updateRSP()
 {
-	qDebug() << "Updating RSP";
 	mc->setRSP(ui->RSPSpinBox->valueDegrees());
 }
 
@@ -129,6 +125,11 @@ void MosaicCameraDialog::createDialogContent()
 
 	// Location tab
 	ui->RASpinBox->setDisplayFormat(AngleSpinBox::HMSSymbols);
+	ui->RSPSpinBox->setDisplayFormat(AngleSpinBox::DecimalDeg);
+	ui->DecSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
+	ui->DecSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+	ui->DecSpinBox->setMinimum(-90.0, true);
+	ui->DecSpinBox->setMaximum(90.0, true);
 	connect(ui->RASpinBox, SIGNAL(valueChanged()), this, SLOT(updateRA()));
 	connect(ui->DecSpinBox, SIGNAL(valueChanged()), this, SLOT(updateDec()));
 	connect(ui->RSPSpinBox, SIGNAL(valueChanged()), this, SLOT(updateRSP()));
