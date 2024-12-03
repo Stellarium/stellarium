@@ -44,26 +44,6 @@
      <property name="documentMode">
       <bool>false</bool>
      </property>
-     <widget class="QWidget" name="aboutTab">
-      <attribute name="title">
-       <string comment="tab in plugin windows">About</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_11">
-       <property name="spacing">
-        <number>9</number>
-       </property>
-       <item>
-        <widget class="QTextBrowser" name="aboutTextBrowser">
-         <property name="openExternalLinks">
-          <bool>true</bool>
-         </property>
-         <property name="openLinks">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
      <widget class="QWidget" name="LocationTab">
       <attribute name="title">
        <string>Location</string>
@@ -180,6 +160,26 @@
           </size>
          </property>
         </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="aboutTab">
+      <attribute name="title">
+       <string comment="tab in plugin windows">About</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_11">
+       <property name="spacing">
+        <number>9</number>
+       </property>
+       <item>
+        <widget class="QTextBrowser" name="aboutTextBrowser">
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+         <property name="openLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
