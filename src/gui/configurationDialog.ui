@@ -315,7 +315,7 @@
                   <enum>QComboBox::NoInsert</enum>
                  </property>
                  <property name="sizeAdjustPolicy">
-                  <enum>QComboBox::SizeAdjustPolicy::AdjustToContentsOnFirstShow</enum>
+                  <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
                  </property>
                  <property name="frame">
                   <bool>true</bool>
@@ -328,10 +328,12 @@
                   <string>Store language settings</string>
                  </property>
                  <property name="text">
-                  <string>...</string>
+                  <string>Save</string>
                  </property>
                  <property name="icon">
-                  <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtSave.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtSave-disabled.png</disabledoff>:/graphicGui/uibtSave.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -1826,7 +1828,9 @@
                   <string>Save</string>
                  </property>
                  <property name="icon">
-                  <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtSave.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtSave-disabled.png</disabledoff>:/graphicGui/uibtSave.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -1962,19 +1966,6 @@
                </property>
                <property name="text">
                 <string>Enable mouse zooming</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="selectSingleConstellationButton">
-               <property name="toolTip">
-                <string>Hide other constellations when you click one</string>
-               </property>
-               <property name="statusTip">
-                <string>Hide other constellations when you click one</string>
-               </property>
-               <property name="text">
-                <string>Select single constellation</string>
                </property>
               </widget>
              </item>
