@@ -225,8 +225,70 @@
              </property>
              <item row="0" column="0">
               <layout class="QGridLayout" name="languageGridLayout">
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_11">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="6">
+                <widget class="QComboBox" name="skycultureLanguageComboBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                 <property name="insertPolicy">
+                  <enum>QComboBox::NoInsert</enum>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <widget class="QLabel" name="skycultureLanguageLabel">
+                 <property name="text">
+                  <string>Sky Culture Language</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
                <item row="0" column="4">
                 <spacer name="horizontalSpacer_9">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="programLanguageLabel">
+                 <property name="text">
+                  <string>Program Language</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_8">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -253,74 +315,25 @@
                   <enum>QComboBox::NoInsert</enum>
                  </property>
                  <property name="sizeAdjustPolicy">
-                  <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+                  <enum>QComboBox::SizeAdjustPolicy::AdjustToContentsOnFirstShow</enum>
                  </property>
                  <property name="frame">
                   <bool>true</bool>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QLabel" name="programLanguageLabel">
+               <item row="0" column="8">
+                <widget class="QToolButton" name="languageSaveToolButton">
+                 <property name="toolTip">
+                  <string>Store language settings</string>
+                 </property>
                  <property name="text">
-                  <string>Program Language</string>
+                  <string>...</string>
                  </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <spacer name="horizontalSpacer_8">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="5">
-                <widget class="QLabel" name="skycultureLanguageLabel">
-                 <property name="text">
-                  <string>Sky Culture Language</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <property name="icon">
+                  <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
                  </property>
                 </widget>
-               </item>
-               <item row="0" column="6">
-                <widget class="QComboBox" name="skycultureLanguageComboBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="editable">
-                  <bool>true</bool>
-                 </property>
-                 <property name="insertPolicy">
-                  <enum>QComboBox::NoInsert</enum>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="7">
-                <spacer name="horizontalSpacer_11">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
               </layout>
              </item>
@@ -464,6 +477,16 @@
                  </property>
                  <property name="text">
                   <string>Save settings</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="immediateSaveCheckBox">
+                 <property name="toolTip">
+                  <string>Store changes immediately. This makes pressing &quot;Save settings&quot; no longer necessary, the button is then disabled.</string>
+                 </property>
+                 <property name="text">
+                  <string>Immediate Save</string>
                  </property>
                 </widget>
                </item>
@@ -1791,6 +1814,19 @@
                 <widget class="QFontComboBox" name="fontComboBox">
                  <property name="toolTip">
                   <string>Application font</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="fontSaveToolButton">
+                 <property name="toolTip">
+                  <string>Store font settings</string>
+                 </property>
+                 <property name="text">
+                  <string>Save</string>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
                  </property>
                 </widget>
                </item>

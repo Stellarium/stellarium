@@ -1221,6 +1221,7 @@ double StelCore::getPresetSkyTime() const
 
 void StelCore::setPresetSkyTime(double d)
 {
+	StelApp::immediateSave("navigation/preset_sky_time", d);
 	presetSkyTime=d;
 }
 
@@ -1633,6 +1634,7 @@ QTime StelCore::getInitTodayTime(void) const
 
 void StelCore::setInitTodayTime(const QTime& time)
 {
+	StelApp::immediateSave("navigation/today_time", time);
 	initTodayTime=time;
 }
 
@@ -2201,6 +2203,7 @@ void StelCore::registerMathMetaTypes()
 
 void StelCore::setStartupTimeMode(const QString& s)
 {
+	StelApp::immediateSave("navigation/startup_time_mode", s);
 	startupTimeMode = s;
 }
 
@@ -2525,6 +2528,7 @@ void StelCore::setCurrentDeltaTAlgorithmKey(QString key)
 		qWarning() << "Unknown DeltaT algorithm: " << key << "setting \"WithoutCorrection\" instead";
 		algo = WithoutCorrection;
 	}
+	StelApp::immediateSave("navigation/time_correction_algorithm", key);
 	setCurrentDeltaTAlgorithm(algo);
 }
 
