@@ -305,7 +305,7 @@ QString StelLocaleMgr::sDateFormatToString(SDateFormat df)
 		"mmddyyyy",
 		"ddmmyyyy",
 		"yyyymmdd",
-		"wwddmmyyyy",
+		"wwmmddyyyy",
 		"wwddmmyyyy",
 		"wwyyyymmdd"};
 	return dfmt[df];

@@ -1070,33 +1070,37 @@ void StelSkyDrawer::setAtmospherePressure(double mbar)
 // These are to find out the best sky parameters. Program feature for debugging/expert mode.
 // These will be connected from AtmosphereDialog and forward the settings to SkyLight class.
 
-void StelSkyDrawer::setFlagDrawSunAfterAtmosphere(bool val){
+void StelSkyDrawer::setFlagDrawSunAfterAtmosphere(bool val)
+{
 	flagDrawSunAfterAtmosphere=val;
 	QSettings* conf = StelApp::getInstance().getSettings();
 	 conf->setValue("landscape/draw_sun_after_atmosphere",val);
 	 conf->sync();
 	 emit flagDrawSunAfterAtmosphereChanged(val);
-	}
+}
 
-void StelSkyDrawer::setFlagEarlySunHalo(bool val){
+void StelSkyDrawer::setFlagEarlySunHalo(bool val)
+{
 	flagEarlySunHalo= val;
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("landscape/early_solar_halo", val);
 	conf->sync();
 	emit flagEarlySunHaloChanged(val);
-	}
+}
 
-void StelSkyDrawer::setFlagTfromK(bool val){
+void StelSkyDrawer::setFlagTfromK(bool val)
+{
 	flagTfromK=val;
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("landscape/use_T_from_k", val);
 	conf->sync();
 	emit flagTfromKChanged(val);
-	}
+}
 
-void StelSkyDrawer::setT(double newT){
+void StelSkyDrawer::setT(double newT)
+{
     turbidity=static_cast<float>(newT);
         QSettings* conf = StelApp::getInstance().getSettings();
         conf->setValue("landscape/turbidity", newT);
         emit turbidityChanged(newT);
-        }
+}
