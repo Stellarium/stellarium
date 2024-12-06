@@ -4966,7 +4966,7 @@
              </property>
              <item row="1" column="0" rowspan="2">
               <layout class="QGridLayout" name="skyCultureGridLayout">
-               <item row="2" column="5">
+               <item row="2" column="5" colspan="2">
                 <widget class="QCheckBox" name="showAsterismLinesCheckBox">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -4979,7 +4979,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="6">
+               <item row="1" column="7">
                 <widget class="QSpinBox" name="asterismsFontSizeSpinBox">
                  <property name="toolTip">
                   <string>Asterisms font size</string>
@@ -4998,7 +4998,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="6">
+               <item row="3" column="7">
                 <widget class="QSpinBox" name="rayHelperThicknessSpinBox">
                  <property name="toolTip">
                   <string>Thickness of line in pixels</string>
@@ -5014,7 +5014,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="0">
+               <item row="3" column="0">
                 <widget class="ColorButton" name="colorConstellationBoundaries">
                  <property name="toolTip">
                   <string>Color of constellation boundaries</string>
@@ -5073,7 +5073,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="4">
+               <item row="3" column="4">
                 <widget class="ColorButton" name="colorRayHelpers">
                  <property name="toolTip">
                   <string>Color of ray helpers</string>
@@ -5094,7 +5094,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="5">
+               <item row="3" column="5" colspan="2">
                 <widget class="QCheckBox" name="showRayHelpersCheckBox">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -5114,7 +5114,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="5">
+               <item row="1" column="5" colspan="2">
                 <widget class="QCheckBox" name="showAsterismLabelsCheckBox">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -5127,7 +5127,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="6">
+               <item row="2" column="7">
                 <widget class="QSpinBox" name="asterismLineThicknessSpinBox">
                  <property name="toolTip">
                   <string>Thickness of line in pixels</string>
@@ -5169,7 +5169,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="5" colspan="2">
+               <item row="0" column="5" colspan="3">
                 <widget class="QCheckBox" name="nativePlanetNamesCheckBox">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -5198,27 +5198,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="7" column="1" colspan="2">
-                <widget class="QCheckBox" name="selectSingleConstellationCheckBox">
-                 <property name="toolTip">
-                  <string>Click on star to show its constellation</string>
-                 </property>
-                 <property name="text">
-                  <string>Select single constellation</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="5">
-                <widget class="QCheckBox" name="selectSingleAsterismCheckBox">
-                 <property name="toolTip">
-                  <string>For scripting use only</string>
-                 </property>
-                 <property name="text">
-                  <string>Select single asterism</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="3">
+               <item row="3" column="3">
                 <widget class="QSpinBox" name="constellationBoundariesThicknessSpinBox">
                  <property name="toolTip">
                   <string>Thickness of line in pixels</string>
@@ -5234,7 +5214,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="1" colspan="2">
+               <item row="3" column="1" colspan="2">
                 <widget class="QCheckBox" name="showConstellationBoundariesCheckBox">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -5250,7 +5230,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="6" column="3">
+               <item row="4" column="3">
                 <widget class="QDoubleSpinBox" name="constellationArtBrightnessSpinBox">
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -5261,9 +5241,12 @@
                  <property name="singleStep">
                   <double>0.050000000000000</double>
                  </property>
+                 <property name="toolTip">
+                  <string>Brightness for constellation art</string>
+                 </property>
                 </widget>
                </item>
-               <item row="6" column="1" colspan="2">
+               <item row="4" column="1" colspan="2">
                 <widget class="QCheckBox" name="showConstellationArtCheckBox">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -5272,11 +5255,21 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>Art in brightness</string>
+                  <string>Constellation art</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="2" colspan="2">
+               <item row="4" column="5">
+                <widget class="QCheckBox" name="selectSingleConstellationCheckBox">
+                 <property name="toolTip">
+                  <string>Click on star to show its constellation</string>
+                 </property>
+                 <property name="text">
+                  <string>Select single constellation</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="6" colspan="2">
                 <widget class="QCheckBox" name="constellationPickCheckBox">
                  <property name="toolTip">
                   <string>Only one at a time</string>
@@ -5470,7 +5463,6 @@
   <tabstop>showRayHelpersCheckBox</tabstop>
   <tabstop>rayHelperThicknessSpinBox</tabstop>
   <tabstop>selectSingleConstellationCheckBox</tabstop>
-  <tabstop>selectSingleAsterismCheckBox</tabstop>
  </tabstops>
  <resources>
   <include location="../../data/gui/guiRes.qrc"/>

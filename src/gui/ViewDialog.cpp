@@ -549,8 +549,6 @@ void ViewDialog::createDialogContent()
 
 	connectBoolProperty(ui->selectSingleConstellationCheckBox, "ConstellationMgr.isolateSelected");
 	connectBoolProperty(ui->constellationPickCheckBox, "ConstellationMgr.flagConstellationPick");
-	//connectBoolProperty(ui->selectSingleAsterismCheckBox, "AsterismMgr.isolateAsterismSelected");
-	ui->selectSingleAsterismCheckBox->hide(); // This property is for scripting only. No need to show a checkbox that does nothing visible.
 
 	ui->colorAsterismLabels->setup("AsterismMgr.namesColor",      "color/asterism_names_color");
 	ui->colorAsterismLines ->setup("AsterismMgr.linesColor",      "color/asterism_lines_color");
@@ -1241,7 +1239,6 @@ void ViewDialog::updateDefaultSkyCulture()
 	ui->rayHelperThicknessSpinBox->setEnabled(b);
 	ui->colorRayHelpers->setEnabled(b);
 	ui->asterismsFontSizeSpinBox->setEnabled(b);
-	ui->selectSingleAsterismCheckBox->setEnabled(b);
 	ui->constellationPickCheckBox->setEnabled(b);
 }
 
