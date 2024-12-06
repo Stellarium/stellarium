@@ -140,7 +140,6 @@ void MosaicCamera::readPolygonSetsFromJson(const QString& filename)
 
         // Read color
         QJsonObject colorObject = setObject["color"].toObject();
-        set.colorComment = colorObject["comment"].toString();
         QJsonArray colorArray = colorObject["value"].toArray();
         if (colorArray.size() == 4) {
             set.color = QColor::fromRgbF(
