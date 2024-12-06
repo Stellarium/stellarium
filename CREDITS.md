@@ -729,6 +729,9 @@
 	4.113 The miscWorldMap.jpg image was created from NASA Blue Marble Next Generation
 	      dataset for July 2004. Public domain.
 	      https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation
+	4.114 Images of M80
+	      from NOIRLab/NSF/AURA
+	      https://commons.wikimedia.org/wiki/
 ```
 
 ## Appendix
