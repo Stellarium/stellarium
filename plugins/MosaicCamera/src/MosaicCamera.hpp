@@ -32,7 +32,6 @@ struct PolygonSet {
     QString name;
     QVector<QVector<QPointF>> corners;
     QColor color;
-    QString colorComment;
 };
 
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
