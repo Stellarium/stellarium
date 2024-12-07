@@ -1241,24 +1241,12 @@ void StarMgr::draw(StelCore* core)
 				maxMagStarName = x;
 		}
 		int zone;
-		// every stars in the first three levels are always checked if they are inside the screen (not by zones) if too far from future
-		if (z->level >= 0 && z->level <= 2 && fabs((core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25) > 3000.)
-		{
-			// Calculate the number of zones for the given level
-			int numZones = 20 * pow(4, z->level); // Equivalent to 4^level
-			// Iterate over all zones for levels 0-2
-			for (int zone = 0; zone < numZones; ++zone)
-			{
-				z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf);
-			}
-		}
-		else
-		{
-			for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-				z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf);
-			for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-				z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, velf);
-		}
+		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
+			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf);
+		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
+			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, velf);
+		// always check the last zone because it is a global zone
+		z->draw(&sPainter, (20<<(z->level<<1)), false, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf);
 	}
 	exit_loop:
 
@@ -1327,34 +1315,20 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	for (auto* z : gridLevels)
 	{
 		//qDebug() << "search inside(" << it->first << "):";
-
-		// because every stars in the first three levels are always checked if inside the screen (not by zones)
-		// if too far from future
-		if (z->level >= 0 && z->level <= 2 && fabs((core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25) > 3000.)
-		{
-			// Calculate the number of zones for the given level
-			int numZones = 20 * pow(4, z->level); // Equivalent to 4^level
-			// Iterate over all zones for levels 0-2
-			for (int zone = 0; zone < numZones; ++zone)
-			{
-				z->searchAround(core, zone,v,f,result);
-			}
-		}
-		else
-		{
 		int zone;
-			for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			{
-				z->searchAround(core, zone,v,f,result);
-				//qDebug() << " " << zone;
-			}
-			//qDebug() << StelUtils::getEndLineChar() << "search border(" << it->first << "):";
-			for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level); (zone = it1.next()) >= 0;)
-			{
-				z->searchAround(core, zone,v,f,result);
-				//qDebug() << " " << zone;
-			}
+		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
+		{
+			z->searchAround(core, zone,v,f,result);
+			//qDebug() << " " << zone;
 		}
+		//qDebug() << StelUtils::getEndLineChar() << "search border(" << it->first << "):";
+		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level); (zone = it1.next()) >= 0;)
+		{
+			z->searchAround(core, zone,v,f,result);
+			//qDebug() << " " << zone;
+		}
+		// always search the last zone because it is a global zone
+		z->searchAround(core, (20<<(z->level<<1)), v, f, result);
 	}
 	return result;
 }
