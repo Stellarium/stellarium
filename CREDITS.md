@@ -431,7 +431,7 @@
 	     License: public domain
 	4.38 Images of M44, IC1396 from Giuseppe Donatiello
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.39 Images of M4, M12, M14, M19, M20, M22, M55, M56, M62, M88, M92, M108, 
+	4.39 Images of M12, M14, M19, M20, M22, M55, M56, M62, M88, M92, M108, 
 	     M109, IC5146, NGC225, NGC281, NGC663, NGC891, NGC1931, NGC6823, NGC7814
 	     from Hewholooks
 	     https://commons.wikimedia.org/wiki/
@@ -484,8 +484,8 @@
 	     from Gianluca.pollastri
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.50 Images of M2, M3, M5, M13, M10, M28, M30, M53, M54, M69, M71, M75, M78, M85, M102, M107,
-	     IC10, PGC143, UGC12613
+	4.50 Images of M2, M3, M4, M5, M13, M10, M28, M30, M53, M54, M69, M71, M75, M78, M85, M102,
+	     M107, IC10, NGC6144, PGC143, UGC12613
 	     from Starhopper
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
@@ -729,6 +729,10 @@
 	4.113 The miscWorldMap.jpg image was created from NASA Blue Marble Next Generation
 	      dataset for July 2004. Public domain.
 	      https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation
+	4.114 Images of M80
+	      from NOIRLab/NSF/AURA
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
