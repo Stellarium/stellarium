@@ -253,7 +253,7 @@ public:
 	//! @param source_id the Gaia source id of the star which is required.
 	//! @return the requested StelObjectP or an empty objecy if the requested
 	//! one was not found.
-	StelObjectP searchGaia(long source_id) const;
+	StelObjectP searchGaia(int64_t source_id) const;
 
 	//! Get the (translated) common name for a star with a specified
 	//! Hipparcos catalogue number.

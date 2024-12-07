@@ -1409,12 +1409,24 @@ StelObjectP StarMgr::searchHP(int hp) const
 }
 
 // Search the star by Gaia source_id
-StelObjectP StarMgr::searchGaia(long source_id) const
+StelObjectP StarMgr::searchGaia(int64_t source_id) const
 {
-	qDebug() << "searchGaia is not implemented for source_id: " << source_id;
+	int matched = 0;
+	StelObjectP so;
+	// search each zone in each grid level
+	// TODO: Should only search the zone that ID is in
+	for (const auto* z : gridLevels)
+	{
+		// search every zone in the grid level
+		for (int index = 0; index < (20<<(z->level<<1)); ++index)
+		{
+			so = z->searchGaiaID(index, source_id, matched);
+			if (matched)
+				return so;
+		}
+	}
 	return StelObjectP();
 }
-
 
 StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 {
@@ -1863,6 +1875,24 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			}
 			else
 				break;
+		}
+	}
+
+	// Add exact Gaia DR3 catalogue numbers.
+	static const QRegularExpression gaiaRx("^\\s*(Gaia DR3)\\s*(\\d+)\\s*.*$", QRegularExpression::CaseInsensitiveOption);
+	match=gaiaRx.match(objw);
+	if (match.hasMatch())
+	{
+		bool ok;
+		int64_t gaiaNum = match.captured(2).toLongLong(&ok);
+		if (ok)
+		{
+			StelObjectP s = searchGaia(gaiaNum);
+			if (s && maxNbItem>0)
+			{
+				result << QString("Gaia DR3 %1").arg(gaiaNum);
+				maxNbItem--;
+			}
 		}
 	}
 

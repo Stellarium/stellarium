@@ -96,6 +96,7 @@ public:
 	//! Pure virtual method. See subclass implementation.
 	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
 							  QList<StelObjectP > &result) = 0;
+    virtual StelObjectP searchGaiaID(int index, const int64_t source_id, int& matched) const = 0;
 
 	//! Pure virtual method. See subclass implementation.
 	virtual void draw(StelPainter* sPainter, int index,bool is_inside,
@@ -188,6 +189,7 @@ protected:
 
 	void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
 	                  QList<StelObjectP > &result) override;
+	StelObjectP searchGaiaID(int index, const int64_t source_id, int& matched) const override;
 
 	Star *stars;
 private:

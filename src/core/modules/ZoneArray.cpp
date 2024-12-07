@@ -589,3 +589,16 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 	}
 }
 
+template<class Star>
+StelObjectP SpecialZoneArray<Star>::searchGaiaID(int index, const int64_t source_id, int &matched) const
+{
+	const SpecialZoneData<Star> *const z = getZones()+index;
+	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
+	{
+		if (s->getGaia() == source_id)
+		{
+			matched++;
+			return s->createStelObject(this,z);
+		}
+	}
+}
