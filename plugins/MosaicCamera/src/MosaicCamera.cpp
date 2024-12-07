@@ -60,10 +60,10 @@ StelPluginInfo MosaicCameraStelPluginInterface::getPluginInfo() const
 /*************************************************************************
  Constructor
 *************************************************************************/
-MosaicCamera::MosaicCamera() : ra(0), dec(0), rsp(0)
+MosaicCamera::MosaicCamera()
 {
-	setObjectName("MosaicCamera");
-	configDialog = new MosaicCameraDialog();
+    setObjectName("MosaicCamera");
+    configDialog = new MosaicCameraDialog();
     tcpServer = new MosaicTcpServer();
 }
 
@@ -94,16 +94,41 @@ void MosaicCamera::init()
 {
     Q_INIT_RESOURCE(MosaicCamera);
 
-    qDebug() << "Starting TCP server";
+    qDebug() << "[MosaicCamera] Starting TCP server";
     tcpServer->startServer(5772);
     connect(tcpServer, &MosaicTcpServer::newValuesReceived, this, &MosaicCamera::updateMosaic);
 
-    qDebug() << "Loading camera mosaic";
-    readPolygonSetsFromJson(":/MosaicCamera/RubinMosaic.json");
+    qDebug() << "[MosaicCamera] Loading built-in cameras";
+    loadBuiltInCameras();
 }
 
+void MosaicCamera::loadBuiltInCameras()
+{
+    QStringList cameraNames = {"LSSTCam", "DECam", "HSC", "MegaPrime", "Latiss"};
+    QStringList jsonFiles = {
+        ":/MosaicCamera/RubinMosaic.json",
+        ":/MosaicCamera/DECam.json",
+        ":/MosaicCamera/HSC.json",
+        ":/MosaicCamera/MegaPrime.json",
+        ":/MosaicCamera/Latiss.json"
+    };
 
-void MosaicCamera::readPolygonSetsFromJson(const QString& filename)
+    for (int i = 0; i < cameraNames.size(); ++i)
+    {
+        Camera camera;
+        camera.name = cameraNames[i];
+        camera.ra = 0.0;
+        camera.dec = 0.0;
+        camera.rotation = 0.0;
+        camera.visible = false;
+        cameras.insert(camera.name, camera);
+        readPolygonSetsFromJson(camera.name, jsonFiles[i]);
+    }
+    qDebug() << "[MosaicCamera] Loaded" << cameras.size() << "cameras";
+    qDebug() << "[MosaicCamera] Camera names:" << cameras.keys();
+}
+
+void MosaicCamera::readPolygonSetsFromJson(const QString& cameraName, const QString& filename)
 {
     QVector<PolygonSet> polygonSets;
 
@@ -153,116 +178,172 @@ void MosaicCamera::readPolygonSetsFromJson(const QString& filename)
         polygonSets.append(set);
     }
 
-    polygon_sets = polygonSets;
-}
-
-void MosaicCamera::setRA(double ra)
-{
-    this->ra = ra;
-    if(configDialog->visible()) {
-        configDialog->setRA(ra);
+    if (cameras.contains(cameraName))
+    {
+        cameras[cameraName].polygon_sets = polygonSets;
     }
 }
 
-void MosaicCamera::setDec(double dec)
+void MosaicCamera::setRA(const QString& cameraName, double ra)
 {
-    this->dec = dec;
-    if(configDialog->visible()) {
-        configDialog->setDec(dec);
+    if (cameras.contains(cameraName))
+    {
+        cameras[cameraName].ra = ra;
+        if(configDialog->visible()) {
+            if (configDialog->getCurrentCameraName() == cameraName) {
+                configDialog->setRA(ra);
+            }
+        }
     }
 }
 
-void MosaicCamera::setRSP(double rsp)
+void MosaicCamera::setDec(const QString& cameraName, double dec)
 {
-    this->rsp = rsp;
-    if(configDialog->visible()) {
-        configDialog->setRSP(rsp);
+    if (cameras.contains(cameraName))
+    {
+        cameras[cameraName].dec = dec;
+        if(configDialog->visible()) {
+            if (configDialog->getCurrentCameraName() == cameraName) {
+                configDialog->setDec(dec);
+            }
+        }
     }
 }
 
-void MosaicCamera::updateMosaic(double ra, double dec, double rsp)
+void MosaicCamera::setRotation(const QString& cameraName, double rotation)
 {
-    qDebug() << "Received new values: RA=" << ra << ", Dec=" << dec << ", RSP=" << rsp;
-    setRA(ra);
-    setDec(dec);
-    setRSP(rsp);
+    if (cameras.contains(cameraName))
+    {
+        cameras[cameraName].rotation = rotation;
+        if(configDialog->visible()) {
+            if (configDialog->getCurrentCameraName() == cameraName) {
+                configDialog->setRotation(rotation);
+            }
+        }
+    }
+}
+
+void MosaicCamera::setVisibility(const QString& cameraName, bool visible)
+{
+    if (cameras.contains(cameraName))
+    {
+        cameras[cameraName].visible = visible;
+        if(configDialog->visible()) {
+            if (configDialog->getCurrentCameraName() == cameraName) {
+                configDialog->setVisibility(visible);
+            }
+        }
+    }
+}
+
+double MosaicCamera::getRA(const QString& cameraName) const
+{
+    return cameras.value(cameraName).ra;
+}
+
+double MosaicCamera::getDec(const QString& cameraName) const
+{
+    return cameras.value(cameraName).dec;
+}
+
+double MosaicCamera::getRotation(const QString& cameraName) const
+{
+    return cameras.value(cameraName).rotation;
+}
+
+bool MosaicCamera::getVisibility(const QString& cameraName) const
+{
+    return cameras.value(cameraName).visible;
+}
+
+void MosaicCamera::updateMosaic(const QString& cameraName, double ra, double dec, double rotation)
+{
+    qDebug() << "Received new values for" << cameraName << ": RA=" << ra << ", Dec=" << dec << ", Rotation=" << rotation;
+    setRA(cameraName, ra);
+    setDec(cameraName, dec);
+    setRotation(cameraName, rotation);
 }
 
 void MosaicCamera::draw(StelCore* core)
 {
-	// Input parameters for drawing LSSTCam FoV are:
-	// ra
-	// dec
-	// rotskypos
+    const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+    StelPainter painter(prj);
 
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter painter(prj);
+    Vec3d startPoint, endPoint;
 
+    for (const auto& camera : cameras)
+    {
+        if (!camera.visible)
+            continue;
 
-    double alpha = ra / 57.29577951308232 + 1.5707963267948966;  // ra=0 isn't along x=0?
-    double beta = 1.5707963267948966 - dec / 57.29577951308232;  // polar angle
-    double rot = rsp / 57.29577951308232;  // rotation angle
+        double alpha = camera.ra / 57.29577951308232 + 1.5707963267948966;
+        double beta = 1.5707963267948966 - camera.dec / 57.29577951308232;
+        double rot = camera.rotation / 57.29577951308232;
 
-    double cosBeta = cos(beta);
-    double sinBeta = sin(beta);
+        double cosBeta = cos(beta);
+        double sinBeta = sin(beta);
 
-    double cosAlpha = cos(alpha);
-    double sinAlpha = sin(alpha);
+        double cosAlpha = cos(alpha);
+        double sinAlpha = sin(alpha);
 
-	Vec3d startPoint, endPoint;
+        for (const auto& polygonSet : camera.polygon_sets) {
 
+            // Set color for this polygon set
+            painter.setColor(
+                polygonSet.color.redF(),
+                polygonSet.color.greenF(),
+                polygonSet.color.blueF(),
+                polygonSet.color.alphaF()
+            );
 
-    for (const auto& polygonSet : polygon_sets) {
-        // Set color for this polygon set
-        painter.setColor(
-            polygonSet.color.redF(),
-            polygonSet.color.greenF(),
-            polygonSet.color.blueF(),
-            polygonSet.color.alphaF()
-        );
+            for (const auto& polygon : polygonSet.corners) {
+                // Loop through points in the polygon
+                for (int i = 0; i < polygon.size(); ++i) {
+                    const QPointF& p1 = polygon[i];
+                    const QPointF& p2 = polygon[(i + 1) % polygon.size()];
 
-        for (const auto& polygon : polygonSet.corners) {
-            // Loop through points in the polygon
-            for (int i = 0; i < polygon.size(); ++i) {
-                const QPointF& p1 = polygon[i];
-                const QPointF& p2 = polygon[(i + 1) % polygon.size()];
+                    // Apply camera rotator
+                    double r1x = cos(rot) * p1.x() + sin(rot) * p1.y();
+                    double r1y = -sin(rot) * p1.x() + cos(rot) * p1.y();
+                    double r2x = cos(rot) * p2.x() + sin(rot) * p2.y();
+                    double r2y = -sin(rot) * p2.x() + cos(rot) * p2.y();
 
-                // Apply camera rotator
-                double r1x = cos(rot) * p1.x() + sin(rot) * p1.y();
-                double r1y = -sin(rot) * p1.x() + cos(rot) * p1.y();
-                double r2x = cos(rot) * p2.x() + sin(rot) * p2.y();
-                double r2y = -sin(rot) * p2.x() + cos(rot) * p2.y();
+                    double r1z = 1.0;
+                    double r2z = 1.0;
 
-                double r1z = 1.0;
-                double r2z = 1.0;
+                    double den1 = sqrt(r1x*r1x + r1y*r1y + r1z*r1z);
+                    double den2 = sqrt(r2x*r2x + r2y*r2y + r2z*r2z);
 
-                double den1 = sqrt(r1x*r1x + r1y*r1y + r1z*r1z);
-                double den2 = sqrt(r2x*r2x + r2y*r2y + r2z*r2z);
+                    // Apply declination
+                    double s1x = r1x;
+                    double s1y = r1y * cosBeta - r1z * sinBeta;
+                    double s1z = r1y * sinBeta + r1z * cosBeta;
+                    double s2x = r2x;
+                    double s2y = r2y * cosBeta - r2z * sinBeta;
+                    double s2z = r2y * sinBeta + r2z * cosBeta;
 
-                // Apply declination
-                double s1x = r1x;
-                double s1y = r1y * cosBeta - r1z * sinBeta;
-                double s1z = r1y * sinBeta + r1z * cosBeta;
-                double s2x = r2x;
-                double s2y = r2y * cosBeta - r2z * sinBeta;
-                double s2z = r2y * sinBeta + r2z * cosBeta;
+                    // Apply right ascension
+                    startPoint.set(
+                        (s1x*cosAlpha - s1y*sinAlpha)/den1,
+                        (s1x*sinAlpha + s1y*cosAlpha)/den1,
+                        s1z/den1
+                    );
+                    endPoint.set(
+                        (s2x*cosAlpha - s2y*sinAlpha)/den2,
+                        (s2x*sinAlpha + s2y*cosAlpha)/den2,
+                        s2z/den2
+                    );
 
-                // Apply right ascension
-                startPoint.set(
-                    (s1x*cosAlpha - s1y*sinAlpha)/den1,
-                    (s1x*sinAlpha + s1y*cosAlpha)/den1,
-                    s1z/den1
-                );
-                endPoint.set(
-                    (s2x*cosAlpha - s2y*sinAlpha)/den2,
-                    (s2x*sinAlpha + s2y*cosAlpha)/den2,
-                    s2z/den2
-                );
-
-                painter.drawGreatCircleArc(startPoint, endPoint);
+                    painter.drawGreatCircleArc(startPoint, endPoint);
+                }
             }
         }
     }
+}
+
+QStringList MosaicCamera::getCameraNames() const
+{
+    return cameras.keys();
 }
 
 bool MosaicCamera::configureGui(bool show)

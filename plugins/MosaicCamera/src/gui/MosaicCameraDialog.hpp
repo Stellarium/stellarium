@@ -39,7 +39,9 @@ public:
 	~MosaicCameraDialog() override;
 	void setRA(double ra);
 	void setDec(double dec);
-	void setRSP(double rsp);
+	void setRotation(double rot);
+	void setVisibility(bool visible);
+	QString getCurrentCameraName() const;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -49,13 +51,17 @@ public slots:
 	void retranslate() override;
 	void updateRA();
 	void updateDec();
-	void updateRSP();
+	void updateRotation();
+	void updateVisibility(bool visible);
     void onCameraSelectionChanged();
 
 private:
+	QString currentCameraName;
+
 	MosaicCamera* mc;
 	Ui_mosaicCameraDialog* ui;
 	void setAboutHtml(void);
+	void updateDialogFields();
 };
 
 #endif // MOSAICCAMERADIALOG_HPP

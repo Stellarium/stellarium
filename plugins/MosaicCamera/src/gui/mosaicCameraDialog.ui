@@ -86,14 +86,14 @@
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QLabel" name="RSPLabel">
+          <widget class="QLabel" name="RotationLabel">
            <property name="text">
-            <string>RotSkyPos:</string>
+            <string>Rotation:</string>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="AngleSpinBox" name="RSPSpinBox">
+          <widget class="AngleSpinBox" name="RotationSpinBox">
            <property name="minimum">
             <double>-90.000000000000000</double>
            </property>
@@ -101,6 +101,16 @@
             <double>90.000000000000000</double>
            </property>
           </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="visibleLabel">
+           <property name="text">
+            <string>Visible:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QCheckBox" name="visibleCheckBox"/>
          </item>
         </layout>
        </item>
