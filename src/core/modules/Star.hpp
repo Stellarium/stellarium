@@ -416,7 +416,7 @@ private:
       qint64 gaia_id; // 8 bytes
       quint8 x0[3];   // 3 bytes, RA in 0.1 arcsecond
       quint8 x1[3];   // 3 bytes, DEC in 0.1 arcsecond (offset by +90 degree)
-      qint8  b_v;     // 1 byte, B-V in 0.05 mag
+      quint8 b_v;     // 1 byte, B-V in 0.05 mag
       quint8 vmag;    // 1 bytes, V magnitude in 0.05 mag (offset by -12.8 mag)
    } d;
 
