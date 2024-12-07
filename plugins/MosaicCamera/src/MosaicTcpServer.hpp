@@ -13,7 +13,7 @@ public:
     void startServer(quint16 port);
 
 signals:
-    void newValuesReceived(double ra, double dec, double rot);
+    void newValuesReceived(QString name, double ra, double dec, double rot);
 
 private slots:
     void onNewConnection();

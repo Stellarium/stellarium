@@ -42,34 +42,65 @@ MosaicCameraDialog::~MosaicCameraDialog()
 	delete ui;
 }
 
+QString MosaicCameraDialog::getCurrentCameraName() const
+{
+	return currentCameraName;
+}
+
 void MosaicCameraDialog::updateRA()
 {
-	mc->setRA(ui->RASpinBox->valueDegrees());
+	mc->setRA(currentCameraName, ui->RASpinBox->valueDegrees());
 }
 
 void MosaicCameraDialog::updateDec()
 {
-	mc->setDec(ui->DecSpinBox->valueDegrees());
+	mc->setDec(currentCameraName, ui->DecSpinBox->valueDegrees());
 }
 
-void MosaicCameraDialog::updateRSP()
+void MosaicCameraDialog::updateRotation()
 {
-	mc->setRSP(ui->RSPSpinBox->valueDegrees());
+	mc->setRotation(currentCameraName, ui->RotationSpinBox->valueDegrees());
+}
+
+void MosaicCameraDialog::updateVisibility(bool visible)
+{
+    mc->setVisibility(currentCameraName, visible);
 }
 
 void MosaicCameraDialog::onCameraSelectionChanged()
 {
     if (ui->lsstCamRadioButton->isChecked()) {
-		mc->readPolygonSetsFromJson(":/MosaicCamera/RubinMosaic.json");
+		currentCameraName = "LSSTCam";
     } else if (ui->decamRadioButton->isChecked()) {
-		mc->readPolygonSetsFromJson(":/MosaicCamera/DECam.json");
-    } else if (ui->hscRadioButton->isChecked()) {
-		mc->readPolygonSetsFromJson(":/MosaicCamera/HSC.json");
-    } else if (ui->megaPrimeRadioButton->isChecked()) {
-		mc->readPolygonSetsFromJson(":/MosaicCamera/MegaPrime.json");
-    } else if (ui->latissPrimeRadioButton->isChecked()) {
-		mc->readPolygonSetsFromJson(":/MosaicCamera/Latiss.json");
-    }
+		currentCameraName = "DECam";
+	} else if (ui->hscRadioButton->isChecked()) {
+		currentCameraName = "HSC";
+	} else if (ui->megaPrimeRadioButton->isChecked()) {
+		currentCameraName = "MegaPrime";
+	} else if (ui->latissPrimeRadioButton->isChecked()) {
+		currentCameraName = "LATISS";
+	}
+	updateDialogFields();
+}
+
+void MosaicCameraDialog::updateDialogFields()
+{
+    // Temporarily disconnect the signals to avoid triggering updates while setting values
+    ui->RASpinBox->blockSignals(true);
+    ui->DecSpinBox->blockSignals(true);
+    ui->RotationSpinBox->blockSignals(true);
+    ui->visibleCheckBox->blockSignals(true);
+
+    ui->RASpinBox->setDegrees(mc->getRA(currentCameraName));
+    ui->DecSpinBox->setDegrees(mc->getDec(currentCameraName));
+    ui->RotationSpinBox->setDegrees(mc->getRotation(currentCameraName));
+    ui->visibleCheckBox->setChecked(mc->getVisibility(currentCameraName));
+
+    // Reconnect the signals
+    ui->RASpinBox->blockSignals(false);
+    ui->DecSpinBox->blockSignals(false);
+    ui->RotationSpinBox->blockSignals(false);
+    ui->visibleCheckBox->blockSignals(false);
 }
 
 void MosaicCameraDialog::setRA(double ra)
@@ -82,9 +113,14 @@ void MosaicCameraDialog::setDec(double dec)
 	ui->DecSpinBox->setDegrees(dec);
 }
 
-void MosaicCameraDialog::setRSP(double rsp)
+void MosaicCameraDialog::setRotation(double rot)
 {
-	ui->RSPSpinBox->setDegrees(rsp);
+	ui->RotationSpinBox->setDegrees(rot);
+}
+
+void MosaicCameraDialog::setVisibility(bool visible)
+{
+	ui->visibleCheckBox->setChecked(visible);
 }
 
 void MosaicCameraDialog::retranslate()
@@ -103,6 +139,7 @@ void MosaicCameraDialog::createDialogContent()
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);
 	ui->lsstCamRadioButton->setChecked(true);
+	currentCameraName = "LSSTCam";
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		this, SLOT(retranslate()));
 
@@ -125,14 +162,15 @@ void MosaicCameraDialog::createDialogContent()
 
 	// Location tab
 	ui->RASpinBox->setDisplayFormat(AngleSpinBox::HMSSymbols);
-	ui->RSPSpinBox->setDisplayFormat(AngleSpinBox::DecimalDeg);
+	ui->RotationSpinBox->setDisplayFormat(AngleSpinBox::DecimalDeg);
 	ui->DecSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->DecSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 	ui->DecSpinBox->setMinimum(-90.0, true);
 	ui->DecSpinBox->setMaximum(90.0, true);
 	connect(ui->RASpinBox, SIGNAL(valueChanged()), this, SLOT(updateRA()));
 	connect(ui->DecSpinBox, SIGNAL(valueChanged()), this, SLOT(updateDec()));
-	connect(ui->RSPSpinBox, SIGNAL(valueChanged()), this, SLOT(updateRSP()));
+	connect(ui->RotationSpinBox, SIGNAL(valueChanged()), this, SLOT(updateRotation()));
+	connect(ui->visibleCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateVisibility(bool)));
 	connect(ui->lsstCamRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));
 	connect(ui->decamRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));
 	connect(ui->hscRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));

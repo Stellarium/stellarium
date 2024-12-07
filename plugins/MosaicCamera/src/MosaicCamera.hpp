@@ -34,6 +34,15 @@ struct PolygonSet {
     QColor color;
 };
 
+struct Camera {
+    QString name;
+	double ra;
+	double dec;
+	double rotation;
+    bool visible;
+    QVector<PolygonSet> polygon_sets;
+};
+
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
 class MosaicCamera : public StelModule
 {
@@ -51,19 +60,26 @@ public:
 
 	bool configureGui(bool show=true) override;
 
-	void setRA(double ra);
-	void setDec(double dec);
-	void setRSP(double rsp);
-	void readPolygonSetsFromJson(const QString& filename);
+    void setRA(const QString& cameraName, double ra);
+    void setDec(const QString& cameraName, double dec);
+    void setRotation(const QString& cameraName, double rotation);
+    void setVisibility(const QString& cameraName, bool visible);
+
+    double getRA(const QString& cameraName) const;
+    double getDec(const QString& cameraName) const;
+    double getRotation(const QString& cameraName) const;
+    bool getVisibility(const QString& cameraName) const;
+
+    void loadBuiltInCameras();
+    QStringList getCameraNames() const;
+    void readPolygonSetsFromJson(const QString& cameraName, const QString& filename);
 
 public slots:
-    void updateMosaic(double ra, double dec, double rsp);  // Slot to update mosaic with received values
+	void updateMosaic(const QString& cameraName, double ra, double dec, double rotation);
 
 private:
-	double ra;
-	double dec;
-	double rsp;
-	QVector<PolygonSet> polygon_sets;
+    QHash<QString, Camera> cameras;
+	QString currentCamera;
 
 	// GUI
 	MosaicCameraDialog* configDialog;
