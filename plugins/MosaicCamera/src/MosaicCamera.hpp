@@ -79,6 +79,7 @@ public slots:
 
 private:
     QHash<QString, Camera> cameras;
+	QStringList cameraOrder;
 	QString currentCamera;
 
 	// GUI
