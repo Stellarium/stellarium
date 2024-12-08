@@ -67,22 +67,6 @@ void MosaicCameraDialog::updateVisibility(bool visible)
     mc->setVisibility(currentCameraName, visible);
 }
 
-void MosaicCameraDialog::onCameraSelectionChanged()
-{
-    if (ui->lsstCamRadioButton->isChecked()) {
-		currentCameraName = "LSSTCam";
-    } else if (ui->decamRadioButton->isChecked()) {
-		currentCameraName = "DECam";
-	} else if (ui->hscRadioButton->isChecked()) {
-		currentCameraName = "HSC";
-	} else if (ui->megaPrimeRadioButton->isChecked()) {
-		currentCameraName = "MegaPrime";
-	} else if (ui->latissPrimeRadioButton->isChecked()) {
-		currentCameraName = "LATISS";
-	}
-	updateDialogFields();
-}
-
 void MosaicCameraDialog::updateDialogFields()
 {
     // Temporarily disconnect the signals to avoid triggering updates while setting values
@@ -132,14 +116,28 @@ void MosaicCameraDialog::retranslate()
 	}
 }
 
+void MosaicCameraDialog::onCameraSelectionChanged(const QString& cameraName)
+{
+    currentCameraName = cameraName;
+    updateDialogFields();
+}
+
 // Initialize the dialog widgets and connect the signals/slots
 void MosaicCameraDialog::createDialogContent()
 {
 	mc = GETSTELMODULE(MosaicCamera);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);
-	ui->lsstCamRadioButton->setChecked(true);
-	currentCameraName = "LSSTCam";
+
+	QStringList cameraNames = mc->getCameraNames();
+    ui->cameraListWidget->addItems(cameraNames);
+    if (!cameraNames.isEmpty())
+    {
+        ui->cameraListWidget->setCurrentRow(0);
+		currentCameraName = cameraNames[0];
+        updateDialogFields();
+    }
+
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		this, SLOT(retranslate()));
 
@@ -167,15 +165,12 @@ void MosaicCameraDialog::createDialogContent()
 	ui->DecSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 	ui->DecSpinBox->setMinimum(-90.0, true);
 	ui->DecSpinBox->setMaximum(90.0, true);
+    connect(ui->cameraListWidget, SIGNAL(currentTextChanged(const QString&)),
+            this, SLOT(onCameraSelectionChanged(const QString&)));
 	connect(ui->RASpinBox, SIGNAL(valueChanged()), this, SLOT(updateRA()));
 	connect(ui->DecSpinBox, SIGNAL(valueChanged()), this, SLOT(updateDec()));
 	connect(ui->RotationSpinBox, SIGNAL(valueChanged()), this, SLOT(updateRotation()));
 	connect(ui->visibleCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateVisibility(bool)));
-	connect(ui->lsstCamRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));
-	connect(ui->decamRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));
-	connect(ui->hscRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));
-	connect(ui->megaPrimeRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));
-	connect(ui->latissPrimeRadioButton, SIGNAL(clicked()), this, SLOT(onCameraSelectionChanged()));
 }
 
 void MosaicCameraDialog::setAboutHtml(void)

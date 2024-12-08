@@ -123,6 +123,7 @@ void MosaicCamera::loadBuiltInCameras()
         camera.visible = false;
         cameras.insert(camera.name, camera);
         readPolygonSetsFromJson(camera.name, jsonFiles[i]);
+        cameraOrder.append(camera.name);
     }
     qDebug() << "[MosaicCamera] Loaded" << cameras.size() << "cameras";
     qDebug() << "[MosaicCamera] Camera names:" << cameras.keys();
@@ -343,7 +344,7 @@ void MosaicCamera::draw(StelCore* core)
 
 QStringList MosaicCamera::getCameraNames() const
 {
-    return cameras.keys();
+    return cameraOrder;
 }
 
 bool MosaicCamera::configureGui(bool show)
