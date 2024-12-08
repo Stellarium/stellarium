@@ -730,7 +730,7 @@
 	      dataset for July 2004. Public domain.
 	      https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation
 	4.114 Images of M80
-	      from NOIRLab/NSF/AURA
+	      from NOIRLab/NSF/AURA, remix: Sun Shuwei 
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
 ```
