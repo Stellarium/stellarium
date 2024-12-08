@@ -53,7 +53,7 @@ public slots:
 	void updateDec();
 	void updateRotation();
 	void updateVisibility(bool visible);
-    void onCameraSelectionChanged();
+    void onCameraSelectionChanged(const QString& cameraName);
 
 private:
 	QString currentCameraName;
