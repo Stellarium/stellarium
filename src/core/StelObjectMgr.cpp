@@ -525,8 +525,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 		const double dy = y - win.v[1];
 		prj->unProject(x+dx, y+dy, v);
 
-		Vec3d v2000(v);
-		return cleverFind(core, v2000);
+		return cleverFind(core, v);
 	}
 	return StelObjectP();
 }

@@ -44,6 +44,7 @@
 #include "ConstellationMgr.hpp"
 #include "Planet.hpp"
 #include "StelUtils.hpp"
+#include "StelHealpix.hpp"
 
 #include <QTextStream>
 #include <QFile>
@@ -1385,19 +1386,29 @@ StelObjectP StarMgr::searchHP(int hp) const
 // Search the star by Gaia source_id
 StelObjectP StarMgr::searchGaia(int64_t source_id) const
 {
+	int maxSearchLevel = getMaxSearchLevel();
 	int matched = 0;
+	int index = 0;
+	// get the level 12 HEALPix index of the source
+	int lv12_pix = source_id / 34359738368;
+	Vec3d v;
 	StelObjectP so;
-	// search each zone in each grid level
-	// TODO: Should only search the zone that ID is in
+	healpix_pix2vec(pow(2, 12), lv12_pix, v.v);  // search which pixel the source is in and turn to coordinates
+	Vec3f vf = v.toVec3f();
+
 	for (const auto* z : gridLevels)
 	{
-		// search every zone in the grid level
-		for (int index = 0; index < (20<<(z->level<<1)); ++index)
-		{
-			so = z->searchGaiaID(index, source_id, matched);
-			if (matched)
-				return so;
-		}
+		// search the zone where the source is in
+		index = StelApp::getInstance().getCore()->getGeodesicGrid(maxSearchLevel)->getZoneNumberForPoint(vf, z->level);
+		qDebug() << "index=" << index;
+		so = z->searchGaiaID(index, source_id, matched);
+		if (matched)
+			return so;
+		
+		// then search the global zone 
+		so = z->searchGaiaID((20<<(z->level<<1)), source_id, matched);
+		if (matched)
+			return so;
 	}
 	return StelObjectP();
 }
