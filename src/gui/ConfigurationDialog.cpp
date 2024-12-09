@@ -630,9 +630,6 @@ void ConfigurationDialog::setDefaultSelectedInfo()
 
 void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 {
-
-//	if (sender())
-//		qDebug() << sender()->objectName();
 	// As this signal will be called when a checkbox is toggled,
 	// change the general mode to Custom.
 	if (!ui->customSelectedInfoRadio->isChecked())
