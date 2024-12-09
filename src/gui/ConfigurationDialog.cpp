@@ -603,34 +603,44 @@ void ConfigurationDialog::updateSelectedInfoGui()
 void ConfigurationDialog::setNoSelectedInfo()
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::None));
+	StelApp::immediateSave("gui/selected_object_info", "none");
 	updateSelectedInfoCheckBoxes();
 }
 
 void ConfigurationDialog::setAllSelectedInfo()
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
+	StelApp::immediateSave("gui/selected_object_info", "all");
 	updateSelectedInfoCheckBoxes();
 }
 
 void ConfigurationDialog::setBriefSelectedInfo()
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
+	StelApp::immediateSave("gui/selected_object_info", "short");
 	updateSelectedInfoCheckBoxes();
 }
 
 void ConfigurationDialog::setDefaultSelectedInfo()
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::DefaultInfo));
+	StelApp::immediateSave("gui/selected_object_info", "default");
 	updateSelectedInfoCheckBoxes();
 }
 
 void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 {
+
+//	if (sender())
+//		qDebug() << sender()->objectName();
 	// As this signal will be called when a checkbox is toggled,
 	// change the general mode to Custom.
 	if (!ui->customSelectedInfoRadio->isChecked())
+	{
 		ui->customSelectedInfoRadio->setChecked(true);
-	
+		StelApp::immediateSave("gui/selected_object_info", "custom");
+	}
+
 	StelObject::InfoStringGroup flags(StelObject::None);
 
 	if (ui->checkBoxName->isChecked())
