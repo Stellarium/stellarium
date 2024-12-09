@@ -55,6 +55,22 @@
 #include <QSettings>
 #include <QGuiApplication>
 
+void brightenImage(QImage &img, float factor)
+{
+	for (int y=0; y<img.height(); y++)
+		for (int x=0; x<img.width(); x++)
+		{
+			QColor col=img.pixelColor(x, y);
+			float h, s, v, a;
+			col.getHsvF(&h, &s, &v, &a);
+			v*=factor; // increase brightness.
+			v=qBound(0.f, v, 1.f);
+			col.setHsvF(h, s, v, a);
+			img.setPixelColor(x, y, col);
+		}
+}
+
+
 void StelButton::initCtor(const QPixmap& apixOn,
 						  const QPixmap& apixOff,
 						  const QPixmap& apixNoChange,
@@ -64,10 +80,20 @@ void StelButton::initCtor(const QPixmap& apixOn,
 						  bool noBackground,
 						  bool isTristate)
 {
-	pixOn = apixOn;
-	pixOff = apixOff;
-	pixHover = apixHover;
-	pixNoChange = apixNoChange;
+	// Allow a much-wanted brightness tweak, at least manually configured.
+	const float brightenFactor=qBound(1.f, StelApp::getInstance().getSettings()->value("gui/pixmaps_brightness", 1.0).toFloat(), 1.8f);
+	QImage pixOnImg=apixOn.toImage();
+	QImage pixOffImg=apixOff.toImage();
+	QImage pixHoverImg=apixHover.toImage();
+	QImage pixNoChangeImg=apixNoChange.toImage();
+	brightenImage(pixOnImg, brightenFactor);
+	brightenImage(pixOffImg, brightenFactor);
+	brightenImage(pixHoverImg, brightenFactor);
+	brightenImage(pixNoChangeImg, brightenFactor);
+	pixOn = QPixmap::fromImage(pixOnImg);
+	pixOff = QPixmap::fromImage(pixOffImg);
+	pixHover = QPixmap::fromImage(pixHoverImg);
+	pixNoChange = QPixmap::fromImage(pixNoChangeImg);
 
 	if(!pixmapsScale)
 	{
@@ -1067,8 +1093,8 @@ void BottomStelBar::enableTopoCentricUpdate(bool enable)
 
 StelBarsFrame::StelBarsFrame(QGraphicsItem* parent) : QGraphicsPathItem(parent), roundSize(6)
 {
-	setBrush(QBrush(QColor::fromRgbF(0.22, 0.22, 0.23, 0.2)));
-	QPen aPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
+	setBrush(QBrush(QColor::fromRgbF(0.22, 0.22, 0.23, 0.2))); // background color
+	QPen aPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));              // perimeter line color
 	// aPen.setWidthF(1.); // 1=default!
 	setPen(aPen);
 }
@@ -1094,7 +1120,7 @@ void StelBarsFrame::updatePath(BottomStelBar* bottom, LeftStelBar* left)
 
 void StelBarsFrame::setBackgroundOpacity(double opacity)
 {
-	setBrush(QBrush(QColor::fromRgbF(0.22, 0.22, 0.23, opacity)));
+	setBrush(QBrush(QColor::fromRgbF(0.22, 0.22, 0.23, opacity))); // repeated background color and new opacity
 }
 
 StelProgressBarMgr::StelProgressBarMgr(QGraphicsItem* parent):
