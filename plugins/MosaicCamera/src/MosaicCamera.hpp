@@ -19,10 +19,12 @@
 #ifndef MOSAICCAMERA_HPP
 #define MOSAICCAMERA_HPP
 
-#include "StelModule.hpp"
 #include "MosaicTcpServer.hpp"
+#include "StelModule.hpp"
+#include "StelPluginInterface.hpp"
 #include <QColor>
 #include <QVector>
+#include <QObject>
 #include <QPointF>
 #include <QString>
 
@@ -43,7 +45,6 @@ struct Camera {
     QVector<PolygonSet> polygon_sets;
 };
 
-//! This is an example of a plug-in which can be dynamically loaded into stellarium
 class MosaicCamera : public StelModule
 {
 	Q_OBJECT
@@ -52,8 +53,6 @@ public:
 	MosaicCamera();
 	~MosaicCamera() override;
 
-	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in the StelModule class
 	void init() override;
 	void draw(StelCore* core) override;
 	double getCallOrder(StelModuleActionName actionName) const override;
@@ -70,7 +69,6 @@ public:
     double getRotation(const QString& cameraName) const;
     bool getVisibility(const QString& cameraName) const;
 
-    void loadBuiltInCameras();
     QStringList getCameraNames() const;
     void readPolygonSetsFromJson(const QString& cameraName, const QString& filename);
 
@@ -81,17 +79,17 @@ private:
     QHash<QString, Camera> cameras;
 	QStringList cameraOrder;
 	QString currentCamera;
+	QString userDirectory;
 
-	// GUI
+    void loadBuiltInCameras();
+	void loadCameraOrder();
+	void initializeUserData();
+	void copyResourcesToUserDirectory();
+
 	MosaicCameraDialog* configDialog;
 	MosaicTcpServer* tcpServer;
 };
 
-
-#include <QObject>
-#include "StelPluginInterface.hpp"
-
-//! This class is used by Qt to manage a plug-in interface
 class MosaicCameraStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
