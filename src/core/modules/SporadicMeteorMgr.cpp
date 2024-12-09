@@ -145,6 +145,7 @@ void SporadicMeteorMgr::setZHR(int zhr)
 	if(zhr!=m_zhr)
 	{
 		m_zhr = zhr;
+		StelApp::immediateSave("astro/meteor_zhr", zhr);
 		emit zhrChanged(zhr);
 	}
 }

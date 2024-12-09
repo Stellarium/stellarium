@@ -97,7 +97,7 @@ public slots:
 	double getIntensity() const {return intensity;}
 	//! Set Zodiacal Light intensity. Default value: 1.
 	//! @param aintensity intensity of Zodiacal Light
-	void setIntensity(double aintensity) {if(!qFuzzyCompare(aintensity, intensity)){intensity = aintensity; emit intensityChanged(intensity);}}
+	void setIntensity(double aintensity);
 	
 	//! Get the color used for rendering the Zodiacal Light. It is modulated by intensity, light pollution and atmospheric extinction.
 	Vec3f getColor() const {return color;}

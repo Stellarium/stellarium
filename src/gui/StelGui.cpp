@@ -1393,6 +1393,7 @@ void StelGui::setAutoHideHorizontalButtonBar(bool b)
 	if (skyGui->autoHideBottomBar!=b)
 	{
 		skyGui->autoHideBottomBar=b;
+		StelApp::immediateSave("gui/auto_hide_horizontal_toolbar", b);
 		emit autoHideHorizontalButtonBarChanged(b);
 	}
 }
@@ -1407,6 +1408,7 @@ void StelGui::setAutoHideVerticalButtonBar(bool b)
 	if (skyGui->autoHideLeftBar!=b)
 	{
 		skyGui->autoHideLeftBar=b;
+		StelApp::immediateSave("gui/auto_hide_vertical_toolbar", b);
 		emit autoHideVerticalButtonBarChanged(b);
 	}
 }

@@ -43,7 +43,6 @@
 #include "ConstellationMgr.hpp"
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
-#include "Planet.hpp"
 #ifdef ENABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
@@ -189,7 +188,9 @@ void ConfigurationDialog::createDialogContent()
 	cb->model()->sort(0);
 	updateCurrentSkyLanguage();
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentSkyLanguage()));
-	connect(cb, SIGNAL(currentIndexChanged(const int)), this, SLOT(selectSkyLanguage(const int)));
+	connect(cb, SIGNAL(currentIndexChanged(const int)), this, SLOT(selectSkyLanguage(const int)));	
+	// Language properties are potentially delicate. Accidentally immediate storing may cause obvious problems.
+	connect(ui->languageSaveToolButton, SIGNAL(clicked()), this, SLOT(storeLanguageSettings()));
 	#else
 	ui->groupBox_LanguageSettings->hide();
 	#endif
@@ -306,7 +307,6 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	connectBoolProperty(ui->gravityLabelCheckbox, "StelCore.flagGravityLabels");
 
-	connectBoolProperty(ui->selectSingleConstellationButton, "ConstellationMgr.isolateSelected");
 	ui->diskViewportCheckbox->setChecked(proj->getMaskType() == StelProjector::MaskDisk);
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	connectBoolProperty(ui->autoZoomResetsDirectionCheckbox, "StelMovementMgr.flagAutoZoomOutResetsDirection");
@@ -367,6 +367,8 @@ void ConfigurationDialog::createDialogContent()
 		ui->fontWritingSystemComboBox->hide();
 		ui->fontComboBox->hide();
 	}
+	// Font properties are potentially delicate. Immediate storing may cause problems with other script systems etc.
+	connect(ui->fontSaveToolButton, SIGNAL(clicked()), this, SLOT(storeFontSettings()));
 
 	// Dithering
 	populateDitherList();
@@ -375,6 +377,19 @@ void ConfigurationDialog::createDialogContent()
 	// General Option Save
 	connect(ui->saveViewDirAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewDirSettings()));
 	connect(ui->saveSettingsAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveAllSettings()));
+	connectBoolProperty(ui->immediateSaveCheckBox, "StelApp.flagImmediateSave");
+	// Disable "save settings" button in case of immediate-store mode
+	if (StelApp::getInstance().getFlagImmediateSave())
+		ui->saveSettingsAsDefaultPushButton->setDisabled(true);
+	connect(ui->saveSettingsAsDefaultPushButton, &QPushButton::clicked, this, [=](){
+		if (ui->immediateSaveCheckBox->isChecked())
+			ui->saveSettingsAsDefaultPushButton->setDisabled(true);
+	});
+	connect(ui->immediateSaveCheckBox, &QCheckBox::clicked, this, [=](){
+		if (!ui->immediateSaveCheckBox->isChecked())
+			ui->saveSettingsAsDefaultPushButton->setDisabled(false);
+	});
+
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(setDefaultViewOptions()));
 
 	// Screenshots
@@ -523,6 +538,7 @@ void ConfigurationDialog::setButtonBarDTFormat()
 		gui->getButtonBar()->setFlagTimeJd(true);
 	else
 		gui->getButtonBar()->setFlagTimeJd(false);
+	StelApp::immediateSave("gui/flag_time_jd", ui->jdRadioButton->isChecked());
 }
 
 void ConfigurationDialog::showShortcutsWindow()
@@ -538,6 +554,7 @@ void ConfigurationDialog::setDiskViewport(bool b)
 		StelApp::getInstance().getCore()->setMaskType(StelProjector::MaskDisk);
 	else
 		StelApp::getInstance().getCore()->setMaskType(StelProjector::MaskNone);
+	StelApp::immediateSave("projection/viewport", StelProjector::maskTypeToString(StelApp::getInstance().getCore()->getCurrentStelProjectorParams().maskType));
 }
 
 void ConfigurationDialog::setSphericMirror(bool b)
@@ -849,7 +866,7 @@ void ConfigurationDialog::saveAllSettings()
 	const StelProjectorP proj = core->getProjection(StelCore::FrameJ2000);
 	Q_ASSERT(proj);
 
-	conf->setValue("gui/screen_font_size",					propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
+	conf->setValue("gui/immediate_save_details",                    StelApp::getInstance().getFlagImmediateSave());
 	conf->setValue("gui/flag_enable_kinetic_scrolling",		propMgr->getStelPropertyValue("StelGui.flagUseKineticScrolling").toBool());
 
 	// view dialog / sky tab settings
@@ -909,7 +926,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_planets_native_names",		propMgr->getStelPropertyValue("SolarSystem.flagNativePlanetNames").toBool());
 	conf->setValue("astro/flag_use_obj_models",			propMgr->getStelPropertyValue("SolarSystem.flagUseObjModels").toBool());
 	conf->setValue("astro/flag_show_obj_self_shadows",		propMgr->getStelPropertyValue("SolarSystem.flagShowObjSelfShadows").toBool());
-	conf->setValue("astro/apparent_magnitude_algorithm",		Planet::getApparentMagnitudeAlgorithmString());
+	conf->setValue("astro/apparent_magnitude_algorithm",		propMgr->getStelPropertyValue("SolarSystem.apparentMagnitudeAlgorithmOnEarth").toString());
 	conf->setValue("astro/flag_planets_nomenclature",		propMgr->getStelPropertyValue("NomenclatureMgr.flagShowNomenclature").toBool());
 	conf->setValue("astro/flag_planets_nomenclature_outline_craters",propMgr->getStelPropertyValue("NomenclatureMgr.flagOutlineCraters").toBool());
 	conf->setValue("astro/flag_hide_local_nomenclature",		propMgr->getStelPropertyValue("NomenclatureMgr.flagHideLocalNomenclature").toBool());
@@ -1015,6 +1032,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_constellation_boundaries",	propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_art",	propMgr->getStelPropertyValue("ConstellationMgr.artDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_isolate_selected",	propMgr->getStelPropertyValue("ConstellationMgr.isolateSelected").toBool());
+	conf->setValue("viewing/flag_asterism_isolate_selected",	propMgr->getStelPropertyValue("AsterismMgr.isolateAsterismSelected").toBool());
 	conf->setValue("viewing/flag_landscape_autoselection",	propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeAutoSelection").toBool());
 	conf->setValue("viewing/flag_light_pollution_database",	propMgr->getStelPropertyValue("LandscapeMgr.flagUseLightPollutionFromDatabase").toBool());
 	conf->setValue("viewing/flag_environment_auto_enable",	propMgr->getStelPropertyValue("LandscapeMgr.flagEnvironmentAutoEnabling").toBool());
@@ -1116,10 +1134,11 @@ void ConfigurationDialog::saveAllSettings()
 	core->setDefaultLocationID(core->getCurrentLocation().getID());
 
 	// configuration dialog / main tab
-	QString langName = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-	conf->setValue("localization/app_locale", StelTranslator::nativeNameToIso639_1Code(langName));
-	langName = StelApp::getInstance().getLocaleMgr().getSkyLanguage();
-	conf->setValue("localization/sky_locale", StelTranslator::nativeNameToIso639_1Code(langName));
+	//QString langName = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	//conf->setValue("localization/app_locale", StelTranslator::nativeNameToIso639_1Code(langName));
+	//langName = StelApp::getInstance().getLocaleMgr().getSkyLanguage();
+	//conf->setValue("localization/sky_locale", StelTranslator::nativeNameToIso639_1Code(langName));
+	storeLanguageSettings();
 
 	// configuration dialog / selected object info tab
 	const StelObject::InfoStringGroup& flags = gui->getInfoTextFilters();
@@ -1168,27 +1187,30 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("navigation/flag_enable_mouse_navigation",		mvmgr->getFlagEnableMouseNavigation());
 	conf->setValue("navigation/flag_enable_mouse_zooming",		mvmgr->getFlagEnableMouseZooming());
 	conf->setValue("navigation/flag_enable_move_keys",			mvmgr->getFlagEnableMoveKeys());
+
+	// configuration dialog / time tab
 	conf->setValue("navigation/startup_time_mode",				core->getStartupTimeMode());
 	conf->setValue("navigation/startup_time_stop",				core->getStartupTimeStop());
 	conf->setValue("navigation/today_time",						core->getInitTodayTime());
 	conf->setValue("navigation/preset_sky_time",					core->getPresetSkyTime());
 	conf->setValue("navigation/time_correction_algorithm",			core->getCurrentDeltaTAlgorithmKey());
+	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
+	conf->setValue("localization/time_display_format",				localeManager.getTimeFormatStr());
+	conf->setValue("localization/date_display_format",				localeManager.getDateFormatStr());
+
+
 	if (mvmgr->getMountMode() == StelMovementMgr::MountAltAzimuthal)
 		conf->setValue("navigation/viewing_mode", "horizon");
 	else
 		conf->setValue("navigation/viewing_mode", "equator");
-
-	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
-	conf->setValue("localization/time_display_format",				localeManager.getTimeFormatStr());
-	conf->setValue("localization/date_display_format",				localeManager.getDateFormatStr());
 
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons",					propMgr->getStelPropertyValue("StelGui.flagShowFlipButtons").toBool());
 	conf->setValue("video/viewport_effect",						StelApp::getInstance().getViewportEffect());
 
 	conf->setValue("projection/viewport",							StelProjector::maskTypeToString(proj->getMaskType()));
-	conf->setValue("projection/viewport_center_offset_x",			core->getCurrentStelProjectorParams().viewportCenterOffset[0]);
-	conf->setValue("projection/viewport_center_offset_y",			core->getCurrentStelProjectorParams().viewportCenterOffset[1]);
+	conf->setValue("projection/viewport_center_offset_x",			core->getCurrentStelProjectorParams().viewportCenterOffset[0]*100.);
+	conf->setValue("projection/viewport_center_offset_y",			core->getCurrentStelProjectorParams().viewportCenterOffset[1]*100.);
 	conf->setValue("projection/flip_horz",							core->getCurrentStelProjectorParams().flipHorz);
 	conf->setValue("projection/flip_vert",							core->getCurrentStelProjectorParams().flipVert);
 	conf->setValue("navigation/max_fov",						mvmgr->getUserMaxFov());
@@ -1198,9 +1220,10 @@ void ConfigurationDialog::saveAllSettings()
 
 	conf->setValue("gui/flag_mouse_cursor_timeout",				propMgr->getStelPropertyValue("MainView.flagCursorTimeout").toBool());
 	conf->setValue("gui/mouse_cursor_timeout",					propMgr->getStelPropertyValue("MainView.cursorTimeout").toFloat());
-	conf->setValue("gui/base_font_name",						QGuiApplication::font().family());
-	conf->setValue("gui/screen_font_size",						propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
-	conf->setValue("gui/gui_font_size",							propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
+	//conf->setValue("gui/base_font_name",						QGuiApplication::font().family());
+	//conf->setValue("gui/screen_font_size",						propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
+	//conf->setValue("gui/gui_font_size",							propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
+	storeFontSettings();
 
 	conf->setValue("video/minimum_fps",						propMgr->getStelPropertyValue("MainView.minFps").toInt());
 	conf->setValue("video/maximum_fps",						propMgr->getStelPropertyValue("MainView.maxFps").toInt());
@@ -1834,6 +1857,11 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxSiderealTime->setChecked(flags & StelObject::SiderealTime);
 	ui->checkBoxRTSTime->setChecked(flags & StelObject::RTSTime);
 	ui->checkBoxSolarLunarPosition->setChecked(flags & StelObject::SolarLunarPosition);
+
+	if (StelApp::getInstance().getFlagImmediateSave())
+	{
+		saveCustomSelectedInfo();
+	}
 }
 
 void ConfigurationDialog::populateTooltips()
@@ -2006,6 +2034,7 @@ void ConfigurationDialog::setDateFormat()
 	if (selectedFormat == localeManager.getDateFormatStr())
 		return;
 
+	StelApp::immediateSave("localization/date_display_format", selectedFormat);
 	localeManager.setDateFormatStr(selectedFormat);	
 }
 
@@ -2040,7 +2069,8 @@ void ConfigurationDialog::setTimeFormat()
 	if (selectedFormat == localeManager.getTimeFormatStr())
 		return;
 
-	localeManager.setTimeFormatStr(selectedFormat);	
+	StelApp::immediateSave("localization/time_display_format", selectedFormat);
+	localeManager.setTimeFormatStr(selectedFormat);
 }
 
 void ConfigurationDialog::populateDitherList()
@@ -2123,4 +2153,30 @@ void ConfigurationDialog::populateScreenshotFileformatsCombo()
 			combo->addItem(QString(format));
 	}
 	combo->setCurrentText(StelApp::getInstance().getStelPropertyManager()->getStelPropertyValue("MainView.screenShotFormat").toString()); // maybe not required.
+}
+
+void ConfigurationDialog::storeLanguageSettings()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+	Q_ASSERT(propMgr);
+
+	QString langName = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	conf->setValue("localization/app_locale", StelTranslator::nativeNameToIso639_1Code(langName));
+	langName = StelApp::getInstance().getLocaleMgr().getSkyLanguage();
+	conf->setValue("localization/sky_locale", StelTranslator::nativeNameToIso639_1Code(langName));
+}
+
+void ConfigurationDialog::storeFontSettings()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+	Q_ASSERT(propMgr);
+
+	conf->setValue("gui/base_font_name",	QGuiApplication::font().family());
+	conf->setValue("gui/screen_font_size",	propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
+	conf->setValue("gui/gui_font_size",	propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
+
 }

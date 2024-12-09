@@ -1687,6 +1687,7 @@ void LandscapeMgr::setFlagAtmosphere(const bool displayed)
 	if (atmosphere->getFlagShow() != displayed) {
 		atmosphere->setFlagShow(displayed);
 		StelApp::getInstance().getCore()->getSkyDrawer()->setFlagHasAtmosphere(displayed);
+		StelApp::immediateSave("landscape/flag_atmosphere", displayed);
 		emit atmosphereDisplayedChanged(displayed);
 		//if (StelApp::getInstance().getSettings()->value("landscape/flag_fog", true).toBool())
 		//	setFlagFog(displayed); // sync of visibility of fog because this is atmospheric phenomena

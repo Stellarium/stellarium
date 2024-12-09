@@ -175,6 +175,7 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->starScaleRadiusDoubleSpinBox,"StelSkyDrawer.absoluteStarScale");
 	connectDoubleProperty(ui->starRelativeScaleDoubleSpinBox, "StelSkyDrawer.relativeStarScale");
 	connectBoolProperty(ui->starTwinkleCheckBox, "StelSkyDrawer.flagStarTwinkle");
+	connectBoolProperty(ui->starTwinkleWithoutAtmosphereCheckBox, "StelSkyDrawer.flagForcedTwinkle");
 	connectDoubleProperty(ui->starTwinkleAmountDoubleSpinBox, "StelSkyDrawer.twinkleAmount");
 	connectBoolProperty(ui->starLimitMagnitudeCheckBox,"StelSkyDrawer.flagStarMagnitudeLimit");
 	connectDoubleProperty(ui->starLimitMagnitudeDoubleSpinBox, "StelSkyDrawer.customStarMagLimit");
@@ -545,6 +546,9 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showAsterismLabelsCheckBox,      "actionShow_Asterism_Labels");
 	connectCheckBox(ui->showRayHelpersCheckBox,          "actionShow_Ray_Helpers");
 	connectIntProperty(ui->rayHelperThicknessSpinBox,    "AsterismMgr.rayHelperThickness");
+
+	connectBoolProperty(ui->selectSingleConstellationCheckBox, "ConstellationMgr.isolateSelected");
+	connectBoolProperty(ui->constellationPickCheckBox, "ConstellationMgr.flagConstellationPick");
 
 	ui->colorAsterismLabels->setup("AsterismMgr.namesColor",      "color/asterism_names_color");
 	ui->colorAsterismLines ->setup("AsterismMgr.linesColor",      "color/asterism_lines_color");
@@ -1235,7 +1239,7 @@ void ViewDialog::updateDefaultSkyCulture()
 	ui->rayHelperThicknessSpinBox->setEnabled(b);
 	ui->colorRayHelpers->setEnabled(b);
 	ui->asterismsFontSizeSpinBox->setEnabled(b);
-	ui->labelAsterismsFontSize->setEnabled(b);
+	ui->constellationPickCheckBox->setEnabled(b);
 }
 
 void ViewDialog::updateDefaultLandscape()
@@ -1279,8 +1283,9 @@ void ViewDialog::populatePlanetMagnitudeAlgorithmsList()
 
 void ViewDialog::setPlanetMagnitudeAlgorithm(int algorithmID)
 {
-	Planet::ApparentMagnitudeAlgorithm currentAlgorithm = static_cast<Planet::ApparentMagnitudeAlgorithm>(ui->planetMagnitudeAlgorithmComboBox->itemData(algorithmID).toInt());
-	Planet::setApparentMagnitudeAlgorithm(currentAlgorithm);
+	Planet::ApparentMagnitudeAlgorithm newAlgorithm = static_cast<Planet::ApparentMagnitudeAlgorithm>(ui->planetMagnitudeAlgorithmComboBox->itemData(algorithmID).toInt());
+
+	GETSTELMODULE(SolarSystem)->setApparentMagnitudeAlgorithmOnEarth(newAlgorithm);
 	populatePlanetMagnitudeAlgorithmDescription();
 }
 

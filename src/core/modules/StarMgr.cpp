@@ -441,12 +441,12 @@ void StarMgr::init()
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
+	setLabelsAmount(conf->value("stars/labels_amount",3.).toDouble());
 	setFlagAdditionalNames(conf->value("astro/flag_star_additional_names",true).toBool());
 	setDesignationUsage(conf->value("astro/flag_star_designation_usage", false).toBool());
 	setFlagDblStarsDesignation(conf->value("astro/flag_star_designation_dbl", false).toBool());
 	setFlagVarStarsDesignation(conf->value("astro/flag_star_designation_var", false).toBool());
 	setFlagHIPDesignation(conf->value("astro/flag_star_designation_hip", false).toBool());
-	setLabelsAmount(conf->value("stars/labels_amount",3.).toDouble());
 
 	objectMgr->registerStelObjectMgr(this);
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");   // Load pointer texture
@@ -1949,10 +1949,83 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	return result;
 }
 
-//! Define font file name and size to use for star names display
+// Set display flag for Stars.
+void StarMgr::setFlagStars(bool b)
+{
+	starsFader=b;
+	StelApp::immediateSave("astro/flag_stars", b);
+	emit starsDisplayedChanged(b);
+}
+// Set display flag for Star names (labels).
+void StarMgr::setFlagLabels(bool b) {labelsFader=b; StelApp::immediateSave("astro/flag_star_name", b); emit starLabelsDisplayedChanged(b);}
+// Set the amount of star labels. The real amount is also proportional with FOV.
+// The limit is set in function of the stars magnitude
+// @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
+void StarMgr::setLabelsAmount(double a)
+{
+	if(!qFuzzyCompare(a,labelsAmount))
+	{
+		labelsAmount=a;
+		StelApp::immediateSave("stars/labels_amount", a);
+		emit labelsAmountChanged(a);
+	}
+}
+
+// Define font file name and size to use for star names display
 void StarMgr::setFontSize(int newFontSize)
 {
 	starFont.setPixelSize(newFontSize);
+}
+
+// Set flag for usage designations of stars for their labels instead common names.
+void StarMgr::setDesignationUsage(const bool flag)
+{
+	if(flagDesignations!=flag)
+	{
+		flagDesignations=flag;
+		StelApp::immediateSave("astro/flag_star_designation_usage", flag);
+		emit designationUsageChanged(flag);
+	}
+}
+// Set flag for usage traditional designations of double stars.
+void StarMgr::setFlagDblStarsDesignation(const bool flag)
+{
+	if(flagDblStarsDesignation!=flag)
+	{
+		flagDblStarsDesignation=flag;
+		StelApp::immediateSave("astro/flag_star_designation_dbl", flag);
+		emit flagDblStarsDesignationChanged(flag);
+	}
+}
+// Set flag for usage designations of variable stars.
+void StarMgr::setFlagVarStarsDesignation(const bool flag)
+{
+	if(flagVarStarsDesignation!=flag)
+	{
+		flagVarStarsDesignation=flag;
+		StelApp::immediateSave("astro/flag_star_designation_var", flag);
+		emit flagVarStarsDesignationChanged(flag);
+	}
+}
+// Set flag for usage Hipparcos catalog designations of stars.
+void StarMgr::setFlagHIPDesignation(const bool flag)
+{
+	if(flagHIPDesignation!=flag)
+	{
+		flagHIPDesignation=flag;
+		StelApp::immediateSave("astro/flag_star_designation_hip", flag);
+		emit flagHIPDesignationChanged(flag);
+	}
+}
+// Show additional star names.
+void StarMgr::setFlagAdditionalNames(bool flag)
+{
+	if (flagAdditionalStarNames!=flag)
+	{
+		flagAdditionalStarNames=flag;
+		StelApp::immediateSave("astro/flag_star_additional_names", flag);
+		emit flagAdditionalNamesDisplayedChanged(flag);
+	}
 }
 
 void StarMgr::updateSkyCulture(const QString& skyCultureDir)
