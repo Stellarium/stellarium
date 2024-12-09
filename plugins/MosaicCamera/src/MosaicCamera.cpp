@@ -19,6 +19,7 @@
 #include "StelProjector.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "MosaicCamera.hpp"
@@ -29,6 +30,7 @@
 #include "CustomObject.hpp"
 
 #include <QDebug>
+#include <QDir>
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
@@ -94,6 +96,8 @@ void MosaicCamera::init()
 {
     Q_INIT_RESOURCE(MosaicCamera);
 
+    initializeUserData();
+
     qDebug() << "[MosaicCamera] Starting TCP server";
     tcpServer->startServer(5772);
     connect(tcpServer, &MosaicTcpServer::newValuesReceived, this, &MosaicCamera::updateMosaic);
@@ -102,28 +106,72 @@ void MosaicCamera::init()
     loadBuiltInCameras();
 }
 
+void MosaicCamera::initializeUserData()
+{
+    userDirectory = StelFileMgr::getUserDir()+"/modules/MosaicCamera/";
+    QDir dir(userDirectory);
+    if (!dir.exists())
+    {
+        StelFileMgr::makeSureDirExistsAndIsWritable(userDirectory);
+        copyResourcesToUserDirectory();
+    }
+}
+
+void MosaicCamera::copyResourcesToUserDirectory()
+{
+    // Get list of files in the resource directory
+    QDir resourceDir(":/MosaicCamera");
+    QStringList resourceFiles = resourceDir.entryList(QDir::Files);
+
+    for (const QString& fileName : resourceFiles)
+    {
+        QString resourcePath = ":/MosaicCamera/" + fileName;
+        QString destPath = userDirectory + fileName;
+
+        if (QFile::copy(resourcePath, destPath))
+        {
+            qDebug() << "Copied" << resourcePath << "to" << destPath;
+
+            // Ensure the copied file is writable
+            QFile destFile(destPath);
+            destFile.setPermissions(destFile.permissions() | QFile::WriteOwner);
+        }
+        else
+        {
+            qWarning() << "Failed to copy" << resourcePath << "to" << destPath;
+        }
+    }
+}
+
+void MosaicCamera::loadCameraOrder()
+{
+    cameraOrder.clear();
+    QFile file(userDirectory + "camera_order.json");
+    if (file.open(QIODevice::ReadOnly)) {
+        QByteArray data = file.readAll();
+        QJsonDocument doc(QJsonDocument::fromJson(data));
+        QJsonObject json = doc.object();
+        QJsonArray orderArray = json["order"].toArray();
+        for (const auto& value : orderArray) {
+            cameraOrder << value.toString();
+        }
+    }
+}
+
 void MosaicCamera::loadBuiltInCameras()
 {
-    QStringList cameraNames = {"LSSTCam", "DECam", "HSC", "MegaPrime", "Latiss"};
-    QStringList jsonFiles = {
-        ":/MosaicCamera/RubinMosaic.json",
-        ":/MosaicCamera/DECam.json",
-        ":/MosaicCamera/HSC.json",
-        ":/MosaicCamera/MegaPrime.json",
-        ":/MosaicCamera/Latiss.json"
-    };
-
-    for (int i = 0; i < cameraNames.size(); ++i)
+    loadCameraOrder();
+    cameras.clear();
+    for (int i = 0; i < cameraOrder.size(); ++i)
     {
         Camera camera;
-        camera.name = cameraNames[i];
+        camera.name = cameraOrder[i];
         camera.ra = 0.0;
         camera.dec = 0.0;
         camera.rotation = 0.0;
         camera.visible = false;
         cameras.insert(camera.name, camera);
-        readPolygonSetsFromJson(camera.name, jsonFiles[i]);
-        cameraOrder.append(camera.name);
+        readPolygonSetsFromJson(camera.name, userDirectory + camera.name + ".json");
     }
     qDebug() << "[MosaicCamera] Loaded" << cameras.size() << "cameras";
     qDebug() << "[MosaicCamera] Camera names:" << cameras.keys();
