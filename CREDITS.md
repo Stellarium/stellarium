@@ -733,6 +733,10 @@
 	      from NOIRLab/NSF/AURA, post-processing: Sun Shuwei 
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
+	4.115 Images of Dark Doodad Nebula, NGC 4372
+	      from Hansjorg Walchli, post-processing: Sun Shuwei
+	      https://www.deepskycorner.ch/index.de.php
+	      License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
