@@ -61,10 +61,18 @@ void brightenImage(QImage &img, float factor)
 		for (int x=0; x<img.width(); x++)
 		{
 			QColor col=img.pixelColor(x, y);
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+			qreal h, s, v, a;
+#else
 			float h, s, v, a;
+#endif
 			col.getHsvF(&h, &s, &v, &a);
 			v*=factor; // increase brightness.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+			v=qBound(0., v, 1.);
+#else
 			v=qBound(0.f, v, 1.f);
+#endif
 			col.setHsvF(h, s, v, a);
 			img.setPixelColor(x, y, col);
 		}
