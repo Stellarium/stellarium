@@ -61,13 +61,20 @@ static const Vec3f north(0,0,1);
 
 void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2)
 {
-	// initialize center,axis0,axis1:
-	ZoneData &z(zones[index]);
-	z.center = c0+c1+c2;
-	z.center.normalize();
-	z.axis0 = north ^ z.center;
-	z.axis0.normalize();
-	z.axis1 = z.center ^ z.axis0;
+	// shut compiler up about unused variables
+	(void)index;
+	(void)c0;
+	(void)c1;
+	(void)c2;
+
+	// we don't need them anymore for the new star catalogs
+	// initialize zone:
+	// ZoneData &z(zones[index]);
+	// z.center = c0+c1+c2;
+	// z.center.normalize();
+	// z.axis0 = north ^ z.center;
+	// z.axis0.normalize();
+	// z.axis1 = z.center ^ z.axis0;
 }
 
 static inline int ReadInt(QFile& file, unsigned int &x)
