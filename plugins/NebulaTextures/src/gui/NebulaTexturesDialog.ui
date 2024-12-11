@@ -50,389 +50,274 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QGroupBox" name="imagePathBox">
-         <property name="minimumSize">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
           <size>
-           <width>0</width>
-           <height>200</height>
+           <width>20</width>
+           <height>40</height>
           </size>
          </property>
-         <property name="title">
-          <string>Astrometric solving</string>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="2">
+          <widget class="QPushButton" name="openFileButton">
+           <property name="text">
+            <string>openFile</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_imagePath">
+           <property name="text">
+            <string>Image Filepath:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="lineEditApiKey"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_apiKey">
+           <property name="text">
+            <string>[Astrometry ApiKey:](https://nova.astrometry.net/api_help)</string>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::TextFormat::MarkdownText</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineEditImagePath"/>
+         </item>
+         <item row="1" column="2">
+          <widget class="QPushButton" name="uploadImageButton">
+           <property name="text">
+            <string>upload</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="3">
+          <widget class="QLabel" name="statusText">
+           <property name="text">
+            <string>Please Select and Upload Image to solve Coordinates with Astrometry.net</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
-         <widget class="QLineEdit" name="lineEditImagePath">
-          <property name="geometry">
-           <rect>
-            <x>170</x>
-            <y>80</y>
-            <width>411</width>
-            <height>27</height>
-           </rect>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="openFileButton">
-          <property name="geometry">
-           <rect>
-            <x>700</x>
-            <y>80</y>
-            <width>92</width>
-            <height>28</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>openFile</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="lineEditApiKey">
-          <property name="geometry">
-           <rect>
-            <x>170</x>
-            <y>120</y>
-            <width>411</width>
-            <height>27</height>
-           </rect>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="uploadImageButton">
-          <property name="geometry">
-           <rect>
-            <x>700</x>
-            <y>120</y>
-            <width>92</width>
-            <height>28</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>upload</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="statusText">
-          <property name="geometry">
-           <rect>
-            <x>30</x>
-            <y>170</y>
-            <width>761</width>
-            <height>19</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Please Select and Upload Image to solve Coordinates with Astrometry.net</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_9">
-          <property name="geometry">
-           <rect>
-            <x>40</x>
-            <y>80</y>
-            <width>111</width>
-            <height>20</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Image Filepath:</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_10">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>120</y>
-            <width>151</width>
-            <height>20</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>[Astrometry ApiKey:](https://nova.astrometry.net/api_help)</string>
-          </property>
-          <property name="textFormat">
-           <enum>Qt::TextFormat::MarkdownText</enum>
-          </property>
-         </widget>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Texture corners' coordinates</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>150</height>
-          </size>
-         </property>
-         <property name="title">
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="1" column="4">
+          <widget class="QDoubleSpinBox" name="topRightY">
+           <property name="decimals">
+            <number>5</number>
+           </property>
+           <property name="minimum">
+            <double>-1000.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_tld">
+           <property name="text">
+            <string>Dec (TopLeft)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QDoubleSpinBox" name="topRightX">
+           <property name="decimals">
+            <number>5</number>
+           </property>
+           <property name="minimum">
+            <double>-1000.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_tlr">
+           <property name="text">
+            <string>RA (TopLeft)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QDoubleSpinBox" name="topLeftY">
+           <property name="decimals">
+            <number>5</number>
+           </property>
+           <property name="minimum">
+            <double>-1000.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLabel" name="label_bld">
+           <property name="text">
+            <string>Dec (BottomLeft)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3">
+          <widget class="QLabel" name="label_brr">
+           <property name="text">
+            <string>RA (BottomRight)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_blr">
+           <property name="text">
+            <string>RA  (BottomLeft)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QLabel" name="label_trr">
+           <property name="text">
+            <string>RA (TopRight)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QDoubleSpinBox" name="topLeftX">
+           <property name="decimals">
+            <number>5</number>
+           </property>
+           <property name="minimum">
+            <double>-1000.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="4">
+          <widget class="QDoubleSpinBox" name="bottomRightY">
+           <property name="decimals">
+            <number>5</number>
+           </property>
+           <property name="minimum">
+            <double>-1000.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
+           <property name="value">
+            <double>0.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="3">
+          <widget class="QDoubleSpinBox" name="bottomRightX">
+           <property name="decimals">
+            <number>5</number>
+           </property>
+           <property name="minimum">
+            <double>-1000.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QDoubleSpinBox" name="bottomLeftY">
+           <property name="decimals">
+            <number>5</number>
+           </property>
+           <property name="minimum">
+            <double>-1000.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QLabel" name="label_trd">
+           <property name="text">
+            <string>Dec (TopRight)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="4">
+          <widget class="QLabel" name="label_brd">
+           <property name="text">
+            <string>Dec (BottomRight)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QDoubleSpinBox" name="bottomLeftX">
+           <property name="decimals">
+            <number>5</number>
+           </property>
+           <property name="minimum">
+            <double>-1000.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Orientation::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="renderButton">
+         <property name="text">
           <string>Render Deep-sky Objects' Textures with its corners' coordinates</string>
          </property>
-         <widget class="QPushButton" name="renderButton">
-          <property name="geometry">
-           <rect>
-            <x>700</x>
-            <y>80</y>
-            <width>92</width>
-            <height>28</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>render</string>
-          </property>
-         </widget>
-         <widget class="QDoubleSpinBox" name="topLeftX">
-          <property name="geometry">
-           <rect>
-            <x>98</x>
-            <y>50</y>
-            <width>91</width>
-            <height>28</height>
-           </rect>
-          </property>
-          <property name="decimals">
-           <number>5</number>
-          </property>
-          <property name="minimum">
-           <double>-1000.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>1000.000000000000000</double>
-          </property>
-         </widget>
-         <widget class="QDoubleSpinBox" name="topLeftY">
-          <property name="geometry">
-           <rect>
-            <x>200</x>
-            <y>50</y>
-            <width>91</width>
-            <height>28</height>
-           </rect>
-          </property>
-          <property name="decimals">
-           <number>5</number>
-          </property>
-          <property name="minimum">
-           <double>-1000.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>1000.000000000000000</double>
-          </property>
-         </widget>
-         <widget class="QDoubleSpinBox" name="topRightX">
-          <property name="geometry">
-           <rect>
-            <x>408</x>
-            <y>50</y>
-            <width>101</width>
-            <height>28</height>
-           </rect>
-          </property>
-          <property name="decimals">
-           <number>5</number>
-          </property>
-          <property name="minimum">
-           <double>-1000.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>1000.000000000000000</double>
-          </property>
-         </widget>
-         <widget class="QDoubleSpinBox" name="topRightY">
-          <property name="geometry">
-           <rect>
-            <x>520</x>
-            <y>50</y>
-            <width>91</width>
-            <height>28</height>
-           </rect>
-          </property>
-          <property name="decimals">
-           <number>5</number>
-          </property>
-          <property name="minimum">
-           <double>-1000.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>1000.000000000000000</double>
-          </property>
-         </widget>
-         <widget class="QDoubleSpinBox" name="bottomLeftX">
-          <property name="geometry">
-           <rect>
-            <x>98</x>
-            <y>110</y>
-            <width>91</width>
-            <height>28</height>
-           </rect>
-          </property>
-          <property name="decimals">
-           <number>5</number>
-          </property>
-          <property name="minimum">
-           <double>-1000.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>1000.000000000000000</double>
-          </property>
-         </widget>
-         <widget class="QDoubleSpinBox" name="bottomLeftY">
-          <property name="geometry">
-           <rect>
-            <x>200</x>
-            <y>110</y>
-            <width>91</width>
-            <height>28</height>
-           </rect>
-          </property>
-          <property name="decimals">
-           <number>5</number>
-          </property>
-          <property name="minimum">
-           <double>-1000.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>1000.000000000000000</double>
-          </property>
-         </widget>
-         <widget class="QDoubleSpinBox" name="bottomRightX">
-          <property name="geometry">
-           <rect>
-            <x>408</x>
-            <y>110</y>
-            <width>101</width>
-            <height>28</height>
-           </rect>
-          </property>
-          <property name="decimals">
-           <number>5</number>
-          </property>
-          <property name="minimum">
-           <double>-1000.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>1000.000000000000000</double>
-          </property>
-         </widget>
-         <widget class="QDoubleSpinBox" name="bottomRightY">
-          <property name="geometry">
-           <rect>
-            <x>520</x>
-            <y>110</y>
-            <width>91</width>
-            <height>28</height>
-           </rect>
-          </property>
-          <property name="decimals">
-           <number>5</number>
-          </property>
-          <property name="minimum">
-           <double>-1000.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>1000.000000000000000</double>
-          </property>
-          <property name="value">
-           <double>0.000000000000000</double>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label">
-          <property name="geometry">
-           <rect>
-            <x>100</x>
-            <y>30</y>
-            <width>69</width>
-            <height>19</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>RA</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_2">
-          <property name="geometry">
-           <rect>
-            <x>100</x>
-            <y>90</y>
-            <width>69</width>
-            <height>19</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>RA</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_3">
-          <property name="geometry">
-           <rect>
-            <x>410</x>
-            <y>30</y>
-            <width>69</width>
-            <height>19</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>RA</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_4">
-          <property name="geometry">
-           <rect>
-            <x>410</x>
-            <y>90</y>
-            <width>69</width>
-            <height>19</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>RA</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_5">
-          <property name="geometry">
-           <rect>
-            <x>200</x>
-            <y>30</y>
-            <width>69</width>
-            <height>19</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Dec</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_6">
-          <property name="geometry">
-           <rect>
-            <x>200</x>
-            <y>90</y>
-            <width>69</width>
-            <height>19</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Dec</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_7">
-          <property name="geometry">
-           <rect>
-            <x>520</x>
-            <y>30</y>
-            <width>69</width>
-            <height>19</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Dec</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_8">
-          <property name="geometry">
-           <rect>
-            <x>520</x>
-            <y>90</y>
-            <width>69</width>
-            <height>19</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Dec</string>
-          </property>
-         </widget>
         </widget>
        </item>
        <item>
@@ -443,7 +328,7 @@
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>120</height>
+           <height>40</height>
           </size>
          </property>
         </spacer>
