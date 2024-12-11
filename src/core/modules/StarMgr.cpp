@@ -1400,7 +1400,6 @@ StelObjectP StarMgr::searchGaia(int64_t source_id) const
 	{
 		// search the zone where the source is in
 		index = StelApp::getInstance().getCore()->getGeodesicGrid(maxSearchLevel)->getZoneNumberForPoint(vf, z->level);
-		qDebug() << "index=" << index;
 		so = z->searchGaiaID(index, source_id, matched);
 		if (matched)
 			return so;

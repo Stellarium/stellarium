@@ -68,32 +68,6 @@ void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1, const 
 	z.axis0 = north ^ z.center;
 	z.axis0.normalize();
 	z.axis1 = z.center ^ z.axis0;
-	
-	// Initialize star_position_scale. This scale is used to multiply stars position
-	// encoded as integers so that it optimize precision over the triangle.
-	// It has to be computed for each triangle because the relative orientation of the 2 axis is different for each triangle.
-	float mu0,mu1,f,h;
-	mu0 = (c0-z.center)*z.axis0;
-	mu1 = (c0-z.center)*z.axis1;
-	f = 1.f/std::sqrt(1.f-mu0*mu0-mu1*mu1);
-	h = std::fabs(mu0)*f;
-	if (star_position_scale < h) star_position_scale = h;
-	h = std::fabs(mu1)*f;
-	if (star_position_scale < h) star_position_scale = h;
-	mu0 = (c1-z.center)*z.axis0;
-	mu1 = (c1-z.center)*z.axis1;
-	f = 1.f/std::sqrt(1.f-mu0*mu0-mu1*mu1);
-	h = std::fabs(mu0)*f;
-	if (star_position_scale < h) star_position_scale = h;
-	h = std::fabs(mu1)*f;
-	if (star_position_scale < h) star_position_scale = h;
-	mu0 = (c2-z.center)*z.axis0;
-	mu1 = (c2-z.center)*z.axis1;
-	f = 1.f/std::sqrt(1.f-mu0*mu0-mu1*mu1);
-	h = std::fabs(mu0)*f;
-	if (star_position_scale < h) star_position_scale = h;
-	h = std::fabs(mu1)*f;
-	if (star_position_scale < h) star_position_scale = h;
 }
 
 static inline int ReadInt(QFile& file, unsigned int &x)
@@ -260,8 +234,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
 			 int mag_range, int mag_steps)
 			: fname(fname), level(level), mag_min(mag_min),
-			  mag_range(mag_range), mag_steps(mag_steps),
-			  star_position_scale(0.0), nr_of_stars(0), zones(Q_NULLPTR), file(file)
+			  mag_range(mag_range), mag_steps(mag_steps), nr_of_stars(0), zones(Q_NULLPTR), file(file)
 {
 	nr_of_zones = static_cast<unsigned int>(StelGeodesicGrid::nrOfZones(level));
 }
@@ -601,4 +574,5 @@ StelObjectP SpecialZoneArray<Star>::searchGaiaID(int index, const int64_t source
 			return s->createStelObject(this,z);
 		}
 	}
+	return StelObjectP();
 }

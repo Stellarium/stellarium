@@ -127,8 +127,6 @@ public:
 	//! Number of steps used to describe values in @em mag_range. Always positive. Individual stars have their mag entries from 0..mag_steps.
 	const int mag_steps;
 
-	float star_position_scale;
-
 protected:
 	//! Load a catalog and display its progress on the splash screen.
 	//! @return @c true if successful, or @c false if an error occurred
