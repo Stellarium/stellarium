@@ -218,12 +218,9 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
       boundary_key += QString::number(QRandomGenerator::global()->bounded(10));  // Generates a random digit (0-9)
    }
 
-   // Format the boundary as '===============<random_number>=='
-   QString boundary1 = "'===============" + boundary_key + "==";
-   QByteArray boundary = boundary1.toUtf8();
+   QByteArray boundary = "===============" + boundary_key.toUtf8() + "==";
 
-
-   QString contentType = QString("multipart/form-data; boundary=%1").arg(boundary);
+   QString contentType = QString("multipart/form-data; boundary=\"") + QString::fromUtf8(boundary) +"\"";
    // QNetworkRequest request;
    request.setHeader(QNetworkRequest::ContentTypeHeader, contentType.toUtf8());
 
