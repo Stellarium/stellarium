@@ -29,7 +29,6 @@ class Ui_mosaicCameraDialog;
 class QTimer;
 class MosaicCamera;
 
-//! @ingroup mosaicCamera
 class MosaicCameraDialog : public StelDialog
 {
 	Q_OBJECT
@@ -44,7 +43,6 @@ public:
 	QString getCurrentCameraName() const;
 
 protected:
-	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent() override;
 
 public slots:

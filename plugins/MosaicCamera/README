@@ -1,0 +1,68 @@
+Mosaic Camera Overlay Stellarium plugin
+=======================================
+
+Overlays mosaic camera sensor outlines on the Stellarium celestial sphere.
+
+Available Cameras
+=================
+
+Built-in cameras include:
+  LSSTCam : https://www.lsst.org/about/camera
+  HSC : https://www.naoj.org/Projects/HSC/
+  DECam : https://www.darkenergysurvey.org/the-des-project/instrument/the-camera/
+  MegaPrime : https://www.cfht.hawaii.edu/Instruments/Imaging/Megacam/
+  Latiss : https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/
+
+Camera sensors are specified via their corners, which are assumed to form spherical
+polygons.  The corners should be specified as gnomonic projections from the sphere to a
+tangent plane in radians.  Multiple groups of sensors can compose the same camera.  For
+example, LSSTCam has separate sensor groups for wavefront sensors, guider sensors, and
+each of two types of science sensors.
+
+Each camera is defined via a JSON file with the structure:
+
+[
+    {
+        "name": "name-of-group-1",
+        "corners": [
+            [
+                [corner1_x, corner1_y],
+                [corner2_x, corner2_y],
+                ...
+            ], # sensor 1
+            [
+                ...
+            ], # sensor 2
+            ...
+        ]
+        "color": {
+            "value": [R, G, B, alpha]
+        }
+    },
+    {
+        "name": "name-of-group-2",
+        ...
+    },
+    ...
+]
+
+Cameras are loaded according to the order in
+
+camera_order.json
+
+which has the structure:
+{
+    "order": [
+        "LSSTCam",
+        "DECam",
+        ...
+    ]
+}
+
+
+TCP Server
+==========
+The mosaic camera plugin starts a TCP server listening on port 5772.  Messages can be
+sent to the port in the format: "[name],[ra],[dec],[rot]" where [name] is the name of
+one of the cameras, [ra] and [dec] indicate the camera boresight and [rot] the camera
+rotation, all in degrees.
