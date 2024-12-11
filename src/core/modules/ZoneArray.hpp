@@ -96,6 +96,7 @@ public:
 	//! Pure virtual method. See subclass implementation.
 	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
 							  QList<StelObjectP > &result) = 0;
+    virtual StelObjectP searchGaiaID(int index, const int64_t source_id, int& matched) const = 0;
 
 	//! Pure virtual method. See subclass implementation.
 	virtual void draw(StelPainter* sPainter, int index,bool is_inside,
@@ -111,8 +112,6 @@ public:
 	//! Initialize the ZoneData struct at the given index.
 	void initTriangle(int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2);
 	
-	virtual void scaleAxis() = 0;
-
 	//! File path of the catalog.
 	const QString fname;
 
@@ -122,21 +121,13 @@ public:
 	//! Lower bound of magnitudes in this level. Units: millimag. May be negative for brightest stars.
 	const int mag_min;
 
-	//! Range of magnitudes in this level. Units: millimags
-	const int mag_range;
-
-	//! Number of steps used to describe values in @em mag_range. Always positive. Individual stars have their mag entries from 0..mag_steps.
-	const int mag_steps;
-
-	float star_position_scale;
-
 protected:
 	//! Load a catalog and display its progress on the splash screen.
 	//! @return @c true if successful, or @c false if an error occurred
 	static bool readFile(QFile& file, void *data, qint64 size);
 
 	//! Protected constructor. Initializes fields and does not load anything.
-	ZoneArray(const QString& fname, QFile* file, int level, int mag_min, int mag_range, int mag_steps);
+	ZoneArray(const QString& fname, QFile* file, int level, int mag_min);
 	unsigned int nr_of_zones;
 	unsigned int nr_of_stars;
 	ZoneData *zones;
@@ -158,10 +149,7 @@ public:
 	//! @param use_mmap whether or not to mmap the star catalog
 	//! @param level level in StelGeodesicGrid
 	//! @param mag_min lower bound of magnitudes
-	//! @param mag_range range of magnitudes
-	//! @param mag_steps number of steps used to describe values in range
-	SpecialZoneArray(QFile* file,bool byte_swap,bool use_mmap,int level,int mag_min,
-			 int mag_range,int mag_steps);
+	SpecialZoneArray(QFile* file,bool byte_swap,bool use_mmap,int level,int mag_min);
 	~SpecialZoneArray(void) override;
 protected:
 	//! Get an array of all SpecialZoneData objects in this catalog.
@@ -188,9 +176,9 @@ protected:
 	          const QVector<SphericalCap>& boundingCaps,
 	          const bool withAberration, const Vec3f vel) const override;
 
-	void scaleAxis() override;
 	void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
 	                  QList<StelObjectP > &result) override;
+	StelObjectP searchGaiaID(int index, const int64_t source_id, int& matched) const override;
 
 	Star *stars;
 private:
@@ -203,10 +191,8 @@ private:
 class HipZoneArray : public SpecialZoneArray<Star1>
 {
 public:
-	HipZoneArray(QFile* file,bool byte_swap,bool use_mmap,
-		   int level,int mag_min,int mag_range,int mag_steps)
-			: SpecialZoneArray<Star1>(file,byte_swap,use_mmap,level,
-									  mag_min,mag_range,mag_steps) {}
+	HipZoneArray(QFile* file,bool byte_swap,bool use_mmap,int level,int mag_min)
+			: SpecialZoneArray<Star1>(file,byte_swap,use_mmap,level,mag_min) {}
 
 	//! Add Hipparcos information for all stars in this catalog into @em hipIndex.
 	//! @param hipIndex array of Hipparcos info structs
