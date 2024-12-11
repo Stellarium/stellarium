@@ -101,7 +101,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		return Q_NULLPTR;
 	}
 	dbStr = "Loading star catalog: " + QDir::toNativeSeparators(catalogFilePath) + " - ";
-	unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
+	unsigned int magic,major,minor,type,level,mag_min;
 	float epochJD;
 	if (ReadInt(*file,magic) < 0 ||
 			ReadInt(*file,type) < 0 ||
@@ -109,9 +109,8 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			ReadInt(*file,minor) < 0 ||
 			ReadInt(*file,level) < 0 ||
 			ReadInt(*file,mag_min) < 0 ||
-			ReadInt(*file,mag_range) < 0 ||
-			ReadInt(*file,mag_steps) < 0 ||
-			ReadFloat(*file,epochJD) < 0)
+			ReadFloat(*file,epochJD) < 0
+		)
 	{
 		dbStr += "error - file format is bad.";
 		qDebug().noquote() << dbStr;
@@ -139,8 +138,6 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		minor = stel_bswap_32(minor);
 		level = stel_bswap_32(level);
 		mag_min = stel_bswap_32(mag_min);
-		mag_range = stel_bswap_32(mag_range);
-		mag_steps = stel_bswap_32(mag_steps);
 		epochJD = stel_bswap_32f(epochJD);
 	}
 	else if (magic == FILE_MAGIC)
@@ -186,7 +183,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			else
 			{
-				rval = new HipZoneArray(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min), static_cast<int>(mag_range), static_cast<int>(mag_steps));
+				rval = new HipZoneArray(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min));
 			}
 			break;
 		case 1:
@@ -196,7 +193,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			else
 			{
-				rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min), static_cast<int>(mag_range), static_cast<int>(mag_steps));
+				rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min));
 			}
 			break;
 		case 2:
@@ -206,7 +203,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			else
 			{
-				rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min), static_cast<int>(mag_range), static_cast<int>(mag_steps));
+				rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min));
 			}
 			break;
 		default:
@@ -231,10 +228,8 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	return rval;
 }
 
-ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
-			 int mag_range, int mag_steps)
-			: fname(fname), level(level), mag_min(mag_min),
-			  mag_range(mag_range), mag_steps(mag_steps), nr_of_stars(0), zones(Q_NULLPTR), file(file)
+ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min)
+			: fname(fname), level(level), mag_min(mag_min), nr_of_stars(0), zones(Q_NULLPTR), file(file)
 {
 	nr_of_zones = static_cast<unsigned int>(StelGeodesicGrid::nrOfZones(level));
 }
@@ -297,8 +292,8 @@ void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 
 template<class Star>
 SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mmap,
-					 int level, int mag_min, int mag_range, int mag_steps)
-		: ZoneArray(file->fileName(), file, level, mag_min, mag_range, mag_steps),
+					 int level, int mag_min)
+		: ZoneArray(file->fileName(), file, level, mag_min),
 		  stars(Q_NULLPTR), mmap_start(Q_NULLPTR)
 {
 	if (nr_of_zones > 0)
@@ -389,8 +384,6 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 				file->close();
 			}
 		}
-		// GZ: Some diagnostics to understand the undocumented vars around mag.
-		// qDebug() << "SpecialZoneArray: mag_min=" << mag_min << ", mag_steps=" << mag_steps << ", mag_range=" << mag_range ;
 	}
 }
 
@@ -431,14 +424,13 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 
 	const Extinction& extinction=core->getSkyDrawer()->getExtinction();
 	const bool withExtinction=drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f;
-	const float k = 0.001f*static_cast<float>(mag_range)/static_cast<float>(mag_steps); // from StarMgr.cpp line 654
 	
 	// Allow artificial cutoff:
 	// find the (integer) mag at which is just bright enough to be drawn.
 	int cutoffMagStep=limitMagIndex;
 	if (drawer->getFlagStarMagnitudeLimit())
 	{
-		cutoffMagStep = (static_cast<int>(drawer->getCustomStarMagnitudeLimit()*1000.0) - mag_min)*mag_steps/mag_range;
+		cutoffMagStep = (static_cast<int>(drawer->getCustomStarMagnitudeLimit()*1000.0) - mag_min)*0.1;  // 1/(10 milli-mag)
 		if (cutoffMagStep>limitMagIndex)
 			cutoffMagStep = limitMagIndex;
 	}
@@ -470,7 +462,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			vf.set(u[0], u[1], u[2]);
 		}
 
-		int magIndex = static_cast<int>((starMag - mag_min) * mag_steps / mag_range);
+		int magIndex = static_cast<int>((starMag - mag_min) * 0.1);  // 1 / (10 milli-mag)
 
 		// first part is check for Star1, so to keep looping for long-range prediction
 		// second part is old behavior, to skip stars below you that are too faint to display for Star2 and Star3
@@ -525,7 +517,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 			float extMagShift=0.0f;
 			extinction.forward(altAz, &extMagShift);
-			extinctedMagIndex += static_cast<int>(extMagShift/k);
+			extinctedMagIndex += static_cast<int>(extMagShift/0.01f); // 0.01 mag MagStepIncrement
 			if (extinctedMagIndex >= cutoffMagStep || extinctedMagIndex<0) // i.e., if extincted it is dimmer than cutoff or extinctedMagIndex is negative (missing star catalog), so remove
 				continue;
 			tmpRcmag = &rcmag_table[extinctedMagIndex];

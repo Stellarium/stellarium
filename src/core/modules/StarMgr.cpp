@@ -1207,10 +1207,9 @@ void StarMgr::draw(StelCore* core)
 	{
 		int limitMagIndex=RCMAG_TABLE_SIZE;
 		const float mag_min = 0.001f*z->mag_min;
-		const float k = (0.001f*z->mag_range)/z->mag_steps; // MagStepIncrement
 		for (int i=0;i<RCMAG_TABLE_SIZE;++i)
 		{
-			const float mag = mag_min+k*i;
+			const float mag = mag_min+0.01*i;  // 0.01 mag MagStepIncrement
 			if (skyDrawer->computeRCMag(mag, &rcmag_table[i])==false)
 			{
 				if (i==0)
@@ -1237,7 +1236,7 @@ void StarMgr::draw(StelCore* core)
 		{
 			// Adapt magnitude limit of the stars labels according to FOV and labelsAmount
 			float maxMag = (skyDrawer->getLimitMagnitude()-6.5f)*0.7f+(static_cast<float>(labelsAmount)*1.2f)-2.f;
-			int x = static_cast<int>((maxMag-mag_min)/k);
+			int x = static_cast<int>((maxMag-mag_min)/0.01);  // 0.01 mag MagStepIncrement
 			if (x > 0)
 				maxMagStarName = x;
 		}
