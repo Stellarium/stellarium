@@ -197,6 +197,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (!crossIndexData.isEmpty())
 			designations.append(crossIndexData);
 
+		if (s->getGaia())
+			designations.append(QString("Gaia DR3 %1").arg(s->getGaia()));
+
 		if (!wdsSciName.isEmpty() && !sciName.contains(wdsSciName, Qt::CaseInsensitive))
 			designations.append(wdsSciName);
 
@@ -219,14 +222,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			}
 		}
 		else
-		{
-			if (s->getGaia())
-			{
-				// Don't add Gaia DR3 if the list already long
-				designations.append(QString("Gaia DR3 %1").arg(s->getGaia()));
-			}
 			designationsList = designations.join(" - ");
-		}
 
 		if (flags&Name)
 		{

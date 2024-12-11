@@ -1537,8 +1537,8 @@ void ConfigurationDialog::updateStarCatalogControlsText()
 			ui->downloadLabel->setText(q_("Download size: %1MB\nStar count: %2 Million\nMagnitude range: %3 - %4")
 				.arg(nextStarCatalogToDownload.value("sizeMb").toString(),
 				     QString::number(nextStarCatalogToDownload.value("count").toDouble(), 'f', 1),
-				     magRange.first().toString(),
-				     magRange.last().toString()));
+				     QString::number(magRange.first().toDouble(), 'f', 2),
+				     QString::number(magRange.last().toDouble(), 'f', 2)));
 		}
 	}
 }
