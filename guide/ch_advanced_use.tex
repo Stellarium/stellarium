@@ -616,7 +616,7 @@ problems.
   or \texttt{warp} for another software-only solution. Note that command line options take precedence over this environment variable.
 \end{description}
 
-\section{Customized GUI Colors}
+\section{GUI Customizations}
 \subsection{User interface colors}
 \label{sec:CommandLineOptions:Special:CSS}
 
@@ -666,6 +666,13 @@ pixmaps_brightness=1.25
 \end{configfile}
 The value is clamped to [1\ldots1.8] to avoid making active and inactive buttons equally bright.
 
+\subsection{Text shadow}
+\label{sec:CommandLineOptions:Special:TextShadow}
+Some users complain the infotext is badly visible when there are trees or the Milky Way in the background.\newFeature{24.4} This can also be mitigated in \file{config.ini}.
+\begin{configfile}
+[gui]
+flag_info_shadow=true
+\end{configfile}
 
 \section{Spout}\newFeature{0.15.1} 
 \label{sec:CommandLineOptions:Special:Spout}
