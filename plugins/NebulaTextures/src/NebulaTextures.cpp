@@ -26,7 +26,7 @@
 #include "NebulaTextures.hpp"
 
 #include "StelModule.hpp"
-#include "gui/NebulaTexturesDialog.hpp"
+#include "NebulaTexturesDialog.hpp"
 
 #include <QDebug>
 

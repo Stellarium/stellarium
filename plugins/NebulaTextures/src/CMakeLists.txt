@@ -1,4 +1,9 @@
-INCLUDE_DIRECTORIES(. gui)
+INCLUDE_DIRECTORIES(
+    .
+    gui
+    ${CMAKE_BINARY_DIR}/plugins/NebulaTextures/src
+    ${CMAKE_BINARY_DIR}/plugins/NebulaTextures/src/gui
+)
 
 # LINK_DIRECTORIES(${BUILD_DIR}/src)
 LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
