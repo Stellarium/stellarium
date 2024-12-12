@@ -42,7 +42,7 @@ StelPluginInfo NebulaTexturesStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
    info.id = "NebulaTextures";
-   info.displayedName = "Nebula Textures plugin";
+   info.displayedName = "Nebula Textures";
 	info.authors = "Stellarium team";
 	info.contact = "www.stellarium.org";
    info.description = "User Define Nebula Textures.";

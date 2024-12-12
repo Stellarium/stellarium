@@ -28,6 +28,9 @@
 #include "StelModuleMgr.hpp"
 #include "StelMainView.hpp"
 
+#include "StelMovementMgr.hpp"
+#include "StelUtils.hpp"
+
 #include <QFileDialog>
 #include <QTimer>
 
@@ -90,6 +93,7 @@ void NebulaTexturesDialog::createDialogContent()
    connect(ui->openFileButton, SIGNAL(clicked()), this, SLOT(on_openFileButton_clicked()));
    connect(ui->uploadImageButton, SIGNAL(clicked()), this, SLOT(on_uploadImageButton_clicked()));
    connect(ui->renderButton, SIGNAL(clicked()), this, SLOT(on_renderButton_clicked()));
+   connect(ui->goPushButton, SIGNAL(clicked()), this, SLOT(on_goPushButton_clicked()));
 
 	setAboutHtml();
 }
@@ -380,8 +384,6 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
       lines.append(content.mid(i, 80));
    }
 
-   double CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2;
-   int IMAGEW, IMAGEH;
 
    for (const QString &line : lines) {
       QRegularExpressionMatch match = regex.match(line);
@@ -417,10 +419,12 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
    qDebug()<<  CRPIX1 << CRPIX2 << CRVAL1 << CRVAL2 << CD1_1 << CD1_2 << CD2_1 << CD2_2;
    qDebug()<< IMAGEW<< IMAGEH;
 
+   referRA = CRVAL1;
+   referDec = CRVAL2;
+   ui->referX->setValue(CRVAL1);
+   ui->referY->setValue(CRVAL2);
 
    int X=0,Y=0;
-   double topLeftRA, topLeftDec, bottomLeftRA, bottomLeftDec;
-   double topRightRA, topRightDec, bottomRightRA, bottomRightDec;
 
    topLeftRA = calculateRA(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
    topLeftDec = calculateDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
@@ -445,7 +449,7 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
    ui->bottomRightX->setValue(bottomRightRA);
    ui->bottomRightY->setValue(bottomRightDec);
 
-   updateStatus("Check coordinates, and click render.");
+   updateStatus("Goto Reference Point, Try to Render, Check and Adjust Coordinates.");
 }
 
 double NebulaTexturesDialog::calculateRA(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
@@ -458,25 +462,48 @@ double NebulaTexturesDialog::calculateDec(int X, int Y, double CRPIX1, double CR
    return CRVAL2 + ((X - CRPIX1) * CD2_1 + (Y - CRPIX2) * CD2_2);
 }
 
+void NebulaTexturesDialog::on_goPushButton_clicked()
+{
+
+   StelCore* core = StelApp::getInstance().getCore();
+   StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+   Vec3d pos;
+   double spinLong=referRA/180.*M_PI;
+   double spinLat=referDec/180.*M_PI;
+
+   mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
+   Vec3d aimUp = mvmgr->getViewUpVectorJ2000();
+   StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+
+   StelUtils::spheToRect(spinLong, spinLat, pos);
+   if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI_2)) )
+   {
+      // make up vector more stable.
+      // Strictly mount should be in a new J2000 mode, but this here also stabilizes searching J2000 coordinates.
+      mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
+      aimUp=mvmgr->getViewUpVectorJ2000();
+   }
+   mvmgr->setFlagTracking(false);
+   mvmgr->moveToJ2000(pos, aimUp, mvmgr->getAutoMoveDuration());
+   // mvmgr->setFlagLockEquPos(useLockPosition);
+}
 
 void NebulaTexturesDialog::on_renderButton_clicked()
 {
    // Retrieve coordinates from the QDoubleSpinBoxes
-   double topLeftX = ui->topLeftX->value();
-   double topLeftY = ui->topLeftY->value();
-   double topRightX = ui->topRightX->value();
-   double topRightY = ui->topRightY->value();
-   double bottomLeftX = ui->bottomLeftX->value();
-   double bottomLeftY = ui->bottomLeftY->value();
-   double bottomRightX = ui->bottomRightX->value();
-   double bottomRightY = ui->bottomRightY->value();
+   topLeftRA = ui->topLeftX->value();
+   topLeftDec = ui->topLeftY->value();
+   topRightRA = ui->topRightX->value();
+   topRightDec = ui->topRightY->value();
+   bottomLeftRA = ui->bottomLeftX->value();
+   bottomLeftDec = ui->bottomLeftY->value();
+   bottomRightRA = ui->bottomRightX->value();
+   bottomRightDec = ui->bottomRightY->value();
+   referRA = ui->referX->value();
+   referDec = ui->referY->value();
 
    // Render logic with the provided coordinates
-   QString renderStatus = QString("Rendering with coordinates:\nTop Left: (%1, %2)\nTop Right: (%3, %4)\nBottom Left: (%5, %6)\nBottom Right: (%7, %8)")
-                            .arg(topLeftX).arg(topLeftY)
-                            .arg(topRightX).arg(topRightY)
-                            .arg(bottomLeftX).arg(bottomLeftY)
-                            .arg(bottomRightX).arg(bottomRightY);
+   QString renderStatus = QString("Rendering with coordinates");
 
    updateStatus(renderStatus);
 
