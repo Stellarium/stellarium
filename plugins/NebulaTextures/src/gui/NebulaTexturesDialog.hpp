@@ -47,6 +47,7 @@ private slots:
    void on_openFileButton_clicked();
    void on_uploadImageButton_clicked();
    void on_renderButton_clicked();
+   void on_goPushButton_clicked();
 
    void onLoginReply(QNetworkReply *reply);
    void onUploadReply(QNetworkReply *reply);
@@ -77,6 +78,12 @@ private:
 
    double calculateDec(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
                                          double CD1_1, double CD1_2, double CD2_1, double CD2_2);
+
+   double CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2;
+   int IMAGEW, IMAGEH;
+   double topLeftRA, topLeftDec, bottomLeftRA, bottomLeftDec;
+   double topRightRA, topRightDec, bottomRightRA, bottomRightDec;
+   double referRA, referDec;
 };
 
 #endif /* NEBULATEXTURESDIALOG_HPP */
