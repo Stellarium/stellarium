@@ -65,7 +65,7 @@ static QStringList objtype_array;
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always match the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 14;
+static const int StarCatalogFormatVersion = 15;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -1206,8 +1206,8 @@ void StarMgr::draw(StelCore* core)
 	for (const auto* z : std::as_const(gridLevels))
 	{
 		int limitMagIndex=RCMAG_TABLE_SIZE;
-		// overshoot by 2 mag because some stars can get brighter than its catalogs min magnitude
-		const float mag_min = 0.001f*z->mag_min - 2.f;
+		// overshoot by 7 mag because some stars (like HIP 16757) can get brighter than its catalogs min magnitude
+		const float mag_min = 0.001f*z->mag_min - 7.f;
 		for (int i=0;i<RCMAG_TABLE_SIZE;++i)
 		{
 			const float mag = mag_min+0.05*i;  // 0.05 mag MagStepIncrement
@@ -1236,7 +1236,7 @@ void StarMgr::draw(StelCore* core)
 		if (labelsFader.getInterstate()>0.f)
 		{
 			// Adapt magnitude limit of the stars labels according to FOV and labelsAmount
-			float maxMag = (skyDrawer->getLimitMagnitude()-6.5f)*0.7f+(static_cast<float>(labelsAmount)*1.2f)-2.f;
+			float maxMag = (skyDrawer->getLimitMagnitude()-6.5f)*0.7f+(static_cast<float>(labelsAmount)*1.2f)-7.f;
 			int x = static_cast<int>((maxMag-mag_min)/0.05);  // 0.05 mag MagStepIncrement
 			if (x > 0)
 				maxMagStarName = x;

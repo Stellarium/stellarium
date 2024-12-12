@@ -42,6 +42,7 @@ struct ZoneData
 		return size;
 	}
 	int size;		// Number of stars in the stars array
+	bool isGlobal = false;	// True if the zone is a global zone
 	void *stars;
 	// we don't need them anymore for the new star catalogs
 	// Vec3f center;	// Normalized center of the triangle

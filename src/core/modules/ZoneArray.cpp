@@ -325,6 +325,8 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 				nr_of_stars += tmp_spu_int32;
 				getZones()[z].size = static_cast<int>(tmp_spu_int32);
 			}
+			// last one is always the global zone
+			getZones()[nr_of_zones-1].isGlobal = true;
 		}
 		// delete zone_size before allocating stars
 		// in order to avoid memory fragmentation:
@@ -437,7 +439,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	int cutoffMagStep=limitMagIndex;
 	if (drawer->getFlagStarMagnitudeLimit())
 	{
-		cutoffMagStep = static_cast<int>((drawer->getCustomStarMagnitudeLimit()*1000.0 - (mag_min - 2000.))*0.02);  // 1/(50 milli-mag)
+		cutoffMagStep = static_cast<int>((drawer->getCustomStarMagnitudeLimit()*1000.0 - (mag_min - 7000.))*0.02);  // 1/(50 milli-mag)
 		if (cutoffMagStep>limitMagIndex)
 			cutoffMagStep = limitMagIndex;
 	}
@@ -446,11 +448,24 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	// Go through all stars, which are sorted by magnitude (bright stars first)
 	const SpecialZoneData<Star>* zoneToDraw = getZones() + index;
 	const Star* lastStar = zoneToDraw->getStars() + zoneToDraw->size;
+	bool globalzone;
 	for (const Star* s=zoneToDraw->getStars();s<lastStar;++s)
 	{
+		// check if this is a global zone
+		globalzone = zoneToDraw->isGlobal;
 		float starMag = s->getMag();
+		int magIndex = static_cast<int>((starMag - (mag_min - 7000.)) * 0.02);  // 1 / (50 milli-mag)
+
+		// first part is check for Star1 and is global zone, so to keep looping for long-range prediction
+		// second part is old behavior, to skip stars below you that are too faint to display for Star2 and Star3
+		if (magIndex > cutoffMagStep) { // should always use catalog magnitude, otherwise will mess up the order
+			if (fabs(dyrs) <= 5000. || !s->isVIP() || !globalzone)  // if any of these true, we should always break
+				break;
+		}
+		// Because of the test above, the star should always be visible from this point.
+		
 		// only recompute if has time dependence and time is far away
-		bool recomputeMag = (s->getPreciseAstrometricFlag() && (fabs(dyrs) > 3000.));
+		bool recomputeMag = (s->getPreciseAstrometricFlag() && (fabs(dyrs) > 5000.));
 		if (recomputeMag) { 
 			// don't do full solution, can be very slow, just estimate here	
 			// estimate parallax from radial velocity and total proper motion
@@ -468,18 +483,12 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			Vec3d u = (r * (1. + pmr0 * dyrs) + pmvec0 * dyrs) * f;
 			vf.set(u[0], u[1], u[2]);
 		}
+		// recompute magIndex with the new magnitude
+		magIndex = static_cast<int>((starMag - (mag_min - 7000.)) * 0.02);  // 1 / (50 milli-mag)
 
-		int magIndex = static_cast<int>((starMag - (mag_min - 2000.)) * 0.02);  // 1 / (50 milli-mag)
-
-		// first part is check for Star1, so to keep looping for long-range prediction
-		// second part is old behavior, to skip stars below you that are too faint to display for Star2 and Star3
-		if ((magIndex > cutoffMagStep && fabs(dyrs) < 3000.) || (magIndex > cutoffMagStep && !s->isVIP()))
-				break;
-		// Because of the test above, the star should always be visible from this point.
-		if (magIndex > cutoffMagStep)
+		if (magIndex > cutoffMagStep) {  // check again with the new magIndex
 				continue;  // allow continue for other star that might became bright enough in the future
-		// Because of the test above, the star should always be visible from this point.
-		
+		}
 		// Array of 2 numbers containing radius and magnitude
 		const RCMag* tmpRcmag = &rcmag_table[magIndex];
 		
