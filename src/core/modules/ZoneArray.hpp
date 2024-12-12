@@ -118,7 +118,8 @@ public:
 	//! Level in StelGeodesicGrid.
 	const int level;
 
-	//! Lower bound of magnitudes in this level. Units: millimag. May be negative for brightest stars.
+	//! Lower bound of magnitudes in this level at the catalog epoch. Units: millimag. 
+	//! May be negative for brightest stars and stars might have different magnitudes in the past/future.
 	const int mag_min;
 
 protected:

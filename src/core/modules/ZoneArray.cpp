@@ -437,7 +437,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	int cutoffMagStep=limitMagIndex;
 	if (drawer->getFlagStarMagnitudeLimit())
 	{
-		cutoffMagStep = (static_cast<int>(drawer->getCustomStarMagnitudeLimit()*1000.0) - mag_min)*0.1;  // 1/(10 milli-mag)
+		cutoffMagStep = static_cast<int>((drawer->getCustomStarMagnitudeLimit()*1000.0 - (mag_min - 2000.))*0.02);  // 1/(50 milli-mag)
 		if (cutoffMagStep>limitMagIndex)
 			cutoffMagStep = limitMagIndex;
 	}
@@ -469,7 +469,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			vf.set(u[0], u[1], u[2]);
 		}
 
-		int magIndex = static_cast<int>((starMag - mag_min) * 0.1);  // 1 / (10 milli-mag)
+		int magIndex = static_cast<int>((starMag - (mag_min - 2000.)) * 0.02);  // 1 / (50 milli-mag)
 
 		// first part is check for Star1, so to keep looping for long-range prediction
 		// second part is old behavior, to skip stars below you that are too faint to display for Star2 and Star3
@@ -524,7 +524,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 			float extMagShift=0.0f;
 			extinction.forward(altAz, &extMagShift);
-			extinctedMagIndex += static_cast<int>(extMagShift/0.01f); // 0.01 mag MagStepIncrement
+			extinctedMagIndex += static_cast<int>(extMagShift/0.05f); // 0.05 mag MagStepIncrement
 			if (extinctedMagIndex >= cutoffMagStep || extinctedMagIndex<0) // i.e., if extincted it is dimmer than cutoff or extinctedMagIndex is negative (missing star catalog), so remove
 				continue;
 			tmpRcmag = &rcmag_table[extinctedMagIndex];

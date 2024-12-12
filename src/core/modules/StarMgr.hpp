@@ -36,7 +36,7 @@ class QSettings;
 class ZoneArray;
 struct HipIndexStruct;
 
-static const int RCMAG_TABLE_SIZE = 4096;
+static const int RCMAG_TABLE_SIZE = 512;
 
 typedef struct
 {
