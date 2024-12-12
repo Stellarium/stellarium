@@ -26,6 +26,7 @@
 #include <QVector>
 #include <QObject>
 #include <QPointF>
+#include <QSettings>
 #include <QString>
 
 class MosaicCameraDialog;
@@ -69,6 +70,9 @@ public:
     double getRotation(const QString& cameraName) const;
     bool getVisibility(const QString& cameraName) const;
 
+	void loadSettings();
+	void saveSettings() const;
+
     QStringList getCameraNames() const;
     void readPolygonSetsFromJson(const QString& cameraName, const QString& filename);
 
@@ -80,6 +84,7 @@ private:
 	QStringList cameraOrder;
 	QString currentCamera;
 	QString userDirectory;
+	QSettings* conf;
 
     void loadBuiltInCameras();
 	void loadCameraOrder();

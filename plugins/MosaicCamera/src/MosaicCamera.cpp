@@ -67,6 +67,7 @@ MosaicCamera::MosaicCamera()
     setObjectName("MosaicCamera");
     configDialog = new MosaicCameraDialog();
     tcpServer = new MosaicTcpServer();
+    conf = StelApp::getInstance().getSettings();
 }
 
 /*************************************************************************
@@ -76,6 +77,36 @@ MosaicCamera::~MosaicCamera()
 {
     delete configDialog;
     delete tcpServer;
+}
+
+void MosaicCamera::loadSettings()
+{
+    conf->beginGroup("MosaicCamera");
+    int size = conf->beginReadArray("cameraVisibility");
+    for (int i = 0; i < size; ++i) {
+        conf->setArrayIndex(i);
+        QString name = conf->value("name").toString();
+        bool visible = conf->value("visible").toBool();
+        if (cameras.contains(name)) {
+            cameras[name].visible = visible;
+        }
+    }
+    conf->endArray();
+    conf->endGroup();
+}
+
+void MosaicCamera::saveSettings() const
+{
+    conf->beginGroup("MosaicCamera");
+    conf->beginWriteArray("cameraVisibility");
+    int i = 0;
+    for (auto it = cameras.constBegin(); it != cameras.constEnd(); ++it) {
+        conf->setArrayIndex(i++);
+        conf->setValue("name", it.key());
+        conf->setValue("visible", it.value().visible);
+    }
+    conf->endArray();
+    conf->endGroup();
 }
 
 /*************************************************************************
@@ -104,6 +135,8 @@ void MosaicCamera::init()
 
     qDebug() << "[MosaicCamera] Loading built-in cameras";
     loadBuiltInCameras();
+
+    loadSettings();
 }
 
 void MosaicCamera::initializeUserData()
@@ -277,6 +310,7 @@ void MosaicCamera::setVisibility(const QString& cameraName, bool visible)
     if (cameras.contains(cameraName))
     {
         cameras[cameraName].visible = visible;
+        saveSettings();
         if(configDialog->visible()) {
             if (configDialog->getCurrentCameraName() == cameraName) {
                 configDialog->setVisibility(visible);
