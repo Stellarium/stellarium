@@ -76,19 +76,23 @@ struct Star
    {
       return static_cast<const Derived *>(this)->getX2();
    } // either in rad (if no getX2()) or in internal astrometric unit (only if getX2())
-   inline int getBVIndex() const 
-   { 
+   inline int getBVIndex() const
+   {
       // need to check because some stars (e.g., Carbon stars) can have really high B-V
       // BV index to color table has only 128 entries, otherwise those stars will be black or weird color
       int index = BVToIndex(getBV());
-      if (index < 0) return 0;
-      if (index > 127) return 127;
+      if (index < 0)
+         return 0;
+      if (index > 127)
+         return 127;
       return index;
    }
    inline double  getMag() const { return static_cast<const Derived *>(this)->getMag(); } // should return in millimag
    inline float   getBV() const { return static_cast<const Derived *>(this)->getBV(); }   // should return in mag
-   // VIP flag is for situation where it can bypass some check (e.g., magnitude display cutoff for Star1 in far past/future) 
+   // VIP flag is for situation where it can bypass some check (e.g., magnitude display cutoff for Star1 in far
+   // past/future)
    inline bool    isVIP() const { return static_cast<const Derived *>(this)->isVIP(); }
+   inline int64_t getGaia() const { return static_cast<const Derived *>(this)->getGaia(); }
    inline bool    hasName() const { return static_cast<const Derived *>(this)->hasName(); }
    inline QString getNameI18n() const { return static_cast<const Derived *>(this)->getNameI18n(); }
    inline QString getScreenNameI18n() const { return static_cast<const Derived *>(this)->getScreenNameI18n(); }
@@ -257,7 +261,8 @@ struct Star
    // 	Vec3d xyz = r * radius;
 
    // 	// from observer's ephemeris
-   // 	Vec3d bxyz(orbital_radius * cos(2. * M_PI / orbital_period * dyrs), orbital_radius * sin(2. * M_PI / orbital_period * dyrs), 0.);
+   // 	Vec3d bxyz(orbital_radius * cos(2. * M_PI / orbital_period * dyrs), orbital_radius * sin(2. * M_PI /
+   // orbital_period * dyrs), 0.);
 
    // 	// phase space coordinates
    // 	Vec3d u0 = xyz - bxyz * AU * 1000. / PARSEC;
@@ -340,8 +345,8 @@ public:
       return hip_id;
    }
 
-   inline long getGaia() const { return d.gaia_id; }
-   inline int  getComponentIds() const
+   inline int64_t getGaia() const { return d.gaia_id; }
+   inline int     getComponentIds() const
    {
       // Combine the 3 bytes into a 24-bit integer (little-endian)
       quint32 combined_value = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
@@ -350,13 +355,13 @@ public:
       return letter_value;
    }
    inline int getObjType() const { return d.objtype; }
-   float   getBV(void) const { return static_cast<float>(d.b_v) / 1000.f; }
-   bool    isVIP() const { return true; }
-   bool    hasName() const { return getHip(); } // OR gaia??
-   QString getNameI18n(void) const;
-   QString getScreenNameI18n(void) const;
-   QString getDesignation(void) const;
-   int     hasComponentID(void) const;
+   float      getBV(void) const { return static_cast<float>(d.b_v) / 1000.f; }
+   bool       isVIP() const { return true; }
+   bool       hasName() const { return getHip(); } // OR gaia??
+   QString    getNameI18n(void) const;
+   QString    getScreenNameI18n(void) const;
+   QString    getDesignation(void) const;
+   int        hasComponentID(void) const;
 };
 static_assert(sizeof(Star1) == 48, "Size of Star1 must be 48 bytes");
 
@@ -388,19 +393,19 @@ public:
    {
       return sqrt((getDx0() * cos(getX1()) * getDx0() * cos(getX1())) + (getDx1() * getDx1()));
    }
-   StelObjectP createStelObject(const SpecialZoneArray<Star2> * a, const SpecialZoneData<Star2> * z) const;
-   inline long getGaia() const { return d.gaia_id; }
-   float       getBV(void) const { return static_cast<float>(d.b_v) / 1000.f; }
-   QString     getNameI18n(void) const { return QString(); }
-   QString     getScreenNameI18n(void) const { return QString(); }
-   QString     getDesignation(void) const { return QString(); }
-   int         hasComponentID(void) const { return 0; }
-   bool        isVIP() const { return false; }
-   bool        hasName() const { return getGaia(); }
-   double      getPlx() const { return d.plx / 100.; }
-   double      getPlxErr() const { return d.plx_err / 100.; }
-   double      getRV() const { return 0.; }
-   bool        getPreciseAstrometricFlag() const
+   StelObjectP    createStelObject(const SpecialZoneArray<Star2> * a, const SpecialZoneData<Star2> * z) const;
+   int64_t        getGaia() const { return d.gaia_id; }
+   float          getBV(void) const { return static_cast<float>(d.b_v) / 1000.f; }
+   QString        getNameI18n(void) const { return QString(); }
+   QString        getScreenNameI18n(void) const { return QString(); }
+   QString        getDesignation(void) const { return QString(); }
+   int            hasComponentID(void) const { return 0; }
+   bool           isVIP() const { return false; }
+   bool           hasName() const { return getGaia() != 0; }
+   double         getPlx() const { return d.plx / 100.; }
+   double         getPlxErr() const { return d.plx_err / 100.; }
+   double         getRV() const { return 0.; }
+   bool           getPreciseAstrometricFlag() const
    { // Flag if the star should have time dependent astrometry computed
       return false;
    }
@@ -432,24 +437,24 @@ public:
       quint32 x1 = d.x1[0] | (d.x1[1] << 8) | (d.x1[2] << 16);
       return (static_cast<double>(x1) - (90. * 36000.)) * 100. * MAS2RAD;
    }
-   inline double getX2() const { return 0.; }
-   inline double getDx0() const { return 0.; }
-   inline double getDx1() const { return 0.; }
-   inline double getDx2() const { return 0.; }
-   inline double getPMTotal() const { return 0.; }
-   double        getPlx() const { return 0.; }
-   double        getPlxErr() const { return 0.; }
-   double        getRV() const { return 0.; }
-   double        getBV() const { return (0.025 * d.b_v) - 1.; }  // in mag
-   double        getMag() const { return d.vmag * 20 + 16000; } // in milli-mag
-   inline long   getGaia() const { return d.gaia_id; }
-   QString       getNameI18n() const { return QString(); }
-   QString       getScreenNameI18n() const { return QString(); }
-   QString       getDesignation() const { return QString(); }
-   bool          isVIP() const { return false; }
-   int           hasComponentID() const { return 0; }
-   bool          hasName() const { return false; }
-   bool          getPreciseAstrometricFlag() const
+   inline double  getX2() const { return 0.; }
+   inline double  getDx0() const { return 0.; }
+   inline double  getDx1() const { return 0.; }
+   inline double  getDx2() const { return 0.; }
+   inline double  getPMTotal() const { return 0.; }
+   double         getPlx() const { return 0.; }
+   double         getPlxErr() const { return 0.; }
+   double         getRV() const { return 0.; }
+   double         getBV() const { return (0.025 * d.b_v) - 1.; } // in mag
+   double         getMag() const { return d.vmag * 20 + 16000; } // in milli-mag
+   int64_t        getGaia() const { return d.gaia_id; }
+   QString        getNameI18n() const { return QString(); }
+   QString        getScreenNameI18n() const { return QString(); }
+   QString        getDesignation() const { return QString(); }
+   bool           isVIP() const { return false; }
+   int            hasComponentID() const { return 0; }
+   bool           hasName() const { return d.gaia_id != 0; }
+   bool           getPreciseAstrometricFlag() const
    { // Flag if the star should have time dependent astrometry computed
       return false;
    }
