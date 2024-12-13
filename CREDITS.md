@@ -516,7 +516,7 @@
 	4.57 Images of NGC1269, NGC3195
 	     from Zhu Ying
 	     License:  Creative Commons Attribution 3.0 Unported
-	4.58 Images of IC2118, NGC1097, NGC1499
+	4.58 Images of IC2118, NGC1499
 	     from Zhao Jingna
 	     License:  Creative Commons Attribution 3.0 Unported
 	4.59 Images of NGC1491
@@ -751,6 +751,10 @@
 	      License: Creative Commons Attribution 4.0 International
 	4.119 Images of M90, M109, IC348, NGC147, NGC404, NGC1569
 	      from Radek Chromik, post-processing: Sun Shuwei
+	      https://www.deepskycorner.ch/index.de.php
+	      License: Creative Commons Attribution 4.0 International
+	4.120 Images of NGC1097
+	      from Eduard von Bergen & Hansjorg Walchli, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
 ```
