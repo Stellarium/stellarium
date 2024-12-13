@@ -415,7 +415,7 @@
 	4.33 Images of PGC6830, PGC29653, UGC5373 from Lowell Observatory
 	     http://www2.lowell.edu/
 	     License: public domain
-	4.34 Images of M59, M60, M89, M90, IC2177, IC2220, IC2631, NGC1433,
+	4.34 Images of M59, M60, M89, IC2177, IC2220, IC2631, NGC1433,
 	     NGC2442, NGC3572, PGC10074,
 	     RCW32, RCW38, RCW49, Fornax Cluster, Virgo Cluster
 	     from ESO/Digitized Sky Survey 2
@@ -424,7 +424,7 @@
 	4.35 Images of NGC3603 from ESO/La Silla Observatory
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.36 Images of M49, NGC147, NGC4228, NGC4244
+	4.36 Images of M49, NGC4228, NGC4244
 	     from Ole Nielsen
 	     License: Creative Commons Attribution-Share Alike 2.5 Generic 
 	4.37 Images of NGC2808, NGC7023, Hercules Cluster from NASA
@@ -432,7 +432,7 @@
 	4.38 Images of M44, IC1396 from Giuseppe Donatiello
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
 	4.39 Images of M12, M14, M19, M20, M22, M55, M56, M62, M88, M92, M108, 
-	     M109, IC5146, NGC225, NGC281, NGC663, NGC891, NGC1931, NGC6823, NGC7814
+	     IC5146, NGC225, NGC281, NGC663, NGC891, NGC1931, NGC6823, NGC7814
 	     from Hewholooks
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
@@ -733,14 +733,24 @@
 	      from NOIRLab/NSF/AURA, post-processing: Sun Shuwei 
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.115 Images of Dark Doodad Nebula, IC348, NGC404, NGC1365, NGC1569, NGC4372
+	4.115 Images of Dark Doodad Nebula, M90, M109, IC348, NGC147, NGC404, NGC1365, NGC1569, 
+	      NGC4372
 	      from Hansjorg Walchli, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
-	4.116 Images of NGC1566
+	4.116 Images of NGC1566, NGC1808
 	      from Dark Energy Survey/DOE/FNAL/DECam/CTIO/NOIRLab/NSF/AURA, Image processing: T.A. Rector (University of Alaska Anchorage/NSF NOIRLab), J. Miller (Gemini Observatory/NSF NOIRLab), M. Zamani & D. de Martin (NSF NOIRLab), post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
+	4.117 Images of NGC185
+	      from Thedarksideobservatory, post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 4.0 International
+4.117 Images of NGC5005
+	      from KPNO/NOIRLab/NSF/AURA/Ray and Emily Magnani/Adam Block
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution 4.0 International
+	      
 ```
 
 ## Appendix
