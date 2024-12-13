@@ -22,6 +22,7 @@
 
 #include "StelDialog.hpp"
 #include <QString>
+#include <QPair>
 
 class Ui_nebulaTexturesDialog;
 
@@ -78,6 +79,9 @@ private:
 
    double calculateDec(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
                                          double CD1_1, double CD1_2, double CD2_1, double CD2_2);
+
+   QPair<double, double> PixelToCelestial(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
+                                             double CD1_1, double CD1_2, double CD2_1, double CD2_2);
 
    double CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2;
    int IMAGEW, IMAGEH;

@@ -207,7 +207,11 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
    uploadJson["allow_commercial_use"] = "d";
    uploadJson["allow_modifications"] = "d";
    uploadJson["publicly_visible"] = "y";
+   uploadJson["tweak_order"] = 0;
+   uploadJson["crpix_center"] = true;
 
+   // 'tweak_order': 0,
+   //   'crpix_center': True
    QFile imageFile(ui->lineEditImagePath->text());
    if (!imageFile.open(QIODevice::ReadOnly)) {
       qDebug() << "Failed to open image file!";      
@@ -224,9 +228,9 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
 
    QByteArray boundary = "===============" + boundary_key.toUtf8() + "==";
 
-   QString contentType = QString("multipart/form-data; boundary=\"") + QString::fromUtf8(boundary) +"\"";
+   QByteArray contentType = "multipart/form-data; boundary=\"" + boundary +"\"";
    // QNetworkRequest request;
-   request.setHeader(QNetworkRequest::ContentTypeHeader, contentType.toUtf8());
+   request.setHeader(QNetworkRequest::ContentTypeHeader, contentType);
 
    QByteArray body;
    QByteArray jsonPart = "--" + boundary + "\r\n"
@@ -424,28 +428,37 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
    ui->referX->setValue(CRVAL1);
    ui->referY->setValue(CRVAL2);
 
+   QPair<double, double> result;
    int X=0,Y=0;
-
-   topLeftRA = calculateRA(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
-   topLeftDec = calculateDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+   result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+   topLeftRA = result.first;
+   topLeftDec = result.second;
    ui->topLeftX->setValue(topLeftRA);
    ui->topLeftY->setValue(topLeftDec);
 
    X = 0, Y = IMAGEH - 1;
-   bottomLeftRA = calculateRA(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
-   bottomLeftDec = calculateDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+   result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+   bottomLeftRA = result.first;
+   bottomLeftDec = result.second;
    ui->bottomLeftX->setValue(bottomLeftRA);
    ui->bottomLeftY->setValue(bottomLeftDec);
 
    X = IMAGEW - 1, Y = 0;
-   topRightRA = calculateRA(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
-   topRightDec = calculateDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+   result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+   topRightRA = result.first;
+   topRightDec = result.second;
    ui->topRightX->setValue(topRightRA);
    ui->topRightY->setValue(topRightDec);
 
+   qDebug()<<"["<<bottomLeftRA<<","<<bottomLeftDec<<"],"
+            <<"["<<bottomRightRA<<","<<bottomRightDec<<"],"
+            <<"["<<topRightRA<<","<<topRightDec<<"],"
+            <<"["<<topLeftRA<<","<<topLeftDec<<"]";
+
    X = IMAGEW - 1, Y = IMAGEH - 1;
-   bottomRightRA = calculateRA(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
-   bottomRightDec = calculateDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+   result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+   bottomRightRA = result.first;
+   bottomRightDec = result.second;
    ui->bottomRightX->setValue(bottomRightRA);
    ui->bottomRightY->setValue(bottomRightDec);
 
@@ -460,6 +473,87 @@ double NebulaTexturesDialog::calculateRA(int X, int Y, double CRPIX1, double CRP
 double NebulaTexturesDialog::calculateDec(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
                     double CD1_1, double CD1_2, double CD2_1, double CD2_2) {
    return CRVAL2 + ((X - CRPIX1) * CD2_1 + (Y - CRPIX2) * CD2_2);
+}
+
+
+QPair<double, double> NebulaTexturesDialog::PixelToCelestial(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
+                                       double CD1_1, double CD1_2, double CD2_1, double CD2_2){
+   // Constants
+   const double D2R = M_PI / 180.0;  // Degree to radian
+   const double R2D = 180.0 / M_PI;  // Radian to degree
+
+   // Convert the reference values (RA, Dec) to radians
+   double RA0 = CRVAL1 * D2R;
+   double Dec0 = CRVAL2 * D2R;
+
+   // Calculate dx and dy
+   double dx = X - CRPIX1;
+   double dy = Y - CRPIX2;
+
+   // Calculate xx and yy
+   double xx = CD1_1 * dx + CD1_2 * dy;
+   double yy = CD2_1 * dx + CD2_2 * dy;
+
+   // Calculate the celestial coordinates
+   double px = std::atan2(xx, -yy) * R2D;
+   double py = std::atan2(R2D, std::sqrt(xx * xx + yy * yy)) * R2D;
+
+   // Calculate sin(Dec) and cos(Dec)
+   double sin_dec = std::sin(D2R * (90.0 - CRVAL2));
+   double cos_dec = std::cos(D2R * (90.0 - CRVAL2));
+
+   // Calculate longitude offset (dphi)
+   double dphi = px - 180.0;
+
+   // Calculate celestial longitude and latitude
+   double sinthe = std::sin(py * D2R);
+   double costhe = std::cos(py * D2R);
+   double costhe3 = costhe * cos_dec;
+   double costhe4 = costhe * sin_dec;
+   double sinthe3 = sinthe * cos_dec;
+   double sinthe4 = sinthe * sin_dec;
+   double sinphi = std::sin(dphi * D2R);
+   double cosphi = std::cos(dphi * D2R);
+
+   // Calculate celestial longitude
+   double x = sinthe4 - costhe3 * cosphi;
+   double y = -costhe * sinphi;
+   double dlng = R2D * std::atan2(y, x);
+   double lng = CRVAL1 + dlng;
+
+   // Normalize the celestial longitude
+   if (CRVAL1 >= 0.0) {
+      if (lng < 0.0) {
+         lng += 360.0;
+      }
+   } else {
+      if (lng > 0.0) {
+         lng -= 360.0;
+      }
+   }
+
+   if (lng > 360.0) {
+      lng -= 360.0;
+   } else if (lng < -360.0) {
+      lng += 360.0;
+   }
+
+   // Calculate celestial latitude
+   double z = sinthe3 + costhe4 * cosphi;
+   double lat;
+   if (std::abs(z) > 0.99) {
+      // For higher precision, use an alternative formula
+      if (z < 0.0) {
+         lat = -std::abs(R2D * std::acos(std::sqrt(x * x + y * y)));
+      } else {
+         lat = std::abs(R2D * std::acos(std::sqrt(x * x + y * y)));
+      }
+   } else {
+      lat = R2D * std::asin(z);
+   }
+
+   // Return the result as a QPair of doubles
+   return QPair<double, double>(lng, lat);
 }
 
 void NebulaTexturesDialog::on_goPushButton_clicked()
