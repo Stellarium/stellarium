@@ -228,7 +228,7 @@ struct Star
          RA  = lon;
          DE  = lat;
          Plx = Plx2;
-         RV  = (pmr1 / MAS2RAD / plx) * (AU / JYEAR_SECONDS);
+         RV  = (pmr1 / MAS2RAD / Plx2) * (AU / JYEAR_SECONDS);
       } else {
          DE    = getX1();
          pmra  = getDx0() * cos(DE);
