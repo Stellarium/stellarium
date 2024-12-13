@@ -738,10 +738,7 @@
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
 	4.116 Images of NGC1566
-	      from Dark Energy Survey/DOE/FNAL/DECam/CTIO/NOIRLab/NSF/AURA, 
-	      Image processing: T.A. Rector (University of Alaska Anchorage/NSF NOIRLab), 
-	      J. Miller (Gemini Observatory/NSF NOIRLab), M. Zamani & D. de Martin 
-	      (NSF NOIRLab), post-processing: Sun Shuwei
+	      from Dark Energy Survey/DOE/FNAL/DECam/CTIO/NOIRLab/NSF/AURA, Image processing: T.A. Rector (University of Alaska Anchorage/NSF NOIRLab), J. Miller (Gemini Observatory/NSF NOIRLab), M. Zamani & D. de Martin (NSF NOIRLab), post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
 ```
