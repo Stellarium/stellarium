@@ -476,6 +476,30 @@ double NebulaTexturesDialog::calculateDec(int X, int Y, double CRPIX1, double CR
 }
 
 
+/*
+ * This function is based on the algorithm and approach from the code licensed under the Apache License, Version 2.0.
+ * The original code can be found at:
+ * https://github.com/PlanetaryResources/NTL-Asteroid-Data-Hunter/blob/master/Algorithms/Algorithm%20%231/alg1_psyho.h
+ *
+ * Copyright (C) [Year] [Original Authors].
+ *
+ * The function implementation is rewritten based on the logic and approach of the original code,
+ * but the code itself has been modified and is not directly copied.
+ *
+ * The code in this function is used under the terms of the Apache License, Version 2.0.
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at:
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * If you modified this code, include a description of the changes made below:
+ * [Optional: Describe any modifications made]
+ */
 QPair<double, double> NebulaTexturesDialog::PixelToCelestial(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
                                        double CD1_1, double CD1_2, double CD2_1, double CD2_2){
    // Constants
