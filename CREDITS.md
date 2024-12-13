@@ -424,7 +424,7 @@
 	4.35 Images of NGC3603 from ESO/La Silla Observatory
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.36 Images of M49, NGC147, NGC404, NGC4228, NGC4244
+	4.36 Images of M49, NGC147, NGC4228, NGC4244
 	     from Ole Nielsen
 	     License: Creative Commons Attribution-Share Alike 2.5 Generic 
 	4.37 Images of NGC2808, NGC7023, Hercules Cluster from NASA
@@ -457,8 +457,8 @@
 	     License: Creative Commons Attribution 4.0 International
  	4.43 Images of M33, M42, NGC253, NGC5566, LBN782, the Pleiades from HG731GZ
 	     License: Creative Commons Attribution 3.0 Unported
-	4.44 Images of M8, M17, M94, M104, IC434, IC2944, IC4628, NGC2264, NGC6334, NGC6357,
-	     NGC6726, NGC7293, SMC (Hydrogen Alpha)
+	4.44 Images of M8, M17, M94, M104, IC434, IC2944, IC4628, NGC2264, NGC53677, NGC6357,
+	     NGC6334, NGC6726, NGC7293, SMC (Hydrogen Alpha)
 	     from Dylan O'Donnell
 	     http://deography.com/
 	     License: public domain
@@ -733,8 +733,15 @@
 	      from NOIRLab/NSF/AURA, post-processing: Sun Shuwei 
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.115 Images of Dark Doodad Nebula, NGC1365, NGC 4372
+	4.115 Images of Dark Doodad Nebula, IC348, NGC404, NGC1365, NGC1569, NGC4372
 	      from Hansjorg Walchli, post-processing: Sun Shuwei
+	      https://www.deepskycorner.ch/index.de.php
+	      License: Creative Commons Attribution 4.0 International
+	4.116 Images of NGC1566
+	      from Dark Energy Survey/DOE/FNAL/DECam/CTIO/NOIRLab/NSF/AURA, 
+	      Image processing: T.A. Rector (University of Alaska Anchorage/NSF NOIRLab), 
+	      J. Miller (Gemini Observatory/NSF NOIRLab), M. Zamani & D. de Martin 
+	      (NSF NOIRLab), post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
 ```
