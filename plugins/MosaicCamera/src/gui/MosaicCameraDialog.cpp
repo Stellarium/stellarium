@@ -21,7 +21,7 @@
 // #include <QFileDialog>
 
 #include "StelApp.hpp"
-#include "ui_MosaicCameraDialog.h"
+#include "ui_mosaicCameraDialog.h"
 #include "MosaicCameraDialog.hpp"
 #include "MosaicCamera.hpp"
 #include "StelModuleMgr.hpp"
