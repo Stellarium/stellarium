@@ -457,7 +457,7 @@
 	     License: Creative Commons Attribution 4.0 International
  	4.43 Images of M33, M42, NGC253, NGC5566, LBN782, the Pleiades from HG731GZ
 	     License: Creative Commons Attribution 3.0 Unported
-	4.44 Images of M8, M17, M94, M104, IC434, IC2944, IC4628, NGC2264, NGC53677, NGC6357,
+	4.44 Images of M8, M17, M94, M104, IC434, IC2944, IC4628, NGC2264, NGC5367, NGC6357,
 	     NGC6334, NGC6726, NGC7293, SMC (Hydrogen Alpha)
 	     from Dylan O'Donnell
 	     http://deography.com/
