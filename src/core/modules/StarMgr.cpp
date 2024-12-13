@@ -1477,7 +1477,7 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	static const QRegularExpression rx5("^\\s*(Gaia DR3)\\s*(\\d+)\\s*.*$", QRegularExpression::CaseInsensitiveOption);
 	match=rx5.match(objw);
 	if (match.hasMatch())
-		return searchGaia(match.captured(2).toLong());
+		return searchGaia(match.captured(2).toLongLong());
 
 	// Search by English common name
 	auto it = commonNamesIndex.find(objw);
