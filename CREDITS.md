@@ -733,8 +733,7 @@
 	      from NOIRLab/NSF/AURA, post-processing: Sun Shuwei 
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.115 Images of Dark Doodad Nebula, M90, M109, IC348, NGC147, NGC404, NGC1365, NGC1569, 
-	      NGC4372
+	4.115 Images of Dark Doodad Nebula, NGC1365, NGC4372
 	      from Hansjorg Walchli, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
@@ -750,7 +749,10 @@
 	      from KPNO/NOIRLab/NSF/AURA/Ray and Emily Magnani/Adam Block
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	      
+	4.119 Images of M90, M109, IC348, NGC147, NGC404, NGC1569
+	      from Radek Chromik, post-processing: Sun Shuwei
+	      https://www.deepskycorner.ch/index.de.php
+	      License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
