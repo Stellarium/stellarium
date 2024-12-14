@@ -760,7 +760,11 @@
 	      License: Creative Commons Attribution 4.0 International
 	4.121 Images of IC2574, Sh2-313
 	      from Jerry Macon, post-processing: Sun Shuwei
-	      https://www.deepskycorner.ch/index.de.php
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution 4.0 International
+	4.121 Images of NGC5395
+	      from KPNO/NOIRLab/NSF/AURA/Doug Matthews and E. J. Jones/Adam Block, post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
 	      
 ```
