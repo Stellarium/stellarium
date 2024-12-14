@@ -766,6 +766,10 @@
 	      from KPNO/NOIRLab/NSF/AURA/Doug Matthews and E. J. Jones/Adam Block, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
+	4.122 Images of RCW77
+	      from KPNO/NOIRLab/NSF/AURA/Doug Matthews and E. J. Jones/Adam Block, post-processing: Sun Shuwei
+	      https://esahubble.org/
+	      License: public domain
 	      
 ```
 
