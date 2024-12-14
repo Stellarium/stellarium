@@ -203,23 +203,18 @@ struct Star
          if (lon < 0.)
             lon += 2. * M_PI;
          double lat    = atan2(u[2], sqrt(u[0] * u[0] + u[1] * u[1]));
-         // double d = sqrt(u[0] * u[0] + u[1] * u[1] + u[2] * u[2]);
 
          double Plx2   = plx * f;
          double pmr1   = (pmr0 + (pmtotsqr + pmr0 * pmr0) * dyrs) * f * f;
          Vec3d  pmvec1 = pmvec0 * (1 + pmr0 * dyrs);
-         pmvec1.set((pmvec1[0] - r[0] * pmr0 * pmr0 * dyrs) * f * f * f,
-                    (pmvec1[1] - r[1] * pmr0 * pmr0 * dyrs) * f * f * f,
-                    (pmvec1[2] - r[2] * pmr0 * pmr0 * dyrs) * f * f * f);
 
-         double slon = sin(lon);
-         double slat = sin(lat);
-         double clon = cos(lon);
-         double clat = cos(lat);
+         pmvec1.set((pmvec1[0] - r[0] * pmtotsqr * dyrs) * f * f * f,
+                    (pmvec1[1] - r[1] * pmtotsqr * dyrs) * f * f * f,
+                    (pmvec1[2] - r[2] * pmtotsqr * dyrs) * f * f * f);
 
-         // normal triad of a spherical coordinate system
-         Vec3d  p2(-slon, clon, 0.);
-         Vec3d  q2(-slat * clon, -slat * slon, clat);
+         double xy = sqrt(u[0] * u[0] + u[1] * u[1]);
+         Vec3d  p2(-u[1] / xy, u[0] / xy, 0.0);
+         Vec3d  q2(-u[0] * u[2] / xy, -u[1] * u[2] / xy, xy);
 
          pmra = p2[0] * pmvec1[0] + p2[1] * pmvec1[1] + p2[2] * pmvec1[2];
          pmra /= MAS2RAD;
