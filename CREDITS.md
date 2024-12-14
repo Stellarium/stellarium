@@ -472,7 +472,7 @@
 	     included in the section entitled GNU Free Documentation License.
 	4.46 Images of Sh2-129
 	     from Maurizio Cabibbo, post-processing: Sun Shuwei
-	     https://www.deepskycorner.ch/index.de.php
+	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
 	4.47 Images of M16, IC4592, IC4601, NGC4236, NGC6914, Perseus Cluster
 	     from Sun Gang
