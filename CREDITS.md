@@ -758,7 +758,7 @@
 	      from Eduard von Bergen & Hansjorg Walchli, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
-	4.121 Images of IC2574
+	4.121 Images of IC2574, Sh2-313
 	      from Jerry Macon, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
