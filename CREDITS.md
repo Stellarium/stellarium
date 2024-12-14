@@ -757,6 +757,11 @@
 	      from Eduard von Bergen & Hansjorg Walchli, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
+	4.121 Images of Sh2-129
+	      from Maurizio Cabibbo, post-processing: Sun Shuwei
+	      https://www.deepskycorner.ch/index.de.php
+	      License: Creative Commons Attribution-Share Alike 4.0 International
+	      
 ```
 
 ## Appendix
