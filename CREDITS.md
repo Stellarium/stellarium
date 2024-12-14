@@ -415,7 +415,7 @@
 	4.33 Images of PGC6830, PGC29653, UGC5373 from Lowell Observatory
 	     http://www2.lowell.edu/
 	     License: public domain
-	4.34 Images of M59, M60, M89, IC2177, IC2220, IC2631, NGC1433,
+	4.34 Images of M59, M60, M89, IC2220, IC2631, NGC1433,
 	     NGC2442, NGC3572, PGC10074,
 	     RCW32, RCW38, RCW49, Fornax Cluster, Virgo Cluster
 	     from ESO/Digitized Sky Survey 2
@@ -429,7 +429,7 @@
 	     License: Creative Commons Attribution-Share Alike 2.5 Generic 
 	4.37 Images of NGC2808, NGC7023, Hercules Cluster from NASA
 	     License: public domain
-	4.38 Images of M44, IC1396 from Giuseppe Donatiello
+	4.38 Images of M44, IC1396, IC2177 from Giuseppe Donatiello
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
 	4.39 Images of M12, M14, M19, M20, M22, M55, M56, M62, M88, M92, M108, 
 	     IC5146, NGC225, NGC281, NGC663, NGC891, NGC1931, NGC6823, NGC7814
