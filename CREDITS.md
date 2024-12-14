@@ -409,7 +409,7 @@
 	4.30 Image of NGC40 from Steven Bellavia
 	4.31 Images of NGC1579, NGC2467, NGC6590, Barnard Loop, IC342, SH2-297 from Sun Shuwei
 	     License: public domain
-	4.32 Images of M77, NGC3109, NGC3180, NGC4449, NGC5474, NGC6231, NGC6397, Sh2-264, Sh2-308, LDN1622
+	4.32 Images of M77, NGC3109, NGC3180, NGC5474, NGC6231, NGC6397, Sh2-264, Sh2-308, LDN1622
 	     from Wang Lingyi
 	     License: public domain
 	4.33 Images of PGC6830, PGC29653, UGC5373 from Lowell Observatory
@@ -470,9 +470,10 @@
 	     version published by the Free Software Foundation; with no Invariant Sections,
 	     no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is
 	     included in the section entitled GNU Free Documentation License.
-	4.46 Images of IC1613 
-	     from Philos2000
-	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.46 Images of Sh2-129
+	     from Maurizio Cabibbo, post-processing: Sun Shuwei
+	     https://www.deepskycorner.ch/index.de.php
+	     License: Creative Commons Attribution-Share Alike 4.0 International
 	4.47 Images of M16, IC4592, IC4601, NGC4236, NGC6914, Perseus Cluster
 	     from Sun Gang
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
@@ -733,7 +734,7 @@
 	      from NOIRLab/NSF/AURA, post-processing: Sun Shuwei 
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.115 Images of Dark Doodad Nebula, NGC1365, NGC4372
+	4.115 Images of Dark Doodad Nebula, IC1613, NGC1365, NGC4372
 	      from Hansjorg Walchli, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
@@ -741,7 +742,7 @@
 	      from Dark Energy Survey/DOE/FNAL/DECam/CTIO/NOIRLab/NSF/AURA, Image processing: T.A. Rector (University of Alaska Anchorage/NSF NOIRLab), J. Miller (Gemini Observatory/NSF NOIRLab), M. Zamani & D. de Martin (NSF NOIRLab), post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
-	4.117 Images of NGC185
+	4.117 Images of NGC185, NGC4449
 	      from Thedarksideobservatory, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
@@ -757,10 +758,10 @@
 	      from Eduard von Bergen & Hansjorg Walchli, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
-	4.121 Images of Sh2-129
-	      from Maurizio Cabibbo, post-processing: Sun Shuwei
+	4.121 Images of IC2574
+	      from Jerry Macon, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
-	      License: Creative Commons Attribution-Share Alike 4.0 International
+	      License: Creative Commons Attribution 4.0 International
 	      
 ```
 
