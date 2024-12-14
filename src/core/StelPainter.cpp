@@ -728,8 +728,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		glActiveTexture(GL_TEXTURE0);
 		glGetIntegerv(GL_TEXTURE_BINDING_2D, &oldTex);
 		tex->texture->bind(0);
-		x += tex->baselineShift.x();
-		y += tex->baselineShift.y();
+		xshift += tex->baselineShift.x();
+		yshift += tex->baselineShift.y();
 
 		static float vertexData[8];
 		// compute the vertex coordinates applying the translation and the rotation
