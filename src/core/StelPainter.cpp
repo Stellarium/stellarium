@@ -740,8 +740,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			const float sinr = std::sin(angleDeg * M_PI_180f);
 			for (int i = 0; i < 8; i+=2)
 			{
-				vertexData[i]   = int(x + (tex->size.width()*vertexBase[i]+xshift) * cosr - (tex->size.height()*vertexBase[i+1]+yshift) * sinr);
-				vertexData[i+1] = int(y + (tex->size.width()*vertexBase[i]+xshift) * sinr + (tex->size.height()*vertexBase[i+1]+yshift) * cosr);
+				vertexData[i]   = x + (tex->size.width()*vertexBase[i]+xshift) * cosr - (tex->size.height()*vertexBase[i+1]+yshift) * sinr;
+				vertexData[i+1] = y + (tex->size.width()*vertexBase[i]+xshift) * sinr + (tex->size.height()*vertexBase[i+1]+yshift) * cosr;
 			}
 		}
 		else
