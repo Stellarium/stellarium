@@ -31,7 +31,7 @@ void MosaicTcpServer::processClientData(QTcpSocket *client)
     QByteArray data = client->readAll();
     QString message(data);
 
-    QStringList params = message.split(',');
+    QStringList params = message.split(' ');
     if (params.size() == 4) {
         bool ok1, ok2, ok3;
         QString name = params[0];
