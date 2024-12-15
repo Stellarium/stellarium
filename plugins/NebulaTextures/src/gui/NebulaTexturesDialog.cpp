@@ -95,6 +95,9 @@ void NebulaTexturesDialog::createDialogContent()
    connect(ui->renderButton, SIGNAL(clicked()), this, SLOT(on_renderButton_clicked()));
    connect(ui->goPushButton, SIGNAL(clicked()), this, SLOT(on_goPushButton_clicked()));
 
+   connect(ui->addTexture, SIGNAL(clicked()), this, SLOT(on_addTexture_clicked()));
+   connect(ui->showTextures, SIGNAL(clicked()), this, SLOT(on_showTextures_clicked()));
+
 	setAboutHtml();
 }
 
@@ -210,8 +213,6 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
    uploadJson["tweak_order"] = 0;
    uploadJson["crpix_center"] = true;
 
-   // 'tweak_order': 0,
-   //   'crpix_center': True
    QFile imageFile(ui->lineEditImagePath->text());
    if (!imageFile.open(QIODevice::ReadOnly)) {
       qDebug() << "Failed to open image file!";      
@@ -279,7 +280,7 @@ void NebulaTexturesDialog::onUploadReply(QNetworkReply *reply)
    subId = QString::number(json["subid"].toInt());
    qDebug() << "Image uploaded. Sub ID:" << subId<< " "<<json["subid"];
 
-   subStatusTimer->start(2000);
+   subStatusTimer->start(3000);
    reply->deleteLater();
 
    updateStatus("Image uploaded. Please wait...");
@@ -313,7 +314,7 @@ void NebulaTexturesDialog::onsubStatusReply(QNetworkReply *reply)
       jobId = QString::number(jobs[0].toInt());
       qDebug() << "Job ID:" << jobId;
       subStatusTimer->stop();
-      jobStatusTimer->start(2000);
+      jobStatusTimer->start(3000);
       reply->deleteLater();
 
       updateStatus("Submission got. Please wait...");
@@ -608,6 +609,8 @@ void NebulaTexturesDialog::on_goPushButton_clicked()
 
 void NebulaTexturesDialog::on_renderButton_clicked()
 {
+   QString filePath = ui->lineEditImagePath->text();
+
    // Retrieve coordinates from the QDoubleSpinBoxes
    topLeftRA = ui->topLeftX->value();
    topLeftDec = ui->topLeftY->value();
@@ -620,13 +623,202 @@ void NebulaTexturesDialog::on_renderButton_clicked()
    referRA = ui->referX->value();
    referDec = ui->referY->value();
 
+   qDebug() << "[" << QString::number(bottomLeftRA, 'f', 10) << "," << QString::number(bottomLeftDec, 'f', 10) << "],"
+            << "[" << QString::number(bottomRightRA, 'f', 10) << "," << QString::number(bottomRightDec, 'f', 10) << "],"
+            << "[" << QString::number(topRightRA, 'f', 10) << "," << QString::number(topRightDec, 'f', 10) << "],"
+            << "[" << QString::number(topLeftRA, 'f', 10) << "," << QString::number(topLeftDec, 'f', 10) << "]";
+
    // Render logic with the provided coordinates
    QString renderStatus = QString("Rendering with coordinates");
 
    updateStatus(renderStatus);
 
+   addCustomTexture(filePath,filePath,
+                    bottomLeftRA,bottomLeftDec,
+                    bottomRightRA,bottomRightDec,
+                    topRightRA,topRightDec,
+                    topLeftRA,topLeftDec,true);
+
    // Example of rendering completion
    QTimer::singleShot(3000, this, [this]() {
       updateStatus("Rendering complete.");
    });
+}
+
+bool NebulaTexturesDialog::addCustomTexture(const QString& id, const QString& filePath,
+                                      double ra0, double dec0,
+                                      double ra1, double dec1,
+                                      double ra2, double dec2,
+                                      double ra3, double dec3,
+                                      bool visible)
+{
+   QString resolvedPath = StelFileMgr::findFile(filePath);
+   if (resolvedPath.isEmpty()) {
+      qWarning() << "NebulaTextures::addCustomTexture: File not found -" << filePath;
+      return false;
+   }
+
+   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+   if (!skyLayerMgr) {
+      qWarning() << "NebulaTextures::addCustomTexture: Could not get StelSkyLayerMgr instance.";
+      return false;
+   }
+
+   // bool success = skyLayerMgr->loadSkyImage(
+   //   id, resolvedPath,
+   //   ra0, dec0, ra1, dec1,
+   //   ra2, dec2, ra3, dec3,
+   //   1.0, 1.0,
+   //   visible, StelCore::FrameType::FrameJ2000,
+   //   false, 1
+   //   );
+
+   // if (success) {
+   //    qDebug() << "NebulaTextures::addCustomTexture: Successfully loaded texture with ID -" << id;
+   // } else {
+   //    qWarning() << "NebulaTextures::addCustomTexture: Failed to load texture with ID -" << id;
+   // }
+
+   // return success;
+   return true;
+}
+
+bool NebulaTexturesDialog::removeCustomTexture(const QString& id)
+{
+   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+   if (!skyLayerMgr) {
+      qWarning() << "NebulaTextures::removeCustomTexture: Could not get StelSkyLayerMgr instance.";
+      return false;
+   }
+
+   if (skyLayerMgr->getAllSkyLayers().contains(id)) {
+      skyLayerMgr->removeSkyLayer(id);
+      qDebug() << "NebulaTextures::removeCustomTexture: Successfully removed texture with ID -" << id;
+      return true;
+   } else {
+      qWarning() << "NebulaTextures::removeCustomTexture: No texture found with ID -" << id;
+      return false;
+   }
+}
+
+void NebulaTexturesDialog::on_addTexture_clicked()
+{
+   QString imagePath = ui->lineEditImagePath->text();
+   if (imagePath.isEmpty()) {
+      qWarning() << "Image path is empty.";
+      return;
+   }
+
+   QString pluginFolder = StelFileMgr::getUserDir() + pluginDir;
+   QDir().mkpath(pluginFolder);
+
+   QFileInfo fileInfo(imagePath);
+   QString baseName = fileInfo.completeBaseName();
+   QString extension = fileInfo.suffix();
+   QString timestamp = QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss");
+   QString targetFileName = QString("%1_%2.%3").arg(baseName, timestamp, extension);
+   QString targetFilePath = pluginFolder + targetFileName;
+
+   if (!QFile::copy(imagePath, targetFilePath)) {
+      qWarning() << "Failed to copy image file to target path:" << targetFilePath;
+      return;
+   }
+
+   QString imageUrl = targetFileName;
+
+   QJsonArray innerWorldCoords;
+   innerWorldCoords.append(QJsonArray({bottomLeftRA, bottomLeftDec}));
+   innerWorldCoords.append(QJsonArray({bottomRightRA, bottomRightDec}));
+   innerWorldCoords.append(QJsonArray({topRightRA, topRightDec}));
+   innerWorldCoords.append(QJsonArray({topLeftRA, topLeftDec}));
+
+   updateCustomTextures(imageUrl, innerWorldCoords, 0.2, 13.4);
+}
+
+void NebulaTexturesDialog::on_showTextures_clicked()
+{
+   QString path = StelFileMgr::getUserDir()+configFile;
+
+   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+
+   if (path.isEmpty())
+      qWarning() << "ERROR while loading nebula texture set default";
+   else
+      skyLayerMgr->insertSkyImage(path, QString(), true, 1);
+}
+
+
+
+void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const QJsonArray& innerWorldCoords, double minResolution, double maxBrightness)
+{
+
+   QString pluginFolder = StelFileMgr::getUserDir() + pluginDir;
+   QDir().mkpath(pluginFolder);
+
+   QString path = StelFileMgr::getUserDir()+configFile;
+
+   QFile jsonFile(path);
+   QJsonObject rootObject;
+
+   if (jsonFile.exists()) {
+      if (!jsonFile.open(QIODevice::ReadOnly)) {
+         qWarning() << "Failed to open existing JSON file for reading:" << path;
+         return;
+      }
+
+      QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
+      if (!jsonDoc.isObject()) {
+         qWarning() << "Invalid JSON structure in file:" << path;
+         return;
+      }
+
+      rootObject = jsonDoc.object();
+      jsonFile.close();
+   } else {
+      rootObject["shortName"] = "Custom Textures";
+      rootObject["description"] = "User specified low resolution nebula texture set.";
+      rootObject["minResolution"] = 0.05;
+      rootObject["alphaBlend"] = true;
+      rootObject["subTiles"] = QJsonArray();
+   }
+
+   QJsonArray subTiles = rootObject.value("subTiles").toArray();
+
+   QJsonObject newSubTile;
+   QJsonObject imageCredits;
+   imageCredits["short"] = "Local User";
+   newSubTile["imageCredits"] = imageCredits;
+   newSubTile["imageUrl"] = imageUrl;
+
+   QJsonArray outerWorldCoords;
+   outerWorldCoords.append(innerWorldCoords);
+   newSubTile["worldCoords"] = outerWorldCoords;
+
+   QJsonArray innerTextureCoords;
+   innerTextureCoords.append(QJsonArray({0, 0}));
+   innerTextureCoords.append(QJsonArray({1, 0}));
+   innerTextureCoords.append(QJsonArray({1, 1}));
+   innerTextureCoords.append(QJsonArray({0, 1}));
+
+   QJsonArray outerTextureCoords;
+   outerTextureCoords.append(innerTextureCoords);
+   newSubTile["textureCoords"] = outerTextureCoords;
+
+   newSubTile["minResolution"] = minResolution;
+   newSubTile["maxBrightness"] = maxBrightness;
+
+   subTiles.append(newSubTile);
+   rootObject["subTiles"] = subTiles;
+
+   if (!jsonFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+      qWarning() << "Failed to open JSON file for writing:" << path;
+      return;
+   }
+
+   QJsonDocument updatedDoc(rootObject);
+   jsonFile.write(updatedDoc.toJson(QJsonDocument::Indented));
+   jsonFile.flush();
+   jsonFile.close();
+
+   qDebug() << "Updated custom textures JSON file successfully.";
 }

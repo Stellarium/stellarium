@@ -426,6 +426,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="showTextures">
+         <property name="text">
+          <string>Show All Custom Textures</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Orientation::Vertical</enum>
