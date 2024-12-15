@@ -90,13 +90,13 @@ void TestAstrometry::testBarnardStar()  // test the Barnard's Star
     int64_t gaiaID = 4472832130942575872;
     // star catalog epoch, to make sure the parameters used to calculate the expected values with astropy are consistent with the catalog
     test6DAstrometryPropagation(gaiaID, 0.f, 269.4485025254, 4.7394200511, 546.9759, -801.5510, 10362.3942, -110.1);
-    // +50000 years from star catalog epoch
+    // +50,000 years from star catalog epoch
     test6DAstrometryPropagation(gaiaID, 50000.0f, 94.31898499, 45.53314217, 1000. / 5.96896177, -106.8912309, -968.34471548, 139.49528674);
-    // -50000 years from star catalog epoch
+    // -50,000 years from star catalog epoch
     test6DAstrometryPropagation(gaiaID, -50000.0f, 272.05148359, -26.85371759, 1000. / 8.76802626, -38.93178342, 450.23851363, -141.01396308);
-    // epoch J5000.0
+    // +5,000 years from star catalog epoch
     test6DAstrometryPropagation(gaiaID, 5000.0f, 267.78462028, 24.68056845, 1000. / 1.34632329, -1620.90567344, 19094.44118355, -72.63017957);
-    // epoch -J5000.0
+    // -5,000 years from star catalog epoch
     test6DAstrometryPropagation(gaiaID, -5000.0f, 270.28908849, -6.13067591, 1000. / 2.435383, -452.77813098, 5839.89405934, -125.15516343);
 }
 
@@ -109,8 +109,8 @@ void TestAstrometry::testCrux()  // test a random Gaia star within the Crux that
     test6DAstrometryPropagation(gaiaID, 50000.0f, 187.36342614, -59.32866405, 1000. / 144.36052582, -2.75739473, -21.94230771, 0.08113282);
     // -50000 years from star catalog epoch
     test6DAstrometryPropagation(gaiaID, -50000.0f, 187.51094009, -58.7190592, 1000. / 144.36056489, -2.7089515, -21.94834105, -0.08113285);
-    // epoch J5000.0
+    // +5,000 years from star catalog epoch
     test6DAstrometryPropagation(gaiaID, 5000.0f, 187.43045509, -59.05436291, 1000. / 144.35848975, -2.73542374, -21.94569162, 0.0081134);
-    // epoch -J5000.0
+    // -5,000 years from star catalog epoch
     test6DAstrometryPropagation(gaiaID, -5000.0f, 187.44520535, -58.99340181, 1000. / 144.35849365, -2.73057972, -21.94629486, -0.0081134);
 }
