@@ -584,3 +584,30 @@ StelObjectP SpecialZoneArray<Star>::searchGaiaID(int index, const int64_t source
 	}
 	return StelObjectP();
 }
+
+template<class Star>
+// this class is written for the unit test
+void SpecialZoneArray<Star>::searchGaiaIDepochPos(const int64_t source_id,
+                                                  float         dyrs,
+                                                  double &      RA,
+                                                  double &      DEC,
+                                                  double &      Plx,
+                                                  double &      pmra,
+                                                  double &      pmdec,
+                                                  double &      RV) const
+{
+   // loop throught each zone in the level which is 20 * 4 ** level + 1 as index
+   for (int i = 0; i < 20 * pow(4, (level)) + 1; i++) {
+      // get the zone data
+      const SpecialZoneData<Star> * const z = getZones() + i;
+      // loop through the stars in the zone
+      for (const Star * s = z->getStars(); s < z->getStars() + z->size; ++s) {
+         // check if the star has the same Gaia ID
+         if (s->getGaia() == source_id) {
+            // get the J2000 position of the star
+            s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RV, dyrs);
+            return;
+         }
+      }
+   }
+}

@@ -178,7 +178,7 @@ struct Star
                                  double & RV,
                                  float    dyrs) const
    {
-      if (getPreciseAstrometricFlag()) {
+      if (getX2() != 0. || getDx2() != 0.) {
          double r0  = getX0();
          double r1  = getX1();
          double r2  = getX2();

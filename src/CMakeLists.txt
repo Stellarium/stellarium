@@ -831,6 +831,16 @@ IF(ENABLE_TESTING)
     ADD_TEST(testAirmass testAirmass)
     SET_TARGET_PROPERTIES(testAirmass PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testAstrometry_SRCS
+        tests/testAstrometry.hpp
+        tests/testAstrometry.cpp
+    )
+    ADD_EXECUTABLE(testAstrometry ${tests_testAstrometry_SRCS})
+    TARGET_LINK_LIBRARIES(testAstrometry ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testAstrometry)
+    ADD_TEST(testAstrometry testAstrometry)
+    SET_TARGET_PROPERTIES(testAstrometry PROPERTIES FOLDER "src/tests")
+
     SET(tests_testGeomMath_SRCS
         tests/testGeomMath.hpp
         tests/testGeomMath.cpp
