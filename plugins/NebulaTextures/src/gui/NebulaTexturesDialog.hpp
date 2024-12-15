@@ -24,6 +24,12 @@
 #include <QString>
 #include <QPair>
 
+#include "NebulaTextures.hpp"
+#include "StelSkyLayerMgr.hpp"
+#include "StelFileMgr.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
+
 class Ui_nebulaTexturesDialog;
 
 //! Main window of the Nebula Textures plug-in.
@@ -35,6 +41,14 @@ class NebulaTexturesDialog : public StelDialog
 public:
 	NebulaTexturesDialog();
 	~NebulaTexturesDialog() override;
+
+   bool addCustomTexture(const QString& id, const QString& filePath,
+                                               double ra0, double dec0,
+                                               double ra1, double dec1,
+                                               double ra2, double dec2,
+                                               double ra3, double dec3,
+                                               bool visible);
+   bool removeCustomTexture(const QString& id);
 
 public slots:
 	void retranslate() override;
@@ -49,6 +63,8 @@ private slots:
    void on_uploadImageButton_clicked();
    void on_renderButton_clicked();
    void on_goPushButton_clicked();
+   void on_addTexture_clicked();
+   void on_showTextures_clicked();
 
    void onLoginReply(QNetworkReply *reply);
    void onUploadReply(QNetworkReply *reply);
@@ -88,6 +104,11 @@ private:
    double topLeftRA, topLeftDec, bottomLeftRA, bottomLeftDec;
    double topRightRA, topRightDec, bottomRightRA, bottomRightDec;
    double referRA, referDec;
+
+   QString pluginDir = "/modules/NebulaTextures/";
+   QString configFile = "/modules/NebulaTextures/custom_textures.json";
+
+   void updateCustomTextures(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness);
 };
 
 #endif /* NEBULATEXTURESDIALOG_HPP */
