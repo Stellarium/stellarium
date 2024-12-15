@@ -31,6 +31,8 @@
 #include "StelMovementMgr.hpp"
 #include "StelUtils.hpp"
 
+#include <QListWidgetItem>
+#include <QMessageBox>
 #include <QFileDialog>
 #include <QTimer>
 
@@ -50,7 +52,8 @@
 #include <cmath>
 
 NebulaTexturesDialog::NebulaTexturesDialog()
-	: StelDialog("NebulaTextures")
+   : StelDialog("NebulaTextures")
+   , m_conf(StelApp::getInstance().getSettings())
 {
 	ui = new Ui_nebulaTexturesDialog();
 
@@ -97,8 +100,18 @@ void NebulaTexturesDialog::createDialogContent()
 
    connect(ui->addTexture, SIGNAL(clicked()), this, SLOT(on_addTexture_clicked()));
    connect(ui->showTextures, SIGNAL(clicked()), this, SLOT(on_showTextures_clicked()));
+   connect(ui->removeButton, SIGNAL(clicked()), this, SLOT(on_removeButton_clicked()));
+
+   connect(ui->showTextures, SIGNAL(clicked(bool)), this, SLOT(setShowCustomTextures(bool)));
+   connect(ui->checkBoxAvoid, SIGNAL(clicked(bool)), this, SLOT(setAvoidAreaConflict(bool)));
 
 	setAboutHtml();
+
+   // load config
+   flag_showCustomTextures = getShowCustomTextures();
+   flag_avoidAreaConflict = getAvoidAreaConflict();
+
+   loadAllData();
 }
 
 void NebulaTexturesDialog::restoreDefaults()
@@ -732,6 +745,7 @@ void NebulaTexturesDialog::on_addTexture_clicked()
    innerWorldCoords.append(QJsonArray({topRightRA, topRightDec}));
    innerWorldCoords.append(QJsonArray({topLeftRA, topLeftDec}));
 
+   // should check whether exists
    updateCustomTextures(imageUrl, innerWorldCoords, 0.2, 13.4);
 }
 
@@ -744,7 +758,7 @@ void NebulaTexturesDialog::on_showTextures_clicked()
    if (path.isEmpty())
       qWarning() << "ERROR while loading nebula texture set default";
    else
-      skyLayerMgr->insertSkyImage(path, QString(), true, 1);
+      skyLayerMgr->insertSkyImage(path, QString("custom"), true, 1);
 }
 
 
@@ -821,4 +835,185 @@ void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const Q
    jsonFile.close();
 
    qDebug() << "Updated custom textures JSON file successfully.";
+}
+
+void NebulaTexturesDialog::loadAllData()
+{
+
+   QString path = StelFileMgr::getUserDir()+configFile;
+
+   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+
+   // if (path.isEmpty()){
+   //    qWarning() << "ERROR while loading nebula texture set default";
+   //    return;
+   // }
+   QFile jsonFile(path);
+   QJsonObject rootObject;
+
+   if (!jsonFile.open(QIODevice::ReadOnly)) {
+      qWarning() << "Failed to open existing JSON file for reading:" << path;
+      return;
+   }
+
+   QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
+   if (!jsonDoc.isObject()) {
+      qWarning() << "Invalid JSON structure in file:" << path;
+      return;
+   }
+
+   rootObject = jsonDoc.object();
+   jsonFile.close();
+
+   // read and show into listWidget
+
+   if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()) {
+      qWarning() << "No 'subTiles' array found in JSON file:" << path;
+      return;
+   }
+
+   QJsonArray subTiles = rootObject["subTiles"].toArray();
+
+
+   ui->listWidget->clear();
+
+   m_texturesNum = 0;
+
+   for (const QJsonValue& subTileValue : subTiles) {
+      if (!subTileValue.isObject()) {
+         qWarning() << "Invalid subTile entry found, skipping...";
+         continue;
+      }
+
+      QJsonObject subTileObject = subTileValue.toObject();
+
+      if (subTileObject.contains("imageUrl") && subTileObject["imageUrl"].isString()) {
+         QString imageUrl = subTileObject["imageUrl"].toString();
+
+         QListWidgetItem* item = new QListWidgetItem(imageUrl, ui->listWidget);
+
+         QVariant data = QVariant::fromValue(subTileObject);
+         item->setData(Qt::UserRole, data);
+
+         ui->listWidget->addItem(item);
+
+         m_texturesNum++;
+      } else {
+         qWarning() << "No 'imageUrl' found in subTile, skipping...";
+      }
+   }
+
+   // check and render
+   if (flag_showCustomTextures)
+      skyLayerMgr->insertSkyImage(path, QString("custom"), true, 1);
+
+}
+
+
+void NebulaTexturesDialog::on_removeButton_clicked()
+{
+
+   QListWidgetItem* selectedItem = ui->listWidget->currentItem();
+   if (!selectedItem) {
+      // QMessageBox::warning(this, tr("No Selection"), tr("Please select an item to remove."));
+      return;
+   }
+
+   QString selectedText = selectedItem->text();
+   // int ret = QMessageBox::question(
+   //   this,
+   //   tr("Confirm Removal"),
+   //   tr("Are you sure you want to remove the selected item: \"%1\"?").arg(selectedText),
+   //   QMessageBox::Yes | QMessageBox::No
+   //   );
+
+   if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to remove this texture?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+      return;
+
+   // if (ret != QMessageBox::Yes) {
+   //    return;
+   // }
+
+   QString path = StelFileMgr::getUserDir() + configFile;
+   QFile jsonFile(path);
+   if (!jsonFile.open(QIODevice::ReadOnly)) {
+      // QMessageBox::critical(this, tr("Error"), tr("Failed to open JSON file for reading."));
+      return;
+   }
+
+   QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
+   jsonFile.close();
+
+   if (!jsonDoc.isObject()) {
+      // QMessageBox::critical(this, tr("Error"), tr("Invalid JSON structure in file."));
+      return;
+   }
+
+   QJsonObject rootObject = jsonDoc.object();
+
+   if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()) {
+      // QMessageBox::critical(this, tr("Error"), tr("No valid 'subTiles' array in JSON."));
+      return;
+   }
+
+   QJsonArray subTiles = rootObject["subTiles"].toArray();
+
+   QJsonArray updatedSubTiles;
+   bool found = false;
+
+   for (const QJsonValue& subTileValue : subTiles) {
+      if (!subTileValue.isObject()) {
+         updatedSubTiles.append(subTileValue);
+         continue;
+      }
+
+      QJsonObject subTileObject = subTileValue.toObject();
+      if (subTileObject.contains("imageUrl") && subTileObject["imageUrl"].toString() == selectedText) {
+         found = true;
+         continue;
+      }
+
+      updatedSubTiles.append(subTileValue);
+   }
+
+   if (!found) {
+      // QMessageBox::warning(this, tr("Not Found"), tr("Selected item was not found in JSON data."));
+      return;
+   }
+
+   rootObject["subTiles"] = updatedSubTiles;
+
+   if (!jsonFile.open(QIODevice::WriteOnly)) {
+      // QMessageBox::critical(this, tr("Error"), tr("Failed to open JSON file for writing."));
+      return;
+   }
+
+   jsonFile.write(QJsonDocument(rootObject).toJson(QJsonDocument::Indented));
+   jsonFile.close();
+
+   delete selectedItem;
+
+   // QMessageBox::information(this, tr("Success"), tr("Selected item has been removed."));
+
+
+}
+
+void NebulaTexturesDialog::setShowCustomTextures(bool b)
+{
+   m_conf->setValue(MS_CONFIG_PREFIX + "/showCustomTextures", b);
+}
+
+bool NebulaTexturesDialog::getShowCustomTextures()
+{
+   return m_conf->value(MS_CONFIG_PREFIX + "/showCustomTextures", false).toBool();
+}
+
+void NebulaTexturesDialog::setAvoidAreaConflict(bool b)
+{
+   m_conf->setValue(MS_CONFIG_PREFIX + "/avoidAreaConflict", b);
+}
+
+bool NebulaTexturesDialog::getAvoidAreaConflict()
+{
+   return m_conf->value(MS_CONFIG_PREFIX + "/avoidAreaConflict", false).toBool();
 }

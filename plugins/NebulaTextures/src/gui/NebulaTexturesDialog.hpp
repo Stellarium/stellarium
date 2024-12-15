@@ -30,6 +30,8 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
+#define MS_CONFIG_PREFIX QString("NebulaTextures")
+
 class Ui_nebulaTexturesDialog;
 
 //! Main window of the Nebula Textures plug-in.
@@ -65,6 +67,7 @@ private slots:
    void on_goPushButton_clicked();
    void on_addTexture_clicked();
    void on_showTextures_clicked();
+   void on_removeButton_clicked();
 
    void onLoginReply(QNetworkReply *reply);
    void onUploadReply(QNetworkReply *reply);
@@ -78,6 +81,7 @@ private slots:
 private:
 	Ui_nebulaTexturesDialog* ui;
 
+   QSettings* m_conf;
 
    QNetworkAccessManager *networkManager;
    QString session;
@@ -109,6 +113,18 @@ private:
    QString configFile = "/modules/NebulaTextures/custom_textures.json";
 
    void updateCustomTextures(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness);
+
+   void loadAllData();
+
+   bool getShowCustomTextures();
+   void setShowCustomTextures(bool b);
+   bool getAvoidAreaConflict();
+   void setAvoidAreaConflict(bool b);
+
+   bool flag_showCustomTextures;
+   bool flag_avoidAreaConflict;
+
+   int m_texturesNum = 0;
 };
 
 #endif /* NEBULATEXTURESDIALOG_HPP */
