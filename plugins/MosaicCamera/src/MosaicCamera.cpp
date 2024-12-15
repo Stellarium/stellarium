@@ -370,7 +370,6 @@ void MosaicCamera::draw(StelCore* core)
         double sinAlpha = sin(alpha);
 
         for (const auto& polygonSet : camera.polygon_sets) {
-
             // Set color for this polygon set
             painter.setColor(
                 polygonSet.color.redF(),
