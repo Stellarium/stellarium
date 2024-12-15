@@ -521,10 +521,10 @@
 	4.58 Images of IC2118, NGC1499
 	     from Zhao Jingna
 	     License:  Creative Commons Attribution 3.0 Unported
-	4.59 Images of NGC1491
-	     from Chuck Ayoub
-	     https://commons.wikimedia.org/wiki/
-	     License:  Creative Commons Attribution-Share Alike 4.0 International
+	4.59 Images o UGC10822
+	     from Science NASA, ESA, Eduardo Vitral (STScI), Roeland van der Marel (STScI), Sangmo Tony Sohn (STScI), DSS Image Processing: Joseph DePasquale (STScI)
+	     https://noirlab.edu/public/
+	     License: Public domain
 	4.60 Images of IC2169, NGC2244, NGC3077, SH2-155, SH2-263, Barnard 22, Barnard207,
 	     Abell85
 	     from Keesscherer
@@ -751,7 +751,7 @@
 	      from KPNO/NOIRLab/NSF/AURA/Ray and Emily Magnani/Adam Block
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.119 Images of M90, M109, IC348, NGC147, NGC404, NGC1569, NGC1624
+	4.119 Images of M90, M109, IC348, NGC147, NGC404, NGC1491, NGC1569, NGC1624
 	      from Radek Chromik, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
@@ -779,10 +779,6 @@
 	      from T.A. Rector (University of Alaska Anchorage) and H. Schweiker (WIYN and NOIRLab/NSF/AURA), post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
-	4.125 Images o UGC10822
-	      from Science NASA, ESA, Eduardo Vitral (STScI), Roeland van der Marel (STScI), Sangmo Tony Sohn (STScI), DSS Image Processing: Joseph DePasquale (STScI)
-	      https://noirlab.edu/public/
-	      License: Public domain
 ```
 
 ## Appendix
