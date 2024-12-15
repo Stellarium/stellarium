@@ -525,7 +525,7 @@
 	     from Chuck Ayoub
 	     https://commons.wikimedia.org/wiki/
 	     License:  Creative Commons Attribution-Share Alike 4.0 International
-	4.60 Images of IC2169, NGC2244, NGC3077, SH2-155, SH2-263, UGC10822, Barnard 22, Barnard207,
+	4.60 Images of IC2169, NGC2244, NGC3077, SH2-155, SH2-263, Barnard 22, Barnard207,
 	     Abell85
 	     from Keesscherer
 	     https://commons.wikimedia.org/wiki/
@@ -779,7 +779,10 @@
 	      from T.A. Rector (University of Alaska Anchorage) and H. Schweiker (WIYN and NOIRLab/NSF/AURA), post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
-	      
+	4.125 Images o UGC10822
+	      from Science NASA, ESA, Eduardo Vitral (STScI), Roeland van der Marel (STScI), Sangmo Tony Sohn (STScI), DSS Image Processing: Joseph DePasquale (STScI)
+	      https://noirlab.edu/public/
+	      License: Public domain
 ```
 
 ## Appendix
