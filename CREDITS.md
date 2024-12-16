@@ -430,7 +430,7 @@
 	     License: Creative Commons Attribution-Share Alike 2.5 Generic 
 	4.37 Images of NGC2808, NGC7023, Hercules Cluster from NASA
 	     License: public domain
-	4.38 Images of M44, IC1396, IC2177 from Giuseppe Donatiello
+	4.38 Images of M44, IC1396 from Giuseppe Donatiello
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
 	4.39 Images of M12, M14, M19, M20, M22, M55, M56, M62, M88, M92, M108, 
 	     IC5146, NGC225, NGC281, NGC663, NGC891, NGC1931, NGC6823, NGC7814
@@ -779,6 +779,11 @@
 	      from T.A. Rector (University of Alaska Anchorage) and H. Schweiker (WIYN and NOIRLab/NSF/AURA), post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
+	4.125 Images of IC2177 
+	      from Giuseppe Donatiello, post-processing: Sun Shuwei
+	      https://flickr.com/photos/133259498@N05/
+	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
+	      
 ```
 
 ## Appendix
