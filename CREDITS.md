@@ -410,7 +410,7 @@
 	4.31 Images of NGC1579, NGC2467, NGC6590, Barnard Loop, IC342
 	     from Sun Shuwei
 	     License: public domain
-	4.32 Images of M77, NGC3109, NGC3180, NGC5474, NGC6231, NGC6397, Sh2-264, Sh2-308, LDN1622
+	4.32 Images of M77, NGC3180, NGC5474, NGC6231, NGC6397, Sh2-264, Sh2-308, LDN1622
 	     from Wang Lingyi
 	     License: public domain
 	4.33 Images of PGC6830, PGC29653, UGC5373 from Lowell Observatory
@@ -785,6 +785,10 @@
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
 	4.126 Images of NGC4976
 	      from ESO/Dss2, Giuseppe Donatiello, post-processing: Sun Shuwei
+	      https://flickr.com/photos/133259498@N05/
+	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
+	4.127 Images of NGC3109
+	      from DESI LIS, Giuseppe Donatiello, post-processing: Sun Shuwei
 	      https://flickr.com/photos/133259498@N05/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
 	      
