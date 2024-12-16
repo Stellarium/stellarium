@@ -63,6 +63,8 @@ NebulaTexturesDialog::NebulaTexturesDialog()
    jobStatusTimer = new QTimer(this);
    connect(subStatusTimer, &QTimer::timeout, this, &NebulaTexturesDialog::checkSubStatus);
    connect(jobStatusTimer, &QTimer::timeout, this, &NebulaTexturesDialog::checkJobStatus);
+
+   reloadTextures();
 }
 
 NebulaTexturesDialog::~NebulaTexturesDialog()
@@ -99,17 +101,18 @@ void NebulaTexturesDialog::createDialogContent()
    connect(ui->goPushButton, SIGNAL(clicked()), this, SLOT(on_goPushButton_clicked()));
 
    connect(ui->addTexture, SIGNAL(clicked()), this, SLOT(on_addTexture_clicked()));
-   connect(ui->showTextures, SIGNAL(clicked()), this, SLOT(on_showTextures_clicked()));
+   connect(ui->showTextures, SIGNAL(clicked()), this, SLOT(on_showTextures_clicked())); // banned
    connect(ui->removeButton, SIGNAL(clicked()), this, SLOT(on_removeButton_clicked()));
 
-   connect(ui->showTextures, SIGNAL(clicked(bool)), this, SLOT(setShowCustomTextures(bool)));
+   connect(ui->reloadButton, SIGNAL(clicked()), this, SLOT(reloadTextures()));
+   connect(ui->checkBoxShow, SIGNAL(clicked(bool)), this, SLOT(setShowCustomTextures(bool)));
    connect(ui->checkBoxAvoid, SIGNAL(clicked(bool)), this, SLOT(setAvoidAreaConflict(bool)));
 
 	setAboutHtml();
 
    // load config
-   flag_showCustomTextures = getShowCustomTextures();
-   flag_avoidAreaConflict = getAvoidAreaConflict();
+   ui->checkBoxShow->setChecked(getShowCustomTextures());
+   ui->checkBoxAvoid->setChecked(getAvoidAreaConflict());
 
    loadAllData();
 }
@@ -698,6 +701,7 @@ bool NebulaTexturesDialog::addCustomTexture(const QString& id, const QString& fi
 
 bool NebulaTexturesDialog::removeCustomTexture(const QString& id)
 {
+   /*
    StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
    if (!skyLayerMgr) {
       qWarning() << "NebulaTextures::removeCustomTexture: Could not get StelSkyLayerMgr instance.";
@@ -712,6 +716,8 @@ bool NebulaTexturesDialog::removeCustomTexture(const QString& id)
       qWarning() << "NebulaTextures::removeCustomTexture: No texture found with ID -" << id;
       return false;
    }
+   */
+   return true;
 }
 
 void NebulaTexturesDialog::on_addTexture_clicked()
@@ -757,8 +763,9 @@ void NebulaTexturesDialog::on_showTextures_clicked()
 
    if (path.isEmpty())
       qWarning() << "ERROR while loading nebula texture set default";
-   else
-      skyLayerMgr->insertSkyImage(path, QString("custom"), true, 1);
+   else{
+      skyLayerMgr->insertSkyImage(path, QString(), true, 1);
+   }
 }
 
 
@@ -789,7 +796,7 @@ void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const Q
       rootObject = jsonDoc.object();
       jsonFile.close();
    } else {
-      rootObject["shortName"] = "Custom Textures";
+      rootObject["shortName"] = keyName;
       rootObject["description"] = "User specified low resolution nebula texture set.";
       rootObject["minResolution"] = 0.05;
       rootObject["alphaBlend"] = true;
@@ -904,8 +911,10 @@ void NebulaTexturesDialog::loadAllData()
    }
 
    // check and render
-   if (flag_showCustomTextures)
-      skyLayerMgr->insertSkyImage(path, QString("custom"), true, 1);
+   // if (flag_showCustomTextures)
+   //    skyLayerMgr->insertSkyImage(path, QString(), true, 1);
+
+   reloadTextures();
 
 }
 
@@ -994,13 +1003,19 @@ void NebulaTexturesDialog::on_removeButton_clicked()
    delete selectedItem;
 
    // QMessageBox::information(this, tr("Success"), tr("Selected item has been removed."));
-
-
 }
+
+void NebulaTexturesDialog::showOffTextures(){
+
+   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+   skyLayerMgr->removeSkyLayer(QString(keyName));
+}
+
 
 void NebulaTexturesDialog::setShowCustomTextures(bool b)
 {
    m_conf->setValue(MS_CONFIG_PREFIX + "/showCustomTextures", b);
+   reloadTextures();
 }
 
 bool NebulaTexturesDialog::getShowCustomTextures()
@@ -1011,9 +1026,25 @@ bool NebulaTexturesDialog::getShowCustomTextures()
 void NebulaTexturesDialog::setAvoidAreaConflict(bool b)
 {
    m_conf->setValue(MS_CONFIG_PREFIX + "/avoidAreaConflict", b);
+   reloadTextures();
 }
 
 bool NebulaTexturesDialog::getAvoidAreaConflict()
 {
    return m_conf->value(MS_CONFIG_PREFIX + "/avoidAreaConflict", false).toBool();
+}
+
+void NebulaTexturesDialog::reloadTextures()
+{
+   if (flag_displayTextures){
+      qDebug() << "remove";
+      showOffTextures();
+      flag_displayTextures = false;
+   }
+   qDebug() << "show flag" << getShowCustomTextures();
+   if (getShowCustomTextures() == true){
+      on_showTextures_clicked();
+      qDebug() << "show";
+      flag_displayTextures = true;
+   }
 }
