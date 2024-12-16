@@ -545,10 +545,10 @@
 	     from TRAPPIST/E. Jehin/ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.65 Images of NGC288
-	     from Sunfishtommy
-	     https://commons.wikimedia.org/wiki/
-	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.65 Images of IC2177, NGC288 
+	     from Giuseppe Donatiello, post-processing: Sun Shuwei
+	     https://flickr.com/photos/133259498@N05/
+	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
 	4.66 Images of IC1848, NGC1055
 	     from Jeffjnet
 	     http://www.iceinspace.com.au/
@@ -779,15 +779,11 @@
 	      from T.A. Rector (University of Alaska Anchorage) and H. Schweiker (WIYN and NOIRLab/NSF/AURA), post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
-	4.125 Images of IC2177 
-	      from Giuseppe Donatiello, post-processing: Sun Shuwei
-	      https://flickr.com/photos/133259498@N05/
-	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.126 Images of Sh2-82, Sh2-91
+	4.125 Images of Sh2-82, Sh2-91
 	      from Sebastian Goralik, post-processing: Sun Shuwei
 	      https://flickr.com/photos/sebastiangoralik/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.127 Images of NGC4976
+	4.126 Images of NGC4976
 	      from ESO/Dss2, Giuseppe Donatiello, post-processing: Sun Shuwei
 	      https://flickr.com/photos/133259498@N05/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
