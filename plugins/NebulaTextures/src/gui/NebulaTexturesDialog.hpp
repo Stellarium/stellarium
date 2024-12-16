@@ -52,6 +52,8 @@ public:
                                                bool visible);
    bool removeCustomTexture(const QString& id);
 
+   QString keyName = "Custom Textures";
+
 public slots:
 	void retranslate() override;
 
@@ -77,6 +79,13 @@ private slots:
 
    void checkSubStatus();
    void checkJobStatus();
+
+   bool getShowCustomTextures();
+   void setShowCustomTextures(bool b);
+   bool getAvoidAreaConflict();
+   void setAvoidAreaConflict(bool b);
+
+   void reloadTextures();
 
 private:
 	Ui_nebulaTexturesDialog* ui;
@@ -116,15 +125,11 @@ private:
 
    void loadAllData();
 
-   bool getShowCustomTextures();
-   void setShowCustomTextures(bool b);
-   bool getAvoidAreaConflict();
-   void setAvoidAreaConflict(bool b);
-
-   bool flag_showCustomTextures;
-   bool flag_avoidAreaConflict;
-
    int m_texturesNum = 0;
+
+   void showOffTextures();
+
+   bool flag_displayTextures = false;
 };
 
 #endif /* NEBULATEXTURESDIALOG_HPP */
