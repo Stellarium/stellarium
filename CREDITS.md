@@ -783,9 +783,13 @@
 	      from Giuseppe Donatiello, post-processing: Sun Shuwei
 	      https://flickr.com/photos/133259498@N05/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.125 Images of Sh2-82, Sh2-91
+	4.126 Images of Sh2-82, Sh2-91
 	      from Sebastian Goralik, post-processing: Sun Shuwei
 	      https://flickr.com/photos/sebastiangoralik/
+	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
+	4.127 Images of NGC4976
+	      from ESO/Dss2, Giuseppe Donatiello, post-processing: Sun Shuwei
+	      https://flickr.com/photos/133259498@N05/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
 	      
 ```
