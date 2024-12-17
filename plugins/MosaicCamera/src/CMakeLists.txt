@@ -4,8 +4,6 @@ LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 SET(MosaicCamera_SRCS
      MosaicCamera.hpp
      MosaicCamera.cpp
-     MosaicTcpServer.hpp
-     MosaicTcpServer.cpp
      gui/MosaicCameraDialog.hpp
      gui/MosaicCameraDialog.cpp
 )
@@ -28,7 +26,6 @@ SET(MosaicCamera_Qt_Libraries
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Gui
     Qt${QT_VERSION_MAJOR}::Widgets
-    Qt${QT_VERSION_MAJOR}::Network
 )
 
 ADD_LIBRARY(MosaicCamera-static STATIC ${MosaicCamera_SRCS} ${MosaicCamera_RES_CXX} ${MosaicCamera_UIS_H})

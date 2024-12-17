@@ -24,7 +24,6 @@
 #include "StelModuleMgr.hpp"
 #include "MosaicCamera.hpp"
 #include "MosaicCameraDialog.hpp"
-#include "MosaicTcpServer.hpp"
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
 #include "CustomObject.hpp"
@@ -66,7 +65,6 @@ MosaicCamera::MosaicCamera()
 {
     setObjectName("MosaicCamera");
     configDialog = new MosaicCameraDialog();
-    tcpServer = new MosaicTcpServer();
     conf = StelApp::getInstance().getSettings();
 }
 
@@ -76,7 +74,6 @@ MosaicCamera::MosaicCamera()
 MosaicCamera::~MosaicCamera()
 {
     delete configDialog;
-    delete tcpServer;
 }
 
 void MosaicCamera::loadSettings()
@@ -128,10 +125,6 @@ void MosaicCamera::init()
     Q_INIT_RESOURCE(MosaicCamera);
 
     initializeUserData();
-
-    qDebug() << "[MosaicCamera] Starting TCP server";
-    tcpServer->startServer(5772);
-    connect(tcpServer, &MosaicTcpServer::newValuesReceived, this, &MosaicCamera::updateMosaic);
 
     qDebug() << "[MosaicCamera] Loading built-in cameras";
     loadBuiltInCameras();
