@@ -19,7 +19,6 @@
 #ifndef MOSAICCAMERA_HPP
 #define MOSAICCAMERA_HPP
 
-#include "MosaicTcpServer.hpp"
 #include "StelModule.hpp"
 #include "StelPluginInterface.hpp"
 #include <QColor>
@@ -109,7 +108,6 @@ private:
 	void copyResourcesToUserDirectory();
 
 	MosaicCameraDialog* configDialog;
-	MosaicTcpServer* tcpServer;
 };
 
 class MosaicCameraStelPluginInterface : public QObject, public StelPluginInterface
