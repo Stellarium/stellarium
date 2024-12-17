@@ -26,11 +26,12 @@
 
 #include "NebulaTextures.hpp"
 #include "StelSkyLayerMgr.hpp"
-#include "StelFileMgr.hpp"
 #include "StelApp.hpp"
-#include "StelCore.hpp"
 
 #define MS_CONFIG_PREFIX QString("NebulaTextures")
+#define CUSTOM_TEXNAME QString("Custom Textures")
+#define DEFAULT_TEXNAME QString("Nebulae")
+#define TEST_TEXNAME QString("Test Textures")
 
 class Ui_nebulaTexturesDialog;
 
@@ -44,17 +45,23 @@ public:
 	NebulaTexturesDialog();
 	~NebulaTexturesDialog() override;
 
-   bool renderTempCustomTexture(const QString& id, const QString& filePath,
-                                               double ra0, double dec0,
-                                               double ra1, double dec1,
-                                               double ra2, double dec2,
-                                               double ra3, double dec3,
-                                               bool visible);
-
-   QString keyName = "Custom Textures";
+   StelSkyImageTile* get_aTile(QString key);
 
 public slots:
 	void retranslate() override;
+
+
+   QPair<double, double> PixelToCelestial(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
+                                          double CD1_1, double CD1_2, double CD2_1, double CD2_2);
+
+   void renderTempCustomTexture();
+   void unRenderTempCustomTexture();
+
+   void addTexture(QString addPath, QString keyName);
+   void updateCustomTextures(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness, QString keyName, QString addPath);
+
+   void reloadTextures();
+   void avoidConflict();
 
 protected:
 	void createDialogContent() override;
@@ -65,11 +72,7 @@ private slots:
    void on_openFileButton_clicked();
    void on_uploadImageButton_clicked();
    void on_goPushButton_clicked();
-
-   void on_renderButton_clicked();
    void on_addTexture_clicked();
-   void on_showTextures_clicked();
-
    void on_removeButton_clicked();
 
    void onLoginReply(QNetworkReply *reply);
@@ -86,34 +89,19 @@ private slots:
    bool getAvoidAreaConflict();
    void setAvoidAreaConflict(bool b);
 
-   void reloadTextures();
+   void reloadData();
 
 private:
 	Ui_nebulaTexturesDialog* ui;
-
    QSettings* m_conf;
 
+   QString API_URL = "http://nova.astrometry.net/";
    QNetworkAccessManager *networkManager;
    QString session;
    QString subId;
    QString jobId;
    QTimer *subStatusTimer;
    QTimer *jobStatusTimer;
-   QString API_URL = "http://nova.astrometry.net/";
-
-	void setAboutHtml();
-   void updateStatus(const QString &status);
-
-   /*
-   double calculateRA(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
-                                        double CD1_1, double CD1_2, double CD2_1, double CD2_2);
-
-   double calculateDec(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
-                                         double CD1_1, double CD1_2, double CD2_1, double CD2_2);
-   */
-
-   QPair<double, double> PixelToCelestial(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
-                                             double CD1_1, double CD1_2, double CD2_1, double CD2_2);
 
    double CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2;
    int IMAGEW, IMAGEH;
@@ -121,20 +109,15 @@ private:
    double topRightRA, topRightDec, bottomRightRA, bottomRightDec;
    double referRA, referDec;
 
-   QString pluginDir = "/modules/NebulaTextures/";
+   QString pluginDir  = "/modules/NebulaTextures/";
    QString configFile = "/modules/NebulaTextures/custom_textures.json";
+   QString tmpcfgFile = "/modules/NebulaTextures/temp_textures.json";
 
-   void updateCustomTextures(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness);
+   bool flag_renderTempTex = false;
 
-   void reloadData();
+   void setAboutHtml();
+   void updateStatus(const QString &status);
 
-   int m_texturesNum = 0;
-
-   void showOffTextures();
-
-   bool flag_displayTextures = false;
-
-   void avoidConflict();
 };
 
 #endif /* NEBULATEXTURESDIALOG_HPP */

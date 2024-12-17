@@ -81,6 +81,7 @@ void NebulaTextures::init()
    // addAction("actionShow_NebulaTextures_ConfigDialog",
    //           N_("Nebula Textures"), N_("Open Nebula Textures configuration dialog"),
    //           configDialog, "visible");
+   configDialog->reloadTextures();
 }
 
 void NebulaTextures::draw(StelCore* core)

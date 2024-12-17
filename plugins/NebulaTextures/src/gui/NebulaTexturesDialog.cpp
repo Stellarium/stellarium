@@ -27,18 +27,16 @@
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMainView.hpp"
-
 #include "StelMovementMgr.hpp"
 #include "StelUtils.hpp"
-
 #include "StelSkyImageTile.hpp"
+#include "StelFileMgr.hpp"
+#include "StelCore.hpp"
 
 #include <QListWidgetItem>
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QTimer>
-
-
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkRequest>
@@ -54,7 +52,8 @@
 #include <cmath>
 
 NebulaTexturesDialog::NebulaTexturesDialog()
-   : StelDialog("NebulaTextures")
+   : StelDialog("NebulaTextures"),
+   flag_renderTempTex(false)
    , m_conf(StelApp::getInstance().getSettings())
 {
 	ui = new Ui_nebulaTexturesDialog();
@@ -74,6 +73,7 @@ NebulaTexturesDialog::~NebulaTexturesDialog()
 	delete ui;
 }
 
+
 void NebulaTexturesDialog::retranslate()
 {
 	if (dialog)
@@ -82,6 +82,7 @@ void NebulaTexturesDialog::retranslate()
 		setAboutHtml();
 	}
 }
+
 
 void NebulaTexturesDialog::createDialogContent()
 {
@@ -99,11 +100,12 @@ void NebulaTexturesDialog::createDialogContent()
 
    connect(ui->openFileButton, SIGNAL(clicked()), this, SLOT(on_openFileButton_clicked()));
    connect(ui->uploadImageButton, SIGNAL(clicked()), this, SLOT(on_uploadImageButton_clicked()));
-   connect(ui->renderButton, SIGNAL(clicked()), this, SLOT(on_renderButton_clicked()));
    connect(ui->goPushButton, SIGNAL(clicked()), this, SLOT(on_goPushButton_clicked()));
+   connect(ui->renderButton, SIGNAL(clicked()), this, SLOT(renderTempCustomTexture()));
+   connect(ui->unrenderButton, SIGNAL(clicked()), this, SLOT(unRenderTempCustomTexture()));
 
    connect(ui->addTexture, SIGNAL(clicked()), this, SLOT(on_addTexture_clicked()));
-   connect(ui->showTextures, SIGNAL(clicked()), this, SLOT(on_showTextures_clicked())); // banned
+   // connect(ui->showTextures, SIGNAL(clicked()), this, SLOT(reloadTextures()));
    connect(ui->removeButton, SIGNAL(clicked()), this, SLOT(on_removeButton_clicked()));
 
    connect(ui->reloadButton, SIGNAL(clicked()), this, SLOT(reloadData()));
@@ -112,12 +114,13 @@ void NebulaTexturesDialog::createDialogContent()
 
 	setAboutHtml();
 
-   // // load config
-   // ui->checkBoxShow->setChecked(getShowCustomTextures());
-   // ui->checkBoxAvoid->setChecked(getAvoidAreaConflict());
+   // load config
+   ui->checkBoxShow->setChecked(getShowCustomTextures());
+   ui->checkBoxAvoid->setChecked(getAvoidAreaConflict());
 
    reloadData();
 }
+
 
 void NebulaTexturesDialog::restoreDefaults()
 {
@@ -161,7 +164,6 @@ void NebulaTexturesDialog::setAvoidAreaConflict(bool b)
 {
    m_conf->setValue(MS_CONFIG_PREFIX + "/avoidAreaConflict", b);
    reloadTextures();
-   avoidConflict();
 }
 
 bool NebulaTexturesDialog::getAvoidAreaConflict()
@@ -169,12 +171,6 @@ bool NebulaTexturesDialog::getAvoidAreaConflict()
    return m_conf->value(MS_CONFIG_PREFIX + "/avoidAreaConflict", false).toBool();
 }
 
-
-void NebulaTexturesDialog::showOffTextures(){
-
-   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-   skyLayerMgr->removeSkyLayer(QString(keyName));
-}
 
 void NebulaTexturesDialog::updateStatus(const QString &status)
 {
@@ -314,6 +310,7 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
    updateStatus("Uploading image...");
 }
 
+// TODO: image should not be flip
 void NebulaTexturesDialog::onUploadReply(QNetworkReply *reply)
 {
    QByteArray content = reply->readAll();
@@ -431,8 +428,6 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
 
    reply->deleteLater();
 
-
-
    QRegularExpression regex("(CRPIX1|CRPIX2|CRVAL1|CRVAL2|CD1_1|CD1_2|CD2_1|CD2_2|IMAGEW|IMAGEH)\\s*=\\s*(-?\\d*\\.?\\d+([eE][-+]?\\d+)?)(.*)");
    QStringList lines;
    for (int i = 0; i < content.length(); i += 80) {
@@ -515,18 +510,6 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
 
    updateStatus("Goto Reference Point, Try to Render, Check and Adjust Coordinates.");
 }
-
-/*
-double NebulaTexturesDialog::calculateRA(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
-                   double CD1_1, double CD1_2, double CD2_1, double CD2_2) {
-   return CRVAL1 + ((X - CRPIX1) * CD1_1 + (Y - CRPIX2) * CD1_2) / cos(CRVAL2 * M_PI / 180.0);
-}
-
-double NebulaTexturesDialog::calculateDec(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
-                    double CD1_1, double CD1_2, double CD2_1, double CD2_2) {
-   return CRVAL2 + ((X - CRPIX1) * CD2_1 + (Y - CRPIX2) * CD2_2);
-}
-*/
 
 
 
@@ -662,10 +645,74 @@ void NebulaTexturesDialog::on_goPushButton_clicked()
    // mvmgr->setFlagLockEquPos(useLockPosition);
 }
 
-// logic
-void NebulaTexturesDialog::on_renderButton_clicked()
+
+// TODO: only a temp json show - enable/disable
+void NebulaTexturesDialog::renderTempCustomTexture()
 {
-   QString filePath = ui->lineEditImagePath->text();
+   updateStatus("Rendering with coordinates");
+
+   addTexture(tmpcfgFile, TEST_TEXNAME);
+
+   QString path = StelFileMgr::getUserDir()+tmpcfgFile;
+
+   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+
+   if (path.isEmpty())
+      qWarning() << "ERROR while loading nebula texture set default";
+   else{
+      if(flag_renderTempTex) unRenderTempCustomTexture();
+      skyLayerMgr->insertSkyImage(path, QString(), true, 1);
+      flag_renderTempTex = true;
+   }
+
+   updateStatus("Rendering complete.");
+   // skyLayerMgr->loadSkyImage(
+   //   id, resolvedPath,
+   //   ra0, dec0, ra1, dec1,
+   //   ra2, dec2, ra3, dec3,
+   //   1.0, 1.0,
+   //   visible, StelCore::FrameType::FrameJ2000,
+   //   false, 1
+   //   );
+}
+
+void NebulaTexturesDialog::unRenderTempCustomTexture()
+{
+   if(!flag_renderTempTex) return;
+   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+   skyLayerMgr->removeSkyLayer(TEST_TEXNAME);
+}
+
+// logic, hint: will add next time restart
+void NebulaTexturesDialog::on_addTexture_clicked()
+{
+   addTexture(configFile, CUSTOM_TEXNAME);
+}
+
+
+// logic, hint: will add next time restart
+void NebulaTexturesDialog::addTexture(QString addPath, QString keyName)
+{
+   QString imagePath = ui->lineEditImagePath->text();
+   if (imagePath.isEmpty()) {
+      qWarning() << "Image path is empty.";
+      return;
+   }
+
+   QString pluginFolder = StelFileMgr::getUserDir() + pluginDir;
+   QDir().mkpath(pluginFolder);
+
+   QFileInfo fileInfo(imagePath);
+   QString baseName = fileInfo.completeBaseName();
+   QString extension = fileInfo.suffix();
+   QString timestamp = QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss");
+   QString targetFileName = QString("%1_%2.%3").arg(baseName, timestamp, extension);
+   QString targetFilePath = pluginFolder + targetFileName;
+   if (!QFile::copy(imagePath, targetFilePath)) {
+      qWarning() << "Failed to copy image file to target path:" << targetFilePath;
+      return;
+   }
+   QString imageUrl = targetFileName;
 
    // Retrieve coordinates from the QDoubleSpinBoxes
    topLeftRA = ui->topLeftX->value();
@@ -684,87 +731,7 @@ void NebulaTexturesDialog::on_renderButton_clicked()
             << "[" << QString::number(topRightRA, 'f', 10) << "," << QString::number(topRightDec, 'f', 10) << "],"
             << "[" << QString::number(topLeftRA, 'f', 10) << "," << QString::number(topLeftDec, 'f', 10) << "]";
 
-   // Render logic with the provided coordinates
-   QString renderStatus = QString("Rendering with coordinates");
 
-   updateStatus(renderStatus);
-
-   renderTempCustomTexture(filePath,filePath,
-                    bottomLeftRA,bottomLeftDec,
-                    bottomRightRA,bottomRightDec,
-                    topRightRA,topRightDec,
-                    topLeftRA,topLeftDec,true);
-
-   // Example of rendering completion
-   // QTimer::singleShot(3000, this, [this]() {
-      updateStatus("Rendering complete.");
-   // });
-}
-
-// TODO: only a temp json show
-bool NebulaTexturesDialog::renderTempCustomTexture(const QString& id, const QString& filePath,
-                                      double ra0, double dec0,
-                                      double ra1, double dec1,
-                                      double ra2, double dec2,
-                                      double ra3, double dec3,
-                                      bool visible)
-{
-   QString resolvedPath = StelFileMgr::findFile(filePath);
-   if (resolvedPath.isEmpty()) {
-      qWarning() << "NebulaTextures::addCustomTexture: File not found -" << filePath;
-      return false;
-   }
-
-   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-   if (!skyLayerMgr) {
-      qWarning() << "NebulaTextures::addCustomTexture: Could not get StelSkyLayerMgr instance.";
-      return false;
-   }
-
-   // bool success = skyLayerMgr->loadSkyImage(
-   //   id, resolvedPath,
-   //   ra0, dec0, ra1, dec1,
-   //   ra2, dec2, ra3, dec3,
-   //   1.0, 1.0,
-   //   visible, StelCore::FrameType::FrameJ2000,
-   //   false, 1
-   //   );
-
-   // if (success) {
-   //    qDebug() << "NebulaTextures::addCustomTexture: Successfully loaded texture with ID -" << id;
-   // } else {
-   //    qWarning() << "NebulaTextures::addCustomTexture: Failed to load texture with ID -" << id;
-   // }
-
-   // return success;
-   return true;
-}
-
-// logic, hint: will add next time restart
-void NebulaTexturesDialog::on_addTexture_clicked()
-{
-   QString imagePath = ui->lineEditImagePath->text();
-   if (imagePath.isEmpty()) {
-      qWarning() << "Image path is empty.";
-      return;
-   }
-
-   QString pluginFolder = StelFileMgr::getUserDir() + pluginDir;
-   QDir().mkpath(pluginFolder);
-
-   QFileInfo fileInfo(imagePath);
-   QString baseName = fileInfo.completeBaseName();
-   QString extension = fileInfo.suffix();
-   QString timestamp = QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss");
-   QString targetFileName = QString("%1_%2.%3").arg(baseName, timestamp, extension);
-   QString targetFilePath = pluginFolder + targetFileName;
-
-   if (!QFile::copy(imagePath, targetFilePath)) {
-      qWarning() << "Failed to copy image file to target path:" << targetFilePath;
-      return;
-   }
-
-   QString imageUrl = targetFileName;
 
    QJsonArray innerWorldCoords;
    innerWorldCoords.append(QJsonArray({bottomLeftRA, bottomLeftDec}));
@@ -773,23 +740,23 @@ void NebulaTexturesDialog::on_addTexture_clicked()
    innerWorldCoords.append(QJsonArray({topLeftRA, topLeftDec}));
 
    // should check whether exists
-   updateCustomTextures(imageUrl, innerWorldCoords, 0.2, 13.4);
+   updateCustomTextures(imageUrl, innerWorldCoords, 0.2, 13.4, keyName, addPath);
 }
 
 
 // write to json
-void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const QJsonArray& innerWorldCoords, double minResolution, double maxBrightness)
+void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const QJsonArray& innerWorldCoords, double minResolution, double maxBrightness, QString keyName, QString addPath)
 {
 
    QString pluginFolder = StelFileMgr::getUserDir() + pluginDir;
    QDir().mkpath(pluginFolder);
 
-   QString path = StelFileMgr::getUserDir()+configFile;
+   QString path = StelFileMgr::getUserDir() + addPath;
 
    QFile jsonFile(path);
    QJsonObject rootObject;
 
-   if (jsonFile.exists()) {
+   if (jsonFile.exists() && keyName!=TEST_TEXNAME) {
       if (!jsonFile.open(QIODevice::ReadOnly)) {
          qWarning() << "Failed to open existing JSON file for reading:" << path;
          return;
@@ -925,22 +892,6 @@ void NebulaTexturesDialog::on_removeButton_clicked()
 
 
 
-// TODO: only enable or disable all custom show flag
-void NebulaTexturesDialog::on_showTextures_clicked()
-{
-   QString path = StelFileMgr::getUserDir()+configFile;
-
-   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-
-   if (path.isEmpty())
-      qWarning() << "ERROR while loading nebula texture set default";
-   else{
-      skyLayerMgr->insertSkyImage(path, QString(), true, 1);
-      // skyLayerMgr->loadCollection(path, 1);
-   }
-}
-
-
 // load json to window
 void NebulaTexturesDialog::reloadData()
 {
@@ -950,10 +901,6 @@ void NebulaTexturesDialog::reloadData()
 
    StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
 
-   // if (path.isEmpty()){
-   //    qWarning() << "ERROR while loading nebula texture set default";
-   //    return;
-   // }
    QFile jsonFile(path);
    QJsonObject rootObject;
 
@@ -980,17 +927,13 @@ void NebulaTexturesDialog::reloadData()
 
    QJsonArray subTiles = rootObject["subTiles"].toArray();
 
-
    ui->listWidget->clear();
-
-   m_texturesNum = 0;
 
    for (const QJsonValue& subTileValue : subTiles) {
       if (!subTileValue.isObject()) {
          qWarning() << "Invalid subTile entry found, skipping...";
          continue;
       }
-
 
       QJsonObject subTileObject = subTileValue.toObject();
 
@@ -1004,7 +947,6 @@ void NebulaTexturesDialog::reloadData()
 
          ui->listWidget->addItem(item);
 
-         m_texturesNum++;
       } else {
          qWarning() << "No 'imageUrl' found in subTile, skipping...";
       }
@@ -1012,139 +954,98 @@ void NebulaTexturesDialog::reloadData()
 }
 
 
-
-// not truely reload but set show of entire custom
+// only enable or disable all custom show flag
 void NebulaTexturesDialog::reloadTextures()
 {
-   // if (flag_displayTextures){
-   //    qDebug() << "remove";
-   //    showOffTextures();
-   //    flag_displayTextures = false;
+   // QString path = StelFileMgr::getUserDir()+configFile;
+
+   // StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+
+   // if (path.isEmpty())
+   //    qWarning() << "ERROR while loading nebula texture set default";
+   // else{
+   //    skyLayerMgr->insertSkyImage(path, QString(), true, 1);
+   //    // skyLayerMgr->loadCollection(path, 1);
    // }
-   // qDebug() << "show flag" << getShowCustomTextures();
-   // if (getShowCustomTextures() == true){
-   //    on_showTextures_clicked();
-   //    qDebug() << "show";
-   //    flag_displayTextures = true;
-   // }
+
+   bool showCustom = getShowCustomTextures();
+   StelSkyImageTile* cusTile = get_aTile(CUSTOM_TEXNAME);
+   StelSkyImageTile* defTile = get_aTile(DEFAULT_TEXNAME);
+   if(!cusTile) return;
+   if(!defTile) return;
+   qDebug() << "updateVisibleState" << showCustom << "size:" << cusTile->getSubTiles().size() << defTile->getSubTiles().size();
+   if (!showCustom){
+      for (int i = 0; i < cusTile->getSubTiles().size(); ++i) {
+         auto subTile = cusTile->getSubTiles()[i];
+         StelSkyImageTile* subImageTile = dynamic_cast<StelSkyImageTile*>(subTile);
+         // subImageTile->flagVisible = false;
+         subImageTile->setVisible(false);
+      }
+      for (int i = 0; i < defTile->getSubTiles().size(); ++i) {
+         auto subTile = defTile->getSubTiles()[i];
+         StelSkyImageTile* subImageTile = dynamic_cast<StelSkyImageTile*>(subTile);
+         // subImageTile->flagVisible = true;
+         subImageTile->setVisible(true);
+      }
+   }
+   else{
+      for (int i = 0; i < cusTile->getSubTiles().size(); ++i) {
+         auto subTile = cusTile->getSubTiles()[i];
+         StelSkyImageTile* subImageTile = dynamic_cast<StelSkyImageTile*>(subTile);
+         // subImageTile->flagVisible = true;
+         subImageTile->setVisible(true);
+      }
+      avoidConflict(); // only when show_custom && avoid_conflict
+   }
+}
+
+
+StelSkyImageTile* NebulaTexturesDialog::get_aTile(QString key)
+{
+   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+   auto aTex = skyLayerMgr->allSkyLayers.find(key);
+   StelSkyLayerMgr::SkyLayerElem* aElem = aTex.value();
+   if (!aElem || !aElem->layer) return nullptr;
+   StelSkyImageTile* aTile = dynamic_cast<StelSkyImageTile*>(aElem->layer.data());
+   return aTile;
 }
 
 
 
-void NebulaTexturesDialog::avoidConflict() // select and compare poly
+// TODO: select and compare poly
+void NebulaTexturesDialog::avoidConflict()
 {
-   // 获取 StelSkyLayerMgr 实例
-   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-
-   // 遍历所有的天空图层
-   qDebug() << "skyLayerMgr->allSkyLayers.size" << skyLayerMgr->allSkyLayers.size();
-
-
-
-   // : select the key one.
-   auto cusTex = skyLayerMgr->allSkyLayers.find("Custom Textures");
-   StelSkyLayerMgr::SkyLayerElem* cusElem = cusTex.value();  // 获取每个 SkyLayerElem 对象
-   if (!cusElem || !cusElem->layer) return;
-   StelSkyImageTile* cusTile = dynamic_cast<StelSkyImageTile*>(cusElem->layer.data());
-   qDebug()<<"Custom Textures:";
-   qDebug() << "subTilesUrls"<< cusTile->subTilesUrls;
-   qDebug() << "skyConvexPolygons"<< cusTile->skyConvexPolygons;
-   qDebug()<<"subTiles size:"<<cusTile->subTiles.size();
-
-
-
-
-   // : select the key one.
-   qDebug()<<"Nebulae:";
-   auto it = skyLayerMgr->allSkyLayers.find("Nebulae");
-
-
-   // for (auto it = skyLayerMgr->allSkyLayers.begin(); it != skyLayerMgr->allSkyLayers.end(); ++it) {
-      StelSkyLayerMgr::SkyLayerElem* layerElem = it.value();  // 获取每个 SkyLayerElem 对象
-   //    if (!layerElem || !layerElem->layer) continue;  // 如果没有图层数据则跳过
-      if (!layerElem || !layerElem->layer) return;
-
-
-      // 尝试将 layer 转换为 StelSkyImageTile
-      StelSkyImageTile* imageTile = dynamic_cast<StelSkyImageTile*>(layerElem->layer.data());
-
-      qDebug() << "convert layer to imageTile" ;
-
-      if (imageTile) {
-         qDebug() << "if imageTile" ;
-
-
-         // :select group subTiles
-         /*
-         // 获取 StelSkyImageTile 中的 imageUrl 和 worldCoords
-         QVariantList imageUrl = imageTile->subTilesUrls;  // 假设 StelSkyImageTile 提供 getImageUrl() 方法
-         // QList<QVariantList> worldCoords = imageTile->getWorldCoords();  // 假设 StelSkyImageTile 提供 getWorldCoords() 方法
-         // 打印前10个元素
-         qDebug()<<"imageUrl size:"<<imageUrl.size();
-         int count = qMin(10, imageUrl.size()); // 获取最小值，防止元素少于10个
-         for (int i = 0; i < count; ++i) {
-            // qDebug() << "Element" << i << ":" << imageUrl[i].toString();
-            auto s = imageUrl[i];
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-            if (s.metaType()==QMetaType(QMetaType::QVariantMap))
-#else
-            if (s.type()==QVariant::Map)
-#endif
-            {
-               QString m_url = s.toMap()["imageUrl"].toString();
-               qDebug() << "meta Type" << m_url; // 每张贴图
-               // if (m_url.startsWith("m")){
-               */
-
-            qDebug()<<"subTiles size:"<<imageTile->subTiles.size();
-            for (int i = 0; i < qMin(10, imageTile->subTiles.size()); ++i) {
-               // if(imageTile->subTiles.size() > i){
-               auto subTile = imageTile->subTiles[i];
-               StelSkyImageTile* subImageTile = dynamic_cast<StelSkyImageTile*>(subTile);
-               // if (!subImageTile) {
-               //    qDebug() << "if not subImageTile";
-               // }
-               // {
-               qDebug() << "if subImageTile";
-               qDebug() << "URI"<< subImageTile->absoluteImageURI;
-               qDebug() << "size" << subImageTile->skyConvexPolygons.size();
-               // subImageTile->flagVisible = !subImageTile->flagVisible;
-               // 对 subImageTile 做一些操作， 比如调用 getTilesToDraw
-               // subImageTile->getTilesToDraw(result, core, viewPortPoly, limitLuminance, !fullInScreen);
-               // }
-               // }
-               // }
-               // 需要遍历每一个
+   if (getAvoidAreaConflict()){
+      StelSkyImageTile* cusTile = get_aTile(CUSTOM_TEXNAME);
+      StelSkyImageTile* defTile = get_aTile(DEFAULT_TEXNAME);
+      if(!cusTile) return;
+      if(!defTile) return;
+      for (int i = 0; i < defTile->getSubTiles().size(); ++i) {
+         StelSkyImageTile* subdefTile = dynamic_cast<StelSkyImageTile*>(defTile->getSubTiles()[i]);
+         if(subdefTile->getVisible() == true && subdefTile->getSkyConvexPolygons().size()>0){
+            SphericalRegionP subdefPoly = subdefTile->getSkyConvexPolygons()[0];
+            for (int j = 0; j < cusTile->getSubTiles().size(); ++j) {
+               StelSkyImageTile* subcusTile = dynamic_cast<StelSkyImageTile*>(cusTile->getSubTiles()[j]);
+               if(subcusTile->getVisible() == true && subcusTile->getSkyConvexPolygons().size()>0){
+                  SphericalRegionP subcusPoly = subcusTile->getSkyConvexPolygons()[0];
+                  if (subcusPoly->intersects(subdefPoly)){
+                     // qDebug() << "intersect:"<< subdefTile->absoluteImageURI << "," << subcusTile->absoluteImageURI;
+                     subdefTile->setVisible(false);
+                  }
+               }
             }
-
-
-            /*
-               // nt = new StelSkyImageTile(s.toMap(), this, decimation);
-            else
-            {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-               Q_ASSERT(s.metaType()==QMetaType(QMetaType::QString));
-#else
-               Q_ASSERT(s.type()==QVariant::String);
-#endif
-               qDebug() << s.toString();
-               // nt = new StelSkyImageTile(s.toString(), this, decimation);
-            }
-            */
-
-
          }
-
-         // 对 imageUrl 或 worldCoords 进行处理
-         // qDebug() << "Image URL: " << imageUrl;
-         // qDebug() << "World Coordinates: " << worldCoords;
-
-         // // 修改 birthJD 值（假设 StelSkyImageTile 有 setBirthJD() 方法）
-         // double newBirthJD = 2458000.5;  // 假设新的 birthJD 值
-         // imageTile->setBirthJD(newBirthJD);
-
-
-   // }
-
+      }
+   }
+   else{
+      StelSkyImageTile* defTile = get_aTile(DEFAULT_TEXNAME);
+      if(!defTile) return;
+      for (int i = 0; i < defTile->getSubTiles().size(); ++i) {
+         StelSkyImageTile* subdefTile = dynamic_cast<StelSkyImageTile*>(defTile->getSubTiles()[i]);
+         if(subdefTile->getVisible() == false){
+            subdefTile->setVisible(true);
+         }
+      }
+   }
 
 }

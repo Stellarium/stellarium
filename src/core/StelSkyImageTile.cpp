@@ -48,6 +48,7 @@ void StelSkyImageTile::initCtor()
 	birthJD = -1e10;
 	withAberration = true;
 	decimation = 1;
+	flagVisible = true;
 }
 
 // Constructor
@@ -164,6 +165,13 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		scheduleChildsDeletion();
 		return;
 	}
+
+   if (flagVisible == false)
+   {
+      // Schedule a deletion
+      scheduleChildsDeletion();
+      return;
+   }
 
 	// Check that we are in the screen
 	bool fullInScreen = true;
