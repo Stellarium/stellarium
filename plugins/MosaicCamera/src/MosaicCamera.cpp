@@ -332,14 +332,6 @@ bool MosaicCamera::getVisibility(const QString& cameraName) const
     return cameras.value(cameraName).visible;
 }
 
-void MosaicCamera::updateMosaic(const QString& cameraName, double ra, double dec, double rotation)
-{
-    qDebug() << "Received new values for" << cameraName << ": RA=" << ra << ", Dec=" << dec << ", Rotation=" << rotation;
-    setRA(cameraName, ra);
-    setDec(cameraName, dec);
-    setRotation(cameraName, rotation);
-}
-
 void MosaicCamera::setCurrentCamera(const QString& cameraName)
 {
     if (cameras.contains(cameraName))
