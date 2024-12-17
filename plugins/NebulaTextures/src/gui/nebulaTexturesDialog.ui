@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>836</width>
-    <height>511</height>
+    <width>888</width>
+    <height>555</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -138,7 +138,7 @@
          <item row="5" column="6">
           <widget class="QDoubleSpinBox" name="bottomRightY">
            <property name="decimals">
-            <number>8</number>
+            <number>10</number>
            </property>
            <property name="minimum">
             <double>-1000.000000000000000</double>
@@ -185,7 +185,7 @@
          <item row="5" column="0">
           <widget class="QDoubleSpinBox" name="bottomLeftX">
            <property name="decimals">
-            <number>8</number>
+            <number>10</number>
            </property>
            <property name="minimum">
             <double>-1000.000000000000000</double>
@@ -201,7 +201,7 @@
          <item row="1" column="1">
           <widget class="QDoubleSpinBox" name="topLeftY">
            <property name="decimals">
-            <number>8</number>
+            <number>10</number>
            </property>
            <property name="minimum">
             <double>-1000.000000000000000</double>
@@ -233,7 +233,7 @@
             <bool>true</bool>
            </property>
            <property name="decimals">
-            <number>8</number>
+            <number>10</number>
            </property>
            <property name="minimum">
             <double>-1000.000000000000000</double>
@@ -246,7 +246,7 @@
          <item row="1" column="0">
           <widget class="QDoubleSpinBox" name="topLeftX">
            <property name="decimals">
-            <number>8</number>
+            <number>10</number>
            </property>
            <property name="minimum">
             <double>-1000.000000000000000</double>
@@ -284,7 +284,7 @@
          <item row="1" column="5">
           <widget class="QDoubleSpinBox" name="topRightX">
            <property name="decimals">
-            <number>8</number>
+            <number>10</number>
            </property>
            <property name="minimum">
             <double>-1000.000000000000000</double>
@@ -314,7 +314,7 @@
          <item row="5" column="5">
           <widget class="QDoubleSpinBox" name="bottomRightX">
            <property name="decimals">
-            <number>8</number>
+            <number>10</number>
            </property>
            <property name="minimum">
             <double>-1000.000000000000000</double>
@@ -330,7 +330,7 @@
          <item row="1" column="6">
           <widget class="QDoubleSpinBox" name="topRightY">
            <property name="decimals">
-            <number>8</number>
+            <number>10</number>
            </property>
            <property name="minimum">
             <double>-1000.000000000000000</double>
@@ -349,7 +349,7 @@
             <bool>true</bool>
            </property>
            <property name="decimals">
-            <number>8</number>
+            <number>10</number>
            </property>
            <property name="minimum">
             <double>-1000.000000000000000</double>
@@ -362,7 +362,7 @@
          <item row="5" column="1">
           <widget class="QDoubleSpinBox" name="bottomLeftY">
            <property name="decimals">
-            <number>8</number>
+            <number>10</number>
            </property>
            <property name="minimum">
             <double>-1000.000000000000000</double>
@@ -385,14 +385,14 @@
          <item row="2" column="2">
           <widget class="QLabel" name="label_rr">
            <property name="text">
-            <string>RA (Reference)</string>
+            <string>RA (Center)</string>
            </property>
           </widget>
          </item>
          <item row="2" column="3">
           <widget class="QLabel" name="label_rd">
            <property name="text">
-            <string>Dec (Reference)</string>
+            <string>Dec (Center)</string>
            </property>
           </widget>
          </item>
@@ -401,10 +401,17 @@
        <item>
         <widget class="QPushButton" name="renderButton">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="text">
-          <string>Try to Render Deep-sky Objects' Textures with its corners' coordinates</string>
+          <string>Try to Render this Textures with its corners' coordinates</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="unrenderButton">
+         <property name="text">
+          <string>Un-Render this Textures</string>
          </property>
         </widget>
        </item>
@@ -479,16 +486,6 @@
             <widget class="QCheckBox" name="checkBoxShow">
              <property name="text">
               <string>Show Custom Textures</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="checkBox">
-             <property name="text">
-              <string>Show Default Textures</string>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
              </property>
             </widget>
            </item>
