@@ -579,7 +579,7 @@
 	4.73 Images of NGC6744
 	     from Zhuokai Liu, Jiang Yuhang
 	     License: Creative Commons Attribution 4.0 International 
-	4.74 Images of NGC2170, SH2-1, SH2-240
+	4.74 Images of NGC2170, SH2-240
 	     from Rogelio Bernal Andreo
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
@@ -791,12 +791,18 @@
 	      from DESI LIS, Giuseppe Donatiello, post-processing: Sun Shuwei
 	      https://flickr.com/photos/133259498@N05/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.127 Images of Sh2-157
+	4.128 Images of Sh2-157
 	      from Sebastian Goralikpost-processing: Sun Shuwei
-	      https://flickr.com/photos/133259498@N05/
+	      https://flickr.com/photos/sebastiangoralik/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	           
-	      
+	4.129 Images of Sh2-1
+	      from Nicolarge, post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 4.0 International 
+	4.130 Images of RCW86
+	      from CTIO/NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage/NSF NOIRLab) Image processing: T.A. Rector (University of Alaska Anchorage/NSF NOIRLab), M. Zamani (NSF NOIRLab) & D. de Martin (NSF NOIRLab), post-processing: Sun Shuwei
+	      https://noirlab.edu/public/
+	      License:  Creative Commons Attribution 4.0 International
 	      
 	      
 	      
