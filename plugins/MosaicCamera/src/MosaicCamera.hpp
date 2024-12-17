@@ -87,7 +87,6 @@ public:
     void readPolygonSetsFromJson(const QString& cameraName, const QString& filename);
 
 public slots:
-	void updateMosaic(const QString& cameraName, double ra, double dec, double rotation);
 	void setCurrentCamera(const QString& cameraName);
 	void setRA(double ra);
 	void setDec(double dec);
