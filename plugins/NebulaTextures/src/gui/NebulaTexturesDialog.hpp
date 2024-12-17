@@ -44,13 +44,12 @@ public:
 	NebulaTexturesDialog();
 	~NebulaTexturesDialog() override;
 
-   bool addCustomTexture(const QString& id, const QString& filePath,
+   bool renderTempCustomTexture(const QString& id, const QString& filePath,
                                                double ra0, double dec0,
                                                double ra1, double dec1,
                                                double ra2, double dec2,
                                                double ra3, double dec3,
                                                bool visible);
-   bool removeCustomTexture(const QString& id);
 
    QString keyName = "Custom Textures";
 
@@ -65,10 +64,12 @@ private slots:
 
    void on_openFileButton_clicked();
    void on_uploadImageButton_clicked();
-   void on_renderButton_clicked();
    void on_goPushButton_clicked();
+
+   void on_renderButton_clicked();
    void on_addTexture_clicked();
    void on_showTextures_clicked();
+
    void on_removeButton_clicked();
 
    void onLoginReply(QNetworkReply *reply);
@@ -103,11 +104,13 @@ private:
 	void setAboutHtml();
    void updateStatus(const QString &status);
 
+   /*
    double calculateRA(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
                                         double CD1_1, double CD1_2, double CD2_1, double CD2_2);
 
    double calculateDec(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
                                          double CD1_1, double CD1_2, double CD2_1, double CD2_2);
+   */
 
    QPair<double, double> PixelToCelestial(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
                                              double CD1_1, double CD1_2, double CD2_1, double CD2_2);
@@ -123,13 +126,15 @@ private:
 
    void updateCustomTextures(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness);
 
-   void loadAllData();
+   void reloadData();
 
    int m_texturesNum = 0;
 
    void showOffTextures();
 
    bool flag_displayTextures = false;
+
+   void avoidConflict();
 };
 
 #endif /* NEBULATEXTURESDIALOG_HPP */

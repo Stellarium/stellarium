@@ -400,6 +400,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="renderButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Try to Render Deep-sky Objects' Textures with its corners' coordinates</string>
          </property>
@@ -427,6 +430,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="showTextures">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Show All Custom Textures</string>
          </property>
@@ -472,7 +478,17 @@
            <item>
             <widget class="QCheckBox" name="checkBoxShow">
              <property name="text">
-              <string>Show All Textures</string>
+              <string>Show Custom Textures</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox">
+             <property name="text">
+              <string>Show Default Textures</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
              </property>
             </widget>
            </item>

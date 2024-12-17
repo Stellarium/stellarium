@@ -31,6 +31,8 @@
 #include "StelMovementMgr.hpp"
 #include "StelUtils.hpp"
 
+#include "StelSkyImageTile.hpp"
+
 #include <QListWidgetItem>
 #include <QMessageBox>
 #include <QFileDialog>
@@ -104,17 +106,17 @@ void NebulaTexturesDialog::createDialogContent()
    connect(ui->showTextures, SIGNAL(clicked()), this, SLOT(on_showTextures_clicked())); // banned
    connect(ui->removeButton, SIGNAL(clicked()), this, SLOT(on_removeButton_clicked()));
 
-   connect(ui->reloadButton, SIGNAL(clicked()), this, SLOT(reloadTextures()));
+   connect(ui->reloadButton, SIGNAL(clicked()), this, SLOT(reloadData()));
    connect(ui->checkBoxShow, SIGNAL(clicked(bool)), this, SLOT(setShowCustomTextures(bool)));
    connect(ui->checkBoxAvoid, SIGNAL(clicked(bool)), this, SLOT(setAvoidAreaConflict(bool)));
 
 	setAboutHtml();
 
-   // load config
-   ui->checkBoxShow->setChecked(getShowCustomTextures());
-   ui->checkBoxAvoid->setChecked(getAvoidAreaConflict());
+   // // load config
+   // ui->checkBoxShow->setChecked(getShowCustomTextures());
+   // ui->checkBoxAvoid->setChecked(getAvoidAreaConflict());
 
-   loadAllData();
+   reloadData();
 }
 
 void NebulaTexturesDialog::restoreDefaults()
@@ -142,6 +144,43 @@ void NebulaTexturesDialog::setAboutHtml(void)
 	}
 	ui->aboutTextBrowser->setHtml(html);
 }
+
+
+void NebulaTexturesDialog::setShowCustomTextures(bool b)
+{
+   m_conf->setValue(MS_CONFIG_PREFIX + "/showCustomTextures", b);
+   reloadTextures();
+}
+
+bool NebulaTexturesDialog::getShowCustomTextures()
+{
+   return m_conf->value(MS_CONFIG_PREFIX + "/showCustomTextures", false).toBool();
+}
+
+void NebulaTexturesDialog::setAvoidAreaConflict(bool b)
+{
+   m_conf->setValue(MS_CONFIG_PREFIX + "/avoidAreaConflict", b);
+   reloadTextures();
+   avoidConflict();
+}
+
+bool NebulaTexturesDialog::getAvoidAreaConflict()
+{
+   return m_conf->value(MS_CONFIG_PREFIX + "/avoidAreaConflict", false).toBool();
+}
+
+
+void NebulaTexturesDialog::showOffTextures(){
+
+   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+   skyLayerMgr->removeSkyLayer(QString(keyName));
+}
+
+void NebulaTexturesDialog::updateStatus(const QString &status)
+{
+   ui->statusText->setText(status);
+}
+
 
 void NebulaTexturesDialog::on_openFileButton_clicked()
 {
@@ -194,11 +233,6 @@ void NebulaTexturesDialog::on_uploadImageButton_clicked()
 
    // Perform image upload logic here, e.g., using an API call
    updateStatus("Sending requests...");
-}
-
-void NebulaTexturesDialog::updateStatus(const QString &status)
-{
-   ui->statusText->setText(status);
 }
 
 
@@ -482,6 +516,7 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
    updateStatus("Goto Reference Point, Try to Render, Check and Adjust Coordinates.");
 }
 
+/*
 double NebulaTexturesDialog::calculateRA(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
                    double CD1_1, double CD1_2, double CD2_1, double CD2_2) {
    return CRVAL1 + ((X - CRPIX1) * CD1_1 + (Y - CRPIX2) * CD1_2) / cos(CRVAL2 * M_PI / 180.0);
@@ -491,6 +526,9 @@ double NebulaTexturesDialog::calculateDec(int X, int Y, double CRPIX1, double CR
                     double CD1_1, double CD1_2, double CD2_1, double CD2_2) {
    return CRVAL2 + ((X - CRPIX1) * CD2_1 + (Y - CRPIX2) * CD2_2);
 }
+*/
+
+
 
 
 /*
@@ -597,6 +635,7 @@ QPair<double, double> NebulaTexturesDialog::PixelToCelestial(int X, int Y, doubl
    return QPair<double, double>(lng, lat);
 }
 
+// logic
 void NebulaTexturesDialog::on_goPushButton_clicked()
 {
 
@@ -623,6 +662,7 @@ void NebulaTexturesDialog::on_goPushButton_clicked()
    // mvmgr->setFlagLockEquPos(useLockPosition);
 }
 
+// logic
 void NebulaTexturesDialog::on_renderButton_clicked()
 {
    QString filePath = ui->lineEditImagePath->text();
@@ -649,19 +689,20 @@ void NebulaTexturesDialog::on_renderButton_clicked()
 
    updateStatus(renderStatus);
 
-   addCustomTexture(filePath,filePath,
+   renderTempCustomTexture(filePath,filePath,
                     bottomLeftRA,bottomLeftDec,
                     bottomRightRA,bottomRightDec,
                     topRightRA,topRightDec,
                     topLeftRA,topLeftDec,true);
 
    // Example of rendering completion
-   QTimer::singleShot(3000, this, [this]() {
+   // QTimer::singleShot(3000, this, [this]() {
       updateStatus("Rendering complete.");
-   });
+   // });
 }
 
-bool NebulaTexturesDialog::addCustomTexture(const QString& id, const QString& filePath,
+// TODO: only a temp json show
+bool NebulaTexturesDialog::renderTempCustomTexture(const QString& id, const QString& filePath,
                                       double ra0, double dec0,
                                       double ra1, double dec1,
                                       double ra2, double dec2,
@@ -699,27 +740,7 @@ bool NebulaTexturesDialog::addCustomTexture(const QString& id, const QString& fi
    return true;
 }
 
-bool NebulaTexturesDialog::removeCustomTexture(const QString& id)
-{
-   /*
-   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-   if (!skyLayerMgr) {
-      qWarning() << "NebulaTextures::removeCustomTexture: Could not get StelSkyLayerMgr instance.";
-      return false;
-   }
-
-   if (skyLayerMgr->getAllSkyLayers().contains(id)) {
-      skyLayerMgr->removeSkyLayer(id);
-      qDebug() << "NebulaTextures::removeCustomTexture: Successfully removed texture with ID -" << id;
-      return true;
-   } else {
-      qWarning() << "NebulaTextures::removeCustomTexture: No texture found with ID -" << id;
-      return false;
-   }
-   */
-   return true;
-}
-
+// logic, hint: will add next time restart
 void NebulaTexturesDialog::on_addTexture_clicked()
 {
    QString imagePath = ui->lineEditImagePath->text();
@@ -755,21 +776,8 @@ void NebulaTexturesDialog::on_addTexture_clicked()
    updateCustomTextures(imageUrl, innerWorldCoords, 0.2, 13.4);
 }
 
-void NebulaTexturesDialog::on_showTextures_clicked()
-{
-   QString path = StelFileMgr::getUserDir()+configFile;
 
-   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-
-   if (path.isEmpty())
-      qWarning() << "ERROR while loading nebula texture set default";
-   else{
-      skyLayerMgr->insertSkyImage(path, QString(), true, 1);
-   }
-}
-
-
-
+// write to json
 void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const QJsonArray& innerWorldCoords, double minResolution, double maxBrightness)
 {
 
@@ -844,8 +852,99 @@ void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const Q
    qDebug() << "Updated custom textures JSON file successfully.";
 }
 
-void NebulaTexturesDialog::loadAllData()
+
+
+// TODO: write to json but only disable show flag, it will remove at restart
+void NebulaTexturesDialog::on_removeButton_clicked()
 {
+
+   QListWidgetItem* selectedItem = ui->listWidget->currentItem();
+   if (!selectedItem) {
+      return;
+   }
+
+   QString selectedText = selectedItem->text();
+
+   if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to remove this texture?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+      return;
+
+   QString path = StelFileMgr::getUserDir() + configFile;
+   QFile jsonFile(path);
+   if (!jsonFile.open(QIODevice::ReadOnly)) {
+      return;
+   }
+
+   QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
+   jsonFile.close();
+
+   if (!jsonDoc.isObject()) {
+      return;
+   }
+
+   QJsonObject rootObject = jsonDoc.object();
+
+   if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()) {
+      return;
+   }
+
+   QJsonArray subTiles = rootObject["subTiles"].toArray();
+
+   QJsonArray updatedSubTiles;
+   bool found = false;
+
+   for (const QJsonValue& subTileValue : subTiles) {
+      if (!subTileValue.isObject()) {
+         updatedSubTiles.append(subTileValue);
+         continue;
+      }
+
+      QJsonObject subTileObject = subTileValue.toObject();
+      if (subTileObject.contains("imageUrl") && subTileObject["imageUrl"].toString() == selectedText) {
+         found = true;
+         continue;
+      }
+
+      updatedSubTiles.append(subTileValue);
+   }
+
+   if (!found) {
+      return;
+   }
+
+   rootObject["subTiles"] = updatedSubTiles;
+
+   if (!jsonFile.open(QIODevice::WriteOnly)) {
+      return;
+   }
+
+   jsonFile.write(QJsonDocument(rootObject).toJson(QJsonDocument::Indented));
+   jsonFile.close();
+
+   delete selectedItem;
+}
+
+
+
+// TODO: only enable or disable all custom show flag
+void NebulaTexturesDialog::on_showTextures_clicked()
+{
+   QString path = StelFileMgr::getUserDir()+configFile;
+
+   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+
+   if (path.isEmpty())
+      qWarning() << "ERROR while loading nebula texture set default";
+   else{
+      skyLayerMgr->insertSkyImage(path, QString(), true, 1);
+      // skyLayerMgr->loadCollection(path, 1);
+   }
+}
+
+
+// load json to window
+void NebulaTexturesDialog::reloadData()
+{
+   reloadTextures();
 
    QString path = StelFileMgr::getUserDir()+configFile;
 
@@ -859,7 +958,7 @@ void NebulaTexturesDialog::loadAllData()
    QJsonObject rootObject;
 
    if (!jsonFile.open(QIODevice::ReadOnly)) {
-      qWarning() << "Failed to open existing JSON file for reading:" << path;
+      qWarning() << "Failed to open JSON file for reading:" << path;
       return;
    }
 
@@ -892,6 +991,7 @@ void NebulaTexturesDialog::loadAllData()
          continue;
       }
 
+
       QJsonObject subTileObject = subTileValue.toObject();
 
       if (subTileObject.contains("imageUrl") && subTileObject["imageUrl"].isString()) {
@@ -909,142 +1009,142 @@ void NebulaTexturesDialog::loadAllData()
          qWarning() << "No 'imageUrl' found in subTile, skipping...";
       }
    }
-
-   // check and render
-   // if (flag_showCustomTextures)
-   //    skyLayerMgr->insertSkyImage(path, QString(), true, 1);
-
-   reloadTextures();
-
 }
 
 
-void NebulaTexturesDialog::on_removeButton_clicked()
-{
 
-   QListWidgetItem* selectedItem = ui->listWidget->currentItem();
-   if (!selectedItem) {
-      // QMessageBox::warning(this, tr("No Selection"), tr("Please select an item to remove."));
-      return;
-   }
-
-   QString selectedText = selectedItem->text();
-   // int ret = QMessageBox::question(
-   //   this,
-   //   tr("Confirm Removal"),
-   //   tr("Are you sure you want to remove the selected item: \"%1\"?").arg(selectedText),
-   //   QMessageBox::Yes | QMessageBox::No
-   //   );
-
-   if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to remove this texture?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
-      return;
-
-   // if (ret != QMessageBox::Yes) {
-   //    return;
-   // }
-
-   QString path = StelFileMgr::getUserDir() + configFile;
-   QFile jsonFile(path);
-   if (!jsonFile.open(QIODevice::ReadOnly)) {
-      // QMessageBox::critical(this, tr("Error"), tr("Failed to open JSON file for reading."));
-      return;
-   }
-
-   QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
-   jsonFile.close();
-
-   if (!jsonDoc.isObject()) {
-      // QMessageBox::critical(this, tr("Error"), tr("Invalid JSON structure in file."));
-      return;
-   }
-
-   QJsonObject rootObject = jsonDoc.object();
-
-   if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()) {
-      // QMessageBox::critical(this, tr("Error"), tr("No valid 'subTiles' array in JSON."));
-      return;
-   }
-
-   QJsonArray subTiles = rootObject["subTiles"].toArray();
-
-   QJsonArray updatedSubTiles;
-   bool found = false;
-
-   for (const QJsonValue& subTileValue : subTiles) {
-      if (!subTileValue.isObject()) {
-         updatedSubTiles.append(subTileValue);
-         continue;
-      }
-
-      QJsonObject subTileObject = subTileValue.toObject();
-      if (subTileObject.contains("imageUrl") && subTileObject["imageUrl"].toString() == selectedText) {
-         found = true;
-         continue;
-      }
-
-      updatedSubTiles.append(subTileValue);
-   }
-
-   if (!found) {
-      // QMessageBox::warning(this, tr("Not Found"), tr("Selected item was not found in JSON data."));
-      return;
-   }
-
-   rootObject["subTiles"] = updatedSubTiles;
-
-   if (!jsonFile.open(QIODevice::WriteOnly)) {
-      // QMessageBox::critical(this, tr("Error"), tr("Failed to open JSON file for writing."));
-      return;
-   }
-
-   jsonFile.write(QJsonDocument(rootObject).toJson(QJsonDocument::Indented));
-   jsonFile.close();
-
-   delete selectedItem;
-
-   // QMessageBox::information(this, tr("Success"), tr("Selected item has been removed."));
-}
-
-void NebulaTexturesDialog::showOffTextures(){
-
-   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-   skyLayerMgr->removeSkyLayer(QString(keyName));
-}
-
-
-void NebulaTexturesDialog::setShowCustomTextures(bool b)
-{
-   m_conf->setValue(MS_CONFIG_PREFIX + "/showCustomTextures", b);
-   reloadTextures();
-}
-
-bool NebulaTexturesDialog::getShowCustomTextures()
-{
-   return m_conf->value(MS_CONFIG_PREFIX + "/showCustomTextures", false).toBool();
-}
-
-void NebulaTexturesDialog::setAvoidAreaConflict(bool b)
-{
-   m_conf->setValue(MS_CONFIG_PREFIX + "/avoidAreaConflict", b);
-   reloadTextures();
-}
-
-bool NebulaTexturesDialog::getAvoidAreaConflict()
-{
-   return m_conf->value(MS_CONFIG_PREFIX + "/avoidAreaConflict", false).toBool();
-}
-
+// not truely reload but set show of entire custom
 void NebulaTexturesDialog::reloadTextures()
 {
-   if (flag_displayTextures){
-      qDebug() << "remove";
-      showOffTextures();
-      flag_displayTextures = false;
-   }
-   qDebug() << "show flag" << getShowCustomTextures();
-   if (getShowCustomTextures() == true){
-      on_showTextures_clicked();
-      qDebug() << "show";
-      flag_displayTextures = true;
-   }
+   // if (flag_displayTextures){
+   //    qDebug() << "remove";
+   //    showOffTextures();
+   //    flag_displayTextures = false;
+   // }
+   // qDebug() << "show flag" << getShowCustomTextures();
+   // if (getShowCustomTextures() == true){
+   //    on_showTextures_clicked();
+   //    qDebug() << "show";
+   //    flag_displayTextures = true;
+   // }
+}
+
+
+
+void NebulaTexturesDialog::avoidConflict() // select and compare poly
+{
+   // 获取 StelSkyLayerMgr 实例
+   StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+
+   // 遍历所有的天空图层
+   qDebug() << "skyLayerMgr->allSkyLayers.size" << skyLayerMgr->allSkyLayers.size();
+
+
+
+   // : select the key one.
+   auto cusTex = skyLayerMgr->allSkyLayers.find("Custom Textures");
+   StelSkyLayerMgr::SkyLayerElem* cusElem = cusTex.value();  // 获取每个 SkyLayerElem 对象
+   if (!cusElem || !cusElem->layer) return;
+   StelSkyImageTile* cusTile = dynamic_cast<StelSkyImageTile*>(cusElem->layer.data());
+   qDebug()<<"Custom Textures:";
+   qDebug() << "subTilesUrls"<< cusTile->subTilesUrls;
+   qDebug() << "skyConvexPolygons"<< cusTile->skyConvexPolygons;
+   qDebug()<<"subTiles size:"<<cusTile->subTiles.size();
+
+
+
+
+   // : select the key one.
+   qDebug()<<"Nebulae:";
+   auto it = skyLayerMgr->allSkyLayers.find("Nebulae");
+
+
+   // for (auto it = skyLayerMgr->allSkyLayers.begin(); it != skyLayerMgr->allSkyLayers.end(); ++it) {
+      StelSkyLayerMgr::SkyLayerElem* layerElem = it.value();  // 获取每个 SkyLayerElem 对象
+   //    if (!layerElem || !layerElem->layer) continue;  // 如果没有图层数据则跳过
+      if (!layerElem || !layerElem->layer) return;
+
+
+      // 尝试将 layer 转换为 StelSkyImageTile
+      StelSkyImageTile* imageTile = dynamic_cast<StelSkyImageTile*>(layerElem->layer.data());
+
+      qDebug() << "convert layer to imageTile" ;
+
+      if (imageTile) {
+         qDebug() << "if imageTile" ;
+
+
+         // :select group subTiles
+         /*
+         // 获取 StelSkyImageTile 中的 imageUrl 和 worldCoords
+         QVariantList imageUrl = imageTile->subTilesUrls;  // 假设 StelSkyImageTile 提供 getImageUrl() 方法
+         // QList<QVariantList> worldCoords = imageTile->getWorldCoords();  // 假设 StelSkyImageTile 提供 getWorldCoords() 方法
+         // 打印前10个元素
+         qDebug()<<"imageUrl size:"<<imageUrl.size();
+         int count = qMin(10, imageUrl.size()); // 获取最小值，防止元素少于10个
+         for (int i = 0; i < count; ++i) {
+            // qDebug() << "Element" << i << ":" << imageUrl[i].toString();
+            auto s = imageUrl[i];
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            if (s.metaType()==QMetaType(QMetaType::QVariantMap))
+#else
+            if (s.type()==QVariant::Map)
+#endif
+            {
+               QString m_url = s.toMap()["imageUrl"].toString();
+               qDebug() << "meta Type" << m_url; // 每张贴图
+               // if (m_url.startsWith("m")){
+               */
+
+            qDebug()<<"subTiles size:"<<imageTile->subTiles.size();
+            for (int i = 0; i < qMin(10, imageTile->subTiles.size()); ++i) {
+               // if(imageTile->subTiles.size() > i){
+               auto subTile = imageTile->subTiles[i];
+               StelSkyImageTile* subImageTile = dynamic_cast<StelSkyImageTile*>(subTile);
+               // if (!subImageTile) {
+               //    qDebug() << "if not subImageTile";
+               // }
+               // {
+               qDebug() << "if subImageTile";
+               qDebug() << "URI"<< subImageTile->absoluteImageURI;
+               qDebug() << "size" << subImageTile->skyConvexPolygons.size();
+               // subImageTile->flagVisible = !subImageTile->flagVisible;
+               // 对 subImageTile 做一些操作， 比如调用 getTilesToDraw
+               // subImageTile->getTilesToDraw(result, core, viewPortPoly, limitLuminance, !fullInScreen);
+               // }
+               // }
+               // }
+               // 需要遍历每一个
+            }
+
+
+            /*
+               // nt = new StelSkyImageTile(s.toMap(), this, decimation);
+            else
+            {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+               Q_ASSERT(s.metaType()==QMetaType(QMetaType::QString));
+#else
+               Q_ASSERT(s.type()==QVariant::String);
+#endif
+               qDebug() << s.toString();
+               // nt = new StelSkyImageTile(s.toString(), this, decimation);
+            }
+            */
+
+
+         }
+
+         // 对 imageUrl 或 worldCoords 进行处理
+         // qDebug() << "Image URL: " << imageUrl;
+         // qDebug() << "World Coordinates: " << worldCoords;
+
+         // // 修改 birthJD 值（假设 StelSkyImageTile 有 setBirthJD() 方法）
+         // double newBirthJD = 2458000.5;  // 假设新的 birthJD 值
+         // imageTile->setBirthJD(newBirthJD);
+
+
+   // }
+
+
 }
