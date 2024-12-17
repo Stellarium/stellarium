@@ -791,6 +791,16 @@
 	      from DESI LIS, Giuseppe Donatiello, post-processing: Sun Shuwei
 	      https://flickr.com/photos/133259498@N05/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
+	4.127 Images of Sh2-157
+	      from Sebastian Goralikpost-processing: Sun Shuwei
+	      https://flickr.com/photos/133259498@N05/
+	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
+	           
+	      
+	      
+	      
+	      
+	      
 	      
 ```
 
