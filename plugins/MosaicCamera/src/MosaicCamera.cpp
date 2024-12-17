@@ -347,6 +347,34 @@ void MosaicCamera::updateMosaic(const QString& cameraName, double ra, double dec
     setRotation(cameraName, rotation);
 }
 
+void MosaicCamera::setCurrentCamera(const QString& cameraName)
+{
+    if (cameras.contains(cameraName))
+    {
+        currentCamera = cameraName;
+    }
+}
+
+void MosaicCamera::setRA(double ra)
+{
+    setRA(currentCamera, ra);
+}
+
+void MosaicCamera::setDec(double dec)
+{
+    setDec(currentCamera, dec);
+}
+
+void MosaicCamera::setRotation(double rotation)
+{
+    setRotation(currentCamera, rotation);
+}
+
+void MosaicCamera::setVisibility(bool visible)
+{
+    setVisibility(currentCamera, visible);
+}
+
 void MosaicCamera::draw(StelCore* core)
 {
     const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);

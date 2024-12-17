@@ -49,6 +49,11 @@ struct Camera {
 class MosaicCamera : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(QString currentCamera READ getCurrentCamera WRITE setCurrentCamera )
+	Q_PROPERTY(double ra             READ getRA            WRITE setRA )
+	Q_PROPERTY(double dec            READ getDec           WRITE setDec )
+	Q_PROPERTY(double rotation       READ getRotation      WRITE setRotation )
+	Q_PROPERTY(bool visible          READ getVisibility    WRITE setVisibility )
 
 public:
 	MosaicCamera();
@@ -70,6 +75,12 @@ public:
     double getRotation(const QString& cameraName) const;
     bool getVisibility(const QString& cameraName) const;
 
+	QString getCurrentCamera() const { return currentCamera; }
+	double getRA() const { return getRA(currentCamera); }
+	double getDec() const { return getDec(currentCamera); }
+	double getRotation() const { return getRotation(currentCamera); }
+	double getVisibility() const { return getVisibility(currentCamera); }
+
 	void loadSettings();
 	void saveSettings() const;
 
@@ -78,13 +89,19 @@ public:
 
 public slots:
 	void updateMosaic(const QString& cameraName, double ra, double dec, double rotation);
+	void setCurrentCamera(const QString& cameraName);
+	void setRA(double ra);
+	void setDec(double dec);
+	void setRotation(double rotation);
+	void setVisibility(bool visible);
 
 private:
     QHash<QString, Camera> cameras;
 	QStringList cameraOrder;
-	QString currentCamera;
 	QString userDirectory;
 	QSettings* conf;
+
+	QString currentCamera;
 
     void loadBuiltInCameras();
 	void loadCameraOrder();
