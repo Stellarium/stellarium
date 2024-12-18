@@ -216,6 +216,8 @@ struct Star
          pmdec = q2[0] * pmvec1[0] + q2[1] * pmvec1[1] + q2[2] * pmvec1[2];
          pmdec /= MAS2RAD;
          StelUtils::rectToSphe(&RA, &DE, u);
+         if (RA < 0)
+            RA += 2 * M_PI;
          Plx = Plx2;
          RV  = (pmr1 / MAS2RAD / Plx2) * (AU / JYEAR_SECONDS);
       } else {
@@ -224,8 +226,6 @@ struct Star
          pmdec = getDx1();
          RA    = getX0() + dyrs * getDx0() * MAS2RAD;
          DE    = getX1() + dyrs * getDx1() * MAS2RAD;
-         Plx   = getPlx();
-         RV    = getRV();
       }
    }
 };
