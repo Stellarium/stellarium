@@ -194,23 +194,18 @@ struct Star
          double pmr0     = rv * plx / (AU / JYEAR_SECONDS) * MAS2RAD;
          double pmtotsqr = (pmvec0[0] * pmvec0[0] + pmvec0[1] * pmvec0[1] + pmvec0[2] * pmvec0[2]);
 
-         double f        = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0 * pmr0) * dyrs * dyrs);
+         double f2       = 1. / (1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0 * pmr0) * dyrs * dyrs);
+         double f        = sqrt(f2);
+         double f3       = f2 * f;
          Vec3d  u        = (r * (1. + pmr0 * dyrs) + pmvec0 * dyrs) * f;
 
-         // cartesian to spherical
-         double lon      = atan2(u[1], u[0]);
-         // warp pi
-         if (lon < 0.)
-            lon += 2. * M_PI;
-         double lat    = atan2(u[2], sqrt(u[0] * u[0] + u[1] * u[1]));
-
          double Plx2   = plx * f;
-         double pmr1   = (pmr0 + (pmtotsqr + pmr0 * pmr0) * dyrs) * f * f;
+         double pmr1   = (pmr0 + (pmtotsqr + pmr0 * pmr0) * dyrs) * f2;
          Vec3d  pmvec1 = pmvec0 * (1 + pmr0 * dyrs);
 
-         pmvec1.set((pmvec1[0] - r[0] * pmtotsqr * dyrs) * f * f * f,
-                    (pmvec1[1] - r[1] * pmtotsqr * dyrs) * f * f * f,
-                    (pmvec1[2] - r[2] * pmtotsqr * dyrs) * f * f * f);
+         pmvec1.set((pmvec1[0] - r[0] * pmtotsqr * dyrs) * f3,
+                    (pmvec1[1] - r[1] * pmtotsqr * dyrs) * f3,
+                    (pmvec1[2] - r[2] * pmtotsqr * dyrs) * f3);
 
          double xy = sqrt(u[0] * u[0] + u[1] * u[1]);
          Vec3d  p2(-u[1] / xy, u[0] / xy, 0.0);
@@ -220,8 +215,7 @@ struct Star
          pmra /= MAS2RAD;
          pmdec = q2[0] * pmvec1[0] + q2[1] * pmvec1[1] + q2[2] * pmvec1[2];
          pmdec /= MAS2RAD;
-         RA  = lon;
-         DE  = lat;
+         StelUtils::rectToSphe(&RA, &DE, u);
          Plx = Plx2;
          RV  = (pmr1 / MAS2RAD / Plx2) * (AU / JYEAR_SECONDS);
       } else {
@@ -230,55 +224,10 @@ struct Star
          pmdec = getDx1();
          RA    = getX0() + dyrs * getDx0() * MAS2RAD;
          DE    = getX1() + dyrs * getDx1() * MAS2RAD;
+         Plx   = getPlx();
+         RV    = getRV();
       }
    }
-
-   // void getJ2000withParallaxEffect(Vec3f& pos, float dyrs) const
-   // {
-   // 	// RA and DE in radian
-   // 	// Plx in mas
-   // 	// pmra, pmdec in mas/yr
-   // 	// vr in km/s
-   // 	// dyrs in Julian year
-   // 	// cant do this without Anthony Brown's astrometry tutorial
-   // 	// this function assume RA, DE observed at J2000.0
-   // 	static const double orbital_period = 1.0;  // in Julian year
-   // 	static const double orbital_radius = 1.0;  // in AU
-
-   //    double r0  = getX0();
-   //    double r1  = getX1();
-   //    double r2  = getX2();
-   //    double plx = 100. * getPlx();
-   //    Vec3d  r(r0, r1, r2);
-
-   // 	// need 3D spherical coordinate system
-   // 	double radius = 1000. / plx;
-   // 	Vec3d xyz = r * radius;
-
-   // 	// from observer's ephemeris
-   // 	Vec3d bxyz(orbital_radius * cos(2. * M_PI / orbital_period * dyrs), orbital_radius * sin(2. * M_PI /
-   // orbital_period * dyrs), 0.);
-
-   // 	// phase space coordinates
-   // 	Vec3d u0 = xyz - bxyz * AU * 1000. / PARSEC;
-   // 	double RA_obs = atan2(u0[1], u0[0]);
-   // 	double RA = atan2(r[1], r[0]);
-   // 	// wrap pi
-   // 	if (RA_obs < 0.) RA_obs += 2. * M_PI;
-   // 	if (RA < 0.) RA += 2. * M_PI;
-   // 	double DEC_obs = atan2(u0[2], sqrt(u0[0] * u0[0] + u0[1] * u0[1]));
-   // 	double DEC = atan2(r[2], sqrt(r[0] * r[0] + r[1] * r[1]));
-   //    double D_RA = RA_obs - RA;
-   //    double D_DEC = DEC_obs - DEC;
-   //    double current_RA, current_DEC;
-   //    // StelUtils::rectToSphe(&current_RA, &current_DEC, pos);
-   //    // StelUtils::spheToRect(current_RA+D_RA, current_DEC+D_DEC, pos);
-   //    StelUtils::rectToSphe(&current_RA, &current_DEC, pos);
-   //    qDebug() << "current_RA: " << current_RA << " RA 2: " << D_RA;
-   //    double new_RA = current_RA+D_RA;
-   //    if (new_RA < 0.) new_RA += 2. * M_PI;
-   //    StelUtils::spheToRect(new_RA, current_DEC+D_DEC, pos);
-   // }
 };
 
 struct Star1 : public Star<Star1>

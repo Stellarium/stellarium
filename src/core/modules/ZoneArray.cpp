@@ -493,6 +493,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		const RCMag* tmpRcmag = &rcmag_table[magIndex];
 		
 		// Get the star position from the array, only do it if not already computed
+		// put it here because potentially cutoffMagStep bigger than magIndex and no computation needed
 		if (!recomputeMag) {
 			s->getJ2000Pos(dyrs, vf);
 		}

@@ -346,7 +346,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			//TRANSLATORS: Unit of measure for distance - Light Years
 			QString ly = qc_("ly", "distance");
-			double distance = 3.26156 * 1000. / Plx;
+			double distance = PARSEC_LY * 1000. / Plx;
 			oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(distance * PlxErr / Plx, 'f', 2), ly) << "<br />";
 		}
 		oss << getExtraInfoStrings(Distance).join("");
@@ -570,7 +570,7 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			//TRANSLATORS: Unit of measure for distance - Light Years
 			QString ly = qc_("ly", "distance");
-			double distance = 3.26156 * 1000. / Plx;
+			double distance = PARSEC_LY * 1000. / Plx;
 			oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(distance * PlxErr / Plx, 'f', 2), ly) << "<br />";
 		}
 		if ((Plx!=0) && (PlxErr!=0))  // as long as having parallax, display it (but not neccessarily displaying inverse parallax)
