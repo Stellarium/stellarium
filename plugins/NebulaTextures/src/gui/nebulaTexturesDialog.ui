@@ -39,7 +39,7 @@
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -71,15 +71,28 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_imagePath">
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineEditImagePath"/>
+         </item>
+         <item row="3" column="0" colspan="3">
+          <widget class="QLabel" name="statusText">
            <property name="text">
-            <string>Image Filepath:</string>
+            <string>Please Select and Upload Image to solve Coordinates with Astrometry.net</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
           <widget class="QLineEdit" name="lineEditApiKey"/>
+         </item>
+         <item row="1" column="2">
+          <widget class="QPushButton" name="uploadImageButton">
+           <property name="text">
+            <string>upload</string>
+           </property>
+          </widget>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_apiKey">
@@ -91,20 +104,20 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEditImagePath"/>
-         </item>
-         <item row="1" column="2">
-          <widget class="QPushButton" name="uploadImageButton">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_imagePath">
            <property name="text">
-            <string>upload</string>
+            <string>Image Filepath:</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="0" colspan="3">
-          <widget class="QLabel" name="statusText">
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="checkBoxKeepApi">
            <property name="text">
-            <string>Please Select and Upload Image to solve Coordinates with Astrometry.net</string>
+            <string>Remember me</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -399,21 +412,32 @@
         </layout>
        </item>
        <item>
-        <widget class="QPushButton" name="renderButton">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>Try to Render this Textures with its corners' coordinates</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="unrenderButton">
-         <property name="text">
-          <string>Un-Render this Textures</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="renderButton">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>Try Rendering this Texture</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="disableDefault">
+           <property name="text">
+            <string>Disable default textures</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="unrenderButton">
+           <property name="text">
+            <string>Stop Rendering this Texture</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <spacer name="verticalSpacer_4">

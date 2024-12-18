@@ -62,6 +62,7 @@ public slots:
 
    void reloadTextures();
    void avoidConflict();
+   bool setTexturesVisible(QString TexName, bool visible);
 
 protected:
 	void createDialogContent() override;
@@ -117,6 +118,7 @@ private:
 
    void setAboutHtml();
    void updateStatus(const QString &status);
+   void changeUiState(bool freeze);
 
 };
 

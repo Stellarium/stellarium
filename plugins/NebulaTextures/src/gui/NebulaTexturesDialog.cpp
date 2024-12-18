@@ -119,6 +119,8 @@ void NebulaTexturesDialog::createDialogContent()
    ui->checkBoxAvoid->setChecked(getAvoidAreaConflict());
 
    reloadData();
+
+   ui->lineEditApiKey->setText(m_conf->value(MS_CONFIG_PREFIX + "/AstroMetry_Apikey", "").toString());
 }
 
 
@@ -184,7 +186,7 @@ void NebulaTexturesDialog::on_openFileButton_clicked()
    if (!fileName.isEmpty())
    {
       ui->lineEditImagePath->setText(fileName);
-      updateStatus("File selected: " + fileName);
+      updateStatus(q_("File selected: ") + fileName);
    }
 }
 
@@ -195,9 +197,12 @@ void NebulaTexturesDialog::on_uploadImageButton_clicked()
 
    if (imagePath.isEmpty() || apiKey.isEmpty())
    {
-      updateStatus("Please provide both API key and image path.");
+      updateStatus(q_("Please provide both API key and image path."));
       return;
    }
+
+   if (ui->checkBoxKeepApi->isChecked())
+      m_conf->setValue(MS_CONFIG_PREFIX + "/AstroMetry_Apikey", apiKey);
 
    // Create the JSON object
    QJsonObject json;
@@ -228,7 +233,9 @@ void NebulaTexturesDialog::on_uploadImageButton_clicked()
    connect(reply, &QNetworkReply::finished, this, [this, reply]() {onLoginReply(reply);});
 
    // Perform image upload logic here, e.g., using an API call
-   updateStatus("Sending requests...");
+   updateStatus(q_("Sending requests..."));
+
+   changeUiState(true);
 }
 
 
@@ -237,17 +244,24 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
    QByteArray content = reply->readAll();
    qDebug()<<content;
    if (reply->error() != QNetworkReply::NoError) {
-      qDebug() << "Login failed:" << reply->errorString();
-      updateStatus("Login failed!");
+      updateStatus(q_("Login failed!"));
       reply->deleteLater();
+      changeUiState(false);
       return;
    }
-   updateStatus("Login success...");
+   updateStatus(q_("Login success..."));
+
+   QFile imageFile(ui->lineEditImagePath->text());
+   if (!imageFile.open(QIODevice::ReadOnly)) {
+      updateStatus(q_("Failed to open image file!"));
+      reply->deleteLater();
+      changeUiState(false);
+      return;
+   }
 
    QJsonDocument doc = QJsonDocument::fromJson(content);
    QJsonObject json = doc.object();
    session = json["session"].toString();
-   qDebug() << "Session ID:" << session;
 
    QUrl uploadUrl(API_URL + "api/upload");
    QNetworkRequest request(uploadUrl);
@@ -258,14 +272,6 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
    uploadJson["publicly_visible"] = "y";
    uploadJson["tweak_order"] = 0;
    uploadJson["crpix_center"] = true;
-
-   QFile imageFile(ui->lineEditImagePath->text());
-   if (!imageFile.open(QIODevice::ReadOnly)) {
-      qDebug() << "Failed to open image file!";      
-      updateStatus("Failed to open image file!");
-      reply->deleteLater();
-      return;
-   }
 
    QString boundary_key;
    // Generate 19 random digits (0-9)
@@ -307,7 +313,7 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
    connect(uploadReply, &QNetworkReply::finished, this, [this, uploadReply]() {onUploadReply(uploadReply);});
 
    reply->deleteLater();
-   updateStatus("Uploading image...");
+   updateStatus(q_("Uploading image..."));
 }
 
 // TODO: image should not be flip
@@ -316,21 +322,19 @@ void NebulaTexturesDialog::onUploadReply(QNetworkReply *reply)
    QByteArray content = reply->readAll();
    qDebug()<<content;
    if (reply->error() != QNetworkReply::NoError) {
-      qDebug() << "Image upload failed:" << reply->errorString();
-      updateStatus("Image upload failed!");
+      updateStatus(q_("Image upload failed!"));
       reply->deleteLater();
+      changeUiState(false);
       return;
    }
 
    QJsonDocument doc = QJsonDocument::fromJson(content);
    QJsonObject json = doc.object();
    subId = QString::number(json["subid"].toInt());
-   qDebug() << "Image uploaded. Sub ID:" << subId<< " "<<json["subid"];
-
    subStatusTimer->start(3000);
    reply->deleteLater();
 
-   updateStatus("Image uploaded. Please wait...");
+   updateStatus(q_("Image uploaded. Please wait..."));
 }
 
 void NebulaTexturesDialog::checkSubStatus()
@@ -340,15 +344,15 @@ void NebulaTexturesDialog::checkSubStatus()
    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
    QNetworkReply *subStatusReply = networkManager->get(request);
    connect(subStatusReply, &QNetworkReply::finished, this, [this, subStatusReply]() {onsubStatusReply(subStatusReply);});
-   updateStatus("Requesting submission. Please wait...");
+   updateStatus(q_("Requesting submission. Please wait..."));
 }
 
 void NebulaTexturesDialog::onsubStatusReply(QNetworkReply *reply)
 {
    if (reply->error() != QNetworkReply::NoError) {
-      qDebug() << "Failed to get submission status:" << reply->errorString();
-      updateStatus("Failed to get submission status!");
+      updateStatus(q_("Failed to get submission status. Retry now..."));
       reply->deleteLater();
+      changeUiState(false);
       return;
    }
    QByteArray cont = reply->readAll();
@@ -359,12 +363,11 @@ void NebulaTexturesDialog::onsubStatusReply(QNetworkReply *reply)
 
    if (!jobs.isEmpty() && !jobs[0].isNull()) {
       jobId = QString::number(jobs[0].toInt());
-      qDebug() << "Job ID:" << jobId;
       subStatusTimer->stop();
       jobStatusTimer->start(3000);
       reply->deleteLater();
 
-      updateStatus("Submission got. Please wait...");
+      updateStatus(q_("Submission ID got. Please wait..."));
    }
 
 }
@@ -378,15 +381,15 @@ void NebulaTexturesDialog::checkJobStatus()
 
    QNetworkReply *jobStatusReply = networkManager->get(request);
    connect(jobStatusReply, &QNetworkReply::finished, this, [this, jobStatusReply]() { onJobStatusReply(jobStatusReply); });
-   updateStatus("Requesting job status. Please wait...");
+   updateStatus(q_("Requesting job status. Please wait..."));
 }
 
 void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
 {
    if (reply->error() != QNetworkReply::NoError) {
-      qDebug() << "Failed to get job status:" << reply->errorString();
-      updateStatus("Failed to get job status!");
+      updateStatus(q_("Failed to get job status. Retry now..."));
       reply->deleteLater();
+      changeUiState(false);
       return;
    }
 
@@ -394,11 +397,8 @@ void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
    QJsonObject json = doc.object();
    QString status = json["status"].toString();
 
-   qDebug() << "Job status:" << status;
-
    if (status == "success") {
-      qDebug() << "Job completed successfully! Downloading WCS file...";
-      updateStatus("Job completed successfully! Downloading WCS file...");
+      updateStatus(q_("Job completed successfully! Downloading WCS file..."));
       jobStatusTimer->stop();
       QUrl wcsUrl(API_URL+ "wcs_file/" + jobId);
       QNetworkRequest request(wcsUrl);
@@ -406,9 +406,9 @@ void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
       connect(wcsReply, &QNetworkReply::finished, this, [this, wcsReply]() { onWcsDownloadReply(wcsReply); });
 
    } else if (status == "error") {
-      qDebug() << "Error in job processing.";      
-      updateStatus("Error in job processing!");
+      updateStatus(q_("Error in job processing!"));
       jobStatusTimer->stop();
+      changeUiState(false);
    }
 
    reply->deleteLater();
@@ -418,9 +418,9 @@ void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
 void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
 {
    if (reply->error() != QNetworkReply::NoError) {
-      qDebug() << "Failed to download WCS file:" << reply->errorString();
-      updateStatus("Failed to download WCS file!");
+      updateStatus(q_("Failed to download WCS file..."));
       reply->deleteLater();
+      changeUiState(false);
       return;
    }
    QByteArray cont = reply->readAll();
@@ -433,7 +433,6 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
    for (int i = 0; i < content.length(); i += 80) {
       lines.append(content.mid(i, 80));
    }
-
 
    for (const QString &line : lines) {
       QRegularExpressionMatch match = regex.match(line);
@@ -466,9 +465,6 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
       }
    }
 
-   qDebug()<<  CRPIX1 << CRPIX2 << CRVAL1 << CRVAL2 << CD1_1 << CD1_2 << CD2_1 << CD2_2;
-   qDebug()<< IMAGEW<< IMAGEH;
-
    referRA = CRVAL1;
    referDec = CRVAL2;
    ui->referX->setValue(CRVAL1);
@@ -496,10 +492,10 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
    ui->topRightX->setValue(topRightRA);
    ui->topRightY->setValue(topRightDec);
 
-   qDebug()<<"["<<bottomLeftRA<<","<<bottomLeftDec<<"],"
-            <<"["<<bottomRightRA<<","<<bottomRightDec<<"],"
-            <<"["<<topRightRA<<","<<topRightDec<<"],"
-            <<"["<<topLeftRA<<","<<topLeftDec<<"]";
+   // qDebug() <<"["<<bottomLeftRA<<","<<bottomLeftDec<<"],"
+   //          <<"["<<bottomRightRA<<","<<bottomRightDec<<"],"
+   //          <<"["<<topRightRA<<","<<topRightDec<<"],"
+   //          <<"["<<topLeftRA<<","<<topLeftDec<<"]";
 
    X = IMAGEW - 1, Y = IMAGEH - 1;
    result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
@@ -508,7 +504,9 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
    ui->bottomRightX->setValue(bottomRightRA);
    ui->bottomRightY->setValue(bottomRightDec);
 
-   updateStatus("Goto Reference Point, Try to Render, Check and Adjust Coordinates.");
+   changeUiState(false);
+
+   updateStatus(q_("Processing completed! Goto Center Point, Try to Render, Check and Add to Local Storage."));
 }
 
 
@@ -618,7 +616,17 @@ QPair<double, double> NebulaTexturesDialog::PixelToCelestial(int X, int Y, doubl
    return QPair<double, double>(lng, lat);
 }
 
-// logic
+
+void NebulaTexturesDialog::changeUiState(bool freeze)
+{
+   ui->openFileButton->setDisabled(freeze);
+   ui->uploadImageButton->setDisabled(freeze);
+   ui->goPushButton->setDisabled(freeze);
+   ui->renderButton->setDisabled(freeze);
+   ui->unrenderButton->setDisabled(freeze);
+   ui->addTexture->setDisabled(freeze);
+}
+
 void NebulaTexturesDialog::on_goPushButton_clicked()
 {
 
@@ -646,10 +654,16 @@ void NebulaTexturesDialog::on_goPushButton_clicked()
 }
 
 
-// TODO: only a temp json show - enable/disable
 void NebulaTexturesDialog::renderTempCustomTexture()
 {
-   updateStatus("Rendering with coordinates");
+   QString imagePath = ui->lineEditImagePath->text();
+   if (imagePath.isEmpty()) {
+      qWarning() << "Image path is empty.";
+      updateStatus(q_("Image path is empty."));
+      return;
+   }
+
+   updateStatus(q_("Rendering..."));
 
    addTexture(tmpcfgFile, TEST_TEXNAME);
 
@@ -657,30 +671,30 @@ void NebulaTexturesDialog::renderTempCustomTexture()
 
    StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
 
-   if (path.isEmpty())
-      qWarning() << "ERROR while loading nebula texture set default";
+   if (path.isEmpty()){
+      qWarning() << "ERROR while loading nebula texture.";
+      updateStatus(q_("Rendering failed."));
+   }
    else{
       if(flag_renderTempTex) unRenderTempCustomTexture();
       skyLayerMgr->insertSkyImage(path, QString(), true, 1);
       flag_renderTempTex = true;
+      if(ui->disableDefault->isChecked())
+         setTexturesVisible(DEFAULT_TEXNAME, false);
+      updateStatus(q_("Rendering complete."));
    }
-
-   updateStatus("Rendering complete.");
-   // skyLayerMgr->loadSkyImage(
-   //   id, resolvedPath,
-   //   ra0, dec0, ra1, dec1,
-   //   ra2, dec2, ra3, dec3,
-   //   1.0, 1.0,
-   //   visible, StelCore::FrameType::FrameJ2000,
-   //   false, 1
-   //   );
 }
+
 
 void NebulaTexturesDialog::unRenderTempCustomTexture()
 {
    if(!flag_renderTempTex) return;
    StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
    skyLayerMgr->removeSkyLayer(TEST_TEXNAME);
+
+   setTexturesVisible(DEFAULT_TEXNAME, true);
+   reloadTextures();
+   updateStatus(q_("Cancel rendering."));
 }
 
 // logic, hint: will add next time restart
@@ -696,6 +710,7 @@ void NebulaTexturesDialog::addTexture(QString addPath, QString keyName)
    QString imagePath = ui->lineEditImagePath->text();
    if (imagePath.isEmpty()) {
       qWarning() << "Image path is empty.";
+      updateStatus(q_("Image path is empty."));
       return;
    }
 
@@ -710,6 +725,7 @@ void NebulaTexturesDialog::addTexture(QString addPath, QString keyName)
    QString targetFilePath = pluginFolder + targetFileName;
    if (!QFile::copy(imagePath, targetFilePath)) {
       qWarning() << "Failed to copy image file to target path:" << targetFilePath;
+      updateStatus(q_("Failed to copy image file to user folder!"));
       return;
    }
    QString imageUrl = targetFileName;
@@ -726,12 +742,10 @@ void NebulaTexturesDialog::addTexture(QString addPath, QString keyName)
    referRA = ui->referX->value();
    referDec = ui->referY->value();
 
-   qDebug() << "[" << QString::number(bottomLeftRA, 'f', 10) << "," << QString::number(bottomLeftDec, 'f', 10) << "],"
-            << "[" << QString::number(bottomRightRA, 'f', 10) << "," << QString::number(bottomRightDec, 'f', 10) << "],"
-            << "[" << QString::number(topRightRA, 'f', 10) << "," << QString::number(topRightDec, 'f', 10) << "],"
-            << "[" << QString::number(topLeftRA, 'f', 10) << "," << QString::number(topLeftDec, 'f', 10) << "]";
-
-
+   // qDebug() << "[" << QString::number(bottomLeftRA, 'f', 10) << "," << QString::number(bottomLeftDec, 'f', 10) << "],"
+   //          << "[" << QString::number(bottomRightRA, 'f', 10) << "," << QString::number(bottomRightDec, 'f', 10) << "],"
+   //          << "[" << QString::number(topRightRA, 'f', 10) << "," << QString::number(topRightDec, 'f', 10) << "],"
+   //          << "[" << QString::number(topLeftRA, 'f', 10) << "," << QString::number(topLeftDec, 'f', 10) << "]";
 
    QJsonArray innerWorldCoords;
    innerWorldCoords.append(QJsonArray({bottomLeftRA, bottomLeftDec}));
@@ -752,19 +766,20 @@ void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const Q
    QDir().mkpath(pluginFolder);
 
    QString path = StelFileMgr::getUserDir() + addPath;
-
    QFile jsonFile(path);
    QJsonObject rootObject;
 
    if (jsonFile.exists() && keyName!=TEST_TEXNAME) {
       if (!jsonFile.open(QIODevice::ReadOnly)) {
          qWarning() << "Failed to open existing JSON file for reading:" << path;
+         updateStatus(q_("Failed to open Configuration File!"));
          return;
       }
 
       QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
       if (!jsonDoc.isObject()) {
          qWarning() << "Invalid JSON structure in file:" << path;
+         updateStatus(q_("Invalid JSON structure in Configuration File!"));
          return;
       }
 
@@ -808,6 +823,7 @@ void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const Q
 
    if (!jsonFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
       qWarning() << "Failed to open JSON file for writing:" << path;
+      updateStatus(q_("Failed to open Configuration File for writing!"));
       return;
    }
 
@@ -816,7 +832,9 @@ void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const Q
    jsonFile.flush();
    jsonFile.close();
 
-   qDebug() << "Updated custom textures JSON file successfully.";
+   // qDebug() << "Updated custom textures JSON file successfully.";
+   updateStatus(q_("Updated custom textures JSON file successfully!"));
+
 }
 
 
@@ -947,44 +965,58 @@ void NebulaTexturesDialog::reloadData()
 
          ui->listWidget->addItem(item);
 
-      } else {
-         qWarning() << "No 'imageUrl' found in subTile, skipping...";
       }
+      // else {
+      //    qWarning() << "No 'imageUrl' found in subTile, skipping...";
+      // }
    }
 }
+
+
+bool NebulaTexturesDialog::setTexturesVisible(QString TexName, bool visible)
+{
+   StelSkyImageTile* mTile = get_aTile(TexName);
+   if(!mTile) return false;
+   for (int i = 0; i < mTile->getSubTiles().size(); ++i) {
+      auto subTile = mTile->getSubTiles()[i];
+      StelSkyImageTile* subImageTile = dynamic_cast<StelSkyImageTile*>(subTile);
+      subImageTile->setVisible(visible);
+   }
+   return true;
+}
+
 
 
 // only enable or disable all custom show flag
 void NebulaTexturesDialog::reloadTextures()
 {
-   // QString path = StelFileMgr::getUserDir()+configFile;
 
-   // StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+   bool showCustom = getShowCustomTextures();
+   if (!showCustom){
+      setTexturesVisible(CUSTOM_TEXNAME,false);
+      setTexturesVisible(DEFAULT_TEXNAME,true);
+   }
+   else{
+      setTexturesVisible(CUSTOM_TEXNAME,true);
+      avoidConflict(); // only when show_custom && avoid_conflict
+   }
 
-   // if (path.isEmpty())
-   //    qWarning() << "ERROR while loading nebula texture set default";
-   // else{
-   //    skyLayerMgr->insertSkyImage(path, QString(), true, 1);
-   //    // skyLayerMgr->loadCollection(path, 1);
-   // }
-
+   /*
    bool showCustom = getShowCustomTextures();
    StelSkyImageTile* cusTile = get_aTile(CUSTOM_TEXNAME);
    StelSkyImageTile* defTile = get_aTile(DEFAULT_TEXNAME);
    if(!cusTile) return;
    if(!defTile) return;
-   qDebug() << "updateVisibleState" << showCustom << "size:" << cusTile->getSubTiles().size() << defTile->getSubTiles().size();
+   // qDebug() << "updateVisibleState" << showCustom << "size:" << cusTile->getSubTiles().size() << defTile->getSubTiles().size();
    if (!showCustom){
       for (int i = 0; i < cusTile->getSubTiles().size(); ++i) {
          auto subTile = cusTile->getSubTiles()[i];
          StelSkyImageTile* subImageTile = dynamic_cast<StelSkyImageTile*>(subTile);
-         // subImageTile->flagVisible = false;
          subImageTile->setVisible(false);
       }
       for (int i = 0; i < defTile->getSubTiles().size(); ++i) {
          auto subTile = defTile->getSubTiles()[i];
          StelSkyImageTile* subImageTile = dynamic_cast<StelSkyImageTile*>(subTile);
-         // subImageTile->flagVisible = true;
          subImageTile->setVisible(true);
       }
    }
@@ -992,11 +1024,11 @@ void NebulaTexturesDialog::reloadTextures()
       for (int i = 0; i < cusTile->getSubTiles().size(); ++i) {
          auto subTile = cusTile->getSubTiles()[i];
          StelSkyImageTile* subImageTile = dynamic_cast<StelSkyImageTile*>(subTile);
-         // subImageTile->flagVisible = true;
          subImageTile->setVisible(true);
       }
       avoidConflict(); // only when show_custom && avoid_conflict
    }
+   */
 }
 
 
@@ -1038,14 +1070,7 @@ void NebulaTexturesDialog::avoidConflict()
       }
    }
    else{
-      StelSkyImageTile* defTile = get_aTile(DEFAULT_TEXNAME);
-      if(!defTile) return;
-      for (int i = 0; i < defTile->getSubTiles().size(); ++i) {
-         StelSkyImageTile* subdefTile = dynamic_cast<StelSkyImageTile*>(defTile->getSubTiles()[i]);
-         if(subdefTile->getVisible() == false){
-            subdefTile->setVisible(true);
-         }
-      }
+      setTexturesVisible(DEFAULT_TEXNAME, true);
    }
-
 }
+
