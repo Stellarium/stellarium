@@ -22,8 +22,14 @@ give the number of zones $n$ as:
 n=20 \cdot 4^L + 1
 \end{equation}
 
-Stellarium uses levels 0 to 8 in the existing star catalogues. Star Data
-Records contain the encoded position of a star.
+Stellarium uses levels 0 to 8 in the existing star catalogues. So the number of zones are 21 for level 0 to 1,310,721 for level 8.
+Stars within the global zone are always checked if they are visible or not without any zone restriction, since stars can move 
+out of their original zones due to proper motion and not drawn in the sky. Only level 0 to level 2 star catalogs have their global 
+zone populated (i.e. level 3-8 global zones are empty).
+
+For level 0, any stars who will move out of their original zones in $\pm 100,000$ years are moved to the global zone. For level 1 and 2, stars are moved 
+to the global zone only if they move out of their original zones and the bordering zones \textbf{or} brighter than 0.3 mag from their 
+present apparent magnitude in $\pm 100,000$ years.
 
 \section{Star Catalogue File Format}%\label{star-catalogue-file-format}
 \label{sec:Catalogues:stars}
@@ -89,12 +95,12 @@ know about the zone model to be able to extract positional data.
 \file{stars\_0\_0v0\_12.cat} & 0 & 48 bytes & 0 &        5,027 & Hipparcos + Gaia\\
 \file{stars\_1\_0v0\_12.cat} & 0 & 48 bytes & 1 &       21,421 & Hipparcos + Gaia\\
 \file{stars\_2\_0v0\_12.cat} & 0 & 48 bytes & 2 &      141,558 & Hipparcos + Gaia\\
-\file{stars\_3\_0v0\_7.cat} & 0 & 48 bytes & 3 &      418,209 & Gaia\\
-\file{stars\_4\_1v0\_4.cat} & 1 & 32 bytes & 4 &    1,741,890 & Gaia\\
-\file{stars\_5\_1v0\_4.cat} & 1 & 32 bytes & 5 &    8,051,915 & Gaia\\
-\file{stars\_6\_1v0\_3.cat} & 1 & 32 bytes & 6 &   29,879,726 & Gaia\\
-\file{stars\_7\_1v0\_3.cat} & 1 & 32 bytes & 7 &   57,534,724 & Gaia\\
-\file{stars\_8\_2v0\_3.cat} & 2 & 16 bytes & 8 & 1,229,081,84 & Gaia\\
+\file{stars\_3\_0v0\_7.cat}  & 0 & 48 bytes & 3 &      418,209 & Gaia\\
+\file{stars\_4\_1v0\_4.cat}  & 1 & 32 bytes & 4 &    1,741,890 & Gaia\\
+\file{stars\_5\_1v0\_4.cat}  & 1 & 32 bytes & 5 &    8,051,915 & Gaia\\
+\file{stars\_6\_1v0\_3.cat}  & 1 & 32 bytes & 6 &   29,879,726 & Gaia\\
+\file{stars\_7\_1v0\_3.cat}  & 1 & 32 bytes & 7 &   57,534,724 & Gaia\\
+\file{stars\_8\_2v0\_3.cat}  & 2 & 16 bytes & 8 & 1,229,081,84 & Gaia\\
 \bottomrule
 \end{tabular}
 
@@ -198,7 +204,29 @@ See tables
 \ref{tab:StarDataRecord0}, \ref{tab:StarDataRecord1} and \ref{tab:StarDataRecord2}
 for record structure details.
 
-Details about vector algebra related to astrometric calculations can be found in \citep{2012asas.book.....V}
+Details about vector algebra related to astrometric calculations can be found in \citep{2012asas.book.....V}. For catalog with Star Data Record Type 0, in 
+practice to convert \texttt{x0}, \texttt{x1}, \texttt{x2} to right accension $\alpha$ and declination $\delta$, one can use the following formulas:
+
+\begin{equation}
+\begin{aligned}
+\alpha &= \arctan2(\texttt{x1}, \texttt{x0})\\
+\delta &= \arcsin(\texttt{x2})
+\end{aligned}
+\end{equation}
+
+and to convert proper motion vector (\texttt{dx0}, \texttt{dx1}, \texttt{dx2}) to proper motion in right accension $\mu_{\alpha^*}$ and declination $\mu_{\delta}$, one can use the following formulas:
+
+\begin{equation}
+\begin{aligned}
+	xy &= \sqrt{\texttt{x0}^2 + \texttt{x1}^2}; \\
+	\vec{p} &= \left(-\frac{\texttt{x1}}{xy}, \frac{\texttt{x0}}{xy}, 0.\right); \\
+	\vec{q} &= \left(-\frac{\texttt{x0} \cdot \texttt{x2}}{xy}, -\frac{\texttt{x1} \cdot \texttt{x2}}{xy}, xy\right);\\
+	\mu_{\alpha^*} &= \vec{p} \cdot \left(\texttt{dx0}, \texttt{dx1}, \texttt{dx2}\right); \\
+	\mu_{\delta} &= \vec{q} \cdot \left(\texttt{dx0}, \texttt{dx1}, \texttt{dx2}\right);
+\end{aligned}
+\end{equation}
+
+where $\mu_{\alpha^*}\equiv\mu_{\alpha}\cos{(\delta)}$.
 
 \begin{table}[p]
 \begin{tabular}{llllp{55mm}}\toprule
@@ -229,10 +257,10 @@ hip            & 45 & int                & 3 & Hipparcos catalogue number with c
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset}& \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
 gaia_id        &  0 & long long          & 8 & Gaia source id\\%\midrule
-x0             &  8 & int                & 4 & RA of the star in mas unit.\\%\midrule
-x1             & 12 & int                & 4 & DEC of the star in mas unit.\\%\midrule
-dx0            & 16 & int                & 4 & Proper motion in RA of the star in $mu$as/year (without $\cos{\mathrm{DEC}}$)%\midrule
-dx1            & 20 & int                & 4 & Proper motion in DEC of the star in $mu$as/year%\midrule
+x0             &  8 & int                & 4 & Right ascension $\alpha$ of the star in mas unit.\\%\midrule
+x1             & 12 & int                & 4 & Declination $\delta$ of the star in mas unit.\\%\midrule
+dx0            & 16 & int                & 4 & Proper motion $\mu_{\alpha}$ of the star in $mu$as/year%\midrule
+dx1            & 20 & int                & 4 & Proper motion $\mu_{\delta}$ of the star in $mu$as/year%\midrule
 b\_v           & 24 & short              & 2 & $B-V$ colour in milli-mag unit.
 mag            & 26 & short              & 2 & $V$-band magnitude in milli-mag unit.
 plx            & 28 & unsigned short     & 2 & parallax of the star in 0.01 mas unit.\\
@@ -246,8 +274,8 @@ plx_err        & 30 & unsigned short     & 2 & parallax error of the star in 0.0
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} & \emph{Description}\\\midrule
 gaia_id        &  0 & long long          & 8 & Gaia source id\\%\midrule
-x0             &  8 & int                & 3 & RA of the star in 0.1 arcsecond unit.\\%\midrule
-x1             & 11 & int                & 3 & DEC of the star in 0.1 arcsecond unit.\\%\midrule
+x0             &  8 & int                & 3 & Right ascension $\alpha$ of the star in 0.1 arcsecond unit.\\%\midrule
+x1             & 11 & int                & 3 & Declination $\delta$ of the star in 0.1 arcsecond unit.\\%\midrule
 b\_v           & 14 & unsigned short     & 1 & $B-V$ colour in 25 milli-mag unit offset by $+1$ mag.
 mag            & 15 & unsigned short     & 1 & $V$-band magnitude in 20 milli-mag unit offset by $-16$ mag.
 \end{tabularx}
@@ -260,7 +288,7 @@ mag            & 15 & unsigned short     & 1 & $V$-band magnitude in 20 milli-ma
 \label{sec:StarCatalogues:VariableStars}
 
 Since version 0.12.2 Stellarium supports the subset of variable stars
-from GCVS\footnote{\url{http://www.sai.msu.su/gcvs/gcvs/}} which have  HIP
+from GCVS\footnote{\url{http://www.sai.msu.su/gcvs/gcvs/}} which have HIP
 identificators (i.e., stars from the Hipparcos catalog). Stellarium's Catalog
 of Variable Stars is based on the \citetp{samus}.
 %\textbf{General Catalogue of Variable Stars} 
