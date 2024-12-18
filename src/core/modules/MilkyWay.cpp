@@ -83,6 +83,7 @@ void MilkyWay::init()
 	setFlagShow(conf->value("astro/flag_milky_way").toBool());
 	setIntensity(conf->value("astro/milky_way_intensity",1.).toDouble());
 	setSaturation(conf->value("astro/milky_way_saturation", 1.).toDouble());
+	setColor(Vec3f(conf->value("astro/milky_way_color", "1.0,1.0,1.0").toString()));
 
 	vbo.reset(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer));
 	vbo->create();
@@ -161,11 +162,44 @@ void MilkyWay::setFlagShow(bool b)
 	if (*fader != b)
 	{
 		*fader = b;
+		StelApp::immediateSave("astro/flag_milky_way", b);
 		emit milkyWayDisplayedChanged(b);
 	}
 }
 
 bool MilkyWay::getFlagShow() const {return *fader;}
+
+// Set Milky Way intensity. Default value: 1.
+void MilkyWay::setIntensity(double aintensity)
+{
+	if(!qFuzzyCompare(aintensity, intensity))
+	{
+		intensity = aintensity;
+		StelApp::immediateSave("astro/milky_way_intensity", aintensity);
+		emit intensityChanged(intensity);
+	}
+}
+
+// Set Milky Way saturation (color strength).
+void MilkyWay::setSaturation(double sat)
+{
+	if(!qFuzzyCompare(sat, saturation))
+	{
+		saturation = sat;
+		StelApp::immediateSave("astro/milky_way_saturation", sat);
+		emit saturationChanged(saturation);
+	}
+}
+
+void MilkyWay::setColor(const Vec3f& c)
+{
+	if (c!=color)
+	{
+		color=c;
+		emit colorChanged(c);
+	}
+}
+
 
 void MilkyWay::draw(StelCore* core)
 {

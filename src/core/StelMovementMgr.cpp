@@ -280,6 +280,7 @@ void StelMovementMgr::bindingFOVActions()
 void StelMovementMgr::setEquatorialMount(bool b)
 {
 	setMountMode(b ? MountEquinoxEquatorial : MountAltAzimuthal);
+	StelApp::immediateSave("navigation/viewing_mode", b ? "equator" : "horizon");
 
 	if (getFlagIndicationMountMode())
 	{
@@ -1753,6 +1754,7 @@ void StelMovementMgr::setUserMaxFov(double max)
 		const float prjMaxFov = StelApp::getInstance().getCore()->getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity(),Mat4d::identity())))->getMaxFov();
 		setMaxFov(qMin(userMaxFov, static_cast<double>(prjMaxFov)));
 	}
+	StelApp::immediateSave("navigation/max_fov", userMaxFov);
 	emit userMaxFovChanged(userMaxFov);
 }
 
@@ -1766,9 +1768,15 @@ void StelMovementMgr::moveViewport(double offsetX, double offsetY, const float d
 	targetViewportOffset.set(offsetX, offsetY);
 
 	if(fabs(offsetX - oldTargetViewportOffset[0]) > 1e-10)
+	{
+		StelApp::immediateSave("projection/viewport_center_offset_x", offsetX);
 		emit viewportHorizontalOffsetTargetChanged(offsetX);
+	}
 	if(fabs(offsetY - oldTargetViewportOffset[1]) > 1e-10)
+	{
+		StelApp::immediateSave("projection/viewport_center_offset_y", offsetY);
 		emit viewportVerticalOffsetTargetChanged(offsetY);
+	}
 
 	if (duration<=0.0f)
 	{

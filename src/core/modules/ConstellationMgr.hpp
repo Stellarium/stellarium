@@ -62,7 +62,7 @@ class ConstellationMgr : public StelObjectModule
 		   READ getFlagBoundaries
 		   WRITE setFlagBoundaries
 		   NOTIFY boundariesDisplayedChanged)
-	Q_PROPERTY(float fontSize
+	Q_PROPERTY(int fontSize
 		   READ getFontSize
 		   WRITE setFontSize
 		   NOTIFY fontSizeChanged)
@@ -70,6 +70,10 @@ class ConstellationMgr : public StelObjectModule
 		   READ getFlagIsolateSelected
 		   WRITE setFlagIsolateSelected
 		   NOTIFY isolateSelectedChanged)
+	Q_PROPERTY(bool flagConstellationPick
+		   READ getFlagConstellationPick
+		   WRITE setFlagConstellationPick
+		   NOTIFY flagConstellationPickChanged)
 	Q_PROPERTY(Vec3f linesColor
 		   READ getLinesColor
 		   WRITE setLinesColor
@@ -244,9 +248,9 @@ public slots:
 	bool getFlagLabels(void) const;
 
 	//! Set the font size used for constellation names display
-	void setFontSize(const float newFontSize);
+	void setFontSize(const int newFontSize);
 	//! Get the font size used for constellation names display
-	float getFontSize() const;
+	int getFontSize() const;
 
 	//! Set the way how constellation names are displayed: abbreviated/as-given/translated
 	//! @param style the new display style
@@ -314,8 +318,9 @@ signals:
 	void artIntensityChanged(const double intensity);
 	void boundariesColorChanged(const Vec3f & color);
 	void boundariesDisplayedChanged(const bool displayed);
-	void fontSizeChanged(const float newSize);
+	void fontSizeChanged(const int newSize);
 	void isolateSelectedChanged(const bool isolate);
+	void flagConstellationPickChanged(const bool mode);
 	void linesColorChanged(const Vec3f & color);
 	void linesDisplayedChanged(const bool displayed);
 	void namesColorChanged(const Vec3f & color);
@@ -415,7 +420,7 @@ private:
 	StarMgr* hipStarMgr;
 
 	bool isolateSelected; // true to pick individual constellations.
-	bool constellationPickEnabled;
+	bool flagConstellationPick; // TODO: CLEAR DESCRIPTION
 	std::vector<std::vector<Vec3d> *> allBoundarySegments;
 
 	QString lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
@@ -424,6 +429,7 @@ private:
 
 	//! this controls how constellations (and also star names) are printed: Abbreviated/as-given/translated
 	ConstellationDisplayStyle constellationDisplayStyle;
+	static const QMap<QString, ConstellationDisplayStyle>ConstellationDisplayStyleMap;
 
 	// These are THE master settings - individual constellation settings can vary based on selection status
 	float artFadeDuration;

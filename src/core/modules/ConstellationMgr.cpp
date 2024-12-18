@@ -50,7 +50,7 @@
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	: hipStarMgr(_hip_stars),
 	  isolateSelected(false),
-	  constellationPickEnabled(false),
+	  flagConstellationPick(false),
 	  constellationDisplayStyle(ConstellationMgr::constellationsTranslated),
 	  artFadeDuration(2.),
 	  artIntensity(0),
@@ -87,13 +87,13 @@ void ConstellationMgr::init()
 	Q_ASSERT(conf);
 
 	lastLoadedSkyCulture = "dummy";
-	asterFont.setPixelSize(conf->value("viewing/constellation_font_size", 15).toInt());
-	setFlagLines(conf->value("viewing/flag_constellation_drawing").toBool());
-	setFlagLabels(conf->value("viewing/flag_constellation_name").toBool());
-	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());	
+	setFontSize(conf->value("viewing/constellation_font_size", 15).toInt());
+	setFlagLines(conf->value("viewing/flag_constellation_drawing", false).toBool());
+	setFlagLabels(conf->value("viewing/flag_constellation_name", false).toBool());
+	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries", false).toBool());
 	setArtIntensity(conf->value("viewing/constellation_art_intensity", 0.5f).toFloat());
 	setArtFadeDuration(conf->value("viewing/constellation_art_fade_duration",2.f).toFloat());
-	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
+	setFlagArt(conf->value("viewing/flag_constellation_art", false).toBool());
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected", false).toBool());
 	setFlagConstellationPick(conf->value("viewing/flag_constellation_pick", false).toBool());
 	setConstellationLineThickness(conf->value("viewing/constellation_line_thickness", 1).toInt());
@@ -102,17 +102,12 @@ void ConstellationMgr::init()
 	setFlagCheckLoadingData(conf->value("devel/check_loading_constellation_data","false").toBool());
 
 	QString starloreDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
-	static const QMap<QString, ConstellationDisplayStyle>map={
-		{ "translated",  constellationsTranslated},
-		{ "native",      constellationsNative},
-		{ "abbreviated", constellationsAbbreviated},
-		{ "english",     constellationsEnglish}};
-	if (!map.contains(starloreDisplayStyle))
+	if (!ConstellationDisplayStyleMap.contains(starloreDisplayStyle))
 	{
 		qDebug() << "Warning: viewing/constellation_name_style (" << starloreDisplayStyle << ") invalid. Using translated style.";
 		conf->setValue("viewing/constellation_name_style", "translated");
 	}
-	setConstellationDisplayStyle(map.value(starloreDisplayStyle, constellationsTranslated));
+	setConstellationDisplayStyle(ConstellationDisplayStyleMap.value(starloreDisplayStyle, constellationsTranslated));
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -422,16 +417,17 @@ Vec3f ConstellationMgr::getLabelsColor() const
 	return Constellation::labelColor;
 }
 
-void ConstellationMgr::setFontSize(const float newFontSize)
+void ConstellationMgr::setFontSize(const int newFontSize)
 {
-	if (asterFont.pixelSize() - newFontSize != 0.0f)
+	if (asterFont.pixelSize() - newFontSize != 0)
 	{
-		asterFont.setPixelSize(static_cast<int>(newFontSize));
+		asterFont.setPixelSize(newFontSize);
+		StelApp::immediateSave("viewing/constellation_font_size", newFontSize);
 		emit fontSizeChanged(newFontSize);
 	}
 }
 
-float ConstellationMgr::getFontSize() const
+int ConstellationMgr::getFontSize() const
 {
 	return asterFont.pixelSize();
 }
@@ -439,6 +435,7 @@ float ConstellationMgr::getFontSize() const
 void ConstellationMgr::setConstellationDisplayStyle(ConstellationDisplayStyle style)
 {
 	constellationDisplayStyle=style;
+	StelApp::immediateSave("viewing/constellation_name_style", ConstellationDisplayStyleMap.key(style));
 	emit constellationsDisplayStyleChanged(constellationDisplayStyle);
 }
 
@@ -460,6 +457,7 @@ void ConstellationMgr::setConstellationLineThickness(const int thickness)
 		if (constellationLineThickness<=0) // The line can not be negative or zero thickness
 			constellationLineThickness = 1;
 
+		StelApp::immediateSave("viewing/constellation_line_thickness", thickness);
 		emit constellationLineThicknessChanged(thickness);
 	}
 }
@@ -468,10 +466,9 @@ void ConstellationMgr::setConstellationBoundariesThickness(const int thickness)
 {
 	if(thickness!=constellationBoundariesThickness)
 	{
-		constellationBoundariesThickness = thickness;
-		if (constellationBoundariesThickness<=0) // The line can not be negative or zero thickness
-			constellationBoundariesThickness = 1;
+		constellationBoundariesThickness = qMax(1, thickness); // cannot be 0 or neg.
 
+		StelApp::immediateSave("viewing/constellation_boundaries_thickness", thickness);
 		emit constellationBoundariesThicknessChanged(thickness);
 	}
 }
@@ -993,7 +990,7 @@ void ConstellationMgr::setArtIntensity(const float intensity)
 		{
 			constellation->artOpacity = artIntensity;
 		}
-
+		StelApp::immediateSave("viewing/constellation_art_intensity", intensity);
 		emit artIntensityChanged(static_cast<double>(intensity));
 	}
 }
@@ -1033,6 +1030,7 @@ void ConstellationMgr::setArtFadeDuration(const float duration)
 		{
 			constellation->artFader.setDuration(static_cast<int>(duration * 1000.f));
 		}
+		StelApp::immediateSave("viewing/constellation_art_fade_duration", duration);
 		emit artFadeDurationChanged(duration);
 	}
 }
@@ -1061,6 +1059,7 @@ void ConstellationMgr::setFlagLines(const bool displayed)
 				constellation->setFlagLines(linesDisplayed);
 			}
 		}
+		StelApp::immediateSave("viewing/flag_constellation_drawing", displayed);
 		emit linesDisplayedChanged(displayed);
 	}
 }
@@ -1089,6 +1088,7 @@ void ConstellationMgr::setFlagBoundaries(const bool displayed)
 				constellation->setFlagBoundaries(boundariesDisplayed);
 			}
 		}
+		StelApp::immediateSave("viewing/flag_constellation_boundaries", displayed);
 		emit boundariesDisplayedChanged(displayed);
 	}
 }
@@ -1117,6 +1117,7 @@ void ConstellationMgr::setFlagArt(const bool displayed)
 				constellation->setFlagArt(artDisplayed);
 			}
 		}
+		StelApp::immediateSave("viewing/flag_constellation_art", displayed);
 		emit artDisplayedChanged(displayed);
 	}
 }
@@ -1141,6 +1142,7 @@ void ConstellationMgr::setFlagLabels(const bool displayed)
 			for (auto* constellation : constellations)
 				constellation->setFlagLabels(namesDisplayed);
 		}
+		StelApp::immediateSave("viewing/flag_constellation_name", displayed);
 		emit namesDisplayedChanged(displayed);
 	}
 }
@@ -1167,6 +1169,7 @@ void ConstellationMgr::setFlagIsolateSelected(const bool isolate)
 				constellation->setFlagBoundaries(getFlagBoundaries());
 			}
 		}
+		StelApp::immediateSave("viewing/flag_constellation_isolate_selected", isolate);
 		emit isolateSelectedChanged(isolate);
 	}
 }
@@ -1178,12 +1181,14 @@ bool ConstellationMgr::getFlagIsolateSelected(void) const
 
 void ConstellationMgr::setFlagConstellationPick(const bool mode)
 {
-	constellationPickEnabled = mode;
+	StelApp::immediateSave("viewing/flag_constellation_pick", mode);
+	flagConstellationPick = mode;
+	emit flagConstellationPickChanged(mode);
 }
 
 bool ConstellationMgr::getFlagConstellationPick(void) const
 {
-	return constellationPickEnabled;
+	return flagConstellationPick;
 }
 
 StelObject* ConstellationMgr::getSelected(void) const
@@ -1536,3 +1541,9 @@ Constellation* ConstellationMgr::isObjectIn(const StelObject *s) const
 	}
 	return Q_NULLPTR;
 }
+
+const QMap<QString, ConstellationMgr::ConstellationDisplayStyle>ConstellationMgr::ConstellationDisplayStyleMap={
+	{ "translated",  constellationsTranslated},
+	{ "native",      constellationsNative},
+	{ "abbreviated", constellationsAbbreviated},
+	{ "english",     constellationsEnglish}};

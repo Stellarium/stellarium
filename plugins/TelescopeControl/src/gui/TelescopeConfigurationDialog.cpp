@@ -165,6 +165,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	#endif
 	#ifdef Q_OS_WIN
 		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		ui->radioButtonTelescopeASCOM->setText(q_("ASCOM disabled!"));
 		ui->radioButtonTelescopeASCOM->setToolTip(q_("Disabled due to apparent incompatibility. Please use the Qt5-based build of Stellarium."));
 		ui->radioButtonTelescopeASCOM->setDisabled(true);
 		#else

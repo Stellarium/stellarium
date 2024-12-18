@@ -297,7 +297,7 @@ private:
 	bool checkJsonFileFormat(void);
 
 	//! parse JSON file and load pulsars to map
-	QVariantMap loadPSRMap(QString path=QString());
+	QVariantMap loadPSRMap();
 
 	//! set items for list of struct from data map
 	void setPSRMap(const QVariantMap& map);

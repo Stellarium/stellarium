@@ -575,84 +575,52 @@ void StelPainter::sSphereMap(double radius, unsigned int slices, unsigned int st
 	}
 }
 
-void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float xshift, float yshift)
+void StelPainter::drawTextGravity180(const float x, const float y, const QString& ws, const float xshift, const float yshift)
 {
 	const float dx = x - static_cast<float>(prj->viewportCenter[0]);
 	const float dy = y - static_cast<float>(prj->viewportCenter[1]);
-	const float d = std::sqrt(dx*dx + dy*dy);
-	const float limit = 120.;
+	float d = std::sqrt(dx*dx + dy*dy);
 
 	// If the text is too far away to be visible in the screen return
 	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2 || ws.isEmpty())
 		return;
 
+	const auto fm = getFontMetrics();
+	const bool rtl = StelApp::getInstance().getLocaleMgr().isSkyRTL();
+
 	const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
-	const float cWidth = static_cast<float>(getFontMetrics().boundingRect(ws).width())/ws.length(); // average character width
-	const float stdWidth = static_cast<float>(getFontMetrics().boundingRect("n").width());
-	const float theta_o = M_PIf + std::atan2(dx, dy - 1);
+	float anglePerUnitWidth = ppx / d;
 	float theta = std::atan2(dy - 1, dx);
-	float psi = std::atan2(ppx*cWidth*1.2, d + 1) * M_180_PIf; // Factor 1.2 is empirical.
-	if (psi>5)
-		psi = 5;
 
-	const float xVc = static_cast<float>(prj->viewportCenter[0]) + xshift;
-	const float yVc = static_cast<float>(prj->viewportCenter[1]) + yshift;
-	const float cosr = std::cos(-theta_o * M_PI_180f);
-	const float sinr = std::sin(-theta_o * M_PI_180f);
-	float xom = x + xshift*cosr - yshift*sinr;
-	float yom = y + yshift*sinr + xshift*cosr;
-	float width;
-	QChar s;
+	float xVc = static_cast<float>(prj->viewportCenter[0]) + xshift;
+	float yVc = static_cast<float>(prj->viewportCenter[1]) + yshift;
 
-	if (!StelApp::getInstance().getLocaleMgr().isSkyRTL())
+	const float charWidth = fm.averageCharWidth();
+	constexpr float maxAnglePerChar = 10 * M_PI_180f;
+	if (charWidth * anglePerUnitWidth > maxAnglePerChar)
 	{
-		for (int i=0; i<ws.length(); ++i)
-		{
-			s = ws[i];
-			if (d<limit)
-			{
-				drawText(xom, yom, s, -theta_o*M_180_PIf+psi*static_cast<float>(i), 0., 0.);
-				xom += cWidth*std::cos(-theta_o+psi*static_cast<float>(i) * M_PI_180f);
-				yom += cWidth*std::sin(-theta_o+psi*static_cast<float>(i) * M_PI_180f);
-			}
-			else
-			{
-				x = d * std::cos(theta) + xVc ;
-				y = d * std::sin(theta) + yVc ;
-				drawText(x, y, s, 90.f + theta*M_180_PIf, 0., 0.);
-				// Compute how much the character contributes to the angle
-				if (s.isSpace())
-					width = stdWidth;
-				else
-					width = static_cast<float>(getFontMetrics().boundingRect(s).width());
-				theta += psi * M_PI_180f * (1 + (width - cWidth)/ cWidth);
-			}
-		}
+		// Too curvy text, limit its curvature by moving the center of curvature away
+		const float x0 = d * std::cos(theta) + xVc;
+		const float y0 = d * std::sin(theta) + yVc;
+
+		anglePerUnitWidth = maxAnglePerChar / charWidth;
+		d = ppx / anglePerUnitWidth;
+
+		xVc = x0 - d * std::cos(theta);
+		yVc = y0 - d * std::sin(theta);
 	}
-	else
+
+	const int slen = ws.length();
+	const int startI = rtl ? slen - 1 : 0;
+	const int endI = rtl ? -1 : slen;
+	const int inc = rtl ? -1 : 1;
+	for (int i = startI; i != endI; i += inc)
 	{
-		int slen = ws.length();
-		for (int i=0;i<slen;i++)
-		{
-			s = ws[slen-1-i];
-			if (d<limit)
-			{
-				drawText(xom, yom, s, -theta_o*M_180_PIf+psi*static_cast<float>(i), 0., 0.);
-				xom += cWidth*std::cos(-theta_o+psi*static_cast<float>(i) * M_PI_180f);
-				yom += cWidth*std::sin(-theta_o+psi*static_cast<float>(i) * M_PI_180f);
-			}
-			else
-			{
-				x = d * std::cos(theta) + xVc;
-				y = d * std::sin(theta) + yVc;
-				drawText(x, y, s, 90.f + theta*M_180_PIf, 0., 0.);
-				if (s.isSpace())
-					width = stdWidth;
-				else
-					width = static_cast<float>(getFontMetrics().boundingRect(s).width());
-				theta += psi * M_PI_180f * (1 + (width - cWidth)/ cWidth);
-			}
-		}
+		const QChar c = ws[i];
+		const float x = d * std::cos(theta) + xVc;
+		const float y = d * std::sin(theta) + yVc;
+		drawText(x, y, c, 90.f + theta*M_180_PIf, 0., 0.);
+		theta += fm.horizontalAdvance(c) * anglePerUnitWidth;
 	}
 }
 
@@ -728,8 +696,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		glActiveTexture(GL_TEXTURE0);
 		glGetIntegerv(GL_TEXTURE_BINDING_2D, &oldTex);
 		tex->texture->bind(0);
-		x += tex->baselineShift.x();
-		y += tex->baselineShift.y();
+		xshift += tex->baselineShift.x();
+		yshift += tex->baselineShift.y();
 
 		static float vertexData[8];
 		// compute the vertex coordinates applying the translation and the rotation
@@ -740,8 +708,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			const float sinr = std::sin(angleDeg * M_PI_180f);
 			for (int i = 0; i < 8; i+=2)
 			{
-				vertexData[i]   = int(x + (tex->size.width()*vertexBase[i]+xshift) * cosr - (tex->size.height()*vertexBase[i+1]+yshift) * sinr);
-				vertexData[i+1] = int(y + (tex->size.width()*vertexBase[i]+xshift) * sinr + (tex->size.height()*vertexBase[i+1]+yshift) * cosr);
+				vertexData[i]   = x + (tex->size.width()*vertexBase[i]+xshift) * cosr - (tex->size.height()*vertexBase[i+1]+yshift) * sinr;
+				vertexData[i+1] = y + (tex->size.width()*vertexBase[i]+xshift) * sinr + (tex->size.height()*vertexBase[i+1]+yshift) * cosr;
 			}
 		}
 		else

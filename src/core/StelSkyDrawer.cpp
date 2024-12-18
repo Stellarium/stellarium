@@ -709,6 +709,7 @@ void StelSkyDrawer::setLightPollutionLuminance(const double luminance)
 	if(lightPollutionLuminance==luminance)
 		return;
 	lightPollutionLuminance=luminance;
+	StelApp::immediateSave("stars/init_light_pollution_luminance", luminance);
 	emit lightPollutionLuminanceChanged(luminance);
 }
 
@@ -722,6 +723,7 @@ void StelSkyDrawer::setFlagStarSpiky(bool b)
 	if (b!=flagStarSpiky)
 	{
 		flagStarSpiky=b;
+		StelApp::immediateSave("stars/flag_star_spiky", b);
 		emit flagStarSpikyChanged(flagStarSpiky);
 	}
 }
@@ -923,4 +925,182 @@ void StelSkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 double StelSkyDrawer::getWorldAdaptationLuminance() const
 {
 	return static_cast<double>(eye->getWorldAdaptationLuminance());
+}
+
+void StelSkyDrawer::setRelativeStarScale(double b)
+{
+	starRelativeScale=b;
+	StelApp::immediateSave("stars/relative_scale", b);
+	emit relativeStarScaleChanged(b);
+}
+
+void StelSkyDrawer::setAbsoluteStarScale(double b)
+{
+	starAbsoluteScaleF=b;
+	StelApp::immediateSave("stars/absolute_scale", b);
+	emit absoluteStarScaleChanged(b);
+}
+
+void StelSkyDrawer::setTwinkleAmount(double b)
+{
+	twinkleAmount=b;
+	StelApp::immediateSave("stars/star_twinkle_amount", b);
+	emit twinkleAmountChanged(b);
+}
+
+void StelSkyDrawer::setFlagTwinkle(bool b)
+{
+	if(b!=flagStarTwinkle)
+	{
+		flagStarTwinkle=b;
+		StelApp::immediateSave("stars/flag_star_twinkle", b);
+		emit flagTwinkleChanged(b);
+	}
+}
+
+void StelSkyDrawer::setFlagForcedTwinkle(bool b)
+{
+	if(b!=flagForcedTwinkle)
+	{
+		flagForcedTwinkle=b;
+		StelApp::immediateSave("stars/flag_forced_twinkle", b);
+		emit flagForcedTwinkleChanged(b);
+	}
+}
+
+void StelSkyDrawer::setFlagDrawBigStarHalo(bool b)
+{
+	if(b!=flagDrawBigStarHalo)
+	{
+		flagDrawBigStarHalo=b;
+		StelApp::immediateSave("stars/flag_star_halo", b);
+		emit flagDrawBigStarHaloChanged(b);
+	}
+}
+
+void StelSkyDrawer::setFlagStarMagnitudeLimit(bool b)
+{
+	if(b!=flagStarMagnitudeLimit)
+	{
+		flagStarMagnitudeLimit = b;
+		StelApp::immediateSave("astro/flag_star_magnitude_limit", b);
+		emit flagStarMagnitudeLimitChanged(b);
+	}
+}
+
+void StelSkyDrawer::setFlagNebulaMagnitudeLimit(bool b)
+{
+	if(b!=flagNebulaMagnitudeLimit)
+	{
+		flagNebulaMagnitudeLimit = b;
+		StelApp::immediateSave("astro/flag_nebula_magnitude_limit", b);
+		emit flagNebulaMagnitudeLimitChanged(b);
+	}
+}
+
+void StelSkyDrawer::setFlagPlanetMagnitudeLimit(bool b)
+{
+	if(b!=flagPlanetMagnitudeLimit)
+	{
+		flagPlanetMagnitudeLimit = b;
+		StelApp::immediateSave("astro/flag_planet_magnitude_limit", b);
+		emit flagPlanetMagnitudeLimitChanged(b);
+	}
+}
+
+void StelSkyDrawer::setCustomStarMagnitudeLimit(double limit)
+{
+	customStarMagLimit=limit;
+	StelApp::immediateSave("astro/star_magnitude_limit", limit);
+	emit customStarMagLimitChanged(limit);
+}
+
+void StelSkyDrawer::setCustomNebulaMagnitudeLimit(double limit)
+{
+	customNebulaMagLimit=limit;
+	StelApp::immediateSave("astro/nebula_magnitude_limit", limit);
+	emit customNebulaMagLimitChanged(limit);
+}
+
+void StelSkyDrawer::setCustomPlanetMagnitudeLimit(double limit)
+{
+	customPlanetMagLimit=limit;
+	StelApp::immediateSave("astro/planet_magnitude_limit", limit);
+	emit customPlanetMagLimitChanged(limit);
+}
+
+void StelSkyDrawer::setFlagLuminanceAdaptation(bool b)
+{
+	if(b!=flagLuminanceAdaptation)
+	{
+		flagLuminanceAdaptation=b;
+		StelApp::immediateSave("viewing/use_luminance_adaptation", b);
+		emit flagLuminanceAdaptationChanged(b);
+	}
+}
+
+void StelSkyDrawer::setDaylightLabelThreshold(double t)
+{
+	daylightLabelThreshold=t;
+	StelApp::immediateSave("viewing/sky_brightness_label_threshold", t);
+	emit daylightLabelThresholdChanged(t);
+}
+
+void StelSkyDrawer::setExtinctionCoefficient(double extCoeff)
+{
+	extinction.setExtinctionCoefficient(static_cast<float>(extCoeff));
+	StelApp::immediateSave("landscape/atmospheric_extinction_coefficient", extCoeff);
+	emit extinctionCoefficientChanged(static_cast<double>(extinction.getExtinctionCoefficient()));
+}
+
+void StelSkyDrawer::setAtmosphereTemperature(double celsius)
+{
+	refraction.setTemperature(static_cast<float>(celsius));
+	StelApp::immediateSave("landscape/temperature_C", celsius);
+	emit atmosphereTemperatureChanged(static_cast<double>(refraction.getTemperature()));
+}
+
+void StelSkyDrawer::setAtmospherePressure(double mbar)
+{
+	refraction.setPressure(static_cast<float>(mbar));
+	StelApp::immediateSave("landscape/pressure_mbar", mbar);
+	emit atmospherePressureChanged(static_cast<double>(refraction.getPressure()));
+}
+
+// These are to find out the best sky parameters. Program feature for debugging/expert mode.
+// These will be connected from AtmosphereDialog and forward the settings to SkyLight class.
+
+void StelSkyDrawer::setFlagDrawSunAfterAtmosphere(bool val)
+{
+	flagDrawSunAfterAtmosphere=val;
+	QSettings* conf = StelApp::getInstance().getSettings();
+	 conf->setValue("landscape/draw_sun_after_atmosphere",val);
+	 conf->sync();
+	 emit flagDrawSunAfterAtmosphereChanged(val);
+}
+
+void StelSkyDrawer::setFlagEarlySunHalo(bool val)
+{
+	flagEarlySunHalo= val;
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->setValue("landscape/early_solar_halo", val);
+	conf->sync();
+	emit flagEarlySunHaloChanged(val);
+}
+
+void StelSkyDrawer::setFlagTfromK(bool val)
+{
+	flagTfromK=val;
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->setValue("landscape/use_T_from_k", val);
+	conf->sync();
+	emit flagTfromKChanged(val);
+}
+
+void StelSkyDrawer::setT(double newT)
+{
+    turbidity=static_cast<float>(newT);
+        QSettings* conf = StelApp::getInstance().getSettings();
+        conf->setValue("landscape/turbidity", newT);
+        emit turbidityChanged(newT);
 }

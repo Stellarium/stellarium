@@ -1238,6 +1238,7 @@ void StelApp::setFlagOverwriteInfoColor(bool b)
 	if (flagOverwriteInfoColor!=b)
 	{
 		flagOverwriteInfoColor=b;
+		StelApp::immediateSave("gui/flag_overwrite_info_color", b);
 		emit flagOverwriteInfoColorChanged(b);
 	}
 }
@@ -1247,9 +1248,21 @@ void StelApp::setFlagShowDecimalDegrees(bool b)
 	if (flagShowDecimalDegrees!=b)
 	{
 		flagShowDecimalDegrees = b;
+		StelApp::immediateSave("gui/flag_show_decimal_degrees", b);
 		emit flagShowDecimalDegreesChanged(b);
 	}
 }
+
+void StelApp::setFlagSouthAzimuthUsage(bool use)
+{
+	if (flagUseAzimuthFromSouth!=use)
+	{
+		flagUseAzimuthFromSouth=use;
+		StelApp::immediateSave("gui/flag_use_azimuth_from_south", use);
+		emit flagUseAzimuthFromSouthChanged(use);
+	}
+}
+
 
 void StelApp::setFlagUseFormattingOutput(bool b)
 {
@@ -1304,6 +1317,9 @@ void StelApp::setFlagImmediateSave(bool b)
 	if (flagImmediateSave!=b)
 	{
 		flagImmediateSave = b;
+		// To not accidentally activate this mode permanently, you must use the "save settings" button to activate!
+		if (!b)
+			StelApp::immediateSave("gui/immediate_save_details", false);
 		emit flagImmediateSaveChanged(b);
 	}
 }
@@ -1377,6 +1393,7 @@ void StelApp::setDevicePixelsPerPixel(qreal dppp)
 void StelApp::setViewportEffect(const QString& name)
 {
 	if (name == getViewportEffect()) return;
+	StelApp::immediateSave("video/viewport_effect", name);
 	if (renderBuffer)
 	{
 		ensureGLContextCurrent();
@@ -1439,6 +1456,7 @@ void StelApp::setScreenFontSize(int s)
 	if (screenFontSize!=s)
 	{
 		screenFontSize=s;
+		StelApp::immediateSave("gui/screen_font_size", s);
 		emit screenFontSizeChanged(s);
 	}
 }
@@ -1449,6 +1467,7 @@ void StelApp::setGuiFontSize(int s)
 		QFont font=QGuiApplication::font();
 		font.setPixelSize(s);
 		QGuiApplication::setFont(font);
+		StelApp::immediateSave("gui/gui_font_size", s);
 		emit guiFontSizeChanged(s);
 	}
 }

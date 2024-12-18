@@ -71,12 +71,13 @@ void AsterismMgr::init()
 	Q_ASSERT(conf);
 
 	lastLoadedSkyCulture = "dummy";
-	asterFont.setPixelSize(conf->value("viewing/asterism_font_size", 14).toInt());
+	setFontSize(conf->value("viewing/asterism_font_size", 14).toInt());
 	setFlagLines(conf->value("viewing/flag_asterism_drawing").toBool());
 	setFlagRayHelpers(conf->value("viewing/flag_rayhelper_drawing").toBool());
 	setFlagLabels(conf->value("viewing/flag_asterism_name").toBool());
 	setAsterismLineThickness(conf->value("viewing/asterism_line_thickness", 1).toInt());
 	setRayHelperThickness(conf->value("viewing/rayhelper_line_thickness", 1).toInt());
+	setFlagIsolateAsterismSelected(conf->value("viewing/flag_asterism_isolate_selected", false).toBool());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -191,16 +192,17 @@ Vec3f AsterismMgr::getLabelsColor() const
 	return Asterism::labelColor;
 }
 
-void AsterismMgr::setFontSize(const float newFontSize)
+void AsterismMgr::setFontSize(const int newFontSize)
 {
-	if ((static_cast<float>(asterFont.pixelSize()) - newFontSize) != 0.0f)
+	if ((asterFont.pixelSize() - newFontSize) != 0)
 	{
-		asterFont.setPixelSize(static_cast<int>(newFontSize));
+		asterFont.setPixelSize(newFontSize);
+		StelApp::immediateSave("viewing/asterism_font_size", newFontSize);
 		emit fontSizeChanged(newFontSize);
 	}
 }
 
-float AsterismMgr::getFontSize() const
+int AsterismMgr::getFontSize() const
 {
 	return asterFont.pixelSize();
 }
@@ -213,6 +215,7 @@ void AsterismMgr::setAsterismLineThickness(const int thickness)
 		if (asterismLineThickness<=0) // The line can not be negative or zero thickness
 			asterismLineThickness = 1;
 
+		StelApp::immediateSave("viewing/asterism_line_thickness", thickness);
 		emit asterismLineThicknessChanged(thickness);
 	}
 }
@@ -225,6 +228,7 @@ void AsterismMgr::setRayHelperThickness(const int thickness)
 		if (rayHelperThickness<=0) // The line can not be negative or zero thickness
 			rayHelperThickness = 1;
 
+		StelApp::immediateSave("viewing/rayhelper_line_thickness", thickness);
 		emit rayHelperThicknessChanged(thickness);
 	}
 }
@@ -502,6 +506,7 @@ void AsterismMgr::setFlagLines(const bool displayed)
 			for (auto* asterism : asterisms)
 				asterism->setFlagLines(linesDisplayed);
 		}
+		StelApp::immediateSave("viewing/flag_asterism_drawing", displayed);
 		emit linesDisplayedChanged(displayed);
 	}
 }
@@ -520,6 +525,7 @@ void AsterismMgr::setFlagRayHelpers(const bool displayed)
 		{
 			asterism->setFlagRayHelpers(rayHelpersDisplayed);
 		}
+		StelApp::immediateSave("viewing/flag_rayhelper_drawing", displayed);
 		emit rayHelpersDisplayedChanged(displayed);
 	}
 }
@@ -544,6 +550,7 @@ void AsterismMgr::setFlagLabels(const bool displayed)
 			for (auto* asterism : asterisms)
 				asterism->setFlagLabels(namesDisplayed);
 		}
+		StelApp::immediateSave("viewing/flag_asterism_name", displayed);
 		emit namesDisplayedChanged(displayed);
 	}
 }
@@ -630,6 +637,7 @@ void AsterismMgr::setFlagIsolateAsterismSelected(const bool isolate)
 				asterism->setFlagLabels(getFlagLabels());
 			}
 		}
+		StelApp::immediateSave("viewing/flag_asterism_isolate_selected", isolate);
 		emit isolateAsterismSelectedChanged(isolate);
 	}
 }

@@ -128,7 +128,7 @@ StelCore::StelCore()
 	currentProjectorParams.viewportCenter.set(viewportCenterX, viewportCenterY);
 	const qreal viewportCenterOffsetX = conf->value("projection/viewport_center_offset_x",0.).toDouble();
 	const qreal viewportCenterOffsetY = conf->value("projection/viewport_center_offset_y",0.).toDouble();
-	currentProjectorParams.viewportCenterOffset.set(viewportCenterOffsetX, viewportCenterOffsetY);
+	currentProjectorParams.viewportCenterOffset.set(viewportCenterOffsetX/100., viewportCenterOffsetY/100.);
 
 	currentProjectorParams.viewportFovDiameter = conf->value("projection/viewport_fov_diameter", qMin(viewport_width,viewport_height)).toDouble();
 	currentProjectorParams.flipHorz = conf->value("projection/flip_horz",false).toBool();
@@ -161,16 +161,17 @@ StelCore::~StelCore()
 	delete position; position=Q_NULLPTR;
 }
 
+const QMap<QString, DitheringMode>StelCore::ditheringMap={
+	{"disabled"   , DitheringMode::Disabled},
+	{"color565"   , DitheringMode::Color565},
+	{"color666"   , DitheringMode::Color666},
+	{"color888"   , DitheringMode::Color888},
+	{"color101010", DitheringMode::Color101010}};
+
 DitheringMode StelCore::parseDitheringMode(const QString& str)
 {
 	const auto s=str.trimmed().toLower();
-	static const QMap<QString, DitheringMode>dMap={
-		{"disabled"   , DitheringMode::Disabled},
-		{"color565"   , DitheringMode::Color565},
-		{"color666"   , DitheringMode::Color666},
-		{"color888"   , DitheringMode::Color888},
-		{"color101010", DitheringMode::Color101010}};
-	return dMap.value(s, DitheringMode::Disabled);
+	return ditheringMap.value(s, DitheringMode::Disabled);
 }
 
 /*************************************************************************
@@ -607,8 +608,10 @@ void StelCore::setCurrentProjectionTypeKey(QString key)
 	if (newType<0)
 	{
 		qWarning() << "Unknown projection type: " << key << "setting \"ProjectionStereographic\" instead";
+		key="ProjectionStereographic";
 		newType = ProjectionStereographic;
 	}
+	StelApp::immediateSave("projection/type", key);
 	setCurrentProjectionType(newType);
 }
 
@@ -641,6 +644,7 @@ void StelCore::setMaskType(StelProjector::StelProjectorMaskType m)
 void StelCore::setFlagGravityLabels(bool gravity)
 {
 	currentProjectorParams.gravityLabels = gravity;
+	StelApp::immediateSave("viewing/flag_gravity_labels", gravity);
 	emit flagGravityLabelsChanged(gravity);
 }
 
@@ -659,6 +663,7 @@ void StelCore::setFlipHorz(bool flip)
 	if (currentProjectorParams.flipHorz != flip)
 	{
 		currentProjectorParams.flipHorz = flip;
+		StelApp::immediateSave("projection/flip_horz", flip);
 		emit flipHorzChanged(flip);
 	}
 }
@@ -668,6 +673,7 @@ void StelCore::setFlipVert(bool flip)
 	if (currentProjectorParams.flipVert != flip)
 	{
 		currentProjectorParams.flipVert = flip;
+		StelApp::immediateSave("projection/flip_vert", flip);
 		emit flipVertChanged(flip);
 	}
 }
@@ -1215,6 +1221,7 @@ double StelCore::getPresetSkyTime() const
 
 void StelCore::setPresetSkyTime(double d)
 {
+	StelApp::immediateSave("navigation/preset_sky_time", d);
 	presetSkyTime=d;
 }
 
@@ -1503,6 +1510,7 @@ void StelCore::setDitheringMode(const DitheringMode newMode)
 		return;
 
 	ditheringMode = newMode;
+	StelApp::immediateSave("video/dithering_mode", ditheringMap.key(newMode, "disabled"));
 	emit ditheringModeChanged(newMode);
 }
 
@@ -1531,6 +1539,7 @@ bool StelCore::getStartupTimeStop() const
 void StelCore::setStartupTimeStop(const bool b)
 {
 	startupTimeStop = b;
+	StelApp::immediateSave("navigation/startup_time_stop", b);
 	emit startupTimeStopChanged(b);
 }
 
@@ -1625,6 +1634,7 @@ QTime StelCore::getInitTodayTime(void) const
 
 void StelCore::setInitTodayTime(const QTime& time)
 {
+	StelApp::immediateSave("navigation/today_time", time);
 	initTodayTime=time;
 }
 
@@ -2193,6 +2203,7 @@ void StelCore::registerMathMetaTypes()
 
 void StelCore::setStartupTimeMode(const QString& s)
 {
+	StelApp::immediateSave("navigation/startup_time_mode", s);
 	startupTimeMode = s;
 }
 
@@ -2517,6 +2528,7 @@ void StelCore::setCurrentDeltaTAlgorithmKey(QString key)
 		qWarning() << "Unknown DeltaT algorithm: " << key << "setting \"WithoutCorrection\" instead";
 		algo = WithoutCorrection;
 	}
+	StelApp::immediateSave("navigation/time_correction_algorithm", key);
 	setCurrentDeltaTAlgorithm(algo);
 }
 

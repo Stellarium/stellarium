@@ -129,68 +129,89 @@ public:
 	const StelObject::InfoStringGroup& getInfoTextFilters() const override;
 
 public slots:
-	//! Set the state of the flag of usage background for GUI buttons
-	void setFlagUseButtonsBackground(bool b);
-
-	//! Set the state of the flag for kinetic scrolling
-	void setFlagUseKineticScrolling(bool b);
-
-	//! Set the state of the flag for enable focus on day spinner in Date and Time dialog
-	void setFlagEnableFocusOnDaySpinner(bool b);
-
-	//! Define whether the button for exit should be visible
-	void setFlagShowQuitButton(bool b);
-
 	//! Define whether the buttons toggling image flip should be visible
+	//! This immediately also stores flag to config.ini
 	void setFlagShowFlipButtons(bool b);
 
 	//! Define whether the button toggling nebulae background should be visible
+	//! This immediately also stores flag to config.ini
 	void setFlagShowNebulaBackgroundButton(bool b);
 
-	//! Define whether the button toggling DSS survey (TOAST) should be visible
-	void setFlagShowDSSButton(bool b);
-
-	//! Define whether the button toggling cardinal should be visible
-	void setFlagShowCardinalButton(bool b);
-
-	//! Define whether the button toggling compass marks should be visible
-	void setFlagShowCompassButton(bool b);
-
-	//! Define whether the button toggling HiPS surveys should be visible
-	void setFlagShowHiPSButton(bool b);
-
-	//! Define whether the button for centering on selected object should be visible. If not, user can still press SPACE to center.
-	void setFlagShowGotoSelectedObjectButton(bool b);
-
-	//! Define whether the button toggling nightmode should be visible in addition to the Ctrl+N hotkey.
-	void setFlagShowNightmodeButton(bool b);
-
-	//! Define whether the button toggling fullscreen view should be visible in addition to F11 hotkey.
-	void setFlagShowFullscreenButton(bool b);
-
 	//! Define whether the button toggling observing list should be visible
+	//! This immediately also stores flag to config.ini
 	void setFlagShowObsListButton(bool b);
 
 	//! Define whether the button toggling ICRS grid should be visible
+	//! This immediately also stores flag to config.ini
 	void setFlagShowICRSGridButton(bool b);
 
 	//! Define whether the button toggling galactic grid should be visible
+	//! This immediately also stores flag to config.ini
 	void setFlagShowGalacticGridButton(bool b);
 
 	//! Define whether the button toggling ecliptic grid should be visible
+	//! This immediately also stores flag to config.ini
 	void setFlagShowEclipticGridButton(bool b);
 
 	//! Define whether the button toggling constellation boundaries should be visible
+	//! This immediately also stores flag to config.ini
 	void setFlagShowConstellationBoundariesButton(bool b);
 
 	//! Define whether the button toggling constellation arts should be visible
+	//! This immediately also stores flag to config.ini
 	void setFlagShowConstellationArtsButton(bool b);
 
 	//! Define whether the button toggling asterism lines should be visible
+	//! This immediately also stores flag to config.ini
 	void setFlagShowAsterismLinesButton(bool b);
 
 	//! Define whether the button toggling asterism labels should be visible
+	//! This immediately also stores flag to config.ini
 	void setFlagShowAsterismLabelsButton(bool b);
+
+	//! Define whether the button toggling DSS survey (TOAST) should be visible
+	//! This immediately also stores flag to config.ini
+	void setFlagShowDSSButton(bool b);
+
+	//! Define whether the button toggling HiPS surveys should be visible
+	//! This immediately also stores flag to config.ini
+	void setFlagShowHiPSButton(bool b);
+
+	//! Define whether the button for centering on selected object should be visible. If not, user can still press SPACE to center.
+	//! This immediately also stores flag to config.ini
+	void setFlagShowGotoSelectedObjectButton(bool b);
+
+	//! Define whether the button toggling nightmode should be visible in addition to the Ctrl+N hotkey.
+	//! This immediately also stores flag to config.ini
+	void setFlagShowNightmodeButton(bool b);
+
+	//! Define whether the button toggling fullscreen view should be visible in addition to F11 hotkey.
+	//! This immediately also stores flag to config.ini
+	void setFlagShowFullscreenButton(bool b);
+
+	//! Define whether the button for exit should be visible
+	//! This immediately also stores flag to config.ini
+	void setFlagShowQuitButton(bool b);
+
+	//! Define whether the button toggling cardinal should be visible
+	//! This immediately also stores flag to config.ini
+	void setFlagShowCardinalButton(bool b);
+
+	//! Define whether the button toggling compass marks should be visible
+	//! This immediately also stores flag to config.ini
+	void setFlagShowCompassButton(bool b);
+
+	//! Set the state of the flag of usage background for GUI buttons
+	//! This immediately also stores flag to config.ini
+	void setFlagUseButtonsBackground(bool b);
+
+	//! Set the state of the flag for kinetic scrolling
+	//! This immediately also stores flag to config.ini
+	void setFlagUseKineticScrolling(bool b);
+
+	//! Set the state of the flag for enable focus on day spinner in Date and Time dialog
+	//! This immediately also stores flag to config.ini
+	void setFlagEnableFocusOnDaySpinner(bool b);
 
 	//! Set the auto-hide status of the horizontal toolbar.
 	//! When set to true, the horizontal toolbar will auto-hide itself, only

@@ -25,7 +25,7 @@ This is checklist for maintainer of Stellarium (a release master)
 ### Dependencies
 - [ ] Update [CalcMySky/ShowMySky](https://github.com/10110111/CalcMySky) version
 - [ ] Update [QXlsx](https://github.com/QtExcel/QXlsx/) version
-- [ ] Update INDI version
+- [ ] Update [INDI](https://github.com/indilib/indi) version
 
 ## Step 2: one week before release
 

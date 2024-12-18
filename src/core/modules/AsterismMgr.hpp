@@ -41,7 +41,7 @@ class StelPainter;
 class AsterismMgr : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(float fontSize
+	Q_PROPERTY(int fontSize
 		   READ getFontSize
 		   WRITE setFontSize
 		   NOTIFY fontSizeChanged)
@@ -173,9 +173,9 @@ public slots:
 	bool getFlagLabels(void) const;
 
 	//! Set the font size used for asterism names display
-	void setFontSize(const float newFontSize);
+	void setFontSize(const int newFontSize);
 	//! Get the font size used for asterism names display
-	float getFontSize() const;
+	int getFontSize() const;
 
 	//! Set the thickness of lines of the asterisms
 	//! @param thickness of line in pixels
@@ -224,7 +224,7 @@ public slots:
 	void selectAllAsterisms(void);
 
 signals:
-	void fontSizeChanged(const float newSize);
+	void fontSizeChanged(const int newSize);
 	void linesColorChanged(const Vec3f & color);
 	void linesDisplayedChanged(const bool displayed);
 	void namesColorChanged(const Vec3f & color);

@@ -518,6 +518,7 @@ void NomenclatureMgr::setFlagShowNomenclature(bool b)
 	if (getFlagShowNomenclature() != b)
 	{
 		NomenclatureItem::setFlagLabels(b);
+		StelApp::immediateSave("astro/flag_planets_nomenclature", b);
 		emit flagShowNomenclatureChanged(b);
 	}
 }

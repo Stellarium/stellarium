@@ -32,6 +32,7 @@
 #include <QSettings>
 #include <QTextDocument>
 #include <QRegularExpression>
+#include <QGraphicsDropShadowEffect>
 
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 	infoPixmap(nullptr)
@@ -73,6 +74,16 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 		font.setPixelSize(StelApp::getInstance().getScreenFontSize());
 		setFont(font);
 	});
+
+	if (conf->value("gui/flag_info_shadow", false).toBool())
+	{
+		// Add a drop shadow for better visibility (not on the infopixmap, though)
+		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(this);
+		effect->setBlurRadius(6);
+		effect->setColor(QColor(0, 0, 0));
+		effect->setOffset(0,0);
+		setGraphicsEffect(effect);
+	}
 }
 
 InfoPanel::~InfoPanel()

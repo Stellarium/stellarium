@@ -115,6 +115,7 @@ void SpecificTimeMgr::setTwilightAltitude(double alt)
 	if (!qFuzzyCompare(alt, twilightAltitude))
 	{
 		twilightAltitude=alt;
+		StelApp::immediateSave("astro/twilight_altitude", alt);
 		emit twilightAltitudeChanged(alt);
 	}
 }

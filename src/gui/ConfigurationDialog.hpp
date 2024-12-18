@@ -88,6 +88,8 @@ private slots:
 	void updateCurrentSkyLanguage();
 	void selectLanguage(const int id);    // id is index of name in QComboBox (must be called in a signal/slot connection!)
 	void selectSkyLanguage(const int id); // id is index of name in QComboBox (must be called in a signal/slot connection!)
+	void storeLanguageSettings(); // Store only currently set language settings (program and skyculture)
+	void storeFontSettings(); // Store only currently set font settings (sizes and program font)
 	void setStartupTimeMode();
 	//! Show/bring to foreground the shortcut editor window.
 	void showShortcutsWindow();
