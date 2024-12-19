@@ -1,7 +1,7 @@
 /*
  * Nebula Textures plug-in for Stellarium
  *
- * Copyright (C) 2024 ultrapre@github.com
+ * Copyright (C) 2024-2025 WANG Siliang
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
