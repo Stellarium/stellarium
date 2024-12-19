@@ -49,7 +49,7 @@ private slots:
                                     double  expectedRV);
    void testBarnardStar();
    void testCrux();
-   // void test2DAstrometryPropagation();
+   void testBrightNoPlx();
 private:
    QList<ZoneArray *> zoneArrays;
 };

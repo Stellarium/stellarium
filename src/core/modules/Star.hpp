@@ -179,6 +179,7 @@ struct Star
                                  float    dyrs) const
    {
       if (getX2() != 0. || getDx2() != 0.) {
+         // as long as there is a 3rd component, we need to compute the full 3D position using the equation below
          double r0  = getX0();
          double r1  = getX1();
          double r2  = getX2();
@@ -187,6 +188,9 @@ struct Star
          double pm2 = getDx2();
          double plx = getPlx();
          double rv  = getRV();
+         bool have_plx = plx != 0.;
+         if (!have_plx)
+            plx = 1.; // to avoid division by zero, any number will do
          Vec3d  r(r0, r1, r2);
          // proper motion
          Vec3d  pmvec0(pm0, pm1, pm2);
@@ -218,7 +222,10 @@ struct Star
          StelUtils::rectToSphe(&RA, &DE, u);
          if (RA < 0)
             RA += 2 * M_PI;
-         Plx = Plx2;
+         if (have_plx)
+            Plx = Plx2;
+         else
+            Plx = 0.;
          RV  = (pmr1 / MAS2RAD / Plx2) * (AU / JYEAR_SECONDS);
       } else {
          DE    = getX1();
