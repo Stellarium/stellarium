@@ -2185,5 +2185,4 @@ void ConfigurationDialog::storeFontSettings()
 	conf->setValue("gui/base_font_name",	QGuiApplication::font().family());
 	conf->setValue("gui/screen_font_size",	propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
 	conf->setValue("gui/gui_font_size",	propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
-
 }
