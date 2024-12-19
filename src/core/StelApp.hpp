@@ -264,6 +264,8 @@ public:
 	void dumpModuleActionPriorities(StelModule::StelModuleActionName actionName) const;
 
 	static constexpr int getDefaultGuiFontSize() { return 13; }
+
+	static bool isInitialized() {if (singleton) return singleton->initialized; else return false;}
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
