@@ -2521,16 +2521,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 
 	const bool withAberration=core->getUseAberration();
 	Vec3d v(vv);
-	v.normalize(); // TODO: start with vv already normalized?
-	if (withAberration)
-	{
-		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-		StelCore::matVsop87ToJ2000.transfo(vel);
-		vel*=core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
-		v+=vel;
-		v.normalize();
-	}
-
+	
 	double cosLimFov = std::cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 	double cosAngularSize;

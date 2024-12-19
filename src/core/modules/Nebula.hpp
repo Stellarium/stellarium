@@ -253,7 +253,7 @@ public:
 
 protected:
 	//! Format the magnitude info string for the object
-	QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const override;
+	QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1, const float& magOffset=0.f) const override;
 
 private:
 	friend struct DrawNebulaFuncObject;

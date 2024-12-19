@@ -46,6 +46,10 @@
 #define SUN_RADIUS 696000.
 // Equatorial radius of the Moon in km
 #define MOON_RADIUS 1738.
+// 1 mas to 1 radian, is M_PI / (3600000. * 180.)
+#define MAS2RAD 4.8481368110953594e-9
+// julian year in seconds that is 365.25 * 86400.
+#define JYEAR_SECONDS 31557600.0
 
 // Add a few frequently used extra math-type literals
 #ifndef M_PI_180
@@ -270,8 +274,7 @@ namespace StelUtils
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(double *lng, double *lat, const Vec3d& v){
-		double r = v.norm();
-		*lat = asin(v[2]/r);
+		*lat = atan2(v[2], sqrt(v[0]*v[0] + v[1]*v[1]));
 		*lng = atan2(v[1],v[0]);
 	}
 
@@ -280,9 +283,8 @@ namespace StelUtils
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(float *lng, float *lat, const Vec3d& v){
-		double r = v.norm();
-		*lat = static_cast<float>(asin(v[2]/r));
 		*lng = static_cast<float>(atan2(v[1],v[0]));
+		*lat = atan2(v[2], sqrt(v[0]*v[0] + v[1]*v[1]));
 	}
 
 
@@ -291,8 +293,7 @@ namespace StelUtils
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(float *lng, float *lat, const Vec3f& v){
-		float r = v.norm();
-		*lat = asinf(v[2]/r);
+		*lat = atan2(v[2], sqrt(v[0]*v[0] + v[1]*v[1]));
 		*lng = atan2f(v[1],v[0]);
 	}
 
@@ -301,8 +302,7 @@ namespace StelUtils
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(double *lng, double *lat, const Vec3f &v){
-		double r = static_cast<double>(v.norm());
-		*lat = asin(static_cast<double>(v[2])/r);
+		*lat = atan2(static_cast<double>(v[2]), sqrt(static_cast<double>(v[0]*v[0] + v[1]*v[1])));
 		*lng = atan2(static_cast<double>(v[1]),static_cast<double>(v[0]));
 	}
 
@@ -323,7 +323,7 @@ namespace StelUtils
 	//! @param v the input 3D vector
 	inline void rectToSphe(double *lng, double *lat, double *r, const Vec3d& v){
 		*r = v.norm();
-		*lat = asin(v[2] / *r);
+		*lat = atan2(v[2], sqrt(v[0]*v[0] + v[1]*v[1]));
 		*lng = atan2(v[1],v[0]);
 	}
 
