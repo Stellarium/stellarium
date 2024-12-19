@@ -49,6 +49,7 @@ signals:
 private:
 	class ToastSurvey* survey;
 	class LinearFader* fader;
+	bool displayNebulaTexturesFlag; // flag for following the state of deep-sky objects background images displaying
 };
 
 #endif // TOASTMGR_HPP
