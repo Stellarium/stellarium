@@ -51,6 +51,11 @@
 #include <QStringList>
 #include <cmath>
 
+/*
+ * Constructor for the NebulaTexturesDialog class. Initializes the dialog, sets up
+ * network management, and configures timers for periodic status checking.
+ * Also loads nebula textures on initialization.
+ */
 NebulaTexturesDialog::NebulaTexturesDialog()
    : StelDialog("NebulaTextures"),
    flag_renderTempTex(false)
@@ -83,7 +88,11 @@ void NebulaTexturesDialog::retranslate()
 	}
 }
 
-
+/*
+ * Initializes and sets up the content and interactions of the NebulaTexturesDialog.
+ * This function configures UI elements, establishes signal-slot connections,
+ * and loads necessary settings and data for the dialog.
+ */
 void NebulaTexturesDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
@@ -134,6 +143,13 @@ void NebulaTexturesDialog::restoreDefaults()
 		qDebug() << "[NebulaTextures] restore defaults is canceled...";
 }
 
+/*
+ * Sets the HTML content for the "About" section in the dialog.
+ * This function generates the HTML that provides information about the Nebula Textures
+ * plugin, including its version, license, author, description, and publication citation.
+ * The HTML content is then displayed in the aboutTextBrowser widget with the appropriate
+ * style settings.
+ */
 void NebulaTexturesDialog::setAboutHtml(void)
 {
    QString html = "<html><head></head><body>";
@@ -167,24 +183,27 @@ void NebulaTexturesDialog::setAboutHtml(void)
 	ui->aboutTextBrowser->setHtml(html);
 }
 
-
+// Sets the value for showing custom textures in the configuration and reloads textures.
 void NebulaTexturesDialog::setShowCustomTextures(bool b)
 {
    m_conf->setValue(MS_CONFIG_PREFIX + "/showCustomTextures", b);
    reloadTextures();
 }
 
+// Gets the current setting for showing custom textures from the configuration.
 bool NebulaTexturesDialog::getShowCustomTextures()
 {
    return m_conf->value(MS_CONFIG_PREFIX + "/showCustomTextures", false).toBool();
 }
 
+// Sets the value for avoiding area conflicts in the configuration and reloads textures.
 void NebulaTexturesDialog::setAvoidAreaConflict(bool b)
 {
    m_conf->setValue(MS_CONFIG_PREFIX + "/avoidAreaConflict", b);
    reloadTextures();
 }
 
+// Gets the current setting for avoiding area conflicts from the configuration.
 bool NebulaTexturesDialog::getAvoidAreaConflict()
 {
    return m_conf->value(MS_CONFIG_PREFIX + "/avoidAreaConflict", false).toBool();
@@ -207,7 +226,13 @@ void NebulaTexturesDialog::on_openFileButton_clicked()
    }
 }
 
-void NebulaTexturesDialog::on_uploadImageButton_clicked()
+/*
+ * Handles the upload image button click event.
+ * Validates input fields, creates a POST request to the API for login,
+ * and initiates the image upload process.
+ * Updates the UI state and connects to the reply signal for further processing.
+ */
+void NebulaTexturesDialog::on_uploadImageButton_clicked() // WARN: image should not be flip
 {
    QString apiKey = ui->lineEditApiKey->text();
    QString imagePath = ui->lineEditImagePath->text();
@@ -255,7 +280,11 @@ void NebulaTexturesDialog::on_uploadImageButton_clicked()
    changeUiState(true);
 }
 
-
+/*
+ * Handles the reply from the login request.
+ * If login is successful, it proceeds to upload the selected image with the session info.
+ * Sends the image as a multipart/form-data request and updates the UI accordingly.
+ */
 void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
 {
    QByteArray content = reply->readAll();
@@ -333,7 +362,11 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
    updateStatus(q_("Uploading image..."));
 }
 
-// TODO: image should not be flip
+/*
+ * Handles the reply from the image upload request.
+ * If the upload is successful, extracts the submission ID and starts a timer to check the upload status.
+ * Updates the UI accordingly and manages the reply cleanup.
+ */
 void NebulaTexturesDialog::onUploadReply(QNetworkReply *reply)
 {
    QByteArray content = reply->readAll();
@@ -354,6 +387,10 @@ void NebulaTexturesDialog::onUploadReply(QNetworkReply *reply)
    updateStatus(q_("Image uploaded. Please wait..."));
 }
 
+/*
+ * Sends a request to check the status of a submission using its ID.
+ * Upon receiving the response, the function calls `onsubStatusReply` to process the result.
+ */
 void NebulaTexturesDialog::checkSubStatus()
 {
    QUrl statusUrl(API_URL + "api/submissions/" + subId);
@@ -364,6 +401,10 @@ void NebulaTexturesDialog::checkSubStatus()
    updateStatus(q_("Requesting submission. Please wait..."));
 }
 
+/*
+ * Handles the response from the submission status request.
+ * If successful, it retrieves the job ID and starts the job status timer; otherwise, it reports an error.
+ */
 void NebulaTexturesDialog::onsubStatusReply(QNetworkReply *reply)
 {
    if (reply->error() != QNetworkReply::NoError) {
@@ -389,6 +430,10 @@ void NebulaTexturesDialog::onsubStatusReply(QNetworkReply *reply)
 
 }
 
+/*
+ * Sends a request to check the status of a job using its job ID.
+ * Upon receiving the response, the function calls `onJobStatusReply` to process the result.
+ */
 void NebulaTexturesDialog::checkJobStatus()
 {
    QUrl jobStatusUrl(API_URL + "api/jobs/" + jobId);
@@ -401,6 +446,11 @@ void NebulaTexturesDialog::checkJobStatus()
    updateStatus(q_("Requesting job status. Please wait..."));
 }
 
+
+/*
+ * Handles the response from the job status request.
+ * If successful, it checks the job status and either triggers WCS file download or reports an error.
+ */
 void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
 {
    if (reply->error() != QNetworkReply::NoError) {
@@ -431,7 +481,11 @@ void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
    reply->deleteLater();
 }
 
-
+/*
+ * Handles the response after downloading the WCS (World Coordinate System) file.
+ * The function parses the WCS data, extracts relevant parameters, converts pixel coordinates to celestial coordinates,
+ * and updates the user interface with the calculated coordinates (top-left, bottom-left, top-right, bottom-right).
+ */
 void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
 {
    if (reply->error() != QNetworkReply::NoError) {
@@ -530,6 +584,21 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
 
 
 /*
+ * Converts pixel coordinates (X, Y) on an image to celestial coordinates (longitude, latitude) using the World Coordinate System (WCS) parameters.
+ * This function applies a series of transformations to convert pixel-based coordinates into the corresponding celestial coordinates,
+ * taking into account the reference coordinates, rotation matrix, and other transformation parameters.
+ *
+ * Parameters:
+ *   - X, Y: The pixel coordinates in the image.
+ *   - CRPIX1, CRPIX2: The reference pixel coordinates (the center of the image).
+ *   - CRVAL1, CRVAL2: The celestial coordinates (right ascension and declination) corresponding to the reference pixel.
+ *   - CD1_1, CD1_2, CD2_1, CD2_2: The linear transformation matrix elements that map pixel coordinates to celestial coordinates.
+ *
+ * Returns:
+ *   - A QPair containing the longitude and latitude corresponding to the input pixel coordinates.
+ *
+ * * * * * * * * * * * * * * * * * * * *
+ *
  * This function is based on the algorithm and approach from the code licensed under the Apache License, Version 2.0.
  * The original code can be found at:
  * https://github.com/PlanetaryResources/NTL-Asteroid-Data-Hunter/blob/master/Algorithms/Algorithm%20%231/alg1_psyho.h
@@ -633,7 +702,14 @@ QPair<double, double> NebulaTexturesDialog::PixelToCelestial(int X, int Y, doubl
    return QPair<double, double>(lng, lat);
 }
 
-
+/*
+ * Toggles the enabled/disabled state of UI components based on the provided "freeze" flag.
+ *
+ * When "freeze" is true, all specified UI buttons are disabled, effectively "freezing" the interface.
+ * When "freeze" is false, the buttons are enabled, allowing user interaction.
+ *
+ * @param freeze  A boolean value indicating whether to disable (true) or enable (false) the UI elements.
+ */
 void NebulaTexturesDialog::changeUiState(bool freeze)
 {
    ui->openFileButton->setDisabled(freeze);
@@ -644,6 +720,17 @@ void NebulaTexturesDialog::changeUiState(bool freeze)
    ui->addTexture->setDisabled(freeze);
 }
 
+/*
+ * Slot triggered when the "Go" button is clicked. This function moves the view to the specified celestial coordinates
+ * (right ascension and declination) by converting them into 3D spherical coordinates and adjusting the view up vector.
+ * The movement is handled by the movement manager, which is part of the core functionality of the Stellarium application.
+ *
+ * Steps performed by this function:
+ *   1. Converts the reference right ascension and declination (referRA, referDec) into radians for spherical calculations.
+ *   2. Sets the view up vector to a stable direction (J2000 coordinate system).
+ *   3. Adjusts the view up vector based on the equatorial mount mode and latitude for stability when close to the poles.
+ *   4. Calls the movement manager to move the view to the target coordinates, ensuring smooth transition with auto-duration.
+ */
 void NebulaTexturesDialog::on_goPushButton_clicked()
 {
 
@@ -670,7 +757,16 @@ void NebulaTexturesDialog::on_goPushButton_clicked()
    // mvmgr->setFlagLockEquPos(useLockPosition);
 }
 
-
+/*
+ * Renders a temporary custom texture for the nebula based on the user-provided image path.
+ * Checks if the path is valid, adds the texture to the system, and inserts it into the sky layer.
+ * Updates the UI status on success or failure and optionally hides the default texture if enabled.
+ *
+ * Steps:
+ *   - Validates image path.
+ *   - Renders the custom texture by adding it to the sky layer.
+ *   - Updates UI status and manages default texture visibility based on user preferences.
+ */
 void NebulaTexturesDialog::renderTempCustomTexture()
 {
    QString imagePath = ui->lineEditImagePath->text();
@@ -702,7 +798,11 @@ void NebulaTexturesDialog::renderTempCustomTexture()
    }
 }
 
-
+/*
+ * Cancels the rendering of the temporary custom texture.
+ * Removes the custom texture from the sky layer and restores the default texture.
+ * Reloads all textures and updates the UI status to indicate the cancellation.
+ */
 void NebulaTexturesDialog::unRenderTempCustomTexture()
 {
    if(!flag_renderTempTex) return;
@@ -714,15 +814,26 @@ void NebulaTexturesDialog::unRenderTempCustomTexture()
    updateStatus(q_("Cancel rendering."));
 }
 
-// logic, hint: will add next time restart
+
 void NebulaTexturesDialog::on_addTexture_clicked()
 {
    addTexture(configFile, CUSTOM_TEXNAME);
 }
 
-
-// logic, hint: will add next time restart
-void NebulaTexturesDialog::addTexture(QString addPath, QString keyName)
+/*
+ * Adds a texture image to the custom textures folder and updates its coordinates.
+ *
+ * Steps:
+ *   1. Validates the image path from the input field.
+ *   2. Copies the image file to the user folder with a timestamped name.
+ *   3. Retrieves celestial coordinates (RA, Dec) from the UI for the image's corners and reference point.
+ *   4. Organizes the coordinates into a JSON array for later use.
+ *   5. Calls `updateCustomTextures` to store the texture and its associated coordinates.
+ *
+ * @param addPath  The path where the texture is to be added.
+ * @param keyName  The unique key name for the texture.
+ */
+void NebulaTexturesDialog::addTexture(QString addPath, QString keyName) // logic, hint: will add next time restart
 {
    QString imagePath = ui->lineEditImagePath->text();
    if (imagePath.isEmpty()) {
@@ -774,8 +885,19 @@ void NebulaTexturesDialog::addTexture(QString addPath, QString keyName)
    updateCustomTextures(imageUrl, innerWorldCoords, 0.2, 13.4, keyName, addPath);
 }
 
-
-// write to json
+/*
+ * Updates the custom textures configuration JSON file with new texture data.
+ *
+ * This function checks if the specified JSON configuration file exists. If it does, it reads and updates the file with the new texture information,
+ * including world coordinates, texture coordinates, resolution, and brightness. If the file does not exist, it creates a new configuration with default values.
+ *
+ * @param imageUrl        The URL of the texture image.
+ * @param innerWorldCoords The world coordinates corresponding to the texture.
+ * @param minResolution   The minimum resolution of the texture.
+ * @param maxBrightness   The maximum brightness of the texture.
+ * @param keyName         The key name of the texture.
+ * @param addPath         The path to the configuration file to update.
+ */
 void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const QJsonArray& innerWorldCoords, double minResolution, double maxBrightness, QString keyName, QString addPath)
 {
 
@@ -855,8 +977,14 @@ void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const Q
 }
 
 
-
-// TODO: write to json but only disable show flag, it will remove at restart
+/*
+ * Handles the removal of a selected texture from the custom textures list.
+ *
+ * This function displays a confirmation dialog, and if confirmed,
+ * it removes the selected texture from the JSON configuration file by
+ * deleting the corresponding entry from the "subTiles" array.
+ * After updating the JSON file, the item is removed from the UI list.
+ */
 void NebulaTexturesDialog::on_removeButton_clicked()
 {
 
@@ -926,8 +1054,15 @@ void NebulaTexturesDialog::on_removeButton_clicked()
 }
 
 
-
-// load json to window
+/*
+ * Reloads the custom textures data from the JSON configuration file and updates the UI list.
+ *
+ * This function reads the JSON file containing custom texture data,
+ * extracts the "subTiles" array, and updates the UI list
+ * (listWidget) with the texture URLs. Each list item stores the associated subTile data for future use.
+ * If the file cannot be read or the structure is invalid,
+ * appropriate warnings are logged.
+ */
 void NebulaTexturesDialog::reloadData()
 {
    reloadTextures();
@@ -990,6 +1125,13 @@ void NebulaTexturesDialog::reloadData()
 }
 
 
+/*
+ * Sets the visibility of a specified texture and its sub-tiles.
+ *
+ * This function iterates over all sub-tiles of a given texture (identified by TexName)
+ * and sets their visibility based on the provided `visible` parameter.
+ * If the texture or sub-tiles cannot be found, it returns false.
+ */
 bool NebulaTexturesDialog::setTexturesVisible(QString TexName, bool visible)
 {
    StelSkyImageTile* mTile = get_aTile(TexName);
@@ -1003,8 +1145,12 @@ bool NebulaTexturesDialog::setTexturesVisible(QString TexName, bool visible)
 }
 
 
-
-// only enable or disable all custom show flag
+/*
+ * Reloads and manages the visibility of textures based on the "show custom textures" flag.
+ *
+ * If custom textures are enabled, it makes them visible and calls avoidConflict to handle any potential conflicts.
+ * If custom textures are not enabled, it ensures the custom textures are hidden and the default textures are visible.
+ */
 void NebulaTexturesDialog::reloadTextures()
 {
 
@@ -1049,6 +1195,12 @@ void NebulaTexturesDialog::reloadTextures()
 }
 
 
+/*
+ * Retrieves a StelSkyImageTile object based on the provided texture key.
+ *
+ * Searches for the sky layer associated with the given key in the StelSkyLayerMgr. If found, it attempts to cast
+ * the layer to a StelSkyImageTile and returns it. Returns nullptr if no layer is found or the cast fails.
+ */
 StelSkyImageTile* NebulaTexturesDialog::get_aTile(QString key)
 {
    StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
@@ -1060,8 +1212,13 @@ StelSkyImageTile* NebulaTexturesDialog::get_aTile(QString key)
 }
 
 
-
-// TODO: select and compare poly
+/*
+ * Prevents conflicts between custom and default textures by hiding overlapping tiles.
+ *
+ * If the 'Avoid Area Conflict' flag is enabled, this function checks for overlapping regions between the
+ * custom and default textures. If an overlap is found, the conflicting default texture tile is hidden.
+ * If conflicts are not to be avoided, all default texture tiles are made visible.
+ */
 void NebulaTexturesDialog::avoidConflict()
 {
    if (getAvoidAreaConflict()){
