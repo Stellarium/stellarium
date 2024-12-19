@@ -26,7 +26,6 @@
 #include "StelCore.hpp"
 #include "StelApp.hpp"
 #include "StelTranslator.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelSkyLayerMgr.hpp"
 
 #include <QSettings>
@@ -58,8 +57,6 @@ void ToastMgr::init()
 
 	// Hide deep-sky survey by default
 	setFlagShow(conf->value("astro/flag_toast_survey", false).toBool());
-	// Remember state to restore after disabling DSS
-	displayNebulaTexturesFlag = !conf->value("astro/flag_nebula_display_no_texture", false).toBool();
 
 	addAction("actionShow_Toast_Survey", N_("Display Options"), N_("Digitized Sky Survey (TOAST)"), "surveyDisplayed");
 }
@@ -99,7 +96,7 @@ void ToastMgr::setFlagShow(const bool displayed)
 	if (*fader != displayed)
 	{
 		*fader = displayed;
-		GETSTELMODULE(StelSkyLayerMgr)->setFlagShow(displayNebulaTexturesFlag && !displayed);
+		StelApp::immediateSave("astro/flag_toast_survey", displayed);
 		emit surveyDisplayedChanged(displayed);
 	}
 }

@@ -77,7 +77,7 @@ public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 	//! Set whether Sky Background should be displayed
-	void setFlagShow(bool b) {if (flagShow !=b) { flagShow = b; emit flagShowChanged(b);}}
+	void setFlagShow(bool b) {if (flagShow !=b) { flagShow = b; StelApp::immediateSave("astro/flag_nebula_display_no_texture", !b); emit flagShowChanged(b);}}
 	//! Load an image from a file into a quad described with 4 corner coordinates.
 	//! The corners are always given in counterclockwise from top-left, also for azaltimuthal images.
 	//! This should not be called directly from scripts because it is not thread safe.
