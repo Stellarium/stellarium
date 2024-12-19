@@ -1,7 +1,7 @@
 /*
  * Nebula Textures plug-in for Stellarium
  *
- * Copyright (C) 2024 ultrapre@github.com
+ * Copyright (C) 2024-2025 WANG Siliang
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,7 +105,6 @@ void NebulaTexturesDialog::createDialogContent()
    connect(ui->unrenderButton, SIGNAL(clicked()), this, SLOT(unRenderTempCustomTexture()));
 
    connect(ui->addTexture, SIGNAL(clicked()), this, SLOT(on_addTexture_clicked()));
-   // connect(ui->showTextures, SIGNAL(clicked()), this, SLOT(reloadTextures()));
    connect(ui->removeButton, SIGNAL(clicked()), this, SLOT(on_removeButton_clicked()));
 
    connect(ui->reloadButton, SIGNAL(clicked()), this, SLOT(reloadData()));
@@ -137,8 +136,26 @@ void NebulaTexturesDialog::restoreDefaults()
 
 void NebulaTexturesDialog::setAboutHtml(void)
 {
-	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Nebula Textures Plug-in") + "</h2><table class='layout' width=\"90%\">";
+   QString html = "<html><head></head><body>";
+
+   html += "<h2>" + q_("Nebula Textures Plug-in") + "</h2><table class='layout' width=\"90%\">";
+   html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + NEBULATEXTURES_PLUGIN_VERSION + "</td></tr>";
+   html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + NEBULATEXTURES_PLUGIN_LICENSE + "</td></tr>";
+   html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>WANG Siliang</td></tr>";
+   html += "</table>";
+
+   html += "<p>" + q_("The Nebula Textures plugin allows users to create and display their own astronomical sky images or even sketches in Stellarium. It supports online plate solving for coordinate parsing, or manual input of coordinates to localize the image, render it, and add it to the custom texture management system.") + "</p>";
+   html += "<p>" + q_("This plugin provides an intuitive way for users to visualize their astronomical observations or creations within Stellarium, enhancing the realism and immersion of the celestial view. By using plate solving or manually inputting coordinates, users can accurately position and render their images or sketches, which are then seamlessly integrated into Stellarium's texture system.") + "</p>";
+
+   html += "<h3>" + q_("Publications") + "</h3>";
+   html += "<p>" + q_("If you use this plugin in your publications, please cite:") + "</p>";
+   html += "<ul>";
+   html += "<li>" + QString("{WANG Siliang: Nebula Textures Plugin.} Stellarium Plugin, 2024-2025.")
+                      .toHtmlEscaped() + "</li>";
+   html += "</ul>";
+
+   html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Nebula Textures plugin");
+
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());

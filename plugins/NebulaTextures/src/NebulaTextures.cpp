@@ -1,7 +1,7 @@
 /*
  * Nebula Textures plug-in for Stellarium
  *
- * Copyright (C) 2024 ultrapre@github.com
+ * Copyright (C) 2024-2025 WANG Siliang
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,10 +18,8 @@
  */
 
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "NebulaTextures.hpp"
 
@@ -43,9 +41,11 @@ StelPluginInfo NebulaTexturesStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
    info.id = "NebulaTextures";
    info.displayedName = "Nebula Textures";
-	info.authors = "Stellarium team";
-	info.contact = "www.stellarium.org";
-   info.description = "User Define Nebula Textures.";
+   info.authors = "WANG Siliang";
+   info.contact = "bd7jay@outlook.com";
+   info.description = "The plugin allows users to create and display their own astronomical sky images or even sketches in Stellarium, supporting both online plate solving for coordinate parsing or manual input of coordinates to localize the image, render it, and add it to the custom texture management system.";
+   info.version = NEBULATEXTURES_PLUGIN_VERSION;
+   info.license = NEBULATEXTURES_PLUGIN_LICENSE;
 	return info;
 }
 
