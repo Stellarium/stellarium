@@ -198,7 +198,7 @@ signals:
 
 public slots:
 	//! Enable/disable all actions of application.
-	//! need for editing shortcuts without trigging any actions
+	//! need for editing shortcuts without triggering any actions
 	//! @todo find out if this is really necessary and why.
 	void setAllActionsEnabled(bool value) {actionsEnabled = value;}
 
