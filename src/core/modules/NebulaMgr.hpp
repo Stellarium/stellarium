@@ -1042,7 +1042,7 @@ private:
 	
 	QFont nebulaFont;      // Font used for names printing
 
-	// For DSO convertor
+	// For DSO converter
 	bool flagConverter;
 	bool flagDecimalCoordinates;
 };
