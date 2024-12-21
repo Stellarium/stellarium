@@ -4904,12 +4904,10 @@ void Planet::drawOrbit(const StelCore* core)
 
 		Vec3d myPos = core->getCurrentPlanet()->getHeliocentricEclipticPos(lastJDE);
 		Vec3d myparentPos = core->getCurrentPlanet()->getParent()->getHeliocentricEclipticPos(dateJDE);
-		Vec3d parentPos = parent->getHeliocentricEclipticPos(dateJDE)+ parent->getAberrationPush(); // aberrationPush is not strictly correct, but helps a lot...
 
 		// pretend they are on x-y plane
 		myPos[2] = 0;
 		myparentPos[2] = 0;
-		parentPos[2] = 0;
 
 		// angle between me and parent
 		double theta = atan2(myPos[1], myPos[0]) - atan2(myparentPos[1], myparentPos[0]);
@@ -4919,13 +4917,10 @@ void Planet::drawOrbit(const StelCore* core)
 		for(int d = 0; d < ORBIT_SEGMENTS; d++)
 		{
 			f = static_cast<double>(d - ORBIT_SEGMENTS/2.) / (ORBIT_SEGMENTS/2.);
+			// make sure only sample half of the orbit forward and half backward
+			// the sampling spacing is trial and error, but power of 13 seems to be good (i.e., densely sample around the current date)
 			calc_date = dateJDE + pow(f, 13)*deltaOrbitJDE*ORBIT_SEGMENTS/2. + theta/180.*deltaOrbitJDE*ORBIT_SEGMENTS/2;
-			orbit[d] = getEclipticPos(calc_date) + parentPos;
-		}
-		Vec3d offsetPos = (getEclipticPos(dateJDE) + parentPos) - (getHeliocentricEclipticPos()+aberrationPush);
-		for(int d = 0; d < ORBIT_SEGMENTS; d++)
-		{
-			orbit[d] -= offsetPos;
+			orbit[d] = getEclipticPos(calc_date);
 		}
 	}
 	const Vec3d savePos = orbit[ORBIT_SEGMENTS/2];
