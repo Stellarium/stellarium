@@ -194,7 +194,7 @@ SimbadLookupReply* SimbadSearcher::lookup(const QString& serverUrl, const QStrin
 {
 	// Create the Simbad query
 	QString url(serverUrl);
-	QString query = "format object \"%COO(d;A D)\\n%IDLIST(HIP)\\n%IDLIST(1)\"\n";
+	QString query = "format object \"%COO(d;A D)\\n%IDLIST(HIP)\\n%IDLIST(Gaia DR3)\\n%IDLIST(1)\"\n";
 	query += QString("set epoch J2000\nset limit %1\n query id ").arg(maxNbResult);
 	query += objectName;
 	QByteArray ba = QUrl::toPercentEncoding(query, "", "");
