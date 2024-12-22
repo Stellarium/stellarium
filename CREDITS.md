@@ -389,7 +389,7 @@
 	     NGC2805, NGC2814, NGC2820, NGC2841, NGC3079, NGC3166, NGC3227,
 	     NGC3310, NGC3344, NGC3359, NGC3504, NGC3512, NGC3521, NGC3628,
 	     NGC3938, NGC4151, NGC4274, NGC4535, NGC4559, NGC4631, NGC4656,
-	     NGC4657, NGC5033, NGC5363, NGC7008, NGC7318, NGC7331, NGC7479,
+	     NGC4657, NGC5033, NGC5363, NGC7008, NGC7331, NGC7479,
 	     NGC7635, NGC7640, NGC7789, PGC1803573, Barnard 142, Barnard 173,
 	     Sh2-101, Sh2-188, LDN1235, Sadr region (Gamma Cygni), Medusa,
 	     Jones-Emberson 1, NGC2146
@@ -803,11 +803,10 @@
 	      from CTIO/NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage/NSF NOIRLab) Image processing: T.A. Rector (University of Alaska Anchorage/NSF NOIRLab), M. Zamani (NSF NOIRLab) & D. de Martin (NSF NOIRLab), post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License:  Creative Commons Attribution 4.0 International
-	      
-	      
-	      
-	      
-	      
+	4.131 Images of NGC7318
+	      from Juan lacruz, post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/
+	      License:  Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
