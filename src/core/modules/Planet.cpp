@@ -4877,10 +4877,10 @@ void Planet::drawOrbit(const StelCore* core)
 			return;
 	}
 	bool fromMoonPerspective = false;
-	if (core->getCurrentPlanet()->pType == 2)  // if I am a moon
+	if (core->getCurrentPlanet()->pType == isMoon || core->getCurrentPlanet()->pType == isObserver)  // if I am a moon or observer of a planet
 	{
 		// only if we are also drawing my parent
-		fromMoonPerspective = core->getCurrentPlanet()->getParent()->getID() == getID();
+		fromMoonPerspective = core->getCurrentPlanet()->getParent() == this;
 	}
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEclipticJ2000);
@@ -4894,42 +4894,43 @@ void Planet::drawOrbit(const StelCore* core)
 	sPainter.setColor(getCurrentOrbitColor(), orbitFader.getInterstate());
 	Vec3d onscreen;
 
-	if (!fromMoonPerspective) {
-		// Update the orbit positions to the current planet date.
-		computeOrbit();
-	}
-	else {
+	if (fromMoonPerspective) {
 		double dateJDE = lastJDE;
 		double calc_date;
 
-		Vec3d myPos = core->getCurrentPlanet()->getHeliocentricEclipticPos(lastJDE);
-		Vec3d myparentPos = core->getCurrentPlanet()->getParent()->getHeliocentricEclipticPos(dateJDE);
-
-		// pretend they are on x-y plane
-		myPos[2] = 0;
-		myparentPos[2] = 0;
-
-		// angle between me and parent
-		double theta = atan2(myPos[1], myPos[0]) - atan2(myparentPos[1], myparentPos[0]);
-		theta = theta / M_PI * 180.;  // should concentrate on this theta when sampling orbit
+		Vec3d myPos = core->getCurrentPlanet()->getHeliocentricEclipticPos(dateJDE);
+		Vec3d myparentPos = getHeliocentricEclipticPos(dateJDE);
+		// orbital plane normal of parent planet, computed with the pos ~quarter of the orbit later
+		Vec3d orbitalNormal = myparentPos ^ getHeliocentricEclipticPos(dateJDE + deltaOrbitJDE*ORBIT_SEGMENTS/4);
+		orbitalNormal.normalize();
+		// project myPos into the orbital plane of parent planet using the normal of orbital plane
+		Vec3d myPosProjected = myPos - myPos.dot(orbitalNormal) * orbitalNormal;
+		// angle between myPos already projected onto the orbital plane of parent planet and the plane
+		// we should concentrate on this theta when sampling orbit
+		double theta = (atan2((myparentPos ^ myPosProjected).dot(orbitalNormal), myparentPos.dot(myPosProjected)))  / M_PI;
 
 		double f;
 		for(int d = 0; d < ORBIT_SEGMENTS; d++)
 		{
-			f = static_cast<double>(d - ORBIT_SEGMENTS/2.) / (ORBIT_SEGMENTS/2.);
+			f = (d - ORBIT_SEGMENTS/2.) / (ORBIT_SEGMENTS/2.);
 			// make sure only sample half of the orbit forward and half backward
 			// the sampling spacing is trial and error, but power of 13 seems to be good (i.e., densely sample around the current date)
-			calc_date = dateJDE + pow(f, 13)*deltaOrbitJDE*ORBIT_SEGMENTS/2. + theta/180.*deltaOrbitJDE*ORBIT_SEGMENTS/2;
+			calc_date = dateJDE + pow(f, 13)*deltaOrbitJDE*ORBIT_SEGMENTS/2. + theta*deltaOrbitJDE*ORBIT_SEGMENTS/2;
 			orbit[d] = getEclipticPos(calc_date);
 		}
 	}
+	else {
+		// Update the orbit positions to the current planet date.
+		computeOrbit();
+		}
 	const Vec3d savePos = orbit[ORBIT_SEGMENTS/2];
 	if (closeOrbit)
 	{
-		if ((!keplerOrbit || keplerOrbit->getEccentricity()<=0.3) && !fromMoonPerspective)
+		if ((!keplerOrbit || keplerOrbit->getEccentricity()<=0.3) && !fromMoonPerspective) {
 			// special case - use current Planet position as center vertex so that draws
 			// on its orbit all the time (since orbit is shown as segmented rather than smooth curve)
 			orbit[ORBIT_SEGMENTS/2]=getHeliocentricEclipticPos()+aberrationPush;
+			}
 		orbit[ORBIT_SEGMENTS]=orbit[0];
 	}
 	int nbIter = closeOrbit ? ORBIT_SEGMENTS : ORBIT_SEGMENTS-1;
