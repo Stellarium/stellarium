@@ -751,7 +751,8 @@
 	      from KPNO/NOIRLab/NSF/AURA/Ray and Emily Magnani/Adam Block
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.119 Images of M90, M109, IC348, NGC147, NGC404, NGC1491, NGC1569, NGC1624, NGC7026
+	4.119 Images of M90, M109, IC348, NGC80, NGC147, NGC404, NGC1491, NGC1569,
+	      NGC1624, NGC7026
 	      from Radek Chromik, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
@@ -803,7 +804,7 @@
 	      from CTIO/NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage/NSF NOIRLab) Image processing: T.A. Rector (University of Alaska Anchorage/NSF NOIRLab), M. Zamani (NSF NOIRLab) & D. de Martin (NSF NOIRLab), post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License:  Creative Commons Attribution 4.0 International
-	4.131 Images of NGC7318
+	4.131 Images of NGC70, NGC7318
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License:  Creative Commons Attribution 4.0 International
