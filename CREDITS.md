@@ -804,10 +804,14 @@
 	      from CTIO/NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage/NSF NOIRLab) Image processing: T.A. Rector (University of Alaska Anchorage/NSF NOIRLab), M. Zamani (NSF NOIRLab) & D. de Martin (NSF NOIRLab), post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License:  Creative Commons Attribution 4.0 International
-	4.131 Images of NGC70, NGC7318
+	4.131 Images of NGC7318
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
-	      License:  Creative Commons Attribution 4.0 International
+	      License: Creative Commons Attribution-Share Alike 4.0 International 
+	4.132 Images of IC1505, NGC70, NGC529, NGC1530, NGC6621, NGC6951, NGC7741
+	      from Juan lacruz, post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
