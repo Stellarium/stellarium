@@ -812,6 +812,10 @@
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
+	4.133 Images of LBN437
+	      from Manuel Peitsch, post-processing: Sun Shuwei
+	      https://manuel-astro.ch/
+	      License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
