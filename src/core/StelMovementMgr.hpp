@@ -216,7 +216,7 @@ public slots:
 	//! PROPERTY GETTER/SETTER
 	//! Get whether being at the edge of the screen activates movement
 	bool getFlagEnableMoveAtScreenEdge() const {return flagEnableMoveAtScreenEdge;}
-	//! Set whether being at the edge of the screen activates movement
+	//! Set whether being at the edge of the screen activates movement. The actual motion is only performed in fullscreen mode.
 	void setFlagEnableMoveAtScreenEdge(bool b) {flagEnableMoveAtScreenEdge=b; StelApp::immediateSave("navigation/flag_enable_move_at_screen_edge", b); emit flagEnableMoveAtScreenEdgeChanged(b);}
 
 	//! PROPERTY GETTER/SETTER

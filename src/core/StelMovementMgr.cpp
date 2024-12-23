@@ -24,6 +24,7 @@
 */
 
 #include "StelMovementMgr.hpp"
+#include "StelMainView.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
@@ -316,8 +317,8 @@ Vec3d StelMovementMgr::getViewUpVectorJ2000() const
 
 bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 {
-	// Turn if the mouse is at the edge of the screen unless config asks otherwise
-	if (flagEnableMoveAtScreenEdge)
+	// Turn if the mouse is at the edge of the screen unless config asks otherwise (this is too awkward in windowed mode)
+	if (flagEnableMoveAtScreenEdge && StelMainView::getInstance().isFullScreen())
 	{
 		if (x <= 1)
 		{
