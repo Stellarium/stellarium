@@ -55,6 +55,8 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation NOTIFY flagUseNutationChanged)
 	Q_PROPERTY(bool flagUseAberration READ getUseAberration WRITE setUseAberration NOTIFY flagUseAberrationChanged)
 	Q_PROPERTY(double aberrationFactor READ getAberrationFactor WRITE setAberrationFactor NOTIFY aberrationFactorChanged)
+	Q_PROPERTY(bool flagUseParallax READ getUseParallax WRITE setUseParallax NOTIFY flagUseParallaxChanged)
+	Q_PROPERTY(double parallaxFactor READ getParallaxFactor WRITE setParallaxFactor NOTIFY parallaxFactorChanged)
 	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates NOTIFY flagUseTopocentricCoordinatesChanged)
 	Q_PROPERTY(ProjectionType currentProjectionType READ getCurrentProjectionType WRITE setCurrentProjectionType NOTIFY currentProjectionTypeChanged)
 	//! This is just another way to access the projection type, by string instead of enum
@@ -551,6 +553,16 @@ public slots:
 	QByteArray getAberrationShader() const;
 	void setAberrationUniforms(QOpenGLShaderProgram& program) const;
 
+	//! @return whether parallax effect is currently used.
+	bool getUseParallax() const {return flagUseParallax;}
+	//! Set whether you want computation and simulation of parallax effect.
+	void setUseParallax(bool use) { if (flagUseParallax != use) { flagUseParallax=use; StelApp::immediateSave("astro/flag_parallax", use); emit flagUseParallaxChanged(use); }}
+
+	//! @return parallax factor. 1 is realistic simulation, but higher values may be useful for didactic purposes.
+	double getParallaxFactor() const {return parallaxFactor;}
+	//! Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
+	void setParallaxFactor(double factor) { if (!fuzzyEquals(parallaxFactor, factor)) { parallaxFactor=qBound(0.,factor, 1000.); StelApp::immediateSave("astro/parallax_factor", parallaxFactor); emit parallaxFactorChanged(factor); }}
+
 	//! @return whether topocentric coordinates are currently used.
 	bool getUseTopocentricCoordinates() const {return flagUseTopocentricCoordinates;}
 	//! Set whether you want topocentric or planetocentric data
@@ -862,6 +874,10 @@ signals:
 	void flagUseAberrationChanged(bool b);
 	//! This signal indicates a change in aberration exaggeration factor
 	void aberrationFactorChanged(double val);
+	//! This signal indicates a switch in use of parallax
+	void flagUseParallaxChanged(bool b);
+	//! This signal indicates a change in parallax exaggeration factor
+	void parallaxFactorChanged(double val);
 	//! This signal indicates a switch in use of topocentric coordinates
 	void flagUseTopocentricCoordinatesChanged(bool b);
 	//! Emitted whenever the projection type changes
@@ -943,6 +959,10 @@ private:
 	bool flagUseAberration;
 	// value to allow exaggerating aberration effects. 1 is natural value, stretching to e.g. 1000 may be useful for explanations.
 	double aberrationFactor;
+	// flag to indicate we want to include parallax effect
+	bool flagUseParallax;
+	// value to allow exaggerating parallax effects. 1 is natural value, stretching to e.g. 1000 may be useful for explanations.
+	double parallaxFactor;
 	// flag to indicate that we show topocentrically corrected coordinates. (Switching to false for planetocentric coordinates is new for 0.14)
 	bool flagUseTopocentricCoordinates;
 

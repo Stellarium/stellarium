@@ -2203,11 +2203,47 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="3" rowspan="2">
+             <item row="0" column="3" rowspan="3">
               <layout class="QGridLayout" name="gridLayoutInclude">
                <property name="spacing">
                 <number>0</number>
                </property>
+               <item row="2" column="1">
+                <layout class="QHBoxLayout" name="horizontalLayout_IncludeParallax">
+                 <item>
+                  <widget class="QCheckBox" name="parallaxCheckBox">
+                   <property name="toolTip">
+                    <string>Parallax is the apparent shift in the position of an object when viewed from two different points.</string>
+                   </property>
+                   <property name="text">
+                    <string>Parallax</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="parallaxSpinBox">
+                   <property name="toolTip">
+                    <string>Exaggerate parallax (for didactic explanations)</string>
+                   </property>
+                   <property name="decimals">
+                    <number>1</number>
+                   </property>
+                   <property name="minimum">
+                    <double>1.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>1000.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>1.000000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>1.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
                <item row="1" column="2">
                 <layout class="QHBoxLayout" name="horizontalLayout_IncludeNutAberr">
                  <item>

@@ -1242,12 +1242,16 @@ void StarMgr::draw(StelCore* core)
 				maxMagStarName = x;
 		}
 		int zone;
+		const double withParallax = core->getUseParallax() * core->getParallaxFactor();
+		double orbital_period = core->getCurrentPlanet()->getSiderealPeriod() / 365.25;  // in earth years
+		// get orbital_radius in AU using Kepler's third law
+		double orbital_radius = pow(orbital_period, 2.0/3.0);
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf);
+			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf, withParallax, orbital_period, orbital_radius);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, velf);
+			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, velf, withParallax, orbital_period, orbital_radius);
 		// always check the last zone because it is a global zone
-		z->draw(&sPainter, (20<<(z->level<<1)), false, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf);
+		z->draw(&sPainter, (20<<(z->level<<1)), false, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf, withParallax, orbital_period, orbital_radius);
 	}
 	exit_loop:
 

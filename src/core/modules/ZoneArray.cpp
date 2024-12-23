@@ -425,7 +425,7 @@ template<class Star>
 void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const RCMag* rcmag_table,
 				  int limitMagIndex, StelCore* core, int maxMagStarName, float names_brightness,
 				  const QVector<SphericalCap> &boundingCaps,
-				  const bool withAberration, const Vec3f vel) const
+				  const bool withAberration, const Vec3f vel, const double withParallax, double operiod, double oradius) const
 {
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	Vec3f vf;
@@ -466,16 +466,17 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		
 		// only recompute if has time dependence and time is far away
 		bool recomputeMag = (s->getPreciseAstrometricFlag() && (fabs(dyrs) > 5000.));
+		double Plx = s->getPlx();
 		if (recomputeMag) { 
 			// don't do full solution, can be very slow, just estimate here	
 			// estimate parallax from radial velocity and total proper motion
-			double Plx = s->getPlx();
 			double vr = s->getRV();
 			Vec3d pmvec0(s->getDx0(), s->getDx1(), s->getDx2());
 			pmvec0 = pmvec0 * MAS2RAD;
 			double pmr0 = vr * Plx / (AU / JYEAR_SECONDS) * MAS2RAD;
 			double pmtotsqr =  (pmvec0[0] * pmvec0[0] + pmvec0[1] * pmvec0[1] + pmvec0[2] * pmvec0[2]);
 			double f = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0*pmr0)*dyrs*dyrs);
+			Plx *= f;
 			float magOffset = 5.f * log10(1/f);
 			starMag += magOffset * 1000.;
 			// if we reach here we might as well compute the position too
@@ -496,6 +497,10 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		// put it here because potentially cutoffMagStep bigger than magIndex and no computation needed
 		if (!recomputeMag) {
 			s->getJ2000Pos(dyrs, vf);
+		}
+
+		if (withParallax) {
+			s->getPlxEffect(withParallax * Plx, vf, operiod, oradius, dyrs);
 		}
 
 		// Aberration: vf contains Equatorial J2000 position.
