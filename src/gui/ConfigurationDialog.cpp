@@ -209,6 +209,8 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->nutationCheckBox, "StelCore.flagUseNutation");
 	connectBoolProperty(ui->aberrationCheckBox, "StelCore.flagUseAberration");
 	connectDoubleProperty(ui->aberrationSpinBox, "StelCore.aberrationFactor");
+	connectBoolProperty(ui->parallaxCheckBox, "StelCore.flagUseParallax");
+	connectDoubleProperty(ui->parallaxSpinBox, "StelCore.parallaxFactor");
 	connectBoolProperty(ui->topocentricCheckBox, "StelCore.flagUseTopocentricCoordinates");
 
 	// Additional settings for selected object info
@@ -1088,6 +1090,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_nutation",			core->getUseNutation());
 	conf->setValue("astro/flag_aberration",			core->getUseAberration());
 	conf->setValue("astro/aberration_factor",		core->getAberrationFactor());
+	conf->setValue("astro/flag_parallax",			core->getUseParallax());
+	conf->setValue("astro/parallax_factor",		core->getParallaxFactor());
 	conf->setValue("astro/flag_topocentric_coordinates",	core->getUseTopocentricCoordinates());
 	conf->setValue("astro/solar_system_threads",		propMgr->getStelPropertyValue("SolarSystem.extraThreads").toInt());
 

@@ -82,6 +82,8 @@ StelCore::StelCore()
 	, flagUseNutation(true)
 	, flagUseAberration(true)
 	, aberrationFactor(1.0)
+	, flagUseParallax(true)
+	, parallaxFactor(1.0)
 	, flagUseTopocentricCoordinates(true)
 	, timeSpeed(JD_SECOND)
 	, JD(0.,0.)
@@ -141,6 +143,8 @@ StelCore::StelCore()
 	flagUseNutation=conf->value("astro/flag_nutation", true).toBool();
 	flagUseAberration=conf->value("astro/flag_aberration", true).toBool();
 	aberrationFactor=conf->value("astro/aberration_factor", 1.0).toDouble();
+	flagUseParallax=conf->value("astro/flag_parallax", true).toBool();
+	parallaxFactor=conf->value("astro/parallax_factor", 1.0).toDouble();
 	flagUseTopocentricCoordinates=conf->value("astro/flag_topocentric_coordinates", true).toBool();
 	flagUseDST=conf->value("localization/flag_dst", true).toBool();
 
