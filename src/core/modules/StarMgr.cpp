@@ -45,6 +45,7 @@
 #include "Planet.hpp"
 #include "StelUtils.hpp"
 #include "StelHealpix.hpp"
+#include "SolarSystem.hpp"
 
 #include <QTextStream>
 #include <QFile>
@@ -1242,16 +1243,26 @@ void StarMgr::draw(StelCore* core)
 				maxMagStarName = x;
 		}
 		int zone;
-		const double withParallax = core->getUseParallax() * core->getParallaxFactor();
-		double orbital_period = core->getCurrentPlanet()->getSiderealPeriod() / 365.25;  // in earth years
-		// get orbital_radius in AU using Kepler's third law
-		double orbital_radius = pow(orbital_period, 2.0/3.0);
+		double withParallax = core->getUseParallax() * core->getParallaxFactor();
+		Vec3d diffPos(0., 0., 0.);
+		if (withParallax) {
+			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+			const PlanetP earth = ssystem->getEarth();
+			// diff between earth location at STAR_CATALOG_JDEPOCH and current location
+			Vec3d earthPosCatalog = earth->getHeliocentricEclipticPos(STAR_CATALOG_JDEPOCH);
+			Vec3d PosNow = core->getCurrentPlanet()->getHeliocentricEclipticPos(core->getJDE());
+			double obliquity = earth->getRotObliquity(core->getJDE());  // need to always use Earth's obliquity because thats what the catalog is based on
+			// Transform from heliocentric ecliptic to equatorial coordinates
+			earthPosCatalog.set(earthPosCatalog[0], earthPosCatalog[1]*cos(obliquity)-earthPosCatalog[2]*sin(obliquity), earthPosCatalog[1]*sin(obliquity)+earthPosCatalog[2]*cos(obliquity));
+			PosNow.set(PosNow[0], PosNow[1]*cos(obliquity)-PosNow[2]*sin(obliquity), PosNow[1]*sin(obliquity)+PosNow[2]*cos(obliquity));
+			diffPos = earthPosCatalog - PosNow;
+		}
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf, withParallax, orbital_period, orbital_radius);
+			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf, withParallax, diffPos);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, velf, withParallax, orbital_period, orbital_radius);
+			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, velf, withParallax, diffPos);
 		// always check the last zone because it is a global zone
-		z->draw(&sPainter, (20<<(z->level<<1)), false, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf, withParallax, orbital_period, orbital_radius);
+		z->draw(&sPainter, (20<<(z->level<<1)), false, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf, withParallax, diffPos);
 	}
 	exit_loop:
 

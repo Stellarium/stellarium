@@ -237,15 +237,12 @@ struct Star
    }
 
    //to get new 3D cartesian position for parallax effect given current star 3D cartesian position, planet orbital period and radius and current delta time from catalog epoch
-   inline void getPlxEffect(double plx, Vec3f& bS, double operiod, double oradius, double dyrs) const {
+   inline void getPlxEffect(double plx, Vec3f& bS, const Vec3d diffPos) const {
 		if (plx <= 0) return;
 		Vec3d bSd(bS[0], bS[1], bS[2]);
 		bSd.normalize();
 		bSd *= 1000./ plx;
-		// remainder of dt in dyrs divided by period
-		double dt = fmod(dyrs, operiod);  // to get phase of the orbit
-		Vec3d b0Ecl(oradius * cos(2 * M_PI / operiod * dt), oradius * sin(2 * M_PI / operiod * dt), 0.);
-		bS = (bSd + b0Ecl * MAS2RAD * 1000.).toVec3f();
+		bS = (bSd + diffPos * MAS2RAD * 1000.).toVec3f();
    }
 };
 

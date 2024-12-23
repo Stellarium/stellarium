@@ -425,7 +425,7 @@ template<class Star>
 void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const RCMag* rcmag_table,
 				  int limitMagIndex, StelCore* core, int maxMagStarName, float names_brightness,
 				  const QVector<SphericalCap> &boundingCaps,
-				  const bool withAberration, const Vec3f vel, const double withParallax, double operiod, double oradius) const
+				  const bool withAberration, const Vec3f vel, const double withParallax, const Vec3d diffPos) const
 {
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	Vec3f vf;
@@ -500,7 +500,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		}
 
 		if (withParallax) {
-			s->getPlxEffect(withParallax * Plx, vf, operiod, oradius, dyrs);
+			s->getPlxEffect(withParallax * Plx, vf, diffPos);
 		}
 
 		// Aberration: vf contains Equatorial J2000 position.
