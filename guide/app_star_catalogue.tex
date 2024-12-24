@@ -204,8 +204,11 @@ See tables
 \ref{tab:StarDataRecord0}, \ref{tab:StarDataRecord1} and \ref{tab:StarDataRecord2}
 for record structure details.
 
-Details about vector algebra related to astrometric calculations can be found in \citep{2012asas.book.....V}. For catalog with Star Data Record Type 0, in 
-practice to convert \texttt{x0}, \texttt{x1}, \texttt{x2} to right accension $\alpha$ and declination $\delta$, one can use the following formulas:
+Details about vector algebra related to astrometric calculations can be 
+found in \citep{2012asas.book.....V}. For catalog with Star Data Record 
+Type 0, in practice to convert \texttt{x0}, \texttt{x1}, \texttt{x2} to 
+right accension $\alpha$ and declination $\delta$, one can use the following 
+formulas:
 
 \begin{equation}
 \begin{aligned}
@@ -214,7 +217,9 @@ practice to convert \texttt{x0}, \texttt{x1}, \texttt{x2} to right accension $\a
 \end{aligned}
 \end{equation}
 
-and to convert proper motion vector (\texttt{dx0}, \texttt{dx1}, \texttt{dx2}) to proper motion in right accension $\mu_{\alpha^*}$ and declination $\mu_{\delta}$, one can use the following formulas:
+and to convert proper motion vector (\texttt{dx0}, \texttt{dx1}, \texttt{dx2}) to 
+proper motion in right ascension $\mu_{\alpha^*}$ and declination $\mu_{\delta}$, 
+one can use the following formulas:
 
 \begin{equation}
 \begin{aligned}
@@ -238,15 +243,15 @@ x2             & 16 & int                & 4 & Cartesian z position of the star 
 dx0            & 20 & int                & 4 & First component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\%\midrule
 dx1            & 24 & int                & 4 & Second component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\%\midrule
 dx2            & 28 & int                & 4 & Third component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\%\midrule
-b\_v           & 32 & short              & 2 & $B-V$ colour in milli-mag unit.
-mag            & 34 & short              & 2 & $V$-band magnitude in milli-mag unit.
-plx            & 36 & unsigned short     & 2 & parallax of the star in 0.02 mas unit.\\
-plx\_err       & 38 & unsigned short     & 2 & parallax error of the star in 0.01 mas unit.\\
-rv             & 40 & short              & 2 & radial velocity of the star in 0.1 km/s unit.\\
+b\_v           & 32 & short              & 2 & $B-V$ colour in milli-mag unit.\\%\midrule
+mag            & 34 & short              & 2 & $V$-band magnitude in milli-mag unit.\\%\midrule
+plx            & 36 & unsigned short     & 2 & parallax of the star in 0.02 mas unit.\\%\midrule
+plx\_err       & 38 & unsigned short     & 2 & parallax error of the star in 0.01 mas unit.\\%\midrule
+rv             & 40 & short              & 2 & radial velocity of the star in 0.1 km/s unit.\\%\midrule
 sp\_int        & 42 & unsigned short     & 2 & index into an array of spectral type descriptions 
-                                               which is taken from the file \file{stars\_hip\_sp.cat}, the index corresponds to the 
-	 				       line number in the file - 1\\%\midrule
-obtype	       & 44 & unsigned char      & 1 & object type classification index. The index corresponds to the line number in the file \file{object\_types\_v*.cat} - 1.\\
+                                               which is taken from the file \file{stars\_hip\_sp.cat}, the index corresponds to the
+                                               line number in the file - 1\\%\midrule
+obtype	       & 44 & unsigned char      & 1 & object type classification index. The index corresponds to the line number in the file \file{object\_types\_v*.cat} - 1.\\%\midrule
 hip            & 45 & int                & 3 & Hipparcos catalogue number with component ID (e.g. A, B, C...)\\\bottomrule
 \end{tabular}
 \caption{Star Data Record Type 0}
@@ -259,8 +264,8 @@ hip            & 45 & int                & 3 & Hipparcos catalogue number with c
 gaia\_id       &  0 & long long          & 8 & Gaia source id\\%\midrule
 x0             &  8 & int                & 4 & Right ascension $\alpha$ of the star in mas unit.\\%\midrule
 x1             & 12 & int                & 4 & Declination $\delta$ of the star in mas unit.\\%\midrule
-dx0            & 16 & int                & 4 & Proper motion $\mu_{\alpha}$ of the star in $mu$as\/year\\%\midrule
-dx1            & 20 & int                & 4 & Proper motion $\mu_{\delta}$ of the star in $mu$as\/year\\%\midrule
+dx0            & 16 & int                & 4 & Proper motion $\mu_{\alpha}$ of the star in $\mu$as/year\\%\midrule
+dx1            & 20 & int                & 4 & Proper motion $\mu_{\delta}$ of the star in $\mu$as/year\\%\midrule
 b\_v           & 24 & short              & 2 & $B-V$ colour in milli-mag unit.\\
 mag            & 26 & short              & 2 & $V$-band magnitude in milli-mag unit.\\
 plx            & 28 & unsigned short     & 2 & parallax of the star in 0.01 mas unit.\\
