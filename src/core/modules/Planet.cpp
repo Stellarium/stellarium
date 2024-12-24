@@ -4918,14 +4918,16 @@ void Planet::drawOrbit(const StelCore* core)
 			orbit[d] = getEclipticPos(calc_date);
 		}
 	}
-	else {
+	else 
+	{
 		// Update the orbit positions to the current planet date.
 		computeOrbit();
 	}
 	const Vec3d savePos = orbit[ORBIT_SEGMENTS/2];
 	if (closeOrbit)
 	{
-		if ((!keplerOrbit || keplerOrbit->getEccentricity()<=0.3) && !fromMoonPerspective) {
+		if ((!keplerOrbit || keplerOrbit->getEccentricity()<=0.3) && !fromMoonPerspective) 
+		{
 			// special case - use current Planet position as center vertex so that draws
 			// on its orbit all the time (since orbit is shown as segmented rather than smooth curve)
 			orbit[ORBIT_SEGMENTS/2]=getHeliocentricEclipticPos()+aberrationPush;
