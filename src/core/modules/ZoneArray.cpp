@@ -408,7 +408,8 @@ template<class Star>
 void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const RCMag* rcmag_table,
 				  int limitMagIndex, StelCore* core, int maxMagStarName, float names_brightness,
 				  const QVector<SphericalCap> &boundingCaps,
-				  const bool withAberration, const Vec3f vel) const
+				  const bool withAberration, const Vec3f vel,
+				  const bool filterMoon, SphericalCap moonCap) const
 {
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	Vec3f vf;
@@ -471,6 +472,14 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 				}
 			}
 			if (!isVisible)
+				continue;
+		}
+
+		// If the star is covered by the Moon, don't draw (avoid displaying part of halo of occulted star!)
+		// TODO: This is a bad test. We should draw the moon into a stencil buffer and check that.
+		if (filterMoon)
+		{
+			if (moonCap.contains(vf))
 				continue;
 		}
 
