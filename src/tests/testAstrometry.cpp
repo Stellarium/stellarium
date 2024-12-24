@@ -122,5 +122,4 @@ void TestAstrometry::testBrightNoPlx()  // test a bright Gaia star without paral
     test6DAstrometryPropagation(gaiaID, 0.f, 358.59593000622834, 57.49936804016163, 0., -4.6991464250248995, -3.1120532783839017, -55.2);
     // simply check the case where radial velocity can be inf/nan when there is no parallax for a star
     test6DAstrometryPropagation(gaiaID, 1.f, 358.59593000622834, 57.49936804016163, 0., -4.6991464250248995, -3.1120532783839017, -55.2);
-
 }
