@@ -209,6 +209,8 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->nutationCheckBox, "StelCore.flagUseNutation");
 	connectBoolProperty(ui->aberrationCheckBox, "StelCore.flagUseAberration");
 	connectDoubleProperty(ui->aberrationSpinBox, "StelCore.aberrationFactor");
+	connectBoolProperty(ui->parallaxCheckBox, "StelCore.flagUseParallax");
+	connectDoubleProperty(ui->parallaxSpinBox, "StelCore.parallaxFactor");
 	connectBoolProperty(ui->topocentricCheckBox, "StelCore.flagUseTopocentricCoordinates");
 
 	// Additional settings for selected object info
@@ -1088,6 +1090,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_nutation",			core->getUseNutation());
 	conf->setValue("astro/flag_aberration",			core->getUseAberration());
 	conf->setValue("astro/aberration_factor",		core->getAberrationFactor());
+	conf->setValue("astro/flag_parallax",			core->getUseParallax());
+	conf->setValue("astro/parallax_factor",		core->getParallaxFactor());
 	conf->setValue("astro/flag_topocentric_coordinates",	core->getUseTopocentricCoordinates());
 	conf->setValue("astro/solar_system_threads",		propMgr->getStelPropertyValue("SolarSystem.extraThreads").toInt());
 
@@ -1567,8 +1571,8 @@ void ConfigurationDialog::updateStarCatalogControlsText()
 			ui->downloadLabel->setText(q_("Download size: %1MB\nStar count: %2 Million\nMagnitude range: %3 - %4")
 				.arg(nextStarCatalogToDownload.value("sizeMb").toString(),
 				     QString::number(nextStarCatalogToDownload.value("count").toDouble(), 'f', 1),
-				     magRange.first().toString(),
-				     magRange.last().toString()));
+				     QString::number(magRange.first().toDouble(), 'f', 2),
+				     QString::number(magRange.last().toDouble(), 'f', 2)));
 		}
 	}
 }

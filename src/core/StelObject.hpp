@@ -267,7 +267,7 @@ public:
 	//! Extinction obviously only if atmosphere=on.
 	//! If you already know vMag, it is wise to provide it in the optional @param knownVMag.
 	//! Else it is called from getVMagnitude() which may be costly.
-	float getVMagnitudeWithExtinction(const StelCore* core, const float knownVMag=-1000.f) const;
+	float getVMagnitudeWithExtinction(const StelCore* core, const float knownVMag=-1000.f, const float& magOffset=0.f) const;
 
 	//! Return a priority value which is used to discriminate objects by priority
 	//! As for magnitudes, the lower is the higher priority
@@ -332,7 +332,8 @@ protected:
 	//! @param core
 	//! @param flags
 	//! @param decimals significant digits after the comma.
-	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const;
+	//! @param magOffset magnitude offset to apply (can be due to changing distance)
+	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1, const float& magOffset=0.f) const;
 
 	//! Add a section to the InfoString with just horizontal data for the Sun and Moon, when observed from Earth.
 	//! The application of this is to have quick info while observing other objects.

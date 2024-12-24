@@ -344,9 +344,10 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	{
 		const int decimals = 2;
 		const float airmass = getAirmass(core);
-		oss << QString("%1: <b>%2</b>").arg(q_("Approx. magnitude"), QString::number(getVMagnitude(core), 'f', decimals));
+		const float mag=getVMagnitude(core);
+		oss << QString("%1: <b>%2</b>").arg(q_("Approx. magnitude"), QString::number(mag, 'f', decimals));
 		if (airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
-			oss << QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', decimals), q_("by"), QString::number(airmass, 'f', decimals), q_("Airmasses"));
+			oss << QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core, mag), 'f', decimals), q_("by"), QString::number(airmass, 'f', decimals), q_("Airmasses"));
 		oss << "<br />";
 	}
 
