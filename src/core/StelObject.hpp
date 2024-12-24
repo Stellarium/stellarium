@@ -332,7 +332,7 @@ protected:
 	//! @param core
 	//! @param flags
 	//! @param decimals significant digits after the comma.
-	//! @param magOffset magnitude offset to apply (can be due to changing distance)
+	//! @param magOffset magnitude offset to apply to display final apperant magnitude, are used if a star distance has changed in the past/future
 	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1, const float& magOffset=0.f) const;
 
 	//! Add a section to the InfoString with just horizontal data for the Sun and Moon, when observed from Earth.
