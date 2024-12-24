@@ -58,7 +58,7 @@ The main catalogue data is split into several files:
 There also exist some control and reference files:
 
 \begin{description}
-\item[\file{object\_types\_v0_1.cat}]
+\item[\file{object\_types\_v0\_1.cat}]
 \item[\file{stars\_hip\_sp\_0v0\_6.cat}]
 \item[\file{gcvs\_hip\_part.dat}]
 \item[\file{wds\_hip\_part.dat}]
@@ -229,9 +229,9 @@ and to convert proper motion vector (\texttt{dx0}, \texttt{dx1}, \texttt{dx2}) t
 where $\mu_{\alpha^*}\equiv\mu_{\alpha}\cos{(\delta)}$.
 
 \begin{table}[p]
-\begin{tabular}{llllp{55mm}}\toprule
+\begin{tabular}{llllp{75mm}}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-gaia_id        &  0 & long long          & 8 & Gaia source id\\%\midrule
+gaia\_id       &  0 & long long          & 8 & Gaia source id\\%\midrule
 x0             &  8 & int                & 4 & Cartesian x position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\%\midrule
 x1             & 12 & int                & 4 & Cartesian y position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\%\midrule
 x2             & 16 & int                & 4 & Cartesian z position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\%\midrule
@@ -241,12 +241,12 @@ dx2            & 28 & int                & 4 & Third component of the star's pro
 b\_v           & 32 & short              & 2 & $B-V$ colour in milli-mag unit.
 mag            & 34 & short              & 2 & $V$-band magnitude in milli-mag unit.
 plx            & 36 & unsigned short     & 2 & parallax of the star in 0.02 mas unit.\\
-plx_err        & 38 & unsigned short     & 2 & parallax error of the star in 0.01 mas unit.\\
+plx\_err       & 38 & unsigned short     & 2 & parallax error of the star in 0.01 mas unit.\\
 rv             & 40 & short              & 2 & radial velocity of the star in 0.1 km/s unit.\\
 sp\_int        & 42 & unsigned short     & 2 & index into an array of spectral type descriptions 
                                                which is taken from the file \file{stars\_hip\_sp.cat}, the index corresponds to the 
-											   line number in the file - 1\\%\midrule
-obtype		   & 44 & unsigned char      & 1 & object type classification index. The index corresponds to the line number in the file \file{object\_types_v*.cat} - 1.\\
+	 				       line number in the file - 1\\%\midrule
+obtype	       & 44 & unsigned char      & 1 & object type classification index. The index corresponds to the line number in the file \file{object\_types\_v*.cat} - 1.\\
 hip            & 45 & int                & 3 & Hipparcos catalogue number with component ID (e.g. A, B, C...)\\\bottomrule
 \end{tabular}
 \caption{Star Data Record Type 0}
@@ -256,15 +256,15 @@ hip            & 45 & int                & 3 & Hipparcos catalogue number with c
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset}& \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-gaia_id        &  0 & long long          & 8 & Gaia source id\\%\midrule
+gaia\_id       &  0 & long long          & 8 & Gaia source id\\%\midrule
 x0             &  8 & int                & 4 & Right ascension $\alpha$ of the star in mas unit.\\%\midrule
 x1             & 12 & int                & 4 & Declination $\delta$ of the star in mas unit.\\%\midrule
-dx0            & 16 & int                & 4 & Proper motion $\mu_{\alpha}$ of the star in $mu$as/year%\midrule
-dx1            & 20 & int                & 4 & Proper motion $\mu_{\delta}$ of the star in $mu$as/year%\midrule
-b\_v           & 24 & short              & 2 & $B-V$ colour in milli-mag unit.
-mag            & 26 & short              & 2 & $V$-band magnitude in milli-mag unit.
+dx0            & 16 & int                & 4 & Proper motion $\mu_{\alpha}$ of the star in $mu$as\/year\\%\midrule
+dx1            & 20 & int                & 4 & Proper motion $\mu_{\delta}$ of the star in $mu$as\/year\\%\midrule
+b\_v           & 24 & short              & 2 & $B-V$ colour in milli-mag unit.\\
+mag            & 26 & short              & 2 & $V$-band magnitude in milli-mag unit.\\
 plx            & 28 & unsigned short     & 2 & parallax of the star in 0.01 mas unit.\\
-plx_err        & 30 & unsigned short     & 2 & parallax error of the star in 0.01 mas unit.\\
+plx\_err       & 30 & unsigned short     & 2 & parallax error of the star in 0.01 mas unit.\\\bottomrule
 \end{tabularx}
 \caption{Star Data Record Type 1}
 \label{tab:StarDataRecord1}
@@ -273,11 +273,11 @@ plx_err        & 30 & unsigned short     & 2 & parallax error of the star in 0.0
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} & \emph{Description}\\\midrule
-gaia_id        &  0 & long long          & 8 & Gaia source id\\%\midrule
+gaia\_id       &  0 & long long          & 8 & Gaia source id\\%\midrule
 x0             &  8 & int                & 3 & Right ascension $\alpha$ of the star in 0.1 arcsecond unit.\\%\midrule
 x1             & 11 & int                & 3 & Declination $\delta$ of the star in 0.1 arcsecond unit.\\%\midrule
-b\_v           & 14 & unsigned short     & 1 & $B-V$ colour in 25 milli-mag unit offset by $+1$ mag.
-mag            & 15 & unsigned short     & 1 & $V$-band magnitude in 20 milli-mag unit offset by $-16$ mag.
+b\_v           & 14 & unsigned short     & 1 & $B-V$ colour in 25 milli-mag unit offset by $+1$ mag.\\
+mag            & 15 & unsigned short     & 1 & $V$-band magnitude in 20 milli-mag unit offset by $-16$ mag.\\\bottomrule
 \end{tabularx}
 \caption{Star Data Record Type 2}
 \label{tab:StarDataRecord2}
