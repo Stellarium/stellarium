@@ -1,2 +1,2 @@
-ADD_SUBDIRECTORY( default )
+ADD_SUBDIRECTORY( hip_gaia3 )
 

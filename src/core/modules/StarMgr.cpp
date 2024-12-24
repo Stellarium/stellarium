@@ -379,16 +379,16 @@ void StarMgr::copyDefaultConfigFile()
 {
 	try
 	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/stars/default");
-		starConfigFileFullPath = StelFileMgr::getUserDir()+"/stars/default/starsConfig.json";
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/stars/hip_gaia3");
+		starConfigFileFullPath = StelFileMgr::getUserDir()+"/stars/hip_gaia3/starsConfig.json";
 		qDebug() << "Creates file " << QDir::toNativeSeparators(starConfigFileFullPath);
-		QFile::copy(StelFileMgr::getInstallationDir()+"/stars/default/defaultStarsConfig.json", starConfigFileFullPath);
+		QFile::copy(StelFileMgr::getInstallationDir()+"/stars/hip_gaia3/defaultStarsConfig.json", starConfigFileFullPath);
 		QFile::setPermissions(starConfigFileFullPath, QFile::permissions(starConfigFileFullPath) | QFileDevice::WriteOwner);
 	}
 	catch (std::runtime_error& e)
 	{
 		qWarning() << e.what();
-		qFatal("Could not create configuration file stars/default/starsConfig.json");
+		qFatal("Could not create configuration file stars/hip_gaia3/starsConfig.json");
 	}
 }
 
@@ -397,7 +397,7 @@ void StarMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	starConfigFileFullPath = StelFileMgr::findFile("stars/default/starsConfig.json", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+	starConfigFileFullPath = StelFileMgr::findFile("stars/hip_gaia3/starsConfig.json", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
 	if (starConfigFileFullPath.isEmpty())
 	{
 		qWarning() << "Could not find the starsConfig.json file: will copy the default one.";
@@ -486,7 +486,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 
 	// See if it is an absolute path, else prepend default path
 	if (!(StelFileMgr::isAbsolute(catalogFileName)))
-		catalogFileName = "stars/default/"+catalogFileName;
+		catalogFileName = "stars/hip_gaia3/"+catalogFileName;
 
 	QString catalogFilePath = StelFileMgr::findFile(catalogFileName);
 	if (catalogFilePath.isEmpty())
@@ -628,9 +628,9 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	}
 	else
 	{
-		QString tmpFic = StelFileMgr::findFile("stars/default/" + cat_hip_sp_file_name);
+		QString tmpFic = StelFileMgr::findFile("stars/hip_gaia3/" + cat_hip_sp_file_name);
 		if (tmpFic.isEmpty())
-			qWarning() << "ERROR while loading data from" << QDir::toNativeSeparators(("stars/default/" + cat_hip_sp_file_name));
+			qWarning() << "ERROR while loading data from" << QDir::toNativeSeparators(("stars/hip_gaia3/" + cat_hip_sp_file_name));
 		else
 			spectral_array = initStringListFromFile(tmpFic);
 	}
@@ -642,9 +642,9 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	}
 	else
 	{
-		QString tmpFic = StelFileMgr::findFile("stars/default/" + cat_objtype_file_name);
+		QString tmpFic = StelFileMgr::findFile("stars/hip_gaia3/" + cat_objtype_file_name);
 		if (tmpFic.isEmpty())
-			qWarning() << "ERROR while loading data from" << QDir::toNativeSeparators(("stars/default/" + cat_objtype_file_name));
+			qWarning() << "ERROR while loading data from" << QDir::toNativeSeparators(("stars/hip_gaia3/" + cat_objtype_file_name));
 		else
 			objtype_array = initStringListFromFile(tmpFic);
 	}
@@ -1992,33 +1992,33 @@ void StarMgr::reduceStarsMagnitudeLimit()
 void StarMgr::populateStarsDesignations()
 {
 	QString fic;
-	fic = StelFileMgr::findFile("stars/default/name.fab");
+	fic = StelFileMgr::findFile("stars/hip_gaia3/name.fab");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load scientific star names file: stars/default/name.fab";
+		qWarning() << "WARNING: could not load scientific star names file: stars/hip_gaia3/name.fab";
 	else
 		loadSciNames(fic, false);
 
-	fic = StelFileMgr::findFile("stars/default/extra_name.fab");
+	fic = StelFileMgr::findFile("stars/hip_gaia3/extra_name.fab");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load scientific star extra names file: stars/default/extra_name.fab";
+		qWarning() << "WARNING: could not load scientific star extra names file: stars/hip_gaia3/extra_name.fab";
 	else
 		loadSciNames(fic, true);
 
-	fic = StelFileMgr::findFile("stars/default/gcvs_hip_part.dat");
+	fic = StelFileMgr::findFile("stars/hip_gaia3/gcvs_hip_part.dat");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load variable stars file: stars/default/gcvs_hip_part.dat";
+		qWarning() << "WARNING: could not load variable stars file: stars/hip_gaia3/gcvs_hip_part.dat";
 	else
 		loadGcvs(fic);
 
-	fic = StelFileMgr::findFile("stars/default/wds_hip_part.dat");
+	fic = StelFileMgr::findFile("stars/hip_gaia3/wds_hip_part.dat");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load double stars file: stars/default/wds_hip_part.dat";
+		qWarning() << "WARNING: could not load double stars file: stars/hip_gaia3/wds_hip_part.dat";
 	else
 		loadWds(fic);
 
-	fic = StelFileMgr::findFile("stars/default/cross-id.dat");
+	fic = StelFileMgr::findFile("stars/hip_gaia3/cross-id.dat");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load cross-identification data file: stars/default/cross-id.dat";
+		qWarning() << "WARNING: could not load cross-identification data file: stars/hip_gaia3/cross-id.dat";
 	else
 		loadCrossIdentificationData(fic);
 }

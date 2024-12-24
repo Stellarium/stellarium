@@ -1603,7 +1603,7 @@ void ConfigurationDialog::downloadStars()
 	Q_ASSERT(currentDownloadFile==Q_NULLPTR);
 	Q_ASSERT(progressBar==Q_NULLPTR);
 
-	QString path = StelFileMgr::getUserDir()+QString("/stars/default/")+nextStarCatalogToDownload.value("fileName").toString();
+	QString path = StelFileMgr::getUserDir()+QString("/stars/hip_gaia3/")+nextStarCatalogToDownload.value("fileName").toString();
 	currentDownloadFile = new QFile(path);
 	if (!currentDownloadFile->open(QIODevice::WriteOnly))
 	{

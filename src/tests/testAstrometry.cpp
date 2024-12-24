@@ -32,7 +32,7 @@ QTEST_GUILESS_MAIN(TestAstrometry)
 void TestAstrometry::initTestCase()
 {
     // Define the directory to search in
-    QDir dir("../../stars/default/");
+    QDir dir("../../stars/hip_gaia3/");
     
     // Make sure the directory exists
     if (!dir.exists()) {
