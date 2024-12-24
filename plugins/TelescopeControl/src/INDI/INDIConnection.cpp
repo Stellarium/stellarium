@@ -25,9 +25,9 @@
 #include <limits>
 #include <cmath>
 
-#include <libs/indiclient/baseclient.h>
-#include <libs/indidevice/basedevice.h>
-#include <libs/indibase/inditelescope.h>
+#include <libindi/baseclient.h>
+#include <libindi/basedevice.h>
+#include <libindi/inditelescope.h>
 
 const int INDIConnection::SLEW_STOP = INDI::Telescope::SLEW_GUIDE - 1;
 
