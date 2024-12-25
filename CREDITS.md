@@ -521,7 +521,7 @@
 	4.58 Images of IC2118, NGC1499
 	     from Zhao Jingna
 	     License:  Creative Commons Attribution 3.0 Unported
-	4.59 Images o UGC10822
+	4.59 Images of UGC10822
 	     from Science NASA, ESA, Eduardo Vitral (STScI), Roeland van der Marel (STScI), Sangmo Tony Sohn (STScI), DSS Image Processing: Joseph DePasquale (STScI)
 	     https://noirlab.edu/public/
 	     License: Public domain
