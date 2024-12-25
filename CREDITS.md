@@ -451,7 +451,7 @@
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
 	4.42 Images of IC1295, NGC134, NGC92, NGC55, NGC908, NGC936, NGC1232, NGC1313, NGC1316,
 	     NGC1792, NGC1978, NGC2207, NGC2736, NGC3199, NGC3699, NGC3766, NGC3532, NGC4945, NGC5128, NGC5189,
-	     NGC6362, NGC6537, NGC6752, NGC6769, NGC6822, NGC7793
+	     NGC6362, NGC6537, NGC6769, NGC6822, NGC7793
 	     from ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International
@@ -828,7 +828,7 @@
 	      from Chuck Ayoub, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.136 Images of NGC1261, NGC5286, NGC6397, NGC6541
+	4.136 Images of NGC1261, NGC5286, NGC6397, NGC6541, NGC6752
 	      from Tian Mai, Image processing: Sun Shuwei
 	      License: Creative Commons Attribution 4.0 International
 ```
