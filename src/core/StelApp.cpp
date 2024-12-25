@@ -160,10 +160,6 @@ Q_IMPORT_PLUGIN(LensDistortionEstimatorStelPluginInterface)
 Q_IMPORT_PLUGIN(MeteorShowersStelPluginInterface)
 #endif
 
-#ifdef USE_STATIC_PLUGIN_MISSINGSTARS
-Q_IMPORT_PLUGIN(MissingStarsStelPluginInterface)
-#endif
-
 #ifdef USE_STATIC_PLUGIN_NAVSTARS
 Q_IMPORT_PLUGIN(NavStarsStelPluginInterface)
 #endif
