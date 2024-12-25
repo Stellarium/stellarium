@@ -1567,8 +1567,8 @@ void ConfigurationDialog::updateStarCatalogControlsText()
 			ui->downloadLabel->setText(q_("Download size: %1MB\nStar count: %2 Million\nMagnitude range: %3 - %4")
 				.arg(nextStarCatalogToDownload.value("sizeMb").toString(),
 				     QString::number(nextStarCatalogToDownload.value("count").toDouble(), 'f', 1),
-				     magRange.first().toString(),
-				     magRange.last().toString()));
+				     QString::number(magRange.first().toDouble(), 'f', 2),
+				     QString::number(magRange.last().toDouble(), 'f', 2)));
 		}
 	}
 }
@@ -1603,7 +1603,7 @@ void ConfigurationDialog::downloadStars()
 	Q_ASSERT(currentDownloadFile==Q_NULLPTR);
 	Q_ASSERT(progressBar==Q_NULLPTR);
 
-	QString path = StelFileMgr::getUserDir()+QString("/stars/default/")+nextStarCatalogToDownload.value("fileName").toString();
+	QString path = StelFileMgr::getUserDir()+QString("/stars/hip_gaia3/")+nextStarCatalogToDownload.value("fileName").toString();
 	currentDownloadFile = new QFile(path);
 	if (!currentDownloadFile->open(QIODevice::WriteOnly))
 	{
@@ -2185,5 +2185,4 @@ void ConfigurationDialog::storeFontSettings()
 	conf->setValue("gui/base_font_name",	QGuiApplication::font().family());
 	conf->setValue("gui/screen_font_size",	propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
 	conf->setValue("gui/gui_font_size",	propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
-
 }

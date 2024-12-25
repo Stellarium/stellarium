@@ -52,7 +52,7 @@ public:
 	
 	int getMaxLevel(void) const {return maxLevel;}
 	
-	static int nrOfZones(int level) {return (20<<(level<<1));} // 20*4^level
+	static int nrOfZones(int level) {return ((20<<(level<<1)) + 1);} // 20*4^level local zones
 	
 	int getNrOfZones(void) const {return nrOfZones(maxLevel);}
 	

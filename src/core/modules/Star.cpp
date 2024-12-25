@@ -94,28 +94,3 @@ int Star1::hasComponentID(void) const
 	}
 	return 0;
 }
-
-void Star1::print(void) const
-{
-	qDebug() << "hip: " << getHip()
-		 << ", componentIds: " << getComponentIds()
-		 << ", x0: " << getX0()
-		 << ", x1: " << getX1()
-		 << ", bV: " << (static_cast<unsigned int>(getBV()))
-		 << ", mag: " << (static_cast<unsigned int>(getMag()))
-		 << ", spInt: " << getSpInt()
-		 << ", dx0: " << getDx0()
-		 << ", dx1: " << getDx1()
-		 << ", plx: " << getPlx();
-}
-
-void Star2::print(void) const
-{
-	qDebug() << "x0: " << getX0()
-		 << ", x1: " << getX1()
-		 << ", dx0: " << getDx0()
-		 << ", dx1: " << getDx1()
-		 << ", bV: " << getBV()
-		 << ", mag: " << getMag();
-}
-

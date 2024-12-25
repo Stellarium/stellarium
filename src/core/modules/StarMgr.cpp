@@ -44,6 +44,7 @@
 #include "ConstellationMgr.hpp"
 #include "Planet.hpp"
 #include "StelUtils.hpp"
+#include "StelHealpix.hpp"
 
 #include <QTextStream>
 #include <QFile>
@@ -59,11 +60,12 @@
 
 static QStringList spectral_array;
 static QStringList component_array;
+static QStringList objtype_array;
 
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always match the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 12;
+static const int StarCatalogFormatVersion = 18;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -93,8 +95,6 @@ QMap<int, int> StarMgr::saoStarsIndex;
 QMap<int, int> StarMgr::hdStarsIndex;
 QMap<int, int> StarMgr::hrStarsIndex;
 QHash<int, QString> StarMgr::referenceMap;
-QHash<int, float> StarMgr::hipParallaxErrors;
-QHash<int, PMData> StarMgr::hipPMData;
 
 QStringList initStringListFromFile(const QString& file_name)
 {
@@ -131,6 +131,16 @@ QString StarMgr::convertToComponentIds(int index)
 		return "";
 	}
 	return component_array.at(index);
+}
+
+QString StarMgr::convertToOjectTypes(int index)
+{
+	if (index < 0 || index >= objtype_array.size())
+	{
+		qDebug() << "convertToObjTypeIds: bad index: " << index << ", max: " << objtype_array.size();
+		return "";
+	}
+	return objtype_array.at(index);
 }
 
 
@@ -365,36 +375,20 @@ int StarMgr::getGcvsMM(int hip)
 	return -99;
 }
 
-float StarMgr::getPlxError(int hip)
-{
-	auto it = hipParallaxErrors.find(hip);
-	if (it!=hipParallaxErrors.end())
-		return it.value();
-	return 0.f;
-}
-
-PMData StarMgr::getProperMotion(int hip)
-{
-	auto it = hipPMData.find(hip);
-	if (it!=hipPMData.end())
-		return it.value();
-	return QPair<float, float>(NAN, NAN);
-}
-
 void StarMgr::copyDefaultConfigFile()
 {
 	try
 	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/stars/default");
-		starConfigFileFullPath = StelFileMgr::getUserDir()+"/stars/default/starsConfig.json";
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/stars/hip_gaia3");
+		starConfigFileFullPath = StelFileMgr::getUserDir()+"/stars/hip_gaia3/starsConfig.json";
 		qDebug() << "Creates file " << QDir::toNativeSeparators(starConfigFileFullPath);
-		QFile::copy(StelFileMgr::getInstallationDir()+"/stars/default/defaultStarsConfig.json", starConfigFileFullPath);
+		QFile::copy(StelFileMgr::getInstallationDir()+"/stars/hip_gaia3/defaultStarsConfig.json", starConfigFileFullPath);
 		QFile::setPermissions(starConfigFileFullPath, QFile::permissions(starConfigFileFullPath) | QFileDevice::WriteOwner);
 	}
 	catch (std::runtime_error& e)
 	{
 		qWarning() << e.what();
-		qFatal("Could not create configuration file stars/default/starsConfig.json");
+		qFatal("Could not create configuration file stars/hip_gaia3/starsConfig.json");
 	}
 }
 
@@ -403,7 +397,7 @@ void StarMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	starConfigFileFullPath = StelFileMgr::findFile("stars/default/starsConfig.json", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+	starConfigFileFullPath = StelFileMgr::findFile("stars/hip_gaia3/starsConfig.json", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
 	if (starConfigFileFullPath.isEmpty())
 	{
 		qWarning() << "Could not find the starsConfig.json file: will copy the default one.";
@@ -452,8 +446,6 @@ void StarMgr::init()
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");   // Load pointer texture
 
 	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
-	for (auto* z : std::as_const(gridLevels))
-		z->scaleAxis();
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &StarMgr::updateSkyCulture);
@@ -494,7 +486,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 
 	// See if it is an absolute path, else prepend default path
 	if (!(StelFileMgr::isAbsolute(catalogFileName)))
-		catalogFileName = "stars/default/"+catalogFileName;
+		catalogFileName = "stars/hip_gaia3/"+catalogFileName;
 
 	QString catalogFilePath = StelFileMgr::findFile(catalogFileName);
 	if (catalogFilePath.isEmpty())
@@ -636,26 +628,31 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	}
 	else
 	{
-		QString tmpFic = StelFileMgr::findFile("stars/default/" + cat_hip_sp_file_name);
+		QString tmpFic = StelFileMgr::findFile("stars/hip_gaia3/" + cat_hip_sp_file_name);
 		if (tmpFic.isEmpty())
-			qWarning() << "ERROR while loading data from" << QDir::toNativeSeparators(("stars/default/" + cat_hip_sp_file_name));
+			qWarning() << "ERROR while loading data from" << QDir::toNativeSeparators(("stars/hip_gaia3/" + cat_hip_sp_file_name));
 		else
 			spectral_array = initStringListFromFile(tmpFic);
 	}
 
-	const QString cat_hip_cids_file_name = starsConfig.value("hipComponentsIdsFile").toString();
-	if (cat_hip_cids_file_name.isEmpty())
+	const QString cat_objtype_file_name = starsConfig.value("objecttypesFile").toString();
+	if (cat_objtype_file_name.isEmpty())
 	{
-		qWarning() << "ERROR: stars:cat_hip_cids_file_name not found";
+		qWarning() << "ERROR: stars:cat_objtype_file_name not found";
 	}
 	else
 	{
-		QString tmpFic = StelFileMgr::findFile("stars/default/" + cat_hip_cids_file_name);
+		QString tmpFic = StelFileMgr::findFile("stars/hip_gaia3/" + cat_objtype_file_name);
 		if (tmpFic.isEmpty())
-			qWarning() << "ERROR while loading data from " << QDir::toNativeSeparators(("stars/default/" + cat_hip_cids_file_name));
+			qWarning() << "ERROR while loading data from" << QDir::toNativeSeparators(("stars/hip_gaia3/" + cat_objtype_file_name));
 		else
-			component_array = initStringListFromFile(tmpFic);
+			objtype_array = initStringListFromFile(tmpFic);
 	}
+
+	// create an array with the first element being an empty string, and then contain strings A,B,C,...,Z
+	component_array.append("");
+	for (int i=0; i<26; i++)
+		component_array.append(QString(QChar('A'+i)));
 
 	lastMaxSearchLevel = maxGeodesicGridLevel;
 	qDebug() << "Finished loading star catalogue data, max_geodesic_level:" << maxGeodesicGridLevel;
@@ -671,7 +668,7 @@ void StarMgr::populateHipparcosLists()
 	classicalCepheidsTypeStars.clear();
 	carbonStars.clear();
 	bariumStars.clear();
-	const int pmLimit = 1; // arc-second per year!
+	const int pmLimit = 1000; // arc-second per year!
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
 		const Star1 *const s = hipIndex[hip].s;
@@ -716,15 +713,11 @@ void StarMgr::populateHipparcosLists()
 				sd[so] = getWdsLastSeparation(s->getHip());
 				doubleHipStars.push_back(sd);
 			}
-			// use separate variables for avoid the overflow (esp. for Barnard's star)
-			PMData properMotion = getProperMotion(s->getHip());
-			float pmX = properMotion.first;
-			float pmY = properMotion.second;
-			float pm = 0.001f * std::sqrt((pmX*pmX) + (pmY*pmY));
+			float pm = s->getPMTotal();
 			if (qAbs(pm)>=pmLimit)
 			{
 				QMap<StelObjectP, float> spm;
-				spm[so] = pm;
+				spm[so] = pm / 1000.f;  // in arc-seconds per year
 				hipStarsHighPM.push_back(spm);
 			}
 		}
@@ -1157,121 +1150,6 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "cross-identification data records for stars";
 }
 
-void StarMgr::loadPlxErr(const QString& plxErrFile)
-{
-	// TODO: This is temporary solution for display parallax errors until format of stars catalogs will not be changed!
-	hipParallaxErrors.clear();
-
-	qDebug().noquote() << "Loading parallax errors data from" << QDir::toNativeSeparators(plxErrFile);
-	QFile ciFile(plxErrFile);
-	if (!ciFile.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-		qWarning().noquote() << "WARNING - could not open" << QDir::toNativeSeparators(plxErrFile);
-		return;
-	}
-	const QStringList& allRecords = QString::fromUtf8(ciFile.readAll()).split('\n');
-	ciFile.close();
-
-	int readOk=0;
-	int totalRecords=0;
-	int lineNumber=0;
-	// record structure is delimited with a 'tab' character. Example record strings:
-	// "1	0.0606"
-	// "2	0.3193"
-	for (const auto& record : allRecords)
-	{
-		++lineNumber;
-		// skip comments and empty lines
-		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
-			continue;
-
-		++totalRecords;
-		const QStringList& fields = record.split('\t');
-		if (fields.size()!=2)
-		{
-			qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(plxErrFile)
-				   << " - record does not match record pattern";
-			continue;
-		}
-		else
-		{
-			// The record is the right format.  Extract the fields
-			bool ok;
-			int hip = fields.at(0).toInt(&ok);
-			if (!ok)
-			{
-				qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(plxErrFile)
-					   << " - failed to convert " << fields.at(0) << "to a number";
-				continue;
-			}
-			hipParallaxErrors[hip] = fields.at(1).toFloat(&ok);
-
-			++readOk;
-		}
-	}
-
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "parallax error data records for stars";
-}
-
-void StarMgr::loadPMData(const QString &pmDataFile)
-{
-	// TODO: This is temporary solution for display parallax errors until format of stars catalogs will not be changed!
-	hipPMData.clear();
-
-	qDebug().noquote() << "Loading proper motion data from" << QDir::toNativeSeparators(pmDataFile);
-	QFile ciFile(pmDataFile);
-	if (!ciFile.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-		qWarning().noquote() << "WARNING - could not open" << QDir::toNativeSeparators(pmDataFile);
-		return;
-	}
-	const QStringList& allRecords = QString::fromUtf8(ciFile.readAll()).split('\n');
-	ciFile.close();
-
-	int readOk=0;
-	int totalRecords=0;
-	int lineNumber=0;
-	// record structure is delimited with a 'tab' character. Example record strings:
-	// "1	-4.58	-1.61"
-	// "2	179.70	1.40"
-	for (const auto& record : allRecords)
-	{
-		++lineNumber;
-		// skip comments and empty lines
-		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
-			continue;
-
-		++totalRecords;
-		const QStringList& fields = record.split('\t');
-		if (fields.size()!=3)
-		{
-			qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(pmDataFile)
-				   << " - record does not match record pattern";
-			continue;
-		}
-		else
-		{
-			// The record is the right format.  Extract the fields
-			bool ok;
-			int hip = fields.at(0).toInt(&ok);
-			if (!ok)
-			{
-				qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(pmDataFile)
-					   << " - failed to convert " << fields.at(0) << "to a number";
-				continue;
-			}
-			PMData properMotion;
-			properMotion.first = fields.at(1).toFloat(&ok);
-			properMotion.second = fields.at(2).toFloat(&ok);
-			hipPMData[hip] = properMotion;
-
-			++readOk;
-		}
-	}
-
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "proper motion data records for stars";
-}
-
 int StarMgr::getMaxSearchLevel() const
 {
 	int rval = -1;
@@ -1328,11 +1206,11 @@ void StarMgr::draw(StelCore* core)
 	for (const auto* z : std::as_const(gridLevels))
 	{
 		int limitMagIndex=RCMAG_TABLE_SIZE;
-		const float mag_min = 0.001f*z->mag_min;
-		const float k = (0.001f*z->mag_range)/z->mag_steps; // MagStepIncrement
+		// overshoot by 7 mag because some stars (like HIP 16757) can get brighter than its catalogs min magnitude
+		const float mag_min = 0.001f*z->mag_min - 7.f;
 		for (int i=0;i<RCMAG_TABLE_SIZE;++i)
 		{
-			const float mag = mag_min+k*i;
+			const float mag = mag_min+0.05*i;  // 0.05 mag MagStepIncrement
 			if (skyDrawer->computeRCMag(mag, &rcmag_table[i])==false)
 			{
 				if (i==0)
@@ -1358,17 +1236,18 @@ void StarMgr::draw(StelCore* core)
 		if (labelsFader.getInterstate()>0.f)
 		{
 			// Adapt magnitude limit of the stars labels according to FOV and labelsAmount
-			float maxMag = (skyDrawer->getLimitMagnitude()-6.5f)*0.7f+(static_cast<float>(labelsAmount)*1.2f)-2.f;
-			int x = static_cast<int>((maxMag-mag_min)/k);
+			float maxMag = (skyDrawer->getLimitMagnitude()-6.5f)*0.7f+(static_cast<float>(labelsAmount)*1.2f)-7.f;
+			int x = static_cast<int>((maxMag-mag_min)/0.05);  // 0.05 mag MagStepIncrement
 			if (x > 0)
 				maxMagStarName = x;
 		}
 		int zone;
-		
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, velf);
+		// always check the last zone because it is a global zone
+		z->draw(&sPainter, (20<<(z->level<<1)), false, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf);
 	}
 	exit_loop:
 
@@ -1449,6 +1328,8 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 			z->searchAround(core, zone,v,f,result);
 			//qDebug() << " " << zone;
 		}
+		// always search the last zone because it is a global zone
+		z->searchAround(core, (20<<(z->level<<1)), v, f, result);
 	}
 	return result;
 }
@@ -1498,6 +1379,35 @@ StelObjectP StarMgr::searchHP(int hp) const
 			const SpecialZoneData<Star1> *const z = hipIndex[hp].z;
 			return s->createStelObject(a,z);
 		}
+	}
+	return StelObjectP();
+}
+
+// Search the star by Gaia source_id
+StelObjectP StarMgr::searchGaia(int64_t source_id) const
+{
+	int maxSearchLevel = getMaxSearchLevel();
+	int matched = 0;
+	int index = 0;
+	// get the level 12 HEALPix index of the source
+	int lv12_pix = source_id / 34359738368;
+	Vec3d v;
+	StelObjectP so;
+	healpix_pix2vec(pow(2, 12), lv12_pix, v.v);  // search which pixel the source is in and turn to coordinates
+	Vec3f vf = v.toVec3f();
+
+	for (const auto* z : gridLevels)
+	{
+		// search the zone where the source is in
+		index = StelApp::getInstance().getCore()->getGeodesicGrid(maxSearchLevel)->getZoneNumberForPoint(vf, z->level);
+		so = z->searchGaiaID(index, source_id, matched);
+		if (matched)
+			return so;
+		
+		// then search the global zone 
+		so = z->searchGaiaID((20<<(z->level<<1)), source_id, matched);
+		if (matched)
+			return so;
 	}
 	return StelObjectP();
 }
@@ -1562,6 +1472,12 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 		if (hr!=hrStarsIndex.end())
 			return searchHP(hr.value());
 	}
+
+	// Search by Gaia number if it's an Gaia formatted number.
+	static const QRegularExpression rx5("^\\s*(Gaia DR3)\\s*(\\d+)\\s*.*$", QRegularExpression::CaseInsensitiveOption);
+	match=rx5.match(objw);
+	if (match.hasMatch())
+		return searchGaia(match.captured(2).toLongLong());
 
 	// Search by English common name
 	auto it = commonNamesIndex.find(objw);
@@ -1713,10 +1629,11 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Search for sci names
+	// need special character escape because many stars have name starting with "*"
 	QString bayerPattern = objPrefix;
-	QRegularExpression bayerRegEx(bayerPattern);
+	QRegularExpression bayerRegEx(QRegularExpression::escape(bayerPattern));
 	QString bayerPatternCI = objw;
-	QRegularExpression bayerRegExCI(bayerPatternCI);
+	QRegularExpression bayerRegExCI(QRegularExpression::escape(bayerPatternCI));
 
 	// if the first character is a Greek letter, check if there's an index
 	// after it, such as "alpha1 Cen".
@@ -1945,6 +1862,24 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		}
 	}
 
+	// Add exact Gaia DR3 catalogue numbers.
+	static const QRegularExpression gaiaRx("^\\s*(Gaia DR3)\\s*(\\d+)\\s*.*$", QRegularExpression::CaseInsensitiveOption);
+	match=gaiaRx.match(objw);
+	if (match.hasMatch())
+	{
+		bool ok;
+		int64_t gaiaNum = match.captured(2).toLongLong(&ok);
+		if (ok)
+		{
+			StelObjectP s = searchGaia(gaiaNum);
+			if (s && maxNbItem>0)
+			{
+				result << QString("Gaia DR3 %1").arg(gaiaNum);
+				maxNbItem--;
+			}
+		}
+	}
+
 	result.sort();	
 	return result;
 }
@@ -2057,47 +1992,35 @@ void StarMgr::reduceStarsMagnitudeLimit()
 void StarMgr::populateStarsDesignations()
 {
 	QString fic;
-	fic = StelFileMgr::findFile("stars/default/name.fab");
+	fic = StelFileMgr::findFile("stars/hip_gaia3/name.fab");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load scientific star names file: stars/default/name.fab";
+		qWarning() << "WARNING: could not load scientific star names file: stars/hip_gaia3/name.fab";
 	else
 		loadSciNames(fic, false);
 
-	fic = StelFileMgr::findFile("stars/default/extra_name.fab");
+	fic = StelFileMgr::findFile("stars/hip_gaia3/extra_name.fab");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load scientific star extra names file: stars/default/extra_name.fab";
+		qWarning() << "WARNING: could not load scientific star extra names file: stars/hip_gaia3/extra_name.fab";
 	else
 		loadSciNames(fic, true);
 
-	fic = StelFileMgr::findFile("stars/default/gcvs_hip_part.dat");
+	fic = StelFileMgr::findFile("stars/hip_gaia3/gcvs_hip_part.dat");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load variable stars file: stars/default/gcvs_hip_part.dat";
+		qWarning() << "WARNING: could not load variable stars file: stars/hip_gaia3/gcvs_hip_part.dat";
 	else
 		loadGcvs(fic);
 
-	fic = StelFileMgr::findFile("stars/default/wds_hip_part.dat");
+	fic = StelFileMgr::findFile("stars/hip_gaia3/wds_hip_part.dat");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load double stars file: stars/default/wds_hip_part.dat";
+		qWarning() << "WARNING: could not load double stars file: stars/hip_gaia3/wds_hip_part.dat";
 	else
 		loadWds(fic);
 
-	fic = StelFileMgr::findFile("stars/default/cross-id.dat");
+	fic = StelFileMgr::findFile("stars/hip_gaia3/cross-id.dat");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load cross-identification data file: stars/default/cross-id.dat";
+		qWarning() << "WARNING: could not load cross-identification data file: stars/hip_gaia3/cross-id.dat";
 	else
 		loadCrossIdentificationData(fic);
-
-	fic = StelFileMgr::findFile("stars/default/hip_plx_err.dat");
-	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load parallax errors data file: stars/default/hip_plx_err.dat";
-	else
-		loadPlxErr(fic);
-
-	fic = StelFileMgr::findFile("stars/default/hip_pm.dat");
-	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load proper motion data file: stars/default/hip_pm.dat";
-	else
-		loadPMData(fic);
 }
 
 QStringList StarMgr::listAllObjects(bool inEnglish) const

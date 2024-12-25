@@ -315,11 +315,11 @@ float StelObject::getSelectPriority(const StelCore* core) const
 	return qMin(getVMagnitudeWithExtinction(core), 15.0f);
 }
 
-float StelObject::getVMagnitudeWithExtinction(const StelCore* core, const float knownVMag) const
+float StelObject::getVMagnitudeWithExtinction(const StelCore* core, const float knownVMag, const float& magoffset) const
 {
 	Vec3d altAzPos = getAltAzPosGeometric(core);
 	altAzPos.normalize();
-	float vMag = (knownVMag>-1000.f ? knownVMag : getVMagnitude(core));
+	float vMag = (knownVMag>-1000.f ? knownVMag : getVMagnitude(core) + magoffset);
 	// without the test, planets flicker stupidly in fullsky atmosphere-less view.
 	if (core->getSkyDrawer()->getFlagHasAtmosphere())
 		core->getSkyDrawer()->getExtinction().forward(altAzPos, &vMag);
@@ -340,15 +340,16 @@ float StelObject::getAirmass(const StelCore *core) const
 		return -1.f;
 }
 
-// Format the magnitude info string for the object
-QString StelObject::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals) const
+// Format the magnitude info string for the object, allow offset from changing distance
+QString StelObject::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals, const float& magoffset) const
 {
 	if (flags&Magnitude)
 	{
-		QString str = QString("%1: <b>%2</b>").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', decimals));
+		float mag = getVMagnitude(core);
+		QString str = QString("%1: <b>%2</b>").arg(q_("Magnitude"), QString::number(getVMagnitude(core) + magoffset, 'f', decimals));
 		const float airmass = getAirmass(core);
 		if (airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
-			str += QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
+			str += QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core, mag, magoffset), 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
 		str += "<br/>" + getExtraInfoStrings(Magnitude).join("");
 		return str;
 	}
@@ -357,6 +358,7 @@ QString StelObject::getMagnitudeInfoString(const StelCore *core, const InfoStrin
 }
 
 // Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
+// computing positional info sometimes also compute others like proper motion too, so store them in the object
 QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	StelApp& app = StelApp::getInstance();

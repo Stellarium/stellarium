@@ -13,24 +13,23 @@ the related file formats.
 
 The celestial sphere is split into zones, which correspond to the
 triangular faces of a geodesic sphere. The number of zones (faces)
-depends on the level of sub-division of this sphere. The lowest level,
-0, is an icosahedron (20 faces), subsequent levels $L$ of sub-division
+depends on the level of sub-division of this sphere plus one global zone for 
+high proper motion stars that can cross zones in the past/future or stars. The lowest level,
+0, is an icosahedron (20 faces + 1 global zone), subsequent levels $L$ of sub-division
 give the number of zones $n$ as:
 
 \begin{equation}
-n=20 \cdot 4^L
+n=20 \cdot 4^L + 1
 \end{equation}
 
-Stellarium uses levels 0 to 7 in the existing star catalogues. Star Data
-Records contain the position of a star as an offset from the central
-position of the zone in which that star is located, thus it is necessary
-to determine the vector from the observer to the centre of a zone, and
-add the star's offsets to find the absolute position of the star on the
-celestial sphere.
+Stellarium uses levels 0 to 8 in the existing star catalogues. So the number of zones are 21 for level 0 to 1,310,721 for level 8.
+Stars within the global zone are always checked if they are visible or not without any zone restriction, since stars can move 
+out of their original zones due to proper motion and not drawn in the sky. Only level 0 to level 2 star catalogs have their global 
+zone populated (i.e. level 3-8 global zones are empty).
 
-This position for a star is expressed as a 3-dimensional vector which
-points from the observer (at the centre of the geodesic sphere) to the
-position of the star as observed on the celestial sphere.
+For level 0, any stars who will move out of their original zones in $\pm 100,000$ years are moved to the global zone. For level 1 and 2, stars are moved 
+to the global zone only if they move out of their original zones and the bordering zones \textbf{or} brighter than 0.3 mag from their 
+present apparent magnitude in $\pm 100,000$ years.
 
 \section{Star Catalogue File Format}%\label{star-catalogue-file-format}
 \label{sec:Catalogues:stars}
@@ -38,50 +37,45 @@ position of the star as observed on the celestial sphere.
 \subsection{General Description}%\label{general-description}
 \label{sec:Catalogues:stars:general}
 
-Stellarium's star catalogue data is kept in the \file{stars/default}
+Stellarium's star catalogue data is kept in the \file{stars/hip\_gaia3}
 sub-directory of the Installation Directory and/or User Directory (see
 section~\ref{sec:Directories}).
 
 The main catalogue data is split into several files:
 
 \begin{description}
-\item[\file{stars\_0\_0v0\_8.cat}]
-\item[\file{stars\_1\_0v0\_8.cat}]
-\item[\file{stars\_2\_0v0\_8.cat}]
-\item[\file{stars\_3\_1v0\_4.cat}]
-\item[\file{stars\_4\_1v0\_2.cat}]
-\item[\file{stars\_5\_2v0\_1.cat}]
-\item[\file{stars\_6\_2v0\_1.cat}]
-\item[\file{stars\_7\_2v0\_1.cat}]
-\item[\file{stars\_8\_2v0\_1.cat}]
+\item[\file{stars\_0\_0v0\_13.cat}]
+\item[\file{stars\_1\_0v0\_13.cat}]
+\item[\file{stars\_2\_0v0\_13.cat}]
+\item[\file{stars\_3\_0v0\_8.cat}]
+\item[\file{stars\_4\_1v0\_4.cat}]
+\item[\file{stars\_5\_1v0\_4.cat}]
+\item[\file{stars\_6\_1v0\_3.cat}]
+\item[\file{stars\_7\_1v0\_3.cat}]
+\item[\file{stars\_8\_2v0\_3.cat}]
 \end{description}
 
 There also exist some control and reference files:
 
 \begin{description}
-\item[\file{stars\_hip\_cids\_0v0\_0.cat}]
-\item[\file{stars\_hip\_sp\_0v0\_3.cat}]
+\item[\file{object\_types\_v0\_1.cat}]
+\item[\file{stars\_hip\_sp\_0v0\_6.cat}]
 \item[\file{gcvs\_hip\_part.dat}]
 \item[\file{wds\_hip\_part.dat}]
 \item[\file{cross-id.dat}]
-\item[\file{hip\_plx\_err.dat}]
-\item[\file{stars.ini}]
+\item[\file{starsConfig.json}]
 \item[\file{name.fab}]
 \end{description}
 
-When Stellarium starts, it reads the \file{stars.ini} file, from which it
-determines the names of the other files, which it then loads.
-
-The files \file{stars\_hip\_cids\_0v0\_0.cat} and \file{stars\_hip\_sp\_0v0\_2.cat}
-contain reference data for the main catalogue files. The
-file \file{gcvs\_hip\_part.dat} contains data about variables stars
+When Stellarium starts, it reads the \file{starsConfig.json}\footnote{Or \file{defaultStarsConfig.json} file in Installation Directory} file, from which it determines the 
+names of the other files, which it then loads. The file \file{stars\_hip\_sp\_0v0\_6.cat} 
+contain spectral type of HIP stars. The file \file{object\_types\_v0\_1.cat} 
+contain object type classification name for the main star catalogs. 
+The file \file{gcvs\_hip\_part.dat} contains data about variables stars
 (see section~\ref{sec:StarCatalogues:VariableStars}) and file \file{wds\_hip\_part.dat} 
 contains data about double stars (see section~\ref{sec:StarCatalogues:DoubleStars}) 
 which again contains references into the main catalogue files.
-
 The file \file{cross-id.dat} (see section~\ref{sec:StarCatalogues:CrossIdentificationData}) contains cross-identification data between HIP, SAO, HD and HR designations.
-
-The file \file{hip\_plx\_err.dat} contains parallax errors data for HIP stars.
 
 A given catalogue file models stars for one and only one level (i.e. for
 a fixed number of zones), which is recorded in the header of the file.
@@ -96,15 +90,15 @@ know about the zone model to be able to extract positional data.
 \emph{File} & \emph{Data     } & \emph{Data            } & \emph{Geodesic      } & \emph{\#Records} & \emph{Notes}\\
             & \emph{     Type} & \emph{     Record Size} & \emph{         Level} &                  &             \\
 \midrule
-\file{stars\_0\_0v0\_8.cat} & 0 & 28 bytes & 0 &      4,979 & Hipparcos\\
-\file{stars\_1\_0v0\_8.cat} & 0 & 28 bytes & 1 &     21,806 & Hipparcos\\
-\file{stars\_2\_0v0\_8.cat} & 0 & 28 bytes & 2 &    150,826 & Hipparcos\\
-\file{stars\_3\_1v0\_4.cat} & 1 & 10 bytes & 3 &    425,807 & Tycho 2\\
-\file{stars\_4\_1v0\_2.cat} & 1 & 10 bytes & 4 &  1,692,779 & Tycho 2\\
-\file{stars\_5\_2v0\_1.cat} & 2 &  8 bytes & 5 &  7,083,058 & NOMAD\\
-\file{stars\_6\_2v0\_1.cat} & 2 &  8 bytes & 6 & 24,670,782 & NOMAD\\
-\file{stars\_7\_2v0\_1.cat} & 2 &  8 bytes & 7 & 50,733,321 & NOMAD\\
-\file{stars\_8\_2v0\_1.cat} & 2 &  8 bytes & 7 & 92,304,337 & NOMAD\\
+\file{stars\_0\_0v0\_14.cat} & 0 & 48 bytes & 0 &        5,026 & Hipparcos + Gaia\\
+\file{stars\_1\_0v0\_14.cat} & 0 & 48 bytes & 1 &       21,421 & Hipparcos + Gaia\\
+\file{stars\_2\_0v0\_14.cat} & 0 & 48 bytes & 2 &      141,557 & Hipparcos + Gaia\\
+\file{stars\_3\_0v0\_9.cat}  & 0 & 48 bytes & 3 &      418,209 & Gaia\\
+\file{stars\_4\_1v0\_5.cat}  & 1 & 32 bytes & 4 &    1,741,891 & Gaia\\
+\file{stars\_5\_1v0\_5.cat}  & 1 & 32 bytes & 5 &    8,051,915 & Gaia\\
+\file{stars\_6\_1v0\_3.cat}  & 1 & 32 bytes & 6 &   29,879,726 & Gaia\\
+\file{stars\_7\_1v0\_3.cat}  & 1 & 32 bytes & 7 &   57,534,724 & Gaia\\
+\file{stars\_8\_2v0\_3.cat}  & 2 & 16 bytes & 8 & 1,229,081,84 & Gaia\\
 \bottomrule
 \end{tabular}
 
@@ -114,7 +108,7 @@ larger catalogues of fainter stars providing less data per star than the
 brighter star catalogues. See tables \emph{Stellarium's star catalogue}
 and for details.
 
-Stellarium's star catalogues are based on Hipparcos~\citep{1997ESASP1200.....E, 2012AstL...38..331A}, Tycho 2~\citep{2000A&A...355L..27H} and NOMAD~\citep{2004AAS...205.4815Z} catalogues.
+Stellarium's star catalogues are based on Hipparcos~\citep{1997ESASP1200.....E, 2012AstL...38..331A} and Gaia~\citep{2016A&A...595A...1G} catalogues.
 
 \subsection{File Sections}%\label{file-sections}
 \label{sec:Catalogues:stars:sections}
@@ -125,10 +119,10 @@ table~\ref{tab:Catalogues:stars:sections}.
 \begin{table}[htb]
 \begin{tabularx}{\textwidth}{l l X}\toprule
 \emph{Section} & \emph{Offset} & \emph{Description}\\\midrule
-File Header Record &  0        & Contains magic number, geodesic subdivision level, and magnitude range\\%\midrule
-Zone Records       & 32        & A list of how many records there are for each zone.
+File Header Record &  0        & Contains magic number, geodesic subdivision level, magnitude and epoch information\\%\midrule
+Zone Records       & 28        & A list of how many records there are for each zone.
                                  The length of the zones section depends on the level value from the header\\%\midrule
-Star Data Records  & 32+4$n$   & This section of the file contains fixed-size star records, as described below. 
+Star Data Records  & $28+4n$   & This section of the file contains fixed-size star records, as described below. 
                                  Records do not contain zone information, which must be inferred by counting 
                                  how many records have been read so far and switching zones when enough have been read 
                                  to fill the number of stars for the zone, as specified in the zones section above. 
@@ -150,19 +144,17 @@ magic number which servers as a file type identifier. See table~\ref{tab:Catalog
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} & \emph{Description}\\\midrule
-Magic             &  0 & int & 4 & magic number which identifies the file as a star catalogue. \texttt{0x835f040a}\\%\midrule
-Data Type         &  4 & int & 4 & type of the file, which defines the size and structure 
+Magic             &  0 & int   & 4 & magic number which identifies the file as a star catalogue. \texttt{0x835f040a}\\%\midrule
+Data Type         &  4 & int   & 4 & type of the file, which defines the size and structure 
                                    of the Star Data record for the file.\\%\midrule
-Major Version     &  8 & int & 4 & file format major version number\\%\midrule
-Minor Version     & 12 & int & 4 & file format minor version number\\%\midrule
-Level             & 16 & int & 4 & sets the level of sub-division of the geodesic sphere used to create the zones. 
-                                   0 means an icosahedron (20 triangular faces), 
+Major Version     &  8 & int   & 4 & file format major version number\\%\midrule
+Minor Version     & 12 & int   & 4 & file format minor version number\\%\midrule
+Level             & 16 & int   & 4 & sets the level of sub-division of the geodesic sphere used to create the zones. 
+                                   0 means an icosahedron (20 triangular faces + 1 global zone), 
                                    subsequent levels of sub-division lead to numbers of zones 
                                    as described in section \ref{sec:Catalogues:stars:record:zone}\\%\midrule
-Magnitude Minimum & 20 & int & 4 &  low bound of the magnitude scale for values in this file. 
-                                   Note that this is still an integer in Stellarium's own internal representation\\%\midrule
-Magnitude Range   & 24 & int & 4 & range of magnitudes expressed in this file\\%\midrule
-Magnitude Steps   & 28 & int & 4 & number of steps used to describes values in the range\\\bottomrule
+Magnitude Minimum & 20 & int   & 4 &  low bound of the magnitude of the catalog in milli-mag unit.  \\%\midrule
+Catalog Epoch     & 24 & float & 4 &  Epoch of the catalog in Julian days.\\%\midrule
 \end{tabularx}
 \caption{Header Record}
 \label{tab:Catalogues:stars:record:header}
@@ -182,10 +174,11 @@ of zones. See table~\ref{tab:Catalogues:stars:record:zones}.
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-num stars in zone 0   & 0    & int & 4 &  number of records in this file which are in zone 0\\%\midrule
-num stars in zone 1   & 4    & int & 4 &  number of records is this file which are in zone 1\\
-\ldots                &      &     &   &\\
-num stars in zone $n$ & $4n$ & int & 4 &  number of records is this file which are in zone $n$\\\bottomrule
+num stars in zone 0     & 0      & int & 4 &  number of records in this file which are in zone 0\\%\midrule
+num stars in zone 1     & 4      & int & 4 &  number of records is this file which are in zone 1\\
+\ldots                  &        &     &   &\\
+num stars in zone $n-1$ & $4n-4$ & int & 4 &  number of records is this file which are in zone $n$\\\bottomrule
+num stars in zone $n$   & $4n$   & int & 4 &  number of records is this file which are in the global zone\\\bottomrule
 \end{tabularx}
 \caption{Zones section}
 \label{tab:Catalogues:stars:record:zones}
@@ -209,32 +202,55 @@ See tables
 \ref{tab:StarDataRecord0}, \ref{tab:StarDataRecord1} and \ref{tab:StarDataRecord2}
 for record structure details.
 
-It should be noted that although the positional data loses accuracy as
-one progresses though the Star Record Types, this is compensated for by
-the face that the number of zones is much higher for the files where the
-smaller precision position fields are used, so the actual resolution on
-the sky isn't significantly worse for the type 1 and 2 records in
-practice.
+Details about vector algebra related to astrometric calculations can be 
+found in \citep{2012asas.book.....V}. For catalog with Star Data Record 
+Type 0, in practice to convert \texttt{x0}, \texttt{x1}, \texttt{x2} to 
+right accension $\alpha$ and declination $\delta$, one can use the following 
+formulas:
+
+\begin{equation}
+\begin{aligned}
+\alpha &= \arctan2(\texttt{x1}, \texttt{x0})\\
+\delta &= \arcsin(\texttt{x2})
+\end{aligned}
+\end{equation}
+
+and to convert proper motion vector (\texttt{dx0}, \texttt{dx1}, \texttt{dx2}) to 
+proper motion in right ascension $\mu_{\alpha^*}$ and declination $\mu_{\delta}$, 
+one can use the following formulas:
+
+\begin{equation}
+\begin{aligned}
+	xy &= \sqrt{\texttt{x0}^2 + \texttt{x1}^2}; \\
+	\vec{p} &= \left(-\frac{\texttt{x1}}{xy}, \frac{\texttt{x0}}{xy}, 0.\right); \\
+	\vec{q} &= \left(-\frac{\texttt{x0} \cdot \texttt{x2}}{xy}, -\frac{\texttt{x1} \cdot \texttt{x2}}{xy}, xy\right);\\
+	\mu_{\alpha^*} &= \vec{p} \cdot \left(\texttt{dx0}, \texttt{dx1}, \texttt{dx2}\right); \\
+	\mu_{\delta} &= \vec{q} \cdot \left(\texttt{dx0}, \texttt{dx1}, \texttt{dx2}\right);
+\end{aligned}
+\end{equation}
+
+where $\mu_{\alpha^*}\equiv\mu_{\alpha}\cos{(\delta)}$.
 
 \begin{table}[p]
-\begin{tabular}{llllp{55mm}}\toprule
+\begin{tabular}{llllp{75mm}}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-hip            &  0 & int                & 3 & Hipparcos catalogue number\\%\midrule
-component\_ids &  3 & unsigned char      & 1 & index to an array of catalogue number suffixes. The list is read from the
-                                               \file{stars\_hip\_component\_ids.cat} file. The value of this field turns out to be 
-											   the line number in the file - 1\\%\midrule
-x0             &  4 & int                & 4 & position of the star relative to the central point in the star's zone, in axis 1\\%\midrule
-x1             &  8 & int                & 4 & position of the star relative to the central point in the star's zone, in axis 2\\%\midrule
-b\_v           & 12 & unsigned char      & 1 & magnitude level in B-V colour. This value refers to one of 256 discrete steps 
-                                               in the magnitude range for the file\\%\midrule
-mag            & 13 & unsigned char      & 1 & magnitude level in the V-I colour. This value refers to one of 256 discrete steps 
-                                               in the magnitude range for the file\\%\midrule
-sp\_int        & 14 & unsigned short int & 2 & index into an array of spectral type descriptions 
-                                               which is taken from the file \file{stars\_hip\_sp.cat}, the index corresponds to the 
-											   line number in the file - 1\\%\midrule
-dx0            & 16 & int                & 4 & proper motion of the star in axis 1\\%\midrule
-dx1            & 20 & int                & 4 & proper motion of the star in axis 2\\%\midrule
-plx            & 24 & int                & 4 & parallax of the star. To get the actual value, divide by 10000.\\\bottomrule
+gaia\_id       &  0 & long long          & 8 & Gaia source id\\%\midrule
+x0             &  8 & int                & 4 & Cartesian x position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\%\midrule
+x1             & 12 & int                & 4 & Cartesian y position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\%\midrule
+x2             & 16 & int                & 4 & Cartesian z position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\%\midrule
+dx0            & 20 & int                & 4 & First component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\%\midrule
+dx1            & 24 & int                & 4 & Second component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\%\midrule
+dx2            & 28 & int                & 4 & Third component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\%\midrule
+b\_v           & 32 & short              & 2 & $B-V$ colour in milli-mag unit.\\%\midrule
+mag            & 34 & short              & 2 & $V$-band magnitude in milli-mag unit.\\%\midrule
+plx            & 36 & unsigned short     & 2 & parallax of the star in 0.02 mas unit.\\%\midrule
+plx\_err       & 38 & unsigned short     & 2 & parallax error of the star in 0.01 mas unit.\\%\midrule
+rv             & 40 & short              & 2 & radial velocity of the star in 0.1 km/s unit.\\%\midrule
+sp\_int        & 42 & unsigned short     & 2 & index into an array of spectral type descriptions 
+                                               which is taken from the file \file{stars\_hip\_sp.cat}, the index corresponds to the
+                                               line number in the file - 1\\%\midrule
+obtype	       & 44 & unsigned char      & 1 & object type classification index. The index corresponds to the line number in the file \file{object\_types\_v*.cat} - 1.\\%\midrule
+hip            & 45 & int                & 3 & Hipparcos catalogue number with component ID (e.g. A, B, C...)\\\bottomrule
 \end{tabular}
 \caption{Star Data Record Type 0}
 \label{tab:StarDataRecord0}
@@ -243,14 +259,15 @@ plx            & 24 & int                & 4 & parallax of the star. To get the 
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset}& \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-x0   &  0      & int          & 20 bits & position of the star relative to the central point in the star's zone, in axis 1\\%\midrule
-x1   & 20 bits & int          & 20 bits & position of the star relative to the central point in the star's zone, in axis 2\\%\midrule
-dx0  & 40 bits & int          & 14 bits & proper motion of the star in axis 1\\%\midrule
-dx1  & 54 bits & int          & 14 bits & proper motion of the star in axis 2\\%\midrule
-b\_v & 68 bits & unsigned int &  7 bits & magnitude level in B-V colour. This value refers to one of 128 discrete steps 
-                                          in the magnitude range for the file\\%\midrule
-mag  & 75 bits & unsigned int &  5 bits & magnitude level in the V-I colour. This value refers to one of 32 discrete steps 
-                                          in the magnitude range for the file\\\bottomrule
+gaia\_id       &  0 & long long          & 8 & Gaia source id\\%\midrule
+x0             &  8 & int                & 4 & Right ascension $\alpha$ of the star in mas unit.\\%\midrule
+x1             & 12 & int                & 4 & Declination $\delta$ of the star in mas unit.\\%\midrule
+dx0            & 16 & int                & 4 & Proper motion $\mu_{\alpha}$ of the star in $\mu$as/year\\%\midrule
+dx1            & 20 & int                & 4 & Proper motion $\mu_{\delta}$ of the star in $\mu$as/year\\%\midrule
+b\_v           & 24 & short              & 2 & $B-V$ colour in milli-mag unit.\\
+mag            & 26 & short              & 2 & $V$-band magnitude in milli-mag unit.\\
+plx            & 28 & unsigned short     & 2 & parallax of the star in 0.01 mas unit.\\
+plx\_err       & 30 & unsigned short     & 2 & parallax error of the star in 0.01 mas unit.\\\bottomrule
 \end{tabularx}
 \caption{Star Data Record Type 1}
 \label{tab:StarDataRecord1}
@@ -259,12 +276,11 @@ mag  & 75 bits & unsigned int &  5 bits & magnitude level in the V-I colour. Thi
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} & \emph{Description}\\\midrule
-x0   & 0       & int          & 18 bits & position of the star relative to the central point in the star's zone, in axis 1\\%\midrule
-x1   & 18 bits & int          & 18 bits & position of the star relative to the central point in the star's zone, in axis 2\\%\midrule
-b\_v & 36 bits & unsigned int &  7 bits & magnitude level in B-V colour. This value refers to one of 128 discrete steps 
-                                          in the magnitude range for the file\\%\midrule
-mag  & 43 bits & unsigned int &  5 bits & magnitude level in the V-I colour. This value refers to one of 32 discrete steps 
-                                          in the magnitude range for the file\\\bottomrule
+gaia\_id       &  0 & long long          & 8 & Gaia source id\\%\midrule
+x0             &  8 & int                & 3 & Right ascension $\alpha$ of the star in 0.1 arcsecond unit.\\%\midrule
+x1             & 11 & int                & 3 & Declination $\delta$ of the star in 0.1 arcsecond unit.\\%\midrule
+b\_v           & 14 & unsigned short     & 1 & $B-V$ colour in 25 milli-mag unit offset by $+1$ mag.\\
+mag            & 15 & unsigned short     & 1 & $V$-band magnitude in 20 milli-mag unit offset by $-16$ mag.\\\bottomrule
 \end{tabularx}
 \caption{Star Data Record Type 2}
 \label{tab:StarDataRecord2}
@@ -275,7 +291,7 @@ mag  & 43 bits & unsigned int &  5 bits & magnitude level in the V-I colour. Thi
 \label{sec:StarCatalogues:VariableStars}
 
 Since version 0.12.2 Stellarium supports the subset of variable stars
-from GCVS\footnote{\url{http://www.sai.msu.su/gcvs/gcvs/}} which have  HIP
+from GCVS\footnote{\url{http://www.sai.msu.su/gcvs/gcvs/}} which have HIP
 identificators (i.e., stars from the Hipparcos catalog). Stellarium's Catalog
 of Variable Stars is based on the \citetp{samus}.
 %\textbf{General Catalogue of Variable Stars} 

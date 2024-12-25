@@ -96,7 +96,7 @@ public:
 	QString getEnglishName(void) const override;
 
 protected:
-	QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const override;
+	QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1, const float& magOffset=0.f) const override;
 
 private:
 	bool initialized;
