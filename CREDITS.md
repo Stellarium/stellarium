@@ -416,8 +416,7 @@
 	4.33 Images of PGC6830, PGC29653, UGC5373 from Lowell Observatory
 	     http://www2.lowell.edu/
 	     License: public domain
-	4.34 Images of M59, M60, M89, IC2220, IC2631, NGC1433,
-	     NGC2442, NGC3572, PGC10074,
+	4.34 Images of M89, IC2220, IC2631, NGC1433, NGC2442, NGC3572, PGC10074,	     
 	     RCW32, RCW38, RCW49, Fornax Cluster, Virgo Cluster
 	     from ESO/Digitized Sky Survey 2
 	     http://eso.org/public/
