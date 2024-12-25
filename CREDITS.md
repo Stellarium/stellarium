@@ -416,7 +416,7 @@
 	4.33 Images of PGC6830, PGC29653, UGC5373 from Lowell Observatory
 	     http://www2.lowell.edu/
 	     License: public domain
-	4.34 Images of M89, IC2220, IC2631, NGC1433, NGC2442, NGC3572, PGC10074,	     
+	4.34 Images of M89, IC2220, IC2631, NGC1433, NGC2434, NGC3572, PGC10074,	     
 	     RCW32, RCW38, RCW49, Fornax Cluster, Virgo Cluster
 	     from ESO/Digitized Sky Survey 2
 	     http://eso.org/public/
@@ -750,7 +750,7 @@
 	      from KPNO/NOIRLab/NSF/AURA/Ray and Emily Magnani/Adam Block
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.119 Images of M90, M109, IC348, NGC80, NGC147, NGC404, NGC1491, NGC1569,
+	4.119 Images of M90, M109, IC348, IC5076, NGC80, NGC147, NGC404, NGC1491, NGC1569,
 	      NGC1624, NGC7026, NGC7048
 	      from Radek Chromik, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
@@ -808,7 +808,7 @@
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International 
 	4.132 Images of IC1505, NGC70, NGC529, NGC1530, NGC2366, NGC6621, NGC6951,
-	      NGC7741, Jones1
+	      NGC7139, NGC7741, Jones1
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
@@ -816,10 +816,18 @@
 	      from Manuel Peitsch, post-processing: Sun Shuwei
 	      https://manuel-astro.ch/
 	      License: Creative Commons Attribution 4.0 International
-	4.134 Images of NGC2899
+	4.134 Images of NGC2442, NGC2899
 	      from ESO, post-processing: Sun Shuwei
 	      http://eso.org/public/
 	      License: Creative Commons Attribution 4.0 International
+	4.135 Images of NGC2579
+	      from Legacy Surveys / D.Lang (Perimeter Institute) & Meli thev, post-processing: Sun Shuwei
+	      https://www.legacysurvey.org/acknowledgment
+	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.135 Images of Sh2-113
+	      from Chuck Ayoub, post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
 ```
 
 ## Appendix

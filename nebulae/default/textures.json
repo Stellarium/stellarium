@@ -1599,6 +1599,14 @@
 		"maxBrightness" : 13
 	},
 	{
+		"imageCredits" : {"short" : "ESO and Digitized Sky Survey 2","infoUrl": "https://www.eso.org/public/images/eso1115c/"}, 
+		"imageUrl" : "n2434.png",
+		"worldCoords" :	[[[113.866, -69.3443],[113.5413,-69.3384],[113.5595,-69.2239],[113.8826,-69.2301]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
+		"minResolution" : 0.2222381739, 
+		"maxBrightness" : 14.5 
+	},
+	{
 		"imageCredits" : {"short" : "Adam Block/Mount Lemmon SkyCenter/University of Arizona","infoUrl": "http://www.caelumobservatory.com/gallery/n2440.shtml"},
 		"imageUrl" : "n2440.png",
 		"worldCoords" : [[[115.5008,-18.2319], [115.4581,-18.2311], [115.4584,-18.191], [115.5013,-18.1914]]],
@@ -1607,9 +1615,9 @@
 		"maxBrightness" : 10.5
 	},
 	{
-		"imageCredits" : {"short" : "ESO and Digitized Sky Survey 2","infoUrl": "https://www.eso.org/public/images/eso1115c/"}, 
+		"imageCredits" : {"short" : "ESO, post-processing: Sun Shuwei","infoUrl": "www.eso.org/public/images/eso1115a/"}, 
 		"imageUrl" : "n2442.png",
-		"worldCoords" : [[[114.6565,-69.6156], [113.561,-69.6154], [113.5688,-69.2341], [114.6485,-69.234]]],
+		"worldCoords" :	[[[114.6115, -69.6624],[113.8318,-69.6634],[113.8339,-69.3926],[114.6035,-69.3917]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
 		"minResolution" : 0.2222381739, 
 		"maxBrightness" : 14.5 
@@ -1650,6 +1658,14 @@
 		"imageCredits" : {"short" : "ESO/J.Perez","infoUrl": "https://www.eso.org/public/images/perez-ngc_2547/"}, 
 		"imageUrl" : "n2547.png",
 		"worldCoords" : [[[122.9611,-49.4555], [122.0946,-49.4552], [122.0991,-48.8922], [122.9556,-48.8924]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
+		"minResolution" : 0.2165786418, 
+		"maxBrightness" : 14.3
+	},
+	{
+		"imageCredits" : {"short" : "Legacy Surveys / D.Lang (Perimeter Institute) & Meli thev, post-processing: Sun Shuwei","infoUrl": "https://www.legacysurvey.org/acknowledgment"}, 
+		"imageUrl" : "n2579.png",
+		"worldCoords" : [[[125.2589,-36.2594], [125.1662,-36.2595], [125.1664,-36.185], [125.2586,-36.1848]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
 		"minResolution" : 0.2165786418, 
 		"maxBrightness" : 14.3
@@ -3304,6 +3320,14 @@
 		"maxBrightness" : 13.0
 	},
 	{
+		"imageCredits": {"short" : "Juan lacruz, post-processing: Sun Shuwei", "infoUrl": "https://commons.wikimedia.org/wiki/File:NGC_7139_J87.png"},
+		"imageUrl" : "n7139.png",
+		"worldCoords" :	[[[326.5981, 63.7623],[326.4704,63.7629],[326.4716,63.8193],[326.5993,63.8188]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1216,
+		"maxBrightness" : 13.0
+	},
+	{
 		"imageCredits": {"short" : "Dylan O'Donnell", "infoUrl": "https://deography.com/the-eye-of-god-helix-nebula-ngc-7293/"},
 		"imageUrl" : "n7293.png",
 		"worldCoords" :	[[[337.6491,-21.0648], [337.1525,-21.0649], [337.1528,-20.6016], [337.6478,-20.6015]]],
@@ -3744,6 +3768,14 @@
 		"maxBrightness" : 13.4
 	},
 	{
+		"imageCredits" : {"short" : "Radek Chromik, post-processing: Sun Shuwei","infoUrl": "https://www.deepskycorner.ch/authors.de.php/rc"},
+		"imageUrl" : "ic5076.png",
+		"worldCoords" :	[[[314.1443, 47.2487],[313.717,47.2505],[313.7188,47.5399],[314.1477,47.5385]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 13.4
+	},
+	{
 		"imageCredits" : {"short" : "Hewholooks","infoUrl": "https://commons.wikimedia.org/wiki/File:CocoonHunterWilson.jpg"},
 		"imageUrl" : "ic5146.png",
 		"worldCoords" : [[[328.5582,47.1141], [328.1111,47.1124], [328.1078,47.4172], [328.5582,47.4183]]],
@@ -4076,6 +4108,14 @@
 		"imageCredits" : {"short" : "Cristina Cellini","infoUrl": "https://commons.wikimedia.org/wiki/File:Sh2-106_20160717.jpg"},
 		"imageUrl" : "sh2-106.png",
 		"worldCoords" : [[[306.9541,37.2958], [306.7559,37.2958], [306.7559,37.4534], [306.9541,37.4534]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13.5
+	},
+	{
+		"imageCredits" : {"short" : "Chuck Ayoub, post-processing: Sun Shuwei","infoUrl": "https://commons.wikimedia.org/wiki/File:Flying-Dragon-Nebula.png"},
+		"imageUrl" : "sh2-113.png",
+		"worldCoords" :	[[[321.2716, 38.0691],[319.5199,37.9153],[319.3045,39.294],[321.0903,39.4502]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2222381739,
 		"maxBrightness" : 13.5
