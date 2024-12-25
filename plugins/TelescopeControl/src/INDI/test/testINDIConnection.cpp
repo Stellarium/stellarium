@@ -23,7 +23,7 @@
 #include <string>
 
 #include "INDIConnection.hpp"
-#include <libs/indidevice/basedevice.h>
+#include <libindi/basedevice.h>
 
 void TestINDIConnection::deafultCoordinates()
 {

@@ -189,6 +189,7 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND ENABLE_INDI)
                 ${indiclient_SOURCE_DIR}/libindi
                 ${indiclient_SOURCE_DIR}/libs
                 PUBLIC
+                ${CMAKE_CURRENT_SOURCE_DIR}/fake-indi
                 ${CMAKE_CURRENT_BINARY_DIR}
                 ${indiclient_SOURCE_DIR}
                 ${indiclient_SOURCE_DIR}/libs/sockets
