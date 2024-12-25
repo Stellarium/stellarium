@@ -828,7 +828,7 @@
 	      from Chuck Ayoub, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.136 Images of NGC5286, NGC6397
+	4.136 Images of NGC5286, NGC6397, NGC6541
 	      from Tian Mai, Image processing: Sun Shuwei
 	      License: Creative Commons Attribution 4.0 International
 ```
