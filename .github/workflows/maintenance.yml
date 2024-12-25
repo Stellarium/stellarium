@@ -1,5 +1,5 @@
 #
-# See https://github.com/marketplace/actions/label-conflicting-pull-requests
+# Various maintenance operations
 #
 name: "Maintenance"
 on:
@@ -10,9 +10,14 @@ on:
   # In `pull_request` we wouldn't be able to change labels of fork PRs
   pull_request_target:
     types: [synchronize]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
-  main:
+  #
+  # See https://github.com/marketplace/actions/label-conflicting-pull-requests
+  #
+  check-conflicts:
     name: "Check conflicts"
     runs-on: ubuntu-latest
     if: "!contains(github.actor, 'transifex')"
@@ -24,3 +29,18 @@ jobs:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           commentOnDirty: "This pull request has conflicts, please resolve those before we can evaluate the pull request."
           commentOnClean: "Conflicts have been resolved. A maintainer will review the pull request shortly."
+
+  #
+  # See https://github.com/marketplace/actions/check-crlf
+  #
+  check-crlf:
+    name: "Check CRLF line endings"
+    runs-on: ubuntu-latest
+    if: "!contains(github.actor, 'transifex')"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check CRLF line endings
+        uses: erclu/check-crlf@v1
+
