@@ -41,11 +41,13 @@ struct ZoneData
 	{
 		return size;
 	}
-	Vec3f center;	// Normalized center of the triangle
-	Vec3f axis0;	// Normalized direction vector of axis 0 (use for storing stars position in 2D relative to this axis)
-	Vec3f axis1;	// Normalized direction vector of axis 0 (use for storing stars position in 2D relative to this axis)
 	int size;		// Number of stars in the stars array
+	bool isGlobal = false;	// True if the zone is a global zone
 	void *stars;
+	// we don't need them anymore for the new star catalogs
+	// Vec3f center;	// Normalized center of the triangle
+	// Vec3f axis0;	// Normalized direction vector of axis 0 (use for storing stars position in 2D relative to this axis)
+	// Vec3f axis1;	// Normalized direction vector of axis 0 (use for storing stars position in 2D relative to this axis)
 };
 
 //! @struct SpecialZoneData

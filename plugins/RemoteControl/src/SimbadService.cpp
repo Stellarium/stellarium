@@ -66,7 +66,7 @@ public:
 
 		loop.exec();
 		//at this point, the reply is finished
-		//and we can extract information using getReply
+		//and we can extract information using getResults
 		status = reply->getCurrentStatus();
 		statusString = reply->getCurrentStatusString();
 		errorString = reply->getErrorString();

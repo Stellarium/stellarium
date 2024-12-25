@@ -36,7 +36,7 @@ class QSettings;
 class ZoneArray;
 struct HipIndexStruct;
 
-static const int RCMAG_TABLE_SIZE = 4096;
+static const int RCMAG_TABLE_SIZE = 512;
 
 typedef struct
 {
@@ -69,7 +69,6 @@ typedef struct
 } crossid;
 
 typedef QMap<StelObjectP, float> StelACStarData;
-typedef QPair<float, float> PMData;
 
 //! @class StarMgr
 //! Stores the star catalogue data.
@@ -250,6 +249,12 @@ public:
 	//! one was not found.
 	StelObjectP searchHP(int hip) const;
 
+	//! Search by Gaia source id.
+	//! @param source_id the Gaia source id of the star which is required.
+	//! @return the requested StelObjectP or an empty objecy if the requested
+	//! one was not found.
+	StelObjectP searchGaia(int64_t source_id) const;
+
 	//! Get the (translated) common name for a star with a specified
 	//! Hipparcos catalogue number.
 	//! @param hip The Hipparcos number of star
@@ -371,18 +376,9 @@ public:
 	//! @return separation in arcseconds
 	static float getWdsLastSeparation(int hip);
 
-	//! Get the parallax error for star with a Hipparcos catalogue number.
-	//! @param hip The Hipparcos number of star
-	//! @return the parallax error (mas)
-	static float getPlxError(int hip);
-
-	//! Get the proper motion data for star with a Hipparcos catalogue number.
-	//! @param hip The Hipparcos number of star
-	//! @return the proper motion (mas/yr for RA and Dec)
-	static PMData getProperMotion(int hip);
-
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
+	static QString convertToOjectTypes(int index);
 
 	QVariantList getCatalogsDescription() const {return catalogsDescription;}
 
@@ -454,14 +450,6 @@ private:
 	//! @param the path to a file containing the cross-identification data.
 	void loadCrossIdentificationData(const QString& crossIdFile);
 
-	//! Loads parallax error data from a file.
-	//! @param the path to a file containing the parallax error data.
-	void loadPlxErr(const QString& plxErrFile);
-
-	//! Loads proper motion data from a file.
-	//! @param the path to a file containing the proper motion data.
-	void loadPMData(const QString& pmDataFile);
-
 	//! Gets the maximum search level.
 	// TODO: add a non-lame description - what is the purpose of the max search level?
 	int getMaxSearchLevel() const;
@@ -532,9 +520,6 @@ private:
 	static QMap<int, int> saoStarsIndex;
 	static QMap<int, int> hdStarsIndex;
 	static QMap<int, int> hrStarsIndex;
-
-	static QHash<int, float> hipParallaxErrors;
-	static QHash<int, PMData> hipPMData;
 
 	static QHash<int, QString> referenceMap;
 

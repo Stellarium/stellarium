@@ -1367,7 +1367,6 @@ void SearchDialog::gotoObjectWithType(const QModelIndex &modelIndex)
 	objType.replace("Pulsars","Pulsar");
 	objType.replace("Quasars","Quasar");
 	objType.replace("MeteorShowers","MeteorShower");
-	objType.replace("MissingStars","MissingStar");
 
 	gotoObject(modelIndex.model()->data(modelIndex, Qt::DisplayRole).toString(), objType);
 }

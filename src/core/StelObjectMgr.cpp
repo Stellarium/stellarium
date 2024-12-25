@@ -525,18 +525,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 		const double dy = y - win.v[1];
 		prj->unProject(x+dx, y+dy, v);
 
-		// Apply annual aberration (backwards). Explan. Suppl. 2013, (7.38)
-		Vec3d v2000(v);
-		if (core->getUseAberration())
-		{
-			v2000.normalize(); // just to be sure...
-			Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-			StelCore::matVsop87ToJ2000.transfo(vel);
-			vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
-			v2000-=vel;
-			v2000.normalize();
-		}
-		return cleverFind(core, v2000);
+		return cleverFind(core, v);
 	}
 	return StelObjectP();
 }

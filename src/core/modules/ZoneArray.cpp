@@ -38,49 +38,58 @@ static unsigned int stel_bswap_32(unsigned int val)
 	       (((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
 }
 
+static float stel_bswap_32f(int val)
+{
+    // Create a union to access the float as an unsigned int
+    union {
+        float f;
+        unsigned int i;
+    } u;
+
+    // Assign the float value to the union
+    u.i = val;
+
+    // Perform the byte swap on the integer representation
+    u.i = (((u.i) & 0xff000000) >> 24) | (((u.i) & 0x00ff0000) >>  8) |
+          (((u.i) & 0x0000ff00) <<  8) | (((u.i) & 0x000000ff) << 24);
+
+    // Return the float value from the union
+    return u.f;
+}
+
 static const Vec3f north(0,0,1);
 
 void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2)
 {
-	// initialize center,axis0,axis1:
-	ZoneData &z(zones[index]);
-	z.center = c0+c1+c2;
-	z.center.normalize();
-	z.axis0 = north ^ z.center;
-	z.axis0.normalize();
-	z.axis1 = z.center ^ z.axis0;
-	
-	// Initialize star_position_scale. This scale is used to multiply stars position
-	// encoded as integers so that it optimize precision over the triangle.
-	// It has to be computed for each triangle because the relative orientation of the 2 axis is different for each triangle.
-	float mu0,mu1,f,h;
-	mu0 = (c0-z.center)*z.axis0;
-	mu1 = (c0-z.center)*z.axis1;
-	f = 1.f/std::sqrt(1.f-mu0*mu0-mu1*mu1);
-	h = std::fabs(mu0)*f;
-	if (star_position_scale < h) star_position_scale = h;
-	h = std::fabs(mu1)*f;
-	if (star_position_scale < h) star_position_scale = h;
-	mu0 = (c1-z.center)*z.axis0;
-	mu1 = (c1-z.center)*z.axis1;
-	f = 1.f/std::sqrt(1.f-mu0*mu0-mu1*mu1);
-	h = std::fabs(mu0)*f;
-	if (star_position_scale < h) star_position_scale = h;
-	h = std::fabs(mu1)*f;
-	if (star_position_scale < h) star_position_scale = h;
-	mu0 = (c2-z.center)*z.axis0;
-	mu1 = (c2-z.center)*z.axis1;
-	f = 1.f/std::sqrt(1.f-mu0*mu0-mu1*mu1);
-	h = std::fabs(mu0)*f;
-	if (star_position_scale < h) star_position_scale = h;
-	h = std::fabs(mu1)*f;
-	if (star_position_scale < h) star_position_scale = h;
+	// shut compiler up about unused variables
+	(void)index;
+	(void)c0;
+	(void)c1;
+	(void)c2;
+
+	// we don't need them anymore for the new star catalogs
+	// initialize zone:
+	// ZoneData &z(zones[index]);
+	// z.center = c0+c1+c2;
+	// z.center.normalize();
+	// z.axis0 = north ^ z.center;
+	// z.axis0.normalize();
+	// z.axis1 = z.center ^ z.axis0;
 }
 
 static inline int ReadInt(QFile& file, unsigned int &x)
 {
 	const int rval = (4 == file.read(reinterpret_cast<char*>(&x), 4)) ? 0 : -1;
 	return rval;
+}
+
+static inline int ReadFloat(QFile& file, float &x)
+{
+	unsigned int temp;
+	if (4 != file.read(reinterpret_cast<char*>(&temp), 4))
+		return -1;
+	x = *reinterpret_cast<float*>(&temp);
+	return 0;
 }
 
 #if (!defined(__GNUC__))
@@ -99,15 +108,16 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		return Q_NULLPTR;
 	}
 	dbStr = "Loading star catalog: " + QDir::toNativeSeparators(catalogFilePath) + " - ";
-	unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
+	unsigned int magic,major,minor,type,level,mag_min;
+	float epochJD;
 	if (ReadInt(*file,magic) < 0 ||
 			ReadInt(*file,type) < 0 ||
 			ReadInt(*file,major) < 0 ||
 			ReadInt(*file,minor) < 0 ||
 			ReadInt(*file,level) < 0 ||
 			ReadInt(*file,mag_min) < 0 ||
-			ReadInt(*file,mag_range) < 0 ||
-			ReadInt(*file,mag_steps) < 0)
+			ReadFloat(*file,epochJD) < 0
+		)
 	{
 		dbStr += "error - file format is bad.";
 		qDebug().noquote() << dbStr;
@@ -135,8 +145,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		minor = stel_bswap_32(minor);
 		level = stel_bswap_32(level);
 		mag_min = stel_bswap_32(mag_min);
-		mag_range = stel_bswap_32(mag_range);
-		mag_steps = stel_bswap_32(mag_steps);
+		epochJD = stel_bswap_32f(epochJD);
 	}
 	else if (magic == FILE_MAGIC)
 	{
@@ -162,6 +171,13 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		qDebug().noquote() << dbStr;
 		return Q_NULLPTR;
 	}
+	if (epochJD != STAR_CATALOG_JDEPOCH)
+	{
+		qDebug().noquote() << epochJD << "!=" << STAR_CATALOG_JDEPOCH;
+		dbStr += "warning - Star catalog epoch is not what is expected in Stellarium";
+		qDebug().noquote() << dbStr;
+		return Q_NULLPTR;
+	}
 	ZoneArray *rval = Q_NULLPTR;
 	dbStr += QString("%1_%2v%3_%4; ").arg(level).arg(type).arg(major).arg(minor);
 
@@ -174,7 +190,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			else
 			{
-				rval = new HipZoneArray(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min), static_cast<int>(mag_range), static_cast<int>(mag_steps));
+				rval = new HipZoneArray(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min));
 			}
 			break;
 		case 1:
@@ -184,7 +200,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			else
 			{
-				rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min), static_cast<int>(mag_range), static_cast<int>(mag_steps));
+				rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min));
 			}
 			break;
 		case 2:
@@ -194,7 +210,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			else
 			{
-				rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min), static_cast<int>(mag_range), static_cast<int>(mag_steps));
+				rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, static_cast<int>(level), static_cast<int>(mag_min));
 			}
 			break;
 		default:
@@ -219,11 +235,8 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	return rval;
 }
 
-ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
-			 int mag_range, int mag_steps)
-			: fname(fname), level(level), mag_min(mag_min),
-			  mag_range(mag_range), mag_steps(mag_steps),
-			  star_position_scale(0.0), nr_of_stars(0), zones(Q_NULLPTR), file(file)
+ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min)
+			: fname(fname), level(level), mag_min(mag_min), nr_of_stars(0), zones(Q_NULLPTR), file(file)
 {
 	nr_of_zones = static_cast<unsigned int>(StelGeodesicGrid::nrOfZones(level));
 }
@@ -260,30 +273,34 @@ void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 				exit(1);
 			}
 			if (hip != 0)
-			{
-				hipIndex[hip].a = this;
-				hipIndex[hip].z = z;
-				hipIndex[hip].s = s;
+			{	
+				// check if a star is there already
+				if (hipIndex[hip].a)
+				{
+					// check if componentid is smaller or higher, we want smaller one (the main one)
+					// otherwise there can be case where Sirius B is stored as main star but not Sirius A
+					if (hipIndex[hip].s->getComponentIds() > s->getComponentIds())
+					{
+						hipIndex[hip].a = this;
+						hipIndex[hip].z = z;
+						hipIndex[hip].s = s;
+					}
+				}
+				else
+				{
+					hipIndex[hip].a = this;
+					hipIndex[hip].z = z;
+					hipIndex[hip].s = s;
+				}
 			}
 		}
 	}
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::scaleAxis()
-{
-	star_position_scale /= Star::MaxPosVal;
-	for (ZoneData *z=zones+(nr_of_zones-1);z>=zones;z--)
-	{
-		z->axis0 *= star_position_scale;
-		z->axis1 *= star_position_scale;
-	}
-}
-
-template<class Star>
 SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mmap,
-					 int level, int mag_min, int mag_range, int mag_steps)
-		: ZoneArray(file->fileName(), file, level, mag_min, mag_range, mag_steps),
+					 int level, int mag_min)
+		: ZoneArray(file->fileName(), file, level, mag_min),
 		  stars(Q_NULLPTR), mmap_start(Q_NULLPTR)
 {
 	if (nr_of_zones > 0)
@@ -308,6 +325,8 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 				nr_of_stars += tmp_spu_int32;
 				getZones()[z].size = static_cast<int>(tmp_spu_int32);
 			}
+			// last one is always the global zone
+			getZones()[nr_of_zones-1].isGlobal = true;
 		}
 		// delete zone_size before allocating stars
 		// in order to avoid memory fragmentation:
@@ -374,8 +393,6 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 				file->close();
 			}
 		}
-		// GZ: Some diagnostics to understand the undocumented vars around mag.
-		// qDebug() << "SpecialZoneArray: mag_min=" << mag_min << ", mag_steps=" << mag_steps << ", mag_range=" << mag_range ;
 	}
 }
 
@@ -412,19 +429,17 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 {
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	Vec3f vf;
-	static const double d2000 = 2451545.0;
-	const float movementFactor = static_cast<float>((M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25) / static_cast<double>(star_position_scale));
+	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 
 	const Extinction& extinction=core->getSkyDrawer()->getExtinction();
 	const bool withExtinction=drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f;
-	const float k = 0.001f*static_cast<float>(mag_range)/static_cast<float>(mag_steps); // from StarMgr.cpp line 654
 	
 	// Allow artificial cutoff:
 	// find the (integer) mag at which is just bright enough to be drawn.
 	int cutoffMagStep=limitMagIndex;
 	if (drawer->getFlagStarMagnitudeLimit())
 	{
-		cutoffMagStep = (static_cast<int>(drawer->getCustomStarMagnitudeLimit()*1000.0) - mag_min)*mag_steps/mag_range;
+		cutoffMagStep = static_cast<int>((drawer->getCustomStarMagnitudeLimit()*1000.0 - (mag_min - 7000.))*0.02);  // 1/(50 milli-mag)
 		if (cutoffMagStep>limitMagIndex)
 			cutoffMagStep = limitMagIndex;
 	}
@@ -433,19 +448,55 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	// Go through all stars, which are sorted by magnitude (bright stars first)
 	const SpecialZoneData<Star>* zoneToDraw = getZones() + index;
 	const Star* lastStar = zoneToDraw->getStars() + zoneToDraw->size;
+	bool globalzone;
 	for (const Star* s=zoneToDraw->getStars();s<lastStar;++s)
 	{
-		// Artificial cutoff per magnitude
-		if (s->getMag() > cutoffMagStep)
-			break;
-    
+		// check if this is a global zone
+		globalzone = zoneToDraw->isGlobal;
+		float starMag = s->getMag();
+		int magIndex = static_cast<int>((starMag - (mag_min - 7000.)) * 0.02);  // 1 / (50 milli-mag)
+
+		// first part is check for Star1 and is global zone, so to keep looping for long-range prediction
+		// second part is old behavior, to skip stars below you that are too faint to display for Star2 and Star3
+		if (magIndex > cutoffMagStep) { // should always use catalog magnitude, otherwise will mess up the order
+			if (fabs(dyrs) <= 5000. || !s->isVIP() || !globalzone)  // if any of these true, we should always break
+				break;
+		}
 		// Because of the test above, the star should always be visible from this point.
 		
+		// only recompute if has time dependence and time is far away
+		bool recomputeMag = (s->getPreciseAstrometricFlag() && (fabs(dyrs) > 5000.));
+		if (recomputeMag) { 
+			// don't do full solution, can be very slow, just estimate here	
+			// estimate parallax from radial velocity and total proper motion
+			double Plx = s->getPlx();
+			double vr = s->getRV();
+			Vec3d pmvec0(s->getDx0(), s->getDx1(), s->getDx2());
+			pmvec0 = pmvec0 * MAS2RAD;
+			double pmr0 = vr * Plx / (AU / JYEAR_SECONDS) * MAS2RAD;
+			double pmtotsqr =  (pmvec0[0] * pmvec0[0] + pmvec0[1] * pmvec0[1] + pmvec0[2] * pmvec0[2]);
+			double f = 1. / sqrt(1. + 2. * pmr0 * dyrs + (pmtotsqr + pmr0*pmr0)*dyrs*dyrs);
+			float magOffset = 5.f * log10(1/f);
+			starMag += magOffset * 1000.;
+			// if we reach here we might as well compute the position too
+			Vec3d r(s->getX0(), s->getX1(), s->getX2());
+			Vec3d u = (r * (1. + pmr0 * dyrs) + pmvec0 * dyrs) * f;
+			vf.set(u[0], u[1], u[2]);
+		}
+		// recompute magIndex with the new magnitude
+		magIndex = static_cast<int>((starMag - (mag_min - 7000.)) * 0.02);  // 1 / (50 milli-mag)
+
+		if (magIndex > cutoffMagStep) {  // check again with the new magIndex
+				continue;  // allow continue for other star that might became bright enough in the future
+		}
 		// Array of 2 numbers containing radius and magnitude
-		const RCMag* tmpRcmag = &rcmag_table[s->getMag()];
+		const RCMag* tmpRcmag = &rcmag_table[magIndex];
 		
-		// Get the star position from the array
-		s->getJ2000Pos(zoneToDraw, movementFactor, vf);
+		// Get the star position from the array, only do it if not already computed
+		// put it here because potentially cutoffMagStep bigger than magIndex and no computation needed
+		if (!recomputeMag) {
+			s->getJ2000Pos(dyrs, vf);
+		}
 
 		// Aberration: vf contains Equatorial J2000 position.
 		if (withAberration)
@@ -474,7 +525,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 				continue;
 		}
 
-		int extinctedMagIndex = s->getMag();
+		int extinctedMagIndex = magIndex;
 		float twinkleFactor=1.0f; // allow height-dependent twinkle.
 		if (withExtinction)
 		{
@@ -483,7 +534,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 			float extMagShift=0.0f;
 			extinction.forward(altAz, &extMagShift);
-			extinctedMagIndex = s->getMag() + static_cast<int>(extMagShift/k);
+			extinctedMagIndex += static_cast<int>(extMagShift/0.05f); // 0.05 mag MagStepIncrement
 			if (extinctedMagIndex >= cutoffMagStep || extinctedMagIndex<0) // i.e., if extincted it is dimmer than cutoff or extinctedMagIndex is negative (missing star catalog), so remove
 				continue;
 			tmpRcmag = &rcmag_table[extinctedMagIndex];
@@ -504,14 +555,13 @@ template<class Star>
 void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const Vec3d &v, double cosLimFov,
 					  QList<StelObjectP > &result)
 {
-	static const double d2000 = 2451545.0;
-	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25)/ static_cast<double>(star_position_scale);
+	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	Vec3f tmp;
 	Vec3f vf = v.toVec3f();
 	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
 	{
-		s->getJ2000Pos(z,static_cast<float>(movementFactor), tmp);
+		s->getJ2000Pos(dyrs, tmp);
 		tmp.normalize();
 		if (tmp*vf >= static_cast<float>(cosLimFov))
 		{
@@ -521,3 +571,44 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 	}
 }
 
+template<class Star>
+StelObjectP SpecialZoneArray<Star>::searchGaiaID(int index, const int64_t source_id, int &matched) const
+{
+	const SpecialZoneData<Star> *const z = getZones()+index;
+	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
+	{
+		if (s->getGaia() == source_id)
+		{
+			matched++;
+			return s->createStelObject(this,z);
+		}
+	}
+	return StelObjectP();
+}
+
+template<class Star>
+// this class is written for the unit test
+void SpecialZoneArray<Star>::searchGaiaIDepochPos(const int64_t source_id,
+                                                  float         dyrs,
+                                                  double &      RA,
+                                                  double &      DEC,
+                                                  double &      Plx,
+                                                  double &      pmra,
+                                                  double &      pmdec,
+                                                  double &      RV) const
+{
+   // loop throught each zone in the level which is 20 * 4 ** level + 1 as index
+   for (int i = 0; i < 20 * pow(4, (level)) + 1; i++) {
+      // get the zone data
+      const SpecialZoneData<Star> * const z = getZones() + i;
+      // loop through the stars in the zone
+      for (const Star * s = z->getStars(); s < z->getStars() + z->size; ++s) {
+         // check if the star has the same Gaia ID
+         if (s->getGaia() == source_id) {
+            // get the J2000 position of the star
+            s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RV, dyrs);
+            return;
+         }
+      }
+   }
+}

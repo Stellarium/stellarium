@@ -114,14 +114,14 @@ QString Supernova::getMaxBrightnessDate(const StelCore *core, const double JD) c
 	return StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(JD, core->getUTCOffset(JD));
 }
 
-QString Supernova::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals) const
+QString Supernova::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals, const float& magOffset) const
 {
 	const float maglimit = 21.f;
 	QString res;
 
 	if (flags&Magnitude)
 	{
-		if (getVMagnitude(core) <= maglimit)
+		if (getVMagnitude(core) + magOffset <= maglimit)
 			res = StelObject::getMagnitudeInfoString(core, flags, decimals);
 		else
 		{

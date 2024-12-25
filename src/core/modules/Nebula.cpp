@@ -161,7 +161,7 @@ Nebula::~Nebula()
 {
 }
 
-QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals) const
+QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals, const float& magOffset) const
 {
 	QString res;
 	const float mmag = qMin(vMag, bMag);
@@ -170,8 +170,8 @@ QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGro
 		QString emag = "";
 		QString fsys = "";
 		bool bmag = false;
-		float mag = getVMagnitude(core);
-		float mage = getVMagnitudeWithExtinction(core);
+		float mag = getVMagnitude(core) + magOffset;
+		float mage = getVMagnitudeWithExtinction(core, mag, magOffset);
 		bool hasAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
 		QString tmag = q_("Magnitude");
 		if (nType == NebDn || B_nb>0) // Dark nebulae or objects from Barnard catalog

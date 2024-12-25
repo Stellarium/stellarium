@@ -148,6 +148,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	Q_UNUSED(az_app)
 
 	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
+	const QString objType = StarMgr::convertToOjectTypes(s->getObjType());
 	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
 	const float wdsPA = StarMgr::getWdsLastPositionAngle(s->getHip());
 	const float wdsSep = StarMgr::getWdsLastSeparation(s->getHip());
@@ -159,8 +160,6 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	const double vEpoch = StarMgr::getGcvsEpoch(s->getHip());
 	const double vPeriod = StarMgr::getGcvsPeriod(s->getHip());
 	const int vMm = StarMgr::getGcvsMM(s->getHip());
-	const float plxErr = StarMgr::getPlxError(s->getHip());
-	const PMData properMotion = StarMgr::getProperMotion(s->getHip());
 	if (s->getHip())
 	{
 		if ((flags&Name) || (flags&CatalogNumber))
@@ -197,6 +196,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		const QString crossIndexData = StarMgr::getCrossIdentificationDesignations(hipq);
 		if (!crossIndexData.isEmpty())
 			designations.append(crossIndexData);
+
+		if (s->getGaia())
+			designations.append(QString("Gaia DR3 %1").arg(s->getGaia()));
 
 		if (!wdsSciName.isEmpty() && !sciName.contains(wdsSciName, Qt::CaseInsensitive))
 			designations.append(wdsSciName);
@@ -249,6 +251,15 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "</h2>";
 	}
+	if (s->getGaia() && !s->getHip()) {
+		if ((flags&Name) || (flags&CatalogNumber))
+			oss << "<h2>";
+		QString gaia_id;
+		gaia_id = QString("Gaia DR3 %1").arg(s->getGaia());
+		oss << gaia_id;
+		if ((flags&Name) || (flags&CatalogNumber))
+			oss << "</h2>";
+	}
 	if (flags&Name)
 	{
 		QStringList extraNames=getExtraInfoStrings(Name);
@@ -263,21 +274,40 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	}
 
 	QString stype = getObjectType();
+	QString objectTypeI18nStr = getObjectTypeI18n();
 	bool ebsFlag = stype.contains("eclipsing binary system");
 	if (flags&ObjectType)
 	{
+		QStringList stypes;
+		if (!objType.isEmpty())
+			stypes.append(objType);
 		if (!varType.isEmpty())
-			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getObjectTypeI18n(), varType) << "<br />";
+			stypes.append(varType);
+		if (stypes.size()>0)
+			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), objectTypeI18nStr, stypes.join(", ")) << "<br />";
 		else
-			oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
+			oss << QString("%1: <b>%2</b>").arg(q_("Type"), objectTypeI18nStr) << "<br />";
 
 		oss << getExtraInfoStrings(flags&ObjectType).join("");
 	}
 
-	oss << getMagnitudeInfoString(core, flags, 2);
+	double RA, DEC, pmra, pmdec;
+	double PlxErr = s->getPlxErr();
+	double Plx = s->getPlx();
+	double RadialVel = s->getRV();
+	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
+	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
 
-	if ((flags&AbsoluteMagnitude) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
-		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->getPlx())), 0, 'f', 2) << "<br />";
+	float magOffset = 0.f;
+	if (Plx)
+	{
+		magOffset = 5.f * log10((s->getPlx())/Plx);
+	} 
+	oss << getMagnitudeInfoString(core, flags, 2, magOffset);
+
+	if ((flags&AbsoluteMagnitude) && Plx && !isNan(Plx) && !isInf(Plx))
+		// should use Plx from getPlx because Plx can change with time, but not absolute magnitude
+		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.001*s->getPlx())), 0, 'f', 2) << "<br />";
 	if (flags&AbsoluteMagnitude)
 		oss << getExtraInfoStrings(AbsoluteMagnitude).join("");
 
@@ -308,50 +338,56 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	oss << getCommonInfoString(core, flags);
 
+	// kinda impossible for both parallax and parallax_err to be exactly 0, so they must just be missing
 	if (flags&Distance)
 	{
-		if (s->getPlx() && !isNan(s->getPlx()) && !isInf(s->getPlx()))
+		// do parallax SNR cut because we are calculating distance, inverse parallax is bad for >20% uncertainty
+		if ((Plx!=0) && (PlxErr!=0) && (Plx/PlxErr>5))
 		{
 			//TRANSLATORS: Unit of measure for distance - Light Years
 			QString ly = qc_("ly", "distance");
-			double k = AU/(SPEED_OF_LIGHT*86400*365.25);
-			double d = ((0.00001/3600.)*(M_PI/180));
-			double distance = k/(s->getPlx()*d);
-			if (plxErr>0.f && (0.01f*s->getPlx())>plxErr) // No distance when error of parallax is bigger than parallax!
-				oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(qAbs(k/((100*plxErr + s->getPlx())*d) - distance), 'f', 2), ly) << "<br />";
-			else
-				oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance, 'f', 2), ly) << "<br />";
+			double distance = PARSEC_LY * 1000. / Plx;
+			oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(distance * PlxErr / Plx, 'f', 2), ly) << "<br />";
 		}
 		oss << getExtraInfoStrings(Distance).join("");
 	}
 
-	if (flags&ProperMotion && (!isNan(properMotion.first) && !isNan(properMotion.second)))
+	// kinda impossible for both pm to be exactly 0, so they must just be missing
+	if ((flags&ProperMotion) && (pmra || pmdec))
 	{
-		float dx = properMotion.first;
-		float dy = properMotion.second;
-		float pa = std::atan2(dx, dy)*M_180_PIf;
+		float pa = std::atan2(pmra, pmdec)*M_180_PIf;
 		if (pa<0)
 			pa += 360.f;
 		oss << QString("%1: %2 %3 %4 %5°").arg(q_("Proper motion"),
-							QString::number(std::sqrt(dx*dx + dy*dy), 'f', 2),
+							QString::number(std::sqrt(pmra * pmra + pmdec * pmdec), 'f', 2),
 							qc_("mas/yr", "milliarc second per year"),
 							qc_("towards", "into the direction of"),
 							QString::number(pa, 'f', 1)) << "<br />";
 		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes"),
-							QString::number(dx, 'f', 2),
-							QString::number(dy, 'f', 2),
+							QString::number(pmra, 'f', 2),
+							QString::number(pmdec, 'f', 2),
 							qc_("mas/yr", "milliarc second per year")) << "<br />";
+	}
+
+	if (flags&Velocity)
+	{
+		if (RadialVel)
+		{
+			// TRANSLATORS: Unit of measure for speed - kilometers per second
+			QString kms = qc_("km/s", "speed");
+			oss << QString("%1: %2 %3").arg(q_("Radial velocity"), QString::number(RadialVel, 'f', 1), kms) << "<br />";
+		}
 	}
 
 	if (flags&Extra)
 	{
-		if (s->getPlx())
+		if (Plx!=0)
 		{
 			QString plx = q_("Parallax");
-			if (plxErr>0.f)
-				oss <<  QString("%1: %2%3%4 ").arg(plx, QString::number(0.01*s->getPlx(), 'f', 3), QChar(0x00B1), QString::number(plxErr, 'f', 3));
+			if (PlxErr>0.f)
+				oss <<  QString("%1: %2%3%4 ").arg(plx, QString::number(Plx, 'f', 3), QChar(0x00B1), QString::number(PlxErr, 'f', 3));
 			else
-				oss << QString("%1: %2 ").arg(plx, QString::number(0.01*s->getPlx(), 'f', 3));
+				oss << QString("%1: %2 ").arg(plx, QString::number(Plx, 'f', 3));
 			oss  << qc_("mas", "parallax") << "<br />";
 		}
 
@@ -449,11 +485,11 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 
 	map.insert("bV", s->getBV());
 
-	if (s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
+	if (s->getPlx())
 	{
-		map.insert("parallax", 0.00001*s->getPlx());
-		map.insert("absolute-mag", getVMagnitude(core)+5.f*(1.f+std::log10(0.00001f*s->getPlx())));
-		map.insert("distance-ly", (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.00001/3600)*(M_PI/180))));
+		map.insert("parallax", 0.001*s->getPlx());
+		map.insert("absolute-mag", getVMagnitude(core)+5.f*(std::log10(0.001*s->getPlx())));
+		map.insert("distance-ly", (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.001/3600)*(M_PI/180))));
 	}
 
 	if (s->getSpInt())
@@ -471,6 +507,122 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 
 	return map;
 }
+
+QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
+{
+	QString str;
+	QTextStream oss(&str);
+
+	if (s->getGaia()) {
+		if ((flags&Name) || (flags&CatalogNumber))
+			oss << "<h2>";
+		QString gaia_id;
+		gaia_id = QString("Gaia DR3 %1").arg(s->getGaia());
+		oss << gaia_id;
+		if ((flags&Name) || (flags&CatalogNumber))
+			oss << "</h2>";
+	}
+
+	if (flags&ObjectType)
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
+
+	oss << getMagnitudeInfoString(core, flags, 2);
+
+	double RA, DEC, pmra, pmdec;
+	double Plx = s->getPlx();
+	double PlxErr = s->getPlxErr();
+	double RadialVel = s->getRV();
+	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
+	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+	bool computeAstrometryFlag = (flags&ProperMotion) && (pmra || pmdec);
+
+	if ((flags&AbsoluteMagnitude) && s->getPlx())
+		// should use Plx from getPlx because Plx can change with time, but not absolute magnitude
+		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.001*s->getPlx())), 0, 'f', 2) << "<br />";
+
+	if (flags&Extra)
+		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(getBV(), 'f', 2)) << "<br />";
+	
+	oss << getCommonInfoString(core, flags);
+
+	// kinda impossible for both pm to be exactly 0, so they must just be missing
+	if (computeAstrometryFlag)
+	{
+		float pa = std::atan2(pmra, pmdec)*M_180_PIf;
+		if (pa<0)
+			pa += 360.f;
+		oss << QString("%1: %2 %3 %4 %5°").arg(q_("Proper motion"),
+							QString::number(std::sqrt(pmra * pmra + pmdec * pmdec), 'f', 2),
+							qc_("mas/yr", "milliarc second per year"),
+							qc_("towards", "into the direction of"),
+							QString::number(pa, 'f', 1)) << "<br />";
+		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes"),
+							QString::number(pmra, 'f', 2),
+							QString::number(pmdec, 'f', 2),
+							qc_("mas/yr", "milliarc second per year")) << "<br />";
+	}
+
+	// kinda impossible for both parallax and parallax_err to be exactly 0, so they must just be missing
+	if (flags&Distance)
+	{
+		// do parallax SNR cut because we are calculating distance, inverse parallax is bad for >20% uncertainty
+		if ((Plx!=0) && (PlxErr!=0) & (Plx/PlxErr > 5.))
+		{
+			//TRANSLATORS: Unit of measure for distance - Light Years
+			QString ly = qc_("ly", "distance");
+			double distance = PARSEC_LY * 1000. / Plx;
+			oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(distance * PlxErr / Plx, 'f', 2), ly) << "<br />";
+		}
+		if ((Plx!=0) && (PlxErr!=0))  // as long as having parallax, display it (but not neccessarily displaying inverse parallax)
+		{
+			QString plx = q_("Parallax");
+			if (PlxErr>0.f)
+				oss <<  QString("%1: %2%3%4 ").arg(plx, QString::number(Plx, 'f', 3), QChar(0x00B1), QString::number(PlxErr, 'f', 3));
+			else
+				oss << QString("%1: %2 ").arg(plx, QString::number(Plx, 'f', 3));
+			oss  << qc_("mas", "parallax") << "<br />";
+		}
+		oss << getExtraInfoStrings(Distance).join("");
+	}
+
+	oss << getSolarLunarInfoString(core, flags);
+
+	StelObject::postProcessInfoString(str, flags);
+
+	return str;
+}
+
+QString StarWrapper3::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
+{
+	QString str;
+	QTextStream oss(&str);
+
+	if (s->getGaia()) {
+		if ((flags&Name) || (flags&CatalogNumber))
+			oss << "<h2>";
+		QString gaia_id;
+		gaia_id = QString("Gaia DR3 %1").arg(s->getGaia());
+		oss << gaia_id;
+		if ((flags&Name) || (flags&CatalogNumber))
+			oss << "</h2>";
+	}
+
+	if (flags&ObjectType)
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
+
+	oss << getMagnitudeInfoString(core, flags, 2);
+
+	if (flags&Extra)
+		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(getBV(), 'f', 2)) << "<br />";
+	
+	oss << getCommonInfoString(core, flags);
+	oss << getSolarLunarInfoString(core, flags);
+
+	StelObject::postProcessInfoString(str, flags);
+
+	return str;
+}
+
 
 StelObjectP Star1::createStelObject(const SpecialZoneArray<Star1> *a, const SpecialZoneData<Star1> *z) const
 {
