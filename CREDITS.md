@@ -376,9 +376,10 @@
 	     License: Creative Commons Attribution 4.0 International
 	4.22 Images of SMC (Magellanic Clouds) from Albert Van
 	     Donkelaar
-	4.23 Images of NGC6726
-	     from Philip Montgomery
-	     http://www.kenthurst.bigpondhosting.com/
+	4.23 Images of NGC1261, NGC3201, NGC4833, NGC5286, NGC6101, NGC6124,
+	     NGC6352, NGC6397, NGC6541, NGC6752
+	     from Tian Mai, Image processing: Sun Shuwei
+	     License: Creative Commons Attribution 4.0 International
 	4.24 The Vesta and Ceres map was taken from USGS website
 	     https://astrogeology.usgs.gov/
 	     and colored by RVS. License: public domain.
@@ -458,7 +459,7 @@
  	4.43 Images of M33, M42, NGC253, NGC5566, LBN782, the Pleiades from HG731GZ
 	     License: Creative Commons Attribution 3.0 Unported
 	4.44 Images of M8, M17, M94, M104, IC434, IC2944, IC4628, NGC2264, NGC5367, NGC6357,
-	     NGC6334, NGC6726, NGC7293, LDN43, SMC (Hydrogen Alpha)
+	     NGC6334, NGC7293, LDN43, SMC (Hydrogen Alpha)
 	     from Dylan O'Donnell
 	     http://deography.com/
 	     License: public domain
@@ -812,7 +813,7 @@
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.133 Images of LBN437, LDN1251
+	4.133 Images of NGC6726, LBN437, LDN1251
 	      from Manuel Peitsch, post-processing: Sun Shuwei
 	      https://manuel-astro.ch/
 	      License: Creative Commons Attribution 4.0 International
@@ -828,10 +829,7 @@
 	      from Chuck Ayoub, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.136 Images of NGC1261, NGC3201, NGC4833, NGC5286, NGC6101, NGC6124, NGC6352,
-	      NGC6397, NGC6541, NGC6752
-	      from Tian Mai, Image processing: Sun Shuwei
-	      License: Creative Commons Attribution 4.0 International
+
 ```
 
 ## Appendix
