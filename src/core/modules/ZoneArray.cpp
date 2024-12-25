@@ -557,8 +557,8 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const Vec3d &v, double cosLimFov,
-					  QList<StelObjectP > &result)
+void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const Vec3d &v, const double withParallax, const Vec3d diffPos, 
+										  double cosLimFov, QList<StelObjectP > &result)
 {
 	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	const SpecialZoneData<Star> *const z = getZones()+index;
@@ -567,6 +567,7 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
 	{
 		s->getJ2000Pos(dyrs, tmp);
+		s->getPlxEffect(withParallax * s->getPlx(), tmp, diffPos);
 		tmp.normalize();
 		if (tmp*vf >= static_cast<float>(cosLimFov))
 		{

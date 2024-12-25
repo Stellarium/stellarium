@@ -29,6 +29,7 @@
 #include "Planet.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
+#include "SolarSystem.hpp"
 
 #include <QString>
 
@@ -79,6 +80,22 @@ protected:
 	{
 		Vec3f v;
 		s->getJ2000Pos((core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25, v);
+
+		double withParallax = core->getUseParallax() * core->getParallaxFactor();
+		Vec3d diffPos(0., 0., 0.);
+		if (withParallax) {
+			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+			const PlanetP earth = ssystem->getEarth();
+			// diff between earth location at STAR_CATALOG_JDEPOCH and current location
+			Vec3d earthPosCatalog = earth->getHeliocentricEclipticPos(STAR_CATALOG_JDEPOCH);
+			Vec3d PosNow = core->getCurrentPlanet()->getHeliocentricEclipticPos(core->getJDE());
+			double obliquity = earth->getRotObliquity(core->getJDE());  // need to always use Earth's obliquity because thats what the catalog is based on
+			// Transform from heliocentric ecliptic to equatorial coordinates
+			earthPosCatalog.set(earthPosCatalog[0], earthPosCatalog[1]*cos(obliquity)-earthPosCatalog[2]*sin(obliquity), earthPosCatalog[1]*sin(obliquity)+earthPosCatalog[2]*cos(obliquity));
+			PosNow.set(PosNow[0], PosNow[1]*cos(obliquity)-PosNow[2]*sin(obliquity), PosNow[1]*sin(obliquity)+PosNow[2]*cos(obliquity));
+			diffPos = earthPosCatalog - PosNow;
+			s->getPlxEffect(withParallax * s->getPlx(), v, diffPos);
+		}
 
 		// Aberration: Explanatory Supplement 2013, (7.38). We must get the observer planet speed vector in Equatorial J2000 coordinates.
 		if (core->getUseAberration())

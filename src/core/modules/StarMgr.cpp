@@ -1326,6 +1326,21 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	SphericalConvexPolygon c(e3, e2, e2, e0);
 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(c.getBoundingSphericalCaps(),lastMaxSearchLevel);
 
+	double withParallax = core->getUseParallax() * core->getParallaxFactor();
+	Vec3d diffPos(0., 0., 0.);
+	if (withParallax) {
+		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+		const PlanetP earth = ssystem->getEarth();
+		// diff between earth location at STAR_CATALOG_JDEPOCH and current location
+		Vec3d earthPosCatalog = earth->getHeliocentricEclipticPos(STAR_CATALOG_JDEPOCH);
+		Vec3d PosNow = core->getCurrentPlanet()->getHeliocentricEclipticPos(core->getJDE());
+		double obliquity = earth->getRotObliquity(core->getJDE());  // need to always use Earth's obliquity because thats what the catalog is based on
+		// Transform from heliocentric ecliptic to equatorial coordinates
+		earthPosCatalog.set(earthPosCatalog[0], earthPosCatalog[1]*cos(obliquity)-earthPosCatalog[2]*sin(obliquity), earthPosCatalog[1]*sin(obliquity)+earthPosCatalog[2]*cos(obliquity));
+		PosNow.set(PosNow[0], PosNow[1]*cos(obliquity)-PosNow[2]*sin(obliquity), PosNow[1]*sin(obliquity)+PosNow[2]*cos(obliquity));
+		diffPos = earthPosCatalog - PosNow;
+	}
+
 	// Iterate over the stars inside the triangles
 	f = cos(limFov * M_PI/180.);
 	for (auto* z : gridLevels)
@@ -1334,17 +1349,17 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 		int zone;
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 		{
-			z->searchAround(core, zone,v,f,result);
+			z->searchAround(core, zone, v, withParallax, diffPos, f, result);
 			//qDebug() << " " << zone;
 		}
 		//qDebug() << StelUtils::getEndLineChar() << "search border(" << it->first << "):";
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level); (zone = it1.next()) >= 0;)
 		{
-			z->searchAround(core, zone,v,f,result);
+			z->searchAround(core, zone, v, withParallax, diffPos, f, result);
 			//qDebug() << " " << zone;
 		}
 		// always search the last zone because it is a global zone
-		z->searchAround(core, (20<<(z->level<<1)), v, f, result);
+		z->searchAround(core, (20<<(z->level<<1)), v, withParallax, diffPos, f, result);
 	}
 	return result;
 }

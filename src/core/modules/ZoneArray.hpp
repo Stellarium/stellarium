@@ -94,8 +94,8 @@ public:
 	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {Q_UNUSED(hipIndex)}
 
 	//! Pure virtual method. See subclass implementation.
-	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
-							  QList<StelObjectP > &result) = 0;
+	virtual void searchAround(const StelCore* core, int index, const Vec3d &v, const double withParallax, const Vec3d diffPos,
+							  double cosLimFov, QList<StelObjectP > &result) = 0;
     virtual StelObjectP searchGaiaID(int index, const int64_t source_id, int& matched) const = 0;
 	virtual void searchGaiaIDepochPos(const int64_t source_id, float dyrs,
                                                   double & RA,
@@ -184,8 +184,8 @@ protected:
 	          const QVector<SphericalCap>& boundingCaps,
 	          const bool withAberration, const Vec3f vel, const double withParallax, const Vec3d diffPos) const override;
 
-	void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
-	                  QList<StelObjectP > &result) override;
+	void searchAround(const StelCore* core, int index, const Vec3d &v, const double withParallax, 
+					  const Vec3d diffPos, double cosLimFov, QList<StelObjectP > &result) override;
 	StelObjectP searchGaiaID(int index, const int64_t source_id, int& matched) const override;
  	void searchGaiaIDepochPos(const int64_t source_id, float dyrs,
                                                   double & RA,
