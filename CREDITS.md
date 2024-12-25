@@ -630,7 +630,7 @@
 	     from J. Aleu
 	     https://commons.wikimedia.org/wiki/
 	     License: public domain
-	4.87 Images of IC2395, IC4756, NGC3114, NGC6025, NGC6087, NGC6124, NGC6633
+	4.87 Images of IC2395, IC4756, NGC3114, NGC6025, NGC6087, NGC6633
 	     from Roberto Mura
 	     https://en.wikipedia.org/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
@@ -828,8 +828,8 @@
 	      from Chuck Ayoub, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.136 Images of NGC1261, NGC3201, NGC4833, NGC5286, NGC6101, NGC6352, NGC6397,
-	      NGC6541, NGC6752
+	4.136 Images of NGC1261, NGC3201, NGC4833, NGC5286, NGC6101, NGC6124, NGC6352,
+	      NGC6397, NGC6541, NGC6752
 	      from Tian Mai, Image processing: Sun Shuwei
 	      License: Creative Commons Attribution 4.0 International
 ```
