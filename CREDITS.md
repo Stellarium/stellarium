@@ -425,7 +425,7 @@
 	4.35 Images of NGC3603 from ESO/La Silla Observatory
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.36 Images of M49, NGC4228, NGC4244
+	4.36 Images of NGC4228, NGC4244
 	     from Ole Nielsen
 	     License: Creative Commons Attribution-Share Alike 2.5 Generic 
 	4.37 Images of NGC2808, NGC7023, Hercules Cluster from NASA
