@@ -26,6 +26,7 @@
 
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
+#include "StelModuleMgr.hpp"
 
 #include <QTextStream>
 #include <limits>
