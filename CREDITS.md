@@ -752,7 +752,7 @@
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
 	4.119 Images of M90, M109, IC348, NGC80, NGC147, NGC404, NGC1491, NGC1569,
-	      NGC1624, NGC7026
+	      NGC1624, NGC7026, NGC7048
 	      from Radek Chromik, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
