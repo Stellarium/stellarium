@@ -829,6 +829,10 @@
 	      from Chuck Ayoub, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
+	4.136 Images of M49, M59, M60, NGC 6934
+	      from Sloan Digital Sky Survey
+	      https://live-sdss4org-dr14.pantheonsite.io/
+	      License:  Creative Commons Attribution 4.0 International 
 ```
 
 ## Appendix
