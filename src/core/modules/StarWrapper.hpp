@@ -30,6 +30,7 @@
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
+#include "StelModuleMgr.hpp"
 
 #include <QString>
 
