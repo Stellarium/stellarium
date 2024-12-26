@@ -670,8 +670,7 @@ Vec3d Exoplanet::getJ2000EquatorialPos(const StelCore* core) const
 {
 	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()))
 	{
-		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		const Vec3d vel = core->getAberrationVec(core->getJDE());
 		Vec3d pos=XYZ+vel;
 		pos.normalize();
 		return pos;

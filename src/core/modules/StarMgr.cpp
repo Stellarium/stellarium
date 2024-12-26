@@ -45,7 +45,6 @@
 #include "Planet.hpp"
 #include "StelUtils.hpp"
 #include "StelHealpix.hpp"
-#include "SolarSystem.hpp"
 
 #include <QTextStream>
 #include <QFile>
@@ -1189,9 +1188,7 @@ void StarMgr::draw(StelCore* core)
 	Vec3d vel(0.);
 	if (withAberration)
 	{
-		vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-		StelCore::matVsop87ToJ2000.transfo(vel);
-		vel*=core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		vel = core->getAberrationVec(core->getJDE());
 	}
 	const Vec3f velf=vel.toVec3f();
 
@@ -1246,16 +1243,7 @@ void StarMgr::draw(StelCore* core)
 		double withParallax = core->getUseParallax() * core->getParallaxFactor();
 		Vec3d diffPos(0., 0., 0.);
 		if (withParallax) {
-			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-			const PlanetP earth = ssystem->getEarth();
-			// diff between earth location at STAR_CATALOG_JDEPOCH and current location
-			Vec3d earthPosCatalog = earth->getHeliocentricEclipticPos(STAR_CATALOG_JDEPOCH);
-			Vec3d PosNow = core->getCurrentPlanet()->getHeliocentricEclipticPos(core->getJDE());
-			double obliquity = earth->getRotObliquity(core->getJDE());  // need to always use Earth's obliquity because thats what the catalog is based on
-			// Transform from heliocentric ecliptic to equatorial coordinates
-			earthPosCatalog.set(earthPosCatalog[0], earthPosCatalog[1]*cos(obliquity)-earthPosCatalog[2]*sin(obliquity), earthPosCatalog[1]*sin(obliquity)+earthPosCatalog[2]*cos(obliquity));
-			PosNow.set(PosNow[0], PosNow[1]*cos(obliquity)-PosNow[2]*sin(obliquity), PosNow[1]*sin(obliquity)+PosNow[2]*cos(obliquity));
-			diffPos = earthPosCatalog - PosNow;
+			diffPos = core->getParallaxDiff(core->getJDE());
 		}
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf, withParallax, diffPos);
@@ -1329,16 +1317,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	double withParallax = core->getUseParallax() * core->getParallaxFactor();
 	Vec3d diffPos(0., 0., 0.);
 	if (withParallax) {
-		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-		const PlanetP earth = ssystem->getEarth();
-		// diff between earth location at STAR_CATALOG_JDEPOCH and current location
-		Vec3d earthPosCatalog = earth->getHeliocentricEclipticPos(STAR_CATALOG_JDEPOCH);
-		Vec3d PosNow = core->getCurrentPlanet()->getHeliocentricEclipticPos(core->getJDE());
-		double obliquity = earth->getRotObliquity(core->getJDE());  // need to always use Earth's obliquity because thats what the catalog is based on
-		// Transform from heliocentric ecliptic to equatorial coordinates
-		earthPosCatalog.set(earthPosCatalog[0], earthPosCatalog[1]*cos(obliquity)-earthPosCatalog[2]*sin(obliquity), earthPosCatalog[1]*sin(obliquity)+earthPosCatalog[2]*cos(obliquity));
-		PosNow.set(PosNow[0], PosNow[1]*cos(obliquity)-PosNow[2]*sin(obliquity), PosNow[1]*sin(obliquity)+PosNow[2]*cos(obliquity));
-		diffPos = earthPosCatalog - PosNow;
+		diffPos = core->getParallaxDiff(core->getJDE());
 	}
 
 	// Iterate over the stars inside the triangles

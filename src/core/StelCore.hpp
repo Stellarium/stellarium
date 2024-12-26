@@ -376,6 +376,11 @@ public:
 
 	Vec3d getMouseJ2000Pos(void) const;
 
+	//! get vector used to compute parallax effect
+	static const Vec3d getParallaxDiff(double JD);
+	//! get vector used to compute aberration effect
+	static const Vec3d getAberrationVec(double JD);
+
 public slots:
 	//! Smoothly move the observer to the given location
 	//! @param target the target location
@@ -1004,6 +1009,17 @@ private:
 	bool de440Active;    // available and user-activated.
 	bool de441Active;    // available and user-activated.
 	QPair<int, int> minMaxEphemRange;
-};
+	
+	// Variables for caching the observer position relative to the star catalog reference frame
+	static Vec3d cachedParallaxDiff;
+    static double cachedParallaxJD; // Cached Julian Date
+	static QString cachedParallaxPlanet;
+	static Vec3d calculateParallaxDiff(double JD); // Actual calculation
 
+	// Variables for caching the aberration effect
+	static Vec3d cachedAberrationVec;
+	static double cachedAberrationJD;
+	static QString cachedAberrationPlanet;
+	static Vec3d calculateAberrationVec(double JD); // Actual calculation
+};
 #endif // STELCORE_HPP

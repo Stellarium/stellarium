@@ -41,6 +41,7 @@
 #include "EphemWrapper.hpp"
 #include "NomenclatureItem.hpp"
 #include "precession.h"
+#include "Star.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -70,6 +71,13 @@ const double StelCore::JD_HOUR   = 0.041666666666666666666;	// 1/24
 const double StelCore::JD_DAY    = 1.;
 const double StelCore::ONE_OVER_JD_SECOND = 86400;		// 86400
 const double StelCore::TZ_ERA_BEGINNING = 2395996.5;		// December 1, 1847
+
+Vec3d StelCore::cachedParallaxDiff = Vec3d(0.,0.,0.);
+double StelCore::cachedParallaxJD = 0.0;
+QString StelCore::cachedParallaxPlanet;
+Vec3d StelCore::cachedAberrationVec = Vec3d(0.,0.,0.);
+double StelCore::cachedAberrationJD = 0.0;
+QString StelCore::cachedAberrationPlanet;
 
 StelCore::StelCore()
 	: skyDrawer(Q_NULLPTR)
@@ -3093,6 +3101,55 @@ Vec3d StelCore::getMouseJ2000Pos() const
 //		mousePosition.normalize();
 //	}
 	return mousePosition;
+}
+
+Vec3d StelCore::calculateParallaxDiff(double JD) {
+	StelCore *core = StelApp::getInstance().getCore();
+	Vec3d diffPos(0., 0., 0.);
+
+	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+	const PlanetP earth = ssystem->getEarth();
+	// diff between earth location at STAR_CATALOG_JDEPOCH and current location
+	Vec3d earthPosCatalog = earth->getHeliocentricEclipticPos(STAR_CATALOG_JDEPOCH);
+	Vec3d PosNow = core->getCurrentPlanet()->getHeliocentricEclipticPos(JD);
+	double obliquity = earth->getRotObliquity(STAR_CATALOG_JDEPOCH);  // need to always use Earth's obliquity because thats what the catalog is based on
+	// Transform from heliocentric ecliptic to equatorial coordinates
+	earthPosCatalog.set(earthPosCatalog[0], earthPosCatalog[1]*cos(obliquity)-earthPosCatalog[2]*sin(obliquity), earthPosCatalog[1]*sin(obliquity)+earthPosCatalog[2]*cos(obliquity));
+	PosNow.set(PosNow[0], PosNow[1]*cos(obliquity)-PosNow[2]*sin(obliquity), PosNow[1]*sin(obliquity)+PosNow[2]*cos(obliquity));
+	diffPos = earthPosCatalog - PosNow;
+
+	return diffPos;
+}
+
+const Vec3d StelCore::getParallaxDiff(double JD) {
+	StelCore *core = StelApp::getInstance().getCore();
+	if ((fabs(JD - cachedParallaxJD) > 1.)  || (core->getCurrentPlanet()->getID() != cachedParallaxPlanet))
+	{
+		cachedParallaxDiff = StelCore::calculateParallaxDiff(JD);
+		cachedParallaxJD = JD;		
+		cachedParallaxPlanet = core->getCurrentPlanet()->getID();
+
+	}
+    return cachedParallaxDiff;
+}
+
+Vec3d StelCore::calculateAberrationVec(double JD) {
+	StelCore *core = StelApp::getInstance().getCore();
+	Vec3d vel = core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+	vel = StelCore::matVsop87ToJ2000 * vel * core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+	return vel;
+}
+
+const Vec3d StelCore::getAberrationVec(double JD) {
+	StelCore *core = StelApp::getInstance().getCore();
+	// need to recompute the aberration vector if the JD has changed or the planet has changed
+	if ((fabs(JD - cachedAberrationJD) > 1.) || (core->getCurrentPlanet()->getID() != cachedAberrationPlanet))
+	{
+		cachedAberrationVec = StelCore::calculateAberrationVec(JD);
+		cachedAberrationJD = JD;
+		cachedAberrationPlanet = core->getCurrentPlanet()->getID();
+	}
+	return cachedAberrationVec;
 }
 
 QByteArray StelCore::getAberrationShader() const

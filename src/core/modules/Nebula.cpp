@@ -714,9 +714,7 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 	sPainter.setColor(getHintColor(nType), hintsBrightness);
 
 	StelCore *core=StelApp::getInstance().getCore();
-	Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-	vel=StelCore::matVsop87ToJ2000*vel;
-	vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+	const Vec3d vel = core->getAberrationVec(core->getJDE());
 
 	// Show outlines
 	if (segments>0 && flagUseOutlines && oLim<=maxMagHints)
