@@ -17,7 +17,7 @@ labels:
       pr:
         body: Thank you for following the template. The repository owner will review this.
         action: ready
-  - name: not a bug
+  - name: "not a bug"
     labeled:
       issue:
         body: This is not a bug! This is a feature...
@@ -43,7 +43,7 @@ labels:
       issue:
         body: This issue already exists.
         action: close
-  - name: good first issue
+  - name: community
     labeled:
       issue:
         body: This is a good task for the community to participate in the contribution into Stellarium. Who wants to help us?
