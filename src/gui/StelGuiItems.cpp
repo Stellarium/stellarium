@@ -55,6 +55,16 @@
 #include <QSettings>
 #include <QGuiApplication>
 
+namespace
+{
+
+constexpr double DEFAULT_FONT_SIZE = 13;
+
+double fontSizeRatio()
+{
+	return StelApp::getInstance().getScreenFontSize() / DEFAULT_FONT_SIZE;
+}
+
 void brightenImage(QImage &img, float factor)
 {
 	for (int y=0; y<img.height(); y++)
@@ -78,6 +88,7 @@ void brightenImage(QImage &img, float factor)
 		}
 }
 
+}
 
 void StelButton::initCtor(const QPixmap& apixOn,
 						  const QPixmap& apixOff,
@@ -349,6 +360,17 @@ QRectF StelButton::boundingRect() const
 	return QRectF(0,0, getButtonPixmapWidth(), getButtonPixmapHeight());
 }
 
+int StelButton::getButtonPixmapWidth() const
+{
+	const double baseWidth = pixOn.width() / pixmapsScale * fontSizeRatio();
+	return std::lround(baseWidth);
+}
+int StelButton::getButtonPixmapHeight() const
+{
+	const double baseHeight = pixOn.height() / pixmapsScale * fontSizeRatio();
+	return std::lround(baseHeight);
+}
+
 void StelButton::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*)
 {
 	/* QPixmap::scaled has much better quality than that scaling via QPainter::drawPixmap, so let's
@@ -367,8 +389,8 @@ void StelButton::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidg
 	const double ratio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
 	if(scaledCurrentPixmap.isNull() || ratio != scaledCurrentPixmap.devicePixelRatioF())
 	{
-		const auto scale = ratio / pixmapsScale;
-		scaledCurrentPixmap = pixmap().scaled(pixOn.size()*scale, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+		const auto size = boundingRect().size() * ratio;
+		scaledCurrentPixmap = pixmap().scaled(size.toSize(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 		scaledCurrentPixmap.setDevicePixelRatio(ratio);
 	}
 	// Align the pixmap to pixel grid, otherwise we'll get artifacts at some scaling factors.
@@ -402,14 +424,26 @@ void LeftStelBar::addButton(StelButton* button)
 	if (QGraphicsItem::childItems().size()!=0)
 	{
 		const QRectF& r = childrenBoundingRect();
-		posY += r.bottom()-1;
+		posY += r.bottom();
 	}
 	button->setParentItem(this);
 	button->setFocusOnSky(false);
 	//button->prepareGeometryChange(); // could possibly be removed when qt 4.6 become stable
-	button->setPos(0., qRound(posY+10.5));
+	button->setPos(0., qRound(posY + 9.5 * fontSizeRatio()));
 
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
+}
+
+void LeftStelBar::updateButtonPositions()
+{
+	double posY = 0;
+	for (const auto button : childItems())
+	{
+		if (const auto b = dynamic_cast<StelButton*>(button))
+			b->animValueChanged(0.); // update button pixmap
+		button->setPos(0., posY);
+		posY += std::round(button->boundingRect().height() + 9.5 * fontSizeRatio());
+	}
 }
 
 void LeftStelBar::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)
@@ -476,6 +510,7 @@ void LeftStelBar::setColor(const QColor& c)
 //! connect from StelApp to resize fonts on the fly.
 void LeftStelBar::setFontSizeFromApp(int size)
 {
+	prepareGeometryChange();
 	// Font size was developed based on base font size 13, i.e. 12
 	int screenFontSize = size-1;
 	QFont font=QGuiApplication::font();
@@ -487,7 +522,10 @@ void LeftStelBar::setFontSizeFromApp(int size)
 		// to avoid crash
 		SkyGui* skyGui=gui->getSkyGui();
 		if (skyGui)
+		{
 			skyGui->updateBarsPos();
+			updateButtonPositions();
+		}
 	}
 }
 
