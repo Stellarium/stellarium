@@ -36,39 +36,41 @@ target_link_libraries(glues_stel Qt${QT_VERSION_MAJOR}::Gui)
 set_target_properties(glues_stel PROPERTIES AUTOMOC 0)
 SET_TARGET_PROPERTIES(glues_stel PROPERTIES FOLDER "src/external")
 
-SET(zlib_SRCS
-     zlib/adler32.c
-     zlib/compress.c
-     zlib/crc32.c
-     zlib/crc32.h
-     zlib/deflate.c
-     zlib/deflate.h
-     zlib/gzclose.c
-     zlib/gzguts.h
-     zlib/gzlib.c
-     zlib/gzread.c
-     zlib/gzwrite.c
-     zlib/infback.c
-     zlib/inffast.c
-     zlib/inffast.h
-     zlib/inffixed.h
-     zlib/inflate.c
-     zlib/inflate.h
-     zlib/inftrees.c
-     zlib/inftrees.h
-     zlib/trees.c
-     zlib/trees.h
-     zlib/uncompr.c
-     zlib/zconf.h
-     zlib/zlib.h
-     zlib/zutil.c
-     zlib/zutil.h)
+IF(NOT USE_SYSTEM_ZLIB)
+     SET(zlib_SRCS
+	  zlib/adler32.c
+	  zlib/compress.c
+	  zlib/crc32.c
+	  zlib/crc32.h
+	  zlib/deflate.c
+	  zlib/deflate.h
+	  zlib/gzclose.c
+	  zlib/gzguts.h
+	  zlib/gzlib.c
+	  zlib/gzread.c
+	  zlib/gzwrite.c
+	  zlib/infback.c
+	  zlib/inffast.c
+	  zlib/inffast.h
+	  zlib/inffixed.h
+	  zlib/inflate.c
+	  zlib/inflate.h
+	  zlib/inftrees.c
+	  zlib/inftrees.h
+	  zlib/trees.c
+	  zlib/trees.h
+	  zlib/uncompr.c
+	  zlib/zconf.h
+	  zlib/zlib.h
+	  zlib/zutil.c
+	  zlib/zutil.h)
 
-add_library(zlib_stel STATIC EXCLUDE_FROM_ALL ${zlib_SRCS})
-target_include_directories(zlib_stel PUBLIC zlib)
-#turn off automoc, not needed here
-set_target_properties(zlib_stel PROPERTIES AUTOMOC 0)
-SET_TARGET_PROPERTIES(zlib_stel PROPERTIES FOLDER "src/external")
+     add_library(zlib_stel STATIC EXCLUDE_FROM_ALL ${zlib_SRCS})
+     target_include_directories(zlib_stel PUBLIC zlib)
+     #turn off automoc, not needed here
+     set_target_properties(zlib_stel PROPERTIES AUTOMOC 0)
+     SET_TARGET_PROPERTIES(zlib_stel PROPERTIES FOLDER "src/external")
+ENDIF()
 
 IF(USE_BUNDLED_QTCOMPRESS)
     # QtCompress library under LGPL 2.1
