@@ -58,8 +58,6 @@
 namespace
 {
 
-constexpr double DEFAULT_FONT_SIZE = 13;
-
 double fontSizeRatio()
 {
 	return StelApp::getInstance().getScreenFontSize() / DEFAULT_FONT_SIZE;
