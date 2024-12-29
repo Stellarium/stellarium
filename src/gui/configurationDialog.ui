@@ -1749,15 +1749,68 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="5" column="1">
-              <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
-               <property name="toolTip">
-                <string>Allow mouse to pan (drag)</string>
-               </property>
-               <property name="text">
-                <string>Enable mouse navigation</string>
-               </property>
-              </widget>
+             <item row="7" column="3">
+              <layout class="QHBoxLayout" name="horizontalLayout_dither">
+               <item>
+                <widget class="QLabel" name="dithering_label">
+                 <property name="text">
+                  <string>Dithering</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="ditheringComboBox"/>
+               </item>
+              </layout>
+             </item>
+             <item row="7" column="1">
+              <layout class="QHBoxLayout" name="mouseTimeoutLayout">
+               <item>
+                <widget class="QCheckBox" name="mouseTimeoutCheckbox">
+                 <property name="toolTip">
+                  <string>Hides the mouse cursor when inactive</string>
+                 </property>
+                 <property name="text">
+                  <string>Mouse cursor timeout:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>30</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="mouseTimeoutSpinBox">
+                 <property name="toolTip">
+                  <string>seconds</string>
+                 </property>
+                 <property name="keyboardTracking">
+                  <bool>false</bool>
+                 </property>
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="minimum">
+                  <double>0.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>3600.000000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>10.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item row="9" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_15">
@@ -1780,6 +1833,16 @@
                </item>
               </layout>
              </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="diskViewportCheckbox">
+               <property name="toolTip">
+                <string>Mask out everything outside a central circle in the main view</string>
+               </property>
+               <property name="text">
+                <string>Disc viewport</string>
+               </property>
+              </widget>
+             </item>
              <item row="3" column="1">
               <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
                <property name="toolTip">
@@ -1789,6 +1852,95 @@
                 <string>Auto-direction at zoom out</string>
                </property>
               </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
+               <property name="toolTip">
+                <string>Allow mouse to pan (drag)</string>
+               </property>
+               <property name="text">
+                <string>Enable mouse navigation</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="3">
+              <layout class="QHBoxLayout" name="horizontalLayout_fps">
+               <item>
+                <widget class="QLabel" name="label_fpsIntent">
+                 <property name="text">
+                  <string>Framerate intent:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_min">
+                 <property name="text">
+                  <string>min:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="minFpsSpinBox">
+                 <property name="toolTip">
+                  <string>Minimum intended FPS between user interaction. Set very low to conserve energy or save CPU use.</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="keyboardTracking">
+                  <bool>false</bool>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_max">
+                 <property name="text">
+                  <string>max:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="maxFpsSpinBox">
+                 <property name="toolTip">
+                  <string>Maximum allowed FPS. 1000 just means &quot;as fast as possible&quot;. </string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="keyboardTracking">
+                  <bool>false</bool>
+                 </property>
+                 <property name="minimum">
+                  <number>5</number>
+                 </property>
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                 <property name="value">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item row="5" column="3">
               <widget class="QCheckBox" name="focusOnDaySpinnerCheckBox">
@@ -1800,19 +1952,28 @@
                </property>
               </widget>
              </item>
-             <item row="7" column="3">
-              <layout class="QHBoxLayout" name="horizontalLayout_dither">
-               <item>
-                <widget class="QLabel" name="dithering_label">
-                 <property name="text">
-                  <string>Dithering</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QComboBox" name="ditheringComboBox"/>
-               </item>
-              </layout>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="enableMouseZoomingCheckBox">
+               <property name="toolTip">
+                <string>Allow mouse to zoom (mousewheel)</string>
+               </property>
+               <property name="text">
+                <string>Enable mouse zooming</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="sphericMirrorCheckbox">
+               <property name="toolTip">
+                <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
+               </property>
+               <property name="text">
+                <string>Spheric mirror distortion</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
              <item row="4" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_keyboardNavigation">
@@ -1859,6 +2020,16 @@
                </item>
               </layout>
              </item>
+             <item row="6" column="3">
+              <widget class="QCheckBox" name="kineticScrollingCheckBox">
+               <property name="toolTip">
+                <string>Kinetic scrolling means dragging text panels directly instead of dragging window handles.</string>
+               </property>
+               <property name="text">
+                <string>Use kinetic scrolling</string>
+               </property>
+              </widget>
+             </item>
              <item row="4" column="3">
               <layout class="QHBoxLayout" name="horizontalLayout_threads">
                <item>
@@ -1886,6 +2057,9 @@
                  <property name="toolTip">
                   <string>A few additional threads may improve speed with many solar system objects. Observe what works best on your multicore system.</string>
                  </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
                  <property name="maximum">
                   <number>31</number>
                  </property>
@@ -1893,13 +2067,13 @@
                </item>
               </layout>
              </item>
-             <item row="9" column="3">
-              <widget class="QCheckBox" name="indicationMountModeCheckBox">
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="gravityLabelCheckbox">
                <property name="toolTip">
-                <string>Flash a short message when toggling mount mode.</string>
+                <string>Align labels with the screen center</string>
                </property>
                <property name="text">
-                <string>Indication for mount mode</string>
+                <string>Gravity labels</string>
                </property>
               </widget>
              </item>
@@ -2010,94 +2184,18 @@
                </item>
               </layout>
              </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="enableMouseZoomingCheckBox">
-               <property name="toolTip">
-                <string>Allow mouse to zoom (mousewheel)</string>
-               </property>
-               <property name="text">
-                <string>Enable mouse zooming</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="1">
-              <layout class="QHBoxLayout" name="mouseTimeoutLayout">
-               <item>
-                <widget class="QCheckBox" name="mouseTimeoutCheckbox">
-                 <property name="toolTip">
-                  <string>Hides the mouse cursor when inactive</string>
-                 </property>
-                 <property name="text">
-                  <string>Mouse cursor timeout:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>30</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="mouseTimeoutSpinBox">
-                 <property name="toolTip">
-                  <string>seconds</string>
-                 </property>
-                 <property name="keyboardTracking">
-                  <bool>false</bool>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>0.000000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>3600.000000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>10.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="gravityLabelCheckbox">
-               <property name="toolTip">
-                <string>Align labels with the screen center</string>
-               </property>
-               <property name="text">
-                <string>Gravity labels</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="3">
-              <widget class="QCheckBox" name="kineticScrollingCheckBox">
-               <property name="toolTip">
-                <string>Kinetic scrolling means dragging text panels directly instead of dragging window handles.</string>
-               </property>
-               <property name="text">
-                <string>Use kinetic scrolling</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3" rowspan="3">
+             <item row="0" column="3" rowspan="2">
               <layout class="QGridLayout" name="gridLayoutInclude">
-               <property name="spacing">
-                <number>0</number>
-               </property>
                <item row="2" column="1">
                 <layout class="QHBoxLayout" name="horizontalLayout_IncludeParallax">
                  <item>
                   <widget class="QCheckBox" name="parallaxCheckBox">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="toolTip">
                     <string>Parallax is the apparent shift in the position of an object when viewed from two different points.</string>
                    </property>
@@ -2111,8 +2209,11 @@
                    <property name="toolTip">
                     <string>Exaggerate parallax (for didactic explanations)</string>
                    </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
                    <property name="decimals">
-                    <number>1</number>
+                    <number>0</number>
                    </property>
                    <property name="minimum">
                     <double>1.000000000000000</double>
@@ -2130,10 +2231,16 @@
                  </item>
                 </layout>
                </item>
-               <item row="1" column="2">
+               <item row="2" column="2">
                 <layout class="QHBoxLayout" name="horizontalLayout_IncludeNutAberr">
                  <item>
                   <widget class="QCheckBox" name="aberrationCheckBox">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="toolTip">
                     <string>Annual aberration is an annual wobble in positions, amounting to max. about 20 arcseconds for observers on Earth.</string>
                    </property>
@@ -2146,6 +2253,9 @@
                   <widget class="QDoubleSpinBox" name="aberrationSpinBox">
                    <property name="toolTip">
                     <string>Exaggerate aberration (for didactic explanations)</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                    <property name="decimals">
                     <number>1</number>
@@ -2163,17 +2273,14 @@
                  </item>
                 </layout>
                </item>
-               <item row="0" column="1" colspan="2">
-                <widget class="QCheckBox" name="topocentricCheckBox">
-                 <property name="toolTip">
-                  <string>Activate to view as seen from surface of the planet (recommended). If switched off, display planetocentric view.</string>
-                 </property>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_Include">
                  <property name="text">
-                  <string>Topocentric coordinates</string>
+                  <string>Include </string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
+               <item row="1" column="2">
                 <widget class="QCheckBox" name="nutationCheckBox">
                  <property name="toolTip">
                   <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
@@ -2183,29 +2290,29 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_Include">
+               <item row="1" column="1">
+                <widget class="QCheckBox" name="topocentricCheckBox">
+                 <property name="toolTip">
+                  <string>Activate to view as seen from surface of the planet (recommended). If switched off, display planetocentric view.</string>
+                 </property>
                  <property name="text">
-                  <string>Include </string>
+                  <string>Topocentric coordinates</string>
                  </property>
                 </widget>
                </item>
               </layout>
              </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="sphericMirrorCheckbox">
+             <item row="2" column="3">
+              <widget class="QCheckBox" name="indicationMountModeCheckBox">
                <property name="toolTip">
-                <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
+                <string>Flash a short message when toggling mount mode.</string>
                </property>
                <property name="text">
-                <string>Spheric mirror distortion</string>
-               </property>
-               <property name="checkable">
-                <bool>true</bool>
+                <string>Indication for mount mode</string>
                </property>
               </widget>
              </item>
-             <item row="10" column="1">
+             <item row="9" column="3">
               <layout class="QHBoxLayout" name="horizontalLayout_14">
                <item>
                 <widget class="ColorButton" name="daylightTextColorButton">
@@ -2218,89 +2325,6 @@
                 <widget class="QLabel" name="label_2">
                  <property name="text">
                   <string>Info text color at daylight</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="diskViewportCheckbox">
-               <property name="toolTip">
-                <string>Mask out everything outside a central circle in the main view</string>
-               </property>
-               <property name="text">
-                <string>Disc viewport</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="3">
-              <layout class="QHBoxLayout" name="horizontalLayout_fps">
-               <item>
-                <widget class="QLabel" name="label_fpsIntent">
-                 <property name="text">
-                  <string>Framerate intent:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_6">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_min">
-                 <property name="text">
-                  <string>min:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="minFpsSpinBox">
-                 <property name="toolTip">
-                  <string>Minimum intended FPS between user interaction. Set very low to conserve energy or save CPU use.</string>
-                 </property>
-                 <property name="keyboardTracking">
-                  <bool>false</bool>
-                 </property>
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>1000</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_max">
-                 <property name="text">
-                  <string>max:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="maxFpsSpinBox">
-                 <property name="toolTip">
-                  <string>Maximum allowed FPS. 1000 just means &quot;as fast as possible&quot;. </string>
-                 </property>
-                 <property name="keyboardTracking">
-                  <bool>false</bool>
-                 </property>
-                 <property name="minimum">
-                  <number>5</number>
-                 </property>
-                 <property name="maximum">
-                  <number>1000</number>
-                 </property>
-                 <property name="value">
-                  <number>1000</number>
                  </property>
                 </widget>
                </item>
@@ -2479,6 +2503,9 @@
                 <widget class="QSpinBox" name="dpiSpinBox">
                  <property name="toolTip">
                   <string>Dots per Inch (for printing size computation in image metadata). Native print size in inches is then pixelSize/dpi.</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="minimum">
                   <number>50</number>

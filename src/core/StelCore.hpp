@@ -566,7 +566,7 @@ public slots:
 	//! @return parallax factor. 1 is realistic simulation, but higher values may be useful for didactic purposes.
 	double getParallaxFactor() const {return parallaxFactor;}
 	//! Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
-	void setParallaxFactor(double factor) { if (!fuzzyEquals(parallaxFactor, factor)) { parallaxFactor=qBound(0.,factor, 1000.); StelApp::immediateSave("astro/parallax_factor", parallaxFactor); emit parallaxFactorChanged(factor); }}
+	void setParallaxFactor(double factor) { if (!fuzzyEquals(parallaxFactor, factor)) { parallaxFactor=qBound(0.,factor, 10000.); StelApp::immediateSave("astro/parallax_factor", parallaxFactor); emit parallaxFactorChanged(factor); }}
 
 	//! @return whether topocentric coordinates are currently used.
 	bool getUseTopocentricCoordinates() const {return flagUseTopocentricCoordinates;}
