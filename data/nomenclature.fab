@@ -798,10 +798,10 @@ Dactyl	1097	_("Celmis","crater")	AA	-46.000000	220.000000	0.2	_("One of the orig
 Deimos	6431	_("Voltaire","crater")	AA	22.000000	356.500000	1.9	_("Francios-Marie Arouet; French writer (1694-1778).","origin")
 # TRANSLATORS: (Deimos); Jonathan; British writer (1667-1745).
 Deimos	5789	_("Swift","crater")	AA	12.500000	1.800000	1	_("Jonathan; British writer (1667-1745).","origin")
-# TRANSLATORS: (Didymos); Belgium, Netherlands, France; a percussion instrument of at least 23 cast bronze bells in fixed suspension.
-Didymos	16265	_("Carillon Saxum","saxum")	SA	-59.000000	311.700000	0.0085	_("Belgium, Netherlands, France; a percussion instrument of at least 23 cast bronze bells in fixed suspension.","origin")
 # TRANSLATORS: (Didymos); Indonesian name of a percussion musical instrument popular in East and South East Asia, a circular metal disk with a definite or indefinite pitch, which is hung vertically and hit in the center by a soft beater; originated in Ancient China.
-Didymos	16266	_("Gong Saxum","saxum")	SA	5.800000	1.900000	0.0022	_("Indonesian name of a percussion musical instrument popular in East and South East Asia, a circular metal disk with a definite or indefinite pitch, which is hung vertically and hit in the center by a soft beater; originated in Ancient China.","origin")
+Didymos	16266	_("Gong Saxum","saxum")	SA	5.800000	1.900000	0.022	_("Indonesian name of a percussion musical instrument popular in East and South East Asia, a circular metal disk with a definite or indefinite pitch, which is hung vertically and hit in the center by a soft beater; originated in Ancient China.","origin")
+# TRANSLATORS: (Didymos); Belgium, Netherlands, France; a percussion instrument of at least 23 cast bronze bells in fixed suspension.
+Didymos	16265	_("Carillon Saxum","saxum")	SA	-59.000000	311.700000	0.085	_("Belgium, Netherlands, France; a percussion instrument of at least 23 cast bronze bells in fixed suspension.","origin")
 # TRANSLATORS: (Dimorphos); West African gourd-resonated xylophone (Guinea, Senegal, Mali).
 Dimorphos	16259	_("Bala","crater")	AA	-24.700000	263.700000	0.0056	_("West African gourd-resonated xylophone (Guinea, Senegal, Mali).","origin")
 # TRANSLATORS: (Dimorphos); Afro-Cuban; a pair of open bottomed drums played with both hands.
@@ -11336,14 +11336,10 @@ Moon	4979	_("Regiomontanus","crater")	AA	-28.279400	358.913900	126.64118	_("Mull
 Moon	6483	_("Walther","crater")	AA	-33.248500	0.615600	134.22691	_("Bernard; German astronomer (1430-1504). (Spelling changed from Walter.)","origin")
 # TRANSLATORS: (Moon); William Allen; British chemist (1817-1870).
 Moon	3899	_("Miller","crater")	AA	-39.371900	0.782700	61.374775	_("William Allen; British chemist (1817-1870).","origin")
-# TRANSLATORS: (Moon); Sir Roderick Impey; Scottish geologist (1792-1871).
-Moon	4072	_("Murchison","crater")	AA	5.066800	359.794600	57.830624	_("Sir Roderick Impey; Scottish geologist (1792-1871).","origin")
 # TRANSLATORS: (Moon); Nasir-Al-Din (Mohammed Ibn Hassan); Persian astronomer (1201-1274).
 Moon	4157	_("Nasireddin","crater")	AA	-41.038700	0.142700	51.992554	_("Nasir-Al-Din (Mohammed Ibn Hassan); Persian astronomer (1201-1274).","origin")
 # TRANSLATORS: (Moon); Hermann; French astronomer of German origin, discoverer of asteroid (21) Lutetia (1802-1866).
 Moon	2210	_("Goldschmidt","crater")	AA	73.036700	356.631400	115.25885	_("Hermann; French astronomer of German origin, discoverer of asteroid (21) Lutetia (1802-1866).","origin")
-# TRANSLATORS: (Moon); Theodor Ritter von; Austrian astronomer (1841-1886).
-Moon	4481	_("Oppolzer","crater")	AA	-1.521000	359.547900	40.86626	_("Theodor Ritter von; Austrian astronomer (1841-1886).","origin")
 # TRANSLATORS: (Moon); Nicholas-Louis De; French astronomer (1713-1762).
 Moon	3185	_("La Caille","crater")	AA	-23.676300	1.083600	67.2229	_("Nicholas-Louis De; French astronomer (1713-1762).","origin")
 # TRANSLATORS: (Moon); Howard Walter; Australian-born British pathologist, Nobel Prize winner 1945 (1898-1968).
@@ -11412,6 +11408,10 @@ Moon	14502	_("Haworth","crater")	AA	-87.450000	354.830000	51.423058	_("Sir Walte
 Moon	5251	_("Réaumur","crater")	AA	-2.450000	0.730000	51.25382	_("René-Antoine Ferchault de; French physicist (1683-1757).","origin")
 # TRANSLATORS: (Moon); Greek astronomer (unkn-c. 400 B.C.).
 Moon	6008	_("Timaeus","crater")	AA	62.910000	359.450000	32.80849	_("Greek astronomer (unkn-c. 400 B.C.).","origin")
+# TRANSLATORS: (Moon); Sir Roderick Impey; Scottish geologist (1792-1871).
+Moon	4072	_("Murchison","crater")	AA	5.070000	359.790000	57.830624	_("Sir Roderick Impey; Scottish geologist (1792-1871).","origin")
+# TRANSLATORS: (Moon); Theodor Ritter von; Austrian astronomer (1841-1886).
+Moon	4481	_("Oppolzer","crater")	AA	-1.520000	359.550000	40.86626	_("Theodor Ritter von; Austrian astronomer (1841-1886).","origin")
 # TRANSLATORS: (Moon); Reinieri, Vincentio; Italian astronomer, mathematician (unkn-1648).
 Moon	4987	_("Reiner Gamma","albedo feature")	AL	7.385300	301.041700	73.44105	_("Reinieri, Vincentio; Italian astronomer, mathematician (unkn-1648).","origin")
 # TRANSLATORS: (Moon); French female name.
@@ -11772,12 +11772,12 @@ Moon	3693	_("Mare Undarum","mare")	ME	7.491200	68.658900	244.84285	_("”Sea of 
 Moon	3684	_("Mare Nubium","mare")	ME	-20.589400	342.712800	714.4992	_("”Sea of Clouds.”","origin")
 # TRANSLATORS: (Moon); "Eastern sea."
 Moon	3685	_("Mare Orientale","mare")	ME	-19.865500	265.329700	294.15512	_("”Eastern sea.”","origin")
+# TRANSLATORS: (Moon); "Sea of Vapors."
+Moon	3694	_("Mare Vaporum","mare")	ME	13.200000	4.090000	242.45752	_("”Sea of Vapors.”","origin")
 # TRANSLATORS: (Moon); "Sea of Cold."
 Moon	3674	_("Mare Frigoris","mare")	ME	57.592300	359.993600	1446.4064	_("”Sea of Cold.”","origin")
 # TRANSLATORS: (Moon); "Sea of Showers."
 Moon	3678	_("Mare Imbrium","mare")	ME	34.724400	345.091400	1145.5275	_("”Sea of Showers.”","origin")
-# TRANSLATORS: (Moon); "Sea of Vapors."
-Moon	3694	_("Mare Vaporum","mare")	ME	13.196700	4.086200	242.45752	_("”Sea of Vapors.”","origin")
 # TRANSLATORS: (Moon); André-Marie; French physicist (1775-1836).
 Moon	3971	_("Mons Ampère","mons")	MO	19.323900	356.290500	29.958717	_("André-Marie; French physicist (1775-1836).","origin")
 # TRANSLATORS: (Moon); Indian male name.
@@ -26292,6 +26292,8 @@ Moon	5569	_("Sinus Roris","sinus")	SI	50.261300	309.141200	195.04158	_("”Bay o
 Moon	5571	_("Sinus Successus","sinus")	SI	1.124200	58.519800	126.65085	_("”Bay of Success.”","origin")
 # TRANSLATORS: (Moon); "Bay of Stickiness."
 Moon	16118	_("Sinus Viscositatis","sinus")	SI	35.250000	319.010000	68	_("”Bay of Stickiness.”","origin")
+# TRANSLATORS: (Moon); "Bay of the center."
+Moon	5567	_("Sinus Medii","sinus")	SI	1.630000	1.030000	286.67413	_("”Bay of the center.”","origin")
 # TRANSLATORS: (Moon); "Bay of Love."
 Moon	5559	_("Sinus Amoris","sinus")	SI	19.920300	37.289300	189.10243	_("”Bay of Love.”","origin")
 # TRANSLATORS: (Moon); "Bay of Roughness."
@@ -26304,8 +26306,6 @@ Moon	5563	_("Sinus Fidei","sinus")	SI	17.992100	2.037900	70.69934	_("”Bay of T
 Moon	5564	_("Sinus Honoris","sinus")	SI	11.719500	17.865800	111.60917	_("”Bay of Honor.”","origin")
 # TRANSLATORS: (Moon); "Bay of Rainbows."
 Moon	5565	_("Sinus Iridum","sinus")	SI	45.010100	328.334700	249.28998	_("”Bay of Rainbows.”","origin")
-# TRANSLATORS: (Moon); "Bay of the center."
-Moon	5567	_("Sinus Medii","sinus")	SI	1.633700	1.026900	286.67413	_("”Bay of the center.”","origin")
 # TRANSLATORS: (Moon); Compound word from Indian philosophy that depicts the masculine (“Shiva”) and feminine (“Shakti”) duality of nature; Landing site of Chandrayaan-3’s Vikram lander.
 Moon	16272	_("Statio Shiv Shakti","statio")	ST	-69.373400	32.319800	0	_("Compound word from Indian philosophy that depicts the masculine (“Shiva”) and feminine (“Shakti”) duality of nature; Landing site of Chandrayaan-3’s Vikram lander.","origin")
 # TRANSLATORS: (Moon); Constellation name in the ancient Chinese star map; means “the celestial river”, synonymous with tian he, the Milky Way; landing site of Chang’e 6.
