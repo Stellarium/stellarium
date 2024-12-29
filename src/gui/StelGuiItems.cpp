@@ -58,11 +58,6 @@
 namespace
 {
 
-double fontSizeRatio()
-{
-	return StelApp::getInstance().getScreenFontSize() / DEFAULT_FONT_SIZE;
-}
-
 void brightenImage(QImage &img, float factor)
 {
 	for (int y=0; y<img.height(); y++)
@@ -358,6 +353,12 @@ QRectF StelButton::boundingRect() const
 	return QRectF(0,0, getButtonPixmapWidth(), getButtonPixmapHeight());
 }
 
+
+double StelButton::fontSizeRatio()
+{
+	return StelApp::getInstance().getScreenFontSize() / DEFAULT_FONT_SIZE;
+}
+
 int StelButton::getButtonPixmapWidth() const
 {
 	const double baseWidth = pixOn.width() / pixmapsScale * fontSizeRatio();
@@ -427,7 +428,7 @@ void LeftStelBar::addButton(StelButton* button)
 	button->setParentItem(this);
 	button->setFocusOnSky(false);
 	//button->prepareGeometryChange(); // could possibly be removed when qt 4.6 become stable
-	button->setPos(0., qRound(posY + 9.5 * fontSizeRatio()));
+	button->setPos(0., qRound(posY + 9.5 * StelButton::fontSizeRatio()));
 
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
 }
@@ -440,7 +441,7 @@ void LeftStelBar::updateButtonPositions()
 		if (const auto b = dynamic_cast<StelButton*>(button))
 			b->animValueChanged(0.); // update button pixmap
 		button->setPos(0., posY);
-		posY += std::round(button->boundingRect().height() + 9.5 * fontSizeRatio());
+		posY += std::round(button->boundingRect().height() + 9.5 * StelButton::fontSizeRatio());
 	}
 }
 

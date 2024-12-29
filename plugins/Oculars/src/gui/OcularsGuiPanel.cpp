@@ -1324,13 +1324,14 @@ QPixmap OcularsGuiPanel::createPixmapFromText(const QString& text,
 		return QPixmap();
 	}
 
-	width  *= StelButton::getInputPixmapsDevicePixelRatio();
-	height *= StelButton::getInputPixmapsDevicePixelRatio();
+	const auto ratio = StelButton::getInputPixmapsDevicePixelRatio() / StelButton::fontSizeRatio();
+	width  *= ratio;
+	height *= ratio;
 
 	QPixmap pixmap(width, height);
 	pixmap.fill(backgroundColor);
 	auto scaledFont(font);
-	scaledFont.setPixelSize(font.pixelSize() * StelButton::getInputPixmapsDevicePixelRatio());
+	scaledFont.setPixelSize(font.pixelSize() * ratio);
 
 	if (text.isEmpty())
 	{
