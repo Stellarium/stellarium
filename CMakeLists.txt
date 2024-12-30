@@ -13,6 +13,9 @@ ENDIF()
 IF(POLICY CMP0071)
      CMAKE_POLICY(SET CMP0071 NEW)
 ENDIF()
+IF(POLICY CMP0175)
+     CMAKE_POLICY(SET CMP0175 OLD)
+ENDIF()
 
 # warn about deprecated stuff so that we may try fixing it
 SET(CMAKE_WARN_DEPRECATED 1)

@@ -118,8 +118,8 @@ public:
 
 	//! Get the width of the button image.
 	//! The width is based on pixOn.
-	int getButtonPixmapWidth() const {return pixOn.width() / pixmapsScale;}
-	int getButtonPixmapHeight() const {return pixOn.height() / pixmapsScale;}
+	int getButtonPixmapWidth() const;
+	int getButtonPixmapHeight() const;
 
 	//! Set the button opacity
 	void setOpacity(double v) {opacity=v; updateIcon();}
@@ -139,6 +139,8 @@ public:
 	QRectF boundingRect() const override;
 
 	static double getInputPixmapsDevicePixelRatio() { return GUI_INPUT_PIXMAPS_SCALE; }
+	static double fontSizeRatio();
+
 
 signals:
 	//! Triggered when the button state changes
@@ -223,6 +225,7 @@ private slots:
 	void setFontSizeFromApp(int size);
 	//! connect from StelApp to set font on the fly.
 	void setFont(const QFont &cfont);
+	void updateButtonPositions();
 private:
 	QTimeLine* hideTimeLine;
 	QGraphicsSimpleTextItem* helpLabel;

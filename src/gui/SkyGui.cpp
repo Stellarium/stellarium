@@ -386,6 +386,7 @@ void SkyGui::updateBarsPos()
 	progressBarMgr->setZValue(400);	
 
 	// Update position of the auto-hide buttons
+	btHorizAutoHide->setPos(1,btVertAutoHide->getButtonPixmapHeight()-btHorizAutoHide->getButtonPixmapHeight()+1);
 	autoHidebts->setPos(0, hh-autoHidebts->childrenBoundingRect().height()+1);
 	double opacity = qMax(animLeftBarTimeLine->currentValue(), animBottomBarTimeLine->currentValue());
 	autoHidebts->setOpacity(qMax(0.01, opacity));	// Work around a qt bug
