@@ -383,13 +383,6 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	{
 		if (Plx!=0)
 		{
-			// get orbital_radius in AU using Kepler's third law, in case we are not on Earth
-			if (core->getCurrentPlanet()->getID() != "earth") {
-				double orbital_radius = pow(core->getCurrentPlanet()->getSiderealPeriod() / 365.25, 2.0/3.0);  // in AU
-				Plx *= orbital_radius;
-				PlxErr *= orbital_radius;
-			}
-			
 			QString plx = q_("Parallax");
 			if (PlxErr>0.f)
 				oss <<  QString("%1: %2%3%4 ").arg(plx, QString::number(Plx, 'f', 3), QChar(0x00B1), QString::number(PlxErr, 'f', 3));
