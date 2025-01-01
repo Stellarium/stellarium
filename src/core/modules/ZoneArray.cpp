@@ -542,7 +542,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			if (extinctedMagIndex >= cutoffMagStep || extinctedMagIndex<0) // i.e., if extincted it is dimmer than cutoff or extinctedMagIndex is negative (missing star catalog), so remove
 				continue;
 			tmpRcmag = &rcmag_table[extinctedMagIndex];
-			twinkleFactor=qMin(1.0f, 1.0f-0.9f*altAz[2]); // suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
+			twinkleFactor=qMin(1.0, 1.0-0.9*altAz[2]); // suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
 		}
 
 		if (drawer->drawPointSource(sPainter, v, *tmpRcmag, s->getBVIndex(), !isInsideViewport, twinkleFactor) && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
