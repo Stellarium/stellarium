@@ -2937,12 +2937,20 @@
 	{
 		"imageCredits" : {"short" : "Adam Block/Mount Lemmon SkyCenter/University of Arizona","infoUrl": "http://www.caelumobservatory.com/gallery/n6522_32in.shtml"},
 		"imageUrl" : "n6522.png",
-		"worldCoords" : [[[271.04783,-30.2425], [270.8215,-30.046], [271.0479,-29.8497], [271.2746,-30.0459]]],
+		"worldCoords" : [[[271.04783,-30.2425], [270.8215,-30.0462], [271.0479,-29.8497], [271.2746,-30.0463]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.266023154,
 		"maxBrightness" : 14.8
 	},
-{
+	{
+		"imageCredits": {"short" : "Sloan Digital Sky Survey","infoUrl": "https://live-sdss4org-dr14.pantheonsite.io/"},
+		"imageUrl" : "n6535.png",
+		"worldCoords" :	[[[270.9985, -0.3337],[270.9244,-0.3335],[270.9247,-0.2594],[270.9988,-0.2597]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.1432128852,
+		"maxBrightness" : 13.2
+	},
+	{
 		"imageCredits" : {"short" : "ESO","infoUrl": "https://www.eso.org/public/images/eso1338a/"},
 		"imageUrl" : "n6537.png",
 		"worldCoords" : [[[271.3328,-19.869], [271.2765,-19.8692], [271.2765,-19.8166], [271.3324,-19.8163]]],
