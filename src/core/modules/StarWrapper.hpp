@@ -77,28 +77,25 @@ protected:
 		const Star *star) : a(array), z(zone), s(star) {}
 	Vec3d getJ2000EquatorialPos(const StelCore* core) const override
 	{
-		Vec3f v;
+		Vec3d v;
 		s->getJ2000Pos((core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25, v);
 
 		double withParallax = core->getUseParallax() * core->getParallaxFactor();
 		if (withParallax) {
 			const Vec3d diffPos = core->getParallaxDiff(core->getJDE());
 			s->getPlxEffect(withParallax * s->getPlx(), v, diffPos);
+			v.normalize();
 		}
 
 		// Aberration: Explanatory Supplement 2013, (7.38). We must get the observer planet speed vector in Equatorial J2000 coordinates.
 		if (core->getUseAberration())
 		{
 			const Vec3d vel = core->getAberrationVec(core->getJDE());
-			v.normalize(); // Required? YES!
-			Vec3d pos=v.toVec3d()+vel;
-			pos.normalize();
-			return pos;
+			v+=vel;
+			v.normalize();
 		}
-		else
-		{
-			return v.toVec3d();
-		}
+		
+		return v;
 	}
 	Vec3f getInfoColor(void) const override
 	{

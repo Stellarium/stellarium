@@ -1190,7 +1190,6 @@ void StarMgr::draw(StelCore* core)
 	{
 		vel = core->getAberrationVec(core->getJDE());
 	}
-	const Vec3f velf=vel.toVec3f();
 
 	// Prepare openGL for drawing many stars
 	StelPainter sPainter(prj);
@@ -1246,11 +1245,11 @@ void StarMgr::draw(StelCore* core)
 			diffPos = core->getParallaxDiff(core->getJDE());
 		}
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf, withParallax, diffPos);
+			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, vel, withParallax, diffPos);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, velf, withParallax, diffPos);
+			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, vel, withParallax, diffPos);
 		// always check the last zone because it is a global zone
-		z->draw(&sPainter, (20<<(z->level<<1)), false, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf, withParallax, diffPos);
+		z->draw(&sPainter, (20<<(z->level<<1)), false, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, vel, withParallax, diffPos);
 	}
 	exit_loop:
 
