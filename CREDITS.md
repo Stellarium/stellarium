@@ -731,7 +731,7 @@
 	4.113 The miscWorldMap.jpg image was created from NASA Blue Marble Next Generation
 	      dataset for July 2004. Public domain.
 	      https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation
-	4.114 Images of M80
+	4.114 Images of M80, RCW101
 	      from NOIRLab/NSF/AURA, post-processing: Sun Shuwei 
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
@@ -813,7 +813,7 @@
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.133 Images of NGC6726, LBN437, LDN1251
+	4.133 Images of NGC6726, LBN437, LDN1251, RCW58, RCW89
 	      from Manuel Peitsch, post-processing: Sun Shuwei
 	      https://manuel-astro.ch/
 	      License: Creative Commons Attribution 4.0 International
@@ -825,11 +825,11 @@
 	      from Legacy Surveys / D.Lang (Perimeter Institute) & Meli thev, post-processing: Sun Shuwei
 	      https://www.legacysurvey.org/acknowledgment
 	      License: Creative Commons Attribution-Share Alike 4.0 International
-	4.135 Images of Sh2-113
+	4.136 Images of Sh2-113
 	      from Chuck Ayoub, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.136 Images of M49, M59, M60, NGC 6934
+	4.137 Images of M49, M59, M60, NGC 6934
 	      from Sloan Digital Sky Survey
 	      https://live-sdss4org-dr14.pantheonsite.io/
 	      License:  Creative Commons Attribution 4.0 International 
