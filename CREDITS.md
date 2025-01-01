@@ -837,6 +837,10 @@
 	      from Legacy Surveys / D.Lang (Perimeter Institute) & Meli thev, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.139 Images of Frosty Leo Nebula
+	      from ESA/Hubble & NASA, post-processing: Sun Shuwei
+	      http://www.spacetelescope.org/
+	      License: public domain
 ```
 
 ## Appendix
