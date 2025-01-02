@@ -316,11 +316,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	//Border/background for the widget
 	borderPath = new QGraphicsPathItem();
 	borderPath->setZValue(100);
-	QBrush borderBrush(QColor::fromRgbF(0.22, 0.22, 0.23, 0.2));
-	borderPath->setBrush(borderBrush);
-	QPen borderPen = QPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
-	borderPen.setWidthF(1.);
-	borderPath->setPen(borderPen);
 	borderPath->setParentItem(parentWidget);
 
 	updatePosition();
@@ -1161,6 +1156,12 @@ void OcularsGuiPanel::updateMainButtonsPositions()
 	int n = buttonCrosshairs->isVisible() ? 5 : 4;
 	qreal width = n * buttonOcular->getButtonPixmapWidth();
 
+	{
+		double left, top, right, bottom;
+		mainLayout->getContentsMargins(&left,&top,&right,&bottom);
+		width += left + right;
+	}
+
 	//Relative position inside the parent widget
 	qreal posX = 0.;
 	qreal posY = 0.;
@@ -1170,9 +1171,9 @@ void OcularsGuiPanel::updateMainButtonsPositions()
 		width += 2 * prevTelescopeButton->getButtonPixmapWidth();
 		posX = prevTelescopeButton->getButtonPixmapWidth();
 	}
-	if ( (buttonOcular->parentItem()) && (buttonOcular->parentItem()->parentItem()) )
+	if (buttonBar->parentItem())
 	{
-		qreal parentWidth = buttonOcular->parentItem()->parentItem()->boundingRect().width();
+		qreal parentWidth = buttonBar->parentItem()->boundingRect().width();
 		int nGaps = n - 1;//n buttons have n-1 gaps
 		spacing = qRound((parentWidth-width)/nGaps);
 	}
