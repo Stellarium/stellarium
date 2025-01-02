@@ -1165,9 +1165,9 @@ void OcularsGuiPanel::updateMainButtonsPositions()
 		width += 2 * prevTelescopeButton->getButtonPixmapWidth();
 		posX = prevTelescopeButton->getButtonPixmapWidth();
 	}
-	if ( (buttonOcular->parentItem()) && (buttonOcular->parentItem()->parentItem()) )
+	if (buttonBar->parentItem())
 	{
-		qreal parentWidth = buttonOcular->parentItem()->parentItem()->boundingRect().width();
+		qreal parentWidth = buttonBar->parentItem()->boundingRect().width();
 		int nGaps = n - 1;//n buttons have n-1 gaps
 		spacing = qRound((parentWidth-width)/nGaps);
 	}
