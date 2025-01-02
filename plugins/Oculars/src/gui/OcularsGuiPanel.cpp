@@ -316,11 +316,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	//Border/background for the widget
 	borderPath = new QGraphicsPathItem();
 	borderPath->setZValue(100);
-	QBrush borderBrush(QColor::fromRgbF(0.22, 0.22, 0.23, 0.2));
-	borderPath->setBrush(borderBrush);
-	QPen borderPen = QPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
-	borderPen.setWidthF(1.);
-	borderPath->setPen(borderPen);
 	borderPath->setParentItem(parentWidget);
 
 	updatePosition();
