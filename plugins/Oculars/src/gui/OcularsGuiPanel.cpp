@@ -1156,6 +1156,12 @@ void OcularsGuiPanel::updateMainButtonsPositions()
 	int n = buttonCrosshairs->isVisible() ? 5 : 4;
 	qreal width = n * buttonOcular->getButtonPixmapWidth();
 
+	{
+		double left, top, right, bottom;
+		mainLayout->getContentsMargins(&left,&top,&right,&bottom);
+		width += left + right;
+	}
+
 	//Relative position inside the parent widget
 	qreal posX = 0.;
 	qreal posY = 0.;
