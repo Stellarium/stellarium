@@ -156,6 +156,7 @@ public slots:
 	//! set whether the button is checked
 	void setChecked(int b);
 	void setChecked(bool b) { setChecked(static_cast<int>(b)); }
+	void updateIcon();
 
 protected:
 	void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override;
@@ -165,7 +166,6 @@ protected:
 	void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
 private slots:
 	void animValueChanged(qreal value);
-	void updateIcon();
 private:
 	void initCtor(const QPixmap& apixOn,
                   const QPixmap& apixOff,
