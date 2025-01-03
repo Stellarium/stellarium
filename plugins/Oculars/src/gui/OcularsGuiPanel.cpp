@@ -207,99 +207,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	nextTelescopeButton = new StelButton(telescopeControls, nextArrow, nextArrowOff, QPixmap(), "actionShow_Telescope_Increment");
 	nextTelescopeButton->setToolTip(q_("Select next telescope"));
 
-	// NOTE: actions for rotation in Oculars.cpp file
-	QColor cOn(255, 255, 255);
-	QColor cOff(102, 102, 102);
-	QColor cHover(162, 162, 162);
-	QString degrees = QString("-90%1").arg(QChar(0x00B0));
-	int degreesW = fm.boundingRect(degrees).width();
-	QPixmap pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	QPixmap pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
-	QPixmap pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
-	rotateCcdMinus90Button = new StelButton(ccdControls, pOn,  pOff, pHover, "actionToggle_Oculars_Rotate_Frame_90_Counterclockwise", true);
-	rotateCcdMinus90Button->setToolTip(q_("Rotate the sensor frame 90 degrees counterclockwise"));
-	rotatePrismMinus90Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_90_Counterclockwise", true);
-	rotatePrismMinus90Button->setToolTip(q_("Rotate the prism 90 degrees counterclockwise"));
-
-	degrees = QString("-15%1").arg(QChar(0x00B0));
-	degreesW = fm.boundingRect(degrees).width();
-	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
-	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
-	rotateCcdMinus15Button = new StelButton(ccdControls, pOn,  pOff, pHover, "actionToggle_Oculars_Rotate_Frame_15_Counterclockwise", true);
-	rotateCcdMinus15Button->setToolTip(q_("Rotate the sensor frame 15 degrees counterclockwise"));
-	rotatePrismMinus15Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_15_Counterclockwise", true);
-	rotatePrismMinus15Button->setToolTip(q_("Rotate the prism 15 degrees counterclockwise"));
-
-	degrees  = QString("-5%1").arg(QChar(0x00B0));
-	degreesW = fm.boundingRect(degrees).width();
-	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
-	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
-	rotateCcdMinus5Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_5_Counterclockwise", true);
-	rotateCcdMinus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees counterclockwise"));
-	rotatePrismMinus5Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_5_Counterclockwise", true);
-	rotatePrismMinus5Button->setToolTip(q_("Rotate the prism 5 degrees counterclockwise"));
-
-	degrees  = QString("-1%1").arg(QChar(0x00B0));
-	degreesW = fm.boundingRect(degrees).width();
-	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
-	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
-	rotateCcdMinus1Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_1_Counterclockwise", true);
-	rotateCcdMinus1Button->setToolTip(q_("Rotate the sensor frame 1 degree counterclockwise"));
-	rotatePrismMinus1Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_1_Counterclockwise", true);
-	rotatePrismMinus1Button->setToolTip(q_("Rotate the prism 1 degree counterclockwise"));
-
-	degrees  = QString("0%1").arg(QChar(0x00B0));
-	degreesW = fm.boundingRect(degrees).width();
-	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
-	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
-	resetCcdRotationButton = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_Reset", true);
-	resetCcdRotationButton->setToolTip(q_("Reset the sensor frame rotation"));
-	resetPrismRotationButton = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_Reset", true);
-	resetPrismRotationButton->setToolTip(q_("Reset the prism rotation"));
-
-	degrees  = QString("+1%1").arg(QChar(0x00B0));
-	degreesW = fm.boundingRect(degrees).width();
-	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
-	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
-	rotateCcdPlus1Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_1_Clockwise", true);
-	rotateCcdPlus1Button->setToolTip(q_("Rotate the sensor frame 1 degree clockwise"));
-	rotatePrismPlus1Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_1_Clockwise", true);
-	rotatePrismPlus1Button->setToolTip(q_("Rotate the prism 1 degree clockwise"));
-
-	degrees  = QString("+5%1").arg(QChar(0x00B0));
-	degreesW = fm.boundingRect(degrees).width();
-	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
-	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
-	rotateCcdPlus5Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_5_Clockwise", true);
-	rotateCcdPlus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees clockwise"));
-	rotatePrismPlus5Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_5_Clockwise", true);
-	rotatePrismPlus5Button->setToolTip(q_("Rotate the prism 5 degrees clockwise"));
-
-	degrees  = QString("+15%1").arg(QChar(0x00B0));
-	degreesW = fm.boundingRect(degrees).width();
-	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
-	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
-	rotateCcdPlus15Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_15_Clockwise", true);
-	rotateCcdPlus15Button->setToolTip(q_("Rotate the sensor frame 15 degrees clockwise"));
-	rotatePrismPlus15Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_15_Clockwise", true);
-	rotatePrismPlus15Button->setToolTip(q_("Rotate the prism 15 degrees clockwise"));
-
-	degrees  = QString("+90%1").arg(QChar(0x00B0));
-	degreesW = fm.boundingRect(degrees).width();
-	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
-	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
-	rotateCcdPlus90Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_90_Clockwise", true);
-	rotateCcdPlus90Button->setToolTip(q_("Rotate the sensor frame 90 degrees clockwise"));
-	rotatePrismPlus90Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_90_Clockwise", true);
-	rotatePrismPlus90Button->setToolTip(q_("Rotate the prism 90 degrees clockwise"));
+	createRotationButtons();
 
 	//Set the layout and update the size
 	qreal width = 2*prevOcularButton->boundingRect().width() + maxWidth;
@@ -1311,6 +1219,107 @@ void OcularsGuiPanel::setColorScheme(const QString &schemeName)
 	borderPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
 	borderPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
 	setControlsColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
+}
+
+void OcularsGuiPanel::createRotationButtons()
+{
+	const auto font = fieldOcularName->font();
+	QFontMetrics fm(font);
+	const int lineHeight = fm.height();
+
+	// NOTE: actions for rotation in Oculars.cpp file
+	QColor cOn(255, 255, 255);
+	QColor cOff(102, 102, 102);
+	QColor cHover(162, 162, 162);
+	QString degrees = QString("-90%1").arg(QChar(0x00B0));
+	int degreesW = fm.boundingRect(degrees).width();
+	QPixmap pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
+	QPixmap pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
+	QPixmap pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	rotateCcdMinus90Button = new StelButton(ccdControls, pOn,  pOff, pHover, "actionToggle_Oculars_Rotate_Frame_90_Counterclockwise", true);
+	rotateCcdMinus90Button->setToolTip(q_("Rotate the sensor frame 90 degrees counterclockwise"));
+	rotatePrismMinus90Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_90_Counterclockwise", true);
+	rotatePrismMinus90Button->setToolTip(q_("Rotate the prism 90 degrees counterclockwise"));
+
+	degrees = QString("-15%1").arg(QChar(0x00B0));
+	degreesW = fm.boundingRect(degrees).width();
+	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
+	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
+	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	rotateCcdMinus15Button = new StelButton(ccdControls, pOn,  pOff, pHover, "actionToggle_Oculars_Rotate_Frame_15_Counterclockwise", true);
+	rotateCcdMinus15Button->setToolTip(q_("Rotate the sensor frame 15 degrees counterclockwise"));
+	rotatePrismMinus15Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_15_Counterclockwise", true);
+	rotatePrismMinus15Button->setToolTip(q_("Rotate the prism 15 degrees counterclockwise"));
+
+	degrees  = QString("-5%1").arg(QChar(0x00B0));
+	degreesW = fm.boundingRect(degrees).width();
+	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
+	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
+	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	rotateCcdMinus5Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_5_Counterclockwise", true);
+	rotateCcdMinus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees counterclockwise"));
+	rotatePrismMinus5Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_5_Counterclockwise", true);
+	rotatePrismMinus5Button->setToolTip(q_("Rotate the prism 5 degrees counterclockwise"));
+
+	degrees  = QString("-1%1").arg(QChar(0x00B0));
+	degreesW = fm.boundingRect(degrees).width();
+	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
+	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
+	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	rotateCcdMinus1Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_1_Counterclockwise", true);
+	rotateCcdMinus1Button->setToolTip(q_("Rotate the sensor frame 1 degree counterclockwise"));
+	rotatePrismMinus1Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_1_Counterclockwise", true);
+	rotatePrismMinus1Button->setToolTip(q_("Rotate the prism 1 degree counterclockwise"));
+
+	degrees  = QString("0%1").arg(QChar(0x00B0));
+	degreesW = fm.boundingRect(degrees).width();
+	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
+	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
+	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	resetCcdRotationButton = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_Reset", true);
+	resetCcdRotationButton->setToolTip(q_("Reset the sensor frame rotation"));
+	resetPrismRotationButton = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_Reset", true);
+	resetPrismRotationButton->setToolTip(q_("Reset the prism rotation"));
+
+	degrees  = QString("+1%1").arg(QChar(0x00B0));
+	degreesW = fm.boundingRect(degrees).width();
+	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
+	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
+	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	rotateCcdPlus1Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_1_Clockwise", true);
+	rotateCcdPlus1Button->setToolTip(q_("Rotate the sensor frame 1 degree clockwise"));
+	rotatePrismPlus1Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_1_Clockwise", true);
+	rotatePrismPlus1Button->setToolTip(q_("Rotate the prism 1 degree clockwise"));
+
+	degrees  = QString("+5%1").arg(QChar(0x00B0));
+	degreesW = fm.boundingRect(degrees).width();
+	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
+	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
+	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	rotateCcdPlus5Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_5_Clockwise", true);
+	rotateCcdPlus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees clockwise"));
+	rotatePrismPlus5Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_5_Clockwise", true);
+	rotatePrismPlus5Button->setToolTip(q_("Rotate the prism 5 degrees clockwise"));
+
+	degrees  = QString("+15%1").arg(QChar(0x00B0));
+	degreesW = fm.boundingRect(degrees).width();
+	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
+	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
+	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	rotateCcdPlus15Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_15_Clockwise", true);
+	rotateCcdPlus15Button->setToolTip(q_("Rotate the sensor frame 15 degrees clockwise"));
+	rotatePrismPlus15Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_15_Clockwise", true);
+	rotatePrismPlus15Button->setToolTip(q_("Rotate the prism 15 degrees clockwise"));
+
+	degrees  = QString("+90%1").arg(QChar(0x00B0));
+	degreesW = fm.boundingRect(degrees).width();
+	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
+	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
+	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	rotateCcdPlus90Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_90_Clockwise", true);
+	rotateCcdPlus90Button->setToolTip(q_("Rotate the sensor frame 90 degrees clockwise"));
+	rotatePrismPlus90Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_90_Clockwise", true);
+	rotatePrismPlus90Button->setToolTip(q_("Rotate the prism 90 degrees clockwise"));
 }
 
 QPixmap OcularsGuiPanel::createPixmapFromText(const QString& text,

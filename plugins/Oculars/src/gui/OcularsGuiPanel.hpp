@@ -68,6 +68,8 @@ private slots:
 	//! Sets the color scheme (day/night mode)
 	void setColorScheme(const QString& schemeName);
 
+	void createRotationButtons();
+
 private:
 	Oculars* ocularsPlugin;
 
