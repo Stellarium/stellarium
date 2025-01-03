@@ -54,6 +54,12 @@
 #include <cmath>
 #include <stdexcept>
 
+// When DEFAULT_FONT_SIZE is 13, GUI panel's font size was designed to be 12.
+// This factor preserves the ratio when the fonts are scaled.
+constexpr double GUI_PANEL_FONT_SIZE_FACTOR = 12.0 / 13.0;
+// Design font size is 14, based on default app fontsize 13.
+constexpr double FONT_SIZE_FACTOR = 14.0 / 13.0;
+
 extern void qt_set_sequence_auto_mnemonic(bool b);
 
 static QSettings *settings; //!< The settings as read in from the ini file.
@@ -151,7 +157,7 @@ Oculars::Oculars()
 	, actionOcularIncrement(Q_NULLPTR)
 	, actionOcularDecrement(Q_NULLPTR)
 	, guiPanel(Q_NULLPTR)
-	, guiPanelFontSize(12)
+	, guiPanelFontSize(StelApp::getInstance().getScreenFontSize() * GUI_PANEL_FONT_SIZE_FACTOR)
 	, textColor(0.)
 	, lineColor(0.)
 	, focuserColor(0.)
@@ -181,7 +187,6 @@ Oculars::Oculars()
 	, flagUseLargeFocuserOverlay(true)
 {
 	setObjectName("Oculars");
-	// Design font size is 14, based on default app fontsize 13.
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
 
@@ -323,6 +328,21 @@ void Oculars::deinit()
 	protractorFlipVTexture.clear();
 	protractorFlipHTexture.clear();
 	protractorFlipHVTexture.clear();
+}
+
+void Oculars::setFontSize(const int fontSize, const int guiPanelFontSize)
+{
+	font.setPixelSize(fontSize);
+
+	this->guiPanelFontSize = guiPanelFontSize;
+	if (guiPanel)
+		guiPanel->setFontSize(guiPanelFontSize);
+}
+
+void Oculars::setFontSizeFromApp(const int size)
+{
+	setFontSize(size * FONT_SIZE_FACTOR,
+	            size * GUI_PANEL_FONT_SIZE_FACTOR);
 }
 
 //! Draw any parts on the screen which are for our module
@@ -588,7 +608,8 @@ void Oculars::init()
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
 
-		guiPanelFontSize=settings->value("gui_panel_fontsize", 12).toInt();
+		const int defaultGuiPanelFontSize = StelApp::getInstance().getScreenFontSize() * GUI_PANEL_FONT_SIZE_FACTOR;
+		guiPanelFontSize=settings->value("gui_panel_fontsize", defaultGuiPanelFontSize).toInt();
 		enableGuiPanel(settings->value("enable_control_panel", true).toBool());
 		textColor=Vec3f(settings->value("text_color", "0.8,0.48,0.0").toString());
 		lineColor=Vec3f(settings->value("line_color", "0.77,0.14,0.16").toString());

@@ -291,9 +291,9 @@ public slots:
 	void setFlagShowOcularsButton(bool b);
 	bool getFlagShowOcularsButton(void) { return flagShowOcularsButton; }
 
-	void setFontSize(int s){font.setPixelSize(s);}
+	void setFontSize(int fontSize, int guiPanelFontSize);
 	//! Connect this to StelApp font size.
-	void setFontSizeFromApp(int s){font.setPixelSize(s+1);}
+	void setFontSizeFromApp(int size);
 
 	void setFlagShowCcdCropOverlay(const bool b);
 	bool getFlagShowCcdCropOverlay(void) const;

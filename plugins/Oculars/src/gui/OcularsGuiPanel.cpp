@@ -98,10 +98,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 					     true);
 	buttonConfiguration->setToolTip(ocularsPlugin->actionConfiguration->getText());
 
-	qreal buttonHeight = buttonOcular->boundingRect().height();
-	buttonBar->setMinimumHeight(buttonHeight);
-	buttonBar->setMaximumHeight(buttonHeight);
-
 	setLayout(mainLayout);
 
 	//Widgets with control and information fields
@@ -146,40 +142,9 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	newFont.setPixelSize(plugin->getGuiPanelFontSize());
 	setControlsFont(newFont);
 
-	//Traditional field width from Ocular ;)
-	QFontMetrics fm(fieldOcularName->font());
-	int maxWidth = fm.boundingRect(QString("MMMMMMMMMMMMMMMMMMMMMM")).width();
-	int lineHeight = fm.height();
-
-	fieldOcularName->setTextWidth(maxWidth);
-	fieldOcularFl->setTextWidth(maxWidth);
-	fieldOcularAfov->setTextWidth(maxWidth);
-	fieldCcdName->setTextWidth(maxWidth);
-	fieldCcdDimensions->setTextWidth(maxWidth);
-	fieldCcdBinning->setTextWidth(maxWidth);
-	fieldCcdHScale->setTextWidth(maxWidth);
-	fieldCcdVScale->setTextWidth(maxWidth);
-	fieldCcdRotation->setTextWidth(maxWidth);
-	fieldPrismRotation->setTextWidth(maxWidth);
-	fieldTelescopeName->setTextWidth(maxWidth);
-	fieldMagnification->setTextWidth(maxWidth);
-	fieldExitPupil->setTextWidth(maxWidth);
-	fieldTwilightFactor->setTextWidth(maxWidth);
-	fieldRelativeBrightness->setTextWidth(maxWidth);
-	fieldAdlerIndex->setTextWidth(maxWidth);
-	fieldBishopIndex->setTextWidth(maxWidth);
-	fieldFov->setTextWidth(maxWidth);
-	fieldRayleighCriterion->setTextWidth(maxWidth);
-	fieldDawesCriterion->setTextWidth(maxWidth);
-	fieldAbbeyCriterion->setTextWidth(maxWidth);
-	fieldSparrowCriterion->setTextWidth(maxWidth);
-	fieldVisualResolution->setTextWidth(maxWidth);
-	fieldLensName->setTextWidth(maxWidth);
-	fieldLensMultipler->setTextWidth(maxWidth);
-
 	// Retrieve value from setting directly, because at this stage the plugin has not parsed it yet.
 	float scv = plugin->getSettings()->value("arrow_scale", 150.f).toFloat();
-	int scale=static_cast<int>(lineHeight*scv*0.01f);
+	const int scale=static_cast<int>(0.14f * scv);
 	// TODO: change this load-once to interactively editable value of scaling coefficient
 	QPixmap pa(":/graphicGui/btTimeRewind-on.png");
 	QPixmap prevArrow = pa.scaledToHeight(scale * StelButton::getInputPixmapsDevicePixelRatio(), Qt::SmoothTransformation);
@@ -207,24 +172,12 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	nextTelescopeButton = new StelButton(telescopeControls, nextArrow, nextArrowOff, QPixmap(), "actionShow_Telescope_Increment");
 	nextTelescopeButton->setToolTip(q_("Select next telescope"));
 
-	createRotationButtons();
+	updateRotationButtons();
 
-	//Set the layout and update the size
-	qreal width = 2*prevOcularButton->boundingRect().width() + maxWidth;
-	qreal left, right, top, bottom;
-	mainLayout->getContentsMargins(&left, &top, &right, &bottom);
-	ocularControls->setMaximumWidth(width);
-	ccdControls->setMaximumWidth(width);
-	telescopeControls->setMaximumWidth(width);
-	lensControls->setMaximumWidth(width);
-	resize(width + left + right, 10);
-	buttonBar->resize(width, size().height());
-	updateMainButtonsPositions();
-
-	//Border/background for the widget
-	borderPath = new QGraphicsPathItem();
+	borderPath = new QGraphicsPathItem(parentWidget);
 	borderPath->setZValue(100);
-	borderPath->setParentItem(parentWidget);
+
+	updateLayout();
 
 	updatePosition();
 	connect (parentWidget, SIGNAL(geometryChanged()),	 this, SLOT(updatePosition()));
@@ -1221,7 +1174,7 @@ void OcularsGuiPanel::setColorScheme(const QString &schemeName)
 	setControlsColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 }
 
-void OcularsGuiPanel::createRotationButtons()
+void OcularsGuiPanel::updateRotationButtons()
 {
 	const auto font = fieldOcularName->font();
 	QFontMetrics fm(font);
@@ -1236,8 +1189,10 @@ void OcularsGuiPanel::createRotationButtons()
 	QPixmap pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
 	QPixmap pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
 	QPixmap pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	delete rotateCcdMinus90Button;
 	rotateCcdMinus90Button = new StelButton(ccdControls, pOn,  pOff, pHover, "actionToggle_Oculars_Rotate_Frame_90_Counterclockwise", true);
 	rotateCcdMinus90Button->setToolTip(q_("Rotate the sensor frame 90 degrees counterclockwise"));
+	delete rotatePrismMinus90Button;
 	rotatePrismMinus90Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_90_Counterclockwise", true);
 	rotatePrismMinus90Button->setToolTip(q_("Rotate the prism 90 degrees counterclockwise"));
 
@@ -1246,8 +1201,10 @@ void OcularsGuiPanel::createRotationButtons()
 	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
 	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	delete rotateCcdMinus15Button;
 	rotateCcdMinus15Button = new StelButton(ccdControls, pOn,  pOff, pHover, "actionToggle_Oculars_Rotate_Frame_15_Counterclockwise", true);
 	rotateCcdMinus15Button->setToolTip(q_("Rotate the sensor frame 15 degrees counterclockwise"));
+	delete rotatePrismMinus15Button;
 	rotatePrismMinus15Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_15_Counterclockwise", true);
 	rotatePrismMinus15Button->setToolTip(q_("Rotate the prism 15 degrees counterclockwise"));
 
@@ -1256,8 +1213,10 @@ void OcularsGuiPanel::createRotationButtons()
 	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
 	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	delete rotateCcdMinus5Button;
 	rotateCcdMinus5Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_5_Counterclockwise", true);
 	rotateCcdMinus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees counterclockwise"));
+	delete rotatePrismMinus5Button;
 	rotatePrismMinus5Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_5_Counterclockwise", true);
 	rotatePrismMinus5Button->setToolTip(q_("Rotate the prism 5 degrees counterclockwise"));
 
@@ -1266,8 +1225,10 @@ void OcularsGuiPanel::createRotationButtons()
 	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
 	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	delete rotateCcdMinus1Button;
 	rotateCcdMinus1Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_1_Counterclockwise", true);
 	rotateCcdMinus1Button->setToolTip(q_("Rotate the sensor frame 1 degree counterclockwise"));
+	delete rotatePrismMinus1Button;
 	rotatePrismMinus1Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_1_Counterclockwise", true);
 	rotatePrismMinus1Button->setToolTip(q_("Rotate the prism 1 degree counterclockwise"));
 
@@ -1276,8 +1237,10 @@ void OcularsGuiPanel::createRotationButtons()
 	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
 	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	delete resetCcdRotationButton;
 	resetCcdRotationButton = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_Reset", true);
 	resetCcdRotationButton->setToolTip(q_("Reset the sensor frame rotation"));
+	delete resetPrismRotationButton;
 	resetPrismRotationButton = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_Reset", true);
 	resetPrismRotationButton->setToolTip(q_("Reset the prism rotation"));
 
@@ -1286,8 +1249,10 @@ void OcularsGuiPanel::createRotationButtons()
 	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
 	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	delete rotateCcdPlus1Button;
 	rotateCcdPlus1Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_1_Clockwise", true);
 	rotateCcdPlus1Button->setToolTip(q_("Rotate the sensor frame 1 degree clockwise"));
+	delete rotatePrismPlus1Button;
 	rotatePrismPlus1Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_1_Clockwise", true);
 	rotatePrismPlus1Button->setToolTip(q_("Rotate the prism 1 degree clockwise"));
 
@@ -1296,8 +1261,10 @@ void OcularsGuiPanel::createRotationButtons()
 	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
 	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	delete rotateCcdPlus5Button;
 	rotateCcdPlus5Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_5_Clockwise", true);
 	rotateCcdPlus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees clockwise"));
+	delete rotatePrismPlus5Button;
 	rotatePrismPlus5Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_5_Clockwise", true);
 	rotatePrismPlus5Button->setToolTip(q_("Rotate the prism 5 degrees clockwise"));
 
@@ -1306,8 +1273,10 @@ void OcularsGuiPanel::createRotationButtons()
 	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
 	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	delete rotateCcdPlus15Button;
 	rotateCcdPlus15Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_15_Clockwise", true);
 	rotateCcdPlus15Button->setToolTip(q_("Rotate the sensor frame 15 degrees clockwise"));
+	delete rotatePrismPlus15Button;
 	rotatePrismPlus15Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_15_Clockwise", true);
 	rotatePrismPlus15Button->setToolTip(q_("Rotate the prism 15 degrees clockwise"));
 
@@ -1316,10 +1285,96 @@ void OcularsGuiPanel::createRotationButtons()
 	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, font, cOn);
 	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, font, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, font, cHover);
+	delete rotateCcdPlus90Button;
 	rotateCcdPlus90Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Frame_90_Clockwise", true);
 	rotateCcdPlus90Button->setToolTip(q_("Rotate the sensor frame 90 degrees clockwise"));
+	delete rotatePrismPlus90Button;
 	rotatePrismPlus90Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_90_Clockwise", true);
 	rotatePrismPlus90Button->setToolTip(q_("Rotate the prism 90 degrees clockwise"));
+}
+
+void OcularsGuiPanel::updateLayout()
+{
+	const qreal buttonHeight = buttonOcular->boundingRect().height();
+	buttonBar->setMinimumHeight(buttonHeight);
+	buttonBar->setMaximumHeight(buttonHeight);
+
+	//Traditional field width from Ocular ;)
+	QFontMetrics fm(fieldOcularName->font());
+	int maxWidth = fm.boundingRect(QString("MMMMMMMMMMMMMMMMMMMMMM")).width();
+
+	fieldOcularName->setTextWidth(maxWidth);
+	fieldOcularFl->setTextWidth(maxWidth);
+	fieldOcularAfov->setTextWidth(maxWidth);
+	fieldCcdName->setTextWidth(maxWidth);
+	fieldCcdDimensions->setTextWidth(maxWidth);
+	fieldCcdBinning->setTextWidth(maxWidth);
+	fieldCcdHScale->setTextWidth(maxWidth);
+	fieldCcdVScale->setTextWidth(maxWidth);
+	fieldCcdRotation->setTextWidth(maxWidth);
+	fieldPrismRotation->setTextWidth(maxWidth);
+	fieldTelescopeName->setTextWidth(maxWidth);
+	fieldMagnification->setTextWidth(maxWidth);
+	fieldExitPupil->setTextWidth(maxWidth);
+	fieldTwilightFactor->setTextWidth(maxWidth);
+	fieldRelativeBrightness->setTextWidth(maxWidth);
+	fieldAdlerIndex->setTextWidth(maxWidth);
+	fieldBishopIndex->setTextWidth(maxWidth);
+	fieldFov->setTextWidth(maxWidth);
+	fieldRayleighCriterion->setTextWidth(maxWidth);
+	fieldDawesCriterion->setTextWidth(maxWidth);
+	fieldAbbeyCriterion->setTextWidth(maxWidth);
+	fieldSparrowCriterion->setTextWidth(maxWidth);
+	fieldVisualResolution->setTextWidth(maxWidth);
+	fieldLensName->setTextWidth(maxWidth);
+	fieldLensMultipler->setTextWidth(maxWidth);
+
+	//Set the layout and update the size
+	qreal width = 2*prevOcularButton->boundingRect().width() + maxWidth;
+	qreal left, right, top, bottom;
+	mainLayout->getContentsMargins(&left, &top, &right, &bottom);
+	ocularControls->setMaximumWidth(width);
+	ccdControls->setMaximumWidth(width);
+	telescopeControls->setMaximumWidth(width);
+	lensControls->setMaximumWidth(width);
+	resize(width + left + right, std::max(size().height(), 1.));
+	buttonBar->resize(width, size().height());
+	updateMainButtonsPositions();
+}
+
+void OcularsGuiPanel::setFontSize(const int size)
+{
+	QFont newFont = font();
+	newFont.setPixelSize(size);
+	setControlsFont(newFont);
+
+	for (const auto button : {buttonOcular,
+	                          buttonCrosshairs,
+	                          buttonCcd,
+	                          buttonTelrad,
+	                          buttonConfiguration,
+	                          prevOcularButton,
+	                          nextOcularButton,
+	                          prevLensButton,
+	                          nextLensButton,
+	                          prevCcdButton,
+	                          nextCcdButton,
+	                          prevTelescopeButton,
+	                          nextTelescopeButton})
+	{
+		button->updateIcon();
+	}
+
+	const bool ocularsVisible = ocularControls->isVisible();
+	const bool ccdVisible = ccdControls->isVisible();
+	foldGui(); // This will force reshaping of mainLayout
+	updateRotationButtons();
+	updateLayout();
+	if (ocularsVisible)
+		updateOcularControls();
+	if (ccdVisible)
+		updateCcdControls();
+	updatePosition();
 }
 
 QPixmap OcularsGuiPanel::createPixmapFromText(const QString& text,
