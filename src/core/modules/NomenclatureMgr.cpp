@@ -355,9 +355,7 @@ QList<StelObjectP> NomenclatureMgr::searchAround(const Vec3d& av, double limitFo
 	v.normalize();
 	if (withAberration)
 	{
-	    Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-	    StelCore::matVsop87ToJ2000.transfo(vel);
-	    vel*=core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		const Vec3d vel = core->getAberrationVec(core->getJDE());
 	    v+=vel;
 	    v.normalize();
 	}

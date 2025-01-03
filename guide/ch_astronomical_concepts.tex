@@ -1123,15 +1123,15 @@ distance at which a nearby star has $p=1''$.
 Even the nearest stars exhibit very small movement due to
 parallax. The closest star to the Earth other than the Sun is Proxima
 Centauri. It has an annual parallax of $0.77199''$, corresponding to a
-distance of $1.295\pc$ (4.22 light years).
-
-Even with the most sensitive instruments for measuring the positions of
-the stars it is only possible to use parallax to determine the distance
-of stars up to about 1,600 light years from the Earth, after which the
-annual parallax is so small it cannot be measured accurately enough.
+distance of $1.295\pc$ (4.22 light years). Currently, Gaia satellite is the most
+accurate instrument for measuring stellar parallax. It can measure parallax
+at the precision level of sub milli-arcseconds for bright stars ($G<15$), measuring distance
+with $\approx 10\%$ to stars up to 10,000 parsecs.
 
 In Stellarium, the annual parallax can be listed in the object information for stars
-when available. It is not accounted for in the positional calculations.
+when available and is accounted for by default in the positional calculations on any 
+Solar System objects including the Earth. You can also exaggerate the parallax effect up to $10,000\times$ 
+to make it more apparent.
 
 \section{Aberration of Light}
 \label{sec:Concepts:Aberration}
@@ -1165,7 +1165,7 @@ want to compute, for example, stellar occultations by the Moon.
 In Stellarium, you can observe a slight annual wobble in all objects'
 positions against the fixed celestial grids. Just enable the
 equatorial grid, zoom in and run through the months. You can also
-exaggerate the aberration effect upto $5\times$ to make it more
+exaggerate the aberration effect up to $5\times$ to make it more
 apparent. \footnote{Exaggerating even more causes graphics defects and
   has been disabled for now.}
 
@@ -1174,7 +1174,7 @@ apparent. \footnote{Exaggerating even more causes graphics defects and
 
 \indexterm[proper motion]{Proper motion} is the change in the position of a star over time as a
 result of its motion through space relative to the Sun. It does not
-include the apparent shift in position of star due to annular parallax.
+include the apparent shift in position of star due to annual parallax.
 The star exhibiting the greatest proper motion is \indexterm{Barnard's Star} which
 moves more than ten seconds of arc per year.
 
@@ -1186,14 +1186,14 @@ galactic neighbourhood (see section~\ref{sec:Exercises:ProperMotion}).
 
 Note however some limitations:
 \begin{enumerate}
-\item Stellarium will stop at $\pm 100.000$ years. This limit may be
+\item Stellarium will stop at $\pm 100,000$ years. This limit may be
   still suitable for most stellar locations. The planetary locations
   are not trustworthy outside of a much narrower temporal window (see
   section~\ref{ch:Accuracy}). You cannot simulate the sky over the
   dinosaurs or such things.
-\item Proper motion is only modeled by linear components. True 3D
-  motion in space requires more computation, which would slow down the
-  program.
+\item For most bright stars ($V<10.5$), their full 6D astrometry (2D sky positions, 
+  2D proper motion, parallax, radial velocity) computed by assuming straight-line motion at constant speed. 
+  Otherwise proper motion are only modelled by linear components.
 \item Double stars are listed in catalogs as two individual stars with
   their current proper motion which consists of a common spatial motion and the 
   orbital motion around their common center of gravity. However, their orbital

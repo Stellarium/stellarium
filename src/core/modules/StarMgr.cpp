@@ -1188,11 +1188,8 @@ void StarMgr::draw(StelCore* core)
 	Vec3d vel(0.);
 	if (withAberration)
 	{
-		vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-		StelCore::matVsop87ToJ2000.transfo(vel);
-		vel*=core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		vel = core->getAberrationVec(core->getJDE());
 	}
-	const Vec3f velf=vel.toVec3f();
 
 	// Prepare openGL for drawing many stars
 	StelPainter sPainter(prj);
@@ -1242,12 +1239,17 @@ void StarMgr::draw(StelCore* core)
 				maxMagStarName = x;
 		}
 		int zone;
+		double withParallax = core->getUseParallax() * core->getParallaxFactor();
+		Vec3d diffPos(0., 0., 0.);
+		if (withParallax) {
+			diffPos = core->getParallaxDiff(core->getJDE());
+		}
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf);
+			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, vel, withParallax, diffPos);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, velf);
+			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, vel, withParallax, diffPos);
 		// always check the last zone because it is a global zone
-		z->draw(&sPainter, (20<<(z->level<<1)), false, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, velf);
+		z->draw(&sPainter, (20<<(z->level<<1)), false, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, vel, withParallax, diffPos);
 	}
 	exit_loop:
 
@@ -1311,6 +1313,12 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	SphericalConvexPolygon c(e3, e2, e2, e0);
 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(c.getBoundingSphericalCaps(),lastMaxSearchLevel);
 
+	double withParallax = core->getUseParallax() * core->getParallaxFactor();
+	Vec3d diffPos(0., 0., 0.);
+	if (withParallax) {
+		diffPos = core->getParallaxDiff(core->getJDE());
+	}
+
 	// Iterate over the stars inside the triangles
 	f = cos(limFov * M_PI/180.);
 	for (auto* z : gridLevels)
@@ -1319,17 +1327,17 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 		int zone;
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 		{
-			z->searchAround(core, zone,v,f,result);
+			z->searchAround(core, zone, v, withParallax, diffPos, f, result);
 			//qDebug() << " " << zone;
 		}
 		//qDebug() << StelUtils::getEndLineChar() << "search border(" << it->first << "):";
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level); (zone = it1.next()) >= 0;)
 		{
-			z->searchAround(core, zone,v,f,result);
+			z->searchAround(core, zone, v, withParallax, diffPos, f, result);
 			//qDebug() << " " << zone;
 		}
 		// always search the last zone because it is a global zone
-		z->searchAround(core, (20<<(z->level<<1)), v, f, result);
+		z->searchAround(core, (20<<(z->level<<1)), v, withParallax, diffPos, f, result);
 	}
 	return result;
 }

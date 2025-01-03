@@ -357,9 +357,6 @@ void AsterismMgr::drawNames(StelPainter& sPainter) const
 		return;
 
 	StelCore *core=StelApp::getInstance().getCore();
-	Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-	vel=StelCore::matVsop87ToJ2000*vel;
-	vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
 
 	sPainter.setBlending(true);
 	for (auto* asterism : asterisms)
@@ -369,6 +366,7 @@ void AsterismMgr::drawNames(StelPainter& sPainter) const
 		Vec3d XYZname=asterism->XYZname;
 		if (core->getUseAberration())
 		{
+			const Vec3d vel = core->getAberrationVec(core->getJDE());
 			XYZname.normalize();
 			XYZname+=vel;
 			XYZname.normalize();
