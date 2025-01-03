@@ -24,6 +24,7 @@
 */
 
 #include "StelMovementMgr.hpp"
+#include "StelMainView.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
@@ -79,27 +80,28 @@ bool Smoother::finished() const
 }
 
 StelMovementMgr::StelMovementMgr(StelCore* acore)
-	: currentFov(60.)
-	, initFov(60.)
-	, minFov(0.001389)
+	: core(acore)
+	, conf(StelApp::getInstance().getSettings())
+	, objectMgr(GETSTELMODULE(StelObjectMgr))
+	, initFov(conf->value("navigation/init_fov",60.0).toDouble())
+	, currentFov(initFov)
+	, minFov(conf->value("navigation/min_fov",0.001389).toDouble()) // default: minimal FOV = 5"
 	, maxFov(100.)
-	, userMaxFov(360.)
+	, userMaxFov(conf->value("navigation/max_fov",360.).toDouble()) // default: 360°=no real limit. maxFov then depends on projection only.
 	, deltaFov(0.0)
-	, core(acore)
-	, objectMgr(Q_NULLPTR)
 	, flagLockEquPos(false)
 	, flagTracking(false)
 	, flagInhibitAllAutomoves(false)
 	, isMouseMovingHoriz(false)
 	, isMouseMovingVert(false)
-	, flagEnableMoveAtScreenEdge(false)
-	, flagEnableMouseNavigation(true)
-	, flagEnableMouseZooming(true)
-	, mouseZoomSpeed(30)
-	, flagEnableZoomKeys(true)
-	, flagEnableMoveKeys(true)
-	, keyMoveSpeed(0.00025)
-	, keyZoomSpeed(0.00025)
+	, flagEnableMoveAtScreenEdge(conf->value("navigation/flag_enable_move_at_screen_edge",false).toBool())
+	, flagEnableMouseNavigation(conf->value("navigation/flag_enable_mouse_navigation",true).toBool())
+	, flagEnableMouseZooming(conf->value("navigation/flag_enable_mouse_zooming",true).toBool())
+	, mouseZoomSpeed(conf->value("navigation/mouse_zoom",30).toInt())
+	, flagEnableZoomKeys(conf->value("navigation/flag_enable_zoom_keys", true).toBool())
+	, flagEnableMoveKeys(conf->value("navigation/flag_enable_move_keys", true).toBool())
+	, keyMoveSpeed(conf->value("navigation/move_speed",0.0004).toDouble())
+	, keyZoomSpeed(conf->value("navigation/zoom_speed", 0.0004).toDouble())
 	, flagMoveSlow(false)
 	, flagCustomPan(false)
 	, rateX(0.0)
@@ -110,31 +112,33 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, zoomingMode(ZoomNone)
 	, deltaAlt(0.0)
 	, deltaAz(0.0)
-	, flagManualZoom(false)
-	, autoMoveDuration(1.5)
+	, flagManualZoom(conf->value("navigation/flag_manual_zoom", false).toBool())
+	, autoMoveDuration(conf->value ("navigation/auto_move_duration",1.5f).toFloat())
 	, isDragging(false)
 	, hasDragged(false)
 	, previousX(0)
 	, previousY(0)
+	, timeDragHistory()
 	, beforeTimeDragTimeRate(0.0)
 	, dragTimeMode(false)
 	, zoomMove()
 	, flagAutoZoom(false)
-	, flagAutoZoomOutResetsDirection(false)
+	, flagAutoZoomOutResetsDirection(conf->value("navigation/auto_zoom_out_resets_direction", true).toBool())
 	, mountMode(MountAltAzimuthal)
+	, flagIndicationMountMode(conf->value("gui/flag_indication_mount_mode", false).toBool())
 	, initViewPos(1., 0., 0.)
 	, initViewUp(0., 0., 1.)
 	, viewDirectionJ2000(0., 1., 0.)
 	, viewDirectionMountFrame(0., 1., 0.)
 	, upVectorMountFrame(0.,0.,1.)
 	, dragTriggerDistance(4.f)
-	, viewportOffsetTimeline(Q_NULLPTR)
+	, viewportOffsetTimeline(new QTimeLine(1000, this))
 	, oldViewportOffset(0.0, 0.0)
 	, targetViewportOffset(0.0, 0.0)
-	, flagIndicationMountMode(false)
 	, lastMessageID(0)
 {
 	setObjectName("StelMovementMgr");
+	Q_ASSERT(objectMgr);
 }
 
 StelMovementMgr::~StelMovementMgr()
@@ -148,31 +152,9 @@ StelMovementMgr::~StelMovementMgr()
 
 void StelMovementMgr::init()
 {
-	conf = StelApp::getInstance().getSettings();
-	objectMgr = GETSTELMODULE(StelObjectMgr);
-	Q_ASSERT(conf);
-	Q_ASSERT(objectMgr);
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 		this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(bindingFOVActions()));
-
-	flagEnableMoveAtScreenEdge = conf->value("navigation/flag_enable_move_at_screen_edge",false).toBool();
-	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
-	flagEnableZoomKeys = conf->value("navigation/flag_enable_zoom_keys", true).toBool();
-	flagEnableMoveKeys = conf->value("navigation/flag_enable_move_keys", true).toBool();
-	keyMoveSpeed = conf->value("navigation/move_speed",0.0004).toDouble();
-	keyZoomSpeed = conf->value("navigation/zoom_speed", 0.0004).toDouble();
-	autoMoveDuration = conf->value ("navigation/auto_move_duration",1.5f).toFloat();
-	flagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
-	flagAutoZoomOutResetsDirection = conf->value("navigation/auto_zoom_out_resets_direction", true).toBool();
-	flagEnableMouseNavigation = conf->value("navigation/flag_enable_mouse_navigation",true).toBool();
-	flagEnableMouseZooming = conf->value("navigation/flag_enable_mouse_zooming",true).toBool();
-	flagIndicationMountMode = conf->value("gui/flag_indication_mount_mode", false).toBool();
-
-	minFov = conf->value("navigation/min_fov",0.001389).toDouble(); // default: minimal FOV = 5"
-	userMaxFov = conf->value("navigation/max_fov",360.).toDouble(); // default: 360°=no real limit. maxFov then depends on projection only.
-	initFov = conf->value("navigation/init_fov",60.0).toDouble();
-	currentFov = initFov;
 
 	// we must set mount mode before potentially loading zenith views etc.
 	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
@@ -211,7 +193,6 @@ void StelMovementMgr::init()
 	// The feature was moved from FOV plugin	
 	bindingFOVActions();
 
-	viewportOffsetTimeline=new QTimeLine(1000, this);
 	viewportOffsetTimeline->setFrameRange(0, 100);
 	connect(viewportOffsetTimeline, SIGNAL(valueChanged(qreal)), this, SLOT(handleViewportOffsetMovement(qreal)));
 	targetViewportOffset.set(core->getViewportHorizontalOffset(), core->getViewportVerticalOffset());
@@ -336,8 +317,8 @@ Vec3d StelMovementMgr::getViewUpVectorJ2000() const
 
 bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 {
-	// Turn if the mouse is at the edge of the screen unless config asks otherwise
-	if (flagEnableMoveAtScreenEdge)
+	// Turn if the mouse is at the edge of the screen unless config asks otherwise (this is too awkward in windowed mode)
+	if (flagEnableMoveAtScreenEdge && StelMainView::getInstance().isFullScreen())
 	{
 		if (x <= 1)
 		{
@@ -1756,6 +1737,16 @@ void StelMovementMgr::setUserMaxFov(double max)
 	}
 	StelApp::immediateSave("navigation/max_fov", userMaxFov);
 	emit userMaxFovChanged(userMaxFov);
+}
+
+void StelMovementMgr::setFov(double f)
+{
+	if (core->getCurrentProjectionType()==StelCore::ProjectionCylinderFill)
+		currentFov=180.0;
+	else
+		currentFov=qBound(minFov, f, maxFov);
+
+	emit currentFovChanged(currentFov);
 }
 
 void StelMovementMgr::moveViewport(double offsetX, double offsetY, const float duration)
