@@ -3109,9 +3109,10 @@ Vec3d StelCore::calculateParallaxDiff(double JD) {
 
 	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 	const PlanetP earth = ssystem->getEarth();
-	// diff between earth location at STAR_CATALOG_JDEPOCH and current location
-	Vec3d earthPosCatalog = earth->getHeliocentricEclipticPos(STAR_CATALOG_JDEPOCH);
-	Vec3d PosNow = core->getCurrentPlanet()->getHeliocentricEclipticPos(JD);
+	const PlanetP sun = ssystem->getSun();
+	// diff between earth bayrcentric location at STAR_CATALOG_JDEPOCH and current location
+	Vec3d earthPosCatalog = earth->getHeliocentricEclipticPos(STAR_CATALOG_JDEPOCH) + sun->getHeliocentricEclipticPos(STAR_CATALOG_JDEPOCH);
+	Vec3d PosNow = core->getCurrentPlanet()->getHeliocentricEclipticPos(JD) + sun->getHeliocentricEclipticPos(JD);
 	double obliquity = earth->getRotObliquity(STAR_CATALOG_JDEPOCH);  // need to always use Earth's obliquity because thats what the catalog is based on
 	// Transform from heliocentric ecliptic to equatorial coordinates
 	earthPosCatalog.set(earthPosCatalog[0], earthPosCatalog[1]*cos(obliquity)-earthPosCatalog[2]*sin(obliquity), earthPosCatalog[1]*sin(obliquity)+earthPosCatalog[2]*cos(obliquity));
@@ -3135,7 +3136,10 @@ const Vec3d StelCore::getParallaxDiff(double JD) {
 
 Vec3d StelCore::calculateAberrationVec(double JD) {
 	StelCore *core = StelApp::getInstance().getCore();
-	Vec3d vel = core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+	const PlanetP sun = ssystem->getSun();
+	// Solar system barycentric velocity
+	Vec3d vel = core->getCurrentPlanet()->getHeliocentricEclipticVelocity() + sun->getHeliocentricEclipticVelocity();
 	vel = StelCore::matVsop87ToJ2000 * vel * core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
 	return vel;
 }
