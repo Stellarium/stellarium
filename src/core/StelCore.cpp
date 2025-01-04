@@ -3140,7 +3140,7 @@ Vec3d StelCore::calculateAberrationVec(double JD) {
 	const PlanetP sun = ssystem->getSun();
 	// Solar system barycentric velocity
 	Vec3d vel = core->getCurrentPlanet()->getHeliocentricEclipticVelocity() + sun->getHeliocentricEclipticVelocity();
-	vel = StelCore::matVsop87ToJ2000 * vel * core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+	vel = StelCore::matVsop87ToJ2000 * vel * (AU/(86400.0*SPEED_OF_LIGHT));
 	return vel;
 }
 
@@ -3153,7 +3153,7 @@ const Vec3d StelCore::getAberrationVec(double JD) {
 		cachedAberrationJD = JD;
 		cachedAberrationPlanet = core->getCurrentPlanet()->getID();
 	}
-	return cachedAberrationVec;
+	return core->getAberrationFactor() * cachedAberrationVec;
 }
 
 QByteArray StelCore::getAberrationShader() const
