@@ -364,16 +364,19 @@ void AstroCalcDialog::createDialogContent()
 	initListSolarEclipseContact();
 	enableSolarEclipsesCircumstancesButtons(buttonState);
 	connect(ui->solareclipsescontactsSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipseCircumstances()));
-	connect(ui->solareclipsesMapSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipseMap()));
+	connect(ui->solareclipsesMapSaveButton, &QPushButton::clicked, this, [this]{saveSolarEclipseMap(false);});
+	connect(ui->solareclipseslocalMapSaveButton, &QPushButton::clicked, this, [this]{saveSolarEclipseMap(true);});
 	connect(ui->solareclipseTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipse(QModelIndex)));
 	connect(ui->solareclipseTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipseDate(QModelIndex)));
 	connect(ui->solareclipsecontactsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipseContact(QModelIndex)));
 	initListSolarEclipseLocal();
 	enableSolarEclipsesLocalButtons(buttonState);
+	enableSolarEclipsesLocalSingleEclipseButtons(buttonState);
 	connect(ui->solareclipseslocalCalculateButton, SIGNAL(clicked()), this, SLOT(generateSolarEclipsesLocal()));
 	connect(ui->solareclipseslocalCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupSolarEclipsesLocal()));
 	connect(ui->solareclipseslocalSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipsesLocal()));
 	connect(ui->solareclipselocalTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipseLocal(QModelIndex)));
+	connect(ui->solareclipselocalTreeWidget, &QTreeWidget::clicked, this, [this]{ enableSolarEclipsesLocalSingleEclipseButtons(true); });
 	initListTransit();
 	enableTransitsButtons(buttonState);
 	connect(ui->transitsCalculateButton, SIGNAL(clicked()), this, SLOT(generateTransits()));
@@ -3601,6 +3604,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 		// sort-by-date
 		ui->solareclipselocalTreeWidget->sortItems(SolarEclipseLocalDate, Qt::AscendingOrder);
 		enableSolarEclipsesLocalButtons(true);
+		enableSolarEclipsesLocalSingleEclipseButtons(false);
 	}
 	else
 		cleanupSolarEclipsesLocal();
@@ -3891,10 +3895,11 @@ void AstroCalcDialog::selectCurrentSolarEclipseDate(const QModelIndex& modelInde
 	//qDebug() << "Moving to MaxLoc ... done";
 }
 
-void AstroCalcDialog::saveSolarEclipseMap()
+void AstroCalcDialog::saveSolarEclipseMap(const bool local)
 {
 	// Make sure that we have circumstances of an eclipse in the table
-	if (ui->solareclipsecontactsTreeWidget->topLevelItemCount() == 0)
+	if ((local && ui->solareclipselocalTreeWidget->topLevelItemCount() == 0) ||
+	    (!local && ui->solareclipsecontactsTreeWidget->topLevelItemCount() == 0))
 		return;
 
 	StelApp::getInstance().enableBottomStelBarUpdates(false);
@@ -3902,7 +3907,17 @@ void AstroCalcDialog::saveSolarEclipseMap()
 	core->setUseTopocentricCoordinates(false);
 	core->update(0);
 
-	const double eclipseJD = ui->solareclipsecontactsTreeWidget->topLevelItem(1)->data(SolarEclipseContactDate, Qt::UserRole).toDouble();
+	double eclipseJD;
+	if (local)
+	{
+		const auto selected = ui->solareclipselocalTreeWidget->selectedItems();
+		if (selected.isEmpty()) return;
+		eclipseJD = selected[0]->data(SolarEclipseLocalDate, Qt::UserRole).toDouble();
+	}
+	else
+	{
+		eclipseJD = ui->solareclipsecontactsTreeWidget->topLevelItem(1)->data(SolarEclipseContactDate, Qt::UserRole).toDouble();
+	}
 	// Find exact time of minimum distance between axis of lunar shadow cone to the center of Earth
 	const double JDMid = ecliptor.getJDofMinimumDistance(eclipseJD);
 
@@ -3954,12 +3969,18 @@ void AstroCalcDialog::cleanupSolarEclipsesLocal()
 {
 	ui->solareclipselocalTreeWidget->clear();
 	enableSolarEclipsesLocalButtons(false);
+	enableSolarEclipsesLocalSingleEclipseButtons(false);
 }
 
 void AstroCalcDialog::enableSolarEclipsesLocalButtons(bool enable)
 {
 	ui->solareclipseslocalCleanupButton->setEnabled(enable);
 	ui->solareclipseslocalSaveButton->setEnabled(enable);
+}
+
+void AstroCalcDialog::enableSolarEclipsesLocalSingleEclipseButtons(bool enable)
+{
+	ui->solareclipseslocalMapSaveButton->setEnabled(enable);
 }
 
 void AstroCalcDialog::selectCurrentSolarEclipseLocal(const QModelIndex& modelIndex)
