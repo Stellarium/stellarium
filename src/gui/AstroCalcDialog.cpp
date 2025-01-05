@@ -561,6 +561,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->tabWidgetGraphs, SIGNAL(currentChanged(int)), this, SLOT(changeGraphsTab(int)));
 	connect(ui->tabWidgetPC, SIGNAL(currentChanged(int)), this, SLOT(changePCTab(int)));
 	connect(ui->tabWidgetEclipses, SIGNAL(currentChanged(int)), this, SLOT(changeEclipsesTab(int)));
+	changeEclipsesTab(ui->tabWidgetEclipses->currentIndex());
 
 	connect(ui->pushButtonExtraEphemerisDialog, SIGNAL(clicked()), this, SLOT(showExtraEphemerisDialog()));
 	connect(ui->pushButtonCustomStepsDialog, SIGNAL(clicked()), this, SLOT(showCustomStepsDialog()));
@@ -2632,100 +2633,116 @@ void AstroCalcDialog::generateLunarEclipses()
 				
 				if (pMag>0.)
 				{
+					bool add = false;
 					if (uMag>=1.)
+					{
 						eclipseTypeStr = qc_("Total", "eclipse type");
+						if (ui->eclipseFilterTotal->isChecked())
+							add = true;
+					}
 					else if (uMag>0.)
+					{
 						eclipseTypeStr = qc_("Partial", "eclipse type");
+						if (ui->eclipseFilterPartial->isChecked())
+							add = true;
+					}
 					else
+					{
 						eclipseTypeStr = qc_("Penumbral", "eclipse type");
-
-					// Visibility conditions / Elevation of the Moon at max. phase of eclipse
-					StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
-					double altitude=alt*M_180_PI;
-
-					if (altitude >= 45.) // Perfect conditions - 45+ degrees
-					{
-						visibilityConditionsStr = qc_("Perfect", "visibility conditions");
-						visibilityConditionsTooltip = q_("Perfect visibility conditions for current location");
-					}
-					else if (altitude >= 30.) // "Photometric altitude" - 30+ degrees
-					{
-						visibilityConditionsStr = qc_("Good", "visibility conditions");
-						visibilityConditionsTooltip = q_("Good visibility conditions for current location");
-					}
-					else
-					{
-						visibilityConditionsStr = qc_("Bad", "visibility conditions");
-						visibilityConditionsTooltip = q_("Bad visibility conditions for current location");
+						if (ui->eclipseFilterPenumbral->isChecked())
+							add = true;
 					}
 
-					// Our rule of thumb is that a partial penumbral eclipse is detectable with
-					// the unaided eye if penumbral magnitude>0.7
-					if (uMag < 1.0 && pMag < 0.7)
+					if (add)
 					{
-						// TRANSLATORS: Not obs. = Not observable
-						visibilityConditionsStr = qc_("Not obs.", "visibility conditions");
-						visibilityConditionsTooltip = q_("Not observable eclipse");
+						// Visibility conditions / Elevation of the Moon at max. phase of eclipse
+						StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
+						double altitude=alt*M_180_PI;
+
+						if (altitude >= 45.) // Perfect conditions - 45+ degrees
+						{
+							visibilityConditionsStr = qc_("Perfect", "visibility conditions");
+							visibilityConditionsTooltip = q_("Perfect visibility conditions for current location");
+						}
+						else if (altitude >= 30.) // "Photometric altitude" - 30+ degrees
+						{
+							visibilityConditionsStr = qc_("Good", "visibility conditions");
+							visibilityConditionsTooltip = q_("Good visibility conditions for current location");
+						}
+						else
+						{
+							visibilityConditionsStr = qc_("Bad", "visibility conditions");
+							visibilityConditionsTooltip = q_("Bad visibility conditions for current location");
+						}
+
+						// Our rule of thumb is that a partial penumbral eclipse is detectable with
+						// the unaided eye if penumbral magnitude>0.7
+						if (uMag < 1.0 && pMag < 0.7)
+						{
+							// TRANSLATORS: Not obs. = Not observable
+							visibilityConditionsStr = qc_("Not obs.", "visibility conditions");
+							visibilityConditionsTooltip = q_("Not observable eclipse");
+						}
+
+						if (altitude<0.)
+						{
+							visibilityConditionsStr = qc_("Invisible", "visibility conditions");
+							visibilityConditionsTooltip = q_("The greatest eclipse is invisible in current location");
+						}
+
+						// Saros series calculations - useful to search for eclipses in the same Saros
+						// Adapted from Saros calculations for solar eclipses in Sky & Telescope (October 1985)
+						// Saros numbers calculated here are matching well with NASA's Five Millennium Catalog of Lunar Eclipses
+
+						// ln = Brown Lunation number : = 1 at the first New Moon of 1923
+						double q = round((JD-2423436.40347)/29.530588-0.25);
+						int ln = int(q) + 1 - 953;
+						int nd = ln + 105;
+						int s = 148 + 38 * nd;
+						int nx = -61 * nd;
+						int nc = floor(nx / 358. + 0.5 - nd / (12. * 358 * 358));
+						int saros = 1 + ((s + nc * 223 - 1) % 223);
+						if ((s + nc * 223 - 1) < 0) saros -= 223;
+						if (saros < -223) saros += 223;
+
+						// gamma = minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone
+						// in units of Earth’s equatorial radius. Positive when the Moon passes north of the shadow cone axis.
+						// Source: https://eclipse.gsfc.nasa.gov/5MCLE/5MCLE-Text10.pdf
+						double gamma = m*0.2725076/mSD;
+						if (y<0.) gamma *= -1.;
+
+						sarosStr = QString("%1").arg(QString::number(saros));
+						gammaStr = QString("%1").arg(QString::number(gamma, 'f', 3));
+						pMagStr = QString("%1").arg(QString::number(pMag, 'f', 3));
+						if (uMag<0.)
+							uMagStr = dash;
+						else
+							uMagStr = QString("%1").arg(QString::number(uMag, 'f', 3));
+
+
+						ACLunarEclipseTreeWidgetItem* treeItem = new ACLunarEclipseTreeWidgetItem(ui->lunareclipseTreeWidget);
+						const double utcOffsetHrs = core->getUTCOffset(JD);
+						treeItem->setText(LunarEclipseDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD, utcOffsetHrs), localeMgr->getPrintableTimeLocal(JD, utcOffsetHrs))); // local date and time
+						treeItem->setData(LunarEclipseDate, Qt::UserRole, JD);
+						treeItem->setText(LunarEclipseSaros, sarosStr);
+						treeItem->setToolTip(LunarEclipseSaros, q_("Saros series number of eclipse (each eclipse in a Saros is separated by an interval of 18 years 11.3 days)"));
+						treeItem->setText(LunarEclipseType, eclipseTypeStr);
+						treeItem->setText(LunarEclipseGamma, gammaStr);
+						treeItem->setText(LunarEclipsePMag, pMagStr);
+						treeItem->setToolTip(LunarEclipsePMag, q_("Penumbral magnitude is the fraction of the Moon's diameter immersed in the penumbra"));
+						treeItem->setData(LunarEclipsePMag, Qt::UserRole, pMag);
+						treeItem->setText(LunarEclipseUMag, uMagStr);
+						treeItem->setToolTip(LunarEclipseUMag, q_("Umbral magnitude is the fraction of the Moon's diameter immersed in the umbra"));
+						treeItem->setData(LunarEclipseUMag, Qt::UserRole, uMag);
+						treeItem->setText(LunarEclipseVisConditions, visibilityConditionsStr);
+						treeItem->setData(LunarEclipseVisConditions, Qt::UserRole, altitude);
+						treeItem->setToolTip(LunarEclipseVisConditions, visibilityConditionsTooltip);
+						treeItem->setTextAlignment(LunarEclipseDate, Qt::AlignRight);
+						treeItem->setTextAlignment(LunarEclipseSaros, Qt::AlignRight);
+						treeItem->setTextAlignment(LunarEclipseGamma, Qt::AlignRight);
+						treeItem->setTextAlignment(LunarEclipsePMag, Qt::AlignRight);
+						treeItem->setTextAlignment(LunarEclipseUMag, Qt::AlignRight);
 					}
-
-					if (altitude<0.)
-					{
-						visibilityConditionsStr = qc_("Invisible", "visibility conditions");
-						visibilityConditionsTooltip = q_("The greatest eclipse is invisible in current location");
-					}
-
-					// Saros series calculations - useful to search for eclipses in the same Saros
-					// Adapted from Saros calculations for solar eclipses in Sky & Telescope (October 1985)
-					// Saros numbers calculated here are matching well with NASA's Five Millennium Catalog of Lunar Eclipses
-
-					// ln = Brown Lunation number : = 1 at the first New Moon of 1923
-					double q = round((JD-2423436.40347)/29.530588-0.25);
-					int ln = int(q) + 1 - 953;
-					int nd = ln + 105;
-					int s = 148 + 38 * nd;
-					int nx = -61 * nd;
-					int nc = floor(nx / 358. + 0.5 - nd / (12. * 358 * 358));
-					int saros = 1 + ((s + nc * 223 - 1) % 223);
-					if ((s + nc * 223 - 1) < 0) saros -= 223;
-					if (saros < -223) saros += 223;
-
-					// gamma = minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone
-					// in units of Earth’s equatorial radius. Positive when the Moon passes north of the shadow cone axis.
-					// Source: https://eclipse.gsfc.nasa.gov/5MCLE/5MCLE-Text10.pdf
-					double gamma = m*0.2725076/mSD;
-					if (y<0.) gamma *= -1.;
-
-					sarosStr = QString("%1").arg(QString::number(saros));
-					gammaStr = QString("%1").arg(QString::number(gamma, 'f', 3));
-					pMagStr = QString("%1").arg(QString::number(pMag, 'f', 3));
-					if (uMag<0.)
-						uMagStr = dash;
-					else
-						uMagStr = QString("%1").arg(QString::number(uMag, 'f', 3));
-
-
-					ACLunarEclipseTreeWidgetItem* treeItem = new ACLunarEclipseTreeWidgetItem(ui->lunareclipseTreeWidget);
-					const double utcOffsetHrs = core->getUTCOffset(JD);
-					treeItem->setText(LunarEclipseDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD, utcOffsetHrs), localeMgr->getPrintableTimeLocal(JD, utcOffsetHrs))); // local date and time
-					treeItem->setData(LunarEclipseDate, Qt::UserRole, JD);
-					treeItem->setText(LunarEclipseSaros, sarosStr);
-					treeItem->setToolTip(LunarEclipseSaros, q_("Saros series number of eclipse (each eclipse in a Saros is separated by an interval of 18 years 11.3 days)"));
-					treeItem->setText(LunarEclipseType, eclipseTypeStr);
-					treeItem->setText(LunarEclipseGamma, gammaStr);
-					treeItem->setText(LunarEclipsePMag, pMagStr);
-					treeItem->setToolTip(LunarEclipsePMag, q_("Penumbral magnitude is the fraction of the Moon's diameter immersed in the penumbra"));
-					treeItem->setData(LunarEclipsePMag, Qt::UserRole, pMag);
-					treeItem->setText(LunarEclipseUMag, uMagStr);
-					treeItem->setToolTip(LunarEclipseUMag, q_("Umbral magnitude is the fraction of the Moon's diameter immersed in the umbra"));
-					treeItem->setData(LunarEclipseUMag, Qt::UserRole, uMag);
-					treeItem->setText(LunarEclipseVisConditions, visibilityConditionsStr);
-					treeItem->setData(LunarEclipseVisConditions, Qt::UserRole, altitude);
-					treeItem->setToolTip(LunarEclipseVisConditions, visibilityConditionsTooltip);
-					treeItem->setTextAlignment(LunarEclipseDate, Qt::AlignRight);
-					treeItem->setTextAlignment(LunarEclipseSaros, Qt::AlignRight);
-					treeItem->setTextAlignment(LunarEclipseGamma, Qt::AlignRight);
-					treeItem->setTextAlignment(LunarEclipsePMag, Qt::AlignRight);
-					treeItem->setTextAlignment(LunarEclipseUMag, Qt::AlignRight);
 				}
 			}
 		}
@@ -3159,18 +3176,27 @@ void AstroCalcDialog::generateSolarEclipses()
 				// Source: Astronomical Algorithms (1991), Jean Meeus
 				if (abs(gamma) <= (1.5433 + L2))
 				{
+					bool add = false;
 					if (abs(gamma) > 0.9972 && abs(gamma) < (1.5433 + L2))
 					{
 						if (abs(gamma) < 0.9972 + abs(L2) && dRatio > 1.)
 						{
 							eclipseTypeStr = qc_("Total", "eclipse type"); // Non-central total eclipse
+							if (ui->eclipseFilterTotal->isChecked())
+								add = true;
 						}
 						else if (abs(gamma) < 0.9972 + abs(L2) && dRatio < 1.)
 						{
 							eclipseTypeStr = qc_("Annular", "eclipse type"); // Non-central annular eclipse
+							if (ui->eclipseFilterAnnular->isChecked())
+								add = true;
 						}
 						else
+						{
 							eclipseTypeStr = qc_("Partial", "eclipse type");
+							if (ui->eclipseFilterPartial->isChecked())
+								add = true;
+						}
 						noncentraleclipse = true;
 					}
 					else
@@ -3178,105 +3204,116 @@ void AstroCalcDialog::generateSolarEclipses()
 						if (L2 < 0.)
 						{
 							eclipseTypeStr = qc_("Total", "eclipse type");
+							if (ui->eclipseFilterTotal->isChecked())
+								add = true;
 						}
 						else if (L2 > 0.0047)
 						{
 							eclipseTypeStr = qc_("Annular", "eclipse type");
+							if (ui->eclipseFilterAnnular->isChecked())
+								add = true;
 						}
 						else if (L2 > 0. && L2 < 0.0047)
 						{
 							if (L2 < (0.00464 * sqrt(1. - gamma * gamma)))
 							{
 								eclipseTypeStr = qc_("Hybrid", "eclipse type");
+								if (ui->eclipseFilterHybrid->isChecked())
+									add = true;
 							}
 							else
 							{
 								eclipseTypeStr = qc_("Annular", "eclipse type");
+								if (ui->eclipseFilterAnnular->isChecked())
+									add = true;
 							}
 						}
 					}
 
-					// Saros series calculations - useful to search for eclipses in the same Saros
-					// Adapted from Saros calculations for solar eclipses in Sky & Telescope (October 1985)
-					// Saros numbers calculated here are matching well with NASA's Five Millennium Catalog of Solar Eclipses
-
-					// ln = Brown Lunation number : = 1 at the first New Moon of 1923
-					const double q = round ((JD-2423436.40347)/29.530588);
-					const int ln = int(q) + 1 - 953;
-					const int nd = ln + 105;
-					const int s = 136 + 38 * nd;
-					const int nx = -61 * nd;
-					const int nc = qFloor(nx / 358. + 0.5 - nd / (12. * 358 * 358));
-					int saros = 1 + ((s + nc * 223 - 1) % 223);
-					if ((s + nc * 223 - 1) < 0) saros -= 223;
-					if (saros < -223) saros += 223;
-
-					sarosStr = QString("%1").arg(QString::number(saros));
-					gammaStr = QString("%1").arg(QString::number(gamma, 'f', 3));
-					double eclipseLatitude = 0.;
-					double eclipseLongitude = 0.;
-					double eclipseAltitude = 0.;
-
-					if (noncentraleclipse)
+					if (add)
 					{
-						magStr = QString("%1").arg(QString::number(magnitude, 'f', 3));
-						eclipseLatitude = latDeg;
-						eclipseLongitude = lngDeg;
-						altitudeStr = "0°";
-						durationStr = dash;
-						pathWidthStr = dash;
-					}
-					else
-					{
-						magStr = QString("%1").arg(QString::number(dRatio, 'f', 3));
-						eclipseAltitude = altitude;
-						altitudeStr = QString("%1°").arg(QString::number(round(eclipseAltitude)));
-						pathWidthStr = QString("%1 %2").arg(QString::number(round(pathWidth)), km);
-						eclipseLatitude = latDeg;
-						eclipseLongitude = lngDeg;
-						double centralDuration = abs(duration);
-						int durationMinute = int(centralDuration);
-						int durationSecond = qRound((centralDuration - durationMinute) * 60.);
-						if (durationSecond>59)
+						// Saros series calculations - useful to search for eclipses in the same Saros
+						// Adapted from Saros calculations for solar eclipses in Sky & Telescope (October 1985)
+						// Saros numbers calculated here are matching well with NASA's Five Millennium Catalog of Solar Eclipses
+
+						// ln = Brown Lunation number : = 1 at the first New Moon of 1923
+						const double q = round ((JD-2423436.40347)/29.530588);
+						const int ln = int(q) + 1 - 953;
+						const int nd = ln + 105;
+						const int s = 136 + 38 * nd;
+						const int nx = -61 * nd;
+						const int nc = qFloor(nx / 358. + 0.5 - nd / (12. * 358 * 358));
+						int saros = 1 + ((s + nc * 223 - 1) % 223);
+						if ((s + nc * 223 - 1) < 0) saros -= 223;
+						if (saros < -223) saros += 223;
+
+						sarosStr = QString("%1").arg(QString::number(saros));
+						gammaStr = QString("%1").arg(QString::number(gamma, 'f', 3));
+						double eclipseLatitude = 0.;
+						double eclipseLongitude = 0.;
+						double eclipseAltitude = 0.;
+
+						if (noncentraleclipse)
 						{
-							durationMinute += 1;
-							durationSecond = 0;
+							magStr = QString("%1").arg(QString::number(magnitude, 'f', 3));
+							eclipseLatitude = latDeg;
+							eclipseLongitude = lngDeg;
+							altitudeStr = "0°";
+							durationStr = dash;
+							pathWidthStr = dash;
 						}
-						if (durationSecond>9)
-							durationStr = QString("%1m %2s").arg(QString::number(durationMinute), QString::number(durationSecond));
 						else
-							durationStr = QString("%1m 0%2s").arg(QString::number(durationMinute), QString::number(durationSecond));
+						{
+							magStr = QString("%1").arg(QString::number(dRatio, 'f', 3));
+							eclipseAltitude = altitude;
+							altitudeStr = QString("%1°").arg(QString::number(round(eclipseAltitude)));
+							pathWidthStr = QString("%1 %2").arg(QString::number(round(pathWidth)), km);
+							eclipseLatitude = latDeg;
+							eclipseLongitude = lngDeg;
+							double centralDuration = abs(duration);
+							int durationMinute = int(centralDuration);
+							int durationSecond = qRound((centralDuration - durationMinute) * 60.);
+							if (durationSecond>59)
+							{
+								durationMinute += 1;
+								durationSecond = 0;
+							}
+							if (durationSecond>9)
+								durationStr = QString("%1m %2s").arg(QString::number(durationMinute), QString::number(durationSecond));
+							else
+								durationStr = QString("%1m 0%2s").arg(QString::number(durationMinute), QString::number(durationSecond));
+						}
+
+						latitudeStr = StelUtils::decDegToLatitudeStr(eclipseLatitude, !withDecimalDegree);
+						longitudeStr = StelUtils::decDegToLongitudeStr(eclipseLongitude, true, false, !withDecimalDegree);
+
+						ACSolarEclipseTreeWidgetItem* treeItem = new ACSolarEclipseTreeWidgetItem(ui->solareclipseTreeWidget);
+						const double utcOffsetHrs = core->getUTCOffset(JD);
+						treeItem->setText(SolarEclipseDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD, utcOffsetHrs), localeMgr->getPrintableTimeLocal(JD, utcOffsetHrs))); // local date and time
+						treeItem->setData(SolarEclipseDate, Qt::UserRole, JD);
+						treeItem->setText(SolarEclipseSaros, sarosStr);
+						treeItem->setToolTip(SolarEclipseSaros, q_("Saros series number of eclipse (each eclipse in a Saros is separated by an interval of 18 years 11.3 days)"));
+						treeItem->setText(SolarEclipseType, eclipseTypeStr);
+						treeItem->setText(SolarEclipseGamma, gammaStr);
+						treeItem->setText(SolarEclipseMag, magStr);
+						treeItem->setToolTip(SolarEclipseMag, q_("Eclipse magnitude is the fraction of the Sun's diameter obscured by the Moon"));
+						treeItem->setText(SolarEclipseLatitude, latitudeStr);
+						treeItem->setData(SolarEclipseLatitude, Qt::UserRole, eclipseLatitude);
+						treeItem->setText(SolarEclipseLongitude, longitudeStr);
+						treeItem->setData(SolarEclipseLongitude, Qt::UserRole, eclipseLongitude);
+						treeItem->setText(SolarEclipseAltitude, altitudeStr);
+						treeItem->setData(SolarEclipseAltitude, Qt::UserRole, eclipseAltitude);
+						treeItem->setToolTip(SolarEclipseAltitude, q_("Sun's altitude at greatest eclipse"));
+						treeItem->setText(SolarEclipsePathwidth, pathWidthStr);
+						treeItem->setData(SolarEclipsePathwidth, Qt::UserRole, pathWidth);
+						treeItem->setToolTip(SolarEclipsePathwidth, q_("Width of the path of totality or annularity at greatest eclipse"));
+						treeItem->setText(SolarEclipseDuration, durationStr);
+						treeItem->setData(SolarEclipseDuration, Qt::UserRole, abs(duration));
+						treeItem->setToolTip(SolarEclipseDuration, q_("Duration of total or annular phase at greatest eclipse"));
+						for (auto column: {SolarEclipseDate,      SolarEclipseSaros,    SolarEclipseGamma,     SolarEclipseMag,      SolarEclipseLatitude,
+								   SolarEclipseLongitude, SolarEclipseAltitude, SolarEclipsePathwidth, SolarEclipseDuration})
+							treeItem->setTextAlignment(column, Qt::AlignRight);
 					}
-
-					latitudeStr = StelUtils::decDegToLatitudeStr(eclipseLatitude, !withDecimalDegree);
-					longitudeStr = StelUtils::decDegToLongitudeStr(eclipseLongitude, true, false, !withDecimalDegree);
-
-					ACSolarEclipseTreeWidgetItem* treeItem = new ACSolarEclipseTreeWidgetItem(ui->solareclipseTreeWidget);
-					const double utcOffsetHrs = core->getUTCOffset(JD);
-					treeItem->setText(SolarEclipseDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD, utcOffsetHrs), localeMgr->getPrintableTimeLocal(JD, utcOffsetHrs))); // local date and time
-					treeItem->setData(SolarEclipseDate, Qt::UserRole, JD);
-					treeItem->setText(SolarEclipseSaros, sarosStr);
-					treeItem->setToolTip(SolarEclipseSaros, q_("Saros series number of eclipse (each eclipse in a Saros is separated by an interval of 18 years 11.3 days)"));
-					treeItem->setText(SolarEclipseType, eclipseTypeStr);
-					treeItem->setText(SolarEclipseGamma, gammaStr);
-					treeItem->setText(SolarEclipseMag, magStr);
-					treeItem->setToolTip(SolarEclipseMag, q_("Eclipse magnitude is the fraction of the Sun's diameter obscured by the Moon"));
-					treeItem->setText(SolarEclipseLatitude, latitudeStr);
-					treeItem->setData(SolarEclipseLatitude, Qt::UserRole, eclipseLatitude);
-					treeItem->setText(SolarEclipseLongitude, longitudeStr);
-					treeItem->setData(SolarEclipseLongitude, Qt::UserRole, eclipseLongitude);
-					treeItem->setText(SolarEclipseAltitude, altitudeStr);
-					treeItem->setData(SolarEclipseAltitude, Qt::UserRole, eclipseAltitude);
-					treeItem->setToolTip(SolarEclipseAltitude, q_("Sun's altitude at greatest eclipse"));
-					treeItem->setText(SolarEclipsePathwidth, pathWidthStr);
-					treeItem->setData(SolarEclipsePathwidth, Qt::UserRole, pathWidth);
-					treeItem->setToolTip(SolarEclipsePathwidth, q_("Width of the path of totality or annularity at greatest eclipse"));
-					treeItem->setText(SolarEclipseDuration, durationStr);
-					treeItem->setData(SolarEclipseDuration, Qt::UserRole, abs(duration));
-					treeItem->setToolTip(SolarEclipseDuration, q_("Duration of total or annular phase at greatest eclipse"));
-					for (auto column: {SolarEclipseDate,      SolarEclipseSaros,    SolarEclipseGamma,     SolarEclipseMag,      SolarEclipseLatitude,
-							   SolarEclipseLongitude, SolarEclipseAltitude, SolarEclipsePathwidth, SolarEclipseDuration})
-						treeItem->setTextAlignment(column, Qt::AlignRight);
 				}
 			}
 		}
@@ -3515,6 +3552,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 							}
 							double C3altitude = eclipseData.altitude;
 
+							bool add = false;
 							if (eclipseData.ce > 0. && ((C2altitude > -.3) || (C3altitude > -.3))) // Central eclipse occurs
 							{
 								centraleclipse = true;
@@ -3522,66 +3560,77 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 								{
 									eclipseTypeStr = qc_("Total", "eclipse type");
 									qSwap(JD2, JD3);
+									if (ui->eclipseFilterTotal->isChecked())
+										add = true;
 								}
 								else
+								{
 									eclipseTypeStr = qc_("Annular", "eclipse type");
+									if (ui->eclipseFilterAnnular->isChecked())
+										add = true;
+								}
 							}
 							else
-								{
-									eclipseTypeStr = qc_("Partial", "eclipse type");
-									centraleclipse = false;
-								}
-
-							if (centraleclipse)
 							{
-								double duration = abs(JD3-JD2)*1440.;
-								int durationMinute = int(duration);
-								int durationSecond = qRound((duration - durationMinute) * 60.);
-								if (durationSecond>59)
-								{
-									durationMinute += 1;
-									durationSecond = 0;
-								}
-								if (durationSecond>9)
-									durationStr = QString("%1m %2s").arg(QString::number(durationMinute), QString::number(durationSecond));
-								else
-									durationStr = QString("%1m 0%2s").arg(QString::number(durationMinute), QString::number(durationSecond));
+								eclipseTypeStr = qc_("Partial", "eclipse type");
+								centraleclipse = false;
+								if (ui->eclipseFilterPartial->isChecked())
+									add = true;
 							}
 
-							ACSolarEclipseLocalTreeWidgetItem* treeItem = new ACSolarEclipseLocalTreeWidgetItem(ui->solareclipselocalTreeWidget);
-							treeItem->setText(SolarEclipseLocalDate, QString("%1").arg(localeMgr->getPrintableDateLocal(JDmax, core->getUTCOffset(JDmax)))); // local date
-							treeItem->setData(SolarEclipseLocalDate, Qt::UserRole, JDmax);
-							treeItem->setText(SolarEclipseLocalType, eclipseTypeStr);
-							treeItem->setText(SolarEclipseLocalFirstContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD1, core->getUTCOffset(JD1))));
-							if (centraleclipse && JD2<JD1) // central eclipse  in progress at Sunrise
-								treeItem->setText(SolarEclipseLocalFirstContact, dash);
-							treeItem->setToolTip(SolarEclipseLocalFirstContact, q_("The time of first contact"));
-							
-							if (centraleclipse)
-								treeItem->setText(SolarEclipseLocal2ndContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD2, core->getUTCOffset(JD2))));
-							else
-								treeItem->setText(SolarEclipseLocal2ndContact, dash);
-							treeItem->setToolTip(SolarEclipseLocal2ndContact, q_("The time of second contact"));
-							treeItem->setText(SolarEclipseLocalMaximum, QString("%1").arg(localeMgr->getPrintableTimeLocal(JDmax, core->getUTCOffset(JDmax))));
-							treeItem->setToolTip(SolarEclipseLocalMaximum, q_("The time of greatest eclipse"));
-							treeItem->setText(SolarEclipseLocalMagnitude, magStr);
-							if (centraleclipse)
-								treeItem->setText(SolarEclipseLocal3rdContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD3, core->getUTCOffset(JD3))));
-							else
-								treeItem->setText(SolarEclipseLocal3rdContact, dash);
-							treeItem->setToolTip(SolarEclipseLocal3rdContact, q_("The time of third contact"));
-							treeItem->setText(SolarEclipseLocalLastContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD4, core->getUTCOffset(JD4))));
-							if (centraleclipse && JD3>JD4) // central eclipse in progress at Sunset
-								treeItem->setText(SolarEclipseLocalLastContact, dash);
-							treeItem->setToolTip(SolarEclipseLocalLastContact, q_("The time of fourth contact"));
-							if (centraleclipse)
-								treeItem->setText(SolarEclipseLocalDuration, durationStr);
-							else
-								treeItem->setText(SolarEclipseLocalDuration, dash);
-							treeItem->setToolTip(SolarEclipseLocalDuration, q_("Duration of total or annular eclipse"));
-							for (auto column: {SolarEclipseLocalDate,    SolarEclipseLocalMagnitude,  SolarEclipseLocalFirstContact, SolarEclipseLocal2ndContact,
-									   SolarEclipseLocalMaximum, SolarEclipseLocal3rdContact, SolarEclipseLocalLastContact,  SolarEclipseLocalDuration})
-								treeItem->setTextAlignment(column, Qt::AlignRight);
+							if (add)
+							{
+								if (centraleclipse)
+								{
+									double duration = abs(JD3-JD2)*1440.;
+									int durationMinute = int(duration);
+									int durationSecond = qRound((duration - durationMinute) * 60.);
+									if (durationSecond>59)
+									{
+										durationMinute += 1;
+										durationSecond = 0;
+									}
+									if (durationSecond>9)
+										durationStr = QString("%1m %2s").arg(QString::number(durationMinute), QString::number(durationSecond));
+									else
+										durationStr = QString("%1m 0%2s").arg(QString::number(durationMinute), QString::number(durationSecond));
+								}
+
+								ACSolarEclipseLocalTreeWidgetItem* treeItem = new ACSolarEclipseLocalTreeWidgetItem(ui->solareclipselocalTreeWidget);
+								treeItem->setText(SolarEclipseLocalDate, QString("%1").arg(localeMgr->getPrintableDateLocal(JDmax, core->getUTCOffset(JDmax)))); // local date
+								treeItem->setData(SolarEclipseLocalDate, Qt::UserRole, JDmax);
+								treeItem->setText(SolarEclipseLocalType, eclipseTypeStr);
+								treeItem->setText(SolarEclipseLocalFirstContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD1, core->getUTCOffset(JD1))));
+								if (centraleclipse && JD2<JD1) // central eclipse  in progress at Sunrise
+									treeItem->setText(SolarEclipseLocalFirstContact, dash);
+								treeItem->setToolTip(SolarEclipseLocalFirstContact, q_("The time of first contact"));
+
+								if (centraleclipse)
+									treeItem->setText(SolarEclipseLocal2ndContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD2, core->getUTCOffset(JD2))));
+								else
+									treeItem->setText(SolarEclipseLocal2ndContact, dash);
+								treeItem->setToolTip(SolarEclipseLocal2ndContact, q_("The time of second contact"));
+								treeItem->setText(SolarEclipseLocalMaximum, QString("%1").arg(localeMgr->getPrintableTimeLocal(JDmax, core->getUTCOffset(JDmax))));
+								treeItem->setToolTip(SolarEclipseLocalMaximum, q_("The time of greatest eclipse"));
+								treeItem->setText(SolarEclipseLocalMagnitude, magStr);
+								if (centraleclipse)
+									treeItem->setText(SolarEclipseLocal3rdContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD3, core->getUTCOffset(JD3))));
+								else
+									treeItem->setText(SolarEclipseLocal3rdContact, dash);
+								treeItem->setToolTip(SolarEclipseLocal3rdContact, q_("The time of third contact"));
+								treeItem->setText(SolarEclipseLocalLastContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD4, core->getUTCOffset(JD4))));
+								if (centraleclipse && JD3>JD4) // central eclipse in progress at Sunset
+									treeItem->setText(SolarEclipseLocalLastContact, dash);
+								treeItem->setToolTip(SolarEclipseLocalLastContact, q_("The time of fourth contact"));
+								if (centraleclipse)
+									treeItem->setText(SolarEclipseLocalDuration, durationStr);
+								else
+									treeItem->setText(SolarEclipseLocalDuration, dash);
+								treeItem->setToolTip(SolarEclipseLocalDuration, q_("Duration of total or annular eclipse"));
+								for (auto column: {SolarEclipseLocalDate,    SolarEclipseLocalMagnitude,  SolarEclipseLocalFirstContact, SolarEclipseLocal2ndContact,
+								                   SolarEclipseLocalMaximum, SolarEclipseLocal3rdContact, SolarEclipseLocalLastContact,  SolarEclipseLocalDuration})
+									treeItem->setTextAlignment(column, Qt::AlignRight);
+							}
 						}
 					}
 				}
@@ -7194,6 +7243,30 @@ void AstroCalcDialog::changeEclipsesTab(int index)
 		{3,	q_("Transits of Mercury and Venus across the Sun")}
 		};
 	ui->eclipseHeaderLabel->setText(headermap.value(index, q_("Table of solar eclipses")));
+	switch(index)
+	{
+	case 0: // Solar eclipses
+		ui->eclipseFilterWidget->setVisible(true);
+		ui->eclipseFilterHybrid->setVisible(true);
+		ui->eclipseFilterAnnular->setVisible(true);
+		ui->eclipseFilterPenumbral->setVisible(false);
+		break;
+	case 1: // Local solar eclipses
+		ui->eclipseFilterWidget->setVisible(true);
+		ui->eclipseFilterHybrid->setVisible(false);
+		ui->eclipseFilterAnnular->setVisible(true);
+		ui->eclipseFilterPenumbral->setVisible(false);
+		break;
+	case 2: // Lunar eclipses
+		ui->eclipseFilterWidget->setVisible(true);
+		ui->eclipseFilterHybrid->setVisible(false);
+		ui->eclipseFilterAnnular->setVisible(false);
+		ui->eclipseFilterPenumbral->setVisible(true);
+		break;
+	default:
+		ui->eclipseFilterWidget->setVisible(false);
+		break;
+	}
 }
 
 void AstroCalcDialog::updateTabBarListWidgetWidth()
