@@ -357,6 +357,8 @@ private slots:
 	void selectCurrentTransit(const QModelIndex &modelIndex);
 	void saveTransits();
 
+	void saveEclipseFiltersState();
+
 	void saveEphemerisCelestialBody(int index);
 	void saveEphemerisSecondaryCelestialBody(int index);
 	void saveEphemerisTimeStep(int index);

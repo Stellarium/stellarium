@@ -381,6 +381,12 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->transitsSaveButton, SIGNAL(clicked()), this, SLOT(saveTransits()));
 	connect(ui->transitTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentTransit(QModelIndex)));
 
+	connect(ui->eclipseFilterTotal, &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
+	connect(ui->eclipseFilterHybrid, &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
+	connect(ui->eclipseFilterAnnular, &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
+	connect(ui->eclipseFilterPartial, &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
+	connect(ui->eclipseFilterPenumbral, &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
+
 	// Let's use DMS and decimal degrees as acceptable values for "Maximum allowed separation" input box
 	ui->allowedSeparationSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->allowedSeparationSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
@@ -4704,6 +4710,29 @@ void AstroCalcDialog::saveTransits()
 		saveTableAsXLSX(fileData.first, ui->transitTreeWidget, transitHeader, q_("Transits across the Sun"), q_("Transits across the Sun"), q_("Notes: Time in parentheses means the contact is invisible at current location. Transit times during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 }
 
+void AstroCalcDialog::saveEclipseFiltersState()
+{
+	switch(ui->tabWidgetEclipses->currentIndex())
+	{
+	case 0: // Solar eclipses
+		conf->setValue("astrocalc/eclipse_filter/global_solar/total_enabled",   ui->eclipseFilterTotal->isChecked());
+		conf->setValue("astrocalc/eclipse_filter/global_solar/hybrid_enabled",  ui->eclipseFilterHybrid->isChecked());
+		conf->setValue("astrocalc/eclipse_filter/global_solar/annular_enabled", ui->eclipseFilterAnnular->isChecked());
+		conf->setValue("astrocalc/eclipse_filter/global_solar/partial_enabled", ui->eclipseFilterPartial->isChecked());
+		break;
+	case 1: // Local solar eclipses
+		conf->setValue("astrocalc/eclipse_filter/local_solar/total_enabled",   ui->eclipseFilterTotal->isChecked());
+		conf->setValue("astrocalc/eclipse_filter/local_solar/annular_enabled", ui->eclipseFilterAnnular->isChecked());
+		conf->setValue("astrocalc/eclipse_filter/local_solar/partial_enabled", ui->eclipseFilterPartial->isChecked());
+		break;
+	case 2: // Lunar eclipses
+		conf->setValue("astrocalc/eclipse_filter/lunar/total_enabled",     ui->eclipseFilterTotal->isChecked());
+		conf->setValue("astrocalc/eclipse_filter/lunar/partial_enabled",   ui->eclipseFilterPartial->isChecked());
+		conf->setValue("astrocalc/eclipse_filter/lunar/penumbral_enabled", ui->eclipseFilterPenumbral->isChecked());
+		break;
+	}
+}
+
 void AstroCalcDialog::populateCelestialBodyList()
 {
 	Q_ASSERT(ui->celestialBodyComboBox);
@@ -7250,18 +7279,31 @@ void AstroCalcDialog::changeEclipsesTab(int index)
 		ui->eclipseFilterHybrid->setVisible(true);
 		ui->eclipseFilterAnnular->setVisible(true);
 		ui->eclipseFilterPenumbral->setVisible(false);
+
+		ui->eclipseFilterTotal->setChecked(conf->value("astrocalc/eclipse_filter/global_solar/total_enabled", true).toBool());
+		ui->eclipseFilterHybrid->setChecked(conf->value("astrocalc/eclipse_filter/global_solar/hybrid_enabled", true).toBool());
+		ui->eclipseFilterAnnular->setChecked(conf->value("astrocalc/eclipse_filter/global_solar/annular_enabled", true).toBool());
+		ui->eclipseFilterPartial->setChecked(conf->value("astrocalc/eclipse_filter/global_solar/partial_enabled", true).toBool());
 		break;
 	case 1: // Local solar eclipses
 		ui->eclipseFilterWidget->setVisible(true);
 		ui->eclipseFilterHybrid->setVisible(false);
 		ui->eclipseFilterAnnular->setVisible(true);
 		ui->eclipseFilterPenumbral->setVisible(false);
+
+		ui->eclipseFilterTotal->setChecked(conf->value("astrocalc/eclipse_filter/local_solar/total_enabled", true).toBool());
+		ui->eclipseFilterAnnular->setChecked(conf->value("astrocalc/eclipse_filter/local_solar/annular_enabled", true).toBool());
+		ui->eclipseFilterPartial->setChecked(conf->value("astrocalc/eclipse_filter/local_solar/partial_enabled", true).toBool());
 		break;
 	case 2: // Lunar eclipses
 		ui->eclipseFilterWidget->setVisible(true);
 		ui->eclipseFilterHybrid->setVisible(false);
 		ui->eclipseFilterAnnular->setVisible(false);
 		ui->eclipseFilterPenumbral->setVisible(true);
+
+		ui->eclipseFilterTotal->setChecked(conf->value("astrocalc/eclipse_filter/lunar/total_enabled", true).toBool());
+		ui->eclipseFilterPartial->setChecked(conf->value("astrocalc/eclipse_filter/lunar/partial_enabled", true).toBool());
+		ui->eclipseFilterPenumbral->setChecked(conf->value("astrocalc/eclipse_filter/lunar/penumbral_enabled", true).toBool());
 		break;
 	default:
 		ui->eclipseFilterWidget->setVisible(false);
