@@ -2582,6 +2582,16 @@
                 </item>
                </layout>
               </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="gammaNoteSolarEclipseLabel">
+                <property name="text">
+                 <string>Notes: The quantity gamma is the minimum distance from the axis of lunar shadow cone to the center of Earth, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the axis of the shadow cone passes north or south of the Earth's center. Path of solar eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation.</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
               <item row="2" column="0">
                <widget class="QTreeWidget" name="solareclipseTreeWidget">
                 <property name="rootIsDecorated">
@@ -2605,16 +2615,6 @@
                 <attribute name="headerShowSortIndicator" stdset="0">
                  <bool>true</bool>
                 </attribute>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QLabel" name="gammaNoteSolarEclipseLabel">
-                <property name="text">
-                 <string>Notes: The quantity gamma is the minimum distance from the axis of lunar shadow cone to the center of Earth, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the axis of the shadow cone passes north or south of the Earth's center. Path of solar eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation.</string>
-                </property>
-                <property name="wordWrap">
-                 <bool>true</bool>
-                </property>
                </widget>
               </item>
               <item row="3" column="0" alignment="Qt::AlignBottom">
@@ -2880,14 +2880,51 @@
            </widget>
           </item>
           <item row="0" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_43">
+           <layout class="QGridLayout" name="gridLayout_28">
             <property name="leftMargin">
              <number>10</number>
             </property>
             <property name="rightMargin">
              <number>10</number>
             </property>
-            <item>
+            <item row="0" column="1">
+             <layout class="QHBoxLayout" name="horizontalLayout_42">
+              <item>
+               <widget class="QLabel" name="eclipseYearsLabel">
+                <property name="text">
+                 <string>to the next</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="eclipseYearsSpinBox">
+                <property name="toolTip">
+                 <string>Duration in years</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>2</number>
+                </property>
+                <property name="maximum">
+                 <number>500</number>
+                </property>
+                <property name="value">
+                 <number>10</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="eclipseYearsFinalLabel">
+                <property name="text">
+                 <string comment="duration, short form">yrs</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="0">
              <layout class="QHBoxLayout" name="horizontalLayout_41">
               <item>
                <widget class="QLabel" name="eclipseHeaderLabel">
@@ -2952,151 +2989,107 @@
               </item>
              </layout>
             </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_42">
-              <item>
-               <widget class="QLabel" name="eclipseYearsLabel">
-                <property name="text">
-                 <string>to the next</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="eclipseYearsSpinBox">
-                <property name="toolTip">
-                 <string>Duration in years</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="minimum">
-                 <number>2</number>
-                </property>
-                <property name="maximum">
-                 <number>500</number>
-                </property>
-                <property name="value">
-                 <number>10</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="eclipseYearsFinalLabel">
-                <property name="text">
-                 <string comment="duration, short form">yrs</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QWidget" name="eclipseFilterWidget" native="true">
-                <property name="minimumSize">
-                 <size>
-                  <width>50</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <layout class="QGridLayout" name="gridLayout_27">
-                 <property name="leftMargin">
-                  <number>0</number>
+            <item row="1" column="0" colspan="2">
+             <widget class="QWidget" name="eclipseFilterWidget" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>0</height>
+               </size>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_19">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <spacer name="eclipseFilterSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="topMargin">
-                  <number>0</number>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
                  </property>
-                 <property name="rightMargin">
-                  <number>0</number>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="eclipseFilterPenumbral">
+                 <property name="toolTip">
+                  <string>Include penumbral eclipses</string>
                  </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
+                 <property name="text">
+                  <string extracomment="This is a filter checkbox meaning &quot;include penumbral lunar eclipses&quot;, so the adjective should be in plural (if applicable)">Penumbral</string>
                  </property>
-                 <item row="0" column="3">
-                  <widget class="QCheckBox" name="eclipseFilterPartial">
-                   <property name="toolTip">
-                    <string>Include partial eclipses</string>
-                   </property>
-                   <property name="text">
-                    <string extracomment="This is a filter checkbox meaning &quot;include partial solar/lunar eclipses&quot;, so the adjective should be in plural (if applicable)">Partial</string>
-                   </property>
-                   <property name="checked">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="0">
-                  <spacer name="eclipseFilterSpacer">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::Fixed</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QCheckBox" name="eclipseFilterTotal">
-                   <property name="toolTip">
-                    <string>Include total eclipses</string>
-                   </property>
-                   <property name="text">
-                    <string extracomment="This is a filter checkbox meaning &quot;include total solar/lunar eclipses&quot;, so the adjective should be in plural (if applicable)">Total</string>
-                   </property>
-                   <property name="checked">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <layout class="QHBoxLayout" name="horizontalLayout_19">
-                   <item>
-                    <widget class="QCheckBox" name="eclipseFilterAnnular">
-                     <property name="toolTip">
-                      <string>Include annular eclipses</string>
-                     </property>
-                     <property name="text">
-                      <string extracomment="This is a filter checkbox meaning &quot;include annular solar eclipses&quot;, so the adjective should be in plural (if applicable)">Annular</string>
-                     </property>
-                     <property name="checked">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QCheckBox" name="eclipseFilterPenumbral">
-                     <property name="toolTip">
-                      <string>Include penumbral eclipses</string>
-                     </property>
-                     <property name="text">
-                      <string extracomment="This is a filter checkbox meaning &quot;include penumbral lunar eclipses&quot;, so the adjective should be in plural (if applicable)">Penumbral</string>
-                     </property>
-                     <property name="checked">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item row="1" column="3">
-                  <widget class="QCheckBox" name="eclipseFilterHybrid">
-                   <property name="toolTip">
-                    <string>Include hybrid eclipses</string>
-                   </property>
-                   <property name="text">
-                    <string extracomment="This is a filter checkbox meaning &quot;include hybrid solar eclipses&quot;, so the adjective should be in plural (if applicable)">Hybrid</string>
-                   </property>
-                   <property name="checked">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-             </layout>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="eclipseFilterHybrid">
+                 <property name="toolTip">
+                  <string>Include hybrid eclipses</string>
+                 </property>
+                 <property name="text">
+                  <string extracomment="This is a filter checkbox meaning &quot;include hybrid solar eclipses&quot;, so the adjective should be in plural (if applicable)">Hybrid</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="eclipseFilterAnnular">
+                 <property name="toolTip">
+                  <string>Include annular eclipses</string>
+                 </property>
+                 <property name="text">
+                  <string extracomment="This is a filter checkbox meaning &quot;include annular solar eclipses&quot;, so the adjective should be in plural (if applicable)">Annular</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="eclipseFilterPartial">
+                 <property name="toolTip">
+                  <string>Include partial eclipses</string>
+                 </property>
+                 <property name="text">
+                  <string extracomment="This is a filter checkbox meaning &quot;include partial solar/lunar eclipses&quot;, so the adjective should be in plural (if applicable)">Partial</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="eclipseFilterTotal">
+                 <property name="toolTip">
+                  <string>Include total eclipses</string>
+                 </property>
+                 <property name="text">
+                  <string extracomment="This is a filter checkbox meaning &quot;include total solar/lunar eclipses&quot;, so the adjective should be in plural (if applicable)">Total</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
             </item>
            </layout>
           </item>
