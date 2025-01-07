@@ -218,6 +218,8 @@ public:
 	void setScreenFontSize(int s);
 	//! Get the ratio of current font size used for screen text to the default value
 	double screenFontSizeRatio() const;
+	//! Get the ratio of current font size used for GUI to the default value
+	double guiFontSizeRatio() const { return double(getGuiFontSize()) / getDefaultGuiFontSize(); }
 	//! Get the principal font size used for GUI panels.
 	int getGuiFontSize() const;
 	//! change GUI font size.
