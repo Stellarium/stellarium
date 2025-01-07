@@ -1459,7 +1459,7 @@ void StelApp::setScreenFontSize(int s)
 
 double StelApp::screenFontSizeRatio() const
 {
-	return getScreenFontSize() / DEFAULT_FONT_SIZE;
+	return double(getScreenFontSize()) / getDefaultGuiFontSize();
 }
 
 void StelApp::setGuiFontSize(int s)
