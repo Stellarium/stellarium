@@ -28,6 +28,7 @@
 #include <QRandomGenerator>
 #include "StelTextureTypes.hpp"
 #include "StelModule.hpp"
+#include "StelUtils.hpp"
 #include "VecMath.hpp"
 
 // Predeclaration of some classes
@@ -215,6 +216,10 @@ public:
 	int getScreenFontSize() const { return screenFontSize; }
 	//! Change screen font size.
 	void setScreenFontSize(int s);
+	//! Get the ratio of current font size used for screen text to the default value
+	double screenFontSizeRatio() const;
+	//! Get the ratio of current font size used for GUI to the default value
+	double guiFontSizeRatio() const { return double(getGuiFontSize()) / getDefaultGuiFontSize(); }
 	//! Get the principal font size used for GUI panels.
 	int getGuiFontSize() const;
 	//! change GUI font size.
@@ -263,7 +268,7 @@ public:
 	//! Dump diagnostics about action call priorities
 	void dumpModuleActionPriorities(StelModule::StelModuleActionName actionName) const;
 
-	static constexpr int getDefaultGuiFontSize() { return 13; }
+	static constexpr int getDefaultGuiFontSize() { return DEFAULT_FONT_SIZE; }
 
 	static bool isInitialized() {if (singleton) return singleton->initialized; else return false;}
 	

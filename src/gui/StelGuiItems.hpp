@@ -139,7 +139,6 @@ public:
 	QRectF boundingRect() const override;
 
 	static double getInputPixmapsDevicePixelRatio() { return GUI_INPUT_PIXMAPS_SCALE; }
-	static double fontSizeRatio();
 
 
 signals:
