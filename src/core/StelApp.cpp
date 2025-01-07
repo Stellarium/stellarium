@@ -1456,6 +1456,12 @@ void StelApp::setScreenFontSize(int s)
 		emit screenFontSizeChanged(s);
 	}
 }
+
+double StelApp::screenFontSizeRatio() const
+{
+	return getScreenFontSize() / DEFAULT_FONT_SIZE;
+}
+
 void StelApp::setGuiFontSize(int s)
 {
 	if (getGuiFontSize()!=s)

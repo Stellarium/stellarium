@@ -1389,7 +1389,7 @@ QPixmap OcularsGuiPanel::createPixmapFromText(const QString& text,
 		return QPixmap();
 	}
 
-	const auto ratio = StelButton::getInputPixmapsDevicePixelRatio() / StelButton::fontSizeRatio();
+	const auto ratio = StelButton::getInputPixmapsDevicePixelRatio() / StelApp::getInstance().screenFontSizeRatio();
 	width  *= ratio;
 	height *= ratio;
 
