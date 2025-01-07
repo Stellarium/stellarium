@@ -205,14 +205,6 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-	// prepare default background gradient for all charts. This is used for the outer frame, not the actual chart!
-	QLinearGradient graphBackgroundGradient(QPointF(0, 0), QPointF(0, 1));
-	// Colors for gradient taken from QSS's QWidget
-	graphBackgroundGradient.setColorAt(0.0, QColor(90, 90, 90));
-	graphBackgroundGradient.setColorAt(1.0, QColor(70, 70, 70));
-	graphBackgroundGradient.setCoordinateMode(QGradient::ObjectBoundingMode);
-	ui->hecPositionsChartView->setBackgroundBrush(graphBackgroundGradient);
-
 	initListCelestialPositions();
 	initListHECPositions();
 	initListPhenomena();	
