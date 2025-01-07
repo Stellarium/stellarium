@@ -244,7 +244,7 @@ void Satellites::init()
 
 void Satellites::setLastUpdate(QDateTime last)
 {
-	lastUpdate.first = last;
+	lastUpdate.first = last.toUTC();
 	lastUpdate.second = StelUtils::qDateTimeToJd(lastUpdate.first);
 }
 void Satellites::setLastUpdate(double last)

@@ -237,8 +237,6 @@ int main(int argc, char **argv)
 	// Init the file manager
 	StelFileMgr::init();
 
-	SplashScreen::present();
-
 	// add contents of STEL_OPTS environment variable.
 	QString envStelOpts(qgetenv("STEL_OPTS").constData());
 	if (!envStelOpts.isEmpty())

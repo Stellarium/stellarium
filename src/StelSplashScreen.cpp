@@ -21,6 +21,9 @@
 #include "StelUtils.hpp"
 
 #include <QPainter>
+#include <cmath>
+
+static constexpr int BASE_FONT_SIZE = 11;
 
 SplashScreen::SplashScreenWidget* SplashScreen::instance;
 
@@ -30,10 +33,10 @@ static QPixmap makePixmap()
 	return pixmap;
 }
 
-void SplashScreen::present()
+void SplashScreen::present(const double sizeRatio)
 {
 	Q_ASSERT(!instance);
-	instance=new SplashScreenWidget(makePixmap());
+	instance=new SplashScreenWidget(makePixmap(), sizeRatio);
 	instance->show();
 	instance->ensureFirstPaint();
 }
@@ -59,10 +62,11 @@ void SplashScreen::clearMessage()
 	instance->clearMessage();
 }
 
-SplashScreen::SplashScreenWidget::SplashScreenWidget(QPixmap const& pixmap)
-	: QSplashScreen(pixmap)
+SplashScreen::SplashScreenWidget::SplashScreenWidget(QPixmap const& pixmap, const double sizeRatio)
+	: QSplashScreen(pixmap.scaledToHeight(std::lround(pixmap.height() * sizeRatio),
+	                                      Qt::SmoothTransformation))
 {
-	splashFont.setPixelSize(11);
+	splashFont.setPixelSize(std::lround(BASE_FONT_SIZE * sizeRatio));
 
 	// Fix concrete font family and rendering mode, so that even if default
 	// application font changes, we still render app version in the same font
