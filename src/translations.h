@@ -618,6 +618,45 @@ class Translations
 		N_("Jupiter's Moons Orbital Simulation");
 
 		// =====================================================================
+		// Translatable UI elements with comments for translators (extracomments)
+
+		// src/gui/astroCalcDialog.ui:
+		// TRANSLATORS: This is a filter checkbox meaning "include penumbral lunar eclipses", so the adjective should be in plural (if applicable)
+		N_("Penumbral");
+		// TRANSLATORS: This is a filter checkbox meaning "include hybrid solar eclipses", so the adjective should be in plural (if applicable)
+		N_("Hybrid");
+		// TRANSLATORS: This is a filter checkbox meaning "include annular solar eclipses", so the adjective should be in plural (if applicable)
+		N_("Annular");
+		// TRANSLATORS: This is a filter checkbox meaning "include partial solar/lunar eclipses", so the adjective should be in plural (if applicable)
+		N_("Partial");
+		// TRANSLATORS: This is a filter checkbox meaning "include total solar/lunar eclipses", so the adjective should be in plural (if applicable)
+		N_("Total");
+		// TRANSLATORS: full phrase is 'show line'
+		NC_("line", "show line");
+		// TRANSLATORS: hours
+		N_("h");
+
+		// src/gui/helpDialogGui.ui:
+		// TRANSLATORS: Same text as in the Configuration window!
+		N_("Edit keyboard shortcuts...");
+
+		// src/gui/searchDialogGui.ui:
+		// TRANSLATORS: See http://en.wikipedia.org/wiki/Bayer_designation
+		N_("Greek letters for Bayer designations");
+
+		// plugins/Satellites/src/gui/satellitesImportDialog.ui:
+		// TRANSLATORS: The title of the window will be set during runtime
+		N_("More Satellites");
+
+		// plugins/SolarSystemEditor/src/gui/manualImportWindow.ui:
+		// TRANSLATORS: The title of the window will be set during runtime
+		N_("Define an object");
+
+		// plugins/SolarSystemEditor/src/gui/mpcImportWindow.ui:
+		// TRANSLATORS: The title of the window will be set during runtime
+		N_("Import data");
+
+		// =====================================================================
 		// List of GUI elements (Qt's dialogs)
 		N_("&Undo");
 		N_("&Redo");
