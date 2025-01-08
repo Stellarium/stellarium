@@ -85,10 +85,10 @@ static inline int ReadInt(QFile& file, unsigned int &x)
 
 static inline int ReadFloat(QFile& file, float &x)
 {
-	unsigned int temp;
-	if (4 != file.read(reinterpret_cast<char*>(&temp), 4))
+	char data[sizeof x];
+	if (file.read(data, sizeof data) != sizeof data)
 		return -1;
-	x = *reinterpret_cast<float*>(&temp);
+	std::memcpy(&x, data, sizeof data);
 	return 0;
 }
 
