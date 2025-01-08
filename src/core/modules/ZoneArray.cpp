@@ -111,13 +111,12 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	unsigned int magic,major,minor,type,level,mag_min;
 	float epochJD;
 	if (ReadInt(*file,magic) < 0 ||
-			ReadInt(*file,type) < 0 ||
-			ReadInt(*file,major) < 0 ||
-			ReadInt(*file,minor) < 0 ||
-			ReadInt(*file,level) < 0 ||
-			ReadInt(*file,mag_min) < 0 ||
-			ReadFloat(*file,epochJD) < 0
-		)
+	    ReadInt(*file,type) < 0 ||
+	    ReadInt(*file,major) < 0 ||
+	    ReadInt(*file,minor) < 0 ||
+	    ReadInt(*file,level) < 0 ||
+	    ReadInt(*file,mag_min) < 0 ||
+	    ReadFloat(*file,epochJD) < 0)
 	{
 		dbStr += "error - file format is bad.";
 		qDebug().noquote() << dbStr;
