@@ -74,10 +74,10 @@ const double StelCore::TZ_ERA_BEGINNING = 2395996.5;		// December 1, 1847
 
 Vec3d StelCore::cachedParallaxDiff = Vec3d(0.,0.,0.);
 double StelCore::cachedParallaxJD = 0.0;
-QString StelCore::cachedParallaxPlanet;
+PlanetP StelCore::cachedParallaxPlanet;
 Vec3d StelCore::cachedAberrationVec = Vec3d(0.,0.,0.);
 double StelCore::cachedAberrationJD = 0.0;
-QString StelCore::cachedAberrationPlanet;
+PlanetP StelCore::cachedAberrationPlanet = Q_NULLPTR;
 
 StelCore::StelCore()
 	: skyDrawer(Q_NULLPTR)
@@ -171,6 +171,8 @@ StelCore::~StelCore()
 	delete geodesicGrid; geodesicGrid=Q_NULLPTR;
 	delete skyDrawer; skyDrawer=Q_NULLPTR;
 	delete position; position=Q_NULLPTR;
+	cachedParallaxPlanet=Q_NULLPTR;
+	cachedAberrationPlanet=Q_NULLPTR;
 }
 
 const QMap<QString, DitheringMode>StelCore::ditheringMap={
@@ -3109,10 +3111,9 @@ Vec3d StelCore::calculateParallaxDiff(double JD) {
 
 	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 	const PlanetP earth = ssystem->getEarth();
-	const PlanetP sun = ssystem->getSun();
 	// diff between earth's solar system bayrcentric location at STAR_CATALOG_JDEPOCH and current solar system bayrcentric location
-	Vec3d earthPosCatalog = earth->getHeliocentricEclipticPos(STAR_CATALOG_JDEPOCH) + sun->getHeliocentricEclipticPos(STAR_CATALOG_JDEPOCH);
-	Vec3d PosNow = core->getCurrentPlanet()->getHeliocentricEclipticPos(JD) + sun->getHeliocentricEclipticPos(JD);
+	Vec3d earthPosCatalog = earth->getBarycentricEclipticPos(STAR_CATALOG_JDEPOCH);
+	Vec3d PosNow = core->getCurrentPlanet()->getBarycentricEclipticPos(JD);
 	// Transform from heliocentric ecliptic to equatorial coordinates
 	earthPosCatalog = matVsop87ToJ2000.upper3x3() * earthPosCatalog;
 	PosNow = matVsop87ToJ2000.upper3x3() * PosNow;
@@ -3123,22 +3124,20 @@ Vec3d StelCore::calculateParallaxDiff(double JD) {
 
 const Vec3d StelCore::getParallaxDiff(double JD) {
 	StelCore *core = StelApp::getInstance().getCore();
-	if ((fabs(JD - cachedParallaxJD) > 1.)  || (core->getCurrentPlanet()->getID() != cachedParallaxPlanet))
+	if (fuzzyEquals(JD, cachedParallaxJD, JD_SECOND) && (core->getCurrentPlanet() == cachedParallaxPlanet))
 	{
-		cachedParallaxDiff = StelCore::calculateParallaxDiff(JD);
-		cachedParallaxJD = JD;		
-		cachedParallaxPlanet = core->getCurrentPlanet()->getID();
-
+		return cachedParallaxDiff;
 	}
+	cachedParallaxDiff = StelCore::calculateParallaxDiff(JD);
+	cachedParallaxJD = JD;		
+	cachedParallaxPlanet = core->getCurrentPlanet(); 
     return cachedParallaxDiff;
 }
 
 Vec3d StelCore::calculateAberrationVec(double JD) {
 	StelCore *core = StelApp::getInstance().getCore();
-	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-	const PlanetP sun = ssystem->getSun();
 	// Solar system barycentric velocity
-	Vec3d vel = core->getCurrentPlanet()->getHeliocentricEclipticVelocity() + sun->getHeliocentricEclipticVelocity();
+	Vec3d vel = core->getCurrentPlanet()->getBarycentricEclipticVelocity();
 	vel = StelCore::matVsop87ToJ2000 * vel * (AU/(86400.0*SPEED_OF_LIGHT));
 	return vel;
 }
@@ -3146,12 +3145,13 @@ Vec3d StelCore::calculateAberrationVec(double JD) {
 const Vec3d StelCore::getAberrationVec(double JD) {
 	StelCore *core = StelApp::getInstance().getCore();
 	// need to recompute the aberration vector if the JD has changed or the planet has changed
-	if ((fabs(JD - cachedAberrationJD) > 1.) || (core->getCurrentPlanet()->getID() != cachedAberrationPlanet))
+	if (fuzzyEquals(JD, cachedAberrationJD, JD_SECOND) && (core->getCurrentPlanet() == cachedAberrationPlanet))
 	{
-		cachedAberrationVec = StelCore::calculateAberrationVec(JD);
-		cachedAberrationJD = JD;
-		cachedAberrationPlanet = core->getCurrentPlanet()->getID();
+		return core->getAberrationFactor() * cachedAberrationVec;
 	}
+	cachedAberrationVec = StelCore::calculateAberrationVec(JD);
+	cachedAberrationJD = JD;
+	cachedAberrationPlanet = core->getCurrentPlanet();
 	return core->getAberrationFactor() * cachedAberrationVec;
 }
 

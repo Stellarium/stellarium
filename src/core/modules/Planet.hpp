@@ -476,6 +476,9 @@ public:
 	Vec3d getHeliocentricEclipticPos() const {return getHeliocentricPos(eclipticPos);}
 	Vec3d getHeliocentricEclipticPos(double dateJDE) const;
 
+	//! Return the barycentric ecliptical position
+	Vec3d getBarycentricEclipticPos(double dateJDE) const;
+
 	//! Return the heliocentric transformation for local (parentocentric) coordinate
 	//! @arg p planetocentric rectangular ecliptical coordinate (J2000)
 	//! @return heliocentric rectangular ecliptical coordinates (J2000)
@@ -487,8 +490,11 @@ public:
 	//! Get the planet velocity around the parent planet in ecliptical coordinates in AU/d
 	Vec3d getEclipticVelocity() const {return eclipticVelocity;}
 
-	//! Get the planet's heliocentric velocity in the solar system in ecliptical coordinates in AU/d. Required for aberration!
+	//! Get the planet's heliocentric velocity in the solar system in ecliptical coordinates in AU/d.
 	Vec3d getHeliocentricEclipticVelocity() const;
+
+	//! Return the barycentric ecliptical velocity in the solar system in ecliptical coordinates in AU/d. Required for aberration!
+	Vec3d getBarycentricEclipticVelocity() const;
 
 	//! Compute and return the distance to the given position in heliocentric ecliptical (J2000) coordinates (in AU)
 	//! Preserves result for later retrieval by getDistance()

@@ -26,6 +26,7 @@
 #include "StelLocation.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelPropertyMgr.hpp"
+#include "SolarSystem.hpp"
 #include "Dithering.hpp"
 #include <QString>
 #include <QStringList>
@@ -1013,13 +1014,13 @@ private:
 	// Variables for caching the observer position relative to the star catalog reference frame
 	static Vec3d cachedParallaxDiff;
     static double cachedParallaxJD; // Cached Julian Date
-	static QString cachedParallaxPlanet;
+	static PlanetP cachedParallaxPlanet;
 	static Vec3d calculateParallaxDiff(double JD); // Actual calculation
 
 	// Variables for caching the aberration effect
 	static Vec3d cachedAberrationVec;
 	static double cachedAberrationJD;
-	static QString cachedAberrationPlanet;
+	static PlanetP cachedAberrationPlanet;
 	static Vec3d calculateAberrationVec(double JD); // Actual calculation
 };
 #endif // STELCORE_HPP
