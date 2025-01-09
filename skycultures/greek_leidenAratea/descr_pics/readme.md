@@ -1,1 +1,0 @@
-These pictures had been provided by Prof. D. Blume in 2020 with the permission to create a sky culture for dome planetarium (performed with Zeiss PowerDome software in Planetarium Jena) and Stellarium.  
