@@ -1649,8 +1649,7 @@ Vec3d Nebula::getJ2000EquatorialPos(const StelCore* core) const
 		Vec3d pos=XYZ;
 		Q_ASSERT_X(fabs(pos.normSquared()-1.0)<0.0001, "Nebula aberration", "vertex length not unity");
 		//pos.normalize(); // Yay - not required!
-		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		Vec3d vel=core->getAberrationVec(core->getJDE());
 		pos+=vel;
 		pos.normalize();
 		return pos;

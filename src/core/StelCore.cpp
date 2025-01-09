@@ -3105,67 +3105,57 @@ Vec3d StelCore::getMouseJ2000Pos() const
 	return mousePosition;
 }
 
-Vec3d StelCore::calculateParallaxDiff(double JD) {
-	StelCore *core = StelApp::getInstance().getCore();
-	Vec3d diffPos(0., 0., 0.);
-
-	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-	const PlanetP earth = ssystem->getEarth();
-	// diff between earth's solar system bayrcentric location at STAR_CATALOG_JDEPOCH and current solar system bayrcentric location
-	Vec3d earthPosCatalog = earth->getBarycentricEclipticPos(STAR_CATALOG_JDEPOCH);
-	Vec3d PosNow = core->getCurrentPlanet()->getBarycentricEclipticPos(JD);
+Vec3d StelCore::calculateParallaxDiff(double JD) const {
+	// ICRS coordinates are barycentric (Gaia gives barycentric RA/DEC coordinates)
+	// diff between solar system bayrcentric location at STAR_CATALOG_JDEPOCH and current solar system bayrcentric location
+	Vec3d PosNow = getCurrentPlanet()->getBarycentricEclipticPos(JD);
 	// Transform from heliocentric ecliptic to equatorial coordinates
-	earthPosCatalog = matVsop87ToJ2000.upper3x3() * earthPosCatalog;
-	PosNow = matVsop87ToJ2000.upper3x3() * PosNow;
-	diffPos = earthPosCatalog - PosNow;
-
-	return diffPos;
+	PosNow = matVsop87ToJ2000.upper3x3() * -1. * PosNow;  // need to times -1 because technically it is doing (0,0,0) - PosNow
+	return PosNow;
 }
 
-const Vec3d StelCore::getParallaxDiff(double JD) {
-	StelCore *core = StelApp::getInstance().getCore();
-	if (fuzzyEquals(JD, cachedParallaxJD, JD_SECOND) && (core->getCurrentPlanet() == cachedParallaxPlanet))
+Vec3d StelCore::getParallaxDiff(double JD) const {
+	if (fuzzyEquals(JD, cachedParallaxJD, JD_SECOND) && (getCurrentPlanet() == cachedParallaxPlanet))
 	{
 		return cachedParallaxDiff;
 	}
-	cachedParallaxDiff = StelCore::calculateParallaxDiff(JD);
-	cachedParallaxJD = JD;		
-	cachedParallaxPlanet = core->getCurrentPlanet(); 
+	cachedParallaxDiff = calculateParallaxDiff(JD); // set the cache to the new value
+	cachedParallaxJD = JD; // set the cache to the new value
+	cachedParallaxPlanet = getCurrentPlanet(); 
     return cachedParallaxDiff;
 }
 
-Vec3d StelCore::calculateAberrationVec(double JD) {
-	StelCore *core = StelApp::getInstance().getCore();
+Vec3d StelCore::calculateAberrationVec(double JD) const {
 	// Solar system barycentric velocity
-	Vec3d vel = core->getCurrentPlanet()->getBarycentricEclipticVelocity();
+	Q_UNUSED(JD);
+	Vec3d vel = getCurrentPlanet()->getBarycentricEclipticVelocity();
 	vel = StelCore::matVsop87ToJ2000 * vel * (AU/(86400.0*SPEED_OF_LIGHT));
 	return vel;
 }
 
-const Vec3d StelCore::getAberrationVec(double JD) {
-	StelCore *core = StelApp::getInstance().getCore();
+Vec3d StelCore::getAberrationVec(double JD) const {
 	// need to recompute the aberration vector if the JD has changed or the planet has changed
-	if (fuzzyEquals(JD, cachedAberrationJD, JD_SECOND) && (core->getCurrentPlanet() == cachedAberrationPlanet))
+	if (fuzzyEquals(JD, cachedAberrationJD, JD_SECOND) && (getCurrentPlanet() == cachedAberrationPlanet))
 	{
-		return core->getAberrationFactor() * cachedAberrationVec;
+		return getAberrationFactor() * cachedAberrationVec;
 	}
-	cachedAberrationVec = StelCore::calculateAberrationVec(JD);
-	cachedAberrationJD = JD;
-	cachedAberrationPlanet = core->getCurrentPlanet();
-	return core->getAberrationFactor() * cachedAberrationVec;
+	cachedAberrationVec = StelCore::calculateAberrationVec(JD); // set the cache to the new value
+	cachedAberrationJD = JD; // set the cache to the new value
+	cachedAberrationPlanet = getCurrentPlanet();
+	return getAberrationFactor() * cachedAberrationVec;
 }
 
 QByteArray StelCore::getAberrationShader() const
 {
 	return 1+R"(
-uniform vec3 STELCORE_currentPlanetHeliocentricEclipticVelocity;
+uniform vec3 STELCORE_currentPlanetBarycentricEclipticVelocity;
 // objectDir points to the object as viewed from its comoving frame.
 // Return value represents the apparent direction to this object from a frame
 // that moves with respect to the object at slightly relativistic speeds (v<0.1c).
 // Relative error in aberration angle is about 0.5v/c.
 vec3 applyAberrationToObject(vec3 objectDir)
 {
-	vec3 velocity = STELCORE_currentPlanetHeliocentricEclipticVelocity;
+	vec3 velocity = STELCORE_currentPlanetBarycentricEclipticVelocity;
 	return normalize(objectDir + velocity);
 }
 // viewDir is the direction where the object appears to be when viewed from a
@@ -3174,7 +3164,7 @@ vec3 applyAberrationToObject(vec3 objectDir)
 // Relative error in aberration angle is about 0.5v/c.
 vec3 applyAberrationToViewDir(vec3 viewDir)
 {
-	vec3 velocity = STELCORE_currentPlanetHeliocentricEclipticVelocity;
+	vec3 velocity = STELCORE_currentPlanetBarycentricEclipticVelocity;
 	return normalize(viewDir - velocity);
 }
 )";
@@ -3185,14 +3175,11 @@ void StelCore::setAberrationUniforms(QOpenGLShaderProgram& program) const
 	Vec3d velocity;
 	if(getUseAberration())
 	{
-		const auto p = getCurrentPlanet();
-		const auto hev = p->getHeliocentricEclipticVelocity();
-		velocity = StelCore::matVsop87ToJ2000 * hev;
-		velocity *= getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+		velocity = cachedAberrationVec;
 	}
 	else
 	{
 		velocity = Vec3d(0,0,0);
 	}
-	program.setUniformValue("STELCORE_currentPlanetHeliocentricEclipticVelocity", velocity.toQVector());
+	program.setUniformValue("STELCORE_currentPlanetBarycentricEclipticVelocity", velocity.toQVector());
 }

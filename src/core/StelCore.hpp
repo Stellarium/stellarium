@@ -378,9 +378,9 @@ public:
 	Vec3d getMouseJ2000Pos(void) const;
 
 	//! get vector used to compute parallax effect
-	static const Vec3d getParallaxDiff(double JD);
+	Vec3d getParallaxDiff(double JD) const;
 	//! get vector used to compute aberration effect
-	static const Vec3d getAberrationVec(double JD);
+	Vec3d getAberrationVec(double JD) const;
 
 public slots:
 	//! Smoothly move the observer to the given location
@@ -1015,12 +1015,12 @@ private:
 	static Vec3d cachedParallaxDiff;
     static double cachedParallaxJD; // Cached Julian Date
 	static PlanetP cachedParallaxPlanet;
-	static Vec3d calculateParallaxDiff(double JD); // Actual calculation
+	Vec3d calculateParallaxDiff(double JD) const; // Actual calculation
 
 	// Variables for caching the aberration effect
 	static Vec3d cachedAberrationVec;
 	static double cachedAberrationJD;
 	static PlanetP cachedAberrationPlanet;
-	static Vec3d calculateAberrationVec(double JD); // Actual calculation
+	Vec3d calculateAberrationVec(double JD) const; // Actual calculation
 };
 #endif // STELCORE_HPP
