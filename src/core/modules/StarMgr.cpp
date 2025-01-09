@@ -82,7 +82,7 @@ QMap<QString,int> StarMgr::commonNamesIndexI18n;
 QMap<QString,int> StarMgr::commonNamesIndex;
 QMap<QString,int> StarMgr::additionalNamesIndex;
 QMap<QString,int> StarMgr::additionalNamesIndexI18n;
-QHash<int,QString> StarMgr::sciDesignationsMapI18n;
+QHash<int64_t,QString> StarMgr::sciDesignationsMapI18n;
 QMap<QString,int> StarMgr::sciDesignationsIndexI18n;
 QHash<int,QString> StarMgr::sciExtraDesignationsMapI18n;
 QMap<QString,int> StarMgr::sciExtraDesignationsIndexI18n;
@@ -222,10 +222,10 @@ QString StarMgr::getCommonEnglishName(int hip)
 }
 
 
-QString StarMgr::getSciName(int hip)
+QString StarMgr::getSciName(int64_t hip)
 {
 	auto it = sciDesignationsMapI18n.find(hip);
-	if (it!=sciDesignationsMapI18n.end())
+	if (it != sciDesignationsMapI18n.end())
 		return it.value();
 	return QString();
 }
@@ -892,7 +892,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
 		{
 			// The record is the right format.  Extract the fields
 			bool ok;
-			int hip = fields.at(0).toInt(&ok);
+			int64_t hip = fields.at(0).toLongLong(&ok);
 			if (!ok)
 			{
 				qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(sciNameFile)

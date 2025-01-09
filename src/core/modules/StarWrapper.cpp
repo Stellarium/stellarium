@@ -147,6 +147,12 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
 	Q_UNUSED(az_app)
 
+	int64_t star_id;
+	if (s->getHip())
+		star_id = static_cast<int64_t>(s->getHip());
+	else
+		star_id = s->getGaia();
+
 	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
 	const QString objType = StarMgr::convertToOjectTypes(s->getObjType());
 	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
@@ -160,26 +166,27 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	const double vEpoch = StarMgr::getGcvsEpoch(s->getHip());
 	const double vPeriod = StarMgr::getGcvsPeriod(s->getHip());
 	const int vMm = StarMgr::getGcvsMM(s->getHip());
+
+	if ((flags&Name) || (flags&CatalogNumber))
+		oss << "<h2>";
+
+	const QString commonNameI18 = StarMgr::getCommonName(s->getHip());
+	const QString additionalNameI18 = StarMgr::getAdditionalNames(s->getHip());
+	const QString sciName = StarMgr::getSciName(star_id);
+	const QString sciExtraName = StarMgr::getSciExtraName(s->getHip());
+	const QString varSciName = StarMgr::getGcvsName(s->getHip());
+	const QString wdsSciName = StarMgr::getWdsName(s->getHip());
+	QStringList designations;
+	if (!sciName.isEmpty())
+		designations.append(sciName);
+	if (!sciExtraName.isEmpty())
+		designations.append(sciExtraName);
+	if (!varSciName.isEmpty() && !sciName.contains(varSciName, Qt::CaseInsensitive))
+		designations.append(varSciName);
+
+	QString hip, hipq;
 	if (s->getHip())
 	{
-		if ((flags&Name) || (flags&CatalogNumber))
-			oss << "<h2>";
-
-		const QString commonNameI18 = StarMgr::getCommonName(s->getHip());
-		const QString additionalNameI18 = StarMgr::getAdditionalNames(s->getHip());
-		const QString sciName = StarMgr::getSciName(s->getHip());
-		const QString sciExtraName = StarMgr::getSciExtraName(s->getHip());
-		const QString varSciName = StarMgr::getGcvsName(s->getHip());
-		const QString wdsSciName = StarMgr::getWdsName(s->getHip());
-		QStringList designations;
-		if (!sciName.isEmpty())
-			designations.append(sciName);
-		if (!sciExtraName.isEmpty())
-			designations.append(sciExtraName);
-		if (!varSciName.isEmpty() && !sciName.contains(varSciName, Qt::CaseInsensitive))
-			designations.append(varSciName);
-
-		QString hip, hipq;
 		if (s->hasComponentID())
 		{
 			hip = QString("HIP %1 %2").arg(s->getHip()).arg(StarMgr::convertToComponentIds(s->getComponentIds()));
@@ -190,76 +197,67 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			hip = QString("HIP %1").arg(s->getHip());
 			hipq = QString("%1").arg(s->getHip());
 		}
-
 		designations.append(hip);
+	}
 
-		const QString crossIndexData = StarMgr::getCrossIdentificationDesignations(hipq);
-		if (!crossIndexData.isEmpty())
-			designations.append(crossIndexData);
+	const QString crossIndexData = StarMgr::getCrossIdentificationDesignations(hipq);
+	if (!crossIndexData.isEmpty())
+		designations.append(crossIndexData);
 
-		if (s->getGaia())
-			designations.append(QString("Gaia DR3 %1").arg(s->getGaia()));
+	if (s->getGaia())
+		designations.append(QString("Gaia DR3 %1").arg(s->getGaia()));
 
-		if (!wdsSciName.isEmpty() && !sciName.contains(wdsSciName, Qt::CaseInsensitive))
-			designations.append(wdsSciName);
+	if (!wdsSciName.isEmpty() && !sciName.contains(wdsSciName, Qt::CaseInsensitive))
+		designations.append(wdsSciName);
 
-		QString designationsList = designations.join(" - ");
-		designations.clear();
-		designations = designationsList.split(" - ");
-		designations.removeDuplicates();
-		int asize = designations.size();
-		if (asize>6) // Special case for many designations (max - 7 items per line); NOTE: Should we add size to the config data for skyculture?
+	QString designationsList = designations.join(" - ");
+	designations.clear();
+	designations = designationsList.split(" - ");
+	designations.removeDuplicates();
+	int asize = designations.size();
+	if (asize>6) // Special case for many designations (max - 7 items per line); NOTE: Should we add size to the config data for skyculture?
+	{
+		designationsList = "";
+		for(int i=0; i<asize; i++)
 		{
-			designationsList = "";
-			for(int i=0; i<asize; i++)
-			{
-				designationsList.append(designations.at(i));
-				if (i<asize-1)
-					designationsList.append(" - ");
+			designationsList.append(designations.at(i));
+			if (i<asize-1)
+				designationsList.append(" - ");
 
-				if (i>0 && (i % 6)==0 && i<(asize-1))
-					designationsList.append("<br />");
-			}
+			if (i>0 && (i % 6)==0 && i<(asize-1))
+				designationsList.append("<br />");
 		}
-		else
-			designationsList = designations.join(" - ");
+	}
+	else
+		designationsList = designations.join(" - ");
 
-		if (flags&Name)
+	if (flags&Name)
+	{
+		QString commonNames;
+		if (!commonNameI18.isEmpty())
+			commonNames = commonNameI18;
+
+		if (!additionalNameI18.isEmpty() && StarMgr::getFlagAdditionalNames())
 		{
-			QString commonNames;
-			if (!commonNameI18.isEmpty())
-				commonNames = commonNameI18;
+			QStringList additionalNames = additionalNameI18.split(" - ");
+			additionalNames.removeDuplicates();
 
-			if (!additionalNameI18.isEmpty() && StarMgr::getFlagAdditionalNames())
-			{
-				QStringList additionalNames = additionalNameI18.split(" - ");
-				additionalNames.removeDuplicates();
-
-				commonNames.append(QString(" (%1)").arg(additionalNames.join(" - ")));
-			}
-
-			if (!commonNames.isEmpty())
-				oss << StelUtils::wrapText(commonNames, 80);
-
-			if (!commonNameI18.isEmpty() && !designationsList.isEmpty() && flags&CatalogNumber)
-				oss << "<br />";
+			commonNames.append(QString(" (%1)").arg(additionalNames.join(" - ")));
 		}
 
-		if (flags&CatalogNumber)
-			oss << designationsList;
+		if (!commonNames.isEmpty())
+			oss << StelUtils::wrapText(commonNames, 80);
 
-		if ((flags&Name) || (flags&CatalogNumber))
-			oss << "</h2>";
+		if (!commonNameI18.isEmpty() && !designationsList.isEmpty() && flags&CatalogNumber)
+			oss << "<br />";
 	}
-	if (s->getGaia() && !s->getHip()) {
-		if ((flags&Name) || (flags&CatalogNumber))
-			oss << "<h2>";
-		QString gaia_id;
-		gaia_id = QString("Gaia DR3 %1").arg(s->getGaia());
-		oss << gaia_id;
-		if ((flags&Name) || (flags&CatalogNumber))
-			oss << "</h2>";
-	}
+
+	if (flags&CatalogNumber)
+		oss << designationsList;
+
+	if ((flags&Name) || (flags&CatalogNumber))
+		oss << "</h2>";
+
 	if (flags&Name)
 	{
 		QStringList extraNames=getExtraInfoStrings(Name);

@@ -75,13 +75,21 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 			case 0: // Ray helpers
 			case 1: // A big asterism with lines by HIP stars
 			{
-				unsigned int HP = 0;
+				int64_t HP = 0;
 				istr >> HP;
 				if(HP == 0)
 				{
 					return false;
 				}
-				asterism[i]=starMgr->searchHP(static_cast<int>(HP));
+				if (HP <= 120416)
+				{
+					asterism[i]=starMgr->searchHP(static_cast<int>(HP));
+				}
+				else
+				{
+					asterism[i]=starMgr->searchGaia(HP);
+				}
+				
 				if (!asterism[i])
 				{
 					qWarning() << "Error in asterism" << abbreviation << "- can't find star HIP" << HP;
