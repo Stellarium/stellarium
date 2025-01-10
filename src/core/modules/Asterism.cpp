@@ -25,6 +25,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
+#include "ZoneArray.hpp"
 
 #include <algorithm>
 #include <QString>
@@ -81,7 +82,7 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 				{
 					return false;
 				}
-				if (HP <= 120416)
+				if (HP <= NR_OF_HIP)
 				{
 					asterism[i]=starMgr->searchHP(static_cast<int>(HP));
 				}

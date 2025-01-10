@@ -28,6 +28,7 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "ConstellationMgr.hpp"
+#include "ZoneArray.hpp"
 
 #include <algorithm>
 #include <QString>
@@ -84,7 +85,15 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 			return false;
 		}
 
-		constellation[i]=starMgr->searchHP(static_cast<int>(HP));
+		if (HP <= NR_OF_HIP)
+		{
+			constellation[i]=starMgr->searchHP(static_cast<int>(HP));
+		}
+		else
+		{
+			constellation[i]=starMgr->searchGaia(HP);
+		}
+
 		if (!constellation[i])
 		{
 			qWarning() << "Error in Constellation " << abbreviation << ": can't find star HIP" << HP;
