@@ -199,6 +199,10 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		}
 		designations.append(hip);
 	}
+	else
+	{
+		hipq = QString("%1").arg(s->getGaia());  // need to look up with Gaia number
+	}
 
 	const QString crossIndexData = StarMgr::getCrossIdentificationDesignations(hipq);
 	if (!crossIndexData.isEmpty())

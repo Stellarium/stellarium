@@ -29,17 +29,22 @@ const QString STAR_TYPE = QStringLiteral("Star");
 
 QString Star1::getNameI18n(void) const
 {
+	QStringList starNames;
+	int64_t star_id;
 	if (getHip())
 	{
-		QStringList starNames;
-		starNames << StarMgr::getCommonName(getHip()) << getDesignation();
-		starNames.removeAll(QString(""));
-		if (starNames.count()>0)
-			return starNames.first();
-		else
-			return QString();
+		star_id = static_cast<int64_t>(getHip());
 	}
-	return QString();
+	else
+	{
+		star_id = getGaia();
+	}
+	starNames << StarMgr::getCommonName(star_id) << getDesignation();
+	starNames.removeAll(QString(""));
+	if (starNames.count()>0)
+		return starNames.first();
+	else
+		return QString();
 }
 
 QString Star1::getScreenNameI18n(void) const
