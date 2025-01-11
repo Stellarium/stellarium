@@ -1233,7 +1233,7 @@ void StarMgr::draw(StelCore* core)
 		if (labelsFader.getInterstate()>0.f)
 		{
 			// Adapt magnitude limit of the stars labels according to FOV and labelsAmount
-			float maxMag = (skyDrawer->getLimitMagnitude()-6.5f)*0.7f+(static_cast<float>(labelsAmount)*1.2f)-7.f;
+			float maxMag = (skyDrawer->getLimitMagnitude()-6.5f)*0.7f+(static_cast<float>(labelsAmount)*1.2f)-2.f;
 			int x = static_cast<int>((maxMag-mag_min)/0.05);  // 0.05 mag MagStepIncrement
 			if (x > 0)
 				maxMagStarName = x;

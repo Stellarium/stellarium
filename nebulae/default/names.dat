@@ -20,6 +20,7 @@
 #      - Come the Night  // Sky & Telescope, p.54-56 (Nov 2019)
 #      - Paddle the Milky Way's Dark River - Sky & Telescope; https://skyandtelescope.org/observing/a-trip-down-the-great-rift/
 #      - The Cosmic Bat Nebula - LDN43; https://skyandtelescope.org/online-gallery/the-cosmic-bat-nebula-ldn43/
+#      - Pincushion Cloud - LDN988; Sky & Telescope - August 2021 - 22
 #   NED: Named Galaxies; https://ned.ipac.caltech.edu/level5/CATALOGS/naga.html
 #   SEDS: A Collection of Some Common Names for Deep Sky Objects; http://messier.seds.org/xtra/supp/d-names.html
 #   SEDSM: Common Names for Messier Objects; http://www.messier.seds.org/m-names.html
@@ -50,6 +51,7 @@
 #      - NGC 6872: A Stretched Spiral Galaxy; https://apod.nasa.gov/apod/ap160426.html
 #      - The Fox Fur Nebula; https://apod.nasa.gov/apod/ap151230.html
 #      - Methuselah Nebula; https://apod.nasa.gov/apod/ap101021.html
+#      - Sharpless-245: Eridanus Loop; https://apod.nasa.gov/apod/ap200323.html
 #      - Sharpless-308: The Dolphin Nebula; https://apod.nasa.gov/apod/ap200302.html
 #      - The Medulla Nebula Supernova Remnant; https://apod.nasa.gov/apod/ap210118.html
 #      - NGC 6188: The Dragons of Ara; https://apod.nasa.gov/apod/ap200728.html
@@ -149,6 +151,9 @@
 #      - Galaxy Merger Gallery; https://blog.galaxyzoo.org/2012/08/21/galaxy-merger-gallery/
 #      - The Phantom Of The Opera Nebula; https://skyandtelescope.org/online-gallery/the-phantom-of-the-opera-nebula-sh2-173/
 #      - Valentine Rose Nebula; https://www.aapod2.com/blog/sh2-174
+#      - Pincushion Cloud - LDN988; https://www.researchgate.net/publication/370395713_Pre-Main_Sequence_Ap_Star_LkHa_324B_in_LDN_988_Star_Forming_Region
+#      - Fishhook Nebula; http://galaxymap.org/cat/view/sharpless/245
+#      - Mandrill Nebula - NGC 2467; http://galaxymap.org/cat/view/sharpless/311
 #   U2K: Uranometria 2000.0 Volume 3, Deep Sky Field Guide
 #   SGN: Steve Gottlieb's NGC Notes; https://astronomy-mall.com/Adventures.In.Deep.Space/steve.ngc.htm
 #   ???: Source very much needed. Marked especially for objects which have a well-known name, where a new/alternative name does not help anybody.
@@ -432,6 +437,7 @@ NGC  2442            _("Cobra Galaxy") # ISS
 NGC  2447            _("Butterfly Cluster") # CSOG-MSC, SEDSM
 NGC  2451            _("Stinging Scorpion Cluster") # B500, HT
 NGC  2467            _("Skull and Crossbones Nebula") # B500, WP
+NGC  2467            _("Mandrill Nebula") # MISC
 NGC  2467            _("Chained Brooch Nebula") # B500
 NGC  2477            _("Electric Guitar Cluster")
 NGC  2477            _("Termite Hole Cluster") # B500
@@ -1163,6 +1169,8 @@ SH2  212             _("Tribble Nebulae") # WP
 SH2  216             _("Second Closest Planetary")
 SH2  240             _("Spaghetti Nebula") # WP
 SH2  240             _("Simeis 147") # WP, PSA
+SH2  245             _("Eridanus Loop") # APOD
+SH2  245             _("Fishhook Nebula") # MISC
 SH2  261             _("Lower's Nebula") # PSA, SIMBAD
 SH2  264             _("λ Ori Molecular Ring") # SIMBAD
 SH2  264             _("Angelfish Nebula")
@@ -1195,6 +1203,7 @@ LDN  43              _("Cosmic Bat Nebula") # APOD, ABIN, S&T
 LDN  810             _("Coalman Nebula") # DSW
 LDN  906             _("Northern Coalsack Nebula") # S&T, HT, PSA
 LDN  935             _("Gulf of Mexico Nebula")
+LDN  988             _("Pincushion Cloud") # S&T, MISC
 LDN  1235            _("Dark Shark Nebula") # WK
 LDN  1529            _("Kutner's Cloud") # SIMBAD
 LDN  1613            _("Cone Nebula") # DSW

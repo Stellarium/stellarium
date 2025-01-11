@@ -94,6 +94,8 @@
 # define STD_EXECUTION_PAR_COMMA
 #endif
 
+constexpr double DEFAULT_FONT_SIZE = 13;
+
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
 {

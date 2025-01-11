@@ -237,8 +237,6 @@ int main(int argc, char **argv)
 	// Init the file manager
 	StelFileMgr::init();
 
-	SplashScreen::present();
-
 	// add contents of STEL_OPTS environment variable.
 	QString envStelOpts(qgetenv("STEL_OPTS").constData());
 	if (!envStelOpts.isEmpty())
@@ -419,7 +417,7 @@ int main(int argc, char **argv)
 	// Note that style sheet will possibly override this setting.
 	QString baseFont = confSettings->value("gui/base_font_name", "Noto Sans").toString();
 	QFont tmpFont(baseFont);
-	tmpFont.setPixelSize(confSettings->value("gui/gui_font_size", 13).toInt());
+	tmpFont.setPixelSize(confSettings->value("gui/gui_font_size", DEFAULT_FONT_SIZE).toInt());
 	QGuiApplication::setFont(tmpFont);
 
 	// Initialize translator feature

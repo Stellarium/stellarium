@@ -50,6 +50,8 @@ public slots:
 	//! Hide the controls, leaving only the button bar.
 	void foldGui();
 
+	void setFontSize(int size);
+
 private slots:
 	//! Update the position of the widget within the parent.
 	//! Tied to the parent's geometryChanged() signal.
@@ -67,6 +69,9 @@ private slots:
 
 	//! Sets the color scheme (day/night mode)
 	void setColorScheme(const QString& schemeName);
+
+	void updateLayout();
+	void updateRotationButtons();
 
 private:
 	Oculars* ocularsPlugin;
@@ -129,24 +134,24 @@ private:
 	QGraphicsTextItem* fieldLimitMagnitude;
 
 	//Sensor frame rotation controls
-	StelButton* rotateCcdMinus90Button;
-	StelButton* rotateCcdMinus15Button;
-	StelButton* rotateCcdMinus5Button;
-	StelButton* rotateCcdMinus1Button;
-	StelButton* resetCcdRotationButton;
-	StelButton* rotateCcdPlus1Button;
-	StelButton* rotateCcdPlus5Button;
-	StelButton* rotateCcdPlus15Button;
-	StelButton* rotateCcdPlus90Button;
-	StelButton* rotatePrismMinus90Button;
-	StelButton* rotatePrismMinus15Button;
-	StelButton* rotatePrismMinus5Button;
-	StelButton* rotatePrismMinus1Button;
-	StelButton* resetPrismRotationButton;
-	StelButton* rotatePrismPlus1Button;
-	StelButton* rotatePrismPlus5Button;
-	StelButton* rotatePrismPlus15Button;
-	StelButton* rotatePrismPlus90Button;
+	StelButton* rotateCcdMinus90Button = nullptr;
+	StelButton* rotateCcdMinus15Button = nullptr;
+	StelButton* rotateCcdMinus5Button = nullptr;
+	StelButton* rotateCcdMinus1Button = nullptr;
+	StelButton* resetCcdRotationButton = nullptr;
+	StelButton* rotateCcdPlus1Button = nullptr;
+	StelButton* rotateCcdPlus5Button = nullptr;
+	StelButton* rotateCcdPlus15Button = nullptr;
+	StelButton* rotateCcdPlus90Button = nullptr;
+	StelButton* rotatePrismMinus90Button = nullptr;
+	StelButton* rotatePrismMinus15Button = nullptr;
+	StelButton* rotatePrismMinus5Button = nullptr;
+	StelButton* rotatePrismMinus1Button = nullptr;
+	StelButton* resetPrismRotationButton = nullptr;
+	StelButton* rotatePrismPlus1Button = nullptr;
+	StelButton* rotatePrismPlus5Button = nullptr;
+	StelButton* rotatePrismPlus15Button = nullptr;
+	StelButton* rotatePrismPlus90Button = nullptr;
 
 	//! Sets the visibility of the ocular name label and the associated buttons.
 	void setOcularControlsVisible(bool show);

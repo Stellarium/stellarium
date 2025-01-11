@@ -11,56 +11,27 @@ INSTALL(FILES NotoSans-Regular.ttf NotoSansMono-Regular.ttf NotoSansSC-Regular.o
 INSTALL(DIRECTORY shaders/ DESTINATION ${SDATALOC}/data/shaders FILES_MATCHING
 	PATTERN "planet*")
 
-########### splash target ##############
-ADD_CUSTOM_TARGET(splash ALL)
-SET(_splashFile splash.png)
-SET(_splashDstFile ${CMAKE_CURRENT_BINARY_DIR}/${_splashFile})
-
-IF(NOT STELLARIUM_RELEASE_BUILD)
-	GET_FILENAME_COMPONENT(_splashSrcFile splash-gray.png ABSOLUTE)
+# install splash
+IF(STELLARIUM_RELEASE_BUILD)
+	INSTALL(FILES splash.png DESTINATION ${SDATALOC}/data)
 ELSE()
-	GET_FILENAME_COMPONENT(_splashSrcFile splash.png ABSOLUTE)
+	INSTALL(FILES splash-gray.png DESTINATION ${SDATALOC}/data RENAME splash.png)
 ENDIF()
 
-ADD_CUSTOM_COMMAND(
-	TARGET splash
-	COMMAND ${CMAKE_COMMAND} -E copy ${_splashSrcFile} ${_splashDstFile}
-)
-SET_TARGET_PROPERTIES(splash PROPERTIES FOLDER "data")
-
-########### icon target ###############
-ADD_CUSTOM_TARGET(icon ALL)
+# install icon
 IF(APPLE)
-	SET(_iconFile stellarium.icns)
-	IF(NOT STELLARIUM_RELEASE_BUILD)
-		GET_FILENAME_COMPONENT(_iconSrcFile stellarium-gray.icns ABSOLUTE)
+	IF(STELLARIUM_RELEASE_BUILD)
+		INSTALL(FILES stellarium.icns DESTINATION ${SDATALOC})
 	ELSE()
-		GET_FILENAME_COMPONENT(_iconSrcFile stellarium.icns ABSOLUTE)
+		INSTALL(FILES stellarium-gray.icns DESTINATION ${SDATALOC} RENAME stellarium.icns)
 	ENDIF()
-ELSE()
-	SET(_iconFile stellarium.ico)
-	IF(NOT STELLARIUM_RELEASE_BUILD)
-		GET_FILENAME_COMPONENT(_iconSrcFile stellarium-gray.ico ABSOLUTE)
-	ELSE()
-		GET_FILENAME_COMPONENT(_iconSrcFile stellarium.ico ABSOLUTE)
-	ENDIF()	
-ENDIF()
-
-SET(_iconDstFile ${CMAKE_CURRENT_BINARY_DIR}/${_iconFile})
-ADD_CUSTOM_COMMAND(
-	TARGET icon
-	COMMAND ${CMAKE_COMMAND} -E copy ${_iconSrcFile} ${_iconDstFile}
-)
-SET_TARGET_PROPERTIES(icon PROPERTIES FOLDER "data")
-
-# install splash and icon
-IF(APPLE)
-        INSTALL(FILES ${_iconDstFile} DESTINATION ${SDATALOC} RENAME ${_iconFile})
-        INSTALL(FILES ${_splashDstFile} DESTINATION ${SDATALOC}/data RENAME ${_splashFile})
 	INSTALL(FILES Info.plist PkgInfo DESTINATION .)
 ELSE()
-        INSTALL(FILES ${_iconDstFile} DESTINATION ${SDATALOC}/data RENAME ${_iconFile})
-        INSTALL(FILES ${_splashDstFile} DESTINATION ${SDATALOC}/data RENAME ${_splashFile})
+	IF(STELLARIUM_RELEASE_BUILD)
+		INSTALL(FILES stellarium.ico DESTINATION ${SDATALOC}/data)
+	ELSE()
+		INSTALL(FILES stellarium-gray.ico DESTINATION ${SDATALOC}/data RENAME stellarium.ico)
+	ENDIF()
 ENDIF()
 
 # install Scenery3d shaders

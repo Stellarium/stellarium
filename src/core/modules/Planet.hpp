@@ -42,10 +42,6 @@ typedef void (*posFuncType)(double, double*, double*, void*);
 
 typedef void (OsculatingFunctType)(double jde0,double jde,double xyz[3], double xyzdot[3]);
 
-// epoch J2000: 12 UT on 1 Jan 2000
-#define J2000 2451545.0
-#define ORBIT_SEGMENTS 360
-
 class Orbit;
 class KeplerOrbit;
 class StelFont;
@@ -148,6 +144,9 @@ public:
 		OrbitPlotting               // Good enough for orbitplotting?
 	};
 	Q_ENUM(PositionQuality)
+
+	// epoch J2000: 12 UT on 1 Jan 2000
+	static inline constexpr double J2000 = 2451545.0;
 
 public:
 	Planet(const QString& englishName,
@@ -534,6 +533,8 @@ public:
 	LinearFader orbitFader;
 	// draw orbital path of Planet
 	void drawOrbit(const StelCore*);
+
+	static constexpr int ORBIT_SEGMENTS = 360;
 	Vec3d orbit[ORBIT_SEGMENTS+1];  // store heliocentric coordinates for drawing the orbit
 	double deltaJDE;                // time difference between positional updates.
 	double deltaOrbitJDE;

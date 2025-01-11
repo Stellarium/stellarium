@@ -30,7 +30,7 @@ class SplashScreen
 		QFont splashFont;
 		bool painted=false;
 	public:
-		SplashScreenWidget(QPixmap const& pixmap);
+		SplashScreenWidget(QPixmap const& pixmap, double sizeRatio);
 		void ensureFirstPaint() const
 		{
 			while(!painted)
@@ -47,7 +47,7 @@ class SplashScreen
 	static SplashScreenWidget* instance;
 
 public:
-	static void present();
+	static void present(double sizeRatio);
 	static void finish(QWidget* mainWindow);
 	static void showMessage(QString const& message);
 	static void clearMessage();

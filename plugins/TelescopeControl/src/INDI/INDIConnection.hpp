@@ -20,8 +20,8 @@
 #define INDICONNECTION_HPP
 
 #include <QObject>
-#include <libs/indiclient/baseclient.h>
-#include <libs/indidevice/basedevice.h>
+#include <libindi/baseclient.h>
+#include <libindi/basedevice.h>
 
 #include <mutex>
 #include <QStringList>

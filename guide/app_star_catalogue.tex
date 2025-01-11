@@ -37,9 +37,9 @@ present apparent magnitude in $\pm 100,000$ years.
 \subsection{General Description}%\label{general-description}
 \label{sec:Catalogues:stars:general}
 
-Stellarium's star catalogue data is kept in the \file{stars/hip\_gaia3}
+Stellarium's star catalogue data is kept in the \file{stars/hip\_gaia3}\newFeature{25.1}
 sub-directory of the Installation Directory and/or User Directory (see
-section~\ref{sec:Directories}).
+section~\ref{sec:Directories}).\footnote{The data has significantly changed in version 25.1. The previous structure can be found in older guides.}
 
 The main catalogue data is split into several files:
 
@@ -67,8 +67,9 @@ There also exist some control and reference files:
 \item[\file{name.fab}]
 \end{description}
 
-When Stellarium starts, it reads the \file{starsConfig.json}\footnote{Or \file{defaultStarsConfig.json} file in Installation Directory} file, from which it determines the 
-names of the other files, which it then loads. The file \file{stars\_hip\_sp\_0v0\_6.cat} 
+When Stellarium starts, it reads the file \file{stars/hip\_gaia3/starsConfig.json}%
+\footnote{Or \file{stars/hip\_gaia3/defaultStarsConfig.json} file in Installation Directory}, from which it determines the 
+names of the other files which it then loads. The file \file{stars\_hip\_sp\_0v0\_6.cat} 
 contain spectral type of HIP stars. The file \file{object\_types\_v0\_1.cat} 
 contain object type classification name for the main star catalogs. 
 The file \file{gcvs\_hip\_part.dat} contains data about variables stars
@@ -171,18 +172,6 @@ simply a list of integer values which describe the number of stars for
 each zone. The total length of the Zones section depends on the number
 of zones. See table~\ref{tab:Catalogues:stars:record:zones}.
 
-\begin{table}[htbp]
-\begin{tabularx}{\textwidth}{llllX}\toprule
-\emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-num stars in zone 0     & 0      & int & 4 &  number of records in this file which are in zone 0\\%\midrule
-num stars in zone 1     & 4      & int & 4 &  number of records is this file which are in zone 1\\
-\ldots                  &        &     &   &\\
-num stars in zone $n-1$ & $4n-4$ & int & 4 &  number of records is this file which are in zone $n$\\\bottomrule
-num stars in zone $n$   & $4n$   & int & 4 &  number of records is this file which are in the global zone\\\bottomrule
-\end{tabularx}
-\caption{Zones section}
-\label{tab:Catalogues:stars:record:zones}
-\end{table}
 
 \subsubsection{Star Data Records}%\label{star-data-records}
 \label{sec:Catalogues:stars:record:data}
@@ -203,35 +192,49 @@ See tables
 for record structure details.
 
 Details about vector algebra related to astrometric calculations can be 
-found in \citep{2012asas.book.....V}. For catalog with Star Data Record 
-Type 0, in practice to convert \texttt{x0}, \texttt{x1}, \texttt{x2} to 
+found in \citep{2012asas.book.....V}. For the catalog with Star Data Record 
+Type 0, in practice to convert $\mathtt{x0}, \mathtt{x1}, \mathtt{x2}$ to 
 right accension $\alpha$ and declination $\delta$, one can use the following 
 formulas:
 
 \begin{equation}
 \begin{aligned}
-\alpha &= \arctan2(\texttt{x1}, \texttt{x0})\\
-\delta &= \arcsin(\texttt{x2})
+\alpha &= \arctan2(\mathtt{x1}, \mathtt{x0})\\
+\delta &= \arcsin(\mathtt{x2})
 \end{aligned}
 \end{equation}
 
-and to convert proper motion vector (\texttt{dx0}, \texttt{dx1}, \texttt{dx2}) to 
+and to convert proper motion vector $(\mathtt{dx0}, \mathtt{dx1}, \mathtt{dx2})$ to 
 proper motion in right ascension $\mu_{\alpha^*}$ and declination $\mu_{\delta}$, 
 one can use the following formulas:
 
 \begin{equation}
 \begin{aligned}
-	xy &= \sqrt{\texttt{x0}^2 + \texttt{x1}^2}; \\
-	\vec{p} &= \left(-\frac{\texttt{x1}}{xy}, \frac{\texttt{x0}}{xy}, 0.\right); \\
-	\vec{q} &= \left(-\frac{\texttt{x0} \cdot \texttt{x2}}{xy}, -\frac{\texttt{x1} \cdot \texttt{x2}}{xy}, xy\right);\\
-	\mu_{\alpha^*} &= \vec{p} \cdot \left(\texttt{dx0}, \texttt{dx1}, \texttt{dx2}\right); \\
-	\mu_{\delta} &= \vec{q} \cdot \left(\texttt{dx0}, \texttt{dx1}, \texttt{dx2}\right);
+	xy &= \sqrt{\mathtt{x0}^2 + \mathtt{x1}^2}; \\
+	\vec{p} &= \left(-\frac{\mathtt{x1}}{xy}, \frac{\mathtt{x0}}{xy}, 0.\right); \\
+	\vec{q} &= \left(-\frac{\mathtt{x0} \cdot \mathtt{x2}}{xy}, -\frac{\mathtt{x1} \cdot \mathtt{x2}}{xy}, xy\right);\\
+	\mu_{\alpha^*} &= \vec{p} \cdot \left(\mathtt{dx0}, \mathtt{dx1}, \mathtt{dx2}\right); \\
+	\mu_{\delta} &= \vec{q} \cdot \left(\mathtt{dx0}, \mathtt{dx1}, \mathtt{dx2}\right);
 \end{aligned}
 \end{equation}
 
 where $\mu_{\alpha^*}\equiv\mu_{\alpha}\cos{(\delta)}$.
 
-\begin{table}[p]
+\begin{table}[htbp]
+\begin{tabularx}{\textwidth}{llllX}\toprule
+\emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
+num stars in zone 0     & 0      & int & 4 &  number of records in this file which are in zone 0\\%\midrule
+num stars in zone 1     & 4      & int & 4 &  number of records is this file which are in zone 1\\
+\ldots                  &        &     &   &\\
+num stars in zone $n-1$ & $4n-4$ & int & 4 &  number of records is this file which are in zone $n$\\\bottomrule
+num stars in zone $n$   & $4n$   & int & 4 &  number of records is this file which are in the global zone\\\bottomrule
+\end{tabularx}
+\caption{Zones section}
+\label{tab:Catalogues:stars:record:zones}
+\end{table}
+
+
+\begin{table}[htbp]
 \begin{tabular}{llllp{75mm}}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
 gaia\_id       &  0 & long long          & 8 & Gaia source id\\%\midrule
@@ -273,6 +276,7 @@ plx\_err       & 30 & unsigned short     & 2 & parallax error of the star in 0.0
 \label{tab:StarDataRecord1}
 \end{table}
 
+
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} & \emph{Description}\\\midrule
@@ -285,6 +289,8 @@ mag            & 15 & unsigned short     & 1 & $V$-band magnitude in 20 milli-ma
 \caption{Star Data Record Type 2}
 \label{tab:StarDataRecord2}
 \end{table}
+
+
 \clearpage
 
 \section{Variable Stars}

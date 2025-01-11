@@ -450,6 +450,9 @@ void StelApp::init(QSettings* conf)
 
 	setScreenFontSize(confSettings->value("gui/screen_font_size", getDefaultGuiFontSize()).toInt());
 	setGuiFontSize(confSettings->value("gui/gui_font_size", getDefaultGuiFontSize()).toInt());
+
+	SplashScreen::present(guiFontSizeRatio());
+
 	setFlagImmediateSave(confSettings->value("gui/immediate_save_details", false).toBool());
 
 	core = new StelCore();
@@ -1456,6 +1459,12 @@ void StelApp::setScreenFontSize(int s)
 		emit screenFontSizeChanged(s);
 	}
 }
+
+double StelApp::screenFontSizeRatio() const
+{
+	return double(getScreenFontSize()) / getDefaultGuiFontSize();
+}
+
 void StelApp::setGuiFontSize(int s)
 {
 	if (getGuiFontSize()!=s)

@@ -85,10 +85,10 @@ static inline int ReadInt(QFile& file, unsigned int &x)
 
 static inline int ReadFloat(QFile& file, float &x)
 {
-	unsigned int temp;
-	if (4 != file.read(reinterpret_cast<char*>(&temp), 4))
+	char data[sizeof x];
+	if (file.read(data, sizeof data) != sizeof data)
 		return -1;
-	x = *reinterpret_cast<float*>(&temp);
+	std::memcpy(&x, data, sizeof data);
 	return 0;
 }
 
@@ -111,13 +111,12 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	unsigned int magic,major,minor,type,level,mag_min;
 	float epochJD;
 	if (ReadInt(*file,magic) < 0 ||
-			ReadInt(*file,type) < 0 ||
-			ReadInt(*file,major) < 0 ||
-			ReadInt(*file,minor) < 0 ||
-			ReadInt(*file,level) < 0 ||
-			ReadInt(*file,mag_min) < 0 ||
-			ReadFloat(*file,epochJD) < 0
-		)
+	    ReadInt(*file,type) < 0 ||
+	    ReadInt(*file,major) < 0 ||
+	    ReadInt(*file,minor) < 0 ||
+	    ReadInt(*file,level) < 0 ||
+	    ReadInt(*file,mag_min) < 0 ||
+	    ReadFloat(*file,epochJD) < 0)
 	{
 		dbStr += "error - file format is bad.";
 		qDebug().noquote() << dbStr;

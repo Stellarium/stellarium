@@ -341,7 +341,7 @@ private slots:
 	void selectCurrentSolarEclipseContact(const QModelIndex &modelIndex);
 	void saveSolarEclipses();
 	void saveSolarEclipseCircumstances();
-	void saveSolarEclipseMap();
+	void saveSolarEclipseMap(bool local);
 
 	//! Calculating local solar eclipses to fill the list.
 	//! Algorithm taken from calculating the rises, transits and sets.
@@ -356,6 +356,8 @@ private slots:
 	void cleanupTransits();
 	void selectCurrentTransit(const QModelIndex &modelIndex);
 	void saveTransits();
+
+	void saveEclipseFiltersState();
 
 	void saveEphemerisCelestialBody(int index);
 	void saveEphemerisSecondaryCelestialBody(int index);
@@ -581,6 +583,7 @@ private:
 	void enableSolarEclipsesButtons(bool enable);
 	void enableSolarEclipsesCircumstancesButtons(bool enable);
 	void enableSolarEclipsesLocalButtons(bool enable);
+	void enableSolarEclipsesLocalSingleEclipseButtons(bool enable);
 	void enableLunarEclipsesButtons(bool enable);
 	void enableLunarEclipsesCircumstancesButtons(bool enable);
 	void enableTransitsButtons(bool enable);

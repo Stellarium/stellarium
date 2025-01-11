@@ -617,17 +617,46 @@ problems.
 \end{description}
 
 \section{GUI Customizations}
-\subsection{User interface colors}
-\label{sec:CommandLineOptions:Special:CSS}
 
 Some users have difficulties to read Stellarium's rather dark user
 interface. Some screens may be too dark, or environments too
-bright. Others find it is still too bright, and they would prefer a
+bright. 
+
+\subsection{Panel transparency}
+\label{sec:CommandLineOptions:Special:PanelTransparency}
+The GUI panels are semitransparent by design. If this impedes your ability to read them, you can 
+make them fully opaque with an entry to \file{config.ini}.
+\begin{configfile}
+[gui]
+flag_use_window_transparency=false
+\end{configfile}
+
+\subsection{Button brightness}
+\label{sec:CommandLineOptions:Special:ButtonBrightness}
+If you only want a bit brighter buttons,\newFeature{24.4} these can be tweaked separately in \file{config.ini}.
+\begin{configfile}
+[gui]
+pixmaps_brightness=1.25
+\end{configfile}
+The value is clamped to [1\ldots1.8] to avoid making active and inactive buttons equally bright.
+
+\subsection{Text shadow}
+\label{sec:CommandLineOptions:Special:TextShadow}
+Some users complain the infotext is badly visible when there are trees or the Milky Way in the background.\newFeature{24.4} This can also be mitigated in \file{config.ini}.
+\begin{configfile}
+[gui]
+flag_info_shadow=true
+\end{configfile}
+
+
+\subsection{User interface colors}
+\label{sec:CommandLineOptions:Special:CSS}
+Others users still find the GUI too bright, and they would prefer a
 real ``dark mode''. To allow this, you can create and load your own alternative style files.
 
 The appearance of the windows, buttons etc.\ is governed by a CSS
 (Cascaded Style Sheet) file. It certainly requires some knowledge and
-guessing to edit your own, but there is enough help available
+guessing to edit your own, but there is enough general help on CSS available
 online. You can find the CSS files in Stellarium's Github site%
 \footnote{\url{https://github.com/Stellarium/stellarium/blob/stellarium-stable/data/gui/normalStyle.css} and
   \url{https://github.com/Stellarium/stellarium/blob/stellarium-stable/data/gui/normalHtml.css}}.
@@ -657,22 +686,6 @@ Note that, as Stellarium evolves, these files also may change from
 version to version. We cannot give any guarantees that one customized
 file will work without adaptation on later or earlier versions of Stellarium.
 
-\subsection{Button brightness}
-\label{sec:CommandLineOptions:Special:ButtonBrightness}
-If you only want a bit brighter buttons,\newFeature{24.4} these can be tweaked separately in \file{config.ini}.
-\begin{configfile}
-[gui]
-pixmaps_brightness=1.25
-\end{configfile}
-The value is clamped to [1\ldots1.8] to avoid making active and inactive buttons equally bright.
-
-\subsection{Text shadow}
-\label{sec:CommandLineOptions:Special:TextShadow}
-Some users complain the infotext is badly visible when there are trees or the Milky Way in the background.\newFeature{24.4} This can also be mitigated in \file{config.ini}.
-\begin{configfile}
-[gui]
-flag_info_shadow=true
-\end{configfile}
 
 \section{Spout}\newFeature{0.15.1} 
 \label{sec:CommandLineOptions:Special:Spout}
@@ -819,24 +832,6 @@ See ongoing discussion on Github\footnote{\url{https://github.com/Stellarium/ste
 \url{https://github.com/Stellarium/stellarium/issues/3535}} and get involved.
 
 
-\section{Immediate Storage of Settings}
-\label{sec:CommandLineOptions:Special:ImmediateStorage}
-
-After changing view settings, \newFeature{24.4}clicking some checkboxes, \ldots to make your system display what you need, 
-you must call the main Settings dialog and press \button{Save Settings}. 
-This is to let beginning users just quit the program in case they moved into confusing ``settings terrain''. 
-Location and landscape settings are of such fundamental importance that they are stored only in their respective dialogs.
-
-Some users prefer to have their changes applied and stored immediately, so that they are applied also on next program launch. 
-Stellarium is on its way to support both modes, but the process is slow, there are hundreds of detail settings to convert. 
-If you already want to apply immediate mode for settings  e.g. in the DSO or Landscape dialogs, 
-you can enable a flag manually by editing \file{config.ini}:
-
-\begin{configfile}
-[gui]
-immediate_save_details = true
-\end{configfile}
-Users of this mode are expected to know where settings are and how to change them. 
 
 %%% Local Variables: 
 %%% mode: latex

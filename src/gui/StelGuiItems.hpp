@@ -116,8 +116,8 @@ public:
 
 	//! Get the width of the button image.
 	//! The width is based on pixOn.
-	int getButtonPixmapWidth() const {return pixOn.width() / pixmapsScale;}
-	int getButtonPixmapHeight() const {return pixOn.height() / pixmapsScale;}
+	int getButtonPixmapWidth() const;
+	int getButtonPixmapHeight() const;
 
 	//! Set the button opacity
 	void setOpacity(double v) {opacity=v; updateIcon();}
@@ -138,6 +138,7 @@ public:
 
 	static double getInputPixmapsDevicePixelRatio() { return GUI_INPUT_PIXMAPS_SCALE; }
 
+
 signals:
 	//! Triggered when the button state changes
 	void toggled(bool);
@@ -152,6 +153,7 @@ public slots:
 	//! set whether the button is checked
 	void setChecked(int b);
 	void setChecked(bool b) { setChecked(static_cast<int>(b)); }
+	void updateIcon();
 
 protected:
 	void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override;
@@ -161,7 +163,6 @@ protected:
 	void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
 private slots:
 	void animValueChanged(qreal value);
-	void updateIcon();
 private:
 	void initCtor(const QPixmap& apixOn,
                   const QPixmap& apixOff,
@@ -220,6 +221,7 @@ private slots:
 	void setFontSizeFromApp(int size);
 	//! connect from StelApp to set font on the fly.
 	void setFont(const QFont &cfont);
+	void updateButtonPositions();
 private:
 	QTimeLine* hideTimeLine;
 	QGraphicsSimpleTextItem* helpLabel;
