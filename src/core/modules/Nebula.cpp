@@ -712,6 +712,7 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 	float oLim = getVisibilityLevelByMagnitude() - 3.f;
 
 	sPainter.setColor(getHintColor(nType), hintsBrightness);
+	sPainter.setLineWidth(1.f * sPainter.getProjector()->getScreenScale());
 
 	StelCore *core=StelApp::getInstance().getCore();
 	Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
