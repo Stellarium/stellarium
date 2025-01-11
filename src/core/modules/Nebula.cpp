@@ -754,7 +754,7 @@ void Nebula::renderDarkNebulaMarker(StelPainter& sPainter, const float x, const 
                                     float size, const Vec3f color) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto scale = sPainter.getProjector()->getDevicePixelsPerPixel();
+	const float scale = sPainter.getProjector()->getScreenScale();
 	size *= scale;
 
 	const float roundRadius = 0.35 * size;
@@ -841,7 +841,7 @@ void Nebula::renderMarkerRoundedRect(StelPainter& sPainter, const float x, const
                                      float size, const Vec3f color) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto scale = sPainter.getProjector()->getDevicePixelsPerPixel();
+	const float scale = sPainter.getProjector()->getScreenScale();
 	size *= scale;
 
 	const float roundRadius = 0.35 * size;
@@ -897,7 +897,7 @@ void Nebula::renderRoundMarker(StelPainter& sPainter, const float x, const float
                                float size, const Vec3f color, const bool crossed) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto scale = sPainter.getProjector()->getDevicePixelsPerPixel();
+	const float scale = sPainter.getProjector()->getScreenScale();
 	size *= scale;
 
 	sPainter.setBlending(true);
@@ -923,7 +923,7 @@ void Nebula::renderEllipticMarker(StelPainter& sPainter, const float x, const fl
                                   const float aspectRatio, const float angle, const Vec3f color) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto scale = sPainter.getProjector()->getDevicePixelsPerPixel();
+	const float scale = sPainter.getProjector()->getScreenScale();
 	size *= scale;
 
 	const float radiusY = 0.35 * size;
@@ -957,21 +957,21 @@ void Nebula::renderMarkerPointedCircle(StelPainter& sPainter, const float x, con
                                        float size, const Vec3f color, const bool insideRect) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto scale = sPainter.getProjector()->getDevicePixelsPerPixel();
+	const float scale = sPainter.getProjector()->getScreenScale();
 	size *= scale;
 
 	texPointElement->bind();
 	sPainter.setColor(color, hintsBrightness);
 	sPainter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
-	const auto numPoints = StelUtils::getSmallerPowerOfTwo(std::clamp(int(0.4f*size), 8, 4096));
-	const auto spriteSize = std::min(0.25f * 2*M_PIf*size / numPoints, 5.f);
+	const auto numPoints = StelUtils::getSmallerPowerOfTwo(std::clamp(int(0.4f*size/scale), 8, 4096));
+	const auto spriteSize = std::min(0.25f * 2*M_PIf*size / numPoints, 5.f * scale);
 	if(insideRect)
 		size -= spriteSize*2;
 	const float*const cossin = StelUtils::ComputeCosSinRhoZone((2*M_PIf)/numPoints, numPoints, 0);
 	for(int n = 0; n < numPoints; ++n)
 	{
 		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
-		sPainter.drawSprite2dMode(x - size*sina, y - size*cosa, spriteSize);
+		sPainter.drawSprite2dModeNoDeviceScale(x - size*sina, y - size*cosa, spriteSize);
 	}
 }
 
@@ -981,7 +981,12 @@ float Nebula::getHintSize(StelPainter& sPainter) const
 	float scaledSize = 0.0f;
 	// Should getPixelPerRadAtCenter() not adjust for HiDPI? Apparently it does not!
 	if (drawHintProportional)
-		scaledSize = static_cast<float>(getAngularRadius(Q_NULLPTR)) *(M_PI_180f)*static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter()) / static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
+	{
+		const float scale = sPainter.getProjector()->getScreenScale();
+		const float angularRadiusAtCenter = static_cast<float>(getAngularRadius(nullptr)) * M_PI_180f;
+		const float pixPerRadAtCenter = static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter());
+		scaledSize = angularRadiusAtCenter * pixPerRadAtCenter / scale;
+	}
 	// TODO: Is it correct that for NebRegions any catalog data for getAngularRadius() is ignored? And that NebRegions are ALWAYS drawn with larger symbol?
 	if (nType==NebRegion)
 		scaledSize = 12.f;

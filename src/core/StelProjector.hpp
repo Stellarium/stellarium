@@ -222,6 +222,10 @@ public:
 	//! Get size of a radian in pixels at the center of the viewport disk
 	float getPixelPerRadAtCenter() const;
 
+	//! Get the scale factor for objects drawn on screen. This takes into account
+	//! font size and the OS-given high-DPI scaling setting (see #getDevicePixelsPerPixel).
+	float getScreenScale() const;
+
 	//! Get the current FOV diameter in degrees
 	float getFov() const;
 
