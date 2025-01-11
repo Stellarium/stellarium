@@ -1112,7 +1112,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// In earlier times (up to 0.21.2) we did not care much to store orbital epoch for comets but silently assumed T for it in various places.
 			// However, the distinction is relevant to discern element sets for various valid ranges.
 			// Comet orbits epoch should default to T while planets or moons default to J2000.
-			const double epoch = pd.value(secname+"/orbit_Epoch", type==L1S("comet") ? time_at_pericenter : J2000).toDouble();
+			const double epoch = pd.value(secname+"/orbit_Epoch", type==L1S("comet") ? time_at_pericenter : Planet::J2000).toDouble();
 			if (time_at_pericenter <= -1e100) {
 				double mean_anomaly = pd.value(secname+"/orbit_MeanAnomaly",-1e100).toDouble()*(M_PI/180.0);
 				if (mean_anomaly <= -1e10) {
@@ -1147,7 +1147,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// after recomputing obliquity and node (below) in Planet::computeTransMatrix().
 			// The effect is negligible for several millennia, though.
 			// When the parent is the sun use ecliptic rather than sun equator:
-			const double parentRotObliquity  = parent->getParent() ? parent->getRotObliquity(J2000) : 0.0;
+			const double parentRotObliquity  = parent->getParent() ? parent->getRotObliquity(Planet::J2000) : 0.0;
 			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingNode()  : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
 			if (parent->getParent()) {
@@ -1481,7 +1481,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			englishName,
 			rotPeriod,
 			rotOffset,
-			pd.value(secname+"/rot_epoch", J2000).toDouble(),
+			pd.value(secname+"/rot_epoch", Planet::J2000).toDouble(),
 			rotObliquity,
 			rotAscNode,
 			J2000NPoleRA,

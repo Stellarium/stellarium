@@ -60,9 +60,6 @@
 #include <QString>
 #include "VecMath.hpp"
 
-// epoch J2000: 12 UT on 1 Jan 2000
-#define J2000 2451545.0
-
 class RotationElements
 {
 public:
@@ -79,6 +76,8 @@ public:
 		Uranus=7,
 		Neptune=8
 	};
+	// epoch J2000: 12 UT on 1 Jan 2000
+	static inline constexpr double J2000 = 2451545.0;
 
 	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.),
 		method(Traditional), ra0(0.), ra1(0.), de0(0.), de1(0.), W0(0.), W1(0.),
