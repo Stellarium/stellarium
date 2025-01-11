@@ -65,7 +65,8 @@ QString StarWrapper1::getEnglishName(void) const
 {
 	if (s->getHip())
 		return QString("HIP %1").arg(s->getHip());
-	return StarWrapperBase::getEnglishName();
+	else
+		return QString("Gaia DR3 %1").arg(s->getGaia());
 }
 
 QString StarWrapper1::getID(void) const
@@ -78,14 +79,28 @@ QString StarWrapper1::getID(void) const
 		else
 			hip = QString("HIP %1").arg(s->getHip());
 	}
+	else
+	{
+		hip = QString("Gaia DR3 %1").arg(s->getGaia());
+	}
 
 	return hip;
 }
 
 QString StarWrapper1::getObjectType() const
 {
-	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
-	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
+	int64_t star_id;
+	if (s->getHip())
+	{
+		star_id = static_cast<int64_t>(s->getHip());
+	}
+	else
+	{
+		star_id = s->getGaia();
+	}
+
+	const QString varType = StarMgr::getGcvsVariabilityType(star_id);
+	const int wdsObs = StarMgr::getWdsLastObservation(star_id);
 	QString varstartype = "";
 	QString startype = (s->getComponentIds() || wdsObs>0) ? N_("double star") : N_("star");
 	if(!varType.isEmpty())
@@ -121,7 +136,16 @@ QString StarWrapper1::getObjectType() const
 QString StarWrapper1::getObjectTypeI18n() const
 {
 	QString stypefinal, stype = getObjectType();
-	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
+	int64_t star_id;
+	if (s->getHip())
+	{
+		star_id = static_cast<int64_t>(s->getHip());
+	}
+	else
+	{
+		star_id = s->getGaia();
+	}
+	const QString varType = StarMgr::getGcvsVariabilityType(star_id);
 	if (!varType.isEmpty())
 	{
 		if (stype.contains(","))
@@ -153,29 +177,29 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	else
 		star_id = s->getGaia();
 
-	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
+	const QString varType = StarMgr::getGcvsVariabilityType(star_id);
 	const QString objType = StarMgr::convertToOjectTypes(s->getObjType());
-	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
-	const float wdsPA = StarMgr::getWdsLastPositionAngle(s->getHip());
-	const float wdsSep = StarMgr::getWdsLastSeparation(s->getHip());
-	const float maxVMag = StarMgr::getGcvsMaxMagnitude(s->getHip());
-	const float magFlag = StarMgr::getGcvsMagnitudeFlag(s->getHip());
-	const float minVMag = StarMgr::getGcvsMinMagnitude(s->getHip());
-	const float min2VMag = StarMgr::getGcvsMinMagnitude(s->getHip(), false);
-	const QString photoVSys = StarMgr::getGcvsPhotometricSystem(s->getHip());
-	const double vEpoch = StarMgr::getGcvsEpoch(s->getHip());
-	const double vPeriod = StarMgr::getGcvsPeriod(s->getHip());
-	const int vMm = StarMgr::getGcvsMM(s->getHip());
+	const int wdsObs = StarMgr::getWdsLastObservation(star_id);
+	const float wdsPA = StarMgr::getWdsLastPositionAngle(star_id);
+	const float wdsSep = StarMgr::getWdsLastSeparation(star_id);
+	const float maxVMag = StarMgr::getGcvsMaxMagnitude(star_id);
+	const float magFlag = StarMgr::getGcvsMagnitudeFlag(star_id);
+	const float minVMag = StarMgr::getGcvsMinMagnitude(star_id);
+	const float min2VMag = StarMgr::getGcvsMinMagnitude(star_id, false);
+	const QString photoVSys = StarMgr::getGcvsPhotometricSystem(star_id);
+	const double vEpoch = StarMgr::getGcvsEpoch(star_id);
+	const double vPeriod = StarMgr::getGcvsPeriod(star_id);
+	const int vMm = StarMgr::getGcvsMM(star_id);
 
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "<h2>";
 
-	const QString commonNameI18 = StarMgr::getCommonName(s->getHip());
-	const QString additionalNameI18 = StarMgr::getAdditionalNames(s->getHip());
+	const QString commonNameI18 = StarMgr::getCommonName(star_id);
+	const QString additionalNameI18 = StarMgr::getAdditionalNames(star_id);
 	const QString sciName = StarMgr::getSciName(star_id);
-	const QString sciExtraName = StarMgr::getSciExtraName(s->getHip());
-	const QString varSciName = StarMgr::getGcvsName(s->getHip());
-	const QString wdsSciName = StarMgr::getWdsName(s->getHip());
+	const QString sciExtraName = StarMgr::getSciExtraName(star_id);
+	const QString varSciName = StarMgr::getGcvsName(star_id);
+	const QString wdsSciName = StarMgr::getWdsName(star_id);
 	QStringList designations;
 	if (!sciName.isEmpty())
 		designations.append(sciName);
@@ -452,12 +476,20 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 {
 	QVariantMap map = StelObject::getInfoMap(core);
-
-	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
-	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
-	const float wdsPA = StarMgr::getWdsLastPositionAngle(s->getHip());
-	const float wdsSep = StarMgr::getWdsLastSeparation(s->getHip());
-	const double vPeriod = StarMgr::getGcvsPeriod(s->getHip());
+	int64_t star_id;
+	if (s->getHip())
+	{
+		star_id = static_cast<int64_t>(s->getHip());
+	}
+	else
+	{
+		star_id = s->getGaia();
+	}
+	const QString varType = StarMgr::getGcvsVariabilityType(star_id);
+	const int wdsObs = StarMgr::getWdsLastObservation(star_id);
+	const float wdsPA = StarMgr::getWdsLastPositionAngle(star_id);
+	const float wdsSep = StarMgr::getWdsLastSeparation(star_id);
+	const double vPeriod = StarMgr::getGcvsPeriod(star_id);
 
 	QString varstartype = "no";
 	QString startype = "star";

@@ -780,7 +780,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 			{
 				// The record is the right format.  Extract the fields
 				bool ok;
-				int hip = recMatch.captured(1).toInt(&ok);
+				int64_t hip = recMatch.captured(1).toLongLong(&ok);
 				if (!ok)
 				{
 					qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
@@ -975,7 +975,7 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 		const QStringList& fields = record.split('\t');
 
 		bool ok;
-		int hip = fields.at(0).toInt(&ok);
+		int64_t hip = fields.at(0).toLongLong(&ok);
 		if (!ok)
 		{
 			qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(GcvsFile)
@@ -1050,7 +1050,7 @@ void StarMgr::loadWds(const QString& WdsFile)
 		const QStringList& fields = record.split('\t');
 
 		bool ok;
-		int hip = fields.at(0).toInt(&ok);
+		int64_t hip = fields.at(0).toLongLong(&ok);
 		if (!ok)
 		{
 			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(WdsFile)
