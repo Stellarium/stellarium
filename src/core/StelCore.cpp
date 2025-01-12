@@ -3115,7 +3115,8 @@ Vec3d StelCore::calculateParallaxDiff(double JD) const {
 }
 
 Vec3d StelCore::getParallaxDiff(double JD) const {
-	if (fuzzyEquals(JD, cachedParallaxJD, JD_SECOND) && (getCurrentPlanet() == cachedParallaxPlanet))
+	// if isArtificial meaning transitioning between planets, use cache and don't recalculate because it will crash
+	if ((fuzzyEquals(JD, cachedParallaxJD, JD_SECOND) && (getCurrentPlanet() == cachedParallaxPlanet)) || (getCurrentPlanet()->getPlanetType() == Planet::isArtificial))
 	{
 		return cachedParallaxDiff;
 	}
