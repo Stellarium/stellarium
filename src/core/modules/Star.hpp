@@ -126,7 +126,7 @@ struct Star
    inline double getRV() const
    {
       return static_cast<const Derived *>(this)->getRV();
-   } // should return in km/s, 0 means no parallax error
+   } // should return in km/s, 0 means no radial velocity
    inline bool getPreciseAstrometricFlag() const
    {
       return static_cast<const Derived *>(this)->getPreciseAstrometricFlag();
