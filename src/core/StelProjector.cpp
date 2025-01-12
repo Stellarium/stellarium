@@ -21,6 +21,7 @@
 #include "StelTranslator.hpp"
 
 #include "StelProjector.hpp"
+#include "StelApp.hpp"
 
 #include <QDebug>
 #include <QString>
@@ -307,6 +308,13 @@ const SphericalCap& StelProjector::getBoundingCap() const
 float StelProjector::getPixelPerRadAtCenter() const
 {
 	return pixelPerRad;
+}
+
+float StelProjector::getScreenScale() const
+{
+	const float dppRatio = getDevicePixelsPerPixel();
+	const float fontRatio = StelApp::getInstance().screenFontSizeRatio();
+	return dppRatio * fontRatio;
 }
 
 //! Get the current FOV diameter in degrees
