@@ -27,16 +27,18 @@ static constexpr int BASE_FONT_SIZE = 11;
 
 SplashScreen::SplashScreenWidget* SplashScreen::instance;
 
-static QPixmap makePixmap()
+static QPixmap makePixmap(const double sizeRatio)
 {
 	QPixmap pixmap(StelFileMgr::findFile("data/splash.png"));
+	pixmap = pixmap.scaledToHeight(std::lround(pixmap.height() * sizeRatio),
+	                               Qt::SmoothTransformation);
 	return pixmap;
 }
 
 void SplashScreen::present(const double sizeRatio)
 {
 	Q_ASSERT(!instance);
-	instance=new SplashScreenWidget(makePixmap(), sizeRatio);
+	instance=new SplashScreenWidget(makePixmap(sizeRatio), sizeRatio);
 	instance->show();
 	instance->ensureFirstPaint();
 }
@@ -63,8 +65,7 @@ void SplashScreen::clearMessage()
 }
 
 SplashScreen::SplashScreenWidget::SplashScreenWidget(QPixmap const& pixmap, const double sizeRatio)
-	: QSplashScreen(pixmap.scaledToHeight(std::lround(pixmap.height() * sizeRatio),
-	                                      Qt::SmoothTransformation))
+	: QSplashScreen(pixmap)
 {
 	splashFont.setPixelSize(std::lround(BASE_FONT_SIZE * sizeRatio));
 
