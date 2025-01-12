@@ -26,6 +26,7 @@
 
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
+#include "StarMgr.hpp"
 
 #include <QTextStream>
 #include <limits>
@@ -89,14 +90,14 @@ QString StarWrapper1::getID(void) const
 
 QString StarWrapper1::getObjectType() const
 {
-	int64_t star_id;
+	StarId star_id;
 	if (s->getHip())
 	{
-		star_id = static_cast<int64_t>(s->getHip());
+		star_id = static_cast<StarId>(s->getHip());
 	}
 	else
 	{
-		star_id = s->getGaia();
+		star_id = static_cast<StarId>(s->getGaia());
 	}
 
 	const QString varType = StarMgr::getGcvsVariabilityType(star_id);
@@ -136,14 +137,14 @@ QString StarWrapper1::getObjectType() const
 QString StarWrapper1::getObjectTypeI18n() const
 {
 	QString stypefinal, stype = getObjectType();
-	int64_t star_id;
+	StarId star_id;
 	if (s->getHip())
 	{
-		star_id = static_cast<int64_t>(s->getHip());
+		star_id = static_cast<StarId>(s->getHip());
 	}
 	else
 	{
-		star_id = s->getGaia();
+		star_id = static_cast<StarId>(s->getGaia());
 	}
 	const QString varType = StarMgr::getGcvsVariabilityType(star_id);
 	if (!varType.isEmpty())
@@ -171,11 +172,11 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
 	Q_UNUSED(az_app)
 
-	int64_t star_id;
+	StarId star_id;
 	if (s->getHip())
-		star_id = static_cast<int64_t>(s->getHip());
+		star_id = static_cast<StarId>(s->getHip());
 	else
-		star_id = s->getGaia();
+		star_id = static_cast<StarId>(s->getGaia());
 
 	const QString varType = StarMgr::getGcvsVariabilityType(star_id);
 	const QString objType = StarMgr::convertToOjectTypes(s->getObjType());
@@ -476,14 +477,14 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 {
 	QVariantMap map = StelObject::getInfoMap(core);
-	int64_t star_id;
+	StarId star_id;
 	if (s->getHip())
 	{
-		star_id = static_cast<int64_t>(s->getHip());
+		star_id = static_cast<StarId>(s->getHip());
 	}
 	else
 	{
-		star_id = s->getGaia();
+		star_id = static_cast<StarId>(s->getGaia());
 	}
 	const QString varType = StarMgr::getGcvsVariabilityType(star_id);
 	const int wdsObs = StarMgr::getWdsLastObservation(star_id);

@@ -63,7 +63,7 @@ Constellation::~Constellation()
 
 bool Constellation::read(const QString& record, StarMgr *starMgr)
 {
-	unsigned int HP;
+	StarId HP;
 
 	abbreviation.clear();
 	numberOfSegments = 0;
@@ -91,7 +91,7 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 		}
 		else
 		{
-			constellation[i]=starMgr->searchGaia(HP);
+			constellation[i]=starMgr->searchGaia(static_cast<int64_t>(HP));
 		}
 
 		if (!constellation[i])

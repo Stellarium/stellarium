@@ -69,6 +69,7 @@ typedef struct
 } crossid;
 
 typedef QMap<StelObjectP, float> StelACStarData;
+typedef uint64_t StarId;
 
 //! @class StarMgr
 //! Stores the star catalogue data.
@@ -259,49 +260,49 @@ public:
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return translated common name of star
-	static QString getCommonName(int64_t hip);
+	static QString getCommonName(StarId hip);
 
 	//! Get the (translated) scientific name for a star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return translated scientific name of star
-	static QString getSciName(int64_t hip);
+	static QString getSciName(StarId hip);
 
 	//! Get the (translated) scientific extra name for a star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return translated scientific name of star
-	static QString getSciExtraName(int64_t hip);
+	static QString getSciExtraName(StarId hip);
 
 	//! Get the (translated) scientific name for a variable star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return translated scientific name of variable star
-	static QString getGcvsName(int64_t hip);
+	static QString getGcvsName(StarId hip);
 
 	//! Get the (translated) scientific name for a double star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return translated scientific name of double star
-	static QString getWdsName(int64_t hip);
+	static QString getWdsName(StarId hip);
 
 	//! Get the (English) common name for a star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return common name of star (from skyculture file star_names.fab)
-	static QString getCommonEnglishName(int64_t hip);
+	static QString getCommonEnglishName(StarId hip);
 
 	//! Get the (translated) additional names for a star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return translated additional names of star
-	static QString getAdditionalNames(int64_t hip);
+	static QString getAdditionalNames(StarId hip);
 
 	//! Get the English additional names for a star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return additional names of star
-	static QString getAdditionalEnglishNames(int64_t hip);
+	static QString getAdditionalEnglishNames(StarId hip);
 
 	//! Get the cross-identification designations for a star with a specified
 	//! Hipparcos or Gaia catalogue number.
@@ -313,68 +314,68 @@ public:
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return type of variability
-	static QString getGcvsVariabilityType(int64_t hip);
+	static QString getGcvsVariabilityType(StarId hip);
 
 	//! Get the magnitude at maximum brightness for a variable star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return the magnitude at maximum brightness for a variable star
-	static float getGcvsMaxMagnitude(int64_t hip);
+	static float getGcvsMaxMagnitude(StarId hip);
 
 	//! Get the magnitude flag code for a variable star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return the magnitude flag code for a variable star
-	static int getGcvsMagnitudeFlag(int64_t hip);
+	static int getGcvsMagnitudeFlag(StarId hip);
 
 	//! Get the minimum magnitude or amplitude for a variable star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @param firstMinimumFlag
 	//! @return the minimum magnitude or amplitude for a variable star
-	static float getGcvsMinMagnitude(int64_t hip, bool firstMinimumFlag=true);
+	static float getGcvsMinMagnitude(StarId hip, bool firstMinimumFlag=true);
 
 	//! Get the photometric system for a variable star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return the photometric system for a variable star
-	static QString getGcvsPhotometricSystem(int64_t hip);
+	static QString getGcvsPhotometricSystem(StarId hip);
 
 	//! Get Epoch for maximum light for a variable star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return Epoch for maximum light for a variable star
-	static double getGcvsEpoch(int64_t hip);
+	static double getGcvsEpoch(StarId hip);
 
 	//! Get the period for a variable star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return the period of variable star
-	static double getGcvsPeriod(int64_t hip);
+	static double getGcvsPeriod(StarId hip);
 
 	//! Get the rising time or duration of eclipse for a variable star with a
 	//! specified Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return the rising time or duration of eclipse for variable star
-	static int getGcvsMM(int64_t hip);
+	static int getGcvsMM(StarId hip);
 
 	//! Get year of last satisfactory observation of double star with a
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return year of last satisfactory observation
-	static int getWdsLastObservation(int64_t hip);
+	static int getWdsLastObservation(StarId hip);
 
 	//! Get position angle at date of last satisfactory observation of double star with a
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return position angle in degrees
-	static float getWdsLastPositionAngle(int64_t hip);
+	static float getWdsLastPositionAngle(StarId hip);
 
 	//! Get separation angle at date of last satisfactory observation of double star with a
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return separation in arcseconds
-	static float getWdsLastSeparation(int64_t hip);
+	static float getWdsLastSeparation(StarId hip);
 
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
@@ -495,33 +496,33 @@ private:
 
 	HipIndexStruct *hipIndex; // array of Hipparcos stars
 
-	static QHash<int64_t, QString> commonNamesMap;     // the original names from skyculture (star_names.fab)
-	static QHash<int64_t, QString> commonNamesMapI18n; // translated names
-	static QMap<QString, int64_t> commonNamesIndexI18n;
-	static QMap<QString, int64_t> commonNamesIndex;
+	static QHash<StarId, QString> commonNamesMap;     // the original names from skyculture (star_names.fab)
+	static QHash<StarId, QString> commonNamesMapI18n; // translated names
+	static QMap<QString, StarId> commonNamesIndexI18n;
+	static QMap<QString, StarId> commonNamesIndex;
 
-	static QHash<int64_t, QString> additionalNamesMap; // additional names
-	static QHash<int64_t, QString> additionalNamesMapI18n;
-	static QMap<QString, int64_t> additionalNamesIndex;
-	static QMap<QString, int64_t> additionalNamesIndexI18n;
+	static QHash<StarId, QString> additionalNamesMap; // additional names
+	static QHash<StarId, QString> additionalNamesMapI18n;
+	static QMap<QString, StarId> additionalNamesIndex;
+	static QMap<QString, StarId> additionalNamesIndexI18n;
 
-	static QHash<int64_t, QString> sciDesignationsMapI18n;
-	static QMap<QString, int64_t> sciDesignationsIndexI18n;
-	static QHash<int64_t, QString> sciExtraDesignationsMapI18n;
-	static QMap<QString, int64_t> sciExtraDesignationsIndexI18n;
+	static QHash<StarId, QString> sciDesignationsMapI18n;
+	static QMap<QString, StarId> sciDesignationsIndexI18n;
+	static QHash<StarId, QString> sciExtraDesignationsMapI18n;
+	static QMap<QString, StarId> sciExtraDesignationsIndexI18n;
 
-	static QHash<int64_t, varstar> varStarsMapI18n;
-	static QMap<QString, int64_t> varStarsIndexI18n;
+	static QHash<StarId, varstar> varStarsMapI18n;
+	static QMap<QString, StarId> varStarsIndexI18n;
 
-	static QHash<int64_t, wds> wdsStarsMapI18n;
-	static QMap<QString, int64_t> wdsStarsIndexI18n;
+	static QHash<StarId, wds> wdsStarsMapI18n;
+	static QMap<QString, StarId> wdsStarsIndexI18n;
 
 	static QMap<QString, crossid> crossIdMap;
-	static QMap<int64_t, int> saoStarsIndex;
-	static QMap<int64_t, int> hdStarsIndex;
-	static QMap<int64_t, int> hrStarsIndex;
+	static QMap<StarId, int> saoStarsIndex;
+	static QMap<StarId, int> hdStarsIndex;
+	static QMap<StarId, int> hrStarsIndex;
 
-	static QHash<int64_t, QString> referenceMap;
+	static QHash<StarId, QString> referenceMap;
 
 	QFont starFont;
 	static bool flagSciNames;

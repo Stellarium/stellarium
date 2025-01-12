@@ -74,27 +74,27 @@ bool StarMgr::flagDesignations = false;
 bool StarMgr::flagDblStarsDesignation = false;
 bool StarMgr::flagVarStarsDesignation = false;
 bool StarMgr::flagHIPDesignation = false;
-QHash<int64_t,QString> StarMgr::commonNamesMap;
-QHash<int64_t,QString> StarMgr::commonNamesMapI18n;
-QHash<int64_t,QString> StarMgr::additionalNamesMap;
-QHash<int64_t,QString> StarMgr::additionalNamesMapI18n;
-QMap<QString,int64_t> StarMgr::commonNamesIndexI18n;
-QMap<QString,int64_t> StarMgr::commonNamesIndex;
-QMap<QString,int64_t> StarMgr::additionalNamesIndex;
-QMap<QString,int64_t> StarMgr::additionalNamesIndexI18n;
-QHash<int64_t,QString> StarMgr::sciDesignationsMapI18n;
-QMap<QString,int64_t> StarMgr::sciDesignationsIndexI18n;
-QHash<int64_t,QString> StarMgr::sciExtraDesignationsMapI18n;
-QMap<QString,int64_t> StarMgr::sciExtraDesignationsIndexI18n;
-QHash<int64_t, varstar> StarMgr::varStarsMapI18n;
-QMap<QString, int64_t> StarMgr::varStarsIndexI18n;
-QHash<int64_t, wds> StarMgr::wdsStarsMapI18n;
-QMap<QString, int64_t> StarMgr::wdsStarsIndexI18n;
+QHash<StarId,QString> StarMgr::commonNamesMap;
+QHash<StarId,QString> StarMgr::commonNamesMapI18n;
+QHash<StarId,QString> StarMgr::additionalNamesMap;
+QHash<StarId,QString> StarMgr::additionalNamesMapI18n;
+QMap<QString,StarId> StarMgr::commonNamesIndexI18n;
+QMap<QString,StarId> StarMgr::commonNamesIndex;
+QMap<QString,StarId> StarMgr::additionalNamesIndex;
+QMap<QString,StarId> StarMgr::additionalNamesIndexI18n;
+QHash<StarId,QString> StarMgr::sciDesignationsMapI18n;
+QMap<QString,StarId> StarMgr::sciDesignationsIndexI18n;
+QHash<StarId,QString> StarMgr::sciExtraDesignationsMapI18n;
+QMap<QString,StarId> StarMgr::sciExtraDesignationsIndexI18n;
+QHash<StarId, varstar> StarMgr::varStarsMapI18n;
+QMap<QString, StarId> StarMgr::varStarsIndexI18n;
+QHash<StarId, wds> StarMgr::wdsStarsMapI18n;
+QMap<QString, StarId> StarMgr::wdsStarsIndexI18n;
 QMap<QString, crossid> StarMgr::crossIdMap;
-QMap<int64_t, int> StarMgr::saoStarsIndex;
-QMap<int64_t, int> StarMgr::hdStarsIndex;
-QMap<int64_t, int> StarMgr::hrStarsIndex;
-QHash<int64_t, QString> StarMgr::referenceMap;
+QMap<StarId, int> StarMgr::saoStarsIndex;
+QMap<StarId, int> StarMgr::hdStarsIndex;
+QMap<StarId, int> StarMgr::hrStarsIndex;
+QHash<StarId, QString> StarMgr::referenceMap;
 
 QStringList initStringListFromFile(const QString& file_name)
 {
@@ -185,7 +185,7 @@ StarMgr::~StarMgr(void)
 }
 
 // Allow untranslated name here if set in constellationMgr!
-QString StarMgr::getCommonName(int64_t hip)
+QString StarMgr::getCommonName(StarId hip)
 {
 	ConstellationMgr* cmgr=GETSTELMODULE(ConstellationMgr);
 	if (cmgr->getConstellationDisplayStyle() == ConstellationMgr::constellationsNative)
@@ -197,7 +197,7 @@ QString StarMgr::getCommonName(int64_t hip)
 	return QString();
 }
 
-QString StarMgr::getAdditionalNames(int64_t hip)
+QString StarMgr::getAdditionalNames(StarId hip)
 {
 	auto it = additionalNamesMapI18n.find(hip);
 	if (it!=additionalNamesMapI18n.end())
@@ -205,7 +205,7 @@ QString StarMgr::getAdditionalNames(int64_t hip)
 	return QString();
 }
 
-QString StarMgr::getAdditionalEnglishNames(int64_t hip)
+QString StarMgr::getAdditionalEnglishNames(StarId hip)
 {
 	auto it = additionalNamesMap.find(hip);
 	if (it!=additionalNamesMap.end())
@@ -213,7 +213,7 @@ QString StarMgr::getAdditionalEnglishNames(int64_t hip)
 	return QString();
 }
 
-QString StarMgr::getCommonEnglishName(int64_t hip)
+QString StarMgr::getCommonEnglishName(StarId hip)
 {
 	auto it = commonNamesMap.find(hip);
 	if (it!=commonNamesMap.end())
@@ -222,7 +222,7 @@ QString StarMgr::getCommonEnglishName(int64_t hip)
 }
 
 
-QString StarMgr::getSciName(int64_t hip)
+QString StarMgr::getSciName(StarId hip)
 {
 	auto it = sciDesignationsMapI18n.find(hip);
 	if (it != sciDesignationsMapI18n.end())
@@ -230,7 +230,7 @@ QString StarMgr::getSciName(int64_t hip)
 	return QString();
 }
 
-QString StarMgr::getSciExtraName(int64_t hip)
+QString StarMgr::getSciExtraName(StarId hip)
 {
 	auto it = sciExtraDesignationsMapI18n.find(hip);
 	if (it!=sciExtraDesignationsMapI18n.end())
@@ -261,7 +261,7 @@ QString StarMgr::getCrossIdentificationDesignations(QString hip)
 	return designations.join(" - ");
 }
 
-QString StarMgr::getWdsName(int64_t hip)
+QString StarMgr::getWdsName(StarId hip)
 {
 	auto it = wdsStarsMapI18n.find(hip);
 	if (it!=wdsStarsMapI18n.end())
@@ -269,7 +269,7 @@ QString StarMgr::getWdsName(int64_t hip)
 	return QString();
 }
 
-int StarMgr::getWdsLastObservation(int64_t hip)
+int StarMgr::getWdsLastObservation(StarId hip)
 {
 	auto it = wdsStarsMapI18n.find(hip);
 	if (it!=wdsStarsMapI18n.end())
@@ -277,7 +277,7 @@ int StarMgr::getWdsLastObservation(int64_t hip)
 	return 0;
 }
 
-float StarMgr::getWdsLastPositionAngle(int64_t hip)
+float StarMgr::getWdsLastPositionAngle(StarId hip)
 {
 	auto it = wdsStarsMapI18n.find(hip);
 	if (it!=wdsStarsMapI18n.end())
@@ -285,7 +285,7 @@ float StarMgr::getWdsLastPositionAngle(int64_t hip)
 	return 0;
 }
 
-float StarMgr::getWdsLastSeparation(int64_t hip)
+float StarMgr::getWdsLastSeparation(StarId hip)
 {
 	auto it = wdsStarsMapI18n.find(hip);
 	if (it!=wdsStarsMapI18n.end())
@@ -293,7 +293,7 @@ float StarMgr::getWdsLastSeparation(int64_t hip)
 	return 0.f;
 }
 
-QString StarMgr::getGcvsName(int64_t hip)
+QString StarMgr::getGcvsName(StarId hip)
 {
 	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
@@ -301,7 +301,7 @@ QString StarMgr::getGcvsName(int64_t hip)
 	return QString();
 }
 
-QString StarMgr::getGcvsVariabilityType(int64_t hip)
+QString StarMgr::getGcvsVariabilityType(StarId hip)
 {
 	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
@@ -309,7 +309,7 @@ QString StarMgr::getGcvsVariabilityType(int64_t hip)
 	return QString();
 }
 
-float StarMgr::getGcvsMaxMagnitude(int64_t hip)
+float StarMgr::getGcvsMaxMagnitude(StarId hip)
 {
 	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
@@ -317,7 +317,7 @@ float StarMgr::getGcvsMaxMagnitude(int64_t hip)
 	return -99.f;
 }
 
-int StarMgr::getGcvsMagnitudeFlag(int64_t hip)
+int StarMgr::getGcvsMagnitudeFlag(StarId hip)
 {
 	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
@@ -326,7 +326,7 @@ int StarMgr::getGcvsMagnitudeFlag(int64_t hip)
 }
 
 
-float StarMgr::getGcvsMinMagnitude(int64_t hip, bool firstMinimumFlag)
+float StarMgr::getGcvsMinMagnitude(StarId hip, bool firstMinimumFlag)
 {
 	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
@@ -343,7 +343,7 @@ float StarMgr::getGcvsMinMagnitude(int64_t hip, bool firstMinimumFlag)
 	return -99.f;
 }
 
-QString StarMgr::getGcvsPhotometricSystem(int64_t hip)
+QString StarMgr::getGcvsPhotometricSystem(StarId hip)
 {
 	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
@@ -351,7 +351,7 @@ QString StarMgr::getGcvsPhotometricSystem(int64_t hip)
 	return QString();
 }
 
-double StarMgr::getGcvsEpoch(int64_t hip)
+double StarMgr::getGcvsEpoch(StarId hip)
 {
 	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
@@ -359,7 +359,7 @@ double StarMgr::getGcvsEpoch(int64_t hip)
 	return -99.;
 }
 
-double StarMgr::getGcvsPeriod(int64_t hip)
+double StarMgr::getGcvsPeriod(StarId hip)
 {
 	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
@@ -367,7 +367,7 @@ double StarMgr::getGcvsPeriod(int64_t hip)
 	return -99.;
 }
 
-int StarMgr::getGcvsMM(int64_t hip)
+int StarMgr::getGcvsMM(StarId hip)
 {
 	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
@@ -780,7 +780,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 			{
 				// The record is the right format.  Extract the fields
 				bool ok;
-				int64_t hip = recMatch.captured(1).toLongLong(&ok);
+				StarId hip = recMatch.captured(1).toLongLong(&ok);
 				if (!ok)
 				{
 					qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
@@ -892,7 +892,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
 		{
 			// The record is the right format.  Extract the fields
 			bool ok;
-			int64_t hip = fields.at(0).toLongLong(&ok);
+			StarId hip = fields.at(0).toLongLong(&ok);
 			if (!ok)
 			{
 				qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(sciNameFile)
@@ -975,7 +975,7 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 		const QStringList& fields = record.split('\t');
 
 		bool ok;
-		int64_t hip = fields.at(0).toLongLong(&ok);
+		StarId hip = fields.at(0).toLongLong(&ok);
 		if (!ok)
 		{
 			qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(GcvsFile)
@@ -1050,7 +1050,7 @@ void StarMgr::loadWds(const QString& WdsFile)
 		const QStringList& fields = record.split('\t');
 
 		bool ok;
-		int64_t hip = fields.at(0).toLongLong(&ok);
+		StarId hip = fields.at(0).toLongLong(&ok);
 		if (!ok)
 		{
 			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(WdsFile)
@@ -1122,7 +1122,7 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 		{
 			// The record is the right format.  Extract the fields
 			bool ok;
-			int64_t hip = fields.at(0).toLongLong(&ok);
+			StarId hip = fields.at(0).toLongLong(&ok);
 			if (!ok)
 			{
 				qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
@@ -1344,16 +1344,16 @@ void StarMgr::updateI18n()
 	commonNamesIndexI18n.clear();
 	additionalNamesMapI18n.clear();
 	additionalNamesIndexI18n.clear();
-	for (QHash<int64_t,QString>::ConstIterator it(commonNamesMap.constBegin());it!=commonNamesMap.constEnd();it++)
+	for (QHash<StarId,QString>::ConstIterator it(commonNamesMap.constBegin());it!=commonNamesMap.constEnd();it++)
 	{
-		const int64_t i = it.key();
+		const StarId i = it.key();
 		const QString t(trans.qtranslate(it.value()));
 		commonNamesMapI18n[i] = t;
 		commonNamesIndexI18n[t.toUpper()] = i;
 	}
-	for (QHash<int64_t,QString>::ConstIterator ita(additionalNamesMap.constBegin());ita!=additionalNamesMap.constEnd();ita++)
+	for (QHash<StarId,QString>::ConstIterator ita(additionalNamesMap.constBegin());ita!=additionalNamesMap.constEnd();ita++)
 	{
-		const int64_t i = ita.key();
+		const StarId i = ita.key();
 		QStringList a = ita.value().split(" - ");
 		QStringList tn;
 		for (const auto& str : a)
@@ -1537,7 +1537,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	bool found;
 
 	// Search for common names
-	QMapIterator<QString, int64_t> i(commonNamesIndexI18n);
+	QMapIterator<QString, StarId> i(commonNamesIndexI18n);
 	while (i.hasNext())
 	{
 		i.next();
@@ -1557,7 +1557,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		}
 	}
 
-	QMapIterator<QString, int64_t> j(commonNamesIndex);
+	QMapIterator<QString, StarId> j(commonNamesIndex);
 	while (j.hasNext())
 	{
 		j.next();
@@ -1579,7 +1579,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 
 	if (getFlagAdditionalNames())
 	{
-		QMapIterator<QString, int64_t> k(additionalNamesIndexI18n);
+		QMapIterator<QString, StarId> k(additionalNamesIndexI18n);
 		while (k.hasNext())
 		{
 			k.next();
@@ -1603,7 +1603,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			}
 		}
 
-		QMapIterator<QString, int64_t> l(additionalNamesIndex);
+		QMapIterator<QString, StarId> l(additionalNamesIndex);
 		while (l.hasNext())
 		{
 			l.next();
@@ -1868,7 +1868,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	if (match.hasMatch())
 	{
 		bool ok;
-		int64_t gaiaNum = match.captured(2).toLongLong(&ok);
+		StarId gaiaNum = match.captured(2).toLongLong(&ok);
 		if (ok)
 		{
 			StelObjectP s = searchGaia(gaiaNum);
@@ -2028,7 +2028,7 @@ QStringList StarMgr::listAllObjects(bool inEnglish) const
 	QStringList result;
 	if (inEnglish)
 	{
-		QMapIterator<QString, int64_t> i(commonNamesIndex);
+		QMapIterator<QString, StarId> i(commonNamesIndex);
 		while (i.hasNext())
 		{
 			i.next();
@@ -2037,7 +2037,7 @@ QStringList StarMgr::listAllObjects(bool inEnglish) const
 	}
 	else
 	{
-		QMapIterator<QString, int64_t> i(commonNamesIndexI18n);
+		QMapIterator<QString, StarId> i(commonNamesIndexI18n);
 		while (i.hasNext())
 		{
 			i.next();

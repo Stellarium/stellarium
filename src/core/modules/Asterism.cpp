@@ -76,7 +76,7 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 			case 0: // Ray helpers
 			case 1: // A big asterism with lines by HIP stars
 			{
-				int64_t HP = 0;
+				StarId HP = 0;
 				istr >> HP;
 				if(HP == 0)
 				{
@@ -88,7 +88,7 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 				}
 				else
 				{
-					asterism[i]=starMgr->searchGaia(HP);
+					asterism[i]=starMgr->searchGaia(static_cast<int64_t>(HP));
 				}
 				
 				if (!asterism[i])
