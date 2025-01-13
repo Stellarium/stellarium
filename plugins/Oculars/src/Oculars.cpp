@@ -2080,6 +2080,25 @@ void Oculars::paintCrosshairs()
 	a = ch_transform.map(QPoint(-hw, 0));
 	b = ch_transform.map(QPoint(hw, 0));
 	painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+
+   if (getFlagAlignCrosshair())
+   {
+      bool flipH = core->getFlipHorz();
+      bool flipV = core->getFlipVert();
+      painter.setColor(1.0, 1.0, 1.0);
+
+      QPoint nDirection = ch_transform.map(QPoint(0, hw + 20));
+      painter.drawText(nDirection.x(), nDirection.y(), q_("N"));
+
+      QPoint sDirection = ch_transform.map(QPoint(0, -hw - 20));
+      painter.drawText(sDirection.x(), sDirection.y(), q_("S"));
+
+      QPoint eDirection = ch_transform.map(QPoint(-hw - 20, 0));
+      painter.drawText(eDirection.x(), eDirection.y(), flipH == flipV ? q_("E") : q_("W"));
+
+      QPoint wDirection = ch_transform.map(QPoint(hw + 20, 0));
+      painter.drawText(wDirection.x(), wDirection.y(), flipH == flipV ? q_("W") : q_("E"));
+   }
 }
 
 void Oculars::paintTelrad()
