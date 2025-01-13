@@ -121,7 +121,6 @@ private:
    void setAboutHtml();
    void updateStatus(const QString &status);
    void changeUiState(bool freeze);
-
 };
 
 #endif /* NEBULATEXTURESDIALOG_HPP */

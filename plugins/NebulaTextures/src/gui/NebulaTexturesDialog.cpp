@@ -122,7 +122,7 @@ void NebulaTexturesDialog::createDialogContent()
 
 	setAboutHtml();
 
-   ui->label_apiKey->setText("<a href=\"https://nova.astrometry.net/api_help\">Astrometry ApiKey:</a>");
+   ui->label_apiKey->setText(QString("<a href=\"https://nova.astrometry.net/api_help\">") + q_("Astrometry ApiKey:") + "</a>");
 
    // load config
    ui->checkBoxShow->setChecked(getShowCustomTextures());
@@ -426,7 +426,6 @@ void NebulaTexturesDialog::onsubStatusReply(QNetworkReply *reply)
       subStatusTimer->stop();
       jobStatusTimer->start(3000);
       reply->deleteLater();
-
       updateStatus(q_("Submission ID got. Please wait..."));
    }
 }
@@ -563,11 +562,6 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
    ui->topRightX->setValue(topRightRA);
    ui->topRightY->setValue(topRightDec);
 
-   // qDebug() <<"["<<bottomLeftRA<<","<<bottomLeftDec<<"],"
-   //          <<"["<<bottomRightRA<<","<<bottomRightDec<<"],"
-   //          <<"["<<topRightRA<<","<<topRightDec<<"],"
-   //          <<"["<<topLeftRA<<","<<topLeftDec<<"]";
-
    X = IMAGEW - 1, Y = IMAGEH - 1;
    result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
    bottomRightRA = result.first;
@@ -576,7 +570,6 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
    ui->bottomRightY->setValue(bottomRightDec);
 
    changeUiState(false);
-
    updateStatus(q_("Processing completed! Goto Center Point, Try to Render, Check and Add to Local Storage."));
 }
 
@@ -813,7 +806,7 @@ void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
 {
    QString cfgFilePath = StelFileMgr::getUserDir() + cfgFile;
 
-   // Step 1: Read the JSON configuration file
+   // Read the JSON configuration file
    QFile jsonFile(cfgFilePath);
 
    if (!jsonFile.open(QIODevice::ReadOnly)) {
@@ -840,7 +833,7 @@ void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
 
    QJsonArray subTiles = rootObject["subTiles"].toArray();
 
-   // Step 2: Loop through each subTile and delete the "imageUrl"
+   // Loop through each subTile and delete the "imageUrl"
    foreach (const QJsonValue &subTileValue, subTiles) {
       if (!subTileValue.isObject()) {
          continue;
@@ -864,7 +857,6 @@ void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
          }
       }
    }
-
    updateStatus(q_("Images deletion completed."));
 }
 
@@ -919,14 +911,13 @@ void NebulaTexturesDialog::addTexture(QString addPath, QString keyName) // logic
    QString baseName = fileInfo.completeBaseName();
    QString extension = fileInfo.suffix();
    QString timestamp = QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss");
-   QString targetFileName = QString("%1_%2.%3").arg(baseName, timestamp, extension);
-   QString targetFilePath = pluginFolder + targetFileName;
+   QString imageUrl = QString("%1_%2.%3").arg(baseName, timestamp, extension);
+   QString targetFilePath = pluginFolder + imageUrl;
    if (!QFile::copy(imagePath, targetFilePath)) {
       qWarning() << "Failed to copy image file to target path:" << targetFilePath;
       updateStatus(q_("Failed to copy image file to user folder!"));
       return;
    }
-   QString imageUrl = targetFileName;
 
    // Retrieve coordinates from the QDoubleSpinBoxes
    topLeftRA = ui->topLeftX->value();
@@ -940,18 +931,12 @@ void NebulaTexturesDialog::addTexture(QString addPath, QString keyName) // logic
    referRA = ui->referX->value();
    referDec = ui->referY->value();
 
-   // qDebug() << "[" << QString::number(bottomLeftRA, 'f', 10) << "," << QString::number(bottomLeftDec, 'f', 10) << "],"
-   //          << "[" << QString::number(bottomRightRA, 'f', 10) << "," << QString::number(bottomRightDec, 'f', 10) << "],"
-   //          << "[" << QString::number(topRightRA, 'f', 10) << "," << QString::number(topRightDec, 'f', 10) << "],"
-   //          << "[" << QString::number(topLeftRA, 'f', 10) << "," << QString::number(topLeftDec, 'f', 10) << "]";
-
    QJsonArray innerWorldCoords;
    innerWorldCoords.append(QJsonArray({bottomLeftRA, bottomLeftDec}));
    innerWorldCoords.append(QJsonArray({bottomRightRA, bottomRightDec}));
    innerWorldCoords.append(QJsonArray({topRightRA, topRightDec}));
    innerWorldCoords.append(QJsonArray({topLeftRA, topLeftDec}));
 
-   // should check whether exists
    updateCustomTextures(imageUrl, innerWorldCoords, 0.2, 13.4, keyName, addPath);
 }
 
@@ -1022,7 +1007,6 @@ void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const Q
    QJsonArray outerTextureCoords;
    outerTextureCoords.append(innerTextureCoords);
    newSubTile["textureCoords"] = outerTextureCoords;
-
    newSubTile["minResolution"] = minResolution;
    newSubTile["maxBrightness"] = maxBrightness;
 
@@ -1040,7 +1024,6 @@ void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const Q
    jsonFile.flush();
    jsonFile.close();
 
-   // qDebug() << "Updated custom textures JSON file successfully.";
    updateStatus(q_("Updated custom textures JSON file successfully!"));
 }
 
@@ -1056,28 +1039,27 @@ void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const Q
 void NebulaTexturesDialog::on_removeButton_clicked()
 {
    QListWidgetItem* selectedItem = ui->listWidget->currentItem();
-   if (!selectedItem) {
+   if (!selectedItem)
       return;
-   }
+
    QString selectedText = selectedItem->text();
    if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to remove this texture?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
       return;
 
    QString path = StelFileMgr::getUserDir() + configFile;
    QFile jsonFile(path);
-   if (!jsonFile.open(QIODevice::ReadOnly)) {
+   if (!jsonFile.open(QIODevice::ReadOnly))
       return;
-   }
+
    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
    jsonFile.close();
 
-   if (!jsonDoc.isObject()) {
+   if (!jsonDoc.isObject())
       return;
-   }
+
    QJsonObject rootObject = jsonDoc.object();
-   if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()) {
+   if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray())
       return;
-   }
 
    QJsonArray subTiles = rootObject["subTiles"].toArray();
    QJsonArray updatedSubTiles;
@@ -1096,23 +1078,18 @@ void NebulaTexturesDialog::on_removeButton_clicked()
          QString imagePath = StelFileMgr::getUserDir() + pluginDir + imageUrl;
          QFile imageFile(imagePath);
          if (imageFile.exists()) {
-            if (!imageFile.remove()) {
-               qWarning() << "Failed to delete image:" << imageUrl;
-            }
-         } else {
-            qDebug() << "Image file does not exist:" << imageUrl;
+            imageFile.remove();
          }
          continue;
       }
       updatedSubTiles.append(subTileValue);
    }
-   if (!found) {
+   if (!found)
       return;
-   }
+
    rootObject["subTiles"] = updatedSubTiles;
-   if (!jsonFile.open(QIODevice::WriteOnly)) {
+   if (!jsonFile.open(QIODevice::WriteOnly))
       return;
-   }
 
    jsonFile.write(QJsonDocument(rootObject).toJson(QJsonDocument::Indented));
    jsonFile.close();
@@ -1155,7 +1132,6 @@ void NebulaTexturesDialog::reloadData()
    jsonFile.close();
 
    // read and show into listWidget
-
    if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()) {
       qWarning() << "No 'subTiles' array found in JSON file:" << path;
       return;
@@ -1175,12 +1151,9 @@ void NebulaTexturesDialog::reloadData()
 
       if (subTileObject.contains("imageUrl") && subTileObject["imageUrl"].isString()) {
          QString imageUrl = subTileObject["imageUrl"].toString();
-
          QListWidgetItem* item = new QListWidgetItem(imageUrl, ui->listWidget);
-
          QVariant data = QVariant::fromValue(subTileObject);
          item->setData(Qt::UserRole, data);
-
          ui->listWidget->addItem(item);
       }
    }
