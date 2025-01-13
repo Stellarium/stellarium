@@ -132,7 +132,7 @@ struct Star
    {
       return static_cast<const Derived *>(this)->getPreciseAstrometricFlag();
    } // should only be true if full astrometric solution is available with getX2(), getDx2() too
-   inline void getJ2000Pos(float dyrs, Vec3f & pos) const
+   inline void getJ2000Pos(float dyrs, Vec3d & pos) const
    {
       // ideally whatever computation is done here should be done to get RA, DEC only
       // dont waste time computing other things because whoever calls this function dont need them
@@ -145,7 +145,7 @@ struct Star
    }
    // Special thanks to Anthony Brown's astrometry tutorial
    // This function only compute RA, DEC in rectangular coordinate system
-   inline void getEquatorialPos3D(float dyrs, Vec3f & pos) const
+   inline void getEquatorialPos3D(float dyrs, Vec3d & pos) const
    {
       double r0  = getX0();
       double r1  = getX1();
@@ -167,7 +167,7 @@ struct Star
 
       pos.set(u[0], u[1], u[2]);
    }
-   inline void getEquatorialPos2D(float dyrs, Vec3f & pos) const
+   inline void getEquatorialPos2D(float dyrs, Vec3d & pos) const
    {
       StelUtils::spheToRect(getX0() + dyrs * getDx0() * MAS2RAD, getX1() + dyrs * getDx1() * MAS2RAD, pos);
    }
@@ -235,6 +235,13 @@ struct Star
          RA    = getX0() + dyrs * getDx0() * MAS2RAD;
          DE    = getX1() + dyrs * getDx1() * MAS2RAD;
       }
+   }
+
+   //to get new 3D cartesian position for parallax effect given current star 3D cartesian position, planet orbital period and radius and current delta time from catalog epoch
+   inline void getPlxEffect(double plx, Vec3d& bS, const Vec3d diffPos) const {
+		if (plx <= 0.) return;
+		bS *= 1000./ plx;
+		bS += diffPos * MAS2RAD * 1000.;
    }
 };
 

@@ -684,9 +684,7 @@ void ConstellationMgr::draw(StelCore* core)
 	Vec3d vel(0.);
 	if (core->getUseAberration())
 	{
-		vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-		vel=StelCore::matVsop87ToJ2000*vel;
-		vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+		vel = core->getAberrationVec(core->getJDE());
 	}
 	drawNames(sPainter, vel);
 	drawArt(sPainter, vel);
