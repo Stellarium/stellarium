@@ -343,6 +343,7 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->useButtonsBackgroundCheckBox,		"StelGui.flagUseButtonsBackground");
 	connectBoolProperty(ui->indicationMountModeCheckBox,			"StelMovementMgr.flagIndicationMountMode");
 	connectBoolProperty(ui->kineticScrollingCheckBox,				"StelGui.flagUseKineticScrolling");
+	connectBoolProperty(ui->pushScreenEdgeCheckBox,				"StelMovementMgr.flagEnableMoveAtScreenEdge");
 	connectBoolProperty(ui->focusOnDaySpinnerCheckBox,			"StelGui.flagEnableFocusOnDaySpinner");
 	ui->overwriteTextColorButton->setup("StelApp.overwriteInfoColor", "color/info_text_color");
 	ui->daylightTextColorButton ->setup("StelApp.daylightInfoColor",  "color/daylight_text_color");
@@ -1190,6 +1191,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/flag_indication_mount_mode",				mvmgr->getFlagIndicationMountMode());
 
 	// configuration dialog / navigation tab
+	conf->setValue("navigation/flag_enable_move_at_screen_edge",		mvmgr->getFlagEnableMoveAtScreenEdge());
 	conf->setValue("navigation/flag_enable_zoom_keys",			mvmgr->getFlagEnableZoomKeys());
 	conf->setValue("navigation/flag_enable_mouse_navigation",		mvmgr->getFlagEnableMouseNavigation());
 	conf->setValue("navigation/flag_enable_mouse_zooming",		mvmgr->getFlagEnableMouseZooming());

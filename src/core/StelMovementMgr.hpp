@@ -55,55 +55,20 @@ private:
 class StelMovementMgr : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool equatorialMount
-		   READ getEquatorialMount
-		   WRITE setEquatorialMount
-		   NOTIFY equatorialMountChanged)
-	Q_PROPERTY(bool tracking
-		   READ getFlagTracking
-		   WRITE setFlagTracking
-		   NOTIFY flagTrackingChanged)
-	Q_PROPERTY(bool flagIndicationMountMode
-		   READ getFlagIndicationMountMode
-		   WRITE setFlagIndicationMountMode
-		   NOTIFY flagIndicationMountModeChanged)
+	Q_PROPERTY(bool equatorialMount			 READ getEquatorialMount		 WRITE setEquatorialMount		 NOTIFY equatorialMountChanged)
+	Q_PROPERTY(bool tracking			 READ getFlagTracking			 WRITE setFlagTracking			 NOTIFY flagTrackingChanged)
+	Q_PROPERTY(bool flagIndicationMountMode		 READ getFlagIndicationMountMode	 WRITE setFlagIndicationMountMode	 NOTIFY flagIndicationMountModeChanged)
 	//The targets of viewport offset animation
-	Q_PROPERTY(double viewportHorizontalOffsetTarget
-		   READ getViewportHorizontalOffsetTarget
-		   WRITE setViewportHorizontalOffsetTarget
-		   NOTIFY viewportHorizontalOffsetTargetChanged)
-	Q_PROPERTY(double viewportVerticalOffsetTarget
-		   READ getViewportVerticalOffsetTarget
-		   WRITE setViewportVerticalOffsetTarget
-		   NOTIFY viewportVerticalOffsetTargetChanged)
-	Q_PROPERTY(bool flagAutoZoomOutResetsDirection
-		   READ getFlagAutoZoomOutResetsDirection
-		   WRITE setFlagAutoZoomOutResetsDirection
-		   NOTIFY flagAutoZoomOutResetsDirectionChanged)
-	Q_PROPERTY(bool flagEnableMouseNavigation
-		   READ getFlagEnableMouseNavigation
-		   WRITE setFlagEnableMouseNavigation
-		   NOTIFY flagEnableMouseNavigationChanged)
-	Q_PROPERTY(bool flagEnableMouseZooming
-		   READ getFlagEnableMouseZooming
-		   WRITE setFlagEnableMouseZooming
-		   NOTIFY flagEnableMouseZoomingChanged)
-	Q_PROPERTY(bool flagEnableMoveKeys
-		   READ getFlagEnableMoveKeys
-		   WRITE setFlagEnableMoveKeys
-		   NOTIFY flagEnableMoveKeysChanged)
-	Q_PROPERTY(bool flagEnableZoomKeys
-		   READ getFlagEnableZoomKeys
-		   WRITE setFlagEnableZoomKeys
-		   NOTIFY flagEnableZoomKeysChanged)
-	Q_PROPERTY(double userMaxFov
-		   READ getUserMaxFov
-		   WRITE setUserMaxFov
-		   NOTIFY userMaxFovChanged)
-	Q_PROPERTY(double currentFov
-		   READ getCurrentFov
-		   WRITE setFov
-		   NOTIFY currentFovChanged)
+	Q_PROPERTY(double viewportHorizontalOffsetTarget READ getViewportHorizontalOffsetTarget	 WRITE setViewportHorizontalOffsetTarget NOTIFY viewportHorizontalOffsetTargetChanged)
+	Q_PROPERTY(double viewportVerticalOffsetTarget	 READ getViewportVerticalOffsetTarget	 WRITE setViewportVerticalOffsetTarget	 NOTIFY viewportVerticalOffsetTargetChanged)
+	Q_PROPERTY(bool flagAutoZoomOutResetsDirection	 READ getFlagAutoZoomOutResetsDirection	 WRITE setFlagAutoZoomOutResetsDirection NOTIFY flagAutoZoomOutResetsDirectionChanged)
+	Q_PROPERTY(bool flagEnableMouseNavigation	 READ getFlagEnableMouseNavigation	 WRITE setFlagEnableMouseNavigation	 NOTIFY flagEnableMouseNavigationChanged)
+	Q_PROPERTY(bool flagEnableMouseZooming		 READ getFlagEnableMouseZooming		 WRITE setFlagEnableMouseZooming	 NOTIFY flagEnableMouseZoomingChanged)
+	Q_PROPERTY(bool flagEnableMoveKeys		 READ getFlagEnableMoveKeys		 WRITE setFlagEnableMoveKeys		 NOTIFY flagEnableMoveKeysChanged)
+	Q_PROPERTY(bool flagEnableZoomKeys		 READ getFlagEnableZoomKeys		 WRITE setFlagEnableZoomKeys		 NOTIFY flagEnableZoomKeysChanged)
+	Q_PROPERTY(bool flagEnableMoveAtScreenEdge	 READ getFlagEnableMoveAtScreenEdge	 WRITE setFlagEnableMoveAtScreenEdge	 NOTIFY flagEnableMoveAtScreenEdgeChanged)
+	Q_PROPERTY(double userMaxFov			 READ getUserMaxFov			 WRITE setUserMaxFov			 NOTIFY userMaxFovChanged)
+	Q_PROPERTY(double currentFov			 READ getCurrentFov			 WRITE setFov				 NOTIFY currentFovChanged)
 public:
 	//! Possible mount modes defining the reference frame in which head movements occur.
 	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
@@ -183,16 +148,89 @@ public slots:
 	//! load and process initial viewing position. Can be called later to restore original "default" view.
 	void resetInitViewPos();
 
-	// UNUSED, but scriptable
-	//! Toggle current mount mode between equatorial and altazimuthal
-	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
+	//! Set current mount type defining the reference frame in which head movements occur.
+	void setMountMode(StelMovementMgr::MountMode m);
+	//! Get current mount type defining the reference frame in which head movements occur.
+	StelMovementMgr::MountMode getMountMode(void) const {return mountMode;}
+
+	//! PROPERTY GETTER/SETTER
+	bool getEquatorialMount(void) const {return mountMode == StelMovementMgr::MountEquinoxEquatorial;}
 	//! Define whether we should use equatorial mount or altazimuthal
 	void setEquatorialMount(bool b);
 
+	// UNUSED, but scriptable
+	//! Toggle current mount mode between equatorial and altazimuthal
+	Q_DECL_DEPRECATED_X("This function will be removed. Use setEquatorialMount(bool b) with a clear decision.")
+	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
+
+	//! PROPERTY GETTER/SETTER
 	//! Set object tracking on/off and go to selected object
 	void setFlagTracking(bool b=true);
 	//! Get current object tracking status.
 	bool getFlagTracking(void) const {return flagTracking;}
+
+	//! PROPERTY GETTER/SETTER
+	//! Set flag for showing a temporary screen text message indicating mount mode
+	bool getFlagIndicationMountMode() const {return flagIndicationMountMode;}
+	//! Set flag for showing a temporary screen text message indicating mount mode
+	void setFlagIndicationMountMode(bool b) { flagIndicationMountMode=b; StelApp::immediateSave("gui/flag_indication_mount_mode", b); emit flagIndicationMountModeChanged(b); }
+
+	//! Returns the targeted value of the viewport offset
+	Vec2d getViewportOffsetTarget() const { return targetViewportOffset; }
+	//! PROPERTY GETTERS/SETTERS
+	double getViewportHorizontalOffsetTarget() const { return targetViewportOffset[0]; }
+	double getViewportVerticalOffsetTarget() const { return targetViewportOffset[1]; }
+	void setViewportHorizontalOffsetTarget(double f) { moveViewport(f,getViewportVerticalOffsetTarget()); }
+	void setViewportVerticalOffsetTarget(double f) { moveViewport(getViewportHorizontalOffsetTarget(),f); }
+
+	//! PROPERTY GETTER/SETTER
+	//! Get whether auto zoom out will reset the viewing direction to the initial value
+	bool getFlagAutoZoomOutResetsDirection(void) const {return flagAutoZoomOutResetsDirection;}
+	//! Set whether auto zoom out will reset the viewing direction to the initial value
+	void setFlagAutoZoomOutResetsDirection(bool b) {if (flagAutoZoomOutResetsDirection != b) { flagAutoZoomOutResetsDirection = b; StelApp::immediateSave("navigation/auto_zoom_out_resets_direction", b); emit flagAutoZoomOutResetsDirectionChanged(b);}}
+
+	//! PROPERTY GETTER/SETTER
+	//! Get whether mouse can control movement
+	bool getFlagEnableMouseNavigation() const {return flagEnableMouseNavigation;}
+	//! Set whether mouse can control movement
+	void setFlagEnableMouseNavigation(bool b) {flagEnableMouseNavigation=b; StelApp::immediateSave("navigation/flag_enable_mouse_navigation", b); emit flagEnableMouseNavigationChanged(b); }
+
+	//! PROPERTY GETTER/SETTER
+	//! Get whether mouse can control zooming
+	bool getFlagEnableMouseZooming() const {return flagEnableMouseZooming;}
+	//! Set whether mouse can control zooming
+	void setFlagEnableMouseZooming(bool b) {flagEnableMouseZooming=b; StelApp::immediateSave("navigation/flag_enable_mouse_zooming", b); emit flagEnableMouseZoomingChanged(b); }
+
+	//! PROPERTY GETTER/SETTER
+	//! Get whether keys can control zoom
+	bool getFlagEnableZoomKeys() const {return flagEnableZoomKeys;}
+	//! Set whether keys can control zoom
+	void setFlagEnableZoomKeys(bool b) {flagEnableZoomKeys=b; StelApp::immediateSave("navigation/flag_enable_zoom_keys", b); emit flagEnableZoomKeysChanged(b);}
+
+	//! PROPERTY GETTER/SETTER
+	//! Get whether keys can control movement
+	bool getFlagEnableMoveKeys() const {return flagEnableMoveKeys;}
+	//! Set whether keys can control movement
+	void setFlagEnableMoveKeys(bool b) {flagEnableMoveKeys=b; StelApp::immediateSave("navigation/flag_enable_move_keys", b); emit flagEnableMoveKeysChanged(b); }
+
+	//! PROPERTY GETTER/SETTER
+	//! Get whether being at the edge of the screen activates movement
+	bool getFlagEnableMoveAtScreenEdge() const {return flagEnableMoveAtScreenEdge;}
+	//! Set whether being at the edge of the screen activates movement. The actual motion is only performed in fullscreen mode.
+	void setFlagEnableMoveAtScreenEdge(bool b) {flagEnableMoveAtScreenEdge=b; StelApp::immediateSave("navigation/flag_enable_move_at_screen_edge", b); emit flagEnableMoveAtScreenEdgeChanged(b);}
+
+	//! PROPERTY GETTER/SETTER
+	//! Set a hard limit for any fov change. Useful in the context of a planetarium with dome
+	//! where a presenter never ever wants to set more than 180° even if the projection would allow it.
+	void setUserMaxFov(double max);
+	double getUserMaxFov() const {return userMaxFov; }
+
+	//! PROPERTY GETTER/SETTER
+	//! Get the current Field Of View in degrees
+	double getCurrentFov() const {return currentFov;}
+	//! Set the current vertical Field Of View in degrees
+	void setFov(double f);
+
 
 	//! Set whether sky position is to be locked.
 	void setFlagLockEquPos(bool b);
@@ -212,40 +250,7 @@ public slots:
 	//! @return the number of seconds it takes for an auto-move operation to complete.
 	float getAutoMoveDuration(void) const {return autoMoveDuration;}
 
-	//! Set whether auto zoom out will reset the viewing direction to the initial value
-	void setFlagAutoZoomOutResetsDirection(bool b) {if (flagAutoZoomOutResetsDirection != b) { flagAutoZoomOutResetsDirection = b; StelApp::immediateSave("navigation/auto_zoom_out_resets_direction", b); emit flagAutoZoomOutResetsDirectionChanged(b);}}
-	//! Get whether auto zoom out will reset the viewing direction to the initial value
-	bool getFlagAutoZoomOutResetsDirection(void) const {return flagAutoZoomOutResetsDirection;}
 
-	//! Get whether keys can control zoom
-	bool getFlagEnableZoomKeys() const {return flagEnableZoomKeys;}
-	//! Set whether keys can control zoom
-	void setFlagEnableZoomKeys(bool b) {flagEnableZoomKeys=b; StelApp::immediateSave("navigation/flag_enable_zoom_keys", b); emit flagEnableZoomKeysChanged(b);}
-
-	//! Get whether keys can control movement
-	bool getFlagEnableMoveKeys() const {return flagEnableMoveKeys;}
-	//! Set whether keys can control movement
-	void setFlagEnableMoveKeys(bool b) {flagEnableMoveKeys=b; StelApp::immediateSave("navigation/flag_enable_move_keys", b); emit flagEnableMoveKeysChanged(b); }
-
-	//! Get whether being at the edge of the screen activates movement
-	bool getFlagEnableMoveAtScreenEdge() const {return flagEnableMoveAtScreenEdge;}
-	//! Set whether being at the edge of the screen activates movement
-	void setFlagEnableMoveAtScreenEdge(bool b) {flagEnableMoveAtScreenEdge=b;}
-
-	//! Get whether mouse can control movement
-	bool getFlagEnableMouseNavigation() const {return flagEnableMouseNavigation;}
-	//! Set whether mouse can control movement
-	void setFlagEnableMouseNavigation(bool b) {flagEnableMouseNavigation=b; StelApp::immediateSave("navigation/flag_enable_mouse_navigation", b); emit flagEnableMouseNavigationChanged(b); }
-
-	//! Get whether mouse can control zooming
-	bool getFlagEnableMouseZooming() const {return flagEnableMouseZooming;}
-	//! Set whether mouse can control zooming
-	void setFlagEnableMouseZooming(bool b) {flagEnableMouseZooming=b; emit flagEnableMouseZoomingChanged(b); }
-
-	//! Get the state of flag for indication of mount mode
-	bool getFlagIndicationMountMode() const {return flagIndicationMountMode;}
-	//! Set the state of flag for indication of mount mode
-	void setFlagIndicationMountMode(bool b) { flagIndicationMountMode=b; StelApp::immediateSave("gui/flag_indication_mount_mode", b); emit flagIndicationMountModeChanged(b); }
 
 	//! Move the view to a specified J2000 position.
 	//! @param aim The position to move to expressed as a vector.
@@ -289,8 +294,6 @@ public slots:
 	//! @param aimFov The desired field of view in degrees.
 	//! @param zoomDuration The time that the operation should take to complete. [seconds]
 	void zoomTo(double aimFov, float zoomDuration = 1.f);
-	//! Get the current Field Of View in degrees
-	double getCurrentFov() const {return currentFov;}
 
 	//! Return the initial default FOV in degree.
 	double getInitFov() const {return initFov;}
@@ -377,6 +380,7 @@ public slots:
 	//! @note Use StelMovementMgr.panView for precise control of view movements.
 	void turnDown(bool s);
 	
+	//! Modal switch used for user keyboard interaction, linked to shift key press/release.
 	void moveSlow(bool b) {flagMoveSlow=b;}
 
 	//! With true, starts zooming in, with an unspecified ratio of degrees per second, either until zooming
@@ -433,38 +437,9 @@ public slots:
 	//! @note Only vertical viewport is really meaningful.
 	void moveViewport(double offsetX, double offsetY, const float duration=0.f);
 
-	//! Set current mount type defining the reference frame in which head movements occur.
-	void setMountMode(StelMovementMgr::MountMode m);
-	//! Get current mount type defining the reference frame in which head movements occur.
-	StelMovementMgr::MountMode getMountMode(void) const {return mountMode;}
-	bool getEquatorialMount(void) const {return mountMode == StelMovementMgr::MountEquinoxEquatorial;}
-
 	//! Function designed only for scripting context. Put the function into the startup.ssc of your planetarium setup,
 	//! this will avoid any unwanted tracking.
 	void setInhibitAllAutomoves(bool inhibit) { flagInhibitAllAutomoves=inhibit;}
-
-	//! Returns the targeted value of the viewport offset
-	Vec2d getViewportOffsetTarget() const { return targetViewportOffset; }
-	double getViewportHorizontalOffsetTarget() const { return targetViewportOffset[0]; }
-	double getViewportVerticalOffsetTarget() const { return targetViewportOffset[1]; }
-
-	void setViewportHorizontalOffsetTarget(double f) { moveViewport(f,getViewportVerticalOffsetTarget()); }
-	void setViewportVerticalOffsetTarget(double f) { moveViewport(getViewportHorizontalOffsetTarget(),f); }
-
-	//! Set a hard limit for any fov change. Useful in the context of a planetarium with dome
-	//! where a presenter never ever wants to set more than 180° even if the projection would allow it.
-	void setUserMaxFov(double max);
-	double getUserMaxFov() const {return userMaxFov; }
-
-	void setFov(double f)
-	{
-		if (core->getCurrentProjectionType()==StelCore::ProjectionCylinderFill)
-			currentFov=180.0;
-		else
-			currentFov=qBound(minFov, f, maxFov);
-
-		emit currentFovChanged(currentFov);
-	}
 
 signals:
 	//! Emitted when the tracking property changes
@@ -478,6 +453,7 @@ signals:
 	void flagEnableMouseZoomingChanged(bool b);
 	void flagEnableMoveKeysChanged(bool b);
 	void flagEnableZoomKeysChanged(bool b);
+	void flagEnableMoveAtScreenEdgeChanged(bool b);
 	void userMaxFovChanged(double fov);
 	void currentFovChanged(double fov);
 	void currentDirectionChanged();
@@ -493,15 +469,15 @@ private slots:
 	void bindingFOVActions();
 
 private:
-	double currentFov; // The current FOV in degrees
+	StelCore* core;          // The core on which the movement are applied
+	QSettings* conf;
+	class StelObjectMgr* objectMgr;
 	double initFov;    // The FOV at startup
+	double currentFov; // The current FOV in degrees
 	double minFov;     // Minimum FOV in degrees
 	double maxFov;     // Maximum FOV in degrees. Depends on projection.
 	double userMaxFov; // Custom setting. Can be useful in a planetarium context.
 	double deltaFov;   // requested change of FOV (degrees) used during zooming.
-	StelCore* core;          // The core on which the movement are applied
-	QSettings* conf;
-	class StelObjectMgr* objectMgr;
 
 	// immediately add deltaFov argument to FOV - does not change private var.
 	void changeFov(double deltaFov);
@@ -529,9 +505,9 @@ private:
 
 	bool flagEnableZoomKeys;
 	bool flagEnableMoveKeys;
-	double keyMoveSpeed;              // Speed of keys movement
-	double keyZoomSpeed;              // Speed of keys zoom
-	bool flagMoveSlow;
+	double keyMoveSpeed;            // Speed of keys movement
+	double keyZoomSpeed;            // Speed of keys zoom
+	bool flagMoveSlow;		// Modal switch used during user keyboard interaction, linked to shift key press/release.
 
 	//flag to enable panning a predetermined amount
 	bool flagCustomPan;
@@ -599,6 +575,7 @@ private:
 
 	// defines if view corrects for horizon, or uses equatorial coordinates
 	MountMode mountMode;
+	bool flagIndicationMountMode; // set true to show a screen text message indicating state of mount mode
 
 	Vec3d initViewPos;        // Default viewing direction
 	Vec3d initViewUp;         // original up vector. Usually 0/0/1, but maybe something else in rare setups (e.g. Planetarium dome upwards fisheye projection).
@@ -621,7 +598,6 @@ private:
 	Vec2d oldViewportOffset;
 	Vec2d targetViewportOffset;
 
-	bool flagIndicationMountMode; // state of mount mode
 
 	//! @name Screen message infrastructure
 	//@{
