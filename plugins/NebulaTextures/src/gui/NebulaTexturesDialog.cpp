@@ -429,7 +429,6 @@ void NebulaTexturesDialog::onsubStatusReply(QNetworkReply *reply)
 
       updateStatus(q_("Submission ID got. Please wait..."));
    }
-
 }
 
 /*
@@ -479,7 +478,6 @@ void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
       jobStatusTimer->stop();
       changeUiState(false);
    }
-
    reply->deleteLater();
 }
 
@@ -735,7 +733,6 @@ void NebulaTexturesDialog::changeUiState(bool freeze)
  */
 void NebulaTexturesDialog::on_goPushButton_clicked()
 {
-
    StelCore* core = StelApp::getInstance().getCore();
    StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
    Vec3d pos;
@@ -973,7 +970,6 @@ void NebulaTexturesDialog::addTexture(QString addPath, QString keyName) // logic
  */
 void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const QJsonArray& innerWorldCoords, double minResolution, double maxBrightness, QString keyName, QString addPath)
 {
-
    QString pluginFolder = StelFileMgr::getUserDir() + pluginDir;
    QDir().mkpath(pluginFolder);
 
@@ -1046,7 +1042,6 @@ void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const Q
 
    // qDebug() << "Updated custom textures JSON file successfully.";
    updateStatus(q_("Updated custom textures JSON file successfully!"));
-
 }
 
 
@@ -1060,14 +1055,11 @@ void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const Q
  */
 void NebulaTexturesDialog::on_removeButton_clicked()
 {
-
    QListWidgetItem* selectedItem = ui->listWidget->currentItem();
    if (!selectedItem) {
       return;
    }
-
    QString selectedText = selectedItem->text();
-
    if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to remove this texture?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
       return;
 
@@ -1076,22 +1068,18 @@ void NebulaTexturesDialog::on_removeButton_clicked()
    if (!jsonFile.open(QIODevice::ReadOnly)) {
       return;
    }
-
    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
    jsonFile.close();
 
    if (!jsonDoc.isObject()) {
       return;
    }
-
    QJsonObject rootObject = jsonDoc.object();
-
    if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()) {
       return;
    }
 
    QJsonArray subTiles = rootObject["subTiles"].toArray();
-
    QJsonArray updatedSubTiles;
    bool found = false;
 
@@ -1104,7 +1092,6 @@ void NebulaTexturesDialog::on_removeButton_clicked()
       QJsonObject subTileObject = subTileValue.toObject();
       if (subTileObject.contains("imageUrl") && subTileObject["imageUrl"].toString() == selectedText) {
          found = true;
-
          QString imageUrl = subTileObject["imageUrl"].toString();
          QString imagePath = StelFileMgr::getUserDir() + pluginDir + imageUrl;
          QFile imageFile(imagePath);
@@ -1115,26 +1102,20 @@ void NebulaTexturesDialog::on_removeButton_clicked()
          } else {
             qDebug() << "Image file does not exist:" << imageUrl;
          }
-
          continue;
       }
-
       updatedSubTiles.append(subTileValue);
    }
-
    if (!found) {
       return;
    }
-
    rootObject["subTiles"] = updatedSubTiles;
-
    if (!jsonFile.open(QIODevice::WriteOnly)) {
       return;
    }
 
    jsonFile.write(QJsonDocument(rootObject).toJson(QJsonDocument::Indented));
    jsonFile.close();
-
    delete selectedItem;
 }
 
@@ -1201,11 +1182,7 @@ void NebulaTexturesDialog::reloadData()
          item->setData(Qt::UserRole, data);
 
          ui->listWidget->addItem(item);
-
       }
-      // else {
-      //    qWarning() << "No 'imageUrl' found in subTile, skipping...";
-      // }
    }
 }
 
@@ -1248,35 +1225,6 @@ void NebulaTexturesDialog::reloadTextures()
       setTexturesVisible(CUSTOM_TEXNAME,true);
       avoidConflict(); // only when show_custom && avoid_conflict
    }
-
-   /*
-   bool showCustom = getShowCustomTextures();
-   StelSkyImageTile* cusTile = get_aTile(CUSTOM_TEXNAME);
-   StelSkyImageTile* defTile = get_aTile(DEFAULT_TEXNAME);
-   if(!cusTile) return;
-   if(!defTile) return;
-   // qDebug() << "updateVisibleState" << showCustom << "size:" << cusTile->getSubTiles().size() << defTile->getSubTiles().size();
-   if (!showCustom){
-      for (int i = 0; i < cusTile->getSubTiles().size(); ++i) {
-         auto subTile = cusTile->getSubTiles()[i];
-         StelSkyImageTile* subImageTile = dynamic_cast<StelSkyImageTile*>(subTile);
-         subImageTile->setVisible(false);
-      }
-      for (int i = 0; i < defTile->getSubTiles().size(); ++i) {
-         auto subTile = defTile->getSubTiles()[i];
-         StelSkyImageTile* subImageTile = dynamic_cast<StelSkyImageTile*>(subTile);
-         subImageTile->setVisible(true);
-      }
-   }
-   else{
-      for (int i = 0; i < cusTile->getSubTiles().size(); ++i) {
-         auto subTile = cusTile->getSubTiles()[i];
-         StelSkyImageTile* subImageTile = dynamic_cast<StelSkyImageTile*>(subTile);
-         subImageTile->setVisible(true);
-      }
-      avoidConflict(); // only when show_custom && avoid_conflict
-   }
-   */
 }
 
 

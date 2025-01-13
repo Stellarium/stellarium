@@ -175,7 +175,6 @@ private slots:
 	void loadCollection(int decimateBy=1);
 
 private:
-
 	SkyLayerElem* skyLayerElemForLayer(const StelSkyLayer*);
 
 	QString keyForLayer(const StelSkyLayer*);
