@@ -22,7 +22,7 @@ environment:
   matrix:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
     qtver: 6.8
-    qtbin: msvc2019_64
+    qtbin: msvc2022_64
     msvcname: Visual Studio 17 2022
     cmake_args: -A x64
     exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
@@ -57,7 +57,7 @@ environment:
     exiv2baseName: exiv2-0.28.0-2017msvc32
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
     qtver: 6.8
-    qtbin: msvc2019_arm64
+    qtbin: msvc2022_arm64
     msvcname: Visual Studio 17 2022
     cmake_args: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.8/msvc2019_64 -DQt6LinguistTools_DIR=C:/Qt/6.8/msvc2019_64/lib/cmake/Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
 before_build:
