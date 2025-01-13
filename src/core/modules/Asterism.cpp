@@ -25,6 +25,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
+#include "ZoneArray.hpp"
 
 #include <algorithm>
 #include <QString>
@@ -75,13 +76,21 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 			case 0: // Ray helpers
 			case 1: // A big asterism with lines by HIP stars
 			{
-				unsigned int HP = 0;
+				StarId HP = 0;
 				istr >> HP;
 				if(HP == 0)
 				{
 					return false;
 				}
-				asterism[i]=starMgr->searchHP(static_cast<int>(HP));
+				if (HP <= NR_OF_HIP)
+				{
+					asterism[i]=starMgr->searchHP(static_cast<int>(HP));
+				}
+				else
+				{
+					asterism[i]=starMgr->searchGaia(HP);
+				}
+				
 				if (!asterism[i])
 				{
 					qWarning() << "Error in asterism" << abbreviation << "- can't find star HIP" << HP;
