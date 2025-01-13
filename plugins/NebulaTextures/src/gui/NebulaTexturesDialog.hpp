@@ -60,6 +60,8 @@ public slots:
    void addTexture(QString addPath, QString keyName);
    void updateCustomTextures(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness, QString keyName, QString addPath);
 
+   void deleteImagesFromCfg(const QString& cfgFilePath);
+
    void reloadTextures();
    void avoidConflict();
    bool setTexturesVisible(QString TexName, bool visible);

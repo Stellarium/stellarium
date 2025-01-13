@@ -122,6 +122,8 @@ void NebulaTexturesDialog::createDialogContent()
 
 	setAboutHtml();
 
+   ui->label_apiKey->setText("<a href=\"https://nova.astrometry.net/api_help\">Astrometry ApiKey:</a>");
+
    // load config
    ui->checkBoxShow->setChecked(getShowCustomTextures());
    ui->checkBoxAvoid->setChecked(getAvoidAreaConflict());
@@ -778,9 +780,11 @@ void NebulaTexturesDialog::renderTempCustomTexture()
 
    updateStatus(q_("Rendering..."));
 
-   addTexture(tmpcfgFile, TEST_TEXNAME);
-
    QString path = StelFileMgr::getUserDir()+tmpcfgFile;
+
+   deleteImagesFromCfg(tmpcfgFile);
+
+   addTexture(tmpcfgFile, TEST_TEXNAME);
 
    StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
 
@@ -796,6 +800,75 @@ void NebulaTexturesDialog::renderTempCustomTexture()
          setTexturesVisible(DEFAULT_TEXNAME, false);
       updateStatus(q_("Rendering complete."));
    }
+}
+
+/*
+ * Reads a given configuration file and deletes the files listed in the "imageUrl" field.
+ * This function assumes that the configuration file contains a list of subTiles, each with an "imageUrl".
+ *
+ * Steps:
+ *   1. Opens the given configuration file and reads the JSON data.
+ *   2. Loops through each subTile to extract the "imageUrl".
+ *   3. Deletes the file corresponding to each "imageUrl" if it exists.
+ *   4. Logs the process and updates the UI.
+ */
+void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
+{
+   QString cfgFilePath = StelFileMgr::getUserDir() + cfgFile;
+
+   // Step 1: Read the JSON configuration file
+   QFile jsonFile(cfgFilePath);
+
+   if (!jsonFile.open(QIODevice::ReadOnly)) {
+      qWarning() << "Failed to open JSON file for reading:" << cfgFilePath;
+      updateStatus(q_("Failed to open Configuration File!"));
+      return;
+   }
+
+   QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
+   jsonFile.close();
+
+   if (!jsonDoc.isObject()) {
+      qWarning() << "Invalid JSON structure in file:" << cfgFilePath;
+      updateStatus(q_("Invalid JSON structure in Configuration File!"));
+      return;
+   }
+
+   QJsonObject rootObject = jsonDoc.object();
+   if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()) {
+      qWarning() << "No 'subTiles' array found in JSON file:" << cfgFilePath;
+      updateStatus(q_("No 'subTiles' array in Configuration File!"));
+      return;
+   }
+
+   QJsonArray subTiles = rootObject["subTiles"].toArray();
+
+   // Step 2: Loop through each subTile and delete the "imageUrl"
+   foreach (const QJsonValue &subTileValue, subTiles) {
+      if (!subTileValue.isObject()) {
+         continue;
+      }
+
+      QJsonObject subTileObject = subTileValue.toObject();
+
+      if (subTileObject.contains("imageUrl") && subTileObject["imageUrl"].isString()) {
+         QString imageUrl = subTileObject["imageUrl"].toString();
+         QString imagePath = StelFileMgr::getUserDir() + pluginDir + imageUrl;
+
+                // Step 3: Delete the file if it exists
+         if (QFile::exists(imagePath)) {
+            if (QFile::remove(imagePath)) {
+               qDebug() << "Deleted image file:" << imagePath;
+            } else {
+               qWarning() << "Failed to delete image file:" << imagePath;
+            }
+         } else {
+            qWarning() << "Image file does not exist:" << imagePath;
+         }
+      }
+   }
+
+   updateStatus(q_("Images deletion completed."));
 }
 
 /*
@@ -1031,6 +1104,18 @@ void NebulaTexturesDialog::on_removeButton_clicked()
       QJsonObject subTileObject = subTileValue.toObject();
       if (subTileObject.contains("imageUrl") && subTileObject["imageUrl"].toString() == selectedText) {
          found = true;
+
+         QString imageUrl = subTileObject["imageUrl"].toString();
+         QString imagePath = StelFileMgr::getUserDir() + pluginDir + imageUrl;
+         QFile imageFile(imagePath);
+         if (imageFile.exists()) {
+            if (!imageFile.remove()) {
+               qWarning() << "Failed to delete image:" << imageUrl;
+            }
+         } else {
+            qDebug() << "Image file does not exist:" << imageUrl;
+         }
+
          continue;
       }
 
