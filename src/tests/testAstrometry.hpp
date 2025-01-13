@@ -21,6 +21,7 @@
 #define TESTASTROMETRY_HPP
 
 #include "modules/Star.hpp"
+#include "modules/StarMgr.hpp"
 #include "modules/ZoneArray.hpp"
 #include <QObject>
 #include <QtTest>
@@ -39,7 +40,7 @@ private slots:
    //! @param expectedPMRA the expected proper motion in right ascension in mas/yr
    //! @param expectedPMDEC the expected proper motion in declination in mas/yr
    //! @param expectedRV the expected radial velocity in km/s
-   void test6DAstrometryPropagation(int64_t gaiaID,
+   void test6DAstrometryPropagation(StarId gaiaID,
                                     float   depoch_from_catalogs,
                                     double  expectedRA,
                                     double  expectedDEC,

@@ -1567,7 +1567,7 @@
                 </sizepolicy>
                </property>
                <property name="text">
-                <string notr="true">Date:</string>
+                <string>Date:</string>
                </property>
                <property name="checked">
                 <bool>true</bool>
@@ -2751,20 +2751,126 @@
   </customwidget>
  </customwidgets>
  <tabstops>
+  <tabstop>programLanguageComboBox</tabstop>
+  <tabstop>skycultureLanguageComboBox</tabstop>
+  <tabstop>languageSaveToolButton</tabstop>
+  <tabstop>de440checkBox</tabstop>
+  <tabstop>de441checkBox</tabstop>
+  <tabstop>de430checkBox</tabstop>
+  <tabstop>de431checkBox</tabstop>
+  <tabstop>saveViewDirAsDefaultPushButton</tabstop>
   <tabstop>saveSettingsAsDefaultPushButton</tabstop>
+  <tabstop>immediateSaveCheckBox</tabstop>
   <tabstop>restoreDefaultsButton</tabstop>
+  <tabstop>allSelectedInfoRadio</tabstop>
+  <tabstop>defaultSelectedInfoRadio</tabstop>
+  <tabstop>briefSelectedInfoRadio</tabstop>
+  <tabstop>noSelectedInfoRadio</tabstop>
+  <tabstop>customSelectedInfoRadio</tabstop>
   <tabstop>checkBoxName</tabstop>
   <tabstop>checkBoxCatalogNumbers</tabstop>
   <tabstop>checkBoxRaDecJ2000</tabstop>
   <tabstop>checkBoxRaDecOfDate</tabstop>
+  <tabstop>checkBoxHourAngle</tabstop>
+  <tabstop>checkBoxAltAz</tabstop>
   <tabstop>checkBoxEclipticCoordsJ2000</tabstop>
   <tabstop>checkBoxEclipticCoordsOfDate</tabstop>
+  <tabstop>checkBoxGalacticCoordinates</tabstop>
+  <tabstop>checkBoxSupergalacticCoordinates</tabstop>
+  <tabstop>checkBoxOtherCoords</tabstop>
+  <tabstop>checkBoxElongation</tabstop>
+  <tabstop>checkBoxVisualMag</tabstop>
+  <tabstop>checkBoxAbsoluteMag</tabstop>
+  <tabstop>checkBoxType</tabstop>
+  <tabstop>checkBoxSize</tabstop>
+  <tabstop>checkBoxVelocity</tabstop>
+  <tabstop>checkBoxProperMotion</tabstop>
+  <tabstop>checkBoxDistance</tabstop>
+  <tabstop>checkBoxSiderealTime</tabstop>
+  <tabstop>checkBoxConstellation</tabstop>
+  <tabstop>checkBoxRTSTime</tabstop>
+  <tabstop>checkBoxSolarLunarPosition</tabstop>
+  <tabstop>checkBoxExtra</tabstop>
+  <tabstop>checkBoxUMSurfaceBrightness</tabstop>
+  <tabstop>checkBoxUMShortNotationSurfaceBrightness</tabstop>
+  <tabstop>checkBoxUseFormattingOutput</tabstop>
+  <tabstop>decimalDegreeCheckBox</tabstop>
+  <tabstop>azimuthFromSouthcheckBox</tabstop>
+  <tabstop>checkBoxUseCCSDesignations</tabstop>
+  <tabstop>showConstellationBoundariesButtonCheckBox</tabstop>
+  <tabstop>showConstellationArtsButtonCheckBox</tabstop>
+  <tabstop>showAsterismLinesButtonCheckBox</tabstop>
+  <tabstop>showAsterismLabelsButtonCheckBox</tabstop>
+  <tabstop>showEclipticGridButtonCheckBox</tabstop>
+  <tabstop>showICRSGridButtonCheckBox</tabstop>
+  <tabstop>showGalacticGridButtonCheckBox</tabstop>
+  <tabstop>showCardinalButtonCheckBox</tabstop>
+  <tabstop>showCompassButtonCheckBox</tabstop>
+  <tabstop>showNightmodeButtonCheckBox</tabstop>
+  <tabstop>showGotoSelectedButtonCheckBox</tabstop>
+  <tabstop>showFullscreenButtonCheckBox</tabstop>
+  <tabstop>showQuitButtonCheckBox</tabstop>
+  <tabstop>showNebulaBgButtonCheckbox</tabstop>
+  <tabstop>showFlipButtonsCheckbox</tabstop>
+  <tabstop>showDSSButtonCheckbox</tabstop>
+  <tabstop>showHipsButtonCheckBox</tabstop>
+  <tabstop>useButtonsBackgroundCheckBox</tabstop>
+  <tabstop>showObsListButtonCheckBox</tabstop>
+  <tabstop>getStarsButton</tabstop>
+  <tabstop>downloadRetryButton</tabstop>
+  <tabstop>downloadCancelButton</tabstop>
   <tabstop>systemTimeRadio</tabstop>
   <tabstop>todayRadio</tabstop>
   <tabstop>todayTimeSpinBox</tabstop>
   <tabstop>fixedTimeRadio</tabstop>
   <tabstop>fixedDateTimeEdit</tabstop>
   <tabstop>fixedDateTimeCurrentButton</tabstop>
+  <tabstop>startupTimeStopCheckBox</tabstop>
+  <tabstop>jdRadioButton</tabstop>
+  <tabstop>dtRadioButton</tabstop>
+  <tabstop>dateFormatsComboBox</tabstop>
+  <tabstop>timeFormatsComboBox</tabstop>
+  <tabstop>deltaTAlgorithmComboBox</tabstop>
+  <tabstop>pushButtonCustomDeltaTEquationDialog</tabstop>
+  <tabstop>deltaTAlgorithmDescription</tabstop>
+  <tabstop>sphericMirrorCheckbox</tabstop>
+  <tabstop>diskViewportCheckbox</tabstop>
+  <tabstop>gravityLabelCheckbox</tabstop>
+  <tabstop>autoZoomResetsDirectionCheckbox</tabstop>
+  <tabstop>enableKeysNavigationCheckBox</tabstop>
+  <tabstop>editShortcutsPushButton</tabstop>
+  <tabstop>enableMouseNavigationCheckBox</tabstop>
+  <tabstop>enableMouseZoomingCheckBox</tabstop>
+  <tabstop>mouseTimeoutCheckbox</tabstop>
+  <tabstop>mouseTimeoutSpinBox</tabstop>
+  <tabstop>overwriteTextColorButton</tabstop>
+  <tabstop>overwriteTextColorCheckBox</tabstop>
+  <tabstop>screenFontSizeSpinBox</tabstop>
+  <tabstop>guiFontSizeSpinBox</tabstop>
+  <tabstop>topocentricCheckBox</tabstop>
+  <tabstop>nutationCheckBox</tabstop>
+  <tabstop>aberrationCheckBox</tabstop>
+  <tabstop>aberrationSpinBox</tabstop>
+  <tabstop>minFpsSpinBox</tabstop>
+  <tabstop>maxFpsSpinBox</tabstop>
+  <tabstop>solarSystemThreadNumberSpinBox</tabstop>
+  <tabstop>focusOnDaySpinnerCheckBox</tabstop>
+  <tabstop>kineticScrollingCheckBox</tabstop>
+  <tabstop>ditheringComboBox</tabstop>
+  <tabstop>indicationMountModeCheckBox</tabstop>
+  <tabstop>daylightTextColorButton</tabstop>
+  <tabstop>fontWritingSystemComboBox</tabstop>
+  <tabstop>fontComboBox</tabstop>
+  <tabstop>fontSaveToolButton</tabstop>
+  <tabstop>screenshotDirEdit</tabstop>
+  <tabstop>screenshotBrowseButton</tabstop>
+  <tabstop>pushButtonConfigureScreenshotsDialog</tabstop>
+  <tabstop>screenshotFileFormatComboBox</tabstop>
+  <tabstop>invertScreenShotColorsCheckBox</tabstop>
+  <tabstop>useCustomScreenshotSizeCheckBox</tabstop>
+  <tabstop>customScreenshotWidthLineEdit</tabstop>
+  <tabstop>customScreenshotHeightLineEdit</tabstop>
+  <tabstop>dpiSpinBox</tabstop>
   <tabstop>scriptInfoBrowser</tabstop>
   <tabstop>closeWindowAtScriptRunCheckbox</tabstop>
   <tabstop>runScriptButton</tabstop>

@@ -4941,7 +4941,7 @@ void Planet::drawOrbit(const StelCore* core)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEclipticJ2000);
 	KeplerOrbit *keplerOrbit=static_cast<KeplerOrbit*>(orbitPtr);
 	StelPainter sPainter(prj);
-	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
+	const float scale = sPainter.getProjector()->getScreenScale();
 
 	// Normal transparency mode
 	sPainter.setBlending(true);
@@ -4993,8 +4993,8 @@ void Planet::drawOrbit(const StelCore* core)
 	QVarLengthArray<float, 1024> vertexArray;
 
 	sPainter.enableClientStates(true, false, false);
-	if (orbitsThickness>1 || ppx>1.f)
-		sPainter.setLineWidth(orbitsThickness*ppx);
+	if (orbitsThickness>1 || scale>1.f)
+		sPainter.setLineWidth(orbitsThickness*scale);
 
 	sPainter.setLineSmooth(true);
 
@@ -5019,7 +5019,7 @@ void Planet::drawOrbit(const StelCore* core)
 		sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/2, 0, false);
 	}
 	sPainter.enableClientStates(false);
-	if (orbitsThickness>1 || ppx>1.f)
+	if (orbitsThickness>1 || scale>1.f)
 		sPainter.setLineWidth(1);
 
 	sPainter.setLineSmooth(false);

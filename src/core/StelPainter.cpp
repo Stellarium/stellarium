@@ -2464,6 +2464,8 @@ void StelPainter::drawFixedColorWideLinesAsQuads(const ArrayDesc& vertexArray, i
 	Q_ASSERT(vertexArray.type == GL_FLOAT);
 	const auto lineVertData = static_cast<const float*>(vertexArray.pointer) + vertexArray.size*offset;
 	const int step = mode==Lines ? 2 : 1;
+	const bool connected = mode!=Lines;
+	Vec2f prevV1aNDC, prevV1bNDC, prevLineDirNDC;
 	for(int n = 0; n < count-1; n += step)
 	{
 		Vec4f in0;
@@ -2498,16 +2500,67 @@ void StelPainter::drawFixedColorWideLinesAsQuads(const ArrayDesc& vertexArray, i
 		const Vec3f ndc0 = Vec3f(clip0.v) / clip0[3];
 		const Vec3f ndc1 = Vec3f(clip1.v) / clip1[3];
 
-		const Vec2f lineDir2d = normalize((Vec2f(ndc1.v) - Vec2f(ndc0.v)) * viewportSize);
+		const Vec2f lineDirNDC = normalize(Vec2f(ndc1.v) - Vec2f(ndc0.v));
+		const Vec2f lineDir2d = normalize(lineDirNDC * viewportSize);
 		const Vec2f perpendicularDir2d = Vec2f(-lineDir2d[1], lineDir2d[0]);
 
 		const Vec2f offset2d = (Vec2f(glState.lineWidth) / viewportSize) * perpendicularDir2d;
 
-		// 2D screen coordinates of the new pairs (a,b) of vertices for each input vertex (0,1)
-		const Vec2f v0a_xy = Vec2f(clip0.v) + offset2d*clip0[3];
-		const Vec2f v0b_xy = Vec2f(clip0.v) - offset2d*clip0[3];
-		const Vec2f v1a_xy = Vec2f(clip1.v) + offset2d*clip1[3];
-		const Vec2f v1b_xy = Vec2f(clip1.v) - offset2d*clip1[3];
+		// 2D NDC of the new pairs (a,b) of vertices for each input vertex (0,1)
+		      Vec2f v0aNDC = Vec2f(ndc0.v) + offset2d;
+		      Vec2f v0bNDC = Vec2f(ndc0.v) - offset2d;
+		const Vec2f v1aNDC = Vec2f(ndc1.v) + offset2d;
+		const Vec2f v1bNDC = Vec2f(ndc1.v) - offset2d;
+
+		if(connected && n > 0) // at n==0 we initialize prevV1{a,b}XY
+		{
+			const auto processLineSide = [lineDirNDC,prevLineDirNDC](const Vec2f& prevV1, Vec2f& currV0) -> bool
+			{
+				// Find prevT and currT for which prevV1+prevLineDirNDC*prevT==currV0+lineDirNDC*currT.
+				// This will define the intersection point of the line side.
+				const float prevT = (lineDirNDC[1]*(prevV1[0]-currV0[0]) + lineDirNDC[0]*(currV0[1]-prevV1[1]))
+				                                                               /
+				                               (lineDirNDC[0]*prevLineDirNDC[1] - lineDirNDC[1]*prevLineDirNDC[0]);
+				const float currT = (prevLineDirNDC[1]*(prevV1[0]-currV0[0]) + prevLineDirNDC[0]*(currV0[1]-prevV1[1]))
+				                                                               /
+				                               (lineDirNDC[0]*prevLineDirNDC[1] - lineDirNDC[1]*prevLineDirNDC[0]);
+				if(prevT > 0 && currT < 0)
+				{
+					// This is the outer corner of a joint. Extrapolate beginning
+					// of the current line back to the intersection.
+					currV0 += lineDirNDC*currT;
+					return true;
+				}
+				return false;
+			};
+
+			// Process one side of the line (we call it A)
+			if(processLineSide(prevV1aNDC, v0aNDC))
+			{
+				// Extrapolate the previous line end forward to the intersection
+				newVertices[6*(n-1)+2][0] = v0aNDC[0]*clip0[3];
+				newVertices[6*(n-1)+2][1] = v0aNDC[1]*clip0[3];
+				newVertices[6*(n-1)+3][0] = v0aNDC[0]*clip0[3];
+				newVertices[6*(n-1)+3][1] = v0aNDC[1]*clip0[3];
+			}
+
+			// Process the second side of the line (we call it B)
+			if(processLineSide(prevV1bNDC, v0bNDC))
+			{
+				// Extrapolate the previous line end forward to the intersection
+				newVertices[6*(n-1)+5][0] = v0bNDC[0]*clip0[3];
+				newVertices[6*(n-1)+5][1] = v0bNDC[1]*clip0[3];
+			}
+		}
+		prevV1aNDC = v1aNDC;
+		prevV1bNDC = v1bNDC;
+		prevLineDirNDC = lineDirNDC;
+
+		// 2D clip space coordinates of the new pairs (a,b) of vertices for each input vertex (0,1)
+		const Vec2f v0a_xy = v0aNDC*clip0[3];
+		const Vec2f v0b_xy = v0bNDC*clip0[3];
+		const Vec2f v1a_xy = v1aNDC*clip1[3];
+		const Vec2f v1b_xy = v1bNDC*clip1[3];
 
 		// Final 4D coordinates of the new vertices
 		const auto v0a = Vec4f(v0a_xy[0], v0a_xy[1], clip0[2], clip0[3]);

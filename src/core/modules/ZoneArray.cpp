@@ -575,7 +575,7 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 }
 
 template<class Star>
-StelObjectP SpecialZoneArray<Star>::searchGaiaID(int index, const int64_t source_id, int &matched) const
+StelObjectP SpecialZoneArray<Star>::searchGaiaID(int index, const StarId source_id, int &matched) const
 {
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
@@ -591,7 +591,7 @@ StelObjectP SpecialZoneArray<Star>::searchGaiaID(int index, const int64_t source
 
 template<class Star>
 // this class is written for the unit test
-void SpecialZoneArray<Star>::searchGaiaIDepochPos(const int64_t source_id,
+void SpecialZoneArray<Star>::searchGaiaIDepochPos(const StarId source_id,
                                                   float         dyrs,
                                                   double &      RA,
                                                   double &      DEC,
