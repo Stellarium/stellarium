@@ -56,6 +56,7 @@ public:
 };
 
 // These functions have an unused void pointer to be compatible to PosFuncType in SolarSystem and Planet classes.
+void get_sun_barycentric_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 void get_sun_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 void get_mercury_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 void get_venus_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void*);

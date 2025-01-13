@@ -26,6 +26,7 @@
 #include "StelLocation.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelPropertyMgr.hpp"
+#include "SolarSystem.hpp"
 #include "Dithering.hpp"
 #include <QString>
 #include <QStringList>
@@ -55,6 +56,8 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation NOTIFY flagUseNutationChanged)
 	Q_PROPERTY(bool flagUseAberration READ getUseAberration WRITE setUseAberration NOTIFY flagUseAberrationChanged)
 	Q_PROPERTY(double aberrationFactor READ getAberrationFactor WRITE setAberrationFactor NOTIFY aberrationFactorChanged)
+	Q_PROPERTY(bool flagUseParallax READ getUseParallax WRITE setUseParallax NOTIFY flagUseParallaxChanged)
+	Q_PROPERTY(double parallaxFactor READ getParallaxFactor WRITE setParallaxFactor NOTIFY parallaxFactorChanged)
 	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates NOTIFY flagUseTopocentricCoordinatesChanged)
 	Q_PROPERTY(ProjectionType currentProjectionType READ getCurrentProjectionType WRITE setCurrentProjectionType NOTIFY currentProjectionTypeChanged)
 	//! This is just another way to access the projection type, by string instead of enum
@@ -374,6 +377,11 @@ public:
 
 	Vec3d getMouseJ2000Pos(void) const;
 
+	//! get vector used to compute parallax effect
+	Vec3d getParallaxDiff(double JD) const;
+	//! get vector used to compute aberration effect
+	Vec3d getAberrationVec(double JD) const;
+
 public slots:
 	//! Smoothly move the observer to the given location
 	//! @param target the target location
@@ -550,6 +558,16 @@ public slots:
 
 	QByteArray getAberrationShader() const;
 	void setAberrationUniforms(QOpenGLShaderProgram& program) const;
+
+	//! @return whether parallax effect is currently used.
+	bool getUseParallax() const {return flagUseParallax;}
+	//! Set whether you want computation and simulation of parallax effect.
+	void setUseParallax(bool use) { if (flagUseParallax != use) { flagUseParallax=use; StelApp::immediateSave("astro/flag_parallax", use); emit flagUseParallaxChanged(use); }}
+
+	//! @return parallax factor. 1 is realistic simulation, but higher values may be useful for didactic purposes.
+	double getParallaxFactor() const {return parallaxFactor;}
+	//! Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
+	void setParallaxFactor(double factor) { if (!fuzzyEquals(parallaxFactor, factor)) { parallaxFactor=qBound(0.,factor, 10000.); StelApp::immediateSave("astro/parallax_factor", parallaxFactor); emit parallaxFactorChanged(factor); }}
 
 	//! @return whether topocentric coordinates are currently used.
 	bool getUseTopocentricCoordinates() const {return flagUseTopocentricCoordinates;}
@@ -862,6 +880,10 @@ signals:
 	void flagUseAberrationChanged(bool b);
 	//! This signal indicates a change in aberration exaggeration factor
 	void aberrationFactorChanged(double val);
+	//! This signal indicates a switch in use of parallax
+	void flagUseParallaxChanged(bool b);
+	//! This signal indicates a change in parallax exaggeration factor
+	void parallaxFactorChanged(double val);
 	//! This signal indicates a switch in use of topocentric coordinates
 	void flagUseTopocentricCoordinatesChanged(bool b);
 	//! Emitted whenever the projection type changes
@@ -943,6 +965,10 @@ private:
 	bool flagUseAberration;
 	// value to allow exaggerating aberration effects. 1 is natural value, stretching to e.g. 1000 may be useful for explanations.
 	double aberrationFactor;
+	// flag to indicate we want to include parallax effect
+	bool flagUseParallax;
+	// value to allow exaggerating parallax effects. 1 is natural value, stretching to e.g. 1000 may be useful for explanations.
+	double parallaxFactor;
 	// flag to indicate that we show topocentrically corrected coordinates. (Switching to false for planetocentric coordinates is new for 0.14)
 	bool flagUseTopocentricCoordinates;
 
@@ -984,6 +1010,17 @@ private:
 	bool de440Active;    // available and user-activated.
 	bool de441Active;    // available and user-activated.
 	QPair<int, int> minMaxEphemRange;
-};
+	
+	// Variables for caching the observer position relative to the star catalog reference frame
+	static Vec3d cachedParallaxDiff;
+    static double cachedParallaxJD; // Cached Julian Date
+	static PlanetP cachedParallaxPlanet;
+	Vec3d calculateParallaxDiff(double JD) const; // Actual calculation
 
+	// Variables for caching the aberration effect
+	static Vec3d cachedAberrationVec;
+	static double cachedAberrationJD;
+	static PlanetP cachedAberrationPlanet;
+	Vec3d calculateAberrationVec(double JD) const; // Actual calculation
+};
 #endif // STELCORE_HPP

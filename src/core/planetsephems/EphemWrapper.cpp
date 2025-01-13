@@ -44,6 +44,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #define EPHEM_URANUS_ID   6
 #define EPHEM_NEPTUNE_ID  7
 #define EPHEM_PLUTO_ID    8
+#define EPHEM_SUN_ID	  10
 
 // GZ No idea what IMD stands for?
 //#define EPHEM_IMD_EARTH_ID 2
@@ -51,6 +52,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #define EPHEM_JPL_PLUTO_ID 9
 #define EPHEM_JPL_MOON_ID 10
 #define EPHEM_JPL_SUN_ID  11
+#define EPHEM_JPL_SSB_ID  12
 
 /**   JPL PLANET ID LIST
 **            1 = mercury           8 = neptune                             **
@@ -165,6 +167,45 @@ void get_planet_helio_coordsv(const double jd, double xyz[3], double xyzdot[3], 
 	xyzdot[0]=xyz6[3]; xyzdot[1]=xyz6[4]; xyzdot[2]=xyz6[5];
 }
 
+// get barycentric instead of heliocentric coordinates
+void get_planet_bary_coordsv(const double jd, double xyz[3], double xyzdot[3], const int planet_id)
+{
+	bool deOk=false;
+	double xyz6[6];
+	if(!std::isfinite(jd))
+	{
+		qDebug() << "get_planet_bary_coordsv(): SKIPPED CoordCalc, jd is infinite/nan: " << jd;
+		return;
+	}
+
+	if(EphemWrapper::use_de440(jd))
+	{
+		deOk=GetDe440Coor(jd, planet_id + 1, xyz6, EPHEM_JPL_SSB_ID);
+	}
+	else if(EphemWrapper::use_de441(jd))
+	{
+		deOk=GetDe441Coor(jd, planet_id + 1, xyz6, EPHEM_JPL_SSB_ID);
+	}
+	else if(EphemWrapper::use_de430(jd))
+	{
+		deOk=GetDe430Coor(jd, planet_id + 1, xyz6, EPHEM_JPL_SSB_ID);
+	}
+	else if(EphemWrapper::use_de431(jd))
+	{
+		deOk=GetDe431Coor(jd, planet_id + 1, xyz6, EPHEM_JPL_SSB_ID);
+	}
+	// VSOP87
+	if (!deOk) //VSOP87 as fallback
+	{
+		xyz[0]   =0; xyz[1]   =0; xyz[2]   =0;
+		xyzdot[0]=0; xyzdot[1]=0; xyzdot[2]=0;
+	}
+	else {
+		xyz[0]   =xyz6[0]; xyz[1]   =xyz6[1]; xyz[2]   =xyz6[2];
+		xyzdot[0]=xyz6[3]; xyzdot[1]=xyz6[4]; xyzdot[2]=xyz6[5];
+	}
+}
+
 // Osculating positions for time JDE in elements for JDE0, if possible by the theory used (e.g. VSOP87).
 // For ephemerides like DE4xx, JDE0 is irrelevant.
 void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], double xyzdot[3], int planet_id)
@@ -246,13 +287,18 @@ void get_pluto_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* un
 	}
 }
 
-/* Return 0 for the sun */
 void get_sun_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(jd)
 	Q_UNUSED(unused)
 	xyz[0]   =0.; xyz[1]   =0.; xyz[2]   =0.;
 	xyzdot[0]=0.; xyzdot[1]=0.; xyzdot[2]=0.;
+}
+
+/* Return barycentric coordinates for the sun */
+void get_sun_barycentric_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
+{
+	Q_UNUSED(unused)
+	get_planet_bary_coordsv(jd, xyz, xyzdot, EPHEM_SUN_ID);
 }
 
 void get_mercury_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)

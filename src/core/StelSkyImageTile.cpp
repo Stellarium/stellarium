@@ -90,8 +90,7 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float opacity
 	Vec3d vel(0.0);
 	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()) && (withAberration))
 	{
-		vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		vel = core->getAberrationVec(core->getJDE());
 	}
 
 	const float limitLuminance = core->getSkyDrawer()->getLimitLuminance();

@@ -1190,7 +1190,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		else
 		{
 			static const QMap<QString, posFuncType>posfuncMap={
-				{ "sun_special",       &get_sun_helio_coordsv},
+				{ "sun_special",       &get_sun_barycentric_coordsv},
 				{ "mercury_special",   &get_mercury_helio_coordsv},
 				{ "venus_special",     &get_venus_helio_coordsv},
 				{ "earth_special",     &get_earth_helio_coordsv},

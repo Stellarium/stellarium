@@ -2048,6 +2048,10 @@ Vec3d Planet::getEclipticPos(double dateJDE) const
 // Return heliocentric ecliptical Cartesian J2000 coordinates of p [AU]
 Vec3d Planet::getHeliocentricPos(Vec3d p) const
 {
+	if (parent == Q_NULLPTR)  // the Sun
+	{
+		return p;
+	}
 	// Note: using shared copies is too slow here.  So we use direct access instead.
 	Vec3d pos = p;
 	const Planet* pp = parent.data();
@@ -2064,6 +2068,10 @@ Vec3d Planet::getHeliocentricPos(Vec3d p) const
 
 Vec3d Planet::getHeliocentricEclipticPos(double dateJDE) const
 {
+	if (parent == Q_NULLPTR)  // the Sun
+	{
+		return Vec3d(0., 0., 0.);
+	}
 	Vec3d pos = getEclipticPos(dateJDE);
 	const Planet* pp = parent.data();
 	if (pp)
@@ -2072,6 +2080,26 @@ Vec3d Planet::getHeliocentricEclipticPos(double dateJDE) const
 		{
 			pos += pp->getEclipticPos(dateJDE);
 			pp = pp->parent.data();
+		}
+	}
+	return pos;
+}
+
+Vec3d Planet::getBarycentricEclipticPos(double dateJDE) const
+{
+	Vec3d pos = getEclipticPos(dateJDE);
+	const Planet* pp = parent.data();
+	if (pp)
+	{
+		while (true)
+		{
+			pos += pp->getEclipticPos(dateJDE);
+			pp = pp->parent.data();
+			// slightly different from getHeliocentricEclipticPos to finally add Sun barycentric position
+			if (pp == Q_NULLPTR)
+			{
+				break;
+			}
 		}
 	}
 	return pos;
@@ -2090,9 +2118,14 @@ void Planet::setHeliocentricEclipticPos(const Vec3d &pos)
 		}
 	}
 }
+
 // Return heliocentric velocity of planet.
 Vec3d Planet::getHeliocentricEclipticVelocity() const
 {
+	if (parent == Q_NULLPTR)  // the Sun
+	{
+		return Vec3d(0., 0., 0.);
+	}
 	// Note: using shared copies is too slow here.  So we use direct access instead.
 	Vec3d vel = eclipticVelocity;
 	const Planet* pp = parent.data();
@@ -2102,6 +2135,28 @@ Vec3d Planet::getHeliocentricEclipticVelocity() const
 		{
 			vel += pp->eclipticVelocity;
 			pp = pp->parent.data();
+		}
+	}
+	return vel;
+}
+
+// Return barycentric velocity of planet.
+Vec3d Planet::getBarycentricEclipticVelocity() const
+{
+	// Note: using shared copies is too slow here.  So we use direct access instead.
+	Vec3d vel = eclipticVelocity;
+	const Planet* pp = parent.data();
+	if (pp)
+	{
+		while (true)
+		{
+			vel += pp->eclipticVelocity;
+			pp = pp->parent.data();
+			// slightly different from getHeliocentricEclipticVelocity to finally add Sun barycentric velocity
+			if (pp == Q_NULLPTR)
+			{
+				break;
+			}
 		}
 	}
 	return vel;

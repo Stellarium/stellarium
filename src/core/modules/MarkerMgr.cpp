@@ -224,9 +224,7 @@ bool SkyMarker::draw(StelCore* core, StelPainter& sPainter)
 	// prepare for aberration: Explan. Suppl. 2013, (7.38)
 	if (withAberration && (core->getUseAberration()))
 	{
-		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-		vel=StelCore::matVsop87ToJ2000*vel;
-		vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+		const Vec3d vel = core->getAberrationVec(core->getJDE());
 		point+=vel;
 		point.normalize();
 	}
