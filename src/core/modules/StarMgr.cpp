@@ -91,9 +91,9 @@ QMap<QString, StarId> StarMgr::varStarsIndexI18n;
 QHash<StarId, wds> StarMgr::wdsStarsMapI18n;
 QMap<QString, StarId> StarMgr::wdsStarsIndexI18n;
 QMap<QString, crossid> StarMgr::crossIdMap;
-QMap<StarId, int> StarMgr::saoStarsIndex;
-QMap<StarId, int> StarMgr::hdStarsIndex;
-QMap<StarId, int> StarMgr::hrStarsIndex;
+QMap<int, StarId> StarMgr::saoStarsIndex;
+QMap<int, StarId> StarMgr::hdStarsIndex;
+QMap<int, StarId> StarMgr::hrStarsIndex;
 QHash<StarId, QString> StarMgr::referenceMap;
 
 QStringList initStringListFromFile(const QString& file_name)
@@ -1436,6 +1436,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 StelObjectP StarMgr::searchByName(const QString& name) const
 {
 	QString objw = name.toUpper();
+	StarId sid;
 
 	// Search by HP number if it's an HP formatted number. The final part (A/B/...) is ignored
 	static const QRegularExpression rx("^\\s*(HP|HIP)\\s*(\\d+)\\s*.*$", QRegularExpression::CaseInsensitiveOption);
@@ -1450,7 +1451,10 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	{
 		auto sao = saoStarsIndex.find(match.captured(2).toInt());
 		if (sao!=saoStarsIndex.end())
-			return searchHP(sao.value());
+		{
+			sid = sao.value();
+			return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
+		}
 	}
 
 	// Search by HD number if it's an HD formatted number
@@ -1460,7 +1464,10 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	{
 		auto hd = hdStarsIndex.find(match.captured(2).toInt());
 		if (hd!=hdStarsIndex.end())
-			return searchHP(hd.value());
+		{
+			sid = hd.value();
+			return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
+		}
 	}
 
 	// Search by HR number if it's an HR formatted number
@@ -1470,7 +1477,10 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	{
 		auto hr = hrStarsIndex.find(match.captured(2).toInt());
 		if (hr!=hrStarsIndex.end())
-			return searchHP(hr.value());
+		{
+			sid = hr.value();
+			return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
+		}
 	}
 
 	// Search by Gaia number if it's an Gaia formatted number.
@@ -1482,41 +1492,65 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	// Search by English common name
 	auto it = commonNamesIndex.find(objw);
 	if (it!=commonNamesIndex.end())
-		return searchHP(it.value());
+	{
+		sid = it.value();
+		return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
+	}
 
 	if (getFlagAdditionalNames())
 	{
 		// Search by English additional common names
 		auto ita = additionalNamesIndex.find(objw);
 		if (ita!=additionalNamesIndex.end())
-			return searchHP(ita.value());
+		{
+			sid = ita.value();
+			return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
+		}
 	}
 
 	// Search by scientific name
 	auto itd = sciDesignationsIndexI18n.find(name); // case sensitive!
 	if (itd!=sciDesignationsIndexI18n.end())
-		return searchHP(itd.value());
+	{
+		sid = itd.value();
+		return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
+	}
 	auto itdi = sciDesignationsIndexI18n.find(objw); // case insensitive!
 	if (itdi!=sciDesignationsIndexI18n.end())
-		return searchHP(itdi.value());
+	{
+		sid = itdi.value();
+		return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
+	}
 
 	// Search by scientific name
 	auto eitd = sciExtraDesignationsIndexI18n.find(name); // case sensitive!
 	if (eitd!=sciExtraDesignationsIndexI18n.end())
-		return searchHP(eitd.value());
+	{
+		sid = eitd.value();
+		return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
+	}
 	auto eitdi = sciExtraDesignationsIndexI18n.find(objw); // case insensitive!
 	if (eitdi!=sciExtraDesignationsIndexI18n.end())
-		return searchHP(eitdi.value());
+	{
+		sid = eitdi.value();
+		return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
+	}
 
 	// Search by GCVS name
 	auto it4 = varStarsIndexI18n.find(objw);
 	if (it4!=varStarsIndexI18n.end())
-		return searchHP(it4.value());
+	{
+		sid = it4.value();
+		return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
+	}
 
 	// Search by WDS name
 	auto wdsIt = wdsStarsIndexI18n.find(objw);
 	if (wdsIt!=wdsStarsIndexI18n.end())
-		return searchHP(wdsIt.value());
+	{
+		sid = wdsIt.value();
+		return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
+	}
 
 	return StelObjectP();
 }
@@ -1772,6 +1806,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			break;
 	}
 
+	StarId sid;
 	// Add exact Hp catalogue numbers. The final part (A/B/...) is ignored
 	static const QRegularExpression hpRx("^(HIP|HP)\\s*(\\d+)\\s*.*$", QRegularExpression::CaseInsensitiveOption);
 	QRegularExpressionMatch match=hpRx.match(objw);
@@ -1799,7 +1834,8 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		auto sao = saoStarsIndex.find(saoNum);
 		if (sao!=saoStarsIndex.end())
 		{
-			StelObjectP s = searchHP(sao.value());
+			sid = sao.value();
+			StelObjectP s =  (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
 			if (s && maxNbItem>0)
 			{
 				result << QString("SAO%1").arg(saoNum);
@@ -1817,7 +1853,8 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		auto hd = hdStarsIndex.find(hdNum);
 		if (hd!=hdStarsIndex.end())
 		{
-			StelObjectP s = searchHP(hd.value());
+			sid = hd.value();
+			StelObjectP s =  (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
 			if (s && maxNbItem>0)
 			{
 				result << QString("HD%1").arg(hdNum);
@@ -1835,7 +1872,8 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		auto hr = hrStarsIndex.find(hrNum);
 		if (hr!=hrStarsIndex.end())
 		{
-			StelObjectP s = searchHP(hr.value());
+			sid = hr.value();
+			StelObjectP s =  (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
 			if (s && maxNbItem>0)
 			{
 				result << QString("HR%1").arg(hrNum);

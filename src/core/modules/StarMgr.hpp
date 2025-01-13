@@ -518,9 +518,9 @@ private:
 	static QMap<QString, StarId> wdsStarsIndexI18n;
 
 	static QMap<QString, crossid> crossIdMap;
-	static QMap<StarId, int> saoStarsIndex;
-	static QMap<StarId, int> hdStarsIndex;
-	static QMap<StarId, int> hrStarsIndex;
+	static QMap<int, StarId> saoStarsIndex;
+	static QMap<int, StarId> hdStarsIndex;
+	static QMap<int, StarId> hrStarsIndex;
 
 	static QHash<StarId, QString> referenceMap;
 
