@@ -24,6 +24,7 @@
 
 #include "tests/testAstrometry.hpp"
 #include "modules/Star.hpp"
+#include "modules/StarMgr.hpp"
 #include "modules/ZoneArray.hpp"
 #include "StelObjectType.hpp"
 
@@ -63,7 +64,7 @@ void TestAstrometry::initTestCase()
         zoneArrays.append(z);
     }
 }
-void TestAstrometry::test6DAstrometryPropagation(int64_t gaiaID, float depoch_from_catalogs, double expectedRA, double expectedDEC, double expectedPlx, double expectedPMRA, double expectedPMDEC, double expectedRV)
+void TestAstrometry::test6DAstrometryPropagation(StarId gaiaID, float depoch_from_catalogs, double expectedRA, double expectedDEC, double expectedPlx, double expectedPMRA, double expectedPMDEC, double expectedRV)
 {
     double RA = 0, DE = 0, Plx = 0, pmra = 0, pmdec = 0, RV = 0;
     for (int i = 0; i < zoneArrays.size(); i++)
@@ -87,7 +88,7 @@ void TestAstrometry::test6DAstrometryPropagation(int64_t gaiaID, float depoch_fr
 
 void TestAstrometry::testBarnardStar()  // test the Barnard's Star
 {
-    int64_t gaiaID = 4472832130942575872;
+    StarId gaiaID = 4472832130942575872;
     // star catalog epoch, to make sure the parameters used to calculate the expected values with astropy are consistent with the catalog
     test6DAstrometryPropagation(gaiaID, 0.f, 269.4485025254, 4.7394200511, 546.9759, -801.5510, 10362.3942, -110.1);
     // +50,000 years from star catalog epoch
@@ -102,7 +103,7 @@ void TestAstrometry::testBarnardStar()  // test the Barnard's Star
 
 void TestAstrometry::testCrux()  // test a random Gaia star within the Crux that has no radial velocity
 {
-    int64_t gaiaID = 6059204728680270080;
+    StarId gaiaID = 6059204728680270080;
     // star catalog epoch, to make sure the parameters used to calculate the expected values with astropy are consistent with the catalog
     test6DAstrometryPropagation(gaiaID, 0.f, 187.43783675, -59.02388257, 1000. / 144.35847096, -2.733, -21.946, 0.);
     // +50000 years from star catalog epoch
@@ -117,7 +118,7 @@ void TestAstrometry::testCrux()  // test a random Gaia star within the Crux that
 
 void TestAstrometry::testBrightNoPlx()  // test a bright Gaia star without parallax but with radial velocity
 {
-    int64_t gaiaID = 1998148532777850880;
+    StarId gaiaID = 1998148532777850880;
     // star catalog epoch, to make sure the parameters used to calculate the expected values with astropy are consistent with the catalog
     test6DAstrometryPropagation(gaiaID, 0.f, 358.59593000622834, 57.49936804016163, 0., -4.6991464250248995, -3.1120532783839017, -55.2);
     // simply check the case where radial velocity can be inf/nan when there is no parallax for a star

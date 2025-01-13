@@ -91,7 +91,7 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 		}
 		else
 		{
-			constellation[i]=starMgr->searchGaia(static_cast<int64_t>(HP));
+			constellation[i]=starMgr->searchGaia(HP);
 		}
 
 		if (!constellation[i])

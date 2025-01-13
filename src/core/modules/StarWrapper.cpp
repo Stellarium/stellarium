@@ -93,11 +93,11 @@ QString StarWrapper1::getObjectType() const
 	StarId star_id;
 	if (s->getHip())
 	{
-		star_id = static_cast<StarId>(s->getHip());
+		star_id = s->getHip();
 	}
 	else
 	{
-		star_id = static_cast<StarId>(s->getGaia());
+		star_id = s->getGaia();
 	}
 
 	const QString varType = StarMgr::getGcvsVariabilityType(star_id);
@@ -140,11 +140,11 @@ QString StarWrapper1::getObjectTypeI18n() const
 	StarId star_id;
 	if (s->getHip())
 	{
-		star_id = static_cast<StarId>(s->getHip());
+		star_id = s->getHip();
 	}
 	else
 	{
-		star_id = static_cast<StarId>(s->getGaia());
+		star_id = s->getGaia();
 	}
 	const QString varType = StarMgr::getGcvsVariabilityType(star_id);
 	if (!varType.isEmpty())
@@ -174,9 +174,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	StarId star_id;
 	if (s->getHip())
-		star_id = static_cast<StarId>(s->getHip());
+		star_id = s->getHip();
 	else
-		star_id = static_cast<StarId>(s->getGaia());
+		star_id = s->getGaia();
 
 	const QString varType = StarMgr::getGcvsVariabilityType(star_id);
 	const QString objType = StarMgr::convertToOjectTypes(s->getObjType());
@@ -480,11 +480,11 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 	StarId star_id;
 	if (s->getHip())
 	{
-		star_id = static_cast<StarId>(s->getHip());
+		star_id = s->getHip();
 	}
 	else
 	{
-		star_id = static_cast<StarId>(s->getGaia());
+		star_id = s->getGaia();
 	}
 	const QString varType = StarMgr::getGcvsVariabilityType(star_id);
 	const int wdsObs = StarMgr::getWdsLastObservation(star_id);

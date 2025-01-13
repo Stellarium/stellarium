@@ -88,7 +88,7 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 				}
 				else
 				{
-					asterism[i]=starMgr->searchGaia(static_cast<int64_t>(HP));
+					asterism[i]=starMgr->searchGaia(HP);
 				}
 				
 				if (!asterism[i])

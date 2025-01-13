@@ -25,6 +25,7 @@
 
 #include "ZoneData.hpp"
 #include "Star.hpp"
+#include "StarMgr.hpp"
 
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
@@ -96,8 +97,8 @@ public:
 	//! Pure virtual method. See subclass implementation.
 	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
 							  QList<StelObjectP > &result) = 0;
-    virtual StelObjectP searchGaiaID(int index, const int64_t source_id, int& matched) const = 0;
-	virtual void searchGaiaIDepochPos(const int64_t source_id, float dyrs,
+    virtual StelObjectP searchGaiaID(int index, const StarId source_id, int& matched) const = 0;
+	virtual void searchGaiaIDepochPos(const StarId source_id, float dyrs,
                                                   double & RA,
                                                   double & DEC,
                                                   double & Plx,
@@ -186,8 +187,8 @@ protected:
 
 	void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
 	                  QList<StelObjectP > &result) override;
-	StelObjectP searchGaiaID(int index, const int64_t source_id, int& matched) const override;
- 	void searchGaiaIDepochPos(const int64_t source_id, float dyrs,
+	StelObjectP searchGaiaID(int index, const StarId source_id, int& matched) const override;
+ 	void searchGaiaIDepochPos(const StarId source_id, float dyrs,
                                                   double & RA,
                                                   double & DEC,
                                                   double & Plx,

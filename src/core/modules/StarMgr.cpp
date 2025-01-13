@@ -1384,7 +1384,7 @@ StelObjectP StarMgr::searchHP(int hp) const
 }
 
 // Search the star by Gaia source_id
-StelObjectP StarMgr::searchGaia(int64_t source_id) const
+StelObjectP StarMgr::searchGaia(StarId source_id) const
 {
 	int maxSearchLevel = getMaxSearchLevel();
 	int matched = 0;

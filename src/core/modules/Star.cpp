@@ -33,7 +33,7 @@ QString Star1::getNameI18n(void) const
 	StarId star_id;
 	if (getHip())
 	{
-		star_id = static_cast<StarId>(getHip());
+		star_id = getHip();
 	}
 	else
 	{
@@ -52,7 +52,7 @@ QString Star1::getScreenNameI18n(void) const
 	QStringList starNames;
 	StarId star_id;
 	if (getHip())
-		star_id = static_cast<StarId>(getHip());
+		star_id = getHip();
 	else
 		star_id = getGaia();
 	if (!StarMgr::getDesignationUsage())
@@ -79,7 +79,7 @@ QString Star1::getDesignation() const
 	QStringList starNames;
 	StarId star_id;
 	if (getHip())
-		star_id = static_cast<StarId>(getHip());
+		star_id = getHip();
 	else
 		star_id = getGaia();
 	starNames << StarMgr::getSciName(star_id).split(" - ");

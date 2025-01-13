@@ -24,6 +24,7 @@
 
 #include "StelObjectType.hpp"
 #include "StelUtils.hpp"
+#include "StarMgr.hpp"
 #include "ZoneData.hpp"
 #include <QString>
 #include <QtEndian>
@@ -92,7 +93,7 @@ struct Star
    // VIP flag is for situation where it can bypass some check (e.g., magnitude display cutoff for Star1 in far
    // past/future)
    inline bool    isVIP() const { return static_cast<const Derived *>(this)->isVIP(); }
-   inline int64_t getGaia() const { return static_cast<const Derived *>(this)->getGaia(); }
+   inline StarId  getGaia() const { return static_cast<const Derived *>(this)->getGaia(); }
    inline bool    hasName() const { return static_cast<const Derived *>(this)->hasName(); }
    inline QString getNameI18n() const { return static_cast<const Derived *>(this)->getNameI18n(); }
    inline QString getScreenNameI18n() const { return static_cast<const Derived *>(this)->getScreenNameI18n(); }
@@ -287,16 +288,16 @@ public:
       // no point of doing proper propagation if any of them is missing
       return (getPlx() || getPlxErr()) && (getPlx() / getPlxErr() > 5) && (getDx0() || getDx1() || getDx2()) && getRV();
    }
-   inline int getHip() const
+   inline StarId getHip() const
    {
       // Combine the 3 bytes into a 24-bit integer (little-endian)
       quint32 combined_value = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
       // Extract the 17-bit ID (shift right by 5 bits)
-      qint32  hip_id         = combined_value >> 5;
+      quint64  hip_id         = combined_value >> 5;
       return hip_id;
    }
 
-   inline int64_t getGaia() const { return d.gaia_id; }
+   inline StarId  getGaia() const { return d.gaia_id; }
    inline int     getComponentIds() const
    {
       // Combine the 3 bytes into a 24-bit integer (little-endian)
@@ -345,7 +346,7 @@ public:
       return sqrt((getDx0() * cos(getX1()) * getDx0() * cos(getX1())) + (getDx1() * getDx1()));
    }
    StelObjectP    createStelObject(const SpecialZoneArray<Star2> * a, const SpecialZoneData<Star2> * z) const;
-   int64_t        getGaia() const { return d.gaia_id; }
+   StarId         getGaia() const { return d.gaia_id; }
    float          getBV(void) const { return static_cast<float>(d.b_v) / 1000.f; }
    QString        getNameI18n(void) const { return QString(); }
    QString        getScreenNameI18n(void) const { return QString(); }
@@ -398,7 +399,7 @@ public:
    double         getRV() const { return 0.; }
    double         getBV() const { return (0.025 * d.b_v) - 1.; } // in mag
    double         getMag() const { return d.vmag * 20 + 16000; } // in milli-mag
-   int64_t        getGaia() const { return d.gaia_id; }
+   StarId         getGaia() const { return d.gaia_id; }
    QString        getNameI18n() const { return QString(); }
    QString        getScreenNameI18n() const { return QString(); }
    QString        getDesignation() const { return QString(); }
