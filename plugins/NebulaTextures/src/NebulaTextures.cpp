@@ -40,10 +40,10 @@ StelPluginInfo NebulaTexturesStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
    info.id = "NebulaTextures";
-   info.displayedName = "Nebula Textures";
+   info.displayedName = N_("Nebula Textures");
    info.authors = "WANG Siliang";
    info.contact = "bd7jay@outlook.com";
-   info.description = "The plugin allows users to create and display their own astronomical sky images or even sketches in Stellarium, supporting both online plate solving for coordinate parsing or manual input of coordinates to localize the image, render it, and add it to the custom texture management system.";
+   info.description = N_("The plugin allows users to create and display their own astronomical sky images or even sketches in Stellarium, supporting both online plate solving for coordinate parsing or manual input of coordinates to localize the image, render it, and add it to the custom texture management system.");
    info.version = NEBULATEXTURES_PLUGIN_VERSION;
    info.license = NEBULATEXTURES_PLUGIN_LICENSE;
 	return info;
@@ -77,10 +77,6 @@ double NebulaTextures::getCallOrder(StelModuleActionName actionName) const
 
 void NebulaTextures::init()
 {
-   qDebug() << "init called for NebulaTextures";
-   // addAction("actionShow_NebulaTextures_ConfigDialog",
-   //           N_("Nebula Textures"), N_("Open Nebula Textures configuration dialog"),
-   //           configDialog, "visible");
    configDialog->reloadTextures();
 }
 
