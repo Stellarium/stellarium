@@ -393,10 +393,12 @@ public:
 	double getRotObliquity(double JDE) const;
 
 	//! Compute the position and orbital velocity in the parent Planet coordinate system and set aberrationPush
+	//! In case of the Sun, it is the heliocentric position and velocity so zeros are set
 	//! Does not compute new position when dateJDE is less than deltaJDE away from lastJDE
 	//! You can add the aberrationPush value according to Edot*lightTime in Explanatory Supplement (2013) formula 7.55.
 	virtual void computePosition(const StelObserver *observer, const double dateJDE, const Vec3d &aberrationPush);
 	//! Compute the position and orbital velocity in the parent Planet coordinate system, and return them in eclPosition and eclVelocity
+	//! In case of the Sun, it is the heliocentric position and velocity so zeros are set
 	//! These may be preferred when we want to avoid setting the actual position (e.g., RTS computation)
 	virtual void computePosition(const double dateJDE, Vec3d &eclPosition, Vec3d &eclVelocity) const;
 
@@ -493,7 +495,7 @@ public:
 	Vec3d getHeliocentricEclipticVelocity() const;
 
 	//! Return the barycentric ecliptical velocity in the solar system in ecliptical coordinates in AU/d. Required for aberration!
-	Vec3d getBarycentricEclipticVelocity() const;
+	Vec3d getBarycentricEclipticVelocity(double dateJDE) const;
 
 	//! Compute and return the distance to the given position in heliocentric ecliptical (J2000) coordinates (in AU)
 	//! Preserves result for later retrieval by getDistance()
