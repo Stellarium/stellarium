@@ -1768,7 +1768,7 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 	return res;
 }
 
-void Planet::computePosition(const StelObserver *observer, const double dateJDE, const Vec3d &aberrationPush)  // heliocentric
+void Planet::computePosition(const StelObserver *observer, const double dateJDE, const Vec3d &aberrationPush)
 {
 	// Having hundreds of Minor Planets makes this very slow. Especially on transitions between locations (StelCore::moveObserverTo())
 	// it seems acceptable to disable position updates for minor bodies.
@@ -1797,7 +1797,7 @@ void Planet::computePosition(const StelObserver *observer, const double dateJDE,
 	this->aberrationPush=aberrationPush;
 }
 
-void Planet::computePosition(const double dateJDE, Vec3d &eclPosition, Vec3d &eclVelocity) const  // heliocentric
+void Planet::computePosition(const double dateJDE, Vec3d &eclPosition, Vec3d &eclVelocity) const
 {
 	// if Sun, then position is always 0,0,0 because coordFunc is computing barycentric coordinates
 	if (this->getParent() == nullptr)
