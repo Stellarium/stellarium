@@ -2047,6 +2047,11 @@ double Planet::getMeanSolarDay() const
 // This is only needed for orbit drawing.
 Vec3d Planet::getEclipticPos(double dateJDE) const
 {
+	// for the Sun
+	if (parent == Q_NULLPTR)  // the Sun
+	{
+		return Vec3d(0., 0., 0.);
+	}
 	// Use current position if the time match.
 	if (fuzzyEquals(dateJDE, lastJDE))
 		return eclipticPos;
