@@ -41,25 +41,11 @@ environment:
     cmake_args:
     exiv2url: https://github.com/10110111/exiv2/releases/download/ver0.28.0-final/exiv2-0.28.0-2017msvc32.zip
     exiv2baseName: exiv2-0.28.0-2017msvc32
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    qtver: 5.15
-    qtbin: msvc2019_64
-    msvcname: Visual Studio 16 2019
-    cmake_args: -A x64
-    exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
-    exiv2baseName: exiv2-0.28.0-2019msvc64
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    qtver: 5.15
-    qtbin: msvc2019
-    msvcname: Visual Studio 16 2019
-    cmake_args: -A Win32
-    exiv2url: https://github.com/10110111/exiv2/releases/download/ver0.28.0-final/exiv2-0.28.0-2017msvc32.zip
-    exiv2baseName: exiv2-0.28.0-2017msvc32
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-    qtver: 6.8
-    qtbin: msvc2022_arm64
+    qtver: 6.5
+    qtbin: msvc2019_arm64
     msvcname: Visual Studio 17 2022
-    cmake_args: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.8/msvc2022_64 -DQt6LinguistTools_DIR=C:/Qt/6.8/msvc2022_64/lib/cmake/Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
+    cmake_args: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.5/msvc2019_64 -DQt6LinguistTools_DIR=C:/Qt/6.5/msvc2019_64/lib/cmake/Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
 before_build:
   - ps: if($env:qtbin.contains('_64')) { $env:BITS=64 } else { $env:BITS=32 }
   - ps: if($env:qtbin.contains('_64')) { $env:PKGARCH="x64" } else { $env:PKGARCH="x86" }
