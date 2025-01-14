@@ -3129,7 +3129,7 @@ Vec3d StelCore::getParallaxDiff(double JD) const {
 Vec3d StelCore::calculateAberrationVec(double JD) const {
 	// Solar system barycentric velocity
 	Q_UNUSED(JD);
-	Vec3d vel = getCurrentPlanet()->getBarycentricEclipticVelocity();
+	Vec3d vel = getCurrentPlanet()->getBarycentricEclipticVelocity(JD);
 	vel = StelCore::matVsop87ToJ2000 * vel * (AU/(86400.0*SPEED_OF_LIGHT));
 	return vel;
 }
