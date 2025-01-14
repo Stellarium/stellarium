@@ -493,7 +493,7 @@ public:
 	Vec3d getHeliocentricEclipticVelocity() const;
 
 	//! Return the barycentric ecliptical velocity in the solar system in ecliptical coordinates in AU/d. Required for aberration!
-	Vec3d getBarycentricEclipticVelocity() const;
+	Vec3d getBarycentricEclipticVelocity(double dateJDE) const;
 
 	//! Compute and return the distance to the given position in heliocentric ecliptical (J2000) coordinates (in AU)
 	//! Preserves result for later retrieval by getDistance()
