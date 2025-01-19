@@ -1,12 +1,6 @@
+get_filename_component(skyculturePath "${CMAKE_CURRENT_SOURCE_DIR}" REALPATH)
+get_filename_component(skyculture ${skyculturePath} NAME)
 
-########### install files ###############
-
-# install info.ini and star_names.fab
-INSTALL(FILES info.ini star_names.fab DESTINATION ${SDATALOC}/skycultures/modern_iau )
-
-# install constellations data, artwork and descriptions
-INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/modern_iau
-	FILES_MATCHING PATTERN "*.fab" 
-	PATTERN "*.png" 
-	PATTERN "*.utf8" 
-	PATTERN "CMakeFiles" EXCLUDE )
+install(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/${skyculture}
+        FILES_MATCHING PATTERN "*"
+        PATTERN "CMakeLists.txt" EXCLUDE)

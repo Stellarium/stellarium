@@ -34,6 +34,7 @@ class StarMgr;
 class Constellation;
 class StelProjector;
 class StelPainter;
+class StelSkyCulture;
 
 //! @class ConstellationMgr
 //! Display and manage the constellations.
@@ -338,7 +339,7 @@ private slots:
 
 	//! Loads new constellation data and art if the SkyCulture has changed.
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	void updateSkyCulture(const QString& skyCultureDir);
+	void updateSkyCulture(const StelSkyCulture& skyCulture);
 
 	//! Update i18n names from English names according to current
 	//! locale, and update font for locale.
@@ -352,37 +353,14 @@ private:
 	void setFlagCheckLoadingData(const bool flag) { checkLoadingData = flag; }
 	bool getFlagCheckLoadingData(void) const { return checkLoadingData; }
 
-	//! Read constellation names from the given file.
-	//! @param namesFile Name of the file containing the constellation names
-	//!        in a format consisting of abbreviation, native name and translatable english name.
-	//! @note The abbreviation must occur in the lines file loaded first in @name loadLinesAndArt()!
-	void loadNames(const QString& namesFile);
-
 	//! Load constellation line shapes, art textures and boundaries shapes from data files.
-	//! @param fileName The name of the constellation data file
-	//! @param artFileName The name of the constellation art data file
-	//! @param cultureName A string ID of the current skyculture
-	//! @note The abbreviation used in @param filename is required for cross-identifying translatable names in @name loadNames():
-	void loadLinesAndArt(const QString& fileName, const QString& artfileName, const QString& cultureName);
+	//! @param constellationsData The structure describing all the constellations
+	void loadLinesNamesAndArt(const QJsonArray& constellationsData, const StelSkyCulture& culture, bool preferNativeNames);
 
 	//! Load the constellation boundary file.
 	//! This function deletes any currently loaded constellation boundaries
-	//! and loads a new set from the file passed as the parameter.  The boundary
-	//! data file consists of whitespace separated values (space, tab or newline).
-	//! Each boundary may span multiple lines, and consists of the following ordered
-	//! data items:
-	//!  - The number of vertices which make up in the boundary (integer).
-	//!  - For each vertex, two floating point numbers describing the ra and dec
-	//!    of the vertex.
-	//!  - The number of constellations which this boundary separates (always 2).
-	//!  - Two constellation abbreviations representing the constellations which
-	//!    the boundary separates.
-	//! @param conCatFile the path to the file which contains the constellation boundary data.
-	bool loadBoundaries(const QString& conCatFile);
-
-	//! Read seasonal rules for displaying constellations from the given file.
-	//! @param rulesFile Name of the file containing the seasonal rules
-	void loadSeasonalRules(const QString& rulesFile);
+	//! and loads a new set from the data passed as the parameter.
+	bool loadBoundaries(const QJsonArray& boundaryData, const QString& epoch);
 
 	//! Draw the constellation lines at the epoch given by the StelCore.
 	void drawLines(StelPainter& sPainter, const StelCore* core) const;
@@ -422,8 +400,6 @@ private:
 	bool isolateSelected; // true to pick individual constellations.
 	bool flagConstellationPick; // TODO: CLEAR DESCRIPTION
 	std::vector<std::vector<Vec3d> *> allBoundarySegments;
-
-	QString lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
 
 	QStringList constellationsEnglishNames;
 
