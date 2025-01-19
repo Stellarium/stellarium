@@ -1211,6 +1211,8 @@ StelSkyImageTile* NebulaTexturesDialog::get_aTile(QString key)
 {
    StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
    auto aTex = skyLayerMgr->allSkyLayers.find(key);
+   if(aTex == skyLayerMgr->allSkyLayers.end())
+      return NULL;
    StelSkyLayerMgr::SkyLayerElem* aElem = aTex.value();
    if (!aElem || !aElem->layer) return nullptr;
    StelSkyImageTile* aTile = dynamic_cast<StelSkyImageTile*>(aElem->layer.data());
