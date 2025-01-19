@@ -1,0 +1,86 @@
+/*
+ * Nebula Textures plug-in for Stellarium
+ *
+ * Copyright (C) 2024-2025 WANG Siliang
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "StelProjector.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
+#include "StelModuleMgr.hpp"
+#include "NebulaTextures.hpp"
+
+#include "StelModule.hpp"
+#include "NebulaTexturesDialog.hpp"
+
+#include <QDebug>
+
+StelModule* NebulaTexturesStelPluginInterface::getStelModule() const
+{
+   return new NebulaTextures();
+}
+
+StelPluginInfo NebulaTexturesStelPluginInterface::getPluginInfo() const
+{
+   // Allow to load the resources when used as a static plugin
+   // Q_INIT_RESOURCE(NebulaTextures);
+
+	StelPluginInfo info;
+   info.id = "NebulaTextures";
+   info.displayedName = N_("Nebula Textures");
+   info.authors = "WANG Siliang";
+   info.contact = "bd7jay@outlook.com";
+   info.description = N_("The plugin allows users to create and display their own astronomical sky images or even sketches in Stellarium, supporting both online plate solving for coordinate parsing or manual input of coordinates to localize the image, render it, and add it to the custom texture management system.");
+   info.version = NEBULATEXTURES_PLUGIN_VERSION;
+   info.license = NEBULATEXTURES_PLUGIN_LICENSE;
+	return info;
+}
+
+NebulaTextures::NebulaTextures()
+{
+   setObjectName("NebulaTextures");
+	font.setPixelSize(25);
+   configDialog = new NebulaTexturesDialog();
+}
+
+NebulaTextures::~NebulaTextures()
+{
+   // delete configDialog;
+}
+
+bool NebulaTextures::configureGui(bool show)
+{
+   if (show)
+      configDialog->setVisible(true);
+   return true;
+}
+
+double NebulaTextures::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ActionDraw)
+		return StelApp::getInstance().getModuleMgr().getModule("NebulaMgr")->getCallOrder(actionName)+10.;
+	return 0;
+}
+
+void NebulaTextures::init()
+{
+   configDialog->reloadTextures();
+}
+
+void NebulaTextures::draw(StelCore* core)
+{
+}
+
