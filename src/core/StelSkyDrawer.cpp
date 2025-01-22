@@ -389,7 +389,6 @@ bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 {
 	rcMag->radius = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), static_cast<float>(starRelativeScale)*1.40f*0.5f);
 	rcMag->radius *=starLinearScale;
-	rcMag->radius *=StelMainView::getInstance().getCustomScreenshotMagnification();
 	// Use now statically min_rmag = 0.5, because higher and too small values look bad
 	if (rcMag->radius < 0.3f)
 	{
@@ -419,6 +418,7 @@ bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 			rcMag->radius=MAX_LINEAR_RADIUS+std::sqrt(1.f+rcMag->radius-MAX_LINEAR_RADIUS)-1.f;
 		}
 	}
+	rcMag->radius *= StelApp::getInstance().getScreenScale();
 	return true;
 }
 
@@ -476,7 +476,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
 		return false;
 
-	const float radius = rcMag.radius * static_cast<float>(sPainter->getProjector()->getDevicePixelsPerPixel());
+	const float radius = rcMag.radius;
 	const float frand=StelApp::getInstance().getRandF();
 
 	// Random coef for star twinkling. twinkleFactor can introduce height-dependent twinkling.
