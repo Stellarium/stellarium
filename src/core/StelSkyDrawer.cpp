@@ -482,11 +482,13 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 	// Random coef for star twinkling. twinkleFactor can introduce height-dependent twinkling.
 	const float tw = ((flagStarTwinkle && (flagHasAtmosphere || flagForcedTwinkle))) ? (1.f-twinkleFactor*static_cast<float>(twinkleAmount)*frand)*rcMag.luminance : rcMag.luminance;
 
+	const float scale = StelApp::getInstance().getScreenScale();
 	// If the rmag is big, draw a big halo
-	if (flagDrawBigStarHalo && radius>MAX_LINEAR_RADIUS+5.f)
+	const float bigHaloThresholdRadius = (MAX_LINEAR_RADIUS+5)*scale;
+	if (flagDrawBigStarHalo && radius > bigHaloThresholdRadius)
 	{
-		float cmag = qMin(1.0f, qMin(rcMag.luminance, (radius-(MAX_LINEAR_RADIUS+5.f))/30.f));
-		float rmag = 150.f;
+		const float cmag = qMin(1.0f, qMin(rcMag.luminance, (radius-bigHaloThresholdRadius)/30.f/scale));
+		const float rmag = 150.f * scale;
 
 		texBigHalo->bind();
 		sPainter->setBlending(true, GL_ONE, GL_ONE);
