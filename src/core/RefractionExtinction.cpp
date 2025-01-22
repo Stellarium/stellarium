@@ -153,8 +153,8 @@ void Refraction::updatePrecomputed()
 
 void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 {
-	const double length = altAzPos.norm();
-	if (length==0.0)
+	const double length = altAzPos.norm();	
+	if (qFuzzyCompare(length, 0.0) || qIsNaN(length))
 	{
 		// Under some circumstances there are zero coordinates. Just leave them alone.
 		//qDebug() << "Refraction::innerRefractionForward(): Zero vector detected - Continue with zero vector.";
@@ -199,7 +199,7 @@ void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 {
 	const double length = altAzPos.norm();
-	if (length==0.0)
+	if (qFuzzyCompare(length, 0.0) || qIsNaN(length))
 	{
 		// Under some circumstances there are zero coordinates. Just leave them alone.
 		//qDebug() << "Refraction::innerRefractionBackward(): Zero vector detected - Continue with zero vector.";
