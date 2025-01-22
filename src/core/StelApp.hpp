@@ -225,6 +225,9 @@ public:
 	//! change GUI font size.
 	void setGuiFontSize(int s);
 
+	//! Combines #getDevicePixelsPerPixel and #getScreenFontSize
+	float getScreenScale() const;
+
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
 	//! Tell the StelApp instance which GUI is currently being used.
