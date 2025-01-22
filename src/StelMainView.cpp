@@ -623,7 +623,6 @@ StelMainView::StelMainView(QSettings* settings)
 	  customScreenshotWidth(1024),
 	  customScreenshotHeight(768),
 	  screenshotDpi(72),
-	  customScreenshotMagnification(1.0f),
 	  screenShotPrefix("stellarium-"),
 	  screenShotFormat("png"),
 	  screenShotFileMask("yyyyMMdd-hhmmssz"),
@@ -1764,8 +1763,6 @@ void StelMainView::doScreenshot(void)
 	sParams.viewportXywh[2] = virtImgWidth;
 	sParams.viewportXywh[3] = virtImgHeight;
 
-	// Configure a helper value to allow some modules to tweak their output sizes. Currently used by StarMgr, maybe solve font issues?
-	customScreenshotMagnification=static_cast<float>(virtImgHeight)/static_cast<float>(screen->geometry().height());
 	sParams.viewportCenter.set(0.0+(0.5+pParams.viewportCenterOffset.v[0])*virtImgWidth,
 							   0.0+(0.5+pParams.viewportCenterOffset.v[1])*virtImgHeight);
 	sParams.viewportFovDiameter = qMin(virtImgWidth,virtImgHeight);
@@ -1801,7 +1798,6 @@ void StelMainView::doScreenshot(void)
 	delete fbObj;
 	// reset viewport and GUI
 	core->setCurrentStelProjectorParams(pParams);
-	customScreenshotMagnification=1.0f;
 	nightModeEffect->setEnabled(nightModeWasEnabled);
 	stelScene->setSceneRect(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 	rootItem->setSize(QSize(pParams.viewportXywh[2], pParams.viewportXywh[3]));
