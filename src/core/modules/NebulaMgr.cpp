@@ -170,6 +170,17 @@ void NebulaMgr::setFlagOutlines(const bool flag)
 	}
 }
 
+bool NebulaMgr::getFlagShowOnlyNamedDSO(void) const {return Nebula::flagShowOnlyNamedDSO; }
+void NebulaMgr::setFlagShowOnlyNamedDSO(const bool flag)
+{
+	if(Nebula::flagShowOnlyNamedDSO!=flag)
+	{
+		Nebula::flagShowOnlyNamedDSO=flag;
+		StelApp::immediateSave("astro/flag_show_only_named_dso", flag);
+		emit flagShowOnlyNamedDSOChanged(flag);
+	}
+}
+
 NebulaMgr::NebulaMgr(void) : StelObjectModule()
 	, nebGrid(200)
 	, hintsAmount(0)
@@ -228,6 +239,7 @@ void NebulaMgr::init()
 	setFlagSurfaceBrightnessUsage(conf->value("astro/flag_surface_brightness_usage", false).toBool());
 	setFlagSurfaceBrightnessArcsecUsage(conf->value("gui/flag_surface_brightness_arcsec", false).toBool());
 	setFlagSurfaceBrightnessShortNotationUsage(conf->value("gui/flag_surface_brightness_short", false).toBool());
+	setFlagShowOnlyNamedDSO(conf->value("astro/flag_show_only_named_dso", false).toBool());
 
 	setFlagSizeLimitsUsage(conf->value("astro/flag_size_limits_usage", false).toBool());
 	setMinSizeLimit(conf->value("astro/size_limit_min", 1.0).toDouble());
@@ -566,6 +578,9 @@ struct DrawNebulaFuncObject
 			return;
 
 		if (!n->objectInDisplayedCatalog())
+			return;
+
+		if (n->flagShowOnlyNamedDSO && n->getEnglishName().isEmpty())
 			return;
 
 		if (!n->objectInAllowedSizeRangeLimits())

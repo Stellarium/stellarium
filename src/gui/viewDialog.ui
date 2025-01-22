@@ -2583,6 +2583,13 @@
                  </property>
                 </widget>
                </item>
+               <item row="8" column="0">
+                <widget class="QCheckBox" name="checkBoxShowOnlyNamedDSO">
+                 <property name="text">
+                  <string>Show only named DSO</string>
+                 </property>
+                </widget>
+               </item>
                <item row="4" column="0">
                 <widget class="QCheckBox" name="checkBoxOutlines">
                  <property name="text">
@@ -2686,14 +2693,14 @@
                  </property>
                 </widget>
                </item>
-               <item row="9" column="0">
+               <item row="10" column="0">
                 <widget class="QPushButton" name="pushButtonConfigureDSOColors">
                  <property name="text">
                   <string>Configure colors of markers</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="0">
+               <item row="9" column="0">
                 <layout class="QGridLayout" name="gridLayout_17">
                  <item row="1" column="0">
                   <widget class="QCheckBox" name="nebulaLimitSizeCheckBox">
