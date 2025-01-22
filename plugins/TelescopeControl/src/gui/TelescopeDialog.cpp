@@ -120,7 +120,7 @@ void TelescopeDialog::createDialogContent()
 	connect(ui->pushButtonAdd, SIGNAL(clicked()), this, SLOT(buttonAddPressed()));
 	connect(ui->pushButtonRemove, SIGNAL(clicked()), this, SLOT(buttonRemovePressed()));
 	
-	connect(ui->telescopeTreeView, SIGNAL(clicked (const QModelIndex &)), this, SLOT(selectTelecope(const QModelIndex &)));
+	connect(ui->telescopeTreeView, SIGNAL(clicked (const QModelIndex &)), this, SLOT(selectTelescope(const QModelIndex &)));
 	//connect(ui->telescopeTreeView, SIGNAL(activated (const QModelIndex &)), this, SLOT(configureTelescope(const QModelIndex &)));
 	
 	//Page: Options:
@@ -636,7 +636,7 @@ void TelescopeDialog::updateModelRow(int rowNumber,
 }
 
 
-void TelescopeDialog::selectTelecope(const QModelIndex & index)
+void TelescopeDialog::selectTelescope(const QModelIndex & index)
 {
 	//Extract selected item index
 	int selectedSlot = telescopeListModel->data( telescopeListModel->index(index.row(),0) ).toInt();
