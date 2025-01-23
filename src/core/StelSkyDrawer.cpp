@@ -544,7 +544,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 	const float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
 	// Assume a disk shape
 	float pixRadius = std::sqrt(illuminatedArea/(60.f*60.f)*M_PI_180f*M_PI_180f*(pixPerRad*pixPerRad))/M_PIf;
-	float pxRd = pixRadius*3.f+100.f;
+	float pxRd = pixRadius*3.f+100.f*scale;
 	bool noStarHalo = false;
 
 	if (isSun)
@@ -554,8 +554,8 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 		texSunHalo->bind();
 		painter->setBlending(true, GL_ONE, GL_ONE);
 
-		float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
-		float cmag = (rmag>=pxRd) ? 1.f : qMax(0.15f, 1.f-(pxRd-rmag)/100); // was qMax(0, .), but this would remove the halo when sun is dim.
+		const float rmag = big3dModelHaloRadius*scale*(mag+15.f)/-11.f;
+		const float cmag = (rmag>=pxRd) ? 1.f : qMax(0.15f, 1.f-(pxRd-rmag)/100/scale); // was qMax(0, .), but this would remove the halo when sun is dim.
 		Vec3f win;
 		painter->getProjector()->project(v, win);
 		painter->setColor(color*cmag);
