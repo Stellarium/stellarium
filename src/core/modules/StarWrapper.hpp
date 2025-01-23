@@ -79,7 +79,8 @@ protected:
 	{
 		Vec3d v;
 		s->getJ2000Pos((core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25, v);
-
+		// in case it is in a binary system
+		s->getBinaryOrbit(core->getJDE(), v);
 		double withParallax = core->getUseParallax() * core->getParallaxFactor();
 		if (withParallax) {
 			const Vec3d diffPos = core->getParallaxDiff(core->getJDE());
