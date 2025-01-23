@@ -342,6 +342,27 @@ struct Star
          primary_mass = 0.70;
          secondary_mass = 0.63;
       }
+      else if ((getHip() == 61941) || (getGaia() == 3683687763520080256))  // Gamma Virginis A and B
+      {
+         // Source: https://ui.adsabs.harvard.edu/abs/2006AJ....132.2219M
+         primary_hip = 61941;
+         secondary_hip = 3683687763520080256;
+         binary_period = 168.93 * 365.25;
+         eccentricity = 0.8825;
+         inclination = 148.82 * M_PI_180;
+         big_omega = 35.34 * M_PI_180;
+         small_omega = 255.02 * M_PI_180;
+         periastron_epoch = 2453531.2295;
+         semi_major = 3.662;
+         bary_distance = 1000. / 85.58;
+         bary_ra = 190.4149391943586 * M_PI_180;
+         bary_dec = -1.4494030396953002 * M_PI_180;
+         bary_rv = -19.8;  // km/s
+         bary_pmra=-569.747,
+         bary_pmdec=10.7155,
+         primary_mass = 1.4;
+         secondary_mass = 1.4;
+      }
       else
       {
          // exit the function because nothing to do, not a binary star
