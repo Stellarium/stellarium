@@ -300,6 +300,8 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	double RadialVel = s->getRV();
 	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+	Vec3d v;
+	s->getBinaryOrbit(core->getJDE(), v, RA, DEC, Plx, pmra, pmdec, RadialVel);
 
 	float magOffset = 0.f;
 	if (Plx)
