@@ -312,9 +312,7 @@ float StelProjector::getPixelPerRadAtCenter() const
 
 float StelProjector::getScreenScale() const
 {
-	const float dppRatio = getDevicePixelsPerPixel();
-	const float fontRatio = StelApp::getInstance().screenFontSizeRatio();
-	return dppRatio * fontRatio;
+	return StelApp::getInstance().getScreenScale();
 }
 
 //! Get the current FOV diameter in degrees

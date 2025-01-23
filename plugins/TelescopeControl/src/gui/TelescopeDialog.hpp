@@ -81,7 +81,7 @@ private slots:
 	//! Slot for receiving information from TelescopeConfigurationDialog
 	void discardChanges(void);
 	
-	void selectTelecope(const QModelIndex &);
+	void selectTelescope(const QModelIndex &);
 	void configureTelescope(const QModelIndex &);
 	
 	//! Update the list of telescopes with their current states.

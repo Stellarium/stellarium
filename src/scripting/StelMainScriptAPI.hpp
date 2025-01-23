@@ -962,6 +962,8 @@ public slots:
 	//! - Linux
 	//! - Windows
 	//! - macOS
+	//! - Haiku
+	//! - Solaris
 	//! - Unknown
 	static QString getPlatformName(void);
 
