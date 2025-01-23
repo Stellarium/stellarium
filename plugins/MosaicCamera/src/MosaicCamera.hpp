@@ -21,38 +21,70 @@
 
 #include "StelModule.hpp"
 #include "StelPluginInterface.hpp"
-#include <QColor>
-#include <QVector>
-#include <QObject>
-#include <QPointF>
-#include <QSettings>
-#include <QString>
 
 class MosaicCameraDialog;
 
-struct PolygonSet {
-    QString name;
-    QVector<QVector<QPointF>> corners;
-    QColor color;
+/*! @defgroup mosaicCamera Mosaic Camera plug-in
+@{
+The Mosaic Camera plugin overlays camera sensor boundaries on the sky.
+@}
+*/
+
+/// @brief Represents a set of polygons with associated properties.
+struct PolygonSet
+{
+    QString name;                      ///< The name of the polygon set.
+    QVector<QVector<QPointF>> corners; ///< Polygons as vectors of corner points.
+    QColor color;                      ///< Color associated with the polygon set.
 };
 
-struct Camera {
-    QString name;
-	double ra;
-	double dec;
-	double rotation;
-    bool visible;
-    QVector<PolygonSet> polygon_sets;
+
+/// @brief Represents a camera with its properties and associated polygon sets.
+struct Camera
+{
+    QString name;                    ///< The name of the camera.
+    double ra;                       ///< Right Ascension of camera pointing [deg]
+    double dec;                      ///< Declination of camera pointing [deg]
+    double rotation;                 ///< Rotation angle of the camera [deg]
+    bool visible;                    ///< Visibility status of the camera.
+    QVector<PolygonSet> polygon_sets; ///< Collection of polygon sets associated with the camera.
 };
 
+//! @class MosaicCamera
+//! @ingroup mosaicCamera
+//! Main class of the Mosaic Camera plug-in.
+//! @author Josh Meyers
 class MosaicCamera : public StelModule
 {
 	Q_OBJECT
+    /**
+     * @name Camera properties
+     * @{
+     * We maintain the concept of a "current" camera primarily for the convenience of
+	 * setting and getting properties through the Stellarium Remove Control HTTP API.
+     */
+
+	/// @property currentCamera
+	/// @brief The name of the current camera
 	Q_PROPERTY(QString currentCamera READ getCurrentCamera WRITE setCurrentCamera )
+
+	/// @property ra
+	/// @brief Set or get the current camera's right ascension [deg]
 	Q_PROPERTY(double ra             READ getRA            WRITE setRA )
+
+	/// @property dec
+	/// @brief Set or get the current camera's declination [deg]
 	Q_PROPERTY(double dec            READ getDec           WRITE setDec )
+
+	/// @property rotation
+	/// @brief Set or get the current camera's rotation [deg]
 	Q_PROPERTY(double rotation       READ getRotation      WRITE setRotation )
+
+	/// @property visible
+	/// @brief Set or get the current camera's visibility
 	Q_PROPERTY(bool visible          READ getVisibility    WRITE setVisibility )
+
+    /** @} */
 
 public:
 	MosaicCamera();
