@@ -466,7 +466,7 @@ struct Star
                             bary_distance + sky_orbit[2], 
                             sky_orbit);  // barycenter position in equatorial cartesian coordinate
 
-      v = sky_orbit - bary_r + bary_u;
+      v = sky_orbit - bary_r * bary_distance + bary_u;
  
       bary_u.normalize();
       plx = 1000. / bary_distance * bary_f;
