@@ -18,17 +18,15 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-// #include <QFileDialog>
-
-#include "StelApp.hpp"
-#include "ui_mosaicCameraDialog.h"
-#include "MosaicCameraDialog.hpp"
 #include "MosaicCamera.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelStyle.hpp"
+#include "MosaicCameraDialog.hpp"
+#include "ui_mosaicCameraDialog.h"
+
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
-
+#include "StelApp.hpp"
+#include "StelModule.hpp"
+#include "StelModuleMgr.hpp"
 
 MosaicCameraDialog::MosaicCameraDialog()
 	: StelDialog("MosaicCamera")

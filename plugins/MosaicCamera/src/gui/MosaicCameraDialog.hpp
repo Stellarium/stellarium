@@ -26,7 +26,6 @@
 #include "MosaicCamera.hpp"
 
 class Ui_mosaicCameraDialog;
-class QTimer;
 class MosaicCamera;
 
 class MosaicCameraDialog : public StelDialog
