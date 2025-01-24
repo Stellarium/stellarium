@@ -153,6 +153,7 @@ void ObsListDialog::createDialogContent()
 	ui->treeView->header()->setStretchLastSection(true);
 	//Enable the sort for columns
 	ui->treeView->setSortingEnabled(true);
+	connect(ui->treeView->header(), SIGNAL(sectionClicked(int)), this, SLOT(headerClicked(int)));
 
 	// Load all observing lists from JSON.
 	// We need to load the global list only once!
@@ -1439,7 +1440,10 @@ void ObsListDialog::sortObsListTreeViewByColumnName(const QString &columnName)
 		{SORTING_BY_LOCATION,      ColumnLocation},
 		{SORTING_BY_LANDSCAPE_ID,  ColumnLandscapeID}
 	};
-	itemModel->sort(map.value(columnName), Qt::AscendingOrder);
+    ObsListDialogSortFilterProxyModel *proxyModel = new ObsListDialogSortFilterProxyModel;
+    proxyModel->setSourceModel(itemModel);
+    ui->treeView->setModel(proxyModel);
+    proxyModel->sort(map.value(columnName), Qt::AscendingOrder);
 }
 
 void ObsListDialog::setFlagUseJD(bool b)
@@ -1521,6 +1525,7 @@ void ObsListDialog::headerClicked(int index)
 		{ColumnLandscapeID,   SORTING_BY_LANDSCAPE_ID}};
 	sorting=map.value(index, "");
 	//qDebug() << "Sorting = " << sorting;
+	sortObsListTreeViewByColumnName(sorting);
 }
 
 // Get the magnitude from selected object (or a dash if unavailable)
@@ -1602,3 +1607,26 @@ const QString ObsListDialog::SORTING_BY_LANDSCAPE_ID  = QStringLiteral("landscap
 const QString ObsListDialog::CUSTOM_OBJECT = QStringLiteral("CustomObject");
 
 const QString ObsListDialog::DASH = QString(QChar(0x2014));
+
+bool ObsListDialogSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
+{
+    if (sortColumn() == ObsListDialog::ColumnRa)
+    {
+        QString raLeft = sourceModel()->data(left).toString();
+        QString raRight = sourceModel()->data(right).toString();
+        return StelUtils::getDecAngle(raLeft) < StelUtils::getDecAngle(raRight);
+    }
+    if (sortColumn() == ObsListDialog::ColumnDec)
+    {
+        QString decLeft = sourceModel()->data(left).toString();
+        QString decRight = sourceModel()->data(right).toString();
+        return StelUtils::getDecAngle(decLeft) < StelUtils::getDecAngle(decRight);
+    }
+    if (sortColumn() == ObsListDialog::ColumnMagnitude)
+    {
+        QString magLeft = sourceModel()->data(left).toString();
+        QString magRight = sourceModel()->data(right).toString();
+        return magLeft.toDouble() < magRight.toDouble();
+    }
+    return QSortFilterProxyModel::lessThan(left, right);
+}
