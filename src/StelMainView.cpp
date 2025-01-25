@@ -395,17 +395,14 @@ protected:
 		//a sanity check
 		Q_ASSERT(mainView->glContext() == QOpenGLContext::currentContext());
 
-		{
-			static int oldViewportWidth, oldViewportHeight;
-			GLint viewport[4] = {};
-			GL(QOpenGLContext::currentContext()->functions()->glGetIntegerv(GL_VIEWPORT, viewport));
-			if(viewport[2] != oldViewportWidth || viewport[3] != oldViewportHeight)
-			{
-				qDebug() << "Early painting: OpenGL viewport size: " << viewport[2] << "x" << viewport[3];
-				oldViewportWidth = viewport[2];
-				oldViewportHeight = viewport[3];
-			}
-		}
+		StelApp& app = StelApp::getInstance();
+
+		// This can change even on the screen even without actual system settings change.
+		// E.g. in KWin 6.1.5 with Wayland backend, if we set 150% scale in System Settings,
+		// the app first gets device pixel ratio of 200%, then the widgets are rescaled to 150%
+		// while the screen still remains at 200%. This is ugly, and shouldn't behave like this,
+		// but the following call seems to be enough to get things working right.
+		app.setDevicePixelsPerPixel(mainView->devicePixelRatioF());
 
 		const double now = StelApp::getTotalRunTime();
 		double dt = now - previousPaintTime;
@@ -421,7 +418,6 @@ protected:
 #endif
 
 		//update and draw
-		StelApp& app = StelApp::getInstance();
 		app.update(dt); // may also issue GL calls
 		app.draw();
 		painter->endNativePainting();
