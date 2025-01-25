@@ -937,6 +937,10 @@ void StelApp::highGraphicsModeDraw()
 	StelOpenGL::checkGLErrors(__FILE__, __LINE__);
 	if(!sceneFBO || sceneFBO->size() != QSize(w,h))
 	{
+		GLint viewport[4] = {};
+		GL(gl->glGetIntegerv(GL_VIEWPORT, viewport));
+		qDebug() << "OpenGL viewport size:" << viewport[2] << "x" << viewport[3];
+
 		qDebug().nospace() << "Creating scene FBO with size " << w << "x" << h;
 		const auto internalFormat = GL_RGBA16;
 		QOpenGLFramebufferObjectFormat format;
