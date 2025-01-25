@@ -2519,7 +2519,6 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	if (!getFlagPlanets())
 		return result;
 
-	const bool withAberration=core->getUseAberration();
 	Vec3d v(vv);
 	
 	double cosLimFov = std::cos(limitFov * M_PI/180.);
