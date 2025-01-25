@@ -395,6 +395,18 @@ protected:
 		//a sanity check
 		Q_ASSERT(mainView->glContext() == QOpenGLContext::currentContext());
 
+		{
+			static int oldViewportWidth, oldViewportHeight;
+			GLint viewport[4] = {};
+			GL(QOpenGLContext::currentContext()->functions()->glGetIntegerv(GL_VIEWPORT, viewport));
+			if(viewport[2] != oldViewportWidth || viewport[3] != oldViewportHeight)
+			{
+				qDebug() << "Early painting: OpenGL viewport size: " << viewport[2] << "x" << viewport[3];
+				oldViewportWidth = viewport[2];
+				oldViewportHeight = viewport[3];
+			}
+		}
+
 		const double now = StelApp::getTotalRunTime();
 		double dt = now - previousPaintTime;
 		//qDebug()<<"dt"<<dt;
