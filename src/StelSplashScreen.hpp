@@ -42,6 +42,7 @@ class SplashScreen
 
 	protected:
 		void paintEvent(QPaintEvent*) override;
+		double sizeRatio = 1;
 	};
 
 	static SplashScreenWidget* instance;

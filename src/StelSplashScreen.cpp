@@ -24,13 +24,14 @@
 #include <cmath>
 
 static constexpr int BASE_FONT_SIZE = 11;
+static constexpr int BASE_PIXMAP_HEIGHT = 365;
 
 SplashScreen::SplashScreenWidget* SplashScreen::instance;
 
 static QPixmap makePixmap(const double sizeRatio)
 {
 	QPixmap pixmap(StelFileMgr::findFile("data/splash.png"));
-	pixmap = pixmap.scaledToHeight(std::lround(pixmap.height() * sizeRatio),
+	pixmap = pixmap.scaledToHeight(std::lround(BASE_PIXMAP_HEIGHT * sizeRatio),
 	                               Qt::SmoothTransformation);
 	return pixmap;
 }
@@ -66,6 +67,7 @@ void SplashScreen::clearMessage()
 
 SplashScreen::SplashScreenWidget::SplashScreenWidget(QPixmap const& pixmap, const double sizeRatio)
 	: QSplashScreen(pixmap)
+	, sizeRatio(sizeRatio)
 {
 	splashFont.setPixelSize(std::lround(BASE_FONT_SIZE * sizeRatio));
 
@@ -94,11 +96,12 @@ void SplashScreen::SplashScreenWidget::paintEvent(QPaintEvent* event)
 #else
 	QFont versionFont(splashFont);
 	QString version = StelUtils::getApplicationPublicVersion();
-	versionFont.setPixelSize(23);
+	versionFont.setPixelSize(23 * sizeRatio);
 	versionFont.setBold(true);
 	QFontMetrics versionMetrics(versionFont);
 	p.setFont(versionFont);
-	p.drawText(365 - versionMetrics.horizontalAdvance(version), 293, version);
+	const int height = BASE_PIXMAP_HEIGHT * sizeRatio;
+	p.drawText(height - versionMetrics.horizontalAdvance(version), 0.803 * height, version);
 #endif
 
 	painted=true;
