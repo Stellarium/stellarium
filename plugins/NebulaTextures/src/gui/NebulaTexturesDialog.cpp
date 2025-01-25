@@ -314,9 +314,9 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
 	QNetworkRequest request(uploadUrl);
 	QJsonObject uploadJson;
 	uploadJson["session"] = session;
-	uploadJson["allow_commercial_use"] = "d";
-	uploadJson["allow_modifications"] = "d";
-	uploadJson["publicly_visible"] = "y";
+	uploadJson["allow_commercial_use"] = "n";
+	uploadJson["allow_modifications"] = "n";
+	uploadJson["publicly_visible"] = "n";
 	uploadJson["tweak_order"] = 0;
 	uploadJson["crpix_center"] = true;
 
