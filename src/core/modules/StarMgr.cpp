@@ -48,6 +48,7 @@
 
 #include <QTextStream>
 #include <QFile>
+#include <QBuffer>
 #include <QSettings>
 #include <QString>
 #include <QRegularExpression>
@@ -373,6 +374,14 @@ int StarMgr::getGcvsMM(StarId hip)
 	if (it!=varStarsMapI18n.end())
 		return it.value().Mm;
 	return -99;
+}
+
+QString StarMgr::getGcvsSpectralType(StarId hip)
+{
+	auto it = varStarsMapI18n.find(hip);
+	if (it!=varStarsMapI18n.end())
+		return it.value().stype;
+	return QString();
 }
 
 void StarMgr::copyDefaultConfigFile()
@@ -949,39 +958,54 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 	varStarsMapI18n.clear();
 	varStarsIndexI18n.clear();
 
-	qDebug().noquote() << "Loading variable stars from" << QDir::toNativeSeparators(GcvsFile);
+	qDebug().noquote() << "Loading variable stars data from" << QDir::toNativeSeparators(GcvsFile);
+
 	QFile vsFile(GcvsFile);
-	if (!vsFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	if (!vsFile.open(QIODevice::ReadOnly))
 	{
-		qWarning().noquote() << "WARNING - could not open" << QDir::toNativeSeparators(GcvsFile);
+		qDebug().noquote() << "Cannot open file" << QDir::toNativeSeparators(GcvsFile);
 		return;
 	}
-	const QStringList& allRecords = QString::fromUtf8(vsFile.readAll()).split('\n');
+	QByteArray data = StelUtils::uncompress(vsFile);
 	vsFile.close();
+	//check if decompressing was successful
+	if(data.isEmpty())
+	{
+		qDebug().noquote() << "Could not decompress file" << QDir::toNativeSeparators(GcvsFile);
+		return;
+	}
+	//create and open a QBuffer for reading
+	QBuffer buf(&data);
+	buf.open(QIODevice::ReadOnly);
 
 	int readOk=0;
 	int totalRecords=0;
 	int lineNumber=0;
+	// Version of GCVS catalog
+	static const QRegularExpression versionRx("\\s*Version:\\s*([\\d\\-\\.]+)\\s*");
 
 	// record structure is delimited with a tab character.
-	for (const auto& record : allRecords)
+	while (!buf.atEnd())
 	{
-		++lineNumber;
+		QString record = QString::fromUtf8(buf.readLine());
+		lineNumber++;
+
 		// skip comments and empty lines
 		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
+		{
+			QRegularExpressionMatch versionMatch=versionRx.match(record);
+			if (versionMatch.hasMatch())
+				qDebug().noquote() << "[...]" << QString("GCVS %1").arg(versionMatch.captured(1).trimmed());
 			continue;
+		}
 
-		++totalRecords;
+		totalRecords++;
 		const QStringList& fields = record.split('\t');
 
 		bool ok;
 		StarId hip = fields.at(0).toLongLong(&ok);
 		if (!ok)
-		{
-			qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(GcvsFile)
-				   << " - failed to convert " << fields.at(0) << "to a number";
 			continue;
-		}
 
 		// Don't set the star if it's already set
 		if (varStarsMapI18n.find(hip)!=varStarsMapI18n.end())
@@ -991,19 +1015,10 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 
 		variableStar.designation = fields.at(1).trimmed();
 		variableStar.vtype = fields.at(2).trimmed();
-		if (fields.at(3).isEmpty())
-			variableStar.maxmag = 99.f;
-		else
-			variableStar.maxmag = fields.at(3).toFloat();
+		variableStar.maxmag = fields.at(3).isEmpty() ? 99.f : fields.at(3).toFloat();
 		variableStar.mflag = fields.at(4).toInt();
-		if (fields.at(5).isEmpty())
-			variableStar.min1mag = 99.f;
-		else
-			variableStar.min1mag = fields.at(5).toFloat();
-		if (fields.at(6).isEmpty())
-			variableStar.min2mag = 99.f;
-		else
-			variableStar.min2mag = fields.at(6).toFloat();
+		variableStar.min1mag = fields.at(5).isEmpty() ? 99.f : fields.at(5).toFloat();
+		variableStar.min2mag = fields.at(6).isEmpty() ? 99.f : fields.at(6).toFloat();
 		variableStar.photosys = fields.at(7).trimmed();
 		variableStar.epoch = fields.at(8).toDouble();
 		variableStar.period = fields.at(9).toDouble();
@@ -1015,6 +1030,7 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 		++readOk;
 	}
 
+	buf.close();
 	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "variable stars";
 }
 
@@ -2050,9 +2066,9 @@ void StarMgr::populateStarsDesignations()
 	else
 		loadSciNames(fic, true);
 
-	fic = StelFileMgr::findFile("stars/hip_gaia3/gcvs_hip_part.dat");
+	fic = StelFileMgr::findFile("stars/hip_gaia3/gcvs.cat");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load variable stars file: stars/hip_gaia3/gcvs_hip_part.dat";
+		qWarning() << "WARNING: could not load variable stars file: stars/hip_gaia3/gcvs.cat";
 	else
 		loadGcvs(fic);
 

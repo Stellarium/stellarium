@@ -94,7 +94,7 @@ protected:
 			v+=vel;
 			v.normalize();
 		}
-		
+
 		return v;
 	}
 	Vec3f getInfoColor(void) const override
@@ -131,7 +131,7 @@ public:
 	//! <li> RaDec
 	//! <li> AltAzi
 	//! <li> Extra (spectral type, parallax)
-	//! <li> Distance	
+	//! <li> Distance
 	//! <li> PlainText </ul>
 	//! @param core the StelCore object.
 	//! @param flags a set of InfoStringGroup items to include in the return value.
@@ -165,6 +165,8 @@ public:
 			   const Star2 *star) : StarWrapper<Star2>(array,zone,star) {}
 	QString getID(void) const override { return QString(); }
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
+	QString getObjectType() const override;
+	QString getObjectTypeI18n() const override;
 };
 
 class StarWrapper3 : public StarWrapper<Star3>
@@ -175,6 +177,8 @@ public:
 			   const Star3 *star) : StarWrapper<Star3>(array,zone,star) {}
 	QString getID(void) const override { return QString(); }
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
+	QString getObjectType() const override;
+	QString getObjectTypeI18n() const override;
 };
 
 
