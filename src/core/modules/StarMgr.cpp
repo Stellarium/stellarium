@@ -141,7 +141,7 @@ QString StarMgr::convertToOjectTypes(int index)
 		qDebug() << "convertToObjTypeIds: bad index: " << index << ", max: " << objtype_array.size();
 		return "";
 	}
-	return objtype_array.at(index);
+	return objtype_array.at(index).trimmed();
 }
 
 
