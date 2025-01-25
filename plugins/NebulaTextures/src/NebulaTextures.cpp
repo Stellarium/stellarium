@@ -30,42 +30,42 @@
 
 StelModule* NebulaTexturesStelPluginInterface::getStelModule() const
 {
-   return new NebulaTextures();
+	return new NebulaTextures();
 }
 
 StelPluginInfo NebulaTexturesStelPluginInterface::getPluginInfo() const
 {
-   // Allow to load the resources when used as a static plugin
-   // Q_INIT_RESOURCE(NebulaTextures);
+	// Allow to load the resources when used as a static plugin
+	// Q_INIT_RESOURCE(NebulaTextures);
 
 	StelPluginInfo info;
-   info.id = "NebulaTextures";
-   info.displayedName = N_("Nebula Textures");
-   info.authors = "WANG Siliang";
-   info.contact = "bd7jay@outlook.com";
-   info.description = N_("The plugin allows users to create and display their own astronomical sky images or even sketches in Stellarium, supporting both online plate solving for coordinate parsing or manual input of coordinates to localize the image, render it, and add it to the custom texture management system.");
-   info.version = NEBULATEXTURES_PLUGIN_VERSION;
-   info.license = NEBULATEXTURES_PLUGIN_LICENSE;
+	info.id = "NebulaTextures";
+	info.displayedName = N_("Nebula Textures");
+	info.authors = "WANG Siliang";
+	info.contact = "bd7jay@outlook.com";
+	info.description = N_("The plugin allows users to create and display their own astronomical sky images or even sketches in Stellarium, supporting both online plate solving for coordinate parsing or manual input of coordinates to localize the image, render it, and add it to the custom texture management system.");
+	info.version = NEBULATEXTURES_PLUGIN_VERSION;
+	info.license = NEBULATEXTURES_PLUGIN_LICENSE;
 	return info;
 }
 
 NebulaTextures::NebulaTextures()
 {
-   setObjectName("NebulaTextures");
+	setObjectName("NebulaTextures");
 	font.setPixelSize(25);
-   configDialog = new NebulaTexturesDialog();
+	configDialog = new NebulaTexturesDialog();
 }
 
 NebulaTextures::~NebulaTextures()
 {
-   // delete configDialog;
+	// delete configDialog;
 }
 
 bool NebulaTextures::configureGui(bool show)
 {
-   if (show)
-      configDialog->setVisible(true);
-   return true;
+	if (show)
+		configDialog->setVisible(true);
+	return true;
 }
 
 double NebulaTextures::getCallOrder(StelModuleActionName actionName) const
@@ -77,10 +77,9 @@ double NebulaTextures::getCallOrder(StelModuleActionName actionName) const
 
 void NebulaTextures::init()
 {
-   configDialog->reloadTextures();
+	configDialog->reloadTextures();
 }
 
 void NebulaTextures::draw(StelCore* core)
 {
 }
-

@@ -166,12 +166,12 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		return;
 	}
 
-   if (flagVisible == false)
-   {
-      // Schedule a deletion
-      scheduleChildsDeletion();
-      return;
-   }
+	if (flagVisible == false)
+	{
+		// Schedule a deletion
+		scheduleChildsDeletion();
+		return;
+	}
 
 	// Check that we are in the screen
 	bool fullInScreen = true;

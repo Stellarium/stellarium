@@ -45,82 +45,82 @@ public:
 	NebulaTexturesDialog();
 	~NebulaTexturesDialog() override;
 
-   StelSkyImageTile* get_aTile(QString key);
+	StelSkyImageTile* get_aTile(QString key);
 
 public slots:
 	void retranslate() override;
 
 
-   QPair<double, double> PixelToCelestial(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
-                                          double CD1_1, double CD1_2, double CD2_1, double CD2_2);
+	QPair<double, double> PixelToCelestial(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
+							double CD1_1, double CD1_2, double CD2_1, double CD2_2);
 
-   void renderTempCustomTexture();
-   void unRenderTempCustomTexture();
+	void renderTempCustomTexture();
+	void unRenderTempCustomTexture();
 
-   void addTexture(QString addPath, QString keyName);
-   void registerTexture(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness, QString keyName, QString addPath);
+	void addTexture(QString addPath, QString keyName);
+	void registerTexture(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness, QString keyName, QString addPath);
 
-   void deleteImagesFromCfg(const QString& cfgFilePath);
+	void deleteImagesFromCfg(const QString& cfgFilePath);
 
-   void reloadTextures();
-   void avoidConflict();
-   bool setTexturesVisible(QString TexName, bool visible);
+	void reloadTextures();
+	void avoidConflict();
+	bool setTexturesVisible(QString TexName, bool visible);
 
 protected:
 	void createDialogContent() override;
 
 private slots:
-   void restoreDefaults();
+	void restoreDefaults();
 
-   void openImageFile();
-   void uploadImage();
-   void goPush();
-   void addCustomTexture();
-   void removeTexture();
+	void openImageFile();
+	void uploadImage();
+	void goPush();
+	void addCustomTexture();
+	void removeTexture();
 
-   void onLoginReply(QNetworkReply *reply);
-   void onUploadReply(QNetworkReply *reply);
-   void onsubStatusReply(QNetworkReply *reply);
-   void onJobStatusReply(QNetworkReply *reply);
-   void onWcsDownloadReply(QNetworkReply *reply);
+	void onLoginReply(QNetworkReply *reply);
+	void onUploadReply(QNetworkReply *reply);
+	void onsubStatusReply(QNetworkReply *reply);
+	void onJobStatusReply(QNetworkReply *reply);
+	void onWcsDownloadReply(QNetworkReply *reply);
 
-   void checkSubStatus();
-   void checkJobStatus();
+	void checkSubStatus();
+	void checkJobStatus();
 
-   bool getShowCustomTextures();
-   void setShowCustomTextures(bool b);
-   bool getAvoidAreaConflict();
-   void setAvoidAreaConflict(bool b);
+	bool getShowCustomTextures();
+	void setShowCustomTextures(bool b);
+	bool getAvoidAreaConflict();
+	void setAvoidAreaConflict(bool b);
 
-   void reloadData();
+	void reloadData();
 
 private:
 	Ui_nebulaTexturesDialog* ui;
-   QSettings* m_conf;
+	QSettings* m_conf;
 
-   QString API_URL = "http://nova.astrometry.net/";
-   QNetworkAccessManager *networkManager;
-   QString session;
-   QString subId;
-   QString jobId;
-   QTimer *subStatusTimer;
-   QTimer *jobStatusTimer;
+	QString API_URL = "http://nova.astrometry.net/";
+	QNetworkAccessManager *networkManager;
+	QString session;
+	QString subId;
+	QString jobId;
+	QTimer *subStatusTimer;
+	QTimer *jobStatusTimer;
 
-   double CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2;
-   int IMAGEW, IMAGEH;
-   double topLeftRA, topLeftDec, bottomLeftRA, bottomLeftDec;
-   double topRightRA, topRightDec, bottomRightRA, bottomRightDec;
-   double referRA, referDec;
+	double CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2;
+	int IMAGEW, IMAGEH;
+	double topLeftRA, topLeftDec, bottomLeftRA, bottomLeftDec;
+	double topRightRA, topRightDec, bottomRightRA, bottomRightDec;
+	double referRA, referDec;
 
-   QString pluginDir  = "/modules/NebulaTextures/";
-   QString configFile = "/modules/NebulaTextures/custom_textures.json";
-   QString tmpcfgFile = "/modules/NebulaTextures/temp_textures.json";
+	QString pluginDir  = "/modules/NebulaTextures/";
+	QString configFile = "/modules/NebulaTextures/custom_textures.json";
+	QString tmpcfgFile = "/modules/NebulaTextures/temp_textures.json";
 
-   bool flag_renderTempTex = false;
+	bool flag_renderTempTex = false;
 
-   void setAboutHtml();
-   void updateStatus(const QString &status);
-   void changeUiState(bool freeze);
+	void setAboutHtml();
+	void updateStatus(const QString &status);
+	void changeUiState(bool freeze);
 };
 
 #endif /* NEBULATEXTURESDIALOG_HPP */

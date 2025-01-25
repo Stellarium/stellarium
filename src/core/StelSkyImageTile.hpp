@@ -101,14 +101,14 @@ public:
 	//! Return an HTML description of the image to be displayed in the GUI.
 	QString getLayerDescriptionHtml() const override {return htmlDescription;}
 
-   //! Set Visible Flag.
-   void setVisible(bool b){flagVisible = b;}
+	//! Set Visible Flag.
+	void setVisible(bool b){flagVisible = b;}
 
-   //! Get Visible Flag.
-   bool getVisible(){return flagVisible;}
+	//! Get Visible Flag.
+	bool getVisible(){return flagVisible;}
 
-   //! return list of all the polygons.
-   QList<SphericalRegionP> getSkyConvexPolygons(){return skyConvexPolygons;}
+	//! return list of all the polygons.
+	QList<SphericalRegionP> getSkyConvexPolygons(){return skyConvexPolygons;}
 
 protected:
 	//! Reimplement the abstract method.
@@ -148,8 +148,8 @@ protected:
 	//! Should usually be true. Allow disabling observation of aberration correction for script-loaded SkyImages.
 	bool withAberration;
 
-   //! Should be default true. Control visible of single tile.
-   bool flagVisible;
+	//! Should be default true. Control visible of single tile.
+	bool flagVisible;
 
 private:
 	//! init the StelSkyImageTile

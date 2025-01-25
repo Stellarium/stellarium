@@ -69,8 +69,8 @@ public:
 	//! It will practically occur after the deletionDelay has expired.
 	void scheduleChildsDeletion();
 
-   //! Return the list of all the created subtiles for this tile
-   QList<MultiLevelJsonBase*> getSubTiles(){return subTiles;}
+	//! Return the list of all the created subtiles for this tile
+	QList<MultiLevelJsonBase*> getSubTiles(){return subTiles;}
 
 private slots:
 	//! Called when the download for the JSON file terminated.
