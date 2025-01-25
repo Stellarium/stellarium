@@ -3173,14 +3173,10 @@ vec3 applyAberrationToViewDir(vec3 viewDir)
 
 void StelCore::setAberrationUniforms(QOpenGLShaderProgram& program) const
 {
-	Vec3d velocity;
+	Vec3d velocity(0.);
 	if(getUseAberration())
 	{
-		velocity = cachedAberrationVec;
-	}
-	else
-	{
-		velocity = Vec3d(0,0,0);
+		velocity = getAberrationFactor() * cachedAberrationVec;
 	}
 	program.setUniformValue("STELCORE_currentPlanetBarycentricEclipticVelocity", velocity.toQVector());
 }
