@@ -107,14 +107,14 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-   connect(ui->openFileButton, SIGNAL(clicked()), this, SLOT(on_openFileButton_clicked()));
-   connect(ui->uploadImageButton, SIGNAL(clicked()), this, SLOT(on_uploadImageButton_clicked()));
-   connect(ui->goPushButton, SIGNAL(clicked()), this, SLOT(on_goPushButton_clicked()));
+   connect(ui->openFileButton, SIGNAL(clicked()), this, SLOT(openImageFile()));
+   connect(ui->uploadImageButton, SIGNAL(clicked()), this, SLOT(uploadImage()));
+   connect(ui->goPushButton, SIGNAL(clicked()), this, SLOT(goPush()));
    connect(ui->renderButton, SIGNAL(clicked()), this, SLOT(renderTempCustomTexture()));
    connect(ui->unrenderButton, SIGNAL(clicked()), this, SLOT(unRenderTempCustomTexture()));
 
-   connect(ui->addTexture, SIGNAL(clicked()), this, SLOT(on_addTexture_clicked()));
-   connect(ui->removeButton, SIGNAL(clicked()), this, SLOT(on_removeButton_clicked()));
+   connect(ui->addCustomTextureButton, SIGNAL(clicked()), this, SLOT(addCustomTexture()));
+   connect(ui->removeTextureButton, SIGNAL(clicked()), this, SLOT(removeTexture()));
 
    connect(ui->reloadButton, SIGNAL(clicked()), this, SLOT(reloadData()));
    connect(ui->checkBoxShow, SIGNAL(clicked(bool)), this, SLOT(setShowCustomTextures(bool)));
@@ -218,7 +218,7 @@ void NebulaTexturesDialog::updateStatus(const QString &status)
 }
 
 
-void NebulaTexturesDialog::on_openFileButton_clicked()
+void NebulaTexturesDialog::openImageFile()
 {
    QString fileName = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Open Image"), QDir::homePath(), tr("Images (*.png *.jpg *.bmp *.tiff)"));
    if (!fileName.isEmpty())
@@ -234,7 +234,7 @@ void NebulaTexturesDialog::on_openFileButton_clicked()
  * and initiates the image upload process.
  * Updates the UI state and connects to the reply signal for further processing.
  */
-void NebulaTexturesDialog::on_uploadImageButton_clicked() // WARN: image should not be flip
+void NebulaTexturesDialog::uploadImage() // WARN: image should not be flip
 {
    QString apiKey = ui->lineEditApiKey->text();
    QString imagePath = ui->lineEditImagePath->text();
@@ -710,7 +710,7 @@ void NebulaTexturesDialog::changeUiState(bool freeze)
    ui->goPushButton->setDisabled(freeze);
    ui->renderButton->setDisabled(freeze);
    ui->unrenderButton->setDisabled(freeze);
-   ui->addTexture->setDisabled(freeze);
+   ui->addCustomTextureButton->setDisabled(freeze);
 }
 
 /*
@@ -724,7 +724,7 @@ void NebulaTexturesDialog::changeUiState(bool freeze)
  *   3. Adjusts the view up vector based on the equatorial mount mode and latitude for stability when close to the poles.
  *   4. Calls the movement manager to move the view to the target coordinates, ensuring smooth transition with auto-duration.
  */
-void NebulaTexturesDialog::on_goPushButton_clicked()
+void NebulaTexturesDialog::goPush()
 {
    StelCore* core = StelApp::getInstance().getCore();
    StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
@@ -877,7 +877,7 @@ void NebulaTexturesDialog::unRenderTempCustomTexture()
 }
 
 
-void NebulaTexturesDialog::on_addTexture_clicked()
+void NebulaTexturesDialog::addCustomTexture()
 {
    addTexture(configFile, CUSTOM_TEXNAME);
 }
@@ -890,7 +890,7 @@ void NebulaTexturesDialog::on_addTexture_clicked()
  *   2. Copies the image file to the user folder with a timestamped name.
  *   3. Retrieves celestial coordinates (RA, Dec) from the UI for the image's corners and reference point.
  *   4. Organizes the coordinates into a JSON array for later use.
- *   5. Calls `updateCustomTextures` to store the texture and its associated coordinates.
+ *   5. Calls `registerTexture` to store the texture and its associated coordinates.
  *
  * @param addPath  The path where the texture is to be added.
  * @param keyName  The unique key name for the texture.
@@ -937,7 +937,7 @@ void NebulaTexturesDialog::addTexture(QString addPath, QString keyName) // logic
    innerWorldCoords.append(QJsonArray({topRightRA, topRightDec}));
    innerWorldCoords.append(QJsonArray({topLeftRA, topLeftDec}));
 
-   updateCustomTextures(imageUrl, innerWorldCoords, 0.2, 13.4, keyName, addPath);
+   registerTexture(imageUrl, innerWorldCoords, 0.2, 13.4, keyName, addPath);
 }
 
 /*
@@ -953,7 +953,7 @@ void NebulaTexturesDialog::addTexture(QString addPath, QString keyName) // logic
  * @param keyName         The key name of the texture.
  * @param addPath         The path to the configuration file to update.
  */
-void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const QJsonArray& innerWorldCoords, double minResolution, double maxBrightness, QString keyName, QString addPath)
+void NebulaTexturesDialog::registerTexture(const QString& imageUrl, const QJsonArray& innerWorldCoords, double minResolution, double maxBrightness, QString keyName, QString addPath)
 {
    QString pluginFolder = StelFileMgr::getUserDir() + pluginDir;
    QDir().mkpath(pluginFolder);
@@ -1036,7 +1036,7 @@ void NebulaTexturesDialog::updateCustomTextures(const QString& imageUrl, const Q
  * deleting the corresponding entry from the "subTiles" array.
  * After updating the JSON file, the item is removed from the UI list.
  */
-void NebulaTexturesDialog::on_removeButton_clicked()
+void NebulaTexturesDialog::removeTexture()
 {
    QListWidgetItem* selectedItem = ui->listWidget->currentItem();
    if (!selectedItem)

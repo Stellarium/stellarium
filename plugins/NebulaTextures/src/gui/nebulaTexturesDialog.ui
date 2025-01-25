@@ -463,7 +463,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="addTexture">
+        <widget class="QPushButton" name="addCustomTextureButton">
          <property name="text">
           <string>Add the Texture to Custom Storage</string>
          </property>
@@ -533,7 +533,7 @@
           <widget class="QListWidget" name="listWidget"/>
          </item>
          <item>
-          <widget class="QPushButton" name="removeButton">
+          <widget class="QPushButton" name="removeTextureButton">
            <property name="text">
             <string>Remove select item in Custom Textures</string>
            </property>

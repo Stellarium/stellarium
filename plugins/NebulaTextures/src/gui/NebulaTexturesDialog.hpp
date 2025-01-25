@@ -58,7 +58,7 @@ public slots:
    void unRenderTempCustomTexture();
 
    void addTexture(QString addPath, QString keyName);
-   void updateCustomTextures(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness, QString keyName, QString addPath);
+   void registerTexture(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness, QString keyName, QString addPath);
 
    void deleteImagesFromCfg(const QString& cfgFilePath);
 
@@ -72,11 +72,11 @@ protected:
 private slots:
    void restoreDefaults();
 
-   void on_openFileButton_clicked();
-   void on_uploadImageButton_clicked();
-   void on_goPushButton_clicked();
-   void on_addTexture_clicked();
-   void on_removeButton_clicked();
+   void openImageFile();
+   void uploadImage();
+   void goPush();
+   void addCustomTexture();
+   void removeTexture();
 
    void onLoginReply(QNetworkReply *reply);
    void onUploadReply(QNetworkReply *reply);
