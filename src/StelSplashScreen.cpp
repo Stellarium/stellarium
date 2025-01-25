@@ -23,17 +23,22 @@
 #include <QPainter>
 #include <cmath>
 
-static constexpr int BASE_FONT_SIZE = 11;
-static constexpr int BASE_PIXMAP_HEIGHT = 365;
-
 SplashScreen::SplashScreenWidget* SplashScreen::instance;
 
-static QPixmap makePixmap(const double sizeRatio)
+namespace
+{
+
+constexpr int BASE_FONT_SIZE = 11;
+constexpr int BASE_PIXMAP_HEIGHT = 365;
+
+QPixmap makePixmap(const double sizeRatio)
 {
 	QPixmap pixmap(StelFileMgr::findFile("data/splash.png"));
 	pixmap = pixmap.scaledToHeight(std::lround(BASE_PIXMAP_HEIGHT * sizeRatio),
 	                               Qt::SmoothTransformation);
 	return pixmap;
+}
+
 }
 
 void SplashScreen::present(const double sizeRatio)
