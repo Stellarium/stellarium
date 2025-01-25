@@ -329,7 +329,7 @@ bool StelProjector::needGlFrontFaceCW() const
 bool StelProjector::checkInViewport(const Vec3d& pos) const
 {
 	return (pos[1]>=viewportXywh[1] && pos[0]>=viewportXywh[0] &&
-		pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));
+	        pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));
 }
 
 //! Check to see if a 2d position is inside the viewport.
@@ -337,7 +337,7 @@ bool StelProjector::checkInViewport(const Vec3d& pos) const
 bool StelProjector::checkInViewport(const Vec3f& pos) const
 {
 	return (pos[1]>=viewportXywh[1] && pos[0]>=viewportXywh[0] &&
-		pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));
+	        pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));
 }
 
 //! Return the position where the 2 2D point p1 and p2 cross the viewport edge
@@ -388,8 +388,8 @@ void StelProjector::project(int n, const Vec3d* in, Vec3f* out)
 		out->set(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
 		forward(*out);
 		out->set(static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * (*out)[0],
-			static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
-			static_cast<float>((static_cast<double>((*out)[2]) - zNear) * oneOverZNearMinusZFar));
+		         static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
+		         static_cast<float>((static_cast<double>((*out)[2]) - zNear) * oneOverZNearMinusZFar));
 	}
 }
 
@@ -401,8 +401,8 @@ void StelProjector::project(int n, const Vec3f* in, Vec3f* out)
 		modelViewTransform->forward(*out);
 		forward(*out);
 		out->set(static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * (*out)[0],
-			static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
-			static_cast<float>((static_cast<double>((*out)[2]) - zNear) * oneOverZNearMinusZFar));
+		         static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
+		         static_cast<float>((static_cast<double>((*out)[2]) - zNear) * oneOverZNearMinusZFar));
 	}
 }
 
@@ -482,8 +482,8 @@ vec3 project(vec3 modelSpacePoint)
 	vec3 worldSpacePoint = modelViewForwardTransform(modelSpacePoint);
 	vec3 v = projectorForwardTransform(worldSpacePoint);
 	return vec3(viewportCenter[0] + flipHorz * pixelPerRad * v[0],
-				viewportCenter[1] + flipVert * pixelPerRad * v[1],
-				(v[2] - zNear) * oneOverZNearMinusZFar);
+	            viewportCenter[1] + flipVert * pixelPerRad * v[1],
+	            (v[2] - zNear) * oneOverZNearMinusZFar);
 }
 #line 1 0
 )";
@@ -640,5 +640,5 @@ bool StelProjector::isSameProjection(const StelProjector& other) const
 {
 	// *this defines the projection type, modelViewTransform defines how refraction is handled.
 	return typeid(*this) == typeid(other) &&
-		   typeid(*modelViewTransform) == typeid(*other.modelViewTransform);
+	       typeid(*modelViewTransform) == typeid(*other.modelViewTransform);
 }
