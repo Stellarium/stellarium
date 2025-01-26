@@ -816,7 +816,7 @@
 	      from Manuel Peitsch, post-processing: Sun Shuwei
 	      https://manuel-astro.ch/
 	      License: Creative Commons Attribution 4.0 International
-	4.134 Images of M7, NGC2442, NGC2899
+	4.134 Images of M7, NGC2442, NGC2899, RCW100
 	      from ESO, post-processing: Sun Shuwei
 	      http://eso.org/public/
 	      License: Creative Commons Attribution 4.0 International
@@ -938,6 +938,10 @@
 	      from Adam Block/Mount Lemmon SkyCenter/University of Arizona, post-processing
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 3.0 United States
+	4.164 Images of Necklace Nebula
+	      from NASA, ESA and the Hubble Heritage Team (STScI/AURA), post-processing: Sun Shuwei
+	      ttps://esahubble.org/
+	      License: Creative Commons Attribution 4.0 International
 	      
 ```
 
