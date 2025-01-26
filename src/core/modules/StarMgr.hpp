@@ -359,6 +359,12 @@ public:
 	//! @return the rising time or duration of eclipse for variable star
 	static int getGcvsMM(StarId hip);
 
+	//! Get the spectral type of variable star with a
+	//! specified Hipparcos or Gaia catalogue number.
+	//! @param hip The Hipparcos/Gaia number of star
+	//! @return the spectral type of variable star
+	static QString getGcvsSpectralType(StarId hip);
+
 	//! Get year of last satisfactory observation of double star with a
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
