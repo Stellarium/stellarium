@@ -751,8 +751,7 @@
 	      from KPNO/NOIRLab/NSF/AURA/Ray and Emily Magnani/Adam Block
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.119 Images of IC348, IC5076, NGC80, NGC147, NGC404, NGC1491,
-	      NGC1624, NGC7026, NGC7048
+	4.119 Images of IC348, NGC80, NGC147, NGC404, NGC1491, NGC1624, NGC7026, NGC7048
 	      from Radek Chromik, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
@@ -903,7 +902,7 @@
 	      from Adam Block/ Josep Drudis/Mount Lemmon SkyCenter/University of Arizona, Ngc1535, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
-	4.155 Images of NGC45
+	4.155 Images of NGC45, NGC6337
 	      from Meli thev, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
@@ -935,6 +934,11 @@
 	      from KPNO/NOIRLab/NSF/AURA/George Hatfield and Flynn Haase, post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
+	4.163 Images of IC5076
+	      from Adam Block/Mount Lemmon SkyCenter/University of Arizona, post-processing
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 3.0 United States
+	      
 ```
 
 ## Appendix
