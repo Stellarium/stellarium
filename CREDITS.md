@@ -829,7 +829,8 @@
 	      from Chuck Ayoub, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.137 Images of M49, M59, M60, NGC4147, NGC4517, NGC4527, NGC4753, NGC6535, NGC6934, UGC9792
+	4.137 Images of M49, M59, M60, NGC2681, NGC4147, NGC4517, NGC4527, NGC4664,
+	      NGC4753, NGC6535, NGC6934, UGC9792
 	      from Sloan Digital Sky Survey
 	      https://live-sdss4org-dr14.pantheonsite.io/
 	      License: Creative Commons Attribution 4.0 International 
