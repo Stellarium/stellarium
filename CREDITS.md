@@ -486,7 +486,7 @@
 	     from Gianluca.pollastri
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.50 Images of M2, M3, M4, M5, M13, M10, M28, M30, M53, M54, M69, M71, M75, M78, M85, M102,
+	4.50 Images of M2, M3, M4, M5, M13, M10, M28, M30, M53, M69, M71, M75, M78, M85, M102,
 	     M107, IC10, NGC6144, PGC143, UGC12613
 	     from Starhopper
 	     https://commons.wikimedia.org/wiki/
@@ -863,6 +863,10 @@
 	      License: Creative Commons Attribution-Share Alike 4.0 International
 	4.145 Images of UGC5373
 	      from KPNO/NOIRLab/NSF/AURA Data obtained and processed by: P. Massey (Lowell Obs.), G. Jacoby, K. Olsen, & C. Smith (AURA/NSF) Image processing: T.A. Rector (University of Alaska Anchorage/NSF NOIRLab), M. Zamani (NSF NOIRLab) & D. de Martin (NSF NOIRLab), post-processing: Sun Shuwei
+	      https://noirlab.edu/public/
+	      License: Creative Commons Attribution 4.0 International
+	4.146 Images of M54
+	      from REU Program/NOIRLab/NSF/AURA, post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
 ```
