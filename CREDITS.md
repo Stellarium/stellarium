@@ -384,7 +384,7 @@
 	     https://astrogeology.usgs.gov/
 	     and colored by RVS. License: public domain.
 	4.25 Images of M15, M24, M51, M58, M63, M76, M81, M82, M96, M101,
-	     M105, M106, IC405, IC443, IC1727, NGC246, NGC457, NGC467,
+	     M105, M106, IC405, IC1727, NGC246, NGC457, NGC467,
 	     NGC470, NGC474, NGC488, NGC672, NGC691, NGC1514, NGC1961,
 	     NGC2174, NGC2371, NGC2392, NGC2403, NGC2506, NGC2655, NGC2685,
 	     NGC2805, NGC2814, NGC2820, NGC2841, NGC3079, NGC3166, NGC3227,
@@ -788,7 +788,7 @@
 	      from ESO/Dss2, Giuseppe Donatiello, post-processing: Sun Shuwei
 	      https://flickr.com/photos/133259498@N05/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.127 Images of NGC3109
+	4.127 Images of NGC3109, IC443
 	      from DESI LIS, Giuseppe Donatiello, post-processing: Sun Shuwei
 	      https://flickr.com/photos/133259498@N05/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
