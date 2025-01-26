@@ -817,7 +817,7 @@
 	      from Manuel Peitsch, post-processing: Sun Shuwei
 	      https://manuel-astro.ch/
 	      License: Creative Commons Attribution 4.0 International
-	4.134 Images of NGC2442, NGC2899
+	4.134 Images of M7, NGC2442, NGC2899
 	      from ESO, post-processing: Sun Shuwei
 	      http://eso.org/public/
 	      License: Creative Commons Attribution 4.0 International
