@@ -735,7 +735,7 @@
 	      from NOIRLab/NSF/AURA, post-processing: Sun Shuwei 
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.115 Images of Dark Doodad Nebula, IC1613, NGC300, NGC1216, NGC4372
+	4.115 Images of Dark Doodad Nebula, IC1613, NGC1216, NGC4372
 	      from Hansjorg Walchli, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
@@ -925,8 +925,12 @@
 	      License: Creative Commons Attribution 4.0 International
 	4.160 Images of NGC6565
 	      from ESA/Hubble & NASA, Acknowledgement: M. Novak, post-processing: Sun Shuwei
-	      hhttps://esahubble.org/
+	      https://esahubble.org/
 	      License: Creative Commons Attribution 4.0 International
+	4.161 Images of NGC300
+	      from Eso/Dss2 / Giuseppe Donatiello, post-processing: Sun Shuwei
+	      https://flickr.com/photos/133259498@N05/37401736025/
+	      License: public domain
 ```
 
 ## Appendix
