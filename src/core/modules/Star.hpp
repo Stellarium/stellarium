@@ -312,6 +312,7 @@ struct Star
          small_omega = 149.161 * M_PI_180;
          periastron_epoch = 2449562.240375;
          semi_major = 7.4957;
+         data_epoch = 2451545.0;
          bary_distance = 1000. / 378.9;
          bary_ra = 101.28715533 * M_PI_180;
          bary_dec = -16.71611586 * M_PI_180;
@@ -326,16 +327,16 @@ struct Star
          // Source: http://www.astro.gsu.edu/wds/orb6.html
          primary_hip = 104214;
          secondary_hip = 104217;
-         binary_period = 678 * 365.25;
-         eccentricity = 0.49;
-         inclination = 51 * M_PI_180;
-         big_omega = 178 * M_PI_180;
-         small_omega = 149 * M_PI_180;
-         periastron_epoch = 2345257.25;
-         semi_major = 24.272;
+         binary_period = 704.858 * 365.25;
+         eccentricity = 0.435;
+         inclination = 52.018 * M_PI_180;
+         big_omega = 174.56 * M_PI_180;
+         small_omega = 154.044 * M_PI_180;
+         periastron_epoch = 2340510.461;
+         semi_major = 24.57;
          bary_distance = 1000. / 286.0054;
-         bary_ra = 316.72479 * M_PI_180;
-         bary_dec = 38.74942 * M_PI_180;
+         bary_ra = 316.7510710233 * M_PI_180;
+         bary_dec = 38.7599676093 * M_PI_180;
          bary_rv = -65.034;  // km/s
          bary_pmra=4135.09,
          bary_pmdec=3202.778,
@@ -354,6 +355,7 @@ struct Star
          small_omega = 255.02 * M_PI_180;
          periastron_epoch = 2453531.2295;
          semi_major = 3.662;
+         data_epoch = 2451545.0;
          bary_distance = 1000. / 85.58;
          bary_ra = 190.4149391943586 * M_PI_180;
          bary_dec = -1.4494030396953002 * M_PI_180;
@@ -429,11 +431,6 @@ struct Star
       double bary_pmtotsqr = (bary_pmvec0[0] * bary_pmvec0[0] + bary_pmvec0[1] * bary_pmvec0[1] + bary_pmvec0[2] * bary_pmvec0[2]);
       double bary_f = 1. / sqrt(1. + 2. * bary_pmr0 * dyrs + (bary_pmtotsqr + bary_pmr0 * bary_pmr0) * dyrs * dyrs);
       Vec3d  bary_u = (bary_r * (1. + bary_pmr0 * dyrs) + bary_pmvec0 * dyrs) * bary_f;
-      Vec3d  bary_pmvec1 = bary_pmvec0 * (1 + bary_pmr0 * dyrs);
-
-      bary_pmvec1.set((bary_pmvec1[0] - bary_r[0] * bary_pmtotsqr * dyrs) * bary_f * bary_f * bary_f,
-                      (bary_pmvec1[1] - bary_r[1] * bary_pmtotsqr * dyrs) * bary_f * bary_f * bary_f,
-                      (bary_pmvec1[2] - bary_r[2] * bary_pmtotsqr * dyrs) * bary_f * bary_f * bary_f);
 
       double xy = sqrt(bary_u[0] * bary_u[0] + bary_u[1] * bary_u[1]);
       Vec3d  p2(-bary_u[1] / xy, bary_u[0] / xy, 0.0);
@@ -469,10 +466,10 @@ struct Star
       }
 
       // sky_orbit is in parsec and sky_orbit_vel is in parsec/year, we want them arcsecond and arcsecond/year
-      sky_orbit *= 1e-3 / MAS2RAD / bary_distance;  // parsec to AU to arcsecond
-      sky_orbit_vel *= 1e-3 / MAS2RAD / bary_distance;
+      sky_orbit[0] /= bary_distance;
+      sky_orbit[1] /= bary_distance;
+      sky_orbit_vel *= 1.e-3 / MAS2RAD / bary_distance;
 
-      // 0.21094953 is km/s to au/yr
       // sky_orbit_vel is in arcsecond/year
       sky_orbit_vel.set(sky_orbit_vel[0] + bary_pmra / 1000., 
                         sky_orbit_vel[1] + bary_pmdec / 1000., 
@@ -480,20 +477,16 @@ struct Star
 
       sky_orbit_vel = p * sky_orbit_vel[0] + q * sky_orbit_vel[1] + r * sky_orbit_vel[2];  // arcsecond/year
 
-      // (arcsceond to rad) or (AU to parsec) = 4.84813681e-06
-      sky_orbit *= MAS2RAD * 1000.;
       StelUtils::spheToRect(bary_ra + sky_orbit[0], 
                             bary_dec + sky_orbit[1], 
                             bary_distance + sky_orbit[2], 
                             sky_orbit);  // barycenter position in equatorial cartesian coordinate
 
-      v = sky_orbit - bary_r * bary_distance + bary_u;
- 
-      bary_u.normalize();
       plx = 1000. / bary_distance * bary_f;
+      RV  = sky_orbit_vel.dot(bary_u) * (1000./plx) * (AU / JYEAR_SECONDS);
+      v = sky_orbit  - bary_r * bary_distance + bary_u * (1000. / plx);
       pmra = sky_orbit_vel.dot(p2) * 1000.;
       pmdec = sky_orbit_vel.dot(q2) * 1000.;
-      RV  = sky_orbit_vel.dot(bary_u) * (1000./plx) * (AU / JYEAR_SECONDS);
       StelUtils::rectToSphe(&ra, &dec, v);
    }
 };
