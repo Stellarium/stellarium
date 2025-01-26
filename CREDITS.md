@@ -891,6 +891,10 @@
 	      https://commons.wikimedia.org/wiki/
 	      https://lucnix.be
 	      License: Creative Commons Attribution-Share Alike 2.5 Generic
+	4.152 Images of NGC3503
+	      from Donald Cappellettiariel, post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 4.0 International
 ```
 
 ## Appendix
