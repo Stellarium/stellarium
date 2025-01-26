@@ -807,7 +807,7 @@
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International 
-	4.132 Images of IC1505, NGC70, NGC529, NGC1530, NGC2366, NGC6621, NGC6951,
+	4.132 Images of IC1505, NGC70, NGC529, NGC1530, NGC2366, NGC2768, NGC6621, NGC6951,
 	      NGC7139, NGC7741, Jones1
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
