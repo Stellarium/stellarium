@@ -735,7 +735,7 @@
 	      from NOIRLab/NSF/AURA, post-processing: Sun Shuwei 
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.115 Images of Dark Doodad Nebula, IC1613, NGC300, NGC1216, NGC1365, NGC4372
+	4.115 Images of Dark Doodad Nebula, IC1613, NGC300, NGC1216, NGC4372
 	      from Hansjorg Walchli, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
@@ -919,6 +919,10 @@
 	      from Adam Block/ChileScope, Ngc1535, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.159 Images of NGC1365
+	      from ESO/IDA/Danish 1.5 m/ R. Gendler, J-E. Ovaldsen, C. Th?ne, and C. Feron., post-processing: Sun Shuwei
+	      http://www.eso.org/public/
+	      License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
