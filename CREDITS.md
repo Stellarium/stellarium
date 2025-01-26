@@ -934,15 +934,14 @@
 	      from KPNO/NOIRLab/NSF/AURA/George Hatfield and Flynn Haase, post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
-	4.163 Images of IC5076
+	4.163 Images of IC5076, Ced211
 	      from Adam Block/Mount Lemmon SkyCenter/University of Arizona, post-processing
-	      https://commons.wikimedia.org/wiki/
+	      http://www.caelumobservatory.com/
 	      License: Creative Commons Attribution-Share Alike 3.0 United States
 	4.164 Images of Necklace Nebula
 	      from NASA, ESA and the Hubble Heritage Team (STScI/AURA), post-processing: Sun Shuwei
 	      ttps://esahubble.org/
 	      License: Creative Commons Attribution 4.0 International
-	      
 ```
 
 ## Appendix
