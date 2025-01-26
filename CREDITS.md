@@ -914,7 +914,7 @@
 	4.157 Images of PGC3074547
 	      from NASA, ESA and The Hubble Heritage Team STScI/AURA, post-processing: Sun Shuwei
 	      https://esahubble.org/
-	      License: public domain
+	      License: Creative Commons Attribution 4.0 International
 	4.158 Images of NGC289
 	      from Adam Block/ChileScope, Ngc1535, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
@@ -922,6 +922,10 @@
 	4.159 Images of NGC1365
 	      from ESO/IDA/Danish 1.5 m/ R. Gendler, J-E. Ovaldsen, C. Th?ne, and C. Feron., post-processing: Sun Shuwei
 	      http://www.eso.org/public/
+	      License: Creative Commons Attribution 4.0 International
+	4.160 Images of NGC6565
+	      from ESA/Hubble & NASA, Acknowledgement: M. Novak, post-processing: Sun Shuwei
+	      hhttps://esahubble.org/
 	      License: Creative Commons Attribution 4.0 International
 ```
 
