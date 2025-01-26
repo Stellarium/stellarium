@@ -886,6 +886,11 @@
 	      from Donald Pelletier, post-processing: Sun Shuwei 
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-ShareAlike 4.0 International 
+	4.151 Images of WR134
+	      from Donald Luc Viatour, post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/
+	      https://lucnix.be
+	      License: Creative Commons Attribution-Share Alike 2.5 Generic
 ```
 
 ## Appendix
