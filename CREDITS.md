@@ -458,7 +458,7 @@
 	     License: Creative Commons Attribution 4.0 International
  	4.43 Images of M33, M42, NGC253, NGC5566, LBN782, the Pleiades from HG731GZ
 	     License: Creative Commons Attribution 3.0 Unported
-	4.44 Images of M8, M17, M94, M104, IC434, IC2944, IC4628, NGC2264, NGC5367, NGC6357,
+	4.44 Images of M8, M17, M94, IC434, IC2944, IC4628, NGC2264, NGC5367, NGC6357,
 	     NGC6334, NGC7293, LDN43, SMC (Hydrogen Alpha)
 	     from Dylan O'Donnell
 	     http://deography.com/
@@ -829,7 +829,7 @@
 	      from Chuck Ayoub, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.137 Images of M49, M59, M60, NGC6535, NGC6934, UGC9792
+	4.137 Images of M49, M59, M60, NGC4517, NGC4753, NGC6535, NGC6934, UGC9792
 	      from Sloan Digital Sky Survey
 	      https://live-sdss4org-dr14.pantheonsite.io/
 	      License: Creative Commons Attribution 4.0 International 
@@ -843,8 +843,12 @@
 	      License: public domain
 	4.140 Images of NGC4666
 	      from ESO/J. Dietrich, post-processing: Sun Shuwei
-	      http://www.eso.org/public
+	      http://www.eso.org/public/
 	      License: Creative Commons Attribution 4.0 International
+	4.141 Images of M104
+	      from Adam Block/Mount Lemmon SkyCenter/University of Arizona & Ngc1535, post-processing
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 4.0 International
 ```
 
 ## Appendix
