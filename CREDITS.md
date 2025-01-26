@@ -414,7 +414,7 @@
 	4.32 Images of M77, NGC3180, NGC5474, NGC6231, Sh2-264, Sh2-308, LDN1622
 	     from Wang Lingyi
 	     License: public domain
-	4.33 Images of PGC6830, PGC29653, UGC5373 from Lowell Observatory
+	4.33 Images of PGC6830, PGC29653 from Lowell Observatory
 	     http://www2.lowell.edu/
 	     License: public domain
 	4.34 Images of M89, IC2220, IC2631, NGC1433, NGC2434, NGC3572, PGC10074,	     
@@ -855,6 +855,14 @@
 	      License: Creative Commons Attribution-Share Alike 4.0 International
 	4.143 Images of NGC4699
 	      from KPNO/NOIRLab/NSF/AURA/Michael Vogel and Robert Mitsch/Adam Block, Image processing: Sun Shuwei
+	      https://noirlab.edu/public/
+	      License: Creative Commons Attribution 4.0 International
+	4.144 Images of NGC6872
+	      from Abdallah jawhari, post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.145 Images of UGC5373
+	      from KPNO/NOIRLab/NSF/AURA Data obtained and processed by: P. Massey (Lowell Obs.), G. Jacoby, K. Olsen, & C. Smith (AURA/NSF) Image processing: T.A. Rector (University of Alaska Anchorage/NSF NOIRLab), M. Zamani (NSF NOIRLab) & D. de Martin (NSF NOIRLab), post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
 ```
