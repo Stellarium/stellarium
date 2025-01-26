@@ -934,8 +934,8 @@
 	      from KPNO/NOIRLab/NSF/AURA/George Hatfield and Flynn Haase, post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
-	4.163 Images of IC5076, Ced211
-	      from Adam Block/Mount Lemmon SkyCenter/University of Arizona, post-processing
+	4.163 Images of IC5076, NGC2419, Ced211
+	      from Adam Block/Mount Lemmon SkyCenter/University of Arizona, post-processing: Sun Shuwei
 	      http://www.caelumobservatory.com/
 	      License: Creative Commons Attribution-Share Alike 3.0 United States
 	4.164 Images of Necklace Nebula
