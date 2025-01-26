@@ -450,7 +450,7 @@
 	     from Adam Block/Mount Lemmon SkyCenter/University of Arizona
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.42 Images of IC1295, NGC134, NGC92, NGC55, NGC908, NGC936, NGC1232, NGC1313, NGC1316,
+	4.42 Images of IC1295, NGC134, NGC92, NGC55, NGC908, NGC936, NGC1232, NGC1313,
 	     NGC1792, NGC1978, NGC2207, NGC2736, NGC3199, NGC3699, NGC3766, NGC3532, NGC4945, NGC5128, NGC5189,
 	     NGC6362, NGC6537, NGC6769, NGC6822, NGC7793
 	     from ESO
@@ -816,7 +816,7 @@
 	      from Manuel Peitsch, post-processing: Sun Shuwei
 	      https://manuel-astro.ch/
 	      License: Creative Commons Attribution 4.0 International
-	4.134 Images of M7, NGC2442, NGC2899, RCW100, Westerlund1
+	4.134 Images of M7, NGC1316, NGC2442, NGC2899, RCW100, Westerlund1
 	      from ESO, post-processing: Sun Shuwei
 	      http://eso.org/public/
 	      License: Creative Commons Attribution 4.0 International
