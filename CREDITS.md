@@ -731,7 +731,7 @@
 	4.113 The miscWorldMap.jpg image was created from NASA Blue Marble Next Generation
 	      dataset for July 2004. Public domain.
 	      https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation
-	4.114 Images of M80, RCW101
+	4.114 Images of M80, M90, RCW101
 	      from NOIRLab/NSF/AURA, post-processing: Sun Shuwei 
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
@@ -751,7 +751,7 @@
 	      from KPNO/NOIRLab/NSF/AURA/Ray and Emily Magnani/Adam Block
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.119 Images of M90, M109, IC348, IC5076, NGC80, NGC147, NGC404, NGC1491,
+	4.119 Images of IC348, IC5076, NGC80, NGC147, NGC404, NGC1491,
 	      NGC1624, NGC7026, NGC7048
 	      from Radek Chromik, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
@@ -931,6 +931,10 @@
 	      from Eso/Dss2 / Giuseppe Donatiello, post-processing: Sun Shuwei
 	      https://flickr.com/photos/133259498@N05/37401736025/
 	      License: public domain
+	4.162 Images of M109
+	      from KPNO/NOIRLab/NSF/AURA/George Hatfield and Flynn Haase, post-processing: Sun Shuwei
+	      https://noirlab.edu/public/
+	      License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
