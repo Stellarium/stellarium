@@ -841,6 +841,10 @@
 	      from ESA/Hubble & NASA, post-processing: Sun Shuwei
 	      http://www.spacetelescope.org/
 	      License: public domain
+	4.140 Images of NGC4666
+	      from ESO/J. Dietrich, post-processing: Sun Shuwei
+	      http://www.eso.org/public
+	      License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
