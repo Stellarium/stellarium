@@ -139,16 +139,16 @@ void NebulaTexturesDialog::restoreDefaults()
 {
 	if (askConfirmation())
 	{
-		qDebug() << "[NebulaTextures] restore defaults...";
+		qDebug() << "[NebulaTextures] Restore defaults...";
 		// GETSTELMODULE(NebulaTextures)->restoreDefaultSettings();
 
 		deleteImagesFromCfg(configFile);
 		QString cfgPath = StelFileMgr::getUserDir() + configFile;
 		if (QFile::exists(cfgPath)) {
 			if (QFile::remove(cfgPath)) {
-				qDebug() << "Deleted config file:" << cfgPath;
+				qDebug() << "[NebulaTextures] Deleted texture config file:" << cfgPath;
 			} else {
-				qWarning() << "Failed to delete config file:" << cfgPath;
+				qWarning() << "[NebulaTextures] Failed to delete config file:" << cfgPath;
 			}
 		}
 
@@ -156,9 +156,9 @@ void NebulaTexturesDialog::restoreDefaults()
 		cfgPath = StelFileMgr::getUserDir() + tmpcfgFile;
 		if (QFile::exists(cfgPath)) {
 			if (QFile::remove(cfgPath)) {
-				qDebug() << "Deleted tmp config file:" << cfgPath;
+				qDebug() << "[NebulaTextures] Deleted temporary texture config file:" << cfgPath;
 			} else {
-				qWarning() << "Failed to delete config file:" << cfgPath;
+				qWarning() << "[NebulaTextures] Failed to delete temporary config file:" << cfgPath;
 			}
 		}
 
@@ -184,7 +184,7 @@ void NebulaTexturesDialog::restoreDefaults()
 		ui->listWidget->clear();
 	}
 	else
-		qDebug() << "[NebulaTextures] restore defaults is canceled...";
+		qDebug() << "[NebulaTextures] Restore defaults is canceled...";
 }
 
 /*
@@ -336,8 +336,8 @@ void NebulaTexturesDialog::uploadImage() // WARN: image should not be flip
 void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
 {
 	QByteArray content = reply->readAll();
-	qDebug()<<content;
 	if (reply->error() != QNetworkReply::NoError) {
+		qWarning() << "[NebulaTextures] Login failed.";
 		updateStatus(q_("Login failed!"));
 		reply->deleteLater();
 		changeUiState(false);
@@ -347,6 +347,7 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
 
 	QFile imageFile(ui->lineEditImagePath->text());
 	if (!imageFile.open(QIODevice::ReadOnly)) {
+		qWarning() << "[NebulaTextures] Failed to open image file.";
 		updateStatus(q_("Failed to open image file!"));
 		reply->deleteLater();
 		changeUiState(false);
@@ -427,8 +428,8 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
 void NebulaTexturesDialog::onUploadReply(QNetworkReply *reply)
 {
 	QByteArray content = reply->readAll();
-	qDebug()<<content;
 	if (reply->error() != QNetworkReply::NoError) {
+		qWarning() << "[NebulaTextures] Image upload failed.";
 		updateStatus(q_("Image upload failed!"));
 		reply->deleteLater();
 		changeUiState(false);
@@ -483,13 +484,13 @@ void NebulaTexturesDialog::checkSubStatus()
 void NebulaTexturesDialog::onsubStatusReply(QNetworkReply *reply)
 {
 	if (reply->error() != QNetworkReply::NoError) {
+		qWarning() << "[NebulaTextures] Failed to get submission status.";
 		updateStatus(q_("Failed to get submission status. Retry now..."));
 		reply->deleteLater();
 		changeUiState(false);
 		return;
 	}
 	QByteArray cont = reply->readAll();
-	qDebug()<<cont;
 	QJsonDocument doc = QJsonDocument::fromJson(cont);
 	QJsonObject json = doc.object();
 	QJsonArray jobs = json["jobs"].toArray();
@@ -547,6 +548,7 @@ void NebulaTexturesDialog::checkJobStatus()
 void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
 {
 	if (reply->error() != QNetworkReply::NoError) {
+		qWarning() << "[NebulaTextures] Failed to get job status.";
 		updateStatus(q_("Failed to get job status. Retry now..."));
 		reply->deleteLater();
 		changeUiState(false);
@@ -566,6 +568,7 @@ void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
 		connect(wcsReply, &QNetworkReply::finished, this, [this, wcsReply]() { onWcsDownloadReply(wcsReply); });
 
 	} else if (status == "error") {
+		qWarning() << "[NebulaTextures] Error in job processing.";
 		updateStatus(q_("Error in job processing!"));
 		jobStatusTimer->stop();
 		changeUiState(false);
@@ -594,6 +597,7 @@ void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
 void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
 {
 	if (reply->error() != QNetworkReply::NoError) {
+		qWarning() << "[NebulaTextures] Failed to download WCS file.";
 		updateStatus(q_("Failed to download WCS file..."));
 		reply->deleteLater();
 		changeUiState(false);
@@ -615,8 +619,6 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
 		if (match.hasMatch()) {
 			QString key = match.captured(1);
 			double value = match.captured(2).toDouble();
-			qDebug()<<match.captured(2);
-			qDebug()<<value;
 			if (key == "CRPIX1") {
 				CRPIX1 = value;
 			} else if (key == "CRPIX2") {
@@ -852,7 +854,7 @@ void NebulaTexturesDialog::renderTempCustomTexture()
 {
 	QString imagePath = ui->lineEditImagePath->text();
 	if (imagePath.isEmpty()) {
-		qWarning() << "Image path is empty.";
+		qWarning() << "[NebulaTextures] Image path is empty.";
 		updateStatus(q_("Image path is empty."));
 		return;
 	}
@@ -868,7 +870,7 @@ void NebulaTexturesDialog::renderTempCustomTexture()
 	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
 
 	if (path.isEmpty()){
-		qWarning() << "ERROR while loading nebula texture.";
+		qWarning() << "[NebulaTextures] Error while loading nebula texture.";
 		updateStatus(q_("Rendering failed."));
 	}
 	else{
@@ -921,7 +923,7 @@ void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
 	QFile jsonFile(cfgFilePath);
 
 	if (!jsonFile.open(QIODevice::ReadOnly)) {
-		qWarning() << "Failed to open JSON file for reading:" << cfgFilePath;
+		qWarning() << "[NebulaTextures] Failed to open JSON file for reading:" << cfgFilePath;
 		updateStatus(q_("Failed to open Configuration File!"));
 		return;
 	}
@@ -930,14 +932,14 @@ void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
 	jsonFile.close();
 
 	if (!jsonDoc.isObject()) {
-		qWarning() << "Invalid JSON structure in file:" << cfgFilePath;
+		qWarning() << "[NebulaTextures] Invalid JSON structure in file:" << cfgFilePath;
 		updateStatus(q_("Invalid JSON structure in Configuration File!"));
 		return;
 	}
 
 	QJsonObject rootObject = jsonDoc.object();
 	if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()) {
-		qWarning() << "No 'subTiles' array found in JSON file:" << cfgFilePath;
+		qWarning() << "[NebulaTextures] No 'subTiles' array found in JSON file:" << cfgFilePath;
 		updateStatus(q_("No 'subTiles' array in Configuration File!"));
 		return;
 	}
@@ -959,12 +961,12 @@ void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
 			// Delete the file if it exists
 			if (QFile::exists(imagePath)) {
 				if (QFile::remove(imagePath)) {
-					qDebug() << "Deleted image file:" << imagePath;
+					qDebug() << "[NebulaTextures] Deleted image file:" << imagePath;
 				} else {
-					qWarning() << "Failed to delete image file:" << imagePath;
+					qWarning() << "[NebulaTextures] Failed to delete image file:" << imagePath;
 				}
 			} else {
-				qWarning() << "Image file does not exist:" << imagePath;
+				qWarning() << "[NebulaTextures] Image file does not exist:" << imagePath;
 			}
 		}
 	}
@@ -997,7 +999,7 @@ void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 {
 	QString imagePath = ui->lineEditImagePath->text();
 	if (imagePath.isEmpty()) {
-		qWarning() << "Image path is empty.";
+		qWarning() << "[NebulaTextures] Image path is empty.";
 		updateStatus(q_("Image path is empty."));
 		return;
 	}
@@ -1012,7 +1014,7 @@ void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 	QString imageUrl = QString("%1_%2.%3").arg(baseName, timestamp, extension);
 	QString targetFilePath = pluginFolder + imageUrl;
 	if (!QFile::copy(imagePath, targetFilePath)) {
-		qWarning() << "Failed to copy image file to target path:" << targetFilePath;
+		qWarning() << "[NebulaTextures] Failed to copy image file to target path:" << targetFilePath;
 		updateStatus(q_("Failed to copy image file to user folder!"));
 		return;
 	}
@@ -1067,14 +1069,14 @@ void NebulaTexturesDialog::registerTexture(const QString& imageUrl, const QJsonA
 
 	if (jsonFile.exists() && groupName!=TEST_TEXNAME) {
 		if (!jsonFile.open(QIODevice::ReadOnly)) {
-			qWarning() << "Failed to open existing JSON file for reading:" << path;
+			qWarning() << "[NebulaTextures] Failed to open existing JSON file for reading:" << path;
 			updateStatus(q_("Failed to open Configuration File!"));
 			return;
 		}
 
 		QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
 		if (!jsonDoc.isObject()) {
-			qWarning() << "Invalid JSON structure in file:" << path;
+			qWarning() << "[NebulaTextures] Invalid JSON structure in file:" << path;
 			updateStatus(q_("Invalid JSON structure in Configuration File!"));
 			return;
 		}
@@ -1117,7 +1119,7 @@ void NebulaTexturesDialog::registerTexture(const QString& imageUrl, const QJsonA
 	rootObject["subTiles"] = subTiles;
 
 	if (!jsonFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
-		qWarning() << "Failed to open JSON file for writing:" << path;
+		qWarning() << "[NebulaTextures] Failed to open JSON file for writing:" << path;
 		updateStatus(q_("Failed to open Configuration File for writing!"));
 		return;
 	}
@@ -1157,18 +1159,24 @@ void NebulaTexturesDialog::removeTexture()
 
 	QString path = StelFileMgr::getUserDir() + configFile;
 	QFile jsonFile(path);
-	if (!jsonFile.open(QIODevice::ReadOnly))
+	if (!jsonFile.open(QIODevice::ReadOnly)){
+		qWarning() << "[NebulaTextures] Failed to open existing JSON file for reading:" << path;
 		return;
+	}
 
 	QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
 	jsonFile.close();
 
-	if (!jsonDoc.isObject())
+	if (!jsonDoc.isObject()){
+		qWarning() << "[NebulaTextures] Invalid JSON structure in file:" << path;
 		return;
+	}
 
 	QJsonObject rootObject = jsonDoc.object();
-	if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray())
+	if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()){
+		qWarning() << "[NebulaTextures] No 'subTiles' array found in JSON file:" << path;
 		return;
+	}
 
 	QJsonArray subTiles = rootObject["subTiles"].toArray();
 	QJsonArray updatedSubTiles;
@@ -1197,8 +1205,10 @@ void NebulaTexturesDialog::removeTexture()
 		return;
 
 	rootObject["subTiles"] = updatedSubTiles;
-	if (!jsonFile.open(QIODevice::WriteOnly))
+	if (!jsonFile.open(QIODevice::WriteOnly)){
+		qWarning() << "[NebulaTextures] Failed to open JSON file for writing:" << path;
 		return;
+	}
 
 	jsonFile.write(QJsonDocument(rootObject).toJson(QJsonDocument::Indented));
 	jsonFile.close();
@@ -1230,14 +1240,14 @@ void NebulaTexturesDialog::reloadData()
 	QJsonObject rootObject;
 
 	if (!jsonFile.open(QIODevice::ReadOnly)) {
-		qWarning() << "Failed to open JSON file for reading:" << path;
+		qWarning() << "[NebulaTextures] Failed to open JSON file for reading:" << path;
 		ui->listWidget->clear();
 		return;
 	}
 
 	QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
 	if (!jsonDoc.isObject()) {
-		qWarning() << "Invalid JSON structure in file:" << path;
+		qWarning() << "[NebulaTextures] Invalid JSON structure in file:" << path;
 		return;
 	}
 
@@ -1246,7 +1256,7 @@ void NebulaTexturesDialog::reloadData()
 
 	// read and show into listWidget
 	if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()) {
-		qWarning() << "No 'subTiles' array found in JSON file:" << path;
+		qWarning() << "[NebulaTextures] No 'subTiles' array found in JSON file:" << path;
 		return;
 	}
 
@@ -1256,7 +1266,7 @@ void NebulaTexturesDialog::reloadData()
 
 	for (const QJsonValue& subTileValue : subTiles) {
 		if (!subTileValue.isObject()) {
-			qWarning() << "Invalid subTile entry found, skipping...";
+			qWarning() << "[NebulaTextures] Invalid subTile entry found, skipping...";
 			continue;
 		}
 
@@ -1372,7 +1382,6 @@ void NebulaTexturesDialog::avoidConflict()
 					if(subcusTile->getVisible() == true && subcusTile->getSkyConvexPolygons().size()>0){
 						SphericalRegionP subcusPoly = subcusTile->getSkyConvexPolygons()[0];
 						if (subcusPoly->intersects(subdefPoly)){
-							// qDebug() << "intersect:"<< subdefTile->absoluteImageURI << "," << subcusTile->absoluteImageURI;
 							subdefTile->setVisible(false);
 						}
 					}
