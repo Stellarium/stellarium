@@ -77,7 +77,7 @@ double NebulaTextures::getCallOrder(StelModuleActionName actionName) const
 
 void NebulaTextures::init()
 {
-	configDialog->reloadTextures();
+	configDialog->refreshTextures();
 }
 
 void NebulaTextures::draw(StelCore* core)

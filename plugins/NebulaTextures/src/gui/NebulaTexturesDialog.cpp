@@ -70,7 +70,7 @@ NebulaTexturesDialog::NebulaTexturesDialog()
 	connect(subStatusTimer, &QTimer::timeout, this, &NebulaTexturesDialog::checkSubStatus);
 	connect(jobStatusTimer, &QTimer::timeout, this, &NebulaTexturesDialog::checkJobStatus);
 
-	reloadTextures();
+	refreshTextures();
 }
 
 NebulaTexturesDialog::~NebulaTexturesDialog()
@@ -89,9 +89,9 @@ void NebulaTexturesDialog::retranslate()
 }
 
 /*
- * Initializes and sets up the content and interactions of the NebulaTexturesDialog.
- * This function configures UI elements, establishes signal-slot connections,
- * and loads necessary settings and data for the dialog.
+ * Set up the content and interactions of the NebulaTexturesDialog.
+ * Configure UI elements, establish signal-slot connections,
+ * and load necessary settings and data for the dialog.
  */
 void NebulaTexturesDialog::createDialogContent()
 {
@@ -146,11 +146,7 @@ void NebulaTexturesDialog::restoreDefaults()
 }
 
 /*
- * Sets the HTML content for the "About" section in the dialog.
- * This function generates the HTML that provides information about the Nebula Textures
- * plugin, including its version, license, author, description, and publication citation.
- * The HTML content is then displayed in the aboutTextBrowser widget with the appropriate
- * style settings.
+ * Set the HTML content for the "About" section in the dialog.
  */
 void NebulaTexturesDialog::setAboutHtml(void)
 {
@@ -184,39 +180,32 @@ void NebulaTexturesDialog::setAboutHtml(void)
 	ui->aboutTextBrowser->setHtml(html);
 }
 
-// Sets the value for showing custom textures in the configuration and reloads textures.
-void NebulaTexturesDialog::setShowCustomTextures(bool b)
+
+/*
+ * Toggle the enabled/disabled state of UI components based on the provided "freeze" flag.
+ *
+ * @param freeze  A boolean value indicating whether to disable (true) or enable (false) the UI elements.
+ */
+void NebulaTexturesDialog::changeUiState(bool freeze)
 {
-	m_conf->setValue(MS_CONFIG_PREFIX + "/showCustomTextures", b);
-	reloadTextures();
+	ui->openFileButton->setDisabled(freeze);
+	ui->uploadImageButton->setDisabled(freeze);
+	ui->goPushButton->setDisabled(freeze);
+	ui->renderButton->setDisabled(freeze);
+	ui->unrenderButton->setDisabled(freeze);
+	ui->addCustomTextureButton->setDisabled(freeze);
 }
 
-// Gets the current setting for showing custom textures from the configuration.
-bool NebulaTexturesDialog::getShowCustomTextures()
-{
-	return m_conf->value(MS_CONFIG_PREFIX + "/showCustomTextures", false).toBool();
-}
-
-// Sets the value for avoiding area conflicts in the configuration and reloads textures.
-void NebulaTexturesDialog::setAvoidAreaConflict(bool b)
-{
-	m_conf->setValue(MS_CONFIG_PREFIX + "/avoidAreaConflict", b);
-	reloadTextures();
-}
-
-// Gets the current setting for avoiding area conflicts from the configuration.
-bool NebulaTexturesDialog::getAvoidAreaConflict()
-{
-	return m_conf->value(MS_CONFIG_PREFIX + "/avoidAreaConflict", false).toBool();
-}
-
-
+// Update the status text displayed in the UI
 void NebulaTexturesDialog::updateStatus(const QString &status)
 {
 	ui->statusText->setText(status);
 }
 
 
+/*
+ * Open a file dialog to select an image file and update the UI.
+ */
 void NebulaTexturesDialog::openImageFile()
 {
 	QString fileName = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Open Image"), QDir::homePath(), tr("Images (*.png *.jpg *.bmp *.tiff)"));
@@ -227,11 +216,17 @@ void NebulaTexturesDialog::openImageFile()
 	}
 }
 
+
 /*
- * Handles the upload image button click event.
- * Validates input fields, creates a POST request to the API for login,
- * and initiates the image upload process.
- * Updates the UI state and connects to the reply signal for further processing.
+ * Upload an image to the server after validating input.
+ * Send the API key and image path via a POST request to the server.
+ *
+ * Steps:
+ *   - Validate the API key and image path.
+ *   - Optionally save the API key for future use.
+ *   - Create a JSON object with the API key.
+ *   - Send the JSON data in a POST request to the server's login API.
+ *   - Update the UI to indicate the upload process is in progress.
  */
 void NebulaTexturesDialog::uploadImage() // WARN: image should not be flip
 {
@@ -282,9 +277,19 @@ void NebulaTexturesDialog::uploadImage() // WARN: image should not be flip
 }
 
 /*
- * Handles the reply from the login request.
- * If login is successful, it proceeds to upload the selected image with the session info.
- * Sends the image as a multipart/form-data request and updates the UI accordingly.
+ * Handle the response after a login request.
+ * If the login is successful, uploads the selected image file to the server.
+ *
+ * Steps:
+ *   - Read the response content from the login request.
+ *   - If the login failed, update the UI and return.
+ *   - If the login succeeded, open the selected image file.
+ *   - Generate a unique boundary key for multipart form-data.
+ *   - Prepare the POST body with the session data and image file.
+ *   - Send the upload request to the server with the image and metadata.
+ *   - Update the UI to reflect the upload status.
+ *
+ * @param reply The network reply object containing the server response.
  */
 void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
 {
@@ -356,6 +361,7 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
 
 	request.setHeader(QNetworkRequest::ContentLengthHeader, QByteArray::number(body.size()));
 
+
 	QNetworkReply *uploadReply = networkManager->post(request, body);
 	connect(uploadReply, &QNetworkReply::finished, this, [this, uploadReply]() {onUploadReply(uploadReply);});
 
@@ -363,10 +369,18 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
 	updateStatus(q_("Uploading image..."));
 }
 
+
 /*
- * Handles the reply from the image upload request.
- * If the upload is successful, extracts the submission ID and starts a timer to check the upload status.
- * Updates the UI accordingly and manages the reply cleanup.
+ * Handle the response after an image upload request.
+ *
+ * Steps:
+ *   - Read the response content from the upload request.
+ *   - If the upload fails, update the UI with an error message and return.
+ *   - If the upload is successful, parse the response JSON to retrieve the sub-id.
+ *   - Start a timer to check the upload status after a short delay.
+ *   - Update the UI to indicate the upload was successful.
+ *
+ * @param reply The network reply object containing the server response.
  */
 void NebulaTexturesDialog::onUploadReply(QNetworkReply *reply)
 {
@@ -388,9 +402,16 @@ void NebulaTexturesDialog::onUploadReply(QNetworkReply *reply)
 	updateStatus(q_("Image uploaded. Please wait..."));
 }
 
+
 /*
- * Sends a request to check the status of a submission using its ID.
- * Upon receiving the response, the function calls `onsubStatusReply` to process the result.
+ * Send a request to check the status of a submitted image.
+ * It queries the API to retrieve the current status of the image submission.
+ *
+ * Steps:
+ *   - Construct the URL for checking the submission status using the sub-id.
+ *   - Create a network request with the appropriate header and URL.
+ *   - Send the request and connect to the finished signal to handle the response.
+ *   - Update the UI to indicate the submission status is being checked.
  */
 void NebulaTexturesDialog::checkSubStatus()
 {
@@ -402,9 +423,20 @@ void NebulaTexturesDialog::checkSubStatus()
 	updateStatus(q_("Requesting submission. Please wait..."));
 }
 
+
 /*
- * Handles the response from the submission status request.
- * If successful, it retrieves the job ID and starts the job status timer; otherwise, it reports an error.
+ * Handle the response for a submission status request.
+ *
+ * Steps:
+ *   - Check if the network reply encountered an error.
+ *   - If there's an error, update the status, delete the reply, stop timers, and exit.
+ *   - Parse the reply content as JSON and extract the "jobs" array.
+ *   - If the "jobs" array contains a valid job ID:
+ *     - Save the job ID for later use.
+ *     - Stop the submission status timer and start the job status timer.
+ *     - Update the status message to inform the user.
+ *
+ * @param reply The QNetworkReply object containing the submission status response.
  */
 void NebulaTexturesDialog::onsubStatusReply(QNetworkReply *reply)
 {
@@ -429,9 +461,16 @@ void NebulaTexturesDialog::onsubStatusReply(QNetworkReply *reply)
 	}
 }
 
+
 /*
- * Sends a request to check the status of a job using its job ID.
- * Upon receiving the response, the function calls `onJobStatusReply` to process the result.
+ * Send a request to check the status of the current job.
+ * It queries the API to retrieve the processing status of the job.
+ *
+ * Steps:
+ *   - Construct the URL using the job ID.
+ *   - Create a network request with the correct header and URL.
+ *   - Send the GET request and connect to the finished signal to process the response.
+ *   - Update the UI to indicate the job status is being checked.
  */
 void NebulaTexturesDialog::checkJobStatus()
 {
@@ -447,8 +486,21 @@ void NebulaTexturesDialog::checkJobStatus()
 
 
 /*
- * Handles the response from the job status request.
- * If successful, it checks the job status and either triggers WCS file download or reports an error.
+ * Handle the API response for checking the job status.
+ *
+ * Steps:
+ *   - Check for errors in the network reply. If any, update the status and stop processing.
+ *   - Parse the JSON response to extract the job status.
+ *   - If the status is "success":
+ *       - Notify the user about the job completion.
+ *       - Stop the job status timer.
+ *       - Initiate a request to download the WCS file.
+ *   - If the status is "error":
+ *       - Notify the user about the error.
+ *       - Stop the job status timer and reset the UI state.
+ *   - Clean up the reply object.
+ *
+ * @param reply The QNetworkReply object containing the job status response.
  */
 void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
 {
@@ -479,10 +531,23 @@ void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
 	reply->deleteLater();
 }
 
+
 /*
- * Handles the response after downloading the WCS (World Coordinate System) file.
- * The function parses the WCS data, extracts relevant parameters, converts pixel coordinates to celestial coordinates,
- * and updates the user interface with the calculated coordinates (top-left, bottom-left, top-right, bottom-right).
+ * Handle the response for downloading the WCS file and process coordinates calculating.
+ *
+ * Steps:
+ *   - Check for errors in the network reply. If any, update the status, reset the UI state, and stop processing.
+ *   - Parse the WCS file content into lines and extract key parameters using a regular expression.
+ *   - Map the extracted WCS parameters (e.g., CRPIX1, CRPIX2, CRVAL1, CRVAL2, etc.) to corresponding member variables.
+ *   - Use the WCS parameters to calculate celestial coordinates (RA, Dec) for the image corners:
+ *       - Top-left
+ *       - Bottom-left
+ *       - Top-right
+ *       - Bottom-right
+ *   - Update the UI fields with the calculated coordinates for reference and display purposes.
+ *   - Notify the user about the successful completion of processing and prompt them to proceed with rendering or saving the result.
+ *
+ * @param reply The QNetworkReply object containing the wcs downloading response.
  */
 void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
 {
@@ -576,8 +641,8 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
 
 
 /*
- * Converts pixel coordinates (X, Y) on an image to celestial coordinates (longitude, latitude) using the World Coordinate System (WCS) parameters.
- * This function applies a series of transformations to convert pixel-based coordinates into the corresponding celestial coordinates,
+ * Convert pixel coordinates (X, Y) on an image to celestial coordinates (RA, Dec) using the World Coordinate System (WCS) parameters.
+ * Apply a series of transformations to convert pixel-based coordinates into the corresponding celestial coordinates,
  * taking into account the reference coordinates, rotation matrix, and other transformation parameters.
  *
  * Parameters:
@@ -694,34 +759,15 @@ QPair<double, double> NebulaTexturesDialog::PixelToCelestial(int X, int Y, doubl
 	return QPair<double, double>(lng, lat);
 }
 
-/*
- * Toggles the enabled/disabled state of UI components based on the provided "freeze" flag.
- *
- * When "freeze" is true, all specified UI buttons are disabled, effectively "freezing" the interface.
- * When "freeze" is false, the buttons are enabled, allowing user interaction.
- *
- * @param freeze  A boolean value indicating whether to disable (true) or enable (false) the UI elements.
- */
-void NebulaTexturesDialog::changeUiState(bool freeze)
-{
-	ui->openFileButton->setDisabled(freeze);
-	ui->uploadImageButton->setDisabled(freeze);
-	ui->goPushButton->setDisabled(freeze);
-	ui->renderButton->setDisabled(freeze);
-	ui->unrenderButton->setDisabled(freeze);
-	ui->addCustomTextureButton->setDisabled(freeze);
-}
 
 /*
- * Slot triggered when the "Go" button is clicked. This function moves the view to the specified celestial coordinates
- * (right ascension and declination) by converting them into 3D spherical coordinates and adjusting the view up vector.
- * The movement is handled by the movement manager, which is part of the core functionality of the Stellarium application.
+ * Goto the center coordinates (RA and Dec) of texture in view.
  *
- * Steps performed by this function:
- *   1. Converts the reference right ascension and declination (referRA, referDec) into radians for spherical calculations.
- *   2. Sets the view up vector to a stable direction (J2000 coordinate system).
- *   3. Adjusts the view up vector based on the equatorial mount mode and latitude for stability when close to the poles.
- *   4. Calls the movement manager to move the view to the target coordinates, ensuring smooth transition with auto-duration.
+ * Steps:
+ *   - Convert the reference right ascension and declination (referRA, referDec) into radians for spherical calculations.
+ *   - Set the view up vector to a stable direction (J2000 coordinate system).
+ *   - Adjust the view up vector based on the equatorial mount mode and latitude for stability.
+ *   - Call the movement manager to move the view to the target coordinates, ensuring smooth transition with auto-duration.
  */
 void NebulaTexturesDialog::goPush()
 {
@@ -749,14 +795,14 @@ void NebulaTexturesDialog::goPush()
 }
 
 /*
- * Renders a temporary custom texture for the nebula based on the user-provided image path.
- * Checks if the path is valid, adds the texture to the system, and inserts it into the sky layer.
- * Updates the UI status on success or failure and optionally hides the default texture if enabled.
+ * Render temporary custom texture for the nebula based on the user-provided image path.
+ * Check if the path is valid, add the texture to the system, and insert it into the sky layer.
+ * Update the UI status on success or failure and optionally hide the default texture if enabled.
  *
  * Steps:
- *   - Validates image path.
- *   - Renders the custom texture by adding it to the sky layer.
- *   - Updates UI status and manages default texture visibility based on user preferences.
+ *   - Validate image path.
+ *   - Render the custom texture by adding it to the sky layer.
+ *   - Update UI status and manage default texture visibility based on user preferences.
  */
 void NebulaTexturesDialog::renderTempCustomTexture()
 {
@@ -791,15 +837,37 @@ void NebulaTexturesDialog::renderTempCustomTexture()
 	}
 }
 
+
 /*
- * Reads a given configuration file and deletes the files listed in the "imageUrl" field.
- * This function assumes that the configuration file contains a list of subTiles, each with an "imageUrl".
+ * Cancel temporary custom texture rendering and restore the default texture.
  *
  * Steps:
- *   1. Opens the given configuration file and reads the JSON data.
- *   2. Loops through each subTile to extract the "imageUrl".
- *   3. Deletes the file corresponding to each "imageUrl" if it exists.
- *   4. Logs the process and updates the UI.
+ *   - Remove the temporary texture from the sky layer.
+ *   - Restore the default texture and reload all textures.
+ *   - Update the UI status to reflect the cancellation.
+ */
+void NebulaTexturesDialog::unRenderTempCustomTexture()
+{
+	if(!flag_renderTempTex) return;
+	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+	skyLayerMgr->removeSkyLayer(TEST_TEXNAME);
+
+	setTexturesVisible(DEFAULT_TEXNAME, true);
+	refreshTextures();
+	updateStatus(q_("Cancel rendering."));
+}
+
+
+/*
+ * Delete the images listed in the given configuration file.
+ *
+ * Steps:
+ *   - Open the given configuration file and read the JSON data.
+ *   - Loop through each subTile to extract the "imageUrl".
+ *   - Delete the file corresponding to each "imageUrl" if it exists.
+ *   - Log the process and update the UI.
+ *
+ * @param cfgFile The path to the configuration file.
  */
 void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
 {
@@ -844,7 +912,7 @@ void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
 			QString imageUrl = subTileObject["imageUrl"].toString();
 			QString imagePath = StelFileMgr::getUserDir() + pluginDir + imageUrl;
 
-			// Step 3: Delete the file if it exists
+			// Delete the file if it exists
 			if (QFile::exists(imagePath)) {
 				if (QFile::remove(imagePath)) {
 					qDebug() << "Deleted image file:" << imagePath;
@@ -859,42 +927,29 @@ void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
 	updateStatus(q_("Images deletion completed."));
 }
 
+
 /*
- * Cancels the rendering of the temporary custom texture.
- * Removes the custom texture from the sky layer and restores the default texture.
- * Reloads all textures and updates the UI status to indicate the cancellation.
+ *  Add the texture to the custom textures configuration
  */
-void NebulaTexturesDialog::unRenderTempCustomTexture()
-{
-	if(!flag_renderTempTex) return;
-	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-	skyLayerMgr->removeSkyLayer(TEST_TEXNAME);
-
-	setTexturesVisible(DEFAULT_TEXNAME, true);
-	reloadTextures();
-	updateStatus(q_("Cancel rendering."));
-}
-
-
 void NebulaTexturesDialog::addCustomTexture()
 {
 	addTexture(configFile, CUSTOM_TEXNAME);
 }
 
 /*
- * Adds a texture image to the custom textures folder and updates its coordinates.
+ * Add the texture to configuration, groupName needed.
  *
  * Steps:
- *   1. Validates the image path from the input field.
- *   2. Copies the image file to the user folder with a timestamped name.
- *   3. Retrieves celestial coordinates (RA, Dec) from the UI for the image's corners and reference point.
- *   4. Organizes the coordinates into a JSON array for later use.
- *   5. Calls `registerTexture` to store the texture and its associated coordinates.
+ *   - Validate the image path from the input field.
+ *   - Copy the image file to the user folder with a timestamped name.
+ *   - Retrieve celestial coordinates (RA, Dec) from the UI for the image's corners and reference point.
+ *   - Organize the coordinates into a JSON array for later use.
+ *   - Call `registerTexture` to store the texture and its associated coordinates.
  *
- * @param addPath  The path where the texture is to be added.
- * @param keyName  The unique key name for the texture.
+ * @param cfgPath  The path of the configuration file to update.
+ * @param groupName  The group name for the texture, custom or temporary.
  */
-void NebulaTexturesDialog::addTexture(QString addPath, QString keyName) // logic, hint: will add next time restart
+void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 {
 	QString imagePath = ui->lineEditImagePath->text();
 	if (imagePath.isEmpty()) {
@@ -936,32 +991,37 @@ void NebulaTexturesDialog::addTexture(QString addPath, QString keyName) // logic
 	innerWorldCoords.append(QJsonArray({topRightRA, topRightDec}));
 	innerWorldCoords.append(QJsonArray({topLeftRA, topLeftDec}));
 
-	registerTexture(imageUrl, innerWorldCoords, 0.2, 13.4, keyName, addPath);
+	registerTexture(imageUrl, innerWorldCoords, 0.2, 13.4, cfgPath, groupName);
 }
 
+
 /*
- * Updates the custom textures configuration JSON file with new texture data.
+ * Register the texture to the custom textures configuration JSON file with new texture data.
  *
- * This function checks if the specified JSON configuration file exists. If it does, it reads and updates the file with the new texture information,
- * including world coordinates, texture coordinates, resolution, and brightness. If the file does not exist, it creates a new configuration with default values.
+ * Steps:
+ *   - Check if the specified JSON configuration file exists.
+ *   - If it exists, open and read the file, then update it with new texture information (world coordinates, texture coordinates, resolution, brightness).
+ *   - If the file does not exist, create a new configuration with default values.
+ *   - Append the new texture data to the configuration file and write the updated file back to disk.
+ *   - Update the UI status to reflect success or failure.
  *
  * @param imageUrl        The URL of the texture image.
  * @param innerWorldCoords The world coordinates corresponding to the texture.
  * @param minResolution   The minimum resolution of the texture.
  * @param maxBrightness   The maximum brightness of the texture.
- * @param keyName         The key name of the texture.
- * @param addPath         The path to the configuration file to update.
+ * @param cfgPath  The path of the configuration file to update.
+ * @param groupName  The group name for the texture, custom or temporary.
  */
-void NebulaTexturesDialog::registerTexture(const QString& imageUrl, const QJsonArray& innerWorldCoords, double minResolution, double maxBrightness, QString keyName, QString addPath)
+void NebulaTexturesDialog::registerTexture(const QString& imageUrl, const QJsonArray& innerWorldCoords, double minResolution, double maxBrightness, QString cfgPath, QString groupName)
 {
 	QString pluginFolder = StelFileMgr::getUserDir() + pluginDir;
 	QDir().mkpath(pluginFolder);
 
-	QString path = StelFileMgr::getUserDir() + addPath;
+	QString path = StelFileMgr::getUserDir() + cfgPath;
 	QFile jsonFile(path);
 	QJsonObject rootObject;
 
-	if (jsonFile.exists() && keyName!=TEST_TEXNAME) {
+	if (jsonFile.exists() && groupName!=TEST_TEXNAME) {
 		if (!jsonFile.open(QIODevice::ReadOnly)) {
 			qWarning() << "Failed to open existing JSON file for reading:" << path;
 			updateStatus(q_("Failed to open Configuration File!"));
@@ -978,7 +1038,7 @@ void NebulaTexturesDialog::registerTexture(const QString& imageUrl, const QJsonA
 		rootObject = jsonDoc.object();
 		jsonFile.close();
 	} else {
-		rootObject["shortName"] = keyName;
+		rootObject["shortName"] = groupName;
 		rootObject["description"] = "User specified low resolution nebula texture set.";
 		rootObject["minResolution"] = 0.05;
 		rootObject["alphaBlend"] = true;
@@ -1028,12 +1088,17 @@ void NebulaTexturesDialog::registerTexture(const QString& imageUrl, const QJsonA
 
 
 /*
- * Handles the removal of a selected texture from the custom textures list.
+ * Remove the selected texture from the list and deletes the associated image file.
  *
- * This function displays a confirmation dialog, and if confirmed,
- * it removes the selected texture from the JSON configuration file by
- * deleting the corresponding entry from the "subTiles" array.
- * After updating the JSON file, the item is removed from the UI list.
+ * Steps:
+ *   - Get the currently selected item from the texture list.
+ *   - Prompt the user with a confirmation dialog asking whether they want to remove the texture.
+ *   - If the user confirms, proceed with the removal process.
+ *   - Open and parse the JSON configuration file that contains texture information.
+ *   - Search for the texture in the "subTiles" array by matching the texture name (`imageUrl`).
+ *   - If the texture is found, delete the corresponding image file from the disk.
+ *   - Remove the texture entry from the JSON and save the updated configuration file.
+ *   - Finally, remove the texture from the UI list.
  */
 void NebulaTexturesDialog::removeTexture()
 {
@@ -1097,17 +1162,20 @@ void NebulaTexturesDialog::removeTexture()
 
 
 /*
- * Reloads the custom textures data from the JSON configuration file and updates the UI list.
+ * Reload texture data and update the UI list widget with available sub-tiles.
  *
- * This function reads the JSON file containing custom texture data,
- * extracts the "subTiles" array, and updates the UI list
- * (listWidget) with the texture URLs. Each list item stores the associated subTile data for future use.
- * If the file cannot be read or the structure is invalid,
- * appropriate warnings are logged.
+ * Steps:
+ *   - Refresh textures by calling the `refreshTextures()` function.
+ *   - Retrieve the path to the JSON configuration file.
+ *   - Open and parse the JSON file to extract texture data.
+ *   - Validate the JSON structure, ensuring it contains a "subTiles" array.
+ *   - Clear the existing list widget items.
+ *   - Populate the list widget with entries from the "subTiles" array, displaying the image URL.
+ *   - Associate metadata from each sub-tile with its corresponding list widget item.
  */
 void NebulaTexturesDialog::reloadData()
 {
-	reloadTextures();
+	refreshTextures();
 
 	QString path = StelFileMgr::getUserDir()+configFile;
 
@@ -1160,32 +1228,14 @@ void NebulaTexturesDialog::reloadData()
 
 
 /*
- * Sets the visibility of a specified texture and its sub-tiles.
+ * Refresh textures and manage their visibility.
  *
- * This function iterates over all sub-tiles of a given texture (identified by TexName)
- * and sets their visibility based on the provided `visible` parameter.
- * If the texture or sub-tiles cannot be found, it returns false.
+ * Steps:
+ *   - Check "show custom textures" flag
+ *   - If enabled, make them visible and calls avoidConflict to handle potential conflicts.
+ *   - If disabled, ensure the custom textures are hidden and the default textures are visible.
  */
-bool NebulaTexturesDialog::setTexturesVisible(QString TexName, bool visible)
-{
-	StelSkyImageTile* mTile = get_aTile(TexName);
-	if(!mTile) return false;
-	for (int i = 0; i < mTile->getSubTiles().size(); ++i) {
-		auto subTile = mTile->getSubTiles()[i];
-		StelSkyImageTile* subImageTile = dynamic_cast<StelSkyImageTile*>(subTile);
-		subImageTile->setVisible(visible);
-	}
-	return true;
-}
-
-
-/*
- * Reloads and manages the visibility of textures based on the "show custom textures" flag.
- *
- * If custom textures are enabled, it makes them visible and calls avoidConflict to handle any potential conflicts.
- * If custom textures are not enabled, it ensures the custom textures are hidden and the default textures are visible.
- */
-void NebulaTexturesDialog::reloadTextures()
+void NebulaTexturesDialog::refreshTextures()
 {
 
 	bool showCustom = getShowCustomTextures();
@@ -1201,17 +1251,46 @@ void NebulaTexturesDialog::reloadTextures()
 
 
 /*
- * Retrieves a StelSkyImageTile object based on the provided texture key.
+ * Set the visibility of the specified texture and its sub-tiles.
  *
- * Searches for the sky layer associated with the given key in the StelSkyLayerMgr. If found, it attempts to cast
- * the layer to a StelSkyImageTile and returns it. Returns nullptr if no layer is found or the cast fails.
+ * Steps:
+ *   - Retrieve the texture identified by `TexName`.
+ *   - If the texture is found, iterate through its sub-tiles.
+ *   - Set the visibility of each sub-tile based on the `visible` parameter.
+ *   - Return false if the texture or its sub-tiles cannot be found.
+ *
+ * @param TexName  The name of the texture to modify.
+ * @param visible  The visibility state to set for the texture and its sub-tiles.
+ *
+ * @return true if the texture and its sub-tiles are found and visibility is set successfully.
+ *         false if the texture or its sub-tiles cannot be found.
+ */
+bool NebulaTexturesDialog::setTexturesVisible(QString TexName, bool visible)
+{
+	StelSkyImageTile* mTile = get_aTile(TexName);
+	if(!mTile) return false;
+	for (int i = 0; i < mTile->getSubTiles().size(); ++i) {
+		auto subTile = mTile->getSubTiles()[i];
+		StelSkyImageTile* subImageTile = dynamic_cast<StelSkyImageTile*>(subTile);
+		subImageTile->setVisible(visible);
+	}
+	return true;
+}
+
+
+/*
+ * Retrieve a StelSkyImageTile object based on the provided texture key.
+ *
+ * Searches for the sky layer associated with the given key in the StelSkyLayerMgr.
+ * If found, it attempts to cast the layer to a StelSkyImageTile and returns it.
+ * Returns nullptr if no layer is found or the cast fails.
  */
 StelSkyImageTile* NebulaTexturesDialog::get_aTile(QString key)
 {
 	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
 	auto aTex = skyLayerMgr->allSkyLayers.find(key);
 	if(aTex == skyLayerMgr->allSkyLayers.end())
-		return NULL;
+		return nullptr;
 	StelSkyLayerMgr::SkyLayerElem* aElem = aTex.value();
 	if (!aElem || !aElem->layer) return nullptr;
 	StelSkyImageTile* aTile = dynamic_cast<StelSkyImageTile*>(aElem->layer.data());
@@ -1220,11 +1299,15 @@ StelSkyImageTile* NebulaTexturesDialog::get_aTile(QString key)
 
 
 /*
- * Prevents conflicts between custom and default textures by hiding overlapping tiles.
+ * Avoid conflicts between custom and default textures by hiding overlapping tiles.
  *
- * If the 'Avoid Area Conflict' flag is enabled, this function checks for overlapping regions between the
- * custom and default textures. If an overlap is found, the conflicting default texture tile is hidden.
- * If conflicts are not to be avoided, all default texture tiles are made visible.
+ * Steps:
+ *   - Check if the 'Avoid Area Conflict' flag is enabled.
+ *   - Retrieve the custom and default texture tiles.
+ *   - Loop through the sub-tiles of the default texture.
+ *   - For each visible sub-tile, check for overlap with custom texture sub-tiles.
+ *   - Hide the default texture sub-tile if overlap is detected.
+ *   - If conflicts are not to be avoided, make all default texture tiles visible.
  */
 void NebulaTexturesDialog::avoidConflict()
 {
@@ -1233,6 +1316,7 @@ void NebulaTexturesDialog::avoidConflict()
 		StelSkyImageTile* defTile = get_aTile(DEFAULT_TEXNAME);
 		if(!cusTile) return;
 		if(!defTile) return;
+
 		for (int i = 0; i < defTile->getSubTiles().size(); ++i) {
 			StelSkyImageTile* subdefTile = dynamic_cast<StelSkyImageTile*>(defTile->getSubTiles()[i]);
 			if(subdefTile->getVisible() == true && subdefTile->getSkyConvexPolygons().size()>0){
@@ -1255,3 +1339,29 @@ void NebulaTexturesDialog::avoidConflict()
 	}
 }
 
+
+// Set the value for showing custom textures in the configuration and refresh textures.
+void NebulaTexturesDialog::setShowCustomTextures(bool b)
+{
+	m_conf->setValue(MS_CONFIG_PREFIX + "/showCustomTextures", b);
+	refreshTextures();
+}
+
+// Get the value for showing custom textures from the configuration.
+bool NebulaTexturesDialog::getShowCustomTextures()
+{
+	return m_conf->value(MS_CONFIG_PREFIX + "/showCustomTextures", false).toBool();
+}
+
+// Set the value for avoiding area conflicts in the configuration and refresh textures.
+void NebulaTexturesDialog::setAvoidAreaConflict(bool b)
+{
+	m_conf->setValue(MS_CONFIG_PREFIX + "/avoidAreaConflict", b);
+	refreshTextures();
+}
+
+// Get the value for avoiding area conflicts from the configuration.
+bool NebulaTexturesDialog::getAvoidAreaConflict()
+{
+	return m_conf->value(MS_CONFIG_PREFIX + "/avoidAreaConflict", false).toBool();
+}

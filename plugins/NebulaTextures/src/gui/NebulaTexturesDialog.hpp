@@ -42,84 +42,176 @@ class NebulaTexturesDialog : public StelDialog
 	Q_OBJECT
 
 public:
+	//! Constructor
 	NebulaTexturesDialog();
+
+	//! Destructor
 	~NebulaTexturesDialog() override;
 
+	//! Get a StelSkyImageTile texture
 	StelSkyImageTile* get_aTile(QString key);
 
 public slots:
 	void retranslate() override;
 
+	//! Convert pixel coordinates on the image to celestial coordinates with WCS parameters
+	QPair<double, double> PixelToCelestial(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2, double CD1_1, double CD1_2, double CD2_1, double CD2_2);
 
-	QPair<double, double> PixelToCelestial(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
-							double CD1_1, double CD1_2, double CD2_1, double CD2_2);
 
+	//! Goto the center coordinates (RA and Dec) of texture
+	void goPush();
+
+	//! Temporary texture rendering for debugging
 	void renderTempCustomTexture();
+
+	//! Cancel temporary texture rendering for debugging
 	void unRenderTempCustomTexture();
 
-	void addTexture(QString addPath, QString keyName);
-	void registerTexture(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness, QString keyName, QString addPath);
-
+	//! Delete the images listed in the given configuration file
 	void deleteImagesFromCfg(const QString& cfgFilePath);
 
-	void reloadTextures();
-	void avoidConflict();
+
+	//! Add the texture to the custom textures configuration
+	void addCustomTexture();
+
+	//! Add the texture to configuration, need to specify the texture groupname
+	void addTexture(QString cfgPath, QString groupName);
+
+	//! Register the texture to the custom textures configuration
+	void registerTexture(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness, QString cfgPath, QString groupName);
+
+
+	//! Remove the selected texture from the list and deletes the associated image file
+	void removeTexture();
+
+
+	//! Reload texture configuration data
+	void reloadData();
+
+
+	//! Refresh textures and manage their visibility
+	void refreshTextures();
+
+
+	//! Set the visibility of the specified texture and its sub-tiles
 	bool setTexturesVisible(QString TexName, bool visible);
 
+	//! Avoid conflicts between custom and default textures by hiding overlapping tiles
+	void avoidConflict();
+
+
+	//! Get the value for showing custom textures
+	bool getShowCustomTextures();
+	//! Set the value for showing custom textures
+	void setShowCustomTextures(bool b);
+
+	//! Get the value for avoiding area conflicts
+	bool getAvoidAreaConflict();
+	//! Set the value for avoiding area conflicts
+	void setAvoidAreaConflict(bool b);
+
+
 protected:
+	//! Set up the content and interactions of the NebulaTexturesDialog
 	void createDialogContent() override;
 
 private slots:
 	void restoreDefaults();
 
+	//! Open a file dialog to select an image file
 	void openImageFile();
+
+
+	/***** Upload image and solve, calculate *****/
+	//! Upload an image to the server
 	void uploadImage();
-	void goPush();
-	void addCustomTexture();
-	void removeTexture();
 
+	//! Handle the response after a login request
 	void onLoginReply(QNetworkReply *reply);
-	void onUploadReply(QNetworkReply *reply);
-	void onsubStatusReply(QNetworkReply *reply);
-	void onJobStatusReply(QNetworkReply *reply);
-	void onWcsDownloadReply(QNetworkReply *reply);
 
+	//! Handle the response after an image upload request
+	void onUploadReply(QNetworkReply *reply);
+
+	//! Check the status of a submitted image
 	void checkSubStatus();
+
+	//! Handle the response for a submission status request
+	void onsubStatusReply(QNetworkReply *reply);
+
+	//! Check the status of the current job
 	void checkJobStatus();
 
-	bool getShowCustomTextures();
-	void setShowCustomTextures(bool b);
-	bool getAvoidAreaConflict();
-	void setAvoidAreaConflict(bool b);
+	//! Handle the response for checking the job status
+	void onJobStatusReply(QNetworkReply *reply);
 
-	void reloadData();
+	//! Handle the response for downloading the WCS file and process coordinates calculating
+	void onWcsDownloadReply(QNetworkReply *reply);
+	//////////////////////////////////////////////
 
 private:
 	Ui_nebulaTexturesDialog* ui;
+
+	// Pointer to QSettings
 	QSettings* m_conf;
 
+	// URL for the Astrometry
 	QString API_URL = "http://nova.astrometry.net/";
+
+	// Network manager for sending and receiving network requests
 	QNetworkAccessManager *networkManager;
+
+
+	// Session identifier for the current session.
 	QString session;
+
+	// Submission ID for the image submission.
 	QString subId;
+
+	// Job ID for the processing job.
 	QString jobId;
+
+	// Timer for tracking submission status updates.
 	QTimer *subStatusTimer;
+
+	// Timer for tracking job status updates.
 	QTimer *jobStatusTimer;
 
+
+	// Calibration parameters for the image (CRPIX, CRVAL, CD values).
 	double CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2;
+
+	// Image width and height values.
 	int IMAGEW, IMAGEH;
+
+	// Right Ascension and Declination for the four corners of the image.
 	double topLeftRA, topLeftDec, bottomLeftRA, bottomLeftDec;
 	double topRightRA, topRightDec, bottomRightRA, bottomRightDec;
+
+	// Reference Right Ascension and Declination for the image center.
 	double referRA, referDec;
 
+
+	// Directory path where plugin-related files are stored.
 	QString pluginDir  = "/modules/NebulaTextures/";
+
+	// Path to the custom textures configuration file.
 	QString configFile = "/modules/NebulaTextures/custom_textures.json";
+
+	// Path to the temporary textures configuration file.
 	QString tmpcfgFile = "/modules/NebulaTextures/temp_textures.json";
 
+	// Flag indicating whether to render temporary textures.
 	bool flag_renderTempTex = false;
 
+
+
+	//! Set the HTML content for the "About" section in the dialog
 	void setAboutHtml();
+
+	//! Update the status text displayed in the UI
 	void updateStatus(const QString &status);
+
+	//! Toggle the enabled/disabled state of UI components
 	void changeUiState(bool freeze);
 };
 

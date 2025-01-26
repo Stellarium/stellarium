@@ -34,9 +34,12 @@ public:
 
 	// Methods defined in the StelModule class
 	void init() override;
+
 	// Activate only if update() does something.
 	//void update(double deltaTime) override {}
+
 	void draw(StelCore* core) override;
+
 	double getCallOrder(StelModuleActionName actionName) const override;
 
 	bool configureGui(bool show=true) override;
