@@ -940,8 +940,12 @@
 	      License: Creative Commons Attribution-Share Alike 3.0 United States
 	4.164 Images of Necklace Nebula
 	      from NASA, ESA and the Hubble Heritage Team (STScI/AURA), post-processing: Sun Shuwei
-	      ttps://esahubble.org/
+	      https://esahubble.org/
 	      License: Creative Commons Attribution 4.0 International
+	4.165 Images of NGC2300
+	      from NASA, ESA, STScI, Adam Block (Steward Observatory), post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/File:NGC_2276_Wide-Field_(2021-029).png
+	      License: public domain
 ```
 
 ## Appendix
