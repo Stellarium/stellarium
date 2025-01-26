@@ -376,8 +376,8 @@
 	     License: Creative Commons Attribution 4.0 International
 	4.22 Images of SMC (Magellanic Clouds) from Albert Van
 	     Donkelaar
-	4.23 Images of NGC1261, NGC3201, NGC4833, NGC5286, NGC6101, NGC6124,
-	     NGC6352, NGC6397, NGC6541, NGC6752
+	4.23 Images of NGC1261, NGC3201, NGC4833, NGC5286, NGC5823, NGC6025, NGC6087,
+	     NGC6101, NGC6124, NGC6352, NGC6397, NGC6541, NGC6752
 	     from Tian Mai, Image processing: Sun Shuwei
 	     License: Creative Commons Attribution 4.0 International
 	4.24 The Vesta and Ceres map was taken from USGS website
@@ -631,7 +631,7 @@
 	     from J. Aleu
 	     https://commons.wikimedia.org/wiki/
 	     License: public domain
-	4.87 Images of IC2395, IC4756, NGC3114, NGC6025, NGC6087, NGC6633
+	4.87 Images of IC2395, IC4756, NGC3114, NGC6633
 	     from Roberto Mura
 	     https://en.wikipedia.org/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
