@@ -173,6 +173,7 @@ private:
 		  bool noBackground,
 		  bool isTristate);
 	int toggleChecked(int);
+	static double buttonSizeRatio();
 
 	QPixmap pixOn;
 	QPixmap pixOff;

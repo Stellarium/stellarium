@@ -189,6 +189,10 @@ Oculars::Oculars()
 	setObjectName("Oculars");
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
+	connect(&StelApp::getInstance(), &StelApp::screenButtonScaleChanged, this,
+	        [this]{const int size = StelApp::getInstance().getScreenFontSize();
+	               setFontSizeFromApp(size); /* and repeat to apply all the geometry changes */
+	               setFontSizeFromApp(size);});
 
 	ccds = QList<CCD *>();
 	oculars = QList<Ocular *>();
