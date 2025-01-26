@@ -886,7 +886,7 @@ The Nebula Textures plugin allows users to customize deep-sky object (DSO) textu
 \begin{enumerate}
     \item \textbf{Prepare an Image}: Use a processed rectangular bitmap file of a deep-sky object, such as PNG, JPG, TIF, or BMP format. It’s recommended to use a descriptive ID or nickname as the filename. While Nova Astrometry does not strictly limit image size, keeping it below 20 MP ensures efficient plate solving. Adjust the image background brightness to suit Stellarium by referencing the nebulae images in the Stellarium \file{nebulae/default} directory. Typical astrophotography images with TAN projections are fine, but avoid images with high field distortion.
 
-    \item \textbf{Open the Plugin}: By default, the plugin opens the “Solve and Add” page. Click the \button{Open File} button to select an image file or paste the file path into the "Image Filepath" text box.
+    \item \textbf{Open Image}: By default, the plugin opens the “Solve and Add” page. Click the \button{Open File} button to select an image file or paste the file path into the “Image Filepath” text box.
 
     \item \textbf{Enter API Key}: Paste your Astrometry API key into the corresponding text box (password mode by default). If you don’t have one, click the \button{Astrometry ApiKey} hyperlink to obtain it after registering or logging in. Check \checkbox{Remember me} to store the key for future use.
 
@@ -896,13 +896,13 @@ The Nebula Textures plugin allows users to customize deep-sky object (DSO) textu
 
     \item \textbf{Optional Debugging}:
     \begin{itemize}
-        \item Click the \button{Go Push} button next to the center coordinates to locate the texture's center.
+        \item Click the \guibutton{0.6}{uibtProcess.png} button next to the center coordinates to locate the texture's center.
         \item Use \button{Try Rendering this Texture} to preview the texture. If it overlaps with default textures, check \checkbox{Disable default textures} to avoid visual conflicts. However, remember to click \button{Stop Rendering this Texture} afterward to restore the rendering of the default nebula textures.
     \end{itemize}
 
     \item \textbf{Stop Debugging}: Use \button{Stop Rendering this Texture} to halt the preview of the texture.
 
-    \item \textbf{Add Texture to Storage}: Click \button{Add this Texture to Custom Storage} to permanently save the texture. The original image will be copied to Stellarium's plugin folder in the user directory. After adding a texture, you should restart Stellarium to fully integrate the texture into the module.
+    \item \textbf{Add Texture to Storage}: Click \button{Add the Texture to Custom Storage} to permanently save the texture. The original image will be copied to Stellarium's plugin folder in the user directory. After adding a texture, you should restart Stellarium to fully integrate the texture into the module.
 
     \item \textbf{Restart Stellarium}: After restarting Stellarium, switch to the \button{Custom Textures} page of the plugin to manage your custom textures. Options include showing/hiding textures, avoiding overlaps with default textures, and reloading them.
 
@@ -924,7 +924,7 @@ The process is similar to the above, except that you don’t need to upload the 
     \item After adding a texture, you must restart Stellarium to fully integrate the texture into the module. The same applies when deleting a texture.
     \item To back up your texture library or share it with others, copy the plugin folder from your user config directory. For Windows, the path is typically:
     \begin{quote}
-    \texttt{\%APPDATA\%\textbackslash Stellarium\textbackslash modules\textbackslash NebulaTextures}.
+    \texttt{\%APPDATA\%\textbackslash Stellarium\textbackslash modules\textbackslash NebulaTextures}
     \end{quote}
     You can then share this folder with others, and they can place it in the same directory on their system to use the custom textures.
 \end{enumerate}
