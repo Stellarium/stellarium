@@ -919,6 +919,7 @@ and positioning of astronomical images, as well as the management and rendering 
         \item Use \button{Try Rendering this Texture} to preview the texture. If it overlaps with default 
 		textures, check \checkbox{Disable default textures} to avoid visual conflicts. However, remember 
 		to click \button{Stop Rendering this Texture} afterward to restore the rendering of the default nebula textures.
+		You can repeatedly press the \texttt{s} key in the main view to toggle star visibility and verify whether the image is aligned accurately.
     \end{itemize}
 
     \item \textbf{Stop Debugging}: Use \button{Stop Rendering this Texture} to halt the preview of the texture.
@@ -940,7 +941,8 @@ and positioning of astronomical images, as well as the management and rendering 
 \subsection{Steps for Manual Texture Addition (For Sketches, Paintings, etc.)}
 The process is similar to the above, except that you don’t need to upload the texture file for solving:
 \begin{itemize}
-    \item Open the image file.
+    \item Open the image file. Stars in non-astrophotographic images may not align precisely with the 
+	software's stars, so it is recommended to use the texture without stars (de-starring).
     \item Input the J2000 equatorial coordinates (in decimal degrees) for the image corners, aligning 
 	with the bitmap display.
     \item If needed, use an astrophotography image with a similar field of view (FOV) to obtain 
