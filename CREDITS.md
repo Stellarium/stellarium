@@ -587,7 +587,7 @@
 	     from Hubble Space Telescope
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.76 Images of M72, NGC6905
+	4.76 Images of NGC6905
 	     from Tom Wildoner
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
@@ -847,6 +847,10 @@
 	      License: Creative Commons Attribution 4.0 International
 	4.141 Images of M104
 	      from Adam Block/Mount Lemmon SkyCenter/University of Arizona & Ngc1535, post-processing
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.142 Images of M72
+	      from Starhopper, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
 ```
