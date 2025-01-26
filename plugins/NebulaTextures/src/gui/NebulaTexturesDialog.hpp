@@ -161,46 +161,46 @@ private:
 	QNetworkAccessManager *networkManager;
 
 
-	// Session identifier for the current session.
+	// Session identifier for the current session
 	QString session;
 
-	// Submission ID for the image submission.
+	// Submission ID for the image submission
 	QString subId;
 
-	// Job ID for the processing job.
+	// Job ID for the processing job
 	QString jobId;
 
-	// Timer for tracking submission status updates.
+	// Timer for tracking submission status updates
 	QTimer *subStatusTimer;
 
-	// Timer for tracking job status updates.
+	// Timer for tracking job status updates
 	QTimer *jobStatusTimer;
 
 
-	// Calibration parameters for the image (CRPIX, CRVAL, CD values).
+	// Calibration parameters for the image (CRPIX, CRVAL, CD values)
 	double CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2;
 
-	// Image width and height values.
+	// Image width and height values
 	int IMAGEW, IMAGEH;
 
-	// Right Ascension and Declination for the four corners of the image.
+	// Right Ascension and Declination for the four corners of the image
 	double topLeftRA, topLeftDec, bottomLeftRA, bottomLeftDec;
 	double topRightRA, topRightDec, bottomRightRA, bottomRightDec;
 
-	// Reference Right Ascension and Declination for the image center.
+	// Reference Right Ascension and Declination for the image center
 	double referRA, referDec;
 
 
-	// Directory path where plugin-related files are stored.
+	// Directory path where plugin-related files are stored
 	QString pluginDir  = "/modules/NebulaTextures/";
 
-	// Path to the custom textures configuration file.
+	// Path to the custom textures configuration file
 	QString configFile = "/modules/NebulaTextures/custom_textures.json";
 
-	// Path to the temporary textures configuration file.
+	// Path to the temporary textures configuration file
 	QString tmpcfgFile = "/modules/NebulaTextures/temp_textures.json";
 
-	// Flag indicating whether to render temporary textures.
+	// Flag indicating whether to render temporary textures
 	bool flag_renderTempTex = false;
 
 

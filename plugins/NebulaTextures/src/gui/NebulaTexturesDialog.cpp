@@ -34,7 +34,6 @@
 #include "StelCore.hpp"
 
 #include <QListWidgetItem>
-#include <QMessageBox>
 #include <QFileDialog>
 #include <QTimer>
 #include <QJsonDocument>
@@ -120,6 +119,8 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(ui->checkBoxShow, SIGNAL(clicked(bool)), this, SLOT(setShowCustomTextures(bool)));
 	connect(ui->checkBoxAvoid, SIGNAL(clicked(bool)), this, SLOT(setAvoidAreaConflict(bool)));
 
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
+
 	setAboutHtml();
 
 	ui->label_apiKey->setText(QString("<a href=\"https://nova.astrometry.net/api_help\">") + q_("Astrometry ApiKey:") + "</a>");
@@ -140,6 +141,47 @@ void NebulaTexturesDialog::restoreDefaults()
 	{
 		qDebug() << "[NebulaTextures] restore defaults...";
 		// GETSTELMODULE(NebulaTextures)->restoreDefaultSettings();
+
+		deleteImagesFromCfg(configFile);
+		QString cfgPath = StelFileMgr::getUserDir() + configFile;
+		if (QFile::exists(cfgPath)) {
+			if (QFile::remove(cfgPath)) {
+				qDebug() << "Deleted config file:" << cfgPath;
+			} else {
+				qWarning() << "Failed to delete config file:" << cfgPath;
+			}
+		}
+
+		deleteImagesFromCfg(tmpcfgFile);
+		cfgPath = StelFileMgr::getUserDir() + tmpcfgFile;
+		if (QFile::exists(cfgPath)) {
+			if (QFile::remove(cfgPath)) {
+				qDebug() << "Deleted tmp config file:" << cfgPath;
+			} else {
+				qWarning() << "Failed to delete config file:" << cfgPath;
+			}
+		}
+
+		setShowCustomTextures(false);
+		setAvoidAreaConflict(false);
+
+		ui->lineEditApiKey->setText("");
+		m_conf->setValue(MS_CONFIG_PREFIX + "/AstroMetry_Apikey", "");
+
+		ui->lineEditImagePath->setText("");
+		ui->referX->setValue(0);
+		ui->referY->setValue(0);
+
+		ui->topLeftX->setValue(0);
+		ui->topLeftY->setValue(0);
+		ui->bottomLeftX->setValue(0);
+		ui->bottomLeftY->setValue(0);
+		ui->topRightX->setValue(0);
+		ui->topRightY->setValue(0);
+		ui->bottomRightX->setValue(0);
+		ui->bottomRightY->setValue(0);
+
+		ui->listWidget->clear();
 	}
 	else
 		qDebug() << "[NebulaTextures] restore defaults is canceled...";
@@ -771,6 +813,8 @@ QPair<double, double> NebulaTexturesDialog::PixelToCelestial(int X, int Y, doubl
  */
 void NebulaTexturesDialog::goPush()
 {
+	referRA = ui->referX->value();
+	referDec = ui->referY->value();
 	StelCore* core = StelApp::getInstance().getCore();
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Vec3d pos;
@@ -1107,7 +1151,8 @@ void NebulaTexturesDialog::removeTexture()
 		return;
 
 	QString selectedText = selectedItem->text();
-	if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to remove this texture?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+
+	if(!askConfirmation("Caution! Are you sure to remove this texture?"))
 		return;
 
 	QString path = StelFileMgr::getUserDir() + configFile;
@@ -1186,6 +1231,7 @@ void NebulaTexturesDialog::reloadData()
 
 	if (!jsonFile.open(QIODevice::ReadOnly)) {
 		qWarning() << "Failed to open JSON file for reading:" << path;
+		ui->listWidget->clear();
 		return;
 	}
 
