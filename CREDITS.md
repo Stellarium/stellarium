@@ -899,6 +899,14 @@
 	      from Adam Block/Mount Lemmon SkyCenter/University of Arizona, Image processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.154 Images of NGC1569
+	      from Adam Block/ Josep Drudis/Mount Lemmon SkyCenter/University of Arizona, Ngc1535, post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.155 Images of NGC45
+	      from Meli thev, post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 4.0 International
 ```
 
 ## Appendix
