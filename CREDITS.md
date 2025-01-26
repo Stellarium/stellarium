@@ -471,7 +471,7 @@
 	     version published by the Free Software Foundation; with no Invariant Sections,
 	     no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is
 	     included in the section entitled GNU Free Documentation License.
-	4.46 Images of Sh2-129
+	4.46 Images of Sh2-73, Sh2-129
 	     from Maurizio Cabibbo, post-processing: Sun Shuwei
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
@@ -868,6 +868,10 @@
 	4.146 Images of M54
 	      from REU Program/NOIRLab/NSF/AURA, post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
+	      License: Creative Commons Attribution 4.0 International
+	4.147 Images of sh2-71
+	      from Cristina Cellini, post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
 ```
 
