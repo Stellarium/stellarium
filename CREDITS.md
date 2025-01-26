@@ -907,6 +907,14 @@
 	      from Meli thev, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.156 Images of UGC11668
+	      from KPNO/NOIRLab/NSF/AURA/Chas Sourek and Diana Hartrampf/Adam Block, post-processing: Sun Shuwei
+	      https://noirlab.edu/public/
+	      License: Creative Commons Attribution 4.0 International
+	4.157 Images of PGC3074547
+	      from NASA, ESA and The Hubble Heritage Team STScI/AURA, post-processing: Sun Shuwei
+	      https://esahubble.org/
+	      License: public domain
 ```
 
 ## Appendix
