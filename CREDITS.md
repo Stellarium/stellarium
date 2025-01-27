@@ -957,6 +957,10 @@
 	      from KPNO/NOIRLab/NSF/AURA/Joe Jordan/Adam Block, post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
+	4.169 Images of NGC3953
+	      from KPNO/NOIRLab/NSF/AURA/Tom and Gail Haynes/Adam Block, post-process
+	      https://noirlab.edu/public/
+	      License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
