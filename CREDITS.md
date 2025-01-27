@@ -886,10 +886,9 @@
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-ShareAlike 4.0 International 
 	4.151 Images of WR134
-	      from Donald Luc Viatour, post-processing: Sun Shuwei
+	      This image file was remixed, transformed, and post-processed by Sun Shuwei from the original file. The original image file was published by Luc Viatour / https://Lucnix.be at https://commons.wikimedia.org/wiki/File:WR134-Hamois-06-08-2024-Luc-Viatour.jpg.
 	      https://commons.wikimedia.org/wiki/
-	      https://lucnix.be
-	      License: Creative Commons Attribution-Share Alike 2.5 Generic
+	      License: Creative Commons Attribution-Share Alike 4.0 International
 	4.152 Images of NGC3503
 	      from Donald Cappellettiariel, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
