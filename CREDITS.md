@@ -408,7 +408,7 @@
 	     Collaboration
 	     License: public domain; http://hubblesite.org/copyright/
 	4.30 Image of NGC40 from Steven Bellavia
-	4.31 Images of NGC1579, NGC2467, NGC6590, Barnard Loop, IC342
+	4.31 Images of NGC2467, NGC6590, Barnard Loop, IC342
 	     from Sun Shuwei
 	     License: public domain
 	4.32 Images of M77, NGC3180, NGC5474, NGC6231, Sh2-264, Sh2-308, LDN1622
@@ -965,6 +965,10 @@
 	      from Roberto Mura, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.171 Images of NGC1579
+	      from Kees Scherer, post-processing: Sun Shuwei
+	      https://www.flickr.com/photos/kees-scherer/
+	      License: public domain
 ```
 
 ## Appendix
