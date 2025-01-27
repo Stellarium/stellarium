@@ -949,6 +949,10 @@
 	      from Doug Williams, REU Program/NOIRLab/NSF/AURA, post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
+	4.167 Images of IC1276
+	      This image file was remixed, transformed, and post-processed by Sun Shuwei from the original file. The original image file was published by Yu-Hang Kuo at https://www.flickr.com/photos/143529236@N06/51139472108/in/dateposted/.
+	      https://www.flickr.com/
+	      License: Creative Commons Attribution-ShareAlike 4.0 International 
 ```
 
 ## Appendix
