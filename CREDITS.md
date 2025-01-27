@@ -969,7 +969,7 @@
 	      from Kees Scherer, post-processing: Sun Shuwei
 	      https://www.flickr.com/photos/kees-scherer/
 	      License: public domain
-	4.172 Images of NGC7635, Sh2-136
+	4.172 Images of NGC7635, Sh2-136, VDB 14, VDB 15
 	      from K Bahr, post-processing: Sun Shuwei
 	      https://www.flickr.com/photos/158350039@N03/
 	      License: public domain
