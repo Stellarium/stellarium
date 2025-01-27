@@ -8,6 +8,12 @@ git:
 
   - filter_type: file
     file_format: PO
+    source_file: po/stellarium-sky/stellarium-sky.pot
+    source_language: en
+    translation_files_expression: 'po/stellarium-sky/<lang>.po'
+
+  - filter_type: file
+    file_format: PO
     source_file: po/stellarium-skycultures/stellarium-skycultures.pot
     source_language: en
     translation_files_expression: 'po/stellarium-skycultures/<lang>.po'
