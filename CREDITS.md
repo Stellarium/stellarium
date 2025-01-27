@@ -391,7 +391,7 @@
 	     NGC3310, NGC3344, NGC3359, NGC3504, NGC3512, NGC3521, NGC3628,
 	     NGC3938, NGC4151, NGC4274, NGC4535, NGC4559, NGC4631, NGC4656,
 	     NGC4657, NGC5033, NGC5363, NGC7008, NGC7331, NGC7479,
-	     NGC7635, NGC7640, NGC7789, PGC1803573, Barnard 142, Barnard 173,
+	     NGC7640, NGC7789, PGC1803573, Barnard 142, Barnard 173,
 	     Sh2-101, Sh2-188, LDN1235, Sadr region (Gamma Cygni), Medusa,
 	     Jones-Emberson 1, NGC2146
 	     from Peter Vasey, Plover Hill Observatory
@@ -969,7 +969,7 @@
 	      from Kees Scherer, post-processing: Sun Shuwei
 	      https://www.flickr.com/photos/kees-scherer/
 	      License: public domain
-	4.172 Images of Sh2-136
+	4.172 Images of NGC7635, Sh2-136
 	      from K Bahr, post-processing: Sun Shuwei
 	      https://www.flickr.com/photos/158350039@N03/
 	      License: public domain
