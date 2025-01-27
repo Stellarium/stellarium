@@ -20,6 +20,7 @@
 #include "StelLogger.hpp"
 #include "StelUtils.hpp"
 
+#include <QApplication>
 #include <QDateTime>
 #include <QProcess>
 
@@ -76,6 +77,7 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("%1").arg(QDateTime::currentDateTime().toString(Qt::ISODate)));
 	// write info about operating system
 	writeLog(QString("Operating System: %1").arg(StelUtils::getOperatingSystemInfo()));	
+	writeLog(QString("Platform: %1").arg(qApp->platformName()));
 
 	// write compiler version
 	writeLog(QString("Compiled using %1").arg(STELLARIUM_COMPILER));
