@@ -958,9 +958,13 @@
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
 	4.169 Images of NGC3953
-	      from KPNO/NOIRLab/NSF/AURA/Tom and Gail Haynes/Adam Block, post-process
+	      from KPNO/NOIRLab/NSF/AURA/Tom and Gail Haynes/Adam Block, post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
+	4.170 Images of IC1287
+	      from Roberto Mura, post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 4.0 International
 ```
 
 ## Appendix
