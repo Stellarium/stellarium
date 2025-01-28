@@ -176,6 +176,11 @@ private:
 	// Timer for tracking job status updates
 	QTimer *jobStatusTimer;
 
+	// status timer retry count
+	int retryCount;
+
+	// limit of status timer retry count
+	const int maxRetryCount = 20;
 
 	// Calibration parameters for the image (CRPIX, CRVAL, CD values)
 	double CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2;
@@ -211,8 +216,8 @@ private:
 	//! Update the status text displayed in the UI
 	void updateStatus(const QString &status);
 
-	//! Toggle the enabled/disabled state of UI components
-	void changeUiState(bool freeze);
+	//! Toggle the enabled/disabled freezing state of UI components
+	void freezeUiState(bool freeze);
 };
 
 #endif /* NEBULATEXTURESDIALOG_HPP */

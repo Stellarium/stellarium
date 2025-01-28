@@ -57,8 +57,9 @@
  */
 NebulaTexturesDialog::NebulaTexturesDialog()
 	: StelDialog("NebulaTextures"),
-	flag_renderTempTex(false)
-	, m_conf(StelApp::getInstance().getSettings())
+	flag_renderTempTex(false),
+	m_conf(StelApp::getInstance().getSettings()),
+	retryCount(0)
 {
 	ui = new Ui_nebulaTexturesDialog();
 
@@ -228,7 +229,7 @@ void NebulaTexturesDialog::setAboutHtml(void)
  *
  * @param freeze  A boolean value indicating whether to disable (true) or enable (false) the UI elements.
  */
-void NebulaTexturesDialog::changeUiState(bool freeze)
+void NebulaTexturesDialog::freezeUiState(bool freeze)
 {
 	ui->openFileButton->setDisabled(freeze);
 	ui->uploadImageButton->setDisabled(freeze);
@@ -250,7 +251,7 @@ void NebulaTexturesDialog::updateStatus(const QString &status)
  */
 void NebulaTexturesDialog::openImageFile()
 {
-	QString fileName = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Open Image"), QDir::homePath(), tr("Images (*.png *.jpg *.bmp *.tiff)"));
+	QString fileName = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Open Image"), QDir::homePath(), tr("Images (*.png *.jpg *.gif *.tif *.tiff *.jpeg)"));
 	if (!fileName.isEmpty())
 	{
 		ui->lineEditImagePath->setText(fileName);
@@ -278,6 +279,22 @@ void NebulaTexturesDialog::uploadImage() // WARN: image should not be flip
 	if (imagePath.isEmpty() || apiKey.isEmpty())
 	{
 		updateStatus(q_("Please provide both API key and image path."));
+		return;
+	}
+
+	QFileInfo fileInfo(imagePath);
+	if (!fileInfo.exists()) {
+		updateStatus(q_("The specified image file does not exist."));
+		return;
+	}
+	if (!fileInfo.isReadable()) {
+		updateStatus(q_("The specified image file is not readable."));
+		return;
+	}
+	QString suffix = fileInfo.suffix().toLower();
+	QStringList allowedSuffixes = {"png", "jpg", "gif", "tif", "tiff", "jpeg"};
+	if (!allowedSuffixes.contains(suffix)) {
+		updateStatus(q_("Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."));
 		return;
 	}
 
@@ -315,7 +332,7 @@ void NebulaTexturesDialog::uploadImage() // WARN: image should not be flip
 	// Perform image upload logic here, e.g., using an API call
 	updateStatus(q_("Sending requests..."));
 
-	changeUiState(true);
+	freezeUiState(true);
 }
 
 /*
@@ -340,7 +357,7 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
 		qWarning() << "[NebulaTextures] Login failed.";
 		updateStatus(q_("Login failed!"));
 		reply->deleteLater();
-		changeUiState(false);
+		freezeUiState(false);
 		return;
 	}
 	updateStatus(q_("Login success..."));
@@ -350,7 +367,7 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
 		qWarning() << "[NebulaTextures] Failed to open image file.";
 		updateStatus(q_("Failed to open image file!"));
 		reply->deleteLater();
-		changeUiState(false);
+		freezeUiState(false);
 		return;
 	}
 
@@ -432,16 +449,16 @@ void NebulaTexturesDialog::onUploadReply(QNetworkReply *reply)
 		qWarning() << "[NebulaTextures] Image upload failed.";
 		updateStatus(q_("Image upload failed!"));
 		reply->deleteLater();
-		changeUiState(false);
+		freezeUiState(false);
 		return;
 	}
 
 	QJsonDocument doc = QJsonDocument::fromJson(content);
 	QJsonObject json = doc.object();
 	subId = QString::number(json["subid"].toInt());
-	subStatusTimer->start(3000);
+	subStatusTimer->start(5000);
 	reply->deleteLater();
-
+	qDebug() << "[NebulaTextures] subid" << subId;//debug
 	updateStatus(q_("Image uploaded. Please wait..."));
 }
 
@@ -463,7 +480,7 @@ void NebulaTexturesDialog::checkSubStatus()
 	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 	QNetworkReply *subStatusReply = networkManager->get(request);
 	connect(subStatusReply, &QNetworkReply::finished, this, [this, subStatusReply]() {onsubStatusReply(subStatusReply);});
-	updateStatus(q_("Requesting submission. Please wait..."));
+	updateStatus(q_("Requesting submission status. Please wait...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
 }
 
 
@@ -471,13 +488,17 @@ void NebulaTexturesDialog::checkSubStatus()
  * Handle the response for a submission status request.
  *
  * Steps:
- *   - Check if the network reply encountered an error.
- *   - If there's an error, update the status, delete the reply, stop timers, and exit.
- *   - Parse the reply content as JSON and extract the "jobs" array.
- *   - If the "jobs" array contains a valid job ID:
- *     - Save the job ID for later use.
- *     - Stop the submission status timer and start the job status timer.
- *     - Update the status message to inform the user.
+ *   - If the reply has an error:
+ *     - Increment the retry counter.
+ *     - If retry count exceeds the limit, stop retrying and notify the user.
+ *     - Otherwise, notify the user and retry.
+ *   - If the reply is successful:
+ *     - Reset the retry counter.
+ *     - Parse the JSON response and check for a valid job ID.
+ *     - If a valid job ID is found:
+ *       - Save the job ID, stop the submission timer, and start the job timer.
+ *       - Notify the user that the submission ID has been received.
+ *   - Delete the reply object to free resources.
  *
  * @param reply The QNetworkReply object containing the submission status response.
  */
@@ -485,23 +506,53 @@ void NebulaTexturesDialog::onsubStatusReply(QNetworkReply *reply)
 {
 	if (reply->error() != QNetworkReply::NoError) {
 		qWarning() << "[NebulaTextures] Failed to get submission status.";
-		updateStatus(q_("Failed to get submission status. Retry now..."));
+		if (retryCount >= maxRetryCount) {
+			qWarning() << "[NebulaTextures] Max retry count reached. Aborting.";
+			updateStatus(q_("Failed to get submission status after multiple attempts. Please try again later."));
+			subStatusTimer->stop();
+			freezeUiState(false);
+			retryCount = 0;
+		} else {
+			updateStatus(q_("Failed to get submission status. Retry now...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
+			retryCount++;
+		}
 		reply->deleteLater();
-		changeUiState(false);
 		return;
 	}
+
+
 	QByteArray cont = reply->readAll();
 	QJsonDocument doc = QJsonDocument::fromJson(cont);
 	QJsonObject json = doc.object();
 	QJsonArray jobs = json["jobs"].toArray();
 
 	if (!jobs.isEmpty() && !jobs[0].isNull()) {
+		retryCount = 0;
 		jobId = QString::number(jobs[0].toInt());
 		subStatusTimer->stop();
-		jobStatusTimer->start(3000);
-		reply->deleteLater();
-		updateStatus(q_("Submission ID got. Please wait..."));
+		jobStatusTimer->start(5000);
+		updateStatus(q_("Job id got. Please wait..."));
 	}
+	else if (json.contains("error_message")) {
+		retryCount = 0;
+		qWarning() << "[NebulaTextures] Error message received:" << json["error_message"].toString();
+		updateStatus(q_("Error occurred!"));
+		subStatusTimer->stop();
+		freezeUiState(false);
+	}
+	else {
+		if (retryCount >= maxRetryCount) {
+			retryCount = 0;
+			qWarning() << "[NebulaTextures] Max retry count reached. Aborting.";
+			updateStatus(q_("Failed to get job id after multiple attempts. Please try again later."));
+			subStatusTimer->stop();
+			freezeUiState(false);
+		} else {
+			updateStatus(q_("Requesting job id. Please wait...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
+			retryCount++;
+		}
+	}
+	reply->deleteLater();
 }
 
 
@@ -519,12 +570,10 @@ void NebulaTexturesDialog::checkJobStatus()
 {
 	QUrl jobStatusUrl(API_URL + "api/jobs/" + jobId);
 	QNetworkRequest request(jobStatusUrl);
-
 	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
 	QNetworkReply *jobStatusReply = networkManager->get(request);
 	connect(jobStatusReply, &QNetworkReply::finished, this, [this, jobStatusReply]() { onJobStatusReply(jobStatusReply); });
-	updateStatus(q_("Requesting job status. Please wait..."));
+	updateStatus(q_("Requesting job status. Please wait...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
 }
 
 
@@ -549,9 +598,18 @@ void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
 {
 	if (reply->error() != QNetworkReply::NoError) {
 		qWarning() << "[NebulaTextures] Failed to get job status.";
-		updateStatus(q_("Failed to get job status. Retry now..."));
-		reply->deleteLater();
-		changeUiState(false);
+		if (retryCount >= maxRetryCount) {
+			qWarning() << "[NebulaTextures] Max retry count reached. Aborting.";
+			updateStatus(q_("Failed to get job status after multiple attempts. Please try again later."));
+			jobStatusTimer->stop(); // Stop the job status timer
+			freezeUiState(false); // Reset the UI state
+			retryCount = 0; // Reset the retry counter
+		} else {
+			updateStatus(q_("Failed to get job status. Retry now...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
+			retryCount++; // Increment the retry counter
+		}
+
+		reply->deleteLater(); // Free resources
 		return;
 	}
 
@@ -560,18 +618,30 @@ void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
 	QString status = json["status"].toString();
 
 	if (status == "success") {
+		retryCount = 0;
 		updateStatus(q_("Job completed successfully! Downloading WCS file..."));
 		jobStatusTimer->stop();
 		QUrl wcsUrl(API_URL+ "wcs_file/" + jobId);
 		QNetworkRequest request(wcsUrl);
 		QNetworkReply *wcsReply = networkManager->get(request);
 		connect(wcsReply, &QNetworkReply::finished, this, [this, wcsReply]() { onWcsDownloadReply(wcsReply); });
-
-	} else if (status == "error") {
+	} else if (status == "error" || status == "failure") {
+		retryCount = 0;
 		qWarning() << "[NebulaTextures] Error in job processing.";
 		updateStatus(q_("Error in job processing!"));
 		jobStatusTimer->stop();
-		changeUiState(false);
+		freezeUiState(false);
+	} else {
+		if (retryCount >= maxRetryCount) {
+			retryCount = 0;
+			qWarning() << "[NebulaTextures] Max retry count reached. Aborting.";
+			updateStatus(q_("Failed to get job result after multiple attempts. Please try again later."));
+			jobStatusTimer->stop();
+			freezeUiState(false);
+		} else {
+			updateStatus(q_("Requesting job result. Please wait...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
+			retryCount++;
+		}
 	}
 	reply->deleteLater();
 }
@@ -600,7 +670,7 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
 		qWarning() << "[NebulaTextures] Failed to download WCS file.";
 		updateStatus(q_("Failed to download WCS file..."));
 		reply->deleteLater();
-		changeUiState(false);
+		freezeUiState(false);
 		return;
 	}
 	QByteArray cont = reply->readAll();
@@ -677,7 +747,7 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
 	ui->bottomRightX->setValue(bottomRightRA);
 	ui->bottomRightY->setValue(bottomRightDec);
 
-	changeUiState(false);
+	freezeUiState(false);
 	updateStatus(q_("Processing completed! Goto Center Point, Try to Render, Check and Add to Local Storage."));
 }
 
@@ -779,9 +849,8 @@ QPair<double, double> NebulaTexturesDialog::PixelToCelestial(int X, int Y, doubl
 		}
 	}
 
-	if (lng > 360.0) {
-		lng -= 360.0;
-	} else if (lng < -360.0) {
+	lng = std::fmod(lng, 360.0);
+	if (lng < 0.0) {
 		lng += 360.0;
 	}
 
@@ -856,6 +925,22 @@ void NebulaTexturesDialog::renderTempCustomTexture()
 	if (imagePath.isEmpty()) {
 		qWarning() << "[NebulaTextures] Image path is empty.";
 		updateStatus(q_("Image path is empty."));
+		return;
+	}
+
+	QFileInfo fileInfo(imagePath);
+	if (!fileInfo.exists()) {
+		updateStatus(q_("The specified image file does not exist."));
+		return;
+	}
+	if (!fileInfo.isReadable()) {
+		updateStatus(q_("The specified image file is not readable."));
+		return;
+	}
+	QString suffix = fileInfo.suffix().toLower();
+	QStringList allowedSuffixes = {"png", "jpg", "gif", "tif", "tiff", "jpeg"};
+	if (!allowedSuffixes.contains(suffix)) {
+		updateStatus(q_("Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."));
 		return;
 	}
 
@@ -1004,10 +1089,25 @@ void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 		return;
 	}
 
+	QFileInfo fileInfo(imagePath);
+	if (!fileInfo.exists()) {
+		updateStatus(q_("The specified image file does not exist."));
+		return;
+	}
+	if (!fileInfo.isReadable()) {
+		updateStatus(q_("The specified image file is not readable."));
+		return;
+	}
+	QString suffix = fileInfo.suffix().toLower();
+	QStringList allowedSuffixes = {"png", "jpg", "gif", "tif", "tiff", "jpeg"};
+	if (!allowedSuffixes.contains(suffix)) {
+		updateStatus(q_("Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."));
+		return;
+	}
+
 	QString pluginFolder = StelFileMgr::getUserDir() + pluginDir;
 	QDir().mkpath(pluginFolder);
 
-	QFileInfo fileInfo(imagePath);
 	QString baseName = fileInfo.completeBaseName();
 	QString extension = fileInfo.suffix();
 	QString timestamp = QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss");
