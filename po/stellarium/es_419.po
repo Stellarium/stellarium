@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-01-14 02:02+0700\n"
+"POT-Creation-Date: 2025-01-23 01:29+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alejandro Moctezuma <moctezumaalejandro25@gmail.com>, 2025\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/stellarium/teams/80998/es_419/)\n"
@@ -100,7 +100,7 @@ msgstr "constelación"
 #: src/core/modules/ConstellationMgr.cpp:127 src/ui_viewDialog.h:4485
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:319
 msgid "Constellation lines"
-msgstr "Líneas de constelación"
+msgstr "Líneas de constelaciones"
 
 #: src/core/modules/ConstellationMgr.cpp:128 src/ui_viewDialog.h:4525
 #: src/ui_configurationDialog.h:2072
@@ -5723,7 +5723,7 @@ msgstr "Ventana de opciones de cielo y vista"
 
 #: src/gui/StelGui.cpp:272
 msgid "Date/time window"
-msgstr "Ventana fecha/hora"
+msgstr "Ventana de fecha/hora"
 
 #: src/gui/StelGui.cpp:273
 msgid "Location window"
@@ -21664,8 +21664,8 @@ msgid "Sync"
 msgstr "Sinc."
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:353
-msgid "Stop all telecope motions (if supported)"
-msgstr "Detener movimientos del telescopio (si está soportado)"
+msgid "Stop all telescope motions (if supported)"
+msgstr "Detener todos los movimientos del telescopio (si es compatible)"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:355
 msgid "Abort slew"

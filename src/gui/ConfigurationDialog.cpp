@@ -354,6 +354,7 @@ void ConfigurationDialog::createDialogContent()
 	// Font selection. We use a hidden, but documented entry in config.ini to optionally show a font selection option.
 	connectIntProperty(ui->screenFontSizeSpinBox, "StelApp.screenFontSize");
 	connectIntProperty(ui->guiFontSizeSpinBox, "StelApp.guiFontSize");
+	connectDoubleProperty(ui->screenButtonScaleSpinBox, "StelApp.screenButtonScale");
 	if (StelApp::getInstance().getSettings()->value("gui/flag_font_selection", true).toBool())
 	{
 		populateFontWritingSystemCombo();
@@ -1235,6 +1236,7 @@ void ConfigurationDialog::saveAllSettings()
 	//conf->setValue("gui/screen_font_size",						propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
 	//conf->setValue("gui/gui_font_size",							propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
 	storeFontSettings();
+	conf->setValue("gui/screen_button_scale",					propMgr->getStelPropertyValue("StelApp.screenButtonScale").toDouble());
 
 	conf->setValue("video/minimum_fps",						propMgr->getStelPropertyValue("MainView.minFps").toInt());
 	conf->setValue("video/maximum_fps",						propMgr->getStelPropertyValue("MainView.maxFps").toInt());
