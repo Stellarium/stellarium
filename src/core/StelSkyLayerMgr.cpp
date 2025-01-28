@@ -96,11 +96,15 @@ void StelSkyLayerMgr::loadCollection(int decimateBy)
 		insertSkyImage(path, QString(), true, decimateBy);
 
 #ifdef USE_STATIC_PLUGIN_NEBULATEXTURES
-	path = StelFileMgr::findFile(StelFileMgr::getUserDir()+"/modules/NebulaTextures/custom_textures.json");
-	if (path.isEmpty())
-		qWarning() << "ERROR while loading nebula texture set custom";
-	else
-		insertSkyImage(path, QString(), true, decimateBy);
+	// [NebulaTextures] The custom textures need to be loaded synchronously at the program startup in order to take effect
+	QSettings* conf = StelApp::getInstance().getSettings();
+	if(conf->value("plugins_load_at_startup/NebulaTextures", false).toBool()){
+		path = StelFileMgr::findFile(StelFileMgr::getUserDir()+"/modules/NebulaTextures/custom_textures.json");
+		if (path.isEmpty())
+			qWarning() << "ERROR while loading nebula texture set custom";
+		else
+			insertSkyImage(path, QString(), true, decimateBy);
+	}
 #endif
 }
 
