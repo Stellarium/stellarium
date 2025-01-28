@@ -10,7 +10,7 @@ jobs:
   # AppImage x86_64/Qt5
   appimage-amd64-qt5:
     name: "x86_64 (qt5)"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     if: "contains(github.event.head_commit.message, '[publish]') || contains(github.ref, 'heads/stellarium-next') || contains(github.ref, 'heads/stellarium-stable')"
 
     steps:
@@ -25,7 +25,7 @@ jobs:
         sudo apt remove php7.* -y
         sudo apt remove php8.* -y
         sudo apt update
-        #sudo apt install libfuse2 libglx-dev
+        sudo apt install libfuse3-3 libglx-dev
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
         #sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
@@ -55,7 +55,7 @@ jobs:
   # AppImage x86_64/Qt6
   appimage-amd64-qt6:
     name: "x86_64 (qt6)"
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     if: "contains(github.event.head_commit.message, '[publish]') || contains(github.ref, 'heads/stellarium-next') || contains(github.ref, 'heads/stellarium-stable')"
 
     steps:
@@ -69,7 +69,7 @@ jobs:
         # Update installed packages
         sudo apt remove php8.* -y
         sudo apt update
-        sudo apt install libfuse2 libglx-dev
+        sudo apt install libfuse3-3 libglx-dev
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
         #sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
