@@ -250,7 +250,7 @@ void SkyGui::init(StelGui* astelGui)
 	btVertAutoHide->setPos(0,0);
 	btVertAutoHide->setZValue(1000);
 
-	infoPanel->setPos(8,8);
+	updateInfoPanelPos();
 
 	// If auto hide is off, show the relevant toolbars
 	if (!autoHideBottomBar)
@@ -268,10 +268,17 @@ void SkyGui::init(StelGui* astelGui)
 	buttonBarsFrame->setZValue(-0.1);
 	updateBarsPos();
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, &SkyGui::updateInfoPanelPos);
 	connect(bottomBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));
 	// The first draw of path may show overshooting date line if there are too few buttons in the bottom bar.
 	// Correct this by a redraw 1/2s after startup
 	QTimer::singleShot(500, this, [=](){buttonBarsFrame->updatePath(bottomBar, leftBar);});
+}
+
+void SkyGui::updateInfoPanelPos()
+{
+	const auto factor = StelApp::getInstance().screenFontSizeRatio();
+	infoPanel->setPos(8 * factor, 8 * factor);
 }
 
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)

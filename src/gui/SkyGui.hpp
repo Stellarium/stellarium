@@ -91,6 +91,9 @@ public slots:
 	void updateBarsPos();
 
 private:
+	void updateInfoPanelPos();
+
+private:
 	class StelBarsFrame* buttonBarsFrame;
 	QTimeLine* animLeftBarTimeLine;
 	QTimeLine* animBottomBarTimeLine;
