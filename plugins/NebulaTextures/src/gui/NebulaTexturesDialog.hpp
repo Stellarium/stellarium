@@ -154,6 +154,8 @@ private:
 	// Pointer to QSettings
 	QSettings* m_conf;
 
+	class StelProgressController* progressBar;
+
 	// URL for the Astrometry
 	QString API_URL = "http://nova.astrometry.net/";
 

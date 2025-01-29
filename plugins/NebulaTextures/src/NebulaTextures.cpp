@@ -43,7 +43,7 @@ StelPluginInfo NebulaTexturesStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Nebula Textures");
 	info.authors = "WANG Siliang";
 	info.contact = "bd7jay@outlook.com";
-	info.description = N_("The plugin allows users to create and display their own astronomical sky images or even sketches in Stellarium, supporting both online plate solving for coordinate parsing or manual input of coordinates to localize the image, render it, and add it to the custom texture management system.");
+	info.description = N_("This plugin can plate-solve and position astronomical images, adding them as custom deep-sky object textures for rendering.");
 	info.version = NEBULATEXTURES_PLUGIN_VERSION;
 	info.license = NEBULATEXTURES_PLUGIN_LICENSE;
 	return info;

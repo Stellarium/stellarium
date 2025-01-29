@@ -59,7 +59,8 @@ NebulaTexturesDialog::NebulaTexturesDialog()
 	: StelDialog("NebulaTextures"),
 	flag_renderTempTex(false),
 	m_conf(StelApp::getInstance().getSettings()),
-	retryCount(0)
+	retryCount(0),
+	progressBar(Q_NULLPTR)
 {
 	ui = new Ui_nebulaTexturesDialog();
 
@@ -201,14 +202,10 @@ void NebulaTexturesDialog::setAboutHtml(void)
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>WANG Siliang</td></tr>";
 	html += "</table>";
 
-	html += "<p>" + q_("The Nebula Textures plugin allows users to create and display their own astronomical sky images or even sketches in Stellarium. It supports online plate solving for coordinate parsing, or manual input of coordinates to localize the image, render it, and add it to the custom texture management system.") + "</p>";
-	html += "<p>" + q_("This plugin provides an intuitive way for users to visualize their astronomical observations or creations within Stellarium, enhancing the realism and immersion of the celestial view. By using plate solving or manually inputting coordinates, users can accurately position and render their images or sketches, which are then seamlessly integrated into Stellarium's texture system.") + "</p>";
-
-	html += "<h3>" + q_("Publications") + "</h3>";
-	html += "<p>" + q_("If you use this plugin in your publications, please cite:") + "</p>";
-	html += "<ul>";
-	html += "<li>" + QString("{WANG Siliang: Nebula Textures Plugin.} Stellarium Plugin, 2024-2025.").toHtmlEscaped() + "</li>";
-	html += "</ul>";
+	html += "<p>" + q_("The Nebula Textures plugin enhances your Stellarium experience by allowing you to customize and render deep-sky object (DSO) textures. "
+					   "Whether you're an astronomy enthusiast with astrophotography or astronomical sketches and paintings, this plugin lets you integrate your own images into Stellarium. "
+					   "It also supports online plate-solving via Astrometry.net for precise positioning of astronomical images. "
+					   "Simply upload your image (ensure it is not flipped horizontally or vertically), solve its coordinates, and enjoy a personalized celestial view!") + "</p>";
 
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Nebula Textures plugin");
 
@@ -944,7 +941,7 @@ void NebulaTexturesDialog::renderTempCustomTexture()
 		return;
 	}
 
-	updateStatus(q_("Rendering..."));
+	// updateStatus(q_("Rendering..."));
 
 	QString path = StelFileMgr::getUserDir()+tmpcfgFile;
 
@@ -956,7 +953,7 @@ void NebulaTexturesDialog::renderTempCustomTexture()
 
 	if (path.isEmpty()){
 		qWarning() << "[NebulaTextures] Error while loading nebula texture.";
-		updateStatus(q_("Rendering failed."));
+		// updateStatus(q_("Rendering failed."));
 	}
 	else{
 		if(flag_renderTempTex) unRenderTempCustomTexture();
@@ -964,7 +961,7 @@ void NebulaTexturesDialog::renderTempCustomTexture()
 		flag_renderTempTex = true;
 		if(ui->disableDefault->isChecked())
 			setTexturesVisible(DEFAULT_TEXNAME, false);
-		updateStatus(q_("Rendering complete."));
+		// updateStatus(q_("Rendering complete."));
 	}
 }
 
@@ -985,7 +982,7 @@ void NebulaTexturesDialog::unRenderTempCustomTexture()
 
 	setTexturesVisible(DEFAULT_TEXNAME, true);
 	refreshTextures();
-	updateStatus(q_("Cancel rendering."));
+	// updateStatus(q_("Cancel rendering."));
 }
 
 
@@ -1004,12 +1001,17 @@ void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
 {
 	QString cfgFilePath = StelFileMgr::getUserDir() + cfgFile;
 
-	// Read the JSON configuration file
 	QFile jsonFile(cfgFilePath);
+
+	if (!jsonFile.exists()) {
+		qWarning() << "[NebulaTextures] JSON file does not exist:" << cfgFilePath;
+		ui->listWidget->clear();
+		return;
+	}
 
 	if (!jsonFile.open(QIODevice::ReadOnly)) {
 		qWarning() << "[NebulaTextures] Failed to open JSON file for reading:" << cfgFilePath;
-		updateStatus(q_("Failed to open Configuration File!"));
+		// updateStatus(q_("Failed to open Configuration File!"));
 		return;
 	}
 
@@ -1018,14 +1020,14 @@ void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
 
 	if (!jsonDoc.isObject()) {
 		qWarning() << "[NebulaTextures] Invalid JSON structure in file:" << cfgFilePath;
-		updateStatus(q_("Invalid JSON structure in Configuration File!"));
+		// updateStatus(q_("Invalid JSON structure in Configuration File!"));
 		return;
 	}
 
 	QJsonObject rootObject = jsonDoc.object();
 	if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()) {
 		qWarning() << "[NebulaTextures] No 'subTiles' array found in JSON file:" << cfgFilePath;
-		updateStatus(q_("No 'subTiles' array in Configuration File!"));
+		// updateStatus(q_("No 'subTiles' array in Configuration File!"));
 		return;
 	}
 
@@ -1055,7 +1057,7 @@ void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
 			}
 		}
 	}
-	updateStatus(q_("Images deletion completed."));
+	// updateStatus(q_("Images deletion completed."));
 }
 
 
@@ -1115,7 +1117,7 @@ void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 	QString targetFilePath = pluginFolder + imageUrl;
 	if (!QFile::copy(imagePath, targetFilePath)) {
 		qWarning() << "[NebulaTextures] Failed to copy image file to target path:" << targetFilePath;
-		updateStatus(q_("Failed to copy image file to user folder!"));
+		// updateStatus(q_("Failed to copy image file to user folder!"));
 		return;
 	}
 
@@ -1170,14 +1172,14 @@ void NebulaTexturesDialog::registerTexture(const QString& imageUrl, const QJsonA
 	if (jsonFile.exists() && groupName!=TEST_TEXNAME) {
 		if (!jsonFile.open(QIODevice::ReadOnly)) {
 			qWarning() << "[NebulaTextures] Failed to open existing JSON file for reading:" << path;
-			updateStatus(q_("Failed to open Configuration File!"));
+			// updateStatus(q_("Failed to open Configuration File!"));
 			return;
 		}
 
 		QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
 		if (!jsonDoc.isObject()) {
 			qWarning() << "[NebulaTextures] Invalid JSON structure in file:" << path;
-			updateStatus(q_("Invalid JSON structure in Configuration File!"));
+			// updateStatus(q_("Invalid JSON structure in Configuration File!"));
 			return;
 		}
 
@@ -1220,7 +1222,7 @@ void NebulaTexturesDialog::registerTexture(const QString& imageUrl, const QJsonA
 
 	if (!jsonFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
 		qWarning() << "[NebulaTextures] Failed to open JSON file for writing:" << path;
-		updateStatus(q_("Failed to open Configuration File for writing!"));
+		// updateStatus(q_("Failed to open Configuration File for writing!"));
 		return;
 	}
 
@@ -1229,7 +1231,7 @@ void NebulaTexturesDialog::registerTexture(const QString& imageUrl, const QJsonA
 	jsonFile.flush();
 	jsonFile.close();
 
-	updateStatus(q_("Updated custom textures JSON file successfully!"));
+	updateStatus(q_("Importing custom textures successfully!"));
 }
 
 
@@ -1339,6 +1341,12 @@ void NebulaTexturesDialog::reloadData()
 	QFile jsonFile(path);
 	QJsonObject rootObject;
 
+	if (!jsonFile.exists()) {
+		qWarning() << "[NebulaTextures] JSON file does not exist:" << path;
+		ui->listWidget->clear();
+		return;
+	}
+
 	if (!jsonFile.open(QIODevice::ReadOnly)) {
 		qWarning() << "[NebulaTextures] Failed to open JSON file for reading:" << path;
 		ui->listWidget->clear();
@@ -1393,7 +1401,6 @@ void NebulaTexturesDialog::reloadData()
  */
 void NebulaTexturesDialog::refreshTextures()
 {
-
 	bool showCustom = getShowCustomTextures();
 	if (!showCustom){
 		setTexturesVisible(CUSTOM_TEXNAME,false);
@@ -1439,16 +1446,16 @@ bool NebulaTexturesDialog::setTexturesVisible(QString TexName, bool visible)
  *
  * Searches for the sky layer associated with the given key in the StelSkyLayerMgr.
  * If found, it attempts to cast the layer to a StelSkyImageTile and returns it.
- * Returns nullptr if no layer is found or the cast fails.
+ * Returns Q_NULLPTR if no layer is found or the cast fails.
  */
 StelSkyImageTile* NebulaTexturesDialog::get_aTile(QString key)
 {
 	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
 	auto aTex = skyLayerMgr->allSkyLayers.find(key);
 	if(aTex == skyLayerMgr->allSkyLayers.end())
-		return nullptr;
+		return Q_NULLPTR;
 	StelSkyLayerMgr::SkyLayerElem* aElem = aTex.value();
-	if (!aElem || !aElem->layer) return nullptr;
+	if (!aElem || !aElem->layer) return Q_NULLPTR;
 	StelSkyImageTile* aTile = dynamic_cast<StelSkyImageTile*>(aElem->layer.data());
 	return aTile;
 }
