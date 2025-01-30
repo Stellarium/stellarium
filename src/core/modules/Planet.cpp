@@ -4828,9 +4828,10 @@ void Planet::drawHints(const StelCore* core, StelPainter &sPainter, const QFont&
 	//StelPainter sPainter(prj);
 	sPainter.setFont(planetNameFont);
 	// Draw nameI18 + scaling if it's not == 1.
+	const float scale = StelApp::getInstance().getScreenScale();
 	const float pixPerRad = sPainter.getProjector()->getPixelPerRadAtCenter();
 	const float angularRadius = getAngularRadius(core)*M_PI/180.;
-	float tmp = (hintFader.getInterstate()<=0.f ? 7.f : 10.f) + angularRadius*pixPerRad/1.44f; // Shift for nameI18 printing
+	float tmp = (hintFader.getInterstate()<=0.f ? 7.f : 10.f) * scale + angularRadius*pixPerRad/1.44f; // Shift for nameI18 printing
 	sPainter.setColor(labelColor,labelsFader.getInterstate());
 	const QString label = sphereScale != 1. ? QString(u8"%1 (\u00d7%2)").arg(getPlanetLabel(), QString::number(sphereScale, 'f', 2))
 	                                        : getPlanetLabel();
