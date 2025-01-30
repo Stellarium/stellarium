@@ -77,9 +77,14 @@ double NebulaTextures::getCallOrder(StelModuleActionName actionName) const
 
 void NebulaTextures::init()
 {
-	configDialog->refreshTextures();
+	refresh(); //when opening plugin but not startup stellarium
 }
 
 void NebulaTextures::draw(StelCore* core)
 {
+}
+
+void NebulaTextures::refresh()
+{
+	configDialog->refreshTextures();
 }

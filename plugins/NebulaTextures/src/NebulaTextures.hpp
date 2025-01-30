@@ -35,6 +35,8 @@ public:
 	// Methods defined in the StelModule class
 	void init() override;
 
+	void refresh();
+
 	// Activate only if update() does something.
 	//void update(double deltaTime) override {}
 

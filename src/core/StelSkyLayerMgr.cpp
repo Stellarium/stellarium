@@ -223,10 +223,6 @@ void StelSkyLayerMgr::loadingStateChanged(bool b)
 		StelApp::getInstance().removeProgressBar(elem->progressBar);
 		elem->progressBar = Q_NULLPTR;
 
-#ifdef USE_STATIC_PLUGIN_NEBULATEXTURES
-		if (StelApp::getInstance().getModuleMgr().isPluginLoaded("NebulaTextures"))
-			StelApp::getInstance().getModule("NebulaTextures")->init();
-#endif
 	}
 }
 

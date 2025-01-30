@@ -71,7 +71,6 @@ NebulaTexturesDialog::NebulaTexturesDialog()
 	connect(subStatusTimer, &QTimer::timeout, this, &NebulaTexturesDialog::checkSubStatus);
 	connect(jobStatusTimer, &QTimer::timeout, this, &NebulaTexturesDialog::checkJobStatus);
 
-	refreshTextures();
 }
 
 NebulaTexturesDialog::~NebulaTexturesDialog()
@@ -956,12 +955,18 @@ void NebulaTexturesDialog::renderTempCustomTexture()
 		// updateStatus(q_("Rendering failed."));
 	}
 	else{
-		if(flag_renderTempTex) unRenderTempCustomTexture();
-		skyLayerMgr->insertSkyImage(path, QString(), true, 1);
-		flag_renderTempTex = true;
+		if(flag_renderTempTex){
+			StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+			skyLayerMgr->removeSkyLayer(TEST_TEXNAME);
+		}
+
 		if(ui->disableDefault->isChecked())
 			setTexturesVisible(DEFAULT_TEXNAME, false);
-		// updateStatus(q_("Rendering complete."));
+		else
+			setTexturesVisible(DEFAULT_TEXNAME, true);
+
+		skyLayerMgr->insertSkyImage(path, QString(), true, 1);
+		flag_renderTempTex = true;
 	}
 }
 
@@ -976,13 +981,13 @@ void NebulaTexturesDialog::renderTempCustomTexture()
  */
 void NebulaTexturesDialog::unRenderTempCustomTexture()
 {
-	if(!flag_renderTempTex) return;
+	if(!flag_renderTempTex)
+		return;
 	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
 	skyLayerMgr->removeSkyLayer(TEST_TEXNAME);
 
+	flag_renderTempTex = false;
 	setTexturesVisible(DEFAULT_TEXNAME, true);
-	refreshTextures();
-	// updateStatus(q_("Cancel rendering."));
 }
 
 
