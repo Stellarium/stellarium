@@ -47,7 +47,6 @@ class InfoPanel : public QGraphicsTextItem
 
 	private:
 		StelObject::InfoStringGroup infoTextFilters;
-		QGraphicsPixmapItem *infoPixmap; // Used when text rendering is buggy. Used when CLI option -t given.
 };
 
 //! The class managing the layout for button bars, selected object info and loading bars.
