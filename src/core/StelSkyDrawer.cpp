@@ -389,7 +389,6 @@ bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 {
 	rcMag->radius = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), static_cast<float>(starRelativeScale)*1.40f*0.5f);
 	rcMag->radius *=starLinearScale;
-	rcMag->radius *=StelMainView::getInstance().getCustomScreenshotMagnification();
 	// Use now statically min_rmag = 0.5, because higher and too small values look bad
 	if (rcMag->radius < 0.3f)
 	{
@@ -419,6 +418,7 @@ bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 			rcMag->radius=MAX_LINEAR_RADIUS+std::sqrt(1.f+rcMag->radius-MAX_LINEAR_RADIUS)-1.f;
 		}
 	}
+	rcMag->radius *= StelApp::getInstance().getScreenScale();
 	return true;
 }
 
@@ -476,17 +476,19 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
 		return false;
 
-	const float radius = rcMag.radius * static_cast<float>(sPainter->getProjector()->getDevicePixelsPerPixel());
+	const float radius = rcMag.radius;
 	const float frand=StelApp::getInstance().getRandF();
 
 	// Random coef for star twinkling. twinkleFactor can introduce height-dependent twinkling.
 	const float tw = ((flagStarTwinkle && (flagHasAtmosphere || flagForcedTwinkle))) ? (1.f-twinkleFactor*static_cast<float>(twinkleAmount)*frand)*rcMag.luminance : rcMag.luminance;
 
+	const float scale = StelApp::getInstance().getScreenScale();
 	// If the rmag is big, draw a big halo
-	if (flagDrawBigStarHalo && radius>MAX_LINEAR_RADIUS+5.f)
+	const float bigHaloThresholdRadius = (MAX_LINEAR_RADIUS+5)*scale;
+	if (flagDrawBigStarHalo && radius > bigHaloThresholdRadius)
 	{
-		float cmag = qMin(1.0f, qMin(rcMag.luminance, (radius-(MAX_LINEAR_RADIUS+5.f))/30.f));
-		float rmag = 150.f;
+		const float cmag = qMin(1.0f, qMin(rcMag.luminance, (radius-bigHaloThresholdRadius)/30.f/scale));
+		const float rmag = 150.f * scale;
 
 		texBigHalo->bind();
 		sPainter->setBlending(true, GL_ONE, GL_ONE);
@@ -538,10 +540,11 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3f& v, float ra
 // Terminate drawing of a 3D model, draw the halo
 void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color, const bool isSun)
 {
+	const float scale = StelApp::getInstance().getScreenScale();
 	const float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
 	// Assume a disk shape
 	float pixRadius = std::sqrt(illuminatedArea/(60.f*60.f)*M_PI_180f*M_PI_180f*(pixPerRad*pixPerRad))/M_PIf;
-	float pxRd = pixRadius*3.f+100.f;
+	float pxRd = pixRadius*3.f+100.f*scale;
 	bool noStarHalo = false;
 
 	if (isSun)
@@ -551,8 +554,8 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 		texSunHalo->bind();
 		painter->setBlending(true, GL_ONE, GL_ONE);
 
-		float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
-		float cmag = (rmag>=pxRd) ? 1.f : qMax(0.15f, 1.f-(pxRd-rmag)/100); // was qMax(0, .), but this would remove the halo when sun is dim.
+		const float rmag = big3dModelHaloRadius*scale*(mag+15.f)/-11.f;
+		const float cmag = (rmag>=pxRd) ? 1.f : qMax(0.15f, 1.f-(pxRd-rmag)/100/scale); // was qMax(0, .), but this would remove the halo when sun is dim.
 		Vec3f win;
 		painter->getProjector()->project(v, win);
 		painter->setColor(color*cmag);
@@ -579,15 +582,16 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 	// so that the radius of the halo is small enough to be not visible (so that we see the disk)
 
 	// TODO: Change drawing halo to more realistic view of stars and planets
-	float tStart = 3.f; // Was 2.f: planet's halo is too dim. Atque 2020-11-12: No need to change these anymore. It appears that this has to do with halo size vs FOV (?).
-	float tStop = 6.f;
+	float tStart = 3.f*scale; // Was 2.f: planet's halo is too dim. Atque 2020-11-12: No need to change these anymore. It appears that this has to do with halo size vs FOV (?).
+	float tStop = 6.f*scale;
 	bool truncated=false;
 
 	float maxHaloRadius = qMax(tStart*6.f, pixRadius*3.f); //Atque 2020-11-12: Careful, if tStart*6.f is too big (tStart*10.f or something), the Moon gets a ridiculously big halo.
 	if (rcm.radius>maxHaloRadius)
 	{
 		truncated = true;
-		rcm.radius=maxHaloRadius+std::sqrt(rcm.radius-maxHaloRadius);
+		// One more factor of scale here is needed to compensate for taking a square root of the already included factor
+		rcm.radius=maxHaloRadius+std::sqrt((rcm.radius-maxHaloRadius)*scale);
 	}
 
 	// Fade the halo away when the disk is too big

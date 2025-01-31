@@ -444,9 +444,8 @@ void StelApp::init(QSettings* conf)
 	gl = QOpenGLContext::currentContext()->functions();
 	confSettings = conf;
 
-	devicePixelsPerPixel = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
-	if (devicePixelsPerPixel>1)
-		qDebug() << "Detected a high resolution device! Device pixel ratio:" << devicePixelsPerPixel;
+	devicePixelsPerPixel = StelMainView::getInstance().devicePixelRatioF();
+	qDebug() << "Initial high-DPI scaling factor:" << devicePixelsPerPixel;
 
 	setScreenFontSize(confSettings->value("gui/screen_font_size", getDefaultGuiFontSize()).toInt());
 	setGuiFontSize(confSettings->value("gui/gui_font_size", getDefaultGuiFontSize()).toInt());
@@ -1387,6 +1386,7 @@ void StelApp::setDevicePixelsPerPixel(qreal dppp)
 	// Check that the device-independent pixel size didn't change
 	if (!viewportEffect && !fuzzyEquals(devicePixelsPerPixel, dppp))
 	{
+		qDebug() << "Changing high-DPI scaling factor from" << devicePixelsPerPixel << "to" << dppp;
 		devicePixelsPerPixel = dppp;
 		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 		params.devicePixelsPerPixel = devicePixelsPerPixel;

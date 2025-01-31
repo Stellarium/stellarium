@@ -1311,11 +1311,11 @@ QString getHoursMinutesFromJulianDay(const double julianDay)
 	return QString("%1:%2").arg(hr, 2, 10, QChar('0')).arg(m, 2, 10, QChar('0'));
 }
 
-QString hoursToHmsStr(const double hours, const bool lowprecision)
+QString hoursToHmsStr(const double hours, const bool minutesOnly, const bool colonFormat)
 {
 	int h = static_cast<int>(hours);
 	double minutes = (qAbs(hours)-qAbs(double(h)))*60.;
-	if (lowprecision)
+	if (minutesOnly)
 	{
 		int m = qRound(minutes);
 		if (m==60)
@@ -1323,7 +1323,8 @@ QString hoursToHmsStr(const double hours, const bool lowprecision)
 			h += 1;
 			m = 0;
 		}
-		return QString("%1h%2m").arg(h).arg(m, 2, 10, QChar('0'));
+		QString format=colonFormat ? "%1:%2" : "%1h%2m";
+		return QString(format).arg(h).arg(m, 2, 10, QChar('0'));
 	}
 	else
 	{
@@ -1339,13 +1340,14 @@ QString hoursToHmsStr(const double hours, const bool lowprecision)
 			h += 1;
 			m = 0;
 		}
-		return QString("%1h%2m%3s").arg(h).arg(m, 2, 10, QChar('0')).arg(s, 4, 'f', 1, QChar('0'));
+		QString format=colonFormat ? "%1:%2:%3" : "%1h%2m%3s";
+		return QString(format).arg(h).arg(m, 2, 10, QChar('0')).arg(s, 4, 'f', 1, QChar('0'));
 	}
 }
 
-QString hoursToHmsStr(const float hours, const bool lowprecision)
+QString hoursToHmsStr(const float hours, const bool minutesOnly, const bool colonFormat)
 {
-	return hoursToHmsStr(static_cast<double>(hours), lowprecision);
+	return hoursToHmsStr(static_cast<double>(hours), minutesOnly, colonFormat);
 }
 
 //! The method to splitting the text by substrings by some limit of string length

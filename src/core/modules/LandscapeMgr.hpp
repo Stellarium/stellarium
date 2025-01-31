@@ -103,6 +103,9 @@ public:
 	void setFlagShow32WCRLabels(bool b) { fader32WCR = b; StelApp::immediateSave("viewing/flag_32wcr_points", b);}
 	bool getFlagShow32WCRLabels() const { return fader32WCR; }
 private:
+	void updateFontSizes();
+
+private:
 	class StelPropertyMgr* propMgr;
 	QFont font4WCR, font8WCR, font16WCR, font32WCR;
 	Vec3f color;

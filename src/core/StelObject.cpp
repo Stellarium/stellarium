@@ -363,6 +363,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 {
 	StelApp& app = StelApp::getInstance();
 	StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
+	const float airmass = getAirmass(core);
 	const StelLocation currentLocation=core->getCurrentLocation();
 	const bool onTransitionToNewLocation=core->getCurrentObserver()->isTraveling();
 	const bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
@@ -372,7 +373,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	const bool withDesignations = app.getFlagUseCCSDesignation();
 	const QString cepoch = qc_("on date", "coordinates for current epoch");
 	const QString currentPlanet = core->getCurrentPlanet()->getEnglishName();
-	const QString apparent = " " + (withAtmosphere ? q_("(apparent)") : "");
+	const QString apparent = " " + (withAtmosphere && (airmass>-1.f) ? q_("(apparent)") : "");
 	const double currentJD = core->getJD();
 	const double utcShift = core->getUTCOffset(currentJD) / 24.; // Fix DST shift...
 	QString currentObjStr = getEnglishName();

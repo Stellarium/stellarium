@@ -71,17 +71,8 @@ constexpr char ATMOSPHERE_MODEL_CONF_VAL_DEFAULT[]="preetham";
 Cardinals::Cardinals()
 	: color(0.6f,0.2f,0.2f)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
-	screenFontSize = StelApp::getInstance().getScreenFontSize();
 	propMgr = StelApp::getInstance().getStelPropertyManager();
-	// Default font size is 24
-	font4WCR.setPixelSize(conf->value("viewing/cardinal_font_size", screenFontSize+11).toInt());
-	// Default font size is 18
-	font8WCR.setPixelSize(conf->value("viewing/ordinal_font_size", screenFontSize+5).toInt());
-	// Draw the principal wind points even smaller.
-	font16WCR.setPixelSize(conf->value("viewing/16wcr_font_size", screenFontSize+2).toInt());
-	font32WCR.setPixelSize(conf->value("viewing/32wcr_font_size", screenFontSize).toInt());
+	updateFontSizes();
 
 	// English names for cardinals
 	labels = {
@@ -94,6 +85,23 @@ Cardinals::Cardinals()
 		{ dSbW,"SbW" }, {dSWbS,"SWbS"}, {dSWbW,"SWbW"}, { dWbS,"WbS" },
 		{ dWbN,"WbN" }, {dNWbW,"NWbW"}, {dNWbN,"NWbN"}, { dNbW,"NbW" }
 	};
+	QObject::connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged,
+	                 [this]{updateFontSizes();});
+}
+
+void Cardinals::updateFontSizes()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	screenFontSize = StelApp::getInstance().getScreenFontSize();
+	const float scale = StelApp::getInstance().screenFontSizeRatio();
+	// Default font size is 24
+	font4WCR.setPixelSize(conf->value("viewing/cardinal_font_size", screenFontSize+11*scale).toInt());
+	// Default font size is 18
+	font8WCR.setPixelSize(conf->value("viewing/ordinal_font_size", screenFontSize+5*scale).toInt());
+	// Draw the principal wind points even smaller.
+	font16WCR.setPixelSize(conf->value("viewing/16wcr_font_size", screenFontSize+2*scale).toInt());
+	font32WCR.setPixelSize(conf->value("viewing/32wcr_font_size", screenFontSize).toInt());
 }
 
 Cardinals::~Cardinals()
@@ -159,13 +167,14 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	if (fader4WCR.getInterstate()>0.f)
 	{
 		const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-		const float ppx = static_cast<float>(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
+		const float ppx = prj->getDevicePixelsPerPixel();
+		const float fontSizeRatio = StelApp::getInstance().screenFontSizeRatio();
 		StelPainter sPainter(prj);
 		sPainter.setFont(font4WCR);
 		float sshift=0.f, bshift=0.f, cshift=0.f, dshift=0.f, vshift=1.f;
 		bool flagMask = (core->getProjection(StelCore::FrameJ2000)->getMaskType() != StelProjector::MaskDisk);
 		if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
-			vshift = static_cast<float>(screenFontSize + 12)*ppx;
+			vshift = static_cast<float>(screenFontSize + 12*fontSizeRatio)*ppx;
 
 		Vec3f xy;
 		sPainter.setColor(color, fader4WCR.getInterstate());
