@@ -659,7 +659,7 @@ StringTexture* StelPainter::getTextTexture(const QString& str, int pixelSize) co
 	if (cachedTex)
 		return cachedTex;
 	QFont tmpFont = currentFont;
-	tmpFont.setPixelSize(currentFont.pixelSize()*static_cast<int>(prj->getDevicePixelsPerPixel()));
+	tmpFont.setPixelSize(currentFont.pixelSize()*prj->getDevicePixelsPerPixel());
 	tmpFont.setStyleStrategy(QFont::NoSubpixelAntialias); // The text may rotate, which would break subpixel AA
 	QRect strRect = QFontMetrics(tmpFont).boundingRect(str);
 	int w = strRect.width()+1+static_cast<int>(0.02f*strRect.width());
