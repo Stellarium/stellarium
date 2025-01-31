@@ -594,8 +594,11 @@ namespace StelUtils
 	//double calculateSiderealPeriod(const double SemiMajorAxis);  MOVED TO Orbit.h
 
 	//! Convert decimal hours to hours, minutes, seconds
-	QString hoursToHmsStr(const double hours, const bool lowprecision = false);
-	QString hoursToHmsStr(const float hours, const bool lowprecision = false);
+	//! Format for  @param colonFormat FALSE           TRUE
+	//! @param minutesOnly FALSE     "HhMMmSS.Ss"    "HHhMMm"
+	//! @param minutesOnly TRUE      "H:MM:SS.S"     "HH:MM"
+	QString hoursToHmsStr(const double hours, const bool minutesOnly = false, const bool colonFormat=false);
+	QString hoursToHmsStr(const float hours, const bool minutesOnly = false, const bool colonFormat=false);
 
 	//! Convert JD to hours and minutes
 	QString getHoursMinutesFromJulianDay(const double julianDay);
