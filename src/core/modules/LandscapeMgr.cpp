@@ -167,13 +167,14 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	if (fader4WCR.getInterstate()>0.f)
 	{
 		const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-		const float ppx = prj->getScreenScale();
+		const float ppx = prj->getDevicePixelsPerPixel();
+		const float fontSizeRatio = StelApp::getInstance().screenFontSizeRatio();
 		StelPainter sPainter(prj);
 		sPainter.setFont(font4WCR);
 		float sshift=0.f, bshift=0.f, cshift=0.f, dshift=0.f, vshift=1.f;
 		bool flagMask = (core->getProjection(StelCore::FrameJ2000)->getMaskType() != StelProjector::MaskDisk);
 		if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
-			vshift = static_cast<float>(screenFontSize + 12)*ppx;
+			vshift = static_cast<float>(screenFontSize + 12*fontSizeRatio)*ppx;
 
 		Vec3f xy;
 		sPainter.setColor(color, fader4WCR.getInterstate());
