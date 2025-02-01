@@ -657,9 +657,12 @@ void StelCore::setMaskType(StelProjector::StelProjectorMaskType m)
 
 void StelCore::setFlagGravityLabels(bool gravity)
 {
-	currentProjectorParams.gravityLabels = gravity;
-	StelApp::immediateSave("viewing/flag_gravity_labels", gravity);
-	emit flagGravityLabelsChanged(gravity);
+	if (currentProjectorParams.gravityLabels != gravity)
+	{
+		currentProjectorParams.gravityLabels = gravity;
+		StelApp::immediateSave("viewing/flag_gravity_labels", gravity);
+		emit flagGravityLabelsChanged(gravity);
+	}
 }
 
 bool StelCore::getFlagGravityLabels() const
@@ -1226,6 +1229,102 @@ void StelCore::setMJDay(double MJD)
 double StelCore::getMJDay() const
 {
 	return JD.first-2400000.5;
+}
+
+// @return whether nutation is currently used.
+bool StelCore::getUseNutation() const
+{
+	return flagUseNutation;
+}
+// Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).
+void StelCore::setUseNutation(bool use)
+{
+	if (flagUseNutation != use)
+	{
+		flagUseNutation=use;
+		StelApp::immediateSave("astro/flag_nutation", use);
+		emit flagUseNutationChanged(use);
+	}
+}
+
+// @return whether aberration is currently used.
+bool StelCore::getUseAberration() const
+{
+	return flagUseAberration;
+}
+// Set whether you want computation and simulation of aberration (a slight wobble of stellar positions due to finite speed of light, about 20 arcseconds when observing from earth).
+void StelCore::setUseAberration(bool use)
+{
+	if (flagUseAberration != use)
+	{
+		flagUseAberration=use;
+		StelApp::immediateSave("astro/flag_aberration", use);
+		emit flagUseAberrationChanged(use);
+	}
+}
+
+// @return aberration factor. 1 is realistic simulation, but higher values may be useful for didactic purposes.
+double StelCore::getAberrationFactor() const
+{
+	return aberrationFactor;
+}
+// Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
+void StelCore::setAberrationFactor(double factor)
+{
+	if (!fuzzyEquals(aberrationFactor, factor))
+	{
+		aberrationFactor=qBound(0.,factor, 5.);
+		StelApp::immediateSave("astro/aberration_factor", aberrationFactor);
+		emit aberrationFactorChanged(factor);
+	}
+}
+
+// @return whether parallax effect is currently used.
+bool StelCore::getUseParallax() const
+{
+	return flagUseParallax;
+}
+// Set whether you want computation and simulation of parallax effect.
+void StelCore::setUseParallax(bool use)
+{
+	if (flagUseParallax != use)
+	{
+		flagUseParallax=use;
+		StelApp::immediateSave("astro/flag_parallax", use);
+		emit flagUseParallaxChanged(use);
+	}
+}
+
+// @return parallax factor. 1 is realistic simulation, but higher values may be useful for didactic purposes.
+double StelCore::getParallaxFactor() const {return parallaxFactor;}
+// Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
+void StelCore::setParallaxFactor(double factor)
+{
+	if (!fuzzyEquals(parallaxFactor, factor))
+	{
+		parallaxFactor=qBound(0.,factor, 10000.);
+		StelApp::immediateSave("astro/parallax_factor", parallaxFactor);
+		emit parallaxFactorChanged(factor);
+	}
+}
+
+// @return whether topocentric coordinates are currently used.
+bool StelCore::getUseTopocentricCoordinates() const
+{
+	return flagUseTopocentricCoordinates;
+}
+// Set whether you want topocentric or planetocentric data
+void StelCore::setUseTopocentricCoordinates(bool use)
+{
+	if (flagUseTopocentricCoordinates!= use)
+	{
+		flagUseTopocentricCoordinates=use;
+		// DO NOT SAVE! GH #4112
+		// This flag is switched too often.
+		// TODO: Add a store button elsewhere whgen needed.
+		//StelApp::immediateSave("astro/flag_topocentric_coordinates", use);
+		emit flagUseTopocentricCoordinatesChanged(use);
+	}
 }
 
 double StelCore::getPresetSkyTime() const
