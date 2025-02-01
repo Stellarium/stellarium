@@ -98,6 +98,7 @@ private:
 	static constexpr const char* zeroOrderScatteringPropName() { return "LandscapeMgr.flagAtmosphereZeroOrderScattering"; }
 	static constexpr const char* singleScatteringPropName()    { return "LandscapeMgr.flagAtmosphereSingleScattering"; }
 	static constexpr const char* multipleScatteringPropName()  { return "LandscapeMgr.flagAtmosphereMultipleScattering"; }
+	static constexpr const char* pseudoMirrorPropName()        { return "LandscapeMgr.flagAtmospherePseudoMirror"; }
 	bool inited=false; // We have to lazy initialize because at the time of construction, LandscapeMgr isn't registered with StelPropertyMgr
 	void init()
 	{
@@ -118,6 +119,11 @@ private:
 			const auto prop = propMan->getProperty(multipleScatteringPropName());
 			QObject::connect(prop, &StelProperty::changed, this, [this](const QVariant& v) { multipleScatteringEnabled_=v.toBool(); });
 			multipleScatteringEnabled_ = prop->getValue().toBool();
+		}
+		{
+			const auto prop = propMan->getProperty(pseudoMirrorPropName());
+			QObject::connect(prop, &StelProperty::changed, this, [this](const QVariant& v) { pseudoMirrorEnabled_=v.toBool(); });
+			pseudoMirrorEnabled_ = prop->getValue().toBool();
 		}
 		inited=true;
 	}
