@@ -1319,10 +1319,8 @@ void StelCore::setUseTopocentricCoordinates(bool use)
 	if (flagUseTopocentricCoordinates!= use)
 	{
 		flagUseTopocentricCoordinates=use;
-		// DO NOT SAVE! GH #4112
-		// This flag is switched too often.
-		// TODO: Add a store button elsewhere whgen needed.
-		//StelApp::immediateSave("astro/flag_topocentric_coordinates", use);
+		// DO NOT IMMEDIATE-SAVE! -- This flag is switched too often. GH #4112
+		// Add a store button elsewhere when needed.
 		emit flagUseTopocentricCoordinatesChanged(use);
 	}
 }
