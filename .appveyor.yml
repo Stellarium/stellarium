@@ -34,13 +34,13 @@ environment:
     cmake_args:
     exiv2url: https://github.com/10110111/exiv2/releases/download/ver0.28.0-final/exiv2-0.28.0-2017msvc64.zip
     exiv2baseName: exiv2-0.28.0-2017msvc64
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-    qtver: 5.12
-    qtbin: msvc2017
-    msvcname: Visual Studio 15 2017
-    cmake_args:
-    exiv2url: https://github.com/10110111/exiv2/releases/download/ver0.28.0-final/exiv2-0.28.0-2017msvc32.zip
-    exiv2baseName: exiv2-0.28.0-2017msvc32
+#  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+#    qtver: 5.12
+#    qtbin: msvc2017
+#    msvcname: Visual Studio 15 2017
+#    cmake_args:
+#    exiv2url: https://github.com/10110111/exiv2/releases/download/ver0.28.0-final/exiv2-0.28.0-2017msvc32.zip
+#    exiv2baseName: exiv2-0.28.0-2017msvc32
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
     qtver: 6.5
     qtbin: msvc2019_arm64
