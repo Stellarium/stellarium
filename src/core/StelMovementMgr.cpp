@@ -279,6 +279,10 @@ void StelMovementMgr::bindingFOVActions()
 
 void StelMovementMgr::setEquatorialMount(bool b)
 {
+	const MountMode mm=getMountMode();
+	if ((mm==MountEquinoxEquatorial && b) || (mm==MountAltAzimuthal && !b))
+		return;
+
 	setMountMode(b ? MountEquinoxEquatorial : MountAltAzimuthal);
 	StelApp::immediateSave("navigation/viewing_mode", b ? "equator" : "horizon");
 

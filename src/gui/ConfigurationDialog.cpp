@@ -212,6 +212,12 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->parallaxCheckBox, "StelCore.flagUseParallax");
 	connectDoubleProperty(ui->parallaxSpinBox, "StelCore.parallaxFactor");
 	connectBoolProperty(ui->topocentricCheckBox, "StelCore.flagUseTopocentricCoordinates");
+	// We cannot link flag setting to immediate storing. (GH #4112)
+	// The immediate-store is now triggered by this click
+	connect(ui->topocentricCheckBox, &QCheckBox::released, this, [=](){
+		StelApp::immediateSave("astro/flag_topocentric_coordinates",
+				       StelApp::getInstance().getStelPropertyManager()->getStelPropertyValue("StelCore.flagUseTopocentricCoordinates"));
+	});
 
 	// Additional settings for selected object info
 	connectBoolProperty(ui->checkBoxUMSurfaceBrightness, "NebulaMgr.flagSurfaceBrightnessArcsecUsage");
