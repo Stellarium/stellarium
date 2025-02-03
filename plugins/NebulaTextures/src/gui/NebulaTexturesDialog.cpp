@@ -1560,6 +1560,10 @@ void NebulaTexturesDialog::gotoSelectedItem(QListWidgetItem* item)
 {
 	if (!item) return;
 
+	// Constants
+	const double D2R = M_PI / 180.0;  // Degree to radian
+	const double R2D = 180.0 / M_PI;  // Radian to degree
+
 	QString selectedText = item->text();
 	QString path = StelFileMgr::getUserDir() + configFile;
 	QFile jsonFile(path);
@@ -1613,8 +1617,8 @@ void NebulaTexturesDialog::gotoSelectedItem(QListWidgetItem* item)
 		// calculate center coordinates (approximately)
 		double sum_x = 0.0, sum_y = 0.0, sum_z = 0.0;
 		for (const auto& point : raDecList) {
-			double ra_rad = qDegreesToRadians(point.first);
-			double dec_rad = qDegreesToRadians(point.second);
+			double ra_rad = D2R * point.first;
+			double dec_rad = D2R * point.second;
 			double x = cos(dec_rad) * cos(ra_rad);
 			double y = cos(dec_rad) * sin(ra_rad);
 			double z = sin(dec_rad);
@@ -1635,16 +1639,16 @@ void NebulaTexturesDialog::gotoSelectedItem(QListWidgetItem* item)
 		avg_x /= norm;
 		avg_y /= norm;
 		avg_z /= norm;
-		double centerRA = fmod(qRadiansToDegrees(atan2(avg_y, avg_x)) + 360.0, 360.0);
-		double centerDec = qRadiansToDegrees(asin(avg_z));
+		double centerRA = fmod(R2D* atan2(avg_y, avg_x) + 360.0, 360.0);
+		double centerDec = R2D * asin(avg_z);
 		centerDec = qBound(-90.0, centerDec, 90.0);
 
 		// goto center view
 		StelCore* core = StelApp::getInstance().getCore();
 		StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 		Vec3d pos;
-		double spinLong = qDegreesToRadians(centerRA);
-		double spinLat = qDegreesToRadians(centerDec);
+		double spinLong = D2R * centerRA;
+		double spinLat = D2R * centerDec;
 
 		mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
 		Vec3d aimUp = mvmgr->getViewUpVectorJ2000();
