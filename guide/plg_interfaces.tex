@@ -892,24 +892,24 @@ and positioning of astronomical images, as well as the management and rendering 
     \item \textbf{Prepare an Image}: Prepare a processed rectangular bitmap file of a deep-sky object, 
 	in a format that supports both Astrometry analysis and rendering, such as PNG, JPG, TIF, or GIF. 
 	You should adjust the image background brightness to suit Stellarium 
-    by referencing the nebulae images in the Stellarium \file{nebulae/default} directory. Typical 
-    astrophotography images with TAN projections are fine, but avoid images with high field distortion. 
+	by referencing the nebulae images in the Stellarium \file{nebulae/default} directory. Typical 
+	astrophotography images with TAN projections are fine, but avoid images with high field distortion. 
 	If the image's FOV is too large, it is recommended to manually split it into multiple sub-images beforehand. 
 	\textbf{\textcolor{red}{Ensure that the image is not flipped horizontally or vertically!!!}} 
-    It’s recommended to use a descriptive ID or nickname as the filename. 
+	It’s recommended to use a descriptive ID or nickname as the filename. 
 	While Nova Astrometry does not strictly limit image size, keeping it below 20 MP 
-    ensures efficient plate solving.
+	ensures efficient plate solving.
 
     \item \textbf{Open Image}: By default, the plugin opens the “Solve and Add” page. Click the \button{Open File} 
-    button to select an image file or paste the file path into the “Image Filepath” text box.
+	button to select an image file or paste the file path into the “Image Filepath” text box.
 
     \item \textbf{Enter API Key}: Paste your Astrometry API key into the corresponding text box (password 
-    mode by default). If you don’t have one, click the \button{Astrometry ApiKey} hyperlink to obtain it 
-    after registering or logging in. Check \checkbox{Remember me} to store the key for future use.
+	mode by default). If you don’t have one, click the \button{Astrometry ApiKey} hyperlink to obtain it 
+	after registering or logging in. Check \checkbox{Remember me} to store the key for future use.
 
-    \item \textbf{Upload and Solve}: Click \button{Upload} to begin uploading and solving the image. Ensure system 
-    proxies are disabled to avoid errors. The solving process may take seconds to minutes, 
-	depending on the Astrometry.net server.
+    \item \textbf{Upload and Solve}: Click \button{Online Solve} to begin uploading and solving the image. Ensure system 
+	proxies are disabled to avoid errors. The solving process may take seconds to minutes, 
+	depending on the Astrometry.net server. If you need to stop the solving process, click the \button{Cancel} button.
 
     \item \textbf{View Solving Results}: After successful solving, the image's center and corners' J2000 
 	equatorial coordinates (in decimal degrees) will be displayed.
@@ -919,8 +919,10 @@ and positioning of astronomical images, as well as the management and rendering 
         \item Click the \guibutton{0.6}{uibtProcess.png} button next to the center coordinates to locate the texture's center.
         \item Use \button{Try Rendering this Texture} to preview the texture. If it overlaps with default 
 		textures, check \checkbox{Disable default textures} to avoid visual conflicts. However, remember 
-		to click \button{Stop Rendering this Texture} afterward to restore the rendering of the default nebula textures.
-		You can repeatedly press the \texttt{s} key in the main view to toggle star visibility and verify whether the image is aligned accurately.
+		to click \button{Stop Rendering this Texture} afterward to restore the rendering of the default nebula textures. 
+		The dropdown menu is used to adjust texture brightness, with three options: \textbf{Bright}, \textbf{Normal}, and \textbf{Dark}. 
+		The default \textbf{Normal} setting is suitable for most cases.
+        \item You can repeatedly press the \texttt{s} key in the main view to toggle star visibility and verify whether the image is aligned accurately.
     \end{itemize}
 
     \item \textbf{Stop Debugging}: Use \button{Stop Rendering this Texture} to halt the preview of the texture.
@@ -932,6 +934,8 @@ and positioning of astronomical images, as well as the management and rendering 
     \item \textbf{Restart Stellarium}: After restarting Stellarium, switch to the \button{Custom Textures} page of the 
 	plugin to manage your custom textures. Options include showing/hiding textures, avoiding 
 	overlaps with default textures, and reloading them.
+
+    \item \textbf{Locate a Texture}: Double-clicking a texture item in the list will quickly center the view on that texture.
 
     \item \textbf{Remove a Texture}: To remove a texture, switch to the \button{Custom Textures} page, select it in 
 	the list view and click \button{Remove selected item in Custom Textures}. The configuration file 
