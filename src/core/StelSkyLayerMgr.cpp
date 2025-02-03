@@ -222,7 +222,6 @@ void StelSkyLayerMgr::loadingStateChanged(bool b)
 		Q_ASSERT(elem->progressBar!=Q_NULLPTR);
 		StelApp::getInstance().removeProgressBar(elem->progressBar);
 		elem->progressBar = Q_NULLPTR;
-
 	}
 }
 

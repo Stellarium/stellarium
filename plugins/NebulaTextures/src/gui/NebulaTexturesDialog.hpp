@@ -23,6 +23,9 @@
 #include "StelDialog.hpp"
 #include <QString>
 #include <QPair>
+#include <QNetworkRequest>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 #include "NebulaTextures.hpp"
 #include "StelSkyLayerMgr.hpp"
@@ -121,6 +124,7 @@ private slots:
 	//! Open a file dialog to select an image file
 	void openImageFile();
 
+	void cancelSolve();
 
 	/***** Upload image and solve, calculate *****/
 	//! Upload an image to the server
@@ -162,6 +166,7 @@ private:
 	// Network manager for sending and receiving network requests
 	QNetworkAccessManager *networkManager;
 
+	QList<QNetworkReply*> activeReplies;
 
 	// Session identifier for the current session
 	QString session;
@@ -182,7 +187,7 @@ private:
 	int retryCount;
 
 	// limit of status timer retry count
-	const int maxRetryCount = 20;
+	const int maxRetryCount = 99;
 
 	// Calibration parameters for the image (CRPIX, CRVAL, CD values)
 	double CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2;

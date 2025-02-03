@@ -38,9 +38,6 @@
 #include <QTimer>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QNetworkRequest>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
 #include <QTimer>
 #include <QDebug>
 #include <QJsonArray>
@@ -75,6 +72,10 @@ NebulaTexturesDialog::NebulaTexturesDialog()
 
 NebulaTexturesDialog::~NebulaTexturesDialog()
 {
+	for (QNetworkReply *reply : activeReplies) {
+		reply->abort();
+		reply->deleteLater();
+	}
 	delete ui;
 }
 
@@ -97,6 +98,11 @@ void NebulaTexturesDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 
+	// load config
+	ui->checkBoxShow->setChecked(getShowCustomTextures());
+	ui->checkBoxAvoid->setChecked(getAvoidAreaConflict());
+	ui->cancelButton->setVisible(false);
+
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser;
 	StelGui* gui= static_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -109,6 +115,7 @@ void NebulaTexturesDialog::createDialogContent()
 
 	connect(ui->openFileButton, SIGNAL(clicked()), this, SLOT(openImageFile()));
 	connect(ui->uploadImageButton, SIGNAL(clicked()), this, SLOT(uploadImage()));
+	connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(cancelSolve()));
 	connect(ui->goPushButton, SIGNAL(clicked()), this, SLOT(goPush()));
 	connect(ui->renderButton, SIGNAL(clicked()), this, SLOT(renderTempCustomTexture()));
 	connect(ui->unrenderButton, SIGNAL(clicked()), this, SLOT(unRenderTempCustomTexture()));
@@ -125,10 +132,6 @@ void NebulaTexturesDialog::createDialogContent()
 	setAboutHtml();
 
 	ui->label_apiKey->setText(QString("<a href=\"https://nova.astrometry.net/api_help\">") + q_("Astrometry ApiKey:") + "</a>");
-
-	// load config
-	ui->checkBoxShow->setChecked(getShowCustomTextures());
-	ui->checkBoxAvoid->setChecked(getAvoidAreaConflict());
 
 	reloadData();
 
@@ -233,6 +236,7 @@ void NebulaTexturesDialog::freezeUiState(bool freeze)
 	ui->renderButton->setDisabled(freeze);
 	ui->unrenderButton->setDisabled(freeze);
 	ui->addCustomTextureButton->setDisabled(freeze);
+	ui->cancelButton->setVisible(freeze);
 }
 
 // Update the status text displayed in the UI
@@ -253,6 +257,20 @@ void NebulaTexturesDialog::openImageFile()
 		ui->lineEditImagePath->setText(fileName);
 		updateStatus(q_("File selected: ") + fileName);
 	}
+}
+
+void NebulaTexturesDialog::cancelSolve()
+{
+	for (QNetworkReply *reply : activeReplies) {
+		reply->abort();
+		reply->deleteLater();
+	}
+	activeReplies.clear();
+	subStatusTimer->stop();
+	jobStatusTimer->stop();
+
+	updateStatus(q_("Operation cancelled by user."));
+	freezeUiState(false);
 }
 
 
@@ -320,10 +338,15 @@ void NebulaTexturesDialog::uploadImage() // WARN: image should not be flip
 	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
 
 	// Send the POST request
-	QNetworkReply *reply = networkManager->post(request, query.toString().toUtf8());
+	QNetworkReply *loginReply = networkManager->post(request, query.toString().toUtf8());
+	activeReplies.append(loginReply);
 
 	// Connect the reply finished signal to a slot
-	connect(reply, &QNetworkReply::finished, this, [this, reply]() {onLoginReply(reply);});
+	connect(loginReply, &QNetworkReply::finished, this, [this, loginReply]() {
+		onLoginReply(loginReply);
+		activeReplies.removeOne(loginReply);
+		loginReply->deleteLater();
+	});
 
 	// Perform image upload logic here, e.g., using an API call
 	updateStatus(q_("Sending requests..."));
@@ -352,7 +375,6 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
 	if (reply->error() != QNetworkReply::NoError) {
 		qWarning() << "[NebulaTextures] Login failed.";
 		updateStatus(q_("Login failed!"));
-		reply->deleteLater();
 		freezeUiState(false);
 		return;
 	}
@@ -362,7 +384,6 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
 	if (!imageFile.open(QIODevice::ReadOnly)) {
 		qWarning() << "[NebulaTextures] Failed to open image file.";
 		updateStatus(q_("Failed to open image file!"));
-		reply->deleteLater();
 		freezeUiState(false);
 		return;
 	}
@@ -419,9 +440,13 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
 
 
 	QNetworkReply *uploadReply = networkManager->post(request, body);
-	connect(uploadReply, &QNetworkReply::finished, this, [this, uploadReply]() {onUploadReply(uploadReply);});
+	activeReplies.append(uploadReply);
+	connect(uploadReply, &QNetworkReply::finished, this, [this, uploadReply]() {
+		onUploadReply(uploadReply);
+		activeReplies.removeOne(uploadReply);
+		uploadReply->deleteLater();
+	});
 
-	reply->deleteLater();
 	updateStatus(q_("Uploading image..."));
 }
 
@@ -444,7 +469,6 @@ void NebulaTexturesDialog::onUploadReply(QNetworkReply *reply)
 	if (reply->error() != QNetworkReply::NoError) {
 		qWarning() << "[NebulaTextures] Image upload failed.";
 		updateStatus(q_("Image upload failed!"));
-		reply->deleteLater();
 		freezeUiState(false);
 		return;
 	}
@@ -453,7 +477,6 @@ void NebulaTexturesDialog::onUploadReply(QNetworkReply *reply)
 	QJsonObject json = doc.object();
 	subId = QString::number(json["subid"].toInt());
 	subStatusTimer->start(5000);
-	reply->deleteLater();
 	qDebug() << "[NebulaTextures] subid" << subId;//debug
 	updateStatus(q_("Image uploaded. Please wait..."));
 }
@@ -475,7 +498,12 @@ void NebulaTexturesDialog::checkSubStatus()
 	QNetworkRequest request(statusUrl);
 	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 	QNetworkReply *subStatusReply = networkManager->get(request);
-	connect(subStatusReply, &QNetworkReply::finished, this, [this, subStatusReply]() {onsubStatusReply(subStatusReply);});
+	activeReplies.append(subStatusReply);
+	connect(subStatusReply, &QNetworkReply::finished, this, [this, subStatusReply]() {
+		onsubStatusReply(subStatusReply);
+		activeReplies.removeOne(subStatusReply);
+		subStatusReply->deleteLater();
+	});
 	updateStatus(q_("Requesting submission status. Please wait...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
 }
 
@@ -512,7 +540,6 @@ void NebulaTexturesDialog::onsubStatusReply(QNetworkReply *reply)
 			updateStatus(q_("Failed to get submission status. Retry now...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
 			retryCount++;
 		}
-		reply->deleteLater();
 		return;
 	}
 
@@ -548,7 +575,6 @@ void NebulaTexturesDialog::onsubStatusReply(QNetworkReply *reply)
 			retryCount++;
 		}
 	}
-	reply->deleteLater();
 }
 
 
@@ -568,7 +594,12 @@ void NebulaTexturesDialog::checkJobStatus()
 	QNetworkRequest request(jobStatusUrl);
 	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 	QNetworkReply *jobStatusReply = networkManager->get(request);
-	connect(jobStatusReply, &QNetworkReply::finished, this, [this, jobStatusReply]() { onJobStatusReply(jobStatusReply); });
+	activeReplies.append(jobStatusReply);
+	connect(jobStatusReply, &QNetworkReply::finished, this, [this, jobStatusReply]() {
+		onJobStatusReply(jobStatusReply);
+		activeReplies.removeOne(jobStatusReply);
+		jobStatusReply->deleteLater();
+	});
 	updateStatus(q_("Requesting job status. Please wait...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
 }
 
@@ -604,8 +635,6 @@ void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
 			updateStatus(q_("Failed to get job status. Retry now...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
 			retryCount++; // Increment the retry counter
 		}
-
-		reply->deleteLater(); // Free resources
 		return;
 	}
 
@@ -620,7 +649,12 @@ void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
 		QUrl wcsUrl(API_URL+ "wcs_file/" + jobId);
 		QNetworkRequest request(wcsUrl);
 		QNetworkReply *wcsReply = networkManager->get(request);
-		connect(wcsReply, &QNetworkReply::finished, this, [this, wcsReply]() { onWcsDownloadReply(wcsReply); });
+		activeReplies.append(wcsReply);
+		connect(wcsReply, &QNetworkReply::finished, this, [this, wcsReply]() {
+			onWcsDownloadReply(wcsReply);
+			activeReplies.removeOne(wcsReply);
+			wcsReply->deleteLater();
+		});
 	} else if (status == "error" || status == "failure") {
 		retryCount = 0;
 		qWarning() << "[NebulaTextures] Error in job processing.";
@@ -639,7 +673,6 @@ void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
 			retryCount++;
 		}
 	}
-	reply->deleteLater();
 }
 
 
@@ -665,14 +698,11 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
 	if (reply->error() != QNetworkReply::NoError) {
 		qWarning() << "[NebulaTextures] Failed to download WCS file.";
 		updateStatus(q_("Failed to download WCS file..."));
-		reply->deleteLater();
 		freezeUiState(false);
 		return;
 	}
 	QByteArray cont = reply->readAll();
 	QString content = QString::fromUtf8(cont);
-
-	reply->deleteLater();
 
 	QRegularExpression regex("(CRPIX1|CRPIX2|CRVAL1|CRVAL2|CD1_1|CD1_2|CD2_1|CD2_2|IMAGEW|IMAGEH)\\s*=\\s*(-?\\d*\\.?\\d+([eE][-+]?\\d+)?)(.*)");
 	QStringList lines;
@@ -1187,7 +1217,6 @@ void NebulaTexturesDialog::registerTexture(const QString& imageUrl, const QJsonA
 			// updateStatus(q_("Invalid JSON structure in Configuration File!"));
 			return;
 		}
-
 		rootObject = jsonDoc.object();
 		jsonFile.close();
 	} else {

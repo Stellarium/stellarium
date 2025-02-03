@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>834</width>
-    <height>545</height>
+    <height>563</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -69,27 +69,10 @@
               <item row="0" column="1">
                <widget class="QLineEdit" name="lineEditImagePath"/>
               </item>
-              <item row="1" column="2">
-               <widget class="QPushButton" name="uploadImageButton">
-                <property name="text">
-                 <string>Upload</string>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="0">
                <widget class="QLabel" name="label_imagePath">
                 <property name="text">
                  <string>Image Filepath:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QCheckBox" name="checkBoxKeepApi">
-                <property name="text">
-                 <string>Remember me</string>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -109,10 +92,34 @@
                 </property>
                </widget>
               </item>
+              <item row="2" column="2">
+               <widget class="QPushButton" name="cancelButton">
+                <property name="text">
+                 <string>Cancel</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QPushButton" name="uploadImageButton">
+                <property name="text">
+                 <string>Online Solve</string>
+                </property>
+               </widget>
+              </item>
               <item row="1" column="1">
                <widget class="QLineEdit" name="lineEditApiKey">
                 <property name="echoMode">
                  <enum>QLineEdit::EchoMode::PasswordEchoOnEdit</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QCheckBox" name="checkBoxKeepApi">
+                <property name="text">
+                 <string>Remember me</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
