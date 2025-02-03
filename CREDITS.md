@@ -1002,6 +1002,12 @@
 	      from Robert Eder, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.182 Images of M9
+	      This image file was remixed, transformed, and post-processed by Sun Shuwei from the original file. The original image file was published by Yu-Hang Kuo at https://www.flickr.com/photos/143529236@N06/48912773222/.
+	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.183 Images of M68
+	      This image file was remixed, transformed, and post-processed by Sun Shuwei from the original file. The original image file was published by Yu-Hang Kuo at https://www.flickr.com/photos/143529236@N06/47278554542/.
+	      License: Creative Commons Attribution-Share Alike 4.0 International
 ```
 
 ## Appendix
