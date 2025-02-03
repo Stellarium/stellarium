@@ -252,8 +252,8 @@ void TelescopeDialog::setAboutText()
 	static const QRegularExpression a_rx("[{]([^{]*)[}]");
 
 #ifdef Q_OS_MACOS
-	QString modifierNameCtrl = "Command";
-	QString modifierNameAlt = "Option";
+	QString modifierNameCtrl = "Command (⌘)";
+	QString modifierNameAlt = "Option (⌥)";
 #else
 	QString modifierNameCtrl = "Ctrl";
 	QString modifierNameAlt = "Alt";
