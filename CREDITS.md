@@ -452,7 +452,7 @@
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
 	4.42 Images of IC1295, NGC134, NGC92, NGC55, NGC908, NGC936, NGC1232, NGC1313,
 	     NGC1792, NGC1978, NGC2207, NGC2736, NGC3199, NGC3699, NGC3766, NGC3532, NGC4945, NGC5128, NGC5189,
-	     NGC6362, NGC6537, NGC6769, NGC6822, NGC7793
+	     NGC6537, NGC6769, NGC6822, NGC7793
 	     from ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International
@@ -977,6 +977,25 @@
 	      from Rudy Kokich, post-processing: Sun Shuwei
 	      https://www.flickr.com/photos/140097441@N02/
 	      License: public domain
+	4.174 Images of NGC1851
+	      This image file was remixed, transformed, and post-processed by Sun Shuwei from the original file. The original image file was published by Yu-Hang Kuo at https://www.flickr.com/photos/143529236@N06/46234214731/.
+	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.175 Images of NGC2808
+	      This image file was remixed, transformed, and post-processed by Sun Shuwei from the original file. The original image file was published by Yu-Hang Kuo at https://www.flickr.com/photos/143529236@N06/31856303507/.
+	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.176 Images of NGC6356
+	      This image file was remixed, transformed, and post-processed by Sun Shuwei from the original file. The original image file was published by Yu-Hang Kuo at https://www.flickr.com/photos/143529236@N06/48912086568/.
+	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.177 Images of NGC6362
+	      This image file was remixed, transformed, and post-processed by Sun Shuwei from the original file. The original image file was published by Yu-Hang Kuo at https://www.flickr.com/photos/143529236@N06/43257251884/.
+	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.178 Images of NGC6760
+	      This image file was remixed, transformed, and post-processed by Sun Shuwei from the original file. The original image file was published by Yu-Hang Kuo at https://www.flickr.com/photos/143529236@N06/51137814465/.
+	      License: Creative Commons Attribution-Share Alike 4.0 Inter
+	      
+	      
+	      
+	      
 ```
 
 ## Appendix
