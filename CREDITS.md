@@ -545,7 +545,7 @@
 	     from TRAPPIST/E. Jehin/ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.65 Images of IC443, IC2177, NGC288, NGC1097, Sh2-191
+	4.65 Images of DWB111, IC443, IC2177, NGC288, NGC1097, Sh2-191
 	     from Giuseppe Donatiello, post-processing: Sun Shuwei
 	     https://flickr.com/photos/133259498@N05/
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
@@ -779,7 +779,7 @@
 	      from T.A. Rector (University of Alaska Anchorage) and H. Schweiker (WIYN and NOIRLab/NSF/AURA), post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
-	4.125 Images of DWB111, Sh2-82, Sh2-91, Sh2-119, VDB158
+	4.125 Images of Sh2-82, Sh2-91, Sh2-119, VDB158
 	      from Sebastian Goralik, post-processing: Sun Shuwei
 	      https://flickr.com/photos/sebastiangoralik/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
