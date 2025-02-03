@@ -26,6 +26,7 @@
 #include <QNetworkRequest>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QListWidgetItem>
 
 #include "NebulaTextures.hpp"
 #include "StelSkyLayerMgr.hpp"
@@ -112,6 +113,8 @@ public slots:
 	bool getAvoidAreaConflict();
 	//! Set the value for avoiding area conflicts
 	void setAvoidAreaConflict(bool b);
+
+	void gotoSelectedItem(QListWidgetItem* item);
 
 
 protected:

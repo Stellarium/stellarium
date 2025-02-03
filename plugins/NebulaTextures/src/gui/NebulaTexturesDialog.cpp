@@ -129,6 +129,8 @@ void NebulaTexturesDialog::createDialogContent()
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 
+	connect(ui->listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(gotoSelectedItem(QListWidgetItem*)));
+
 	setAboutHtml();
 
 	ui->label_apiKey->setText(QString("<a href=\"https://nova.astrometry.net/api_help\">") + q_("Astrometry ApiKey:") + "</a>");
@@ -1101,6 +1103,9 @@ void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
  */
 void NebulaTexturesDialog::addCustomTexture()
 {
+	if(!askConfirmation("Caution! Are you sure to add this texture?"))
+		return;
+
 	addTexture(configFile, CUSTOM_TEXNAME);
 }
 
@@ -1532,6 +1537,125 @@ void NebulaTexturesDialog::avoidConflict()
 	}
 	else{
 		setTexturesVisible(DEFAULT_TEXNAME, true);
+	}
+}
+
+
+/*
+ * Move the view to the center coordinates of the selected nebula texture.
+ *
+ * Steps:
+ *   - Retrieve the selected item from the list.
+ *   - Open and parse the JSON configuration file.
+ *   - Find the corresponding texture entry based on the selected item.
+ *   - Extract world coordinate information from the JSON data.
+ *   - Compute the spherical center of the texture using vector averaging.
+ *   - Convert the computed center to Right Ascension (RA) and Declination (Dec).
+ *   - Adjust the camera's view to focus on the computed coordinates.
+ */
+void NebulaTexturesDialog::gotoSelectedItem(QListWidgetItem* item)
+{
+	if (!item) return;
+
+	QString selectedText = item->text();
+	QString path = StelFileMgr::getUserDir() + configFile;
+	QFile jsonFile(path);
+	if (!jsonFile.open(QIODevice::ReadOnly)) {
+		qWarning() << "[NebulaTextures] Failed to open JSON file:" << path;
+		return;
+	}
+
+	QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
+	jsonFile.close();
+	if (!jsonDoc.isObject()) {
+		qWarning() << "[NebulaTextures] Invalid JSON structure in file:" << path;
+		return;
+	}
+
+	QJsonObject rootObject = jsonDoc.object();
+	if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()) {
+		qWarning() << "[NebulaTextures] No 'subTiles' array found in JSON file:" << path;
+		return;
+	}
+
+	QJsonArray subTiles = rootObject["subTiles"].toArray();
+	for (const QJsonValue& subTileValue : subTiles) {
+		if (!subTileValue.isObject()) continue;
+
+		QJsonObject subTileObject = subTileValue.toObject();
+		if (!subTileObject.contains("imageUrl") || subTileObject["imageUrl"].toString() != selectedText)
+			continue;
+
+		if (!subTileObject.contains("worldCoords") || !subTileObject["worldCoords"].isArray()) {
+			qWarning() << "[NebulaTextures] Missing 'worldCoords' in subTileObject.";
+			return;
+		}
+
+		QJsonArray worldCoords = subTileObject["worldCoords"].toArray();
+		if (worldCoords.size() != 1 || !worldCoords[0].isArray() || worldCoords[0].toArray().size() != 4) {
+			qWarning() << "[NebulaTextures] Invalid 'worldCoords' format.";
+			return;
+		}
+
+		QJsonArray corners = worldCoords[0].toArray();
+		QVector<QPair<double, double>> raDecList;
+		for (const QJsonValue& corner : corners) {
+			if (!corner.isArray() || corner.toArray().size() != 2) {
+				qWarning() << "[NebulaTextures] Invalid coordinate format.";
+				return;
+			}
+			raDecList.append(qMakePair(corner.toArray()[0].toDouble(), corner.toArray()[1].toDouble()));
+		}
+
+		// calculate center coordinates (approximately)
+		double sum_x = 0.0, sum_y = 0.0, sum_z = 0.0;
+		for (const auto& point : raDecList) {
+			double ra_rad = qDegreesToRadians(point.first);
+			double dec_rad = qDegreesToRadians(point.second);
+			double x = cos(dec_rad) * cos(ra_rad);
+			double y = cos(dec_rad) * sin(ra_rad);
+			double z = sin(dec_rad);
+			sum_x += x;
+			sum_y += y;
+			sum_z += z;
+		}
+
+		double avg_x = sum_x / 4.0;
+		double avg_y = sum_y / 4.0;
+		double avg_z = sum_z / 4.0;
+		double norm = sqrt(avg_x * avg_x + avg_y * avg_y + avg_z * avg_z);
+		if (norm == 0.0) {
+			qWarning() << "[NebulaTextures] Invalid input: zero vector sum.";
+			return;
+		}
+
+		avg_x /= norm;
+		avg_y /= norm;
+		avg_z /= norm;
+		double centerRA = fmod(qRadiansToDegrees(atan2(avg_y, avg_x)) + 360.0, 360.0);
+		double centerDec = qRadiansToDegrees(asin(avg_z));
+		centerDec = qBound(-90.0, centerDec, 90.0);
+
+		// goto center view
+		StelCore* core = StelApp::getInstance().getCore();
+		StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+		Vec3d pos;
+		double spinLong = qDegreesToRadians(centerRA);
+		double spinLat = qDegreesToRadians(centerDec);
+
+		mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
+		Vec3d aimUp = mvmgr->getViewUpVectorJ2000();
+		StelMovementMgr::MountMode mountMode = mvmgr->getMountMode();
+
+		StelUtils::spheToRect(spinLong, spinLat, pos);
+		if ((mountMode == StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat) > (0.9 * M_PI_2))) {
+			mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat > 0. ? 1. : -1.));
+			aimUp = mvmgr->getViewUpVectorJ2000();
+		}
+
+		mvmgr->setFlagTracking(false);
+		mvmgr->moveToJ2000(pos, aimUp, mvmgr->getAutoMoveDuration());
+		return;
 	}
 }
 
