@@ -273,6 +273,7 @@ void NebulaTexturesDialog::cancelSolve()
 	activeReplies.clear();
 	subStatusTimer->stop();
 	jobStatusTimer->stop();
+	retryCount = 0;
 
 	updateStatus(q_("Operation cancelled by user."));
 	freezeUiState(false);
