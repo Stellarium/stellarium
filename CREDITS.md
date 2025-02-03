@@ -998,6 +998,10 @@
 	4.180 Images of Sh2-112
 	      This image file was remixed, transformed, and post-processed by Sun Shuwei from the original file. The original image file was published by Carsten Frenzl at https://flickr.com/photos/castro-pic/50666893358/.
 	      License: Creative Commons Attribution 4.0 International
+	4.181 Images of NGC6366
+	      from Robert Eder, post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 4.0 International
 ```
 
 ## Appendix
