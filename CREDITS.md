@@ -820,7 +820,7 @@
 	      from ESO, post-processing: Sun Shuwei
 	      http://eso.org/public/
 	      License: Creative Commons Attribution 4.0 International
-	4.135 Images of NGC2579
+	4.135 Images of NGC2210, NGC2579
 	      from Legacy Surveys / D.Lang (Perimeter Institute) & Meli thev, post-processing: Sun Shuwei
 	      https://www.legacysurvey.org/acknowledgment
 	      License: Creative Commons Attribution-Share Alike 4.0 International
