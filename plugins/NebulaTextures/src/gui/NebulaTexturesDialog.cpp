@@ -102,6 +102,11 @@ void NebulaTexturesDialog::createDialogContent()
 	ui->checkBoxShow->setChecked(getShowCustomTextures());
 	ui->checkBoxAvoid->setChecked(getAvoidAreaConflict());
 	ui->cancelButton->setVisible(false);
+	ui->label_apiKey->setText(QString("<a href=\"https://nova.astrometry.net/api_help\">") + q_("Astrometry ApiKey:") + "</a>");
+	ui->brightComboBox->addItem(q_("Bright"), QVariant(12));
+	ui->brightComboBox->addItem(q_("Normal"), QVariant(13.5));
+	ui->brightComboBox->addItem(q_("Dark"), QVariant(15));
+	ui->brightComboBox->setCurrentIndex(1);
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser;
@@ -132,8 +137,6 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(ui->listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(gotoSelectedItem(QListWidgetItem*)));
 
 	setAboutHtml();
-
-	ui->label_apiKey->setText(QString("<a href=\"https://nova.astrometry.net/api_help\">") + q_("Astrometry ApiKey:") + "</a>");
 
 	reloadData();
 
@@ -1179,7 +1182,7 @@ void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 	innerWorldCoords.append(QJsonArray({topRightRA, topRightDec}));
 	innerWorldCoords.append(QJsonArray({topLeftRA, topLeftDec}));
 
-	registerTexture(imageUrl, innerWorldCoords, 0.2, 13.4, cfgPath, groupName);
+	registerTexture(imageUrl, innerWorldCoords, 0.2, ui->brightComboBox->currentData().toDouble(), cfgPath, groupName);
 }
 
 

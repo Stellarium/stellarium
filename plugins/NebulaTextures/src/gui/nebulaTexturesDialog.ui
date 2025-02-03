@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>834</width>
-    <height>563</height>
+    <height>565</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -467,6 +467,16 @@
               </property>
               <property name="text">
                <string>Try Rendering this Texture</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="brightComboBox">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
               </property>
              </widget>
             </item>
