@@ -384,7 +384,7 @@
 	     https://astrogeology.usgs.gov/
 	     and colored by RVS. License: public domain.
 	4.25 Images of M15, M24, M51, M58, M63, M76, M81, M82, M96, M101,
-	     M105, M106, IC405, IC1727, NGC246, NGC457, NGC467,
+	     M105, M106, IC1727, NGC246, NGC457, NGC467,
 	     NGC470, NGC474, NGC488, NGC672, NGC691, NGC1514, NGC1961,
 	     NGC2174, NGC2371, NGC2392, NGC2403, NGC2506, NGC2655, NGC2685,
 	     NGC2805, NGC2814, NGC2820, NGC2841, NGC3079, NGC3166, NGC3227,
@@ -399,7 +399,7 @@
 	4.26 Image of IC3568 from Howard Bond (Space Telescope Science Institute), Robin Ciardullo (Pennsylvania State University) and NASA
 	     License: public domain
 	4.27 Image of solar corona from eclipse 2008-08-01 by Georg Zotti
-	4.28 Images of IC410, NGC2359 from Carole Pope
+	4.28 Images of NGC2359 from Carole Pope
 	     https://sites.google.com/site/caroleastroimaging/
 	4.29 Images of NGC2261, NGC2818, NGC2936, NGC3314, NGC3690, NGC3918,
 	     NGC4038-4039, NGC5257, NGC5307, NGC6027, NGC6050, NGC6369, NGC6826, NGC7742, IC883,
@@ -545,7 +545,7 @@
 	     from TRAPPIST/E. Jehin/ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.65 Images of DWB111, IC443, IC2177, NGC288, NGC1097, Sh2-191
+	4.65 Images of DWB111, IC405, IC410, IC443, IC2177, NGC288, NGC1097, NGC1931, Sh2-191
 	     from Giuseppe Donatiello, post-processing: Sun Shuwei
 	     https://flickr.com/photos/133259498@N05/
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
