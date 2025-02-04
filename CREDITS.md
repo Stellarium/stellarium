@@ -816,7 +816,7 @@
 	      from Manuel Peitsch, post-processing: Sun Shuwei
 	      https://manuel-astro.ch/
 	      License: Creative Commons Attribution 4.0 International
-	4.134 Images of M7, NGC1316, NGC2442, NGC2899, RCW100, Westerlund1
+	4.134 Images of M7, NGC1316, NGC2442, NGC2899, RCW100, Sh2-54, Westerlund1
 	      from ESO, post-processing: Sun Shuwei
 	      http://eso.org/public/
 	      License: Creative Commons Attribution 4.0 International
