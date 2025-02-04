@@ -537,7 +537,7 @@
 	     from ESO and Joe DePasquale
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.63 Images of NGC2547, Vela supernova remnant
+	4.63 Images of NGC2547
 	     from ESO/J.Perez
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
@@ -812,7 +812,7 @@
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.133 Images of NGC6726, LBN437, LDN1251, Sh2-124, RCW58, RCW89
+	4.133 Images of NGC6726, LBN437, LDN1251, Sh2-124, RCW58, RCW89, Vela supernova remnant
 	      from Manuel Peitsch, post-processing: Sun Shuwei
 	      https://manuel-astro.ch/
 	      License: Creative Commons Attribution 4.0 International

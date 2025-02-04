@@ -4649,12 +4649,12 @@
 		"maxBrightness" : 13.5
 	},
 	{
-		"imageCredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "https://www.eso.org/public/images/eso1420c/"},
+		"imageCredits" : {"short" : "ESO/Digitized Sky Survey 2, post-processing: Sun Shuwei","infoUrl": "https://www.eso.org/public/images/eso1420c/"},
 		"imageUrl" : "rcw32.png",
-		"worldCoords" : [[[134.0118,-43.2605], [128.4534,-43.3388], [128.5208,-39.29834], [133.7435,-39.2275]]],
+		"worldCoords" : [[[134.0124,-43.2605], [128.4534,-43.3379], [128.5208,-39.29834], [133.7403,-39.2243]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 0.266023154,
-		"maxBrightness" : 14.8
+		"minResolution" : 0.666023154,
+		"maxBrightness" : 14.6
 	},
 	{
 		"imageCredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "https://www.eso.org/public/images/eso0929d/"},
@@ -5171,12 +5171,20 @@
 		"maxBrightness" : 14.0
 	},
 	{
-		"imageCredits" : {"short" : "ESO/J.Perez","infoUrl": "https://www.eso.org/public/images/velasnrlasilla/"},
-		"imageUrl" : "velasnr.png",
-		"worldCoords" : [[[129.0789,-45.4552], [125.6247,-45.5165], [125.6083,-43.0943], [128.9233,-43.0339]]],
+		"imageCredits" : {"short" : "Manuel Peitsch, post-processing: Sun Shuwei","infoUrl": "https://manuel-astro.ch/project/vela-supernova-remnant/"},
+		"imageUrl" : "velasnr-1.png",
+		"worldCoords" :	[[[136.4406, -46.5025],[129.8326,-46.6039],[129.9443,-42.0541],[136.0689,-41.9666]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 0.2222381739,
-		"maxBrightness" : 14.5
+		"minResolution" : 0.7222381739,
+		"maxBrightness" : 14.6
+	},
+	{
+		"imageCredits" : {"short" : "Manuel Peitsch, post-processing: Sun Shuwei","infoUrl": "https://manuel-astro.ch/project/vela-supernova-remnant/"},
+		"imageUrl" : "velasnr-2.png",
+		"worldCoords" :	[[[129.8326,-46.6039],[123.2619,-46.324849],[123.8473,-41.8198],[129.9443,-42.0541]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.7222381739,
+		"maxBrightness" : 14.6
 	},
 	{
 		"imageCredits" : {"short" : "ESO, post-processing: Sun Shuwei","infoUrl": "https://www.eso.org/public/images/eso1034c/"},
