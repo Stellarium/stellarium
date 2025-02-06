@@ -752,7 +752,7 @@
 	      from KPNO/NOIRLab/NSF/AURA/Ray and Emily Magnani/Adam Block
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.119 Images of IC348, NGC80, NGC147, NGC1491, NGC1624, NGC7026, NGC7048
+	4.119 Images of NGC80, NGC147, NGC1491, NGC1624, NGC7026, NGC7048
 	      from Radek Chromik, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
@@ -813,7 +813,7 @@
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.133 Images of NGC6726, LBN437, LDN1251, Sh2-124, RCW58, RCW89, Vela supernova remnant
+	4.133 Images of IC348, NGC6726, LBN437, LDN1251, Sh2-124, RCW58, RCW89, Vela supernova remnant
 	      from Manuel Peitsch, post-processing: Sun Shuwei
 	      https://manuel-astro.ch/
 	      License: Creative Commons Attribution 4.0 International
