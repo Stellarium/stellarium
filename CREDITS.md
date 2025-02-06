@@ -1009,6 +1009,10 @@
 	4.183 Images of M68
 	      This image file was remixed, transformed, and post-processed by Sun Shuwei from the original file. The original image file was published by Yu-Hang Kuo at https://www.flickr.com/photos/143529236@N06/47278554542/.
 	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.184 Images of Sh2-282, Sh2-284 
+	      from ESO/Digitized Sky Survey 2. Acknowledgement: Davide De Martin, post-processing: Sun Shuwei
+	      http://eso.org/public/
+	      License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
