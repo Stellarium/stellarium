@@ -752,7 +752,7 @@
 	      from KPNO/NOIRLab/NSF/AURA/Ray and Emily Magnani/Adam Block
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.119 Images of NGC80, NGC147, NGC1491, NGC1624, NGC7026, NGC7048
+	4.119 Images of NGC80, NGC147, NGC1491, NGC1624, NGC7026
 	      from Radek Chromik, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
@@ -1012,9 +1012,13 @@
 	4.184 Images of Sh2-280
 	      from Wang Jianjun, post-processing: Sun Shuwei
 	      License: Creative Commons Attribution 4.0 International
-	4.185 Images of Sh2-282, Sh2-284 
+	4.185 Images of Sh2-282, Sh2-284
 	      from ESO/Digitized Sky Survey 2. Acknowledgement: Davide De Martin, post-processing: Sun Shuwei
 	      http://eso.org/public/
+	      License: Creative Commons Attribution 4.0 International
+	4.186 Images of NGC7048
+	      from KPNO/NOIRLab/NSF/AURA/Richard Robinson and Beverly Erdman/Adam Block, post-processing: Sun Shuwei
+	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
 
 ```
