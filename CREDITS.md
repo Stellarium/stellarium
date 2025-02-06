@@ -545,7 +545,7 @@
 	     from TRAPPIST/E. Jehin/ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.65 Images of DWB111, IC405, IC410, IC443, IC2177, NGC288, NGC1097, NGC1931, Sh2-191
+	4.65 Images of DWB111, IC405, IC410, IC443, IC2177, NGC288, NGC404, NGC1097, NGC1931, Sh2-191
 	     from Giuseppe Donatiello, post-processing: Sun Shuwei
 	     https://flickr.com/photos/133259498@N05/
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
@@ -751,7 +751,7 @@
 	      from KPNO/NOIRLab/NSF/AURA/Ray and Emily Magnani/Adam Block
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.119 Images of IC348, NGC80, NGC147, NGC404, NGC1491, NGC1624, NGC7026, NGC7048
+	4.119 Images of IC348, NGC80, NGC147, NGC1491, NGC1624, NGC7026, NGC7048
 	      from Radek Chromik, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
