@@ -113,6 +113,21 @@ protected:
 	}
 };
 
+class StelProjectorMollweide : public StelProjector 
+{
+public:
+	StelProjectorMollweide(ModelViewTranformP func) : StelProjector(func) {}
+	QString getNameI18() const override;
+	QString getDescriptionI18() const override;
+	float getMaxFov() const override { return 180.f; }
+	bool forward(Vec3f &v) const override;
+	bool backward(Vec3d &v) const override;
+	QByteArray getForwardTransformShader() const override;
+	QByteArray getBackwardTransformShader() const override;
+protected:
+	bool hasDiscontinuity() const override { return true; }
+};
+
 class StelProjectorCylinder : public StelProjector
 {
 public:
