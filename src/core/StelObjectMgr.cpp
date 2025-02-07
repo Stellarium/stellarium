@@ -556,6 +556,7 @@ bool StelObjectMgr::setSelectedObject(const StelObjectP obj, StelModule::StelMod
 	// An object has been found
 	QList<StelObjectP> objs;
 	objs.push_back(obj);
+	lastSelectedObject = obj;
 	return setSelectedObject(objs, action);
 }
 
