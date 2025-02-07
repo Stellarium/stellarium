@@ -326,6 +326,9 @@ public slots:
 	//! Deselect the selected object
 	void deselection(void);
 
+	//! Re-select last selected object
+	void reSelectLastObject(void);
+
 	//! If currently zooming, return the target FOV, otherwise return current FOV in degree.
 	double getAimFov(void) const;
 

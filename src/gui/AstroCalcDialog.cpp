@@ -5463,9 +5463,9 @@ double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const AstroCalcC
 		case AstroCalcChart::AngularSize2:
 		{
 			// angular radius without rings
-			value = ssObj->getSpheroidAngularRadius(core) * (360. / M_PI);
-			if (value < 1.)
-				value *= 60.;
+			value = ssObj->getSpheroidAngularRadius(core)*7200.;
+			if (value >= 60.)
+				value /= 60.;
 			break;
 		}
 		case AstroCalcChart::PhaseAngle1:

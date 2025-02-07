@@ -404,7 +404,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			// Calculate next minimum or maximum light
 			double vsEpoch = 2400000+vEpoch;
-			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJDE() - vsEpoch)/vPeriod);
+			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
 			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
 			QString dateStr = q_("Next maximum light");
 			if (ebsFlag)
@@ -765,7 +765,7 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			// Calculate next minimum or maximum light
 			double vsEpoch = 2400000+vEpoch;
-			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJDE() - vsEpoch)/vPeriod);
+			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
 			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
 			QString dateStr = q_("Next maximum light");
 			if (ebsFlag)
@@ -935,7 +935,7 @@ QString StarWrapper3::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			// Calculate next minimum or maximum light
 			double vsEpoch = 2400000+vEpoch;
-			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJDE() - vsEpoch)/vPeriod);
+			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
 			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
 			QString dateStr = q_("Next maximum light");
 			if (ebsFlag)

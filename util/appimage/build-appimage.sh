@@ -34,7 +34,7 @@ then
     ait=$(whereis appimagetool | sed 's/appimagetool://i')
     if [ -z $ait ]
     then
-        baseURL="https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
+        baseURL="https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage"
         AppImage_Tool="/usr/local/bin/appimagetool"
         # Install appimagetool AppImage
         sudo wget ${baseURL} -O ${AppImage_Tool}
