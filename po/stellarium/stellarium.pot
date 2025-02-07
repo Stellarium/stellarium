@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-02-03 12:19+0700\n"
+"POT-Creation-Date: 2025-02-07 14:14+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3488,8 +3488,8 @@ msgstr ""
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
-"article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
-"A.D. 1980</em> (%1)."
+"article <em>Long-term changes in the rotation of the earth - 700 B.C. to A."
+"D. 1980</em> (%1)."
 msgstr ""
 
 #: src/core/StelCore.cpp:2698
@@ -4281,59 +4281,63 @@ msgid "Deselect the selected object"
 msgstr ""
 
 #: src/core/StelMovementMgr.cpp:197
-msgid "Zoom in on selected object"
+msgid "Re-select last selected object"
 msgstr ""
 
 #: src/core/StelMovementMgr.cpp:198
+msgid "Zoom in on selected object"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:199
 msgid "Zoom out"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:200
+#: src/core/StelMovementMgr.cpp:201
 msgid "Track object"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:202
+#: src/core/StelMovementMgr.cpp:203
 msgid "Look towards East"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:203
+#: src/core/StelMovementMgr.cpp:204
 msgid "Look towards West"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:204
+#: src/core/StelMovementMgr.cpp:205
 msgid "Look towards North"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:205
+#: src/core/StelMovementMgr.cpp:206
 msgid "Look towards South"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:206
+#: src/core/StelMovementMgr.cpp:207
 msgid "Look towards Zenith"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:208
+#: src/core/StelMovementMgr.cpp:209
 msgid "Look towards North Celestial pole"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:209
+#: src/core/StelMovementMgr.cpp:210
 msgid "Look towards South Celestial pole"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:263
+#: src/core/StelMovementMgr.cpp:264
 msgid "Field of View"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:263
+#: src/core/StelMovementMgr.cpp:264
 msgid "Set predefined FOV"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:291
+#: src/core/StelMovementMgr.cpp:292
 msgctxt "mount mode"
 msgid "Equatorial mount"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:293
+#: src/core/StelMovementMgr.cpp:294
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
 msgstr ""
@@ -21389,8 +21393,8 @@ msgstr ""
 #: plugins/Quasars/src/Quasars.cpp:75
 msgid ""
 "A plugin that shows some quasars brighter than visual magnitude 18. The "
-"catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' "
-"(13th Ed.) (Veron+ 2010)"
+"catalogue of quasars was compiled from 'Quasars and Active Galactic "
+"Nuclei' (13th Ed.) (Veron+ 2010)"
 msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:172
@@ -26161,8 +26165,8 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:292
 msgid ""
-"This will speed up rendering, but the appearance will look "
-"&quot;broken&quot; until you stop moving."
+"This will speed up rendering, but the appearance will look &quot;"
+"broken&quot; until you stop moving."
 msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:293
@@ -26172,8 +26176,8 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:295
 msgid ""
-"This updates a second face, so that the visual appearance seems less "
-"&quot;broken&quot;."
+"This updates a second face, so that the visual appearance seems less &quot;"
+"broken&quot;."
 msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:304
