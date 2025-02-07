@@ -544,6 +544,115 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 )";
 }
 
+QString StelProjectorMollweide::getNameI18() const {
+    return q_("Mollweide");
+}
+
+QString StelProjectorMollweide::getDescriptionI18() const {
+    return q_("The Mollweide projection is an equal-area map projection introduced by Karl Mollweide in 1805.");
+}
+
+bool StelProjectorMollweide::forward(Vec3f &v) const {
+    // Convert from 3D sphere to (x,y) in projection space.
+    const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+    // Compute latitude (φ) and longitude (λ)
+    const float phi = std::asin(v[1] / r);
+    const float lambda = std::atan2(v[0], -v[2]);
+    // Solve for theta in: 2θ + sin(2θ) = π sinφ
+    float theta = phi; // initial guess
+    const float piSinPhi = static_cast<float>(M_PI) * std::sin(phi);
+    const int maxIter = 10;
+    const float tol = 1e-7f;
+    for (int i = 0; i < maxIter; ++i) {
+        float f = 2.f*theta + std::sin(2.f*theta) - piSinPhi;
+        float fprime = 2.f + 2.f*std::cos(2.f*theta);
+        float dtheta = f / fprime;
+        theta -= dtheta;
+        if (std::fabs(dtheta) < tol)
+            break;
+    }
+    // Compute projection coordinates:
+    // widthStretch is a member (as in the Hammer code)
+    float x = (2.f * static_cast<float>(M_SQRT2) / static_cast<float>(M_PI)) * lambda * std::cos(theta) * widthStretch;
+    float y = static_cast<float>(M_SQRT2) * std::sin(theta);
+    v[0] = x;
+    v[1] = y;
+    v[2] = r; // store original radius if needed
+    return true;
+}
+
+bool StelProjectorMollweide::backward(Vec3d &v) const {
+    // Inverse: from projection (x,y) back to sphere.
+    v[0] /= widthStretch;
+    // Recover theta from y = √2 sinθ
+    double theta = std::asin(v[1] / static_cast<double>(M_SQRT2));
+    double cosTheta = std::cos(theta);
+    // Avoid division by zero near the poles
+    if (std::fabs(cosTheta) < 1e-10)
+        return false;
+    // Recover λ from x = (2√2/π) λ cosθ
+    double lambda = (v[0] * static_cast<double>(M_PI)) / (2.0 * static_cast<double>(M_SQRT2) * cosTheta);
+    // Recover φ from: 2θ + sin(2θ) = π sinφ  =>  φ = arcsin((2θ + sin2θ)/π)
+    double phi = std::asin((2.0*theta + std::sin(2.0*theta)) / static_cast<double>(M_PI));
+    double cosPhi = std::cos(phi);
+    // Convert spherical (φ,λ) to 3D vector (using same convention as in the Hammer code)
+    v[0] = cosPhi * std::sin(lambda);
+    v[1] = std::sin(phi);
+    v[2] = - cosPhi * std::cos(lambda);
+    return true;
+}
+
+QByteArray StelProjectorMollweide::getForwardTransformShader() const
+{
+	return modelViewTransform->getForwardTransformShader() + R"(
+#line 1 102
+// Forward transform shader snippet:
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorForwardTransform(vec3 v) {
+    float r = length(v);
+    float phi = asin(v.y / r);
+    float lambda = atan(v.x, -v.z);
+    float theta = phi;
+    // Iterative solution for theta (10 iterations)
+    for (int i = 0; i < 10; i++) {
+        float f = 2.0 * theta + sin(2.0 * theta) - 3.14159265 * sin(phi);
+        float fprime = 2.0 + 2.0 * cos(2.0 * theta);
+        theta -= f / fprime;
+    }
+    float x = (2.82842712 / 3.14159265) * lambda * cos(theta) * PROJECTOR_FWD_widthStretch; // 2√2 = 2.82842712
+    float y = 1.41421356 * sin(theta); // √2 = 1.41421356
+    return vec3(x, y, r);
+}
+#line 1 0
+)";
+}
+
+QByteArray StelProjectorMollweide::getBackwardTransformShader() const
+{
+	return modelViewTransform->getBackwardTransformShader() + R"(
+#line 1 103
+// Backward transform shader snippet:
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorBackwardTransform(vec3 v, out bool ok) {
+    v.x /= PROJECTOR_FWD_widthStretch;
+    float theta = asin(v.y / 1.41421356);
+    float cosTheta = cos(theta);
+    if (abs(cosTheta) < 0.00001) {
+        ok = false;
+        return v;
+    }
+    float lambda = (v.x * 3.14159265) / (2.82842712 * cosTheta);
+    float phi = asin((2.0 * theta + sin(2.0 * theta)) / 3.14159265);
+    float cosPhi = cos(phi);
+    float x = cosPhi * sin(lambda);
+    float y = sin(phi);
+    float z = - cosPhi * cos(lambda);
+    ok = true;
+    return vec3(x, y, z);
+}
+#line 1 0
+)";
+}
 
 
 QString StelProjectorCylinder::getNameI18() const
