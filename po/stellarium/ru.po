@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-02-03 12:19+0700\n"
+"POT-Creation-Date: 2025-02-07 14:14+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -4525,59 +4525,63 @@ msgid "Deselect the selected object"
 msgstr "Отменить выбор выбранного объекта"
 
 #: src/core/StelMovementMgr.cpp:197
+msgid "Re-select last selected object"
+msgstr "Повторно выбрать последний выбранный объект"
+
+#: src/core/StelMovementMgr.cpp:198
 msgid "Zoom in on selected object"
 msgstr "Увеличить выбранный объект"
 
-#: src/core/StelMovementMgr.cpp:198
+#: src/core/StelMovementMgr.cpp:199
 msgid "Zoom out"
 msgstr "Отдалить"
 
-#: src/core/StelMovementMgr.cpp:200
+#: src/core/StelMovementMgr.cpp:201
 msgid "Track object"
 msgstr "Следить за объектом"
 
-#: src/core/StelMovementMgr.cpp:202
+#: src/core/StelMovementMgr.cpp:203
 msgid "Look towards East"
 msgstr "Посмотреть на восток"
 
-#: src/core/StelMovementMgr.cpp:203
+#: src/core/StelMovementMgr.cpp:204
 msgid "Look towards West"
 msgstr "Посмотреть на запад"
 
-#: src/core/StelMovementMgr.cpp:204
+#: src/core/StelMovementMgr.cpp:205
 msgid "Look towards North"
 msgstr "Посмотреть на север"
 
-#: src/core/StelMovementMgr.cpp:205
+#: src/core/StelMovementMgr.cpp:206
 msgid "Look towards South"
 msgstr "Посмотреть на юг"
 
-#: src/core/StelMovementMgr.cpp:206
+#: src/core/StelMovementMgr.cpp:207
 msgid "Look towards Zenith"
 msgstr "Посмотреть в зенит"
 
-#: src/core/StelMovementMgr.cpp:208
+#: src/core/StelMovementMgr.cpp:209
 msgid "Look towards North Celestial pole"
 msgstr "Посмотреть в сторону Северного полюса мира"
 
-#: src/core/StelMovementMgr.cpp:209
+#: src/core/StelMovementMgr.cpp:210
 msgid "Look towards South Celestial pole"
 msgstr "Посмотреть в сторону Южного полюса мира"
 
-#: src/core/StelMovementMgr.cpp:263
+#: src/core/StelMovementMgr.cpp:264
 msgid "Field of View"
 msgstr "Поле зрения"
 
-#: src/core/StelMovementMgr.cpp:263
+#: src/core/StelMovementMgr.cpp:264
 msgid "Set predefined FOV"
 msgstr "Задать предопределенное ПЗ"
 
-#: src/core/StelMovementMgr.cpp:291
+#: src/core/StelMovementMgr.cpp:292
 msgctxt "mount mode"
 msgid "Equatorial mount"
 msgstr "Экваториальная монтировка"
 
-#: src/core/StelMovementMgr.cpp:293
+#: src/core/StelMovementMgr.cpp:294
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
 msgstr "Альт-азимутальная монтировка"
