@@ -847,7 +847,7 @@
 	      http://www.eso.org/public/
 	      License: Creative Commons Attribution 4.0 International
 	4.141 Images of M104
-	      from Adam Block/Mount Lemmon SkyCenter/University of Arizona & Ngc1535, post-processing
+	      from Adam Block/Mount Lemmon SkyCenter/University of Arizona & Ngc1535, post-processing, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
 	4.142 Images of M72
@@ -894,7 +894,7 @@
 	      from Donald Cappellettiariel, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
-	4.153 Images of NGC5850
+	4.153 Images of IC239, NGC5850
 	      from Adam Block/Mount Lemmon SkyCenter/University of Arizona, Image processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
