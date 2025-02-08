@@ -813,7 +813,8 @@
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.133 Images of IC348, NGC6726, LBN437, LBN550, LDN1251, Sh2-124, RCW29, RCW58, RCW89, Vela supernova remnant
+	4.133 Images of IC348, NGC6726, LBN437, LBN550, LDN1251, Sh2-124, RCW29,
+	      RCW58, RCW89, VDB123, Vela supernova remnant
 	      from Manuel Peitsch, post-processing: Sun Shuwei
 	      https://manuel-astro.ch/
 	      License: Creative Commons Attribution 4.0 International
