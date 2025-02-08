@@ -914,18 +914,16 @@ and positioning of astronomical images, as well as the management and rendering 
     \item \textbf{View Solving Results}: After successful solving, the image's center and corners' J2000 
 	equatorial coordinates (in decimal degrees) will be displayed.
 
-    \item \textbf{Optional Debugging}:
+    \item \textbf{Optional Testing}:
     \begin{itemize}
         \item Click the \guibutton{0.6}{uibtProcess.png} button next to the center coordinates to locate the texture's center.
-        \item Use \button{Try Rendering this Texture} to preview the texture. If it overlaps with default 
-		textures, check \checkbox{Disable default textures} to avoid visual conflicts. However, remember 
-		to click \button{Stop Rendering this Texture} afterward to restore the rendering of the default nebula textures. 
+        \item Use \button{Test this texture} to preview the texture. If it overlaps with default textures, check \button{Disable default textures} to avoid visual conflicts. 
+		The \button{Test this texture} button will toggle between “Test this texture” and “Stop test” to start and stop the rendering process. 
+		Remember to click \button{Stop Test} afterward to restore the rendering of the default nebula textures! 
 		The dropdown menu is used to adjust texture brightness, with three options: \textbf{Bright}, \textbf{Normal}, and \textbf{Dark}. 
 		The default \textbf{Normal} setting is suitable for most cases.
         \item You can repeatedly press the \texttt{s} key in the main view to toggle star visibility and verify whether the image is aligned accurately.
     \end{itemize}
-
-    \item \textbf{Stop Debugging}: Use \button{Stop Rendering this Texture} to halt the preview of the texture.
 
     \item \textbf{Add Texture to Storage}: Click \button{Add the Texture to Custom Storage} to permanently save 
 	the texture. The original image will be copied to Stellarium's plugin folder in the user 

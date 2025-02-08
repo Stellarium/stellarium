@@ -45,6 +45,10 @@ public:
 	double getCallOrder(StelModuleActionName actionName) const override;
 
 	bool configureGui(bool show=true) override;
+
+	// Only trigger refresh when the textures are initially loaded on screen (including both default and custom, twice) to avoid conflicts
+	int countRefresh, maxCountRefresh;
+
 private:
 	// Font used for displaying our text
 	QFont font;

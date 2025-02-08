@@ -455,7 +455,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_5">
          <property name="title">
-          <string>Rendering debugger</string>
+          <string>Rendering tester</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_10">
           <item>
@@ -466,7 +466,10 @@
                <bool>true</bool>
               </property>
               <property name="text">
-               <string>Try Rendering this Texture</string>
+               <string>Test this texture</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -478,19 +481,15 @@
                 <height>16777215</height>
                </size>
               </property>
+              <property name="toolTip">
+               <string>Brightness</string>
+              </property>
              </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="disableDefault">
               <property name="text">
                <string>Disable default textures</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="unrenderButton">
-              <property name="text">
-               <string>Stop Rendering this Texture</string>
               </property>
              </widget>
             </item>

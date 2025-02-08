@@ -122,8 +122,9 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(ui->uploadImageButton, SIGNAL(clicked()), this, SLOT(uploadImage()));
 	connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(cancelSolve()));
 	connect(ui->goPushButton, SIGNAL(clicked()), this, SLOT(goPush()));
-	connect(ui->renderButton, SIGNAL(clicked()), this, SLOT(renderTempCustomTexture()));
-	connect(ui->unrenderButton, SIGNAL(clicked()), this, SLOT(unRenderTempCustomTexture()));
+	connect(ui->renderButton, SIGNAL(clicked()), this, SLOT(toggleTempTextureRendering()));
+	connect(ui->disableDefault, SIGNAL(clicked()), this, SLOT(toggleDisableDefaultTexture()));
+	connect(ui->brightComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(onBrightnessChanged(int)));
 
 	connect(ui->addCustomTextureButton, SIGNAL(clicked()), this, SLOT(addCustomTexture()));
 	connect(ui->removeTextureButton, SIGNAL(clicked()), this, SLOT(removeTexture()));
@@ -239,7 +240,6 @@ void NebulaTexturesDialog::freezeUiState(bool freeze)
 	ui->uploadImageButton->setDisabled(freeze);
 	ui->goPushButton->setDisabled(freeze);
 	ui->renderButton->setDisabled(freeze);
-	ui->unrenderButton->setDisabled(freeze);
 	ui->addCustomTextureButton->setDisabled(freeze);
 	ui->cancelButton->setVisible(freeze);
 }
@@ -941,6 +941,42 @@ void NebulaTexturesDialog::goPush()
 	// mvmgr->setFlagLockEquPos(useLockPosition);
 }
 
+// Toggle the rendering state of the temporary texture
+void NebulaTexturesDialog::toggleTempTextureRendering()
+{
+	if (flag_renderTempTex) {
+		unRenderTempCustomTexture();
+	} else {
+		renderTempCustomTexture();
+	}
+	ui->renderButton->setChecked(flag_renderTempTex);
+
+	if(flag_renderTempTex)
+		ui->renderButton->setText(q_("Stop test"));
+	else
+		ui->renderButton->setText(q_("Test this texture"));
+}
+
+// Toggle the visibility of the default texture when testing temp texture rendering
+void NebulaTexturesDialog::toggleDisableDefaultTexture()
+{
+	if(!flag_renderTempTex)
+		return;
+	if(ui->disableDefault->isChecked())
+		setTexturesVisible(DEFAULT_TEXNAME, false);
+	else{
+		setTexturesVisible(DEFAULT_TEXNAME, true);
+		refreshTextures();
+	}
+}
+
+// Redo rendering when toggling Brightness Change
+void NebulaTexturesDialog::onBrightnessChanged(int index)
+{
+	if(flag_renderTempTex)
+		renderTempCustomTexture();
+}
+
 /*
  * Render temporary custom texture for the nebula based on the user-provided image path.
  * Check if the path is valid, add the texture to the system, and insert it into the sky layer.
@@ -996,13 +1032,11 @@ void NebulaTexturesDialog::renderTempCustomTexture()
 			skyLayerMgr->removeSkyLayer(TEST_TEXNAME);
 		}
 
-		if(ui->disableDefault->isChecked())
-			setTexturesVisible(DEFAULT_TEXNAME, false);
-		else
-			setTexturesVisible(DEFAULT_TEXNAME, true);
-
 		skyLayerMgr->insertSkyImage(path, QString(), true, 1);
 		flag_renderTempTex = true;
+
+		if(ui->disableDefault->isChecked())
+			setTexturesVisible(DEFAULT_TEXNAME, false);
 	}
 }
 
@@ -1024,6 +1058,7 @@ void NebulaTexturesDialog::unRenderTempCustomTexture()
 
 	flag_renderTempTex = false;
 	setTexturesVisible(DEFAULT_TEXNAME, true);
+	refreshTextures();
 }
 
 
@@ -1088,9 +1123,7 @@ void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
 
 			// Delete the file if it exists
 			if (QFile::exists(imagePath)) {
-				if (QFile::remove(imagePath)) {
-					qDebug() << "[NebulaTextures] Deleted image file:" << imagePath;
-				} else {
+				if (!QFile::remove(imagePath)) {
 					qWarning() << "[NebulaTextures] Failed to delete image file:" << imagePath;
 				}
 			} else {
@@ -1107,7 +1140,7 @@ void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
  */
 void NebulaTexturesDialog::addCustomTexture()
 {
-	if(!askConfirmation("Caution! Are you sure to add this texture?"))
+	if(!askConfirmation("Caution! Are you sure to add this texture? It will only take effect after restarting Stellarium."))
 		return;
 
 	addTexture(configFile, CUSTOM_TEXNAME);
@@ -1299,7 +1332,7 @@ void NebulaTexturesDialog::removeTexture()
 
 	QString selectedText = selectedItem->text();
 
-	if(!askConfirmation("Caution! Are you sure to remove this texture?"))
+	if(!askConfirmation("Caution! Are you sure to remove this texture? It will only take effect after restarting Stellarium."))
 		return;
 
 	QString path = StelFileMgr::getUserDir() + configFile;

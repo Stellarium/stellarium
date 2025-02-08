@@ -51,6 +51,8 @@ StelPluginInfo NebulaTexturesStelPluginInterface::getPluginInfo() const
 
 NebulaTextures::NebulaTextures()
 {
+	countRefresh = 0;
+	maxCountRefresh = 2;
 	setObjectName("NebulaTextures");
 	font.setPixelSize(25);
 	configDialog = new NebulaTexturesDialog();
@@ -77,7 +79,10 @@ double NebulaTextures::getCallOrder(StelModuleActionName actionName) const
 
 void NebulaTextures::init()
 {
-	refresh(); //when opening plugin but not startup stellarium
+	if(countRefresh < maxCountRefresh){
+		refresh();
+		countRefresh++;
+	}
 }
 
 void NebulaTextures::draw(StelCore* core)

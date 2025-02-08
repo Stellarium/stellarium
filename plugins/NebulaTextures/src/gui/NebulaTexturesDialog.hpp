@@ -65,6 +65,15 @@ public slots:
 	//! Goto the center coordinates (RA and Dec) of texture
 	void goPush();
 
+	//! toggle temporary texture render testing
+	void toggleTempTextureRendering();
+
+	//! toggle showing default texture when testing temporary texture rendering
+	void toggleDisableDefaultTexture();
+
+	//! toggle brightness change to render again
+	void onBrightnessChanged(int index);
+
 	//! Temporary texture rendering for debugging
 	void renderTempCustomTexture();
 
