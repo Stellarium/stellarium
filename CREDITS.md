@@ -1000,10 +1000,9 @@
 	4.180 Images of Sh2-112
 	      This image file was remixed, transformed, and post-processed by Sun Shuwei from the original file. The original image file was published by Carsten Frenzl at https://flickr.com/photos/castro-pic/50666893358/.
 	      License: Creative Commons Attribution 4.0 International
-	4.181 Images of NGC6366
-	      from Robert Eder, post-processing: Sun Shuwei
-	      https://commons.wikimedia.org/wiki/
-	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.181 Images of NGC2985
+	      This image file was remixed, transformed, and post-processed by Sun Shuwei from the original file. The original image file was published by Carsten Frenzl at https://flickr.com/photos/191225735@N03/51941601154.
+	      License: Creative Commons Attribution 4.0 International
 	4.182 Images of M9
 	      This image file was remixed, transformed, and post-processed by Sun Shuwei from the original file. The original image file was published by Yu-Hang Kuo at https://www.flickr.com/photos/143529236@N06/48912773222/.
 	      License: Creative Commons Attribution-Share Alike 4.0 International
@@ -1021,6 +1020,10 @@
 	      from KPNO/NOIRLab/NSF/AURA/Richard Robinson and Beverly Erdman/Adam Block, post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
+	4.187 Images of NGC6366
+	      from Robert Eder, post-processing: Sun Shuwei
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 4.0 International
 
 ```
 
