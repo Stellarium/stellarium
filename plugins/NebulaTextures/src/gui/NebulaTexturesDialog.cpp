@@ -45,7 +45,6 @@
 #include <QUrlQuery>
 #include <QRegularExpression>
 #include <QStringList>
-#include <cmath>
 
 /*
  * Constructor for the NebulaTexturesDialog class. Initializes the dialog, sets up
@@ -55,8 +54,10 @@
 NebulaTexturesDialog::NebulaTexturesDialog()
 	: StelDialog("NebulaTextures"),
 	flag_renderTempTex(false),
-	m_conf(StelApp::getInstance().getSettings()),
+	conf(StelApp::getInstance().getSettings()),
 	retryCount(0),
+	countRefresh(0),
+	maxCountRefresh(2),
 	progressBar(Q_NULLPTR)
 {
 	ui = new Ui_nebulaTexturesDialog();
@@ -67,7 +68,6 @@ NebulaTexturesDialog::NebulaTexturesDialog()
 	jobStatusTimer = new QTimer(this);
 	connect(subStatusTimer, &QTimer::timeout, this, &NebulaTexturesDialog::checkSubStatus);
 	connect(jobStatusTimer, &QTimer::timeout, this, &NebulaTexturesDialog::checkJobStatus);
-
 }
 
 NebulaTexturesDialog::~NebulaTexturesDialog()
@@ -130,7 +130,8 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(ui->removeTextureButton, SIGNAL(clicked()), this, SLOT(removeTexture()));
 
 	connect(ui->reloadButton, SIGNAL(clicked()), this, SLOT(reloadData()));
-	connect(ui->checkBoxShow, SIGNAL(clicked(bool)), this, SLOT(setShowCustomTextures(bool)));
+	// connect(ui->checkBoxShow, SIGNAL(clicked(bool)), this, SLOT(setShowCustomTextures(bool)));
+	connectCheckBox(ui->checkBoxShow,"actionShow_NebulaTextures");
 	connect(ui->checkBoxAvoid, SIGNAL(clicked(bool)), this, SLOT(setAvoidAreaConflict(bool)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
@@ -141,7 +142,7 @@ void NebulaTexturesDialog::createDialogContent()
 
 	reloadData();
 
-	ui->lineEditApiKey->setText(m_conf->value(MS_CONFIG_PREFIX + "/AstroMetry_Apikey", "").toString());
+	ui->lineEditApiKey->setText(conf->value(NT_CONFIG_PREFIX + "/AstroMetry_Apikey", "").toString());
 }
 
 
@@ -176,7 +177,7 @@ void NebulaTexturesDialog::restoreDefaults()
 		setAvoidAreaConflict(false);
 
 		ui->lineEditApiKey->setText("");
-		m_conf->setValue(MS_CONFIG_PREFIX + "/AstroMetry_Apikey", "");
+		conf->setValue(NT_CONFIG_PREFIX + "/AstroMetry_Apikey", "");
 
 		ui->lineEditImagePath->setText("");
 		ui->referX->setValue(0);
@@ -250,6 +251,13 @@ void NebulaTexturesDialog::updateStatus(const QString &status)
 	ui->statusText->setText(status);
 }
 
+void NebulaTexturesDialog::refreshInit()
+{
+	if(countRefresh < maxCountRefresh){
+		refreshTextures();
+		countRefresh++;
+	}
+}
 
 /*
  * Open a file dialog to select an image file and update the UI.
@@ -319,7 +327,7 @@ void NebulaTexturesDialog::uploadImage() // WARN: image should not be flip
 	}
 
 	if (ui->checkBoxKeepApi->isChecked())
-		m_conf->setValue(MS_CONFIG_PREFIX + "/AstroMetry_Apikey", apiKey);
+		conf->setValue(NT_CONFIG_PREFIX + "/AstroMetry_Apikey", apiKey);
 
 	// Create the JSON object
 	QJsonObject json;
@@ -1704,25 +1712,24 @@ void NebulaTexturesDialog::gotoSelectedItem(QListWidgetItem* item)
 // Set the value for showing custom textures in the configuration and refresh textures.
 void NebulaTexturesDialog::setShowCustomTextures(bool b)
 {
-	m_conf->setValue(MS_CONFIG_PREFIX + "/showCustomTextures", b);
-	refreshTextures();
+	conf->setValue(NT_CONFIG_PREFIX + "/showCustomTextures", b);
 }
 
 // Get the value for showing custom textures from the configuration.
 bool NebulaTexturesDialog::getShowCustomTextures()
 {
-	return m_conf->value(MS_CONFIG_PREFIX + "/showCustomTextures", false).toBool();
+	return conf->value(NT_CONFIG_PREFIX + "/showCustomTextures", false).toBool();
 }
 
 // Set the value for avoiding area conflicts in the configuration and refresh textures.
 void NebulaTexturesDialog::setAvoidAreaConflict(bool b)
 {
-	m_conf->setValue(MS_CONFIG_PREFIX + "/avoidAreaConflict", b);
+	conf->setValue(NT_CONFIG_PREFIX + "/avoidAreaConflict", b);
 	refreshTextures();
 }
 
 // Get the value for avoiding area conflicts from the configuration.
 bool NebulaTexturesDialog::getAvoidAreaConflict()
 {
-	return m_conf->value(MS_CONFIG_PREFIX + "/avoidAreaConflict", false).toBool();
+	return conf->value(NT_CONFIG_PREFIX + "/avoidAreaConflict", false).toBool();
 }

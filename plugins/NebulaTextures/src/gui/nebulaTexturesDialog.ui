@@ -484,12 +484,18 @@
               <property name="toolTip">
                <string>Brightness</string>
               </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="disableDefault">
               <property name="text">
                <string>Disable default textures</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -553,12 +559,18 @@
              <property name="text">
               <string>Show Custom Textures</string>
              </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
            <item>
             <widget class="QCheckBox" name="checkBoxAvoid">
              <property name="text">
               <string>Avoid Area Conflict</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
              </property>
             </widget>
            </item>

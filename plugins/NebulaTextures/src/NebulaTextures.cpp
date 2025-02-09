@@ -21,9 +21,11 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
-#include "NebulaTextures.hpp"
-
 #include "StelModule.hpp"
+#include "StelGui.hpp"
+#include "StelGuiItems.hpp"
+
+#include "NebulaTextures.hpp"
 #include "NebulaTexturesDialog.hpp"
 
 #include <QDebug>
@@ -36,7 +38,7 @@ StelModule* NebulaTexturesStelPluginInterface::getStelModule() const
 StelPluginInfo NebulaTexturesStelPluginInterface::getPluginInfo() const
 {
 	// Allow to load the resources when used as a static plugin
-	// Q_INIT_RESOURCE(NebulaTextures);
+	Q_INIT_RESOURCE(NebulaTextures);
 
 	StelPluginInfo info;
 	info.id = "NebulaTextures";
@@ -51,11 +53,12 @@ StelPluginInfo NebulaTexturesStelPluginInterface::getPluginInfo() const
 
 NebulaTextures::NebulaTextures()
 {
-	countRefresh = 0;
-	maxCountRefresh = 2;
 	setObjectName("NebulaTextures");
 	font.setPixelSize(25);
 	configDialog = new NebulaTexturesDialog();
+	flagShowNebulaTextures = false;
+	connect(StelApp::getInstance().getModule("StelSkyLayerMgr"),
+			SIGNAL(collectionLoaded()),configDialog,SLOT(refreshInit()));
 }
 
 NebulaTextures::~NebulaTextures()
@@ -79,9 +82,30 @@ double NebulaTextures::getCallOrder(StelModuleActionName actionName) const
 
 void NebulaTextures::init()
 {
-	if(countRefresh < maxCountRefresh){
-		refresh();
-		countRefresh++;
+	// Create action for enable/disable & hook up signals
+	addAction("actionShow_NebulaTextures",        N_("Nebula Textures"), N_("Toggle Custom Nebula Textures"), "flagShow");
+	addAction("actionShow_NebulaTextures_config_dialog", N_("Nebula Textures"), N_("Show settings dialog"), configDialog, "visible"); // no default hotkey
+
+	// Add a toolbar button
+	try
+	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		if (gui!=Q_NULLPTR)
+		{
+			StelButton* nebulaTexturesButton = new StelButton(Q_NULLPTR,
+								QPixmap(":/NebulaTextures/btNebulaTextures-on.png"),
+								QPixmap(":/NebulaTextures/btNebulaTextures-off.png"),
+								QPixmap(":/graphicGui/miscGlow32x32.png"),
+								"actionShow_NebulaTextures",
+								false,
+								"actionShow_NebulaTextures_config_dialog");
+			gui->getButtonBar()->addButton(nebulaTexturesButton, "065-pluginsGroup");
+		}
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "[NebulaTextures] unable to manage toolbar buttons for NebulaTextures plugin!"
+				   << e.what();
 	}
 }
 
@@ -89,7 +113,14 @@ void NebulaTextures::draw(StelCore* core)
 {
 }
 
-void NebulaTextures::refresh()
+void NebulaTextures::setShow(bool b)
 {
+	configDialog->setShowCustomTextures(b);
 	configDialog->refreshTextures();
+	emit showChanged(b);
+}
+
+bool NebulaTextures::getShow()
+{
+	return configDialog->getShowCustomTextures();
 }

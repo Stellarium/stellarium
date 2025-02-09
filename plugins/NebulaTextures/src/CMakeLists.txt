@@ -20,16 +20,16 @@ SET(NebulaTextures_UIS
 )
 
 ################# compiles resources files ############
-# SET(NebulaTextures_RES ../NebulaTextures.qrc)
+SET(NebulaTextures_RES ../resources/NebulaTextures.qrc)
 IF (${QT_VERSION_MAJOR} EQUAL "5")
      QT5_WRAP_UI(NebulaTextures_UIS_H ${NebulaTextures_UIS})
-     # QT5_ADD_RESOURCES(NebulaTextures_RES_CXX ${NebulaTextures_RES})
+     QT5_ADD_RESOURCES(NebulaTextures_RES_CXX ${NebulaTextures_RES})
 ELSE()
      QT_WRAP_UI(NebulaTextures_UIS_H ${NebulaTextures_UIS})
-     # QT_ADD_RESOURCES(NebulaTextures_RES_CXX ${NebulaTextures_RES})
+     QT_ADD_RESOURCES(NebulaTextures_RES_CXX ${NebulaTextures_RES})
 ENDIF()
 
-ADD_LIBRARY(NebulaTextures-static STATIC ${NebulaTextures_SRCS} ${NebulaTextures_UIS_H})
+ADD_LIBRARY(NebulaTextures-static STATIC ${NebulaTextures_SRCS} ${NebulaTextures_RES_CXX} ${NebulaTextures_UIS_H})
 
 # The library target "NebulaTextures-static" has a default OUTPUT_NAME of "NebulaTextures-static", so change it.
 TARGET_LINK_LIBRARIES(NebulaTextures-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets) # Gui

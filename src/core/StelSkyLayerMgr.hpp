@@ -160,6 +160,7 @@ public slots:
 
 signals:
 	void flagShowChanged(bool b);
+	void collectionLoaded();
 
 private slots:
 	//! Called when loading of data started or stopped for one collection

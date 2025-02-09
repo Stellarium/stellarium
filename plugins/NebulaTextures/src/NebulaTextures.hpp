@@ -27,15 +27,15 @@ class NebulaTexturesDialog;
 
 class NebulaTextures : public StelModule
 {
+	Q_OBJECT
+	Q_PROPERTY(bool flagShow            READ getShow              WRITE setShow           NOTIFY showChanged)
+
 public:
 	NebulaTextures();
 	~NebulaTextures() override;
 
-
 	// Methods defined in the StelModule class
 	void init() override;
-
-	void refresh();
 
 	// Activate only if update() does something.
 	//void update(double deltaTime) override {}
@@ -46,8 +46,13 @@ public:
 
 	bool configureGui(bool show=true) override;
 
-	// Only trigger refresh when the textures are initially loaded on screen (including both default and custom, twice) to avoid conflicts
-	int countRefresh, maxCountRefresh;
+public slots:
+	bool getShow();
+
+	void setShow(bool b);
+
+signals:
+	void showChanged(bool b);
 
 private:
 	// Font used for displaying our text

@@ -32,7 +32,7 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelApp.hpp"
 
-#define MS_CONFIG_PREFIX QString("NebulaTextures")
+#define NT_CONFIG_PREFIX QString("NebulaTextures")
 #define CUSTOM_TEXNAME QString("Custom Textures")
 #define DEFAULT_TEXNAME QString("Nebulae")
 #define TEST_TEXNAME QString("Test Textures")
@@ -55,12 +55,17 @@ public:
 	//! Get a StelSkyImageTile texture
 	StelSkyImageTile* get_aTile(QString key);
 
+	//! Only trigger refresh when the textures are initially loaded on screen (including both default and custom, twice) to avoid conflicts
+	int countRefresh, maxCountRefresh;
+
 public slots:
 	void retranslate() override;
 
+	//! refresh when textures painted on screen
+	void refreshInit();
+
 	//! Convert pixel coordinates on the image to celestial coordinates with WCS parameters
 	QPair<double, double> PixelToCelestial(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2, double CD1_1, double CD1_2, double CD2_1, double CD2_2);
-
 
 	//! Goto the center coordinates (RA and Dec) of texture
 	void goPush();
@@ -125,7 +130,6 @@ public slots:
 
 	void gotoSelectedItem(QListWidgetItem* item);
 
-
 protected:
 	//! Set up the content and interactions of the NebulaTexturesDialog
 	void createDialogContent() override;
@@ -168,7 +172,7 @@ private:
 	Ui_nebulaTexturesDialog* ui;
 
 	// Pointer to QSettings
-	QSettings* m_conf;
+	QSettings* conf;
 
 	class StelProgressController* progressBar;
 
