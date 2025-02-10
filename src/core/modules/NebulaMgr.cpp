@@ -176,7 +176,7 @@ void NebulaMgr::setFlagShowOnlyNamedDSO(const bool flag)
 	if(Nebula::flagShowOnlyNamedDSO!=flag)
 	{
 		Nebula::flagShowOnlyNamedDSO=flag;
-		StelApp::immediateSave("astro/flag_show_only_named_dso", flag);
+		StelApp::immediateSave("astro/flag_dso_show_only_named", flag);
 		emit flagShowOnlyNamedDSOChanged(flag);
 	}
 }
@@ -239,7 +239,7 @@ void NebulaMgr::init()
 	setFlagSurfaceBrightnessUsage(conf->value("astro/flag_surface_brightness_usage", false).toBool());
 	setFlagSurfaceBrightnessArcsecUsage(conf->value("gui/flag_surface_brightness_arcsec", false).toBool());
 	setFlagSurfaceBrightnessShortNotationUsage(conf->value("gui/flag_surface_brightness_short", false).toBool());
-	setFlagShowOnlyNamedDSO(conf->value("astro/flag_show_only_named_dso", false).toBool());
+	setFlagShowOnlyNamedDSO(conf->value("astro/flag_dso_show_only_named", false).toBool());
 
 	setFlagSizeLimitsUsage(conf->value("astro/flag_size_limits_usage", false).toBool());
 	setMinSizeLimit(conf->value("astro/size_limit_min", 1.0).toDouble());
