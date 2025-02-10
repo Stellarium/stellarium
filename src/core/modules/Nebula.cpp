@@ -58,6 +58,7 @@ bool Nebula::flagUseArcsecSurfaceBrightness = false;
 bool Nebula::flagUseShortNotationSurfaceBrightness = true;
 bool Nebula::flagUseOutlines = false;
 bool Nebula::flagShowAdditionalNames = true;
+bool Nebula::flagShowOnlyNamedDSO = false;
 bool Nebula::flagUseSizeLimits = false;
 double Nebula::minSizeLimit = 1.0;
 double Nebula::maxSizeLimit = 600.0;
