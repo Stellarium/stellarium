@@ -260,20 +260,28 @@ int main(int argc, char **argv)
 	CLIProcessor::parseCLIArgsPreConfig(argList);
 
 	// Start logging.
-	QString logName("log.txt");
+	QString logName = StelFileMgr::getUserDir()+ "/log.txt"; // Default file path and file name
 	try
 	{
-		logName = CLIProcessor::argsGetOptionWithArg(argList, "-l", "--log-file", "log.txt").toString();
-		// Strip external paths!
-		QFileInfo fi(logName);
-		logName=fi.fileName();
+		// Expected: absolute file path or empty string (default file path and file name)
+		QString logFileName = CLIProcessor::argsGetOptionWithArg(argList, "-l", "--log-file", "").toString();
+		if (!logFileName.isEmpty())
+		{
+			if (logFileName.contains("/") || logFileName.contains("\\"))
+			{
+				QFileInfo fi(logFileName);
+				logName = fi.absoluteFilePath();
+			}
+			else
+				logName = StelFileMgr::getUserDir()+ "/" + logFileName; // just a file name - let's use User Directory
+		}
 	}
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: while processing --log-file option: " << e.what() << ". Using \"log.txt\"";
-		logName = "log.txt";
+		logName = StelFileMgr::getUserDir()+ "/log.txt"; // Back to default value
 	}
-	StelLogger::init(StelFileMgr::getUserDir()+"/"+logName);
+	StelLogger::init(logName);
 	StelLogger::writeLog(argStr);
 
 	// OK we start the full program.

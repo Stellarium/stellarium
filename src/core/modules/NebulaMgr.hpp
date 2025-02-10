@@ -115,6 +115,11 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setDesignationUsage
 		   NOTIFY designationUsageChanged
 		   )
+	Q_PROPERTY(bool flagShowOnlyNamedDSO
+		   READ getFlagShowOnlyNamedDSO
+		   WRITE setFlagShowOnlyNamedDSO
+		   NOTIFY flagShowOnlyNamedDSOChanged
+		   )
 	Q_PROPERTY(bool flagUseSizeLimits
 		   READ getFlagSizeLimitsUsage
 		   WRITE setFlagSizeLimitsUsage
@@ -825,6 +830,11 @@ public slots:
 	//! Get value of flag used to turn on and off DSO type filtering.
 	bool getFlagUseTypeFilters(void) const;
 
+	//! Set flag used to turn on and off Named DSO Only.
+	void setFlagShowOnlyNamedDSO(const bool b);
+	//! Get value of flag used to turn on and off Named DSO Only.
+	bool getFlagShowOnlyNamedDSO(void) const;
+
 	//! Set the limit for min. angular size of displayed DSO.
 	//! @param s the angular size between 1 and 600 arcminutes
 	void setMinSizeLimit(double s);
@@ -893,6 +903,7 @@ signals:
 	void flagOutlinesDisplayedChanged(bool b);
 	void flagAdditionalNamesDisplayedChanged(bool b);
 	void designationUsageChanged(bool b);
+	void flagShowOnlyNamedDSOChanged(bool b);
 	void flagSurfaceBrightnessUsageChanged(bool b);
 	void flagSurfaceBrightnessArcsecUsageChanged(bool b);
 	void flagSurfaceBrightnessShortNotationUsageChanged(bool b);
