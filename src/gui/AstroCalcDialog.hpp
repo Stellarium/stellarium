@@ -629,7 +629,7 @@ private:
 	//! @note modes: 0 - conjunction, 1 - opposition, 2 - greatest elongation
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode);
 	//! Filling the table of phenomena
-	void fillPhenomenaTableVis(const QString &phenomenType, double JD, const QString &firstObjectName, float firstObjectMagnitude,
+	void fillPhenomenaTableVis(const QString &phenomenType, int phenomenMode, double JD, const QString &firstObjectName, float firstObjectMagnitude,
 				   const QString &secondObjectName, float secondObjectMagnitude, const QString &separation, const QString &elevation,
 				   QString &elongation, const QString &angularDistance, const QString &elongTooltip="", const QString &angDistTooltip="");
 	//! Calculation of greatest elongations
