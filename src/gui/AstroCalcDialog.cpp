@@ -5757,7 +5757,7 @@ void AstroCalcDialog::selectCurrentPhenomen(const QModelIndex& modelIndex)
 {
 	// Find the object
 	QString name = ui->object1ComboBox->currentData().toString();
-	if (modelIndex.sibling(modelIndex.row(), PhenomenaType).data().toString().contains(q_("Opposition"), Qt::CaseInsensitive))
+	if (modelIndex.sibling(modelIndex.row(), PhenomenaType).data(Qt::UserRole).toInt()==PhenomenaTypeIndex::Opposition)
 		name = modelIndex.sibling(modelIndex.row(), PhenomenaObject2).data().toString();
 	const double JD = modelIndex.sibling(modelIndex.row(), PhenomenaDate).data(Qt::UserRole).toDouble();
 	goToObject(name, JD);
@@ -6093,12 +6093,13 @@ void AstroCalcDialog::savePhenomena()
 		saveTableAsXLSX(fileData.first, ui->phenomenaTreeWidget, phenomenaHeader, q_("Phenomena"), q_("Phenomena"));
 }
 
-void AstroCalcDialog::fillPhenomenaTableVis(const QString &phenomenType, double JD, const QString &firstObjectName, float firstObjectMagnitude,
+void AstroCalcDialog::fillPhenomenaTableVis(const QString &phenomenType, int phenomenMode, double JD, const QString &firstObjectName, float firstObjectMagnitude,
 					    const QString &secondObjectName, float secondObjectMagnitude, const QString &separation, const QString &elevation,
 					    QString &elongation, const QString &angularDistance, const QString &elongTooltip, const QString &angDistTooltip)
 {
 	ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 	treeItem->setText(PhenomenaType, phenomenType);
+	treeItem->setData(PhenomenaType, Qt::UserRole, phenomenMode);
 	// local date and time
 	const double utcOffsetHrs = core->getUTCOffset(JD);
 	treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD, utcOffsetHrs), StelUtils::getHoursMinutesFromJulianDay(JD+utcOffsetHrs*StelCore::JD_HOUR)));
@@ -6299,7 +6300,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		else
 			elevationStr = StelUtils::radToDmsPStr(alt, 2);
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), nameObj2, magnitude, separationStr, elevationStr, elongStr, angDistStr, elongationInfo, angularDistanceInfo);
+		fillPhenomenaTableVis(phenomenType, mode, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), nameObj2, magnitude, separationStr, elevationStr, elongStr, angDistStr, elongationInfo, angularDistanceInfo);
 	}
 }
 
@@ -6374,7 +6375,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		else
 			elevationStr = StelUtils::radToDmsPStr(alt, 2);
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, magnitude, separationStr, elevationStr, elongStr, angDistStr);
+		fillPhenomenaTableVis(phenomenType, PhenomenaTypeIndex::Conjunction, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, magnitude, separationStr, elevationStr, elongStr, angDistStr);
 	}
 }
 
@@ -6491,7 +6492,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		else
 			elevationStr = StelUtils::radToDmsPStr(alt, 2);
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, magnitude, separationStr, elevationStr, elongStr, angDistStr);
+		fillPhenomenaTableVis(phenomenType, mode, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, magnitude, separationStr, elevationStr, elongStr, angDistStr);
 	}
 }
 
