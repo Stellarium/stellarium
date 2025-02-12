@@ -84,9 +84,18 @@ TextHorizMetrics getRealTextWidthAndOffset(SplashTextHolder& h, const QFont& fon
 	       .scaled(img.width(), 1, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 	const uchar*const data = img.constBits();
 	int leftMargin = 0, rightMargin = 0;
-	while(leftMargin < img.width() && data[leftMargin] == 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+	const int step = 1;
+#else
+	// Qt5's conversion to Grayscale8 appears to keep pixel data
+	// in {gray,gray,gray,255} format instead of simple {gray}.
+	// We'll compute the step indirectly, just in case something
+	// works even more unexpectedly.
+	const int step = img.bytesPerLine() / img.width(); // expected to be 4
+#endif
+	while(leftMargin < img.width() && data[leftMargin * step] == 0)
 		++leftMargin;
-	while(rightMargin < img.width() && data[img.width() - 1 - rightMargin] == 0)
+	while(rightMargin < img.width() && data[(img.width() - 1 - rightMargin) * step] == 0)
 		++rightMargin;
 	if(rightMargin + leftMargin >= img.width())
 	{

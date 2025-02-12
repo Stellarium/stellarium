@@ -1768,6 +1768,12 @@ void LandscapeMgr::setFlagAtmosphereMultipleScattering(const bool enable)
 	emit flagAtmosphereMultipleScatteringChanged(enable);
 }
 
+void LandscapeMgr::setFlagAtmospherePseudoMirror(const bool enable)
+{
+	atmospherePseudoMirrorEnabled=enable;
+	emit flagAtmospherePseudoMirrorChanged(enable);
+}
+
 void LandscapeMgr::setAtmosphereEclipseSimulationQuality(const int quality)
 {
 	if(getAtmosphereEclipseSimulationQuality() == quality)
@@ -1841,6 +1847,11 @@ bool LandscapeMgr::getFlagAtmosphereSingleScattering() const
 bool LandscapeMgr::getFlagAtmosphereMultipleScattering() const
 {
 	return atmosphereMultipleScatteringEnabled;
+}
+
+bool LandscapeMgr::getFlagAtmospherePseudoMirror() const
+{
+	return atmospherePseudoMirrorEnabled;
 }
 
 int LandscapeMgr::getAtmosphereEclipseSimulationQuality() const

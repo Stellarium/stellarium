@@ -108,6 +108,7 @@ void AtmosphereDialog::createDialogContent()
 	connectBoolProperty(ui->showMySky_zeroOrderEnabled, "LandscapeMgr.flagAtmosphereZeroOrderScattering");
 	connectBoolProperty(ui->showMySky_singleScatteringEnabled, "LandscapeMgr.flagAtmosphereSingleScattering");
 	connectBoolProperty(ui->showMySky_multipleScatteringEnabled, "LandscapeMgr.flagAtmosphereMultipleScattering");
+	connectBoolProperty(ui->showMySky_pseudoMirrorEnabled, "LandscapeMgr.flagAtmospherePseudoMirror");
 	connectIntProperty(ui->showMySky_eclipseSimulationQualitySpinBox, ECLIPSE_SIM_QUALITY_PROPERTY);
 #else
 	ui->visualModelConfigGroup->hide();

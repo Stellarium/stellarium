@@ -175,6 +175,10 @@ class LandscapeMgr : public StelModule
 		   READ getFlagAtmosphereMultipleScattering
 		   WRITE setFlagAtmosphereMultipleScattering
 		   NOTIFY flagAtmosphereMultipleScatteringChanged)
+	Q_PROPERTY(bool flagAtmospherePseudoMirror
+		   READ getFlagAtmospherePseudoMirror
+		   WRITE setFlagAtmospherePseudoMirror
+		   NOTIFY flagAtmospherePseudoMirrorChanged)
 	Q_PROPERTY(int atmosphereEclipseSimulationQuality
 		   READ getAtmosphereEclipseSimulationQuality
 		   WRITE setAtmosphereEclipseSimulationQuality
@@ -567,6 +571,9 @@ public slots:
 	bool getFlagAtmosphereMultipleScattering() const;
 	void setFlagAtmosphereMultipleScattering(bool enable);
 
+	bool getFlagAtmospherePseudoMirror() const;
+	void setFlagAtmospherePseudoMirror(bool enable);
+
 	int getAtmosphereEclipseSimulationQuality() const;
 	void setAtmosphereEclipseSimulationQuality(int quality);
 
@@ -718,6 +725,7 @@ signals:
 	void flagAtmosphereZeroOrderScatteringChanged(bool value);
 	void flagAtmosphereSingleScatteringChanged(bool value);
 	void flagAtmosphereMultipleScatteringChanged(bool value);
+	void flagAtmospherePseudoMirrorChanged(bool value);
 	void atmosphereEclipseSimulationQualityChanged(unsigned quality);
 	void atmosphereNoScatterChanged(const bool noScatter);
 	void cardinalPointsDisplayedChanged(const bool displayed);
@@ -883,6 +891,7 @@ private:
 	bool atmosphereZeroOrderScatteringEnabled=false;
 	bool atmosphereSingleScatteringEnabled=true;
 	bool atmosphereMultipleScatteringEnabled=true;
+	bool atmospherePseudoMirrorEnabled=true;
 
 	QString atmosphereShowMySkyStatusText;
 	bool atmosphereShowMySkyStoppedWithError=false;
