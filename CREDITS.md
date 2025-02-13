@@ -675,10 +675,10 @@
 	4.97 Images of IC59, IC63
 	     from Zhang Ruiping
 	     License: Creative Commons Attribution 4.0 International 
-	4.98 Images of IC423
-	     from Astrowicht
+	4.98 Images of NGC6366
+	     from Robert Eder, post-processing: Sun Shuwei
 	     https://commons.wikimedia.org/wiki/
-	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	     License: Creative Commons Attribution-Share Alike 4.0 International
 	4.99 Images of IC418, IC4593, NGC5315, NGC6751
 	     from NASA/ESA and The Hubble Heritage Team (STScI/AURA)
 	     https://www.spacetelescope.org/
@@ -813,7 +813,7 @@
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.133 Images of IC348, IC434, NGC6726,LBN550, LDN1251, Sh2-124, RCW29,
+	4.133 Images of IC348, IC423, IC434, NGC6726,LBN550, LDN1251, Sh2-124, RCW29,
 	      RCW58, RCW89, VDB123, Vela supernova remnant
 	      from Manuel Peitsch, post-processing: Sun Shuwei
 	      https://manuel-astro.ch/
@@ -1020,11 +1020,6 @@
 	      from KPNO/NOIRLab/NSF/AURA/Richard Robinson and Beverly Erdman/Adam Block, post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
-	4.187 Images of NGC6366
-	      from Robert Eder, post-processing: Sun Shuwei
-	      https://commons.wikimedia.org/wiki/
-	      License: Creative Commons Attribution-Share Alike 4.0 International
-
 ```
 
 ## Appendix
