@@ -383,7 +383,7 @@
 	4.24 The Vesta and Ceres map was taken from USGS website
 	     https://astrogeology.usgs.gov/
 	     and colored by RVS. License: public domain.
-	4.25 Images of M15, M24, M51, M58, M63, M76, M81, M82, M96, M101,
+	4.25 Images of M15, M24, M51, M58, M63, M76, M82, M96, M101,
 	     M105, M106, IC1727, NGC246, NGC457, NGC467,
 	     NGC470, NGC474, NGC488, NGC672, NGC691, NGC1514, NGC1961,
 	     NGC2174, NGC2371, NGC2392, NGC2403, NGC2506, NGC2655, NGC2685,
@@ -813,7 +813,7 @@
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.133 Images of IC348, IC423, IC434, M78, NGC6726, LBN550, LDN1251, Sh2-124, RCW29,
+	4.133 Images of M78, IC348, IC423, IC434, NGC6726, LBN550, LDN1251, Sh2-124, RCW29,
 	      RCW58, RCW89, VDB123, Vela supernova remnant
 	      from Manuel Peitsch, post-processing: Sun Shuwei
 	      https://manuel-astro.ch/
@@ -967,7 +967,7 @@
 	      from Roberto Mura, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
-	4.171 Images of IC1613, NGC1579
+	4.171 Images of M81, IC1613, NGC1579
 	      from Kees Scherer, post-processing: Sun Shuwei
 	      https://www.flickr.com/photos/kees-scherer/
 	      License: public domain
