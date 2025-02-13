@@ -1,0 +1,659 @@
+{
+  "id": "greek_farnese",
+  "region": "Southern Europe",
+  "classification": ["comparative"],
+  "fallback_to_international_names": false,
+  "thumbnail": "???",
+  "thumbnail_bscale": 2,
+  "highlight": "???",
+  "constellations": [
+    {
+      "id": "CON greek_farnese UMi",
+      "lines": [[11767, 85822, 82080, 77055, 72607, 75097, 79822, 77055]],
+      "common_name": {"english": "Small She-Bear", "native": "Μικρή ʾˊΑρκτος (Mikre Arktos)"}
+    },
+    {
+      "id": "CON greek_farnese UMa",
+      "lines": [[41704, 44390, 45038], [44390, 46977, 45038, 45075, 46733], [41704, 48319, 48402, 46853, 44127], [46853, 44471], [46733, 54061], [48402, 53910, 58001], [54061, 59774], [54539, 50372], [54539, 50801], [59774, 58001], [59774, 62956, 65378, 67301], [58001, 54539]],
+      "common_name": {"english": "Great She-Bear", "native": "Μεγαλή ʾˊΑρκτος (Megale Arktos)"}
+    },
+    {
+      "id": "CON greek_farnese Dra",
+      "lines": [[83608, 85819, 85670], [85819, 87585, 87833, 85670], [90156, 90905, 91755], [87585, 90156], [87833, 91755], [92512, 90156], [92512, 91755], [92512, 94376], [92512, 95081, 94376], [95081, 98702, 97433, 94376], [97433, 96100], [94376, 96100, 94648], [96100, 92782], [94648, 92782, 89937], [94648, 89937, 89908], [89937, 86614], [89908, 86614, 83895], [89908, 83895, 80331, 78527, 75458, 68756, 61281, 56211]],
+      "image": {
+        "file": "illustrations/dra_sw_bg.png",
+        "size": [1024, 642],
+        "anchors": [
+          {"pos": [713, 432], "hip": 87833},
+          {"pos": [96, 410], "hip": 97433},
+          {"pos": [685, 83], "hip": 80331}
+        ]
+      },
+      "common_name": {"english": "Dragon", "native": "Δράκων (Drakon)"}
+    },
+    {
+      "id": "CON greek_farnese Cep",
+      "lines": [[99255, 106032], [116727, 106032, 108917, 112724], [108917, 105199, 102422, 101093], [108917, 109556, 109492, 109857]],
+      "image": {
+        "file": "illustrations/cep_sw_bg.png",
+        "size": [1024, 965],
+        "anchors": [
+          {"pos": [326, 36], "hip": 99255},
+          {"pos": [38, 180], "hip": 116727},
+          {"pos": [574, 846], "hip": 110991}
+        ]
+      },
+      "common_name": {"english": "King Kepheus", "native": "Κηφεύς (Kepheus)"}
+    },
+    {
+      "id": "CON greek_farnese Boo",
+      "lines": [[73555, 72582, 71075], [72582, 74666], [71075, 69732, 69713, 70497, 69481], [74666, 73745, 74087, 73996], [75973, 75411, 73568], [74666, 72105], [71075, 71053, 71284, 72105, 71795], [71053, 67927, 67275, 67459]],
+      "image": {
+        "file": "illustrations/boo_sw_bg.png",
+        "size": [727, 1024],
+        "anchors": [
+          {"pos": [581, 977], "hip": 67459},
+          {"pos": [188, 936], "hip": 72125},
+          {"pos": [420, 176], "hip": 71075}
+        ]
+      },
+      "common_name": {"english": "Ploughman", "native": "Βοώτης (Bootes)"}
+    },
+    {
+      "id": "CON greek_farnese CrB",
+      "lines": [[76127, 75695, 76267, 76952, 77512, 78159, 78493]],
+      "image": {
+        "file": "illustrations/crb_bg.png",
+        "size": [464, 482],
+        "anchors": [
+          {"pos": [270, 450], "hip": 76267},
+          {"pos": [423, 228], "hip": 76127},
+          {"pos": [60, 294], "hip": 78159}
+        ]
+      },
+      "common_name": {"english": "Crown", "native": "Στέφανος (Stephanos)"}
+    },
+    {
+      "id": "CON greek_farnese Her",
+      "lines": [[84345, 82764, 84379], [82764, 80816, 80170, 79043], [84379, 85693, 86974, 87933, 87998, 88794], [84379, 83207], [80816, 81693, 83207, 84380, 81833, 81693], [84380, 87808, 86414, 85379, 86182, 87280], [81833, 81126, 79992, 77760, 75973]],
+      "image": {
+        "file": "illustrations/her_sw_bg.png",
+        "size": [1024, 1076],
+        "anchors": [
+          {"pos": [739, 235], "hip": 79992},
+          {"pos": [447, 918], "hip": 84345},
+          {"pos": [753, 849], "hip": 80170}
+        ]
+      },
+      "common_name": {"english": "Kneeler", "native": "ʾΕνγόνασιν (Engonasin)"}
+    },
+    {
+      "id": "CON greek_farnese Lyr",
+      "lines": [[91262, 91919, 91971, 92728, 93194, 92420, 92405], [93279, 93279], [93194, 92420, 91971], [91262, 91235, 91883, 93720, 93917, 93903, 94713, 94481, 92791], [92405, 93279, 93194]],
+      "image": {
+        "file": "illustrations/lyr_sw_bg.png",
+        "size": [1024, 920],
+        "anchors": [
+          {"pos": [750, 868], "hip": 94630},
+          {"pos": [993, 507], "hip": 91042},
+          {"pos": [123, 183], "hip": 91782}
+        ]
+      },
+      "common_name": {"english": "Lyre", "native": "Λύρα (Lyra)"}
+    },
+    {
+      "id": "CON greek_farnese Cyg",
+      "lines": [[95947, 96683, 98110, 100453, 97165], [100453, 102488], [104732, 102488], [104732, 102098, 100453, 103413, 104060], [100453, 99675, 99848, 101138], [97165, 96441, 95853, 94779, 102098]],
+      "image": {
+        "file": "illustrations/cyg_sw_bg.png",
+        "size": [911, 1024],
+        "anchors": [
+          {"pos": [897, 746], "hip": 95947},
+          {"pos": [251, 990], "hip": 104732},
+          {"pos": [263, 20], "hip": 99655}
+        ]
+      },
+      "common_name": {"english": "Bird", "native": "ʾˊΟρνις (Ornis)"}
+    },
+    {
+      "id": "CON greek_farnese Cas",
+      "lines": [[2920, 3179, 3821, 4427, 6686, 8886, 11569], [3179, 5542, 6242], [3179, 118243]],
+      "image": {
+        "file": "illustrations/cas_sw_bg.png",
+        "size": [512, 502],
+        "anchors": [
+          {"pos": [339, 294], "hip": 746},
+          {"pos": [196, 226], "hip": 4427},
+          {"pos": [115, 207], "hip": 6686}
+        ]
+      },
+      "common_name": {"english": "Queen Kassiepeia", "native": "Κασσιέπεiα (Kassiepeia)"}
+    },
+    {
+      "id": "CON greek_farnese Per",
+      "lines": [[13531, 14632, 12777], [14632, 14328, 13268, 11020], [12777, 14668, 14576, 13949, 13879, 14354, 14817, 14576], [14328, 17358, 20070, 20354, 21476], [16499, 12777], [16499, 17358], [16499, 17529, 18532, 18614, 17448, 18246]],
+      "image": {
+        "file": "illustrations/per_sw_bg.png",
+        "size": [709, 1024],
+        "anchors": [
+          {"pos": [343, 52], "hip": 9222},
+          {"pos": [235, 898], "hip": 22699},
+          {"pos": [673, 940], "hip": 18246}
+        ]
+      },
+      "common_name": {"english": "Perseus", "native": "Περσεύς (Perseus)"}
+    },
+    {
+      "id": "CON greek_farnese Aur",
+      "lines": [[28358, 27196, 28360], [27196, 24608], [28360, 27673, 28380], [24608, 23416, 23767, 23453], [27196, 25292, 23015], [25292, 25428], [28360, 25984, 22453, 24608]],
+      "image": {
+        "file": "illustrations/aur_sw_bg.png",
+        "size": [831, 1024],
+        "anchors": [
+          {"pos": [678, 498], "hip": 23416},
+          {"pos": [218, 868], "hip": 25428},
+          {"pos": [676, 78], "hip": 28358}
+        ]
+      },
+      "common_name": {"english": "Charioteer", "native": "ʿΗνίοχος (Heniochos)"}
+    },
+    {
+      "id": "CON greek_farnese Oph",
+      "lines": [[86032, 85333, 86742], [85333, 83000], [86742, 87108, 88048, 88404], [83000, 82673, 80883, 79882, 79593], [86742, 85365, 82693, 83000], [85365, 84012, 84893, 85755, 85340, 84970, 84405], [82693, 81377, 80894, 80569, 80343, 80975, 80473]],
+      "image": {
+        "file": "illustrations/oph_sw_bg.png",
+        "size": [897, 1024],
+        "anchors": [
+          {"pos": [401, 157], "hip": 86032},
+          {"pos": [822, 48], "hip": 76852},
+          {"pos": [422, 997], "hip": 85423}
+        ]
+      },
+      "common_name": {"english": "Serpent Bearer", "native": "ʾΟφιούχος (Ophiuchos)"}
+    },
+    {
+      "id": "CON greek_farnese Ser",
+      "lines": [[77661, 76852, 77233, 78072, 77661], [77233, 76276, 77070, 77622, 77516], [92946, 89962, 88175], [77516, 79195, 82730, 86284, 88175]],
+      "common_name": {"english": "Snake", "native": "ʾˊΟφις (Ophis)"}
+    },
+    {
+      "id": "CON greek_farnese Sge",
+      "lines": [[98337, 97365, 96757], [97365, 96837]],
+      "common_name": {"english": "Arrow", "native": "ʾΟιστός (Oistos)"}
+    },
+    {
+      "id": "CON greek_farnese Aql",
+      "lines": [[92818, 97278, 97675, 98103, 92818], [93051, 96229, 97229, 96665, 95501, 93051], [94834, 95447, 94982, 94834], [95447, 97278, 97938, 98526, 100541, 98036, 97607, 97229, 95447], [93429, 93805, 95501, 97804, 98844, 99473], [97804, 96556, 96483], [93805, 95585, 96468]],
+      "image": {
+        "file": "illustrations/aql_sw_bg.png",
+        "size": [852, 1024],
+        "anchors": [
+          {"pos": [64, 901], "hip": 100541},
+          {"pos": [163, 169], "hip": 95947},
+          {"pos": [684, 94], "hip": 92161}
+        ]
+      },
+      "common_name": {"english": "Eagle", "native": "ʾΑετός (Aetos)"}
+    },
+    {
+      "id": "CON greek_farnese Del",
+      "lines": [[102532, 101958, 101589, 101483, 101421, 101882, 102281, 102532], [101421, 101916, 101800, 101421]],
+      "image": {
+        "file": "illustrations/del_sw_bg.png",
+        "size": [340, 512],
+        "anchors": [
+          {"pos": [195, 439], "hip": 104987},
+          {"pos": [295, 266], "hip": 101421},
+          {"pos": [96, 96], "hip": 101867}
+        ]
+      },
+      "common_name": {"english": "Dolphin", "native": "Δελφίς (Delphis)"}
+    },
+    {
+      "id": "CON greek_farnese Equ",
+      "lines": [[105570, 104858, 104521, 104987, 105570]],
+      "common_name": {"english": "Bust [of a Horse]", "native": "Προτομή (Protomé)"}
+    },
+    {
+      "id": "CON greek_farnese Peg",
+      "lines": [[107315, 109068, 109427, 107315], [109068, 112935, 113963, 112029, 109427, 112447, 113963, 115919, 117020, 1067, 677], [1067, 113963, 112440, 112748, 113881], [112440, 109176, 107354], [113881, 112158, 109410], [677, 113881]],
+      "image": {
+        "file": "illustrations/peg_sw_bg.png",
+        "size": [1048, 707],
+        "anchors": [
+          {"pos": [980, 440], "hip": 107315},
+          {"pos": [964, 116], "hip": 107310},
+          {"pos": [388, 274], "hip": 677}
+        ]
+      },
+      "common_name": {"english": "Horse", "native": "ʿˊΙππος (Hippos)"}
+    },
+    {
+      "id": "CON greek_farnese And",
+      "lines": [[677, 3092, 3031, 3693, 4463], [3092, 2912, 1366, 116631, 116584], [2912, 3881], [3031, 5447, 4436, 3881, 5434], [5447, 7818, 7719, 5434, 8068], [7818, 9640]],
+      "image": {
+        "file": "illustrations/and_sw_bg.png",
+        "size": [1024, 641],
+        "anchors": [
+          {"pos": [838, 168], "hip": 677},
+          {"pos": [224, 616], "hip": 9977},
+          {"pos": [104, 312], "hip": 8068}
+        ]
+      },
+      "common_name": {"english": "Princess Andromeda", "native": "ʾΑνδρομέδα (Andromeda)"}
+    },
+    {
+      "id": "CON greek_farnese Tri",
+      "lines": [[8796, 10064, 10644, 10670, 8796]],
+      "common_name": {"english": "Triangle", "native": "Τρίγωνος (Trigonos)"}
+    },
+    {
+      "id": "CON greek_farnese Ari",
+      "lines": [[13209, 13061, 12719, 12489], [12828, 12832, 13327, 13702, 13914, 12332, 10050, 9110, 10328, 11843, 13165, 12832], [13914, 14838, 15737, 15627, 15110, 13914], [9110, 10732, 10306, 8832, 9110], [8832, 8903, 9492, 9815, 9248]],
+      "image": {
+        "file": "illustrations/ari_sw_bg.png",
+        "size": [1024, 939],
+        "anchors": [
+          {"pos": [824, 90], "hip": 8903},
+          {"pos": [86, 696], "hip": 15737},
+          {"pos": [910, 776], "hip": 11249}
+        ]
+      },
+      "common_name": {"english": "Ram", "native": "Κριός (Krios)"}
+    },
+    {
+      "id": "CON greek_farnese Tau",
+      "lines": [[25428, 21881], [26451, 23871, 22565], [21881, 22565], [20205, 20255, 20635, 20711], [19205, 17608], [18724, 20455], [19960, 18724, 17771, 15900, 16083, 16322, 16369], [26451, 23835, 21273, 20732, 20205], [25428, 20711, 20430, 20250, 19205, 19513, 20430], [19205, 19038, 19990]],
+      "image": {
+        "file": "illustrations/tau_sw_bg.png",
+        "size": [1024, 848],
+        "anchors": [
+          {"pos": [348, 548], "hip": 21421},
+          {"pos": [196, 156], "hip": 19205},
+          {"pos": [952, 352], "hip": 16083}
+        ]
+      },
+      "common_name": {"english": "Bull", "native": "Ταῦρος (Tauros)"}
+    },
+    {
+      "id": "CON greek_farnese Gem",
+      "lines": [[38363, 38228, 37826, 37629, 38363], [37826, 36962, 37740], [36962, 36046], [36962, 35550, 35350, 32362], [35550, 34088, 31681], [37339, 37179, 36850], [37339, 36896, 36850, 34693, 33018], [34693, 36046], [34693, 32246, 30883], [32246, 30343, 29655]],
+      "image": {
+        "file": "illustrations/gem_sw_bg.png",
+        "size": [1024, 1011],
+        "anchors": [
+          {"pos": [760, 84], "hip": 33018},
+          {"pos": [990, 832], "hip": 29655},
+          {"pos": [110, 455], "hip": 37826}
+        ]
+      },
+      "common_name": {"english": "Twins", "native": "Δίδυμοι (Didymoi)"}
+    },
+    {
+      "id": "CON greek_farnese Cnc",
+      "lines": [[43103, 42806, 41909, 39780], [41909, 41822, 40526], [41822, 42911, 44066], [42911, 42806]],
+      "image": {
+        "file": "illustrations/cnc_sw_bg.png",
+        "size": [411, 512],
+        "anchors": [
+          {"pos": [180, 478], "hip": 44066},
+          {"pos": [36, 118], "hip": 43103},
+          {"pos": [358, 187], "hip": 40167}
+        ]
+      },
+      "common_name": {"english": "Crab", "native": "Καρκίνος (Karkinos)"}
+    },
+    {
+      "id": "CON greek_farnese Leo",
+      "lines": [[57632, 54872, 54879, 55642, 55434], [54879, 49669, 49029, 47508], [49669, 49583, 50583, 50335, 54872], [50335, 48455, 46146], [48455, 47908, 49583], [47908, 46750]],
+      "image": {
+        "file": "illustrations/leo_sw_bg.png",
+        "size": [1024, 831],
+        "anchors": [
+          {"pos": [913, 610], "hip": 47508},
+          {"pos": [130, 204], "hip": 60742},
+          {"pos": [673, 169], "hip": 46750}
+        ]
+      },
+      "common_name": {"english": "Lion", "native": "Λέων (Leon)"}
+    },
+    {
+      "id": "CON greek_farnese Vir",
+      "lines": [[57380, 57328, 58948, 58590, 57380], [62267, 61960, 63608, 68520, 62267], [63090, 62267, 58590, 60129], [63090, 66249, 70755, 71957], [66249, 66098, 69427, 69974], [66098, 61941, 63090], [61941, 60129], [57757, 60129, 62985, 57757], [65474, 60129]],
+      "image": {
+        "file": "illustrations/vir_sw_bg.png",
+        "size": [1024, 736],
+        "anchors": [
+          {"pos": [631, 610], "hip": 65474},
+          {"pos": [48, 532], "hip": 71957},
+          {"pos": [500, 42], "hip": 64226}
+        ]
+      },
+      "common_name": {"english": "Maiden", "native": "Παρθένος (Parthenos)"}
+    },
+    {
+      "id": "CON greek_farnese Lib",
+      "lines": [[77853, 74785, 73473, 76333], [74392, 72622, 72489, 73945]],
+      "image": {
+        "file": "illustrations/lib.png",
+        "size": [724, 1021],
+        "anchors": [
+          {"pos": [660, 430], "hip": 69458},
+          {"pos": [183, 265], "hip": 72622},
+          {"pos": [421, 792], "hip": 73107}
+        ]
+      },
+      "common_name": {"english": "Claws [of Scorpion]", "native": "Χηλαί"}
+    },
+    {
+      "id": "CON greek_farnese Sco",
+      "lines": [[80112, 78265, 78401, 78820, 80112, 80763, 79374], [80763, 78104], [80763, 81266, 82396, 82545, 82729, 84143, 86228, 87073, 85927, 85696]],
+      "image": {
+        "file": "illustrations/sco_sw_bg.png",
+        "size": [1024, 881],
+        "anchors": [
+          {"pos": [896, 114], "hip": 72622},
+          {"pos": [378, 792], "hip": 84143},
+          {"pos": [484, 294], "hip": 78820}
+        ]
+      },
+      "common_name": {"english": "Scorpion", "native": "Σκορπίος (Skorpios)"}
+    },
+    {
+      "id": "CON greek_farnese Sgr",
+      "lines": [[92855, 92041, 89931], [92855, 93498, 92761, 93057, 94141, 94643, 95477, 96465, 95865, 93506, 93667], [93506, 93134], [94643, 93864, 93506], [93667, 98066, 98162, 98688, 98353, 98066], [98688, 98842, 98412, 100591], [98412, 98761, 98032], [98412, 96932, 94124, 92329, 92855], [95294, 95347, 94986], [93149, 91918, 89642], [88635, 93506, 95456], [89178, 88060, 89020], [90185, 89931, 89341], [95619, 93506, 88635], [90496, 89341], [94820, 95168, 95176, 96950, 98258, 97783]],
+      "image": {
+        "file": "illustrations/sgr_sw_bg.png",
+        "size": [965, 1024],
+        "anchors": [
+          {"pos": [655, 969], "hip": 95294},
+          {"pos": [550, 297], "hip": 89931},
+          {"pos": [154, 85], "hip": 92882}
+        ]
+      },
+      "common_name": {"english": "Archer", "native": "Τοξότης (Toxotes)"}
+    },
+    {
+      "id": "CON greek_farnese Cap",
+      "lines": [[106723, 107188, 107556, 106985, 105515, 105881, 104234, 102978], [104234, 101123, 102485], [101123, 100195, 100345, 99572], [100345, 100064, 100310], [100345, 104139, 105515]],
+      "image": {
+        "file": "illustrations/cap.png",
+        "size": [871, 1024],
+        "anchors": [
+          {"pos": [736, 762], "hip": 100195},
+          {"pos": [259, 894], "hip": 103226},
+          {"pos": [559, 370], "hip": 99572}
+        ]
+      },
+      "common_name": {"english": "The One with the Goat's Horn", "native": "Αίγόκερος (Aigokeros)"}
+    },
+    {
+      "id": "CON greek_farnese Aqr",
+      "lines": [[106944, 106278, 104459, 102618], [106278, 109139, 110778, 112211], [106944, 109074, 106278], [109074, 110003, 111123, 109139], [111123, 112716, 113136], [109074, 110395, 112961, 114341], [110395, 110672, 111497, 114855], [115438, 114855]],
+      "image": {
+        "file": "illustrations/aqr_sw_bg.png",
+        "size": [462, 1024],
+        "anchors": [
+          {"pos": [206, 74], "hip": 106278},
+          {"pos": [100, 430], "hip": 110672},
+          {"pos": [380, 992], "hip": 3419}
+        ]
+      },
+      "common_name": {"english": "Water-carrier", "native": "ʿΥδροχόος (Hydrochoos)"}
+    },
+    {
+      "id": "CON greek_farnese Psc",
+      "lines": [[113889, 115227], [114971, 115738, 116928, 118268], [115227, 115830, 116771, 118268, 1645, 2548, 3786, 4906, 5737, 5346, 6061, 7007, 7884, 8833, 9487, 8198, 7535, 7097, 6706, 5742, 6193, 5544, 5586, 4889, 4510, 3885, 4366, 5131, 5310, 5454], [5310, 5742], [5310, 5571, 6706]],
+      "image": {
+        "file": "illustrations/psc_sw_bg.png",
+        "size": [975, 566],
+        "anchors": [
+          {"pos": [10, 519], "hip": 12093},
+          {"pos": [260, 8], "hip": 5586},
+          {"pos": [962, 434], "hip": 113889}
+        ]
+      },
+      "common_name": {"english": "Fishes", "native": "ʾΙχθύες (Ichthyes)"}
+    },
+    {
+      "id": "CON greek_farnese Cet",
+      "lines": [[10324, 11484, 13954, 14135, 12706, 12093, 11484], [12706, 12387, 12390, 11345, 8645, 6537, 5364, 3909, 3455, 1562, 3419, 3455, 9347, 11783, 12770, 12390]],
+      "image": {
+        "file": "illustrations/cet_sw_bg.png",
+        "size": [1024, 577],
+        "anchors": [
+          {"pos": [409, 18], "hip": 13954},
+          {"pos": [937, 432], "hip": 3419},
+          {"pos": [252, 348], "hip": 13701}
+        ]
+      },
+      "common_name": {"english": "Sea Monster", "native": "Κῆτος (Ketos)"}
+    },
+    {
+      "id": "CON greek_farnese Ori",
+      "lines": [[27366, 26727, 26311, 25930, 24674, 24436], [26727, 27989, 28614, 29038, 27913, 28716, 29434, 29704, 29426, 28614], [29426, 29038, 29434], [27989, 26487, 25336], [26487, 26366, 26176, 26207, 26215, 26366], [25336, 25930], [25336, 22845, 22509, 22449, 22549, 22797, 23123], [22845, 22957, 23607, 24010]],
+      "image": {
+        "file": "illustrations/ori_sw_bg.png",
+        "size": [658, 1024],
+        "anchors": [
+          {"pos": [540, 36], "hip": 22957},
+          {"pos": [204, 213], "hip": 27989},
+          {"pos": [423, 957], "hip": 24436}
+        ]
+      },
+      "common_name": {"english": "Hero Orion", "native": "ʾΩρίων (Orion)"}
+    },
+    {
+      "id": "CON greek_farnese Eri",
+      "lines": [[23972, 23875, 23364, 22701, 22109, 21444, 20507, 19849, 19587, 18543, 17593, 17378, 16537, 15197, 14293, 14168, 13701, 12843, 13288, 14146, 15474, 16611, 17651, 17717, 18216, 18673, 21248, 21393, 20535, 20042, 17874, 17797, 17351, 13847]],
+      "image": {
+        "file": "illustrations/eri.png",
+        "size": [749, 1024],
+        "anchors": [
+          {"pos": [693, 160], "hip": 13701},
+          {"pos": [102, 93], "hip": 22701},
+          {"pos": [687, 808], "hip": 13847}
+        ]
+      },
+      "common_name": {"english": "River", "native": "Ποταμός (Potamos)"}
+    },
+    {
+      "id": "CON greek_farnese Lep",
+      "lines": [[24305, 24786, 24927, 25606, 28816, 27288, 24786], [24927, 23685], [28816, 27654, 27072], [28816, 28103, 27517], [24305, 24845, 24873], [24305, 24327, 24244]],
+      "image": {
+        "file": "illustrations/lep_sw_bg.png",
+        "size": [1024, 707],
+        "anchors": [
+          {"pos": [313, 609], "hip": 27072},
+          {"pos": [211, 154], "hip": 27288},
+          {"pos": [946, 439], "hip": 23685}
+        ]
+      },
+      "common_name": {"english": "Hare", "native": "Λαγῶς (Lagos)"}
+    },
+    {
+      "id": "CON greek_farnese CMa",
+      "lines": [[30122, 32759, 33579, 34444], [30122, 31870, 33152, 33977], [33856, 33152, 33302, 33347, 32349, 32492, 33160, 33345, 34045, 35415, 35904, 35037, 33856], [33092, 31592, 30324, 31700, 33077], [33248, 31416, 31125, 29843]],
+      "image": {
+        "file": "illustrations/cma_sw_bg.png",
+        "size": [886, 1024],
+        "anchors": [
+          {"pos": [800, 540], "hip": 30324},
+          {"pos": [604, 316], "hip": 32349},
+          {"pos": [204, 644], "hip": 34444}
+        ]
+      },
+      "common_name": {"english": "Dog", "native": "Κύων (Kyon)"}
+    },
+    {
+      "id": "CON greek_farnese CMi",
+      "lines": [[37279, 36188]],
+      "image": {
+        "file": "illustrations/hand_ori.png",
+        "size": [712, 1024],
+        "anchors": [
+          {"pos": [639, 309], "hip": 28614},
+          {"pos": [573, 900], "hip": 30028},
+          {"pos": [177, 55], "hip": 35550}
+        ]
+      },
+      "common_name": {"english": "Left Hand of the Atlas Statue", "native": "[Statue]"}
+    },
+    {
+      "id": "CON greek_farnese Arg",
+      "lines": [[43409, 42828, 42515, 42312], [39429, 39757, 38835, 38170, 38070, 35264, 36377, 38827, 42913, 45941, 46651, 44816, 39429], [39953, 30438], [37611, 37389, 36987], [36848, 36987], [36848, 36837, 37270, 37590, 37611], [37677, 36917, 37648], [38070, 37173, 38170]],
+      "image": {
+        "file": "illustrations/arg_sw_bg.png",
+        "size": [788, 1024],
+        "anchors": [
+          {"pos": [478, 988], "hip": 30438},
+          {"pos": [758, 248], "hip": 38170},
+          {"pos": [196, 426], "hip": 44816}
+        ]
+      },
+      "common_name": {"english": "The Ship Argo", "native": "ʾΑργω (Argo)"}
+    },
+    {
+      "id": "CON greek_farnese Hya",
+      "lines": [[43813, 43109, 42313, 42402, 42799, 43813, 44659, 45336, 46776, 46509, 46390, 47452, 48356, 49402, 51069, 52085, 52943, 57936, 64962, 68895]],
+      "image": {
+        "file": "illustrations/hya_sw_bg.png",
+        "size": [1024, 472],
+        "anchors": [
+          {"pos": [960, 40], "hip": 42313},
+          {"pos": [28, 335], "hip": 68895},
+          {"pos": [468, 443], "hip": 56343}
+        ]
+      },
+      "common_name": {"english": "Water Snake", "native": "ʿˊΥδρος (Hydros)"}
+    },
+    {
+      "id": "CON greek_farnese Crt",
+      "lines": [[53740, 55705, 57283, 58188, 56633, 55687, 55282, 53740]],
+      "common_name": {"english": "Vessel", "native": "Κρατήρ (Krater)"}
+    },
+    {
+      "id": "CON greek_farnese Crv",
+      "lines": [[61359, 60189], [59199, 59316, 60189, 59803], [60189, 60965, 61174]],
+      "common_name": {"english": "Raven", "native": "Κóραξ (Korax)"}
+    },
+    {
+      "id": "CON greek_farnese Cen",
+      "lines": [[67786, 67457, 67153, 67786], [68933, 67457, 65109, 65936, 65373, 61622, 59184, 59449], [66657, 71683], [68933, 68862], [68933, 68245, 68282, 68002], [68862, 71352, 73334], [68002, 67234, 66657, 66821, 68702], [66657, 60059, 61084, 62434], [60059, 59747, 60718], [60059, 59449, 59196, 56480], [65109, 62896]],
+      "image": {
+        "file": "illustrations/cen_sw_bg.png",
+        "size": [1024, 859],
+        "anchors": [
+          {"pos": [859, 819], "hip": 60718},
+          {"pos": [891, 441], "hip": 59196},
+          {"pos": [556, 783], "hip": 68702}
+        ]
+      },
+      "common_name": {"english": "Kentaur", "native": "Κένταυρος (Kentauros)"}
+    },
+    {
+      "id": "CON greek_farnese Lup",
+      "lines": [[76945, 78918, 78384, 76945], [78384, 76297, 74911, 74395, 71536], [74395, 71860, 70576], [71860, 73273, 75141, 73493], [75141, 76297]],
+      "image": {
+        "file": "illustrations/lup_bg.png",
+        "size": [435, 426],
+        "anchors": [
+          {"pos": [199, 22], "hip": 70593},
+          {"pos": [402, 285], "hip": 70931},
+          {"pos": [9, 148], "hip": 74479}
+        ]
+      },
+      "common_name": {"english": "Beast", "native": "Θηρίον (Therion)"}
+    },
+    {
+      "id": "CON greek_farnese Ara",
+      "lines": [[86092, 88714, 85258, 85267, 83081, 83153, 85792, 86092]],
+      "image": {
+        "file": "illustrations/ara_sw_bg.png",
+        "size": [929, 869],
+        "anchors": [
+          {"pos": [882, 553], "hip": 82363},
+          {"pos": [198, 432], "hip": 85792},
+          {"pos": [582, 772], "hip": 85267}
+        ]
+      },
+      "common_name": {"english": "Altar", "native": "Θυμιατήριον (Thymiaterion)"}
+    },
+    {
+      "id": "CON greek_farnese CrA",
+      "lines": [[92308, 92382, 92953, 93542, 94005, 94160, 94114, 93825, 93174, 92989, 91875, 90887, 90982]],
+      "image": {
+        "file": "illustrations/cra_bg.png",
+        "size": [519, 384],
+        "anchors": [
+          {"pos": [5, 201], "hip": 94986},
+          {"pos": [236, 250], "hip": 92953},
+          {"pos": [273, 36], "hip": 91875}
+        ]
+      },
+      "common_name": {"english": "Southern Crown", "native": "Στέφανος Νότιος (Stephanos Notios)"}
+    },
+    {
+      "id": "CON greek_farnese PsA",
+      "lines": [[113368, 111954, 111138, 109789, 108661, 107608, 107380, 108085, 109285, 111188, 112948, 113246, 113234, 113368], [109111, 108543, 108294], [108035, 107344, 106327]],
+      "common_name": {"english": "Southern Fish", "native": "Νότιος ʾΙχθύς (Notios Ichthys)"}
+    },
+    {
+      "id": "CON greek_farnese Com",
+      "lines": [[60742, 59923, 59489, 59364, 59468, 59847], [60697, 60351, 60327, 60941, 61394, 60697]],
+      "common_name": {"english": "The Lock [in Leo]", "native": "πλόκαμος (Plokamos, in Leo)"}
+    },
+    {
+      "id": "CON greek_farnese HaR",
+      "lines": [[78820, 78820]],
+      "image": {
+        "file": "illustrations/hand_oph.png",
+        "size": [840, 1024],
+        "anchors": [
+          {"pos": [703, 372], "hip": 74785},
+          {"pos": [186, 393], "hip": 81377},
+          {"pos": [382, 834], "hip": 78401}
+        ]
+      },
+      "common_name": {"english": "Right Hand of the Atlas Statue", "native": "[Statue, right hand]"}
+    },
+    {
+      "id": "CON greek_farnese HaL",
+      "lines": [[36188, 36188]],
+      "common_name": {"english": "Left Hand of the Atlas Statue", "native": "[Statue, left hand]"}
+    },
+    {
+      "id": "CON greek_farnese Pat",
+      "lines": [[41262, 41262]],
+      "image": {
+        "file": "illustrations/Farnese_viereck.png",
+        "size": [512, 497],
+        "anchors": [
+          {"pos": [54, 196], "hip": 43584},
+          {"pos": [322, 366], "hip": 39767},
+          {"pos": [139, 76], "hip": 43634}
+        ]
+      },
+      "common_name": {"english": "special feature: unclear", "native": "[unknown]"}
+    }
+  ],
+  "common_names": {
+    "M 44": [{"english": "φάτνη (Manger)"},
+             {"english": "Cnc 1"},
+             {"english": "The middle of the nebulous mass in the chest, called Praesepe"}],
+    "M 45": [{"english": "Πλειάδες (Pleiades)"},
+             {"english": "Tau 30-33"}],
+    "Mel 111": [{"english": "πλόκαμος (Coma)"},
+                {"english": "Leo 33"}],
+    "Mel 25": [{"english": "ʿΥάδες (Hyades)"},
+               {"english": "Tau 11-15"}],
+    "NGC 5139": [{"english": "Cen 21"},
+                 {"english": "The star on the place where the back joins [the horse's body]"}],
+    "NGC 6441": [{"english": "sco 22"},
+                 {"english": "The nebulous star to the rear of the sting"}],
+    "NGC 869": [{"english": "Per 1"},
+                {"english": "The nebulous mass on the right hand"}],
+    "NGC 884": [{"english": "Per 1"},
+                {"english": "The nebulous mass on the right hand"}]
+  }
+}
