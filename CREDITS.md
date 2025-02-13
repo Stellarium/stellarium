@@ -546,7 +546,7 @@
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
 	4.65 Images of DWB111, IC405, IC410, IC443, IC2177, NGC288, NGC404, NGC1097,
-	     NGC1931, Sh2-191, Sh2-247
+	     NGC1931, LBN437, Sh2-191, Sh2-247
 	     from Giuseppe Donatiello, post-processing: Sun Shuwei
 	     https://flickr.com/photos/133259498@N05/
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
@@ -813,7 +813,7 @@
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.133 Images of IC348, NGC6726, LBN437, LBN550, LDN1251, Sh2-124, RCW29,
+	4.133 Images of IC348, NGC6726,LBN550, LDN1251, Sh2-124, RCW29,
 	      RCW58, RCW89, VDB123, Vela supernova remnant
 	      from Manuel Peitsch, post-processing: Sun Shuwei
 	      https://manuel-astro.ch/
