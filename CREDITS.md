@@ -486,7 +486,7 @@
 	     from Gianluca.pollastri
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.50 Images of M2, M3, M4, M5, M13, M10, M28, M30, M53, M69, M71, M75, M78, M85, M102,
+	4.50 Images of M2, M3, M4, M5, M13, M10, M28, M30, M53, M69, M71, M75, M85, M102,
 	     M107, IC10, NGC6144, PGC143, UGC12613
 	     from Starhopper
 	     https://commons.wikimedia.org/wiki/
@@ -813,7 +813,7 @@
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.133 Images of IC348, IC423, IC434, NGC6726,LBN550, LDN1251, Sh2-124, RCW29,
+	4.133 Images of IC348, IC423, IC434, M78, NGC6726, LBN550, LDN1251, Sh2-124, RCW29,
 	      RCW58, RCW89, VDB123, Vela supernova remnant
 	      from Manuel Peitsch, post-processing: Sun Shuwei
 	      https://manuel-astro.ch/
