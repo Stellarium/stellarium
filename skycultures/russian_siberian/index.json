@@ -1,0 +1,30 @@
+{
+  "id": "russian_siberian",
+  "region": "Northern Asia",
+  "classification": ["ethnographic"],
+  "fallback_to_international_names": false,
+  "thumbnail": "???",
+  "thumbnail_bscale": 2,
+  "highlight": "???",
+  "constellations": [
+    {
+      "id": "CON russian_siberian Elk",
+      "lines": [[67301, 65378, 62956, 59774, 58001, 53910, 54061, 59774]],
+      "common_name": {"english": "Elk", "native": "Лось"}
+    },
+    {
+      "id": "CON russian_siberian Kic",
+      "lines": [[26241, 26268, 26727, 26311, 25930]],
+      "common_name": {"english": "Threshers", "native": "Кичиги"}
+    },
+    {
+      "id": "CON russian_siberian DNe",
+      "lines": [[17499, 17489, 17531, 17579, 17664, 17851, 17847, 17608, 17499]],
+      "common_name": {"english": "Duck Nest", "native": "Утиное гнездо"}
+    }
+  ],
+  "common_names": {
+    "HIP 11767": [{"english": "Golden stake"}],
+    "NAME Venus": [{"english": "Night Star", "native": "Ночная звёздочка", "translators_comments": "Native name of Venus in Siberian culture"}]
+  }
+}

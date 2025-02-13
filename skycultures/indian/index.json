@@ -1,0 +1,557 @@
+{
+  "id": "indian",
+  "region": "Southern Asia",
+  "classification": ["traditional"],
+  "fallback_to_international_names": false,
+  "thumbnail": "???",
+  "thumbnail_bscale": 2,
+  "highlight": "???",
+  "asterisms": [
+  ],
+  "constellations": [
+    {
+      "id": "CON indian Aśv",
+      "lines": [[8832, 8903]],
+      "common_name": {"english": "With Horses", "native": "Aśvinī"}
+    },
+    {
+      "id": "CON indian Bhar",
+      "lines": [[12719, 13061, 13209]],
+      "common_name": {"english": "Bearer", "native": "Bharanī"}
+    },
+    {
+      "id": "CON indian Kṛt",
+      "lines": [[17851, 17847, 17702, 17608, 17499, 17531, 17573, 17579]],
+      "common_name": {"english": "Cutter", "native": "Kṛttikā"}
+    },
+    {
+      "id": "CON indian Roh",
+      "lines": [[21421, 21421]],
+      "common_name": {"english": "Climber", "native": "Rohiṇī"}
+    },
+    {
+      "id": "CON indian Mṛg",
+      "lines": [[26207, 26176, 26366]],
+      "image": {
+        "file": "illustrations/mRgashIrSha.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [344, 213], "hip": 25336},
+          {"pos": [255, 306], "hip": 26311},
+          {"pos": [278, 390], "hip": 24436}
+        ]
+      },
+      "common_name": {"english": "Deer's head", "native": "Mṛgaśiras"}
+    },
+    {
+      "id": "CON indian MṛVy",
+      "lines": [[33160, 34045, 33347, 32349, 33977, 34444, 35037, 35904], [33579, 33856, 34444], [33152, 31592, 31416], [31592, 30324], [31592, 32349], [33579, 32759], [30122, 33579], [33347, 33160], [33152, 33579]],
+      "image": {
+        "file": "illustrations/mRgavyAdha.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [112, 355], "hip": 33579},
+          {"pos": [167, 245], "hip": 34444},
+          {"pos": [417, 245], "hip": 32349}
+        ]
+      },
+      "common_name": {"english": "Deer Hunter", "native": "Mṛgavyādha"}
+    },
+    {
+      "id": "CON indian Inv",
+      "lines": [[26727, 26311, 25930]],
+      "image": {
+        "file": "illustrations/arrow.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [196, 213], "hip": 26727},
+          {"pos": [226, 213], "hip": 26311},
+          {"pos": [264, 205], "hip": 25930}
+        ]
+      },
+      "common_name": {"english": "Arrow", "native": "Invakā"}
+    },
+    {
+      "id": "CON indian Śara",
+      "lines": [[25044, 33646]],
+      "common_name": {"english": "Reed forest", "native": "Śaravaṇa"}
+    },
+    {
+      "id": "CON indian Ārd",
+      "lines": [[27989, 27989]],
+      "common_name": {"english": "Moist", "native": "Ārdrā"}
+    },
+    {
+      "id": "CON indian PVas",
+      "lines": [[36850, 37826]],
+      "common_name": {"english": "Wealth-restorer", "native": "Punarvasū"}
+    },
+    {
+      "id": "CON indian Puṣ",
+      "lines": [[42911, 41822]],
+      "common_name": {"english": "Nourisher", "native": "Puṣya"}
+    },
+    {
+      "id": "CON indian Aśl",
+      "lines": [[43109, 42313, 42402, 42799, 43234]],
+      "image": {
+        "file": "illustrations/hydra.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [26, 491], "hip": 64962},
+          {"pos": [111, 149], "hip": 55434},
+          {"pos": [401, 33], "hip": 43813}
+        ]
+      },
+      "common_name": {"english": "Embrace", "native": "Aśleṣa"}
+    },
+    {
+      "id": "CON indian Magh",
+      "lines": [[49669, 49669]],
+      "common_name": {"english": "Bountiful", "native": "Maghā"}
+    },
+    {
+      "id": "CON indian PPhā",
+      "lines": [[54872, 54879]],
+      "common_name": {"english": "Former Fruitful", "native": "Pūrva phālgunī"}
+    },
+    {
+      "id": "CON indian UPhā",
+      "lines": [[57632, 57565]],
+      "common_name": {"english": "Latter Fruitful", "native": "Uttara phālgunī"}
+    },
+    {
+      "id": "CON indian Hasta",
+      "lines": [[60965, 61359], [60965, 59803, 59316, 59199], [59316, 61359]],
+      "image": {
+        "file": "illustrations/hasta.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [306, 430], "hip": 60965},
+          {"pos": [93, 435], "hip": 59803},
+          {"pos": [312, 14], "hip": 61359}
+        ]
+      },
+      "common_name": {"english": "Hand", "native": "Hasta"}
+    },
+    {
+      "id": "CON indian Chitr",
+      "lines": [[65474, 65474]],
+      "common_name": {"english": "Spectacular", "native": "Chitrā"}
+    },
+    {
+      "id": "CON indian Svā",
+      "lines": [[69673, 69673]],
+      "common_name": {"english": "Self mover", "native": "Svātī"}
+    },
+    {
+      "id": "CON indian Viś",
+      "lines": [[76333, 74785, 72622], [74785, 74392]],
+      "image": {
+        "file": "illustrations/vishAkhA.png",
+        "size": [232, 218],
+        "anchors": [
+          {"pos": [101, 163], "hip": 72622},
+          {"pos": [14, 63], "hip": 73714},
+          {"pos": [193, 59], "hip": 74785}
+        ]
+      },
+      "common_name": {"english": "Well branched", "native": "Viśākhā"}
+    },
+    {
+      "id": "CON indian Anur",
+      "lines": [[78820, 78401, 78265]],
+      "common_name": {"english": "Following Rādhā", "native": "Anurādhā"}
+    },
+    {
+      "id": "CON indian Jyeṣ",
+      "lines": [[80112, 80763, 81266]],
+      "common_name": {"english": "Elder", "native": "Jyeṣṭhā"}
+    },
+    {
+      "id": "CON indian Mūl",
+      "lines": [[82396, 82545, 82729, 84143, 86228, 87073, 86670, 85927, 85696]],
+      "image": {
+        "file": "illustrations/mUlam.png",
+        "size": [271, 243],
+        "anchors": [
+          {"pos": [234, 32], "hip": 82396},
+          {"pos": [50, 94], "hip": 85927},
+          {"pos": [85, 216], "hip": 86228}
+        ]
+      },
+      "common_name": {"english": "Root", "native": "Mūla"}
+    },
+    {
+      "id": "CON indian PAṣ",
+      "lines": [[90185, 89931]],
+      "common_name": {"english": "Former invincible one", "native": "Pūrvāṣāḍhā"}
+    },
+    {
+      "id": "CON indian UAṣ",
+      "lines": [[92855, 93506]],
+      "common_name": {"english": "Latter invincible one", "native": "Uttarāṣāḍhā"}
+    },
+    {
+      "id": "CON indian PBhā",
+      "lines": [[113881, 113963]],
+      "image": {
+        "file": "illustrations/proShThapada.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [219, 52], "hip": 113881},
+          {"pos": [233, 379], "hip": 113963},
+          {"pos": [300, 108], "hip": 112748}
+        ]
+      },
+      "common_name": {"english": "The first of the blessed feet", "native": "Pūrva bhādrapada"}
+    },
+    {
+      "id": "CON indian UBhā",
+      "lines": [[1067, 667]],
+      "image": {
+        "file": "illustrations/proShThapada.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [219, 52], "hip": 667},
+          {"pos": [233, 379], "hip": 1067},
+          {"pos": [313, 130], "hip": 118131}
+        ]
+      },
+      "common_name": {"english": "The second of the blessed feet", "native": "Uttara bhādrapada"}
+    },
+    {
+      "id": "CON indian Abh",
+      "lines": [[91926, 91262, 91971]],
+      "common_name": {"english": "Victorious", "native": "Abhijit"}
+    },
+    {
+      "id": "CON indian Śra",
+      "lines": [[98036, 97649, 97278]],
+      "image": {
+        "file": "illustrations/shravaNa.png",
+        "size": [232, 218],
+        "anchors": [
+          {"pos": [130, 100], "hip": 97649},
+          {"pos": [130, 22], "hip": 97278},
+          {"pos": [140, 181], "hip": 98036}
+        ]
+      },
+      "common_name": {"english": "Ear", "native": "Śravaṇa"}
+    },
+    {
+      "id": "CON indian Dhani",
+      "lines": [[102281, 101958]],
+      "image": {
+        "file": "illustrations/dhaniShThA.png",
+        "size": [232, 218],
+        "anchors": [
+          {"pos": [32, 101], "hip": 102532},
+          {"pos": [108, 58], "hip": 101958},
+          {"pos": [153, 115], "hip": 101769}
+        ]
+      },
+      "common_name": {"english": "Wealthiest", "native": "Dhaniṣṭhā"}
+    },
+    {
+      "id": "CON indian Śata",
+      "lines": [[110395, 110395]],
+      "common_name": {"english": "Hundred cures", "native": "Śatabhiṣak"}
+    },
+    {
+      "id": "CON indian Rev",
+      "lines": [[5737, 5737]],
+      "common_name": {"english": "Leaper", "native": "Revatī"}
+    },
+    {
+      "id": "CON indian Meṣa",
+      "lines": [[13209, 9884, 8903, 9153, 9884], [13209, 13061], [13209, 13914, 14838], [13914, 10306, 9884], [10306, 8832]],
+      "image": {
+        "file": "illustrations/aries.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [12, 130], "hip": 13209},
+          {"pos": [58, 206], "hip": 13914},
+          {"pos": [210, 47], "hip": 8832}
+        ]
+      },
+      "common_name": {"english": "Aries", "native": "Meṣa Rāśi"}
+    },
+    {
+      "id": "CON indian Vṛṣa",
+      "lines": [[25428, 21881, 20889, 26451], [20205, 20455], [20205, 18724, 16369], [21421, 20889], [21421, 20894, 20205], [20889, 20648, 20455, 17847, 16369], [18907, 18724], [16369, 15900]],
+      "image": {
+        "file": "illustrations/taurus.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [13, 92], "hip": 26451},
+          {"pos": [399, 438], "hip": 15900},
+          {"pos": [382, 192], "hip": 17999}
+        ]
+      },
+      "common_name": {"english": "Taurus", "native": "Vṛṣa Rāśi"}
+    },
+    {
+      "id": "CON indian Mith",
+      "lines": [[31681, 34088, 35550, 35350, 32362], [35550, 36962, 37740], [36962, 37826], [36962, 36046, 34693, 36850], [34693, 33018], [34693, 32246, 30883], [32246, 30343, 29655, 28734]],
+      "image": {
+        "file": "illustrations/gemini.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [14, 81], "hip": 37740},
+          {"pos": [117, 252], "hip": 32362},
+          {"pos": [249, 165], "hip": 28734}
+        ]
+      },
+      "common_name": {"english": "Gemini", "native": "Mithuna Rāśi"}
+    },
+    {
+      "id": "CON indian Kark",
+      "lines": [[43103, 42806, 40843], [42806, 42911, 44066], [40526, 42911]],
+      "image": {
+        "file": "illustrations/cancer.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [29, 166], "hip": 44066},
+          {"pos": [101, 255], "hip": 40526},
+          {"pos": [206, 91], "hip": 40843}
+        ]
+      },
+      "common_name": {"english": "Cancer", "native": "Karkaṭa Rāśi"}
+    },
+    {
+      "id": "CON indian Simh",
+      "lines": [[55434, 55642, 54879, 49669, 49583, 50583, 54872, 57632], [50583, 50335, 48455, 47908], [54872, 54879], [49669, 47508]],
+      "image": {
+        "file": "illustrations/leo.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [69, 411], "hip": 57632},
+          {"pos": [383, 186], "hip": 49669},
+          {"pos": [321, 32], "hip": 47908}
+        ]
+      },
+      "common_name": {"english": "Leo", "native": "Simha Rāśi"}
+    },
+    {
+      "id": "CON indian Kany",
+      "lines": [[57380, 60030, 61941, 65474, 69427, 69701, 71957], [65474, 66249, 68520, 72220], [66249, 63090, 63608], [63090, 61941]],
+      "image": {
+        "file": "illustrations/virgo.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [65, 389], "hip": 72220},
+          {"pos": [454, 57], "hip": 57380},
+          {"pos": [338, 382], "hip": 65474}
+        ]
+      },
+      "common_name": {"english": "Virgo", "native": "Kanyā Rāśi"}
+    },
+    {
+      "id": "CON indian Tulā",
+      "lines": [[74785, 76333, 77853, 78207, 74785, 72622, 73714, 76600, 76470, 73714, 74392, 74785]],
+      "image": {
+        "file": "illustrations/libra.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [41, 27], "hip": 74785},
+          {"pos": [58, 170], "hip": 77853},
+          {"pos": [224, 107], "hip": 73714}
+        ]
+      },
+      "common_name": {"english": "Libra", "native": "Tulā Rāśi"}
+    },
+    {
+      "id": "CON indian Vṛśc",
+      "lines": [[80112, 80763, 81266], [78401, 80112, 80763, 81266, 82396, 82545, 82729, 84143, 86228, 87073, 86670, 85927, 85696], [80763, 78265], [80763, 78820]],
+      "image": {
+        "file": "illustrations/scorpius.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [447, 29], "hip": 78820},
+          {"pos": [62, 365], "hip": 85927},
+          {"pos": [217, 462], "hip": 82729}
+        ]
+      },
+      "common_name": {"english": "Scorpius", "native": "Vṛścikā Rāśi"}
+    },
+    {
+      "id": "CON indian Dhan",
+      "lines": [[94141, 93683, 93085], [93683, 93864, 92855], [93864, 93506], [89931, 93506], [92855, 92041, 89931, 88635], [89642, 90185, 89931, 90496, 89341], [93864, 95168, 98162, 93864], [98162, 98688]],
+      "image": {
+        "file": "illustrations/sagittarius.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [96, 82], "hip": 95168},
+          {"pos": [307, 492], "hip": 95294},
+          {"pos": [506, 100], "hip": 87072}
+        ]
+      },
+      "common_name": {"english": "Bow", "native": "Dhanur Rāśi"}
+    },
+    {
+      "id": "CON indian Makr",
+      "lines": [[100064, 100345, 104139, 105515, 106985, 107556], [105515, 105881, 104139], [100345, 102485], [104139, 102978]],
+      "image": {
+        "file": "illustrations/makara.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [15, 436], "hip": 107556},
+          {"pos": [403, 7], "hip": 100064},
+          {"pos": [460, 438], "hip": 102978}
+        ]
+      },
+      "common_name": {"english": "Crocodile", "native": "Makara Rāśi"}
+    },
+    {
+      "id": "CON indian Kumbh",
+      "lines": [[113136, 112716, 112961, 111497, 110960, 110395, 109074, 106278, 102618], [106278, 104459], [106278, 109139], [110003, 109074], [110003, 110395]],
+      "image": {
+        "file": "illustrations/aquarius.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [144, 464], "hip": 115438},
+          {"pos": [179, 98], "hip": 109074},
+          {"pos": [465, 49], "hip": 102618}
+        ]
+      },
+      "common_name": {"english": "Aquarius", "native": "Kumbha Rāśi"}
+    },
+    {
+      "id": "CON indian Mīna",
+      "lines": [[4889, 5742], [4889, 6193, 5742, 7097, 8198, 9487, 8833, 7884, 7007, 4906, 3760, 1645, 118268, 116771, 116928, 115738, 114971, 115830, 116771]],
+      "image": {
+        "file": "illustrations/pisces.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [24, 104], "hip": 4889},
+          {"pos": [111, 489], "hip": 9487},
+          {"pos": [481, 155], "hip": 114971}
+        ]
+      },
+      "common_name": {"english": "Pisces", "native": "Mīna Rāśi"}
+    },
+    {
+      "id": "CON indian C01",
+      "lines": [[26727, 26311, 25930], [29038, 27913], [28614, 27989, 26727, 27366], [24436, 24674, 25281, 25930, 25336, 26207, 27989], [25336, 22449, 22549, 22730, 23123], [22449, 22509, 22845], [29038, 28614], [30419, 29038], [26727, 26549, 26237, 26241]],
+      "common_name": {"english": ""}
+    },
+    {
+      "id": "CON indian Shim",
+      "lines": [[87585, 87833, 85670, 85829, 87585, 94376, 97433, 94648, 89937, 83895, 80331, 78527, 75458, 68756, 61281, 56211]],
+      "image": {
+        "file": "illustrations/shimshumAra.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [207, 15], "hip": 94376},
+          {"pos": [66, 22], "hip": 87833},
+          {"pos": [92, 116], "hip": 78527}
+        ]
+      },
+      "common_name": {"english": "Dolphin", "native": "Shiṁśumāra"}
+    },
+    {
+      "id": "CON indian R̥kṣa",
+      "lines": [[67301, 65378, 62956, 59774, 54061, 53910, 58001, 59774], [58001, 57399, 54539, 50372], [54539, 50801], [53910, 48402, 46853, 44471], [46853, 44127], [48402, 48319, 41704, 46733, 54061]],
+      "image": {
+        "file": "illustrations/ursa-major.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [26, 75], "hip": 67301},
+          {"pos": [452, 272], "hip": 41704},
+          {"pos": [258, 394], "hip": 50372}
+        ]
+      },
+      "common_name": {"english": "Ursa Major", "native": "R̥kṣa"}
+    },
+    {
+      "id": "CON indian Sapt",
+      "lines": [[54061, 53910, 58001, 59774, 62956, 65378, 67301]],
+      "common_name": {"english": "7 Sages", "native": "Saptarṣi"}
+    },
+    {
+      "id": "CON indian Sāra",
+      "lines": [[28380, 28360, 24608, 23453, 23015], [25428, 23015], [25428, 28380]],
+      "image": {
+        "file": "illustrations/sArathi.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [196, 189], "hip": 28380},
+          {"pos": [419, 208], "hip": 24608},
+          {"pos": [290, 423], "hip": 23015}
+        ]
+      },
+      "common_name": {"english": "Charioteer", "native": "Sārathi"}
+    },
+    {
+      "id": "CON indian Tri",
+      "lines": [[61084, 60718], [62434, 59747]],
+      "image": {
+        "file": "illustrations/trishanku.png",
+        "size": [128, 128],
+        "anchors": [
+          {"pos": [112, 21], "hip": 61084},
+          {"pos": [42, 20], "hip": 62434},
+          {"pos": [21, 106], "hip": 60718}
+        ]
+      },
+      "common_name": {"english": "King Trishanku", "native": "Trishanku"}
+    },
+    {
+      "id": "CON indian Yam",
+      "lines": [[7588, 9007, 10602, 11407, 12413, 12486, 13847, 15510, 17797, 17874, 20042, 20535, 21393, 17651, 16611, 15474, 14146, 12843, 13701, 15197, 16537, 17378, 21444, 22109, 22701, 23875, 23972, 21594]],
+      "image": {
+        "file": "illustrations/eridanus.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [41, 95], "hip": 22109},
+          {"pos": [296, 44], "hip": 13701},
+          {"pos": [493, 490], "hip": 7588}
+        ]
+      },
+      "common_name": {"english": "River Yamunā", "native": "Yamunā"}
+    }
+  ],
+  "common_names": {
+    "HIP 746": [{"english": "Jamadagni", "translators_comments": "A great sage (Caph)"}],
+    "HIP 5737": [{"english": "Revatī"}],
+    "HIP 11767": [{"english": "Dhruva", "translators_comments": "A hero. Literally: Steadfast one.\nFixed (Pole star)"}],
+    "HIP 21421": [{"english": "Rohiṇī", "translators_comments": "Red (Aldebaran)"}],
+    "HIP 24436": [{"english": "Vānrājā", "translators_comments": "Monarch (Rigel)"}],
+    "HIP 24608": [{"english": "Bramha-hṛdaya", "translators_comments": "Heart of the Creator (Capella)"}],
+    "HIP 25336": [{"english": "Kārtikeya", "translators_comments": "Son of lord Shiva (Bellatrix)"}],
+    "HIP 25428": [{"english": "Agni", "translators_comments": "Fire (Elnath)"}],
+    "HIP 25930": [{"english": "Chitralekhā", "translators_comments": "As beautiful as a picture (Mintaka)"}],
+    "HIP 26311": [{"english": "Aniruddha", "translators_comments": "Unbounded (Alnilam)"}],
+    "HIP 26727": [{"english": "Uṣā", "translators_comments": "Dawn (Alnitak)"}],
+    "HIP 27366": [{"english": "Kārtavīrya"}],
+    "HIP 27989": [{"english": "Ārdrā", "translators_comments": "Moist (Betelgeuse)"}],
+    "HIP 30438": [{"english": "Agastya", "translators_comments": "A great sage who went south (Canopus)"}],
+    "HIP 31681": [{"english": "Anala", "translators_comments": "Fire (Alhena)"}],
+    "HIP 32349": [{"english": "Lubdhaka", "translators_comments": "Hunter (Sirius)"}],
+    "HIP 36850": [{"english": "Aditi", "translators_comments": "Mother of gods (Castor)"}],
+    "HIP 37826": [{"english": "Diti", "translators_comments": "Mother of demons (Pollux)"}],
+    "HIP 49669": [{"english": "Maghā", "translators_comments": "Bountiful one (Regulus)"}],
+    "HIP 53910": [{"english": "Pulaha", "translators_comments": "One of the seven sages (Merak)"}],
+    "HIP 54061": [{"english": "Kratu", "translators_comments": "One of the seven sages (Dubhe)"}],
+    "HIP 58001": [{"english": "Pulasta", "translators_comments": "One of the seven sages (Phecda)"}],
+    "HIP 59774": [{"english": "Atri", "translators_comments": "One of the seven sages (Megrez)"}],
+    "HIP 62956": [{"english": "Angirā", "translators_comments": "One of the seven sages (Alioth)"}],
+    "HIP 65378": [{"english": "Vaśisṭha", "translators_comments": "One of the seven sages (Mizar)"}],
+    "HIP 65474": [{"english": "Chitrā", "translators_comments": "Spectacular (Spica)"}],
+    "HIP 65477": [{"english": "Arundhati", "translators_comments": "Wife of Vasisṭha, a great sage (Alcor)"}],
+    "HIP 67301": [{"english": "Mārīchi", "translators_comments": "One of the seven sages (Alkaid)"}],
+    "HIP 69673": [{"english": "Svāti", "translators_comments": "Honest one (Arcturus)"}],
+    "HIP 80763": [{"english": "jyeṣṭhā", "translators_comments": "Eldest (Antares)"}],
+    "HIP 91262": [{"english": "Abhijit", "translators_comments": "Invincible (Vega)"}],
+    "HIP 97649": [{"english": "Śravaṇa", "translators_comments": "To hear or Ear (Altair)"}],
+    "HIP 110395": [{"english": "Śatabhiṣak"}],
+    "NAME Jupiter": [{"english": "Mentor", "native": "Guru", "translators_comments": "Native name for Jupiter"}],
+    "NAME Mars": [{"english": "Auspicious one", "native": "Maṇgala", "translators_comments": "Native name for Mars"}],
+    "NAME Mercury": [{"english": "Wise one", "native": "Budha", "translators_comments": "Native name for Mercury"}],
+    "NAME Moon": [{"english": "Delighter", "native": "Candra", "translators_comments": "Native name for the Moon"}],
+    "NAME Saturn": [{"english": "Slow mover", "native": "Śani", "translators_comments": "Native name for Saturn"}],
+    "NAME Sun": [{"english": "Vigorous", "native": "Sūrya", "translators_comments": "Native name for the Sun"}],
+    "NAME Venus": [{"english": "Bright one", "native": "Śukra", "translators_comments": "Native name for Venus"}]
+  }
+}

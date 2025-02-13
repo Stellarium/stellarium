@@ -1,0 +1,81 @@
+{
+  "id": "aztec",
+  "region": "Central America",
+  "classification": ["historical"],
+  "fallback_to_international_names": false,
+  "thumbnail": "???",
+  "thumbnail_bscale": 2,
+  "highlight": "???",
+  "constellations": [
+    {
+      "id": "CON aztec 001",
+      "lines": [[26727, 26311, 25930], [26311, 26237, 26221, 26199]],
+      "image": {
+        "file": "illustrations/mamalhuaztli.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [150, 262], "hip": 26311},
+          {"pos": [124, 174], "hip": 25930},
+          {"pos": [438, 368], "hip": 26199}
+        ]
+      },
+      "common_name": {"english": "Mamalhuaztli (The New fire)", "native": "Mamalhuaztli"}
+    },
+    {
+      "id": "CON aztec 002",
+      "lines": [[17847, 17664, 17579, 17531, 17489, 17499, 17608, 17847]],
+      "image": {
+        "file": "illustrations/tianquiztli.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [160, 160], "hip": 17579},
+          {"pos": [276, 118], "hip": 17499},
+          {"pos": [342, 402], "hip": 17847}
+        ]
+      },
+      "common_name": {"english": "Tianquiztli  (The Market)", "native": "Tianquiztli"}
+    },
+    {
+      "id": "CON aztec 003",
+      "lines": [[37826, 36850, 34693, 32246, 30343, 30883, 31681, 34088, 36962, 37826]],
+      "image": {
+        "file": "illustrations/citlaltlachtli.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [144, 331], "hip": 37826},
+          {"pos": [133, 201], "hip": 36850},
+          {"pos": [396, 182], "hip": 30343}
+        ]
+      },
+      "common_name": {"english": "Citlaltlachtli (The ball game of the stars)", "native": "Citlaltlachtli"}
+    },
+    {
+      "id": "CON aztec 004",
+      "lines": [[11767, 85822, 82080, 77055, 72607, 75097, 79822]],
+      "image": {
+        "file": "illustrations/xonecuilli_crop.png",
+        "size": [256, 512],
+        "anchors": [
+          {"pos": [102, 41], "hip": 11767},
+          {"pos": [106, 414], "hip": 79822},
+          {"pos": [198, 374], "hip": 72607}
+        ]
+      },
+      "common_name": {"english": "Xonecuilli (Twisted foot)", "native": "Xonecuilli"}
+    },
+    {
+      "id": "CON aztec 005",
+      "lines": [[85927, 86670, 87073, 86228, 84143, 82671, 82514, 82396, 81266, 80763, 78401], [80763, 78265], [80763, 78820]],
+      "image": {
+        "file": "illustrations/colotlixayac.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [82, 185], "hip": 87073},
+          {"pos": [64, 308], "hip": 82729},
+          {"pos": [310, 255], "hip": 81266}
+        ]
+      },
+      "common_name": {"english": "Colotl Ixayac (Scorpion face)", "native": "Colotl Ixayac"}
+    }
+  ]
+}

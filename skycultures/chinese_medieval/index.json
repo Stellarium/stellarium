@@ -1,0 +1,2251 @@
+{
+  "id": "chinese_medieval",
+  "region": "Eastern Asia",
+  "classification": ["historical"],
+  "fallback_to_international_names": false,
+  "thumbnail": "???",
+  "thumbnail_bscale": 2,
+  "highlight": "???",
+  "constellations": [
+    {
+      "id": "CON chinese_medieval P01",
+      "lines": [[75097, 72607, 70692, 69112, 62572]],
+      "common_name": {"english": "Northern Pole", "native": "Bei Ji"}
+    },
+    {
+      "id": "CON chinese_medieval P02",
+      "lines": [[72573, 59767, 51384, 56253]],
+      "common_name": {"english": "Four Advisors", "native": "Si Fu"}
+    },
+    {
+      "id": "CON chinese_medieval P03",
+      "lines": [[67627, 67627]],
+      "common_name": {"english": "Celestial Great One", "native": "Tian Yi"}
+    },
+    {
+      "id": "CON chinese_medieval P04",
+      "lines": [[66798, 66798]],
+      "common_name": {"english": "First Great One", "native": "Tai Yi"}
+    },
+    {
+      "id": "CON chinese_medieval P05",
+      "lines": [[75458, 78527, 80331, 83895, 89908, 99255, 111056, 6522]],
+      "common_name": {"english": "Purple Forbidden East Wall", "native": "Zi Wei Zuo Yuan"}
+    },
+    {
+      "id": "CON chinese_medieval P06",
+      "lines": [[68756, 61281, 56211, 46977, 33827, 24254, 14862]],
+      "common_name": {"english": "Purple Forbidden West Wall", "native": "Zi Wei You Yuan"}
+    },
+    {
+      "id": "CON chinese_medieval P07",
+      "lines": [[74605, 73199]],
+      "common_name": {"english": "Hidden Virtue", "native": "Yin De"}
+    },
+    {
+      "id": "CON chinese_medieval P08",
+      "lines": [[78893, 80161, 80650, 80682, 79414, 78893]],
+      "common_name": {"english": "Royal Secretary", "native": "Shang Shu"}
+    },
+    {
+      "id": "CON chinese_medieval P09",
+      "lines": [[86614, 86614]],
+      "common_name": {"english": "Female Protocol", "native": "Nü Shi"}
+    },
+    {
+      "id": "CON chinese_medieval P10",
+      "lines": [[89937, 89937]],
+      "common_name": {"english": "Official of Royal Archives", "native": "Zhu Shi"}
+    },
+    {
+      "id": "CON chinese_medieval P11",
+      "lines": [[87234, 92112, 94083, 90647]],
+      "common_name": {"english": "Maids-in-waiting", "native": "Yu Nü"}
+    },
+    {
+      "id": "CON chinese_medieval P12",
+      "lines": [[100965, 101082, 102599, 104756, 102208, 100965]],
+      "common_name": {"english": "Celestial Pillar", "native": "Tian Zhu"}
+    },
+    {
+      "id": "CON chinese_medieval P13",
+      "lines": [[77277, 75974]],
+      "common_name": {"english": "Chief Judge", "native": "Da Li"}
+    },
+    {
+      "id": "CON chinese_medieval P14",
+      "lines": [[112833, 5372, 11767, 85822, 82080, 77055]],
+      "common_name": {"english": "Curved Array", "native": "Gou Chen"}
+    },
+    {
+      "id": "CON chinese_medieval P15",
+      "lines": [[10054, 10623, 4283, 3132, 2142, 5626, 10054]],
+      "common_name": {"english": "Six Jia", "native": "Liu Jia"}
+    },
+    {
+      "id": "CON chinese_medieval P16",
+      "lines": [[115746, 115746]],
+      "common_name": {"english": "Great Emperor of Heaven", "native": "Tian Huang Da Di"}
+    },
+    {
+      "id": "CON chinese_medieval P17",
+      "lines": [[112519, 113116], [112519, 108456], [112519, 118027], [112519, 110724]],
+      "common_name": {"english": "Interior Seats of the Five Emperors", "native": "Wu Di Nei Zuo"}
+    },
+    {
+      "id": "CON chinese_medieval P18",
+      "lines": [[9480, 13367, 12821, 11569, 9009, 8016, 7650]],
+      "common_name": {"english": "Canopy of the Emperor", "native": "Hua Gai"}
+    },
+    {
+      "id": "CON chinese_medieval P19",
+      "lines": [[19461, 14844, 13055, 10309, 9568, 9727, 9763, 9586, 9598]],
+      "common_name": {"english": "Canopy Support (Vassal of Canopy of the Emperor)", "native": "Gang"}
+    },
+    {
+      "id": "CON chinese_medieval P20",
+      "lines": [[20266, 19177, 17884, 15890, 8362, 6312, 5566, 4572, 3951]],
+      "common_name": {"english": "Guest House", "native": "Chuan She"}
+    },
+    {
+      "id": "CON chinese_medieval P21",
+      "lines": [[44390, 37949, 36528], [42527, 40215, 36211]],
+      "common_name": {"english": "Inner Steps", "native": "Nei Jie"}
+    },
+    {
+      "id": "CON chinese_medieval P22",
+      "lines": [[97433, 95081, 90344], [91315, 94376, 98702]],
+      "common_name": {"english": "Celestial Kitchen", "native": "Tian Chu"}
+    },
+    {
+      "id": "CON chinese_medieval P23",
+      "lines": [[23522, 21601, 20376, 21452, 22783, 24017, 22626, 24914]],
+      "common_name": {"english": "Eight Kinds of Crops", "native": "Ba Gu"}
+    },
+    {
+      "id": "CON chinese_medieval P24",
+      "lines": [[87585, 85829, 85670, 87833, 86414]],
+      "common_name": {"english": "Celestial Flail", "native": "Tian Bang"}
+    },
+    {
+      "id": "CON chinese_medieval P25",
+      "lines": [[73507, 71040, 70952], [72664, 71876, 68184]],
+      "common_name": {"english": "Celestial Bed", "native": "Tian Chuang"}
+    },
+    {
+      "id": "CON chinese_medieval P26",
+      "lines": [[62423, 63076]],
+      "common_name": {"english": "Inner Kitchen", "native": "Nei Chu"}
+    },
+    {
+      "id": "CON chinese_medieval P27",
+      "lines": [[46733, 48319, 48402, 46853, 44901, 44504]],
+      "common_name": {"english": "Administrative Center", "native": "Wen Chang"}
+    },
+    {
+      "id": "CON chinese_medieval P28",
+      "lines": [[52353, 50933, 51448]],
+      "common_name": {"english": "Three Top Instructors", "native": "San Shi"}
+    },
+    {
+      "id": "CON chinese_medieval P29",
+      "lines": [[54539, 54539]],
+      "common_name": {"english": "Royals", "native": "Tai Zun"}
+    },
+    {
+      "id": "CON chinese_medieval P30",
+      "lines": [[51814, 51459, 52136, 53261, 53043, 52478, 51814]],
+      "common_name": {"english": "Celestial Prison", "native": "Tian Lao"}
+    },
+    {
+      "id": "CON chinese_medieval P31",
+      "lines": [[57399, 57399]],
+      "common_name": {"english": "Guard of the Sun", "native": "Tai Yang Shou"}
+    },
+    {
+      "id": "CON chinese_medieval P32",
+      "lines": [[57045, 55797, 54765, 56510, 57045]],
+      "common_name": {"english": "Eunuch", "native": "Shi"}
+    },
+    {
+      "id": "CON chinese_medieval P33",
+      "lines": [[60988, 60988]],
+      "common_name": {"english": "Prime Minister", "native": "Xiang"}
+    },
+    {
+      "id": "CON chinese_medieval P34",
+      "lines": [[66234, 64906, 65550]],
+      "common_name": {"english": "Three Excellencies (In Purple Forbidden Enclosure)", "native": "San gong(Zi Wei Yuan)"}
+    },
+    {
+      "id": "CON chinese_medieval P35",
+      "lines": [[69732, 69732]],
+      "common_name": {"english": "Sombre Lance", "native": "Xuan Ge"}
+    },
+    {
+      "id": "CON chinese_medieval P36",
+      "lines": [[57477, 56083, 56944, 58181, 57477]],
+      "common_name": {"english": "Judge for Nobility", "native": "Tian Li"}
+    },
+    {
+      "id": "CON chinese_medieval P37",
+      "lines": [[54061, 53910, 58001, 59774, 62956, 65378, 67301]],
+      "common_name": {"english": "Northern Dipper", "native": "Bei Dou"}
+    },
+    {
+      "id": "CON chinese_medieval P38",
+      "lines": [[65477, 65477]],
+      "common_name": {"english": "Assistant (Vassal of Northern Dipper)", "native": "Fu"}
+    },
+    {
+      "id": "CON chinese_medieval P39",
+      "lines": [[70497, 69713, 69483]],
+      "common_name": {"english": "Celestial Spear", "native": "Tian Qiang"}
+    },
+    {
+      "id": "CON chinese_medieval S01",
+      "lines": [[60129, 61941, 63090, 63608, 64241]],
+      "common_name": {"english": "Supreme Palace East Wall", "native": "Tai Wei Zuo Yuan"}
+    },
+    {
+      "id": "CON chinese_medieval S02",
+      "lines": [[57757, 55434, 55642, 54879, 54872]],
+      "common_name": {"english": "Supreme Palace West Wall", "native": "Tai Wei You Yuan"}
+    },
+    {
+      "id": "CON chinese_medieval S03",
+      "lines": [[60172, 60172]],
+      "common_name": {"english": "Usher to the Court", "native": "Ye Zhe"}
+    },
+    {
+      "id": "CON chinese_medieval S04",
+      "lines": [[60353, 61103, 61658]],
+      "common_name": {"english": "Three Excellencies (In Supreme Palace Enclosure)", "native": "San Gong(Tai Wei Yuan)"}
+    },
+    {
+      "id": "CON chinese_medieval S05",
+      "lines": [[62541, 62394, 61960]],
+      "common_name": {"english": "Nine Senior Officers", "native": "Jiu Qing"}
+    },
+    {
+      "id": "CON chinese_medieval S06",
+      "lines": [[62886, 61724, 60957, 60202, 59819]],
+      "common_name": {"english": "Five Lords", "native": "Wu Zhu Hou(Tai Wei Yuan)"}
+    },
+    {
+      "id": "CON chinese_medieval S07",
+      "lines": [[57328, 57380, 58590, 58948]],
+      "common_name": {"english": "Inner Screen", "native": "Nei Ping"}
+    },
+    {
+      "id": "CON chinese_medieval S08",
+      "lines": [[58159, 57632, 57320], [57646, 57632, 57779]],
+      "common_name": {"english": "Seats of the Five Emperors", "native": "Wu Di Zuo"}
+    },
+    {
+      "id": "CON chinese_medieval S09",
+      "lines": [[58858, 58858]],
+      "common_name": {"english": "Officer of Honour", "native": "Xing Chen"}
+    },
+    {
+      "id": "CON chinese_medieval S10",
+      "lines": [[57565, 57565]],
+      "common_name": {"english": "Crown Prince", "native": "Tai Zi"}
+    },
+    {
+      "id": "CON chinese_medieval S11",
+      "lines": [[56975, 56975]],
+      "common_name": {"english": "Retinue (In Supreme Palace Enclosure)", "native": "Cong Guan(Tai Wei Yuan)"}
+    },
+    {
+      "id": "CON chinese_medieval S12",
+      "lines": [[63121, 63121]],
+      "common_name": {"english": "Captain of the Bodyguards", "native": "Lang Jiang"}
+    },
+    {
+      "id": "CON chinese_medieval S13",
+      "lines": [[54951, 54951]],
+      "common_name": {"english": "Emperor's Bodyguard", "native": "Hu Ben"}
+    },
+    {
+      "id": "CON chinese_medieval S14",
+      "lines": [[59856, 58386, 58460, 58654, 57670, 56997, 56410]],
+      "common_name": {"english": "Royal Guards", "native": "Chang Chen"}
+    },
+    {
+      "id": "CON chinese_medieval S15",
+      "lines": [[60018, 60742], [60018, 59923, 60742, 60697, 60098, 59489, 59923], [60880, 60746, 60170, 59364, 59489], [60697, 60746], [60880, 60904, 60514, 60351, 60168, 59468, 59364]],
+      "common_name": {"english": "Officers of the Imperial Guard", "native": "Lang Wei"}
+    },
+    {
+      "id": "CON chinese_medieval S16",
+      "lines": [[56647, 56127, 55084]],
+      "common_name": {"english": "The Hall of Glory", "native": "Ming Tang"}
+    },
+    {
+      "id": "CON chinese_medieval S17",
+      "lines": [[54863, 54182, 53824]],
+      "common_name": {"english": "Astronomical Observatory", "native": "Ling Tai"}
+    },
+    {
+      "id": "CON chinese_medieval S18",
+      "lines": [[52638, 52959, 53417, 53954]],
+      "common_name": {"english": "Junior Officers", "native": "Shao Wei"}
+    },
+    {
+      "id": "CON chinese_medieval S19",
+      "lines": [[52457, 52686, 52689, 52911]],
+      "common_name": {"english": "Long Wall", "native": "Chang Yuan"}
+    },
+    {
+      "id": "CON chinese_medieval S20",
+      "lines": [[44127, 44471]],
+      "common_name": {"english": "Three Steps (Upper Step)", "native": "San Tai"}
+    },
+    {
+      "id": "CON chinese_medieval S21",
+      "lines": [[50372, 50801]],
+      "common_name": {"english": "Three Steps (Middle Step)", "native": "San Tai"}
+    },
+    {
+      "id": "CON chinese_medieval S22",
+      "lines": [[55219, 55203]],
+      "common_name": {"english": "Three Steps (Lower Step)", "native": "San Tai"}
+    },
+    {
+      "id": "CON chinese_medieval S23",
+      "lines": [[44127, 44471, 50372, 50801, 55219, 55203]],
+      "common_name": {"english": ""}
+    },
+    {
+      "id": "CON chinese_medieval H01",
+      "lines": [[84379, 85693, 86974, 88794, 92043, 93747, 92946, 89962, 88048, 86263, 84012]],
+      "common_name": {"english": "Heavenly Market East Wall", "native": "Tian Shi Zuo Yuan"}
+    },
+    {
+      "id": "CON chinese_medieval H02",
+      "lines": [[80816, 80170, 79043, 78072, 77233, 76276, 77070, 77622, 79593, 79882, 81377]],
+      "common_name": {"english": "Heavenly Market West Wall", "native": "Tian Shi You Yuan"}
+    },
+    {
+      "id": "CON chinese_medieval H03",
+      "lines": [[85474, 86284, 86768, 85922, 85365, 84524, 85474]],
+      "common_name": {"english": "Municipal Office", "native": "Shi Lou"}
+    },
+    {
+      "id": "CON chinese_medieval H04",
+      "lines": [[82979, 82369]],
+      "common_name": {"english": "Commodity Market", "native": "Che Si"}
+    },
+    {
+      "id": "CON chinese_medieval H05",
+      "lines": [[86742, 87108]],
+      "common_name": {"english": "Official for the Royal Clan", "native": "Zong Zheng"}
+    },
+    {
+      "id": "CON chinese_medieval H06",
+      "lines": [[88601, 88192], [88290, 88601, 88149]],
+      "common_name": {"english": "Official of Religious Ceremonies", "native": "Zong Ren"}
+    },
+    {
+      "id": "CON chinese_medieval H07",
+      "lines": [[88765, 88771]],
+      "common_name": {"english": "Patriarchal Clan", "native": "Zong"}
+    },
+    {
+      "id": "CON chinese_medieval H08",
+      "lines": [[88899, 88331]],
+      "common_name": {"english": "Textile Ruler", "native": "Bo Du"}
+    },
+    {
+      "id": "CON chinese_medieval H09",
+      "lines": [[88886, 88267]],
+      "common_name": {"english": "Butcher's Shops", "native": "Tu Si"}
+    },
+    {
+      "id": "CON chinese_medieval H10",
+      "lines": [[86032, 86032]],
+      "common_name": {"english": "Astrologer", "native": "Hou"}
+    },
+    {
+      "id": "CON chinese_medieval H11",
+      "lines": [[84345, 84345]],
+      "common_name": {"english": "Emperor's Seat", "native": "Di Zuo"}
+    },
+    {
+      "id": "CON chinese_medieval H12",
+      "lines": [[82802, 83430, 83504, 83613]],
+      "common_name": {"english": "Eunuch Official", "native": "Huan Zhe"}
+    },
+    {
+      "id": "CON chinese_medieval H13",
+      "lines": [[80179, 80883]],
+      "common_name": {"english": "Jewel Market", "native": "Lie Si"}
+    },
+    {
+      "id": "CON chinese_medieval H14",
+      "lines": [[83000, 82673, 82073, 82402, 82216]],
+      "common_name": {"english": "Dipper for Liquids", "native": "Dou"}
+    },
+    {
+      "id": "CON chinese_medieval H15",
+      "lines": [[81641, 82037, 84500, 85355]],
+      "common_name": {"english": "Dipper for Solids", "native": "Hu"}
+    },
+    {
+      "id": "CON chinese_medieval H16",
+      "lines": [[77655, 76127, 75695, 76267, 76952, 77512, 78159, 78493, 78459, 77655]],
+      "common_name": {"english": "Coiled Thong", "native": "Guan Suo"}
+    },
+    {
+      "id": "CON chinese_medieval H17",
+      "lines": [[83947, 81833, 80460, 78012, 75411, 73555, 71075]],
+      "common_name": {"english": "Seven Excellencies", "native": "Qi Gong"}
+    },
+    {
+      "id": "CON chinese_medieval H18",
+      "lines": [[87563, 87808, 85382, 84862, 83313, 83207, 81693, 80197, 80181]],
+      "common_name": {"english": "Celestial Discipline", "native": "Tian Ji"}
+    },
+    {
+      "id": "CON chinese_medieval H19",
+      "lines": [[84380, 84606, 85112]],
+      "common_name": {"english": "Woman's Bed", "native": "Nü Chuang"}
+    },
+    {
+      "id": "CON chinese_medieval 01A",
+      "lines": [[65474, 66249]],
+      "common_name": {"english": "Horn", "native": "Jiao Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 01B",
+      "lines": [[65323, 66006]],
+      "common_name": {"english": "Flat Road", "native": "Ping Dao"}
+    },
+    {
+      "id": "CON chinese_medieval 01C",
+      "lines": [[66936, 66200]],
+      "common_name": {"english": "Celestial Farmland (In Horn Mansion)", "native": "Tian Tian(Jiao Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 01D",
+      "lines": [[64238, 64238]],
+      "common_name": {"english": "Recommending Virtuous Men", "native": "Jin Xian"}
+    },
+    {
+      "id": "CON chinese_medieval 01E",
+      "lines": [[67480, 66763, 66727]],
+      "common_name": {"english": "Tripod of the Zhou", "native": "Zhou Ding"}
+    },
+    {
+      "id": "CON chinese_medieval 01F",
+      "lines": [[66015, 64924]],
+      "common_name": {"english": "Celestial Gate", "native": "Tian Men"}
+    },
+    {
+      "id": "CON chinese_medieval 01G",
+      "lines": [[66400, 64962]],
+      "common_name": {"english": "Judging", "native": "Ping"}
+    },
+    {
+      "id": "CON chinese_medieval 01H",
+      "lines": [[68282, 71352, 68933, 67457, 65109, 64408, 63972, 64332, 64557, 64348]],
+      "common_name": {"english": "Arsenal", "native": "Ku Lou"}
+    },
+    {
+      "id": "CON chinese_medieval 01I",
+      "lines": [[67464, 67472], [68245, 68862, 67464]],
+      "common_name": {"english": "Railings", "native": "Heng"}
+    },
+    {
+      "id": "CON chinese_medieval 01J",
+      "lines": [[64004, 66657]],
+      "common_name": {"english": "Southern Gate", "native": "Nan Men"}
+    },
+    {
+      "id": "CON chinese_medieval 01K",
+      "lines": [[71860, 71536, 70931]],
+      "common_name": {"english": "Pillars (In Horn Mansion)", "native": "Zhu(Jiao Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 01L",
+      "lines": [[70574, 70104, 69996]],
+      "common_name": {"english": "Pillars (In Horn Mansion)", "native": "Zhu(Jiao Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 01M",
+      "lines": [[68523, 68002, 67663]],
+      "common_name": {"english": "Pillars (In Horn Mansion)", "native": "Zhu(Jiao Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 01N",
+      "lines": [[70300, 70090, 68493]],
+      "common_name": {"english": "Pillars (In Horn Mansion)", "native": "Zhu(Jiao Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 01O",
+      "lines": [[65936, 65535, 65593]],
+      "common_name": {"english": "Pillars (In Horn Mansion)", "native": "Zhu(Jiao Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 02A",
+      "lines": [[69427, 69701, 70755], [69427, 69974]],
+      "common_name": {"english": "Neck", "native": "Kang Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 02B",
+      "lines": [[69673, 69673]],
+      "common_name": {"english": "Great Horn", "native": "Da Jiao"}
+    },
+    {
+      "id": "CON chinese_medieval 02C",
+      "lines": [[71295, 70518, 69929, 69658, 69269, 68763, 67057]],
+      "common_name": {"english": "Executions", "native": "Zhe Wei"}
+    },
+    {
+      "id": "CON chinese_medieval 02D",
+      "lines": [[72125, 71762, 71795]],
+      "common_name": {"english": "Left Conductor", "native": "Zuo She Ti"}
+    },
+    {
+      "id": "CON chinese_medieval 02E",
+      "lines": [[67927, 67275, 67459]],
+      "common_name": {"english": "Right Conductor", "native": "You She Ti"}
+    },
+    {
+      "id": "CON chinese_medieval 02F",
+      "lines": [[70469, 70306]],
+      "common_name": {"english": "Trials", "native": "Dun Wan"}
+    },
+    {
+      "id": "CON chinese_medieval 02G",
+      "lines": [[69415, 68895]],
+      "common_name": {"english": "Gate of Yang", "native": "Yang Men"}
+    },
+    {
+      "id": "CON chinese_medieval 03A",
+      "lines": [[72622, 74392, 76333, 74785]],
+      "common_name": {"english": "Root", "native": "Di Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 03B",
+      "lines": [[77516, 77516]],
+      "common_name": {"english": "Celestial Milk", "native": "Tian Ru"}
+    },
+    {
+      "id": "CON chinese_medieval 03C",
+      "lines": [[69879, 69879]],
+      "common_name": {"english": "Twinkling Indicator", "native": "Zhao Yao"}
+    },
+    {
+      "id": "CON chinese_medieval 03D",
+      "lines": [[72105, 71284, 71053]],
+      "common_name": {"english": "Celestial Lance", "native": "Geng He"}
+    },
+    {
+      "id": "CON chinese_medieval 03E",
+      "lines": [[72659, 71115, 70602]],
+      "common_name": {"english": "Mattress of the Emperor", "native": "Di Xi"}
+    },
+    {
+      "id": "CON chinese_medieval 03F",
+      "lines": [[70027, 69829, 69585, 69536, 69612, 69989, 70027]],
+      "common_name": {"english": "Boats and Lake", "native": "Kang Chi"}
+    },
+    {
+      "id": "CON chinese_medieval 03G",
+      "lines": [[73714, 73184, 72929]],
+      "common_name": {"english": "Battle Chariots", "native": "Zhen Che"}
+    },
+    {
+      "id": "CON chinese_medieval 03H",
+      "lines": [[74395, 74006, 72290]],
+      "common_name": {"english": "Chariots and Cavalry", "native": "Che Qi"}
+    },
+    {
+      "id": "CON chinese_medieval 03I",
+      "lines": [[76470, 76742]],
+      "common_name": {"english": "Celestial Spokes", "native": "Tian Fu"}
+    },
+    {
+      "id": "CON chinese_medieval 03J",
+      "lines": [[74376, 74376]],
+      "common_name": {"english": "Chariots and Cavalry General", "native": "Qi Zhen Jiang Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 03K",
+      "lines": [[73559, 72959, 72010]],
+      "common_name": {"english": "Imperial Guards", "native": "Qi Guan"}
+    },
+    {
+      "id": "CON chinese_medieval 03L",
+      "lines": [[74604, 74857, 73937]],
+      "common_name": {"english": "Imperial Guards", "native": "Qi Guan"}
+    },
+    {
+      "id": "CON chinese_medieval 03M",
+      "lines": [[72800, 72432, 71865]],
+      "common_name": {"english": "Imperial Guards", "native": "Qi Guan"}
+    },
+    {
+      "id": "CON chinese_medieval 03N",
+      "lines": [[75177, 75304, 75647]],
+      "common_name": {"english": "Imperial Guards", "native": "Qi Guan"}
+    },
+    {
+      "id": "CON chinese_medieval 03O",
+      "lines": [[75501, 75141, 76297]],
+      "common_name": {"english": "Imperial Guards", "native": "Qi Guan"}
+    },
+    {
+      "id": "CON chinese_medieval 03P",
+      "lines": [[73334, 73273, 72683]],
+      "common_name": {"english": "Imperial Guards", "native": "Qi Guan"}
+    },
+    {
+      "id": "CON chinese_medieval 03Q",
+      "lines": [[75264, 74117, 73807]],
+      "common_name": {"english": "Imperial Guards", "native": "Qi Guan"}
+    },
+    {
+      "id": "CON chinese_medieval 03R",
+      "lines": [[75828, 74911, 75206]],
+      "common_name": {"english": "Imperial Guards", "native": "Qi Guan"}
+    },
+    {
+      "id": "CON chinese_medieval 03S",
+      "lines": [[76552, 76829, 76371]],
+      "common_name": {"english": "Imperial Guards", "native": "Qi Guan"}
+    },
+    {
+      "id": "CON chinese_medieval 04A",
+      "lines": [[78820, 78401, 78265, 78104], [78933, 78820]],
+      "common_name": {"english": "Room", "native": "Fang Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 04B",
+      "lines": [[78933, 78990]],
+      "common_name": {"english": "Lock (Vassal of Room)", "native": "Gou Qian"}
+    },
+    {
+      "id": "CON chinese_medieval 04C",
+      "lines": [[79374, 79374]],
+      "common_name": {"english": "Door Bolt", "native": "Jian Bi"}
+    },
+    {
+      "id": "CON chinese_medieval 04D",
+      "lines": [[80343, 80569, 80894]],
+      "common_name": {"english": "Punishment", "native": "Fa"}
+    },
+    {
+      "id": "CON chinese_medieval 04E",
+      "lines": [[81724, 80975, 80473, 80815]],
+      "common_name": {"english": "Eastern Door", "native": "Dong Xian"}
+    },
+    {
+      "id": "CON chinese_medieval 04F",
+      "lines": [[78727, 78207, 77853, 77060]],
+      "common_name": {"english": "Western Door", "native": "Xi Xian"}
+    },
+    {
+      "id": "CON chinese_medieval 04G",
+      "lines": [[77840, 77840]],
+      "common_name": {"english": "Solar Star", "native": "Ri"}
+    },
+    {
+      "id": "CON chinese_medieval 04H",
+      "lines": [[78918, 77634]],
+      "common_name": {"english": "Retinue (In Room Mansion)", "native": "Cong Guan(Fang Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 05A",
+      "lines": [[80112, 80763, 81266]],
+      "common_name": {"english": "Heart", "native": "Xin Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 05B",
+      "lines": [[80337, 81304], [80337, 80911], [79320, 78384], [79320, 78323], [80212, 79653], [80212, 80582], [80945, 81305], [80945, 81972], [80337, 79320, 80212, 80945, 80337]],
+      "common_name": {"english": "Group of Soldiers", "native": "Ji Zu"}
+    },
+    {
+      "id": "CON chinese_medieval 06A",
+      "lines": [[82396, 82514, 82671, 84143, 86228, 87073, 86670, 85927], [86670, 85696], [82514, 82545]],
+      "common_name": {"english": "Tail", "native": "Wei Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 06B",
+      "lines": [[82545, 82545]],
+      "common_name": {"english": "Changing Room (Vassal of Tail)", "native": "Shen Gong"}
+    },
+    {
+      "id": "CON chinese_medieval 06C",
+      "lines": [[84720, 86092, 86486, 85792, 84105]],
+      "common_name": {"english": "Tortoise", "native": "Gui"}
+    },
+    {
+      "id": "CON chinese_medieval 06D",
+      "lines": [[85755, 85340, 84970, 84405]],
+      "common_name": {"english": "Celestial River", "native": "Tian Jiang"}
+    },
+    {
+      "id": "CON chinese_medieval 06E",
+      "lines": [[87261, 87261]],
+      "common_name": {"english": "Fu Yue", "native": "Fu Yue"}
+    },
+    {
+      "id": "CON chinese_medieval 06F",
+      "lines": [[87616, 87616]],
+      "common_name": {"english": "Fish", "native": "Yu"}
+    },
+    {
+      "id": "CON chinese_medieval 07A",
+      "lines": [[88635, 89931, 90185, 89642]],
+      "common_name": {"english": "Winnowing Basket", "native": "Ji Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 07B",
+      "lines": [[90842, 90422, 90568]],
+      "common_name": {"english": "Pestle (In Winnowing Basket Mansion)", "native": "Chu(Ji Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 07C",
+      "lines": [[88550, 88550]],
+      "common_name": {"english": "Chaff", "native": "Kang"}
+    },
+    {
+      "id": "CON chinese_medieval 08A",
+      "lines": [[89341, 90496, 92041, 92855, 93864, 93506]],
+      "common_name": {"english": "Dipper", "native": "Dou Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 08B",
+      "lines": [[93085, 93683, 94141, 94820, 95168, 95176]],
+      "common_name": {"english": "Establishment", "native": "Jian"}
+    },
+    {
+      "id": "CON chinese_medieval 08C",
+      "lines": [[93580, 94149, 93805, 93526, 93429, 93026, 92488, 91726, 91117]],
+      "common_name": {"english": "Market Officer", "native": "Tian Bian"}
+    },
+    {
+      "id": "CON chinese_medieval 08D",
+      "lines": [[94114, 93825, 93174, 92989, 91875, 90968, 90887, 90982, 91494, 92308, 92953, 93542, 94005, 94160, 94114]],
+      "common_name": {"english": "River Turtle", "native": "Bie"}
+    },
+    {
+      "id": "CON chinese_medieval 08E",
+      "lines": [[96950, 97783]],
+      "common_name": {"english": "Celestial Cock", "native": "Tian Ji"}
+    },
+    {
+      "id": "CON chinese_medieval 08F",
+      "lines": [[88012, 87836, 87706, 88116, 89153, 89980, 89678, 88839, 88012]],
+      "common_name": {"english": "Celestial Keyhole", "native": "Tian Yue"}
+    },
+    {
+      "id": "CON chinese_medieval 08G",
+      "lines": [[96465, 95477]],
+      "common_name": {"english": "Dog", "native": "Gou"}
+    },
+    {
+      "id": "CON chinese_medieval 08H",
+      "lines": [[98066, 98353, 98688, 98162, 98066]],
+      "common_name": {"english": "Territory of Dog", "native": "Gou Guo"}
+    },
+    {
+      "id": "CON chinese_medieval 08I",
+      "lines": [[97067, 96234, 95823, 96721, 98032, 97749, 97067], [98412, 97749], [94986, 96234], [95823, 95241], [98512, 98032]],
+      "common_name": {"english": "Celestial Spring", "native": "Tian Yuan"}
+    },
+    {
+      "id": "CON chinese_medieval 08J",
+      "lines": [[90763, 90763]],
+      "common_name": {"english": "Peasant", "native": "Nong Zhang Ren"}
+    },
+    {
+      "id": "CON chinese_medieval 09A",
+      "lines": [[100345, 100881, 101123, 101027, 100345, 100310], [100345, 100064]],
+      "common_name": {"english": "Ox", "native": "Niu Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 09B",
+      "lines": [[100195, 100062, 99825], [101090, 101384, 100738], [101997, 102094, 102092], [102094, 101384, 100062]],
+      "common_name": {"english": "Celestial Farmland (In Ox Mansion)", "native": "Tian Tian(Niu Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 09C",
+      "lines": [[101772, 102790, 101477], [102790, 105685, 105334], [105685, 105425], [105685, 107649], [106429, 107649, 107409]],
+      "common_name": {"english": "Nine Water Wells", "native": "Jiu Kan"}
+    },
+    {
+      "id": "CON chinese_medieval 09D",
+      "lines": [[98036, 97649, 97278]],
+      "common_name": {"english": "Drum at the River", "native": "He Gu"}
+    },
+    {
+      "id": "CON chinese_medieval 09E",
+      "lines": [[91919, 91262, 91971]],
+      "common_name": {"english": "Weaving Girl", "native": "Zhi Nü"}
+    },
+    {
+      "id": "CON chinese_medieval 09F",
+      "lines": [[98754, 98234, 97365, 98337, 98920, 99352, 100276, 99742, 100256]],
+      "common_name": {"english": "Left Flag", "native": "Zuo Qi"}
+    },
+    {
+      "id": "CON chinese_medieval 09G",
+      "lines": [[96665, 97229, 96229, 94727, 95501, 96468, 95937, 95066, 96483]],
+      "common_name": {"english": "Right Flag", "native": "You Qi"}
+    },
+    {
+      "id": "CON chinese_medieval 09H",
+      "lines": [[100232, 99473, 98844, 97804]],
+      "common_name": {"english": "Celestial Drumstick", "native": "Tian Fu"}
+    },
+    {
+      "id": "CON chinese_medieval 09I",
+      "lines": [[101923, 102026, 101984]],
+      "common_name": {"english": "Network of Dykes", "native": "Luo Yan"}
+    },
+    {
+      "id": "CON chinese_medieval 09J",
+      "lines": [[92791, 92420, 93194, 93903]],
+      "common_name": {"english": "Clepsydra Terrace", "native": "Jian Tai"}
+    },
+    {
+      "id": "CON chinese_medieval 09K",
+      "lines": [[92862, 94481, 94713, 95556, 96052]],
+      "common_name": {"english": "Imperial Passageway", "native": "Nian Dao"}
+    },
+    {
+      "id": "CON chinese_medieval 10A",
+      "lines": [[102618, 103045, 103005, 102624]],
+      "common_name": {"english": "Girl", "native": "Nü Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 10B",
+      "lines": [[101692, 101847, 101101, 100977]],
+      "common_name": {"english": "Pearls on Ladies' Wear", "native": "Li Zhu"}
+    },
+    {
+      "id": "CON chinese_medieval 10C",
+      "lines": [[101483, 101882, 101800, 101421, 101483, 101589]],
+      "common_name": {"english": "Rotten Gourd", "native": "Bai Gua"}
+    },
+    {
+      "id": "CON chinese_medieval 10D",
+      "lines": [[102532, 101958, 101769, 102080, 102281, 102532]],
+      "common_name": {"english": "Good Gourd", "native": "Hu Gua"}
+    },
+    {
+      "id": "CON chinese_medieval 10E",
+      "lines": [[104732, 105138, 104887, 103413, 102098, 99639, 97165, 100453, 102488, 104732]],
+      "common_name": {"english": "Celestial Ford", "native": "Tian Jin"}
+    },
+    {
+      "id": "CON chinese_medieval 10F",
+      "lines": [[94779, 95853, 96620, 97635]],
+      "common_name": {"english": "Xi Zhong", "native": "Xi Zhong"}
+    },
+    {
+      "id": "CON chinese_medieval 10G",
+      "lines": [[92549, 91755, 90905, 90156, 89401, 89047, 88732]],
+      "common_name": {"english": "Basket for Mulberry Leaves", "native": "Fu Kuang"}
+    },
+    {
+      "id": "CON chinese_medieval 10H",
+      "lines": [[102978, 102485]],
+      "common_name": {"english": "Twelve States (Zhao State)", "native": "Shi Er Guo (Zhao)"}
+    },
+    {
+      "id": "CON chinese_medieval 10I",
+      "lines": [[102014, 102014]],
+      "common_name": {"english": "Twelve States (Yue State)", "native": "Shi Er Guo (Yue)"}
+    },
+    {
+      "id": "CON chinese_medieval 10J",
+      "lines": [[103226, 102487]],
+      "common_name": {"english": "Twelve States (Zhou State)", "native": "Shi Er Guo (Zhou)"}
+    },
+    {
+      "id": "CON chinese_medieval 10K",
+      "lines": [[102831, 102831]],
+      "common_name": {"english": "Twelve States (Qi State)", "native": "Shi Er Guo (Qi)"}
+    },
+    {
+      "id": "CON chinese_medieval 10L",
+      "lines": [[103738, 103738]],
+      "common_name": {"english": "Twelve States (Zheng State)", "native": "Shi Er Guo (Zheng)"}
+    },
+    {
+      "id": "CON chinese_medieval 10M",
+      "lines": [[103777, 103777]],
+      "common_name": {"english": "Twelve States (Chu State)", "native": "Shi Er Guo (Chu)"}
+    },
+    {
+      "id": "CON chinese_medieval 10N",
+      "lines": [[104139, 104019]],
+      "common_name": {"english": "Twelve States (Qin State)", "native": "Shi Er Guo (Qin)"}
+    },
+    {
+      "id": "CON chinese_medieval 10O",
+      "lines": [[104174, 104174]],
+      "common_name": {"english": "Twelve States (Yan State)", "native": "Shi Er Guo (Yan)"}
+    },
+    {
+      "id": "CON chinese_medieval 10P",
+      "lines": [[104234, 104234]],
+      "common_name": {"english": "Twelve States (Wei State)", "native": "Shi Er Guo (Wei)"}
+    },
+    {
+      "id": "CON chinese_medieval 10Q",
+      "lines": [[104963, 105515]],
+      "common_name": {"english": "Twelve States (Dai State)", "native": "Shi Er Guo (Dai)"}
+    },
+    {
+      "id": "CON chinese_medieval 10R",
+      "lines": [[105140, 105140]],
+      "common_name": {"english": "Twelve States (Jin State)", "native": "Shi Er Guo (Jin)"}
+    },
+    {
+      "id": "CON chinese_medieval 10S",
+      "lines": [[104750, 104750]],
+      "common_name": {"english": "Twelve States (Han State)", "native": "Shi Er Guo (Han)"}
+    },
+    {
+      "id": "CON chinese_medieval 11A",
+      "lines": [[106278, 104987]],
+      "common_name": {"english": "Emptiness", "native": "Xu Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 11B",
+      "lines": [[107575, 106944]],
+      "common_name": {"english": "Deified Judge of Life", "native": "Si Ming"}
+    },
+    {
+      "id": "CON chinese_medieval 11C",
+      "lines": [[107151, 106856]],
+      "common_name": {"english": "Deified Judge of Rank", "native": "Si Lu"}
+    },
+    {
+      "id": "CON chinese_medieval 11D",
+      "lines": [[104858, 104521]],
+      "common_name": {"english": "Deified Judge of Disaster and Good Fortune", "native": "Si wei"}
+    },
+    {
+      "id": "CON chinese_medieval 11E",
+      "lines": [[107348, 107788]],
+      "common_name": {"english": "Deified Judge of Right and Wrong", "native": "Si Fei"}
+    },
+    {
+      "id": "CON chinese_medieval 11F",
+      "lines": [[106039, 105881]],
+      "common_name": {"english": "Crying", "native": "Ku"}
+    },
+    {
+      "id": "CON chinese_medieval 11G",
+      "lines": [[110273, 110003]],
+      "common_name": {"english": "Weeping", "native": "Qi"}
+    },
+    {
+      "id": "CON chinese_medieval 11H",
+      "lines": [[108085, 108294, 108681, 109289, 109285, 109422, 108952, 108661, 106913, 106564, 106703, 106907, 107019, 108085]],
+      "common_name": {"english": "Celestial Ramparts", "native": "Tian Lei Cheng"}
+    },
+    {
+      "id": "CON chinese_medieval 11I",
+      "lines": [[109973, 109268, 112122, 112203]],
+      "common_name": {"english": "Decayed Mortar", "native": "Bai Jiu"}
+    },
+    {
+      "id": "CON chinese_medieval 11J",
+      "lines": [[106340, 106067, 105476]],
+      "common_name": {"english": "Jade Ornament on Ladies' Wear", "native": "Li Yu"}
+    },
+    {
+      "id": "CON chinese_medieval 12A",
+      "lines": [[109074, 109427, 107315], [109427, 110672]],
+      "common_name": {"english": "Rooftop", "native": "Wei Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 12B",
+      "lines": [[110960, 110395], [110960, 111497], [110960, 110672]],
+      "common_name": {"english": "Tomb (Vassal of Rooftop)", "native": "Fen Mu"}
+    },
+    {
+      "id": "CON chinese_medieval 12C",
+      "lines": [[107763, 107975], [107763, 107310], [107763, 108022], [107763, 107354]],
+      "common_name": {"english": "Humans", "native": "Ren"}
+    },
+    {
+      "id": "CON chinese_medieval 12D",
+      "lines": [[110371, 109056, 109176]],
+      "common_name": {"english": "Mortar", "native": "Jiu"}
+    },
+    {
+      "id": "CON chinese_medieval 12E",
+      "lines": [[109937, 109654, 109410]],
+      "common_name": {"english": "Pestle (In Rooftop Mansion)", "native": "Chu(Wei Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 12F",
+      "lines": [[111944, 111104, 109831, 107856, 107253, 106551, 106711, 107856]],
+      "common_name": {"english": "Big Yard for Chariots", "native": "Che Fu"}
+    },
+    {
+      "id": "CON chinese_medieval 12G",
+      "lines": [[116727, 114222, 111532, 109400, 107119, 106032, 102370, 100261, 101134]],
+      "common_name": {"english": "Celestial Hook", "native": "Tian Gou"}
+    },
+    {
+      "id": "CON chinese_medieval 12H",
+      "lines": [[110991, 113561, 111795], [109492, 113561, 109857]],
+      "common_name": {"english": "Zaofu", "native": "Zao Fu"}
+    },
+    {
+      "id": "CON chinese_medieval 12I",
+      "lines": [[111710, 111170, 110532, 110023]],
+      "common_name": {"english": "Temple", "native": "Xu Liang"}
+    },
+    {
+      "id": "CON chinese_medieval 12J",
+      "lines": [[110391, 110746, 110529, 109990, 109737, 109375, 109199, 109509, 109786, 110135, 110391]],
+      "common_name": {"english": "Celestial Money", "native": "Tian Qian"}
+    },
+    {
+      "id": "CON chinese_medieval 12K",
+      "lines": [[108991, 108874]],
+      "common_name": {"english": "Roofing", "native": "Gai Wu"}
+    },
+    {
+      "id": "CON chinese_medieval 13A",
+      "lines": [[113963, 113881, 115250], [113881, 112748], [113881, 112051]],
+      "common_name": {"english": "Encampment", "native": "Shi Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 13B",
+      "lines": [[112051, 112158]],
+      "common_name": {"english": "Resting Palace (Vassal of Encampment)", "native": "Li Gong"}
+    },
+    {
+      "id": "CON chinese_medieval 13C",
+      "lines": [[112748, 112440]],
+      "common_name": {"english": "Resting Palace (Vassal of Encampment)", "native": "Li Gong"}
+    },
+    {
+      "id": "CON chinese_medieval 13D",
+      "lines": [[115250, 115623]],
+      "common_name": {"english": "Resting Palace (Vassal of Encampment)", "native": "Li Gong"}
+    },
+    {
+      "id": "CON chinese_medieval 13E",
+      "lines": [[117020, 115919, 114389, 114144, 113503, 112935]],
+      "common_name": {"english": "Thunder and Lightning", "native": "Lei Dian"}
+    },
+    {
+      "id": "CON chinese_medieval 13F",
+      "lines": [[112447, 112029]],
+      "common_name": {"english": "Official for Materials Supply", "native": "Tu Gong Li"}
+    },
+    {
+      "id": "CON chinese_medieval 13G",
+      "lines": [[118209, 154, 443, 145, 118209, 114724, 112961, 111123, 109139, 107556, 106985, 106723, 107188, 107556]],
+      "common_name": {"english": "Line of Ramparts", "native": "Lei Bi Zhen"}
+    },
+    {
+      "id": "CON chinese_medieval 13H",
+      "lines": [[116231, 115833, 115102]],
+      "common_name": {"english": "Axe", "native": "Fu Yue"}
+    },
+    {
+      "id": "CON chinese_medieval 13I",
+      "lines": [[113368, 113368]],
+      "common_name": {"english": "North Gate of the Military Camp", "native": "Bei Luo Shi Men"}
+    },
+    {
+      "id": "CON chinese_medieval 13J",
+      "lines": [[111188, 111188]],
+      "common_name": {"english": "Materials for Making Tents", "native": "Tian Gang"}
+    },
+    {
+      "id": "CON chinese_medieval 13K",
+      "lines": [[115990, 117301, 117863, 117299, 114924, 114162, 113501, 112761, 111169, 113288, 113919, 114570, 115022, 115152, 116584, 116805, 116631], [111169, 111674], [111169, 110538], [111169, 109521], [111169, 110609], [111169, 111022]],
+      "common_name": {"english": "Flying Serpent", "native": "Teng She"}
+    },
+    {
+      "id": "CON chinese_medieval 13L",
+      "lines": [[3521, 3456, 2240, 133, 950], [5042, 2663, 2240, 2081, 966]],
+      "common_name": {"english": "Net for Catching Birds", "native": "Ba Kui"}
+    },
+    {
+      "id": "CON chinese_medieval 13M",
+      "lines": [[1158, 1562, 355]],
+      "common_name": {"english": "Palace Guard", "native": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 13N",
+      "lines": [[117541, 117314, 117567]],
+      "common_name": {"english": "Palace Guard", "native": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 13O",
+      "lines": [[116957, 116971, 116758]],
+      "common_name": {"english": "Palace Guard", "native": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 13P",
+      "lines": [[117629, 117218, 116901]],
+      "common_name": {"english": "Palace Guard", "native": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 13Q",
+      "lines": [[116247, 115669, 115438]],
+      "common_name": {"english": "Palace Guard", "native": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 13R",
+      "lines": [[115033, 114939, 114855]],
+      "common_name": {"english": "Palace Guard", "native": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 13S",
+      "lines": [[113998, 113136, 113080]],
+      "common_name": {"english": "Palace Guard", "native": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 13T",
+      "lines": [[113531, 113031, 112716]],
+      "common_name": {"english": "Palace Guard", "native": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 13U",
+      "lines": [[112211, 112529, 111449]],
+      "common_name": {"english": "Palace Guard", "native": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 13V",
+      "lines": [[111515, 111138, 111954]],
+      "common_name": {"english": "Palace Guard", "native": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 13W",
+      "lines": [[111539, 111086, 110778]],
+      "common_name": {"english": "Palace Guard", "native": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 13X",
+      "lines": [[107797, 108784, 107901]],
+      "common_name": {"english": "Palace Guard", "native": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 13Y",
+      "lines": [[109624, 110000, 110602]],
+      "common_name": {"english": "Palace Guard", "native": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 13Z",
+      "lines": [[116591, 115126, 115839]],
+      "common_name": {"english": "Palace Guard", "native": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 130",
+      "lines": [[114341, 114375, 114119]],
+      "common_name": {"english": "Palace Guard", "native": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 14A",
+      "lines": [[1067, 677]],
+      "common_name": {"english": "Wall", "native": "Bi Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 14B",
+      "lines": [[118268, 116771, 115830, 114971, 113889]],
+      "common_name": {"english": "Thunderbolt", "native": "Pi Li"}
+    },
+    {
+      "id": "CON chinese_medieval 14C",
+      "lines": [[117887, 116928, 115738, 116323]],
+      "common_name": {"english": "Cloud and Rain", "native": "Yun Yu"}
+    },
+    {
+      "id": "CON chinese_medieval 14D",
+      "lines": [[3300, 3504, 3478, 3414, 2900, 2225, 841, 967, 1415, 1921, 3300]],
+      "common_name": {"english": "Celestial Stable", "native": "Tian Jiu"}
+    },
+    {
+      "id": "CON chinese_medieval 14E",
+      "lines": [[6502, 4577, 4852], [4577, 2661, 2210]],
+      "common_name": {"english": "Sickle", "native": "Fu Zhi"}
+    },
+    {
+      "id": "CON chinese_medieval 14F",
+      "lines": [[1465, 813]],
+      "common_name": {"english": "Official for Earthworks and Buildings", "native": "Tu Gong"}
+    },
+    {
+      "id": "CON chinese_medieval 15A",
+      "lines": [[3881, 4436, 5447, 5936, 5544, 5586, 6193, 5742, 5571, 4463, 3693, 3031, 3092, 2912, 2942, 3231, 3881]],
+      "common_name": {"english": "Legs", "native": "Kui Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 15B",
+      "lines": [[9487, 8833, 7884, 7007, 5737, 4906, 3786]],
+      "common_name": {"english": "Outer Fence", "native": "Wai Ping"}
+    },
+    {
+      "id": "CON chinese_medieval 15C",
+      "lines": [[4147, 4914, 5951, 6226, 6061, 5346, 3992, 4147]],
+      "common_name": {"english": "Celestial Pigsty", "native": "Tian Hun"}
+    },
+    {
+      "id": "CON chinese_medieval 15D",
+      "lines": [[3419, 3419]],
+      "common_name": {"english": "Master of Constructions (In Legs Mansion)", "native": "Tu Si Kong(Kui Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 15E",
+      "lines": [[8796, 8796]],
+      "common_name": {"english": "Southern Military Gate", "native": "Jun Nan Men"}
+    },
+    {
+      "id": "CON chinese_medieval 15F",
+      "lines": [[5434, 5542, 7294, 8046, 8886, 9312]],
+      "common_name": {"english": "Flying Corridor", "native": "Ge Dao"}
+    },
+    {
+      "id": "CON chinese_medieval 15G",
+      "lines": [[6686, 6686]],
+      "common_name": {"english": "Auxiliary Road", "native": "Fu Lu"}
+    },
+    {
+      "id": "CON chinese_medieval 15H",
+      "lines": [[4427, 3821, 3179, 2920], [746, 4427], [746, 3821], [746, 3179], [746, 2920]],
+      "common_name": {"english": "Wang Liang", "native": "Wang Liang"}
+    },
+    {
+      "id": "CON chinese_medieval 15I",
+      "lines": [[2599, 2599]],
+      "common_name": {"english": "Whip", "native": "Ce"}
+    },
+    {
+      "id": "CON chinese_medieval 16A",
+      "lines": [[9884, 8903, 8832]],
+      "common_name": {"english": "Bond", "native": "Lou Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 16B",
+      "lines": [[10795, 10732, 10155, 10306, 10795, 11670]],
+      "common_name": {"english": "Official in Charge of the Forest", "native": "Zuo Geng"}
+    },
+    {
+      "id": "CON chinese_medieval 16C",
+      "lines": [[7981, 7359, 6981, 7097, 7740, 7359]],
+      "common_name": {"english": "Official in Charge of Pasturing", "native": "You Geng"}
+    },
+    {
+      "id": "CON chinese_medieval 16D",
+      "lines": [[9347, 8102, 8645, 6537, 5364, 3455]],
+      "common_name": {"english": "Square Celestial Granary", "native": "Tian Cang"}
+    },
+    {
+      "id": "CON chinese_medieval 16E",
+      "lines": [[10320, 9677, 9440]],
+      "common_name": {"english": "Ricks of Grain", "native": "Tian Yu"}
+    },
+    {
+      "id": "CON chinese_medieval 16F",
+      "lines": [[8068, 7607, 7719, 7513, 7818, 8423, 9021, 10064, 10280, 10793, 9640, 8068]],
+      "common_name": {"english": "Great General of Heaven", "native": "Tian Da Jiang Jun"}
+    },
+    {
+      "id": "CON chinese_medieval 17A",
+      "lines": [[12719, 13061, 13209]],
+      "common_name": {"english": "Stomach", "native": "Wei Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 17B",
+      "lines": [[12828, 11484, 10324, 11249, 12828, 13954, 14135, 12093, 12706, 12387, 12530, 11791, 11046, 10826]],
+      "common_name": {"english": "Circular Celestial Granary", "native": "Tian Qun"}
+    },
+    {
+      "id": "CON chinese_medieval 17C",
+      "lines": [[16369, 16322, 16083, 15900]],
+      "common_name": {"english": "Celestial Foodstuff", "native": "Tian Lin"}
+    },
+    {
+      "id": "CON chinese_medieval 17D",
+      "lines": [[12692, 13531, 14632, 14668, 14576, 14354, 13254, 12623]],
+      "common_name": {"english": "Mausoleum", "native": "Da Ling"}
+    },
+    {
+      "id": "CON chinese_medieval 17E",
+      "lines": [[13268, 14328, 15863, 16826, 17358, 19343, 19812, 20070, 19167]],
+      "common_name": {"english": "Celestial Boat", "native": "Tian Chuan"}
+    },
+    {
+      "id": "CON chinese_medieval 17F",
+      "lines": [[13879, 13879]],
+      "common_name": {"english": "Heap of Corpses", "native": "Ji Shi(Wei Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 17G",
+      "lines": [[18453, 18453]],
+      "common_name": {"english": "Stored water", "native": "Ji Shui(Wei Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 18A",
+      "lines": [[17531, 17489, 17573, 17499, 17702, 17608, 17847]],
+      "common_name": {"english": "Hairy Head", "native": "Mao Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 18B",
+      "lines": [[15696, 15696]],
+      "common_name": {"english": "Celestial Concave", "native": "Tian E"}
+    },
+    {
+      "id": "CON chinese_medieval 18C",
+      "lines": [[19038, 19038]],
+      "common_name": {"english": "Lunar Star", "native": "Yue"}
+    },
+    {
+      "id": "CON chinese_medieval 18D",
+      "lines": [[15737, 15870], [15737, 15627], [15737, 15110], [15737, 14838]],
+      "common_name": {"english": "Celestial Yin Force", "native": "Tian Yin"}
+    },
+    {
+      "id": "CON chinese_medieval 18E",
+      "lines": [[17529, 18532, 18614, 18246, 17448, 17313]],
+      "common_name": {"english": "Rolled Tongue", "native": "Juan She"}
+    },
+    {
+      "id": "CON chinese_medieval 18F",
+      "lines": [[17886, 17886]],
+      "common_name": {"english": "Celestial Slander", "native": "Tian Chan"}
+    },
+    {
+      "id": "CON chinese_medieval 18G",
+      "lines": [[19205, 19171, 19513, 20430]],
+      "common_name": {"english": "Whetstone", "native": "Li Shi"}
+    },
+    {
+      "id": "CON chinese_medieval 18H",
+      "lines": [[11783, 11345, 12444], [11348, 12390, 11029]],
+      "common_name": {"english": "Hay", "native": "Chu Hao"}
+    },
+    {
+      "id": "CON chinese_medieval 18I",
+      "lines": [[18543, 17593, 17378, 16537, 15197, 13701, 12770, 12843, 13288, 14146, 15474, 16611, 17651, 17717, 18216, 18673]],
+      "common_name": {"english": "Celestial Meadows", "native": "Tian Yuan"}
+    },
+    {
+      "id": "CON chinese_medieval 19A",
+      "lines": [[20889, 20648, 20455, 20205], [21421, 20894, 20713, 20205, 18724], [21421, 21683]],
+      "common_name": {"english": "Net", "native": "Bi Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 19B",
+      "lines": [[21683, 21683]],
+      "common_name": {"english": "Whisper (Vassal of Net)", "native": "Fu Er"}
+    },
+    {
+      "id": "CON chinese_medieval 19C",
+      "lines": [[20711, 20635]],
+      "common_name": {"english": "Celestial Street", "native": "Tian Jie"}
+    },
+    {
+      "id": "CON chinese_medieval 19D",
+      "lines": [[21402, 22044, 22157, 21589, 21402, 20522, 19860, 18975, 18907]],
+      "common_name": {"english": "Celestial Tally", "native": "Tian Jie"}
+    },
+    {
+      "id": "CON chinese_medieval 19E",
+      "lines": [[25539, 24822, 24512, 23883, 23497, 21881]],
+      "common_name": {"english": "Feudal Kings", "native": "Zhu Wang"}
+    },
+    {
+      "id": "CON chinese_medieval 19F",
+      "lines": [[22176, 22565, 23043, 22441, 22176]],
+      "common_name": {"english": "Celestial High Terrace", "native": "Tian Gao"}
+    },
+    {
+      "id": "CON chinese_medieval 19G",
+      "lines": [[20507, 21278, 21296, 21297, 21239, 20922, 19777, 19996, 19849, 20507]],
+      "common_name": {"english": "Interpreters of Nine Dialects", "native": "Jiu Zhou Shu Kou"}
+    },
+    {
+      "id": "CON chinese_medieval 19H",
+      "lines": [[23015, 24608, 28360, 28380, 25428]],
+      "common_name": {"english": "Five Chariots", "native": "Wu Che"}
+    },
+    {
+      "id": "CON chinese_medieval 19I",
+      "lines": [[26536, 26712, 25984]],
+      "common_name": {"english": "Pillars (In Net Mansion)", "native": "Zhu(Bi Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 19J",
+      "lines": [[27639, 27673, 27483]],
+      "common_name": {"english": "Pillars (In Net Mansion)", "native": "Zhu(Bi Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 19K",
+      "lines": [[23767, 23416, 23453]],
+      "common_name": {"english": "Pillars (In Net Mansion)", "native": "Zhu(Bi Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 19L",
+      "lines": [[25475, 25580, 25541, 24879, 24727]],
+      "common_name": {"english": "Celestial Pier", "native": "Tian Huang"}
+    },
+    {
+      "id": "CON chinese_medieval 19M",
+      "lines": [[25143, 25048, 24902]],
+      "common_name": {"english": "Pool of Harmony", "native": "Xian Chi"}
+    },
+    {
+      "id": "CON chinese_medieval 19N",
+      "lines": [[26451, 26451]],
+      "common_name": {"english": "Celestial Pass", "native": "Tian Guan"}
+    },
+    {
+      "id": "CON chinese_medieval 19O",
+      "lines": [[24010, 23607, 22957, 22833, 22845, 22509, 22449, 22549, 22797]],
+      "common_name": {"english": "Banner of Three Stars", "native": "Can Qi"}
+    },
+    {
+      "id": "CON chinese_medieval 19P",
+      "lines": [[20884, 21139, 21547, 21444, 22024, 21986, 22439, 22479, 23362]],
+      "common_name": {"english": "Imperial Military Flag", "native": "Jiu Liu"}
+    },
+    {
+      "id": "CON chinese_medieval 19Q",
+      "lines": [[21248, 21393, 20535, 20042, 17797, 17874, 17351, 16870, 16310, 15510, 13847, 12486, 12413]],
+      "common_name": {"english": "Celestial Orchard", "native": "Tian Yuan"}
+    },
+    {
+      "id": "CON chinese_medieval 20A",
+      "lines": [[26207, 26176], [26207, 26366]],
+      "common_name": {"english": "Turtle Beak", "native": "Zi Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 20B",
+      "lines": [[27830, 28237, 28734, 28716]],
+      "common_name": {"english": "Deity in Charge of Monsters", "native": "Si Guai"}
+    },
+    {
+      "id": "CON chinese_medieval 20C",
+      "lines": [[29696, 31173, 31579, 31771, 31789, 31832, 30972, 30520, 30247]],
+      "common_name": {"english": "Seat Flags", "native": "Zuo Qi"}
+    },
+    {
+      "id": "CON chinese_medieval 21A",
+      "lines": [[27989, 26727, 26311, 25930, 24436], [25930, 25336], [26727, 27366]],
+      "common_name": {"english": "Three Stars", "native": "Shen Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 21B",
+      "lines": [[26237, 26235, 26241]],
+      "common_name": {"english": "Send Armed Forces To Suppress (Vassal of Three Stars)", "native": "Fa"}
+    },
+    {
+      "id": "CON chinese_medieval 21C",
+      "lines": [[23972, 23364, 23875, 24674]],
+      "common_name": {"english": "Jade Well", "native": "Yu Jing"}
+    },
+    {
+      "id": "CON chinese_medieval 21D",
+      "lines": [[23685, 24927]],
+      "common_name": {"english": "Screen", "native": "Ping"}
+    },
+    {
+      "id": "CON chinese_medieval 21E",
+      "lines": [[24244, 24327, 24845, 24873]],
+      "common_name": {"english": "Military Well", "native": "Jun Jing"}
+    },
+    {
+      "id": "CON chinese_medieval 21F",
+      "lines": [[25985, 25606, 27072, 27654]],
+      "common_name": {"english": "Toilet", "native": "Ce"}
+    },
+    {
+      "id": "CON chinese_medieval 21G",
+      "lines": [[26865, 26865]],
+      "common_name": {"english": "Excrement", "native": "Shi"}
+    },
+    {
+      "id": "CON chinese_medieval 22A",
+      "lines": [[35350, 34088, 32921, 32246], [32921, 30883, 30343], [30883, 31681, 34088], [31681, 32362], [30343, 29655]],
+      "common_name": {"english": "Well", "native": "Jing Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 22B",
+      "lines": [[29655, 29655]],
+      "common_name": {"english": "Battle Axe (Vassal of Well)", "native": "Yue"}
+    },
+    {
+      "id": "CON chinese_medieval 22C",
+      "lines": [[37279, 36188, 35987]],
+      "common_name": {"english": "South River", "native": "Nan He"}
+    },
+    {
+      "id": "CON chinese_medieval 22D",
+      "lines": [[37826, 36850, 36366]],
+      "common_name": {"english": "North River", "native": "Bei He"}
+    },
+    {
+      "id": "CON chinese_medieval 22E",
+      "lines": [[35550, 35699, 36238]],
+      "common_name": {"english": "Celestial Wine Cup", "native": "Tian Zun"}
+    },
+    {
+      "id": "CON chinese_medieval 22F",
+      "lines": [[33018, 34693, 36046, 36962, 37740]],
+      "common_name": {"english": "Five Feudal Kings", "native": "Wu Zhu Hou(JingXiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 22G",
+      "lines": [[37265, 37265]],
+      "common_name": {"english": "Accumulated Water", "native": "Ji Shui(Jin Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 22H",
+      "lines": [[39659, 39659]],
+      "common_name": {"english": "Pile of Firewood", "native": "Ji Xin"}
+    },
+    {
+      "id": "CON chinese_medieval 22I",
+      "lines": [[29038, 29426, 29704, 29434, 29038]],
+      "common_name": {"english": "Official for Irrigation", "native": "Shui Fu"}
+    },
+    {
+      "id": "CON chinese_medieval 22J",
+      "lines": [[38722, 37908, 37300, 36760]],
+      "common_name": {"english": "Water Level", "native": "Shui Wei"}
+    },
+    {
+      "id": "CON chinese_medieval 22K",
+      "lines": [[34033, 32533, 31216, 30419]],
+      "common_name": {"english": "Four Channels", "native": "Si Du"}
+    },
+    {
+      "id": "CON chinese_medieval 22L",
+      "lines": [[31700, 31592, 31416, 31125, 29843, 29150, 29048, 28816, 28910, 30214, 30457, 31084, 31827, 31700]],
+      "common_name": {"english": "Market for Soldiers", "native": "Jun Shi"}
+    },
+    {
+      "id": "CON chinese_medieval 22M",
+      "lines": [[30324, 30324]],
+      "common_name": {"english": "Wild Cockerel", "native": "Ye Ji"}
+    },
+    {
+      "id": "CON chinese_medieval 22N",
+      "lines": [[30788, 30277]],
+      "common_name": {"english": "Grandson", "native": "Sun"}
+    },
+    {
+      "id": "CON chinese_medieval 22O",
+      "lines": [[28199, 27628]],
+      "common_name": {"english": "Son", "native": "Zi"}
+    },
+    {
+      "id": "CON chinese_medieval 22P",
+      "lines": [[26634, 25859]],
+      "common_name": {"english": "Grandfather", "native": "Zhang Ren"}
+    },
+    {
+      "id": "CON chinese_medieval 22Q",
+      "lines": [[36641, 34769]],
+      "common_name": {"english": "Palace Gate", "native": "Que Qiu"}
+    },
+    {
+      "id": "CON chinese_medieval 22R",
+      "lines": [[32349, 32349]],
+      "common_name": {"english": "Wolf", "native": "Lang"}
+    },
+    {
+      "id": "CON chinese_medieval 22S",
+      "lines": [[38170, 35904, 32759, 33579, 33856, 34444, 35415, 36721, 38170], [33977, 34444, 35904]],
+      "common_name": {"english": "Bow and Arrow", "native": "Hu Shi"}
+    },
+    {
+      "id": "CON chinese_medieval 22T",
+      "lines": [[30438, 30438]],
+      "common_name": {"english": "Old Man", "native": "Lao Ren"}
+    },
+    {
+      "id": "CON chinese_medieval 23A",
+      "lines": [[41822, 41909, 42806, 42911, 41822]],
+      "common_name": {"english": "Ghosts", "native": "Gui Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 23B",
+      "lines": [[42578, 42578]],
+      "common_name": {"english": "Cumulative Corpse Gas", "native": "Ji Shi Qi"}
+    },
+    {
+      "id": "CON chinese_medieval 23C",
+      "lines": [[41816, 41404, 40843, 40881, 41816]],
+      "common_name": {"english": "Beacon Fire", "native": "Guan"}
+    },
+    {
+      "id": "CON chinese_medieval 23D",
+      "lines": [[37447, 37394], [37447, 36640], [37447, 38048, 37891, 37379, 36773]],
+      "common_name": {"english": "Celestial Dog", "native": "Tian Gou"}
+    },
+    {
+      "id": "CON chinese_medieval 23E",
+      "lines": [[43142, 42028, 41307, 42146, 42835, 43305, 43142]],
+      "common_name": {"english": "Outer Kitchen", "native": "Wai Chu"}
+    },
+    {
+      "id": "CON chinese_medieval 23F",
+      "lines": [[43067, 43067]],
+      "common_name": {"english": "Judge for Estimating the Age of Animals", "native": "Tian Ji"}
+    },
+    {
+      "id": "CON chinese_medieval 23G",
+      "lines": [[37819, 35264, 34802, 34339, 32537, 31685]],
+      "common_name": {"english": "Celestial Earth God's Temple", "native": "Tian She"}
+    },
+    {
+      "id": "CON chinese_medieval 24A",
+      "lines": [[42799, 42402, 42313, 43109, 43234, 43813, 44659, 45336]],
+      "common_name": {"english": "Willow", "native": "Liu Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 24B",
+      "lines": [[46771, 46774, 47205]],
+      "common_name": {"english": "Banner of Wine Shop", "native": "Jiu Qi"}
+    },
+    {
+      "id": "CON chinese_medieval 25A",
+      "lines": [[46390, 46509, 46776, 47431], [46390, 45811, 45751, 46744], [46390, 46744]],
+      "common_name": {"english": "Star", "native": "Xing Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 25B",
+      "lines": [[44248, 44700, 45688, 45860, 47168, 47701, 46146, 46750, 47908, 48455, 50335, 50583, 49583, 49669, 47508], [49669, 51624], [49669, 49637]],
+      "common_name": {"english": "Xuanyuan", "native": "Xuan Yuan"}
+    },
+    {
+      "id": "CON chinese_medieval 25C",
+      "lines": [[51233, 51056, 52098, 53229]],
+      "common_name": {"english": "High Judge", "native": "Nei Ping"}
+    },
+    {
+      "id": "CON chinese_medieval 25D",
+      "lines": [[46982, 48341, 48437]],
+      "common_name": {"english": "Celestial Premier", "native": "Tian Xiang"}
+    },
+    {
+      "id": "CON chinese_medieval 25E",
+      "lines": [[44816, 44511, 42570, 42312, 44191, 44816]],
+      "common_name": {"english": "Celestial Cereals", "native": "Tian Ji"}
+    },
+    {
+      "id": "CON chinese_medieval 26A",
+      "lines": [[48356, 49841, 51069, 48615], [48356, 48615], [48356, 47452], [51069, 52085]],
+      "common_name": {"english": "Extended Net", "native": "Zhang Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 26B",
+      "lines": [[48219, 46515, 46734, 46026, 45001, 45754, 45448, 42515, 42828, 43409, 44824, 45902, 46578, 47758, 48219]],
+      "common_name": {"english": "Celestial Temple", "native": "Tian Miao"}
+    },
+    {
+      "id": "CON chinese_medieval 27A",
+      "lines": [[57587, 56633, 55687, 54029, 52980], [55687, 55874, 56802, 55282, 55705], [58188, 57283, 55705, 53740, 52943], [57283, 55598, 53740], [55598, 54682, 56078, 54204, 54477], [58158, 56280, 54477, 51979, 50066]],
+      "common_name": {"english": "Wings", "native": "Yi Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 27B",
+      "lines": [[53773, 53502, 50888, 50191], [50888, 48926]],
+      "common_name": {"english": "Dongou", "native": "Dong Ou"}
+    },
+    {
+      "id": "CON chinese_medieval 28A",
+      "lines": [[61359, 60965, 59803, 59316, 61359], [59803, 60189], [60965, 61174], [59316, 59199]],
+      "common_name": {"english": "Chariot", "native": "Zhen Xiu"}
+    },
+    {
+      "id": "CON chinese_medieval 28B",
+      "lines": [[60189, 60189]],
+      "common_name": {"english": "Changsha (Vassal of Chariot)", "native": "Chang Sha"}
+    },
+    {
+      "id": "CON chinese_medieval 28C",
+      "lines": [[61174, 61174]],
+      "common_name": {"english": "Left linchpin (Vassal of Chariot)", "native": "Zuo Xia"}
+    },
+    {
+      "id": "CON chinese_medieval 28D",
+      "lines": [[59199, 59199]],
+      "common_name": {"english": "Right linchpin (Vassal of Chariot)", "native": "You Xia"}
+    },
+    {
+      "id": "CON chinese_medieval 28E",
+      "lines": [[57613, 58082]],
+      "common_name": {"english": "Military Gate", "native": "Jun Men"}
+    },
+    {
+      "id": "CON chinese_medieval 28F",
+      "lines": [[56332, 56343, 56620, 57936]],
+      "common_name": {"english": "Master of Constructions (In Chariot Mansion)", "native": "Tu Si Kong(Zhen Xiu)"}
+    },
+    {
+      "id": "CON chinese_medieval 28G",
+      "lines": [[61468, 61789, 62896, 63066, 63033, 61916, 61379, 61468]],
+      "common_name": {"english": "Green Hill", "native": "Qing Qiu"}
+    },
+    {
+      "id": "CON chinese_medieval 28H",
+      "lines": [[63003, 62327, 61084, 60379, 58642, 57870, 56480, 55425], [63007, 62434, 61966, 61136, 59747, 58901, 57512, 55581], [62268, 60260, 58921, 57439, 56243, 54463], [60718, 58758, 57175, 56986, 55831, 54751], [60009, 59072, 57669, 56561]],
+      "common_name": {"english": "House for Musical Instruments", "native": "Qi Fu"}
+    }
+  ],
+  "edges_type": "own",
+  "edges": [
+    "___:___ __ 12:24:16 +84:43:18 13:25:14 -11:09:06 28A 01A",
+    "___:___ __ 13:25:14 -11:09:06 00:24:16 -84:43:18 28A 01A",
+    "___:___ __ 12:24:16 +84:43:18 14:12:53 -10:18:52 01A 02A",
+    "___:___ __ 14:12:53 -10:18:52 00:24:16 -84:43:18 01A 02A",
+    "___:___ __ 12:24:16 +84:43:18 14:51:00 -16:01:24 02A 03A",
+    "___:___ __ 14:51:00 -16:01:24 00:24:16 -84:43:18 02A 03A",
+    "___:___ __ 12:24:16 +84:43:18 15:59:02 -26:06:23 03A 04A",
+    "___:___ __ 15:59:02 -26:06:23 00:24:16 -84:43:18 03A 04A",
+    "___:___ __ 12:24:16 +84:43:18 16:21:12 -25:35:15 04A 05A",
+    "___:___ __ 16:21:12 -25:35:15 00:24:16 -84:43:18 04A 05A",
+    "___:___ __ 12:24:16 +84:43:18 16:51:51 -38:02:28 05A 06A",
+    "___:___ __ 16:51:51 -38:02:28 00:24:16 -84:43:18 05A 06A",
+    "___:___ __ 12:24:16 +84:43:18 18:05:56 -30:22:03 06A 07A",
+    "___:___ __ 18:05:56 -30:22:03 00:24:16 -84:43:18 06A 07A",
+    "___:___ __ 12:24:16 +84:43:18 18:45:36 -26:59:28 07A 08A",
+    "___:___ __ 18:45:36 -26:59:28 00:24:16 -84:43:18 07A 08A",
+    "___:___ __ 12:24:16 +84:43:18 20:20:58 -14:46:52 08A 09A",
+    "___:___ __ 20:20:58 -14:46:52 00:24:16 -84:43:18 08A 09A",
+    "___:___ __ 12:24:16 +84:43:18 20:47:38 -09:29:11 09A 10A",
+    "___:___ __ 20:47:38 -09:29:11 00:24:16 -84:43:18 09A 10A",
+    "___:___ __ 12:24:16 +84:43:18 21:31:32 -05:34:09 10A 11A",
+    "___:___ __ 21:31:32 -05:34:09 00:24:16 -84:43:18 10A 11A",
+    "___:___ __ 12:24:16 +84:43:18 22:05:46 -00:18:58 11A 12A",
+    "___:___ __ 22:05:46 -00:18:58 00:24:16 -84:43:18 11A 12A",
+    "___:___ __ 12:24:16 +84:43:18 23:04:42 +15:12:54 12A 13A",
+    "___:___ __ 23:04:42 +15:12:54 00:24:16 -84:43:18 12A 13A",
+    "___:___ __ 12:24:16 +84:43:18 00:13:14 +15:11:10 13A 14A",
+    "___:___ __ 00:13:14 +15:11:10 00:24:16 -84:43:18 13A 14A",
+    "___:___ __ 12:24:16 +84:43:18 00:47:28 +24:17:13 14A 15A",
+    "___:___ __ 00:47:28 +24:17:13 00:24:16 -84:43:18 14A 15A",
+    "___:___ __ 12:24:16 +84:43:18 01:54:31 +20:50:01 15A 16A",
+    "___:___ __ 01:54:31 +20:50:01 00:24:16 -84:43:18 15A 16A",
+    "___:___ __ 12:24:16 +84:43:18 02:43:26 +27:42:34 16A 17A",
+    "___:___ __ 02:43:26 +27:42:34 00:24:16 -84:43:18 16A 17A",
+    "___:___ __ 12:24:16 +84:43:18 03:44:51 +24:07:35 17A 18A",
+    "___:___ __ 03:44:51 +24:07:35 00:24:16 -84:43:18 17A 18A",
+    "___:___ __ 12:24:16 +84:43:18 04:28:30 +19:11:25 18A 19A",
+    "___:___ __ 04:28:30 +19:11:25 00:24:16 -84:43:18 18A 19A",
+    "___:___ __ 12:24:16 +84:43:18 05:34:49 +09:29:25 19A 20A",
+    "___:___ __ 05:34:49 +09:29:25 00:24:16 -84:43:18 19A 20A",
+    "___:___ __ 12:24:16 +84:43:18 05:32:00 -00:17:57 20A 21A",
+    "___:___ __ 05:32:00 -00:17:57 00:24:16 -84:43:18 20A 21A",
+    "___:___ __ 12:24:16 +84:43:18 06:22:53 +22:32:43 21A 22A",
+    "___:___ __ 06:22:53 +22:32:43 00:24:16 -84:43:18 21A 22A",
+    "___:___ __ 12:24:16 +84:43:18 08:31:39 +18:06:41 22A 23A",
+    "___:___ __ 08:31:39 +18:06:41 00:24:16 -84:43:18 22A 23A",
+    "___:___ __ 12:24:16 +84:43:18 08:37:44 +05:42:19 23A 24A",
+    "___:___ __ 08:37:44 +05:42:19 00:24:16 -84:43:18 23A 24A",
+    "___:___ __ 12:24:16 +84:43:18 09:27:36 -08:40:05 24A 25A",
+    "___:___ __ 09:27:36 -08:40:05 00:24:16 -84:43:18 24A 25A",
+    "___:___ __ 12:24:16 +84:43:18 09:51:33 -14:50:25 25A 26A",
+    "___:___ __ 09:51:33 -14:50:25 00:24:16 -84:43:18 25A 26A",
+    "___:___ __ 12:24:16 +84:43:18 11:00:17 -18:20:40 26A 27A",
+    "___:___ __ 11:00:17 -18:20:40 00:24:16 -84:43:18 26A 27A",
+    "___:___ __ 12:24:16 +84:43:18 12:15:59 -17:32:48 27A 28A",
+    "___:___ __ 12:15:59 -17:32:48 00:24:16 -84:43:18 27A 28A"
+  ],
+  "common_names": {
+    "HIP 746": [{"english": "Wangliang/Wang Liang"},
+                {"english": "Determinative Star"}],
+    "HIP 813": [{"english": "Determinative Star"}],
+    "HIP 841": [{"english": "Determinative Star"}],
+    "HIP 1067": [{"english": "Determinative Star"}],
+    "HIP 2081": [{"english": "Determinative Star"}],
+    "HIP 2599": [{"english": "Ce/Whip"}],
+    "HIP 2920": [{"english": "Tiansi/Celestial Horse"}],
+    "HIP 3179": [{"english": "Tiansi/Celestial Horse"}],
+    "HIP 3419": [{"english": "Tusikong/Master of Constructions"}],
+    "HIP 3693": [{"english": "Determinative Star"}],
+    "HIP 3786": [{"english": "Determinative Star"}],
+    "HIP 3821": [{"english": "Tiansi/Celestial Horse"}],
+    "HIP 4147": [{"english": "Determinative Star"}],
+    "HIP 4427": [{"english": "Tiansi/Celestial Horse"}],
+    "HIP 4577": [{"english": "Determinative Star"}],
+    "HIP 5434": [{"english": "Determinative Star"}],
+    "HIP 5626": [{"english": "Determinative Star"}],
+    "HIP 6522": [{"english": "Shaocheng/The Second Imperial Minister"}],
+    "HIP 6537": [{"english": "Determinative Star"}],
+    "HIP 6686": [{"english": "Fulu/Auxiliary Road"}],
+    "HIP 7981": [{"english": "Determinative Star"}],
+    "HIP 8796": [{"english": "Junnanmen/Southern Military Gate"}],
+    "HIP 8903": [{"english": "Determinative Star"}],
+    "HIP 9677": [{"english": "Determinative Star"}],
+    "HIP 10064": [{"english": "Determinative Star"}],
+    "HIP 10155": [{"english": "Determinative Star"}],
+    "HIP 11345": [{"english": "Determinative Star"}],
+    "HIP 11569": [{"english": "Determinative Star"}],
+    "HIP 11767": [{"english": "Yuanshi/The Origin of All Things"},
+                  {"english": "Determinative Star"}],
+    "HIP 12719": [{"english": "Determinative Star"}],
+    "HIP 13879": [{"english": "Jishi/Heap of Corpses"}],
+    "HIP 14135": [{"english": "Determinative Star"}],
+    "HIP 14576": [{"english": "Determinative Star"}],
+    "HIP 14838": [{"english": "Determinative Star"}],
+    "HIP 14862": [{"english": "Shangcheng/The Great Imperial Minister"}],
+    "HIP 15696": [{"english": "Tiane/Celestial Concave"}],
+    "HIP 15863": [{"english": "Determinative Star"}],
+    "HIP 15890": [{"english": "Determinative Star"}],
+    "HIP 15900": [{"english": "Determinative Star"}],
+    "HIP 17499": [{"english": "Determinative Star"}],
+    "HIP 17886": [{"english": "Tianchan/Celestial Slander"}],
+    "HIP 18453": [{"english": "Jishui/Stored Water"}],
+    "HIP 18532": [{"english": "Determinative Star"}],
+    "HIP 18543": [{"english": "Determinative Star"}],
+    "HIP 19038": [{"english": "Yue/Lunar Star"}],
+    "HIP 19205": [{"english": "Determinative Star"}],
+    "HIP 19461": [{"english": "Determinative Star"}],
+    "HIP 19849": [{"english": "Determinative Star"}],
+    "HIP 20635": [{"english": "Determinative Star"}],
+    "HIP 20889": [{"english": "Determinative Star"}],
+    "HIP 21248": [{"english": "Determinative Star"}],
+    "HIP 21421": [{"english": "Tiangao/Celestial High Terrace"},
+                  {"english": "Bianjiang/Side-general"}],
+    "HIP 21589": [{"english": "Determinative Star"}],
+    "HIP 21683": [{"english": "Fuer/Whisper"}],
+    "HIP 21881": [{"english": "Determinative Star"}],
+    "HIP 22549": [{"english": "Determinative Star"}],
+    "HIP 22565": [{"english": "Determinative Star"}],
+    "HIP 23362": [{"english": "Determinative Star"}],
+    "HIP 23416": [{"english": "Determinative Star"}],
+    "HIP 23522": [{"english": "Determinative Star"}],
+    "HIP 23685": [{"english": "Determinative Star"}],
+    "HIP 23875": [{"english": "Determinative Star"}],
+    "HIP 24254": [{"english": "Shaowei/The Second Imperial Guard"}],
+    "HIP 24327": [{"english": "Determinative Star"}],
+    "HIP 24436": [{"english": "Youzu/Right Foot"}],
+    "HIP 24608": [{"english": "Determinative Star"}],
+    "HIP 24879": [{"english": "Determinative Star"}],
+    "HIP 24902": [{"english": "Determinative Star"}],
+    "HIP 25336": [{"english": "Youjian/Right Shoulder"}],
+    "HIP 25859": [{"english": "Determinative Star"}],
+    "HIP 25930": [{"english": "Hengshi/Scales"},
+                  {"english": "Determinative Star"}],
+    "HIP 25984": [{"english": "Determinative Star"}],
+    "HIP 25985": [{"english": "Determinative Star"}],
+    "HIP 26176": [{"english": "Determinative Star"}],
+    "HIP 26241": [{"english": "Determinative Star"}],
+    "HIP 26311": [{"english": "Hengshi/Scales"}],
+    "HIP 26451": [{"english": "Tianguan/Celestial Pass"}],
+    "HIP 26727": [{"english": "Hengshi/Scales"}],
+    "HIP 27072": [{"english": "Shi/Excrement"}],
+    "HIP 27366": [{"english": "Zuozu/Left Foot"}],
+    "HIP 27483": [{"english": "Determinative Star"}],
+    "HIP 27628": [{"english": "Determinative Star"}],
+    "HIP 27989": [{"english": "Zuojian/Left Shoulder"}],
+    "HIP 28716": [{"english": "Determinative Star"}],
+    "HIP 28910": [{"english": "Determinative Star"}],
+    "HIP 29038": [{"english": "Determinative Star"}],
+    "HIP 29655": [{"english": "Yue/Battle Axe"}],
+    "HIP 29696": [{"english": "Determinative Star"}],
+    "HIP 30277": [{"english": "Determinative Star"}],
+    "HIP 30324": [{"english": "Yeji/Wild Cockerel"}],
+    "HIP 30343": [{"english": "Determinative Star"}],
+    "HIP 30419": [{"english": "Determinative Star"}],
+    "HIP 30438": [{"english": "Laoren/Old Man"},
+                  {"english": "Nanjilaoren/The Southernmost Old Man"}],
+    "HIP 31685": [{"english": "Determinative Star"}],
+    "HIP 32349": [{"english": "Lang/Wolf"},
+                  {"english": "Tianlang/Celestial Wolf"}],
+    "HIP 33018": [{"english": "Dishi/Emperor Teacher"},
+                  {"english": "Determinative Star"}],
+    "HIP 33827": [{"english": "Shangwei/The Great Imperial Guard"}],
+    "HIP 33977": [{"english": "Shi/Arrow"},
+                  {"english": "Determinative Star"}],
+    "HIP 34693": [{"english": "Diyou/Emperor friend"}],
+    "HIP 34769": [{"english": "Determinative Star"}],
+    "HIP 35550": [{"english": "Determinative Star"}],
+    "HIP 36046": [{"english": "Sangong/Three excellencies"}],
+    "HIP 36760": [{"english": "Determinative Star"}],
+    "HIP 36962": [{"english": "Boshi/Doctor"}],
+    "HIP 37265": [{"english": "Jishui/Accumulated Water"}],
+    "HIP 37279": [{"english": "Determinative Star"}],
+    "HIP 37379": [{"english": "Determinative Star"}],
+    "HIP 37740": [{"english": "Taishi/Court Historian"}],
+    "HIP 37826": [{"english": "Determinative Star"}],
+    "HIP 39659": [{"english": "Jixin/Pile of Firewood"}],
+    "HIP 40843": [{"english": "Determinative Star"}],
+    "HIP 41307": [{"english": "Determinative Star"}],
+    "HIP 41822": [{"english": "Determinative Star"}],
+    "HIP 42313": [{"english": "Determinative Star"}],
+    "HIP 42527": [{"english": "Determinative Star"}],
+    "HIP 43067": [{"english": "Tianji/Judge for Estimating the Age of Animals"}],
+    "HIP 44127": [{"english": "Tianzi/Son of Heaven"},
+                  {"english": "Determinative Star"}],
+    "HIP 44248": [{"english": "Cifei/Minor Imperial Consort"}],
+    "HIP 44471": [{"english": "Nüzhu/Empress"}],
+    "HIP 44504": [{"english": "Sikou/Supreme Judge"},
+                  {"english": "Dali/Minister of Justice"}],
+    "HIP 44511": [{"english": "Determinative Star"}],
+    "HIP 44700": [{"english": "Cifei/Minor Imperial Consort"}],
+    "HIP 44901": [{"english": "Siming/Deified Judge of Life"},
+                  {"english": "Siguai/Deity in Charge of Monsters"},
+                  {"english": "Taishi/Court Historian"},
+                  {"english": "Determinative Star"}],
+    "HIP 45688": [{"english": "Cifei/Minor Imperial Consort"}],
+    "HIP 45860": [{"english": "Cifei/Minor Imperial Consort"}],
+    "HIP 45902": [{"english": "Determinative Star"}],
+    "HIP 46146": [{"english": "Cifei/Minor Imperial Consort"}],
+    "HIP 46390": [{"english": "Determinative Star"}],
+    "HIP 46733": [{"english": "Shangjiang/Great General"}],
+    "HIP 46750": [{"english": "Cifei/Minor Imperial Consort"}],
+    "HIP 46771": [{"english": "Determinative Star"}],
+    "HIP 46853": [{"english": "Silu/Deified Judge of Rank"},
+                  {"english": "Sizhong/Deified Judge of Disaster"},
+                  {"english": "Sili/Senior Judge"}],
+    "HIP 46977": [{"english": "Shaofu/The Second Advisor"}],
+    "HIP 47168": [{"english": "Cifei/Minor Imperial Consort"}],
+    "HIP 47508": [{"english": "Damin/Patriarchal Clan of Empress Dowager"}],
+    "HIP 47701": [{"english": "Cifei/Minor Imperial Consort"}],
+    "HIP 47908": [{"english": "Cifei/Minor Imperial Consort"}],
+    "HIP 48319": [{"english": "Cijiang/Second General"},
+                  {"english": "Shangshu/Royal Secretary"}],
+    "HIP 48356": [{"english": "Determinative Star"}],
+    "HIP 48402": [{"english": "Guixiang/Distinguished Primer"},
+                  {"english": "Taichang/Minister of Justice"}],
+    "HIP 48437": [{"english": "Determinative Star"}],
+    "HIP 48455": [{"english": "Cifei/Minor Imperial Consort"}],
+    "HIP 49583": [{"english": "Furen/Highest-ranking Imperial Consort"},
+                  {"english": "Shangjiang/Great General"}],
+    "HIP 49637": [{"english": "Yunü/Maids-in-waiting"}],
+    "HIP 49669": [{"english": "Nüzhu/Empress"},
+                  {"english": "Determinative Star"}],
+    "HIP 50191": [{"english": "Determinative Star"}],
+    "HIP 50335": [{"english": "Cifei/Minor Imperial Consort"}],
+    "HIP 50372": [{"english": "Zhuhousangong/ Feudal Kings and Three Excellencies"},
+                  {"english": "Determinative Star"}],
+    "HIP 50583": [{"english": "Fei/Imperial Consort"},
+                  {"english": "Cijiang/Second General"}],
+    "HIP 50801": [{"english": "Qingdafu/High Ministers and Nobles"}],
+    "HIP 50933": [{"english": "Determinative Star"}],
+    "HIP 51056": [{"english": "Determinative Star"}],
+    "HIP 51624": [{"english": "Shaomin/Patriarchal Clan of Empress Consort"}],
+    "HIP 51814": [{"english": "Determinative Star"}],
+    "HIP 52911": [{"english": "Determinative Star"}],
+    "HIP 53740": [{"english": "Determinative Star"}],
+    "HIP 53824": [{"english": "Determinative Star"}],
+    "HIP 53910": [{"english": "Tianxuan/The Celestial Rotating Jade"},
+                  {"english": "Jumen/Giant Gate"},
+                  {"english": "Fa/Law"}],
+    "HIP 53954": [{"english": "Determinative Star"}],
+    "HIP 54061": [{"english": "Tianshu/The Celestial Pivot"},
+                  {"english": "Tanlang/Greedy Wolf"},
+                  {"english": "Zheng/Justice"}],
+    "HIP 54539": [{"english": "Taizun/Royals"}],
+    "HIP 54765": [{"english": "Determinative Star"}],
+    "HIP 54872": [{"english": "Xishangxiang/The Great Western Premier"}],
+    "HIP 54879": [{"english": "Xicixiang/The Second Western Premier"}],
+    "HIP 54951": [{"english": "Huben/Emperor's Bodyguard"}],
+    "HIP 55084": [{"english": "Determinative Star"}],
+    "HIP 55203": [{"english": "Shuren/Common People"}],
+    "HIP 55219": [{"english": "Shi/Gentry"},
+                  {"english": "Determinative Star"}],
+    "HIP 55425": [{"english": "Determinative Star"}],
+    "HIP 55434": [{"english": "Xishangjiang/The Great Western General"}],
+    "HIP 55642": [{"english": "Xicijiang/The Second Western General"}],
+    "HIP 56211": [{"english": "Shangfu/The Great Advisor"}],
+    "HIP 56975": [{"english": "Congguan/Retinue"}],
+    "HIP 57320": [{"english": "Baidi/White Emperor"}],
+    "HIP 57380": [{"english": "Determinative Star"}],
+    "HIP 57399": [{"english": "Taiyangshou/Guard of the Sun"}],
+    "HIP 57477": [{"english": "Determinative Star"}],
+    "HIP 57565": [{"english": "Taizi/Crown Prince"}],
+    "HIP 57613": [{"english": "Determinative Star"}],
+    "HIP 57632": [{"english": "Huangdizuo/Seat of Yellow Emperor"},
+                  {"english": "Determinative Star"}],
+    "HIP 57646": [{"english": "Heidi/Black Emperor"}],
+    "HIP 57757": [{"english": "Youzhifa/Right Law Administrator"}],
+    "HIP 57779": [{"english": "Chidi/Red Emperor"}],
+    "HIP 57936": [{"english": "Determinative Star"}],
+    "HIP 58001": [{"english": "Tianji/The Celestial Shining Pearl"},
+                  {"english": "Lucun/Good Fortune Star"},
+                  {"english": "Ling/Command"}],
+    "HIP 58159": [{"english": "Cangdi/Azure Emperor"}],
+    "HIP 58858": [{"english": "Xingchen/Officer of Honour"}],
+    "HIP 59199": [{"english": "Youxia/Right linchpin"}],
+    "HIP 59468": [{"english": "Determinative Star"}],
+    "HIP 59774": [{"english": "Tianquan/The Celestial Balance"},
+                  {"english": "Wenqu/Literary Star"},
+                  {"english": "Fa/Crusade"}],
+    "HIP 59803": [{"english": "Determinative Star"}],
+    "HIP 59819": [{"english": "Determinative Star"}],
+    "HIP 59856": [{"english": "Determinative Star"}],
+    "HIP 60129": [{"english": "Zuozhifa/Left Law Administrator"}],
+    "HIP 60172": [{"english": "Yezhe/Usher to the Court"}],
+    "HIP 60189": [{"english": "Changsha/Changsha"}],
+    "HIP 60988": [{"english": "Xiang/Prime Minister"}],
+    "HIP 61174": [{"english": "Zuoxia/Left linchpin"}],
+    "HIP 61281": [{"english": "Shaowei/The Second Commandant"}],
+    "HIP 61658": [{"english": "Determinative Star"}],
+    "HIP 61789": [{"english": "Determinative Star"}],
+    "HIP 61941": [{"english": "Dongshangxiang/The Great Eastern Premier"}],
+    "HIP 61960": [{"english": "Determinative Star"}],
+    "HIP 62572": [{"english": "Tianshu/The Celestial Pivot"},
+                  {"english": "Niuxing/Ancient Star"},
+                  {"english": "Determinative Star"}],
+    "HIP 62956": [{"english": "Yuheng/The Jade Sighting-tube"},
+                  {"english": "Lianzhen/Clean and Chaste"},
+                  {"english": "Sha/Killing"}],
+    "HIP 63076": [{"english": "Determinative Star"}],
+    "HIP 63090": [{"english": "Dongcixiang/The Second Eastern Premier"}],
+    "HIP 63608": [{"english": "Dongcijiang/The Second Eastern General"}],
+    "HIP 64004": [{"english": "Determinative Star"}],
+    "HIP 64238": [{"english": "Jinxian/Recommending Virtuous Men"}],
+    "HIP 64241": [{"english": "Dongshangjiang/The Great Eastern General"}],
+    "HIP 64924": [{"english": "Determinative Star"}],
+    "HIP 64962": [{"english": "Determinative Star"}],
+    "HIP 65109": [{"english": "Determinative Star"}],
+    "HIP 65378": [{"english": "Kaiyang/The Opener of Heat"},
+                  {"english": "Wuqu/Military Star"},
+                  {"english": "Wei/Danger"}],
+    "HIP 65474": [{"english": "Determinative Star"}],
+    "HIP 65477": [{"english": "Fu/Assistant"}],
+    "HIP 66006": [{"english": "Determinative Star"}],
+    "HIP 66200": [{"english": "Determinative Star"}],
+    "HIP 66234": [{"english": "Determinative Star"}],
+    "HIP 66798": [{"english": "Taiyi/First Great One"}],
+    "HIP 67301": [{"english": "Yaoguang/The Twinkling Brilliance"},
+                  {"english": "Pojun/Break the Enemy"},
+                  {"english": "Bu/Army"}],
+    "HIP 67464": [{"english": "Determinative Star"}],
+    "HIP 67480": [{"english": "Determinative Star"}],
+    "HIP 67627": [{"english": "Tianyi/Celestial Great One"}],
+    "HIP 67927": [{"english": "Determinative Star"}],
+    "HIP 68756": [{"english": "Youshu/Right Pivot"}],
+    "HIP 68895": [{"english": "Determinative Star"}],
+    "HIP 69112": [{"english": "Hougong/Harem"}],
+    "HIP 69269": [{"english": "Determinative Star"}],
+    "HIP 69427": [{"english": "Determinative Star"}],
+    "HIP 69673": [{"english": "Dajiao/Great Horn"}],
+    "HIP 69732": [{"english": "Xuange/Sombre Lance"}],
+    "HIP 69879": [{"english": "Zhaoyao/Twinkling Indicator"}],
+    "HIP 70027": [{"english": "Determinative Star"}],
+    "HIP 70469": [{"english": "Determinative Star"}],
+    "HIP 70497": [{"english": "Determinative Star"}],
+    "HIP 70692": [{"english": "Shuzi/Bastard"}],
+    "HIP 70952": [{"english": "Determinative Star"}],
+    "HIP 71075": [{"english": "Determinative Star"}],
+    "HIP 71795": [{"english": "Determinative Star"}],
+    "HIP 72105": [{"english": "Determinative Star"}],
+    "HIP 72607": [{"english": "Di/Emperor"}],
+    "HIP 72622": [{"english": "Shi/Wedded Wife"},
+                  {"english": "Determinative Star"}],
+    "HIP 72659": [{"english": "Determinative Star"}],
+    "HIP 72959": [{"english": "Determinative Star"}],
+    "HIP 73714": [{"english": "Determinative Star"}],
+    "HIP 74376": [{"english": "Qizhenjiangjun/Chariots and Cavalry General"}],
+    "HIP 74392": [{"english": "Qie/Minor Concubine"}],
+    "HIP 74395": [{"english": "Determinative Star"}],
+    "HIP 74605": [{"english": "Determinative Star"}],
+    "HIP 74785": [{"english": "Shi/Wedded Wife"}],
+    "HIP 75097": [{"english": "Taizi/Crown Prince"}],
+    "HIP 75458": [{"english": "Zuoshu/Left Pivot"}],
+    "HIP 76267": [{"english": "Determinative Star"}],
+    "HIP 76276": [{"english": "Qin"}],
+    "HIP 76333": [{"english": "Qie/Minor Concubine"}],
+    "HIP 76470": [{"english": "Determinative Star"}],
+    "HIP 77070": [{"english": "Shu"}],
+    "HIP 77233": [{"english": "Zhou"}],
+    "HIP 77277": [{"english": "Determinative Star"}],
+    "HIP 77516": [{"english": "Tianru/Celestial Milk"}],
+    "HIP 77622": [{"english": "Ba"}],
+    "HIP 77634": [{"english": "Determinative Star"}],
+    "HIP 77840": [{"english": "Ri/Solar Star"}],
+    "HIP 77853": [{"english": "Determinative Star"}],
+    "HIP 78072": [{"english": "Zheng"}],
+    "HIP 78104": [{"english": "Shangjiang/The Great General"}],
+    "HIP 78265": [{"english": "Cijiang/The Second General"},
+                  {"english": "Determinative Star"}],
+    "HIP 78384": [{"english": "Determinative Star"}],
+    "HIP 78401": [{"english": "Cixiang/The Second General"}],
+    "HIP 78527": [{"english": "Shangzai/The Great Prime Minister"}],
+    "HIP 78820": [{"english": "Shangxiang/The Great Premier"}],
+    "HIP 78990": [{"english": "Determinative Star"}],
+    "HIP 79043": [{"english": "Jin"}],
+    "HIP 79374": [{"english": "Jianbi/Door Bolt"}],
+    "HIP 79593": [{"english": "Liang"}],
+    "HIP 79882": [{"english": "Chu"}],
+    "HIP 80112": [{"english": "Taizi/Crown Prince"},
+                  {"english": "Determinative Star"}],
+    "HIP 80170": [{"english": "Hejian"}],
+    "HIP 80181": [{"english": "Determinative Star"}],
+    "HIP 80331": [{"english": "Shaozai/The Second Prime Minister"}],
+    "HIP 80343": [{"english": "Determinative Star"}],
+    "HIP 80473": [{"english": "Determinative Star"}],
+    "HIP 80650": [{"english": "Determinative Star"}],
+    "HIP 80763": [{"english": "Tianwang/Celestial King"},
+                  {"english": "Mingtang/Cosmological Temple"},
+                  {"english": "Dahuo/Great Fire"}],
+    "HIP 80816": [{"english": "Hezhong"}],
+    "HIP 80883": [{"english": "Determinative Star"}],
+    "HIP 81266": [{"english": "Shuzi/Bastard"}],
+    "HIP 81377": [{"english": "Han"}],
+    "HIP 82037": [{"english": "Determinative Star"}],
+    "HIP 82369": [{"english": "Determinative Star"}],
+    "HIP 82396": [{"english": "Hou/Empress Consort"}],
+    "HIP 82514": [{"english": "Fei/Imperial Consort"},
+                  {"english": "Determinative Star"}],
+    "HIP 82545": [{"english": "Shengong/Changing Room"}],
+    "HIP 82671": [{"english": "Fei/Imperial Consort"}],
+    "HIP 83000": [{"english": "Determinative Star"}],
+    "HIP 83613": [{"english": "Determinative Star"}],
+    "HIP 83895": [{"english": "Shangbi/The Great Protector"}],
+    "HIP 84012": [{"english": "Song"}],
+    "HIP 84143": [{"english": "Fei/Imperial Consort"}],
+    "HIP 84345": [{"english": "Dizuo/Emperor's Seat"}],
+    "HIP 84379": [{"english": "Wei"}],
+    "HIP 84380": [{"english": "Determinative Star"}],
+    "HIP 84970": [{"english": "Determinative Star"}],
+    "HIP 85474": [{"english": "Determinative Star"}],
+    "HIP 85693": [{"english": "Zhao"}],
+    "HIP 85696": [{"english": "Qie/Minor Concubine"}],
+    "HIP 85792": [{"english": "Determinative Star"}],
+    "HIP 85927": [{"english": "Qie/Minor Concubine"}],
+    "HIP 86032": [{"english": "Hou/Astrologer"}],
+    "HIP 86228": [{"english": "Pin/Imperial Concubine"}],
+    "HIP 86263": [{"english": "Nanhai"}],
+    "HIP 86414": [{"english": "Determinative Star"}],
+    "HIP 86614": [{"english": "Nüshi/Female Protocol"}],
+    "HIP 86670": [{"english": "Pin/Imperial Concubine"}],
+    "HIP 86742": [{"english": "Determinative Star"}],
+    "HIP 86974": [{"english": "Jiuhe"}],
+    "HIP 87073": [{"english": "Pin/Imperial Concubine"}],
+    "HIP 87261": [{"english": "Fuyue/Fu Yue"}],
+    "HIP 88048": [{"english": "Yan"}],
+    "HIP 88116": [{"english": "Determinative Star"}],
+    "HIP 88192": [{"english": "Determinative Star"}],
+    "HIP 88267": [{"english": "Determinative Star"}],
+    "HIP 88331": [{"english": "Determinative Star"}],
+    "HIP 88550": [{"english": "Kang/Chaff"}],
+    "HIP 88635": [{"english": "Determinative Star"}],
+    "HIP 88771": [{"english": "Determinative Star"}],
+    "HIP 88794": [{"english": "Zhongshan"}],
+    "HIP 89341": [{"english": "Qisha/Seven Assassins"},
+                  {"english": "Jiang/General"}],
+    "HIP 89908": [{"english": "Shaobi/The Second Protector"}],
+    "HIP 89937": [{"english": "Zhushi/Official of Royal Archives"}],
+    "HIP 89962": [{"english": "Donghai"}],
+    "HIP 90156": [{"english": "Determinative Star"}],
+    "HIP 90422": [{"english": "Determinative Star"}],
+    "HIP 90496": [{"english": "Tianxiang/Celestial Premier"},
+                  {"english": "Yin/Stamp"}],
+    "HIP 90763": [{"english": "Nongzhangren/Peasant"}],
+    "HIP 91117": [{"english": "Determinative Star"}],
+    "HIP 91262": [{"english": "Zhinüxing/Weaving Girl"},
+                  {"english": "Determinative Star"}],
+    "HIP 92041": [{"english": "Tiantong/Celestial Collaborators"},
+                  {"english": "Fu/Blessing"},
+                  {"english": "Determinative Star"}],
+    "HIP 92043": [{"english": "Qi"}],
+    "HIP 92855": [{"english": "Tianji/Celestial Secret"},
+                  {"english": "Shan/Kindness"}],
+    "HIP 92862": [{"english": "Determinative Star"}],
+    "HIP 92946": [{"english": "Xu"}],
+    "HIP 93085": [{"english": "Determinative Star"}],
+    "HIP 93194": [{"english": "Determinative Star"}],
+    "HIP 93506": [{"english": "Tianfu/Celestial Official"},
+                  {"english": "Ling/Command"}],
+    "HIP 93747": [{"english": "Wuyue"}],
+    "HIP 93864": [{"english": "Tianliang/Celestial Beam"},
+                  {"english": "Yin/Shade"}],
+    "HIP 94114": [{"english": "Determinative Star"}],
+    "HIP 94376": [{"english": "Determinative Star"}],
+    "HIP 94779": [{"english": "Determinative Star"}],
+    "HIP 95501": [{"english": "Determinative Star"}],
+    "HIP 96465": [{"english": "Determinative Star"}],
+    "HIP 96950": [{"english": "Determinative Star"}],
+    "HIP 97165": [{"english": "Determinative Star"}],
+    "HIP 97278": [{"english": "Youjiangjun/Right General"}],
+    "HIP 97649": [{"english": "Dajiangjun/Great General"},
+                  {"english": "Qianniuxing/Cowboy"},
+                  {"english": "Determinative Star"}],
+    "HIP 98036": [{"english": "Zuojiangjun/Left General"}],
+    "HIP 98066": [{"english": "Determinative Star"}],
+    "HIP 98337": [{"english": "Determinative Star"}],
+    "HIP 98412": [{"english": "Determinative Star"}],
+    "HIP 99255": [{"english": "Shangwei/The Great Imperial Guard"}],
+    "HIP 99473": [{"english": "Determinative Star"}],
+    "HIP 100062": [{"english": "Determinative Star"}],
+    "HIP 100345": [{"english": "Determinative Star"}],
+    "HIP 101421": [{"english": "Determinative Star"}],
+    "HIP 101772": [{"english": "Determinative Star"}],
+    "HIP 101847": [{"english": "Determinative Star"}],
+    "HIP 101923": [{"english": "Determinative Star"}],
+    "HIP 101958": [{"english": "Determinative Star"}],
+    "HIP 102014": [{"english": "Yue"}],
+    "HIP 102485": [{"english": "Determinative Star"}],
+    "HIP 102487": [{"english": "Determinative Star"}],
+    "HIP 102599": [{"english": "Determinative Star"}],
+    "HIP 102618": [{"english": "Determinative Star"}],
+    "HIP 102831": [{"english": "Qi"}],
+    "HIP 103738": [{"english": "Zheng"}],
+    "HIP 103777": [{"english": "Chu"}],
+    "HIP 104019": [{"english": "Determinative Star"}],
+    "HIP 104174": [{"english": "Yan"}],
+    "HIP 104234": [{"english": "Wei"}],
+    "HIP 104521": [{"english": "Determinative Star"}],
+    "HIP 104750": [{"english": "Han"}],
+    "HIP 104963": [{"english": "Determinative Star"}],
+    "HIP 105140": [{"english": "Jin"}],
+    "HIP 105881": [{"english": "Determinative Star"}],
+    "HIP 106032": [{"english": "Determinative Star"}],
+    "HIP 106278": [{"english": "Determinative Star"}],
+    "HIP 106340": [{"english": "Determinative Star"}],
+    "HIP 106551": [{"english": "Determinative Star"}],
+    "HIP 106723": [{"english": "Determinative Star"}],
+    "HIP 106856": [{"english": "Determinative Star"}],
+    "HIP 106944": [{"english": "Determinative Star"}],
+    "HIP 107348": [{"english": "Determinative Star"}],
+    "HIP 107354": [{"english": "Determinative Star"}],
+    "HIP 108991": [{"english": "Determinative Star"}],
+    "HIP 109074": [{"english": "Determinative Star"}],
+    "HIP 109176": [{"english": "Determinative Star"}],
+    "HIP 109410": [{"english": "Determinative Star"}],
+    "HIP 109973": [{"english": "Determinative Star"}],
+    "HIP 110273": [{"english": "Determinative Star"}],
+    "HIP 110391": [{"english": "Determinative Star"}],
+    "HIP 110960": [{"english": "Determinative Star"}],
+    "HIP 110991": [{"english": "Determinative Star"}],
+    "HIP 111056": [{"english": "Shaowei/The Second Imperial Guard"}],
+    "HIP 111169": [{"english": "Determinative Star"}],
+    "HIP 111188": [{"english": "Tiangang/Materials for Making Tents"}],
+    "HIP 111710": [{"english": "Determinative Star"}],
+    "HIP 112029": [{"english": "Determinative Star"}],
+    "HIP 112519": [{"english": "Determinative Star"}],
+    "HIP 112935": [{"english": "Determinative Star"}],
+    "HIP 113368": [{"english": "Beiluoshimen/North Gate of the Military Camp"}],
+    "HIP 113889": [{"english": "Determinative Star"}],
+    "HIP 113963": [{"english": "Determinative Star"}],
+    "HIP 114341": [{"english": "Determinative Star"}],
+    "HIP 115102": [{"english": "Determinative Star"}],
+    "HIP 115738": [{"english": "Determinative Star"}],
+    "HIP 115746": [{"english": "Tianhuangdadi/Great Emperor of Heaven"}],
+    "M 44": [{"english": "Jishiqi / Cumulative Corpse Gas"}],
+    "M 45": [{"english": "Maotou / Ancient Flag with Yak's Tail"}],
+    "M 7": [{"english": "Yu / Fish"}],
+    "NAME Jupiter": [{"english": "Sui Star", "native": "岁星", "translators_comments": "Native name of Jupiter in Chinese culture"}],
+    "NAME Mars": [{"english": "Yinghuo", "native": "荧惑", "translators_comments": "Native name of Mars in Chinese culture"}],
+    "NAME Mercury": [{"english": "Chen Star", "native": "辰星", "translators_comments": "Native name of Mercury in Chinese culture"}],
+    "NAME Moon": [{"english": "Taiyin", "native": "太阴", "translators_comments": "Native name of the Moon in Chinese culture"}],
+    "NAME Saturn": [{"english": "Zhen Star", "native": "填星", "translators_comments": "Native name of Saturn in Chinese culture"}],
+    "NAME Sun": [{"english": "Taiyang", "native": "太阳", "translators_comments": "Native name of the Sun in Chinese culture"}],
+    "NAME Venus": [{"english": "Taibai", "native": "太白", "translators_comments": "Native name of Venus in Chinese culture"}]
+  }
+}

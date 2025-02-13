@@ -1,0 +1,539 @@
+{
+  "id": "babylonian_seleucid",
+  "region": "Western Asia",
+  "classification": ["historical"],
+  "fallback_to_international_names": false,
+  "thumbnail": "???",
+  "thumbnail_bscale": 2,
+  "highlight": "???",
+  "asterisms": [
+    {
+      "id": "AST babylonian_seleucid 001",
+      "is_ray_helper": true,
+      "lines": [[37279, 42319]]
+    }
+  ],
+  "constellations": [
+    {
+      "id": "CON babylonian_seleucid 001",
+      "lines": [[746, 3179, 4427, 6686, 8886], [2599, 4151, 5542], [3951, 4151]],
+      "common_name": {"english": "Plough", "native": "Epinnu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 002",
+      "lines": [[4427, 4427]],
+      "common_name": {"english": "Plough's Seeder (Wolf)", "native": "Barbaru"}
+    },
+    {
+      "id": "CON babylonian_seleucid 003",
+      "lines": [[18246, 17448], [18246, 18614, 18532, 17358, 15863, 14328, 13268, 14382], [15863, 12777, 11313, 9640], [13254, 14354, 14576, 17358], [11220, 12777], [14382, 14328]],
+      "common_name": {"english": "Old Man", "native": "Shibu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 004",
+      "lines": [[28380, 28360, 24608]],
+      "common_name": {"english": "Crook", "native": "Gamlu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 005",
+      "lines": [[31681, 32362, 35550, 37826], [36850, 32246, 30883, 30343], [33018, 34693, 36046, 36962, 37704]],
+      "image": {
+        "file": "illustrations/JNG_04_gemini_bab_1024.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [333, 177], "hip": 37826},
+          {"pos": [207, 951], "hip": 32362},
+          {"pos": [778, 355], "hip": 33018}
+        ]
+      },
+      "common_name": {"english": "Twins", "native": "Tu'amu rabutu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 006",
+      "lines": [[5571, 7097, 8198, 9487, 7007, 4906, 3786], [5571, 4463, 3693, 4510, 6193, 5742, 5571, 5081, 3810, 5571], [3786, 1645, 186]],
+      "image": {
+        "file": "illustrations/JNG_01_fische_bab_1024.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [400, 837], "hip": 9487},
+          {"pos": [187, 322], "hip": 3693},
+          {"pos": [740, 330], "hip": 116771}
+        ]
+      },
+      "common_name": {"english": "Tails", "native": "Zibati"}
+    },
+    {
+      "id": "CON babylonian_seleucid 007",
+      "lines": [[41822, 42911, 42806, 41909, 41822], [40526, 41822], [42911, 44066], [42806, 43103], [41909, 37740]],
+      "image": {
+        "file": "illustrations/JNG_05_Cancer_sk_1024.png",
+        "size": [1024, 728],
+        "anchors": [
+          {"pos": [879, 144], "hip": 43103},
+          {"pos": [45, 184], "hip": 44066},
+          {"pos": [67, 600], "hip": 40526}
+        ]
+      },
+      "common_name": {"english": "Crab", "native": "Allutu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 008",
+      "lines": [[47908, 48455, 50335, 50583, 49583, 49669, 54879, 54872, 50583], [54872, 57632], [54879, 55642], [49669, 49637, 49029], [50583, 53417, 55203, 55219], [46146, 48455], [46750, 47908], [54879, 54182], [49669, 51624]],
+      "image": {
+        "file": "illustrations/JNG_06_leo_bab_1024.png",
+        "size": [1024, 656],
+        "anchors": [
+          {"pos": [59, 504], "hip": 57632},
+          {"pos": [748, 618], "hip": 49029},
+          {"pos": [302, 47], "hip": 55219}
+        ]
+      },
+      "common_name": {"english": "Urgulu-demon", "native": "Urgulu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 009",
+      "lines": [[49669, 49669]],
+      "common_name": {"english": "King", "native": "sharru"}
+    },
+    {
+      "id": "CON babylonian_seleucid 010",
+      "lines": [[60742, 60697, 60904], [60697, 60351], [60742, 60599, 60957, 60202], [61394, 60599, 59847], [59501, 60957, 61418]],
+      "common_name": {"english": "Spadix (Jewellery) of Erua's date palm", "native": "sissinnu Eru"}
+    },
+    {
+      "id": "CON babylonian_seleucid 011",
+      "lines": [[67927, 71053, 71075, 74666, 72105, 71795], [71053, 72105], [73555, 72582], [73555, 73634]],
+      "common_name": {"english": "SHU.PA-Enlil", "native": "SHU.PA"}
+    },
+    {
+      "id": "CON babylonian_seleucid 013",
+      "lines": [[76127, 75695, 76267, 76952, 77512, 78159, 78493]],
+      "common_name": {"english": "Asterism of Dignity", "native": "kakkab balti"}
+    },
+    {
+      "id": "CON babylonian_seleucid 014",
+      "lines": [[67301, 65378, 62956, 59774, 58001, 53910, 54061]],
+      "common_name": {"english": "Wagon", "native": "Ereqqu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 015",
+      "lines": [[65477, 65477]],
+      "common_name": {"english": "The Fox", "native": "Shelebu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 016",
+      "lines": [[54061, 54061]],
+      "common_name": {"english": "The Ewe", "native": "Lakhru"}
+    },
+    {
+      "id": "CON babylonian_seleucid 017",
+      "lines": [[11767, 85822, 82080, 77055, 72607], [5372, 11767], [72607, 75097]],
+      "common_name": {"english": "The Hitched Yoke", "native": "MU.BU.KESH.DA"}
+    },
+    {
+      "id": "CON babylonian_seleucid 018",
+      "lines": [[87833, 85670, 85829, 87585, 87833], [87585, 94376]],
+      "common_name": {"english": "Wagon of Heaven", "native": "MAR.GID.DA.AN.NA"}
+    },
+    {
+      "id": "CON babylonian_seleucid 019",
+      "lines": [[11767, 11767]],
+      "common_name": {"english": "The Heir of the Sublime Temple, the first-ranking son of Anu", "native": "Ibila-Emakh maru reshtu sha Anim"}
+    },
+    {
+      "id": "CON babylonian_seleucid 020",
+      "lines": [[93194, 92791, 91971, 92420], [91919, 91971, 91262, 91919], [93903, 92791]],
+      "common_name": {"english": "The She-Goat", "native": "Enzu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 021",
+      "lines": [[80816, 81693, 81833, 83947, 84380, 83207, 82504, 80816, 80170], [84379, 83207], [86974, 84380]],
+      "common_name": {"english": "The Dog", "native": "Kalbu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 022",
+      "lines": [[91262, 91262]],
+      "common_name": {"english": "Lamma", "native": "Lamassu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 023",
+      "lines": [[94481, 94713]],
+      "common_name": {"english": "Nin-SAR", "native": "Nin-SAR and Erragal"}
+    },
+    {
+      "id": "CON babylonian_seleucid 024",
+      "lines": [[116584, 111169, 109492, 99675, 100453, 102098, 109492], [100453, 102488, 104732], [99675, 97165, 96441, 99675]],
+      "common_name": {"english": "Panther", "native": "Nimru"}
+    },
+    {
+      "id": "CON babylonian_seleucid 025",
+      "lines": [[96837, 96757, 97886, 99824, 101867, 96837]],
+      "common_name": {"english": "The Pig", "native": "Shakhu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 026",
+      "lines": [[105199, 112724, 116727, 106032, 105199]],
+      "common_name": {"english": "The Horse", "native": "Sisu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 027",
+      "lines": [[8068, 7607, 6999, 6813, 6411, 5434, 3801], [6999, 5434], [3504, 3414, 2900, 2225, 841, 117221, 116805, 116631, 3293, 4411, 5317, 5554, 4298, 3504]],
+      "common_name": {"english": "The Stag", "native": "Lulimu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 030",
+      "lines": [[677, 1067, 113963, 113881, 677]],
+      "common_name": {"english": "Field", "native": "Iku"}
+    },
+    {
+      "id": "CON babylonian_seleucid 031",
+      "lines": [[118268, 116771, 115830, 114144], [115830, 113889], [116928, 116771, 117020], [118268, 117927, 194, 118268], [117020, 115919], [116928, 116323]],
+      "common_name": {"english": "The Swallow", "native": "Shinunutu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 032",
+      "lines": [[7719, 7513, 10064, 10670, 5544, 5447, 4436, 7719], [4436, 1473, 2912, 3031, 5544], [2912, 1630, 1493, 1657, 2912], [9021, 9977], [8814, 7818], [3031, 5586], [1473, 3231]],
+      "common_name": {"english": "Anunitu", "native": "Anunitu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 033",
+      "lines": [[16369, 16083, 15900, 13954, 12828, 10324, 9110, 10732, 13108, 14838, 15110, 15870, 16641, 16369], [9110, 8832, 8903, 9884]],
+      "image": {
+        "file": "illustrations/JNG_02_Aries_sk_1024.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [114, 302], "hip": 15870},
+          {"pos": [254, 772], "hip": 15900},
+          {"pos": [724, 188], "hip": 9884}
+        ]
+      },
+      "common_name": {"english": "Sheep", "native": "Immeru"}
+    },
+    {
+      "id": "CON babylonian_seleucid 034",
+      "lines": [[17847, 17702, 17608, 17499, 17573, 17702]],
+      "common_name": {"english": "The Stars, The Seven Gods", "native": "Zappu, Sebettu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 035",
+      "lines": [[21421, 20894, 20205, 20455, 20889, 25428], [21421, 26451], [20205, 18724], [17702, 19038, 20455]],
+      "image": {
+        "file": "illustrations/JNG_03_taurus_bab_1024.png",
+        "size": [633, 640],
+        "anchors": [
+          {"pos": [121, 27], "hip": 25428},
+          {"pos": [556, 276], "hip": 17702},
+          {"pos": [385, 411], "hip": 20205}
+        ]
+      },
+      "common_name": {"english": "Bull of Heaven", "native": "Alu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 036",
+      "lines": [[21421, 20894, 20205, 20455, 20889]],
+      "common_name": {"english": "Jaw of the Bull", "native": "is le"}
+    },
+    {
+      "id": "CON babylonian_seleucid 037",
+      "lines": [[28614, 28413], [28614, 27989], [27366, 26727, 27989], [25336, 25930, 24436], [25930, 26311, 26727], [26207, 26366, 27989], [26366, 25336, 22797], [28614, 27913, 28716, 29433, 29650, 29434]],
+      "common_name": {"english": "True Shepherd of Anu", "native": "Shidallu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 038",
+      "lines": [[22449, 22549]],
+      "common_name": {"english": "Lulal and Latarak", "native": "Lulal u Latarak"}
+    },
+    {
+      "id": "CON babylonian_seleucid 039",
+      "lines": [[28910, 28103, 27288, 25985, 25606, 23685, 24305, 25985], [24305, 24327, 24244], [24327, 24845, 25202], [24845, 24873], [23430, 23685, 25045], [24305, 24845], [28816, 25985], [27654, 25606, 27072]],
+      "common_name": {"english": "The Rooster", "native": "Targlugallu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 040",
+      "lines": [[32349, 34444], [33347, 31827, 31592], [35904, 34444, 33579]],
+      "common_name": {"english": "The Arrow", "native": "Shukudu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 041",
+      "lines": [[39757, 36795, 33977, 30122, 27628, 39757]],
+      "common_name": {"english": "The Bow", "native": "Qashtu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 042",
+      "lines": [[68895, 64962, 64166, 57936, 56343, 54682, 53740, 52943, 51069, 49841, 48356, 46390, 46776, 45336, 43813, 43109, 42313, 42402, 42799, 43109]],
+      "common_name": {"english": "The Snake", "native": "Nirakh"}
+    },
+    {
+      "id": "CON babylonian_seleucid 043",
+      "lines": [[59199, 59316, 59803, 60965, 61359, 59199]],
+      "common_name": {"english": "The Raven", "native": "Aribu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 044",
+      "lines": [[57283, 55687, 57791, 60129, 60172, 61103, 62325, 63221, 63090, 61941, 61558, 59273, 57283], [59273, 57791], [60129, 61941], [62933, 62325, 61960, 62394, 62541, 62356, 63355, 64241, 64823, 63608, 63081, 63221], [63090, 64238, 66006], [66200, 66249, 66006, 65639], [64577, 66006, 67494], [66006, 65474], [56901, 55705], [55874, 55282]],
+      "image": {
+        "file": "illustrations/virgo_4plani_1024.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [578, 213], "hip": 63608},
+          {"pos": [293, 538], "hip": 65474},
+          {"pos": [780, 988], "hip": 55687}
+        ]
+      },
+      "common_name": {"english": "The Maiden (Goddess Shala)", "native": "Shala"}
+    },
+    {
+      "id": "CON babylonian_seleucid 045",
+      "lines": [[74785, 72622, 69427, 69701, 71957, 72622], [74785, 71957, 72220, 73620, 74785], [73620, 71957, 69427]],
+      "image": {
+        "file": "illustrations/JNG_08_libra_bab_1024.png",
+        "size": [1024, 712],
+        "anchors": [
+          {"pos": [248, 44], "hip": 72622},
+          {"pos": [280, 552], "hip": 69701},
+          {"pos": [620, 100], "hip": 74785}
+        ]
+      },
+      "common_name": {"english": "The Scales", "native": "Zibanitu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 046",
+      "lines": [[81377, 83000, 86032, 86742, 84012, 81377], [80975, 80343, 80894, 82369], [84345, 83000, 79882, 79593, 80883, 82673, 84345], [85355, 84514, 85365, 86284, 88048]],
+      "common_name": {"english": "Asterism of Zababa", "native": "kakkab Zababa"}
+    },
+    {
+      "id": "CON babylonian_seleucid 047",
+      "lines": [[92175, 95501], [93805, 95501, 97649], [99473, 95501, 93747], [97649, 98036, 101421, 102281, 102532, 101958, 101769, 97278, 97649], [98036, 99473], [97278, 93747]],
+      "common_name": {"english": "Eagle", "native": "Eru"}
+    },
+    {
+      "id": "CON babylonian_seleucid 048",
+      "lines": [[101916, 104858, 104987, 101916, 100541, 101101], [101847, 101692, 101101]],
+      "common_name": {"english": "Dead Man", "native": "Pagru"}
+    },
+    {
+      "id": "CON babylonian_seleucid 049",
+      "lines": [[113246, 113368, 112948], [113368, 111188, 109285, 107380, 107608, 109422, 111954, 113368]],
+      "common_name": {"english": "The Fish", "native": "Nunu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 050",
+      "lines": [[110003, 109139], [115438, 114855, 112961, 110003, 109074, 106278, 109139, 112716, 113136, 114341], [109074, 107315, 106278], [109074, 110395, 111710], [110960, 111497, 114724, 115033, 116971, 116901], [110960, 110672, 154, 355, 910, 1170]],
+      "image": {
+        "file": "illustrations/JNG_12_aquarius_bab_ohnevogel_1024.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [608, 85], "hip": 107315},
+          {"pos": [650, 952], "hip": 113562},
+          {"pos": [94, 684], "hip": 443}
+        ]
+      },
+      "common_name": {"english": "The Great One", "native": "GU.LA"}
+    },
+    {
+      "id": "CON babylonian_seleucid 051",
+      "lines": [[30438, 30438]],
+      "common_name": {"english": "Star of Eridu", "native": "Eridu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 052",
+      "lines": [[3419, 1562, 8102, 9347, 3419]],
+      "common_name": {"english": "Ninmakh", "native": "Ninmakh"}
+    },
+    {
+      "id": "CON babylonian_seleucid 053",
+      "lines": [[14146, 15474, 16611, 17651, 21393, 20535, 20042, 14879, 14146, 12843]],
+      "common_name": {"english": "Khabasiranu", "native": "Khabasiranu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 054",
+      "lines": [[39953, 44816, 52727, 52419, 45556, 41037, 42913, 39953]],
+      "common_name": {"english": "The Harrow", "native": "Mashkakatu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 055",
+      "lines": [[68702, 71683]],
+      "common_name": {"english": "Shullat and Khanish", "native": "Shullat u Khanish"}
+    },
+    {
+      "id": "CON babylonian_seleucid 056",
+      "lines": [[65109, 62896], [71352, 68933], [71683, 68702, 66657, 68002, 68933, 67244, 65109, 65373, 61932, 61084, 60718], [68002, 65373], [67244, 67457, 67669, 67153, 67457]],
+      "common_name": {"english": "Numushda", "native": "Numushda"}
+    },
+    {
+      "id": "CON babylonian_seleucid 057",
+      "lines": [[78918, 77634, 78384], [77634, 76705, 76297, 74376, 71860, 73273, 75141, 75177, 76705], [71536, 71860], [74376, 74395], [76297, 78323]],
+      "common_name": {"english": "Mad Dog", "native": "UR.IDIM"}
+    },
+    {
+      "id": "CON babylonian_seleucid 058",
+      "lines": [[85696, 85927, 87261, 87073, 86228, 84143, 82729, 82545, 82396, 81266, 80763, 80112, 78820, 76333, 76219, 78727, 79374, 80112, 76600, 73714, 78265, 80112, 78401]],
+      "image": {
+        "file": "illustrations/JNG_13_scorpius_sk_1024.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [46, 670], "hip": 87261},
+          {"pos": [325, 838], "hip": 82716},
+          {"pos": [760, 483], "hip": 78401}
+        ]
+      },
+      "common_name": {"english": "Scorpion", "native": "Zuqaqipu"}
+    },
+    {
+      "id": "CON babylonian_seleucid 059",
+      "lines": [[80763, 80763]],
+      "common_name": {"english": "Lisi", "native": "Irat Zuqaqipi, Lisi"}
+    },
+    {
+      "id": "CON babylonian_seleucid 060",
+      "lines": [[85696, 85927]],
+      "common_name": {"english": "Sharur and Shargaz", "native": "Sharur u Shargaz"}
+    },
+    {
+      "id": "CON babylonian_seleucid 061",
+      "lines": [[98032, 95865], [90185, 89931, 90496], [93506, 89931, 88635], [92855, 93085, 93683, 94141, 93864], [94643, 95477, 96465, 98412, 98761], [96465, 98066, 98688], [88714, 89112, 89642], [90568, 90422, 91918, 89642, 89341, 92041, 94643], [91918, 95865, 96465]],
+      "image": {
+        "file": "illustrations/JNG_10_sagittarius_bab_1024.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [699, 436], "hip": 89931},
+          {"pos": [118, 506], "hip": 98066},
+          {"pos": [250, 888], "hip": 98032}
+        ]
+      },
+      "common_name": {"english": "Pabilsag", "native": "Pabilsang"}
+    },
+    {
+      "id": "CON babylonian_seleucid 062",
+      "lines": [[93174, 93825, 94114, 94160, 94005, 93542, 92953]],
+      "common_name": {"english": "The Bark", "native": "Makurru"}
+    },
+    {
+      "id": "CON babylonian_seleucid 063",
+      "lines": [[107556, 108036, 107095, 107556, 105881, 104139, 107556], [104139, 101027, 102485, 104234], [102978, 102978, 105881], [101027, 100345, 100064]],
+      "image": {
+        "file": "illustrations/cap_blau_1024.png",
+        "size": [655, 458],
+        "anchors": [
+          {"pos": [537, 39], "hip": 99572},
+          {"pos": [549, 405], "hip": 102978},
+          {"pos": [91, 297], "hip": 108036}
+        ]
+      },
+      "common_name": {"english": "The Goat-Fish", "native": "Sukhurmashu"}
+    }
+  ],
+  "common_names": {
+    "HIP 4427": [{"english": "Wolf"}],
+    "HIP 7097": [{"english": "The brightest star of the Ribbon of the Fishes"}],
+    "HIP 8903": [{"english": "The front star of the head of the Hired Man"}],
+    "HIP 9884": [{"english": "The rear star of the head of the Hired Man"}],
+    "HIP 11767": [{"english": "Heir of the Sublime Temple, the first-ranking son of Anu"}],
+    "HIP 17702": [{"english": "The Bristle"}],
+    "HIP 21421": [{"english": "The Jaw of the Bull"}],
+    "HIP 25428": [{"english": "The northern star of the Chariot"}],
+    "HIP 25985": [{"english": "the middle of the Rooster"}],
+    "HIP 26451": [{"english": "The southern star of the Chariot"}],
+    "HIP 27366": [{"english": "The rear heel of the True Shepherd of Anu"},
+                  {"english": "the rear heel of the True Shepherd of Anu"}],
+    "HIP 28380": [{"english": "Hand of the Crook"}],
+    "HIP 29426": [{"english": "the right hand of the True Shepherd of Anu"}],
+    "HIP 29655": [{"english": "The front star of the Twin's feet"}],
+    "HIP 30343": [{"english": "The rear star of the Twin's feet"},
+                  {"english": "the front feet of the Great Twins"}],
+    "HIP 30438": [{"english": "Star of Eridu"}],
+    "HIP 31681": [{"english": "The Twin's star near the Shepherd"}],
+    "HIP 33018": [{"english": "the front feet and hands of the Great Twins"},
+                  {"english": "the hands of the Great Twins"}],
+    "HIP 35264": [{"english": "the left foot of the constellation of the Arrow"}],
+    "HIP 36850": [{"english": "The front Twin star"}],
+    "HIP 37279": [{"english": "Rooster"}],
+    "HIP 37826": [{"english": "The rear Twin star"},
+                  {"english": "the rear foot of the Great Twins"}],
+    "HIP 39953": [{"english": "the hands of Nunki"}],
+    "HIP 41822": [{"english": "The front star of the Crab to the south"}],
+    "HIP 41909": [{"english": "The front star of the Crab to the north"}],
+    "HIP 42806": [{"english": "The rear star of the Crab to the north"}],
+    "HIP 42911": [{"english": "The rear star of the Crab to the south"}],
+    "HIP 44816": [{"english": "Nunki (Eridu)"}],
+    "HIP 47452": [{"english": "the middle of the Snake"}],
+    "HIP 47908": [{"english": "The head of the Lion"},
+                  {"english": "two stars in the head of the Lion"}],
+    "HIP 48455": [{"english": "two stars in the head of the Lion"}],
+    "HIP 48774": [{"english": "the hand of Ninmah which is on the knot"}],
+    "HIP 49029": [{"english": "front right foot of the Lion"}],
+    "HIP 49583": [{"english": "four stars of the chest of the Lion"}],
+    "HIP 49669": [{"english": "King"},
+                  {"english": "The King"},
+                  {"english": "four stars of the chest of the Lion"}],
+    "HIP 50335": [{"english": "four stars of the chest of the Lion"}],
+    "HIP 50583": [{"english": "four stars of the chest of the Lion"}],
+    "HIP 51624": [{"english": "The small star which is 4 cubits behind the King"},
+                  {"english": "the foot in the middle of the Lion"}],
+    "HIP 52727": [{"english": "bite of the Harrow"}],
+    "HIP 53740": [{"english": "the tail of the Raven"}],
+    "HIP 54061": [{"english": "Ewe"}],
+    "HIP 54872": [{"english": "the two stars in the rump of the Lion"}],
+    "HIP 54879": [{"english": "The Rump of the Lion"},
+                  {"english": "the two stars in the rump of the Lion"}],
+    "HIP 57632": [{"english": "The single (star) of the tail of the Lion"}],
+    "HIP 57757": [{"english": "The rear foot of the Lion"}],
+    "HIP 59196": [{"english": "the hand of the Mouse"}],
+    "HIP 59803": [{"english": "the middle of the Raven"}],
+    "HIP 61941": [{"english": "The Single star in front of the Furrow"}],
+    "HIP 65474": [{"english": "Ear of Grain"},
+                  {"english": "The bright star of the Furrow"}],
+    "HIP 65477": [{"english": "Fox"}],
+    "HIP 67927": [{"english": "Harness"}],
+    "HIP 69673": [{"english": "Abundant One"},
+                  {"english": "Yoke"},
+                  {"english": "SHU.PA"}],
+    "HIP 72105": [{"english": "Rear Harness"},
+                  {"english": "the second star of the Harness"}],
+    "HIP 72603": [{"english": "The southern part of the Scales"},
+                  {"english": "the front pan of the Balance"}],
+    "HIP 74785": [{"english": "The northern part of the Scales"},
+                  {"english": "the middle of the Balance"}],
+    "HIP 76297": [{"english": "the eye of the Wolf [Mad Dog]"}],
+    "HIP 76333": [{"english": "the middle of the Balance"}],
+    "HIP 78323": [{"english": "[the midd]le of the Wolf [Mad Dog]"}],
+    "HIP 78401": [{"english": "The middle star of the head of the Scorpion"},
+                  {"english": "the stars of the head of the Scorpion"}],
+    "HIP 78820": [{"english": "The upper star of the head of the Scorpion"}],
+    "HIP 80763": [{"english": "Scorpion's Heart, Lisi"},
+                  {"english": "(the god) Lisi"},
+                  {"english": "the star of the chest of the Scorpion"}],
+    "HIP 82514": [{"english": "the upraised tail of the Scorpion"}],
+    "HIP 82671": [{"english": "the rear foot of the Wolf"}],
+    "HIP 84012": [{"english": "the eye of Zababa"}],
+    "HIP 84970": [{"english": "The bright star on the tip of Pabilsang's arrow"}],
+    "HIP 85927": [{"english": "Shargaz"}],
+    "HIP 85969": [{"english": "Sharur"}],
+    "HIP 86974": [{"english": "the single star of the knee of the She-Goat"}],
+    "HIP 88048": [{"english": "the middle of Zababa"}],
+    "HIP 89931": [{"english": "the left hand of Pabilsag which is on the bow"}],
+    "HIP 89962": [{"english": "the shin of Zababa"}],
+    "HIP 91262": [{"english": "Lady of Life"},
+                  {"english": "the Crook of the Goat"}],
+    "HIP 92041": [{"english": "[the right hand of Pabi]lsag which is on the arrow"}],
+    "HIP 93805": [{"english": "the foot of Zababa"}],
+    "HIP 97649": [{"english": "the bright star of the Eagle"}],
+    "HIP 98032": [{"english": "(the star of) Pabilsag which is above the Barge"}],
+    "HIP 100345": [{"english": "The Horn of the Goat-Fish"}],
+    "HIP 102098": [{"english": "Breast of the U.KA.DU.A demon"}],
+    "HIP 106985": [{"english": "The front star of the Goat-fish"}],
+    "HIP 107556": [{"english": "The rear star of the Goat-fish"}],
+    "HIP 111169": [{"english": "Knee of the U.KA.DU.A demon"}],
+    "HIP 116584": [{"english": "Heel of the U.KA.DU.A demon"}],
+    "M 45": [{"english": "The Star Cluster, The Seven Gods"}],
+    "Mel 111": [{"english": "Spadix of Erua's date palm"}],
+    "NGC 869": [{"english": "Twinkling stars of the Old Man"}],
+    "NAME Jupiter": [{"english": "MUL.SANGMEGAR", "native": "mul.SANGMEGAR", "translators_comments": "Native name of Jupiter in Babilonian (Seleucid) culture"}],
+    "NAME Mars": [{"english": "kakkab Salbatanu", "native": "mul.Salbatanu", "translators_comments": "Native name of Mars in Babilonian (Seleucid) culture"}],
+    "NAME Mercury": [{"english": "Dancing Wild Sheep", "native": "mul.UDU.IDIM.GUD", "translators_comments": "Native name of Mercury in Babilonian (Seleucid) culture"}],
+    "NAME Moon": [{"english": "SIN", "native": "SIN", "translators_comments": "Native name of the Moon in Babilonian (Seleucid) culture"}],
+    "NAME Saturn": [{"english": "Steady Wild Sheep", "native": "mul.UDU.IDIM.SANGUSH", "translators_comments": "Native name of Saturn in Babilonian (Seleucid) culture"}],
+    "NAME Sun": [{"english": "Shamash", "native": "Shamash", "translators_comments": "Native name of the Sun in Babilonian (Seleucid) culture"}],
+    "NAME Venus": [{"english": "MUL.DILBAT", "native": "mul.DILBAT", "translators_comments": "Native name of Venus in Babilonian (Seleucid) culture"}]
+  }
+}
