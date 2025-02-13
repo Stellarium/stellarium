@@ -458,7 +458,7 @@
 	     License: Creative Commons Attribution 4.0 International
  	4.43 Images of M33, M42, NGC253, NGC5566, LBN782, the Pleiades from HG731GZ
 	     License: Creative Commons Attribution 3.0 Unported
-	4.44 Images of M8, M17, M94, IC434, IC2944, IC4628, NGC2264, NGC5367, NGC6357,
+	4.44 Images of M8, M17, M94, IC2944, IC4628, NGC2264, NGC5367, NGC6357,
 	     NGC6334, NGC7293, LDN43, SMC (Hydrogen Alpha)
 	     from Dylan O'Donnell
 	     http://deography.com/
@@ -813,7 +813,7 @@
 	      from Juan lacruz, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.133 Images of IC348, NGC6726,LBN550, LDN1251, Sh2-124, RCW29,
+	4.133 Images of IC348, IC434, NGC6726,LBN550, LDN1251, Sh2-124, RCW29,
 	      RCW58, RCW89, VDB123, Vela supernova remnant
 	      from Manuel Peitsch, post-processing: Sun Shuwei
 	      https://manuel-astro.ch/
