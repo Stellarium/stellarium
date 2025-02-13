@@ -1025,6 +1025,10 @@
 	      from KPNO/NOIRLab/NSF/AURA/John and Christie Connors/Adam Block, post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
+	4.187 Images of NGC3726
+	      from KPNO/NOIRLab/NSF/AURA/George Hickey/Adam Block, post-processing: Sun Shuwei
+	      https://noirlab.edu/public/
+	      License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
