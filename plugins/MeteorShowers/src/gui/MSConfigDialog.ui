@@ -31,7 +31,7 @@
    </property>
    <item>
     <widget class="TitleBar" name="titleBar">
-     <property name="title">
+     <property name="title" stdset="0">
       <string>Meteor Showers: Settings</string>
      </property>
     </widget>
@@ -64,6 +64,18 @@
           <bool>false</bool>
          </property>
          <layout class="QGridLayout" name="gridLayout_8">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="horizontalSpacing">
+           <number>0</number>
+          </property>
           <item row="0" column="0">
            <widget class="QCheckBox" name="enableAtStartUp">
             <property name="text">
@@ -140,6 +152,18 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" name="gridLayout_9">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="horizontalSpacing">
+           <number>0</number>
+          </property>
           <item row="1" column="0">
            <widget class="QCheckBox" name="enableLabels">
             <property name="text">
@@ -158,6 +182,9 @@
            <widget class="QSpinBox" name="fontSize">
             <property name="toolTip">
              <string>Label font size (pixels)</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -182,136 +209,46 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <item row="0" column="1" alignment="Qt::AlignHCenter">
-           <widget class="QGroupBox" name="activeGenericData">
-            <property name="minimumSize">
-             <size>
-              <width>130</width>
-              <height>100</height>
-             </size>
+          <item row="0" column="3">
+           <widget class="QLabel" name="labelGeneric">
+            <property name="text">
+             <string comment="radiant type">Generic</string>
             </property>
-            <property name="toolTip">
-             <string>Active Radiant - Generic Data</string>
-            </property>
-            <property name="title">
-             <string>Generic</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_3">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <item row="0" column="0">
-              <widget class="ColorButton" name="setColorARG">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-            </layout>
            </widget>
           </item>
-          <item row="0" column="2" alignment="Qt::AlignHCenter">
-           <widget class="QGroupBox" name="inactive">
-            <property name="minimumSize">
-             <size>
-              <width>130</width>
-              <height>100</height>
-             </size>
+          <item row="0" column="1">
+           <widget class="QLabel" name="labelConfirmed">
+            <property name="text">
+             <string comment="radiant type">Confirmed</string>
             </property>
-            <property name="toolTip">
-             <string>Inactive Radiant</string>
-            </property>
-            <property name="title">
-             <string>Inactive</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_4">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <item row="0" column="0">
-              <widget class="ColorButton" name="setColorIR">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-            </layout>
            </widget>
           </item>
-          <item row="0" column="0" alignment="Qt::AlignHCenter">
-           <widget class="QGroupBox" name="activeConfirmedData">
-            <property name="minimumSize">
-             <size>
-              <width>130</width>
-              <height>100</height>
-             </size>
+          <item row="0" column="2">
+           <widget class="ColorButton" name="setColorARG">
+            <property name="text">
+             <string/>
             </property>
-            <property name="toolTip">
-             <string>Active Radiant - Confirmed Data</string>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QLabel" name="labelInactive">
+            <property name="text">
+             <string comment="radiant type">Inactive</string>
             </property>
-            <property name="title">
-             <string>Confirmed</string>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="ColorButton" name="setColorIR">
+            <property name="text">
+             <string/>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="ColorButton" name="setColorARC">
+            <property name="text">
+             <string/>
             </property>
-            <layout class="QGridLayout" name="gridLayout_2">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <item row="0" column="0">
-              <widget class="ColorButton" name="setColorARC">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-            </layout>
            </widget>
           </item>
          </layout>
@@ -352,6 +289,18 @@
           <bool>true</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_12">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
@@ -447,6 +396,18 @@
           <string>Last attempt to update</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
            <layout class="QGridLayout" name="gridLayout_6">
             <item row="0" column="0">
@@ -527,9 +488,6 @@
        <string comment="tab in plugin windows">About</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_11">
-       <property name="spacing">
-        <number>9</number>
-       </property>
        <item>
         <widget class="QTextBrowser" name="about">
          <property name="openExternalLinks">
