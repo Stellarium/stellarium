@@ -30,7 +30,6 @@
 #include "ConstellationMgr.hpp"
 #include "ZoneArray.hpp"
 
-#include <algorithm>
 #include <QString>
 #include <QJsonArray>
 #include <QTextStream>

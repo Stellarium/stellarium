@@ -22,7 +22,6 @@
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelApp.hpp"
-#include "StelIniParser.hpp"
 
 #include <md4c-html.h>
 
@@ -80,7 +79,8 @@ void applyStyleToMarkdown(QString& string)
 
 				// Also force the caption to be below the image,
 				// rather than to the right of it.
-				newSubstr.replace(QRegularExpression("(<img [^>]+>)"), "\\1<br>");
+				static const QRegularExpression re("(<img [^>]+>)");
+				newSubstr.replace(re, "\\1<br>");
 
 				string.replace(substr, newSubstr);
 
@@ -108,7 +108,8 @@ QString markdownToHTML(QString input)
 
 QString convertReferenceLinks(QString text)
 {
-	text.replace(QRegularExpression(" ?\\[#([0-9]+)\\]", QRegularExpression::MultilineOption),
+	static const QRegularExpression re(" ?\\[#([0-9]+)\\]", QRegularExpression::MultilineOption);
+	text.replace(re,
 	             "<sup><a href=\"#cite_\\1\">[\\1]</a></sup>");
 	return text;
 }
@@ -490,7 +491,8 @@ std::pair<QString/*color*/,QString/*info*/> StelSkyCultureMgr::getLicenseDescrip
 
 QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 {
-	const auto lines = currentSkyCulture.license.split(QRegularExpression("\\s*\n+\\s*"), SkipEmptyParts);
+	static const QRegularExpression licRe("\\s*\n+\\s*");
+	const auto lines = currentSkyCulture.license.split(licRe, SkipEmptyParts);
 	if (lines.isEmpty()) return "";
 
 	if (lines.size() == 1)
@@ -519,7 +521,8 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 		QString addendum;
 		for (const auto& line : lines)
 		{
-			const auto parts = line.split(QRegularExpression("\\s*:\\s*"), SkipEmptyParts);
+			static const QRegularExpression re("\\s*:\\s*");
+			const auto parts = line.split(re, SkipEmptyParts);
 			if (parts.size() == 1)
 			{
 				addendum += line + "<br>\n";
@@ -604,13 +607,14 @@ QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown,
                                                         const StelTranslator& trans)
 {
 	auto text = markdown.mid(bodyStartPos, bodyEndPos - bodyStartPos);
-	text.replace(QRegularExpression("^\n*|\n*$"), "");
+	static const QRegularExpression re("^\n*|\n*$");
+	text.replace(re, "");
 	text = trans.qtranslate(text);
 
 	if (sectionName.trimmed() == "References")
 	{
-		text.replace(QRegularExpression("^ *- \\[#([0-9]+)\\]: (.*)$", QRegularExpression::MultilineOption),
-		             "\\1. <span id=\"cite_\\1\">\\2</span>");
+		static const QRegularExpression refRe("^ *- \\[#([0-9]+)\\]: (.*)$", QRegularExpression::MultilineOption);
+		text.replace(refRe, "\\1. <span id=\"cite_\\1\">\\2</span>");
 	}
 	else
 	{
@@ -635,10 +639,10 @@ QString StelSkyCultureMgr::descriptionMarkdownToHTML(const QString& markdownInpu
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
 
 	// Strip comments before translating
-	const QRegularExpression commentPat("<!--.*?-->");
+	static const QRegularExpression commentPat("<!--.*?-->");
 	const auto markdown = QString(markdownInput).replace(commentPat, "");
 
-	const QRegularExpression headerPat("^# +(.+)$", QRegularExpression::MultilineOption);
+	static const QRegularExpression headerPat("^# +(.+)$", QRegularExpression::MultilineOption);
 	const auto match = headerPat.match(markdown);
 	QString name;
 	if (match.isValid())
@@ -653,7 +657,7 @@ QString StelSkyCultureMgr::descriptionMarkdownToHTML(const QString& markdownInpu
 	}
 
 	QString text = "<h1>" + trans.qtranslate(name, "sky culture") + "</h1>";
-	const QRegularExpression sectionNamePat("^## +(.+)$", QRegularExpression::MultilineOption);
+	static const QRegularExpression sectionNamePat("^## +(.+)$", QRegularExpression::MultilineOption);
 	QString prevSectionName;
 	qsizetype prevBodyStartPos = -1;
 	for (auto it = sectionNamePat.globalMatch(markdown); it.hasNext(); )
@@ -696,7 +700,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription()
 		lang = lang.split("_").at(0);
 	}
 	const QString descPath = currentSkyCulture.path + "/description.md";
-	const bool pathExists = QFileInfo(descPath).exists();
+	const bool pathExists = QFileInfo::exists(descPath);
 	if (!pathExists)
 		qWarning() << "WARNING: can't find description for skyculture" << currentSkyCulture.id;
 
