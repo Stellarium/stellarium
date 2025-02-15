@@ -36,6 +36,7 @@
 #include "StelPainter.hpp"
 #include "Planet.hpp"
 #include "StelUtils.hpp"
+#include "precession.h"
 
 #include <vector>
 #include <QDebug>
@@ -489,7 +490,7 @@ void ConstellationMgr::loadLinesNamesAndArt(const QJsonArray &constellationsData
 		const auto texfile = imgData["file"].toString();
 
 		auto texturePath = culture.path+"/"+texfile;
-		if (!QFileInfo(texturePath).exists())
+		if (!QFileInfo::exists(texturePath))
 		{
 			qWarning() << "ERROR: could not find texture" << QDir::toNativeSeparators(texfile);
 			texturePath.clear();
@@ -1072,6 +1073,61 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 	}
 	allBoundarySegments.clear();
 
+	bool b1875 = false;
+	bool customEdgeEpoch = false;
+	Mat4d matCustomEdgeEpochToJ2000;
+	if (boundariesEpoch.toUpper() == "B1875")
+		b1875 = true;
+	else if (boundariesEpoch.toUpper() != "J2000")
+	{
+		qWarning() << "Custom epoch for boundaries:" << boundariesEpoch;
+		customEdgeEpoch = true;
+	}
+	if (customEdgeEpoch)
+	{
+		// Allow "Bxxxx.x", "Jxxxx.x", "JDjjjjjjjj.jjj" and pure doubles as JD
+		bool ok=false;
+		double boundariesEpochJD;
+
+		if (boundariesEpoch.startsWith("JD", Qt::CaseInsensitive))
+		{
+			QStringView boundariesEpochStrV=boundariesEpoch.right(boundariesEpoch.length()-2);
+			boundariesEpochJD=boundariesEpochStrV.toDouble(&ok); // pureJD
+		}
+		else if (boundariesEpoch.startsWith("B", Qt::CaseInsensitive))
+		{
+			QStringView boundariesEpochStrV=boundariesEpoch.right(boundariesEpoch.length()-1);
+			double boundariesEpochY=boundariesEpochStrV.toDouble(&ok); // pureJD
+			if (ok)
+			{
+				boundariesEpochJD=StelUtils::getJDFromBesselianEpoch(boundariesEpochY);
+			}
+		}
+		else if (boundariesEpoch.startsWith("J", Qt::CaseInsensitive))
+		{
+			QStringView boundariesEpochStrV=boundariesEpoch.right(boundariesEpoch.length()-1);
+			double boundariesEpochY=boundariesEpochStrV.toDouble(&ok); // pureJD
+			if (ok)
+			{
+				boundariesEpochJD=StelUtils::getJDFromJulianEpoch(boundariesEpochY);
+			}
+		}
+		else
+			boundariesEpochJD=boundariesEpoch.toDouble(&ok); // pureJD
+		if (ok)
+		{
+			// Create custom precession matrix for transformation of edges to J2000.0
+			double epsEpoch, chiEpoch, omegaEpoch, psiEpoch;
+			getPrecessionAnglesVondrak(boundariesEpochJD, &epsEpoch, &chiEpoch, &omegaEpoch, &psiEpoch);
+			matCustomEdgeEpochToJ2000 = Mat4d::xrotation(84381.406*1./3600.*M_PI/180.) * Mat4d::zrotation(-psiEpoch) * Mat4d::xrotation(-omegaEpoch) * Mat4d::zrotation(chiEpoch);
+		}
+		else
+		{
+			qWarning() << "SkyCultureMgr: Cannot parse edges_epoch =" << boundariesEpoch << ". Falling back to J2000.0";
+			customEdgeEpoch = false;
+		}
+	}
+	const auto& core = *StelApp::getInstance().getCore();
 	qDebug() << "Loading constellation boundary data ... ";
 
 	for (int n = 0; n < boundaryData.size(); ++n)
@@ -1103,13 +1159,6 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 		const double DE1 = (60. * (60. * dec1_d + dec1_m) + dec1_s) * (dec1_sign=='-' ? -1 : 1) * angleSecToRad;
 		const double DE2 = (60. * (60. * dec2_d + dec2_m) + dec2_s) * (dec2_sign=='-' ? -1 : 1) * angleSecToRad;
 
-		bool b1875 = false;
-		if (boundariesEpoch.toUpper() == "B1875")
-			b1875 = true;
-		else if (boundariesEpoch.toUpper() != "J2000")
-			qWarning() << "Unexpected epoch for boundaries:" << boundariesEpoch;
-
-		const auto& core = *StelApp::getInstance().getCore();
 
 		const int numPoints = 2 + std::ceil(std::abs(RA1 - RA2) / (M_PI / 64));
 		Vec3d xyz1;
@@ -1123,14 +1172,16 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 		if (RA2 - RA1 > M_PI) RA2 -= 2 * M_PI;
 		if (RA1 - RA2 > M_PI) RA1 -= 2 * M_PI;
 
-		for (double n = 0; n < numPoints; ++n)
+		for (int n = 0; n < numPoints; ++n)
 		{
-			const double t = n / (numPoints - 1);
+			const double t = double(n) / (numPoints - 1);
 			const double RA = RA1 + t * (RA2 - RA1);
 			const double DE = DE1 + t * (DE2 - DE1);
 			Vec3d xyz;
 			StelUtils::spheToRect(RA,DE,xyz);
 			if (b1875) xyz = core.j1875ToJ2000(xyz);
+			else if (customEdgeEpoch)
+				xyz = matCustomEdgeEpochToJ2000*xyz;
 			points->push_back(xyz);
 		}
 

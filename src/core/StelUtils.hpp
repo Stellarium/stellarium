@@ -524,9 +524,14 @@ namespace StelUtils
 	double getJDFromSystem();
 
 	//! Get the Julian Day Number (JD) from Besselian epoch.
-	//! @param epoch Besselian epoch, expressed as year
+	//! @param epoch Besselian epoch, expressed as year with decimal fraction
 	//! @return Julian Day number (JD) for B<Year>
 	double getJDFromBesselianEpoch(const double epoch);
+
+	//! Get the Julian Day Number (JD) from Julian epoch.
+	//! @param epoch Julian epoch, expressed as year with decimal fraction
+	//! @return Julian Day number (JD) for J<Year>
+	double getJDFromJulianEpoch(const double epoch);
 
 	//! Convert a time of day to the fraction of a Julian Day.
 	//! Note that a Julian Day starts at 12:00, not 0:00, and

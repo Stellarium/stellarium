@@ -360,6 +360,9 @@ private:
 	//! Load the constellation boundary file.
 	//! This function deletes any currently loaded constellation boundaries
 	//! and loads a new set from the data passed as the parameter.
+	//! @param epoch: Specified as JSON key "edges_epoch".
+	//! Can be "Bxxxx.x" (Besselian year), "Jxxxx.x" (Julian year), "JDjjjjjjjj.jjj" (Julian day number) and pure doubles as JD.
+	//! The most common cases, "B1875" (for IAU boundaries) and "J2000" are handled most efficiently.
 	bool loadBoundaries(const QJsonArray& boundaryData, const QString& epoch);
 
 	//! Draw the constellation lines at the epoch given by the StelCore.
