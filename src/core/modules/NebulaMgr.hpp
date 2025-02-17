@@ -1038,6 +1038,7 @@ private:
 	QVector<NebulaP> dsoArray;		// The DSO list
 	QHash<unsigned int, NebulaP> dsoIndex;
 	QHash<QString/*name*/,NebulaP> commonNameMap;
+	QHash<NebulaP,QVector<QString>> defaultNameMap;
 
 	LinearFader hintsFader;
 	LinearFader flagShow;

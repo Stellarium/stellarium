@@ -913,6 +913,15 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	loadDSOCatalog(dsoCatalogPath);
 	loadCommonNames();
 
+	if (QString defaultNamesPath = StelFileMgr::findFile("nebulae/default/names.dat"); defaultNamesPath.isEmpty())
+	{
+		qWarning().noquote() << "ERROR while loading deep-sky names data set" << setName;
+	}
+	else
+	{
+		loadDSONames(defaultNamesPath);
+	}
+
 	if (!dsoOutlinesPath.isEmpty())
 		loadDSOOutlines(dsoOutlinesPath);
 
@@ -1545,6 +1554,9 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 bool NebulaMgr::loadDSONames(const QString &filename)
 {
 	qDebug() << "Loading DSO name data ...";
+
+	defaultNameMap.clear();
+
 	QFile dsoNameFile(filename);
 	if (!dsoNameFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
@@ -1684,7 +1696,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 			if (transMatch.hasMatch())
 			{
 				QString propName = transMatch.captured(1).trimmed();
-				setName(e, propName);
+				defaultNameMap[e].push_back(propName);
 			}
 			readOk++;
 		}
@@ -1862,14 +1874,10 @@ void NebulaMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	}
 	else
 	{
-		QString setName = "default";
-		QString dsoNamesPath = StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
-		if (dsoNamesPath.isEmpty())
-		{
-			qWarning().noquote() << "ERROR while loading deep-sky names data set" << setName;
-			return;
-		}
-		loadDSONames(dsoNamesPath);
+		for (auto it = defaultNameMap.begin(); it != defaultNameMap.end(); ++it)
+			for (const auto& name : it.value())
+				setName(it.key(), name);
+
 	}
 
 	updateI18n();
