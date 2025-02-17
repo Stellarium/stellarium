@@ -262,6 +262,8 @@ SET(stellarium_lib_SRCS
      StelSplashScreen.cpp
      StelLogger.hpp
      StelLogger.cpp
+     StelSystemInfo.hpp
+     StelSystemInfo.cpp
      CLIProcessor.hpp
      CLIProcessor.cpp
      translations.h
