@@ -159,6 +159,11 @@ void clearCache()
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
+	qSetMessagePattern("[%{time process}][%{if-debug}DBG %{endif}"
+	                                     "%{if-info}INFO%{endif}"
+	                                     "%{if-warning}WARN%{endif}"
+	                                     "%{if-critical}CRIT%{endif}"
+	                                     "%{if-fatal}FATAL%{endif}] %{message}");
 	Q_INIT_RESOURCE(mainRes);
 	Q_INIT_RESOURCE(guiRes);
 
