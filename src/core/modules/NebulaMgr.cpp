@@ -1684,11 +1684,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 			if (transMatch.hasMatch())
 			{
 				QString propName = transMatch.captured(1).trimmed();
-				QString currName = e->getEnglishName();
-				if (currName.isEmpty())
-					e->setProperName(propName);
-				else if (currName!=propName)
-					e->addNameAlias(propName);
+				setName(e, propName);
 			}
 			readOk++;
 		}
