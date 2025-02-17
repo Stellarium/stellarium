@@ -391,7 +391,7 @@ int main(int argc, char **argv)
 	}
 
 	Q_ASSERT(confSettings);
-	qDebug().noquote() << "Config file:" << QDir::toNativeSeparators(configFileFullPath);
+	qInfo().noquote() << "Config file:" << QDir::toNativeSeparators(configFileFullPath);
 
 	QSurfaceFormat::setDefaultFormat(StelMainView::getDesiredGLFormat(confSettings));
 
