@@ -1091,12 +1091,12 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 
 		if (boundariesEpoch.startsWith("JD", Qt::CaseInsensitive))
 		{
-			QStringView boundariesEpochStrV=boundariesEpoch.right(boundariesEpoch.length()-2);
+			QString boundariesEpochStrV=boundariesEpoch.right(boundariesEpoch.length()-2);
 			boundariesEpochJD=boundariesEpochStrV.toDouble(&ok); // pureJD
 		}
 		else if (boundariesEpoch.startsWith("B", Qt::CaseInsensitive))
 		{
-			QStringView boundariesEpochStrV=boundariesEpoch.right(boundariesEpoch.length()-1);
+			QString boundariesEpochStrV=boundariesEpoch.right(boundariesEpoch.length()-1);
 			double boundariesEpochY=boundariesEpochStrV.toDouble(&ok); // pureJD
 			if (ok)
 			{
@@ -1105,7 +1105,7 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 		}
 		else if (boundariesEpoch.startsWith("J", Qt::CaseInsensitive))
 		{
-			QStringView boundariesEpochStrV=boundariesEpoch.right(boundariesEpoch.length()-1);
+			QString boundariesEpochStrV=boundariesEpoch.right(boundariesEpoch.length()-1);
 			double boundariesEpochY=boundariesEpochStrV.toDouble(&ok); // pureJD
 			if (ok)
 			{
