@@ -911,6 +911,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	}
 
 	loadDSOCatalog(dsoCatalogPath);
+	loadCommonNames();
 
 	if (!dsoOutlinesPath.isEmpty())
 		loadDSOOutlines(dsoOutlinesPath);
@@ -1849,11 +1850,15 @@ void NebulaMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	for (const auto& n : std::as_const(dsoArray))
 		n->removeAllNames();
 
-	const auto nameToIdMap = loadCommonNames(skyCulture.fallbackToInternationalNames);
+	if (skyCulture.fallbackToInternationalNames)
+	{
+		for (auto it = commonNameMap.begin(); it != commonNameMap.end(); ++it)
+			setName(it.value(), it.key());
+	}
 
 	int numLoaded = 0;
 	if (!skyCulture.names.isEmpty())
-		numLoaded = loadCultureSpecificNames(skyCulture.names, nameToIdMap);
+		numLoaded = loadCultureSpecificNames(skyCulture.names);
 
 	if (numLoaded)
 	{
@@ -1874,7 +1879,7 @@ void NebulaMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	updateI18n();
 }
 
-int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QString/*name*/,QString/*dsoId*/>& commonNameToIdMap)
+int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data)
 {
 	int loadedTotal = 0;
 	for (auto it = data.begin(); it != data.end(); ++it)
@@ -1899,7 +1904,7 @@ int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QStr
 			};
 			if (const auto it = renamer.find(name); it != renamer.end())
 				name = it.value();
-			loadCultureSpecificNameForNamedObject(it.value().toArray(), name, commonNameToIdMap);
+			loadCultureSpecificNameForNamedObject(it.value().toArray(), name);
 		}
 		else if (const NebulaP n = searchByDesignation(key))
 		{
@@ -1919,36 +1924,31 @@ int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QStr
 	return loadedTotal;
 }
 
-void NebulaMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName,
-                                                      const QMap<QString/*name*/,QString/*dsoId*/>& commonNameToIdMap)
+void NebulaMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName)
 {
-	const auto commonNameIndexIt = commonNameToIdMap.find(commonName.toUpper());
-	if (commonNameIndexIt == commonNameToIdMap.end())
+	const auto commonNameIndexIt = commonNameMap.find(commonName.toUpper());
+	if (commonNameIndexIt == commonNameMap.end())
 	{
 		// This may actually not even be a nebula, so we shouldn't emit any warning, just return
 		return;
 	}
-	const auto dsoId = commonNameIndexIt.value();
 
 	for (const auto& entry : data)
 	{
 		const auto specificName = entry.toObject()["english"].toString();
 		if (specificName.isEmpty()) continue;
-
-		NebulaP e = search(dsoId);
-		if (!e.isNull()) // avoid crash
-			setName(e, specificName);
-		else
-			qWarning() << "Failed to find DSO" << dsoId;
+		setName(commonNameIndexIt.value(), specificName);
 	}
 }
-QMap<QString/*name*/,QString/*dsoId*/> NebulaMgr::loadCommonNames(const bool saveIntoObjects)
+void NebulaMgr::loadCommonNames()
 {
+	commonNameMap.clear();
+
 	QString namesFile = StelFileMgr::findFile("skycultures/common_dso_names.fab");
 	if (namesFile.isEmpty())
 	{
 		qWarning().noquote() << "Failed to open common DSO names file";
-		return {};
+		return;
 	}
 
 	// Open file
@@ -1956,7 +1956,7 @@ QMap<QString/*name*/,QString/*dsoId*/> NebulaMgr::loadCommonNames(const bool sav
 	if (!dsoNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		qWarning().noquote() << "Failed to open file" << QDir::toNativeSeparators(namesFile);
-		return {};
+		return;
 	}
 
 	// Now parse the file
@@ -1967,7 +1967,6 @@ QMap<QString/*name*/,QString/*dsoId*/> NebulaMgr::loadCommonNames(const bool sav
 	// which will be available in recMatch.capturedTexts()
 	static const QRegularExpression recRx("^\\s*([\\w\\s\\-\\+\\.]+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)");
 
-	QMap<QString/*name*/,QString/*dsoId*/> output;
 	QString record, dsoId, nativeName;
 	int totalRecords=0;
 	int readOk=0;
@@ -1995,9 +1994,7 @@ QMap<QString/*name*/,QString/*dsoId*/> NebulaMgr::loadCommonNames(const bool sav
 			NebulaP e = search(dsoId);
 			if (!e.isNull()) // avoid crash
 			{
-				if (saveIntoObjects)
-					setName(e, nativeName);
-				output[nativeName.toUpper()] = dsoId;
+				commonNameMap[nativeName.toUpper()] = e;
 			}
 			else
 				qWarning().noquote() << "ERROR - could NOT found DSO " << dsoId;
@@ -2007,8 +2004,6 @@ QMap<QString/*name*/,QString/*dsoId*/> NebulaMgr::loadCommonNames(const bool sav
 	}
 	dsoNamesFile.close();
 	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "common names of deep-sky objects";
-
-	return output;
 }
 
 void NebulaMgr::updateI18n()

@@ -965,10 +965,9 @@ private slots:
 
 	//! Load culture-independent names and return a map from name to id to
 	//! enable search while loading culture-specific names.
-	QMap<QString/*name*/,QString/*dsoId*/> loadCommonNames(bool saveIntoObjects);
-	int loadCultureSpecificNames(const QJsonObject& data, const QMap<QString/*name*/,QString/*dsoId*/>& commonNameToIdMap);
-	void loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName,
-	                                           const QMap<QString/*name*/,QString/*dsoId*/>& commonNameToIdMap);
+	void loadCommonNames();
+	int loadCultureSpecificNames(const QJsonObject& data);
+	void loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName);
 
 	//! Connect from StelApp to reflect font size change.
 	void setFontSizeFromApp(int size){nebulaFont.setPixelSize(size);}
@@ -1038,6 +1037,7 @@ private:
 
 	QVector<NebulaP> dsoArray;		// The DSO list
 	QHash<unsigned int, NebulaP> dsoIndex;
+	QHash<QString/*name*/,NebulaP> commonNameMap;
 
 	LinearFader hintsFader;
 	LinearFader flagShow;
