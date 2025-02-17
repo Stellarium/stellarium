@@ -99,15 +99,20 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		// just print details of the first item for now
 		// Must set lastRTS for currently selected object here...
 		StelCore *core=StelApp::getInstance().getCore();
-		QString s = selected[0]->getInfoString(core, infoTextFilters);
+		infoHTML = selected[0]->getInfoString(core, infoTextFilters);
 		selected[0]->removeExtraInfoStrings(StelObject::AllInfo);
-		setHtml(s);
+		setHtml(infoHTML);
 	}
 }
 
 const QString InfoPanel::getSelectedText(void) const
 {
 	return toPlainText();
+}
+
+QString InfoPanel::getSelectedHTML() const
+{
+	return infoHTML;
 }
 
 SkyGui::SkyGui(QGraphicsItem * parent)

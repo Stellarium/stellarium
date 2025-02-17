@@ -61,6 +61,7 @@
 #include <QGraphicsWidget>
 #include <QGraphicsGridLayout>
 #include <QClipboard>
+#include <QMimeData>
 #include <QPalette>
 #include <QColor>
 #include <QAction>
@@ -1529,7 +1530,12 @@ StelAction* StelGui::getAction(const QString& actionName) const
 
 void StelGui::copySelectedObjectInfo(void)
 {
-	QGuiApplication::clipboard()->setText(skyGui->infoPanel->getSelectedText());
+	const auto cb = QGuiApplication::clipboard();
+	const auto md = new QMimeData;
+	const auto colorRE = QRegularExpression(" color=\"?#[0-9a-f]+\"?");
+	md->setHtml(skyGui->infoPanel->getSelectedHTML().replace(colorRE, ""));
+	md->setText(skyGui->infoPanel->getSelectedText());
+	cb->setMimeData(md);
 }
 
 bool StelGui::getAstroCalcVisible() const
