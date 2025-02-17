@@ -73,31 +73,33 @@ void StelLogger::init(const QString& logFilePath)
 	if (logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
 		qInstallMessageHandler(StelLogger::debugLogHandler);
 
+	const auto log = [](const QString& s){ qInfo().noquote() << s; };
+
 	// write timestamp
-	writeLog(QString("%1").arg(QDateTime::currentDateTime().toString(Qt::ISODate)));
+	log(QString("%1").arg(QDateTime::currentDateTime().toString(Qt::ISODate)));
 	// write info about operating system
-	writeLog(QString("Operating System: %1").arg(StelUtils::getOperatingSystemInfo()));	
-	writeLog(QString("Platform: %1").arg(qApp->platformName()));
+	log(QString("Operating System: %1").arg(StelUtils::getOperatingSystemInfo()));
+	log(QString("Platform: %1").arg(qApp->platformName()));
 
 	// write compiler version
-	writeLog(QString("Compiled using %1").arg(STELLARIUM_COMPILER));
+	log(QString("Compiled using %1").arg(STELLARIUM_COMPILER));
 
 	// write Qt version
-	writeLog(QString("Qt runtime version: %1").arg(qVersion()));
-	writeLog(QString("Qt compilation version: %1").arg(QT_VERSION_STR));
+	log(QString("Qt runtime version: %1").arg(qVersion()));
+	log(QString("Qt compilation version: %1").arg(QT_VERSION_STR));
 
 	// write ABI
-	writeLog(QString("Build ABI: %1").arg(QSysInfo::buildAbi()));
+	log(QString("Build ABI: %1").arg(QSysInfo::buildAbi()));
 
 	// write addressing mode
 #if defined(__LP64__) || defined(_WIN64)
-	writeLog("Addressing mode: 64-bit");
+	log("Addressing mode: 64-bit");
 #else
-	writeLog("Addressing mode: 32-bit");
+	log("Addressing mode: 32-bit");
 #endif
 
 	// write CPU and memory info
-	writeLog(QString("Processor architecture: %1").arg(QSysInfo::currentCpuArchitecture()));
+	log(QString("Processor architecture: %1").arg(QSysInfo::currentCpuArchitecture()));
 
 #ifdef Q_OS_WIN
 	// Use WMI
@@ -131,13 +133,13 @@ void StelLogger::init(const QString& logFilePath)
 					break;
 
 				hr = obj->Get(L"Name", 0, &vt_prop, nullptr, nullptr);
-				writeLog(QString("Processor name: %1").arg(vt_prop.bstrVal));
+				log(QString("Processor name: %1").arg(vt_prop.bstrVal));
 
 				hr = obj->Get(L"MaxClockSpeed", 0, &vt_prop, nullptr, nullptr);
-				writeLog(QString("Processor maximum speed: %1 MHz").arg(vt_prop.uintVal));
+				log(QString("Processor maximum speed: %1 MHz").arg(vt_prop.uintVal));
 
 				hr = obj->Get(L"NumberOfLogicalProcessors", 0, &vt_prop, nullptr, nullptr);
-				writeLog(QString("Processor logical cores: %1").arg(vt_prop.intVal));
+				log(QString("Processor logical cores: %1").arg(vt_prop.intVal));
 
 				VariantClear(&vt_prop);
 				obj->Release();
@@ -159,7 +161,7 @@ void StelLogger::init(const QString& logFilePath)
 				VariantClear(&vt_prop);
 				obj->Release();
 			}
-			writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+			log(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 
 			// GPU info
 			const std::wstring gpu_query(L"SELECT Name, AdapterRAM, CurrentHorizontalResolution, CurrentVerticalResolution FROM Win32_VideoController");
@@ -171,16 +173,16 @@ void StelLogger::init(const QString& logFilePath)
 					break;
 
 				hr = obj->Get(L"Name", 0, &vt_prop, nullptr, nullptr);
-				writeLog(QString("Video controller name: %1").arg(vt_prop.bstrVal));
+				log(QString("Video controller name: %1").arg(vt_prop.bstrVal));
 
 				hr = obj->Get(L"AdapterRAM", 0, &vt_prop, nullptr, nullptr);
-				writeLog(QString("Video controller RAM: %1 MB").arg(vt_prop.ullVal/(1024<<10)));
+				log(QString("Video controller RAM: %1 MB").arg(vt_prop.ullVal/(1024<<10)));
 
 				hr = obj->Get(L"CurrentHorizontalResolution", 0, &vt_prop, nullptr, nullptr);
 				int currHRes = vt_prop.intVal;
 				hr = obj->Get(L"CurrentVerticalResolution", 0, &vt_prop, nullptr, nullptr);
 				int currVRes = vt_prop.intVal;
-				writeLog(QString("Current resolution: %1x%2").arg(currHRes).arg(currVRes));
+				log(QString("Current resolution: %1x%2").arg(currHRes).arg(currVRes));
 
 				VariantClear(&vt_prop);
 				obj->Release();
@@ -198,28 +200,28 @@ void StelLogger::init(const QString& logFilePath)
 	sysctlbyname("machdep.cpu.brand_string", nullptr, &size, nullptr, 0);
 	std::string cpuname(size, '\0');
 	sysctlbyname("machdep.cpu.brand_string", const_cast<char *>(cpuname.data()), &size, nullptr, 0);
-	writeLog(QString("Processor name: %1").arg(cpuname.data()));
+	log(QString("Processor name: %1").arg(cpuname.data()));
 
 	int64_t maxFreq = 0;
 	size = sizeof(maxFreq);
 	if (sysctlbyname("hw.cpufrequency_max", &maxFreq, &size, nullptr, 0) != -1)
-		writeLog(QString("Processor maximum speed: %1 MHz").arg(maxFreq/1000000));
+		log(QString("Processor maximum speed: %1 MHz").arg(maxFreq/1000000));
 
 	int ncpu = 0;
 	size = sizeof(ncpu);
 	sysctlbyname("hw.ncpu", &ncpu, &size, nullptr, 0);
-	writeLog(QString("Processor logical cores: %1").arg(ncpu));
+	log(QString("Processor logical cores: %1").arg(ncpu));
 
 	uint64_t totalRAM = 0;
 	size = sizeof(totalRAM);
 	sysctlbyname("hw.memsize", &totalRAM, &size, nullptr, 0);
-	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+	log(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 
 	// extra info
 	sysctlbyname("hw.model", nullptr, &size, nullptr, 0);
 	std::string model(size, '\0');
 	sysctlbyname("hw.model", const_cast<char *>(model.data()), &size, nullptr, 0);
-	writeLog(QString("Model identifier: %1").arg(model.data()));
+	log(QString("Model identifier: %1").arg(model.data()));
 #endif
 
 #ifdef Q_OS_LINUX
@@ -229,7 +231,7 @@ void StelLogger::init(const QString& logFilePath)
 	bool cpuOK = false;
 	QFile infoFile("/proc/cpuinfo");
 	if (!infoFile.open(QIODevice::ReadOnly | QIODevice::Text))
-		writeLog("Could not get CPU info.");
+		log("Could not get CPU info.");
 	else
 	{
 		cpuOK = true;
@@ -267,13 +269,13 @@ void StelLogger::init(const QString& logFilePath)
 
 	if (cpuOK)
 	{
-		writeLog(QString("Processor name: %1").arg(cpumodel));
+		log(QString("Processor name: %1").arg(cpumodel));
 		if (!hardware.isEmpty())
-			writeLog(QString("Processor hardware: %1").arg(hardware));
+			log(QString("Processor hardware: %1").arg(hardware));
 		if (!model.isEmpty())
-			writeLog(QString("Device model: %1").arg(model));
-		writeLog(QString("Processor maximum speed: %1 MHz").arg(freq));
-		writeLog(QString("Processor logical cores: %1").arg(ncpu));
+			log(QString("Device model: %1").arg(model));
+		log(QString("Processor maximum speed: %1 MHz").arg(freq));
+		log(QString("Processor logical cores: %1").arg(ncpu));
 	}
 
 	// memory info
@@ -285,8 +287,8 @@ void StelLogger::init(const QString& logFilePath)
 	totalRAM *= memInfo.mem_unit;
 	totalVRAM *= memInfo.mem_unit;
 
-	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
-	writeLog(QString("Total virtual memory: %1 MB").arg(totalVRAM/(1024<<10)));
+	log(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+	log(QString("Total virtual memory: %1 MB").arg(totalVRAM/(1024<<10)));
 
 #endif
 
@@ -304,23 +306,23 @@ void StelLogger::init(const QString& logFilePath)
 	sysctlbyname(_model, nullptr, &len, nullptr, 0);
 	std::string model(len, '\0');
 	sysctlbyname(_model, const_cast<char *>(model.data()), &len, nullptr, 0);
-	writeLog(QString("Processor name: %1").arg(model.data()));
+	log(QString("Processor name: %1").arg(model.data()));
 
 	int64_t freq = 0;
 	len = sizeof(freq);
 	sysctlbyname("machdep.tsc_freq", &freq, &len, nullptr, 0);
-	writeLog(QString("Processor speed: %1 MHz").arg(freq/1000000));
+	log(QString("Processor speed: %1 MHz").arg(freq/1000000));
 
 	int ncpu = 0;
 	len = sizeof(ncpu);
 	sysctlbyname("hw.ncpu", &ncpu, &len, nullptr, 0);
-	writeLog(QString("Processor logical cores: %1").arg(ncpu));
+	log(QString("Processor logical cores: %1").arg(ncpu));
 
 	// memory info
 	uint64_t totalRAM = 0;
 	len = sizeof(totalRAM);
 	sysctlbyname(_physmem, &totalRAM, &len, nullptr, 0);
-	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+	log(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 #endif
 
 #ifdef Q_OS_OPENBSD
@@ -334,19 +336,19 @@ void StelLogger::init(const QString& logFilePath)
 	mib[1] = HW_MODEL;
 	sysctl(mib, 2, model.data(), &len, NULL, 0);
 	model.resize(len);
-	writeLog(QString("Processor name: %1").arg(model.data()));
+	log(QString("Processor name: %1").arg(model.data()));
 
 	mib[0] = CTL_HW;
 	mib[1] = HW_CPUSPEED;
 	len = sizeof(freq);
 	sysctl(mib, 2, &freq, &len, NULL, 0);
-	writeLog(QString("Processor speed: %1 MHz").arg(freq));
+	log(QString("Processor speed: %1 MHz").arg(freq));
 
 	mib[0] = CTL_HW;
 	mib[1] = HW_NCPU;
 	len = sizeof(ncpu);
 	sysctl(mib, 2, &ncpu, &len, NULL, 0);
-	writeLog(QString("Processor logical cores: %1").arg(ncpu));
+	log(QString("Processor logical cores: %1").arg(ncpu));
 
 	// memory info
 	mib[0] = CTL_HW;
@@ -358,21 +360,21 @@ void StelLogger::init(const QString& logFilePath)
 	uint64_t totalRAM = 0;
 	len = sizeof(totalRAM);
 	sysctl(mib, 2, &totalRAM, &len, NULL, 0);
-	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+	log(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 #endif
 
 #ifdef Q_OS_SOLARIS
 	processor_info_t pinfo;
 	processor_info(0, &pinfo);
-	//writeLog(QString("Processor name: %1").arg(pinfo.pi_processor_type));
-	writeLog(QString("Processor speed: %1 MHz").arg(pinfo.pi_clock));
+	//log(QString("Processor name: %1").arg(pinfo.pi_processor_type));
+	log(QString("Processor speed: %1 MHz").arg(pinfo.pi_clock));
 
 	int ncpu = sysconf( _SC_NPROCESSORS_ONLN );
-	writeLog(QString("Processor logical cores: %1").arg(ncpu));
+	log(QString("Processor logical cores: %1").arg(ncpu));
 
 	// memory info
 	uint64_t totalRAM = (size_t)sysconf( _SC_PHYS_PAGES ) * (size_t)sysconf( _SC_PAGESIZE );
-	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+	log(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 #endif
 
 #ifdef Q_OS_HAIKU
@@ -412,17 +414,17 @@ void StelLogger::init(const QString& logFilePath)
 	else
 		clockSpeed = QString("%1 GHz").arg(QString::number(frequency/1000.f, 'f', 2));
 
-	writeLog(QString("Processor name: %1 %2 @ %3").arg(get_cpu_vendor_string(cpuVendor), get_cpu_model_string(platform, cpuVendor, cpuModel), clockSpeed));
-	writeLog(QString("Processor speed: %1 MHz").arg(frequency));
+	log(QString("Processor name: %1 %2 @ %3").arg(get_cpu_vendor_string(cpuVendor), get_cpu_model_string(platform, cpuVendor, cpuModel), clockSpeed));
+	log(QString("Processor speed: %1 MHz").arg(frequency));
 
 	system_info hwinfo;
 	get_system_info(&hwinfo);
 
-	writeLog(QString("Processor logical cores: %1").arg(hwinfo.cpu_count));
+	log(QString("Processor logical cores: %1").arg(hwinfo.cpu_count));
 
 	// memory info
 	uint64_t totalRAM = round(hwinfo.max_pages*B_PAGE_SIZE/1048576.0 + hwinfo.ignored_pages*B_PAGE_SIZE/1048576.0);
-	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM));
+	log(QString("Total physical memory: %1 MB").arg(totalRAM));
 #endif
 }
 
