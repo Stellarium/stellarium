@@ -876,7 +876,7 @@
 	      from Cristina Cellini, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.148 Images of sh2-173
+	4.148 Images of DWB20, sh2-173
 	      from Astrophoto Andy, post-processing: Sun Shuwei
 	      https://www.flickr.com/photos/andyweeks/53246079280/in/dateposted/
 	      License: public domain
