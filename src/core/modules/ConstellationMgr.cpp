@@ -1133,20 +1133,22 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 	for (int n = 0; n < boundaryData.size(); ++n)
 	{
 		const auto line = boundaryData[n].toString().toStdString();
+		char edgeType, edgeDir;
 		char dec1_sign, dec2_sign;
 		int ra1_h, ra1_m, ra1_s, dec1_d, dec1_m, dec1_s;
 		int ra2_h, ra2_m, ra2_s, dec2_d, dec2_m, dec2_s;
 		char constellationNames[2][8];
 		if (sscanf(line.c_str(),
-		           "%*s %*s"
+		           "%*s %c%c "
 		           "%d:%d:%d %c%d:%d:%d "
 		           "%d:%d:%d %c%d:%d:%d "
 		           "%7s %7s",
+		           &edgeType, &edgeDir,
 		           &ra1_h, &ra1_m, &ra1_s,
 		           &dec1_sign, &dec1_d, &dec1_m, &dec1_s,
 		           &ra2_h, &ra2_m, &ra2_s,
 		           &dec2_sign, &dec2_d, &dec2_m, &dec2_s,
-		           constellationNames[0], constellationNames[1]) != 16)
+		           constellationNames[0], constellationNames[1]) != 18)
 		{
 			qWarning().nospace() << "Failed to parse skyculture boundary line: \"" << line.c_str() << "\"";
 			continue;
@@ -1156,11 +1158,9 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 		double RA1 = (60. * (60. * ra1_h + ra1_m) + ra1_s) * timeSecToRadians;
 		double RA2 = (60. * (60. * ra2_h + ra2_m) + ra2_s) * timeSecToRadians;
 		constexpr double angleSecToRad = M_PI / (180 * 3600);
-		const double DE1 = (60. * (60. * dec1_d + dec1_m) + dec1_s) * (dec1_sign=='-' ? -1 : 1) * angleSecToRad;
-		const double DE2 = (60. * (60. * dec2_d + dec2_m) + dec2_s) * (dec2_sign=='-' ? -1 : 1) * angleSecToRad;
+		double DE1 = (60. * (60. * dec1_d + dec1_m) + dec1_s) * (dec1_sign=='-' ? -1 : 1) * angleSecToRad;
+		double DE2 = (60. * (60. * dec2_d + dec2_m) + dec2_s) * (dec2_sign=='-' ? -1 : 1) * angleSecToRad;
 
-
-		const int numPoints = 2 + std::ceil(std::abs(RA1 - RA2) / (M_PI / 64));
 		Vec3d xyz1;
 		StelUtils::spheToRect(RA1,DE1,xyz1);
 		Vec3d xyz2;
@@ -1168,15 +1168,46 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 
 		const auto points = new std::vector<Vec3d>;
 
-		// Make sure the interpolation works without problems when jumping over 2pi
-		if (RA2 - RA1 > M_PI) RA2 -= 2 * M_PI;
-		if (RA1 - RA2 > M_PI) RA1 -= 2 * M_PI;
+		const bool edgeTypeDirValid = ((edgeType == 'P' || edgeType == 'M') && (edgeDir == '+' || edgeDir == '-')) ||
+		                               (edgeType == '_' && edgeDir == '_');
+		if (!edgeTypeDirValid)
+		{
+			qWarning().nospace() << "Bad edge type/direction: must be [PM_][-+_], but is " << QString("%1%2").arg(edgeType).arg(edgeDir)
+			                     << ". Will not interpolate the edges.";
+			edgeType = '_';
+			edgeDir = '_';
+		}
+
+		double stepRA = 0, stepDE = 0;
+		int numPoints = 2;
+		switch (edgeType)
+		{
+		case 'P': // RA is variable
+			if (RA2 > RA1 && edgeDir == '-')
+				RA1 += 2*M_PI;
+			if (RA2 < RA1 && edgeDir == '+')
+				RA1 -= 2*M_PI;
+			numPoints = 2 + std::ceil(std::abs(RA1 - RA2) / (M_PI / 64));
+			stepRA = (RA2 - RA1) / (numPoints - 1);
+			break;
+		case 'M': // DE is variable
+			if (DE2 > DE1 && edgeDir == '-')
+				DE1 += 2*M_PI;
+			if (DE2 < DE1 && edgeDir == '+')
+				DE1 -= 2*M_PI;
+			numPoints = 2 + std::ceil(std::abs(DE1 - DE2) / (M_PI / 64));
+			stepDE = (DE2 - DE1) / (numPoints - 1);
+			break;
+		default: // No interpolation
+			stepRA = RA2 - RA1;
+			stepDE = DE2 - DE1;
+			break;
+		}
 
 		for (int n = 0; n < numPoints; ++n)
 		{
-			const double t = double(n) / (numPoints - 1);
-			const double RA = RA1 + t * (RA2 - RA1);
-			const double DE = DE1 + t * (DE2 - DE1);
+			const double RA = RA1 + n * stepRA;
+			const double DE = DE1 + n * stepDE;
 			Vec3d xyz;
 			StelUtils::spheToRect(RA,DE,xyz);
 			if (b1875) xyz = core.j1875ToJ2000(xyz);
