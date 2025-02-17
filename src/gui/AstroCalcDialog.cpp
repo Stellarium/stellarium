@@ -405,6 +405,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
 	connect(ui->object1ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(savePhenomenaCelestialBody(int)));
 	connect(ui->object2ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(savePhenomenaCelestialGroup(int)));
+	connect(ui->selectObjectButton, SIGNAL(clicked()), this, SLOT(selectStoredObject()));
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(populateSelectedObject()));
 
 	plotAltVsTimeSun = conf->value("astrocalc/altvstime_sun", false).toBool();
 	plotAltVsTimeMoon = conf->value("astrocalc/altvstime_moon", false).toBool();
@@ -5126,13 +5128,20 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->setCurrentIndex(index);
 	groups->model()->sort(0);
 	groups->blockSignals(false);
+
+	// Set visibility the button for restore selection of latest selected object
+	bool state = (groups->itemData(index).toInt() == PHCLatestSelectedObject);
+	ui->selectObjectButton->setVisible(state);
 }
 
 void AstroCalcDialog::savePhenomenaCelestialGroup(int index)
 {
 	Q_ASSERT(ui->object2ComboBox);
 	QComboBox* group = ui->object2ComboBox;
-	conf->setValue("astrocalc/phenomena_celestial_group", group->itemData(index).toInt());
+	int groupIndex = group->itemData(index).toInt();
+	conf->setValue("astrocalc/phenomena_celestial_group", groupIndex);
+	// Set visibility the button for restore selection of latest selected object
+	ui->selectObjectButton->setVisible(groupIndex == PHCLatestSelectedObject);
 }
 
 void AstroCalcDialog::cleanupPhenomena()
@@ -5140,6 +5149,39 @@ void AstroCalcDialog::cleanupPhenomena()
 	ui->phenomenaTreeWidget->clear();
 	adjustPhenomenaColumns();
 	enablePhenomenaButtons(false);
+	followLatestSelectedObject = true;
+}
+
+void AstroCalcDialog::populateSelectedObject()
+{
+	if (followLatestSelectedObject)
+	{
+		QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
+		if (!selectedObjects.isEmpty())
+		{
+			latestSelectedObject = selectedObjects.first();
+			QString name = latestSelectedObject->getNameI18n();
+			if (name.isEmpty())
+			{
+				QString otype = latestSelectedObject->getType();
+				if (otype == "Nebula")
+				{
+					name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+					if (name.isEmpty())
+						name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
+				}
+				else if (otype == "Star" || otype=="Pulsar")
+					name = latestSelectedObject->getID();
+			}
+			ui->selectObjectButton->setText(name);
+		}
+	}
+}
+
+void AstroCalcDialog::selectStoredObject()
+{
+	if (!latestSelectedObject.isNull())
+		objectMgr->setSelectedObject(latestSelectedObject);
 }
 
 void AstroCalcDialog::savePhenomenaOppositionFlag(bool b)
@@ -5770,6 +5812,7 @@ void AstroCalcDialog::calculatePhenomena()
 	const bool opposition = ui->phenomenaOppositionCheckBox->isChecked();
 	const bool perihelion = ui->phenomenaPerihelionAphelionCheckBox->isChecked();
 	const bool quadrature = ui->phenomenaElongationQuadratureCheckBox->isChecked();
+	followLatestSelectedObject = false; // do not following the changes in selection of objects
 
 	initListPhenomena();
 
@@ -5993,17 +6036,15 @@ void AstroCalcDialog::calculatePhenomena()
 
 		if (obj2Type == PHCLatestSelectedObject)
 		{
-			QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
-			if (!selectedObjects.isEmpty())
+			if (!latestSelectedObject.isNull())
 			{
-				StelObjectP selectedObject = selectedObjects[0];
-				if (selectedObject!=planet && selectedObject->getType() != "Satellite")
+				if (latestSelectedObject!=planet && latestSelectedObject->getType() != "Satellite")
 				{
 					// conjunction
-					fillPhenomenaTable(findClosestApproach(planet, selectedObject, startJD, stopJD, separation, PhenomenaTypeIndex::Conjunction), planet, selectedObject, PhenomenaTypeIndex::Conjunction);
+					fillPhenomenaTable(findClosestApproach(planet, latestSelectedObject, startJD, stopJD, separation, PhenomenaTypeIndex::Conjunction), planet, latestSelectedObject, PhenomenaTypeIndex::Conjunction);
 					// opposition
 					if (opposition)
-						fillPhenomenaTable(findClosestApproach(planet, selectedObject, startJD, stopJD, separation, PhenomenaTypeIndex::Opposition), planet, selectedObject, PhenomenaTypeIndex::Opposition);
+						fillPhenomenaTable(findClosestApproach(planet, latestSelectedObject, startJD, stopJD, separation, PhenomenaTypeIndex::Opposition), planet, latestSelectedObject, PhenomenaTypeIndex::Opposition);
 				}
 			}
 		}

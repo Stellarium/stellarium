@@ -163,7 +163,7 @@ public:
 	StarWrapper2(const SpecialZoneArray<Star2> *array,
 			   const SpecialZoneData<Star2> *zone,
 			   const Star2 *star) : StarWrapper<Star2>(array,zone,star) {}
-	QString getID(void) const override { return QString(); }
+	QString getID(void) const override;
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 	QString getObjectType() const override;
 	QString getObjectTypeI18n() const override;
@@ -175,7 +175,7 @@ public:
 	StarWrapper3(const SpecialZoneArray<Star3> *array,
 			   const SpecialZoneData<Star3> *zone,
 			   const Star3 *star) : StarWrapper<Star3>(array,zone,star) {}
-	QString getID(void) const override { return QString(); }
+	QString getID(void) const override;
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 	QString getObjectType() const override;
 	QString getObjectTypeI18n() const override;
