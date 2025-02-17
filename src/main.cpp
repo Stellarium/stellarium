@@ -22,6 +22,7 @@
 #include "StelSplashScreen.hpp"
 #include "StelTranslator.hpp"
 #include "StelLogger.hpp"
+#include "StelSystemInfo.hpp"
 #include "StelFileMgr.hpp"
 #include "CLIProcessor.hpp"
 #include "StelIniParser.hpp"
@@ -298,6 +299,7 @@ int main(int argc, char **argv)
 	qInfo() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
 	qInfo() << qPrintable(QString("[ %1 ]").arg(copyrightLine.leftJustified(maxLength, ' ')));
 	qInfo() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
+	printSystemInfo();
 	qInfo().noquote() << "Writing log file to:" << QDir::toNativeSeparators(StelLogger::getLogFileName());
 	qInfo() << "File search paths:";
 	int n=0;
