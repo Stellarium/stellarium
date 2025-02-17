@@ -289,16 +289,16 @@ int main(int argc, char **argv)
 	QString versionLine = QString("This is %1 (v%2) - %3").arg(StelUtils::getApplicationName(), StelUtils::getApplicationVersion(), STELLARIUM_URL);
 	QString copyrightLine = STELLARIUM_COPYRIGHT;
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
-	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
-	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
-	qDebug() << qPrintable(QString("[ %1 ]").arg(copyrightLine.leftJustified(maxLength, ' ')));
-	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
-	qDebug().noquote() << "Writing log file to:" << QDir::toNativeSeparators(StelLogger::getLogFileName());
-	qDebug() << "File search paths:";
+	qInfo() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
+	qInfo() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
+	qInfo() << qPrintable(QString("[ %1 ]").arg(copyrightLine.leftJustified(maxLength, ' ')));
+	qInfo() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
+	qInfo().noquote() << "Writing log file to:" << QDir::toNativeSeparators(StelLogger::getLogFileName());
+	qInfo() << "File search paths:";
 	int n=0;
 	for (const auto& i : StelFileMgr::getSearchPaths())
 	{
-		qDebug().noquote().nospace() << " [" << n << "]: " << QDir::toNativeSeparators(i);
+		qInfo().noquote().nospace() << " [" << n << "]: " << QDir::toNativeSeparators(i);
 		++n;
 	}
 
