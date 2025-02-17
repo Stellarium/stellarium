@@ -360,10 +360,10 @@
 	     from Harel Boren
 	     http://www.pbase.com/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.18 Images of IC1805
-	     from Aldeabaran66
-	     https://commons.wikimedia.org/wiki/
-	     License: Creative Commons Attribution-Share Alike 4.0 International
+	4.18 Images of NGC3726
+	     from KPNO/NOIRLab/NSF/AURA/George Hickey/Adam Block, post-processing: Sun Shuwei
+	     https://noirlab.edu/public/
+	     License: Creative Commons Attribution 4.0 International
 	4.19 Images of M21, M47, NGC3324, NGC7590, RCW158
 	     from Trevor Gerdes
 	     http://www.sarcasmogerdes.com/
@@ -545,12 +545,12 @@
 	     from TRAPPIST/E. Jehin/ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.65 Images of DWB111, IC405, IC410, IC443, IC2177, NGC288, NGC404, NGC1097,
-	     NGC1931, NGC2264, LBN437, Sh2-191, Sh2-247
+	4.65 Images of DWB111, IC405, IC410, IC443, IC1805, IC1848, IC2177,
+	     NGC288, NGC404, NGC1097, NGC1931, NGC2264, LBN437, Sh2-191, Sh2-247
 	     from Giuseppe Donatiello, post-processing: Sun Shuwei
 	     https://flickr.com/photos/133259498@N05/
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.66 Images of IC1848, NGC1055
+	4.66 Images of NGC1055
 	     from Jeffjnet
 	     http://www.iceinspace.com.au/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
@@ -1025,10 +1025,7 @@
 	      from KPNO/NOIRLab/NSF/AURA/John and Christie Connors/Adam Block, post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
-	4.187 Images of NGC3726
-	      from KPNO/NOIRLab/NSF/AURA/George Hickey/Adam Block, post-processing: Sun Shuwei
-	      https://noirlab.edu/public/
-	      License: Creative Commons Attribution 4.0 International
+
 ```
 
 ## Appendix
