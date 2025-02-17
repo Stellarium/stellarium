@@ -18,6 +18,9 @@
  */
 
 #include "StelLogger.hpp"
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif
 
 // Init statics variables.
 QFile StelLogger::logFile;
