@@ -67,14 +67,16 @@ def ensure_dir(file_path):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-def is_sc_descr_entry(entry):
+def is_sc_descr_entry(entry, sc_name):
     '''Check if a given .po file entry is a section from a sky culture description'''
     if not entry.comment:
         return False
-    if entry.comment == 'Sky culture name':
+    c = entry.comment
+    if not c.startswith('Sky culture ') and not c.startswith(sc_name+' sky culture '):
+        return False
+    if 'Sky culture name' in c or (sc_name+' sky culture name') in c:
         return True
-    return (entry.comment.startswith('Sky culture ') and
-            entry.comment.endswith(' section in markdown format'))
+    return c.endswith(' section in markdown format')
 
 def main():
     SCDIR = None
@@ -215,7 +217,7 @@ def main():
                 continue
             po = polib.pofile(po_path)
             for entry in po:
-                if is_sc_descr_entry(entry):
+                if is_sc_descr_entry(entry, sc_names[sky_culture]):
                     if entry not in combined_gui_po:
                         entry.comment = sc_names[sky_culture] + ' s' + entry.comment[1:]
                         combined_gui_po.append(entry)
