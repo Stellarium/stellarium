@@ -105,7 +105,7 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 	}
 }
 
-const QString InfoPanel::getSelectedText(void) const
+QString InfoPanel::getSelectedText() const
 {
 	return toPlainText();
 }
