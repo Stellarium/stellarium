@@ -404,6 +404,14 @@ void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
 
 	QJsonDocument doc = QJsonDocument::fromJson(content);
 	QJsonObject json = doc.object();
+
+	if(!json.contains("session") || json["status"].toString() == QString("error")) {
+		qWarning() << "[NebulaTextures] Login failed. Please check if your API key is valid.";
+		updateStatus(q_("Login failed! Please check if your API key is valid."));
+		freezeUiState(false);
+		return;
+	}
+
 	session = json["session"].toString();
 
 	QUrl uploadUrl(API_URL + "api/upload");
