@@ -134,6 +134,10 @@ private:
 	bool flagAsterism;
 	//! List of stars forming the segments
 	std::vector<StelObjectP> asterism;
+	//! In case this describes a single-star asterism (i.e. just one line segment that starts and ends at the same star),
+	//! or we have a line segment with such single star somewhere within the asterism,
+	//! we will draw a circle with this opening radius.
+	double singleStarAsterismRadius;
 
 	SphericalCap boundingCap;
 

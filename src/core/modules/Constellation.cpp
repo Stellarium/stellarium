@@ -50,6 +50,7 @@ Constellation::Constellation()
 	: numberOfSegments(0)
 	, beginSeason(0)
 	, endSeason(0)
+	, singleStarConstellationRadius(cos(M_PI/360.)) // default radius of 1/2 degrees
 	, artOpacity(1.f)
 {
 }
@@ -119,6 +120,11 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool p
 	}
 
 	numberOfSegments = constellation.size() / 2;
+	if (data.contains("single_star_radius"))
+	{
+		double rd = data["single_star_radius"].toDouble(0.5);
+		singleStarConstellationRadius = cos(rd*M_PI/180.);
+	}
 
 	// Name tag should go to constellation's centre of gravity
 	XYZname.set(0.,0.,0.);
@@ -162,8 +168,15 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 			star1=constellation[2*i]->getJ2000EquatorialPos(core);
 			star2=constellation[2*i+1]->getJ2000EquatorialPos(core);
 			star1.normalize();
-			star2.normalize();			
-			sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);			
+			star2.normalize();
+			if (star1.fuzzyEquals(star2))
+			{
+				// draw single-star segment as circle
+				SphericalCap scCircle(star1, singleStarConstellationRadius);
+				sPainter.drawSphericalRegion(&scCircle, StelPainter::SphericalPolygonDrawModeBoundary);
+			}
+			else
+				sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);
 		}
 	}
 }

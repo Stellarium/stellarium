@@ -466,13 +466,13 @@ where
 \item[\jtag{lines}] an array of arrays, each describing a polygon with star numbers. The star numbers are usually the Hipparcos (HIP) numbers. 
                     For very dim stars, the longer numbers from the Gaia DR3 catalog are acceptable, but they must be written as string.
 					
-					\emph{Single-star constellations} or particular highlights can be described with just one entry in a segment,\newFeature{25.1} 
+					\emph{Single-star constellations}\newFeature{25.1}  or particular highlights can be described with just one star repeated in a two-element segment,
 					the respective star will be encircled with a radius of \jtag{single\_star\_radius}.
 					
-					To describe \indexterm{dark constellations} formed from dust clouds in the Milky Way or other non-stellar items, 
+					To describe \indexterm{dark constellations}\newFeature{25.2} formed from dust clouds in the Milky Way or other non-stellar items, 
 					another variant can use coordinate lists and is technically an array of arrays of 2-part arrays of float numbers, 
-					each pair being right ascension $\alpha$ (decimal hours) and declination $\delta$ (decimal degrees) in equinox J2000.0. \newFeature{25.1}
-\item[\jtag{single\_star\_radius}] (float, default 1.0/TBD) radius of a circle (degrees) marking single-star segments in \jtag{lines}.		\newFeature{25.1} 
+					each pair being right ascension $\alpha$ (decimal hours) and declination $\delta$ (decimal degrees) in equinox J2000.0. 
+\item[\jtag{single\_star\_radius}] (float, default 0.5)\newFeature{25.1}  radius of a circle (degrees) marking single-star segments in \jtag{lines}.
 \item[\jtag{image}] Optional, see \ref{SC:image}
 \item[\jtag{common\_name}] Dictionary of names. Required entries: \jtag{english}. Optional: \jtag{native}
 
@@ -597,9 +597,10 @@ Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help ra
                     For the very dim stars of telescopic asterisms, the longer numbers from the Gaia DR3 catalog are acceptable, but they must be written as string.
 					Another variant can use coordinate lists and is technically an array of arrays of 2-part arrays of float numbers, 
 					each pair being right ascension $\alpha$ (decimal hours) and declination $\delta$ (decimal degrees) in equinox J2000.0. 
-					%Single-star asterisms can be described with just one line vertex (star or coordinate pair)\newFeature{25.2} 
-					%the respective star/coordinate will be encircled with a radius of \jtag{single\_star\_radius}. 
-%\item[\jtag{single\_star\_radius}] (float, default 1.0/TBD) radius of a circle (degrees) marking single-vertex segments in \jtag{lines}.		\newFeature{25.2} 			
+
+					\emph{Single-star asterisms} \newFeature{25.1} can be described with a two-element array that repeats the first entry (star or coordinate pair)
+					-- the respective star/coordinate will be encircled with a radius of \jtag{single\_star\_radius}.
+\item[\jtag{single\_star\_radius}] (float, default 0.5)\newFeature{25.1}  radius of a circle (degrees) marking single-star segments in \jtag{lines}.
 \end{description}
 
 
