@@ -963,9 +963,6 @@ private slots:
 	//! Loads native names of deep-sky objects for a given sky culture.
 	void updateSkyCulture(const StelSkyCulture& skyCulture);
 
-	//! Load culture-independent names and return a map from name to id to
-	//! enable search while loading culture-specific names.
-	void loadCommonNames();
 	int loadCultureSpecificNames(const QJsonObject& data);
 	void loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName);
 

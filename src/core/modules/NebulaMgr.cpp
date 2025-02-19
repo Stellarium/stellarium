@@ -911,7 +911,6 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	}
 
 	loadDSOCatalog(dsoCatalogPath);
-	loadCommonNames();
 
 	if (QString defaultNamesPath = StelFileMgr::findFile("nebulae/default/names.dat"); defaultNamesPath.isEmpty())
 	{
@@ -1697,6 +1696,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 			{
 				QString propName = transMatch.captured(1).trimmed();
 				defaultNameMap[e].push_back(propName);
+				commonNameMap[propName.toUpper()] = e;
 			}
 			readOk++;
 		}
@@ -1943,71 +1943,6 @@ void NebulaMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, co
 		if (specificName.isEmpty()) continue;
 		setName(commonNameIndexIt.value(), specificName);
 	}
-}
-void NebulaMgr::loadCommonNames()
-{
-	commonNameMap.clear();
-
-	QString namesFile = StelFileMgr::findFile("skycultures/common_dso_names.fab");
-	if (namesFile.isEmpty())
-	{
-		qWarning().noquote() << "Failed to open common DSO names file";
-		return;
-	}
-
-	// Open file
-	QFile dsoNamesFile(namesFile);
-	if (!dsoNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-		qWarning().noquote() << "Failed to open file" << QDir::toNativeSeparators(namesFile);
-		return;
-	}
-
-	// Now parse the file
-	// lines to ignore which start with a # or are empty
-	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
-
-	// lines which look like records - we use the RE to extract the fields
-	// which will be available in recMatch.capturedTexts()
-	static const QRegularExpression recRx("^\\s*([\\w\\s\\-\\+\\.]+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)");
-
-	QString record, dsoId, nativeName;
-	int totalRecords=0;
-	int readOk=0;
-	int lineNumber=0;
-	while (!dsoNamesFile.atEnd())
-	{
-		record = QString::fromUtf8(dsoNamesFile.readLine()).trimmed();
-		lineNumber++;
-
-		// Skip comments
-		if (commentRx.match(record).hasMatch())
-			continue;
-
-		totalRecords++;
-
-		QRegularExpressionMatch recMatch=recRx.match(record);
-		if (!recMatch.hasMatch())
-		{
-			qWarning().noquote() << "ERROR - cannot parse record at line" << lineNumber << "in native deep-sky object names file" << QDir::toNativeSeparators(namesFile);
-		}
-		else
-		{
-			dsoId = recMatch.captured(1).trimmed();
-			nativeName = recMatch.captured(2).trimmed(); // Use translatable text
-			NebulaP e = search(dsoId);
-			if (!e.isNull()) // avoid crash
-			{
-				commonNameMap[nativeName.toUpper()] = e;
-			}
-			else
-				qWarning().noquote() << "ERROR - could NOT found DSO " << dsoId;
-
-			readOk++;
-		}
-	}
-	dsoNamesFile.close();
-	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "common names of deep-sky objects";
 }
 
 void NebulaMgr::updateI18n()
