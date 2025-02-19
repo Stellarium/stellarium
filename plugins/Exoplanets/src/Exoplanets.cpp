@@ -155,7 +155,7 @@ void Exoplanets::init()
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Exoplanets"))
 		{
-			qDebug() << "[Exoplanets] No Exoplanets section exists in main config file - creating with defaults";
+			qInfo() << "[Exoplanets] No Exoplanets section exists in main config file - creating with defaults";
 			resetConfiguration();
 		}
 
@@ -199,11 +199,11 @@ void Exoplanets::init()
 	}
 	else
 	{
-		qDebug().noquote() << "[Exoplanets] exoplanets.json does not exist - copying default catalog to" << QDir::toNativeSeparators(jsonCatalogPath);
+		qInfo().noquote() << "[Exoplanets] exoplanets.json does not exist - copying default catalog to" << QDir::toNativeSeparators(jsonCatalogPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug().noquote() << "[Exoplanets] loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
+	qInfo().noquote() << "[Exoplanets] loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
 
 	readJsonFile();
 
@@ -638,7 +638,7 @@ int Exoplanets::getJsonFileFormatVersion(void) const
 		jsonVersion = map.value("version").toInt();
 	}
 
-	qDebug() << "[Exoplanets] Version of the format of the catalog:" << jsonVersion;
+	qInfo().noquote() << "[Exoplanets] Version of the format of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
 

@@ -503,7 +503,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 		// The file is supposed to be checked, but we can't find it
 		if (checked)
 		{
-			qWarning() << QString("Warning: could not find star catalog %1").arg(QDir::toNativeSeparators(catalogFileName));
+			qWarning().noquote() << "Could not find star catalog" << QDir::toNativeSeparators(catalogFileName);
 			setCheckFlag(catDesc.value("id").toString(), false);
 		}
 		return false;
@@ -511,7 +511,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 	// Possibly fixes crash on Vista
 	if (!StelFileMgr::isReadable(catalogFilePath))
 	{
-		qWarning() << QString("Warning: User does not have permissions to read catalog %1").arg(QDir::toNativeSeparators(catalogFilePath));
+		qWarning().noquote() << "User does not have permissions to read catalog" << QDir::toNativeSeparators(catalogFilePath);
 		return false;
 	}
 
@@ -612,7 +612,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	// Please do not init twice:
 	Q_ASSERT(maxGeodesicGridLevel < 0);
 
-	qDebug() << "Loading star data ...";
+	qInfo() << "Loading star data ...";
 
 	catalogsDescription = starsConfig.value("catalogs").toList();
 	foreach (const QVariant& catV, catalogsDescription)
@@ -664,7 +664,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 		component_array.append(QString(QChar('A'+i)));
 
 	lastMaxSearchLevel = maxGeodesicGridLevel;
-	qDebug() << "Finished loading star catalogue data, max_geodesic_level:" << maxGeodesicGridLevel;
+	qInfo().noquote() << "Finished loading star catalogue data, max_geodesic_level:" << maxGeodesicGridLevel;
 }
 
 void StarMgr::populateHipparcosLists()
@@ -740,11 +740,11 @@ auto StarMgr::loadCommonNames(const QString& commonNameFile) const -> CommonName
 
 	if (commonNameFile.isEmpty()) return commonNames;
 
-	qDebug().noquote() << "Loading star names from" << QDir::toNativeSeparators(commonNameFile);
+	qInfo().noquote() << "Loading star names from" << QDir::toNativeSeparators(commonNameFile);
 	QFile cnFile(commonNameFile);
 	if (!cnFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning().noquote() << "WARNING - could not open" << QDir::toNativeSeparators(commonNameFile);
+		qWarning().noquote() << "Could not open" << QDir::toNativeSeparators(commonNameFile);
 		return commonNames;
 	}
 
@@ -773,8 +773,8 @@ auto StarMgr::loadCommonNames(const QString& commonNameFile) const -> CommonName
 		QRegularExpressionMatch recMatch=recordRx.match(record);
 		if (!recMatch.hasMatch())
 		{
-			qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
-				   << " - record does not match record pattern";
+			qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
+					     << " - record does not match record pattern";
 			qWarning().noquote() << "Problematic record:" << record;
 			continue;
 		}
@@ -789,15 +789,15 @@ auto StarMgr::loadCommonNames(const QString& commonNameFile) const -> CommonName
 #endif
 			if (!ok)
 			{
-				qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
-					   << " - failed to convert " << recMatch.captured(1) << "to a number";
+				qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
+						     << " - failed to convert " << recMatch.captured(1) << "to a number";
 				continue;
 			}
 			QString englishCommonName = recMatch.captured(2).trimmed();
 			if (englishCommonName.isEmpty())
 			{
-				qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
-					   << " - empty name field";
+				qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
+						     << " - empty name field";
 				continue;
 			}
 
@@ -819,7 +819,7 @@ auto StarMgr::loadCommonNames(const QString& commonNameFile) const -> CommonName
 	}
 	cnFile.close();
 
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "common star names";
+	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "common star names";
 	return commonNames;
 }
 
@@ -925,19 +925,19 @@ void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
 	{
 		sciExtraDesignationsMapI18n.clear();
 		sciExtraDesignationsIndexI18n.clear();
-		qDebug().noquote() << "Loading scientific star extra names from" << QDir::toNativeSeparators(sciNameFile);
+		qInfo().noquote() << "Loading scientific star extra names from" << QDir::toNativeSeparators(sciNameFile);
 	}
 	else
 	{
 		sciDesignationsMapI18n.clear();
 		sciDesignationsIndexI18n.clear();
-		qDebug().noquote() << "Loading scientific star names from" << QDir::toNativeSeparators(sciNameFile);
+		qInfo().noquote() << "Loading scientific star names from" << QDir::toNativeSeparators(sciNameFile);
 	}
 
 	QFile snFile(sciNameFile);
 	if (!snFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning().noquote() << "WARNING - could not open" << QDir::toNativeSeparators(sciNameFile);
+		qWarning().noquote() << "Could not open" << QDir::toNativeSeparators(sciNameFile);
 		return;
 	}
 	const QStringList& allRecords = QString::fromUtf8(snFile.readAll()).split('\n');
@@ -960,8 +960,8 @@ void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
 		const QStringList& fields = record.split('|');
 		if (fields.size()!=2)
 		{
-			qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(sciNameFile)
-				   << " - record does not match record pattern";
+			qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(sciNameFile)
+					     << " - record does not match record pattern";
 			continue;
 		}
 		else
@@ -971,16 +971,16 @@ void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
 			StarId hip = fields.at(0).toLongLong(&ok);
 			if (!ok)
 			{
-				qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(sciNameFile)
-					   << " - failed to convert " << fields.at(0) << "to a number";
+				qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(sciNameFile)
+						     << " - failed to convert " << fields.at(0) << "to a number";
 				continue;
 			}
 
 			QString sci_name = fields.at(1).trimmed();
 			if (sci_name.isEmpty())
 			{
-				qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(sciNameFile)
-					   << " - empty name field";
+				qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(sciNameFile)
+						     << " - empty name field";
 				continue;
 			}
 
@@ -1014,9 +1014,9 @@ void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
 	}
 
 	if (extraData)
-		qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "scientific star extra names";
+		qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "scientific star extra names";
 	else
-		qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "scientific star names";
+		qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "scientific star names";
 }
 
 // Load GCVS from file
@@ -1025,7 +1025,7 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 	varStarsMapI18n.clear();
 	varStarsIndexI18n.clear();
 
-	qDebug().noquote() << "Loading variable stars data from" << QDir::toNativeSeparators(GcvsFile);
+	qInfo().noquote() << "Loading variable stars data from" << QDir::toNativeSeparators(GcvsFile);
 
 	QFile vsFile(GcvsFile);
 	if (!vsFile.open(QIODevice::ReadOnly))
@@ -1062,7 +1062,7 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 		{
 			QRegularExpressionMatch versionMatch=versionRx.match(record);
 			if (versionMatch.hasMatch())
-				qDebug().noquote() << "[...]" << QString("GCVS %1").arg(versionMatch.captured(1).trimmed());
+				qInfo().noquote() << "[...]" << QString("GCVS %1").arg(versionMatch.captured(1).trimmed());
 			continue;
 		}
 
@@ -1098,7 +1098,7 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 	}
 
 	buf.close();
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "variable stars";
+	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "variable stars";
 }
 
 // Load WDS from file
@@ -1107,11 +1107,11 @@ void StarMgr::loadWds(const QString& WdsFile)
 	wdsStarsMapI18n.clear();
 	wdsStarsIndexI18n.clear();
 
-	qDebug().noquote() << "Loading double stars from" << QDir::toNativeSeparators(WdsFile);
+	qInfo().noquote() << "Loading double stars from" << QDir::toNativeSeparators(WdsFile);
 	QFile dsFile(WdsFile);
 	if (!dsFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning().noquote() << "WARNING - could not open" << QDir::toNativeSeparators(WdsFile);
+		qWarning().noquote() << "Could not open" << QDir::toNativeSeparators(WdsFile);
 		return;
 	}
 	const QStringList& allRecords = QString::fromUtf8(dsFile.readAll()).split('\n');
@@ -1136,7 +1136,7 @@ void StarMgr::loadWds(const QString& WdsFile)
 		StarId hip = fields.at(0).toLongLong(&ok);
 		if (!ok)
 		{
-			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(WdsFile)
+			qWarning() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(WdsFile)
 				   << " - failed to convert " << fields.at(0) << "to a number";
 			continue;
 		}
@@ -1157,7 +1157,7 @@ void StarMgr::loadWds(const QString& WdsFile)
 		++readOk;
 	}
 
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "double stars";
+	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "double stars";
 }
 
 // Load cross-identification data from file
@@ -1168,11 +1168,11 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 	hdStarsIndex.clear();	
 	hrStarsIndex.clear();
 
-	qDebug().noquote() << "Loading cross-identification data from" << QDir::toNativeSeparators(crossIdFile);
+	qInfo().noquote() << "Loading cross-identification data from" << QDir::toNativeSeparators(crossIdFile);
 	QFile ciFile(crossIdFile);
 	if (!ciFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning().noquote() << "WARNING - could not open" << QDir::toNativeSeparators(crossIdFile);
+		qWarning().noquote() << "Could not open" << QDir::toNativeSeparators(crossIdFile);
 		return;
 	}
 	const QStringList& allRecords = QString::fromUtf8(ciFile.readAll()).split('\n');
@@ -1197,8 +1197,8 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 		const QStringList& fields = record.split('\t');
 		if (fields.size()!=5)
 		{
-			qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
-				   << " - record does not match record pattern";
+			qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
+					     << " - record does not match record pattern";
 			continue;
 		}
 		else
@@ -1208,8 +1208,8 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 			StarId hip = fields.at(0).toLongLong(&ok);
 			if (!ok)
 			{
-				qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
-					   << " - failed to convert " << fields.at(0) << "to a number";
+				qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
+						     << " - failed to convert " << fields.at(0) << "to a number";
 				continue;
 			}
 
@@ -1230,7 +1230,7 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 		}
 	}
 
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "cross-identification data records for stars";
+	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "cross-identification data records for stars";
 }
 
 int StarMgr::getMaxSearchLevel() const
@@ -2168,31 +2168,31 @@ void StarMgr::populateStarsDesignations()
 	QString fic;
 	fic = StelFileMgr::findFile("stars/hip_gaia3/name.fab");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load scientific star names file: stars/hip_gaia3/name.fab";
+		qWarning() << "Could not load scientific star names file: stars/hip_gaia3/name.fab";
 	else
 		loadSciNames(fic, false);
 
 	fic = StelFileMgr::findFile("stars/hip_gaia3/extra_name.fab");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load scientific star extra names file: stars/hip_gaia3/extra_name.fab";
+		qWarning() << "Could not load scientific star extra names file: stars/hip_gaia3/extra_name.fab";
 	else
 		loadSciNames(fic, true);
 
 	fic = StelFileMgr::findFile("stars/hip_gaia3/gcvs.cat");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load variable stars file: stars/hip_gaia3/gcvs.cat";
+		qWarning() << "Could not load variable stars file: stars/hip_gaia3/gcvs.cat";
 	else
 		loadGcvs(fic);
 
 	fic = StelFileMgr::findFile("stars/hip_gaia3/wds_hip_part.dat");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load double stars file: stars/hip_gaia3/wds_hip_part.dat";
+		qWarning() << "Could not load double stars file: stars/hip_gaia3/wds_hip_part.dat";
 	else
 		loadWds(fic);
 
 	fic = StelFileMgr::findFile("stars/hip_gaia3/cross-id.dat");
 	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load cross-identification data file: stars/hip_gaia3/cross-id.dat";
+		qWarning() << "Could not load cross-identification data file: stars/hip_gaia3/cross-id.dat";
 	else
 		loadCrossIdentificationData(fic);
 }

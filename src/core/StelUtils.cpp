@@ -919,6 +919,12 @@ double getJDFromBesselianEpoch(const double epoch)
 	return 2400000.5 + (15019.81352 + (epoch - 1900.0) * 365.242198781);
 }
 
+double getJDFromJulianEpoch(const double epoch)
+{
+	return 2451545.0 + (epoch - 2000.0) * 365.25;
+}
+
+
 double qTimeToJDFraction(const QTime& time)
 {
 	return static_cast<double>(1./(24*60*60*1000)*QTime(0, 0, 0, 0).msecsTo(time))-0.5;
@@ -948,7 +954,7 @@ QTime jdFractionToQTime(const double jd)
 		hours+=1;
 	}
 	if (hours >= 24)
-		qDebug() << "WARNING: hours exceed a full day!" << hours;
+		qWarning() << "Hours exceed a full day!" << hours;
 	hours %= 24;
 
 	QTime tm=QTime(hours, mins, sec, ms);

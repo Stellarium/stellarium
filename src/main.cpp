@@ -22,6 +22,7 @@
 #include "StelSplashScreen.hpp"
 #include "StelTranslator.hpp"
 #include "StelLogger.hpp"
+#include "StelSystemInfo.hpp"
 #include "StelFileMgr.hpp"
 #include "CLIProcessor.hpp"
 #include "StelIniParser.hpp"
@@ -159,6 +160,11 @@ void clearCache()
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
+	qSetMessagePattern("[%{time process}][%{if-debug}DBG %{endif}"
+	                                     "%{if-info}INFO%{endif}"
+	                                     "%{if-warning}WARN%{endif}"
+	                                     "%{if-critical}CRIT%{endif}"
+	                                     "%{if-fatal}FATAL%{endif}] %{message}");
 	Q_INIT_RESOURCE(mainRes);
 	Q_INIT_RESOURCE(guiRes);
 
@@ -278,7 +284,7 @@ int main(int argc, char **argv)
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: while processing --log-file option: " << e.what() << ". Using \"log.txt\"";
+		qWarning() << "While processing --log-file option: " << e.what() << ". Using \"log.txt\"";
 		logName = StelFileMgr::getUserDir()+ "/log.txt"; // Back to default value
 	}
 	StelLogger::init(logName);
@@ -289,16 +295,17 @@ int main(int argc, char **argv)
 	QString versionLine = QString("This is %1 (v%2) - %3").arg(StelUtils::getApplicationName(), StelUtils::getApplicationVersion(), STELLARIUM_URL);
 	QString copyrightLine = STELLARIUM_COPYRIGHT;
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
-	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
-	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
-	qDebug() << qPrintable(QString("[ %1 ]").arg(copyrightLine.leftJustified(maxLength, ' ')));
-	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
-	qDebug().noquote() << "Writing log file to:" << QDir::toNativeSeparators(StelLogger::getLogFileName());
-	qDebug() << "File search paths:";
+	qInfo() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
+	qInfo() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
+	qInfo() << qPrintable(QString("[ %1 ]").arg(copyrightLine.leftJustified(maxLength, ' ')));
+	qInfo() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
+	printSystemInfo();
+	qInfo().noquote() << "Writing log file to:" << QDir::toNativeSeparators(StelLogger::getLogFileName());
+	qInfo() << "File search paths:";
 	int n=0;
 	for (const auto& i : StelFileMgr::getSearchPaths())
 	{
-		qDebug().noquote().nospace() << " [" << n << "]: " << QDir::toNativeSeparators(i);
+		qInfo().noquote().nospace() << " [" << n << "]: " << QDir::toNativeSeparators(i);
 		++n;
 	}
 
@@ -310,7 +317,7 @@ int main(int argc, char **argv)
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning().noquote() << "WARNING: while looking for --config-file option:" << e.what() << ". Using \"config.ini\"";
+		qWarning().noquote() << "While looking for --config-file option:" << e.what() << ". Using \"config.ini\"";
 		configName = "config.ini";
 	}
 
@@ -386,7 +393,7 @@ int main(int argc, char **argv)
 	}
 
 	Q_ASSERT(confSettings);
-	qDebug().noquote() << "Config file:" << QDir::toNativeSeparators(configFileFullPath);
+	qInfo().noquote() << "Config file:" << QDir::toNativeSeparators(configFileFullPath);
 
 	QSurfaceFormat::setDefaultFormat(StelMainView::getDesiredGLFormat(confSettings));
 
@@ -440,7 +447,7 @@ int main(int argc, char **argv)
 	int screen = confSettings->value("video/screen_number", 0).toInt();
 	if (screen < 0 || screen >= qApp->screens().count())
 	{
-		qWarning().noquote() << "WARNING: screen" << screen << "not found";
+		qWarning().noquote() << "Screen" << screen << "not found";
 		screen = 0;
 	}
 	const auto qscreen = qApp->screens().at(screen);

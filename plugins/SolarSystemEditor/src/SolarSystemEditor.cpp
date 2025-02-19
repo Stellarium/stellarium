@@ -220,19 +220,19 @@ bool SolarSystemEditor::cloneSolarSystemConfigurationFile() const
 	}
 	if (!userDataDirectory.exists("data") && !userDataDirectory.mkdir("data"))
 	{
-		qDebug() << "Unable to create a \"data\" subdirectory in" << QDir::toNativeSeparators(userDataDirectory.absolutePath());
+		qWarning() << "Unable to create a \"data\" subdirectory in" << QDir::toNativeSeparators(userDataDirectory.absolutePath());
 		return false;
 	}
 
 	if (QFile::exists(customSolarSystemFilePath))
 	{
-		qDebug() << "Using the ssystem_minor.ini file that already exists in the user directory...";
+		qInfo() << "Using the ssystem_minor.ini file that already exists in the user directory...";
 		return true;
 	}
 
 	if (QFile::exists(defaultSolarSystemFilePath))
 	{
-		qDebug() << "Trying to copy ssystem_minor.ini to" << QDir::toNativeSeparators(customSolarSystemFilePath);
+		qInfo() << "Trying to copy ssystem_minor.ini to" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return QFile::copy(defaultSolarSystemFilePath, customSolarSystemFilePath);
 	}
 	else
@@ -912,7 +912,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(const QString &oneLin
 	}
 	else
 	{
-		qWarning() << "Warning: Cannot read element epoch date for comet " << name << ". Will use T_perihel at load time.";
+		qWarning() << "Cannot read element epoch date for comet " << name << ". Will use T_perihel at load time.";
 	}
 
 	double absoluteMagnitude = mpcMatch.captured(15).toDouble(&ok1);
@@ -923,7 +923,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(const QString &oneLin
 		result.insert("slope_parameter", slopeParameter);
 	if (!(ok1 && ok2))
 	{
-		qWarning() << "Warning: Problem reading magnitude parameters for comet " << name;
+		qWarning() << "Problem reading magnitude parameters for comet " << name;
 	}
 
 	result.insert("ref", mpcMatch.captured(18).simplified());

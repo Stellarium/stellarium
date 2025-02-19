@@ -403,7 +403,7 @@ LandscapeMgr::~LandscapeMgr()
 	}
 	delete landscape;
 	landscape = Q_NULLPTR;
-	qDebug() << "LandscapeMgr: Clearing cache of" << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+	qInfo() << "LandscapeMgr: Clearing cache of" << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
 	landscapeCache.clear(); // deletes all objects within.
 }
 
@@ -445,7 +445,7 @@ void LandscapeMgr::update(double deltaTime)
 				setAtmosphereShowMySkyStoppedWithError(false);
 				const auto percentDone = std::lround(100.*status.stepsDone/status.stepsToDo);
 				setAtmosphereShowMySkyStatusText(QString("%1 %2% %3").arg(q_("Loading..."), QString::number(percentDone), qc_("done","percentage of done")));
-				qDebug() << "Finished this batch of loading at" << percentDone << "%, will continue in the next frame";
+				qInfo() << "Finished this batch of loading at" << percentDone << "%, will continue in the next frame";
 			}
 			else
 			{
@@ -454,8 +454,8 @@ void LandscapeMgr::update(double deltaTime)
 		}
 		catch(Atmosphere::InitFailure const& error)
 		{
-			qWarning() << "ERROR: Failed to load atmosphere model data:" << error.what();
-			qWarning() << "WARNING: Falling back to the Preetham's model";
+			qInfo() << "ERROR: Failed to load atmosphere model data:" << error.what();
+			qWarning() << "Falling back to the Preetham's model";
 			setAtmosphereShowMySkyStoppedWithError(true);
 			setAtmosphereShowMySkyStatusText(error.what());
 			loadingAtmosphere.reset();
@@ -542,7 +542,7 @@ void LandscapeMgr::update(double deltaTime)
 	catch(Atmosphere::InitFailure const& error)
 	{
 		qWarning().noquote() << "ShowMySky atmosphere model crashed:" << error.what();
-		qWarning() << "Loading Preetham model";
+		qInfo().noquote() << "Loading Preetham model";
 		showMessage(q_("ShowMySky atmosphere model crashed. Loading Preetham model as a fallback."));
 		resetToFallbackAtmosphere();
 	}
@@ -773,8 +773,8 @@ void LandscapeMgr::createAtmosphere()
 		}
 		catch(Atmosphere::InitFailure const& error)
 		{
-			qWarning() << "ERROR: Failed to initialize ShowMySky atmosphere model:" << error.what();
-			qWarning() << "WARNING: Falling back to the Preetham's model";
+			qInfo() << "ERROR: Failed to initialize ShowMySky atmosphere model:" << error.what();
+			qWarning() << "Falling back to the Preetham's model";
 			loadingAtmosphere.reset(new AtmospherePreetham(skylight));
 			needResetConfig=true;
 
@@ -827,7 +827,7 @@ void LandscapeMgr::init()
 	Q_ASSERT(app);
 
 	landscapeCache.setMaxCost(conf->value("landscape/cache_size_mb", 100).toInt());
-	qDebug() << "LandscapeMgr: initialized Cache for" << landscapeCache.maxCost() << "MB.";
+	qInfo() << "LandscapeMgr: initialized Cache for" << landscapeCache.maxCost() << "MB.";
 
 	// SET SIMPLE PROPERTIES FIRST, before loading the landscape (Loading may already make use of them! GH#1237)
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
@@ -1044,7 +1044,7 @@ bool LandscapeMgr::setCurrentLandscapeName(const QString& name, const double cha
 		qWarning() << "Can't find a landscape with name=" << name << StelUtils::getEndLineChar();
 		return false;
 	}
-	qDebug() << "Loading landscapeID" << name;
+	qInfo().noquote() << "Loading landscapeID" << name;
 	return true;
 }
 

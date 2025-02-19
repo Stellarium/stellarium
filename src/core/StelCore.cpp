@@ -232,7 +232,7 @@ void StelCore::init()
 
 	if (!location.isValid())
 	{
-		qWarning() << "Warning: location" << defaultLocationID << "is unknown.";
+		qWarning() << "Location" << defaultLocationID << "is unknown.";
 		location = locationMgr->getLastResortLocation();
 	}
 	position = new StelObserver(location);
@@ -264,11 +264,11 @@ void StelCore::init()
 	presetSkyTime = presetTimeStr.toDouble(&ok);
 	if (ok)
 	{
-		qDebug().noquote() << "navigation/preset_sky_time is a double - treating as jday:" << QString::number(presetSkyTime, 'f', 5);
+		qInfo().noquote() << "navigation/preset_sky_time is a double - treating as jday:" << QString::number(presetSkyTime, 'f', 5);
 	}
 	else
 	{
-		qDebug().noquote() << "navigation/preset_sky_time was not a double, treating as string date:" << presetTimeStr;
+		qWarning().noquote() << "navigation/preset_sky_time was not a double, treating as string date:" << presetTimeStr;
 		presetSkyTime = StelUtils::qDateTimeToJd(QDateTime::fromString(presetTimeStr));
 	}
 	setInitTodayTime(QTime::fromString(conf->value("navigation/today_time", "22:00").toString()));
@@ -1724,7 +1724,7 @@ void StelCore::setTodayTime(const QTime& target)
 	}
 	else
 	{
-		qWarning() << "WARNING - time passed to StelCore::setTodayTime is not valid. The system time will be used." << target;
+		qWarning().noquote() << "Time passed to StelCore::setTodayTime is not valid. The system time will be used." << target;
 		setTimeNow();
 	}
 }
@@ -2968,7 +2968,7 @@ void StelCore::initEphemeridesFunctions()
 	de430Available=!de430FilePath.isEmpty();
 	if(de430Available)
 	{
-		qDebug().noquote() << "DE430 at:" << de430FilePath;
+		qInfo().noquote() << "DE430 at:" << de430FilePath;
 		EphemWrapper::init_de430(de430FilePath.toStdString().c_str());
 	}
 	setDe430Active(de430Available && conf->value("astro/flag_use_de430", false).toBool());
@@ -2982,7 +2982,7 @@ void StelCore::initEphemeridesFunctions()
 	de431Available=!de431FilePath.isEmpty();
 	if(de431Available)
 	{
-		qDebug().noquote() << "DE431 at:" << de431FilePath;
+		qInfo().noquote() << "DE431 at:" << de431FilePath;
 		EphemWrapper::init_de431(de431FilePath.toStdString().c_str());
 	}
 	setDe431Active(de431Available && conf->value("astro/flag_use_de431", false).toBool());
@@ -2996,7 +2996,7 @@ void StelCore::initEphemeridesFunctions()
 	de440Available=!de440FilePath.isEmpty();
 	if(de440Available)
 	{
-		qDebug().noquote() << "DE440 at:" << de440FilePath;
+		qInfo().noquote() << "DE440 at:" << de440FilePath;
 		EphemWrapper::init_de440(de440FilePath.toStdString().c_str());
 	}
 	setDe440Active(de440Available && conf->value("astro/flag_use_de440", false).toBool());
@@ -3010,7 +3010,7 @@ void StelCore::initEphemeridesFunctions()
 	de441Available=!de441FilePath.isEmpty();
 	if(de441Available)
 	{
-		qDebug().noquote() << "DE441 at:" << de441FilePath;
+		qInfo().noquote() << "DE441 at:" << de441FilePath;
 		EphemWrapper::init_de441(de441FilePath.toStdString().c_str());
 	}
 	setDe441Active(de441Available && conf->value("astro/flag_use_de441", false).toBool());

@@ -127,7 +127,7 @@ void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slop
 	if ((slope < -2.5f) || (slope > 25.0f))
 	{
 		// Slope G can become slightly smaller than 0. -10 is mark of invalidity.
-		qDebug() << "Warning: Suspect slope parameter value" << slope << "for comet" << getEnglishName() << "(rarely exceeding -1...20)";
+		qWarning().noquote() << "Suspect slope parameter value" << slope << "for comet" << getEnglishName() << "(rarely exceeding -1...20)";
 		return;
 	}
 	absoluteMagnitude = magnitude;

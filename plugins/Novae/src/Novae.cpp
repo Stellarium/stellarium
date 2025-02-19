@@ -159,11 +159,11 @@ void Novae::init()
 	}
 	else
 	{
-		qDebug().noquote() << "[Novae] novae.json does not exist - copying default file to" << QDir::toNativeSeparators(novaeJsonPath);
+		qInfo().noquote() << "[Novae] novae.json does not exist - copying default file to" << QDir::toNativeSeparators(novaeJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug().noquote() << "[Novae] Loading catalog file:" << QDir::toNativeSeparators(novaeJsonPath);
+	qInfo().noquote() << "[Novae] Loading catalog file:" << QDir::toNativeSeparators(novaeJsonPath);
 
 	readJsonFile();
 
@@ -479,7 +479,7 @@ int Novae::getJsonFileVersion(void) const
 	{
 		jsonVersion = map.value("version").toInt();
 	}
-	qDebug() << "[Novae] version of the catalog:" << jsonVersion;
+	qInfo().noquote() << "[Novae] version of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
 

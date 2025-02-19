@@ -56,4 +56,4 @@ ADD_SUBDIRECTORY( vanuatu_netwar )
 ADD_SUBDIRECTORY( xhosa )
 ADD_SUBDIRECTORY( zulu )
 
-INSTALL(FILES "common_star_names.fab" "common_dso_names.fab" DESTINATION ${SDATALOC}/skycultures)
+INSTALL(FILES "common_star_names.fab" DESTINATION ${SDATALOC}/skycultures)

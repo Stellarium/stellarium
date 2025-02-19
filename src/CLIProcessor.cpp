@@ -254,7 +254,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 			if (dateMatch.hasMatch())
 			    StelUtils::getJDFromDate(&skyDatePart, dateMatch.captured(1).toInt(), dateMatch.captured(2).toInt(), dateMatch.captured(3).toInt(), 12, 0, 0);
 			else
-			    qWarning() << "WARNING: --sky-date argument has unrecognised format  (I want [-]yyyymmdd)" << skyDate.remove(boundaryRx);
+			    qWarning() << "--sky-date argument has unrecognised format  (I want [-]yyyymmdd)" << skyDate.remove(boundaryRx);
 		}
 
 		if (!skyTime.isEmpty())
@@ -263,7 +263,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 			if (timeRx.match(skyTime).hasMatch())
 				skyTimePart = StelUtils::qTimeToJDFraction(QTime::fromString(skyTime, "hh:mm:ss"));
 			else
-				qWarning() << "WARNING: --sky-time argument has unrecognised format (I want hh:mm:ss)";
+				qWarning() << "--sky-time argument has unrecognised format (I want hh:mm:ss)";
 		}
 
 		confSettings->setValue("navigation/startup_time_mode", "preset");
@@ -299,7 +299,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		}
 		catch (std::runtime_error& e)
 		{
-			qWarning() << "WARNING: problem while setting screenshot directory for --screenshot-dir option: " << e.what();
+			qWarning() << "Problem while setting screenshot directory for --screenshot-dir option: " << e.what();
 		}
 	}
 	else
@@ -313,7 +313,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 			}
 			catch (std::runtime_error& e)
 			{
-				qWarning() << "WARNING: problem while setting screenshot from config file setting: " << e.what();
+				qWarning() << "Problem while setting screenshot from config file setting: " << e.what();
 			}
 		}		
 	}

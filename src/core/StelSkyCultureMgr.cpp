@@ -22,7 +22,6 @@
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelApp.hpp"
-#include "StelIniParser.hpp"
 
 #include <md4c-html.h>
 
@@ -80,7 +79,8 @@ void applyStyleToMarkdown(QString& string)
 
 				// Also force the caption to be below the image,
 				// rather than to the right of it.
-				newSubstr.replace(QRegularExpression("(<img [^>]+>)"), "\\1<br>");
+				static const QRegularExpression re("(<img [^>]+>)");
+				newSubstr.replace(re, "\\1<br>");
 
 				string.replace(substr, newSubstr);
 
@@ -108,7 +108,8 @@ QString markdownToHTML(QString input)
 
 QString convertReferenceLinks(QString text)
 {
-	text.replace(QRegularExpression(" ?\\[#([0-9]+)\\]", QRegularExpression::MultilineOption),
+	static const QRegularExpression re(" ?\\[#([0-9]+)\\]", QRegularExpression::MultilineOption);
+	text.replace(re,
 	             "<sup><a href=\"#cite_\\1\">[\\1]</a></sup>");
 	return text;
 }
@@ -121,7 +122,7 @@ QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& idFromJSON) c
 	const QString descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description.md");
 	if (descPath.isEmpty())
 	{
-		qWarning() << "WARNING: can't find description for skyculture" << skyCultureId;
+		qWarning() << "Can't find description for skyculture" << skyCultureId;
 		return idFromJSON;
 	}
 
@@ -208,6 +209,11 @@ void StelSkyCultureMgr::makeCulturesList()
 		culture.id = id;
 		culture.englishName = getSkyCultureEnglishName(dir);
 		culture.region = data["region"].toString();
+		if (culture.region.length()==0)
+		{
+			qWarning() << "No geographic region declared in skyculture" << id << ". setting \"World\"";
+			culture.region = "World";
+		}
 		if (data["constellations"].isArray())
 		{
 			culture.constellations = data["constellations"].toArray();
@@ -221,27 +227,23 @@ void StelSkyCultureMgr::makeCulturesList()
 		culture.asterisms = data["asterisms"].toArray();
 		culture.langsUseNativeNames = data["langs_use_native_names"].toArray();
 
-		culture.boundariesType = StelSkyCulture::BoundariesType::Own; // default value if not specified in the JSON file
+		culture.boundariesType = StelSkyCulture::BoundariesType::None; // default value if not specified in the JSON file
 		if (data.contains("edges"))
 		{
 			if (data.contains("edges_type"))
 			{
-				const auto type = data["edges_type"].toString();
-				const auto typeSimp = type.simplified().toUpper();
-				if (typeSimp == "IAU")
-					culture.boundariesType = StelSkyCulture::BoundariesType::IAU;
-				else if(typeSimp == "OWN")
-					culture.boundariesType = StelSkyCulture::BoundariesType::Own;
-				else if(typeSimp == "NONE")
-					culture.boundariesType = StelSkyCulture::BoundariesType::None;
-				else
+				const QString type = data["edges_type"].toString();
+				const QString typeSimp = type.simplified().toUpper();
+				static const QMap<QString, StelSkyCulture::BoundariesType>map={
+				        {"IAU", StelSkyCulture::BoundariesType::IAU},
+				        {"OWN", StelSkyCulture::BoundariesType::Own},
+				        {"NONE", StelSkyCulture::BoundariesType::None}
+				};
+				if (!map.contains(typeSimp))
 					qWarning().nospace() << "Unexpected edges_type value in sky culture " << dir
 					                     << ": " << type << ". Will resort to Own.";
+				culture.boundariesType = map.value(typeSimp, StelSkyCulture::BoundariesType::Own);
 			}
-		}
-		else
-		{
-			culture.boundariesType = StelSkyCulture::BoundariesType::None;
 		}
 		culture.boundaries = data["edges"].toArray();
 		culture.boundariesEpoch = data["edges_epoch"].toString("J2000");
@@ -490,7 +492,8 @@ std::pair<QString/*color*/,QString/*info*/> StelSkyCultureMgr::getLicenseDescrip
 
 QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 {
-	const auto lines = currentSkyCulture.license.split(QRegularExpression("\\s*\n+\\s*"), SkipEmptyParts);
+	static const QRegularExpression licRe("\\s*\n+\\s*");
+	const auto lines = currentSkyCulture.license.split(licRe, SkipEmptyParts);
 	if (lines.isEmpty()) return "";
 
 	if (lines.size() == 1)
@@ -519,7 +522,8 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 		QString addendum;
 		for (const auto& line : lines)
 		{
-			const auto parts = line.split(QRegularExpression("\\s*:\\s*"), SkipEmptyParts);
+			static const QRegularExpression re("\\s*:\\s*");
+			const auto parts = line.split(re, SkipEmptyParts);
 			if (parts.size() == 1)
 			{
 				addendum += line + "<br>\n";
@@ -604,13 +608,14 @@ QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown,
                                                         const StelTranslator& trans)
 {
 	auto text = markdown.mid(bodyStartPos, bodyEndPos - bodyStartPos);
-	text.replace(QRegularExpression("^\n*|\n*$"), "");
+	static const QRegularExpression re("^\n*|\n*$");
+	text.replace(re, "");
 	text = trans.qtranslate(text);
 
 	if (sectionName.trimmed() == "References")
 	{
-		text.replace(QRegularExpression("^ *- \\[#([0-9]+)\\]: (.*)$", QRegularExpression::MultilineOption),
-		             "\\1. <span id=\"cite_\\1\">\\2</span>");
+		static const QRegularExpression refRe("^ *- \\[#([0-9]+)\\]: (.*)$", QRegularExpression::MultilineOption);
+		text.replace(refRe, "\\1. <span id=\"cite_\\1\">\\2</span>");
 	}
 	else
 	{
@@ -635,10 +640,10 @@ QString StelSkyCultureMgr::descriptionMarkdownToHTML(const QString& markdownInpu
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
 
 	// Strip comments before translating
-	const QRegularExpression commentPat("<!--.*?-->");
+	static const QRegularExpression commentPat("<!--.*?-->");
 	const auto markdown = QString(markdownInput).replace(commentPat, "");
 
-	const QRegularExpression headerPat("^# +(.+)$", QRegularExpression::MultilineOption);
+	static const QRegularExpression headerPat("^# +(.+)$", QRegularExpression::MultilineOption);
 	const auto match = headerPat.match(markdown);
 	QString name;
 	if (match.isValid())
@@ -653,7 +658,7 @@ QString StelSkyCultureMgr::descriptionMarkdownToHTML(const QString& markdownInpu
 	}
 
 	QString text = "<h1>" + trans.qtranslate(name, "sky culture") + "</h1>";
-	const QRegularExpression sectionNamePat("^## +(.+)$", QRegularExpression::MultilineOption);
+	static const QRegularExpression sectionNamePat("^## +(.+)$", QRegularExpression::MultilineOption);
 	QString prevSectionName;
 	qsizetype prevBodyStartPos = -1;
 	for (auto it = sectionNamePat.globalMatch(markdown); it.hasNext(); )
@@ -696,9 +701,9 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription()
 		lang = lang.split("_").at(0);
 	}
 	const QString descPath = currentSkyCulture.path + "/description.md";
-	const bool pathExists = QFileInfo(descPath).exists();
+	const bool pathExists = QFileInfo::exists(descPath);
 	if (!pathExists)
-		qWarning() << "WARNING: can't find description for skyculture" << currentSkyCulture.id;
+		qWarning() << "Can't find description for skyculture" << currentSkyCulture.id;
 
 	QString description;
 	if (!pathExists)

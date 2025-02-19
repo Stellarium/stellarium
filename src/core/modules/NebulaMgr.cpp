@@ -912,6 +912,15 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 
 	loadDSOCatalog(dsoCatalogPath);
 
+	if (QString defaultNamesPath = StelFileMgr::findFile("nebulae/default/names.dat"); defaultNamesPath.isEmpty())
+	{
+		qWarning().noquote() << "ERROR while loading deep-sky names data set" << setName;
+	}
+	else
+	{
+		loadDSONames(defaultNamesPath);
+	}
+
 	if (!dsoOutlinesPath.isEmpty())
 		loadDSOOutlines(dsoOutlinesPath);
 
@@ -1480,8 +1489,8 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 	dsoIn.close();
 	dsoOut.flush();
 	dsoOut.close();
-	qDebug().noquote() << "Converted" << readOk << "/" << totalRecords << "DSO records";
-	qDebug().noquote() << "[...] Please use 'gzip -nc catalog.pack > catalog.dat' to pack the catalog.";
+	qInfo().noquote() << "Converted" << readOk << "/" << totalRecords << "DSO records";
+	qInfo().noquote() << "[...] Please use 'gzip -nc catalog.pack > catalog.dat' to pack the catalog.";
 }
 
 bool NebulaMgr::loadDSOCatalog(const QString &filename)
@@ -1490,7 +1499,7 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 	if (!in.open(QIODevice::ReadOnly))
 		return false;
 
-	qDebug().noquote() << "Loading DSO data ...";
+	qInfo().noquote() << "Loading DSO data ...";
 
 	// Let's begin use gzipped data
 	QDataStream ins(StelUtils::uncompress(in.readAll()));
@@ -1507,12 +1516,12 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 				version = "3.1"; // The first version of extended edition of the catalog
 			if (edition.isEmpty())
 				edition = "unknown";
-			qDebug().noquote() << "[...]" << QString("Stellarium DSO Catalog, version %1 (%2 edition)").arg(version, edition);
+			qInfo().noquote() << "[...]" << QString("Stellarium DSO Catalog, version %1 (%2 edition)").arg(version, edition);
 			if (StelUtils::compareVersions(version, StellariumDSOCatalogVersion)!=0)
 			{
 				++totalRecords;
-				qDebug().noquote() << "WARNING: Mismatch of DSO catalog version (" << version << ")! The expected version is" << StellariumDSOCatalogVersion;
-				qDebug().noquote() << "         See section 5.5 of the User Guide and install the right version of the catalog!";
+				qWarning().noquote() << "Mismatch of DSO catalog version (" << version << ")! The expected version is" << StellariumDSOCatalogVersion;
+				qWarning().noquote() << "See section 5.5 of the User Guide and install the right version of the catalog!";
 				QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"),
 				                     QString("%1. %2: %3 - %4: %5. %6").arg(q_("DSO catalog version mismatch"),
 				                                                            q_("Found"),
@@ -1537,13 +1546,16 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 		++totalRecords;
 	}
 	in.close();
-	qDebug().noquote() << "Loaded" << --totalRecords << "DSO records";
+	qInfo().noquote() << "Loaded" << --totalRecords << "DSO records";
 	return true;
 }
 
 bool NebulaMgr::loadDSONames(const QString &filename)
 {
-	qDebug() << "Loading DSO name data ...";
+	qInfo() << "Loading DSO name data ...";
+
+	defaultNameMap.clear();
+
 	QFile dsoNameFile(filename);
 	if (!dsoNameFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
@@ -1683,11 +1695,8 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 			if (transMatch.hasMatch())
 			{
 				QString propName = transMatch.captured(1).trimmed();
-				QString currName = e->getEnglishName();
-				if (currName.isEmpty())
-					e->setProperName(propName);
-				else if (currName!=propName)
-					e->addNameAlias(propName);
+				defaultNameMap[e].push_back(propName);
+				commonNameMap[propName.toUpper()] = e;
 			}
 			readOk++;
 		}
@@ -1695,18 +1704,18 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 			nodata.append(QString("%1 %2").arg(ref.trimmed(), cdes.trimmed()));
 	}
 	dsoNameFile.close();
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "DSO name records successfully";
+	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "DSO name records successfully";
 
 	int err = nodata.size();
 	if (err>0)
-		qDebug().noquote() << "WARNING - No position data for" << err << "objects:" << nodata.join(", ");
+		qWarning().noquote() << "No position data for" << err << "objects:" << nodata.join(", ");
 
 	return true;
 }
 
 bool NebulaMgr::loadDSODiscoveryData(const QString &filename)
 {
-	qDebug() << "Loading DSO discovery data ...";
+	qInfo() << "Loading DSO discovery data ...";
 	QFile dsoDiscoveryFile(filename);
 	if (!dsoDiscoveryFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
@@ -1746,13 +1755,13 @@ bool NebulaMgr::loadDSODiscoveryData(const QString &filename)
 		}
 	}
 	dsoDiscoveryFile.close();
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "DSO discovery records successfully";
+	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "DSO discovery records successfully";
 	return true;
 }
 
 bool NebulaMgr::loadDSOOutlines(const QString &filename)
 {
-	qDebug() << "Loading DSO outline data ...";
+	qInfo() << "Loading DSO outline data ...";
 	QFile dsoOutlineFile(filename);
 	if (!dsoOutlineFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
@@ -1840,7 +1849,7 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 		}
 	}
 	dsoOutlineFile.close();
-	qDebug().noquote() << "Loaded" << readOk << "DSO outline records successfully";
+	qInfo().noquote() << "Loaded" << readOk << "DSO outline records successfully";
 	return true;
 }
 
@@ -1849,32 +1858,32 @@ void NebulaMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	for (const auto& n : std::as_const(dsoArray))
 		n->removeAllNames();
 
-	const auto nameToIdMap = loadCommonNames(skyCulture.fallbackToInternationalNames);
+	if (skyCulture.fallbackToInternationalNames)
+	{
+		for (auto it = commonNameMap.begin(); it != commonNameMap.end(); ++it)
+			setName(it.value(), it.key());
+	}
 
 	int numLoaded = 0;
 	if (!skyCulture.names.isEmpty())
-		numLoaded = loadCultureSpecificNames(skyCulture.names, nameToIdMap);
+		numLoaded = loadCultureSpecificNames(skyCulture.names);
 
 	if (numLoaded)
 	{
-		qDebug() << "Loaded" << numLoaded << "culture-specific DSO names";
+		qInfo().noquote() << "Loaded" << numLoaded << "culture-specific DSO names";
 	}
 	else
 	{
-		QString setName = "default";
-		QString dsoNamesPath = StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
-		if (dsoNamesPath.isEmpty())
-		{
-			qWarning().noquote() << "ERROR while loading deep-sky names data set" << setName;
-			return;
-		}
-		loadDSONames(dsoNamesPath);
+		for (auto it = defaultNameMap.begin(); it != defaultNameMap.end(); ++it)
+			for (const auto& name : it.value())
+				setName(it.key(), name);
+
 	}
 
 	updateI18n();
 }
 
-int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QString/*name*/,QString/*dsoId*/>& commonNameToIdMap)
+int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data)
 {
 	int loadedTotal = 0;
 	for (auto it = data.begin(); it != data.end(); ++it)
@@ -1899,7 +1908,7 @@ int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QStr
 			};
 			if (const auto it = renamer.find(name); it != renamer.end())
 				name = it.value();
-			loadCultureSpecificNameForNamedObject(it.value().toArray(), name, commonNameToIdMap);
+			loadCultureSpecificNameForNamedObject(it.value().toArray(), name);
 		}
 		else if (const NebulaP n = searchByDesignation(key))
 		{
@@ -1919,96 +1928,21 @@ int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QStr
 	return loadedTotal;
 }
 
-void NebulaMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName,
-                                                      const QMap<QString/*name*/,QString/*dsoId*/>& commonNameToIdMap)
+void NebulaMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName)
 {
-	const auto commonNameIndexIt = commonNameToIdMap.find(commonName.toUpper());
-	if (commonNameIndexIt == commonNameToIdMap.end())
+	const auto commonNameIndexIt = commonNameMap.find(commonName.toUpper());
+	if (commonNameIndexIt == commonNameMap.end())
 	{
 		// This may actually not even be a nebula, so we shouldn't emit any warning, just return
 		return;
 	}
-	const auto dsoId = commonNameIndexIt.value();
 
 	for (const auto& entry : data)
 	{
 		const auto specificName = entry.toObject()["english"].toString();
 		if (specificName.isEmpty()) continue;
-
-		NebulaP e = search(dsoId);
-		if (!e.isNull()) // avoid crash
-			setName(e, specificName);
-		else
-			qWarning() << "Failed to find DSO" << dsoId;
+		setName(commonNameIndexIt.value(), specificName);
 	}
-}
-QMap<QString/*name*/,QString/*dsoId*/> NebulaMgr::loadCommonNames(const bool saveIntoObjects)
-{
-	QString namesFile = StelFileMgr::findFile("skycultures/common_dso_names.fab");
-	if (namesFile.isEmpty())
-	{
-		qWarning().noquote() << "Failed to open common DSO names file";
-		return {};
-	}
-
-	// Open file
-	QFile dsoNamesFile(namesFile);
-	if (!dsoNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-		qWarning().noquote() << "Failed to open file" << QDir::toNativeSeparators(namesFile);
-		return {};
-	}
-
-	// Now parse the file
-	// lines to ignore which start with a # or are empty
-	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
-
-	// lines which look like records - we use the RE to extract the fields
-	// which will be available in recMatch.capturedTexts()
-	static const QRegularExpression recRx("^\\s*([\\w\\s\\-\\+\\.]+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)");
-
-	QMap<QString/*name*/,QString/*dsoId*/> output;
-	QString record, dsoId, nativeName;
-	int totalRecords=0;
-	int readOk=0;
-	int lineNumber=0;
-	while (!dsoNamesFile.atEnd())
-	{
-		record = QString::fromUtf8(dsoNamesFile.readLine()).trimmed();
-		lineNumber++;
-
-		// Skip comments
-		if (commentRx.match(record).hasMatch())
-			continue;
-
-		totalRecords++;
-
-		QRegularExpressionMatch recMatch=recRx.match(record);
-		if (!recMatch.hasMatch())
-		{
-			qWarning().noquote() << "ERROR - cannot parse record at line" << lineNumber << "in native deep-sky object names file" << QDir::toNativeSeparators(namesFile);
-		}
-		else
-		{
-			dsoId = recMatch.captured(1).trimmed();
-			nativeName = recMatch.captured(2).trimmed(); // Use translatable text
-			NebulaP e = search(dsoId);
-			if (!e.isNull()) // avoid crash
-			{
-				if (saveIntoObjects)
-					setName(e, nativeName);
-				output[nativeName.toUpper()] = dsoId;
-			}
-			else
-				qWarning().noquote() << "ERROR - could NOT found DSO " << dsoId;
-
-			readOk++;
-		}
-	}
-	dsoNamesFile.close();
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "common names of deep-sky objects";
-
-	return output;
 }
 
 void NebulaMgr::updateI18n()

@@ -749,9 +749,9 @@ void DescriptionOldLoader::loadTranslationsOfNames(const QString& poBaseDir, con
 						if(star && star->HIP > 0)
 						{
 							if(star->nativeName.isEmpty())
-								comments = QString("Name for HIP %1").arg(star->HIP);
+								comments = QString("%1 name for HIP %2").arg(englishName).arg(star->HIP);
 							else
-								comments = QString("Name for HIP %1, native: %2").arg(star->HIP).arg(star->nativeName);
+								comments = QString("%1 name for HIP %2, native: %3").arg(englishName).arg(star->HIP).arg(star->nativeName);
 							comments += '\n' + star->translatorsComments;
 						}
 						else
@@ -764,9 +764,9 @@ void DescriptionOldLoader::loadTranslationsOfNames(const QString& poBaseDir, con
 						if(const auto planet = namesLoader.findPlanet(msgid))
 						{
 							if(planet->native.isEmpty())
-								comments = "Name for NAME " + planet->id;
+								comments = QString("%1 name for NAME %2").arg(englishName).arg(planet->id);
 							else
-								comments = QString("Name for NAME %1, native: %2").arg(planet->id, planet->native);
+								comments = QString("%1 name for NAME %2, native: %3").arg(englishName).arg(planet->id, planet->native);
 							comments += '\n' + planet->translatorsComments;
 						}
 						else
@@ -779,9 +779,9 @@ void DescriptionOldLoader::loadTranslationsOfNames(const QString& poBaseDir, con
 						if(const auto dso = namesLoader.findDSO(msgid))
 						{
 							if(dso->nativeName.isEmpty())
-								comments = "Name for " + dso->id;
+								comments = QString("%1 name for %2").arg(englishName).arg(dso->id);
 							else
-								comments = QString("Name for %1, native: %2").arg(dso->id, dso->nativeName);
+								comments = QString("%1 name for %2, native: %3").arg(englishName).arg(dso->id, dso->nativeName);
 							comments += '\n' + dso->translatorsComments;
 						}
 						else

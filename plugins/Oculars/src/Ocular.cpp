@@ -169,7 +169,7 @@ Ocular * Ocular::ocularFromSettings(const QSettings *theSettings, const int ocul
 	ocular->setReticlePath(theSettings->value(prefix + "reticlePath", "").toString());
 
 	if (!(ocular->apparentFOV() > 0.0 && ocular->effectiveFocalLength() > 0.0)) {
-		qWarning() << "WARNING: Invalid data for ocular. Ocular values must be positive. \n"
+		qWarning() << "Invalid data for ocular. Ocular values must be positive. \n"
 		<< "\tafov: " << ocular->apparentFOV() << "\n"
 		<< "\tefl: " << ocular->effectiveFocalLength() << "\n"
 		<< "\tThis ocular will be ignored.";

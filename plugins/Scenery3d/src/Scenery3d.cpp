@@ -369,7 +369,7 @@ void Scenery3d::createToolbarButtons() const
 	}
 	catch (std::runtime_error& e)
 	{
-		qCWarning(scenery3d) << "WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
+		qCWarning(scenery3d) << "Unable to create toolbar buttons for Scenery3d plugin: " << e.what();
 	}
 }
 

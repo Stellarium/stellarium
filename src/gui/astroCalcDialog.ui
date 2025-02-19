@@ -1243,6 +1243,16 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QPushButton" name="selectObjectButton">
+              <property name="toolTip">
+               <string>Re-select previously selected object</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
           <item row="1" column="0" colspan="2">

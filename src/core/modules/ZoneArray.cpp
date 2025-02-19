@@ -219,7 +219,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	if (rval && rval->isInitialized())
 	{
 		dbStr += QString("%1 entries").arg(rval->getNrOfStars());
-		qDebug().noquote() << dbStr;
+		qInfo().noquote() << dbStr;
 	}
 	else
 	{

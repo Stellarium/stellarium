@@ -107,6 +107,7 @@
 %\newcommand{\button}[1]{\fbox{\textbf{\textsf{\scriptsize #1}}}}
 % V1.0: Better use menu
 \newcommand{\button}[1]{\menu{#1}}
+\newcommand{\checkbox}[1]{\menu{\CheckedBox\  #1}}
 %% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index.
 %% Names should be given with First names and surnames like \name[Johann]{Bayer}. The index will be built sorted by entry surnames.
 %% Unfortunately, these cause problems (Ugly rendering, and Stack size exceeded) with tex4ht. But we don't have an index in the HTML version, so just ignore.
@@ -194,6 +195,49 @@
   sensitive=true
 }
 
+% https://gist.github.com/ed-cooper/1927af4ccac39b083440d436d018d253
+\definecolor{jdelim}{RGB}{20,105,176}
+\definecolor{jnumb}{RGB}{106, 10, 32}
+\definecolor{jstring}{rgb}{0.08,0.08,0.08}
+
+\lstdefinelanguage{json}{
+    %numbers=left,
+    %numberstyle=\small,
+    frame=single,
+    rulecolor=\color{black},
+    showspaces=false,
+    showtabs=false,
+	tabsize=4,
+    breaklines=true,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{gray}\hookrightarrow\space}},
+    breakatwhitespace=true,
+    basicstyle=\ttfamily\small,
+    upquote=true,
+    morestring=[b]",
+    stringstyle=\color{jstring},
+	literate=
+     *{0}{{{\color{jnumb}0}}}{1}
+      {1}{{{\color{jnumb}1}}}{1}
+      {2}{{{\color{jnumb}2}}}{1}
+      {3}{{{\color{jnumb}3}}}{1}
+      {4}{{{\color{jnumb}4}}}{1}
+      {5}{{{\color{jnumb}5}}}{1}
+      {6}{{{\color{jnumb}6}}}{1}
+      {7}{{{\color{jnumb}7}}}{1}
+      {8}{{{\color{jnumb}8}}}{1}
+      {9}{{{\color{jnumb}9}}}{1}
+      {\{}{{{\color{jdelim}{\{}}}}{1}
+      {\}}{{{\color{jdelim}{\}}}}}{1}
+      {[}{{{\color{jdelim}{[}}}}{1}
+      {]}{{{\color{jdelim}{]}}}}{1}
+	  ,
+}
+% The "literate" above can define rules for string translation. If started with an asterisk, only characters outside strings are replaced. 
+% Unfortunately, listings cannot show higher UTF8 chars with diacritics. The Samoan Skycultures example had to be reduced to 
+% showing non-diacritic letters. A translation like this would be possible, but only if the asterix was given up, then coloring numbers in the strings. 
+%     {iIi}{i'i}{3}
+
+
 % It seems the lstenvironments are much too complicated or need big efforts for decorating in HTML/CSS. Just replace by something simpler.
 % We must repeat the same definitions with small and scriptsize (executed in PDF only), and later remove the optional size argument. 							 
 \ifhtlatex
@@ -213,6 +257,9 @@
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
 \lstnewenvironment{configfileScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,showstringspaces=false,%
+                                   backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
+                             }{}%
+\lstnewenvironment{jsonfile}[1][\small]{\lstset{inputencoding=utf8,language=json,basicstyle=\ttfamily#1,showstringspaces=false,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
 \lstnewenvironment{script}{\lstset{language=JavaScript,                   

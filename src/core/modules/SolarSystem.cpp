@@ -649,7 +649,7 @@ void SolarSystem::loadPlanets()
 {
 	minorBodies.clear();
 	systemMinorBodies.clear();
-	qDebug() << "Loading Solar System data (1: planets and moons) ...";
+	qInfo() << "Loading Solar System data (1: planets and moons) ...";
 	QString solarSystemFile = StelFileMgr::findFile("data/ssystem_major.ini");
 	if (solarSystemFile.isEmpty())
 	{
@@ -663,7 +663,7 @@ void SolarSystem::loadPlanets()
 		return;
 	}
 
-	qDebug() << "Loading Solar System data (2: minor bodies) ...";
+	qInfo() << "Loading Solar System data (2: minor bodies) ...";
 	QStringList solarSystemFiles = StelFileMgr::findFileInAllPaths("data/ssystem_minor.ini");
 	if (solarSystemFiles.isEmpty())
 	{
@@ -675,7 +675,7 @@ void SolarSystem::loadPlanets()
 	{
 		if (loadPlanets(solarSystemFile))
 		{
-			qDebug() << "File ssystem_minor.ini is loaded successfully...";
+			qInfo().noquote() << "File ssystem_minor.ini is loaded successfully...";
 			break;
 		}
 		else
@@ -730,7 +730,7 @@ unsigned char SolarSystem::BvToColorIndex(double bV)
 bool SolarSystem::loadPlanets(const QString& filePath)
 {
 	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
-	qDebug().noquote() << "Loading from:"  << filePath;
+	qInfo().noquote() << "Loading from:"  << filePath;
 	QSettings pd(filePath, StelIniFormat);
 	if (pd.status() != QSettings::NoError)
 	{
@@ -1284,7 +1284,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			if (semi_major_axis>0)
 				mp->deltaJDE = 2.0*semi_major_axis*StelCore::JD_SECOND;
 			 else if (semi_major_axis<=0.0 && type!=L1S("interstellar object"))
-				qWarning().noquote() << "WARNING: Minor body" << englishName << "has no semimajor axis!";
+				qWarning().noquote() << "Minor body" << englishName << "has no semimajor axis!";
 
 			systemMinorBodies.push_back(newP);
 		}
@@ -1488,8 +1488,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	if (readOk==0)
 		qWarning().noquote() << "No Solar System objects loaded from" << QDir::toNativeSeparators(filePath);
 	else
-		qDebug() << "Loaded" << readOk << "Solar System bodies from " << filePath;
-	qDebug() << "Solar System now has" << systemPlanets.count() << "entries.";
+		qInfo().noquote() << "Loaded" << readOk << "Solar System bodies from " << filePath;
+	qInfo().noquote() << "Solar System now has" << systemPlanets.count() << "entries.";
 	return readOk>0;
 }
 
@@ -1504,11 +1504,11 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 	static bool threadMessage=true;
 	if (threadMessage)
 	{
-		qDebug() << "SolarSystem: We have configured" << extraThreads << "threads (plus main thread) for computePositions().";
+		qInfo() << "SolarSystem: We have configured" << extraThreads << "threads (plus main thread) for computePositions().";
 		if (extraThreads > QThreadPool::globalInstance()->maxThreadCount()-1)
 		{
-			qDebug() << "This is more than the maximum additional thread count (" << QThreadPool::globalInstance()->maxThreadCount()-1 << ").";
-			qDebug() << "Consider reducing this number to avoid oversubscription.";
+			qWarning() << "This is more than the maximum additional thread count (" << QThreadPool::globalInstance()->maxThreadCount()-1 << ").";
+			qWarning() << "Consider reducing this number to avoid oversubscription.";
 		}
 		threadMessage=false;
 	}

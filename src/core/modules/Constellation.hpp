@@ -171,6 +171,10 @@ private:
 	int endSeason;
 	//! List of stars forming the segments
 	std::vector<StelObjectP> constellation;
+	//! In case this describes a single-star constellation (i.e. just one line segment that starts and ends at the same star),
+	//! or we have a line segment with such single star somewhere within the constellation,
+	//! we will draw a circle with this opening radius.
+	double singleStarConstellationRadius;
 
 	StelTextureSP artTexture;
 	StelVertexArray artPolygon;

@@ -548,6 +548,11 @@ QString StarWrapper2::getObjectType() const
 		return startype;
 }
 
+QString StarWrapper2::getID(void) const
+{
+	return QString("Gaia DR3 %1").arg(s->getGaia());
+}
+
 QString StarWrapper2::getObjectTypeI18n() const
 {
 	QString stypefinal, stype = getObjectType();
@@ -791,6 +796,11 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 	StelObject::postProcessInfoString(str, flags);
 
 	return str;
+}
+
+QString StarWrapper3::getID(void) const
+{
+	return QString("Gaia DR3 %1").arg(s->getGaia());
 }
 
 QString StarWrapper3::getObjectType() const

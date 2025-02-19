@@ -65,15 +65,15 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refre
 	Q_ASSERT(StelTranslator::globalTranslator);
 	delete StelTranslator::globalTranslator;
 	StelTranslator::globalTranslator = new StelTranslator("stellarium", newAppLanguageName);
-	qDebug().noquote() << "Application language:" << StelTranslator::globalTranslator->getTrueLocaleName();
+	qInfo().noquote() << "Application language:" << StelTranslator::globalTranslator->getTrueLocaleName();
 
 	// Update the translator with new locale name
 	scriptsTranslator.reset(new StelTranslator("stellarium-scripts", newAppLanguageName));
-	qDebug().noquote() << "Scripts language:" << scriptsTranslator->getTrueLocaleName();
+	qInfo().noquote() << "Scripts language:" << scriptsTranslator->getTrueLocaleName();
 
 	// Update the translator with new locale name
 	skyCultureDescriptionsTranslator.reset(new StelTranslator("stellarium-skycultures-descriptions", newAppLanguageName));
-	qDebug().noquote() << "Sky culture description language:" << skyCultureDescriptionsTranslator->getTrueLocaleName();
+	qInfo().noquote() << "Sky culture description language:" << skyCultureDescriptionsTranslator->getTrueLocaleName();
 
 	createNameLists();
 	if (refreshAll)
@@ -92,11 +92,11 @@ void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName, bool refre
 {
 	// Update the translator with new locale name
 	skyTranslator.reset(new StelSkyTranslator(newSkyLanguageName));
-	qDebug().noquote() << "Sky language:" << skyTranslator->getTrueLocaleName();
+	qInfo().noquote() << "Sky language:" << skyTranslator->getTrueLocaleName();
 
 	// Update the translator with new locale name
 	planetaryFeaturesTranslator.reset(new StelTranslator("stellarium-planetary-features", newSkyLanguageName));
-	qDebug().noquote() << "Planetary features language:" << planetaryFeaturesTranslator->getTrueLocaleName();
+	qInfo().noquote() << "Planetary features language:" << planetaryFeaturesTranslator->getTrueLocaleName();
 
 	if (refreshAll)
 		StelApp::getInstance().updateI18n();
@@ -195,7 +195,7 @@ QString StelLocaleMgr::getPrintableDateLocal(double JD, double utcOffsetHrs) con
 			str = StelUtils::localeDateString(year, month, day, dayOfWeek);
 			break;
 		default:
-			qWarning() << "WARNING: unknown date format fallback to system default";
+			qWarning() << "Unknown date format fallback to system default";
 			str = StelUtils::localeDateString(year, month, day, dayOfWeek);
 	}
 	return str;
@@ -218,7 +218,7 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD, double utcOffsetHrs) con
 		case STime12h:
 			return t.toString("hh:mm:ss AP");
 		default:
-			qWarning() << "WARNING: unknown time format, fallback to system default";
+			qWarning() << "Unknown time format, fallback to system default";
 
 #if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
 			return t.toString(QLocale().dateFormat(QLocale::ShortFormat));
@@ -282,7 +282,7 @@ StelLocaleMgr::STimeFormat StelLocaleMgr::stringToSTimeFormat(const QString& tf)
 		{"24h", STime24h},
 		{"12h", STime12h}};
 	if (!map.contains(tf))
-		qWarning() << "WARNING: unrecognized time_display_format : " << tf << " system_default used.";
+		qWarning() << "Unrecognized time_display_format : " << tf << " system_default used.";
 	return map.value(tf, STimeSystemDefault);
 }
 
@@ -304,7 +304,7 @@ StelLocaleMgr::SDateFormat StelLocaleMgr::stringToSDateFormat(const QString& df)
 		{"wwddmmyyyy",     SDateWWDDMMYYYY},
 		{"wwyyyymmdd",     SDateWWYYYYMMDD}};
 	if (!map.contains(df))
-		qWarning() << "WARNING: unrecognized date_display_format : " << df << " system_default used.";
+		qWarning() << "Unrecognized date_display_format : " << df << " system_default used.";
 	return map.value(df, SDateSystemDefault);
 }
 

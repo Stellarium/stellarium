@@ -3,7 +3,7 @@
 #
 # Tool for extraction the names of sky cultures for translation
 #
-# Copyright (C) 2021 Alexander Wolf
+# Copyright (C) 2021, 2025 Alexander Wolf
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -38,7 +38,7 @@ for($i=0;$i<scalar(@srcData);$i++)
 {
 	$str = $srcData[$i];
 	# if (substr($str, 0, 1) eq '#') { next; }
-	if ($str =~ /ADD_SUBDIRECTORY\(\s*([A-Za-z\_\-]+)\s*\)/)
+	if ($str =~ /\s*ADD_SUBDIRECTORY\(\s*([A-Za-z\_\-]+)\s*\)/)
 	{
 		push(@SC, $1);
 	}
@@ -46,20 +46,19 @@ for($i=0;$i<scalar(@srcData);$i++)
 
 open(OUT, ">:encoding(utf8)", "$OUT");
 print OUT "#\n# This file contains names of sky cultures.\n";
-print OUT "# It is not meant to be compiled but just parsed by gettext.\n#\n\n";
-print OUT "#\n# Constellation cultures\n#\n";
+print OUT "# It is not meant to be compiled but just parsed by gettext.\n#\n";
 for($i=0;$i<scalar(@SC);$i++)
 {
 	$str = $SC[$i];
 	
-	$INFOSRC = "../../skycultures/".$str."/info.ini";
+	$INFOSRC = "../../skycultures/".$str."/description.md";
 	open(INFO, "<:encoding(utf8)", "$INFOSRC");
 	@info = <INFO>;
 	close INFO;
 	$name = "";
 	for($j=0;$j<scalar(@info);$j++)
 	{
-		if ($info[$j] =~ m/name\s*=(.+)/)
+		if ($info[$j] =~ m/^#\s+(.+)/)
 		{
 			$name = $1;
 			$name =~ s/\r//g;

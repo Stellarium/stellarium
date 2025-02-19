@@ -213,7 +213,7 @@ void OnlineQueries::createToolbarButton() const
 	}
 	catch (std::runtime_error& e)
 	{
-		qCWarning(onlineQueries) << "WARNING: unable to create toolbar button for OnlineQueries plugin: " << e.what();
+		qCWarning(onlineQueries) << "Unable to create toolbar button for OnlineQueries plugin: " << e.what();
 	}
 }
 

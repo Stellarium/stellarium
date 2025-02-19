@@ -43,6 +43,7 @@ const QString Asterism::ASTERISM_TYPE = QStringLiteral("Asterism");
 
 Asterism::Asterism()
 	: flagAsterism(true)
+	, singleStarAsterismRadius(cos(M_PI/360.)) // default radius of 1/2 degrees
 {
 }
 
@@ -170,6 +171,12 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 		}
 	}
 
+	if (data.contains("single_star_radius"))
+	{
+		double rd = data["single_star_radius"].toDouble(0.5);
+		singleStarAsterismRadius = cos(rd*M_PI/180.);
+	}
+
 	if (typeOfAsterism != Type::RayHelper)
 	{
 		XYZname.set(0.,0.,0.);
@@ -206,7 +213,14 @@ void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const Sphe
 		star2=asterism[2*i+1]->getJ2000EquatorialPos(core);
 		star1.normalize();
 		star2.normalize();
-		sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);
+		if (star1.fuzzyEquals(star2))
+		{
+			// draw single-star segment as circle
+			SphericalCap saCircle(star1, singleStarAsterismRadius);
+			sPainter.drawSphericalRegion(&saCircle, StelPainter::SphericalPolygonDrawModeBoundary);
+		}
+		else
+			sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);
 	}
 }
 

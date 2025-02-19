@@ -157,8 +157,8 @@ void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 				--n;
 			}
 		}
-		qDebug() << "Loaded" << readOK << "/" << skyCulture.asterisms.size()
-		         << "asterism records successfully for culture" << currentSkyCultureID;
+		qInfo().noquote() << "Loaded" << readOK << "/" << skyCulture.asterisms.size()
+				  << "asterism records successfully for culture" << currentSkyCultureID;
 
 		// Set current states
 		setFlagLines(linesDisplayed);

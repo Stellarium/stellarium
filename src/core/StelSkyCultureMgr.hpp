@@ -33,7 +33,6 @@ class StelTranslator;
 //! Store basic info about a sky culture for Stellarium.
 //! Different human cultures have used different names for stars, and visualised
 //! different constellations in the sky (and in different parts of the sky).
-//! This information will probably evolve considerably over the 0.19 and 0.20 series.
 class StelSkyCulture
 {
 	Q_GADGET
@@ -98,21 +97,23 @@ public:
 	QString englishName;
 	//! The license
 	QString license;
-	//! The name of region
+	//! The name of region following the United Nations geoscheme UN~M49 https://unstats.un.org/unsd/methodology/m49/
+	//! For skycultures of worldwide applicability (mostly those adhering to IAU constellation borders), use "World".
 	QString region;
 	//! Type of the boundaries
 	BoundariesType boundariesType;
-	//! JSON data describing the constellations
+	//! JSON data describing the constellations (names, lines, artwork)
 	QJsonArray constellations;
 	//! JSON data describing boundaries of the constellations
 	QJsonArray boundaries;
-	//! E.g. J2000, B1875
+	//! Epoch for boundary definition. E.g. "J2000" (default), "B1875", "J2050.0", "B1950.5", "JD1234567.89" or just any JD value
+	//! The first two examples are treated most efficiently.
 	QString boundariesEpoch;
 	//! JSON data describing asterism lines and names
 	QJsonArray asterisms;
 	//! Classification of sky culture (enum)
 	CLASSIFICATION classification;
-	//! JSON data containing culture-specific names of celestial objects
+	//! JSON data containing culture-specific names of celestial objects (stars, planets, DSO)
 	QJsonObject names;
 	//! JSON data describing the policy on the usage of native names vs the English ones
 	QJsonArray langsUseNativeNames;
