@@ -123,7 +123,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 					);
 			for (int i=0; i<16; ++i)
 			{
-				if (!conversionOK[i]) qCWarning(sceneInfo) << "WARNING: scenery3d.ini: element " << i+1 << " of obj2grid_trafo invalid, set zo zero.";
+				if (!conversionOK[i]) qCWarning(sceneInfo) << "scenery3d.ini: element " << i+1 << " of obj2grid_trafo invalid, set zo zero.";
 			}
 		}
 		else qCWarning(sceneInfo) << "obj2grid_trafo invalid: not 16 comma-separated elements";

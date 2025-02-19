@@ -197,7 +197,7 @@ void StelTranslator::initSystemLanguage()
 	pos = systemLangName.indexOf('.', 0);
 	if (pos != -1) systemLangName.resize(pos);
 
-	qWarning().noquote() << "System language (ISO 639 / ISO 3166):" << systemLangName;
+	qInfo().noquote() << "System language (ISO 639 / ISO 3166):" << systemLangName;
 }
 
 
@@ -220,7 +220,7 @@ QString StelTranslator::iso639_1CodeToNativeName(const QString& languageCode)
 	if (iso639codes.contains(languageCode))
 		return iso639codes[languageCode];
 
-	// qWarning() << "WARNING: Cannot determine name of language for code" << languageCode;
+	// qWarning() << "Cannot determine name of language for code" << languageCode;
 	return languageCode;
 }
 

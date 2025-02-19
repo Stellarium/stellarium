@@ -353,7 +353,7 @@ const QString Landscape::getTexturePath(const QString& basename, const QString& 
 	if (path.isEmpty())
 		path = StelFileMgr::findFile("textures/" + basename);
 	if (path.isEmpty())
-		qWarning() << "Warning: Landscape" << landscapeId << ": File" << basename << "does not exist.";
+		qWarning().noquote() << "Landscape" << landscapeId << ": File" << basename << "does not exist.";
 	return path;
 }
 

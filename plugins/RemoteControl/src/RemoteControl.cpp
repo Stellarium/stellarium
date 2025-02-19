@@ -119,7 +119,7 @@ void RemoteControl::init()
 
 	loadSettings();
 
-	qDebug()<<"RemoteControl using QtWebApp version"<<getQtWebAppLibVersion();
+	qInfo()<<"RemoteControl using QtWebApp version"<<getQtWebAppLibVersion();
 
 	StaticFileControllerSettings settings;
 	//retrieve actual webroot through StelFileMgr
@@ -168,7 +168,7 @@ void RemoteControl::init()
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: unable to create toolbar button for RemoteControl plugin: " << e.what();
+		qWarning() << "Unable to create toolbar button for RemoteControl plugin: " << e.what();
 	}
 
 	if(autoStart)

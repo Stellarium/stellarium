@@ -284,7 +284,7 @@ int main(int argc, char **argv)
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: while processing --log-file option: " << e.what() << ". Using \"log.txt\"";
+		qWarning() << "While processing --log-file option: " << e.what() << ". Using \"log.txt\"";
 		logName = StelFileMgr::getUserDir()+ "/log.txt"; // Back to default value
 	}
 	StelLogger::init(logName);
@@ -317,7 +317,7 @@ int main(int argc, char **argv)
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning().noquote() << "WARNING: while looking for --config-file option:" << e.what() << ". Using \"config.ini\"";
+		qWarning().noquote() << "While looking for --config-file option:" << e.what() << ". Using \"config.ini\"";
 		configName = "config.ini";
 	}
 
@@ -447,7 +447,7 @@ int main(int argc, char **argv)
 	int screen = confSettings->value("video/screen_number", 0).toInt();
 	if (screen < 0 || screen >= qApp->screens().count())
 	{
-		qWarning().noquote() << "WARNING: screen" << screen << "not found";
+		qWarning().noquote() << "Screen" << screen << "not found";
 		screen = 0;
 	}
 	const auto qscreen = qApp->screens().at(screen);

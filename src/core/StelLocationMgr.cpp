@@ -541,7 +541,7 @@ void StelLocationMgr::setLocations(const LocationList &locations)
 
 void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool isUserLocation, const QString& binFilePath) const
 {
-	qDebug() << "Generating a locations list...";
+	qInfo() << "Generating a locations list...";
 	const QMap<QString, StelLocation>& cities = loadCities(fileName, isUserLocation);
 	QFile binfile(StelFileMgr::findFile(binFilePath, StelFileMgr::New));
 	if(binfile.open(QIODevice::WriteOnly))
@@ -552,7 +552,7 @@ void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool i
 		binfile.flush();
 		binfile.close();
 	}
-	qDebug() << "[...] Please use 'gzip -nc base_locations.bin > base_locations.bin.gz' to pack a locations list.";
+	qInfo() << "[...] Please use 'gzip -nc base_locations.bin > base_locations.bin.gz' to pack a locations list.";
 }
 
 LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
@@ -629,14 +629,14 @@ LocationMap StelLocationMgr::loadCities(const QString& fileName, bool isUserLoca
 	{
 		// Note it is quite normal not to have a user locations file (e.g. first run)
 		if (!isUserLocation)
-			qWarning() << "WARNING: Failed to locate location data file: " << QDir::toNativeSeparators(fileName);
+			qWarning().noquote() << "Failed to locate location data file: " << QDir::toNativeSeparators(fileName);
 		return locations;
 	}
 
 	QFile sourcefile(cityDataPath);
 	if (!sourcefile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "ERROR: Could not open location data file: " << QDir::toNativeSeparators(cityDataPath);
+		qWarning().noquote() << "ERROR: Could not open location data file: " << QDir::toNativeSeparators(cityDataPath);
 		return locations;
 	}
 
@@ -1267,7 +1267,7 @@ void StelLocationMgr::loadCountries()
 		}
 		textFile.close();
 		if (readOk>0)
-			qDebug() << "Loaded" << readOk << "countries";
+			qInfo().noquote() << "Loaded" << readOk << "countries";
 		else
 			qDebug() << "ERROR: List of countries was not loaded!";
 	}
@@ -1328,7 +1328,7 @@ void StelLocationMgr::loadRegions()
 		}
 		geoFile.close();
 		if (readOk>0)
-			qDebug() << "Loaded" << readOk << "regions";
+			qInfo().noquote() << "Loaded" << readOk << "regions";
 		else
 			qDebug() << "ERROR: List of regions was not loaded!";
 	}

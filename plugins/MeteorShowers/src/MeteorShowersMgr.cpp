@@ -201,7 +201,7 @@ void MeteorShowersMgr::loadTextures()
 
 bool MeteorShowersMgr::loadCatalog(const QString& jsonPath)
 {
-	qDebug().noquote() << "[MeteorShowersMgr] Loading catalog file:"
+	qInfo().noquote() << "[MeteorShowersMgr] Loading catalog file:"
 		 << QDir::toNativeSeparators(jsonPath);
 
 	QFile jsonFile(jsonPath);
@@ -228,14 +228,14 @@ bool MeteorShowersMgr::loadCatalog(const QString& jsonPath)
 
 	QVariantMap map = json["showers"].toObject().toVariantMap();
 	m_meteorShowers->loadMeteorShowers(map);
-	qDebug() << "[MeteorShowersMgr] Version of the format of the catalog:" << json["version"].toInt();
+	qInfo().noquote() << "[MeteorShowersMgr] Version of the format of the catalog:" << json["version"].toInt();
 
 	return true;
 }
 
 void MeteorShowersMgr::restoreDefaultSettings()
 {
-	qDebug() << "[MeteorShowersMgr] Restoring default settings";
+	qInfo() << "[MeteorShowersMgr] Restoring default settings";
 	m_conf->beginGroup(MS_CONFIG_PREFIX);
 	m_conf->remove("");
 	m_conf->endGroup();
@@ -246,7 +246,7 @@ void MeteorShowersMgr::restoreDefaultSettings()
 
 bool MeteorShowersMgr::restoreDefaultCatalog(const QString& destination)
 {
-	qDebug() << "[MeteorShowersMgr] Trying to restore the default catalog to"
+	qInfo() << "[MeteorShowersMgr] Trying to restore the default catalog to"
 		 << QDir::toNativeSeparators(destination);
 
 	QFile d(destination);
@@ -270,7 +270,7 @@ bool MeteorShowersMgr::restoreDefaultCatalog(const QString& destination)
 
 	setLastUpdate(QDateTime::fromString("2015-07-01T00:00:00"));
 
-	qDebug() << "[MeteorShowersMgr] The default catalog was copied!";
+	qInfo() << "[MeteorShowersMgr] The default catalog was copied!";
 	displayMessage(q_("Using the default Meteor Showers catalog."), "#bb0000");
 
 	return true;

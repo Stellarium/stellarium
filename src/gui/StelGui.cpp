@@ -221,7 +221,7 @@ void StelGui::updateStelStyle()
 
 void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 {
-	qDebug() << "Creating GUI ...";
+	qInfo() << "Creating GUI ...";
 
 	StelGuiBase::init(atopLevelGraphicsWidget);
 	skyGui = new SkyGui(atopLevelGraphicsWidget);
@@ -492,7 +492,7 @@ void StelGui::setStelStyle(const QString& style)
 	QFile styleFile(qtStyleFileName);
 	if(styleFile.open(QIODevice::ReadOnly))
 	{
-		qDebug().noquote() << "Loading style file:" << styleFile.fileName();
+		qInfo().noquote() << "Loading style file:" << styleFile.fileName();
 		currentStelStyle.qtStyleSheet = styleFile.readAll();
 		styleFile.close();
 	}

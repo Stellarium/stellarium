@@ -192,13 +192,13 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		QTextStream in;
 		QString fName = StelFileMgr::findFile(custom_distortion_file);
 		if (fName.isEmpty()) {
-			qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file;
+			qWarning() << "Could not open custom_distortion_file:" << custom_distortion_file;
 		} else {
 			file.setFileName(fName);
 			if(file.open(QIODevice::ReadOnly))
 				in.setDevice(&file);
 			else
-				qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file;
+				qWarning() << "Could not open custom_distortion_file:" << custom_distortion_file;
 		}
 		Q_ASSERT(file.error()!=QFile::NoError);
 		in >> max_x >> max_y;

@@ -2049,7 +2049,7 @@ void StelPainter::sCylinder(double radius, double height, int slices, int orient
 
 void StelPainter::initGLShaders()
 {
-	qDebug() << "Initializing basic GL shaders... ";
+	qInfo() << "Initializing basic GL shaders... ";
 	// Basic shader: just vertex filled with plain color
 	QOpenGLShader vshader3(QOpenGLShader::Vertex);
 	const auto vsrc3 =

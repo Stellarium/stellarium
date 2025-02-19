@@ -290,7 +290,7 @@ void ArchaeoLines::init()
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: unable to create toolbar button for ArchaeoLines plugin: " << e.what();
+		qWarning() << "Unable to create toolbar button for ArchaeoLines plugin: " << e.what();
 	}
 	addAction("actionAL_showEquinoxLine",          section, N_("Show Line for Equinox"),            "flagShowEquinox"         ); // No Shortcuts configured.
 	addAction("actionAL_showSolsticeLines",        section, N_("Show Line for Solstices"),          "flagShowSolstices"       ); // No Shortcuts configured.

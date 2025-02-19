@@ -63,7 +63,7 @@ void InitDE431(const char* filepath)
 		double jd1, jd2;
 		jd1=jpl_get_double(ephem, JPL_EPHEM_START_JD);
 		jd2=jpl_get_double(ephem, JPL_EPHEM_END_JD);
-		qDebug().noquote().nospace() << "DE431 init successful. JD range " << QString::number(jd1, 'f', 4) << ".." << QString::number(jd2, 'f', 4);
+		qInfo().noquote().nospace() << "DE431 init successful. JD range " << QString::number(jd1, 'f', 4) << ".." << QString::number(jd2, 'f', 4);
 	}
 }
 

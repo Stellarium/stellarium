@@ -122,7 +122,7 @@ QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& idFromJSON) c
 	const QString descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description.md");
 	if (descPath.isEmpty())
 	{
-		qWarning() << "WARNING: can't find description for skyculture" << skyCultureId;
+		qWarning() << "Can't find description for skyculture" << skyCultureId;
 		return idFromJSON;
 	}
 
@@ -702,7 +702,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription()
 	const QString descPath = currentSkyCulture.path + "/description.md";
 	const bool pathExists = QFileInfo::exists(descPath);
 	if (!pathExists)
-		qWarning() << "WARNING: can't find description for skyculture" << currentSkyCulture.id;
+		qWarning() << "Can't find description for skyculture" << currentSkyCulture.id;
 
 	QString description;
 	if (!pathExists)

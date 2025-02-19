@@ -214,7 +214,7 @@ void Calendars::init()
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: unable to create toolbar button for Calendars plugin: " << e.what();
+		qWarning() << "Unable to create toolbar button for Calendars plugin: " << e.what();
 	}
 
 	infoPanel->setFont(font);

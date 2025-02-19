@@ -954,7 +954,7 @@ QTime jdFractionToQTime(const double jd)
 		hours+=1;
 	}
 	if (hours >= 24)
-		qDebug() << "WARNING: hours exceed a full day!" << hours;
+		qWarning() << "Hours exceed a full day!" << hours;
 	hours %= 24;
 
 	QTime tm=QTime(hours, mins, sec, ms);

@@ -104,7 +104,7 @@ void ConstellationMgr::init()
 	QString starloreDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
 	if (!ConstellationDisplayStyleMap.contains(starloreDisplayStyle))
 	{
-		qDebug() << "Warning: viewing/constellation_name_style (" << starloreDisplayStyle << ") invalid. Using translated style.";
+		qWarning() << "viewing/constellation_name_style (" << starloreDisplayStyle << ") invalid. Using translated style.";
 		conf->setValue("viewing/constellation_name_style", "translated");
 	}
 	setConstellationDisplayStyle(ConstellationDisplayStyleMap.value(starloreDisplayStyle, constellationsTranslated));
@@ -561,7 +561,7 @@ void ConstellationMgr::loadLinesNamesAndArt(const QJsonArray &constellationsData
 		cons->boundingCap.d=tmp*tmp2;
 	}
 
-	qDebug() << "Loaded" << readOk << "/" << constellations.size() << "constellation records successfully for culture" << culture.id;
+	qInfo().noquote() << "Loaded" << readOk << "/" << constellations.size() << "constellation records successfully for culture" << culture.id;
 
 	// Set current states
 	setFlagArt(artDisplayed);
@@ -1128,7 +1128,7 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 		}
 	}
 	const auto& core = *StelApp::getInstance().getCore();
-	qDebug() << "Loading constellation boundary data ... ";
+	qInfo().noquote() << "Loading constellation boundary data ... ";
 
 	for (int n = 0; n < boundaryData.size(); ++n)
 	{
@@ -1240,7 +1240,7 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 			delete points;
 		}
 	}
-	qDebug() << "Loaded" << boundaryData.size() << "constellation boundary segments";
+	qInfo().noquote() << "Loaded" << boundaryData.size() << "constellation boundary segments";
 
 	return true;
 }

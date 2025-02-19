@@ -1490,8 +1490,8 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 	dsoIn.close();
 	dsoOut.flush();
 	dsoOut.close();
-	qDebug().noquote() << "Converted" << readOk << "/" << totalRecords << "DSO records";
-	qDebug().noquote() << "[...] Please use 'gzip -nc catalog.pack > catalog.dat' to pack the catalog.";
+	qInfo().noquote() << "Converted" << readOk << "/" << totalRecords << "DSO records";
+	qInfo().noquote() << "[...] Please use 'gzip -nc catalog.pack > catalog.dat' to pack the catalog.";
 }
 
 bool NebulaMgr::loadDSOCatalog(const QString &filename)
@@ -1500,7 +1500,7 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 	if (!in.open(QIODevice::ReadOnly))
 		return false;
 
-	qDebug().noquote() << "Loading DSO data ...";
+	qInfo().noquote() << "Loading DSO data ...";
 
 	// Let's begin use gzipped data
 	QDataStream ins(StelUtils::uncompress(in.readAll()));
@@ -1517,12 +1517,12 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 				version = "3.1"; // The first version of extended edition of the catalog
 			if (edition.isEmpty())
 				edition = "unknown";
-			qDebug().noquote() << "[...]" << QString("Stellarium DSO Catalog, version %1 (%2 edition)").arg(version, edition);
+			qInfo().noquote() << "[...]" << QString("Stellarium DSO Catalog, version %1 (%2 edition)").arg(version, edition);
 			if (StelUtils::compareVersions(version, StellariumDSOCatalogVersion)!=0)
 			{
 				++totalRecords;
-				qDebug().noquote() << "WARNING: Mismatch of DSO catalog version (" << version << ")! The expected version is" << StellariumDSOCatalogVersion;
-				qDebug().noquote() << "         See section 5.5 of the User Guide and install the right version of the catalog!";
+				qWarning().noquote() << "Mismatch of DSO catalog version (" << version << ")! The expected version is" << StellariumDSOCatalogVersion;
+				qWarning().noquote() << "See section 5.5 of the User Guide and install the right version of the catalog!";
 				QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"),
 				                     QString("%1. %2: %3 - %4: %5. %6").arg(q_("DSO catalog version mismatch"),
 				                                                            q_("Found"),
@@ -1547,13 +1547,13 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 		++totalRecords;
 	}
 	in.close();
-	qDebug().noquote() << "Loaded" << --totalRecords << "DSO records";
+	qInfo().noquote() << "Loaded" << --totalRecords << "DSO records";
 	return true;
 }
 
 bool NebulaMgr::loadDSONames(const QString &filename)
 {
-	qDebug() << "Loading DSO name data ...";
+	qInfo() << "Loading DSO name data ...";
 
 	defaultNameMap.clear();
 
@@ -1704,18 +1704,18 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 			nodata.append(QString("%1 %2").arg(ref.trimmed(), cdes.trimmed()));
 	}
 	dsoNameFile.close();
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "DSO name records successfully";
+	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "DSO name records successfully";
 
 	int err = nodata.size();
 	if (err>0)
-		qDebug().noquote() << "WARNING - No position data for" << err << "objects:" << nodata.join(", ");
+		qWarning().noquote() << "No position data for" << err << "objects:" << nodata.join(", ");
 
 	return true;
 }
 
 bool NebulaMgr::loadDSODiscoveryData(const QString &filename)
 {
-	qDebug() << "Loading DSO discovery data ...";
+	qInfo() << "Loading DSO discovery data ...";
 	QFile dsoDiscoveryFile(filename);
 	if (!dsoDiscoveryFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
@@ -1755,13 +1755,13 @@ bool NebulaMgr::loadDSODiscoveryData(const QString &filename)
 		}
 	}
 	dsoDiscoveryFile.close();
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "DSO discovery records successfully";
+	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "DSO discovery records successfully";
 	return true;
 }
 
 bool NebulaMgr::loadDSOOutlines(const QString &filename)
 {
-	qDebug() << "Loading DSO outline data ...";
+	qInfo() << "Loading DSO outline data ...";
 	QFile dsoOutlineFile(filename);
 	if (!dsoOutlineFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
@@ -1849,7 +1849,7 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 		}
 	}
 	dsoOutlineFile.close();
-	qDebug().noquote() << "Loaded" << readOk << "DSO outline records successfully";
+	qInfo().noquote() << "Loaded" << readOk << "DSO outline records successfully";
 	return true;
 }
 
@@ -1870,7 +1870,7 @@ void NebulaMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 
 	if (numLoaded)
 	{
-		qDebug() << "Loaded" << numLoaded << "culture-specific DSO names";
+		qInfo().noquote() << "Loaded" << numLoaded << "culture-specific DSO names";
 	}
 	else
 	{
@@ -2007,7 +2007,7 @@ void NebulaMgr::loadCommonNames()
 		}
 	}
 	dsoNamesFile.close();
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "common names of deep-sky objects";
+	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "common names of deep-sky objects";
 }
 
 void NebulaMgr::updateI18n()

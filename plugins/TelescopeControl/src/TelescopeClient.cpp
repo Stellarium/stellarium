@@ -74,13 +74,13 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	}
 	else
 	{
-		qWarning() << "WARNING - telescope definition" << url << "not recognised";
+		qWarning() << "Telescope definition" << url << "not recognised";
 		return nullptr;
 	}
 
 	const TelescopeControl::Equinox eq = (equinox == "JNow" ? TelescopeControl::EquinoxJNow : TelescopeControl::EquinoxJ2000);
 
-	qDebug() << "Creating telescope" << url << "; name/type/equinox/params:" << name << type << ((eq == TelescopeControl::EquinoxJNow) ? "JNow" : "J2000") << params;
+	qInfo() << "Creating telescope" << url << "; name/type/equinox/params:" << name << type << ((eq == TelescopeControl::EquinoxJNow) ? "JNow" : "J2000") << params;
 
 	TelescopeClient * newTelescope = nullptr;
 	
@@ -118,7 +118,7 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	#endif
 	else
 	{
-		qWarning() << "WARNING - unknown telescope type" << type << "- not creating a telescope object for url" << url;
+		qWarning() << "Unknown telescope type" << type << "- not creating a telescope object for url" << url;
 	}
 	
 	if (newTelescope && !newTelescope->isInitialized())
@@ -211,11 +211,11 @@ TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Telescope
 	}
 	else
 	{
-		qWarning() << "WARNING - incorrect TelescopeTCP parameters";
+		qWarning() << "Incorrect TelescopeTCP parameters";
 		return;
 	}
 
-	qDebug() << "TelescopeTCP parameters host, port, time_delay:" << host << port << time_delay;
+	qInfo() << "TelescopeTCP parameters host, port, time_delay:" << host << port << time_delay;
 	
 	if (time_delay <= 0 || time_delay > 10000000)
 	{

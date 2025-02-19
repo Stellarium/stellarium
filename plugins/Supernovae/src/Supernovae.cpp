@@ -165,11 +165,11 @@ void Supernovae::init()
 	}
 	else
 	{
-		qDebug().noquote() << "[Supernovae] supernovae.json does not exist - copying default file to" << QDir::toNativeSeparators(sneJsonPath);
+		qInfo().noquote() << "[Supernovae] supernovae.json does not exist - copying default file to" << QDir::toNativeSeparators(sneJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug().noquote() << "[Supernovae] Loading catalog file:" << QDir::toNativeSeparators(sneJsonPath);
+	qInfo().noquote() << "[Supernovae] Loading catalog file:" << QDir::toNativeSeparators(sneJsonPath);
 
 	readJsonFile();
 
@@ -447,7 +447,7 @@ int Supernovae::getJsonFileVersion(void) const
 		jsonVersion = map.value("version").toInt();
 	}
 
-	qDebug() << "[Supernovae] version of the catalog:" << jsonVersion;
+	qInfo().noquote() << "[Supernovae] version of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
 

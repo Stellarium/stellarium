@@ -155,10 +155,10 @@ void StelFileMgr::init()
 		}
 		else
 		{
-			qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
-					 << QDir::toNativeSeparators(installLocation.filePath())
-					 << " (we checked for "
-					 << QDir::toNativeSeparators(checkFile.filePath()) << ").";
+			qWarning().noquote() << "Could not find install location:"
+					     << QDir::toNativeSeparators(installLocation.filePath())
+					     << " (we checked for "
+					     << QDir::toNativeSeparators(checkFile.filePath()) << ").";
 
 			qWarning() << "Maybe this is AppImage or something similar? Let's check relative path...";
 			// This hook has been added after reverse-engineering an AppImage application
@@ -170,10 +170,10 @@ void StelFileMgr::init()
 			}
 			else
 			{
-				qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
-						 << QDir::toNativeSeparators(relativePath)
-						 << " (we checked for "
-						 << QDir::toNativeSeparators(checkFile.filePath()) << ").";
+				qWarning().noquote() << "Could not find install location:"
+						     << QDir::toNativeSeparators(relativePath)
+						     << " (we checked for "
+						     << QDir::toNativeSeparators(checkFile.filePath()) << ").";
 
 				qWarning() << "Maybe this is development environment? Let's check source directory path...";
 
@@ -185,10 +185,10 @@ void StelFileMgr::init()
 				}
 				else
 				{
-					qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
-							 << QDir::toNativeSeparators(sourceDirPath)
-							 << " (we checked for "
-							 << QDir::toNativeSeparators(checkFile.filePath()) << ").";
+					qWarning().noquote() << "Could not find install location:"
+							     << QDir::toNativeSeparators(sourceDirPath)
+							     << " (we checked for "
+							     << QDir::toNativeSeparators(checkFile.filePath()) << ").";
 
 					#ifndef UNIT_TEST
 					// NOTE: Hook for buildbots (using within testEphemeris)
@@ -500,7 +500,7 @@ QString StelFileMgr::getLocaleDir()
 		}
 		else
 		{
-			qWarning() << "WARNING StelFileMgr::getLocaleDir() - could not determine locale directory";
+			qWarning() << "Could not determine locale directory";
 			return "";
 		}
 	}
