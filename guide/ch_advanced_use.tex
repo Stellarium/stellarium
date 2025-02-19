@@ -619,6 +619,16 @@ problems.
   or \texttt{warp} for another software-only solution. Note that command line options take precedence over this environment variable.
 \end{description}
 
+\subsection{Logfile tweaks}
+\label{sec:Environment:Logfile}
+
+The amount of logging messages in Qt-based programs can be tuned by setting an environment variable \texttt{QT\_LOGGING\_RULES}. 
+For example, to remove all ``Debug'' messages, set it to \texttt{*.debug=false}. To remove even the ``Info'' messages, add \texttt{;*.info=false}. (Combine several rules with semicola.)
+If you experience operating trouble, make sure you allow all messages, i.e., set these entries shown here to \texttt{true} (or delete the variable).
+
+More information can be found online\footnote{\scriptsize{\url{https://doc.qt.io/qt-6/qloggingcategory.html}, \url{https://doc.qt.io/qt-6/debug.html}}}.
+
+
 \section{GUI Customizations}
 
 Some users have difficulties to read Stellarium's rather dark user
