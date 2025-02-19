@@ -135,7 +135,9 @@ ENDMACRO(GETTEXT_CREATE_TRANSLATIONS )
 
 
 ADD_SUBDIRECTORY(stellarium) 
+ADD_SUBDIRECTORY(stellarium-sky)
 ADD_SUBDIRECTORY(stellarium-skycultures) 
+ADD_SUBDIRECTORY(stellarium-skycultures-descriptions)
 ADD_SUBDIRECTORY(stellarium-planetary-features) 
 IF(ENABLE_SCRIPTING)
     ADD_SUBDIRECTORY(stellarium-scripts) 

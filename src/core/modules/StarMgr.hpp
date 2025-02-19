@@ -29,6 +29,7 @@
 
 class StelObject;
 class StelToneReproducer;
+class StelSkyCulture;
 class StelProjector;
 class StelPainter;
 class QSettings;
@@ -410,8 +411,7 @@ private slots:
 
 	//! Called when the sky culture is updated.
 	//! Loads common and scientific names of stars for a given sky culture.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	void updateSkyCulture(const QString& skyCultureDir);
+	void updateSkyCulture(const StelSkyCulture& skyCulture);
 
 	//! increase artificial cutoff magnitude slightly (can be linked to an action/hotkey)
 	void increaseStarsMagnitudeLimit();
@@ -433,11 +433,22 @@ private:
 
 	void copyDefaultConfigFile();
 
+	struct CommonNames
+	{
+		QHash<int, QString> byHIP;
+		QMap<QString, int> hipByName;
+	};
 	//! Loads common names for stars from a file.
 	//! Called when the SkyCulture is updated.
 	//! @param the path to a file containing the common names for bright stars.
 	//! @note Stellarium doesn't support sky cultures made prior version 0.10.6 now!
-	int loadCommonNames(const QString& commonNameFile);
+	CommonNames loadCommonNames(const QString& commonNameFile) const;
+
+	//! Load culture-specific names for stars from JSON data
+	void loadCultureSpecificNames(const QJsonObject& data, const QMap<QString, int>& commonNamesIndexToSearchWhileLoading);
+	void loadCultureSpecificNameForHIP(const QJsonArray& data, int HIP);
+	void loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName,
+	                                           const QMap<QString, int>& commonNamesIndexToSearchWhileLoading);
 
 	//! Loads scientific names for stars from a file.
 	//! Called when the SkyCulture is updated.

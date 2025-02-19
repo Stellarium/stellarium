@@ -1,13 +1,6 @@
+get_filename_component(skyculturePath "${CMAKE_CURRENT_SOURCE_DIR}" REALPATH)
+get_filename_component(skyculture ${skyculturePath} NAME)
 
-########### install files ###############
-
-# install info.ini
-INSTALL(FILES info.ini DESTINATION ${SDATALOC}/skycultures/arabic_lunar_mansions )
-
-# install constellations data, native names data, artwork and descriptions
-INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/arabic_lunar_mansions
-	FILES_MATCHING PATTERN "*.fab" 
-	PATTERN "description.*.utf8"
-	PATTERN "*.png"
-	PATTERN "*.dat"
-	PATTERN "CMakeFiles" EXCLUDE )
+install(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/${skyculture}
+        FILES_MATCHING PATTERN "*"
+        PATTERN "CMakeLists.txt" EXCLUDE)

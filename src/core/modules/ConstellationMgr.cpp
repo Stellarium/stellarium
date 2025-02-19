@@ -86,7 +86,6 @@ void ConstellationMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	lastLoadedSkyCulture = "dummy";
 	setFontSize(conf->value("viewing/constellation_font_size", 15).toInt());
 	setFlagLines(conf->value("viewing/flag_constellation_drawing", false).toBool());
 	setFlagLabels(conf->value("viewing/flag_constellation_name", false).toBool());
@@ -121,7 +120,7 @@ void ConstellationMgr::init()
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &ConstellationMgr::updateSkyCulture);
+	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &ConstellationMgr::updateSkyCulture);
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Constellation_Lines", displayGroup, N_("Constellation lines"), "linesDisplayed", "C");
@@ -150,64 +149,23 @@ void ConstellationMgr::reloadSkyCulture()
 	StelApp::getInstance().getSkyCultureMgr().reloadSkyCulture();
 }
 
-void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
+void ConstellationMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
-	// Find constellation art.  If this doesn't exist, warn, but continue using ""
-	// the loadLinesAndArt function knows how to handle this (just loads lines).
-	QString conArtFile = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationsart.fab");
-	if (conArtFile.isEmpty())
-	{
-		qDebug() << "No constellationsart.fab file found for sky culture dir" << QDir::toNativeSeparators(skyCultureDir);
-	}
-
 	// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
 	deselectConstellations();
+	loadLinesNamesAndArt(skyCulture.constellations, skyCulture,
+	                     skyCulture.langsUseNativeNames.contains("en"));
 
-	QString fic = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationship.fab");
-	if (fic.isEmpty())
-		qWarning() << "ERROR loading constellation lines and art from file: " << fic;
-	else
-		loadLinesAndArt(fic, conArtFile, skyCultureDir);
-
-	// load constellation names
-	fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellation_names.eng.fab");
-	if (fic.isEmpty())
-		qWarning() << "ERROR loading constellation names from file: " << fic;
-	else
-		loadNames(fic);
-
-	// load seasonal rules
-	loadSeasonalRules(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/seasonal_rules.fab"));
+	constellationsEnglishNames.clear();
+	for (const auto*const cons : constellations)
+	{
+		constellationsEnglishNames.push_back(cons->englishName);
+	}
 
 	// Translate constellation names for the new sky culture
 	updateI18n();
 
-	// load constellation boundaries
-	StelApp *app = &StelApp::getInstance();
-	const auto idx = app->getSkyCultureMgr().getCurrentSkyCultureBoundariesType();
-	if (idx != StelSkyCulture::BoundariesType::None)
-	{
-		// OK, the current sky culture has boundaries!
-		if (idx == StelSkyCulture::BoundariesType::Own)
-		{
-			// boundaries = own
-			fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellation_boundaries.dat");
-			if (fic.isEmpty()) // Check old file name (backward compatibility)
-				fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
-		}
-		else
-		{
-			// boundaries = generic
-			fic = StelFileMgr::findFile("data/constellation_boundaries.dat");
-		}
-
-		if (fic.isEmpty())
-			qWarning() << "ERROR loading constellation boundaries file: " << fic;
-		else
-			loadBoundaries(fic);
-	}
-
-	lastLoadedSkyCulture = skyCultureDir;
+	loadBoundaries(skyCulture.boundaries, skyCulture.boundariesEpoch);
 
 	if (getFlagCheckLoadingData())
 	{
@@ -473,63 +431,136 @@ void ConstellationMgr::setConstellationBoundariesThickness(const int thickness)
 	}
 }
 
-void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &artfileName, const QString& cultureName)
+void ConstellationMgr::loadLinesNamesAndArt(const QJsonArray &constellationsData, const StelSkyCulture &culture, const bool preferNativeNames)
 {
-	QFile in(fileName);
-	if (!in.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-		qWarning() << "Can't open constellation data file" << QDir::toNativeSeparators(fileName)  << "for culture" << cultureName;
-		Q_ASSERT(0);
-	}
-
-	int totalRecords=0;
-	QString record;
-	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$"); // pure comment lines or empty lines
-	while (!in.atEnd())
-	{
-		record = QString::fromUtf8(in.readLine());
-		if (!commentRx.match(record).hasMatch())
-			totalRecords++;
-	}
-	in.seek(0);
-
-	// delete existing data, if any
-	for (auto* constellation : constellations)
-		delete constellation;
-
 	constellations.clear();
-	Constellation *cons = Q_NULLPTR;
+	Constellation::seasonalRuleEnabled = false;
 
-	// read the file of line patterns, adding a record per non-comment line
-	int currentLineNumber = 0;	// line in file
-	int readOk = 0;			// count of records processed OK
-	while (!in.atEnd())
+	int readOk = 0;
+	for (const auto& constellationData : constellationsData)
 	{
-		record = QString::fromUtf8(in.readLine());
-		currentLineNumber++;
-		if (commentRx.match(record).hasMatch())
-			continue;
-
-		cons = new Constellation;
-		if(cons->read(record, hipStarMgr))
+		Constellation*const cons = new Constellation;
+		const auto consObj = constellationData.toObject();
+		if (!cons->read(consObj, hipStarMgr, preferNativeNames))
 		{
-			cons->artOpacity = artIntensity;
-			cons->artFader.setDuration(static_cast<int>(artFadeDuration * 1000.f));
-			cons->setFlagArt(artDisplayed);
-			cons->setFlagBoundaries(boundariesDisplayed);
-			cons->setFlagLines(linesDisplayed);
-			cons->setFlagLabels(namesDisplayed);
-			constellations.push_back(cons);
-			++readOk;
-		}
-		else
-		{
-			qWarning() << "ERROR reading constellation lines record at line " << currentLineNumber << "for culture" << cultureName;
 			delete cons;
+			continue;
 		}
+		++readOk;
+		constellations.push_back(cons);
+
+		cons->artOpacity = artIntensity;
+		cons->artFader.setDuration(static_cast<int>(artFadeDuration * 1000.f));
+		cons->setFlagArt(artDisplayed);
+		cons->setFlagBoundaries(boundariesDisplayed);
+		cons->setFlagLines(linesDisplayed);
+		cons->setFlagLabels(namesDisplayed);
+
+		// Now load constellation art
+
+		const auto imgVal = consObj["image"];
+		if (imgVal.isUndefined())
+			continue;
+		const auto imgData = imgVal.toObject();
+		const auto anchors = imgData["anchors"].toArray();
+		if (anchors.size() < 3)
+		{
+			qWarning().nospace() << "Bad number of anchors (" << anchors.size() << ") for image in constellation "
+			                     << consObj["id"].toString();
+			continue;
+		}
+		const auto anchor1 = anchors[0].toObject();
+		const auto anchor2 = anchors[1].toObject();
+		const auto anchor3 = anchors[2].toObject();
+		const auto xy1 = anchor1["pos"].toArray();
+		const auto xy2 = anchor2["pos"].toArray();
+		const auto xy3 = anchor3["pos"].toArray();
+
+		const int x1 = xy1[0].toInt();
+		const int y1 = xy1[1].toInt();
+		const int x2 = xy2[0].toInt();
+		const int y2 = xy2[1].toInt();
+		const int x3 = xy3[0].toInt();
+		const int y3 = xy3[1].toInt();
+		const int hp1 = StelUtils::getLongLong(anchor1["hip"]);
+		const int hp2 = StelUtils::getLongLong(anchor2["hip"]);
+		const int hp3 = StelUtils::getLongLong(anchor3["hip"]);
+
+		const auto texfile = imgData["file"].toString();
+
+		auto texturePath = culture.path+"/"+texfile;
+		if (!QFileInfo(texturePath).exists())
+		{
+			qWarning() << "ERROR: could not find texture" << QDir::toNativeSeparators(texfile);
+			texturePath.clear();
+		}
+
+		cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath, StelTexture::StelTextureParams(true));
+
+		const auto sizeData = imgData["size"].toArray();
+		if (sizeData.size() != 2)
+		{
+			qWarning().nospace() << "Bad length of \"size\" array for image in constellation "
+			                     << consObj["id"].toString();
+			continue;
+		}
+		const int texSizeX = sizeData[0].toInt(), texSizeY = sizeData[1].toInt();
+
+		StelCore* core = StelApp::getInstance().getCore();
+		const Vec3d s1 = hipStarMgr->searchHP(static_cast<int>(hp1))->getJ2000EquatorialPos(core);
+		const Vec3d s2 = hipStarMgr->searchHP(static_cast<int>(hp2))->getJ2000EquatorialPos(core);
+		const Vec3d s3 = hipStarMgr->searchHP(static_cast<int>(hp3))->getJ2000EquatorialPos(core);
+
+		// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
+		// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate space
+		// We need 3 stars and the 4th point is deduced from the others to get a normal base
+		// X = B inv(A)
+		Vec3d s4 = s1 + ((s2 - s1) ^ (s3 - s1));
+		Mat4d B(s1[0], s1[1], s1[2], 1, s2[0], s2[1], s2[2], 1, s3[0], s3[1], s3[2], 1, s4[0], s4[1], s4[2], 1);
+		Mat4d A(x1, texSizeY - static_cast<int>(y1), 0., 1., x2, texSizeY - static_cast<int>(y2), 0., 1., x3, texSizeY - static_cast<int>(y3), 0., 1., x1, texSizeY - static_cast<int>(y1), texSizeX, 1.);
+		Mat4d X = B * A.inverse();
+
+		// Tessellate on the plane assuming a tangential projection for the image
+		static const int nbPoints=5;
+		QVector<Vec2f> texCoords;
+		texCoords.reserve(nbPoints*nbPoints*6);
+		for (int j=0;j<nbPoints;++j)
+		{
+			for (int i=0;i<nbPoints;++i)
+			{
+				texCoords << Vec2f((static_cast<float>(i))/nbPoints, (static_cast<float>(j))/nbPoints);
+				texCoords << Vec2f((static_cast<float>(i)+1.f)/nbPoints, (static_cast<float>(j))/nbPoints);
+				texCoords << Vec2f((static_cast<float>(i))/nbPoints, (static_cast<float>(j)+1.f)/nbPoints);
+				texCoords << Vec2f((static_cast<float>(i)+1.f)/nbPoints, (static_cast<float>(j))/nbPoints);
+				texCoords << Vec2f((static_cast<float>(i)+1.f)/nbPoints, (static_cast<float>(j)+1.f)/nbPoints);
+				texCoords << Vec2f((static_cast<float>(i))/nbPoints, (static_cast<float>(j)+1.f)/nbPoints);
+			}
+		}
+
+		QVector<Vec3d> contour;
+		contour.reserve(texCoords.size());
+		for (const auto& v : qAsConst(texCoords))
+		{
+			Vec3d vertex = X * Vec3d(static_cast<double>(v[0]) * texSizeX, static_cast<double>(v[1]) * texSizeY, 0.);
+			// Originally the projected texture plane remained as tangential plane.
+			// The vertices should however be reduced to the sphere for correct aberration:
+			vertex.normalize();
+			contour << vertex;
+		}
+
+		cons->artPolygon.vertex=contour;
+		cons->artPolygon.texCoords=texCoords;
+		cons->artPolygon.primitiveType=StelVertexArray::Triangles;
+
+		Vec3d tmp(X * Vec3d(0.5*texSizeX, 0.5*texSizeY, 0.));
+		tmp.normalize();
+		Vec3d tmp2(X * Vec3d(0., 0., 0.));
+		tmp2.normalize();
+		cons->boundingCap.n=tmp;
+		cons->boundingCap.d=tmp*tmp2;
 	}
-	in.close();
-	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation records successfully for culture" << cultureName;
+
+	qDebug() << "Loaded" << readOk << "/" << constellations.size() << "constellation records successfully for culture" << culture.id;
 
 	// Set current states
 	setFlagArt(artDisplayed);
@@ -537,142 +568,6 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	setFlagLabels(namesDisplayed);
 	setFlagBoundaries(boundariesDisplayed);
 
-	// It's possible to have no art - just constellations
-	if (artfileName.isNull() || artfileName.isEmpty())
-		return;
-	QFile fic(artfileName);
-	if (!fic.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-		qWarning() << "Can't open constellation art file" << QDir::toNativeSeparators(fileName)  << "for culture" << cultureName;
-		return;
-	}
-
-	totalRecords=0;
-	while (!fic.atEnd())
-	{
-		record = QString::fromUtf8(fic.readLine());
-		if (!commentRx.match(record).hasMatch())
-			totalRecords++;
-	}
-	fic.seek(0);
-
-	// Read the constellation art file with the following format :
-	// ShortName texture_file x1 y1 hp1 x2 y2 hp2
-	// Where :
-	// shortname is the international short name (i.e "Lep" for Lepus)
-	// texture_file is the graphic file of the art texture
-	// x1 y1 are the x and y texture coordinates in pixels of the star of hipparcos number hp1
-	// x2 y2 are the x and y texture coordinates in pixels of the star of hipparcos number hp2
-	// The coordinate are taken with (0,0) at the top left corner of the image file
-	QString shortname;
-	QString texfile;
-	unsigned int x1, y1, x2, y2, x3, y3, hp1, hp2, hp3;
-
-	currentLineNumber = 0;	// line in file
-	readOk = 0;		// count of records processed OK
-
-	while (!fic.atEnd())
-	{
-		++currentLineNumber;
-		record = QString::fromUtf8(fic.readLine());
-		if (commentRx.match(record).hasMatch())
-			continue;
-
-		// prevent leading zeros on numbers from being interpreted as octal numbers
-		record.replace(" 0", " ");
-		QTextStream rStr(&record);
-		rStr >> shortname >> texfile >> x1 >> y1 >> hp1 >> x2 >> y2 >> hp2 >> x3 >> y3 >> hp3;
-		if (rStr.status()!=QTextStream::Ok)
-		{
-			qWarning() << "ERROR parsing constellation art record at line" << currentLineNumber << "of art file for culture" << cultureName;
-			continue;
-		}
-
-		// Draw loading bar
-// 		lb.SetMessage(q_("Loading Constellation Art: %1/%2").arg(currentLineNumber).arg(totalRecords));
-// 		lb.Draw((float)(currentLineNumber)/totalRecords);
-
-		cons = Q_NULLPTR;
-		cons = findFromAbbreviation(shortname);
-		if (!cons)
-		{
-			qWarning() << "ERROR in constellation art file at line" << currentLineNumber << "for culture" << cultureName
-					   << "constellation" << shortname << "unknown";
-		}
-		else
-		{
-			QString texturePath = StelFileMgr::findFile("skycultures/"+cultureName+"/"+texfile);
-			if (texturePath.isEmpty())
-			{
-				qWarning() << "ERROR: could not find texture, " << QDir::toNativeSeparators(texfile);
-			}
-
-			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath, StelTexture::StelTextureParams(true));
-
-			int texSizeX = 0, texSizeY = 0;
-			if (cons->artTexture==Q_NULLPTR || !cons->artTexture->getDimensions(texSizeX, texSizeY))
-			{
-				qWarning() << "Texture dimension not available";
-			}
-
-			StelCore* core = StelApp::getInstance().getCore();
-			const Vec3d s1 = hipStarMgr->searchHP(static_cast<int>(hp1))->getJ2000EquatorialPos(core);
-			const Vec3d s2 = hipStarMgr->searchHP(static_cast<int>(hp2))->getJ2000EquatorialPos(core);
-			const Vec3d s3 = hipStarMgr->searchHP(static_cast<int>(hp3))->getJ2000EquatorialPos(core);
-
-			// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
-			// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate space
-			// We need 3 stars and the 4th point is deduced from the others to get a normal base
-			// X = B inv(A)
-			Vec3d s4 = s1 + ((s2 - s1) ^ (s3 - s1));
-			Mat4d B(s1[0], s1[1], s1[2], 1, s2[0], s2[1], s2[2], 1, s3[0], s3[1], s3[2], 1, s4[0], s4[1], s4[2], 1);
-			Mat4d A(x1, texSizeY - static_cast<int>(y1), 0., 1., x2, texSizeY - static_cast<int>(y2), 0., 1., x3, texSizeY - static_cast<int>(y3), 0., 1., x1, texSizeY - static_cast<int>(y1), texSizeX, 1.);
-			Mat4d X = B * A.inverse();
-
-			// Tessellate on the plane assuming a tangential projection for the image
-			static const int nbPoints=5;
-			QVector<Vec2f> texCoords;
-			texCoords.reserve(nbPoints*nbPoints*6);
-			for (int j=0;j<nbPoints;++j)
-			{
-				for (int i=0;i<nbPoints;++i)
-				{
-					texCoords << Vec2f((static_cast<float>(i))/nbPoints, (static_cast<float>(j))/nbPoints);
-					texCoords << Vec2f((static_cast<float>(i)+1.f)/nbPoints, (static_cast<float>(j))/nbPoints);
-					texCoords << Vec2f((static_cast<float>(i))/nbPoints, (static_cast<float>(j)+1.f)/nbPoints);
-					texCoords << Vec2f((static_cast<float>(i)+1.f)/nbPoints, (static_cast<float>(j))/nbPoints);
-					texCoords << Vec2f((static_cast<float>(i)+1.f)/nbPoints, (static_cast<float>(j)+1.f)/nbPoints);
-					texCoords << Vec2f((static_cast<float>(i))/nbPoints, (static_cast<float>(j)+1.f)/nbPoints);
-				}
-			}
-
-			QVector<Vec3d> contour;
-			contour.reserve(texCoords.size());
-			for (const auto& v : std::as_const(texCoords))
-			{
-				Vec3d vertex = X * Vec3d(static_cast<double>(v[0]) * texSizeX, static_cast<double>(v[1]) * texSizeY, 0.);
-				// Originally the projected texture plane remained as tangential plane.
-				// The vertices should however be reduced to the sphere for correct aberration:
-				vertex.normalize();
-				contour << vertex;
-			}
-
-			cons->artPolygon.vertex=contour;
-			cons->artPolygon.texCoords=texCoords;
-			cons->artPolygon.primitiveType=StelVertexArray::Triangles;
-
-			Vec3d tmp(X * Vec3d(0.5*texSizeX, 0.5*texSizeY, 0.));
-			tmp.normalize();
-			Vec3d tmp2(X * Vec3d(0., 0., 0.));
-			tmp2.normalize();
-			cons->boundingCap.n=tmp;
-			cons->boundingCap.d=tmp*tmp2;
-			++readOk;
-		}
-	}
-
-	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation art records successfully for culture" << cultureName;
-	fic.close();
 }
 
 void ConstellationMgr::draw(StelCore* core)
@@ -781,187 +676,20 @@ QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d&, double, const St
 	return QList<StelObjectP>();
 }
 
-void ConstellationMgr::loadNames(const QString& namesFile)
-{
-	// Constellation not loaded yet
-	if (constellations.empty()) return;
-
-	// clear previous names
-	for (auto* constellation : constellations)
-	{
-		constellation->englishName.clear();
-	}
-
-	// Open file
-	QFile commonNameFile(namesFile);
-	if (!commonNameFile.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-		qDebug() << "Cannot open file" << QDir::toNativeSeparators(namesFile);
-		return;
-	}
-
-	constellationsEnglishNames.clear();
-
-	// Now parse the file
-	// lines to ignore which start with a # or are empty
-	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
-
-	// lines which look like records - we use the RE to extract the fields
-	// which will be available in recRx.capturedTexts()
-	// abbreviation is allowed to start with a dot to mark as "hidden".
-	static const QRegularExpression recRx("^\\s*(\\.?\\S+)\\s+\"(.*)\"\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
-	static const QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
-
-	// keep track of how many records we processed.
-	int totalRecords=0;
-	int readOk=0;
-	int lineNumber=0;
-	while (!commonNameFile.atEnd())
-	{
-		QString record = QString::fromUtf8(commonNameFile.readLine());
-		lineNumber++;
-
-		// Skip comments
-		if (commentRx.match(record).hasMatch())
-			continue;
-
-		totalRecords++;
-
-		QRegularExpressionMatch recMatch=recRx.match(record);
-		if (!recMatch.hasMatch())
-		{
-			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in constellation names file" << QDir::toNativeSeparators(namesFile) << ":" << record;
-		}
-		else
-		{
-			QString shortName = recMatch.captured(1);
-			Constellation *aster = findFromAbbreviation(shortName);
-			// If the constellation exists, set the English name
-			if (aster != Q_NULLPTR)
-			{
-				aster->nativeName = recMatch.captured(2);
-				QString ctxt = recMatch.captured(3);
-				QRegularExpressionMatch ctxMatch=ctxRx.match(ctxt);
-				if (ctxMatch.hasMatch())
-				{
-					aster->englishName = ctxMatch.captured(1);
-					aster->context = ctxMatch.captured(2);
-				}
-				else
-				{
-					aster->englishName = ctxt;
-					aster->context = "";
-				}
-				readOk++;
-				// Some skycultures already have empty nativeNames. Fill those.
-				if (aster->nativeName.isEmpty())
-					aster->nativeName=aster->englishName;
-
-				constellationsEnglishNames << aster->englishName;
-			}
-			else
-			{
-				qWarning() << "WARNING - constellation abbreviation" << shortName << "not found when loading constellation names";
-			}
-		}
-	}
-	commonNameFile.close();
-	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation names";
-}
-
 QStringList ConstellationMgr::getConstellationsEnglishNames()
 {
 	return  constellationsEnglishNames;
 }
 
-void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
-{
-	// Constellation not loaded yet
-	if (constellations.empty()) return;
-
-	bool flag = true;
-	if (rulesFile.isEmpty())
-		flag = false;
-
-	// clear previous rules
-	for (auto* constellation : constellations)
-	{
-		constellation->beginSeason = 1;
-		constellation->endSeason = 12;
-		constellation->seasonalRuleEnabled = flag;
-	}
-
-	// Current starlore didn't support the seasonal rules
-	if (!flag)
-		return;
-
-	// Open file
-	QFile seasonalRulesFile(rulesFile);
-	if (!seasonalRulesFile.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-		qDebug() << "Cannot open file" << QDir::toNativeSeparators(rulesFile);
-		return;
-	}
-
-	// Now parse the file
-	// lines to ignore which start with a # or are empty
-	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
-
-	// lines which look like records - we use the RE to extract the fields
-	// which will be available in recRx.capturedTexts()
-	static const QRegularExpression recRx("^\\s*(\\w+)\\s+(\\w+)\\s+(\\w+)\\n");
-
-	// Some more variables to use in the parsing
-	Constellation *aster;
-	QString record, shortName;
-
-	// keep track of how many records we processed.
-	int totalRecords=0;
-	int readOk=0;
-	int lineNumber=0;
-	while (!seasonalRulesFile.atEnd())
-	{
-		record = QString::fromUtf8(seasonalRulesFile.readLine());
-		lineNumber++;
-
-		// Skip comments
-		if (commentRx.match(record).hasMatch())
-			continue;
-
-		totalRecords++;
-
-		QRegularExpressionMatch recMatch=recRx.match(record);
-		if (!recMatch.hasMatch())
-		{
-			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in seasonal rules file" << QDir::toNativeSeparators(rulesFile);
-		}
-		else
-		{
-			shortName = recMatch.captured(1);
-			aster = findFromAbbreviation(shortName);
-			// If the constellation exists, set the English name
-			if (aster != Q_NULLPTR)
-			{
-				aster->beginSeason = recMatch.captured(2).toInt();
-				aster->endSeason = recMatch.captured(3).toInt();
-				readOk++;
-			}
-			else
-			{
-				qWarning() << "WARNING - constellation abbreviation" << shortName << "not found when loading seasonal rules for constellations";
-			}
-		}
-	}
-	seasonalRulesFile.close();
-	qDebug() << "Loaded" << readOk << "/" << totalRecords << "seasonal rules";
-}
-
 void ConstellationMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+
 	for (auto* constellation : constellations)
 	{
-		constellation->nameI18 = trans.qtranslate(constellation->englishName, constellation->context);
+		constellation->nameI18 = trans.tryQtranslate(constellation->englishName, "constellation");
+		if (constellation->nameI18.isEmpty())
+			constellation->nameI18 = qc_(constellation->englishName, "constellation");
 	}
 }
 
@@ -1335,10 +1063,8 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 	}
 }
 
-bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
+bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QString& boundariesEpoch)
 {
-	Constellation *cons = Q_NULLPTR;
-
 	// delete existing boundaries if any exist
 	for (auto* segment : allBoundarySegments)
 	{
@@ -1348,75 +1074,75 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 
 	qDebug() << "Loading constellation boundary data ... ";
 
-	// Modified boundary file by Torsten Bronger with permission
-	// http://pp3.sourceforge.net
-	QFile dataFile(boundaryFile);
-	if (!dataFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	for (int n = 0; n < boundaryData.size(); ++n)
 	{
-		qWarning() << "Boundary file " << QDir::toNativeSeparators(boundaryFile) << " not found";
-		return false;
-	}
-
-	double DE, RA;
-	Vec3d XYZ;
-	unsigned numc;
-	std::vector<Vec3d> *points = Q_NULLPTR;
-	QString consname, data = "";
-	unsigned int i = 0;
-
-	// Added support of comments for constellation_boundaries.dat file
-	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
-	while (!dataFile.atEnd())
-	{
-		// Read the line
-		QString record = QString::fromUtf8(dataFile.readLine());
-
-		// Skip comments
-		if (commentRx.match(record).hasMatch())
-			continue;
-
-		// Append the data
-		data.append(record);
-	}
-
-	// Read and parse the data without comments
-	QTextStream istr(&data);
-	while (!istr.atEnd())
-	{
-		unsigned num = 0;
-		istr >> num;
-		if(num == 0)
-			continue; // empty line
-
-		points = new std::vector<Vec3d>;
-
-		for (unsigned int j=0;j<num;j++)
+		const auto line = boundaryData[n].toString().toStdString();
+		char dec1_sign, dec2_sign;
+		int ra1_h, ra1_m, ra1_s, dec1_d, dec1_m, dec1_s;
+		int ra2_h, ra2_m, ra2_s, dec2_d, dec2_m, dec2_s;
+		char constellationNames[2][8];
+		if (sscanf(line.c_str(),
+		           "%*s %*s"
+		           "%d:%d:%d %c%d:%d:%d "
+		           "%d:%d:%d %c%d:%d:%d "
+		           "%7s %7s",
+		           &ra1_h, &ra1_m, &ra1_s,
+		           &dec1_sign, &dec1_d, &dec1_m, &dec1_s,
+		           &ra2_h, &ra2_m, &ra2_s,
+		           &dec2_sign, &dec2_d, &dec2_m, &dec2_s,
+		           constellationNames[0], constellationNames[1]) != 16)
 		{
-			istr >> RA >> DE;
-
-			RA*=M_PI/12.;     // Convert from hours to rad
-			DE*=M_PI/180.;    // Convert from deg to rad
-
-			// Calc the Cartesian coord with RA and DE
-			StelUtils::spheToRect(RA,DE,XYZ);
-			points->push_back(XYZ);
+			qWarning().nospace() << "Failed to parse skyculture boundary line: \"" << line.c_str() << "\"";
+			continue;
 		}
 
-		// this list is for the de-allocation
-		allBoundarySegments.push_back(points);
+		constexpr double timeSecToRadians = M_PI / (12 * 3600);
+		double RA1 = (60. * (60. * ra1_h + ra1_m) + ra1_s) * timeSecToRadians;
+		double RA2 = (60. * (60. * ra2_h + ra2_m) + ra2_s) * timeSecToRadians;
+		constexpr double angleSecToRad = M_PI / (180 * 3600);
+		const double DE1 = (60. * (60. * dec1_d + dec1_m) + dec1_s) * (dec1_sign=='-' ? -1 : 1) * angleSecToRad;
+		const double DE2 = (60. * (60. * dec2_d + dec2_m) + dec2_s) * (dec2_sign=='-' ? -1 : 1) * angleSecToRad;
 
-		istr >> numc;
-		// there are 2 constellations per boundary
+		bool b1875 = false;
+		if (boundariesEpoch.toUpper() == "B1875")
+			b1875 = true;
+		else if (boundariesEpoch.toUpper() != "J2000")
+			qWarning() << "Unexpected epoch for boundaries:" << boundariesEpoch;
 
-		for (unsigned int j=0;j<numc;j++)
+		const auto& core = *StelApp::getInstance().getCore();
+
+		const int numPoints = 2 + std::ceil(std::abs(RA1 - RA2) / (M_PI / 64));
+		Vec3d xyz1;
+		StelUtils::spheToRect(RA1,DE1,xyz1);
+		Vec3d xyz2;
+		StelUtils::spheToRect(RA2,DE2,xyz2);
+
+		const auto points = new std::vector<Vec3d>;
+
+		// Make sure the interpolation works without problems when jumping over 2pi
+		if (RA2 - RA1 > M_PI) RA2 -= 2 * M_PI;
+		if (RA1 - RA2 > M_PI) RA1 -= 2 * M_PI;
+
+		for (double n = 0; n < numPoints; ++n)
 		{
-			istr >> consname;
-			// not used?
-			if (consname == "SER1" || consname == "SER2") consname = "SER";
+			const double t = n / (numPoints - 1);
+			const double RA = RA1 + t * (RA2 - RA1);
+			const double DE = DE1 + t * (DE2 - DE1);
+			Vec3d xyz;
+			StelUtils::spheToRect(RA,DE,xyz);
+			if (b1875) xyz = core.j1875ToJ2000(xyz);
+			points->push_back(xyz);
+		}
 
-			cons = findFromAbbreviation(consname);
+		Constellation *cons = Q_NULLPTR;
+		for (QString consName : constellationNames)
+		{
+			// not used?
+			if (consName == "SER1" || consName == "SER2") consName = "SER";
+
+			cons = findFromAbbreviation(consName);
 			if (!cons)
-				qWarning() << "ERROR while processing boundary file - cannot find constellation: " << consname;
+				qWarning() << "ERROR while processing boundary file - cannot find constellation:" << consName;
 			else
 				cons->isolatedBoundarySegments.push_back(points);
 		}
@@ -1424,17 +1150,15 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 		if (cons)
 		{
 			cons->sharedBoundarySegments.push_back(points);
-			points=Q_NULLPTR; // Avoid Coverity resource leak warning. (CID48925).
+			// this list is for the de-allocation
+			allBoundarySegments.push_back(points);
 		}
-		i++;
+		else
+		{
+			delete points;
+		}
 	}
-	dataFile.close();
-	qDebug() << "Loaded" << i << "constellation boundary segments";
-	if (points)
-	{
-		delete points; // See if Coverity complains here? (CID48925).
-		points=Q_NULLPTR;
-	}
+	qDebug() << "Loaded" << boundaryData.size() << "constellation boundary segments";
 
 	return true;
 }

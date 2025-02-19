@@ -1,13 +1,6 @@
+get_filename_component(skyculturePath "${CMAKE_CURRENT_SOURCE_DIR}" REALPATH)
+get_filename_component(skyculture ${skyculturePath} NAME)
 
-########### install files ###############
-
-# install info.ini and star_names.fab
-INSTALL(FILES info.ini DESTINATION ${SDATALOC}/skycultures/chinese_medieval )
-
-# install constellations data, artwork and descriptions
-INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/chinese_medieval
-	FILES_MATCHING PATTERN "constellation*" 
-	PATTERN "*.png"
-	PATTERN "*.fab" 
-	PATTERN "description.*.utf8" 
-	PATTERN "CMakeFiles" EXCLUDE )
+install(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/${skyculture}
+        FILES_MATCHING PATTERN "*"
+        PATTERN "CMakeLists.txt" EXCLUDE)

@@ -1,0 +1,709 @@
+{
+  "id": "babylonian_mulapin",
+  "region": "Western Asia",
+  "classification": ["historical"],
+  "fallback_to_international_names": false,
+  "thumbnail": "???",
+  "thumbnail_bscale": 2,
+  "highlight": "???",
+  "asterisms": [
+    {
+      "id": "AST babylonian_mulapin 001",
+      "is_ray_helper": true,
+      "lines": [[37279, 42319]]
+    }
+  ],
+  "constellations": [
+    {
+      "id": "CON babylonian_mulapin 001",
+      "lines": [[746, 3179, 4427, 6686, 8886], [2599, 4151, 5542], [3951, 4151], [8886, 11569]],
+      "image": {
+        "file": "illustrations/Plough_bg.png",
+        "size": [1024, 522],
+        "anchors": [
+          {"pos": [624, 287], "hip": 4427},
+          {"pos": [812, 306], "hip": 3179},
+          {"pos": [841, 103], "hip": 746}
+        ]
+      },
+      "common_name": {"english": "Plough", "native": "Epinnu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 002",
+      "lines": [[4427, 4427]],
+      "common_name": {"english": ""}
+    },
+    {
+      "id": "CON babylonian_mulapin 003",
+      "lines": [[18246, 17448], [18246, 18614, 18532, 17358, 15863, 14328, 13268, 14382], [15863, 12777, 11313, 11784], [13254, 14354, 14576, 17358], [11220, 12777], [14382, 14328]],
+      "image": {
+        "file": "illustrations/OldMan_bg.png",
+        "size": [522, 663],
+        "anchors": [
+          {"pos": [307, 215], "hip": 15863},
+          {"pos": [35, 614], "hip": 18246},
+          {"pos": [328, 456], "hip": 14576}
+        ]
+      },
+      "common_name": {"english": "Old Man", "native": "Shibu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 004",
+      "lines": [[28380, 28360, 24608]],
+      "image": {
+        "file": "illustrations/Crook_bg.png",
+        "size": [336, 370],
+        "anchors": [
+          {"pos": [301, 45], "hip": 24608},
+          {"pos": [70, 334], "hip": 28380},
+          {"pos": [86, 107], "hip": 28360}
+        ]
+      },
+      "common_name": {"english": "Crook", "native": "Gamlu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 005",
+      "lines": [[37826, 35550], [32246, 36850, 37826]],
+      "image": {
+        "file": "illustrations/GreatTwins_bg.jpg",
+        "size": [687, 1024],
+        "anchors": [
+          {"pos": [24, 621], "hip": 35550},
+          {"pos": [400, 273], "hip": 36850},
+          {"pos": [355, 988], "hip": 32246}
+        ]
+      },
+      "common_name": {"english": "Great Twins", "native": "Tu'amu rabutu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 006",
+      "lines": [[34088, 31681], [34088, 35350, 32362]],
+      "image": {
+        "file": "illustrations/LittleTwins_bg.png",
+        "size": [551, 1024],
+        "anchors": [
+          {"pos": [136, 94], "hip": 35350},
+          {"pos": [412, 96], "hip": 34088},
+          {"pos": [478, 736], "hip": 31681}
+        ]
+      },
+      "common_name": {"english": "Little Twins", "native": "Tu'amu sekhrutu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 007",
+      "lines": [[41822, 42911, 42806, 41909, 41822], [40526, 41822], [42911, 44066], [42806, 43103], [41909, 37740]],
+      "image": {
+        "file": "illustrations/Crab_bg.png",
+        "size": [605, 673],
+        "anchors": [
+          {"pos": [188, 499], "hip": 44066},
+          {"pos": [405, 651], "hip": 40526},
+          {"pos": [388, 65], "hip": 43103}
+        ]
+      },
+      "common_name": {"english": "Crab", "native": "Allutu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 008",
+      "lines": [[47908, 48455, 50335, 50583, 49583, 49669, 54879, 54872, 50583], [54872, 57632], [54879, 55642], [49669, 49637, 49029], [50583, 53417, 55203, 55219], [46146, 48455], [46750, 47908], [54879, 54182], [49669, 51624]],
+      "image": {
+        "file": "illustrations/Urgulu_bg.png",
+        "size": [1024, 803],
+        "anchors": [
+          {"pos": [400, 91], "hip": 55219},
+          {"pos": [117, 430], "hip": 57632},
+          {"pos": [694, 760], "hip": 49029}
+        ]
+      },
+      "common_name": {"english": "Urgulu-demon", "native": "Urgulu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 009",
+      "lines": [[49669, 49669]],
+      "common_name": {"english": ""}
+    },
+    {
+      "id": "CON babylonian_mulapin 010",
+      "lines": [[60742, 60697, 60904], [60697, 60351], [60742, 60599, 60957, 60202], [61394, 60599, 59847], [59501, 60957, 61418]],
+      "image": {
+        "file": "illustrations/Spadix_bg.png",
+        "size": [1024, 909],
+        "anchors": [
+          {"pos": [163, 601], "hip": 61571},
+          {"pos": [642, 177], "hip": 60742},
+          {"pos": [337, 765], "hip": 60202}
+        ]
+      },
+      "common_name": {"english": "Spadix of Erua's date palm", "native": "sissinnu Eru"}
+    },
+    {
+      "id": "CON babylonian_mulapin 011",
+      "lines": [[67927, 71053, 71075, 74666, 72105, 71795], [71053, 72105], [73555, 72582], [73555, 73634]],
+      "image": {
+        "file": "illustrations/Enlil2_bg.png",
+        "size": [738, 942],
+        "anchors": [
+          {"pos": [370, 906], "hip": 67459},
+          {"pos": [36, 868], "hip": 71795},
+          {"pos": [295, 176], "hip": 73555}
+        ]
+      },
+      "common_name": {"english": "SHUPA-Enlil", "native": "SHU.PA"}
+    },
+    {
+      "id": "CON babylonian_mulapin 012",
+      "lines": [[69673, 69673]],
+      "common_name": {"english": "Abundant One", "native": "Khegalaju"}
+    },
+    {
+      "id": "CON babylonian_mulapin 013",
+      "lines": [[76127, 75695, 76267, 76952, 77512, 78159, 78493]],
+      "image": {
+        "file": "illustrations/HornCrown_bg.png",
+        "size": [303, 279],
+        "anchors": [
+          {"pos": [187, 257], "hip": 76267},
+          {"pos": [50, 194], "hip": 78159},
+          {"pos": [221, 127], "hip": 76127}
+        ]
+      },
+      "common_name": {"english": "Asterism of Dignity", "native": "kakkab balti"}
+    },
+    {
+      "id": "CON babylonian_mulapin 014",
+      "lines": [[67301, 65378, 62956, 59774, 58001, 53910, 54061]],
+      "image": {
+        "file": "illustrations/Wagon_bg.png",
+        "size": [1057, 642],
+        "anchors": [
+          {"pos": [1032, 157], "hip": 54061},
+          {"pos": [602, 440], "hip": 58001},
+          {"pos": [148, 64], "hip": 65378}
+        ]
+      },
+      "common_name": {"english": "Wagon", "native": "Ereqqu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 015",
+      "lines": [[65477, 65477]],
+      "common_name": {"english": "The Fox", "native": "Shelebu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 016",
+      "lines": [[54061, 54061]],
+      "common_name": {"english": "The Ewe", "native": "Lakhru"}
+    },
+    {
+      "id": "CON babylonian_mulapin 017",
+      "lines": [[80331, 78527, 75458, 70497, 63125]],
+      "common_name": {"english": "Hitched Yoke", "native": "MU.BU.KESH.DA"}
+    },
+    {
+      "id": "CON babylonian_mulapin 018",
+      "lines": [[11767, 85822, 82080, 77055, 79822, 75097, 72607, 77055]],
+      "common_name": {"english": "Wagon of Heaven", "native": "MAR.GID.DA AN.NA"}
+    },
+    {
+      "id": "CON babylonian_mulapin 019",
+      "lines": [[11767, 11767]],
+      "common_name": {"english": "The Heir of the Sublime Temple, the first-ranking son of Anu", "native": "Ibila-Emakh maru reshtu sha Anim"}
+    },
+    {
+      "id": "CON babylonian_mulapin 020",
+      "lines": [[93194, 92791, 91971, 92420], [91919, 91971, 91262, 91919], [93903, 92791]],
+      "image": {
+        "file": "illustrations/Gula_bg.png",
+        "size": [512, 793],
+        "anchors": [
+          {"pos": [418, 769], "hip": 88886},
+          {"pos": [399, 477], "hip": 87933},
+          {"pos": [151, 321], "hip": 91262}
+        ]
+      },
+      "common_name": {"english": "She-Goat", "native": "Enzu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 021",
+      "lines": [[80816, 81693, 81833, 83947, 84380, 83207, 82504, 80816, 80170], [84379, 83207], [86974, 84380]],
+      "image": {
+        "file": "illustrations/Hund_bg.png",
+        "size": [618, 751],
+        "anchors": [
+          {"pos": [32, 575], "hip": 86974},
+          {"pos": [595, 730], "hip": 80170},
+          {"pos": [204, 292], "hip": 84380}
+        ]
+      },
+      "common_name": {"english": "Dog", "native": "Kalbu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 022",
+      "lines": [[91262, 91262]],
+      "common_name": {"english": ""}
+    },
+    {
+      "id": "CON babylonian_mulapin 023",
+      "lines": [[94481, 94713]],
+      "common_name": {"english": "Nin-SAR u Erragal", "native": "Nin-SAR and Erragal"}
+    },
+    {
+      "id": "CON babylonian_mulapin 024",
+      "lines": [[106481, 109492], [106481, 109937, 102488, 100453, 102098, 106481], [109754, 113726, 116584], [102488, 104732], [100453, 98110, 98543, 100587], [98543, 101076]],
+      "image": {
+        "file": "illustrations/ukadua_bg.png",
+        "size": [743, 1023],
+        "anchors": [
+          {"pos": [273, 967], "hip": 116584},
+          {"pos": [81, 793], "hip": 109492},
+          {"pos": [406, 51], "hip": 98543}
+        ]
+      },
+      "common_name": {"english": "UKADUA demon", "native": "U.KA.DU.A"}
+    },
+    {
+      "id": "CON babylonian_mulapin 025",
+      "lines": [[96837, 96757, 97886, 99824, 101867, 96837]],
+      "image": {
+        "file": "illustrations/Pig_bg.png",
+        "size": [512, 336],
+        "anchors": [
+          {"pos": [406, 308], "hip": 96837},
+          {"pos": [65, 129], "hip": 101867},
+          {"pos": [182, 25], "hip": 99824}
+        ]
+      },
+      "common_name": {"english": "Pig", "native": "Shakhu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 026",
+      "lines": [[105199, 112724, 116727, 106032, 105199]],
+      "image": {
+        "file": "illustrations/Horse_bg.png",
+        "size": [282, 512],
+        "anchors": [
+          {"pos": [129, 492], "hip": 112519},
+          {"pos": [172, 32], "hip": 105199},
+          {"pos": [26, 182], "hip": 98583}
+        ]
+      },
+      "common_name": {"english": "Horse", "native": "Sisu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 027",
+      "lines": [[7607, 7513, 116631, 7607]],
+      "image": {
+        "file": "illustrations/Stag_bg.png",
+        "size": [457, 512],
+        "anchors": [
+          {"pos": [158, 141], "hip": 8068},
+          {"pos": [170, 498], "hip": 7818},
+          {"pos": [401, 493], "hip": 4903}
+        ]
+      },
+      "common_name": {"english": "Stag", "native": "Lulimu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 030",
+      "lines": [[677, 1067, 113963, 113881, 677]],
+      "image": {
+        "file": "illustrations/Field_bg.png",
+        "size": [608, 517],
+        "anchors": [
+          {"pos": [585, 483], "hip": 113963},
+          {"pos": [52, 17], "hip": 677},
+          {"pos": [554, 20], "hip": 113881}
+        ]
+      },
+      "common_name": {"english": "Field (a measure)", "native": "Iku"}
+    },
+    {
+      "id": "CON babylonian_mulapin 031",
+      "lines": [[6732, 7097, 8198, 9487, 7007, 4906, 3786], [5364, 6537, 9487, 14838], [12706, 12387, 11791, 11021, 11738, 12706], [11021, 9487]],
+      "image": {
+        "file": "illustrations/Swallow_bg.png",
+        "size": [1024, 650],
+        "anchors": [
+          {"pos": [499, 70], "hip": 7097},
+          {"pos": [904, 535], "hip": 6537},
+          {"pos": [390, 552], "hip": 12706}
+        ]
+      },
+      "common_name": {"english": "Great Swallow", "native": "Shinunutu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 032",
+      "lines": [[3693, 6193, 5586, 4436, 5447], [4436, 3881, 3231, 3092], [2912, 3693]],
+      "image": {
+        "file": "illustrations/Ishtar_bg.png",
+        "size": [590, 1009],
+        "anchors": [
+          {"pos": [109, 286], "hip": 5447},
+          {"pos": [162, 31], "hip": 3881},
+          {"pos": [378, 681], "hip": 4463}
+        ]
+      },
+      "common_name": {"english": "Anunitu (goddess)", "native": "Anunitu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 033",
+      "lines": [[8903, 9884, 8796, 10064, 13209]],
+      "image": {
+        "file": "illustrations/HiredMan_bg.png",
+        "size": [948, 1425],
+        "anchors": [
+          {"pos": [688, 4], "hip": 9640},
+          {"pos": [800, 1342], "hip": 8903},
+          {"pos": [66, 886], "hip": 13209}
+        ]
+      },
+      "common_name": {"english": "Hired Man", "native": "Agru"}
+    },
+    {
+      "id": "CON babylonian_mulapin 034",
+      "lines": [[17847, 17702, 17608, 17499, 17573, 17702]],
+      "common_name": {"english": "The Star Cluster, The Seven Gods", "native": "Zappu, Sebettu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 035",
+      "lines": [[21421, 20894, 20205, 20455, 20889, 25428], [21421, 26451], [20205, 18724], [17702, 19038, 20455]],
+      "image": {
+        "file": "illustrations/Bull_bg.png",
+        "size": [1024, 905],
+        "anchors": [
+          {"pos": [108, 304], "hip": 26451},
+          {"pos": [240, 122], "hip": 25428},
+          {"pos": [546, 455], "hip": 21421}
+        ]
+      },
+      "common_name": {"english": "Bull of Heaven", "native": "Alu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 036",
+      "lines": [[21421, 20894, 20205, 20455, 20889]],
+      "common_name": {"english": "Jaw of the Bull", "native": "is le"}
+    },
+    {
+      "id": "CON babylonian_mulapin 037",
+      "lines": [[30343, 28614], [29655, 28614, 28413], [28614, 27989], [27366, 26727, 27989], [25336, 25930, 24436], [25930, 26311, 26727], [26207, 26366, 27989], [26366, 25336, 22797]],
+      "image": {
+        "file": "illustrations/TrueShepherd_bg.png",
+        "size": [872, 1192],
+        "anchors": [
+          {"pos": [86, 26], "hip": 30343},
+          {"pos": [538, 644], "hip": 25336},
+          {"pos": [584, 1134], "hip": 24436}
+        ]
+      },
+      "common_name": {"english": "True Shepherd of Anu", "native": "Shidallu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 038",
+      "lines": [[22449, 22549]],
+      "common_name": {"english": "Lulal and Latarak (gods)", "native": "Lulal u Latarak"}
+    },
+    {
+      "id": "CON babylonian_mulapin 039",
+      "lines": [[28910, 28103, 27288, 25985, 25606, 23685, 24305, 25985], [24305, 24327, 24244], [24327, 24845, 25202], [24845, 24873], [23430, 23685, 25045], [24305, 24845], [28816, 25985], [27654, 25606, 27072]],
+      "image": {
+        "file": "illustrations/Rooster_bg.png",
+        "size": [848, 1024],
+        "anchors": [
+          {"pos": [490, 790], "hip": 23685},
+          {"pos": [718, 363], "hip": 24327},
+          {"pos": [366, 418], "hip": 25985}
+        ]
+      },
+      "common_name": {"english": "Rooster", "native": "Targlugallu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 040",
+      "lines": [[32349, 34444], [33347, 31827, 31592], [35904, 34444, 33579]],
+      "image": {
+        "file": "illustrations/Bow+Arrow_bg.png",
+        "size": [1223, 840],
+        "anchors": [
+          {"pos": [720, 126], "hip": 32349},
+          {"pos": [53, 458], "hip": 39757},
+          {"pos": [1155, 765], "hip": 27628}
+        ]
+      },
+      "common_name": {"english": "Arrow", "native": "Shukudu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 041",
+      "lines": [[39757, 36795, 33977, 30122, 27628, 39757]],
+      "common_name": {"english": "Bow", "native": "Qashtu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 042",
+      "lines": [[68895, 64962, 64166, 57936, 56343, 54682, 53740, 52943, 51069, 49841, 48356, 46390, 46776, 45336, 43813, 43109, 42313, 42402, 42799, 43109]],
+      "image": {
+        "file": "illustrations/Serpent_bg.png",
+        "size": [1491, 399],
+        "anchors": [
+          {"pos": [245, 307], "hip": 64962},
+          {"pos": [1371, 288], "hip": 41307},
+          {"pos": [1367, 106], "hip": 43109}
+        ]
+      },
+      "common_name": {"english": "MUSH-Snake (god)", "native": "Nirakh"}
+    },
+    {
+      "id": "CON babylonian_mulapin 043",
+      "lines": [[59199, 59316, 59803, 60965, 61359, 59199]],
+      "common_name": {"english": "Raven", "native": "Aribu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 044",
+      "lines": [[57380, 61941, 65474], [61941, 63090, 63608]],
+      "image": {
+        "file": "illustrations/Furrow_bg.png",
+        "size": [1024, 725],
+        "anchors": [
+          {"pos": [243, 558], "hip": 65474},
+          {"pos": [440, 300], "hip": 63090},
+          {"pos": [864, 215], "hip": 57380}
+        ]
+      },
+      "common_name": {"english": "Furrow", "native": "Shir'u"}
+    },
+    {
+      "id": "CON babylonian_mulapin 045",
+      "lines": [[74785, 72622, 69427, 69701, 71957, 72622], [74785, 71957, 72220, 73620, 74785], [73620, 71957, 69427]],
+      "image": {
+        "file": "illustrations/Balance_bg.png",
+        "size": [512, 467],
+        "anchors": [
+          {"pos": [253, 35], "hip": 72622},
+          {"pos": [477, 124], "hip": 74785},
+          {"pos": [231, 363], "hip": 70012}
+        ]
+      },
+      "common_name": {"english": "Scales", "native": "Zibanitu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 046",
+      "lines": [[84012, 85365, 86742, 86032, 83000, 79593], [83000, 81377, 80894, 80343, 80975], [84012, 84970], [84012, 81377], [86742, 88048]],
+      "image": {
+        "file": "illustrations/Zababa_bg.png",
+        "size": [943, 1024],
+        "anchors": [
+          {"pos": [288, 919], "hip": 84980},
+          {"pos": [603, 906], "hip": 80569},
+          {"pos": [423, 177], "hip": 86032}
+        ]
+      },
+      "common_name": {"english": "God Zababa", "native": "Zababa"}
+    },
+    {
+      "id": "CON babylonian_mulapin 047",
+      "lines": [[92175, 95501], [93805, 95501, 97649], [99473, 95501, 93747], [97649, 98036, 101421, 102281, 102532, 101958, 101769, 97278, 97649], [98036, 99473], [97278, 93747]],
+      "image": {
+        "file": "illustrations/Eagle_bg.png",
+        "size": [1092, 1278],
+        "anchors": [
+          {"pos": [250, 156], "hip": 102532},
+          {"pos": [528, 1164], "hip": 92175},
+          {"pos": [948, 660], "hip": 93244}
+        ]
+      },
+      "common_name": {"english": "Eagle", "native": "Eru"}
+    },
+    {
+      "id": "CON babylonian_mulapin 048",
+      "lines": [[101916, 104858, 104987, 101916, 100541, 101101], [101847, 101692, 101101]],
+      "image": {
+        "file": "illustrations/corpse_bg.png",
+        "size": [512, 348],
+        "anchors": [
+          {"pos": [460, 305], "hip": 101692},
+          {"pos": [105, 285], "hip": 104987},
+          {"pos": [206, 25], "hip": 101916}
+        ]
+      },
+      "common_name": {"english": "Dead Man", "native": "Pagru"}
+    },
+    {
+      "id": "CON babylonian_mulapin 049",
+      "lines": [[113246, 113368, 112948], [113368, 111188, 109285, 107380, 107608, 109422, 111954, 113368]],
+      "image": {
+        "file": "illustrations/Fish_bg.png",
+        "size": [778, 512],
+        "anchors": [
+          {"pos": [37, 268], "hip": 113368},
+          {"pos": [679, 240], "hip": 107380},
+          {"pos": [163, 147], "hip": 111954}
+        ]
+      },
+      "common_name": {"english": "Fish", "native": "Nunu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 050",
+      "lines": [[110003, 109139], [115438, 114855, 112961, 110003, 109074, 106278, 109139, 112716, 113136, 114341], [109074, 107315, 106278], [109074, 110395, 114971, 116771], [110960, 111497, 114724, 115033, 116971, 116901], [110960, 110672, 118209, 154, 355, 910, 1170]],
+      "image": {
+        "file": "illustrations/Enki_older_bg.jpg",
+        "size": [999, 1024],
+        "anchors": [
+          {"pos": [787, 79], "hip": 107315},
+          {"pos": [522, 868], "hip": 114119},
+          {"pos": [345, 99], "hip": 115919}
+        ]
+      },
+      "common_name": {"english": "The Great One (God Ea)", "native": "GU.LA (Ea)"}
+    },
+    {
+      "id": "CON babylonian_mulapin 051",
+      "lines": [[30438, 30438]],
+      "common_name": {"english": "Asterism of Eridu", "native": "Eridu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 052",
+      "lines": [[3419, 1562, 8102, 9347, 3419]],
+      "common_name": {"english": "Goddess Ninmakh", "native": "Ninmakh"}
+    },
+    {
+      "id": "CON babylonian_mulapin 053",
+      "lines": [[14146, 15474, 16611, 17651, 21393, 20535, 20042, 14879, 14146, 12843]],
+      "image": {
+        "file": "illustrations/KhabasiranuMouse_bg.png",
+        "size": [1024, 425],
+        "anchors": [
+          {"pos": [210, 402], "hip": 19747},
+          {"pos": [205, 131], "hip": 21393},
+          {"pos": [827, 200], "hip": 12843}
+        ]
+      },
+      "common_name": {"english": "Habasiranu Demon", "native": "Habasiranu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 054",
+      "lines": [[39953, 44816, 52727, 52419, 45238, 41037, 39953]],
+      "image": {
+        "file": "illustrations/Harrow_bg.png",
+        "size": [1024, 647],
+        "anchors": [
+          {"pos": [100, 33], "hip": 52419},
+          {"pos": [946, 586], "hip": 39953},
+          {"pos": [991, 145], "hip": 44816}
+        ]
+      },
+      "common_name": {"english": "Harrow", "native": "Mashkakatu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 055",
+      "lines": [[68702, 71683]],
+      "common_name": {"english": "Shullat and Khanish", "native": "Shullat u Khanish"}
+    },
+    {
+      "id": "CON babylonian_mulapin 056",
+      "lines": [[65109, 62896], [71352, 68933], [71683, 68702, 66657, 68002, 68933, 67244, 65109, 65373, 61932, 61084, 60718], [68002, 65373], [67244, 67457, 67669, 67153, 67457]],
+      "common_name": {"english": "God Numushda", "native": "Numushda"}
+    },
+    {
+      "id": "CON babylonian_mulapin 057",
+      "lines": [[78918, 77634, 78384], [77634, 76705, 76297, 74376, 71860, 73273, 75141, 75177, 76705], [71536, 71860], [74376, 74395], [76297, 78323]],
+      "image": {
+        "file": "illustrations/MadDog_bg.png",
+        "size": [551, 352],
+        "anchors": [
+          {"pos": [101, 139], "hip": 78384},
+          {"pos": [493, 192], "hip": 71860},
+          {"pos": [240, 10], "hip": 75177}
+        ]
+      },
+      "common_name": {"english": "Mad Dog", "native": "UR.IDIM"}
+    },
+    {
+      "id": "CON babylonian_mulapin 058",
+      "lines": [[85696, 85927, 87261, 87073, 86228, 84143, 82729, 82545, 82396, 81266, 80763, 80112, 78820, 76333, 76219, 78727, 79374, 80112, 76600, 73714, 78265, 80112, 78401]],
+      "image": {
+        "file": "illustrations/Scorpion_bg.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [61, 454], "hip": 86228},
+          {"pos": [368, 299], "hip": 76600},
+          {"pos": [320, 58], "hip": 78727}
+        ]
+      },
+      "common_name": {"english": "Scorpion", "native": "Zuqaqipu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 059",
+      "lines": [[80763, 80763]],
+      "common_name": {"english": ""}
+    },
+    {
+      "id": "CON babylonian_mulapin 060",
+      "lines": [[85696, 85927]],
+      "common_name": {"english": "Sharur and Shargaz", "native": "Sharur u Shargaz"}
+    },
+    {
+      "id": "CON babylonian_mulapin 061",
+      "lines": [[98032, 95865], [90185, 89931, 90496], [93506, 89931, 88635], [92855, 93085, 93683, 94141, 93864], [94643, 95477, 96465, 98412, 98761], [96465, 98066, 98688], [88714, 89112, 89642], [90568, 90422, 91918, 89642, 89341, 92041, 94643], [91918, 95865, 96465]],
+      "image": {
+        "file": "illustrations/Pabilsang+ship_bg.png",
+        "size": [1024, 835],
+        "anchors": [
+          {"pos": [648, 652], "hip": 89112},
+          {"pos": [205, 499], "hip": 98412},
+          {"pos": [738, 96], "hip": 89341}
+        ]
+      },
+      "common_name": {"english": "God Pabilsang", "native": "Pabilsang"}
+    },
+    {
+      "id": "CON babylonian_mulapin 063",
+      "lines": [[107556, 108036, 107095, 107556, 105881, 104139, 107556], [104139, 101027, 102485, 104234], [102978, 102978, 105881], [101027, 100345, 100064]],
+      "image": {
+        "file": "illustrations/GoatFish_bg.png",
+        "size": [832, 583],
+        "anchors": [
+          {"pos": [114, 217], "hip": 107556},
+          {"pos": [769, 38], "hip": 100027},
+          {"pos": [546, 457], "hip": 102485}
+        ]
+      },
+      "common_name": {"english": "The Goat-Fish (demon)", "native": "Sukhurmashu"}
+    },
+    {
+      "id": "CON babylonian_mulapin 015",
+      "lines": [[41704, 42527, 46733, 48319, 46853, 44127, 44471]],
+      "common_name": {"english": ""}
+    },
+    {
+      "id": "CON babylonian_mulapin 016",
+      "lines": [[68756, 67627, 61281, 56211, 60998, 63076, 67627], [63076, 62512, 60978], [67627, 65728, 65477], [68756, 73199], [66738, 67627]],
+      "common_name": {"english": ""}
+    }
+  ],
+  "common_names": {
+    "HIP 4427": [{"english": "Barbaru (Wolf)"}],
+    "HIP 11767": [{"english": "Heir of the Sublime Temple, the first-ranking son of Anu"}],
+    "HIP 30438": [{"english": "Star of Eridu"}],
+    "HIP 49669": [{"english": "Sharru (King)"}],
+    "HIP 54061": [{"english": "Lakhru (Ewe)"}],
+    "HIP 65474": [{"english": "Ear of Grain"}],
+    "HIP 65477": [{"english": "Shelebu (Fox)"}],
+    "HIP 69673": [{"english": "Abundant One"}],
+    "HIP 80763": [{"english": "Scorpion's Heart, Lisi"}],
+    "HIP 85927": [{"english": "Shargaz"}],
+    "HIP 85969": [{"english": "Sharur"}],
+    "HIP 91262": [{"english": "Goddess Lamssatu"}],
+    "HIP 100453": [{"english": "Shoulder of the U.KA.DU.A demon"}],
+    "HIP 102098": [{"english": "Breast of the U.KA.DU.A demon"}],
+    "HIP 110538": [{"english": "Knee of the U.KA.DU.A demon"}],
+    "HIP 111169": [{"english": "Knee of the U.KA.DU.A demon"}],
+    "HIP 113726": [{"english": "Knee of the U.KA.DU.A demon"}],
+    "HIP 116584": [{"english": "Heel of the U.KA.DU.A demon"}],
+    "M 45": [{"english": "The Star Cluster, The Seven Gods"}],
+    "Mel 111": [{"english": "Spadix of Erua's date palm"}],
+    "NGC 869": [{"english": "Twinkling stars of the Old Man"}],
+    "NAME Jupiter": [{"english": "mul.SANGMEGAR", "native": "mul.SANGMEGAR", "translators_comments": "Native name of Jupiter in Babilonian (Mulapin) culture"}],
+    "NAME Mars": [{"english": "mul.Salbatanu", "native": "mul.Salbatanu", "translators_comments": "Native name of Mars in Babilonian (Mulapin) culture"}],
+    "NAME Mercury": [{"english": "Dancing Wild Sheep", "native": "mul.UDU.IDIM.GUD", "translators_comments": "Native name of Mercury in Babilonian (Mulapin) culture"}],
+    "NAME Moon": [{"english": "SIN", "native": "SIN", "translators_comments": "Native name of the Moon in Babilonian (Mulapin) culture"}],
+    "NAME Saturn": [{"english": "Steady Wild Sheep", "native": "mul.UDU.IDIM.SANGUSH", "translators_comments": "Native name of Saturn in Babilonian (Mulapin) culture"}],
+    "NAME Sun": [{"english": "Shamash", "native": "Shamash", "translators_comments": "Native name of the Sun in Babilonian (Mulapin) culture"}],
+    "NAME Venus": [{"english": "mul.DILBAT", "native": "mul.DILBAT", "translators_comments": "Native name of Venus in Babilonian (Mulapin) culture"}]
+  }
+}
