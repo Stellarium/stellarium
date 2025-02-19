@@ -209,6 +209,11 @@ void StelSkyCultureMgr::makeCulturesList()
 		culture.id = id;
 		culture.englishName = getSkyCultureEnglishName(dir);
 		culture.region = data["region"].toString();
+		if (culture.region.length()==0)
+		{
+			qWarning() << "No geographic region declared in skyculture" << id << ". setting \"World\"";
+			culture.region = "World";
+		}
 		if (data["constellations"].isArray())
 		{
 			culture.constellations = data["constellations"].toArray();
@@ -222,27 +227,23 @@ void StelSkyCultureMgr::makeCulturesList()
 		culture.asterisms = data["asterisms"].toArray();
 		culture.langsUseNativeNames = data["langs_use_native_names"].toArray();
 
-		culture.boundariesType = StelSkyCulture::BoundariesType::Own; // default value if not specified in the JSON file
+		culture.boundariesType = StelSkyCulture::BoundariesType::None; // default value if not specified in the JSON file
 		if (data.contains("edges"))
 		{
 			if (data.contains("edges_type"))
 			{
-				const auto type = data["edges_type"].toString();
-				const auto typeSimp = type.simplified().toUpper();
-				if (typeSimp == "IAU")
-					culture.boundariesType = StelSkyCulture::BoundariesType::IAU;
-				else if(typeSimp == "OWN")
-					culture.boundariesType = StelSkyCulture::BoundariesType::Own;
-				else if(typeSimp == "NONE")
-					culture.boundariesType = StelSkyCulture::BoundariesType::None;
-				else
+				const QString type = data["edges_type"].toString();
+				const QString typeSimp = type.simplified().toUpper();
+				static const QMap<QString, StelSkyCulture::BoundariesType>map={
+				        {"IAU", StelSkyCulture::BoundariesType::IAU},
+				        {"OWN", StelSkyCulture::BoundariesType::Own},
+				        {"NONE", StelSkyCulture::BoundariesType::None}
+				};
+				if (!map.contains(typeSimp))
 					qWarning().nospace() << "Unexpected edges_type value in sky culture " << dir
 					                     << ": " << type << ". Will resort to Own.";
+				culture.boundariesType = map.value(typeSimp, StelSkyCulture::BoundariesType::Own);
 			}
-		}
-		else
-		{
-			culture.boundariesType = StelSkyCulture::BoundariesType::None;
 		}
 		culture.boundaries = data["edges"].toArray();
 		culture.boundariesEpoch = data["edges_epoch"].toString("J2000");

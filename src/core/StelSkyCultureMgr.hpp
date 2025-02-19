@@ -33,7 +33,6 @@ class StelTranslator;
 //! Store basic info about a sky culture for Stellarium.
 //! Different human cultures have used different names for stars, and visualised
 //! different constellations in the sky (and in different parts of the sky).
-//! This information will probably evolve considerably over the 0.19 and 0.20 series.
 class StelSkyCulture
 {
 	Q_GADGET
@@ -107,7 +106,7 @@ public:
 	QJsonArray constellations;
 	//! JSON data describing boundaries of the constellations
 	QJsonArray boundaries;
-	//! Epoch for boundary definition. E.g. "J2000", "B1875", "J2050.0", "B1950.5", "JD1234567.89" or just any JD value
+	//! Epoch for boundary definition. E.g. "J2000" (default), "B1875", "J2050.0", "B1950.5", "JD1234567.89" or just any JD value
 	//! The first two examples are treated most efficiently.
 	QString boundariesEpoch;
 	//! JSON data describing asterism lines and names

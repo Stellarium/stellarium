@@ -80,7 +80,8 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool p
 		qWarning() << "No name for constellation" << id;
 
 	constellation.clear();
-	for (const auto& polyLineObj : data["lines"].toArray())
+	const QJsonArray &linesArray=data["lines"].toArray();
+	for (const auto& polyLineObj : linesArray)
 	{
 		const auto& polyLine = polyLineObj.toArray();
 		if (polyLine.size() < 2) continue; // one point doesn't define a segment

@@ -195,23 +195,6 @@ i.e. unordered collections of comma-separated \texttt{"tag": value} pairs in bra
 Values can be strings, numbers, arrays or other dictionaries. Arrays are ordered sequences in \texttt{[...]} delimiters.  
 You must take care to close any open brackets and separate entries by commas. 
 
-\iffalse
-
-\begin{configfile}[\scriptsize]
-[info]
-name=myCulture
-author=me
-credits=my institute (optional)
-boundaries=none
-classification=personal
-license=CC BY-SA 4.0 International Public License
-region=Western Europe
-\end{configfile}
-
-\noindent (or what seems best for you). The \texttt{name} is used for the list entry in
-the Starlore tab in the View dialog (see \ref{sec:gui:view:starlore}). \texttt{author} should be the actual author(s)' name(s). 
-The optional \texttt{credits} \newFeature{0.22.2} can be used to mention other involved parties. 
-\fi
 
 \begin{jsonfile}[\scriptsize]
 {
@@ -237,16 +220,21 @@ in which
 \item[\jtag{id}] A unique identifier for program-internal use. It is never displayed to users. 
 \item[\jtag{region}] See \ref{SC:region}
 \item[\jtag{classification}] See \ref{SC:classification}
-\item[\jtag{fallback\_to\_international\_names}] TBD
-\item[\jtag{thumbnail}] TBD
-\item[\jtag{thumbnail\_bscale}] TBD
-\item[\jtag{highlight}] TBD
-\item[\jtag{common\_names}] includes star names, see \ref{SC:common_names}
+\item[\jtag{fallback\_to\_international\_names}] if \texttt{true}, the IAU-approved star names are loaded after all names given here, 
+so names will be mixed without a clear separation, and newly-approved star names will just appear automatically. 
+This is most useful for skycultures which have no names of their own, or where such mix is intended, 
+like \jtag{personal} contemporary skycultures (see ~\ref{SC:classification}) which are allowed to adapt. 
+% These are used by a related project. We can safely ignore them.
+%\item[\jtag{thumbnail}] ignored
+%\item[\jtag{thumbnail\_bscale}] ignored
+%\item[\jtag{highlight}] ignored
+\item[\jtag{common\_names}] includes names for star, planet and deep-sky objects, see \ref{SC:common_names}
 \item[\jtag{constellations}] describes constellations, see \ref{SC:constellations}
 \item[\jtag{edges\ldots}] describes boundaries between constellations, see \ref{SC:boundaries}
 \item[\jtag{asterisms}]  describes asterisms, see \ref{SC:asterisms}
 \end{description}
 
+Tags not described here may be used in other programs but are ignored by Stellarium.
 
 \subsection{Region}
 \label{sec:skycultures:region}
@@ -417,7 +405,9 @@ where
   \end{description}
 \end{description}
 
-The lines in the array ``edges'' were taken from the given reference. The first and second component are ignored. 
+The lines in the array ``edges'' were taken from the given reference. The first component is ignored. 
+The next element provides information whether the segment runs along a meridian (\texttt{M}, right ascension) or 
+parallel (\texttt{P}, declination) circle in ascending \texttt{+} or descending \texttt{-} sense.  
 Then it provides $\alpha_1$, $\delta_1$, $\alpha_2$, $\delta_2$ in sexagesimal numbers ($\alpha$ in HH:MM:SS, $\delta$ in DD:MM:SS format)
 and the uppercased constellation abbreviations. As described in the original source file, 
 Serpens has been split into \texttt{SER1} and \texttt{SER2}, these tags are treated both as \texttt{SER}.
@@ -543,7 +533,7 @@ is programmed in the \jtag{image} dictionary. It contains entries
   \item[\jtag{hip}] The star index as Hipparcos (HIP) number, given as integer. This may technically also be a Gaia DR3 number when given as string.
   \end{description}
 \end{description}
-
+%
 In case the artwork is only available in a certain projection (e.g.,
 an all-sky map), or is otherwise heavily distorted so that the match
 is not satisfactory, you may have to re-project the image somehow. For
