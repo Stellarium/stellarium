@@ -1103,8 +1103,9 @@ NebulaP NebulaMgr::searchUGC(unsigned int UGC) const
 
 NebulaP NebulaMgr::searchCed(QString Ced) const
 {
+	Ced = Ced.trimmed().toUpper();
 	for (const auto& n : dsoArray)
-		if (n->Ced_nb.trimmed().toUpper() == Ced.trimmed().toUpper())
+		if (n->Ced_nb.trimmed().toUpper() == Ced)
 			return n;
 	return NebulaP();
 }
@@ -1127,56 +1128,63 @@ NebulaP NebulaMgr::searchVV(unsigned int VV) const
 
 NebulaP NebulaMgr::searchPK(QString PK) const
 {
+	PK = PK.trimmed().toUpper();
 	for (const auto& n : dsoArray)
-		if (n->PK_nb.trimmed().toUpper() == PK.trimmed().toUpper())
+		if (n->PK_nb.trimmed().toUpper() == PK)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchPNG(QString PNG) const
 {
+	PNG = PNG.trimmed().toUpper();
 	for (const auto& n : dsoArray)
-		if (n->PNG_nb.trimmed().toUpper() == PNG.trimmed().toUpper())
+		if (n->PNG_nb.trimmed().toUpper() == PNG)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchSNRG(QString SNRG) const
 {
+	SNRG = SNRG.trimmed().toUpper();
 	for (const auto& n : dsoArray)
-		if (n->SNRG_nb.trimmed().toUpper() == SNRG.trimmed().toUpper())
+		if (n->SNRG_nb.trimmed().toUpper() == SNRG)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchACO(QString ACO) const
 {
+	ACO = ACO.trimmed().toUpper();
 	for (const auto& n : dsoArray)
-		if (n->ACO_nb.trimmed().toUpper() == ACO.trimmed().toUpper())
+		if (n->ACO_nb.trimmed().toUpper() == ACO)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchHCG(QString HCG) const
 {
+	HCG = HCG.trimmed().toUpper();
 	for (const auto& n : dsoArray)
-		if (n->HCG_nb.trimmed().toUpper() == HCG.trimmed().toUpper())
+		if (n->HCG_nb.trimmed().toUpper() == HCG)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchESO(QString ESO) const
 {
+	ESO = ESO.trimmed().toUpper();
 	for (const auto& n : dsoArray)
-		if (n->ESO_nb.trimmed().toUpper() == ESO.trimmed().toUpper())
+		if (n->ESO_nb.trimmed().toUpper() == ESO)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchVdBH(QString VdBH) const
 {
+	VdBH = VdBH.trimmed().toUpper();
 	for (const auto& n : dsoArray)
-		if (n->VdBH_nb.trimmed().toUpper() == VdBH.trimmed().toUpper())
+		if (n->VdBH_nb.trimmed().toUpper() == VdBH)
 			return n;
 	return NebulaP();
 }
