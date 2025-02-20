@@ -54,10 +54,7 @@ void convertInfoIni(const QString& dir, std::ostream& s, QString& boundariesType
 	   "  \"id\": \"" + cultureId.toStdString() + "\",\n"
 	   "  \"region\": \"" + region.toStdString() + "\",\n"
 	   "  \"classification\": [\"" + classification.toStdString() + "\"],\n"
-	   "  \"fallback_to_international_names\": false,\n"
-	   "  \"thumbnail\": \"???\",\n"
-	   "  \"thumbnail_bscale\": 2,\n"
-	   "  \"highlight\": \"" + highlight + "\",\n";
+	   "  \"fallback_to_international_names\": false,\n";
 }
 
 void writeEnding(std::string& s)
