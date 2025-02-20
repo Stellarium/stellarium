@@ -87,8 +87,16 @@ some cultural/ethnographical background of the users of this sky culture,
 history of sky culture research that provided this work, tables of names/translations,
 links to external resources, whatever seems suitable.  The length of the description texts is not limited.
 
-The skyculture description should include Level 2 sections \texttt{Authors} and \texttt{Acknowledgements} where applicable. 
+The skyculture description should include the following Level 2 sections. Any other section must be a subsection (i.e. Level 3 or deeper) of one of these sections. Each of these sections will have its own entry in the translations files.
 
+\begin{description}
+\item \texttt{Introduction} -- a summary that could ideally be shown on a small screen entirely.
+\item \texttt{Description} -- the actual text of the description.
+\item \texttt{Constellations} -- a sequence of Level 5 sections, where the header names a constellation, and the contents gives some information on it.
+\item \texttt{References} -- a list of references, see \ref{SC:references} for details.
+\item \texttt{Authors} -- all authors and acknowledgments go here.
+\item \texttt{License} -- either a license id (see \ref{SC:license}), or a sequence of lines separated by empty lines (i.e. Markdown paragraphs) describing which part of the culture has which license, in the format "Sky culture item: License-ID".
+\end{description}
 
 To allow the correct display of special characters like ÄÖÜßáé you must provide the file in UTF-8 encoding. 
 If you write only English/ASCII, this may not be relevant.
