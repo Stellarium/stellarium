@@ -1200,6 +1200,15 @@ void Nebula::readDSO(QDataStream &in)
 		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb >> SNRG_nb >> ACO_nb
 		>> HCG_nb >> ESO_nb >> VdBH_nb >> DWB_nb >> Tr_nb >> St_nb >> Ru_nb >> VdBHa_nb;
 
+	Ced_nb = Ced_nb.trimmed();
+	PK_nb = PK_nb.trimmed();
+	PNG_nb = PNG_nb.trimmed();
+	SNRG_nb = SNRG_nb.trimmed();
+	ACO_nb = ACO_nb.trimmed();
+	HCG_nb = HCG_nb.trimmed();
+	ESO_nb = ESO_nb.trimmed();
+	VdBH_nb = VdBH_nb.trimmed();
+
 	const unsigned int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb + DWB_nb + Tr_nb + St_nb + Ru_nb + VdBHa_nb;
 	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty() && ACO_nb.isEmpty() && HCG_nb.isEmpty() && ESO_nb.isEmpty() && VdBH_nb.isEmpty())
 		withoutID = true;
