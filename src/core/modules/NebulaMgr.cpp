@@ -1103,9 +1103,9 @@ NebulaP NebulaMgr::searchUGC(unsigned int UGC) const
 
 NebulaP NebulaMgr::searchCed(QString Ced) const
 {
-	Ced = Ced.trimmed().toUpper();
+	Ced = Ced.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->Ced_nb.toUpper() == Ced)
+		if (n->Ced_nb.compare(Ced, Qt::CaseInsensitive))
 			return n;
 	return NebulaP();
 }
@@ -1128,63 +1128,63 @@ NebulaP NebulaMgr::searchVV(unsigned int VV) const
 
 NebulaP NebulaMgr::searchPK(QString PK) const
 {
-	PK = PK.trimmed().toUpper();
+	PK = PK.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->PK_nb.toUpper() == PK)
+		if (n->PK_nb.compare(PK, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchPNG(QString PNG) const
 {
-	PNG = PNG.trimmed().toUpper();
+	PNG = PNG.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->PNG_nb.toUpper() == PNG)
+		if (n->PNG_nb.compare(PNG, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchSNRG(QString SNRG) const
 {
-	SNRG = SNRG.trimmed().toUpper();
+	SNRG = SNRG.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->SNRG_nb.toUpper() == SNRG)
+		if (n->SNRG_nb.compare(SNRG, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchACO(QString ACO) const
 {
-	ACO = ACO.trimmed().toUpper();
+	ACO = ACO.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->ACO_nb.toUpper() == ACO)
+		if (n->ACO_nb.compare(ACO, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchHCG(QString HCG) const
 {
-	HCG = HCG.trimmed().toUpper();
+	HCG = HCG.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->HCG_nb.toUpper() == HCG)
+		if (n->HCG_nb.compare(HCG, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchESO(QString ESO) const
 {
-	ESO = ESO.trimmed().toUpper();
+	ESO = ESO.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->ESO_nb.toUpper() == ESO)
+		if (n->ESO_nb.compare(ESO, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchVdBH(QString VdBH) const
 {
-	VdBH = VdBH.trimmed().toUpper();
+	VdBH = VdBH.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->VdBH_nb.toUpper() == VdBH)
+		if (n->VdBH_nb.compare(VdBH, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
