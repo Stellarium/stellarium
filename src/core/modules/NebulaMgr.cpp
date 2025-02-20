@@ -870,15 +870,12 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 }
 
 // Search by name
-NebulaP NebulaMgr::search(const QString& name)
+NebulaP NebulaMgr::searchForCommonName(const QString& name)
 {
 	QString uname = name.toUpper();
 
-	for (const auto& n : std::as_const(dsoArray))
-	{
-		QString testName = n->getEnglishName().toUpper();
-		if (testName==uname) return n;
-	}
+	if (const auto it = commonNameMap.find(uname); it != commonNameMap.end())
+		return *it;
 
 	return searchByDesignation(uname);
 }
@@ -1752,7 +1749,7 @@ bool NebulaMgr::loadDSODiscoveryData(const QString &filename)
 		dYear	= list.at(1).trimmed();
 		dName	= list.at(2).trimmed();
 
-		e = search(dso);
+		e = searchForCommonName(dso);
 		if (e.isNull()) // maybe this is inner number of DSO
 			e = searchDSO(dso.toUInt());
 
@@ -1816,7 +1813,7 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 		if (command.contains("start", Qt::CaseInsensitive))
 		{
 			outline.clear();
-			e = search(dso);
+			e = searchForCommonName(dso);
 			if (e.isNull()) // maybe this is inner number of DSO
 				e = searchDSO(dso.toUInt());
 
