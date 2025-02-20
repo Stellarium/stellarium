@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-02-18 13:42+0700\n"
+"POT-Creation-Date: 2025-02-20 19:49+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -36,8 +36,8 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:243
-#: src/core/modules/Constellation.cpp:333
+#: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:257
+#: src/core/modules/Constellation.cpp:347
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:251
 #: src/core/modules/Nebula.cpp:253 src/core/modules/Planet.cpp:597
 #: src/core/modules/Planet.cpp:600 src/core/modules/StarWrapper.cpp:50
@@ -1959,284 +1959,284 @@ msgstr "发现者"
 msgid "Morphological description"
 msgstr "形态描述"
 
-#: src/core/modules/Nebula.cpp:1383
+#: src/core/modules/Nebula.cpp:1392
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "恒星高度趋向中心凝聚"
 
-#: src/core/modules/Nebula.cpp:1386
+#: src/core/modules/Nebula.cpp:1395
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "恒星密集趋向中心凝聚"
 
-#: src/core/modules/Nebula.cpp:1389
+#: src/core/modules/Nebula.cpp:1398
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "恒星构建强的核心"
 
-#: src/core/modules/Nebula.cpp:1392
+#: src/core/modules/Nebula.cpp:1401
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "恒星中等偏丰的凝聚"
 
-#: src/core/modules/Nebula.cpp:1397
+#: src/core/modules/Nebula.cpp:1406
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "恒星中等凝聚"
 
-#: src/core/modules/Nebula.cpp:1400
+#: src/core/modules/Nebula.cpp:1409
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "rather loose concentration of stars towards the center"
 msgstr "恒星较为松散的趋向中心凝聚"
 
-#: src/core/modules/Nebula.cpp:1403
+#: src/core/modules/Nebula.cpp:1412
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "恒星松散的趋向中心凝聚"
 
-#: src/core/modules/Nebula.cpp:1406
+#: src/core/modules/Nebula.cpp:1415
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "恒星松散的凝聚"
 
-#: src/core/modules/Nebula.cpp:1409
+#: src/core/modules/Nebula.cpp:1418
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "恒星非常松散的趋向中心凝聚"
 
-#: src/core/modules/Nebula.cpp:1412
+#: src/core/modules/Nebula.cpp:1421
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "几乎没有趋向中心凝聚"
 
-#: src/core/modules/Nebula.cpp:1415
+#: src/core/modules/Nebula.cpp:1424
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "凝聚度未记录"
 
-#: src/core/modules/Nebula.cpp:1465
+#: src/core/modules/Nebula.cpp:1474
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "恒星中心凝聚度强"
 
-#: src/core/modules/Nebula.cpp:1468
+#: src/core/modules/Nebula.cpp:1477
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "恒星中心凝聚度小"
 
-#: src/core/modules/Nebula.cpp:1471
+#: src/core/modules/Nebula.cpp:1480
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "没有明显的凝聚"
 
-#: src/core/modules/Nebula.cpp:1474
+#: src/core/modules/Nebula.cpp:1483
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "星场凝聚度"
 
-#: src/core/modules/Nebula.cpp:1477
+#: src/core/modules/Nebula.cpp:1486
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "凝聚度未记录"
 
-#: src/core/modules/Nebula.cpp:1483
+#: src/core/modules/Nebula.cpp:1492
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "成员亮度差异小"
 
-#: src/core/modules/Nebula.cpp:1486
+#: src/core/modules/Nebula.cpp:1495
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "成员亮度差异中等"
 
-#: src/core/modules/Nebula.cpp:1489
+#: src/core/modules/Nebula.cpp:1498
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "成员亮度差异大"
 
-#: src/core/modules/Nebula.cpp:1492
+#: src/core/modules/Nebula.cpp:1501
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "亮度差异未记录"
 
-#: src/core/modules/Nebula.cpp:1498
+#: src/core/modules/Nebula.cpp:1507
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "不到50颗恒星的贫星团"
 
-#: src/core/modules/Nebula.cpp:1501
+#: src/core/modules/Nebula.cpp:1510
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "包含50-100颗恒星的中等星团"
 
-#: src/core/modules/Nebula.cpp:1504
+#: src/core/modules/Nebula.cpp:1513
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "超过100颗恒星的富星团"
 
-#: src/core/modules/Nebula.cpp:1507
+#: src/core/modules/Nebula.cpp:1516
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "成员数量未记录"
 
-#: src/core/modules/Nebula.cpp:1511
+#: src/core/modules/Nebula.cpp:1520
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "位于星云内的星团"
 
-#: src/core/modules/Nebula.cpp:1533
+#: src/core/modules/Nebula.cpp:1542
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "极亮"
 
-#: src/core/modules/Nebula.cpp:1536
+#: src/core/modules/Nebula.cpp:1545
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "明亮"
 
-#: src/core/modules/Nebula.cpp:1539
+#: src/core/modules/Nebula.cpp:1548
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "中等亮度"
 
-#: src/core/modules/Nebula.cpp:1542
+#: src/core/modules/Nebula.cpp:1551
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "暗淡"
 
-#: src/core/modules/Nebula.cpp:1545
+#: src/core/modules/Nebula.cpp:1554
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "极暗"
 
-#: src/core/modules/Nebula.cpp:1548
+#: src/core/modules/Nebula.cpp:1557
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "亮度不稳定"
 
-#: src/core/modules/Nebula.cpp:1551
+#: src/core/modules/Nebula.cpp:1560
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "反射星云亮度未记录"
 
-#: src/core/modules/Nebula.cpp:1557
+#: src/core/modules/Nebula.cpp:1566
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "照亮星云的恒星在星云内部"
 
-#: src/core/modules/Nebula.cpp:1560
+#: src/core/modules/Nebula.cpp:1569
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "恒星位于被照亮星云之外"
 
-#: src/core/modules/Nebula.cpp:1563
+#: src/core/modules/Nebula.cpp:1572
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "恒星位于被照亮星云一角"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1568
+#: src/core/modules/Nebula.cpp:1577
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "恒星位于被照亮的特殊星云之外"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1574
+#: src/core/modules/Nebula.cpp:1583
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "被照亮的特殊星云"
 
-#: src/core/modules/Nebula.cpp:1578
+#: src/core/modules/Nebula.cpp:1587
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "反射星云未归类"
 
-#: src/core/modules/Nebula.cpp:1599
+#: src/core/modules/Nebula.cpp:1608
 msgid "circular form"
 msgstr "圆形"
 
-#: src/core/modules/Nebula.cpp:1600
+#: src/core/modules/Nebula.cpp:1609
 msgid "elliptical form"
 msgstr "椭圆形"
 
-#: src/core/modules/Nebula.cpp:1601
+#: src/core/modules/Nebula.cpp:1610
 msgid "irregular form"
 msgstr "不规则形状"
 
-#: src/core/modules/Nebula.cpp:1603
+#: src/core/modules/Nebula.cpp:1612
 msgid "amorphous structure"
 msgstr "无定形结构"
 
-#: src/core/modules/Nebula.cpp:1604
+#: src/core/modules/Nebula.cpp:1613
 msgid "conventional structure"
 msgstr "常规结构"
 
-#: src/core/modules/Nebula.cpp:1605
+#: src/core/modules/Nebula.cpp:1614
 msgid "filamentary structure"
 msgstr "纤维结构"
 
-#: src/core/modules/Nebula.cpp:1607
+#: src/core/modules/Nebula.cpp:1616
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "暗淡"
 
-#: src/core/modules/Nebula.cpp:1608
+#: src/core/modules/Nebula.cpp:1617
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "中等亮度"
 
-#: src/core/modules/Nebula.cpp:1609
+#: src/core/modules/Nebula.cpp:1618
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "明亮"
 
-#: src/core/modules/Nebula.cpp:1612
+#: src/core/modules/Nebula.cpp:1621
 msgid "undocumented form"
 msgstr "形状未记录"
 
-#: src/core/modules/Nebula.cpp:1613
+#: src/core/modules/Nebula.cpp:1622
 msgid "undocumented structure"
 msgstr "结构未记录"
 
-#: src/core/modules/Nebula.cpp:1614
+#: src/core/modules/Nebula.cpp:1623
 msgid "undocumented brightness"
 msgstr "亮度未记录"
 
-#: src/core/modules/Nebula.cpp:1626
+#: src/core/modules/Nebula.cpp:1635
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
 msgstr "遗迹显示壳状射电结构"
 
-#: src/core/modules/Nebula.cpp:1629
+#: src/core/modules/Nebula.cpp:1638
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
 msgstr "遗迹显示一个云心（“实心”）射电结构"
 
-#: src/core/modules/Nebula.cpp:1632
+#: src/core/modules/Nebula.cpp:1641
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
 msgstr "遗迹显示混合（或复合）射电结构"
 
-#: src/core/modules/Nebula.cpp:1635
+#: src/core/modules/Nebula.cpp:1644
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
 msgstr "遗迹显示出一些不确定的壳状射电结构"
 
-#: src/core/modules/Nebula.cpp:1638
+#: src/core/modules/Nebula.cpp:1647
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
 "uncertainty"
 msgstr "遗迹显示一个云心（“实心”）射电结构，但有不确定性"
 
-#: src/core/modules/Nebula.cpp:1641
+#: src/core/modules/Nebula.cpp:1650
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a composite (or combination) radio structure with some "
 "uncertainty"
 msgstr "遗迹显示混合（或复合）射电结构，但有不确定性"
 
-#: src/core/modules/Nebula.cpp:1649
+#: src/core/modules/Nebula.cpp:1658
 msgid "undocumented type"
 msgstr "类型未记录"
 
@@ -2249,27 +2249,27 @@ msgstr "深空天体"
 msgid "Toggle DSO type filter"
 msgstr "切换深空天体类型过滤器"
 
-#: src/core/modules/NebulaMgr.cpp:1526 src/gui/StelDialog.cpp:336
+#: src/core/modules/NebulaMgr.cpp:1533 src/gui/StelDialog.cpp:336
 #: src/gui/ObsListDialog.cpp:590 src/StelMainView.cpp:1059
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:774
 msgid "Attention!"
 msgstr "注意！"
 
-#: src/core/modules/NebulaMgr.cpp:1527
+#: src/core/modules/NebulaMgr.cpp:1534
 msgid "DSO catalog version mismatch"
 msgstr "DSO目录版本不匹配"
 
-#: src/core/modules/NebulaMgr.cpp:1528 src/core/SimbadSearcher.cpp:180
+#: src/core/modules/NebulaMgr.cpp:1535 src/core/SimbadSearcher.cpp:180
 #: src/core/SimbadSearcher.cpp:182
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:93
 msgid "Found"
 msgstr "已找到"
 
-#: src/core/modules/NebulaMgr.cpp:1530
+#: src/core/modules/NebulaMgr.cpp:1537
 msgid "Expected"
 msgstr "预期"
 
-#: src/core/modules/NebulaMgr.cpp:1532
+#: src/core/modules/NebulaMgr.cpp:1539
 msgid "See Logfile for instructions."
 msgstr "有关说明，请参阅日志文件。"
 
@@ -4160,68 +4160,68 @@ msgstr "正在加载 '%1'"
 msgid "Loading '%1' from %2"
 msgstr "正在从 %2 中加载 '%1'"
 
-#: src/core/StelSkyCultureMgr.cpp:365
+#: src/core/StelSkyCultureMgr.cpp:363
 msgctxt "sky culture classification"
 msgid "ethnographic"
 msgstr "民族志学"
 
-#: src/core/StelSkyCultureMgr.cpp:366
+#: src/core/StelSkyCultureMgr.cpp:364
 msgid ""
 "Provided by ethnographic researchers based on interviews of indigenous "
 "people."
 msgstr "民族志学研究人员根据对原住民的访谈所获得。"
 
-#: src/core/StelSkyCultureMgr.cpp:370
+#: src/core/StelSkyCultureMgr.cpp:368
 msgctxt "sky culture classification"
 msgid "historical"
 msgstr "历史"
 
-#: src/core/StelSkyCultureMgr.cpp:371
+#: src/core/StelSkyCultureMgr.cpp:369
 msgid ""
 "Provided by historians based on historical written sources from a (usually "
 "short) period of the past."
 msgstr "历史学家根据过去一段时间 (通常是短期的)的历史文献获得。"
 
-#: src/core/StelSkyCultureMgr.cpp:375
+#: src/core/StelSkyCultureMgr.cpp:373
 msgctxt "sky culture classification"
 msgid "single"
 msgstr "单一来源"
 
-#: src/core/StelSkyCultureMgr.cpp:376
+#: src/core/StelSkyCultureMgr.cpp:374
 msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
 msgstr "表示单一来源，如一幅历史星图或单一作者的著作。"
 
-#: src/core/StelSkyCultureMgr.cpp:380
+#: src/core/StelSkyCultureMgr.cpp:378
 msgctxt "sky culture classification"
 msgid "comparative"
 msgstr "比较"
 
-#: src/core/StelSkyCultureMgr.cpp:381
+#: src/core/StelSkyCultureMgr.cpp:379
 msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
 msgstr "将至少两种星空文化的元素相互比较。"
 
-#: src/core/StelSkyCultureMgr.cpp:385
+#: src/core/StelSkyCultureMgr.cpp:383
 msgctxt "sky culture classification"
 msgid "traditional"
 msgstr "传统"
 
-#: src/core/StelSkyCultureMgr.cpp:386
+#: src/core/StelSkyCultureMgr.cpp:384
 msgid ""
 "Content represents 'common' knowledge by several members of an ethnic "
 "community, and the sky culture has been developed by members of such "
 "community."
 msgstr "呈现一个族群许多成员的的“共同”认知。此类星空文化是由这个族群发展传承而来。"
 
-#: src/core/StelSkyCultureMgr.cpp:390
+#: src/core/StelSkyCultureMgr.cpp:388
 msgctxt "sky culture classification"
 msgid "personal"
 msgstr "个人"
 
-#: src/core/StelSkyCultureMgr.cpp:391
+#: src/core/StelSkyCultureMgr.cpp:389
 msgid ""
 "This is a personally developed sky culture which is not founded in published"
 " historical or ethnological research. Stellarium may include it when it is "
@@ -4229,71 +4229,71 @@ msgid ""
 msgstr ""
 "由个人发展起来的星空文化，不是建立在历史著作或民族学研究中的。Stellarium或许会因为它“足够漂亮”，而不是真正认可它的内容而将其加入。"
 
-#: src/core/StelSkyCultureMgr.cpp:395
+#: src/core/StelSkyCultureMgr.cpp:393
 msgctxt "sky culture classification"
 msgid "incomplete"
 msgstr "不完整"
 
-#: src/core/StelSkyCultureMgr.cpp:396
+#: src/core/StelSkyCultureMgr.cpp:394
 msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
 msgstr "无法给出星空文化描述的准确性，尽管它看起来是建立在坚实的基础上，但还需要做更多的考据工作。"
 
-#: src/core/StelSkyCultureMgr.cpp:400
+#: src/core/StelSkyCultureMgr.cpp:398
 msgctxt "sky culture classification"
 msgid "undefined"
 msgstr "未归类"
 
-#: src/core/StelSkyCultureMgr.cpp:407
+#: src/core/StelSkyCultureMgr.cpp:405
 msgid "Classification"
 msgstr "分类"
 
-#: src/core/StelSkyCultureMgr.cpp:420
+#: src/core/StelSkyCultureMgr.cpp:418
 msgid ""
 "This sky culture is provided under unknown license. Please ask authors for "
 "details about license for this sky culture."
 msgstr "此星空文化是在未知的许可下提供的。请向作者询问有关星空文化许可的详细信息。"
 
-#: src/core/StelSkyCultureMgr.cpp:426
+#: src/core/StelSkyCultureMgr.cpp:424
 msgid ""
 "This sky culture is provided under GNU General Public License. You can use "
 "it for commercial and non-commercial purposes, freely adapt it and share "
 "adapted work."
 msgstr "此星空文化是根据GNU通用公共许可证提供的。您可以将其用于商业和非商业目的，自由改编并共享改编的作品。"
 
-#: src/core/StelSkyCultureMgr.cpp:429 src/core/StelSkyCultureMgr.cpp:438
+#: src/core/StelSkyCultureMgr.cpp:427 src/core/StelSkyCultureMgr.cpp:436
 msgid ""
 "You can use it for commercial and non-commercial purposes, freely adapt it "
 "and share adapted work."
 msgstr "您可以将其用于商业和非商业目的，自由改编并分享改编后的作品。"
 
-#: src/core/StelSkyCultureMgr.cpp:435
+#: src/core/StelSkyCultureMgr.cpp:433
 msgid ""
 "This sky culture is provided under MIT License. You can use it for "
 "commercial and non-commercial purposes, freely adapt it and share adapted "
 "work."
 msgstr "这个天空文化是在MIT许可证下提供的。您可以将其用于商业和非商业目的，自由改编并分享改编后的作品。"
 
-#: src/core/StelSkyCultureMgr.cpp:444 src/core/StelSkyCultureMgr.cpp:481
+#: src/core/StelSkyCultureMgr.cpp:442 src/core/StelSkyCultureMgr.cpp:479
 msgid "This sky culture is distributed as public domain."
 msgstr "本星空文化基于公共领域协议分发。"
 
-#: src/core/StelSkyCultureMgr.cpp:446
+#: src/core/StelSkyCultureMgr.cpp:444
 msgid "This is distributed as public domain."
 msgstr "这是作为公共领域分发的。"
 
-#: src/core/StelSkyCultureMgr.cpp:451
+#: src/core/StelSkyCultureMgr.cpp:449
 msgid "This sky culture is provided under Creative Commons License."
 msgstr "此星空文化是根据创作共用许可协议（ Creative Commons License）提供的"
 
-#: src/core/StelSkyCultureMgr.cpp:456
+#: src/core/StelSkyCultureMgr.cpp:454
 msgid ""
 "You may distribute, remix, adapt, and build upon this sky culture, even "
 "commercially, as long as you credit authors for the original creation."
 msgstr "您可以自由地进行传播、二次创作、修改及衍生开发，即使是出于商业目的，只要您标注原作者的署名。"
 
-#: src/core/StelSkyCultureMgr.cpp:458
+#: src/core/StelSkyCultureMgr.cpp:456
 msgid ""
 "You may remix, adapt, and build upon this sky culture even for commercial "
 "purposes, as long as you credit authors and license the new creations under "
@@ -4302,40 +4302,40 @@ msgid ""
 msgstr ""
 "您可对此星空文化进行二次创作、修改及衍生开发，甚至用于商业用途，但须注明原作者署名并以相同条款授权新作品。该许可协议常被类比为\"copyleft\"类自由及开源软件许可协议。"
 
-#: src/core/StelSkyCultureMgr.cpp:461
+#: src/core/StelSkyCultureMgr.cpp:459
 msgid ""
 "You may reuse this sky culture for any purpose, including commercially; "
 "however, adapted work cannot be shared with others, and credit must be "
 "provided by you."
 msgstr "您可以自由地复制或共享本星空文化，即使是出于商业目的，只要您标注原作者的署名；但禁止分发经过修改、衍生开发的作品。"
 
-#: src/core/StelSkyCultureMgr.cpp:463
+#: src/core/StelSkyCultureMgr.cpp:461
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, and "
 "although your new works must also acknowledge authors and be non-commercial,"
 " you don’t have to license your derivative works on the same terms."
 msgstr "您可以出于非商业目的修改、二次创作，衍生开发本星空文化，只要您标注原作者的署名并且保持非商业性，但不强制以相同协议授权衍生作品。"
 
-#: src/core/StelSkyCultureMgr.cpp:466
+#: src/core/StelSkyCultureMgr.cpp:464
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, as "
 "long as you credit authors and license your new creations under the "
 "identical terms."
 msgstr "您可以出于非商业目的修改、二次创作，衍生开发本星空文化，只要您标注原作者的署名并且以相同的许可协议共享您的作品。"
 
-#: src/core/StelSkyCultureMgr.cpp:468
+#: src/core/StelSkyCultureMgr.cpp:466
 msgid ""
 "You may use this sky culture and share them with others as long as you "
 "credit authors, but you can’t change it in any way or use it commercially."
 msgstr "您可以使用并与其他人共享此本星空文化，只要您标注原作者的署名，但禁止以任何方式修改他它或用于商业目的。"
 
-#: src/core/StelSkyCultureMgr.cpp:486
+#: src/core/StelSkyCultureMgr.cpp:484
 msgid ""
 "Free Art License grants the right to freely copy, distribute, and transform."
 msgstr "自由艺术许可证授予自由自由复制、传播及改编的权利。"
 
-#: src/core/StelSkyCultureMgr.cpp:506 src/core/StelSkyCultureMgr.cpp:513
-#: src/core/StelSkyCultureMgr.cpp:520 src/gui/ConfigurationDialog.cpp:1372
+#: src/core/StelSkyCultureMgr.cpp:504 src/core/StelSkyCultureMgr.cpp:511
+#: src/core/StelSkyCultureMgr.cpp:518 src/gui/ConfigurationDialog.cpp:1372
 #: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
@@ -4361,46 +4361,46 @@ msgstr "自由艺术许可证授予自由自由复制、传播及改编的权利
 msgid "License"
 msgstr "版权许可证"
 
-#: src/core/StelSkyCultureMgr.cpp:507 src/core/StelSkyCultureMgr.cpp:514
+#: src/core/StelSkyCultureMgr.cpp:505 src/core/StelSkyCultureMgr.cpp:512
 msgid "unknown"
 msgstr "未知 "
 
-#: src/core/StelSkyCultureMgr.cpp:550
+#: src/core/StelSkyCultureMgr.cpp:548
 msgid ""
 "The region indicates the geographical area of origin of a given sky culture."
 msgstr "区域指某一特定星空文化的起源地。"
 
-#: src/core/StelSkyCultureMgr.cpp:556
+#: src/core/StelSkyCultureMgr.cpp:554
 msgid "World"
 msgstr "世界"
 
-#: src/core/StelSkyCultureMgr.cpp:557
+#: src/core/StelSkyCultureMgr.cpp:555
 msgid ""
 "All 'modern' sky cultures are based on the IAU-approved 88 constellations "
 "with standardized boundaries and are used worldwide. The origins of these "
 "constellations are pan-European."
 msgstr "所有“现代”的星空文化都基于国际天文学联合会IAU认定的88个具有标准化边界的星座，并在全世界范围内通用。这些星座的起源是泛欧洲的。"
 
-#: src/core/StelSkyCultureMgr.cpp:561 src/ui_locationDialogGui.h:450
+#: src/core/StelSkyCultureMgr.cpp:559 src/ui_locationDialogGui.h:450
 msgid "Region:"
 msgstr "区："
 
-#: src/core/StelSkyCultureMgr.cpp:636
+#: src/core/StelSkyCultureMgr.cpp:634
 msgctxt "Name of a section in sky culture description"
 msgid "Extras"
 msgstr "其他"
 
-#: src/core/StelSkyCultureMgr.cpp:637
+#: src/core/StelSkyCultureMgr.cpp:635
 msgctxt "Name of a section in sky culture description"
 msgid "References"
 msgstr "参考文献"
 
-#: src/core/StelSkyCultureMgr.cpp:638
+#: src/core/StelSkyCultureMgr.cpp:636
 msgctxt "Name of a section in sky culture description"
 msgid "Authors"
 msgstr "作者"
 
-#: src/core/StelSkyCultureMgr.cpp:710
+#: src/core/StelSkyCultureMgr.cpp:708
 msgid "No description"
 msgstr "无描述"
 
@@ -11487,281 +11487,6 @@ msgstr "奥诃梅尔区"
 #: src/translations_regions.h:656
 msgid "Tui Regio"
 msgstr "兑区"
-
-#: skycultures/translations_skycultures.fab:6
-msgctxt "sky culture"
-msgid "Anutan"
-msgstr "阿努塔"
-
-#: skycultures/translations_skycultures.fab:8
-msgctxt "sky culture"
-msgid "Arabic (Al-Sufi)"
-msgstr "阿拉伯 (苏菲)"
-
-#: skycultures/translations_skycultures.fab:10
-msgctxt "sky culture"
-msgid "Arabic (Arabian Peninsula)"
-msgstr "阿拉伯（阿拉伯半岛）"
-
-#: skycultures/translations_skycultures.fab:12
-msgctxt "sky culture"
-msgid "Arabic (Indigenous)"
-msgstr "阿拉伯（本土）"
-
-#: skycultures/translations_skycultures.fab:14
-msgctxt "sky culture"
-msgid "Arabic (Lunar Mansions)"
-msgstr "阿拉伯（月宿）"
-
-#: skycultures/translations_skycultures.fab:16
-msgctxt "sky culture"
-msgid "Armintxe Cave"
-msgstr "阿明特洞穴"
-
-#: skycultures/translations_skycultures.fab:18
-msgctxt "sky culture"
-msgid "Aztec"
-msgstr "阿兹特克"
-
-#: skycultures/translations_skycultures.fab:20
-msgctxt "sky culture"
-msgid "Babylonian (MUL.APIN)"
-msgstr "巴比伦 (MUL.APIN)"
-
-#: skycultures/translations_skycultures.fab:22
-msgctxt "sky culture"
-msgid "Babylonian (Seleucid)"
-msgstr "巴比伦 (塞琉古)"
-
-#: skycultures/translations_skycultures.fab:24
-msgctxt "sky culture"
-msgid "Belarusian"
-msgstr "白罗斯"
-
-#: skycultures/translations_skycultures.fab:26
-msgctxt "sky culture"
-msgid "Boorong"
-msgstr "波荣"
-
-#: skycultures/translations_skycultures.fab:28
-msgctxt "sky culture"
-msgid "Chinese"
-msgstr "中国传统"
-
-#: skycultures/translations_skycultures.fab:30
-msgctxt "sky culture"
-msgid "Chinese Medieval"
-msgstr "中国中世纪"
-
-#: skycultures/translations_skycultures.fab:32
-msgctxt "sky culture"
-msgid "Egyptian"
-msgstr "埃及"
-
-#: skycultures/translations_skycultures.fab:34
-msgctxt "sky culture"
-msgid "Egyptian (Dendera)"
-msgstr "埃及 (丹达腊)"
-
-#: skycultures/translations_skycultures.fab:36
-msgctxt "sky culture"
-msgid "Greek (Almagest)"
-msgstr "希腊 (天文学大成)"
-
-#: skycultures/translations_skycultures.fab:38
-msgctxt "sky culture"
-msgid "Greek (Dante)"
-msgstr "希腊 (但丁)"
-
-#: skycultures/translations_skycultures.fab:40
-msgctxt "sky culture"
-msgid "Greek (Farnese + Almagest)"
-msgstr "希腊 (法尔内塞+天文学大成)"
-
-#: skycultures/translations_skycultures.fab:42
-msgctxt "sky culture"
-msgid "Greek (Leiden Aratea + Almagest)"
-msgstr "希腊 (莱顿·阿拉图+天文学大成)"
-
-#: skycultures/translations_skycultures.fab:44
-msgctxt "sky culture"
-msgid "Hawaiian Starlines"
-msgstr "夏威夷星线"
-
-#: skycultures/translations_skycultures.fab:46
-msgctxt "sky culture"
-msgid "Inuit"
-msgstr "因纽特"
-
-#: skycultures/translations_skycultures.fab:48
-msgctxt "sky culture"
-msgid "Indian Vedic"
-msgstr "印度吠陀"
-
-#: skycultures/translations_skycultures.fab:50
-msgctxt "sky culture"
-msgid "Japanese Yasui Map"
-msgstr "日本涩川图"
-
-#: skycultures/translations_skycultures.fab:52
-msgctxt "sky culture"
-msgid "Kamilaroi/Euahlayi"
-msgstr "卡米勒罗伊/尤阿拉伊"
-
-#: skycultures/translations_skycultures.fab:54
-msgctxt "sky culture"
-msgid "Khoikhoi and San"
-msgstr "科伊科伊人和桑人"
-
-#: skycultures/translations_skycultures.fab:56
-msgctxt "sky culture"
-msgid "Korean"
-msgstr "朝鲜"
-
-#: skycultures/translations_skycultures.fab:58
-msgctxt "sky culture"
-msgid "Lokono"
-msgstr "阿拉瓦克"
-
-#: skycultures/translations_skycultures.fab:60
-msgctxt "sky culture"
-msgid "Macedonian"
-msgstr "马其顿"
-
-#: skycultures/translations_skycultures.fab:62
-msgctxt "sky culture"
-msgid "Maori"
-msgstr "毛利"
-
-#: skycultures/translations_skycultures.fab:64
-msgctxt "sky culture"
-msgid "Maya"
-msgstr "玛雅"
-
-#: skycultures/translations_skycultures.fab:66
-msgctxt "sky culture"
-msgid "Modern"
-msgstr "现代"
-
-#: skycultures/translations_skycultures.fab:68
-msgctxt "sky culture"
-msgid "Modern (Chinese)"
-msgstr "现代 (中国)"
-
-#: skycultures/translations_skycultures.fab:70
-msgctxt "sky culture"
-msgid "Modern (H.A. Rey)"
-msgstr "现代 (H.A.Rey)"
-
-#: skycultures/translations_skycultures.fab:72
-msgctxt "sky culture"
-msgid "Modern (IAU)"
-msgstr "现代 (国际天文学联合会)"
-
-#: skycultures/translations_skycultures.fab:74
-msgctxt "sky culture"
-msgid "Modern (O. Hlad)"
-msgstr "现代 (O. Hlad)"
-
-#: skycultures/translations_skycultures.fab:76
-msgctxt "sky culture"
-msgid "Modern (Sky & Telescope)"
-msgstr "现代 (天空与望远镜杂志)"
-
-#: skycultures/translations_skycultures.fab:78
-msgctxt "sky culture"
-msgid "Modern (Sternenkarten)"
-msgstr "现代 (Sternenkarten)"
-
-#: skycultures/translations_skycultures.fab:80
-msgctxt "sky culture"
-msgid "Mongolian"
-msgstr "蒙古"
-
-#: skycultures/translations_skycultures.fab:82
-msgctxt "sky culture"
-msgid "Navajo"
-msgstr "纳瓦霍"
-
-#: skycultures/translations_skycultures.fab:84
-msgctxt "sky culture"
-msgid "Norse"
-msgstr "挪威 (北欧)"
-
-#: skycultures/translations_skycultures.fab:86
-msgctxt "sky culture"
-msgid "Northern Andes"
-msgstr "北安第斯"
-
-#: skycultures/translations_skycultures.fab:88
-msgctxt "sky culture"
-msgid "Romanian"
-msgstr "罗马尼亚"
-
-#: skycultures/translations_skycultures.fab:90
-msgctxt "sky culture"
-msgid "Russian (Siberian)"
-msgstr "西伯利亚"
-
-#: skycultures/translations_skycultures.fab:92
-msgctxt "sky culture"
-msgid "Sami"
-msgstr "萨米"
-
-#: skycultures/translations_skycultures.fab:94
-msgctxt "sky culture"
-msgid "Samoan"
-msgstr "萨摩亚"
-
-#: skycultures/translations_skycultures.fab:96
-msgctxt "sky culture"
-msgid "Sardinian"
-msgstr "撒丁"
-
-#: skycultures/translations_skycultures.fab:98
-msgctxt "sky culture"
-msgid "Seri"
-msgstr "赛里"
-
-#: skycultures/translations_skycultures.fab:100
-msgctxt "sky culture"
-msgid "Tibetan"
-msgstr "藏族"
-
-#: skycultures/translations_skycultures.fab:102
-msgctxt "sky culture"
-msgid "Tongan"
-msgstr "汤加"
-
-#: skycultures/translations_skycultures.fab:104
-msgctxt "sky culture"
-msgid "Tukano"
-msgstr "图卡诺"
-
-#: skycultures/translations_skycultures.fab:106
-msgctxt "sky culture"
-msgid "Tikuna"
-msgstr "提库纳"
-
-#: skycultures/translations_skycultures.fab:108
-msgctxt "sky culture"
-msgid "Tupi-Guarani"
-msgstr "图皮-瓜拉尼"
-
-#: skycultures/translations_skycultures.fab:110
-msgctxt "sky culture"
-msgid "Vanuatu (Netwar)"
-msgstr "瓦努阿图 (奈特瓦)"
-
-#: skycultures/translations_skycultures.fab:112
-msgctxt "sky culture"
-msgid "Xhosa"
-msgstr "科萨"
-
-#: skycultures/translations_skycultures.fab:114
-msgctxt "sky culture"
-msgid "Zulu"
-msgstr "祖鲁"
 
 #: src/ui_dateTimeDialogGui.h:325 src/ui_dateTimeDialogGui.h:330
 msgid "Julian Day"
