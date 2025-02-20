@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-02-18 13:42+0700\n"
+"POT-Creation-Date: 2025-02-20 19:49+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:243
-#: src/core/modules/Constellation.cpp:333
+#: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:257
+#: src/core/modules/Constellation.cpp:347
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:251
 #: src/core/modules/Nebula.cpp:253 src/core/modules/Planet.cpp:597
 #: src/core/modules/Planet.cpp:600 src/core/modules/StarWrapper.cpp:50
@@ -1928,284 +1928,284 @@ msgstr ""
 msgid "Morphological description"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1383
+#: src/core/modules/Nebula.cpp:1392
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1386
+#: src/core/modules/Nebula.cpp:1395
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1389
+#: src/core/modules/Nebula.cpp:1398
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1392
+#: src/core/modules/Nebula.cpp:1401
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1397
+#: src/core/modules/Nebula.cpp:1406
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1400
+#: src/core/modules/Nebula.cpp:1409
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "rather loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1403
+#: src/core/modules/Nebula.cpp:1412
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1406
+#: src/core/modules/Nebula.cpp:1415
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1409
+#: src/core/modules/Nebula.cpp:1418
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1412
+#: src/core/modules/Nebula.cpp:1421
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1415
+#: src/core/modules/Nebula.cpp:1424
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1465
+#: src/core/modules/Nebula.cpp:1474
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1468
+#: src/core/modules/Nebula.cpp:1477
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1471
+#: src/core/modules/Nebula.cpp:1480
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1474
+#: src/core/modules/Nebula.cpp:1483
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1477
+#: src/core/modules/Nebula.cpp:1486
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1483
+#: src/core/modules/Nebula.cpp:1492
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1486
+#: src/core/modules/Nebula.cpp:1495
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1489
+#: src/core/modules/Nebula.cpp:1498
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1492
+#: src/core/modules/Nebula.cpp:1501
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1498
+#: src/core/modules/Nebula.cpp:1507
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1501
+#: src/core/modules/Nebula.cpp:1510
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1504
+#: src/core/modules/Nebula.cpp:1513
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1507
+#: src/core/modules/Nebula.cpp:1516
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1511
+#: src/core/modules/Nebula.cpp:1520
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1533
+#: src/core/modules/Nebula.cpp:1542
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1536
+#: src/core/modules/Nebula.cpp:1545
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1539
+#: src/core/modules/Nebula.cpp:1548
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1542
+#: src/core/modules/Nebula.cpp:1551
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1545
+#: src/core/modules/Nebula.cpp:1554
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1548
+#: src/core/modules/Nebula.cpp:1557
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1551
+#: src/core/modules/Nebula.cpp:1560
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1557
+#: src/core/modules/Nebula.cpp:1566
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1560
+#: src/core/modules/Nebula.cpp:1569
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1563
+#: src/core/modules/Nebula.cpp:1572
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr ""
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1568
+#: src/core/modules/Nebula.cpp:1577
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr ""
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1574
+#: src/core/modules/Nebula.cpp:1583
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1578
+#: src/core/modules/Nebula.cpp:1587
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1599
+#: src/core/modules/Nebula.cpp:1608
 msgid "circular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1600
+#: src/core/modules/Nebula.cpp:1609
 msgid "elliptical form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1601
+#: src/core/modules/Nebula.cpp:1610
 msgid "irregular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1603
+#: src/core/modules/Nebula.cpp:1612
 msgid "amorphous structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1604
+#: src/core/modules/Nebula.cpp:1613
 msgid "conventional structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1605
+#: src/core/modules/Nebula.cpp:1614
 msgid "filamentary structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1607
+#: src/core/modules/Nebula.cpp:1616
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1608
+#: src/core/modules/Nebula.cpp:1617
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1609
+#: src/core/modules/Nebula.cpp:1618
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1612
+#: src/core/modules/Nebula.cpp:1621
 msgid "undocumented form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1613
+#: src/core/modules/Nebula.cpp:1622
 msgid "undocumented structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1614
+#: src/core/modules/Nebula.cpp:1623
 msgid "undocumented brightness"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:1626
-msgctxt "supernova remnant structure classification"
-msgid "remnant shows a shell radio structure"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:1629
-msgctxt "supernova remnant structure classification"
-msgid "remnant shows a filled center ('plerion') radio structure"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:1632
-msgctxt "supernova remnant structure classification"
-msgid "remnant shows a composite (or combination) radio structure"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:1635
 msgctxt "supernova remnant structure classification"
-msgid "remnant shows a shell radio structure with some uncertainty"
+msgid "remnant shows a shell radio structure"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:1638
+msgctxt "supernova remnant structure classification"
+msgid "remnant shows a filled center ('plerion') radio structure"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1641
+msgctxt "supernova remnant structure classification"
+msgid "remnant shows a composite (or combination) radio structure"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1644
+msgctxt "supernova remnant structure classification"
+msgid "remnant shows a shell radio structure with some uncertainty"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:1647
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
 "uncertainty"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1641
+#: src/core/modules/Nebula.cpp:1650
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a composite (or combination) radio structure with some "
 "uncertainty"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1649
+#: src/core/modules/Nebula.cpp:1658
 msgid "undocumented type"
 msgstr ""
 
@@ -2218,27 +2218,27 @@ msgstr ""
 msgid "Toggle DSO type filter"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:1526 src/gui/StelDialog.cpp:336
+#: src/core/modules/NebulaMgr.cpp:1533 src/gui/StelDialog.cpp:336
 #: src/gui/ObsListDialog.cpp:590 src/StelMainView.cpp:1059
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:774
 msgid "Attention!"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:1527
+#: src/core/modules/NebulaMgr.cpp:1534
 msgid "DSO catalog version mismatch"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:1528 src/core/SimbadSearcher.cpp:180
+#: src/core/modules/NebulaMgr.cpp:1535 src/core/SimbadSearcher.cpp:180
 #: src/core/SimbadSearcher.cpp:182
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:93
 msgid "Found"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:1530
+#: src/core/modules/NebulaMgr.cpp:1537
 msgid "Expected"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:1532
+#: src/core/modules/NebulaMgr.cpp:1539
 msgid "See Logfile for instructions."
 msgstr ""
 
@@ -4042,139 +4042,139 @@ msgstr ""
 msgid "Loading '%1' from %2"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:365
+#: src/core/StelSkyCultureMgr.cpp:363
 msgctxt "sky culture classification"
 msgid "ethnographic"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:366
+#: src/core/StelSkyCultureMgr.cpp:364
 msgid ""
 "Provided by ethnographic researchers based on interviews of indigenous "
 "people."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:370
+#: src/core/StelSkyCultureMgr.cpp:368
 msgctxt "sky culture classification"
 msgid "historical"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:371
+#: src/core/StelSkyCultureMgr.cpp:369
 msgid ""
 "Provided by historians based on historical written sources from a (usually "
 "short) period of the past."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:375
+#: src/core/StelSkyCultureMgr.cpp:373
 msgctxt "sky culture classification"
 msgid "single"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:376
+#: src/core/StelSkyCultureMgr.cpp:374
 msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:380
+#: src/core/StelSkyCultureMgr.cpp:378
 msgctxt "sky culture classification"
 msgid "comparative"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:381
+#: src/core/StelSkyCultureMgr.cpp:379
 msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:385
+#: src/core/StelSkyCultureMgr.cpp:383
 msgctxt "sky culture classification"
 msgid "traditional"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:386
+#: src/core/StelSkyCultureMgr.cpp:384
 msgid ""
 "Content represents 'common' knowledge by several members of an ethnic "
 "community, and the sky culture has been developed by members of such "
 "community."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:390
+#: src/core/StelSkyCultureMgr.cpp:388
 msgctxt "sky culture classification"
 msgid "personal"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:391
+#: src/core/StelSkyCultureMgr.cpp:389
 msgid ""
 "This is a personally developed sky culture which is not founded in published "
 "historical or ethnological research. Stellarium may include it when it is "
 "'pretty enough' without really approving its contents."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:395
+#: src/core/StelSkyCultureMgr.cpp:393
 msgctxt "sky culture classification"
 msgid "incomplete"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:396
+#: src/core/StelSkyCultureMgr.cpp:394
 msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:400
+#: src/core/StelSkyCultureMgr.cpp:398
 msgctxt "sky culture classification"
 msgid "undefined"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:407
+#: src/core/StelSkyCultureMgr.cpp:405
 msgid "Classification"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:420
+#: src/core/StelSkyCultureMgr.cpp:418
 msgid ""
 "This sky culture is provided under unknown license. Please ask authors for "
 "details about license for this sky culture."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:426
+#: src/core/StelSkyCultureMgr.cpp:424
 msgid ""
 "This sky culture is provided under GNU General Public License. You can use "
 "it for commercial and non-commercial purposes, freely adapt it and share "
 "adapted work."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:429 src/core/StelSkyCultureMgr.cpp:438
+#: src/core/StelSkyCultureMgr.cpp:427 src/core/StelSkyCultureMgr.cpp:436
 msgid ""
 "You can use it for commercial and non-commercial purposes, freely adapt it "
 "and share adapted work."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:435
+#: src/core/StelSkyCultureMgr.cpp:433
 msgid ""
 "This sky culture is provided under MIT License. You can use it for "
 "commercial and non-commercial purposes, freely adapt it and share adapted "
 "work."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:444 src/core/StelSkyCultureMgr.cpp:481
+#: src/core/StelSkyCultureMgr.cpp:442 src/core/StelSkyCultureMgr.cpp:479
 msgid "This sky culture is distributed as public domain."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:446
+#: src/core/StelSkyCultureMgr.cpp:444
 msgid "This is distributed as public domain."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:451
+#: src/core/StelSkyCultureMgr.cpp:449
 msgid "This sky culture is provided under Creative Commons License."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:456
+#: src/core/StelSkyCultureMgr.cpp:454
 msgid ""
 "You may distribute, remix, adapt, and build upon this sky culture, even "
 "commercially, as long as you credit authors for the original creation."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:458
+#: src/core/StelSkyCultureMgr.cpp:456
 msgid ""
 "You may remix, adapt, and build upon this sky culture even for commercial "
 "purposes, as long as you credit authors and license the new creations under "
@@ -4182,40 +4182,40 @@ msgid ""
 "open source software licenses."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:461
+#: src/core/StelSkyCultureMgr.cpp:459
 msgid ""
 "You may reuse this sky culture for any purpose, including commercially; "
 "however, adapted work cannot be shared with others, and credit must be "
 "provided by you."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:463
+#: src/core/StelSkyCultureMgr.cpp:461
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, and "
 "although your new works must also acknowledge authors and be non-commercial, "
 "you don’t have to license your derivative works on the same terms."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:466
+#: src/core/StelSkyCultureMgr.cpp:464
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, as "
 "long as you credit authors and license your new creations under the "
 "identical terms."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:468
+#: src/core/StelSkyCultureMgr.cpp:466
 msgid ""
 "You may use this sky culture and share them with others as long as you "
 "credit authors, but you can’t change it in any way or use it commercially."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:486
+#: src/core/StelSkyCultureMgr.cpp:484
 msgid ""
 "Free Art License grants the right to freely copy, distribute, and transform."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:506 src/core/StelSkyCultureMgr.cpp:513
-#: src/core/StelSkyCultureMgr.cpp:520 src/gui/ConfigurationDialog.cpp:1372
+#: src/core/StelSkyCultureMgr.cpp:504 src/core/StelSkyCultureMgr.cpp:511
+#: src/core/StelSkyCultureMgr.cpp:518 src/gui/ConfigurationDialog.cpp:1372
 #: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
@@ -4241,46 +4241,46 @@ msgstr ""
 msgid "License"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:507 src/core/StelSkyCultureMgr.cpp:514
+#: src/core/StelSkyCultureMgr.cpp:505 src/core/StelSkyCultureMgr.cpp:512
 msgid "unknown"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:550
+#: src/core/StelSkyCultureMgr.cpp:548
 msgid ""
 "The region indicates the geographical area of origin of a given sky culture."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:556
+#: src/core/StelSkyCultureMgr.cpp:554
 msgid "World"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:557
+#: src/core/StelSkyCultureMgr.cpp:555
 msgid ""
 "All 'modern' sky cultures are based on the IAU-approved 88 constellations "
 "with standardized boundaries and are used worldwide. The origins of these "
 "constellations are pan-European."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:561 src/ui_locationDialogGui.h:450
+#: src/core/StelSkyCultureMgr.cpp:559 src/ui_locationDialogGui.h:450
 msgid "Region:"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:636
+#: src/core/StelSkyCultureMgr.cpp:634
 msgctxt "Name of a section in sky culture description"
 msgid "Extras"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:637
+#: src/core/StelSkyCultureMgr.cpp:635
 msgctxt "Name of a section in sky culture description"
 msgid "References"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:638
+#: src/core/StelSkyCultureMgr.cpp:636
 msgctxt "Name of a section in sky culture description"
 msgid "Authors"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:710
+#: src/core/StelSkyCultureMgr.cpp:708
 msgid "No description"
 msgstr ""
 
@@ -11045,281 +11045,6 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tui_Regio
 #: src/translations_regions.h:656
 msgid "Tui Regio"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:6
-msgctxt "sky culture"
-msgid "Anutan"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:8
-msgctxt "sky culture"
-msgid "Arabic (Al-Sufi)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:10
-msgctxt "sky culture"
-msgid "Arabic (Arabian Peninsula)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:12
-msgctxt "sky culture"
-msgid "Arabic (Indigenous)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:14
-msgctxt "sky culture"
-msgid "Arabic (Lunar Mansions)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:16
-msgctxt "sky culture"
-msgid "Armintxe Cave"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:18
-msgctxt "sky culture"
-msgid "Aztec"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:20
-msgctxt "sky culture"
-msgid "Babylonian (MUL.APIN)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:22
-msgctxt "sky culture"
-msgid "Babylonian (Seleucid)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:24
-msgctxt "sky culture"
-msgid "Belarusian"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:26
-msgctxt "sky culture"
-msgid "Boorong"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:28
-msgctxt "sky culture"
-msgid "Chinese"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:30
-msgctxt "sky culture"
-msgid "Chinese Medieval"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:32
-msgctxt "sky culture"
-msgid "Egyptian"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:34
-msgctxt "sky culture"
-msgid "Egyptian (Dendera)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:36
-msgctxt "sky culture"
-msgid "Greek (Almagest)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:38
-msgctxt "sky culture"
-msgid "Greek (Dante)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:40
-msgctxt "sky culture"
-msgid "Greek (Farnese + Almagest)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:42
-msgctxt "sky culture"
-msgid "Greek (Leiden Aratea + Almagest)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:44
-msgctxt "sky culture"
-msgid "Hawaiian Starlines"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:46
-msgctxt "sky culture"
-msgid "Inuit"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:48
-msgctxt "sky culture"
-msgid "Indian Vedic"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:50
-msgctxt "sky culture"
-msgid "Japanese Yasui Map"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:52
-msgctxt "sky culture"
-msgid "Kamilaroi/Euahlayi"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:54
-msgctxt "sky culture"
-msgid "Khoikhoi and San"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:56
-msgctxt "sky culture"
-msgid "Korean"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:58
-msgctxt "sky culture"
-msgid "Lokono"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:60
-msgctxt "sky culture"
-msgid "Macedonian"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:62
-msgctxt "sky culture"
-msgid "Maori"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:64
-msgctxt "sky culture"
-msgid "Maya"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:66
-msgctxt "sky culture"
-msgid "Modern"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:68
-msgctxt "sky culture"
-msgid "Modern (Chinese)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:70
-msgctxt "sky culture"
-msgid "Modern (H.A. Rey)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:72
-msgctxt "sky culture"
-msgid "Modern (IAU)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:74
-msgctxt "sky culture"
-msgid "Modern (O. Hlad)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:76
-msgctxt "sky culture"
-msgid "Modern (Sky & Telescope)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:78
-msgctxt "sky culture"
-msgid "Modern (Sternenkarten)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:80
-msgctxt "sky culture"
-msgid "Mongolian"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:82
-msgctxt "sky culture"
-msgid "Navajo"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:84
-msgctxt "sky culture"
-msgid "Norse"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:86
-msgctxt "sky culture"
-msgid "Northern Andes"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:88
-msgctxt "sky culture"
-msgid "Romanian"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:90
-msgctxt "sky culture"
-msgid "Russian (Siberian)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:92
-msgctxt "sky culture"
-msgid "Sami"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:94
-msgctxt "sky culture"
-msgid "Samoan"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:96
-msgctxt "sky culture"
-msgid "Sardinian"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:98
-msgctxt "sky culture"
-msgid "Seri"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:100
-msgctxt "sky culture"
-msgid "Tibetan"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:102
-msgctxt "sky culture"
-msgid "Tongan"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:104
-msgctxt "sky culture"
-msgid "Tukano"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:106
-msgctxt "sky culture"
-msgid "Tikuna"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:108
-msgctxt "sky culture"
-msgid "Tupi-Guarani"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:110
-msgctxt "sky culture"
-msgid "Vanuatu (Netwar)"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:112
-msgctxt "sky culture"
-msgid "Xhosa"
-msgstr ""
-
-#: skycultures/translations_skycultures.fab:114
-msgctxt "sky culture"
-msgid "Zulu"
 msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:325 src/ui_dateTimeDialogGui.h:330
