@@ -971,7 +971,7 @@ private slots:
 
 private:
 	//! Search for a nebula object by name, e.g. M83, NGC 1123, IC 1234.
-	NebulaP search(const QString& name);
+	NebulaP searchForCommonName(const QString& name);
 
 	//! Search the Nebulae by position
 	NebulaP search(const Vec3d& pos);
