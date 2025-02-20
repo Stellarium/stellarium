@@ -228,22 +228,19 @@ void StelSkyCultureMgr::makeCulturesList()
 		culture.langsUseNativeNames = data["langs_use_native_names"].toArray();
 
 		culture.boundariesType = StelSkyCulture::BoundariesType::None; // default value if not specified in the JSON file
-		if (data.contains("edges"))
+		if (data.contains("edges") && data.contains("edges_type"))
 		{
-			if (data.contains("edges_type"))
-			{
-				const QString type = data["edges_type"].toString();
-				const QString typeSimp = type.simplified().toUpper();
-				static const QMap<QString, StelSkyCulture::BoundariesType>map={
-				        {"IAU", StelSkyCulture::BoundariesType::IAU},
-				        {"OWN", StelSkyCulture::BoundariesType::Own},
-				        {"NONE", StelSkyCulture::BoundariesType::None}
-				};
-				if (!map.contains(typeSimp))
-					qWarning().nospace() << "Unexpected edges_type value in sky culture " << dir
-					                     << ": " << type << ". Will resort to Own.";
-				culture.boundariesType = map.value(typeSimp, StelSkyCulture::BoundariesType::Own);
-			}
+			const QString type = data["edges_type"].toString();
+			const QString typeSimp = type.simplified().toUpper();
+			static const QMap<QString, StelSkyCulture::BoundariesType> map={
+			        {"IAU", StelSkyCulture::BoundariesType::IAU},
+			        {"OWN", StelSkyCulture::BoundariesType::Own},
+			        {"NONE", StelSkyCulture::BoundariesType::None}
+			};
+			if (!map.contains(typeSimp))
+				qWarning().nospace() << "Unexpected edges_type value in sky culture " << dir
+				                     << ": " << type << ". Will resort to Own.";
+			culture.boundariesType = map.value(typeSimp, StelSkyCulture::BoundariesType::Own);
 		}
 		culture.boundaries = data["edges"].toArray();
 		culture.boundariesEpoch = data["edges_epoch"].toString("J2000");
