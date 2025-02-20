@@ -1061,6 +1061,8 @@ private:
 	// For DSO converter
 	bool flagConverter;
 	bool flagDecimalCoordinates;
+
+	static const QString StellariumDSOCatalogVersion;
 };
 
 #endif // NEBULAMGR_HPP
