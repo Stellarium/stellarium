@@ -37,12 +37,32 @@ DESCPOTFILE = os.path.join(DIR, '..', '..', 'po', 'stellarium-skycultures-descri
 SCPOTFILE = os.path.join(DIR, '..', '..', 'po', 'stellarium-skycultures', 'stellarium-skycultures.pot')
 
 sc_names = {}
+common_names = set()
 
 def is_sky_culture_dir(d):
     if not os.path.isdir(os.path.join(SCDIR, d)):
         return False
     index_file = os.path.join(SCDIR, d, 'index.json')
     return os.path.exists(index_file)
+
+def load_common_names():
+    star_names_path = os.path.join(SCDIR, 'common_star_names.fab')
+    dso_names_path = os.path.join(DIR, '..', '..', 'nebulae', 'default', 'names.dat')
+    comment_re = re.compile(r'^#|^\s*$')
+    entry_re = re.compile(r'\s*[^|]\+\s*|\s*_\("([^"]+)"\)')
+    for path in [star_names_path, dso_names_path]:
+        with open(path) as file:
+            line_num = 0
+            for line in file:
+                line_num += 1
+                if comment_re.search(line):
+                    continue
+                match = entry_re.search(line)
+                if not match:
+                    print(f"{path}:{line_num}: error: failed to parse line", file=sys.stderr)
+                    continue
+                common_names.add(match.group(1))
+    print(f"Loaded {len(common_names)} common names", file=sys.stderr)
 
 def update_descriptions_pot():
     sclist = [d for d in os.listdir(SCDIR) if is_sky_culture_dir(d)]
@@ -144,6 +164,7 @@ def update_cultures_pot():
             assert 'id' in obj
             obj_id = obj['id']
 
+            obj_name = ''
             if 'common_name' in obj:
                 name = obj['common_name']
 
@@ -154,6 +175,9 @@ def update_cultures_pot():
                 else:
                     english = None
 
+                if english and obj_name == '':
+                    obj_name = english
+
                 if 'native' in name:
                     native = name['native']
                     if len(native) == 0:
@@ -161,20 +185,43 @@ def update_cultures_pot():
                 else:
                     native = None
 
-                if not english:
-                    print(f'{sky_culture}: warning: common_name property in {obj_type} "{obj_id}" has no English name', file=sys.stderr)
-                    continue
+                if native and obj_name == '':
+                    obj_name = native
 
-                if native:
-                    comment = f'{sc_name} {obj_type}, native: {native}'
+                if english:
+                    # Don't extract items that are already translated in other places
+                    if not english in common_names:
+                        comment = f'{sc_name} {obj_type}'
+                        if native:
+                            comment += f', native: {native}'
+
+                        if 'pronounce' in name and len(name['pronounce']) != 0:
+                            comment += ', pronounce: ' + name['pronounce']
+
+                        if 'translators_comments' in name:
+                            comment += '\n' + name['translators_comments']
+
+
+                        entry = polib.POEntry(comment = comment, msgid = english, msgstr = "")
+                        if entry in pot:
+                            prev_entry = pot.find(entry.msgid)
+                            assert prev_entry
+                            prev_entry.comment += '\n' + comment
+                        else:
+                            pot.append(entry)
                 else:
-                    comment = f'{sc_name} {obj_type}'
+                    print(f'{sky_culture}: warning: common_name property in {obj_type} "{obj_id}" has no English name', file=sys.stderr)
+            else:
+                print(f'{sky_culture}: warning: no common_name key in {obj_type} "{obj_id}"', file=sys.stderr)
 
-                if 'translators_comments' in name:
-                    comment += '\n' + name['translators_comments']
+            if obj_name == '':
+                obj_name = obj_id
 
+            if 'description' in obj:
+                desc = obj['description']
+                comment = f'Description of {sc_name} {obj_type} {obj_name}'
 
-                entry = polib.POEntry(comment = comment, msgid = english, msgstr = "")
+                entry = polib.POEntry(comment = comment, msgid = desc, msgstr = "")
                 if entry in pot:
                     prev_entry = pot.find(entry.msgid)
                     assert prev_entry
@@ -182,9 +229,6 @@ def update_cultures_pot():
                 else:
                     pot.append(entry)
 
-            else:
-                print(f'{sky_culture}: warning: no common_name key in {obj_type} "{obj_id}"', file=sys.stderr)
-                continue
 
     def process_names(objects, pot, sc_name):
         for obj_id in objects:
@@ -205,6 +249,10 @@ def update_cultures_pot():
 
                 if not english:
                     print(f'{sky_culture}: warning: common_name property in object "{obj_id}" has no English name', file=sys.stderr)
+                    continue
+
+                # Don't extract items that are already translated in other places
+                if english in common_names:
                     continue
 
                 if native:
@@ -245,6 +293,8 @@ def update_cultures_pot():
 
 
 if __name__ == '__main__':
+    print("Loading common names...", file=sys.stderr)
+    load_common_names()
     print("Updating descriptions .pot file...", file=sys.stderr)
     update_descriptions_pot()
     print("Updating SC index .pot file...", file=sys.stderr)
