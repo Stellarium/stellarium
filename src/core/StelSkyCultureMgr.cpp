@@ -740,8 +740,8 @@ QString StelSkyCultureMgr::directoryToSkyCultureI18(const QString& directory) co
 	QString culture = dirToNameEnglish[directory].englishName;
 	if (culture=="")
 	{
-		qWarning() << "WARNING: StelSkyCultureMgr::directoryToSkyCultureI18(\""
-			   << QDir::toNativeSeparators(directory) << "\"): could not find directory";
+		qWarning().nospace() << "StelSkyCultureMgr::directoryToSkyCultureI18("
+			<< QDir::toNativeSeparators(directory) << "): could not find directory";
 		return "";
 	}
 	return q_(culture);

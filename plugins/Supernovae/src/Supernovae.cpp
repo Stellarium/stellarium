@@ -348,14 +348,14 @@ bool Supernovae::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "[Supernovae] WARNING - could not remove old supernovas.json file";
+				qWarning() << "[Supernovae] Could not remove old supernovas.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "[Supernovae] WARNING - failed to copy supernovae.json to supernovae.json.old";
+		qWarning() << "[Supernovae] Failed to copy supernovae.json to supernovae.json.old";
 		return false;
 	}
 

@@ -490,8 +490,7 @@ void AngleSpinBox::formatText(void)
 		}
 		default:
 		{
-			qWarning() << "AngleSpinBox::formatText - WARNING - unknown format" 
-		       << static_cast<int>(angleSpinBoxFormat);
+			qWarning() << "AngleSpinBox::formatText: unknown format" << static_cast<int>(angleSpinBoxFormat);
 			break;
 		}
 	}
@@ -533,7 +532,7 @@ QSize AngleSpinBox::minimumSizeHint() const
 		}
 		default:
 		{
-			qWarning() << "AngleSpinBox::updateSizeHint - WARNING - unknown format" << static_cast<int>(angleSpinBoxFormat);
+			qWarning() << "AngleSpinBox::updateSizeHint: unknown format" << static_cast<int>(angleSpinBoxFormat);
 			break;
 		}
 	}

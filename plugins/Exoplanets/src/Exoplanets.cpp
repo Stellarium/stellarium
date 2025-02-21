@@ -464,14 +464,14 @@ bool Exoplanets::backupJsonFile(bool deleteOriginal) const
 		{
 			if (!old.remove())
 			{
-				qWarning() << "[Exoplanets] WARNING - could not remove old exoplanets.json file";
+				qWarning() << "[Exoplanets] Could not remove old exoplanets.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "[Exoplanets] WARNING - failed to copy exoplanets.json to exoplanets.json.old";
+		qWarning() << "[Exoplanets] Failed to copy exoplanets.json to exoplanets.json.old";
 		return false;
 	}
 

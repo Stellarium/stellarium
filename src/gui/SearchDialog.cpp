@@ -1478,7 +1478,8 @@ void SearchDialog::populateSimbadServerList()
 	servers->clear();
 	//For each server, display the localized description and store the URL as user data.
 	servers->addItem(q_("University of Strasbourg (France)"), DEF_SIMBAD_URL);
-	servers->addItem(q_("Harvard University (USA)"), "http://simbad.harvard.edu/");
+	servers->addItem(q_("Harvard-Smithsonian Center for Astrophysics (USA)"), "https://simbad.cfa.harvard.edu/");
+	servers->addItem(q_("Strasbourg astronomical Data Center (France)"), "https://simbad.cds.unistra.fr/");
 
 	//Restore the selection
 	index = servers->findData(selectedUrl, Qt::UserRole, Qt::MatchCaseSensitive);

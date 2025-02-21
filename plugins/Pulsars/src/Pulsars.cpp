@@ -436,14 +436,14 @@ bool Pulsars::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "[Pulsars] WARNING - could not remove old pulsars.json file";
+				qWarning() << "[Pulsars] Could not remove old pulsars.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "[Pulsars] WARNING - failed to copy pulsars.json to pulsars.json.old";
+		qWarning() << "[Pulsars] Failed to copy pulsars.json to pulsars.json.old";
 		return false;
 	}
 
