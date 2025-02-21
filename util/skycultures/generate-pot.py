@@ -144,6 +144,7 @@ def update_cultures_pot():
             assert 'id' in obj
             obj_id = obj['id']
 
+            obj_name = ''
             if 'common_name' in obj:
                 name = obj['common_name']
 
@@ -154,6 +155,9 @@ def update_cultures_pot():
                 else:
                     english = None
 
+                if english and obj_name == '':
+                    obj_name = english
+
                 if 'native' in name:
                     native = name['native']
                     if len(native) == 0:
@@ -161,20 +165,41 @@ def update_cultures_pot():
                 else:
                     native = None
 
-                if not english:
-                    print(f'{sky_culture}: warning: common_name property in {obj_type} "{obj_id}" has no English name', file=sys.stderr)
-                    continue
+                if native and obj_name == '':
+                    obj_name = native
 
-                if native:
-                    comment = f'{sc_name} {obj_type}, native: {native}'
-                else:
+                if english:
                     comment = f'{sc_name} {obj_type}'
+                    if native:
+                        comment += f', native: {native}'
 
-                if 'translators_comments' in name:
-                    comment += '\n' + name['translators_comments']
+                    if 'pronounce' in name and len(name['pronounce']) != 0:
+                        comment += ', pronounce: ' + name['pronounce']
+
+                    if 'translators_comments' in name:
+                        comment += '\n' + name['translators_comments']
 
 
-                entry = polib.POEntry(comment = comment, msgid = english, msgstr = "")
+                    entry = polib.POEntry(comment = comment, msgid = english, msgstr = "")
+                    if entry in pot:
+                        prev_entry = pot.find(entry.msgid)
+                        assert prev_entry
+                        prev_entry.comment += '\n' + comment
+                    else:
+                        pot.append(entry)
+                else:
+                    print(f'{sky_culture}: warning: common_name property in {obj_type} "{obj_id}" has no English name', file=sys.stderr)
+            else:
+                print(f'{sky_culture}: warning: no common_name key in {obj_type} "{obj_id}"', file=sys.stderr)
+
+            if obj_name == '':
+                obj_name = obj_id
+
+            if 'description' in obj:
+                desc = obj['description']
+                comment = f'Description of {sc_name} {obj_type} {obj_name}'
+
+                entry = polib.POEntry(comment = comment, msgid = desc, msgstr = "")
                 if entry in pot:
                     prev_entry = pot.find(entry.msgid)
                     assert prev_entry
@@ -182,9 +207,6 @@ def update_cultures_pot():
                 else:
                     pot.append(entry)
 
-            else:
-                print(f'{sky_culture}: warning: no common_name key in {obj_type} "{obj_id}"', file=sys.stderr)
-                continue
 
     def process_names(objects, pot, sc_name):
         for obj_id in objects:
