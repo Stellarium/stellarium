@@ -579,6 +579,7 @@ public slots:
 	//! - ProjectionStereographic
 	//! - ProjectionFisheye
 	//! - ProjectionHammer
+	//! - ProjectionMollweide
 	//! - ProjectionCylinder
 	//! - ProjectionMercator
 	//! - ProjectionOrthographic
