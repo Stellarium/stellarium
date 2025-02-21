@@ -405,14 +405,14 @@ bool Quasars::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "[Quasars] WARNING - could not remove old quasars.json file";
+				qWarning() << "[Quasars] Could not remove old quasars.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "[Quasars] WARNING - failed to copy quasars.json to quasars.json.old";
+		qWarning() << "[Quasars] Failed to copy quasars.json to quasars.json.old";
 		return false;
 	}
 

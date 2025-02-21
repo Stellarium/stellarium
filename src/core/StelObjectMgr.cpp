@@ -660,7 +660,7 @@ QVariantMap StelObjectMgr::getObjectInfo(const StelObjectP obj)
 	QVariantMap map;
 	if (!obj)
 	{
-		qDebug() << "getObjectInfo WARNING - object not found";
+		qWarning() << "getObjectInfo: object not found";
 		map.insert("found", false);
 	}
 	else

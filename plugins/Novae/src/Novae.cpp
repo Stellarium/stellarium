@@ -381,14 +381,14 @@ bool Novae::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "[Novae] WARNING - could not remove old novae.json file";
+				qWarning() << "[Novae] Could not remove old novae.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "[Novae] WARNING - failed to copy novae.json to novae.json.old";
+		qWarning() << "[Novae] Failed to copy novae.json to novae.json.old";
 		return false;
 	}
 

@@ -330,14 +330,14 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "[Satellites] WARNING: unable to remove old catalogue file!";
+				qWarning() << "[Satellites] Unable to remove old catalogue file!";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "[Satellites] WARNING: failed to back up catalogue file as"
+		qWarning() << "[Satellites] Failed to back up catalogue file as"
 			   << QDir::toNativeSeparators(backupPath);
 		return false;
 	}

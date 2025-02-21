@@ -1943,7 +1943,7 @@ void StelMainView::doScreenshot(void)
 	}
 	if (!imageWriter.write(im))
 	{
-		qWarning() << "WARNING failed to write screenshot to: " << QDir::toNativeSeparators(shotPath.filePath());
+		qWarning() << "Failed to write screenshot to: " << QDir::toNativeSeparators(shotPath.filePath());
 	}
 }
 

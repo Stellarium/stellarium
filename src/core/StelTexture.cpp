@@ -61,7 +61,7 @@ StelTexture::~StelTexture()
 		if (gl->glIsTexture(id)==GL_FALSE)
 		{
 			GLenum err = gl->glGetError();
-			qWarning() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID="
+			qWarning() << "StelTexture::~StelTexture() tried to delete invalid texture with ID="
 			           << id << "Current GL ERROR status is" << err << "(" << StelOpenGL::getGLErrorText(err) << ")";
 		}
 		else

@@ -282,7 +282,7 @@ void ScriptConsole::preprocessScript()
 		StelApp::getInstance().getScriptMgr().preprocessScript( scriptFileName, src, dest, ui->includeEdit->text(), errLoc );
 	}
 	else
-		qDebug() << "[ScriptConsole] WARNING - unknown preprocessor type";
+		qWarning() << "[ScriptConsole] Unknown preprocessor type";
 
 	ui->scriptEdit->setPlainText(dest);
 	scriptFileName = ""; // OK, it's a new file!
