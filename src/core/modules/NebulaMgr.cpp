@@ -420,7 +420,11 @@ void NebulaMgr::init()
 	if (allSetsUnwantedRefsRaw.contains(';'))
 	{
 		// full specification: SetA:refA,refB;SetB:refC
+#if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
 		QStringList allSetsUnwantedRefs=allSetsUnwantedRefsRaw.split(';', Qt::SkipEmptyParts);
+#else
+		QStringList allSetsUnwantedRefs=allSetsUnwantedRefsRaw.split(';');
+#endif
 		foreach (const QString &entry, allSetsUnwantedRefs)
 		{
 			QStringList oneSetList=entry.split(':');
@@ -443,7 +447,11 @@ void NebulaMgr::init()
 	else
 		allUnwantedReferencesFromOneSetRaw=allSetsUnwantedRefsRaw;
 	// At this point allUnwantedReferencesFromOneSetRaw is assumed to be a comma-separated list for the current nebulaSet.
+#if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
 	unwantedReferences=allUnwantedReferencesFromOneSetRaw.split(',', Qt::SkipEmptyParts);
+#else
+	unwantedReferences=allUnwantedReferencesFromOneSetRaw.split(',');
+#endif
 	qInfo() << "NebulaMgr: Unwanted References:" << unwantedReferences;
 
 	loadNebulaSet(nebulaSetName);
