@@ -423,7 +423,7 @@ void NebulaMgr::init()
 #if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
 		QStringList allSetsUnwantedRefs=allSetsUnwantedRefsRaw.split(';', Qt::SkipEmptyParts);
 #else
-		QStringList allSetsUnwantedRefs=allSetsUnwantedRefsRaw.split(';');
+		QStringList allSetsUnwantedRefs=allSetsUnwantedRefsRaw.split(';', QString::SkipEmptyParts);
 #endif
 		foreach (const QString &entry, allSetsUnwantedRefs)
 		{
@@ -450,7 +450,7 @@ void NebulaMgr::init()
 #if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
 	unwantedReferences=allUnwantedReferencesFromOneSetRaw.split(',', Qt::SkipEmptyParts);
 #else
-	unwantedReferences=allUnwantedReferencesFromOneSetRaw.split(',');
+	unwantedReferences=allUnwantedReferencesFromOneSetRaw.split(',', QString::SkipEmptyParts);
 #endif
 	qInfo() << "NebulaMgr: Unwanted References:" << unwantedReferences;
 
@@ -909,7 +909,7 @@ NebulaP NebulaMgr::searchForCommonName(const QString& name)
 	QString uname = name.toUpper();
 
 	if (const auto it = commonNameMap.find(uname); it != commonNameMap.end())
-		return *&(it->nebula);
+		return (it->nebula);
 
 	return searchByDesignation(uname);
 }

@@ -1062,8 +1062,6 @@ private:
 	};
 	QHash<QString/*name*/,NebulaWithReferences> commonNameMap;
 
-
-	//QHash<QString/*name*/,NebulaP> commonNameMap;
 	QHash<NebulaP,QVector<QString>> defaultNameMap;
 
 	LinearFader hintsFader;
