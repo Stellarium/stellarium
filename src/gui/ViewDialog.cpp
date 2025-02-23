@@ -43,6 +43,7 @@
 #include "StelStyle.hpp"
 #include "StelGuiBase.hpp"
 #include "StelGui.hpp"
+#include "HipsMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelHips.hpp"
@@ -562,7 +563,15 @@ void ViewDialog::createDialogContent()
 	// Hips mgr.
 	populateHipsGroups();
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");	
-	connect(hipsmgr, SIGNAL(surveysChanged()), this, SLOT(updateHips()));
+	// HiPS updates may be very frequent when we are getting a list of
+	// surveys, we don't want to update the widget on each of them, so the
+	// timer is used to delay the update a bit.
+	hipsUpdateTimer.setInterval(50);
+	hipsUpdateTimer.setSingleShot(true);
+	connect(&hipsUpdateTimer, &QTimer::timeout, this, &ViewDialog::updateHips);
+	connect(qobject_cast<HipsMgr*>(hipsmgr), &HipsMgr::surveysChanged, this,
+	        [this]{ if(!hipsUpdateTimer.isActive()) hipsUpdateTimer.start(); });
+
 	connect(ui->surveyTypeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateHips()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(updateHips()));
 	connect(ui->surveysListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(updateHips()), Qt::QueuedConnection);
