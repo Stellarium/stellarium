@@ -455,7 +455,8 @@ bool StelTexture::glLoad(const GLData& data)
 
 #ifndef NDEBUG
 	if (qApp->property("verbose") == true)
-		qDebug() << "StelTexture" << id << "uploaded, total memory usage "
+		qDebug() << "StelTexture" << id << "of size" << width << u8"×" << height
+		         << "uploaded, total memory usage "
 		         << textureMgr->glMemoryUsage / (1024.0 * 1024.0) << "MB";
 #endif
 
