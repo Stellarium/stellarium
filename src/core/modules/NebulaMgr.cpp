@@ -39,8 +39,6 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 
-#include <unordered_map>
-#include <algorithm>
 #include <vector>
 #include <QDebug>
 #include <QFile>
@@ -53,7 +51,7 @@
 
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
-static const QString StellariumDSOCatalogVersion = "3.20";
+const QString NebulaMgr::StellariumDSOCatalogVersion = QStringLiteral("3.20");
 
 namespace
 {
@@ -888,6 +886,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 		dsoCatalogPath	= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
 	QString dsoOutlinesPath	= StelFileMgr::findFile("nebulae/" + setName + "/outlines.dat");
 	QString dsoDiscoveryPath = StelFileMgr::findFile("nebulae/" + setName + "/discovery.dat");
+	QString dsoNamesPath = StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
 
 	dsoArray.clear();
 	dsoIndex.clear();
@@ -898,7 +897,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 		if (!srcCatalogPath.isEmpty())
 			convertDSOCatalog(srcCatalogPath, StelFileMgr::findFile("nebulae/" + setName + "/catalog.pack", StelFileMgr::New), flagDecimalCoordinates);
 		else
-			qWarning() << "ERROR convert catalogue, because source data set does not exist for " << setName;
+			qWarning() << "ERROR converting catalogue, because source data set does not exist for " << setName;
 	}
 
 	if (dsoCatalogPath.isEmpty())
@@ -909,13 +908,13 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 
 	loadDSOCatalog(dsoCatalogPath);
 
-	if (QString defaultNamesPath = StelFileMgr::findFile("nebulae/default/names.dat"); defaultNamesPath.isEmpty())
+	if (dsoNamesPath.isEmpty())
 	{
 		qWarning().noquote() << "ERROR while loading deep-sky names data set" << setName;
 	}
 	else
 	{
-		loadDSONames(defaultNamesPath);
+		loadDSONames(dsoNamesPath);
 	}
 
 	if (!dsoOutlinesPath.isEmpty())
