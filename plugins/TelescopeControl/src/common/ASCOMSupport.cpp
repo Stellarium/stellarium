@@ -56,8 +56,12 @@ bool ASCOMSupport::isASCOMSupported()
 		majorVersion = versionMatch.captured(1).trimmed();
 	}
 
-	// Check ASCOM Platform version to be 6 or greater
+	// Check ASCOM Platform version to be 6 or greater. We apparently need 7 for Qt6!
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	if (majorVersion.toInt() >= 7)
+#else
 	if (majorVersion.toInt() >= 6)
+#endif
 	{
 		return true;
 	}
