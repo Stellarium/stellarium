@@ -411,14 +411,50 @@ void NebulaMgr::init()
 
 	setTypeFilters(typeFilters);
 
-	// TODO: mechanism to specify which sets get loaded at start time.
-	// candidate methods:
-	// 1. config file option (list of sets to load at startup)
-	// 2. load all
-	// 3. flag in nebula_textures.fab (yuk)
-	// 4. info.ini file in each set containing a "load at startup" item
-	// For now (0.9.0), just load the default set
-	loadNebulaSet("default");
+	// specify which sets get loaded at start time.
+	const QString nebulaSetName=conf->value("astro/nebula_set", "default").toString();
+
+	// Load the list of unwanted references.
+	const QString allSetsUnwantedRefsRaw = conf->value("astro/nebula_exclude_references").toString(); // Later: read this from config.ini. Syntax: "setName:unrefA,unrefB,..."
+	QString allUnwantedReferencesFromOneSetRaw;
+	if (allSetsUnwantedRefsRaw.contains(';'))
+	{
+		// full specification: SetA:refA,refB;SetB:refC
+#if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
+		QStringList allSetsUnwantedRefs=allSetsUnwantedRefsRaw.split(';', Qt::SkipEmptyParts);
+#else
+		QStringList allSetsUnwantedRefs=allSetsUnwantedRefsRaw.split(';', QString::SkipEmptyParts);
+#endif
+		foreach (const QString &entry, allSetsUnwantedRefs)
+		{
+			QStringList oneSetList=entry.split(':');
+			if (oneSetList.length()==2 && oneSetList.at(0)==nebulaSetName)
+			{
+				allUnwantedReferencesFromOneSetRaw=oneSetList.at(1); // Now this has the packed list without nebulaSet name
+				break;
+			}
+		}
+		if (allUnwantedReferencesFromOneSetRaw.isEmpty())
+		{
+			qInfo() << "NebulaMgr: FYI: No references found to be excluded for set" << nebulaSetName;
+		}
+	}
+	else if (allSetsUnwantedRefsRaw.contains(':'))
+	{
+		// Presumably only a packed list for default nebulaSet.
+		allUnwantedReferencesFromOneSetRaw=allSetsUnwantedRefsRaw.section(':', 1, 1);
+	}
+	else
+		allUnwantedReferencesFromOneSetRaw=allSetsUnwantedRefsRaw;
+	// At this point allUnwantedReferencesFromOneSetRaw is assumed to be a comma-separated list for the current nebulaSet.
+#if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
+	unwantedReferences=allUnwantedReferencesFromOneSetRaw.split(',', Qt::SkipEmptyParts);
+#else
+	unwantedReferences=allUnwantedReferencesFromOneSetRaw.split(',', QString::SkipEmptyParts);
+#endif
+	qInfo() << "NebulaMgr: Unwanted References:" << unwantedReferences;
+
+	loadNebulaSet(nebulaSetName);
 
 	updateI18n();
 
@@ -873,7 +909,7 @@ NebulaP NebulaMgr::searchForCommonName(const QString& name)
 	QString uname = name.toUpper();
 
 	if (const auto it = commonNameMap.find(uname); it != commonNameMap.end())
-		return *it;
+		return (it->nebula);
 
 	return searchByDesignation(uname);
 }
@@ -1699,8 +1735,47 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 			if (transMatch.hasMatch())
 			{
 				QString propName = transMatch.captured(1).trimmed();
-				defaultNameMap[e].push_back(propName);
-				commonNameMap[propName.toUpper()] = e;
+				// TODO: Check if name is in the unwanted list and then don't include.
+				QString refs = transMatch.captured(2).trimmed(); // a null string should not complain.
+				QStringList refList;
+				bool accept=refs.isNull(); // if we don't have a reference, we must accept it.
+				if (!accept)
+				{
+					refs=refs.right(refs.length()-1); // Chop off # sign. Use slice after switch to Qt6!
+					refList=refs.split(",");
+					// trim all sub-strings
+					for (int i=0; i<refList.length(); ++i)
+					{
+						refList[i]=refList.at(i).trimmed();
+					}
+
+					//qDebug() << "References for object " << e->getDSODesignation() << "as" << propName << ":" << refList;
+					accept=refList.isEmpty(); // if we don't have a reference list, we must accept it.
+				}
+				// Now refList contains the DSO's reference strings.
+				// Compare with the list of unwantedReferences and accept only "allowed" ones.
+				if (!accept)
+				{
+					//refList.removeAll()
+
+					foreach(QString str, refList)
+					{
+						if (unwantedReferences.contains(str))
+						{
+							qDebug() << "Unwanted reference" << str << "detected for DSO name" << propName;
+							refList.removeOne(str);
+						}
+					}
+					// Now it's inverse: if there are still references, we use the name.
+					accept=!refList.isEmpty();
+				}
+
+				if (accept)
+				{
+					defaultNameMap[e].push_back(propName);
+					NebulaWithReferences nr = {e, refList };
+					commonNameMap[propName.toUpper()] = nr;  // add with reduced refList.
+				}
 			}
 			readOk++;
 		}
@@ -1865,7 +1940,7 @@ void NebulaMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	if (skyCulture.fallbackToInternationalNames)
 	{
 		for (auto it = commonNameMap.begin(); it != commonNameMap.end(); ++it)
-			setName(it.value(), it.key());
+			setName(it.value().nebula, it.key());
 	}
 
 	int numLoaded = 0;
@@ -1945,7 +2020,10 @@ void NebulaMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, co
 	{
 		const auto specificName = entry.toObject()["english"].toString();
 		if (specificName.isEmpty()) continue;
-		setName(commonNameIndexIt.value(), specificName);
+
+		// TODO: Filter away unwanted sources per-skyculture!
+		// For now, just accept as before.
+		setName(commonNameIndexIt.value().nebula, specificName);
 	}
 }
 

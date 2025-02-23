@@ -43,8 +43,20 @@ typedef QSharedPointer<Nebula> NebulaP;
 
 //! @class NebulaMgr
 //! Manage a collection of nebulae. This class is used
-//! to display the NGC catalog with information, and textures for some of them.
-// GZ: This doc seems outdated/misleading - photo textures are not managed here but in StelSkyImageTile
+//! to display the M, NGC, IC, Barnard, and many other catalogs with information, and textures for some of them.
+// GZ: This doc seems widely outdated/misleading - photo textures are not managed here but in StelSkyImageTile
+
+//! Stellarium is prepared to manage more than one set of nebulae (Deep-Sky Objects).
+//! Currently all data are loaded from directory nebulae/default/.
+//! The actual textures are managed in a StelSphericalIndex.
+//! The file names.dat is an annotated list of object nicknames, providing names and references.
+//! Some names are a bit too fancyful for some users, so references can be excluded from loading
+//! by setting an entry in config.ini:
+//! [astro]
+//! nebula_exclude_references=default:ADI,DSC-HT;custom:foo,bar
+//! This would exclude references ADI and DSC-HT from nebulae/default/names.dat
+//! and references foo and bar from a (future) nebulae/custom/names.dat nebula set.
+//! If the value string does not contain a colon, it is assumed we mean default.
 
 class NebulaMgr : public StelObjectModule
 {
@@ -1032,9 +1044,24 @@ private:
 	// TODO: Move these data into main DSO catalog to fast reading (v4)
 	bool loadDSODiscoveryData(const QString& filename);
 
+	//! User-chosen suppressed references.
+	//! The collection of DSO names in default/names.dat does not suit all.
+	//! We allow to block loading references.
+	//! The unwanted references go to config.ini: astro/nebula_exclude_references = default:unref1,unref2,...;mySet:unref7,unref9,...
+	//! In order to load new versions of the ever-growing list of names (with growing list of references),
+	//! we store which entries should be blocked.
+	//! These names only block the global list, not skyculture-added names.
+	QStringList unwantedReferences;
+
 	QVector<NebulaP> dsoArray;		// The DSO list
 	QHash<unsigned int, NebulaP> dsoIndex;
-	QHash<QString/*name*/,NebulaP> commonNameMap;
+	// A struct that holds a NebulaP and user-accepted references from the loaded nebulaSet (usually nebulae/default/names.dat)
+	struct NebulaWithReferences {
+		NebulaP nebula;
+		QStringList references;
+	};
+	QHash<QString/*name*/,NebulaWithReferences> commonNameMap;
+
 	QHash<NebulaP,QVector<QString>> defaultNameMap;
 
 	LinearFader hintsFader;
