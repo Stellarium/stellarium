@@ -780,7 +780,7 @@
 	      from T.A. Rector (University of Alaska Anchorage) and H. Schweiker (WIYN and NOIRLab/NSF/AURA), post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
-	4.125 Images of Sh2-82, Sh2-91, Sh2-119, VDB158
+	4.125 Images of Sh2-82, Sh2-91, Sh2-119, Sh2-235, VDB158
 	      from Sebastian Goralik, post-processing: Sun Shuwei
 	      https://flickr.com/photos/sebastiangoralik/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
