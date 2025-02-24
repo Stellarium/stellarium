@@ -6,6 +6,7 @@
 #  6 - 20  string id      identificator for object in the catalog
 # 21 - end string name    proper name of the object (translatable). Format: _("name") [# comment]
 # comment is optional but should be used to indicate source for names. See source list below for keys.
+# The source keys must not contain hash, colon, comma
 #
 # Sources: 
 #   WK:   Well-known name which does not need special source. 

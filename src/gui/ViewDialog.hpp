@@ -23,6 +23,7 @@
 #include "StelDialog.hpp"
 
 #include <QObject>
+#include <QTimer>
 
 class Ui_viewDialogForm;
 class QListWidgetItem;
@@ -92,6 +93,7 @@ private slots:
 	void updateSelectedTypesCheckBoxes();
 
 	void updateHips();
+	void filterSurveys();
 	void hipsListItemChanged(QListWidgetItem* item);
 	void populateHipsGroups();
 
@@ -115,6 +117,7 @@ private:
 	GreatRedSpotDialog * greatRedSpotDialog;
 	ConfigureDSOColorsDialog * configureDSOColorsDialog;
 	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;
+	QTimer hipsUpdateTimer;
 };
 
 #endif // _VIEWDIALOG_HPP

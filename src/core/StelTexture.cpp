@@ -453,12 +453,6 @@ bool StelTexture::glLoad(const GLData& data)
 	//for now, assume full sized 8 bit GL formats used internally
 	glSize = static_cast<uint>(data.data.size());
 
-#ifndef NDEBUG
-	if (qApp->property("verbose") == true)
-		qDebug() << "StelTexture" << id << "uploaded, total memory usage "
-		         << textureMgr->glMemoryUsage / (1024.0 * 1024.0) << "MB";
-#endif
-
 	//restore old value
 	gl->glPixelStorei(GL_UNPACK_ALIGNMENT, oldalignment);
 
@@ -494,6 +488,12 @@ bool StelTexture::glLoad(const GLData& data)
 	textureMgr->glMemoryUsage += glSize;
 	textureMgr->idMap.insert(id,sharedFromThis());
 
+#ifndef NDEBUG
+	if (qApp->property("verbose") == true)
+		qDebug() << "StelTexture" << id << "of size" << width << u8"×" << height
+		         << "uploaded, total memory usage "
+		         << textureMgr->glMemoryUsage / (1024.0 * 1024.0) << "MB";
+#endif
 
 	// Report success of texture loading
 	emit loadingProcessFinished(false);

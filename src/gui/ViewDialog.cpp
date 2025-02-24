@@ -43,6 +43,7 @@
 #include "StelStyle.hpp"
 #include "StelGuiBase.hpp"
 #include "StelGui.hpp"
+#include "HipsMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelHips.hpp"
@@ -562,11 +563,20 @@ void ViewDialog::createDialogContent()
 	// Hips mgr.
 	populateHipsGroups();
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");	
-	connect(hipsmgr, SIGNAL(surveysChanged()), this, SLOT(updateHips()));
+	// HiPS updates may be very frequent when we are getting a list of
+	// surveys, we don't want to update the widget on each of them, so the
+	// timer is used to delay the update a bit.
+	hipsUpdateTimer.setInterval(50);
+	hipsUpdateTimer.setSingleShot(true);
+	connect(&hipsUpdateTimer, &QTimer::timeout, this, &ViewDialog::updateHips);
+	connect(qobject_cast<HipsMgr*>(hipsmgr), &HipsMgr::surveysChanged, this,
+	        [this]{ if(!hipsUpdateTimer.isActive()) hipsUpdateTimer.start(); });
+
 	connect(ui->surveyTypeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateHips()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(updateHips()));
 	connect(ui->surveysListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(updateHips()), Qt::QueuedConnection);
 	connect(ui->surveysListWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(hipsListItemChanged(QListWidgetItem*)));
+	connect(ui->surveysFilter, &QLineEdit::textChanged, this, &ViewDialog::filterSurveys);
 	updateHips();
 
 	updateTabBarListWidgetWidth();
@@ -723,6 +733,7 @@ void ViewDialog::updateHips()
 			ui->surveysTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 		ui->surveysTextBrowser->setHtml(html);
 	}
+	filterSurveys();
 }
 
 void ViewDialog::populateHipsGroups()
@@ -738,6 +749,19 @@ void ViewDialog::populateHipsGroups()
 	typeComboBox->addItem(q_("Solar System"), "sol");
 	index = typeComboBox->findData(selectedType, Qt::UserRole, Qt::MatchCaseSensitive);
 	typeComboBox->setCurrentIndex(index);
+}
+
+void ViewDialog::filterSurveys()
+{
+	const QString pattern = ui->surveysFilter->text().simplified();
+	const auto& list = *ui->surveysListWidget;
+	for (int row = 0; row < list.count(); ++row)
+	{
+		auto& item = *list.item(row);
+		const QString text = item.text().simplified();
+		const bool show = pattern.isEmpty() || text.contains(pattern, Qt::CaseInsensitive);
+		item.setHidden(!show);
+	}
 }
 
 void ViewDialog::hipsListItemChanged(QListWidgetItem* item)
