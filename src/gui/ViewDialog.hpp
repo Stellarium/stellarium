@@ -93,6 +93,7 @@ private slots:
 	void updateSelectedTypesCheckBoxes();
 
 	void updateHips();
+	void filterSurveys();
 	void hipsListItemChanged(QListWidgetItem* item);
 	void populateHipsGroups();
 

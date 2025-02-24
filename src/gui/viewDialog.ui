@@ -5317,19 +5317,29 @@
           <property name="spacing">
            <number>3</number>
           </property>
-          <item row="1" column="0">
-           <widget class="QListWidget" name="surveysListWidget">
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
+          <item row="0" column="1" rowspan="3">
+           <widget class="QTextBrowser" name="surveysTextBrowser">
+            <property name="openExternalLinks">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
           <item row="0" column="0">
            <widget class="QComboBox" name="surveyTypeComboBox"/>
           </item>
-          <item row="0" column="1" rowspan="2">
-           <widget class="QTextBrowser" name="surveysTextBrowser">
-            <property name="openExternalLinks">
+          <item row="2" column="0">
+           <widget class="QListWidget" name="surveysListWidget">
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLineEdit" name="surveysFilter">
+            <property name="placeholderText">
+             <string>Filter</string>
+            </property>
+            <property name="clearButtonEnabled">
              <bool>true</bool>
             </property>
            </widget>
