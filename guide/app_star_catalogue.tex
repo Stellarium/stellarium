@@ -60,7 +60,7 @@ There also exist some control and reference files:
 \begin{description}
 \item[\file{object\_types\_v0\_1.cat}]
 \item[\file{stars\_hip\_sp\_0v0\_6.cat}]
-\item[\file{gcvs\_hip\_part.dat}]
+\item[\file{gcvs.cat}]
 \item[\file{wds\_hip\_part.dat}]
 \item[\file{cross-id.dat}]
 \item[\file{starsConfig.json}]
@@ -72,7 +72,7 @@ When Stellarium starts, it reads the file \file{stars/hip\_gaia3/starsConfig.jso
 names of the other files which it then loads. The file \file{stars\_hip\_sp\_0v0\_6.cat} 
 contain spectral type of HIP stars. The file \file{object\_types\_v0\_1.cat} 
 contain object type classification name for the main star catalogs. 
-The file \file{gcvs\_hip\_part.dat} contains data about variables stars
+The file \file{gcvs.cat} contains data about variables stars
 (see section~\ref{sec:StarCatalogues:VariableStars}) and file \file{wds\_hip\_part.dat} 
 contains data about double stars (see section~\ref{sec:StarCatalogues:DoubleStars}) 
 which again contains references into the main catalogue files.
@@ -316,18 +316,18 @@ User Directory (see section~\ref{sec:Directories}).
 \subsubsection{File Format}%\label{file-format}
 \label{sec:StarCatalogues:VariableStars:file}
 
-The \file{gcvs\_hip\_part.dat} file contains data about 6862 Variable Stars 
-(see section~\ref{sec:Phenomena:variableStars}) which have HIP identificators and
+The \file{gcvs.cat} file contains data about 49800+ Variable Stars 
+(see section~\ref{sec:Phenomena:variableStars}) which have HIP/Gaia3 identificators and
 are stored in a plain text format with tab delimiter (Table~\ref{tab:sec:StarCatalogues:VariableStars}).
 
 \begin{table}[tb]
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{Name} & \emph{Type} & \emph{Description}\\\midrule
-HIP      & int    & This is the HIP identificator for the star. Used for reference to the main star catalogue.\\%\midrule
-GCVS     & string & This is the GCVS designation for the variable star.\\%\midrule
-Type     & string & Type of variability.\\%\midrule
-Max      & float  & Magnitude at maximum brightness.\\%\midrule
-MFlag    & int    & Magnitude flag code (0=No flag; 1="(" if max. magnitude is an amplitude; 
+HIP/Gaia3 & int    & This is the HIP or Gaia3 identificator for the star. Used for reference to the main star catalogue.\\%\midrule
+GCVS      & string & This is the GCVS designation for the variable star.\\%\midrule
+Type      & string & Type of variability.\\%\midrule
+Max       & float  & Magnitude at maximum brightness.\\%\midrule
+MFlag     & int    & Magnitude flag code (0=No flag; 1="(" if max. magnitude is an amplitude; 
                     2="\textless{}" if max. magnitude is a bright limit; 
                     3="\textgreater{}" is max. magnitude is a faint limit).\\%\midrule
 Min I    & float  & First minimum magnitude or amplitude.\\%\midrule
