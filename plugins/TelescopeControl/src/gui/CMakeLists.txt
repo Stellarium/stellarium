@@ -39,10 +39,10 @@ IF(ENABLE_INDI)
     )
 ENDIF(ENABLE_INDI)
 
-if(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))
+if(WIN32)
 target_link_libraries(TelescopeControl_gui
     TelescopeControl_ASCOM
     )
-ENDif(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))
+ENDif(WIN32)
 
 SET_TARGET_PROPERTIES(TelescopeControl_gui PROPERTIES FOLDER "plugins/TelescopeControl")

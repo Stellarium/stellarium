@@ -8,9 +8,9 @@ add_subdirectory(Rts2)
 IF(ENABLE_INDI)
     add_subdirectory(INDI)
 ENDIF()
-if(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))
+if(WIN32)
     add_subdirectory(ASCOM)
-endif(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))
+endif(WIN32)
 
 SET(TelescopeControl_RES ../resources/TelescopeControl.qrc)
 IF (${QT_VERSION_MAJOR} EQUAL "5")
@@ -56,11 +56,10 @@ IF(ENABLE_INDI)
     )
 ENDIF(ENABLE_INDI)
 
-# Due to incomprehensible errors between ASCOM and Qt6OpenGL!QOpenGL2PaintEngineEx::setState(), we must disable in QT6-based builds.
-if(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))
-#TARGET_LINK_LIBRARIES(TelescopeControl-static
-#    TelescopeControl_ASCOM)
-ENDIF(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))
+if(WIN32)
+TARGET_LINK_LIBRARIES(TelescopeControl-static
+    TelescopeControl_ASCOM)
+ENDIF(WIN32)
 
 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins TelescopeControl-static)
