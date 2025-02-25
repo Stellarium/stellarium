@@ -59,6 +59,22 @@
 #include <QStringList>
 #include <QJsonArray>
 
+struct Page
+{
+	enum
+	{
+		Sky,
+		SSO,
+		DSO,
+		Markings,
+		Landscape,
+		SkyCulture,
+		Surveys,
+
+		COUNT
+	};
+};
+
 ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
 	, addRemoveLandscapesDialog(nullptr)
 	, atmosphereDialog(nullptr)
@@ -69,6 +85,10 @@ ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
 	, configureOrbitColorsDialog(nullptr)
 {
 	ui = new Ui_viewDialogForm;	
+	// This connection should be made here, rather than in createDialogContent, because otherwise it
+	// won't be possible to open the dialog for the first time by right-clicking the HiPS button.
+	const auto hipsmgr = qobject_cast<HipsMgr*>(StelApp::getInstance().getModule("HipsMgr"));
+	connect(qobject_cast<HipsMgr*>(hipsmgr), &HipsMgr::toggleDialog, this, &ViewDialog::toggleHipsDialog);
 }
 
 ViewDialog::~ViewDialog()
@@ -135,13 +155,14 @@ void ViewDialog::connectGroupBox(QGroupBox* groupBox, const QString& actionId)
 void ViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+	Q_ASSERT(ui->stackedWidget->count() == Page::COUNT);
 	dialog->installEventFilter(this);
 
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	// Set the Sky tab activated by default
-	ui->stackedWidget->setCurrentIndex(0);
-	ui->stackListWidget->setCurrentRow(0);
+	ui->stackedWidget->setCurrentIndex(Page::Sky);
+	ui->stackListWidget->setCurrentRow(Page::Sky);
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 	// Kinetic scrolling
 	kineticScrollingList << ui->projectionListWidget << ui->culturesListWidget << ui->skyCultureTextBrowser << ui->landscapesListWidget
@@ -749,6 +770,29 @@ void ViewDialog::populateHipsGroups()
 	typeComboBox->addItem(q_("Solar System"), "sol");
 	index = typeComboBox->findData(selectedType, Qt::UserRole, Qt::MatchCaseSensitive);
 	typeComboBox->setCurrentIndex(index);
+}
+
+void ViewDialog::toggleHipsDialog()
+{
+	if (visible())
+	{
+		if (ui->stackListWidget->currentRow() == Page::Surveys)
+		{
+			setVisible(false);
+		}
+		else
+		{
+			ui->stackListWidget->setCurrentRow(Page::Surveys);
+			// Force it to become active and bring it to the top
+			setVisible(false);
+			setVisible(true);
+		}
+	}
+	else
+	{
+		setVisible(true);
+		ui->stackListWidget->setCurrentRow(Page::Surveys);
+	}
 }
 
 void ViewDialog::filterSurveys()

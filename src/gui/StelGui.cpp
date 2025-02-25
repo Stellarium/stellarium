@@ -1122,7 +1122,7 @@ void StelGui::setFlagShowHiPSButton(bool b)
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btHIPS-on.png");
 				QPixmap pxmapOff(":/graphicGui/btHIPS-off.png");
-				btShowHiPS = new StelButton(nullptr, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Hips_Surveys");
+				btShowHiPS = new StelButton(nullptr, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Hips_Surveys", false, "actionShow_Hips_Surveys_dialog");
 			}
 			getButtonBar()->addButton(btShowHiPS, "040-nebulaeGroup");
 		} else {

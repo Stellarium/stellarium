@@ -96,6 +96,7 @@ private slots:
 	void filterSurveys();
 	void hipsListItemChanged(QListWidgetItem* item);
 	void populateHipsGroups();
+	void toggleHipsDialog();
 
 	void populateOrbitsControls(bool flag);
 	void populateTrailsControls(bool flag);
