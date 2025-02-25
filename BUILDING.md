@@ -415,6 +415,7 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | USE_PLUGIN_LENSDISTORTIONESTIMATOR | bool   | ON      | Enable building the Lens Distortion Estimator plugin
 | USE_PLUGIN_METEORSHOWERS           | bool   | ON      | Enable building the Meteor Showers plugin
 | USE_PLUGIN_MISSINGSTARS            | bool   | ON      | Enable building the Missing Stars plugin
+| USE_PLUGIN_MOSAICCAMERA            | bool   | OFF     | Enable building the Mosaic Camera plugin
 | USE_PLUGIN_NAVSTARS                | bool   | ON      | Enable building the Navigational Stars plugin
 | USE_PLUGIN_NOVAE                   | bool   | ON      | Enable building the Bright Novae plugin
 | USE_PLUGIN_OBSERVABILITY           | bool   | ON      | Enable building the Observability Analysis plugin
