@@ -462,7 +462,10 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 	Mat3d mat3;
 	Vec3d pos;
 	Vec2f texPos;
-	uint16_t gridSize = static_cast<uint16_t>(1 << (splitOrder - drawOrder));
+	// First of all, min() limits gridSize to <256, because otherwise squaring it will overflow index type, uint16_t.
+	// But in practice 32 points per side seems already good enough, and getting to 128 points noticeably affects
+	// performance, so the upper limit is lower.
+	uint16_t gridSize = static_cast<uint16_t>(1 << std::min(5, splitOrder + drawOrder - order));
 	uint16_t n = gridSize + 1;
 	const uint16_t INDICES[2][6][2] = {
 		{{0, 0}, {0, 1}, {1, 0}, {1, 1}, {1, 0}, {0, 1}},
