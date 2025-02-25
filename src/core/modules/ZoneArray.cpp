@@ -498,6 +498,9 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			s->getJ2000Pos(dyrs, v);
 		}
 
+		// in case it is in a binary system
+		s->getBinaryOrbit(core->getJDE(), v);
+
 		if (withParallax) {
 			s->getPlxEffect(withParallax * Plx, v, diffPos);
 			v.normalize();
@@ -564,6 +567,8 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
 	{
 		s->getJ2000Pos(dyrs, tmp);
+		// in case it is in a binary system
+		s->getBinaryOrbit(core->getJDE(), tmp);
 		s->getPlxEffect(withParallax * s->getPlx(), tmp, diffPos);
 		tmp.normalize();
 		if (tmp * v >= cosLimFov)

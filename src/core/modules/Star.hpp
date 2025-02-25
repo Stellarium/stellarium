@@ -93,6 +93,7 @@ struct Star
    // VIP flag is for situation where it can bypass some check (e.g., magnitude display cutoff for Star1 in far
    // past/future)
    inline bool    isVIP() const { return static_cast<const Derived *>(this)->isVIP(); }
+   inline StarId  getHip() const { return static_cast<const Derived *>(this)->getHip(); }
    inline StarId  getGaia() const { return static_cast<const Derived *>(this)->getGaia(); }
    inline bool    hasName() const { return static_cast<const Derived *>(this)->hasName(); }
    inline QString getNameI18n() const { return static_cast<const Derived *>(this)->getNameI18n(); }
@@ -243,6 +244,423 @@ struct Star
 		bS *= 1000./ plx;
 		bS += diffPos * MAS2RAD * 1000.;
    }
+
+   inline void getBinaryOrbit(double epoch, Vec3d& v) const {
+      double pmra = 0.;
+      double pmdec = 0.;
+      double rv = 0.;
+      double plx = 0.;
+      double ra = 0.;
+      double dec = 0.;
+      getBinaryOrbit(epoch, v, ra, dec, plx, pmra, pmdec, rv);
+   }
+
+   inline void getBinaryOrbit(double epoch, Vec3d& v, double& ra, double& dec, double& plx, double& pmra, double& pmdec, double& RV) const {
+      // Orbital elements of the secondary star
+      double binary_period;  // Orbital period [days]
+      double eccentricity;  // Eccentricity
+      double inclination;  // Orbit inclination [rad]
+      double big_omega;  // Position angle of ascending node [rad]
+      double small_omega;  // Argument of periastron [rad]
+      double periastron_epoch;  // Julian Date at periastron passage
+      double semi_major;  // Angular semi-major axis [arcsec]
+      double bary_distance;  // distance [parsec]
+      double data_epoch = STAR_CATALOG_JDEPOCH;  // Julian Date of the data, by default assume the date is the same as the catalog epoch
+      double bary_ra;  // Right Ascension of the barycenter
+      double bary_dec;  // Declination of the barycenter
+      // motion of the barycenter
+      double bary_rv;  // km/s
+      double primary_mass;  // primary star mass
+      double secondary_mass;  // secondary star mass
+      StarId primary_hip;  // primary star ID
+      StarId secondary_hip;  // secondary star ID
+      double bary_pmra;  // mas/yr
+      double bary_pmdec;  // mas/yr
+      const double G = 4.49850215e-15;  // Gravitational constant in parsec^3 / (M_sun * yr^2)
+
+      // Alula Australis - ξ UMa - HIP 55203 - the companion actually does not exist in the catalog
+      // Mizar - ζ UMa - HIP 65378 - there is no Mizar A and B orbital solution only Aa-Ab and Ba-Bb but the companion is not in the catalog
+      // Sheliak - β Lyr - HIP 92420 - there is no β Lyr A and B orbital solution only Aa-Ab but the companion is not in the catalog
+      // Acamar - θ1 Eri - HIP 13847 - there is no orbital solution
+      if ((getHip() == 71683) || (getHip() == 71681))  // Alpha Cen A and B
+      {
+         // Source: https://iopscience.iop.org/article/10.3847/1538-3881/abfaff
+         primary_hip = 71683;
+         secondary_hip = 71681;
+         binary_period = 79.762 * 365.25;
+         eccentricity = 0.51947;
+         inclination = 79.2430 * M_PI_180;
+         big_omega = 205.073 * M_PI_180;
+         small_omega = 231.519 * M_PI_180;
+         periastron_epoch = 2435314.751;
+         semi_major = 17.4930;
+         bary_distance = 1000. / 750.81;
+         data_epoch = 2458667.375;
+         bary_ra = 219.85892215 * M_PI_180;
+         bary_dec = -60.83163195 * M_PI_180;
+         bary_rv = -22.39;  // km/s
+         bary_pmra=-3639.95;
+         bary_pmdec=700.40;
+         primary_mass = 1.0788;
+         secondary_mass = 0.9092;
+      }
+      else if ((getHip() == 32349) || (getGaia() == 2947050466531873024))  // Sirius A and B
+      {
+         // Source: https://arxiv.org/abs/1703.10625
+         primary_hip = 32349;
+         secondary_hip = 2947050466531873024;
+         binary_period = 50.1284 * 365.25;
+         eccentricity = 0.59142;
+         inclination = 136.336 * M_PI_180;
+         big_omega = 45.400 * M_PI_180;
+         small_omega = 149.161 * M_PI_180;
+         periastron_epoch = 2449562.240375;
+         semi_major = 7.4957;
+         data_epoch = 2451545.0;
+         bary_distance = 1000. / 378.9;
+         bary_ra = 101.28715533 * M_PI_180;
+         bary_dec = -16.71611586 * M_PI_180;
+         bary_rv = -8.47;  // km/s
+         bary_pmra=-506.3282841530055;
+         bary_pmdec=-1078.0683606557377;
+         primary_mass = 2.063;
+         secondary_mass = 1.018;
+      }
+      else if ((getHip() == 104214) || (getHip() == 104217))  // 61 Cygni A and B
+      {
+         // Source: http://www.astro.gsu.edu/wds/orb6.html
+         primary_hip = 104214;
+         secondary_hip = 104217;
+         binary_period = 704.858 * 365.25;
+         eccentricity = 0.435;
+         inclination = 52.018 * M_PI_180;
+         big_omega = 174.56 * M_PI_180;
+         small_omega = 154.044 * M_PI_180;
+         periastron_epoch = 2340510.461;
+         semi_major = 24.57;
+         bary_distance = 1000. / 286.0054;
+         bary_ra = 316.7510710233 * M_PI_180;
+         bary_dec = 38.7599676093 * M_PI_180;
+         bary_rv = -65.034;  // km/s
+         bary_pmra=4135.09;
+         bary_pmdec=3202.778;
+         primary_mass = 0.70;
+         secondary_mass = 0.63;
+      }
+      else if ((getHip() == 61941) || (getGaia() == 3683687763520080256))  // Gamma Virginis A and B
+      {
+         // Source: https://ui.adsabs.harvard.edu/abs/2006AJ....132.2219M
+         primary_hip = 61941;
+         secondary_hip = 3683687763520080256;
+         binary_period = 168.93 * 365.25;
+         eccentricity = 0.8825;
+         inclination = 148.82 * M_PI_180;
+         big_omega = 35.34 * M_PI_180;
+         small_omega = 255.02 * M_PI_180;
+         periastron_epoch = 2453531.2295;
+         semi_major = 3.662;
+         data_epoch = 2451545.0;
+         bary_distance = 1000. / 85.58;
+         bary_ra = 190.4149391943586 * M_PI_180;
+         bary_dec = -1.4494030396953002 * M_PI_180;
+         bary_rv = -19.8;  // km/s
+         bary_pmra=-569.747,
+         bary_pmdec=10.7155,
+         primary_mass = 1.4;
+         secondary_mass = 1.4;
+      }
+      else if ((getHip() == 55203) || (getGaia() == 756853643637996160))  // Alula Australis - ξ UMa - HIP 55203
+      {
+         primary_hip = 55203;
+         secondary_hip = 756853643637996160;
+         binary_period = 59.8903 * 365.25;
+         eccentricity = 0.40432;
+         inclination = 122.187 * M_PI_180;
+         big_omega = 100.939 * M_PI_180;
+         small_omega = 126.964 * M_PI_180;
+         periastron_epoch = 2427865.8425000003;
+         semi_major = 2.50442;
+         data_epoch = 2451545.0;
+         bary_distance = 1000. / 114.4867;
+         bary_ra = 169.54442668460666 * M_PI_180;
+         bary_dec = 31.52853473639239 * M_PI_180;
+         bary_rv = -17.5;  // km/s
+         bary_pmra=-393.113693989071;
+         bary_pmdec=-599.1503387978142;
+         primary_mass = 0.97;
+         secondary_mass = 0.86;
+      }
+      else if ((getHip() == 3821) || (getGaia() == 425040000962497792))  // Achird - η Cas - HIP 3821
+      {
+         primary_hip = 3821;
+         secondary_hip = 425040000962497792;
+         binary_period = 479.27 * 365.25;
+         eccentricity = 0.497;
+         inclination = 35.6 * M_PI_180;
+         big_omega = 278.0 * M_PI_180;
+         small_omega = 269.8 * M_PI_180;
+         periastron_epoch = 2411341.9325;
+         semi_major = 12.040;
+         data_epoch = 2451545.0;
+         bary_distance = 1000. / 168.8322;
+         bary_ra = 12.283711400033505 * M_PI_180;
+         bary_dec = 57.813857274201595 * M_PI_180;
+         bary_rv = 8.5089;  // km/s
+         bary_pmra=1103.3904999999997;
+         bary_pmdec=-520.583625;
+         primary_mass = 0.95;
+         secondary_mass = 0.57;
+      }
+      else if ((getHip() == 91919) || (getGaia() == 2098237656065233792))  // ε1 Lyr - HIP 91919
+      {
+         primary_hip = 91919;
+         secondary_hip = 2098237656065233792;
+         binary_period = 2802.8 * 365.25;
+         eccentricity = 0.953;
+         inclination = 102.2 * M_PI_180;
+         big_omega = 149.6 * M_PI_180;
+         small_omega = 258.8 * M_PI_180;
+         periastron_epoch = 2411341.9325;
+         semi_major = 14.237;
+         data_epoch = 2470351.7225;
+         bary_distance = 1000. / 20.4574;
+         bary_ra = 281.08475708701553 * M_PI_180;
+         bary_dec = 39.67067855496124 * M_PI_180;
+         bary_rv = 32.25961538461539;  // km/s
+         bary_pmra=19.984807692307694;
+         bary_pmdec=23.025403846153846;
+         primary_mass = 2.03;
+         secondary_mass = 1.61;
+      }
+      else if ((getHip() == 91926) || (getGaia() == 2098202128100428288))  // ε2 Lyr - HIP 91926
+      {
+         primary_hip = 91926;
+         secondary_hip = 2098202128100428288;
+         binary_period = 724.3 * 365.25;
+         eccentricity = 0.353;
+         inclination = 126.1 * M_PI_180;
+         big_omega = 26.5 * M_PI_180;
+         small_omega = 73.8 * M_PI_180;
+         periastron_epoch = 2533324.475;
+         semi_major = 2.920;
+         data_epoch = 2470351.7225;
+         bary_distance = 1000. / 20.97;
+         bary_ra = 281.0953758085716 * M_PI_180;
+         bary_dec = 39.613010644075835 * M_PI_180;
+         bary_rv = -26.117840375586855;  // km/s
+         bary_pmra=5.7759940089347666;
+         bary_pmdec=57.50554153914594;
+         primary_mass = 2.11;
+         secondary_mass = 2.15;
+      }
+      else if ((getHip() == 62322) || (getGaia() == 5855802671045627648))  // β Mus - HIP 62322
+      {
+         primary_hip = 62322;
+         secondary_hip = 5855802671045627648;
+         binary_period = 479.27 * 365.25;
+         eccentricity = 0.497;
+         inclination = 35.6 * M_PI_180;
+         big_omega = 278.0 * M_PI_180;
+         small_omega = 269.8 * M_PI_180;
+         periastron_epoch = 2411341.9325;
+         semi_major = 12.040;
+         data_epoch = 2470351.7225;
+         bary_distance = 1000. / 10.33;
+         bary_ra = 191.56982860741647 * M_PI_180;
+         bary_dec = -68.10806846587313 * M_PI_180;
+         bary_rv = 42.;  // km/s
+         bary_pmra=-37.47949516527006;
+         bary_pmdec=-16.40962870405608;
+         primary_mass = 2.11;
+         secondary_mass = 2.15;
+      }
+      else if ((getHip() == 14879) || (getGaia() == 5059349158319689344))  // Dalim - α For - HIP 14879
+      {
+         primary_hip = 14879;
+         secondary_hip = 5059349158319689344;
+         binary_period = 268.2120 * 365.25;
+         eccentricity = 0.73704;
+         inclination = 81.484 * M_PI_180;
+         big_omega = 117.397 * M_PI_180;
+         small_omega = 43.023 * M_PI_180;
+         periastron_epoch = 2432336.977325;
+         semi_major = 3.96341;
+         data_epoch = 2470351.7225;
+         bary_distance = 1000. / 71.22;
+         bary_ra = 48.02016189207887 * M_PI_180;
+         bary_dec = -28.984593222987403 * M_PI_180;
+         bary_rv = -19.023605511848338;  // km/s
+         bary_pmra=353.699852158919;
+         bary_pmdec=625.3625094672343;
+         primary_mass = 1.33;
+         secondary_mass = 0.78;
+      }
+      else if ((getHip() == 46651) || (getGaia() == 5426587107149861120))  // ψ Vel - HIP 46651
+      {
+         primary_hip = 46651;
+         secondary_hip = 5426587107149861120;
+         binary_period = 34.12 * 365.25;
+         eccentricity = 0.439;
+         inclination = 58.4 * M_PI_180;
+         big_omega = 288.2 * M_PI_180;
+         small_omega = 47.7 * M_PI_180;
+         periastron_epoch = 2432336.977325;
+         semi_major = 0.810;
+         data_epoch = 2453031.5675;
+         bary_distance = 1000. / 54.4556;
+         bary_ra = 142.67382931492276 * M_PI_180;
+         bary_dec = -40.46651215769516 * M_PI_180;
+         bary_rv = 8.8;  // km/s
+         bary_pmra=-190.96888235294116;
+         bary_pmdec=69.36568627450981;
+         primary_mass = 1.56;
+         secondary_mass = 1.5;
+      }
+      else if ((getHip() == 88601) || (getGaia() == 4468557611977674496))  // ρ Oph - HIP 88601
+      {
+         primary_hip = 88601;
+         secondary_hip = 4468557611977674496;
+         binary_period = 88.3983 * 365.25;
+         eccentricity = 0.49803;
+         inclination = 120.892 * M_PI_180;
+         big_omega = 121.692 * M_PI_180;
+         small_omega = 193.376 * M_PI_180;
+         periastron_epoch = 2413493.8394;
+         semi_major = 4.55038;
+         data_epoch = 2453031.5675;
+         bary_distance = 1000. / 195.71184;
+         bary_ra = 271.36509160183584 * M_PI_180;
+         bary_dec = 2.4947755106163902 * M_PI_180;
+         bary_rv = -6.87;  // km/s
+         bary_pmra=261.9856072570008;
+         bary_pmdec=-1090.3690455852434;
+         primary_mass = 0.9;
+         secondary_mass = 0.7;
+      }
+      else
+      {
+         // exit the function because nothing to do, not a binary star
+         return;
+      }
+      double dyrs = (epoch - data_epoch) / 365.25;
+      semi_major = semi_major * bary_distance * MAS2RAD * 1000.;  // Convert to parsec
+      double mass_ratio = secondary_mass / (primary_mass + secondary_mass);
+      Vec3d bary_r;
+      StelUtils::spheToRect(bary_ra, bary_dec, bary_r);  // barycenter position in equatorial cartesian coordinate
+
+      // angular phase since periastron (at periastron_epoch)
+      double ud = 2 * M_PI * (epoch - periastron_epoch) / binary_period;
+      ud = fmod(ud, 2 * M_PI);  // warp u to [0, 2pi]
+      
+      // eccentric anomaly with newton's method
+      double E = ud;
+      // iterate until convergence or maximum iterations
+      const int max_iterations = 100;
+      const double tolerance = 1e-10;
+      for (int j = 0; j < max_iterations; j++)
+      {
+         double delta = (E - eccentricity * sin(E) - ud) / (1 - eccentricity * cos(E));
+         E = E - delta;
+         if (fabs(delta) < tolerance)
+         {
+         break;
+         }
+      }
+
+      // calculate true anomaly nu and bary_distance r
+      double nu = 2 * atan(sqrt((1 + eccentricity) / (1 - eccentricity)) * tan(E / 2));
+      double radius = semi_major * (1 - eccentricity * cos(E));  // in parsec
+      Vec3d true_orbit(radius * cos(nu), radius * sin(nu), 0);  // all axis in parsec
+
+      // Angular momentum per unit mass
+      double h = sqrt(semi_major * (1 - eccentricity * eccentricity));
+      double mu = G * (primary_mass + secondary_mass);
+      double v_r = (1. / h) * eccentricity * sin(nu);  // radial velocity
+      double v_theta = h / radius;  // Tangential velocity
+      Vec3d true_orbit_vel(v_r * cos(nu) - v_theta * sin(nu), v_r * sin(nu) + v_theta * cos(nu), 0.);
+      true_orbit_vel *= sqrt(mu);  // scale the velocity to physical units in parsec/yr
+
+      // rotation matrix from true to sky plane
+      Mat3d rot;
+      rot.set(cos(big_omega) * cos(small_omega) - sin(big_omega) * sin(small_omega) * cos(inclination),
+            -cos(big_omega) * sin(small_omega) - sin(big_omega) * cos(small_omega) * cos(inclination),
+            sin(big_omega) * sin(inclination),
+            sin(big_omega) * cos(small_omega) + cos(big_omega) * sin(small_omega) * cos(inclination),
+            -sin(big_omega) * sin(small_omega) + cos(big_omega) * cos(small_omega) * cos(inclination),
+            -cos(big_omega) * sin(inclination),
+            sin(small_omega) * sin(inclination),
+            cos(small_omega) * sin(inclination),
+            cos(inclination));
+
+      // to equatorial cartesian coordinate, similar to normal triad but with additional declination rotation
+      Vec3d p(-sin(bary_ra), cos(bary_ra), 0.);
+      Vec3d q(-sin(bary_dec) * cos(bary_ra), -sin(bary_dec) * sin(bary_ra), cos(bary_dec));
+      Vec3d r(cos(bary_dec) * cos(bary_ra), cos(bary_dec) * sin(bary_ra), sin(bary_dec));
+
+      // add the barycenter shift from proper motion
+      Vec3d bary_pmvec0 = (p * bary_pmra + q * bary_pmdec) * MAS2RAD;
+      double bary_pmr0 = bary_rv * (1000. / bary_distance) / (AU / JYEAR_SECONDS) * MAS2RAD;
+      double bary_pmtotsqr = (bary_pmvec0[0] * bary_pmvec0[0] + bary_pmvec0[1] * bary_pmvec0[1] + bary_pmvec0[2] * bary_pmvec0[2]);
+      double bary_f = 1. / sqrt(1. + 2. * bary_pmr0 * dyrs + (bary_pmtotsqr + bary_pmr0 * bary_pmr0) * dyrs * dyrs);
+      Vec3d  bary_u = (bary_r * (1. + bary_pmr0 * dyrs) + bary_pmvec0 * dyrs) * bary_f;
+
+      double xy = sqrt(bary_u[0] * bary_u[0] + bary_u[1] * bary_u[1]);
+      Vec3d  p2(-bary_u[1] / xy, bary_u[0] / xy, 0.0);
+      Vec3d  q2(-bary_u[0] * bary_u[2] / xy, -bary_u[1] * bary_u[2] / xy, xy);
+      // to sky plane, all axis in parsec and parsec/yr
+      Vec3d sky_orbit(0.);
+      Vec3d sky_orbit_vel(0.);
+      for (size_t i = 0; i < 3; ++i) {
+         for (size_t j = 0; j < 3; ++j) {
+               sky_orbit[i] += rot[i*3+j] * true_orbit[j];
+               sky_orbit_vel[i] += rot[i*3+j] * true_orbit_vel[j];
+         }
+      }
+
+      // swap the first two components of sky_orbit to match ra, dec axis
+      double tmp = sky_orbit[0];
+      sky_orbit[0] = sky_orbit[1];
+      sky_orbit[1] = tmp;
+      tmp = sky_orbit_vel[0];
+      sky_orbit_vel[0] = sky_orbit_vel[1];
+      sky_orbit_vel[1] = tmp;
+
+      // need to check secondary star first
+      if (getHip() == secondary_hip || getGaia() == secondary_hip)
+      {
+         sky_orbit *= (1.0 - mass_ratio);
+         sky_orbit_vel *= (1.0 - mass_ratio);
+      }
+      else if (getHip() == primary_hip || getGaia() == primary_hip)
+      {
+         sky_orbit *= -mass_ratio;
+         sky_orbit_vel *= -mass_ratio;
+      }
+
+      // sky_orbit is in parsec and sky_orbit_vel is in parsec/year, we want them arcsecond and arcsecond/year
+      sky_orbit[0] /= bary_distance;
+      sky_orbit[1] /= bary_distance;
+      sky_orbit_vel *= 1.e-3 / MAS2RAD / bary_distance;
+
+      // sky_orbit_vel is in arcsecond/year
+      sky_orbit_vel.set(sky_orbit_vel[0] + bary_pmra / 1000., 
+                        sky_orbit_vel[1] + bary_pmdec / 1000., 
+                        sky_orbit_vel[2] + bary_rv * (JYEAR_SECONDS / AU) / bary_distance);
+
+      sky_orbit_vel = p * sky_orbit_vel[0] + q * sky_orbit_vel[1] + r * sky_orbit_vel[2];  // arcsecond/year
+
+      StelUtils::spheToRect(bary_ra + sky_orbit[0], 
+                            bary_dec + sky_orbit[1], 
+                            bary_distance + sky_orbit[2], 
+                            sky_orbit);  // barycenter position in equatorial cartesian coordinate
+
+      plx = 1000. / bary_distance * bary_f;
+      RV  = sky_orbit_vel.dot(bary_u) * (1000./plx) * (AU / JYEAR_SECONDS);
+      v = sky_orbit  - bary_r * bary_distance + bary_u * (1000. / plx);
+      pmra = sky_orbit_vel.dot(p2) * 1000.;
+      pmdec = sky_orbit_vel.dot(q2) * 1000.;
+      StelUtils::rectToSphe(&ra, &dec, v);
+   }
 };
 
 struct Star1 : public Star<Star1>
@@ -353,6 +771,7 @@ public:
       return sqrt((getDx0() * cos(getX1()) * getDx0() * cos(getX1())) + (getDx1() * getDx1()));
    }
    StelObjectP    createStelObject(const SpecialZoneArray<Star2> * a, const SpecialZoneData<Star2> * z) const;
+   StarId         getHip() const { return 0; }
    StarId         getGaia() const { return d.gaia_id; }
    float          getBV(void) const { return static_cast<float>(d.b_v) / 1000.f; }
    QString        getNameI18n(void) const { return QString(); }
@@ -406,6 +825,7 @@ public:
    double         getRV() const { return 0.; }
    double         getBV() const { return (0.025 * d.b_v) - 1.; } // in mag
    double         getMag() const { return d.vmag * 20 + 16000; } // in milli-mag
+   StarId         getHip() const { return 0; }
    StarId         getGaia() const { return d.gaia_id; }
    QString        getNameI18n() const { return QString(); }
    QString        getScreenNameI18n() const { return QString(); }
