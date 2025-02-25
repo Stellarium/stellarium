@@ -76,7 +76,7 @@ The file \file{gcvs.cat} contains data about variables stars
 (see section~\ref{sec:StarCatalogues:VariableStars}) and file \file{wds\_hip\_part.dat} 
 contains data about double stars (see section~\ref{sec:StarCatalogues:DoubleStars}) 
 which again contains references into the main catalogue files.
-The file \file{cross-id.dat} (see section~\ref{sec:StarCatalogues:CrossIdentificationData}) contains cross-identification data between HIP, SAO, HD and HR designations.
+The file \file{cross-id.dat} (see section~\ref{sec:StarCatalogues:CrossIdentificationData}) contains cross-identification data between HIP, Gaia DR3, SAO, HD and HR designations.
 
 A given catalogue file models stars for one and only one level (i.e. for
 a fixed number of zones), which is recorded in the header of the file.
@@ -91,9 +91,9 @@ know about the zone model to be able to extract positional data.
 \emph{File} & \emph{Data     } & \emph{Data            } & \emph{Geodesic      } & \emph{\#Records} & \emph{Notes}\\
             & \emph{     Type} & \emph{     Record Size} & \emph{         Level} &                  &             \\
 \midrule
-\file{stars\_0\_0v0\_14.cat} & 0 & 48 bytes & 0 &        5,026 & Hipparcos + Gaia\\
+\file{stars\_0\_0v0\_15.cat} & 0 & 48 bytes & 0 &        5,025 & Hipparcos + Gaia\\
 \file{stars\_1\_0v0\_14.cat} & 0 & 48 bytes & 1 &       21,421 & Hipparcos + Gaia\\
-\file{stars\_2\_0v0\_14.cat} & 0 & 48 bytes & 2 &      141,557 & Hipparcos + Gaia\\
+\file{stars\_2\_0v0\_15.cat} & 0 & 48 bytes & 2 &      141,558 & Hipparcos + Gaia\\
 \file{stars\_3\_0v0\_9.cat}  & 0 & 48 bytes & 3 &      418,209 & Gaia\\
 \file{stars\_4\_1v0\_5.cat}  & 1 & 32 bytes & 4 &    1,741,891 & Gaia\\
 \file{stars\_5\_1v0\_5.cat}  & 1 & 32 bytes & 5 &    8,051,915 & Gaia\\
@@ -309,7 +309,7 @@ of Variable Stars is based on the \citetp{samus}.
 \label{sec:StarCatalogues:VariableStars:general}
 
 Stellarium's Variable Stars catalog data is kept
-in the \file{stars/default} sub-directory of the Installation Directory and/or
+in the \file{stars/hip_gaia3} sub-directory of the Installation Directory and/or
 User Directory (see section~\ref{sec:Directories}).
 
 
@@ -323,11 +323,11 @@ are stored in a plain text format with tab delimiter (Table~\ref{tab:sec:StarCat
 \begin{table}[tb]
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{Name} & \emph{Type} & \emph{Description}\\\midrule
-HIP/Gaia3 & int    & This is the HIP or Gaia3 identificator for the star. Used for reference to the main star catalogue.\\%\midrule
-GCVS      & string & This is the GCVS designation for the variable star.\\%\midrule
-Type      & string & Type of variability.\\%\midrule
-Max       & float  & Magnitude at maximum brightness.\\%\midrule
-MFlag     & int    & Magnitude flag code (0=No flag; 1="(" if max. magnitude is an amplitude; 
+HIP/Gaia & int    & This is the HIP or Gaia DR3 identificator for the star. Used for reference to the main star catalogue.\\%\midrule
+GCVS     & string & This is the GCVS designation for the variable star.\\%\midrule
+Type     & string & Type of variability.\\%\midrule
+Max      & float  & Magnitude at maximum brightness.\\%\midrule
+MFlag    & int    & Magnitude flag code (0=No flag; 1="(" if max. magnitude is an amplitude; 
                     2="\textless{}" if max. magnitude is a bright limit; 
                     3="\textgreater{}" is max. magnitude is a faint limit).\\%\midrule
 Min I    & float  & First minimum magnitude or amplitude.\\%\midrule
