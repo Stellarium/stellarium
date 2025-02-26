@@ -323,7 +323,7 @@
 	    right to modify and redistribute) "as long as it is credited."
 	4.8 M31 pictures come from LEE ang HG731GZ
 	    License: Creative Commons Attribution 3.0 Unported
-	4.9 Images of NGC4526, NGC6544, NGC6553, Sh2-261
+	4.9 Images of NGC4526, NGC6544, NGC6553
 	    from Yang Kai
 	    License: public domain 
 	4.10 Images of M1, M27, M57, M97, NGC6946 from Stephane
@@ -780,7 +780,7 @@
 	      from T.A. Rector (University of Alaska Anchorage) and H. Schweiker (WIYN and NOIRLab/NSF/AURA), post-processing: Sun Shuwei
 	      https://noirlab.edu/public/
 	      License: Creative Commons Attribution 4.0 International
-	4.125 Images of Sh2-82, Sh2-91, Sh2-119, Sh2-135, Sh2-235, VDB158
+	4.125 Images of Sh2-82, Sh2-91, Sh2-119, Sh2-135, Sh2-235,  Sh2-261, VDB158
 	      from Sebastian Goralik, post-processing: Sun Shuwei
 	      https://flickr.com/photos/sebastiangoralik/
 	      License: Creative Commons CC0 1.0 Universal Public Domain Dedication
