@@ -62,7 +62,7 @@ There also exist some control and reference files:
 \item[\file{stars\_hip\_sp\_0v0\_6.cat}]
 \item[\file{gcvs.cat}]
 \item[\file{wds\_hip\_part.dat}]
-\item[\file{cross-id.dat}]
+\item[\file{cross-id.cat}]
 \item[\file{starsConfig.json}]
 \item[\file{name.fab}]
 \end{description}
@@ -76,7 +76,7 @@ The file \file{gcvs.cat} contains data about variables stars
 (see section~\ref{sec:StarCatalogues:VariableStars}) and file \file{wds\_hip\_part.dat} 
 contains data about double stars (see section~\ref{sec:StarCatalogues:DoubleStars}) 
 which again contains references into the main catalogue files.
-The file \file{cross-id.dat} (see section~\ref{sec:StarCatalogues:CrossIdentificationData}) contains cross-identification data between HIP, Gaia DR3, SAO, HD and HR designations.
+The file \file{cross-id.cat} (see section~\ref{sec:StarCatalogues:CrossIdentificationData}) contains cross-identification data between HIP, Gaia DR3, SAO, HD and HR designations.
 
 A given catalogue file models stars for one and only one level (i.e. for
 a fixed number of zones), which is recorded in the header of the file.
@@ -1835,18 +1835,18 @@ in the \file{stars/default} sub-directory of the Installation Directory and/or U
 \subsubsection{File Format}
 \label{sec:StarCatalogues:CrossIdentificationData:file}
 
-The file \file{cross-id.dat} contains cross reference data for catalogues HIP, SAO, HD and HR, which stored in the plain text format with tab delimiter.
+The file \file{cross-id.cat} contains cross reference data for catalogues HIP, SAO, HD and HR, which stored in the binary format.
 
 \begin{table}[htb]
 \begin{tabularx}{\textwidth}{l|c|X}\toprule
 \emph{Name} & \emph{Type} & \emph{Description}\\\midrule
-HIP	      & int & HIP or Gaia identifier for the star. Used for reference to the main star catalogue.\\%\midrule
-Component & str & Component of the star in the multiple star system.\\%\midrule
-SAO    	  & int & SAO identifier for the star.\\%\midrule
-HD	      & int & HD identifier for the star.\\%\midrule
-HR	      & int & HR identifier for the star.\\\bottomrule
+HIP	      & unsigned long long & HIP or Gaia identifier for the star. Used for reference to the main star catalogue.\\%\midrule
+Component & int 			   & Component of the star in the multiple star system.\\%\midrule
+SAO    	  & int 			   & SAO identifier for the star.\\%\midrule
+HD	      & int 			   & HD identifier for the star.\\%\midrule
+HR	      & int 			   & HR identifier for the star.\\\bottomrule
 \end{tabularx}
-\caption{Format of \file{cross-id.dat}}
+\caption{Format of \file{cross-id.cat}}
 \label{tab:StarCatalogues:CrossIdentificationData:file}
 \end{table}
 

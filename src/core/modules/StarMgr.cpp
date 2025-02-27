@@ -1170,66 +1170,55 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 
 	qInfo().noquote() << "Loading cross-identification data from" << QDir::toNativeSeparators(crossIdFile);
 	QFile ciFile(crossIdFile);
-	if (!ciFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	if (!ciFile.open(QIODevice::ReadOnly))
 	{
 		qWarning().noquote() << "Could not open" << QDir::toNativeSeparators(crossIdFile);
 		return;
 	}
-	const QStringList& allRecords = QString::fromUtf8(ciFile.readAll()).split('\n');
-	ciFile.close();
+
+	QDataStream in(&ciFile);
+	in.setByteOrder(QDataStream::LittleEndian);
 
 	crossid crossIdData;
 
-	int readOk=0;
-	int totalRecords=0;
-	int lineNumber=0;
-	// record structure is delimited with a 'tab' character. Example record strings:
-	// "1	128522	224700"
-	// "2	165988	224690"
-	for (const auto& record : allRecords)
+	int readOk = 0;
+	int totalRecords = 0;
+	StarId hip;
+	int component, sao, hd, hr;
+	QString hipstar;
+	quint64 hipTemp;
+
+	while (!in.atEnd())
 	{
-		++lineNumber;
-		// skip comments and empty lines
-		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
-			continue;
-
 		++totalRecords;
-		const QStringList& fields = record.split('\t');
-		if (fields.size()!=5)
+
+		in >> hipTemp >> component >> sao >> hd >> hr;
+		hip = static_cast<StarId>(hipTemp);
+
+		if (in.status() != QDataStream::Ok)
 		{
-			qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
-					     << " - record does not match record pattern";
-			continue;
+			qWarning().noquote() << "Parse error in" << QDir::toNativeSeparators(crossIdFile)
+						 << " - failed to read data";
+			break;
 		}
-		else
-		{
-			// The record is the right format.  Extract the fields
-			bool ok;
-			StarId hip = fields.at(0).toLongLong(&ok);
-			if (!ok)
-			{
-				qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
-						     << " - failed to convert " << fields.at(0) << "to a number";
-				continue;
-			}
 
-			QString hipstar = QString("%1%2").arg(hip).arg(fields.at(1).trimmed());
-			crossIdData.sao = fields.at(2).toInt(&ok);
-			crossIdData.hd = fields.at(3).toInt(&ok);
-			crossIdData.hr = fields.at(4).toInt(&ok);
+		hipstar = QString("%1%2").arg(hip).arg(component == 0 ? QString() : QString(QChar('A' + component - 1)));
+		crossIdData.sao = sao;
+		crossIdData.hd = hd;
+		crossIdData.hr = hr;
 
-			crossIdMap[hipstar] = crossIdData;
-			if (crossIdData.sao>0)
-				saoStarsIndex[crossIdData.sao] = hip;
-			if (crossIdData.hd>0)
-				hdStarsIndex[crossIdData.hd] = hip;
-			if (crossIdData.hr>0)
-				hrStarsIndex[crossIdData.hr] = hip;
+		crossIdMap[hipstar] = crossIdData;
+		if (crossIdData.sao > 0)
+			saoStarsIndex[crossIdData.sao] = hip;
+		if (crossIdData.hd > 0)
+			hdStarsIndex[crossIdData.hd] = hip;
+		if (crossIdData.hr > 0)
+			hrStarsIndex[crossIdData.hr] = hip;
 
-			++readOk;
-		}
+		++readOk;
 	}
 
+	ciFile.close();
 	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "cross-identification data records for stars";
 }
 
@@ -2190,9 +2179,9 @@ void StarMgr::populateStarsDesignations()
 	else
 		loadWds(fic);
 
-	fic = StelFileMgr::findFile("stars/hip_gaia3/cross-id.dat");
+	fic = StelFileMgr::findFile("stars/hip_gaia3/cross-id.cat");
 	if (fic.isEmpty())
-		qWarning() << "Could not load cross-identification data file: stars/hip_gaia3/cross-id.dat";
+		qWarning() << "Could not load cross-identification data file: stars/hip_gaia3/cross-id.cat";
 	else
 		loadCrossIdentificationData(fic);
 }
