@@ -1186,12 +1186,14 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 	StarId hip;
 	int component, sao, hd, hr;
 	QString hipstar;
+	quint64 hipTemp;
 
 	while (!in.atEnd())
 	{
 		++totalRecords;
 
-		in >> hip >> component >> sao >> hd >> hr;
+		in >> hipTemp >> component >> sao >> hd >> hr;
+		hip = static_cast<StarId>(hipTemp);
 
 		if (in.status() != QDataStream::Ok)
 		{
