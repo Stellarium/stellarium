@@ -688,9 +688,15 @@ void ConstellationMgr::updateI18n()
 
 	for (auto* constellation : constellations)
 	{
-		constellation->nameI18 = trans.tryQtranslate(constellation->englishName, "constellation");
+		QString context = constellation->context;
+		constellation->nameI18 = trans.tryQtranslate(constellation->englishName, context);
 		if (constellation->nameI18.isEmpty())
-			constellation->nameI18 = qc_(constellation->englishName, "constellation");
+		{
+			if (context.isEmpty())
+				constellation->nameI18 = q_(constellation->englishName);
+			else
+				constellation->nameI18 = qc_(constellation->englishName, context);
+		}
 	}
 }
 
