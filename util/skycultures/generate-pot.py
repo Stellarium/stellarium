@@ -201,8 +201,11 @@ def update_cultures_pot():
                         if 'translators_comments' in name:
                             comment += '\n' + name['translators_comments']
 
+                        context = None
+                        if 'context' in name:
+                            context = name['context']
 
-                        entry = polib.POEntry(comment = comment, msgid = english, msgstr = "")
+                        entry = polib.POEntry(comment = comment, msgid = english, msgstr = "", msgctxt = context)
                         if entry in pot:
                             prev_entry = pot.find(entry.msgid)
                             assert prev_entry

@@ -76,6 +76,7 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool p
 	const auto names = data["common_name"].toObject();
 	nativeName = names["native"].toString();
 	englishName = preferNativeName && !nativeName.isEmpty() ? nativeName : names["english"].toString();
+	context = names["context"].toString();
 	if (englishName.isEmpty() && nativeName.isEmpty())
 		qWarning() << "No name for constellation" << id;
 
@@ -336,10 +337,16 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 
 	if (flags&Name)
 	{
+		QStringList names;
+		names << getNativeName();
+
 		QString shortname = getShortName();
-		oss << "<h2>" << getNameI18n();
 		if (!shortname.isEmpty() && shortname.toInt()==0)
-			oss << " (" << shortname << ")";
+			names << shortname;
+
+		oss << "<h2>" << getNameI18n();
+		if (!names.empty())
+			oss << " (" << names.join(" - ") << ")";
 		oss << "</h2>";
 	}
 

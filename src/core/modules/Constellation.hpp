@@ -110,6 +110,8 @@ private:
 	QString getEnglishName() const override {return englishName;}
 	//! Get the short name for the Constellation (returns the abbreviation).
 	QString getShortName() const {return abbreviation;}
+	//! Get the native name for the Constellation
+	QString getNativeName() const {return nativeName;}
 	//! Draw the lines for the Constellation.
 	//! This method uses the coords of the stars (optimized for use through
 	//! the class ConstellationMgr only).
