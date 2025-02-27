@@ -33,7 +33,7 @@ ChangesAssociations=yes
 Compression=lzma2/ultra
 
 [Files]
-Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "@CMAKE_INSTALL_PREFIX@\bin\*.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "@CMAKE_INSTALL_PREFIX@\bin\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "@CMAKE_SOURCE_DIR@\data\stellarium.url"; DestDir: "{app}"; Flags: ignoreversion
 Source: "@CMAKE_SOURCE_DIR@\data\stellarium-devdocs.url"; DestDir: "{app}"; Flags: ignoreversion
