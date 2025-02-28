@@ -156,8 +156,8 @@ QString StelTranslator::tryTranslateChineseStar(const QString& s, const QString&
 
 	if (!addedPresent) return translatedConstellation + number;
 
-	const auto& translatedAdded = qtranslate("Added", "chinese skycultures");
-	return QString("%1 %2%3").arg(translatedConstellation, translatedAdded, number);
+	const auto& translatedAdded = qtranslate(" Added", "chinese skycultures");
+	return QString("%1%2%3").arg(translatedConstellation, translatedAdded, number);
 }
 
 QString StelTranslator::tryQtranslate(const QString &s, const QString &c) const
