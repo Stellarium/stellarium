@@ -1680,7 +1680,7 @@ void StelMainView::saveScreenShot(const QString& filePrefix, const QString& save
 	emit screenshotRequested();
 }
 
-void StelMainView::doScreenshot(void)
+bool StelMainView::getScreenshot(QImage &im, bool useCustomSize, bool invert, bool nightmode)
 {
 	QFileInfo shotDir;
 	// Make a screenshot which may be larger than the current window. This is harder than you would think:
@@ -1695,7 +1695,7 @@ void StelMainView::doScreenshot(void)
 	int physImgHeight = std::lround(stelScene->height() * pixelRatio);
 	bool nightModeWasEnabled=nightModeEffect->isEnabled();
 	nightModeEffect->setEnabled(false);
-	if (flagUseCustomScreenshotSize)
+	if (useCustomSize)
 	{
 		// Borrowed from Scenery3d renderer: determine maximum framebuffer size as minimum of texture, viewport and renderbuffer size
 		QOpenGLContext *context = QOpenGLContext::currentContext();
@@ -1737,7 +1737,7 @@ void StelMainView::doScreenshot(void)
 		else
 		{
 			qCWarning(mainview) << "No GL context for screenshot! Aborting.";
-			return;
+			return false;
 		}
 	}
 	// The texture format depends on used GL version. RGB is fine on OpenGL. on GLES, we must use RGBA and circumvent problems with a few more steps.
@@ -1780,7 +1780,6 @@ void StelMainView::doScreenshot(void)
 	stelScene->render(&painter, QRectF(), QRectF(0,0,virtImgWidth,virtImgHeight) , Qt::KeepAspectRatio);
 	painter.end();
 
-	QImage im;
 	if (isGLES)
 	{
 		// We have RGBA texture with possibly empty spots when atmosphere was off.
@@ -1806,7 +1805,7 @@ void StelMainView::doScreenshot(void)
 		stelGui->forceRefreshGui();
 	}
 
-	if (nightModeWasEnabled)
+	if (nightmode)
 	{
 		for (int row=0; row<im.height(); ++row)
 			for (int col=0; col<im.width(); ++col)
@@ -1816,9 +1815,18 @@ void StelMainView::doScreenshot(void)
 				im.setPixel(col, row, qRgb(gray, 0, 0));
 			}
 	}
-	if (flagInvertScreenShotColors)
+	if (invert)
 		im.invertPixels();
+	return true;
+}
 
+void StelMainView::doScreenshot(void)
+{
+	QImage im;
+	if (!getScreenshot(im, flagUseCustomScreenshotSize, flagInvertScreenShotColors, nightModeEffect->isEnabled()))
+		return;
+
+	QFileInfo shotDir;
 	if (StelFileMgr::getScreenshotDir().isEmpty())
 	{
 		qWarning() << "Oops, the directory for screenshots is not set! Let's try create and set it...";

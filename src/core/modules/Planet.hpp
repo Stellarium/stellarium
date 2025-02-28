@@ -311,6 +311,8 @@ public:
 	double getMeanSolarDay(void) const;
 	//! Get albedo
 	double getAlbedo(void) const { return static_cast<double>(albedo); }
+	//! return whether this planet is hidden (observers, etc.)
+	bool isHidden() const {return hidden;}
 
 	//! @return texture map name
 	const QString& getTextMapName() const {return texMapName;}
