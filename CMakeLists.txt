@@ -556,6 +556,7 @@ ELSE()
 ENDIF()
 ADD_PLUGIN(RemoteSync 1)
 ADD_PLUGIN(Satellites 1)
+ADD_PLUGIN(Planes 1)
 ADD_PLUGIN(Scenery3d 1)
 ADD_PLUGIN(SolarSystemEditor 1)
 ADD_PLUGIN(Supernovae 1)
@@ -567,6 +568,11 @@ ADD_PLUGIN(Vts 0)
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
+
+IF(USE_PLUGIN_PLANES)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Sql)
+     SET(QT_USE_QTSQL TRUE) # Planes plugin needs SQL module
+ENDIF()
 
 # Custom target used to manage dependencies of stellarium -> Static plugins
 # It is important that static plugins are compiled before stellarium main executable is linked

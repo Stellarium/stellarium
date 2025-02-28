@@ -551,6 +551,11 @@ ELSE()
      ADD_EXECUTABLE(stellarium WIN32 ${stellarium_exe_SRCS})
      TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${STELMAIN_DEPS} stelMain)
 
+     IF(USE_PLUGIN_PLANES)
+	  #QT_USE_MODULES(stelMain Sql) ## old call? next line may replace it. ATTN: Rebased 2023 from 2013.
+	  SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::Sql)
+     ENDIF()
+
      IF(APPLE)
 	  SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
      ENDIF()
