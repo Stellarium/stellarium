@@ -462,7 +462,10 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 	Mat3d mat3;
 	Vec3d pos;
 	Vec2f texPos;
-	uint16_t gridSize = static_cast<uint16_t>(1 << (splitOrder - drawOrder));
+	// First of all, min() limits gridSize to <256, because otherwise squaring it will overflow index type, uint16_t.
+	// But in practice 32 points per side seems already good enough, and getting to 128 points noticeably affects
+	// performance, so the upper limit is lower.
+	uint16_t gridSize = static_cast<uint16_t>(1 << std::min(5, splitOrder + drawOrder - order));
 	uint16_t n = gridSize + 1;
 	const uint16_t INDICES[2][6][2] = {
 		{{0, 0}, {0, 1}, {1, 0}, {1, 1}, {1, 0}, {0, 1}},
@@ -498,6 +501,33 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 			{
 				indices << (INDICES[outside ? 1 : 0][k][1] + i) * n +
 					        INDICES[outside ? 1 : 0][k][0] + j;
+			}
+
+			// Check that the surface is convex. If it isn't, make it convex.
+
+			const auto p0 = verts[indices[indices.size() - 6 + 0]];
+			const auto p1 = verts[indices[indices.size() - 6 + 1]];
+			const auto p2 = verts[indices[indices.size() - 6 + 2]];
+
+			// Midpoint of the shared edge of two triangles.
+			const auto midPoint = outside ? (p0 + p2)/2. : (p1 + p2)/2.;
+			// A vertex that's not on the shared edge.
+			const auto outerVert = outside ? p1 : p0;
+			// The vector from an outer edge towards the midpoint of the shared edge.
+			const auto vecFromMidPointToOuterVert = outerVert - midPoint;
+			if(vecFromMidPointToOuterVert.dot(midPoint) > 0)
+			{
+				// The surface is concave. Swap some vertices to make it convex.
+				if(outside)
+				{
+					indices[indices.size() - 4] = indices[indices.size() - 2];
+					indices[indices.size() - 1] = indices[indices.size() - 5];
+				}
+				else
+				{
+					indices[indices.size() - 4] = indices[indices.size() - 3];
+					indices[indices.size() - 1] = indices[indices.size() - 6];
+				}
 			}
 		}
 	}

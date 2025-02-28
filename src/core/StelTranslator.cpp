@@ -112,7 +112,7 @@ QString StelTranslator::qTranslateStar(const QString& s, const QString& c) const
 
 QString StelTranslator::tryTranslateChineseStar(const QString& s, const QString& c) const
 {
-	static const auto re = []{ QRegularExpression re("(.+)( [IXVLCDM]+)$"); re.optimize(); return re; }();
+	static const auto re = []{ QRegularExpression re("(.+)( [IXVLCDM]+)([*?]*)$"); re.optimize(); return re; }();
 	const auto match = re.match(s);
 	if (!match.hasMatch()) return {};
 
@@ -153,11 +153,11 @@ QString StelTranslator::tryTranslateChineseStar(const QString& s, const QString&
 			number += chars[units];
 		}
 	}
+	const auto extra = match.captured(3);
+	if (!addedPresent) return translatedConstellation + number + extra;
 
-	if (!addedPresent) return translatedConstellation + number;
-
-	const auto& translatedAdded = qtranslate("Added", "skyculture");
-	return QString("%1 %2%3").arg(translatedConstellation, translatedAdded, number);
+	const auto& translatedAdded = qtranslate(" Added", "chinese skycultures");
+	return QString("%1%2%3%4").arg(translatedConstellation, translatedAdded, number, extra);
 }
 
 QString StelTranslator::tryQtranslate(const QString &s, const QString &c) const

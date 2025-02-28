@@ -38,6 +38,7 @@ SCPOTFILE = os.path.join(DIR, '..', '..', 'po', 'stellarium-skycultures', 'stell
 
 sc_names = {}
 common_names = set()
+cons_ast_names = set()
 
 def is_sky_culture_dir(d):
     if not os.path.isdir(os.path.join(SCDIR, d)):
@@ -205,6 +206,8 @@ def update_cultures_pot():
                         if 'context' in name:
                             context = name['context']
 
+                        cons_ast_names.add(english)
+
                         entry = polib.POEntry(comment = comment, msgid = english, msgstr = "", msgctxt = context)
                         if entry in pot:
                             prev_entry = pot.find(entry.msgid, by = 'msgid', msgctxt = context)
@@ -258,10 +261,27 @@ def update_cultures_pot():
                 if english in common_names:
                     continue
 
-                if native:
-                    comment = f'{sc_name} name for {obj_id}, native: {native}'
-                else:
-                    comment = f'{sc_name} name for {obj_id}'
+                chinese_name_cleaned = False
+                if "chinese" in sc_name.lower():
+                    cleaned = english
+                    cleaned = re.sub(' Added', '', cleaned)
+                    has_added = cleaned != english
+                    cleaned = re.sub(' [MDCLXVI]+[*?]*$', '', cleaned)
+                    chinese_name_cleaned = cleaned != english
+                    english = cleaned
+
+                    if has_added:
+                        comment = 'This word is used in Chinese star names, e.g. "Wang Liang Added IX"'
+                        entry = polib.POEntry(msgid=' Added', comment=comment, msgctxt='chinese skycultures')
+                        if entry not in pot:
+                            pot.append(entry)
+
+                comment = ''
+                if not chinese_name_cleaned or not english in cons_ast_names:
+                    if native:
+                        comment = f'{sc_name} name for {obj_id}, native: {native}'
+                    else:
+                        comment = f'{sc_name} name for {obj_id}'
 
                 if 'translators_comments' in name:
                     comment += '\n' + name['translators_comments']
@@ -270,7 +290,8 @@ def update_cultures_pot():
                 if entry in pot:
                     prev_entry = pot.find(entry.msgid)
                     assert prev_entry
-                    prev_entry.comment += '\n' + comment
+                    if comment:
+                        prev_entry.comment += '\n' + comment
                 else:
                     pot.append(entry)
 
