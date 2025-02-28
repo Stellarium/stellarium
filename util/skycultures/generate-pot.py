@@ -272,7 +272,7 @@ def update_cultures_pot():
 
                     if has_added:
                         comment = 'This word is used in Chinese star names, e.g. "Wang Liang Added IX"'
-                        entry = polib.POEntry(msgid='Added', comment=comment)
+                        entry = polib.POEntry(msgid='Added', comment=comment, msgctxt='chinese skycultures')
                         if entry not in pot:
                             pot.append(entry)
 
