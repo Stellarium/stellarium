@@ -96,6 +96,7 @@ QHash<int, StarId> StarMgr::saoStarsIndex;
 QHash<int, StarId> StarMgr::hdStarsIndex;
 QHash<int, StarId> StarMgr::hrStarsIndex;
 QHash<StarId, QString> StarMgr::referenceMap;
+QHash<StarId, binaryorbitstar> StarMgr::binaryOrbitStarMap;
 
 QStringList initStringListFromFile(const QString& file_name)
 {
@@ -382,6 +383,14 @@ QString StarMgr::getGcvsSpectralType(StarId hip)
 	if (it!=varStarsMapI18n.end())
 		return it.value().stype;
 	return QString();
+}
+
+binaryorbitstar StarMgr::getBinaryOrbitData(StarId hip)
+{
+	auto it = binaryOrbitStarMap.find(hip);
+	if (it!=binaryOrbitStarMap.end())
+		return it.value();
+	return binaryorbitstar();
 }
 
 void StarMgr::copyDefaultConfigFile()
@@ -1221,6 +1230,84 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 
 	ciFile.close();
 	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "cross-identification data records for stars";
+}
+
+// load binary system orbital parameters data
+void StarMgr::loadBinaryOrbitalData(const QString& orbitalParamFile)
+{
+	qInfo().noquote() << "Loading orbital parameters data for binary system from" << QDir::toNativeSeparators(orbitalParamFile);
+	QFile opFile(orbitalParamFile);
+	if (!opFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qWarning().noquote() << "Could not open" << QDir::toNativeSeparators(orbitalParamFile);
+		return;
+	}
+	const QStringList& allRecords = QString::fromUtf8(opFile.readAll()).split('\n');
+	opFile.close();
+
+	binaryorbitstar orbitalData;
+
+	int readOk=0;
+	int totalRecords=0;
+	int lineNumber=0;
+	StarId hip;
+	for (const auto& record : allRecords)
+	{
+		++lineNumber;
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
+			continue;
+
+		++totalRecords;
+		const QStringList& fields = record.split('\t');
+		if (fields.size()!=18)
+		{
+			qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(orbitalParamFile)
+					     << " - record does not match record pattern";
+			continue;
+		}
+		else
+		{
+			// The record is the right format.  Extract the fields
+			bool ok;
+			orbitalData.binary_period = fields.at(2).toDouble(&ok);
+			orbitalData.eccentricity = fields.at(3).toFloat(&ok);
+			orbitalData.inclination = fields.at(4).toFloat(&ok);
+			orbitalData.big_omega = fields.at(5).toFloat(&ok);
+			orbitalData.small_omega = fields.at(6).toFloat(&ok);
+			orbitalData.periastron_epoch = fields.at(7).toDouble(&ok);
+			orbitalData.semi_major = fields.at(8).toDouble(&ok);
+			orbitalData.bary_distance = fields.at(9).toDouble(&ok);
+			orbitalData.data_epoch = fields.at(10).toDouble(&ok);
+			orbitalData.bary_ra = fields.at(11).toDouble(&ok);
+			orbitalData.bary_dec = fields.at(12).toDouble(&ok);
+			orbitalData.bary_rv = fields.at(13).toDouble(&ok);
+			orbitalData.bary_pmra = fields.at(14).toDouble(&ok);
+			orbitalData.bary_pmdec = fields.at(15).toDouble(&ok);
+			orbitalData.primary_mass = fields.at(16).toFloat(&ok);
+			orbitalData.secondary_mass = fields.at(17).toFloat(&ok);
+			// do primary star
+			hip = fields.at(0).toLongLong(&ok);
+			orbitalData.hip = hip;
+			orbitalData.primary = true;
+			binaryOrbitStarMap[hip] = orbitalData;
+			// do secondary star
+			hip = fields.at(1).toLongLong(&ok);
+			orbitalData.hip = hip;
+			orbitalData.primary = false;
+			binaryOrbitStarMap[hip] = orbitalData;
+
+			if (!ok)
+			{
+				qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(orbitalParamFile)
+						     << " - failed to convert " << fields.at(0) << "to a number";
+				continue;
+			}
+			++readOk;
+		}
+	}
+
+	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "orbital parameters data for binary system";
 }
 
 int StarMgr::getMaxSearchLevel() const
@@ -2185,6 +2272,12 @@ void StarMgr::populateStarsDesignations()
 		qWarning() << "Could not load cross-identification data file: stars/hip_gaia3/cross-id.cat";
 	else
 		loadCrossIdentificationData(fic);
+	
+	fic = StelFileMgr::findFile("stars/hip_gaia3/binary_orbitparam.dat");
+	if (fic.isEmpty())
+		qWarning() << "Could not load binary orbital parameters data file: stars/hip_gaia3/binary_orbitparam.dat";
+	else
+		loadBinaryOrbitalData(fic);
 }
 
 QStringList StarMgr::listAllObjects(bool inEnglish) const
