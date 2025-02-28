@@ -1137,7 +1137,7 @@ NebulaP NebulaMgr::searchCed(QString Ced) const
 {
 	Ced = Ced.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->Ced_nb.compare(Ced, Qt::CaseInsensitive))
+		if (n->Ced_nb.compare(Ced, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
