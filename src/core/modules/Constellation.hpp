@@ -112,6 +112,8 @@ private:
 	QString getShortName() const {return abbreviation;}
 	//! Get the native name for the Constellation
 	QString getNativeName() const {return nativeName;}
+	//! Get pronouncement of the native name for the Constellation
+	QString getNativeNamePronounce() const {return nativeNamePronounce;}
 	//! Draw the lines for the Constellation.
 	//! This method uses the coords of the stars (optimized for use through
 	//! the class ConstellationMgr only).
@@ -151,16 +153,19 @@ private:
 
 	//! International name (translated using gettext)
 	QString nameI18;
-	//! Name in english (column 3 in constellation_names.eng.fab)
+	//! Name in English language
 	QString englishName;
-	//! Name in native language (column 2 in constellation_names.eng.fab).
+	//! Name in native language (original name of constellation in the source)
 	//! According to practice as of V0.13.1, this may be an empty string.
 	//! If empty, will be filled with englishName.
 	QString nativeName;
-	//! Abbreviation (of the latin name for western constellations)
+	//! Pronouncement of the native name or the romanized version of native name of constellation
+	QString nativeNamePronounce;
+	//! Abbreviation (the short name or designation of constellations)
 	//! For non-western, a skyculture designer must invent it. (usually 2-5 letters)
 	//! This MUST be filled and be unique within a sky culture.
 	QString abbreviation;
+	//! The context for English name of constellation (using for correct translation via gettext)
 	QString context;
 	//! Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;
