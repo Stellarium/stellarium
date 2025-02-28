@@ -72,6 +72,29 @@ typedef struct
 typedef QMap<StelObjectP, float> StelACStarData;
 typedef uint64_t StarId;
 
+typedef struct
+{
+	StarId hip;
+    bool primary;
+    double binary_period;
+    float eccentricity;
+    float inclination;
+    float big_omega;
+    float small_omega;
+    double periastron_epoch;
+    double semi_major;
+    double bary_distance;
+    double data_epoch;
+    double bary_ra;
+    double bary_dec;
+    double bary_rv;
+    double bary_pmra;
+    double bary_pmdec;
+    float primary_mass;
+    float secondary_mass;
+} binaryorbitstar;
+
+
 //! @class StarMgr
 //! Stores the star catalogue data.
 //! Used to render the stars themselves, as well as determine the color table
@@ -384,6 +407,11 @@ public:
 	//! @return separation in arcseconds
 	static float getWdsLastSeparation(StarId hip);
 
+	//! Get binary orbit data for a star with a specified Hipparcos or Gaia catalogue number.
+	//! @param hip The Hipparcos/Gaia number of star
+	//! @return binary orbit data
+	static binaryorbitstar getBinaryOrbitData(StarId hip);
+
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
 	static QString convertToOjectTypes(int index);
@@ -468,6 +496,10 @@ private:
 	//! @param the path to a file containing the cross-identification data.
 	void loadCrossIdentificationData(const QString& crossIdFile);
 
+	//! Loads orbital parameters data for binary systems data from a file.
+	//! @param the path to a file containing the orbital parameters data for binary systems.
+	void loadBinaryOrbitalData(const QString& orbitalParamFile);
+
 	//! Gets the maximum search level.
 	// TODO: add a non-lame description - what is the purpose of the max search level?
 	int getMaxSearchLevel() const;
@@ -540,6 +572,8 @@ private:
 	static QMap<int, StarId> hrStarsIndex;
 
 	static QHash<StarId, QString> referenceMap;
+
+	static QHash<StarId, binaryorbitstar> binaryOrbitStarMap;
 
 	QFont starFont;
 	static bool flagSciNames;
