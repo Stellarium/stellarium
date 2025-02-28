@@ -736,7 +736,7 @@
 	      from NOIRLab/NSF/AURA, post-processing: Sun Shuwei 
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution 4.0 International
-	4.115 Images of Dark Doodad Nebula, NGC1216, NGC4372
+	4.115 Images of Dark Doodad Nebula, IC1613, NGC1216, NGC4372
 	      from Hansjorg Walchli, post-processing: Sun Shuwei
 	      https://www.deepskycorner.ch/index.de.php
 	      License: Creative Commons Attribution 4.0 International
@@ -968,7 +968,7 @@
 	      from Roberto Mura, post-processing: Sun Shuwei
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
-	4.171 Images of M81, IC1613, NGC1579
+	4.171 Images of M81, NGC1579
 	      from Kees Scherer, post-processing: Sun Shuwei
 	      https://www.flickr.com/photos/kees-scherer/
 	      License: public domain
