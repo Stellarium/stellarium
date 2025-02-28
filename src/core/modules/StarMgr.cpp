@@ -1184,7 +1184,8 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 	int readOk = 0;
 	int totalRecords = 0;
 	StarId hip;
-	int component, sao, hd, hr;
+	unsigned char component;
+	int sao, hd, hr;
 	QString hipstar;
 	quint64 hipTemp;
 

@@ -237,7 +237,7 @@ num stars in zone $n$   & $4n$   & int & 4 &  number of records is this file whi
 \begin{table}[htbp]
 \begin{tabular}{llllp{75mm}}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-gaia\_id       &  0 & long long          & 8 & Gaia source id\\%\midrule
+gaia\_id       &  0 & int64_t            & 8 & Gaia source id\\%\midrule
 x0             &  8 & int                & 4 & Cartesian x position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\%\midrule
 x1             & 12 & int                & 4 & Cartesian y position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\%\midrule
 x2             & 16 & int                & 4 & Cartesian z position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\%\midrule
@@ -262,7 +262,7 @@ hip            & 45 & int                & 3 & Hipparcos catalogue number with c
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset}& \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-gaia\_id       &  0 & long long          & 8 & Gaia source id\\%\midrule
+gaia\_id       &  0 & int64_t            & 8 & Gaia source id\\%\midrule
 x0             &  8 & int                & 4 & Right ascension $\alpha$ of the star in mas unit.\\%\midrule
 x1             & 12 & int                & 4 & Declination $\delta$ of the star in mas unit.\\%\midrule
 dx0            & 16 & int                & 4 & Proper motion $\mu_{\alpha}$ of the star in $\mu$as/year\\%\midrule
@@ -280,7 +280,7 @@ plx\_err       & 30 & unsigned short     & 2 & parallax error of the star in 0.0
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} & \emph{Description}\\\midrule
-gaia\_id       &  0 & long long          & 8 & Gaia source id\\%\midrule
+gaia\_id       &  0 & int64_t            & 8 & Gaia source id\\%\midrule
 x0             &  8 & int                & 3 & Right ascension $\alpha$ of the star in 0.1 arcsecond unit.\\%\midrule
 x1             & 11 & int                & 3 & Declination $\delta$ of the star in 0.1 arcsecond unit.\\%\midrule
 b\_v           & 14 & unsigned short     & 1 & $B-V$ colour in 25 milli-mag unit offset by $+1$ mag.\\
@@ -1840,11 +1840,11 @@ The file \file{cross-id.cat} contains cross reference data for catalogues HIP, S
 \begin{table}[htb]
 \begin{tabularx}{\textwidth}{l|c|X}\toprule
 \emph{Name} & \emph{Type} & \emph{Description}\\\midrule
-HIP	      & unsigned long long & HIP or Gaia identifier for the star. Used for reference to the main star catalogue.\\%\midrule
-Component & int 			   & Component of the star in the multiple star system.\\%\midrule
-SAO    	  & int 			   & SAO identifier for the star.\\%\midrule
-HD	      & int 			   & HD identifier for the star.\\%\midrule
-HR	      & int 			   & HR identifier for the star.\\\bottomrule
+HIP	      & uint64_t      & HIP or Gaia identifier for the star. Used for reference to the main star catalogue.\\%\midrule
+Component & unsigned char & Component of the star in the multiple star system.\\%\midrule
+SAO    	  & int           & SAO identifier for the star.\\%\midrule
+HD	      & int           & HD identifier for the star.\\%\midrule
+HR	      & int           & HR identifier for the star.\\\bottomrule
 \end{tabularx}
 \caption{Format of \file{cross-id.cat}}
 \label{tab:StarCatalogues:CrossIdentificationData:file}
