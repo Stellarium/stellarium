@@ -409,6 +409,9 @@ SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
 # Activate support for ShowMySky atmosphere
 SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmosphere model if installed")
 
+# Activate sky culture converter build
+SET(ENABLE_SC_CONVERTER 1 CACHE BOOL "Define whether to build sky culture converter tool")
+
 # Activate support for XLSX (Excel) files
 SET(ENABLE_XLSX 1 CACHE BOOL "Define whether to support XLSX (Excel) files")
 IF(ENABLE_XLSX)
@@ -1121,4 +1124,7 @@ IF(ENABLE_SHOWMYSKY)
 ENDIF()
 IF(ENABLE_NLS)
      ADD_SUBDIRECTORY( po )
+ENDIF()
+IF(ENABLE_SC_CONVERTER)
+     ADD_SUBDIRECTORY( util/skyculture-converter )
 ENDIF()

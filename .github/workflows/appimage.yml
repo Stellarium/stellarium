@@ -30,7 +30,7 @@ jobs:
         # https://github.com/actions/virtual-environments/issues/2703
         #sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
         # Installing dependencies
-        sudo apt install -y libglx-dev libtbb-dev qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+        sudo apt install -y libglx-dev libtbb-dev qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake libgettextpo-dev
         #sudo pip3 install appimage-builder
         sudo wget https://github.com/AppImageCrafters/appimage-builder/releases/download/Continuous/appimage-builder-1.1.1.dev32+g2709a3b-x86_64.AppImage -O /usr/local/bin/appimage-builder
         sudo chmod +x /usr/local/bin/appimage-builder
@@ -74,7 +74,7 @@ jobs:
         # https://github.com/actions/virtual-environments/issues/2703
         #sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
         # Installing dependencies
-        sudo apt install -y cmake libglx-dev zlib1g-dev libgl1-mesa-dev libdrm-dev libxkbcommon-x11-dev libgps-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio gstreamer1.0-libav gstreamer1.0-vaapi qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data libexiv2-dev libnlopt-cxx-dev
+        sudo apt install -y cmake libglx-dev zlib1g-dev libgl1-mesa-dev libdrm-dev libxkbcommon-x11-dev libgps-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio gstreamer1.0-libav gstreamer1.0-vaapi qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data libexiv2-dev libnlopt-cxx-dev libgettextpo-dev
         #sudo pip3 install appimage-builder
         sudo wget https://github.com/AppImageCrafters/appimage-builder/releases/download/Continuous/appimage-builder-1.1.1.dev32+g2709a3b-x86_64.AppImage -O /usr/local/bin/appimage-builder
         sudo chmod +x /usr/local/bin/appimage-builder
