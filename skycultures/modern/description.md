@@ -116,6 +116,7 @@ The IAU is the only scientifically accepted authority to assign new names to sta
  - [#52]: Meade Instruction Manual 7" LX200 Maksutov-Cassegrain Telescope; 8", 10", and 12" LX200 Schmidt-Cassegrain Telescopes
  - [#53]: [Mike Wall (2013). "Strange 'Methuselah' Star Looks Older Than the Universe". Space.com](https://www.space.com/20112-oldest-known-star-universe.html)
  - [#54]: [Space Telescope Science Institute (STScI). "Hubble finds 'birth certificate' of oldest known star." ScienceDaily. ScienceDaily, 7 March 2013](www.sciencedaily.com/releases/2013/03/130307145103.htm)
+ - [#55]: [Atlas Coeli Skalnaté Pleso 1950.0](https://en.wikipedia.org/wiki/Skalnate_Pleso_Atlas_of_the_Heavens)
 
 ## Authors
 

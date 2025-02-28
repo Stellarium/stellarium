@@ -207,7 +207,7 @@ def update_cultures_pot():
 
                         entry = polib.POEntry(comment = comment, msgid = english, msgstr = "", msgctxt = context)
                         if entry in pot:
-                            prev_entry = pot.find(entry.msgid)
+                            prev_entry = pot.find(entry.msgid, by = 'msgid', msgctxt = context)
                             assert prev_entry
                             prev_entry.comment += '\n' + comment
                         else:
