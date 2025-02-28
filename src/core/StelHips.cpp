@@ -502,6 +502,33 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 				indices << (INDICES[outside ? 1 : 0][k][1] + i) * n +
 					        INDICES[outside ? 1 : 0][k][0] + j;
 			}
+
+			// Check that the surface is convex. If it isn't, make it convex.
+
+			const auto p0 = verts[indices[indices.size() - 6 + 0]];
+			const auto p1 = verts[indices[indices.size() - 6 + 1]];
+			const auto p2 = verts[indices[indices.size() - 6 + 2]];
+
+			// Midpoint of the shared edge of two triangles.
+			const auto midPoint = outside ? (p0 + p2)/2. : (p1 + p2)/2.;
+			// A vertex that's not on the shared edge.
+			const auto outerVert = outside ? p1 : p0;
+			// The vector from an outer edge towards the midpoint of the shared edge.
+			const auto vecFromMidPointToOuterVert = outerVert - midPoint;
+			if(vecFromMidPointToOuterVert.dot(midPoint) > 0)
+			{
+				// The surface is concave. Swap some vertices to make it convex.
+				if(outside)
+				{
+					indices[indices.size() - 4] = indices[indices.size() - 2];
+					indices[indices.size() - 1] = indices[indices.size() - 5];
+				}
+				else
+				{
+					indices[indices.size() - 4] = indices[indices.size() - 3];
+					indices[indices.size() - 1] = indices[indices.size() - 6];
+				}
+			}
 		}
 	}
 	return gridSize * gridSize * 6;
