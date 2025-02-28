@@ -266,7 +266,7 @@ def update_cultures_pot():
                     cleaned = english
                     cleaned = re.sub(' Added', '', cleaned)
                     has_added = cleaned != english
-                    cleaned = re.sub(' [MDCLXVI]+$', '', cleaned)
+                    cleaned = re.sub(' [MDCLXVI]+[*?]*$', '', cleaned)
                     chinese_name_cleaned = cleaned != english
                     english = cleaned
 
