@@ -111,10 +111,10 @@ Stellarium ships with the first four star catalogue files of nine files. The imp
 
 The files which come with Stellarium are found by the partial paths:
 @verbatim
-stars/default/stars_0_0v0_1.cat
-stars/default/stars_1_0v0_1.cat
-stars/default/stars_2_0v0_1.cat
-stars/default/stars_3_1v0_1.cat
+stars/default/stars_0_0v0_16.cat
+stars/default/stars_1_0v0_15.cat
+stars/default/stars_2_0v0_16.cat
+stars/default/stars_3_1v0_10.cat
 @endverbatim
 
 Naturally, these files are to be located in the <em>Installation Data Directory</em> (because they ship with the installer).
@@ -122,15 +122,15 @@ Naturally, these files are to be located in the <em>Installation Data Directory<
 The catalogue downloader tool runs within Stellarium.  When it downloads extra star catalogue files, it should place them in the <em>User Data Directory</em>. After downloading all the catalogues, the paths to the various files should look like this:
 
 @verbatim
-<Installation Data Directory>/stars/default/stars_0_0v0_1.cat
-<Installation Data Directory>/stars/default/stars_1_0v0_1.cat
-<Installation Data Directory>/stars/default/stars_2_0v0_1.cat
-<Installation Data Directory>/stars/default/stars_3_1v0_1.cat
-<User Data Directory>/stars/default/stars_4_1v0_0.cat
-<User Data Directory>/stars/default/stars_5_2v0_0.cat
-<User Data Directory>/stars/default/stars_6_2v0_0.cat
-<User Data Directory>/stars/default/stars_7_2v0_0.cat
-<User Data Directory>/stars/default/stars_8_2v0_0.cat
+<Installation Data Directory>/stars/default/stars_0_0v0_16.cat
+<Installation Data Directory>/stars/default/stars_1_0v0_15.cat
+<Installation Data Directory>/stars/default/stars_2_0v0_16.cat
+<Installation Data Directory>/stars/default/stars_3_0v0_10.cat
+<User Data Directory>/stars/default/stars_4_1v0_6.cat
+<User Data Directory>/stars/default/stars_5_1v0_6.cat
+<User Data Directory>/stars/default/stars_6_1v0_4.cat
+<User Data Directory>/stars/default/stars_7_1v0_3.cat
+<User Data Directory>/stars/default/stars_8_2v0_3.cat
 @endverbatim
 
 It might be that someone makes a customised installer of Stellarium which includes all the star catalogues with the main installation - perhaps on a special edition DVD.  In this case, all the files would be in the <em> \<Installation Data Directory>/stars/default</em> directory.  The downloader tool should be able to cope with this, not re-downloading files into the <em>User Data Directory</em> which already reside in the <em>Installation Data Directory</em>.
