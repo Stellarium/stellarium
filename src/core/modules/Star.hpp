@@ -256,27 +256,7 @@ struct Star
    }
 
    inline void getBinaryOrbit(double epoch, Vec3d& v, double& ra, double& dec, double& plx, double& pmra, double& pmdec, double& RV) const {
-      // Orbital elements of the secondary star
-      double binary_period;  // Orbital period [days]
-      float eccentricity;  // Eccentricity
-      float inclination;  // Orbit inclination [rad]
-      float big_omega;  // Position angle of ascending node [rad]
-      float small_omega;  // Argument of periastron [rad]
-      double periastron_epoch;  // Julian Date at periastron passage
-      double semi_major;  // Angular semi-major axis [arcsec]
-      double bary_distance;  // distance [parsec]
-      double data_epoch = STAR_CATALOG_JDEPOCH;  // Julian Date of the data, by default assume the date is the same as the catalog epoch
-      double bary_ra;  // Right Ascension of the barycenter
-      double bary_dec;  // Declination of the barycenter
-      // motion of the barycenter
-      double bary_rv;  // km/s
-      double primary_mass;  // primary star mass
-      double secondary_mass;  // secondary star mass
       StarId star_id;  // star ID
-      double bary_pmra;  // mas/yr
-      double bary_pmdec;  // mas/yr
-      const double G = 4.49850215e-15;  // Gravitational constant in parsec^3 / (M_sun * yr^2)
-
       if (getGaia() == 0)
       {
          star_id = getHip();
@@ -294,25 +274,31 @@ struct Star
          // exit the function because nothing to do, not a binary star
          return;
       }
-      else
+
+      // Orbital elements of the secondary star
+      double binary_period = bso.binary_period;  // Orbital period [days]
+      float eccentricity = bso.eccentricity;  // Eccentricity
+      float inclination = bso.inclination;  // Orbit inclination [rad]
+      float big_omega = bso.big_omega;  // Position angle of ascending node [rad]
+      float small_omega = bso.small_omega;  // Argument of periastron [rad]
+      double periastron_epoch = bso.periastron_epoch;  // Julian Date at periastron passage
+      double semi_major = bso.semi_major;  // Angular semi-major axis [arcsec]
+      double bary_distance = bso.bary_distance;  // distance [parsec]
+      double data_epoch = bso.data_epoch;  // Julian Date of the data
+      double bary_ra = bso.bary_ra;  // Right Ascension of the barycenter [rad]
+      double bary_dec = bso.bary_dec;  // Declination of the barycenter [rad]
+      // motion of the barycenter
+      double bary_rv = bso.bary_rv;  // Barycenter radial velocity [km/s]
+      float primary_mass = bso.primary_mass;  // Primary star mass [solar mass]
+      float secondary_mass = bso.secondary_mass;  // Secondary star mass [solar mass]
+      double bary_pmra = bso.bary_pmra;  // Barycenter RA proper motion [mas/yr]
+      double bary_pmdec = bso.bary_pmdec;  // Barycenter DEC proper motion [mas/yr]
+      if (!data_epoch)
       {
-         binary_period = bso.binary_period;
-         eccentricity = bso.eccentricity;
-         inclination = bso.inclination;
-         big_omega = bso.big_omega;
-         small_omega = bso.small_omega;
-         periastron_epoch = bso.periastron_epoch;
-         semi_major = bso.semi_major;
-         bary_distance = bso.bary_distance;
-         data_epoch = bso.data_epoch;
-         bary_ra = bso.bary_ra;
-         bary_dec = bso.bary_dec;
-         bary_rv = bso.bary_rv;
-         primary_mass = bso.primary_mass;
-         secondary_mass = bso.secondary_mass;
-         bary_pmra = bso.bary_pmra;
-         bary_pmdec = bso.bary_pmdec;
+         data_epoch = STAR_CATALOG_JDEPOCH;  // by default assume the date is the same as the catalog epoch
       }
+      const double G = 4.49850215e-15;  // Gravitational constant in parsec^3 / (M_sun * yr^2)
+
       double dyrs = (epoch - data_epoch) / 365.25;
       semi_major = semi_major * bary_distance * MAS2RAD * 1000.;  // Convert to parsec
       double mass_ratio = secondary_mass / (primary_mass + secondary_mass);
@@ -334,7 +320,7 @@ struct Star
          E = E - delta;
          if (fabs(delta) < tolerance)
          {
-         break;
+            break;
          }
       }
 
@@ -396,16 +382,15 @@ struct Star
       sky_orbit_vel[0] = sky_orbit_vel[1];
       sky_orbit_vel[1] = tmp;
 
-      // need to check secondary star first
-      if (!bso.primary)
-      {
-         sky_orbit *= (1.0 - mass_ratio);
-         sky_orbit_vel *= (1.0 - mass_ratio);
-      }
-      else
+      if (bso.primary)
       {
          sky_orbit *= -mass_ratio;
          sky_orbit_vel *= -mass_ratio;
+      }
+      else
+      {
+         sky_orbit *= (1.0 - mass_ratio);
+         sky_orbit_vel *= (1.0 - mass_ratio);
       }
 
       // sky_orbit is in parsec and sky_orbit_vel is in parsec/year, we want them arcsecond and arcsecond/year
