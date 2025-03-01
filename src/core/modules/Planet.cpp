@@ -3128,6 +3128,7 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(orenNayarParameters = p->uniformLocation("orenNayarParameters"));
 	GL(outgasParameters = p->uniformLocation("outgasParameters"));
 	GL(hasAtmosphere = p->uniformLocation("hasAtmosphere"));
+	GL(isSurvey = p->uniformLocation("isSurvey"));
 
 	// Moon-specific variables
 	GL(earthShadow = p->uniformLocation("earthShadow"));
@@ -3956,7 +3957,8 @@ void Planet::computeModelMatrix(Mat4d &result, bool solarEclipseCase) const
 	}
 }
 
-Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars) //const
+Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader,
+                                                   const PlanetShaderVars& shaderVars, const bool isSurvey)
 {
 	RenderData data;
 
@@ -4003,6 +4005,8 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	//qDebug() << " -->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
 	static LandscapeMgr* lmgr=GETSTELMODULE(LandscapeMgr);
 	Q_ASSERT(lmgr);
+
+	GL(shader->setUniformValue(shaderVars.isSurvey, GLint(isSurvey)));
 
 	GL(shader->setUniformValue(shaderVars.projectionMatrix, qMat));
 	GL(shader->setUniformValue(shaderVars.hasAtmosphere, GLint(atmosphere)));
@@ -4132,7 +4136,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 
 	GL(shader->bind());
 
-	RenderData rData = setCommonShaderUniforms(*painter,shader,*shaderVars);
+	RenderData rData = setCommonShaderUniforms(*painter,shader,*shaderVars, false);
 	if(this==ssm->getSun())
 	{
 		const auto color = painter->getColor();
@@ -4381,7 +4385,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	}
 
 	GL(shader->bind());
-	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars);
+	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars, true);
 	QVector<Vec3f> projectedVertsArray;
 	QVector<Vec3f> vertsArray;
 	const double angle = getSpheroidAngularRadius(core) * M_PI_180;
@@ -4675,7 +4679,7 @@ bool Planet::drawObjModel(StelPainter *painter, float screenRd)
 	GL(shd->enableAttributeArray("vertex"));
 	objModel->projPosBuffer->release();
 
-	setCommonShaderUniforms(*painter,shd,*shdVars);
+	setCommonShaderUniforms(*painter,shd,*shdVars,false);
 
 	//draw that model using the array wrapper
 	objModel->arr->draw();
