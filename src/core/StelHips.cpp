@@ -63,8 +63,10 @@ QUrl HipsSurvey::getUrlFor(const QString& path) const
 	return QString("%1/%2%3").arg(base.url(), path, args);
 }
 
-HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
+HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString& type, double releaseDate_):
 	url(url_),
+	type(type),
+	hipsFrame(frame),
 	releaseDate(releaseDate_),
 	planetarySurvey(false),
 	tiles(1000 * 512 * 512), // Cache max cost in pixels (enough for 1000 512x512 tiles).
@@ -550,6 +552,9 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 {
 	QList<HipsSurveyP> ret;
 	QString url;
+	QString type;
+	static const QString defaultFrame = "equatorial";
+	QString frame = defaultFrame;
 	double releaseDate = 0;
 	for (auto &line : data.split('\n'))
 	{
@@ -567,9 +572,14 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 			date.setTimeSpec(Qt::UTC);
 			releaseDate = StelUtils::qDateTimeToJd(date);
 		}
+		if (key == "hips_frame")
+			frame = value.toLower();
+		if (key == "type")
+			type = value.toLower();
 		if (key == "hips_status" && value.split(' ').contains("public")) {
-			ret.append(HipsSurveyP(new HipsSurvey(url, releaseDate)));
+			ret.append(HipsSurveyP(new HipsSurvey(url, frame, type, releaseDate)));
 			url = "";
+			frame = defaultFrame;
 			releaseDate = 0;
 		}
 	}

@@ -60,8 +60,10 @@ public:
 							   const QVector<uint16_t>& indices)> DrawCallback;
 	//! Create a new HipsSurvey from its url.
 	//! @param url The location of the survey.
+	//! @param frame The reference frame from the survey's \c hips_frame property.
+	//! @param type Survey type from the survey's \c type property.
 	//! @param releaseDate If known the UTC JD release date of the survey.  Used for cache busting.
-	HipsSurvey(const QString& url, double releaseDate=0.0);
+	HipsSurvey(const QString& url, const QString& frame, const QString& type, double releaseDate=0.0);
 	~HipsSurvey() override;
 
 	//! Get whether the survey is visible.
@@ -82,6 +84,12 @@ public:
 	//! Return the source URL of the survey.
 	const QString& getUrl() const {return url;}
 
+	//! Return the frame name of the survey (its \c hips_frame property).
+	QString getFrame() const { return hipsFrame; }
+
+	//! Return the type of the survey (its \c type property).
+	QString getType() const { return type; }
+
 	//! Get whether the survey is still loading.
 	bool isLoading(void) const;
 
@@ -98,7 +106,8 @@ signals:
 private:
 	LinearFader fader;
 	QString url;
-	QString hipsFrame = "equatorial";
+	QString type;
+	QString hipsFrame;
 	QString planet;
 	double releaseDate; // As UTC Julian day.
 	bool planetarySurvey;
