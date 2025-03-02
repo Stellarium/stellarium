@@ -35,6 +35,7 @@ public:
 	//! @param method the method in the receiver which will be called when
 	//! the value is changed.  Note that this should be passed using the 
 	//! SLOT() macro.
+	//! @param defValue the default value for the node
 	//! @param parent the node for the parent menu item
 	//! @param prev the previous node in the current menu (typically 
 	//! shares the same parent)

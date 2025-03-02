@@ -551,10 +551,10 @@ namespace StelUtils
 
 	//! Convert a Julian Day number to a QDateTime.
 	//! @param jd Julian Day number (with fractions) to convert
-	//! @param timeSpec a Qt::TimeSpec constant. Meaningful in this context seem only Qt::UTC (preferred) and Qt::LocalTime (useful in some GUI contexts).
+	//! @param timeSpec a @c Qt::TimeSpec constant. Meaningful in this context seem only Qt::UTC (preferred) and Qt::LocalTime (useful in some GUI contexts).
 	//! @note From 2008 to 2022-05 this converted to local time zone, not to UTC as specified and intended.
-	//!        The old behaviour is kept with @param timeSpec set to Qt::LocalTime.
-	//! If you use Qt::LocalTime, you should add StelCore::getUTCOffset(jd)/24 to the current JD before calling this to have @param jd as a "local time zone corrected JD" before conversion.
+	//!        The old behaviour is kept with @p timeSpec set to Qt::LocalTime.
+	//! If you use Qt::LocalTime, you should add StelCore::getUTCOffset(jd)/24 to the current JD before calling this to have @p jd as a "local time zone corrected JD" before conversion.
 	//! @result the matching QDateTime
 	//! @note QDate has no year zero. This and other idiosyncrasies of QDateTime may limit the applicability of program parts which use this method to positive years or may cause other issues.
 	QDateTime jdToQDateTime(const double& jd, const Qt::TimeSpec timeSpec);
@@ -611,9 +611,11 @@ namespace StelUtils
 	//double calculateSiderealPeriod(const double SemiMajorAxis);  MOVED TO Orbit.h
 
 	//! Convert decimal hours to hours, minutes, seconds
-	//! Format for  @param colonFormat FALSE           TRUE
-	//! @param minutesOnly FALSE     "HhMMmSS.Ss"    "HHhMMm"
-	//! @param minutesOnly TRUE      "H:MM:SS.S"     "HH:MM"
+	//! Format for:
+	//! @p colonFormat        |      false     |   true
+	//! ----------------------|----------------|----------
+	//! @p minutesOnly=false  |  "HhMMmSS.Ss"  | "HHhMMm"
+	//! @p minutesOnly=true   |  "H:MM:SS.S"   | "HH:MM"
 	QString hoursToHmsStr(const double hours, const bool minutesOnly = false, const bool colonFormat=false);
 	QString hoursToHmsStr(const float hours, const bool minutesOnly = false, const bool colonFormat=false);
 
@@ -1031,8 +1033,8 @@ namespace StelUtils
 	//! @param y1 Argument 1
 	//! @param y2 Argument 2
 	//! @param y3 Argument 3
-	//! @param y3 Argument 4
-	//! @param y3 Argument 5
+	//! @param y4 Argument 4
+	//! @param y5 Argument 5
 	//! @return interpolation value
 	template<class T> T interpolate5(T n, T y1, T y2, T y3, T y4, T y5)
 	{
@@ -1046,7 +1048,7 @@ namespace StelUtils
 		return (((K*(1.0/24.0)*n + (H+J)/12.0)*n  + (F*0.5-K/24.0))*n + ((B+C)*0.5 - (H+J)/12.0))*n +y3;
 	}
 
-	//! Interval test. This checks whether @param value is within [@param low, @param high]
+	//! Interval test. This checks whether @p value is within [@p low, @p high]
 	template <typename T> bool isWithin(const T& value, const T& low, const T& high)
 	{
 		return !(value < low) && !(high < value);
