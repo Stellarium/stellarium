@@ -111,7 +111,7 @@ Stellarium ships with the first four star catalogue files of nine files. The imp
 
 The files which come with Stellarium are found by the partial paths:
 @verbatim
-stars/hip_gaia3/stars_0_0v0_16.cat
+stars/hip_gaia3/stars_0_0v0_18.cat
 stars/hip_gaia3/stars_1_0v0_15.cat
 stars/hip_gaia3/stars_2_0v0_16.cat
 stars/hip_gaia3/stars_3_1v0_10.cat
@@ -122,7 +122,7 @@ Naturally, these files are to be located in the <em>Installation Data Directory<
 The catalogue downloader tool runs within Stellarium.  When it downloads extra star catalogue files, it should place them in the <em>User Data Directory</em>. After downloading all the catalogues, the paths to the various files should look like this:
 
 @verbatim
-<Installation Data Directory>/stars/hip_gaia3/stars_0_0v0_16.cat
+<Installation Data Directory>/stars/hip_gaia3/stars_0_0v0_18.cat
 <Installation Data Directory>/stars/hip_gaia3/stars_1_0v0_15.cat
 <Installation Data Directory>/stars/hip_gaia3/stars_2_0v0_16.cat
 <Installation Data Directory>/stars/hip_gaia3/stars_3_0v0_10.cat
