@@ -22,7 +22,7 @@
 #include "OldHinduSolarCalendar.hpp"
 
 //! @class OldHinduLuniSolarCalendar
-//! Functions for the Old Hindu Lunisolar calendars described in CC:UE chapter 10.
+//! @brief Functions for the Old Hindu Lunisolar calendars described in CC:UE chapter 10.
 //! @author Georg Zotti
 //! @ingroup calendars
 //! The old Hindu Lunisolar calendar as given in CC.UE describes the South Indian version where months begin at New Moon (amanta scheme).
