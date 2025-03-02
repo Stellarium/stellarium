@@ -244,7 +244,17 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 
 	int orderMin = getPropertyInt("hips_order_min", 3);
 	int order = getPropertyInt("hips_order");
-	int drawOrder = qRound(ceil(log2(px / (4.0 * std::sqrt(2.0) * tileWidth))));
+	int drawOrder;
+	if (outside)
+	{
+		drawOrder = ceil(log2(px / (4.0 * std::sqrt(2.0) * tileWidth)));
+	}
+	else
+	{
+		// The divisor approximately accounts for the fraction of the planetary disk
+		// most often taken by the most stretched tiles (the ones near the poles).
+		drawOrder = ceil(log2(px / 1.5 / tileWidth));
+	}
 	drawOrder = qBound(orderMin, drawOrder, order);
 	int splitOrder = qMax(drawOrder, 4);
 
