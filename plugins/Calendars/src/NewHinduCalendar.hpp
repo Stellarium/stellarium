@@ -22,7 +22,7 @@
 #include "OldHinduLuniSolarCalendar.hpp"
 
 //! @class NewHinduCalendar
-//! Functions for the New Hindu calendars described in CC:UE chapter 20.
+//! @brief Functions for the New Hindu calendars described in CC:UE chapter 20.
 //! @author Georg Zotti
 //! @ingroup calendars
 //! The new Hindu calendar as given in CC.UE is an astronomical Lunisolar calendar with Solar and Lunar months.
@@ -36,9 +36,12 @@
 //! @note This class contains all relevant functions from CC:UE chapter 20. They are also scriptable.
 //! The Calendar interfacing functions deal with New Hindu Solar dates.
 //!
-//! @class NewHinduLunarCalendar   provides the New   Hindu Lunar dates in the overridden interfacing methods from Calendar.
-//! @class AstroHinduSolarCalendar provides the Astro Hindu Solar dates in the overridden interfacing methods from Calendar.
-//! @class AstroHinduLunarCalendar provides the Astro Hindu Lunar dates in the overridden interfacing methods from Calendar.
+//! @class NewHinduLunarCalendar
+//! @brief Provides the New   Hindu Lunar dates in the overridden interfacing methods from Calendar.
+//! @class AstroHinduSolarCalendar
+//! @brief Provides the Astro Hindu Solar dates in the overridden interfacing methods from Calendar.
+//! @class AstroHinduLunarCalendar
+//! @brief Provides the Astro Hindu Lunar dates in the overridden interfacing methods from Calendar.
 
 
 class NewHinduCalendar : public OldHinduLuniSolarCalendar

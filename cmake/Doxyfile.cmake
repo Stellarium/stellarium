@@ -1125,6 +1125,7 @@ HTML_EXTRA_STYLESHEET  = @PROJECT_SOURCE_DIR@/doc/extrastyle.css
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
 HTML_EXTRA_FILES       = @PROJECT_SOURCE_DIR@/doc/images/stellarium-architecture.svg \
+                         @PROJECT_SOURCE_DIR@/doc/stellarium-ide.xml \
                          @PROJECT_SOURCE_DIR@/doc/images/stellarium-architecture.png
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen

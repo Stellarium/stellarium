@@ -28,7 +28,7 @@
 #include <QVarLengthArray>
 
 //! @struct EdgeVertex
-//! Describe a vertex composing polygon contours, and whether it belongs to an edge or not.
+//! @brief Describe a vertex composing polygon contours, and whether it belongs to an edge or not.
 struct EdgeVertex
 {
 	EdgeVertex() : edgeFlag(false) {}
@@ -133,7 +133,7 @@ private:
 
 	bool sideContains2D(const Vec3d& p, int sideNb) const;
 
-	//! Tesselate the contours per side, producing (in @var sides) a list of triangles subcontours according to the given rule.
+	//! Tesselate the contours per side, producing (in #sides) a list of triangles subcontours according to the given rule.
 	void tesselate(TessWindingRule rule);
 
 	QVector<SubContour> tesselateOneSideLineLoop(struct GLUEStesselator* tess, int sidenb) const;

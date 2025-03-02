@@ -22,7 +22,7 @@
 #include "ChineseCalendar.hpp"
 
 //! @class JapaneseCalendar
-//! Functions for the Japanese calendar (as derived from the Chinese calendar)
+//! @brief Functions for the Japanese calendar (as derived from the Chinese calendar)
 //! @author Georg Zotti
 //! @ingroup calendars
 //! The Japanese calendar is derived from the Chinese calendar (like Korean and Vietnamese).

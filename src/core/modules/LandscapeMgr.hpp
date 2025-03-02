@@ -37,7 +37,8 @@ class QSettings;
 class QTimer;
 
 
-//! @class Cardinals manages the display of cardinal points
+//! @class Cardinals
+//! @brief Manages the display of cardinal points
 class Cardinals
 {
 	Q_GADGET

@@ -4388,7 +4388,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars, true);
 	QVector<Vec3f> projectedVertsArray;
 	QVector<Vec3f> vertsArray;
-	const double angle = getSpheroidAngularRadius(core) * M_PI_180;
+	const double angle = 2 * getSpheroidAngularRadius(core) * M_PI_180;
 
 	if (rings)
 	{
