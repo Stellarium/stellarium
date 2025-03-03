@@ -35,8 +35,8 @@ class HipsTile
 public:
 	int order;
 	int pix;
-	StelTextureSP texture = StelTextureSP(Q_NULLPTR);
-	StelTextureSP allsky = StelTextureSP(Q_NULLPTR); // allsky low res version of the texture.
+	StelTextureSP texture;
+	StelTextureSP allsky; // allsky low res version of the texture.
 
 	// Used for smooth fade in
 	QTimeLine texFader;
