@@ -845,7 +845,7 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 			const auto specificNameCap = specificName.toUpper();
 			if (additionalNamesMap.find(HIP) != additionalNamesMap.end())
 			{
-				const auto newName = additionalNamesMap[HIP].prepend(specificName + " - ");
+				const auto newName = additionalNamesMap[HIP].append(" - " + specificName);
 				additionalNamesMap[HIP] = newName;
 				additionalNamesMapI18n[HIP] = newName;
 				additionalNamesIndex[specificNameCap] = HIP;
@@ -877,7 +877,7 @@ void StarMgr::loadCultureSpecificNameForHIP(const QJsonArray& data, const int HI
 			{
 				if (additionalNamesMap.find(HIP) != additionalNamesMap.end())
 				{
-					const auto newName = additionalNamesMap[HIP].prepend(specificName + " - ");
+					const auto newName = additionalNamesMap[HIP].append(" - " + specificName);
 					additionalNamesMap[HIP] = newName;
 					additionalNamesMapI18n[HIP] = newName;
 					additionalNamesIndex[englishNameCap] = HIP;
