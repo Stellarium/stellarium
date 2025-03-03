@@ -486,102 +486,103 @@ QString HelpDialog::hotkeyTextWrapper(const QString hotkey) const
 
 void HelpDialog::updateAboutText(void) const
 {
-	QStringList allContributors = StelContributors::contributorsList;
-	allContributors.sort();
-	allContributors.removeDuplicates();
+   QStringList allContributors = StelContributors::contributorsList;
+   allContributors.sort();
+   allContributors.removeDuplicates();
 
-	typedef QPair<QString, int> donator;
-	QVector<donator> financialContributors = {
-		// Individuals
-		{ "Daniel", 1600 }, { "Laurence Holt", 1000 }, { "John Bellora", 670 }, { "Marla Pinaire", 530 }, { "Jeff Moe", 512 },
-		{ "Vernon Hermsen", 324 }, { "Walter Dörfler", 300 }, { "Michel Payette", 290 },  { "Salvatore Ficicchia", 261 },
-		{ "Satish Mallesh", 260 }, { "Raul Prisacariu", 260 }, { "Philippe Renoux", 250 }, { "Fito Martin", 250 },
-		{ "SuEllen Shepard", 250 },  { "Vlad Magdalin", 250  },
-		// Organizations
-		{ "BairesDev", 9500 }, { "Dotcom-Monitor", 1000 }, { "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 790 },
-	        { "SSSTwitter", 500 }, { "Triplebyte", 280 }
-	};
-	std::sort(financialContributors.begin(), financialContributors.end(), [](donator i, donator j){ return i.second > j.second; });
-	QStringList bestFinancialContributors;
-	for (auto fc = financialContributors.begin(); fc != financialContributors.end(); ++fc)
-	{
-		bestFinancialContributors << fc->first;
-	}
+   typedef QPair<QString, int> donator;
+   QVector<donator> financialContributors = {
+      // Individuals
+      { "Daniel", 1600 }, { "Laurence Holt", 1000 }, { "John Bellora", 670 }, { "Marla Pinaire", 530 }, { "Jeff Moe", 512 },
+      { "Vernon Hermsen", 324 }, { "Walter Dörfler", 300 }, { "Michel Payette", 290 },  { "Salvatore Ficicchia", 261 },
+      { "Satish Mallesh", 260 }, { "Raul Prisacariu", 260 }, { "Philippe Renoux", 250 }, { "Fito Martin", 250 },
+      { "SuEllen Shepard", 250 },  { "Vlad Magdalin", 250  },
+      // Organizations
+      { "BairesDev", 9500 }, { "Dotcom-Monitor", 1000 }, { "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 790 },
+      { "SSSTwitter", 500 }, { "Triplebyte", 280 }
+   };
+   std::sort(financialContributors.begin(), financialContributors.end(), [](donator i, donator j){ return i.second > j.second; });
+   QStringList bestFinancialContributors;
+   for (auto fc = financialContributors.begin(); fc != financialContributors.end(); ++fc)
+   {
+      bestFinancialContributors << fc->first;
+   }
 
-	// Regexp to replace {text} with an HTML link.
-	static const QRegularExpression a_rx("[{]([^{]*)[}]");
+          // Regexp to replace {text} with an HTML link.
+   static const QRegularExpression a_rx("[{]([^{]*)[}]");
 
-	// populate About tab
-	QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
-	newHtml += QString("<p><strong>%1 %2").arg(q_("Version"), StelUtils::getApplicationVersion());
-	newHtml += QString("<br />%1 %2</strong></p>").arg(q_("Based on Qt"), QT_VERSION_STR);
-	if (!message.isEmpty())
-		newHtml += "<p><strong>" + message + "</strong></p>";
-	// Note: this legal notice is not suitable for translation
-	newHtml += QString("<h3>%1</h3>").arg(STELLARIUM_COPYRIGHT);
-	// newHtml += "<p><em>Version 0.15 is dedicated in memory of our team member Barry Gerdes.</em></p>";
-	newHtml += "<p>This program is free software; you can redistribute it and/or ";
-	newHtml += "modify it under the terms of the GNU General Public License ";
-	newHtml += "as published by the Free Software Foundation; either version 2 ";
-	newHtml += "of the License, or (at your option) any later version.</p>";
-	newHtml += "<p>This program is distributed in the hope that it will be useful, ";
-	newHtml += "but WITHOUT ANY WARRANTY; without even the implied ";
-	newHtml += "warranty of MERCHANTABILITY or FITNESS FOR A ";
-	newHtml += "PARTICULAR PURPOSE.  See the GNU General Public ";
-	newHtml += "License for more details.</p>";
-	newHtml += "<p>You should have received a copy of the GNU General Public ";
-	newHtml += "License along with this program; if not, write to:</p>";
-	newHtml += "<pre>Free Software Foundation, Inc.\n";
-	newHtml += "51 Franklin Street, Suite 500\n";
-	newHtml += "Boston, MA  02110-1335, USA.\n</pre>";
-	newHtml += "<p><a href=\"http://www.fsf.org\">www.fsf.org</a></p>";
-	newHtml += "<h3>" + q_("Developers").toHtmlEscaped() + "</h3><ul>";
-	newHtml += "<li>" + q_("Project coordinator & lead developer: %1").arg(QString("Fabien Chéreau")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Graphic/other designer: %1").arg(QString("Martín Bernardi")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Guillaume Chéreau")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Georg Zotti")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Alexander V. Wolf")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Ruslan Kabatsayev")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Worachate Boonplod")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Sky cultures researcher: %1").arg(QString("Susanne M. Hoffmann")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Tester: %1").arg(QString("Khalid AlAjaji")).toHtmlEscaped() + "</li></ul>";
-	newHtml += "<h3>" + q_("Former Developers").toHtmlEscaped() + "</h3>";
-	newHtml += "<p>"  + q_("Several people have made significant contributions, but are no longer active. Their work has made a big difference to the project:").toHtmlEscaped() + "</p><ul>";
-	newHtml += "<li>" + q_("Graphic/other designer: %1").arg(QString("Johan Meuris")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Doc author/developer: %1").arg(QString("Matthew Gates")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Johannes Gajdosik")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Rob Spearman")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Bogdan Marinov")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Timothy Reaves")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Florian Schaukowitsch")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("András Mohari")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Mike Storm")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Ferdinand Majerech")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Jörg Müller")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Marcos Cardinot")).toHtmlEscaped() + "</li>";	
-	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Nigel Kerr")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Diego Marcos")).toHtmlEscaped() + "</li></ul>";
-	newHtml += "<h3>" + q_("Contributors").toHtmlEscaped() + "</h3>";
-	newHtml += "<p>"  + q_("Many individuals have made contributions to the project and their work has made Stellarium better. Alphabetically sorted list of all contributors: %1.").arg(allContributors.join(", ")).toHtmlEscaped() + "</p>";
-	newHtml += "<h3>" + q_("Financial support").toHtmlEscaped() + "</h3>";
-	newHtml += "<p>"  + q_("Many individuals and organizations are supporting the development of Stellarium by donations, and the most generous financial contributors (with donations of $250 or more) are %1.").arg(bestFinancialContributors.join(", ")).toHtmlEscaped();
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	newHtml += " " + q_("The full list of financial contributors you may see on our {Open Collective page}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://opencollective.com/stellarium\">\\1</a>") + "</p>";
-	newHtml += "<h3>" + q_("Acknowledgment").toHtmlEscaped() + "</h3>";
-	newHtml += "<p>"  + q_("If the Stellarium planetarium was helpful for your research work, the following acknowledgment would be appreciated:").toHtmlEscaped() + "</p>";
-	newHtml += "<p><em>"  + q_("This research has made use of the Stellarium planetarium") + "</em></p>";
-	newHtml += "<p>Zotti, G., Hoffmann, S. M., Wolf, A., Chéreau, F., & Chéreau, G. (2021). The Simulated Sky: Stellarium for Cultural Astronomy Research. Journal of Skyscape Archaeology, 6(2), 221–258. <a href='https://doi.org/10.1558/jsa.17822'>https://doi.org/10.1558/jsa.17822</a></p>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	newHtml += "<p>" + q_("Or you may {download the BibTeX file of the paper} to create another citation format.").toHtmlEscaped().replace(a_rx, "<a href=\"https://stellarium.org/files/stellarium.bib\">\\1</a>") + "</p>";
-	newHtml += "<p>";
+          // populate About tab
+   QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
+   newHtml += QString("<p><strong>%1 %2").arg(q_("Version"), StelUtils::getApplicationVersion());
+   newHtml += QString("<br />%1 %2</strong></p>").arg(q_("Based on Qt"), QT_VERSION_STR);
+   if (!message.isEmpty())
+      newHtml += "<p><strong>" + message + "</strong></p>";
+   // Note: this legal notice is not suitable for translation
+   newHtml += QString("<h3>%1</h3>").arg(STELLARIUM_COPYRIGHT);
+   // newHtml += "<p><em>Version 0.15 is dedicated in memory of our team member Barry Gerdes.</em></p>";
+   newHtml += "<p>This program is free software; you can redistribute it and/or ";
+   newHtml += "modify it under the terms of the GNU General Public License ";
+   newHtml += "as published by the Free Software Foundation; either version 2 ";
+   newHtml += "of the License, or (at your option) any later version.</p>";
+   newHtml += "<p>This program is distributed in the hope that it will be useful, ";
+   newHtml += "but WITHOUT ANY WARRANTY; without even the implied ";
+   newHtml += "warranty of MERCHANTABILITY or FITNESS FOR A ";
+   newHtml += "PARTICULAR PURPOSE.  See the GNU General Public ";
+   newHtml += "License for more details.</p>";
+   newHtml += "<p>You should have received a copy of the GNU General Public ";
+   newHtml += "License along with this program; if not, write to:</p>";
+   newHtml += "<pre>Free Software Foundation, Inc.\n";
+   newHtml += "51 Franklin Street, Suite 500\n";
+   newHtml += "Boston, MA  02110-1335, USA.\n</pre>";
+   newHtml += "<p><a href=\"http://www.fsf.org\">www.fsf.org</a></p>";
+   newHtml += "<h3>" + q_("Developers").toHtmlEscaped() + "</h3><ul>";
+   newHtml += "<li>" + q_("Project coordinator & lead developer: %1").arg(QString("Fabien Chéreau")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Graphic/other designer: %1").arg(QString("Martín Bernardi")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("Guillaume Chéreau")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("Georg Zotti")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("Alexander V. Wolf")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("Ruslan Kabatsayev")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("Worachate Boonplod")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("Henry Leung")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Sky cultures researcher: %1").arg(QString("Susanne M. Hoffmann")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Tester: %1").arg(QString("Khalid AlAjaji")).toHtmlEscaped() + "</li></ul>";
+   newHtml += "<h3>" + q_("Former Developers").toHtmlEscaped() + "</h3>";
+   newHtml += "<p>"  + q_("Several people have made significant contributions, but are no longer active. Their work has made a big difference to the project:").toHtmlEscaped() + "</p><ul>";
+   newHtml += "<li>" + q_("Graphic/other designer: %1").arg(QString("Johan Meuris")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Doc author/developer: %1").arg(QString("Matthew Gates")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("Johannes Gajdosik")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("Rob Spearman")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("Bogdan Marinov")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("Timothy Reaves")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("Florian Schaukowitsch")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("András Mohari")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("Mike Storm")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("Ferdinand Majerech")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("Jörg Müller")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("Developer: %1").arg(QString("Marcos Cardinot")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Nigel Kerr")).toHtmlEscaped() + "</li>";
+   newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Diego Marcos")).toHtmlEscaped() + "</li></ul>";
+   newHtml += "<h3>" + q_("Contributors").toHtmlEscaped() + "</h3>";
+   newHtml += "<p>"  + q_("Many individuals have made contributions to the project and their work has made Stellarium better. Alphabetically sorted list of all contributors: %1.").arg(allContributors.join(", ")).toHtmlEscaped() + "</p>";
+   newHtml += "<h3>" + q_("Financial support").toHtmlEscaped() + "</h3>";
+   newHtml += "<p>"  + q_("Many individuals and organizations are supporting the development of Stellarium by donations, and the most generous financial contributors (with donations of $250 or more) are %1.").arg(bestFinancialContributors.join(", ")).toHtmlEscaped();
+   // TRANSLATORS: The text between braces is the text of an HTML link.
+   newHtml += " " + q_("The full list of financial contributors you may see on our {Open Collective page}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://opencollective.com/stellarium\">\\1</a>") + "</p>";
+   newHtml += "<h3>" + q_("Acknowledgment").toHtmlEscaped() + "</h3>";
+   newHtml += "<p>"  + q_("If the Stellarium planetarium was helpful for your research work, the following acknowledgment would be appreciated:").toHtmlEscaped() + "</p>";
+   newHtml += "<p><em>"  + q_("This research has made use of the Stellarium planetarium") + "</em></p>";
+   newHtml += "<p>Zotti, G., Hoffmann, S. M., Wolf, A., Chéreau, F., & Chéreau, G. (2021). The Simulated Sky: Stellarium for Cultural Astronomy Research. Journal of Skyscape Archaeology, 6(2), 221–258. <a href='https://doi.org/10.1558/jsa.17822'>https://doi.org/10.1558/jsa.17822</a></p>";
+   // TRANSLATORS: The text between braces is the text of an HTML link.
+   newHtml += "<p>" + q_("Or you may {download the BibTeX file of the paper} to create another citation format.").toHtmlEscaped().replace(a_rx, "<a href=\"https://stellarium.org/files/stellarium.bib\">\\1</a>") + "</p>";
+   newHtml += "<p>";
 
-	ui->aboutBrowser->clear();
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (gui)
-		ui->aboutBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->aboutBrowser->insertHtml(newHtml);
-	ui->aboutBrowser->scrollToAnchor("top");
+   ui->aboutBrowser->clear();
+   StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+   if (gui)
+      ui->aboutBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+   ui->aboutBrowser->insertHtml(newHtml);
+   ui->aboutBrowser->scrollToAnchor("top");
 }
 
 void HelpDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
