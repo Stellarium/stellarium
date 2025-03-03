@@ -34,6 +34,17 @@ present apparent magnitude in $\pm 100,000$ years.
 \section{Star Catalogue File Format}%\label{star-catalogue-file-format}
 \label{sec:Catalogues:stars}
 
+With version 25.1\newFeature{25.1}, Stellarium is adopting the currently most modern class of astrometrical data: Gaia DR3. 
+This astrometry satellite, operated by ESA, delivers unprecedented accuracy for millions of stars. 
+However, just those stars most important to human casual observers, naked-eye stars, 
+are too bright for the sensitive instruments. Therefore, for the brightest stars, 
+data from the preceding Hipparcos mission are still used. Most indexing is still based on Hipparcos numbers. 
+In previous versions, dimmer stars were stored without number. Now, you can use the long index from Gaia DR3 
+in descriptions of constellations, or search for the number directly. 
+
+Information about the previous format is easiest found in the v24.4 User Guide.
+ 
+
 \subsection{General Description}%\label{general-description}
 \label{sec:Catalogues:stars:general}
 
@@ -225,7 +236,7 @@ where $\mu_{\alpha^*}\equiv\mu_{\alpha}\cos{(\delta)}$.
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-num stars in zone 0     & 0      & int & 4 &  number of records in this file which are in zone 0\\%\midrule
+num stars in zone 0     & 0      & int & 4 &  number of records in this file which are in zone 0\\
 num stars in zone 1     & 4      & int & 4 &  number of records is this file which are in zone 1\\
 \ldots                  &        &     &   &\\
 num stars in zone $n-1$ & $4n-4$ & int & 4 &  number of records is this file which are in zone $n$\\\bottomrule
@@ -239,16 +250,16 @@ num stars in zone $n$   & $4n$   & int & 4 &  number of records is this file whi
 \begin{table}[htbp]
 \begin{tabular}{llllp{75mm}}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-gaia\_id       &  0 & int64_t            & 8 & Gaia source id\\%\midrule
-x0             &  8 & int                & 4 & Cartesian x position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\%\midrule
-x1             & 12 & int                & 4 & Cartesian y position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\%\midrule
+gaia\_id       &  0 & int64\_t           & 8 & Gaia source id\\%\midrule
+x0             &  8 & int                & 4 & Cartesian x position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\
+x1             & 12 & int                & 4 & Cartesian y position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\
 x2             & 16 & int                & 4 & Cartesian z position of the star on an unit sphere at the catalog epoch scaled by $2\times10^9$\\%\midrule
-dx0            & 20 & int                & 4 & First component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\%\midrule
-dx1            & 24 & int                & 4 & Second component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\%\midrule
+dx0            & 20 & int                & 4 & First component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\
+dx1            & 24 & int                & 4 & Second component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\
 dx2            & 28 & int                & 4 & Third component of the star's proper motion vector at the catalog epoch scaled by $1\times10^3$\\%\midrule
-b\_v           & 32 & short              & 2 & $B-V$ colour in milli-mag unit.\\%\midrule
-mag            & 34 & short              & 2 & $V$-band magnitude in milli-mag unit.\\%\midrule
-plx            & 36 & unsigned short     & 2 & parallax of the star in 0.02 mas unit.\\%\midrule
+b\_v           & 32 & short              & 2 & $B-V$ colour in milli-mag unit.\\
+mag            & 34 & short              & 2 & $V$-band magnitude in milli-mag unit.\\
+plx            & 36 & unsigned short     & 2 & parallax of the star in 0.02 mas unit.\\
 plx\_err       & 38 & unsigned short     & 2 & parallax error of the star in 0.01 mas unit.\\%\midrule
 rv             & 40 & short              & 2 & radial velocity of the star in 0.1 km/s unit.\\%\midrule
 sp\_int        & 42 & unsigned short     & 2 & index into an array of spectral type descriptions 
@@ -264,10 +275,10 @@ hip            & 45 & int                & 3 & Hipparcos catalogue number with c
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset}& \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-gaia\_id       &  0 & int64_t            & 8 & Gaia source id\\%\midrule
-x0             &  8 & int                & 4 & Right ascension $\alpha$ of the star in mas unit.\\%\midrule
+gaia\_id       &  0 & int64\_t           & 8 & Gaia source id\\%\midrule
+x0             &  8 & int                & 4 & Right ascension $\alpha$ of the star in mas unit.\\
 x1             & 12 & int                & 4 & Declination $\delta$ of the star in mas unit.\\%\midrule
-dx0            & 16 & int                & 4 & Proper motion $\mu_{\alpha}$ of the star in $\mu$as/year\\%\midrule
+dx0            & 16 & int                & 4 & Proper motion $\mu_{\alpha}$ of the star in $\mu$as/year\\
 dx1            & 20 & int                & 4 & Proper motion $\mu_{\delta}$ of the star in $\mu$as/year\\%\midrule
 b\_v           & 24 & short              & 2 & $B-V$ colour in milli-mag unit.\\
 mag            & 26 & short              & 2 & $V$-band magnitude in milli-mag unit.\\
@@ -282,9 +293,9 @@ plx\_err       & 30 & unsigned short     & 2 & parallax error of the star in 0.0
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} & \emph{Description}\\\midrule
-gaia\_id       &  0 & int64_t            & 8 & Gaia source id\\%\midrule
-x0             &  8 & int                & 3 & Right ascension $\alpha$ of the star in 0.1 arcsecond unit.\\%\midrule
-x1             & 11 & int                & 3 & Declination $\delta$ of the star in 0.1 arcsecond unit.\\%\midrule
+gaia\_id       &  0 & int64\_t           & 8 & Gaia source id\\
+x0             &  8 & int                & 3 & Right ascension $\alpha$ of the star in 0.1 arcsecond unit.\\
+x1             & 11 & int                & 3 & Declination $\delta$ of the star in 0.1 arcsecond unit.\\
 b\_v           & 14 & unsigned short     & 1 & $B-V$ colour in 25 milli-mag unit offset by $+1$ mag.\\
 mag            & 15 & unsigned short     & 1 & $V$-band magnitude in 20 milli-mag unit offset by $-16$ mag.\\\bottomrule
 \end{tabularx}
@@ -325,19 +336,19 @@ are stored in a plain text format with tab delimiter (Table~\ref{tab:sec:StarCat
 \begin{table}[tb]
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{Name} & \emph{Type} & \emph{Description}\\\midrule
-HIP/Gaia & int    & This is the HIP or Gaia DR3 identifier for the star. Used for reference to the main star catalogue.\\%\midrule
-GCVS     & string & This is the GCVS designation for the variable star.\\%\midrule
-Type     & string & Type of variability.\\%\midrule
-Max      & float  & Magnitude at maximum brightness.\\%\midrule
+HIP/Gaia & int    & This is the HIP or Gaia DR3 identifier for the star. Used for reference to the main star catalogue.\\
+GCVS     & string & This is the GCVS designation for the variable star.\\
+Type     & string & Type of variability.\\
+Max      & float  & Magnitude at maximum brightness.\\
 MFlag    & int    & Magnitude flag code (0=No flag; 1="(" if max. magnitude is an amplitude; 
                     2="\textless{}" if max. magnitude is a bright limit; 
-                    3="\textgreater{}" is max. magnitude is a faint limit).\\%\midrule
-Min I    & float  & First minimum magnitude or amplitude.\\%\midrule
-Min II   & float  & Second minimum magnitude.\\%\midrule
-V        & char   & The photometric system for magnitudes.\\%\midrule
-Epoch    & float  & Epoch for maximum or minimum light (in Julian days).\\%\midrule
-Period   & float  & Period for the variable star (in days).\\%\midrule
-M-m      & float  & Rising time or duration of the eclipse (in percent).\\%\midrule
+                    3="\textgreater{}" is max. magnitude is a faint limit).\\
+Min I    & float  & First minimum magnitude or amplitude.\\
+Min II   & float  & Second minimum magnitude.\\
+V        & char   & The photometric system for magnitudes.\\
+Epoch    & float  & Epoch for maximum or minimum light (in Julian days).\\
+Period   & float  & Period for the variable star (in days).\\
+M-m      & float  & Rising time or duration of the eclipse (in percent).\\
 Spectrum & string & Spectral class of the variable star.\\\bottomrule
 \end{tabularx}
 \caption{Variable Star Catalog File Format}
@@ -1842,10 +1853,10 @@ The file \file{cross-id.cat} contains cross reference data for catalogues HIP, S
 \begin{table}[htb]
 \begin{tabularx}{\textwidth}{l|c|X}\toprule
 \emph{Name} & \emph{Type} & \emph{Description}\\\midrule
-HIP	      & uint64_t      & HIP or Gaia identifier for the star. Used for reference to the main star catalogue.\\%\midrule
-Component & unsigned char & Component of the star in the multiple star system.\\%\midrule
-SAO    	  & int           & SAO identifier for the star.\\%\midrule
-HD	      & int           & HD identifier for the star.\\%\midrule
+HIP	      & uint64\_t     & HIP or Gaia identifier for the star. Used for reference to the main star catalogue.\\
+Component & unsigned char & Component of the star in the multiple star system.\\
+SAO    	  & int           & SAO identifier for the star.\\
+HD	      & int           & HD identifier for the star.\\
 HR	      & int           & HR identifier for the star.\\\bottomrule
 \end{tabularx}
 \caption{Format of \file{cross-id.cat}}
