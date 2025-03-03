@@ -93,6 +93,7 @@ struct Star
    // VIP flag is for situation where it can bypass some check (e.g., magnitude display cutoff for Star1 in far
    // past/future)
    inline bool    isVIP() const { return static_cast<const Derived *>(this)->isVIP(); }
+   inline StarId  getHip() const { return static_cast<const Derived *>(this)->getHip(); }
    inline StarId  getGaia() const { return static_cast<const Derived *>(this)->getGaia(); }
    inline bool    hasName() const { return static_cast<const Derived *>(this)->hasName(); }
    inline QString getNameI18n() const { return static_cast<const Derived *>(this)->getNameI18n(); }
@@ -243,6 +244,179 @@ struct Star
 		bS *= 1000./ plx;
 		bS += diffPos * MAS2RAD * 1000.;
    }
+
+   inline void getBinaryOrbit(double epoch, Vec3d& v) const {
+      double pmra = 0.;
+      double pmdec = 0.;
+      double rv = 0.;
+      double plx = 0.;
+      double ra = 0.;
+      double dec = 0.;
+      getBinaryOrbit(epoch, v, ra, dec, plx, pmra, pmdec, rv);
+   }
+
+   inline void getBinaryOrbit(double epoch, Vec3d& v, double& ra, double& dec, double& plx, double& pmra, double& pmdec, double& RV) const {
+      StarId star_id;  // star ID
+      if (getGaia() == 0)
+      {
+         star_id = getHip();
+      }
+      else
+      {
+         star_id = getGaia();
+      }
+
+      // look up if hip is in the binary star map
+      binaryorbitstar bso = StarMgr::getBinaryOrbitData(star_id);
+      // check if bso is empty or not
+      if (bso.hip == 0)
+      {
+         // exit the function because nothing to do, not a binary star
+         return;
+      }
+
+      // Orbital elements of the secondary star
+      double binary_period = bso.binary_period;  // Orbital period [days]
+      float eccentricity = bso.eccentricity;  // Eccentricity
+      float inclination = bso.inclination;  // Orbit inclination [rad]
+      float big_omega = bso.big_omega;  // Position angle of ascending node [rad]
+      float small_omega = bso.small_omega;  // Argument of periastron [rad]
+      double periastron_epoch = bso.periastron_epoch;  // Julian Date at periastron passage
+      double semi_major = bso.semi_major;  // Angular semi-major axis [arcsec]
+      double bary_distance = bso.bary_distance;  // distance [parsec]
+      double data_epoch = bso.data_epoch;  // Julian Date of the data
+      double bary_ra = bso.bary_ra;  // Right Ascension of the barycenter [rad]
+      double bary_dec = bso.bary_dec;  // Declination of the barycenter [rad]
+      // motion of the barycenter
+      double bary_rv = bso.bary_rv;  // Barycenter radial velocity [km/s]
+      float primary_mass = bso.primary_mass;  // Primary star mass [solar mass]
+      float secondary_mass = bso.secondary_mass;  // Secondary star mass [solar mass]
+      double bary_pmra = bso.bary_pmra;  // Barycenter RA proper motion [mas/yr]
+      double bary_pmdec = bso.bary_pmdec;  // Barycenter DEC proper motion [mas/yr]
+      if (!data_epoch)
+      {
+         data_epoch = STAR_CATALOG_JDEPOCH;  // by default assume the date is the same as the catalog epoch
+      }
+      const double G = 4.49850215e-15;  // Gravitational constant in parsec^3 / (M_sun * yr^2)
+
+      double dyrs = (epoch - data_epoch) / 365.25;
+      semi_major = semi_major * bary_distance * MAS2RAD * 1000.;  // Convert to parsec
+      double mass_ratio = secondary_mass / (primary_mass + secondary_mass);
+      Vec3d bary_r;
+      StelUtils::spheToRect(bary_ra, bary_dec, bary_r);  // barycenter position in equatorial cartesian coordinate
+
+      // angular phase since periastron (at periastron_epoch)
+      double ud = 2 * M_PI * (epoch - periastron_epoch) / binary_period;
+      ud = fmod(ud, 2 * M_PI);  // warp u to [0, 2pi]
+      
+      // eccentric anomaly with newton's method
+      double E = ud;
+      // iterate until convergence or maximum iterations
+      const int max_iterations = 100;
+      const double tolerance = 1e-10;
+      for (int j = 0; j < max_iterations; j++)
+      {
+         double delta = (E - eccentricity * sin(E) - ud) / (1 - eccentricity * cos(E));
+         E = E - delta;
+         if (fabs(delta) < tolerance)
+         {
+            break;
+         }
+      }
+
+      // calculate true anomaly nu and bary_distance r
+      double nu = 2 * atan(sqrt((1 + eccentricity) / (1 - eccentricity)) * tan(E / 2));
+      double radius = semi_major * (1 - eccentricity * cos(E));  // in parsec
+      Vec3d true_orbit(radius * cos(nu), radius * sin(nu), 0);  // all axis in parsec
+
+      // Angular momentum per unit mass
+      double h = sqrt(semi_major * (1 - eccentricity * eccentricity));
+      double mu = G * (primary_mass + secondary_mass);
+      double v_r = (1. / h) * eccentricity * sin(nu);  // radial velocity
+      double v_theta = h / radius;  // Tangential velocity
+      Vec3d true_orbit_vel(v_r * cos(nu) - v_theta * sin(nu), v_r * sin(nu) + v_theta * cos(nu), 0.);
+      true_orbit_vel *= sqrt(mu);  // scale the velocity to physical units in parsec/yr
+
+      // rotation matrix from true to sky plane
+      Mat3d rot;
+      rot.set(cos(big_omega) * cos(small_omega) - sin(big_omega) * sin(small_omega) * cos(inclination),
+            -cos(big_omega) * sin(small_omega) - sin(big_omega) * cos(small_omega) * cos(inclination),
+            sin(big_omega) * sin(inclination),
+            sin(big_omega) * cos(small_omega) + cos(big_omega) * sin(small_omega) * cos(inclination),
+            -sin(big_omega) * sin(small_omega) + cos(big_omega) * cos(small_omega) * cos(inclination),
+            -cos(big_omega) * sin(inclination),
+            sin(small_omega) * sin(inclination),
+            cos(small_omega) * sin(inclination),
+            cos(inclination));
+
+      // to equatorial cartesian coordinate, similar to normal triad but with additional declination rotation
+      Vec3d p(-sin(bary_ra), cos(bary_ra), 0.);
+      Vec3d q(-sin(bary_dec) * cos(bary_ra), -sin(bary_dec) * sin(bary_ra), cos(bary_dec));
+      Vec3d r(cos(bary_dec) * cos(bary_ra), cos(bary_dec) * sin(bary_ra), sin(bary_dec));
+
+      // add the barycenter shift from proper motion
+      Vec3d bary_pmvec0 = (p * bary_pmra + q * bary_pmdec) * MAS2RAD;
+      double bary_pmr0 = bary_rv * (1000. / bary_distance) / (AU / JYEAR_SECONDS) * MAS2RAD;
+      double bary_pmtotsqr = (bary_pmvec0[0] * bary_pmvec0[0] + bary_pmvec0[1] * bary_pmvec0[1] + bary_pmvec0[2] * bary_pmvec0[2]);
+      double bary_f = 1. / sqrt(1. + 2. * bary_pmr0 * dyrs + (bary_pmtotsqr + bary_pmr0 * bary_pmr0) * dyrs * dyrs);
+      Vec3d  bary_u = (bary_r * (1. + bary_pmr0 * dyrs) + bary_pmvec0 * dyrs) * bary_f;
+
+      double xy = sqrt(bary_u[0] * bary_u[0] + bary_u[1] * bary_u[1]);
+      Vec3d  p2(-bary_u[1] / xy, bary_u[0] / xy, 0.0);
+      Vec3d  q2(-bary_u[0] * bary_u[2] / xy, -bary_u[1] * bary_u[2] / xy, xy);
+      // to sky plane, all axis in parsec and parsec/yr
+      Vec3d sky_orbit(0.);
+      Vec3d sky_orbit_vel(0.);
+      for (size_t i = 0; i < 3; ++i) {
+         for (size_t j = 0; j < 3; ++j) {
+               sky_orbit[i] += rot[i*3+j] * true_orbit[j];
+               sky_orbit_vel[i] += rot[i*3+j] * true_orbit_vel[j];
+         }
+      }
+
+      // swap the first two components of sky_orbit to match ra, dec axis
+      double tmp = sky_orbit[0];
+      sky_orbit[0] = sky_orbit[1];
+      sky_orbit[1] = tmp;
+      tmp = sky_orbit_vel[0];
+      sky_orbit_vel[0] = sky_orbit_vel[1];
+      sky_orbit_vel[1] = tmp;
+
+      if (bso.primary)
+      {
+         sky_orbit *= -mass_ratio;
+         sky_orbit_vel *= -mass_ratio;
+      }
+      else
+      {
+         sky_orbit *= (1.0 - mass_ratio);
+         sky_orbit_vel *= (1.0 - mass_ratio);
+      }
+
+      // sky_orbit is in parsec and sky_orbit_vel is in parsec/year, we want them arcsecond and arcsecond/year
+      sky_orbit[0] /= bary_distance;
+      sky_orbit[1] /= bary_distance;
+      sky_orbit_vel *= 1.e-3 / MAS2RAD / bary_distance;
+
+      // sky_orbit_vel is in arcsecond/year
+      sky_orbit_vel.set(sky_orbit_vel[0] + bary_pmra / 1000., 
+                        sky_orbit_vel[1] + bary_pmdec / 1000., 
+                        sky_orbit_vel[2] + bary_rv * (JYEAR_SECONDS / AU) / bary_distance);
+
+      sky_orbit_vel = p * sky_orbit_vel[0] + q * sky_orbit_vel[1] + r * sky_orbit_vel[2];  // arcsecond/year
+
+      StelUtils::spheToRect(bary_ra + sky_orbit[0], 
+                            bary_dec + sky_orbit[1], 
+                            bary_distance + sky_orbit[2], 
+                            sky_orbit);  // barycenter position in equatorial cartesian coordinate
+
+      plx = 1000. / bary_distance * bary_f;
+      RV  = sky_orbit_vel.dot(bary_u) * (1000./plx) * (AU / JYEAR_SECONDS);
+      v = sky_orbit  - bary_r * bary_distance + bary_u * (1000. / plx);
+      pmra = sky_orbit_vel.dot(p2) * 1000.;
+      pmdec = sky_orbit_vel.dot(q2) * 1000.;
+      StelUtils::rectToSphe(&ra, &dec, v);
+   }
 };
 
 struct Star1 : public Star<Star1>
@@ -353,6 +527,7 @@ public:
       return sqrt((getDx0() * cos(getX1()) * getDx0() * cos(getX1())) + (getDx1() * getDx1()));
    }
    StelObjectP    createStelObject(const SpecialZoneArray<Star2> * a, const SpecialZoneData<Star2> * z) const;
+   StarId         getHip() const { return 0; }
    StarId         getGaia() const { return d.gaia_id; }
    float          getBV(void) const { return static_cast<float>(d.b_v) / 1000.f; }
    QString        getNameI18n(void) const { return QString(); }
@@ -406,6 +581,7 @@ public:
    double         getRV() const { return 0.; }
    double         getBV() const { return (0.025 * d.b_v) - 1.; } // in mag
    double         getMag() const { return d.vmag * 20 + 16000; } // in milli-mag
+   StarId         getHip() const { return 0; }
    StarId         getGaia() const { return d.gaia_id; }
    QString        getNameI18n() const { return QString(); }
    QString        getScreenNameI18n() const { return QString(); }

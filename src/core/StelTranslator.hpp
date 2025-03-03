@@ -59,7 +59,6 @@ public:
 	//! The passed language name is a language code string like "fr" or "fr_FR".
 	//! This class wrap gettext to simulate an object oriented multiplateform gettext UTF8 translator
 	//! @param adomain The name of the domain to use for translation
-	//! @param amoDirectory The directory where to look for the domain.mo translation files.
 	//! @param alangName The C locale name or language name like "fr" or "fr_FR". If string is "" or "system" it will use the system locale.
 	StelTranslator(const QString& adomain, const QString& alangName);
 	

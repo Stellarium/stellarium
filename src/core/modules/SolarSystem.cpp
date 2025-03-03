@@ -4167,10 +4167,12 @@ bool SolarSystem::removeMinorPlanet(const QString &name)
 
 void SolarSystem::onNewSurvey(HipsSurveyP survey)
 {
-	// For the moment we only consider the survey url to decide if we
-	// assign it to a planet.  It would be better to use some property
-	// for that.
-	QString planetName = QUrl(survey->getUrl()).fileName();
+	if (survey->getType() != "planet")
+	{
+		// We don't handle planet-normal yet
+		return;
+	}
+	QString planetName = survey->getFrame();
 	PlanetP pl = searchByEnglishName(planetName);
 	if (!pl || pl->survey)
 		return;

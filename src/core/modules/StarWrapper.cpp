@@ -300,16 +300,18 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	double RadialVel = s->getRV();
 	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+	Vec3d v;
+	s->getBinaryOrbit(core->getJDE(), v, RA, DEC, Plx, pmra, pmdec, RadialVel);
 
 	float magOffset = 0.f;
-	if (Plx)
+	if (Plx && s->getPlx())
 	{
-		magOffset = 5.f * log10((s->getPlx())/Plx);
+		magOffset = 5.f * log10(s->getPlx()/Plx);
 	} 
 	oss << getMagnitudeInfoString(core, flags, 2, magOffset);
 
-	if ((flags&AbsoluteMagnitude) && Plx && !isNan(Plx) && !isInf(Plx))
-		// should use Plx from getPlx because Plx can change with time, but not absolute magnitude
+	// should use Plx from getPlx because Plx can change with time, but not absolute magnitude
+	if ((flags&AbsoluteMagnitude) && s->getPlx())
 		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.001*s->getPlx())), 0, 'f', 2) << "<br />";
 	if (flags&AbsoluteMagnitude)
 		oss << getExtraInfoStrings(AbsoluteMagnitude).join("");

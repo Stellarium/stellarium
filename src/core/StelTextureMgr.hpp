@@ -60,7 +60,7 @@ public:
 
 	//! Creates or finds a StelTexture wrapper for the specified OpenGL texture object.
 	//! The wrapper takes ownership of the texture and will delete it if it is destroyed.
-	//! @param texID The OpenGL texture ID which should be wrapped. If this is already a StelTexture, the existing wrapper will be returned.
+	//! @param texId The OpenGL texture ID which should be wrapped. If this is already a StelTexture, the existing wrapper will be returned.
 	//! @returns the existing or new wrapper for the texture with the given GL name. Returns a null pointer if the texture name is invalid.
 	StelTextureSP wrapperForGLTexture(GLuint texId);
 
