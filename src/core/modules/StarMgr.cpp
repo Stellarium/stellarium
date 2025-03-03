@@ -92,9 +92,9 @@ QMap<QString, StarId> StarMgr::varStarsIndexI18n;
 QHash<StarId, wds> StarMgr::wdsStarsMapI18n;
 QMap<QString, StarId> StarMgr::wdsStarsIndexI18n;
 QMap<QString, crossid> StarMgr::crossIdMap;
-QMap<int, StarId> StarMgr::saoStarsIndex;
-QMap<int, StarId> StarMgr::hdStarsIndex;
-QMap<int, StarId> StarMgr::hrStarsIndex;
+QHash<int, StarId> StarMgr::saoStarsIndex;
+QHash<int, StarId> StarMgr::hdStarsIndex;
+QHash<int, StarId> StarMgr::hrStarsIndex;
 QHash<StarId, QString> StarMgr::referenceMap;
 
 QStringList initStringListFromFile(const QString& file_name)
