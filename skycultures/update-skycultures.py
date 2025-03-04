@@ -45,13 +45,7 @@ parser.add_argument("--sky_culture_dir",
                     help="directory where sky cultures are stored.")
 args = parser.parse_args()
 
-LANGS = ['af','am','ar','arn','ay','az','be','bg','bn','br','bs','ca',
-         'ca@valencia','cs','da','de','el','en','en_AU','en_CA','en_GB','en_US',
-         'es','es_419','et','eu','fa','fi','fr','fy','gd','gl','gu','he','hi',
-         'hr','hu','hy','id','is','it','ja','jv','ka','ko','la','lb','lt','lv',
-         'mi','ml','mr','ms','nb','nds','ne','nl','nn','oj','pl','pt','pt_BR',
-         'qu','rap','ro','ru','sa','sc','shi','si','sk','sl','sq','sr','sr@latin',
-         'sv','ta','te','th','ti','tr','tt','uk','vi','zh_CN','zh_HK','zh_TW']
+LANGS = []
 
 BLACKLIST = [
     # Unclear images licensing
@@ -101,6 +95,13 @@ def main():
     ensure_dir(os.path.join(OUTSCDIR, 'file'))
     ensure_dir(os.path.join(OUT_DIR_I18N_SC, 'file'))
     ensure_dir(os.path.join(OUT_DIR_I18N_GUI, 'file'))
+
+    global LANGS
+    for filename in os.listdir(OUT_DIR_I18N_SC) + os.listdir(OUT_DIR_I18N_SC_BACKUP) + os.listdir(OUT_DIR_I18N_GUI):
+        if filename.endswith('.po'):
+            LANGS.append(filename.replace('.po', ''))
+    LANGS = list(set(LANGS))
+    LANGS.sort()
 
     def is_sky_culture_dir(d):
         if not os.path.isdir(os.path.join(SCDIR, d)):
