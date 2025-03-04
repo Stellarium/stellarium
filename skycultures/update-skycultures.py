@@ -35,7 +35,7 @@ if sys.version_info[0] < 3:
         sys.version_info[0]))
 
 if os.path.dirname(os.path.relpath(__file__)) != 'skycultures':
-    print("This script must be run from the skycultures/ directory")
+    print("This script must be run from the skycultures/ directory", file=sys.stderr)
     sys.exit(-1)
 
 DIR = os.path.abspath(os.path.dirname(__file__))
@@ -81,7 +81,7 @@ def main():
         # If not path is given, get the data from upstream github
         url = 'https://github.com/Stellarium/stellarium-skycultures/archive/master.zip'
         path = '/tmp/stellarium-skycultures-master.zip'
-        print(f'Download {url}')
+        print(f'Download {url}', file=sys.stderr)
         urllib.request.urlretrieve(url, path)
         outpath = tempfile.mkdtemp()
 
@@ -127,7 +127,7 @@ def main():
         description_file = os.path.join(data_path, 'description.md')
         assert os.path.exists(description_file)
 
-        print(f'Processing {sky_culture} from {index_file}')
+        print(f'Processing {sky_culture} from {index_file}', file=sys.stderr)
 
         with open(description_file) as file:
             markdown = file.read()
@@ -159,9 +159,9 @@ def main():
 
     # Generates combined po files to obtain 1 po file with all sky cultures
     # strings per supported language.
-    print('Generating combined po files')
+    print('Generating combined po files', file=sys.stderr)
     for lang in LANGS:
-        print('Processing language "'+lang+'"...')
+        print('Processing language "'+lang+'"...', file=sys.stderr)
         input_lang = lang
         if lang == 'zh_Hant':
             input_lang = 'zh_TW'
@@ -214,7 +214,7 @@ def main():
                 continue
             po_path = os.path.join(SCDIR, sky_culture, 'po', input_lang + '.po')
             if not os.path.exists(po_path):
-                print('Warning: no language "'+input_lang+'" for sky culture "'+sc_names[sky_culture]+'"')
+                print('Warning: no language "'+input_lang+'" for sky culture "'+sc_names[sky_culture]+'"', file=sys.stderr)
                 continue
             po = polib.pofile(po_path)
             for entry in po:
@@ -229,10 +229,10 @@ def main():
                         combined_sc_po.append(entry)
 
         if len(combined_sc_po.translated_entries()) == 0:
-            print('Warning: no name strings present for language "'+input_lang+'"')
+            print('Warning: no name strings present for language "'+input_lang+'"', file=sys.stderr)
             continue
         if len(combined_sc_po.translated_entries()) == 0:
-            print('Warning: no description strings present for language "'+input_lang+'"')
+            print('Warning: no description strings present for language "'+input_lang+'"', file=sys.stderr)
             continue
 
         combined_sc_po.save(sc_po_path)
