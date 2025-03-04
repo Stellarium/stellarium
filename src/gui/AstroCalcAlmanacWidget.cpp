@@ -177,8 +177,7 @@ QString AstroCalcAlmanacWidget::getFormattedDateTime(const double JD, const doub
 
 void AstroCalcAlmanacWidget::setSeasonTimes()
 {
-	const double utcShift = core->getUTCOffset(core->getJD()) / 24.; // Fix DST shift...
-	const double JD = core->getJD() + utcShift;
+	const double JD = core->getJD() +  core->getUTCOffset(core->getJD()) / 24.;
 	int year, month, day;
 	double jdFirstDay, jdLastDay;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
@@ -197,19 +196,19 @@ void AstroCalcAlmanacWidget::setSeasonTimes()
 	ui->labelYearDuration->setText(QString("(%1 %2)").arg(QString::number(jdLastDay-jdFirstDay), days));
 	// Spring/Fall
 	ui->labelMarchEquinoxJD->setText(QString::number(marchEquinox, 'f', jdDepth));
-	ui->labelMarchEquinoxLT->setText(getFormattedDateTime(marchEquinox, utcShift));
+	ui->labelMarchEquinoxLT->setText(getFormattedDateTime(marchEquinox, core->getUTCOffset(marchEquinox) / 24.)); // Fix DST shift...
 	ui->labelMarchEquinoxDuration->setText(QString("%1 %2").arg(QString::number(juneSolstice-marchEquinox, 'f', daysDepth), days));
 	// Summer/Winter
 	ui->labelJuneSolsticeJD->setText(QString::number(juneSolstice, 'f', jdDepth));
-	ui->labelJuneSolsticeLT->setText(getFormattedDateTime(juneSolstice, utcShift));
+	ui->labelJuneSolsticeLT->setText(getFormattedDateTime(juneSolstice, core->getUTCOffset(juneSolstice) / 24.)); // Fix DST shift...
 	ui->labelJuneSolsticeDuration->setText(QString("%1 %2").arg(QString::number(septemberEquinox-juneSolstice, 'f', daysDepth), days));
 	// Fall/Spring
 	ui->labelSeptemberEquinoxJD->setText(QString::number(septemberEquinox, 'f', jdDepth));
-	ui->labelSeptemberEquinoxLT->setText(getFormattedDateTime(septemberEquinox, utcShift));
+	ui->labelSeptemberEquinoxLT->setText(getFormattedDateTime(septemberEquinox, core->getUTCOffset(septemberEquinox) / 24.)); // Fix DST shift...
 	ui->labelSeptemberEquinoxDuration->setText(QString("%1 %2").arg(QString::number(decemberSolstice-septemberEquinox, 'f', daysDepth), days));
 	// Winter/Summer
 	ui->labelDecemberSolsticeJD->setText(QString::number(decemberSolstice, 'f', jdDepth));
-	ui->labelDecemberSolsticeLT->setText(getFormattedDateTime(decemberSolstice, utcShift));
+	ui->labelDecemberSolsticeLT->setText(getFormattedDateTime(decemberSolstice, core->getUTCOffset(decemberSolstice) / 24.)); // Fix DST shift...
 	const double duration = (marchEquinox-jdFirstDay) + (jdLastDay-decemberSolstice);
 	ui->labelDecemberSolsticeDuration->setText(QString("%1 %2").arg(QString::number(duration, 'f', daysDepth), days));
 }
