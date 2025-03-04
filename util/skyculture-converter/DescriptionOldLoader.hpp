@@ -36,12 +36,13 @@ class DescriptionOldLoader
 	using TranslationDict = std::vector<DictEntry>;
 	QHash<QString/*locale*/, TranslationDict> translations;
 	QHash<QString/*locale*/, QString/*header*/> poHeaders;
+	std::set<DictEntry> allMarkdownSections;
 	bool dumpMarkdown(const QString& outDir) const;
 	void locateAndRelocateAllInlineImages(QString& html, bool saveToRefs);
 	void loadTranslationsOfNames(const QString& poBaseDir, const QString& cultureId, const QString& englishName,
 	                             const ConstellationOldLoader& consLoader, const AsterismOldLoader& astLoader, const NamesOldLoader& namesLoader);
-	QString translateSection(const QString& markdown, const qsizetype bodyStartPos, const qsizetype bodyEndPos, const QString& locale, const QString& sectionName) const;
-	QString translateDescription(const QString& markdown, const QString& locale) const;
+	QString translateSection(const QString& markdown, const qsizetype bodyStartPos, const qsizetype bodyEndPos, const QString& locale, const QString& sectionName);
+	QString translateDescription(const QString& markdown, const QString& locale);
 public:
 	void load(const QString& inDir, const QString& poBaseDir, const QString& cultureId, const QString& englishName,
 	          const QString& author, const QString& credit, const QString& license,

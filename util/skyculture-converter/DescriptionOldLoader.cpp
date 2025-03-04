@@ -568,10 +568,12 @@ void gettextpo_xerror2(int severity,
 }
 
 QString DescriptionOldLoader::translateSection(const QString& markdown, const qsizetype bodyStartPos,
-                                               const qsizetype bodyEndPos, const QString& locale, const QString& sectionName) const
+                                               const qsizetype bodyEndPos, const QString& locale, const QString& sectionName)
 {
+	const auto comment = QString("Sky culture %1 section in markdown format").arg(sectionName.trimmed().toLower());
 	auto text = markdown.mid(bodyStartPos, bodyEndPos - bodyStartPos);
 	text.replace(QRegularExpression("^\n*|\n*$"), "");
+	allMarkdownSections.insert(DictEntry{.comment = {comment}, .english = text, .translated = ""});
 	for(const auto& entry : translations[locale])
 	{
 		if(entry.english == text)
@@ -579,17 +581,18 @@ QString DescriptionOldLoader::translateSection(const QString& markdown, const qs
 			text = stripComments(entry.translated);
 			break;
 		}
-		if(entry.comment.find(QString("Sky culture %1 section in markdown format").arg(sectionName.trimmed().toLower())) != entry.comment.end())
+		if(entry.comment.find(comment) != entry.comment.end())
 		{
 			qWarning() << " *** BAD TRANSLATION ENTRY for section" << sectionName << "in locale" << locale;
 			qWarning() << "  Entry msgid:" << entry.english;
 			qWarning() << "  English section text:" << text << "\n";
+			continue;
 		}
 	}
 	return text;
 }
 
-QString DescriptionOldLoader::translateDescription(const QString& markdownInput, const QString& locale) const
+QString DescriptionOldLoader::translateDescription(const QString& markdownInput, const QString& locale)
 {
 	const auto markdown = stripComments(markdownInput);
 
@@ -1231,15 +1234,31 @@ bool DescriptionOldLoader::dump(const QString& outDir) const
 		std::set<DictEntry> emittedEntries;
 		for(const auto& entry : dictIt.value())
 		{
-			if(emittedEntries.find(entry) != emittedEntries.end()) continue;
+			const DictEntry untransEntry{.comment = entry.comment, .english = entry.english, .translated = ""};
+			if(emittedEntries.find(untransEntry) != emittedEntries.end()) continue;
 			const auto msg = po_message_create();
 			if(!entry.comment.empty())
 				po_message_set_extracted_comments(msg, join(entry.comment).toStdString().c_str());
 			po_message_set_msgid(msg, entry.english.toStdString().c_str());
 			po_message_set_msgstr(msg, entry.translated.toStdString().c_str());
 			po_message_insert(iterator, msg);
-			emittedEntries.insert(entry);
+			emittedEntries.insert(untransEntry);
 		}
+
+		// Add untranslated markdown entries
+		for(const auto& entry : allMarkdownSections)
+		{
+			if(const auto found = emittedEntries.find(entry); found == emittedEntries.end())
+			{
+				const auto msg = po_message_create();
+				po_message_set_msgid(msg, entry.english.toStdString().c_str());
+				if(!entry.comment.empty())
+					po_message_set_extracted_comments(msg, join(entry.comment).toStdString().c_str());
+				po_message_insert(iterator, msg);
+				emittedEntries.insert(entry);
+			}
+		}
+
 		po_message_iterator_free(iterator);
 		po_xerror_handler handler = {gettextpo_xerror, gettextpo_xerror2};
 		po_file_write(file, path.toStdString().c_str(), &handler);
