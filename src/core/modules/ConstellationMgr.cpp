@@ -173,7 +173,7 @@ void ConstellationMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 		int i = 1;
 		for (auto* constellation : constellations)
 		{
-			qWarning() << "[Constellation] #" << i << " abbr:" << constellation->abbreviation << " name:" << constellation->getEnglishName() << " segments:" << constellation->numberOfSegments;
+			qInfo() << "[Constellation] #" << i << " abbr:" << constellation->abbreviation << " name:" << constellation->getEnglishName() << " segments:" << constellation->numberOfSegments;
 			i++;
 		}
 	}
