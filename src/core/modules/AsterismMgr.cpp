@@ -129,7 +129,7 @@ void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 		asterisms.clear();
 		selected.clear();
 		hasAsterism = false;
-		qWarning() << "No asterisms for skyculture" << currentSkyCultureID;
+		qInfo() << "No asterisms for skyculture" << currentSkyCultureID;
 	}
 	else
 	{
