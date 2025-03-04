@@ -196,16 +196,16 @@ void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::Constellat
 		QString name;
 		switch (style)
 		{
-			case ConstellationMgr::constellationsTranslated:
+			case ConstellationMgr::Translated:
 				name=nameI18;
 				break;
-			case ConstellationMgr::constellationsNative:
+			case ConstellationMgr::Native:
 				name=nativeName;
 				break;
-			case ConstellationMgr::constellationsEnglish:
+			case ConstellationMgr::English:
 				name=englishName;
 				break;
-			case ConstellationMgr::constellationsAbbreviated:
+			case ConstellationMgr::Abbreviated:
 				name=(abbreviation.startsWith('.') ? "" : abbreviation);
 				break;
 		}

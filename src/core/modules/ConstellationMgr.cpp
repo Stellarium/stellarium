@@ -49,24 +49,24 @@
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
-        : hipStarMgr(_hip_stars),
-          isolateSelected(false),
-          flagConstellationPick(false),
-          constellationDisplayStyle(ConstellationMgr::constellationsTranslated),
-          artFadeDuration(2.),
-          artIntensity(0),
-          artIntensityMinimumFov(1.0),
-          artIntensityMaximumFov(2.0),
-          artDisplayed(0),
-          boundariesDisplayed(0),
-          boundariesFadeDuration(1.),
-          linesDisplayed(0),
-          linesFadeDuration(0.),
-          namesDisplayed(0),
-          namesFadeDuration(1.),
-          checkLoadingData(false),
-          constellationLineThickness(1),
-          constellationBoundariesThickness(1)
+	: hipStarMgr(_hip_stars),
+	  isolateSelected(false),
+	  flagConstellationPick(false),
+	  constellationDisplayStyle(ConstellationMgr::Translated),
+	  artFadeDuration(2.),
+	  artIntensity(0),
+	  artIntensityMinimumFov(1.0),
+	  artIntensityMaximumFov(2.0),
+	  artDisplayed(0),
+	  boundariesDisplayed(0),
+	  boundariesFadeDuration(1.),
+	  linesDisplayed(0),
+	  linesFadeDuration(0.),
+	  namesDisplayed(0),
+	  namesFadeDuration(1.),
+	  checkLoadingData(false),
+	  constellationLineThickness(1),
+	  constellationBoundariesThickness(1)
 {
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
@@ -113,7 +113,7 @@ void ConstellationMgr::init()
 		qWarning() << "viewing/constellation_name_style (" << skyCultureDisplayStyle << ") invalid. Using translated style.";
 		conf->setValue("viewing/constellation_name_style", "translated");
 	}
-	setConstellationDisplayStyle(ConstellationDisplayStyleMap.value(skyCultureDisplayStyle, constellationsTranslated));
+	setConstellationDisplayStyle(ConstellationDisplayStyleMap.value(skyCultureDisplayStyle, Translated));
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -406,7 +406,7 @@ void ConstellationMgr::setConstellationDisplayStyle(ConstellationDisplayStyle st
 
 QString ConstellationMgr::getConstellationDisplayStyleString(ConstellationDisplayStyle style)
 {
-	return (style == constellationsAbbreviated ? "abbreviated" : (style == constellationsNative ? "native" : "translated"));
+	return (style == Abbreviated ? "abbreviated" : (style == Native ? "native" : "translated"));
 }
 
 ConstellationMgr::ConstellationDisplayStyle ConstellationMgr::getConstellationDisplayStyle()
@@ -1434,7 +1434,7 @@ Constellation* ConstellationMgr::isObjectIn(const StelObject *s) const
 }
 
 const QMap<QString, ConstellationMgr::ConstellationDisplayStyle>ConstellationMgr::ConstellationDisplayStyleMap={
-	{ "translated",  constellationsTranslated},
-	{ "native",      constellationsNative},
-	{ "abbreviated", constellationsAbbreviated},
-	{ "english",     constellationsEnglish}};
+	{ "translated",  Translated},
+	{ "native",      Native},
+	{ "abbreviated", Abbreviated},
+	{ "english",     English}};

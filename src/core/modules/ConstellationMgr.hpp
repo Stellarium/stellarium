@@ -104,12 +104,23 @@ public:
 	QString getName() const override { return "Constellations"; }
 	QString getStelObjectType() const override;
 	//! Describes how to display constellation labels. The viewDialog GUI has a combobox which corresponds to these values.
+	//! TODO: Move to become SkycultureMgr::DisplayStyle? Then apply separately to Constellations and Planets, and whether applied to screen labels or infoString.
 	enum ConstellationDisplayStyle
 	{
-		constellationsAbbreviated	= 0,
-		constellationsNative		= 1,
-		constellationsTranslated	= 2,
-		constellationsEnglish		= 3 // Maybe this is not useful?
+		Abbreviated	= 0, // short label
+		Native		= 1, // may show non-Latin glyphs
+		Translated	= 2, // user language
+		English		= 3, // Useful in case of adding names in modern English terminology (planets etc.). Maybe "Modern" would be better, and should show object scientific name in modern terminology, translated.
+		Translit	= 4, // user-language transliteration/pronunciation aid
+		Native_Translit,             // combinations: just help reading foreign glyphs. MORE OPTIONS POSSIBLE!
+		Native_Translit_Translated,  // help reading foreign glyphs, show translations
+		Native_Translit_IPA_Translated, // help reading foreign glyphs, phonetics, show translations
+		Native_Translated,           // glyphs + user language
+		Translit_Translated,         // user language letters + translation
+		Translit_IPA_Translated,     // user language letters, phonetic + translation
+		Translit_Translated_English, // user language letters + translation + English Name
+		Translit_IPA_Translated_English, // user language letters + translation + English Name
+
 	};	
 	Q_ENUM(ConstellationDisplayStyle)
 
