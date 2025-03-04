@@ -59,6 +59,9 @@
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
         </widget>
        </item>
        <item row="5" column="7" colspan="6">
@@ -113,6 +116,9 @@
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
         </widget>
        </item>
        <item row="4" column="9">
@@ -156,7 +162,11 @@
         </widget>
        </item>
        <item row="4" column="3">
-        <widget class="QLabel" name="labelMarchEquinoxDuration"/>
+        <widget class="QLabel" name="labelMarchEquinoxDuration">
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
        </item>
        <item row="8" column="11">
         <widget class="QPushButton" name="buttonMoonset">
@@ -272,10 +282,17 @@
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
         </widget>
        </item>
        <item row="2" column="3">
-        <widget class="QLabel" name="labelMarchEquinoxLT"/>
+        <widget class="QLabel" name="labelMarchEquinoxLT">
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
        </item>
        <item row="2" column="1">
         <widget class="QLabel" name="labelLT1">
@@ -304,7 +321,11 @@
         </widget>
        </item>
        <item row="2" column="5">
-        <widget class="QLabel" name="labelJuneSolsticeLT"/>
+        <widget class="QLabel" name="labelJuneSolsticeLT">
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
        </item>
        <item row="2" column="7">
         <widget class="QLabel" name="labelCivilTwilight">
@@ -346,7 +367,11 @@
         </widget>
        </item>
        <item row="4" column="5">
-        <widget class="QLabel" name="labelJuneSolsticeDuration"/>
+        <widget class="QLabel" name="labelJuneSolsticeDuration">
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
        </item>
        <item row="1" column="8" colspan="2">
         <widget class="QLabel" name="labelDawn">
@@ -394,7 +419,11 @@
         </widget>
        </item>
        <item row="7" column="3">
-        <widget class="QLabel" name="labelSeptemberEquinoxLT"/>
+        <widget class="QLabel" name="labelSeptemberEquinoxLT">
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
        </item>
        <item row="2" column="9">
         <widget class="QPushButton" name="buttonCivilDawn">
@@ -561,6 +590,9 @@
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
         </widget>
        </item>
        <item row="3" column="11">
@@ -586,10 +618,17 @@
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
         </widget>
        </item>
        <item row="9" column="5">
-        <widget class="QLabel" name="labelDecemberSolsticeDuration"/>
+        <widget class="QLabel" name="labelDecemberSolsticeDuration">
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
        </item>
        <item row="3" column="7">
         <widget class="QLabel" name="labelNauticalTwilight">
@@ -602,7 +641,11 @@
         </widget>
        </item>
        <item row="8" column="5">
-        <widget class="QLabel" name="labelDecemberSolsticeJD"/>
+        <widget class="QLabel" name="labelDecemberSolsticeJD">
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
        </item>
        <item row="4" column="1">
         <widget class="QLabel" name="labelDuration1">
@@ -678,6 +721,9 @@
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
          </property>
         </widget>
        </item>
@@ -802,10 +848,18 @@
         </layout>
        </item>
        <item row="3" column="3">
-        <widget class="QLabel" name="labelMarchEquinoxJD"/>
+        <widget class="QLabel" name="labelMarchEquinoxJD">
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
        </item>
        <item row="9" column="3">
-        <widget class="QLabel" name="labelSeptemberEquinoxDuration"/>
+        <widget class="QLabel" name="labelSeptemberEquinoxDuration">
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
        </item>
        <item row="4" column="7">
         <widget class="QLabel" name="labelAstronomicalTwilight">
@@ -850,6 +904,9 @@
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
         </widget>
        </item>
        <item row="4" column="12">
@@ -863,7 +920,11 @@
         </widget>
        </item>
        <item row="7" column="5">
-        <widget class="QLabel" name="labelDecemberSolsticeLT"/>
+        <widget class="QLabel" name="labelDecemberSolsticeLT">
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
        </item>
        <item row="0" column="1" colspan="5">
         <widget class="QLabel" name="labelSeasons">
@@ -915,7 +976,11 @@
         </widget>
        </item>
        <item row="8" column="3">
-        <widget class="QLabel" name="labelSeptemberEquinoxJD"/>
+        <widget class="QLabel" name="labelSeptemberEquinoxJD">
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
        </item>
        <item row="7" column="11">
         <widget class="QPushButton" name="buttonSunset">
@@ -939,6 +1004,9 @@
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
          </property>
         </widget>
        </item>
@@ -965,6 +1033,9 @@
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
         </widget>
        </item>
        <item row="7" column="10">
@@ -975,10 +1046,17 @@
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
         </widget>
        </item>
        <item row="3" column="5">
-        <widget class="QLabel" name="labelJuneSolsticeJD"/>
+        <widget class="QLabel" name="labelJuneSolsticeJD">
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
        </item>
        <item row="1" column="2" rowspan="9">
         <widget class="Line" name="line_4">
@@ -1042,6 +1120,9 @@
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
         </widget>
        </item>
        <item row="7" column="8">
@@ -1051,6 +1132,9 @@
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
          </property>
         </widget>
        </item>
