@@ -23,11 +23,11 @@ import os
 import re
 import sys
 import json
-import polib
 import shutil
 import zipfile
 import tempfile
 import argparse
+import subprocess
 import urllib.request
 
 if sys.version_info[0] < 3:
@@ -35,7 +35,7 @@ if sys.version_info[0] < 3:
         sys.version_info[0]))
 
 if os.path.dirname(os.path.relpath(__file__)) != 'skycultures':
-    print("This script must be run from the skycultures/ directory")
+    print("This script must be run from the skycultures/ directory", file=sys.stderr)
     sys.exit(-1)
 
 DIR = os.path.abspath(os.path.dirname(__file__))
@@ -45,13 +45,7 @@ parser.add_argument("--sky_culture_dir",
                     help="directory where sky cultures are stored.")
 args = parser.parse_args()
 
-LANGS = ['af','am','ar','arn','ay','az','be','bg','bn','br','bs','ca',
-         'ca@valencia','cs','da','de','el','en','en_AU','en_CA','en_GB','en_US',
-         'es','es_419','et','eu','fa','fi','fr','fy','gd','gl','gu','he','hi',
-         'hr','hu','hy','id','is','it','ja','jv','ka','ko','la','lb','lt','lv',
-         'mi','ml','mr','ms','nb','nds','ne','nl','nn','oj','pl','pt','pt_BR',
-         'qu','rap','ro','ru','sa','sc','shi','si','sk','sl','sq','sr','sr@latin',
-         'sv','ta','te','th','ti','tr','tt','uk','vi','zh_CN','zh_HK','zh_TW']
+LANGS = []
 
 BLACKLIST = [
     # Unclear images licensing
@@ -60,6 +54,10 @@ BLACKLIST = [
 ]
 
 sc_names = {}
+
+# Turn a list of lists in to a simple list
+def flatten(xss):
+    return [x for xs in xss for x in xs]
 
 def ensure_dir(file_path):
     '''Create a directory for a path if it doesn't exist yet'''
@@ -87,7 +85,7 @@ def main():
         # If not path is given, get the data from upstream github
         url = 'https://github.com/Stellarium/stellarium-skycultures/archive/master.zip'
         path = '/tmp/stellarium-skycultures-master.zip'
-        print(f'Download {url}')
+        print(f'Download {url}', file=sys.stderr)
         urllib.request.urlretrieve(url, path)
         outpath = tempfile.mkdtemp()
 
@@ -96,11 +94,19 @@ def main():
         SCDIR = os.path.join(outpath, 'stellarium-skycultures-master')
     OUTSCDIR = os.path.join(DIR)
     OUT_DIR_I18N_SC = os.path.join(DIR, '..', 'po', 'stellarium-skycultures')
-    OUT_DIR_I18N_SC_BACKUP = os.path.join(DIR, '..', 'po', 'stellarium-sky')
     OUT_DIR_I18N_GUI = os.path.join(DIR, '..', 'po', 'stellarium-skycultures-descriptions')
     ensure_dir(os.path.join(OUTSCDIR, 'file'))
     ensure_dir(os.path.join(OUT_DIR_I18N_SC, 'file'))
     ensure_dir(os.path.join(OUT_DIR_I18N_GUI, 'file'))
+
+    GENERATE_PO_CMD_PATH = os.path.join(DIR, '..', 'util', 'skycultures', 'generate-pot.py')
+
+    global LANGS
+    for filename in os.listdir(OUT_DIR_I18N_SC) + os.listdir(OUT_DIR_I18N_GUI):
+        if filename.endswith('.po'):
+            LANGS.append(filename.replace('.po', ''))
+    LANGS = list(set(LANGS))
+    LANGS.sort()
 
     def is_sky_culture_dir(d):
         if not os.path.isdir(os.path.join(SCDIR, d)):
@@ -126,7 +132,7 @@ def main():
         description_file = os.path.join(data_path, 'description.md')
         assert os.path.exists(description_file)
 
-        print(f'Processing {sky_culture} from {index_file}')
+        print(f'Processing {sky_culture} from {index_file}', file=sys.stderr)
 
         with open(description_file) as file:
             markdown = file.read()
@@ -156,86 +162,44 @@ def main():
         out_doc_dir = os.path.join(out_dir, 'doc')
         shutil.rmtree(out_doc_dir, ignore_errors=True)
 
-    # Generates combined po files to obtain 1 po file with all sky cultures
-    # strings per supported language.
-    print('Generating combined po files')
+    print('Generating new pot files...', file=sys.stderr)
+    if os.system(GENERATE_PO_CMD_PATH) != 0:
+        sys.exit(1)
+
+    print('Generating combined po files...', file=sys.stderr)
     for lang in LANGS:
-        print('Processing language "'+lang+'"...')
+        print('Processing language "'+lang+'"...', file=sys.stderr)
         input_lang = lang
         if lang == 'zh_Hant':
             input_lang = 'zh_TW'
         if lang == 'zh_Hans':
             input_lang = 'zh_CN'
 
-        combined_sc_po = polib.POFile(encoding='utf-8', check_for_duplicates=True)
         sc_po_path = os.path.join(OUT_DIR_I18N_SC, lang + '.po')
-        sc_po_backup_path = os.path.join(OUT_DIR_I18N_SC_BACKUP, lang + '.po')
-        if os.path.exists(sc_po_path):
-            orig_sc_po = polib.pofile(sc_po_path)
-            combined_sc_po.metadata = orig_sc_po.metadata
-        elif os.path.exists(sc_po_backup_path):
-            orig_sc_po = polib.pofile(sc_po_backup_path)
-            combined_sc_po.metadata = orig_sc_po.metadata
-        else:
-            print(f"Warning: no original file {sc_po_path}. Please check the metadata after this script finishes.", file=sys.stderr)
-            combined_sc_po.metadata = {
-                'Project-Id-Version': '1.0',
-                'Last-Translator': "(unknown)",
-                'Language-Team': "(unknown)",
-                'MIME-Version': '1.0',
-                'Content-Type': 'text/plain; charset=UTF-8',
-                'Content-Transfer-Encoding': '8bit',
-                'Language': lang
-            }
-
-        combined_gui_po = polib.POFile(encoding='utf-8', check_for_duplicates=True)
+        sc_pot_path = os.path.join(OUT_DIR_I18N_SC, 'stellarium-skycultures.pot')
         gui_po_path = os.path.join(OUT_DIR_I18N_GUI, lang + '.po')
-        if os.path.exists(gui_po_path):
-            orig_gui_po = polib.pofile(gui_po_path)
-            combined_gui_po.metadata = orig_gui_po.metadata
-        else:
-            print(f"Warning: no original file {gui_po_path}. Please check the metadata after this script finishes.", file=sys.stderr)
-            combined_gui_po.metadata = {
-                'Project-Id-Version': '1.0',
-                'Last-Translator': "(unknown)",
-                'Language-Team': "(unknown)",
-                'MIME-Version': '1.0',
-                'Content-Type': 'text/plain; charset=UTF-8',
-                'Content-Transfer-Encoding': '8bit',
-                'Language': lang
-            }
+        gui_pot_path = os.path.join(OUT_DIR_I18N_GUI, 'stellarium-skycultures-descriptions.pot')
+        tmp_po_path = os.path.join(OUT_DIR_I18N_SC, lang + '.po.tmp')
 
-        setattr(combined_sc_po, 'check_for_duplicates', False)
-        setattr(combined_gui_po, 'check_for_duplicates', False)
-
+        po_files = []
         for sky_culture in sclist:
             if sky_culture == 'out':
                 continue
             po_path = os.path.join(SCDIR, sky_culture, 'po', input_lang + '.po')
             if not os.path.exists(po_path):
-                print('Warning: no language "'+input_lang+'" for sky culture "'+sc_names[sky_culture]+'"')
+                print('Warning: no language "'+input_lang+'" for sky culture "'+sc_names[sky_culture]+'"', file=sys.stderr)
                 continue
-            po = polib.pofile(po_path)
-            for entry in po:
-                if is_sc_descr_entry(entry, sc_names[sky_culture]):
-                    if entry not in combined_gui_po:
-                        entry.comment = sc_names[sky_culture] + ' s' + entry.comment[1:]
-                        combined_gui_po.append(entry)
-                else:
-                    if entry not in combined_sc_po:
-                        if entry.comment.startswith("Name for "):
-                            entry.comment = sc_names[sky_culture] + ' n' + entry.comment[1:]
-                        combined_sc_po.append(entry)
-
-        if len(combined_sc_po.translated_entries()) == 0:
-            print('Warning: no name strings present for language "'+input_lang+'"')
-            continue
-        if len(combined_sc_po.translated_entries()) == 0:
-            print('Warning: no description strings present for language "'+input_lang+'"')
+            po_files.append(po_path)
+        if len(po_files) == 0:
             continue
 
-        combined_sc_po.save(sc_po_path)
-        combined_gui_po.save(gui_po_path)
+        if os.system('msgcat --use-first --force-po "'+('" "'.join(po_files))+f'" -o "{tmp_po_path}"') != 0:
+            sys.exit(1)
+        if os.system(f'msgmerge -N -o "{sc_po_path}" "{tmp_po_path}" "{sc_pot_path}"') != 0:
+            sys.exit(1)
+        if os.system(f'msgmerge -N -o "{gui_po_path}" "{tmp_po_path}" "{gui_pot_path}"') != 0:
+            sys.exit(1)
+        os.remove(tmp_po_path)
 
 
 if __name__ == '__main__':

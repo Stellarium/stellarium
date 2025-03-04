@@ -42,8 +42,7 @@ class StelPainter;
 //! Each Constellation consists of a list of stars identified by their
 //! abbreviation and Hipparcos catalogue numbers (taken from file: constellationship.fab),
 //! another entry in file constellation_names.eng.fab with the defining abbreviated name,
-//! nativeName, and translatable englishName (translation goes into nameI18),
-//! boundary shape from file constellation_boundaries.dat and an (optional) artistic pictorial representation.
+//! nativeName, and translatable englishName (translation goes into nameI18).
 //! GZ NEW: The nativeName should be accessible in a GUI option, so that e.g. original names as written in a
 //! concrete book where a skyculture has been taken from can be assured even when translation is available.
 //! TODO: There should be a distinction between constellations and asterisms, which are "unofficial" figures within a sky culture.
