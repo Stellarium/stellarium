@@ -3182,7 +3182,6 @@ void AstroCalcDialog::generateSolarEclipses()
 			double JD = InitJD + synodicMonth * i;
 			if (JD > startJD)
 			{
-
 				// Find exact time of minimum distance between axis of lunar shadow cone to the center of Earth
 				JD = ecliptor.getJDofMinimumDistance(JD);
 				core->setJD(JD);
