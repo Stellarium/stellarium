@@ -449,6 +449,8 @@ private slots:
 	void showExtraEphemerisDialog();
 	void showCustomStepsDialog();
 
+	void updateAlmanacWidgetVisibility();
+
 	void saveGraph(QChartView *graph);
 	void updateMinMaxDateRange();
 
