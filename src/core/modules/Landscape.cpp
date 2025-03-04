@@ -418,6 +418,8 @@ void Landscape::loadLabels(const QString& landscapeId)
 					      parts.at(1).toFloat()*M_PI_180f, newLabel.featurePoint);
 			StelUtils::spheToRect((180.0f-parts.at(0).toFloat() - parts.at(3).toFloat())*M_PI_180f,
 					      (parts.at(1).toFloat() + parts.at(2).toFloat())*M_PI_180f, newLabel.labelPoint);
+			newLabel.isLabelAboveFeature=(parts.at(2).toFloat() >= 0);
+			//qDebug() << newLabel.name << "isLabelAboveFeature:" << newLabel.isLabelAboveFeature;
 			landscapeLabels.append(newLabel);
 			//qDebug() << "Added landscape label " << newLabel.name;
 		}
@@ -446,6 +448,7 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 
 	for (int i = 0; i < landscapeLabels.size(); ++i)
 	{
+		int textWidth=fm.boundingRect(landscapeLabels.at(i).name).width();
 		// in case of gravityLabels, we cannot shift-adjust centered placename, sorry!
 		if (prj->getFlagGravityLabels())
 		{
@@ -453,13 +456,20 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 		}
 		else if (labelAngle>0)
 		{
+			if (landscapeLabels.at(i).isLabelAboveFeature)
+			{
 			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, labelAngle, 0.5f*fontSize*sinf(labelAngle*M_PI_180f),
 					  -0.5f*fontSize*sinf(labelAngle*M_PI_180f), true);
+			}
+			else
+			{
+			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, labelAngle, -0.5f*fontSize*sinf(labelAngle*M_PI_180f)-2*textWidth,
+					  -0.5f*fontSize*sinf(labelAngle*M_PI_180f), true);
+			}
 		}
 		else
 		{
-			int textWidth=fm.boundingRect(landscapeLabels.at(i).name).width();
-			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth/2, 2, true);
+			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth, 2, true);
 		}
 		painter->drawGreatCircleArc(landscapeLabels.at(i).featurePoint, landscapeLabels.at(i).labelPoint, nullptr);
 	}
@@ -676,7 +686,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	unsigned short int limit;
 
 	LOSSide precompSide;
-	precompSide.arr.primitiveType=StelVertexArray::Triangles;	
+	precompSide.arr.primitiveType=StelVertexArray::Triangles;
 	for (unsigned int n=0;n<nbDecorRepeat;n++)
 	{
 		for (unsigned int i=0;i<nbSide;i++)
@@ -698,7 +708,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 			float tx0 = sides[ti].texCoords[0];
 			const float d_tx = (sides[ti].texCoords[2]-sides[ti].texCoords[0]) / slices_per_side;
-			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;			
+			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;
 			for (unsigned short int j=0;j<slices_per_side;j++)
 			{
 				const float y1 = y0*ca - x0*sa;
@@ -1908,7 +1918,7 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 			gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 			mapTexFog->release();
 		}
-	}	
+	}
 
 	// Add a bottom cap in case of maptex_bottom.
 	if ((mapTexBottom>-90.f*M_PI_180f) && (_bottomCapColor != Vec3f(-1.0f, 0.0f, 0.0f)))
