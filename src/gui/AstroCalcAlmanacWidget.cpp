@@ -171,7 +171,7 @@ void AstroCalcAlmanacWidget::setSeasonLabels()
 QString AstroCalcAlmanacWidget::getFormattedDateTime(const double JD, const double utcShift)
 {
 	int year, month, day;
-	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	StelUtils::getDateFromJulianDay(JD+utcShift, &year, &month, &day);
 	return QString("%1 %2 %3").arg(QString::number(day), localeMgr->longGenitiveMonthName(month), StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(JD+utcShift), true));
 }
 
