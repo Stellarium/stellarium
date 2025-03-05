@@ -185,7 +185,7 @@ def update_cultures_pot(sclist, pot):
 
                         entry = polib.POEntry(comment = comment, msgid = english, msgstr = "", msgctxt = context)
                         if entry in pot:
-                            prev_entry = pot.find(entry.msgid, by = 'msgid', msgctxt = context)
+                            prev_entry = pot.find(entry.msgid, msgctxt = context)
                             assert prev_entry
                             prev_entry.comment += '\n' + comment
                         else:
@@ -261,9 +261,13 @@ def update_cultures_pot(sclist, pot):
                 if 'translators_comments' in name:
                     comment += '\n' + name['translators_comments']
 
-                entry = polib.POEntry(comment = comment, msgid = english, msgstr = "")
+                context = None
+                if 'context' in name:
+                    context = name['context']
+
+                entry = polib.POEntry(comment = comment, msgid = english, msgstr = "", msgctxt = context)
                 if entry in pot:
-                    prev_entry = pot.find(entry.msgid)
+                    prev_entry = pot.find(entry.msgid, msgctxt = context)
                     assert prev_entry
                     if comment:
                         prev_entry.comment += '\n' + comment
