@@ -95,6 +95,9 @@ public:
 
 	bool isPlanetarySurvey(void) const { return planetarySurvey; }
 
+	void setNormalsSurvey(const HipsSurveyP& normals);
+	void setHorizonsSurvey(const HipsSurveyP& horizons);
+
 	//! Parse a hipslist file into a list of surveys.
 	static QList<HipsSurveyP> parseHipslist(const QString& data);
 
@@ -109,7 +112,10 @@ private:
 	QString type;
 	QString hipsFrame;
 	QString planet;
+	HipsSurveyP normals;
+	HipsSurveyP horizons;
 	double releaseDate; // As UTC Julian day.
+	int order = -1;
 	bool planetarySurvey;
 	QCache<long int, HipsTile> tiles;
 	// reply to the initial download of the properties file and to the

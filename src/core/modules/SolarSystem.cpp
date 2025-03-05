@@ -4167,16 +4167,31 @@ bool SolarSystem::removeMinorPlanet(const QString &name)
 
 void SolarSystem::onNewSurvey(HipsSurveyP survey)
 {
-	if (survey->getType() != "planet")
-	{
-		// We don't handle planet-normal yet
+	const auto type = survey->getType();
+	const bool isPlanetColor = type == "planet";
+	const bool isPlanetNormal = type == "planet-normal";
+	const bool isPlanetHorizon = type == "planet-horizon";
+	if (!isPlanetColor && !isPlanetNormal && !isPlanetHorizon)
 		return;
-	}
+
 	QString planetName = survey->getFrame();
 	PlanetP pl = searchByEnglishName(planetName);
-	if (!pl || pl->survey)
-		return;
-	pl->survey = survey;
+	if (!pl) return;
+	if (isPlanetColor)
+	{
+		if (pl->survey) return;
+		pl->survey = survey;
+	}
+	else if (isPlanetNormal)
+	{
+		if (pl->surveyForNormals) return;
+		pl->surveyForNormals = survey;
+	}
+	else if (isPlanetHorizon)
+	{
+		if (pl->surveyForHorizons) return;
+		pl->surveyForHorizons = survey;
+	}
 	survey->setProperty("planet", pl->getCommonEnglishName());
 	// Not visible by default for the moment.
 	survey->setProperty("visible", false);
