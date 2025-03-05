@@ -26,6 +26,7 @@ import re
 import sys
 import json
 import polib
+import argparse
 
 if sys.version_info[0] < 3:
     raise Exception("Please use Python 3 (current is {})".format(
@@ -39,6 +40,12 @@ SCPOTFILE = os.path.join(DIR, '..', '..', 'po', 'stellarium-skycultures', 'stell
 sc_names = {}
 common_names = set()
 cons_ast_names = set()
+
+def ensure_dir(file_path):
+    '''Create a directory for a path if it doesn't exist yet'''
+    directory = os.path.dirname(file_path)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
 
 def is_sky_culture_dir(d):
     if not os.path.isdir(os.path.join(SCDIR, d)):
@@ -65,22 +72,7 @@ def load_common_names():
                 common_names.add(match.group(1))
     print(f"Loaded {len(common_names)} common names", file=sys.stderr)
 
-def update_descriptions_pot():
-    sclist = [d for d in os.listdir(SCDIR) if is_sky_culture_dir(d)]
-    sclist.sort()
-
-    pot = polib.POFile(encoding='utf-8', check_for_duplicates=True)
-    pot.metadata = {
-        'Project-Id-Version': 'PACKAGE VERSION',
-        'Report-Msgid-Bugs-To': 'stellarium@googlegroups.com',
-        'Last-Translator': 'FULL NAME <EMAIL@ADDRESS>',
-        'Language-Team': 'LANGUAGE <LL@li.org>',
-        'Language': '',
-        'MIME-Version': '1.0',
-        'Content-Type': 'text/plain; charset=UTF-8',
-        'Content-Transfer-Encoding': '8bit'
-    }
-
+def update_descriptions_pot(sclist, pot):
     for sky_culture in sclist:
         data_path = os.path.join(SCDIR, sky_culture)
         description_file = os.path.join(data_path, 'description.md')
@@ -142,24 +134,7 @@ def update_descriptions_pot():
                 else:
                     pot.append(entry)
 
-    pot.save(DESCPOTFILE)
-
-def update_cultures_pot():
-    sclist = [d for d in os.listdir(SCDIR) if is_sky_culture_dir(d)]
-    sclist.sort()
-
-    pot = polib.POFile(encoding='utf-8', check_for_duplicates=True)
-    pot.metadata = {
-        'Project-Id-Version': 'PACKAGE VERSION',
-        'Report-Msgid-Bugs-To': 'stellarium@googlegroups.com',
-        'Last-Translator': 'FULL NAME <EMAIL@ADDRESS>',
-        'Language-Team': 'LANGUAGE <LL@li.org>',
-        'Language': '',
-        'MIME-Version': '1.0',
-        'Content-Type': 'text/plain; charset=UTF-8',
-        'Content-Transfer-Encoding': '8bit'
-    }
-
+def update_cultures_pot(sclist, pot):
     def process_cons_or_asterism(array, obj_type, pot, sc_name):
         for obj in array:
             assert 'id' in obj
@@ -313,13 +288,50 @@ def update_cultures_pot():
             if 'common_names' in data:
                 process_names(data['common_names'], pot, sc_name)
 
-    pot.save(SCPOTFILE)
-
-
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s", "--sky-culture", help="Process only the specified sky culture")
+    args = parser.parse_args()
+    metadata_template = {
+        'Project-Id-Version': 'PACKAGE VERSION',
+        'Report-Msgid-Bugs-To': 'stellarium@googlegroups.com',
+        'Last-Translator': 'FULL NAME <EMAIL@ADDRESS>',
+        'Language-Team': 'LANGUAGE <LL@li.org>',
+        'Language': '',
+        'MIME-Version': '1.0',
+        'Content-Type': 'text/plain; charset=UTF-8',
+        'Content-Transfer-Encoding': '8bit'
+    }
+    if args.sky_culture:
+        sclist = [args.sky_culture]
+        desc_pot = polib.POFile(encoding='utf-8', check_for_duplicates=True)
+        desc_pot.metadata = metadata_template
+        sc_pot = desc_pot # same file for everything
+        desc_pot_file_path = None
+        sc_pot_file_path = None
+        common_pot_file_path = os.path.join(SCDIR, args.sky_culture, 'po', args.sky_culture+'.pot')
+        ensure_dir(common_pot_file_path)
+    else:
+        sclist = [d for d in os.listdir(SCDIR) if is_sky_culture_dir(d)]
+        sclist.sort()
+        desc_pot = polib.POFile(encoding='utf-8', check_for_duplicates=True)
+        desc_pot.metadata = metadata_template
+        sc_pot = polib.POFile(encoding='utf-8', check_for_duplicates=True)
+        sc_pot.metadata = metadata_template
+        desc_pot_file_path = DESCPOTFILE
+        sc_pot_file_path = SCPOTFILE
+        common_pot_file_path = None
+
+
     print("Loading common names...", file=sys.stderr)
     load_common_names()
     print("Updating descriptions .pot file...", file=sys.stderr)
-    update_descriptions_pot()
+    update_descriptions_pot(sclist, desc_pot)
+    if desc_pot_file_path:
+        desc_pot.save(desc_pot_file_path)
     print("Updating SC index .pot file...", file=sys.stderr)
-    update_cultures_pot()
+    update_cultures_pot(sclist, sc_pot)
+    if sc_pot_file_path:
+        sc_pot.save(sc_pot_file_path)
+    if common_pot_file_path:
+        sc_pot.save(common_pot_file_path)
