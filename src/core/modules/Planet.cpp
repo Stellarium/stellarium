@@ -4100,6 +4100,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 	if(shaderError)
 		return;
 	
+	const bool isMoon = this == ssm->getMoon();
 	QOpenGLShaderProgram* shader = planetShaderProgram;
 	const PlanetShaderVars* shaderVars = &planetShaderVars;
 	if (rings)
@@ -4107,7 +4108,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		shader = ringPlanetShaderProgram;
 		shaderVars = &ringPlanetShaderVars;
 	}
-	if (this==ssm->getMoon())
+	if (isMoon)
 	{
 		shader = moonShaderProgram;
 		shaderVars = &moonShaderVars;
@@ -4128,7 +4129,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		{
 			shader = ringPlanetShaderProgram;
 		}
-		if (this==ssm->getMoon())
+		if (isMoon)
 		{
 			shader = moonShaderProgram;
 		}
@@ -4153,7 +4154,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		rings->tex->bind(2);
 	}
 
-	if (this==ssm->getMoon())
+	if (isMoon)
 	{
 		GL(normalMap->bind(2));
 		GL(moonShaderProgram->setUniformValue(moonShaderVars.normalMap, 2));
@@ -4371,6 +4372,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	Vec4f color = painter->getColor();
 	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(equatorialRadius * sphereScale));
 
+	const bool isMoon = this == ssm->getMoon();
 	QOpenGLShaderProgram* shader = planetShaderProgram;
 	const PlanetShaderVars* shaderVars = &planetShaderVars;
 	if (rings)
@@ -4378,7 +4380,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 		shader = ringPlanetShaderProgram;
 		shaderVars = &ringPlanetShaderVars;
 	}
-	if (this == ssm->getMoon())
+	if (isMoon)
 	{
 		shader = moonShaderProgram;
 		shaderVars = &moonShaderVars;
@@ -4400,7 +4402,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 		rings->tex->bind(2);
 	}
 
-	if (this == ssm->getMoon())
+	if (isMoon)
 	{
 		GL(normalMap->bind(2));
 		GL(moonShaderProgram->setUniformValue(moonShaderVars.normalMap, 2));
