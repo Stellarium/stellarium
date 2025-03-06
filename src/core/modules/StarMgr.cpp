@@ -191,7 +191,7 @@ StarMgr::~StarMgr(void)
 QString StarMgr::getCommonName(StarId hip)
 {
 	ConstellationMgr* cmgr=GETSTELMODULE(ConstellationMgr);
-	if (cmgr->getConstellationDisplayStyle() == ConstellationMgr::Native)
+	if (cmgr->getConstellationDisplayStyle() == StelObject::CulturalDisplayStyle::Native)
 		return getCommonEnglishName(hip);
 
 	auto it = commonNamesMapI18n.find(hip);
