@@ -415,7 +415,7 @@ static bool isClipped(int n, double (*pos)[4])
 
 
 void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
-						  const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback)
+                          const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback)
 {
 	constexpr int colorTexUnit = 0;
 	constexpr int normalTexUnit = 2;
@@ -523,7 +523,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	}
 	sPainter->setCullFace(true);
 	nb = fillArrays(order, pix, drawOrder, splitOrder, outside, sPainter, observerVelocity,
-					vertsArray, texArray, indicesArray);
+	                vertsArray, texArray, indicesArray);
 	if (!callback) {
 		sPainter->setArrays(vertsArray.constData(), texArray.constData());
 		sPainter->drawFromArray(StelPainter::Triangles, nb, 0, true, indicesArray.constData());
@@ -538,7 +538,7 @@ skip_render:
 		for (int i = 0; i < 4; i++)
 		{
 			drawTile(order + 1, pix * 4 + i, drawOrder, splitOrder, outside,
-					 viewportShape, sPainter, observerVelocity, callback);
+			         viewportShape, sPainter, observerVelocity, callback);
 		}
 	}
 	// Restore the painter color.
@@ -546,8 +546,8 @@ skip_render:
 }
 
 int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
-						   bool outside, StelPainter* sPainter, Vec3d observerVelocity,
-						   QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices)
+                           bool outside, StelPainter* sPainter, Vec3d observerVelocity,
+                           QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices)
 {
 	Q_UNUSED(sPainter)
 	Mat3d mat3;
@@ -591,7 +591,7 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 			for (uint16_t k = 0; k < 6; k++)
 			{
 				indices << (INDICES[outside ? 1 : 0][k][1] + i) * n +
-					        INDICES[outside ? 1 : 0][k][0] + j;
+				            INDICES[outside ? 1 : 0][k][0] + j;
 			}
 
 			// Check that the surface is convex. If it isn't, make it convex.
