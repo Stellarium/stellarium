@@ -23,6 +23,7 @@
 
 #include "StelObjectType.hpp"
 #include "StelObjectModule.hpp"
+#include "StelObject.hpp"
 
 #include <vector>
 #include <QString>
@@ -91,7 +92,7 @@ class ConstellationMgr : public StelObjectModule
 		   READ getFlagLabels
 		   WRITE setFlagLabels
 		   NOTIFY namesDisplayedChanged)
-	Q_PROPERTY(ConstellationDisplayStyle constellationDisplayStyle
+	Q_PROPERTY(StelObject::CulturalDisplayStyle constellationDisplayStyle
 		   READ getConstellationDisplayStyle
 		   WRITE setConstellationDisplayStyle
 		   NOTIFY constellationsDisplayStyleChanged)
@@ -145,26 +146,18 @@ public:
 	QStringList listAllObjects(bool inEnglish) const override;
 	QString getName() const override { return "Constellations"; }
 	QString getStelObjectType() const override;
-	//! Describes how to display constellation labels. The viewDialog GUI has a combobox which corresponds to these values.
-	//! TODO: Move to become SkycultureMgr::DisplayStyle? Then apply separately to Constellations and Planets, and whether applied to screen labels or infoString.
-	enum ConstellationDisplayStyle
-	{
-		Abbreviated	= 0, // short label
-		Native		= 1, // may show non-Latin glyphs
-		Translated	= 2, // user language
-		English		= 3, // Useful in case of adding names in modern English terminology (planets etc.). Maybe "Modern" would be better, and should show object scientific name in modern terminology, translated.
-		Translit	= 4, // user-language transliteration/pronunciation aid
-		Native_Translit,             // combinations: just help reading foreign glyphs. MORE OPTIONS POSSIBLE!
-		Native_Translit_Translated,  // help reading foreign glyphs, show translations
-		Native_Translit_IPA_Translated, // help reading foreign glyphs, phonetics, show translations
-		Native_Translated,           // glyphs + user language
-		Translit_Translated,         // user language letters + translation
-		Translit_IPA_Translated,     // user language letters, phonetic + translation
-		Translit_Translated_English, // user language letters + translation + English Name
-		Translit_IPA_Translated_English, // user language letters + translation + English Name
-
-	};	
-	Q_ENUM(ConstellationDisplayStyle)
+	// Moved to become StelObject::CulturalDisplayStyle, Then apply maybe even separately to Constellations and Planets, and whether applied to screen labels or infoString.
+	// Describes how to display constellation labels. The viewDialog GUI has a combobox which corresponds to these values.
+	// TODO: This could of course become a bitfield, but having just discrete options may still be easier to maintain.
+	//enum ConstellationDisplayStyle
+	//{
+	//	Abbreviated	= 0, // short label
+	//	Native		= 1, // may show non-Latin glyphs
+	//	Translated	= 2, // user language
+	//	English		= 3, // Useful in case of adding names in modern English terminology (planets etc.). Maybe "Modern" would be better, and should show object scientific name in modern terminology, translated.
+	//	Pronounce	= 4, // user-language transliteration/pronunciation aid. Usually the original form like pinyin is also used in users' languages, but it may be translatable to user language, e.g. for other coding system.
+	//};
+	//Q_ENUM(ConstellationDisplayStyle)
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -266,12 +259,12 @@ public slots:
 
 	//! Set the way how constellation names are displayed: abbreviated/as-given/translated
 	//! @param style the new display style
-	void setConstellationDisplayStyle(ConstellationMgr::ConstellationDisplayStyle style);
+	void setConstellationDisplayStyle(StelObject::CulturalDisplayStyle style);
 	//! get the way how constellation names are displayed: abbreviated/as-given/translated
-	ConstellationMgr::ConstellationDisplayStyle getConstellationDisplayStyle();
+	StelObject::CulturalDisplayStyle getConstellationDisplayStyle();
 	//! Returns the currently set constellation display style as string, instead of enum
 	//! @see getConstellationDisplayStyle()
-	static QString getConstellationDisplayStyleString(ConstellationMgr::ConstellationDisplayStyle style);
+	static QString getConstellationDisplayStyleString(StelObject::CulturalDisplayStyle style);
 
 	//! Set the thickness of lines of the constellations
 	//! @param thickness of line in pixels
@@ -337,7 +330,7 @@ signals:
 	void linesDisplayedChanged(const bool displayed);
 	void namesColorChanged(const Vec3f & color);
 	void namesDisplayedChanged(const bool displayed);
-	void constellationsDisplayStyleChanged(const ConstellationMgr::ConstellationDisplayStyle style);
+	void constellationsDisplayStyleChanged(const StelObject::CulturalDisplayStyle style);
 	void constellationLineThicknessChanged(int thickness);
 	void constellationBoundariesThicknessChanged(int thickness);
 
@@ -418,8 +411,8 @@ private:
 	QStringList constellationsEnglishNames;
 
 	//! this controls how constellations (and also star names) are printed: Abbreviated/as-given/translated
-	ConstellationDisplayStyle constellationDisplayStyle;
-	static const QMap<QString, ConstellationDisplayStyle>ConstellationDisplayStyleMap;
+	StelObject::CulturalDisplayStyle constellationDisplayStyle;
+	static const QMap<QString, StelObject::CulturalDisplayStyle>ConstellationDisplayStyleMap;
 
 	// These are THE master settings - individual constellation settings can vary based on selection status
 	float artFadeDuration;
