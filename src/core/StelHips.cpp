@@ -36,7 +36,11 @@ public:
 	int order;
 	int pix;
 	StelTextureSP texture;
+	StelTextureSP normalTexture;
+	StelTextureSP horizonTexture;
 	StelTextureSP allsky; // allsky low res version of the texture.
+	StelTextureSP normalAllsky; // allsky low res version of the texture.
+	StelTextureSP horizonAllsky; // allsky low res version of the texture.
 
 	// Used for smooth fade in
 	QTimeLine texFader;
@@ -195,13 +199,36 @@ bool HipsSurvey::isLoading(void) const
 	return (networkReply != Q_NULLPTR);
 }
 
+void HipsSurvey::setNormalsSurvey(const HipsSurveyP& normals)
+{
+	if (type != "planet")
+	{
+		qWarning() << "Attempted to add normals survey to a non-planet survey";
+		return;
+	}
+	this->normals = normals;
+}
+
+void HipsSurvey::setHorizonsSurvey(const HipsSurveyP& horizons)
+{
+	if (type != "planet")
+	{
+		qWarning() << "Attempted to add horizons survey to a non-planet survey";
+		return;
+	}
+	this->horizons = horizons;
+}
+
 void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallback callback)
 {
 	// We don't draw anything until we get the properties file and the
 	// allsky texture (if available).
 	const bool outside = qFuzzyCompare(angle, 2.0 * M_PI);
 	if (properties.isEmpty()) return;
-	if (!getAllsky()) return;
+	bool gotAllsky = getAllsky();
+	if (normals) gotAllsky &= normals->getAllsky();
+	if (horizons) gotAllsky &= horizons->getAllsky();
+	if (!gotAllsky) return;
 	if (fader.getInterstate() == 0.0f) return;
 	sPainter->setColor(1, 1, 1, fader.getInterstate());
 
@@ -245,7 +272,24 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	int tileWidth = getPropertyInt("hips_tile_width");
 
 	int orderMin = getPropertyInt("hips_order_min", 3);
-	int order = getPropertyInt("hips_order");
+	if (order < 0)
+	{
+		order = getPropertyInt("hips_order");
+		int normalsOrder = normals ? normals->getPropertyInt("hips_order") : order;
+		int horizonsOrder = horizons ? horizons->getPropertyInt("hips_order") : order;
+		if (normalsOrder < order)
+		{
+			qWarning().nospace() << "Normal map survey's hips_order=" << normalsOrder << " is less than that of the color survey: "
+			                     << order << ". Will reduce the total order accordingly.";
+			order = normalsOrder;
+		}
+		if (horizonsOrder < order)
+		{
+			qWarning().nospace() << "Horizon map survey's hips_order=" << horizonsOrder << " is less than that of the color survey: "
+			                     << order << ". Will reduce the total order accordingly.";
+			order = horizonsOrder;
+		}
+	}
 	int drawOrder;
 	if (outside)
 	{
@@ -320,6 +364,27 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		int tileWidth = getPropertyInt("hips_tile_width", 512);
 		tiles.insert(uid, tile, static_cast<long>(tileWidth) * tileWidth);
 	}
+
+	if (tile && normals && !tile->normalTexture)
+	{
+		const auto normalsTile = normals->getTile(order, pix);
+		if (normalsTile && (normalsTile->texture || normalsTile->allsky))
+		{
+			tile->normalTexture = normalsTile->texture;
+			tile->normalAllsky = normalsTile->allsky;
+		}
+	}
+
+	if (tile && horizons && !tile->horizonTexture)
+	{
+		const auto horizonsTile = horizons->getTile(order, pix);
+		if (horizonsTile && (horizonsTile->texture || horizonsTile->allsky))
+		{
+			tile->horizonTexture = horizonsTile->texture;
+			tile->horizonAllsky = horizonsTile->allsky;
+		}
+	}
+
 	return tile;
 }
 
@@ -350,8 +415,12 @@ static bool isClipped(int n, double (*pos)[4])
 
 
 void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
-						  const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback)
+                          const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback)
 {
+	constexpr int colorTexUnit = 0;
+	constexpr int normalTexUnit = 2;
+	constexpr int horizonTexUnit = 4;
+
 	Vec3d pos;
 	Mat3d mat3;
 	const Vec2d uv[4] = {Vec2d(0, 0), Vec2d(0, 1), Vec2d(1, 0), Vec2d(1, 1)};
@@ -412,9 +481,18 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 
 	nbVisibleTiles++;
 	tile = getTile(order, pix);
+
 	if (!tile) return;
-	if (!tile->texture->bind() && (!tile->allsky || !tile->allsky->bind()))
+	if (normals && !tile->normalTexture && !tile->normalAllsky) return;
+	if (horizons && !tile->horizonTexture && !tile->horizonAllsky) return;
+
+	if (!tile->texture->bind(colorTexUnit) && (!tile->allsky || !tile->allsky->bind(colorTexUnit)))
 		return;
+	if (normals && tile->normalTexture && !tile->normalTexture->bind(normalTexUnit) && (!tile->normalAllsky || !tile->normalAllsky->bind(normalTexUnit)))
+		return;
+	if (horizons && tile->horizonTexture && !tile->horizonTexture->bind(horizonTexUnit) && (!tile->horizonAllsky || !tile->horizonAllsky->bind(horizonTexUnit)))
+		return;
+
 	if (tile->texFader.state() == QTimeLine::NotRunning && tile->texFader.currentValue() == 0.0)
 		tile->texFader.start();
 	nbLoadedTiles++;
@@ -445,7 +523,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	}
 	sPainter->setCullFace(true);
 	nb = fillArrays(order, pix, drawOrder, splitOrder, outside, sPainter, observerVelocity,
-					vertsArray, texArray, indicesArray);
+	                vertsArray, texArray, indicesArray);
 	if (!callback) {
 		sPainter->setArrays(vertsArray.constData(), texArray.constData());
 		sPainter->drawFromArray(StelPainter::Triangles, nb, 0, true, indicesArray.constData());
@@ -460,7 +538,7 @@ skip_render:
 		for (int i = 0; i < 4; i++)
 		{
 			drawTile(order + 1, pix * 4 + i, drawOrder, splitOrder, outside,
-					 viewportShape, sPainter, observerVelocity, callback);
+			         viewportShape, sPainter, observerVelocity, callback);
 		}
 	}
 	// Restore the painter color.
@@ -468,8 +546,8 @@ skip_render:
 }
 
 int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
-						   bool outside, StelPainter* sPainter, Vec3d observerVelocity,
-						   QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices)
+                           bool outside, StelPainter* sPainter, Vec3d observerVelocity,
+                           QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices)
 {
 	Q_UNUSED(sPainter)
 	Mat3d mat3;
@@ -513,7 +591,7 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 			for (uint16_t k = 0; k < 6; k++)
 			{
 				indices << (INDICES[outside ? 1 : 0][k][1] + i) * n +
-					        INDICES[outside ? 1 : 0][k][0] + j;
+				            INDICES[outside ? 1 : 0][k][0] + j;
 			}
 
 			// Check that the surface is convex. If it isn't, make it convex.

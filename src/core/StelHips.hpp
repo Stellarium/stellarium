@@ -57,7 +57,7 @@ class HipsSurvey : public QObject
 
 public:
 	typedef std::function<void(const QVector<Vec3d>& verts, const QVector<Vec2f>& tex,
-							   const QVector<uint16_t>& indices)> DrawCallback;
+	                           const QVector<uint16_t>& indices)> DrawCallback;
 	//! Create a new HipsSurvey from its url.
 	//! @param url The location of the survey.
 	//! @param frame The reference frame from the survey's \c hips_frame property.
@@ -95,6 +95,9 @@ public:
 
 	bool isPlanetarySurvey(void) const { return planetarySurvey; }
 
+	void setNormalsSurvey(const HipsSurveyP& normals);
+	void setHorizonsSurvey(const HipsSurveyP& horizons);
+
 	//! Parse a hipslist file into a list of surveys.
 	static QList<HipsSurveyP> parseHipslist(const QString& data);
 
@@ -109,7 +112,10 @@ private:
 	QString type;
 	QString hipsFrame;
 	QString planet;
+	HipsSurveyP normals;
+	HipsSurveyP horizons;
 	double releaseDate; // As UTC Julian day.
+	int order = -1;
 	bool planetarySurvey;
 	QCache<long int, HipsTile> tiles;
 	// reply to the initial download of the properties file and to the
@@ -135,12 +141,12 @@ private:
 	HipsTile* getTile(int order, int pix);
 	// draw a single tile. observerVelocity (in the correct hipsFrame) is necessary for aberration correction. Set to 0 for no aberration correction.
 	void drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
-				  const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback);
+	              const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback);
 
 	// Fill the array for a given tile.
 	int fillArrays(int order, int pix, int drawOrder, int splitOrder,
-				   bool outside, StelPainter* sPainter, Vec3d observerVelocity,
-				   QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices);
+	               bool outside, StelPainter* sPainter, Vec3d observerVelocity,
+	               QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices);
 
 	void updateProgressBar(int nb, int total);
 };

@@ -33,7 +33,8 @@ uniform mediump vec3 diffuseLight; // Must be in linear sRGB, without OETF appli
 uniform highp vec4 sunInfo;
 uniform mediump float skyBrightness;
 uniform bool hasAtmosphere;
-uniform bool isSurvey;
+uniform bool hasNormalMap;
+uniform bool hasHorizonMap;
 
 uniform int shadowCount;
 uniform highp mat4 shadowData;
@@ -286,16 +287,16 @@ void main()
 
 #ifdef IS_MOON
     mediump vec3 normal;
-    if(isSurvey)
-        normal = vec3(0,0,1); // Surveys' texture coordinates are unsuitable for non-survey normal maps
-    else
+    if(hasNormalMap)
         normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);
+    else
+        normal = vec3(0,0,1);
 
     normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);
     // normal now contains the real surface normal taking normal map into account
 
     mediump float horizonShadowCoefficient = 1.;
-    if(!isSurvey) // Surveys' texture coordinates are unsuitable for non-survey horizon maps
+    if(hasHorizonMap)
     {
         // Check whether the fragment is in the shadow of surrounding mountains or the horizon
         mediump vec3 lonDir = normalX;
