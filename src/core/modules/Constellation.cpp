@@ -186,27 +186,62 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 	}
 }
 
-void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const
+void Constellation::drawName(StelPainter& sPainter, StelObject::CulturalDisplayStyle style) const
 {
 	if (nameFader.getInterstate()==0.0f)
 		return;
 
+	// TODO: Find a solution of fallbacks when components are missing?
 	if (checkVisibility())
 	{
 		QString name;
 		switch (style)
 		{
-			case ConstellationMgr::Translated:
-				name=nameI18;
+			case CulturalDisplayStyle::Abbreviated:
+				name=(abbreviation.startsWith('.') ? "" : abbreviation);
 				break;
-			case ConstellationMgr::Native:
+			case CulturalDisplayStyle::Native:
 				name=nativeName;
 				break;
-			case ConstellationMgr::English:
+			case CulturalDisplayStyle::Translated:
+				name=nameI18;
+				break;
+			case CulturalDisplayStyle::Modern:
 				name=englishName;
 				break;
-			case ConstellationMgr::Abbreviated:
-				name=(abbreviation.startsWith('.') ? "" : abbreviation);
+			case CulturalDisplayStyle::Pronounce:
+				name=englishName;
+				break;
+			case CulturalDisplayStyle::Translit:
+				name=englishName;
+				break;
+			case CulturalDisplayStyle::IPA:
+				name=nativeNameIPA;
+				break;
+			case CulturalDisplayStyle::Pronounce_Translated:
+				name=QString("%1 (%2)").arg(nativeNamePronounce, nameI18);
+				break;
+			case CulturalDisplayStyle::Pronounce_IPA_Translated:
+				name=QString("%1 [%2] (%3)").arg(nativeNamePronounce, nativeNameIPA, englishName);
+				break;
+			case CulturalDisplayStyle::Pronounce_Translated_Modern:
+				name=QString("%1 (%2, %3)").arg(nativeNamePronounce, nameI18, englishName);
+				break;
+			case CulturalDisplayStyle::Pronounce_IPA_Translated_Modern:
+				name=QString("%1 [%2] (%3, %4)").arg(nativeNamePronounce, nativeNameIPA, nameI18, englishName);
+				break;
+			case CulturalDisplayStyle::Native_Pronounce:
+				name=QString("%1 [%2]").arg(nativeName, nativeNamePronounce);
+				break;
+			case CulturalDisplayStyle::Native_Pronounce_Translated:
+				name=QString("%1 [%2] (%3)").arg(nativeName, nativeNamePronounce, nameI18);
+				break;
+			case CulturalDisplayStyle::Native_Pronounce_IPA_Translated:
+				name=QString("%1 [%2, %3] (%4)").arg(nativeName, nativeNamePronounce, nativeNameIPA, nameI18);
+				break;
+				// TODO: MORE TO COME!
+			default:  // pronounce + translated...
+				name=QString("%1 (%2)").arg(nativeNamePronounce, nameI18);
 				break;
 		}
 
