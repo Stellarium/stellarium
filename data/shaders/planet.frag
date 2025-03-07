@@ -288,7 +288,7 @@ void main()
 #ifdef IS_MOON
     mediump vec3 normal;
     if(hasNormalMap)
-        normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);
+        normal = texture2D(normalMap, texc).rgb-vec3(0.5);
     else
         normal = vec3(0,0,1);
 
