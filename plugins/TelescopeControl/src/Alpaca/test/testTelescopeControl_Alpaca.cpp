@@ -88,7 +88,7 @@ void TestTelescopeControl_Alpaca::areSimilarShouldShowSlightErrors()
 	QVERIFY(isSimilar == false);
 }
 
-void TestTelescopeControl_Alpaca::AlpacaDeviceShouldFailToInitializeWithInvalidDevice()
+void TestTelescopeControl_Alpaca::alpacaDeviceShouldFailToInitializeWithInvalidDevice()
 {
 	// Given
 	AlpacaDevice* device;
