@@ -527,7 +527,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 	if (!checked)
 	{
 		// The file is not checked but we found it, maybe from a previous download/version
-		qWarning().noquote() << "Found file" << QDir::toNativeSeparators(catalogFilePath) << ", checking md5sum...";
+		qInfo().noquote() << "Found file" << QDir::toNativeSeparators(catalogFilePath) << ", checking md5sum...";
 
 		QFile file(catalogFilePath);
 		if(file.open(QIODevice::ReadOnly | QIODevice::Unbuffered))
@@ -569,7 +569,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 				file.remove();
 				return false;
 			}
-			qWarning() << "MD5 sum correct!";
+			qInfo() << "MD5 sum correct!";
 			setCheckFlag(catDesc.value("id").toString(), true);
 		}
 	}
