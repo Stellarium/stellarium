@@ -307,7 +307,7 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter, const Vec3d& obsVel
 
 bool Constellation::checkVisibility() const
 {
-	// Is supported seasonal rules by current starlore?
+	// Is supported seasonal rules by current sky culture?
 	if (!seasonalRuleEnabled)
 		return true;
 

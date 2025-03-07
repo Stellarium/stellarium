@@ -10,7 +10,7 @@
 
 
 Stellarium comes with a nice set of sky cultures from all
-over the world (see section~\ref{sec:gui:view:starlore}). For ethnographers or
+over the world (see section~\ref{sec:gui:view:skyculture}). For ethnographers or
 historians of science it may be a worthwhile consideration to
 illustrate the sky culture of the people they are studying. It is not
 very hard to do so, but depending on your data, may require some
@@ -69,7 +69,7 @@ The file is automatically broken into pieces, translated and converted to HTML f
 The first line of the file starts with the only Level 1 header, 
 i.e., a line starting with a single hash (\texttt{\#}), 
 a space and then the \emph{name} of the skyculture. 
-This name is used in the selection list in the skyculture GUI (see \ref{sec:gui:view:starlore}). 
+This name is used in the selection list in the Sky Culture GUI (see \ref{sec:gui:view:skyculture}). 
  
 The other sections typically start with Level 2 or 3 headers (with two or three hash characters) which are displayed as smaller section and 
 subsection titles (HTML: \texttt{h2} or \texttt{h3}, respectively).  
@@ -454,7 +454,7 @@ where
 \item[\jtag{id}] A unique figure identifier, consisting of \texttt{CON} (for constellations), skyculture id, and a short label still unique within the skyculture.
                  For IAU-based skycultures, these short labels must be the IAU standard labels. For others, you can invent your own. It is not necessary to have exactly
                  3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended:  
-				 the short label is displayed when setting Constellation name style to ``short'' (s.~\ref{sec:gui:view:starlore}). If you want to prevent
+				 the short label is displayed when setting Constellation name style to ``short'' (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
 				 certain abbreviations from being displayed, let them start with a dot. See the effect in the \file{Modern (H.A.Rey)} sky culture: In
 				 \menu{Abbreviated} mode, only the official abbreviations are displayed.
 				 
@@ -472,7 +472,7 @@ where
 \item[\jtag{image}] Optional, see \ref{SC:image}
 \item[\jtag{common\_name}] Dictionary of names. Required entries: \jtag{english}. Optional: \jtag{native}
 
-	These names are used in the Constellation name style settings (s.~\ref{sec:gui:view:starlore}): In \menu{Native} mode, the native element is shown. 
+	These names are used in the Constellation name style settings (s.~\ref{sec:gui:view:skyculture}): In \menu{Native} mode, the native element is shown. 
 	Only with setting \menu{Translated}, the text translated from the english element is shown. If your sky culture is a variant of the \file{Modern}
 	sky culture, please use the canonical Latin names, they have all been translated already.
 
@@ -581,7 +581,7 @@ Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help ra
 \begin{description}
 \item[\jtag{id}] A unique asterism identifier, consisting of \texttt{AST} (for asterism), skyculture id, and a short label still unique within the skyculture.
                  It is not necessary to have exactly 3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended:  
-				 the short label is displayed when setting Constellation name style to ``short'' (s.~\ref{sec:gui:view:starlore}). If you want to prevent
+				 the short label is displayed when setting Constellation name style to ``short'' (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
 				 certain abbreviations from being displayed at all, let them start with a dot. 				 
 \item[\jtag{common\_name}] Another dict with entries \jtag{english} (the translatable english name), 
 				and an optional array \jtag{references} which lists from which sources (from \ref{SC:references}) this asterism was taken. 
