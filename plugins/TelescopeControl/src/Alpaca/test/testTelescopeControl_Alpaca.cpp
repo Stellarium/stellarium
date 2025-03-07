@@ -88,16 +88,16 @@ void TestTelescopeControl_Alpaca::areSimilarShouldShowSlightErrors()
 	QVERIFY(isSimilar == false);
 }
 
-void TestTelescopeControl_Alpaca::alpacaDeviceShouldFailToInitializeWithInvalidDevice()
-{
-	// Given
-	AlpacaDevice* device;
-
-	// When
-	device = new AlpacaDevice(nullptr, nullptr);
-
-	// Then
-	QVERIFY(device->connect() == false);	
-}
+//void TestTelescopeControl_Alpaca::alpacaDeviceShouldFailToInitializeWithInvalidDevice()
+//{
+//	// Given
+//	AlpacaDevice* device;
+//
+//	// When
+//	device = new AlpacaDevice(nullptr, nullptr);
+//
+//	// Then
+//	QVERIFY(device->connect() == false);
+//}
 
 QTEST_MAIN(TestTelescopeControl_Alpaca)

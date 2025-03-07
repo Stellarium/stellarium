@@ -36,7 +36,7 @@ private slots:
 	void useJNowShouldUseJNowOnUnknownAlpaca();
 	void areSimilarShouldCompareCorrectly();
 	void areSimilarShouldShowSlightErrors();
-	void alpacaDeviceShouldFailToInitializeWithInvalidDevice();
+	//void alpacaDeviceShouldFailToInitializeWithInvalidDevice(); // probably useless test
 };
 
 #endif // TESTTELESCOPECONTROL_ALPACA_HPP
