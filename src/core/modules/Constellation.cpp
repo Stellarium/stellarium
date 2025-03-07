@@ -101,7 +101,7 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool p
 				if (s == "thin" || s == "bold")
 					continue;
 			}
-			const int HP = StelUtils::getLongLong(polyLine[i]);
+			const StarId HP = StelUtils::getLongLong(polyLine[i]);
 			if (HP <= 0)
 			{
 				qWarning().nospace() << "Error in constellation " << abbreviation << ": bad HIP " << HP;
