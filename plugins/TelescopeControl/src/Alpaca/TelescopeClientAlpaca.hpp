@@ -57,7 +57,7 @@ private:
 	bool mAlpacaUseDeviceEqCoordType;
 	AlpacaDevice* mAlpacaDevice;
 	AlpacaDevice::AlpacaEquatorialCoordinateType mCoordinateType;
-	bool mDoesRefraction;
+	bool mDoesRefraction; //! Telescope supports refraction correction. TODO: Check this on connecting.
 	TelescopeControl::Equinox mEquinox;
 	AlpacaDevice::AlpacaCoordinates mLastCoord;
 	Vec3d mInterpolatedPosition;
