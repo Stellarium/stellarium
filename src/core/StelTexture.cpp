@@ -42,6 +42,7 @@
 QPointer<StelTextureMgr> StelTexture::textureMgr;
 
 StelTexture::StelTexture()
+	: gl(QOpenGLContext::currentContext()->functions())
 {
 }
 
@@ -203,13 +204,13 @@ bool StelTexture::bind(uint slot)
 	if(load())
 	{
 		// Finally load the data in the main thread.
+		gl->glActiveTexture(GL_TEXTURE0 + slot);
 		glLoad(loader->result());
 		delete loader;
 		loader = Q_NULLPTR;
 		if (id != 0)
 		{
 			// The texture is already fully loaded, just bind and return true;
-			gl->glActiveTexture(GL_TEXTURE0 + slot);
 			gl->glBindTexture(GL_TEXTURE_2D, id);
 			return true;
 		}
@@ -415,7 +416,6 @@ bool StelTexture::glLoad(const GLData& data)
 		return false;
 	}
 
-	gl->glActiveTexture(GL_TEXTURE0);
 	gl->glGenTextures(1, &id);
 	gl->glBindTexture(GL_TEXTURE_2D, id);
 	gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, loadParams.filtering);

@@ -101,13 +101,13 @@ void ConstellationMgr::init()
 	// The setting for developers
 	setFlagCheckLoadingData(conf->value("devel/check_loading_constellation_data","false").toBool());
 
-	QString starloreDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
-	if (!ConstellationDisplayStyleMap.contains(starloreDisplayStyle))
+	QString skyCultureDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
+	if (!ConstellationDisplayStyleMap.contains(skyCultureDisplayStyle))
 	{
-		qWarning() << "viewing/constellation_name_style (" << starloreDisplayStyle << ") invalid. Using translated style.";
+		qWarning() << "viewing/constellation_name_style (" << skyCultureDisplayStyle << ") invalid. Using translated style.";
 		conf->setValue("viewing/constellation_name_style", "translated");
 	}
-	setConstellationDisplayStyle(ConstellationDisplayStyleMap.value(starloreDisplayStyle, constellationsTranslated));
+	setConstellationDisplayStyle(ConstellationDisplayStyleMap.value(skyCultureDisplayStyle, constellationsTranslated));
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();

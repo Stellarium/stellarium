@@ -146,8 +146,8 @@ private:
 	//! @return true if Constellation art rendering it turned on, else false.
 	bool getFlagArt() const {return artFader;}
 
-	//! Check visibility of starlore elements (using for seasonal rules)
-	//! @return true if starlore elements rendering it turned on, else false.
+	//! Check visibility of sky culture elements (using for seasonal rules)
+	//! @return true if sky culture elements rendering it turned on, else false.
 	bool checkVisibility() const;
 
 	//! International name (translated using gettext)
