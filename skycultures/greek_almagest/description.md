@@ -460,7 +460,7 @@ the reconstruction (column 6).
 	<td>Beast</td>
 	<td><notr>Lupus</notr></td>
 	<td></td>
-	<td>&beta; described as &lsquo;End of hind leg&lsquo; -> taken as star in the belly; &tau;<sub>1</sub> as hindleg &Chi; removed from head, because otherwise shapelessness arises; HIP 73493 taken as foreleg</td>
+	<td>&beta; described as &lsquo;End of hind leg&lsquo; -> taken as star in the belly; &tau;<sub>1</sub> as hindleg &chi; removed from head, because otherwise shapelessness arises; HIP 73493 taken as foreleg</td>
 </tr>
 <tr valign="top">
 	<td><notr>Ara</notr></td>
