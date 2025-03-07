@@ -281,7 +281,6 @@ QString AlpacaDevice::getDeviceURL(QString &command)
 void AlpacaDevice::alpacaGET()
 {
 	QString clientArgs=QString("clientid=%2&clienttransactionid=%2").arg(QString::number(clientId), QString::number(clientTransactionId));
-
 }
 
 const QString AlpacaDevice::LSlewToCoordinatesAsync = QStringLiteral("SlewToCoordinatesAsync");

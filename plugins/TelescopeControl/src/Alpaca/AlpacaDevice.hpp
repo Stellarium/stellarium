@@ -93,7 +93,6 @@ private:
 
 	static const QString ProtocolVersion;
 	static const QString DeviceType;
-
 };
 
 #endif // ALPACA_DEVICE_HPP
