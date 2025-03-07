@@ -97,7 +97,9 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool p
 			if (polyLine[i].isString())
 			{
 				// Can be "thin" or "bold", but we don't support these modifiers yet, so ignore this entry
-				continue;
+				const auto s = polyLine[i].toString();
+				if (s == "thin" || s == "bold")
+					continue;
 			}
 			const int HP = StelUtils::getLongLong(polyLine[i]);
 			if (HP <= 0)
