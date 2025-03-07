@@ -83,8 +83,8 @@ private:
 	//! @return false if can't parse record (invalid result!), else true.
 	bool read(const QJsonObject& data, StarMgr *starMgr, bool preferNativeNames);
 
-	//! Draw the constellation name
-	void drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const;
+	//! Draw the constellation name. Depending on completeness of names and data, there may be a rich set of options to display.
+	void drawName(StelPainter& sPainter, CulturalDisplayStyle style) const;
 	//! Draw the constellation art
 	void drawArt(StelPainter& sPainter) const;
 	//! Draw the constellation boundary. obsVelocity used for aberration
@@ -160,6 +160,10 @@ private:
 	QString nativeName;
 	//! Pronouncement of the native name or the romanized version of native name of constellation
 	QString nativeNamePronounce;
+	//! Pronunciation aid in International Phonetic Alphabet (future addition)
+	QString nativeNameIPA;
+	//! A scientific transliteration that does not help pronunciation. (Example: Tibetan/Wylie.)
+	QString nativeNameTranslit;
 	//! Abbreviation (the short name or designation of constellations)
 	//! For non-western, a skyculture designer must invent it. (usually 2-5 letters)
 	//! This MUST be filled and be unique within a sky culture.

@@ -52,7 +52,7 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	: hipStarMgr(_hip_stars),
 	  isolateSelected(false),
 	  flagConstellationPick(false),
-	  constellationDisplayStyle(ConstellationMgr::constellationsTranslated),
+	  constellationDisplayStyle(StelObject::CulturalDisplayStyle::Translated),
 	  artFadeDuration(2.),
 	  artIntensity(0),
 	  artIntensityMinimumFov(1.0),
@@ -107,7 +107,7 @@ void ConstellationMgr::init()
 		qWarning() << "viewing/constellation_name_style (" << starloreDisplayStyle << ") invalid. Using translated style.";
 		conf->setValue("viewing/constellation_name_style", "translated");
 	}
-	setConstellationDisplayStyle(ConstellationDisplayStyleMap.value(starloreDisplayStyle, constellationsTranslated));
+	setConstellationDisplayStyle(ConstellationDisplayStyleMap.value(starloreDisplayStyle, StelObject::CulturalDisplayStyle::Translated));
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -391,19 +391,20 @@ int ConstellationMgr::getFontSize() const
 	return asterFont.pixelSize();
 }
 
-void ConstellationMgr::setConstellationDisplayStyle(ConstellationDisplayStyle style)
+void ConstellationMgr::setConstellationDisplayStyle(StelObject::CulturalDisplayStyle style)
 {
+	// TODO: Store this per-skyculture! Maybe open a new group in config.ini?
 	constellationDisplayStyle=style;
 	StelApp::immediateSave("viewing/constellation_name_style", ConstellationDisplayStyleMap.key(style));
 	emit constellationsDisplayStyleChanged(constellationDisplayStyle);
 }
 
-QString ConstellationMgr::getConstellationDisplayStyleString(ConstellationDisplayStyle style)
+QString ConstellationMgr::getConstellationDisplayStyleString(StelObject::CulturalDisplayStyle style)
 {
-	return (style == constellationsAbbreviated ? "abbreviated" : (style == constellationsNative ? "native" : "translated"));
+	return (style == StelObject::CulturalDisplayStyle::Abbreviated ? "abbreviated" : (style == StelObject::CulturalDisplayStyle::Native ? "native" : "translated"));
 }
 
-ConstellationMgr::ConstellationDisplayStyle ConstellationMgr::getConstellationDisplayStyle()
+StelObject::CulturalDisplayStyle ConstellationMgr::getConstellationDisplayStyle()
 {
 	return constellationDisplayStyle;
 }
@@ -1354,8 +1355,9 @@ Constellation* ConstellationMgr::isObjectIn(const StelObject *s) const
 	return Q_NULLPTR;
 }
 
-const QMap<QString, ConstellationMgr::ConstellationDisplayStyle>ConstellationMgr::ConstellationDisplayStyleMap={
-	{ "translated",  constellationsTranslated},
-	{ "native",      constellationsNative},
-	{ "abbreviated", constellationsAbbreviated},
-	{ "english",     constellationsEnglish}};
+// TODO: More to come. Probably move to StelObject!
+const QMap<QString, StelObject::CulturalDisplayStyle>ConstellationMgr::ConstellationDisplayStyleMap={
+	{ "translated",  StelObject::CulturalDisplayStyle::Translated},
+	{ "native",      StelObject::CulturalDisplayStyle::Native},
+	{ "abbreviated", StelObject::CulturalDisplayStyle::Abbreviated},
+	{ "english",     StelObject::CulturalDisplayStyle::Modern}};
