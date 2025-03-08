@@ -921,7 +921,7 @@ List of telescope types supported by INDI\footnote{\url{https://indilib.org/devi
 \item IOptron GotoNova Upgrade Kit 8400
 \end{itemize}
 
-\subsection{ASCOM (Windows, Qt5-based builds only)}
+\subsection{ASCOM~7 (Windows only)}
 \label{sec:plugins:TelescopeControl:ASCOM}
 
 \indexterm{ASCOM} \newFeature{0.19.3}is probably the most widely used
@@ -934,13 +934,15 @@ and most of the astronomy software and tools can communicate with
 ASCOM compatible devices.
 
 The ASCOM telescope support has been added to Stellarium's Telescope Control plugin by Gion Kunz in version 0.19.3.\footnote{%
-Unfortunately traditional ASCOM seems to be incompatible with Qt6. 
-Starting with version 24.3 ASCOM support is no longer available on Qt6-based builds.
-If you depend on ASCOM support, please use a Qt5-based build of the same version.}
+Unfortunately ASCOM version~6 seems to be incompatible with Qt6. 
+After numerous error reports we had to disable ASCOM support on Qt6-based builds of version 24.3-24.4. 
+However, preliminary tests showed that ASCOM~7 \emph{may} work again, so this way of connection is back. 
+Without proper instruments, the maintainers depend on your feedback, though. 
+If you depend on ASCOM support, please update to ASCOM version 7, or use a Qt5-based build of the same version.}
 
 Note that in order for Stellarium to communicate with your ASCOM
 compatible mount, you will need to have the ASCOM platform installed
-on your Windows machine (version 6 or
+on your Windows machine (version 7 or
 higher\footnote{\url{https://ascom-standards.org/Downloads/Index.htm}}). Also,
 the ASCOM driver of your telescope mount needs to be installed before
 you can start using the telescope in Stellarium.
