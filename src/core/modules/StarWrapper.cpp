@@ -428,7 +428,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << QString("%1: %2% (%3)").arg(mmStr).arg(vMm).arg(dms) << "<br />";
 		}
 
-		if ((wdsObs>0) | (binary_sep>0.f))  // either have a WDS observation or a separation modelled by the binary orbit
+		if ((wdsObs>0) || (binary_sep>0.f))  // either have a WDS observation or a separation modelled by the binary orbit
 		{
 			// use separation and position angle from the binary orbit if available
 			oss << QString("%1 (%3): %2°").arg(q_("Position angle"),
