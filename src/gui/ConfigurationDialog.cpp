@@ -1036,8 +1036,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_fov_circular_marker",		propMgr->getStelPropertyValue("SpecialMarkersMgr.fovCircularMarkerDisplayed").toBool());
 	conf->setValue("viewing/size_fov_circular_marker",		QString::number(propMgr->getStelPropertyValue("SpecialMarkersMgr.fovCircularMarkerSize").toDouble(), 'f', 2));
 	conf->setValue("viewing/flag_fov_rectangular_marker",		propMgr->getStelPropertyValue("SpecialMarkersMgr.fovRectangularMarkerDisplayed").toBool());
-	conf->setValue("viewing/width_fov_rectangular_marker",		QString::number(propMgr->getStelPropertyValue("SpecialMarkersMgr.fovRectangularMarkerWidth").toDouble(), 'f', 2));
-	conf->setValue("viewing/height_fov_rectangular_marker",		QString::number(propMgr->getStelPropertyValue("SpecialMarkersMgr.fovRectangularMarkerHeight").toDouble(), 'f', 2));
+	conf->setValue("viewing/width_fov_rectangular_marker",	QString::number(propMgr->getStelPropertyValue("SpecialMarkersMgr.fovRectangularMarkerWidth").toDouble(), 'f', 2));
+	conf->setValue("viewing/height_fov_rectangular_marker",	QString::number(propMgr->getStelPropertyValue("SpecialMarkersMgr.fovRectangularMarkerHeight").toDouble(), 'f', 2));
 	conf->setValue("viewing/rot_fov_rectangular_marker",		QString::number(propMgr->getStelPropertyValue("SpecialMarkersMgr.fovRectangularMarkerRotationAngle").toDouble(), 'f', 2));
 	conf->setValue("viewing/line_thickness",			propMgr->getStelPropertyValue("GridLinesMgr.lineThickness").toInt());
 	conf->setValue("viewing/part_thickness",			propMgr->getStelPropertyValue("GridLinesMgr.partThickness").toInt());
@@ -1045,17 +1045,21 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/constellation_font_size",		propMgr->getStelPropertyValue("ConstellationMgr.fontSize").toInt());
 	conf->setValue("viewing/flag_constellation_drawing",		propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_name",		propMgr->getStelPropertyValue("ConstellationMgr.namesDisplayed").toBool());
-	conf->setValue("viewing/flag_constellation_boundaries",		propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool());
+	conf->setValue("viewing/flag_constellation_boundaries",	propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_art",		propMgr->getStelPropertyValue("ConstellationMgr.artDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_isolate_selected",	propMgr->getStelPropertyValue("ConstellationMgr.isolateSelected").toBool());
 	conf->setValue("viewing/flag_asterism_isolate_selected",	propMgr->getStelPropertyValue("AsterismMgr.isolateAsterismSelected").toBool());
 	conf->setValue("viewing/flag_landscape_autoselection",		propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeAutoSelection").toBool());
 	conf->setValue("viewing/flag_light_pollution_database",		propMgr->getStelPropertyValue("LandscapeMgr.flagUseLightPollutionFromDatabase").toBool());
-	conf->setValue("viewing/flag_environment_auto_enable",		propMgr->getStelPropertyValue("LandscapeMgr.flagEnvironmentAutoEnabling").toBool());
+	conf->setValue("viewing/flag_environment_auto_enable",	propMgr->getStelPropertyValue("LandscapeMgr.flagEnvironmentAutoEnabling").toBool());
 	conf->setValue("viewing/constellation_art_intensity",		propMgr->getStelPropertyValue("ConstellationMgr.artIntensity").toFloat());
 	conf->setValue("viewing/constellation_name_style",		ConstellationMgr::getConstellationDisplayStyleString(static_cast<ConstellationMgr::ConstellationDisplayStyle> (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())  ));
 	conf->setValue("viewing/constellation_line_thickness",		propMgr->getStelPropertyValue("ConstellationMgr.constellationLineThickness").toInt());
 	conf->setValue("viewing/constellation_boundaries_thickness",	propMgr->getStelPropertyValue("ConstellationMgr.constellationBoundariesThickness").toInt());
+	conf->setValue("viewing/constellation_art_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.artFadeDuration").toDouble(), 'f', 1));
+	conf->setValue("viewing/constellation_boundaries_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.boundariesFadeDuration").toDouble(), 'f', 1));
+	conf->setValue("viewing/constellation_lines_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.linesFadeDuration").toDouble(), 'f', 1));
+	conf->setValue("viewing/constellation_labels_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.namesFadeDuration").toDouble(), 'f', 1));
 
 	conf->setValue("viewing/asterism_font_size",			propMgr->getStelPropertyValue("AsterismMgr.fontSize").toInt());
 	conf->setValue("viewing/flag_asterism_drawing",			propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool());

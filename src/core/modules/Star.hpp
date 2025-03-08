@@ -256,6 +256,12 @@ struct Star
    }
 
    inline void getBinaryOrbit(double epoch, Vec3d& v, double& ra, double& dec, double& plx, double& pmra, double& pmdec, double& RV) const {
+      double sep = 0.;
+      double pa = 0.;
+      getBinaryOrbit(epoch, v, ra, dec, plx, pmra, pmdec, RV, sep, pa);
+   }
+
+   inline void getBinaryOrbit(double epoch, Vec3d& v, double& ra, double& dec, double& plx, double& pmra, double& pmdec, double& RV, double& sep, double& pa) const {
       StarId star_id;  // star ID
       if (getGaia() == 0)
       {
@@ -381,6 +387,12 @@ struct Star
       tmp = sky_orbit_vel[0];
       sky_orbit_vel[0] = sky_orbit_vel[1];
       sky_orbit_vel[1] = tmp;
+
+      // compute on-sky separation and position angle
+      sep = sqrt(sky_orbit[0] * sky_orbit[0] + sky_orbit[1] * sky_orbit[1]) / bary_distance / MAS2RAD / 1000.;  // in arcsecond
+      pa = atan2(sky_orbit[0], sky_orbit[1]);
+      if (pa < 0)
+         pa += 2 * M_PI;
 
       if (bso.primary)
       {
