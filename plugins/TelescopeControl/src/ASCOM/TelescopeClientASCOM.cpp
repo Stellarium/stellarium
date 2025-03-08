@@ -47,6 +47,7 @@ TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& p
 
 	mAscomDevice = new ASCOMDevice(this, mAscomDeviceId);
 	mAscomDevice->connect();
+	// TODO: Wait for actual confirmation of connection...
 	mDoesRefraction = mAscomDevice->doesRefraction();
 	mCoordinateType = mAscomDevice->getEquatorialCoordinateType();
 }
@@ -167,7 +168,9 @@ void TelescopeClientASCOM::telescopeAbortSlew()
 
 bool TelescopeClientASCOM::isConnected() const
 {
-	return mAscomDevice->isDeviceConnected();
+	//return mAscomDevice->isDeviceConnected();
+	// Called every frame, we should only see if we have been connected before...
+	return mAscomDevice->isConnected();
 }
 
 bool TelescopeClientASCOM::hasKnownPosition() const
