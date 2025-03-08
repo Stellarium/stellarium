@@ -21,6 +21,7 @@
 
 #include <QObject>
 #include <QStringList>
+#include <QTimer>
 #include "../common/OLE.hpp"
 
 class ASCOMDevice final : public QObject
@@ -43,10 +44,14 @@ public:
 
 	ASCOMDevice(QObject* parent = nullptr, QString ascomDeviceId = nullptr);
 	
-	bool isDeviceConnected() const;
+	bool isConnected() const; // just return mConnected, i.e., connection has been etablished previously so that this device is said "active".
+	bool isDeviceConnected() const; // Thorough test if connection to actual telescope is still present. Slow!
 	bool isParked() const;
-	bool connect();
-	bool disconnect();
+	void connect(); // initiate connection.
+	void disconnect(); // initiate disconnection.
+	bool isConnecting() const; // According to ASCOM7 protocol standards.
+	void tryFinishConnect(); // finalize connection or give up after some time.
+	void tryFinishDisconnect();
 	ASCOMCoordinates position() const;
 	void slewToCoordinates(ASCOMCoordinates coords);
 	void syncToCoordinates(ASCOMCoordinates coords);
@@ -56,6 +61,7 @@ public:
 	ASCOMCoordinates getCoordinates();
 
 signals:
+	// TODO: These signals are empty definitions and are not connected and never emitted!
 	void deviceConnected();
 	void deviceDisconnected();
 
@@ -64,10 +70,15 @@ private:
 	bool mConnected = false;
 	ASCOMCoordinates mCoordinates;
 	QString mAscomDeviceId;
+	QTimer connectionTimer;
+	int connectionRetries;
 	static const wchar_t* LSlewToCoordinatesAsync;
 	static const wchar_t* LSyncToCoordinates;
 	static const wchar_t* LAbortSlew;
 	static const wchar_t* LConnected;
+	static const wchar_t* LConnecting;
+	static const wchar_t* LConnect;
+	static const wchar_t* LDisconnect;
 	static const wchar_t* LAtPark;
 	static const wchar_t* LEquatorialSystem;
 	static const wchar_t* LDoesRefraction;
