@@ -1062,24 +1062,27 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/constellation_labels_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.namesFadeDuration").toDouble(), 'f', 1));
 
 	conf->setValue("viewing/asterism_font_size",			propMgr->getStelPropertyValue("AsterismMgr.fontSize").toInt());
-	conf->setValue("viewing/flag_asterism_drawing",			propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool());
+	conf->setValue("viewing/flag_asterism_drawing",		propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool());
 	conf->setValue("viewing/flag_asterism_name",			propMgr->getStelPropertyValue("AsterismMgr.namesDisplayed").toBool());
 	conf->setValue("viewing/asterism_line_thickness",		propMgr->getStelPropertyValue("AsterismMgr.asterismLineThickness").toInt());
 	conf->setValue("viewing/flag_rayhelper_drawing",		propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool());
 	conf->setValue("viewing/rayhelper_line_thickness",		propMgr->getStelPropertyValue("AsterismMgr.rayHelperThickness").toInt());
+	conf->setValue("viewing/asterism_lines_fade_duration",		QString::number(propMgr->getStelPropertyValue("AsterismMgr.linesFadeDuration").toDouble(), 'f', 1));
+	conf->setValue("viewing/asterism_labels_fade_duration",	QString::number(propMgr->getStelPropertyValue("AsterismMgr.namesFadeDuration").toDouble(), 'f', 1));
+	conf->setValue("viewing/rayhelper_lines_fade_duration",	QString::number(propMgr->getStelPropertyValue("AsterismMgr.rayHelpersFadeDuration").toDouble(), 'f', 1));
 	conf->setValue("viewing/sky_brightness_label_threshold",	propMgr->getStelPropertyValue("StelSkyDrawer.daylightLabelThreshold").toFloat());
 	conf->setValue("viewing/flag_night",				StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_stars",				propMgr->getStelPropertyValue("StarMgr.flagStarsDisplayed").toBool());
-	conf->setValue("astro/flag_star_name",				propMgr->getStelPropertyValue("StarMgr.flagLabelsDisplayed").toBool());
+	conf->setValue("astro/flag_star_name",			propMgr->getStelPropertyValue("StarMgr.flagLabelsDisplayed").toBool());
 	conf->setValue("astro/flag_star_additional_names",		propMgr->getStelPropertyValue("StarMgr.flagAdditionalNamesDisplayed").toBool());
 	conf->setValue("astro/flag_star_designation_usage",		propMgr->getStelPropertyValue("StarMgr.flagDesignationLabels").toBool());
 	conf->setValue("astro/flag_star_designation_dbl",		propMgr->getStelPropertyValue("StarMgr.flagDblStarsDesignation").toBool());
 	conf->setValue("astro/flag_star_designation_var",		propMgr->getStelPropertyValue("StarMgr.flagVarStarsDesignation").toBool());
 	conf->setValue("astro/flag_star_designation_hip",		propMgr->getStelPropertyValue("StarMgr.flagHIPDesignation").toBool());
-	conf->setValue("stars/labels_amount",				propMgr->getStelPropertyValue("StarMgr.labelsAmount").toDouble());
+	conf->setValue("stars/labels_amount",			propMgr->getStelPropertyValue("StarMgr.labelsAmount").toDouble());
 	conf->setValue("astro/nebula_hints_amount",			propMgr->getStelPropertyValue("NebulaMgr.hintsAmount").toDouble());
 	conf->setValue("astro/nebula_labels_amount",			propMgr->getStelPropertyValue("NebulaMgr.labelsAmount").toDouble());
-	conf->setValue("astro/nebula_hints_brightness",			propMgr->getStelPropertyValue("NebulaMgr.hintsBrightness").toDouble());
+	conf->setValue("astro/nebula_hints_brightness",		propMgr->getStelPropertyValue("NebulaMgr.hintsBrightness").toDouble());
 	conf->setValue("astro/nebula_labels_brightness",		propMgr->getStelPropertyValue("NebulaMgr.labelsBrightness").toDouble());
 
 	conf->setValue("astro/flag_nebula_hints_proportional",		propMgr->getStelPropertyValue("NebulaMgr.hintsProportional").toBool());

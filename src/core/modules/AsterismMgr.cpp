@@ -50,8 +50,11 @@ AsterismMgr::AsterismMgr(StarMgr *_hip_stars)
 	, namesDisplayed(false)
 	, hasAsterism(false)
 	, isolateAsterismSelected(false)
-	, asterismLineThickness(1)
-	, rayHelperThickness(1)	
+        , linesFadeDuration(1.f)
+        , namesFadeDuration(1.f)
+        , rayHelpersFadeDuration(1.f)
+        , asterismLineThickness(1)
+        , rayHelperThickness(1)
 {
 	setObjectName("AsterismMgr");
 	Q_ASSERT(hipStarMgr);
@@ -78,6 +81,10 @@ void AsterismMgr::init()
 	setAsterismLineThickness(conf->value("viewing/asterism_line_thickness", 1).toInt());
 	setRayHelperThickness(conf->value("viewing/rayhelper_line_thickness", 1).toInt());
 	setFlagIsolateAsterismSelected(conf->value("viewing/flag_asterism_isolate_selected", false).toBool());
+
+	setLinesFadeDuration(conf->value("viewing/asterism_lines_fade_duration", 1.0f).toFloat());
+	setLabelsFadeDuration(conf->value("viewing/asterism_labels_fade_duration", 1.0f).toFloat());
+	setRayHelpersFadeDuration(conf->value("viewing/rayhelper_lines_fade_duration", 1.0f).toFloat());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -145,6 +152,9 @@ void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 			aster = new Asterism;
 			if (aster->read(skyCulture.asterisms[n].toObject(), hipStarMgr))
 			{
+				aster->lineFader.setDuration(static_cast<int>(linesFadeDuration * 1000.f));
+				aster->rayHelperFader.setDuration(static_cast<int>(rayHelpersFadeDuration * 1000.f));
+				aster->nameFader.setDuration(static_cast<int>(namesFadeDuration * 1000.f));
 				aster->setFlagLines(linesDisplayed);
 				aster->setFlagLabels(namesDisplayed);
 				aster->setFlagRayHelpers(rayHelpersDisplayed);
@@ -742,4 +752,64 @@ void AsterismMgr::switchSelectionMode()
 	setFlagIsolateAsterismSelected(!state);
 	if (!state)
 		deselectAsterisms();
+}
+
+void AsterismMgr::setLinesFadeDuration(const float duration)
+{
+	if (!qFuzzyCompare(linesFadeDuration, duration))
+	{
+		linesFadeDuration = duration;
+
+		for (auto* asterism : asterisms)
+		{
+			asterism->lineFader.setDuration(static_cast<int>(duration * 1000.f));
+		}
+		StelApp::immediateSave("viewing/asterism_lines_fade_duration", duration);
+		emit linesFadeDurationChanged(duration);
+	}
+}
+
+float AsterismMgr::getLinesFadeDuration() const
+{
+	return linesFadeDuration;
+}
+
+void AsterismMgr::setLabelsFadeDuration(const float duration)
+{
+	if (!qFuzzyCompare(namesFadeDuration, duration))
+	{
+		namesFadeDuration = duration;
+
+		for (auto* asterism : asterisms)
+		{
+			asterism->nameFader.setDuration(static_cast<int>(duration * 1000.f));
+		}
+		StelApp::immediateSave("viewing/asterism_labels_fade_duration", duration);
+		emit namesFadeDurationChanged(duration);
+	}
+}
+
+float AsterismMgr::getLabelsFadeDuration() const
+{
+	return namesFadeDuration;
+}
+
+void AsterismMgr::setRayHelpersFadeDuration(const float duration)
+{
+	if (!qFuzzyCompare(rayHelpersFadeDuration, duration))
+	{
+		rayHelpersFadeDuration = duration;
+
+		for (auto* asterism : asterisms)
+		{
+			asterism->rayHelperFader.setDuration(static_cast<int>(duration * 1000.f));
+		}
+		StelApp::immediateSave("viewing/rayhelper_lines_fade_duration", duration);
+		emit rayHelpersFadeDurationChanged(duration);
+	}
+}
+
+float AsterismMgr::getRayHelpersFadeDuration() const
+{
+	return rayHelpersFadeDuration;
 }
