@@ -18,6 +18,7 @@
  */
 
 #include "Dithering.hpp"
+#include "StelMainView.hpp"
 #include "StelTextureMgr.hpp"
 
 #include <QFileInfo>
@@ -47,6 +48,8 @@ StelTextureMgr::StelTextureMgr(QObject *parent)
 	if (maxTexSize<8192)
 		qDebug() << "Max texture size:" << maxTexSize;
 	StelTexture::textureMgr = this;
+
+	connect(&StelMainView::getInstance(), &StelMainView::frameFinished, this, &StelTextureMgr::onFrameFinished);
 }
 
 StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const StelTexture::StelTextureParams& params)
@@ -177,6 +180,21 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	}
 	textureCache.insert(canPath,tex);
 	return tex;
+}
+
+void StelTextureMgr::onFrameFinished()
+{
+	totalLoadTimeTaken = 0;
+}
+
+void StelTextureMgr::reportTextureLoadStart()
+{
+	textureLoadTimer.start();
+}
+
+void StelTextureMgr::reportTextureLoadEnd()
+{
+	totalLoadTimeTaken += textureLoadTimer.nsecsElapsed();
 }
 
 //! Create a texture from a QImage.

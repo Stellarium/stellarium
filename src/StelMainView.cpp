@@ -1514,6 +1514,8 @@ void StelMainView::drawEnded()
 
 	if(!fpsTimer->isActive())
 		fpsTimer->start();
+
+	emit frameFinished();
 }
 
 void StelMainView::setFlagCursorTimeout(bool b)
