@@ -29,6 +29,9 @@ class Translations
 	{
 		// Generate Gettext strings for traduction
 		Q_ASSERT(0);
+		
+		// TRANSLATORS: short name of dataset for DSO textures
+		N_("Nebulae");
 
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Planets");
