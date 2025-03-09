@@ -46,8 +46,10 @@ constexpr quint64 MAX_LOAD_NANOSEC_PER_FRAME = 1e9 / 120;
 QPointer<StelTextureMgr> StelTexture::textureMgr;
 
 StelTexture::StelTexture()
-	: gl(QOpenGLContext::currentContext()->functions())
 {
+	// Note: we don't set gl to OpenGL functions here, because this
+	// constructor may be called from another thread, which doesn't
+	// have a GL context associated with it.
 }
 
 StelTexture::~StelTexture()
@@ -209,6 +211,7 @@ bool StelTexture::bind(uint slot)
 	{
 		if(textureMgr->getTotalLoadTimeTaken() > MAX_LOAD_NANOSEC_PER_FRAME)
 			return false;
+		gl = QOpenGLContext::currentContext()->functions();
 		// Finally load the data in the main thread.
 		gl->glActiveTexture(GL_TEXTURE0 + slot);
 		textureMgr->reportTextureLoadStart();
