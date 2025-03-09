@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-03-09 13:06+0700\n"
+"POT-Creation-Date: 2025-03-09 13:10+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8218,8 +8218,8 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: short name of dataset for DSO textures
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:34 src/translations.h:288 src/ui_dsoColorsDialog.h:507
+#: src/translations.h:34
+msgctxt "dataset short name"
 msgid "Nebulae"
 msgstr ""
 
@@ -8760,6 +8760,11 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:282
 msgid "Bright galaxies"
+msgstr ""
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/translations.h:288 src/ui_dsoColorsDialog.h:507
+msgid "Nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)

@@ -31,7 +31,7 @@ class Translations
 		Q_ASSERT(0);
 		
 		// TRANSLATORS: short name of dataset for DSO textures
-		N_("Nebulae");
+		NC_("Nebulae", "dataset short name");
 
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Planets");
