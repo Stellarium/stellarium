@@ -239,7 +239,13 @@ void StelTexture::waitForLoaded()
 		Q_ASSERT(0);
 	}
 	if(loader)
+	{
 		loader->waitForFinished();
+
+		glLoad(loader->result());
+		delete loader;
+		loader = nullptr;
+	}
 }
 
 template <typename T, typename...Params, typename...Args>
