@@ -279,6 +279,8 @@ signals:
 	void maxFpsChanged(int fps);
 	void minTimeBetweenFramesChanged(int tbf);
 
+	void frameFinished();
+
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);

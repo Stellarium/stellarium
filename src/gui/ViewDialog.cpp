@@ -565,6 +565,9 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->boundariesFadeDurationDoubleSpinBox,	"ConstellationMgr.boundariesFadeDuration");
 	connectDoubleProperty(ui->linesFadeDurationDoubleSpinBox,		"ConstellationMgr.linesFadeDuration");
 	connectDoubleProperty(ui->namesFadeDurationDoubleSpinBox,		"ConstellationMgr.namesFadeDuration");
+	connectDoubleProperty(ui->asterismNamesFadeDurationDoubleSpinBox,	"AsterismMgr.namesFadeDuration");
+	connectDoubleProperty(ui->asterismLinesFadeDurationDoubleSpinBox,	"AsterismMgr.linesFadeDuration");
+	connectDoubleProperty(ui->rayHelpersFadeDurationDoubleSpinBox,	"AsterismMgr.rayHelpersFadeDuration");
 
 	ui->colorConstellationBoundaries->setup("ConstellationMgr.boundariesColor", "color/const_boundary_color");
 	ui->colorConstellationLabels    ->setup("ConstellationMgr.namesColor",      "color/const_names_color");
@@ -1054,6 +1057,9 @@ void ViewDialog::populateToolTips()
 	ui->linesFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->namesFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->boundariesFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->asterismLinesFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->asterismNamesFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->rayHelpersFadeDurationDoubleSpinBox->setSuffix(seconds);
 }
 
 void ViewDialog::populateLists()
