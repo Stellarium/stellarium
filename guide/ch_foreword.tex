@@ -9,13 +9,17 @@ Almost  twenty-five years have elapsed since Fabien Ch\'ereau typed the
 first lines of code of a desktop planetarium which should be based on
 modern algorithms from computer graphics to provide a trustworthy
 simulation of the night sky, utilizing OpenGL real-time graphics technology which best
-runs on dedicated graphics hardware. What evolved from these first
-attempts has turned into a beautiful program which has been
+runs on dedicated graphics hardware. 
+%
+%What evolved from these first
+%attempts has turned into a beautiful program which has been
+%
+The beautiful program that evolved since then has been 
 downloaded millions of times to run on desktop computers and notebooks
 all around the planet, on various operating systems and in dozens of
 languages. The first team of developers also developed ways to control Goto 
 telescopes which became a popular feature. In the years to come this was occasionally 
-extended by further external contributors to provide support for INDI on Linux and ASCOM on Windows, 
+extended by further external contributors to provide support for INDI and RTS2 on Linux and ASCOM on Windows, 
 but keeping the systems working by occasionally upgrading the protocols was left to 
 the maintainers who may be limited in their access to instruments or just have 
 not even enough time to go observing themselves.  
@@ -37,11 +41,11 @@ The builds on the older Qt5 framework seemed to always work nicely.
 
 With only three core developers working part-time at best and otherwise busy in other projects or daytime jobs, 
 we cannot do giant leaps, but the program has 
-evolved nicely in other areas like the AstroCalc panel that becomes richer in every version. 
+evolved nicely in other areas like the AstroCalc dialog that becomes richer in every version. 
 
 
 
-While many improvements involved  refinements for planetary positions and modelling of observing conditions, 
+While many improvements had involved  refinements for planetary positions and modelling of observing conditions, 
 other users were more interested in star positions over millennia. 
 The star catalog we have used since 2006, which was based on the 
 then best positional measurements made by ESA's Hipparcos satellite,  was discovered to have 
@@ -56,15 +60,17 @@ required for the brightest stars which were too bright for Gaia to measure.
 Computers have become more powerful since 2006, and so this new catalog comes with new features: While previously 
 we just showed numerical data for parallax, now you can observe the stars' actual parallaxes as Earth moves around the Sun! 
 If needed in demonstrations, you can exaggerate the effect.
-Proper motions are now modelled accurately. And, what some may like best, 
+Proper motions are now modelled accurately, and even stars' distances change, so you can observe the brightness change of 
+close stars like Barnard's as they pass our Solar system. And, what some may like best, 
 binary stars with known orbits move around each other while doing all this. 
-So, fasten your seat belts and observe, for example, the fast spatial motion of 61 Cygni, affected by parallax, 
+So, fasten your seat belts and observe, for example, the fast spatial motion of 61 Cygni, affected by annual parallax and aberration, 
 and observe the two components dancing around each other over centuries! Add a HiPS survey displayed behind the stars, 
 and see when the actual plates were taken so that the fast running stars fall in place. 
-Observe the combination of motions with aberration and you will get a higher appreciation for how difficult 
-finding stellar distances from parallax measurements actually must have been for the pioneers in the field in the 19th century.
-That each star is now identified by its catalog number in Gaia DR3 is an added benefit. 
-This new catalog also made the MissingStars plugin obsolete and solved many reports about ``missing stars''. 
+Observe the combination of motions and you will get a higher appreciation for how difficult 
+finding stellar distances from positional measurements actually must have been for the pioneers in the field in the 19th century.
+%That each 
+Each star is now identified by its catalog number in Gaia DR3 as an added benefit. 
+%This new catalog also made the MissingStars plugin obsolete and solved many reports about ``missing stars''. 
 
 If you need to run an older version of Stellarium and have downloaded the higher-level star catalogs, 
 these will still be available for running these older versions, but you will want to download the new star catalogs as soon as possible. 
@@ -72,21 +78,23 @@ these will still be available for running these older versions, but you will wan
 
 We had actually planned for a different large development to begin in early 2025. Fabien's newer projects, Stellarium-web and Stellarium-mobile, 
 are utilizing a more modern data format for their skyculture descriptions: JSON. Also in our core team, 
-we were convinced that the file formats user so far are not flexible enough to model the many aspects of the rich astronomical 
-heritage of cultures found all over the world and had already collected ideas for years. 
+we were convinced that the file formats used so far are not flexible enough to model the many aspects of the rich astronomical 
+heritage of cultures found all over the world, and we had already collected ideas for years. 
 In a scientific symposium in Jena in late 2023 that was also supported by Stellarium's donation 
-fund we were able to work out a few definitions and requirements of how Stellarium can help display and communicate 
-all this. Starting with this version 25.1, we are therefore using a completely new file format for the sky cultures. 
-Ruslan  did a great job converting all existing data, especially the translation into dozens of existing languages, 
-so that hopefully no vocabulary that was already translated was lost.  See chapter \ref{ch:SkyCultures} for details about the new features
-as we use them now, and expect more features to come in this area as we continue to work during this year. 
+fund we were able to work out a few definitions and requirements of how Stellarium can help scientists collecting, displaying and communicating 
+all this. Starting with this version 25.1, we are therefore using a completely new file format for the sky 
+cultures which should be compatible with all programs of the Stellarium family. 
+Ruslan, who also optimizes the OpenGL rendering in countless little improvements, did a great job converting all existing data, 
+especially the translation into dozens of existing languages, so that hopefully no vocabulary that was already translated was lost.  
+See chapter \ref{ch:SkyCultures} for details about the new features as we use them now, 
+and expect more features to come in this area as we continue to work during this year. 
 
 Coming back to ASCOM, while testing with version 7 we could not trigger the bad crash that was reported before, 
 therefore we hope that re-enabling ASCOM in this release will work for our users with actual instruments. 
 Your feedback is important to find this out, and if you are familiar with programming, we can need support in this part of the program. 
 
 We want to thank all sponsors and backers of the project as meanwhile we have collected substantial funds to support development 
-also in work hours. We like to work on this project, but also must pay the bills, so please keep up your kind support! 
+also in work hours. We like working on this project, but also must pay the bills, so please keep up your kind support! 
 
 
 \iffalse
@@ -110,10 +118,10 @@ In the name of all prior and current developers we wish you much enjoyment with
 this and future versions of the Stellarium desktop planetarium!
 
 \begin{flushright}
-\textbf{Georg Zotti and Alexander Wolf} \\ \emph{March 2025}
+Georg Zotti and Alexander Wolf, March 2025
 \end{flushright}
 
-\vspace{2\baselineskip}
+%\vspace{2\baselineskip}
 
 
 
