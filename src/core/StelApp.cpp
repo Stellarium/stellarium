@@ -216,6 +216,10 @@ Q_IMPORT_PLUGIN(VtsStelPluginInterface)
 Q_IMPORT_PLUGIN(OnlineQueriesPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_PLANES
+Q_IMPORT_PLUGIN(PlanesStelPluginInterface)
+#endif
+
 // Initialize static variables
 StelApp* StelApp::singleton = Q_NULLPTR;
 qint64 StelApp::startMSecs = 0;
