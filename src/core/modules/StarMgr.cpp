@@ -2436,3 +2436,4 @@ QString StarMgr::getStelObjectType() const
 {
 	return STAR_TYPE;
 }
+
