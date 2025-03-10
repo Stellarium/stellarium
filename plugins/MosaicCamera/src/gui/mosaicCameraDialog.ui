@@ -32,7 +32,7 @@
    <item>
     <widget class="TitleBar" name="titleBar">
      <property name="title" stdset="0">
-      <string>Mosaic Camera Plug-in Configuration</string>
+      <string>Mosaic Camera</string>
      </property>
     </widget>
    </item>
@@ -44,9 +44,58 @@
      <property name="documentMode">
       <bool>false</bool>
      </property>
-     <widget class="QWidget" name="LocationTab">
+     <widget class="QWidget" name="generalTab">
       <attribute name="title">
-       <string>Location</string>
+       <string>Mosaic Camera</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QGroupBox" name="groupBoxMosaicCamera">
+         <property name="title">
+          <string>Mosaic Camera</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QCheckBox" name="showPluginButtonCheckBox">
+            <property name="text">
+             <string>Show plug-in button on toolbar</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="CameraTab">
+      <attribute name="title">
+       <string>Cameras</string>
       </attribute>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>

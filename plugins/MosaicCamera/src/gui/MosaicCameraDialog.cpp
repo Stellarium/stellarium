@@ -156,7 +156,7 @@ void MosaicCameraDialog::createDialogContent()
 	if(gui!=nullptr)
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
-	// Location tab
+	// Cameras tab
 	ui->RASpinBox->setDisplayFormat(AngleSpinBox::HMSSymbols);
 	ui->RotationSpinBox->setDisplayFormat(AngleSpinBox::DecimalDeg);
 	ui->DecSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
