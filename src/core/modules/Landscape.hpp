@@ -74,6 +74,7 @@ public:
 		QString name;
 		Vec3d featurePoint; // start of the line: mountain peak, building, ...
 		Vec3d labelPoint;   // end of the line, where the centered label best fits.
+		bool isLabelAboveFeature; // whether label is above featurePoint.
 	} LandscapeLabel;
 
 	Landscape(float _radius = 2.f);
@@ -187,7 +188,7 @@ public:
 		azGrad_altGrad = 4, //! azimuth[new_degrees] altitude[new_degrees] (may be found on theodolites)
 		azGrad_zdGrad  = 5  //! azimuth[new_degrees] zenithDistance[new_degrees] (may be found on theodolites)
 	};
-	
+
 	//! Load descriptive labels from optional file gazetteer.LANG.utf8.
 	void loadLabels(const QString& landscapeId);
 	bool hasLandscapePolygon() const {return !horizonPolygon.isNull();}
