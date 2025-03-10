@@ -919,7 +919,7 @@ void StarMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QStri
 		// Let's allow Hipparcos and Gaia designations only
 		if (key.startsWith("HIP "))
 		{
-			loadCultureSpecificNameForStar(it.value().toArray(), key.mid(4).toULongLong());
+			loadCultureSpecificNameForStar(it.value().toArray(), key.mid(4).toUInt());
 		}
 		else if (key.startsWith("Gaia DR3 "))
 		{
