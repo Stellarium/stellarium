@@ -474,7 +474,7 @@ private:
 
 	//! Load culture-specific names for stars from JSON data
 	void loadCultureSpecificNames(const QJsonObject& data, const QMap<QString, int>& commonNamesIndexToSearchWhileLoading);
-	void loadCultureSpecificNameForHIP(const QJsonArray& data, StarId HIP);
+	void loadCultureSpecificNameForStar(const QJsonArray& data, StarId HIP);
 	void loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName,
 	                                           const QMap<QString, int>& commonNamesIndexToSearchWhileLoading);
 
