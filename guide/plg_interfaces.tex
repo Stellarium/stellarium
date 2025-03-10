@@ -872,6 +872,108 @@ Once MPC data has been downloaded, the user can select objects for updating the 
 \label{fig:SolarSystemEditor:ImportData:FinalView}
 \end{figure}
 
+\newpage
+
+
+\clearpage
+
+\section{Nebula Textures Plugin User Guide}
+\label{sec:plugins:NebulaTextures}
+
+The Nebula Textures plugin allows users to customize deep-sky object (DSO) textures, precisely 
+rendering them in Stellarium like default textures. Astronomy amateurs can use it to create 
+a collection of their own astrophotography, visual-like sketches, paintings, and even more in 
+Stellarium. It also serves as a simple client for Astrometry.net, enabling blind-solving and precise 
+positioning of astronomical images. The plugin's full functionality includes online plate-solving 
+and positioning of astronomical images, as well as the management and rendering of custom textures.
+
+\subsection{Steps for Online Solving and Texture Management (For Astrophotography)}
+\begin{enumerate}
+    \item \textbf{Prepare an Image}: Prepare a processed rectangular bitmap file of a deep-sky object, 
+	in a format that supports both Astrometry analysis and rendering, such as PNG, JPG, TIF, or GIF. 
+	You should adjust the image background brightness to suit Stellarium 
+	by referencing the nebulae images in the Stellarium \file{nebulae/default} directory. Typical 
+	astrophotography images with TAN projections are fine, but avoid images with high field distortion. 
+	If the image's FOV is too large, it is recommended to manually split it into multiple sub-images beforehand. 
+	\textbf{\textcolor{red}{Ensure that the image is not flipped horizontally or vertically!!!}} 
+	It’s recommended to use a descriptive ID or nickname as the filename. 
+	While Nova Astrometry does not strictly limit image size, keeping it below 20 MP 
+	ensures efficient plate solving.
+
+    \item \textbf{Open Image}: By default, the plugin opens the “Solve and Add” page. Click the \button{Open File} 
+	button to select an image file or paste the file path into the “Image Filepath” text box.
+
+    \item \textbf{Enter API Key}: Paste your Astrometry API key into the corresponding text box (password 
+	mode by default). If you don’t have one, click \href{https://nova.astrometry.net/api_help}{\textcolor{blue}{\underline{Astrometry ApiKey}}} to obtain it 
+	after registering or logging in. Check \checkbox{Remember me} to store the key for future use.
+
+    \item \textbf{Upload and Solve}: Click \button{Online Solve} to begin uploading and solving the image. Ensure system 
+	proxies are disabled to avoid errors. The solving process may take seconds to minutes, 
+	depending on the Astrometry.net server. If you need to stop the solving process, click the \button{Cancel} button.
+
+    \item \textbf{View Solving Results}: After successful solving, the image's center and corners' J2000 
+	equatorial coordinates (in decimal degrees) will be displayed.
+
+    \item \textbf{Optional Testing}:
+    \begin{itemize}
+        \item Click the \guibutton{0.6}{uibtProcess.png} button next to the center coordinates to locate the texture's center.
+        \item Use \button{Test this texture} to preview the texture. If it overlaps with default textures, check \button{Disable default textures} to avoid visual conflicts. 
+		The \button{Test this texture} button will toggle between “Test this texture” and “Stop test” to start and stop the rendering process. 
+		Remember to click \button{Stop Test} afterward to restore the rendering of the default nebula textures! 
+		The dropdown menu is used to adjust texture brightness, with three options: \textbf{Bright}, \textbf{Normal}, and \textbf{Dark}. 
+		The default \textbf{Normal} setting is suitable for most cases.
+        \item You can repeatedly press the \texttt{s} key in the main view to toggle star visibility and verify whether the image is aligned accurately.
+    \end{itemize}
+
+    \item \textbf{Add Texture to Storage}: Click \button{Add the Texture to Custom Storage} to permanently save 
+	the texture. The original image will be copied to Stellarium's plugin folder in the user 
+	directory. After adding a texture, you should restart Stellarium to fully integrate the texture into the module.
+
+    \item \textbf{Display Settings}: After restarting Stellarium, switch to the \button{Custom Textures} page of the 
+	plugin to manage your custom textures. Options include \button{Show Custom Textures} (showing/hiding textures), \button{Avoid Area Conflict} (avoiding 
+	overlaps with default textures), and \button{Reload} (reloading custom textures).
+
+    \item \textbf{Locate a Texture}: Double-clicking a texture item in the list will quickly center the view on that texture.
+
+    \item \textbf{Remove a Texture}: To remove a texture, switch to the \button{Custom Textures} page, select it in 
+	the list view and click \button{Remove selected item in Custom Textures}. The configuration file 
+	will update, and the corresponding image file in the plugin folder will be deleted. However, 
+	Stellarium may continue rendering the texture until it is restarted.
+\end{enumerate}
+
+\subsection{Steps for Manual Texture Addition (For Sketches, Paintings, etc.)}
+The process is similar to the above, except that you don’t need to upload the texture file for solving:
+\begin{itemize}
+    \item Open the image file. Stars in non-astrophotographic images may not align precisely with the 
+	software's stars, so it is recommended to use the texture without stars (de-starring).
+    \item Input the J2000 equatorial coordinates (in decimal degrees) for the image corners, aligning 
+	with the bitmap display.
+    \item If needed, use an astrophotography image with a similar field of view (FOV) to obtain 
+	approximate corner coordinates via online solving first. Alternatively, enable Digitized 
+	Sky Survey layers in Stellarium (Disable constellation lines, illustrations, grids, and other 
+	unrelated elements to approximate a realistic effect), adjust the field of view and rotation 
+	to match the texture, and capture a screenshot for solving. After obtaining the solved 
+	coordinates, replace the image path with the texture path.
+    \item Then, debug and render the texture, adjusting coordinates until the texture stars align 
+	accurately with Stellarium stars. Finally, add the texture to the custom storage.
+\end{itemize}
+
+\subsection{Notes}
+\begin{enumerate}
+    \item All uploaded images are automatically assigned a \textbf{CC BY-NC-ND 3.0} license by Astrometry.net 
+	and are not publicly visible by default. Avoid excessive uploads to prevent server 
+	congestion or issues with your API key.
+    \item After adding a texture, you must restart Stellarium to fully integrate the texture into the 
+	module. The same applies when deleting a texture.
+    \item To back up your texture library or share it with others, copy the plugin folder from your user 
+	config directory. For Windows, the path is typically:
+    \begin{quote}
+    \texttt{\%APPDATA\%\textbackslash Stellarium\textbackslash modules\textbackslash NebulaTextures}
+    \end{quote}
+    You can then share this folder with others, and they can place it in the same directory on 
+	their system to use the custom textures.
+\end{enumerate}
+
 
 %%% Local Variables: 
 %%% mode: latex
