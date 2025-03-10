@@ -871,7 +871,7 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 	}
 }
 
-void StarMgr::loadCultureSpecificNameForHIP(const QJsonArray& data, const int HIP)
+void StarMgr::loadCultureSpecificNameForHIP(const QJsonArray& data, const StarId HIP)
 {
 	for (const auto& entry : data)
 	{
@@ -918,7 +918,7 @@ void StarMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QStri
 		const auto key = it.key();
 		if (key.startsWith("HIP "))
 		{
-			loadCultureSpecificNameForHIP(it.value().toArray(), key.mid(4).toInt());
+			loadCultureSpecificNameForHIP(it.value().toArray(), key.mid(4).toULongLong());
 		}
 		else if (key.startsWith("NAME "))
 		{
