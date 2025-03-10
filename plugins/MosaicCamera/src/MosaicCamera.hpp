@@ -19,9 +19,11 @@
 #ifndef MOSAICCAMERA_HPP
 #define MOSAICCAMERA_HPP
 
+#include "StelGui.hpp"
 #include "StelModule.hpp"
 #include "StelPluginInterface.hpp"
 
+class StelButton;
 class MosaicCameraDialog;
 
 /*! @defgroup mosaicCamera Mosaic Camera plug-in
@@ -64,25 +66,31 @@ class MosaicCamera : public StelModule
 	 * setting and getting properties through the Stellarium Remove Control HTTP API.
      */
 
+	/// @property enabled
+	/// @brief Are mosaic camera overlays enabled?
+	Q_PROPERTY(bool enabled		     READ isEnabled          WRITE enableMosaicCamera  NOTIFY flagMosaicCameraVisibilityChanged)
+
+	Q_PROPERTY(bool showButton       READ getFlagShowButton  WRITE setFlagShowButton   NOTIFY flagShowButtonChanged)
+
 	/// @property currentCamera
 	/// @brief The name of the current camera
-	Q_PROPERTY(QString currentCamera READ getCurrentCamera WRITE setCurrentCamera )
+	Q_PROPERTY(QString currentCamera READ getCurrentCamera   WRITE setCurrentCamera )
 
 	/// @property ra
 	/// @brief Set or get the current camera's right ascension [deg]
-	Q_PROPERTY(double ra             READ getRA            WRITE setRA )
+	Q_PROPERTY(double ra             READ getRA              WRITE setRA )
 
 	/// @property dec
 	/// @brief Set or get the current camera's declination [deg]
-	Q_PROPERTY(double dec            READ getDec           WRITE setDec )
+	Q_PROPERTY(double dec            READ getDec             WRITE setDec )
 
 	/// @property rotation
 	/// @brief Set or get the current camera's rotation [deg]
-	Q_PROPERTY(double rotation       READ getRotation      WRITE setRotation )
+	Q_PROPERTY(double rotation       READ getRotation        WRITE setRotation )
 
 	/// @property visible
 	/// @brief Set or get the current camera's visibility
-	Q_PROPERTY(bool visible          READ getVisibility    WRITE setVisibility )
+	Q_PROPERTY(bool visible          READ getVisibility      WRITE setVisibility )
 
     /** @} */
 
@@ -112,13 +120,22 @@ public:
 	double getRotation() const { return getRotation(currentCamera); }
 	double getVisibility() const { return getVisibility(currentCamera); }
 
+	bool isEnabled() const { return flagShowMosaicCamera; }
+	bool getFlagShowButton() const { return flagShowButton; }
+
 	void loadSettings();
 	void saveSettings() const;
 
     QStringList getCameraNames() const;
     void readPolygonSetsFromJson(const QString& cameraName, const QString& filename);
 
+signals:
+	void flagMosaicCameraVisibilityChanged(bool b);
+	void flagShowButtonChanged(bool b);
+
 public slots:
+	void enableMosaicCamera(bool b);
+	void setFlagShowButton(bool b);
 	void setCurrentCamera(const QString& cameraName);
 	void setRA(double ra);
 	void setDec(double dec);
@@ -126,19 +143,23 @@ public slots:
 	void setVisibility(bool visible);
 
 private:
-    QHash<QString, Camera> cameras;
+	QHash<QString, Camera> cameras;
 	QStringList cameraOrder;
 	QString userDirectory;
 	QSettings* conf;
 
 	QString currentCamera;
+	bool flagShowMosaicCamera;
+	bool flagShowButton;
 
-    void loadBuiltInCameras();
+	void loadBuiltInCameras();
 	void loadCameraOrder();
 	void initializeUserData();
 	void copyResourcesToUserDirectory();
 
+	StelGui* gui;
 	MosaicCameraDialog* configDialog;
+	StelButton* toolbarButton;
 };
 
 class MosaicCameraStelPluginInterface : public QObject, public StelPluginInterface
