@@ -20,6 +20,8 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
+#include "StelGui.hpp"
+#include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "MosaicCamera.hpp"
@@ -65,7 +67,10 @@ MosaicCamera::MosaicCamera()
 {
     setObjectName("MosaicCamera");
     configDialog = new MosaicCameraDialog();
-    conf = StelApp::getInstance().getSettings();
+    StelApp &app = StelApp::getInstance();
+    conf = app.getSettings();
+    gui = dynamic_cast<StelGui*>(app.getGui());
+    toolbarButton = Q_NULLPTR;
 }
 
 /*************************************************************************
@@ -130,6 +135,20 @@ void MosaicCamera::init()
     loadBuiltInCameras();
 
     loadSettings();
+
+    addAction("actionShow_MosaicCamera", N_("Mosaic Camera"), N_("Show Mosaic Camera"), "enabled", "");
+    addAction("actionShow_MosaicCamera_dialog", N_("Mosaic Camera"), N_("Show settings dialog"), configDialog, "visible");
+
+    enableMosaicCamera(true);
+}
+
+void MosaicCamera::enableMosaicCamera(bool b)
+{
+    if (b!=flagShowMosaicCamera)
+    {
+        flagShowMosaicCamera = b;
+        emit flagMosaicCameraVisibilityChanged(b);
+    }
 }
 
 void MosaicCamera::initializeUserData()
@@ -141,6 +160,30 @@ void MosaicCamera::initializeUserData()
         StelFileMgr::makeSureDirExistsAndIsWritable(userDirectory);
         copyResourcesToUserDirectory();
     }
+}
+
+void MosaicCamera::setFlagShowButton(bool b)
+{
+    if (gui != Q_NULLPTR)
+    {
+        if (b == true) {
+            if (toolbarButton == Q_NULLPTR) {
+                // Create the button
+                toolbarButton = new StelButton(Q_NULLPTR,
+                    QPixmap(":/MosaicCamera/bt_MosaicCamera_On.png"),
+                    QPixmap(":/MosaicCamera/bt_MosaicCamera_Off.png"),
+                    QPixmap(":/graphicGui/miscGlow32x32.png"),
+                    "actionShow_MosaicCamera",
+                    false,
+                    "actionShow_MosaicCamera_dialog");
+            }
+            gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+        }
+        else {
+            gui->getButtonBar()->hideButton("actionShow_MosaicCamera");
+        }
+    }
+	flagShowButton = b;
 }
 
 void MosaicCamera::copyResourcesToUserDirectory()
@@ -362,6 +405,9 @@ void MosaicCamera::setVisibility(bool visible)
 
 void MosaicCamera::draw(StelCore* core)
 {
+	if (!isEnabled())
+		return;
+
     const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
     StelPainter painter(prj);
 
