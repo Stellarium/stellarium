@@ -68,29 +68,29 @@ class MosaicCamera : public StelModule
 
 	/// @property enabled
 	/// @brief Are mosaic camera overlays enabled?
-	Q_PROPERTY(bool enabled		     READ isEnabled          WRITE enableMosaicCamera  NOTIFY flagMosaicCameraVisibilityChanged)
+	Q_PROPERTY(bool enabled		     READ isEnabled              WRITE enableMosaicCamera  NOTIFY flagMosaicCameraVisibilityChanged)
 
-	Q_PROPERTY(bool showButton       READ getFlagShowButton  WRITE setFlagShowButton   NOTIFY flagShowButtonChanged)
+	Q_PROPERTY(bool showButton       READ getFlagShowButton      WRITE setFlagShowButton   NOTIFY flagShowButtonChanged)
 
 	/// @property currentCamera
 	/// @brief The name of the current camera
-	Q_PROPERTY(QString currentCamera READ getCurrentCamera   WRITE setCurrentCamera )
+	Q_PROPERTY(QString currentCamera READ getCurrentCamera       WRITE setCurrentCamera )
 
 	/// @property ra
 	/// @brief Set or get the current camera's right ascension [deg]
-	Q_PROPERTY(double ra             READ getRA              WRITE setRA )
+	Q_PROPERTY(double ra             READ getCurrentRA           WRITE setCurrentRA )
 
 	/// @property dec
 	/// @brief Set or get the current camera's declination [deg]
-	Q_PROPERTY(double dec            READ getDec             WRITE setDec )
+	Q_PROPERTY(double dec            READ getCurrentDec          WRITE setCurrentDec )
 
 	/// @property rotation
 	/// @brief Set or get the current camera's rotation [deg]
-	Q_PROPERTY(double rotation       READ getRotation        WRITE setRotation )
+	Q_PROPERTY(double rotation       READ getCurrentRotation     WRITE setCurrentRotation )
 
 	/// @property visible
 	/// @brief Set or get the current camera's visibility
-	Q_PROPERTY(bool visible          READ getVisibility      WRITE setVisibility )
+	Q_PROPERTY(bool visible          READ getCurrentVisibility   WRITE setCurrentVisibility )
 
     /** @} */
 
@@ -104,21 +104,16 @@ public:
 
 	bool configureGui(bool show=true) override;
 
-    void setRA(const QString& cameraName, double ra);
-    void setDec(const QString& cameraName, double dec);
-    void setRotation(const QString& cameraName, double rotation);
-    void setVisibility(const QString& cameraName, bool visible);
-
     double getRA(const QString& cameraName) const;
     double getDec(const QString& cameraName) const;
     double getRotation(const QString& cameraName) const;
     bool getVisibility(const QString& cameraName) const;
 
 	QString getCurrentCamera() const { return currentCamera; }
-	double getRA() const { return getRA(currentCamera); }
-	double getDec() const { return getDec(currentCamera); }
-	double getRotation() const { return getRotation(currentCamera); }
-	double getVisibility() const { return getVisibility(currentCamera); }
+	double getCurrentRA() const { return getRA(currentCamera); }
+	double getCurrentDec() const { return getDec(currentCamera); }
+	double getCurrentRotation() const { return getRotation(currentCamera); }
+	double getCurrentVisibility() const { return getVisibility(currentCamera); }
 
 	bool isEnabled() const { return flagShowMosaicCamera; }
 	bool getFlagShowButton() const { return flagShowButton; }
@@ -134,13 +129,19 @@ signals:
 	void flagShowButtonChanged(bool b);
 
 public slots:
+    void setRA(const QString& cameraName, double ra);
+    void setDec(const QString& cameraName, double dec);
+    void setRotation(const QString& cameraName, double rotation);
+    void setVisibility(const QString& cameraName, bool visible);
+	void setPosition(const QString& cameraName, double ra, double dec, double rotation);
+
 	void enableMosaicCamera(bool b);
 	void setFlagShowButton(bool b);
 	void setCurrentCamera(const QString& cameraName);
-	void setRA(double ra);
-	void setDec(double dec);
-	void setRotation(double rotation);
-	void setVisibility(bool visible);
+	void setCurrentRA(double ra);
+	void setCurrentDec(double dec);
+	void setCurrentRotation(double rotation);
+	void setCurrentVisibility(bool visible);
 
 private:
 	QHash<QString, Camera> cameras;
