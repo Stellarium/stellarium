@@ -24,6 +24,7 @@
 #include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "MosaicCamera.hpp"
 #include "MosaicCameraDialog.hpp"
 #include "StelUtils.hpp"
@@ -140,6 +141,11 @@ void MosaicCamera::init()
 
     addAction("actionShow_MosaicCamera", N_("Mosaic Camera"), N_("Show Mosaic Camera"), "enabled", "");
     addAction("actionShow_MosaicCamera_dialog", N_("Mosaic Camera"), N_("Show settings dialog"), configDialog, "visible");
+    addAction("actionSetRADecToView", N_("Mosaic Camera"), N_("Set RA/Dec to current view"), "setRADecToView()", "");
+    addAction("actionIncrementRotation", N_("Mosaic Camera"), N_("Increment rotation"), "incrementRotation()", "");
+    addAction("actionDecrementRotation", N_("Mosaic Camera"), N_("Decrement rotation"), "decrementRotation()", "");
+    addAction("actionNextCamera", N_("Mosaic Camera"), N_("Next camera"), "nextCamera()", "");
+    addAction("actionPreviousCamera", N_("Mosaic Camera"), N_("Previous camera"), "previousCamera()", "");
 
     enableMosaicCamera(true);
     if (currentCamera == "")
@@ -366,6 +372,46 @@ void MosaicCamera::setPosition(const QString& cameraName, double ra, double dec,
     setRA(cameraName, ra);
     setDec(cameraName, dec);
     setRotation(cameraName, rotation);
+}
+
+void MosaicCamera::setRADecToView()
+{
+	Vec3d current = GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, current);
+    // convert to degrees from radians
+	ra = std::fmod((ra*180/M_PI)+360., 360.);
+	dec = dec*180/M_PI;
+    setCurrentRA(ra);
+    setCurrentDec(dec);
+}
+
+void MosaicCamera::incrementRotation()
+{
+    double rotation = getRotation(currentCamera);
+    rotation += 5.0;
+    setRotation(currentCamera, rotation);
+}
+
+void MosaicCamera::decrementRotation()
+{
+    double rotation = getRotation(currentCamera);
+    rotation -= 5.0;
+    setRotation(currentCamera, rotation);
+}
+
+void MosaicCamera::nextCamera()
+{
+    int index = cameraOrder.indexOf(currentCamera);
+    index = (index + 1) % cameraOrder.size();
+    setCurrentCamera(cameraOrder[index]);
+}
+
+void MosaicCamera::previousCamera()
+{
+    int index = cameraOrder.indexOf(currentCamera);
+    index = (index - 1 + cameraOrder.size()) % cameraOrder.size();
+    setCurrentCamera(cameraOrder[index]);
 }
 
 double MosaicCamera::getRA(const QString& cameraName) const
