@@ -134,6 +134,11 @@ public slots:
     void setRotation(const QString& cameraName, double rotation);
     void setVisibility(const QString& cameraName, bool visible);
 	void setPosition(const QString& cameraName, double ra, double dec, double rotation);
+	void setRADecToView();
+	void incrementRotation();
+	void decrementRotation();
+	void nextCamera();
+	void previousCamera();
 
 	void enableMosaicCamera(bool b);
 	void setFlagShowButton(bool b);
