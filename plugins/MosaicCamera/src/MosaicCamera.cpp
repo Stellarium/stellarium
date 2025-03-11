@@ -355,6 +355,13 @@ void MosaicCamera::setVisibility(const QString& cameraName, bool visible)
     }
 }
 
+void MosaicCamera::setPosition(const QString& cameraName, double ra, double dec, double rotation)
+{
+    setRA(cameraName, ra);
+    setDec(cameraName, dec);
+    setRotation(cameraName, rotation);
+}
+
 double MosaicCamera::getRA(const QString& cameraName) const
 {
     return cameras.value(cameraName).ra;
@@ -383,22 +390,22 @@ void MosaicCamera::setCurrentCamera(const QString& cameraName)
     }
 }
 
-void MosaicCamera::setRA(double ra)
+void MosaicCamera::setCurrentRA(double ra)
 {
     setRA(currentCamera, ra);
 }
 
-void MosaicCamera::setDec(double dec)
+void MosaicCamera::setCurrentDec(double dec)
 {
     setDec(currentCamera, dec);
 }
 
-void MosaicCamera::setRotation(double rotation)
+void MosaicCamera::setCurrentRotation(double rotation)
 {
     setRotation(currentCamera, rotation);
 }
 
-void MosaicCamera::setVisibility(bool visible)
+void MosaicCamera::setCurrentVisibility(bool visible)
 {
     setVisibility(currentCamera, visible);
 }
