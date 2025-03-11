@@ -84,6 +84,7 @@ MosaicCamera::~MosaicCamera()
 void MosaicCamera::loadSettings()
 {
     conf->beginGroup("MosaicCamera");
+    currentCamera = conf->value("currentCamera").toString();
     int size = conf->beginReadArray("cameraVisibility");
     for (int i = 0; i < size; ++i) {
         conf->setArrayIndex(i);
@@ -100,6 +101,7 @@ void MosaicCamera::loadSettings()
 void MosaicCamera::saveSettings() const
 {
     conf->beginGroup("MosaicCamera");
+    conf->setValue("currentCamera", currentCamera);
     conf->beginWriteArray("cameraVisibility");
     int i = 0;
     for (auto it = cameras.constBegin(); it != cameras.constEnd(); ++it) {
@@ -140,6 +142,10 @@ void MosaicCamera::init()
     addAction("actionShow_MosaicCamera_dialog", N_("Mosaic Camera"), N_("Show settings dialog"), configDialog, "visible");
 
     enableMosaicCamera(true);
+    if (currentCamera == "")
+    {
+        setCurrentCamera(cameraOrder[0]);
+    }
 }
 
 void MosaicCamera::enableMosaicCamera(bool b)

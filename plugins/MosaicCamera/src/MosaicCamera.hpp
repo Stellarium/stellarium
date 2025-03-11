@@ -104,10 +104,10 @@ public:
 
 	bool configureGui(bool show=true) override;
 
-    double getRA(const QString& cameraName) const;
-    double getDec(const QString& cameraName) const;
-    double getRotation(const QString& cameraName) const;
-    bool getVisibility(const QString& cameraName) const;
+    Q_INVOKABLE double getRA(const QString& cameraName) const;
+    Q_INVOKABLE double getDec(const QString& cameraName) const;
+    Q_INVOKABLE double getRotation(const QString& cameraName) const;
+    Q_INVOKABLE bool getVisibility(const QString& cameraName) const;
 
 	QString getCurrentCamera() const { return currentCamera; }
 	double getCurrentRA() const { return getRA(currentCamera); }
