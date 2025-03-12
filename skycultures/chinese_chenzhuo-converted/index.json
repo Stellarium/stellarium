@@ -1,0 +1,1851 @@
+{
+  "id": "chinese_chenzhuo",
+  "region": "Eastern Asia",
+  "classification": ["historical"],
+  "fallback_to_international_names": false,
+  "constellations": [
+    {
+      "id": "CON chinese_chenzhuo P01",
+      "lines": [[75097, 72607, 70692, 69112, 65595]],
+      "common_name": {"english": "Northern Pole", "native": "北极", "pronounce": "Bei Ji"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P02",
+      "lines": [[72573, 62572, 59504, 63340]],
+      "common_name": {"english": "Four Advisors", "native": "四辅", "pronounce": "Si Fu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P03",
+      "lines": [[61281, 61281]],
+      "common_name": {"english": "Celestial One", "native": "天一", "pronounce": "Tian Yi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P04",
+      "lines": [[60998, 60998]],
+      "common_name": {"english": "Supreme One", "native": "太一", "pronounce": "Tai Yi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P05",
+      "lines": [[92056, 89908, 86201, 83895, 80331, 78527, 75458, 68756]],
+      "common_name": {"english": "Purple Forbidden Palace East Wall", "native": "紫微东垣", "pronounce": "Zi Wei Dong Yuan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P06",
+      "lines": [[61384, 56211, 52425, 47654, 40793, 33694, 25110]],
+      "common_name": {"english": "Purple Forbidden Palace West Wall", "native": "紫微西垣", "pronounce": "Zi Wei Xi Yuan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P07",
+      "lines": [[74605, 73199]],
+      "common_name": {"english": "Hidden Virtue", "native": "阴德", "pronounce": "Yin De"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P08",
+      "lines": [[75974, 77277, 75260], [75256, 77277, 75696]],
+      "common_name": {"english": "Royal Secretary", "native": "尚书", "pronounce": "Shang Shu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P09",
+      "lines": [[89937, 89937]],
+      "common_name": {"english": "Female Protocol", "native": "女史", "pronounce": "Nü Shi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P10",
+      "lines": [[86614, 86614]],
+      "common_name": {"english": "Official of Royal Archives", "native": "柱史", "pronounce": "Zhu Shi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P11",
+      "lines": [[87234, 90647, 88136, 84769, 87234]],
+      "common_name": {"english": "Maids-in-waiting", "native": "女御", "pronounce": "Nü Yu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P12",
+      "lines": [[80161, 80650, 81660], [80161, 78893, 82860]],
+      "common_name": {"english": "Celestial Pillar", "native": "天柱", "pronounce": "Tian Zhu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P13",
+      "lines": [[68537, 69373]],
+      "common_name": {"english": "Chief Judge", "native": "大理", "pronounce": "Da Li"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P14",
+      "lines": [[4283, 16489, 11767, 85822, 82080, 77055]],
+      "common_name": {"english": "Curved Array", "native": "钩陈", "pronounce": "Gou Chen"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P15",
+      "lines": [[105727, 102599, 101082, 100965, 102208, 104756, 105727]],
+      "common_name": {"english": "Six Jia", "native": "六甲", "pronounce": "Liu Jia"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P16",
+      "lines": [[5372, 5372]],
+      "common_name": {"english": "Great Emperor of Heaven", "native": "天皇大帝", "pronounce": "Tian Huang Da Di"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P17",
+      "lines": [[99255, 95167], [99255, 101260], [99255, 104105], [99255, 94083]],
+      "common_name": {"english": "Inner Seats of the Five Emperors", "native": "五帝内座", "pronounce": "Wu Di Nei Zuo"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P18",
+      "lines": [[107119, 108535, 106032, 107119, 109400, 111532, 114222, 116727, 108535, 114222], [111532, 108535, 109400]],
+      "common_name": {"english": "Canopy of the Emperor", "native": "华盖", "pronounce": "Hua Gai"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P19",
+      "lines": [[5928, 115746, 109693, 112833, 113116, 112519, 111056, 111242, 111660]],
+      "common_name": {"english": "Canopy Support (Adjunct to the Canopy)", "native": "杠(附华盖)", "pronounce": "Gang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P20",
+      "lines": [[105199, 108917, 110817, 112724, 113864, 115088, 9598, 12273, 14862]],
+      "common_name": {"english": "Guest House", "native": "传舍", "pronounce": "Chuan She"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P21",
+      "lines": [[47594, 46977, 45038, 44390, 42527, 42080]],
+      "common_name": {"english": "Inner Steps", "native": "内阶", "pronounce": "Nei Jie"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P22",
+      "lines": [[95081, 98702, 97433, 94376, 95081], [94376, 92782, 94648, 97433]],
+      "common_name": {"english": "Celestial Kitchen", "native": "天厨", "pronounce": "Tian Chu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P23",
+      "lines": [[22783, 29997, 33449, 28358, 25197, 23522, 22783], [25197, 23040, 23783]],
+      "common_name": {"english": "Eight Kinds of Crops", "native": "八谷", "pronounce": "Ba Gu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P24",
+      "lines": [[87585, 85829, 85670, 87833, 86414]],
+      "common_name": {"english": "Celestial Flail", "native": "天棓", "pronounce": "Tian Bang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P25",
+      "lines": [[63432, 62402, 67627, 65728, 71040, 71111]],
+      "common_name": {"english": "Celestial Bed", "native": "天床", "pronounce": "Tian Chuang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P26",
+      "lines": [[52338, 50685]],
+      "common_name": {"english": "Inner Kitchen", "native": "内厨", "pronounce": "Nei Chu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P27",
+      "lines": [[41704, 45075, 46733, 48319, 46853, 44901]],
+      "common_name": {"english": "Administrative Center", "native": "文昌", "pronounce": "Wen Chang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P28",
+      "lines": [[52353, 50933, 51448]],
+      "common_name": {"english": "Three Excellencies (Wuxian)", "native": "三公(巫咸)", "pronounce": "San Gong (Wuxian)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P29",
+      "lines": [[50546, 50546]],
+      "common_name": {"english": "Royals", "native": "太尊", "pronounce": "Tai Zun"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P30",
+      "lines": [[51814, 51459, 52136, 53261, 53043, 52478, 51814]],
+      "common_name": {"english": "Celestial Prison", "native": "天牢", "pronounce": "Tian Lao"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P31",
+      "lines": [[54539, 54539]],
+      "common_name": {"english": "Guard of the Sun", "native": "太阳守", "pronounce": "Tai Yang Shou"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P32",
+      "lines": [[55044, 53706, 55086, 56731, 55044]],
+      "common_name": {"english": "Eunuch", "native": "势", "pronounce": "Shi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P33",
+      "lines": [[57399, 57399]],
+      "common_name": {"english": "Prime Minister", "native": "相", "pronounce": "Xiang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P34",
+      "lines": [[66234, 64906, 65550]],
+      "common_name": {"english": "Three Excellencies (Gan School)", "native": "三公(甘氏)", "pronounce": "San gong(Gan Shi)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P35",
+      "lines": [[69732, 69732]],
+      "common_name": {"english": "Sombre Lance", "native": "玄戈", "pronounce": "Xuan Ge"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P36",
+      "lines": [[57477, 56083, 56944, 58181, 57477]],
+      "common_name": {"english": "Judge for Nobility", "native": "天理", "pronounce": "Tian Li"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P37",
+      "lines": [[54061, 53910, 58001, 59774, 62956, 65378, 67301]],
+      "common_name": {"english": "Northern Dipper", "native": "北斗", "pronounce": "Bei Dou"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P38",
+      "lines": [[65477, 65477]],
+      "common_name": {"english": "Assistant (Vassal of Northern Dipper)", "native": "辅(附北斗)", "pronounce": "Fu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo P39",
+      "lines": [[70497, 69713], [70497, 69483]],
+      "common_name": {"english": "Celestial Spear", "native": "天枪", "pronounce": "Tian Qiang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S01",
+      "lines": [[60129, 61941, 63090, 63608, 64241]],
+      "common_name": {"english": "Supreme Palace Left Wall", "native": "太微左垣", "pronounce": "Tai Wei Zuo Yuan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S02",
+      "lines": [[57757, 55434, 55642, 54879, 54872]],
+      "common_name": {"english": "Supreme Palace Right Wall", "native": "太微右垣", "pronounce": "Tai Wei You Yuan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S03",
+      "lines": [[60172, 60172]],
+      "common_name": {"english": "Usher to the Court", "native": "谒者", "pronounce": "Ye Zhe"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S04",
+      "lines": [[62325, 61960, 62267, 62325]],
+      "common_name": {"english": "Inner Seats of Three Excellencies", "native": "三公内座", "pronounce": "San Gong Nei Zuo"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S05",
+      "lines": [[63355, 62807, 62356]],
+      "common_name": {"english": "Inner Seats of Nine Senior Officers", "native": "九卿内座", "pronounce": "Jiu Qing Nei Zuo"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S06",
+      "lines": [[64394, 62886, 61418, 60202, 59819]],
+      "common_name": {"english": "Inner Five Lords", "native": "内五诸侯", "pronounce": "Nei Wu Zhu Hou(Tai Wei Yuan)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S07",
+      "lines": [[57328, 57380, 58590, 58948]],
+      "common_name": {"english": "Inner Screen", "native": "内屏", "pronounce": "Nei Ping"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S08",
+      "lines": [[57646, 57632, 58159], [57606, 57632, 57779]],
+      "common_name": {"english": "Seats of the Five Emperors", "native": "五帝坐", "pronounce": "Wu Di Zuo"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S09",
+      "lines": [[58858, 58858]],
+      "common_name": {"english": "Officer of Honour", "native": "幸臣", "pronounce": "Xing Chen"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S10",
+      "lines": [[57565, 57565]],
+      "common_name": {"english": "Crown Prince", "native": "太子", "pronounce": "Tai Zi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S11",
+      "lines": [[56975, 56975]],
+      "common_name": {"english": "Retinue (In Supreme Palace)", "native": "从官(太微)", "pronounce": "Cong Guan(Tai Wei)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S12",
+      "lines": [[63121, 63121]],
+      "common_name": {"english": "Captain of the Bodyguards", "native": "郎将", "pronounce": "Lang Jiang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S13",
+      "lines": [[54951, 54951]],
+      "common_name": {"english": "Emperor's Bodyguard", "native": "虎贲", "pronounce": "Hu Ben"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S14",
+      "lines": [[56997, 57670, 58654, 60646, 61317], [60646, 59856, 59923]],
+      "common_name": {"english": "Royal Guards", "native": "常陈", "pronounce": "Chang Chen"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S15",
+      "lines": [[60742, 60697, 60746, 60904, 61071, 61295], [60746, 60514, 60351, 60327], [60697, 60170, 60066, 59847], [60904, 60514, 60170], [61071, 60351, 60168, 60066], [61295, 60941, 60599, 60327, 59847], [60599, 59847], [60742, 60170]],
+      "common_name": {"english": "Officers of the Imperial Guard", "native": "郎位", "pronounce": "Lang Wei"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S16",
+      "lines": [[56647, 56127, 55084]],
+      "common_name": {"english": "The Hall of Glory", "native": "明堂", "pronounce": "Ming Tang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S17",
+      "lines": [[55137, 54336, 53907]],
+      "common_name": {"english": "Astronomical Observatory", "native": "灵台", "pronounce": "Ling Tai"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S18",
+      "lines": [[53417, 53954, 52689, 52911]],
+      "common_name": {"english": "Junior Officers", "native": "少微", "pronounce": "Shao Wei"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S19",
+      "lines": [[52638, 52422, 52457, 52686]],
+      "common_name": {"english": "Long Wall", "native": "长垣", "pronounce": "Chang Yuan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S20",
+      "lines": [[44127, 44471]],
+      "common_name": {"english": "Three Steps (Upper Step)", "native": "三台(上台)", "pronounce": "San Tai"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S21",
+      "lines": [[50372, 50801]],
+      "common_name": {"english": "Three Steps (Middle Step)", "native": "三台(中台)", "pronounce": "San Tai"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S22",
+      "lines": [[55219, 55203]],
+      "common_name": {"english": "Three Steps (Lower Step)", "native": "三台(下台)", "pronounce": "San Tai"}
+    },
+    {
+      "id": "CON chinese_chenzhuo S23",
+      "lines": [[44127, 44471, 50372, 50801, 55219, 55203]],
+      "common_name": {"english": "", "native": "三台"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H01",
+      "lines": [[84379, 85693, 86974, 88794, 92043, 93747, 92946, 89962, 88048, 86263, 84012]],
+      "common_name": {"english": "Heavenly Market Left Wall", "native": "天市左垣", "pronounce": "Tian Shi Zuo Yuan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H02",
+      "lines": [[80816, 80170, 79043, 78072, 77233, 76276, 77070, 77622, 79593, 79882, 81377]],
+      "common_name": {"english": "Heavenly Market Right Wall", "native": "天市右垣", "pronounce": "Tian Shi You Yuan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H03",
+      "lines": [[88404, 88175, 85537, 84514, 85365, 86284, 88404]],
+      "common_name": {"english": "Municipal Office", "native": "市楼", "pronounce": "Shi Lou"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H04",
+      "lines": [[84880, 83262]],
+      "common_name": {"english": "Commodity Market", "native": "车肆", "pronounce": "Che Si"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H05",
+      "lines": [[86742, 87108]],
+      "common_name": {"english": "Official for the Royal Clan", "native": "宗正", "pronounce": "Zong Zheng"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H06",
+      "lines": [[88601, 88192], [88601, 88290], [88601, 88149]],
+      "common_name": {"english": "Official of Religious Ceremonies", "native": "宗人", "pronounce": "Zong Ren"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H07",
+      "lines": [[88765, 88771]],
+      "common_name": {"english": "Patriarchal Clan", "native": "宗", "pronounce": "Zong"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H08",
+      "lines": [[88886, 88267]],
+      "common_name": {"english": "Textile Ruler", "native": "帛度", "pronounce": "Bo Du"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H09",
+      "lines": [[88818, 87747]],
+      "common_name": {"english": "Butcher's Shops", "native": "屠肆", "pronounce": "Tu Si"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H10",
+      "lines": [[86032, 86032]],
+      "common_name": {"english": "Astrologer", "native": "候", "pronounce": "Hou"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H11",
+      "lines": [[84345, 84345]],
+      "common_name": {"english": "Emperor's Seat", "native": "帝坐(天市)", "pronounce": "Di Zuo"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H12",
+      "lines": [[82764, 82802, 83430, 83613]],
+      "common_name": {"english": "Eunuch Official", "native": "宦者", "pronounce": "Huan Zhe"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H13",
+      "lines": [[81008, 80463]],
+      "common_name": {"english": "Jewel Market", "native": "列肆", "pronounce": "Lie Si"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H14",
+      "lines": [[83000, 82673, 82073, 82402, 82216]],
+      "common_name": {"english": "Dipper for Liquids", "native": "斗", "pronounce": "Dou"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H15",
+      "lines": [[81007, 82480, 83601, 85355]],
+      "common_name": {"english": "Dipper for Solids", "native": "斛", "pronounce": "Hu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H16",
+      "lines": [[77048, 76127, 75695, 76267, 76952, 77512, 78159, 78493, 78459, 77048]],
+      "common_name": {"english": "Coiled Thong", "native": "贯索", "pronounce": "Guan Suo"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H17",
+      "lines": [[81833, 80460, 79119, 77655, 76669, 75411, 73555]],
+      "common_name": {"english": "Seven Excellencies", "native": "七公", "pronounce": "Qi Gong"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H18",
+      "lines": [[90191, 89826, 87808, 84573, 83313, 83207, 81693, 80197, 80181]],
+      "common_name": {"english": "Celestial Discipline", "native": "天纪", "pronounce": "Tian Ji"}
+    },
+    {
+      "id": "CON chinese_chenzhuo H19",
+      "lines": [[84380, 84606, 85112]],
+      "common_name": {"english": "Woman's Bed", "native": "女床", "pronounce": "Nü Chuang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 01A",
+      "lines": [[65474, 66249]],
+      "common_name": {"english": "Horn", "native": "角", "pronounce": "Jiao Xiu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 01B",
+      "lines": [[65420, 66006]],
+      "common_name": {"english": "Flat Road", "native": "平道", "pronounce": "Ping Dao"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 01C",
+      "lines": [[66936, 66200]],
+      "common_name": {"english": "Celestial Farmland (In Horn Mansion)", "native": "天田(角宿)", "pronounce": "Tian Tian(Jiao Xiu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 01D",
+      "lines": [[64238, 64238]],
+      "common_name": {"english": "Recommending Virtuous Men", "native": "进贤", "pronounce": "Jin Xian"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 01E",
+      "lines": [[67480, 66763, 66727]],
+      "common_name": {"english": "Tripod of the Zhou", "native": "周鼎", "pronounce": "Zhou Ding"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 01F",
+      "lines": [[65639, 64407]],
+      "common_name": {"english": "Celestial Gate", "native": "天门", "pronounce": "Tian Men"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 01G",
+      "lines": [[65835, 64962]],
+      "common_name": {"english": "Judging", "native": "平", "pronounce": "Ping"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 01H",
+      "lines": [[68002, 71860, 71352, 68933, 65109, 64348, 61932, 61622, 60823, 60710, 61932]],
+      "common_name": {"english": "Arsenal", "native": "库楼", "pronounce": "Ku Lou"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 01I",
+      "lines": [[67464, 67472, 68245, 68862]],
+      "common_name": {"english": "Railings", "native": "衡", "pronounce": "Heng"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 01J",
+      "lines": [[68702, 62434]],
+      "common_name": {"english": "Southern Gate", "native": "南门", "pronounce": "Nan Men"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 01K",
+      "lines": [[67669, 67457, 67153]],
+      "common_name": {"english": "Pillars (In Arsenal)", "native": "柱(库楼)", "pronounce": "Zhu(Jiao Xiu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 01L",
+      "lines": [[70054, 70300, 69598]],
+      "common_name": {"english": "Pillars (In Arsenal)", "native": "柱(库楼)", "pronounce": "Zhu(Jiao Xiu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 01M",
+      "lines": [[70574, 70104, 69996]],
+      "common_name": {"english": "Pillars (In Arsenal)", "native": "柱(库楼)", "pronounce": "Zhu(Jiao Xiu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 01N",
+      "lines": [[68282, 68523, 68079]],
+      "common_name": {"english": "Pillars (In Arsenal)", "native": "柱(库楼)", "pronounce": "Zhu(Jiao Xiu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 01O",
+      "lines": [[65936, 65535, 65593]],
+      "common_name": {"english": "Pillars (In Arsenal)", "native": "柱(库楼)", "pronounce": "Zhu(Jiao Xiu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 02A",
+      "lines": [[69427, 69701, 70755], [69427, 69974]],
+      "common_name": {"english": "Neck", "native": "亢", "pronounce": "Kang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 02B",
+      "lines": [[69673, 69673]],
+      "common_name": {"english": "Great Horn", "native": "大角", "pronounce": "Da Jiao"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 02C",
+      "lines": [[67929, 66803, 67172, 69269, 69658, 69929, 70469]],
+      "common_name": {"english": "Executions", "native": "折威", "pronounce": "Zhe Wei"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 02D",
+      "lines": [[72125, 71762, 71795]],
+      "common_name": {"english": "Left Conductor", "native": "左摄提", "pronounce": "Zuo She Ti"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 02E",
+      "lines": [[67927, 67275, 67459]],
+      "common_name": {"english": "Right Conductor", "native": "右摄提", "pronounce": "You She Ti"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 02F",
+      "lines": [[72571, 72357]],
+      "common_name": {"english": "Trials", "native": "顿顽", "pronounce": "Dun Wan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 02G",
+      "lines": [[70753, 70306]],
+      "common_name": {"english": "Gate of Yang", "native": "阳门", "pronounce": "Yang Men"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 03A",
+      "lines": [[72622, 74392, 76333, 74785]],
+      "common_name": {"english": "Root", "native": "氐", "pronounce": "Di"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 03B",
+      "lines": [[73620, 73620]],
+      "common_name": {"english": "Celestial Milk", "native": "天乳", "pronounce": "Tian Ru"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 03C",
+      "lines": [[71075, 71075]],
+      "common_name": {"english": "Twinkling Indicator", "native": "招摇", "pronounce": "Zhao Yao"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 03D",
+      "lines": [[72105, 71284, 71053]],
+      "common_name": {"english": "Celestial Lance", "native": "梗河", "pronounce": "Geng He"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 03E",
+      "lines": [[71115, 69226, 68276]],
+      "common_name": {"english": "Seat of the Emperor (At Great Horn)", "native": "帝坐(大角)", "pronounce": "Di Zuo (Da Jiao)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 03F",
+      "lines": [[70027, 69829, 69585, 69536, 69612, 69989, 70027]],
+      "common_name": {"english": "Boats and Lake", "native": "亢池", "pronounce": "Kang Chi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 03G",
+      "lines": [[73714, 73184, 72929]],
+      "common_name": {"english": "Battle Chariots", "native": "阵车", "pronounce": "Zhen Che"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 03H",
+      "lines": [[76935, 77678, 78639, 76935]],
+      "common_name": {"english": "Chariots and Cavalry", "native": "车骑", "pronounce": "Che Qi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 03I",
+      "lines": [[77635, 77840]],
+      "common_name": {"english": "Celestial Spokes", "native": "天辐", "pronounce": "Tian Fu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 03J",
+      "lines": [[78323, 78323]],
+      "common_name": {"english": "Chariots and Cavalry General", "native": "骑阵将军", "pronounce": "Qi Zhen Jiang Jun"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 03K",
+      "lines": [[72010, 72800, 71865, 73334, 73273, 72683, 74117, 73807, 74395], [74117, 74376], [74117, 73111], [72010, 73049, 73624, 73937], [73624, 74604, 74857], [73624, 75177, 75304, 75501, 75141, 76552, 76829, 75828], [76829, 78914], [76552, 76939, 76705, 76945], [75141, 73334]],
+      "common_name": {"english": "Imperial Guards", "native": "骑官", "pronounce": "Qi Guan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 03L",
+      "lines": [[69038, 69038]],
+      "common_name": {"english": "Celestial Arsenal", "native": "天库", "pronounce": "Tian Ku"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 04A",
+      "lines": [[78820, 78401, 78265, 78104], [78933, 78820]],
+      "common_name": {"english": "Room", "native": "房", "pronounce": "Fang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 04B",
+      "lines": [[78933, 78990]],
+      "common_name": {"english": "Lock (Adjunct of Room)", "native": "钩钤(附房)", "pronounce": "Gou Qian"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 04C",
+      "lines": [[79374, 79374]],
+      "common_name": {"english": "Door Bolt", "native": "键闭", "pronounce": "Jian Bi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 04D",
+      "lines": [[80343, 80569, 80894]],
+      "common_name": {"english": "Punishment", "native": "罚", "pronounce": "Fa"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 04E",
+      "lines": [[81724, 81754, 80975, 80473]],
+      "common_name": {"english": "Eastern Door", "native": "东咸", "pronounce": "Dong Xian"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 04F",
+      "lines": [[78727, 78207, 77853, 76880]],
+      "common_name": {"english": "Western Door", "native": "西咸", "pronounce": "Xi Xian"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 04G",
+      "lines": [[78246, 78246]],
+      "common_name": {"english": "Solar Star", "native": "日", "pronounce": "Ri"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 04H",
+      "lines": [[77984, 77900]],
+      "common_name": {"english": "Retinue (In Room Mansion)", "native": "从官(房宿)", "pronounce": "Cong Guan(Fang Xiu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 05A",
+      "lines": [[80112, 80763, 81266]],
+      "common_name": {"english": "Heart", "native": "心", "pronounce": "Xin"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 05B",
+      "lines": [[80337, 81304], [80337, 80911], [79320, 78384], [79320, 78918], [80212, 79653], [80212, 80582], [80945, 81305], [80945, 81972], [80337, 79320, 80212, 80945, 80337]],
+      "common_name": {"english": "Group of Soldiers", "native": "积卒", "pronounce": "Ji Zu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 06A",
+      "lines": [[82396, 82514, 82671, 84143, 86228, 87073, 86670, 85927], [86670, 85696], [82514, 82545]],
+      "common_name": {"english": "Tail", "native": "尾", "pronounce": "Wei"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 06C",
+      "lines": [[87846, 89112, 88714, 86486, 86092, 87846]],
+      "common_name": {"english": "Tortoise", "native": "龟", "pronounce": "Gui"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 06D",
+      "lines": [[85755, 85340, 84970, 84405]],
+      "common_name": {"english": "Celestial River", "native": "天江", "pronounce": "Tian Jiang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 06E",
+      "lines": [[87261, 87261]],
+      "common_name": {"english": "Fu Yue", "native": "傅说", "pronounce": "Fu Yue"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 06F",
+      "lines": [[87616, 87616]],
+      "common_name": {"english": "Fish", "native": "鱼", "pronounce": "Yu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 07A",
+      "lines": [[88635, 89931, 90185, 89642]],
+      "common_name": {"english": "Winnowing Basket", "native": "箕", "pronounce": "Ji"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 07B",
+      "lines": [[90422, 90414, 90568]],
+      "common_name": {"english": "Pestle", "native": "杵", "pronounce": "Chu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 07C",
+      "lines": [[88550, 88550]],
+      "common_name": {"english": "Chaff", "native": "糠", "pronounce": "Kang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 08A",
+      "lines": [[89341, 90496, 92041, 92855, 93864, 93506]],
+      "common_name": {"english": "South Dipper", "native": "南斗", "pronounce": "Nan Dou"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 08B",
+      "lines": [[93085, 93683, 94141, 94820, 95168, 95176]],
+      "common_name": {"english": "Banner", "native": "建", "pronounce": "Jian"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 08C",
+      "lines": [[91117, 91726, 91845, 92202, 92175, 93026, 93429, 93805, 93526]],
+      "common_name": {"english": "Market Officer", "native": "天弁", "pronounce": "Tian Bian"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 08D",
+      "lines": [[94114, 93825, 93174, 92989, 91875, 90968, 90887, 90982, 91494, 92308, 92953, 93542, 94005, 94160, 94114]],
+      "common_name": {"english": "River Turtle", "native": "鳖", "pronounce": "Bie"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 08E",
+      "lines": [[98258, 96950]],
+      "common_name": {"english": "Celestial Cock", "native": "天鸡", "pronounce": "Tian Ji"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 08F",
+      "lines": [[88012, 87836, 87706, 88116, 89153, 89980, 89678, 88839, 88012]],
+      "common_name": {"english": "Celestial Keyhole", "native": "天籥", "pronounce": "Tian Yue"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 08G",
+      "lines": [[93134, 93667]],
+      "common_name": {"english": "Dog", "native": "狗", "pronounce": "Gou"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 08H",
+      "lines": [[98066, 98353, 98688, 98162, 98066]],
+      "common_name": {"english": "Territory of Dog", "native": "狗国", "pronounce": "Gou Guo"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 08I",
+      "lines": [[97067, 96234, 95823, 96178, 98032, 97749, 97067], [98412, 97749], [94986, 96234], [95823, 95241], [98512, 98032]],
+      "common_name": {"english": "Celestial Spring", "native": "天渊", "pronounce": "Tian Yuan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 08J",
+      "lines": [[90763, 90763]],
+      "common_name": {"english": "Peasant", "native": "农丈人", "pronounce": "Nong Zhang Ren"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 09A",
+      "lines": [[100345, 100881, 101123, 101027, 100345, 100310], [100345, 100064]],
+      "common_name": {"english": "Leading Ox", "native": "牵牛", "pronounce": "Qian Niu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 09B",
+      "lines": [[100195, 100062, 99825], [101090, 101384, 100738], [101997, 102094, 102092], [102094, 101384, 100062]],
+      "common_name": {"english": "Celestial Farmland (In Ox Mansion)", "native": "天田(牛宿)", "pronounce": "Tian Tian(Niu Xiu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 09C",
+      "lines": [[100469, 102497, 100852], [102497, 103882, 103127], [103882, 102916], [103882, 105854, 104752], [105854, 104738]],
+      "common_name": {"english": "Nine Water Wells", "native": "九坎", "pronounce": "Jiu Kan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 09D",
+      "lines": [[98036, 97649, 97278]],
+      "common_name": {"english": "Drum at the River", "native": "河鼓", "pronounce": "He Gu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 09E",
+      "lines": [[91919, 91262, 91971]],
+      "common_name": {"english": "Weaving Girl", "native": "织女", "pronounce": "Zhi Nü"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 09F",
+      "lines": [[96757, 97365, 96837], [97365, 98337, 98738, 98438, 98819, 98754, 99742]],
+      "common_name": {"english": "Left Flag", "native": "左旗", "pronounce": "Zuo Qi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 09G",
+      "lines": [[96229, 95501, 96665], [95501, 95585, 96468, 97804, 99473, 101101, 101345]],
+      "common_name": {"english": "Flag of the Drum", "native": "鼓旗", "pronounce": "Gu Qi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 09H",
+      "lines": [[98103, 98526, 98823, 100541]],
+      "common_name": {"english": "Celestial Drumstick", "native": "天桴", "pronounce": "Tian Fu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 09I",
+      "lines": [[101923, 102026], [101923, 101507]],
+      "common_name": {"english": "Network of Dykes", "native": "罗堰", "pronounce": "Luo Yan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 09J",
+      "lines": [[92791, 92420, 93194, 93903]],
+      "common_name": {"english": "Clepsydra Terrace", "native": "渐台", "pronounce": "Jian Tai"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 09K",
+      "lines": [[92862, 94481, 94713, 95556, 96052]],
+      "common_name": {"english": "Imperial Passageway", "native": "辇道", "pronounce": "Nian Dao"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10A",
+      "lines": [[102618, 103045, 103005, 102624]],
+      "common_name": {"english": "Labor Women", "native": "须女", "pronounce": "Xu Nü"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10B",
+      "lines": [[101936, 101847, 101692, 102561, 102770]],
+      "common_name": {"english": "Pearls on Ladies' Wear", "native": "离珠", "pronounce": "Li Zhu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10C",
+      "lines": [[101421, 101916, 101800, 101483, 101421], [101483, 101882]],
+      "common_name": {"english": "Rotten Gourd", "native": "败瓜", "pronounce": "Bai Gua"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10D",
+      "lines": [[102532, 101958, 101769, 102281, 102532], [101769, 101589]],
+      "common_name": {"english": "Good Gourd", "native": "瓠瓜", "pronounce": "Hu Gua"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10E",
+      "lines": [[104732, 105138, 104887, 103413, 102098, 99639, 97165, 100453, 102488, 104732]],
+      "common_name": {"english": "Celestial Ford", "native": "天津", "pronounce": "Tian Jin"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10F",
+      "lines": [[94779, 95853, 96441, 96014]],
+      "common_name": {"english": "Xi Zhong", "native": "奚仲", "pronounce": "Xi Zhong"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10G",
+      "lines": [[98583, 101093, 102422, 102431], [98583, 98962, 98073, 99655]],
+      "common_name": {"english": "Basket for Mulberry Leaves", "native": "扶筐", "pronounce": "Fu Kuang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10H",
+      "lines": [[102978, 102485]],
+      "common_name": {"english": "Twelve States (Zhao State)", "native": "赵", "pronounce": "Shi Er Guo (Zhao)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10I",
+      "lines": [[103226, 103226]],
+      "common_name": {"english": "Twelve States (Yue State)", "native": "越", "pronounce": "Shi Er Guo (Yue)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10J",
+      "lines": [[104139, 104019]],
+      "common_name": {"english": "Twelve States (Zhou State)", "native": "周", "pronounce": "Shi Er Guo (Zhou)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10K",
+      "lines": [[102831, 102831]],
+      "common_name": {"english": "Twelve States (Qi State)", "native": "齐", "pronounce": "Shi Er Guo (Qi)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10L",
+      "lines": [[102487, 102487]],
+      "common_name": {"english": "Twelve States (Zheng State)", "native": "郑", "pronounce": "Shi Er Guo (Zheng)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10M",
+      "lines": [[103389, 103389]],
+      "common_name": {"english": "Twelve States (Chu State)", "native": "楚", "pronounce": "Shi Er Guo (Chu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10N",
+      "lines": [[105515, 104963]],
+      "common_name": {"english": "Twelve States (Qin State)", "native": "秦", "pronounce": "Shi Er Guo (Qin)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10O",
+      "lines": [[103777, 103777]],
+      "common_name": {"english": "Twelve States (Yan State)", "native": "燕", "pronounce": "Shi Er Guo (Yan)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10P",
+      "lines": [[104234, 104234]],
+      "common_name": {"english": "Twelve States (Wei State)", "native": "魏", "pronounce": "Shi Er Guo (Wei)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10Q",
+      "lines": [[105140, 104174]],
+      "common_name": {"english": "Twelve States (Dai State)", "native": "代", "pronounce": "Shi Er Guo (Dai)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10R",
+      "lines": [[103738, 103738]],
+      "common_name": {"english": "Twelve States (Jin State)", "native": "晋", "pronounce": "Shi Er Guo (Jin)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 10S",
+      "lines": [[104148, 104148]],
+      "common_name": {"english": "Twelve States (Han State)", "native": "韩", "pronounce": "Shi Er Guo (Han)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 11A",
+      "lines": [[106278, 104987]],
+      "common_name": {"english": "Emptiness", "native": "虚", "pronounce": "Xu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 11B",
+      "lines": [[105570, 104031]],
+      "common_name": {"english": "Deified Judge of Life", "native": "司命", "pronounce": "Si Ming"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 11C",
+      "lines": [[104858, 104521]],
+      "common_name": {"english": "Deified Judge of Rank", "native": "司禄", "pronounce": "Si Lu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 11D",
+      "lines": [[106787, 105502]],
+      "common_name": {"english": "Deified Judge of Disaster and Good Fortune", "native": "司危", "pronounce": "Si wei"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 11E",
+      "lines": [[107472, 106140]],
+      "common_name": {"english": "Deified Judge of Right and Wrong", "native": "司非", "pronounce": "Si Fei"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 11F",
+      "lines": [[107556, 106985]],
+      "common_name": {"english": "Crying", "native": "哭", "pronounce": "Ku"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 11G",
+      "lines": [[109139, 109472]],
+      "common_name": {"english": "Weeping", "native": "泣", "pronounce": "Qi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 11H",
+      "lines": [[107188, 106723, 106559, 106039, 105881, 106654, 108661, 109789, 109737, 109786, 109332, 108784, 107901, 107188]],
+      "common_name": {"english": "Celestial Ramparts", "native": "天垒城", "pronounce": "Tian Lei Cheng"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 11I",
+      "lines": [[111954, 111188, 109289, 107380]],
+      "common_name": {"english": "Decayed Mortar", "native": "败臼", "pronounce": "Bai Jiu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 11J",
+      "lines": [[106340, 106067, 105476]],
+      "common_name": {"english": "Jade Ornament on Ladies' Wear", "native": "离瑜", "pronounce": "Li Yu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 12A",
+      "lines": [[109074, 109427, 107315], [109427, 110672]],
+      "common_name": {"english": "Rooftop", "native": "危宿", "pronounce": "Wei"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 12B",
+      "lines": [[110960, 110395], [110960, 111497], [110960, 110672]],
+      "common_name": {"english": "Tomb (Adjunct to Wei)", "native": "坟墓(附危)", "pronounce": "Fen Mu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 12C",
+      "lines": [[107763, 107975], [107763, 107310], [107763, 108022], [107763, 107354]],
+      "common_name": {"english": "Humans", "native": "人", "pronounce": "Ren"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 12D",
+      "lines": [[109176, 109056], [109176, 109602, 110371]],
+      "common_name": {"english": "Mortar", "native": "臼", "pronounce": "Jiu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 12E",
+      "lines": [[109937, 109654, 109410]],
+      "common_name": {"english": "Inner Pestle", "native": "内杵", "pronounce": "Nei Chu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 12F",
+      "lines": [[111944, 111104, 109754, 107253, 106551, 105942, 107129, 107253]],
+      "common_name": {"english": "Big Yard for Chariots", "native": "车府", "pronounce": "Che Fu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 12G",
+      "lines": [[108317, 107418, 107259, 107136, 107533, 106481, 105186, 104060, 104194]],
+      "common_name": {"english": "Celestial Hook", "native": "天钩", "pronounce": "Tian Gou"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 12H",
+      "lines": [[110991, 109857], [110991, 109492], [110991, 109556], [110991, 109592]],
+      "common_name": {"english": "Zaofu", "native": "造父", "pronounce": "Zao Fu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 12I",
+      "lines": [[110009, 110273, 110532, 111170]],
+      "common_name": {"english": "Temple", "native": "虚梁", "pronounce": "Xu Liang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 12J",
+      "lines": [[112211, 112542, 112021, 111066, 110602, 110778, 110391, 110529, 111515, 112529, 112211]],
+      "common_name": {"english": "Celestial Money", "native": "天钱", "pronounce": "Tian Qian"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 12K",
+      "lines": [[108991, 108874]],
+      "common_name": {"english": "Roofing", "native": "盖屋", "pronounce": "Gai Wu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 13A",
+      "lines": [[113963, 113881, 115250], [113881, 112748], [113881, 112051]],
+      "common_name": {"english": "Encampment", "native": "营室", "pronounce": "Ying Shi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 13B",
+      "lines": [[112051, 112158]],
+      "common_name": {"english": "Resting Palace (Adjunct to Ying Shi)", "native": "离宫(附室)", "pronounce": "Li Gong"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 13C",
+      "lines": [[112748, 112440]],
+      "common_name": {"english": "Resting Palace (Adjunct to Ying Shi)", "native": "离宫(附室)", "pronounce": "Li Gong"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 13D",
+      "lines": [[115250, 115623]],
+      "common_name": {"english": "Resting Palace (Adjunct to Ying Shi)", "native": "离宫(附室)", "pronounce": "Li Gong"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 13E",
+      "lines": [[112935, 113445, 113186], [113445, 114144, 114389], [114144, 114347]],
+      "common_name": {"english": "Thunder and Lightning", "native": "雷电", "pronounce": "Lei Dian"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 13F",
+      "lines": [[112447, 112029]],
+      "common_name": {"english": "Official for Materials Supply", "native": "土公吏", "pronounce": "Tu Gong Li"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 13G",
+      "lines": [[109624, 110000, 111123, 110179, 109624], [111123, 112961, 115142, 117375, 417, 1421, 2006, 2787, 2100, 1421]],
+      "common_name": {"english": "Line of Ramparts", "native": "垒壁阵", "pronounce": "Lei Bi Zhen"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 13H",
+      "lines": [[113204, 113673, 113562]],
+      "common_name": {"english": "Axe", "native": "𫓧钺", "pronounce": "Fu Yue"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 13I",
+      "lines": [[113368, 113368]],
+      "common_name": {"english": "North Gate of the Military Camp", "native": "北落师门", "pronounce": "Bei Luo Shi Men"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 13J",
+      "lines": [[112948, 112948]],
+      "common_name": {"english": "Materials for Making Tents", "native": "天纲", "pronounce": "Tian Gang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 13K",
+      "lines": [[113288, 113919, 113327], [113919, 114570, 115022, 115152, 116584, 116805, 116631, 115191, 113726], [113919, 114162], [113501, 114162, 112641], [114162, 114924, 118243, 117863, 117301, 115990, 115395, 114104, 114622, 115990]],
+      "common_name": {"english": "Flying Serpent", "native": "螣蛇", "pronounce": "Teng She"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 13L",
+      "lines": [[950, 2081, 2072], [2081, 116389, 116231], [116389, 116602], [116389, 114131, 114421], [114131, 114132]],
+      "common_name": {"english": "Net for Catching Birds", "native": "八魁", "pronounce": "Ba Kui"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 13M",
+      "lines": [[1170, 983, 301, 910, 355, 117567, 116971, 116957, 116901, 117218, 117629], [355, 1191, 1158, 1562], [1158, 671, 443, 154], [443, 840], [443, 145, 664], [145, 118209], [116971, 116758, 116591, 116853, 117314, 117756], [115125, 115115, 115033, 114855, 114939, 114724, 113996], [114724, 115257], [115125, 115404, 115438, 115669, 116247], [115125, 113031, 112716, 113136, 114341, 114375, 114119]],
+      "common_name": {"english": "Palace Guard", "native": "羽林军", "pronounce": "Yu Lin Jun"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 14A",
+      "lines": [[1067, 677]],
+      "common_name": {"english": "Eastern Wall", "native": "东壁", "pronounce": "Dong Bi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 14B",
+      "lines": [[118268, 116771, 115830, 115227, 113889]],
+      "common_name": {"english": "Thunderbolt", "native": "霹雳", "pronounce": "Pi Li"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 14C",
+      "lines": [[117245, 116928, 115738, 114971]],
+      "common_name": {"english": "Cloud and Rain", "native": "云雨", "pronounce": "Yun Yu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 14D",
+      "lines": [[3300, 3504, 3478, 3414, 2900, 2225, 841, 967, 1415, 1921, 3300]],
+      "common_name": {"english": "Celestial Stable", "native": "天厩", "pronounce": "Tian Jiu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 14E",
+      "lines": [[6502, 4577, 4852], [4577, 2661, 2210]],
+      "common_name": {"english": "Sickle", "native": "𫓧锧", "pronounce": "Fu Zhi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 14F",
+      "lines": [[3632, 3810]],
+      "common_name": {"english": "Official for Earthworks and Buildings", "native": "土公", "pronounce": "Tu Gong"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 15A",
+      "lines": [[3693, 3031, 3092, 2912, 2942, 3231, 3333, 3881, 4436, 5447, 5544, 5586, 6193, 5742, 5131, 4463, 3693]],
+      "common_name": {"english": "Legs", "native": "奎", "pronounce": "Kui Xiu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 15B",
+      "lines": [[9487, 8833, 7884, 7007, 5737, 4906, 3786]],
+      "common_name": {"english": "Outer Fence", "native": "外屏", "pronounce": "Wai Ping"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 15C",
+      "lines": [[5799, 4914, 4147, 3765, 5346, 6061, 5951, 5799]],
+      "common_name": {"english": "Celestial Pigsty", "native": "天溷", "pronounce": "Tian Hun"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 15D",
+      "lines": [[3419, 3419]],
+      "common_name": {"english": "Master of Constructions (In Legs Mansion)", "native": "土司空(奎宿)", "pronounce": "Tu Si Kong(Kui Xiu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 15E",
+      "lines": [[5434, 5434]],
+      "common_name": {"english": "Southern Military Gate", "native": "军南门", "pronounce": "Jun Nan Men"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 15F",
+      "lines": [[6242, 6686, 8362, 8886, 9312, 11569]],
+      "common_name": {"english": "Flying Corridor", "native": "阁道", "pronounce": "Ge Dao"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 15G",
+      "lines": [[5361, 5361]],
+      "common_name": {"english": "Auxiliary Road", "native": "附路", "pronounce": "Fu Lu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 15H",
+      "lines": [[4427, 3821, 3179, 2920], [746, 4427], [746, 3821], [746, 3179], [746, 2920]],
+      "common_name": {"english": "Wang Liang", "native": "王良", "pronounce": "Wang Liang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 15I",
+      "lines": [[2599, 2599]],
+      "common_name": {"english": "Whip", "native": "策", "pronounce": "Ce"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 16A",
+      "lines": [[9884, 8903, 8832]],
+      "common_name": {"english": "Bond", "native": "娄", "pronounce": "Lou"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 16B",
+      "lines": [[10795, 10732, 10155, 10306, 10795, 11670]],
+      "common_name": {"english": "Official in Charge of the Forest", "native": "左更", "pronounce": "Zuo Geng"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 16C",
+      "lines": [[7981, 7359, 6981, 7097, 7740, 7359]],
+      "common_name": {"english": "Official in Charge of Pasturing", "native": "右更", "pronounce": "You Geng"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 16D",
+      "lines": [[9347, 8102, 8645, 6537, 5364, 3455]],
+      "common_name": {"english": "Square Celestial Granary", "native": "天仓", "pronounce": "Tian Cang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 16E",
+      "lines": [[11918, 11072, 9677]],
+      "common_name": {"english": "Ricks of Grain", "native": "天庾", "pronounce": "Tian Yu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 16F",
+      "lines": [[10340, 9640, 7513, 6813, 7607, 8068], [9640, 9977, 10064, 10670, 11784]],
+      "common_name": {"english": "Great General of Heaven", "native": "天大将军", "pronounce": "Tian Da Jiang Jun"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 17A",
+      "lines": [[12719, 13061, 13209]],
+      "common_name": {"english": "Stomach", "native": "胃宿", "pronounce": "Wei Xiu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 17B",
+      "lines": [[14135, 13954, 12828, 11249, 10324, 11484, 12093, 12706, 12387, 11791, 11046, 11021, 10723]],
+      "common_name": {"english": "Circular Celestial Granary", "native": "天囷", "pronounce": "Tian Qun"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 17C",
+      "lines": [[16369, 16322, 16083, 15900]],
+      "common_name": {"english": "Celestial Foodstuff", "native": "天廪", "pronounce": "Tian Lin"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 17D",
+      "lines": [[13268, 13531, 14632, 14668, 14576, 14354, 13254, 12623]],
+      "common_name": {"english": "Mausoleum", "native": "大陵", "pronounce": "Da Ling"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 17E",
+      "lines": [[14382, 14328, 15863, 16826, 17358, 19343, 19812, 20070, 19949]],
+      "common_name": {"english": "Celestial Boat", "native": "天船", "pronounce": "Tian Chuan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 17F",
+      "lines": [[13879, 13879]],
+      "common_name": {"english": "Heap of Corpses (In Mausoleum)", "native": "积尸(大陵)", "pronounce": "Ji Shi(Da Ling)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 17G",
+      "lines": [[19167, 19167]],
+      "common_name": {"english": "Stored water (In Celestial Boat)", "native": "积水(天船)", "pronounce": "Ji Shui(Tian Chuan)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 18A",
+      "lines": [[17531, 17489, 17573, 17499, 17702, 17608, 17847]],
+      "common_name": {"english": "Hairy Head", "native": "昴", "pronounce": "Mao Xiu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 18B",
+      "lines": [[20842, 20842]],
+      "common_name": {"english": "Celestial Concave", "native": "天阿", "pronounce": "Tian E"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 18C",
+      "lines": [[19038, 19038]],
+      "common_name": {"english": "Lunar Star", "native": "月", "pronounce": "Yue"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 18D",
+      "lines": [[19261, 18170], [19261, 18717], [19261, 19284], [19261, 19641]],
+      "common_name": {"english": "Celestial Yin Force", "native": "天阴", "pronounce": "Tian Yin"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 18E",
+      "lines": [[17529, 18532, 18614, 18246, 17448, 17313]],
+      "common_name": {"english": "Rolled Tongue", "native": "卷舌", "pronounce": "Juan She"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 18F",
+      "lines": [[17886, 17886]],
+      "common_name": {"english": "Celestial Slander", "native": "天谗", "pronounce": "Tian Chan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 18G",
+      "lines": [[23416, 23767, 23453, 21476]],
+      "common_name": {"english": "Whetstone", "native": "砺石", "pronounce": "Li Shi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 18H",
+      "lines": [[12562, 11783, 12390, 11345, 12444, 11029]],
+      "common_name": {"english": "Hay", "native": "刍藁", "pronounce": "Chu Hao"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 18I",
+      "lines": [[19398, 18543, 17593, 17378, 16537, 15197, 13701, 12770, 12843, 13288, 14146, 15474, 16611, 17651, 18216, 18673]],
+      "common_name": {"english": "Celestial Meadows", "native": "天苑", "pronounce": "Tian Yuan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19A",
+      "lines": [[20889, 20648, 20455, 20205], [21421, 20894, 20713, 20205, 18724], [21421, 21683]],
+      "common_name": {"english": "Net", "native": "毕", "pronounce": "Bi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19B",
+      "lines": [[21683, 21683]],
+      "common_name": {"english": "Whisper (Adjunct to Net)", "native": "附耳(附毕)", "pronounce": "Fu Er"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19C",
+      "lines": [[20711, 20635]],
+      "common_name": {"english": "Celestial Street", "native": "天街", "pronounce": "Tian Jie"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19D",
+      "lines": [[21718, 22109], [21718, 21139], [21718, 21444, 20507, 19849, 19587, 19777]],
+      "common_name": {"english": "Celestial Tally", "native": "天节", "pronounce": "Tian Jie"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19E",
+      "lines": [[20250, 21819, 22697, 23088, 23900, 24822]],
+      "common_name": {"english": "Feudal Kings", "native": "诸王", "pronounce": "Zhu Wang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19F",
+      "lines": [[23497, 22565, 21604, 21881, 23497]],
+      "common_name": {"english": "Celestial High Terrace", "native": "天高", "pronounce": "Tian Gao"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19G",
+      "lines": [[21644, 22439, 22479, 22263, 22028, 21763, 20892, 20922, 21594, 21644]],
+      "common_name": {"english": "Interpreters of Nine Dialects", "native": "九州殊口", "pronounce": "Jiu Zhou Shu Kou"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19H",
+      "lines": [[23015, 24608, 28360, 28380, 25428]],
+      "common_name": {"english": "Five Chariots", "native": "五车", "pronounce": "Wu Che"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19I",
+      "lines": [[25984, 25492], [25984, 25291]],
+      "common_name": {"english": "Pillars (In Five Chariots)", "native": "柱(五车)", "pronounce": "Zhu(Bi Xiu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19J",
+      "lines": [[27639, 27673], [27639, 27483]],
+      "common_name": {"english": "Pillars (In Five Chariots)", "native": "柱(五车)", "pronounce": "Zhu(Bi Xiu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19K",
+      "lines": [[22678, 23179, 22453]],
+      "common_name": {"english": "Pillars (In Five Chariots)", "native": "柱(五车)", "pronounce": "Zhu(Bi Xiu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19L",
+      "lines": [[24879, 24575, 24799], [24727, 24575, 24504]],
+      "common_name": {"english": "Celestial Pier", "native": "天潢", "pronounce": "Tian Huang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19M",
+      "lines": [[24813, 24340], [24813, 25292]],
+      "common_name": {"english": "Pool of Harmony", "native": "咸池", "pronounce": "Xian Chi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19N",
+      "lines": [[26451, 26451]],
+      "common_name": {"english": "Celestial Pass", "native": "天关", "pronounce": "Tian Guan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19O",
+      "lines": [[24010, 23607, 22957, 22833, 22845, 22509, 22449, 22549, 22797]],
+      "common_name": {"english": "Banner of Three Stars", "native": "参旗", "pronounce": "Can Qi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19P",
+      "lines": [[21743, 23362, 22860, 22881, 23060, 23231, 23221, 22024, 21278]],
+      "common_name": {"english": "Imperial Military Flag", "native": "九斿", "pronounce": "Jiu Liu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 19Q",
+      "lines": [[21248, 21393, 20535, 20042, 17797, 17874, 17351, 16870, 16310, 15510, 13847, 12486, 12413]],
+      "common_name": {"english": "Celestial Orchard", "native": "天园", "pronounce": "Tian Yuan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 20A",
+      "lines": [[26207, 26176], [26207, 26366]],
+      "common_name": {"english": "Beak", "native": "觜觿", "pronounce": "Zi Xi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 20B",
+      "lines": [[27830, 28237, 28734, 28716]],
+      "common_name": {"english": "Deity in Charge of Monsters", "native": "司怪", "pronounce": "Si Guai"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 20C",
+      "lines": [[33485, 32844, 31832, 31579, 29451, 29696, 27629, 26640, 26248]],
+      "common_name": {"english": "Seat Flags", "native": "坐旗", "pronounce": "Zuo Qi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 21A",
+      "lines": [[27989, 26727, 26311, 25930, 24436], [25930, 25336], [26727, 27366]],
+      "common_name": {"english": "Three Stars", "native": "参", "pronounce": "Shen"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 21B",
+      "lines": [[26237, 26235, 26241]],
+      "common_name": {"english": "Attack (Adjunct to the Three Stars)", "native": "伐(附参)", "pronounce": "Fa"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 21C",
+      "lines": [[23972, 23364, 23875, 24674]],
+      "common_name": {"english": "Jade Well", "native": "玉井", "pronounce": "Yu Jing"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 21D",
+      "lines": [[23685, 24305]],
+      "common_name": {"english": "Screen", "native": "屏", "pronounce": "Ping"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 21E",
+      "lines": [[24244, 24327, 24845, 24873]],
+      "common_name": {"english": "Military Well", "native": "军井", "pronounce": "Jun Jing"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 21F",
+      "lines": [[25985, 25606, 27072, 27654]],
+      "common_name": {"english": "Toilet", "native": "厕", "pronounce": "Ce"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 21G",
+      "lines": [[26460, 26460]],
+      "common_name": {"english": "Celestial Excrement", "native": "天矢", "pronounce": "Tian Shi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22A",
+      "lines": [[35350, 34088, 32921, 32246], [32921, 30883, 30343], [30883, 31681, 34088], [31681, 32362], [30343, 29655]],
+      "common_name": {"english": "East Well", "native": "东井", "pronounce": "Dong Jing"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22B",
+      "lines": [[29655, 29655]],
+      "common_name": {"english": "Battle Axe (Adjunct to Eastern Well)", "native": "钺(附东井)", "pronounce": "Yue"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22C",
+      "lines": [[37279, 36188, 36284]],
+      "common_name": {"english": "South River", "native": "南河", "pronounce": "Nan He"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22D",
+      "lines": [[37826, 36850, 36366]],
+      "common_name": {"english": "North River", "native": "北河", "pronounce": "Bei He"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22E",
+      "lines": [[31434, 31737, 32311]],
+      "common_name": {"english": "Celestial Wine Cup", "native": "天樽", "pronounce": "Tian Zun"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22F",
+      "lines": [[33018, 34693, 36046, 36962, 37740]],
+      "common_name": {"english": "Five Feudal Kings", "native": "五诸侯(井宿)", "pronounce": "Wu Zhu Hou(JingXiu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22G",
+      "lines": [[37265, 37265]],
+      "common_name": {"english": "Accumulated Water", "native": "积水(井宿)", "pronounce": "Ji Shui(Jin Xiu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22H",
+      "lines": [[39424, 39424]],
+      "common_name": {"english": "Pile of Firewood", "native": "积薪", "pronounce": "Ji Xin"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22I",
+      "lines": [[29850, 31119, 31277, 29800, 29850]],
+      "common_name": {"english": "Official for Irrigation", "native": "水府", "pronounce": "Shui Fu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22J",
+      "lines": [[39780, 38722, 37908, 37300]],
+      "common_name": {"english": "Water Level", "native": "水位", "pronounce": "Shui Wei"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22K",
+      "lines": [[33202, 33914, 34440, 34909]],
+      "common_name": {"english": "Four Channels", "native": "四渎", "pronounce": "Si Du"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22L",
+      "lines": [[31700, 31592, 31416, 31125, 29150, 29048, 28816, 28910, 29735, 30214, 30457, 31084, 31827, 31700]],
+      "common_name": {"english": "Market for Soldiers", "native": "军市", "pronounce": "Jun Shi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22M",
+      "lines": [[30324, 30324]],
+      "common_name": {"english": "Wild Cockerel", "native": "野鸡", "pronounce": "Ye Ji"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22N",
+      "lines": [[30788, 30277]],
+      "common_name": {"english": "Grandson", "native": "孙", "pronounce": "Sun"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22O",
+      "lines": [[28199, 27628]],
+      "common_name": {"english": "Son", "native": "子", "pronounce": "Zi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22P",
+      "lines": [[26634, 25859]],
+      "common_name": {"english": "Grandfather", "native": "丈人", "pronounce": "Zhang Ren"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22Q",
+      "lines": [[34769, 39311]],
+      "common_name": {"english": "Palace Gate", "native": "阙丘", "pronounce": "Que Qiu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22R",
+      "lines": [[32349, 32349]],
+      "common_name": {"english": "Wolf", "native": "狼", "pronounce": "Lang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22S",
+      "lines": [[38170, 35904, 32759, 33579, 33856, 34444, 35415, 36721, 38170], [33977, 34444, 35904]],
+      "common_name": {"english": "Bow and Arrow", "native": "弧矢", "pronounce": "Hu Shi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 22T",
+      "lines": [[30438, 30438]],
+      "common_name": {"english": "Old Man", "native": "老人", "pronounce": "Lao Ren"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 23A",
+      "lines": [[41822, 41909, 42806, 42911, 41822]],
+      "common_name": {"english": "Cabin Ghosts", "native": "舆鬼", "pronounce": "Yu Gui"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 23B",
+      "lines": [[42578, 42578]],
+      "common_name": {"english": "Cumulative Corpse (In Cabin Ghosts)", "native": "积尸（舆鬼）", "pronounce": "Ji Shi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 23C",
+      "lines": [[43103, 43834, 44818, 44154, 43103]],
+      "common_name": {"english": "Beacon Fire", "native": "爟", "pronounce": "Guan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 23D",
+      "lines": [[39863, 39079, 39211], [39079, 38474, 37901, 37088, 36388]],
+      "common_name": {"english": "Celestial Dog", "native": "天狗", "pronounce": "Tian Gou"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 23E",
+      "lines": [[43142, 42028, 41307, 42146], [42835, 43305, 43142]],
+      "common_name": {"english": "Outer Kitchen", "native": "外厨", "pronounce": "Wai Chu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 23F",
+      "lines": [[43409, 43409]],
+      "common_name": {"english": "Judge for Estimating the Age of Animals", "native": "天记", "pronounce": "Tian Ji"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 23G",
+      "lines": [[39429, 38455, 38414], [38455, 37819, 37096], [37819, 35264]],
+      "common_name": {"english": "Celestial Earth God's Temple", "native": "天社", "pronounce": "Tian She"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 24A",
+      "lines": [[42799, 42402, 42313, 43109, 43234, 43813, 44659, 45336]],
+      "common_name": {"english": "Willow", "native": "柳", "pronounce": "Liu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 24B",
+      "lines": [[44066, 44798], [44066, 45410, 44798]],
+      "common_name": {"english": "Banner of Wine Shop", "native": "酒旗", "pronounce": "Jiu Qi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 25A",
+      "lines": [[47431, 46776, 46509, 46404, 46390, 45811, 45751]],
+      "common_name": {"english": "Seven Stars", "native": "七星", "pronounce": "Qi Xing"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 25B",
+      "lines": [[44248, 44700, 45688, 45860, 47168, 47701, 46146, 46750, 47908, 48455, 50335, 50583, 49583, 49669, 47508], [49669, 51624], [49669, 49637]],
+      "common_name": {"english": "Xuanyuan", "native": "轩辕", "pronounce": "Xuan Yuan"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 25C",
+      "lines": [[51233, 51056, 52098, 53229]],
+      "common_name": {"english": "High Judge", "native": "内平", "pronounce": "Nei Ping"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 25D",
+      "lines": [[46982, 48341], [46982, 48437]],
+      "common_name": {"english": "Celestial Premier", "native": "天相", "pronounce": "Tian Xiang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 25E",
+      "lines": [[42536, 42913, 45556, 46701, 45941, 42913]],
+      "common_name": {"english": "Celestial Cereals", "native": "天稷", "pronounce": "Tian Ji"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 26A",
+      "lines": [[48356, 49841, 51069, 48615], [48356, 48615], [48356, 47452], [51069, 52085]],
+      "common_name": {"english": "Extended Net", "native": "张", "pronounce": "Zhang"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 26B",
+      "lines": [[48374, 47175, 44511, 44816, 44191, 42884, 43023, 42570, 40096, 40706, 42515, 42828, 46515, 46651, 48374]],
+      "common_name": {"english": "Celestial Temple", "native": "天庙", "pronounce": "Tian Miao"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 27A",
+      "lines": [[52943, 53740, 55282, 55705, 57283], [55282, 54029], [58576, 56633, 55687, 54029, 52948, 51933], [55687, 56802], [54682, 53740], [54682, 55705], [54682, 54703, 56293, 56830], [54703, 54204], [58158, 57001, 56280, 54477, 54204, 51979]],
+      "common_name": {"english": "Wings", "native": "翼", "pronounce": "Yi"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 27B",
+      "lines": [[52727, 54746, 55425, 59196, 57803]],
+      "common_name": {"english": "Dongou", "native": "东瓯", "pronounce": "Dong Ou"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 28A",
+      "lines": [[61359, 60965, 59803, 59316, 61359], [59803, 60189], [60965, 61174], [59316, 59394]],
+      "common_name": {"english": "Chariot", "native": "轸", "pronounce": "Zhen"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 28B",
+      "lines": [[60189, 60189]],
+      "common_name": {"english": "Changsha (Adjunct to Chariot)", "native": "长沙(附轸)", "pronounce": "Chang Sha"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 28C",
+      "lines": [[61174, 61174]],
+      "common_name": {"english": "Left linchpin (Adjunct to Chariot)", "native": "左辖(附轸)", "pronounce": "Zuo Xia"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 28D",
+      "lines": [[59394, 59394]],
+      "common_name": {"english": "Right linchpin (Adjunct to Chariot)", "native": "右辖(附轸)", "pronounce": "You Xia"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 28E",
+      "lines": [[57613, 58082]],
+      "common_name": {"english": "Military Gate", "native": "军门", "pronounce": "Jun Men"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 28F",
+      "lines": [[57936, 56922, 56343, 56332]],
+      "common_name": {"english": "Master of Constructions (In Chariot Mansion)", "native": "土司空(轸宿)", "pronounce": "Tu Si Kong(Zhen Xiu)"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 28G",
+      "lines": [[60449, 62683, 64003, 64408, 62896, 61789, 60855, 60449]],
+      "common_name": {"english": "Green Hill", "native": "青丘", "pronounce": "Qing Qiu"}
+    },
+    {
+      "id": "CON chinese_chenzhuo 28H",
+      "lines": [[63003, 62327, 61084, 60379, 58642, 57870, 56480, 55425], [63007, 62434, 61966, 61136, 59747, 58901, 57512, 55581], [62268, 60260, 58921, 57439, 56243, 54463], [60718, 58758, 57175, 56986, 55831, 54751], [60009, 59072, 57669, 56561]],
+      "common_name": {"english": "House for Musical Instruments", "native": "器府", "pronounce": "Qi Fu"}
+    }
+  ],
+  "edges_type": "own",
+  "edges": [
+    "___:___ __ 12:43:34 +80:33:39 13:25:12 -11:09:41 01A 02A",
+    "___:___ __ 13:25:12 -11:09:41 00:43:34 -80:33:39 01A 02A",
+    "___:___ __ 12:43:34 +80:33:39 14:12:54 -10:16:25 02A 03A",
+    "___:___ __ 14:12:54 -10:16:25 00:43:34 -80:33:39 02A 03A",
+    "___:___ __ 12:43:34 +80:33:39 14:50:53 -16:02:30 03A 04A",
+    "___:___ __ 14:50:53 -16:02:30 00:43:34 -80:33:39 03A 04A",
+    "___:___ __ 12:43:34 +80:33:39 15:58:51 -26:06:51 04A 05A",
+    "___:___ __ 15:58:51 -26:06:51 00:43:34 -80:33:39 04A 05A",
+    "___:___ __ 12:43:34 +80:33:39 16:21:11 -25:35:34 05A 06A",
+    "___:___ __ 16:21:11 -25:35:34 00:43:34 -80:33:39 05A 06A",
+    "___:___ __ 12:43:34 +80:33:39 16:51:52 -38:02:51 06A 07A",
+    "___:___ __ 16:51:52 -38:02:51 00:43:34 -80:33:39 06A 07A",
+    "___:___ __ 12:43:34 +80:33:39 18:05:48 -30:25:27 07A 08A",
+    "___:___ __ 18:05:48 -30:25:27 00:43:34 -80:33:39 07A 08A",
+    "___:___ __ 12:43:34 +80:33:39 18:45:39 -26:59:27 08A 09A",
+    "___:___ __ 18:45:39 -26:59:27 00:43:34 -80:33:39 08A 09A",
+    "___:___ __ 12:43:34 +80:33:39 20:21:01 -14:46:53 09A 10A",
+    "___:___ __ 20:21:01 -14:46:53 00:43:34 -80:33:39 09A 10A",
+    "___:___ __ 12:43:34 +80:33:39 20:47:41 -09:29:45 10A 11A",
+    "___:___ __ 20:47:41 -09:29:45 00:43:34 -80:33:39 10A 11A",
+    "___:___ __ 12:43:34 +80:33:39 21:31:34 -05:34:16 11A 12A",
+    "___:___ __ 21:31:34 -05:34:16 00:43:34 -80:33:39 11A 12A",
+    "___:___ __ 12:43:34 +80:33:39 22:05:47 -00:19:11 12A 13A",
+    "___:___ __ 22:05:47 -00:19:11 00:43:34 -80:33:39 12A 13A",
+    "___:___ __ 12:43:34 +80:33:39 23:04:46 +15:12:19 13A 14A",
+    "___:___ __ 23:04:46 +15:12:19 00:43:34 -80:33:39 13A 14A",
+    "___:___ __ 12:43:34 +80:33:39 00:13:14 +15:11:01 14A 15A",
+    "___:___ __ 00:13:14 +15:11:01 00:43:34 -80:33:39 14A 15A",
+    "___:___ __ 12:43:34 +80:33:39 00:47:20 +24:16:02 15A 16A",
+    "___:___ __ 00:47:20 +24:16:02 00:43:34 -80:33:39 15A 16A",
+    "___:___ __ 12:43:34 +80:33:39 01:54:38 +20:48:29 16A 17A",
+    "___:___ __ 01:54:38 +20:48:29 00:43:34 -80:33:39 16A 17A",
+    "___:___ __ 12:43:34 +80:33:39 02:43:27 +27:42:26 17A 18A",
+    "___:___ __ 02:43:27 +27:42:26 00:43:34 -80:33:39 17A 18A",
+    "___:___ __ 12:43:34 +80:33:39 03:44:53 +24:06:48 18A 19A",
+    "___:___ __ 03:44:53 +24:06:48 00:43:34 -80:33:39 18A 19A",
+    "___:___ __ 12:43:34 +80:33:39 04:28:37 +19:10:50 19A 20A",
+    "___:___ __ 04:28:37 +19:10:50 00:43:34 -80:33:39 19A 20A",
+    "___:___ __ 12:43:34 +80:33:39 05:34:49 +09:29:22 20A 21A",
+    "___:___ __ 05:34:49 +09:29:22 00:43:34 -80:33:39 20A 21A",
+    "___:___ __ 12:43:34 +80:33:39 05:32:00 -00:17:57 21A 22A",
+    "___:___ __ 05:32:00 -00:17:57 00:43:34 -80:33:39 21A 22A",
+    "___:___ __ 12:43:34 +80:33:39 06:22:58 +22:30:49 22A 23A",
+    "___:___ __ 06:22:58 +22:30:49 00:43:34 -80:33:39 22A 23A",
+    "___:___ __ 12:43:34 +80:33:39 08:31:36 +18:05:40 23A 24A",
+    "___:___ __ 08:31:36 +18:05:40 00:43:34 -80:33:39 23A 24A",
+    "___:___ __ 12:43:34 +80:33:39 08:37:39 +05:42:14 24A 25A",
+    "___:___ __ 08:37:39 +05:42:14 00:43:34 -80:33:39 24A 25A",
+    "___:___ __ 12:43:34 +80:33:39 09:27:35 -08:39:31 25A 26A",
+    "___:___ __ 09:27:35 -08:39:31 00:43:34 -80:33:39 25A 26A",
+    "___:___ __ 12:43:34 +80:33:39 09:51:29 -14:50:48 26A 27A",
+    "___:___ __ 09:51:29 -14:50:48 00:43:34 -80:33:39 26A 27A",
+    "___:___ __ 12:43:34 +80:33:39 10:59:46 -18:17:56 27A 28A",
+    "___:___ __ 10:59:46 -18:17:56 00:43:34 -80:33:39 27A 28A",
+    "___:___ __ 12:43:34 +80:33:39 12:15:48 -17:32:31 28A 01A",
+    "___:___ __ 12:15:48 -17:32:31 00:43:34 -80:33:39 28A 01A"
+  ],
+  "common_names": {
+    "HIP 746": [{"english": "王良"}],
+    "HIP 2599": [{"english": "策"}],
+    "HIP 3419": [{"english": "土司空[奎宿]"}],
+    "HIP 5372": [{"english": "天皇大帝"}],
+    "HIP 5434": [{"english": "军南门"}],
+    "HIP 6686": [{"english": "附路"}],
+    "HIP 13879": [{"english": "积尸[胃宿]"}],
+    "HIP 17886": [{"english": "天谗"}],
+    "HIP 18453": [{"english": "积水[胃宿]"}],
+    "HIP 19038": [{"english": "月"}],
+    "HIP 20842": [{"english": "天阿"}],
+    "HIP 21421": [{"english": "天高"},
+                  {"english": "边将"}],
+    "HIP 21683": [{"english": "附耳"}],
+    "HIP 23015": [{"english": "乡"}],
+    "HIP 24436": [{"english": "右足"}],
+    "HIP 24608": [{"english": "天库"}],
+    "HIP 25110": [{"english": "信龟"}],
+    "HIP 25336": [{"english": "右肩"}],
+    "HIP 25428": [{"english": "司空"}],
+    "HIP 25930": [{"english": "衡石"}],
+    "HIP 26311": [{"english": "衡石"}],
+    "HIP 26451": [{"english": "天关"}],
+    "HIP 26460": [{"english": "天矢"}],
+    "HIP 26727": [{"english": "衡石"}],
+    "HIP 27366": [{"english": "左足"}],
+    "HIP 27989": [{"english": "左肩"}],
+    "HIP 28360": [{"english": "狱"}],
+    "HIP 28380": [{"english": "天仓"}],
+    "HIP 29655": [{"english": "钺"}],
+    "HIP 30324": [{"english": "野鸡"}],
+    "HIP 30438": [{"english": "老人"},
+                  {"english": "南极老人"}],
+    "HIP 32349": [{"english": "狼"}],
+    "HIP 33694": [{"english": "桐陵"}],
+    "HIP 33977": [{"english": "矢"}],
+    "HIP 37265": [{"english": "积水"}],
+    "HIP 39424": [{"english": "积薪"}],
+    "HIP 40793": [{"english": "紫光"}],
+    "HIP 41704": [{"english": "上将"}],
+    "HIP 43409": [{"english": "天记"}],
+    "HIP 44901": [{"english": "大理"}],
+    "HIP 45075": [{"english": "次将"}],
+    "HIP 46733": [{"english": "尚书"}],
+    "HIP 46853": [{"english": "司怪"}],
+    "HIP 47508": [{"english": "太民"}],
+    "HIP 47654": [{"english": "直门"}],
+    "HIP 48319": [{"english": "司中"}],
+    "HIP 49637": [{"english": "女御"}],
+    "HIP 49669": [{"english": "女主"}],
+    "HIP 50546": [{"english": "太尊"}],
+    "HIP 51624": [{"english": "少民"}],
+    "HIP 52425": [{"english": "奸星"}],
+    "HIP 53910": [{"english": "天璇"},
+                  {"english": "巨门"},
+                  {"english": "法"}],
+    "HIP 54061": [{"english": "天枢"},
+                  {"english": "贪狼"},
+                  {"english": "正"}],
+    "HIP 54539": [{"english": "太阳守"}],
+    "HIP 54872": [{"english": "西上相"}],
+    "HIP 54879": [{"english": "西次相"}],
+    "HIP 54951": [{"english": "虎贲"}],
+    "HIP 55434": [{"english": "西上将"}],
+    "HIP 55642": [{"english": "西次将"}],
+    "HIP 56211": [{"english": "梓明"}],
+    "HIP 56975": [{"english": "从官"}],
+    "HIP 57320": [{"english": "白帝"}],
+    "HIP 57399": [{"english": "相"}],
+    "HIP 57565": [{"english": "太子"}],
+    "HIP 57632": [{"english": "黄帝座"}],
+    "HIP 57646": [{"english": "黑帝"}],
+    "HIP 57757": [{"english": "右执法"}],
+    "HIP 57779": [{"english": "赤帝"}],
+    "HIP 58001": [{"english": "天玑"},
+                  {"english": "禄存"},
+                  {"english": "令"}],
+    "HIP 58159": [{"english": "苍帝"}],
+    "HIP 58858": [{"english": "幸臣"}],
+    "HIP 59394": [{"english": "右辖"}],
+    "HIP 59774": [{"english": "天权"},
+                  {"english": "文曲"},
+                  {"english": "伐"}],
+    "HIP 60129": [{"english": "左执法"}],
+    "HIP 60172": [{"english": "谒者"}],
+    "HIP 60189": [{"english": "长沙"}],
+    "HIP 60998": [{"english": "太一"}],
+    "HIP 61174": [{"english": "左辖"}],
+    "HIP 61281": [{"english": "天一"}],
+    "HIP 61384": [{"english": "守门"}],
+    "HIP 61941": [{"english": "东上相"}],
+    "HIP 62572": [{"english": "天枢"},
+                  {"english": "纽星"}],
+    "HIP 62956": [{"english": "玉衡"},
+                  {"english": "廉贞"},
+                  {"english": "杀"}],
+    "HIP 63090": [{"english": "东次相"}],
+    "HIP 63125": [{"english": "郎将"}],
+    "HIP 63608": [{"english": "东次将"}],
+    "HIP 64238": [{"english": "进贤"}],
+    "HIP 64241": [{"english": "东上将"}],
+    "HIP 65378": [{"english": "开阳"},
+                  {"english": "武曲"},
+                  {"english": "危"}],
+    "HIP 65477": [{"english": "辅"}],
+    "HIP 67301": [{"english": "摇光"},
+                  {"english": "破军"},
+                  {"english": "部"}],
+    "HIP 68756": [{"english": "头观"}],
+    "HIP 69038": [{"english": "天库"}],
+    "HIP 69112": [{"english": "后宫"}],
+    "HIP 69673": [{"english": "大角"}],
+    "HIP 69732": [{"english": "玄戈"}],
+    "HIP 69879": [{"english": "招摇"}],
+    "HIP 70692": [{"english": "庶子"}],
+    "HIP 72607": [{"english": "帝"}],
+    "HIP 73620": [{"english": "天乳"}],
+    "HIP 75097": [{"english": "太子"}],
+    "HIP 75458": [{"english": "庆门"}],
+    "HIP 76276": [{"english": "秦"}],
+    "HIP 77070": [{"english": "蜀"}],
+    "HIP 77233": [{"english": "周"}],
+    "HIP 77622": [{"english": "巴"}],
+    "HIP 77840": [{"english": "日"}],
+    "HIP 78072": [{"english": "郑"}],
+    "HIP 78104": [{"english": "上将"}],
+    "HIP 78265": [{"english": "次将"}],
+    "HIP 78323": [{"english": "骑阵将军"}],
+    "HIP 78401": [{"english": "次相"}],
+    "HIP 78527": [{"english": "泮星"}],
+    "HIP 78820": [{"english": "上相"}],
+    "HIP 79043": [{"english": "晋"}],
+    "HIP 79374": [{"english": "键闭"}],
+    "HIP 79593": [{"english": "梁"}],
+    "HIP 79882": [{"english": "楚"}],
+    "HIP 80112": [{"english": "太子"}],
+    "HIP 80170": [{"english": "河间"}],
+    "HIP 80331": [{"english": "开蕃"}],
+    "HIP 80763": [{"english": "大火"},
+                  {"english": "大辰"}],
+    "HIP 80816": [{"english": "河中"}],
+    "HIP 81266": [{"english": "庶子"}],
+    "HIP 81377": [{"english": "韩"}],
+    "HIP 83895": [{"english": "龙登"}],
+    "HIP 84012": [{"english": "宋"}],
+    "HIP 84345": [{"english": "帝坐"}],
+    "HIP 84379": [{"english": "魏"}],
+    "HIP 85693": [{"english": "赵"}],
+    "HIP 86032": [{"english": "候"}],
+    "HIP 86201": [{"english": "敢星"}],
+    "HIP 86263": [{"english": "南海"}],
+    "HIP 86614": [{"english": "柱史"}],
+    "HIP 86974": [{"english": "九河"}],
+    "HIP 87261": [{"english": "傅说"}],
+    "HIP 88048": [{"english": "燕"}],
+    "HIP 88550": [{"english": "糠"}],
+    "HIP 88794": [{"english": "中山"}],
+    "HIP 89341": [{"english": "七杀"},
+                  {"english": "将"}],
+    "HIP 89908": [{"english": "光伯"}],
+    "HIP 89937": [{"english": "女史"}],
+    "HIP 89962": [{"english": "东海"}],
+    "HIP 90496": [{"english": "天相"},
+                  {"english": "印"}],
+    "HIP 90763": [{"english": "农丈人"}],
+    "HIP 92041": [{"english": "天同"},
+                  {"english": "福"}],
+    "HIP 92043": [{"english": "齐"}],
+    "HIP 92056": [{"english": "顺光"}],
+    "HIP 92855": [{"english": "天机"},
+                  {"english": "善"}],
+    "HIP 92946": [{"english": "徐"}],
+    "HIP 93506": [{"english": "天府"},
+                  {"english": "令"}],
+    "HIP 93747": [{"english": "吴越"}],
+    "HIP 93864": [{"english": "天梁"},
+                  {"english": "荫"}],
+    "HIP 102487": [{"english": "郑"}],
+    "HIP 102831": [{"english": "齐"}],
+    "HIP 103226": [{"english": "越"}],
+    "HIP 103389": [{"english": "楚"}],
+    "HIP 103738": [{"english": "晋"}],
+    "HIP 103777": [{"english": "燕"}],
+    "HIP 104148": [{"english": "韩"}],
+    "HIP 104234": [{"english": "魏"}],
+    "HIP 112948": [{"english": "天纲"}],
+    "HIP 113368": [{"english": "北落师门"}],
+    "M 44": [{"english": "积尸气"}],
+    "M 45": [{"english": "旄头"}],
+    "M 7": [{"english": "鱼"}],
+    "NAME Jupiter": [{"english": "岁星", "native": "Suixing"}],
+    "NAME Mars": [{"english": "荧惑", "native": "Yinghuo"}],
+    "NAME Mercury": [{"english": "辰星", "native": "Chenxing"}],
+    "NAME Moon": [{"english": "太阴", "native": "Taiying"}],
+    "NAME Saturn": [{"english": "填星", "native": "Zhenxing"}],
+    "NAME Sun": [{"english": "太阳", "native": "Taiyang"}],
+    "NAME Venus": [{"english": "太白", "native": "Taibai"}]
+  }
+}
