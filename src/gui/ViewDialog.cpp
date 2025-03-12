@@ -1179,7 +1179,7 @@ void ViewDialog::onAddNewCulture()
 		                      q_("The directory chosen doesn't contain a file \"index.json\""));
 		return;
 	}
-	StelApp::getInstance().getSkyCultureMgr().addNewCulture(dir, true);
+	StelApp::getInstance().getSkyCultureMgr().addCustomCulture(dir, true);
 	updateSkyCulturesList();
 }
 

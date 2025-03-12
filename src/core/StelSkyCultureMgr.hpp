@@ -148,7 +148,8 @@ public:
 	//! sets that sky culture by calling setCurrentSkyCultureID().
 	void init();
 
-	void addNewCulture(const QString& dir, bool reportErrorsToGUI = false);
+	bool addNewCulture(const QString& dir, bool reportErrorsToGUI = false);
+	void addCustomCulture(const QString& dir, bool reportErrorsToGUI);
 	
 public slots:
 	//! Get the current sky culture English name.
@@ -255,6 +256,7 @@ private:
 	std::pair<QString/*color*/,QString/*info*/> getLicenseDescription(const QString& license, const bool singleLicenseForAll) const;
 
 	QMap<QString, StelSkyCulture> dirToNameEnglish;
+	QSet<QString> additionalCultureDirs;
 	
 	StelSkyCulture currentSkyCulture;
 	

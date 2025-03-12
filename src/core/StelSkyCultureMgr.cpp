@@ -181,14 +181,36 @@ QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& dir, const QS
 StelSkyCultureMgr::StelSkyCultureMgr()
 {
 	setObjectName("StelSkyCultureMgr");
-	makeCulturesList();
 }
 
 StelSkyCultureMgr::~StelSkyCultureMgr()
 {
 }
 
-void StelSkyCultureMgr::addNewCulture(const QString& dir, const bool reportErrorsToGUI)
+void StelSkyCultureMgr::addCustomCulture(const QString& dir, const bool reportErrorsToGUI)
+{
+	if (!addNewCulture(dir, reportErrorsToGUI)) return;
+
+	additionalCultureDirs << dir;
+
+	QSettings*const conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("skycultures");
+	conf->beginWriteArray("additional_cultures");
+	int i = 0;
+	for (const auto& dir : additionalCultureDirs)
+	{
+		conf->setArrayIndex(i);
+		conf->setValue("dir", dir);
+		++i;
+	}
+	conf->endArray();
+	conf->endGroup();
+
+	auto& culture = dirToNameEnglish[dir];
+	qInfo() << "Added a new sky culture:" << culture.englishName;
+}
+
+bool StelSkyCultureMgr::addNewCulture(const QString& dir, const bool reportErrorsToGUI)
 {
 	constexpr char indexFileName[] = "/index.json";
 	const QString filePath = QFileInfo(dir).isAbsolute() ? dir + indexFileName : StelFileMgr::findFile("skycultures/" + dir + indexFileName);
@@ -203,7 +225,7 @@ void StelSkyCultureMgr::addNewCulture(const QString& dir, const bool reportError
 		{
 			qCritical() << "Failed to find" << indexFileName << "file in sky culture directory" << QDir::toNativeSeparators(dir);
 		}
-		return;
+		return false;
 	}
 	QFile file(filePath);
 	if (!file.open(QFile::ReadOnly))
@@ -217,7 +239,7 @@ void StelSkyCultureMgr::addNewCulture(const QString& dir, const bool reportError
 		{
 			qCritical() << "Failed to open" << indexFileName << "file in sky culture directory" << QDir::toNativeSeparators(dir);
 		}
-		return;
+		return false;
 	}
 	const auto jsonText = file.readAll();
 	if (jsonText.isEmpty())
@@ -232,7 +254,7 @@ void StelSkyCultureMgr::addNewCulture(const QString& dir, const bool reportError
 			qCritical() << "Failed to read data from" << indexFileName << "file in sky culture directory"
 			            << QDir::toNativeSeparators(dir);
 		}
-		return;
+		return false;
 	}
 	QJsonParseError error;
 	const auto jsonDoc = QJsonDocument::fromJson(jsonText, &error);
@@ -248,7 +270,7 @@ void StelSkyCultureMgr::addNewCulture(const QString& dir, const bool reportError
 			qCritical().nospace() << "Failed to parse " << indexFileName << " from sky culture directory "
 			                      << QDir::toNativeSeparators(dir) << ": " << error.errorString();
 		}
-		return;
+		return false;
 	}
 	if (!jsonDoc.isObject())
 	{
@@ -262,7 +284,7 @@ void StelSkyCultureMgr::addNewCulture(const QString& dir, const bool reportError
 			qCritical() << "Failed to find the expected JSON structure in" << indexFileName << " from sky culture directory"
 			            << QDir::toNativeSeparators(dir);
 		}
-		return;
+		return false;
 	}
 	const auto data = jsonDoc.object();
 
@@ -338,16 +360,13 @@ void StelSkyCultureMgr::addNewCulture(const QString& dir, const bool reportError
 		}
 		culture.classification = classification;
 	}
-	if (reportErrorsToGUI)
-	{
-		// This is the case of loading an external culture, log this event
-		qInfo() << "Added a new sky culture:" << culture.englishName;
-	}
+	return true;
 }
 
 void StelSkyCultureMgr::makeCulturesList()
 {
 	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
+	cultureDirNames += additionalCultureDirs;
 	for (const auto& dir : std::as_const(cultureDirNames))
 		addNewCulture(dir);
 }
@@ -355,6 +374,19 @@ void StelSkyCultureMgr::makeCulturesList()
 //! Init itself from a config file.
 void StelSkyCultureMgr::init()
 {
+	QSettings*const conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("skycultures");
+	const int size = conf->beginReadArray("additional_cultures");
+	for (int i = 0; i < size; i++)
+	{
+		conf->setArrayIndex(i);
+		additionalCultureDirs << conf->value("dir").toString();
+	}
+	conf->endArray();
+	conf->endGroup();
+
+	makeCulturesList();
+
 	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "modern").toString();
 	if (defaultSkyCultureID=="western") // switch to new Sky Culture ID
 		defaultSkyCultureID = "modern";
