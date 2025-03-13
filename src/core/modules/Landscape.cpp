@@ -436,6 +436,7 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 
 	// We must reset painter to pure altaz coordinates without pano-based rotation
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	const float ppx = static_cast<float>(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
 	painter->setProjector(prj);
 	QFont font;
 	font.setPixelSize(fontSize);
@@ -448,7 +449,8 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 
 	for (int i = 0; i < landscapeLabels.size(); ++i)
 	{
-		int textWidth=fm.boundingRect(landscapeLabels.at(i).name).width();
+		int textWidth=ppx*fm.boundingRect(landscapeLabels.at(i).name).width();
+		int textHeight=ppx*fm.boundingRect(landscapeLabels.at(i).name).height();
 		// in case of gravityLabels, we cannot shift-adjust centered placename, sorry!
 		if (prj->getFlagGravityLabels())
 		{
@@ -463,13 +465,20 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 			}
 			else
 			{
-			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, labelAngle, -0.5f*fontSize*sinf(labelAngle*M_PI_180f)-2*textWidth,
+			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, labelAngle, -0.5f*fontSize*sinf(labelAngle*M_PI_180f)-textWidth,
 					  -0.5f*fontSize*sinf(labelAngle*M_PI_180f), true);
 			}
 		}
 		else
 		{
-			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth, 2, true);
+			if (landscapeLabels.at(i).isLabelAboveFeature)
+			{
+			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth/2, 2, true);
+			}
+			else
+			{
+			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth/2, -2-textHeight/2, true);
+			}
 		}
 		painter->drawGreatCircleArc(landscapeLabels.at(i).featurePoint, landscapeLabels.at(i).labelPoint, nullptr);
 	}
