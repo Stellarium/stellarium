@@ -574,7 +574,8 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, const bool load)
 		}
 	}
 
-	if (load) {
+	if (load)
+	{
 		ZoneArray* z = ZoneArray::create(catalogFilePath, true);
 		if (z)
 		{
