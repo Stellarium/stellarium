@@ -497,7 +497,7 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 	}
 }
 
-bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
+bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, const bool load)
 {
 	const bool checked = catDesc.value("checked").toBool();
 	QString catalogFileName = catDesc.value("fileName").toString();
@@ -574,21 +574,28 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 		}
 	}
 
-	ZoneArray* z = ZoneArray::create(catalogFilePath, true);
-	if (z)
-	{
-		if (z->level<gridLevels.size())
+	if (load) {
+		ZoneArray* z = ZoneArray::create(catalogFilePath, true);
+		if (z)
 		{
-			qWarning().noquote() << QDir::toNativeSeparators(catalogFileName) << ", " << z->level << ": duplicate level";
-			delete z;
-			return true;
+			if (z->level<gridLevels.size())
+			{
+				qWarning().noquote() << QDir::toNativeSeparators(catalogFileName) << ", " << z->level << ": duplicate level";
+				delete z;
+				return true;
+			}
+			Q_ASSERT(z->level==maxGeodesicGridLevel+1);
+			Q_ASSERT(z->level==gridLevels.size());
+			++maxGeodesicGridLevel;
+			gridLevels.append(z);
 		}
-		Q_ASSERT(z->level==maxGeodesicGridLevel+1);
-		Q_ASSERT(z->level==gridLevels.size());
-		++maxGeodesicGridLevel;
-		gridLevels.append(z);
+		return true;
 	}
-	return true;
+	else
+	{
+		qWarning().noquote() << "Star catalog: " << QDir::toNativeSeparators(catalogFileName) << "is found but not loaded because at least one of the lower levels is missing!";
+		return false;
+	}
 }
 
 void StarMgr::setCheckFlag(const QString& catId, bool b)
@@ -624,10 +631,11 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	qInfo() << "Loading star data ...";
 
 	catalogsDescription = starsConfig.value("catalogs").toList();
+	bool isSuccessing = true;
 	foreach (const QVariant& catV, catalogsDescription)
 	{
 		QVariantMap m = catV.toMap();
-		checkAndLoadCatalog(m);
+		isSuccessing = checkAndLoadCatalog(m, isSuccessing);
 	}
 
 	for (int i=0; i<=NR_OF_HIP; i++)
