@@ -65,13 +65,13 @@ StelPluginInfo MosaicCameraStelPluginInterface::getPluginInfo() const
  Constructor
 *************************************************************************/
 MosaicCamera::MosaicCamera()
+    : toolbarButton(Q_NULLPTR)
 {
     setObjectName("MosaicCamera");
     configDialog = new MosaicCameraDialog();
     StelApp &app = StelApp::getInstance();
     conf = app.getSettings();
     gui = dynamic_cast<StelGui*>(app.getGui());
-    toolbarButton = Q_NULLPTR;
 }
 
 /*************************************************************************
@@ -86,6 +86,8 @@ void MosaicCamera::loadSettings()
 {
     conf->beginGroup("MosaicCamera");
     currentCamera = conf->value("currentCamera").toString();
+    setFlagShowButton(conf->value("showButton").toBool());
+    enableMosaicCamera(conf->value("enabled").toBool());
     int size = conf->beginReadArray("cameraVisibility");
     for (int i = 0; i < size; ++i) {
         conf->setArrayIndex(i);
@@ -103,6 +105,8 @@ void MosaicCamera::saveSettings() const
 {
     conf->beginGroup("MosaicCamera");
     conf->setValue("currentCamera", currentCamera);
+    conf->setValue("showButton", getFlagShowButton());
+    conf->setValue("enabled", flagShowMosaicCamera);
     conf->beginWriteArray("cameraVisibility");
     int i = 0;
     for (auto it = cameras.constBegin(); it != cameras.constEnd(); ++it) {
@@ -133,11 +137,7 @@ void MosaicCamera::init()
     Q_INIT_RESOURCE(MosaicCamera);
 
     initializeUserData();
-
-    qDebug() << "[MosaicCamera] Loading built-in cameras";
     loadBuiltInCameras();
-
-    loadSettings();
 
     addAction("actionShow_MosaicCamera", N_("Mosaic Camera"), N_("Show Mosaic Camera"), "enabled", "");
     addAction("actionShow_MosaicCamera_dialog", N_("Mosaic Camera"), N_("Show settings dialog"), configDialog, "visible");
@@ -147,7 +147,8 @@ void MosaicCamera::init()
     addAction("actionNextCamera", N_("Mosaic Camera"), N_("Next camera"), "nextCamera()", "");
     addAction("actionPreviousCamera", N_("Mosaic Camera"), N_("Previous camera"), "previousCamera()", "");
 
-    enableMosaicCamera(true);
+    loadSettings();
+
     if (currentCamera == "")
     {
         setCurrentCamera(cameraOrder[0]);
@@ -211,7 +212,7 @@ void MosaicCamera::copyResourcesToUserDirectory()
 
         if (QFile::copy(resourcePath, destPath))
         {
-            qDebug() << "Copied" << resourcePath << "to" << destPath;
+            qDebug() << "[MosaicCamera] Copied" << resourcePath << "to" << destPath;
 
             // Ensure the copied file is writable
             QFile destFile(destPath);
@@ -219,7 +220,7 @@ void MosaicCamera::copyResourcesToUserDirectory()
         }
         else
         {
-            qWarning() << "Failed to copy" << resourcePath << "to" << destPath;
+            qWarning() << "[MosaicCamera] Failed to copy" << resourcePath << "to" << destPath;
         }
     }
 }
