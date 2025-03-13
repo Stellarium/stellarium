@@ -1724,7 +1724,7 @@ void ConfigurationDialog::downloadFinished()
 	progressBar=Q_NULLPTR;
 
 	ui->downloadLabel->setText(q_("Verifying file integrity..."));
-	if (GETSTELMODULE(StarMgr)->checkAndLoadCatalog(nextStarCatalogToDownload)==false)
+	if (GETSTELMODULE(StarMgr)->checkAndLoadCatalog(nextStarCatalogToDownload, true)==false)
 	{
 		ui->getStarsButton->setVisible(false);
 		ui->downloadLabel->setText(q_("Error downloading %1:\nFile is corrupted.").arg(nextStarCatalogToDownload.value("id").toString()));

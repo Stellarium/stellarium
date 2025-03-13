@@ -420,8 +420,10 @@ public:
 
 	//! Try to load the given catalog, even if it is marched as unchecked.
 	//! Mark it as checked if checksum is correct.
+	//! @param m the catalog data.
+	//! @param load true if the catalog should be loaded, otherwise just check but don't load.
 	//! @return false in case of failure.
-	bool checkAndLoadCatalog(const QVariantMap& m);
+	bool checkAndLoadCatalog(const QVariantMap& m, bool load);
 
 	//! Get the list of all Hipparcos stars.
 	const QList<StelObjectP>& getHipparcosStars() const { return hipparcosStars; }	
