@@ -631,11 +631,11 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	qInfo() << "Loading star data ...";
 
 	catalogsDescription = starsConfig.value("catalogs").toList();
-	bool hasFailed = false;
+	bool isSuccessing = true;
 	foreach (const QVariant& catV, catalogsDescription)
 	{
 		QVariantMap m = catV.toMap();
-		hasFailed = not checkAndLoadCatalog(m, not hasFailed);
+		isSuccessing = checkAndLoadCatalog(m, isSuccessing);
 	}
 
 	for (int i=0; i<=NR_OF_HIP; i++)
