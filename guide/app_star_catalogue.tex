@@ -62,7 +62,7 @@ The main catalogue data is split into several files:
 \item[\file{stars\_4\_1v0\_6.cat}]
 \item[\file{stars\_5\_1v0\_6.cat}]
 \item[\file{stars\_6\_1v0\_4.cat}]
-\item[\file{stars\_7\_1v0\_3.cat}]
+\item[\file{stars\_7\_1v0\_4.cat}]
 \item[\file{stars\_8\_2v0\_3.cat}]
 \end{description}
 
@@ -76,7 +76,7 @@ There also exist some control and reference files:
 \item[\file{cross-id.cat}]
 \item[\file{starsConfig.json}]
 \item[\file{name.fab}]
-\item[\file{binary_orbitparam.dat}]
+\item[\file{binary\_orbitparam.dat}]
 \end{description}
 
 When Stellarium starts, it reads the file \file{stars/hip\_gaia3/starsConfig.json}%
@@ -89,7 +89,7 @@ The file \file{gcvs.cat} contains data about variables stars
 contains data about double stars (see section~\ref{sec:StarCatalogues:DoubleStars}) 
 which again contains references into the main catalogue files.
 The file \file{cross-id.cat} (see section~\ref{sec:StarCatalogues:CrossIdentificationData}) contains cross-identification data between HIP, Gaia DR3, SAO, HD and HR designations.
-The file \file{binary_orbitparam.cat} (see section~\ref{sec:StarCatalogues:BinaryOrbitalParameters}) contains binary star system orbital parameters.
+The file \file{binary\_orbitparam.cat} (see section~\ref{sec:StarCatalogues:BinaryOrbitalParameters}) contains binary star system orbital parameters.
 
 A given catalogue file models stars for one and only one level (i.e. for
 a fixed number of zones), which is recorded in the header of the file.
@@ -111,8 +111,8 @@ know about the zone model to be able to extract positional data.
 \file{stars\_4\_1v0\_6.cat}  & 1 & 32 bytes & 4 &    1,741,849 & Gaia\\
 \file{stars\_5\_1v0\_6.cat}  & 1 & 32 bytes & 5 &    8,051,933 & Gaia\\
 \file{stars\_6\_1v0\_4.cat}  & 1 & 32 bytes & 6 &   29,879,734 & Gaia\\
-\file{stars\_7\_1v0\_3.cat}  & 1 & 32 bytes & 7 &   57,534,724 & Gaia\\
-\file{stars\_8\_2v0\_3.cat}  & 2 & 16 bytes & 8 & 1,229,081,84 & Gaia\\
+\file{stars\_7\_1v0\_4.cat}  & 1 & 32 bytes & 7 &   57,534,724 & Gaia\\
+\file{stars\_8\_2v0\_3.cat}  & 2 & 16 bytes & 8 &  122,908,184 & Gaia\\
 \bottomrule
 \end{tabular}
 
@@ -1218,7 +1218,7 @@ database SIMBAD  \citep{2000A&AS..143....9W}.
 %\label{sec:StarCatalogues:DoubleStars:general}
 
 Stellarium's Double Stars catalog data is kept
-in the \file{stars/hip_gaia3} sub-directory of the Installation Directory and/or
+in the \file{stars/hip\_gaia3} sub-directory of the Installation Directory and/or
 User Directory (see section~\ref{sec:Directories}).
 
 
@@ -1843,7 +1843,7 @@ catalogues.
 %\label{sec:StarCatalogues:CrossIdentificationData:general}
 
 Stellarium's Cross-Identification catalog data is kept
-in the \file{stars/hip_gaia3} sub-directory of the Installation Directory and/or User Directory (see section~\ref{sec:Directories}).
+in the \file{stars/hip\_gaia3} sub-directory of the Installation Directory and/or User Directory (see section~\ref{sec:Directories}).
 
 \subsubsection{File Format}
 \label{sec:StarCatalogues:CrossIdentificationData:file}
@@ -1890,32 +1890,32 @@ Since version 25.1\newFeature{25.1} Stellarium supports modelling orbital motion
 \label{sec:StarCatalogues:BinaryOrbitalParameters:format}
 
 Stellarium's Binary Star System Orbital Parameters catalog data is kept
-in the \file{stars/hip_gaia3} sub-directory of the Installation Directory and/or User Directory (see section~\ref{sec:Directories}).
+in the \file{stars/hip\_gaia3} sub-directory of the Installation Directory and/or User Directory (see section~\ref{sec:Directories}).
 
 \subsubsection{File Format}
 \label{sec:StarCatalogues:BinaryOrbitalParameters:file}
 
-The file \file{binary_orbitparam.dat} contains cross binary system orbital parameter data, which stored in plain text format.
+The file \file{binary\_orbitparam.dat} contains binary system orbital parameter data, which are stored in plain text format.
 
 \begin{table}[htb]
 	\begin{tabularx}{\textwidth}{l|c|X}\toprule
-	  \emph{Name}      & \emph{Type} & \emph{Description}                     \\%\midrule
-	  binary_period    & double      & Orbital period [days]                  \\%\midrule
-	  eccentricity     & float       & Eccentricity                           \\%\midrule
-	  inclination      & float       & Orbit inclination [rad]                \\%\midrule
-	  big_omega        & float       & Position angle of ascending node [rad] \\%\midrule
-	  small_omega      & float       & Argument of periastron [rad]           \\%\midrule
-	  periastron_epoch & double      & Julian Date at periastron passage      \\%\midrule
-	  semi_major       & double      & Angular semi-major axis [arcsec]       \\%\midrule
-	  bary_distance    & double      & distance [parsec]                      \\%\midrule
-	  data_epoch       & double      & Julian Date of the data                \\%\midrule
-	  bary_ra          & double      & Right Ascension of the barycenter [rad]\\%\midrule
-	  bary_dec         & double      & Declination of the barycenter  [rad]   \\%\midrule
-	  bary_rv          & double      & Barycenter radial velocity [km/s]      \\%\midrule
-	  primary_mass     & float       & Primary star mass [solar mass]         \\%\midrule
-	  secondary_mass   & float       & Secondary star mass [solar mass]       \\%\midrule
-	  bary_pmra        & double      & Barycenter RA proper motion [mas/yr]   \\%\midrule
-	  bary_pmdec       & double      & Barycenter DEC proper motion [mas/yr]  \\\bottomrule
+	  \emph{Name}                    & \emph{Type} & \emph{Description}                     \\\midrule
+	  binary period  $p$             & double      & Orbital period [days]                  \\%\midrule
+	  eccentricity   $e$             & float       & Eccentricity                           \\%\midrule
+	  inclination    $i$             & float       & Orbit inclination [rad]                \\%\midrule
+	  big omega      $\Omega$        & float       & Position angle of ascending node [rad] \\%\midrule
+	  small omega    $\omega$        & float       & Argument of periastron [rad]           \\%\midrule
+	  periastron epoch $JD$          & double      & Julian Date at periastron passage      \\%\midrule
+	  semi major     $a$             & double      & Angular semi-major axis [arcsec]       \\%\midrule
+	  bary distance  $\Delta$        & double      & distance [parsec]                      \\%\midrule
+	  data epoch     $E$             & double      & Julian Date of the data                \\%\midrule
+	  bary ra        $\alpha$        & double      & Right Ascension of the barycenter [rad]\\%\midrule
+	  bary dec       $\delta$        & double      & Declination of the barycenter  [rad]   \\%\midrule
+	  bary rv        $RV$            & double      & Barycenter radial velocity [km/s]      \\%\midrule
+	  primary mass   $m_0$           & float       & Primary star mass [solar mass]         \\%\midrule
+	  secondary mass $m_1$           & float       & Secondary star mass [solar mass]       \\%\midrule
+	  bary pmra      $\dot{\alpha}$  & double      & Barycenter RA proper motion [mas/yr]   \\%\midrule
+	  bary pmdec     $\dot{\delta}$  & double      & Barycenter DEC proper motion [mas/yr]  \\\bottomrule
 	\end{tabularx}
 \label{tab:StarCatalogues:BinaryOrbitalParameters:file}
 \end{table}

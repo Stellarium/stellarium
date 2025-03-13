@@ -302,7 +302,7 @@ void AstroCalcDialog::createDialogContent()
 	enableEphemerisButtons(buttonState);
 	ui->ephemerisIgnoreDateTestCheckBox->setChecked(conf->value("astrocalc/flag_ephemeris_ignore_date_test", true).toBool());
 	connect(ui->ephemerisIgnoreDateTestCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveIgnoreDateTestFlag(bool)));
-	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(reGenerateEphemeris()));	
+	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateGeneratedEphemeris()));
 	connect(ui->allNakedEyePlanetsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveEphemerisFlagNakedEyePlanets(bool)));
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
 	connect(ui->ephemerisCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupEphemeris()));
@@ -318,6 +318,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->dateFromMonthSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setMonthDuration()));
 	ui->dateToDurationSpinBox->setValue(conf->value("astrocalc/ephemeris_time_duration", 1).toInt());
 	connect(ui->dateToDurationSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveEphemerisTimeDuration(int)));
+	connect(core, SIGNAL(flagUseAberrationChanged(bool)), this, SLOT(updateGeneratedEphemeris()));
+	connect(core, SIGNAL(aberrationFactorChanged(double)), this, SLOT(updateGeneratedEphemeris()));
 
 	ui->genericMarkerColor->setup("SolarSystem.ephemerisGenericMarkerColor", "color/ephemeris_generic_marker_color");
 	ui->secondaryMarkerColor->setup("SolarSystem.ephemerisSecondaryMarkerColor", "color/ephemeris_secondary_marker_color");
@@ -1839,6 +1841,11 @@ void AstroCalcDialog::saveIgnoreDateTestFlag(bool b)
 {
 	conf->setValue("astrocalc/flag_ephemeris_ignore_date_test", b);
 	reGenerateEphemeris(true);
+}
+
+void AstroCalcDialog::updateGeneratedEphemeris()
+{
+	reGenerateEphemeris(ui->ephemerisHorizontalCoordinatesCheckBox->isChecked());
 }
 
 void AstroCalcDialog::reGenerateEphemeris(bool withSelection)

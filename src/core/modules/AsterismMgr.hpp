@@ -42,46 +42,19 @@ class StelPainter;
 class AsterismMgr : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(int fontSize
-		   READ getFontSize
-		   WRITE setFontSize
-		   NOTIFY fontSizeChanged)
-	Q_PROPERTY(Vec3f linesColor
-		   READ getLinesColor
-		   WRITE setLinesColor
-		   NOTIFY linesColorChanged)
-	Q_PROPERTY(bool linesDisplayed
-		   READ getFlagLines
-		   WRITE setFlagLines
-		   NOTIFY linesDisplayedChanged)
-	Q_PROPERTY(Vec3f rayHelpersColor
-		   READ getRayHelpersColor
-		   WRITE setRayHelpersColor
-		   NOTIFY rayHelpersColorChanged)
-	Q_PROPERTY(bool rayHelpersDisplayed
-		   READ getFlagRayHelpers
-		   WRITE setFlagRayHelpers
-		   NOTIFY rayHelpersDisplayedChanged)
-	Q_PROPERTY(Vec3f namesColor
-		   READ getLabelsColor
-		   WRITE setLabelsColor
-		   NOTIFY namesColorChanged)
-	Q_PROPERTY(bool namesDisplayed
-		   READ getFlagLabels
-		   WRITE setFlagLabels
-		   NOTIFY namesDisplayedChanged)
-	Q_PROPERTY(int asterismLineThickness
-		   READ getAsterismLineThickness
-		   WRITE setAsterismLineThickness
-		   NOTIFY asterismLineThicknessChanged)
-	Q_PROPERTY(int rayHelperThickness
-		   READ getRayHelperThickness
-		   WRITE setRayHelperThickness
-		   NOTIFY rayHelperThicknessChanged)
-	Q_PROPERTY(bool isolateAsterismSelected
-		   READ getFlagIsolateAsterismSelected
-		   WRITE setFlagIsolateAsterismSelected
-		   NOTIFY isolateAsterismSelectedChanged)
+	Q_PROPERTY(int fontSize					READ getFontSize						WRITE setFontSize						NOTIFY fontSizeChanged)
+	Q_PROPERTY(Vec3f linesColor				READ getLinesColor					WRITE setLinesColor					NOTIFY linesColorChanged)
+	Q_PROPERTY(bool linesDisplayed			READ getFlagLines					WRITE setFlagLines					NOTIFY linesDisplayedChanged)
+	Q_PROPERTY(Vec3f rayHelpersColor			READ getRayHelpersColor				WRITE setRayHelpersColor				NOTIFY rayHelpersColorChanged)
+	Q_PROPERTY(bool rayHelpersDisplayed		READ getFlagRayHelpers				WRITE setFlagRayHelpers				NOTIFY rayHelpersDisplayedChanged)
+	Q_PROPERTY(Vec3f namesColor				READ getLabelsColor					WRITE setLabelsColor					NOTIFY namesColorChanged)
+	Q_PROPERTY(bool namesDisplayed			READ getFlagLabels					WRITE setFlagLabels					NOTIFY namesDisplayedChanged)
+	Q_PROPERTY(int asterismLineThickness		READ getAsterismLineThickness			WRITE setAsterismLineThickness			NOTIFY asterismLineThicknessChanged)
+	Q_PROPERTY(int rayHelperThickness			READ getRayHelperThickness			WRITE setRayHelperThickness			NOTIFY rayHelperThicknessChanged)
+	Q_PROPERTY(bool isolateAsterismSelected		READ getFlagIsolateAsterismSelected		WRITE setFlagIsolateAsterismSelected	NOTIFY isolateAsterismSelectedChanged)
+	Q_PROPERTY(float namesFadeDuration		READ getLabelsFadeDuration			WRITE setLabelsFadeDuration			NOTIFY namesFadeDurationChanged)
+	Q_PROPERTY(float linesFadeDuration			READ getLinesFadeDuration				WRITE setLinesFadeDuration			NOTIFY linesFadeDurationChanged)
+	Q_PROPERTY(float rayHelpersFadeDuration	READ getRayHelpersFadeDuration		WRITE setRayHelpersFadeDuration		NOTIFY rayHelpersFadeDurationChanged)
 
 public:
 	//! Constructor
@@ -224,6 +197,21 @@ public slots:
 	//! Select all asterisms
 	void selectAllAsterisms(void);
 
+	//! Set asterism lines fade duration in second
+	void setLinesFadeDuration(const float duration);
+	//! Get asterism lines fade duration in second
+	float getLinesFadeDuration() const;
+
+	//! Set asterism screen labels fade duration in second
+	void setLabelsFadeDuration(const float duration);
+	//! Get asterism screen labels fade duration in second
+	float getLabelsFadeDuration() const;
+
+	//! Set ray helpers fade duration in second
+	void setRayHelpersFadeDuration(const float duration);
+	//! Get ray helpers fade duration in second
+	float getRayHelpersFadeDuration() const;
+
 signals:
 	void fontSizeChanged(const int newSize);
 	void linesColorChanged(const Vec3f & color);
@@ -235,6 +223,9 @@ signals:
 	void rayHelpersDisplayedChanged(const bool displayed);
 	void rayHelperThicknessChanged(int thickness);
 	void isolateAsterismSelectedChanged(const bool isolate);
+	void namesFadeDurationChanged(const float duration);
+	void linesFadeDurationChanged(const float duration);
+	void rayHelpersFadeDurationChanged(const float duration);
 
 private slots:
 	//! Loads new asterism data and art if the SkyCulture has changed.
@@ -282,6 +273,10 @@ private:
 	bool namesDisplayed;
 	bool hasAsterism;
 	bool isolateAsterismSelected; // true to pick individual asterisms.
+
+	float linesFadeDuration;
+	float namesFadeDuration;
+	float rayHelpersFadeDuration;
 
 	// Store the thickness of lines of the asterisms
 	int asterismLineThickness;

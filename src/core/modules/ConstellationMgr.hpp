@@ -43,66 +43,24 @@ class StelSkyCulture;
 class ConstellationMgr : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool artDisplayed
-		   READ getFlagArt
-		   WRITE setFlagArt
-		   NOTIFY artDisplayedChanged)
-	Q_PROPERTY(float artFadeDuration
-		   READ getArtFadeDuration
-		   WRITE setArtFadeDuration
-		   NOTIFY artFadeDurationChanged)
-	Q_PROPERTY(float artIntensity
-		   READ getArtIntensity
-		   WRITE setArtIntensity
-		   NOTIFY artIntensityChanged)
-	Q_PROPERTY(Vec3f boundariesColor
-		   READ getBoundariesColor
-		   WRITE setBoundariesColor
-		   NOTIFY boundariesColorChanged)
-	Q_PROPERTY(bool boundariesDisplayed
-		   READ getFlagBoundaries
-		   WRITE setFlagBoundaries
-		   NOTIFY boundariesDisplayedChanged)
-	Q_PROPERTY(int fontSize
-		   READ getFontSize
-		   WRITE setFontSize
-		   NOTIFY fontSizeChanged)
-	Q_PROPERTY(bool isolateSelected
-		   READ getFlagIsolateSelected
-		   WRITE setFlagIsolateSelected
-		   NOTIFY isolateSelectedChanged)
-	Q_PROPERTY(bool flagConstellationPick
-		   READ getFlagConstellationPick
-		   WRITE setFlagConstellationPick
-		   NOTIFY flagConstellationPickChanged)
-	Q_PROPERTY(Vec3f linesColor
-		   READ getLinesColor
-		   WRITE setLinesColor
-		   NOTIFY linesColorChanged)
-	Q_PROPERTY(bool linesDisplayed
-		   READ getFlagLines
-		   WRITE setFlagLines
-		   NOTIFY linesDisplayedChanged)
-	Q_PROPERTY(Vec3f namesColor
-		   READ getLabelsColor
-		   WRITE setLabelsColor
-		   NOTIFY namesColorChanged)
-	Q_PROPERTY(bool namesDisplayed
-		   READ getFlagLabels
-		   WRITE setFlagLabels
-		   NOTIFY namesDisplayedChanged)
-	Q_PROPERTY(ConstellationDisplayStyle constellationDisplayStyle
-		   READ getConstellationDisplayStyle
-		   WRITE setConstellationDisplayStyle
-		   NOTIFY constellationsDisplayStyleChanged)
-	Q_PROPERTY(int constellationLineThickness
-		   READ getConstellationLineThickness
-		   WRITE setConstellationLineThickness
-		   NOTIFY constellationLineThicknessChanged)
-	Q_PROPERTY(int constellationBoundariesThickness
-		   READ getConstellationBoundariesThickness
-		   WRITE setConstellationBoundariesThickness
-		   NOTIFY constellationBoundariesThicknessChanged)
+	Q_PROPERTY(bool artDisplayed					READ getFlagArt							WRITE setFlagArt							NOTIFY artDisplayedChanged)
+	Q_PROPERTY(float artFadeDuration				READ getArtFadeDuration					WRITE setArtFadeDuration					NOTIFY artFadeDurationChanged)
+	Q_PROPERTY(float artIntensity					READ getArtIntensity						WRITE setArtIntensity						NOTIFY artIntensityChanged)
+	Q_PROPERTY(Vec3f boundariesColor				READ getBoundariesColor					WRITE setBoundariesColor					NOTIFY boundariesColorChanged)
+	Q_PROPERTY(bool boundariesDisplayed			READ getFlagBoundaries					WRITE setFlagBoundaries					NOTIFY boundariesDisplayedChanged)
+	Q_PROPERTY(float boundariesFadeDuration		READ getBoundariesFadeDuration			WRITE setBoundariesFadeDuration			NOTIFY boundariesFadeDurationChanged)
+	Q_PROPERTY(int fontSize						READ getFontSize							WRITE setFontSize							NOTIFY fontSizeChanged)
+	Q_PROPERTY(bool isolateSelected				READ getFlagIsolateSelected				WRITE setFlagIsolateSelected				NOTIFY isolateSelectedChanged)
+	Q_PROPERTY(bool flagConstellationPick			READ getFlagConstellationPick				WRITE setFlagConstellationPick				NOTIFY flagConstellationPickChanged)
+	Q_PROPERTY(Vec3f linesColor					READ getLinesColor						WRITE setLinesColor						NOTIFY linesColorChanged)
+	Q_PROPERTY(bool linesDisplayed				READ getFlagLines						WRITE setFlagLines						NOTIFY linesDisplayedChanged)
+	Q_PROPERTY(float linesFadeDuration				READ getLinesFadeDuration					WRITE setLinesFadeDuration				NOTIFY linesFadeDurationChanged)
+	Q_PROPERTY(Vec3f namesColor					READ getLabelsColor						WRITE setLabelsColor						NOTIFY namesColorChanged)
+	Q_PROPERTY(bool namesDisplayed				READ getFlagLabels						WRITE setFlagLabels						NOTIFY namesDisplayedChanged)
+	Q_PROPERTY(float namesFadeDuration			READ getLabelsFadeDuration				WRITE setLabelsFadeDuration				NOTIFY namesFadeDurationChanged)
+	Q_PROPERTY(ConstellationDisplayStyle constellationDisplayStyle	READ getConstellationDisplayStyle	WRITE setConstellationDisplayStyle		NOTIFY constellationsDisplayStyleChanged)
+	Q_PROPERTY(int constellationLineThickness		READ getConstellationLineThickness			WRITE setConstellationLineThickness			NOTIFY constellationLineThicknessChanged)
+	Q_PROPERTY(int constellationBoundariesThickness	READ getConstellationBoundariesThickness	WRITE setConstellationBoundariesThickness	NOTIFY constellationBoundariesThicknessChanged)
 
 public:
 	//! Constructor
@@ -208,6 +166,11 @@ public slots:
 	//! Get whether constellation boundaries lines are displayed
 	bool getFlagBoundaries(void) const;
 
+	//! Set constellation boundaries fade duration in second
+	void setBoundariesFadeDuration(const float duration);
+	//! Get constellation boundaries fade duration in second
+	float getBoundariesFadeDuration() const;
+
 	//! Set whether selected constellation must be displayed alone
 	void setFlagIsolateSelected(const bool isolate);
 	//! Get whether selected constellation is displayed alone
@@ -233,6 +196,11 @@ public slots:
 	//! Get whether constellation lines are displayed
 	bool getFlagLines(void) const;
 
+	//! Set constellation lines fade duration in second
+	void setLinesFadeDuration(const float duration);
+	//! Get constellation lines fade duration in second
+	float getLinesFadeDuration() const;
+
 	//! Set label color for names
 	//! @param color The color of labels
 	//! @code
@@ -247,6 +215,11 @@ public slots:
 	void setFlagLabels(const bool displayed);
 	//! Set whether constellation names are displayed
 	bool getFlagLabels(void) const;
+
+	//! Set constellation labels fade duration in second
+	void setLabelsFadeDuration(const float duration);
+	//! Get constellation labels fade duration in second
+	float getLabelsFadeDuration() const;
 
 	//! Set the font size used for constellation names display
 	void setFontSize(const int newFontSize);
@@ -319,13 +292,16 @@ signals:
 	void artIntensityChanged(const double intensity);
 	void boundariesColorChanged(const Vec3f & color);
 	void boundariesDisplayedChanged(const bool displayed);
+	void boundariesFadeDurationChanged(const float duration);
 	void fontSizeChanged(const int newSize);
 	void isolateSelectedChanged(const bool isolate);
 	void flagConstellationPickChanged(const bool mode);
 	void linesColorChanged(const Vec3f & color);
 	void linesDisplayedChanged(const bool displayed);
+	void linesFadeDurationChanged(const float duration);
 	void namesColorChanged(const Vec3f & color);
 	void namesDisplayedChanged(const bool displayed);
+	void namesFadeDurationChanged(const float duration);
 	void constellationsDisplayStyleChanged(const ConstellationMgr::ConstellationDisplayStyle style);
 	void constellationLineThicknessChanged(int thickness);
 	void constellationBoundariesThicknessChanged(int thickness);
@@ -417,8 +393,11 @@ private:
 	double artIntensityMaximumFov;
 	bool artDisplayed;
 	bool boundariesDisplayed;
+	float boundariesFadeDuration;
 	bool linesDisplayed;
+	float linesFadeDuration;
 	bool namesDisplayed;
+	float namesFadeDuration;
 	bool checkLoadingData;
 
 	// Store the thickness of lines of the constellations

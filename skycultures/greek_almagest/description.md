@@ -196,7 +196,7 @@ the reconstruction (column 6).
 	<td>Charioteer</td>
 	<td><notr>Auriga</notr></td>
 	<td>wears long garment; garment limited through shoulders and hem</td>
-	<td>o Aur added as neck star; 1 Aur added as hem star</td>
+	<td>&omicron; Aur added as neck star; 1 Aur added as hem star</td>
 </tr>
 <tr valign="top">
 	<td><notr>Oph</notr></td>
@@ -412,7 +412,7 @@ the reconstruction (column 6).
 	<td>The One before the Dog</td>
 	<td><notr>Canis Minor</notr></td>
 	<td></td>
-	<td>In Almagest, the name of the constellation is &quot;The One before the Dog&quot; or &quot;Harbinger of Sirius&quot; as Toomer puts it. However, &beta; CMi is called &quot;the neck&quot; (of whom is unknown). We drew a little dog with &gamma; and &epsilon; as head; &alpha;, &beta;, &eta; and HIP36889 as body; forelegs with HIP 35509 and HIP 35614; hindlegs with &delta;<sub>2</sub> and &delta;<sub>3</sub>; tail with HIP 37634</td>
+	<td>In Almagest, the name of the constellation is &quot;The One before the Dog&quot; or &quot;Harbinger of Sirius&quot; as Toomer puts it. However, &beta; CMi is called &quot;the neck&quot; (of whom is unknown).</td>
 </tr>
 <tr valign="top">
 	<td><notr>Arg</notr></td>
@@ -460,7 +460,7 @@ the reconstruction (column 6).
 	<td>Beast</td>
 	<td><notr>Lupus</notr></td>
 	<td></td>
-	<td>&beta; described as &lsquo;End of hind leg&lsquo; -> taken as star in the belly; &tau;<sub>1</sub> as hindleg &Chi; removed from head, because otherwise shapelessness arises; HIP 73493 taken as foreleg</td>
+	<td>&beta; described as &lsquo;End of hind leg&lsquo; -> taken as star in the belly; &tau;<sub>1</sub> as hindleg; &chi; in head, because otherwise shapelessness arises; HIP 73493 taken as foreleg</td>
 </tr>
 <tr valign="top">
 	<td><notr>Ara</notr></td>
@@ -484,7 +484,7 @@ the reconstruction (column 6).
 	<td>Southern Fish</td>
 	<td><notr>Piscis Austrinus</notr></td>
 	<td>the fish is laying on his back</td>
-	<td>we added a few stars to mark the tail as such (&beta; should be the tip of the tail but we used it as its root)</td>
+	<td>the fish is apparently dead: the belly up, or an eelwith twisted spine; we added a few stars to mark the tail fin whose tip is given as &beta; PsA.</td>
 </tr>
 </table>
 

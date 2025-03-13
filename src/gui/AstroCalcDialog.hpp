@@ -367,6 +367,7 @@ private slots:
 	void initEphemerisFlagNakedEyePlanets(void);
 	void saveEphemerisFlagNakedEyePlanets(bool flag);
 	void setMonthDuration();
+	void updateGeneratedEphemeris();
 
 	//! Calculating phenomena for selected celestial body and fill the list.
 	void calculatePhenomena();

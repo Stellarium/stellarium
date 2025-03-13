@@ -550,25 +550,34 @@ void ViewDialog::createDialogContent()
 	updateDefaultSkyCulture();
 
 	// allow to display short names and inhibit translation.
-	connectIntProperty(ui->skyCultureNamesStyleComboBox,            "ConstellationMgr.constellationDisplayStyle");
-	connectCheckBox(ui->nativePlanetNamesCheckBox,                  "actionShow_Skyculture_NativePlanetNames");
-	connectCheckBox(ui->showConstellationLinesCheckBox,             "actionShow_Constellation_Lines");
-	connectIntProperty(ui->constellationLineThicknessSpinBox,       "ConstellationMgr.constellationLineThickness");
+	connectIntProperty(ui->skyCultureNamesStyleComboBox,		"ConstellationMgr.constellationDisplayStyle");
+	connectCheckBox(ui->nativePlanetNamesCheckBox,			"actionShow_Skyculture_NativePlanetNames");
+	connectCheckBox(ui->showConstellationLinesCheckBox,			"actionShow_Constellation_Lines");
+	connectIntProperty(ui->constellationLineThicknessSpinBox,		"ConstellationMgr.constellationLineThickness");
 	connectCheckBox(ui->showConstellationLabelsCheckBox,		"actionShow_Constellation_Labels");
-	connectCheckBox(ui->showConstellationBoundariesCheckBox,        "actionShow_Constellation_Boundaries");
-	connectIntProperty(ui->constellationBoundariesThicknessSpinBox, "ConstellationMgr.constellationBoundariesThickness");
-	connectCheckBox(ui->showConstellationArtCheckBox,               "actionShow_Constellation_Art");
-	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,    "ConstellationMgr.artIntensity");
+	connectCheckBox(ui->showConstellationBoundariesCheckBox,		"actionShow_Constellation_Boundaries");
+	connectIntProperty(ui->constellationBoundariesThicknessSpinBox,	"ConstellationMgr.constellationBoundariesThickness");
+	connectCheckBox(ui->showConstellationArtCheckBox,			"actionShow_Constellation_Art");
+	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,		"ConstellationMgr.artIntensity");
+
+	// fade duration
+	connectDoubleProperty(ui->artFadeDurationDoubleSpinBox,		"ConstellationMgr.artFadeDuration");
+	connectDoubleProperty(ui->boundariesFadeDurationDoubleSpinBox,	"ConstellationMgr.boundariesFadeDuration");
+	connectDoubleProperty(ui->linesFadeDurationDoubleSpinBox,		"ConstellationMgr.linesFadeDuration");
+	connectDoubleProperty(ui->namesFadeDurationDoubleSpinBox,		"ConstellationMgr.namesFadeDuration");
+	connectDoubleProperty(ui->asterismNamesFadeDurationDoubleSpinBox,	"AsterismMgr.namesFadeDuration");
+	connectDoubleProperty(ui->asterismLinesFadeDurationDoubleSpinBox,	"AsterismMgr.linesFadeDuration");
+	connectDoubleProperty(ui->rayHelpersFadeDurationDoubleSpinBox,	"AsterismMgr.rayHelpersFadeDuration");
 
 	ui->colorConstellationBoundaries->setup("ConstellationMgr.boundariesColor", "color/const_boundary_color");
 	ui->colorConstellationLabels    ->setup("ConstellationMgr.namesColor",      "color/const_names_color");
 	ui->colorConstellationLines     ->setup("ConstellationMgr.linesColor",      "color/const_lines_color");
 
-	connectCheckBox(ui->showAsterismLinesCheckBox,       "actionShow_Asterism_Lines");
-	connectIntProperty(ui->asterismLineThicknessSpinBox, "AsterismMgr.asterismLineThickness");
-	connectCheckBox(ui->showAsterismLabelsCheckBox,      "actionShow_Asterism_Labels");
-	connectCheckBox(ui->showRayHelpersCheckBox,          "actionShow_Ray_Helpers");
-	connectIntProperty(ui->rayHelperThicknessSpinBox,    "AsterismMgr.rayHelperThickness");
+	connectCheckBox(ui->showAsterismLinesCheckBox,		"actionShow_Asterism_Lines");
+	connectIntProperty(ui->asterismLineThicknessSpinBox,		"AsterismMgr.asterismLineThickness");
+	connectCheckBox(ui->showAsterismLabelsCheckBox,		"actionShow_Asterism_Labels");
+	connectCheckBox(ui->showRayHelpersCheckBox,		"actionShow_Ray_Helpers");
+	connectIntProperty(ui->rayHelperThicknessSpinBox,		"AsterismMgr.rayHelperThickness");
 
 	connectBoolProperty(ui->selectSingleConstellationCheckBox, "ConstellationMgr.isolateSelected");
 	connectBoolProperty(ui->constellationPickCheckBox, "ConstellationMgr.flagConstellationPick");
@@ -1042,6 +1051,15 @@ void ViewDialog::populateToolTips()
 	ui->fovRectangularMarkerHeightDoubleSpinBox->setSuffix(degree);
 	ui->fovRectangularMarkerWidthDoubleSpinBox->setSuffix(degree);
 	ui->fovRectangularMarkerRotationAngleDoubleSpinBox->setSuffix(degree);
+
+	QString seconds = qc_("s", "duration, suffix");
+	ui->artFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->linesFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->namesFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->boundariesFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->asterismLinesFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->asterismNamesFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->rayHelpersFadeDurationDoubleSpinBox->setSuffix(seconds);
 }
 
 void ViewDialog::populateLists()
@@ -1051,8 +1069,8 @@ void ViewDialog::populateLists()
 	QListWidget* l = ui->culturesListWidget;
 	l->blockSignals(true);
 	l->clear();
-	QStringList starlore = app.getSkyCultureMgr().getSkyCultureListI18();
-	for ( const auto& s : starlore  )
+	QStringList skyculture = app.getSkyCultureMgr().getSkyCultureListI18();
+	for ( const auto& s : skyculture  )
 	{
 		l->addItem(s);
 		l->findItems(s, Qt::MatchExactly).at(0)->setToolTip(s);

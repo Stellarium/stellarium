@@ -97,9 +97,11 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool p
 			if (polyLine[i].isString())
 			{
 				// Can be "thin" or "bold", but we don't support these modifiers yet, so ignore this entry
-				continue;
+				const auto s = polyLine[i].toString();
+				if (s == "thin" || s == "bold")
+					continue;
 			}
-			const int HP = StelUtils::getLongLong(polyLine[i]);
+			const StarId HP = StelUtils::getLongLong(polyLine[i]);
 			if (HP <= 0)
 			{
 				qWarning().nospace() << "Error in constellation " << abbreviation << ": bad HIP " << HP;
@@ -307,7 +309,7 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter, const Vec3d& obsVel
 
 bool Constellation::checkVisibility() const
 {
-	// Is supported seasonal rules by current starlore?
+	// Is supported seasonal rules by current sky culture?
 	if (!seasonalRuleEnabled)
 		return true;
 

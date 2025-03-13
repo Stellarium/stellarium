@@ -545,7 +545,6 @@ void HelpDialog::updateAboutText(void) const
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Worachate Boonplod")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Henry Leung")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Sky cultures researcher: %1").arg(QString("Susanne M. Hoffmann")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Tester: %1").arg(QString("Khalid AlAjaji")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<h3>" + q_("Former Developers").toHtmlEscaped() + "</h3>";
 	newHtml += "<p>"  + q_("Several people have made significant contributions, but are no longer active. Their work has made a big difference to the project:").toHtmlEscaped() + "</p><ul>";
@@ -562,7 +561,8 @@ void HelpDialog::updateAboutText(void) const
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Jörg Müller")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Marcos Cardinot")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Nigel Kerr")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Diego Marcos")).toHtmlEscaped() + "</li></ul>";
+	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Diego Marcos")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<h3>" + q_("Contributors").toHtmlEscaped() + "</h3>";
 	newHtml += "<p>"  + q_("Many individuals have made contributions to the project and their work has made Stellarium better. Alphabetically sorted list of all contributors: %1.").arg(allContributors.join(", ")).toHtmlEscaped() + "</p>";
 	newHtml += "<h3>" + q_("Financial support").toHtmlEscaped() + "</h3>";

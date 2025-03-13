@@ -18,6 +18,7 @@
  */
 
 #include "Dithering.hpp"
+#include "StelMainView.hpp"
 #include "StelTextureMgr.hpp"
 
 #include <QFileInfo>
@@ -34,8 +35,7 @@ StelTextureMgr::StelTextureMgr(QObject *parent)
 	: QObject(parent), glMemoryUsage(0), loaderThreadPool(new QThreadPool(this))
 {
 #ifdef Q_PROCESSOR_X86_64
-	//allow up to 8 textures to be loaded in parallel. Do not use more than half of the cores, as this may cause issues (#3148)
-	loaderThreadPool->setMaxThreadCount(qBound(1,QThread::idealThreadCount()/2-1, 8));
+	loaderThreadPool->setMaxThreadCount(QThread::idealThreadCount());
 #else
 	//on other archs, for now ensure that just 1 texture is at once in background
 	//otherwise, for large textures loaded in parallel (some scenery3d scenes), the risk of an out-of-memory error is greater on 32bit systems
@@ -47,6 +47,8 @@ StelTextureMgr::StelTextureMgr(QObject *parent)
 	if (maxTexSize<8192)
 		qDebug() << "Max texture size:" << maxTexSize;
 	StelTexture::textureMgr = this;
+
+	connect(&StelMainView::getInstance(), &StelMainView::frameFinished, this, &StelTextureMgr::onFrameFinished);
 }
 
 StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const StelTexture::StelTextureParams& params)
@@ -177,6 +179,21 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	}
 	textureCache.insert(canPath,tex);
 	return tex;
+}
+
+void StelTextureMgr::onFrameFinished()
+{
+	totalLoadTimeTaken = 0;
+}
+
+void StelTextureMgr::reportTextureLoadStart()
+{
+	textureLoadTimer.start();
+}
+
+void StelTextureMgr::reportTextureLoadEnd()
+{
+	totalLoadTimeTaken += textureLoadTimer.nsecsElapsed();
 }
 
 //! Create a texture from a QImage.

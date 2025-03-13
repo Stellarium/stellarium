@@ -301,7 +301,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
 	Vec3d v;
-	s->getBinaryOrbit(core->getJDE(), v, RA, DEC, Plx, pmra, pmdec, RadialVel);
+	double binary_sep, binary_pa;  // binary star separation and position angle
+	s->getBinaryOrbit(core->getJDE(), v, RA, DEC, Plx, pmra, pmdec, RadialVel, binary_sep, binary_pa);
+	binary_pa *= M_180_PIf;
 
 	float magOffset = 0.f;
 	if (Plx && s->getPlx())
@@ -426,19 +428,20 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << QString("%1: %2% (%3)").arg(mmStr).arg(vMm).arg(dms) << "<br />";
 		}
 
-		if (wdsObs>0)
+		if ((wdsObs>0) || (binary_sep>0.f))  // either have a WDS observation or a separation modelled by the binary orbit
 		{
+			// use separation and position angle from the binary orbit if available
 			oss << QString("%1 (%3): %2°").arg(q_("Position angle"),
-							QString::number(wdsPA, 'f', 2),
-							QString::number(wdsObs)) << "<br />";
+							QString::number((binary_sep>0.f) ? binary_pa: wdsPA, 'f', 2),
+							(binary_sep>0.f) ? qc_("on date", "coordinates for current epoch"): QString::number(wdsObs)) << "<br />";
 			if (wdsSep>0.f && wdsSep<999.f) // A spectroscopic binary or not?
 			{
 				if (wdsSep>60.f) // A wide binary star?
 					oss << QString("%1 (%4): %2\" (%3)").arg(
 									    q_("Separation"),
-									    QString::number(wdsSep, 'f', 3),
-									    StelUtils::decDegToDmsStr(wdsSep/3600.f),
-									    QString::number(wdsObs)) << "<br />";
+									    QString::number((binary_sep>0.f) ? binary_sep: wdsSep, 'f', 3),
+									    StelUtils::decDegToDmsStr(((binary_sep>0.f) ? binary_sep: wdsSep)/3600.f),
+									    (binary_sep>0.f) ? qc_("on date", "coordinates for current epoch"): QString::number(wdsObs)) << "<br />";
 				else
 					oss << QString("%1 (%3): %2\"").arg(q_("Separation"), QString::number(wdsSep, 'f', 3), QString::number(wdsObs)) << "<br />";
 			}

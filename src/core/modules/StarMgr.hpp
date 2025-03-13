@@ -75,23 +75,23 @@ typedef uint64_t StarId;
 typedef struct
 {
 	StarId hip;
-    bool primary;
-    double binary_period;
-    float eccentricity;
-    float inclination;
-    float big_omega;
-    float small_omega;
-    double periastron_epoch;
-    double semi_major;
-    double bary_distance;
-    double data_epoch;
-    double bary_ra;
-    double bary_dec;
-    double bary_rv;
-    double bary_pmra;
-    double bary_pmdec;
-    float primary_mass;
-    float secondary_mass;
+	bool primary;
+	double binary_period;
+	float eccentricity;
+	float inclination;
+	float big_omega;
+	float small_omega;
+	double periastron_epoch;
+	double semi_major;
+	double bary_distance;
+	double data_epoch;
+	double bary_ra;
+	double bary_dec;
+	double bary_rv;
+	double bary_pmra;
+	double bary_pmdec;
+	float primary_mass;
+	float secondary_mass;
 } binaryorbitstar;
 
 
@@ -420,8 +420,10 @@ public:
 
 	//! Try to load the given catalog, even if it is marched as unchecked.
 	//! Mark it as checked if checksum is correct.
+	//! @param m the catalog data.
+	//! @param load true if the catalog should be loaded, otherwise just check but don't load.
 	//! @return false in case of failure.
-	bool checkAndLoadCatalog(const QVariantMap& m);
+	bool checkAndLoadCatalog(const QVariantMap& m, bool load);
 
 	//! Get the list of all Hipparcos stars.
 	const QList<StelObjectP>& getHipparcosStars() const { return hipparcosStars; }	
@@ -474,7 +476,7 @@ private:
 
 	//! Load culture-specific names for stars from JSON data
 	void loadCultureSpecificNames(const QJsonObject& data, const QMap<QString, int>& commonNamesIndexToSearchWhileLoading);
-	void loadCultureSpecificNameForHIP(const QJsonArray& data, int HIP);
+	void loadCultureSpecificNameForStar(const QJsonArray& data, StarId HIP);
 	void loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName,
 	                                           const QMap<QString, int>& commonNamesIndexToSearchWhileLoading);
 

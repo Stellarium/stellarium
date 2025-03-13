@@ -57,10 +57,13 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	  artIntensity(0),
 	  artIntensityMinimumFov(1.0),
 	  artIntensityMaximumFov(2.0),
-	  artDisplayed(0),
-	  boundariesDisplayed(0),
-	  linesDisplayed(0),
-	  namesDisplayed(0),
+          artDisplayed(0),
+          boundariesDisplayed(0),
+          boundariesFadeDuration(1.),
+          linesDisplayed(0),
+          linesFadeDuration(0.),
+          namesDisplayed(0),
+          namesFadeDuration(1.),
 	  checkLoadingData(false),
 	  constellationLineThickness(1),
 	  constellationBoundariesThickness(1)
@@ -98,16 +101,19 @@ void ConstellationMgr::init()
 	setFlagConstellationPick(conf->value("viewing/flag_constellation_pick", false).toBool());
 	setConstellationLineThickness(conf->value("viewing/constellation_line_thickness", 1).toInt());
 	setConstellationBoundariesThickness(conf->value("viewing/constellation_boundaries_thickness", 1).toInt());
+	setBoundariesFadeDuration(conf->value("viewing/constellation_boundaries_fade_duration", 1.0f).toFloat());
+	setLinesFadeDuration(conf->value("viewing/constellation_lines_fade_duration", 1.0f).toFloat());
+	setLabelsFadeDuration(conf->value("viewing/constellation_labels_fade_duration", 1.0f).toFloat());
 	// The setting for developers
 	setFlagCheckLoadingData(conf->value("devel/check_loading_constellation_data","false").toBool());
 
-	QString starloreDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
-	if (!ConstellationDisplayStyleMap.contains(starloreDisplayStyle))
+	QString skyCultureDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
+	if (!ConstellationDisplayStyleMap.contains(skyCultureDisplayStyle))
 	{
-		qWarning() << "viewing/constellation_name_style (" << starloreDisplayStyle << ") invalid. Using translated style.";
+		qWarning() << "viewing/constellation_name_style (" << skyCultureDisplayStyle << ") invalid. Using translated style.";
 		conf->setValue("viewing/constellation_name_style", "translated");
 	}
-	setConstellationDisplayStyle(ConstellationDisplayStyleMap.value(starloreDisplayStyle, constellationsTranslated));
+	setConstellationDisplayStyle(ConstellationDisplayStyleMap.value(skyCultureDisplayStyle, constellationsTranslated));
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -452,6 +458,9 @@ void ConstellationMgr::loadLinesNamesAndArt(const QJsonArray &constellationsData
 
 		cons->artOpacity = artIntensity;
 		cons->artFader.setDuration(static_cast<int>(artFadeDuration * 1000.f));
+		cons->lineFader.setDuration(static_cast<int>(linesFadeDuration * 1000.f));
+		cons->boundaryFader.setDuration(static_cast<int>(boundariesFadeDuration * 1000.f));
+		cons->nameFader.setDuration(static_cast<int>(namesFadeDuration * 1000.f));
 		cons->setFlagArt(artDisplayed);
 		cons->setFlagBoundaries(boundariesDisplayed);
 		cons->setFlagLines(linesDisplayed);
@@ -756,7 +765,7 @@ double ConstellationMgr::getArtIntensityMaximumFov() const
 
 void ConstellationMgr::setArtFadeDuration(const float duration)
 {
-    if (!qFuzzyCompare(artFadeDuration, duration))
+	if (!qFuzzyCompare(artFadeDuration, duration))
 	{
 		artFadeDuration = duration;
 
@@ -772,6 +781,66 @@ void ConstellationMgr::setArtFadeDuration(const float duration)
 float ConstellationMgr::getArtFadeDuration() const
 {
 	return artFadeDuration;
+}
+
+void ConstellationMgr::setBoundariesFadeDuration(const float duration)
+{
+	if (!qFuzzyCompare(boundariesFadeDuration, duration))
+	{
+		boundariesFadeDuration = duration;
+
+		for (auto* constellation : constellations)
+		{
+			constellation->boundaryFader.setDuration(static_cast<int>(duration * 1000.f));
+		}
+		StelApp::immediateSave("viewing/constellation_boundaries_fade_duration", duration);
+		emit boundariesFadeDurationChanged(duration);
+	}
+}
+
+float ConstellationMgr::getBoundariesFadeDuration() const
+{
+	return boundariesFadeDuration;
+}
+
+void ConstellationMgr::setLinesFadeDuration(const float duration)
+{
+	if (!qFuzzyCompare(linesFadeDuration, duration))
+	{
+		linesFadeDuration = duration;
+
+		for (auto* constellation : constellations)
+		{
+			constellation->lineFader.setDuration(static_cast<int>(duration * 1000.f));
+		}
+		StelApp::immediateSave("viewing/constellation_lines_fade_duration", duration);
+		emit linesFadeDurationChanged(duration);
+	}
+}
+
+float ConstellationMgr::getLinesFadeDuration() const
+{
+	return linesFadeDuration;
+}
+
+void ConstellationMgr::setLabelsFadeDuration(const float duration)
+{
+	if (!qFuzzyCompare(namesFadeDuration, duration))
+	{
+		namesFadeDuration = duration;
+
+		for (auto* constellation : constellations)
+		{
+			constellation->nameFader.setDuration(static_cast<int>(duration * 1000.f));
+		}
+		StelApp::immediateSave("viewing/constellation_labels_fade_duration", duration);
+		emit namesFadeDurationChanged(duration);
+	}
+}
+
+float ConstellationMgr::getLabelsFadeDuration() const
+{
+	return namesFadeDuration;
 }
 
 void ConstellationMgr::setFlagLines(const bool displayed)

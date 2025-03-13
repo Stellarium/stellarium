@@ -3128,7 +3128,8 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(orenNayarParameters = p->uniformLocation("orenNayarParameters"));
 	GL(outgasParameters = p->uniformLocation("outgasParameters"));
 	GL(hasAtmosphere = p->uniformLocation("hasAtmosphere"));
-	GL(isSurvey = p->uniformLocation("isSurvey"));
+	GL(hasNormalMap = p->uniformLocation("hasNormalMap"));
+	GL(hasHorizonMap = p->uniformLocation("hasHorizonMap"));
 
 	// Moon-specific variables
 	GL(earthShadow = p->uniformLocation("earthShadow"));
@@ -3957,8 +3958,8 @@ void Planet::computeModelMatrix(Mat4d &result, bool solarEclipseCase) const
 	}
 }
 
-Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader,
-                                                   const PlanetShaderVars& shaderVars, const bool isSurvey)
+Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars,
+                                                   const bool hasNormalMap, const bool hasHorizonMap)
 {
 	RenderData data;
 
@@ -4006,7 +4007,8 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	static LandscapeMgr* lmgr=GETSTELMODULE(LandscapeMgr);
 	Q_ASSERT(lmgr);
 
-	GL(shader->setUniformValue(shaderVars.isSurvey, GLint(isSurvey)));
+	GL(shader->setUniformValue(shaderVars.hasNormalMap, GLint(hasNormalMap)));
+	GL(shader->setUniformValue(shaderVars.hasHorizonMap, GLint(hasHorizonMap)));
 
 	GL(shader->setUniformValue(shaderVars.projectionMatrix, qMat));
 	GL(shader->setUniformValue(shaderVars.hasAtmosphere, GLint(atmosphere)));
@@ -4100,6 +4102,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 	if(shaderError)
 		return;
 	
+	const bool isMoon = this == ssm->getMoon();
 	QOpenGLShaderProgram* shader = planetShaderProgram;
 	const PlanetShaderVars* shaderVars = &planetShaderVars;
 	if (rings)
@@ -4107,7 +4110,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		shader = ringPlanetShaderProgram;
 		shaderVars = &ringPlanetShaderVars;
 	}
-	if (this==ssm->getMoon())
+	if (isMoon)
 	{
 		shader = moonShaderProgram;
 		shaderVars = &moonShaderVars;
@@ -4128,7 +4131,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		{
 			shader = ringPlanetShaderProgram;
 		}
-		if (this==ssm->getMoon())
+		if (isMoon)
 		{
 			shader = moonShaderProgram;
 		}
@@ -4136,7 +4139,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 
 	GL(shader->bind());
 
-	RenderData rData = setCommonShaderUniforms(*painter,shader,*shaderVars, false);
+	RenderData rData = setCommonShaderUniforms(*painter,shader,*shaderVars, isMoon,isMoon);
 	if(this==ssm->getSun())
 	{
 		const auto color = painter->getColor();
@@ -4153,7 +4156,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		rings->tex->bind(2);
 	}
 
-	if (this==ssm->getMoon())
+	if (isMoon)
 	{
 		GL(normalMap->bind(2));
 		GL(moonShaderProgram->setUniformValue(moonShaderVars.normalMap, 2));
@@ -4363,6 +4366,11 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	if (!Planet::initShader()) return;
 	static SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
+	if (surveyForNormals && survey)
+		survey->setNormalsSurvey(surveyForNormals);
+	if (surveyForHorizons && survey)
+		survey->setHorizonsSurvey(surveyForHorizons);
+
 	painter->setDepthMask(true);
 	painter->setDepthTest(true);
 
@@ -4371,6 +4379,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	Vec4f color = painter->getColor();
 	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(equatorialRadius * sphereScale));
 
+	const bool isMoon = this == ssm->getMoon();
 	QOpenGLShaderProgram* shader = planetShaderProgram;
 	const PlanetShaderVars* shaderVars = &planetShaderVars;
 	if (rings)
@@ -4378,14 +4387,14 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 		shader = ringPlanetShaderProgram;
 		shaderVars = &ringPlanetShaderVars;
 	}
-	if (this == ssm->getMoon())
+	if (isMoon)
 	{
 		shader = moonShaderProgram;
 		shaderVars = &moonShaderVars;
 	}
 
 	GL(shader->bind());
-	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars, true);
+	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars, surveyForNormals != nullptr, surveyForHorizons != nullptr);
 	QVector<Vec3f> projectedVertsArray;
 	QVector<Vec3f> vertsArray;
 	const double angle = 2 * getSpheroidAngularRadius(core) * M_PI_180;
@@ -4400,9 +4409,8 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 		rings->tex->bind(2);
 	}
 
-	if (this == ssm->getMoon())
+	if (isMoon)
 	{
-		GL(normalMap->bind(2));
 		GL(moonShaderProgram->setUniformValue(moonShaderVars.normalMap, 2));
 		if (!rData.shadowCandidates.isEmpty())
 		{
@@ -4679,7 +4687,7 @@ bool Planet::drawObjModel(StelPainter *painter, float screenRd)
 	GL(shd->enableAttributeArray("vertex"));
 	objModel->projPosBuffer->release();
 
-	setCommonShaderUniforms(*painter,shd,*shdVars,false);
+	setCommonShaderUniforms(*painter,shd,*shdVars,false,false);
 
 	//draw that model using the array wrapper
 	objModel->arr->draw();

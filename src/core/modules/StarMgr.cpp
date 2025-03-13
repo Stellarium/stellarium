@@ -497,7 +497,7 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 	}
 }
 
-bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
+bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc, const bool load)
 {
 	const bool checked = catDesc.value("checked").toBool();
 	QString catalogFileName = catDesc.value("fileName").toString();
@@ -527,7 +527,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 	if (!checked)
 	{
 		// The file is not checked but we found it, maybe from a previous download/version
-		qWarning().noquote() << "Found file" << QDir::toNativeSeparators(catalogFilePath) << ", checking md5sum...";
+		qInfo().noquote() << "Found file" << QDir::toNativeSeparators(catalogFilePath) << ", checking md5sum...";
 
 		QFile file(catalogFilePath);
 		if(file.open(QIODevice::ReadOnly | QIODevice::Unbuffered))
@@ -569,26 +569,34 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 				file.remove();
 				return false;
 			}
-			qWarning() << "MD5 sum correct!";
+			qInfo() << "MD5 sum correct!";
 			setCheckFlag(catDesc.value("id").toString(), true);
 		}
 	}
 
-	ZoneArray* z = ZoneArray::create(catalogFilePath, true);
-	if (z)
+	if (load)
 	{
-		if (z->level<gridLevels.size())
+		ZoneArray* z = ZoneArray::create(catalogFilePath, true);
+		if (z)
 		{
-			qWarning().noquote() << QDir::toNativeSeparators(catalogFileName) << ", " << z->level << ": duplicate level";
-			delete z;
-			return true;
+			if (z->level<gridLevels.size())
+			{
+				qWarning().noquote() << QDir::toNativeSeparators(catalogFileName) << ", " << z->level << ": duplicate level";
+				delete z;
+				return true;
+			}
+			Q_ASSERT(z->level==maxGeodesicGridLevel+1);
+			Q_ASSERT(z->level==gridLevels.size());
+			++maxGeodesicGridLevel;
+			gridLevels.append(z);
 		}
-		Q_ASSERT(z->level==maxGeodesicGridLevel+1);
-		Q_ASSERT(z->level==gridLevels.size());
-		++maxGeodesicGridLevel;
-		gridLevels.append(z);
+		return true;
 	}
-	return true;
+	else
+	{
+		qWarning().noquote() << "Star catalog: " << QDir::toNativeSeparators(catalogFileName) << "is found but not loaded because at least one of the lower levels is missing!";
+		return false;
+	}
 }
 
 void StarMgr::setCheckFlag(const QString& catId, bool b)
@@ -624,10 +632,11 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	qInfo() << "Loading star data ...";
 
 	catalogsDescription = starsConfig.value("catalogs").toList();
+	bool isSuccessing = true;
 	foreach (const QVariant& catV, catalogsDescription)
 	{
 		QVariantMap m = catV.toMap();
-		checkAndLoadCatalog(m);
+		isSuccessing = checkAndLoadCatalog(m, isSuccessing);
 	}
 
 	for (int i=0; i<=NR_OF_HIP; i++)
@@ -871,7 +880,7 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 	}
 }
 
-void StarMgr::loadCultureSpecificNameForHIP(const QJsonArray& data, const int HIP)
+void StarMgr::loadCultureSpecificNameForStar(const QJsonArray& data, const StarId HIP)
 {
 	for (const auto& entry : data)
 	{
@@ -916,9 +925,14 @@ void StarMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QStri
 	for (auto it = data.begin(); it != data.end(); ++it)
 	{
 		const auto key = it.key();
+		// Let's allow Hipparcos and Gaia designations only
 		if (key.startsWith("HIP "))
 		{
-			loadCultureSpecificNameForHIP(it.value().toArray(), key.mid(4).toInt());
+			loadCultureSpecificNameForStar(it.value().toArray(), key.mid(4).toUInt());
+		}
+		else if (key.startsWith("Gaia DR3 "))
+		{
+			loadCultureSpecificNameForStar(it.value().toArray(), key.mid(9).toULongLong());
 		}
 		else if (key.startsWith("NAME "))
 		{
