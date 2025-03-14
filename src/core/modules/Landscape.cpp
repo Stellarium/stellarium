@@ -419,7 +419,6 @@ void Landscape::loadLabels(const QString& landscapeId)
 			StelUtils::spheToRect((180.0f-parts.at(0).toFloat() - parts.at(3).toFloat())*M_PI_180f,
 					      (parts.at(1).toFloat() + parts.at(2).toFloat())*M_PI_180f, newLabel.labelPoint);
 			newLabel.isLabelAboveFeature=(parts.at(2).toFloat() >= 0);
-			//qDebug() << newLabel.name << "isLabelAboveFeature:" << newLabel.isLabelAboveFeature;
 			landscapeLabels.append(newLabel);
 			//qDebug() << "Added landscape label " << newLabel.name;
 		}
@@ -460,12 +459,12 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 		{
 			if (landscapeLabels.at(i).isLabelAboveFeature)
 			{
-			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, labelAngle, 0.5f*fontSize*sinf(labelAngle*M_PI_180f),
+				painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, labelAngle, 0.5f*fontSize*sinf(labelAngle*M_PI_180f),
 					  -0.5f*fontSize*sinf(labelAngle*M_PI_180f), true);
 			}
 			else
 			{
-			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, labelAngle, -0.5f*fontSize*sinf(labelAngle*M_PI_180f)-textWidth,
+				painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, labelAngle, -0.5f*fontSize*sinf(labelAngle*M_PI_180f)-textWidth,
 					  -0.5f*fontSize*sinf(labelAngle*M_PI_180f), true);
 			}
 		}
@@ -473,11 +472,11 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 		{
 			if (landscapeLabels.at(i).isLabelAboveFeature)
 			{
-			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth/2, 2, true);
+				painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth/2, 2, true);
 			}
 			else
 			{
-			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth/2, -2-textHeight/2, true);
+				painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth/2, -2-textHeight/2, true);
 			}
 		}
 		painter->drawGreatCircleArc(landscapeLabels.at(i).featurePoint, landscapeLabels.at(i).labelPoint, nullptr);
