@@ -1052,6 +1052,7 @@ void ViewDialog::populateToolTips()
 	ui->fovRectangularMarkerWidthDoubleSpinBox->setSuffix(degree);
 	ui->fovRectangularMarkerRotationAngleDoubleSpinBox->setSuffix(degree);
 
+	// TRANSLATORS: duration in seconds
 	QString seconds = qc_("s", "duration, suffix");
 	ui->artFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->linesFadeDurationDoubleSpinBox->setSuffix(seconds);

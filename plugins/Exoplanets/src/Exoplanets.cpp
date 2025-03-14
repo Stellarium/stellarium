@@ -570,10 +570,17 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 		{
 			QStringList designations = epsData.value("starAltNames").toString().split(", ");
 			QString hip;
-			for(int i=0; i<designations.size(); i++)
+			for (int i = 0; i < designations.size(); i++)
 			{
-				if (designations.at(i).trimmed().startsWith("HIP"))
-					hip = designations.at(i).trimmed();
+				QString trimmedDesignation = designations.at(i).trimmed();
+				if (trimmedDesignation.startsWith("HIP") || 
+					trimmedDesignation.startsWith("GAIA DR3") || 
+					trimmedDesignation.startsWith("SAO") || 
+					trimmedDesignation.startsWith("HD") || 
+					trimmedDesignation.startsWith("HR"))
+				{
+					hip = trimmedDesignation;
+				}
 			}
 			if (!hip.isEmpty())
 				star = smgr->searchByName(hip);
