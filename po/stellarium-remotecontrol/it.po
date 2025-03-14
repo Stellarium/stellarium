@@ -8,17 +8,17 @@
 # Andrea Reguitti <andreareguitti@gmail.com>, 2022
 # Giuseppe Putzolu <giuseppe.putzolu@gmail.com>, 2022
 # Alberto Canepa <alby.canepa@gmail.com>, 2023
-# Luigi Ghia <luigi.ghia@gmail.com>, 2024
-# cardinot <mcardinot@gmail.com>, 2024
+# cardinot <mcardinot@gmail.com>, 2025
+# Luigi Ghia <luigi.ghia@gmail.com>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-12-02 12:46+0700\n"
+"POT-Creation-Date: 2025-01-03 20:26+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2024\n"
+"Last-Translator: Luigi Ghia <luigi.ghia@gmail.com>, 2025\n"
 "Language-Team: Italian (https://app.transifex.com/stellarium/teams/80998/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -197,15 +197,15 @@ msgstr "Settimana solare"
 
 #: index.html:92 tablet7in.html:193
 msgid "Calendar year"
-msgstr ""
+msgstr "Anno Calendariale"
 
 #: index.html:93 tablet7in.html:194
 msgid "10 Calendar years"
-msgstr ""
+msgstr "10 anni Calendariali"
 
 #: index.html:94 tablet7in.html:195
 msgid "100 Calendar years"
-msgstr ""
+msgstr "100 anni Calendariali"
 
 #: index.html:97 tablet7in.html:198
 msgid "Sidereal year"
@@ -285,7 +285,7 @@ msgstr "Seleziona e metti a fuoco"
 
 #: index.html:245 tablet7in.html:265
 msgid "Select current item"
-msgstr ""
+msgstr "Seleziona l'elemento corrente"
 
 #: index.html:249 tablet7in.html:269
 msgid "Selection mode"
@@ -325,15 +325,15 @@ msgstr "Luminosità Via Lettea:"
 
 #: index.html:289 tablet7in.html:351
 msgid "Dbl. stars"
-msgstr ""
+msgstr "Stelle doppie"
 
 #: index.html:290 tablet7in.html:352
 msgid "Var. stars"
-msgstr ""
+msgstr "Stelle Variabili"
 
 #: index.html:291 tablet7in.html:353
 msgid "HIP"
-msgstr ""
+msgstr "HIP"
 
 #: index.html:294 tablet7in.html:357
 msgid "Digitized Sky Survey"
@@ -393,11 +393,11 @@ msgstr "Scala dei corpi minori:"
 
 #: index.html:332
 msgid "Mark minor bodies:"
-msgstr ""
+msgstr "Contrassegna i corpi minori:"
 
 #: index.html:360 tablet7in.html:438
 msgid "Bortle class:"
-msgstr ""
+msgstr "Scala del cielo buio di Bortle:"
 
 #: index.html:377 tablet7in.html:455
 msgid "Extinction Coefficient:"
@@ -405,11 +405,11 @@ msgstr "Coefficiente di estinzione"
 
 #: index.html:378 tablet7in.html:456
 msgid "Only extinction/refraction, no blue skylight"
-msgstr ""
+msgstr "Solo estinzione/rifrazione, nessuna luce blu del cielo"
 
 #: index.html:378 tablet7in.html:457
 msgid "Suppress scattering"
-msgstr ""
+msgstr "Sopprimere la dispersione"
 
 #: index.html:382 tablet7in.html:462
 msgid "Shooting Stars"
@@ -449,7 +449,7 @@ msgstr "Minore fermata"
 
 #: index.html:470 tablet7in.html:558
 msgid "Line width:"
-msgstr ""
+msgstr "Spessore della linea:"
 
 #: index.html:480 tablet7in.html:568
 msgid "Current Planet:"
@@ -516,7 +516,7 @@ msgstr "Panorama attuale"
 
 #: index.html:699 tablet7in.html:772
 msgid "Label constellations with font size"
-msgstr ""
+msgstr "Etichetta le costellazioni con la dimensione del carattere"
 
 #: index.html:703 tablet7in.html:776
 msgid "Show lines with thickness"
@@ -524,7 +524,7 @@ msgstr "Mostra linee con spessore"
 
 #: index.html:707 tablet7in.html:780
 msgid "Label asterisms with font size"
-msgstr ""
+msgstr "Etichetta degli asterismi con la dimensione del carattere"
 
 #: index.html:711 tablet7in.html:784
 msgid "Show asterisms with thickness"
@@ -533,6 +533,10 @@ msgstr "Mostra gli asterismi con spessore"
 #: index.html:715 tablet7in.html:788
 msgid "Show ray helpers with thickness"
 msgstr "Mostra l'helper ray con spessore"
+
+#: index.html:719 tablet7in.html:792
+msgid "Show art in brightness"
+msgstr "Mostra i disegni in luminosità"
 
 #: index.html:723 tablet7in.html:796
 msgid "Show boundaries with thickness"
