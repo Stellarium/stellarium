@@ -267,6 +267,15 @@ public:
 		TransitCount			//! total number of columns
 	};
 
+	enum EphemerisTimeDurationSteps {
+		Minutes	= 1,
+		Hours	= 2,
+		Days	= 3,
+		Weeks	= 4,
+		Months	= 5,
+		Years	= 6
+	};
+
 	AstroCalcDialog(QObject* parent);
 	~AstroCalcDialog() override;
 

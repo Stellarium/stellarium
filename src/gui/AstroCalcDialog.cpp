@@ -1925,12 +1925,12 @@ double AstroCalcDialog::getEphemerisTimeStep(const PlanetP &planet)
 double AstroCalcDialog::getEphemerisTimeDuration()
 {
 	const QMap<int, double>timeUnitMap = {
-		{ 1, StelCore::JD_MINUTE },
-		{ 2, StelCore::JD_HOUR },
-		{ 3, StelCore::JD_DAY },
-		{ 4, 7.0 },
-		{ 5, 30.4375 }, // month = 1/12 of year in days
-		{ 6, 365.25 }	// year
+	        { EphemerisTimeDurationSteps::Minutes,	StelCore::JD_MINUTE },
+	        { EphemerisTimeDurationSteps::Hours,	StelCore::JD_HOUR },
+	        { EphemerisTimeDurationSteps::Days,	StelCore::JD_DAY },
+	        { EphemerisTimeDurationSteps::Weeks,	7.0 },
+	        { EphemerisTimeDurationSteps::Months,	30.4375 }, // month = 1/12 of year in days
+	        { EphemerisTimeDurationSteps::Years,	365.25 } // year
 	};
 	return timeUnitMap.value(ui->dateToUnitsComboBox->currentData().toInt(), 30.4375);
 }
@@ -1938,14 +1938,14 @@ double AstroCalcDialog::getEphemerisTimeDuration()
 void AstroCalcDialog::populateEphemerisTimeDurationTooltip()
 {
 	const QMap<int, QString> timeTooltipMap = {
-		{ 1, q_("Duration in minutes") },
-		{ 2, q_("Duration in hours") },
-		{ 3, q_("Duration in days") },
-		{ 4, q_("Duration in weeks") },
-		{ 5, q_("Duration in months") },
-		{ 6, q_("Duration in years") }
+	        { EphemerisTimeDurationSteps::Minutes,	q_("Duration in minutes") },
+	        { EphemerisTimeDurationSteps::Hours,	q_("Duration in hours") },
+	        { EphemerisTimeDurationSteps::Days,	q_("Duration in days") },
+	        { EphemerisTimeDurationSteps::Weeks,	q_("Duration in weeks") },
+	        { EphemerisTimeDurationSteps::Months,	q_("Duration in months") },
+	        { EphemerisTimeDurationSteps::Years,	q_("Duration in years") }
 	};
-	ui->dateToDurationSpinBox->setToolTip(timeTooltipMap.value(ui->dateToUnitsComboBox->currentData().toInt(), q_("Duration in months")));
+	ui->dateToDurationSpinBox->setToolTip(QString("%1. %2: %3..%4").arg(timeTooltipMap.value(ui->dateToUnitsComboBox->currentData().toInt(), q_("Duration in months")), q_("Valid range"), QString::number(ui->dateToDurationSpinBox->minimum()), QString::number(ui->dateToDurationSpinBox->maximum())));
 }
 
 void AstroCalcDialog::generateEphemeris()
