@@ -517,9 +517,20 @@ void ConstellationMgr::loadLinesNamesAndArt(const QJsonArray &constellationsData
 		const int texSizeX = sizeData[0].toInt(), texSizeY = sizeData[1].toInt();
 
 		StelCore* core = StelApp::getInstance().getCore();
-		const Vec3d s1 = hipStarMgr->searchHP(static_cast<int>(hp1))->getJ2000EquatorialPos(core);
-		const Vec3d s2 = hipStarMgr->searchHP(static_cast<int>(hp2))->getJ2000EquatorialPos(core);
-		const Vec3d s3 = hipStarMgr->searchHP(static_cast<int>(hp3))->getJ2000EquatorialPos(core);
+		StelObjectP s1obj = hipStarMgr->searchHP(static_cast<int>(hp1));
+		StelObjectP s2obj = hipStarMgr->searchHP(static_cast<int>(hp2));
+		StelObjectP s3obj = hipStarMgr->searchHP(static_cast<int>(hp3));
+
+		// check for null pointers
+		if (s1obj.isNull() || s2obj.isNull() || s3obj.isNull())
+		{
+			qWarning() << "ERROR: could not find stars:" << hp1 << hp2 << hp3 << " in constellation" << consObj["id"].toString();
+			continue;
+		}
+
+		const Vec3d s1 = s1obj->getJ2000EquatorialPos(core);
+		const Vec3d s2 = s2obj->getJ2000EquatorialPos(core);
+		const Vec3d s3 = s3obj->getJ2000EquatorialPos(core);
 
 		// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
 		// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate space
