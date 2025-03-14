@@ -1,4 +1,4 @@
-# Chinese Chenzhuo Sky（3rd to 6th Century）
+# Chinese Chenzhuo Sky (3rd Century)
 
 ## Introduction
 
@@ -38,7 +38,7 @@ This sky culture is thus invaluable for uncovering the original scientific and c
  - [#1]: Sun, X.-C., and Kistemaker, J., *The Chinese sky during the Han*. Leiden: Brill, 1997.
  - [#2]: Yang, B.-S., 2023. *Zhongguo Chuantong Hengxing Guance Jingdu ji Xingguan Yanbian Yanjiu* 中国传统恒星观测精度及星官演变研究 (A Research on the Accuracy of Chinese Traditional Star Observation and the Evolution of Constellations), PhD thesis, (Hefei: University of Science and Technology of China, 2023).
  - [#3]: Yang, B.-S., and Hoffmann, S. M., 2024. Identification of Z Cam’s Historical Counterpart: The Quest for an Ancient Nova. *Research in Astronomy and Astrophysics*. 12, 12pp.
- - [#4]: Yang, B.-S., and Chu, L.-F., 2025. A Research on Chenzhuo’s Star Catalogue in the Continuation of the Later Han Books. *The Chinese Journal for the History of Science*. 3 (To be published).
+ - [#4]: Yang, B.-S., and Chu, L.-F., 2025. A Research on Chenzhuo’s Star Catalogue in the Continuation of the Later Han Books. *The Chinese Journal for the History of Science*. 1.
 
 ## Authors
 
