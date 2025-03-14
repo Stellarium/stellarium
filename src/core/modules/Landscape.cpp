@@ -420,7 +420,6 @@ void Landscape::loadLabels(const QString& landscapeId)
 					      (parts.at(1).toFloat() + parts.at(2).toFloat())*M_PI_180f, newLabel.labelPoint);
 			newLabel.isLabelAboveFeature=(parts.at(2).toFloat() >= 0);
 			landscapeLabels.append(newLabel);
-			//qDebug() << "Added landscape label " << newLabel.name;
 		}
 		file.close();
 	}
