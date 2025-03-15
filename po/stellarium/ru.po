@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-03-09 13:10+0700\n"
+"POT-Creation-Date: 2025-03-14 10:16+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -5925,98 +5925,99 @@ msgstr ""
 "невыпуклых объектов солнечной системы. Может ухудшить качество теней на "
 "некоторых объектах."
 
-#: src/gui/ViewDialog.cpp:1055
+#. TRANSLATORS: duration in seconds
+#: src/gui/ViewDialog.cpp:1056
 msgctxt "duration, suffix"
 msgid "s"
 msgstr " с"
 
-#: src/gui/ViewDialog.cpp:1091
+#: src/gui/ViewDialog.cpp:1092
 msgid "Abbreviated"
 msgstr "Сокращенные"
 
-#: src/gui/ViewDialog.cpp:1092
+#: src/gui/ViewDialog.cpp:1093
 msgid "Native"
 msgstr "Собственные"
 
-#: src/gui/ViewDialog.cpp:1093
+#: src/gui/ViewDialog.cpp:1094
 msgid "Translated"
 msgstr "Переведенные"
 
-#: src/gui/ViewDialog.cpp:1275
+#: src/gui/ViewDialog.cpp:1276
 msgid "No shooting stars"
 msgstr "Без метеоров"
 
-#: src/gui/ViewDialog.cpp:1277
+#: src/gui/ViewDialog.cpp:1278
 msgid "Normal rate"
 msgstr "Нормальный темп"
 
-#: src/gui/ViewDialog.cpp:1279
+#: src/gui/ViewDialog.cpp:1280
 msgid "Standard Orionids rate"
 msgstr "Стандартный темп для Орионид"
 
-#: src/gui/ViewDialog.cpp:1281
+#: src/gui/ViewDialog.cpp:1282
 msgid "Standard Perseids rate"
 msgstr "Стандартный темп для Персеид"
 
-#: src/gui/ViewDialog.cpp:1283
+#: src/gui/ViewDialog.cpp:1284
 msgid "Standard Geminids rate"
 msgstr "Стандартный темп для Геминид"
 
-#: src/gui/ViewDialog.cpp:1285
+#: src/gui/ViewDialog.cpp:1286
 msgid "Exceptional Perseid rate"
 msgstr "Исключительный темп для Персеид"
 
-#: src/gui/ViewDialog.cpp:1287
+#: src/gui/ViewDialog.cpp:1288
 msgid "Meteor storm rate"
 msgstr "Метеорный ливень"
 
-#: src/gui/ViewDialog.cpp:1289
+#: src/gui/ViewDialog.cpp:1290
 msgid "Exceptional Draconid rate"
 msgstr "Исключительный темп для Драконид"
 
-#: src/gui/ViewDialog.cpp:1291
+#: src/gui/ViewDialog.cpp:1292
 msgid "Exceptional Leonid rate"
 msgstr "Исключительный темп для Леонид"
 
-#: src/gui/ViewDialog.cpp:1293
+#: src/gui/ViewDialog.cpp:1294
 msgid "Very high rate (1966 Leonids)"
 msgstr "Очень высокий темп (Леониды 1966)"
 
-#: src/gui/ViewDialog.cpp:1295
+#: src/gui/ViewDialog.cpp:1296
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Наибольший возможный темп (Леониды 1833)"
 
-#: src/gui/ViewDialog.cpp:1358
+#: src/gui/ViewDialog.cpp:1359
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
 msgstr "Г. Мюллер (1893)"
 
-#: src/gui/ViewDialog.cpp:1359
+#: src/gui/ViewDialog.cpp:1360
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
 msgstr "Астрономический альманах (1984)"
 
-#: src/gui/ViewDialog.cpp:1360
+#: src/gui/ViewDialog.cpp:1361
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Пояснительное дополнение (1992)"
 
-#: src/gui/ViewDialog.cpp:1361
+#: src/gui/ViewDialog.cpp:1362
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Пояснительное дополнение (2013)"
 
-#: src/gui/ViewDialog.cpp:1362
+#: src/gui/ViewDialog.cpp:1363
 msgctxt "magnitude algorithm"
 msgid "Mallama & Hilton (2018)"
 msgstr "Маллама и Хилтон (2018)"
 
-#: src/gui/ViewDialog.cpp:1363
+#: src/gui/ViewDialog.cpp:1364
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "Общий"
 
-#: src/gui/ViewDialog.cpp:1386
+#: src/gui/ViewDialog.cpp:1387
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -6025,7 +6026,7 @@ msgstr ""
 "позднее) и дает звёздную величину (инструментальную) V (предположительно Д. "
 "Л. Харриса)."
 
-#: src/gui/ViewDialog.cpp:1387
+#: src/gui/ViewDialog.cpp:1388
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Müller and was"
 " still republished in the <em>Explanatory Supplement to the Astronomical "
@@ -6035,7 +6036,7 @@ msgstr ""
 "опубликован в <em>Пояснительном дополнении к астрономическим эфемеридам</em>"
 " (1961)."
 
-#: src/gui/ViewDialog.cpp:1388
+#: src/gui/ViewDialog.cpp:1389
 msgid ""
 "The algorithm was published in the 2nd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (1992)."
@@ -6043,7 +6044,7 @@ msgstr ""
 "Алгоритм был опубликован в 2-м издании <em>Пояснительного дополнения к "
 "астрономическому альманаху</em> (1992)."
 
-#: src/gui/ViewDialog.cpp:1389
+#: src/gui/ViewDialog.cpp:1390
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -6051,7 +6052,7 @@ msgstr ""
 "Алгоритм был опубликован в 3-м издании <em>Пояснительного дополнения к "
 "астрономическим эфемеридам</em> (2013)."
 
-#: src/gui/ViewDialog.cpp:1390
+#: src/gui/ViewDialog.cpp:1391
 msgid ""
 "The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing "
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
@@ -6061,7 +6062,7 @@ msgstr ""
 "видимых планетных звёздных величин для астрономического альманаха.</em> "
 "Астрономия и вычисления 25 (2018) 10-24."
 
-#: src/gui/ViewDialog.cpp:1393
+#: src/gui/ViewDialog.cpp:1394
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Визуальная звёзд. величина, основанная на фазовом угле и альбедо."
 
@@ -7683,7 +7684,7 @@ msgid "Declination vs. Time"
 msgstr "Склонение от времени"
 
 #. TRANSLATORS: hours.
-#. TRANSLATORS: duration
+#. TRANSLATORS: duration in hours
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:5657 src/gui/AstroCalcChart.cpp:445
 #: src/gui/AstroCalcChart.cpp:471
@@ -16840,7 +16841,7 @@ msgstr "\"/пкс"
 msgid "Max exposure"
 msgstr "Макс. экпозиция"
 
-#. TRANSLATORS: duration
+#. TRANSLATORS: duration in seconds
 #. TRANSLATORS: seconds.
 #: plugins/Oculars/src/Oculars.cpp:2039
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1193
@@ -23762,109 +23763,109 @@ msgid "Enable display number of exoplanets in the system"
 msgstr "Включить отображение количества экзопланет в системе "
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1044
+#: plugins/Exoplanets/src/Exoplanets.cpp:1051
 msgctxt "Habitable zone"
 msgid "Hot"
 msgstr "горяч."
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1046
+#: plugins/Exoplanets/src/Exoplanets.cpp:1053
 msgctxt "Habitable zone"
 msgid "Warm"
 msgstr "тёпл."
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1048
+#: plugins/Exoplanets/src/Exoplanets.cpp:1055
 msgctxt "Habitable zone"
 msgid "Cold"
 msgstr "холод."
 
 #. TRANSLATORS: Exoplanet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1051
+#: plugins/Exoplanets/src/Exoplanets.cpp:1058
 msgctxt "Exoplanet size"
 msgid "Miniterran"
 msgstr "миниземля"
 
 #. TRANSLATORS: Exoplanet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1053
+#: plugins/Exoplanets/src/Exoplanets.cpp:1060
 msgctxt "Exoplanet size"
 msgid "Subterran"
 msgstr "субземля"
 
 #. TRANSLATORS: Exoplanet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1055
+#: plugins/Exoplanets/src/Exoplanets.cpp:1062
 msgctxt "Exoplanet size"
 msgid "Terran"
 msgstr "земля"
 
 #. TRANSLATORS: Exoplanet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1057
+#: plugins/Exoplanets/src/Exoplanets.cpp:1064
 msgctxt "Exoplanet size"
 msgid "Superterran"
 msgstr "суперземля"
 
 #. TRANSLATORS: Exoplanet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1059
+#: plugins/Exoplanets/src/Exoplanets.cpp:1066
 msgctxt "Exoplanet size"
 msgid "Jovian"
 msgstr "юпитер"
 
 #. TRANSLATORS: Exoplanet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1061
+#: plugins/Exoplanets/src/Exoplanets.cpp:1068
 msgctxt "Exoplanet size"
 msgid "Neptunian"
 msgstr "нептун"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1064
+#: plugins/Exoplanets/src/Exoplanets.cpp:1071
 msgctxt "Exoplanet detection method"
 msgid "Astrometry"
 msgstr "астрометр."
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1066
+#: plugins/Exoplanets/src/Exoplanets.cpp:1073
 msgctxt "Exoplanet detection method"
 msgid "Imaging"
 msgstr "прям. наблюд."
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1068
+#: plugins/Exoplanets/src/Exoplanets.cpp:1075
 msgctxt "Exoplanet detection method"
 msgid "Kinematic"
 msgstr "кинем."
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1070
+#: plugins/Exoplanets/src/Exoplanets.cpp:1077
 msgctxt "Exoplanet detection method"
 msgid "Microlensing"
 msgstr "микролинзир."
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1072
+#: plugins/Exoplanets/src/Exoplanets.cpp:1079
 msgctxt "Exoplanet detection method"
 msgid "Other"
 msgstr "другой"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1074
+#: plugins/Exoplanets/src/Exoplanets.cpp:1081
 msgctxt "Exoplanet detection method"
 msgid "Primary Transit"
 msgstr "перв. транзит."
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1076
+#: plugins/Exoplanets/src/Exoplanets.cpp:1083
 msgctxt "Exoplanet detection method"
 msgid "Radial Velocity"
 msgstr "лучев. скор."
 
 #. TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:1078
+#: plugins/Exoplanets/src/Exoplanets.cpp:1085
 msgctxt "Exoplanet detection method"
 msgid "TTV"
 msgstr "ВВТ"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1080
+#: plugins/Exoplanets/src/Exoplanets.cpp:1087
 msgctxt "Exoplanet detection method"
 msgid "Timing"
 msgstr "пер. пульс."
