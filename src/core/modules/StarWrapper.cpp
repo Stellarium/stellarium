@@ -310,7 +310,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	{
 		magOffset = 5.f * log10(s->getPlx()/Plx);
 	} 
-	oss << getMagnitudeInfoString(core, flags, 2, magOffset);
+	double variable_magoffset = 0.0;
+	s->getVarStarOffset(core->getJDE(), variable_magoffset);
+	oss << getMagnitudeInfoString(core, flags, 2, magOffset + variable_magoffset / 1000.);
 
 	// should use Plx from getPlx because Plx can change with time, but not absolute magnitude
 	if ((flags&AbsoluteMagnitude) && s->getPlx())
@@ -668,7 +670,9 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << QString("%1: <b>%2</b>").arg(q_("Type"), objectTypeI18nStr) << "<br />";
 	}
 
-	oss << getMagnitudeInfoString(core, flags, 2);
+	double variable_magoffset = 0.0;
+	s->getVarStarOffset(core->getJDE(), variable_magoffset);
+	oss << getMagnitudeInfoString(core, flags, 2, variable_magoffset / 1000.);
 
 	double RA, DEC, pmra, pmdec;
 	double Plx = s->getPlx();
@@ -895,7 +899,9 @@ QString StarWrapper3::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << QString("%1: <b>%2</b>").arg(q_("Type"), objectTypeI18nStr) << "<br />";
 	}
 
-	oss << getMagnitudeInfoString(core, flags, 2);
+	double variable_magoffset = 0.0;
+	s->getVarStarOffset(core->getJDE(), variable_magoffset);
+	oss << getMagnitudeInfoString(core, flags, 2, variable_magoffset / 1000.);
 
 	if (flags&Extra)
 	{
