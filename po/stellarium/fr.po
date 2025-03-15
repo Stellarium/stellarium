@@ -3577,8 +3577,8 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
-"Cet algorithme a été utilisé dans l'ouvrage de P. Bretagnon & L. Simon "
-"<em>Planetary Programs and Tables from -4000 to +2800</em> (1986) et dans le"
+"Cet algorithme a été utilisé pour l'ouvrage de P. Bretagnon & L. Simon "
+"<em>Planetary Programs and Tables from -4000 to +2800</em> (1986) et pour le"
 " logiciel de planétarium RedShift."
 
 #: src/core/StelCore.cpp:2700
@@ -3997,8 +3997,8 @@ msgid ""
 "projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
 "Le nom complet de cette projection est <i>projection cylindrique "
-"équidistante</i>. Avec cette projection toutes les parallèles sont également"
-" espacées."
+"équidistante</i>. Avec cette projection tous les parallèles sont également "
+"espacés."
 
 #: src/core/StelProjectorClasses.cpp:633
 msgid "Equirectangular"
@@ -5453,8 +5453,8 @@ msgid ""
 " available via the \"%1\" button."
 msgstr ""
 "Seules les commandes auxquelles est attribué un raccourci clavier sont "
-"indiquées ci-dessous. Pour afficher d'autres commandes, cliquer sur le "
-"bouton « %1 »."
+"indiquées ci-dessous. Pour afficher d'autres commandes, cliquer le bouton "
+"« %1 »."
 
 #: src/gui/HelpDialog.cpp:359 src/ui_astroCalcDialog.h:2356
 msgid "or"
@@ -5490,7 +5490,7 @@ msgstr "Charger un script depuis un fichier"
 
 #: src/gui/HelpDialog.cpp:406 src/ui_scriptConsole.h:358
 msgid "Save script to file"
-msgstr "Enregistrer un script dans un fichier"
+msgstr "Exporter le script"
 
 #: src/gui/HelpDialog.cpp:408 src/ui_scriptConsole.h:376
 msgid "Run script"
@@ -5935,7 +5935,7 @@ msgstr "Propriétés"
 
 #: src/gui/ViewDialog.cpp:778
 msgid "Deep Sky"
-msgstr "Ciel Profond"
+msgstr "Ciel profond"
 
 #: src/gui/ViewDialog.cpp:779
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:239
@@ -7590,17 +7590,17 @@ msgstr "Sednoïdes"
 #: src/gui/AstroCalcDialog.cpp:5132
 #, qt-format
 msgid "Bright stars (<%1 mag)"
-msgstr "Étoiles brillantes (<%1 mag)"
+msgstr "Étoiles lumineuses (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:5133
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
-msgstr "Étoiles doubles brillantes (<%1 mag)"
+msgstr "Étoiles doubles lumineuses (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:5134
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
-msgstr "Étoiles variables brillantes (<%1 mag)"
+msgstr "Étoiles variables lumineuses (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:5135
 #, qt-format
@@ -7668,13 +7668,13 @@ msgstr "Lunes du premier objet"
 #: src/gui/AstroCalcDialog.cpp:5142 src/gui/AstroCalcDialog.cpp:7509
 #: src/translations.h:429
 msgid "Bright carbon stars"
-msgstr "Étoiles carbonées brillantes"
+msgstr "Étoiles carbonées lumineuses"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5142 src/gui/AstroCalcDialog.cpp:7510
 #: src/translations.h:431
 msgid "Bright barium stars"
-msgstr "Étoiles à baryum brillantes"
+msgstr "Étoiles à baryum lumineuses"
 
 #: src/gui/AstroCalcDialog.cpp:5143
 msgid "Sun, planets and moons of first body and observer's planet"
@@ -7932,11 +7932,11 @@ msgstr "N'importe quand dans la nuit"
 
 #: src/gui/AstroCalcDialog.cpp:7474
 msgid "Bright stars"
-msgstr "Étoiles brillantes"
+msgstr "Étoiles lumineuses"
 
 #: src/gui/AstroCalcDialog.cpp:7475 src/ui_viewDialog.h:3933
 msgid "Bright nebulae"
-msgstr "Nébuleuses brillantes"
+msgstr "Nébuleuses lumineuses"
 
 #: src/gui/AstroCalcDialog.cpp:7477 src/ui_viewDialog.h:3937
 #: src/ui_dsoColorsDialog.h:543
@@ -7958,17 +7958,17 @@ msgstr "Nébuleuses planétaires"
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7488 src/translations.h:419
 msgid "Bright double stars"
-msgstr "Étoiles doubles brillantes"
+msgstr "Étoiles doubles lumineuses"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7489 src/translations.h:421
 msgid "Bright variable stars"
-msgstr "Étoiles variables brillantes"
+msgstr "Étoiles variables lumineuses"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7490 src/translations.h:423
 msgid "Bright stars with high proper motion"
-msgstr "Étoiles brillantes avec mouvement propre élevé"
+msgstr "Étoiles lumineuses avec mouvement propre élevé"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7493 src/translations.h:320
@@ -9784,7 +9784,7 @@ msgstr "Faces de cube (Skybox)"
 #. TRANSLATORS: Name of script
 #: src/translations.h:552
 msgid "Occultations of bright stars by planets"
-msgstr "Occultations d'étoiles brillantes par des planètes"
+msgstr "Occultations d'étoiles lumineuses par des planètes"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:554
@@ -10090,7 +10090,7 @@ msgid ""
 "by planets, 2000 to 2040."
 msgstr ""
 "Ce script montre les phénomènes intéressants d'occultations d'étoiles "
-"brillantes, de l'année 2000 à 2040."
+"lumineuses, de l'année 2000 à 2040."
 
 #: src/translations.h:612
 msgid ""
@@ -12307,7 +12307,7 @@ msgstr "Système solaire"
 #: src/ui_viewDialog.h:3604
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
-msgstr "Ciel profond"
+msgstr "DSO"
 
 #: src/ui_viewDialog.h:3606
 msgid "Deep-Sky Objects"
@@ -12358,7 +12358,8 @@ msgstr ""
 #: src/ui_viewDialog.h:3636
 msgid "Open skylight details (color tweaks for the atmosphere)"
 msgstr ""
-"Ouvrir les infos lumière du ciel (ajustement de couleur de l'atmosphère)"
+"Ouvrir les infos sur le modèle du ciel (ajustement de couleur de "
+"l'atmosphère)"
 
 #: src/ui_viewDialog.h:3639
 msgid "Open tone mapping details."
@@ -12387,7 +12388,7 @@ msgstr "Luminosité/saturation de la Voie Lactée :"
 #: src/ui_viewDialog.h:3648
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
-"Atténuer la luminosité des objets célestes lorsqu'un objet très brillant est"
+"Atténuer la luminosité des objets célestes lorsqu'un objet très lumineux est"
 " visible"
 
 #: src/ui_viewDialog.h:3650
@@ -12643,7 +12644,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3759
 msgid "... and moons"
-msgstr "…et ses lunes"
+msgstr "…et de ses lunes"
 
 #: src/ui_viewDialog.h:3762
 msgid "Toggle permanent drawing of Sun's corona when atmosphere is disabled"
@@ -13277,9 +13278,9 @@ msgid ""
 "This circle represents the size of Earth's central, deep shadow in the "
 "distance of the Moon. Will not show when Moon scaling is enabled!"
 msgstr ""
-"Ce cercle représente la taille de l'ombre centrale et profonde de la Terre "
-"dans la direction de la Lune. N'apparaîtra pas quand la mise à l'échelle à "
-"la Lune est activée!"
+"Ce cercle représente la taille de l'ombre centrale et profonde de la Terre à"
+" la distance de la Lune. Elle n'est pas affichée pas quand la mise à "
+"l'échelle à la Lune est activée !"
 
 #: src/ui_viewDialog.h:4208
 msgid "Earth umbra"
@@ -14228,7 +14229,7 @@ msgstr "Notation abrégée pour les unités de luminosité de surface"
 
 #: src/ui_configurationDialog.h:2079
 msgid "Use mag/arcsec^2 for surface brightness"
-msgstr "Utiliser mag/arcsec^2 pour la luminosité de surface"
+msgstr "Utiliser mag/arcsec² pour la luminosité de surface"
 
 #: src/ui_configurationDialog.h:2080
 msgid "Tabular output for coordinates and time"
@@ -14272,7 +14273,7 @@ msgstr "Afficher le bouton de la grille équatoriale J2000"
 
 #: src/ui_configurationDialog.h:2104
 msgid "ICRS grid"
-msgstr "Grille ICRS"
+msgstr "Grille équatoriale"
 
 #: src/ui_configurationDialog.h:2106
 msgid "A button to toggle ecliptic grid of date"
@@ -14419,7 +14420,7 @@ msgstr "Modifier équation"
 
 #: src/ui_configurationDialog.h:2184
 msgid "Planetarium options"
-msgstr "Options du planétarium"
+msgstr "Options pour planétarium"
 
 #: src/ui_configurationDialog.h:2186
 msgid "Hides the mouse cursor when inactive"
@@ -14572,7 +14573,8 @@ msgid ""
 "mirror for low-cost planetarium systems."
 msgstr ""
 "La distorsion pour miroir sphérique est utilisée lors de la projection de "
-"Stellarium sur un miroir sphérique de planétarium bon marché."
+"Stellarium sur un miroir sphérique pour construire un planétarium bon "
+"marché."
 
 #: src/ui_configurationDialog.h:2255
 msgid "Spheric mirror distortion"
@@ -14676,7 +14678,7 @@ msgstr "Enregistrer les réglages de police"
 
 #: src/ui_configurationDialog.h:2304
 msgid "Screen button scale:"
-msgstr "Échelle du bouton à l'écran :"
+msgstr "Échelle des boutons :"
 
 #: src/ui_configurationDialog.h:2305
 msgid "Screenshots"
@@ -15363,7 +15365,7 @@ msgid ""
 "Draw only the part of the graph where altitude is greater than the value "
 "given in the right box."
 msgstr ""
-"N'afficher que la partie du graphe dont la hauteur est plus grande que la "
+"Ne dessiner que la partie du graphe dont la hauteur est plus grande que la "
 "valeur du champ de droite."
 
 #: src/ui_astroCalcDialog.h:2486 src/ui_astroCalcDialog.h:2497
@@ -16156,7 +16158,7 @@ msgstr "Styles de couleur des orbites"
 
 #: src/ui_orbitColorsDialog.h:360
 msgid "One color for all orbits"
-msgstr "Une couleur pour toutes les orbites"
+msgstr "Même couleur pour toutes les orbites"
 
 #: src/ui_orbitColorsDialog.h:361
 msgid "Separate colors for orbits by object type"
@@ -16339,25 +16341,25 @@ msgstr "Couleur de l'orbite de Neptune"
 
 #: src/ui_skylightDialog.h:1153
 msgid "Skylight Details"
-msgstr "Infos lumière du ciel "
+msgstr "Infos modèle du ciel "
 
 #: src/ui_skylightDialog.h:1154
 msgid "Skylight Settings"
-msgstr "Réglages lumière du ciel"
+msgstr "Réglages modèle du ciel"
 
 #: src/ui_skylightDialog.h:1156
 msgid "switch parameters below by"
-msgstr "passer aux paramètres ci-dessous de"
+msgstr "Changer les paramètres ci-dessous de"
 
 #: src/ui_skylightDialog.h:1157
 msgid "Draw Sun after atmosphere (attempt better red ball effect)"
 msgstr ""
-"Afficher le soleil après l'atmosphère (tentez un meilleur effet de boule "
+"Dessiner le Soleil après l'atmosphère (tentative pour une meilleure boule "
 "rouge)"
 
 #: src/ui_skylightDialog.h:1158
 msgid "Draw solar glare before Sun"
-msgstr "Afficher l'éblouissement du Soleil avant le Soleil"
+msgstr "Dessiner l'éblouissement du Soleil avant le Soleil"
 
 #: src/ui_skylightDialog.h:1160
 msgid ""
@@ -16376,8 +16378,8 @@ msgid ""
 "Reset all ABCDE values for zenith and distribution to those in Preetham's "
 "1999 paper"
 msgstr ""
-"Réinitialiser toutes les valeurs ABCDE pour le zénith et distribution de "
-"celles dans le papier de Preetham de 1999"
+"Réinitialiser toutes les valeurs ABCDE pour le zénith et distribution à "
+"celles de l'article de Preetham (1999)"
 
 #: src/ui_skylightDialog.h:1166
 msgid "Reset all xy (Preetham)"
@@ -16388,10 +16390,12 @@ msgid ""
 "Schaefer's skylight model is better than the result from the CIE skylight "
 "distribution."
 msgstr ""
+"Le modèle du ciel de Schaefer est meilleur que le résultat obtenu à partir "
+"de la distribution CIE."
 
 #: src/ui_skylightDialog.h:1170
 msgid "Y from Schaefer, not Preetham sky"
-msgstr "Y de Schaefer, pas du ciel de Preetham"
+msgstr "Y tiré de Schaefer, pas de Preetham"
 
 #: src/ui_skylightDialog.h:1171
 msgid "[Preetham]"
@@ -16407,17 +16411,19 @@ msgstr "Réinitialiser : Stellarium"
 #: src/ui_skylightDialog.h:1182 src/ui_skylightDialog.h:1184
 #: src/ui_skylightDialog.h:1186
 msgid "Reset: Preetham"
-msgstr "Réinitialiser : Preetham"
+msgstr "Réinitialiser : Preetham"
 
 #: src/ui_skylightDialog.h:1176
 msgid ""
 "with zenith angle &theta;, solar zenith angle &theta;<sub>s</sub>, solar "
 "angle &gamma;"
 msgstr ""
+"où &theta; est l'angle zénithal, &theta;<sub>s</sub> l'angle solaire "
+"zénithal et &gamma; l'angle solaire "
 
 #: src/ui_skylightDialog.h:1177
 msgid "Horizon bright/dark"
-msgstr ""
+msgstr "Horizon lumineux/obscur"
 
 #: src/ui_skylightDialog.h:1178
 msgid "Hor.Gradient"
@@ -16429,19 +16435,19 @@ msgstr "Intensité circumsolaire"
 
 #: src/ui_skylightDialog.h:1180
 msgid "highlightSize"
-msgstr ""
+msgstr "highlightSize"
 
 #: src/ui_skylightDialog.h:1181
 msgid "rel. backscatter"
-msgstr ""
+msgstr "Rétrodiffusion rel."
 
 #: src/ui_skylightDialog.h:1188
 msgid ""
 "Note: when the sky brightness (CIE Y) is set by Schaefer's model, the "
 "bottom-left settings will not visibly change anything."
 msgstr ""
-"Note : lorsque la luminosité du ciel (CIE Y) est définie par le modèle de "
-"Schaefer, les réglages en bas à gauche n'auront aucun effet visuel."
+"Note : lorsque la lumière du ciel (CIE Y) suit le modèle de Schaefer, les "
+"réglages en bas à gauche n'auront aucun effet visible."
 
 #: src/ui_tonemappingDialog.h:144
 msgid "Tone Mapping Details"
@@ -16509,6 +16515,8 @@ msgstr "Gamma de l'écran :"
 #: src/ui_tonemappingDialog.h:173
 msgid "Use an XYZ->sRGB color transform matrix, not XYZ->Adobe RGB (1998)."
 msgstr ""
+"Utiliser une matrice de transformation des couleurs XYZ->sRGB, et non "
+"XYZ->Adobe RGB (1998)."
 
 #: src/ui_tonemappingDialog.h:175
 msgid "Use sRGB"
@@ -16582,7 +16590,7 @@ msgstr "La mesure d'angle est activée"
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:679
 msgid "Drag with the left button to measure, left-click to clear."
-msgstr "Glissez avec le bouton gauche pour mesurer, clic gauche pour effacer"
+msgstr "Glisser avec le bouton gauche pour mesurer, clic gauche pour effacer"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:681
@@ -17449,9 +17457,9 @@ msgid ""
 "of 0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see "
 "with the naked eye through the Telrad (or similar) finder."
 msgstr ""
-"Vous pouvez afficher une mire Telrad. Cette fonction affiche trois cercles "
-"concentriques de 0,5%1, 2,0%1 et 4,0%1 pour vous aider à voir ce que vous "
-"verriez à l'œil nu à travers une mire Telrad (ou similaire)."
+"Une mire Telrad peut être affichée. Trois cercles concentriques de 0,5%1, "
+"2,0%1 et 4,0%1 sont affichés pour montrer ce que l'on verrait à l'œil nu à "
+"travers une mire Telrad (ou similaire)."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:649
 msgid ""
@@ -17519,6 +17527,10 @@ msgid ""
 "selected solar system objects (the mount has sidereal speed enabled) to "
 "avoid a movement of more than 1 pixel width."
 msgstr ""
+"La vue capteur comporte également une fonction permettant d'afficher un "
+"temps d'exposition maximal pour certains objets du système solaire (si la "
+"vitesse sidérale est activée sur la monture) afin d'éviter un mouvement de "
+"plus d'1 pixel."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1413
 msgid "Interface"
@@ -17845,7 +17857,7 @@ msgstr "Resolution x :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1550
 msgid "Prism/CCD height:"
-msgstr ""
+msgstr "Hauteur prisme/CCD :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1552
 msgid ""
@@ -17855,7 +17867,7 @@ msgstr "La distance du centre du capteur d'image au centre du prisme"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1554
 msgid "Prism/CCD distance:"
-msgstr ""
+msgstr "Distance prisme/CCD :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1555
 msgid "Rotation Angle:"
@@ -17867,15 +17879,15 @@ msgstr "Binning y :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1557
 msgid "Prism/CCD width:"
-msgstr ""
+msgstr "Largeur prisme/CCD :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1558
 msgid "Chip height:"
-msgstr ""
+msgstr "Hauteur du capteur :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1559
 msgid "Chip width:"
-msgstr ""
+msgstr "Largeur du capteur :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1560
 msgid "Position angle:"
@@ -17979,7 +17991,7 @@ msgstr "Le télescope spatial Chandra X-ray"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1431
 msgid "X-ray Multi-Mirror Mission"
-msgstr ""
+msgstr "X-ray Multi-Mirror Mission"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1433
@@ -18000,12 +18012,12 @@ msgstr ""
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1439
 msgid "Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)"
-msgstr ""
+msgstr "Neil Gehrels Swift Observatory"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1441
 msgid "Astro‐Rivelatore Gamma a Immagini Leggero"
-msgstr ""
+msgstr "Astro‐Rivelatore Gamma a Immagini Leggero"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1443
@@ -18015,12 +18027,12 @@ msgstr "Fermi Gamma-ray Space Telescope"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1445
 msgid "Wide-field Infrared Survey Explorer"
-msgstr ""
+msgstr "Wide-field Infrared Survey Explorer"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1447
 msgid "Interplanetary Kite-craft Accelerated by Radiation Of the Sun"
-msgstr ""
+msgstr "Interplanetary Kite-craft Accelerated by Radiation Of the Sun"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1449
@@ -18030,7 +18042,7 @@ msgstr "Le radio-télescope russe de l'espace RadioAstron"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1451
 msgid "Nuclear Spectroscopic Telescope Array"
-msgstr ""
+msgstr "Nuclear Spectroscopic Telescope Array"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1453
@@ -18059,7 +18071,7 @@ msgstr "Le télescope spatial Dark Matter Particle Explorer"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1461
 msgid "Hard X-ray Modulation Telescope"
-msgstr ""
+msgstr "Hard X-ray Modulation Telescope"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1463
@@ -18074,7 +18086,7 @@ msgstr "Transiting Exoplanet Survey Satellite"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1467
 msgid "Spectrum-X-Gamma"
-msgstr ""
+msgstr "Spektr-RG"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1469
@@ -18090,7 +18102,7 @@ msgstr ""
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1473
 msgid "Imaging X-ray Polarimetry Explorer"
-msgstr ""
+msgstr "Imaging X-ray Polarimetry Explorer"
 
 #. TRANSLATORS: Satellite description. "James Webb" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1475
@@ -18183,21 +18195,21 @@ msgstr "tv"
 #. TRANSLATORS: Satellite group: Satellites belonging to the GONETS satellites
 #: plugins/Satellites/src/Satellites.cpp:3352
 msgid "gonets"
-msgstr ""
+msgstr "GONETS"
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
 #. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
 #. https://celestrak.org/NORAD/elements/tle-new.txt
 #: plugins/Satellites/src/Satellites.cpp:3358
 msgid "tle-new"
-msgstr ""
+msgstr "Nouveaux TLE"
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
 #. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3361
 msgid "last-30-days"
-msgstr ""
+msgstr "30 derniers lancements"
 
 #. TRANSLATORS: Satellite group: Space stations
 #. TRANSLATORS: CelesTrak source [Space Stations]:
@@ -18251,7 +18263,7 @@ msgstr "Météo"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3388
 msgid "noaa"
-msgstr ""
+msgstr "NOAA"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GOES satellites
 #. TRANSLATORS: CelesTrak source [GOES]:
@@ -18278,7 +18290,7 @@ msgstr "ressource"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3400
 msgid "sarsat"
-msgstr ""
+msgstr "SARSAT"
 
 #. TRANSLATORS: Satellite group: Disaster Monitoring satellites
 #. TRANSLATORS: CelesTrak source [Disaster Monitoring]:
@@ -18287,7 +18299,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=dmc&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3404
 msgid "dmc"
-msgstr ""
+msgstr "Surveillance désastres"
 
 #. TRANSLATORS: Satellite group: The Tracking and Data Relay Satellite System
 #. (TDRSS) is a network of communications satellites and ground stations used
@@ -18308,7 +18320,7 @@ msgstr "tdrss"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=argos&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3412
 msgid "argos"
-msgstr ""
+msgstr "ARGOS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Spire
 #. constellation (LEMUR satellites)
@@ -18327,7 +18339,7 @@ msgstr "spore"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=geo&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3428
 msgid "geo"
-msgstr ""
+msgstr "Géosynchrones actif"
 
 #. TRANSLATORS: Satellite group: GEO Protected Zone
 #. TRANSLATORS: CelesTrak source [GEO Protected Zone]:
@@ -18336,7 +18348,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3432
 msgid "gpz"
-msgstr ""
+msgstr "GPZ"
 
 #. TRANSLATORS: Satellite group: GEO Protected Zone Plus
 #. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]:
@@ -18345,7 +18357,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3436
 msgid "gpz-plus"
-msgstr ""
+msgstr "GPZ Plus"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT
 #. satellites
@@ -18368,7 +18380,7 @@ msgstr "intelsat"
 #. https://celestrak.org/NORAD/elements/supplemental/ses.txt
 #: plugins/Satellites/src/Satellites.cpp:3446
 msgid "ses"
-msgstr ""
+msgstr "SES"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
@@ -18388,7 +18400,7 @@ msgstr "Iridium"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3454
 msgid "iridium-NEXT"
-msgstr "iridium-NEXT"
+msgstr "Iridium NEXT"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Starlink
 #. constellation (Starlink is a proper name)
@@ -18443,7 +18455,7 @@ msgstr "globalstar"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=swarm&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3477
 msgid "swarm"
-msgstr ""
+msgstr "SWARM"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #. TRANSLATORS: CelesTrak source [Amateur Radio]:
@@ -18461,7 +18473,7 @@ msgstr "Radio-amateurs"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3485
 msgid "x-comm"
-msgstr ""
+msgstr "Communication exp."
 
 #. TRANSLATORS: Satellite group: Other communication satellites
 #. TRANSLATORS: CelesTrak source [Other Comm]:
@@ -18470,7 +18482,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3489
 msgid "other-comm"
-msgstr ""
+msgstr "Communication autres"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the SatNOGS
 #. satellites
@@ -18480,7 +18492,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3493
 msgid "satnogs"
-msgstr ""
+msgstr "SatNOGS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT
 #. satellites
@@ -18518,7 +18530,7 @@ msgstr "molniya"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gnss&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3512
 msgid "gnss"
-msgstr ""
+msgstr "GNSS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
@@ -18536,7 +18548,7 @@ msgstr "GPS"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3519
 msgid "gps-ops"
-msgstr ""
+msgstr "GPS-Ops"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
@@ -18554,7 +18566,7 @@ msgstr "GLONASS"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3526
 msgid "glo-ops"
-msgstr ""
+msgstr "GLO-Ops"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
@@ -18585,7 +18597,7 @@ msgstr "beidou"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sbas&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3538
 msgid "sbas"
-msgstr ""
+msgstr "SBAS"
 
 #. TRANSLATORS: Satellite group: Navy Navigation Satellite System (NNSS)
 #. TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]:
@@ -18594,7 +18606,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=nnss&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3542
 msgid "nnss"
-msgstr ""
+msgstr "NNSS"
 
 #. TRANSLATORS: Satellite group: Russian LEO Navigation Satellites
 #. TRANSLATORS: CelesTrak source [Russian LEO Navigation]:
@@ -18603,7 +18615,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=musson&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3546
 msgid "musson"
-msgstr ""
+msgstr "Musson"
 
 #. TRANSLATORS: Satellite group: Space & Earth Science satellites
 #. TRANSLATORS: CelesTrak source [Space & Earth Science]:
@@ -19112,10 +19124,9 @@ msgid ""
 "the default %3 file.  The old file will be backed up as %4.  This can be "
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
-"Un clic sur le bouton « %1 » de l'onglet « %2 » de cette fenêtre vous fera "
-"revenir au fichier par défaut %3. L'ancien fichier sera sauvegardé sous le "
-"nom %4, dans le dossier de données utilisateur, dans "
-"« modules/Satellites/ »."
+"Cliquer le bouton « %1 » de l'onglet « %2 » de cette fenêtre pour revenir au"
+" fichier par défaut %3. L'ancien fichier sera sauvegardé sous le nom %4, "
+"dans le dossier de données utilisateur, dans « modules/Satellites/ »."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:796
 msgid ""
@@ -19360,9 +19371,9 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
-"Si vous désactivez les mises à jour via Internet, vous devrez mettre à jour "
-"à partir d'un fichier de votre ordinateur. Ce fichier doit être au même "
-"format que les mises à jour Celestrak (voir %1 pour un exemple)."
+"Si les mises à jour via Internet sont désactivées, les mises à jour doivent "
+"se faire à partir d'un fichier. Ce fichier doit être au même format que les "
+"mises à jour Celestrak (voir %1 pour un exemple)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:848
 msgid ""
@@ -19391,7 +19402,7 @@ msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
 msgstr ""
-"Dans l'onglet Satellites, cliquer sur le bouton « + ». Sélectionner les "
+"Dans l'onglet Satellites, cliquer le bouton « + ». Sélectionner les "
 "satellites à ajouter et cliquer le bouton « Ajouter »."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:855
@@ -20894,10 +20905,10 @@ msgid ""
 "Stellarium's Configuration window (opened by pressing <b>F2</b> or the "
 "respective button in the left toolbar)."
 msgstr ""
-"En cliquant sur le bouton « Configurer » du plugin, dans l'onglet "
-"« Plugins » de la fenêtre de configuration générale de Stellarium (qui "
-"s'ouvre en pressant la touche <b>F2</b> ou en cliquant le bouton adéquat de "
-"la barre d'outils à gauche)."
+"En cliquant le bouton « Configurer » du plugin, dans l'onglet « Plugins » de"
+" la fenêtre de configuration générale de Stellarium (qui s'ouvre en pressant"
+" la touche <b>F2</b> ou en cliquant le bouton adéquat de la barre d'outils à"
+" gauche)."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
@@ -20907,7 +20918,7 @@ msgid ""
 "(opened by pressing <b>%1+0</b> or the respective button on the bottom "
 "toolbar)."
 msgstr ""
-"En cliquant sur le bouton « Configurer les télescopes...» dans la fenêtre "
+"En cliquant le bouton « Configurer les télescopes...» dans la fenêtre "
 "{Fenêtre « Pointer le télescope »} (ouvert en appuyant sur <b>%1+0</b> ou "
 "sur le bouton correspondant dans la barre d'outils inférieure)."
 
@@ -20979,9 +20990,9 @@ msgid ""
 "press the <b>Configure</b> button. In both cases, a telescope connection "
 "configuration window will open."
 msgstr ""
-"Cliquer sur le bouton <b>Ajouter</b> pour configurer une nouvelle connexion "
-"à un télescope. Pour modifier une connexion existante, la choisir dans la "
-"liste et cliquer sur <b>Configurer</b>."
+"Cliquer le bouton <b>Ajouter</b> pour configurer une nouvelle connexion à un"
+" télescope. Pour modifier une connexion existante, la choisir dans la liste "
+"et cliquer sur <b>Configurer</b>."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
@@ -21249,8 +21260,8 @@ msgid ""
 "Pressing the <b>Slew</b> button slews the selected device to the selected "
 "set of coordinates."
 msgstr ""
-"Un clic sur le bouton <b>Pointer</b> déplace l'appareil sélectionné vers les"
-" coordonnées choisies."
+"Cliquer le bouton <b>Pointer</b> pour déplacer l'appareil sélectionné vers "
+"les coordonnées choisies."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:454
@@ -21267,7 +21278,7 @@ msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the {main window} "
 "of the plug-in."
 msgstr ""
-"En cliquant le bouton <b>Configurer les télescopes...</b>, on ouvre la "
+"Cliquer le bouton <b>Configurer les télescopes...</b> pour ouvrir la "
 "{fenêtre principale} du plugin."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:462
@@ -21516,8 +21527,7 @@ msgstr ""
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
 msgstr ""
-"Appuyez sur le bouton \"%1\" pour configurer une nouvelle connexion "
-"télescope."
+"Cliquer le bouton « %1 » pour configurer une nouvelle connexion télescope."
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:572
@@ -21662,7 +21672,7 @@ msgstr "&HMS"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:337
 msgid "Degrees-minutes-seconds format"
-msgstr "Format Degrés-Minutes-Secondes"
+msgstr "Format degrés-minutes-secondes"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:339
 msgid "&DMS"
@@ -21874,7 +21884,7 @@ msgstr "Fichiers"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:415
 msgid "Log telescope driver messages to files"
-msgstr "Enregistrer les journaux du pilote dans les journaux"
+msgstr "Exporter les journaux du pilote de télescope"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:416
 msgid "Use telescope server executables (override built-in drivers)"
@@ -22370,8 +22380,8 @@ msgstr ""
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
-"Vous pouvez également supprimer toutes les modifications et revenir à la "
-"configuration par défaut:"
+"Vous pouvez également réinitialiser tous les réglages et revenir à la "
+"configuration par défaut :"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:229
 msgid "Export/replace the Solar System minor objects file"
@@ -22645,12 +22655,19 @@ msgid ""
 "were selected to allow observers from anywhere in the world on any given "
 "night, to be able to easily and quickly make precision alignments."
 msgstr ""
+"Le Meade LX200 utilise 33 étoiles lumineuses et bien connues pour calibrer "
+"la bibliothèque d'objets du télescope, dans les alignements ALTAZ et POLAR. "
+"Ces étoiles ont été sélectionnées pour permettre aux observateurs de partout"
+" dans le monde et à n'importe quelle date d'effectuer facilement et "
+"rapidement des alignements de précision."
 
 #: plugins/NavStars/src/NavStars.cpp:403
 msgid ""
 "This list from Meade ETX mount will aid the observer to find alignment stars"
 " at various times of the year."
 msgstr ""
+"Cette liste de la monture Meade ETX aidera l'observateur à trouver des "
+"étoiles d'alignement à différentes périodes de l'année."
 
 #: plugins/NavStars/src/NavStars.cpp:404
 msgid "Alignment stars for the Meade Autostar #494 handset (ETX60AT)."
@@ -22666,6 +22683,9 @@ msgid ""
 "only 82 (stars brighter than or equal to magnitude 2.5) can be used for "
 "alignment and related tasks."
 msgstr ""
+"Bien qu'il y ait environ 250 étoiles nommées dans la base de données de "
+"contrôle manuel, seules 82 (étoiles plus lumineuses que la magnitude 2.5) "
+"peuvent être utilisées pour l'alignement et autres tâches connexes."
 
 #: plugins/NavStars/src/NavStars.cpp:407
 msgid ""
@@ -23096,13 +23116,13 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:122
 msgid "This plugin allows you to see recent bright novae: "
-msgstr "Ce plugin permet d'afficher des novæ brillantes récentes : "
+msgstr "Ce plugin permet d'afficher des novæ lumineuses récentes : "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:125
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
 msgstr ""
-"Toutes ces novæ sont plus brillantes que %1 à leur maximum de magnitude."
+"Toutes ces novæ sont plus lumineuses que %1 à leur maximum de magnitude."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:127
 msgid ""
@@ -25446,7 +25466,7 @@ msgid ""
 "which means a bright beam of light."
 msgstr ""
 "Bibhā [/bɪbɦa/] est la prononciation bengali du mot sanskrit Vibha, qui "
-"signifie un brillant rayon lumineux."
+"signifie un éclatant rayon de lumière."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:484
 msgid ""
@@ -25657,7 +25677,7 @@ msgid ""
 "In the local dialect of Triesenberg, Pipoltr is a bright and visible "
 "butterfly, alluding to the properties of a star."
 msgstr ""
-"Dans le dialecte local de Triesenberg, Pipoltr est un papillon brillant et "
+"Dans le dialecte local de Triesenberg, Pipoltr est un papillon éclatant et "
 "visible, faisant allusion aux propriétés d'une étoile."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:510
@@ -26275,8 +26295,8 @@ msgstr ""
 msgid ""
 "Mönch is one of the prominent peaks of the Bernese Alps in Switzerland."
 msgstr ""
-"Mönch est l'un des sommets les plus hauts des Alpes bernoises, situé dans la"
-" zone protégée de Jungfrau-Aletsch en Suisse."
+"Le Mönch est l'un des sommets les plus hauts des Alpes bernoises, situé dans"
+" la zone protégée de Jungfrau-Aletsch en Suisse."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:588
 msgid ""
@@ -26291,6 +26311,9 @@ msgid ""
 "Ebla was one of the earliest kingdoms in Syria, and served as a prominent "
 "region in the 2nd and 3rd millennia B.C."
 msgstr ""
+"Ebla était l'un des premiers royaumes de Syrie, et a été une région "
+"importante au cours des 2<sup>e</sup> et 3<sup>e</sup> millénaires avant "
+"J.-C."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:590
 msgid ""
@@ -28150,9 +28173,9 @@ msgid ""
 msgstr ""
 "L'index de population mesure la distribution de magnitude d'une pluie de "
 "météores. Une valeur inférieure à 2.5 correspond à une distribution dans "
-"laquelle les météores brillantes sont plus fréquentes que la moyenne, tandis"
-" qu'une valeur supérieure à 3.0 indique que la proportion de météores peu "
-"brillantes est plus importante que d'habitude."
+"laquelle les météores lumineux sont plus fréquentes que la moyenne, tandis "
+"qu'une valeur supérieure à 3.0 indique que la proportion de météores peu "
+"lumineux est plus importante que d'habitude."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:291
 msgid "Solar longitude"
@@ -33139,129 +33162,129 @@ msgstr "Mineur"
 #: plugins/Calendars/src/JapaneseCalendar.cpp:43
 msgctxt "Japanese calendar major Solar term"
 msgid "Usui (Rain Water)"
-msgstr ""
+msgstr "Usui (Eau de pluie)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:44
 msgctxt "Japanese calendar major Solar term"
 msgid "Shunbun (Spring Equinox)"
-msgstr ""
+msgstr "Shunbun (Équinoxe de printemps)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:45
 msgctxt "Japanese calendar major Solar term"
 msgid "Kokuu (Grain Rain)"
-msgstr ""
+msgstr "Kokuu (Pluie de grains)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:46
 msgctxt "Japanese calendar major Solar term"
 msgid "Shōman (Grain Full)"
-msgstr ""
+msgstr "Shōman (Grains pleins)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:47
 msgctxt "Japanese calendar major Solar term"
 msgid "Geshi (Summer Solstice)"
-msgstr ""
+msgstr "Geshi (Solstice d'été)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:48
 msgctxt "Japanese calendar major Solar term"
 msgid "Taisho (Great Heat)"
-msgstr ""
+msgstr "Taisho (Grande chaleur)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:49
 msgctxt "Japanese calendar major Solar term"
 msgid "Shosho (Limit of Heat)"
-msgstr ""
+msgstr "Shosho (Limite de chaleur)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:50
 msgctxt "Japanese calendar major Solar term"
 msgid "Shūbun (Autumnal Equinox)"
-msgstr ""
+msgstr "Shūbun (Équinoxe d'automne)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:51
 msgctxt "Japanese calendar major Solar term"
 msgid "Sōkō (Descent of Frost)"
-msgstr ""
+msgstr "Sōkō (Descente du gel)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:52
 msgctxt "Japanese calendar major Solar term"
 msgid "Shōsetsu (Slight Snow)"
-msgstr ""
+msgstr "Shōsetsu (Légère neige)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:53
 msgctxt "Japanese calendar major Solar term"
 msgid "Tōji (Winter Solstice)"
-msgstr ""
+msgstr "Tōji (Solstice d'hiver)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:54
 msgctxt "Japanese calendar major Solar term"
 msgid "Taikan (Great Cold)"
-msgstr ""
+msgstr "Taikan (Grand froid)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:56
 msgctxt "Japanese calendar minor Solar term"
 msgid "Risshun (Beginning of Spring)"
-msgstr ""
+msgstr "Risshun (Début du printemps)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:57
 msgctxt "Japanese calendar minor Solar term"
 msgid "Keichitsu (Waking of Insects)"
-msgstr ""
+msgstr "Keichitsu (Réveil des insectes)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:58
 msgctxt "Japanese calendar minor Solar term"
 msgid "Seimei (Pure Brightness)"
-msgstr ""
+msgstr "Seimei (Éclat pur)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:59
 msgctxt "Japanese calendar minor Solar term"
 msgid "Rikka (Beginning of Summer)"
-msgstr ""
+msgstr "Rikka (Début de l'été)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:60
 msgctxt "Japanese calendar minor Solar term"
 msgid "Bōshu (Grain in Ear)"
-msgstr ""
+msgstr "Bōshu (Grain dans l'oreille)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:61
 msgctxt "Japanese calendar minor Solar term"
 msgid "Shōsho (Slight Heat)"
-msgstr ""
+msgstr "Shōsho (Légère chaleur)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:62
 msgctxt "Japanese calendar minor Solar term"
 msgid "Risshū (Beginning of Autumn)"
-msgstr ""
+msgstr "Risshū (Début de l'automne)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:63
 msgctxt "Japanese calendar minor Solar term"
 msgid "Hakuro (White Dew)"
-msgstr ""
+msgstr "Hakuro (Rosée blanche)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:64
 msgctxt "Japanese calendar minor Solar term"
 msgid "Kanro (Cold Dew)"
-msgstr ""
+msgstr "Kanro (Rosée froide)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:65
 msgctxt "Japanese calendar minor Solar term"
 msgid "Rittō (Beginning of Winter)"
-msgstr ""
+msgstr "Rittō (Début de l'hiver)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:66
 msgctxt "Japanese calendar minor Solar term"
 msgid "Taisetsu (Great Snow)"
-msgstr ""
+msgstr "Taisetsu (Grande neige)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:67
 msgctxt "Japanese calendar minor Solar term"
 msgid "Shōkan (Slight Cold)"
-msgstr ""
+msgstr "Shōkan (Léger froid)"
 
 #. TRANSLATORS: Japanese Calendar output string
 #: plugins/Calendars/src/JapaneseCalendar.cpp:108
 #, qt-format
 msgctxt "Japanese Calendar output"
 msgid "Day %1 - Month %2<sub>%3</sub> - year %4 (kigen)"
-msgstr ""
+msgstr "Jour %1 - Mois %2<sub>%3</sub> - année %4 (kigen)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:129
 msgctxt "Japanese calendar: Major Solar Term"
@@ -33276,122 +33299,122 @@ msgstr "Mineur"
 #: plugins/Calendars/src/KoreanCalendar.cpp:43
 msgctxt "Korean calendar major Solar term"
 msgid "Woo-Soo (Rain Water)"
-msgstr ""
+msgstr "Woo-Soo (Eau de pluie)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:44
 msgctxt "Korean calendar major Solar term"
 msgid "Chun-Bun (Spring Equinox)"
-msgstr ""
+msgstr "Chun-Bun (Équinoxe de printemps)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:45
 msgctxt "Korean calendar major Solar term"
 msgid "Gok-Woo (Grain Rain)"
-msgstr ""
+msgstr "Gok-Woo (Pluie de grains)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:46
 msgctxt "Korean calendar major Solar term"
 msgid "So-Man (Grain Full)"
-msgstr ""
+msgstr "So-Man (Grains pleins)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:47
 msgctxt "Korean calendar major Solar term"
 msgid "Ha-Ji (Summer Solstice)"
-msgstr ""
+msgstr "Ha-Ji (Solstice d'été)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:48
 msgctxt "Korean calendar major Solar term"
 msgid "Dae-Suh (Great Heat)"
-msgstr ""
+msgstr "Dae-Suh (Grande chaleur)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:49
 msgctxt "Korean calendar major Solar term"
 msgid "Chu-Suh (Limit of Heat)"
-msgstr ""
+msgstr "Chu-Suh (Limite de chaleur)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:50
 msgctxt "Korean calendar major Solar term"
 msgid "Chu-Bun (Autumnal Equinox)"
-msgstr ""
+msgstr "Chu-Bun (Équinoxe d'automne)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:51
 msgctxt "Korean calendar major Solar term"
 msgid "Sang-Kang (Descent of Frost)"
-msgstr ""
+msgstr "Sang-Kang (Descente du gel)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:52
 msgctxt "Korean calendar major Solar term"
 msgid "So-Sul (Slight Snow)"
-msgstr ""
+msgstr "So-Sul (Légère neige)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:53
 msgctxt "Korean calendar major Solar term"
 msgid "Dong-Ji (Winter Solstice)"
-msgstr ""
+msgstr "Dong-Ji (Solstice d'hiver)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:54
 msgctxt "Korean calendar major Solar term"
 msgid "Dae-Han (Great Cold)"
-msgstr ""
+msgstr "Dae-Han (Grand froid)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:56
 msgctxt "Korean calendar minor Solar term"
 msgid "Ip-Chun (Beginning of Spring)"
-msgstr ""
+msgstr "Ip-Chun (Début du printemps)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:57
 msgctxt "Korean calendar minor Solar term"
 msgid "Kyung-Chip (Waking of Insects)"
-msgstr ""
+msgstr "Kyung-Chip (Réveil des insectes)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:58
 msgctxt "Korean calendar minor Solar term"
 msgid "Chyng-Myung (Pure Brightness)"
-msgstr ""
+msgstr "Chyng-Myung (Éclat pur)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:59
 msgctxt "Korean calendar minor Solar term"
 msgid "Ip-Ha (Beginning of Summer)"
-msgstr ""
+msgstr "Ip-Ha (Début de l'été)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:60
 msgctxt "Korean calendar minor Solar term"
 msgid "Mang-Jong (Grain in Ear)"
-msgstr ""
+msgstr "Mang-Jong (Grain dans l'oreille)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:61
 msgctxt "Korean calendar minor Solar term"
 msgid "So-Suh (Slight Heat)"
-msgstr ""
+msgstr "So-Suh (Légère neige)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:62
 msgctxt "Korean calendar minor Solar term"
 msgid "Ip-Choo (Beginning of Autumn)"
-msgstr ""
+msgstr "Ip-Choo (Début de l'automne)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:63
 msgctxt "Korean calendar minor Solar term"
 msgid "Bak-Roo (White Dew)"
-msgstr ""
+msgstr "Bak-Roo (Rosée blanche)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:64
 msgctxt "Korean calendar minor Solar term"
 msgid "Han-Roo (Cold Dew)"
-msgstr ""
+msgstr "Han-Roo (Rosée froide)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:65
 msgctxt "Korean calendar minor Solar term"
 msgid "Ip-Dong (Beginning of Winter)"
-msgstr ""
+msgstr "Ip-Dong (Début de l'hiver)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:66
 msgctxt "Korean calendar minor Solar term"
 msgid "Dae-Sul (Great Snow)"
-msgstr ""
+msgstr "Dae-Sul (Grande neige)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:67
 msgctxt "Korean calendar minor Solar term"
 msgid "So-Han (Slight Cold)"
-msgstr ""
+msgstr "So-Han (Léger froid)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:69
 msgctxt "Korean calendar, celestial stem name"
@@ -33508,7 +33531,7 @@ msgstr "Hae"
 #, qt-format
 msgctxt "Korean Calendar output"
 msgid "Day %1 (%2) - Month %3<sub>%4</sub> (%5) <br/>Danki Year %6 (%7)"
-msgstr ""
+msgstr "Jour %1 (%2) - Mois %3<sub>%4</sub> (%5) <br/>Année Danki %6 (%7)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:185
 msgctxt "Korean calendar: Major Solar Term"
@@ -33835,7 +33858,7 @@ msgstr "Poule"
 #, qt-format
 msgctxt "Vietnamese calendar output"
 msgid "Day %1 (%2) - Month %3 (%4)<sub>%5</sub> (%6) <br/>Year %7"
-msgstr ""
+msgstr "Jour %1 (%2) - Mois %3 (%4)<sub>%5</sub> (%6) Année %7"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:199
 msgctxt "Vietnamese calendar: Major Solar Term"
@@ -34604,11 +34627,11 @@ msgid ""
 " must match one of the mounts supported by your camera as listed in the "
 "database)."
 msgstr ""
-"Dans l'onglet <i>Modèle pour lensfun</i>, on peut générer une chaîne XML "
-"pour la base de donnée lensfun. Saisir la marque et le modèle de la "
-"lentille, ainsi que la monture (le nom doit correspondre à une des montures "
-"prises en charge par votre appareil photo telle qu'indiquée dans la base de "
-"données)."
+"Dans l'onglet <i>Modèle pour lensfun</i>, il est possible de générer une "
+"chaîne XML pour la base de donnée lensfun. Saisir la marque et le modèle de "
+"la lentille, ainsi que la monture (le nom doit correspondre à une des "
+"montures prises en charge par votre appareil photo telle qu'indiquée dans la"
+" base de données)."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1781
 msgid "Preparing a photo"
