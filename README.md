@@ -15,6 +15,8 @@ in 3D, just like what you see with the naked eye, binoculars or a telescope.
 
 If you are new to Stellarium, go to [www.stellarium.org](https://www.stellarium.org) for loads of additional information.
 
+![Screenshot](https://stellarium.org/img/screenshots/0.10-planets.jpg)
+
 ## Installation Instructions & Quick Start
 
 Please refer to the [User Guide, Getting Started section](https://github.com/Stellarium/stellarium/releases/download/v24.4/stellarium_user_guide-24.4-1.pdf).
