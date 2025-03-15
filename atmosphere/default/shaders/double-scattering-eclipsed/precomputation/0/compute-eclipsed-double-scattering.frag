@@ -259,7 +259,7 @@ void main()
                                                                          viewRayIntersectsGround);
 
     CONST int directionIndex=int(gl_FragCoord.x);
-    CONST float radialDistIndex=gl_FragCoord.y;
+    CONST int radialDistIndex=int(gl_FragCoord.y);
 
     // Using midpoint rule for quadrature
     CONST float dl=radialIntegrInterval/radialIntegrationPoints;

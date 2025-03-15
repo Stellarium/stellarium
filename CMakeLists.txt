@@ -701,9 +701,8 @@ IF(ENABLE_SHOWMYSKY)
     ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
     CPMFindPackage(NAME ShowMySky-Qt${QT_VERSION_MAJOR}
 		URL https://codeload.github.com/10110111/CalcMySky/zip/refs/heads/master
-#        URL_HASH SHA256=d284eaabcf21ad3d1f520a1d1b1b533f7c5f5a44ba92495dd38e238874e8e4d7
-#        URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.3.3.tar.gz
-#        URL_HASH SHA256=21cce3187009ce62a4a08a72b4e22ae7bc00654edfbc7fa9fe8ab65b412791df
+#        URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.3.4.tar.gz
+#        URL_HASH SHA256=29ef4c81cf020e131ec79a28c78946d80d422d05818197079cbaa6353ffba16a
         EXCLUDE_FROM_ALL yes
         OPTIONS "QT_VERSION ${QT_VERSION_MAJOR}")
     IF(ShowMySky-Qt${QT_VERSION_MAJOR}_ADDED)
