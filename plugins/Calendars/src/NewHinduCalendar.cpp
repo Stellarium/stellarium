@@ -330,18 +330,18 @@ int NewHinduCalendar::hinduLunarDayFromMoment(const double rd_ut)
 // return RD of New Moon before RD (CC:UE 20.17)
 double NewHinduCalendar::hinduNewMoonBefore(const double rd_ut)
 {
-	static const double eps=pow(2., -1000);
 	const double tau=rd_ut-(hinduSynodicMonth/360.)*hinduLunarPhase(rd_ut);
 	double l=tau-1.;
 	double u=qMin(rd_ut, tau+1.);
 	do{
-		double mid=(l+u)*0.5;
+		double mid=l*0.5+u*0.5; // Try avoiding num. extinction
 		if (hinduLunarPhase(mid)>180.)
 			l=mid;
 		else
 			u=mid;
-	} while ( (hinduZodiac(l)!=hinduZodiac(u)) && (u-l>eps) );
-	return (l+u)*0.5;
+	} while ( (hinduZodiac(l)!=hinduZodiac(u)) && !qFuzzyCompare(u, l) );
+
+	return l*0.5+u*0.5;
 }
 
 int NewHinduCalendar::hinduCalendarYear(const double rd_ut)
