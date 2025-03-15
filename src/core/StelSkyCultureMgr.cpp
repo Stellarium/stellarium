@@ -21,12 +21,14 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelMainView.hpp"
 #include "StelApp.hpp"
 
 #include <md4c-html.h>
 
 #include <QSettings>
 #include <QString>
+#include <QMessageBox>
 #include <QStringList>
 #include <QVariant>
 #include <QDebug>
@@ -116,20 +118,37 @@ QString convertReferenceLinks(QString text)
 
 }
 
-QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& idFromJSON) const
+QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& dir, const QString& idFromJSON, const bool reportErrorsToGUI) const
 {
 	const auto skyCultureId = idFromJSON;
-	const QString descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description.md");
+	constexpr char descFileName[] = "/description.md";
+	const auto descPath = QFileInfo(dir).isAbsolute() ? dir + descFileName : StelFileMgr::findFile("skycultures/" + dir + descFileName);
 	if (descPath.isEmpty())
 	{
-		qWarning() << "Can't find description for skyculture" << skyCultureId;
+		if (reportErrorsToGUI)
+		{
+			QMessageBox::critical(&StelMainView::getInstance(), q_("Error loading sky culture"),
+			                      q_("Can't find file %1").arg(descPath));
+		}
+		else
+		{
+			qWarning() << "Can't find description for skyculture" << skyCultureId;
+		}
 		return idFromJSON;
 	}
 
 	QFile f(descPath);
 	if (!f.open(QIODevice::ReadOnly))
 	{
-		qWarning().nospace() << "Failed to open sky culture description file " << descPath << ": " << f.errorString();
+		if (reportErrorsToGUI)
+		{
+			QMessageBox::critical(&StelMainView::getInstance(), q_("Error loading sky culture"),
+			                      q_("Failed to open file %1").arg(descPath));
+		}
+		else
+		{
+			qWarning().nospace() << "Failed to open sky culture description file " << descPath << ": " << f.errorString();
+		}
 		return idFromJSON;
 	}
 
@@ -139,8 +158,17 @@ QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& idFromJSON) c
 		if (line.isEmpty()) continue;
 		if (!line.startsWith("#"))
 		{
-			qWarning().nospace() << "Sky culture description file " << descPath << " at line "
-			                     << lineNum << " has wrong format (expected a top-level header, got " << line;
+			if (reportErrorsToGUI)
+			{
+				QMessageBox::critical(&StelMainView::getInstance(), q_("Error loading sky culture"),
+				                      q_("Sky culture description file %1 at line %2 has wrong format "
+				                         "(expected a top-level header, got:\n%3").arg(descPath).arg(lineNum).arg(line));
+			}
+			else
+			{
+				qWarning().nospace() << "Sky culture description file " << descPath << " at line "
+				                     << lineNum << " has wrong format (expected a top-level header, got " << line;
+			}
 			return idFromJSON;
 		}
 		return line.mid(1).trimmed();
@@ -153,131 +181,212 @@ QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& idFromJSON) c
 StelSkyCultureMgr::StelSkyCultureMgr()
 {
 	setObjectName("StelSkyCultureMgr");
-	makeCulturesList();
 }
 
 StelSkyCultureMgr::~StelSkyCultureMgr()
 {
 }
 
+void StelSkyCultureMgr::addCustomCulture(const QString& dir, const bool reportErrorsToGUI)
+{
+	if (!addNewCulture(dir, reportErrorsToGUI)) return;
+
+	additionalCultureDirs << dir;
+
+	QSettings*const conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("skycultures");
+	conf->beginWriteArray("additional_cultures");
+	int i = 0;
+	for (const auto& dir : additionalCultureDirs)
+	{
+		conf->setArrayIndex(i);
+		conf->setValue("dir", dir);
+		++i;
+	}
+	conf->endArray();
+	conf->endGroup();
+
+	auto& culture = dirToNameEnglish[dir];
+	qInfo() << "Added a new sky culture:" << culture.englishName;
+}
+
+bool StelSkyCultureMgr::addNewCulture(const QString& dir, const bool reportErrorsToGUI)
+{
+	constexpr char indexFileName[] = "/index.json";
+	const QString filePath = QFileInfo(dir).isAbsolute() ? dir + indexFileName : StelFileMgr::findFile("skycultures/" + dir + indexFileName);
+	if (filePath.isEmpty())
+	{
+		if (reportErrorsToGUI)
+		{
+			QMessageBox::critical(&StelMainView::getInstance(), q_("Error loading sky culture"),
+			                      q_("Failed to find %1 file in %2").arg(indexFileName, QDir::toNativeSeparators(dir)));
+		}
+		else
+		{
+			qCritical() << "Failed to find" << indexFileName << "file in sky culture directory" << QDir::toNativeSeparators(dir);
+		}
+		return false;
+	}
+	QFile file(filePath);
+	if (!file.open(QFile::ReadOnly))
+	{
+		if (reportErrorsToGUI)
+		{
+			QMessageBox::critical(&StelMainView::getInstance(), q_("Error loading sky culture"),
+			                      q_("Failed to open file %1").arg(QDir::toNativeSeparators(filePath)));
+		}
+		else
+		{
+			qCritical() << "Failed to open" << indexFileName << "file in sky culture directory" << QDir::toNativeSeparators(dir);
+		}
+		return false;
+	}
+	const auto jsonText = file.readAll();
+	if (jsonText.isEmpty())
+	{
+		if (reportErrorsToGUI)
+		{
+			QMessageBox::critical(&StelMainView::getInstance(), q_("Error loading sky culture"),
+			                      q_("Failed to read data from file %1").arg(QDir::toNativeSeparators(filePath)));
+		}
+		else
+		{
+			qCritical() << "Failed to read data from" << indexFileName << "file in sky culture directory"
+			            << QDir::toNativeSeparators(dir);
+		}
+		return false;
+	}
+	QJsonParseError error;
+	const auto jsonDoc = QJsonDocument::fromJson(jsonText, &error);
+	if (error.error != QJsonParseError::NoError)
+	{
+		if (reportErrorsToGUI)
+		{
+			QMessageBox::critical(&StelMainView::getInstance(), q_("Error loading sky culture"),
+			                      q_("Failed to parse file %1").arg(QDir::toNativeSeparators(filePath)));
+		}
+		else
+		{
+			qCritical().nospace() << "Failed to parse " << indexFileName << " from sky culture directory "
+			                      << QDir::toNativeSeparators(dir) << ": " << error.errorString();
+		}
+		return false;
+	}
+	if (!jsonDoc.isObject())
+	{
+		if (reportErrorsToGUI)
+		{
+			QMessageBox::critical(&StelMainView::getInstance(), q_("Error loading sky culture"),
+			                      q_("Failed to find the expected JSON structure in %1").arg(QDir::toNativeSeparators(filePath)));
+		}
+		else
+		{
+			qCritical() << "Failed to find the expected JSON structure in" << indexFileName << " from sky culture directory"
+			            << QDir::toNativeSeparators(dir);
+		}
+		return false;
+	}
+	const auto data = jsonDoc.object();
+
+	auto& culture = dirToNameEnglish[dir];
+	culture.path = StelFileMgr::dirName(filePath);
+	const auto id = data["id"].toString();
+	const auto dirFileName = QFileInfo(dir).fileName();
+	if(id != dirFileName)
+		qWarning() << "Sky culture id" << id << "doesn't match directory name" << dirFileName;
+	culture.id = id;
+	culture.englishName = getSkyCultureEnglishName(dir, id, reportErrorsToGUI);
+	culture.region = data["region"].toString();
+	if (culture.region.length()==0)
+	{
+		qWarning() << "No geographic region declared in skyculture" << id << ". setting \"World\"";
+		culture.region = "World";
+	}
+	if (data["constellations"].isArray())
+	{
+		culture.constellations = data["constellations"].toArray();
+	}
+	else
+	{
+		qWarning() << "No \"constellations\" array found in JSON data in sky culture directory"
+		           << QDir::toNativeSeparators(dir);
+	}
+
+	culture.asterisms = data["asterisms"].toArray();
+	culture.langsUseNativeNames = data["langs_use_native_names"].toArray();
+
+	culture.boundariesType = StelSkyCulture::BoundariesType::None; // default value if not specified in the JSON file
+	if (data.contains("edges") && data.contains("edges_type"))
+	{
+		const QString type = data["edges_type"].toString();
+		const QString typeSimp = type.simplified().toUpper();
+		static const QMap<QString, StelSkyCulture::BoundariesType> map={
+		        {"IAU", StelSkyCulture::BoundariesType::IAU},
+		        {"OWN", StelSkyCulture::BoundariesType::Own},
+		        {"NONE", StelSkyCulture::BoundariesType::None}
+		};
+		if (!map.contains(typeSimp))
+			qWarning().nospace() << "Unexpected edges_type value in sky culture " << dir
+			                     << ": " << type << ". Will resort to Own.";
+		culture.boundariesType = map.value(typeSimp, StelSkyCulture::BoundariesType::Own);
+	}
+	culture.boundaries = data["edges"].toArray();
+	culture.boundariesEpoch = data["edges_epoch"].toString("J2000");
+	culture.fallbackToInternationalNames = data["fallback_to_international_names"].toBool();
+	culture.names = data["common_names"].toObject();
+
+	const auto classifications = data["classification"].toArray();
+	if (classifications.isEmpty())
+	{
+		culture.classification = StelSkyCulture::INCOMPLETE;
+	}
+	else
+	{
+		static const QMap <QString, StelSkyCulture::CLASSIFICATION>classificationMap={
+			{ "traditional",  StelSkyCulture::TRADITIONAL},
+			{ "historical",   StelSkyCulture::HISTORICAL},
+			{ "ethnographic", StelSkyCulture::ETHNOGRAPHIC},
+			{ "single",       StelSkyCulture::SINGLE},
+			{ "comparative",  StelSkyCulture::COMPARATIVE},
+			{ "personal",     StelSkyCulture::PERSONAL},
+			{ "incomplete",   StelSkyCulture::INCOMPLETE},
+		};
+		const auto classificationStr = classifications[0].toString(); // We'll take only the first item for now.
+		const auto classification=classificationMap.value(classificationStr.toLower(), StelSkyCulture::INCOMPLETE);
+		if (classificationMap.constFind(classificationStr.toLower()) == classificationMap.constEnd()) // not included
+		{
+			qWarning() << "Skyculture " << dir << "has UNKNOWN classification: " << classificationStr;
+			qWarning() << "Please edit info.ini and change to a supported value. For now, this equals 'incomplete'";
+		}
+		culture.classification = classification;
+	}
+	return true;
+}
+
 void StelSkyCultureMgr::makeCulturesList()
 {
 	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
+	cultureDirNames += additionalCultureDirs;
 	for (const auto& dir : std::as_const(cultureDirNames))
-	{
-		constexpr char indexFileName[] = "/index.json";
-		const QString filePath = StelFileMgr::findFile("skycultures/" + dir + indexFileName);
-		if (filePath.isEmpty())
-		{
-			qCritical() << "Failed to find" << indexFileName << "file in sky culture directory" << QDir::toNativeSeparators(dir);
-			continue;
-		}
-		QFile file(filePath);
-		if (!file.open(QFile::ReadOnly))
-		{
-			qCritical() << "Failed to open" << indexFileName << "file in sky culture directory" << QDir::toNativeSeparators(dir);
-			continue;
-		}
-		const auto jsonText = file.readAll();
-		if (jsonText.isEmpty())
-		{
-			qCritical() << "Failed to read data from" << indexFileName << "file in sky culture directory"
-			           << QDir::toNativeSeparators(dir);
-			continue;
-		}
-		QJsonParseError error;
-		const auto jsonDoc = QJsonDocument::fromJson(jsonText, &error);
-		if (error.error != QJsonParseError::NoError)
-		{
-			qCritical().nospace() << "Failed to parse " << indexFileName << " from sky culture directory "
-			                     << QDir::toNativeSeparators(dir) << ": " << error.errorString();
-			continue;
-		}
-		if (!jsonDoc.isObject())
-		{
-			qCritical() << "Failed to find the expected JSON structure in" << indexFileName << " from sky culture directory"
-			           << QDir::toNativeSeparators(dir);
-			continue;
-		}
-		const auto data = jsonDoc.object();
-
-		auto& culture = dirToNameEnglish[dir];
-		culture.path = StelFileMgr::dirName(filePath);
-		const auto id = data["id"].toString();
-		if(id != dir)
-			qWarning() << "Sky culture id" << id << "doesn't match directory name" << dir;
-		culture.id = id;
-		culture.englishName = getSkyCultureEnglishName(dir);
-		culture.region = data["region"].toString();
-		if (culture.region.length()==0)
-		{
-			qWarning() << "No geographic region declared in skyculture" << id << ". setting \"World\"";
-			culture.region = "World";
-		}
-		if (data["constellations"].isArray())
-		{
-			culture.constellations = data["constellations"].toArray();
-		}
-		else
-		{
-			qWarning() << "No \"constellations\" array found in JSON data in sky culture directory"
-			           << QDir::toNativeSeparators(dir);
-		}
-
-		culture.asterisms = data["asterisms"].toArray();
-		culture.langsUseNativeNames = data["langs_use_native_names"].toArray();
-
-		culture.boundariesType = StelSkyCulture::BoundariesType::None; // default value if not specified in the JSON file
-		if (data.contains("edges") && data.contains("edges_type"))
-		{
-			const QString type = data["edges_type"].toString();
-			const QString typeSimp = type.simplified().toUpper();
-			static const QMap<QString, StelSkyCulture::BoundariesType> map={
-			        {"IAU", StelSkyCulture::BoundariesType::IAU},
-			        {"OWN", StelSkyCulture::BoundariesType::Own},
-			        {"NONE", StelSkyCulture::BoundariesType::None}
-			};
-			if (!map.contains(typeSimp))
-				qWarning().nospace() << "Unexpected edges_type value in sky culture " << dir
-				                     << ": " << type << ". Will resort to Own.";
-			culture.boundariesType = map.value(typeSimp, StelSkyCulture::BoundariesType::Own);
-		}
-		culture.boundaries = data["edges"].toArray();
-		culture.boundariesEpoch = data["edges_epoch"].toString("J2000");
-		culture.fallbackToInternationalNames = data["fallback_to_international_names"].toBool();
-		culture.names = data["common_names"].toObject();
-
-		const auto classifications = data["classification"].toArray();
-		if (classifications.isEmpty())
-		{
-			culture.classification = StelSkyCulture::INCOMPLETE;
-		}
-		else
-		{
-			static const QMap <QString, StelSkyCulture::CLASSIFICATION>classificationMap={
-				{ "traditional",  StelSkyCulture::TRADITIONAL},
-				{ "historical",   StelSkyCulture::HISTORICAL},
-				{ "ethnographic", StelSkyCulture::ETHNOGRAPHIC},
-				{ "single",       StelSkyCulture::SINGLE},
-				{ "comparative",  StelSkyCulture::COMPARATIVE},
-				{ "personal",     StelSkyCulture::PERSONAL},
-				{ "incomplete",   StelSkyCulture::INCOMPLETE},
-			};
-			const auto classificationStr = classifications[0].toString(); // We'll take only the first item for now.
-			const auto classification=classificationMap.value(classificationStr.toLower(), StelSkyCulture::INCOMPLETE);
-			if (classificationMap.constFind(classificationStr.toLower()) == classificationMap.constEnd()) // not included
-			{
-				qDebug() << "Skyculture " << dir << "has UNKNOWN classification: " << classificationStr;
-				qDebug() << "Please edit info.ini and change to a supported value. For now, this equals 'incomplete'";
-			}
-			culture.classification = classification;
-		}
-	}
+		addNewCulture(dir);
 }
 
 //! Init itself from a config file.
 void StelSkyCultureMgr::init()
 {
+	QSettings*const conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("skycultures");
+	const int size = conf->beginReadArray("additional_cultures");
+	for (int i = 0; i < size; i++)
+	{
+		conf->setArrayIndex(i);
+		additionalCultureDirs << conf->value("dir").toString();
+	}
+	conf->endArray();
+	conf->endGroup();
+
+	makeCulturesList();
+
 	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "modern").toString();
 	if (defaultSkyCultureID=="western") // switch to new Sky Culture ID
 		defaultSkyCultureID = "modern";

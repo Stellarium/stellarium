@@ -56,8 +56,10 @@ protected:
 	bool eventFilter(QObject* object, QEvent* event) override;
 private slots:
 	void populateLists();
+	void onAddNewCulture();
 	void populateToolTips();
 	void skyCultureChanged();
+	void updateSkyCulturesList();
 	void changeProjection(const QString& projectionNameI18n);
 	void projectionChanged();
 	void landscapeChanged(QString id,QString name);
