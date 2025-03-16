@@ -4882,49 +4882,49 @@ Ring::Ring(float radiusMin, float radiusMax, const QString &texname)
 
 Vec3f Planet::getCurrentOrbitColor() const
 {
-	static const QMap<Planet::PlanetType, Vec3f> typeColorMap = {
-		{ isMoon,         orbitMoonsColor       },
-		{ isPlanet,       orbitMajorPlanetsColor},
-		{ isAsteroid,     orbitMinorPlanetsColor},
-		{ isDwarfPlanet,  orbitDwarfPlanetsColor},
-		{ isCubewano,     orbitCubewanosColor   },
-		{ isPlutino,      orbitPlutinosColor    },
-		{ isSDO,          orbitScatteredDiscObjectsColor},
-		{ isOCO,          orbitOortCloudObjectsColor},
-		{ isComet,        orbitCometsColor      },
-		{ isSednoid,      orbitSednoidsColor    },
-		{ isInterstellar, orbitInterstellarColor}};
-	static const QMap<QString, Vec3f>majorPlanetColorMap = {
-		{ "mercury", orbitMercuryColor},
-		{ "venus",   orbitVenusColor  },
-		{ "earth",   orbitEarthColor  },
-		{ "mars",    orbitMarsColor   },
-		{ "jupiter", orbitJupiterColor},
-		{ "saturn",  orbitSaturnColor },
-		{ "uranus",  orbitUranusColor },
-		{ "neptune", orbitNeptuneColor}};
+	static const QMap<Planet::PlanetType, Vec3f*> typeColorMap = {
+		{ isMoon,         &orbitMoonsColor       },
+		{ isPlanet,       &orbitMajorPlanetsColor},
+		{ isAsteroid,     &orbitMinorPlanetsColor},
+		{ isDwarfPlanet,  &orbitDwarfPlanetsColor},
+		{ isCubewano,     &orbitCubewanosColor   },
+		{ isPlutino,      &orbitPlutinosColor    },
+		{ isSDO,          &orbitScatteredDiscObjectsColor},
+		{ isOCO,          &orbitOortCloudObjectsColor},
+		{ isComet,        &orbitCometsColor      },
+		{ isSednoid,      &orbitSednoidsColor    },
+		{ isInterstellar, &orbitInterstellarColor}};
+	static const QMap<QString, Vec3f*>majorPlanetColorMap = {
+		{ "mercury", &orbitMercuryColor},
+		{ "venus",   &orbitVenusColor  },
+		{ "earth",   &orbitEarthColor  },
+		{ "mars",    &orbitMarsColor   },
+		{ "jupiter", &orbitJupiterColor},
+		{ "saturn",  &orbitSaturnColor },
+		{ "uranus",  &orbitUranusColor },
+		{ "neptune", &orbitNeptuneColor}};
 
 	Vec3f orbColor = orbitColor;
 	switch(orbitColorStyle)
 	{
 		case ocsGroups:
 		{
-			orbColor = typeColorMap.value(pType, orbitColor);
+			orbColor = *typeColorMap.value(pType, &orbitColor);
 			break;
 		}
 		case ocsMajorPlanets:
 		{
 			const QString pName = getEnglishName().toLower();
-			orbColor=majorPlanetColorMap.value(pName, orbitColor);
+			orbColor=*(majorPlanetColorMap.value(pName, &orbitColor));
 			break;
 		}
 		case ocsMajorPlanetsMinorTypes:
 		{
 			const QString pName = getEnglishName().toLower();
 			if (majorPlanetColorMap.contains(pName))
-				orbColor=majorPlanetColorMap.value(pName, orbitColor);
+				orbColor=*majorPlanetColorMap.value(pName, &orbitColor);
 			else
-				orbColor = typeColorMap.value(pType, orbitColor);
+				orbColor = *typeColorMap.value(pType, &orbitColor);
 			break;
 		}
 		case ocsOneColor:
