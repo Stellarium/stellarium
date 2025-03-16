@@ -2736,7 +2736,7 @@ msgstr "Agrandar o Sol"
 
 #: src/core/modules/SolarSystem.cpp:360
 msgid "Native planet names (from sky culture)"
-msgstr ""
+msgstr "Nomes de planetas nativos (dende cultura do ceo)"
 
 #: src/core/modules/SolarSystem.cpp:361 src/ui_viewDialog.h:3777
 msgid "Mark minor bodies"
@@ -2875,7 +2875,7 @@ msgstr "Alternar Enquisas Progresivas Xerárquicas"
 
 #: src/core/modules/HipsMgr.cpp:157
 msgid "Toggle HiPS dialog"
-msgstr ""
+msgstr "Alternar o diálogo de HiPS"
 
 #: src/core/SolarEclipseComputer.cpp:2032 src/gui/AstroCalcDialog.cpp:4007
 msgid "Solar Eclipse"
@@ -4360,6 +4360,8 @@ msgid ""
 "You can use it for commercial and non-commercial purposes, freely adapt it "
 "and share adapted work."
 msgstr ""
+"Podes utilizalo con fins comerciais e non comerciais, adaptalo libremente e "
+"compartir traballos adaptados."
 
 #: src/core/StelSkyCultureMgr.cpp:433
 msgid ""
@@ -4377,7 +4379,7 @@ msgstr "Esta cultura do ceo distribúese como dominio público."
 
 #: src/core/StelSkyCultureMgr.cpp:444
 msgid "This is distributed as public domain."
-msgstr ""
+msgstr "Este distribúese como dominio público."
 
 #: src/core/StelSkyCultureMgr.cpp:449
 msgid "This sky culture is provided under Creative Commons License."
@@ -4447,6 +4449,8 @@ msgstr ""
 msgid ""
 "Free Art License grants the right to freely copy, distribute, and transform."
 msgstr ""
+"A Licenza de Arte Libre outorga o dereito de copiar, distribuír e "
+"transformar libremente."
 
 #: src/core/StelSkyCultureMgr.cpp:504 src/core/StelSkyCultureMgr.cpp:511
 #: src/core/StelSkyCultureMgr.cpp:518 src/gui/ConfigurationDialog.cpp:1379
@@ -4506,17 +4510,17 @@ msgstr "Rexión:"
 #: src/core/StelSkyCultureMgr.cpp:635
 msgctxt "Name of a section in sky culture description"
 msgid "Extras"
-msgstr ""
+msgstr "Extras"
 
 #: src/core/StelSkyCultureMgr.cpp:636
 msgctxt "Name of a section in sky culture description"
 msgid "References"
-msgstr ""
+msgstr "Referencias"
 
 #: src/core/StelSkyCultureMgr.cpp:637
 msgctxt "Name of a section in sky culture description"
 msgid "Authors"
-msgstr ""
+msgstr "Autores"
 
 #: src/core/StelSkyCultureMgr.cpp:709
 msgid "No description"
@@ -4536,7 +4540,7 @@ msgstr "Anular a selección do obxecto seleccionado"
 
 #: src/core/StelMovementMgr.cpp:197
 msgid "Re-select last selected object"
-msgstr ""
+msgstr "Volver seleccionar o último obxecto seleccionado"
 
 #: src/core/StelMovementMgr.cpp:198
 msgid "Zoom in on selected object"
@@ -5916,7 +5920,7 @@ msgstr ""
 #: src/gui/ViewDialog.cpp:1056
 msgctxt "duration, suffix"
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: src/gui/ViewDialog.cpp:1092
 msgid "Abbreviated"
@@ -6394,11 +6398,11 @@ msgstr "Universidade de Estrasburgo (Francia)"
 
 #: src/gui/SearchDialog.cpp:1481
 msgid "Harvard-Smithsonian Center for Astrophysics (USA)"
-msgstr ""
+msgstr "Harvard-Smithsonian Center for Astrophysics (USA)"
 
 #: src/gui/SearchDialog.cpp:1482
 msgid "Strasbourg astronomical Data Center (France)"
-msgstr ""
+msgstr "Strasbourg astronomical Data Center (France)"
 
 #: src/gui/SearchDialog.cpp:1564
 msgid "Paste and Search"
@@ -8252,46 +8256,46 @@ msgstr "saros"
 #: src/gui/AstroCalcAlmanacWidget.cpp:165 src/ui_astroCalcAlmanacWidget.h:845
 msgctxt "season"
 msgid "Spring"
-msgstr ""
+msgstr "Primavera"
 
 #. TRANSLATORS: The name of season
 #: src/gui/AstroCalcAlmanacWidget.cpp:151
 #: src/gui/AstroCalcAlmanacWidget.cpp:167 src/ui_astroCalcAlmanacWidget.h:867
 msgctxt "season"
 msgid "Summer"
-msgstr ""
+msgstr "Verán"
 
 #. TRANSLATORS: The name of season
 #: src/gui/AstroCalcAlmanacWidget.cpp:153
 #: src/gui/AstroCalcAlmanacWidget.cpp:161 src/ui_astroCalcAlmanacWidget.h:773
 msgctxt "season"
 msgid "Fall"
-msgstr ""
+msgstr "Outono"
 
 #. TRANSLATORS: The name of season
 #: src/gui/AstroCalcAlmanacWidget.cpp:155
 #: src/gui/AstroCalcAlmanacWidget.cpp:163 src/ui_astroCalcAlmanacWidget.h:788
 msgctxt "season"
 msgid "Winter"
-msgstr ""
+msgstr "Inverno"
 
 #. TRANSLATORS: full phrase is "The Sun is XX° below the horizon"
 #: src/gui/AstroCalcAlmanacWidget.cpp:283
 #, qt-format
 msgid "The Sun is %1 below the horizon"
-msgstr ""
+msgstr "O Sol está un %1 por debaixo do horizonte"
 
 #: src/gui/AstroCalcAlmanacWidget.cpp:287
 msgid "The duration of daytime"
-msgstr ""
+msgstr "A duración do día"
 
 #: src/gui/AstroCalcAlmanacWidget.cpp:288
 msgid "The duration of the astronomical night"
-msgstr ""
+msgstr "A duración da noite astronómica"
 
 #: src/gui/AstroCalcAlmanacWidget.cpp:289
 msgid "The duration of morning and evening twilights"
-msgstr ""
+msgstr "A duración dos crepúsculos da mañá e da noite"
 
 #: src/gui/AstroCalcAlmanacWidget.cpp:370 src/ui_astroCalcAlmanacWidget.h:839
 #: plugins/NavStars/src/ui_navStarsWindow.h:546
@@ -8584,7 +8588,7 @@ msgstr ""
 #: src/translations.h:34
 msgctxt "dataset short name"
 msgid "Nebulae"
-msgstr ""
+msgstr "Nebulosas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:43
@@ -12881,7 +12885,7 @@ msgstr "Usar nomes adicionais do DSO"
 
 #: src/ui_viewDialog.h:3949
 msgid "Show only named DSO"
-msgstr ""
+msgstr "Mostrar só os nomes de Obxectos do Espazo Profundo"
 
 #: src/ui_viewDialog.h:3950
 msgid "Use outlines for big deep-sky objects"
@@ -13622,7 +13626,7 @@ msgstr "Usar esta paisaxe por omisión"
 
 #: src/ui_viewDialog.h:4562
 msgid "Fading duration for artwork of constellations "
-msgstr ""
+msgstr "Duración do desvaecemento das imaxes artísticas das constelacións"
 
 #: src/ui_viewDialog.h:4566
 msgid "Click on star to show its constellation"
@@ -13631,6 +13635,7 @@ msgstr "Fai clic na estrela para mostrar a súa constelación"
 #: src/ui_viewDialog.h:4573
 msgid "Fading duration for screen labels of constellations"
 msgstr ""
+"Duración do esvaecemento para as etiquetas de pantalla das constelacións"
 
 #: src/ui_viewDialog.h:4576
 msgid "Select if you want names abbreviated, original or translated"
@@ -13650,7 +13655,7 @@ msgstr "Cor dos nomes das constelacións"
 
 #: src/ui_viewDialog.h:4590
 msgid "Fading duration for lines of constellations"
-msgstr ""
+msgstr "Duración do esvaecemento das liñas das constelacións"
 
 #: src/ui_viewDialog.h:4593
 msgid "Constellations font size"
@@ -13666,7 +13671,7 @@ msgstr "Cor das liñas de constelación"
 
 #: src/ui_viewDialog.h:4602
 msgid "Fading duration for boundaries of constellations"
-msgstr ""
+msgstr "Duración do desvaecemento dos límites das constelacións"
 
 #: src/ui_viewDialog.h:4606
 msgid "Color of asterism lines"
@@ -13690,7 +13695,7 @@ msgstr "Cor de axudantes de raios"
 
 #: src/ui_viewDialog.h:4631
 msgid "Fading duration for screen labels of asterisms "
-msgstr ""
+msgstr "Duración do esvaecemento para as etiquetas de asterismos en pantalla"
 
 #: src/ui_viewDialog.h:4634
 msgid "Use native names for planets from current culture"
@@ -13702,7 +13707,7 @@ msgstr "Usar nomes nativos para os planetas"
 
 #: src/ui_viewDialog.h:4638
 msgid "Fading duration for lines of asterisms"
-msgstr ""
+msgstr "Duración do esvaecemento para as liñas de asterismos"
 
 #: src/ui_viewDialog.h:4641
 msgid "Only one at a time"
@@ -13714,7 +13719,7 @@ msgstr "lllado"
 
 #: src/ui_viewDialog.h:4645
 msgid "Fading duration for lines of ray helpers"
-msgstr ""
+msgstr "Duración do esvaecemento das liñas de axudantes de raios"
 
 #: src/ui_viewDialog.h:4647
 msgid "Use this sky culture as default"
@@ -13722,7 +13727,7 @@ msgstr "Usar esta cultura do ceo por omisión"
 
 #: src/ui_viewDialog.h:4648
 msgid "Filter"
-msgstr ""
+msgstr "Filtro"
 
 #: src/ui_configurationDialog.h:1897
 msgid "Configuration"
@@ -14563,7 +14568,7 @@ msgstr "Almacenar a configuración da fonte"
 
 #: src/ui_configurationDialog.h:2304
 msgid "Screen button scale:"
-msgstr ""
+msgstr "Escala do botón da pantalla:"
 
 #: src/ui_configurationDialog.h:2305
 msgid "Screenshots"
@@ -14717,7 +14722,7 @@ msgstr "Renderizar dispersión múltiple"
 
 #: src/ui_atmosphereDialog.h:367
 msgid "Mirror the sky under the horizon"
-msgstr ""
+msgstr "Reflicte o ceo baixo o horizonte"
 
 #: src/ui_atmosphereDialog.h:368
 msgid "Refraction Settings"
@@ -14938,7 +14943,7 @@ msgstr "Eclipses e tránsitos"
 
 #: src/ui_astroCalcDialog.h:2310
 msgid "Almanac"
-msgstr ""
+msgstr "Almanaque"
 
 #: src/ui_astroCalcDialog.h:2317 src/ui_astroCalcDialog.h:2545
 msgid "Show objects brighter than magnitude"
@@ -15198,7 +15203,7 @@ msgstr "Entre obxectos:"
 
 #: src/ui_astroCalcDialog.h:2456
 msgid "Re-select previously selected object"
-msgstr ""
+msgstr "Volver seleccionar o obxecto seleccionado anteriormente"
 
 #: src/ui_astroCalcDialog.h:2461
 msgid "Maximum allowed separation:"
@@ -15546,31 +15551,31 @@ msgstr "Unidade de medida:"
 
 #: src/ui_astroCalcAlmanacWidget.h:775
 msgid "Previous September Equinox"
-msgstr ""
+msgstr "Equinoccio de setembro anterior"
 
 #: src/ui_astroCalcAlmanacWidget.h:778
 msgid "Current September Equinox"
-msgstr ""
+msgstr "Equinoccio de setembro actual"
 
 #: src/ui_astroCalcAlmanacWidget.h:781
 msgid "Next September Equinox"
-msgstr ""
+msgstr "Equinoccio de setembro seguinte"
 
 #: src/ui_astroCalcAlmanacWidget.h:784
 msgid "Today's sunset"
-msgstr ""
+msgstr "O solpor de hoxe"
 
 #: src/ui_astroCalcAlmanacWidget.h:790
 msgid "Previous December Solstice"
-msgstr ""
+msgstr "Solsticio de decembro anterior"
 
 #: src/ui_astroCalcAlmanacWidget.h:793
 msgid "Current December Solstice"
-msgstr ""
+msgstr "Solsticio de decembro actual"
 
 #: src/ui_astroCalcAlmanacWidget.h:796
 msgid "Next December Solstice"
-msgstr ""
+msgstr "Solsticio de decembro seguinte"
 
 #: src/ui_astroCalcAlmanacWidget.h:799 src/ui_astroCalcAlmanacWidget.h:806
 #: src/ui_astroCalcAlmanacWidget.h:808 src/ui_astroCalcAlmanacWidget.h:840
@@ -15580,19 +15585,19 @@ msgstr "Duración"
 
 #: src/ui_astroCalcAlmanacWidget.h:801
 msgid "Evening civil twilight"
-msgstr ""
+msgstr "Crepúsculo civil vespertino"
 
 #: src/ui_astroCalcAlmanacWidget.h:805
 msgid "Dusk"
-msgstr ""
+msgstr "Solpor"
 
 #: src/ui_astroCalcAlmanacWidget.h:810
 msgid "Morning astronomical twilight"
-msgstr ""
+msgstr "Crepúsculo astronómico da mañá"
 
 #: src/ui_astroCalcAlmanacWidget.h:814
 msgid "Evening nautical twilight"
-msgstr ""
+msgstr "Crepúsculo náutico vespertino"
 
 #: src/ui_astroCalcAlmanacWidget.h:817
 #: plugins/Calendars/src/ui_calendarsDialog.h:948
@@ -15601,7 +15606,7 @@ msgstr "Ano"
 
 #: src/ui_astroCalcAlmanacWidget.h:821
 msgid "Today's moonrise"
-msgstr ""
+msgstr "Saída da lúa hoxe"
 
 #: src/ui_astroCalcAlmanacWidget.h:824
 msgid "Twilight"
@@ -15609,19 +15614,19 @@ msgstr "Solpor"
 
 #: src/ui_astroCalcAlmanacWidget.h:826
 msgid "Today's sunrise"
-msgstr ""
+msgstr "Posta da lúa hoxe"
 
 #: src/ui_astroCalcAlmanacWidget.h:830
 msgid "Evening astronomical twilight"
-msgstr ""
+msgstr "Crepúsculo astronómico vespertino"
 
 #: src/ui_astroCalcAlmanacWidget.h:833
 msgid "Astronomical Night"
-msgstr ""
+msgstr "Noite astronómica"
 
 #: src/ui_astroCalcAlmanacWidget.h:836
 msgid "Morning civil twilight"
-msgstr ""
+msgstr "Crepúsculo civil matutino"
 
 #: src/ui_astroCalcAlmanacWidget.h:842
 msgid "Set"
@@ -15630,33 +15635,33 @@ msgstr "Posta"
 #: src/ui_astroCalcAlmanacWidget.h:843
 msgctxt "twilight"
 msgid "Civil"
-msgstr ""
+msgstr "Civil"
 
 #: src/ui_astroCalcAlmanacWidget.h:844
 msgctxt "twilight"
 msgid "Astronomical"
-msgstr ""
+msgstr "Astronómico"
 
 #: src/ui_astroCalcAlmanacWidget.h:847
 msgid "Previous March Equinox"
-msgstr ""
+msgstr "Equinoccio de marzo anterior"
 
 #: src/ui_astroCalcAlmanacWidget.h:850
 msgid "Current March Equinox"
-msgstr ""
+msgstr "Equinoccio de marzo actual"
 
 #: src/ui_astroCalcAlmanacWidget.h:853
 msgid "Next March Equinox"
-msgstr ""
+msgstr "Equinoccio de marzo seguinte"
 
 #: src/ui_astroCalcAlmanacWidget.h:855
 msgctxt "twilight"
 msgid "Nautical"
-msgstr ""
+msgstr "Náutico"
 
 #: src/ui_astroCalcAlmanacWidget.h:856
 msgid "Seasons"
-msgstr ""
+msgstr "Estacións"
 
 #: src/ui_astroCalcAlmanacWidget.h:862
 msgid "Rise"
@@ -15664,19 +15669,19 @@ msgstr "Saída"
 
 #: src/ui_astroCalcAlmanacWidget.h:864
 msgid "Today's moonset"
-msgstr ""
+msgstr "A posta da lúa hoxe"
 
 #: src/ui_astroCalcAlmanacWidget.h:869
 msgid "Previous June Solstice"
-msgstr ""
+msgstr "Solsticio de xuño anterior"
 
 #: src/ui_astroCalcAlmanacWidget.h:872
 msgid "Current June Solstice"
-msgstr ""
+msgstr "Solsticio de xuño actual"
 
 #: src/ui_astroCalcAlmanacWidget.h:875
 msgid "Next June Solstice"
-msgstr ""
+msgstr "Solsticio de xuño seguinte"
 
 #: src/ui_astroCalcAlmanacWidget.h:877
 msgid "Dawn"
@@ -15684,7 +15689,7 @@ msgstr "Amencer"
 
 #: src/ui_astroCalcAlmanacWidget.h:879
 msgid "Morning nautical twilight"
-msgstr ""
+msgstr "Crepúsculo náutico matinal"
 
 #: src/ui_obsListDialog.h:362
 msgid "Add object"
@@ -20417,11 +20422,12 @@ msgstr "Detido"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:117
 msgid "Outdated ASCOM!"
-msgstr ""
+msgstr "ASCOM desactualizado!"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:117
 msgid "Your ASCOM is below version 7. Upgrade to avoid problems!"
 msgstr ""
+"O teu ASCOM é unha versión asnterior á 7. Actualízao para evitar problemas!"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:273
 msgid "Telescope Control plug-in"
@@ -20777,6 +20783,9 @@ msgid ""
 "(opened by pressing <b>%1+0</b> or the respective button on the bottom "
 "toolbar)."
 msgstr ""
+"Premendo o botón 'Configurar telescopios...' na xanela {'Desplazar a'} "
+"(abrese premendo <b>%1+0</b> ou o botón respectivo da barra de ferramentas "
+"inferior)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
 msgid ""
@@ -20792,6 +20801,8 @@ msgid ""
 "The number (<b>#</b>) column shows the number used to control this "
 "telescope. For example, for telescope #2, the shortcut is %1+2."
 msgstr ""
+"A columna número (<b>#</b>) mostra o número utilizado para controlar este "
+"telescopio. Por exemplo, para o telescopio #2, o atallo é %1+2."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:361
 msgid ""
@@ -21083,6 +21094,8 @@ msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>%1+0</b> or the "
 "respective button in the bottom toolbar."
 msgstr ""
+"A xanela \"Mover telescopio a\" pódese abrir premendo <b>%1+0</b> ou o botón"
+" correspondente na barra de ferramentas inferior."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid ""
@@ -21164,12 +21177,15 @@ msgid ""
 "<b>To point a device to an object:</b> Select an object (e.g. a star) and "
 "press the number of the device while holding down the <b>%1</b> key."
 msgstr ""
+"<b>Para apuntar un dispositivo a un obxecto:</b> Selecciona un obxecto (por "
+"exemplo, unha estrela) e prema o número do dispositivo mentres mantés "
+"premida a tecla <b>%1</b> ."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:466
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:469
 #, qt-format
 msgid "For example, %1+1 for telescope #1."
-msgstr ""
+msgstr "Por exempolo, %1+1 para o telescopio #1."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:467
 msgid "This will move the telescope to the selected object."
@@ -21181,6 +21197,8 @@ msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
 "device while holding down the <b>%1</b> key."
 msgstr ""
+"<b>Para apuntar un dispositivo ó centro da vista:</b> Preme o número do "
+"dispositivo mentres mantés premida a tecla <b>%1</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:470
 msgid ""
@@ -21202,6 +21220,8 @@ msgid ""
 "<b>To point a device to a given set of coordinates:</b> Use the {'Slew to' "
 "window} (press <b>%1+0</b>)."
 msgstr ""
+"<b>Para apuntar un dispositivo a un determinado conxunto de coordenadas:</b>"
+" Usa a {xanela 'Desprazar a'} (preme <b>%1+0</b>)."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:481
@@ -21347,6 +21367,10 @@ msgid ""
 "telescope's number. To slew it to the center of the current view, hold down "
 "the %2 key and press the key with that telescope's number."
 msgstr ""
+"Para dirixir un telescopio conectado a un obxecto (por exemplo, unha "
+"estrela), selecciona ese obxecto, mantén premida a tecla % 1 e preme a tecla"
+" co número dese telescopio. Para desprazalo ó centro da vista actual, mantén"
+" premida a tecla %2 e preme a tecla co número dese telescopio."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually
 #. see this text. :)
@@ -21544,7 +21568,7 @@ msgstr "Sinc"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:353
 msgid "Stop all telescope motions (if supported)"
-msgstr ""
+msgstr "Detén todos os movementos do telescopio (se é compatible)"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:355
 msgid "Abort slew"
