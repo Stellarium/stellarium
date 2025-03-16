@@ -78,13 +78,18 @@ protected:
 	Vec3d getJ2000EquatorialPos(const StelCore* core) const override
 	{
 		Vec3d v;
-		s->getJ2000Pos((core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25, v);
+
+		double RA, DEC, pmra, pmdec, Plx, RadialVel;
+		float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
+		s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+		StelUtils::spheToRect(RA, DEC, v);
+
 		// in case it is in a binary system
 		s->getBinaryOrbit(core->getJDE(), v);
 		double withParallax = core->getUseParallax() * core->getParallaxFactor();
 		if (withParallax) {
 			const Vec3d diffPos = core->getParallaxDiff(core->getJDE());
-			s->getPlxEffect(withParallax * s->getPlx(), v, diffPos);
+			s->getPlxEffect(withParallax * Plx, v, diffPos);
 			v.normalize();
 		}
 

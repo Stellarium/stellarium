@@ -743,8 +743,10 @@ public slots:
 	bool getFlagEarthShadowEnlargementDanjon() const;
 
 	//! Set style of colors of orbits for Solar system bodies
+	//! @param style One of one_color | groups | major_planets | major_planets_minor_types
 	void setOrbitColorStyle(const QString &style);
 	//! Get style of colors of orbits for Solar system bodies
+	//! @return One of one_color | groups | major_planets | major_planets_minor_types
 	QString getOrbitColorStyle() const;
 
 	//! Get list of objects by type

@@ -3323,6 +3323,7 @@ void SolarSystem::setLabelsColor(const Vec3f& c)
 	if (c!=Planet::getLabelColor())
 	{
 		Planet::setLabelColor(c);
+		StelApp::immediateSave("color/planet_names_color", c.toStr());
 		emit labelsColorChanged(c);
 	}
 }
@@ -3338,6 +3339,7 @@ void SolarSystem::setOrbitsColor(const Vec3f& c)
 	if (c!=Planet::getOrbitColor())
 	{
 		Planet::setOrbitColor(c);
+		StelApp::immediateSave("color/sso_orbits_color", c.toStr());
 		emit orbitsColorChanged(c);
 	}
 }
@@ -3352,6 +3354,7 @@ void SolarSystem::setMajorPlanetsOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getMajorPlanetOrbitColor())
 	{
 		Planet::setMajorPlanetOrbitColor(c);
+		StelApp::immediateSave("color/major_planets_orbits_color", c.toStr());
 		emit majorPlanetsOrbitsColorChanged(c);
 	}
 }
@@ -3366,6 +3369,7 @@ void SolarSystem::setMinorPlanetsOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getMinorPlanetOrbitColor())
 	{
 		Planet::setMinorPlanetOrbitColor(c);
+		StelApp::immediateSave("color/minor_planets_orbits_color", c.toStr());
 		emit minorPlanetsOrbitsColorChanged(c);
 	}
 }
@@ -3380,6 +3384,7 @@ void SolarSystem::setDwarfPlanetsOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getDwarfPlanetOrbitColor())
 	{
 		Planet::setDwarfPlanetOrbitColor(c);
+		StelApp::immediateSave("color/dwarf_planets_orbits_color", c.toStr());
 		emit dwarfPlanetsOrbitsColorChanged(c);
 	}
 }
@@ -3394,6 +3399,7 @@ void SolarSystem::setMoonsOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getMoonOrbitColor())
 	{
 		Planet::setMoonOrbitColor(c);
+		StelApp::immediateSave("color/moon_orbits_color", c.toStr());
 		emit moonsOrbitsColorChanged(c);
 	}
 }
@@ -3408,6 +3414,7 @@ void SolarSystem::setCubewanosOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getCubewanoOrbitColor())
 	{
 		Planet::setCubewanoOrbitColor(c);
+		StelApp::immediateSave("color/cubewano_orbits_color", c.toStr());
 		emit cubewanosOrbitsColorChanged(c);
 	}
 }
@@ -3422,6 +3429,7 @@ void SolarSystem::setPlutinosOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getPlutinoOrbitColor())
 	{
 		Planet::setPlutinoOrbitColor(c);
+		StelApp::immediateSave("color/plutino_orbits_color", c.toStr());
 		emit plutinosOrbitsColorChanged(c);
 	}
 }
@@ -3436,6 +3444,7 @@ void SolarSystem::setScatteredDiskObjectsOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getScatteredDiscObjectOrbitColor())
 	{
 		Planet::setScatteredDiscObjectOrbitColor(c);
+		StelApp::immediateSave("color/sdo_orbits_color", c.toStr());
 		emit scatteredDiskObjectsOrbitsColorChanged(c);
 	}
 }
@@ -3450,6 +3459,7 @@ void SolarSystem::setOortCloudObjectsOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getOortCloudObjectOrbitColor())
 	{
 		Planet::setOortCloudObjectOrbitColor(c);
+		StelApp::immediateSave("color/oco_orbits_color", c.toStr());
 		emit oortCloudObjectsOrbitsColorChanged(c);
 	}
 }
@@ -3464,6 +3474,7 @@ void SolarSystem::setCometsOrbitsColor(const Vec3f& c)
 	if (c!=Planet::getCometOrbitColor())
 	{
 		Planet::setCometOrbitColor(c);
+		StelApp::immediateSave("color/comet_orbits_color", c.toStr());
 		emit cometsOrbitsColorChanged(c);
 	}
 }
@@ -3478,6 +3489,7 @@ void SolarSystem::setSednoidsOrbitsColor(const Vec3f& c)
 	if (c!=Planet::getSednoidOrbitColor())
 	{
 		Planet::setSednoidOrbitColor(c);
+		StelApp::immediateSave("color/sednoid_orbits_color", c.toStr());
 		emit sednoidsOrbitsColorChanged(c);
 	}
 }
@@ -3492,6 +3504,7 @@ void SolarSystem::setInterstellarOrbitsColor(const Vec3f& c)
 	if (c!=Planet::getInterstellarOrbitColor())
 	{
 		Planet::setInterstellarOrbitColor(c);
+		StelApp::immediateSave("color/interstellar_orbits_color", c.toStr());
 		emit interstellarOrbitsColorChanged(c);
 	}
 }
@@ -3506,6 +3519,7 @@ void SolarSystem::setMercuryOrbitColor(const Vec3f &c)
 	if (c!=Planet::getMercuryOrbitColor())
 	{
 		Planet::setMercuryOrbitColor(c);
+		StelApp::immediateSave("color/mercury_orbit_color", c.toStr());
 		emit mercuryOrbitColorChanged(c);
 	}
 }
@@ -3520,6 +3534,7 @@ void SolarSystem::setVenusOrbitColor(const Vec3f &c)
 	if (c!=Planet::getVenusOrbitColor())
 	{
 		Planet::setVenusOrbitColor(c);
+		StelApp::immediateSave("color/venus_orbit_color", c.toStr());
 		emit venusOrbitColorChanged(c);
 	}
 }
@@ -3534,6 +3549,7 @@ void SolarSystem::setEarthOrbitColor(const Vec3f &c)
 	if (c!=Planet::getEarthOrbitColor())
 	{
 		Planet::setEarthOrbitColor(c);
+		StelApp::immediateSave("color/earth_orbit_color", c.toStr());
 		emit earthOrbitColorChanged(c);
 	}
 }
@@ -3548,6 +3564,7 @@ void SolarSystem::setMarsOrbitColor(const Vec3f &c)
 	if (c!=Planet::getMarsOrbitColor())
 	{
 		Planet::setMarsOrbitColor(c);
+		StelApp::immediateSave("color/mars_orbit_color", c.toStr());
 		emit marsOrbitColorChanged(c);
 	}
 }
@@ -3562,6 +3579,7 @@ void SolarSystem::setJupiterOrbitColor(const Vec3f &c)
 	if (c!=Planet::getJupiterOrbitColor())
 	{
 		Planet::setJupiterOrbitColor(c);
+		StelApp::immediateSave("color/jupiter_orbit_color", c.toStr());
 		emit jupiterOrbitColorChanged(c);
 	}
 }
@@ -3576,6 +3594,7 @@ void SolarSystem::setSaturnOrbitColor(const Vec3f &c)
 	if (c!=Planet::getSaturnOrbitColor())
 	{
 		Planet::setSaturnOrbitColor(c);
+		StelApp::immediateSave("color/saturn_orbit_color", c.toStr());
 		emit saturnOrbitColorChanged(c);
 	}
 }
@@ -3590,6 +3609,7 @@ void SolarSystem::setUranusOrbitColor(const Vec3f &c)
 	if (c!=Planet::getUranusOrbitColor())
 	{
 		Planet::setUranusOrbitColor(c);
+		StelApp::immediateSave("color/uranus_orbit_color", c.toStr());
 		emit uranusOrbitColorChanged(c);
 	}
 }
@@ -3604,6 +3624,7 @@ void SolarSystem::setNeptuneOrbitColor(const Vec3f &c)
 	if (c!=Planet::getNeptuneOrbitColor())
 	{
 		Planet::setNeptuneOrbitColor(c);
+		StelApp::immediateSave("color/neptune_orbit_color", c.toStr());
 		emit neptuneOrbitColorChanged(c);
 	}
 }

@@ -452,7 +452,8 @@ void NebulaMgr::init()
 #else
 	unwantedReferences=allUnwantedReferencesFromOneSetRaw.split(',', QString::SkipEmptyParts);
 #endif
-	qInfo() << "NebulaMgr: Unwanted References:" << unwantedReferences;
+	if (!unwantedReferences.isEmpty()) // Do not show unwanted references when they does not defined
+		qInfo() << "NebulaMgr: Unwanted References:" << unwantedReferences;
 
 	loadNebulaSet(nebulaSetName);
 
