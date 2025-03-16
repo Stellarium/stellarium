@@ -92,8 +92,9 @@ public slots:
 	//! Set the color used to draw nomenclature items.
 	//! @param c The color of the nomenclature items (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! NomenclatureMgr.setColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! NomenclatureMgr.setColor(c.toVec3f());
 	//! @endcode
 	void setColor(const Vec3f& c);
 	//! Get the current color used to draw nomenclature items.

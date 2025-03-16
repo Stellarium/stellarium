@@ -95,8 +95,9 @@ public slots:
 	//! Set the color used to draw of the highlight markers.
 	//! @param c The color of the highlight markers (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! HighlightMgr.setColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! HighlightMgr.setColor(c.toVec3f());
 	//! @endcode
 	void setColor(const Vec3f& c);
 	//! Get the current color used to draw of the highlight markers.

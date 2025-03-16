@@ -154,8 +154,9 @@ public slots:
 	//! Define boundary color
 	//! @param color The color of boundaries
 	//! @code
-	//! // example of usage in scripts
-	//! ConstellationMgr.setBoundariesColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! ConstellationMgr.setBoundariesColor(c.toVec3f());
 	//! @endcode
 	void setBoundariesColor(const Vec3f& color);
 	//! Get current boundary color
@@ -184,8 +185,9 @@ public slots:
 	//! Define line color
 	//! @param color The color of lines
 	//! @code
-	//! // example of usage in scripts
-	//! ConstellationMgr.setLinesColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! ConstellationMgr.setLinesColor(c.toVec3f());
 	//! @endcode
 	void setLinesColor(const Vec3f& color);
 	//! Get line color
@@ -204,8 +206,9 @@ public slots:
 	//! Set label color for names
 	//! @param color The color of labels
 	//! @code
-	//! // example of usage in scripts
-	//! ConstellationMgr.setLabelsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! ConstellationMgr.setLabelsColor(c.toVec3f());
 	//! @endcode
 	void setLabelsColor(const Vec3f& color);
 	//! Get label color for names
