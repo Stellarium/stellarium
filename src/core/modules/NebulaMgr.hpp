@@ -436,8 +436,9 @@ public slots:
 	//! Set the default color used to draw the nebula symbols (default circles, etc).
 	//! @param c The color of the nebula symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setCirclesColor(Vec3f(0.6,0.8,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(0.6, 0.8, 0.0);
+	//! NebulaMgr.setCirclesColor(c.toVec3f());
 	//! @endcode
 	void setCirclesColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
@@ -446,8 +447,9 @@ public slots:
 	//! Set the default color used to draw the region symbols (default dashed shape).
 	//! @param c The color of the region symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setRegionsColor(Vec3f(0.6,0.8,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(0.6, 0.8, 0.0);
+	//! NebulaMgr.setRegionsColor(c.toVec3f());
 	//! @endcode
 	void setRegionsColor(const Vec3f& c);
 	//! Get current value of the region color.
@@ -456,8 +458,9 @@ public slots:
 	//! Set the color used to draw the galaxy symbols (ellipses).
 	//! @param c The color of the galaxy symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setGalaxyColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! NebulaMgr.setGalaxyColor(c.toVec3f());
 	//! @endcode
 	void setGalaxyColor(const Vec3f& c);
 	//! Get current value of the galaxy symbol color.
@@ -466,8 +469,9 @@ public slots:
 	//! Set the color used to draw the active galaxy symbols (ellipses).
 	//! @param c The color of the active galaxy symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setActiveGalaxyColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! NebulaMgr.setActiveGalaxyColor(c.toVec3f());
 	//! @endcode
 	void setActiveGalaxyColor(const Vec3f& c);
 	//! Get current value of the active galaxy symbol color.
@@ -476,8 +480,9 @@ public slots:
 	//! Set the color used to draw the interacting galaxy symbols (ellipses).
 	//! @param c The color of the interacting galaxy symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setInteractingGalaxyColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! NebulaMgr.setInteractingGalaxyColor(c.toVec3f());
 	//! @endcode
 	void setInteractingGalaxyColor(const Vec3f& c);
 	//! Get current value of the interacting galaxy symbol color.
@@ -486,8 +491,9 @@ public slots:
 	//! Set the color used to draw the radio galaxy symbols (ellipses).
 	//! @param c The color of the radio galaxy symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setRadioGalaxyColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! NebulaMgr.setRadioGalaxyColor(c.toVec3f());
 	//! @endcode
 	void setRadioGalaxyColor(const Vec3f& c);
 	//! Get current value of the radio galaxy symbol color.
@@ -496,8 +502,9 @@ public slots:
 	//! Set the color used to draw the quasars symbols (ellipses).
 	//! @param c The color of the quasars symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setQuasarColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! NebulaMgr.setQuasarColor(c.toVec3f());
 	//! @endcode
 	void setQuasarColor(const Vec3f& c);
 	//! Get current value of the quasar symbol color.
@@ -506,8 +513,9 @@ public slots:
 	//! Set the color used to draw the bright nebula symbols (emission nebula boxes, planetary nebulae circles).
 	//! @param c The color of the nebula symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setNebulaColor(Vec3f(0.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(0.0, 1.0, 0.0);
+	//! NebulaMgr.setNebulaColor(c.toVec3f());
 	//! @endcode
 	void setNebulaColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
@@ -516,8 +524,9 @@ public slots:
 	//! Set the color used to draw the planetary nebulae symbols.
 	//! @param c The color of the planetary nebulae symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setPlanetaryNebulaColor(Vec3f(0.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(0.0, 1.0, 0.0);
+	//! NebulaMgr.setPlanetaryNebulaColor(c.toVec3f());
 	//! @endcode
 	void setPlanetaryNebulaColor(const Vec3f& c);
 	//! Get current value of the planetary nebula circle color.
@@ -526,8 +535,9 @@ public slots:
 	//! Set the color used to draw the reflection nebulae symbols.
 	//! @param c The color of the reflection nebulae symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setReflectionNebulaColor(Vec3f(0.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(0.0, 1.0, 0.0);
+	//! NebulaMgr.setReflectionNebulaColor(c.toVec3f());
 	//! @endcode
 	void setReflectionNebulaColor(const Vec3f& c);
 	//! Get current value of the reflection nebula circle color.
@@ -536,8 +546,9 @@ public slots:
 	//! Set the color used to draw the bipolar nebulae symbols.
 	//! @param c The color of the bipolar nebulae symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setBipolarNebulaColor(Vec3f(0.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(0.0, 1.0, 0.0);
+	//! NebulaMgr.setBipolarNebulaColor(c.toVec3f());
 	//! @endcode
 	void setBipolarNebulaColor(const Vec3f& c);
 	//! Get current value of the bipolar nebula circle color.
@@ -546,8 +557,9 @@ public slots:
 	//! Set the color used to draw the emission nebulae symbols.
 	//! @param c The color of the emission nebulae symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setEmissionNebulaColor(Vec3f(0.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(0.0, 1.0, 0.0);
+	//! NebulaMgr.setEmissionNebulaColor(c.toVec3f());
 	//! @endcode
 	void setEmissionNebulaColor(const Vec3f& c);
 	//! Get current value of the emission nebula circle color.
@@ -556,8 +568,9 @@ public slots:
 	//! Set the color used to draw the ionized hydrogen region symbols.
 	//! @param c The color of the ionized hydrogen region symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setHydrogenRegionColor(Vec3f(0.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(0.0, 1.0, 0.0);
+	//! NebulaMgr.setHydrogenRegionColor(c.toVec3f());
 	//! @endcode
 	void setHydrogenRegionColor(const Vec3f& c);
 	//! Get current value of the hydrogen region symbol color.
@@ -566,8 +579,9 @@ public slots:
 	//! Set the color used to draw the supernova remnant symbols.
 	//! @param c The color of the supernova remnant symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setSupernovaRemnantColor(Vec3f(0.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(0.0, 1.0, 0.0);
+	//! NebulaMgr.setSupernovaRemnantColor(c.toVec3f());
 	//! @endcode
 	void setSupernovaRemnantColor(const Vec3f& c);
 	//! Get current value of the supernova remnant symbol color.
@@ -576,8 +590,9 @@ public slots:
 	//! Set the color used to draw the supernova candidate symbols.
 	//! @param c The color of the supernova candidate symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setSupernovaCandidateColor(Vec3f(0.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(0.0, 1.0, 0.0);
+	//! NebulaMgr.setSupernovaCandidateColor(c.toVec3f());
 	//! @endcode
 	void setSupernovaCandidateColor(const Vec3f& c);
 	//! Get current value of the supernova candidate symbol color.
@@ -587,8 +602,9 @@ public slots:
 	//! Set the color used to draw the supernova remnant candidate symbols.
 	//! @param c The color of the supernova remnant candidate symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setSupernovaRemnantCandidateColor(Vec3f(0.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(0.0, 1.0, 0.0);
+	//! NebulaMgr.setSupernovaRemnantCandidateColor(c.toVec3f());
 	//! @endcode
 	void setSupernovaRemnantCandidateColor(const Vec3f& c);
 	//! Get current value of the supernova remnant candidate symbol color.
@@ -597,8 +613,9 @@ public slots:
 	//! Set the color used to draw the interstellar matter symbols.
 	//! @param c The color of the interstellar matter symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setInterstellarMatterColor(Vec3f(0.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(0.0, 1.0, 0.0);
+	//! NebulaMgr.setInterstellarMatterColor(c.toVec3f());
 	//! @endcode
 	void setInterstellarMatterColor(const Vec3f& c);
 	//! Get current value of the interstellar matter symbol color.
@@ -607,8 +624,9 @@ public slots:
 	//! Set the color used to draw the dark nebula symbols (gray boxes).
 	//! @param c The color of the dark nebula symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setDarkNebulaColor(Vec3f(0.2,0.2,0.2));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(0.2, 0.2, 0.2);
+	//! NebulaMgr.setDarkNebulaColor(c.toVec3f());
 	//! @endcode
 	void setDarkNebulaColor(const Vec3f& c);
 	//! Get current value of the dark nebula color.
@@ -617,8 +635,9 @@ public slots:
 	//! Set the color used to draw the star cluster symbols (Open/Globular).
 	//! @param c The color of the cluster symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setClusterColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setClusterColor(c.toVec3f());
 	//! @endcode
 	void setClusterColor(const Vec3f& c);
 	//! Get current value of the star cluster symbol color.
@@ -627,8 +646,9 @@ public slots:
 	//! Set the color used to draw the open star cluster symbols.
 	//! @param c The color of the open star cluster symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setOpenClusterColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setOpenClusterColor(c.toVec3f());
 	//! @endcode
 	void setOpenClusterColor(const Vec3f& c);
 	//! Get current value of the open star cluster symbol color.
@@ -637,8 +657,9 @@ public slots:
 	//! Set the color used to draw the globular star cluster symbols.
 	//! @param c The color of the globular star cluster symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setGlobularClusterColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setGlobularClusterColor(c.toVec3f());
 	//! @endcode
 	void setGlobularClusterColor(const Vec3f& c);
 	//! Get current value of the globular star cluster symbol color.
@@ -647,8 +668,9 @@ public slots:
 	//! Set the color used to draw the stellar associations symbols.
 	//! @param c The color of the stellar associations symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setStellarAssociationColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setStellarAssociationColor(c.toVec3f());
 	//! @endcode
 	void setStellarAssociationColor(const Vec3f& c);
 	//! Get current value of the stellar association symbol color.
@@ -657,8 +679,9 @@ public slots:
 	//! Set the color used to draw the star clouds symbols.
 	//! @param c The color of the star clouds symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setStarCloudColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setStarCloudColor(c.toVec3f());
 	//! @endcode
 	void setStarCloudColor(const Vec3f& c);
 	//! Get current value of the star cloud symbol color.
@@ -667,8 +690,9 @@ public slots:
 	//! Set the color used to draw the emission objects symbols.
 	//! @param c The color of the emission objects symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setEmissionObjectColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! NebulaMgr.setEmissionObjectColor(c.toVec3f());
 	//! @endcode
 	void setEmissionObjectColor(const Vec3f& c);
 	//! Get current value of the emission object symbol color.
@@ -677,8 +701,9 @@ public slots:
 	//! Set the color used to draw the BL Lac objects symbols.
 	//! @param c The color of the BL Lac objects symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setBlLacObjectColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setBlLacObjectColor(c.toVec3f());
 	//! @endcode
 	void setBlLacObjectColor(const Vec3f& c);
 	//! Get current value of the BL Lac object symbol color.
@@ -687,8 +712,9 @@ public slots:
 	//! Set the color used to draw the blazars symbols.
 	//! @param c The color of the blazars symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setBlazarColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setBlazarColor(c.toVec3f());
 	//! @endcode
 	void setBlazarColor(const Vec3f& c);
 	//! Get current value of the blazar symbol color.
@@ -697,8 +723,9 @@ public slots:
 	//! Set the color used to draw the molecular clouds symbols.
 	//! @param c The color of the molecular clouds symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setMolecularCloudColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setMolecularCloudColor(c.toVec3f());
 	//! @endcode
 	void setMolecularCloudColor(const Vec3f& c);
 	//! Get current value of the molecular cloud symbol color.
@@ -707,8 +734,9 @@ public slots:
 	//! Set the color used to draw the young stellar objects symbols.
 	//! @param c The color of the young stellar objects symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setYoungStellarObjectColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setYoungStellarObjectColor(c.toVec3f());
 	//! @endcode
 	void setYoungStellarObjectColor(const Vec3f& c);
 	//! Get current value of the young stellar object symbol color.
@@ -717,8 +745,9 @@ public slots:
 	//! Set the color used to draw the possible quasars symbols.
 	//! @param c The color of the possible quasars symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setPossibleQuasarColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setPossibleQuasarColor(c.toVec3f());
 	//! @endcode
 	void setPossibleQuasarColor(const Vec3f& c);
 	//! Get current value of the possible quasar symbol color.
@@ -727,8 +756,9 @@ public slots:
 	//! Set the color used to draw the possible planetary nebulae symbols.
 	//! @param c The color of the possible planetary nebulae symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setPossiblePlanetaryNebulaColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setPossiblePlanetaryNebulaColor(c.toVec3f());
 	//! @endcode
 	void setPossiblePlanetaryNebulaColor(const Vec3f& c);
 	//! Get current value of the possible planetary nebula symbol color.
@@ -737,8 +767,9 @@ public slots:
 	//! Set the color used to draw the protoplanetary nebulae symbols.
 	//! @param c The color of the protoplanetary nebulae symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setProtoplanetaryNebulaColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setProtoplanetaryNebulaColor(c.toVec3f());
 	//! @endcode
 	void setProtoplanetaryNebulaColor(const Vec3f& c);
 	//! Get current value of the protoplanetary nebula symbol color.
@@ -747,8 +778,9 @@ public slots:
 	//! Set the color used to draw the stars symbols.
 	//! @param c The color of the stars symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setStarColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setStarColor(c.toVec3f());
 	//! @endcode
 	void setStarColor(const Vec3f& c);
 	//! Get current value of the star symbol color.
@@ -757,8 +789,9 @@ public slots:
 	//! Set the color used to draw the symbiotic stars symbols.
 	//! @param c The color of the symbiotic stars symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setSymbioticStarColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setSymbioticStarColor(c.toVec3f());
 	//! @endcode
 	void setSymbioticStarColor(const Vec3f& c);
 	//! Get current value of the symbiotic star symbol color.
@@ -767,8 +800,9 @@ public slots:
 	//! Set the color used to draw the emission-line stars symbols.
 	//! @param c The color of the emission-line stars symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setEmissionLineStarColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setEmissionLineStarColor(c.toVec3f());
 	//! @endcode
 	void setEmissionLineStarColor(const Vec3f& c);
 	//! Get current value of the emission-line star symbol color.
@@ -777,8 +811,9 @@ public slots:
 	//! Set the color used to draw the cluster of galaxies symbols.
 	//! @param c The color of the cluster of galaxies symbols
 	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setGalaxyClusterColor(Vec3f(1.0,1.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 1.0, 0.0);
+	//! NebulaMgr.setGalaxyClusterColor(c.toVec3f());
 	//! @endcode
 	void setGalaxyClusterColor(const Vec3f& c);
 	//! Get current value of the cluster of galaxies symbol color.

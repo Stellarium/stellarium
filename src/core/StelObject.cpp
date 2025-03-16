@@ -384,6 +384,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		currentObjStr = StelUtils::radToHmsStr(ra_j2000);
 	}
 
+	const Vec3d eqNow=getEquinoxEquatorialPos(core);
 	QString res, firstCoordinate, secondCoordinate;
 	int currentYear, currentMonth, currentDay;
 	double currentLatitude=static_cast<double>(currentLocation.getLatitude());
@@ -426,7 +427,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	if (flags&RaDecOfDate)
 	{
 		double dec_equ, ra_equ;
-		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,eqNow);
 		if (withDecimalDegree)
 		{
 			firstCoordinate  = StelUtils::radToDecDegStr(ra_equ,5,false,true);
@@ -644,7 +645,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 		double ra_equ, dec_equ, lambdaJDE, betaJDE;
 
-		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,eqNow);
 		StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
 		if (lambdaJDE<0) lambdaJDE+=2.0*M_PI;
 		if (withDecimalDegree)
@@ -879,7 +880,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 		// Greatest Digression: limiting azimuth and hour angles for stars with upper culmination between pole and zenith
 		double dec_equ, ra_equ;
-		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,eqNow);
 		const double latitude=static_cast<double>(core->getCurrentLocation().getLatitude())*M_PI_180;
 		if (((latitude>0.) && (dec_equ>=latitude)) || ((latitude<0.) && (dec_equ<=latitude)))
 		{
@@ -967,7 +968,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 	if (flags&IAUConstellation)
 	{
-		QString constel=core->getIAUConstellation(getEquinoxEquatorialPos(core));
+		QString constel = (fuzzyEquals(eqNow.normSquared(),0.) ? "---" : core->getIAUConstellation(eqNow));
 		res += QString("%1: %2<br/>").arg(q_("IAU Constellation"), constel);
 		res += getExtraInfoStrings(flags&IAUConstellation).join("");
 		res += omgr->getExtraInfoStrings(flags&IAUConstellation).join("");

@@ -175,8 +175,9 @@ public slots:
 	//! Set color for text
 	//! @param c color
 	//! @code
-	//! // example of usage in scripts
-	//! PointerCoordinates.setFontColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! PointerCoordinates.setFontColor(c.toVec3f());
 	//! @endcode
 	void setFontColor(const Vec3f& c);
 

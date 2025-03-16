@@ -104,8 +104,9 @@ public slots:
 	//! Define line color
 	//! @param color The color of lines
 	//! @code
-	//! // example of usage in scripts
-	//! AsterismMgr.setLinesColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! AsterismMgr.setLinesColor(c.toVec3f());
 	//! @endcode
 	void setLinesColor(const Vec3f& color);
 	//! Get line color
@@ -119,8 +120,9 @@ public slots:
 	//! Define ray helper color
 	//! @param color The color of ray helpers
 	//! @code
-	//! // example of usage in scripts
-	//! AsterismMgr.setRayHelpersColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! AsterismMgr.setRayHelpersColor(c.toVec3f());
 	//! @endcode
 	void setRayHelpersColor(const Vec3f& color);
 	//! Get ray helper color
@@ -134,8 +136,9 @@ public slots:
 	//! Set label color for names
 	//! @param color The color of labels
 	//! @code
-	//! // example of usage in scripts
-	//! AsterismMgr.setLabelsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! AsterismMgr.setLabelsColor(c.toVec3f());
 	//! @endcode
 	void setLabelsColor(const Vec3f& color);
 	//! Get label color for names

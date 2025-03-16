@@ -240,8 +240,9 @@ public slots:
 	//! @param c color
 	//! @param mtype set false if you want set color for pulsars with glitches
 	//! @code
-	//! // example of usage in scripts
-	//! Pulsars.setMarkerColor(Vec3f(1.0,0.0,0.0), true);
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! Pulsars.setMarkerColor(c.toVec3f(), true);
 	//! @endcode
 	void setMarkerColor(const Vec3f& c);
 
@@ -252,8 +253,9 @@ public slots:
 	//! Set markers color for pulsars with glitches
 	//! @param c color
 	//! @code
-	//! // example of usage in scripts
-	//! Pulsars.setGlitchColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! Pulsars.setGlitchColor(c.toVec3f());
 	//! @endcode
 	void setGlitchColor(const Vec3f& c);
 
