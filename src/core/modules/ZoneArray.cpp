@@ -463,8 +463,8 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		}
 		// Because of the test above, the star should always be visible from this point.
 		
-		// only recompute if has time dependence and time is far away
-		bool recomputeMag = (s->getPreciseAstrometricFlag() && (fabs(dyrs) > 5000.));
+		// only recompute if has time dependence
+		bool recomputeMag = (s->getPreciseAstrometricFlag());
 		double Plx = s->getPlx();
 		if (recomputeMag) { 
 			// don't do full solution, can be very slow, just estimate here	
@@ -564,13 +564,22 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	Vec3d tmp;
+	double RA, DEC, pmra, pmdec, PlxErr, Plx, RadialVel;
 	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
 	{
-		s->getJ2000Pos(dyrs, tmp);
+		s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+		StelUtils::spheToRect(RA, DEC, tmp);
+		// s->getJ2000Pos(dyrs, tmp);
 		// in case it is in a binary system
 		s->getBinaryOrbit(core->getJDE(), tmp);
-		s->getPlxEffect(withParallax * s->getPlx(), tmp, diffPos);
+		s->getPlxEffect(withParallax * Plx, tmp, diffPos);
 		tmp.normalize();
+		if (core->getUseAberration())
+		{
+			const Vec3d vel = core->getAberrationVec(core->getJDE());
+			tmp+=vel;
+			tmp.normalize();
+		}
 		if (tmp * v >= cosLimFov)
 		{
 			// TODO: do not select stars that are too faint to display

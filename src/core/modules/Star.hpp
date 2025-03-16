@@ -180,7 +180,8 @@ struct Star
                                  double & RV,
                                  float    dyrs) const
    {
-      if (getX2() != 0. || getDx2() != 0.) {
+      if (getX2() != 0. || getDx2() != 0.) 
+      {  // for star data type 0, have full astrometric solution
          // as long as there is a 3rd component, we need to compute the full 3D position using the equation below
          double r0  = getX0();
          double r1  = getX1();
@@ -229,12 +230,28 @@ struct Star
          else
             Plx = 0.;
          RV  = (pmr1 / MAS2RAD / Plx2) * (AU / JYEAR_SECONDS);
-      } else {
+         return;
+      }
+      if (getDx1() != 0. || getDx2() != 0.)  // for star data type 1, have proper motion
+      {
          DE    = getX1();
          pmra  = getDx0() * cos(DE);
          pmdec = getDx1();
          RA    = getX0() + dyrs * getDx0() * MAS2RAD;
          DE    = getX1() + dyrs * getDx1() * MAS2RAD;
+         Plx   = getPlx();
+         RV    = getRV();
+         return;
+      }
+      else 
+      {  // for star data type 2, have no proper motion
+         RA    = getX0();
+         DE    = getX1();
+         Plx = 0.;
+         RV = 0.;
+         pmra = 0.;
+         pmdec = 0.;
+         return;
       }
    }
 
