@@ -33,31 +33,44 @@ QTEST_GUILESS_MAIN(TestAstrometry)
 void TestAstrometry::initTestCase()
 {
     // Define the directory to search in
-    QDir dir("../../stars/hip_gaia3/");
-    
-    // Make sure the directory exists
-    if (!dir.exists()) {
-        qDebug() << "Directory does not exist!";
-        return;
-    }
-
+    QDir dir(QDir::currentPath());
     // make a list of star catalog files stars_0_*.cat, stars_1_*.cat, stars_2_*.cat and stars_3_*.cat
     QStringList filters;
     filters << "stars_0_*.cat" << "stars_1_*.cat" << "stars_2_*.cat" << "stars_3_*.cat";
+    QStringList files;
+    QString file;
+
+    while (!dir.isRoot())  // check directory one by one if the current directory contains star catalog files
+    {
+        // check if at least one "stars_*.cat" file exist under the directory
+        if (dir.exists("stars/hip_gaia3"))  // check if the directory exists, if yes go in to check
+        {
+            dir.cd("stars/hip_gaia3");
+            dir.setNameFilters(QStringList() << filters[0]);
+            files = dir.entryList(QDir::Files);
+            if (!files.isEmpty())  // in case the directory does not contains any star catalog file
+            {
+                break;
+            }
+            else
+            {
+                // go back to the parent directory and keep searching
+                dir.cd("../../");
+            }
+        }
+        dir.cdUp();  // one level up at a time
+    }
+
+    // assert the directory exists
+    QVERIFY2(dir.exists(), "Star catalog directory does not exist! Can't perform the rest of the tests.");
 
     // loop through the filters and set the ZoneArray pointers
     for (int i = 0; i < filters.size(); i++)
     {
         dir.setNameFilters(QStringList() << filters[i]);
-        QStringList files = dir.entryList(QDir::Files);
-        QString file;
-
-        if (!files.isEmpty()) {
-            qDebug() << "Found files:" << files[0];
-            file = files[0];
-        } else {
-            qDebug() << "No matching files found.";
-        }
+        files = dir.entryList(QDir::Files);  // get the list of files in the directory
+        QVERIFY2(!files.isEmpty(), qPrintable(QString("No matching star catalog found at %1").arg(dir.path().toStdString().c_str())));
+        file = files[0];
 
         file = dir.path() + "/" + file;
         ZoneArray* z = ZoneArray::create(file, true);

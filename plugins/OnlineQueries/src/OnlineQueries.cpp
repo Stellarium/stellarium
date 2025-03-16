@@ -150,7 +150,6 @@ void OnlineQueries::loadConfiguration(void)
 	aavsoOidUrl    =conf->value("aavso_oid_url",    "https://www.aavso.org/vsx/index.php?view=detail.top&oid=%1").toString();
 	gcvsUrl        =conf->value("gcvs_url",         "http://www.sai.msu.su/gcvs/cgi-bin/ident.cgi?cat=Hip+&num=%1").toString();
 	wikipediaUrl   =conf->value("wikipedia_url",    "https://en.wikipedia.org/wiki/%1").toString();
-	customUrl1     =conf->value("custom1_url",      "https://biblicalastronomy.co/playground/fetch.cfm?Hipp=%1").toString();
 	if (!customUrl1.isEmpty() && !customUrl1.contains("%1"))
 	{
 		qWarning() << "OnlineQueries: custom1_url invalid: no '%1' found in " << customUrl1;

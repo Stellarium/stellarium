@@ -632,7 +632,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		res += getExtraInfoStrings(EclipticCoordJ2000).join("");
 	}
 
-	if ((flags&EclipticCoordOfDate) && (QString("Earth Sun").contains(currentPlanet)))
+	if ((flags&EclipticCoordOfDate) && (currentPlanet=="Earth"))
 	{
 		const double jde=core->getJDE();
 		double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(jde);
