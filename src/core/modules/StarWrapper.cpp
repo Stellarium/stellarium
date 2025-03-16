@@ -294,14 +294,12 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << getExtraInfoStrings(flags&ObjectType).join("");
 	}
 
-	double RA, DEC, pmra, pmdec;
+	double RA, DEC, pmra, pmdec, Plx, RadialVel;
 	double PlxErr = s->getPlxErr();
-	double Plx = s->getPlx();
-	double RadialVel = s->getRV();
 	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
 	Vec3d v;
-	double binary_sep, binary_pa;  // binary star separation and position angle
+	double binary_sep = 0.0, binary_pa = 0.0;  // binary star separation and position angle
 	s->getBinaryOrbit(core->getJDE(), v, RA, DEC, Plx, pmra, pmdec, RadialVel, binary_sep, binary_pa);
 	binary_pa *= M_180_PIf;
 
@@ -670,10 +668,8 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	oss << getMagnitudeInfoString(core, flags, 2);
 
-	double RA, DEC, pmra, pmdec;
-	double Plx = s->getPlx();
+	double RA, DEC, pmra, pmdec, Plx, RadialVel;
 	double PlxErr = s->getPlxErr();
-	double RadialVel = s->getRV();
 	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
 	bool computeAstrometryFlag = (flags&ProperMotion) && (pmra || pmdec);
