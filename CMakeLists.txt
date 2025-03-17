@@ -598,7 +598,7 @@ ELSE()
      MESSAGE(STATUS "Found Qt${QT_VERSION_MAJOR}: ${QMAKE_LOCATION} (found suitable version ${QT_VERSION})")
 ENDIF()
 FIND_PACKAGE(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS
-     Concurrent Gui Network Widgets Charts)
+     Concurrent Gui Network Widgets Charts Positioning)
 IF(USE_PLUGIN_TELESCOPECONTROL OR ENABLE_GPS)
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS SerialPort REQUIRED)
 ENDIF()
