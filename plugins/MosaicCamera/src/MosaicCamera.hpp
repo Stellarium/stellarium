@@ -119,7 +119,6 @@ public:
 	bool getFlagShowButton() const { return flagShowButton; }
 
 	void loadSettings();
-	void saveSettings() const;
 
     QStringList getCameraNames() const;
     void readPolygonSetsFromJson(const QString& cameraName, const QString& filename);
@@ -148,7 +147,9 @@ public slots:
 	void setCurrentRotation(double rotation);
 	void setCurrentVisibility(bool visible);
 
-private:
+	void saveSettings() const;
+
+	private:
 	QHash<QString, Camera> cameras;
 	QStringList cameraOrder;
 	QString userDirectory;
