@@ -140,6 +140,7 @@ class ParabolicFader : public LinearFader
 {
 public:
 	// Create and initialise to default
+	using LinearFader::operator=;
 	ParabolicFader(int _duration=1000, bool initialState=false)
 		: LinearFader(_duration, initialState)
 	{
