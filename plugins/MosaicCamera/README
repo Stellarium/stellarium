@@ -58,11 +58,3 @@ which has the structure:
         ...
     ]
 }
-
-
-TCP Server
-==========
-The mosaic camera plugin starts a TCP server listening on port 5772.  Messages can be
-sent to the port in the format: "[name],[ra],[dec],[rot]" where [name] is the name of
-one of the cameras, [ra] and [dec] indicate the camera boresight and [rot] the camera
-rotation, all in degrees.
