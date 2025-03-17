@@ -95,6 +95,9 @@ void MosaicCamera::loadSettings()
         bool visible = conf->value("visible").toBool();
         if (cameras.contains(name)) {
             cameras[name].visible = visible;
+            cameras[name].ra = conf->value("ra").toDouble();
+            cameras[name].dec = conf->value("dec").toDouble();
+            cameras[name].rotation = conf->value("rotation").toDouble();
         }
     }
     conf->endArray();
@@ -113,6 +116,9 @@ void MosaicCamera::saveSettings() const
         conf->setArrayIndex(i++);
         conf->setValue("name", it.key());
         conf->setValue("visible", it.value().visible);
+        conf->setValue("ra", it.value().ra);
+        conf->setValue("dec", it.value().dec);
+        conf->setValue("rotation", it.value().rotation);
     }
     conf->endArray();
     conf->endGroup();
@@ -359,7 +365,6 @@ void MosaicCamera::setVisibility(const QString& cameraName, bool visible)
     if (cameras.contains(cameraName))
     {
         cameras[cameraName].visible = visible;
-        saveSettings();
         if(configDialog->visible()) {
             if (configDialog->getCurrentCameraName() == cameraName) {
                 configDialog->setVisibility(visible);

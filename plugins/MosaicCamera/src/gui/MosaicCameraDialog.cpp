@@ -172,6 +172,7 @@ void MosaicCameraDialog::createDialogContent()
 
 	// General tab
 	connectBoolProperty(ui->checkBoxShowButton, "MosaicCamera.showButton");
+	connect(ui->pushButtonSaveSettings, SIGNAL(clicked()), mc, SLOT(saveSettings()));
 }
 
 void MosaicCameraDialog::setAboutHtml(void)
