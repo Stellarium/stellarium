@@ -25,9 +25,7 @@
 #include <QMetaType>
 #include <QMap>
 #include <QImage>
-#ifdef Q_OS_WIN
 #include <QtPositioning/QGeoPositionInfoSource>
-#endif
 #include "VecMath.hpp"
 
 typedef QList<StelLocation> LocationList;
@@ -184,6 +182,10 @@ private slots:
 	void positionUpdated(QGeoPositionInfo gpsPos);
 	#endif
 #endif
+	//! Use QLocation services to get location from OS (via IP, Wifi, ...)
+	//! Needs permissions.
+	void positionUpdatedFromOS(const QGeoPositionInfo &info);
+
 private:
 	void loadRegions();
 	void loadCountries();
@@ -222,6 +224,7 @@ private:
 #ifdef Q_OS_WIN
 	QGeoPositionInfoSource *positionSource=Q_NULLPTR;
 #endif
+	QGeoPositionInfoSource *qGeoPositionInfoSource;
 };
 
 #endif // STELLOCATIONMGR_HPP
