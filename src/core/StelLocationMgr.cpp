@@ -1158,7 +1158,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 
 			qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity, ipRegion, ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
 
-			QString regionName = pickRegionFromCountryCode(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
+			QString regionName = pickRegionFromCountryCode(ipCountryCode.toLower());
 			float luminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 			if (!ipCity.isEmpty())
 			{
