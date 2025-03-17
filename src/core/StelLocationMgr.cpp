@@ -1158,16 +1158,26 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 
 			qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity, ipRegion, ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
 
+			QString regionName = pickRegionFromCountryCode(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
+			float luminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+			if (!ipCity.isEmpty())
+			{
+				// Check location in our database and fetch light pollution luminance if it possible
+				StelLocation loctmp = locationForString(QString("%1, %2").arg(ipCity, regionName));
+				if (loctmp.isValid())
+					luminance = loctmp.lightPollutionLuminance.toFloat();
+			}
+
 			StelLocation loc;
 			loc.name    = (ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity);
 			loc.state   = (ipRegion.isEmpty() ? "IPregion"  : ipRegion);
-			loc.region = pickRegionFromCountryCode(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
+			loc.region = regionName;
 			loc.role    = QChar(0x0058); // char 'X'
 			loc.population = 0;
 			loc.setLatitude  (static_cast<float>(latitude));
 			loc.setLongitude (static_cast<float>(longitude));
 			loc.altitude = 0;
-			loc.lightPollutionLuminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+			loc.lightPollutionLuminance = luminance;
 			loc.ianaTimeZone = (ipTimeZone.isEmpty() ? "" : ipTimeZone);
 			loc.planetName = "Earth";
 			loc.landscapeKey = "";
