@@ -506,13 +506,11 @@ StelLocationMgr::StelLocationMgr()
 	planetSurfaceMap=QImage(":/graphicGui/miscWorldMap.jpg");
 	connect(StelApp::getInstance().getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(changePlanetMapForLocation(StelLocation)));
 
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	// configure the QGeoPositionInfoSource which can be queried from OS
 	qGeoPositionInfoSource = QGeoPositionInfoSource::createDefaultSource(this);
 	if (qGeoPositionInfoSource)
 		connect(qGeoPositionInfoSource, SIGNAL(positionUpdated(QGeoPositionInfo)),
 			this, SLOT(positionUpdatedFromOS(QGeoPositionInfo)));
-#endif
 }
 
 StelLocationMgr::~StelLocationMgr()
@@ -957,7 +955,6 @@ void StelLocationMgr::locationFromIP()
                     qDebug() << "permission granted, doing OS service lookup for location... postRequest ";
             }
 #else
-    #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
         if (qGeoPositionInfoSource)
         {
                 qDebug() << "Doing OS service lookup for location...";
@@ -965,9 +962,6 @@ void StelLocationMgr::locationFromIP()
                 qGeoPositionInfoSource->requestUpdate();
                 qDebug() << "Doing OS service lookup for location... postRequest ";
         }
-    #else
-        if (false) {}
-    #endif
 #endif
             else
             {
@@ -986,7 +980,6 @@ void StelLocationMgr::locationFromIP()
 #endif
 }
 
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 // Private slot that is called when position info arrives
 void StelLocationMgr::positionUpdatedFromOS(const QGeoPositionInfo &info)
 {
@@ -1025,7 +1018,6 @@ void StelLocationMgr::positionUpdatedFromOS(const QGeoPositionInfo &info)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("init_location/last_location", QString("%1, %2").arg(QString::number(gCoord.latitude()), QString::number(gCoord.longitude())));
 }
-#endif
 
 #ifdef ENABLE_GPS
 void StelLocationMgr::locationFromGPS(int interval)
