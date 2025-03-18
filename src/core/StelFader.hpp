@@ -139,8 +139,10 @@ private:
 class ParabolicFader : public LinearFader
 {
 public:
-	// Create and initialise to default
+	// Bring LinearFader::operator= into scope
+	// which is hidden due to function name hiding rules 
 	using LinearFader::operator=;
+	// Create and initialise to default
 	ParabolicFader(int _duration=1000, bool initialState=false)
 		: LinearFader(_duration, initialState)
 	{
