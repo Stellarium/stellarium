@@ -1763,7 +1763,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 					{
 						if (unwantedReferences.contains(str))
 						{
-							qDebug() << "Unwanted reference" << str << "detected for DSO name" << propName;
+							//qDebug() << "Unwanted reference" << str << "detected for DSO name" << propName;
 							refList.removeOne(str);
 						}
 					}
