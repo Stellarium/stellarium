@@ -23,6 +23,8 @@ environment:
   gettextSrcBaseName: gettext-0.23.1
   gettextURL: https://github.com/vslavik/gettext-tools-windows/releases/download/v0.23.1/gettext-tools-windows-0.23.1.zip
   gettextBaseName: gettext-tools-windows-0.23.1
+  tidyURL: https://github.com/htacg/tidy-html5/releases/download/5.8.0/tidy-5.8.0-win64.zip
+  tidyBaseName: tidy-5.8.0-win64
   matrix:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
     VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
@@ -85,11 +87,15 @@ before_build:
   - ps: if ($env:scConverterEnabled) { cp c:\$env:gettextBaseName\bin\libgettextpo-0.dll c:\$env:gettextBaseName\bin\libgettextpo.dll }
   - ps: if ($env:scConverterEnabled) { (dumpbin /EXPORTS c:\$env:gettextBaseName\bin\libgettextpo.dll) -match "^.*\b(po_.*)$" -replace "^.*\b(po_.*)$","`$1" >> libgettextpo.def }
   - ps: if ($env:scConverterEnabled) { lib /def:libgettextpo.def /out:c:\$env:gettextBaseName\lib\libgettextpo.lib }
+
+  - ps: appveyor DownloadFile $env:tidyURL -FileName c:\$env:tidyBaseName.zip
+  - ps: 7z e c:\$env:tidyBaseName.zip -spf -oc:\
+
   -    if [1]==[%scConverterEnabled%] git clone -q https://github.com/Stellarium/stellarium-skyculture-converter c:\skyculture-converter
   -    if [1]==[%scConverterEnabled%] mkdir c:\skyculture-converter\build
   -    if [1]==[%scConverterEnabled%] cd c:\skyculture-converter\build
   -    if [1]==[%scConverterEnabled%] git show --summary
-  -    if [1]==[%scConverterEnabled%] cmake -DCMAKE_PREFIX_PATH=c:\%gettextBaseName% -DCMAKE_INSTALL_PREFIX=c:\sc-converter -G "%msvcname%" %cmake_args% ..
+  -    if [1]==[%scConverterEnabled%] cmake -DCMAKE_PREFIX_PATH=c:\%gettextBaseName%;c:\%tidyBaseName% -DCMAKE_INSTALL_PREFIX=c:\sc-converter -G "%msvcname%" %cmake_args% ..
   -    if [1]==[%scConverterEnabled%] if [%PUBLISH_BINARY%]==[true] cmake --build . --config %configuration% --target install -- /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   - cd c:\stellarium
@@ -110,7 +116,9 @@ after_test:
   - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\%gettextBaseName%\bin\libgettextpo-0.dll c:\stellarium-%qtver%-%qtbin%\bin\libgettextpo.dll
   - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\%gettextBaseName%\bin\libintl-8.dll c:\stellarium-%qtver%-%qtbin%\bin\
   - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\%gettextBaseName%\bin\libiconv-2.dll c:\stellarium-%qtver%-%qtbin%\bin\
+  - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\%tidyBaseName%\bin\tidy.dll c:\stellarium-%qtver%-%qtbin%\bin\
   - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\sc-converter\skyculture-converter.exe c:\stellarium-%qtver%-%qtbin%\bin\
+  - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\sc-converter\Qt6Xml.dll c:\stellarium-%qtver%-%qtbin%\bin\
   - if [%USE_EXT_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win%BITS%.zip -FileName c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip
   - if [%USE_EXT_LIBGLES%]==[true] 7z e c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip -aoa -oc:\stellarium-%qtver%-%qtbin%\qtstuff
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-%PKGARCH%.dll -FileName c:\stellarium-%qtver%-%qtbin%\qtstuff\opengl32sw.dll
