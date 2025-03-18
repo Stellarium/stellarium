@@ -712,9 +712,31 @@ Known tags are
 \section{The Skyculture Converter}
 \label{ch:SkyCultures:converter}
 
-TBD
+Many sky cultures have been created and maintained outside of Stellarium. They follow the old format, which is no longer supported since Stellarium version 25.1. To ease the transition we've developed a converter tool. It is a console application that takes a path to the old-format sky culture directory, and a path where to put the converted sky culture. Example command to run it:
 
+\begin{commands}
+skyculture-converter c:\samoan.old c:\samoan
+\end{commands}
 
+While the converter tries hard to convert the description text from HTML to Markdown adding some sections from other parts of the sky culture, the conversion may not be ideal. Formerly the description was completely free in structure, while now there are some requirements on it, so the text may need some editing to conform.
+
+If you have gettext translation files (the ones whose names are in the form \texttt{locale-name.po}) for the names of stars, constellations etc., you can pass the path to the directory that contains them as an optional third argument to the converter.
+
+Additionally, there are some options that you can use to control the conversion:
+
+\begin{description}
+\item[\texttt{-\/-footnotes-to-references}] Convert footnotes in a particular form to references. Such footnotes are expected to be in the form of
+\begin{htmlbit}
+<p id="footnote-9">This is a footnote</p>
+\end{htmlbit}
+while the references to them are expected to be in the form of
+\begin{htmlbit}
+<sup><a href="#footnote-9">[9]</a></sup>
+\end{htmlbit}
+\item[\texttt{-\/-untrans-names-are-native}] Put the names that in \texttt{star\_names.fab} or in \texttt{dso\_names.fab} are denoted without an underscore into the \texttt{native} section of the name, rather than \texttt{english}. For example, with this option \texttt{32349|("Fētūsolonuʻu")} would be treated as a native name, while \texttt{32349|\_("Gliding Star")} would be treated as an English one.
+\item[\texttt{-\/-native-locale LOCALE}] Some sky cultures have, in addition to \texttt{star\_names.fab} or \texttt{dso\_names.fab}, localized versions of them, like e.g. \texttt{star\_names.zh\_CN.fab}, that were never actually used but do contain useful information. If you pass the locale (\texttt{zh\_CN} in this example) as the \texttt{LOCALE} parameter, these names will be read and put into the \texttt{native} section of the corresponding JSON entry. Note that the order of stars/DSOs in the normal and localized files much be the same, otherwise there's no way to match the names.
+\item[\texttt{-\/-translated-md}] To check the look of the translated description texts you can use this option. The output directory will contain, in addition to \texttt{description.md}, files named like \texttt{description.es\_419.DO\_NOT\_COMMIT.md}, with the ``DO NOT COMMIT'' part reminding you that they are not a part of the sky culture.
+\end{description}
 
 \section{Publish Your Work}
 \label{sec:skyculture:publish}

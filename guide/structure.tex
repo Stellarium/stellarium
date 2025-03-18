@@ -262,6 +262,10 @@
 \lstnewenvironment{jsonfile}[1][\small]{\lstset{inputencoding=utf8,language=json,basicstyle=\ttfamily#1,showstringspaces=false,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
+% Shows an HTML one-liner
+\lstnewenvironment{htmlbit}[1][\small]{\lstset{inputencoding=utf8,language=html,basicstyle=\ttfamily#1,showstringspaces=false,%
+                                   backgroundcolor=\color{black!5}}%
+                             }{}%
 \lstnewenvironment{script}{\lstset{language=JavaScript,                   
                                backgroundcolor=\color{black!5},%
                                frame=leftline,%
@@ -336,6 +340,8 @@
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \usepackage{newunicodechar} % Must be loaded after [utf8]inputenc
 \newunicodechar{°}{\degree}
+% Taken from https://tex.stackexchange.com/a/424538
+\newunicodechar{ʻ}{\raisebox{\dimexpr\fontcharht\font`A-\height}{\scalebox{0.8}{`}}}
 % It seems Ubuntu on Windows10 has a bit outdated utf8 inputenc? https://tex.stackexchange.com/questions/13067/utf8x-vs-utf8-inputenc
 % But all is OK in TeXLive2017.
 %\newunicodechar{ē}{\=e}
