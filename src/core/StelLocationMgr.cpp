@@ -1160,13 +1160,15 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 
 			QString regionName = pickRegionFromCountryCode(ipCountryCode.toLower());
 			float luminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+			StelLocation ipLoc;
+			// Check location in our database and fetch light pollution luminance if it possible
 			if (!ipCity.isEmpty())
-			{
-				// Check location in our database and fetch light pollution luminance if it possible
-				StelLocation loctmp = locationForString(QString("%1, %2").arg(ipCity, regionName));
-				if (loctmp.isValid())
-					luminance = loctmp.lightPollutionLuminance.toFloat();
-			}
+				ipLoc = locationForString(QString("%1, %2").arg(ipCity, regionName));
+			else
+				ipLoc = pickLocationsNearby("Earth", longitude, latitude, 5.f).first();
+
+			if (ipLoc.isValid())
+				luminance = ipLoc.lightPollutionLuminance.toFloat();
 
 			StelLocation loc;
 			loc.name    = (ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity);
