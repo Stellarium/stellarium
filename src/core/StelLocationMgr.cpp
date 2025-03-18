@@ -1165,7 +1165,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			if (!ipCity.isEmpty())
 				ipLoc = locationForString(QString("%1, %2").arg(ipCity, regionName));
 			else
-				ipLoc = pickLocationsNearby("Earth", longitude, latitude, 5.f).first();
+				ipLoc = pickLocationsNearby("Earth", longitude, latitude, 1.f).first();
 
 			if (ipLoc.isValid())
 				luminance = ipLoc.lightPollutionLuminance.toFloat();
