@@ -303,6 +303,15 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	}
 	drawOrder = qBound(orderMin, drawOrder, order);
 	int splitOrder = qMax(drawOrder, 4);
+	if (tileWidth < 512)
+	{
+		int w = 512;
+		while (tileWidth < w && splitOrder > 0)
+		{
+			w /= 2;
+			--splitOrder;
+		}
+	}
 
 	nbVisibleTiles = 0;
 	nbLoadedTiles = 0;
