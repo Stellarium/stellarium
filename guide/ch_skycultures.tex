@@ -678,16 +678,20 @@ The  \jtag{common\_names} dict can also contain native names of the planets.
 For these, the JSON key is formed from \jtag{NAME }, a space and the English name of the planet. 
 The value vector provides dicts which include 
 \begin{description}
-\item[\jtag{english}] (the translatable name), 
+\item[\jtag{english}] (the translated name), 
 \item[\jtag{native}] (optional) native spelling, may be in native glyphs when supported by UTF8, 
-\item[\jtag{transliteration}] (optional) Native name in European glyphs, if needed.
+\item[\jtag{pronounce}] (optional) Native name in European glyphs, if needed. For Chinese, expect Pinyin here.
+%\item[\jtag{transliteration}] (optional) Scientific transliteration of the native name in European glyphs, if needed. For Tibetan, this is for Wylie.
+%\item[\jtag{IPA}] (optional) International Phonetic Alphabet.
 \item[\jtag{translators\_comments}] (optional) comments to be shown to translators on Transifex, 
 \item[\jtag{references}] (optional) the sources for these names where applicable.
 \end{description}
 
+Currently, if two \jtag{english} strings are given, the first is used as screen label. This may change as the features further evolve.
+
 In earlier versions it was recommended to combine the native name with an English translation. 
 In the new format here we should keep them separate, and the actual screen label can be combined from available components on the fly.\newFeature{25.2}
-However, for languages with non-European glyphs please include a transliteration as pronounciation aid to the \jtag{english} string.
+However, for languages with non-European glyphs please add a widely used transliteration as pronounciation aid in the \jtag{pronounce} tag.
 % TODO: Shall we add an optional \jtag{transliteration} tag which could itself again be translatable?
 
 
@@ -712,8 +716,66 @@ Known tags are
 \section{The Skyculture Converter}
 \label{ch:SkyCultures:converter}
 
-TBD
+Many sky cultures have been created and maintained outside of Stellarium. They follow the old format, which is no longer supported since Stellarium version 25.1. 
+To ease the transition we have developed a converter tool. It is a console application that takes a path to the old-format sky culture directory, 
+and a path where to put the converted sky culture. 
 
+The converter is installed together with the program, but there is no menu entry for it. 
+On Windows, press the Windows key and type \texttt{cmd} to startup the command console. 
+
+Let us assume you have created a skyculture following the format used until version 24.4 and described in previous editions of this Guide, 
+and that this skyculture \texttt{mine} resides in the default user data directory on Windows (see \ref{sec:Directories} for other platforms). 
+First we rename the skyculture to indicate that it is old and outdated. Then we must call the converter in its absolute path name.
+
+ 
+Example command to run it:
+
+\begin{commands}[\footnotesize]
+cd c:\Users\<ME>\AppData\Roaming\skycultures
+move mine mine.old
+"c:\Program Files\stellarium\skyculture-converter" mine.old mine
+\end{commands}
+
+While the converter tries hard to convert the description text from HTML to Markdown adding some sections from other parts of the sky culture, the conversion may not be ideal. 
+Formerly the description was completely free in structure, while now there are some requirements on it, so the text may need some editing to conform.
+
+If you have \program{gettext} translation files (the ones whose names are in the form \file{locale-name.po}) for the names of stars, constellations etc., 
+you can pass the path to the directory that contains them as an optional third positional argument to the converter.
+
+Additionally, there are some options that you can use to control the conversion:
+
+\begin{description}
+\item[\texttt{-\/-footnotes-to-references}] Convert footnotes in a particular form to references. Such footnotes are expected to be in the form of
+\begin{htmlbit}
+<p id="footnote-9">This is a footnote</p>
+\end{htmlbit}
+while the references to them are expected to be in the form of
+\begin{htmlbit}
+<sup><a href="#footnote-9">[9]</a></sup>
+\end{htmlbit}
+\item[\texttt{-\/-untrans-names-are-native}] Put the names that in \file{star\_names.fab} or in 
+      \file{dso\_names.fab} are denoted without an underscore into the \jtag{native} section of the name, 
+      rather than \jtag{english}. For example, with this option \texttt{32349|("Fētūsolonuʻu")} would be 
+      used for the \jtag{native} name, while \texttt{32349|\_("Gliding Star")} would be used for the \jtag{english} tag.
+\item[\texttt{-\/-native-locale LOCALE}] In addition to files \file{star\_names.fab} or \file{dso\_names.fab}, 
+      some sky cultures have localized versions of them, like e.g. \file{star\_names.zh\_CN.fab}, 
+      that were never actually used but do contain useful information. If you pass the locale (\file{zh\_CN} in this example) 
+      as the \texttt{LOCALE} parameter, these names will be read and put into the \jtag{native} section of the corresponding JSON entry. 
+      Note that the order of stars/DSOs in the normal and localized files must be the same, otherwise there's no way to match the names.
+\item[\texttt{-\/-translated-md}] To check the look of the translated description texts you can use this option. 
+      The output directory will contain, in addition to \file{description.md}, files named like 
+      \file{description.es\_419.DO\_NOT\_COMMIT.md}, with the ``DO NOT COMMIT'' part reminding you that they are not a part of the sky culture.
+\end{description}
+
+\noindent After the run, read the notes and warnings, and adjust your text accordingly. 
+Make especially sure to prepare and adjust your old \file{description.en.utf8} for successful conversion.
+For example, it must start with an HTML header of level \texttt{<h1>} (the only such header in this file!) which is expected 
+to match the skyculture \texttt{name} given in the old \file{info.ini}. If in doubt, the latter will be used in the new files.
+
+Generally, clean HTML should be converted successfully. 
+Given the wide variety of writing styles, not every conversion may however work flawlessly, 
+and you may have to adjust the result, also in light of the new features. 
+To protect any changes you may have added after conversion, running the converter again needs a new target directory. 
 
 
 \section{Publish Your Work}
