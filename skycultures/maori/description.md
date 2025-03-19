@@ -8,8 +8,8 @@ The Maori (New Zealand) night sky is similar to the Polynesian night sky. But it
 
 ## References
 
- - [#1]: [Maori sky culture on Stellarium Wiki](http://www.stellarium.org/wiki/index.php/Sky_cultures#Maori_.28New_Zealand.29): a more complete version of this text.
- - [#2]: [The Phoenix Astronomical Society](http://www.astronomynz.org/): a very good website on Maori sky culture (Wairarapa, New Zealand).
+ <!-- - [#1]: [Maori sky culture on Stellarium Wiki](http://www.stellarium.org/wiki/index.php/Sky_cultures#Maori_.28New_Zealand.29): a more complete version of this text. 2025: 404  -->
+ - [#1]: [The Phoenix Astronomical Society](http://www.astronomynz.org/): a very good website on Maori sky culture (Wairarapa, New Zealand).
 
 ## Authors
 
