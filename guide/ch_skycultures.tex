@@ -740,9 +740,9 @@ While the converter tries hard to convert the description text from HTML to Mark
 Formerly the description was completely free in structure, while now there are some requirements on it, so the text may need some editing to conform.
 
 If you have \program{gettext} translation files (the ones whose names are in the form \file{locale-name.po}) for the names of stars, constellations etc., 
-you can pass the path to the directory that contains them as an optional third argument to the converter.
+you can pass the path to the directory that contains them as an optional third positional argument to the converter.
 
-Additionally, there are some options that you can use to control the conversion. These should be given as first arguments:
+Additionally, there are some options that you can use to control the conversion:
 
 \begin{description}
 \item[\texttt{-\/-footnotes-to-references}] Convert footnotes in a particular form to references. Such footnotes are expected to be in the form of
@@ -753,8 +753,6 @@ while the references to them are expected to be in the form of
 \begin{htmlbit}
 <sup><a href="#footnote-9">[9]</a></sup>
 \end{htmlbit}
-\item[\texttt{-\/-full-markdown}] Try to convert most of HTML constructs to their Markdown counterparts
-\item[\texttt{-\/-convert-olists}] Try to convert ordered lists to Markdown (only when \texttt{-\/-full-markdown} is on)
 \item[\texttt{-\/-untrans-names-are-native}] Put the names that in \file{star\_names.fab} or in 
       \file{dso\_names.fab} are denoted without an underscore into the \jtag{native} section of the name, 
       rather than \jtag{english}. For example, with this option \texttt{32349|("Fētūsolonuʻu")} would be 
