@@ -259,7 +259,8 @@
 \lstnewenvironment{configfileScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,showstringspaces=false,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
-\lstnewenvironment{jsonfile}[1][\small]{\lstset{inputencoding=utf8,language=json,basicstyle=\ttfamily#1,showstringspaces=false,%
+% The solution for escaping accented characters is from https://tex.stackexchange.com/a/24532
+\lstnewenvironment{jsonfile}[1][\small]{\lstset{inputencoding=utf8,escapeinside={\%(*}{*)},language=json,basicstyle=\ttfamily#1,showstringspaces=false,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
 % Shows an HTML one-liner
