@@ -1350,7 +1350,14 @@ void StarMgr::draw(StelCore* core)
 		return;
 
 	int maxSearchLevel = getMaxSearchLevel();
-	QVector<SphericalCap> viewportCaps = prj->getViewportConvexPolygon()->getBoundingSphericalCaps();
+	double margin = 0.;  // pixel margin to be applied to viewport convex polygon
+	if (core->getSkyDrawer()->getFlagHasAtmosphere())
+	{
+		// Saemundsson's inversion formula for atmospheric refraction is not exact, so need some padding in terms of arcseconds
+		margin = 30000. * MAS2RAD * prj->getPixelPerRadAtCenter();  // 0.5 arcmin
+	}
+	
+	QVector<SphericalCap> viewportCaps = prj->getViewportConvexPolygon(margin, margin)->getBoundingSphericalCaps();
 	viewportCaps.append(core->getVisibleSkyArea());
 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxSearchLevel)->search(viewportCaps,maxSearchLevel);
 

@@ -554,12 +554,15 @@ void StelProjector::computeBoundingCap()
 	// Now need to determine the aperture
 	Vec3d e0,e1,e2,e3,e4,e5;
 	const Vec4i& vp = viewportXywh;
-	ok &= unProject(vp[0],vp[1],e0);               // e0: bottom left
-	ok &= unProject(vp[0]+vp[2],vp[1],e1);         // e1: bottom right
-	ok &= unProject(vp[0]+vp[2],vp[1]+vp[3],e2);   // e2: top right
-	ok &= unProject(vp[0],vp[1]+vp[3],e3);         // e3: top left
-	ok &= unProject(vp[0],vp[1]+vp[3]/2,e4);       // e4: left center
-	ok &= unProject(vp[0]+vp[2],vp[1]+vp[3]/2,e5); // e5: right center
+	// Saemundsson's inversion formula for atmospheric refraction is not exact, so need some padding in terms of arcseconds
+	const double margin = 30000. * MAS2RAD * getPixelPerRadAtCenter();  // 0.5 arcmin
+
+	ok &= unProject(vp[0]-margin, vp[1]-margin, e0);             // e0: bottom left
+	ok &= unProject(vp[0]+vp[2]+margin, vp[1]-margin,e1);        // e1: bottom right
+	ok &= unProject(vp[0]+vp[2]+margin, vp[1]+vp[3]+margin, e2); // e2: top right
+	ok &= unProject(vp[0]-margin, vp[1]+vp[3]+margin, e3);       // e3: top left
+	ok &= unProject(vp[0]-margin,vp[1]+vp[3]/2+margin,e4);       // e4: left center
+	ok &= unProject(vp[0]+vp[2]+margin,vp[1]+vp[3]/2+margin,e5); // e5: right center
 	if (!ok)
 	{
 		// Some points were in invalid positions, use full sky.
