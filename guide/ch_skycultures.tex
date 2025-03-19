@@ -611,34 +611,25 @@ Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help ra
 Many cultures have defined their own names for stars, planets and even a few deep-sky objects bright enough to be seen with the unaided eye. 
 The \jtag{common\_names} dict in a skyculture file \file{index.json} contains entries of arrays tagged with HIP catalog numbers or other names.
 
-As example, we show a part of the Samoan skyculture\footnote{Sorry for the misspelling. Our typesetter does not like diacritics. The JSON file is correct!}:
+As example, we show a part of the Samoan skyculture:
 \begin{jsonfile}[\scriptsize]
-"common_names": {
-    "HIP 32349": [{"english": "Gliding Star", "native": "Fetusolonu'u"}],
+  "common_names": {
+    "HIP 32349": [{"english": "Gliding Star", "native": "%(*Fētūsolonuʻu*)"}],
     "HIP 68702": [{"english": "Mea", "native": "Mea"}],
     "HIP 71683": [{"english": "Filo", "native": "Filo"}],
-    "M45": [{"english": "Face of Li'i", "native": "MataliIi"}],
+    "M45": [{"english": "Face of %(*Liʻi*)", "native": "%(*Matāliʻi*)"}],
     "NGC2055": [{"english": "Pale Cloud", "native": "Aotea"}],
     "NGC292": [{"english": "Flying Cloud", "native": "Aolele"}],
-    "NGC6093": [{"english": "Pae", "native": "Pae", "translators_comments": "Samoan Name"}],
-    "NGC6121": [{"english": "Suga", "native": "Suga", "translators_comments": "Samoan Name"}],
+    "NGC6093": [{"english": "Pae"}],
+    "NGC6121": [{"english": "Suga"}],
     "NAME Earth": [{"english": "Earth", "native": "Lalolagi"}],
-    "NAME Jupiter": [{"english": "Undying Mystery", 
-	                  "native": "Tupualegase", 
-					  "translators_comments": "Native name of Jupiter in Samoan"}],
-    "NAME Mars": [{"english": "Reddish Face/Surface", 
-	               "native": "Matamemea", 
-				   "translators_comments": "Native name of Mars in Samoan"}],
-    "NAME Mercury": [{"english": "Brownish", 
-	                  "native": "Ta'elo", 
-					  "translators_comments": "Native name of Mercury in Samoan"}],
-    "NAME Moon": [{"english": "Moon", "native": "Masina"}],
-    "NAME Saturn": [{"english": "Garland Star", "native": "Fetu'asoa", 
-	                 "translators_comments": "Native name of Saturn in Samoan"}],
-    "NAME Sun": [{"english": "Sun", "native": "La"}],
-    "NAME Venus": [{"english": "Morning Star / Forbidden Radiance", 
-					"native": "Tapu'itea", 
-	                "translators_comments": "Native name of Venus in Samoan"}]
+    "NAME Jupiter": [{"english": "Undying Mystery", "native": "%(*Tupualēgase*)"}],
+    "NAME Mars": [{"english": "Reddish Face/Surface", "native": "Matamemea"}],
+    "NAME Mercury": [{"english": "Brownish", "native": "Ta'elo"}],
+    "NAME Moon": [{"english": "Moon", "native": "%(*Māsina*)"}],
+    "NAME Saturn": [{"english": "Garland Star", "native": "%(*Fētūʻāsoa*)"}],
+    "NAME Sun": [{"english": "Sun", "native": "%(*Lā*)"}],
+    "NAME Venus": [{"english": "Morning Star / Forbidden Radiance", "native": "Tapu'itea"}]
   }
 \end{jsonfile}
 
