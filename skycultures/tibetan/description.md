@@ -320,13 +320,15 @@ The Lunar Mansions in this skyculture are shown as asterisms among the tradition
 
 The figures are my own attempt of identification of the Lunar mansion figures. We can be sure about the placement of only those which can also be found in other sky cultures, e.g. Japanese Moon Stations. Many stars are rather dim, and the figures in the emblem apparently have to be rotated in arbitrary ways, like *gyukar 3*=Hyades. Others require considerable liberties to accept a topological match. Alternative matches with stars in similar topology arranged in the orientation shown in the emblem (north=outer circle) have been found only in neighboring areas of the sky, making a match rather unlikely. Others appear to have been taken over from Chinese tradition, e.g. Nr. 11. LM21 can be explained only if we accept two separate figures which are not joined as shown in the concrete figure. Then they represent Chinese constellations *Ox* and *Girl* (which is also Japanese Lunar station *Woman*).
 
- Alternative figures can be found in the configuration files. We would like to hear from experts of Tibetan astronomy about both confirmed and corrected identification.
+Alternative figures can be found in the old configuration files. We would like to hear from experts of Tibetan astronomy about both confirmed and corrected identification.
 
 #### Further reading
 
 This work accompanies a 3D model of the Stag Phu observatory for use with the Scenery3D plugin and described in:
 
-Georg Zotti, Guntram Hazod, Martin Gamon, Hubert Feiglstorfer: A Calendar Observatory in Tibet. Proc. SEAC2022, Timisoara University Press, 2023. (to appear)
+Georg Zotti, Guntram Hazod, Martin Gamon and Hubert Feiglstorfer (2024), "A Calendar Observatory in Tibet". In: Marc Fr&icirc;ncu (coordinator), 
+Proceedings of the 29th Conference of the European Society for Astronomy in Culture (SEAC) Timisoara 2022,  
+Editura Universit&#x103;&#x163;ii de Vest din Timi&#x15F;oara} (pages 123-136).  ISBN 978-630-327-107-1.
 
 ## References
 

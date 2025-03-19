@@ -1,0 +1,44 @@
+Big issues in Skycultures as of 25.1
+
+GENERAL: Many SCs have constellations with non-mnemonic abbreviations. They could be converted to good use.
+
+arabic_al-sufi: native and pronunciation missing
+arabic_arabian_peninsula: pronunciation missing
+arabic_indigenous: pronunciation missing
+arabic_lunar_mansions: pronunciation missing
+armintxe: NO LICENSE (It is withheld anyhow due to implausibility)
+babylonian_mulapin: use 0-length string as native placeholders, later add cuneiform
+babylonian_seleucid: use 0-length string as native placeholders, later add cuneiform
+belarusian: native->pronounce, add cyrillic to native
+boorong: untranslated native star names to "english" or "native" tags?
+chinese: constellation names native->pronounce (and add diacritics!), add real native. 
+         star names: one dict has english=pinyin. Combine both dicts into one with english/pronunciation. 
+	             Optional: add native in Chinese characters.
+chinese_medieval: constellation names native->pronounce (and add diacritics!), add real native. 
+                  star names: properly split english "pinyin/translation". Add diacritics?
+egyptian: (taken out of ditribution)
+egyptian_dendera: use hieroglyphs in native? Better utilize new features
+greek_farnese: split common_names properly
+greek_leidenAratea: split common_names properly, check other names
+hawaiian_starlines: untranslated native star names to "english" or "native" tags?
+indian: star names: english->native. TBD: use same for english, or the translators' comments?
+kamilaroi: Add explanations/translation to the english tags
+khoi-san: Add actual native names.
+korean: add native in Korean; native->pronounce
+lokono: more native star names and translations?
+macedonian: Add pronounce tags
+maori: common names: any translations available?
+       The text links to an old Stellarium wiki page with more info. 404. Any chance it is archived?
+modern: A few stars still without reference.
+modern_chinese: add native and pronounce entries
+modern_rey: Maybe set Rey's star names "native", add IAU names as "english".
+northern_andes: References with date, any explanation for the origin of the person names in the constellations?
+romanian: Implausible use of all-common western star names. Changed to fallback_to_international_names=true.
+russian_siberian: pronounce tags missing. 
+sardinian: native star names missing :-(
+seri: remove native parts from English name. What about native "Hant" -- is it Hazoj canoj?? Star names actually untranslated native.
+tongan: common_names: would be nice to have translated star names.
+tupi: sone constellations still need translation; common_names: 2 stars with same name? translation?
+vanuatu_netwar: translate star names.
+xhosa:  translate star names.
+zulu: native star names?
