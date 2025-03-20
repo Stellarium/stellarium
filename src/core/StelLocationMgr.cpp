@@ -1158,16 +1158,52 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 
 			qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity, ipRegion, ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
 
+			QString regionName = pickRegionFromCountryCode(ipCountryCode.toLower());
+			float luminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+
+			// Check location in our database and fetch light pollution luminance if it possible
+			StelLocation ipLoc;
+			if (!ipCity.isEmpty())
+				ipLoc = locationForString(QString("%1, %2").arg(ipCity, regionName));
+			else
+			{
+				auto closeLocations = pickLocationsNearby("Earth", longitude, latitude, 0.5f);
+				// find closest location to (longitude,latitude) to grab light pollution info from.
+				// This is a bit awkard to begin with. Consider being 40km from an isolated larger city.
+				// Sky is good, and you take LP value for the city?
+				double minDistanceKm=1E12;
+				StelLocation candLoc;
+				QMapIterator<QString, StelLocation> it(closeLocations);
+				while (it.hasNext()) {
+					it.next();
+					const double distanceKm=it.value().distanceKm(longitude, latitude);
+					qDebug() << "Close location: " << it.value().name << " -- " << int(distanceKm) << "km";
+					if (distanceKm < minDistanceKm)
+					{
+						minDistanceKm=distanceKm;
+						candLoc=it.value();
+						qDebug() << "-- TAKEN!";
+					}
+				}
+				qDebug() << "Closest known place:" << candLoc.name << "at" << candLoc.distanceKm(longitude, latitude) << "km";
+				// Consider result valid only in a meaningful distance. Light pollution is changing rapidly.
+				// Try 25 km, YMMV.
+				if (minDistanceKm < 25)
+					ipLoc = candLoc;
+			}
+			if (ipLoc.isValid())
+				luminance = ipLoc.lightPollutionLuminance.toFloat();
+
 			StelLocation loc;
 			loc.name    = (ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity);
 			loc.state   = (ipRegion.isEmpty() ? "IPregion"  : ipRegion);
-			loc.region = pickRegionFromCountryCode(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
+			loc.region = regionName;
 			loc.role    = QChar(0x0058); // char 'X'
 			loc.population = 0;
 			loc.setLatitude  (static_cast<float>(latitude));
 			loc.setLongitude (static_cast<float>(longitude));
 			loc.altitude = 0;
-			loc.lightPollutionLuminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+			loc.lightPollutionLuminance = luminance;
 			loc.ianaTimeZone = (ipTimeZone.isEmpty() ? "" : ipTimeZone);
 			loc.planetName = "Earth";
 			loc.landscapeKey = "";
