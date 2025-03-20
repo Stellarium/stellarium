@@ -1160,13 +1160,37 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 
 			QString regionName = pickRegionFromCountryCode(ipCountryCode.toLower());
 			float luminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
-			StelLocation ipLoc;
+
 			// Check location in our database and fetch light pollution luminance if it possible
+			StelLocation ipLoc;
 			if (!ipCity.isEmpty())
 				ipLoc = locationForString(QString("%1, %2").arg(ipCity, regionName));
 			else
-				ipLoc = pickLocationsNearby("Earth", longitude, latitude, 1.f).first();
-
+			{
+				auto closeLocations = pickLocationsNearby("Earth", longitude, latitude, 0.5f);
+				// find closest location to (longitude,latitude) to grab light pollution info from.
+				// This is a bit awkard to begin with. Consider being 40km from an isolated larger city.
+				// Sky is good, and you take LP value for the city?
+				double minDistanceKm=1E12;
+				StelLocation candLoc;
+				QMapIterator<QString, StelLocation> it(closeLocations);
+				while (it.hasNext()) {
+					it.next();
+					const double distanceKm=it.value().distanceKm(longitude, latitude);
+					qDebug() << "Close location: " << it.value().name << " -- " << int(distanceKm) << "km";
+					if (distanceKm < minDistanceKm)
+					{
+						minDistanceKm=distanceKm;
+						candLoc=it.value();
+						qDebug() << "-- TAKEN!";
+					}
+				}
+				qDebug() << "Closest known place:" << candLoc.name << "at" << candLoc.distanceKm(longitude, latitude) << "km";
+				// Consider result valid only in a meaningful distance. Light pollution is changing rapidly.
+				// Try 25 km, YMMV.
+				if (minDistanceKm < 25)
+					ipLoc = candLoc;
+			}
 			if (ipLoc.isValid())
 				luminance = ipLoc.lightPollutionLuminance.toFloat();
 
