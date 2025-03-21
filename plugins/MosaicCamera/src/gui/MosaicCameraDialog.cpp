@@ -184,7 +184,7 @@ void MosaicCameraDialog::setAboutHtml(void)
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Josh Meyers &lt;jmeyers314@gmail.com&gt;</td></tr></table>";
 	html += "<p>" + q_("The Mosaic Camera plugin overlays camera sensor boundaries on the sky.  The position of an overlay is defined by its J2000 RA/Dec coordinates, and a camera rotation angle.") + "</p>";
 	html += "<h3>" + q_("Default Cameras") + "</h3>";
-	html += "<p>" + q_("A number of cameras are available to Stellarium by default.  See the user guide for information about adding user-defined camera mosaics.") + "</p>";
+	html += "<p>" + q_("A number of cameras are available to Stellarium by default.  See the User Guide for information about adding user-defined camera mosaics.") + "</p>";
 	html += "<h4>" + q_("LSSTCam") + "</h4>";
 	html += "<p>" + q_("The largest (as of 2025) digital camera ever assembled at 3.2 gigapixels. Now mounted on the Simonyi Survey Telescope at the Vera C. Rubin Observatory, this camera will be used to execute the Legacy Survey of Space and Time, creating a 10-year multicolor 'movie' of the southern sky. See more at: ") + "<a href=\"https://noirlab.edu/public/programs/vera-c-rubin-observatory/\">https://noirlab.edu/public/programs/vera-c-rubin-observatory/</a>" + "</p>";
 	html += "<h4>" + q_("HSC") + "</h4>";
@@ -194,7 +194,7 @@ void MosaicCameraDialog::setAboutHtml(void)
 	html += "<h4>" + q_("MegaPrime") + "</h4>";
 	html += "<p>" + q_("A 378 megapixel camera mounted on the Canada-France-Hawaii Telescope at Mauna Kea Observatory.  See more at: ") + "<a href=\"https://www.cfht.hawaii.edu/Instruments/Imaging/MegaPrime/\">https://www.cfht.hawaii.edu/Instruments/Imaging/MegaPrime/</a>" + "</p>";
 	html += "<h4>" + q_("Latiss") + "</h4>";
-	html += "<p>" + q_("The LSST Atmospheric Transmission Imager and Slitless Spectrograph.  A 16 megapixel camera mounted on the Rubin Observatroy Auxiliary telescope.  See more at: ") + "<a href=\"https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/\">https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/</a>" + "</p>";
+	html += "<p>" + q_("The LSST Atmospheric Transmission Imager and Slitless Spectrograph.  A 16 megapixel camera mounted on the Rubin Observatory Auxiliary telescope.  See more at: ") + "<a href=\"https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/\">https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/</a>" + "</p>";
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
