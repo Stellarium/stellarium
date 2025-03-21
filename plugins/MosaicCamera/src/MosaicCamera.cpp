@@ -483,9 +483,9 @@ void MosaicCamera::draw(StelCore* core)
         if (!camera.visible)
             continue;
 
-        double alpha = camera.ra / 57.29577951308232 + 1.5707963267948966;
-        double beta = 1.5707963267948966 - camera.dec / 57.29577951308232;
-        double rot = camera.rotation / 57.29577951308232;
+        double alpha = camera.ra / M_180_PI + M_PI_2;
+        double beta = M_PI_2 - camera.dec / M_180_PI;
+        double rot = camera.rotation / M_180_PI;
 
         double cosBeta = cos(beta);
         double sinBeta = sin(beta);
