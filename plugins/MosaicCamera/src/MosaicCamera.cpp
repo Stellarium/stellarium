@@ -86,7 +86,7 @@ void MosaicCamera::loadSettings()
 {
     conf->beginGroup("MosaicCamera");
     currentCamera = conf->value("currentCamera").toString();
-    setFlagShowButton(conf->value("showButton").toBool());
+    setFlagShowButton(conf->value("showButton", true).toBool());
     enableMosaicCamera(conf->value("enabled").toBool());
     int size = conf->beginReadArray("cameraVisibility");
     for (int i = 0; i < size; ++i) {
