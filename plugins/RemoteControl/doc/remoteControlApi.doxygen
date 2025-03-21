@@ -45,6 +45,11 @@ curl -G -d 'id=double_stars.ssc' http://localhost:8090/api/scripts/info
 curl -d 'id=double_stars.ssc' http://localhost:8090/api/scripts/run
 @endcode
 
+If there are multiple parameters, they can be chained together with the ampersand sign as in a query string:
+@code{.sh}
+curl -d "x=1&y=0.3" http://localhost:8090/api/main/move
+@endcode
+
 If authentication is enabled (see RemoteControl class), <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">HTTP Basic access authentication</a> is expected, with an empty username.
 HTTPS configuration is currently not implemented, even if the underlying \ref qtWebApp would allow it.
 
