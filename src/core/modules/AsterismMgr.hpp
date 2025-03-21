@@ -268,7 +268,6 @@ private:
 	QFont asterFont;
 	StarMgr* hipStarMgr;
 
-	QString lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
 	QString currentSkyCultureID;
 
 	bool linesDisplayed;
