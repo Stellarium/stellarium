@@ -183,7 +183,7 @@ identifies the Akkadian words with celestial regions and constellations (work by
 <td><notr>19</notr></td>
 <td>STAR in its bond</td>
 <td><sup>STAR</sup><i>APIL-EMA&#7722;</i> (Heir of the Ema&#7723;-temple), foremost son of <sup>GOD</sup>Anu</td>
-<td><notr>&alpha; UMi (?)</notr></td>
+<td><notr>somewhere in the circumpolar area</notr></td>
 </tr>
 <tr valign="top" style="background: #c6c6c6; color: #ff0000">
 <td></td>
