@@ -462,24 +462,21 @@ you can access a running instance of Stellarium with various programming languag
 \subsubsection{Commandline}
 \label{sec:plugins:RemoteControl:API:CLI}
 
-It is possible to send commands via command line\footnote{%
-  Depending on your operating system or command shell,
-  you may have to use double quotes in the \texttt{-\/-data} argument to \command{curl}.}%
-, e.g.,
+It is possible to send commands via command line, e.g.:
 
 \begin{commandsScr}
-wget -q --post-data 'id=show.ssc' http://stella:8090/api/scripts/run >/dev/null 2>&1
-curl --data 'id=myScript.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&1
-curl -d     'id=myScript.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&1
-curl -d 'id=LandscapeMgr.fogDisplayed&value=false' \ 
-      http://localhost:8090/api/stelproperty/set 
+wget --post-data "id=show.ssc" http://stella:8090/api/scripts/run -O /dev/null
+curl --data "id=myScript.ssc" http://localhost:8090/api/scripts/run
+curl -d     "id=myScript.ssc" http://localhost:8090/api/scripts/run
+curl -d "id=LandscapeMgr.fogDisplayed&value=false" \ 
+      http://localhost:8090/api/stelproperty/set
 \end{commandsScr}
 This allows triggering automatic show setups for museums etc.\ via  some centralized schedulers like \command{cron}.
 
 % TODO: List all available commands with examples here?
 To get a complete pretty-printed list of properties and actions, use:
 \begin{commandsScr}
-curl -G -d 'propId=-2&actionId=-2' http://localhost:8090/api/main/status | \
+curl -G -d "propId=-2&actionId=-2" http://localhost:8090/api/main/status | \
      python -m json.tool 
 \end{commandsScr} 
 
