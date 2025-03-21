@@ -81,7 +81,7 @@ identifies the Akkadian words with celestial regions and constellations (work by
 <td><notr>2</notr></td>
 <td><sup>STAR</sup><i>BARBARU</i>(Wolf)</td>
 <td>seeder of <sup>STAR</sup><i>EPINNU</i></td>
-<td><notr>&gamma; Cas (+?)</notr></td>
+<td><notr>&gamma; Cas and adjacent</notr></td>
 </tr>
 <tr valign="top" style="background: #dee6ef">
 <td><notr>3</notr></td>
@@ -159,31 +159,31 @@ identifies the Akkadian words with celestial regions and constellations (work by
 <td>15</td>
 <td>STAR by the pole of <sup>STAR</sup><i>EREQQU</i></td>
 <td><sup>STAR</sup><i>&Scaron;&#274;LEBU</i>(Fox), <sup>GOD</sup>Erra, the strong of the gods</td>
-<td>Alcor (80 UMa)</td>
+<td>Alcor (80 UMa) and north of it</td>
 </tr>
 <tr valign="top" style="background: #e7e6e6">
 <td><notr>16</notr></td>
 <td>STAR on the forehead of <sup>STAR</sup><i>EREQQU</i></td>
 <td><sup>STAR</sup><i>LA&#7722;RU</i>(Ewe), <sup>GOD</sup>Aya</td>
-<td><notr>&alpha; UMa(+)</notr></td>
+<td><notr>west of &alpha; UMa </notr></td>
 </tr>
 <tr valign="top" style="background: #e7e6e6">
 <td><notr>17</notr></td>
-<td><sup>STAR</sup>MU.BU.K&Eacute;&Scaron;.DA(Hitched yoke?)</td>
+<td><sup>STAR</sup>MU.BU.K&Eacute;&Scaron;.DA (Hitched yoke?)</td>
 <td><sup>GOD</sup><i>Anu-rab&ucirc;</i> of heaven</td>
-<td><notr>UMi</notr></td>
+<td><notr>reworked with the knowledge of [#5,#6,#7]</notr></td>
 </tr>
 <tr valign="top" style="background: #e7e6e6">
 <td><notr>18</notr></td>
-<td><sup>STAR</sup>MAR.G&Iacute;D.DA.AN.NA(Wagon of heaven)</td>
+<td><sup>STAR</sup>MAR.G&Iacute;D.DA.AN.NA (Wagon of heaven)</td>
 <td><sup>GOD</sup>Damkianna</td>
-<td>somewhere betw UMi and Vega?</td>
+<td>UMi (according to Aratus)</td>
 </tr>
 <tr valign="top" style="background: #e7e6e6">
 <td><notr>19</notr></td>
 <td>STAR in its bond</td>
-<td><sup>STAR</sup><i>APIL-EMA&#7722;</i>(Heir of the Ema&#7723;-temple), foremost son of <sup>GOD</sup>Anu</td>
-<td><notr>&alpha; UMi (?)</notr></td>
+<td><sup>STAR</sup><i>APIL-EMA&#7722;</i> (Heir of the Ema&#7723;-temple), foremost son of <sup>GOD</sup>Anu</td>
+<td><notr>somewhere in the circumpolar area</notr></td>
 </tr>
 <tr valign="top" style="background: #c6c6c6; color: #ff0000">
 <td></td>
@@ -524,7 +524,9 @@ Further publications are in preparation (e.g. together with M. Krebernik for the
  - [#2]: Hermann Hunger and John Steele, The Babylonian astronomical compendium MUL.APIN, Routledge, London/New York 2018.
  - [#3]: Susanne M. Hoffmann: [Hipparchs Himmelsglobus](https://www.springer.com/de/book/9783658186821), Springer, Wiesbaden, New York, 2017.
  - [#4]: Susanne M. Hoffmann: *History of Constellations as popularization of uranometry* in: Wolfschmidt, Gudrun [ed.]: [Popularisierung der Astronomie](https://tredition.de/autoren/gudrun-wolfschmidt-1029/popularisierung-der-astronomie-proceedings-der-tagung-des-arbeitskreises-astronomiegeschichte-in-der-astronomischen-gesellschaft-in-bochum-2016-hardcover-91756/), Nuncius Hamburgensis, Bd. 41, Hamburg, 2017.
- - [#5]: Susanne M. Hoffmann and M. Krebernik: *What do deities tell us about the celestial positioning system?* in: Proceedings of the Rencontre Assyriologique Internationale 2018 (In preparation).
+ - [#5]: Hoffmann, S.M. and Krebernik, M. (2023): *What do deities tell us about the celestial positioning system*, in: R. Rollinger, I. Madreiter, M. Lang, C. Pappi (eds.). The Intellectual Heritage of the Ancient Near East, Papers held at the 64th Rencontre Assyriologique International and 12th Melammu Symposium July 16-20 2018, Innsbruck. Austrian Academy of Sciences Press, 539-579
+ - [#6]: Hoffmann and Horowitz (2023). The Standing and Sitting Asterisms of Ekur, N.A.B.U., n°3 (sept.), 141-143
+ - [#7]: Hoffmann, S.M. (2024). Standing and Sitting Gods of MUL.APIN, Journal of Astronomical History and Heritage, 27(2), 261-272 
 
 ### Fair Use
 
