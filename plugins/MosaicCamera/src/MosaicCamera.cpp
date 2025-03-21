@@ -174,7 +174,7 @@ void MosaicCamera::initializeUserData()
 {
     userDirectory = StelFileMgr::getUserDir()+"/modules/MosaicCamera/";
     QDir dir(userDirectory);
-    if (!dir.exists())
+    if (!dir.exists() || dir.isEmpty())
     {
         StelFileMgr::makeSureDirExistsAndIsWritable(userDirectory);
         copyResourcesToUserDirectory();
