@@ -73,7 +73,6 @@ void AsterismMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	lastLoadedSkyCulture = "dummy";
 	setFontSize(conf->value("viewing/asterism_font_size", 14).toInt());
 	setFlagLines(conf->value("viewing/flag_asterism_drawing").toBool());
 	setFlagRayHelpers(conf->value("viewing/flag_rayhelper_drawing").toBool());
@@ -126,10 +125,6 @@ void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	if (!selectedObject.isEmpty()) // Unselect asterism
 		objMgr->unSelect();
 
-	// Check if the sky culture changed since last load, if not don't load anything
-	if (lastLoadedSkyCulture == skyCulture.id)
-		return;
-
 	if (skyCulture.asterisms.isEmpty())
 	{
 		// No data!
@@ -178,8 +173,6 @@ void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 
 	// Translate asterism names for the new sky culture
 	updateI18n();
-
-	lastLoadedSkyCulture = skyCulture.id;
 }
 
 void AsterismMgr::setLinesColor(const Vec3f& color)
