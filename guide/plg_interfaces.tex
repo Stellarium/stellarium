@@ -465,9 +465,9 @@ you can access a running instance of Stellarium with various programming languag
 It is possible to send commands via command line, e.g.:
 
 \begin{commandsScr}
+curl -d "x=1&y=0.3" http://localhost:8090/api/main/move
 wget --post-data "id=show.ssc" http://stella:8090/api/scripts/run -O /dev/null
-curl --data "id=myScript.ssc" http://localhost:8090/api/scripts/run
-curl -d     "id=myScript.ssc" http://localhost:8090/api/scripts/run
+curl -d "id=myScript.ssc" http://localhost:8090/api/scripts/run
 curl -d "id=LandscapeMgr.fogDisplayed&value=false" \ 
       http://localhost:8090/api/stelproperty/set
 \end{commandsScr}
