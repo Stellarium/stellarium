@@ -40,9 +40,9 @@ to access the API remotely. For POST operations, you would use the flag \c -d to
 the additional flag \c -G if parameters are required. Examples:
 @code{.sh}
 # retrieve info about the script "double_stars.ssc" with a GET request
-curl -G -d 'id=double_stars.ssc' http://localhost:8090/api/scripts/info
+curl -G -d "id=double_stars.ssc" http://localhost:8090/api/scripts/info
 # run the script "double_stars.ssc" with a POST request
-curl -d 'id=double_stars.ssc' http://localhost:8090/api/scripts/run
+curl -d "id=double_stars.ssc" http://localhost:8090/api/scripts/run
 @endcode
 
 If there are multiple parameters, they can be chained together with the ampersand sign as in a query string:
