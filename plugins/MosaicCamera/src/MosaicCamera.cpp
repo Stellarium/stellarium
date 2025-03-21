@@ -445,27 +445,32 @@ void MosaicCamera::setCurrentCamera(const QString& cameraName)
     if (cameras.contains(cameraName))
     {
         currentCamera = cameraName;
+        emit currentCameraChanged(cameraName);
     }
 }
 
 void MosaicCamera::setCurrentRA(double ra)
 {
     setRA(currentCamera, ra);
+    emit currentRAChanged(ra);
 }
 
 void MosaicCamera::setCurrentDec(double dec)
 {
     setDec(currentCamera, dec);
+    emit currentDecChanged(dec);
 }
 
 void MosaicCamera::setCurrentRotation(double rotation)
 {
     setRotation(currentCamera, rotation);
+    emit currentRotationChanged(rotation);
 }
 
 void MosaicCamera::setCurrentVisibility(bool visible)
 {
     setVisibility(currentCamera, visible);
+    emit currentVisibilityChanged(visible);
 }
 
 void MosaicCamera::draw(StelCore* core)

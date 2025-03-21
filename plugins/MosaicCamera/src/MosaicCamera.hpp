@@ -68,29 +68,29 @@ class MosaicCamera : public StelModule
 
 	/// @property enabled
 	/// @brief Are mosaic camera overlays enabled?
-	Q_PROPERTY(bool enabled		     READ isEnabled              WRITE enableMosaicCamera  NOTIFY flagMosaicCameraVisibilityChanged)
+	Q_PROPERTY(bool enabled		     READ isEnabled              WRITE enableMosaicCamera   NOTIFY flagMosaicCameraVisibilityChanged)
 
-	Q_PROPERTY(bool showButton       READ getFlagShowButton      WRITE setFlagShowButton   NOTIFY flagShowButtonChanged)
+	Q_PROPERTY(bool showButton       READ getFlagShowButton      WRITE setFlagShowButton    NOTIFY flagShowButtonChanged)
 
 	/// @property currentCamera
 	/// @brief The name of the current camera
-	Q_PROPERTY(QString currentCamera READ getCurrentCamera       WRITE setCurrentCamera )
+	Q_PROPERTY(QString currentCamera READ getCurrentCamera       WRITE setCurrentCamera     NOTIFY currentCameraChanged)
 
 	/// @property ra
 	/// @brief Set or get the current camera's right ascension [deg]
-	Q_PROPERTY(double ra             READ getCurrentRA           WRITE setCurrentRA )
+	Q_PROPERTY(double ra             READ getCurrentRA           WRITE setCurrentRA         NOTIFY currentRAChanged)
 
 	/// @property dec
 	/// @brief Set or get the current camera's declination [deg]
-	Q_PROPERTY(double dec            READ getCurrentDec          WRITE setCurrentDec )
+	Q_PROPERTY(double dec            READ getCurrentDec          WRITE setCurrentDec        NOTIFY currentDecChanged)
 
 	/// @property rotation
 	/// @brief Set or get the current camera's rotation [deg]
-	Q_PROPERTY(double rotation       READ getCurrentRotation     WRITE setCurrentRotation )
+	Q_PROPERTY(double rotation       READ getCurrentRotation     WRITE setCurrentRotation   NOTIFY currentRotationChanged)
 
 	/// @property visible
 	/// @brief Set or get the current camera's visibility
-	Q_PROPERTY(bool visible          READ getCurrentVisibility   WRITE setCurrentVisibility )
+	Q_PROPERTY(bool visible          READ getCurrentVisibility   WRITE setCurrentVisibility NOTIFY currentVisibilityChanged)
 
     /** @} */
 
@@ -126,6 +126,11 @@ public:
 signals:
 	void flagMosaicCameraVisibilityChanged(bool b);
 	void flagShowButtonChanged(bool b);
+	void currentCameraChanged(const QString& cameraName);
+	void currentRAChanged(double ra);
+	void currentDecChanged(double dec);
+	void currentRotationChanged(double rotation);
+	void currentVisibilityChanged(bool visible);
 
 public slots:
     void setRA(const QString& cameraName, double ra);
