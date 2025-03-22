@@ -40,6 +40,7 @@ public:
 	void setRotation(double rot);
 	void setVisibility(bool visible);
 	QString getCurrentCameraName() const;
+	void setCurrentCameraName(const QString& cameraName);
 
 protected:
 	void createDialogContent() override;

@@ -467,6 +467,9 @@ void MosaicCamera::setCurrentCamera(const QString& cameraName)
     {
         currentCamera = cameraName;
         emit currentCameraChanged(cameraName);
+        if(configDialog->visible()) {
+            configDialog->setCurrentCameraName(cameraName);
+        }
     }
 }
 

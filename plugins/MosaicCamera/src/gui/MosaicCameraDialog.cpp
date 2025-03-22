@@ -72,17 +72,22 @@ void MosaicCameraDialog::updateDialogFields()
     ui->DecSpinBox->blockSignals(true);
     ui->RotationSpinBox->blockSignals(true);
     ui->visibleCheckBox->blockSignals(true);
+    ui->cameraListWidget->blockSignals(true);
 
     ui->RASpinBox->setDegrees(mc->getRA(currentCameraName));
     ui->DecSpinBox->setDegrees(mc->getDec(currentCameraName));
     ui->RotationSpinBox->setDegrees(mc->getRotation(currentCameraName));
     ui->visibleCheckBox->setChecked(mc->getVisibility(currentCameraName));
+    QListWidgetItem* item = ui->cameraListWidget->findItems(currentCameraName, Qt::MatchExactly).first();
+    int row = ui->cameraListWidget->row(item);
+    ui->cameraListWidget->setCurrentRow(row);
 
     // Reconnect the signals
     ui->RASpinBox->blockSignals(false);
     ui->DecSpinBox->blockSignals(false);
     ui->RotationSpinBox->blockSignals(false);
     ui->visibleCheckBox->blockSignals(false);
+    ui->cameraListWidget->blockSignals(false);
 }
 
 void MosaicCameraDialog::setRA(double ra)
@@ -103,6 +108,12 @@ void MosaicCameraDialog::setRotation(double rot)
 void MosaicCameraDialog::setVisibility(bool visible)
 {
 	ui->visibleCheckBox->setChecked(visible);
+}
+
+void MosaicCameraDialog::setCurrentCameraName(const QString& cameraName)
+{
+    currentCameraName = cameraName;
+    updateDialogFields();
 }
 
 void MosaicCameraDialog::retranslate()
