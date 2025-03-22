@@ -5,6 +5,7 @@ add_subdirectory(gui)
 add_subdirectory(Lx200)
 add_subdirectory(NexStar)
 add_subdirectory(Rts2)
+add_subdirectory(Alpaca)
 IF(ENABLE_INDI)
     add_subdirectory(INDI)
 ENDIF()
@@ -44,6 +45,7 @@ TARGET_LINK_LIBRARIES(TelescopeControl-static
     TelescopeControl_Lx200
     TelescopeControl_NexStar
     TelescopeControl_Rts2
+    TelescopeControl_Alpaca
     TelescopeControl_common
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Widgets

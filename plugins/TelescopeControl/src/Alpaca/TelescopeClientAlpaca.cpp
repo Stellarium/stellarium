@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2019 Gion Kunz <gion.kunz@gmail.com>
+ * Copyright (C) 2019 Gion Kunz <gion.kunz@gmail.com> (ASCOM)
+ * Copyright (C) 2025 Georg Zotti (Alpaca port)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,55 +17,55 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "TelescopeClientASCOM.hpp"
+#include "TelescopeClientAlpaca.hpp"
 
 #include <QDebug>
 #include <QMessageBox>
 #include <QRegularExpression>
 #include <cmath>
-#include <limits>
+//#include <limits>
 
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 
-TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& params, TelescopeControl::Equinox eq)
+TelescopeClientAlpaca::TelescopeClientAlpaca(const QString& name, const QString& params, TelescopeControl::Equinox eq)
 	: TelescopeClient(name)
 	, mEquinox(eq)
 	, mInterpolatedPosition(1, 0, 0)
 	, mCurrentTargetPosition(1, 0, 0)
 {
+	qNAM=StelApp::getInstance().getNetworkAccessManager();
 	static const QRegularExpression paramRx("^([^:]*):([^:]*)$");
 	QRegularExpressionMatch paramMatch=paramRx.match(params);
 	if (paramMatch.hasMatch())
 	{
-		mAscomDeviceId = paramMatch.captured(1).trimmed();
-		mAscomUseDeviceEqCoordType = paramMatch.captured(2).trimmed() == "true";
+		mAlpacaDeviceId = paramMatch.captured(1).trimmed();
+		mAlpacaUseDeviceEqCoordType = paramMatch.captured(2).trimmed() == "true";
 	}
 
-	qDebug() << "TelescopeClientASCOM::TelescopeClientASCOM with telescope name " << name << " and ascomDeviceId " << mAscomDeviceId;
+	qDebug() << "TelescopeClientAlpaca::TelescopeClientAlpaca with telescope name " << name << " and AlpacaDeviceId " << mAlpacaDeviceId;
 
-	mAscomDevice = new ASCOMDevice(this, mAscomDeviceId);
-	mAscomDevice->connect();
-	// TODO: Wait for actual confirmation of connection...
-	mDoesRefraction = mAscomDevice->doesRefraction();
-	mCoordinateType = mAscomDevice->getEquatorialCoordinateType();
+	mAlpacaDevice = new AlpacaDevice(this, mAlpacaDeviceId);
+	mAlpacaDevice->connect();
+	mDoesRefraction = mAlpacaDevice->doesRefraction();
+	mCoordinateType = mAlpacaDevice->getEquatorialCoordinateType();
 }
 
-TelescopeClientASCOM::~TelescopeClientASCOM()
+TelescopeClientAlpaca::~TelescopeClientAlpaca()
 {
-	mAscomDevice->disconnect();
-	delete mAscomDevice;
+	mAlpacaDevice->disconnect();
+	delete mAlpacaDevice;
 }
 
-void TelescopeClientASCOM::performCommunication()
+void TelescopeClientAlpaca::performCommunication()
 {
 	qint64 now = getNow();
 
 	if (now - mLastUpdateTime > 1000000)
 	{
-		ASCOMDevice::ASCOMCoordinates currentCoords = mAscomDevice->getCoordinates();
+		AlpacaDevice::AlpacaCoordinates currentCoords = mAlpacaDevice->getCoordinates();
 
 		double longitudeRad = currentCoords.RA * M_PI / 12.0;
 		double latitudeRad = currentCoords.DEC * M_PI / 180.0;
@@ -73,7 +74,7 @@ void TelescopeClientASCOM::performCommunication()
 		StelUtils::spheToRect(longitudeRad, latitudeRad, position);
 
 		// If telescope sent us JNow
-		if (useJNow(mCoordinateType, mAscomUseDeviceEqCoordType, mEquinox))
+		if (useJNow(mCoordinateType, mAlpacaUseDeviceEqCoordType, mEquinox))
 		{
 			const StelCore* core = StelApp::getInstance().getCore();
 			position = core->equinoxEquToJ2000(position,
@@ -99,21 +100,21 @@ void TelescopeClientASCOM::performCommunication()
 		mInterpolatedPosition = mCurrentTargetPosition;
 }
 
-bool TelescopeClientASCOM::prepareCommunication()
+bool TelescopeClientAlpaca::prepareCommunication()
 {
 	return true;
 }
 
-Vec3d TelescopeClientASCOM::getJ2000EquatorialPos(const StelCore*) const
+Vec3d TelescopeClientAlpaca::getJ2000EquatorialPos(const StelCore*) const
 {
 	return mInterpolatedPosition;
 }
 
-ASCOMDevice::ASCOMCoordinates TelescopeClientASCOM::j2000PosToAscomCoord(const Vec3d& j2000Pos) 
+AlpacaDevice::AlpacaCoordinates TelescopeClientAlpaca::j2000PosToAlpacaCoord(const Vec3d& j2000Pos) 
 {
 	Vec3d position = j2000Pos;
 	// If telescope wants JNow
-	if (useJNow(mCoordinateType, mAscomUseDeviceEqCoordType, mEquinox))
+	if (useJNow(mCoordinateType, mAlpacaUseDeviceEqCoordType, mEquinox))
 	{
 		const StelCore* core = StelApp::getInstance().getCore();
 		position = core->j2000ToEquinoxEqu(j2000Pos,
@@ -126,65 +127,63 @@ ASCOMDevice::ASCOMCoordinates TelescopeClientASCOM::j2000PosToAscomCoord(const V
 	const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
 	const double dec = atan2(position[2], std::sqrt(position[0] * position[0] + position[1] * position[1]));
 
-	ASCOMDevice::ASCOMCoordinates coord;
+	AlpacaDevice::AlpacaCoordinates coord;
 	coord.RA = ra * 12.0 / M_PI;
 	coord.DEC = dec * 180.0 / M_PI;
 
 	return coord;
 }
 
-void TelescopeClientASCOM::telescopeGoto(const Vec3d& j2000Pos, StelObjectP selectObject)
+void TelescopeClientAlpaca::telescopeGoto(const Vec3d& j2000Pos, StelObjectP selectObject)
 {
 	Q_UNUSED(selectObject)
 
 	if (!isConnected()) return;
 
-	if (mAscomDevice->isParked())
+	if (mAlpacaDevice->isParked())
 	{
 		QMessageBox::warning(&StelMainView::getInstance(), "Stellarium",
 		  q_("Can't slew a telescope which is parked. Unpark before performing any goto command."));
 		return;
 	}
 
-	ASCOMDevice::ASCOMCoordinates coords = j2000PosToAscomCoord(j2000Pos);
-	mAscomDevice->slewToCoordinates(coords);
+	AlpacaDevice::AlpacaCoordinates coords = j2000PosToAlpacaCoord(j2000Pos);
+	mAlpacaDevice->slewToCoordinates(coords);
 }
 
-void TelescopeClientASCOM::telescopeSync(const Vec3d& j2000Pos, StelObjectP selectObject) 
+void TelescopeClientAlpaca::telescopeSync(const Vec3d& j2000Pos, StelObjectP selectObject) 
 {
 	Q_UNUSED(selectObject)
 	if (!isConnected()) return;
 
-	ASCOMDevice::ASCOMCoordinates coords = j2000PosToAscomCoord(j2000Pos);
-	mAscomDevice->syncToCoordinates(coords);
+	AlpacaDevice::AlpacaCoordinates coords = j2000PosToAlpacaCoord(j2000Pos);
+	mAlpacaDevice->syncToCoordinates(coords);
 }
 
-void TelescopeClientASCOM::telescopeAbortSlew() 
+void TelescopeClientAlpaca::telescopeAbortSlew() 
 {
 	if (!isConnected()) return;
 
-	mAscomDevice->abortSlew();
+	mAlpacaDevice->abortSlew();
 }
 
-bool TelescopeClientASCOM::isConnected() const
+bool TelescopeClientAlpaca::isConnected() const
 {
-	//return mAscomDevice->isDeviceConnected();
-	// Called every frame, we should only see if we have been connected before...
-	return mAscomDevice->isConnected();
+	return mAlpacaDevice->isDeviceConnected();
 }
 
-bool TelescopeClientASCOM::hasKnownPosition() const
+bool TelescopeClientAlpaca::hasKnownPosition() const
 {
 	return true;
 }
 
-bool TelescopeClientASCOM::useJNow(ASCOMDevice::ASCOMEquatorialCoordinateType coordinateType, bool ascomUseDeviceEqCoordType, TelescopeControl::Equinox equinox)
+bool TelescopeClientAlpaca::useJNow(AlpacaDevice::AlpacaEquatorialCoordinateType coordinateType, bool AlpacaUseDeviceEqCoordType, TelescopeControl::Equinox equinox)
 {
-	if (ascomUseDeviceEqCoordType)
+	if (AlpacaUseDeviceEqCoordType)
 	{
-		return coordinateType == ASCOMDevice::ASCOMEquatorialCoordinateType::Topocentric
+		return coordinateType == AlpacaDevice::AlpacaEquatorialCoordinateType::Topocentric
 			   // Assume Other as JNow too
-			   || coordinateType == ASCOMDevice::ASCOMEquatorialCoordinateType::Other;
+			   || coordinateType == AlpacaDevice::AlpacaEquatorialCoordinateType::Other;
 	}
 	else
 	{
