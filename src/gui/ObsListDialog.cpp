@@ -758,12 +758,20 @@ QString ObsListDialog::saveBookmarksHashInObservingLists(const QHash<QString, ob
 */
 void ObsListDialog::selectAndGoToObject(QModelIndex index)
 {
-	QStandardItem *selectedItem = itemModel->itemFromIndex(index);
-	int rowNumber = selectedItem->row();
+    // Map the index from the proxy to the source model.
+    QSortFilterProxyModel* proxy = qobject_cast<QSortFilterProxyModel*>(ui->treeView->model());
+    QModelIndex sourceIndex = proxy ? proxy->mapToSource(index) : index;
 
-	QStandardItem *uuidItem = itemModel->item(rowNumber, ColumnUUID);
-	QString itemUuid = uuidItem->text();
-	observingListItem item = currentItemCollection.value(itemUuid);
+    QStandardItem *selectedItem = itemModel->itemFromIndex(sourceIndex);
+    if (!selectedItem)
+        return;
+    int rowNumber = selectedItem->row();
+
+    QStandardItem *uuidItem = itemModel->item(rowNumber, ColumnUUID);
+    if (!uuidItem)
+        return;
+    QString itemUuid = uuidItem->text();
+    observingListItem item = currentItemCollection.value(itemUuid);
 
 	// Load landscape/location before dealing with the object: It could be a view from another planet!
 	// We load stored landscape/location if the respective checkbox is checked.
