@@ -349,7 +349,7 @@ Asterism* AsterismMgr::findFromAbbreviation(const QString& abbreviation) const
 		if (asterism->abbreviation.compare(abbreviation, Qt::CaseInsensitive) == 0)
 			return asterism;
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 
@@ -456,7 +456,7 @@ StelObjectP AsterismMgr::searchByNameI18n(const QString& nameI18n) const
 		QString objwcap = asterism->nameI18.toUpper();
 		if (objwcap == objw) return asterism;
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 StelObjectP AsterismMgr::searchByName(const QString& name) const
@@ -470,7 +470,7 @@ StelObjectP AsterismMgr::searchByName(const QString& name) const
 		objwcap = asterism->abbreviation.toUpper();
 		if (objwcap == objw) return asterism;
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 QStringList AsterismMgr::listAllObjects(bool inEnglish) const
@@ -501,7 +501,7 @@ StelObjectP AsterismMgr::searchByID(const QString &id) const
 	{
 		if (asterism->getID() == id) return asterism;
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 QString AsterismMgr::getStelObjectType() const
@@ -537,7 +537,7 @@ bool AsterismMgr::getFlagIsolateAsterismSelected(void) const
 void AsterismMgr::setSelectedAsterism(Asterism *a)
 {
 	// update states for other asterisms to fade them out
-	if (a != Q_NULLPTR)
+	if (a != nullptr)
 	{
 		selected.push_back(a);
 
@@ -599,7 +599,7 @@ void AsterismMgr::setSelectedAsterism(Asterism *a)
 //! Remove a asterism from the selected asterism list
 void AsterismMgr::unsetSelectedAsterism(Asterism *a)
 {
-	if (a != Q_NULLPTR)
+	if (a != nullptr)
 	{
 		for (auto iter = selected.begin(); iter != selected.end();)
 		{

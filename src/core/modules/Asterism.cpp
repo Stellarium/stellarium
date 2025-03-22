@@ -144,7 +144,8 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 
 				Vec3d coords;
 				StelUtils::spheToRect(RA*M_PI/12., DE*M_PI/180., coords);
-				QList<StelObjectP> stars = starMgr->searchAround(coords, 0.1, core);
+				const QList<StelObjectP> stars = starMgr->searchAround(coords, 0.1, core);
+				// Find star closest to coordinates
 				StelObjectP s = nullptr;
 				double d = 10.;
 				for (const auto& p : stars)
