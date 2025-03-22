@@ -493,12 +493,12 @@ void HelpDialog::updateAboutText(void) const
 	typedef QPair<QString, int> donator;
 	QVector<donator> financialContributors = {
 	        // Individuals
-	        { "Daniel", 1600 }, { "Laurence Holt", 1000 }, { "John Bellora", 670 }, { "Marla Pinaire", 530 }, { "Jeff Moe", 512 },
-	        { "Vernon Hermsen", 324 }, { "Walter Dörfler", 300 }, { "Michel Payette", 290 },  { "Salvatore Ficicchia", 261 },
-	        { "Satish Mallesh", 260 }, { "Raul Prisacariu", 260 }, { "Philippe Renoux", 250 }, { "Fito Martin", 250 },
-	        { "SuEllen Shepard", 250 },  { "Vlad Magdalin", 250  },
+	        { "Daniel", 1900 }, { "Bryan", 1000 }, { "Laurence Holt", 1000 }, { "John Bellora", 670 }, { "Marla Pinaire", 560 }, { "Jeff Moe", 512 },
+	        { "Vernon Hermsen", 324 }, { "Michel Payette", 305 },  { "James Lattis", 300 }, { "Walter Dörfler", 300 }, { "Salvatore Ficicchia", 276 },
+	        { "Satish Mallesh", 260 }, { "Raul Prisacariu", 260 }, { "Philippe Renoux", 250 }, { "Fito Martin", 250 },  { "SuEllen Shepard", 250 },
+	        { "Vlad Magdalin", 250  },
 	        // Organizations
-	        { "BairesDev", 9500 }, { "Dotcom-Monitor", 1000 }, { "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 790 },
+	        { "BairesDev", 11000 }, { "Dotcom-Monitor", 1000 }, { "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 820 },
 	        { "SSSTwitter", 500 }, { "Triplebyte", 280 }
 	};
 	std::sort(financialContributors.begin(), financialContributors.end(), [](donator i, donator j){ return i.second > j.second; });
