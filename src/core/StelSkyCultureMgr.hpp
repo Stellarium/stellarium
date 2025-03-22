@@ -147,6 +147,9 @@ public:
 	//! Gets the default sky culture name from the application's settings,
 	//! sets that sky culture by calling setCurrentSkyCultureID().
 	void init();
+
+	bool addNewCulture(const QString& dir, bool reportErrorsToGUI = false);
+	void addCustomCulture(const QString& dir, bool reportErrorsToGUI);
 	
 public slots:
 	//! Get the current sky culture English name.
@@ -230,7 +233,7 @@ private:
 
 	//! Read the English name of the sky culture from description file.
 	//! @param idFromJSON the id from \p index.json that will be used as a default name if an error occurs.
-	QString getSkyCultureEnglishName(const QString& idFromJSON) const;
+	QString getSkyCultureEnglishName(const QString& dir, const QString& idFromJSON, bool reportErrorsToGUI) const;
 	//! Get the culture name in English associated with a specified directory.
 	//! @param directory The directory name.
 	//! @return The English name for the culture associated with directory.
@@ -253,6 +256,7 @@ private:
 	std::pair<QString/*color*/,QString/*info*/> getLicenseDescription(const QString& license, const bool singleLicenseForAll) const;
 
 	QMap<QString, StelSkyCulture> dirToNameEnglish;
+	QSet<QString> additionalCultureDirs;
 	
 	StelSkyCulture currentSkyCulture;
 	

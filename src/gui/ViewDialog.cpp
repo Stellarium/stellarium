@@ -32,6 +32,7 @@
 #include "StelCore.hpp"
 #include "StelModule.hpp"
 #include "LandscapeMgr.hpp"
+#include "StelMainView.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelProjector.hpp"
@@ -56,6 +57,8 @@
 #include <QSettings>
 #include <QTimer>
 #include <QDialog>
+#include <QMessageBox>
+#include <QFileDialog>
 #include <QStringList>
 #include <QJsonArray>
 
@@ -188,6 +191,7 @@ void ViewDialog::createDialogContent()
 	// Jupiter's GRS should become property, and recheck the other "from trunk" entries.
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)),&StelApp::getInstance().getSkyCultureMgr(),SLOT(setCurrentSkyCultureNameI18(QString)));
 	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &ViewDialog::skyCultureChanged);
+	connect(ui->culturesAddNewBtn, &QPushButton::clicked, this, &ViewDialog::onAddNewCulture);
 
 	// Connect and initialize checkboxes and other widgets
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
@@ -1063,9 +1067,8 @@ void ViewDialog::populateToolTips()
 	ui->rayHelpersFadeDurationDoubleSpinBox->setSuffix(seconds);
 }
 
-void ViewDialog::populateLists()
+void ViewDialog::updateSkyCulturesList()
 {
-	// Fill the culture list widget from the available list
 	StelApp& app = StelApp::getInstance();
 	QListWidget* l = ui->culturesListWidget;
 	l->blockSignals(true);
@@ -1079,6 +1082,13 @@ void ViewDialog::populateLists()
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	updateSkyCultureText();
+}
+
+void ViewDialog::populateLists()
+{
+	// Fill the culture list widget from the available list
+	StelApp& app = StelApp::getInstance();
+	updateSkyCulturesList();
 
 	// populate language printing combo. (taken from DeltaT combo)
 	StelModule* cmgr = app.getModule("ConstellationMgr");
@@ -1103,7 +1113,7 @@ void ViewDialog::populateLists()
 	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
 
 	// Fill the projection list
-	l = ui->projectionListWidget;
+	QListWidget* l = ui->projectionListWidget;
 	l->blockSignals(true);
 	l->clear();	
 	const QStringList mappings = core->getAllProjectionTypeKeys();
@@ -1157,6 +1167,21 @@ void ViewDialog::skyCultureChanged()
 	l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	updateSkyCultureText();
 	updateDefaultSkyCulture();
+}
+
+void ViewDialog::onAddNewCulture()
+{
+	const auto dir = QFileDialog::getExistingDirectory(&StelMainView::getInstance(), q_("Add new sky culture"));
+	if (dir.isEmpty()) return;
+	const auto indexPath = dir + "/index.json";
+	if (!QFileInfo(indexPath).exists())
+	{
+		QMessageBox::critical(&StelMainView::getInstance(), q_("Error loading sky culture"),
+		                      q_("The directory chosen doesn't contain a file \"index.json\""));
+		return;
+	}
+	StelApp::getInstance().getSkyCultureMgr().addCustomCulture(dir, true);
+	updateSkyCulturesList();
 }
 
 // fill the description text window, not the names in the sky.
