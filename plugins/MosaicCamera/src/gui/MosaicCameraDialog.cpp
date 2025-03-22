@@ -117,6 +117,7 @@ void MosaicCameraDialog::retranslate()
 void MosaicCameraDialog::onCameraSelectionChanged(const QString& cameraName)
 {
     currentCameraName = cameraName;
+    mc->setCurrentCamera(cameraName);
     updateDialogFields();
 }
 
@@ -173,6 +174,7 @@ void MosaicCameraDialog::createDialogContent()
 	// General tab
 	connectBoolProperty(ui->checkBoxShowButton, "MosaicCamera.showButton");
 	connect(ui->pushButtonSaveSettings, SIGNAL(clicked()), mc, SLOT(saveSettings()));
+	connect(ui->setToObjectButton, SIGNAL(clicked()), mc, SLOT(setRADecToObject()));
 }
 
 void MosaicCameraDialog::setAboutHtml(void)
