@@ -139,6 +139,7 @@ public slots:
     void setVisibility(const QString& cameraName, bool visible);
 	void setPosition(const QString& cameraName, double ra, double dec, double rotation);
 	void setRADecToView();
+	void setRADecToObject();
 	void incrementRotation();
 	void decrementRotation();
 	void nextCamera();
@@ -154,7 +155,7 @@ public slots:
 
 	void saveSettings() const;
 
-	private:
+private:
 	QHash<QString, Camera> cameras;
 	QStringList cameraOrder;
 	QString userDirectory;
@@ -172,6 +173,8 @@ public slots:
 	StelGui* gui;
 	MosaicCameraDialog* configDialog;
 	StelButton* toolbarButton;
+	StelCore* core;
+
 };
 
 class MosaicCameraStelPluginInterface : public QObject, public StelPluginInterface

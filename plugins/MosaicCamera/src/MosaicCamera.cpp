@@ -25,6 +25,8 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelObject.hpp"
+#include "StelObjectMgr.hpp"
 #include "MosaicCamera.hpp"
 #include "MosaicCameraDialog.hpp"
 #include "StelUtils.hpp"
@@ -71,6 +73,7 @@ MosaicCamera::MosaicCamera()
     configDialog = new MosaicCameraDialog();
     StelApp &app = StelApp::getInstance();
     conf = app.getSettings();
+    core = app.getCore();
     gui = dynamic_cast<StelGui*>(app.getGui());
 }
 
@@ -148,6 +151,7 @@ void MosaicCamera::init()
     addAction("actionShow_MosaicCamera", N_("Mosaic Camera"), N_("Show Mosaic Camera"), "enabled", "");
     addAction("actionShow_MosaicCamera_dialog", N_("Mosaic Camera"), N_("Show settings dialog"), configDialog, "visible");
     addAction("actionSetRADecToView", N_("Mosaic Camera"), N_("Set RA/Dec to current view"), "setRADecToView()", "");
+    addAction("actionSetRADecToObject", N_("Mosaic Camera"), N_("Set RA/Dec to current object"), "setRADecToObject()", "");
     addAction("actionIncrementRotation", N_("Mosaic Camera"), N_("Increment rotation"), "incrementRotation()", "");
     addAction("actionDecrementRotation", N_("Mosaic Camera"), N_("Decrement rotation"), "decrementRotation()", "");
     addAction("actionNextCamera", N_("Mosaic Camera"), N_("Next camera"), "nextCamera()", "");
@@ -388,6 +392,23 @@ void MosaicCamera::setRADecToView()
     // convert to degrees from radians
 	ra = std::fmod((ra*180/M_PI)+360., 360.);
 	dec = dec*180/M_PI;
+    setCurrentRA(ra);
+    setCurrentDec(dec);
+}
+
+void MosaicCamera::setRADecToObject()
+{
+	const QList<StelObjectP> selection = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+    if (selection.isEmpty())
+    {
+        return;
+    }
+    StelObjectP obj = selection[0];
+    double ra, dec;
+    Vec3d pos = obj->getJ2000EquatorialPos(core);
+    StelUtils::rectToSphe(&ra, &dec, pos);
+    ra = std::fmod((ra*M_180_PI)+360., 360.);
+    dec = dec*M_180_PI;
     setCurrentRA(ra);
     setCurrentDec(dec);
 }
