@@ -118,7 +118,9 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 				if (!asterism.back())
 				{
 					asterism.pop_back();
-					qWarning().nospace() << "Error in asterism " << abbreviation << ": can't find star HIP " << HIP;
+					qWarning().nospace() << "Error in asterism " << abbreviation <<
+								": can't find star " << (HIP <= NR_OF_HIP ? "HIP ":"DR3 ") << HIP <<
+								" (Skipping asterism. Install more catalogs?)";
 					return false;
 				}
 				break;
@@ -144,7 +146,7 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 
 				Vec3d coords;
 				StelUtils::spheToRect(RA*M_PI/12., DE*M_PI/180., coords);
-				const QList<StelObjectP> stars = starMgr->searchAround(coords, 0.1, core);
+				const QList<StelObjectP> stars = starMgr->searchAround(coords, 0.25, core);
 				// Find star closest to coordinates
 				StelObjectP s = nullptr;
 				double d = 10.;
