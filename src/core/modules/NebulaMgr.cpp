@@ -1957,7 +1957,6 @@ void NebulaMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 		for (auto it = defaultNameMap.begin(); it != defaultNameMap.end(); ++it)
 			for (const auto& name : it.value())
 				setName(it.key(), name);
-
 	}
 
 	updateI18n();

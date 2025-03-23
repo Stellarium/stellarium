@@ -1042,7 +1042,6 @@ void StelApp::highGraphicsModeDraw()
 		const auto rgbMaxValue=calcRGBMaxValue(core->getDitheringMode());
 		postProcessorProgram->setUniformValue(postProcessorUniformLocations.rgbMaxValue,
 		                                      rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
-
 	}
 
 	postProcessorVAO->bind();

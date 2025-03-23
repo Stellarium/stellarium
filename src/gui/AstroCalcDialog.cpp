@@ -183,7 +183,6 @@ void AstroCalcDialog::retranslate()
 		populateToolTips();
 		// Almanac
 		ui->astroCalcAlmanac->retranslate();
-
 	}
 }
 
