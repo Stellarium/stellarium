@@ -828,31 +828,18 @@ ELSE()
 ENDIF()
 
 IF(ENABLE_XLSX)
-     # TODO: switch to something like vcpkg or conan, and plain find_package,
-     # without the fallback of cmake downloading the dep itself.
-     # But some libraries are not available there yet.
-
-     # Version 1.4.4 exports "QXlsx", but future (unreleased as of 10 Nov 2022)
-     # version exports "QXlsxQt5" (or ...Qt6) instead. Try both, but
-     # download newer one, because 1.4.4 doesn't link on windows when
-     # added via add_subdirectory().
-     FIND_PACKAGE(QXlsx NAMES QXlsxQt${QT_VERSION_MAJOR} QXlsx)
-     IF(QXlsx_FOUND)
-         MESSAGE(STATUS "Using system-provided QXlsx ${QXlsx_VERSION}")
-     ELSE()
-         CPMAddPackage(NAME QXlsxQt${QT_VERSION_MAJOR}
-             URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.5.0.tar.gz
-             URL_HASH SHA256=4461bb0fc9b88b6a970520e8b32eb7d2fc391a1a5c326b139a0af836278cdb09
-             EXCLUDE_FROM_ALL ON
-             SOURCE_SUBDIR QXlsx)
-     ENDIF()
+     CPMFindPackage(NAME QXlsxQt${QT_VERSION_MAJOR}
+          URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.5.0.tar.gz
+          URL_HASH SHA256=4461bb0fc9b88b6a970520e8b32eb7d2fc391a1a5c326b139a0af836278cdb09
+          EXCLUDE_FROM_ALL ON
+          SOURCE_SUBDIR QXlsx)
 ENDIF()
 
-CPMAddPackage(NAME md4c
-              URL https://github.com/mity/md4c/archive/refs/tags/release-0.4.8.tar.gz
-              URL_HASH SHA256=4a457df853425b6bb6e3457aa1d1a13bccec587a04c38c622b1013a0da41439f
-              EXCLUDE_FROM_ALL yes
-              OPTIONS "BUILD_MD2HTML_EXECUTABLE OFF")
+CPMFindPackage(NAME md4c
+     URL https://github.com/mity/md4c/archive/refs/tags/release-0.4.8.tar.gz
+     URL_HASH SHA256=4a457df853425b6bb6e3457aa1d1a13bccec587a04c38c622b1013a0da41439f
+     EXCLUDE_FROM_ALL yes
+     OPTIONS "BUILD_MD2HTML_EXECUTABLE OFF")
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
