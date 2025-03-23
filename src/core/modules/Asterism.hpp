@@ -108,6 +108,7 @@ private:
 	//! @return true if Asterism name label rendering it turned on, else false.
 	bool getFlagLabels() const { return nameFader; }
 
+	//! @return true if a (real) named asterism, false for a ray helper
 	bool isAsterism() const { return flagAsterism; }
 
 	//! International name (translated using gettext)
@@ -131,7 +132,7 @@ private:
 	};
 	//! Type of asterism
 	Type typeOfAsterism = Type::Asterism;
-	bool flagAsterism;
+	bool flagAsterism; //!< True for genuine asterisms, false for ray helpers
 	//! List of stars forming the segments
 	std::vector<StelObjectP> asterism;
 	//! In case this describes a single-star asterism (i.e. just one line segment that starts and ends at the same star),

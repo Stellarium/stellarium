@@ -265,10 +265,10 @@ void StelSkyCultureMgr::makeCulturesList()
 			};
 			const auto classificationStr = classifications[0].toString(); // We'll take only the first item for now.
 			const auto classification=classificationMap.value(classificationStr.toLower(), StelSkyCulture::INCOMPLETE);
-			if (classificationMap.constFind(classificationStr.toLower()) == classificationMap.constEnd()) // not included
+			if (!classificationMap.contains(classificationStr.toLower()))
 			{
-				qDebug() << "Skyculture " << dir << "has UNKNOWN classification: " << classificationStr;
-				qDebug() << "Please edit info.ini and change to a supported value. For now, this equals 'incomplete'";
+				qInfo() << "Skyculture " << dir << "has UNKNOWN classification: " << classificationStr;
+				qInfo() << "Please edit index.json and change to a supported value. For now, this equals 'incomplete'";
 			}
 			culture.classification = classification;
 		}
@@ -286,17 +286,14 @@ void StelSkyCultureMgr::init()
 
 void StelSkyCultureMgr::reloadSkyCulture()
 {
-	emit currentSkyCultureIDChanged(currentSkyCulture.id);
-	emit currentSkyCultureChanged(currentSkyCulture);
+	const QString currentID=currentSkyCulture.id;
+	makeCulturesList();
+	setCurrentSkyCultureID(currentID);
 }
 
 //! Set the current sky culture from the passed directory
 bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 {
-	//prevent unnecessary changes
-	if(cultureDir==currentSkyCulture.id)
-		return false;
-
 	QString scID = cultureDir;
 	bool result = true;
 	// make sure culture definition exists before attempting or will die
