@@ -1173,8 +1173,8 @@ apparent. \footnote{Exaggerating even more causes graphics defects and
 \label{sec:Concepts:ProperMotion}
 
 \indexterm[proper motion]{Proper motion} is the change in the position of a star over time as a
-result of its motion through space relative to the Sun. It does not
-include the apparent shift in position of star due to annual parallax.
+result of its motion through space relative to the Sun. Stellarium also 
+includes\newFeature{25.1} the apparent shift in position of star due to annual parallax.
 The star exhibiting the greatest proper motion is \indexterm{Barnard's Star} which
 moves more than ten seconds of arc per year.
 
@@ -1194,12 +1194,14 @@ Note however some limitations:
 \item For most bright stars ($V<10.5$), their full 6D astrometry (2D sky positions, 
   2D proper motion, parallax, radial velocity) computed by assuming straight-line motion at constant speed. 
   Otherwise proper motion are only modelled by linear components.
-\item Double stars are listed in catalogs as two individual stars with
-  their current proper motion which consists of a common spatial motion and the 
-  orbital motion around their common center of gravity. However, their orbital
-  motion around each other is not modelled in Stellarium.  They may be seen flying 
-  apart, which is of course not realistic.
 \end{enumerate}
+
+\subsection{Binary Stars}
+
+Binary stars are listed in catalogs as two individual stars with
+their current proper motion which consists of a common spatial motion and the 
+orbital motion around their common center of gravity. Their orbital
+motion around each other, where known,\newFeature{25.1} is now properly modelled in Stellarium. 
 
 %%% Local Variables: 
 %%% mode: latex
