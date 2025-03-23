@@ -156,6 +156,7 @@ jobs:
         # brew update
         # brew upgrade
         brew install qt@5 nlopt exiv2
+        brew uninstall md4c
 
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -195,6 +196,7 @@ jobs:
         # brew update
         # brew upgrade
         brew install qt@6 nlopt exiv2
+        brew uninstall md4c
 
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -236,7 +238,8 @@ jobs:
       run: |
         # brew update
         # brew upgrade
-        brew install qt@6 nlopt exiv2 md4c
+        brew install qt@6 nlopt exiv2
+        brew uninstall md4c
 
     - name: Checkout repository
       uses: actions/checkout@v4
