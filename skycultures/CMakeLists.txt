@@ -11,6 +11,7 @@ ADD_SUBDIRECTORY( babylonian_seleucid )
 ADD_SUBDIRECTORY( belarusian )
 ADD_SUBDIRECTORY( boorong )
 ADD_SUBDIRECTORY( chinese )
+ADD_SUBDIRECTORY( chinese_chenzhuo )
 ADD_SUBDIRECTORY( chinese_medieval )
 # Exclude from standard package
 # ADD_SUBDIRECTORY( egyptian )
