@@ -29,7 +29,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: JSONlint
-      run: jsonlint ${{github.workspace}}/skycultures/*/index.json
+      run: jsonlint -S ${{github.workspace}}/skycultures/*/index.json
 
     - name: Configure CMake
       shell: bash
