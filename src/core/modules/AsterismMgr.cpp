@@ -141,11 +141,11 @@ void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 		asterisms.clear();
 		asterisms.resize(skyCulture.asterisms.size());
 		unsigned readOK = 0;
-		for (unsigned n = 0; n < asterisms.size(); ++n)
+		for (unsigned n = 0, m=0; n < asterisms.size(); ++n, ++m)
 		{
 			auto& aster = asterisms[n];
 			aster = new Asterism;
-			if (aster->read(skyCulture.asterisms[n].toObject(), hipStarMgr))
+			if (aster->read(skyCulture.asterisms[m].toObject(), hipStarMgr))
 			{
 				aster->lineFader.setDuration(static_cast<int>(linesFadeDuration * 1000.f));
 				aster->rayHelperFader.setDuration(static_cast<int>(rayHelpersFadeDuration * 1000.f));
