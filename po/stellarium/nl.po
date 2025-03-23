@@ -17,17 +17,17 @@
 # EggBird, 2025
 # Alex Rijckaert, 2025
 # Harry Mensch, 2025
-# Dirk Devlies <dirk.devlies@telenet.be>, 2025
 # Lisa -, 2025
+# Dirk Devlies <dirk.devlies@telenet.be>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-03-17 23:39+0700\n"
+"POT-Creation-Date: 2025-03-23 22:14+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Lisa -, 2025\n"
+"Last-Translator: Dirk Devlies <dirk.devlies@telenet.be>, 2025\n"
 "Language-Team: Dutch (https://app.transifex.com/stellarium/teams/80998/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +36,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:257
+#: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:260
 #: src/core/modules/Constellation.cpp:360
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:251
 #: src/core/modules/Nebula.cpp:253 src/core/modules/Planet.cpp:597
@@ -74,7 +74,7 @@ msgstr "Markering"
 msgid "asterism"
 msgstr "asterisme"
 
-#: src/core/modules/AsterismMgr.cpp:103
+#: src/core/modules/AsterismMgr.cpp:102
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:471
 #: src/core/modules/GridLinesMgr.cpp:2007
 #: src/core/modules/SpecialMarkersMgr.cpp:311
@@ -89,21 +89,21 @@ msgstr "asterisme"
 msgid "Display Options"
 msgstr "Opties weergeven"
 
-#: src/core/modules/AsterismMgr.cpp:104 src/ui_viewDialog.h:4560
+#: src/core/modules/AsterismMgr.cpp:103 src/ui_viewDialog.h:4560
 #: src/ui_configurationDialog.h:2109
 msgid "Asterism lines"
 msgstr "Asterismelijnen"
 
-#: src/core/modules/AsterismMgr.cpp:105 src/ui_viewDialog.h:4608
+#: src/core/modules/AsterismMgr.cpp:104 src/ui_viewDialog.h:4608
 #: src/ui_configurationDialog.h:2110
 msgid "Asterism labels"
 msgstr "Asterismelabels"
 
-#: src/core/modules/AsterismMgr.cpp:106
+#: src/core/modules/AsterismMgr.cpp:105
 msgid "Toggle single asterism selection mode"
 msgstr "Enkele asterisme mode selecteren"
 
-#: src/core/modules/AsterismMgr.cpp:107 src/ui_viewDialog.h:4564
+#: src/core/modules/AsterismMgr.cpp:106 src/ui_viewDialog.h:4564
 msgid "Ray helpers"
 msgstr "Hulplijnen"
 
@@ -3864,12 +3864,12 @@ msgstr ""
 "coëfficiënten bepaald door de gebruiker."
 
 #: src/core/StelCore.cpp:2772 src/core/SimbadSearcher.cpp:178
-#: src/gui/ObsListDialog.cpp:85 src/gui/ObsListDialog.cpp:963
-#: src/gui/ObsListDialog.cpp:987 src/gui/ObsListDialog.cpp:1036
-#: src/gui/ObsListDialog.cpp:1052 src/gui/ObsListDialog.cpp:1093
-#: src/gui/ObsListDialog.cpp:1105 src/gui/ObsListDialog.cpp:1114
-#: src/gui/ObsListDialog.cpp:1132 src/gui/ObsListDialog.cpp:1152
-#: src/gui/ObsListDialog.cpp:1315 src/gui/ObsListDialog.cpp:1320
+#: src/gui/ObsListDialog.cpp:85 src/gui/ObsListDialog.cpp:971
+#: src/gui/ObsListDialog.cpp:995 src/gui/ObsListDialog.cpp:1044
+#: src/gui/ObsListDialog.cpp:1060 src/gui/ObsListDialog.cpp:1101
+#: src/gui/ObsListDialog.cpp:1113 src/gui/ObsListDialog.cpp:1122
+#: src/gui/ObsListDialog.cpp:1140 src/gui/ObsListDialog.cpp:1160
+#: src/gui/ObsListDialog.cpp:1323 src/gui/ObsListDialog.cpp:1328
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "Fout"
@@ -4259,12 +4259,12 @@ msgstr "Laden van '%1'"
 msgid "Loading '%1' from %2"
 msgstr "Laden '%1' van %2"
 
-#: src/core/StelSkyCultureMgr.cpp:363
+#: src/core/StelSkyCultureMgr.cpp:360
 msgctxt "sky culture classification"
 msgid "ethnographic"
 msgstr "etnographisch"
 
-#: src/core/StelSkyCultureMgr.cpp:364
+#: src/core/StelSkyCultureMgr.cpp:361
 msgid ""
 "Provided by ethnographic researchers based on interviews of indigenous "
 "people."
@@ -4272,12 +4272,12 @@ msgstr ""
 "Geleverd door etnografische onderzoekers op basis van interviews met "
 "inheemse mensen."
 
-#: src/core/StelSkyCultureMgr.cpp:368
+#: src/core/StelSkyCultureMgr.cpp:365
 msgctxt "sky culture classification"
 msgid "historical"
 msgstr "historisch"
 
-#: src/core/StelSkyCultureMgr.cpp:369
+#: src/core/StelSkyCultureMgr.cpp:366
 msgid ""
 "Provided by historians based on historical written sources from a (usually "
 "short) period of the past."
@@ -4285,12 +4285,12 @@ msgstr ""
 "Geleverd door historici op basis van historische schriftelijke bronnen uit "
 "een (meestal korte) periode uit het verleden."
 
-#: src/core/StelSkyCultureMgr.cpp:373
+#: src/core/StelSkyCultureMgr.cpp:370
 msgctxt "sky culture classification"
 msgid "single"
 msgstr "enkel"
 
-#: src/core/StelSkyCultureMgr.cpp:374
+#: src/core/StelSkyCultureMgr.cpp:371
 msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
@@ -4298,23 +4298,23 @@ msgstr ""
 "Vertegenwoordigt een enkele bron zoals een historische atlas of publicaties "
 "van één auteur."
 
-#: src/core/StelSkyCultureMgr.cpp:378
+#: src/core/StelSkyCultureMgr.cpp:375
 msgctxt "sky culture classification"
 msgid "comparative"
 msgstr "vergelĳkbaar"
 
-#: src/core/StelSkyCultureMgr.cpp:379
+#: src/core/StelSkyCultureMgr.cpp:376
 msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
 msgstr "Vergelijkt elementen uit minstens twee hemelculturen."
 
-#: src/core/StelSkyCultureMgr.cpp:383
+#: src/core/StelSkyCultureMgr.cpp:380
 msgctxt "sky culture classification"
 msgid "traditional"
 msgstr "traditioneel"
 
-#: src/core/StelSkyCultureMgr.cpp:384
+#: src/core/StelSkyCultureMgr.cpp:381
 msgid ""
 "Content represents 'common' knowledge by several members of an ethnic "
 "community, and the sky culture has been developed by members of such "
@@ -4324,12 +4324,12 @@ msgstr ""
 "leden van een etnische gemeenschap en de hemelcultuur is ontwikkeld door "
 "leden van een dergelijke gemeenschap."
 
-#: src/core/StelSkyCultureMgr.cpp:388
+#: src/core/StelSkyCultureMgr.cpp:385
 msgctxt "sky culture classification"
 msgid "personal"
 msgstr "persoonlijk"
 
-#: src/core/StelSkyCultureMgr.cpp:389
+#: src/core/StelSkyCultureMgr.cpp:386
 msgid ""
 "This is a personally developed sky culture which is not founded in published"
 " historical or ethnological research. Stellarium may include it when it is "
@@ -4339,12 +4339,12 @@ msgstr ""
 "gepubliceerd historisch of etnologisch onderzoek. Stellarium zal het "
 "mogelijk opnemen als het 'mooi genoeg' is zonder de inhoud goed te keuren."
 
-#: src/core/StelSkyCultureMgr.cpp:393
+#: src/core/StelSkyCultureMgr.cpp:390
 msgctxt "sky culture classification"
 msgid "incomplete"
 msgstr "incompleet"
 
-#: src/core/StelSkyCultureMgr.cpp:394
+#: src/core/StelSkyCultureMgr.cpp:391
 msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
@@ -4353,16 +4353,16 @@ msgstr ""
 "gegeven, hoewel het lijkt alsof het op een solide achtergrond is gebouwd. "
 "Meer werk zal nodig zijn."
 
-#: src/core/StelSkyCultureMgr.cpp:398
+#: src/core/StelSkyCultureMgr.cpp:395
 msgctxt "sky culture classification"
 msgid "undefined"
 msgstr "niet gedefineerd"
 
-#: src/core/StelSkyCultureMgr.cpp:405
+#: src/core/StelSkyCultureMgr.cpp:402
 msgid "Classification"
 msgstr "Classificatie"
 
-#: src/core/StelSkyCultureMgr.cpp:418
+#: src/core/StelSkyCultureMgr.cpp:415
 msgid ""
 "This sky culture is provided under unknown license. Please ask authors for "
 "details about license for this sky culture."
@@ -4370,7 +4370,7 @@ msgstr ""
 "Deze hemelcultuur wordt ter beschikking gesteld zonder bekende licentie. "
 "Vraag de auteurs naar details over de licentie voor deze hemelcultuur."
 
-#: src/core/StelSkyCultureMgr.cpp:424
+#: src/core/StelSkyCultureMgr.cpp:421
 msgid ""
 "This sky culture is provided under GNU General Public License. You can use "
 "it for commercial and non-commercial purposes, freely adapt it and share "
@@ -4380,7 +4380,7 @@ msgstr ""
 "kunt het gebruiken voor commerciële en niet-commerciële doeleinden, vrij "
 "aanpassen en aangepast werk delen."
 
-#: src/core/StelSkyCultureMgr.cpp:427 src/core/StelSkyCultureMgr.cpp:436
+#: src/core/StelSkyCultureMgr.cpp:424 src/core/StelSkyCultureMgr.cpp:433
 msgid ""
 "You can use it for commercial and non-commercial purposes, freely adapt it "
 "and share adapted work."
@@ -4388,7 +4388,7 @@ msgstr ""
 "U kunt het gebruiken voor commerciële en niet-commerciële doeleinden, het "
 "vrij aanpassen en aangepast werk delen."
 
-#: src/core/StelSkyCultureMgr.cpp:433
+#: src/core/StelSkyCultureMgr.cpp:430
 msgid ""
 "This sky culture is provided under MIT License. You can use it for "
 "commercial and non-commercial purposes, freely adapt it and share adapted "
@@ -4398,19 +4398,19 @@ msgstr ""
 "gebruiken voor commerciële en niet-commerciële doeleinden, vrij aanpassen en"
 " het aangepast werk delen."
 
-#: src/core/StelSkyCultureMgr.cpp:442 src/core/StelSkyCultureMgr.cpp:479
+#: src/core/StelSkyCultureMgr.cpp:439 src/core/StelSkyCultureMgr.cpp:476
 msgid "This sky culture is distributed as public domain."
 msgstr "Deze hemelcultuur wordt verspreid onder publiek domein."
 
-#: src/core/StelSkyCultureMgr.cpp:444
+#: src/core/StelSkyCultureMgr.cpp:441
 msgid "This is distributed as public domain."
 msgstr "Dit wordt verspreid als publiek domein."
 
-#: src/core/StelSkyCultureMgr.cpp:449
+#: src/core/StelSkyCultureMgr.cpp:446
 msgid "This sky culture is provided under Creative Commons License."
 msgstr "Deze hemelcultuur wordt verstrekt onder de Creative Commons Licentie."
 
-#: src/core/StelSkyCultureMgr.cpp:454
+#: src/core/StelSkyCultureMgr.cpp:451
 msgid ""
 "You may distribute, remix, adapt, and build upon this sky culture, even "
 "commercially, as long as you credit authors for the original creation."
@@ -4419,7 +4419,7 @@ msgstr ""
 "voortbouwen, zelfs commercieel, zolang je de auteurs van de originele "
 "creatie vermeldt."
 
-#: src/core/StelSkyCultureMgr.cpp:456
+#: src/core/StelSkyCultureMgr.cpp:453
 msgid ""
 "You may remix, adapt, and build upon this sky culture even for commercial "
 "purposes, as long as you credit authors and license the new creations under "
@@ -4431,7 +4431,7 @@ msgstr ""
 "creaties onder dezelfde voorwaarden licenseert. Deze licentie wordt vaak "
 "vergeleken met \"copyleft\" vrije en open source software licenties."
 
-#: src/core/StelSkyCultureMgr.cpp:459
+#: src/core/StelSkyCultureMgr.cpp:456
 msgid ""
 "You may reuse this sky culture for any purpose, including commercially; "
 "however, adapted work cannot be shared with others, and credit must be "
@@ -4441,7 +4441,7 @@ msgstr ""
 "aangepast werk mag echter niet met anderen worden gedeeld, en je moet zelf "
 "voor de naamsvermelding zorgen."
 
-#: src/core/StelSkyCultureMgr.cpp:461
+#: src/core/StelSkyCultureMgr.cpp:458
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, and "
 "although your new works must also acknowledge authors and be non-commercial,"
@@ -4452,7 +4452,7 @@ msgstr ""
 " en niet-commercieel moeten zijn, hoef je je afgeleide werken niet onder "
 "dezelfde voorwaarden te licenseren."
 
-#: src/core/StelSkyCultureMgr.cpp:464
+#: src/core/StelSkyCultureMgr.cpp:461
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, as "
 "long as you credit authors and license your new creations under the "
@@ -4462,7 +4462,7 @@ msgstr ""
 "voortbouwen, zolang je de auteurs vermeldt en uw nieuwe creaties onder "
 "dezelfde voorwaarden licenseert."
 
-#: src/core/StelSkyCultureMgr.cpp:466
+#: src/core/StelSkyCultureMgr.cpp:463
 msgid ""
 "You may use this sky culture and share them with others as long as you "
 "credit authors, but you can’t change it in any way or use it commercially."
@@ -4471,15 +4471,15 @@ msgstr ""
 "vermeldt, maar je mag het op geen enkele manier veranderen of commercieel "
 "gebruiken."
 
-#: src/core/StelSkyCultureMgr.cpp:484
+#: src/core/StelSkyCultureMgr.cpp:481
 msgid ""
 "Free Art License grants the right to freely copy, distribute, and transform."
 msgstr ""
 "Met de Free Art License heeft u het recht om de werken vrij te kopiëren, te "
 "verspreiden en te transformeren."
 
-#: src/core/StelSkyCultureMgr.cpp:504 src/core/StelSkyCultureMgr.cpp:511
-#: src/core/StelSkyCultureMgr.cpp:518 src/gui/ConfigurationDialog.cpp:1379
+#: src/core/StelSkyCultureMgr.cpp:501 src/core/StelSkyCultureMgr.cpp:508
+#: src/core/StelSkyCultureMgr.cpp:515 src/gui/ConfigurationDialog.cpp:1379
 #: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
@@ -4505,22 +4505,22 @@ msgstr ""
 msgid "License"
 msgstr "Licentie"
 
-#: src/core/StelSkyCultureMgr.cpp:505 src/core/StelSkyCultureMgr.cpp:512
+#: src/core/StelSkyCultureMgr.cpp:502 src/core/StelSkyCultureMgr.cpp:509
 msgid "unknown"
 msgstr "onbekend"
 
-#: src/core/StelSkyCultureMgr.cpp:548
+#: src/core/StelSkyCultureMgr.cpp:545
 msgid ""
 "The region indicates the geographical area of origin of a given sky culture."
 msgstr ""
 "De regio geeft het geografische gebied van oorsprong van een bepaalde "
 "hemelcultuur aan."
 
-#: src/core/StelSkyCultureMgr.cpp:554
+#: src/core/StelSkyCultureMgr.cpp:551
 msgid "World"
 msgstr "Wereld"
 
-#: src/core/StelSkyCultureMgr.cpp:555
+#: src/core/StelSkyCultureMgr.cpp:552
 msgid ""
 "All 'modern' sky cultures are based on the IAU-approved 88 constellations "
 "with standardized boundaries and are used worldwide. The origins of these "
@@ -4530,26 +4530,26 @@ msgstr ""
 " 88 sterrenbeelden met gestandaardiseerde grenzen en worden wereldwijd "
 "gebruikt. De oorsprong van deze sterrenbeelden is pan-Europees."
 
-#: src/core/StelSkyCultureMgr.cpp:559 src/ui_locationDialogGui.h:450
+#: src/core/StelSkyCultureMgr.cpp:556 src/ui_locationDialogGui.h:450
 msgid "Region:"
 msgstr "Regio:"
 
-#: src/core/StelSkyCultureMgr.cpp:635
+#: src/core/StelSkyCultureMgr.cpp:632
 msgctxt "Name of a section in sky culture description"
 msgid "Extras"
 msgstr "Extra's"
 
-#: src/core/StelSkyCultureMgr.cpp:636
+#: src/core/StelSkyCultureMgr.cpp:633
 msgctxt "Name of a section in sky culture description"
 msgid "References"
 msgstr "Referenties"
 
-#: src/core/StelSkyCultureMgr.cpp:637
+#: src/core/StelSkyCultureMgr.cpp:634
 msgctxt "Name of a section in sky culture description"
 msgid "Authors"
 msgstr "Auteurs"
 
-#: src/core/StelSkyCultureMgr.cpp:709
+#: src/core/StelSkyCultureMgr.cpp:706
 msgid "No description"
 msgstr "Geen beschrijving"
 
@@ -8329,7 +8329,7 @@ msgstr "De duur van de ochtend- en avondschemeringen."
 msgid "Today"
 msgstr "Vandaag"
 
-#: src/gui/ObsListDialog.cpp:85 src/gui/ObsListDialog.cpp:1114
+#: src/gui/ObsListDialog.cpp:85 src/gui/ObsListDialog.cpp:1122
 msgid "Cannot open observingLists.json to write"
 msgstr "Kan observingLists.json niet openen om te bewerken."
 
@@ -8377,43 +8377,43 @@ msgstr ""
 "Sommige objecten met bladwijzers zijn niet gevonden. Zie logbestand voor "
 "details."
 
-#: src/gui/ObsListDialog.cpp:944
+#: src/gui/ObsListDialog.cpp:952
 msgid "New Observation List"
 msgstr "Nieuwe observatielijst"
 
-#: src/gui/ObsListDialog.cpp:945
+#: src/gui/ObsListDialog.cpp:953
 msgid "Observing list creation mode"
 msgstr "Observatielijst aanmaak modus"
 
-#: src/gui/ObsListDialog.cpp:958
+#: src/gui/ObsListDialog.cpp:966
 msgid "Observing list editor mode"
 msgstr "Observatielijst bewerkingsmodus"
 
-#: src/gui/ObsListDialog.cpp:963
+#: src/gui/ObsListDialog.cpp:971
 msgid "selectedOlud empty. This is a bug"
 msgstr "selectedOlud leeg. Dit is een bug"
 
-#: src/gui/ObsListDialog.cpp:975
+#: src/gui/ObsListDialog.cpp:983
 msgid "Export observing list as..."
 msgstr "Observatielijsten exporteren als..."
 
-#: src/gui/ObsListDialog.cpp:987
+#: src/gui/ObsListDialog.cpp:995
 msgid "Cannot export. See logfile for details."
 msgstr "Kan niet exporteren. Zie logfile voor details."
 
-#: src/gui/ObsListDialog.cpp:1024
+#: src/gui/ObsListDialog.cpp:1032
 msgid "Import observing list"
 msgstr "Importeer observatielijst"
 
-#: src/gui/ObsListDialog.cpp:1036
+#: src/gui/ObsListDialog.cpp:1044
 msgid "Cannot open selected file for import"
 msgstr "Kan geselecteerde bestand niet openen voor import"
 
-#: src/gui/ObsListDialog.cpp:1052
+#: src/gui/ObsListDialog.cpp:1060
 msgid "Empty list."
 msgstr "Lege lijst."
 
-#: src/gui/ObsListDialog.cpp:1074
+#: src/gui/ObsListDialog.cpp:1082
 #, qt-format
 msgid ""
 "A list named '%1', created %2 and last modified %3 would overwrite your "
@@ -8423,43 +8423,43 @@ msgstr ""
 "uw bestaande lijst '%4', gedateerd %5 en laatst gewijzigd op %6 "
 "overschrijven. Accepteren?"
 
-#: src/gui/ObsListDialog.cpp:1093
+#: src/gui/ObsListDialog.cpp:1101
 msgid "The file is empty or doesn't contain legacy bookmarks."
 msgstr "Het bestand is leeg of bevat geen bestaande bladwijzers."
 
-#: src/gui/ObsListDialog.cpp:1105
+#: src/gui/ObsListDialog.cpp:1113
 msgid "File does not contain observing lists or legacy bookmarks"
 msgstr "Het bestand bevat geen observatielijsten of bestaande bladwijzers"
 
-#: src/gui/ObsListDialog.cpp:1132
+#: src/gui/ObsListDialog.cpp:1140
 msgid "File format is wrong!"
 msgstr "Bestandsformaat is verkeerd!"
 
-#: src/gui/ObsListDialog.cpp:1152
+#: src/gui/ObsListDialog.cpp:1160
 msgid "Cannot open JSON output file. Will not delete."
 msgstr "Kan JSON uitvoerbestand niet openen. Wordt niet verwijderd."
 
-#: src/gui/ObsListDialog.cpp:1176 src/ui_configurationDialog.h:1904
+#: src/gui/ObsListDialog.cpp:1184 src/ui_configurationDialog.h:1904
 msgid "Information"
 msgstr "Informatie"
 
-#: src/gui/ObsListDialog.cpp:1176
+#: src/gui/ObsListDialog.cpp:1184
 msgid "You cannot delete the default or the last list."
 msgstr "U kunt de standaard- of de laatste lijst niet wissen."
 
-#: src/gui/ObsListDialog.cpp:1232
+#: src/gui/ObsListDialog.cpp:1240
 msgid "Unnamed object"
 msgstr "Object zonder naam"
 
-#: src/gui/ObsListDialog.cpp:1315
+#: src/gui/ObsListDialog.cpp:1323
 msgid "Empty name"
 msgstr "Naam leegmaken"
 
-#: src/gui/ObsListDialog.cpp:1320
+#: src/gui/ObsListDialog.cpp:1328
 msgid "List name already exists"
 msgstr "Naam van de lijst bestaat reeds"
 
-#: src/gui/ObsListDialog.cpp:1385 src/ui_configurationDialog.h:2094
+#: src/gui/ObsListDialog.cpp:1393 src/ui_configurationDialog.h:2094
 #: src/ui_obsListDialog.h:361
 msgid "Observing lists"
 msgstr "Observatielijsten"
@@ -10225,10 +10225,10 @@ msgstr "&Kopiëren"
 msgid "&Paste"
 msgstr "&Plakken"
 
-#: src/translations.h:669 plugins/Oculars/src/ui_ocularDialog.h:1529
-#: plugins/Oculars/src/ui_ocularDialog.h:1538
-#: plugins/Oculars/src/ui_ocularDialog.h:1544
-#: plugins/Oculars/src/ui_ocularDialog.h:1563
+#: src/translations.h:669 plugins/Oculars/src/ui_ocularDialog.h:1530
+#: plugins/Oculars/src/ui_ocularDialog.h:1539
+#: plugins/Oculars/src/ui_ocularDialog.h:1545
+#: plugins/Oculars/src/ui_ocularDialog.h:1564
 msgid "Delete"
 msgstr "Verwijderen"
 
@@ -15672,7 +15672,7 @@ msgstr "Ondergang"
 #: src/ui_astroCalcAlmanacWidget.h:843
 msgctxt "twilight"
 msgid "Civil"
-msgstr "Burgerijk"
+msgstr "Burgerlijk"
 
 #: src/ui_astroCalcAlmanacWidget.h:844
 msgctxt "twilight"
@@ -16629,7 +16629,7 @@ msgid "Allow snap to selected object"
 msgstr "Laat vastklikken aan geselecteerd object toe"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:316
-#: plugins/Oculars/src/ui_ocularDialog.h:1571
+#: plugins/Oculars/src/ui_ocularDialog.h:1572
 #: plugins/Satellites/src/ui_satellitesDialog.h:1384
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:240
@@ -16653,7 +16653,7 @@ msgid "About"
 msgstr "Over"
 
 #: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1515
-#: plugins/Oculars/src/ui_ocularDialog.h:1412
+#: plugins/Oculars/src/ui_ocularDialog.h:1413
 msgid "Oculars"
 msgstr "Oculairs"
 
@@ -16734,7 +16734,7 @@ msgid ""
 msgstr "Kan sensoromtrek niet tonen: sensor of telescoop niet gedefinieerd."
 
 #: plugins/Oculars/src/Oculars.cpp:1516
-#: plugins/Oculars/src/ui_ocularDialog.h:1446
+#: plugins/Oculars/src/ui_ocularDialog.h:1447
 msgid "Ocular view"
 msgstr "Oculairbeeld"
 
@@ -17266,24 +17266,24 @@ msgid "Magnification factor:"
 msgstr "Vergrotingsfactor:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:584
-#: plugins/Oculars/src/ui_ocularDialog.h:1568
+#: plugins/Oculars/src/ui_ocularDialog.h:1569
 msgid "Diameter:"
 msgstr "Diameter:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:589
-#: plugins/Oculars/src/ui_ocularDialog.h:1533
+#: plugins/Oculars/src/ui_ocularDialog.h:1534
 msgid "aFOV:"
 msgstr "aFOV:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:590
-#: plugins/Oculars/src/ui_ocularDialog.h:1534
-#: plugins/Oculars/src/ui_ocularDialog.h:1569
+#: plugins/Oculars/src/ui_ocularDialog.h:1535
+#: plugins/Oculars/src/ui_ocularDialog.h:1570
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:764
 msgid "Focal length:"
 msgstr "Brandpuntsafstand:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:591
-#: plugins/Oculars/src/ui_ocularDialog.h:1530
+#: plugins/Oculars/src/ui_ocularDialog.h:1531
 msgid "Field stop:"
 msgstr "Veldstop:"
 
@@ -17442,15 +17442,15 @@ msgstr ""
 " snelheid ingeschakeld) om een beweging van meer dan 1 pixelbreedte te "
 "voorkomen."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1413
+#: plugins/Oculars/src/ui_ocularDialog.h:1414
 msgid "Interface"
 msgstr "Interface"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1417
+#: plugins/Oculars/src/ui_ocularDialog.h:1418
 msgid "Arrow button scale (requires restart)"
 msgstr "Pijltoets schaal (herstart vereist)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1419
+#: plugins/Oculars/src/ui_ocularDialog.h:1420
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
@@ -17458,28 +17458,28 @@ msgstr ""
 "Markeer het, als u de gezichtsveldwaarde het zelfde wilt hebben als bij het "
 "opstarten van Stellarium."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1421
+#: plugins/Oculars/src/ui_ocularDialog.h:1422
 msgid "Restore FOV to initial values"
 msgstr "Gezichtsveld naar beginwaarden terugzetten"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1422
+#: plugins/Oculars/src/ui_ocularDialog.h:1423
 msgid "Show resolution criteria"
 msgstr "Resolutie criteria weergeven"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1423
+#: plugins/Oculars/src/ui_ocularDialog.h:1424
 msgid "On-screen control panel"
 msgstr "Controlepaneel op het scherm"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1425
-#: plugins/Oculars/src/ui_ocularDialog.h:1429
+#: plugins/Oculars/src/ui_ocularDialog.h:1426
+#: plugins/Oculars/src/ui_ocularDialog.h:1430
 msgid "Font size of text on on-screen control panel"
 msgstr "Lettergrootte van tekst op het schermcontrolepaneel"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1427
+#: plugins/Oculars/src/ui_ocularDialog.h:1428
 msgid "...font size"
 msgstr "...lettergrootte"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1432
+#: plugins/Oculars/src/ui_ocularDialog.h:1433
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
@@ -17487,112 +17487,112 @@ msgstr ""
 "Markeer het, als u de richtingswaarde hetzelfde wilt hebben als bij het "
 "opstarten van Stellarium."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1434
+#: plugins/Oculars/src/ui_ocularDialog.h:1435
 msgid "Restore direction to initial values"
 msgstr "Richting naar beginwaarden terugzetten"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1436
+#: plugins/Oculars/src/ui_ocularDialog.h:1437
 msgid "Color for ocular circles and sensor frames"
 msgstr "Kleur voor oculair cirkels en sensorframes"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1439
+#: plugins/Oculars/src/ui_ocularDialog.h:1440
 msgid "Line Color"
 msgstr "Lijnkleur"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1441
+#: plugins/Oculars/src/ui_ocularDialog.h:1442
 msgid "Color for text which is shown only when GUI is switched off."
 msgstr "Kleur voor tekst die alleen getoond wordt als GUI is uitgeschakeld."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1444
+#: plugins/Oculars/src/ui_ocularDialog.h:1445
 msgid "Text Color"
 msgstr "Tekstkleur"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1445
+#: plugins/Oculars/src/ui_ocularDialog.h:1446
 msgid "Show oculars button on toolbar"
 msgstr "Oculairs toets op de werkbalk weergeven"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1448
+#: plugins/Oculars/src/ui_ocularDialog.h:1449
 msgid ""
 "Show FOV circles relative to the apparent FOV of the widest-angle ocular"
 msgstr ""
 "Toon de FOV cirkels in verhouding tot de FOV van het oculair met de grootste"
 " FOV"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1450
+#: plugins/Oculars/src/ui_ocularDialog.h:1451
 msgid "Scale image circle"
 msgstr "Schaal afbeeldingscirkel"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1451
+#: plugins/Oculars/src/ui_ocularDialog.h:1452
 msgid "Hide grids and lines when enabled"
 msgstr "Aanvinken om rasters en lijnen te verbergen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1452
+#: plugins/Oculars/src/ui_ocularDialog.h:1453
 msgid "Enable only if an object is selected"
 msgstr "Alleen beschikbaar als een object is geselecteerd"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1454
+#: plugins/Oculars/src/ui_ocularDialog.h:1455
 msgid "Show border circle"
 msgstr "Toon grenscirkel"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1456
+#: plugins/Oculars/src/ui_ocularDialog.h:1457
 msgid "Show FOV outline"
 msgstr "De FOV omtrek tonen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1458
+#: plugins/Oculars/src/ui_ocularDialog.h:1459
 msgid "Apply limit for stellar magnitude based on telescope aperture"
 msgstr ""
 "Een limiet instellen op magnitude, in functie van de opening van de "
 "telescoop"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1460
+#: plugins/Oculars/src/ui_ocularDialog.h:1461
 msgid "Auto-limit stellar magnitude"
 msgstr "Magnitude limiteren"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1462
+#: plugins/Oculars/src/ui_ocularDialog.h:1463
 msgid "Show cardinal directions in equatorial coordinate system"
 msgstr "De kardinale richtingen in het equatoriaal coördinatensysteem tonen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1464
+#: plugins/Oculars/src/ui_ocularDialog.h:1465
 msgid "Show compass rose"
 msgstr "De kompasroos tonen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1466
+#: plugins/Oculars/src/ui_ocularDialog.h:1467
 msgid "Align the crosshair in equatorial coordinate system"
 msgstr "Vizier uitlijnen in equatoriaal coördinatensysteem"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1468
+#: plugins/Oculars/src/ui_ocularDialog.h:1469
 msgid "Align crosshair"
 msgstr "Vizier uitlijnen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1470
+#: plugins/Oculars/src/ui_ocularDialog.h:1471
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr "In oculairmodus wat zicht buiten de oculaire cirkel toestaan."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1472
+#: plugins/Oculars/src/ui_ocularDialog.h:1473
 msgid "Use semi-transparent mask"
 msgstr "Semi-transparant masker gebruiken"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1474
+#: plugins/Oculars/src/ui_ocularDialog.h:1475
 msgid "Opacity of semi-transparent mask"
 msgstr "Opaciteit van het masker"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1476
+#: plugins/Oculars/src/ui_ocularDialog.h:1477
 msgid "Sensor view"
 msgstr "Sensorbeeld"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1478
+#: plugins/Oculars/src/ui_ocularDialog.h:1479
 msgid "Color for focuser overlay line"
 msgstr "Kleur van de overlay-lijn van de focuser"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1480
+#: plugins/Oculars/src/ui_ocularDialog.h:1481
 msgid "Show focuser overlay"
 msgstr "Toon de overlay van de focuser"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1481
+#: plugins/Oculars/src/ui_ocularDialog.h:1482
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Graden en minuten gebruiken voor gezichtsveld van CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1483
+#: plugins/Oculars/src/ui_ocularDialog.h:1484
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
@@ -17600,39 +17600,39 @@ msgstr ""
 "Automatisch wisselen van monteringstype inschakelen, vanuit de "
 "telescoopinstellingen voor horizontale oriëntatie van het CCD-frame."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1485
+#: plugins/Oculars/src/ui_ocularDialog.h:1486
 msgid "Enable automatic switch of mount type"
 msgstr "Automatisch wisselen van monteringstype inschakelen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1486
+#: plugins/Oculars/src/ui_ocularDialog.h:1487
 msgid "Use size of focuser:"
 msgstr "Gebruik grootte focuser:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1487
+#: plugins/Oculars/src/ui_ocularDialog.h:1488
 msgid "Use horizontal coordinates instead equatorial coordinates"
 msgstr "Gebruik horizontale ipv equatoriale coördinaten."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1488
+#: plugins/Oculars/src/ui_ocularDialog.h:1489
 msgid "Overlay size (px)"
 msgstr "Overlay grootte (px)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1490
+#: plugins/Oculars/src/ui_ocularDialog.h:1491
 msgid "Horizontal size (width)"
 msgstr "Horizontale grootte (breedte)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1493
+#: plugins/Oculars/src/ui_ocularDialog.h:1494
 msgid "Vertical size (height)"
 msgstr "Verticale grootte (hoogte)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1496
+#: plugins/Oculars/src/ui_ocularDialog.h:1497
 msgid "Enable pixel grid of sensor binned pixels within sensor crop overlay."
 msgstr "Toon een pixel raster rekening houdend met de binning."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1498
+#: plugins/Oculars/src/ui_ocularDialog.h:1499
 msgid "Show pixel grid"
 msgstr "Toon een pixel raster"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1500
+#: plugins/Oculars/src/ui_ocularDialog.h:1501
 msgid ""
 "Enable a rectangular overlay showing the effective size of a number of "
 "pixels."
@@ -17640,95 +17640,95 @@ msgstr ""
 "Schakel een overlay in die de effectieve grootte van een aantal pixels "
 "weergeeft."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1502
+#: plugins/Oculars/src/ui_ocularDialog.h:1503
 msgid "Show sensor crop overlay"
 msgstr "Bijsnij sensor weergeven"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1503
+#: plugins/Oculars/src/ui_ocularDialog.h:1504
 msgid "Enable autozoom when switching CCD"
 msgstr "Autozoom inschakelen wanneer CCD wordt ingeschakeld"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1505
+#: plugins/Oculars/src/ui_ocularDialog.h:1506
 msgid ""
 "Show maximum exposure time for Solar system objects to avoid movement streak"
 msgstr ""
 "toon voor zonnestelselobjecten de maximale belichtingstijd zonder risico op "
 "strepen door beweging"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1507
+#: plugins/Oculars/src/ui_ocularDialog.h:1508
 msgid "Show max exposure time for moving objects"
 msgstr "Toon maximale belichtingstijd voor bewegende objecten"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1508
+#: plugins/Oculars/src/ui_ocularDialog.h:1509
 msgid "Telrad view"
 msgstr "Telradbeeld"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1512
+#: plugins/Oculars/src/ui_ocularDialog.h:1513
 msgctxt "abbreviation"
 msgid "FOV:"
 msgstr "FOV:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1514
+#: plugins/Oculars/src/ui_ocularDialog.h:1515
 msgid "FOV for circle 1"
 msgstr "FOV voor cirkel 1"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1517
+#: plugins/Oculars/src/ui_ocularDialog.h:1518
 msgid "FOV for circle 2"
 msgstr "FOV voor cirkel 2"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1520
+#: plugins/Oculars/src/ui_ocularDialog.h:1521
 msgid "FOV for circle 3"
 msgstr "FOV voor cirkel 3"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1523
+#: plugins/Oculars/src/ui_ocularDialog.h:1524
 msgid "FOV for circle 4"
 msgstr "FOV voor cirkel 4"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1525
+#: plugins/Oculars/src/ui_ocularDialog.h:1526
 msgid "Restore original Telrad FOV"
 msgstr "Originele Telrad FOV instellen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1526
+#: plugins/Oculars/src/ui_ocularDialog.h:1527
 msgid "Enable autozoom when switching Telrad"
 msgstr "Autozoom inschakelen wanneer Telrad wordt ingeschakeld"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1527
+#: plugins/Oculars/src/ui_ocularDialog.h:1528
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:401
 msgid "General"
 msgstr "Algemeen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1528
-#: plugins/Oculars/src/ui_ocularDialog.h:1537
-#: plugins/Oculars/src/ui_ocularDialog.h:1543
-#: plugins/Oculars/src/ui_ocularDialog.h:1562
+#: plugins/Oculars/src/ui_ocularDialog.h:1529
+#: plugins/Oculars/src/ui_ocularDialog.h:1538
+#: plugins/Oculars/src/ui_ocularDialog.h:1544
+#: plugins/Oculars/src/ui_ocularDialog.h:1563
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:174
 msgid "Add"
 msgstr "Toevoegen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1531
+#: plugins/Oculars/src/ui_ocularDialog.h:1532
 msgid "Has permanent cross-hairs"
 msgstr "Heeft permanente kruisdraden"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1532
+#: plugins/Oculars/src/ui_ocularDialog.h:1533
 msgid "Binoculars"
 msgstr "Verrekijker"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1535
-#: plugins/Oculars/src/ui_ocularDialog.h:1539
-#: plugins/Oculars/src/ui_ocularDialog.h:1549
-#: plugins/Oculars/src/ui_ocularDialog.h:1564
+#: plugins/Oculars/src/ui_ocularDialog.h:1536
+#: plugins/Oculars/src/ui_ocularDialog.h:1540
+#: plugins/Oculars/src/ui_ocularDialog.h:1550
+#: plugins/Oculars/src/ui_ocularDialog.h:1565
 #: plugins/Satellites/src/ui_satellitesDialog.h:1295
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:559
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:203
 msgid "Name:"
 msgstr "Naam:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1536
+#: plugins/Oculars/src/ui_ocularDialog.h:1537
 msgid "Eyepieces"
 msgstr "Oculairs"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1540
+#: plugins/Oculars/src/ui_ocularDialog.h:1541
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -17736,35 +17736,35 @@ msgstr ""
 "Een vermenigvuldigingsfactor >1 vergroot de brandpuntsafstand (Barlow-lens)."
 " Waarden <1 verkleind de brandpuntsafstand (Shapley-lens)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1541
+#: plugins/Oculars/src/ui_ocularDialog.h:1542
 msgid "Multiplier:"
 msgstr "Vermenigvuldigingsfactor:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1542
+#: plugins/Oculars/src/ui_ocularDialog.h:1543
 msgid "Lenses"
 msgstr "Lenzen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1545
+#: plugins/Oculars/src/ui_ocularDialog.h:1546
 msgid "Off-Axis guider"
 msgstr "Off-Axis geleider"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1546
+#: plugins/Oculars/src/ui_ocularDialog.h:1547
 msgid "Resolution y:"
 msgstr "Resolutie y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1547
+#: plugins/Oculars/src/ui_ocularDialog.h:1548
 msgid "Binning x:"
 msgstr "Binning x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1548
+#: plugins/Oculars/src/ui_ocularDialog.h:1549
 msgid "Resolution x:"
 msgstr "Resolutie x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1550
+#: plugins/Oculars/src/ui_ocularDialog.h:1551
 msgid "Prism/CCD height:"
 msgstr "Prisma/CCD hoogte:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1552
+#: plugins/Oculars/src/ui_ocularDialog.h:1553
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the center of "
 "the Prism"
@@ -17772,51 +17772,51 @@ msgstr ""
 "Dit is de afstand van het middelpunt van de Beeldsensor tot het middelpunt "
 "van het Prisma"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1554
+#: plugins/Oculars/src/ui_ocularDialog.h:1555
 msgid "Prism/CCD distance:"
 msgstr "Prisma/CCD afstand:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1555
+#: plugins/Oculars/src/ui_ocularDialog.h:1556
 msgid "Rotation Angle:"
 msgstr "Rotatiehoek:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1556
+#: plugins/Oculars/src/ui_ocularDialog.h:1557
 msgid "Binning y:"
 msgstr "Binning y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1557
+#: plugins/Oculars/src/ui_ocularDialog.h:1558
 msgid "Prism/CCD width:"
 msgstr "Prisma/CCD breedte:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1558
+#: plugins/Oculars/src/ui_ocularDialog.h:1559
 msgid "Chip height:"
 msgstr "Chip hoogte:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1559
+#: plugins/Oculars/src/ui_ocularDialog.h:1560
 msgid "Chip width:"
 msgstr "Chip breedte:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1560
+#: plugins/Oculars/src/ui_ocularDialog.h:1561
 msgid "Position angle:"
 msgstr "Positiehoek:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1561
+#: plugins/Oculars/src/ui_ocularDialog.h:1562
 msgid "Sensors"
 msgstr "Sensoren"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1565
+#: plugins/Oculars/src/ui_ocularDialog.h:1566
 msgid "Horizontal flip"
 msgstr "Horizontaal spiegelen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1566
+#: plugins/Oculars/src/ui_ocularDialog.h:1567
 msgid "Vertical flip"
 msgstr "Verticaal spiegelen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1567
+#: plugins/Oculars/src/ui_ocularDialog.h:1568
 msgid "Equatorial Mount"
 msgstr "Equatoriale montering"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1570
+#: plugins/Oculars/src/ui_ocularDialog.h:1571
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:395
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:406
 msgid "Telescopes"

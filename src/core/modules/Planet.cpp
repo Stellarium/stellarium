@@ -592,7 +592,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 					cometType = qc_("short-period", "type of comet");
 				else
 					cometType = qc_("periodic", "type of comet");
-
 			}
 			oss << QString("%1: <b>%2</b> (%3)<br/>").arg(q_("Type"), getObjectTypeI18n(), cometType);
 		}

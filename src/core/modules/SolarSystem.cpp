@@ -1821,7 +1821,6 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			}
 			computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
 		} // end of default (original single-threaded) solution
-
 		}
 	}
 	else

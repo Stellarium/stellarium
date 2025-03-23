@@ -8,7 +8,7 @@ A strong-willed girl became so angry when her mother would not give her any of a
 
 ##### Hunting trip &mdash; Pleiades, Aldebaran and Orion
 
-According to the Namaquas, the Pleiades were the daughters of the sky god. Their husband (Aldebaran) shot his arrow (Orion&#8217;s sword) at three zebras (Orion's belt), but missed. Now he is stuck. He cannot go home because he had not supplied meat for his family, and he cannot fetch his arrow because of the fierce lion (Betelgueuse), watching the zebras.
+According to the Namaquas, the Pleiades were the daughters of the sky god. Their husband (Aldebaran) shot his arrow (Orion&#8217;s sword) at three zebras (Orion's belt), but missed. Now he is stuck. He cannot go home because he had not supplied meat for his family, and he cannot fetch his arrow because of the fierce lion (Betelgeuse), watching the zebras.
 
 ##### Other Legends
 

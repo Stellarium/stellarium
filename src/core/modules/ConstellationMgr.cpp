@@ -49,14 +49,14 @@
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
-	: hipStarMgr(_hip_stars),
-	  isolateSelected(false),
-	  flagConstellationPick(false),
-	  constellationDisplayStyle(ConstellationMgr::constellationsTranslated),
-	  artFadeDuration(2.),
-	  artIntensity(0),
-	  artIntensityMinimumFov(1.0),
-	  artIntensityMaximumFov(2.0),
+        : hipStarMgr(_hip_stars),
+          isolateSelected(false),
+          flagConstellationPick(false),
+          constellationDisplayStyle(ConstellationMgr::constellationsTranslated),
+          artFadeDuration(2.),
+          artIntensity(0),
+          artIntensityMinimumFov(1.0),
+          artIntensityMaximumFov(2.0),
           artDisplayed(0),
           boundariesDisplayed(0),
           boundariesFadeDuration(1.),
@@ -64,9 +64,9 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
           linesFadeDuration(0.),
           namesDisplayed(0),
           namesFadeDuration(1.),
-	  checkLoadingData(false),
-	  constellationLineThickness(1),
-	  constellationBoundariesThickness(1)
+          checkLoadingData(false),
+          constellationLineThickness(1),
+          constellationBoundariesThickness(1)
 {
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
@@ -588,7 +588,6 @@ void ConstellationMgr::loadLinesNamesAndArt(const QJsonArray &constellationsData
 	setFlagLines(linesDisplayed);
 	setFlagLabels(namesDisplayed);
 	setFlagBoundaries(boundariesDisplayed);
-
 }
 
 void ConstellationMgr::draw(StelCore* core)
