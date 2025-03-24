@@ -207,6 +207,13 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="setMosaicToViewButton">
+           <property name="text">
+            <string>Center camera on current view</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="setMosaicToObjectButton">
            <property name="text">
             <string>Center camera on current object</string>

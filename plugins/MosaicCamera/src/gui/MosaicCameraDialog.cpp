@@ -137,7 +137,7 @@ void MosaicCameraDialog::createDialogContent()
 {
 	mc = GETSTELMODULE(MosaicCamera);
 	ui->setupUi(dialog);
-	ui->tabs->setCurrentIndex(0);
+	ui->tabs->setCurrentIndex(1);
 
 	QStringList cameraNames = mc->getCameraNames();
     ui->cameraListWidget->addItems(cameraNames);
@@ -183,6 +183,8 @@ void MosaicCameraDialog::createDialogContent()
 	connect(ui->visibleCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateVisibility(bool)));
 	connect(ui->setMosaicToObjectButton, SIGNAL(clicked()), mc, SLOT(setRADecToObject()));
 	connect(ui->setViewToCameraButton, SIGNAL(clicked()), mc, SLOT(setViewToCamera()));
+	connect(ui->setMosaicToViewButton, SIGNAL(clicked()), mc, SLOT(setRADecToView()));
+
 	// General tab
 	connectBoolProperty(ui->checkBoxShowButton, "MosaicCamera.showButton");
 	connect(ui->pushButtonSaveSettings, SIGNAL(clicked()), mc, SLOT(saveSettings()));
