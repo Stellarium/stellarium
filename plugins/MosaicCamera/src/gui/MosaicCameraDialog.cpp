@@ -208,7 +208,7 @@ void MosaicCameraDialog::setAboutHtml(void)
 	html += "<p>" + q_("The Dark Energy Camera. A 570 megapixel camera mounted on the Blanco telescope at the Cerro Tololo Inter-American Observatory.  See more at: ") + "<a href=\"https://www.darkenergysurvey.org/the-des-project/instrument/\">https://www.darkenergysurvey.org/the-des-project/instrument/</a>" + "</p>";
 	html += "<h4>" + q_("MegaPrime") + "</h4>";
 	html += "<p>" + q_("A 378 megapixel camera mounted on the Canada-France-Hawaii Telescope at Mauna Kea Observatory.  See more at: ") + "<a href=\"https://www.cfht.hawaii.edu/Instruments/Imaging/MegaPrime/\">https://www.cfht.hawaii.edu/Instruments/Imaging/MegaPrime/</a>" + "</p>";
-	html += "<h4>" + q_("Latiss") + "</h4>";
+	html += "<h4>" + q_("LATISS") + "</h4>";
 	html += "<p>" + q_("The LSST Atmospheric Transmission Imager and Slitless Spectrograph.  A 16 megapixel camera mounted on the Rubin Observatory Auxiliary telescope.  See more at: ") + "<a href=\"https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/\">https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/</a>" + "</p>";
 	html += "</body></html>";
 
