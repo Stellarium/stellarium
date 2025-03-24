@@ -44,12 +44,13 @@ struct PolygonSet
 /// @brief Represents a camera with its properties and associated polygon sets.
 struct Camera
 {
-    QString name;                    ///< The name of the camera.
-    double ra;                       ///< Right Ascension of camera pointing [deg]
-    double dec;                      ///< Declination of camera pointing [deg]
-    double rotation;                 ///< Rotation angle of the camera [deg]
-    bool visible;                    ///< Visibility status of the camera.
+    QString name;                     ///< The name of the camera.
+    double ra;                        ///< Right Ascension of camera pointing [deg]
+    double dec;                       ///< Declination of camera pointing [deg]
+    double rotation;                  ///< Rotation angle of the camera [deg]
+    bool visible;                     ///< Visibility status of the camera.
     QVector<PolygonSet> polygon_sets; ///< Collection of polygon sets associated with the camera.
+	double fieldDiameter;             ///< Estimated field diameter of the camera [deg]
 };
 
 //! @class MosaicCamera
@@ -170,6 +171,8 @@ private:
 	void loadCameraOrder();
 	void initializeUserData();
 	void copyResourcesToUserDirectory();
+	void setCameraFieldDiameter(Camera& camera);
+	static double gnomonicChordSeparationSquared(const QPointF& p1, const QPointF& p2);
 
 	StelGui* gui;
 	MosaicCameraDialog* configDialog;

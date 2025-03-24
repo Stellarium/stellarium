@@ -265,6 +265,7 @@ void MosaicCamera::loadBuiltInCameras()
         camera.visible = false;
         cameras.insert(camera.name, camera);
         readPolygonSetsFromJson(camera.name, userDirectory + camera.name + ".json");
+        setCameraFieldDiameter(cameras[camera.name]);
     }
     qDebug() << "[MosaicCamera] Loaded" << cameras.size() << "cameras";
     qDebug() << "[MosaicCamera] Camera names:" << cameras.keys();
@@ -324,6 +325,46 @@ void MosaicCamera::readPolygonSetsFromJson(const QString& cameraName, const QStr
     {
         cameras[cameraName].polygon_sets = polygonSets;
     }
+}
+
+void MosaicCamera::setCameraFieldDiameter(Camera& camera)
+{
+    // First get all corners of all polygons
+    QVector<QPointF> allCorners;
+    for (const auto& polygonSet : camera.polygon_sets)
+    {
+        for (const auto& polygon : polygonSet.corners)
+        {
+            allCorners.append(polygon);
+        }
+    }
+
+    // Now calculate the maximum distance between any two corners
+    double maxChordSq = 0.0;
+    for (int i = 0; i < allCorners.size(); ++i)
+    {
+        for (int j = i + 1; j < allCorners.size(); ++j)
+        {
+            double chordSq = gnomonicChordSeparationSquared(allCorners[i], allCorners[j]);
+            if (chordSq > maxChordSq)
+            {
+                maxChordSq = chordSq;
+            }
+        }
+    }
+    camera.fieldDiameter = 2.0 * asin(0.5 * sqrt(maxChordSq)) * M_180_PI;
+}
+
+double MosaicCamera::gnomonicChordSeparationSquared(const QPointF& p1, const QPointF& p2)
+{
+    // Compute unit circle coordinates
+    Vec3d v1(p1.x(), p1.y(), 1.0);
+    Vec3d v2(p2.x(), p2.y(), 1.0);
+    v1.normalize();
+    v2.normalize();
+
+    // Compute the chordal distance
+    return (v1-v2).normSquared();
 }
 
 void MosaicCamera::setRA(const QString& cameraName, double ra)
@@ -423,6 +464,7 @@ void MosaicCamera::setViewToCamera()
     StelUtils::spheToRect(ra/M_180_PI, dec/M_180_PI, 1.0, aim);
     const Vec3d aimUp(0.0, 0.0, 1.0);
     GETSTELMODULE(StelMovementMgr)->moveToJ2000(aim, aimUp);
+    GETSTELMODULE(StelMovementMgr)->setFov(5 * cameras[currentCamera].fieldDiameter);
 }
 
 void MosaicCamera::incrementRotation()
