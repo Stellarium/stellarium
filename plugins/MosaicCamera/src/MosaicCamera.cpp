@@ -152,6 +152,7 @@ void MosaicCamera::init()
     addAction("actionShow_MosaicCamera_dialog", N_("Mosaic Camera"), N_("Show settings dialog"), configDialog, "visible");
     addAction("actionSetRADecToView", N_("Mosaic Camera"), N_("Set RA/Dec to current view"), "setRADecToView()", "");
     addAction("actionSetRADecToObject", N_("Mosaic Camera"), N_("Set RA/Dec to current object"), "setRADecToObject()", "");
+    addAction("actionSetViewToCamera", N_("Mosaic Camera"), N_("Set view to current camera"), "setViewToCamera()", "");
     addAction("actionIncrementRotation", N_("Mosaic Camera"), N_("Increment rotation"), "incrementRotation()", "");
     addAction("actionDecrementRotation", N_("Mosaic Camera"), N_("Decrement rotation"), "decrementRotation()", "");
     addAction("actionNextCamera", N_("Mosaic Camera"), N_("Next camera"), "nextCamera()", "");
@@ -390,8 +391,8 @@ void MosaicCamera::setRADecToView()
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, current);
     // convert to degrees from radians
-	ra = std::fmod((ra*180/M_PI)+360., 360.);
-	dec = dec*180/M_PI;
+	ra = std::fmod((ra*M_180_PI)+360., 360.);
+	dec = dec*M_180_PI;
     setCurrentRA(ra);
     setCurrentDec(dec);
 }
@@ -411,6 +412,17 @@ void MosaicCamera::setRADecToObject()
     dec = dec*M_180_PI;
     setCurrentRA(ra);
     setCurrentDec(dec);
+}
+
+void MosaicCamera::setViewToCamera()
+{
+    double ra = getRA(currentCamera);
+    double dec = getDec(currentCamera);
+
+    Vec3d aim;
+    StelUtils::spheToRect(ra/M_180_PI, dec/M_180_PI, 1.0, aim);
+    const Vec3d aimUp(0.0, 0.0, 1.0);
+    GETSTELMODULE(StelMovementMgr)->moveToJ2000(aim, aimUp);
 }
 
 void MosaicCamera::incrementRotation()

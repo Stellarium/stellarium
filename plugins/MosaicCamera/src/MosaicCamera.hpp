@@ -140,6 +140,7 @@ public slots:
 	void setPosition(const QString& cameraName, double ra, double dec, double rotation);
 	void setRADecToView();
 	void setRADecToObject();
+	void setViewToCamera();
 	void incrementRotation();
 	void decrementRotation();
 	void nextCamera();

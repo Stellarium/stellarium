@@ -181,11 +181,11 @@ void MosaicCameraDialog::createDialogContent()
 	connect(ui->DecSpinBox, SIGNAL(valueChanged()), this, SLOT(updateDec()));
 	connect(ui->RotationSpinBox, SIGNAL(valueChanged()), this, SLOT(updateRotation()));
 	connect(ui->visibleCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateVisibility(bool)));
-
+	connect(ui->setMosaicToObjectButton, SIGNAL(clicked()), mc, SLOT(setRADecToObject()));
+	connect(ui->setViewToCameraButton, SIGNAL(clicked()), mc, SLOT(setViewToCamera()));
 	// General tab
 	connectBoolProperty(ui->checkBoxShowButton, "MosaicCamera.showButton");
 	connect(ui->pushButtonSaveSettings, SIGNAL(clicked()), mc, SLOT(saveSettings()));
-	connect(ui->setToObjectButton, SIGNAL(clicked()), mc, SLOT(setRADecToObject()));
 }
 
 void MosaicCameraDialog::setAboutHtml(void)

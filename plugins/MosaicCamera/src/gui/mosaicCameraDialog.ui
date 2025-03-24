@@ -200,9 +200,16 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="setToObjectButton">
+          <widget class="QPushButton" name="setViewToCameraButton">
            <property name="text">
-            <string>Center on current object</string>
+            <string>Center view on camera</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="setMosaicToObjectButton">
+           <property name="text">
+            <string>Center camera on current object</string>
            </property>
           </widget>
          </item>
