@@ -202,7 +202,7 @@ SplashScreen::SplashScreenWidget::SplashScreenWidget(const double sizeRatio)
 	subtitleHM = getRealTextWidthAndOffset(*textHolder, subtitleFont, subtitleText);
 
 	versionFont = splashFont;
-	versionFont.setPixelSize(23 * sizeRatio);
+	versionFont.setPixelSize(22 * sizeRatio);
 	versionFont.setBold(true);
 	const auto lastTitleLetterBR = QFontMetrics(titleFont).tightBoundingRect(titleText.back());
 	const auto versionText = StelUtils::getApplicationPublicVersion();
