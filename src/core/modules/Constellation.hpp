@@ -74,14 +74,10 @@ private:
 	//! observer centered J2000 coordinates.
 	Vec3d getJ2000EquatorialPos(const StelCore*) const override {return XYZname;}
 
-	//! @param record string containing the following whitespace
-	//! separated fields: abbreviation - a three character abbreviation
-	//! for the constellation, a number of lines (pairs), and a list of Hipparcos
-	//! catalogue numbers which, when connected pairwise, form the lines of the
-	//! constellation.
+	//! @param data a JSON formatted constellation record from index.json
 	//! @param starMgr a pointer to the StarManager object.
 	//! @return false if can't parse record (invalid result!), else true.
-	bool read(const QJsonObject& data, StarMgr *starMgr, bool preferNativeNames);
+	bool read(const QJsonObject& data, StarMgr *starMgr);
 
 	//! Draw the constellation name. Depending on completeness of names and data, there may be a rich set of options to display.
 	void drawName(StelPainter& sPainter, CulturalDisplayStyle style) const;
@@ -94,7 +90,7 @@ private:
 	//! This member tests to see if a star is one of those which make up
 	//! the lines of a Constellation.
 	//! @return a pointer to the constellation which the star is a part of,
-	//! or Q_NULLPTR if the star is not part of a constellation
+	//! or nullptr if the star is not part of a constellation
 	const Constellation* isStarIn(const StelObject*) const;
 
 	//! Get the brightest star in a Constellation.
@@ -107,12 +103,18 @@ private:
 	QString getNameI18n() const override {return nameI18;}
 	//! Get the English name for the Constellation.
 	QString getEnglishName() const override {return englishName;}
-	//! Get the short name for the Constellation (returns the abbreviation).
-	QString getShortName() const {return abbreviation;}
+	//! Get the short name for the Constellation (returns the translated version of abbreviation).
+	QString getShortName() const {return abbreviationI18n;}
 	//! Get the native name for the Constellation
-	QString getNativeName() const {return nativeName;}
-	//! Get pronouncement of the native name for the Constellation
-	QString getNativeNamePronounce() const {return nativeNamePronounce;}
+	QString getNameNative() const override {return nativeName;}
+	//! Get (translated) pronouncement of the native name for the Constellation
+	QString getNamePronounce() const override {return (nativeNamePronounceI18n.length()>0 ? nativeNamePronounceI18n : nativeName);}
+	//! Combine screen label from various components, depending on settings in SkyCultureMgr
+	QString getScreenLabel() const override;
+	//! Combine InfoString label from various components, depending on settings in SkyCultureMgr
+	QString getInfoLabel() const override;
+	//! Underlying worker
+	QString getCultureLabel(StelObject::CulturalDisplayStyle style) const;
 	//! Draw the lines for the Constellation.
 	//! This method uses the coords of the stars (optimized for use through
 	//! the class ConstellationMgr only).
@@ -158,16 +160,21 @@ private:
 	//! According to practice as of V0.13.1, this may be an empty string.
 	//! If empty, will be filled with englishName.
 	QString nativeName;
-	//! Pronouncement of the native name or the romanized version of native name of constellation
+	//! Latin-letter based transliteration geared at english pronounciation
 	QString nativeNamePronounce;
-	//! Pronunciation aid in International Phonetic Alphabet (future addition)
+	//! Translated transliteration geared at pronounciation in user language
+	QString nativeNamePronounceI18n;
+	//! Pronunciation aid in International Phonetic Alphabet (optional)
 	QString nativeNameIPA;
 	//! A scientific transliteration that does not help pronunciation. (Example: Tibetan/Wylie.)
 	QString nativeNameTranslit;
 	//! Abbreviation (the short name or designation of constellations)
-	//! For non-western, a skyculture designer must invent it. (usually 2-5 letters)
+	//! For non-western, a skyculture designer must invent it. (usually 2-5 Latin letters and numerics)
 	//! This MUST be filled and be unique within a sky culture.
 	QString abbreviation;
+	//! Translated version of abbreviation (the short name or designation of constellations)
+	//! Latin-based languages should not translate it, but it may be useful to translate for other glyph systems.
+	QString abbreviationI18n;
 	//! The context for English name of constellation (using for correct translation via gettext)
 	QString context;
 	//! Direction vector pointing on constellation name drawing position

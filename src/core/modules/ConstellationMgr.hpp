@@ -341,7 +341,7 @@ private:
 
 	//! Load constellation line shapes, art textures and boundaries shapes from data files.
 	//! @param constellationsData The structure describing all the constellations
-	void loadLinesNamesAndArt(const QJsonArray& constellationsData, const StelSkyCulture& culture, bool preferNativeNames);
+	void loadLinesNamesAndArt(const StelSkyCulture& culture);
 
 	//! Load the constellation boundary file.
 	//! This function deletes any currently loaded constellation boundaries
@@ -389,8 +389,6 @@ private:
 	bool isolateSelected; // true to pick individual constellations.
 	bool flagConstellationPick; // TODO: CLEAR DESCRIPTION
 	std::vector<std::vector<Vec3d> *> allBoundarySegments;
-
-	QStringList constellationsEnglishNames;
 
 	//! this controls how constellations (and also star names) are printed: Abbreviated/as-given/translated
 	StelObject::CulturalDisplayStyle constellationDisplayStyle;

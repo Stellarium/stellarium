@@ -47,7 +47,7 @@ public:
 	enum InfoStringGroupFlags
 	{
 		None			= 0x00000000, //!< Show Nothing
-		Name			= 0x00000001, //!< An object's name
+		Name			= 0x00000001, //!< An object's name as further defined by CulturalDisplayStyle found in SkyCultureMgr.
 		CatalogNumber		= 0x00000002, //!< Catalog numbers
 		Magnitude		= 0x00000004, //!< Magnitude related data
 		RaDecJ2000		= 0x00000008, //!< The equatorial position (J2000 ref)
@@ -220,11 +220,37 @@ public:
 	//! should search through all ID variants, but this method only returns one of them.
 	virtual QString getID() const = 0;
 
-	//! Return object's name in english
+	//! Return object's name in english.
+	//! For non-default skycultures, this is the english translation of the native name.
 	virtual QString getEnglishName() const = 0;
 
 	//! Return translated object's name
+	//! For non-default skycultures, this is the user language translation of the english name (which should be native translated to english).
 	virtual QString getNameI18n() const = 0;
+
+	//! Return object's native name in the glyphs as written in skyculture descriptions (index.json).
+	//! For non-default skycultures, this is as close to the original as possible.
+	virtual QString getNameNative() const {return "";}
+
+	//! Return a Latin-letter based transliteration geared at english pronounciation of the native name.
+	//! This is optional but essential for all skycultures in languages which use non-Latin glyphs.
+	//! When user language is English, this is the string from index.json.
+	//! TBD: When user language is different, this may appear adapted to user language.
+	virtual QString getNamePronounce() const {return "";}
+
+	//! Return a secondary scientific transliteration of the native name.
+	//! This is optional and in fact rarely used. An example would be Wylie-transliteration of Tibetan.
+	virtual QString getNameTransliteration() const {return "";}
+
+	//! Return native name in International Phonetic Alphabet. Optional.
+	virtual QString getNameIPA() const {return "";}
+
+	//! Return screen label (to be used in the sky display. Most users will use some short label)
+	virtual QString getScreenLabel() const {return "";}
+
+	//! Return InfoString label (to be used in the InfoString).
+	//! When dealing with foreign skycultures, many users will want this to be longer, with more name components.
+	virtual QString getInfoLabel() const {return "";}
 
 	//! Get observer-centered equatorial coordinates at equinox J2000, including aberration
 	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const = 0;

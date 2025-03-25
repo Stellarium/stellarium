@@ -115,10 +115,25 @@ private:
 	QString nameI18;
 	//! Name in english (second column in asterism_names.eng.fab)
 	QString englishName;
+	//! Name in native language (original name of constellation in the source)
+	//! According to practice as of V0.13.1, this may be an empty string.
+	//! If empty, will be filled with englishName.
+	QString nativeName;
+	//! Latin-letter based transliteration geared at english pronounciation
+	QString nativeNamePronounce;
+	//! Translated transliteration geared at pronounciation in user language
+	QString nativeNamePronounceI18;
+	//! Pronunciation aid in International Phonetic Alphabet (optional)
+	QString nativeNameIPA;
+	//! A scientific transliteration that does not help pronunciation. (Example: Tibetan/Wylie.)
+	QString nativeNameTranslit;
 	//! Abbreviation
 	//! A skyculture designer must invent it. (usually 2-5 letters)
 	//! This MUST be filled and be unique within a sky culture.
-	QString abbreviation;	
+	QString abbreviation;
+	//! Translated version of abbreviation (the short name or designation of asterism)
+	//! Latin-based languages should not translate it, but it may be useful to translate for other glyph systems.
+	QString abbreviationI18;
 	//! Context for name
 	QString context;
 	//! Direction vector pointing on constellation name drawing position
