@@ -28,9 +28,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: JSONlint
-      run: jsonlint -S ${{github.workspace}}/skycultures/*/index.json
-
     - name: Configure CMake
       shell: bash
       run: |

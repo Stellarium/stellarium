@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.actor, 'transifex')"
     steps:
-      - name: check if prs are dirty
+      - name: Check if PRs are dirty
         uses: eps1lon/actions-label-merge-conflict@releases/2.x
         with:
           dirtyLabel: "has conflicts"
@@ -44,3 +44,13 @@ jobs:
       - name: Check CRLF line endings
         uses: erclu/check-crlf@v1
 
+  check-json:
+    name: "Linting JSON"
+    runs-on: ubuntu-latest
+    if: "!contains(github.actor, 'transifex')"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Linting JSON
+        run: jsonlint -S ${{github.workspace}}/skycultures/*/index.json
