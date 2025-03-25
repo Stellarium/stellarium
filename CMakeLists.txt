@@ -831,7 +831,7 @@ IF(ENABLE_XLSX)
      # version exports "QXlsxQt5" (or ...Qt6) instead. Try both, but
      # download newer one, because 1.4.4 doesn't link on windows when
      # added via add_subdirectory().
-     FIND_PACKAGE(QXlsx NAMES QXlsxQt${QT_VERSION_MAJOR} QXlsx)
+     FIND_PACKAGE(QXlsx NAMES QXlsxQt${QT_VERSION_MAJOR} QXlsx QUIET)
      IF(QXlsx_FOUND)
           MESSAGE(STATUS "Using system-provided QXlsx ${QXlsx_VERSION}")
      ELSE()
