@@ -49,6 +49,13 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.actor, 'transifex')"
     steps:
+      - name: Install JSON linter
+        run: |
+        sudo apt remove php7.* -y
+        sudo apt remove php8.* -y
+        sudo apt update
+        sudo apt install -y jsonlint python3-demjson
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
