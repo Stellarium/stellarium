@@ -10,18 +10,18 @@
 # Xavier PG, 2023
 # Susanna Pujol, 2024
 # Pep Pujols Puigdesens, 2025
-# Daniel Alomar <daniel.adastra@gmail.com>, 2025
 # Gemma Domènech <info@gemmadomenech.com>, 2025
 # Pascual Martínez Reig <pascualmralcoi@gmail.com>, 2025
+# Daniel Alomar <daniel.adastra@gmail.com>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-03-17 23:39+0700\n"
+"POT-Creation-Date: 2025-03-23 22:14+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Pascual Martínez Reig <pascualmralcoi@gmail.com>, 2025\n"
+"Last-Translator: Daniel Alomar <daniel.adastra@gmail.com>, 2025\n"
 "Language-Team: Catalan (https://app.transifex.com/stellarium/teams/80998/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:257
+#: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:260
 #: src/core/modules/Constellation.cpp:360
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:251
 #: src/core/modules/Nebula.cpp:253 src/core/modules/Planet.cpp:597
@@ -68,7 +68,7 @@ msgstr "Marcador"
 msgid "asterism"
 msgstr "asterisme"
 
-#: src/core/modules/AsterismMgr.cpp:103
+#: src/core/modules/AsterismMgr.cpp:102
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:471
 #: src/core/modules/GridLinesMgr.cpp:2007
 #: src/core/modules/SpecialMarkersMgr.cpp:311
@@ -83,21 +83,21 @@ msgstr "asterisme"
 msgid "Display Options"
 msgstr "Opcions de visualització"
 
-#: src/core/modules/AsterismMgr.cpp:104 src/ui_viewDialog.h:4560
+#: src/core/modules/AsterismMgr.cpp:103 src/ui_viewDialog.h:4560
 #: src/ui_configurationDialog.h:2109
 msgid "Asterism lines"
 msgstr "Línies d'asterism"
 
-#: src/core/modules/AsterismMgr.cpp:105 src/ui_viewDialog.h:4608
+#: src/core/modules/AsterismMgr.cpp:104 src/ui_viewDialog.h:4608
 #: src/ui_configurationDialog.h:2110
 msgid "Asterism labels"
 msgstr "Etiquetes d'asterism"
 
-#: src/core/modules/AsterismMgr.cpp:106
+#: src/core/modules/AsterismMgr.cpp:105
 msgid "Toggle single asterism selection mode"
 msgstr "Commuta el mode de selecció d'un sol asterisme"
 
-#: src/core/modules/AsterismMgr.cpp:107 src/ui_viewDialog.h:4564
+#: src/core/modules/AsterismMgr.cpp:106 src/ui_viewDialog.h:4564
 msgid "Ray helpers"
 msgstr "Ajudants de raigs"
 
@@ -2750,7 +2750,7 @@ msgstr "Augmentar Sol"
 
 #: src/core/modules/SolarSystem.cpp:360
 msgid "Native planet names (from sky culture)"
-msgstr ""
+msgstr "Noms nadius dels planetes (segons la cultura del cel)\""
 
 #: src/core/modules/SolarSystem.cpp:361 src/ui_viewDialog.h:3777
 msgid "Mark minor bodies"
@@ -2889,7 +2889,7 @@ msgstr "Commuta els Mapes Jeràrquics Progressius"
 
 #: src/core/modules/HipsMgr.cpp:157
 msgid "Toggle HiPS dialog"
-msgstr ""
+msgstr "Commuta el diàleg HiPS"
 
 #: src/core/SolarEclipseComputer.cpp:2032 src/gui/AstroCalcDialog.cpp:4007
 msgid "Solar Eclipse"
@@ -3859,12 +3859,12 @@ msgstr ""
 "definits per l'usuari."
 
 #: src/core/StelCore.cpp:2772 src/core/SimbadSearcher.cpp:178
-#: src/gui/ObsListDialog.cpp:85 src/gui/ObsListDialog.cpp:963
-#: src/gui/ObsListDialog.cpp:987 src/gui/ObsListDialog.cpp:1036
-#: src/gui/ObsListDialog.cpp:1052 src/gui/ObsListDialog.cpp:1093
-#: src/gui/ObsListDialog.cpp:1105 src/gui/ObsListDialog.cpp:1114
-#: src/gui/ObsListDialog.cpp:1132 src/gui/ObsListDialog.cpp:1152
-#: src/gui/ObsListDialog.cpp:1315 src/gui/ObsListDialog.cpp:1320
+#: src/gui/ObsListDialog.cpp:85 src/gui/ObsListDialog.cpp:971
+#: src/gui/ObsListDialog.cpp:995 src/gui/ObsListDialog.cpp:1044
+#: src/gui/ObsListDialog.cpp:1060 src/gui/ObsListDialog.cpp:1101
+#: src/gui/ObsListDialog.cpp:1113 src/gui/ObsListDialog.cpp:1122
+#: src/gui/ObsListDialog.cpp:1140 src/gui/ObsListDialog.cpp:1160
+#: src/gui/ObsListDialog.cpp:1323 src/gui/ObsListDialog.cpp:1328
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "Error"
@@ -4256,12 +4256,12 @@ msgstr "Carregant '%1'"
 msgid "Loading '%1' from %2"
 msgstr "Carregant '%1' de %2 "
 
-#: src/core/StelSkyCultureMgr.cpp:363
+#: src/core/StelSkyCultureMgr.cpp:360
 msgctxt "sky culture classification"
 msgid "ethnographic"
 msgstr "etnogràfic"
 
-#: src/core/StelSkyCultureMgr.cpp:364
+#: src/core/StelSkyCultureMgr.cpp:361
 msgid ""
 "Provided by ethnographic researchers based on interviews of indigenous "
 "people."
@@ -4269,12 +4269,12 @@ msgstr ""
 "Proporcionada per investigadors etnogràfics basats en entrevistes a pobles "
 "indígenes."
 
-#: src/core/StelSkyCultureMgr.cpp:368
+#: src/core/StelSkyCultureMgr.cpp:365
 msgctxt "sky culture classification"
 msgid "historical"
 msgstr "històric"
 
-#: src/core/StelSkyCultureMgr.cpp:369
+#: src/core/StelSkyCultureMgr.cpp:366
 msgid ""
 "Provided by historians based on historical written sources from a (usually "
 "short) period of the past."
@@ -4282,12 +4282,12 @@ msgstr ""
 "Proporcionats per historiadors basats en fonts històriques escrites d'un "
 "període (generalment curt) del passat."
 
-#: src/core/StelSkyCultureMgr.cpp:373
+#: src/core/StelSkyCultureMgr.cpp:370
 msgctxt "sky culture classification"
 msgid "single"
 msgstr "únic"
 
-#: src/core/StelSkyCultureMgr.cpp:374
+#: src/core/StelSkyCultureMgr.cpp:371
 msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
@@ -4295,24 +4295,24 @@ msgstr ""
 "Representa una única font com un atles històric o publicacions d'un sol "
 "autor."
 
-#: src/core/StelSkyCultureMgr.cpp:378
+#: src/core/StelSkyCultureMgr.cpp:375
 msgctxt "sky culture classification"
 msgid "comparative"
 msgstr "comparativa"
 
-#: src/core/StelSkyCultureMgr.cpp:379
+#: src/core/StelSkyCultureMgr.cpp:376
 msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
 msgstr ""
 "Compara i confronta elements d'almenys dues cultures del cel entre si."
 
-#: src/core/StelSkyCultureMgr.cpp:383
+#: src/core/StelSkyCultureMgr.cpp:380
 msgctxt "sky culture classification"
 msgid "traditional"
 msgstr "tradicional"
 
-#: src/core/StelSkyCultureMgr.cpp:384
+#: src/core/StelSkyCultureMgr.cpp:381
 msgid ""
 "Content represents 'common' knowledge by several members of an ethnic "
 "community, and the sky culture has been developed by members of such "
@@ -4322,12 +4322,12 @@ msgstr ""
 "d’una comunitat ètnica i la cultura del cel ha estat desenvolupada per "
 "membres d’aquesta comunitat."
 
-#: src/core/StelSkyCultureMgr.cpp:388
+#: src/core/StelSkyCultureMgr.cpp:385
 msgctxt "sky culture classification"
 msgid "personal"
 msgstr "personal"
 
-#: src/core/StelSkyCultureMgr.cpp:389
+#: src/core/StelSkyCultureMgr.cpp:386
 msgid ""
 "This is a personally developed sky culture which is not founded in published"
 " historical or ethnological research. Stellarium may include it when it is "
@@ -4337,12 +4337,12 @@ msgstr ""
 "investigació històrica o etnològica publicada. Stellarium pot incloure'l "
 "quan es 'prou bo\"' sense demostrar realment el seu contingut."
 
-#: src/core/StelSkyCultureMgr.cpp:393
+#: src/core/StelSkyCultureMgr.cpp:390
 msgctxt "sky culture classification"
 msgid "incomplete"
 msgstr "incomplet"
 
-#: src/core/StelSkyCultureMgr.cpp:394
+#: src/core/StelSkyCultureMgr.cpp:391
 msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
@@ -4351,16 +4351,16 @@ msgstr ""
 "i que sembla que està construïda sobre un fons sòlid. Es necessitarien més "
 "treballs."
 
-#: src/core/StelSkyCultureMgr.cpp:398
+#: src/core/StelSkyCultureMgr.cpp:395
 msgctxt "sky culture classification"
 msgid "undefined"
 msgstr "no definit"
 
-#: src/core/StelSkyCultureMgr.cpp:405
+#: src/core/StelSkyCultureMgr.cpp:402
 msgid "Classification"
 msgstr "Classificació"
 
-#: src/core/StelSkyCultureMgr.cpp:418
+#: src/core/StelSkyCultureMgr.cpp:415
 msgid ""
 "This sky culture is provided under unknown license. Please ask authors for "
 "details about license for this sky culture."
@@ -4368,7 +4368,7 @@ msgstr ""
 "Aquesta cultura del cel s'ha subministrat sense cap llicència coneguda. Si "
 "us plau pregunteu als autors per les dades de la seva llicència."
 
-#: src/core/StelSkyCultureMgr.cpp:424
+#: src/core/StelSkyCultureMgr.cpp:421
 msgid ""
 "This sky culture is provided under GNU General Public License. You can use "
 "it for commercial and non-commercial purposes, freely adapt it and share "
@@ -4378,7 +4378,7 @@ msgstr ""
 "pública General.  La pots fer servir per propòsits comercials i no "
 "comercials,  adaptar-lo lliurament  i compartir-ne feines d'adpatació."
 
-#: src/core/StelSkyCultureMgr.cpp:427 src/core/StelSkyCultureMgr.cpp:436
+#: src/core/StelSkyCultureMgr.cpp:424 src/core/StelSkyCultureMgr.cpp:433
 msgid ""
 "You can use it for commercial and non-commercial purposes, freely adapt it "
 "and share adapted work."
@@ -4386,7 +4386,7 @@ msgstr ""
 "Podeu utilitzar-lo amb finalitats comercials i no comercials, adaptar-lo "
 "lliurement i compartir els treballs adaptats."
 
-#: src/core/StelSkyCultureMgr.cpp:433
+#: src/core/StelSkyCultureMgr.cpp:430
 msgid ""
 "This sky culture is provided under MIT License. You can use it for "
 "commercial and non-commercial purposes, freely adapt it and share adapted "
@@ -4396,20 +4396,20 @@ msgstr ""
 "utilitzar-la amb finalitats comercials i no comercials, adaptar-la "
 "lliurement i compartir aquestes adaptacions."
 
-#: src/core/StelSkyCultureMgr.cpp:442 src/core/StelSkyCultureMgr.cpp:479
+#: src/core/StelSkyCultureMgr.cpp:439 src/core/StelSkyCultureMgr.cpp:476
 msgid "This sky culture is distributed as public domain."
 msgstr "Aquesta cultura del cel es distribueix com a domini públic."
 
-#: src/core/StelSkyCultureMgr.cpp:444
+#: src/core/StelSkyCultureMgr.cpp:441
 msgid "This is distributed as public domain."
 msgstr "Es distribueix com a domini públic."
 
-#: src/core/StelSkyCultureMgr.cpp:449
+#: src/core/StelSkyCultureMgr.cpp:446
 msgid "This sky culture is provided under Creative Commons License."
 msgstr ""
 "Aquesta cultura del cel s'ha subministrat amb la Creative Commons License."
 
-#: src/core/StelSkyCultureMgr.cpp:454
+#: src/core/StelSkyCultureMgr.cpp:451
 msgid ""
 "You may distribute, remix, adapt, and build upon this sky culture, even "
 "commercially, as long as you credit authors for the original creation."
@@ -4418,7 +4418,7 @@ msgstr ""
 "cel, fins i tot comercialment, sempre que feu esment dels autors de la "
 "creació original."
 
-#: src/core/StelSkyCultureMgr.cpp:456
+#: src/core/StelSkyCultureMgr.cpp:453
 msgid ""
 "You may remix, adapt, and build upon this sky culture even for commercial "
 "purposes, as long as you credit authors and license the new creations under "
@@ -4431,7 +4431,7 @@ msgstr ""
 "comparada amb les llicències de programari lliure i de codi obert "
 "\"copyleft\"."
 
-#: src/core/StelSkyCultureMgr.cpp:459
+#: src/core/StelSkyCultureMgr.cpp:456
 msgid ""
 "You may reuse this sky culture for any purpose, including commercially; "
 "however, adapted work cannot be shared with others, and credit must be "
@@ -4441,7 +4441,7 @@ msgstr ""
 "l'ús comercial; tanmateix, el treball adaptat no es pot compartir amb altres"
 " persones i el crèdit l'has de proporcionar tu mateix."
 
-#: src/core/StelSkyCultureMgr.cpp:461
+#: src/core/StelSkyCultureMgr.cpp:458
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, and "
 "although your new works must also acknowledge authors and be non-commercial,"
@@ -4452,7 +4452,7 @@ msgstr ""
 "autors i no ser comercials, no heu de llicenciar les vostres obres derivades"
 " amb els mateixos termes."
 
-#: src/core/StelSkyCultureMgr.cpp:464
+#: src/core/StelSkyCultureMgr.cpp:461
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, as "
 "long as you credit authors and license your new creations under the "
@@ -4462,7 +4462,7 @@ msgstr ""
 " comercial, sempre que acrediteu els autors i llicències a les vostres noves"
 " creacions amb els mateixos termes."
 
-#: src/core/StelSkyCultureMgr.cpp:466
+#: src/core/StelSkyCultureMgr.cpp:463
 msgid ""
 "You may use this sky culture and share them with others as long as you "
 "credit authors, but you can’t change it in any way or use it commercially."
@@ -4471,15 +4471,15 @@ msgstr ""
 "que acrediteu els autors, però no la podeu canviar de cap manera ni "
 "utilitzar-la comercialment."
 
-#: src/core/StelSkyCultureMgr.cpp:484
+#: src/core/StelSkyCultureMgr.cpp:481
 msgid ""
 "Free Art License grants the right to freely copy, distribute, and transform."
 msgstr ""
 "La Llicència d'Art Lliure dóna el dret de copiar-lo, distribuir-lo i "
 "transformar-lo lliurement."
 
-#: src/core/StelSkyCultureMgr.cpp:504 src/core/StelSkyCultureMgr.cpp:511
-#: src/core/StelSkyCultureMgr.cpp:518 src/gui/ConfigurationDialog.cpp:1379
+#: src/core/StelSkyCultureMgr.cpp:501 src/core/StelSkyCultureMgr.cpp:508
+#: src/core/StelSkyCultureMgr.cpp:515 src/gui/ConfigurationDialog.cpp:1379
 #: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
@@ -4505,21 +4505,21 @@ msgstr ""
 msgid "License"
 msgstr "Llicència"
 
-#: src/core/StelSkyCultureMgr.cpp:505 src/core/StelSkyCultureMgr.cpp:512
+#: src/core/StelSkyCultureMgr.cpp:502 src/core/StelSkyCultureMgr.cpp:509
 msgid "unknown"
 msgstr "desconegut"
 
-#: src/core/StelSkyCultureMgr.cpp:548
+#: src/core/StelSkyCultureMgr.cpp:545
 msgid ""
 "The region indicates the geographical area of origin of a given sky culture."
 msgstr ""
 "La regió indica l'àrea geogràfica de l'origen de la cultura del cel donada. "
 
-#: src/core/StelSkyCultureMgr.cpp:554
+#: src/core/StelSkyCultureMgr.cpp:551
 msgid "World"
 msgstr "Món "
 
-#: src/core/StelSkyCultureMgr.cpp:555
+#: src/core/StelSkyCultureMgr.cpp:552
 msgid ""
 "All 'modern' sky cultures are based on the IAU-approved 88 constellations "
 "with standardized boundaries and are used worldwide. The origins of these "
@@ -4530,26 +4530,26 @@ msgstr ""
 "s'utilitzen a tot el món. Els orígens d'aquestes constel·lacions són "
 "paneuropeus."
 
-#: src/core/StelSkyCultureMgr.cpp:559 src/ui_locationDialogGui.h:450
+#: src/core/StelSkyCultureMgr.cpp:556 src/ui_locationDialogGui.h:450
 msgid "Region:"
 msgstr "Regió:"
 
-#: src/core/StelSkyCultureMgr.cpp:635
+#: src/core/StelSkyCultureMgr.cpp:632
 msgctxt "Name of a section in sky culture description"
 msgid "Extras"
 msgstr "Extres"
 
-#: src/core/StelSkyCultureMgr.cpp:636
+#: src/core/StelSkyCultureMgr.cpp:633
 msgctxt "Name of a section in sky culture description"
 msgid "References"
 msgstr "Referències"
 
-#: src/core/StelSkyCultureMgr.cpp:637
+#: src/core/StelSkyCultureMgr.cpp:634
 msgctxt "Name of a section in sky culture description"
 msgid "Authors"
 msgstr "Autors"
 
-#: src/core/StelSkyCultureMgr.cpp:709
+#: src/core/StelSkyCultureMgr.cpp:706
 msgid "No description"
 msgstr "Sense descripció"
 
@@ -5953,7 +5953,7 @@ msgstr ""
 #: src/gui/ViewDialog.cpp:1056
 msgctxt "duration, suffix"
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: src/gui/ViewDialog.cpp:1092
 msgid "Abbreviated"
@@ -6431,11 +6431,11 @@ msgstr "Universitat d'Estrasburg (França)"
 
 #: src/gui/SearchDialog.cpp:1481
 msgid "Harvard-Smithsonian Center for Astrophysics (USA)"
-msgstr ""
+msgstr "Harvard-Smithsonian Center for Astrophysics (EUA)"
 
 #: src/gui/SearchDialog.cpp:1482
 msgid "Strasbourg astronomical Data Center (France)"
-msgstr ""
+msgstr "Strasbourg Astronomical Data Center (França)"
 
 #: src/gui/SearchDialog.cpp:1564
 msgid "Paste and Search"
@@ -8295,53 +8295,53 @@ msgstr "saros"
 #: src/gui/AstroCalcAlmanacWidget.cpp:165 src/ui_astroCalcAlmanacWidget.h:845
 msgctxt "season"
 msgid "Spring"
-msgstr ""
+msgstr "Primavera"
 
 #. TRANSLATORS: The name of season
 #: src/gui/AstroCalcAlmanacWidget.cpp:151
 #: src/gui/AstroCalcAlmanacWidget.cpp:167 src/ui_astroCalcAlmanacWidget.h:867
 msgctxt "season"
 msgid "Summer"
-msgstr ""
+msgstr "Estiu"
 
 #. TRANSLATORS: The name of season
 #: src/gui/AstroCalcAlmanacWidget.cpp:153
 #: src/gui/AstroCalcAlmanacWidget.cpp:161 src/ui_astroCalcAlmanacWidget.h:773
 msgctxt "season"
 msgid "Fall"
-msgstr ""
+msgstr "Tardor"
 
 #. TRANSLATORS: The name of season
 #: src/gui/AstroCalcAlmanacWidget.cpp:155
 #: src/gui/AstroCalcAlmanacWidget.cpp:163 src/ui_astroCalcAlmanacWidget.h:788
 msgctxt "season"
 msgid "Winter"
-msgstr ""
+msgstr "Hivern"
 
 #. TRANSLATORS: full phrase is "The Sun is XX° below the horizon"
 #: src/gui/AstroCalcAlmanacWidget.cpp:283
 #, qt-format
 msgid "The Sun is %1 below the horizon"
-msgstr ""
+msgstr "El Sol és %1 per sota de l’horitzó"
 
 #: src/gui/AstroCalcAlmanacWidget.cpp:287
 msgid "The duration of daytime"
-msgstr ""
+msgstr "La durada del dia"
 
 #: src/gui/AstroCalcAlmanacWidget.cpp:288
 msgid "The duration of the astronomical night"
-msgstr ""
+msgstr "La durada de la nis astronòmica"
 
 #: src/gui/AstroCalcAlmanacWidget.cpp:289
 msgid "The duration of morning and evening twilights"
-msgstr ""
+msgstr "La durada dels crepuscles matutí i vespertí"
 
 #: src/gui/AstroCalcAlmanacWidget.cpp:370 src/ui_astroCalcAlmanacWidget.h:839
 #: plugins/NavStars/src/ui_navStarsWindow.h:546
 msgid "Today"
 msgstr "Avui"
 
-#: src/gui/ObsListDialog.cpp:85 src/gui/ObsListDialog.cpp:1114
+#: src/gui/ObsListDialog.cpp:85 src/gui/ObsListDialog.cpp:1122
 msgid "Cannot open observingLists.json to write"
 msgstr "No es pot obrir observingLists.json per escriure"
 
@@ -8390,43 +8390,43 @@ msgstr ""
 "Diversos objectes seleccionats no s'han pogut trobar. Vegeu el fitxer de "
 "registre per a més detalls."
 
-#: src/gui/ObsListDialog.cpp:944
+#: src/gui/ObsListDialog.cpp:952
 msgid "New Observation List"
 msgstr "Nova Llista d'Observació"
 
-#: src/gui/ObsListDialog.cpp:945
+#: src/gui/ObsListDialog.cpp:953
 msgid "Observing list creation mode"
 msgstr "Mode de creació de la llista d'observació "
 
-#: src/gui/ObsListDialog.cpp:958
+#: src/gui/ObsListDialog.cpp:966
 msgid "Observing list editor mode"
 msgstr "Mode d'edició de la llista d'observació "
 
-#: src/gui/ObsListDialog.cpp:963
+#: src/gui/ObsListDialog.cpp:971
 msgid "selectedOlud empty. This is a bug"
 msgstr "selectedOlud buit. Això és un error"
 
-#: src/gui/ObsListDialog.cpp:975
+#: src/gui/ObsListDialog.cpp:983
 msgid "Export observing list as..."
 msgstr "Exporta la llista d'observació com a..."
 
-#: src/gui/ObsListDialog.cpp:987
+#: src/gui/ObsListDialog.cpp:995
 msgid "Cannot export. See logfile for details."
 msgstr "No es pot exportar. Vegeu el fitxer de registre per a més detalls."
 
-#: src/gui/ObsListDialog.cpp:1024
+#: src/gui/ObsListDialog.cpp:1032
 msgid "Import observing list"
 msgstr "Importa la llista d'observació"
 
-#: src/gui/ObsListDialog.cpp:1036
+#: src/gui/ObsListDialog.cpp:1044
 msgid "Cannot open selected file for import"
 msgstr "No es pot obrir el fitxer seleccionat per importar-lo"
 
-#: src/gui/ObsListDialog.cpp:1052
+#: src/gui/ObsListDialog.cpp:1060
 msgid "Empty list."
 msgstr "Llista buida."
 
-#: src/gui/ObsListDialog.cpp:1074
+#: src/gui/ObsListDialog.cpp:1082
 #, qt-format
 msgid ""
 "A list named '%1', created %2 and last modified %3 would overwrite your "
@@ -8436,44 +8436,44 @@ msgstr ""
 "sobreescriuria la vostra llista existent '%4', de data %5 i modificada per "
 "última vegada el %6. Acceptar?"
 
-#: src/gui/ObsListDialog.cpp:1093
+#: src/gui/ObsListDialog.cpp:1101
 msgid "The file is empty or doesn't contain legacy bookmarks."
 msgstr "El fitxer està buit o no conté adreces d'interès heretades."
 
-#: src/gui/ObsListDialog.cpp:1105
+#: src/gui/ObsListDialog.cpp:1113
 msgid "File does not contain observing lists or legacy bookmarks"
 msgstr ""
 "El fitxer no conté llistes d'observació ni adreces d'interès heretades"
 
-#: src/gui/ObsListDialog.cpp:1132
+#: src/gui/ObsListDialog.cpp:1140
 msgid "File format is wrong!"
 msgstr "El format del fitxer és incorrecte!"
 
-#: src/gui/ObsListDialog.cpp:1152
+#: src/gui/ObsListDialog.cpp:1160
 msgid "Cannot open JSON output file. Will not delete."
 msgstr "No es pot obrir el fitxer de sortida JSON. No s'eliminarà."
 
-#: src/gui/ObsListDialog.cpp:1176 src/ui_configurationDialog.h:1904
+#: src/gui/ObsListDialog.cpp:1184 src/ui_configurationDialog.h:1904
 msgid "Information"
 msgstr "Informació"
 
-#: src/gui/ObsListDialog.cpp:1176
+#: src/gui/ObsListDialog.cpp:1184
 msgid "You cannot delete the default or the last list."
 msgstr "No podeu eliminar la llista predeterminada ni l'última."
 
-#: src/gui/ObsListDialog.cpp:1232
+#: src/gui/ObsListDialog.cpp:1240
 msgid "Unnamed object"
 msgstr "Objecte no identificat"
 
-#: src/gui/ObsListDialog.cpp:1315
+#: src/gui/ObsListDialog.cpp:1323
 msgid "Empty name"
 msgstr "Nom buit"
 
-#: src/gui/ObsListDialog.cpp:1320
+#: src/gui/ObsListDialog.cpp:1328
 msgid "List name already exists"
 msgstr "El nom de la llista ja existeix"
 
-#: src/gui/ObsListDialog.cpp:1385 src/ui_configurationDialog.h:2094
+#: src/gui/ObsListDialog.cpp:1393 src/ui_configurationDialog.h:2094
 #: src/ui_obsListDialog.h:361
 msgid "Observing lists"
 msgstr "Llista d'observació"
@@ -8629,7 +8629,7 @@ msgstr ""
 #: src/translations.h:34
 msgctxt "dataset short name"
 msgid "Nebulae"
-msgstr ""
+msgstr "Nebuloses"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:43
@@ -10242,10 +10242,10 @@ msgstr "&Copiar"
 msgid "&Paste"
 msgstr "&Enganxar"
 
-#: src/translations.h:669 plugins/Oculars/src/ui_ocularDialog.h:1529
-#: plugins/Oculars/src/ui_ocularDialog.h:1538
-#: plugins/Oculars/src/ui_ocularDialog.h:1544
-#: plugins/Oculars/src/ui_ocularDialog.h:1563
+#: src/translations.h:669 plugins/Oculars/src/ui_ocularDialog.h:1530
+#: plugins/Oculars/src/ui_ocularDialog.h:1539
+#: plugins/Oculars/src/ui_ocularDialog.h:1545
+#: plugins/Oculars/src/ui_ocularDialog.h:1564
 msgid "Delete"
 msgstr "Suprimeix"
 
@@ -13685,7 +13685,7 @@ msgstr "Fes servir aquest ﻿paisatge per omissió"
 
 #: src/ui_viewDialog.h:4562
 msgid "Fading duration for artwork of constellations "
-msgstr ""
+msgstr "Durada de l’esvaïment de les il·lustracions de les constel·lacions"
 
 #: src/ui_viewDialog.h:4566
 msgid "Click on star to show its constellation"
@@ -13694,6 +13694,7 @@ msgstr "Fes clic a una estrella per mostrar la seva constel·lació"
 #: src/ui_viewDialog.h:4573
 msgid "Fading duration for screen labels of constellations"
 msgstr ""
+"Durada de l’esvaïment de les etiquetes en pantalla de les constel·lacions"
 
 #: src/ui_viewDialog.h:4576
 msgid "Select if you want names abbreviated, original or translated"
@@ -13713,7 +13714,7 @@ msgstr "Color dels noms de les constel·lacions"
 
 #: src/ui_viewDialog.h:4590
 msgid "Fading duration for lines of constellations"
-msgstr ""
+msgstr "Durada de l’esvaïment de les línies de les constel·lacions"
 
 #: src/ui_viewDialog.h:4593
 msgid "Constellations font size"
@@ -13729,7 +13730,7 @@ msgstr "Color de les línies de les constel·lacions"
 
 #: src/ui_viewDialog.h:4602
 msgid "Fading duration for boundaries of constellations"
-msgstr ""
+msgstr "Durada de l’esvaïment dels límits de les constel·lacions"
 
 #: src/ui_viewDialog.h:4606
 msgid "Color of asterism lines"
@@ -13753,7 +13754,7 @@ msgstr "Color dels ajudants de raigs"
 
 #: src/ui_viewDialog.h:4631
 msgid "Fading duration for screen labels of asterisms "
-msgstr ""
+msgstr "Durada de l’esvaïment de les etiquetes en pantalla dels asterismes"
 
 #: src/ui_viewDialog.h:4634
 msgid "Use native names for planets from current culture"
@@ -13765,7 +13766,7 @@ msgstr "Feu servir noms nadius per als planetes"
 
 #: src/ui_viewDialog.h:4638
 msgid "Fading duration for lines of asterisms"
-msgstr ""
+msgstr "Durada de l’esvaïment de les línies dels asterismes"
 
 #: src/ui_viewDialog.h:4641
 msgid "Only one at a time"
@@ -13777,7 +13778,7 @@ msgstr "Aïllat"
 
 #: src/ui_viewDialog.h:4645
 msgid "Fading duration for lines of ray helpers"
-msgstr ""
+msgstr "Durada de l’esvaïment de les línies dels ajudants de raigs"
 
 #: src/ui_viewDialog.h:4647
 msgid "Use this sky culture as default"
@@ -13785,7 +13786,7 @@ msgstr "Fes servir aquesta cultura del cel per omissió"
 
 #: src/ui_viewDialog.h:4648
 msgid "Filter"
-msgstr ""
+msgstr "Filtre"
 
 #: src/ui_configurationDialog.h:1897
 msgid "Configuration"
@@ -15009,7 +15010,7 @@ msgstr "Eclipsis i trànsits"
 
 #: src/ui_astroCalcDialog.h:2310
 msgid "Almanac"
-msgstr ""
+msgstr "Almanac"
 
 #: src/ui_astroCalcDialog.h:2317 src/ui_astroCalcDialog.h:2545
 msgid "Show objects brighter than magnitude"
@@ -15619,31 +15620,31 @@ msgstr "Unitat de mesura:"
 
 #: src/ui_astroCalcAlmanacWidget.h:775
 msgid "Previous September Equinox"
-msgstr ""
+msgstr "Equinocci de setembre anterior"
 
 #: src/ui_astroCalcAlmanacWidget.h:778
 msgid "Current September Equinox"
-msgstr ""
+msgstr "Equinocci de setembre actual"
 
 #: src/ui_astroCalcAlmanacWidget.h:781
 msgid "Next September Equinox"
-msgstr ""
+msgstr "Equinocci de setembre següent"
 
 #: src/ui_astroCalcAlmanacWidget.h:784
 msgid "Today's sunset"
-msgstr ""
+msgstr "Posta de sol d’avui"
 
 #: src/ui_astroCalcAlmanacWidget.h:790
 msgid "Previous December Solstice"
-msgstr ""
+msgstr "Solstici de desembre anterior"
 
 #: src/ui_astroCalcAlmanacWidget.h:793
 msgid "Current December Solstice"
-msgstr ""
+msgstr "Solstici de desembre actual"
 
 #: src/ui_astroCalcAlmanacWidget.h:796
 msgid "Next December Solstice"
-msgstr ""
+msgstr "Solstici de desembre següent"
 
 #: src/ui_astroCalcAlmanacWidget.h:799 src/ui_astroCalcAlmanacWidget.h:806
 #: src/ui_astroCalcAlmanacWidget.h:808 src/ui_astroCalcAlmanacWidget.h:840
@@ -15653,19 +15654,19 @@ msgstr "Durada"
 
 #: src/ui_astroCalcAlmanacWidget.h:801
 msgid "Evening civil twilight"
-msgstr ""
+msgstr "Crepuscle civil del vespre"
 
 #: src/ui_astroCalcAlmanacWidget.h:805
 msgid "Dusk"
-msgstr ""
+msgstr "Capvespre"
 
 #: src/ui_astroCalcAlmanacWidget.h:810
 msgid "Morning astronomical twilight"
-msgstr ""
+msgstr "Crepuscle astronòmic del matí"
 
 #: src/ui_astroCalcAlmanacWidget.h:814
 msgid "Evening nautical twilight"
-msgstr ""
+msgstr "Crepuscle nàutic del vespre"
 
 #: src/ui_astroCalcAlmanacWidget.h:817
 #: plugins/Calendars/src/ui_calendarsDialog.h:948
@@ -15674,7 +15675,7 @@ msgstr "Any"
 
 #: src/ui_astroCalcAlmanacWidget.h:821
 msgid "Today's moonrise"
-msgstr ""
+msgstr "Sortida de la Lluna d’avui"
 
 #: src/ui_astroCalcAlmanacWidget.h:824
 msgid "Twilight"
@@ -15682,19 +15683,19 @@ msgstr "Crepuscle"
 
 #: src/ui_astroCalcAlmanacWidget.h:826
 msgid "Today's sunrise"
-msgstr ""
+msgstr "Sortida del Sol d’avui"
 
 #: src/ui_astroCalcAlmanacWidget.h:830
 msgid "Evening astronomical twilight"
-msgstr ""
+msgstr "Crepuscle astronòmic del vespre"
 
 #: src/ui_astroCalcAlmanacWidget.h:833
 msgid "Astronomical Night"
-msgstr ""
+msgstr "Nit astronòmica"
 
 #: src/ui_astroCalcAlmanacWidget.h:836
 msgid "Morning civil twilight"
-msgstr ""
+msgstr "Crepuscle civil del matí"
 
 #: src/ui_astroCalcAlmanacWidget.h:842
 msgid "Set"
@@ -15703,33 +15704,33 @@ msgstr "Posta"
 #: src/ui_astroCalcAlmanacWidget.h:843
 msgctxt "twilight"
 msgid "Civil"
-msgstr ""
+msgstr "Civil"
 
 #: src/ui_astroCalcAlmanacWidget.h:844
 msgctxt "twilight"
 msgid "Astronomical"
-msgstr ""
+msgstr "Astronòmic"
 
 #: src/ui_astroCalcAlmanacWidget.h:847
 msgid "Previous March Equinox"
-msgstr ""
+msgstr "Equinocci de març anterior"
 
 #: src/ui_astroCalcAlmanacWidget.h:850
 msgid "Current March Equinox"
-msgstr ""
+msgstr "Equinocci de març actual"
 
 #: src/ui_astroCalcAlmanacWidget.h:853
 msgid "Next March Equinox"
-msgstr ""
+msgstr "Equinocci de març següent"
 
 #: src/ui_astroCalcAlmanacWidget.h:855
 msgctxt "twilight"
 msgid "Nautical"
-msgstr ""
+msgstr "Nàutic"
 
 #: src/ui_astroCalcAlmanacWidget.h:856
 msgid "Seasons"
-msgstr ""
+msgstr "Estacions"
 
 #: src/ui_astroCalcAlmanacWidget.h:862
 msgid "Rise"
@@ -15737,19 +15738,19 @@ msgstr "Sortida"
 
 #: src/ui_astroCalcAlmanacWidget.h:864
 msgid "Today's moonset"
-msgstr ""
+msgstr "Posta de la Lluna d’avui"
 
 #: src/ui_astroCalcAlmanacWidget.h:869
 msgid "Previous June Solstice"
-msgstr ""
+msgstr "Solstici de juny anterior"
 
 #: src/ui_astroCalcAlmanacWidget.h:872
 msgid "Current June Solstice"
-msgstr ""
+msgstr "Solstici de juny actual"
 
 #: src/ui_astroCalcAlmanacWidget.h:875
 msgid "Next June Solstice"
-msgstr ""
+msgstr "Solstici de juny següent"
 
 #: src/ui_astroCalcAlmanacWidget.h:877
 msgid "Dawn"
@@ -15757,7 +15758,7 @@ msgstr "Alba"
 
 #: src/ui_astroCalcAlmanacWidget.h:879
 msgid "Morning nautical twilight"
-msgstr ""
+msgstr "Crepuscle nàutic del matí"
 
 #: src/ui_obsListDialog.h:362
 msgid "Add object"
@@ -16664,7 +16665,7 @@ msgid "Allow snap to selected object"
 msgstr "Permet fixar l'objecte seleccionat"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:316
-#: plugins/Oculars/src/ui_ocularDialog.h:1571
+#: plugins/Oculars/src/ui_ocularDialog.h:1572
 #: plugins/Satellites/src/ui_satellitesDialog.h:1384
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:240
@@ -16688,7 +16689,7 @@ msgid "About"
 msgstr "Quant a..."
 
 #: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1515
-#: plugins/Oculars/src/ui_ocularDialog.h:1412
+#: plugins/Oculars/src/ui_ocularDialog.h:1413
 msgid "Oculars"
 msgstr "Oculars"
 
@@ -16771,7 +16772,7 @@ msgstr ""
 "telescopi."
 
 #: plugins/Oculars/src/Oculars.cpp:1516
-#: plugins/Oculars/src/ui_ocularDialog.h:1446
+#: plugins/Oculars/src/ui_ocularDialog.h:1447
 msgid "Ocular view"
 msgstr "Vista d'ocular"
 
@@ -17316,24 +17317,24 @@ msgid "Magnification factor:"
 msgstr "Factor d'ampliació:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:584
-#: plugins/Oculars/src/ui_ocularDialog.h:1568
+#: plugins/Oculars/src/ui_ocularDialog.h:1569
 msgid "Diameter:"
 msgstr "Diàmetre:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:589
-#: plugins/Oculars/src/ui_ocularDialog.h:1533
+#: plugins/Oculars/src/ui_ocularDialog.h:1534
 msgid "aFOV:"
 msgstr "FOVa:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:590
-#: plugins/Oculars/src/ui_ocularDialog.h:1534
-#: plugins/Oculars/src/ui_ocularDialog.h:1569
+#: plugins/Oculars/src/ui_ocularDialog.h:1535
+#: plugins/Oculars/src/ui_ocularDialog.h:1570
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:764
 msgid "Focal length:"
 msgstr "Distància focal:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:591
-#: plugins/Oculars/src/ui_ocularDialog.h:1530
+#: plugins/Oculars/src/ui_ocularDialog.h:1531
 msgid "Field stop:"
 msgstr "Camp d'aturada:"
 
@@ -17494,42 +17495,42 @@ msgstr ""
 "de tenir la velocitat sideral activada) per tal d'evitar un moviment de més "
 "d'1 píxel d'amplada."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1413
+#: plugins/Oculars/src/ui_ocularDialog.h:1414
 msgid "Interface"
 msgstr "Interfície"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1417
+#: plugins/Oculars/src/ui_ocularDialog.h:1418
 msgid "Arrow button scale (requires restart)"
 msgstr "Escala dels botons de les fletxes (requereix reinici)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1419
+#: plugins/Oculars/src/ui_ocularDialog.h:1420
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
 msgstr "Marca-ho si vols el valor del FOV igual que a l'inici de Stellarium."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1421
+#: plugins/Oculars/src/ui_ocularDialog.h:1422
 msgid "Restore FOV to initial values"
 msgstr "Restaura el FOV als valors inicials"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1422
+#: plugins/Oculars/src/ui_ocularDialog.h:1423
 msgid "Show resolution criteria"
 msgstr "Mostra criteri de resolució"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1423
+#: plugins/Oculars/src/ui_ocularDialog.h:1424
 msgid "On-screen control panel"
 msgstr "Panell de control en pantalla"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1425
-#: plugins/Oculars/src/ui_ocularDialog.h:1429
+#: plugins/Oculars/src/ui_ocularDialog.h:1426
+#: plugins/Oculars/src/ui_ocularDialog.h:1430
 msgid "Font size of text on on-screen control panel"
 msgstr "Mida de la lletra del text al tauler de control de la pantalla"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1427
+#: plugins/Oculars/src/ui_ocularDialog.h:1428
 msgid "...font size"
 msgstr "...mida de la lletra"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1432
+#: plugins/Oculars/src/ui_ocularDialog.h:1433
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
@@ -17537,112 +17538,112 @@ msgstr ""
 "Marcar si voleu que la direcció sigui la mateixa com a l'arrancada de "
 "Stellarium."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1434
+#: plugins/Oculars/src/ui_ocularDialog.h:1435
 msgid "Restore direction to initial values"
 msgstr "Restaurar direcció als valors inicials"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1436
+#: plugins/Oculars/src/ui_ocularDialog.h:1437
 msgid "Color for ocular circles and sensor frames"
 msgstr "Color per a cercles oculars i marcs de sensors"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1439
+#: plugins/Oculars/src/ui_ocularDialog.h:1440
 msgid "Line Color"
 msgstr "Color de la línia"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1441
+#: plugins/Oculars/src/ui_ocularDialog.h:1442
 msgid "Color for text which is shown only when GUI is switched off."
 msgstr "Color per al text que només es mostra quan la GUI està apagada."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1444
+#: plugins/Oculars/src/ui_ocularDialog.h:1445
 msgid "Text Color"
 msgstr "Color del text"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1445
+#: plugins/Oculars/src/ui_ocularDialog.h:1446
 msgid "Show oculars button on toolbar"
 msgstr "Mostra els botons dels oculars a la barra d'eines"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1448
+#: plugins/Oculars/src/ui_ocularDialog.h:1449
 msgid ""
 "Show FOV circles relative to the apparent FOV of the widest-angle ocular"
 msgstr ""
 "Mostra els cercles de camp de visió en relació amb el camp de visió aparent "
 "de l’ocular d’angle més ampli"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1450
+#: plugins/Oculars/src/ui_ocularDialog.h:1451
 msgid "Scale image circle"
 msgstr "Canvia l'escala del cercle d'imatge"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1451
+#: plugins/Oculars/src/ui_ocularDialog.h:1452
 msgid "Hide grids and lines when enabled"
 msgstr "Quan està activat, amaga graella i línies"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1452
+#: plugins/Oculars/src/ui_ocularDialog.h:1453
 msgid "Enable only if an object is selected"
 msgstr "Habilita només si hi ha un objecte seleccionat"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1454
+#: plugins/Oculars/src/ui_ocularDialog.h:1455
 msgid "Show border circle"
 msgstr "Mostra el cercle de la vora"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1456
+#: plugins/Oculars/src/ui_ocularDialog.h:1457
 msgid "Show FOV outline"
 msgstr "Mostra l’esquema del camp de visió"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1458
+#: plugins/Oculars/src/ui_ocularDialog.h:1459
 msgid "Apply limit for stellar magnitude based on telescope aperture"
 msgstr ""
 "Aplicar límits de magnituds estelar per diferents apertures de telescopis"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1460
+#: plugins/Oculars/src/ui_ocularDialog.h:1461
 msgid "Auto-limit stellar magnitude"
 msgstr "Auto-limitar la magnitud estel·lar"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1462
+#: plugins/Oculars/src/ui_ocularDialog.h:1463
 msgid "Show cardinal directions in equatorial coordinate system"
 msgstr "Mostrar direccions cardinals en el sistema de coordenades equatorials"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1464
+#: plugins/Oculars/src/ui_ocularDialog.h:1465
 msgid "Show compass rose"
 msgstr "Mostrar rosa de la brúixola"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1466
+#: plugins/Oculars/src/ui_ocularDialog.h:1467
 msgid "Align the crosshair in equatorial coordinate system"
 msgstr "Alinear el punt de mira en el sistema de coordenades equatorials"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1468
+#: plugins/Oculars/src/ui_ocularDialog.h:1469
 msgid "Align crosshair"
 msgstr "Alinear el punt de mira"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1470
+#: plugins/Oculars/src/ui_ocularDialog.h:1471
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr ""
 "En el mode ocular, permet una certa visibilitat fora del cercle ocular."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1472
+#: plugins/Oculars/src/ui_ocularDialog.h:1473
 msgid "Use semi-transparent mask"
 msgstr "Utilitza màscara semitransparent"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1474
+#: plugins/Oculars/src/ui_ocularDialog.h:1475
 msgid "Opacity of semi-transparent mask"
 msgstr "Opacitat de la màscara semitransparent"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1476
+#: plugins/Oculars/src/ui_ocularDialog.h:1477
 msgid "Sensor view"
 msgstr "Vista del sensor"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1478
+#: plugins/Oculars/src/ui_ocularDialog.h:1479
 msgid "Color for focuser overlay line"
 msgstr "Color per a la línia de superposició del focuser"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1480
+#: plugins/Oculars/src/ui_ocularDialog.h:1481
 msgid "Show focuser overlay"
 msgstr "Mostrar la superposició del focuser"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1481
+#: plugins/Oculars/src/ui_ocularDialog.h:1482
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Utilitzeu graus i minuts per FOV de la CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1483
+#: plugins/Oculars/src/ui_ocularDialog.h:1484
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
@@ -17650,43 +17651,43 @@ msgstr ""
 "Habilitar canvi automàtic de tipus de muntura des dels paràmetres del "
 "telescopi per orientacions horitzontals del marc CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1485
+#: plugins/Oculars/src/ui_ocularDialog.h:1486
 msgid "Enable automatic switch of mount type"
 msgstr "Habilitar canvi automàtic de tipus de muntura"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1486
+#: plugins/Oculars/src/ui_ocularDialog.h:1487
 msgid "Use size of focuser:"
 msgstr "Utilitzi la mida de l'enfocador:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1487
+#: plugins/Oculars/src/ui_ocularDialog.h:1488
 msgid "Use horizontal coordinates instead equatorial coordinates"
 msgstr ""
 "Utilitza les coordinades horitzontals en lloc de les coordenades "
 "equatorials."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1488
+#: plugins/Oculars/src/ui_ocularDialog.h:1489
 msgid "Overlay size (px)"
 msgstr "Mida de superposició (px)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1490
+#: plugins/Oculars/src/ui_ocularDialog.h:1491
 msgid "Horizontal size (width)"
 msgstr "Mida horitzontal (amplada)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1493
+#: plugins/Oculars/src/ui_ocularDialog.h:1494
 msgid "Vertical size (height)"
 msgstr "Mida vertical (alçada)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1496
+#: plugins/Oculars/src/ui_ocularDialog.h:1497
 msgid "Enable pixel grid of sensor binned pixels within sensor crop overlay."
 msgstr ""
 "Activar la quadrícula de píxels dels píxels combinats del sensor dins de la "
 "superposició de retallada del sensor."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1498
+#: plugins/Oculars/src/ui_ocularDialog.h:1499
 msgid "Show pixel grid"
 msgstr "Mostra la quadrícula de píxels"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1500
+#: plugins/Oculars/src/ui_ocularDialog.h:1501
 msgid ""
 "Enable a rectangular overlay showing the effective size of a number of "
 "pixels."
@@ -17694,95 +17695,95 @@ msgstr ""
 "Activi una superposició rectangular que mostri la mida efectiva d'un nombre "
 "de píxels."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1502
+#: plugins/Oculars/src/ui_ocularDialog.h:1503
 msgid "Show sensor crop overlay"
 msgstr "Mostrar retall de la superposició del sensor (crop overlay)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1503
+#: plugins/Oculars/src/ui_ocularDialog.h:1504
 msgid "Enable autozoom when switching CCD"
 msgstr "Activar l'autozoom quan canvieu el CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1505
+#: plugins/Oculars/src/ui_ocularDialog.h:1506
 msgid ""
 "Show maximum exposure time for Solar system objects to avoid movement streak"
 msgstr ""
 "Mostra el temps màxim d'exposició dels objectes del sistema solar per evitar"
 " moviments a batzegades."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1507
+#: plugins/Oculars/src/ui_ocularDialog.h:1508
 msgid "Show max exposure time for moving objects"
 msgstr "Mostra el temps màxim d'expòsició per moure objectes"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1508
+#: plugins/Oculars/src/ui_ocularDialog.h:1509
 msgid "Telrad view"
 msgstr "Vista Telrad"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1512
+#: plugins/Oculars/src/ui_ocularDialog.h:1513
 msgctxt "abbreviation"
 msgid "FOV:"
 msgstr "Camp de visió:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1514
+#: plugins/Oculars/src/ui_ocularDialog.h:1515
 msgid "FOV for circle 1"
 msgstr "Camp de visió pel cercle 1"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1517
+#: plugins/Oculars/src/ui_ocularDialog.h:1518
 msgid "FOV for circle 2"
 msgstr "Camp de visió pel cercle 2"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1520
+#: plugins/Oculars/src/ui_ocularDialog.h:1521
 msgid "FOV for circle 3"
 msgstr "Camp de visió pel cercle 3"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1523
+#: plugins/Oculars/src/ui_ocularDialog.h:1524
 msgid "FOV for circle 4"
 msgstr "Camp de visió pel cercle 4"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1525
+#: plugins/Oculars/src/ui_ocularDialog.h:1526
 msgid "Restore original Telrad FOV"
 msgstr "Restaurar el camp de visió original de Telrad"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1526
+#: plugins/Oculars/src/ui_ocularDialog.h:1527
 msgid "Enable autozoom when switching Telrad"
 msgstr "Activar l'autozoom quan canvieu Telrad"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1527
+#: plugins/Oculars/src/ui_ocularDialog.h:1528
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:401
 msgid "General"
 msgstr "Opcions generals"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1528
-#: plugins/Oculars/src/ui_ocularDialog.h:1537
-#: plugins/Oculars/src/ui_ocularDialog.h:1543
-#: plugins/Oculars/src/ui_ocularDialog.h:1562
+#: plugins/Oculars/src/ui_ocularDialog.h:1529
+#: plugins/Oculars/src/ui_ocularDialog.h:1538
+#: plugins/Oculars/src/ui_ocularDialog.h:1544
+#: plugins/Oculars/src/ui_ocularDialog.h:1563
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:174
 msgid "Add"
 msgstr "Afegeix"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1531
+#: plugins/Oculars/src/ui_ocularDialog.h:1532
 msgid "Has permanent cross-hairs"
 msgstr "Té la mira permanent"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1532
+#: plugins/Oculars/src/ui_ocularDialog.h:1533
 msgid "Binoculars"
 msgstr "Binoculars"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1535
-#: plugins/Oculars/src/ui_ocularDialog.h:1539
-#: plugins/Oculars/src/ui_ocularDialog.h:1549
-#: plugins/Oculars/src/ui_ocularDialog.h:1564
+#: plugins/Oculars/src/ui_ocularDialog.h:1536
+#: plugins/Oculars/src/ui_ocularDialog.h:1540
+#: plugins/Oculars/src/ui_ocularDialog.h:1550
+#: plugins/Oculars/src/ui_ocularDialog.h:1565
 #: plugins/Satellites/src/ui_satellitesDialog.h:1295
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:559
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:203
 msgid "Name:"
 msgstr "Nom:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1536
+#: plugins/Oculars/src/ui_ocularDialog.h:1537
 msgid "Eyepieces"
 msgstr "Oculars"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1540
+#: plugins/Oculars/src/ui_ocularDialog.h:1541
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -17790,35 +17791,35 @@ msgstr ""
 "Valors de multiplicador >1 amplia la llargada focal (lent Barlow). Valors de"
 " multiplicador <1 redueix la llargada focal (lent Shapley)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1541
+#: plugins/Oculars/src/ui_ocularDialog.h:1542
 msgid "Multiplier:"
 msgstr "Multiplicador:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1542
+#: plugins/Oculars/src/ui_ocularDialog.h:1543
 msgid "Lenses"
 msgstr "Lents"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1545
+#: plugins/Oculars/src/ui_ocularDialog.h:1546
 msgid "Off-Axis guider"
 msgstr "Guia fora d'eix"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1546
+#: plugins/Oculars/src/ui_ocularDialog.h:1547
 msgid "Resolution y:"
 msgstr "Resolució de la y\\:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1547
+#: plugins/Oculars/src/ui_ocularDialog.h:1548
 msgid "Binning x:"
 msgstr "Binning x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1548
+#: plugins/Oculars/src/ui_ocularDialog.h:1549
 msgid "Resolution x:"
 msgstr "Resolució de la x\\:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1550
+#: plugins/Oculars/src/ui_ocularDialog.h:1551
 msgid "Prism/CCD height:"
 msgstr "Prisma/CCD altura\\:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1552
+#: plugins/Oculars/src/ui_ocularDialog.h:1553
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the center of "
 "the Prism"
@@ -17826,51 +17827,51 @@ msgstr ""
 "Aquesta és la distància des del centre del sensor de la imatge fins al "
 "centre del prisma"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1554
+#: plugins/Oculars/src/ui_ocularDialog.h:1555
 msgid "Prism/CCD distance:"
 msgstr "Primsa/CCD distància\\:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1555
+#: plugins/Oculars/src/ui_ocularDialog.h:1556
 msgid "Rotation Angle:"
 msgstr "Angle rotació:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1556
+#: plugins/Oculars/src/ui_ocularDialog.h:1557
 msgid "Binning y:"
 msgstr "Binning y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1557
+#: plugins/Oculars/src/ui_ocularDialog.h:1558
 msgid "Prism/CCD width:"
 msgstr "Amplada prisma/CCD:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1558
+#: plugins/Oculars/src/ui_ocularDialog.h:1559
 msgid "Chip height:"
 msgstr "Alçària del xip:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1559
+#: plugins/Oculars/src/ui_ocularDialog.h:1560
 msgid "Chip width:"
 msgstr "Amplària del xip:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1560
+#: plugins/Oculars/src/ui_ocularDialog.h:1561
 msgid "Position angle:"
 msgstr "Angle de posició:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1561
+#: plugins/Oculars/src/ui_ocularDialog.h:1562
 msgid "Sensors"
 msgstr "Sensors"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1565
+#: plugins/Oculars/src/ui_ocularDialog.h:1566
 msgid "Horizontal flip"
 msgstr "Capgira horitzontalment"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1566
+#: plugins/Oculars/src/ui_ocularDialog.h:1567
 msgid "Vertical flip"
 msgstr "Capgira veticalment"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1567
+#: plugins/Oculars/src/ui_ocularDialog.h:1568
 msgid "Equatorial Mount"
 msgstr "Muntura equatorial"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1570
+#: plugins/Oculars/src/ui_ocularDialog.h:1571
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:395
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:406
 msgid "Telescopes"
@@ -20512,11 +20513,13 @@ msgstr "Aturat"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:117
 msgid "Outdated ASCOM!"
-msgstr ""
+msgstr "ASCOM no actualitzat!"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:117
 msgid "Your ASCOM is below version 7. Upgrade to avoid problems!"
 msgstr ""
+"La teva versió d’ASCOM és inferior a la 7. Actualitza-la per evitar "
+"problemes!"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:273
 msgid "Telescope Control plug-in"
