@@ -827,11 +827,20 @@ ELSE()
 ENDIF()
 
 IF(ENABLE_XLSX)
-     CPMFindPackage(NAME QXlsxQt${QT_VERSION_MAJOR}
-          URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.5.0.tar.gz
-          URL_HASH SHA256=4461bb0fc9b88b6a970520e8b32eb7d2fc391a1a5c326b139a0af836278cdb09
-          EXCLUDE_FROM_ALL ON
-          SOURCE_SUBDIR QXlsx)
+     # Version 1.4.4 exports "QXlsx", but future (unreleased as of 10 Nov 2022)
+     # version exports "QXlsxQt5" (or ...Qt6) instead. Try both, but
+     # download newer one, because 1.4.4 doesn't link on windows when
+     # added via add_subdirectory().
+     FIND_PACKAGE(QXlsx NAMES QXlsxQt${QT_VERSION_MAJOR} QXlsx)
+     IF(QXlsx_FOUND)
+          MESSAGE(STATUS "Using system-provided QXlsx ${QXlsx_VERSION}")
+     ELSE()
+          CPMAddPackage(NAME QXlsxQt${QT_VERSION_MAJOR}
+               URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.5.0.tar.gz
+               URL_HASH SHA256=4461bb0fc9b88b6a970520e8b32eb7d2fc391a1a5c326b139a0af836278cdb09
+               EXCLUDE_FROM_ALL ON
+               SOURCE_SUBDIR QXlsx)
+     ENDIF()
 ENDIF()
 
 CPMFindPackage(NAME md4c
