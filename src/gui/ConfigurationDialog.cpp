@@ -448,7 +448,11 @@ void ConfigurationDialog::createDialogContent()
 
 	// plugins control
 	connect(ui->pluginsListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(pluginsSelectionChanged(QListWidgetItem*, QListWidgetItem*)));
+#if (QT_VERSION<QT_VERSION_CHECK(6,7,0))
 	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(loadAtStartupChanged(int)));
+#else
+	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)), this, SLOT(loadAtStartupChanged(Qt::CheckState)));
+#endif
 	connect(ui->pluginsListWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(pluginConfigureCurrentSelection()));
 	connect(ui->pluginConfigureButton, SIGNAL(clicked()), this, SLOT(pluginConfigureCurrentSelection()));
 	populatePluginsList();
@@ -1417,7 +1421,11 @@ void ConfigurationDialog::pluginConfigureCurrentSelection()
 	}
 }
 
-void ConfigurationDialog::loadAtStartupChanged(int state)
+#if (QT_VERSION<QT_VERSION_CHECK(6,7,0))
+	void ConfigurationDialog::loadAtStartupChanged(int state)
+#else
+	void ConfigurationDialog::loadAtStartupChanged(Qt::CheckState state)
+#endif
 {
 	if (ui->pluginsListWidget->count() <= 0)
 		return;
