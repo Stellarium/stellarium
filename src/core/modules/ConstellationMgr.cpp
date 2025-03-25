@@ -160,14 +160,7 @@ void ConstellationMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
 	// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
 	deselectConstellations();
-	loadLinesNamesAndArt(skyCulture.constellations, skyCulture,
-	                     skyCulture.langsUseNativeNames.contains("en"));
-
-	constellationsEnglishNames.clear();
-	for (const auto*const cons : constellations)
-	{
-		constellationsEnglishNames.push_back(cons->englishName);
-	}
+	loadLinesNamesAndArt(skyCulture);
 
 	// Translate constellation names for the new sky culture
 	updateI18n();
@@ -439,17 +432,17 @@ void ConstellationMgr::setConstellationBoundariesThickness(const int thickness)
 	}
 }
 
-void ConstellationMgr::loadLinesNamesAndArt(const QJsonArray &constellationsData, const StelSkyCulture &culture, const bool preferNativeNames)
+void ConstellationMgr::loadLinesNamesAndArt(const StelSkyCulture &culture)
 {
 	constellations.clear();
 	Constellation::seasonalRuleEnabled = false;
 
 	int readOk = 0;
-	for (const auto& constellationData : constellationsData)
+	for (const auto& constellationData : culture.constellations)
 	{
 		Constellation*const cons = new Constellation;
 		const auto consObj = constellationData.toObject();
-		if (!cons->read(consObj, hipStarMgr, preferNativeNames))
+		if (!cons->read(consObj, hipStarMgr)) //, preferNativeNames))
 		{
 			delete cons;
 			continue;
@@ -699,6 +692,11 @@ QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d&, double, const St
 
 QStringList ConstellationMgr::getConstellationsEnglishNames()
 {
+	QStringList constellationsEnglishNames;
+	for (auto* constellation : constellations)
+	{
+		constellationsEnglishNames << constellation->getEnglishName();
+	}
 	return  constellationsEnglishNames;
 }
 
@@ -716,6 +714,22 @@ void ConstellationMgr::updateI18n()
 				constellation->nameI18 = q_(constellation->englishName);
 			else
 				constellation->nameI18 = qc_(constellation->englishName, context);
+		}
+		constellation->nativeNamePronounceI18n = trans.tryQtranslate(constellation->nativeNamePronounce, context);
+		if (constellation->nativeNamePronounceI18n.isEmpty())
+		{
+			if (context.isEmpty())
+				constellation->nativeNamePronounceI18n = q_(constellation->nativeNamePronounce);
+			else
+				constellation->nativeNamePronounceI18n = qc_(constellation->nativeNamePronounce, context);
+		}
+		constellation->abbreviationI18n = trans.tryQtranslate(constellation->abbreviation, context);
+		if (constellation->abbreviationI18n.isEmpty())
+		{
+			if (context.isEmpty())
+				constellation->abbreviationI18n = q_(constellation->abbreviation);
+			else
+				constellation->abbreviationI18n = qc_(constellation->abbreviation, context);
 		}
 	}
 }

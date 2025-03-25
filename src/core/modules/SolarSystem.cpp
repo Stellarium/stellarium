@@ -2329,7 +2329,7 @@ StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
 {
 	for (const auto& p : systemPlanets)
 	{
-		QString nativeName = p->getNativeNameI18n().toUpper();
+		QString nativeName = p->getNameNativeI18n().toUpper();
 		if (p->getNameI18n().toUpper() == planetNameI18.toUpper() || (!nativeName.isEmpty() && nativeName == planetNameI18.toUpper()))
 			return qSharedPointerCast<StelObject>(p);
 	}
@@ -2341,7 +2341,7 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 {
 	for (const auto& p : systemPlanets)
 	{
-		QString nativeName = p->getNativeName().toUpper();
+		QString nativeName = p->getNameNative().toUpper();
 		if (p->getEnglishName().toUpper() == name.toUpper() || (!nativeName.isEmpty() && nativeName == name.toUpper()))
 			return qSharedPointerCast<StelObject>(p);
 
@@ -2728,8 +2728,8 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 		for (const auto& p : systemPlanets)
 		{
 			result << p->getNameI18n();
-			if (!p->getNativeNameI18n().isEmpty())
-				result << p->getNativeNameI18n() << p->getNativeName();
+			if (!p->getNameNativeI18n().isEmpty())
+				result << p->getNameNativeI18n() << p->getNameNative();
 			if (!p->getIAUDesignation().isEmpty())
 				result << p->getIAUDesignation();
 		}
