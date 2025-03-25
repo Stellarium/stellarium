@@ -530,9 +530,15 @@ void ViewDialog::createDialogContent()
 	ui->colorCardinalPoints          ->setup("LandscapeMgr.cardinalPointsColor",            "color/cardinal_color");
 	ui->colorCompassMarks            ->setup("SpecialMarkersMgr.compassMarksColor",         "color/compass_marks_color");
 
+#if (QT_VERSION<QT_VERSION_CHECK(6,7,0))
 	connect(ui->showCardinalPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
 	connect(ui->showOrdinal8WRPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
 	connect(ui->showOrdinal16WRPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
+#else
+	connect(ui->showCardinalPointsCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)), this, SLOT(setSelectedCardinalCheckBoxes()));
+	connect(ui->showOrdinal8WRPointsCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)), this, SLOT(setSelectedCardinalCheckBoxes()));
+	connect(ui->showOrdinal16WRPointsCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)), this, SLOT(setSelectedCardinalCheckBoxes()));
+#endif
 	setSelectedCardinalCheckBoxes();
 
 	// Projection
