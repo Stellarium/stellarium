@@ -464,7 +464,7 @@ void MosaicCamera::setViewToCamera()
     StelUtils::spheToRect(ra/M_180_PI, dec/M_180_PI, 1.0, aim);
     const Vec3d aimUp(0.0, 0.0, 1.0);
     GETSTELMODULE(StelMovementMgr)->moveToJ2000(aim, aimUp);
-    GETSTELMODULE(StelMovementMgr)->setFov(5 * cameras[currentCamera].fieldDiameter);
+    GETSTELMODULE(StelMovementMgr)->zoomTo(5 * cameras[currentCamera].fieldDiameter);
 }
 
 void MosaicCamera::incrementRotation()
