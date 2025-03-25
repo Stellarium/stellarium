@@ -509,25 +509,23 @@ QSize AngleSpinBox::minimumSizeHint() const
 		case DMSSymbolsUnsigned:
 		{
 			if (angleSpinBoxFormat == DMSLetters || angleSpinBoxFormat == DMSLettersUnsigned)
-				refText = QString("%1%2d %3m %4s").arg(signPlaceholder).arg(359).arg(59)
-				                                  .arg(0, 0, 'f', decimalPlaces, ' ');
+				refText = QString("%1%2d %3m %4s").arg(signPlaceholder).arg(359).arg(59).arg(0., 0, 'f', decimalPlaces, ' ');
 			else
-				refText = QString("%1%2° %3' %4\"").arg(signPlaceholder).arg(359).arg(59)
-				                                   .arg(0, 0, 'f', decimalPlaces, ' ');
+				refText = QString("%1%2° %3' %4\"").arg(signPlaceholder).arg(359).arg(59).arg(0., 0, 'f', decimalPlaces, ' ');
 			break;
 		}
 		case HMSLetters:
 		case HMSSymbols:
 		{
 			if (angleSpinBoxFormat == HMSLetters)
-				refText = QString("%1h %2m %3s").arg(23).arg(59).arg(0, 0, 'f', decimalPlaces, ' ');
+				refText = QString("%1h %2m %3s").arg(23).arg(59).arg(0., 0, 'f', decimalPlaces, ' ');
 			else
-				refText = QString("%1h %2' %3\"").arg(23).arg(59).arg(0, 0, 'f', decimalPlaces, ' ');
+				refText = QString("%1h %2' %3\"").arg(23).arg(59).arg(0., 0, 'f', decimalPlaces, ' ');
 			break;
 		}
 		case DecimalDeg:
 		{
-			refText = QString("%1%2°").arg(signPlaceholder).arg(360, 0, 'f', decimalPlaces, ' ');
+			refText = QString("%1%2°").arg(signPlaceholder).arg(360., 0, 'f', decimalPlaces, ' ');
 			break;
 		}
 		default:

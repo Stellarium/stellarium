@@ -564,7 +564,7 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	Vec3d tmp;
-	double RA, DEC, pmra, pmdec, PlxErr, Plx, RadialVel;
+	double RA, DEC, pmra, pmdec, Plx, RadialVel;
 	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
 	{
 		s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
