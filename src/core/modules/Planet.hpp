@@ -258,8 +258,8 @@ public:
 	QString getEnglishName(void) const override;
 	QString getNameI18n(void) const override;
 	virtual QString getIAUDesignation(void) const;
-	QString getNativeName(void) const { return nativeName; }
-	QString getNativeNameI18n(void) const { return nativeNameMeaningI18n; }
+	QString getNameNative(void) const override { return nativeName; }
+	QString getNameNativeI18n(void) const { return nativeNameMeaningI18n; }
 	QString getCommonEnglishName(void) const {return englishName;}
 	QString getCommonNameI18n(void) const {return nameI18;}
 	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.

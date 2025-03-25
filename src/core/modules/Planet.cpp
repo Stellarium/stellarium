@@ -480,10 +480,10 @@ QString Planet::getPlanetLabel() const
 		switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
 		{
 			case 1: // constellationsNative
-				oss << (nativeName.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNativeName(), getNameI18n()));
+				oss << (nativeName.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNameNative(), getNameI18n()));
 				break;
 			case 2: // constellationsTranslated
-				oss << (nativeNameMeaningI18n.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNativeNameI18n(), getNameI18n()));
+				oss << (nativeNameMeaningI18n.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNameNativeI18n(), getNameI18n()));
 				break;
 			case 3: // constellationsEnglish
 				oss << (nativeNameMeaning.isEmpty() ? getEnglishName() : QString("%1 [%2]").arg(nativeNameMeaning, getEnglishName()));

@@ -495,7 +495,9 @@ void StelApp::init(QSettings* conf)
 	//create non-StelModule managers
 	propMgr = new StelPropertyMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
-	propMgr->registerObject(skyCultureMgr);
+	skyCultureMgr->init();
+	getModuleMgr().registerModule(skyCultureMgr);
+
 	planetLocationMgr = new StelLocationMgr();
 	actionMgr = new StelActionMgr();
 

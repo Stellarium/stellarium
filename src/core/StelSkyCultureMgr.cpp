@@ -756,3 +756,40 @@ QString StelSkyCultureMgr::skyCultureI18ToDirectory(const QString& cultureName) 
 	}
 	return "";
 }
+
+// Returns the screen labeling setting for the currently active skyculture
+StelObject::CulturalDisplayStyle StelSkyCultureMgr::getScreenLabelStyle()
+{
+	QSettings *conf=StelApp::getInstance().getSettings();
+	QVariant val= conf->value(QString("SCScreenLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
+	if (val.canConvert<StelObject::CulturalDisplayStyle>())
+		return val.value<StelObject::CulturalDisplayStyle>();
+	else
+		return StelObject::CulturalDisplayStyle::Translated;
+}
+// Sets the screen labeling setting for the currently active skyculture
+void StelSkyCultureMgr::setScreenLabelStyle(StelObject::CulturalDisplayStyle &style)
+{
+	QSettings *conf=StelApp::getInstance().getSettings();
+	conf->setValue(QString("SCScreenLabelStyle/%1").arg(getCurrentSkyCultureID()), QVariant::fromValue(style).toString());
+	emit screenLabelStyleChanged(style);
+}
+
+// Returns the InfoString Labeling setting for the currently active skyculture
+StelObject::CulturalDisplayStyle StelSkyCultureMgr::getInfoLabelStyle()
+{
+	QSettings *conf=StelApp::getInstance().getSettings();
+	QVariant val= conf->value(QString("SCInfoLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
+	if (val.canConvert<StelObject::CulturalDisplayStyle>())
+		return val.value<StelObject::CulturalDisplayStyle>();
+	else
+		return StelObject::CulturalDisplayStyle::Translated;
+}
+
+// Sets the InfoString Labeling setting for the currently active skyculture
+void StelSkyCultureMgr::setInfoLabelStyle(StelObject::CulturalDisplayStyle &style)
+{
+	QSettings *conf=StelApp::getInstance().getSettings();
+	conf->setValue(QString("SCInfoLabelStyle/%1").arg(getCurrentSkyCultureID()), QVariant::fromValue(style).toString());
+	emit infoLabelStyleChanged(style);
+}

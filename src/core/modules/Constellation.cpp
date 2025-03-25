@@ -29,6 +29,7 @@
 #include "StelUtils.hpp"
 #include "ConstellationMgr.hpp"
 #include "ZoneArray.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 #include <QString>
 #include <QJsonArray>
@@ -59,7 +60,7 @@ Constellation::~Constellation()
 {
 }
 
-bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool preferNativeName)
+bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 {
 	const auto id = data["id"].toString();
 	const auto idParts = id.split(" ");
@@ -76,9 +77,11 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool p
 	const auto names = data["common_name"].toObject();
 	nativeName = names["native"].toString();
 	nativeNamePronounce = names["pronounce"].toString();
-	englishName = preferNativeName && !nativeName.isEmpty() ? nativeName : names["english"].toString();
+	nativeNameIPA = names["IPA"].toString();
+	nativeNameTranslit = names["transliteration"].toString();
+	englishName = names["english"].toString();
 	context = names["context"].toString();
-	if (englishName.isEmpty() && nativeName.isEmpty())
+	if (englishName.isEmpty() && nativeName.isEmpty() && nativeNamePronounce.isEmpty())
 		qWarning() << "No name for constellation" << id;
 
 	constellation.clear();
@@ -157,6 +160,70 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool p
 	return true;
 }
 
+QString Constellation::getScreenLabel() const
+{
+	return getCultureLabel(GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle());
+}
+QString Constellation::getInfoLabel() const
+{
+	return getCultureLabel(GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle());
+}
+
+QString Constellation::getCultureLabel(StelObject::CulturalDisplayStyle style) const
+{
+	QString label;
+	switch (style)
+	{
+		case CulturalDisplayStyle::Abbreviated:
+			label=(abbreviationI18n.startsWith('.') ? "" : abbreviationI18n);
+			break;
+		case CulturalDisplayStyle::Native:
+			label=nativeName;
+			break;
+		case CulturalDisplayStyle::Translated:
+			label=nameI18;
+			break;
+		case CulturalDisplayStyle::Modern:
+			label=englishName;
+			break;
+		case CulturalDisplayStyle::Pronounce:
+			label=getNamePronounce();
+			break;
+		case CulturalDisplayStyle::Translit:
+			label=nativeNameTranslit;
+			break;
+		case CulturalDisplayStyle::IPA:
+			label=nativeNameIPA;
+			break;
+		case CulturalDisplayStyle::Pronounce_Translated:
+			label=QString("%1 (%2)").arg(getNamePronounce(), nameI18);
+			break;
+		case CulturalDisplayStyle::Pronounce_IPA_Translated:
+			label=QString("%1 [%2] (%3)").arg(getNamePronounce(), nativeNameIPA, nameI18);
+			break;
+		case CulturalDisplayStyle::Pronounce_Translated_Modern:
+			label=QString("%1 (%2, %3)").arg(getNamePronounce(), nameI18, englishName);
+			break;
+		case CulturalDisplayStyle::Pronounce_IPA_Translated_Modern:
+			label=QString("%1 [%2] (%3, %4)").arg(getNamePronounce(), nativeNameIPA, nameI18, englishName);
+			break;
+		case CulturalDisplayStyle::Native_Pronounce:
+			label=QString("%1 [%2]").arg(nativeName, getNamePronounce());
+			break;
+		case CulturalDisplayStyle::Native_Pronounce_Translated:
+			label=QString("%1 [%2] (%3)").arg(nativeName, getNamePronounce(), nameI18);
+			break;
+		case CulturalDisplayStyle::Native_Pronounce_IPA_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(nativeName, getNamePronounce(), nativeNameIPA, nameI18);
+			break;
+			// TODO: MORE TO COME!
+		default:  // pronounce + translated...
+			label=QString("%1 (%2)").arg(getNamePronounce(), nameI18);
+			break;
+	}
+	return label;
+}
+
 void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const
 {
 	if (lineFader.getInterstate()<=0.0001f)
@@ -194,57 +261,7 @@ void Constellation::drawName(StelPainter& sPainter, StelObject::CulturalDisplayS
 	// TODO: Find a solution of fallbacks when components are missing?
 	if (checkVisibility())
 	{
-		QString name;
-		switch (style)
-		{
-			case CulturalDisplayStyle::Abbreviated:
-				name=(abbreviation.startsWith('.') ? "" : abbreviation);
-				break;
-			case CulturalDisplayStyle::Native:
-				name=nativeName;
-				break;
-			case CulturalDisplayStyle::Translated:
-				name=nameI18;
-				break;
-			case CulturalDisplayStyle::Modern:
-				name=englishName;
-				break;
-			case CulturalDisplayStyle::Pronounce:
-				name=englishName;
-				break;
-			case CulturalDisplayStyle::Translit:
-				name=englishName;
-				break;
-			case CulturalDisplayStyle::IPA:
-				name=nativeNameIPA;
-				break;
-			case CulturalDisplayStyle::Pronounce_Translated:
-				name=QString("%1 (%2)").arg(nativeNamePronounce, nameI18);
-				break;
-			case CulturalDisplayStyle::Pronounce_IPA_Translated:
-				name=QString("%1 [%2] (%3)").arg(nativeNamePronounce, nativeNameIPA, englishName);
-				break;
-			case CulturalDisplayStyle::Pronounce_Translated_Modern:
-				name=QString("%1 (%2, %3)").arg(nativeNamePronounce, nameI18, englishName);
-				break;
-			case CulturalDisplayStyle::Pronounce_IPA_Translated_Modern:
-				name=QString("%1 [%2] (%3, %4)").arg(nativeNamePronounce, nativeNameIPA, nameI18, englishName);
-				break;
-			case CulturalDisplayStyle::Native_Pronounce:
-				name=QString("%1 [%2]").arg(nativeName, nativeNamePronounce);
-				break;
-			case CulturalDisplayStyle::Native_Pronounce_Translated:
-				name=QString("%1 [%2] (%3)").arg(nativeName, nativeNamePronounce, nameI18);
-				break;
-			case CulturalDisplayStyle::Native_Pronounce_IPA_Translated:
-				name=QString("%1 [%2, %3] (%4)").arg(nativeName, nativeNamePronounce, nativeNameIPA, nameI18);
-				break;
-				// TODO: MORE TO COME!
-			default:  // pronounce + translated...
-				name=QString("%1 (%2)").arg(nativeNamePronounce, nameI18);
-				break;
-		}
-
+		QString name=getScreenLabel();
 		sPainter.setColor(labelColor, nameFader.getInterstate());
 		sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 	}
@@ -291,13 +308,13 @@ const Constellation* Constellation::isStarIn(const StelObject* s) const
 	for(unsigned int i=0;i<numberOfSegments*2;++i)
 	{
 		// constellation[i]==s test was not working
-		if (constellation[i]->getEnglishName()==s->getEnglishName())
+		if (constellation[i]->getID()==s->getID()) // don't compare englishNames, we may have duplicate names!
 		{
 			// qDebug() << "Const matched. " << getEnglishName();
 			return this;
 		}
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 void Constellation::update(int deltaTime)
@@ -375,20 +392,7 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 
 	if (flags&Name)
 	{
-		QStringList names;
-		if (getNativeNamePronounce().isEmpty())
-			names << getNativeName();
-		else
-			names << QString("%1 [%2]").arg(getNativeName(), getNativeNamePronounce());
-
-		QString shortname = getShortName();
-		if (!shortname.isEmpty() && shortname.toInt()==0)
-			names << shortname;
-
-		oss << "<h2>" << getNameI18n();
-		if (!names.empty())
-			oss << " (" << names.join(" - ") << ")";
-		oss << "</h2>";
+		oss << "<h2>" << getInfoLabel() << "</h2>";
 	}
 
 	if (flags&ObjectType)
