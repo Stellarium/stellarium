@@ -108,7 +108,7 @@
       <attribute name="title">
        <string>Cameras</string>
       </attribute>
-      <layout class="QHBoxLayout" name="horizontalLayout">
+      <layout class="QHBoxLayout" name="horizontalLayout1">
        <item>
         <widget class="QListWidget" name="cameraListWidget">
          <property name="sizePolicy">
@@ -187,7 +187,7 @@
           </layout>
          </item>
          <item>
-          <spacer name="verticalSpacer">
+          <spacer name="verticalSpacer1">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
