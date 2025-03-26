@@ -4971,7 +4971,7 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="1" column="0" rowspan="2">
+             <item row="5" column="0" rowspan="2">
               <layout class="QGridLayout" name="skyCultureGridLayout">
                <item row="2" column="6" colspan="2">
                 <widget class="QCheckBox" name="showAsterismLinesCheckBox">
@@ -5442,6 +5442,50 @@
                </item>
               </layout>
              </item>
+             <item row="3" column="0">
+              <layout class="QGridLayout" name="gridLayout_LabelStyle">
+               <item row="0" column="0">
+                <widget class="QLabel" name="labelInfoLabel">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Info label</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="labelScreenLabel">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Screen label</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QComboBox" name="infoLabelComboBox">
+                 <property name="toolTip">
+                  <string>Combination of names for the object description</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QComboBox" name="screenLabelComboBox">
+                 <property name="toolTip">
+                  <string>Combination of names for the object screen label</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
              <item row="0" column="0" colspan="2">
               <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
                <property name="text">
@@ -5640,12 +5684,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
