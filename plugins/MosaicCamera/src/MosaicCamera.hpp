@@ -178,7 +178,6 @@ private:
 	MosaicCameraDialog* configDialog;
 	StelButton* toolbarButton;
 	StelCore* core;
-
 };
 
 class MosaicCameraStelPluginInterface : public QObject, public StelPluginInterface
