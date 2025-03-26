@@ -33,33 +33,15 @@ QTEST_GUILESS_MAIN(TestAstrometry)
 void TestAstrometry::initTestCase()
 {
     // Define the directory to search in
-    QDir dir(QDir::currentPath());
+    QDir dir(STELLARIUM_SOURCE_DIR);
     // make a list of star catalog files stars_0_*.cat, stars_1_*.cat, stars_2_*.cat and stars_3_*.cat
     QStringList filters;
     filters << "stars_0_*.cat" << "stars_1_*.cat" << "stars_2_*.cat" << "stars_3_*.cat";
     QStringList files;
     QString file;
 
-    while (!dir.isRoot())  // check directory one by one if the current directory contains star catalog files
-    {
-        // check if at least one "stars_*.cat" file exist under the directory
-        if (dir.exists("stars/hip_gaia3"))  // check if the directory exists, if yes go in to check
-        {
-            dir.cd("stars/hip_gaia3");
-            dir.setNameFilters(QStringList() << filters[0]);
-            files = dir.entryList(QDir::Files);
-            if (!files.isEmpty())  // in case the directory does not contains any star catalog file
-            {
-                break;
-            }
-            else
-            {
-                // go back to the parent directory and keep searching
-                dir.cd("../../");
-            }
-        }
-        dir.cdUp();  // one level up at a time
-    }
+    // Go to star catalog directory...
+    dir.cd("stars/hip_gaia3");
 
     // assert the directory exists
     QVERIFY2(dir.exists(), "Star catalog directory does not exist! Can't perform the rest of the tests.");
