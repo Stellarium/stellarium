@@ -564,14 +564,14 @@ bool StelSkyCultureMgr::setCurrentSkyCultureNameI18(const QString& cultureName)
 }
 
 //! returns newline delimited list of human readable culture names in english
-QString StelSkyCultureMgr::getSkyCultureListEnglish(void) const
+QStringList StelSkyCultureMgr::getSkyCultureListEnglish(void) const
 {
-	QString cultures;
+	QStringList cultures;
 	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
 	while(i.hasNext())
 	{
 		i.next();
-		cultures += QString("%1\n").arg(i.value().englishName);
+		cultures << i.value().englishName;
 	}
 	return cultures;
 }
@@ -762,6 +762,7 @@ StelObject::CulturalDisplayStyle StelSkyCultureMgr::getScreenLabelStyle()
 {
 	QSettings *conf=StelApp::getInstance().getSettings();
 	QVariant val= conf->value(QString("SCScreenLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
+	//qDebug() << "StelSkyCultureMgr::getScreenLabelStyle(): found " << val << "(" << val.toString() << ")";
 	if (val.canConvert<StelObject::CulturalDisplayStyle>())
 		return val.value<StelObject::CulturalDisplayStyle>();
 	else
@@ -780,6 +781,7 @@ StelObject::CulturalDisplayStyle StelSkyCultureMgr::getInfoLabelStyle()
 {
 	QSettings *conf=StelApp::getInstance().getSettings();
 	QVariant val= conf->value(QString("SCInfoLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
+	//qDebug() << "StelSkyCultureMgr::getScreenLabelStyle(): found " << val << "(" << val.toString() << ")";
 	if (val.canConvert<StelObject::CulturalDisplayStyle>())
 		return val.value<StelObject::CulturalDisplayStyle>();
 	else

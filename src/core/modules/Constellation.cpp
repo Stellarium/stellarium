@@ -29,6 +29,7 @@
 #include "StelUtils.hpp"
 #include "ConstellationMgr.hpp"
 #include "ZoneArray.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 
 #include <QString>
@@ -214,12 +215,36 @@ QString Constellation::getCultureLabel(StelObject::CulturalDisplayStyle style) c
 			label=QString("%1 [%2] (%3)").arg(nativeName, getNamePronounce(), nameI18);
 			break;
 		case CulturalDisplayStyle::Native_Pronounce_IPA_Translated:
-			label=QString("%1 [%2, %3] (%4)").arg(nativeName, getNamePronounce(), nativeNameIPA, nameI18);
+			label=QString("%1 [%2%3] (%4)").arg(nativeName, getNamePronounce(), nativeNameIPA.length() > 0 ? QString(", %1").arg(nativeNameIPA) : "", nameI18);
 			break;
-			// TODO: MORE TO COME!
-		default:  // pronounce + translated...
-			label=QString("%1 (%2)").arg(getNamePronounce(), nameI18);
+		case  CulturalDisplayStyle::Native_Translated:
+			label=QString("%1 (%2)").arg(nativeName, nameI18);
 			break;
+		case  CulturalDisplayStyle::Native_Translit_Translated:
+			label=QString("%1 [%2] (%3)").arg(nativeName, nativeNameTranslit, nameI18);
+			break;
+		case  CulturalDisplayStyle::Native_Translit_Pronounce_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(nativeName, nativeNameTranslit, getNamePronounce(), nameI18);
+			break;
+		case  CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated:
+			label=QString("%1 [%2, %3, %4] (%5)").arg(nativeName, nativeNameTranslit, getNamePronounce(), nativeNameIPA, nameI18);
+			break;
+		case  CulturalDisplayStyle::Native_Translit_IPA_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(nativeName, nativeNameTranslit, nativeNameIPA, nameI18);
+			break;
+		case  CulturalDisplayStyle::Translit_Translated:
+			label=QString("%1 (%2)").arg(nativeNameTranslit, nameI18);
+			break;
+		case  CulturalDisplayStyle::Translit_Pronounce_Translated:
+			label=QString("%1 [%2] (%3)").arg(nativeNameTranslit, getNamePronounce(), nameI18);
+			break;
+		case  CulturalDisplayStyle::Translit_Pronounce_IPA_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(nativeNameTranslit, getNamePronounce(), nativeNameIPA, nameI18);
+			break;
+		case  CulturalDisplayStyle::Translit_IPA_Translated:
+			label=QString("%1 [%2] (%4)").arg(nativeNameTranslit, nativeNameIPA, nameI18);
+			break;
+		// NO default here, else we may forget one.
 	}
 	return label;
 }

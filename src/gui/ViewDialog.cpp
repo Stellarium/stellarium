@@ -556,7 +556,13 @@ void ViewDialog::createDialogContent()
 	updateDefaultSkyCulture();
 
 	// allow to display short names and inhibit translation.
-	connectIntProperty(ui->skyCultureNamesStyleComboBox,		"ConstellationMgr.constellationDisplayStyle");
+	// TODO: Remove
+//	connectIntProperty(ui->skyCultureNamesStyleComboBox,		"ConstellationMgr.constellationDisplayStyle");
+	ui->skyCultureNamesStyleComboBox->hide();
+	ui->labelConstellationsNameStyle->hide();
+
+	connectIntProperty(ui->screenLabelComboBox,		"StelSkyCultureMgr.screenLabelStyle");
+	connectIntProperty(ui->infoLabelComboBox,		"StelSkyCultureMgr.infoLabelStyle");
 	connectCheckBox(ui->nativePlanetNamesCheckBox,			"actionShow_Skyculture_NativePlanetNames");
 	connectCheckBox(ui->showConstellationLinesCheckBox,			"actionShow_Constellation_Lines");
 	connectIntProperty(ui->constellationLineThicknessSpinBox,		"ConstellationMgr.constellationLineThickness");
@@ -1076,8 +1082,8 @@ void ViewDialog::populateLists()
 	QListWidget* l = ui->culturesListWidget;
 	l->blockSignals(true);
 	l->clear();
-	QStringList skyculture = app.getSkyCultureMgr().getSkyCultureListI18();
-	for ( const auto& s : skyculture  )
+	const QStringList &skycultures = app.getSkyCultureMgr().getSkyCultureListI18();
+	for ( const auto& s : skycultures  )
 	{
 		l->addItem(s);
 		l->findItems(s, Qt::MatchExactly).at(0)->setToolTip(s);
@@ -1086,24 +1092,27 @@ void ViewDialog::populateLists()
 	l->blockSignals(false);
 	updateSkyCultureText();
 
-	// populate language printing combo. (taken from DeltaT combo)
-	StelModule* cmgr = app.getModule("ConstellationMgr");
-	Q_ASSERT(cmgr);
-	Q_ASSERT(ui->skyCultureNamesStyleComboBox);
-	QComboBox* cultureNamesStyleComboBox = ui->skyCultureNamesStyleComboBox;
+//	// populate language printing combo. (taken from DeltaT combo)
+//	StelModule* cmgr = app.getModule("ConstellationMgr");
+//	Q_ASSERT(cmgr);
+//	Q_ASSERT(ui->skyCultureNamesStyleComboBox);
+//	QComboBox* cultureNamesStyleComboBox = ui->skyCultureNamesStyleComboBox;
+//
+//	cultureNamesStyleComboBox->blockSignals(true);
+//	cultureNamesStyleComboBox->clear();
+//	QMetaEnum enumerator = cmgr->metaObject()->property(cmgr->metaObject()->indexOfProperty("constellationDisplayStyle")).enumerator();
+//	cultureNamesStyleComboBox->addItem(q_("Abbreviated"), enumerator.keyToValue("constellationsAbbreviated"));
+//	cultureNamesStyleComboBox->addItem(q_("Native"), enumerator.keyToValue("constellationsNative"));  // Please make this always a transcript into European letters!
+//	cultureNamesStyleComboBox->addItem(q_("Translated"), enumerator.keyToValue("constellationsTranslated"));
+//	//cultureNamesStyleComboBox->addItem(q_("English"),    ConstellationMgr::constellationsEnglish); // This is not useful.
+//	//Restore the selection
+//	int index = cultureNamesStyleComboBox->findData(cmgr->property("constellationDisplayStyle").toInt(), Qt::UserRole, Qt::MatchCaseSensitive);
+//	if (index==-1) index=2; // Default: Translated
+//	cultureNamesStyleComboBox->setCurrentIndex(index);
+//	cultureNamesStyleComboBox->blockSignals(false);
 
-	cultureNamesStyleComboBox->blockSignals(true);
-	cultureNamesStyleComboBox->clear();
-	QMetaEnum enumerator = cmgr->metaObject()->property(cmgr->metaObject()->indexOfProperty("constellationDisplayStyle")).enumerator();
-	cultureNamesStyleComboBox->addItem(q_("Abbreviated"), enumerator.keyToValue("constellationsAbbreviated"));
-	cultureNamesStyleComboBox->addItem(q_("Native"), enumerator.keyToValue("constellationsNative"));  // Please make this always a transcript into European letters!
-	cultureNamesStyleComboBox->addItem(q_("Translated"), enumerator.keyToValue("constellationsTranslated"));
-	//cultureNamesStyleComboBox->addItem(q_("English"),    ConstellationMgr::constellationsEnglish); // This is not useful.
-	//Restore the selection
-	int index = cultureNamesStyleComboBox->findData(cmgr->property("constellationDisplayStyle").toInt(), Qt::UserRole, Qt::MatchCaseSensitive);
-	if (index==-1) index=2; // Default: Translated
-	cultureNamesStyleComboBox->setCurrentIndex(index);
-	cultureNamesStyleComboBox->blockSignals(false);
+	// This is too long, placed into own method
+	populateSkyCultureLabelStyleComboboxes();
 
 	const StelCore* core = app.getCore();
 	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
@@ -1155,6 +1164,60 @@ void ViewDialog::populateLists()
 		ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));	
 	ui->landscapeTextBrowser->setHtml(lmgr->property("currentLandscapeHtmlDescription").toString());	
 	updateDefaultLandscape();
+}
+
+// populate label formatting combos. (taken from DeltaT combo)
+void ViewDialog::populateSkyCultureLabelStyleComboboxes()
+{
+//	StelApp& app = StelApp::getInstance();
+	StelModule* scMgr = GETSTELMODULE(StelSkyCultureMgr);
+	Q_ASSERT(scMgr);
+	//StelModule* cmgr = app.getModule("ConstellationMgr");
+	//Q_ASSERT(cmgr);
+	Q_ASSERT(ui->skyCultureNamesStyleComboBox);
+	//QComboBox* cultureNamesStyleComboBox = ui->skyCultureNamesStyleComboBox;
+
+	QList<QComboBox *>comboBoxes={ui->screenLabelComboBox, ui->infoLabelComboBox};
+	for (QComboBox *comboBox: comboBoxes)
+	{
+		comboBox->blockSignals(true);
+		comboBox->clear();
+		// I am not sure if this is the best way. The actual enum is in StelObject.
+		QMetaEnum enumerator = scMgr->metaObject()->property(scMgr->metaObject()->indexOfProperty("screenLabelStyle")).enumerator();
+		comboBox->addItem(q_("Abbreviated"), enumerator.keyToValue("Abbreviated"));
+		comboBox->addItem(q_("Native"),      enumerator.keyToValue("Native"));
+		comboBox->addItem(q_("Translated"),  enumerator.keyToValue("Translated"));
+		comboBox->addItem(q_("Modern"),              enumerator.keyToValue("Modern"));
+		comboBox->addItem(q_("Transliteration"),     enumerator.keyToValue("Pronounce"));
+		comboBox->addItem(q_("Sci.Transliteration"), enumerator.keyToValue("Translit"));
+		comboBox->addItem(q_("IPA"),                 enumerator.keyToValue("IPA"));
+		comboBox->addItem(q_("Transliteration and translation"),                             enumerator.keyToValue("Pronounce_Translated"));
+		comboBox->addItem(q_("Transliteration, IPA and translation"),                        enumerator.keyToValue("Pronounce_IPA_Translated"));
+		comboBox->addItem(q_("Transliteration, translation and modern name"),                enumerator.keyToValue("Pronounce_Translated_Modern"));
+		comboBox->addItem(q_("Transliteration, IPA, translation, and modern name"),          enumerator.keyToValue("Pronounce_IPA_Translated_Modern"));
+		comboBox->addItem(q_("Native and transliteration"),                                  enumerator.keyToValue("Native_Pronounce"));
+		comboBox->addItem(q_("Native, transliteration and translation"),                     enumerator.keyToValue("Native_Pronounce_Translated"));
+		comboBox->addItem(q_("Native, transliteration, IPA and translation"),                enumerator.keyToValue("Native_Pronounce_IPA_Translated"));
+		comboBox->addItem(q_("Native and translation"),                                      enumerator.keyToValue("Native_Translated"));
+		comboBox->addItem(q_("Native, sci.transliteration and translation"),                 enumerator.keyToValue("Native_Translit_Translated"));
+		comboBox->addItem(q_("Native, sci.transliteration, transliteration and translation"),enumerator.keyToValue("Native_Translit_Pronounce_Translated"));
+		comboBox->addItem(q_("Native, sci.transliteration, transliteration, IPA and translation"), enumerator.keyToValue("Native_Translit_Pronounce_IPA_Translated"));
+		comboBox->addItem(q_("Native, sci.transliteration, IPA and translation"),            enumerator.keyToValue("Native_Translit_IPA_Translated"));
+		comboBox->addItem(q_("Sci.transliteration and translation"),                         enumerator.keyToValue("Translit_Translated"));
+		comboBox->addItem(q_("Sci.transliteration, transliteration and translation"),        enumerator.keyToValue("Translit_Pronounce_Translated"));
+		comboBox->addItem(q_("Sci.transliteration, transliteration, IPA and translation"),   enumerator.keyToValue("Translit_Pronounce_IPA_Translated"));
+		comboBox->addItem(q_("Sci.transliteration, IPA and translation"),                    enumerator.keyToValue("Translit_IPA_Translated"));
+	}
+	//Restore the selections
+	int index = ui->screenLabelComboBox->findData(scMgr->property("screenLabelStyle").toInt(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (index==-1) index=2; // Default: Translated
+	ui->screenLabelComboBox->setCurrentIndex(index);
+	ui->screenLabelComboBox->blockSignals(false);
+
+	index = ui->infoLabelComboBox->findData(scMgr->property("infoLabelStyle").toInt(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (index==-1) index=2; // Default: Translated
+	ui->infoLabelComboBox->setCurrentIndex(index);
+	ui->infoLabelComboBox->blockSignals(false);
 }
 
 void ViewDialog::skyCultureChanged()
