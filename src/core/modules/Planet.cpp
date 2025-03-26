@@ -475,39 +475,42 @@ QString Planet::getPlanetLabel() const
 	if (englishName==L1S("Pluto")) // We must prepend minor planet number here. Actually Dwarf Planet Pluto is still a "Planet" object in Stellarium...
 		oss << QString("(134340) ");
 
-	if (getFlagNativeName())
-	{
-		switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
-		{
-			case 1: // constellationsNative
-				oss << (nativeName.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNameNative(), getNameI18n()));
-				break;
-			case 2: // constellationsTranslated
-				oss << (nativeNameMeaningI18n.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNameNativeI18n(), getNameI18n()));
-				break;
-			case 3: // constellationsEnglish
-				oss << (nativeNameMeaning.isEmpty() ? getEnglishName() : QString("%1 [%2]").arg(nativeNameMeaning, getEnglishName()));
-				break;
-			default:
-				oss << getNameI18n();
-				break;
-		}
-	}
-	else
-	{
-		switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
-		{
-			case 3: // constellationsEnglish
-				oss << getEnglishName();
-				break;
-			case 1: // constellationsNative
-			case 2: // constellationsTranslated
-			default:
-				oss << getNameI18n();
-				break;
-		}
-	}
+//	if (getFlagNativeName())
+//	{
+//		switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
+//		{
+//			case 1: // constellationsNative
+//				oss << (nativeName.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNameNative(), getNameI18n()));
+//				break;
+//			case 2: // constellationsTranslated
+//				oss << (nativeNameMeaningI18n.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNameNativeI18n(), getNameI18n()));
+//				break;
+//			case 3: // constellationsEnglish
+//				oss << (nativeNameMeaning.isEmpty() ? getEnglishName() : QString("%1 [%2]").arg(nativeNameMeaning, getEnglishName()));
+//				break;
+//			default:
+//				oss << getNameI18n();
+//				break;
+//		}
+//	}
+//	else
+//	{
+//		switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
+//		{
+//			case 3: // constellationsEnglish
+//				oss << getEnglishName();
+//				break;
+//			case 1: // constellationsNative
+//			case 2: // constellationsTranslated
+//			default:
+//				oss << getNameI18n();
+//				break;
+//		}
+//	}
 
+	// FOR NOW:
+	oss << getNameI18n();
+	// LATER: This will be getScreenLabel()
 	return str;
 }
 

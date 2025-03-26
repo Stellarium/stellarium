@@ -1057,7 +1057,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_light_pollution_database",		propMgr->getStelPropertyValue("LandscapeMgr.flagUseLightPollutionFromDatabase").toBool());
 	conf->setValue("viewing/flag_environment_auto_enable",	propMgr->getStelPropertyValue("LandscapeMgr.flagEnvironmentAutoEnabling").toBool());
 	conf->setValue("viewing/constellation_art_intensity",		propMgr->getStelPropertyValue("ConstellationMgr.artIntensity").toFloat());
-	conf->setValue("viewing/constellation_name_style",		ConstellationMgr::getConstellationDisplayStyleString(static_cast<StelObject::CulturalDisplayStyle> (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())  ));
+//	conf->setValue("viewing/constellation_name_style",		ConstellationMgr::getConstellationDisplayStyleString(static_cast<StelObject::CulturalDisplayStyle> (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())  ));
 	conf->setValue("viewing/constellation_line_thickness",		propMgr->getStelPropertyValue("ConstellationMgr.constellationLineThickness").toInt());
 	conf->setValue("viewing/constellation_boundaries_thickness",	propMgr->getStelPropertyValue("ConstellationMgr.constellationBoundariesThickness").toInt());
 	conf->setValue("viewing/constellation_art_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.artFadeDuration").toDouble(), 'f', 1));

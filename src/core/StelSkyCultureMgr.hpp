@@ -26,6 +26,7 @@
 #include <QStringList>
 #include <QJsonObject>
 #include <QJsonArray>
+#include "StelObject.hpp"
 #include "StelModule.hpp"
 
 class StelTranslator;
@@ -209,8 +210,8 @@ public slots:
 	bool setDefaultSkyCultureID(const QString& id);
 	
 	//! Get a list of sky culture names in English.
-	//! @return A new-line delimited list of English sky culture names.
-	QString getSkyCultureListEnglish(void) const;
+	//! @return A list of English sky culture names.
+	QStringList getSkyCultureListEnglish(void) const;
 	
 	//! Get a list of sky culture names in the current language.
 	//! @return A list of translated sky culture names.
@@ -226,11 +227,15 @@ public slots:
 	StelObject::CulturalDisplayStyle getScreenLabelStyle();
 	//! Sets the screen labeling setting for the currently active skyculture
 	void setScreenLabelStyle(StelObject::CulturalDisplayStyle &style);
+	//! TODO: scripting version
+	//void setScreenLabelStyle(const QString &style);
 
 	//! Returns the InfoString labeling setting for the currently active skyculture
 	StelObject::CulturalDisplayStyle getInfoLabelStyle();
 	//! sets the InfoString labeling setting for the currently active skyculture
 	void setInfoLabelStyle(StelObject::CulturalDisplayStyle &style);
+	//! TODO: scripting version
+	//void setInfoLabelStyle(const QString &style);
 
 signals:
 	//! Emitted whenever the default sky culture changed.

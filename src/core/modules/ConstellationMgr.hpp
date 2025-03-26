@@ -60,8 +60,8 @@ class ConstellationMgr : public StelObjectModule
 	Q_PROPERTY(bool namesDisplayed            READ getFlagLabels                     WRITE setFlagLabels                    NOTIFY namesDisplayedChanged)
 	Q_PROPERTY(float namesFadeDuration        READ getLabelsFadeDuration             WRITE setLabelsFadeDuration            NOTIFY namesFadeDurationChanged)
 //	Q_PROPERTY(ConstellationDisplayStyle constellationDisplayStyle	READ getConstellationDisplayStyle WRITE setConstellationDisplayStyle NOTIFY constellationsDisplayStyleChanged)
-	Q_PROPERTY(StelObject::CulturalDisplayStyle constellationDisplayStyle
-						  READ getConstellationDisplayStyle      WRITE setConstellationDisplayStyle     NOTIFY constellationsDisplayStyleChanged)
+//	Q_PROPERTY(StelObject::CulturalDisplayStyle constellationDisplayStyle
+//						  READ getConstellationDisplayStyle      WRITE setConstellationDisplayStyle     NOTIFY constellationsDisplayStyleChanged)
 	Q_PROPERTY(int constellationLineThickness READ getConstellationLineThickness     WRITE setConstellationLineThickness    NOTIFY constellationLineThicknessChanged)
 	Q_PROPERTY(int constellationBoundariesThickness	READ getConstellationBoundariesThickness WRITE setConstellationBoundariesThickness NOTIFY constellationBoundariesThicknessChanged)
 
@@ -236,14 +236,14 @@ public slots:
 	//! Get the font size used for constellation names display
 	int getFontSize() const;
 
-	//! Set the way how constellation names are displayed: abbreviated/as-given/translated
-	//! @param style the new display style
-	void setConstellationDisplayStyle(StelObject::CulturalDisplayStyle style);
-	//! get the way how constellation names are displayed: abbreviated/as-given/translated
-	StelObject::CulturalDisplayStyle getConstellationDisplayStyle();
-	//! Returns the currently set constellation display style as string, instead of enum
-	//! @see getConstellationDisplayStyle()
-	static QString getConstellationDisplayStyleString(StelObject::CulturalDisplayStyle style);
+//	//! Set the way how constellation names are displayed: abbreviated/as-given/translated
+//	//! @param style the new display style
+//	void setConstellationDisplayStyle(StelObject::CulturalDisplayStyle style);
+//	//! get the way how constellation names are displayed: abbreviated/as-given/translated
+//	StelObject::CulturalDisplayStyle getConstellationDisplayStyle();
+//	//! Returns the currently set constellation display style as string, instead of enum
+//	//! @see getConstellationDisplayStyle()
+//	static QString getConstellationDisplayStyleString(StelObject::CulturalDisplayStyle style);
 
 	//! Set the thickness of lines of the constellations
 	//! @param thickness of line in pixels
@@ -390,9 +390,10 @@ private:
 	bool flagConstellationPick; // TODO: CLEAR DESCRIPTION
 	std::vector<std::vector<Vec3d> *> allBoundarySegments;
 
+	// DEPRECATED. StelSkyCultureMgr.infoLabelStyle and StelSkyCultureMgr.screenLabelStyle will take over.
 	//! this controls how constellations (and also star names) are printed: Abbreviated/as-given/translated
-	StelObject::CulturalDisplayStyle constellationDisplayStyle;
-	static const QMap<QString, StelObject::CulturalDisplayStyle>ConstellationDisplayStyleMap;
+	//StelObject::CulturalDisplayStyle constellationDisplayStyle;
+//	static const QMap<QString, StelObject::CulturalDisplayStyle>ConstellationDisplayStyleMap;
 
 	// These are THE master settings - individual constellation settings can vary based on selection status
 	float artFadeDuration;
