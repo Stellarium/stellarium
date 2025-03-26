@@ -224,18 +224,18 @@ public slots:
 	QMap<QString, StelSkyCulture> getDirToNameMap() const { return dirToNameEnglish; }
 
 	//! Returns the screen labeling setting for the currently active skyculture
-	StelObject::CulturalDisplayStyle getScreenLabelStyle();
+	StelObject::CulturalDisplayStyle getScreenLabelStyle() const;
 	//! Sets the screen labeling setting for the currently active skyculture
-	void setScreenLabelStyle(StelObject::CulturalDisplayStyle &style);
+	void setScreenLabelStyle(const StelObject::CulturalDisplayStyle style);
 	//! TODO: scripting version
-	//void setScreenLabelStyle(const QString &style);
+	void setScreenLabelStyle(const QString &style);
 
 	//! Returns the InfoString labeling setting for the currently active skyculture
-	StelObject::CulturalDisplayStyle getInfoLabelStyle();
+	StelObject::CulturalDisplayStyle getInfoLabelStyle() const;
 	//! sets the InfoString labeling setting for the currently active skyculture
-	void setInfoLabelStyle(StelObject::CulturalDisplayStyle &style);
+	void setInfoLabelStyle(const StelObject::CulturalDisplayStyle style);
 	//! TODO: scripting version
-	//void setInfoLabelStyle(const QString &style);
+	void setInfoLabelStyle(const QString &style);
 
 signals:
 	//! Emitted whenever the default sky culture changed.
@@ -249,9 +249,9 @@ signals:
 	void currentSkyCultureChanged(const StelSkyCulture& culture);
 
 	//! Emitted when InfoLabelStyle has changed
-	void infoLabelStyleChanged(StelObject::CulturalDisplayStyle &style);
+	void infoLabelStyleChanged(const StelObject::CulturalDisplayStyle style);
 	//! Emitted when ScreenLabelStyle has changed
-	void screenLabelStyleChanged(StelObject::CulturalDisplayStyle &style);
+	void screenLabelStyleChanged(const StelObject::CulturalDisplayStyle style);
 
 private:
 	//! Scan all sky cultures to get their names and other properties.

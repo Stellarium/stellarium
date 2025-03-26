@@ -306,6 +306,10 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 
 	currentSkyCulture = dirToNameEnglish[scID];
 
+	// Lookup culture Style!
+	setScreenLabelStyle(getScreenLabelStyle());
+	setInfoLabelStyle(getInfoLabelStyle());
+
 	emit currentSkyCultureChanged(currentSkyCulture);
 	emit currentSkyCultureIDChanged(currentSkyCulture.id);
 	return result;
@@ -758,8 +762,12 @@ QString StelSkyCultureMgr::skyCultureI18ToDirectory(const QString& cultureName) 
 }
 
 // Returns the screen labeling setting for the currently active skyculture
-StelObject::CulturalDisplayStyle StelSkyCultureMgr::getScreenLabelStyle()
+StelObject::CulturalDisplayStyle StelSkyCultureMgr::getScreenLabelStyle() const
 {
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return StelObject::CulturalDisplayStyle::Translated;
+
 	QSettings *conf=StelApp::getInstance().getSettings();
 	QVariant val= conf->value(QString("SCScreenLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
 	//qDebug() << "StelSkyCultureMgr::getScreenLabelStyle(): found " << val << "(" << val.toString() << ")";
@@ -769,16 +777,28 @@ StelObject::CulturalDisplayStyle StelSkyCultureMgr::getScreenLabelStyle()
 		return StelObject::CulturalDisplayStyle::Translated;
 }
 // Sets the screen labeling setting for the currently active skyculture
-void StelSkyCultureMgr::setScreenLabelStyle(StelObject::CulturalDisplayStyle &style)
+void StelSkyCultureMgr::setScreenLabelStyle(const StelObject::CulturalDisplayStyle style)
 {
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return;
+
 	QSettings *conf=StelApp::getInstance().getSettings();
 	conf->setValue(QString("SCScreenLabelStyle/%1").arg(getCurrentSkyCultureID()), QVariant::fromValue(style).toString());
 	emit screenLabelStyleChanged(style);
 }
+void StelSkyCultureMgr::setScreenLabelStyle(const QString &style)
+{
+	setScreenLabelStyle(QVariant(style).value<StelObject::CulturalDisplayStyle>());
+}
 
 // Returns the InfoString Labeling setting for the currently active skyculture
-StelObject::CulturalDisplayStyle StelSkyCultureMgr::getInfoLabelStyle()
+StelObject::CulturalDisplayStyle StelSkyCultureMgr::getInfoLabelStyle() const
 {
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return StelObject::CulturalDisplayStyle::Translated;
+
 	QSettings *conf=StelApp::getInstance().getSettings();
 	QVariant val= conf->value(QString("SCInfoLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
 	//qDebug() << "StelSkyCultureMgr::getScreenLabelStyle(): found " << val << "(" << val.toString() << ")";
@@ -789,9 +809,18 @@ StelObject::CulturalDisplayStyle StelSkyCultureMgr::getInfoLabelStyle()
 }
 
 // Sets the InfoString Labeling setting for the currently active skyculture
-void StelSkyCultureMgr::setInfoLabelStyle(StelObject::CulturalDisplayStyle &style)
+void StelSkyCultureMgr::setInfoLabelStyle(const StelObject::CulturalDisplayStyle style)
 {
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return;
+
 	QSettings *conf=StelApp::getInstance().getSettings();
 	conf->setValue(QString("SCInfoLabelStyle/%1").arg(getCurrentSkyCultureID()), QVariant::fromValue(style).toString());
 	emit infoLabelStyleChanged(style);
+}
+
+void StelSkyCultureMgr::setInfoLabelStyle(const QString &style)
+{
+	setInfoLabelStyle(QVariant(style).value<StelObject::CulturalDisplayStyle>());
 }
