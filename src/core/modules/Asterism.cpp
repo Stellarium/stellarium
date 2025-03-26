@@ -26,6 +26,7 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "ZoneArray.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 
 #include <algorithm>
@@ -343,7 +344,7 @@ QString Asterism::getInfoString(const StelCore *core, const InfoStringGroup &fla
 	QTextStream oss(&str);
 
 	if (flags&Name)
-		oss << "<h2>" << getNameI18n() << "</h2>";
+		oss << "<h2>" << getInfoLabel() << "</h2>";
 
 	if (flags&ObjectType)
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
