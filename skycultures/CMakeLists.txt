@@ -12,7 +12,7 @@ ADD_SUBDIRECTORY( belarusian )
 ADD_SUBDIRECTORY( boorong )
 ADD_SUBDIRECTORY( chinese )
 ADD_SUBDIRECTORY( chinese_chenzhuo )
-ADD_SUBDIRECTORY( chinese_medieval )
+ADD_SUBDIRECTORY( chinese_song_dynasty )
 # Exclude from standard package
 # ADD_SUBDIRECTORY( egyptian )
 ADD_SUBDIRECTORY( egyptian_dendera )
