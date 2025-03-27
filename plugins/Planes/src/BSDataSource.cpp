@@ -75,7 +75,7 @@ BSDataSource::BSDataSource() : FlightDataSource(10),
 	this->connect(&socket, SIGNAL(readyRead()), SLOT(readData()));
 	this->connect(&socket, SIGNAL(connected()), SLOT(setSocketConnected()));
 	this->connect(&socket, SIGNAL(disconnected()), SLOT(setSocketDisconnected()));
-	this->connect(&socket, SIGNAL(error(QAbstractSocket::SocketError)), SLOT(handleSocketError()));
+	this->connect(&socket, SIGNAL(errorOccurred(QAbstractSocket::SocketError)), SLOT(handleSocketError()));
 	timer = new QTimer();
 	this->connect(timer, SIGNAL(timeout()), SLOT(reconnect()));
 }
