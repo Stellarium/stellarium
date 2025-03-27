@@ -132,7 +132,7 @@ QString Flight::getInfoString(const StelCore *core, const StelObject::InfoString
 	if (flags & CatalogNumber)
 		ss << QString("ICAO %1").arg(data->getHexAddress()) << br << br;
 
-	if (flags & ObjectType)
+	if ((flags & ObjectType) && currentFrame)
 		ss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getObjectTypeI18n(), currentFrame->onGround ? q_("on groud") : q_("in flight")) << br;
 
 	if (flags & Distance)
