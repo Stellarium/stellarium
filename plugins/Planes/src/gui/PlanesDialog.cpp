@@ -76,6 +76,10 @@ void PlanesDialog::setBSStatus(QString status)
 void PlanesDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+
 	ui->dbDriver->addItem(QStringLiteral("MySQL"), QStringLiteral("QMYSQL"));
 	ui->dbDriver->addItem(QStringLiteral("ODBC"), QStringLiteral("QODBC"));
 	ui->dbDriver->addItem(QStringLiteral("SQLite"), QStringLiteral("QSQLITE"));
@@ -122,8 +126,6 @@ void PlanesDialog::createDialogContent()
 	connectDoubleProperty(ui->maxVertRate, "Planes.maxVertRate");
 	connectDoubleProperty(ui->minVertRate, "Planes.minVertRate");
 
-	//connectStringProperty()
-
 	ui->bsHost->setText(planes->getBSHost());
 	ui->bsPort->setText(QString::number((int)planes->getBSPort()));
 	ui->useBSDB->setChecked(planes->isDumpingOldFlights());
@@ -131,7 +133,6 @@ void PlanesDialog::createDialogContent()
 	ui->bsStatus->setText(cachedBSStatus);
 	ui->dbStatus->setText(cachedDBStatus);
 
-	this->connect(ui->closeStelWindow, SIGNAL(clicked()), SLOT(close()));
 	this->connect(&StelApp::getInstance(), SIGNAL(languageChanged()), SLOT(retranslate()));
 	this->connect(ui->col_solid, SIGNAL(clicked()), SLOT(setSolidCol()));
 	this->connect(ui->col_height, SIGNAL(clicked()), SLOT(setHeightCol()));
@@ -166,7 +167,7 @@ void PlanesDialog::createDialogContent()
 	connectBoolProperty(ui->connectOnStartup, "Planes.connectOnStartup");
 	this->connect(ui->reconnectOnConnectionLoss, SIGNAL(clicked(bool)), SLOT(setReconnectOnConnectionLoss(bool)));
 
-	connectColorButton(ui->infoTextColorButton, "Planes.infoColor", "Planes/planes_color");
+	ui->infoTextColorButton->setup("Planes.infoColor", "Planes/planes_color");
 
 	setAboutHtml();
 }
