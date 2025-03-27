@@ -96,7 +96,7 @@
          <item>
           <widget class="QPushButton" name="pushButtonSaveSettings">
            <property name="text">
-            <string>Save Settings</string>
+            <string>Save settings</string>
            </property>
           </widget>
          </item>
@@ -132,11 +132,14 @@
            </item>
            <item row="0" column="1">
             <widget class="AngleSpinBox" name="RASpinBox">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
              <property name="minimum">
-              <double>-360.000000000000000</double>
+              <number>-360</number>
              </property>
              <property name="maximum">
-              <double>360.000000000000000</double>
+              <number>360</number>
              </property>
             </widget>
            </item>
@@ -149,11 +152,14 @@
            </item>
            <item row="1" column="1">
             <widget class="AngleSpinBox" name="DecSpinBox">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
              <property name="minimum">
-              <double>-90.000000000000000</double>
+              <number>-90</number>
              </property>
              <property name="maximum">
-              <double>90.000000000000000</double>
+              <number>90</number>
              </property>
             </widget>
            </item>
@@ -166,11 +172,14 @@
            </item>
            <item row="2" column="1">
             <widget class="AngleSpinBox" name="RotationSpinBox">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
              <property name="minimum">
-              <double>-90.000000000000000</double>
+              <number>-90</number>
              </property>
              <property name="maximum">
-              <double>90.000000000000000</double>
+              <number>90</number>
              </property>
             </widget>
            </item>
