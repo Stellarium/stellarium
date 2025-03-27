@@ -147,11 +147,13 @@ public:
 	//! @param radius the half size of a square side in pixel.
 	//! @param v direction vector of object to draw. Will draw only if this is in the visible hemisphere.
 	void drawSprite2dMode(float x, float y, float radius);
+	void drawSprite2dMode(const std::vector<float>& x, const std::vector<float>& y, float radius);
 	void drawSprite2dMode(const Vec3d& v, float radius);
 
 	//! Same as drawSprite2dMode but don't scale according to display device scaling. 
 	void drawSprite2dModeNoDeviceScale(float x, float y, float radius);
-	
+	void drawSprite2dModeNoDeviceScale(const std::vector<float>& x, const std::vector<float>& y, float radius);
+
 	//! Draw a rotated square using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
 	//! @param x x position in the viewport in pixel.

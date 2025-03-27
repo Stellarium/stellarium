@@ -1763,7 +1763,43 @@ void StelPainter::drawSprite2dMode(float x, float y, float radius)
 	enableClientStates(false);
 }
 
+void StelPainter::drawSprite2dMode(const std::vector<float>& x, const std::vector<float>& y, float radius)
+{	
+	std::vector<float> texCoordData(x.size() * 8); // Each sprite has 4 vertices, each with 2 texture coordinates (u, v)
+	for (size_t i = 0; i < x.size(); ++i)
+	{
+		texCoordData[i * 8 + 0] = 0.f; texCoordData[i * 8 + 1] = 0.f;
+		texCoordData[i * 8 + 2] = 1.f; texCoordData[i * 8 + 3] = 0.f;
+		texCoordData[i * 8 + 4] = 0.f; texCoordData[i * 8 + 5] = 1.f;
+		texCoordData[i * 8 + 6] = 1.f; texCoordData[i * 8 + 7] = 1.f;
+	}
+
+	// Takes into account device pixel density and global scale ratio, as we are drawing 2D stuff.
+	radius *= static_cast<float>(prj->getDevicePixelsPerPixel());
+
+	std::vector<float> vertexData(x.size() * 8); // Each sprite has 4 vertices, each with 2 coordinates (x, y)
+
+	for (size_t i = 0; i < x.size(); ++i)
+	{
+		vertexData[i * 8 + 0] = x[i] - radius; vertexData[i * 8 + 1] = y[i] - radius;
+		vertexData[i * 8 + 2] = x[i] + radius; vertexData[i * 8 + 3] = y[i] - radius;
+		vertexData[i * 8 + 4] = x[i] - radius; vertexData[i * 8 + 5] = y[i] + radius;
+		vertexData[i * 8 + 6] = x[i] + radius; vertexData[i * 8 + 7] = y[i] + radius;
+	}
+
+	enableClientStates(true, true);
+	setVertexPointer(2, GL_FLOAT, vertexData.data());
+	setTexCoordPointer(2, GL_FLOAT, texCoordData.data());
+	drawFromArray(TriangleStrip, x.size() * 4, 0, false);
+	enableClientStates(false);
+}
+
 void StelPainter::drawSprite2dModeNoDeviceScale(float x, float y, float radius)
+{
+	drawSprite2dMode(x, y, radius/(static_cast<float>(prj->getDevicePixelsPerPixel())));
+}
+
+void StelPainter::drawSprite2dModeNoDeviceScale(const std::vector<float>& x, const std::vector<float>& y, float radius)
 {
 	drawSprite2dMode(x, y, radius/(static_cast<float>(prj->getDevicePixelsPerPixel())));
 }
