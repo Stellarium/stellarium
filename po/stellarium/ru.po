@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-03-27 20:14+0700\n"
+"POT-Creation-Date: 2025-03-27 23:33+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -13872,6 +13872,7 @@ msgstr "Сохранить эти настройки для всех после�
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:562
 #: plugins/Observability/src/ui_ObservabilityDialog.h:308
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:219
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:243
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
 msgid "Save settings"
 msgstr "Сохранить настройки"
@@ -16619,7 +16620,7 @@ msgstr "Разрешить привязку к выбранному объект
 #: plugins/Observability/src/ui_ObservabilityDialog.h:310
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:221
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:434
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:250
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:253
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:299
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:781
 #: plugins/Calendars/src/ui_calendarsDialog.h:995
@@ -28131,9 +28132,9 @@ msgstr "Результаты поиска"
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:160
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:161
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:162
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:237
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:238
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:240
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:241
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:244
 msgid "Mosaic Camera"
 msgstr "Мозаичная камера"
 
@@ -28265,48 +28266,44 @@ msgstr ""
 " и бесщелевой спектрограф. 16-мегапиксельная камера, установленная на "
 "вспомогательном телескопе обсерватории Рубин. Подробнее см. здесь:"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:236
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:239
 msgid "Mosaic Camera Configuration"
 msgstr "Настройка мозаичной камеры"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:239
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:242
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:268
 msgid "Show plug-in button on toolbar"
 msgstr "Показывать кнопку плагина на панели инструментов"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:240
-msgid "Save Settings"
-msgstr "Сохранить настройки"
-
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:242
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:245
 msgid "Right Ascension:"
 msgstr "Прямое восхождение:"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:243
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:246
 msgid "Declination:"
 msgstr "Склонение:"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:244
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:247
 msgid "Rotation:"
 msgstr "Поворот:"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:245
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:248
 msgid "Visible:"
 msgstr "Видима:"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:246
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:249
 msgid "Center view on camera"
 msgstr "Центральный вид на камеру"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:247
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:250
 msgid "Center camera on current view"
 msgstr "Центрировать камеру на текущем виде"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:248
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:251
 msgid "Center camera on current object"
 msgstr "Центрировать камеру на текущем объекте"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:249
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:252
 msgid "Cameras"
 msgstr "Камеры"
 
