@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-03-27 20:14+0700\n"
+"POT-Creation-Date: 2025-03-27 23:33+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Nicolas Martignoni, 2025\n"
 "Language-Team: French (https://app.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -13966,6 +13966,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:562
 #: plugins/Observability/src/ui_ObservabilityDialog.h:308
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:219
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:243
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
 msgid "Save settings"
 msgstr "Enregistrer tous les réglages"
@@ -16733,7 +16734,7 @@ msgstr "Permettre l'ancrage à l'objet sélectionné"
 #: plugins/Observability/src/ui_ObservabilityDialog.h:310
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:221
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:434
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:250
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:253
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:299
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:781
 #: plugins/Calendars/src/ui_calendarsDialog.h:995
@@ -28355,9 +28356,9 @@ msgstr "Résultats"
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:160
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:161
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:162
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:237
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:238
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:240
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:241
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:244
 msgid "Mosaic Camera"
 msgstr "Mosaïque de caméra"
 
@@ -28489,48 +28490,44 @@ msgstr ""
 "caméra de 16 mégapixels montée sur le télescope auxiliaire de l'Observatoire"
 " Rubin. Plus d'info à ce sujet sur : "
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:236
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:239
 msgid "Mosaic Camera Configuration"
 msgstr "Configuration de la mosaïque de caméra"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:239
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:242
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:268
 msgid "Show plug-in button on toolbar"
 msgstr "Afficher le bouton du plugin au démarrage"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:240
-msgid "Save Settings"
-msgstr "Enregistrer les réglages"
-
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:242
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:245
 msgid "Right Ascension:"
 msgstr "Ascension droite :"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:243
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:246
 msgid "Declination:"
 msgstr "Déclinaison :"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:244
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:247
 msgid "Rotation:"
 msgstr "Rotation :"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:245
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:248
 msgid "Visible:"
 msgstr "Visible ."
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:246
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:249
 msgid "Center view on camera"
 msgstr "Centrer la vue sur la caméra"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:247
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:250
 msgid "Center camera on current view"
 msgstr "Centrer la caméra sur la vue actuelle"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:248
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:251
 msgid "Center camera on current object"
 msgstr "Centrer la caméra sur l'objet actuel"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:249
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:252
 msgid "Cameras"
 msgstr "Caméras"
 
