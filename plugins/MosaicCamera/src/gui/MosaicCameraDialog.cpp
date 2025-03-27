@@ -29,8 +29,8 @@
 #include "StelModuleMgr.hpp"
 
 MosaicCameraDialog::MosaicCameraDialog()
-	: StelDialog("MosaicCamera")
-	, mc(nullptr)
+        : StelDialog("MosaicCamera")
+        , mc(nullptr)
 {
 	ui = new Ui_mosaicCameraDialog;
 }
@@ -62,32 +62,32 @@ void MosaicCameraDialog::updateRotation()
 
 void MosaicCameraDialog::updateVisibility(bool visible)
 {
-    mc->setVisibility(currentCameraName, visible);
+	mc->setVisibility(currentCameraName, visible);
 }
 
 void MosaicCameraDialog::updateDialogFields()
 {
-    // Temporarily disconnect the signals to avoid triggering updates while setting values
-    ui->RASpinBox->blockSignals(true);
-    ui->DecSpinBox->blockSignals(true);
-    ui->RotationSpinBox->blockSignals(true);
-    ui->visibleCheckBox->blockSignals(true);
-    ui->cameraListWidget->blockSignals(true);
+	// Temporarily disconnect the signals to avoid triggering updates while setting values
+	ui->RASpinBox->blockSignals(true);
+	ui->DecSpinBox->blockSignals(true);
+	ui->RotationSpinBox->blockSignals(true);
+	ui->visibleCheckBox->blockSignals(true);
+	ui->cameraListWidget->blockSignals(true);
 
-    ui->RASpinBox->setDegrees(mc->getRA(currentCameraName));
-    ui->DecSpinBox->setDegrees(mc->getDec(currentCameraName));
-    ui->RotationSpinBox->setDegrees(mc->getRotation(currentCameraName));
-    ui->visibleCheckBox->setChecked(mc->getVisibility(currentCameraName));
-    QListWidgetItem* item = ui->cameraListWidget->findItems(currentCameraName, Qt::MatchExactly).first();
-    int row = ui->cameraListWidget->row(item);
-    ui->cameraListWidget->setCurrentRow(row);
+	ui->RASpinBox->setDegrees(mc->getRA(currentCameraName));
+	ui->DecSpinBox->setDegrees(mc->getDec(currentCameraName));
+	ui->RotationSpinBox->setDegrees(mc->getRotation(currentCameraName));
+	ui->visibleCheckBox->setChecked(mc->getVisibility(currentCameraName));
+	QListWidgetItem* item = ui->cameraListWidget->findItems(currentCameraName, Qt::MatchExactly).first();
+	int row = ui->cameraListWidget->row(item);
+	ui->cameraListWidget->setCurrentRow(row);
 
-    // Reconnect the signals
-    ui->RASpinBox->blockSignals(false);
-    ui->DecSpinBox->blockSignals(false);
-    ui->RotationSpinBox->blockSignals(false);
-    ui->visibleCheckBox->blockSignals(false);
-    ui->cameraListWidget->blockSignals(false);
+	// Reconnect the signals
+	ui->RASpinBox->blockSignals(false);
+	ui->DecSpinBox->blockSignals(false);
+	ui->RotationSpinBox->blockSignals(false);
+	ui->visibleCheckBox->blockSignals(false);
+	ui->cameraListWidget->blockSignals(false);
 }
 
 void MosaicCameraDialog::setRA(double ra)
@@ -112,8 +112,8 @@ void MosaicCameraDialog::setVisibility(bool visible)
 
 void MosaicCameraDialog::setCurrentCameraName(const QString& cameraName)
 {
-    currentCameraName = cameraName;
-    updateDialogFields();
+	currentCameraName = cameraName;
+	updateDialogFields();
 }
 
 void MosaicCameraDialog::retranslate()
@@ -127,9 +127,9 @@ void MosaicCameraDialog::retranslate()
 
 void MosaicCameraDialog::onCameraSelectionChanged(const QString& cameraName)
 {
-    currentCameraName = cameraName;
-    mc->setCurrentCamera(cameraName);
-    updateDialogFields();
+	currentCameraName = cameraName;
+	mc->setCurrentCamera(cameraName);
+	updateDialogFields();
 }
 
 // Initialize the dialog widgets and connect the signals/slots
@@ -140,16 +140,16 @@ void MosaicCameraDialog::createDialogContent()
 	ui->tabs->setCurrentIndex(1);
 
 	QStringList cameraNames = mc->getCameraNames();
-    ui->cameraListWidget->addItems(cameraNames);
-    if (!cameraNames.isEmpty())
-    {
-        ui->cameraListWidget->setCurrentRow(0);
+	ui->cameraListWidget->addItems(cameraNames);
+	if (!cameraNames.isEmpty())
+	{
+		ui->cameraListWidget->setCurrentRow(0);
 		currentCameraName = cameraNames[0];
-        updateDialogFields();
-    }
+		updateDialogFields();
+	}
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-		this, SLOT(retranslate()));
+	        this, SLOT(retranslate()));
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser;
@@ -175,8 +175,7 @@ void MosaicCameraDialog::createDialogContent()
 	ui->DecSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 	ui->DecSpinBox->setMinimum(-90.0, true);
 	ui->DecSpinBox->setMaximum(90.0, true);
-    connect(ui->cameraListWidget, SIGNAL(currentTextChanged(const QString&)),
-            this, SLOT(onCameraSelectionChanged(const QString&)));
+	connect(ui->cameraListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(onCameraSelectionChanged(const QString&)));
 	connect(ui->RASpinBox, SIGNAL(valueChanged()), this, SLOT(updateRA()));
 	connect(ui->DecSpinBox, SIGNAL(valueChanged()), this, SLOT(updateDec()));
 	connect(ui->RotationSpinBox, SIGNAL(valueChanged()), this, SLOT(updateRotation()));
