@@ -114,7 +114,19 @@ public:
 	};                                                 // MORE OPTIONS NEEDED?
 	Q_ENUM(CulturalDisplayStyle)
 
-
+	//! @struct CulturalName
+	//! Contains name components belonging to an object.
+	//!
+	struct CulturalName
+	{
+		QString native;           //!< native name in native glyphs
+		QString pronounce;        //!< native name in a Latin-based transliteration usable as pronunciation aid for English
+		QString pronounceI18n;    //!< native name in a transliteration scheme in user-language usable as pronunciation aid
+		QString transliteration;  //!< native name in a science-based transliteration scheme not geared at pronunciation (e.g. Tibetan Wylie; rarely used).
+		QString translated;       //!< Native name translated to English. NOT the same as the usual object's englishName!
+		QString translatedI18n;   //!< Translated name (user language)
+		QString IPA;              //!< native name expressed in International Phonetic Alphabet
+	};
 
 	//! A pre-defined "all available" set of specifiers for the getInfoString flags argument to getInfoString
 	static constexpr InfoStringGroup AllInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
