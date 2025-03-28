@@ -196,6 +196,16 @@ public:
 	QString getEnglishName() const override {return englishName;}
 	QString getEnglishAliases() const;
 	QString getI18nAliases() const;
+
+	//! retrieve pronunciation from the first of the cultural names
+	QString getNamePronounce() const override {return (culturalNames.empty() ? "" : culturalNames.constFirst().pronounceI18n);}
+	//! Combine screen label from various components, depending on settings in SkyCultureMgr
+	QString getScreenLabel() const override;
+	//! Combine InfoString label from various components, depending on settings in SkyCultureMgr
+	QString getInfoLabel() const override;
+	//! Underlying worker that processes the culturalNames
+	QStringList getCultureLabels(StelObject::CulturalDisplayStyle style) const;
+
 	//! Return the angular radius of a circle containing the object as seen from the observer
 	//! with the circle center assumed to be at getJ2000EquatorialPos().
 	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
@@ -236,7 +246,9 @@ public:
 	void setProperName(QString name) { englishName = name; }
 	void setDiscoveryData(QString name, QString year) { discoverer = name; discoveryYear = year; }
 	void addNameAlias(QString name) { englishAliases.append(name); englishAliases.removeDuplicates(); }
-	void removeAllNames() { englishName=""; englishAliases.clear(); }
+	void removeAllNames() { englishName=""; englishAliases.clear(); culturalNames.clear();}
+	//! Add a name for the currently set skyculture
+	void addCulturalName(StelObject::CulturalName culturalName){culturalNames.append(culturalName);}
 
 	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, vdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO, vdBH, DWB, Tr, St, Ru, vdB-Ha)
 	//! from the first catalog that is activated.
@@ -326,6 +338,7 @@ private:
 	QStringList englishAliases; // English aliases
 	QString nameI18;            // Nebula name
 	QStringList nameI18Aliases; // Nebula aliases
+	QList<StelObject::CulturalName> culturalNames; // describes native names used in non-modern Skycultures. Usually just one, but there may be more!
 	QString discoverer;         // The name of discoverer
 	QString discoveryYear;      // Year(s) of discovery
 	QString mTypeString;        // Morphological type of object (as string)

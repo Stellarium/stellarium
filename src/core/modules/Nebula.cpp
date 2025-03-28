@@ -30,6 +30,7 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "RefractionExtinction.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 #include <QTextStream>
 #include <QFile>
@@ -203,6 +204,100 @@ QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGro
 	return res;
 }
 
+QString Nebula::getScreenLabel() const
+{
+	return getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle()).constFirst();
+}
+QString Nebula::getInfoLabel() const
+{
+	return getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle()).join("; ");
+}
+
+QStringList Nebula::getCultureLabels(StelObject::CulturalDisplayStyle style) const
+{
+	QStringList labels;
+	for (auto &cName: culturalNames)
+	{
+	QString label;
+	switch (style)
+	{
+		case CulturalDisplayStyle::Abbreviated:
+			label="";
+			break;
+		case CulturalDisplayStyle::Native:
+			label=cName.native;
+			break;
+		case CulturalDisplayStyle::Translated:
+			label=cName.translatedI18n;
+			break;
+		case CulturalDisplayStyle::Modern:
+			label=nameI18; // fully non-cultural!
+			break;
+		case CulturalDisplayStyle::Pronounce:
+			label=cName.pronounceI18n;
+			break;
+		case CulturalDisplayStyle::Translit:
+			label=cName.transliteration;
+			break;
+		case CulturalDisplayStyle::IPA:
+			label=cName.IPA;
+			break;
+		case CulturalDisplayStyle::Pronounce_Translated:
+			label=QString("%1 (%2)").arg(cName.pronounceI18n, cName.translatedI18n);
+			break;
+		case CulturalDisplayStyle::Pronounce_IPA_Translated:
+			label=QString("%1 [%2] (%3)").arg(cName.pronounceI18n, cName.IPA, cName.translatedI18n);
+			break;
+		case CulturalDisplayStyle::Pronounce_Translated_Modern:
+			label=QString("%1 (%2, %3)").arg(cName.pronounceI18n, cName.translatedI18n, nameI18);
+			break;
+		case CulturalDisplayStyle::Pronounce_IPA_Translated_Modern:
+			label=QString("%1 [%2] (%3, %4)").arg(cName.pronounceI18n, cName.IPA, cName.translatedI18n, nameI18);
+			break;
+		case CulturalDisplayStyle::Native_Pronounce:
+			label=QString("%1 [%2]").arg(cName.native, cName.pronounceI18n);
+			break;
+		case CulturalDisplayStyle::Native_Pronounce_Translated:
+			label=QString("%1 [%2] (%3)").arg(cName.native, cName.pronounceI18n, cName.translatedI18n);
+			break;
+		case CulturalDisplayStyle::Native_Pronounce_IPA_Translated:
+			label=QString("%1 [%2%3] (%4)").arg(cName.native, cName.pronounceI18n, cName.IPA.length() > 0 ? QString(", %1").arg(cName.IPA) : "", cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Native_Translated:
+			label=QString("%1 (%2)").arg(cName.native, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Native_Translit_Translated:
+			label=QString("%1 [%2] (%3)").arg(cName.native, cName.transliteration, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Native_Translit_Pronounce_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(cName.native, cName.transliteration, cName.pronounceI18n, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated:
+			label=QString("%1 [%2, %3, %4] (%5)").arg(cName.native, cName.transliteration, cName.pronounceI18n, cName.IPA, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Native_Translit_IPA_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(cName.native, cName.transliteration, cName.IPA, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Translit_Translated:
+			label=QString("%1 (%2)").arg(cName.transliteration, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Translit_Pronounce_Translated:
+			label=QString("%1 [%2] (%3)").arg(cName.transliteration, cName.pronounceI18n, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Translit_Pronounce_IPA_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(cName.transliteration, cName.pronounceI18n, cName.IPA, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Translit_IPA_Translated:
+			label=QString("%1 [%2] (%4)").arg(cName.transliteration, cName.IPA, cName.translatedI18n);
+			break;
+		// NO default here, else we may forget one.
+	}
+	labels << label;
+	}
+	return labels;
+}
+
+
 QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	QString str;
@@ -211,6 +306,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "<h2>";
+
+	if (!culturalNames.isEmpty() && flags&Name)
+		oss << getInfoLabel() << "<br/>";
 
 	if (!nameI18.isEmpty() && flags&Name)
 	{
@@ -462,6 +560,7 @@ QVariantMap Nebula::getInfoMap(const StelCore *core) const
 	map.insert("axis-minor-deg", StelUtils::radToDecDegStr(axisMinor, 5));
 	map.insert("axis-minor-dms", StelUtils::radToDmsPStr(axisMinor, 2));
 	map.insert("orientation-angle", axisPA);
+	map.insert("cultural-names", getCultureLabels(StelObject::CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated));
 
 	// TODO: more? Names? Data?
 	return map;
@@ -1109,7 +1208,8 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 
 	const float shift = 15.f + (drawHintProportional ? getHintSize(sPainter) : 0.f);
 
-	QString str = getNameI18n();
+	//QString str = getNameI18n();
+	QString str = getScreenLabel();
 	if (str.isEmpty() || designationUsage)
 		str = getDSODesignation();
 
@@ -1470,54 +1570,32 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		QStringList rtxt;
 		static const QStringList occlass = { "I", "II", "III", "IV"};
 		static const QStringList ocrich = { "p", "m", "r"};
-		switch(occlass.indexOf(OClMatch.captured(1).trimmed()))
-		{
-			case 0:
-				rtxt << qc_("strong central concentration of stars", "Trumpler's Concentration Class");
-				break;
-			case 1:
-				rtxt << qc_("little central concentration of stars", "Trumpler's Concentration Class");
-				break;
-			case 2:
-				rtxt << qc_("no noticeable concentration of stars", "Trumpler's Concentration Class");
-				break;
-			case 3:
-				rtxt << qc_("a star field condensation", "Trumpler's Concentration Class");
-				break;
-			default:
-				rtxt << qc_("undocumented concentration class", "Trumpler's Concentration Class");
-				break;
-		}
-		switch(OClMatch.captured(2).toInt())
-		{
-			case 1:
-				rtxt << qc_("small brightness range of cluster members", "Trumpler's Brightness Class");
-				break;
-			case 2:
-				rtxt << qc_("medium brightness range of cluster members", "Trumpler's Brightness Class");
-				break;
-			case 3:
-				rtxt << qc_("large brightness range of cluster members", "Trumpler's Brightness Class");
-				break;
-			default:
-				rtxt << qc_("undocumented brightness range of cluster members", "Trumpler's Brightness Class");
-				break;
-		}
-		switch(ocrich.indexOf(OClMatch.captured(3).trimmed()))
-		{
-			case 0:
-				rtxt << qc_("poor cluster with less than 50 stars", "Trumpler's Number of Members Class");
-				break;
-			case 1:
-				rtxt << qc_("moderately rich cluster with 50-100 stars", "Trumpler's Number of Members Class");
-				break;
-			case 2:
-				rtxt << qc_("rich cluster with more than 100 stars", "Trumpler's Number of Members Class");
-				break;
-			default:
-				rtxt << qc_("undocumented number of members class", "Trumpler's Number of Members Class");
-				break;
-		}
+
+		QStringList occlassStrings = {
+			qc_("strong central concentration of stars", "Trumpler's Concentration Class"),
+			qc_("little central concentration of stars", "Trumpler's Concentration Class"),
+			qc_("no noticeable concentration of stars", "Trumpler's Concentration Class"),
+			qc_("a star field condensation", "Trumpler's Concentration Class")};
+
+		rtxt << occlassStrings.value(occlass.indexOf(OClMatch.captured(1).trimmed()),
+			 qc_("undocumented concentration class", "Trumpler's Concentration Class"));
+
+		QStringList oclBRangeStrings = {
+			qc_("small brightness range of cluster members", "Trumpler's Brightness Class"),
+			qc_("medium brightness range of cluster members", "Trumpler's Brightness Class"),
+			qc_("large brightness range of cluster members", "Trumpler's Brightness Class")};
+
+		rtxt << oclBRangeStrings.value(OClMatch.captured(2).toInt()-1,
+			qc_("undocumented brightness range of cluster members", "Trumpler's Brightness Class"));
+
+		QStringList ocrichStrings = {
+			qc_("poor cluster with less than 50 stars", "Trumpler's Number of Members Class"),
+			qc_("moderately rich cluster with 50-100 stars", "Trumpler's Number of Members Class"),
+			qc_("rich cluster with more than 100 stars", "Trumpler's Number of Members Class")};
+
+		rtxt << ocrichStrings.value(ocrich.indexOf(OClMatch.captured(3).trimmed()),
+			qc_("undocumented number of members class", "Trumpler's Number of Members Class"));
+
 		if (!OClMatch.captured(4).trimmed().isEmpty())
 			rtxt << qc_("the cluster lies within nebulosity", "nebulosity factor of open clusters");
 
@@ -1629,9 +1707,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 	if (nType==NebSNR)
 	{
-		QString delim = "";
-		if (!r.isEmpty())
-			delim = "; ";
+		const QString delim =r.isEmpty() ? "" : "; ";
 
 		if (mTypeString.contains("S") && !mTypeString.contains("S?"))
 			r = qc_("remnant shows a shell radio structure", "supernova remnant structure classification") + delim + r;
