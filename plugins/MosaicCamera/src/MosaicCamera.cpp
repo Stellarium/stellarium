@@ -268,12 +268,12 @@ void MosaicCamera::loadBuiltInCameras()
 		camera.dec = 0.0;
 		camera.rotation = 0.0;
 		camera.visible = false;
+		camera.fieldDiameter = 0.0; // initialize
 		cameras.insert(camera.name, camera);
 		readPolygonSetsFromJson(camera.name, userDirectory + camera.name + ".json");
 		setCameraFieldDiameter(cameras[camera.name]);
 	}
-	qDebug() << "[MosaicCamera] Loaded" << cameras.size() << "cameras";
-	qDebug() << "[MosaicCamera] Camera names:" << cameras.keys();
+	qInfo() << "[MosaicCamera] Loaded" << cameras.size() << "cameras:" << cameras.keys().join(", ");
 }
 
 void MosaicCamera::readPolygonSetsFromJson(const QString& cameraName, const QString& filename)
