@@ -1158,6 +1158,9 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 
 			qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity, ipRegion, ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
 
+			if (latitude==0.0 && longitude==0.0 && ipTimeZone.isEmpty() && ipCountry.isEmpty() && ipCountryCode.isEmpty())
+				throw std::runtime_error("IP lookup provided bogus result.");
+
 			QString regionName = pickRegionFromCountryCode(ipCountryCode.toLower());
 			float luminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 
@@ -1185,11 +1188,14 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 						qDebug() << "-- TAKEN!";
 					}
 				}
-				qDebug() << "Closest known place:" << candLoc.name << "at" << candLoc.distanceKm(longitude, latitude) << "km";
-				// Consider result valid only in a meaningful distance. Light pollution is changing rapidly.
-				// Try 25 km, YMMV.
-				if (minDistanceKm < 25)
-					ipLoc = candLoc;
+				if (candLoc.isValid())
+				{
+					qDebug() << "Closest known place:" << candLoc.name << "at" << candLoc.distanceKm(longitude, latitude) << "km";
+					// Consider result valid only in a meaningful distance. Light pollution is changing rapidly.
+					// Try 25 km, YMMV.
+					if (minDistanceKm < 25)
+						ipLoc = candLoc;
+				}
 			}
 			if (ipLoc.isValid())
 				luminance = ipLoc.lightPollutionLuminance.toFloat();

@@ -54,10 +54,10 @@ StelPluginInfo MosaicCameraStelPluginInterface::getPluginInfo() const
 {
 	StelPluginInfo info;
 	info.id = "MosaicCamera";
-	info.displayedName = "Mosaic Camera";
+	info.displayedName = N_("Mosaic Camera");
 	info.authors = "Josh Meyers";
 	info.contact = "jmeyers314@gmail.com";
-	info.description = "Mosaic Camera Overlay";
+	info.description = N_("Mosaic Camera Overlay");
 	info.version = MOSAICCAMERA_PLUGIN_VERSION;
 	info.license = MOSAICCAMERA_PLUGIN_LICENSE;
 	return info;
@@ -268,12 +268,12 @@ void MosaicCamera::loadBuiltInCameras()
 		camera.dec = 0.0;
 		camera.rotation = 0.0;
 		camera.visible = false;
+		camera.fieldDiameter = 0.0; // let's initialize field
 		cameras.insert(camera.name, camera);
 		readPolygonSetsFromJson(camera.name, userDirectory + camera.name + ".json");
 		setCameraFieldDiameter(cameras[camera.name]);
 	}
-	qDebug() << "[MosaicCamera] Loaded" << cameras.size() << "cameras";
-	qDebug() << "[MosaicCamera] Camera names:" << cameras.keys();
+	qInfo() << "[MosaicCamera] Loaded" << cameras.size() << "cameras:" << cameras.keys().join(", ");
 }
 
 void MosaicCamera::readPolygonSetsFromJson(const QString& cameraName, const QString& filename)
