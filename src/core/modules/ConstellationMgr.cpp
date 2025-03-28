@@ -1189,7 +1189,7 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 	{
 		// Allow "Bxxxx.x", "Jxxxx.x", "JDjjjjjjjj.jjj" and pure doubles as JD
 		bool ok=false;
-		double boundariesEpochJD;
+		double boundariesEpochJD=StelUtils::J2000;
 
 		if (boundariesEpoch.startsWith("JD", Qt::CaseInsensitive))
 		{
