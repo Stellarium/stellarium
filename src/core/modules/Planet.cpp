@@ -3511,23 +3511,14 @@ bool Planet::initFBO()
 #if !QT_CONFIG(opengles2)
 		if(!ctx->isOpenGLES())
 		{
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-			QOpenGLFunctions_1_0* gl10= QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_1_0>(ctx);
-#else
-			QOpenGLFunctions_1_0* gl10 = ctx->versionFunctions<QOpenGLFunctions_1_0>();
-#endif
-			if(Q_LIKELY(gl10))
-			{
-				//use DrawBuffer instead of DrawBuffers
-				//because it is available since GL 1.0 instead of only on 3+
-				gl10->glDrawBuffer(GL_NONE);
-				gl10->glReadBuffer(GL_NONE);
-			}
-			else
-			{
-				//something is probably not how we want it
-				Q_ASSERT(0);
-			}
+			// Use DrawBuffer instead of DrawBuffers because it is available since GL 1.0 instead of only on 3+
+			// Resolve them manually, because while they are present since 1.0,
+			// they are not found by QOpenGLFunctions_1_0 when in Core profile
+			void (APIENTRYP glDrawBuffer)(GLenum) = reinterpret_cast<decltype(glDrawBuffer)>(ctx->getProcAddress("glDrawBuffer"));
+			void (APIENTRYP glReadBuffer)(GLenum) = reinterpret_cast<decltype(glReadBuffer)>(ctx->getProcAddress("glReadBuffer"));
+
+			glDrawBuffer(GL_NONE);
+			glReadBuffer(GL_NONE);
 		}
 #endif
 
