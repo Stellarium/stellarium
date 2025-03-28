@@ -29,6 +29,7 @@
 #include "StelUtils.hpp"
 #include "ConstellationMgr.hpp"
 #include "ZoneArray.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 
 #include <QString>
