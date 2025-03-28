@@ -1763,9 +1763,54 @@ void StelPainter::drawSprite2dMode(float x, float y, float radius)
 	enableClientStates(false);
 }
 
+void StelPainter::drawSprite2dMode(const std::vector<Vec2f>& points, float radius)
+{
+	std::vector<Vec2f> texCoordData;
+	// Each sprite has 2 triangles, each with separate 3 vertices
+	texCoordData.reserve(points.size() * (2*3));
+	for (size_t i = 0; i < points.size(); ++i)
+	{
+		texCoordData.emplace_back(0.f, 0.f);
+		texCoordData.emplace_back(1.f, 0.f);
+		texCoordData.emplace_back(0.f, 1.f);
+
+		texCoordData.emplace_back(1.f, 0.f);
+		texCoordData.emplace_back(1.f, 1.f);
+		texCoordData.emplace_back(0.f, 1.f);
+	}
+
+	// Takes into account device pixel density and global scale ratio, as we are drawing 2D stuff.
+	radius *= static_cast<float>(prj->getDevicePixelsPerPixel());
+
+	std::vector<Vec2f> vertexData;
+	// Each sprite has 2 triangles, each with separate 3 vertices
+	vertexData.reserve(points.size() * (2*3));
+	for (size_t i = 0; i < points.size(); ++i)
+	{
+		vertexData.emplace_back(points[i][0] - radius, points[i][1] - radius);
+		vertexData.emplace_back(points[i][0] + radius, points[i][1] - radius);
+		vertexData.emplace_back(points[i][0] - radius, points[i][1] + radius);
+
+		vertexData.emplace_back(points[i][0] + radius, points[i][1] - radius);
+		vertexData.emplace_back(points[i][0] + radius, points[i][1] + radius);
+		vertexData.emplace_back(points[i][0] - radius, points[i][1] + radius);
+	}
+
+	enableClientStates(true, true);
+	setVertexPointer(2, GL_FLOAT, vertexData.data());
+	setTexCoordPointer(2, GL_FLOAT, texCoordData.data());
+	drawFromArray(Triangles, points.size() * 6, 0, false);
+	enableClientStates(false);
+}
+
 void StelPainter::drawSprite2dModeNoDeviceScale(float x, float y, float radius)
 {
 	drawSprite2dMode(x, y, radius/(static_cast<float>(prj->getDevicePixelsPerPixel())));
+}
+
+void StelPainter::drawSprite2dModeNoDeviceScale(const std::vector<Vec2f>& points, float radius)
+{
+	drawSprite2dMode(points, radius/(static_cast<float>(prj->getDevicePixelsPerPixel())));
 }
 
 void StelPainter::drawSprite2dMode(const Vec3d& v, float radius)
