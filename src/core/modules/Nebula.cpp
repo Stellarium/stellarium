@@ -968,11 +968,14 @@ void Nebula::renderMarkerPointedCircle(StelPainter& sPainter, const float x, con
 	if(insideRect)
 		size -= spriteSize*2;
 	const float*const cossin = StelUtils::ComputeCosSinRhoZone((2*M_PIf)/numPoints, numPoints, 0);
-	for(int n = 0; n < numPoints; ++n)
+	std::vector<Vec2f> points;
+	points.reserve(numPoints);
+	for (int n = 0; n < numPoints; ++n)
 	{
-		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
-		sPainter.drawSprite2dModeNoDeviceScale(x - size*sina, y - size*cosa, spriteSize);
+		const auto cosa = cossin[2 * n], sina = cossin[2 * n + 1];
+		points.emplace_back(x - size * sina, y - size * cosa);
 	}
+	sPainter.drawSprite2dModeNoDeviceScale(points, spriteSize);
 }
 
 float Nebula::getHintSize(StelPainter& sPainter) const
