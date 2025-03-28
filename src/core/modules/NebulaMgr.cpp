@@ -620,13 +620,6 @@ struct DrawNebulaFuncObject
 			return;
 
 		Nebula* n = static_cast<Nebula*>(obj);
-		float mag=n->getVisibilityLevelByMagnitude();
-
-		StelSkyDrawer *drawer = core->getSkyDrawer();
-		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
-		if ((drawer->getFlagNebulaMagnitudeLimit()) && (mag > static_cast<float>(drawer->getCustomNebulaMagnitudeLimit())))
-			return;
-
 		if (!n->objectInDisplayedCatalog())
 			return;
 
@@ -634,6 +627,12 @@ struct DrawNebulaFuncObject
 			return;
 
 		if (!n->objectInAllowedSizeRangeLimits())
+			return;
+
+		float mag=n->getVisibilityLevelByMagnitude();
+		StelSkyDrawer *drawer = core->getSkyDrawer();
+		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
+		if ((drawer->getFlagNebulaMagnitudeLimit()) && (mag > static_cast<float>(drawer->getCustomNebulaMagnitudeLimit())))
 			return;
 
 		if (n->majorAxisSize>angularSizeLimit || n->majorAxisSize==0.f || mag <= maxMagHints)
@@ -1954,7 +1953,7 @@ void NebulaMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	}
 	else
 	{
-		for (auto it = defaultNameMap.begin(); it != defaultNameMap.end(); ++it)
+		for (auto it = defaultNameMap.cbegin(); it != defaultNameMap.cend(); ++it)
 			for (const auto& name : it.value())
 				setName(it.key(), name);
 	}
@@ -1993,20 +1992,32 @@ int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data)
 		{
 			for (const auto& entry : specificNames)
 			{
-				for (const char*const nameType : {"english", "native"})
-				{
-					const auto specificName = entry.toObject()[nameType].toString();
-					if (specificName.isEmpty())
-						continue;
-					setName(n, specificName);
-					++loadedTotal;
-				}
+				//for (const char*const nameType : {"english", "native"})
+				//{
+				//	const auto specificName = entry.toObject()[nameType].toString();
+				//	if (specificName.isEmpty())
+				//		continue;
+				//	setName(n, specificName);
+				//	++loadedTotal;
+				//}
+				QJsonObject json=entry.toObject();
+				StelObject::CulturalName cName;
+				cName.native          = json["native"].toString("");
+				cName.pronounce       = json["pronounce"].toString("");
+				cName.pronounceI18n   = qc_(json["pronounce"].toString(""), json["context"].toString("")); // TODO: Clarify if context is available
+				cName.transliteration = json["transliteration"].toString("");
+				cName.translated      = json["english"].toString("");
+				cName.translatedI18n  = qc_(json["english"].toString(""), json["context"].toString("")); // TODO: Clarify if context is available
+				cName.IPA             = json["IPA"].toString("");
+
+				n->addCulturalName(cName);
 			}
 		}
 	}
 	return loadedTotal;
 }
 
+// Add names from data to the object locatable by commonname
 void NebulaMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName)
 {
 	const auto commonNameIndexIt = commonNameMap.find(commonName.toUpper());
@@ -2018,12 +2029,24 @@ void NebulaMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, co
 
 	for (const auto& entry : data)
 	{
-		const auto specificName = entry.toObject()["english"].toString();
-		if (specificName.isEmpty()) continue;
+		//const auto specificName = entry.toObject()["english"].toString();
+		//if (specificName.isEmpty()) continue;
 
-		// TODO: Filter away unwanted sources per-skyculture!
-		// For now, just accept as before.
-		setName(commonNameIndexIt.value().nebula, specificName);
+		//// TODO: Filter away unwanted sources per-skyculture!
+		//// For now, just accept as before.
+		//setName(commonNameIndexIt.value().nebula, specificName);
+
+		QJsonObject json=entry.toObject();
+		StelObject::CulturalName cName;
+		cName.native          = json["native"].toString("");
+		cName.pronounce       = json["pronounce"].toString("");
+		cName.pronounceI18n   = qc_(json["pronounce"].toString(""), json["context"].toString("")); // TODO: Clarify if context is available
+		cName.transliteration = json["transliteration"].toString("");
+		cName.translated      = json["english"].toString("");
+		cName.translatedI18n  = qc_(json["english"].toString(""), json["context"].toString("")); // TODO: Clarify if context is available
+		cName.IPA             = json["IPA"].toString("");
+
+		commonNameIndexIt.value().nebula->addCulturalName(cName);
 	}
 }
 
