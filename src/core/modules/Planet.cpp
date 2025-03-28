@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <windows.h>
 #include <QOpenGLFunctions_1_0>
 #include "StelApp.hpp"
 #include "StelSRGB.hpp"
