@@ -30,6 +30,7 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "RefractionExtinction.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 #include <QTextStream>
 #include <QFile>
@@ -203,6 +204,100 @@ QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGro
 	return res;
 }
 
+QString Nebula::getScreenLabel() const
+{
+	return getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle()).constFirst();
+}
+QString Nebula::getInfoLabel() const
+{
+	return getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle()).join("; ");
+}
+
+QStringList Nebula::getCultureLabels(StelObject::CulturalDisplayStyle style) const
+{
+	QStringList labels;
+	for (auto &cName: culturalNames)
+	{
+	QString label;
+	switch (style)
+	{
+		case CulturalDisplayStyle::Abbreviated:
+			label="";
+			break;
+		case CulturalDisplayStyle::Native:
+			label=cName.native;
+			break;
+		case CulturalDisplayStyle::Translated:
+			label=cName.translatedI18n;
+			break;
+		case CulturalDisplayStyle::Modern:
+			label=nameI18; // fully non-cultural!
+			break;
+		case CulturalDisplayStyle::Pronounce:
+			label=cName.pronounceI18n;
+			break;
+		case CulturalDisplayStyle::Translit:
+			label=cName.transliteration;
+			break;
+		case CulturalDisplayStyle::IPA:
+			label=cName.IPA;
+			break;
+		case CulturalDisplayStyle::Pronounce_Translated:
+			label=QString("%1 (%2)").arg(cName.pronounceI18n, cName.translatedI18n);
+			break;
+		case CulturalDisplayStyle::Pronounce_IPA_Translated:
+			label=QString("%1 [%2] (%3)").arg(cName.pronounceI18n, cName.IPA, cName.translatedI18n);
+			break;
+		case CulturalDisplayStyle::Pronounce_Translated_Modern:
+			label=QString("%1 (%2, %3)").arg(cName.pronounceI18n, cName.translatedI18n, englishName);
+			break;
+		case CulturalDisplayStyle::Pronounce_IPA_Translated_Modern:
+			label=QString("%1 [%2] (%3, %4)").arg(cName.pronounceI18n, cName.IPA, cName.translatedI18n, englishName);
+			break;
+		case CulturalDisplayStyle::Native_Pronounce:
+			label=QString("%1 [%2]").arg(cName.native, cName.pronounceI18n);
+			break;
+		case CulturalDisplayStyle::Native_Pronounce_Translated:
+			label=QString("%1 [%2] (%3)").arg(cName.native, cName.pronounceI18n, cName.translatedI18n);
+			break;
+		case CulturalDisplayStyle::Native_Pronounce_IPA_Translated:
+			label=QString("%1 [%2%3] (%4)").arg(cName.native, cName.pronounceI18n, cName.IPA.length() > 0 ? QString(", %1").arg(cName.IPA) : "", cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Native_Translated:
+			label=QString("%1 (%2)").arg(cName.native, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Native_Translit_Translated:
+			label=QString("%1 [%2] (%3)").arg(cName.native, cName.transliteration, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Native_Translit_Pronounce_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(cName.native, cName.transliteration, cName.pronounceI18n, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated:
+			label=QString("%1 [%2, %3, %4] (%5)").arg(cName.native, cName.transliteration, cName.pronounceI18n, cName.IPA, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Native_Translit_IPA_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(cName.native, cName.transliteration, cName.IPA, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Translit_Translated:
+			label=QString("%1 (%2)").arg(cName.transliteration, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Translit_Pronounce_Translated:
+			label=QString("%1 [%2] (%3)").arg(cName.transliteration, cName.pronounceI18n, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Translit_Pronounce_IPA_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(cName.transliteration, cName.pronounceI18n, cName.IPA, cName.translatedI18n);
+			break;
+		case  CulturalDisplayStyle::Translit_IPA_Translated:
+			label=QString("%1 [%2] (%4)").arg(cName.transliteration, cName.IPA, cName.translatedI18n);
+			break;
+		// NO default here, else we may forget one.
+	}
+	labels << label;
+	}
+	return labels;
+}
+
+
 QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	QString str;
@@ -211,6 +306,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "<h2>";
+
+	if (!culturalNames.isEmpty() && flags&Name)
+		oss << getInfoLabel() << "<br/>";
 
 	if (!nameI18.isEmpty() && flags&Name)
 	{
@@ -1110,7 +1208,8 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 
 	const float shift = 15.f + (drawHintProportional ? getHintSize(sPainter) : 0.f);
 
-	QString str = getNameI18n();
+	//QString str = getNameI18n();
+	QString str = getScreenLabel();
 	if (str.isEmpty() || designationUsage)
 		str = getDSODesignation();
 
