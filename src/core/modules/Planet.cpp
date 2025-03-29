@@ -29,7 +29,7 @@
 #include "Planet.hpp"
 #include "Orbit.hpp"
 #include "planetsephems/precession.h"
-//#include "planetsephems/EphemWrapper.hpp"
+#include "planetsephems/EphemWrapper.hpp"
 #include "SolarEclipseComputer.hpp"
 #include "StelObserver.hpp"
 #include "StelProjector.hpp"
