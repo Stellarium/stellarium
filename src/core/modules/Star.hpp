@@ -449,21 +449,16 @@ struct Star
 
    inline void getVarStarOffset(double epoch, double &offset) const // get brightness offset for variable stars (not actual brightness)
    {
-      StarId star_id;  // star ID
-      if (getGaia() == 0)
-      {
-         star_id = getHip();
-      }
-      else
-      {
-         star_id = getGaia();
-      }
+      StarId star_id = (getGaia() == 0) ? getHip() : getGaia();
       double period = StarMgr::getGcvsPeriod(star_id) / 365.25;
       if (period <=0.)  // not a variable star
          return;
       double dyrs = (epoch - STAR_CATALOG_JDEPOCH) / 365.25;
       double min1mag = StarMgr::getGcvsMinMagnitude(star_id) * 1000.;
       double maxmag = StarMgr::getGcvsMaxMagnitude(star_id) * 1000.;
+      QString name = StarMgr::getGcvsVariabilityType(star_id);
+      if (!name.isEmpty())
+         qDebug() << "Star " << name << " has period " << period << " days, min1mag " << min1mag << ", maxmag " << maxmag;
       double epoch_offset = (StarMgr::getGcvsEpoch(star_id) - STAR_CATALOG_JDEPOCH) / 365.25;
       double phase = fmod(dyrs - epoch_offset, period) / period;
    
