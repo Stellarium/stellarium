@@ -1567,54 +1567,32 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		QStringList rtxt;
 		static const QStringList occlass = { "I", "II", "III", "IV"};
 		static const QStringList ocrich = { "p", "m", "r"};
-		switch(occlass.indexOf(OClMatch.captured(1).trimmed()))
-		{
-			case 0:
-				rtxt << qc_("strong central concentration of stars", "Trumpler's Concentration Class");
-				break;
-			case 1:
-				rtxt << qc_("little central concentration of stars", "Trumpler's Concentration Class");
-				break;
-			case 2:
-				rtxt << qc_("no noticeable concentration of stars", "Trumpler's Concentration Class");
-				break;
-			case 3:
-				rtxt << qc_("a star field condensation", "Trumpler's Concentration Class");
-				break;
-			default:
-				rtxt << qc_("undocumented concentration class", "Trumpler's Concentration Class");
-				break;
-		}
-		switch(OClMatch.captured(2).toInt())
-		{
-			case 1:
-				rtxt << qc_("small brightness range of cluster members", "Trumpler's Brightness Class");
-				break;
-			case 2:
-				rtxt << qc_("medium brightness range of cluster members", "Trumpler's Brightness Class");
-				break;
-			case 3:
-				rtxt << qc_("large brightness range of cluster members", "Trumpler's Brightness Class");
-				break;
-			default:
-				rtxt << qc_("undocumented brightness range of cluster members", "Trumpler's Brightness Class");
-				break;
-		}
-		switch(ocrich.indexOf(OClMatch.captured(3).trimmed()))
-		{
-			case 0:
-				rtxt << qc_("poor cluster with less than 50 stars", "Trumpler's Number of Members Class");
-				break;
-			case 1:
-				rtxt << qc_("moderately rich cluster with 50-100 stars", "Trumpler's Number of Members Class");
-				break;
-			case 2:
-				rtxt << qc_("rich cluster with more than 100 stars", "Trumpler's Number of Members Class");
-				break;
-			default:
-				rtxt << qc_("undocumented number of members class", "Trumpler's Number of Members Class");
-				break;
-		}
+
+		QStringList occlassStrings = {
+			qc_("strong central concentration of stars", "Trumpler's Concentration Class"),
+			qc_("little central concentration of stars", "Trumpler's Concentration Class"),
+			qc_("no noticeable concentration of stars", "Trumpler's Concentration Class"),
+			qc_("a star field condensation", "Trumpler's Concentration Class")};
+
+		rtxt << occlassStrings.value(occlass.indexOf(OClMatch.captured(1).trimmed()),
+			 qc_("undocumented concentration class", "Trumpler's Concentration Class"));
+
+		QStringList oclBRangeStrings = {
+			qc_("small brightness range of cluster members", "Trumpler's Brightness Class"),
+			qc_("medium brightness range of cluster members", "Trumpler's Brightness Class"),
+			qc_("large brightness range of cluster members", "Trumpler's Brightness Class")};
+
+		rtxt << oclBRangeStrings.value(OClMatch.captured(2).toInt()-1,
+			qc_("undocumented brightness range of cluster members", "Trumpler's Brightness Class"));
+
+		QStringList ocrichStrings = {
+			qc_("poor cluster with less than 50 stars", "Trumpler's Number of Members Class"),
+			qc_("moderately rich cluster with 50-100 stars", "Trumpler's Number of Members Class"),
+			qc_("rich cluster with more than 100 stars", "Trumpler's Number of Members Class")};
+
+		rtxt << ocrichStrings.value(ocrich.indexOf(OClMatch.captured(3).trimmed()),
+			qc_("undocumented number of members class", "Trumpler's Number of Members Class"));
+
 		if (!OClMatch.captured(4).trimmed().isEmpty())
 			rtxt << qc_("the cluster lies within nebulosity", "nebulosity factor of open clusters");
 
