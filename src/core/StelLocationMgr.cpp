@@ -1232,8 +1232,8 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 		}
 		catch (const std::exception& e)
 		{
-			qDebug() << "Failure getting IP-based location: answer is in not acceptable format! Error: " << e.what()
-					<< "\nLet's use Paris, France as default location...";
+			qWarning() << "Failure getting IP-based location: answer is in not acceptable format! Error:" << e.what();
+			qWarning() << "Moving to the fallback location";
 			core->moveObserverTo(getLastResortLocation(), 0.0, 0.0, "guereins"); // Answer is not in JSON format! A possible block by DNS server or firewall
 		}
 	}
