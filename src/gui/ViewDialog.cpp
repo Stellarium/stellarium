@@ -560,10 +560,11 @@ void ViewDialog::createDialogContent()
 //	connectIntProperty(ui->skyCultureNamesStyleComboBox,		"ConstellationMgr.constellationDisplayStyle");
 	ui->skyCultureNamesStyleComboBox->hide();
 	ui->labelConstellationsNameStyle->hide();
+	//connectCheckBox(ui->nativePlanetNamesCheckBox,			"actionShow_Skyculture_NativePlanetNames");
+	ui->nativePlanetNamesCheckBox->hide();
 
 	connectIntProperty(ui->screenLabelComboBox,		"StelSkyCultureMgr.screenLabelStyle");
 	connectIntProperty(ui->infoLabelComboBox,		"StelSkyCultureMgr.infoLabelStyle");
-	connectCheckBox(ui->nativePlanetNamesCheckBox,			"actionShow_Skyculture_NativePlanetNames");
 	connectCheckBox(ui->showConstellationLinesCheckBox,			"actionShow_Constellation_Lines");
 	connectIntProperty(ui->constellationLineThicknessSpinBox,		"ConstellationMgr.constellationLineThickness");
 	connectCheckBox(ui->showConstellationLabelsCheckBox,		"actionShow_Constellation_Labels");
