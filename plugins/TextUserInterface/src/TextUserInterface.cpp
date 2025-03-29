@@ -710,7 +710,7 @@ void TextUserInterface::handleKeys(QKeyEvent* event)
 {
 	if (currentNode == Q_NULLPTR)
 	{
-		qWarning() << "WARNING: no current node in TextUserInterface plugin";
+		qWarning() << "No current node in TextUserInterface plugin";
 		event->setAccepted(false);
 		return;
 	}

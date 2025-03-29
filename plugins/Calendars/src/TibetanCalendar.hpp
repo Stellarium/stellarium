@@ -22,7 +22,7 @@
 #include "Calendar.hpp"
 
 //! @class TibetanCalendar
-//! Functions for the Tibetan (Phuglugs) calendar
+//! @brief Functions for the Tibetan (Phuglugs) calendar
 //! @author Georg Zotti
 //! @ingroup calendars
 //! The Tibetan Phuglugs/Phug-pa version of the Kalacakra (Wheel of Time) calendar is similar

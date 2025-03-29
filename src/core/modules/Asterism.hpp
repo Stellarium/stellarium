@@ -32,6 +32,7 @@
 
 class StarMgr;
 class StelPainter;
+class QJsonObject;
 
 //! @class Asterism
 //! The Asterism class models a grouping of stars in a Sky Culture.
@@ -73,7 +74,7 @@ private:
 	//! asterism.
 	//! @param starMgr a pointer to the StarManager object.
 	//! @return false if can't parse record, else true.
-	bool read(const QString& record, StarMgr *starMgr);
+	bool read(const QJsonObject& data, StarMgr *starMgr);
 
 	//! Draw the asterism name
 	void drawName(StelPainter& sPainter) const;
@@ -107,6 +108,7 @@ private:
 	//! @return true if Asterism name label rendering it turned on, else false.
 	bool getFlagLabels() const { return nameFader; }
 
+	//! @return true if a (real) named asterism, false for a ray helper
 	bool isAsterism() const { return flagAsterism; }
 
 	//! International name (translated using gettext)
@@ -122,13 +124,21 @@ private:
 	//! Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;
 	Vec3d XYname;
-	//! Number of segments in the lines
-	unsigned int numberOfSegments;
+	enum class Type
+	{
+		RayHelper,          //!< Ray helper
+		Asterism,           //!< An asterism with lines between HIP/Gaia stars
+		TelescopicAsterism, //!< An asterism with lines defined by J2000.0 coordinates
+	};
 	//! Type of asterism
-	int typeOfAsterism;
-	bool flagAsterism;
+	Type typeOfAsterism = Type::Asterism;
+	bool flagAsterism; //!< True for genuine asterisms, false for ray helpers
 	//! List of stars forming the segments
-	StelObjectP* asterism;
+	std::vector<StelObjectP> asterism;
+	//! In case this describes a single-star asterism (i.e. just one line segment that starts and ends at the same star),
+	//! or we have a line segment with such single star somewhere within the asterism,
+	//! we will draw a circle with this opening radius.
+	double singleStarAsterismRadius;
 
 	SphericalCap boundingCap;
 

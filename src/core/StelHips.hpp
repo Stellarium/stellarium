@@ -57,11 +57,13 @@ class HipsSurvey : public QObject
 
 public:
 	typedef std::function<void(const QVector<Vec3d>& verts, const QVector<Vec2f>& tex,
-							   const QVector<uint16_t>& indices)> DrawCallback;
+	                           const QVector<uint16_t>& indices)> DrawCallback;
 	//! Create a new HipsSurvey from its url.
 	//! @param url The location of the survey.
+	//! @param frame The reference frame from the survey's \c hips_frame property.
+	//! @param type Survey type from the survey's \c type property.
 	//! @param releaseDate If known the UTC JD release date of the survey.  Used for cache busting.
-	HipsSurvey(const QString& url, double releaseDate=0.0);
+	HipsSurvey(const QString& url, const QString& frame, const QString& type, double releaseDate=0.0);
 	~HipsSurvey() override;
 
 	//! Get whether the survey is visible.
@@ -82,10 +84,19 @@ public:
 	//! Return the source URL of the survey.
 	const QString& getUrl() const {return url;}
 
+	//! Return the frame name of the survey (its \c hips_frame property).
+	QString getFrame() const { return hipsFrame; }
+
+	//! Return the type of the survey (its \c type property).
+	QString getType() const { return type; }
+
 	//! Get whether the survey is still loading.
 	bool isLoading(void) const;
 
 	bool isPlanetarySurvey(void) const { return planetarySurvey; }
+
+	void setNormalsSurvey(const HipsSurveyP& normals);
+	void setHorizonsSurvey(const HipsSurveyP& horizons);
 
 	//! Parse a hipslist file into a list of surveys.
 	static QList<HipsSurveyP> parseHipslist(const QString& data);
@@ -98,9 +109,13 @@ signals:
 private:
 	LinearFader fader;
 	QString url;
-	QString hipsFrame = "equatorial";
+	QString type;
+	QString hipsFrame;
 	QString planet;
+	HipsSurveyP normals;
+	HipsSurveyP horizons;
 	double releaseDate; // As UTC Julian day.
+	int order = -1;
 	bool planetarySurvey;
 	QCache<long int, HipsTile> tiles;
 	// reply to the initial download of the properties file and to the
@@ -126,12 +141,12 @@ private:
 	HipsTile* getTile(int order, int pix);
 	// draw a single tile. observerVelocity (in the correct hipsFrame) is necessary for aberration correction. Set to 0 for no aberration correction.
 	void drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
-				  const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback);
+	              const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback);
 
 	// Fill the array for a given tile.
 	int fillArrays(int order, int pix, int drawOrder, int splitOrder,
-				   bool outside, StelPainter* sPainter, Vec3d observerVelocity,
-				   QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices);
+	               bool outside, StelPainter* sPainter, Vec3d observerVelocity,
+	               QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices);
 
 	void updateProgressBar(int nb, int total);
 };

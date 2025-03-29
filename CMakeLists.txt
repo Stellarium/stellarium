@@ -3,16 +3,12 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
 # Fix behavior of CMAKE_CXX_STANDARD and CMAKE_C_STANDARD when targeting macOS.
-IF(POLICY CMP0025)
-     CMAKE_POLICY(SET CMP0025 NEW)
-ENDIF()
+CMAKE_POLICY(SET CMP0025 NEW)
 # Potential dangerous comparison of variables. Details: https://cmake.org/cmake/help/v3.1/policy/CMP0054.html
-IF(POLICY CMP0054)
-     CMAKE_POLICY(SET CMP0054 NEW)
-ENDIF()
-IF(POLICY CMP0071)
-     CMAKE_POLICY(SET CMP0071 NEW)
-ENDIF()
+CMAKE_POLICY(SET CMP0054 NEW)
+# Let AUTOMOC and AUTOUIC process GENERATED files.
+CMAKE_POLICY(SET CMP0071 NEW)
+# CMake Policies introduced after version CMAKE_MINIMUM_REQUIRED
 IF(POLICY CMP0175)
      CMAKE_POLICY(SET CMP0175 OLD)
 ENDIF()
@@ -47,7 +43,7 @@ ENDIF()
 # Note: Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR 25)
 # Number of the release (0 is used before first release)
-SET(STELLARIUM_MINOR 0)
+SET(STELLARIUM_MINOR 1)
 IF(STELLARIUM_RELEASE_BUILD)
     ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
     SET(CMAKE_BUILD_TYPE Release)
@@ -150,8 +146,8 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
                APPEND_COVERAGE_COMPILER_FLAGS()
                MESSAGE(STATUS "Found lcov ${LCOV_PATH} (enable coverage support)")
                SETUP_TARGET_FOR_COVERAGE_LCOV(
-                    NAME coverage 
-                    EXECUTABLE ctest -j ${PROCESSOR_COUNT} 
+                    NAME coverage
+                    EXECUTABLE ctest -j ${PROCESSOR_COUNT}
                     DEPENDENCIES buildTests
                )
           ENDIF()
@@ -174,7 +170,7 @@ ELSE()
           EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} describe --tags --abbrev=0 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_TAGS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
 	  IF(GIT_REVISION)
                # Let's use short hash in all cases
-               STRING(SUBSTRING ${GIT_REVISION} 0 7 REVISION)               
+               STRING(SUBSTRING ${GIT_REVISION} 0 7 REVISION)
 	       ADD_DEFINITIONS(-DGIT_REVISION="${REVISION}")
                ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
 	  ENDIF()
@@ -371,7 +367,7 @@ IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
 ENDIF()
 
 # FreeBSD-specific compiler flags
-# resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers 
+# resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers
 IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
      # Use -pthread compilation option to properly link to threading library
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -Wno-unused-local-typedefs")
@@ -544,6 +540,7 @@ ADD_PLUGIN(Calendars 1)
 ADD_PLUGIN(Exoplanets 1)
 ADD_PLUGIN(EquationOfTime 1)
 ADD_PLUGIN(MeteorShowers 1)
+ADD_PLUGIN(MosaicCamera 1)
 ADD_PLUGIN(NavStars 1)
 ADD_PLUGIN(NebulaTextures 1)
 ADD_PLUGIN(Novae 1)
@@ -705,8 +702,8 @@ SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 IF(ENABLE_SHOWMYSKY)
     ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
     CPMFindPackage(NAME ShowMySky-Qt${QT_VERSION_MAJOR}
-        URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.3.3.tar.gz
-        URL_HASH SHA256=21cce3187009ce62a4a08a72b4e22ae7bc00654edfbc7fa9fe8ab65b412791df
+        URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.3.4.tar.gz
+        URL_HASH SHA256=29ef4c81cf020e131ec79a28c78946d80d422d05818197079cbaa6353ffba16a
         EXCLUDE_FROM_ALL yes
         OPTIONS "QT_VERSION ${QT_VERSION_MAJOR}")
     IF(ShowMySky-Qt${QT_VERSION_MAJOR}_ADDED)
@@ -718,7 +715,7 @@ IF(ENABLE_SHOWMYSKY)
         MESSAGE(STATUS "Will build ShowMySky library")
         INCLUDE(GNUInstallDirs)
 	IF(APPLE)
-	    INSTALL(TARGETS ShowMySky LIBRARY DESTINATION Frameworks)	
+	    INSTALL(TARGETS ShowMySky LIBRARY DESTINATION Frameworks)
 	ELSE()
 	    INSTALL(TARGETS ShowMySky
 		    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -738,7 +735,7 @@ IF(ENABLE_SHOWMYSKY)
         GET_TARGET_PROPERTY(ShowMySky_LIBRARY
             ShowMySky::ShowMySky LOCATION)
         IF(EXISTS ${ShowMySky_LIBRARY})
-            MESSAGE(STATUS "Found ShowMySky library: ${ShowMySky_LIBRARY}")	    
+            MESSAGE(STATUS "Found ShowMySky library: ${ShowMySky_LIBRARY}")
         ELSE()
             MESSAGE(FATAL_ERROR "Could NOT found ShowMySky library")
         ENDIF()
@@ -832,24 +829,33 @@ ELSE()
 ENDIF()
 
 IF(ENABLE_XLSX)
-     # TODO: switch to something like vcpkg or conan, and plain find_package,
-     # without the fallback of cmake downloading the dep itself.
-     # But some libraries are not available there yet.
-
      # Version 1.4.4 exports "QXlsx", but future (unreleased as of 10 Nov 2022)
      # version exports "QXlsxQt5" (or ...Qt6) instead. Try both, but
      # download newer one, because 1.4.4 doesn't link on windows when
      # added via add_subdirectory().
-     FIND_PACKAGE(QXlsx NAMES QXlsxQt${QT_VERSION_MAJOR} QXlsx)
+     FIND_PACKAGE(QXlsx NAMES QXlsxQt${QT_VERSION_MAJOR} QXlsx QUIET)
      IF(QXlsx_FOUND)
-         MESSAGE(STATUS "Using system-provided QXlsx ${QXlsx_VERSION}")
+          MESSAGE(STATUS "Using system-provided QXlsx ${QXlsx_VERSION}")
      ELSE()
-         CPMAddPackage(NAME QXlsxQt${QT_VERSION_MAJOR}
-             URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.4.8.tar.gz
-             URL_HASH SHA256=5b2a5aad08f07e6b099d934c4c4f75bcd83a0421538aec1e8582d8c8596b0956
-             EXCLUDE_FROM_ALL ON
-             SOURCE_SUBDIR QXlsx)
+          CPMAddPackage(NAME QXlsxQt${QT_VERSION_MAJOR}
+               URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.5.0.tar.gz
+               URL_HASH SHA256=4461bb0fc9b88b6a970520e8b32eb7d2fc391a1a5c326b139a0af836278cdb09
+               EXCLUDE_FROM_ALL ON
+               SOURCE_SUBDIR QXlsx)
      ENDIF()
+ENDIF()
+
+CPMFindPackage(NAME md4c
+     URL https://github.com/mity/md4c/archive/refs/tags/release-0.4.8.tar.gz
+     URL_HASH SHA256=4a457df853425b6bb6e3457aa1d1a13bccec587a04c38c622b1013a0da41439f
+     EXCLUDE_FROM_ALL yes
+     OPTIONS "BUILD_MD2HTML_EXECUTABLE OFF")
+IF(md4c_ADDED)
+     SET(MD4C_STEL_LIBRARIES md4c-html)
+ELSE()
+     # *_LIBRARIES variable is not set by CPM (unlike find_package; see
+     # https://github.com/cpm-cmake/CPM.cmake/issues/132).
+     SET(MD4C_STEL_LIBRARIES md4c::md4c-html)
 ENDIF()
 
 ########### Set some global variables ###########
@@ -857,7 +863,7 @@ IF(UNIX AND NOT WIN32)
      IF(APPLE)
           SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
      ELSE()
-          ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/${SDATALOC}")          
+          ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/${SDATALOC}")
           # Used in generating the documentation (doc/stellarium.pod.cmake):
           SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/${SDATALOC}")
      ENDIF()
@@ -996,7 +1002,7 @@ IF(GENERATE_PACKAGE_TARGET)
      SET(CPACK_PACKAGE_CHECKSUM "SHA256")
      SET(CPACK_STRIP_FILES "bin/stellarium")
      SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
-     SET(CPACK_SOURCE_IGNORE_FILES "/.git/" "/.github/" "builds/" "installers/" "po/stellarium-landscapes-descriptions" "po/stellarium-scenery3d-descriptions" "po/stellarium-skycultures-descriptions" "po/stellarium-desktop" "po/stellarium-metainfo" "util/spout2" "util/DSSToStellarium/toastForShape$" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "/CITATION*" "\\\\.gitignore$" "\\\\.clang-format$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
+     SET(CPACK_SOURCE_IGNORE_FILES "/.git/" "/.github/" "builds/" "installers/" "po/stellarium-landscapes-descriptions" "po/stellarium-scenery3d-descriptions" "po/stellarium-desktop" "po/stellarium-metainfo" "util/spout2" "util/DSSToStellarium/toastForShape$" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "/CITATION*" "\\\\.gitignore$" "\\\\.clang-format$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
      SET(CPACK_RPM_PACKAGE_LICENSE "GNU GPLv2 or later")
      SET(CPACK_RPM_PACKAGE_GROUP "Sciences/Astronomy")
      SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_VENDOR} <stellarium@googlegroups.com>")

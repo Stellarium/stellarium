@@ -39,6 +39,10 @@
 #include <QSettings>
 #include <QStandardItem>
 #include <QRegularExpression>
+#if defined(Q_OS_WIN)
+	#include "../common/ASCOMSupport.hpp"
+	#include <QMessageBox>
+#endif
 
 
 TelescopeDialog::TelescopeDialog(const QString &dialogName, QObject *parent)
@@ -108,6 +112,11 @@ void TelescopeDialog::createDialogContent()
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
 
+#ifdef Q_OS_WIN
+	if ((ASCOMSupport::getASCOMMajorVersion() > 0) && (ASCOMSupport::getASCOMMajorVersion() < 7))
+		QMessageBox::warning(nullptr, q_("Outdated ASCOM!"), q_("Your ASCOM is below version 7. Upgrade to avoid problems!") );
+#endif
+
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
@@ -120,7 +129,7 @@ void TelescopeDialog::createDialogContent()
 	connect(ui->pushButtonAdd, SIGNAL(clicked()), this, SLOT(buttonAddPressed()));
 	connect(ui->pushButtonRemove, SIGNAL(clicked()), this, SLOT(buttonRemovePressed()));
 	
-	connect(ui->telescopeTreeView, SIGNAL(clicked (const QModelIndex &)), this, SLOT(selectTelecope(const QModelIndex &)));
+	connect(ui->telescopeTreeView, SIGNAL(clicked (const QModelIndex &)), this, SLOT(selectTelescope(const QModelIndex &)));
 	//connect(ui->telescopeTreeView, SIGNAL(activated (const QModelIndex &)), this, SLOT(configureTelescope(const QModelIndex &)));
 	
 	//Page: Options:
@@ -251,6 +260,14 @@ void TelescopeDialog::setAboutText()
 	// Regexp to replace {text} with an HTML link.
 	static const QRegularExpression a_rx("[{]([^{]*)[}]");
 
+#ifdef Q_OS_MACOS
+	QString modifierNameCtrl = "⌘"; // Command key
+	QString modifierNameAlt = "⌥"; // Option key
+#else
+	QString modifierNameCtrl = "Ctrl";
+	QString modifierNameAlt = "Alt";
+#endif
+
 	//TODO: Expand
 	QString aboutPage = "<html><head></head><body>";
 	aboutPage += "<h2>" + q_("Telescope Control plug-in") + "</h2><table class='layout' width=\"90%\">";
@@ -337,10 +354,10 @@ void TelescopeDialog::setAboutText()
 	helpPage += "<li>" + q_("By pressing the 'configure' button for the plug-in in the 'Plugins' tab of Stellarium's Configuration window (opened by pressing <b>F2</b> or the respective button in the left toolbar).") + "</li>";
 	helpPage += "<li>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	helpPage += q_("By pressing the 'Configure telescopes...' button in the {'Slew to' window} (opened by pressing <b>Ctrl+0</b> or the respective button on the bottom toolbar).").replace(a_rx, "<a href=\"#slew_to\">\\1</a>");
+	helpPage += (q_("By pressing the 'Configure telescopes...' button in the {'Slew to' window} (opened by pressing <b>%1+0</b> or the respective button on the bottom toolbar).").arg(modifierNameCtrl)).replace(a_rx, "<a href=\"#slew_to\">\\1</a>");
 	helpPage += "</li></ul>";
 	helpPage += "<p>" + q_("The <b>Telescopes</b> tab displays a list of the telescope connections that have been set up:") + "</p><ul>";
-	helpPage += "<li>" + q_("The number (<b>#</b>) column shows the number used to control this telescope. For example, for telescope #2, the shortcut is Ctrl+2.") + "</li>";
+	helpPage += "<li>" + q_("The number (<b>#</b>) column shows the number used to control this telescope. For example, for telescope #2, the shortcut is %1+2.").arg(modifierNameCtrl) + "</li>";
 	helpPage += "<li>" + q_("The <b>Status</b> column indicates if this connection is currently active or not. Unfortunately, there are some cases in which 'Connected' is displayed when no working connection exists.") + "</li>";
 	helpPage += "<li>" + q_("The <b>Type</b> field indicates what kind of connection is this:") + "</li><ul>";
 	helpPage += "<li>";
@@ -428,7 +445,7 @@ void TelescopeDialog::setAboutText()
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 
 	helpPage += "<h3><a name=\"slew_to\" />" + q_("'Slew telescope to' window") + "</h3>";
-	helpPage += "<p>" + q_("The 'Slew telescope to' window can be opened by pressing <b>Ctrl+0</b> or the respective button in the bottom toolbar.") + "</p>";
+	helpPage += "<p>" + q_("The 'Slew telescope to' window can be opened by pressing <b>%1+0</b> or the respective button in the bottom toolbar.").arg(modifierNameCtrl) + "</p>";
 	helpPage += "<p>" + q_("It contains two fields for entering celestial coordinates, selectors for the preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or Decimal degrees), a drop-down list and two buttons.") + "</p>";
 	helpPage += "<p>" + q_("The drop-down list contains the names of the currently connected devices.") + " ";
 	helpPage += q_("If no devices are connected, it will remain empty, and the 'Slew' button will be disabled.") + "</p>";
@@ -440,23 +457,21 @@ void TelescopeDialog::setAboutText()
 	// TRANSLATORS: The text between braces is the text of an HTML link.
 	helpPage += q_("Pressing the <b>Configure telescopes...</b> button opens the {main window} of the plug-in.").replace(a_rx, "<a href=\"#mainwindow\">\\1</a>");
 	helpPage += "</p>";
-	helpPage += "<p>" + q_("<b>TIP:</b> Inside the 'Slew' window, underlined letters indicate that pressing 'Alt + underlined letter' can be used instead of clicking.") + " ";
-	helpPage +=  q_("For example, pressing <b>Alt+S</b> is equivalent to clicking the 'Slew' button, pressing <b>Alt+E</b> switches to decimal degree format, etc.") + "</p>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 
 	helpPage += "<h3><a name=\"commands\" />" + q_("Sending commands") + "</h3>";
 	helpPage += "<p>" + q_("Once a telescope is successfully started/connected, Stellarium displays a telescope reticle labelled with the telescope's name on its current position in the sky.")
 		 + " " + q_("The reticle is an object like every other in Stellarium - it can be selected with the mouse, it can be tracked and it appears as an object in the 'Search' window.") + "</p>";
-	helpPage += "<p>" + q_("<b>To point a device to an object:</b> Select an object (e.g. a star) and press the number of the device while holding down the <b>Ctrl</b> key.")
-		 + " (" + q_("For example, Ctrl+1 for telescope #1.") + ") "
+	helpPage += "<p>" + q_("<b>To point a device to an object:</b> Select an object (e.g. a star) and press the number of the device while holding down the <b>%1</b> key.").arg(modifierNameCtrl)
+		 + " (" + q_("For example, %1+1 for telescope #1.").arg(modifierNameCtrl) + ") "
 		 + q_("This will move the telescope to the selected object.") + "</p>";
-	helpPage += "<p>" + q_("<b>To point a device to the center of the view:</b> Press the number of the device while holding down the <b>Alt</b> key.")
-		 + " (" + q_("For example, Alt+1 for telescope #1.") + ") "
+	helpPage += "<p>" + q_("<b>To point a device to the center of the view:</b> Press the number of the device while holding down the <b>%1</b> key.").arg(modifierNameAlt)
+		 + " (" + q_("For example, %1+1 for telescope #1.").arg(modifierNameAlt) + ") "
 		 + q_("This will slew the device to the point in the center of the current view.")
 		 + " (" + q_("If you move the view after issuing the command, the target won't change unless you issue another command.") + ")</p>";
 	helpPage += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	helpPage += q_("<b>To point a device to a given set of coordinates:</b> Use the {'Slew to' window} (press <b>Ctrl+0</b>).").replace(a_rx, "<a href=\"#slew_to\">\\1</a>");
+	helpPage += q_("<b>To point a device to a given set of coordinates:</b> Use the {'Slew to' window} (press <b>%1+0</b>).").arg(modifierNameCtrl).replace(a_rx, "<a href=\"#slew_to\">\\1</a>");
 	helpPage += "</p>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 
@@ -524,12 +539,14 @@ void TelescopeDialog::updateWarningTexts()
 	if (telescopeCount > 0)
 	{
 #ifdef Q_OS_MACOS
-		QString modifierName = "Command";
+		QString modifierNameCtrl = "⌘"; // Command key
+		QString modifierNameAlt = "⌥"; // Option key
 #else
-		QString modifierName = "Ctrl";
+		QString modifierNameCtrl = "Ctrl";
+		QString modifierNameAlt = "Alt";
 #endif
 		
-		text = QString(q_("To slew a connected telescope to an object (for example, a star), select that object, then hold down the %1 key and press the key with that telescope's number. To slew it to the center of the current view, hold down the Alt key and press the key with that telescope's number.")).arg(modifierName);
+		text = QString(q_("To slew a connected telescope to an object (for example, a star), select that object, then hold down the %1 key and press the key with that telescope's number. To slew it to the center of the current view, hold down the %2 key and press the key with that telescope's number.")).arg(modifierNameCtrl, modifierNameAlt);
 	}
 	else
 	{
@@ -636,7 +653,7 @@ void TelescopeDialog::updateModelRow(int rowNumber,
 }
 
 
-void TelescopeDialog::selectTelecope(const QModelIndex & index)
+void TelescopeDialog::selectTelescope(const QModelIndex & index)
 {
 	//Extract selected item index
 	int selectedSlot = telescopeListModel->data( telescopeListModel->index(index.row(),0) ).toInt();

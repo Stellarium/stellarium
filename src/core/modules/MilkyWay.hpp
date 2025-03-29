@@ -88,8 +88,9 @@ public slots:
 	//! Sets the color to use for rendering the Milky Way
 	//! @param c The color to use for rendering the Milky Way. Default (1.0, 1.0, 1.0)
 	//! @code
-	//! // example of usage in scripts
-	//! MilkyWay.setColor(Vec3f(0.7,1.0,0.8));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(0.7, 1.0, 0.8);
+	//! MilkyWay.setColor(c.toVec3f());
 	//! @endcode
 	void setColor(const Vec3f& c);
 	

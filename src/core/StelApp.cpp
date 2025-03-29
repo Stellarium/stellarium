@@ -220,6 +220,10 @@ Q_IMPORT_PLUGIN(OnlineQueriesPluginInterface)
 Q_IMPORT_PLUGIN(NebulaTexturesStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_MOSAICCAMERA
+Q_IMPORT_PLUGIN(MosaicCameraStelPluginInterface)
+#endif
+
 // Initialize static variables
 StelApp* StelApp::singleton = Q_NULLPTR;
 qint64 StelApp::startMSecs = 0;
@@ -308,7 +312,7 @@ StelApp::StelApp(StelMainView *parent)
 *************************************************************************/
 StelApp::~StelApp()
 {
-	qDebug() << qPrintable(QString("Downloaded %1 files (%2 kbytes) in a session of %3 sec (average of %4 kB/s + %5 files from cache (%6 kB)).").arg(nbDownloadedFiles).arg(totalDownloadedSize/1024).arg(getTotalRunTime()).arg(static_cast<double>(totalDownloadedSize/1024)/getTotalRunTime()).arg(nbUsedCache).arg(totalUsedCacheSize/1024));
+	qInfo() << qPrintable(QString("Downloaded %1 files (%2 kbytes) in a session of %3 sec (average of %4 kB/s + %5 files from cache (%6 kB)).").arg(nbDownloadedFiles).arg(totalDownloadedSize/1024).arg(getTotalRunTime()).arg(static_cast<double>(totalDownloadedSize/1024)/getTotalRunTime()).arg(nbUsedCache).arg(totalUsedCacheSize/1024));
 
 	stelObjectMgr->unSelect();
 	moduleMgr->unloadModule("StelVideoMgr", false);  // We need to delete it afterward
@@ -448,12 +452,12 @@ void StelApp::init(QSettings* conf)
 	gl = QOpenGLContext::currentContext()->functions();
 	confSettings = conf;
 
-	devicePixelsPerPixel = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
-	if (devicePixelsPerPixel>1)
-		qDebug() << "Detected a high resolution device! Device pixel ratio:" << devicePixelsPerPixel;
+	devicePixelsPerPixel = StelMainView::getInstance().devicePixelRatioF();
+	qInfo() << "Initial high-DPI scaling factor:" << devicePixelsPerPixel;
 
 	setScreenFontSize(confSettings->value("gui/screen_font_size", getDefaultGuiFontSize()).toInt());
 	setGuiFontSize(confSettings->value("gui/gui_font_size", getDefaultGuiFontSize()).toInt());
+	setScreenButtonScale(confSettings->value("gui/screen_button_scale", 100).toDouble());
 
 	SplashScreen::present(guiFontSizeRatio());
 
@@ -483,7 +487,7 @@ void StelApp::init(QSettings* conf)
 	cache->setMaximumCacheSize(confSettings->value("main/network_cache_size",300).toInt() * 1024 * 1024);
 	QString cachePath = StelFileMgr::getCacheDir();
 
-	qDebug().noquote() << "Cache directory:" << QDir::toNativeSeparators(cachePath);
+	qInfo().noquote() << "Cache directory:" << QDir::toNativeSeparators(cachePath);
 	cache->setCacheDirectory(cachePath);
 	networkAccessManager->setCache(cache);	
 	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));
@@ -941,7 +945,11 @@ void StelApp::highGraphicsModeDraw()
 	StelOpenGL::checkGLErrors(__FILE__, __LINE__);
 	if(!sceneFBO || sceneFBO->size() != QSize(w,h))
 	{
-		qDebug().nospace() << "Creating scene FBO with size " << w << "x" << h;
+		GLint viewport[4] = {};
+		GL(gl->glGetIntegerv(GL_VIEWPORT, viewport));
+		qInfo() << "OpenGL viewport size:" << viewport[2] << "x" << viewport[3];
+
+		qInfo().nospace() << "Creating scene FBO with size " << w << "x" << h;
 		const auto internalFormat = GL_RGBA16;
 		QOpenGLFramebufferObjectFormat format;
 		format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
@@ -1042,7 +1050,6 @@ void StelApp::highGraphicsModeDraw()
 		const auto rgbMaxValue=calcRGBMaxValue(core->getDitheringMode());
 		postProcessorProgram->setUniformValue(postProcessorUniformLocations.rgbMaxValue,
 		                                      rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
-
 	}
 
 	postProcessorVAO->bind();
@@ -1386,6 +1393,7 @@ void StelApp::setDevicePixelsPerPixel(qreal dppp)
 	// Check that the device-independent pixel size didn't change
 	if (!viewportEffect && !fuzzyEquals(devicePixelsPerPixel, dppp))
 	{
+		qDebug() << "Changing high-DPI scaling factor from" << devicePixelsPerPixel << "to" << dppp;
 		devicePixelsPerPixel = dppp;
 		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 		params.devicePixelsPerPixel = devicePixelsPerPixel;
@@ -1464,6 +1472,16 @@ void StelApp::setScreenFontSize(int s)
 	}
 }
 
+void StelApp::setScreenButtonScale(const double s)
+{
+	if (screenButtonScale!=s)
+	{
+		screenButtonScale = s;
+		StelApp::immediateSave("gui/screen_button_scale", s);
+		emit screenButtonScaleChanged(s);
+	}
+}
+
 double StelApp::screenFontSizeRatio() const
 {
 	return double(getScreenFontSize()) / getDefaultGuiFontSize();
@@ -1483,6 +1501,13 @@ void StelApp::setGuiFontSize(int s)
 int StelApp::getGuiFontSize() const
 {
 	return QGuiApplication::font().pixelSize();
+}
+
+float StelApp::getScreenScale() const
+{
+	const float dppRatio = StelApp::getInstance().getDevicePixelsPerPixel();
+	const float fontRatio = StelApp::getInstance().screenFontSizeRatio();
+	return dppRatio * fontRatio;
 }
 
 void StelApp::setAppFont(QFont font)

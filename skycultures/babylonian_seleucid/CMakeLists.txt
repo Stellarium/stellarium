@@ -1,13 +1,6 @@
+get_filename_component(skyculturePath "${CMAKE_CURRENT_SOURCE_DIR}" REALPATH)
+get_filename_component(skyculture ${skyculturePath} NAME)
 
-########### install files ###############
-
-# install info.ini and star_names.fab
-INSTALL(FILES info.ini star_names.fab DESTINATION ${SDATALOC}/skycultures/babylonian_seleucid )
-
-# install constellations data, artwork and descriptions
-INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/babylonian_seleucid
-	FILES_MATCHING PATTERN "constellation*" 
-	PATTERN "*.fab" 
-	PATTERN "*.png"
-	PATTERN "description.*.utf8" 
-	PATTERN "CMakeFiles" EXCLUDE )
+install(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/${skyculture}
+        FILES_MATCHING PATTERN "*"
+        PATTERN "CMakeLists.txt" EXCLUDE)

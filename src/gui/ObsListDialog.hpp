@@ -22,6 +22,7 @@
 
 #include <QObject>
 #include <QStandardItemModel>
+#include <QSortFilterProxyModel>
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
@@ -427,6 +428,12 @@ private:
 	static const QString CUSTOM_OBJECT;
 
 	static const QString DASH;
+};
+
+class ObsListDialogSortFilterProxyModel : public QSortFilterProxyModel
+{
+protected:
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
 };
 
 #endif // OBSLISTDIALOG_H

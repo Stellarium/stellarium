@@ -1,0 +1,33 @@
+<h2>Testscen</h2>
+
+<p>Den här scenen är mest användbar som testbädd för din egen utveckling. Du
+bör göra en kopia av scenmappen och modifiera efter behag, prova
+materialinställningar eller andra detaljer för att ta reda på hur detta
+plugin fungerar. Bygg sedan och presentera ditt eget arbete!</p>
+
+<h4>Koordinera och orientera tester</h4>
+
+<p>De pelare som visas här, sett från konstruktionens mitt, ger en ungefärlig
+bild (inte högprecision!) av solståndets/equinox soluppgångens/solnedgångens
+positioner på centraleuropeiska breddgrader. De centrala pelarna ger en
+öst-västlig linje. Det koordinatnät som syns på golvet är inte i linje med
+den geografiska nordriktningen.  En rotation på -4,2 grader (test för
+meridiankonvergens) måste kompenseras, d.v.s. medan de centrala pelarna
+absolut och alltid måste peka mot väst-öst, träffar rutnätslinjerna den
+norra horisonten något (4,2 grader) till vänster om norr!</p>
+
+<p>Koordinater för markrunda (Ctrl-R, T) bör visa de koordinater som är synliga
+längs markens södra och västra kant.</p>
+
+<h4>Materialtest</h4>
+
+<p>Den här modellen används också för att testa plugin-programmets grafiska
+funktioner. Du kan leka med materialparametrar för att skapa roliga effekter
+som halvgenomskinliga eller självlysande sfärer av tegelstenar.</p>
+
+<p>För att testa temporala funktioner är pelarna och sfärerna synliga endast
+från år 2000 till 2020.  Redigera materialfilen för att ändra det!</p>
+
+<h4>Modell</h4>
+<p>Testscen för Stellarium/scenery3d-utveckling. Export från
+SU8-Kerkythea-KT2OBJ.</p>

@@ -30,7 +30,9 @@
 #include <QRegularExpression>
 #include <QProcess>
 #include <QSysInfo>
+#include <QJsonValue>
 #include <cmath> // std::fmod
+#include <limits>
 #include <zlib.h>
 
 #ifdef CYGWIN
@@ -917,6 +919,12 @@ double getJDFromBesselianEpoch(const double epoch)
 	return 2400000.5 + (15019.81352 + (epoch - 1900.0) * 365.242198781);
 }
 
+double getJDFromJulianEpoch(const double epoch)
+{
+	return 2451545.0 + (epoch - 2000.0) * 365.25;
+}
+
+
 double qTimeToJDFraction(const QTime& time)
 {
 	return static_cast<double>(1./(24*60*60*1000)*QTime(0, 0, 0, 0).msecsTo(time))-0.5;
@@ -946,7 +954,7 @@ QTime jdFractionToQTime(const double jd)
 		hours+=1;
 	}
 	if (hours >= 24)
-		qDebug() << "WARNING: hours exceed a full day!" << hours;
+		qWarning() << "Hours exceed a full day!" << hours;
 	hours %= 24;
 
 	QTime tm=QTime(hours, mins, sec, ms);
@@ -1311,11 +1319,11 @@ QString getHoursMinutesFromJulianDay(const double julianDay)
 	return QString("%1:%2").arg(hr, 2, 10, QChar('0')).arg(m, 2, 10, QChar('0'));
 }
 
-QString hoursToHmsStr(const double hours, const bool lowprecision)
+QString hoursToHmsStr(const double hours, const bool minutesOnly, const bool colonFormat)
 {
 	int h = static_cast<int>(hours);
 	double minutes = (qAbs(hours)-qAbs(double(h)))*60.;
-	if (lowprecision)
+	if (minutesOnly)
 	{
 		int m = qRound(minutes);
 		if (m==60)
@@ -1323,7 +1331,8 @@ QString hoursToHmsStr(const double hours, const bool lowprecision)
 			h += 1;
 			m = 0;
 		}
-		return QString("%1h%2m").arg(h).arg(m, 2, 10, QChar('0'));
+		QString format=colonFormat ? "%1:%2" : "%1h%2m";
+		return QString(format).arg(h).arg(m, 2, 10, QChar('0'));
 	}
 	else
 	{
@@ -1339,13 +1348,14 @@ QString hoursToHmsStr(const double hours, const bool lowprecision)
 			h += 1;
 			m = 0;
 		}
-		return QString("%1h%2m%3s").arg(h).arg(m, 2, 10, QChar('0')).arg(s, 4, 'f', 1, QChar('0'));
+		QString format=colonFormat ? "%1:%2:%3" : "%1h%2m%3s";
+		return QString(format).arg(h).arg(m, 2, 10, QChar('0')).arg(s, 4, 'f', 1, QChar('0'));
 	}
 }
 
-QString hoursToHmsStr(const float hours, const bool lowprecision)
+QString hoursToHmsStr(const float hours, const bool minutesOnly, const bool colonFormat)
 {
-	return hoursToHmsStr(static_cast<double>(hours), lowprecision);
+	return hoursToHmsStr(static_cast<double>(hours), minutesOnly, colonFormat);
 }
 
 //! The method to splitting the text by substrings by some limit of string length
@@ -2788,6 +2798,32 @@ QByteArray uncompress(QIODevice& device, qint64 maxBytes)
 	return out;
 }
 
+qint64 getLongLong(const QJsonValue& v)
+{
+	const auto reportError = [&v]{
+		qWarning().nospace() << "Cannot obtain an integer from JSON value "
+		                     << v << ". Please format it as a JSON string or"
+		                     " make sure it's an integer smaller than 2^53.";
+		return 0;
+	};
+
+	bool ok = false;
+	if(v.isString())
+	{
+		const auto integer = v.toString().toLongLong(&ok);
+		if(!ok) return reportError();
+		return integer;
+	}
+	const auto value = v.toDouble();
+	constexpr qint64 max = (1LL<<std::numeric_limits<double>::digits) - 1;
+
+	if(std::abs(value) > max) return reportError();
+
+	const auto integer = static_cast<qint64>(value);
+	if(value != integer) // fractional part must be zero
+		return reportError();
+	return integer;
+}
 
 } // end of the StelUtils namespace
 

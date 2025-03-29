@@ -192,6 +192,17 @@
           </iconset>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>Almanac</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabSSO.png</normalon>
+           <selectedon>:/graphicGui/tabSSO-selected.png</selectedon>
+          </iconset>
+         </property>
+        </item>
        </widget>
       </item>
       <item row="1" column="0">
@@ -1240,6 +1251,16 @@
               </property>
               <property name="insertPolicy">
                <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="selectObjectButton">
+              <property name="toolTip">
+               <string>Re-select previously selected object</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
               </property>
              </widget>
             </item>
@@ -2915,7 +2936,7 @@
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="minimum">
-                 <number>2</number>
+                 <number>1</number>
                 </property>
                 <property name="maximum">
                  <number>500</number>
@@ -3105,6 +3126,20 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="stackedWidgetPage9">
+         <layout class="QGridLayout" name="gridLayout_27">
+          <item row="0" column="0">
+           <widget class="AstroCalcAlmanacWidget" name="astroCalcAlmanac" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -3133,6 +3168,12 @@
    <class>QChartView</class>
    <extends>QGraphicsView</extends>
    <header>QtCharts/qchartview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>AstroCalcAlmanacWidget</class>
+   <extends>QWidget</extends>
+   <header>AstroCalcAlmanacWidget.hpp</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

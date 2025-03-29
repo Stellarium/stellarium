@@ -194,6 +194,7 @@ void StelMovementMgr::init()
 	addAction("actionSwitch_Equatorial_Mount", N_("Miscellaneous"), N_("Switch between equatorial and azimuthal mount"), "equatorialMount", "Ctrl+M");
 	addAction("actionGoto_Selected_Object", movementGroup, N_("Center on selected object"), "tracking", "Space");
 	addAction("actionGoto_Deselection", movementGroup, N_("Deselect the selected object"), "deselection()", "Ctrl+Space");
+	addAction("actionGoto_ReSelect_Last_Selected_Object", movementGroup, N_("Re-select last selected object"), "reSelectLastObject()", "Ctrl+Alt+Space");
 	addAction("actionZoom_In_Auto", movementGroup, N_("Zoom in on selected object"), "autoZoomIn()", "/");
 	addAction("actionZoom_Out_Auto", movementGroup, N_("Zoom out"), "autoZoomOut()", "\\");
 	// AW: Same behaviour has action "actionGoto_Selected_Object" by the fact (Is it for backward compatibility?)
@@ -279,6 +280,10 @@ void StelMovementMgr::bindingFOVActions()
 
 void StelMovementMgr::setEquatorialMount(bool b)
 {
+	const MountMode mm=getMountMode();
+	if ((mm==MountEquinoxEquatorial && b) || (mm==MountAltAzimuthal && !b))
+		return;
+
 	setMountMode(b ? MountEquinoxEquatorial : MountAltAzimuthal);
 	StelApp::immediateSave("navigation/viewing_mode", b ? "equator" : "horizon");
 
@@ -1275,8 +1280,14 @@ void StelMovementMgr::deselection(void)
 {
 	// Deselect the selected object
 	StelApp::getInstance().getStelObjectMgr().unSelect();
-	setFlagLockEquPos(false);	
-	return;
+	setFlagLockEquPos(false);
+}
+
+void StelMovementMgr::reSelectLastObject(void)
+{
+	StelObjectP lastSelectedObject = objectMgr->getLastSelectedObject();
+	if (!lastSelectedObject.isNull())
+		objectMgr->setSelectedObject(lastSelectedObject);
 }
 
 // Go and zoom to the selected object. (Action linked to key, default "/")

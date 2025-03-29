@@ -1749,20 +1749,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="7" column="3">
-              <layout class="QHBoxLayout" name="horizontalLayout_dither">
-               <item>
-                <widget class="QLabel" name="dithering_label">
-                 <property name="text">
-                  <string>Dithering</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QComboBox" name="ditheringComboBox"/>
-               </item>
-              </layout>
-             </item>
              <item row="7" column="1">
               <layout class="QHBoxLayout" name="mouseTimeoutLayout">
                <item>
@@ -1812,27 +1798,6 @@
                </item>
               </layout>
              </item>
-             <item row="9" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout_15">
-               <item>
-                <widget class="ColorButton" name="overwriteTextColorButton">
-                 <property name="toolTip">
-                  <string>Info text color for overwrite</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="overwriteTextColorCheckBox">
-                 <property name="toolTip">
-                  <string>Set one color for text in info panel for all objects</string>
-                 </property>
-                 <property name="text">
-                  <string>Overwrite text color</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
              <item row="1" column="1">
               <widget class="QCheckBox" name="diskViewportCheckbox">
                <property name="toolTip">
@@ -1842,183 +1807,6 @@
                 <string>Disc viewport</string>
                </property>
               </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
-               <property name="toolTip">
-                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
-               </property>
-               <property name="text">
-                <string>Auto-direction at zoom out</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
-               <property name="toolTip">
-                <string>Allow mouse to pan (drag)</string>
-               </property>
-               <property name="text">
-                <string>Enable mouse navigation</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="3">
-              <layout class="QHBoxLayout" name="horizontalLayout_fps">
-               <item>
-                <widget class="QLabel" name="label_fpsIntent">
-                 <property name="text">
-                  <string>Framerate intent:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_6">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_min">
-                 <property name="text">
-                  <string>min:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="minFpsSpinBox">
-                 <property name="toolTip">
-                  <string>Minimum intended FPS between user interaction. Set very low to conserve energy or save CPU use.</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="keyboardTracking">
-                  <bool>false</bool>
-                 </property>
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>1000</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_max">
-                 <property name="text">
-                  <string>max:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="maxFpsSpinBox">
-                 <property name="toolTip">
-                  <string>Maximum allowed FPS. 1000 just means &quot;as fast as possible&quot;. </string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="keyboardTracking">
-                  <bool>false</bool>
-                 </property>
-                 <property name="minimum">
-                  <number>5</number>
-                 </property>
-                 <property name="maximum">
-                  <number>1000</number>
-                 </property>
-                 <property name="value">
-                  <number>1000</number>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="5" column="3">
-              <widget class="QCheckBox" name="focusOnDaySpinnerCheckBox">
-               <property name="toolTip">
-                <string>Force date/time tab and focus on day input when activating date panel</string>
-               </property>
-               <property name="text">
-                <string>Set keyboard focus to day input</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="enableMouseZoomingCheckBox">
-               <property name="toolTip">
-                <string>Allow mouse to zoom (mousewheel)</string>
-               </property>
-               <property name="text">
-                <string>Enable mouse zooming</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="sphericMirrorCheckbox">
-               <property name="toolTip">
-                <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
-               </property>
-               <property name="text">
-                <string>Spheric mirror distortion</string>
-               </property>
-               <property name="checkable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout_keyboardNavigation">
-               <item>
-                <widget class="QCheckBox" name="enableKeysNavigationCheckBox">
-                 <property name="toolTip">
-                  <string>Allow keyboard to pan and zoom</string>
-                 </property>
-                 <property name="text">
-                  <string>Enable keyboard navigation</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_3">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QPushButton" name="editShortcutsPushButton">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>Edit keyboard shortcuts...</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../../data/gui/guiRes.qrc">
-                   <normaloff>:/graphicGui/uibtSettings.png</normaloff>
-                   <disabledoff>:/graphicGui/uibtSettings-disabled.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
-                 </property>
-                </widget>
-               </item>
-              </layout>
              </item>
              <item row="6" column="3">
               <widget class="QCheckBox" name="kineticScrollingCheckBox">
@@ -2030,159 +1818,33 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="3">
-              <layout class="QHBoxLayout" name="horizontalLayout_threads">
+             <item row="9" column="3">
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
                <item>
-                <widget class="QLabel" name="label_threads">
-                 <property name="text">
-                  <string>Additional threads for solar system</string>
+                <widget class="ColorButton" name="daylightTextColorButton">
+                 <property name="toolTip">
+                  <string>Info text color at daylight</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <spacer name="horizontalSpacer_12">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="solarSystemThreadNumberSpinBox">
-                 <property name="toolTip">
-                  <string>A few additional threads may improve speed with many solar system objects. Observe what works best on your multicore system.</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="maximum">
-                  <number>31</number>
+                <widget class="QLabel" name="label_2">
+                 <property name="text">
+                  <string>Info text color at daylight</string>
                  </property>
                 </widget>
                </item>
               </layout>
              </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="gravityLabelCheckbox">
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
                <property name="toolTip">
-                <string>Align labels with the screen center</string>
+                <string>Allow mouse to pan (drag)</string>
                </property>
                <property name="text">
-                <string>Gravity labels</string>
+                <string>Enable mouse navigation</string>
                </property>
               </widget>
-             </item>
-             <item row="11" column="1" colspan="3">
-              <layout class="QHBoxLayout" name="fontHorizontalLayout">
-               <item>
-                <widget class="QLabel" name="fontSizeLabel">
-                 <property name="text">
-                  <string>Font size: Screen</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="screenFontSizeSpinBox">
-                 <property name="toolTip">
-                  <string>Base font size for on-screen text</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="minimum">
-                  <number>5</number>
-                 </property>
-                 <property name="maximum">
-                  <number>50</number>
-                 </property>
-                 <property name="value">
-                  <number>13</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="guiFontSizeLabel">
-                 <property name="toolTip">
-                  <string>Graphical user interface</string>
-                 </property>
-                 <property name="text">
-                  <string comment="abbreviation">GUI</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="guiFontSizeSpinBox">
-                 <property name="toolTip">
-                  <string>Base font size for dialogs</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="minimum">
-                  <number>7</number>
-                 </property>
-                 <property name="maximum">
-                  <number>50</number>
-                 </property>
-                 <property name="value">
-                  <number>13</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_7">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QComboBox" name="fontWritingSystemComboBox">
-                 <property name="toolTip">
-                  <string>Pre-select fonts for a particular writing system</string>
-                 </property>
-                 <property name="editable">
-                  <bool>true</bool>
-                 </property>
-                 <property name="insertPolicy">
-                  <enum>QComboBox::NoInsert</enum>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QFontComboBox" name="fontComboBox">
-                 <property name="toolTip">
-                  <string>Application font</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="fontSaveToolButton">
-                 <property name="toolTip">
-                  <string>Store font settings</string>
-                 </property>
-                 <property name="text">
-                  <string>Save</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../../data/gui/guiRes.qrc">
-                   <normaloff>:/graphicGui/uibtSave.png</normaloff>
-                   <disabledoff>:/graphicGui/uibtSave-disabled.png</disabledoff>:/graphicGui/uibtSave.png</iconset>
-                 </property>
-                </widget>
-               </item>
-              </layout>
              </item>
              <item row="0" column="3" rowspan="2">
               <layout class="QGridLayout" name="gridLayoutInclude">
@@ -2302,6 +1964,197 @@
                </item>
               </layout>
              </item>
+             <item row="3" column="3">
+              <layout class="QHBoxLayout" name="horizontalLayout_fps">
+               <item>
+                <widget class="QLabel" name="label_fpsIntent">
+                 <property name="text">
+                  <string>Framerate intent:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_min">
+                 <property name="text">
+                  <string>min:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="minFpsSpinBox">
+                 <property name="toolTip">
+                  <string>Minimum intended FPS between user interaction. Set very low to conserve energy or save CPU use.</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="keyboardTracking">
+                  <bool>false</bool>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_max">
+                 <property name="text">
+                  <string>max:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="maxFpsSpinBox">
+                 <property name="toolTip">
+                  <string>Maximum allowed FPS. 1000 just means &quot;as fast as possible&quot;. </string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="keyboardTracking">
+                  <bool>false</bool>
+                 </property>
+                 <property name="minimum">
+                  <number>5</number>
+                 </property>
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                 <property name="value">
+                  <number>1000</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="4" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_keyboardNavigation">
+               <item>
+                <widget class="QCheckBox" name="enableKeysNavigationCheckBox">
+                 <property name="toolTip">
+                  <string>Allow keyboard to pan and zoom</string>
+                 </property>
+                 <property name="text">
+                  <string>Enable keyboard navigation</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="editShortcutsPushButton">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="toolTip">
+                  <string>Edit keyboard shortcuts...</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtSettings-disabled.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="7" column="3">
+              <layout class="QHBoxLayout" name="horizontalLayout_dither">
+               <item>
+                <widget class="QLabel" name="dithering_label">
+                 <property name="text">
+                  <string>Dithering</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="ditheringComboBox"/>
+               </item>
+              </layout>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="gravityLabelCheckbox">
+               <property name="toolTip">
+                <string>Align labels with the screen center</string>
+               </property>
+               <property name="text">
+                <string>Gravity labels</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="sphericMirrorCheckbox">
+               <property name="toolTip">
+                <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
+               </property>
+               <property name="text">
+                <string>Spheric mirror distortion</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
+               <property name="toolTip">
+                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
+               </property>
+               <property name="text">
+                <string>Auto-direction at zoom out</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="3">
+              <widget class="QCheckBox" name="focusOnDaySpinnerCheckBox">
+               <property name="toolTip">
+                <string>Force date/time tab and focus on day input when activating date panel</string>
+               </property>
+               <property name="text">
+                <string>Set keyboard focus to day input</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="enableMouseZoomingCheckBox">
+               <property name="toolTip">
+                <string>Allow mouse to zoom (mousewheel)</string>
+               </property>
+               <property name="text">
+                <string>Enable mouse zooming</string>
+               </property>
+              </widget>
+             </item>
              <item row="2" column="3">
               <widget class="QCheckBox" name="indicationMountModeCheckBox">
                <property name="toolTip">
@@ -2312,19 +2165,209 @@
                </property>
               </widget>
              </item>
-             <item row="9" column="3">
-              <layout class="QHBoxLayout" name="horizontalLayout_14">
+             <item row="9" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_15">
                <item>
-                <widget class="ColorButton" name="daylightTextColorButton">
+                <widget class="ColorButton" name="overwriteTextColorButton">
                  <property name="toolTip">
-                  <string>Info text color at daylight</string>
+                  <string>Info text color for overwrite</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="label_2">
+                <widget class="QCheckBox" name="overwriteTextColorCheckBox">
+                 <property name="toolTip">
+                  <string>Set one color for text in info panel for all objects</string>
+                 </property>
                  <property name="text">
-                  <string>Info text color at daylight</string>
+                  <string>Overwrite text color</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="4" column="3">
+              <layout class="QHBoxLayout" name="horizontalLayout_threads">
+               <item>
+                <widget class="QLabel" name="label_threads">
+                 <property name="text">
+                  <string>Additional threads for solar system</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_12">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="solarSystemThreadNumberSpinBox">
+                 <property name="toolTip">
+                  <string>A few additional threads may improve speed with many solar system objects. Observe what works best on your multicore system.</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="maximum">
+                  <number>31</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="10" column="1" colspan="3">
+              <layout class="QHBoxLayout" name="fontHorizontalLayout">
+               <item>
+                <widget class="QLabel" name="fontSizeLabel">
+                 <property name="text">
+                  <string>Font size: Screen</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="screenFontSizeSpinBox">
+                 <property name="toolTip">
+                  <string>Base font size for on-screen text</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <number>5</number>
+                 </property>
+                 <property name="maximum">
+                  <number>50</number>
+                 </property>
+                 <property name="value">
+                  <number>13</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="guiFontSizeLabel">
+                 <property name="toolTip">
+                  <string>Graphical user interface</string>
+                 </property>
+                 <property name="text">
+                  <string comment="abbreviation">GUI</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="guiFontSizeSpinBox">
+                 <property name="toolTip">
+                  <string>Base font size for dialogs</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <number>7</number>
+                 </property>
+                 <property name="maximum">
+                  <number>50</number>
+                 </property>
+                 <property name="value">
+                  <number>13</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QComboBox" name="fontWritingSystemComboBox">
+                 <property name="toolTip">
+                  <string>Pre-select fonts for a particular writing system</string>
+                 </property>
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                 <property name="insertPolicy">
+                  <enum>QComboBox::NoInsert</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QFontComboBox" name="fontComboBox">
+                 <property name="toolTip">
+                  <string>Application font</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="fontSaveToolButton">
+                 <property name="toolTip">
+                  <string>Store font settings</string>
+                 </property>
+                 <property name="text">
+                  <string>Save</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtSave.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtSave-disabled.png</disabledoff>:/graphicGui/uibtSave.png</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="11" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_11">
+               <item>
+                <widget class="QLabel" name="label_4">
+                 <property name="text">
+                  <string>Screen button scale:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="screenButtonScaleSpinBox">
+                 <property name="suffix">
+                  <string notr="true">%</string>
+                 </property>
+                 <property name="decimals">
+                  <number>0</number>
+                 </property>
+                 <property name="minimum">
+                  <double>10.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>500.000000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>100.000000000000000</double>
                  </property>
                 </widget>
                </item>

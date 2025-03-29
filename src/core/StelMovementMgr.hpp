@@ -220,12 +220,12 @@ public slots:
 	//! Get whether keys can control zoom
 	bool getFlagEnableZoomKeys() const {return flagEnableZoomKeys;}
 	//! Set whether keys can control zoom
-	void setFlagEnableZoomKeys(bool b) {flagEnableZoomKeys=b; StelApp::immediateSave("navigation/flag_enable_zoom_keys", b); emit flagEnableZoomKeysChanged(b);}
+	void setFlagEnableZoomKeys(bool b) {if (flagEnableZoomKeys!=b) {flagEnableZoomKeys=b; StelApp::immediateSave("navigation/flag_enable_zoom_keys", b); emit flagEnableZoomKeysChanged(b);}}
 
 	//! Get whether keys can control movement
 	bool getFlagEnableMoveKeys() const {return flagEnableMoveKeys;}
 	//! Set whether keys can control movement
-	void setFlagEnableMoveKeys(bool b) {flagEnableMoveKeys=b; StelApp::immediateSave("navigation/flag_enable_move_keys", b); emit flagEnableMoveKeysChanged(b); }
+	void setFlagEnableMoveKeys(bool b) {if (flagEnableMoveKeys!=b) {flagEnableMoveKeys=b; StelApp::immediateSave("navigation/flag_enable_move_keys", b); emit flagEnableMoveKeysChanged(b);}}
 
 	//! Get whether being at the edge of the screen activates movement
 	bool getFlagEnableMoveAtScreenEdge() const {return flagEnableMoveAtScreenEdge;}
@@ -235,17 +235,17 @@ public slots:
 	//! Get whether mouse can control movement
 	bool getFlagEnableMouseNavigation() const {return flagEnableMouseNavigation;}
 	//! Set whether mouse can control movement
-	void setFlagEnableMouseNavigation(bool b) {flagEnableMouseNavigation=b; StelApp::immediateSave("navigation/flag_enable_mouse_navigation", b); emit flagEnableMouseNavigationChanged(b); }
+	void setFlagEnableMouseNavigation(bool b) {if (flagEnableMouseNavigation!=b){flagEnableMouseNavigation=b; StelApp::immediateSave("navigation/flag_enable_mouse_navigation", b); emit flagEnableMouseNavigationChanged(b);}}
 
 	//! Get whether mouse can control zooming
 	bool getFlagEnableMouseZooming() const {return flagEnableMouseZooming;}
 	//! Set whether mouse can control zooming
-	void setFlagEnableMouseZooming(bool b) {flagEnableMouseZooming=b; emit flagEnableMouseZoomingChanged(b); }
+	void setFlagEnableMouseZooming(bool b) {if (flagEnableMouseZooming!=b) {flagEnableMouseZooming=b; StelApp::immediateSave("navigation/flag_enable_mouse_zooming", b); emit flagEnableMouseZoomingChanged(b);}}
 
 	//! Get the state of flag for indication of mount mode
 	bool getFlagIndicationMountMode() const {return flagIndicationMountMode;}
 	//! Set the state of flag for indication of mount mode
-	void setFlagIndicationMountMode(bool b) { flagIndicationMountMode=b; StelApp::immediateSave("gui/flag_indication_mount_mode", b); emit flagIndicationMountModeChanged(b); }
+	void setFlagIndicationMountMode(bool b) { if (flagIndicationMountMode!=b){flagIndicationMountMode=b; StelApp::immediateSave("gui/flag_indication_mount_mode", b); emit flagIndicationMountModeChanged(b);}}
 
 	//! Move the view to a specified J2000 position.
 	//! @param aim The position to move to expressed as a vector.
@@ -325,6 +325,9 @@ public slots:
 
 	//! Deselect the selected object
 	void deselection(void);
+
+	//! Re-select last selected object
+	void reSelectLastObject(void);
 
 	//! If currently zooming, return the target FOV, otherwise return current FOV in degree.
 	double getAimFov(void) const;

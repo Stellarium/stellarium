@@ -222,7 +222,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 			tex = texMgr.createTextureThread(absoluteImageURI, StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, false, decimation));
 			if (!tex)
 			{
-				qWarning() << "WARNING : Can't create tile: " << absoluteImageURI;
+				qWarning() << "Can't create tile: " << absoluteImageURI;
 				errorOccured = true;
 				return;
 			}

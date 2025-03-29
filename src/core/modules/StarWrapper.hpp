@@ -78,12 +78,18 @@ protected:
 	Vec3d getJ2000EquatorialPos(const StelCore* core) const override
 	{
 		Vec3d v;
-		s->getJ2000Pos((core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25, v);
 
+		double RA, DEC, pmra, pmdec, Plx, RadialVel;
+		float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
+		s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+		StelUtils::spheToRect(RA, DEC, v);
+
+		// in case it is in a binary system
+		s->getBinaryOrbit(core->getJDE(), v);
 		double withParallax = core->getUseParallax() * core->getParallaxFactor();
 		if (withParallax) {
 			const Vec3d diffPos = core->getParallaxDiff(core->getJDE());
-			s->getPlxEffect(withParallax * s->getPlx(), v, diffPos);
+			s->getPlxEffect(withParallax * Plx, v, diffPos);
 			v.normalize();
 		}
 
@@ -94,7 +100,7 @@ protected:
 			v+=vel;
 			v.normalize();
 		}
-		
+
 		return v;
 	}
 	Vec3f getInfoColor(void) const override
@@ -131,7 +137,7 @@ public:
 	//! <li> RaDec
 	//! <li> AltAzi
 	//! <li> Extra (spectral type, parallax)
-	//! <li> Distance	
+	//! <li> Distance
 	//! <li> PlainText </ul>
 	//! @param core the StelCore object.
 	//! @param flags a set of InfoStringGroup items to include in the return value.
@@ -163,8 +169,10 @@ public:
 	StarWrapper2(const SpecialZoneArray<Star2> *array,
 			   const SpecialZoneData<Star2> *zone,
 			   const Star2 *star) : StarWrapper<Star2>(array,zone,star) {}
-	QString getID(void) const override { return QString(); }
+	QString getID(void) const override;
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
+	QString getObjectType() const override;
+	QString getObjectTypeI18n() const override;
 };
 
 class StarWrapper3 : public StarWrapper<Star3>
@@ -173,8 +181,10 @@ public:
 	StarWrapper3(const SpecialZoneArray<Star3> *array,
 			   const SpecialZoneData<Star3> *zone,
 			   const Star3 *star) : StarWrapper<Star3>(array,zone,star) {}
-	QString getID(void) const override { return QString(); }
+	QString getID(void) const override;
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
+	QString getObjectType() const override;
+	QString getObjectTypeI18n() const override;
 };
 
 

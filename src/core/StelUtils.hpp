@@ -117,6 +117,18 @@ namespace StelUtils
 	//! Return the user agent name, i.e. "Stellarium/0.15.0 (Linux)"
 	QString getUserAgentString();
 
+	/*! \brief Get a long integer from a JSON value
+	 *
+	 *  QJsonValue stores JSON numbers as double-precision floating-point values. This means
+	 *  that numbers greater than 2^53-1 will be rounded, which is unacceptable for e.g. ids
+	 *  like those of the Gaia catalog.
+	 *  This function supports, in addition to normal JSON numbers, also representations of
+	 *  numbers by JSON strings. If the value passed is a JSON string, it will be parsed to a
+	 *  number. If it's a JSON number less than 2^53, it will be returned as is. Otherwise it
+	 *  will return 0, as QJsonValue's getters would in case of a type mismatch.
+	 */
+	qint64 getLongLong(const class QJsonValue& v);
+
 	inline const QString getEndLineChar() {
 		#ifdef Q_OS_WIN
 		const QString stelEndl="\r\n";
@@ -512,9 +524,14 @@ namespace StelUtils
 	double getJDFromSystem();
 
 	//! Get the Julian Day Number (JD) from Besselian epoch.
-	//! @param epoch Besselian epoch, expressed as year
+	//! @param epoch Besselian epoch, expressed as year with decimal fraction
 	//! @return Julian Day number (JD) for B<Year>
 	double getJDFromBesselianEpoch(const double epoch);
+
+	//! Get the Julian Day Number (JD) from Julian epoch.
+	//! @param epoch Julian epoch, expressed as year with decimal fraction
+	//! @return Julian Day number (JD) for J<Year>
+	double getJDFromJulianEpoch(const double epoch);
 
 	//! Convert a time of day to the fraction of a Julian Day.
 	//! Note that a Julian Day starts at 12:00, not 0:00, and
@@ -534,10 +551,10 @@ namespace StelUtils
 
 	//! Convert a Julian Day number to a QDateTime.
 	//! @param jd Julian Day number (with fractions) to convert
-	//! @param timeSpec a Qt::TimeSpec constant. Meaningful in this context seem only Qt::UTC (preferred) and Qt::LocalTime (useful in some GUI contexts).
+	//! @param timeSpec a @c Qt::TimeSpec constant. Meaningful in this context seem only Qt::UTC (preferred) and Qt::LocalTime (useful in some GUI contexts).
 	//! @note From 2008 to 2022-05 this converted to local time zone, not to UTC as specified and intended.
-	//!        The old behaviour is kept with @param timeSpec set to Qt::LocalTime.
-	//! If you use Qt::LocalTime, you should add StelCore::getUTCOffset(jd)/24 to the current JD before calling this to have @param jd as a "local time zone corrected JD" before conversion.
+	//!        The old behaviour is kept with @p timeSpec set to Qt::LocalTime.
+	//! If you use Qt::LocalTime, you should add StelCore::getUTCOffset(jd)/24 to the current JD before calling this to have @p jd as a "local time zone corrected JD" before conversion.
 	//! @result the matching QDateTime
 	//! @note QDate has no year zero. This and other idiosyncrasies of QDateTime may limit the applicability of program parts which use this method to positive years or may cause other issues.
 	QDateTime jdToQDateTime(const double& jd, const Qt::TimeSpec timeSpec);
@@ -594,8 +611,13 @@ namespace StelUtils
 	//double calculateSiderealPeriod(const double SemiMajorAxis);  MOVED TO Orbit.h
 
 	//! Convert decimal hours to hours, minutes, seconds
-	QString hoursToHmsStr(const double hours, const bool lowprecision = false);
-	QString hoursToHmsStr(const float hours, const bool lowprecision = false);
+	//! Format for:
+	//! @p colonFormat        |      false     |   true
+	//! ----------------------|----------------|----------
+	//! @p minutesOnly=false  |  "HhMMmSS.Ss"  | "HHhMMm"
+	//! @p minutesOnly=true   |  "H:MM:SS.S"   | "HH:MM"
+	QString hoursToHmsStr(const double hours, const bool minutesOnly = false, const bool colonFormat=false);
+	QString hoursToHmsStr(const float hours, const bool minutesOnly = false, const bool colonFormat=false);
 
 	//! Convert JD to hours and minutes
 	QString getHoursMinutesFromJulianDay(const double julianDay);
@@ -1011,8 +1033,8 @@ namespace StelUtils
 	//! @param y1 Argument 1
 	//! @param y2 Argument 2
 	//! @param y3 Argument 3
-	//! @param y3 Argument 4
-	//! @param y3 Argument 5
+	//! @param y4 Argument 4
+	//! @param y5 Argument 5
 	//! @return interpolation value
 	template<class T> T interpolate5(T n, T y1, T y2, T y3, T y4, T y5)
 	{
@@ -1026,7 +1048,7 @@ namespace StelUtils
 		return (((K*(1.0/24.0)*n + (H+J)/12.0)*n  + (F*0.5-K/24.0))*n + ((B+C)*0.5 - (H+J)/12.0))*n +y3;
 	}
 
-	//! Interval test. This checks whether @param value is within [@param low, @param high]
+	//! Interval test. This checks whether @p value is within [@p low, @p high]
 	template <typename T> bool isWithin(const T& value, const T& low, const T& high)
 	{
 		return !(value < low) && !(high < value);

@@ -58,6 +58,7 @@ src/gui/AstroCalcDialog.cpp
 src/gui/AstroCalcChart.cpp
 src/gui/AstroCalcExtraEphemerisDialog.cpp
 src/gui/AstroCalcCustomStepsDialog.cpp
+src/gui/AstroCalcAlmanacWidget.cpp
 src/gui/ObsListDialog.cpp
 src/gui/ConfigureDSOColorsDialog.cpp
 src/gui/ConfigureOrbitColorsDialog.cpp
@@ -70,7 +71,6 @@ src/StelMainView.cpp
 # Translations of strings not contained in the source code
 src/translations.h
 src/translations_regions.h
-skycultures/translations_skycultures.fab
 
 # Translations of GUI files generated at build time
 src/ui_dateTimeDialogGui.h
@@ -87,6 +87,7 @@ src/ui_scriptConsole.h
 src/ui_astroCalcDialog.h
 src/ui_astroCalcExtraEphemerisDialog.h
 src/ui_astroCalcCustomStepsDialog.h
+src/ui_astroCalcAlmanacWidget.h
 src/ui_obsListDialog.h
 src/ui_dsoColorsDialog.h
 src/ui_orbitColorsDialog.h
@@ -193,6 +194,9 @@ plugins/MeteorShowers/src/gui/MSConfigDialog.cpp
 plugins/MeteorShowers/src/gui/MSSearchDialog.cpp
 plugins/MeteorShowers/src/ui_MSConfigDialog.h
 plugins/MeteorShowers/src/ui_MSSearchDialog.h
+plugins/MosaicCamera/src/MosaicCamera.cpp
+plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp
+plugins/MosaicCamera/src/ui_mosaicCameraDialog.h
 plugins/PointerCoordinates/src/PointerCoordinates.cpp
 plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp
 plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h

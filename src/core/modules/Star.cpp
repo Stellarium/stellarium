@@ -30,15 +30,7 @@ const QString STAR_TYPE = QStringLiteral("Star");
 QString Star1::getNameI18n(void) const
 {
 	QStringList starNames;
-	StarId star_id;
-	if (getHip())
-	{
-		star_id = getHip();
-	}
-	else
-	{
-		star_id = getGaia();
-	}
+	StarId star_id = getHip() ? getHip() : 	getGaia();
 	starNames << StarMgr::getCommonName(star_id) << getDesignation();
 	starNames.removeAll(QString(""));
 	if (starNames.count()>0)
@@ -50,11 +42,7 @@ QString Star1::getNameI18n(void) const
 QString Star1::getScreenNameI18n(void) const
 {
 	QStringList starNames;
-	StarId star_id;
-	if (getHip())
-		star_id = getHip();
-	else
-		star_id = getGaia();
+	StarId star_id = getHip() ? getHip() : 	getGaia();
 	if (!StarMgr::getDesignationUsage())
 		starNames << StarMgr::getCommonName(star_id);
 	if (StarMgr::getFlagSciNames()) // The scientific designations can be used for western sky cultures only
@@ -77,15 +65,14 @@ QString Star1::getScreenNameI18n(void) const
 QString Star1::getDesignation() const
 {
 	QStringList starNames;
-	StarId star_id;
-	if (getHip())
-		star_id = getHip();
-	else
-		star_id = getGaia();
+	StarId star_id = getHip() ? getHip() : 	getGaia();
 	starNames << StarMgr::getSciName(star_id).split(" - ");
 	starNames << StarMgr::getSciExtraName(star_id).split(" - ");
 	starNames << StarMgr::getGcvsName(star_id);
-	starNames << QString("HIP %1").arg(star_id);
+	if (getHip())
+		starNames << QString("HIP %1").arg(star_id);
+	else
+		starNames << QString("Gaia DR3 %1").arg(star_id);
 	starNames.removeAll(QString(""));
 	if (starNames.count()>0)
 		return starNames.first();
@@ -96,8 +83,7 @@ QString Star1::getDesignation() const
 int Star1::hasComponentID(void) const
 {
 	if (getComponentIds())
-	{
 		return getComponentIds();
-	}
+
 	return 0;
 }

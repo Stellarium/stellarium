@@ -1,0 +1,445 @@
+{
+  "id": "greek_dante",
+  "region": "Southern Europe",
+  "classification": ["single"],
+  "fallback_to_international_names": false,
+  "constellations": [
+    {
+      "id": "CON greek_dante UMi",
+      "lines": [[75097, 79822, 84769, 11767, 85822, 82080, 77055, 70692, 72607, 75097]],
+      "image": {
+        "file": "illustrations/horn3_dante_524.jpg",
+        "size": [524, 309],
+        "anchors": [
+          {"pos": [357, 118], "hip": 70692},
+          {"pos": [408, 238], "hip": 75097},
+          {"pos": [87, 20], "hip": 11767}
+        ]
+      },
+      "common_name": {"english": "Horn", "native": "Ursa Minor"}
+    },
+    {
+      "id": "CON greek_dante UMa",
+      "lines": [[67301, 65378, 62956, 59774, 58001, 53910, 54061, 59774]],
+      "image": {
+        "file": "illustrations/wagen_bg.jpg",
+        "size": [493, 279],
+        "anchors": [
+          {"pos": [487, 47], "hip": 54061},
+          {"pos": [12, 9], "hip": 65378},
+          {"pos": [279, 193], "hip": 58001}
+        ]
+      },
+      "common_name": {"english": "Wagon", "native": "Ursa Major"}
+    },
+    {
+      "id": "CON greek_dante Ari",
+      "lines": [[13209, 13061, 12719, 12489], [12828, 12832, 13327, 13702, 13914, 12332, 10050, 9110, 10328, 11843, 13165, 12832], [13914, 14838, 15737, 15627, 15110, 13914], [9110, 10732, 10306, 8832, 9110], [8832, 8903, 9492, 9815, 9248]],
+      "image": {
+        "file": "illustrations/ari_scotus.jpg",
+        "size": [590, 418],
+        "anchors": [
+          {"pos": [378, 62], "hip": 8832},
+          {"pos": [191, 205], "hip": 12332},
+          {"pos": [79, 344], "hip": 15110}
+        ]
+      },
+      "common_name": {"english": "Ram", "native": "Aries"}
+    },
+    {
+      "id": "CON greek_dante Tau",
+      "lines": [[25428, 21881], [26451, 23871, 22565], [21881, 22565], [20205, 20255, 20635, 20711], [19205, 17608], [18724, 20455], [19960, 18724, 17771, 15900, 16083, 16322, 16369], [26451, 23835, 21273, 20732, 20205], [25428, 20711, 20430, 20250, 19205, 19513, 20430], [19205, 19038, 19990]],
+      "image": {
+        "file": "illustrations/tau_scotus.jpg",
+        "size": [514, 360],
+        "anchors": [
+          {"pos": [460, 122], "hip": 17702},
+          {"pos": [115, 86], "hip": 21421},
+          {"pos": [172, 308], "hip": 18724}
+        ]
+      },
+      "common_name": {"english": "Bull", "native": "Taurus"}
+    },
+    {
+      "id": "CON greek_dante Gem",
+      "lines": [[38363, 38228, 37826, 37629, 38363], [37826, 36962, 37740], [36962, 36046], [36962, 35550, 35350, 32362], [35550, 34088, 31681], [37339, 37179, 36850], [37339, 36896, 36850, 34693, 33018], [34693, 36046], [34693, 32246, 30883], [32246, 30343, 29655]],
+      "image": {
+        "file": "illustrations/gem_scotus_bg_1024.jpg",
+        "size": [1024, 878],
+        "anchors": [
+          {"pos": [593, 42], "hip": 36850},
+          {"pos": [324, 25], "hip": 37826},
+          {"pos": [789, 808], "hip": 30343}
+        ]
+      },
+      "common_name": {"english": "Twins", "native": "Gemini"}
+    },
+    {
+      "id": "CON greek_dante Cnc",
+      "lines": [[43103, 42806, 41909, 39780], [41909, 41822, 40526], [41822, 42911, 44066], [42911, 42806]],
+      "image": {
+        "file": "illustrations/cnc_scotus.jpg",
+        "size": [678, 442],
+        "anchors": [
+          {"pos": [288, 180], "hip": 42806},
+          {"pos": [276, 322], "hip": 42911},
+          {"pos": [384, 321], "hip": 41822}
+        ]
+      },
+      "common_name": {"english": "Crab", "native": "Cancer"}
+    },
+    {
+      "id": "CON greek_dante Leo",
+      "lines": [[57632, 54872, 54879, 55642, 55434], [54879, 49669, 49029, 47508], [49669, 49583, 50583, 50335, 54872], [50335, 48455, 46146], [48455, 47908, 49583], [47908, 46750]],
+      "image": {
+        "file": "illustrations/leo_scotus.jpg",
+        "size": [806, 502],
+        "anchors": [
+          {"pos": [609, 81], "hip": 47908},
+          {"pos": [525, 316], "hip": 49669},
+          {"pos": [105, 401], "hip": 57632}
+        ]
+      },
+      "common_name": {"english": "Lion", "native": "Leo"}
+    },
+    {
+      "id": "CON greek_dante Vir",
+      "lines": [[57380, 57328, 58948, 58590, 57380], [62267, 61960, 63608, 68520, 62267], [63090, 62267, 58590, 60129], [63090, 66249, 70755, 71957], [66249, 66098, 69427, 69974], [66098, 61941, 63090], [61941, 60129], [57757, 60129, 62985, 57757], [65474, 60129]],
+      "image": {
+        "file": "illustrations/vir_scotus.jpg",
+        "size": [348, 576],
+        "anchors": [
+          {"pos": [293, 193], "hip": 61740},
+          {"pos": [73, 202], "hip": 63608},
+          {"pos": [73, 555], "hip": 71957}
+        ]
+      },
+      "common_name": {"english": "Maiden", "native": "Virgo"}
+    },
+    {
+      "id": "CON greek_dante Lib",
+      "lines": [[77853, 74785, 73473, 76333], [74392, 72622, 72489, 73945]],
+      "image": {
+        "file": "illustrations/lib_scotus.jpg",
+        "size": [464, 398],
+        "anchors": [
+          {"pos": [405, 301], "hip": 73714},
+          {"pos": [74, 308], "hip": 78727},
+          {"pos": [182, 160], "hip": 74785}
+        ]
+      },
+      "common_name": {"english": "Balance", "native": "Libra"}
+    },
+    {
+      "id": "CON greek_dante Sco",
+      "lines": [[80112, 78265, 78401, 78820, 80112, 80763, 79374], [80763, 78104], [80763, 81266, 82396, 82545, 82729, 84143, 86228, 87073, 85927, 85696]],
+      "image": {
+        "file": "illustrations/sco_scotus.jpg",
+        "size": [340, 638],
+        "anchors": [
+          {"pos": [91, 519], "hip": 85927},
+          {"pos": [205, 514], "hip": 82729},
+          {"pos": [162, 226], "hip": 80763}
+        ]
+      },
+      "common_name": {"english": "Scorpion", "native": "Scorpius"}
+    },
+    {
+      "id": "CON greek_dante Sgr",
+      "lines": [[92855, 92041, 89931], [92855, 93498, 92761, 93057, 94141, 94643, 95477, 96465, 95865, 93506, 93667], [93506, 93134], [94643, 93864, 93506], [93667, 98066, 98162, 98688, 98353, 98066], [98688, 98842, 98412, 100591], [98412, 98761, 98032], [98412, 96932, 94124, 92329, 92855], [95294, 95347, 94986], [93149, 91918, 89642], [88635, 93506, 95456], [89178, 88060, 89020], [90185, 89931, 89341], [95619, 93506, 88635], [90496, 89341], [94820, 95168, 95176, 96950, 98258, 97783]],
+      "image": {
+        "file": "illustrations/sgr_scotus.jpg",
+        "size": [676, 506],
+        "anchors": [
+          {"pos": [557, 162], "hip": 89931},
+          {"pos": [92, 106], "hip": 98258},
+          {"pos": [164, 475], "hip": 98032}
+        ]
+      },
+      "common_name": {"english": "Archer", "native": "Sagittarius"}
+    },
+    {
+      "id": "CON greek_dante Cap",
+      "lines": [[106723, 107188, 107556, 106985, 105515, 105881, 104234, 102978], [104234, 101123, 102485], [101123, 100195, 100345, 99572], [100345, 100064, 100310], [100345, 104139, 105515]],
+      "image": {
+        "file": "illustrations/cap_scotus.jpg",
+        "size": [604, 760],
+        "anchors": [
+          {"pos": [434, 586], "hip": 102978},
+          {"pos": [462, 157], "hip": 100345},
+          {"pos": [45, 438], "hip": 107556}
+        ]
+      },
+      "common_name": {"english": "The One with the Goat's Horn", "native": "Capricornus"}
+    },
+    {
+      "id": "CON greek_dante Aqr",
+      "lines": [[106944, 106278, 104459, 102618], [106278, 109139, 110778, 112211], [106944, 109074, 106278], [109074, 110003, 111123, 109139], [111123, 112716, 113136], [109074, 110395, 112961, 114341], [110395, 110672, 111497, 114855], [115438, 114855]],
+      "image": {
+        "file": "illustrations/aqr_scotus.jpg",
+        "size": [446, 774],
+        "anchors": [
+          {"pos": [83, 183], "hip": 111497},
+          {"pos": [270, 728], "hip": 111449},
+          {"pos": [286, 79], "hip": 106944}
+        ]
+      },
+      "common_name": {"english": "Water-carrier", "native": "Aquarius"}
+    },
+    {
+      "id": "CON greek_dante Psc",
+      "lines": [[113889, 115227], [114971, 115738, 116928, 118268], [115227, 115830, 116771, 118268, 1645, 2548, 3786, 4906, 5737, 5346, 6061, 7007, 7884, 8833, 9487, 8198, 7535, 7097, 6706, 5742, 6193, 5544, 5586, 4889, 4510, 3885, 4366, 5131, 5310, 5454], [5310, 5742], [5310, 5571, 6706]],
+      "image": {
+        "file": "illustrations/psc_scotus.jpg",
+        "size": [790, 590],
+        "anchors": [
+          {"pos": [745, 380], "hip": 118268},
+          {"pos": [483, 53], "hip": 3693},
+          {"pos": [96, 421], "hip": 5737}
+        ]
+      },
+      "common_name": {"english": "Fishes", "native": "Pisces"}
+    },
+    {
+      "id": "CON greek_dante CrB",
+      "lines": [[76127, 75695, 76267, 76952, 77512, 78159, 78493]],
+      "image": {
+        "file": "illustrations/CrB_Aratea_bg.jpg",
+        "size": [487, 512],
+        "anchors": [
+          {"pos": [104, 198], "hip": 78159},
+          {"pos": [320, 107], "hip": 76127},
+          {"pos": [239, 322], "hip": 76267}
+        ]
+      },
+      "common_name": {"english": "Ring", "native": "Corona Borealis"}
+    },
+    {
+      "id": "CON greek_dante 001",
+      "lines": [[69673, 69673]],
+      "image": {
+        "file": "illustrations/singleStar.jpg",
+        "size": [550, 550],
+        "anchors": [
+          {"pos": [273, 273], "hip": 69673},
+          {"pos": [273, 22], "hip": 69592},
+          {"pos": [46, 273], "hip": 70602}
+        ]
+      },
+      "common_name": {"english": "Arcturus", "native": "1"}
+    },
+    {
+      "id": "CON greek_dante 002",
+      "lines": [[91262, 91262]],
+      "image": {
+        "file": "illustrations/singleStar.jpg",
+        "size": [550, 550],
+        "anchors": [
+          {"pos": [273, 273], "hip": 91262},
+          {"pos": [114, 472], "hip": 91971},
+          {"pos": [48, 226], "hip": 91926}
+        ]
+      },
+      "common_name": {"english": "Vega", "native": "2"}
+    },
+    {
+      "id": "CON greek_dante 003",
+      "lines": [[24608, 24608]],
+      "image": {
+        "file": "illustrations/singleStar.jpg",
+        "size": [550, 550],
+        "anchors": [
+          {"pos": [273, 273], "hip": 24608},
+          {"pos": [273, 401], "hip": 24881},
+          {"pos": [448, 209], "hip": 23585}
+        ]
+      },
+      "common_name": {"english": "Capella", "native": "3"}
+    },
+    {
+      "id": "CON greek_dante 004",
+      "lines": [[21421, 21421]],
+      "image": {
+        "file": "illustrations/singleStar.jpg",
+        "size": [550, 550],
+        "anchors": [
+          {"pos": [273, 273], "hip": 21421},
+          {"pos": [511, 191], "hip": 20542},
+          {"pos": [433, 464], "hip": 20901}
+        ]
+      },
+      "common_name": {"english": "Aldebaran", "native": "4"}
+    },
+    {
+      "id": "CON greek_dante 005",
+      "lines": [[49669, 49669]],
+      "image": {
+        "file": "illustrations/singleStar.jpg",
+        "size": [550, 550],
+        "anchors": [
+          {"pos": [273, 273], "hip": 49669},
+          {"pos": [278, 18], "hip": 50333},
+          {"pos": [105, 360], "hip": 49637}
+        ]
+      },
+      "common_name": {"english": "Regulus", "native": "5"}
+    },
+    {
+      "id": "CON greek_dante 006",
+      "lines": [[57632, 57632]],
+      "image": {
+        "file": "illustrations/singleStar.jpg",
+        "size": [550, 550],
+        "anchors": [
+          {"pos": [273, 273], "hip": 57632},
+          {"pos": [248, 16], "hip": 58159},
+          {"pos": [9, 484], "hip": 57779}
+        ]
+      },
+      "common_name": {"english": "Denebola", "native": "6"}
+    },
+    {
+      "id": "CON greek_dante 007",
+      "lines": [[65474, 65474]],
+      "image": {
+        "file": "illustrations/singleStar.jpg",
+        "size": [550, 550],
+        "anchors": [
+          {"pos": [273, 273], "hip": 65474},
+          {"pos": [280, 107], "hip": 66098},
+          {"pos": [156, 273], "hip": 65581}
+        ]
+      },
+      "common_name": {"english": "Spica", "native": "7"}
+    },
+    {
+      "id": "CON greek_dante 008",
+      "lines": [[113368, 113368]],
+      "image": {
+        "file": "illustrations/singleStar.jpg",
+        "size": [550, 550],
+        "anchors": [
+          {"pos": [273, 273], "hip": 113368},
+          {"pos": [87, 482], "hip": 114254},
+          {"pos": [458, 435], "hip": 113246}
+        ]
+      },
+      "common_name": {"english": "Fomalhaut", "native": "8 & 15"}
+    },
+    {
+      "id": "CON greek_dante 009",
+      "lines": [[27989, 27989]],
+      "image": {
+        "file": "illustrations/singleStar.jpg",
+        "size": [550, 550],
+        "anchors": [
+          {"pos": [273, 273], "hip": 27989},
+          {"pos": [22, 509], "hip": 28812},
+          {"pos": [447, 324], "hip": 27386}
+        ]
+      },
+      "common_name": {"english": "Betelgeuse", "native": "9"}
+    },
+    {
+      "id": "CON greek_dante 010",
+      "lines": [[24436, 24436]],
+      "image": {
+        "file": "illustrations/singleStar.jpg",
+        "size": [550, 550],
+        "anchors": [
+          {"pos": [273, 273], "hip": 24436},
+          {"pos": [87, 273], "hip": 25247},
+          {"pos": [273, 87], "hip": 24294}
+        ]
+      },
+      "common_name": {"english": "Rigel", "native": "10"}
+    },
+    {
+      "id": "CON greek_dante 011",
+      "lines": [[32349, 32349]],
+      "image": {
+        "file": "illustrations/singleStar.jpg",
+        "size": [550, 550],
+        "anchors": [
+          {"pos": [273, 273], "hip": 32349},
+          {"pos": [87, 273], "hip": 33347},
+          {"pos": [263, 127], "hip": 32411}
+        ]
+      },
+      "common_name": {"english": "Sirius", "native": "11"}
+    },
+    {
+      "id": "CON greek_dante 012",
+      "lines": [[37279, 37279]],
+      "image": {
+        "file": "illustrations/singleStar.jpg",
+        "size": [550, 550],
+        "anchors": [
+          {"pos": [273, 273], "hip": 37279},
+          {"pos": [102, 526], "hip": 37705},
+          {"pos": [74, 203], "hip": 38062}
+        ]
+      },
+      "common_name": {"english": "Procyon", "native": "12"}
+    },
+    {
+      "id": "CON greek_dante 013",
+      "lines": [[30438, 30438]],
+      "image": {
+        "file": "illustrations/singleStar.jpg",
+        "size": [550, 550],
+        "anchors": [
+          {"pos": [273, 273], "hip": 30438},
+          {"pos": [97, 473], "hip": 29276},
+          {"pos": [111, 65], "hip": 32761}
+        ]
+      },
+      "common_name": {"english": "Canopus", "native": "13"}
+    },
+    {
+      "id": "CON greek_dante 014",
+      "lines": [[71683, 71683]],
+      "image": {
+        "file": "illustrations/singleStar.jpg",
+        "size": [550, 550],
+        "anchors": [
+          {"pos": [273, 273], "hip": 71683},
+          {"pos": [51, 218], "hip": 73036},
+          {"pos": [143, 486], "hip": 72131}
+        ]
+      },
+      "common_name": {"english": "α Cen", "native": "14"}
+    },
+    {
+      "id": "CON greek_dante 016",
+      "lines": [[13847, 13847]],
+      "image": {
+        "file": "illustrations/singleStar.jpg",
+        "size": [550, 550],
+        "anchors": [
+          {"pos": [273, 273], "hip": 13847},
+          {"pos": [144, 232], "hip": 13789},
+          {"pos": [325, 196], "hip": 13414}
+        ]
+      },
+      "common_name": {"english": "ϑ Eri", "native": "16"}
+    }
+  ],
+  "common_names": {
+    "HIP 13847": [{"english": "Eridanus: The last star of the river, the bright one"}],
+    "HIP 21421": [{"english": "[The stars in the face, called 'Hyades':] the bright star of the Hyades, the reddish one on the southern eye"}],
+    "HIP 24436": [{"english": "Orion: The bright star in the left foot, which is [applied in] common to the water [of Eridanus]"}],
+    "HIP 24608": [{"english": "The star on the left shoulder, called Capella"}],
+    "HIP 27989": [{"english": "Orion: The bright, reddish star on the right shoulder"}],
+    "HIP 30438": [{"english": "Argo: The more advanced of the 2 stars in the other [southern, rear] steeringoar, called Canopus"}],
+    "HIP 32349": [{"english": "The star in the mouth, the brightest, which is called 'the Dog' and is sparkeling"}],
+    "HIP 37279": [{"english": "The bright star just over the hindquarters, called Procyon"}],
+    "HIP 49669": [{"english": "The star on the heart, called 'Regulus'"}],
+    "HIP 57632": [{"english": "The star on the end of the tail [of the Lion]"}],
+    "HIP 65474": [{"english": "The star on the left hand, called 'Spica'"}],
+    "HIP 69673": [{"english": "The star between the thighs, called 'Arcturus', reddish"}],
+    "HIP 71683": [{"english": "Centaurus: The star on the end of the right front leg"}],
+    "HIP 91262": [{"english": "The bright star on the shell, called Lyra"}],
+    "HIP 113368": [{"english": "Aqr: [The stars on the flow of the water:] The star at the end of the water and on the mouth of & PsA: The star in the mouth, which is the same as the beginning of the water"}]
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "id": "vanuatu_netwar",
+  "region": "Melanesia",
+  "classification": ["ethnographic"],
+  "fallback_to_international_names": false,
+  "constellations": [
+    {
+      "id": "CON vanuatu_netwar 001",
+      "lines": [[26727, 26311, 25930]],
+      "image": {
+        "file": "illustrations/kasulia_apam.png",
+        "size": [200, 200],
+        "anchors": [
+          {"pos": [39, 99], "hip": 25930},
+          {"pos": [164, 93], "hip": 26727},
+          {"pos": [100, 49], "hip": 26117}
+        ]
+      },
+      "common_name": {"english": "Long Yoke", "native": "Kasulia apam"}
+    },
+    {
+      "id": "CON vanuatu_netwar 002",
+      "lines": [[26237, 26235, 26241]],
+      "image": {
+        "file": "illustrations/kasulia_rerparep.png",
+        "size": [200, 200],
+        "anchors": [
+          {"pos": [28, 84], "hip": 26241},
+          {"pos": [166, 88], "hip": 26237},
+          {"pos": [100, 144], "hip": 26021}
+        ]
+      },
+      "common_name": {"english": "Short Yoke", "native": "Kasulia rerparep"}
+    },
+    {
+      "id": "CON vanuatu_netwar 003",
+      "lines": [[21421, 20894, 20205, 20455, 20889]],
+      "image": {
+        "file": "illustrations/kou.png",
+        "size": [200, 200],
+        "anchors": [
+          {"pos": [12, 117], "hip": 21421},
+          {"pos": [13, 77], "hip": 20889},
+          {"pos": [149, 109], "hip": 18724}
+        ]
+      },
+      "common_name": {"english": "Tweezers for Hot Stones", "native": "Kou"}
+    },
+    {
+      "id": "CON vanuatu_netwar 004",
+      "lines": [[85927, 85696, 87073, 86670, 85927]],
+      "image": {
+        "file": "illustrations/kahau.png",
+        "size": [200, 200],
+        "anchors": [
+          {"pos": [186, 80], "hip": 87073},
+          {"pos": [42, 69], "hip": 85696},
+          {"pos": [90, 137], "hip": 86698}
+        ]
+      },
+      "common_name": {"english": "Rat", "native": "Kahaur rul"}
+    },
+    {
+      "id": "CON vanuatu_netwar 005",
+      "lines": [[27989, 25336, 25930, 24436, 27366, 26727, 27989]],
+      "image": {
+        "file": "illustrations/kilil.png",
+        "size": [300, 300],
+        "anchors": [
+          {"pos": [106, 244], "hip": 25336},
+          {"pos": [186, 265], "hip": 27989},
+          {"pos": [147, 91], "hip": 26241}
+        ]
+      },
+      "common_name": {"english": "Fan", "native": "Kilil"}
+    },
+    {
+      "id": "CON vanuatu_netwar 006",
+      "lines": [[61084, 60718], [62434, 59747]],
+      "image": {
+        "file": "illustrations/suatu_kywer.png",
+        "size": [200, 200],
+        "anchors": [
+          {"pos": [98, 38], "hip": 61084},
+          {"pos": [180, 89], "hip": 59747},
+          {"pos": [118, 178], "hip": 60718}
+        ]
+      },
+      "common_name": {"english": "Four roads", "native": "Suatu kywer"}
+    },
+    {
+      "id": "CON vanuatu_netwar 007",
+      "lines": [[17847, 17702, 17608, 17499, 17573, 17702]],
+      "common_name": {"english": "Young Boys from Lapnuman, Young Girls from Lapnuman", "native": "Nowaswas Lapnuman, Neperawen Lapnuman"}
+    },
+    {
+      "id": "CON vanuatu_netwar 008",
+      "lines": [[25482, 25482]],
+      "image": {
+        "file": "illustrations/nowanuman_l.png",
+        "size": [200, 200],
+        "anchors": [
+          {"pos": [188, 60], "hip": 23467},
+          {"pos": [71, 63], "hip": 24372},
+          {"pos": [56, 148], "hip": 27534}
+        ]
+      },
+      "common_name": {"english": "Earth oven", "native": "Nowanuman"}
+    },
+    {
+      "id": "CON vanuatu_netwar 009",
+      "lines": [[3042, 3042]],
+      "image": {
+        "file": "illustrations/nowanuman_s.png",
+        "size": [200, 200],
+        "anchors": [
+          {"pos": [20, 136], "hip": 3781},
+          {"pos": [136, 182], "hip": 3042},
+          {"pos": [151, 11], "hip": 6256}
+        ]
+      },
+      "common_name": {"english": "Earth oven", "native": "Nowanuman"}
+    },
+    {
+      "id": "CON vanuatu_netwar 010",
+      "lines": [[39429, 39429]],
+      "image": {
+        "file": "illustrations/nemrau.png",
+        "size": [200, 200],
+        "anchors": [
+          {"pos": [170, 96], "hip": 39953},
+          {"pos": [119, 181], "hip": 42515},
+          {"pos": [52, 45], "hip": 35264}
+        ]
+      },
+      "common_name": {"english": "Ashes", "native": "Nemrau"}
+    }
+  ],
+  "common_names": {
+    "HIP 21421": [{"english": "Kapaumeta"}],
+    "M 45": [{"english": "Nowaswas Lapnuman", "translators_comments": "Meaning \"Young boys of Lapnuman\""},
+             {"english": "Neperawen Lapnuman", "translators_comments": "Meaning \"Young girls of Lapnuman\""}],
+    "NGC 292": [{"english": "Nowanuman", "translators_comments": "Meaning \"Earth oven\""}],
+    "PGC 17223": [{"english": "Nowanuman", "translators_comments": "Meaning \"Earth oven\""}],
+    "NAME Jupiter": [{"english": "Karatéi", "native": "Karatéi"}],
+    "NAME Moon": [{"english": "Mawuk", "native": "Mawuk"}],
+    "NAME Sun": [{"english": "Met", "native": "Met"}],
+    "NAME Venus": [{"english": "Fétukai (on morning sky), Kéwita (on evening sky)", "native": "Fétukai, Kéwita"}]
+  }
+}

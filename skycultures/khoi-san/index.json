@@ -1,0 +1,106 @@
+{
+  "id": "khoi-san",
+  "region": "Southern Africa",
+  "classification": ["ethnographic"],
+  "fallback_to_international_names": false,
+  "constellations": [
+    {
+      "id": "CON khoi-san 001",
+      "lines": [[85696, 85927]],
+      "image": {
+        "file": "illustrations/roots.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [105, 143], "hip": 80569},
+          {"pos": [409, 53], "hip": 63613},
+          {"pos": [433, 202], "hip": 93015}
+        ]
+      },
+      "common_name": {"english": "Stars' Road", "native": "Milky Way"}
+    },
+    {
+      "id": "CON khoi-san 002",
+      "lines": [[21421, 21029]],
+      "image": {
+        "file": "illustrations/hunter.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [24, 277], "hip": 18246},
+          {"pos": [446, 201], "hip": 21421},
+          {"pos": [236, 127], "hip": 17453}
+        ]
+      },
+      "common_name": {"english": "Hunter and his wives", "native": "Aldebaran and Pleiades"}
+    },
+    {
+      "id": "CON khoi-san 003",
+      "lines": [[26063, 25737]],
+      "image": {
+        "file": "illustrations/zebras.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [399, 70], "hip": 26427},
+          {"pos": [293, 188], "hip": 26311},
+          {"pos": [314, 420], "hip": 27989}
+        ]
+      },
+      "common_name": {"english": "The Lion stalking Zebra", "native": "Betelgeuse and Orion's Belt"}
+    },
+    {
+      "id": "CON khoi-san 004",
+      "lines": [[30438, 31079]],
+      "image": {
+        "file": "illustrations/ant-egg.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [76, 330], "hip": 30438},
+          {"pos": [155, 174], "hip": 35158},
+          {"pos": [423, 285], "hip": 39662}
+        ]
+      },
+      "common_name": {"english": "The Ant-egg Star", "native": "Canopus"}
+    },
+    {
+      "id": "CON khoi-san 005",
+      "lines": [[91262, 91373]],
+      "image": {
+        "file": "illustrations/steenbok.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [349, 144], "hip": 91262},
+          {"pos": [53, 222], "hip": 85819},
+          {"pos": [417, 487], "hip": 103963}
+        ]
+      },
+      "common_name": {"english": "Male Steenbok", "native": "Vega"}
+    },
+    {
+      "id": "CON khoi-san 006",
+      "lines": [[71333, 68902]],
+      "image": {
+        "file": "illustrations/beast.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [47, 144], "hip": 74824},
+          {"pos": [263, 375], "hip": 67664},
+          {"pos": [248, 209], "hip": 70035}
+        ]
+      },
+      "common_name": {"english": "The Eyes of the Beast", "native": "Mura"}
+    }
+  ],
+  "common_names": {
+    "HIP 7588": [{"english": "Achernar"}],
+    "HIP 21421": [{"english": "Aldebaran"}],
+    "HIP 24436": [{"english": "Rigel"}],
+    "HIP 24608": [{"english": "Capella"}],
+    "HIP 27989": [{"english": "Betelgeuse"}],
+    "HIP 30438": [{"english": "Canopus"}],
+    "HIP 32349": [{"english": "Sirius"}],
+    "HIP 60718": [{"english": "Acrux"}],
+    "HIP 68702": [{"english": "Hadar"}],
+    "HIP 71683": [{"english": "Rigil Kent"}],
+    "HIP 80763": [{"english": "Antares"}],
+    "HIP 91262": [{"english": "Vega"}]
+  }
+}

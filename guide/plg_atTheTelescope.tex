@@ -21,6 +21,9 @@ In addition, the Observability plugin (section~\ref{sec:plugins:Observability})
 can be used for planning the best times to observe your favorite
 objects.
 
+The Mosaic Camera plugin (section~\ref{sec:plugins:Mosaic}) can be used to
+show the orientations of more complicated camera mosaics.
+
 \section{Oculars Plugin}
 \sectionauthor*{Timothy Reaves, with additions by Alexander Wolf}
 \label{sec:plugins:Oculars}
@@ -921,7 +924,7 @@ List of telescope types supported by INDI\footnote{\url{https://indilib.org/devi
 \item IOptron GotoNova Upgrade Kit 8400
 \end{itemize}
 
-\subsection{ASCOM (Windows, Qt5-based builds only)}
+\subsection{ASCOM~7 (Windows only)}
 \label{sec:plugins:TelescopeControl:ASCOM}
 
 \indexterm{ASCOM} \newFeature{0.19.3}is probably the most widely used
@@ -934,13 +937,15 @@ and most of the astronomy software and tools can communicate with
 ASCOM compatible devices.
 
 The ASCOM telescope support has been added to Stellarium's Telescope Control plugin by Gion Kunz in version 0.19.3.\footnote{%
-Unfortunately traditional ASCOM seems to be incompatible with Qt6. 
-Starting with version 24.3 ASCOM support is no longer available on Qt6-based builds.
-If you depend on ASCOM support, please use a Qt5-based build of the same version.}
+Unfortunately ASCOM version~6 seems to be incompatible with Qt6. 
+After numerous error reports we had to disable ASCOM support on Qt6-based builds of version 24.3-24.4. 
+However, preliminary tests showed that ASCOM~7 \emph{may} work again, so this way of connection is back. 
+Without proper instruments, the maintainers depend on your feedback, though. 
+If you depend on ASCOM support, please update to ASCOM version 7, or use a Qt5-based build of the same version.}
 
 Note that in order for Stellarium to communicate with your ASCOM
 compatible mount, you will need to have the ASCOM platform installed
-on your Windows machine (version 6 or
+on your Windows machine (version 7 or
 higher\footnote{\url{https://ascom-standards.org/Downloads/Index.htm}}). Also,
 the ASCOM driver of your telescope mount needs to be installed before
 you can start using the telescope in Stellarium.
@@ -1151,7 +1156,187 @@ keep this definition as well.
 \label{sec:plugins:Observability:author}
 This plugin has been contributed by Ivan Marti-Vidal (Onsala Space Observatory)\footnote{\url{mailto:i.martividal@gmail.com}} with some advice by Alexander Wolf and Georg Zotti.
 
+\newpage
+\section{Mosaic Camera Plugin}
+\sectionauthor*{Josh Meyers\footnote{\url{mailto:jmeyers314@gmail.com}}}
+\label{sec:plugins:MosaicCamera}
 
+\begin{figure}[t]\centering
+\includegraphics[width=\textwidth]{MosaicCamera.png}
+\caption{The Mosaic Camera plugin in action.  Overlays of LSSTCam(left), DECam (center), and HyperSuprimeCam (right) are shown, as well as the configuration dialog for the plugin (top right).}
+\label{fig:plugins:MosaicCamera}
+\end{figure}
+
+\subsection{Introduction}
+\label{sec:plugins:MosaicCamera:intro}
+This plugin overlays an outline of one or more mosaic cameras, i.e., cameras with multiple sensors, onto the Stellarium celestial sphere.
+With this functionality, one may compare the fields of view of different cameras, including potentially one's own astrophotography setup.
+Combined with the scripting and remote control features of Stellarium, various visualizations are possible, including real-time tracking of the observations of telescopes, playback of past observations, or public outreach demonstrations of the capabilities of various instruments.
+
+\subsection{Usage}
+\label{sec:plugins:MosaicCamera:usage}
+
+From the ``Cameras'' tab of the Mosaic Camera configuration window, you can select from the available cameras, setting their RA, Dec, rotation, and visibility as desired.
+
+\subsection{Cameras}
+\label{sec:plugins:MosaicCamera:cameras}
+Multiple cameras can be individually configured and displayed.
+
+\subsubsection{Default Cameras}
+\label{sec:plugins:MosaicCamera:cameras:default}
+A few cameras come pre-packaged with Stellarium.  These are:
+
+\paragraph{LSSTCam}
+
+The largest (as of 2025) digital camera ever assembled at 3.2 gigapixels.
+Now mounted on the Simonyi Survey Telescope at the Vera C. Rubin Observatory, this camera will be used to execute the Legacy Survey of Space and Time, creating a 10-year multicolor `movie' of the southern sky.
+
+Note that the individual CCDs within this camera's overlay are color-coded by their functionality:
+Two shades of blue indicate the main science sensors.
+(LSSTCam features a hybrid focal plane.
+Light blue corresponds to sensors made by Imaging Technology Laboratory, while dark blue corresponds to sensors made by Imaging Teledyne e2v.)
+The white sensors in the middle show the field-of-view of the Rubin Commissioning Camera, a smaller camera used to commission the telescope mount and mirrors before the main LSSTCam camera was ready.
+The red sensors in the corners are wavefront sensors, used to monitor and correct the telescope's optical alignment in real time.
+The green sensors are the guider sensors, used to inform the telescope's tracking system.
+See more at \url{https://noirlab.edu/public/programs/vera-c-rubin-observatory/}.
+
+\paragraph{HyperSuprimeCam (HSC)}
+
+A 900 megapixel camera mounted on the Subaru telescope at the Mauna Kea Observatory.
+See more at \url{https://www.naoj.org/Projects/HSC/}.
+
+\paragraph{Dark Energy Camera (DECam)}
+
+A 570 megapixel camera mounted on the Blanco telescope at the Cerro Tololo Inter-American Observatory.
+See more at \url{https://www.darkenergysurvey.org/the-des-project/instrument/}.
+
+\paragraph{MegaPrime}
+
+A 378 megapixel camera mounted on the Canada-France-Hawaii Telescope at Mauna Kea Observatory.
+See more at \url{https://www.cfht.hawaii.edu/Instruments/Imaging/MegaPrime/}.
+
+\paragraph{LATISS}
+
+The LSST Atmospheric Transmission Imager and Slitless Spectrograph.  A 16 megapixel camera mounted on the Rubin Observatory Auxiliary telescope.
+See more at \url{https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/}.
+
+\subsubsection{Adding a Camera}
+\label{sec:plugins:MosaicCamera:cameras:add}
+When the Mosaic Camera plugin is first enabled, it checks for the existence of a directory \file{<USERDATA>/modules/MosaicCamera/}.
+If this directory does not exist, it will be created and populated with JSON files for each of the default cameras, and one JSON file \file{camera\_order.json} which specifies the order in which the cameras are displayed.
+
+To add a new camera, create a new JSON file inside this directory, and add a reference to it in the \file{camera\_order.json} file.
+
+Camera sensors are specified via their corners, which are assumed to form spherical polygons.
+The corners should be specified as \href{https://en.wikipedia.org/wiki/Gnomonic_projection}{gnomonic projections} from the sphere to a tangent plane in radians.
+Multiple groups of sensors can compose the same camera.
+For example, LSSTCam has separate sensor groups for wavefront sensors, guider sensors, and each of two types of science sensors.
+
+\newpage
+
+Each camera is defined via a JSON file with the structure:
+
+\begin{jsonfile}[\scriptsize]
+[
+    {
+        "name": "name-of-group-1",
+        "corners": [
+            [
+                [corner1_x, corner1_y],
+                [corner2_x, corner2_y],
+                ...
+            ], # sensor 1
+            [
+                ...
+            ], # sensor 2
+            ...
+        ]
+        "color": {
+            "value": [R, G, B, alpha]
+        }
+    },
+    {
+        "name": "name-of-group-2",
+        ...
+    },
+    ...
+]
+\end{jsonfile}
+
+See the default camera JSON files for examples.
+
+If you ever need to reset the plugin to its default state, simply delete the \file{<USERDATA>/modules/MosaicCamera/} directory.
+
+\subsection{Control}
+\label{sec:plugins:MosaicCamera:control}
+
+There are several ways to control the Mosaic Camera plugin.
+
+\subsubsection{Mosaic Camera Settings Dialog}
+\label{sec:plugins:MosaicCamera:control:dialog}
+
+The Mosaic Camera settings dialog can be opened by right-clicking the MosaicCamera icon, or by selecting ``configure'' from the Plugins tab of the main Stellarium Configuration window.
+This dialog allows you to configure the cameras, as well as the visibility of the overlays.
+
+\subsubsection{Keyboard Shortcuts}
+\label{sec:plugins:MosaicCamera:control:keyboard}
+
+Keyboard shortcuts (see section~\ref{sec:gui:help:hotkeys}) can be configured to perform the following actions:
+
+\begin{itemize}
+\item Cycle the active camera forward or backward
+\item Increase or decrease the rotation angle of the current camera by 5 degrees.
+\item Set the pointing of the current camera to the current Stellarium view.
+\item Toggle the visibility of Mosaic Camera overlays.
+\item Toggle the Mosaic Camera settings dialog.
+\end{itemize}
+
+\subsubsection{Stellarium Scripting}
+\label{sec:plugins:MosaicCamera:control:scripting}
+
+The Mosaic Camera plugin can be controlled via Stellarium's scripting interface.
+In the following example, we set the LSSTCam overlay to be centered at RA=3.0, Dec=4.0 (in J2000 degrees), with a rotation of 1.0 degrees.
+
+\begin{script}
+  MosaicCamera.setCurrentCamera("LSSTCam")
+  MosaicCamera.setCurrentRA(3.0)
+  MosaicCamera.setCurrentDec(4.0)
+  MosaicCamera.setCurrentRotation(1.0)
+\end{script}
+
+an equivalent script is:
+
+\begin{script}
+  MosaicCamera.setRA("LSSTCam", 3.0)
+  MosaicCamera.setDec("LSSTCam", 4.0)
+  MosaicCamera.setRotation("LSSTCam", 1.0)
+\end{script}
+
+or even:
+
+\begin{script}
+  MosaicCamera.setPosition("LSSTCam", 3.0, 4.0, 1.0)
+\end{script}
+
+\subsubsection{Stellarium Remote Control}
+\label{sec:plugins:MosaicCamera:control:remote}
+
+The Mosaic Camera plugin is also accessible via Stellarium's remote control interface (see ~\ref{sec:plugin:RemoteControl}).
+Here's a short python script equivalent to the above example:
+
+\begin{script}
+  import requests
+  port = 8090  # Default Stellarium port
+  url = f"http://localhost:{port}/api/stelproperty/set"
+
+  for name, val in [
+    ["MosaicCamera.currentCamera", "LSSTCam"],
+    ["MosaicCamera.ra", 3.0],
+    ["MosaicCamera.dec", 4.0],
+    ["MosaicCamera.rotation", 1.0]
+  ]:
+    requests.post(url, data={"id": name, "value": val})
+\end{script}
 
 
 %%% Local Variables: 

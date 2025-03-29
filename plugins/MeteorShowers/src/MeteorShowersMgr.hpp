@@ -243,8 +243,9 @@ public slots:
 
 	//! Set the color of the active radiant based on generic data.
 	//! @code
-	//! // example of usage in scripts
-	//! MeteorShowers.setColorARG(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! MeteorShowers.setColorARG(c.toVec3f());
 	//! @endcode
 	void setColorARG(const Vec3f& rgb);
 	//! @return color of markers of the active radiants based on generic data.
@@ -256,8 +257,9 @@ public slots:
 
 	//! Set the color of the active radiant based on confirmed data.
 	//! @code
-	//! // example of usage in scripts
-	//! MeteorShowers.setColorARC(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! MeteorShowers.setColorARC(c.toVec3f());
 	//! @endcode
 	void setColorARC(const Vec3f& rgb);
 	//! @return color of markers of the active radiants based on confirmed data.
@@ -269,8 +271,9 @@ public slots:
 
 	//! Set the color of the inactive radiant.
 	//! @code
-	//! // example of usage in scripts
-	//! MeteorShowers.setColorIR(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! MeteorShowers.setColorIR(c.toVec3f());
 	//! @endcode
 	void setColorIR(const Vec3f& rgb);
 	//! @return color of markers of the inactive radiants.

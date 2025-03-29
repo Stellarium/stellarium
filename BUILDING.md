@@ -30,8 +30,7 @@ directory. Default settings create a debug build with all useful plugins.
 In the Projects tab (button in vertical left bar), you should at least 
 configure Debug and Release builds.
 
-Do not forget to load the [Code Style File](https://stellarium.org/files/ide/stellarium-ide.xml) 
-([TAR.GZ](https://stellarium.org/files/ide/stellarium-ide.xml.tgz)) in 
+Do not forget to load the [Code Style File](doc/stellarium-ide.xml) in
 Extras/Settings/C++/Coding style (Import... button).
 
 ## Prerequisite Packages
@@ -85,7 +84,8 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
                  qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins \
                  libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libqt5positioning5 \
                  libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev \
-                 libexiv2-dev libnlopt-cxx-dev libtbb-dev libtbb2 libqt5concurrent5 
+                 libexiv2-dev libnlopt-cxx-dev libtbb-dev libtbb2 libqt5concurrent5 \
+                 libmd4c-dev libmd4c-html0-dev
 ```
 
 ##### Qt6
@@ -102,7 +102,7 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev lib
                  qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev \
                  libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev \
                  qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data \
-                 libexiv2-dev libnlopt-cxx-dev libqt6concurrent6 
+                 libexiv2-dev libnlopt-cxx-dev libqt6concurrent6 libmd4c-dev libmd4c-html0-dev
 ```
 
 
@@ -284,9 +284,9 @@ https://github.com/Stellarium/stellarium/releases
 Do this command in a terminal (if you prefer, you might use arK or some other graphical archive tool): 
 
 ```
-$ tar zxf stellarium-24.4.tar.gz
+$ tar zxf stellarium-25.1.tar.gz
 ```
-You should now have a directory `stellarium-24.4` with the source code in it.
+You should now have a directory `stellarium-25.1` with the source code in it.
 
 
 ### Clone project from GitHub
@@ -325,7 +325,7 @@ GitHub by web.
 
 #### Windows specifics
 
-On Windows save the file (`master.zip` or `stellarium-24.4.tar.gz`) to the `C:/Devel` directory as 
+On Windows save the file (`master.zip` or `stellarium-25.1.tar.gz`) to the `C:/Devel` directory as 
 example. You will need a decompression program installed in Windows, for example [7-Zip](http://www.7-zip.org/). 
 The root of the source tree will be `C:/Devel/stellarium` for simplicity.
 
@@ -415,6 +415,7 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | USE_PLUGIN_LENSDISTORTIONESTIMATOR | bool   | ON      | Enable building the Lens Distortion Estimator plugin
 | USE_PLUGIN_METEORSHOWERS           | bool   | ON      | Enable building the Meteor Showers plugin
 | USE_PLUGIN_MISSINGSTARS            | bool   | ON      | Enable building the Missing Stars plugin
+| USE_PLUGIN_MOSAICCAMERA            | bool   | OFF     | Enable building the Mosaic Camera plugin
 | USE_PLUGIN_NAVSTARS                | bool   | ON      | Enable building the Navigational Stars plugin
 | USE_PLUGIN_NOVAE                   | bool   | ON      | Enable building the Bright Novae plugin
 | USE_PLUGIN_OBSERVABILITY           | bool   | ON      | Enable building the Observability Analysis plugin

@@ -181,6 +181,8 @@ void AstroCalcDialog::retranslate()
 		// by causing the list items to be laid out again.
 		updateTabBarListWidgetWidth();
 		populateToolTips();
+		// Almanac
+		ui->astroCalcAlmanac->retranslate();
 	}
 }
 
@@ -299,7 +301,7 @@ void AstroCalcDialog::createDialogContent()
 	enableEphemerisButtons(buttonState);
 	ui->ephemerisIgnoreDateTestCheckBox->setChecked(conf->value("astrocalc/flag_ephemeris_ignore_date_test", true).toBool());
 	connect(ui->ephemerisIgnoreDateTestCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveIgnoreDateTestFlag(bool)));
-	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(reGenerateEphemeris()));	
+	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateGeneratedEphemeris()));
 	connect(ui->allNakedEyePlanetsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveEphemerisFlagNakedEyePlanets(bool)));
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
 	connect(ui->ephemerisCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupEphemeris()));
@@ -315,6 +317,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->dateFromMonthSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setMonthDuration()));
 	ui->dateToDurationSpinBox->setValue(conf->value("astrocalc/ephemeris_time_duration", 1).toInt());
 	connect(ui->dateToDurationSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveEphemerisTimeDuration(int)));
+	connect(core, SIGNAL(flagUseAberrationChanged(bool)), this, SLOT(updateGeneratedEphemeris()));
+	connect(core, SIGNAL(aberrationFactorChanged(double)), this, SLOT(updateGeneratedEphemeris()));
 
 	ui->genericMarkerColor->setup("SolarSystem.ephemerisGenericMarkerColor", "color/ephemeris_generic_marker_color");
 	ui->secondaryMarkerColor->setup("SolarSystem.ephemerisSecondaryMarkerColor", "color/ephemeris_secondary_marker_color");
@@ -405,6 +409,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
 	connect(ui->object1ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(savePhenomenaCelestialBody(int)));
 	connect(ui->object2ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(savePhenomenaCelestialGroup(int)));
+	connect(ui->selectObjectButton, SIGNAL(clicked()), this, SLOT(selectStoredObject()));
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(populateSelectedObject()));
 
 	plotAltVsTimeSun = conf->value("astrocalc/altvstime_sun", false).toBool();
 	plotAltVsTimeMoon = conf->value("astrocalc/altvstime_moon", false).toBool();
@@ -567,6 +573,11 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->pushButtonExtraEphemerisDialog, SIGNAL(clicked()), this, SLOT(showExtraEphemerisDialog()));
 	connect(ui->pushButtonCustomStepsDialog, SIGNAL(clicked()), this, SLOT(showCustomStepsDialog()));
 
+	// Tab: Almanac
+	ui->astroCalcAlmanac->setup();
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateAlmanacWidgetVisibility()));
+	updateAlmanacWidgetVisibility();
+
 	updateTabBarListWidgetWidth();
 
 	ui->celestialPositionsUpdateButton->setShortcut(QKeySequence("Shift+F10"));
@@ -592,6 +603,20 @@ void AstroCalcDialog::createDialogContent()
 
 	// NOTE: populating tooltips should be doing after initialization and setting the values for all spinboxes
 	populateToolTips();
+}
+
+void AstroCalcDialog::updateAlmanacWidgetVisibility()
+{
+	const int almanacTabIndex = 8;
+	const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
+
+	// hide Almanac tab or not
+	ui->stackListWidget->item(almanacTabIndex)->setHidden(!onEarth);
+	ui->astroCalcAlmanac->setVisible(onEarth);
+
+	// move to first tab if Alamac was visible when user are moved to non-terrestial location
+	if (!onEarth && ui->stackListWidget->currentRow()==almanacTabIndex)
+		ui->stackListWidget->setCurrentRow(0);
 }
 
 void AstroCalcDialog::populateToolTips()
@@ -1817,6 +1842,11 @@ void AstroCalcDialog::saveIgnoreDateTestFlag(bool b)
 	reGenerateEphemeris(true);
 }
 
+void AstroCalcDialog::updateGeneratedEphemeris()
+{
+	reGenerateEphemeris(ui->ephemerisHorizontalCoordinatesCheckBox->isChecked());
+}
+
 void AstroCalcDialog::reGenerateEphemeris(bool withSelection)
 {
 	if (computeEphemeris)
@@ -1894,12 +1924,12 @@ double AstroCalcDialog::getEphemerisTimeStep(const PlanetP &planet)
 double AstroCalcDialog::getEphemerisTimeDuration()
 {
 	const QMap<int, double>timeUnitMap = {
-		{ 1, StelCore::JD_MINUTE },
-		{ 2, StelCore::JD_HOUR },
-		{ 3, StelCore::JD_DAY },
-		{ 4, 7.0 },
-		{ 5, 30.4375 }, // month = 1/12 of year in days
-		{ 6, 365.25 }	// year
+	        { EphemerisTimeDurationSteps::Minutes,	StelCore::JD_MINUTE },
+	        { EphemerisTimeDurationSteps::Hours,	StelCore::JD_HOUR },
+	        { EphemerisTimeDurationSteps::Days,	StelCore::JD_DAY },
+	        { EphemerisTimeDurationSteps::Weeks,	7.0 },
+	        { EphemerisTimeDurationSteps::Months,	30.4375 }, // month = 1/12 of year in days
+	        { EphemerisTimeDurationSteps::Years,	365.25 } // year
 	};
 	return timeUnitMap.value(ui->dateToUnitsComboBox->currentData().toInt(), 30.4375);
 }
@@ -1907,14 +1937,14 @@ double AstroCalcDialog::getEphemerisTimeDuration()
 void AstroCalcDialog::populateEphemerisTimeDurationTooltip()
 {
 	const QMap<int, QString> timeTooltipMap = {
-		{ 1, q_("Duration in minutes") },
-		{ 2, q_("Duration in hours") },
-		{ 3, q_("Duration in days") },
-		{ 4, q_("Duration in weeks") },
-		{ 5, q_("Duration in months") },
-		{ 6, q_("Duration in years") }
+	        { EphemerisTimeDurationSteps::Minutes,	q_("Duration in minutes") },
+	        { EphemerisTimeDurationSteps::Hours,	q_("Duration in hours") },
+	        { EphemerisTimeDurationSteps::Days,	q_("Duration in days") },
+	        { EphemerisTimeDurationSteps::Weeks,	q_("Duration in weeks") },
+	        { EphemerisTimeDurationSteps::Months,	q_("Duration in months") },
+	        { EphemerisTimeDurationSteps::Years,	q_("Duration in years") }
 	};
-	ui->dateToDurationSpinBox->setToolTip(timeTooltipMap.value(ui->dateToUnitsComboBox->currentData().toInt(), q_("Duration in months")));
+	ui->dateToDurationSpinBox->setToolTip(QString("%1. %2: %3..%4").arg(timeTooltipMap.value(ui->dateToUnitsComboBox->currentData().toInt(), q_("Duration in months")), q_("Valid range"), QString::number(ui->dateToDurationSpinBox->minimum()), QString::number(ui->dateToDurationSpinBox->maximum())));
 }
 
 void AstroCalcDialog::generateEphemeris()
@@ -3158,7 +3188,6 @@ void AstroCalcDialog::generateSolarEclipses()
 			double JD = InitJD + synodicMonth * i;
 			if (JD > startJD)
 			{
-
 				// Find exact time of minimum distance between axis of lunar shadow cone to the center of Earth
 				JD = ecliptor.getJDofMinimumDistance(JD);
 				core->setJD(JD);
@@ -5126,13 +5155,20 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->setCurrentIndex(index);
 	groups->model()->sort(0);
 	groups->blockSignals(false);
+
+	// Set visibility the button for restore selection of latest selected object
+	bool state = (groups->itemData(index).toInt() == PHCLatestSelectedObject);
+	ui->selectObjectButton->setVisible(state);
 }
 
 void AstroCalcDialog::savePhenomenaCelestialGroup(int index)
 {
 	Q_ASSERT(ui->object2ComboBox);
 	QComboBox* group = ui->object2ComboBox;
-	conf->setValue("astrocalc/phenomena_celestial_group", group->itemData(index).toInt());
+	int groupIndex = group->itemData(index).toInt();
+	conf->setValue("astrocalc/phenomena_celestial_group", groupIndex);
+	// Set visibility the button for restore selection of latest selected object
+	ui->selectObjectButton->setVisible(groupIndex == PHCLatestSelectedObject);
 }
 
 void AstroCalcDialog::cleanupPhenomena()
@@ -5140,6 +5176,39 @@ void AstroCalcDialog::cleanupPhenomena()
 	ui->phenomenaTreeWidget->clear();
 	adjustPhenomenaColumns();
 	enablePhenomenaButtons(false);
+	followLatestSelectedObject = true;
+}
+
+void AstroCalcDialog::populateSelectedObject()
+{
+	if (followLatestSelectedObject)
+	{
+		QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
+		if (!selectedObjects.isEmpty())
+		{
+			latestSelectedObject = selectedObjects.first();
+			QString name = latestSelectedObject->getNameI18n();
+			if (name.isEmpty())
+			{
+				QString otype = latestSelectedObject->getType();
+				if (otype == "Nebula")
+				{
+					name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+					if (name.isEmpty())
+						name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
+				}
+				else if (otype == "Star" || otype=="Pulsar")
+					name = latestSelectedObject->getID();
+			}
+			ui->selectObjectButton->setText(name);
+		}
+	}
+}
+
+void AstroCalcDialog::selectStoredObject()
+{
+	if (!latestSelectedObject.isNull())
+		objectMgr->setSelectedObject(latestSelectedObject);
 }
 
 void AstroCalcDialog::savePhenomenaOppositionFlag(bool b)
@@ -5463,9 +5532,9 @@ double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const AstroCalcC
 		case AstroCalcChart::AngularSize2:
 		{
 			// angular radius without rings
-			value = ssObj->getSpheroidAngularRadius(core) * (360. / M_PI);
-			if (value < 1.)
-				value *= 60.;
+			value = ssObj->getSpheroidAngularRadius(core)*7200.;
+			if (value >= 60.)
+				value /= 60.;
 			break;
 		}
 		case AstroCalcChart::PhaseAngle1:
@@ -5757,7 +5826,7 @@ void AstroCalcDialog::selectCurrentPhenomen(const QModelIndex& modelIndex)
 {
 	// Find the object
 	QString name = ui->object1ComboBox->currentData().toString();
-	if (modelIndex.sibling(modelIndex.row(), PhenomenaType).data().toString().contains(q_("Opposition"), Qt::CaseInsensitive))
+	if (modelIndex.sibling(modelIndex.row(), PhenomenaType).data(Qt::UserRole).toInt()==PhenomenaTypeIndex::Opposition)
 		name = modelIndex.sibling(modelIndex.row(), PhenomenaObject2).data().toString();
 	const double JD = modelIndex.sibling(modelIndex.row(), PhenomenaDate).data(Qt::UserRole).toDouble();
 	goToObject(name, JD);
@@ -5770,6 +5839,7 @@ void AstroCalcDialog::calculatePhenomena()
 	const bool opposition = ui->phenomenaOppositionCheckBox->isChecked();
 	const bool perihelion = ui->phenomenaPerihelionAphelionCheckBox->isChecked();
 	const bool quadrature = ui->phenomenaElongationQuadratureCheckBox->isChecked();
+	followLatestSelectedObject = false; // do not following the changes in selection of objects
 
 	initListPhenomena();
 
@@ -5993,17 +6063,15 @@ void AstroCalcDialog::calculatePhenomena()
 
 		if (obj2Type == PHCLatestSelectedObject)
 		{
-			QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
-			if (!selectedObjects.isEmpty())
+			if (!latestSelectedObject.isNull())
 			{
-				StelObjectP selectedObject = selectedObjects[0];
-				if (selectedObject!=planet && selectedObject->getType() != "Satellite")
+				if (latestSelectedObject!=planet && latestSelectedObject->getType() != "Satellite")
 				{
 					// conjunction
-					fillPhenomenaTable(findClosestApproach(planet, selectedObject, startJD, stopJD, separation, PhenomenaTypeIndex::Conjunction), planet, selectedObject, PhenomenaTypeIndex::Conjunction);
+					fillPhenomenaTable(findClosestApproach(planet, latestSelectedObject, startJD, stopJD, separation, PhenomenaTypeIndex::Conjunction), planet, latestSelectedObject, PhenomenaTypeIndex::Conjunction);
 					// opposition
 					if (opposition)
-						fillPhenomenaTable(findClosestApproach(planet, selectedObject, startJD, stopJD, separation, PhenomenaTypeIndex::Opposition), planet, selectedObject, PhenomenaTypeIndex::Opposition);
+						fillPhenomenaTable(findClosestApproach(planet, latestSelectedObject, startJD, stopJD, separation, PhenomenaTypeIndex::Opposition), planet, latestSelectedObject, PhenomenaTypeIndex::Opposition);
 				}
 			}
 		}
@@ -6093,12 +6161,13 @@ void AstroCalcDialog::savePhenomena()
 		saveTableAsXLSX(fileData.first, ui->phenomenaTreeWidget, phenomenaHeader, q_("Phenomena"), q_("Phenomena"));
 }
 
-void AstroCalcDialog::fillPhenomenaTableVis(const QString &phenomenType, double JD, const QString &firstObjectName, float firstObjectMagnitude,
+void AstroCalcDialog::fillPhenomenaTableVis(const QString &phenomenType, int phenomenMode, double JD, const QString &firstObjectName, float firstObjectMagnitude,
 					    const QString &secondObjectName, float secondObjectMagnitude, const QString &separation, const QString &elevation,
 					    QString &elongation, const QString &angularDistance, const QString &elongTooltip, const QString &angDistTooltip)
 {
 	ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 	treeItem->setText(PhenomenaType, phenomenType);
+	treeItem->setData(PhenomenaType, Qt::UserRole, phenomenMode);
 	// local date and time
 	const double utcOffsetHrs = core->getUTCOffset(JD);
 	treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD, utcOffsetHrs), StelUtils::getHoursMinutesFromJulianDay(JD+utcOffsetHrs*StelCore::JD_HOUR)));
@@ -6299,7 +6368,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		else
 			elevationStr = StelUtils::radToDmsPStr(alt, 2);
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), nameObj2, magnitude, separationStr, elevationStr, elongStr, angDistStr, elongationInfo, angularDistanceInfo);
+		fillPhenomenaTableVis(phenomenType, mode, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), nameObj2, magnitude, separationStr, elevationStr, elongStr, angDistStr, elongationInfo, angularDistanceInfo);
 	}
 }
 
@@ -6374,7 +6443,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		else
 			elevationStr = StelUtils::radToDmsPStr(alt, 2);
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, magnitude, separationStr, elevationStr, elongStr, angDistStr);
+		fillPhenomenaTableVis(phenomenType, PhenomenaTypeIndex::Conjunction, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, magnitude, separationStr, elevationStr, elongStr, angDistStr);
 	}
 }
 
@@ -6491,7 +6560,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		else
 			elevationStr = StelUtils::radToDmsPStr(alt, 2);
 
-		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, magnitude, separationStr, elevationStr, elongStr, angDistStr);
+		fillPhenomenaTableVis(phenomenType, mode, it.key(), object1->getNameI18n(), object1->getVMagnitude(core), commonName, magnitude, separationStr, elevationStr, elongStr, angDistStr);
 	}
 }
 

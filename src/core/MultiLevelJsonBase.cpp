@@ -84,7 +84,7 @@ void JsonLoadThread::run()
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING : Can't parse loaded JSON description: " << e.what();
+		qWarning() << "Can't parse loaded JSON description: " << e.what();
 		tile->errorOccured = true;
 	}
 }
@@ -124,7 +124,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 			fileName = StelFileMgr::findFile(parent->getBaseUrl()+url);
 			if (fileName.isEmpty())
 			{
-				qWarning() << "WARNING : Can't find JSON description: " << url;
+				qWarning() << "Can't find JSON description: " << url;
 				errorOccured = true;
 				return;
 			}
@@ -142,7 +142,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 			}
 			catch (std::runtime_error& e)
 			{
-				qWarning() << "WARNING: Can't parse JSON document: " << QDir::toNativeSeparators(fileName) << ":" << e.what();
+				qWarning() << "Can't parse JSON document: " << QDir::toNativeSeparators(fileName) << ":" << e.what();
 				errorOccured = true;
 				f.close();
 				return;
@@ -196,7 +196,7 @@ void MultiLevelJsonBase::initFromQVariantMap(const QVariantMap& map)
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: invalid variant map: " << e.what();
+		qWarning() << "Invalid variant map: " << e.what();
 		errorOccured = true;
 		return;
 	}
@@ -293,7 +293,7 @@ void MultiLevelJsonBase::downloadFinished()
 	if (httpReply->error()!=QNetworkReply::NoError)
 	{
 		if (httpReply->error()!=QNetworkReply::OperationCanceledError)
-			qWarning() << "WARNING : Problem while downloading JSON description for " << httpReply->request().url().path() << ": "<< httpReply->errorString();
+			qWarning() << "Problem while downloading JSON description for " << httpReply->request().url().path() << ": "<< httpReply->errorString();
 		errorOccured = true;
 		httpReply->deleteLater();
 		httpReply=Q_NULLPTR;
@@ -305,7 +305,7 @@ void MultiLevelJsonBase::downloadFinished()
 	QByteArray content = httpReply->readAll();
 	if (content.isEmpty())
 	{
-		qWarning() << "WARNING : empty JSON description for " << httpReply->request().url().path();
+		qWarning() << "Empty JSON description for " << httpReply->request().url().path();
 		errorOccured = true;
 		httpReply->deleteLater();
 		httpReply=Q_NULLPTR;
@@ -339,7 +339,7 @@ void MultiLevelJsonBase::jsonLoadFinished()
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: invalid variant map: " << e.what();
+		qWarning() << "Invalid variant map: " << e.what();
 		errorOccured = true;
 		return;
 	}

@@ -312,9 +312,7 @@ float StelProjector::getPixelPerRadAtCenter() const
 
 float StelProjector::getScreenScale() const
 {
-	const float dppRatio = getDevicePixelsPerPixel();
-	const float fontRatio = StelApp::getInstance().screenFontSizeRatio();
-	return dppRatio * fontRatio;
+	return StelApp::getInstance().getScreenScale();
 }
 
 //! Get the current FOV diameter in degrees
@@ -331,7 +329,7 @@ bool StelProjector::needGlFrontFaceCW() const
 bool StelProjector::checkInViewport(const Vec3d& pos) const
 {
 	return (pos[1]>=viewportXywh[1] && pos[0]>=viewportXywh[0] &&
-		pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));
+	        pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));
 }
 
 //! Check to see if a 2d position is inside the viewport.
@@ -339,7 +337,7 @@ bool StelProjector::checkInViewport(const Vec3d& pos) const
 bool StelProjector::checkInViewport(const Vec3f& pos) const
 {
 	return (pos[1]>=viewportXywh[1] && pos[0]>=viewportXywh[0] &&
-		pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));
+	        pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));
 }
 
 //! Return the position where the 2 2D point p1 and p2 cross the viewport edge
@@ -390,8 +388,8 @@ void StelProjector::project(int n, const Vec3d* in, Vec3f* out)
 		out->set(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
 		forward(*out);
 		out->set(static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * (*out)[0],
-			static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
-			static_cast<float>((static_cast<double>((*out)[2]) - zNear) * oneOverZNearMinusZFar));
+		         static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
+		         static_cast<float>((static_cast<double>((*out)[2]) - zNear) * oneOverZNearMinusZFar));
 	}
 }
 
@@ -403,8 +401,8 @@ void StelProjector::project(int n, const Vec3f* in, Vec3f* out)
 		modelViewTransform->forward(*out);
 		forward(*out);
 		out->set(static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * (*out)[0],
-			static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
-			static_cast<float>((static_cast<double>((*out)[2]) - zNear) * oneOverZNearMinusZFar));
+		         static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
+		         static_cast<float>((static_cast<double>((*out)[2]) - zNear) * oneOverZNearMinusZFar));
 	}
 }
 
@@ -484,8 +482,8 @@ vec3 project(vec3 modelSpacePoint)
 	vec3 worldSpacePoint = modelViewForwardTransform(modelSpacePoint);
 	vec3 v = projectorForwardTransform(worldSpacePoint);
 	return vec3(viewportCenter[0] + flipHorz * pixelPerRad * v[0],
-				viewportCenter[1] + flipVert * pixelPerRad * v[1],
-				(v[2] - zNear) * oneOverZNearMinusZFar);
+	            viewportCenter[1] + flipVert * pixelPerRad * v[1],
+	            (v[2] - zNear) * oneOverZNearMinusZFar);
 }
 #line 1 0
 )";
@@ -556,12 +554,15 @@ void StelProjector::computeBoundingCap()
 	// Now need to determine the aperture
 	Vec3d e0,e1,e2,e3,e4,e5;
 	const Vec4i& vp = viewportXywh;
-	ok &= unProject(vp[0],vp[1],e0);               // e0: bottom left
-	ok &= unProject(vp[0]+vp[2],vp[1],e1);         // e1: bottom right
-	ok &= unProject(vp[0]+vp[2],vp[1]+vp[3],e2);   // e2: top right
-	ok &= unProject(vp[0],vp[1]+vp[3],e3);         // e3: top left
-	ok &= unProject(vp[0],vp[1]+vp[3]/2,e4);       // e4: left center
-	ok &= unProject(vp[0]+vp[2],vp[1]+vp[3]/2,e5); // e5: right center
+	// Saemundsson's inversion formula for atmospheric refraction is not exact, so need some padding in terms of arcseconds
+	const double margin = 30000. * MAS2RAD * getPixelPerRadAtCenter();  // 0.5 arcmin
+
+	ok &= unProject(vp[0]-margin, vp[1]-margin, e0);             // e0: bottom left
+	ok &= unProject(vp[0]+vp[2]+margin, vp[1]-margin,e1);        // e1: bottom right
+	ok &= unProject(vp[0]+vp[2]+margin, vp[1]+vp[3]+margin, e2); // e2: top right
+	ok &= unProject(vp[0]-margin, vp[1]+vp[3]+margin, e3);       // e3: top left
+	ok &= unProject(vp[0]-margin,vp[1]+vp[3]/2+margin,e4);       // e4: left center
+	ok &= unProject(vp[0]+vp[2]+margin,vp[1]+vp[3]/2+margin,e5); // e5: right center
 	if (!ok)
 	{
 		// Some points were in invalid positions, use full sky.
@@ -642,5 +643,5 @@ bool StelProjector::isSameProjection(const StelProjector& other) const
 {
 	// *this defines the projection type, modelViewTransform defines how refraction is handled.
 	return typeid(*this) == typeid(other) &&
-		   typeid(*modelViewTransform) == typeid(*other.modelViewTransform);
+	       typeid(*modelViewTransform) == typeid(*other.modelViewTransform);
 }

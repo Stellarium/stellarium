@@ -234,6 +234,12 @@ int StelButton::toggleChecked(int checked)
 	return checked;
 }
 
+double StelButton::buttonSizeRatio()
+{
+	const auto& app = StelApp::getInstance();
+	return app.screenFontSizeRatio() * app.getScreenButtonScale()/100;
+}
+
 void StelButton::hoverEnterEvent(QGraphicsSceneHoverEvent*)
 {
 	timeLine->setDirection(QTimeLine::Forward);
@@ -356,12 +362,12 @@ QRectF StelButton::boundingRect() const
 
 int StelButton::getButtonPixmapWidth() const
 {
-	const double baseWidth = pixOn.width() / pixmapsScale * StelApp::getInstance().screenFontSizeRatio();
+	const double baseWidth = pixOn.width() / pixmapsScale * buttonSizeRatio();
 	return std::lround(baseWidth);
 }
 int StelButton::getButtonPixmapHeight() const
 {
-	const double baseHeight = pixOn.height() / pixmapsScale * StelApp::getInstance().screenFontSizeRatio();
+	const double baseHeight = pixOn.height() / pixmapsScale * buttonSizeRatio();
 	return std::lround(baseHeight);
 }
 
@@ -380,7 +386,7 @@ void StelButton::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidg
 	 *    rectangles.
 	 *    Our keeping QPixmap alive instead of deleting it on return from this function prevents this.
 	 */
-	const double ratio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
+	const double ratio = StelApp::getInstance().getDevicePixelsPerPixel();
 	if(scaledCurrentPixmap.isNull() || ratio != scaledCurrentPixmap.devicePixelRatioF())
 	{
 		const auto size = boundingRect().size() * ratio;
@@ -404,6 +410,10 @@ LeftStelBar::LeftStelBar(QGraphicsItem* parent)
 
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, &LeftStelBar::setFontSizeFromApp);
+	connect(&StelApp::getInstance(), &StelApp::screenButtonScaleChanged, this,
+	        [this]{const int size = StelApp::getInstance().getScreenFontSize();
+	               setFontSizeFromApp(size); /* and repeat to apply all the geometry changes */
+	               setFontSizeFromApp(size);});
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &LeftStelBar::setFont);
 }
 
@@ -423,7 +433,7 @@ void LeftStelBar::addButton(StelButton* button)
 	button->setParentItem(this);
 	button->setFocusOnSky(false);
 	//button->prepareGeometryChange(); // could possibly be removed when qt 4.6 become stable
-	button->setPos(0., qRound(posY + 9.5 * StelApp::getInstance().screenFontSizeRatio()));
+	button->setPos(0., qRound(posY + 9.5 * StelButton::buttonSizeRatio()));
 
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
 }
@@ -436,7 +446,7 @@ void LeftStelBar::updateButtonPositions()
 		if (const auto b = dynamic_cast<StelButton*>(button))
 			b->animValueChanged(0.); // update button pixmap
 		button->setPos(0., posY);
-		posY += std::round(button->boundingRect().height() + 9.5 * StelApp::getInstance().screenFontSizeRatio());
+		posY += std::round(button->boundingRect().height() + 9.5 * StelButton::buttonSizeRatio());
 	}
 }
 
@@ -566,6 +576,10 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, [=](int fontsize){setFontSizeFromApp(fontsize); setFontSizeFromApp(fontsize);}); // We must call that twice to force all geom. updates
+	connect(&StelApp::getInstance(), &StelApp::screenButtonScaleChanged, this,
+	        [this]{const int size = StelApp::getInstance().getScreenFontSize();
+	               setFontSizeFromApp(size); /* and repeat to apply all the geometry changes */
+	               setFontSizeFromApp(size);});
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &BottomStelBar::setFont);
 	connect(StelApp::getInstance().getCore(), &StelCore::flagUseTopocentricCoordinatesChanged, this, [=](bool){updateText(false, true);});
 

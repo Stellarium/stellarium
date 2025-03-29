@@ -71,17 +71,8 @@ constexpr char ATMOSPHERE_MODEL_CONF_VAL_DEFAULT[]="preetham";
 Cardinals::Cardinals()
 	: color(0.6f,0.2f,0.2f)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
-	screenFontSize = StelApp::getInstance().getScreenFontSize();
 	propMgr = StelApp::getInstance().getStelPropertyManager();
-	// Default font size is 24
-	font4WCR.setPixelSize(conf->value("viewing/cardinal_font_size", screenFontSize+11).toInt());
-	// Default font size is 18
-	font8WCR.setPixelSize(conf->value("viewing/ordinal_font_size", screenFontSize+5).toInt());
-	// Draw the principal wind points even smaller.
-	font16WCR.setPixelSize(conf->value("viewing/16wcr_font_size", screenFontSize+2).toInt());
-	font32WCR.setPixelSize(conf->value("viewing/32wcr_font_size", screenFontSize).toInt());
+	updateFontSizes();
 
 	// English names for cardinals
 	labels = {
@@ -94,6 +85,23 @@ Cardinals::Cardinals()
 		{ dSbW,"SbW" }, {dSWbS,"SWbS"}, {dSWbW,"SWbW"}, { dWbS,"WbS" },
 		{ dWbN,"WbN" }, {dNWbW,"NWbW"}, {dNWbN,"NWbN"}, { dNbW,"NbW" }
 	};
+	QObject::connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged,
+	                 [this]{updateFontSizes();});
+}
+
+void Cardinals::updateFontSizes()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	screenFontSize = StelApp::getInstance().getScreenFontSize();
+	const float scale = StelApp::getInstance().screenFontSizeRatio();
+	// Default font size is 24
+	font4WCR.setPixelSize(conf->value("viewing/cardinal_font_size", screenFontSize+11*scale).toInt());
+	// Default font size is 18
+	font8WCR.setPixelSize(conf->value("viewing/ordinal_font_size", screenFontSize+5*scale).toInt());
+	// Draw the principal wind points even smaller.
+	font16WCR.setPixelSize(conf->value("viewing/16wcr_font_size", screenFontSize+2*scale).toInt());
+	font32WCR.setPixelSize(conf->value("viewing/32wcr_font_size", screenFontSize).toInt());
 }
 
 Cardinals::~Cardinals()
@@ -159,13 +167,14 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	if (fader4WCR.getInterstate()>0.f)
 	{
 		const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-		const float ppx = static_cast<float>(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
+		const float ppx = prj->getDevicePixelsPerPixel();
+		const float fontSizeRatio = StelApp::getInstance().screenFontSizeRatio();
 		StelPainter sPainter(prj);
 		sPainter.setFont(font4WCR);
 		float sshift=0.f, bshift=0.f, cshift=0.f, dshift=0.f, vshift=1.f;
 		bool flagMask = (core->getProjection(StelCore::FrameJ2000)->getMaskType() != StelProjector::MaskDisk);
 		if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
-			vshift = static_cast<float>(screenFontSize + 12)*ppx;
+			vshift = static_cast<float>(screenFontSize + 12*fontSizeRatio)*ppx;
 
 		Vec3f xy;
 		sPainter.setColor(color, fader4WCR.getInterstate());
@@ -394,7 +403,7 @@ LandscapeMgr::~LandscapeMgr()
 	}
 	delete landscape;
 	landscape = Q_NULLPTR;
-	qDebug() << "LandscapeMgr: Clearing cache of" << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+	qInfo() << "LandscapeMgr: Clearing cache of" << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
 	landscapeCache.clear(); // deletes all objects within.
 }
 
@@ -436,7 +445,7 @@ void LandscapeMgr::update(double deltaTime)
 				setAtmosphereShowMySkyStoppedWithError(false);
 				const auto percentDone = std::lround(100.*status.stepsDone/status.stepsToDo);
 				setAtmosphereShowMySkyStatusText(QString("%1 %2% %3").arg(q_("Loading..."), QString::number(percentDone), qc_("done","percentage of done")));
-				qDebug() << "Finished this batch of loading at" << percentDone << "%, will continue in the next frame";
+				qInfo() << "Finished this batch of loading at" << percentDone << "%, will continue in the next frame";
 			}
 			else
 			{
@@ -445,8 +454,8 @@ void LandscapeMgr::update(double deltaTime)
 		}
 		catch(Atmosphere::InitFailure const& error)
 		{
-			qWarning() << "ERROR: Failed to load atmosphere model data:" << error.what();
-			qWarning() << "WARNING: Falling back to the Preetham's model";
+			qInfo() << "ERROR: Failed to load atmosphere model data:" << error.what();
+			qWarning() << "Falling back to the Preetham's model";
 			setAtmosphereShowMySkyStoppedWithError(true);
 			setAtmosphereShowMySkyStatusText(error.what());
 			loadingAtmosphere.reset();
@@ -533,7 +542,7 @@ void LandscapeMgr::update(double deltaTime)
 	catch(Atmosphere::InitFailure const& error)
 	{
 		qWarning().noquote() << "ShowMySky atmosphere model crashed:" << error.what();
-		qWarning() << "Loading Preetham model";
+		qInfo().noquote() << "Loading Preetham model";
 		showMessage(q_("ShowMySky atmosphere model crashed. Loading Preetham model as a fallback."));
 		resetToFallbackAtmosphere();
 	}
@@ -764,8 +773,8 @@ void LandscapeMgr::createAtmosphere()
 		}
 		catch(Atmosphere::InitFailure const& error)
 		{
-			qWarning() << "ERROR: Failed to initialize ShowMySky atmosphere model:" << error.what();
-			qWarning() << "WARNING: Falling back to the Preetham's model";
+			qInfo() << "ERROR: Failed to initialize ShowMySky atmosphere model:" << error.what();
+			qWarning() << "Falling back to the Preetham's model";
 			loadingAtmosphere.reset(new AtmospherePreetham(skylight));
 			needResetConfig=true;
 
@@ -818,7 +827,7 @@ void LandscapeMgr::init()
 	Q_ASSERT(app);
 
 	landscapeCache.setMaxCost(conf->value("landscape/cache_size_mb", 100).toInt());
-	qDebug() << "LandscapeMgr: initialized Cache for" << landscapeCache.maxCost() << "MB.";
+	qInfo() << "LandscapeMgr: initialized Cache for" << landscapeCache.maxCost() << "MB.";
 
 	// SET SIMPLE PROPERTIES FIRST, before loading the landscape (Loading may already make use of them! GH#1237)
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
@@ -1035,7 +1044,7 @@ bool LandscapeMgr::setCurrentLandscapeName(const QString& name, const double cha
 		qWarning() << "Can't find a landscape with name=" << name << StelUtils::getEndLineChar();
 		return false;
 	}
-	qDebug() << "Loading landscapeID" << name;
+	qInfo().noquote() << "Loading landscapeID" << name;
 	return true;
 }
 
@@ -1759,6 +1768,12 @@ void LandscapeMgr::setFlagAtmosphereMultipleScattering(const bool enable)
 	emit flagAtmosphereMultipleScatteringChanged(enable);
 }
 
+void LandscapeMgr::setFlagAtmospherePseudoMirror(const bool enable)
+{
+	atmospherePseudoMirrorEnabled=enable;
+	emit flagAtmospherePseudoMirrorChanged(enable);
+}
+
 void LandscapeMgr::setAtmosphereEclipseSimulationQuality(const int quality)
 {
 	if(getAtmosphereEclipseSimulationQuality() == quality)
@@ -1832,6 +1847,11 @@ bool LandscapeMgr::getFlagAtmosphereSingleScattering() const
 bool LandscapeMgr::getFlagAtmosphereMultipleScattering() const
 {
 	return atmosphereMultipleScatteringEnabled;
+}
+
+bool LandscapeMgr::getFlagAtmospherePseudoMirror() const
+{
+	return atmospherePseudoMirrorEnabled;
 }
 
 int LandscapeMgr::getAtmosphereEclipseSimulationQuality() const

@@ -1,6 +1,7 @@
 %% Part of Stellarium User Guide 0.15+
 %% History:
 %% 2016-04-17 New chapter.
+%% 2025-02-17: Rewrite for new SC format
 
 
 \chapter{Adding Sky Cultures}
@@ -8,37 +9,44 @@
 \chapterauthor*{Georg Zotti, with additions by Alexander Wolf and Susanne M. Hoffmann}
 
 
-A \indexterm{sky culture} in Stellarium is the entity that consists of 
-\begin{itemize}
-\item a set of names for constellations 
-\item a description of the role these constellations and other celestial features (clouds, polar lights (aurorae), meteors, comets, \ldots) 
-      had or still have for the human culture that used or use these constellations, including some relevant background on the culture.
-\item stick figure definitions connecting stars into those constellations
-\item (optional) a list of names for individual stars
-\item (optional) artwork supporting the stick figures
-\item (optional) a description of boundaries or borders between the constellations
-\item (optional) names and stick figure definitions of additional figures of lesser importance, termed \indexterm{asterisms}.
-\end{itemize}
-\noindent The CC-licence that the author of the SC chooses, is valid for the entire set of files, i.e. all texts and images provided.
-
 Stellarium comes with a nice set of sky cultures from all
-over the world (see section~\ref{sec:gui:view:starlore}). For ethnographers or
+over the world (see section~\ref{sec:gui:view:skyculture}). For ethnographers or
 historians of science it may be a worthwhile consideration to
 illustrate the sky culture of the people they are studying. It is not
 very hard to do so, but depending on your data, may require some
 skills in image processing.
 
+Version 25.1 introduces a completely new format for skyculture data.\newFeature{25.1} 
+If you are interested in the old format, please refer to the 24.4 edition of the User Guide.
+In case you have created your own skycultures, we have created a format converter  described in section~\ref{ch:SkyCultures:converter}.
+
+
+If you add a new sky culture, please adhere to this description for an optimal result!
 Some features regarding translation and multilinguality have evolved
 over the years, and not all sky cultures currently included in
-Stellarium adhere to the standards described above and in the following
-sections. Sky cultures will also see continuous development in the
-coming versions. If you add a new sky culture, please adhere to this
-description for an optimal result!
+Stellarium adhere to the standards described in the following
+sections. Incomplete skycultures may be improved, or removed when found too deficient.
 
 
-In the Stellarium program folder you can see a folder
-\file{skycultures}. Let us assume you work on Windows and want to create a
-new sky culture, say, \emph{myCulture}.
+
+A \indexterm{sky culture} in Stellarium is the entity that consists of 
+\begin{itemize}
+\item a description of the role these constellations and other celestial features (clouds, polar lights (aurorae), meteors, comets, \ldots) 
+      had or still have for the human culture that used or use these constellations, including some relevant background on the culture.
+\item a set of names for constellations 
+\item stick figure definitions connecting stars into those constellations
+\item (optional) a list of names for individual stars
+\item (optional) artwork supporting the stick figures
+\item (optional) a description of boundaries or borders between the constellations
+\item (optional) names and stick figure definitions of additional figures of lesser importance, termed \indexterm{asterisms}.
+\item A CC-licence that the author of the SC chooses; this is valid for the entire set of files, i.e. all texts and images provided.
+\end{itemize}
+
+
+
+
+\iffalse
+
 
 You can take the \file{inuit} directory as template to start with. Just copy the folder 
 \file{C:\textbackslash{}Program Files\textbackslash{}Stellarium\textbackslash{}skycultures\textbackslash{}inuit} to
@@ -46,73 +54,84 @@ You can take the \file{inuit} directory as template to start with. Just copy the
 
 In the folder you see image files for the constellation artwork, and all
 other files with various extensions are text files. 
+\fi
 
 
-\section{Basic Information}
-\label{sec:skycultures:info.ini}
+\section{Text description}
+\label{sec:skycultures:description}
+\label{SC:description.md}
 
 
-In \file{myculture\textbackslash{}info.ini}, change the entries to 
+A sky culture must contain the file \file{description.md}, this is a text in \program{Markdown} format. 
+Markdown is a plaintext format which allows the simple declaration of text regions like sections, subsections, lists, images, or references. 
+The file is automatically broken into pieces, translated and converted to HTML for display. Also some important skyculture components are extracted from here.
+
+The first line of the file starts with the only Level 1 header, 
+i.e., a line starting with a single hash (\texttt{\#}), 
+a space and then the \emph{name} of the skyculture. 
+This name is used in the selection list in the Sky Culture GUI (see \ref{sec:gui:view:skyculture}). 
+ 
+The other sections typically start with Level 2 or 3 headers (with two or three hash characters) which are displayed as smaller section and 
+subsection titles (HTML: \texttt{h2} or \texttt{h3}, respectively).  
+
+The continuous text should be formatted like that, please do not add newlines where they do not signal the end of a paragraph with an empty line. 
+Use an editor which just auto-wraps long lines to the window width. 
+These long lines/paragraphs are automatically fed into the translation system. References (see \ref{SC:references}) should be given like \texttt{[\#42]}.
+ 
+You can also have embedded images in the file (your book cover?
+Views of sacred landscapes/buildings/artwork/\ldots?), just provide them in 
+PNG or JPG format please. 
+
+You should provide a good description in the interest of future users:
+some cultural/ethnographical background of the users of this sky culture,
+history of sky culture research that provided this work, tables of names/translations,
+links to external resources, whatever seems suitable.  The length of the description texts is not limited.
+
+The skyculture description should include the following Level 2 sections. Any other section must be a subsection (i.e. Level 3 or deeper) of one of these sections. Each of these sections will have its own entry in the translations files.
+
+\begin{description}
+\item \texttt{Introduction} -- a summary that could ideally be shown on a small screen entirely.
+\item \texttt{Description} -- the actual text of the description.
+\item \texttt{Constellations} -- a sequence of Level 5 sections, where the header names a constellation, and the contents gives some information on it.
+\item \texttt{References} -- a list of references, see \ref{SC:references} for details.
+\item \texttt{Authors} -- all authors and acknowledgments go here.
+\item \texttt{License} -- either a license id (see \ref{SC:license}), or a sequence of lines separated by empty lines (i.e. Markdown paragraphs) describing which part of the culture has which license, in the format "Sky culture item: License-ID".
+\end{description}
+
+To allow the correct display of special characters like ÄÖÜßáé you must provide the file in UTF-8 encoding. 
+If you write only English/ASCII, this may not be relevant.
+
+
+\subsection{References}
+\label{sec:skycultures:references}
+\label{SC:references}
+
+The optional Level 2 section ``References'' contains a list of information sources. 
+Each line of the section contains one record of 2 discernible fields: 
+a hyphen followed by a numerical key in brackets, 
+a colon and then the actual description of the reference. The latter may include hyperlinks,
+ e.g.:
+
 \begin{configfile}[\scriptsize]
-[info]
-name=myCulture
-author=me
-credits=my institute (optional)
-boundaries=none
-classification=personal
-license=CC BY-SA 4.0 International Public License
-region=Western Europe
+ - [#1]: Kunitzsch, P.; Smart T. (2006). "A Dictionary of Modern star Names: ...
 \end{configfile}
 
-\noindent (or what seems best for you). The \texttt{name} is used for the list entry in
-the Starlore tab in the View dialog (see \ref{sec:gui:view:starlore}). \texttt{author} should be the actual author(s)' name(s). 
-The optional \texttt{credits} \newFeature{0.22.2} can be used to mention other involved parties. 
+This list is most important for ``traditional'' sky cultures collected from various sources to provide traceable references. 
 
-\subsection{Boundaries}
-The option ``boundaries'' is optional and may contain the following values:
-\begin{description}
-\item[none] --- (default) designates that this culture doesn't have constellation boundaries.
-\item[iau] --- use this value for variants of ``modern'' sky cultures to enable use of IAU boundaries.
-\item[own] --- used for cultures which have their own set of constellation boundaries.
-\end{description}
+\paragraph{Caution!} These reference numbers are not only used in the text, but also in the data description. If you re-arrange references, 
+you must also fix all affected references in the JSON file (\ref{SC:index.json}).
 
-\subsection{Classification}
-The option ``classification'' is also optional. \newFeature{0.19.0} It allows some form of quality control:
-\begin{description}
-  \item[personal] -- this is a personally developed sky culture which
-    is not founded in published historical or ethnological research. Stellarium
-    may include it when it is ``pretty enough'' without really
-    approving its contents.
-  \item[traditional] -- (default value) content represents ``common'' knowledge by
-    several members of an ethnic community, and the sky culture has
-    been developed by members of such community. Our ``Modern''
-    sky culture is a key example: it has evolved for about 2500 years in the ``western'' world,
-    and modern astronomers use it.
-  \item[ethnographic] -- provided by ethnographic researchers based on
-    interviews of indigenous people.
-  \item[historical] -- based on historical written sources from a
-    (usually short) period of the past.
-  \item[single] -- represents a single source like a historical atlas,
-    or publications of a single author.
-  \item[comparative] -- special-purpose compositions \newFeature{0.21.2} of e.g.\ artwork
-    from one and stick figures from another sky culture, and optionally
-    asterisms as representations of a third. Or comparison of two
-    stick figure sets in constellations and asterisms. These figures
-    sometimes will appear not to fit together well. This may be
-    intended, to explain and highlight just those differences! The
-    description text must clearly explain and identify all sources and
-    how these differences should be interpreted.
-\end{description}
 
 \subsection{License}
 \label{sec:skycultures:licenses}
-The option ``license'' \newFeature{0.22.2} is technically optional
-(for backward compatibility; it defaults to ``unknown''), but we
-highly recommend to define it for your sky culture, and it is
-mandatory if you want your sky culture to be distributed with
+\label{SC:license}
+
+The level 2 section ``License''  is mandatory if you want your sky culture to be distributed with
 Stellarium to prevent ``unexpected'' distribution of your content to other
-software or applications out of our hands.  The license info will be decoded for human
-readable hints about allowed permissions for sky culture in the GUI.
+software or applications out of our hands.  
+\iffalse
+The license info will be decoded for human readable hints about allowed permissions for sky culture in the GUI.
+\fi
 
 We recommend to use one of the following possible licenses in this section: 
 \begin{description}
@@ -155,21 +174,79 @@ material you create, to meets the Freedom Defined definition of a
 If you have used one of the keys above in your \texttt{license} entry,
 a short (unofficial!  Informative only) description of license
 conditions will be displayed. You can use other licenses as well, but
-please describe the conditions sufficiently well in a dedicated
-\texttt{h2} section close to the end of your
-\file{description.en.utf8}.
+then please describe the conditions sufficiently well in this section.
+
 
 \paragraph{Caution for users!} While Stellarium is provided under the free GPL v2.0 licence which allows for commercial use,
 some of our sky cultures have been contributed under CC NC/ND licenses,
 i.e., are for noncommercial use only.  Please respect their heritage
-holders and check-out the CC licence version in the description before
+holders and check the CC licence version in the description before
 you use sky cultures in public events like TV documentaries, YouTube
 videos, lectures, planetarium shows or printed matter. If in doubt,
 contact the respective authors.
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Technical data: index.json}
+\label{sec:skycultures:index.json}
+\label{SC:index.json}
+
+%% JSON tag. (tag exists)
+\newcommand{\jtag}[1]{\texttt{"#1"}}
+
+
+The file \file{index.json} contains all ``technical data'' of the skyculture. 
+JSON is a text-based format in which strings, numerical values and arrays can be stored in nested \emph{dictionaries}, 
+i.e. unordered collections of comma-separated \texttt{"tag": value} pairs in braces: \texttt{\{ "Tag1": "Value1", "number": 123.456 \}}. 
+Values can be strings, numbers, arrays or other dictionaries. Arrays are ordered sequences in \texttt{[...]} delimiters.  
+You must take care to close any open brackets and separate entries by commas. 
+
+
+\begin{jsonfile}[\scriptsize]
+{
+  "id": "modern",
+  "region": "World",
+  "classification": ["traditional"],
+  "fallback_to_international_names": false,
+  "asterisms": [ ... ],
+  "constellations": [ ... ],
+  "edges_type": "iau",
+  "edges_source": "https://pbarbier.com/constellations/edges_18.txt",
+  "edges_epoch": "B1875",
+  "edges": [ ... ],
+  "common_names": { ... }
+}
+\end{jsonfile}
+
+in which
+\begin{description}
+\item[\jtag{id}] A unique identifier for program-internal use. It is never displayed to users. 
+\item[\jtag{region}] See \ref{SC:region}
+\item[\jtag{classification}] See \ref{SC:classification}
+\item[\jtag{fallback\_to\_international\_names}] if \texttt{true}, the IAU-approved star names are loaded after all names given here, 
+so names will be mixed without a clear separation, and newly-approved star names will just appear automatically. 
+Also all DSO names from \file{nebulae/default/names.dat} are loaded.
+This is most useful for skycultures which have no names of their own, or where such mix is intended, 
+like \jtag{personal} contemporary skycultures (see ~\ref{SC:classification}) which are allowed to auto-adapt to newly given names. 
+% These are used by a related project. We can safely ignore them.
+%\item[\jtag{thumbnail}] ignored
+%\item[\jtag{thumbnail\_bscale}] ignored
+%\item[\jtag{highlight}] ignored
+\item[\jtag{common\_names}] includes names for star, planet and deep-sky objects, see \ref{SC:common_names}
+\item[\jtag{constellations}] describes constellations, see \ref{SC:constellations}
+\item[\jtag{edges\ldots}] describes boundaries between constellations, see \ref{SC:boundaries}
+\item[\jtag{asterisms}]  describes asterisms, see \ref{SC:asterisms}
+\end{description}
+
+Tags not described here may be used in other programs but are ignored by Stellarium.
+
 \subsection{Region}
 \label{sec:skycultures:region}
-The option ``region'' is also optional and marks the origin region of the respective sky culture. \newFeature{1.2}
+\label{SC:region}
+
+The ``region'' tag marks the origin region of the respective sky culture.
 It allows some form of additional grouping. The names of regions are following the United Nations
 geoscheme UN~M49\footnote{Standard country or area codes for statistical use (M49) -- \url{https://unstats.un.org/unsd/methodology/m49/}}:
 \begin{description}
@@ -249,179 +326,194 @@ geoscheme UN~M49\footnote{Standard country or area codes for statistical use (M4
 	\label{fig:skycultures:OceaniaRegions}
 \end{figure}
 
-\section{Sky culture Description Files}
-\label{sec:skycultures:description}
 
 
-In order to have translated texts, Stellarium uses files
-\file{description.<LANG>.utf8}, where \file{<LANG>} is the two-letter
-ISO~639-1 language code, or its extension which contains language and
-country code, like \file{pt\_BR} for Brazilian Portuguese. A minimum
-sky culture must contain the file \file{description.en.utf8}, this is
-\texttt{en=English} text with HTML tags for sections, tables,
-etc. You can also have embedded images in the HTML (your book cover?
-Views of sacred landscapes/buildings/artwork/\ldots?), just make them
-PNG or JPG format please. The length of the description texts is not limited.
-You should provide a good description in the interest of future users:
-some cultural/ethnographical background of the users of this sky culture,
-history of sky culture research that provided this work, tables of names/translations,
-links to external resources, whatever seems suitable. When you started
-from a copied sky culture, delete the other \file{description.*.utf8}
-files.
+\subsection{Classification}
+\label{SC:classification}
 
-If you can provide other languages supported by Stellarium, you can
-provide translations yourself, else Stellarium translators \emph{may}
-translate the English version for you. (It may take years though.) The file
-ending \file{.utf8} indicates that for special characters like ÄÖÜßáé
-you should use UTF-8 encoding. If you write only English/ASCII, this may not
-be relevant.
+The tag ``classification'' allows describing the origin and intended use of this skyculture:
+\begin{description}
+  \item[personal] -- this is a personally developed sky culture which
+    is not founded in published historical or ethnological research. Stellarium
+    may include it when it is ``pretty enough'' without really
+    approving its contents.
+  \item[traditional] -- (default value) content represents ``common'' knowledge by
+    several members of an ethnic community, and the sky culture has
+    been developed by members of such community. Our ``Modern''
+    sky culture is a key example: rooted in antiquity it has evolved for about 2500 years in what is now commonly known as ``western'' world,
+    and modern astronomers use it.
+  \item[ethnographic] -- provided by ethnographic researchers based on
+    interviews of indigenous people.
+  \item[historical] -- based on historical written sources from a
+    (usually short) period of the past.
+  \item[single] -- represents a single source like a historical atlas,
+    or related publications of a single author.
+  \item[comparative] -- special-purpose compositions \newFeature{0.21.2} of e.g.\ artwork
+    from one and stick figures from another sky culture, and optionally
+    asterisms as representations of a third. Or comparison of two
+    stick figure sets in constellations and asterisms. These figures
+    sometimes will appear not to fit together well. This may be
+    intended, to explain and highlight just those differences! The
+    description text must clearly explain and identify all sources and
+    how these differences should be interpreted.
+\end{description}
 
-\section{Proper Names}
-\label{sec:skycultures:names}
 
-\subsection{Constellation Names}
+\subsection{Constellation boundaries}
+\label{SC:boundaries}
+\label{SC:edges}
+
+
+In the late 18th century, when variable stars started to be catalogued by a code that included the star's constellation, 
+a necessity arose to define which sky region belonged to which constellation. 
+Atlases of this period showed curved boundaries between the constellations. 
+Such boundaries are hard to describe by coordinates, though. The Uranographia Argentina proposed a different approach.
+The boundaries were described by straight segments along great circles of equal right ascension and small circles of equal declination. 
+The atlas used coordinates for epoch B1875.0. 
+In 1930 the International Astronomical Union (IAU) ratified  this partition of the sky into the 88 constellations used by scientists and amateurs ever since.
+When looking at these boundaries in J2000.0 coordinates, we can see they are no longer parallel to the J2000.0 coordinate grid, the deviation caused by precession. 
+
+Partitions of the full sky into contiguous regions defined by edges between coordinate vertices defined in  
+equatorial coordinates at a certain  epoch can be described in the following elements of the \file{index.json}:
+
+\begin{jsonfile}[\scriptsize]
+  "edges_type": "iau",
+  "edges_source": "https://pbarbier.com/constellations/edges_18.txt",
+  "edges_epoch": "B1875",
+  "edges": [
+    "001:002 M+ 22:52:00 +34:30:00 22:52:00 +52:30:00 AND LAC",
+    "002:003 P+ 22:52:00 +52:30:00 23:20:00 +52:30:00 AND CAS",
+    "004:005 P+ 23:20:00 +50:00:00 23:35:00 +50:00:00 AND CAS",
+	...
+	]
+\end{jsonfile}
+
+
+where
+\begin{description}
+\item[\jtag{edges\_type}] is optional and may contain the following values:
+  \begin{description}
+  \item[\texttt{"none"}] --- (default) designates that this culture doesn't have constellation boundaries, and any \texttt{edges} entry is ignored.
+  \item[\texttt{"iau"}] --- use this value for variants of ``modern'' sky cultures to declare use of IAU boundaries.
+  \item[\texttt{"own"}] --- used for cultures which have their own set of constellation boundaries.
+  \end{description}
+
+\item[\jtag{edges\_source}] is optional and only given for reference. It is not evaluated.
+
+\item[\jtag{edges\_epoch}] describes the coordinate epoch. Allowed values: 
+  \begin{description}
+  \item[\texttt{"J2000"}] (default)
+  \item[\texttt{"B1875"}] used for the edge list defining the IAU borders.
+  \item[\texttt{"Byyyy.y"}] (a number with \texttt{B} prepended) Arbitrary epoch as Besselian year.
+  \item[\texttt{"Jyyyy.y"}] (a number with \texttt{J} prepended) Arbitrary epoch as Julian year.
+  \item[\texttt{"JDddddddd.ddd"}] (a number with \texttt{JD} prepended) Arbitrary epoch as Julian Day number.
+  \item[\texttt{"ddddddd.ddd"}] (a pure number) Arbitrary epoch as Julian Day number.
+  \end{description}
+\end{description}
+
+The lines in the array ``edges'' were taken from the given reference. The first component is ignored. 
+The next element provides information whether the segment runs along a meridian (\texttt{M}, right ascension) or 
+parallel (\texttt{P}, declination) circle in ascending \texttt{+} or descending \texttt{-} sense.  
+Then it provides $\alpha_1$, $\delta_1$, $\alpha_2$, $\delta_2$ in sexagesimal numbers ($\alpha$ in HH:MM:SS, $\delta$ in DD:MM:SS format)
+and the uppercased constellation abbreviations. As described in the original source file, 
+Serpens has been split into \texttt{SER1} and \texttt{SER2}, these tags are treated both as \texttt{SER}.
+
+These edges are used to define isolated boundaries for each constellation (for proper working of the \menu{Select single constellation} option). 
+
+
+
+\subsection{Constellations}
 \label{sec:skycultures:constellations}
+\label{SC:constellations}
 
-The native constellations are listed in
-\file{constellation\_names.eng.fab}. It consists of 3 simple columns:
-Abbreviation (or just a serial number), native name, and English
-translation. The writing \texttt{\_("name")} allows automatic
-translation of the English strings to other languages. These strings
-will be used as constellation labels.
+Constellations are coded as array of dictionaries:
 
+\begin{jsonfile}[\scriptsize]
+"constellations": [
+    {
+      "id": "CON modern Aql",
+      "lines": [[98036, 97649, 97278], [97649, 95501, 97804], [99473, 97804], 
+				[95501, 93747, 93244], [95501, 93805]],
+      "image": {
+        "file": "illustrations/aquila.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [163, 232], "hip": 97649},
+          {"pos": [385, 131], "hip": 93244},
+          {"pos": [397, 397], "hip": 93805}
+        ]
+      },
+      "common_name": {"english": "Aquila", "native": "Aquila"}
+    }, ... 
+], ...
+\end{jsonfile}
+
+where
+
+\begin{description}
+\item[\jtag{id}] A unique figure identifier, consisting of \texttt{CON} (for constellations), skyculture id, and a short label still unique within the skyculture.
+                 For IAU-based skycultures, these short labels must be the IAU standard labels. For others, you can invent your own. It is not necessary to have exactly
+                 3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended:  
+				 the short label is displayed when setting Constellation name style to ``short'' (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
+				 certain abbreviations from being displayed, let them start with a dot. See the effect in the \file{Modern (H.A.Rey)} sky culture: In
+				 \menu{Abbreviated} mode, only the official abbreviations are displayed.
+				 
+				 
+\item[\jtag{lines}] an array of arrays, each describing a polygon with star numbers. The star numbers are usually the Hipparcos (HIP) numbers. 
+                    For very dim stars, the longer numbers from the Gaia DR3 catalog are acceptable, but they must be written as string.
+					
+					\emph{Single-star constellations}\newFeature{25.1}  or particular highlights can be described with just one star repeated in a two-element segment,
+					the respective star will be encircled with a radius of \jtag{single\_star\_radius}.
+					
+					To describe \indexterm{dark constellations}\newFeature{25.2} formed from dust clouds in the Milky Way or other non-stellar items, 
+					another variant can use coordinate lists and is technically an array of arrays of 2-part arrays of float numbers, 
+					each pair being right ascension $\alpha$ (decimal hours) and declination $\delta$ (decimal degrees) in equinox J2000.0. 
+\item[\jtag{single\_star\_radius}] (float, default 0.5)\newFeature{25.1}  radius of a circle (degrees) marking single-star segments in \jtag{lines}.
+\item[\jtag{image}] Optional, see \ref{SC:image}
+\item[\jtag{common\_name}] Dictionary of names. Required entries: \jtag{english}. Optional: \jtag{native}
+
+	These names are used in the Constellation name style settings (s.~\ref{sec:gui:view:skyculture}): In \menu{Native} mode, the native element is shown. 
+	Only with setting \menu{Translated}, the text translated from the english element is shown. If your sky culture is a variant of the \file{Modern}
+	sky culture, please use the canonical Latin names, they have all been translated already.
+
+	If your sky culture is not a variant of the generally known \file{Modern} (western)
+	sky culture, please provide an English translation in addition to the name given in
+	the native language. Else translators will not be able to translate
+	the name. 
+
+\item[\jtag{visibility}] (optional) special cases for rule-based visibility, e.g. seasonally changing aspects of figures. 
+	Currently only a \jtag{months} rule has been defined. 
+	Its ``payload'' is an array of two integers, start and end of visibility in months, e.g:
+
+	\begin{jsonfile}
+"visibility": {"months": [6, 3]},
+	\end{jsonfile}
+%
+This specifies that the afflicted constellation is visible only from June to March. 
+A second entry of the same constellation (with possibly different lines, artwork, or even name) 
+that would be visible from April to May, would be specified as:
+\begin{jsonfile}
+"visibility": {"months": [4, 5]},
+\end{jsonfile}
+\end{description}
+
+
+
+
+
+
+
+\iffalse REFERENCE?
 You can \newFeature{0.19.2} add a reference comment after each
 3-column entry. Just add a white-space, and then a comma-separated list
 of numerical references to the books listed in \file{reference.fab}.
+\fi
 
-The first column (abbreviation) in the Modern sky culture provides
-the canonical 3-letter abbreviation for constellations as used by the
-International Astronomical Union. Such abbreviations may not be
-available for the sky culture you are working with, so you must invent
-your own. These abbreviations are used as keys in the other files, so
-they must be unique within your sky culture. It is not necessary to have
-3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended. 
 
-The keys can be displayed on screen when labels are requested in the
-Starlore GUI (section~\ref{sec:gui:view:starlore}). If you want to prevent
-certain abbreviations from being displayed, let them start with a
-dot. See the effect in the \file{Modern (H.A.Rey)} sky culture: In
-\menu{Abbreviated} mode, only the official abbreviations are
-displayed. In \menu{Native} mode, the second column of
-\file{constellation\_names.eng.fab} is shown. Only with setting
-\menu{Translated}, the text translated from the text shown in the
-third column is shown. If your sky culture is a variant of the \file{Modern}
-sky culture, please use the canonical Latin names, they have all been translated already.
 
-If your sky culture is not a variant of the generally known \file{Modern} (western)
-sky culture, please include an English translation to the name given in
-the native language. Else translators will not be able to translate
-the name. See a good example in the \file{Mongolian} sky culture.
-
-\subsection{Star Names}
-\label{sec:skycultures:starnames}
-
-The file \file{star\_names.fab} contains a list of HIP catalog
-numbers and common names for those stars. Each line of the file
-contains one record of two fields (separated by the pipe character
-(\texttt{|})) or three fields (the first pair is separated by the 
-pipe character (\texttt{|}) and the last one separated by the space 
-character). The first field is the star's Hipparcos catalog number,
-the second is the common name of the star in a format that enables
-translation support, the third is an optional list of references (see \ref{sec:skycultures:references})  
-to the source of the information about this name, e.g:
-\begin{configfile}
-# Piscis Austrinus (PsA)
-113368|_("Fomalhaut") 1,2,6,11,12
-113368|_("Thalim")
-\end{configfile}
-
-In the sample you can see 3 lines: the first line is a comment, the 
-second line has 3 fields and the third line has 2 fields. Both lines 
-with data have the same Hipparcos number of the star: \textit{Fomalhaut} is 
-the well-known name of HIP 113368, and \textit{Thalim} is an additional 
-(not well-known) name of this star for which a source reference is unfortunately missing.
-
-\subsection{Planet Names}
-\label{sec:skycultures:planetnames}
-
-The file \file{planet\_names.fab} contains a list of native names of
-the planets. Each line of the file contains one record of 3 fields,
-separated by the white space or tab character. The first field is the
-English name of the planet, the second is the native name of the
-planet (can be in the native language, but please for maximum
-utability use an English transliteration) and the third is the
-translatable version of the native name of the planet (translated into
-English). Here is an example from the \file{Egyptian} sky culture:
-
-\begin{configfile}
-Mars	"Horus-Desher"	_("Red Horus")
-\end{configfile}
-
-\subsection{Deep-Sky Objects Names}
-\label{sec:skycultures:dsonames}
-
-\noindent\newFeature{0.15.1}The file \file{dso\_names.fab} contains a list of native names for
-deep-sky objects (DSO). The format of this file is similar to the 
-\file{star\_names.fab} format (see \ref{sec:skycultures:starnames}).
-Each line of the file contains one record of two fields (separated 
-by the pipe character (\texttt{|})) or three fields (first pair is 
-separated by the pipe character (\texttt{|}) and the last one separated 
-by the space character). The first field is an identifier of the
-deep-sky object, the second is the native name of the DSO in a 
-format that enables translation support, the optional third is a  
-list of references (see \ref{sec:skycultures:references}) to the source 
-of the information about this name, e.g.:
-\begin{configfile}
-PGC 17223|_("Native name for LMC") 1,2,3
-NGC 292  |_("Native name for SMC") 1,3
-NGC 292  |_("Small Magellanic Cloud")
-\end{configfile}
-
-\section{Stick Figures}
-\label{sec:skycultures:stickfigures}
-
-The modern-style stick figures are coded in \file{constellationship.fab}\footnote{%
-  To clarify some apparent misunderstanding of the name: this is not a new word
-  coined with -ship as in ``friendship'', but simply constellations encoded in HIPparcos numbers.}.
-Lines look like:
-
-\begin{configfile}
-Abbr pairs pair1_star1 pair1_star2 pair2_star1 pair2_star2 ...
-\end{configfile}
-In this file,
-\begin{description}
-\item[Abbr] is the abbreviation defined in \file{constellation\_names.eng.fab}
-\item[pairs] is the number of line pairs which follow.
-\item[pairN\_starA] Hipparcos numbers for the stars which form the
-  constellation stick figure. We need two entries per line, longer
-  line segments are not supported. To find the HIP number, just have
-  Stellarium open and click on the star in Stellarium while editing
-  this file.
-\end{description}
-Anything after the last star number is currently ignored.
-Comments can be given in lines starting with \texttt{\#} signs. Empty lines are ignored.
-
-\section{Constellation Boundaries}
-\label{sec:skycultures:boundaries}
-
-An optional file\footnote{Please define \texttt{boundaries = own} in the file \file{info.ini} to enable using custom boundaries.} 
-\file{constellation\_boundaries.dat} can provide data for the boundary lines drawn between constellations. 
-The boundaries for the IAU constellations are defined in the file named \file{data/constellation\_boundaries.dat}.
-The format for this file is a bit more difficult than the other files. It contains sections which may consist of multiple lines, of the format:
-
-\begin{configfile}
-N RA_1 DE_1 RA_2 DE_2 ... RA_N DE_N 2 CON1 CON2
-\end{configfile}
-where
-\begin{description}
-\item[N] number of segments for boundary
-\item[RA\_n, DE\_n] right ascension (decimal hours) and declination (decimal degrees) of the points of segments in J2000 coordinates.
-\item[2 CON1 CON2] this data indicate ``border between 2 constellations CON1 and CON2''. 
-      They are used to define isolated boundaries for each constellation (for proper working of the \menu{Select single constellation} option). 
-\end{description}
-
-\section{Constellation Artwork}
+\subsubsection{Constellation Artwork}
 \label{sec:skycultures:artwork}
+\label{SC:image}
 
 Constellation artwork is optional, but may give your sky culture the
 final touch, if it requires artwork at all. E.g., H. A. Rey's variant
@@ -429,27 +521,25 @@ of the \file{Modern} sky culture deliberately does not contain artwork
 other than his new set of stick figures.
 
 Each constellation artwork is linked to 3 stars in its constellation. This
-is programmed in the file \file{constellationsart.fab}. It consists of lines
-
-\begin{configfile}
-  Abbr image_name.png x1 y1 HIP1 x2 y2 HIP2 x3 y3 HIP3
-\end{configfile}
-where 
+is programmed in the \jtag{image} dictionary. It contains entries
 \begin{description}
-\item[Abbr] is the abbreviation defined in \file{constellation\_names.eng.fab}
-\item[image\_name.png] is the file name of your texture. It should be
+\item[\jtag{file}] is the file name of your texture. All constellation artwork files should reside in a subdirectory \file{illustrations}. 
+  For best efficiency it should be
   sized in a power of two, like $512\times512$, $1024\times2048$
   etc. Avoid dimensions larger than 2048, they are not supported on
   all systems. Use as little border in your textures as possible instead.
   You can distort images to better exploit the pixels,
   the texture will be stretched back. The background of the artwork
   image must be absolutely black.
-\item[x\textit{n}, y\textit{n}, HIP\textit{n}] ($n\in[1, 2, 3]$) pixel locations of the
-  star in the constellation drawing (find those in any image editor)
-  and HIP\textit{n} is the star number in the Hipparcos catalog, which
-  you find when you click on the star in Stellarium.
+  \item[\jtag{size}] Image size (width, height) in pixels. This size specified here, and not the real image size, is relevant for the \jtag{anchors} entry. 
+  This may be important on very memory limited systems where you decide to downscale all textures.
+  \item[\jtag{anchors}] An array of three similar dicts with
+  \begin{description}
+  \item[\jtag{pos}] pixel addresses [x, y] given from upper left corner (find those in any image editor)
+  \item[\jtag{hip}] The star index as Hipparcos (HIP) number, given as integer. This may technically also be a Gaia DR3 number when given as string.
+  \end{description}
 \end{description}
-
+%
 In case the artwork is only available in a certain projection (e.g.,
 an all-sky map), or is otherwise heavily distorted so that the match
 is not satisfactory, you may have to re-project the image somehow. For
@@ -457,87 +547,229 @@ aligning, you should switch Stellarium to Stereographic projection for
 optimal results.
 
 You don't have to shutdown and restart Stellarium during
-creation/matching, just switch sky culture to something else and back
-to the new one to reload.
+creation/matching, you can just press \key{Ctrl+\Alt+I} to reload.
 
-\section{Seasonal Rules}
-\label{sec:skycultures:seasonal_rules}
 
-File \file{seasonal\_rules.fab} (optional) contains possible seasonal rules for
-the visibility of constellations. There is one rule per line. Each
-rule contains three elements separated with white space (or tab
-character): constellation ID, start of visibility (month) and end of
-visibility (month), e.g:
-
-\begin{configfile}
-  Emu 6 3
-\end{configfile}
-
-\noindent This specifies that constellation Emu (abbreviated also as ``Emu'') is
-visible only from June to March.
-%% TODO: This feature may need rework. Where is it used?
-
-\section{References}
-\label{sec:skycultures:references}
-
-\noindent\newFeature{0.15.1}The file \file{reference.fab} contains a list of information sources. 
-Each line of the file contains one record of 3 fields,
-separated by the pipe character (\texttt{|}) --- number of source, 
-description of source and optional URL, e.g.:
-
-\begin{configfile}
-9|Kruger 60|https://en.wikipedia.org/wiki/Kruger_60
-\end{configfile}
-
-This file will be used in future versions. It is most important for ``traditional'' 
-sky cultures collected from various sources to provide traceable references. 
-
-\section{Asterisms and help rays}
+\subsection{Asterisms and help rays}
 \label{sec:skycultures:asterisms}
+\label{SC:asterisms}
 
-\noindent\newFeature{0.16.1}Sometimes there is a need to extract some part of a 
-constellation into a figure in its own right, or to merge parts from different 
-constellations into one big figure --- e.g. ``Big Dipper'' as part of Ursa Major or the 
+Sometimes auxiliary figures were created for easier orientation. Some part of a 
+constellation was redefined into a figure in its own right, or  parts from different 
+constellations were merged into one big figure --- e.g. ``Big Dipper'' as part of Ursa Major or the 
 ``Summer Triangle'' consisting of 3 stars from the constellations Cygnus, Lyra and Aquila. 
 After the codification of the official 88 constellations by the IAU, those additional figures
-are called \indexterm{asterisms}.\footnote{In a more generalized context when describing the sky of
-  other cultures, the distinction may be less strict.}
+are generally called \indexterm{asterisms}. \footnote{In a more generalized context when describing the sky of
+  other cultures, the distinction may be less strict, and the term ``asterism'' may even be used 
+  for the ``primary figures'' observed by those cultures.}
 
-Other simple figures might be used as navigation helpers: the \indexterm{help rays}. 
+Other simple figures might be used as navigation and orientation helpers: the \indexterm{help rays}. 
 As example to help in orientation in the sky the additional lines between constellations 
 Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help rays are listed in
-\file{asterism\_names.eng.fab}. This file consists of 2 simple columns:
-Abbreviation (or just a serial number) and English
-name of asterism. The writing \texttt{\_("name", "asterism")} allows automatic, context sensitive
-translation of the English strings to other languages. These strings
-will be used as asterisms labels. In addition, after a hash mark (\texttt{\#}) marking a comment sign, 
-some reference information can be added in comment lines, like ``List found at \ldots''.
-Also, you can \newFeature{0.19.2} again add a reference comment after each
-2-column entry. Just add a white-space, and then a comma-separated list
-of numerical references to the books listed in \file{reference.fab}.
-Collecting sources and giving such references 
-is always a good idea. Some later versions of Stellarium may use and display this information.
+\jtag{asterisms} which is similar to the \jtag{constellations} dict, but has no \jtag{figures} entry:
 
-The stick figures of asterisms are coded in \file{asterism\_lines.fab}
-which looks similar to the entries for the constellation
-figures. Lines look like:
+\begin{jsonfile}[\scriptsize]
+"asterisms": [
+    {
+      "id": "AST modern HeG",
+      "common_name": {"english": "Heavenly G", "references": [30,32]},
+      "lines": [[21421, 24608, 36850, 37826, 37279, 32349, 24436, 25336, 27989]]
+    }, ...
+]
+\end{jsonfile}
 
-\begin{configfile}[\scriptsize]
-Abbr type pairs pair1_star1 pair1_star2 pair2_star1 pair2_star2 ...
-\end{configfile}
-or
-\begin{configfile}[\scriptsize]
-Abbr 2 pairs pair1_RA1 pair1_DE1 pair1_RA2 pair1_DE2 pair2_RA1 ...
-\end{configfile}
-In this file,
 \begin{description}
-\item[Abbr] is the abbreviation defined in \file{asterism\_names.eng.fab}
-\item[type] is the type of line. Use 1 or 2 to define an asterism and 0 for the help rays (0 and 1 uses HIP numbers, and 2 uses coordinates).
-\item[pairs] is the number of line pairs which follow.
-\item[pairN\_starA] Hipparcos numbers for the stars which form the asterism/help ray stick figure (similar to constellations),
-  or equatorial coordinates for epoch J2000.0 of the stars (decimal hours for right ascension and decimal degrees for declination).
-  The help rays are actually a special form of asterisms in Stellarium. 
+\item[\jtag{id}] A unique asterism identifier, consisting of \texttt{AST} (for asterism), skyculture id, and a short label still unique within the skyculture.
+                 It is not necessary to have exactly 3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended:  
+				 the short label is displayed when setting Constellation name style to ``short'' (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
+				 certain abbreviations from being displayed at all, let them start with a dot. 				 
+\item[\jtag{common\_name}] Another dict with entries \jtag{english} (the translatable english name), 
+				and an optional array \jtag{references} which lists from which sources (from \ref{SC:references}) this asterism was taken. 
+				Collecting sources and giving such references is always a good idea. This entry may be used in later versions of Stellarium.
+\item[\jtag{is\_ray\_helper}] (optional, default=\texttt{false}). 
+                Set to \texttt{true} to declare this asterism as ``ray helper'' which is shown in a different color and without label. 
+\item[\jtag{lines}] an array of arrays, each describing a polygon with integer star numbers. The star numbers are usually the Hipparcos (HIP) numbers. 
+                    For the very dim stars of telescopic asterisms, the longer numbers from the Gaia DR3 catalog are acceptable, but they must be written as string.
+					Another variant can use coordinate lists and is technically an array of arrays of 2-part arrays of float numbers, 
+					each pair being right ascension $\alpha$ (decimal hours) and declination $\delta$ (decimal degrees) in equinox J2000.0. 
+
+					\emph{Single-star asterisms} \newFeature{25.1} can be described with a two-element array that repeats the first entry (star or coordinate pair)
+					-- the respective star/coordinate will be encircled with a radius of \jtag{single\_star\_radius}.
+\item[\jtag{single\_star\_radius}] (float, default 0.5)\newFeature{25.1}  radius of a circle (degrees) marking single-star segments in \jtag{lines}.
 \end{description}
+
+
+
+
+
+
+
+\subsection{Names of Stars, Planets and Nonstellar Objects}
+\label{sec:skycultures:starnames}
+\label{SC:common_names}
+
+Many cultures have defined their own names for stars, planets and even a few deep-sky objects bright enough to be seen with the unaided eye. 
+The \jtag{common\_names} dict in a skyculture file \file{index.json} contains entries of arrays tagged with HIP catalog numbers or other names.
+
+As example, we show a part of the Samoan skyculture:
+\begin{jsonfile}[\scriptsize]
+  "common_names": {
+    "HIP 32349": [{"english": "Gliding Star", "native": "%(*Fētūsolonuʻu*)"}],
+    "HIP 68702": [{"english": "Mea", "native": "Mea"}],
+    "HIP 71683": [{"english": "Filo", "native": "Filo"}],
+    "M45": [{"english": "Face of %(*Liʻi*)", "native": "%(*Matāliʻi*)"}],
+    "NGC2055": [{"english": "Pale Cloud", "native": "Aotea"}],
+    "NGC292": [{"english": "Flying Cloud", "native": "Aolele"}],
+    "NGC6093": [{"english": "Pae"}],
+    "NGC6121": [{"english": "Suga"}],
+    "NAME Earth": [{"english": "Earth", "native": "Lalolagi"}],
+    "NAME Jupiter": [{"english": "Undying Mystery", "native": "%(*Tupualēgase*)"}],
+    "NAME Mars": [{"english": "Reddish Face/Surface", "native": "Matamemea"}],
+    "NAME Mercury": [{"english": "Brownish", "native": "Ta'elo"}],
+    "NAME Moon": [{"english": "Moon", "native": "%(*Māsina*)"}],
+    "NAME Saturn": [{"english": "Garland Star", "native": "%(*Fētūʻāsoa*)"}],
+    "NAME Sun": [{"english": "Sun", "native": "%(*Lā*)"}],
+    "NAME Venus": [{"english": "Morning Star / Forbidden Radiance", "native": "Tapu'itea"}]
+  }
+\end{jsonfile}
+
+\subsubsection{Star names}
+
+
+The Keys for stars generally start with \jtag{HIP }. 
+The associated array contains again dicts providing english spellings of the star names 
+and \jtag{references} (optional but highly recommended) which indicates 
+in which sources (see \ref{SC:references}) these star names or particular spellings occur.
+Currently this has only documentary value for skyculture authors and researchers, but may become useful in later versions of Stellarium.
+The \jtag{english} name will be translated. An additional \jtag{native} entry can be given, 
+which is the culture-native version of the spelling 
+(also in language-specific glyphs when available in UTF8 and the current font) and will never be translated but can be shown on screen if so configured.
+
+
+\begin{jsonfile}[\scriptsize]
+"common_names": {
+    "HIP 677": [{"english": "Alpheratz", "references": [1,2,5,6,11,12,37]},
+                {"english": "Sirrah", "references": [23,37]}],
+    "HIP 746": [{"english": "Caph", "references": [1,2,6,11,12,23,37]},
+                {"english": "Al Sanam al Nakah", "references": [37]}],
+	... }
+\end{jsonfile}
+
+When there is more than one name for a star, the first in the list is used as screen label. 
+% TODO
+% Alternatively, one of the dicts can have an optional tag \jtag{label}\texttt{: true}, in which case this string (or translation) 
+% is used as screen label if the star name setting is set to short. \newFeature{25.2}   
+% This can be used for more technical labels (star list numbers).
+
+
+\subsubsection{Planet Names}
+\label{sec:skycultures:planetnames}
+
+The  \jtag{common\_names} dict can also contain native names of the planets. 
+For these, the JSON key is formed from \jtag{NAME }, a space and the English name of the planet. 
+The value vector provides dicts which include 
+\begin{description}
+\item[\jtag{english}] (the translated name), 
+\item[\jtag{native}] (optional) native spelling, may be in native glyphs when supported by UTF8, 
+\item[\jtag{pronounce}] (optional) Native name in European glyphs, if needed. For Chinese, expect Pinyin here.
+%\item[\jtag{transliteration}] (optional) Scientific transliteration of the native name in European glyphs, if needed. For Tibetan, this is for Wylie.
+%\item[\jtag{IPA}] (optional) International Phonetic Alphabet.
+\item[\jtag{translators\_comments}] (optional) comments to be shown to translators on Transifex, 
+\item[\jtag{references}] (optional) the sources for these names where applicable.
+\end{description}
+
+Currently, if two \jtag{english} strings are given, the first is used as screen label. This may change as the features further evolve.
+
+In earlier versions it was recommended to combine the native name with an English translation. 
+In the new format here we should keep them separate, and the actual screen label can be combined from available components on the fly.\newFeature{25.2}
+However, for languages with non-European glyphs please add a widely used transliteration as pronounciation aid in the \jtag{pronounce} tag.
+% TODO: Shall we add an optional \jtag{transliteration} tag which could itself again be translatable?
+
+
+
+\subsection{Deep-Sky Objects Names}
+\label{sec:skycultures:dsonames}
+
+\jtag{common\_names} can also contain native names for
+deep-sky objects (DSO). The content  of the dicts is similar to the 
+format for planet names above. % (see \ref{sec:skycultures:planetnames}).
+Known tags are 
+\begin{description}
+\item[\jtag{english}] English meaning
+\item[\jtag{native}] (optional) Native name. May be in native glyphs when supported in UTF8.
+\item[\jtag{pronounce}] (optional) Native name in European glyphs, if needed. For Chinese, expect Pinyin here.
+%\item[\jtag{transliteration}] (optional) Scientific transliteration of the native name in European glyphs, if needed.
+%\item[\jtag{IPA}] (optional) International Phonetic Alphabet.
+\item[\jtag{translators\_comments}] (optional) English explanations that help in translation. Not displayed in the program.
+\item[\jtag{references}]  (optional) the sources for these names where applicable
+\end{description}
+
+
+
+\section{The Skyculture Converter}
+\label{ch:SkyCultures:converter}
+
+Many sky cultures have been created and maintained outside of Stellarium. They follow the old format, which is no longer supported since Stellarium version 25.1. 
+To ease the transition we have developed a converter tool. It is a console application that takes a path to the old-format sky culture directory, 
+and a path where to put the converted sky culture. 
+
+The converter is installed together with the program, but there is no menu entry for it. 
+On Windows, press the Windows key and type \texttt{cmd} to startup the command console. 
+
+Let us assume you have created a skyculture following the format used until version 24.4 and described in previous editions of this Guide, 
+and that this skyculture \texttt{mine} resides in the default user data directory on Windows (see \ref{sec:Directories} for other platforms). 
+First we rename the skyculture to indicate that it is old and outdated. Then we must call the converter in its absolute path name.
+
+ 
+Example command to run it:
+
+\begin{commands}[\footnotesize]
+cd c:\Users\<ME>\AppData\Roaming\skycultures
+move mine mine.old
+"c:\Program Files\stellarium\skyculture-converter" mine.old mine
+\end{commands}
+
+While the converter tries hard to convert the description text from HTML to Markdown adding some sections from other parts of the sky culture, the conversion may not be ideal. 
+Formerly the description was completely free in structure, while now there are some requirements on it, so the text may need some editing to conform.
+
+If you have \program{gettext} translation files (the ones whose names are in the form \file{locale-name.po}) for the names of stars, constellations etc., 
+you can pass the path to the directory that contains them as an optional third positional argument to the converter.
+
+Additionally, there are some options that you can use to control the conversion:
+
+\begin{description}
+\item[\texttt{-\/-footnotes-to-references}] Convert footnotes in a particular form to references. Such footnotes are expected to be in the form of
+\begin{htmlbit}
+<p id="footnote-9">This is a footnote</p>
+\end{htmlbit}
+while the references to them are expected to be in the form of
+\begin{htmlbit}
+<sup><a href="#footnote-9">[9]</a></sup>
+\end{htmlbit}
+\item[\texttt{-\/-untrans-names-are-native}] Put the names that in \file{star\_names.fab} or in 
+      \file{dso\_names.fab} are denoted without an underscore into the \jtag{native} section of the name, 
+      rather than \jtag{english}. For example, with this option \texttt{32349|("Fētūsolonuʻu")} would be 
+      used for the \jtag{native} name, while \texttt{32349|\_("Gliding Star")} would be used for the \jtag{english} tag.
+\item[\texttt{-\/-native-locale LOCALE}] In addition to files \file{star\_names.fab} or \file{dso\_names.fab}, 
+      some sky cultures have localized versions of them, like e.g. \file{star\_names.zh\_CN.fab}, 
+      that were never actually used but do contain useful information. If you pass the locale (\file{zh\_CN} in this example) 
+      as the \texttt{LOCALE} parameter, these names will be read and put into the \jtag{native} section of the corresponding JSON entry. 
+      Note that the order of stars/DSOs in the normal and localized files must be the same, otherwise there's no way to match the names.
+\item[\texttt{-\/-translated-md}] To check the look of the translated description texts you can use this option. 
+      The output directory will contain, in addition to \file{description.md}, files named like 
+      \file{description.es\_419.DO\_NOT\_COMMIT.md}, with the ``DO NOT COMMIT'' part reminding you that they are not a part of the sky culture.
+\end{description}
+
+\noindent After the run, read the notes and warnings, and adjust your text accordingly. 
+Make especially sure to prepare and adjust your old \file{description.en.utf8} for successful conversion.
+For example, it must start with an HTML header of level \texttt{<h1>} (the only such header in this file!) which is expected 
+to match the skyculture \texttt{name} given in the old \file{info.ini}. If in doubt, the latter will be used in the new files.
+
+Generally, clean HTML should be converted successfully. 
+Given the wide variety of writing styles, not every conversion may however work flawlessly, 
+and you may have to adjust the result, also in light of the new features. 
+To protect any changes you may have added after conversion, running the converter again needs a new target directory. 
+
 
 \section{Publish Your Work}
 \label{sec:skyculture:publish}
@@ -545,11 +777,11 @@ In this file,
 If you are willing to let other users enjoy the result of your hard
 work (and we certainly hope you do!), when you are done, please write
 a note in the Forum or at GitHub. We will decide about acceptability
-and classification, and may ask for better descriptions for the
+and classification, or may ask for better descriptions for the
 benefit of our users.
 
-Please be prepared to put the imagery and text
-under some compatible open-source license (Creative Commons).
+Please put the imagery and text
+under some compatible open-source license (see ~\ref{SC:license}).
 Else the sky culture cannot be hosted by us.
 While we cannot be held responsible for legal problems, it seems that
 CC BY 4.0 International\footnote{\url{https://creativecommons.org/licenses/by/4.0/}} or

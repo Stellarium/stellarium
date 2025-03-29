@@ -61,6 +61,7 @@
 #include <QGraphicsWidget>
 #include <QGraphicsGridLayout>
 #include <QClipboard>
+#include <QMimeData>
 #include <QPalette>
 #include <QColor>
 #include <QAction>
@@ -220,7 +221,7 @@ void StelGui::updateStelStyle()
 
 void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 {
-	qDebug() << "Creating GUI ...";
+	qInfo() << "Creating GUI ...";
 
 	StelGuiBase::init(atopLevelGraphicsWidget);
 	skyGui = new SkyGui(atopLevelGraphicsWidget);
@@ -491,7 +492,7 @@ void StelGui::setStelStyle(const QString& style)
 	QFile styleFile(qtStyleFileName);
 	if(styleFile.open(QIODevice::ReadOnly))
 	{
-		qDebug().noquote() << "Loading style file:" << styleFile.fileName();
+		qInfo().noquote() << "Loading style file:" << styleFile.fileName();
 		currentStelStyle.qtStyleSheet = styleFile.readAll();
 		styleFile.close();
 	}
@@ -1121,7 +1122,7 @@ void StelGui::setFlagShowHiPSButton(bool b)
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btHIPS-on.png");
 				QPixmap pxmapOff(":/graphicGui/btHIPS-off.png");
-				btShowHiPS = new StelButton(nullptr, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Hips_Surveys");
+				btShowHiPS = new StelButton(nullptr, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Hips_Surveys", false, "actionShow_Hips_Surveys_dialog");
 			}
 			getButtonBar()->addButton(btShowHiPS, "040-nebulaeGroup");
 		} else {
@@ -1529,7 +1530,12 @@ StelAction* StelGui::getAction(const QString& actionName) const
 
 void StelGui::copySelectedObjectInfo(void)
 {
-	QGuiApplication::clipboard()->setText(skyGui->infoPanel->getSelectedText());
+	const auto cb = QGuiApplication::clipboard();
+	const auto md = new QMimeData;
+	const auto colorRE = QRegularExpression(" color=\"?#[0-9a-f]+\"?");
+	md->setHtml(skyGui->infoPanel->getSelectedHTML().replace(colorRE, ""));
+	md->setText(skyGui->infoPanel->getSelectedText());
+	cb->setMimeData(md);
 }
 
 bool StelGui::getAstroCalcVisible() const

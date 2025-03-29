@@ -37,7 +37,8 @@ class QSettings;
 class QTimer;
 
 
-//! @class Cardinals manages the display of cardinal points
+//! @class Cardinals
+//! @brief Manages the display of cardinal points
 class Cardinals
 {
 	Q_GADGET
@@ -102,6 +103,9 @@ public:
 	bool getFlagShow16WCRLabels() const { return fader16WCR; }
 	void setFlagShow32WCRLabels(bool b) { fader32WCR = b; StelApp::immediateSave("viewing/flag_32wcr_points", b);}
 	bool getFlagShow32WCRLabels() const { return fader32WCR; }
+private:
+	void updateFontSizes();
+
 private:
 	class StelPropertyMgr* propMgr;
 	QFont font4WCR, font8WCR, font16WCR, font32WCR;
@@ -172,6 +176,10 @@ class LandscapeMgr : public StelModule
 		   READ getFlagAtmosphereMultipleScattering
 		   WRITE setFlagAtmosphereMultipleScattering
 		   NOTIFY flagAtmosphereMultipleScatteringChanged)
+	Q_PROPERTY(bool flagAtmospherePseudoMirror
+		   READ getFlagAtmospherePseudoMirror
+		   WRITE setFlagAtmospherePseudoMirror
+		   NOTIFY flagAtmospherePseudoMirrorChanged)
 	Q_PROPERTY(int atmosphereEclipseSimulationQuality
 		   READ getAtmosphereEclipseSimulationQuality
 		   WRITE setAtmosphereEclipseSimulationQuality
@@ -564,6 +572,9 @@ public slots:
 	bool getFlagAtmosphereMultipleScattering() const;
 	void setFlagAtmosphereMultipleScattering(bool enable);
 
+	bool getFlagAtmospherePseudoMirror() const;
+	void setFlagAtmospherePseudoMirror(bool enable);
+
 	int getAtmosphereEclipseSimulationQuality() const;
 	void setAtmosphereEclipseSimulationQuality(int quality);
 
@@ -715,6 +726,7 @@ signals:
 	void flagAtmosphereZeroOrderScatteringChanged(bool value);
 	void flagAtmosphereSingleScatteringChanged(bool value);
 	void flagAtmosphereMultipleScatteringChanged(bool value);
+	void flagAtmospherePseudoMirrorChanged(bool value);
 	void atmosphereEclipseSimulationQualityChanged(unsigned quality);
 	void atmosphereNoScatterChanged(const bool noScatter);
 	void cardinalPointsDisplayedChanged(const bool displayed);
@@ -880,6 +892,7 @@ private:
 	bool atmosphereZeroOrderScatteringEnabled=false;
 	bool atmosphereSingleScatteringEnabled=true;
 	bool atmosphereMultipleScatteringEnabled=true;
+	bool atmospherePseudoMirrorEnabled=true;
 
 	QString atmosphereShowMySkyStatusText;
 	bool atmosphereShowMySkyStoppedWithError=false;

@@ -78,6 +78,9 @@ public:
 	//! Get a reference to the StelTranslator object currently used for scripts.
 	const StelTranslator &getScriptsTranslator() const;
 
+	//! Get a reference to the StelTranslator object currently used for sky cultures descriptions.
+	const StelTranslator &getSkyCultureDescriptionsTranslator() const;
+
 	//! Get the type (RTL or LTR) of language currently used for sky objects
 	bool isSkyRTL() const;
 	
@@ -179,6 +182,7 @@ private:
 	std::unique_ptr<StelTranslator> skyTranslator;
 	std::unique_ptr<StelTranslator> planetaryFeaturesTranslator;
 	std::unique_ptr<StelTranslator> scriptsTranslator;
+	std::unique_ptr<StelTranslator> skyCultureDescriptionsTranslator;
 	StelCore* core;
 	
 	// Date and time variables

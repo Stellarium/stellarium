@@ -104,6 +104,7 @@ shadow\_enlargement\_danjon 	   & bool   & false & Earth shadow enlargement (see
 flag\_dso\_designation\_usage      & bool   & false & If \emph{true}, use designations of deep-sky objects on the sky instead of their common names.\\%\midrule
 flag\_dso\_outlines\_usage         & bool   & false & If \emph{true}, use outlines for big deep-sky objects on the sky instead of their hints.\\%\midrule
 flag\_dso\_additional\_names       & bool   & true  & Set \emph{true} to use additional names (also known as) for deep-sky objects.\\\midrule
+flag\_dso\_show\_only\_named       & bool   & false & If \emph{true}, only show deep-sky objects with names, hiding those with only designations.\\\midrule
 %
 grs\_longitude                     & int    & 216   & Longitude (System II) of Great Red Spot on Jupiter in degrees.\\%\midrule
 grs\_drift                         & float  & 15.0  & Annual drift of Great Red Spot on Jupiter in degrees.\\%\midrule
@@ -1046,7 +1047,7 @@ HiPS related options.
 \emph{ID}     & \emph{Type} & \emph{Description}\\\midrule
 show          & bool        & show HiPS at startup? \\
 sources/size  & int         & Number of HiPS survey sources\\%\midrule
-sources/n/url & string      & uri of the $n$th source hipslist file ($n \in [1 \ldots \mathtt{sources/size}]$)\\
+sources/$n$/url & string      & uri of the $n$th source hipslist file ($n \in [1 \ldots \mathtt{sources/size}]$)\\
 visible/url   & bool        & HiPS configured to be displayed. (Stores current setting on program exit)\\\bottomrule
 \end{tabularx}
 

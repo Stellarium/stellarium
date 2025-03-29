@@ -43,11 +43,12 @@ class InfoPanel : public QGraphicsTextItem
 		void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {infoTextFilters=aflags;}
 		const StelObject::InfoStringGroup& getInfoTextFilters(void) const {return infoTextFilters;}
 		void setTextFromObjects(const QList<StelObjectP>&);
-		const QString getSelectedText(void) const;
+		QString getSelectedText() const;
+		QString getSelectedHTML() const;
 
 	private:
+		QString infoHTML;
 		StelObject::InfoStringGroup infoTextFilters;
-		QGraphicsPixmapItem *infoPixmap; // Used when text rendering is buggy. Used when CLI option -t given.
 };
 
 //! The class managing the layout for button bars, selected object info and loading bars.
@@ -89,6 +90,9 @@ public slots:
 	//! Update the position of the button bars in the main window
 	//! GZ needed this public for interactive GUI scaling
 	void updateBarsPos();
+
+private:
+	void updateInfoPanelPos();
 
 private:
 	class StelBarsFrame* buttonBarsFrame;

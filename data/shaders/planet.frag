@@ -33,6 +33,8 @@ uniform mediump vec3 diffuseLight; // Must be in linear sRGB, without OETF appli
 uniform highp vec4 sunInfo;
 uniform mediump float skyBrightness;
 uniform bool hasAtmosphere;
+uniform bool hasNormalMap;
+uniform bool hasHorizonMap;
 
 uniform int shadowCount;
 uniform highp mat4 shadowData;
@@ -137,6 +139,8 @@ mediump float orenNayar(in mediump vec3 normal, in highp vec3 lightDir, in highp
     mediump float cosAngleLightNormal = dot(normal, lightDir);  //cos theta_i
     mediump float cosAngleEyeNormal = dot(normal, viewDir); //cos theta_r
     if(cosAngleLightNormal < 0.) return 0.;
+    if(cosAngleEyeNormal < 0.)
+        cosAngleEyeNormal = 0.;
     //acos can be quite expensive, can we avoid it?
     mediump float angleLightNormal = acos(cosAngleLightNormal); //theta_i
     mediump float angleEyeNormal = acos(cosAngleEyeNormal); //theta_r
@@ -284,11 +288,17 @@ void main()
     }
 
 #ifdef IS_MOON
-    mediump vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);
+    mediump vec3 normal;
+    if(hasNormalMap)
+        normal = texture2D(normalMap, texc).rgb-vec3(0.5);
+    else
+        normal = vec3(0,0,1);
+
     normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);
     // normal now contains the real surface normal taking normal map into account
 
     mediump float horizonShadowCoefficient = 1.;
+    if(hasHorizonMap)
     {
         // Check whether the fragment is in the shadow of surrounding mountains or the horizon
         mediump vec3 lonDir = normalX;

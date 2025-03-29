@@ -339,7 +339,7 @@ void SolarSystem::init()
 	markerCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-marker.png");
 
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &SolarSystem::updateSkyCulture);
+	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &SolarSystem::updateSkyCulture);
 	connect(&StelMainView::getInstance(), SIGNAL(reloadShadersRequested()), this, SLOT(reloadShaders()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(recreateTrails()));
 	connect(core, SIGNAL(dateChangedForTrails()), this, SLOT(recreateTrails()));
@@ -357,7 +357,7 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_EnlargeMinor", displayGroup, N_("Enlarge minor bodies"), "flagMinorBodyScale");
 	addAction("actionShow_Planets_EnlargePlanets", displayGroup, N_("Enlarge Planets"), "flagPlanetScale");
 	addAction("actionShow_Planets_EnlargeSun", displayGroup, N_("Enlarge Sun"), "flagSunScale");
-	addAction("actionShow_Skyculture_NativePlanetNames", displayGroup, N_("Native planet names (from starlore)"), "flagNativePlanetNames", "Ctrl+Shift+N");
+	addAction("actionShow_Skyculture_NativePlanetNames", displayGroup, N_("Native planet names (from sky culture)"), "flagNativePlanetNames", "Ctrl+Shift+N");
 	addAction("actionShow_Planets_ShowMinorBodyMarkers", displayGroup, N_("Mark minor bodies"), "flagMarkers");
 
 	connect(StelApp::getInstance().getModule("HipsMgr"), SIGNAL(gotNewSurvey(HipsSurveyP)),
@@ -532,77 +532,48 @@ void SolarSystem::recreateTrails()
 }
 
 
-void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
+void SolarSystem::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
 	planetNativeNamesMap.clear();
 	planetNativeNamesMeaningMap.clear();
 
-	QString namesFile = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/planet_names.fab");
+	if (!skyCulture.names.isEmpty())
+		loadCultureSpecificNames(skyCulture.names);
 
-	if (namesFile.isEmpty())
+	updateI18n();
+}
+
+void SolarSystem::loadCultureSpecificNames(const QJsonObject& data)
+{
+	for (auto it = data.begin(); it != data.end(); ++it)
 	{
-		for (const auto& p : std::as_const(systemPlanets))
+		const auto key = it.key();
+		const auto specificNames = it->toArray();
+
+		if (key.startsWith("NAME "))
 		{
-			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+			const auto planetId = key.mid(5);
+			const auto names = it.value().toArray();
+
+			// We store only one name per planet, so just take the first valid one
+			// FIXME: maybe we should somehow store all
+			QString nativeName, nativeNameMeaning;
+			for (const auto& nameVal : names)
 			{
-				p->setNativeName("");
-				p->setNativeNameMeaning("");
+				const auto nameObj = nameVal.toObject();
+				if (nameObj.find("english") == nameObj.end())
+					continue;
+				nativeNameMeaning = nameObj["english"].toString();
+				if (nameObj.find("native") != nameObj.end())
+					nativeName = nameObj["native"].toString();
+				else
+					nativeName = nativeNameMeaning;
+				break;
 			}
-		}
-		updateI18n();
-		return;
-	}
-
-	// Open file
-	QFile planetNamesFile(namesFile);
-	if (!planetNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-		qDebug() << " Cannot open file" << QDir::toNativeSeparators(namesFile);
-		return;
-	}
-
-	// Now parse the file
-	// lines to ignore which start with a # or are empty
-	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
-
-	// lines which look like records - we use the RE to extract the fields
-	// which will be available in recRx.capturedTexts()
-	static const QRegularExpression recRx("^\\s*(\\w+)\\s+\"(.+)\"\\s+_[(]\"(.+)\"[)]\\n");
-
-	QString record, planetId, nativeName, nativeNameMeaning;
-
-	// keep track of how many records we processed.
-	int totalRecords=0;
-	int readOk=0;
-	int lineNumber=0;
-	while (!planetNamesFile.atEnd())
-	{
-		record = QString::fromUtf8(planetNamesFile.readLine());
-		lineNumber++;
-
-		// Skip comments
-		if (commentRx.match(record).hasMatch())
-			continue;
-
-		totalRecords++;
-
-		QRegularExpressionMatch match=recRx.match(record);
-		if (!match.hasMatch())
-		{
-			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in planet names file" << QDir::toNativeSeparators(namesFile);
-		}
-		else
-		{
-			planetId          = match.captured(1).trimmed();
-			nativeName        = match.captured(2).trimmed();
-			nativeNameMeaning = match.captured(3).trimmed();
 			planetNativeNamesMap[planetId] = nativeName;
 			planetNativeNamesMeaningMap[planetId] = nativeNameMeaning;
-			readOk++;
 		}
 	}
-	planetNamesFile.close();
-	qDebug() << "Loaded" << readOk << "/" << totalRecords << "native names of planets";
 
 	for (const auto& p : std::as_const(systemPlanets))
 	{
@@ -612,8 +583,6 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 			p->setNativeNameMeaning(planetNativeNamesMeaningMap[p->getEnglishName()]);
 		}
 	}
-
-	updateI18n();
 }
 
 void SolarSystem::reloadShaders()
@@ -680,7 +649,7 @@ void SolarSystem::loadPlanets()
 {
 	minorBodies.clear();
 	systemMinorBodies.clear();
-	qDebug() << "Loading Solar System data (1: planets and moons) ...";
+	qInfo() << "Loading Solar System data (1: planets and moons) ...";
 	QString solarSystemFile = StelFileMgr::findFile("data/ssystem_major.ini");
 	if (solarSystemFile.isEmpty())
 	{
@@ -694,7 +663,7 @@ void SolarSystem::loadPlanets()
 		return;
 	}
 
-	qDebug() << "Loading Solar System data (2: minor bodies) ...";
+	qInfo() << "Loading Solar System data (2: minor bodies) ...";
 	QStringList solarSystemFiles = StelFileMgr::findFileInAllPaths("data/ssystem_minor.ini");
 	if (solarSystemFiles.isEmpty())
 	{
@@ -706,7 +675,7 @@ void SolarSystem::loadPlanets()
 	{
 		if (loadPlanets(solarSystemFile))
 		{
-			qDebug() << "File ssystem_minor.ini is loaded successfully...";
+			qInfo().noquote() << "File ssystem_minor.ini is loaded successfully...";
 			break;
 		}
 		else
@@ -761,7 +730,7 @@ unsigned char SolarSystem::BvToColorIndex(double bV)
 bool SolarSystem::loadPlanets(const QString& filePath)
 {
 	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
-	qDebug().noquote() << "Loading from:"  << filePath;
+	qInfo().noquote() << "Loading from:"  << filePath;
 	QSettings pd(filePath, StelIniFormat);
 	if (pd.status() != QSettings::NoError)
 	{
@@ -1315,7 +1284,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			if (semi_major_axis>0)
 				mp->deltaJDE = 2.0*semi_major_axis*StelCore::JD_SECOND;
 			 else if (semi_major_axis<=0.0 && type!=L1S("interstellar object"))
-				qWarning().noquote() << "WARNING: Minor body" << englishName << "has no semimajor axis!";
+				qWarning().noquote() << "Minor body" << englishName << "has no semimajor axis!";
 
 			systemMinorBodies.push_back(newP);
 		}
@@ -1519,8 +1488,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	if (readOk==0)
 		qWarning().noquote() << "No Solar System objects loaded from" << QDir::toNativeSeparators(filePath);
 	else
-		qDebug() << "Loaded" << readOk << "Solar System bodies from " << filePath;
-	qDebug() << "Solar System now has" << systemPlanets.count() << "entries.";
+		qInfo().noquote() << "Loaded" << readOk << "Solar System bodies from " << filePath;
+	qInfo().noquote() << "Solar System now has" << systemPlanets.count() << "entries.";
 	return readOk>0;
 }
 
@@ -1535,11 +1504,11 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 	static bool threadMessage=true;
 	if (threadMessage)
 	{
-		qDebug() << "SolarSystem: We have configured" << extraThreads << "threads (plus main thread) for computePositions().";
+		qInfo() << "SolarSystem: We have configured" << extraThreads << "threads (plus main thread) for computePositions().";
 		if (extraThreads > QThreadPool::globalInstance()->maxThreadCount()-1)
 		{
-			qDebug() << "This is more than the maximum additional thread count (" << QThreadPool::globalInstance()->maxThreadCount()-1 << ").";
-			qDebug() << "Consider reducing this number to avoid oversubscription.";
+			qWarning() << "This is more than the maximum additional thread count (" << QThreadPool::globalInstance()->maxThreadCount()-1 << ").";
+			qWarning() << "Consider reducing this number to avoid oversubscription.";
 		}
 		threadMessage=false;
 	}
@@ -1852,7 +1821,6 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			}
 			computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
 		} // end of default (original single-threaded) solution
-
 		}
 	}
 	else
@@ -2519,7 +2487,6 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	if (!getFlagPlanets())
 		return result;
 
-	const bool withAberration=core->getUseAberration();
 	Vec3d v(vv);
 	
 	double cosLimFov = std::cos(limitFov * M_PI/180.);
@@ -3355,6 +3322,7 @@ void SolarSystem::setLabelsColor(const Vec3f& c)
 	if (c!=Planet::getLabelColor())
 	{
 		Planet::setLabelColor(c);
+		StelApp::immediateSave("color/planet_names_color", c.toStr());
 		emit labelsColorChanged(c);
 	}
 }
@@ -3370,6 +3338,7 @@ void SolarSystem::setOrbitsColor(const Vec3f& c)
 	if (c!=Planet::getOrbitColor())
 	{
 		Planet::setOrbitColor(c);
+		StelApp::immediateSave("color/sso_orbits_color", c.toStr());
 		emit orbitsColorChanged(c);
 	}
 }
@@ -3384,6 +3353,7 @@ void SolarSystem::setMajorPlanetsOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getMajorPlanetOrbitColor())
 	{
 		Planet::setMajorPlanetOrbitColor(c);
+		StelApp::immediateSave("color/major_planets_orbits_color", c.toStr());
 		emit majorPlanetsOrbitsColorChanged(c);
 	}
 }
@@ -3398,6 +3368,7 @@ void SolarSystem::setMinorPlanetsOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getMinorPlanetOrbitColor())
 	{
 		Planet::setMinorPlanetOrbitColor(c);
+		StelApp::immediateSave("color/minor_planets_orbits_color", c.toStr());
 		emit minorPlanetsOrbitsColorChanged(c);
 	}
 }
@@ -3412,6 +3383,7 @@ void SolarSystem::setDwarfPlanetsOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getDwarfPlanetOrbitColor())
 	{
 		Planet::setDwarfPlanetOrbitColor(c);
+		StelApp::immediateSave("color/dwarf_planets_orbits_color", c.toStr());
 		emit dwarfPlanetsOrbitsColorChanged(c);
 	}
 }
@@ -3426,6 +3398,7 @@ void SolarSystem::setMoonsOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getMoonOrbitColor())
 	{
 		Planet::setMoonOrbitColor(c);
+		StelApp::immediateSave("color/moon_orbits_color", c.toStr());
 		emit moonsOrbitsColorChanged(c);
 	}
 }
@@ -3440,6 +3413,7 @@ void SolarSystem::setCubewanosOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getCubewanoOrbitColor())
 	{
 		Planet::setCubewanoOrbitColor(c);
+		StelApp::immediateSave("color/cubewano_orbits_color", c.toStr());
 		emit cubewanosOrbitsColorChanged(c);
 	}
 }
@@ -3454,6 +3428,7 @@ void SolarSystem::setPlutinosOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getPlutinoOrbitColor())
 	{
 		Planet::setPlutinoOrbitColor(c);
+		StelApp::immediateSave("color/plutino_orbits_color", c.toStr());
 		emit plutinosOrbitsColorChanged(c);
 	}
 }
@@ -3468,6 +3443,7 @@ void SolarSystem::setScatteredDiskObjectsOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getScatteredDiscObjectOrbitColor())
 	{
 		Planet::setScatteredDiscObjectOrbitColor(c);
+		StelApp::immediateSave("color/sdo_orbits_color", c.toStr());
 		emit scatteredDiskObjectsOrbitsColorChanged(c);
 	}
 }
@@ -3482,6 +3458,7 @@ void SolarSystem::setOortCloudObjectsOrbitsColor(const Vec3f &c)
 	if (c!=Planet::getOortCloudObjectOrbitColor())
 	{
 		Planet::setOortCloudObjectOrbitColor(c);
+		StelApp::immediateSave("color/oco_orbits_color", c.toStr());
 		emit oortCloudObjectsOrbitsColorChanged(c);
 	}
 }
@@ -3496,6 +3473,7 @@ void SolarSystem::setCometsOrbitsColor(const Vec3f& c)
 	if (c!=Planet::getCometOrbitColor())
 	{
 		Planet::setCometOrbitColor(c);
+		StelApp::immediateSave("color/comet_orbits_color", c.toStr());
 		emit cometsOrbitsColorChanged(c);
 	}
 }
@@ -3510,6 +3488,7 @@ void SolarSystem::setSednoidsOrbitsColor(const Vec3f& c)
 	if (c!=Planet::getSednoidOrbitColor())
 	{
 		Planet::setSednoidOrbitColor(c);
+		StelApp::immediateSave("color/sednoid_orbits_color", c.toStr());
 		emit sednoidsOrbitsColorChanged(c);
 	}
 }
@@ -3524,6 +3503,7 @@ void SolarSystem::setInterstellarOrbitsColor(const Vec3f& c)
 	if (c!=Planet::getInterstellarOrbitColor())
 	{
 		Planet::setInterstellarOrbitColor(c);
+		StelApp::immediateSave("color/interstellar_orbits_color", c.toStr());
 		emit interstellarOrbitsColorChanged(c);
 	}
 }
@@ -3538,6 +3518,7 @@ void SolarSystem::setMercuryOrbitColor(const Vec3f &c)
 	if (c!=Planet::getMercuryOrbitColor())
 	{
 		Planet::setMercuryOrbitColor(c);
+		StelApp::immediateSave("color/mercury_orbit_color", c.toStr());
 		emit mercuryOrbitColorChanged(c);
 	}
 }
@@ -3552,6 +3533,7 @@ void SolarSystem::setVenusOrbitColor(const Vec3f &c)
 	if (c!=Planet::getVenusOrbitColor())
 	{
 		Planet::setVenusOrbitColor(c);
+		StelApp::immediateSave("color/venus_orbit_color", c.toStr());
 		emit venusOrbitColorChanged(c);
 	}
 }
@@ -3566,6 +3548,7 @@ void SolarSystem::setEarthOrbitColor(const Vec3f &c)
 	if (c!=Planet::getEarthOrbitColor())
 	{
 		Planet::setEarthOrbitColor(c);
+		StelApp::immediateSave("color/earth_orbit_color", c.toStr());
 		emit earthOrbitColorChanged(c);
 	}
 }
@@ -3580,6 +3563,7 @@ void SolarSystem::setMarsOrbitColor(const Vec3f &c)
 	if (c!=Planet::getMarsOrbitColor())
 	{
 		Planet::setMarsOrbitColor(c);
+		StelApp::immediateSave("color/mars_orbit_color", c.toStr());
 		emit marsOrbitColorChanged(c);
 	}
 }
@@ -3594,6 +3578,7 @@ void SolarSystem::setJupiterOrbitColor(const Vec3f &c)
 	if (c!=Planet::getJupiterOrbitColor())
 	{
 		Planet::setJupiterOrbitColor(c);
+		StelApp::immediateSave("color/jupiter_orbit_color", c.toStr());
 		emit jupiterOrbitColorChanged(c);
 	}
 }
@@ -3608,6 +3593,7 @@ void SolarSystem::setSaturnOrbitColor(const Vec3f &c)
 	if (c!=Planet::getSaturnOrbitColor())
 	{
 		Planet::setSaturnOrbitColor(c);
+		StelApp::immediateSave("color/saturn_orbit_color", c.toStr());
 		emit saturnOrbitColorChanged(c);
 	}
 }
@@ -3622,6 +3608,7 @@ void SolarSystem::setUranusOrbitColor(const Vec3f &c)
 	if (c!=Planet::getUranusOrbitColor())
 	{
 		Planet::setUranusOrbitColor(c);
+		StelApp::immediateSave("color/uranus_orbit_color", c.toStr());
 		emit uranusOrbitColorChanged(c);
 	}
 }
@@ -3636,6 +3623,7 @@ void SolarSystem::setNeptuneOrbitColor(const Vec3f &c)
 	if (c!=Planet::getNeptuneOrbitColor())
 	{
 		Planet::setNeptuneOrbitColor(c);
+		StelApp::immediateSave("color/neptune_orbit_color", c.toStr());
 		emit neptuneOrbitColorChanged(c);
 	}
 }
@@ -4199,14 +4187,31 @@ bool SolarSystem::removeMinorPlanet(const QString &name)
 
 void SolarSystem::onNewSurvey(HipsSurveyP survey)
 {
-	// For the moment we only consider the survey url to decide if we
-	// assign it to a planet.  It would be better to use some property
-	// for that.
-	QString planetName = QUrl(survey->getUrl()).fileName();
-	PlanetP pl = searchByEnglishName(planetName);
-	if (!pl || pl->survey)
+	const auto type = survey->getType();
+	const bool isPlanetColor = type == "planet";
+	const bool isPlanetNormal = type == "planet-normal";
+	const bool isPlanetHorizon = type == "planet-horizon";
+	if (!isPlanetColor && !isPlanetNormal && !isPlanetHorizon)
 		return;
-	pl->survey = survey;
+
+	QString planetName = survey->getFrame();
+	PlanetP pl = searchByEnglishName(planetName);
+	if (!pl) return;
+	if (isPlanetColor)
+	{
+		if (pl->survey) return;
+		pl->survey = survey;
+	}
+	else if (isPlanetNormal)
+	{
+		if (pl->surveyForNormals) return;
+		pl->surveyForNormals = survey;
+	}
+	else if (isPlanetHorizon)
+	{
+		if (pl->surveyForHorizons) return;
+		pl->surveyForHorizons = survey;
+	}
 	survey->setProperty("planet", pl->getCommonEnglishName());
 	// Not visible by default for the moment.
 	survey->setProperty("visible", false);

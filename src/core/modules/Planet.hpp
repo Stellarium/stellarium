@@ -795,6 +795,8 @@ protected:
 	QString objModelPath;
 
 	HipsSurveyP survey;
+	HipsSurveyP surveyForNormals;
+	HipsSurveyP surveyForHorizons;
 
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
@@ -888,6 +890,8 @@ private:
 		int eclipsePush; // apparent brightness push for partial Lunar Eclipse (make bright rim overbright)
 		int normalMap;
 		int horizonMap;
+		int hasNormalMap;
+		int hasHorizonMap;
 
 		// Rings-specific variables
 		int isRing;
@@ -915,7 +919,8 @@ private:
 	};
 
 	//! Calculates and uploads the common shader uniforms (projection matrix, texture, lighting&shadow data)
-	RenderData setCommonShaderUniforms(const StelPainter &painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars); // const;
+	RenderData setCommonShaderUniforms(const StelPainter &painter, QOpenGLShaderProgram* shader,
+	                                   const PlanetShaderVars& shaderVars, bool hasNormalMap, bool hasHorizonMap);
 
 	static PlanetShaderVars planetShaderVars;
 	static QOpenGLShaderProgram* planetShaderProgram;

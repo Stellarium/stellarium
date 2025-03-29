@@ -25,6 +25,7 @@
 #include <QObject>
 #include <QMap>
 #include <QWeakPointer>
+#include <QElapsedTimer>
 #include <QMutex>
 
 class QNetworkReply;
@@ -60,7 +61,7 @@ public:
 
 	//! Creates or finds a StelTexture wrapper for the specified OpenGL texture object.
 	//! The wrapper takes ownership of the texture and will delete it if it is destroyed.
-	//! @param texID The OpenGL texture ID which should be wrapped. If this is already a StelTexture, the existing wrapper will be returned.
+	//! @param texId The OpenGL texture ID which should be wrapped. If this is already a StelTexture, the existing wrapper will be returned.
 	//! @returns the existing or new wrapper for the texture with the given GL name. Returns a null pointer if the texture name is invalid.
 	StelTextureSP wrapperForGLTexture(GLuint texId);
 
@@ -71,6 +72,14 @@ public:
 
 //	//! Returns the estimated memory usage of all textures currently loaded through StelTexture
 //	int getGLMemoryUsage();
+private:
+	void onFrameFinished();
+	//! Called by StelTexture to indicate the beginning of loading of a texture, so we can measure time spent on it
+	void reportTextureLoadStart();
+	//! Called by StelTexture to indicate the end of loading of a texture, so we can measure time spent on it
+	void reportTextureLoadEnd();
+	//! Get total time taken by texture loads during current frame, in nanoseconds
+	quint64 getTotalLoadTimeTaken() const { return totalLoadTimeTaken; }
 
 private:
 	friend class StelTexture;
@@ -79,6 +88,9 @@ private:
 
 	//! Private constructor, use StelApp::getTextureManager for the correct instance
 	StelTextureMgr(QObject* parent = Q_NULLPTR);
+
+	QElapsedTimer textureLoadTimer;
+	quint64 totalLoadTimeTaken = 0; //!< Total time taken by texture loads during current frame
 
 	unsigned int glMemoryUsage;
 

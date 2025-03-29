@@ -254,7 +254,7 @@ given in section~\ref{sec:plugins:TUI:commands}.
 2.7 & Time Display Format & Change how Stellarium formats time values. ``system\_default'' takes the format from the computer settings, 
                             or it is possible to select ``24h'' or ``12h'' clock modes\\\midrule
 3    & General      & (menu group)\\%\midrule
-3.1  & Starlore     & Select the sky culture to use (changes constellation lines, names, artwork)\\%\midrule
+3.1  & Sky Culture  & Select the sky culture to use (changes constellation lines, names, artwork)\\%\midrule
 3.2  & Sky Language & Change the language used to describe objects in the sky\\%\midrule
 3.3  & App Language & Change the application language (used in GUIs) \\\midrule
 4    & Stars          & (menu group)\\%\midrule
@@ -462,24 +462,21 @@ you can access a running instance of Stellarium with various programming languag
 \subsubsection{Commandline}
 \label{sec:plugins:RemoteControl:API:CLI}
 
-It is possible to send commands via command line\footnote{%
-  Depending on your operating system or command shell,
-  you may have to use double quotes in the \texttt{-\/-data} argument to \command{curl}.}%
-, e.g.,
+It is possible to send commands via command line, e.g.:
 
 \begin{commandsScr}
-wget -q --post-data 'id=show.ssc' http://stella:8090/api/scripts/run >/dev/null 2>&1
-curl --data 'id=myScript.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&1
-curl -d     'id=myScript.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&1
-curl -d 'id=LandscapeMgr.fogDisplayed&value=false' \ 
-      http://localhost:8090/api/stelproperty/set 
+curl -d "x=1&y=0.3" http://localhost:8090/api/main/move
+wget --post-data "id=show.ssc" http://stella:8090/api/scripts/run -O /dev/null
+curl -d "id=myScript.ssc" http://localhost:8090/api/scripts/run
+curl -d "id=LandscapeMgr.fogDisplayed&value=false" \ 
+      http://localhost:8090/api/stelproperty/set
 \end{commandsScr}
 This allows triggering automatic show setups for museums etc.\ via  some centralized schedulers like \command{cron}.
 
 % TODO: List all available commands with examples here?
 To get a complete pretty-printed list of properties and actions, use:
 \begin{commandsScr}
-curl -G -d 'propId=-2&actionId=-2' http://localhost:8090/api/main/status | \
+curl -G -d "propId=-2&actionId=-2" http://localhost:8090/api/main/status | \
      python -m json.tool 
 \end{commandsScr} 
 
@@ -760,10 +757,7 @@ The result is displayed in a browser view\footnote{%
 
 In addition, you can configure up to three further websites. These
 must provide some public website which takes a query for a Hipparcos
-star number or object name.  For example, the website
-\url{https://biblicalastronomy.co/playground/fetch.cfm?Hipp=n}
-provides various data and cross-references for a star with Hipparcos
-number \texttt{n}.
+star number or object name.  
 
 Regardless of the current program language, the result is always
 presented in English or the language of the respective website.
@@ -793,7 +787,7 @@ aavso\_oid\_url      &string & (don't override)\\ % https://www.aavso.org/vsx/in
 gcvs\_url            &string & (don't override)\\ % http://www.sai.msu.su/gcvs/cgi-bin/ident.cgi?cat=Hip+\&num=\%1    \\
 wikipedia\_url       &string & (don't override)\\ % https://en.wikipedia.org/wiki/\%1 \\
 \midrule
-custom1\_url         &string & https://biblicalastronomy.co/playground/fetch.cfm?Hipp=\%1 \\
+custom1\_url         &string & \\
 custom2\_url         &string & \\
 custom3\_url         &string & \\
 custom1\_use\_hip    &boolean& true \\

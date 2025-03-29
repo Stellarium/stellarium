@@ -541,7 +541,7 @@ void StelLocationMgr::setLocations(const LocationList &locations)
 
 void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool isUserLocation, const QString& binFilePath) const
 {
-	qDebug() << "Generating a locations list...";
+	qInfo() << "Generating a locations list...";
 	const QMap<QString, StelLocation>& cities = loadCities(fileName, isUserLocation);
 	QFile binfile(StelFileMgr::findFile(binFilePath, StelFileMgr::New));
 	if(binfile.open(QIODevice::WriteOnly))
@@ -552,7 +552,7 @@ void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool i
 		binfile.flush();
 		binfile.close();
 	}
-	qDebug() << "[...] Please use 'gzip -nc base_locations.bin > base_locations.bin.gz' to pack a locations list.";
+	qInfo() << "[...] Please use 'gzip -nc base_locations.bin > base_locations.bin.gz' to pack a locations list.";
 }
 
 LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
@@ -629,14 +629,14 @@ LocationMap StelLocationMgr::loadCities(const QString& fileName, bool isUserLoca
 	{
 		// Note it is quite normal not to have a user locations file (e.g. first run)
 		if (!isUserLocation)
-			qWarning() << "WARNING: Failed to locate location data file: " << QDir::toNativeSeparators(fileName);
+			qWarning().noquote() << "Failed to locate location data file: " << QDir::toNativeSeparators(fileName);
 		return locations;
 	}
 
 	QFile sourcefile(cityDataPath);
 	if (!sourcefile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "ERROR: Could not open location data file: " << QDir::toNativeSeparators(cityDataPath);
+		qWarning().noquote() << "ERROR: Could not open location data file: " << QDir::toNativeSeparators(cityDataPath);
 		return locations;
 	}
 
@@ -1158,16 +1158,58 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 
 			qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity, ipRegion, ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
 
+			if (latitude==0.0 && longitude==0.0 && ipTimeZone.isEmpty() && ipCountry.isEmpty() && ipCountryCode.isEmpty())
+				throw std::runtime_error("IP lookup provided bogus result.");
+
+			QString regionName = pickRegionFromCountryCode(ipCountryCode.toLower());
+			float luminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+
+			// Check location in our database and fetch light pollution luminance if it possible
+			StelLocation ipLoc;
+			if (!ipCity.isEmpty())
+				ipLoc = locationForString(QString("%1, %2").arg(ipCity, regionName));
+			else
+			{
+				auto closeLocations = pickLocationsNearby("Earth", longitude, latitude, 0.5f);
+				// find closest location to (longitude,latitude) to grab light pollution info from.
+				// This is a bit awkard to begin with. Consider being 40km from an isolated larger city.
+				// Sky is good, and you take LP value for the city?
+				double minDistanceKm=1E12;
+				StelLocation candLoc;
+				QMapIterator<QString, StelLocation> it(closeLocations);
+				while (it.hasNext()) {
+					it.next();
+					const double distanceKm=it.value().distanceKm(longitude, latitude);
+					qDebug() << "Close location: " << it.value().name << " -- " << int(distanceKm) << "km";
+					if (distanceKm < minDistanceKm)
+					{
+						minDistanceKm=distanceKm;
+						candLoc=it.value();
+						qDebug() << "-- TAKEN!";
+					}
+				}
+				if (candLoc.isValid())
+				{
+					qDebug() << "Closest known place:" << candLoc.name << "at" << candLoc.distanceKm(longitude, latitude) << "km";
+					// Consider result valid only in a meaningful distance. Light pollution is changing rapidly.
+					// Try 25 km, YMMV.
+					if (minDistanceKm < 25)
+						ipLoc = candLoc;
+				}
+			}
+			if (ipLoc.isValid())
+				luminance = ipLoc.lightPollutionLuminance.toFloat();
+
 			StelLocation loc;
 			loc.name    = (ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity);
 			loc.state   = (ipRegion.isEmpty() ? "IPregion"  : ipRegion);
-			loc.region = pickRegionFromCountryCode(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
+			loc.region = regionName;
 			loc.role    = QChar(0x0058); // char 'X'
 			loc.population = 0;
 			loc.setLatitude  (static_cast<float>(latitude));
 			loc.setLongitude (static_cast<float>(longitude));
 			loc.altitude = 0;
-			loc.lightPollutionLuminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+			loc.lightPollutionLuminance = luminance;
 			loc.ianaTimeZone = (ipTimeZone.isEmpty() ? "" : ipTimeZone);
 			loc.planetName = "Earth";
 			loc.landscapeKey = "";
@@ -1190,8 +1232,8 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 		}
 		catch (const std::exception& e)
 		{
-			qDebug() << "Failure getting IP-based location: answer is in not acceptable format! Error: " << e.what()
-					<< "\nLet's use Paris, France as default location...";
+			qWarning() << "Failure getting IP-based location: answer is in not acceptable format! Error:" << e.what();
+			qWarning() << "Moving to the fallback location";
 			core->moveObserverTo(getLastResortLocation(), 0.0, 0.0, "guereins"); // Answer is not in JSON format! A possible block by DNS server or firewall
 		}
 	}
@@ -1267,7 +1309,7 @@ void StelLocationMgr::loadCountries()
 		}
 		textFile.close();
 		if (readOk>0)
-			qDebug() << "Loaded" << readOk << "countries";
+			qInfo().noquote() << "Loaded" << readOk << "countries";
 		else
 			qDebug() << "ERROR: List of countries was not loaded!";
 	}
@@ -1328,7 +1370,7 @@ void StelLocationMgr::loadRegions()
 		}
 		geoFile.close();
 		if (readOk>0)
-			qDebug() << "Loaded" << readOk << "regions";
+			qInfo().noquote() << "Loaded" << readOk << "regions";
 		else
 			qDebug() << "ERROR: List of regions was not loaded!";
 	}

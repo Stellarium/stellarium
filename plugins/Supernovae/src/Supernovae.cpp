@@ -165,11 +165,11 @@ void Supernovae::init()
 	}
 	else
 	{
-		qDebug().noquote() << "[Supernovae] supernovae.json does not exist - copying default file to" << QDir::toNativeSeparators(sneJsonPath);
+		qInfo().noquote() << "[Supernovae] supernovae.json does not exist - copying default file to" << QDir::toNativeSeparators(sneJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug().noquote() << "[Supernovae] Loading catalog file:" << QDir::toNativeSeparators(sneJsonPath);
+	qInfo().noquote() << "[Supernovae] Loading catalog file:" << QDir::toNativeSeparators(sneJsonPath);
 
 	readJsonFile();
 
@@ -348,14 +348,14 @@ bool Supernovae::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "[Supernovae] WARNING - could not remove old supernovas.json file";
+				qWarning() << "[Supernovae] Could not remove old supernovas.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "[Supernovae] WARNING - failed to copy supernovae.json to supernovae.json.old";
+		qWarning() << "[Supernovae] Failed to copy supernovae.json to supernovae.json.old";
 		return false;
 	}
 
@@ -447,7 +447,7 @@ int Supernovae::getJsonFileVersion(void) const
 		jsonVersion = map.value("version").toInt();
 	}
 
-	qDebug() << "[Supernovae] version of the catalog:" << jsonVersion;
+	qInfo().noquote() << "[Supernovae] version of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
 

@@ -33,6 +33,7 @@
 #include <QFont>
 
 class Orbit;
+class StelSkyCulture;
 class StelTranslator;
 class StelObject;
 class StelCore;
@@ -303,8 +304,9 @@ public slots:
 	//! Set the color used to draw planet labels.
 	//! @param c The color of the planet labels (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setLabelsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setLabelsColor(c.toVec3f());
 	//! @endcode
 	void setLabelsColor(const Vec3f& c);
 	//! Get the current color used to draw planet labels.
@@ -314,8 +316,9 @@ public slots:
 	//! Set the color used to draw solar system object orbit lines.
 	//! @param c The color of the solar system object orbit lines (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setOrbitsColor(c.toVec3f());
 	//! @endcode
 	void setOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw solar system object orbit lines.
@@ -325,8 +328,9 @@ public slots:
 	//! Set the color used to draw orbits lines of the major planets.
 	//! @param c The color of orbits lines of the major planets (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setMajorPlanetsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setMajorPlanetsOrbitsColor(c.toVec3f());
 	//! @endcode
 	void setMajorPlanetsOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw orbits lines of the major planets.
@@ -336,8 +340,9 @@ public slots:
 	//! Set the color used to draw orbits lines of moons of planets.
 	//! @param c The color of orbits lines of moons of planets lines (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setMoonsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setMoonsOrbitsColor(c.toVec3f());
 	//! @endcode
 	void setMoonsOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw orbits lines of moons of planets.
@@ -347,8 +352,9 @@ public slots:
 	//! Set the color used to draw orbits lines of the minor planets.
 	//! @param c The color of orbits lines of the minor planets (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setMinorPlanetsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setMinorPlanetsOrbitsColor(c.toVec3f());
 	//! @endcode
 	void setMinorPlanetsOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw orbits lines of the minor planets.
@@ -358,8 +364,9 @@ public slots:
 	//! Set the color used to draw orbits lines of the dwarf planets.
 	//! @param c The color of orbits lines of the dwarf planets (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setDwarfPlanetsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setDwarfPlanetsOrbitsColor(c.toVec3f());
 	//! @endcode
 	void setDwarfPlanetsOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw orbits lines of the dwarf planets.
@@ -369,8 +376,9 @@ public slots:
 	//! Set the color used to draw orbits lines of cubewanos.
 	//! @param c The color of orbits lines of cubewanos (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setCubewanosOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setCubewanosOrbitsColor(c.toVec3f());
 	//! @endcode
 	void setCubewanosOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw orbits lines of cubewanos.
@@ -380,8 +388,9 @@ public slots:
 	//! Set the color used to draw orbits lines of plutinos.
 	//! @param c The color of orbits lines of plutinos (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setPlutinosOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setPlutinosOrbitsColor(c.toVec3f());
 	//! @endcode
 	void setPlutinosOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw orbits lines of plutinos.
@@ -391,8 +400,9 @@ public slots:
 	//! Set the color used to draw orbits lines of scattered disk objects.
 	//! @param c The color of orbits lines of scattered disk objects (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setScatteredDiskObjectsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setScatteredDiskObjectsOrbitsColor(c.toVec3f());
 	//! @endcode
 	void setScatteredDiskObjectsOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw orbits lines of scattered disk objects.
@@ -402,8 +412,9 @@ public slots:
 	//! Set the color used to draw orbits lines of Oort cloud objects.
 	//! @param c The color of orbits lines of Oort cloud objects (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setOortCloudObjectsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setOortCloudObjectsOrbitsColor(c.toVec3f());
 	//! @endcode
 	void setOortCloudObjectsOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw orbits lines of Oort cloud objects.
@@ -413,8 +424,9 @@ public slots:
 	//! Set the color used to draw comet orbit lines.
 	//! @param c The color of the comet orbit lines (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setCometsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setCometsOrbitsColor(c.toVec3f());
 	//! @endcode
 	void setCometsOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw comet orbit lines.
@@ -424,8 +436,9 @@ public slots:
 	//! Set the color used to draw sednoid orbit lines.
 	//! @param c The color of the sednoid orbit lines (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setSednoidsOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setSednoidsOrbitsColor(c.toVec3f());
 	//! @endcode
 	void setSednoidsOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw sednoid orbit lines.
@@ -435,8 +448,9 @@ public slots:
 	//! Set the color used to draw interstellar orbit (hyperbolic trajectory) lines.
 	//! @param c The color of the interstellar orbit lines (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setInterstellarOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setInterstellarOrbitsColor(c.toVec3f());
 	//! @endcode
 	void setInterstellarOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw interstellar orbit lines.
@@ -446,8 +460,9 @@ public slots:
 	//! Set the color used to draw Mercury orbit line.
 	//! @param c The color of Mercury orbit line (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setMercuryOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setMercuryOrbitColor(c.toVec3f());
 	//! @endcode
 	void setMercuryOrbitColor(const Vec3f& c);
 	//! Get the current color used to draw Mercury orbit line.
@@ -457,8 +472,9 @@ public slots:
 	//! Set the color used to draw Venus orbit line.
 	//! @param c The color of Venus orbit line (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setVenusOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setVenusOrbitColor(c.toVec3f());
 	//! @endcode
 	void setVenusOrbitColor(const Vec3f& c);
 	//! Get the current color used to draw Venus orbit line.
@@ -468,8 +484,9 @@ public slots:
 	//! Set the color used to draw Earth orbit line.
 	//! @param c The color of Earth orbit line (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setEarthOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setEarthOrbitColor(c.toVec3f());
 	//! @endcode
 	void setEarthOrbitColor(const Vec3f& c);
 	//! Get the current color used to draw Earth orbit line.
@@ -479,8 +496,9 @@ public slots:
 	//! Set the color used to draw Mars orbit line.
 	//! @param c The color of Mars orbit line (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setMarsOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setMarsOrbitColor(c.toVec3f());
 	//! @endcode
 	void setMarsOrbitColor(const Vec3f& c);
 	//! Get the current color used to draw Mars orbit line.
@@ -490,8 +508,9 @@ public slots:
 	//! Set the color used to draw Jupiter orbit line.
 	//! @param c The color of Jupiter orbit line (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setJupiterOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setJupiterOrbitColor(c.toVec3f());
 	//! @endcode
 	void setJupiterOrbitColor(const Vec3f& c);
 	//! Get the current color used to draw Jupiter orbit line.
@@ -501,8 +520,9 @@ public slots:
 	//! Set the color used to draw Saturn orbit line.
 	//! @param c The color of Saturn orbit line (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setSaturnOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setSaturnOrbitColor(c.toVec3f());
 	//! @endcode
 	void setSaturnOrbitColor(const Vec3f& c);
 	//! Get the current color used to draw Saturn orbit line.
@@ -512,8 +532,9 @@ public slots:
 	//! Set the color used to draw Uranus orbit line.
 	//! @param c The color of Uranus orbit line (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setUranusOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setUranusOrbitColor(c.toVec3f());
 	//! @endcode
 	void setUranusOrbitColor(const Vec3f& c);
 	//! Get the current color used to draw Uranus orbit line.
@@ -523,8 +544,9 @@ public slots:
 	//! Set the color used to draw Neptune orbit line.
 	//! @param c The color of Neptune orbit line (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setNeptuneOrbitColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setNeptuneOrbitColor(c.toVec3f());
 	//! @endcode
 	void setNeptuneOrbitColor(const Vec3f& c);
 	//! Get the current color used to draw Neptune orbit line.
@@ -534,8 +556,9 @@ public slots:
 	//! Set the color used to draw planet trails lines.
 	//! @param c The color of the planet trails lines (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setTrailsColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setTrailsColor(c.toVec3f());
 	//! @endcode
 	void setTrailsColor(const Vec3f& c) {if (c!=trailsColor) { trailsColor=c; emit trailsColorChanged(c);}}
 	//! Get the current color used to draw planet trails lines.
@@ -545,8 +568,9 @@ public slots:
 	//! Set the color used to draw planet pointers.
 	//! @param c The color of the planet pointers
 	//! @code
-	//! // example of usage in scripts
-	//! SolarSystem.setPointerColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SolarSystem.setPointerColor(c.toVec3f());
 	//! @endcode
 	void setPointerColor(const Vec3f& c) {if (c!=pointerColor) {pointerColor=c; emit pointerColorChanged(c);}}
 	//! Get the current color used to draw planet pointers.
@@ -719,8 +743,10 @@ public slots:
 	bool getFlagEarthShadowEnlargementDanjon() const;
 
 	//! Set style of colors of orbits for Solar system bodies
+	//! @param style One of one_color | groups | major_planets | major_planets_minor_types
 	void setOrbitColorStyle(const QString &style);
 	//! Get style of colors of orbits for Solar system bodies
+	//! @return One of one_color | groups | major_planets | major_planets_minor_types
 	QString getOrbitColorStyle() const;
 
 	//! Get list of objects by type
@@ -938,8 +964,9 @@ private slots:
 
 	//! Called when the sky culture is updated.
 	//! Loads native names of planets for a given sky culture.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	void updateSkyCulture(const QString& skyCultureDir);
+	void updateSkyCulture(const StelSkyCulture& skyCulture);
+
+	void loadCultureSpecificNames(const QJsonObject& data);
 
 	//! Called following StelMainView::reloadShadersRequested
 	void reloadShaders();

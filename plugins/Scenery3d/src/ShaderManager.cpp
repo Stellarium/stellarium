@@ -115,7 +115,7 @@ ShaderMgr::~ShaderMgr()
 
 void ShaderMgr::clearCache()
 {
-	qCDebug(shaderMgr)<<"Clearing"<<m_shaderContentCache.size()<<"shaders";
+	qCInfo(shaderMgr)<<"Clearing"<<m_shaderContentCache.size()<<"shaders";
 
 	//iterate over the shaderContentCache - this contains the same amount of shaders as actually exist!
 	//the shaderCache could contain duplicate entries

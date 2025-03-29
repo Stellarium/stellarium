@@ -5,6 +5,8 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2022
+# Tomas Marklund, 2025
+# Daniel Nylander <po@danielnylander.se>, 2025
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2023-11-28 13:04+0700\n"
 "PO-Revision-Date: 2022-10-05 17:03+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2022\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (https://app.transifex.com/stellarium/teams/80998/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,11 +36,15 @@ msgid ""
 "or some other details to find out how this plugin behaves. Then build and "
 "present your own work!"
 msgstr ""
+"Den här scenen är mest användbar som testbädd för din egen utveckling. Du "
+"bör göra en kopia av scenmappen och modifiera efter behag, prova "
+"materialinställningar eller andra detaljer för att ta reda på hur detta "
+"plugin fungerar. Bygg sedan och presentera ditt eget arbete!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:8
 msgid "Coordinate and orientation tests"
-msgstr ""
+msgstr "Koordinera och orientera tester"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:10
@@ -52,6 +58,14 @@ msgid ""
 "absolutely and always point west-east, the grid lines hit the northern "
 "horizon slightly (4.2 deg) left of north!"
 msgstr ""
+"De pelare som visas här, sett från konstruktionens mitt, ger en ungefärlig "
+"bild (inte högprecision!) av solståndets/equinox soluppgångens/solnedgångens"
+" positioner på centraleuropeiska breddgrader. De centrala pelarna ger en "
+"öst-västlig linje. Det koordinatnät som syns på golvet är inte i linje med "
+"den geografiska nordriktningen.  En rotation på -4,2 grader (test för "
+"meridiankonvergens) måste kompenseras, d.v.s. medan de centrala pelarna "
+"absolut och alltid måste peka mot väst-öst, träffar rutnätslinjerna den "
+"norra horisonten något (4,2 grader) till vänster om norr!"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:19
@@ -59,11 +73,13 @@ msgid ""
 "Walkaround ground coordinates (Ctrl-R, T) should display the coordinates "
 "visible along the south and west border of the ground."
 msgstr ""
+"Koordinater för markrunda (Ctrl-R, T) bör visa de koordinater som är synliga"
+" längs markens södra och västra kant."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:23
 msgid "Material test"
-msgstr ""
+msgstr "Materialtest"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:25
@@ -72,6 +88,9 @@ msgid ""
 " can play with material parameters to create funny effects like "
 "semitransparent or glow-in-the-dark brick spheres."
 msgstr ""
+"Den här modellen används också för att testa plugin-programmets grafiska "
+"funktioner. Du kan leka med materialparametrar för att skapa roliga effekter"
+" som halvgenomskinliga eller självlysande sfärer av tegelstenar."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:29
@@ -79,12 +98,14 @@ msgid ""
 "To test temporal features, the pillars and spheres are visible only from the"
 " years 2000 until 2020.  Edit the material file to change that!"
 msgstr ""
+"För att testa temporala funktioner är pelarna och sfärerna synliga endast "
+"från år 2000 till 2020.  Redigera materialfilen för att ändra det!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:32
 #: ../../scenery3d/Sterngarten/description.en.utf8:56
 msgid "Model"
-msgstr ""
+msgstr "Modell"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:33
@@ -92,6 +113,8 @@ msgid ""
 "Testscene for Stellarium/scenery3d development. Export from SU8-Kerkythea-"
 "KT2OBJ."
 msgstr ""
+"Testscen för Stellarium/scenery3d-utveckling. Export från SU8-Kerkythea-"
+"KT2OBJ."
 
 #. type: Content of: <h2>
 #: ../../scenery3d/Sterngarten/description.en.utf8:1
@@ -104,11 +127,13 @@ msgid ""
 "Sterngarten (\"Star Garden\") is an open-air planetarium in the south-west "
 "of Vienna, demonstrating the solar year."
 msgstr ""
+"Sterngarten (\"Stjärnträdgården\") är ett utomhusplanetarium i sydvästra "
+"Wien som visar solåret."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:7
 msgid "Idea"
-msgstr ""
+msgstr "Idé"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:9
@@ -117,11 +142,14 @@ msgid ""
 "Astronomical Bureau (1907) and Austrian Astronomical Society (1924). "
 "Director of first Vienna Planetarium (1927) and Urania observatory."
 msgstr ""
+"Univ.prof.dr Oswald Thomas (1882 Kronstadt - 1963 Wien). Grundare av "
+"Astronomical Bureau (1907) och Austrian Astronomical Society (1924). "
+"Direktör för Wiens första planetarium (1927) och Urania-observatoriet."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:14
 msgid "Construction"
-msgstr ""
+msgstr "Konstruktion"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:16
@@ -135,6 +163,13 @@ msgid ""
 "Calendar)  and the monthly journal \"Der Sternenbote\" (The Starry "
 "Messenger)."
 msgstr ""
+"Sterngarten utvecklades av Thomas elev och efterträdare på Astronomiska "
+"byrån Prof. Hermann Mucke (1935-2019) tillsammans med hans medarbetare.  "
+"Mucke var också sekreterare i Österrikiska astronomiska sällskapet "
+"1963-2018, chef för Wiens planetarium 1963-2001 och Wiens offentliga "
+"observatorium Urania 1971-2001. Under mer än 60 år publicerade Mucke och "
+"sällskapet \"Österreichischer Himmelskalender\" (Österrikiska "
+"himlakalendern) och månadsskriften \"Der Sternenbote\" (Stjärnbudbäraren)."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:22
@@ -142,11 +177,13 @@ msgid ""
 "It was built 1997-2001 by the Austrian Astronomical Society, supported by "
 "public and private sponsors."
 msgstr ""
+"Den byggdes 1997-2001 av Austrian Astronomical Society, med stöd av "
+"offentliga och privata sponsorer."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:24
 msgid "Purpose"
-msgstr ""
+msgstr "Syfte"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:26
@@ -157,11 +194,15 @@ msgid ""
 "southwest of Vienna; always open privately for everybody free of charge. "
 "Frequently guided tours."
 msgstr ""
+"Förbättring av grundläggande astronomisk kunskap hos allmänheten. Att "
+"bevittna fakta och förändringar på himlen med blotta ögat, eventuellt med "
+"ett fältglas, erbjuds av vår anläggning, som ligger i sydvästra Wien; alltid"
+" öppen privat för alla utan kostnad. Ofta guidade turer."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:32
 msgid "Components"
-msgstr ""
+msgstr "Komponenter"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:35
@@ -169,17 +210,19 @@ msgid ""
 "Pyramid with platform 7x7m. Seen from 1.5m above Center Plate all angles "
 "fit."
 msgstr ""
+"Pyramid med plattform 7x7m. Sett från 1,5 m ovanför mittplattan passar alla "
+"vinklar."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:36
 msgid "Horizon Railing, representing the mathematical horizon."
-msgstr ""
+msgstr "Horizon Railing, som representerar den matematiska horisonten."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:37
 msgid ""
 "Surrounding Steps; 200 seats. Entrance by staircase and wheelchair ramp."
-msgstr ""
+msgstr "Omgivande trappor; 200 platser. Ingång via trappa och rullstolsramp."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:38
@@ -190,6 +233,11 @@ msgid ""
 "rising/setting on the mathematical horizon is not possible in the field due "
 "to vegetation and landscape)."
 msgstr ""
+"Pelare för soluppgång och solnedgång i början av årstiderna.  Pelarnas "
+"positioner är precis på azimuterna för dagjämning och solstånd.  Armarna "
+"indikerar horisonten och förskjutningseffekten på grund av refraktion.  "
+"(Observation av uppgång/sänkning på den matematiska horisonten är inte "
+"möjlig i fält på grund av vegetation och landskap)."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:42
@@ -197,6 +245,8 @@ msgid ""
 "South Pillar, marked (10&deg;/10&deg; altitude); Transit marks for sun at "
 "seasons' beginning."
 msgstr ""
+"Södra pelaren, markerad (10°/10° höjd); Transitmarkeringar för solen i "
+"början av säsongerna."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:43
@@ -204,6 +254,8 @@ msgid ""
 "North Pillar, marked (10&deg;/10&deg; altitude); on top Shadow Disc with "
 "central hole: North celestial Pole."
 msgstr ""
+"Nordpelare, markerad (10°/10° höjd); ovanpå skuggskiva med centralt hål: "
+"Norra himmelspolen."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:44
@@ -213,26 +265,29 @@ msgid ""
 " longitude, with zodiacal signs. Ascending part serves as polar gnomon for "
 "the"
 msgstr ""
+"Bent Analemma, uppdelad. Vår- och sommardatum på den horisontella delen, "
+"höst- och vinterdatum på den stigande, markerade (10°/10°) solens longitud, "
+"med zodiakens tecken. Den uppåtgående delen fungerar som polär gnomon för"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:45
 msgid "Sundial, full hours Vh to VIIh marked."
-msgstr ""
+msgstr "Solur, fulla timmar Vh till VIIh markerade."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:46
 msgid "Information panels."
-msgstr ""
+msgstr "Informationspaneler."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:49
 msgid "Further Information"
-msgstr ""
+msgstr "Vidare information"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:50
 msgid "Websites in German only."
-msgstr ""
+msgstr "Webbsidor endast på tyska."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:52
@@ -240,6 +295,8 @@ msgid ""
 "Österreichischer Astronomischer Verein: <a "
 "href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
 msgstr ""
+"Österreichischer Astronomischer Verein: <a "
+"href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:53
@@ -247,6 +304,8 @@ msgid ""
 "German Wikipedia article on the <a "
 "href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
 msgstr ""
+"Artikel i tyska Wikipedia om <a "
+"href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:57
@@ -256,6 +315,10 @@ msgid ""
 "by Mucke in his primary school days. Mucke's spirit will remain alive in the"
 " Sterngarten."
 msgstr ""
+"Skapad av Georg Zotti efter ritningar av H. Mucke; Liksom otaliga amatör- "
+"och yrkesastronomer i Österrike introducerades Zotti till astronomi av Mucke"
+" under sin grundskoletid. Mucke's anda kommer att förbli levande i "
+"Sterngarten."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:60
@@ -263,3 +326,5 @@ msgid ""
 "Model created in 2010 with Google Sketchup 8, exported from Google Sketchup "
 "8.0.14346."
 msgstr ""
+"Modell skapad 2010 med Google Sketchup 8, exporterad från Google Sketchup "
+"8.0.14346."

@@ -1,0 +1,760 @@
+{
+  "id": "arabic_indigenous",
+  "region": "Western Asia",
+  "classification": ["traditional"],
+  "fallback_to_international_names": false,
+  "constellations": [
+    {
+      "id": "CON arabic_indigenous 0100",
+      "lines": [[72607, 75097]],
+      "common_name": {"english": "The Two Oryx Calves", "native": "الفرقدان", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 0200",
+      "lines": [[11767, 85822, 82080, 77055, 72607, 70692, 69112, 62572, 11767]],
+      "common_name": {"english": "The Axe Of The Grindstone", "native": "فأس الرحى", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 0300",
+      "lines": [[54061, 53910, 58001, 59774, 62956, 65378, 67301]],
+      "common_name": {"english": "Daughters Of Na'sh", "native": "بنات نعش", "references": [1,2,3,4], "translators_comments": "Na'sh is a proper name meaning bier"}
+    },
+    {
+      "id": "CON arabic_indigenous 0400",
+      "lines": [[61317, 58684, 55560, 54539, 52469, 48682], [57565, 54951, 53417, 50303, 45860, 44700, 44248], [60485, 57399, 54539]],
+      "common_name": {"english": "The Gazelles And Their Youngsters", "native": "الظباء وأولاد الظباء", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 0410",
+      "lines": [[55219, 55203]],
+      "common_name": {"english": "The First Leap", "native": "القفزة الأولى", "references": [3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 0420",
+      "lines": [[50372, 50801]],
+      "common_name": {"english": "The Second Leap", "native": "القفزة الثانية", "references": [3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 0430",
+      "lines": [[44127, 44471]],
+      "common_name": {"english": "The Third Leap", "native": "القفزة الثالثة", "references": [3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 0501",
+      "lines": [[46733, 48319]],
+      "common_name": {"english": "The Two Preceding To The Water", "native": "الفارطان", "references": [5,6]}
+    },
+    {
+      "id": "CON arabic_indigenous 0500",
+      "lines": [[41704, 45075, 46733, 48319, 48402, 46853, 44901]],
+      "common_name": {"english": "The Pool", "native": "الحوض", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 0600",
+      "lines": [[83895, 80331]],
+      "common_name": {"english": "The Two Wolves", "native": "الذئبان", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 0700",
+      "lines": [[85819, 85670, 87833, 87585, 85819]],
+      "common_name": {"english": "The Mother Camels", "native": "العوائذ", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 0800",
+      "lines": [[94376, 97433, 89937, 94376]],
+      "common_name": {"english": "The Three Stone Support", "native": "الأثافي", "references": [3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 0900",
+      "lines": [[102422, 101093, 98962, 97892, 98073, 99655, 101084, 102431, 102775, 102727, 102422]],
+      "common_name": {"english": "The Pot", "native": "القدر", "references": [2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1000",
+      "lines": [[107119, 112724, 117371, 3721, 5626, 5372, 109693, 101044, 99255, 99255, 101260, 107119]],
+      "common_name": {"english": "The Shepherd And The Sheep", "native": "الراعي الشمالي والشاء", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1100",
+      "lines": [[69673, 69226, 67665], [71053, 71284, 72105, 67927, 67275, 67459]],
+      "common_name": {"english": "The Armed One", "native": "ذو السلاح", "references": [1,2]}
+    },
+    {
+      "id": "CON arabic_indigenous 1200",
+      "lines": [[65474, 65474], [65239, 65239]],
+      "common_name": {"english": "The Unarmed One", "native": "السماك الأعزل", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1300",
+      "lines": [[71075, 72552, 73568, 73996, 75312, 76617, 80181, 81693, 81833, 81126, 79992, 70497, 69483, 69732, 71075]],
+      "common_name": {"english": "The Hyenas And Their Youngsters", "native": "الضباع وأولاد الضباع", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1400",
+      "lines": [[77048, 76127, 75695, 76267, 76952, 77512, 78159, 78493]],
+      "common_name": {"english": "The Bowl Of The Poor", "native": "قصعة المساكين", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1500",
+      "lines": [[75530, 75530], [92420, 92420], [84893, 84893]],
+      "common_name": {"english": "The Desert Garden And The Goats", "native": "الروضة والأغنام", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1600",
+      "lines": [[91262, 91919], [91262, 91971]],
+      "common_name": {"english": "The Landing Eagle", "native": "النسر الواقع", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1700",
+      "lines": [[97649, 98036], [97649, 97278]],
+      "common_name": {"english": "The Flying Eagle", "native": "النسر الطائر", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1800",
+      "lines": [[94779, 97165, 100453, 102488, 104732]],
+      "common_name": {"english": "The Knights", "native": "الفوارس", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1901",
+      "lines": [[116631, 116805, 116584, 117221]],
+      "common_name": {"english": "Head Of The She-Camel", "native": "رأس الناقة", "references": [1,2,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1902",
+      "lines": [[117221, 841, 2225, 2900, 3414, 3504, 3300, 2920]],
+      "common_name": {"english": "Neck Of The She-Camel", "native": "عنق الناقة", "references": [1,2,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1903",
+      "lines": [[5251, 8068], [4998, 7607]],
+      "common_name": {"english": "Legs Of The She-Camel", "native": "يدا الناقة", "references": [4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1900",
+      "lines": [[116631, 116805, 116584, 117221, 841, 2225, 2900, 3414, 3504, 3300, 2920, 2505, 746, 2599, 8886], [2505, 3179, 3821, 4292, 4427, 2599]],
+      "common_name": {"english": "The She-Camel", "native": "الناقة", "references": [1,2,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2001",
+      "lines": [[8886, 8886], [4427, 4427], [6686, 6686], [746, 746], [3179, 3179]],
+      "common_name": {"english": "The She-Camel's Hump - The Henna Tinted Hand", "native": "سنام الناقة - الكف الخضيب", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2008",
+      "lines": [[14135, 13954, 12828], [14135, 12706, 11484], [14135, 12387, 11484], [17702, 16369, 14135], [17702, 16322, 16083, 15900, 14135], [11791, 11791]],
+      "common_name": {"english": "The Leprous Hand", "native": "الكف الجذماء", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2002",
+      "lines": [[17702, 18246], [17702, 17448]],
+      "common_name": {"english": "The Shoulder Blade", "native": "العاتق", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2003",
+      "lines": [[18246, 18614], [17448, 17460]],
+      "common_name": {"english": "The Shoulder", "native": "المنكب", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2004",
+      "lines": [[18614, 18532, 17358], [17460, 17529, 16335]],
+      "common_name": {"english": "The Arm", "native": "العضد", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2005",
+      "lines": [[17358, 14328], [16335, 15863, 14328]],
+      "common_name": {"english": "The Elbow", "native": "المرفق", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2006",
+      "lines": [[14328, 13268, 11020]],
+      "common_name": {"english": "The Forearm", "native": "الساعد", "references": [2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2007",
+      "lines": [[11020, 11020]],
+      "common_name": {"english": "The Wrist", "native": "المعصم", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2000",
+      "lines": [[14135, 13954, 12828], [14135, 12706, 11484], [14135, 12387, 11484], [11020, 13268, 14328, 17358, 18532, 18614, 18246, 17702, 17448, 17460, 17529, 16335, 15863, 14328], [17702, 16369, 14135], [17702, 16322, 16083, 15900, 14135]],
+      "common_name": {"english": "Al-Thurayya"}
+    },
+    {
+      "id": "CON arabic_indigenous 2100",
+      "lines": [[24608, 28360, 28380, 25428, 23015, 24608]],
+      "common_name": {"english": "Al-Ayyuq And The Posts", "native": "العيوق والأعلام", "references": [1,2,3,4], "translators_comments": "Al-Ayyuq is a proper name meaning the obstructor"}
+    },
+    {
+      "id": "CON arabic_indigenous 2200",
+      "lines": [[28358, 33449, 22783, 23522, 28358]],
+      "common_name": {"english": "The Northern Tent", "native": "الخباء الشآمي", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2300",
+      "lines": [[101769, 101958, 102532, 102281, 101769]],
+      "common_name": {"english": "The Young Camel", "native": "القعود", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2400",
+      "lines": [[9640, 9640], [9438, 9438]],
+      "common_name": {"english": "The Caracal", "native": "عناق الأرض", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2501",
+      "lines": [[115250, 115623]],
+      "common_name": {"english": "The Bucket Rope Knot", "native": "الكرب", "references": [1,2,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2506",
+      "lines": [[115623, 3092, 5447], [3881, 3231, 2912, 3031, 3693, 5454, 5571, 6193, 6315, 5447, 3881]],
+      "common_name": {"english": "The Bucket Rope", "native": "الرشاء", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2550",
+      "lines": [[3881, 3231, 2912, 3031, 3693, 5454, 5571, 6193, 6315, 5447, 3881]],
+      "common_name": {"english": "The Fish", "native": "الحوت", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2560",
+      "lines": [[1168, 1193, 1215, 2355, 2583, 2926, 1168]],
+      "common_name": {"english": "The Empty Place Of The Fox", "native": "بلدة الثعلب", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2500",
+      "lines": [[115250, 115623, 3092, 5447], [113881, 677], [113881, 1067], [113963, 677], [113963, 1067], [677, 1067], [113881, 113963]],
+      "common_name": {"english": "The Well Bucket", "native": "الدلو", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2502",
+      "lines": [[113881, 113963]],
+      "common_name": {"english": "The Front Bucket Mouth", "native": "الفرغ المقدم", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2504",
+      "lines": [[677, 1067]],
+      "common_name": {"english": "The Rear Bucket Mouth", "native": "الفرغ المؤخر", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2601",
+      "lines": [[8796, 8796], [10064, 10064]],
+      "common_name": {"english": "The Two Forelegs Of The Lamb", "native": "الأيبسان", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2602",
+      "lines": [[9884, 8903]],
+      "common_name": {"english": "The Two Signs", "native": "الشرطان", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2603",
+      "lines": [[12719, 13209, 13061, 12719]],
+      "common_name": {"english": "The Little Abdomen", "native": "البطين", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2600",
+      "lines": [[14576, 14354, 15549, 15696, 15861, 15110, 14838, 9884, 10535, 13061, 15549], [10535, 8796], [10535, 10064], [8903, 9153, 9884, 8903, 8832]],
+      "common_name": {"english": "The Lamb", "native": "الحمل", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2702",
+      "lines": [[20711, 20635]],
+      "common_name": {"english": "The Two Dogs Of Al-Dabaran", "native": "كلبا الدبران", "references": [1,2,3,4], "translators_comments": "Al-Dabaran is a proper name meaning the follower"}
+    },
+    {
+      "id": "CON arabic_indigenous 2703",
+      "lines": [[21273, 20219, 19284, 19038, 20250, 21881, 22565, 21273]],
+      "common_name": {"english": "The Young She-Camels", "native": "القلاص", "references": [1,2,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2801",
+      "lines": [[37279, 36188]],
+      "common_name": {"english": "The Retracted Arm", "native": "الذراع المقبوضة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2802",
+      "lines": [[36850, 37826]],
+      "common_name": {"english": "The Extended Arm", "native": "الذراع المبسوطة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2803",
+      "lines": [[42806, 42556, 42911], [43004, 43004]],
+      "common_name": {"english": "The Nostrils", "native": "النثرة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2804",
+      "lines": [[47908, 47508]],
+      "common_name": {"english": "The Eyes", "native": "الطرف", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2805",
+      "lines": [[50335, 50583, 49583, 49669]],
+      "common_name": {"english": "The Forehead", "native": "الجبهة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2806",
+      "lines": [[54872, 54879]],
+      "common_name": {"english": "The Mane", "native": "الزبرة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2808",
+      "lines": [[63608, 63090, 61941, 60129, 57757]],
+      "common_name": {"english": "The Bend", "native": "العوا", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2810",
+      "lines": [[69701, 69427, 69974], [70784, 70784]],
+      "common_name": {"english": "The Cover", "native": "الغفر", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2811",
+      "lines": [[61394, 60087, 59847, 59468, 59364, 59489, 59923, 60742, 60697, 60746, 60904, 61071, 61394]],
+      "common_name": {"english": "The Tassel", "native": "الهلبة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2800",
+      "lines": [[37279, 47508, 57757, 60129, 61941, 63090, 63608, 60202, 48455, 37826], [42806, 42556, 42911], [43004, 43004], [47508, 42911], [48455, 42806], [61394, 62886, 64241, 64792, 64852, 63090]],
+      "common_name": {"english": "The Lion", "native": "الأسد", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2902",
+      "lines": [[78820, 78401, 78265]],
+      "common_name": {"english": "The Diadem", "native": "الإكليل", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2906",
+      "lines": [[85927, 85696]],
+      "common_name": {"english": "The Scorpion's Sting", "native": "الشولة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2900",
+      "lines": [[78820, 78401, 78265], [74785, 78820, 80112], [72622, 78265, 80112], [78401, 80112, 80763, 81266, 82396, 82514, 82729, 84143, 86228, 87073, 86670, 85927]],
+      "common_name": {"english": "The Scorpion", "native": "العقرب", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 3001",
+      "lines": [[88635, 89642, 90185, 89931, 88635]],
+      "common_name": {"english": "The Ostriches Drinking At The River", "native": "النعام الوارد", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 3002",
+      "lines": [[92855, 93864, 93506, 92041, 92855]],
+      "common_name": {"english": "The Ostriches Leaving The River", "native": "النعام الصادر", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 3003",
+      "lines": [[93085, 93683, 94141, 94820, 95168, 95176]],
+      "common_name": {"english": "The Ostrich Nest - The Necklace", "native": "الأدحي - القلادة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 3004",
+      "lines": [[90759, 90982, 91494, 92308, 93542, 94005, 94160, 94114, 93825, 93174, 91875, 90887, 90759]],
+      "common_name": {"english": "The Dome-Like Tent", "native": "القبة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 3005",
+      "lines": [[97290, 96760, 95503, 95564, 96440, 97290]],
+      "common_name": {"english": "The Empty Place", "native": "البلدة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 3000",
+      "lines": [[89931, 90185, 93506, 92041, 89931], [88635, 89642, 90185, 89931, 88635], [92855, 93864, 93506, 92041, 92855], [89931, 90496, 92041]],
+      "common_name": {"english": "The Ostriches", "native": "النعائم", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 3100",
+      "lines": [[100064, 100310, 100345]],
+      "common_name": {"english": "The Lucky Star Of The Slaughterer", "native": "سعد الذابح", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 3200",
+      "lines": [[102618, 103045, 104459]],
+      "common_name": {"english": "The Lucky Star Of The Swallower", "native": "سعد بلع", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 3300",
+      "lines": [[106278, 106786, 107382]],
+      "common_name": {"english": "The Luckiest Of The Lucky Stars", "native": "سعد السعود", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 3400",
+      "lines": [[110395, 110960, 110672], [110960, 111497], [110395, 110672], [110395, 111497]],
+      "common_name": {"english": "The Lucky Star Of The Tents", "native": "سعد الأخبية", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 3500",
+      "lines": [[106985, 107556]],
+      "common_name": {"english": "The Lucky Star Of Nashira", "native": "سعد ناشرة", "references": [1,2,3,4], "translators_comments": "Nashira is a proper name"}
+    },
+    {
+      "id": "CON arabic_indigenous 3600",
+      "lines": [[109074, 108874]],
+      "common_name": {"english": "The Lucky Star Of The King", "native": "سعد الملك", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 3700",
+      "lines": [[109427, 109068]],
+      "common_name": {"english": "The Lucky Star Of The Young Sheep", "native": "سعد البهام", "references": [2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 3800",
+      "lines": [[112029, 112447]],
+      "common_name": {"english": "The Lucky Star Of The One With Great Endeavour", "native": "سعد الهمام", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 3900",
+      "lines": [[112440, 112748]],
+      "common_name": {"english": "The Lucky Star Of The Excellent One", "native": "سعد البارع", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 4000",
+      "lines": [[112158, 112051]],
+      "common_name": {"english": "The Lucky Star Of Matar", "native": "سعد مطر", "references": [1,2,3,4], "translators_comments": "Matar is a proper name meaning rain"}
+    },
+    {
+      "id": "CON arabic_indigenous 4100",
+      "lines": [[113889, 115227, 115830, 116771, 117245, 116928, 116422, 115738, 114971, 115227], [116771, 118268]],
+      "common_name": {"english": "The Ringed Rope", "native": "الربق", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 4201",
+      "lines": [[26207, 26176, 26366, 26207], [26444, 26444]],
+      "common_name": {"english": "The Circular Mark‎", "native": "الهقعة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 4202",
+      "lines": [[25930, 26311, 26727]],
+      "common_name": {"english": "The String", "native": "النظم", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 4203",
+      "lines": [[26237, 26235, 26241]],
+      "common_name": {"english": "The Young Maids", "native": "الجواري", "references": [1,2,3]}
+    },
+    {
+      "id": "CON arabic_indigenous 4204",
+      "lines": [[24010, 23607, 22957, 22509, 22449, 22549, 22797, 23123]],
+      "common_name": {"english": "Hair Braids Of Al-Jawza", "native": "ذوائب الجوزاء", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 4206",
+      "lines": [[31681, 32362]],
+      "common_name": {"english": "The Downward Bend", "native": "الهنعة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 4207",
+      "lines": [[29655, 30343, 30883]],
+      "common_name": {"english": "Stars Of Abundant Rain", "native": "التحايي", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 4205",
+      "lines": [[30419, 31216, 31978, 32362, 31681, 30883, 30343, 29655]],
+      "common_name": {"english": "Bow Of Al-Jawza", "native": "قوس الجوزاء", "references": [1,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 4200",
+      "lines": [[26207, 26487], [25336, 26487, 27989], [25336, 25930, 26311, 26727, 27366, 24436], [27989, 32362], [30419, 31216, 31978, 32362, 31681, 30883, 30343, 29655], [24010, 23607, 22957, 22509, 22449, 22549, 22797, 23123], [25336, 22449], [24436, 25930], [27989, 26727]],
+      "common_name": {"english": "Al-Jawza", "native": "الجوزاء", "references": [1,2,3,4], "translators_comments": "Al-Jawza is a proper name"}
+    },
+    {
+      "id": "CON arabic_indigenous 4300",
+      "lines": [[23972, 23364, 23875, 24674, 23972]],
+      "common_name": {"english": "The Front Footstool Of Al-Jawza", "native": "كرسي الجوزاء المقدم", "references": [2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 4400",
+      "lines": [[25985, 25606, 27072, 27654, 25985]],
+      "common_name": {"english": "The Rear Footstool Of Al-Jawza", "native": "كرسي الجوزاء المؤخر", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 4500",
+      "lines": [[35264, 33579, 33977, 34444, 35904, 35264]],
+      "common_name": {"english": "The Virgins", "native": "العذارى", "references": [1,2,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 4600",
+      "lines": [[25859, 26634, 27628, 30277, 30122]],
+      "common_name": {"english": "The Ravens", "native": "الأغربة", "references": [4]}
+    },
+    {
+      "id": "CON arabic_indigenous 4700",
+      "lines": [[9347, 8102, 8645, 6537, 5364]],
+      "common_name": {"english": "The Ostriches", "native": "النعامات", "references": [1,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 4800",
+      "lines": [[13701, 12770, 12843, 13288, 14146, 14757, 16611, 18543]],
+      "common_name": {"english": "The Ostriches Nest, The Eggs And Egg Shells", "native": "أدحي النعام والبيض والقيض", "references": [1,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 4900",
+      "lines": [[15457, 16852, 18255, 19860, 18724, 15457]],
+      "common_name": {"english": "The Oryxes", "native": "البقر", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 5000",
+      "lines": [[49841, 52943, 59316, 61359, 64962, 68895, 73714, 76470]],
+      "common_name": {"english": "The Tied Camels", "native": "الشراسيف", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 5100",
+      "lines": [[58188, 57283, 55705, 55282, 55687, 56633]],
+      "common_name": {"english": "The Trough", "native": "المعلف", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 5200",
+      "lines": [[59316, 61359, 60965, 59803, 59316]],
+      "common_name": {"english": "The Southern Tent", "native": "الخباء اليماني", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 5300",
+      "lines": [[71683, 68702, 66657, 61932, 57803, 59196, 61084, 62434], [59196, 59747, 60260, 60718], [57803, 57443, 56343]],
+      "common_name": {"english": "The Date Clusters", "native": "الشماريخ", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 5400",
+      "lines": [[68933, 72010, 75177, 78384, 80000, 85792, 88714, 82363, 68002, 65109, 68933]],
+      "common_name": {"english": "The Horses And The Foals", "native": "الخيل وأفلاء الخيل", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 5500",
+      "lines": [[101772, 100751]],
+      "common_name": {"english": "The Two Shrikes", "native": "الصردان", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 5600",
+      "lines": [[112122, 109268]],
+      "common_name": {"english": "The Two Doves", "native": "اليمامتان", "references": [1,2,3]}
+    },
+    {
+      "id": "CON arabic_indigenous 5700",
+      "lines": [[113368, 3419]],
+      "common_name": {"english": "The Two Male Ostriches", "native": "الظليمان", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 5800",
+      "lines": [[114341, 114375, 114119], [115438, 115669, 116247], [117629, 117089, 116901], [301, 983, 1170]],
+      "common_name": {"english": "The Young Ostriches", "native": "الرئال", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 5900",
+      "lines": [[114421, 116602, 765, 3245, 5165, 7083, 9007]],
+      "common_name": {"english": "The Larks", "native": "المكاكي", "references": [1]}
+    },
+    {
+      "id": "CON arabic_indigenous 6000",
+      "lines": [[113246, 111188, 109306, 107380, 105140, 103738, 108085, 108543, 109111, 109973, 110997]],
+      "common_name": {"english": "The Sandgrouses", "native": "القطا", "references": [1,2,3]}
+    },
+    {
+      "id": "CON arabic_indigenous 6100",
+      "lines": [[112961, 112716, 113136, 116971, 1562, 118209, 117375, 112961]],
+      "common_name": {"english": "The Wild Asses", "native": "العانة", "references": [1,3]}
+    },
+    {
+      "id": "CON arabic_indigenous 6200",
+      "lines": [[3786, 4906, 7007, 7884, 9487]],
+      "common_name": {"english": "The Ladder", "native": "السلم", "references": [1,3]}
+    },
+    {
+      "id": "CON arabic_indigenous 0601",
+      "lines": [[85805, 86201]],
+      "common_name": {"english": "The Wolf Claws", "native": "أظفار الذئب", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1001",
+      "lines": [[106032, 105199]],
+      "common_name": {"english": "The Two Separated Stars", "native": "كوكبا الفرق", "references": [3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1101",
+      "lines": [[71053, 71284, 72105, 67927, 67275, 67459]],
+      "common_name": {"english": "The Spear", "native": "الرمح", "references": [4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1501",
+      "lines": [[92420, 87933, 86974, 85693, 84379, 80816, 80170, 79043, 78072, 77233, 75530]],
+      "common_name": {"english": "The Northern Line", "native": "النسق الشآمي", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 1502",
+      "lines": [[75530, 76276, 77070, 77622, 79593, 79882, 80628, 81377, 84012, 84893]],
+      "common_name": {"english": "The Southern Line", "native": "النسق اليماني", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_indigenous 2604",
+      "lines": [[17181, 17181]],
+      "common_name": {"english": "Al-Thurayya", "native": "الثريا", "references": [1,2,3,4], "translators_comments": "Al-Thurayya is a proper name"}
+    },
+    {
+      "id": "CON arabic_indigenous 2701",
+      "lines": [[21421, 21421], [20894, 20894]],
+      "common_name": {"english": "Al-Dabaran", "native": "الدبران", "references": [1,2,3,4]}
+    }
+  ],
+  "common_names": {
+    "HIP 677": [{"english": "The Rear Bucket Mouth 2", "references": [1,2,3,4]},
+                {"english": "The Lower Cross Beam 2", "references": [1,2,3,4]}],
+    "HIP 746": [{"english": "The She-Camel's Hump", "references": [1,2,3,4]}],
+    "HIP 1067": [{"english": "The Rear Bucket Mouth 1", "references": [1,2,3,4]},
+                 {"english": "The Lower Cross Beam 1", "references": [1,2,3,4]}],
+    "HIP 2081": [{"english": "Hadari", "references": [1,2,3,4], "translators_comments": "Hadari is a proper name"}],
+    "HIP 3419": [{"english": "The Two Male Ostriches 2", "references": [1,2,3,4]}],
+    "HIP 5447": [{"english": "Abdomen Of The Fish", "references": [1,2]},
+                 {"english": "Abdomen Of The Whale", "references": [3,4]}],
+    "HIP 7588": [{"english": "Oath Star", "references": [1,2,3,4]},
+                 {"english": "Al-Wazn", "references": [1,2,3,4], "translators_comments": "Al-wazn is a proper name"}],
+    "HIP 8796": [{"english": "The Two Forelegs 1", "references": [1,2,3,4]}],
+    "HIP 9640": [{"english": "The Caracal", "references": [1,2,3,4]}],
+    "HIP 10064": [{"english": "The Two Forelegs 2", "references": [1,2,3,4]}],
+    "HIP 11020": [{"english": "The Wrist", "references": [1,2,3,4]}],
+    "HIP 11767": [{"english": "The Kid", "references": [1,2,3,4]}],
+    "HIP 14328": [{"english": "The Forearm", "references": [2,3,4]}],
+    "HIP 15863": [{"english": "The Elbow", "references": [1,2,3,4]}],
+    "HIP 16335": [{"english": "Bend Of The Hand", "references": [1,2,3,4]}],
+    "HIP 17358": [{"english": "Tip Of The Elbow", "references": [1,2,3,4]}],
+    "HIP 18246": [{"english": "The Shoulder Blade", "references": [1,2,3,4]}],
+    "HIP 18532": [{"english": "The Arm", "references": [1,2,3,4]}],
+    "HIP 18614": [{"english": "The Shoulder", "references": [1,2,3,4]}],
+    "HIP 21421": [{"english": "Al-Dabaran", "references": [1,2,3,4]},
+                  {"english": "The Male Camel", "references": [2,3,4]},
+                  {"english": "The Wood Stirring Rod", "references": [1,2,3,4]},
+                  {"english": "The Camel Herder", "references": [2,3,4]}],
+    "HIP 23015": [{"english": "Foot Of Al-Ayyuq", "references": [1,2,3], "translators_comments": "Al-Ayyuq is a proper name meaning the obstructor"}],
+    "HIP 24436": [{"english": "Leg Of Al-Jawza", "references": [1,2,3,4], "translators_comments": "Al-Jawza is a proper Arabic name of orion"}],
+    "HIP 24608": [{"english": "Al-Ayyuq", "references": [1,2,3,4], "translators_comments": "Al-Ayyuq is a proper name meaning the obstructor"},
+                  {"english": "Ayyuq Al-Thurayya", "references": [1,2,3,4], "translators_comments": "Ayyuq Al-Thurayya is a proper name meaning the obstructor of Al-Thurayya"},
+                  {"english": "Al-Thurayya watcher", "references": [4,9], "translators_comments": "Al-Thurayya is a proper name"}],
+    "HIP 25336": [{"english": "Al-Najidh", "references": [2,3,4], "translators_comments": "Al-Najidh is a proper name"}],
+    "HIP 25428": [{"english": "The Posts 3", "references": [1,2,3,4]},
+                  {"english": "The Associates Of Al-Ayyuq 3", "references": [1,2,3,4]}],
+    "HIP 26366": [{"english": "The Circular Mark", "references": [1,2,3,4]}],
+    "HIP 27989": [{"english": "Shoulder Of Al-Jawza", "references": [2,3,4], "translators_comments": "Al-Jawza is a proper Arabic name of orion"}],
+    "HIP 28360": [{"english": "The Posts 1", "references": [1,2,3,4]},
+                  {"english": "The Associates Of Al-Ayyuq 1", "references": [1,2,3,4]}],
+    "HIP 28380": [{"english": "The Posts 2", "references": [1,2,3,4]},
+                  {"english": "The Associates Of Al-Ayyuq 2", "references": [1,2,3,4]}],
+    "HIP 29655": [{"english": "Stars Of Abundant Rain 1", "references": [1,2,3,4]}],
+    "HIP 30324": [{"english": "Mirzam Of The Crossing Shi'ra", "references": [1,2,3,4], "translators_comments": "Mirzam is an associate star of the crossing Shi'ra which is a proper Arabic name of Sirius"},
+                  {"english": "Mirzam Of Al-Shi'ra", "references": [4], "translators_comments": "Mirzam is an associate star of Al-Shi'ra which is a proper Arabic name of Sirius"}],
+    "HIP 30343": [{"english": "Stars Of Abundant Rain 2", "references": [1,2,3,4]}],
+    "HIP 30438": [{"english": "Suhayl", "references": [1,2,3,4], "translators_comments": "ٍSuhayl is a proper name"}],
+    "HIP 30883": [{"english": "Stars Of Abundant Rain 3", "references": [1,2,3,4]}],
+    "HIP 31681": [{"english": "Az-Zir", "references": [1,2,3,4], "translators_comments": "Az-zir is a proper name"}],
+    "HIP 32349": [{"english": "The Southern Shi'ra", "references": [1,2,3,4], "translators_comments": "The southern Shi'ra is a proper Arabic name of Sirius"},
+                  {"english": "The Crossing Shi'ra", "references": [1,2,3,4], "translators_comments": "The crossing Shi'ra is a proper Arabic name of Sirius"}],
+    "HIP 32362": [{"english": "Al-Maysan", "references": [1,2,3,4], "translators_comments": "Al-Maysan is a proper name"}],
+    "HIP 32768": [{"english": "Suhayl Balqayn", "references": [1,2,3,4], "translators_comments": "Suhayl Balqayn is a proper name"}],
+    "HIP 34088": [{"english": "The Claws 5", "references": [1,3,4]}],
+    "HIP 35350": [{"english": "The Claws 6", "references": [1,3,4]}],
+    "HIP 35550": [{"english": "The Claws 4", "references": [1,3,4]}],
+    "HIP 36046": [{"english": "The Claws 1", "references": [1,3,4]}],
+    "HIP 36188": [{"english": "Mirzam of The Arm", "references": [1,2,3], "translators_comments": "Mirzam is an associate star of the tearful Shi'ra, which is a proper Arabic name of Procyon. The two stars together are called the Arm."}],
+    "HIP 36962": [{"english": "The Claws 2", "references": [1,3,4]}],
+    "HIP 37279": [{"english": "The Northern Shi'ra", "references": [1,2,3,4], "translators_comments": "The northern Shi'ra is a proper Arabic name of Procyon"},
+                  {"english": "The Tearful Shi'ra", "references": [1,2,3,4], "translators_comments": "The tearful Shi'ra is a proper Arabic name of Procyon"}],
+    "HIP 37740": [{"english": "The Claws 3", "references": [1,3,4]}],
+    "HIP 39429": [{"english": "Suhayl Hadari", "references": [4], "translators_comments": "Suhayl Hadari is a proper name"}],
+    "HIP 39953": [{"english": "Suhayl Al-Wazn", "references": [4], "translators_comments": "Suhayl Al-wazn is a proper name"}],
+    "HIP 44816": [{"english": "Suhayl Raqashi", "references": [4], "translators_comments": "Suhayl Raqashi is a proper name"}],
+    "HIP 46390": [{"english": "The Sole One", "references": [1,2,3,4]}],
+    "HIP 46733": [{"english": "The Two Preceding To The Water 1", "references": [5]}],
+    "HIP 46750": [{"english": "The Eyelashes 1", "references": [1,3,4]}],
+    "HIP 46771": [{"english": "The Eyelashes 3", "references": [1,3,4]}],
+    "HIP 46774": [{"english": "The Eyelashes 4", "references": [1,3,4]}],
+    "HIP 48319": [{"english": "The Two Preceding To The Water 2", "references": [5]}],
+    "HIP 48455": [{"english": "The Eyelashes 2", "references": [1,3,4]}],
+    "HIP 53910": [{"english": "The Two Front Ones 2", "references": [7,8]}],
+    "HIP 54061": [{"english": "The Two Front Ones 1", "references": [7,8]}],
+    "HIP 57632": [{"english": "Star Of Weather Change", "references": [1,2,3,4]}],
+    "HIP 58001": [{"english": "The Two Lame Ones 1", "references": [7,8]}],
+    "HIP 59774": [{"english": "The Two Lame Ones 2", "references": [7,8]}],
+    "HIP 62956": [{"english": "The Dark Camel", "references": [2,4]},
+                  {"english": "The Oryx", "references": [6]}],
+    "HIP 63125": [{"english": "Liver Of The Lion", "references": [1,3,4]}],
+    "HIP 65378": [{"english": "The Little Goat", "references": [1,2,3,4]}],
+    "HIP 65474": [{"english": "The Unarmed High One", "references": [1,2,3,4]}],
+    "HIP 65477": [{"english": "Al-Suha", "references": [1,2,3,4], "translators_comments": "Al-Suha is a proper name"},
+                  {"english": "Aslam", "references": [5], "translators_comments": "Aslam is a proper name"},
+                  {"english": "As-Saydaq", "references": [1,2,3,4], "translators_comments": "As-Saydaq is a proper name"}],
+    "HIP 67301": [{"english": "The Leader", "references": [1,2,3,4]}],
+    "HIP 67459": [{"english": "The Rear Spear Tassel", "references": [2,4]},
+                  {"english": "Flag Of The High One", "references": [1,2,4]}],
+    "HIP 67927": [{"english": "The Spear 1", "references": [2,3,4]}],
+    "HIP 68702": [{"english": "Al-Muqil", "references": [7], "translators_comments": "Al-Muqil is a proper name"}],
+    "HIP 69673": [{"english": "The High One With The Spear", "references": [1,2,3,4]},
+                  {"english": "The Watcher", "references": [2]},
+                  {"english": "The Armed One", "references": [1,2]}],
+    "HIP 71053": [{"english": "The Front Spear Tassel", "references": [2,4]}],
+    "HIP 72105": [{"english": "The Spear 2", "references": [2,3,4]}],
+    "HIP 72607": [{"english": "The Two Calves 1", "references": [1,2,3,4]}],
+    "HIP 75097": [{"english": "The Two Calves 2"}],
+    "HIP 75458": [{"english": "The Male Hyena", "references": [1,2,3,4]}],
+    "HIP 76267": [{"english": "The Bright Star Of Al-Fakkah", "references": [1,2,3,4], "translators_comments": "Al-Fakkah is an incomlete circle"}],
+    "HIP 80112": [{"english": "Veins Of The Heart 1", "references": [1,2,3,4]}],
+    "HIP 80331": [{"english": "The Two Wolves 2", "references": [1,2,3,4]},
+                  {"english": "The Two Black Birds 2", "references": [2,3,4]},
+                  {"english": "The Two Falcons 2", "references": [1,2,3,4]}],
+    "HIP 80763": [{"english": "The Heart", "references": [1,2,3,4]}],
+    "HIP 81266": [{"english": "Veins Of The Heart 2", "references": [1,2,3,4]}],
+    "HIP 82396": [{"english": "Tail Segments Of The Scorpion 1", "references": [2,3,4]}],
+    "HIP 82514": [{"english": "Tail Segments Of The Scorpion 2", "references": [2,3,4]}],
+    "HIP 82729": [{"english": "Tail Segments Of The Scorpion 3", "references": [2,3,4]}],
+    "HIP 83608": [{"english": "The Trotting Camel", "references": [4]}],
+    "HIP 83895": [{"english": "The Two Wolves 1", "references": [1,2,3,4]},
+                  {"english": "The Two Black Birds 1", "references": [2,3,4]},
+                  {"english": "The Two Falcons 1", "references": [1,2,3,4]}],
+    "HIP 84143": [{"english": "Tail Segments Of The Scorpion 4", "references": [2,3,4]}],
+    "HIP 84345": [{"english": "First Dog Of The [Southern] Shepherd", "references": [2,3,4]}],
+    "HIP 85927": [{"english": "Raised Tail Of The Scorpion", "references": [1,2,3,4]}],
+    "HIP 86032": [{"english": "The [Southern] Shepherd", "references": [1,2,3,4]}],
+    "HIP 86228": [{"english": "Tail Segments Of The Scorpion 5", "references": [2,3,4]}],
+    "HIP 86670": [{"english": "Tail Segments Of The Scorpion 7", "references": [2,3,4]}],
+    "HIP 86742": [{"english": "Second Dog Of The [Southern] Shepherd", "references": [4]}],
+    "HIP 86782": [{"english": "The Baby Camel", "references": [1,2,3,4]}],
+    "HIP 87073": [{"english": "Tail Segments Of The Scorpion 6", "references": [2,3,4]}],
+    "HIP 87261": [{"english": "The Follower", "references": [10]}],
+    "HIP 89826": [{"english": "The Landing Eagle Claws 1", "references": [1,4]}],
+    "HIP 89937": [{"english": "The Three Stone Support 3", "references": [3,4]}],
+    "HIP 90191": [{"english": "The Landing Eagle Claws 2", "references": [1,4]}],
+    "HIP 91262": [{"english": "The Landing Eagle", "references": [1,2,3,4]}],
+    "HIP 94376": [{"english": "The Three Stone Support 1", "references": [3,4]}],
+    "HIP 94779": [{"english": "The Knights 1", "references": [1,2,3,4]}],
+    "HIP 97165": [{"english": "The Knights 2", "references": [1,2,3,4]}],
+    "HIP 97433": [{"english": "The Three Stone Support 2", "references": [3,4]}],
+    "HIP 97649": [{"english": "The Flying Eagle", "references": [1,2,3,4]}],
+    "HIP 100310": [{"english": "The Sheep", "references": [1,2,4]}],
+    "HIP 100453": [{"english": "The Knights 3", "references": [1,2,3,4]}],
+    "HIP 100751": [{"english": "The Two Shrikes 2", "references": [1,2,3]}],
+    "HIP 101421": [{"english": "The Post Of The Cross", "references": [4]}],
+    "HIP 101772": [{"english": "The Two Shrikes 1", "references": [1,2,3]}],
+    "HIP 102098": [{"english": "The Rear Knight", "references": [1,2,3,4]}],
+    "HIP 102488": [{"english": "The Knights 4", "references": [1,2,3,4]}],
+    "HIP 104732": [{"english": "The Knights 5", "references": [1,2,3,4]}],
+    "HIP 105199": [{"english": "The Two Stars Of Separation 1", "references": [2,3,4]},
+                   {"english": "The White One", "references": [1,3]}],
+    "HIP 106032": [{"english": "The Two Stars Of Separation 2", "references": [2,3,4]}],
+    "HIP 108917": [{"english": "The Horse Forehead Star", "references": [1,2,3,4]}],
+    "HIP 109268": [{"english": "The Two Doves 1", "references": [1,2,3]}],
+    "HIP 112122": [{"english": "The Two Doves 2", "references": [1,2,3]}],
+    "HIP 113368": [{"english": "The Two Male Ostriches 1", "references": [1,2,3,4]}],
+    "HIP 113881": [{"english": "The Front Bucket Mouth 2", "references": [1,2,3,4]},
+                   {"english": "The Upper Cross Beam 2", "references": [1,2,3,4]}],
+    "HIP 113963": [{"english": "The Front Bucket Mouth 1", "references": [1,2,3,4]},
+                   {"english": "The Upper Cross Beam 1", "references": [1,2,3,4]}],
+    "HIP 114222": [{"english": "The [Northern] Shepherd Dog", "references": [1,2,3,4]}],
+    "HIP 116727": [{"english": "The [Northern] Shepherd", "references": [1,2,3,4]}],
+    "M 44": [{"english": "The Lion's Nostrils", "references": [1,2,3,4]}],
+    "M 45": [{"english": "Al-Thurayya", "references": [1,2,3,4], "translators_comments": "Al-Thurayya is a proper name for the Pleiades"}],
+    "M 7": [{"english": "The Scorpion's Sting", "references": [1,2,3]}],
+    "NGC 869": [{"english": "The Wrist 1", "references": [1,2,4]},
+                {"english": "The She-Camel's Brand 1", "references": [1,2,4]}],
+    "NGC 884": [{"english": "The Wrist 2", "references": [1,2,4]},
+                {"english": "The She-Camel's Brand 2", "references": [1,2,4]}],
+    "NAME Jupiter": [{"english": "The Shining One", "native": "المشتري", "translators_comments": "Al-Mushtari is the native proper name for Jupiter, derived from shining like lightning. See Ref. # 2."}],
+    "NAME Mars": [{"english": "The Fire Starter", "native": "المريخ", "translators_comments": "Al-Merrikh is the native proper name for Mars, derived from Marakh (ARABIC: مرخ), a plant which is used to start fire. See Ref. # 2."}],
+    "NAME Mercury": [{"english": "The Unstable", "native": "عطارد", "translators_comments": "Utarid is the native proper name for Mercury, derived from unstableness (mercurial).  See Ref. # 2."}],
+    "NAME Moon": [{"english": "The Strongly White", "native": "القمر", "translators_comments": "Al-Qamar is the native proper name for the Moon, derived from strong whiteness.  See Ref. # 2. and Taj al-Arous lexicon."}],
+    "NAME Saturn": [{"english": "The Remote one", "native": "زحل", "translators_comments": "Zuhal is the native proper name for Saturn, derived from remoteness.  See Ref. # 2."}],
+    "NAME Sun": [{"english": "Ush-Shams", "native": "الشمس", "translators_comments": "Ush-shams is the native proper name for the Sun."}],
+    "NAME Venus": [{"english": "The Beautiful Bright One", "native": "الزهرة", "translators_comments": "Az- Zuharah is the native proper name for Venus, derived from brightness and beauty. See Ref. # 2."}]
+  }
+}

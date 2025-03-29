@@ -238,6 +238,13 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QCheckBox" name="showMySky_pseudoMirrorEnabled">
+              <property name="text">
+               <string>Mirror the sky under the horizon</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
          </item>
@@ -433,11 +440,6 @@
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>

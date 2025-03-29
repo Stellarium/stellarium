@@ -267,6 +267,15 @@ public:
 		TransitCount			//! total number of columns
 	};
 
+	enum EphemerisTimeDurationSteps {
+		Minutes	= 1,
+		Hours	= 2,
+		Days	= 3,
+		Weeks	= 4,
+		Months	= 5,
+		Years	= 6
+	};
+
 	AstroCalcDialog(QObject* parent);
 	~AstroCalcDialog() override;
 
@@ -367,6 +376,7 @@ private slots:
 	void initEphemerisFlagNakedEyePlanets(void);
 	void saveEphemerisFlagNakedEyePlanets(bool flag);
 	void setMonthDuration();
+	void updateGeneratedEphemeris();
 
 	//! Calculating phenomena for selected celestial body and fill the list.
 	void calculatePhenomena();
@@ -449,8 +459,13 @@ private slots:
 	void showExtraEphemerisDialog();
 	void showCustomStepsDialog();
 
+	void updateAlmanacWidgetVisibility();
+
 	void saveGraph(QChartView *graph);
 	void updateMinMaxDateRange();
+
+	void populateSelectedObject();
+	void selectStoredObject();
 
 private:
 	class AstroCalcExtraEphemerisDialog* extraEphemerisDialog = nullptr;
@@ -629,7 +644,7 @@ private:
 	//! @note modes: 0 - conjunction, 1 - opposition, 2 - greatest elongation
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode);
 	//! Filling the table of phenomena
-	void fillPhenomenaTableVis(const QString &phenomenType, double JD, const QString &firstObjectName, float firstObjectMagnitude,
+	void fillPhenomenaTableVis(const QString &phenomenType, int phenomenMode, double JD, const QString &firstObjectName, float firstObjectMagnitude,
 				   const QString &secondObjectName, float secondObjectMagnitude, const QString &separation, const QString &elevation,
 				   QString &elongation, const QString &angularDistance, const QString &elongTooltip="", const QString &angDistTooltip="");
 	//! Calculation of greatest elongations
@@ -658,12 +673,14 @@ private:
 	bool plotDistanceGraph = false;
 	bool plotLunarElongationGraph = false;
 	bool plotAziVsTime = false;
+	bool followLatestSelectedObject = true;
 	bool computeRTS = false;
 	bool computeEphemeris = false;
 	int altVsTimePositiveLimit = 0, monthlyElevationPositiveLimit = 0, graphsDuration = 1, graphsStep = 24;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, lunareclipsecontactsHeader, solareclipseHeader, solareclipsecontactsHeader, solareclipselocalHeader, transitHeader;
 	static double brightLimit;
 	static const QString dash, delimiter;
+	StelObjectP latestSelectedObject = nullptr;
 
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
@@ -680,82 +697,82 @@ private:
 	bool graphPlotNeedsRefresh = false;
 
 	enum PhenomenaCategory {
-		PHCLatestSelectedObject		=  -1,
-		PHCSolarSystem					=   0,
-		PHCPlanets						=   1,
-		PHCAsteroids					=   2,
-		PHCPlutinos						=   3,
-		PHCComets						=   4,
-		PHCDwarfPlanets				=   5,
-		PHCCubewanos					=   6,
-		PHCScatteredDiscObjects		=   7,
-		PHCOortCloudObjects			=   8,
-		PHCSednoids					=   9,
-		PHCBrightStars					= 10,
-		PHCBrightDoubleStars			= 11,
-		PHCBrightVariableStars			= 12,
-		PHCBrightStarClusters			= 13,
-		PHCPlanetaryNebulae			= 14,
-		PHCBrightNebulae				= 15,
-		PHCDarkNebulae				= 16,
-		PHCBrightGalaxies				= 17,
-		PHCSymbioticStars				= 18,
-		PHCEmissionLineStars			= 19,
-		PHCInterstellarObjects			= 20,
-		PHCPlanetsSun					= 21,
-		PHCSunPlanetsMoons			= 22,
-		PHCBrightSolarSystemObjects	= 23,
-		PHCSolarSystemMinorBodies		= 24,
-		PHCMoonsFirstBody				= 25,
-		PHCBrightCarbonStars			= 26,
-		PHCBrightBariumStars			= 27,
-		PHCSunPlanetsTheirMoons		= 28,
+		PHCLatestSelectedObject     = -1,
+		PHCSolarSystem              =  0,
+		PHCPlanets                  =  1,
+		PHCAsteroids                =  2,
+		PHCPlutinos                 =  3,
+		PHCComets                   =  4,
+		PHCDwarfPlanets             =  5,
+		PHCCubewanos                =  6,
+		PHCScatteredDiscObjects     =  7,
+		PHCOortCloudObjects         =  8,
+		PHCSednoids                 =  9,
+		PHCBrightStars              = 10,
+		PHCBrightDoubleStars        = 11,
+		PHCBrightVariableStars      = 12,
+		PHCBrightStarClusters       = 13,
+		PHCPlanetaryNebulae         = 14,
+		PHCBrightNebulae            = 15,
+		PHCDarkNebulae              = 16,
+		PHCBrightGalaxies           = 17,
+		PHCSymbioticStars           = 18,
+		PHCEmissionLineStars        = 19,
+		PHCInterstellarObjects      = 20,
+		PHCPlanetsSun               = 21,
+		PHCSunPlanetsMoons          = 22,
+		PHCBrightSolarSystemObjects = 23,
+		PHCSolarSystemMinorBodies   = 24,
+		PHCMoonsFirstBody           = 25,
+		PHCBrightCarbonStars        = 26,
+		PHCBrightBariumStars        = 27,
+		PHCSunPlanetsTheirMoons     = 28,
 		PHCNone	// stop gapper for syntax reasons
 	};
 
 	enum WUTCategory {
-		EWPlanets								=   0,
-		EWBrightStars							=   1,
-		EWBrightNebulae						=   2,
-		EWDarkNebulae							=   3,
-		EWGalaxies								=   4,
-		EWOpenStarClusters					=   5,
-		EWAsteroids								=   6,
-		EWComets								=   7,
-		EWPlutinos								=   8,
-		EWDwarfPlanets							=   9,
-		EWCubewanos							= 10,
-		EWScatteredDiscObjects					= 11,
-		EWOortCloudObjects					= 12,
-		EWSednoids								= 13,
-		EWPlanetaryNebulae					= 14,
-		EWBrightDoubleStars					= 15,
-		EWBrightVariableStars					= 16,
-		EWBrightStarsWithHighProperMotion		= 17,
-		EWSymbioticStars						= 18,
-		EWEmissionLineStars					= 19,
-		EWSupernovaeCandidates				= 20,
-		EWSupernovaeRemnantCandidates		= 21,
-		EWSupernovaeRemnants					= 22,
-		EWClustersOfGalaxies					= 23,
-		EWInterstellarObjects					= 24,
-		EWGlobularStarClusters					= 25,
-		EWRegionsOfTheSky						= 26,
-		EWActiveGalaxies						= 27,
-		EWPulsars								= 28,
-		EWExoplanetarySystems					= 29,
-		EWBrightNovaStars						= 30,
-		EWBrightSupernovaStars				= 31,
-		EWInteractingGalaxies					= 32,
-		EWDeepSkyObjects						= 33,
-		EWMessierObjects						= 34,
-		EWNGCICObjects						= 35,
-		EWCaldwellObjects						= 36,
-		EWHerschel400Objects					= 37,
-		EWAlgolTypeVariableStars				= 38, // http://www.sai.msu.su/gcvs/gcvs/vartype.htm
-		EWClassicalCepheidsTypeVariableStars	= 39, // http://www.sai.msu.su/gcvs/gcvs/vartype.htm
-		EWCarbonStars							= 40,
-		EWBariumStars							= 41,
+		EWPlanets                            =  0,
+		EWBrightStars                        =  1,
+		EWBrightNebulae                      =  2,
+		EWDarkNebulae                        =  3,
+		EWGalaxies                           =  4,
+		EWOpenStarClusters                   =  5,
+		EWAsteroids                          =  6,
+		EWComets                             =  7,
+		EWPlutinos                           =  8,
+		EWDwarfPlanets                       =  9,
+		EWCubewanos                          = 10,
+		EWScatteredDiscObjects               = 11,
+		EWOortCloudObjects                   = 12,
+		EWSednoids                           = 13,
+		EWPlanetaryNebulae                   = 14,
+		EWBrightDoubleStars                  = 15,
+		EWBrightVariableStars                = 16,
+		EWBrightStarsWithHighProperMotion    = 17,
+		EWSymbioticStars                     = 18,
+		EWEmissionLineStars                  = 19,
+		EWSupernovaeCandidates               = 20,
+		EWSupernovaeRemnantCandidates        = 21,
+		EWSupernovaeRemnants                 = 22,
+		EWClustersOfGalaxies                 = 23,
+		EWInterstellarObjects                = 24,
+		EWGlobularStarClusters               = 25,
+		EWRegionsOfTheSky                    = 26,
+		EWActiveGalaxies                     = 27,
+		EWPulsars                            = 28,
+		EWExoplanetarySystems                = 29,
+		EWBrightNovaStars                    = 30,
+		EWBrightSupernovaStars               = 31,
+		EWInteractingGalaxies                = 32,
+		EWDeepSkyObjects                     = 33,
+		EWMessierObjects                     = 34,
+		EWNGCICObjects                       = 35,
+		EWCaldwellObjects                    = 36,
+		EWHerschel400Objects                 = 37,
+		EWAlgolTypeVariableStars             = 38, // http://www.sai.msu.su/gcvs/gcvs/vartype.htm
+		EWClassicalCepheidsTypeVariableStars = 39, // http://www.sai.msu.su/gcvs/gcvs/vartype.htm
+		EWCarbonStars                        = 40,
+		EWBariumStars                        = 41,
 		EWNone	// stop gapper for syntax reasons
 	};
 };

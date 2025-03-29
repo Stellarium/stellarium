@@ -189,9 +189,6 @@ public slots:
 	int getScreenshotDpi() const {return screenshotDpi;}
 	//! Set screenshot DPI. This is only an entry in the screenshot image metadata. The raster content is not influenced.
 	void setScreenshotDpi(int dpi);
-	//! Get screenshot magnification. This should be used by StarMgr, text drawing and other elements which may
-	//! want to enlarge their output in screenshots to keep them visible.
-	float getCustomScreenshotMagnification() const {return customScreenshotMagnification;}
 	//! Get the state of the mouse cursor timeout flag
 	bool getFlagCursorTimeout() const {return flagCursorTimeout;}
 	//! Set the state of the mouse cursor timeout flag
@@ -280,6 +277,8 @@ signals:
 	void maxFpsChanged(int fps);
 	void minTimeBetweenFramesChanged(int tbf);
 
+	void frameFinished();
+
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
@@ -334,7 +333,6 @@ private:
 	int customScreenshotWidth;            //! used when flagCustomResolutionScreenshots==true
 	int customScreenshotHeight;           //! used when flagCustomResolutionScreenshots==true
 	int screenshotDpi;                //! Image metadata entry for DPI. This does not influence the screenshot raster image content in any way, but some workflows like to have a configurable entry.
-	float customScreenshotMagnification;  //! tracks the magnification factor customScreenshotHeight/NormalWindowHeight
 	QString screenShotPrefix;
 	QString screenShotFormat; //! file type like "png" or "jpg".
 	QString screenShotFileMask;

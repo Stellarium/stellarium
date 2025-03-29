@@ -232,7 +232,7 @@ void StelCore::init()
 
 	if (!location.isValid())
 	{
-		qWarning() << "Warning: location" << defaultLocationID << "is unknown.";
+		qWarning() << "Location" << defaultLocationID << "is unknown.";
 		location = locationMgr->getLastResortLocation();
 	}
 	position = new StelObserver(location);
@@ -264,11 +264,11 @@ void StelCore::init()
 	presetSkyTime = presetTimeStr.toDouble(&ok);
 	if (ok)
 	{
-		qDebug().noquote() << "navigation/preset_sky_time is a double - treating as jday:" << QString::number(presetSkyTime, 'f', 5);
+		qInfo().noquote() << "navigation/preset_sky_time is a double - treating as jday:" << QString::number(presetSkyTime, 'f', 5);
 	}
 	else
 	{
-		qDebug().noquote() << "navigation/preset_sky_time was not a double, treating as string date:" << presetTimeStr;
+		qWarning().noquote() << "navigation/preset_sky_time was not a double, treating as string date:" << presetTimeStr;
 		presetSkyTime = StelUtils::qDateTimeToJd(QDateTime::fromString(presetTimeStr));
 	}
 	setInitTodayTime(QTime::fromString(conf->value("navigation/today_time", "22:00").toString()));
@@ -657,9 +657,12 @@ void StelCore::setMaskType(StelProjector::StelProjectorMaskType m)
 
 void StelCore::setFlagGravityLabels(bool gravity)
 {
-	currentProjectorParams.gravityLabels = gravity;
-	StelApp::immediateSave("viewing/flag_gravity_labels", gravity);
-	emit flagGravityLabelsChanged(gravity);
+	if (currentProjectorParams.gravityLabels != gravity)
+	{
+		currentProjectorParams.gravityLabels = gravity;
+		StelApp::immediateSave("viewing/flag_gravity_labels", gravity);
+		emit flagGravityLabelsChanged(gravity);
+	}
 }
 
 bool StelCore::getFlagGravityLabels() const
@@ -877,6 +880,11 @@ Vec3d StelCore::j2000ToEquinoxEqu(const Vec3d& v, RefractionMode refMode) const
 Vec3d StelCore::j2000ToJ1875(const Vec3d& v) const
 {
 	return matJ2000ToJ1875*v;
+}
+
+Vec3d StelCore::j1875ToJ2000(const Vec3d& v) const
+{
+	return matJ2000ToJ1875.transpose()*v;
 }
 
 Vec3d StelCore::j2000ToGalactic(const Vec3d& v) const
@@ -1226,6 +1234,100 @@ void StelCore::setMJDay(double MJD)
 double StelCore::getMJDay() const
 {
 	return JD.first-2400000.5;
+}
+
+// @return whether nutation is currently used.
+bool StelCore::getUseNutation() const
+{
+	return flagUseNutation;
+}
+// Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).
+void StelCore::setUseNutation(bool use)
+{
+	if (flagUseNutation != use)
+	{
+		flagUseNutation=use;
+		StelApp::immediateSave("astro/flag_nutation", use);
+		emit flagUseNutationChanged(use);
+	}
+}
+
+// @return whether aberration is currently used.
+bool StelCore::getUseAberration() const
+{
+	return flagUseAberration;
+}
+// Set whether you want computation and simulation of aberration (a slight wobble of stellar positions due to finite speed of light, about 20 arcseconds when observing from earth).
+void StelCore::setUseAberration(bool use)
+{
+	if (flagUseAberration != use)
+	{
+		flagUseAberration=use;
+		StelApp::immediateSave("astro/flag_aberration", use);
+		emit flagUseAberrationChanged(use);
+	}
+}
+
+// @return aberration factor. 1 is realistic simulation, but higher values may be useful for didactic purposes.
+double StelCore::getAberrationFactor() const
+{
+	return aberrationFactor;
+}
+// Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
+void StelCore::setAberrationFactor(double factor)
+{
+	if (!fuzzyEquals(aberrationFactor, factor))
+	{
+		aberrationFactor=qBound(0.,factor, 5.);
+		StelApp::immediateSave("astro/aberration_factor", aberrationFactor);
+		emit aberrationFactorChanged(factor);
+	}
+}
+
+// @return whether parallax effect is currently used.
+bool StelCore::getUseParallax() const
+{
+	return flagUseParallax;
+}
+// Set whether you want computation and simulation of parallax effect.
+void StelCore::setUseParallax(bool use)
+{
+	if (flagUseParallax != use)
+	{
+		flagUseParallax=use;
+		StelApp::immediateSave("astro/flag_parallax", use);
+		emit flagUseParallaxChanged(use);
+	}
+}
+
+// @return parallax factor. 1 is realistic simulation, but higher values may be useful for didactic purposes.
+double StelCore::getParallaxFactor() const {return parallaxFactor;}
+// Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
+void StelCore::setParallaxFactor(double factor)
+{
+	if (!fuzzyEquals(parallaxFactor, factor))
+	{
+		parallaxFactor=qBound(0.,factor, 10000.);
+		StelApp::immediateSave("astro/parallax_factor", parallaxFactor);
+		emit parallaxFactorChanged(factor);
+	}
+}
+
+// @return whether topocentric coordinates are currently used.
+bool StelCore::getUseTopocentricCoordinates() const
+{
+	return flagUseTopocentricCoordinates;
+}
+// Set whether you want topocentric or planetocentric data
+void StelCore::setUseTopocentricCoordinates(bool use)
+{
+	if (flagUseTopocentricCoordinates!= use)
+	{
+		flagUseTopocentricCoordinates=use;
+		// DO NOT IMMEDIATE-SAVE! -- This flag is switched too often. GH #4112
+		// Add a store button elsewhere when needed.
+		emit flagUseTopocentricCoordinatesChanged(use);
+	}
 }
 
 double StelCore::getPresetSkyTime() const
@@ -1622,7 +1724,7 @@ void StelCore::setTodayTime(const QTime& target)
 	}
 	else
 	{
-		qWarning() << "WARNING - time passed to StelCore::setTodayTime is not valid. The system time will be used." << target;
+		qWarning().noquote() << "Time passed to StelCore::setTodayTime is not valid. The system time will be used." << target;
 		setTimeNow();
 	}
 }
@@ -2866,7 +2968,7 @@ void StelCore::initEphemeridesFunctions()
 	de430Available=!de430FilePath.isEmpty();
 	if(de430Available)
 	{
-		qDebug().noquote() << "DE430 at:" << de430FilePath;
+		qInfo().noquote() << "DE430 at:" << de430FilePath;
 		EphemWrapper::init_de430(de430FilePath.toStdString().c_str());
 	}
 	setDe430Active(de430Available && conf->value("astro/flag_use_de430", false).toBool());
@@ -2880,7 +2982,7 @@ void StelCore::initEphemeridesFunctions()
 	de431Available=!de431FilePath.isEmpty();
 	if(de431Available)
 	{
-		qDebug().noquote() << "DE431 at:" << de431FilePath;
+		qInfo().noquote() << "DE431 at:" << de431FilePath;
 		EphemWrapper::init_de431(de431FilePath.toStdString().c_str());
 	}
 	setDe431Active(de431Available && conf->value("astro/flag_use_de431", false).toBool());
@@ -2894,7 +2996,7 @@ void StelCore::initEphemeridesFunctions()
 	de440Available=!de440FilePath.isEmpty();
 	if(de440Available)
 	{
-		qDebug().noquote() << "DE440 at:" << de440FilePath;
+		qInfo().noquote() << "DE440 at:" << de440FilePath;
 		EphemWrapper::init_de440(de440FilePath.toStdString().c_str());
 	}
 	setDe440Active(de440Available && conf->value("astro/flag_use_de440", false).toBool());
@@ -2908,7 +3010,7 @@ void StelCore::initEphemeridesFunctions()
 	de441Available=!de441FilePath.isEmpty();
 	if(de441Available)
 	{
-		qDebug().noquote() << "DE441 at:" << de441FilePath;
+		qInfo().noquote() << "DE441 at:" << de441FilePath;
 		EphemWrapper::init_de441(de441FilePath.toStdString().c_str());
 	}
 	setDe441Active(de441Available && conf->value("astro/flag_use_de441", false).toBool());
@@ -2935,6 +3037,7 @@ static bool iau_constlineVecInitialized=false;
 // We converted back to HH:MM:SS format to avoid the inherent rounding errors present in that file (Bug LP:#1690615).
 QString StelCore::getIAUConstellation(const Vec3d &positionEqJnow) const
 {
+	Q_ASSERT(positionEqJnow.norm()>0); // Just make sure it looks like a valid posititon.
 	// Precess positionJ2000 to 1875.0
 	const Vec3d pos1875=j2000ToJ1875(equinoxEquToJ2000(positionEqJnow, RefractionOff));
 	double RA1875;
@@ -3010,7 +3113,7 @@ QString StelCore::getIAUConstellation(const Vec3d &positionEqJnow) const
 		else
 			entry++;
 	}
-	qDebug() << "getIAUconstellation error: Cannot determine, algorithm failed.";
+	qWarning() << "getIAUconstellation error: Cannot determine, algorithm failed.";
 	return "(?)";
 }
 
@@ -3173,14 +3276,10 @@ vec3 applyAberrationToViewDir(vec3 viewDir)
 
 void StelCore::setAberrationUniforms(QOpenGLShaderProgram& program) const
 {
-	Vec3d velocity;
+	Vec3d velocity(0.);
 	if(getUseAberration())
 	{
-		velocity = cachedAberrationVec;
-	}
-	else
-	{
-		velocity = Vec3d(0,0,0);
+		velocity = getAberrationFactor() * cachedAberrationVec;
 	}
 	program.setUniformValue("STELCORE_currentPlanetBarycentricEclipticVelocity", velocity.toQVector());
 }

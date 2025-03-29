@@ -304,6 +304,38 @@ public slots:
 	//! stars will start with no extra information when they become selected again.
 	static void addToSelectedObjectInfoString(const QString &str, bool replace=false);
 
+	//! Retrieve information about rise, transit and setting time above a given @param altitude for @param objectName.
+	//! @return a map with various entries in local time.
+	//! The times are on the current calendar day, not the "nearest" events,
+	//! therefore esp. the Moon may return "skipping codes" 20/30/40.
+	//! The map keys are
+	//! - rise-dhr     : rise, decimal hour, zone time
+	//! - transit-dhr  : transit, decimal hour, zone time
+	//! - set-dhr      : set, decimal hour, zone time
+	//! - rise         : string, "HHhMMm" format
+	//! - transit      : string, "HHhMMm" format
+	//! - set          : string, "HHhMMm" format
+	//! - altitude     : decimal degrees, just same as @param altitude, for reference
+	//! - name         : english name of the object, for reference
+	//! - status-code:
+	//!       *     0. normal result, 3 valid times.
+	//! 	  *  +100. for circumpolar objects. Rise and set give lower culmination times.
+	//!       *  -100. for objects never rising. Rise and set give transit times.
+	//!       * -1000. is used as "invalid" value. The result should then not be used. If unexpected, consider reporting a bug.
+	//!       *   +20. (Planet objects only) no transit time on current date.
+	//!       *   +30. (Planet objects only) no rise time on current date.
+	//!       *   +40. (Planet objects only) no set time on current date.
+	//! - status: An english string explaining the status code
+	//! If altitude==0, this is just rise/transit/set also included in getObjectInfo(objectName).
+	//! This function however can be used to retrieve twilight times like
+	//! @code
+	//! civilTwilightMap=core.getRTS("Sun", -6.);
+	//! nautTwilightMap=core.getRTS("Sun", -12.);
+	//! astroTwilightMap=core.getRTS("Sun", -18.);
+	//! core.output("Twilight " + astroTwilightMap["rise"] + "/" + nautTwilightMap["rise"] + "/" + civilTwilightMap["rise"]);
+	//! @endcode
+	static QVariantMap getRTS(const QString &objectName, const double altitude=0.);
+
 	//! Set value for some StelProperty.
 	//! @note This method may be very helpful for change the values in the plugins to avoid crashes when some plugin is not loaded.
 	//! @note See also @ref isModuleLoaded() method
@@ -962,6 +994,8 @@ public slots:
 	//! - Linux
 	//! - Windows
 	//! - macOS
+	//! - Haiku
+	//! - Solaris
 	//! - Unknown
 	static QString getPlatformName(void);
 

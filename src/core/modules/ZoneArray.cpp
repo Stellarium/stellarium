@@ -219,7 +219,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	if (rval && rval->isInitialized())
 	{
 		dbStr += QString("%1 entries").arg(rval->getNrOfStars());
-		qDebug().noquote() << dbStr;
+		qInfo().noquote() << dbStr;
 	}
 	else
 	{
@@ -442,7 +442,8 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		if (cutoffMagStep>limitMagIndex)
 			cutoffMagStep = limitMagIndex;
 	}
-	Q_ASSERT(cutoffMagStep<RCMAG_TABLE_SIZE);
+	Q_ASSERT_X(cutoffMagStep<=RCMAG_TABLE_SIZE, "ZoneArray.cpp",
+		   QString("RCMAG_TABLE_SIZE: %1, cutoffmagStep: %2").arg(QString::number(RCMAG_TABLE_SIZE), QString::number(cutoffMagStep)).toLatin1());
     
 	// Go through all stars, which are sorted by magnitude (bright stars first)
 	const SpecialZoneData<Star>* zoneToDraw = getZones() + index;
@@ -463,8 +464,8 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		}
 		// Because of the test above, the star should always be visible from this point.
 		
-		// only recompute if has time dependence and time is far away
-		bool recomputeMag = (s->getPreciseAstrometricFlag() && (fabs(dyrs) > 5000.));
+		// only recompute if has time dependence
+		bool recomputeMag = (s->getPreciseAstrometricFlag());
 		double Plx = s->getPlx();
 		if (recomputeMag) { 
 			// don't do full solution, can be very slow, just estimate here	
@@ -497,6 +498,9 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		if (!recomputeMag) {
 			s->getJ2000Pos(dyrs, v);
 		}
+
+		// in case it is in a binary system
+		s->getBinaryOrbit(core->getJDE(), v);
 
 		if (withParallax) {
 			s->getPlxEffect(withParallax * Plx, v, diffPos);
@@ -561,11 +565,22 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	Vec3d tmp;
+	double RA, DEC, pmra, pmdec, Plx, RadialVel;
 	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
 	{
-		s->getJ2000Pos(dyrs, tmp);
-		s->getPlxEffect(withParallax * s->getPlx(), tmp, diffPos);
+		s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+		StelUtils::spheToRect(RA, DEC, tmp);
+		// s->getJ2000Pos(dyrs, tmp);
+		// in case it is in a binary system
+		s->getBinaryOrbit(core->getJDE(), tmp);
+		s->getPlxEffect(withParallax * Plx, tmp, diffPos);
 		tmp.normalize();
+		if (core->getUseAberration())
+		{
+			const Vec3d vel = core->getAberrationVec(core->getJDE());
+			tmp+=vel;
+			tmp.normalize();
+		}
 		if (tmp * v >= cosLimFov)
 		{
 			// TODO: do not select stars that are too faint to display

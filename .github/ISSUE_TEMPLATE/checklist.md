@@ -26,6 +26,7 @@ This is checklist for maintainer of Stellarium (a release master)
 - [ ] Update [CalcMySky/ShowMySky](https://github.com/10110111/CalcMySky) version
 - [ ] Update [QXlsx](https://github.com/QtExcel/QXlsx/) version
 - [ ] Update [INDI](https://github.com/indilib/indi) version
+- [ ] Update [md4c](https://github.com/mity/md4c) version
 
 ## Step 2: one week before release
 
@@ -69,7 +70,6 @@ This is checklist for maintainer of Stellarium (a release master)
 - [ ] Update metainfo for new release (`util\metainfo\metainfo.sh`)
 - [ ] Update translations of desktop info (`util\desktop\desktoppo.py`)
 - [ ] Update translations for landscapes descriptions (`util\landscapes\translate.sh`)
-- [ ] Update translations for skycultures descriptions (`util\skycultures\translate.sh`)
 - [ ] Update translations for scenery3d descriptions (`util\scenery3d\translate.sh`)
 
 ## Step 4: release

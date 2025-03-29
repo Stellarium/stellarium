@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Orr Nuts <orrnuts@gmail.com>, 2024
+# Orr Nuts <orrnuts@gmail.com>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-12-02 12:46+0700\n"
+"POT-Creation-Date: 2025-01-03 20:26+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Orr Nuts <orrnuts@gmail.com>, 2024\n"
+"Last-Translator: Orr Nuts <orrnuts@gmail.com>, 2025\n"
 "Language-Team: Croatian (https://app.transifex.com/stellarium/teams/80998/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -192,15 +192,15 @@ msgstr "Solarni tjedan"
 
 #: index.html:92 tablet7in.html:193
 msgid "Calendar year"
-msgstr ""
+msgstr "Kalendarska godina"
 
 #: index.html:93 tablet7in.html:194
 msgid "10 Calendar years"
-msgstr ""
+msgstr "10 kalendarskih godina"
 
 #: index.html:94 tablet7in.html:195
 msgid "100 Calendar years"
-msgstr ""
+msgstr "100 kalendarskih godina"
 
 #: index.html:97 tablet7in.html:198
 msgid "Sidereal year"
@@ -281,7 +281,7 @@ msgstr "Odaberi i fokusiraj"
 
 #: index.html:245 tablet7in.html:265
 msgid "Select current item"
-msgstr ""
+msgstr "Odaberi trenutnu stavku"
 
 #: index.html:249 tablet7in.html:269
 msgid "Selection mode"
@@ -321,15 +321,15 @@ msgstr "Sjaj Mliječne staze:"
 
 #: index.html:289 tablet7in.html:351
 msgid "Dbl. stars"
-msgstr ""
+msgstr "Dv. zvijezde"
 
 #: index.html:290 tablet7in.html:352
 msgid "Var. stars"
-msgstr ""
+msgstr "Var. zvijezde"
 
 #: index.html:291 tablet7in.html:353
 msgid "HIP"
-msgstr ""
+msgstr "HIP"
 
 #: index.html:294 tablet7in.html:357
 msgid "Digitized Sky Survey"
@@ -345,7 +345,7 @@ msgstr "Uključi nutaciju"
 
 #: index.html:306 tablet7in.html:371
 msgid "Include aberration"
-msgstr ""
+msgstr "Uključi aberaciju"
 
 #: index.html:314 tablet7in.html:385
 msgid "Show planet markers"
@@ -377,11 +377,11 @@ msgstr "Mjerilo Mjeseca:"
 
 #: index.html:325 tablet7in.html:398
 msgid "Scale Sun:"
-msgstr ""
+msgstr "Mjerilo Sunca:"
 
 #: index.html:326 tablet7in.html:402
 msgid "Scale Planets:"
-msgstr ""
+msgstr "Mjerilo Planeta:"
 
 #: index.html:327 tablet7in.html:406
 msgid "Scale minor bodies:"
@@ -389,11 +389,11 @@ msgstr "Mjerilo manjih tijela:"
 
 #: index.html:332
 msgid "Mark minor bodies:"
-msgstr ""
+msgstr "Označi manja tijela"
 
 #: index.html:360 tablet7in.html:438
 msgid "Bortle class:"
-msgstr ""
+msgstr "Bortle klasa:"
 
 #: index.html:377 tablet7in.html:455
 msgid "Extinction Coefficient:"
@@ -401,11 +401,11 @@ msgstr "Koeficijent ekstinkcije:"
 
 #: index.html:378 tablet7in.html:456
 msgid "Only extinction/refraction, no blue skylight"
-msgstr ""
+msgstr "Samo ekstinkcija/refrakcija, bez plavog nebeskog svjetla."
 
 #: index.html:378 tablet7in.html:457
 msgid "Suppress scattering"
-msgstr ""
+msgstr "Smanjenje raspršenja"
 
 #: index.html:382 tablet7in.html:462
 msgid "Shooting Stars"
@@ -425,7 +425,7 @@ msgstr ""
 
 #: index.html:447 tablet7in.html:532
 msgid "Center"
-msgstr ""
+msgstr "Centar"
 
 #: index.html:463 tablet7in.html:550
 msgid "Solstices"
@@ -445,7 +445,7 @@ msgstr "Najniži zastoj"
 
 #: index.html:470 tablet7in.html:558
 msgid "Line width:"
-msgstr ""
+msgstr "Debljina linija:"
 
 #: index.html:480 tablet7in.html:568
 msgid "Current Planet:"
@@ -467,11 +467,11 @@ msgstr "Objekti bez identifikatora"
 
 #: index.html:623
 msgid "Open Star clusters"
-msgstr ""
+msgstr "Otvoreni zvjezdani skupovi"
 
 #: index.html:624 tablet7in.html:694
 msgid "Globular Star clusters"
-msgstr ""
+msgstr "Kuglasti zvjezdani skupovi"
 
 #: index.html:630 tablet7in.html:700
 msgid "Bright Nebulae"
@@ -511,7 +511,7 @@ msgstr "Trenutni krajolik"
 
 #: index.html:699 tablet7in.html:772
 msgid "Label constellations with font size"
-msgstr ""
+msgstr "Oznake zviježđa u veličini fonta"
 
 #: index.html:703 tablet7in.html:776
 msgid "Show lines with thickness"
@@ -519,7 +519,7 @@ msgstr "Prikaži linije s debljinom"
 
 #: index.html:707 tablet7in.html:780
 msgid "Label asterisms with font size"
-msgstr ""
+msgstr "Oznake asterizama u veličini fonta"
 
 #: index.html:711 tablet7in.html:784
 msgid "Show asterisms with thickness"
@@ -528,6 +528,10 @@ msgstr "Prikaži asterizme s debljinom"
 #: index.html:715 tablet7in.html:788
 msgid "Show ray helpers with thickness"
 msgstr "Prikaži pomoćne zrake s debljinom"
+
+#: index.html:719 tablet7in.html:792
+msgid "Show art in brightness"
+msgstr "Prikaži umjetnički prikaz u osvijetljenosti"
 
 #: index.html:723 tablet7in.html:796
 msgid "Show boundaries with thickness"
@@ -703,11 +707,11 @@ msgstr "Skup 47 Tucanae "
 
 #: tablet7in.html:287
 msgid "Aries"
-msgstr "Aries"
+msgstr "Ovan"
 
 #: tablet7in.html:288
 msgid "Taurus"
-msgstr "Taurus"
+msgstr "Bik"
 
 #: tablet7in.html:289
 msgid "Gemini"
@@ -715,39 +719,39 @@ msgstr "Blizanci"
 
 #: tablet7in.html:290
 msgid "Cancer"
-msgstr "Cancer"
+msgstr "Rak"
 
 #: tablet7in.html:291
 msgid "Leo"
-msgstr "Leo"
+msgstr "Lav"
 
 #: tablet7in.html:292
 msgid "Virgo"
-msgstr "Virgo"
+msgstr "Djevica"
 
 #: tablet7in.html:293
 msgid "Libra"
-msgstr "Libra"
+msgstr "Vaga"
 
 #: tablet7in.html:294
 msgid "Scorpius"
-msgstr "Scorpius"
+msgstr "Škorpion"
 
 #: tablet7in.html:295
 msgid "Sagittarius"
-msgstr "Sagittarius"
+msgstr "Strijelac"
 
 #: tablet7in.html:296
 msgid "Capricornus"
-msgstr "Capricornus"
+msgstr "Jarac"
 
 #: tablet7in.html:297
 msgid "Aquarius"
-msgstr "Aquarius"
+msgstr "Vodenjak"
 
 #: tablet7in.html:298
 msgid "Pisces"
-msgstr "Pisces"
+msgstr "Ribe"
 
 #: tablet7in.html:839
 msgid "Favorites"

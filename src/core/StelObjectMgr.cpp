@@ -556,6 +556,7 @@ bool StelObjectMgr::setSelectedObject(const StelObjectP obj, StelModule::StelMod
 	// An object has been found
 	QList<StelObjectP> objs;
 	objs.push_back(obj);
+	lastSelectedObject = obj;
 	return setSelectedObject(objs, action);
 }
 
@@ -659,7 +660,7 @@ QVariantMap StelObjectMgr::getObjectInfo(const StelObjectP obj)
 	QVariantMap map;
 	if (!obj)
 	{
-		qDebug() << "getObjectInfo WARNING - object not found";
+		qWarning() << "getObjectInfo: object not found";
 		map.insert("found", false);
 	}
 	else

@@ -262,6 +262,8 @@ SET(stellarium_lib_SRCS
      StelSplashScreen.cpp
      StelLogger.hpp
      StelLogger.cpp
+     StelSystemInfo.hpp
+     StelSystemInfo.cpp
      CLIProcessor.hpp
      CLIProcessor.cpp
      translations.h
@@ -354,12 +356,14 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/ConfigureScreenshotsDialog.cpp
           gui/AstroCalcDialog.hpp
           gui/AstroCalcDialog.cpp
+          gui/AstroCalcChart.hpp
+          gui/AstroCalcChart.cpp
           gui/AstroCalcExtraEphemerisDialog.hpp
           gui/AstroCalcExtraEphemerisDialog.cpp
           gui/AstroCalcCustomStepsDialog.hpp
           gui/AstroCalcCustomStepsDialog.cpp
-          gui/AstroCalcChart.hpp
-          gui/AstroCalcChart.cpp
+          gui/AstroCalcAlmanacWidget.hpp
+          gui/AstroCalcAlmanacWidget.cpp
           gui/ObsListDialog.hpp
           gui/ObsListDialog.cpp
           gui/StelDialog.hpp
@@ -396,6 +400,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/astroCalcDialog.ui
           gui/astroCalcExtraEphemerisDialog.ui
           gui/astroCalcCustomStepsDialog.ui
+          gui/astroCalcAlmanacWidget.ui
           gui/obsListDialog.ui
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
@@ -519,7 +524,7 @@ IF(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
      CONFIGURE_FILE(${SPOUT_LIBRARY_DLL} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 ENDIF()
 
-SET(STELMAIN_DEPS ${ZLIB_LIBRARIES} glues_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY} ${STD_EXECUTION_LIBS})
+SET(STELMAIN_DEPS ${MD4C_STEL_LIBRARIES} ${ZLIB_LIBRARIES} glues_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY} ${STD_EXECUTION_LIBS})
 IF(USE_BUNDLED_QTCOMPRESS)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} qtcompress_stel)
 ENDIF()
@@ -564,6 +569,7 @@ ENDIF(ENABLE_PCH)
 IF(ENABLE_SHOWMYSKY)
     TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${ShowMySky_INCLUDE_DIRECTORIES}")
 ENDIF()
+TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${md4c_SOURCE_DIR}/src")
 
 SET_TARGET_PROPERTIES(stellarium PROPERTIES ENABLE_EXPORTS TRUE)
 

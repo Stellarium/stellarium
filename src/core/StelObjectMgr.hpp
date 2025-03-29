@@ -128,6 +128,9 @@ public:
 	//! Get the list of objects which was recently selected by the user.
 	const QList<StelObjectP>& getSelectedObject() const {return lastSelectedObjects;}
 
+	//! Get the last selected object.
+	StelObjectP getLastSelectedObject() const { return lastSelectedObject; }
+
 	//! Return the list objects of type "type" which was recently selected by the user.
 	//! @param type return only objects of the given type
 	QList<StelObjectP> getSelectedObject(const QString& type) const;
@@ -202,7 +205,6 @@ public slots:
 	{
 		objectPointerVisibility=b;
 		emit flagSelectedObjectPointerChanged(b);
-
 	}
 	//! Get whether a pointer is to be drawn over selected object.
 	bool getFlagSelectedObjectPointer(void) { return objectPointerVisibility; }
@@ -220,10 +222,12 @@ private:
 	QMap<QString, StelObjectModule*> typeToModuleMap;
 	QMap<QString, QString> objModulesMap;
 
-	// The last selected object in stellarium
+	// The list of last selected objects in Stellarium
 	QList<StelObjectP> lastSelectedObjects;
 	// Should selected object pointer be drawn
 	bool objectPointerVisibility;
+	// The last selected object in Stellarium
+	StelObjectP lastSelectedObject;
 
 	//! Find in a "clever" way an object from its equatorial J2000.0 position.
 	StelObjectP cleverFind(const StelCore* core, const Vec3d& pos) const;

@@ -34,8 +34,7 @@
 #include <QRegularExpression>
 #include <QGraphicsDropShadowEffect>
 
-InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
-	infoPixmap(nullptr)
+InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -62,8 +61,6 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 			qWarning() << "config.ini option gui/selected_object_info is invalid, using \"default\"";
 		infoTextFilters = StelObject::InfoStringGroup(StelObject::DefaultInfo);
 	}
-	if (qApp->property("text_texture")==true) // CLI option -t given?
-		infoPixmap=new QGraphicsPixmapItem(this);
 
 	QFont font=QGuiApplication::font();
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize());
@@ -77,7 +74,7 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 
 	if (conf->value("gui/flag_info_shadow", false).toBool())
 	{
-		// Add a drop shadow for better visibility (not on the infopixmap, though)
+		// Add a drop shadow for better visibility
 		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(this);
 		effect->setBlurRadius(6);
 		effect->setColor(QColor(0, 0, 0));
@@ -88,58 +85,6 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 
 InfoPanel::~InfoPanel()
 {
-	if (infoPixmap)
-	{
-		delete infoPixmap;
-		infoPixmap=nullptr;
-	}
-}
-
-// A hackish fix for broken OpenGL font situations like RasPi2 VC4 as of 2016-03-26.
-// strList is the text-only representation of InfoPanel.toPlainText(), pre-split into a stringlist.
-// It is assumed: The h2 element (1-2 lines) has been broken into 1-2 lines and a line "ENDHEAD", rest follows line-by-line.
-// The header lines are shown in bold large font, the rest in normal size.
-// There is no bold or other font mark-up, but that should be acceptable.
-QPixmap getInfoPixmap(const QStringList& strList, QFont font, QColor color)
-{
-	// Render the text str into a QPixmap.
-	// search longest string.
-	int maxLenIdx=0; int maxLen=0;
-	for (int i = 0; i < strList.size(); ++i)
-	{
-		if (strList.at(i).length() > maxLen)
-		{
-			maxLen=strList.at(i).length();
-			maxLenIdx=i;
-		}
-	}
-	QFont titleFont(font);
-	titleFont.setBold(true);
-	titleFont.setPixelSize(font.pixelSize()+7);
-
-	QRect strRect = QFontMetrics(titleFont).boundingRect(strList.at(maxLenIdx));
-	int w = strRect.width()+1+static_cast<int>(0.02f*static_cast<float>(strRect.width()));
-	int h = strRect.height()*strList.count()+8;
-
-	QPixmap strPixmap(w, h);
-	strPixmap.fill(Qt::transparent);
-	QPainter painter(&strPixmap);
-	font.setStyleStrategy(QFont::NoAntialias); // else: font problems on RasPi20160326
-	//painter.setRenderHints(QPainter::TextAntialiasing);
-	painter.setPen(color);
-	painter.setFont(titleFont);
-	int txtOffset=0; // to separate heading from rest of text.
-	for (int i = 0; i < strList.size(); ++i)
-	{
-		if (strList.at(i).startsWith( "ENDHEAD"))
-		{
-			painter.setFont(font);
-			txtOffset=8;
-		}
-		else
-			painter.drawText(-strRect.x()+1, -strRect.y()+i*(painter.font().pixelSize()+2)+txtOffset, strList.at(i));
-	}
-	return strPixmap;
 }
 
 void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
@@ -148,48 +93,26 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 	{
 		if (!document()->isEmpty())
 			document()->clear();
-		if (qApp->property("text_texture")==true) // CLI option -t given?
-			infoPixmap->setVisible(false);
 	}
 	else
 	{
 		// just print details of the first item for now
 		// Must set lastRTS for currently selected object here...
 		StelCore *core=StelApp::getInstance().getCore();
-		QString s = selected[0]->getInfoString(core, infoTextFilters);
+		infoHTML = selected[0]->getInfoString(core, infoTextFilters);
 		selected[0]->removeExtraInfoStrings(StelObject::AllInfo);
-		setHtml(s);
-		if (qApp->property("text_texture")==true) // CLI option -t given?
-		{
-			// Extract color from HTML.
-			static const QRegularExpression colorRegExp("<font color=(#[0-9a-f]{6,6})>");
-			int colorInt=s.indexOf(colorRegExp);
-			QString colorStr;
-
-			if (colorInt>-1)
-				colorStr=colorRegExp.match(s).captured(1);
-			else
-				colorStr="#ffffff";
-
-			QColor infoColor(colorStr);
-			// inject a marker word in the infostring to mark end of header.
-			// In case no header exists, put it after the color tag (first closing brace).
-			int endHead=s.indexOf("</h2>")+5;
-			if (endHead==4)
-				endHead=s.indexOf(">")+1;
-			s.insert(endHead, QString("ENDHEAD<br/>"));
-			setHtml(s);
-			infoPixmap->setPixmap(getInfoPixmap(getSelectedText().split("\n"), this->font(), infoColor));
-			// setting visible=false would hide also the child QGraphicsPixmapItem...
-			setHtml("");
-			infoPixmap->setVisible(true);
-		}
+		setHtml(infoHTML);
 	}
 }
 
-const QString InfoPanel::getSelectedText(void) const
+QString InfoPanel::getSelectedText() const
 {
 	return toPlainText();
+}
+
+QString InfoPanel::getSelectedHTML() const
+{
+	return infoHTML;
 }
 
 SkyGui::SkyGui(QGraphicsItem * parent)
@@ -250,7 +173,7 @@ void SkyGui::init(StelGui* astelGui)
 	btVertAutoHide->setPos(0,0);
 	btVertAutoHide->setZValue(1000);
 
-	infoPanel->setPos(8,8);
+	updateInfoPanelPos();
 
 	// If auto hide is off, show the relevant toolbars
 	if (!autoHideBottomBar)
@@ -268,10 +191,17 @@ void SkyGui::init(StelGui* astelGui)
 	buttonBarsFrame->setZValue(-0.1);
 	updateBarsPos();
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, &SkyGui::updateInfoPanelPos);
 	connect(bottomBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));
 	// The first draw of path may show overshooting date line if there are too few buttons in the bottom bar.
 	// Correct this by a redraw 1/2s after startup
 	QTimer::singleShot(500, this, [=](){buttonBarsFrame->updatePath(bottomBar, leftBar);});
+}
+
+void SkyGui::updateInfoPanelPos()
+{
+	const auto factor = StelApp::getInstance().screenFontSizeRatio();
+	infoPanel->setPos(8 * factor, 8 * factor);
 }
 
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)

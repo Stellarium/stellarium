@@ -1,0 +1,86 @@
+{
+  "id": "northern_andes",
+  "region": "Southern America",
+  "classification": ["traditional"],
+  "fallback_to_international_names": false,
+  "asterisms": [
+    {
+      "id": "AST northern_andes AS1",
+      "common_name": {"english": "Molestina Triangle"},
+      "lines": [[80763, 97649, 91262, 80763]]
+    },
+    {
+      "id": "AST northern_andes AS2",
+      "common_name": {"english": "Southern Cross"},
+      "lines": [[60718, 62434, 61084, 59747, 60718]]
+    },
+    {
+      "id": "AST northern_andes AS3",
+      "common_name": {"english": "Antonio Quinatoa Cross"},
+      "lines": [[37279, 32349, 24436, 27989, 37279]]
+    }
+  ],
+  "constellations": [
+    {
+      "id": "CON northern_andes 001",
+      "lines": [[32578, 31622, 31646, 32533, 31216, 30419, 29860, 30185, 30545, 30493, 30666, 30093, 29651, 30772, 31278, 31083, 32578]],
+      "image": {
+        "file": "illustrations/jaguar.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [2, 342], "hip": 29996},
+          {"pos": [425, 142], "hip": 32226},
+          {"pos": [509, 204], "hip": 31347}
+        ]
+      },
+      "common_name": {"english": "The Jaguar", "native": "Estelina Quinatoa (El Jaguar)"}
+    },
+    {
+      "id": "CON northern_andes 002",
+      "lines": [[92175, 92202, 93026, 93429, 93805, 93717, 93526, 91308, 90441, 90642, 88404, 86768, 88048, 88326, 87879, 87544, 87074, 87161, 88258, 88857, 88981, 91105, 92175]],
+      "image": {
+        "file": "illustrations/mono.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [312, 6], "hip": 93805},
+          {"pos": [50, 377], "hip": 88258},
+          {"pos": [458, 308], "hip": 90441}
+        ]
+      },
+      "common_name": {"english": "The Monkey", "native": "Mercedes Cotacachi (El Mono)"}
+    },
+    {
+      "id": "CON northern_andes 003",
+      "lines": [[2599, 115990, 112731, 6686, 2599], [6686, 8020, 12346, 10893, 8886, 11569, 5518, 112724, 6686]],
+      "image": {
+        "file": "illustrations/guerrero.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [247, 8], "hip": 9799},
+          {"pos": [194, 510], "hip": 112731},
+          {"pos": [367, 94], "hip": 8878}
+        ]
+      },
+      "common_name": {"english": "The Warrior", "native": "Hernan Crespo Toral (El Guerrero)"}
+    },
+    {
+      "id": "CON northern_andes 004",
+      "lines": [[59996, 59072, 59457, 60771, 60944, 62053, 61158, 62227, 63802, 63277, 62268, 62732, 64016, 63117, 61179, 60379, 61136, 59649, 59282, 58901, 60260, 59396, 59996]],
+      "image": {
+        "file": "illustrations/sapo.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [225, 40], "hip": 62026},
+          {"pos": [43, 223], "hip": 64664},
+          {"pos": [468, 109], "hip": 58041}
+        ]
+      },
+      "common_name": {"english": "The Frog", "native": "Ana Jaramillo de Velastegui (El Sapo)"}
+    },
+    {
+      "id": "CON northern_andes 005",
+      "lines": [[6686, 4427, 2599, 746, 3179, 3821, 4422, 6686]],
+      "common_name": {"english": "The Arrow", "native": "La Flecha (Jorge Trujillo)"}
+    }
+  ]
+}

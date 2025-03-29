@@ -30,8 +30,8 @@
 #include "ConstellationMgr.hpp"
 #include "ZoneArray.hpp"
 
-#include <algorithm>
 #include <QString>
+#include <QJsonArray>
 #include <QTextStream>
 #include <QDebug>
 #include <QFontMetrics>
@@ -50,55 +50,85 @@ Constellation::Constellation()
 	: numberOfSegments(0)
 	, beginSeason(0)
 	, endSeason(0)
-	, constellation(Q_NULLPTR)
+	, singleStarConstellationRadius(cos(M_PI/360.)) // default radius of 1/2 degrees
 	, artOpacity(1.f)
 {
 }
 
 Constellation::~Constellation()
 {
-	delete[] constellation;
-	constellation = Q_NULLPTR;
 }
 
-bool Constellation::read(const QString& record, StarMgr *starMgr)
+bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool preferNativeName)
 {
-	StarId HP;
-
-	abbreviation.clear();
-	numberOfSegments = 0;
-
-	QString buf(record);
-	QTextStream istr(&buf, QIODevice::ReadOnly);
-	// allow mixed-case abbreviations now that they can be displayed on screen. We then need toUpper() in comparisons.
-	istr >> abbreviation >> numberOfSegments;
-	if (istr.status()!=QTextStream::Ok)
-		return false;
-
-	constellation = new StelObjectP[numberOfSegments*2];
-	for (unsigned int i=0;i<numberOfSegments*2;++i)
+	const auto id = data["id"].toString();
+	const auto idParts = id.split(" ");
+	if (idParts.size() == 3 && idParts[0] == "CON")
 	{
-		HP = 0;
-		istr >> HP;
-		if(HP == 0)
-		{
-			return false;
-		}
+		abbreviation = idParts[2];
+	}
+	else
+	{
+		qWarning().nospace() << "Bad constellation id: expected \"CON cultureName Abbrev\", got " << id;
+		return false;
+	}
 
-		if (HP <= NR_OF_HIP)
-		{
-			constellation[i]=starMgr->searchHP(static_cast<int>(HP));
-		}
-		else
-		{
-			constellation[i]=starMgr->searchGaia(HP);
-		}
+	const auto names = data["common_name"].toObject();
+	nativeName = names["native"].toString();
+	nativeNamePronounce = names["pronounce"].toString();
+	englishName = preferNativeName && !nativeName.isEmpty() ? nativeName : names["english"].toString();
+	context = names["context"].toString();
+	if (englishName.isEmpty() && nativeName.isEmpty())
+		qWarning() << "No name for constellation" << id;
 
-		if (!constellation[i])
+	constellation.clear();
+	const QJsonArray &linesArray=data["lines"].toArray();
+	for (const auto& polyLineObj : linesArray)
+	{
+		const auto& polyLine = polyLineObj.toArray();
+		if (polyLine.size() < 2) continue; // one point doesn't define a segment
+
+		const auto numSegments = polyLine.size() - 1;
+		constellation.reserve(constellation.size() + 2 * numSegments);
+
+		StelObjectP prevPoint = nullptr;
+		for (qsizetype i = 0; i < polyLine.size(); ++i)
 		{
-			qWarning() << "Error in Constellation " << abbreviation << ": can't find star HIP" << HP;
-			return false;
+			if (polyLine[i].isString())
+			{
+				// Can be "thin" or "bold", but we don't support these modifiers yet, so ignore this entry
+				const auto s = polyLine[i].toString();
+				if (s == "thin" || s == "bold")
+					continue;
+			}
+			const StarId HP = StelUtils::getLongLong(polyLine[i]);
+			if (HP <= 0)
+			{
+				qWarning().nospace() << "Error in constellation " << abbreviation << ": bad HIP " << HP;
+				return false;
+			}
+
+			const auto newPoint = HP <= NR_OF_HIP ? starMgr->searchHP(HP)
+			                                      : starMgr->searchGaia(HP);
+			if (!newPoint)
+			{
+				qWarning().nospace() << "Error in constellation " << abbreviation << ": can't find star HIP " << HP;
+				return false;
+			}
+			if (prevPoint)
+			{
+				constellation.push_back(prevPoint);
+				constellation.push_back(newPoint);
+			}
+			prevPoint = newPoint;
 		}
+	}
+
+	numberOfSegments = constellation.size() / 2;
+	if (data.contains("single_star_radius"))
+	{
+		double rd = data["single_star_radius"].toDouble(0.5);
+		singleStarConstellationRadius = cos(rd*M_PI/180.);
 	}
 
 	// Name tag should go to constellation's centre of gravity
@@ -108,6 +138,21 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 		XYZname+= constellation[ii]->getJ2000EquatorialPos(StelApp::getInstance().getCore());
 	}
 	XYZname.normalize();
+
+	beginSeason = 1;
+	endSeason = 12;
+	const auto visib = data["visibility"];
+	if (visib.isUndefined()) return true;
+	const auto visibility = visib.toObject();
+	const auto months = visibility["months"].toArray();
+	if (months.size() != 2)
+	{
+		qWarning() << "Unexpected format of \"visibility\" entry in constellation" << id;
+		return true; // not critical
+	}
+	beginSeason = months[0].toInt();
+	endSeason = months[1].toInt();
+	seasonalRuleEnabled = true;
 
 	return true;
 }
@@ -128,8 +173,15 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 			star1=constellation[2*i]->getJ2000EquatorialPos(core);
 			star2=constellation[2*i+1]->getJ2000EquatorialPos(core);
 			star1.normalize();
-			star2.normalize();			
-			sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);			
+			star2.normalize();
+			if (star1.fuzzyEquals(star2))
+			{
+				// draw single-star segment as circle
+				SphericalCap scCircle(star1, singleStarConstellationRadius);
+				sPainter.drawSphericalRegion(&scCircle, StelPainter::SphericalPolygonDrawModeBoundary);
+			}
+			else
+				sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);
 		}
 	}
 }
@@ -257,7 +309,7 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter, const Vec3d& obsVel
 
 bool Constellation::checkVisibility() const
 {
-	// Is supported seasonal rules by current starlore?
+	// Is supported seasonal rules by current sky culture?
 	if (!seasonalRuleEnabled)
 		return true;
 
@@ -288,10 +340,19 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 
 	if (flags&Name)
 	{
+		QStringList names;
+		if (getNativeNamePronounce().isEmpty())
+			names << getNativeName();
+		else
+			names << QString("%1 [%2]").arg(getNativeName(), getNativeNamePronounce());
+
 		QString shortname = getShortName();
-		oss << "<h2>" << getNameI18n();
 		if (!shortname.isEmpty() && shortname.toInt()==0)
-			oss << " (" << shortname << ")";
+			names << shortname;
+
+		oss << "<h2>" << getNameI18n();
+		if (!names.empty())
+			oss << " (" << names.join(" - ") << ")";
 		oss << "</h2>";
 	}
 

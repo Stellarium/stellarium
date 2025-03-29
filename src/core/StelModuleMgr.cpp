@@ -124,7 +124,7 @@ StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 		{
 			Q_ASSERT(desc.pluginInterface);
 			StelModule* sMod = desc.pluginInterface->getStelModule();
-			qDebug() << "Loaded plugin" << moduleID;
+			qInfo() << "Loaded plugin" << moduleID;
 			pluginDescriptorList[moduleID].loaded=true;
 			return sMod;
 		}
@@ -175,7 +175,7 @@ void StelModuleMgr::unloadAllPlugins()
 		if (d.loaded==false)
 			continue;
 		unloadModule(d.info.id, true);
-		qDebug() << "Unloaded plugin" << d.info.id;
+		qInfo() << "Unloaded plugin" << d.info.id;
 	}
 	// Call update now to make sure that all references to the now deleted plugins modules
 	// are removed (fix crashes at application shutdown).

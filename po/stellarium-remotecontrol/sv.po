@@ -6,17 +6,18 @@
 # Translators:
 # spcsmrf <spcsmrf@gmail.com>, 2022
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
-# Karl Birgersson <birgerssonkarl@outlook.com>, 2024
-# cardinot <mcardinot@gmail.com>, 2024
+# cardinot <mcardinot@gmail.com>, 2025
+# Daniel Nylander <po@danielnylander.se>, 2025
+# Karl Birgersson <birgerssonkarl@outlook.com>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-12-02 12:46+0700\n"
+"POT-Creation-Date: 2025-01-03 20:26+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2024\n"
+"Last-Translator: Karl Birgersson <birgerssonkarl@outlook.com>, 2025\n"
 "Language-Team: Swedish (https://app.transifex.com/stellarium/teams/80998/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,15 +27,15 @@ msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
-msgstr ""
+msgstr "Kunde inte hämta åtgärdslistan"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr ""
+msgstr "Åtgärd '%1' accepteras inte av servern: "
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr ""
+msgstr "Fel vid sändning av åtgärd \"%1\" till servern: "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
@@ -44,57 +45,57 @@ msgstr "Fel vid sökning"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:125
 msgid "Could not retrieve country list"
-msgstr ""
+msgstr "Landslistan kunde inte hämtas"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:138
 msgid "Could not retrieve planet list"
-msgstr ""
+msgstr "Planetlistan kunde inte hämtas"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:28
 msgid "Could not retrieve property list"
-msgstr ""
+msgstr "Kunde inte hämta egenskapslistan"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
 msgid "Property '%1' not accepted by server: "
-msgstr ""
+msgstr "Egenskapen '%1' accepteras inte av servern: "
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
-msgstr ""
+msgstr "Fel vid sändning av egenskapen '%1' till servern: "
 
 #: plugins/RemoteControl/webroot/js/api/remotecontrol.js:197
 msgid "Error sending command to server: "
-msgstr ""
+msgstr "Fel vid sändning av kommando till server: "
 
 #: plugins/RemoteControl/webroot/js/api/scripts.js:27
 msgid "Could not retrieve script list"
-msgstr ""
+msgstr "Det gick inte att hämta skriptlistan"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:35
 msgid "querying"
-msgstr ""
+msgstr "frågar"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:44
 msgid "Error (%1)"
-msgstr ""
+msgstr "Fel (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
-msgstr ""
+msgstr "Fel vid uppslagning i Simbad"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:225
 #: tablet7in.html:242
 msgid "idle"
-msgstr ""
+msgstr "tomgång"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:105
 msgid "Error loading object types"
-msgstr ""
+msgstr "Fel vid laddning av objekttyper"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:138
 msgid "Error getting object list"
-msgstr ""
+msgstr "Fel vid hämtning av objektlista"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:200
 msgid "waiting"
@@ -102,26 +103,26 @@ msgstr "väntar"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
-msgstr ""
+msgstr "Det gick inte att hämta projektionslistan"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
 msgid "Could not retrieve landscape list"
-msgstr ""
+msgstr "Kunde inte hämta landskapslistan"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
 #: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:745
 #: index.html:807 tablet7in.html:830 tablet7in.html:890
 msgid "-none-"
-msgstr ""
+msgstr "-ingen-"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
 msgid "(Currently loading: %1)"
-msgstr ""
+msgstr "(Aktuell laddning: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr ""
+msgstr "Det gick inte att hämta Scenery3d-listan"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -135,175 +136,175 @@ msgstr "av"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:58
 msgid "Show All Items"
-msgstr ""
+msgstr "Visa alla objekt"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:124
 msgid "Input did not match any item"
-msgstr ""
+msgstr "Inmatningen matchade inte någon post"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:294
 msgid "No current selection"
-msgstr ""
+msgstr "Inget aktuellt val"
 
 #: index.html:7 tablet7in.html:7
 msgid "Stellarium remote control plugin"
-msgstr ""
+msgstr "Stellarium fjärrstyrningsplugin"
 
 #: index.html:19 tablet7in.html:20
 msgid "Please wait, loading"
-msgstr ""
+msgstr "Vänta, läser in"
 
 #: index.html:28 tablet7in.html:29
 msgid "Stellarium remote control"
-msgstr ""
+msgstr "Stellarium fjärrkontroll"
 
 #: index.html:32 tablet7in.html:33
 msgid "Main controls"
-msgstr ""
+msgstr "Huvudkontroller"
 
 #: index.html:35 tablet7in.html:40
 msgid "DSO"
-msgstr ""
+msgstr "DSO"
 
 #: index.html:38
 msgid "Actions and scripts"
-msgstr ""
+msgstr "Åtgärder och skript"
 
 #: index.html:41 tablet7in.html:47
 msgid "Scenery3d"
-msgstr ""
+msgstr "Scenery3d"
 
 #: index.html:79
 msgid "Pause"
-msgstr ""
+msgstr "Paus"
 
 #: index.html:84 tablet7in.html:185
 msgid "Time jumps"
-msgstr ""
+msgstr "Tidshopp"
 
 #: index.html:88 tablet7in.html:189
 msgid "Solar hour"
-msgstr ""
+msgstr "Soltimme"
 
 #: index.html:89 tablet7in.html:190
 msgid "Solar day"
-msgstr ""
+msgstr "Soldag"
 
 #: index.html:90 tablet7in.html:191
 msgid "Solar week"
-msgstr ""
+msgstr "Solvecka"
 
 #: index.html:92 tablet7in.html:193
 msgid "Calendar year"
-msgstr ""
+msgstr "Kalenderår"
 
 #: index.html:93 tablet7in.html:194
 msgid "10 Calendar years"
-msgstr ""
+msgstr "10 kalenderår"
 
 #: index.html:94 tablet7in.html:195
 msgid "100 Calendar years"
-msgstr ""
+msgstr "100 kalenderår"
 
 #: index.html:97 tablet7in.html:198
 msgid "Sidereal year"
-msgstr ""
+msgstr "Sideriskt år"
 
 #: index.html:98 tablet7in.html:199
 msgid "Sidereal century"
-msgstr ""
+msgstr "Sideriskt århundrade"
 
 #: index.html:100 tablet7in.html:201
 msgid "Synodic month"
-msgstr ""
+msgstr "Synodisk månad"
 
 #: index.html:101 tablet7in.html:202
 msgid "Draconic month"
-msgstr ""
+msgstr "Drakonisk månad"
 
 #: index.html:102 tablet7in.html:203
 msgid "Draconic year"
-msgstr ""
+msgstr "Drakoniskt år"
 
 #: index.html:105 tablet7in.html:206
 msgid "Anomalistic month"
-msgstr ""
+msgstr "Anomalistisk månad"
 
 #: index.html:106 tablet7in.html:207
 msgid "Anomalistic year"
-msgstr ""
+msgstr "Anomalistiskt år"
 
 #: index.html:107 tablet7in.html:208
 msgid "Anomalistic century"
-msgstr ""
+msgstr "Anomalistiskt århundrade"
 
 #: index.html:109 tablet7in.html:210
 msgid "Mean tropical month"
-msgstr ""
+msgstr "Genomsnittlig tropisk månad"
 
 #: index.html:110 tablet7in.html:211
 msgid "Mean tropical year"
-msgstr ""
+msgstr "Genomsnittligt tropiskt år"
 
 #: index.html:111 tablet7in.html:212
 msgid "Mean tropical century"
-msgstr ""
+msgstr "Genomsnittligt tropiskt århundrade"
 
 #: index.html:113 tablet7in.html:214
 msgid "Tropical year"
-msgstr ""
+msgstr "Tropiskt år"
 
 #: index.html:114 tablet7in.html:215
 msgid "Julian year"
-msgstr ""
+msgstr "Julianskt år"
 
 #: index.html:115 tablet7in.html:216
 msgid "Julian century"
-msgstr ""
+msgstr "Julianskt århundrade"
 
 #: index.html:117 tablet7in.html:218
 msgid "Gaussian year"
-msgstr ""
+msgstr "Gaussiskt år"
 
 #: index.html:129 tablet7in.html:103
 msgid "View towards horizon at Azimuth"
-msgstr ""
+msgstr "Vy mot horisonten vid Azimut"
 
 #: index.html:150 tablet7in.html:125
 msgid "Vertical View offset"
-msgstr ""
+msgstr "Vertikal vyförskjutning"
 
 #: index.html:219 tablet7in.html:236
 msgid "Enter search term. Use TAB to navigate results."
-msgstr ""
+msgstr "Ange sökterm. Använd TAB för att navigera bland resultaten."
 
 #: index.html:220 tablet7in.html:237
 msgid "Select and focus"
-msgstr ""
+msgstr "Välj och fokusera"
 
 #: index.html:245 tablet7in.html:265
 msgid "Select current item"
-msgstr ""
+msgstr "Välj aktuellt objekt"
 
 #: index.html:249 tablet7in.html:269
 msgid "Selection mode"
-msgstr ""
+msgstr "Val av läge"
 
 #: index.html:249 tablet7in.html:269
 msgid "Center on object"
-msgstr ""
+msgstr "Centrera på objektet"
 
 #: index.html:249 tablet7in.html:269
 msgid "Center and zoom to object"
-msgstr ""
+msgstr "Centrera och zooma till objektet"
 
 #: index.html:249 tablet7in.html:269
 msgid "Just mark the object"
-msgstr ""
+msgstr "Markera bara objektet"
 
 #: index.html:251 tablet7in.html:271
 msgid "Quick select"
-msgstr ""
+msgstr "Snabbval"
 
 #: index.html:255 tablet7in.html:275
 msgid "Earth"
@@ -311,11 +312,11 @@ msgstr "Jorden"
 
 #: index.html:255 tablet7in.html:275
 msgid "Pluto"
-msgstr ""
+msgstr "Pluto"
 
 #: index.html:261 tablet7in.html:304
 msgid "Current selection"
-msgstr ""
+msgstr "Aktuellt val"
 
 #: index.html:278 tablet7in.html:332
 msgid "Milky Way brightness:"
@@ -323,23 +324,23 @@ msgstr "Ljusstyrka för Vintergatan:"
 
 #: index.html:289 tablet7in.html:351
 msgid "Dbl. stars"
-msgstr ""
+msgstr "Dubbelstjärnor"
 
 #: index.html:290 tablet7in.html:352
 msgid "Var. stars"
-msgstr ""
+msgstr "Var. stjärnor"
 
 #: index.html:291 tablet7in.html:353
 msgid "HIP"
-msgstr ""
+msgstr "HIP"
 
 #: index.html:294 tablet7in.html:357
 msgid "Digitized Sky Survey"
-msgstr ""
+msgstr "Digitized Sky Survey"
 
 #: index.html:295 tablet7in.html:358
 msgid "HiPS Survey"
-msgstr ""
+msgstr "HiPS-kartering"
 
 #: index.html:304 tablet7in.html:369
 msgid "Include nutation"
@@ -375,7 +376,7 @@ msgstr "Visa endast spår för vald planet"
 
 #: index.html:324 tablet7in.html:394
 msgid "Scale Moon:"
-msgstr "Månskala:"
+msgstr "Skala månen:"
 
 #: index.html:325 tablet7in.html:398
 msgid "Scale Sun:"
@@ -383,7 +384,7 @@ msgstr "Skala solen:"
 
 #: index.html:326 tablet7in.html:402
 msgid "Scale Planets:"
-msgstr ""
+msgstr "Skala planeter:"
 
 #: index.html:327 tablet7in.html:406
 msgid "Scale minor bodies:"
@@ -391,11 +392,11 @@ msgstr "Skala mindre kroppar:"
 
 #: index.html:332
 msgid "Mark minor bodies:"
-msgstr ""
+msgstr "Markera mindre kroppar:"
 
 #: index.html:360 tablet7in.html:438
 msgid "Bortle class:"
-msgstr ""
+msgstr "Bortle-klass:"
 
 #: index.html:377 tablet7in.html:455
 msgid "Extinction Coefficient:"
@@ -403,53 +404,55 @@ msgstr "Absorptionskoefficient:"
 
 #: index.html:378 tablet7in.html:456
 msgid "Only extinction/refraction, no blue skylight"
-msgstr ""
+msgstr "Endast extinktion/refraktion, inget blått himmelsljus"
 
 #: index.html:378 tablet7in.html:457
 msgid "Suppress scattering"
-msgstr ""
+msgstr "Dölj spridning"
 
 #: index.html:382 tablet7in.html:462
 msgid "Shooting Stars"
-msgstr ""
+msgstr "Stjärnfall"
 
 #: index.html:383 tablet7in.html:463
 msgid "ZHR:"
-msgstr ""
+msgstr "ZHR:"
 
 #: index.html:430 tablet7in.html:515
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
 msgstr ""
+"Momentana cirklar av jordens axel vid dess rörelse runt de ekliptiska "
+"polerna. Visas endast på jorden."
 
 #: index.html:447 tablet7in.html:532
 msgid "Center"
-msgstr ""
+msgstr "Centrera"
 
 #: index.html:463 tablet7in.html:550
 msgid "Solstices"
-msgstr ""
+msgstr "Solstånd"
 
 #: index.html:464 tablet7in.html:551
 msgid "Crossquarters"
-msgstr ""
+msgstr "Korsningsdagar"
 
 #: index.html:465 tablet7in.html:552
 msgid "Major Standstill"
-msgstr ""
+msgstr "Högsta månstillestånd"
 
 #: index.html:466 tablet7in.html:553
 msgid "Minor Standstill"
-msgstr ""
+msgstr "Lägsta månstillestånd"
 
 #: index.html:470 tablet7in.html:558
 msgid "Line width:"
-msgstr ""
+msgstr "Linjebredd:"
 
 #: index.html:480 tablet7in.html:568
 msgid "Current Planet:"
-msgstr ""
+msgstr "Aktuell planet:"
 
 #: index.html:520 tablet7in.html:608
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
@@ -459,34 +462,35 @@ msgstr "Katalog över reflektionsnebulosor (Van den Bergh, 1966)"
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
 msgstr ""
+"Katalog över sydliga stjärnor inbäddade i nebulositet (van den Bergh+, 1975)"
 
 #: index.html:605
 msgid "Objects without identifier"
-msgstr ""
+msgstr "Objekt utan identifierare"
 
 #: index.html:623
 msgid "Open Star clusters"
-msgstr ""
+msgstr "Öppna stjärnhopar"
 
 #: index.html:624 tablet7in.html:694
 msgid "Globular Star clusters"
-msgstr ""
+msgstr "Klothopar"
 
 #: index.html:630 tablet7in.html:700
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "Ljusa nebulosor"
 
 #: index.html:631 tablet7in.html:701
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "Mörka nebulosor"
 
 #: index.html:632 tablet7in.html:702
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "Planetariska nebulosor"
 
 #: index.html:642 tablet7in.html:712
 msgid "Labels and markers"
-msgstr ""
+msgstr "Etiketter och markörer"
 
 #: index.html:660 tablet7in.html:731
 msgid "Limit angular size (arcmin):"
@@ -502,31 +506,35 @@ msgstr "Visa landskapsetiketter"
 
 #: index.html:683 tablet7in.html:754
 msgid "Show illumination"
-msgstr ""
+msgstr "Visa belysning"
 
 #: index.html:688 tablet7in.html:760
 msgid "Current landscape"
-msgstr ""
+msgstr "Nuvarande landskap"
 
 #: index.html:699 tablet7in.html:772
 msgid "Label constellations with font size"
-msgstr ""
+msgstr "Märk konstellationer med teckenstorlek"
 
 #: index.html:703 tablet7in.html:776
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Visa linjer med tjocklek"
 
 #: index.html:707 tablet7in.html:780
 msgid "Label asterisms with font size"
-msgstr ""
+msgstr "Markera asterismer med teckenstorlek"
 
 #: index.html:711 tablet7in.html:784
 msgid "Show asterisms with thickness"
-msgstr ""
+msgstr "Visa asterismer med tjocklek"
 
 #: index.html:715 tablet7in.html:788
 msgid "Show ray helpers with thickness"
-msgstr ""
+msgstr "Visar hjälplinjer med tjocklek"
+
+#: index.html:719 tablet7in.html:792
+msgid "Show art in brightness"
+msgstr "Visa grafik med ljusstyrka"
 
 #: index.html:723 tablet7in.html:796
 msgid "Show boundaries with thickness"
@@ -534,127 +542,127 @@ msgstr "Visa gränser med tjocklek"
 
 #: index.html:728 tablet7in.html:801
 msgid "Constellation selection isolated"
-msgstr ""
+msgstr "Isolerade stjärnbilder"
 
 #: index.html:732 tablet7in.html:805
 msgid "Current sky culture"
-msgstr ""
+msgstr "Nuvarande himmelskultur"
 
 #: index.html:745 tablet7in.html:830
 msgid "Active script:"
-msgstr ""
+msgstr "Aktivt skript:"
 
 #: index.html:746 tablet7in.html:831
 msgid "Run selected script"
-msgstr ""
+msgstr "Kör valt skript"
 
 #: index.html:746 tablet7in.html:831
 msgid "Stop current script"
-msgstr ""
+msgstr "Stoppa aktuellt skript"
 
 #: index.html:751 tablet7in.html:43 tablet7in.html:815
 msgid "Actions"
-msgstr ""
+msgstr "Åtgärder"
 
 #: index.html:755 tablet7in.html:819
 msgid "Run/toggle action"
-msgstr ""
+msgstr "Kör/växla åtgärd"
 
 #: index.html:766 tablet7in.html:854
 msgid "Planet map"
-msgstr ""
+msgstr "Planetkarta"
 
 #: index.html:767 tablet7in.html:855
 msgid "Planet map pointer"
-msgstr ""
+msgstr "Pekare för planetkarta"
 
 #: index.html:771 tablet7in.html:859
 msgid "Type to search location"
-msgstr ""
+msgstr "Skriv för att söka plats"
 
 #: index.html:805 tablet7in.html:888
 msgid "Interaction"
-msgstr ""
+msgstr "Interaktioner"
 
 #: index.html:806 tablet7in.html:889
 msgid "Current scene:"
-msgstr ""
+msgstr "Aktuell scen:"
 
 #: index.html:809 tablet7in.html:892
 msgid "View controls"
-msgstr ""
+msgstr "Visa kontroller"
 
 #: index.html:815 tablet7in.html:898
 msgid "Movement controls"
-msgstr ""
+msgstr "Rörelsekontroller"
 
 #: index.html:827 tablet7in.html:910
 msgid "Torchlight"
-msgstr ""
+msgstr "Fackelsken"
 
 #: index.html:834 tablet7in.html:917
 msgid "Scene selection"
-msgstr ""
+msgstr "Val av scen"
 
 #: index.html:838 tablet7in.html:921
 msgid "Load selected scene"
-msgstr ""
+msgstr "Läs in vald scen"
 
 #: index.html:864 tablet7in.html:948
 msgid "No response from server"
-msgstr ""
+msgstr "Inget svar från servern"
 
 #: index.html:865 tablet7in.html:949
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
-msgstr ""
+msgstr "Inget svar från servern på %1 sekunder. Körs Stellarium fortfarande?"
 
 #: tablet7in.html:34
 msgid "Time Jump"
-msgstr ""
+msgstr "Tidshopp"
 
 #: tablet7in.html:39
 msgid "Grids"
-msgstr ""
+msgstr "Rutnät"
 
 #: tablet7in.html:99
 msgid "Up/Left"
-msgstr ""
+msgstr "Upp/vänster"
 
 #: tablet7in.html:99
 msgid "Up"
-msgstr ""
+msgstr "Upp"
 
 #: tablet7in.html:99
 msgid "Up/Right"
-msgstr ""
+msgstr "Upp/höger"
 
 #: tablet7in.html:99
 msgid "Left"
-msgstr ""
+msgstr "Vänster"
 
 #: tablet7in.html:99
 msgid "Focus on selected object"
-msgstr ""
+msgstr "Fokusera på valt objekt"
 
 #: tablet7in.html:99
 msgid "Focus on selection"
-msgstr ""
+msgstr "Fokus på urval"
 
 #: tablet7in.html:99
 msgid "Right"
-msgstr ""
+msgstr "Höger"
 
 #: tablet7in.html:99
 msgid "Down/Left"
-msgstr ""
+msgstr "Nedåt/vänster"
 
 #: tablet7in.html:99
 msgid "Down"
-msgstr ""
+msgstr "Ner"
 
 #: tablet7in.html:99
 msgid "Down/Right"
-msgstr ""
+msgstr "Nedåt/höger"
 
 #: tablet7in.html:276
 msgid "Sirius"
@@ -694,11 +702,11 @@ msgstr "Orionnebulusan"
 
 #: tablet7in.html:285
 msgid "Eta Carinae Nebula"
-msgstr ""
+msgstr "Eta Carinae-nebulosan"
 
 #: tablet7in.html:286
 msgid "47 Tucanae Cluster"
-msgstr ""
+msgstr "47 Tucanae-hopen"
 
 #: tablet7in.html:287
 msgid "Aries"
@@ -750,16 +758,16 @@ msgstr "Fiskarna"
 
 #: tablet7in.html:839
 msgid "Favorites"
-msgstr ""
+msgstr "Favoriter"
 
 #: tablet7in.html:841
 msgid "Show 1"
-msgstr ""
+msgstr "Visa 1"
 
 #: tablet7in.html:842
 msgid "Remove Labels and Images"
-msgstr ""
+msgstr "Ta bort etiketter och bilder"
 
 #: tablet7in.html:842
 msgid "Cleanup Screen"
-msgstr ""
+msgstr "Rensa skärm"

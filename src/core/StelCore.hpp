@@ -250,6 +250,8 @@ public:
 	Vec3d equinoxEquToJ2000(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	//! Use fixed matrix to allow fast transformation of positions related to the IAU constellation borders.
 	Vec3d j2000ToJ1875(const Vec3d& v) const;
+	//! Use fixed matrix to allow fast transformation of positions related to the IAU constellation borders.
+	Vec3d j1875ToJ2000(const Vec3d& v) const;
 	//! Transform position vector v from equatorial coordinates J2000 to those of date (optionally corrected by refraction).
 	//! Use refMode=StelCore::RefractionOff if you don't want any atmosphere correction.
 	//! Use refMode=StelCore::RefractionOn to correct observed (apparent) coordinates (which are subject to refraction).
@@ -542,37 +544,37 @@ public slots:
 	double getDeltaT() const;
 
 	//! @return whether nutation is currently used.
-	bool getUseNutation() const {return flagUseNutation;}
+	bool getUseNutation() const;
 	//! Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).
-	void setUseNutation(bool use) { if (flagUseNutation != use) { flagUseNutation=use; StelApp::immediateSave("astro/flag_nutation", use); emit flagUseNutationChanged(use); }}
+	void setUseNutation(bool use);
 
 	//! @return whether aberration is currently used.
-	bool getUseAberration() const {return flagUseAberration;}
+	bool getUseAberration() const;
 	//! Set whether you want computation and simulation of aberration (a slight wobble of stellar positions due to finite speed of light, about 20 arcseconds when observing from earth).
-	void setUseAberration(bool use) { if (flagUseAberration != use) { flagUseAberration=use; StelApp::immediateSave("astro/flag_aberration", use); emit flagUseAberrationChanged(use); }}
+	void setUseAberration(bool use);
 
 	//! @return aberration factor. 1 is realistic simulation, but higher values may be useful for didactic purposes.
-	double getAberrationFactor() const {return aberrationFactor;}
+	double getAberrationFactor() const;
 	//! Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
-	void setAberrationFactor(double factor) { if (!fuzzyEquals(aberrationFactor, factor)) { aberrationFactor=qBound(0.,factor, 5.); StelApp::immediateSave("astro/aberration_factor", aberrationFactor); emit aberrationFactorChanged(factor); }}
+	void setAberrationFactor(double factor);
 
 	QByteArray getAberrationShader() const;
 	void setAberrationUniforms(QOpenGLShaderProgram& program) const;
 
 	//! @return whether parallax effect is currently used.
-	bool getUseParallax() const {return flagUseParallax;}
+	bool getUseParallax() const;
 	//! Set whether you want computation and simulation of parallax effect.
-	void setUseParallax(bool use) { if (flagUseParallax != use) { flagUseParallax=use; StelApp::immediateSave("astro/flag_parallax", use); emit flagUseParallaxChanged(use); }}
+	void setUseParallax(bool use);
 
 	//! @return parallax factor. 1 is realistic simulation, but higher values may be useful for didactic purposes.
-	double getParallaxFactor() const {return parallaxFactor;}
+	double getParallaxFactor() const;
 	//! Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
-	void setParallaxFactor(double factor) { if (!fuzzyEquals(parallaxFactor, factor)) { parallaxFactor=qBound(0.,factor, 10000.); StelApp::immediateSave("astro/parallax_factor", parallaxFactor); emit parallaxFactorChanged(factor); }}
+	void setParallaxFactor(double factor);
 
 	//! @return whether topocentric coordinates are currently used.
-	bool getUseTopocentricCoordinates() const {return flagUseTopocentricCoordinates;}
+	bool getUseTopocentricCoordinates() const;
 	//! Set whether you want topocentric or planetocentric data
-	void setUseTopocentricCoordinates(bool use) { if (flagUseTopocentricCoordinates!= use) { flagUseTopocentricCoordinates=use; StelApp::immediateSave("astro/flag_topocentric_coordinates", use); emit flagUseTopocentricCoordinatesChanged(use); }}
+	void setUseTopocentricCoordinates(bool use);
 
 	//! Return the preset sky time in JD
 	double getPresetSkyTime() const;

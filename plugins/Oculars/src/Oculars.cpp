@@ -189,6 +189,10 @@ Oculars::Oculars()
 	setObjectName("Oculars");
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
+	connect(&StelApp::getInstance(), &StelApp::screenButtonScaleChanged, this,
+	        [this]{const int size = StelApp::getInstance().getScreenFontSize();
+	               setFontSizeFromApp(size); /* and repeat to apply all the geometry changes */
+	               setFontSizeFromApp(size);});
 
 	ccds = QList<CCD *>();
 	oculars = QList<Ocular *>();
@@ -657,7 +661,7 @@ void Oculars::init()
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
+		qWarning() << "Unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
 	}
 
@@ -2439,7 +2443,7 @@ void Oculars::validateAndLoadIniFile()
 		}
 		else
 		{
-			qDebug() << "Oculars::validateAndLoadIniFile() copied default_ocular.ini to " << QDir::toNativeSeparators(ocularIniPath);
+			qWarning() << "Oculars::validateAndLoadIniFile() copied default_ocular.ini to " << QDir::toNativeSeparators(ocularIniPath);
 			// The resource is read only, and the new file inherits this, so set write-able.
 			QFile dest(ocularIniPath);
 			dest.setPermissions(dest.permissions() | QFile::WriteOwner);
@@ -2447,10 +2451,10 @@ void Oculars::validateAndLoadIniFile()
 	}
 	else
 	{
-		qDebug().noquote() << "Oculars::validateAndLoadIniFile() ocular.ini exists at:" << QDir::toNativeSeparators(ocularIniPath) << ". Checking version...";
+		qInfo().noquote() << "Oculars::validateAndLoadIniFile() ocular.ini exists at:" << QDir::toNativeSeparators(ocularIniPath) << ". Checking version...";
 		QSettings mySettings(ocularIniPath, QSettings::IniFormat);
 		const float ocularsVersion = mySettings.value("oculars_version", 0.0).toFloat();
-		qWarning() << "Oculars::validateAndLoadIniFile() found existing ini file version" << ocularsVersion;
+		qInfo().noquote() << "Oculars::validateAndLoadIniFile() found existing ini file version" << ocularsVersion;
 
 		if (ocularsVersion < MIN_OCULARS_INI_VERSION)
 		{

@@ -88,6 +88,7 @@ class StelApp : public QObject
 	Q_PROPERTY(Vec3f daylightInfoColor	READ getDaylightInfoColor	WRITE setDaylightInfoColor	 NOTIFY daylightInfoColorChanged)
 	Q_PROPERTY(int  screenFontSize          READ getScreenFontSize          WRITE setScreenFontSize          NOTIFY screenFontSizeChanged)
 	Q_PROPERTY(int  guiFontSize             READ getGuiFontSize             WRITE setGuiFontSize             NOTIFY guiFontSizeChanged)
+	Q_PROPERTY(double screenButtonScale     READ getScreenButtonScale       WRITE setScreenButtonScale       NOTIFY screenButtonScaleChanged)
 	Q_PROPERTY(bool flagImmediateSave       READ getFlagImmediateSave       WRITE setFlagImmediateSave       NOTIFY flagImmediateSaveChanged)
 
 	Q_PROPERTY(QString version READ getVersion CONSTANT)
@@ -224,6 +225,14 @@ public:
 	int getGuiFontSize() const;
 	//! change GUI font size.
 	void setGuiFontSize(int s);
+
+	//! Get the ratio (in percent) of screen button size to the default screen scale-dependent one
+	double getScreenButtonScale() const { return screenButtonScale; }
+	//! Set the ratio (in percent) of screen button size to the default screen scale-dependent one
+	void setScreenButtonScale(double s);
+
+	//! Combines #getDevicePixelsPerPixel and #getScreenFontSize
+	float getScreenScale() const;
 
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
@@ -371,6 +380,7 @@ signals:
 	void languageChanged();
 	void screenFontSizeChanged(int);
 	void guiFontSizeChanged(int);
+	void screenButtonScaleChanged(double);
 	void fontChanged(const QFont&);
 	void overwriteInfoColorChanged(const Vec3f & color);
 	void daylightInfoColorChanged(const Vec3f & color);
@@ -502,6 +512,7 @@ private:
 
 	QList<StelProgressController*> progressControllers;
 
+	double screenButtonScale = 100; // in percent
 	int screenFontSize;
 	int numMultiSamples = 1;
 

@@ -1,13 +1,6 @@
+get_filename_component(skyculturePath "${CMAKE_CURRENT_SOURCE_DIR}" REALPATH)
+get_filename_component(skyculture ${skyculturePath} NAME)
 
-########### install files ###############
-
-# install info.ini
-INSTALL(FILES info.ini DESTINATION ${SDATALOC}/skycultures/maya )
-
-# install constellations data, artwork and descriptions
-INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/maya
-	FILES_MATCHING PATTERN "*.fab" 
-	PATTERN "*.png"
-	PATTERN "description.*.utf8" 
-        PATTERN "CMakeFiles" EXCLUDE )
-
+install(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/${skyculture}
+        FILES_MATCHING PATTERN "*"
+        PATTERN "CMakeLists.txt" EXCLUDE)

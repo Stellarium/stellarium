@@ -399,8 +399,19 @@ void Planet::replaceTexture(const QString &texName)
 
 void Planet::translateName(const StelTranslator& trans)
 {
-	nameI18 = trans.qtranslate(englishName, getContextString());
-	nativeNameMeaningI18n = (!nativeNameMeaning.isEmpty() ? trans.qtranslate(nativeNameMeaning) : "");
+	nameI18 = trans.tryQtranslate(englishName, getContextString());
+	if (nameI18.isEmpty())
+		nameI18 = qc_(englishName, getContextString());
+	if (!nativeNameMeaning.isEmpty())
+	{
+		nativeNameMeaningI18n = trans.tryQtranslate(nativeNameMeaning);
+		if (nativeNameMeaningI18n.isEmpty())
+			nativeNameMeaningI18n = q_(nativeNameMeaning);
+	}
+	else
+	{
+		nativeNameMeaningI18n = "";
+	}
 }
 
 void Planet::setIAUMoonNumber(const QString &designation)
@@ -521,7 +532,7 @@ QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& f
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(2);
 	if (sphereScale != 1.)
-		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
+		oss << QString::fromUtf8(u8" (\u00d7") << sphereScale << ")";
 
 	oss << "</h2>";
 	return str;
@@ -581,7 +592,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 					cometType = qc_("short-period", "type of comet");
 				else
 					cometType = qc_("periodic", "type of comet");
-
 			}
 			oss << QString("%1: <b>%2</b> (%3)<br/>").arg(q_("Type"), getObjectTypeI18n(), cometType);
 		}
@@ -2419,7 +2429,7 @@ float Planet::getMeanOppositionMagnitude() const
 		if (orbitPtr)
 			semimajorAxis=static_cast<KeplerOrbit*>(orbitPtr)->getSemimajorAxis();
 		else
-			qWarning() << "WARNING: No orbitPtr for " << englishName;
+			qWarning() << "No orbitPtr for " << englishName;
 	}
 
 	if (semimajorAxis>0.)
@@ -3117,6 +3127,8 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(orenNayarParameters = p->uniformLocation("orenNayarParameters"));
 	GL(outgasParameters = p->uniformLocation("outgasParameters"));
 	GL(hasAtmosphere = p->uniformLocation("hasAtmosphere"));
+	GL(hasNormalMap = p->uniformLocation("hasNormalMap"));
+	GL(hasHorizonMap = p->uniformLocation("hasHorizonMap"));
 
 	// Moon-specific variables
 	GL(earthShadow = p->uniformLocation("earthShadow"));
@@ -3499,23 +3511,14 @@ bool Planet::initFBO()
 #if !QT_CONFIG(opengles2)
 		if(!ctx->isOpenGLES())
 		{
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-			QOpenGLFunctions_1_0* gl10= QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_1_0>(ctx);
-#else
-			QOpenGLFunctions_1_0* gl10 = ctx->versionFunctions<QOpenGLFunctions_1_0>();
-#endif
-			if(Q_LIKELY(gl10))
-			{
-				//use DrawBuffer instead of DrawBuffers
-				//because it is available since GL 1.0 instead of only on 3+
-				gl10->glDrawBuffer(GL_NONE);
-				gl10->glReadBuffer(GL_NONE);
-			}
-			else
-			{
-				//something is probably not how we want it
-				Q_ASSERT(0);
-			}
+			// Use DrawBuffer instead of DrawBuffers because it is available since GL 1.0 instead of only on 3+
+			// Resolve them manually, because while they are present since 1.0,
+			// they are not found by QOpenGLFunctions_1_0 when in Core profile
+			void (QOPENGLF_APIENTRYP glDrawBuffer)(GLenum) = reinterpret_cast<decltype(glDrawBuffer)>(ctx->getProcAddress("glDrawBuffer"));
+			void (QOPENGLF_APIENTRYP glReadBuffer)(GLenum) = reinterpret_cast<decltype(glReadBuffer)>(ctx->getProcAddress("glReadBuffer"));
+
+			glDrawBuffer(GL_NONE);
+			glReadBuffer(GL_NONE);
 		}
 #endif
 
@@ -3945,7 +3948,8 @@ void Planet::computeModelMatrix(Mat4d &result, bool solarEclipseCase) const
 	}
 }
 
-Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars) //const
+Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars,
+                                                   const bool hasNormalMap, const bool hasHorizonMap)
 {
 	RenderData data;
 
@@ -3992,6 +3996,9 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	//qDebug() << " -->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
 	static LandscapeMgr* lmgr=GETSTELMODULE(LandscapeMgr);
 	Q_ASSERT(lmgr);
+
+	GL(shader->setUniformValue(shaderVars.hasNormalMap, GLint(hasNormalMap)));
+	GL(shader->setUniformValue(shaderVars.hasHorizonMap, GLint(hasHorizonMap)));
 
 	GL(shader->setUniformValue(shaderVars.projectionMatrix, qMat));
 	GL(shader->setUniformValue(shaderVars.hasAtmosphere, GLint(atmosphere)));
@@ -4085,6 +4092,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 	if(shaderError)
 		return;
 	
+	const bool isMoon = this == ssm->getMoon();
 	QOpenGLShaderProgram* shader = planetShaderProgram;
 	const PlanetShaderVars* shaderVars = &planetShaderVars;
 	if (rings)
@@ -4092,7 +4100,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		shader = ringPlanetShaderProgram;
 		shaderVars = &ringPlanetShaderVars;
 	}
-	if (this==ssm->getMoon())
+	if (isMoon)
 	{
 		shader = moonShaderProgram;
 		shaderVars = &moonShaderVars;
@@ -4113,7 +4121,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		{
 			shader = ringPlanetShaderProgram;
 		}
-		if (this==ssm->getMoon())
+		if (isMoon)
 		{
 			shader = moonShaderProgram;
 		}
@@ -4121,7 +4129,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 
 	GL(shader->bind());
 
-	RenderData rData = setCommonShaderUniforms(*painter,shader,*shaderVars);
+	RenderData rData = setCommonShaderUniforms(*painter,shader,*shaderVars, isMoon,isMoon);
 	if(this==ssm->getSun())
 	{
 		const auto color = painter->getColor();
@@ -4138,7 +4146,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		rings->tex->bind(2);
 	}
 
-	if (this==ssm->getMoon())
+	if (isMoon)
 	{
 		GL(normalMap->bind(2));
 		GL(moonShaderProgram->setUniformValue(moonShaderVars.normalMap, 2));
@@ -4348,6 +4356,11 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	if (!Planet::initShader()) return;
 	static SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
+	if (surveyForNormals && survey)
+		survey->setNormalsSurvey(surveyForNormals);
+	if (surveyForHorizons && survey)
+		survey->setHorizonsSurvey(surveyForHorizons);
+
 	painter->setDepthMask(true);
 	painter->setDepthTest(true);
 
@@ -4356,6 +4369,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	Vec4f color = painter->getColor();
 	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(equatorialRadius * sphereScale));
 
+	const bool isMoon = this == ssm->getMoon();
 	QOpenGLShaderProgram* shader = planetShaderProgram;
 	const PlanetShaderVars* shaderVars = &planetShaderVars;
 	if (rings)
@@ -4363,17 +4377,17 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 		shader = ringPlanetShaderProgram;
 		shaderVars = &ringPlanetShaderVars;
 	}
-	if (this == ssm->getMoon())
+	if (isMoon)
 	{
 		shader = moonShaderProgram;
 		shaderVars = &moonShaderVars;
 	}
 
 	GL(shader->bind());
-	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars);
+	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars, surveyForNormals != nullptr, surveyForHorizons != nullptr);
 	QVector<Vec3f> projectedVertsArray;
 	QVector<Vec3f> vertsArray;
-	const double angle = getSpheroidAngularRadius(core) * M_PI_180;
+	const double angle = 2 * getSpheroidAngularRadius(core) * M_PI_180;
 
 	if (rings)
 	{
@@ -4385,9 +4399,8 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 		rings->tex->bind(2);
 	}
 
-	if (this == ssm->getMoon())
+	if (isMoon)
 	{
-		GL(normalMap->bind(2));
 		GL(moonShaderProgram->setUniformValue(moonShaderVars.normalMap, 2));
 		if (!rData.shadowCandidates.isEmpty())
 		{
@@ -4664,7 +4677,7 @@ bool Planet::drawObjModel(StelPainter *painter, float screenRd)
 	GL(shd->enableAttributeArray("vertex"));
 	objModel->projPosBuffer->release();
 
-	setCommonShaderUniforms(*painter,shd,*shdVars);
+	setCommonShaderUniforms(*painter,shd,*shdVars,false,false);
 
 	//draw that model using the array wrapper
 	objModel->arr->draw();
@@ -4828,9 +4841,13 @@ void Planet::drawHints(const StelCore* core, StelPainter &sPainter, const QFont&
 	//StelPainter sPainter(prj);
 	sPainter.setFont(planetNameFont);
 	// Draw nameI18 + scaling if it's not == 1.
-	float tmp = (hintFader.getInterstate()<=0.f ? 7.f : 10.f) + static_cast<float>(getAngularRadius(core)*M_PI/180.)*sPainter.getProjector()->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
+	const float scale = StelApp::getInstance().getScreenScale();
+	const float pixPerRad = sPainter.getProjector()->getPixelPerRadAtCenter();
+	const float angularRadius = getAngularRadius(core)*M_PI/180.;
+	float tmp = (hintFader.getInterstate()<=0.f ? 7.f : 10.f) * scale + angularRadius*pixPerRad/1.44f; // Shift for nameI18 printing
 	sPainter.setColor(labelColor,labelsFader.getInterstate());
-	const QString label = (sphereScale != 1.) ? QString("%1 (\xC3\x97%2)").arg(getPlanetLabel(), QString::number(sphereScale, 'f', 2)) : getPlanetLabel();
+	const QString label = sphereScale != 1. ? QString(u8"%1 (\u00d7%2)").arg(getPlanetLabel(), QString::number(sphereScale, 'f', 2))
+	                                        : getPlanetLabel();
 	sPainter.drawText(static_cast<float>(screenPos[0]),static_cast<float>(screenPos[1]), label, 0, tmp, tmp, false);
 
 	// hint disappears smoothly on close view
@@ -4855,49 +4872,49 @@ Ring::Ring(float radiusMin, float radiusMax, const QString &texname)
 
 Vec3f Planet::getCurrentOrbitColor() const
 {
-	static const QMap<Planet::PlanetType, Vec3f> typeColorMap = {
-		{ isMoon,         orbitMoonsColor       },
-		{ isPlanet,       orbitMajorPlanetsColor},
-		{ isAsteroid,     orbitMinorPlanetsColor},
-		{ isDwarfPlanet,  orbitDwarfPlanetsColor},
-		{ isCubewano,     orbitCubewanosColor   },
-		{ isPlutino,      orbitPlutinosColor    },
-		{ isSDO,          orbitScatteredDiscObjectsColor},
-		{ isOCO,          orbitOortCloudObjectsColor},
-		{ isComet,        orbitCometsColor      },
-		{ isSednoid,      orbitSednoidsColor    },
-		{ isInterstellar, orbitInterstellarColor}};
-	static const QMap<QString, Vec3f>majorPlanetColorMap = {
-		{ "mercury", orbitMercuryColor},
-		{ "venus",   orbitVenusColor  },
-		{ "earth",   orbitEarthColor  },
-		{ "mars",    orbitMarsColor   },
-		{ "jupiter", orbitJupiterColor},
-		{ "saturn",  orbitSaturnColor },
-		{ "uranus",  orbitUranusColor },
-		{ "neptune", orbitNeptuneColor}};
+	static const QMap<Planet::PlanetType, Vec3f*> typeColorMap = {
+		{ isMoon,         &orbitMoonsColor       },
+		{ isPlanet,       &orbitMajorPlanetsColor},
+		{ isAsteroid,     &orbitMinorPlanetsColor},
+		{ isDwarfPlanet,  &orbitDwarfPlanetsColor},
+		{ isCubewano,     &orbitCubewanosColor   },
+		{ isPlutino,      &orbitPlutinosColor    },
+		{ isSDO,          &orbitScatteredDiscObjectsColor},
+		{ isOCO,          &orbitOortCloudObjectsColor},
+		{ isComet,        &orbitCometsColor      },
+		{ isSednoid,      &orbitSednoidsColor    },
+		{ isInterstellar, &orbitInterstellarColor}};
+	static const QMap<QString, Vec3f*>majorPlanetColorMap = {
+		{ "mercury", &orbitMercuryColor},
+		{ "venus",   &orbitVenusColor  },
+		{ "earth",   &orbitEarthColor  },
+		{ "mars",    &orbitMarsColor   },
+		{ "jupiter", &orbitJupiterColor},
+		{ "saturn",  &orbitSaturnColor },
+		{ "uranus",  &orbitUranusColor },
+		{ "neptune", &orbitNeptuneColor}};
 
 	Vec3f orbColor = orbitColor;
 	switch(orbitColorStyle)
 	{
 		case ocsGroups:
 		{
-			orbColor = typeColorMap.value(pType, orbitColor);
+			orbColor = *typeColorMap.value(pType, &orbitColor);
 			break;
 		}
 		case ocsMajorPlanets:
 		{
 			const QString pName = getEnglishName().toLower();
-			orbColor=majorPlanetColorMap.value(pName, orbitColor);
+			orbColor=*(majorPlanetColorMap.value(pName, &orbitColor));
 			break;
 		}
 		case ocsMajorPlanetsMinorTypes:
 		{
 			const QString pName = getEnglishName().toLower();
 			if (majorPlanetColorMap.contains(pName))
-				orbColor=majorPlanetColorMap.value(pName, orbitColor);
+				orbColor=*majorPlanetColorMap.value(pName, &orbitColor);
 			else
-				orbColor = typeColorMap.value(pType, orbitColor);
+				orbColor = *typeColorMap.value(pType, &orbitColor);
 			break;
 		}
 		case ocsOneColor:

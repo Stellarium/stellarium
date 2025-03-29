@@ -192,13 +192,13 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		QTextStream in;
 		QString fName = StelFileMgr::findFile(custom_distortion_file);
 		if (fName.isEmpty()) {
-			qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file;
+			qWarning() << "Could not open custom_distortion_file:" << custom_distortion_file;
 		} else {
 			file.setFileName(fName);
 			if(file.open(QIODevice::ReadOnly))
 				in.setDevice(&file);
 			else
-				qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file;
+				qWarning() << "Could not open custom_distortion_file:" << custom_distortion_file;
 		}
 		Q_ASSERT(file.error()!=QFile::NoError);
 		in >> max_x >> max_y;
@@ -338,11 +338,11 @@ void StelViewportDistorterFisheyeToSphericMirror::setupCurrentVAO() const
 	auto& gl = *QOpenGLContext::currentContext()->functions();
 	verticesVBO->bind();
 	gl.glVertexAttribPointer(VERTEX_ATTRIB_INDEX, SPHERIC_MIRROR_COORDS_PER_VERTEX, GL_FLOAT,
-	                         false, 0, reinterpret_cast<const void*>(vboVertexDataOffset));
+	                         false, 0, reinterpret_cast<const void*>(uintptr_t(vboVertexDataOffset)));
 	gl.glVertexAttribPointer(COLOR_ATTRIB_INDEX, SPHERIC_MIRROR_COORDS_PER_COLOR, GL_FLOAT,
-	                         false, 0, reinterpret_cast<const void*>(vboColorDataOffset));
+	                         false, 0, reinterpret_cast<const void*>(uintptr_t(vboColorDataOffset)));
 	gl.glVertexAttribPointer(TEXCOORD_ATTRIB_INDEX, SPHERIC_MIRROR_COORDS_PER_TEXCOORD, GL_FLOAT,
-	                         false, 0, reinterpret_cast<const void*>(vboTexCoordDataOffset));
+	                         false, 0, reinterpret_cast<const void*>(uintptr_t(vboTexCoordDataOffset)));
 	verticesVBO->release();
 	gl.glEnableVertexAttribArray(VERTEX_ATTRIB_INDEX);
 	gl.glEnableVertexAttribArray(COLOR_ATTRIB_INDEX);
