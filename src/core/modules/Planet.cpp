@@ -17,9 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifdef Q_OS_WIN
-#include <windows.h>
-#endif
 #include <QOpenGLFunctions_1_0>
 #include "StelApp.hpp"
 #include "StelSRGB.hpp"
@@ -3517,8 +3514,8 @@ bool Planet::initFBO()
 			// Use DrawBuffer instead of DrawBuffers because it is available since GL 1.0 instead of only on 3+
 			// Resolve them manually, because while they are present since 1.0,
 			// they are not found by QOpenGLFunctions_1_0 when in Core profile
-			void (APIENTRYP glDrawBuffer)(GLenum) = reinterpret_cast<decltype(glDrawBuffer)>(ctx->getProcAddress("glDrawBuffer"));
-			void (APIENTRYP glReadBuffer)(GLenum) = reinterpret_cast<decltype(glReadBuffer)>(ctx->getProcAddress("glReadBuffer"));
+			void (QOPENGLF_APIENTRYP glDrawBuffer)(GLenum) = reinterpret_cast<decltype(glDrawBuffer)>(ctx->getProcAddress("glDrawBuffer"));
+			void (QOPENGLF_APIENTRYP glReadBuffer)(GLenum) = reinterpret_cast<decltype(glReadBuffer)>(ctx->getProcAddress("glReadBuffer"));
 
 			glDrawBuffer(GL_NONE);
 			glReadBuffer(GL_NONE);
