@@ -18,56 +18,134 @@
 
 #include "ASCOMDevice.hpp"
 #include <comdef.h>
+#include <QTimer>
+//#include <qwaitcondition.h>
+#include <QMessageBox>
+#include "StelTranslator.hpp"
 
 ASCOMDevice::ASCOMDevice(QObject* parent, QString ascomDeviceId) : QObject(parent),
-	mAscomDeviceId(ascomDeviceId)
-{}
-
-bool ASCOMDevice::connect()
+	mAscomDeviceId(ascomDeviceId),
+	connectionRetries(0)
 {
-	if (mConnected) return true;
+}
+
+// FIXME! ASCOM7 deprecates writing to the LConnected property. One shall use methods Connect()/Disconnect() instead,
+// and detect the state per "Connecting" property.
+void ASCOMDevice::connect()
+{
+	if (mConnected) return; // true;
 
 	BOOL initResult = OleInit(COINIT_APARTMENTTHREADED);
 	HRESULT hResult = OleCreateInstance(reinterpret_cast<const wchar_t*>(mAscomDeviceId.toStdWString().c_str()), &pTelescopeDispatch);
 
 	if (!initResult || FAILED(hResult))
 	{
-		qDebug() << "Initialization failed for device: " << mAscomDeviceId;
-		return false;
+		qCritical() << "Initialization failed for device: " << mAscomDeviceId;
+		QMessageBox::critical(nullptr, q_("ERROR!"), q_("Initialization failed for device: ")+mAscomDeviceId);
+
+		return;
 	}
 
-	VARIANT v1 = OleBoolToVariant(TRUE);
-
-	hResult = OlePropertyPut(pTelescopeDispatch, nullptr, const_cast<wchar_t*>(LConnected), 1, v1);
-
+	// Initiate asynchronous Connect() according to ASCOM7
+	hResult = OleMethodCall(pTelescopeDispatch, nullptr, const_cast<wchar_t*>(LConnect), 0);
 	if (FAILED(hResult))
 	{
-		qDebug() << "Could not connect to device: " << mAscomDeviceId;
-		return false;
+		qCritical() << "Could not send Connect signal to device: " << mAscomDeviceId;
+		QMessageBox::critical(nullptr, q_("ERROR!"), q_("Could not send Connect signal to device: ")+mAscomDeviceId);
+		return;
 	}
-	
-	mConnected = true;
-	return true;
+	connectionRetries=10;
+	QObject::connect(&connectionTimer, &QTimer::timeout, this, &ASCOMDevice::tryFinishConnect);
+	connectionTimer.start(250); // 1/4 s interval
 }
 
-bool ASCOMDevice::disconnect()
+void ASCOMDevice::tryFinishConnect()
 {
-	if (!mConnected) return true;
+	qDebug() << "ASCOMDevice::tryFinishConnect()";
 
-	VARIANT v1 = OleBoolToVariant(FALSE);
-	HRESULT hResult = OlePropertyPut(pTelescopeDispatch, nullptr, const_cast<wchar_t*>(LConnected), 1, v1);
+	if (isConnecting())
+	{
+		if (--connectionRetries <= 0)
+		{
+			// Give up connecting!
+			connectionTimer.stop();
+			QObject::disconnect(&connectionTimer, &QTimer::timeout, this, &ASCOMDevice::tryFinishConnect);
+			qCritical() << "Could not establish connection to device: " << mAscomDeviceId;
+			QMessageBox::critical(nullptr, q_("ERROR!"), q_("Could not establish connection to device: ")+mAscomDeviceId);
+		}
+	}
+	else // connection has probably been established. Read value for certainty.
+	{
+		connectionTimer.stop();
+		QObject::disconnect(&connectionTimer, &QTimer::timeout, this, &ASCOMDevice::tryFinishConnect);
+		mConnected=isDeviceConnected();
+	}
+}
 
+void ASCOMDevice::tryFinishDisconnect()
+{
+	qDebug() << "ASCOMDevice::tryFinishDisconnect()";
+	if (isConnecting())
+	{
+		if (--connectionRetries <= 0)
+		{
+			// Give up disconnecting! Is that at all useful?
+			connectionTimer.stop();
+			QObject::disconnect(&connectionTimer, &QTimer::timeout, this, &ASCOMDevice::tryFinishDisconnect);
+			qCritical() << "Could not send Disconnect signal to device: " << mAscomDeviceId;
+			// TODO: Show a screen panel?
+			QMessageBox::critical(nullptr, q_("ERROR!"), q_("Could not cleanly disconnect from device: ")+mAscomDeviceId);
+		}
+	}
+	else // disconnection has been successful. Read value for certainty.
+	{
+		connectionTimer.stop();
+		QObject::disconnect(&connectionTimer, &QTimer::timeout, this, &ASCOMDevice::tryFinishDisconnect);
+		mConnected=false;
+		pTelescopeDispatch->Release();
+	}
+}
+
+
+
+//void ASCOMDevice::disconnect()
+//{
+//	if (!mConnected) return; // true;
+//
+//	VARIANT v1 = OleBoolToVariant(FALSE);
+//	HRESULT hResult = OlePropertyPut(pTelescopeDispatch, nullptr, const_cast<wchar_t*>(LConnected), 1, v1);
+//
+//	if (FAILED(hResult))
+//	{
+//		qDebug() << "Could not disconnect device: " << mAscomDeviceId;
+//		return; // false;
+//	}
+//
+//	pTelescopeDispatch->Release();  // TODO: Move that to tryFinishDisconnect
+//
+//	mConnected = false;
+//	return; // true;
+//}
+
+
+void ASCOMDevice::disconnect()
+{
+	if (mConnected) return; // true;
+
+
+	// Initiate asynchronous Disconnect() according to ASCOM7
+	HRESULT hResult = OleMethodCall(pTelescopeDispatch, nullptr, const_cast<wchar_t*>(LDisconnect), 0);
 	if (FAILED(hResult))
 	{
-		qDebug() << "Could not disconnect device: " << mAscomDeviceId;
-		return false;
+		qCritical() << "Could not send Disconnect signal to device: " << mAscomDeviceId;
+		// TODO: Show a screen panel?
+		return;
 	}
-	
-	pTelescopeDispatch->Release();
-
-	mConnected = false;
-	return true;
+	connectionRetries=10;
+	QObject::connect(&connectionTimer, &QTimer::timeout, this, &ASCOMDevice::tryFinishDisconnect);
+	connectionTimer.start(250); // 1/4 s interval
 }
+
 
 ASCOMDevice::ASCOMCoordinates ASCOMDevice::position() const
 {
@@ -114,6 +192,11 @@ void ASCOMDevice::abortSlew()
 	}
 }
 
+bool ASCOMDevice::isConnected() const
+{
+	return mConnected;
+}
+
 bool ASCOMDevice::isDeviceConnected() const
 {
 	if (!mConnected) return false;
@@ -127,7 +210,21 @@ bool ASCOMDevice::isDeviceConnected() const
 		return false;
 	}
 
-	return v1.boolVal == -1;
+	return v1.boolVal == VARIANT_TRUE;
+}
+
+bool ASCOMDevice::isConnecting() const
+{
+	VARIANT v1;
+	HRESULT hResult = OlePropertyGet(pTelescopeDispatch, &v1, const_cast<wchar_t*>(LConnecting));
+
+	if (FAILED(hResult))
+	{
+		qDebug() << "Could not get connecting state for device: " << mAscomDeviceId;
+		return false;
+	}
+
+	return v1.boolVal == VARIANT_TRUE;
 }
 
 bool ASCOMDevice::isParked() const
@@ -143,7 +240,7 @@ bool ASCOMDevice::isParked() const
 		return false;
 	}
 
-	return v1.boolVal == -1;
+	return v1.boolVal == VARIANT_TRUE;
 }
 
 
@@ -176,7 +273,7 @@ bool ASCOMDevice::doesRefraction()
 		return false;
 	}
 
-	return v1.boolVal == -1;
+	return v1.boolVal == VARIANT_TRUE;
 }
 
 
@@ -228,9 +325,12 @@ QString ASCOMDevice::showDeviceChooser(QString previousDeviceId)
 
 const wchar_t* ASCOMDevice::LSlewToCoordinatesAsync = L"SlewToCoordinatesAsync";
 const wchar_t* ASCOMDevice::LSyncToCoordinates = L"SyncToCoordinates";
-const wchar_t* ASCOMDevice::LAbortSlew = L"AbortSlew";
-const wchar_t* ASCOMDevice::LConnected = L"Connected";
-const wchar_t* ASCOMDevice::LAtPark = L"AtPark";
+const wchar_t* ASCOMDevice::LAbortSlew  = L"AbortSlew";
+const wchar_t* ASCOMDevice::LConnected  = L"Connected";
+const wchar_t* ASCOMDevice::LConnecting = L"Connecting";
+const wchar_t* ASCOMDevice::LConnect    = L"Connect";
+const wchar_t* ASCOMDevice::LDisconnect = L"Disconnect";
+const wchar_t* ASCOMDevice::LAtPark     = L"AtPark";
 const wchar_t* ASCOMDevice::LEquatorialSystem = L"EquatorialSystem";
 const wchar_t* ASCOMDevice::LDoesRefraction = L"DoesRefraction";
 const wchar_t* ASCOMDevice::LRightAscension = L"RightAscension";
