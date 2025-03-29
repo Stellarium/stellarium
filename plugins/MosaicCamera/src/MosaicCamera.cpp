@@ -217,7 +217,8 @@ void MosaicCamera::copyResourcesToUserDirectory()
 {
 	// Get list of files in the resource directory
 	QDir resourceDir(":/MosaicCamera");
-	QStringList resourceFiles = resourceDir.entryList(QDir::Files);
+	QStringList fileNameFilters("*.json"); // copy data only
+	QStringList resourceFiles = resourceDir.entryList(fileNameFilters);
 
 	for (const QString& fileName : resourceFiles)
 	{
