@@ -86,7 +86,7 @@ public:
 	//! TODO: This could of course become a bitfield, but having just a choice of discrete options may still be easier to maintain.
 	//! TODO: In any case, this will require methods getScreenLabel() and getInfoLabel() in StelObject.
 	//! NOTE: Changing names here MUST be reflected in ViewDialog::populateSkyCultureLabelStyleComboboxes()
-	enum class CulturalDisplayStyle // TODO: Not sure about class yet. It may be easier to store the enums as ints, not long strings.
+	enum class CulturalDisplayStyle
 	{
 		Abbreviated	= 0, // short label
 		Native		= 1, // may show non-Latin glyphs

@@ -249,10 +249,10 @@ QStringList Nebula::getCultureLabels(StelObject::CulturalDisplayStyle style) con
 			label=QString("%1 [%2] (%3)").arg(cName.pronounceI18n, cName.IPA, cName.translatedI18n);
 			break;
 		case CulturalDisplayStyle::Pronounce_Translated_Modern:
-			label=QString("%1 (%2, %3)").arg(cName.pronounceI18n, cName.translatedI18n, englishName);
+			label=QString("%1 (%2, %3)").arg(cName.pronounceI18n, cName.translatedI18n, nameI18);
 			break;
 		case CulturalDisplayStyle::Pronounce_IPA_Translated_Modern:
-			label=QString("%1 [%2] (%3, %4)").arg(cName.pronounceI18n, cName.IPA, cName.translatedI18n, englishName);
+			label=QString("%1 [%2] (%3, %4)").arg(cName.pronounceI18n, cName.IPA, cName.translatedI18n, nameI18);
 			break;
 		case CulturalDisplayStyle::Native_Pronounce:
 			label=QString("%1 [%2]").arg(cName.native, cName.pronounceI18n);
@@ -561,6 +561,7 @@ QVariantMap Nebula::getInfoMap(const StelCore *core) const
 	map.insert("axis-minor-deg", StelUtils::radToDecDegStr(axisMinor, 5));
 	map.insert("axis-minor-dms", StelUtils::radToDmsPStr(axisMinor, 2));
 	map.insert("orientation-angle", axisPA);
+	map.insert("cultural-names", getCultureLabels(StelObject::CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated));
 
 	// TODO: more? Names? Data?
 	return map;
@@ -1704,9 +1705,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 	if (nType==NebSNR)
 	{
-		QString delim = "";
-		if (!r.isEmpty())
-			delim = "; ";
+		const QString delim =r.isEmpty() ? "" : "; ";
 
 		if (mTypeString.contains("S") && !mTypeString.contains("S?"))
 			r = qc_("remnant shows a shell radio structure", "supernova remnant structure classification") + delim + r;
