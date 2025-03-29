@@ -47,6 +47,7 @@
 #include "StelOpenGLArray.hpp"
 #include "StelHips.hpp"
 #include "RefractionExtinction.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 #include <limits>
 #include <QByteArray>
@@ -225,7 +226,7 @@ Planet::Planet(const QString& englishName,
 	  closeOrbit(acloseOrbit),
 	  englishName(englishName),
 	  nameI18(englishName),
-	  nativeName(""),
+	  //nativeName(""),
 	  texMapName(atexMapName),
 	  normalMapName(anormalMapName),
 	  horizonMapName(ahorizonMapName),
@@ -402,15 +403,28 @@ void Planet::translateName(const StelTranslator& trans)
 	nameI18 = trans.tryQtranslate(englishName, getContextString());
 	if (nameI18.isEmpty())
 		nameI18 = qc_(englishName, getContextString());
-	if (!nativeNameMeaning.isEmpty())
+//	if (!nativeNameMeaning.isEmpty())
+//	{
+//		nativeNameMeaningI18n = trans.tryQtranslate(nativeNameMeaning);
+//		if (nativeNameMeaningI18n.isEmpty())
+//			nativeNameMeaningI18n = q_(nativeNameMeaning);
+//	}
+//	else
+//	{
+//		nativeNameMeaningI18n = "";
+//	}
+
+	if (!culturalNames.isEmpty())
 	{
-		nativeNameMeaningI18n = trans.tryQtranslate(nativeNameMeaning);
-		if (nativeNameMeaningI18n.isEmpty())
-			nativeNameMeaningI18n = q_(nativeNameMeaning);
-	}
-	else
-	{
-		nativeNameMeaningI18n = "";
+		for (CulturalName &cname: culturalNames )
+		{
+			cname.translatedI18n = trans.tryQtranslate(cname.translated);
+			if (cname.translatedI18n.isEmpty())
+				cname.translatedI18n = q_(cname.translated);
+			cname.pronounceI18n = trans.tryQtranslate(cname.pronounce);
+			if (cname.pronounceI18n.isEmpty())
+				cname.pronounceI18n = q_(cname.pronounce);
+		}
 	}
 }
 
@@ -508,11 +522,115 @@ QString Planet::getPlanetLabel() const
 //		}
 //	}
 
-	// FOR NOW:
-	oss << getNameI18n();
-	// LATER: This will be getScreenLabel()
+	// AND NOW:
+	oss << getScreenLabel();
 	return str;
 }
+
+QString Planet::getScreenLabel() const
+{
+	QStringList list=getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle());
+	return list.isEmpty() ? "" : list.constFirst();
+}
+QString Planet::getInfoLabel() const
+{
+	QStringList list=getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle());
+	return list.isEmpty() ? "" : list.join("; ");
+}
+
+QStringList Planet::getCultureLabels(StelObject::CulturalDisplayStyle style) const
+{
+	QStringList labels;
+	if (culturalNames.isEmpty())
+	{
+		labels << getNameI18n();
+	}
+	else
+		for (auto &cName: culturalNames)
+		{
+			// At least while many fields have not been filled, we should create a few fallbacks
+			//QString pronounceStr=(cName.pronounceI18n.isEmpty() ? (cName.pronounce.isEmpty() ? cName.native : cName.pronounce) : cName.pronounceI18n);
+			QString pronounceStr=(cName.pronounceI18n.isEmpty() ? cName.pronounce : cName.pronounceI18n);
+
+			QString label;
+			switch (style)
+			{
+			case CulturalDisplayStyle::Abbreviated:
+			label=getNameI18n();
+			break;
+			case CulturalDisplayStyle::Native:
+			label=cName.native;
+			break;
+			case CulturalDisplayStyle::Translated:
+			label=cName.translatedI18n;
+			break;
+			case CulturalDisplayStyle::Modern:
+			label=getNameI18n(); // fully non-cultural!
+			break;
+			case CulturalDisplayStyle::Pronounce:
+			label=pronounceStr;
+			break;
+			case CulturalDisplayStyle::Translit:
+			label=cName.transliteration;
+			break;
+			case CulturalDisplayStyle::IPA:
+			label=cName.IPA;
+			break;
+			case CulturalDisplayStyle::Pronounce_Translated:
+			label=QString("%1 (%2)").arg(pronounceStr, cName.translatedI18n);
+			break;
+			case CulturalDisplayStyle::Pronounce_IPA_Translated:
+			label=QString("%1 [%2] (%3)").arg(pronounceStr, cName.IPA, cName.translatedI18n);
+			break;
+			case CulturalDisplayStyle::Pronounce_Translated_Modern:
+			label=QString("%1 (%2, %3)").arg(pronounceStr, cName.translatedI18n, getNameI18n());
+			break;
+			case CulturalDisplayStyle::Pronounce_IPA_Translated_Modern:
+			label=QString("%1 [%2] (%3, %4)").arg(pronounceStr, cName.IPA, cName.translatedI18n, getNameI18n());
+			break;
+			case CulturalDisplayStyle::Native_Pronounce:
+			label=QString("%1 [%2]").arg(cName.native, pronounceStr);
+			break;
+			case CulturalDisplayStyle::Native_Pronounce_Translated:
+			label=QString("%1 [%2] (%3)").arg(cName.native, pronounceStr, cName.translatedI18n);
+			break;
+			case CulturalDisplayStyle::Native_Pronounce_IPA_Translated:
+			label=QString("%1 [%2%3] (%4)").arg(cName.native, pronounceStr, cName.IPA.length() > 0 ? QString(", %1").arg(cName.IPA) : "", cName.translatedI18n);
+			break;
+			case  CulturalDisplayStyle::Native_Translated:
+			label=QString("%1 (%2)").arg(cName.native, cName.translatedI18n);
+			break;
+			case  CulturalDisplayStyle::Native_Translit_Translated:
+			label=QString("%1 [%2] (%3)").arg(cName.native, cName.transliteration, cName.translatedI18n);
+			break;
+			case  CulturalDisplayStyle::Native_Translit_Pronounce_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(cName.native, cName.transliteration, pronounceStr, cName.translatedI18n);
+			break;
+			case  CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated:
+			label=QString("%1 [%2, %3, %4] (%5)").arg(cName.native, cName.transliteration, pronounceStr, cName.IPA, cName.translatedI18n);
+			break;
+			case  CulturalDisplayStyle::Native_Translit_IPA_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(cName.native, cName.transliteration, cName.IPA, cName.translatedI18n);
+			break;
+			case  CulturalDisplayStyle::Translit_Translated:
+			label=QString("%1 (%2)").arg(cName.transliteration, cName.translatedI18n);
+			break;
+			case  CulturalDisplayStyle::Translit_Pronounce_Translated:
+			label=QString("%1 [%2] (%3)").arg(cName.transliteration, pronounceStr, cName.translatedI18n);
+			break;
+			case  CulturalDisplayStyle::Translit_Pronounce_IPA_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(cName.transliteration, pronounceStr, cName.IPA, cName.translatedI18n);
+			break;
+			case  CulturalDisplayStyle::Translit_IPA_Translated:
+			label=QString("%1 [%2] (%4)").arg(cName.transliteration, cName.IPA, cName.translatedI18n);
+			break;
+			// NO default here, else we may forget one.
+			}
+			labels << label;
+		}
+	return labels;
+}
+
 
 QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const
 {
@@ -525,7 +643,7 @@ QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& f
 	if (!iauMoonNumber.isEmpty())
 		oss << QString("(%1) ").arg(iauMoonNumber);
 
-	oss << getPlanetLabel();
+	oss << getInfoLabel();
 
 	// NOTE: currently only moons have an IAU designation
 	QString iau = getIAUDesignation();
@@ -1537,6 +1655,8 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 			}
 		}
 	}
+
+	map.insert("cultural-names", getCultureLabels(StelObject::CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated));
 
 	return map;
 }

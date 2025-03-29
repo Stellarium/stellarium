@@ -258,10 +258,26 @@ public:
 	QString getEnglishName(void) const override;
 	QString getNameI18n(void) const override;
 	virtual QString getIAUDesignation(void) const;
-	QString getNameNative(void) const override { return nativeName; }
-	QString getNameNativeI18n(void) const { return nativeNameMeaningI18n; }
+	QString getNameNative(void) const override { return (culturalNames.isEmpty() ? "" : culturalNames.constFirst().native); }
+	QString getNameNativeI18n(void) const { return (culturalNames.isEmpty() ? "" : culturalNames.constFirst().translatedI18n); }
 	QString getCommonEnglishName(void) const {return englishName;}
 	QString getCommonNameI18n(void) const {return nameI18;}
+
+	// NEW Skyculture-related names
+	//! retrieve pronunciation from the first of the cultural names
+	QString getNamePronounce() const override {return (culturalNames.empty() ? "" : culturalNames.constFirst().pronounceI18n);}
+	//! Combine screen label from various components, depending on settings in SkyCultureMgr
+	QString getScreenLabel() const override;
+	//! Combine InfoString label from various components, depending on settings in SkyCultureMgr
+	QString getInfoLabel() const override;
+	//! Underlying worker that processes the culturalNames
+	QStringList getCultureLabels(StelObject::CulturalDisplayStyle style) const;
+	void removeAllCulturalNames() { culturalNames.clear();}
+	//! Add a name for the currently set skyculture
+	void addCulturalName(StelObject::CulturalName culturalName){culturalNames.append(culturalName);}
+
+
+
 	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.
 	double getAngularRadius(const StelCore* core) const override;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
@@ -318,8 +334,8 @@ public:
 	PlanetType getPlanetType() const {return pType;}
 	Orbit* getOrbit() const {return orbitPtr;}
 
-	void setNativeName(QString planet) { nativeName = planet; }
-	void setNativeNameMeaning(QString planet) { nativeNameMeaning = planet; }
+	//void setNativeName(QString planet) { nativeName = planet; }
+	//void setNativeNameMeaning(QString planet) { nativeNameMeaning = planet; }
 
 	//! set the IAU moon number (designation of the moon), if any.
 	void setIAUMoonNumber(const QString& designation);
@@ -651,7 +667,9 @@ public:
 	//!       *   +40 for objects with no set time on current date.
 	Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const override;
 
+	//! Reset planet textures to those defined at start time. (You may load other textures with replaceTexture()
 	void resetTextures();
+	//! Use texture from @param texName (must reside inside the scripts directory!)
 	void replaceTexture(const QString& texName);
 	
 protected:
@@ -747,9 +765,9 @@ protected:
 
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
-	QString nativeName;              // Can be used in a skyculture
-	QString nativeNameMeaning;       // Can be used in a skyculture
-	QString nativeNameMeaningI18n;   // Can be used in a skyculture
+	//QString nativeName;              // Can be used in a skyculture
+	//QString nativeNameMeaning;       // Can be used in a skyculture
+	//QString nativeNameMeaningI18n;   // Can be used in a skyculture
 	QString texMapName;              // Texture file path
 	QString normalMapName;           // Texture file path
 	QString horizonMapName;          // Texture file path
@@ -843,6 +861,8 @@ private:
 	// Discovery data
 	QString discoverer;
 	QString discoveryDate;
+	QList<StelObject::CulturalName> culturalNames; //!< describes native names used in non-modern Skycultures. Usually just one, but there may be more!
+
 	// File path for texture and normal map; both variables used for saving original names of files
 	QString texMapFileOrig;
 	QString normalMapFileOrig;

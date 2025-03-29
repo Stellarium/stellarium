@@ -88,7 +88,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, flagShowObjSelfShadows(true)
 	, flagShow(false)
 	, flagPointer(false)
-	, flagNativePlanetNames(false)
+	//, flagNativePlanetNames(false)
 	, flagIsolatedTrails(true)
 	, numberIsolatedTrails(0)
 	, maxTrailPoints(5000)
@@ -251,7 +251,7 @@ void SolarSystem::init()
 	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
 	// planets in case  observer on the Earth by default
 	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "Mallama2018").toString());
-	setFlagNativePlanetNames(conf->value("viewing/flag_planets_native_names", true).toBool());
+	//setFlagNativePlanetNames(conf->value("viewing/flag_planets_native_names", true).toBool());
 	// Is enabled the showing of isolated trails for selected objects only?
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 	setNumberIsolatedTrails(conf->value("viewing/number_isolated_trails", 1).toInt());
@@ -357,7 +357,7 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_EnlargeMinor", displayGroup, N_("Enlarge minor bodies"), "flagMinorBodyScale");
 	addAction("actionShow_Planets_EnlargePlanets", displayGroup, N_("Enlarge Planets"), "flagPlanetScale");
 	addAction("actionShow_Planets_EnlargeSun", displayGroup, N_("Enlarge Sun"), "flagSunScale");
-	addAction("actionShow_Skyculture_NativePlanetNames", displayGroup, N_("Native planet names (from sky culture)"), "flagNativePlanetNames", "Ctrl+Shift+N");
+	//addAction("actionShow_Skyculture_NativePlanetNames", displayGroup, N_("Native planet names (from sky culture)"), "flagNativePlanetNames", "Ctrl+Shift+N");
 	addAction("actionShow_Planets_ShowMinorBodyMarkers", displayGroup, N_("Mark minor bodies"), "flagMarkers");
 
 	connect(StelApp::getInstance().getModule("HipsMgr"), SIGNAL(gotNewSurvey(HipsSurveyP)),
@@ -534,8 +534,8 @@ void SolarSystem::recreateTrails()
 
 void SolarSystem::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
-	planetNativeNamesMap.clear();
-	planetNativeNamesMeaningMap.clear();
+	//planetNativeNamesMap.clear();
+	//planetNativeNamesMeaningMap.clear();
 
 	if (!skyCulture.names.isEmpty())
 		loadCultureSpecificNames(skyCulture.names);
@@ -545,6 +545,9 @@ void SolarSystem::updateSkyCulture(const StelSkyCulture& skyCulture)
 
 void SolarSystem::loadCultureSpecificNames(const QJsonObject& data)
 {
+	for (const auto& p : std::as_const(systemPlanets))
+		p->removeAllCulturalNames();
+
 	for (auto it = data.begin(); it != data.end(); ++it)
 	{
 		const auto key = it.key();
@@ -557,32 +560,48 @@ void SolarSystem::loadCultureSpecificNames(const QJsonObject& data)
 
 			// We store only one name per planet, so just take the first valid one
 			// FIXME: maybe we should somehow store all
-			QString nativeName, nativeNameMeaning;
+			// YES, store all now...
+			PlanetP planet = searchByEnglishName(planetId);
+			if (!planet)
+				continue;
+
+			//QString nativeName, nativeNameMeaning;
 			for (const auto& nameVal : names)
 			{
 				const auto nameObj = nameVal.toObject();
-				if (nameObj.find("english") == nameObj.end())
-					continue;
-				nativeNameMeaning = nameObj["english"].toString();
-				if (nameObj.find("native") != nameObj.end())
-					nativeName = nameObj["native"].toString();
-				else
-					nativeName = nativeNameMeaning;
-				break;
+				//if (nameObj.find("english") == nameObj.end())
+				//	continue;
+				//nativeNameMeaning = nameObj["english"].toString();
+				//if (nameObj.find("native") != nameObj.end())
+				//	nativeName = nameObj["native"].toString();
+				//else
+				//	nativeName = nativeNameMeaning;
+				//break;
+
+				StelObject::CulturalName cName;
+				cName.native=nameObj["native"].toString();
+				cName.pronounce=nameObj["pronounce"].toString();
+				cName.pronounceI18n=q_(cName.pronounce);
+				cName.transliteration=nameObj["transliteration"].toString();
+				cName.translated=nameObj["english"].toString();
+				cName.translatedI18n=q_(cName.translated);
+				cName.IPA=nameObj["IPA"].toString();
+
+				planet->addCulturalName(cName);
 			}
-			planetNativeNamesMap[planetId] = nativeName;
-			planetNativeNamesMeaningMap[planetId] = nativeNameMeaning;
+			//planetNativeNamesMap[planetId] = nativeName;
+			//planetNativeNamesMeaningMap[planetId] = nativeNameMeaning;
 		}
 	}
 
-	for (const auto& p : std::as_const(systemPlanets))
-	{
-		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
-		{
-			p->setNativeName(planetNativeNamesMap[p->getEnglishName()]);
-			p->setNativeNameMeaning(planetNativeNamesMeaningMap[p->getEnglishName()]);
-		}
-	}
+//	for (const auto& p : std::as_const(systemPlanets))
+//	{
+//		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+//		{
+//			p->setNativeName(planetNativeNamesMap[p->getEnglishName()]);
+//			p->setNativeNameMeaning(planetNativeNamesMeaningMap[p->getEnglishName()]);
+//		}
+//	}
 }
 
 void SolarSystem::reloadShaders()
@@ -3143,26 +3162,26 @@ Vec3f SolarSystem::getEphemerisSaturnMarkerColor() const
 	return ephemerisSaturnMarkerColor;
 }
 
-void SolarSystem::setFlagNativePlanetNames(bool b)
-{
-	if (b!=flagNativePlanetNames)
-	{
-		flagNativePlanetNames=b;
-		for (const auto& p : std::as_const(systemPlanets))
-		{
-			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
-				p->setFlagNativeName(flagNativePlanetNames);
-		}
-		updateI18n();
-		StelApp::immediateSave("viewing/flag_planets_native_names", b);
-		emit flagNativePlanetNamesChanged(b);
-	}
-}
-
-bool SolarSystem::getFlagNativePlanetNames() const
-{
-	return flagNativePlanetNames;
-}
+//void SolarSystem::setFlagNativePlanetNames(bool b)
+//{
+//	if (b!=flagNativePlanetNames)
+//	{
+//		flagNativePlanetNames=b;
+//		for (const auto& p : std::as_const(systemPlanets))
+//		{
+//			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+//				p->setFlagNativeName(flagNativePlanetNames);
+//		}
+//		updateI18n();
+//		StelApp::immediateSave("viewing/flag_planets_native_names", b);
+//		emit flagNativePlanetNamesChanged(b);
+//	}
+//}
+//
+//bool SolarSystem::getFlagNativePlanetNames() const
+//{
+//	return flagNativePlanetNames;
+//}
 
 void SolarSystem::setFlagIsolatedTrails(bool b)
 {
@@ -3801,7 +3820,7 @@ void SolarSystem::reloadPlanets()
 	const bool flagHints = getFlagHints();
 	const bool flagLabels = getFlagLabels();
 	const bool flagOrbits = getFlagOrbits();
-	const bool flagNative = getFlagNativePlanetNames();
+	//const bool flagNative = getFlagNativePlanetNames();
 	bool hasSelection = false;
 
 	// Save observer location (fix for LP bug # 969211)
@@ -3867,7 +3886,7 @@ void SolarSystem::reloadPlanets()
 	setFlagHints(flagHints);
 	setFlagLabels(flagLabels);
 	setFlagOrbits(flagOrbits);
-	setFlagNativePlanetNames(flagNative);
+	//setFlagNativePlanetNames(flagNative);
 
 	// Restore translations
 	updateI18n();
