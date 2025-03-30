@@ -108,6 +108,9 @@ signals:
 	void visibleChanged(bool);
 
 private:
+	void checkForPlanetarySurvey();
+
+private:
 	LinearFader fader;
 	QString url;
 	QString type;

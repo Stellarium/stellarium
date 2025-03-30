@@ -83,6 +83,7 @@ HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString&
 	// First save properties from hipslist
 	for (auto it = hipslistProps.begin(); it != hipslistProps.end(); ++it)
 		properties[it.key()] = it.value();
+	checkForPlanetarySurvey();
 
 	// Immediately download the properties and replace the hipslist data with them.
 	QNetworkRequest req = QNetworkRequest(getUrlFor("properties"));
@@ -112,10 +113,7 @@ HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString&
 		if (properties.contains("hips_frame"))
 			hipsFrame = properties["hips_frame"].toString().toLower();
 
-		planetarySurvey = !QStringList{"equatorial","galactic","ecliptic"}.contains(hipsFrame, Qt::CaseInsensitive) ||
-		                  std::as_const(properties)["creator_did"].toString().contains("moon", Qt::CaseInsensitive) ||
-		                  std::as_const(properties)["client_category"].toString().contains("solar system", Qt::CaseInsensitive);
-
+		checkForPlanetarySurvey();
 		emit propertiesChanged();
 		emit statusChanged();
 		networkReply->deleteLater();
@@ -124,6 +122,13 @@ HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString&
 
 HipsSurvey::~HipsSurvey()
 {
+}
+
+void HipsSurvey::checkForPlanetarySurvey()
+{
+	planetarySurvey = !QStringList{"equatorial","galactic","ecliptic"}.contains(hipsFrame, Qt::CaseInsensitive) ||
+	                  std::as_const(properties)["creator_did"].toString().contains("moon", Qt::CaseInsensitive) ||
+	                  std::as_const(properties)["client_category"].toString().contains("solar system", Qt::CaseInsensitive);
 }
 
 bool HipsSurvey::isVisible() const
