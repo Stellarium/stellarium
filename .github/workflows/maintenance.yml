@@ -60,4 +60,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Linting JSON
-        run: jsonlint -S ${{github.workspace}}/skycultures/*/index.json
+        run: find ${{github.workspace}}{src,plugins,nebulae,skycultures} -iname '*.json' -exec jsonlint -S {} +
