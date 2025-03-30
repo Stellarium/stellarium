@@ -106,8 +106,8 @@ HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString&
 			hipsFrame = properties["hips_frame"].toString().toLower();
 
 		planetarySurvey = QStringList{"equatorial","galactic","ecliptic"}.contains(hipsFrame, Qt::CaseInsensitive) ||
-		                  properties["creator_did"].toString().contains("moon", Qt::CaseInsensitive) ||
-		                  properties["client_category"].toString().contains("solar system", Qt::CaseInsensitive);
+		                  std::as_const(properties)["creator_did"].toString().contains("moon", Qt::CaseInsensitive) ||
+		                  std::as_const(properties)["client_category"].toString().contains("solar system", Qt::CaseInsensitive);
 
 		emit propertiesChanged();
 		emit statusChanged();
