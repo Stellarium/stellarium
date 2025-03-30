@@ -4185,6 +4185,8 @@ bool SolarSystem::removeMinorPlanet(const QString &name)
 
 void SolarSystem::onNewSurvey(HipsSurveyP survey)
 {
+	if (!survey->isPlanetarySurvey()) return;
+
 	const auto type = survey->getType();
 	const bool isPlanetColor = type == "planet";
 	const bool isPlanetNormal = type == "planet-normal";
