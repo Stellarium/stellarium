@@ -69,7 +69,8 @@ QUrl HipsSurvey::getUrlFor(const QString& path) const
 	return QString("%1/%2%3").arg(base.url(), path, args);
 }
 
-HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString& type, double releaseDate_):
+HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString& type,
+                       const QMap<QString, QString>& hipslistProps, const double releaseDate_) :
 	url(url_),
 	type(type),
 	hipsFrame(frame),
@@ -79,7 +80,11 @@ HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString&
 	nbVisibleTiles(0),
 	nbLoadedTiles(0)
 {
-	// Immediately download the properties.
+	// First save properties from hipslist
+	for (auto it = hipslistProps.begin(); it != hipslistProps.end(); ++it)
+		properties[it.key()] = it.value();
+
+	// Immediately download the properties and replace the hipslist data with them.
 	QNetworkRequest req = QNetworkRequest(getUrlFor("properties"));
 	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 	req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
@@ -645,11 +650,15 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 		QString frame = defaultFrame;
 		QString status;
 		double releaseDate = 0;
+		QMap<QString, QString> hipslistProps;
 		for (const auto &line : entry.split('\n'))
 		{
 			if (line.startsWith('#')) continue;
 			QString key = line.section("=", 0, 0).trimmed();
 			QString value = line.section("=", 1, -1).trimmed();
+
+			hipslistProps[key] = value;
+
 			if (key == "hips_service_url")
 			{
 				url = value;
@@ -672,7 +681,7 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 				status = value.toLower();
 		}
 		if(status.split(' ').contains("public"))
-			ret.append(HipsSurveyP(new HipsSurvey(url, frame, type, releaseDate)));
+			ret.append(HipsSurveyP(new HipsSurvey(url, frame, type, hipslistProps, releaseDate)));
 	}
 	return ret;
 }

@@ -63,7 +63,8 @@ public:
 	//! @param frame The reference frame from the survey's \c hips_frame property.
 	//! @param type Survey type from the survey's \c type property.
 	//! @param releaseDate If known the UTC JD release date of the survey.  Used for cache busting.
-	HipsSurvey(const QString& url, const QString& frame, const QString& type, double releaseDate=0.0);
+	HipsSurvey(const QString& url, const QString& frame, const QString& type,
+	           const QMap<QString, QString>& hipslistProps, double releaseDate=0.0);
 	~HipsSurvey() override;
 
 	//! Get whether the survey is visible.
