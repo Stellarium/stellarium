@@ -638,37 +638,42 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 {
 	QList<HipsSurveyP> ret;
-	QString url;
-	QString type;
 	static const QString defaultFrame = "equatorial";
-	QString frame = defaultFrame;
-	double releaseDate = 0;
-	for (auto &line : data.split('\n'))
+	for (const auto& entry : data.split(QRegularExpression("\n\\s*\n")))
 	{
-		if (line.startsWith('#')) continue;
-		QString key = line.section("=", 0, 0).trimmed();
-		QString value = line.section("=", 1, -1).trimmed();
-		if (key == "hips_service_url") url = value;
-		// special case: https://github.com/Stellarium/stellarium/issues/1276
-		if (url.contains("data.stellarium.org/surveys/dss")) continue;
-		if (key == "hips_release_date")
+		QString url;
+		QString type;
+		QString frame = defaultFrame;
+		QString status;
+		double releaseDate = 0;
+		for (const auto &line : entry.split('\n'))
 		{
-			// XXX: StelUtils::getJulianDayFromISO8601String does not work
-			// without the seconds!
-			QDateTime date = QDateTime::fromString(value, Qt::ISODate);
-			date.setTimeSpec(Qt::UTC);
-			releaseDate = StelUtils::qDateTimeToJd(date);
+			if (line.startsWith('#')) continue;
+			QString key = line.section("=", 0, 0).trimmed();
+			QString value = line.section("=", 1, -1).trimmed();
+			if (key == "hips_service_url")
+			{
+				url = value;
+				// special case: https://github.com/Stellarium/stellarium/issues/1276
+				if (url.contains("data.stellarium.org/surveys/dss")) continue;
+			}
+			else if (key == "hips_release_date")
+			{
+				// XXX: StelUtils::getJulianDayFromISO8601String does not work
+				// without the seconds!
+				QDateTime date = QDateTime::fromString(value, Qt::ISODate);
+				date.setTimeSpec(Qt::UTC);
+				releaseDate = StelUtils::qDateTimeToJd(date);
+			}
+			else if (key == "hips_frame")
+				frame = value.toLower();
+			else if (key == "type")
+				type = value.toLower();
+			else if (key == "hips_status")
+				status = value.toLower();
 		}
-		if (key == "hips_frame")
-			frame = value.toLower();
-		if (key == "type")
-			type = value.toLower();
-		if (key == "hips_status" && value.split(' ').contains("public")) {
+		if(status.split(' ').contains("public"))
 			ret.append(HipsSurveyP(new HipsSurvey(url, frame, type, releaseDate)));
-			url = "";
-			frame = defaultFrame;
-			releaseDate = 0;
-		}
 	}
 	return ret;
 }
