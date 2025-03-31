@@ -1166,6 +1166,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 
 			// Check location in our database and fetch light pollution luminance if it possible
 			StelLocation ipLoc;
+			ipLoc.role = '!'; // the location is not valid by default
 			if (!ipCity.isEmpty())
 				ipLoc = locationForString(QString("%1, %2").arg(ipCity, regionName));
 			else
@@ -1176,6 +1177,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 				// Sky is good, and you take LP value for the city?
 				double minDistanceKm=1E12;
 				StelLocation candLoc;
+				candLoc.role = '!'; // the location is not valid by default
 				QMapIterator<QString, StelLocation> it(closeLocations);
 				while (it.hasNext()) {
 					it.next();
@@ -1188,7 +1190,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 						qDebug() << "-- TAKEN!";
 					}
 				}
-				if (candLoc.isValid())
+				if (candLoc.isValid() && closeLocations.size()>0)
 				{
 					qDebug() << "Closest known place:" << candLoc.name << "at" << candLoc.distanceKm(longitude, latitude) << "km";
 					// Consider result valid only in a meaningful distance. Light pollution is changing rapidly.
