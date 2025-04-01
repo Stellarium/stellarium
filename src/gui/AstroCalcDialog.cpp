@@ -1359,7 +1359,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 		for (const auto& star : std::as_const(celestialObjects))
 		{
-			StelObjectP obj = star.firstKey();
+			StelObjectP obj = star.first;
 			QString extra, elongStr;
 			if (static_cast<double>(obj->getVMagnitudeWithExtinction(core)) <= mag && obj->isAboveRealHorizon(core))
 			{
@@ -1370,19 +1370,19 @@ void AstroCalcDialog::currentCelestialPositions()
 
 				if (celTypeId == 170) // double stars
 				{
-					double wdsSep = static_cast<double>(star.value(obj));
+					double wdsSep = static_cast<double>(star.second);
 					extra = QString::number(wdsSep, 'f', 3); // arc-seconds
 					sToolTip = StelUtils::decDegToDmsStr(wdsSep / 3600.);
 				}
 				else if (celTypeId == 171 || celTypeId == 173 || celTypeId == 174) // variable stars
 				{
-					if (star.value(obj) > 0.f)
-						extra = QString::number(star.value(obj), 'f', 5); // days
+					if (star.second > 0.f)
+						extra = QString::number(star.second, 'f', 5); // days
 					else
 						extra = dash;
 				}
 				else	// stars with high proper motion
-					extra = QString::number(star.value(obj), 'f', 5); // "/yr
+					extra = QString::number(star.second, 'f', 5); // "/yr
 
 				QString sTransit = dash;
 				QString sMaxElevation = dash;
@@ -5930,15 +5930,15 @@ void AstroCalcDialog::calculatePhenomena()
 		case PHCBrightDoubleStars: // Double stars
 			for (const auto& object : doubleHipStars)
 			{
-				if (object.firstKey()->getVMagnitude(core) < static_cast<float>(brightLimit - 5.0))
-					star.append(object.firstKey());
+				if (object.first->getVMagnitude(core) < static_cast<float>(brightLimit - 5.0))
+					star.append(object.first);
 			}
 			break;
 		case PHCBrightVariableStars: // Variable stars
 			for (const auto& object : variableHipStars)
 			{
-				if (object.firstKey()->getVMagnitude(core) < static_cast<float>(brightLimit - 5.0))
-					star.append(object.firstKey());
+				if (object.first->getVMagnitude(core) < static_cast<float>(brightLimit - 5.0))
+					star.append(object.first);
 			}
 			break;
 		case PHCBrightStarClusters: // Star clusters
@@ -8045,12 +8045,12 @@ void AstroCalcDialog::calculateWutObjects()
 
 					for (const auto& dblStar : dblHipStars)
 					{
-						StelObjectP object = dblStar.firstKey();
+						StelObjectP object = dblStar.first;
 						const float mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							// convert from arc-seconds to degrees
-							if ((angularSizeLimit) && (!StelUtils::isWithin(static_cast<double>(dblStar.value(object))/3600.0, angularSizeLimitMin, angularSizeLimitMax)))
+							if ((angularSizeLimit) && (!StelUtils::isWithin(static_cast<double>(dblStar.second)/3600.0, angularSizeLimitMin, angularSizeLimitMax)))
 								continue;
 
 							designation = object->getEnglishName();
@@ -8068,7 +8068,7 @@ void AstroCalcDialog::calculateWutObjects()
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 								otype = object->getObjectTypeI18n();
 
-								fillWUTTable(starName, designation, mag, rts, alt, dblStar.value(object)/3600.0, constellation, otype, withDecimalDegree);
+								fillWUTTable(starName, designation, mag, rts, alt, dblStar.second/3600.0, constellation, otype, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -8079,13 +8079,13 @@ void AstroCalcDialog::calculateWutObjects()
 				case EWBrightVariableStars:
 				{
 					enableAngular = false;					
-					static QMap<int, QList<StelACStarData>>map = {
-						{EWAlgolTypeVariableStars,			algolTypeStars},
-						{EWClassicalCepheidsTypeVariableStars,	classicalCepheidsTypeStars},
-						{EWBrightVariableStars,				varHipStars}};
+					static const QMap<int, QList<StelACStarData>>map = {
+						{EWAlgolTypeVariableStars,             algolTypeStars},
+						{EWClassicalCepheidsTypeVariableStars, classicalCepheidsTypeStars},
+						{EWBrightVariableStars,                varHipStars}};
 					for (const auto& varStar : map.value(categoryId, varHipStars))
 					{
-						StelObjectP object = varStar.firstKey();
+						StelObjectP object = varStar.first;
 						const float mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
@@ -8115,7 +8115,7 @@ void AstroCalcDialog::calculateWutObjects()
 					enableAngular = false;
 					for (const auto& hpmStar : hpmHipStars)
 					{
-						StelObjectP object = hpmStar.firstKey();
+						StelObjectP object = hpmStar.first;
 						const float mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{

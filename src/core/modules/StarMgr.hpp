@@ -26,6 +26,7 @@
 #include "StelFader.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
+#include "StelObject.hpp"
 
 class StelObject;
 class StelToneReproducer;
@@ -41,35 +42,35 @@ static const int RCMAG_TABLE_SIZE = 512;
 
 typedef struct
 {
-	QString designation;	//! GCVS designation
-	QString vtype;		//! Type of variability
-	float maxmag;		//! Magnitude at maximum brightness
-	int mflag;		//! Magnitude flag code
-	float min1mag;		//! First minimum magnitude or amplitude
-	float min2mag;		//! Second minimum magnitude or amplitude
-	QString photosys;	//! The photometric system for magnitudes
-	double epoch;		//! Epoch for maximum light (Julian days)
-	double period;		//! Period of the variable star (days)
-	int Mm;			//! Rising time or duration of eclipse (%)
-	QString stype;		//! Spectral type
+	QString designation;	//!< GCVS designation
+	QString vtype;		//!< Type of variability
+	float maxmag;		//!< Magnitude at maximum brightness
+	int mflag;		//!< Magnitude flag code
+	float min1mag;		//!< First minimum magnitude or amplitude
+	float min2mag;		//!< Second minimum magnitude or amplitude
+	QString photosys;	//!< The photometric system for magnitudes
+	double epoch;		//!< Epoch for maximum light (Julian days)
+	double period;		//!< Period of the variable star (days)
+	int Mm;			//!< Rising time or duration of eclipse (%)
+	QString stype;		//!< Spectral type
 } varstar;
 
 typedef struct
 {
-	QString designation;	//! WDS designation
-	int observation;	//! Date of last satisfactory observation, yr
-	float positionAngle;	//! Position Angle at date of last satisfactory observation, deg
-	float separation;	//! Separation at date of last satisfactory observation, arcsec
+	QString designation;	//!< WDS designation
+	int observation;	//!< Date of last satisfactory observation, yr
+	float positionAngle;	//!< Position Angle at date of last satisfactory observation, deg
+	float separation;	//!< Separation at date of last satisfactory observation, arcsec
 } wds;
 
 typedef struct
 {
-	int sao;
-	int hd;
-	int hr;
+	int sao;                //!< SAO Smithsonian astrophysical Observatory
+	int hd;                 //!< HD Henry Draper catalog
+	int hr;                 //!< HR Harvard Revised Photometry Catalogue, now Yale Bright Star Catalogue
 } crossid;
 
-typedef QMap<StelObjectP, float> StelACStarData;
+typedef QPair<StelObjectP, float> StelACStarData;
 typedef uint64_t StarId;
 
 typedef struct
@@ -207,10 +208,26 @@ public:
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
-	//! @note Loading stars with the common names only.
+	//! List all currently loaded names.
+	//! @param inEnglish list EnglishNames (true) or translated (false)
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
+	//! @note Listing stars with the common names only, not skyculture-related.
 	QStringList listAllObjects(bool inEnglish) const override;
+	//! @param objType a string with int number 0...8.
+	//! 0..Interesting double stars
+	//! 1..Interesting variable stars
+	//! 2..Bright double stars
+	//! 3..Bright variable stars
+	//! 4..high proper motion stars
+	//! 5..Algol-type eclipsing systems
+	//! 6..Classical delta Cepheid stars
+	//! 7..Bright carbon stars
+	//! 8..Bright Barium stars
+	//! @param inEnglish: return English, not translated star names
+	//! @return a QStringList with all known star names
 	QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const override;
 	QString getName() const override { return "Stars"; }
+	//! @return "Star"
 	QString getStelObjectType() const override;
 
 public slots:
@@ -284,6 +301,7 @@ public:
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return translated common name of star
+	//! @todo Rename to getCommonNameI18n
 	static QString getCommonName(StarId hip);
 
 	//! Get the (translated) scientific name for a star with a specified
@@ -332,7 +350,7 @@ public:
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return cross-identification data
-	static QString getCrossIdentificationDesignations(QString hip);
+	static QString getCrossIdentificationDesignations(const QString &hip);
 
 	//! Get the type of variability for a variable star with a specified
 	//! Hipparcos or Gaia catalogue number.
@@ -427,11 +445,11 @@ public:
 
 	//! Get the list of all Hipparcos stars.
 	const QList<StelObjectP>& getHipparcosStars() const { return hipparcosStars; }	
-	const QList<QMap<StelObjectP, float>>& getHipparcosHighPMStars() const { return hipStarsHighPM; }
-	const QList<QMap<StelObjectP, float>>& getHipparcosDoubleStars() const { return doubleHipStars; }	
-	const QList<QMap<StelObjectP, float>>& getHipparcosVariableStars() const { return variableHipStars; }
-	const QList<QMap<StelObjectP, float>>& getHipparcosAlgolTypeStars() const { return algolTypeStars; }
-	const QList<QMap<StelObjectP, float>>& getHipparcosClassicalCepheidsTypeStars() const { return classicalCepheidsTypeStars; }
+	const QList<QPair<StelObjectP, float>>& getHipparcosHighPMStars() const { return hipStarsHighPM; }
+	const QList<QPair<StelObjectP, float>>& getHipparcosDoubleStars() const { return doubleHipStars; }
+	const QList<QPair<StelObjectP, float>>& getHipparcosVariableStars() const { return variableHipStars; }
+	const QList<QPair<StelObjectP, float>>& getHipparcosAlgolTypeStars() const { return algolTypeStars; }
+	const QList<QPair<StelObjectP, float>>& getHipparcosClassicalCepheidsTypeStars() const { return classicalCepheidsTypeStars; }
 	const QList<StelObjectP>& getHipparcosCarbonStars() const { return carbonStars; }
 	const QList<StelObjectP>& getHipparcosBariumStars() const { return bariumStars; }
 
@@ -466,12 +484,12 @@ private:
 	struct CommonNames
 	{
 		QHash<int, QString> byHIP;
-		QMap<QString, int> hipByName;
+		QMap<QString, int> hipByName; // Reverse mapping of uppercased name to HIP number
 	};
-	//! Loads common names for stars from a file.
+	//! Loads common names for stars from a file. (typical: skycultures/common_star_names.fab)
 	//! Called when the SkyCulture is updated.
 	//! @param the path to a file containing the common names for bright stars.
-	//! @note Stellarium doesn't support sky cultures made prior version 0.10.6 now!
+	//! @note Stellarium doesn't support sky cultures made prior version 25.1.
 	CommonNames loadCommonNames(const QString& commonNameFile) const;
 
 	//! Load culture-specific names for stars from JSON data
@@ -512,12 +530,16 @@ private:
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(StelPainter& sPainter, const StelCore* core);
 
+	//! Fill hipparcosStars, hipStarsHighPM, doubleHipStars, variableHipStars, algolTypeStars,
+	//! classicalCepheidsTypeStars, carbonStars, bariumStars. Called once in init().
 	void populateHipparcosLists();
+	//! Load scientific star names, variable names, binary data, cross indices. Called once in init().
 	void populateStarsDesignations();
 
 	//! List of all Hipparcos stars.
 	QList<StelObjectP> hipparcosStars, carbonStars, bariumStars;
-	QList<QMap<StelObjectP, float>> doubleHipStars, variableHipStars, algolTypeStars, classicalCepheidsTypeStars, hipStarsHighPM;
+	// TODO: Document why this is a list of 1-element(?) QMAPs, not just a QMap itself
+	QList<StelACStarData> doubleHipStars, variableHipStars, algolTypeStars, classicalCepheidsTypeStars, hipStarsHighPM;
 
 	LinearFader labelsFader;
 	LinearFader starsFader;
@@ -550,7 +572,7 @@ private:
 	static QHash<StarId, QString> commonNamesMap;     // the original names from skyculture (star_names.fab)
 	static QHash<StarId, QString> commonNamesMapI18n; // translated names
 	static QMap<QString, StarId> commonNamesIndexI18n;
-	static QMap<QString, StarId> commonNamesIndex;
+	static QMap<QString, StarId> commonNamesIndex;    // back-references upper-case names
 
 	static QHash<StarId, QString> additionalNamesMap; // additional names
 	static QHash<StarId, QString> additionalNamesMapI18n;
