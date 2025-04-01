@@ -76,25 +76,26 @@ public:
 	//! Available sets of navigational stars
 	enum NavigationalStarsSet
 	{
-		AngloAmerican,  //!< Anglo-American set (The Nautical Almanac)
-		French,                  //!< French set (Ephémérides Nautiques)
-		British,                  //!< British set from XVIII century (Maskelyne's "British Mariner's Guide", 1764)
-		Russian,	                //!< Russian set (Морской астрономический ежегодник)
-		USSRAvia,             //!< The set of navigational stars which was used for Soviet aviation
-		USSRSpace,         //!< The set of navigational stars for Soviet and Russian manned space programs Voskhod and Soyuz
-		German,                //!< German set (Nautisches Jahrbuch)
-		GeminiAPS,          //!< Gemini APS Alignment Star List
+		AngloAmerican,   //!< Anglo-American set (The Nautical Almanac)
+		French,          //!< French set (Ephémérides Nautiques)
+		British,         //!< British set from XVIII century (Maskelyne's "British Mariner's Guide", 1764)
+		Wrinkles,        //!< British set from XIX century (Lecky's "Wrinkles" in practical navigation", 1884)
+		Russian,         //!< Russian set (Морской астрономический ежегодник)
+		USSRAvia,        //!< The set of navigational stars which was used for Soviet aviation
+		USSRSpace,       //!< The set of navigational stars for Soviet and Russian manned space programs Voskhod and Soyuz
+		German,          //!< German set (Nautisches Jahrbuch)
+		GeminiAPS,       //!< Gemini APS Alignment Star List
 		MeadeLX200,      //!< Meade LX200 Alignment Star Library
-		MeadeETX,           //!< Meade ETX Alignment Star Library
+		MeadeETX,        //!< Meade ETX Alignment Star Library
 		MeadeAS494,      //!< Meade Autostar #494 Alignment Stars
 		MeadeAS497,      //!< Meade Autostar #497 Alignment Stars
-		CelestronNS,       //!< Celestron NexStar Alignment Star List
-		Apollo,                   //!< Apollo Alignment Star List
+		CelestronNS,     //!< Celestron NexStar Alignment Star List
+		Apollo,          //!< Apollo Alignment Star List
 		SkywatcherSS,    //!< Skywatcher SynScan Hand Controller and SynScan Pro App
-		VixenSB,               //!< Vixen Starbook Alignment Stars
-		ArgoNavis,           //!< Alignment stars for Argo Navis digital setting circles
-		OrionIS,	                //!< Alignment stars for Orion Intelliscope mounts
-		SkyCommander  //!< Alignment stars for Sky Commander DSCs
+		VixenSB,         //!< Vixen Starbook Alignment Stars
+		ArgoNavis,       //!< Alignment stars for Argo Navis digital setting circles
+		OrionIS,         //!< Alignment stars for Orion Intelliscope mounts
+		SkyCommander     //!< Alignment stars for Sky Commander DSCs
 	};
 	Q_ENUM(NavigationalStarsSet)
 
