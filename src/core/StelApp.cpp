@@ -314,12 +314,12 @@ StelApp::~StelApp()
 	moduleMgr->unloadModule("StelVideoMgr", false);  // We need to delete it afterward
 	moduleMgr->unloadModule("StelSkyLayerMgr", false);  // We need to delete it afterward
 	moduleMgr->unloadModule("StelObjectMgr", false);// We need to delete it afterward
+	moduleMgr->unloadModule("StelSkyCultureMgr", true);// No need to delete only later!
 	StelModuleMgr* tmp = moduleMgr;
 	moduleMgr = new StelModuleMgr(); // Create a secondary instance to avoid crashes at other deinit
 	delete tmp; tmp=Q_NULLPTR;
 	delete skyImageMgr; skyImageMgr=Q_NULLPTR;
 	delete core; core=Q_NULLPTR;
-	delete skyCultureMgr; skyCultureMgr=Q_NULLPTR;
 	delete localeMgr; localeMgr=Q_NULLPTR;
 	delete audioMgr; audioMgr=Q_NULLPTR;
 	delete videoMgr; videoMgr=Q_NULLPTR;
