@@ -704,7 +704,6 @@ StelMainView::StelMainView(QSettings* settings)
 	//setMouseTracking(true);
 
     setRenderHint(QPainter::Antialiasing);
-	topMost=new TopMost();
 }
 
 void StelMainView::resizeEvent(QResizeEvent* event)
@@ -961,8 +960,7 @@ void StelMainView::init()
 	actionMgr->addAction("actionSave_Screenshot_Global", N_("Miscellaneous"), N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
 	actionMgr->addAction("actionReload_Shaders", N_("Miscellaneous"), N_("Reload shaders (for development)"), this, "reloadShaders()", "Ctrl+R, P");
 	actionMgr->addAction("actionSet_Full_Screen_Global", N_("Display Options"), N_("Full-screen mode"), this, "fullScreen", "F11");
-	actionMgr->addAction("actionSet_Full_Screen_Exclusive", N_("Display Options"), N_("Full-screen exclusive"), this, "fullScreenExclusive()", "Shift+F11");
-
+	
 	StelPainter::initGLShaders();
 
 	guiItem = new StelGuiItem(size(), rootItem);
@@ -1076,22 +1074,6 @@ void StelMainView::reloadShaders()
 	//make sure GL context is bound
 	glContextMakeCurrent();
 	emit reloadShadersRequested();
-}
-
-void StelMainView::fullScreenExclusive()
-{
-	if (!isFullScreen())
-		return;
-
-	const auto exclusive=topMost->isVisible();
-	if (exclusive)
-		topMost->hide();
-	else
-		topMost->show();
-
-	const auto verbose=qApp->property("verbose").toBool();
-	if (verbose)
-		qDebug() << "running" << (exclusive?"exclusive":"managed") << "fullscreen";
 }
 
 // This is a series of various diagnostics based on "bugs" reported for 0.13.0 and 0.13.1.
@@ -1489,13 +1471,9 @@ void StelMainView::initTitleI18n()
 void StelMainView::setFullScreen(bool b)
 {
 	if (b)
-	{
-		topMost->show();
 		showFullScreen();
-	}
 	else
 	{
-		topMost->hide();
 		showNormal();
 		// Not enough. If we had started in fullscreen, the inner part of the window is at 0/0, with the frame extending to top/left off screen.
 		// Therefore moving is not possible. We must move to the stored position or at least defaults.

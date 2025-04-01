@@ -133,7 +133,6 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	action = anAction;
 	secondAction = otherAction;
 	checked = false;
-	secondState = false;
 	flagChangeFocus = false;
 
 	//Q_ASSERT(!pixOn.isNull());
@@ -194,18 +193,13 @@ StelButton::StelButton(QGraphicsItem* parent,
 					   const QPixmap& pixHover,
 					   const QString& actionId,
 					   bool noBackground,
-					   bool isTristate,
-					   const QString &otherActionId)
+					   bool isTristate)
 	: QGraphicsPixmapItem(pixOff, parent)
 {
 	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(actionId);
 	if (!actionId.isEmpty() && !action)
 		qWarning() << "Couldn't find action" << actionId;
-	StelAction *otherAction=nullptr;
-	if (!otherActionId.isEmpty())
-		otherAction = StelApp::getInstance().getStelActionManager()->findAction(otherActionId);
-
-	initCtor(pixOn, pixOff, pixNoChange, pixHover, action, otherAction, noBackground, isTristate);
+	initCtor(pixOn, pixOff, pixNoChange, pixHover, action, nullptr, noBackground, isTristate);
 }
 
 StelButton::StelButton(QGraphicsItem* parent,
@@ -329,8 +323,7 @@ void StelButton::updateIcon()
 		painter.drawPixmap(0, 0, pixBackground);
 
 	painter.drawPixmap(0, 0,
-		(isTristate_ && checked == ButtonStateNoChange) ||
-			   (!isTristate_ && secondState && checked == ButtonStateOn) ? (pixNoChange) :
+		(isTristate_ && checked == ButtonStateNoChange) ? (pixNoChange) :
 		(checked == ButtonStateOn) ? (pixOn) :
 		/* (checked == ButtonStateOff) ? */ (pixOff));
 
