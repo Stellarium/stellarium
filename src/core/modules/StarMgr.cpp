@@ -84,6 +84,13 @@ QMap<QString,StarId> StarMgr::commonNamesIndexI18n; // ATTN: Stores uppercase va
 QMap<QString,StarId> StarMgr::commonNamesIndex;
 QMap<QString,StarId> StarMgr::additionalNamesIndex;     // ATTN: some names are not unique! map target type may need to become QList<StarId>
 QMap<QString,StarId> StarMgr::additionalNamesIndexI18n; // ATTN: Stores uppercase variant of additionalNameI18n, BUT WHY? Also, some names are not unique! map target type may need to be QList<StarId>
+
+// Cultural names: We must store all data here, and have even 4 indices to native names&spelling, pronunciation, english and user-language spelling
+QHash<StarId, QList<StelObject::CulturalName>> StarMgr::culturalNamesMap; // cultural names
+QMap<QString, QList<StarId>> StarMgr::culturalNativeNamesIndex; // reverse mappings. For names, unfortunately multiple results are possible!
+QMap<QString, QList<StarId>> StarMgr::culturalPronounceIndex;
+QMap<QString, QList<StarId>> StarMgr::culturalPronounceI18nIndex;
+
 QHash<StarId,QString> StarMgr::sciDesignationsMapI18n;
 QMap<QString,StarId> StarMgr::sciDesignationsIndexI18n;
 QHash<StarId,QString> StarMgr::sciExtraDesignationsMapI18n; // TODO: Convert map target to QStringList?
