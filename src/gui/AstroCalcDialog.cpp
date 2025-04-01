@@ -2742,13 +2742,13 @@ void AstroCalcDialog::generateLunarEclipses()
 						double gamma = m*0.2725076/mSD;
 						if (y<0.) gamma *= -1.;
 
-						sarosStr = QString("%1").arg(QString::number(saros));
-						gammaStr = QString("%1").arg(QString::number(gamma, 'f', 3));
-						pMagStr = QString("%1").arg(QString::number(pMag, 'f', 3));
+						sarosStr = QString::number(saros);
+						gammaStr = QString::number(gamma, 'f', 3);
+						pMagStr  = QString::number(pMag, 'f', 3);
 						if (uMag<0.)
 							uMagStr = dash;
 						else
-							uMagStr = QString("%1").arg(QString::number(uMag, 'f', 3));
+							uMagStr = QString::number(uMag, 'f', 3);
 
 
 						ACLunarEclipseTreeWidgetItem* treeItem = new ACLunarEclipseTreeWidgetItem(ui->lunareclipseTreeWidget);
@@ -3277,15 +3277,15 @@ void AstroCalcDialog::generateSolarEclipses()
 						if ((s + nc * 223 - 1) < 0) saros -= 223;
 						if (saros < -223) saros += 223;
 
-						sarosStr = QString("%1").arg(QString::number(saros));
-						gammaStr = QString("%1").arg(QString::number(gamma, 'f', 3));
+						sarosStr = QString::number(saros);
+						gammaStr = QString::number(gamma, 'f', 3);
 						double eclipseLatitude = 0.;
 						double eclipseLongitude = 0.;
 						double eclipseAltitude = 0.;
 
 						if (noncentraleclipse)
 						{
-							magStr = QString("%1").arg(QString::number(magnitude, 'f', 3));
+							magStr = QString::number(magnitude, 'f', 3);
 							eclipseLatitude = latDeg;
 							eclipseLongitude = lngDeg;
 							altitudeStr = "0°";
@@ -3294,7 +3294,7 @@ void AstroCalcDialog::generateSolarEclipses()
 						}
 						else
 						{
-							magStr = QString("%1").arg(QString::number(dRatio, 'f', 3));
+							magStr = QString::number(dRatio, 'f', 3);
 							eclipseAltitude = altitude;
 							altitudeStr = QString("%1°").arg(QString::number(round(eclipseAltitude)));
 							pathWidthStr = QString("%1 %2").arg(QString::number(round(pathWidth)), km);
@@ -3466,7 +3466,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 						magLocal = eclipseData.magnitude;
 						altitudeMideclipse = eclipseData.altitude;
 					}
-					magStr = QString("%1").arg(QString::number(magLocal, 'f', 3));
+					magStr = QString::number(magLocal, 'f', 3);
 
 					if (magLocal > 0.) // Eclipse occurs for transparent Earth, need to check altitude of the Sun at each contacts
 					{
@@ -3526,7 +3526,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 									JD1 = JD; // time of first contact at Sunrise
 									JDmax = JD; // time of maximum eclipse
 									magLocal = eclipseData.magnitude;
-									magStr = QString("%1").arg(QString::number(eclipseData.magnitude, 'f', 3));
+									magStr = QString::number(eclipseData.magnitude, 'f', 3);
 								}
 							}
 
@@ -3551,7 +3551,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 										JD4 = JD; // time of last contact at Sunset
 										JDmax = JD; // time of maximum eclipse
 										magLocal = eclipseData.magnitude;
-										magStr = QString("%1").arg(QString::number(eclipseData.magnitude, 'f', 3));
+										magStr = QString::number(eclipseData.magnitude, 'f', 3);
 									}
 							}
 
@@ -3627,28 +3627,28 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 								}
 
 								ACSolarEclipseLocalTreeWidgetItem* treeItem = new ACSolarEclipseLocalTreeWidgetItem(ui->solareclipselocalTreeWidget);
-								treeItem->setText(SolarEclipseLocalDate, QString("%1").arg(localeMgr->getPrintableDateLocal(JDmax, core->getUTCOffset(JDmax)))); // local date
+								treeItem->setText(SolarEclipseLocalDate, localeMgr->getPrintableDateLocal(JDmax, core->getUTCOffset(JDmax))); // local date
 								treeItem->setData(SolarEclipseLocalDate, Qt::UserRole, JDmax);
 								treeItem->setText(SolarEclipseLocalType, eclipseTypeStr);
-								treeItem->setText(SolarEclipseLocalFirstContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD1, core->getUTCOffset(JD1))));
+								treeItem->setText(SolarEclipseLocalFirstContact, localeMgr->getPrintableTimeLocal(JD1, core->getUTCOffset(JD1)));
 								if (centraleclipse && JD2<JD1) // central eclipse  in progress at Sunrise
 									treeItem->setText(SolarEclipseLocalFirstContact, dash);
 								treeItem->setToolTip(SolarEclipseLocalFirstContact, q_("The time of first contact"));
 
 								if (centraleclipse)
-									treeItem->setText(SolarEclipseLocal2ndContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD2, core->getUTCOffset(JD2))));
+									treeItem->setText(SolarEclipseLocal2ndContact, localeMgr->getPrintableTimeLocal(JD2, core->getUTCOffset(JD2)));
 								else
 									treeItem->setText(SolarEclipseLocal2ndContact, dash);
 								treeItem->setToolTip(SolarEclipseLocal2ndContact, q_("The time of second contact"));
-								treeItem->setText(SolarEclipseLocalMaximum, QString("%1").arg(localeMgr->getPrintableTimeLocal(JDmax, core->getUTCOffset(JDmax))));
+								treeItem->setText(SolarEclipseLocalMaximum, localeMgr->getPrintableTimeLocal(JDmax, core->getUTCOffset(JDmax)));
 								treeItem->setToolTip(SolarEclipseLocalMaximum, q_("The time of greatest eclipse"));
 								treeItem->setText(SolarEclipseLocalMagnitude, magStr);
 								if (centraleclipse)
-									treeItem->setText(SolarEclipseLocal3rdContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD3, core->getUTCOffset(JD3))));
+									treeItem->setText(SolarEclipseLocal3rdContact, localeMgr->getPrintableTimeLocal(JD3, core->getUTCOffset(JD3)));
 								else
 									treeItem->setText(SolarEclipseLocal3rdContact, dash);
 								treeItem->setToolTip(SolarEclipseLocal3rdContact, q_("The time of third contact"));
-								treeItem->setText(SolarEclipseLocalLastContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD4, core->getUTCOffset(JD4))));
+								treeItem->setText(SolarEclipseLocalLastContact, localeMgr->getPrintableTimeLocal(JD4, core->getUTCOffset(JD4)));
 								if (centraleclipse && JD3>JD4) // central eclipse in progress at Sunset
 									treeItem->setText(SolarEclipseLocalLastContact, dash);
 								treeItem->setToolTip(SolarEclipseLocalLastContact, q_("The time of fourth contact"));
@@ -4532,7 +4532,7 @@ void AstroCalcDialog::generateTransits()
 #endif
 								}
 							else
-								treeItem->setText(TransitContact1, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD1, core->getUTCOffset(JD1))));
+								treeItem->setText(TransitContact1, localeMgr->getPrintableTimeLocal(JD1, core->getUTCOffset(JD1)));
 						}
 						else
 							treeItem->setText(TransitContact1, dash);
@@ -4550,7 +4550,7 @@ void AstroCalcDialog::generateTransits()
 #endif
 						}
 						else
-							treeItem->setText(TransitContact2, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD2, core->getUTCOffset(JD2))));
+							treeItem->setText(TransitContact2, localeMgr->getPrintableTimeLocal(JD2, core->getUTCOffset(JD2)));
 						treeItem->setData(TransitContact2, Qt::UserRole, StelUtils::getHoursFromJulianDay(JD2 + shift));
 						treeItem->setToolTip(TransitContact2, q_("The time of second contact, the entire disk of the planet is internally tangent to the Sun"));
 						if (transitMagnitude > 0.)
@@ -4565,7 +4565,7 @@ void AstroCalcDialog::generateTransits()
 #endif
 								}
 							else
-								treeItem->setText(TransitMid, QString("%1").arg(localeMgr->getPrintableTimeLocal(JDMid, utcOffsetHrs)));
+								treeItem->setText(TransitMid, localeMgr->getPrintableTimeLocal(JDMid, utcOffsetHrs));
 						}
 						else
 							treeItem->setText(TransitMid, dash);
@@ -4600,7 +4600,7 @@ void AstroCalcDialog::generateTransits()
 #endif
 						}
 						else
-							treeItem->setText(TransitContact3, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD3, core->getUTCOffset(JD3))));
+							treeItem->setText(TransitContact3, localeMgr->getPrintableTimeLocal(JD3, core->getUTCOffset(JD3)));
 						treeItem->setData(TransitContact3, Qt::UserRole, StelUtils::getHoursFromJulianDay(JD3 + shift));
 						treeItem->setToolTip(TransitContact3, q_("The time of third contact, the planet reaches the opposite limb and is once again internally tangent to the Sun"));
 						if (transitMagnitude > 0.)
@@ -4615,7 +4615,7 @@ void AstroCalcDialog::generateTransits()
 #endif
 							}
 							else
-								treeItem->setText(TransitContact4, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD4, core->getUTCOffset(JD4))));
+								treeItem->setText(TransitContact4, localeMgr->getPrintableTimeLocal(JD4, core->getUTCOffset(JD4)));
 						}
 						else
 							treeItem->setText(TransitContact4, dash);
@@ -5859,11 +5859,11 @@ void AstroCalcDialog::calculatePhenomena()
 	Q_ASSERT(star.isEmpty());
 	Q_ASSERT(doubleStar.isEmpty());
 	Q_ASSERT(variableStar.isEmpty());
-	QVector<StelObjectP> hipStars = starMgr->getHipparcosStars().toVector();
-	QVector<StelObjectP> carbonStars = starMgr->getHipparcosCarbonStars().toVector();
-	QVector<StelObjectP> bariumStars = starMgr->getHipparcosBariumStars().toVector();
-	QVector<StelACStarData> doubleHipStars = starMgr->getHipparcosDoubleStars().toVector();
-	QVector<StelACStarData> variableHipStars = starMgr->getHipparcosVariableStars().toVector();
+	const QVector<StelObjectP> hipStars = starMgr->getHipparcosStars().toVector();
+	const QVector<StelObjectP> carbonStars = starMgr->getHipparcosCarbonStars().toVector();
+	const QVector<StelObjectP> bariumStars = starMgr->getHipparcosBariumStars().toVector();
+	const QVector<StelACStarData> doubleHipStars = starMgr->getHipparcosDoubleStars().toVector();
+	const QVector<StelACStarData> variableHipStars = starMgr->getHipparcosVariableStars().toVector();
 
 	int obj2Type = ui->object2ComboBox->currentData().toInt();
 	switch (obj2Type)
