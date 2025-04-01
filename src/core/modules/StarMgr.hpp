@@ -574,10 +574,16 @@ private:
 	static QMap<QString, StarId> commonNamesIndexI18n;
 	static QMap<QString, StarId> commonNamesIndex;    // back-references upper-case names
 
-	static QHash<StarId, QString> additionalNamesMap; // additional names
+	static QHash<StarId, QString> additionalNamesMap; // additional names. These will be replaced by the CulturalNames
 	static QHash<StarId, QString> additionalNamesMapI18n;
 	static QMap<QString, StarId> additionalNamesIndex;
 	static QMap<QString, StarId> additionalNamesIndexI18n;
+
+	// Cultural names: We must store all data here, and have even 4 indices to native names&spelling, pronunciation, english and user-language spelling
+	static QHash<StarId, QList<StelObject::CulturalName>> culturalNamesMap; // cultural names
+	static QMap<QString, QList<StarId>>  culturalNativeNamesIndex; // reverse mappings. For names, unfortunately multiple results are possible!
+	static QMap<QString, QList<StarId>>  culturalPronounceIndex;
+	static QMap<QString, QList<StarId>>  culturalPronounceI18nIndex;
 
 	static QHash<StarId, QString> sciDesignationsMapI18n;
 	static QMap<QString, StarId> sciDesignationsIndexI18n;
