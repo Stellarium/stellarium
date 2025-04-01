@@ -26,6 +26,7 @@
 #include "StelFader.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
+#include "StelObject.hpp"
 
 class StelObject;
 class StelToneReproducer;
@@ -69,7 +70,7 @@ typedef struct
 	int hr;                 //!< HR Harvard Revised Photometry Catalogue, now Yale Bright Star Catalogue
 } crossid;
 
-typedef QMap<StelObjectP, float> StelACStarData;
+typedef QPair<StelObjectP, float> StelACStarData;
 typedef uint64_t StarId;
 
 typedef struct
@@ -444,11 +445,11 @@ public:
 
 	//! Get the list of all Hipparcos stars.
 	const QList<StelObjectP>& getHipparcosStars() const { return hipparcosStars; }	
-	const QList<QMap<StelObjectP, float>>& getHipparcosHighPMStars() const { return hipStarsHighPM; }
-	const QList<QMap<StelObjectP, float>>& getHipparcosDoubleStars() const { return doubleHipStars; }	
-	const QList<QMap<StelObjectP, float>>& getHipparcosVariableStars() const { return variableHipStars; }
-	const QList<QMap<StelObjectP, float>>& getHipparcosAlgolTypeStars() const { return algolTypeStars; }
-	const QList<QMap<StelObjectP, float>>& getHipparcosClassicalCepheidsTypeStars() const { return classicalCepheidsTypeStars; }
+	const QList<QPair<StelObjectP, float>>& getHipparcosHighPMStars() const { return hipStarsHighPM; }
+	const QList<QPair<StelObjectP, float>>& getHipparcosDoubleStars() const { return doubleHipStars; }
+	const QList<QPair<StelObjectP, float>>& getHipparcosVariableStars() const { return variableHipStars; }
+	const QList<QPair<StelObjectP, float>>& getHipparcosAlgolTypeStars() const { return algolTypeStars; }
+	const QList<QPair<StelObjectP, float>>& getHipparcosClassicalCepheidsTypeStars() const { return classicalCepheidsTypeStars; }
 	const QList<StelObjectP>& getHipparcosCarbonStars() const { return carbonStars; }
 	const QList<StelObjectP>& getHipparcosBariumStars() const { return bariumStars; }
 
@@ -483,7 +484,7 @@ private:
 	struct CommonNames
 	{
 		QHash<int, QString> byHIP;
-		QMap<QString, int> hipByName;
+		QMap<QString, int> hipByName; // Reverse mapping of uppercased name to HIP number
 	};
 	//! Loads common names for stars from a file. (typical: skycultures/common_star_names.fab)
 	//! Called when the SkyCulture is updated.
@@ -571,7 +572,7 @@ private:
 	static QHash<StarId, QString> commonNamesMap;     // the original names from skyculture (star_names.fab)
 	static QHash<StarId, QString> commonNamesMapI18n; // translated names
 	static QMap<QString, StarId> commonNamesIndexI18n;
-	static QMap<QString, StarId> commonNamesIndex;
+	static QMap<QString, StarId> commonNamesIndex;    // back-references upper-case names
 
 	static QHash<StarId, QString> additionalNamesMap; // additional names
 	static QHash<StarId, QString> additionalNamesMapI18n;

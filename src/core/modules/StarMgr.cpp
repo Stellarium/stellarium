@@ -650,35 +650,23 @@ void StarMgr::populateHipparcosLists()
 
 			if (!getGcvsVariabilityType(s->getHip()).isEmpty())
 			{
-				QMap<StelObjectP, float> sa;
-				sa[so] = static_cast<float>(getGcvsPeriod(s->getHip()));
+				QPair<StelObjectP, float> sa(so, static_cast<float>(getGcvsPeriod(s->getHip())));
 				variableHipStars.push_back(sa);
 				
-				auto vartype = getGcvsVariabilityType(s->getHip());
+				QString vartype = getGcvsVariabilityType(s->getHip());
 				if (vartype.contains("EA"))
-				{
-					QMap<StelObjectP, float> sal;
-					sal[so] = sa[so];
-					algolTypeStars.push_back(sal);
-				}
-				if (vartype.contains("DCEP") && !vartype.contains("DCEPS"))
-				{
-					QMap<StelObjectP, float> sacc;
-					sacc[so] = sa[so];
-					classicalCepheidsTypeStars.push_back(sacc);
-				}
+					algolTypeStars.push_back(QPair<StelObjectP, float>(so, sa.second));
+				else if (vartype.contains("DCEP") && !vartype.contains("DCEPS"))
+					classicalCepheidsTypeStars.push_back(QPair<StelObjectP, float>(so, sa.second));
 			}
 			if (!getWdsName(s->getHip()).isEmpty())
 			{
-				QMap<StelObjectP, float> sd;
-				sd[so] = getWdsLastSeparation(s->getHip());
-				doubleHipStars.push_back(sd);
+				doubleHipStars.push_back(QPair<StelObjectP, float>(so, getWdsLastSeparation(s->getHip())));
 			}
 			float pm = s->getPMTotal();
 			if (qAbs(pm)>=pmLimit)
 			{
-				QMap<StelObjectP, float> spm;
-				spm[so] = pm / 1000.f;  // in arc-seconds per year
+				QPair<StelObjectP, float> spm(so, pm / 1000.f);  // in arc-seconds per year
 				hipStarsHighPM.push_back(spm);
 			}
 		}
@@ -1108,7 +1096,10 @@ void StarMgr::loadWds(const QString& WdsFile)
 
 		// Don't set the star if it's already set
 		if (wdsStarsMapI18n.contains(hip))
+		{
+			qWarning() << "HIP" << hip << "already processed. Ignoring record:" << record;
 			continue;
+		}
 
 		wds doubleStar;
 
@@ -2365,11 +2356,11 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 	{
 		for (const auto& star : std::as_const(starsT2))
 		{
-			starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
+			starName = inEnglish ? star.first->getEnglishName() : star.first->getNameI18n();
 			if (!starName.isEmpty())
 				result << starName;
 			else
-				result << star.firstKey()->getID();
+				result << star.first->getID();
 		}
 	}
 
