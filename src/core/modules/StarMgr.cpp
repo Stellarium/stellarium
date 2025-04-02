@@ -45,6 +45,7 @@
 #include "Planet.hpp"
 #include "StelUtils.hpp"
 #include "StelHealpix.hpp"
+#include "StelObject.hpp"
 
 #include <QGlobalStatic>
 #include <QTextStream>
@@ -76,29 +77,28 @@ bool StarMgr::flagDesignations = false;
 bool StarMgr::flagDblStarsDesignation = false;
 bool StarMgr::flagVarStarsDesignation = false;
 bool StarMgr::flagHIPDesignation = false;
+// Multi
 QHash<StarId,QString> StarMgr::commonNamesMap;
 QHash<StarId,QString> StarMgr::commonNamesMapI18n;
-QHash<StarId,QString> StarMgr::additionalNamesMap;
-QHash<StarId,QString> StarMgr::additionalNamesMapI18n;
 QMap<QString,StarId> StarMgr::commonNamesIndexI18n; // ATTN: Stores uppercase variant of nameI18n, BUT WHY?
 QMap<QString,StarId> StarMgr::commonNamesIndex;
-QMap<QString,StarId> StarMgr::additionalNamesIndex;     // ATTN: some names are not unique! map target type may need to become QList<StarId>
-QMap<QString,StarId> StarMgr::additionalNamesIndexI18n; // ATTN: Stores uppercase variant of additionalNameI18n, BUT WHY? Also, some names are not unique! map target type may need to be QList<StarId>
+//QHash<StarId,QString> StarMgr::additionalNamesMap;
+//QHash<StarId,QString> StarMgr::additionalNamesMapI18n;
+//QMap<QString,StarId> StarMgr::additionalNamesIndex;     // ATTN: some names are not unique! map target type may need to become QList<StarId>
+//QMap<QString,StarId> StarMgr::additionalNamesIndexI18n; // ATTN: Stores uppercase variant of additionalNameI18n, BUT WHY? Also, some names are not unique! map target type may need to be QList<StarId>
 
 // Cultural names: We must store all data here, and have even 4 indices to native names&spelling, pronunciation, english and user-language spelling
-QHash<StarId, QList<StelObject::CulturalName>> StarMgr::culturalNamesMap; // cultural names
-QMap<QString, QList<StarId>> StarMgr::culturalNativeNamesIndex; // reverse mappings. For names, unfortunately multiple results are possible!
-QMap<QString, QList<StarId>> StarMgr::culturalPronounceIndex;
-QMap<QString, QList<StarId>> StarMgr::culturalPronounceI18nIndex;
+QMultiHash<StarId, StelObject::CulturalName> StarMgr::culturalNamesMap; // cultural names
+QMultiMap<QString, StarId> StarMgr::culturalNamesIndex; // reverse mappings. For names, unfortunately multiple results are possible!
 
-QHash<StarId,QString> StarMgr::sciDesignationsMapI18n;
-QMap<QString,StarId> StarMgr::sciDesignationsIndexI18n;
-QHash<StarId,QString> StarMgr::sciExtraDesignationsMapI18n; // TODO: Convert map target to QStringList?
-QMap<QString,StarId> StarMgr::sciExtraDesignationsIndexI18n;
-QHash<StarId, varstar> StarMgr::varStarsMapI18n;
-QMap<QString, StarId> StarMgr::varStarsIndexI18n;
-QHash<StarId, wds> StarMgr::wdsStarsMapI18n;
-QMap<QString, StarId> StarMgr::wdsStarsIndexI18n;
+QHash<StarId,QString> StarMgr::sciDesignationsMap;      // Bayer/Flamsteed. TODO: Convert map target to QStringList?
+QMap<QString,StarId> StarMgr::sciDesignationsIndex;
+QHash<StarId,QString> StarMgr::sciExtraDesignationsMap; // Other sci designations. TODO: Convert map target to QStringList?
+QMap<QString,StarId> StarMgr::sciExtraDesignationsIndex;
+QHash<StarId, varstar> StarMgr::varStarsMap;
+QMap<QString, StarId> StarMgr::varStarsIndex;
+QHash<StarId, wds> StarMgr::wdsStarsMap;
+QMap<QString, StarId> StarMgr::wdsStarsIndex;
 QMap<QString, crossid> StarMgr::crossIdMap;
 QHash<int, StarId> StarMgr::saoStarsIndex;
 QHash<int, StarId> StarMgr::hdStarsIndex;
@@ -205,14 +205,28 @@ QString StarMgr::getCommonName(StarId hip)
 	return commonNamesMapI18n.value(hip, QString());
 }
 
-QString StarMgr::getAdditionalNames(StarId hip)
-{
-	return additionalNamesMapI18n.value(hip, QString());
-}
+//QString StarMgr::getAdditionalNames(StarId hip)
+//{
+//	return additionalNamesMapI18n.value(hip, QString());
+//}
+//
+//QString StarMgr::getAdditionalEnglishNames(StarId hip)
+//{
+//	return additionalNamesMap.value(hip, QString());
+//}
 
-QString StarMgr::getAdditionalEnglishNames(StarId hip)
+// Get the cultural names for a star with a specified
+// Hipparcos or Gaia catalogue number.
+// @param hip The Hipparcos/Gaia number of star
+// @return cultural names of star
+QList<StelObject::CulturalName> StarMgr::getCulturalNames(StarId hip)
 {
-	return additionalNamesMap.value(hip, QString());
+	// As returned, the latest added comes first!
+	// Our SC JSONs are typically human generated, with most common first, so reverse the results.
+
+	QList<StelObject::CulturalName>cNames=culturalNamesMap.values(hip);
+	std::reverse(cNames.begin(), cNames.end());
+	return cNames;
 }
 
 QString StarMgr::getCommonEnglishName(StarId hip)
@@ -222,12 +236,12 @@ QString StarMgr::getCommonEnglishName(StarId hip)
 
 QString StarMgr::getSciName(StarId hip)
 {
-	return sciDesignationsMapI18n.value(hip, QString());
+	return sciDesignationsMap.value(hip, QString());
 }
 
 QString StarMgr::getSciExtraName(StarId hip)
 {
-	return sciExtraDesignationsMapI18n.value(hip, QString());
+	return sciExtraDesignationsMap.value(hip, QString());
 }
 
 QString StarMgr::getCrossIdentificationDesignations(const QString &hip)
@@ -256,50 +270,50 @@ QString StarMgr::getCrossIdentificationDesignations(const QString &hip)
 
 QString StarMgr::getWdsName(StarId hip)
 {
-	return (wdsStarsMapI18n.contains(hip) ? QString("WDS J%1").arg(wdsStarsMapI18n.value(hip).designation) : QString());
+	return (wdsStarsMap.contains(hip) ? QString("WDS J%1").arg(wdsStarsMap.value(hip).designation) : QString());
 }
 
 int StarMgr::getWdsLastObservation(StarId hip)
 {
-	return (wdsStarsMapI18n.contains(hip) ? wdsStarsMapI18n.value(hip).observation : 0);
+	return (wdsStarsMap.contains(hip) ? wdsStarsMap.value(hip).observation : 0);
 }
 
 float StarMgr::getWdsLastPositionAngle(StarId hip)
 {
-	return (wdsStarsMapI18n.contains(hip) ? wdsStarsMapI18n.value(hip).positionAngle : 0);
+	return (wdsStarsMap.contains(hip) ? wdsStarsMap.value(hip).positionAngle : 0);
 }
 
 float StarMgr::getWdsLastSeparation(StarId hip)
 {
-	return (wdsStarsMapI18n.contains(hip) ? wdsStarsMapI18n.value(hip).separation : 0);
+	return (wdsStarsMap.contains(hip) ? wdsStarsMap.value(hip).separation : 0);
 }
 
 QString StarMgr::getGcvsName(StarId hip)
 {
-	return (varStarsMapI18n.contains(hip) ? varStarsMapI18n.value(hip).designation : QString());
+	return (varStarsMap.contains(hip) ? varStarsMap.value(hip).designation : QString());
 }
 
 QString StarMgr::getGcvsVariabilityType(StarId hip)
 {
-	return (varStarsMapI18n.contains(hip) ? varStarsMapI18n.value(hip).vtype : QString());
+	return (varStarsMap.contains(hip) ? varStarsMap.value(hip).vtype : QString());
 }
 
 float StarMgr::getGcvsMaxMagnitude(StarId hip)
 {
-	return (varStarsMapI18n.contains(hip) ? varStarsMapI18n.value(hip).maxmag : -99.f);
+	return (varStarsMap.contains(hip) ? varStarsMap.value(hip).maxmag : -99.f);
 }
 
 int StarMgr::getGcvsMagnitudeFlag(StarId hip)
 {
-	return (varStarsMapI18n.contains(hip) ? varStarsMapI18n.value(hip).mflag : 0);
+	return (varStarsMap.contains(hip) ? varStarsMap.value(hip).mflag : 0);
 }
 
 
 float StarMgr::getGcvsMinMagnitude(StarId hip, bool firstMinimumFlag)
 {
-	if (varStarsMapI18n.contains(hip))
+	if (varStarsMap.contains(hip))
 	{
-		varstar var=varStarsMapI18n.value(hip);
+		varstar var=varStarsMap.value(hip);
 		return (firstMinimumFlag ? var.min1mag : var.min2mag);
 	}
 	return -99.f;
@@ -307,27 +321,27 @@ float StarMgr::getGcvsMinMagnitude(StarId hip, bool firstMinimumFlag)
 
 QString StarMgr::getGcvsPhotometricSystem(StarId hip)
 {
-	return (varStarsMapI18n.contains(hip) ? varStarsMapI18n.value(hip).photosys : QString());
+	return (varStarsMap.contains(hip) ? varStarsMap.value(hip).photosys : QString());
 }
 
 double StarMgr::getGcvsEpoch(StarId hip)
 {
-	return (varStarsMapI18n.contains(hip) ? varStarsMapI18n.value(hip).epoch : -99.);
+	return (varStarsMap.contains(hip) ? varStarsMap.value(hip).epoch : -99.);
 }
 
 double StarMgr::getGcvsPeriod(StarId hip)
 {
-	return (varStarsMapI18n.contains(hip) ? varStarsMapI18n.value(hip).period : -99.);
+	return (varStarsMap.contains(hip) ? varStarsMap.value(hip).period : -99.);
 }
 
 int StarMgr::getGcvsMM(StarId hip)
 {
-	return (varStarsMapI18n.contains(hip) ? varStarsMapI18n.value(hip).Mm : -99);
+	return (varStarsMap.contains(hip) ? varStarsMap.value(hip).Mm : -99);
 }
 
 QString StarMgr::getGcvsSpectralType(StarId hip)
 {
-	return (varStarsMapI18n.contains(hip) ? varStarsMapI18n.value(hip).stype : QString());
+	return (varStarsMap.contains(hip) ? varStarsMap.value(hip).stype : QString());
 }
 
 binaryorbitstar StarMgr::getBinaryOrbitData(StarId hip)
@@ -778,7 +792,7 @@ auto StarMgr::loadCommonNames(const QString& commonNameFile) const -> CommonName
 }
 
 // Identify a star HIP/Gaia StarId from its common name and the commonnames list.
-// @param data the array assigned to the "NAME commonName" entry of the current skyculture's index.json
+// @param data the JSON array assigned to the "NAME commonName" entry of the current skyculture's index.json
 // @param commonName the name given in the common_names entry in the current skyculture's index.json
 // @param commonNamesIndexToSearchWhileLoading the part of CommonNames that provides HIPO for a given name.
 void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName,
@@ -794,70 +808,101 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 
 	for (const QJsonValue& entry : data)
 	{
-		for (const char*const nameType : {"english", "native"})
-		{
-			const QString specificName = entry.toObject().value(nameType).toString();
-			if (specificName.isEmpty())
-				continue;
+		//for (const char*const nameType : {"english", "native"})
+		//{
+		//	const QString specificName = entry.toObject().value(nameType).toString();
+		//	if (specificName.isEmpty())
+		//		continue;
 
-			const QString specificNameUpper = specificName.toUpper();
-			if (additionalNamesMap.contains(HIP))
-			{
-				const QString newName = additionalNamesMap[HIP].append(" - " + specificName);
-				additionalNamesMap[HIP] = newName;
-				additionalNamesMapI18n[HIP] = newName;
-				additionalNamesIndex[specificNameUpper] = HIP;
-				additionalNamesIndexI18n[specificNameUpper] = HIP;
-			}
-			else
-			{
-				additionalNamesMap[HIP] = specificName;
-				additionalNamesMapI18n[HIP] = specificName;
-				additionalNamesIndex[specificNameUpper] = HIP;
-				additionalNamesIndexI18n[specificNameUpper] = HIP;
-			}
-		}
+		//	const QString specificNameUpper = specificName.toUpper();
+		//	if (additionalNamesMap.contains(HIP))
+		//	{
+		//		const QString newName = additionalNamesMap[HIP].append(" - " + specificName);
+		//		additionalNamesMap[HIP] = newName;
+		//		additionalNamesMapI18n[HIP] = newName;
+		//		additionalNamesIndex[specificNameUpper] = HIP;
+		//		additionalNamesIndexI18n[specificNameUpper] = HIP;
+		//	}
+		//	else
+		//	{
+		//		additionalNamesMap[HIP] = specificName;
+		//		additionalNamesMapI18n[HIP] = specificName;
+		//		additionalNamesIndex[specificNameUpper] = HIP;
+		//		additionalNamesIndexI18n[specificNameUpper] = HIP;
+		//	}
+		//}
+		StelObject::CulturalName cName{entry["native"].toString(), entry["pronounce"].toString(), q_(entry["pronounce"].toString()),
+					entry["transliteration"].toString(), entry["english"].toString(), q_(entry["english"].toString()), entry["IPA"].toString()};
+
+		if (culturalNamesMap.contains(HIP))
+			qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated;
+		culturalNamesMap.insert(HIP, cName); // add as possibly multiple entry to HIP.
+		if (!cName.native.isEmpty())
+			culturalNamesIndex.insert(cName.native.toUpper(), HIP);
+		if (!cName.pronounceI18n.isEmpty())
+			culturalNamesIndex.insert(cName.pronounceI18n.toUpper(), HIP);
+		if (!cName.transliteration.isEmpty())
+			culturalNamesIndex.insert(cName.transliteration.toUpper(), HIP);
+		if (!cName.translatedI18n.isEmpty())
+			culturalNamesIndex.insert(cName.translatedI18n.toUpper(), HIP);
 	}
 }
 
 void StarMgr::loadCultureSpecificNameForStar(const QJsonArray& data, const StarId HIP)
 {
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+
 	for (const QJsonValue& entry : data)
 	{
-		for (const char*const nameType : {"english", "native"})
-		{
-			const QString specificName = entry.toObject().value(nameType).toString();
-			if (specificName.isEmpty())
-				continue;
+		//for (const char*const nameType : {"english", "native"})
+		//{
+		//	const QString specificName = entry.toObject().value(nameType).toString();
+		//	if (specificName.isEmpty())
+		//		continue;
 
-			const QString englishNameCap = specificName.toUpper();
-			if (commonNamesMap.contains(HIP))
-			{
-				if (additionalNamesMap.contains(HIP))
-				{
-					const QString newName = additionalNamesMap[HIP].append(" - " + specificName);
-					additionalNamesMap[HIP] = newName;
-					additionalNamesMapI18n[HIP] = newName;
-					additionalNamesIndex[englishNameCap] = HIP;
-					additionalNamesIndexI18n[englishNameCap] = HIP;
-				}
-				else
-				{
-					additionalNamesMap[HIP] = specificName;
-					additionalNamesMapI18n[HIP] = specificName;
-					additionalNamesIndex[englishNameCap] = HIP;
-					additionalNamesIndexI18n[englishNameCap] = HIP;
-				}
-			}
-			else
-			{
-				commonNamesMap[HIP] = specificName;
-				commonNamesMapI18n[HIP] = specificName;
-				commonNamesIndexI18n[englishNameCap] = HIP;
-				commonNamesIndex[englishNameCap] = HIP;
-			}
-		}
+		//	const QString englishNameCap = specificName.toUpper();
+		//	if (commonNamesMap.contains(HIP))
+		//	{
+		//		if (additionalNamesMap.contains(HIP))
+		//		{
+		//			const QString newName = additionalNamesMap[HIP].append(" - " + specificName);
+		//			additionalNamesMap[HIP] = newName;
+		//			additionalNamesMapI18n[HIP] = newName;
+		//			additionalNamesIndex[englishNameCap] = HIP;
+		//			additionalNamesIndexI18n[englishNameCap] = HIP;
+		//		}
+		//		else
+		//		{
+		//			additionalNamesMap[HIP] = specificName;
+		//			additionalNamesMapI18n[HIP] = specificName;
+		//			additionalNamesIndex[englishNameCap] = HIP;
+		//			additionalNamesIndexI18n[englishNameCap] = HIP;
+		//		}
+		//	}
+		//	else
+		//	{
+		//		commonNamesMap[HIP] = specificName;
+		//		commonNamesMapI18n[HIP] = specificName;
+		//		commonNamesIndexI18n[englishNameCap] = HIP;
+		//		commonNamesIndex[englishNameCap] = HIP;
+		//	}
+		//}
+
+		StelObject::CulturalName cName{entry["native"].toString(), entry["pronounce"].toString(), trans.qTranslateStar(entry["pronounce"].toString()),
+					entry["transliteration"].toString(), entry["english"].toString(), trans.qTranslateStar(entry["english"].toString()), entry["IPA"].toString()};
+		if (culturalNamesMap.contains(HIP))
+			qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated << "/" << cName.translatedI18n;
+		culturalNamesMap.insert(HIP, cName); // add as possibly multiple entry to HIP.
+		if (!cName.native.isEmpty())
+			culturalNamesIndex.insert(cName.native.toUpper(), HIP);
+		if (!cName.pronounceI18n.isEmpty())
+			culturalNamesIndex.insert(cName.pronounceI18n.toUpper(), HIP);
+		if (!cName.transliteration.isEmpty())
+			culturalNamesIndex.insert(cName.transliteration.toUpper(), HIP);
+		if (!cName.translatedI18n.isEmpty())
+			culturalNamesIndex.insert(cName.translatedI18n.toUpper(), HIP);
 	}
+	qInfo() << "Skyculture has " << culturalNamesMap.size() << "entries, index has" << culturalNamesIndex.size();
 }
 
 void StarMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QString, int>& commonNamesIndexToSearchWhileLoading)
@@ -886,14 +931,14 @@ void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
 {
 	if (extraData)
 	{
-		sciExtraDesignationsMapI18n.clear();
-		sciExtraDesignationsIndexI18n.clear();
+		sciExtraDesignationsMap.clear();
+		sciExtraDesignationsIndex.clear();
 		qInfo().noquote() << "Loading scientific star extra names from" << QDir::toNativeSeparators(sciNameFile);
 	}
 	else
 	{
-		sciDesignationsMapI18n.clear();
-		sciDesignationsIndexI18n.clear();
+		sciDesignationsMap.clear();
+		sciDesignationsIndex.clear();
 		qInfo().noquote() << "Loading scientific star names from" << QDir::toNativeSeparators(sciNameFile);
 	}
 
@@ -924,7 +969,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
 		if (fields.size()!=2)
 		{
 			qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(sciNameFile)
-					     << " - record does not match record pattern";
+					     << " - record does not match record pattern. Skipping line.";
 			continue;
 		}
 		else
@@ -951,24 +996,26 @@ void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
 			if (extraData)
 			{
 				// Don't set the main sci name if it's already set - it's additional sci name
-				if (sciExtraDesignationsMapI18n.contains(hip))
+				if (sciExtraDesignationsMap.contains(hip))
 				{
-					sciExtraDesignationsMapI18n[hip].append(" - " + sci_name);
+					sciExtraDesignationsMap[hip].append(" - " + sci_name);
 				}
 				else
-					sciExtraDesignationsMapI18n.insert(hip, sci_name);
-				sciExtraDesignationsIndexI18n[sci_name] = hip;
+					sciExtraDesignationsMap.insert(hip, sci_name);
+				sciExtraDesignationsIndex[sci_name] = hip;
 			}
 			else
 			{
+				// The file is expected to contain Bayer/Flamsteed designations only. With multiple components, we still need stringlists...
 				// Don't set the main sci name if it's already set - it's additional sci name
-				if (sciDesignationsMapI18n.contains(hip))
+				if (sciDesignationsMap.contains(hip))
 				{
-					sciDesignationsMapI18n[hip].append(" - " + sci_name);
+					//qInfo() << "Unexpected additional Bayer/Flamsteed designation for " << hip << "=" << sciDesignationsMapI18n.value(hip) << ":" << sci_name;
+					sciDesignationsMap[hip].append(" - " + sci_name);
 				}
 				else
-					sciDesignationsMapI18n.insert(hip, sci_name);
-				sciDesignationsIndexI18n[sci_name] = hip;
+					sciDesignationsMap.insert(hip, sci_name);
+				sciDesignationsIndex[sci_name] = hip;
 			}
 			++readOk;
 		}
@@ -983,8 +1030,8 @@ void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
 // Load GCVS from file
 void StarMgr::loadGcvs(const QString& GcvsFile)
 {
-	varStarsMapI18n.clear();
-	varStarsIndexI18n.clear();
+	varStarsMap.clear();
+	varStarsIndex.clear();
 
 	qInfo().noquote() << "Loading variable stars data from" << QDir::toNativeSeparators(GcvsFile);
 
@@ -1036,7 +1083,7 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 			continue;
 
 		// Don't set the star if it's already set
-		if (varStarsMapI18n.contains(hip))
+		if (varStarsMap.contains(hip))
 			continue;
 
 		varstar variableStar;
@@ -1053,8 +1100,8 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 		variableStar.Mm = fields.at(10).toInt();
 		variableStar.stype = fields.at(11).trimmed();
 
-		varStarsMapI18n[hip] = variableStar;
-		varStarsIndexI18n[variableStar.designation.toUpper()] = hip;
+		varStarsMap[hip] = variableStar;
+		varStarsIndex[variableStar.designation.toUpper()] = hip;
 		++readOk;
 	}
 
@@ -1065,8 +1112,8 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 // Load WDS from file
 void StarMgr::loadWds(const QString& WdsFile)
 {
-	wdsStarsMapI18n.clear();
-	wdsStarsIndexI18n.clear();
+	wdsStarsMap.clear();
+	wdsStarsIndex.clear();
 
 	qInfo().noquote() << "Loading double stars from" << QDir::toNativeSeparators(WdsFile);
 	QFile dsFile(WdsFile);
@@ -1103,7 +1150,7 @@ void StarMgr::loadWds(const QString& WdsFile)
 		}
 
 		// Don't set the star if it's already set
-		if (wdsStarsMapI18n.contains(hip))
+		if (wdsStarsMap.contains(hip))
 		{
 			qWarning() << "HIP" << hip << "already processed. Ignoring record:" << record;
 			continue;
@@ -1116,8 +1163,8 @@ void StarMgr::loadWds(const QString& WdsFile)
 		doubleStar.positionAngle = fields.at(3).toFloat();
 		doubleStar.separation = fields.at(4).toFloat();
 
-		wdsStarsMapI18n[hip] = doubleStar;
-		wdsStarsIndexI18n[QString("WDS J%1").arg(doubleStar.designation.toUpper())] = hip;
+		wdsStarsMap[hip] = doubleStar;
+		wdsStarsIndex[QString("WDS J%1").arg(doubleStar.designation.toUpper())] = hip;
 		++readOk;
 	}
 
@@ -1472,8 +1519,8 @@ void StarMgr::updateI18n()
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	commonNamesMapI18n.clear();
 	commonNamesIndexI18n.clear();
-	additionalNamesMapI18n.clear();
-	additionalNamesIndexI18n.clear();
+	//additionalNamesMapI18n.clear();
+	//additionalNamesIndexI18n.clear();
 	for (QHash<StarId,QString>::ConstIterator it(commonNamesMap.constBegin());it!=commonNamesMap.constEnd();it++)
 	{
 		const StarId i = it.key();
@@ -1481,19 +1528,38 @@ void StarMgr::updateI18n()
 		commonNamesMapI18n[i] = t;
 		commonNamesIndexI18n[t.toUpper()] = i;
 	}
-	for (QHash<StarId,QString>::ConstIterator ita(additionalNamesMap.constBegin());ita!=additionalNamesMap.constEnd();ita++)
+	//for (QHash<StarId,QString>::ConstIterator ita(additionalNamesMap.constBegin());ita!=additionalNamesMap.constEnd();ita++)
+	//{
+	//	const StarId i = ita.key();
+	//	const QStringList a = ita.value().split(" - ");
+	//	QStringList tn;
+	//	for (const auto& str : a)
+	//	{
+	//		QString tns = trans.qTranslateStar(str);
+	//		tn << tns;
+	//		additionalNamesIndexI18n[tns.toUpper()] = i;
+	//	}
+	//	const QString r = tn.join(" - ");
+	//	additionalNamesMapI18n[i] = r;
+	//}
+	culturalNamesIndex.clear();
+	for (QMultiHash<StarId,StelObject::CulturalName>::iterator it(culturalNamesMap.begin());it!=culturalNamesMap.end();it++)
 	{
-		const StarId i = ita.key();
-		const QStringList a = ita.value().split(" - ");
-		QStringList tn;
-		for (const auto& str : a)
-		{
-			QString tns = trans.qTranslateStar(str);
-			tn << tns;
-			additionalNamesIndexI18n[tns.toUpper()] = i;
-		}
-		const QString r = tn.join(" - ");
-		additionalNamesMapI18n[i] = r;
+		StarId HIP=it.key();
+		StelObject::CulturalName &cName=it.value();
+		cName.pronounceI18n=trans.qTranslateStar(cName.pronounce);
+		cName.translatedI18n=trans.qTranslateStar(cName.translated);
+		it.value() = cName;
+
+		// rebuild index
+		if (!cName.native.isEmpty())
+			culturalNamesIndex.insert(cName.native.toUpper(), HIP);
+		if (!cName.pronounceI18n.isEmpty())
+			culturalNamesIndex.insert(cName.pronounceI18n.toUpper(), HIP);
+		if (!cName.transliteration.isEmpty())
+			culturalNamesIndex.insert(cName.transliteration.toUpper(), HIP);
+		if (!cName.translatedI18n.isEmpty())
+			culturalNamesIndex.insert(cName.translatedI18n.toUpper(), HIP);
 	}
 }
 
@@ -1550,9 +1616,13 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	if (commonNamesIndexI18n.contains(nameI18nUpper))
 		return searchHP(commonNamesIndexI18n.value(nameI18nUpper));
 
-	// Search by I18n additional common names?
-	if (getFlagAdditionalNames() && additionalNamesIndexI18n.contains(nameI18nUpper))
-		return searchHP(additionalNamesIndexI18n.value(nameI18nUpper));
+	//// Search by I18n additional common names?
+	//if (getFlagAdditionalNames() && additionalNamesIndexI18n.contains(nameI18nUpper))
+	//	return searchHP(additionalNamesIndexI18n.value(nameI18nUpper));
+
+	// Search by cultural names? (Any names: native/pronounceI18n/translatedI18n/transliteration
+	if (getFlagAdditionalNames() && culturalNamesIndex.contains(nameI18nUpper))
+		return searchHP(culturalNamesIndex.value(nameI18nUpper)); // This only returns the first-found number.
 
 	return searchByName(nameI18n);
 }
@@ -1622,49 +1692,52 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 
 	if (getFlagAdditionalNames())
 	{
-		// Search by English additional common names
-		if (additionalNamesIndex.contains(nameUpper))
-		{
-			sid = additionalNamesIndex.value(nameUpper);
-			return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
-		}
+		//// Search by English additional common names
+		//if (additionalNamesIndex.contains(nameUpper))
+		//{
+		//	sid = additionalNamesIndex.value(nameUpper);
+		//	return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
+		//}
+
+		if (culturalNamesIndex.contains(nameUpper))
+			return searchHP(culturalNamesIndex.value(nameUpper)); // This only returns the first-found number.
 	}
 
 	// Search by scientific name
-	if (sciDesignationsIndexI18n.contains(name)) // case sensitive!
+	if (sciDesignationsIndex.contains(name)) // case sensitive!
 	{
-		sid = sciDesignationsIndexI18n.value(name);
+		sid = sciDesignationsIndex.value(name);
 		return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
 	}
-	if (sciDesignationsIndexI18n.contains(nameUpper)) // case insensitive!
+	if (sciDesignationsIndex.contains(nameUpper)) // case insensitive!
 	{
-		sid = sciDesignationsIndexI18n.value(nameUpper);
+		sid = sciDesignationsIndex.value(nameUpper);
 		return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
 	}
 
 	// Search by scientific name
-	if (sciExtraDesignationsIndexI18n.contains(name)) // case sensitive!
+	if (sciExtraDesignationsIndex.contains(name)) // case sensitive!
 	{
-		sid = sciExtraDesignationsIndexI18n.value(name);
+		sid = sciExtraDesignationsIndex.value(name);
 		return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
 	}
-	if (sciExtraDesignationsIndexI18n.contains(nameUpper)) // case insensitive!
+	if (sciExtraDesignationsIndex.contains(nameUpper)) // case insensitive!
 	{
-		sid = sciExtraDesignationsIndexI18n.value(nameUpper);
+		sid = sciExtraDesignationsIndex.value(nameUpper);
 		return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
 	}
 
 	// Search by GCVS name
-	if (varStarsIndexI18n.contains(nameUpper))
+	if (varStarsIndex.contains(nameUpper))
 	{
-		sid = varStarsIndexI18n.value(nameUpper);
+		sid = varStarsIndex.value(nameUpper);
 		return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
 	}
 
 	// Search by WDS name
-	if (wdsStarsIndexI18n.contains(nameUpper))
+	if (wdsStarsIndex.contains(nameUpper))
 	{
-		sid = wdsStarsIndexI18n.value(nameUpper);
+		sid = wdsStarsIndex.value(nameUpper);
 		return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
 	}
 
@@ -1729,51 +1802,72 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 
 	if (getFlagAdditionalNames())
 	{
-		QMapIterator<QString, StarId> k(additionalNamesIndexI18n);
-		while (k.hasNext())
+		//QMapIterator<QString, StarId> k(additionalNamesIndexI18n);
+		//while (k.hasNext())
+		//{
+		//	k.next();
+		//	QStringList names = getAdditionalNames(k.value()).split(" - ");
+		//	for (const auto &name : std::as_const(names))
+		//	{
+		//		if (useStartOfWords && name.startsWith(objPrefixUpper, Qt::CaseInsensitive))
+		//			found = true;
+		//		else if (!useStartOfWords && name.contains(objPrefixUpper, Qt::CaseInsensitive))
+		//			found = true;
+		//		else
+		//			found = false;
+
+		//		if (found)
+		//		{
+		//			if (maxNbItem<=0)
+		//				break;
+		//			result.append(name);
+		//			--maxNbItem;
+		//		}
+		//	}
+		//}
+
+		//QMapIterator<QString, StarId> l(additionalNamesIndex);
+		//while (l.hasNext())
+		//{
+		//	l.next();
+		//	QStringList names = getAdditionalEnglishNames(l.value()).split(" - ");
+		//	for (const auto &name : std::as_const(names))
+		//	{
+		//		if (useStartOfWords && name.startsWith(objPrefixUpper, Qt::CaseInsensitive))
+		//			found = true;
+		//		else if (!useStartOfWords && name.contains(objPrefixUpper, Qt::CaseInsensitive))
+		//			found = true;
+		//		else
+		//			found = false;
+
+		//		if (found)
+		//		{
+		//			if (maxNbItem<=0)
+		//				break;
+		//			result.append(name);
+		//			--maxNbItem;
+		//		}
+		//	}
+		//}
+
+		QMultiMapIterator<QString, StarId>it(culturalNamesIndex);
+		while (it.hasNext())
 		{
-			k.next();
-			QStringList names = getAdditionalNames(k.value()).split(" - ");
-			for (const auto &name : std::as_const(names))
+			it.next();
+			QString name=it.key();
+
+			if (useStartOfWords && name.startsWith(objPrefixUpper, Qt::CaseInsensitive))
+				found = true;
+			else if (!useStartOfWords && name.contains(objPrefixUpper, Qt::CaseInsensitive))
+				found = true;
+			else
+				found = false;
+			if (found)
 			{
-				if (useStartOfWords && name.startsWith(objPrefixUpper, Qt::CaseInsensitive))
-					found = true;
-				else if (!useStartOfWords && name.contains(objPrefixUpper, Qt::CaseInsensitive))
-					found = true;
-				else
-					found = false;
-
-				if (found)
-				{
-					if (maxNbItem<=0)
-						break;
-					result.append(name);
-					--maxNbItem;
-				}
-			}
-		}
-
-		QMapIterator<QString, StarId> l(additionalNamesIndex);
-		while (l.hasNext())
-		{
-			l.next();
-			QStringList names = getAdditionalEnglishNames(l.value()).split(" - ");
-			for (const auto &name : std::as_const(names))
-			{
-				if (useStartOfWords && name.startsWith(objPrefixUpper, Qt::CaseInsensitive))
-					found = true;
-				else if (!useStartOfWords && name.contains(objPrefixUpper, Qt::CaseInsensitive))
-					found = true;
-				else
-					found = false;
-
-				if (found)
-				{
-					if (maxNbItem<=0)
-						break;
-					result.append(name);
-					--maxNbItem;
-				}
+				if (maxNbItem<=0)
+					break;
+				result.append(name);
+				--maxNbItem;
 			}
 		}
 	}
@@ -1792,7 +1886,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	if (objPrefixUpper.at(0).unicode() >= 0x0391 && objPrefixUpper.at(0).unicode() <= 0x03A9)
 		bayerRegExCI.setPattern(bayerPatternCI.insert(1,"\\d?"));
 
-	for (auto it = sciDesignationsIndexI18n.lowerBound(objPrefix); it != sciDesignationsIndexI18n.end(); ++it)
+	for (auto it = sciDesignationsIndex.lowerBound(objPrefix); it != sciDesignationsIndex.end(); ++it)
 	{
 		if (it.key().indexOf(bayerRegEx)==0 || it.key().indexOf(objPrefix)==0)
 		{
@@ -1821,7 +1915,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			break;
 	}
 
-	for (auto it = sciDesignationsIndexI18n.lowerBound(objPrefixUpper); it != sciDesignationsIndexI18n.end(); ++it)
+	for (auto it = sciDesignationsIndex.lowerBound(objPrefixUpper); it != sciDesignationsIndex.end(); ++it)
 	{
 		if (it.key().indexOf(bayerRegExCI)==0 || it.key().indexOf(objPrefixUpper)==0)
 		{
@@ -1850,7 +1944,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			break;
 	}
 
-	for (auto it = sciExtraDesignationsIndexI18n.lowerBound(objPrefix); it != sciExtraDesignationsIndexI18n.end(); ++it)
+	for (auto it = sciExtraDesignationsIndex.lowerBound(objPrefix); it != sciExtraDesignationsIndex.end(); ++it)
 	{
 		if (it.key().indexOf(bayerRegEx)==0 || it.key().indexOf(objPrefix)==0)
 		{
@@ -1879,7 +1973,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			break;
 	}
 
-	for (auto it = sciExtraDesignationsIndexI18n.lowerBound(objPrefixUpper); it != sciExtraDesignationsIndexI18n.end(); ++it)
+	for (auto it = sciExtraDesignationsIndex.lowerBound(objPrefixUpper); it != sciExtraDesignationsIndex.end(); ++it)
 	{
 		if (it.key().indexOf(bayerRegExCI)==0 || it.key().indexOf(objPrefixUpper)==0)
 		{
@@ -1909,7 +2003,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Search for sci names for var stars
-	for (auto it = varStarsIndexI18n.lowerBound(objPrefixUpper); it != varStarsIndexI18n.end(); ++it)
+	for (auto it = varStarsIndex.lowerBound(objPrefixUpper); it != varStarsIndex.end(); ++it)
 	{
 		if (it.key().startsWith(objPrefixUpper))
 		{
@@ -1999,7 +2093,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	static const QRegularExpression wdsRx("^(WDS)\\s*(\\S+)\\s*$", QRegularExpression::CaseInsensitiveOption);
 	if (wdsRx.match(objPrefixUpper).hasMatch())
 	{
-		for (auto wds = wdsStarsIndexI18n.lowerBound(objPrefixUpper); wds != wdsStarsIndexI18n.end(); ++wds)
+		for (auto wds = wdsStarsIndex.lowerBound(objPrefixUpper); wds != wdsStarsIndex.end(); ++wds)
 		{
 			if (wds.key().startsWith(objPrefixUpper))
 			{
@@ -2126,12 +2220,14 @@ void StarMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	QMap<QString, int> commonNamesIndexToSearchWhileLoading = commonNames.hipByName;
 	commonNamesMap.clear();
 	commonNamesMapI18n.clear();
-	additionalNamesMap.clear();
-	additionalNamesMapI18n.clear();
+	//additionalNamesMap.clear();
+	//additionalNamesMapI18n.clear();
 	commonNamesIndexI18n.clear();
 	commonNamesIndex.clear();
-	additionalNamesIndex.clear();
-	additionalNamesIndexI18n.clear();
+	//additionalNamesIndex.clear();
+	//additionalNamesIndexI18n.clear();
+	culturalNamesMap.clear();
+	culturalNamesIndex.clear();
 
 	if (!skyCulture.names.isEmpty())
 		loadCultureSpecificNames(skyCulture.names, commonNamesIndexToSearchWhileLoading);
@@ -2150,21 +2246,22 @@ void StarMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 				commonNamesIndexI18n[englishNameCap] = HIP;
 				commonNamesIndex[englishNameCap] = HIP;
 			}
-			else if (!additionalNamesMap.contains(HIP))
-			{
-				additionalNamesMap[HIP] = englishName;
-				additionalNamesMapI18n[HIP] = englishName;
-				additionalNamesIndex[englishNameCap] = HIP;
-				additionalNamesIndexI18n[englishNameCap] = HIP;
-			}
-			else
-			{
-				const auto newName = additionalNamesMap[HIP] + (" - " + englishName);
-				additionalNamesMap[HIP] = newName;
-				additionalNamesMapI18n[HIP] = newName;
-				additionalNamesIndex[englishNameCap] = HIP;
-				additionalNamesIndexI18n[englishNameCap] = HIP;
-			}
+			// TODO: GZ: Not sure why this filled additionalNames with the actual commonNames?
+			//else if (!additionalNamesMap.contains(HIP))
+			//{
+			//	additionalNamesMap[HIP] = englishName;
+			//	additionalNamesMapI18n[HIP] = englishName;
+			//	additionalNamesIndex[englishNameCap] = HIP;
+			//	additionalNamesIndexI18n[englishNameCap] = HIP;
+			//}
+			//else
+			//{
+			//	const auto newName = additionalNamesMap[HIP] + (" - " + englishName);
+			//	additionalNamesMap[HIP] = newName;
+			//	additionalNamesMapI18n[HIP] = newName;
+			//	additionalNamesIndex[englishNameCap] = HIP;
+			//	additionalNamesIndexI18n[englishNameCap] = HIP;
+			//}
 		}
 	}
 
@@ -2380,3 +2477,121 @@ QString StarMgr::getStelObjectType() const
 {
 	return STAR_TYPE;
 }
+
+//! cultural names
+//! Return screen label (to be used in the sky display. Most users will use some short label)
+QString StarMgr::getCulturalScreenLabel(StarId hip)
+{
+	QStringList list=getCultureLabels(hip, GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle());
+	qDebug() << "culturalScreenLabel: " << list;
+	return list.isEmpty() ? "" : list.constFirst();
+}
+
+//! Return InfoString label (to be used in the InfoString).
+//! When dealing with foreign skycultures, many users will want this to be longer, with more name components.
+QString StarMgr::getCulturalInfoLabel(StarId hip)
+{
+	QStringList list=getCultureLabels(hip, GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle());
+	return list.isEmpty() ? "" : list.join("; ");
+}
+
+QStringList StarMgr::getCultureLabels(StarId hip, StelObject::CulturalDisplayStyle style)
+{
+	// Retrieve list in order as read from JSON
+	QList<StelObject::CulturalName>culturalNames=getCulturalNames(hip);
+	if (culturalNames.isEmpty())
+	{
+		return QStringList();
+	}
+
+	QStringList labels;
+	for (auto &cName: culturalNames)
+		{
+			// At least while many fields have not been filled, we should create a few fallbacks
+			//QString pronounceStr=(cName.pronounceI18n.isEmpty() ? (cName.pronounce.isEmpty() ? cName.native : cName.pronounce) : cName.pronounceI18n);
+			QString pronounceStr=(cName.pronounceI18n.isEmpty() ? cName.pronounce : cName.pronounceI18n);
+
+			QString label;
+			switch (style)
+			{
+			case StelObject::CulturalDisplayStyle::Abbreviated:
+			label=getCommonName(hip);
+			break;
+			case StelObject::CulturalDisplayStyle::Native:
+			label=cName.native;
+			break;
+			case StelObject::CulturalDisplayStyle::Translated:
+			label=cName.translatedI18n;
+			break;
+			case StelObject::CulturalDisplayStyle::Modern:
+			label=getCommonName(hip); // fully non-cultural!
+			break;
+			case StelObject::CulturalDisplayStyle::Pronounce:
+			label=pronounceStr;
+			break;
+			case StelObject::StelObject::CulturalDisplayStyle::Translit:
+			label=cName.transliteration;
+			break;
+			case StelObject::CulturalDisplayStyle::IPA:
+			label=cName.IPA;
+			break;
+			case StelObject::CulturalDisplayStyle::Pronounce_Translated:
+			label=QString("%1 (%2)").arg(pronounceStr, cName.translatedI18n);
+			break;
+			case StelObject::CulturalDisplayStyle::Pronounce_IPA_Translated:
+			label=QString("%1 [%2] (%3)").arg(pronounceStr, cName.IPA, cName.translatedI18n);
+			break;
+			case StelObject::CulturalDisplayStyle::Pronounce_Translated_Modern:
+			label=QString("%1 (%2, %3)").arg(pronounceStr, cName.translatedI18n, getCommonName(hip));
+			break;
+			case StelObject::CulturalDisplayStyle::Pronounce_IPA_Translated_Modern:
+			label=QString("%1 [%2] (%3, %4)").arg(pronounceStr, cName.IPA, cName.translatedI18n, getCommonName(hip));
+			break;
+			case StelObject::CulturalDisplayStyle::Native_Pronounce:
+			label=QString("%1 [%2]").arg(cName.native, pronounceStr);
+			break;
+			case StelObject::CulturalDisplayStyle::Native_Pronounce_Translated:
+			label=QString("%1 [%2] (%3)").arg(cName.native, pronounceStr, cName.translatedI18n);
+			break;
+			case StelObject::CulturalDisplayStyle::Native_Pronounce_IPA_Translated:
+			label=QString("%1 [%2%3] (%4)").arg(cName.native, pronounceStr, cName.IPA.length() > 0 ? QString(", %1").arg(cName.IPA) : "", cName.translatedI18n);
+			break;
+			case  StelObject::CulturalDisplayStyle::Native_Translated:
+			label=QString("%1 (%2)").arg(cName.native, cName.translatedI18n);
+			break;
+			case  StelObject::CulturalDisplayStyle::Native_Translit_Translated:
+			label=QString("%1 [%2] (%3)").arg(cName.native, cName.transliteration, cName.translatedI18n);
+			break;
+			case  StelObject::CulturalDisplayStyle::Native_Translit_Pronounce_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(cName.native, cName.transliteration, pronounceStr, cName.translatedI18n);
+			break;
+			case  StelObject::CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated:
+			label=QString("%1 [%2, %3, %4] (%5)").arg(cName.native, cName.transliteration, pronounceStr, cName.IPA, cName.translatedI18n);
+			break;
+			case  StelObject::CulturalDisplayStyle::Native_Translit_IPA_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(cName.native, cName.transliteration, cName.IPA, cName.translatedI18n);
+			break;
+			case  StelObject::CulturalDisplayStyle::Translit_Translated:
+			label=QString("%1 (%2)").arg(cName.transliteration, cName.translatedI18n);
+			break;
+			case  StelObject::CulturalDisplayStyle::Translit_Pronounce_Translated:
+			label=QString("%1 [%2] (%3)").arg(cName.transliteration, pronounceStr, cName.translatedI18n);
+			break;
+			case  StelObject::CulturalDisplayStyle::Translit_Pronounce_IPA_Translated:
+			label=QString("%1 [%2, %3] (%4)").arg(cName.transliteration, pronounceStr, cName.IPA, cName.translatedI18n);
+			break;
+			case  StelObject::CulturalDisplayStyle::Translit_IPA_Translated:
+			label=QString("%1 [%2] (%4)").arg(cName.transliteration, cName.IPA, cName.translatedI18n);
+			break;
+			// NO default here, else we may forget one.
+			}
+			labels << label;
+		}
+	labels.removeDuplicates();
+	int nullStrIdx=labels.indexOf("");
+	if (nullStrIdx>=0)
+		labels.remove(nullStrIdx);
+	return labels;
+}
+
+
