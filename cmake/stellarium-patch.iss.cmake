@@ -52,6 +52,8 @@ UsePreviousAppDir=yes
 CreateUninstallRegKey=no
 UpdateUninstallLogAppName=no
 
+PrivilegesRequiredOverridesAllowed=commandline
+
 
 [Files]
 Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; DestDir: "{app}"; Flags: ignoreversion

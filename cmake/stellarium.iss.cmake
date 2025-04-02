@@ -31,6 +31,7 @@ LicenseFile=@CMAKE_SOURCE_DIR@\COPYING
 ChangesAssociations=yes
 ; LZMA2/ultra required 356 MB RAM for compression and 32 MB RAM for decompression
 Compression=lzma2/ultra
+PrivilegesRequiredOverridesAllowed=commandline
 
 [Files]
 Source: "@CMAKE_INSTALL_PREFIX@\bin\*.exe"; DestDir: "{app}"; Flags: ignoreversion
