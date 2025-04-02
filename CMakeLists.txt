@@ -2,6 +2,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
 # CMake 3.20+ is required if x-compiling for Windows on ARM
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
+CMAKE_POLICY(VERSION 3.16)
 # Fix behavior of CMAKE_CXX_STANDARD and CMAKE_C_STANDARD when targeting macOS.
 CMAKE_POLICY(SET CMP0025 NEW)
 # Potential dangerous comparison of variables. Details: https://cmake.org/cmake/help/v3.1/policy/CMP0054.html
