@@ -230,6 +230,15 @@ public:
 	//! @return "Star"
 	QString getStelObjectType() const override;
 
+	//! cultural names
+	//! Return screen label (to be used in the sky display. Most users will use some short label)
+	static QString getCulturalScreenLabel(StarId hip);
+
+	//! Return InfoString label (to be used in the InfoString).
+	//! When dealing with foreign skycultures, many users will want this to be longer, with more name components.
+	static QString getCulturalInfoLabel(StarId hip);
+	//! Underlying worker that processes the culturalNames
+	static QStringList getCultureLabels(StarId hip, StelObject::CulturalDisplayStyle style);
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods callable from script and GUI
@@ -338,13 +347,19 @@ public:
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return translated additional names of star
-	static QString getAdditionalNames(StarId hip);
+	//static QString getAdditionalNames(StarId hip);
 
 	//! Get the English additional names for a star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return additional names of star
-	static QString getAdditionalEnglishNames(StarId hip);
+	//static QString getAdditionalEnglishNames(StarId hip);
+
+	//! Get the cultural names for a star with a specified
+	//! Hipparcos or Gaia catalogue number.
+	//! @param hip The Hipparcos/Gaia number of star
+	//! @return cultural names of star
+	static QList<StelObject::CulturalName> getCulturalNames(StarId hip);
 
 	//! Get the cross-identification designations for a star with a specified
 	//! Hipparcos or Gaia catalogue number.
@@ -569,32 +584,36 @@ private:
 
 	HipIndexStruct *hipIndex; // array of Hipparcos stars
 
+	//! CommonNames: unique 1:1 names
 	static QHash<StarId, QString> commonNamesMap;     // the original names from skyculture (star_names.fab)
 	static QHash<StarId, QString> commonNamesMapI18n; // translated names
 	static QMap<QString, StarId> commonNamesIndexI18n;
 	static QMap<QString, StarId> commonNamesIndex;    // back-references upper-case names
 
-	static QHash<StarId, QString> additionalNamesMap; // additional names. These will be replaced by the CulturalNames
-	static QHash<StarId, QString> additionalNamesMapI18n;
-	static QMap<QString, StarId> additionalNamesIndex;
-	static QMap<QString, StarId> additionalNamesIndexI18n;
+	//static QHash<StarId, QString> additionalNamesMap; // additional names. These will be replaced by the CulturalNames
+	//static QHash<StarId, QString> additionalNamesMapI18n;
+	//static QMap<QString, StarId> additionalNamesIndex;
+	//static QMap<QString, StarId> additionalNamesIndexI18n;
 
-	// Cultural names: We must store all data here, and have even 4 indices to native names&spelling, pronunciation, english and user-language spelling
-	static QHash<StarId, QList<StelObject::CulturalName>> culturalNamesMap; // cultural names
-	static QMap<QString, QList<StarId>>  culturalNativeNamesIndex; // reverse mappings. For names, unfortunately multiple results are possible!
-	static QMap<QString, QList<StarId>>  culturalPronounceIndex;
-	static QMap<QString, QList<StarId>>  culturalPronounceI18nIndex;
+	// Cultural names: We must store all data here, and have even 3 indices to native names&spelling, pronunciation, english and user-language spelling
+	static QMultiHash<StarId, StelObject::CulturalName> culturalNamesMap; // cultural names
+	//! reverse mappings of UPPERCASEd native, pronounceI18n, transliteration and translatedI18n names. Multiple results are possible!
+	//! Retrieve with QList<StarId> ids=culturalNamesIndex.values(name)
+	static QMultiMap<QString, StarId>  culturalNamesIndex;
 
-	static QHash<StarId, QString> sciDesignationsMapI18n;
-	static QMap<QString, StarId> sciDesignationsIndexI18n;
-	static QHash<StarId, QString> sciExtraDesignationsMapI18n;
-	static QMap<QString, StarId> sciExtraDesignationsIndexI18n;
+	//! Scientific designations:
+	//! Bayer/Flamsteed
+	static QHash<StarId, QString> sciDesignationsMap;      // TODO: Must become multihash
+	static QMap<QString, StarId> sciDesignationsIndex;
+	//! Various other scientific labels.
+	static QHash<StarId, QString> sciExtraDesignationsMap; // TODO: Must become multihash
+	static QMap<QString, StarId> sciExtraDesignationsIndex;
 
-	static QHash<StarId, varstar> varStarsMapI18n;
-	static QMap<QString, StarId> varStarsIndexI18n;
+	static QHash<StarId, varstar> varStarsMap;
+	static QMap<QString, StarId> varStarsIndex;
 
-	static QHash<StarId, wds> wdsStarsMapI18n;
-	static QMap<QString, StarId> wdsStarsIndexI18n;
+	static QHash<StarId, wds> wdsStarsMap;
+	static QMap<QString, StarId> wdsStarsIndex;
 
 	static QMap<QString, crossid> crossIdMap;
 	static QHash<int, StarId> saoStarsIndex;

@@ -44,7 +44,13 @@ QString Star1::getScreenNameI18n(void) const
 	QStringList starNames;
 	StarId star_id = getHip() ? getHip() : 	getGaia();
 	if (!StarMgr::getDesignationUsage())
-		starNames << StarMgr::getCommonName(star_id);
+	{
+		const QString culturalLabel=StarMgr::getCulturalScreenLabel(star_id);
+		if (culturalLabel.isEmpty())
+			starNames << StarMgr::getCommonName(star_id);
+		else
+			starNames << culturalLabel;
+	}
 	if (StarMgr::getFlagSciNames()) // The scientific designations can be used for western sky cultures only
 	{
 		starNames << StarMgr::getSciName(star_id).split(" - ");
