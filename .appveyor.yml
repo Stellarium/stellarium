@@ -19,7 +19,7 @@ skip_commits:
 max_jobs: 5
 # environment variables
 environment:
-  gettextSrcURL: https://ftp.gnu.org/gnu/gettext/gettext-0.23.1.tar.xz
+  gettextSrcURL: https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/gettext-0.23.1.tar.xz
   gettextSrcBaseName: gettext-0.23.1
   gettextURL: https://github.com/vslavik/gettext-tools-windows/releases/download/v0.23.1/gettext-tools-windows-0.23.1.zip
   gettextBaseName: gettext-tools-windows-0.23.1
