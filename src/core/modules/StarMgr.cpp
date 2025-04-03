@@ -80,8 +80,8 @@ bool StarMgr::flagHIPDesignation = false;
 // Multi
 QHash<StarId,QString> StarMgr::commonNamesMap;
 QHash<StarId,QString> StarMgr::commonNamesMapI18n;
-QMap<QString,StarId> StarMgr::commonNamesIndexI18n; // ATTN: Stores uppercase variant of nameI18n, BUT WHY?
-QMap<QString,StarId> StarMgr::commonNamesIndex;
+QHash<QString,StarId> StarMgr::commonNamesIndexI18n; // ATTN: Stores uppercase variant of nameI18n, BUT WHY?
+QHash<QString,StarId> StarMgr::commonNamesIndex;
 //QHash<StarId,QString> StarMgr::additionalNamesMap;
 //QHash<StarId,QString> StarMgr::additionalNamesMapI18n;
 //QMap<QString,StarId> StarMgr::additionalNamesIndex;     // ATTN: some names are not unique! map target type may need to become QList<StarId>
@@ -92,13 +92,13 @@ QMultiHash<StarId, StelObject::CulturalName> StarMgr::culturalNamesMap; // cultu
 QMultiMap<QString, StarId> StarMgr::culturalNamesIndex; // reverse mappings. For names, unfortunately multiple results are possible!
 
 QHash<StarId,QString> StarMgr::sciDesignationsMap;      // Bayer/Flamsteed. TODO: Convert map target to QStringList?
-QMap<QString,StarId> StarMgr::sciDesignationsIndex;
+QHash<QString,StarId> StarMgr::sciDesignationsIndex;
 QHash<StarId,QString> StarMgr::sciExtraDesignationsMap; // Other sci designations. TODO: Convert map target to QStringList?
-QMap<QString,StarId> StarMgr::sciExtraDesignationsIndex;
+QHash<QString,StarId> StarMgr::sciExtraDesignationsIndex;
 QHash<StarId, varstar> StarMgr::varStarsMap;
-QMap<QString, StarId> StarMgr::varStarsIndex;
+QHash<QString, StarId> StarMgr::varStarsIndex;
 QHash<StarId, wds> StarMgr::wdsStarsMap;
-QMap<QString, StarId> StarMgr::wdsStarsIndex;
+QHash<QString, StarId> StarMgr::wdsStarsIndex;
 QMap<QString, crossid> StarMgr::crossIdMap;
 QHash<int, StarId> StarMgr::saoStarsIndex;
 QHash<int, StarId> StarMgr::hdStarsIndex;
@@ -1762,7 +1762,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	bool found;
 
 	// Search for common names
-	QMapIterator<QString, StarId> i(commonNamesIndexI18n);
+	QHashIterator<QString, StarId> i(commonNamesIndexI18n);
 	while (i.hasNext())
 	{
 		i.next();
@@ -1782,7 +1782,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		}
 	}
 
-	QMapIterator<QString, StarId> j(commonNamesIndex);
+	QHashIterator<QString, StarId> j(commonNamesIndex);
 	while (j.hasNext())
 	{
 		j.next();
@@ -1888,8 +1888,11 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	if (objPrefixUpper.at(0).unicode() >= 0x0391 && objPrefixUpper.at(0).unicode() <= 0x03A9)
 		bayerRegExCI.setPattern(bayerPatternCI.insert(1,"\\d?"));
 
-	for (auto it = sciDesignationsIndex.lowerBound(objPrefix); it != sciDesignationsIndex.end(); ++it)
+	//for (auto it = sciDesignationsIndex.begin(objPrefix); it != sciDesignationsIndex.end(); ++it)
+	QHashIterator<QString,StarId>it(sciDesignationsIndex);
+	while (it.hasNext())
 	{
+		it.next();
 		if (it.key().indexOf(bayerRegEx)==0 || it.key().indexOf(objPrefix)==0)
 		{
 			if (maxNbItem<=0)
@@ -1917,8 +1920,11 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			break;
 	}
 
-	for (auto it = sciDesignationsIndex.lowerBound(objPrefixUpper); it != sciDesignationsIndex.end(); ++it)
+	//for (auto it = sciDesignationsIndex.lowerBound(objPrefixUpper); it != sciDesignationsIndex.end(); ++it)
+	it.toFront(); // reset
+	while (it.hasNext())
 	{
+		it.next();
 		if (it.key().indexOf(bayerRegExCI)==0 || it.key().indexOf(objPrefixUpper)==0)
 		{
 			if (maxNbItem<=0)
@@ -1946,13 +1952,16 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			break;
 	}
 
-	for (auto it = sciExtraDesignationsIndex.lowerBound(objPrefix); it != sciExtraDesignationsIndex.end(); ++it)
+	//for (auto it = sciExtraDesignationsIndex.lowerBound(objPrefix); it != sciExtraDesignationsIndex.end(); ++it)
+	QHashIterator<QString,StarId>ite(sciExtraDesignationsIndex);
+	while (ite.hasNext())
 	{
-		if (it.key().indexOf(bayerRegEx)==0 || it.key().indexOf(objPrefix)==0)
+		ite.next();
+		if (ite.key().indexOf(bayerRegEx)==0 || ite.key().indexOf(objPrefix)==0)
 		{
 			if (maxNbItem<=0)
 				break;
-			QStringList names = getSciExtraName(it.value()).split(" - ");
+			QStringList names = getSciExtraName(ite.value()).split(" - ");
 			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
@@ -1971,17 +1980,20 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 				}
 			}
 		}
-		else if (it.key().at(0) != objPrefix.at(0))
+		else if (ite.key().at(0) != objPrefix.at(0))
 			break;
 	}
 
-	for (auto it = sciExtraDesignationsIndex.lowerBound(objPrefixUpper); it != sciExtraDesignationsIndex.end(); ++it)
+	//for (auto it = sciExtraDesignationsIndex.lowerBound(objPrefixUpper); it != sciExtraDesignationsIndex.end(); ++it)
+	ite.toFront(); // reset
+	while (ite.hasNext())
 	{
-		if (it.key().indexOf(bayerRegExCI)==0 || it.key().indexOf(objPrefixUpper)==0)
+		ite.next();
+		if (ite.key().indexOf(bayerRegExCI)==0 || ite.key().indexOf(objPrefixUpper)==0)
 		{
 			if (maxNbItem<=0)
 				break;
-			QStringList names = getSciExtraName(it.value()).split(" - ");
+			QStringList names = getSciExtraName(ite.value()).split(" - ");
 			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
@@ -2000,13 +2012,16 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 				}
 			}
 		}
-		else if (it.key().at(0) != objPrefixUpper.at(0))
+		else if (ite.key().at(0) != objPrefixUpper.at(0))
 			break;
 	}
 
 	// Search for sci names for var stars
-	for (auto it = varStarsIndex.lowerBound(objPrefixUpper); it != varStarsIndex.end(); ++it)
+	//for (auto it = varStarsIndex.lowerBound(objPrefixUpper); it != varStarsIndex.end(); ++it)
+	QHashIterator<QString,StarId>itv(varStarsIndex);
+	while (itv.hasNext())
 	{
+		itv.next();
 		if (it.key().startsWith(objPrefixUpper))
 		{
 			if (maxNbItem<=0)
@@ -2095,8 +2110,11 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	static const QRegularExpression wdsRx("^(WDS)\\s*(\\S+)\\s*$", QRegularExpression::CaseInsensitiveOption);
 	if (wdsRx.match(objPrefixUpper).hasMatch())
 	{
-		for (auto wds = wdsStarsIndex.lowerBound(objPrefixUpper); wds != wdsStarsIndex.end(); ++wds)
+		//for (auto wds = wdsStarsIndex.lowerBound(objPrefixUpper); wds != wdsStarsIndex.end(); ++wds)
+		QHashIterator<QString, StarId>wds(wdsStarsIndex);
+		while (wds.hasNext())
 		{
+			wds.next();
 			if (wds.key().startsWith(objPrefixUpper))
 			{
 				if (maxNbItem==0)
@@ -2485,7 +2503,7 @@ QString StarMgr::getStelObjectType() const
 QString StarMgr::getCulturalScreenLabel(StarId hip)
 {
 	QStringList list=getCultureLabels(hip, GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle());
-	qDebug() << "culturalScreenLabel: " << list;
+	//qDebug() << "culturalScreenLabel: " << list;
 	return list.isEmpty() ? "" : list.constFirst();
 }
 
