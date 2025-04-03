@@ -1,8 +1,8 @@
 FIND_PACKAGE(exiv2)
 
 CPMFindPackage(NAME NLopt
-               URL https://github.com/stevengj/nlopt/archive/refs/tags/v2.7.1.tar.gz
-               URL_HASH SHA256=db88232fa5cef0ff6e39943fc63ab6074208831dc0031cf1545f6ecd31ae2a1a
+               URL https://github.com/stevengj/nlopt/archive/refs/tags/v2.10.0.tar.gz
+               URL_HASH SHA256=506f83a9e778ad4f204446e99509cb2bdf5539de8beccc260a014bd560237be1
                EXCLUDE_FROM_ALL yes
                OPTIONS "NLOPT_CXX ON" "NLOPT_FORTRAN OFF" "NLOPT_GUILE OFF" "NLOPT_MATLAB OFF" "NLOPT_OCTAVE OFF" "NLOPT_PYTHON OFF" "NLOPT_SWIG OFF" "NLOPT_TESTS OFF"
               )

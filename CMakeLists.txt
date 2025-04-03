@@ -3,12 +3,6 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
 CMAKE_POLICY(VERSION 3.16)
-# Fix behavior of CMAKE_CXX_STANDARD and CMAKE_C_STANDARD when targeting macOS.
-CMAKE_POLICY(SET CMP0025 NEW)
-# Potential dangerous comparison of variables. Details: https://cmake.org/cmake/help/v3.1/policy/CMP0054.html
-CMAKE_POLICY(SET CMP0054 NEW)
-# Let AUTOMOC and AUTOUIC process GENERATED files.
-CMAKE_POLICY(SET CMP0071 NEW)
 # CMake Policies introduced after version CMAKE_MINIMUM_REQUIRED
 IF(POLICY CMP0175)
      CMAKE_POLICY(SET CMP0175 OLD)
@@ -702,8 +696,8 @@ SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 IF(ENABLE_SHOWMYSKY)
     ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
     CPMFindPackage(NAME ShowMySky-Qt${QT_VERSION_MAJOR}
-        URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.3.4.tar.gz
-        URL_HASH SHA256=29ef4c81cf020e131ec79a28c78946d80d422d05818197079cbaa6353ffba16a
+        URL https://github.com/10110111/CalcMySky/archive/refs/heads/master.zip
+        #URL_HASH SHA256=29ef4c81cf020e131ec79a28c78946d80d422d05818197079cbaa6353ffba16a
         EXCLUDE_FROM_ALL yes
         OPTIONS "QT_VERSION ${QT_VERSION_MAJOR}")
     IF(ShowMySky-Qt${QT_VERSION_MAJOR}_ADDED)
@@ -846,8 +840,8 @@ IF(ENABLE_XLSX)
 ENDIF()
 
 CPMFindPackage(NAME md4c
-     URL https://github.com/mity/md4c/archive/refs/tags/release-0.4.8.tar.gz
-     URL_HASH SHA256=4a457df853425b6bb6e3457aa1d1a13bccec587a04c38c622b1013a0da41439f
+     URL https://github.com/mity/md4c/archive/refs/tags/release-0.5.2.tar.gz
+     URL_HASH SHA256=55d0111d48fb11883aaee91465e642b8b640775a4d6993c2d0e7a8092758ef21
      EXCLUDE_FROM_ALL yes
      OPTIONS "BUILD_MD2HTML_EXECUTABLE OFF")
 IF(md4c_ADDED)
