@@ -1953,7 +1953,7 @@ void NebulaMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	}
 	else
 	{
-		for (auto it = defaultNameMap.begin(); it != defaultNameMap.end(); ++it)
+		for (auto it = defaultNameMap.cbegin(); it != defaultNameMap.cend(); ++it)
 			for (const auto& name : it.value())
 				setName(it.key(), name);
 	}
