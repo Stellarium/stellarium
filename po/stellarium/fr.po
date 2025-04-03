@@ -21414,7 +21414,7 @@ msgid ""
 "%1'Connection delay'%2 is 1.5 seconds instead of 0.5 seconds."
 msgstr ""
 "D'après le testeur, il est un peu lent, raison pour laquelle son réglage par"
-" défaut pour le %1délai de connexion%2 est de 1.5 s au lieu de 0.5 s."
+" défaut pour le %1« délai de connexion »%2 est de 1.5 s au lieu de 0.5 s."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:492
 msgid ""
@@ -21456,8 +21456,8 @@ msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B"
 msgstr ""
-"N'oubliez pas de le régler en mode compatible Meade et de fixer son baudrate"
-" à 9600 "
+"Ne pas oublier de le régler en mode compatible Meade et de fixer son "
+"baudrate à 9600 "
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:501
 msgid ""
@@ -21573,7 +21573,7 @@ msgstr "local, ASCOM"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1004
 msgid "Start"
-msgstr "Lancer"
+msgstr "Démarrer"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1006
 msgid "Start the selected local telescope"
@@ -21636,7 +21636,7 @@ msgstr "Pointer le télescope vers les coordonnées"
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:315
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:204
 msgid "&Right Ascension (J2000):"
-msgstr "&Ascension droite (J2000) :"
+msgstr "Ascension d&roite (J2000) :"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:316
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:205
@@ -21650,7 +21650,7 @@ msgstr "Prendre les coordonnées de l'objet actuel"
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:320
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:201
 msgid "&Current object"
-msgstr "Objet actuel"
+msgstr "Objet a&ctuel"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:322
 msgid "Take coordinates of screen center"
@@ -21765,7 +21765,7 @@ msgstr "Rien, une simple simulation (un réticule mouvant)"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:560
 msgid "Connection delay:"
-msgstr "Délai de connexion:"
+msgstr "Délai de connexion :"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:565
 msgid "J2000 (default)"
@@ -21834,7 +21834,8 @@ msgstr "Réglages de l'interface utilisateur"
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:599
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr ""
-"Afficher des cercles à taille angulaire fixe autour du réticule du télescope"
+"Afficher des cercles de taille angulaire fixe autour du réticule du "
+"télescope"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:601
 msgid "Use field of view indicators"
@@ -21847,7 +21848,7 @@ msgstr "Taille du(des) cercle(s) :"
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:604
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
 msgstr ""
-"Jusqu'à dix valeurs décimales en degrés d'arc séparées par des virgules"
+"Jusqu'à dix valeurs décimales en degrés d'arc, séparées par des virgules"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:607
 msgid "OK"
@@ -21875,7 +21876,7 @@ msgstr "Interface graphique"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:408
 msgid "Show telescope labels"
-msgstr "Afficher les noms des télescope"
+msgstr "Afficher les noms des télescopes"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:409
 msgid "Show field of view indicators"
