@@ -798,6 +798,8 @@ auto StarMgr::loadCommonNames(const QString& commonNameFile) const -> CommonName
 void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName,
                                                     const QMap<QString, int>& commonNamesIndexToSearchWhileLoading)
 {
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+
 	const QString commonNameUpper=commonName.toUpper();
 	if (!commonNamesIndexToSearchWhileLoading.contains(commonNameUpper))
 	{
@@ -831,8 +833,8 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 		//		additionalNamesIndexI18n[specificNameUpper] = HIP;
 		//	}
 		//}
-		StelObject::CulturalName cName{entry["native"].toString(), entry["pronounce"].toString(), q_(entry["pronounce"].toString()),
-					entry["transliteration"].toString(), entry["english"].toString(), q_(entry["english"].toString()), entry["IPA"].toString()};
+		StelObject::CulturalName cName{entry["native"].toString(), entry["pronounce"].toString(), trans.qTranslateStar(entry["pronounce"].toString()),
+					entry["transliteration"].toString(), entry["english"].toString(), trans.qTranslateStar(entry["english"].toString()), entry["IPA"].toString()};
 
 		if (culturalNamesMap.contains(HIP))
 			qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated;
@@ -2507,84 +2509,7 @@ QStringList StarMgr::getCultureLabels(StarId hip, StelObject::CulturalDisplaySty
 	QStringList labels;
 	for (auto &cName: culturalNames)
 		{
-			// At least while many fields have not been filled, we should create a few fallbacks
-			//QString pronounceStr=(cName.pronounceI18n.isEmpty() ? (cName.pronounce.isEmpty() ? cName.native : cName.pronounce) : cName.pronounceI18n);
-			QString pronounceStr=(cName.pronounceI18n.isEmpty() ? cName.pronounce : cName.pronounceI18n);
-
-			QString label;
-			switch (style)
-			{
-			case StelObject::CulturalDisplayStyle::Abbreviated:
-			label=getCommonName(hip);
-			break;
-			case StelObject::CulturalDisplayStyle::Native:
-			label=cName.native;
-			break;
-			case StelObject::CulturalDisplayStyle::Translated:
-			label=cName.translatedI18n;
-			break;
-			case StelObject::CulturalDisplayStyle::Modern:
-			label=getCommonName(hip); // fully non-cultural!
-			break;
-			case StelObject::CulturalDisplayStyle::Pronounce:
-			label=pronounceStr;
-			break;
-			case StelObject::StelObject::CulturalDisplayStyle::Translit:
-			label=cName.transliteration;
-			break;
-			case StelObject::CulturalDisplayStyle::IPA:
-			label=cName.IPA;
-			break;
-			case StelObject::CulturalDisplayStyle::Pronounce_Translated:
-			label=QString("%1 (%2)").arg(pronounceStr, cName.translatedI18n);
-			break;
-			case StelObject::CulturalDisplayStyle::Pronounce_IPA_Translated:
-			label=QString("%1 [%2] (%3)").arg(pronounceStr, cName.IPA, cName.translatedI18n);
-			break;
-			case StelObject::CulturalDisplayStyle::Pronounce_Translated_Modern:
-			label=QString("%1 (%2, %3)").arg(pronounceStr, cName.translatedI18n, getCommonName(hip));
-			break;
-			case StelObject::CulturalDisplayStyle::Pronounce_IPA_Translated_Modern:
-			label=QString("%1 [%2] (%3, %4)").arg(pronounceStr, cName.IPA, cName.translatedI18n, getCommonName(hip));
-			break;
-			case StelObject::CulturalDisplayStyle::Native_Pronounce:
-			label=QString("%1 [%2]").arg(cName.native, pronounceStr);
-			break;
-			case StelObject::CulturalDisplayStyle::Native_Pronounce_Translated:
-			label=QString("%1 [%2] (%3)").arg(cName.native, pronounceStr, cName.translatedI18n);
-			break;
-			case StelObject::CulturalDisplayStyle::Native_Pronounce_IPA_Translated:
-			label=QString("%1 [%2%3] (%4)").arg(cName.native, pronounceStr, cName.IPA.length() > 0 ? QString(", %1").arg(cName.IPA) : "", cName.translatedI18n);
-			break;
-			case  StelObject::CulturalDisplayStyle::Native_Translated:
-			label=QString("%1 (%2)").arg(cName.native, cName.translatedI18n);
-			break;
-			case  StelObject::CulturalDisplayStyle::Native_Translit_Translated:
-			label=QString("%1 [%2] (%3)").arg(cName.native, cName.transliteration, cName.translatedI18n);
-			break;
-			case  StelObject::CulturalDisplayStyle::Native_Translit_Pronounce_Translated:
-			label=QString("%1 [%2, %3] (%4)").arg(cName.native, cName.transliteration, pronounceStr, cName.translatedI18n);
-			break;
-			case  StelObject::CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated:
-			label=QString("%1 [%2, %3, %4] (%5)").arg(cName.native, cName.transliteration, pronounceStr, cName.IPA, cName.translatedI18n);
-			break;
-			case  StelObject::CulturalDisplayStyle::Native_Translit_IPA_Translated:
-			label=QString("%1 [%2, %3] (%4)").arg(cName.native, cName.transliteration, cName.IPA, cName.translatedI18n);
-			break;
-			case  StelObject::CulturalDisplayStyle::Translit_Translated:
-			label=QString("%1 (%2)").arg(cName.transliteration, cName.translatedI18n);
-			break;
-			case  StelObject::CulturalDisplayStyle::Translit_Pronounce_Translated:
-			label=QString("%1 [%2] (%3)").arg(cName.transliteration, pronounceStr, cName.translatedI18n);
-			break;
-			case  StelObject::CulturalDisplayStyle::Translit_Pronounce_IPA_Translated:
-			label=QString("%1 [%2, %3] (%4)").arg(cName.transliteration, pronounceStr, cName.IPA, cName.translatedI18n);
-			break;
-			case  StelObject::CulturalDisplayStyle::Translit_IPA_Translated:
-			label=QString("%1 [%2] (%4)").arg(cName.transliteration, cName.IPA, cName.translatedI18n);
-			break;
-			// NO default here, else we may forget one.
-			}
+			QString label=StelSkyCultureMgr::createCulturalLabel(cName, style, getCommonName(hip));
 			labels << label;
 		}
 	labels.removeDuplicates();

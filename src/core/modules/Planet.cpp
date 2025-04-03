@@ -541,93 +541,15 @@ QString Planet::getInfoLabel() const
 QStringList Planet::getCultureLabels(StelObject::CulturalDisplayStyle style) const
 {
 	QStringList labels;
-	if (culturalNames.isEmpty())
-	{
-		labels << getNameI18n();
-	}
-	else
-		for (auto &cName: culturalNames)
+	for (auto &cName: culturalNames)
 		{
-			// At least while many fields have not been filled, we should create a few fallbacks
-			//QString pronounceStr=(cName.pronounceI18n.isEmpty() ? (cName.pronounce.isEmpty() ? cName.native : cName.pronounce) : cName.pronounceI18n);
-			QString pronounceStr=(cName.pronounceI18n.isEmpty() ? cName.pronounce : cName.pronounceI18n);
-
-			QString label;
-			switch (style)
-			{
-			case CulturalDisplayStyle::Abbreviated:
-			label=getNameI18n();
-			break;
-			case CulturalDisplayStyle::Native:
-			label=cName.native;
-			break;
-			case CulturalDisplayStyle::Translated:
-			label=cName.translatedI18n;
-			break;
-			case CulturalDisplayStyle::Modern:
-			label=getNameI18n(); // fully non-cultural!
-			break;
-			case CulturalDisplayStyle::Pronounce:
-			label=pronounceStr;
-			break;
-			case CulturalDisplayStyle::Translit:
-			label=cName.transliteration;
-			break;
-			case CulturalDisplayStyle::IPA:
-			label=cName.IPA;
-			break;
-			case CulturalDisplayStyle::Pronounce_Translated:
-			label=QString("%1 (%2)").arg(pronounceStr, cName.translatedI18n);
-			break;
-			case CulturalDisplayStyle::Pronounce_IPA_Translated:
-			label=QString("%1 [%2] (%3)").arg(pronounceStr, cName.IPA, cName.translatedI18n);
-			break;
-			case CulturalDisplayStyle::Pronounce_Translated_Modern:
-			label=QString("%1 (%2, %3)").arg(pronounceStr, cName.translatedI18n, getNameI18n());
-			break;
-			case CulturalDisplayStyle::Pronounce_IPA_Translated_Modern:
-			label=QString("%1 [%2] (%3, %4)").arg(pronounceStr, cName.IPA, cName.translatedI18n, getNameI18n());
-			break;
-			case CulturalDisplayStyle::Native_Pronounce:
-			label=QString("%1 [%2]").arg(cName.native, pronounceStr);
-			break;
-			case CulturalDisplayStyle::Native_Pronounce_Translated:
-			label=QString("%1 [%2] (%3)").arg(cName.native, pronounceStr, cName.translatedI18n);
-			break;
-			case CulturalDisplayStyle::Native_Pronounce_IPA_Translated:
-			label=QString("%1 [%2%3] (%4)").arg(cName.native, pronounceStr, cName.IPA.length() > 0 ? QString(", %1").arg(cName.IPA) : "", cName.translatedI18n);
-			break;
-			case  CulturalDisplayStyle::Native_Translated:
-			label=QString("%1 (%2)").arg(cName.native, cName.translatedI18n);
-			break;
-			case  CulturalDisplayStyle::Native_Translit_Translated:
-			label=QString("%1 [%2] (%3)").arg(cName.native, cName.transliteration, cName.translatedI18n);
-			break;
-			case  CulturalDisplayStyle::Native_Translit_Pronounce_Translated:
-			label=QString("%1 [%2, %3] (%4)").arg(cName.native, cName.transliteration, pronounceStr, cName.translatedI18n);
-			break;
-			case  CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated:
-			label=QString("%1 [%2, %3, %4] (%5)").arg(cName.native, cName.transliteration, pronounceStr, cName.IPA, cName.translatedI18n);
-			break;
-			case  CulturalDisplayStyle::Native_Translit_IPA_Translated:
-			label=QString("%1 [%2, %3] (%4)").arg(cName.native, cName.transliteration, cName.IPA, cName.translatedI18n);
-			break;
-			case  CulturalDisplayStyle::Translit_Translated:
-			label=QString("%1 (%2)").arg(cName.transliteration, cName.translatedI18n);
-			break;
-			case  CulturalDisplayStyle::Translit_Pronounce_Translated:
-			label=QString("%1 [%2] (%3)").arg(cName.transliteration, pronounceStr, cName.translatedI18n);
-			break;
-			case  CulturalDisplayStyle::Translit_Pronounce_IPA_Translated:
-			label=QString("%1 [%2, %3] (%4)").arg(cName.transliteration, pronounceStr, cName.IPA, cName.translatedI18n);
-			break;
-			case  CulturalDisplayStyle::Translit_IPA_Translated:
-			label=QString("%1 [%2] (%4)").arg(cName.transliteration, cName.IPA, cName.translatedI18n);
-			break;
-			// NO default here, else we may forget one.
-			}
+			QString label=StelSkyCultureMgr::createCulturalLabel(cName, style, getNameI18n());
 			labels << label;
 		}
+	labels.removeDuplicates();
+	int nullStrIdx=labels.indexOf("");
+	if (nullStrIdx>=0)
+		labels.remove(nullStrIdx);
 	return labels;
 }
 
