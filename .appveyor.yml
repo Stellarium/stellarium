@@ -62,7 +62,7 @@ before_build:
   - set USE_EXT_LIBGLES=false
   - set SIGNING=false
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\Inno Setup 6
-  - set PATH=%VSPATH%;C:\Qt\%QT_BASEDIR%\bin;c:\%exiv2baseName%\bin;%INNSPATH%;%PATH%
+  - set PATH=%VSPATH%;%QT_BASEDIR%\bin;c:\%exiv2baseName%\bin;%INNSPATH%;%PATH%
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable") { $env:PUBLISH_BINARY = 'true' }
