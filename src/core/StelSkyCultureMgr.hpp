@@ -157,6 +157,9 @@ public:
 	//! Gets the default sky culture name from the application's settings,
 	//! sets that sky culture by calling setCurrentSkyCultureID().
 	void init();
+
+	//! Creates one label from cName
+	static QString createCulturalLabel(const StelObject::CulturalName cName, const StelObject::CulturalDisplayStyle style, const QString commonNameI18n);
 	
 public slots:
 	//! Get the current sky culture English name.
