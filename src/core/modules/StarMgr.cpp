@@ -2225,6 +2225,7 @@ void StarMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	commonNamesIndex.clear();
 	//additionalNamesIndex.clear();
 	//additionalNamesIndexI18n.clear();
+	culturalNamesMap.clear();
 	culturalNamesIndex.clear();
 
 	if (!skyCulture.names.isEmpty())
@@ -2586,6 +2587,9 @@ QStringList StarMgr::getCultureLabels(StarId hip, StelObject::CulturalDisplaySty
 			labels << label;
 		}
 	labels.removeDuplicates();
+	int nullStrIdx=labels.indexOf("");
+	if (nullStrIdx>=0)
+		labels.remove(nullStrIdx);
 	return labels;
 }
 
