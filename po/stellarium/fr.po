@@ -2300,7 +2300,7 @@ msgstr "Consulter le fichier de journalisation pour des instructions."
 #. https://celestrak.org/NORAD/elements/supplemental/planet.txt
 #: src/core/modules/Planet.cpp:130 plugins/Satellites/src/Satellites.cpp:3417
 msgid "planet"
-msgstr "planète"
+msgstr "Planète"
 
 #: src/core/modules/Planet.cpp:131
 msgid "moon"
@@ -18123,7 +18123,7 @@ msgstr "Chargement TLE"
 #. TRANSLATORS: Satellite group: Communication satellites
 #: plugins/Satellites/src/Satellites.cpp:3324
 msgid "communications"
-msgstr "Communications"
+msgstr "Communication"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
 #: plugins/Satellites/src/Satellites.cpp:3326
@@ -20431,7 +20431,8 @@ msgstr "Port TCP :"
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
-"Nom d'hôte ou adresse IPv4 du poste hébergeant le serveur de télescope"
+"Nom d'hôte ou adresse IPv4 de l'ordinateur hébergeant le serveur de "
+"télescope"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:131
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:575
@@ -20488,7 +20489,7 @@ msgid ""
 "mounts will handle this correctly, but some might not."
 msgstr ""
 "Laisser l'appareil ASCOM dire à Stellarium le système de coordonnées à "
-"utiliser. La plupart des montures gère ceci correctement."
+"utiliser. La plupart des montures gèrent ceci correctement."
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:46
 msgid "Let ASCOM device decide"
@@ -20584,7 +20585,7 @@ msgstr "Prise en charge RTS2"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid "INDI Telescope Client"
-msgstr "Client de télescope INDI"
+msgstr "Client télescope INDI"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
 msgid ""
@@ -20657,7 +20658,7 @@ msgstr "Possibilités et limitations"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:324
 msgid "The original telescope control feature"
-msgstr "La fonctionnalité originale de commande de télescopes"
+msgstr "La fonctionnalité originale de commande de télescope"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
@@ -21069,14 +21070,15 @@ msgid ""
 "Otherwise, to start the telescope, you need to open the main window, select "
 "that telescope and press the 'Start/Connect' button."
 msgstr ""
-"Dans le cas contraire, il sera nécessaire de lancer la connexion "
-"manuellement-"
+"Dans le cas contraire, pour démarrer le télescope, il sera nécessaire "
+"d'ouvrir la fenêtre principale, de sélectionner ce télescope et de lancer la"
+" connexion manuellement."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
 msgid "This section is active only for DIRECT connections (see {above})."
 msgstr ""
-"Cette section n'est active que pour des connexions DIRECTES (voir {ci-"
+"Cette section n'est active que pour des connexions directes (voir {ci-"
 "dessus})."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
@@ -21111,8 +21113,8 @@ msgid ""
 "If you are using an USB cable, the default serial port of your telescope "
 "most probably is not in the list of suggestions."
 msgstr ""
-"Si vous utilisez un câble USB, le port sériel par défaut de votre télescope "
-"ne figure probablement pas dans la liste des suggestions."
+"Si un câble USB est utilisé, le port sériel par défaut du télescope ne "
+"figure probablement pas dans la liste des suggestions."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:411
 msgid ""
@@ -21126,7 +21128,7 @@ msgid ""
 "This will list all devices, the full name of your serial port should be "
 "somewhere in the list (for example, '/dev/cu.usbserial-FTDFZVMK')."
 msgstr ""
-"La liste de tous les appareils. Le nom de votre port sériel est "
+"La liste de tous les appareils. Le nom du port sériel adéquat est "
 "vraisemblablement dans cette liste (par exemple, /dev/cu.usbserial-"
 "FTDFZVMK)."
 
@@ -21157,7 +21159,7 @@ msgid ""
 "<b>Host</b> can be either a host name or an {IPv4} address such as "
 "'127.0.0.1'. The default value of 'localhost' means 'this computer'."
 msgstr ""
-"L'<b>Hôte</b> peut être soit un nom d'hôte, soit une adresse {IPv4}, comme "
+"<b>Hôte</b> peut être soit un nom d'hôte, soit une adresse {IPv4}, comme "
 "127.0.0.1. La valeur par défaut est « localhost », ce qui signifie « cet "
 "ordinateur »."
 
@@ -21179,14 +21181,14 @@ msgid ""
 "only if you are attempting a remote connection over a network."
 msgstr ""
 "Pour les connexions indirectes, la modification du nom d'hôte par défaut n'a"
-" de sens que si vous tentez une connexion distante au moyen du réseau."
+" de sens que si une connexion distante et tentée au moyen du réseau."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:433
 msgid ""
 "In this case, it should be the name or IP address of the computer that runs "
 "a program that runs the telescope."
 msgstr ""
-"Dans ce cas, indiquez le nom ou l'adresse IP de l'ordinateur sur lequel "
+"Dans ce cas, indiquer le nom ou l'adresse IP de l'ordinateur sur lequel "
 "tourne le programme du télescope."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:437
@@ -21211,8 +21213,8 @@ msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with commas in the field below."
 msgstr ""
-"Cocher l'option « Utiliser des indicateurs de champ visuel », puis saisissez"
-" une liste de valeurs séparées par des virgules dans le champ ci-dessous."
+"Cocher l'option « Utiliser des indicateurs de champ visuel », puis saisir "
+"une liste de valeurs séparées par des virgules dans le champ ci-dessous."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:440
 msgid "The values are interpreted as degrees of arc."
@@ -21225,7 +21227,7 @@ msgid ""
 "moving reticle with the Telrad circles."
 msgstr ""
 "Ceci peut être utilisé en combinaison avec un {télescope virtuel} pour "
-"afficher un réticule se déplaçant avec des cercles Telrad."
+"afficher un réticule avec des cercles Telrad."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:448
 #, qt-format
@@ -21327,7 +21329,7 @@ msgstr "Par exemple, %1+1, pour le télescope #1."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:467
 msgid "This will move the telescope to the selected object."
-msgstr "Ceci pointera le télescope vers l'objet sélectionné."
+msgstr "Cette opération pointe le télescope vers l'objet sélectionné."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:468
 #, qt-format
@@ -21342,7 +21344,7 @@ msgstr ""
 msgid ""
 "This will slew the device to the point in the center of the current view."
 msgstr ""
-"Cette opération pointe l'appareil vers le point au centre de la vue "
+"Cette opération pointe le télescope vers le point au centre de la vue "
 "actuelle."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:471
@@ -21350,8 +21352,8 @@ msgid ""
 "If you move the view after issuing the command, the target won't change "
 "unless you issue another command."
 msgstr ""
-"Si vous déplacer le champ visuel après avoir lancé la commande, la position "
-"visée ne sera modifiée que si vous lancez une nouvelle commande."
+"Si la vue est modifiée après le lancement de la commande, la position visée "
+"ne sera modifiée qu'après avoir lancé une nouvelle commande."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:474
@@ -28323,7 +28325,7 @@ msgstr "Activer les mises à jour automatiques"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:427
 msgid "Next update:"
-msgstr "Prochaine mise à jou :"
+msgstr "Prochaine mise à jour :"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:428
 msgid "Last attempt to update"
