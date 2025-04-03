@@ -1963,6 +1963,8 @@ void NebulaMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 
 int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data)
 {
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+
 	int loadedTotal = 0;
 	for (auto it = data.begin(); it != data.end(); ++it)
 	{
@@ -2004,10 +2006,10 @@ int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data)
 				StelObject::CulturalName cName;
 				cName.native          = json["native"].toString("");
 				cName.pronounce       = json["pronounce"].toString("");
-				cName.pronounceI18n   = qc_(json["pronounce"].toString(""), json["context"].toString("")); // TODO: Clarify if context is available
+				cName.pronounceI18n   = trans.qtranslate(json["pronounce"].toString(""), json["context"].toString());
 				cName.transliteration = json["transliteration"].toString("");
 				cName.translated      = json["english"].toString("");
-				cName.translatedI18n  = qc_(json["english"].toString(""), json["context"].toString("")); // TODO: Clarify if context is available
+				cName.translatedI18n  = trans.qtranslate(json["english"].toString(""), json["context"].toString());
 				cName.IPA             = json["IPA"].toString("");
 
 				n->addCulturalName(cName);
