@@ -587,8 +587,8 @@ private:
 	//! CommonNames: unique 1:1 names
 	static QHash<StarId, QString> commonNamesMap;     // the original names from skyculture (star_names.fab)
 	static QHash<StarId, QString> commonNamesMapI18n; // translated names
-	static QMap<QString, StarId> commonNamesIndexI18n;
-	static QMap<QString, StarId> commonNamesIndex;    // back-references upper-case names
+	static QHash<QString, StarId> commonNamesIndexI18n;
+	static QHash<QString, StarId> commonNamesIndex;    // back-references upper-case names
 
 	//static QHash<StarId, QString> additionalNamesMap; // additional names. These will be replaced by the CulturalNames
 	//static QHash<StarId, QString> additionalNamesMapI18n;
@@ -604,16 +604,16 @@ private:
 	//! Scientific designations:
 	//! Bayer/Flamsteed
 	static QHash<StarId, QString> sciDesignationsMap;      // TODO: Must become multihash
-	static QMap<QString, StarId> sciDesignationsIndex;
+	static QHash<QString, StarId> sciDesignationsIndex;
 	//! Various other scientific labels.
 	static QHash<StarId, QString> sciExtraDesignationsMap; // TODO: Must become multihash
-	static QMap<QString, StarId> sciExtraDesignationsIndex;
+	static QHash<QString, StarId> sciExtraDesignationsIndex;
 
 	static QHash<StarId, varstar> varStarsMap;
-	static QMap<QString, StarId> varStarsIndex;
+	static QHash<QString, StarId> varStarsIndex;
 
 	static QHash<StarId, wds> wdsStarsMap;
-	static QMap<QString, StarId> wdsStarsIndex;
+	static QHash<QString, StarId> wdsStarsIndex;
 
 	static QMap<QString, crossid> crossIdMap;
 	static QHash<int, StarId> saoStarsIndex;
