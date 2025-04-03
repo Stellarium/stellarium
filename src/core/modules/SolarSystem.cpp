@@ -537,6 +537,9 @@ void SolarSystem::updateSkyCulture(const StelSkyCulture& skyCulture)
 	//planetNativeNamesMap.clear();
 	//planetNativeNamesMeaningMap.clear();
 
+	for (const auto& p : std::as_const(systemPlanets))
+		p->removeAllCulturalNames();
+
 	if (!skyCulture.names.isEmpty())
 		loadCultureSpecificNames(skyCulture.names);
 
@@ -545,22 +548,18 @@ void SolarSystem::updateSkyCulture(const StelSkyCulture& skyCulture)
 
 void SolarSystem::loadCultureSpecificNames(const QJsonObject& data)
 {
-	for (const auto& p : std::as_const(systemPlanets))
-		p->removeAllCulturalNames();
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 
 	for (auto it = data.begin(); it != data.end(); ++it)
 	{
 		const auto key = it.key();
-		const auto specificNames = it->toArray();
+		//const auto specificNames = it->toArray();
 
 		if (key.startsWith("NAME "))
 		{
-			const auto planetId = key.mid(5);
-			const auto names = it.value().toArray();
+			const QString planetId = key.mid(5);
+			const QJsonArray names = it.value().toArray(); // The array of name dicts
 
-			// We store only one name per planet, so just take the first valid one
-			// FIXME: maybe we should somehow store all
-			// YES, store all now...
 			PlanetP planet = searchByEnglishName(planetId);
 			if (!planet)
 				continue;
@@ -568,7 +567,7 @@ void SolarSystem::loadCultureSpecificNames(const QJsonObject& data)
 			//QString nativeName, nativeNameMeaning;
 			for (const auto& nameVal : names)
 			{
-				const auto nameObj = nameVal.toObject();
+				const QJsonObject json = nameVal.toObject();
 				//if (nameObj.find("english") == nameObj.end())
 				//	continue;
 				//nativeNameMeaning = nameObj["english"].toString();
@@ -579,13 +578,13 @@ void SolarSystem::loadCultureSpecificNames(const QJsonObject& data)
 				//break;
 
 				StelObject::CulturalName cName;
-				cName.native=nameObj["native"].toString();
-				cName.pronounce=nameObj["pronounce"].toString();
-				cName.pronounceI18n=q_(cName.pronounce);
-				cName.transliteration=nameObj["transliteration"].toString();
-				cName.translated=nameObj["english"].toString();
-				cName.translatedI18n=q_(cName.translated);
-				cName.IPA=nameObj["IPA"].toString();
+				cName.native=json["native"].toString();
+				cName.pronounce=json["pronounce"].toString();
+				cName.pronounceI18n=trans.qtranslate(cName.pronounce, json["context"].toString());
+				cName.transliteration=json["transliteration"].toString();
+				cName.translated=json["english"].toString();
+				cName.translatedI18n=trans.qtranslate(cName.translated, json["context"].toString());
+				cName.IPA=json["IPA"].toString();
 
 				planet->addCulturalName(cName);
 			}
