@@ -4371,7 +4371,7 @@ msgid ""
 "This sky culture is provided under unknown license. Please ask authors for "
 "details about license for this sky culture."
 msgstr ""
-"Cette culture céleste est fournie sans licence connue. Demandez aux auteurs "
+"Cette culture céleste est fournie sans licence connue. Demander aux auteurs "
 "les informations concernant la licence."
 
 #: src/core/StelSkyCultureMgr.cpp:421
@@ -4389,8 +4389,8 @@ msgid ""
 "You can use it for commercial and non-commercial purposes, freely adapt it "
 "and share adapted work."
 msgstr ""
-"Vous pouvez l'utiliser à des fins commerciales et non commerciales, "
-"l'adapter librement et partager toute œuvre dérivée."
+"Elle être utilisée à des fins commerciales et non commerciales, adaptée "
+"librement et toute œuvre dérivée peut être partagée."
 
 #: src/core/StelSkyCultureMgr.cpp:430
 msgid ""
@@ -4924,8 +4924,8 @@ msgid ""
 "Support is provided via the Github website.  Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
-"L'assistance est fournie via GitHub. N'oubliez pas de mentionner « %1 » dans"
-" l'objet du message."
+"L'assistance est fournie via GitHub. Ne pas oublier de mentionner « %1 » "
+"dans l'objet du message."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/core/StelModuleMgr.cpp:316
@@ -14645,8 +14645,8 @@ msgid ""
 "Observe what works best on your multicore system."
 msgstr ""
 "Des threads supplémentaires peuvent améliorer la performance lorsque de "
-"nombreux objets du système solaire sont affichés. Examinez ce qui fonctionne"
-" le mieux sur votre système multicœur."
+"nombreux objets du système solaire sont affichés. Examiner ce qui fonctionne"
+" le mieux sur votre système multi-cœur."
 
 #: src/ui_configurationDialog.h:2283
 msgid "Font size: Screen"
@@ -20564,7 +20564,7 @@ msgstr "ASCOM obsolète !"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:117
 msgid "Your ASCOM is below version 7. Upgrade to avoid problems!"
 msgstr ""
-"La version de votre ASCOM est antérieure à 7. Mettez à jour pour éviter des "
+"La version de ASCOM est antérieure à 7. Mettre à jour pour éviter des "
 "problèmes !"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:273
@@ -21028,7 +21028,7 @@ msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a {virtual "
 "telescope} (no connection)"
 msgstr ""
-"<b>Rien, une simple simulation (un réticule mouvant)</b> indique un "
+"<b>Rien, une simple simulation (un réticule qui se déplace)</b> indique un "
 "{télescope virtuel} (pas de connexion)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
@@ -21121,7 +21121,7 @@ msgid ""
 "To list all valid serial port names in Mac OS X, open a terminal and type:"
 msgstr ""
 "Pour obtenir la liste des ports sériels valide dans Mac OS X, ouvrir un "
-"terminal et tapez :"
+"terminal et taper :"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:412
 msgid ""
@@ -21337,8 +21337,8 @@ msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
 "device while holding down the <b>%1</b> key."
 msgstr ""
-"<b>Pour pointer un appareil au centre du champ visuel </b>: pressez le "
-"numéro de l'appareil en maintenant enfoncée la touche <b>%1</b>."
+"<b>Pour pointer un appareil au centre du champ visuel </b>: presser le "
+"numéro du télescope en maintenant enfoncée la touche <b>%1</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:470
 msgid ""
@@ -21467,10 +21467,10 @@ msgid ""
 "that will react in the same way as the reticle of a real telescope "
 "controlled by the plug-in."
 msgstr ""
-"Pour tester ce plugin sans appareil connecté à l'ordinateur, choisissez "
-"<b>Rien, une simple simulation (un réticule mouvant)</b> dans le champ "
-"<b>Télescope contrôlé par</b>. Un réticule sera affiché, qui réagira comme "
-"le réticule d'un véritable télescope piloté par le plugin."
+"Pour tester ce plugin sans appareil connecté à l'ordinateur, choisir "
+"<b>Rien, une simple simulation (un réticule qui se déplace)</b> dans le "
+"champ <b>Télescope contrôlé par</b>. Un réticule sera affiché, qui réagira "
+"comme le réticule d'un véritable télescope piloté par le plugin."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:504
@@ -21496,7 +21496,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:102
 msgctxt "numero sign"
 msgid "#"
-msgstr "#"
+msgstr "N°"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:530
 msgid "Status"
@@ -21761,7 +21761,7 @@ msgstr "Télescope RTS2"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:557
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr "Rien, une simple simulation (un réticule mouvant)"
+msgstr "Rien, une simple simulation (un réticule qui se déplace)"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:560
 msgid "Connection delay:"
@@ -22201,7 +22201,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:200
 msgid "Select bookmark..."
-msgstr "Sélectionnez un signet…"
+msgstr "Sélectionner un signet…"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:337
 msgid "Plain Text File"
@@ -22293,11 +22293,11 @@ msgstr "Télécharger une liste d'objets"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:484
 msgid "Select a source from the list:"
-msgstr "Sélectionnez une source depuis la liste :"
+msgstr "Sélectionner une source depuis la liste :"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:485
 msgid "Or enter a URL:"
-msgstr "Ou saisissez une URL:"
+msgstr "Ou saisir une URL:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:486
 msgid "Add this URL to the bookmarks list"
@@ -23627,7 +23627,7 @@ msgid ""
 msgstr ""
 "Le partage de ressources entre origines multiples (CORS = Cross-Origin "
 "Resource Sharing) permet au site web indiqué de prendre le contrôle de votre"
-" application Stellarium.<br/>Indiquez * pour permettre à n'importe quel site"
+" application Stellarium.<br/>Indiquer * pour permettre à n'importe quel site"
 " web de prendre le contrôle, à vos risques et périls."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:240
@@ -28213,7 +28213,7 @@ msgstr "Infos"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:298
 msgid "Info about meteor showers you can get here:"
-msgstr "Pour plus d'informations sur les pluies de météores, consultez :"
+msgstr "Pour plus d'informations sur les pluies de météores, consulter :"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
@@ -28771,7 +28771,7 @@ msgstr "Finalisation du chargement…"
 #: plugins/Scenery3d/src/Scenery3d.cpp:528
 msgid "Could not load scene, please check log for error messages!"
 msgstr ""
-"Impossible de charger la scène. Consultez les messages d'erreur dans le "
+"Impossible de charger la scène. Consulter les messages d'erreur dans le "
 "journal."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:532
@@ -28781,7 +28781,7 @@ msgstr "Scène chargée correctement."
 #: plugins/Scenery3d/src/Scenery3d.cpp:592
 msgid "Could not load scene info, please check log for error messages!"
 msgstr ""
-"Impossible de charger les infos de la scène. Consultez les messages d'erreur"
+"Impossible de charger les infos de la scène. Consulter les messages d'erreur"
 " dans le journal."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:616
@@ -28927,7 +28927,7 @@ msgstr "Retour au mode « 6 Textures » en raison d'un bogue ANGLE"
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
-"Le placage d'ombre ne peut pas être utilisé sur votre matériel. Consultez "
+"Le placage d'ombre ne peut pas être utilisé avec votre matériel. Consulter "
 "les journaux d'événements pour plus de détails."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:265
