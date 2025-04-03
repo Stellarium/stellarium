@@ -9866,7 +9866,7 @@ msgstr ""
 
 #: src/translations.h:583
 msgid "Script which runs automatically at startup"
-msgstr "Script s'exécutant au démarrage"
+msgstr "Script lancé au démarrage"
 
 #: src/translations.h:584
 msgid ""
@@ -14732,7 +14732,7 @@ msgstr "Lancer le script sélectionné"
 
 #: src/ui_configurationDialog.h:2326
 msgid "Stop a running script"
-msgstr "Stopper le script sélectionné"
+msgstr "Stopper un script en cours"
 
 #: src/ui_configurationDialog.h:2330
 msgid "Load at startup"
@@ -22055,7 +22055,7 @@ msgstr "Équateur galactique"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:439
 msgid "Sky Background (default: black)"
-msgstr "fond du ciel (par défaut : noir)"
+msgstr "Fond du ciel (par défaut : noir)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:472
 msgid "Effects"
@@ -22087,11 +22087,11 @@ msgstr "Intensité de la lumière zodiacale :"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:537
 msgid "Run local script"
-msgstr "Exécuter un script local"
+msgstr "Lancer un script local"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:543
 msgid "Stop running script"
-msgstr "Arrêter le script en cours d'exécution"
+msgstr "Stopper le script en cours"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:554
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:558
@@ -22161,7 +22161,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:151
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:238
 msgid "Import orbital elements in MPC format..."
-msgstr "Importation des paramètres orbitaux en format MPC…"
+msgstr "Importer des paramètres orbitaux en format MPC…"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:766
 msgid "Anonymous"
@@ -22194,10 +22194,10 @@ msgid ""
 "searching for \"%3\" will return %4, Halley's Comet, but a search for \"%5\""
 " will return the asteroid %6."
 msgstr ""
-"Il faut rajouter %1 ou %2 devant les <i>noms</i> des comètes. Si plus d'une "
+"Il faut ajouter %1 ou %2 devant les <i>noms</i> des comètes. Si plus d'une "
 "comète correspond à un nom, seul le premier résultat sera retourné. Par "
-"exemple, une recherche de \"%3\" retournera %4, la comète de Halley, mais "
-"une recherche de \"%5\" donnera l'astéroïde %6."
+"exemple, une recherche de « %3 » retournera %4, la comète de Halley, mais "
+"une recherche de « %5 » donnera l'astéroïde %6."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:200
 msgid "Select bookmark..."
@@ -22205,7 +22205,7 @@ msgstr "Sélectionner un signet…"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:337
 msgid "Plain Text File"
-msgstr "Fichier texte pur"
+msgstr "Fichier texte"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:339
 msgid "All Files"
@@ -22336,7 +22336,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:497
 msgid "This will update existing objects only."
-msgstr "Cette opération mettra seulement à jour les objets existants."
+msgstr "Cette opération ne mettra à jour que les objets existants."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:499
 msgid "Overwrite existing objects only"
@@ -22890,7 +22890,7 @@ msgstr "Ces champs désignent :"
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:332
 #, qt-format
 msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
-msgstr "GHA%1 : L'angle horaire de Greenwich du premier point de Aries."
+msgstr "GHA%1 : l'angle horaire de Greenwich du premier point de Aries."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:312
 msgid "SHA: Sidereal Hour Angle of the navigation star."
@@ -22954,7 +22954,7 @@ msgstr ""
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:331
 msgid "Ho: Simulated observed altitude of navigation star using a sextant."
 msgstr ""
-"Ho : Hauteur simulée de l'étoile de navigation observée au moyen du sextant."
+"Ho : hauteur simulée de l'étoile de navigation observée au moyen du sextant."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:333
 msgid "LMST: Local mean sidereal time."
