@@ -209,6 +209,14 @@ void MosaicCameraDialog::setAboutHtml(void)
 	html += "<p>" + q_("A 378 megapixel camera mounted on the Canada-France-Hawaii Telescope at Mauna Kea Observatory.  See more at: ") + "<a href=\"https://www.cfht.hawaii.edu/Instruments/Imaging/MegaPrime/\">https://www.cfht.hawaii.edu/Instruments/Imaging/MegaPrime/</a>" + "</p>";
 	html += "<h4>" + q_("LATISS") + "</h4>";
 	html += "<p>" + q_("The LSST Atmospheric Transmission Imager and Slitless Spectrograph.  A 16 megapixel camera mounted on the Rubin Observatory Auxiliary telescope.  See more at: ") + "<a href=\"https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/\">https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/</a>" + "</p>";
+	html += "<h4>" + q_("JWST") + "</h4>";
+	html += "<p>" + q_("The James Webb Space Telescope's focal plane. See more at: ") + "<a href=\"https://jwst-docs.stsci.edu/jwst-observatory-hardware/jwst-telescope/jwst-focal-plane#gsc.tab=0/\">https://jwst-docs.stsci.edu/jwst-observatory-hardware/jwst-telescope/jwst-focal-plane#gsc.tab=0</a>" + "</p>";
+	html += "<h4>" + q_("HST") + "</h4>";
+	html += "<p>" + q_("The Hubble Space Telescope's focal plane. See more at: ") + "<a href=\"https://hst-docs.stsci.edu/acsihb/chapter-3-acs-capabilities-design-and-operations/3-1-acs-location-in-the-hst-focal-plane\">https://hst-docs.stsci.edu/acsihb/chapter-3-acs-capabilities-design-and-operations/3-1-acs-location-in-the-hst-focal-plane</a>" + "</p>";
+	html += "<h4>" + q_("Roman") + "</h4>";
+	html += "<p>" + q_("The Nancy Grace Roman Space Telescope's focal plane. See more at: ") + "<a href=\"https://roman.gsfc.nasa.gov/science/WFI_technical.html\">https://roman.gsfc.nasa.gov/science/WFI_technical.html</a>" + "</p>";
+	html += "<h4>" + q_("Euclid") + "</h4>";
+	html += "<p>" + q_("The Euclid Space Telescope's focal plane. See more at: ") + "<a href=\"https://www.euclid-ec.org/public/mission/vis/\">https://www.euclid-ec.org/public/mission/vis/</a>" + "</p>";
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
