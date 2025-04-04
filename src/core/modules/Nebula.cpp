@@ -222,9 +222,7 @@ QStringList Nebula::getCultureLabels(StelObject::CulturalDisplayStyle style) con
 			labels << label;
 		}
 	labels.removeDuplicates();
-	int nullStrIdx=labels.indexOf("");
-	if (nullStrIdx>=0)
-		labels.remove(nullStrIdx);
+	labels.removeOne("");
 	return labels;
 }
 
