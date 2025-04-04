@@ -82,7 +82,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
-	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
+	//QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! Return the matching asterism object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensitive asterism name

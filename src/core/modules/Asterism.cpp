@@ -28,8 +28,9 @@
 #include "ZoneArray.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
+#include <QMessageBox>
 
-#include <algorithm>
+//#include <algorithm>
 #include <QString>
 #include <QTextStream>
 #include <QDebug>
@@ -55,36 +56,67 @@ Asterism::~Asterism()
 
 bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 {
-	abbreviation = data["id"].toString();
-	const auto commonName = data["common_name"];
-	if (commonName.isObject())
-		englishName = commonName.toObject()["english"].toString();
-	const auto polylines = data["lines"].toArray();
+	//abbreviation = data["id"].toString();
+
+	const QString id = data["id"].toString();
+	const QStringList idParts = id.split(" ");
+	if (idParts.size() == 3 && idParts[0] == "AST")
+	{
+		abbreviation = idParts[2];
+	}
+	else
+	{
+		qWarning().nospace() << "Bad asterism id: expected \"AST cultureName Abbrev\", got " << id;
+		return false;
+	}
+
+
+	const QJsonValue names = data["common_name"];
+	if (names.isObject())
+	{
+		culturalName.translated = names["english"].toString().trimmed();
+		culturalName.native = names["native"].toString().trimmed();
+		culturalName.pronounce = names["pronounce"].toString().trimmed();
+		//if (culturalName.native.isEmpty())
+		//{
+		//	if (culturalName.pronounce.isEmpty())
+		//		culturalName.native=culturalName.translated;
+		//	else
+		//		culturalName.native=culturalName.pronounce;
+		//}
+		culturalName.IPA = names["IPA"].toString().trimmed();
+		culturalName.transliteration = names["transliteration"].toString().trimmed();
+	}
+	const QJsonArray polylines = data["lines"].toArray();
 	asterism.clear();
 
 	flagAsterism = !data["is_ray_helper"].toBool();
 	typeOfAsterism = flagAsterism ? Type::Asterism : Type::RayHelper;
 
+	// TODO: Apparently ray helpers have no name. This could act to autodetect all this.
+	if(names.isObject()) Q_ASSERT(flagAsterism);
+
 	if (polylines.isEmpty())
 	{
-		qWarning().nospace() << "Empty asterism lines array found for asterism " << abbreviation << " (" << englishName << ")";
+		qWarning().nospace() << "Empty asterism lines array found for asterism " << id << " (" << culturalName.native << ")";
 		return false;
 	}
 
 	if (!polylines[0].toArray().isEmpty() && polylines[0].toArray()[0].isArray())
 	{
-		if (polylines[0].toArray()[0].toArray().size() != 2)
-		{
-			qWarning().nospace() << "Bad asterism point entry for asterism " << abbreviation
-			                     << " (" << englishName << "): expected size 2, got " << polylines[0].toArray()[0].toArray().size();
-			return false;
-		}
-		if (typeOfAsterism == Type::RayHelper)
-		{
-			qWarning() << "Mismatch between asterism type and line data: got a ray helper, "
-			              "but the line points contain two entries instead of one";
-			return false;
-		}
+		qWarning().nospace() << "Coordinate array detected for asterism" << id << ". This is obsolete. Skipping.";
+		//if (polylines[0].toArray()[0].toArray().size() != 2)
+		//{
+		//	qWarning().nospace() << "Bad asterism point entry for asterism " << id
+		//			     << " (" << culturalName.native << "): expected size 2, got " << polylines[0].toArray()[0].toArray().size();
+		//	return false;
+		//}
+		//if (typeOfAsterism == Type::RayHelper)
+		//{
+		//	qWarning() << "Mismatch between asterism type and line data: got a ray helper, "
+		//	              "but the line points contain two entries instead of one";
+		//	return false;
+		//}
 		// The entry contains RA and dec instead of HIP catalog number
 		typeOfAsterism = Type::TelescopicAsterism;
 	}
@@ -129,16 +161,18 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 			}
 			case Type::TelescopicAsterism:
 			{
+					QMessageBox::information(nullptr, "Bad asterism", "Asterism with coord list found: " + id);
+				/*
 				if (!point.isArray())
 				{
-					qWarning().nospace() << "Error in asterism " << abbreviation << ": bad point at line #"
+					qWarning().nospace() << "Error in asterism " << id << ": bad point at line #"
 					                     << lineIndex << ": isn't an array of two numbers (RA and dec)";
 					return false;
 				}
-				const auto arr = point.toArray();
+				const QJsonArray arr = point.toArray();
 				if (arr.size() != 2 || !arr[0].isDouble() || !arr[1].isDouble())
 				{
-					qWarning().nospace() << "Error in asterism " << abbreviation << ": bad point at line #"
+					qWarning().nospace() << "Error in asterism " << id << ": bad point at line #"
 					                     << lineIndex << ": isn't an array of two numbers (RA and dec)";
 					return false;
 				}
@@ -164,9 +198,10 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 				asterism.push_back(s);
 				if (!asterism.back())
 				{
-					qWarning() << "Error in asterism" << abbreviation << "- can't find star with coordinates" << RA << "/" << DE;
+					qWarning() << "Error in asterism" << id << "- can't find star with coordinates" << RA << "/" << DE;
 					return false;
 				}
+				*/
 				break;
 			}
 			}
@@ -204,81 +239,7 @@ QString Asterism::getInfoLabel() const
 
 QString Asterism::getCultureLabel(StelObject::CulturalDisplayStyle style) const
 {
-	QString label;
-	switch (style)
-	{
-		case CulturalDisplayStyle::Abbreviated:
-			label=(abbreviationI18n.startsWith('.') ? "" : abbreviationI18n);
-			break;
-		case CulturalDisplayStyle::Native:
-			label=nativeName;
-			break;
-		case CulturalDisplayStyle::Translated:
-			label=nameI18;
-			break;
-		case CulturalDisplayStyle::Modern:
-			label=englishName;
-			break;
-		case CulturalDisplayStyle::Pronounce:
-			label=getNamePronounce();
-			break;
-		case CulturalDisplayStyle::Translit:
-			label=nativeNameTranslit;
-			break;
-		case CulturalDisplayStyle::IPA:
-			label=nativeNameIPA;
-			break;
-		case CulturalDisplayStyle::Pronounce_Translated:
-			label=QString("%1 (%2)").arg(getNamePronounce(), nameI18);
-			break;
-		case CulturalDisplayStyle::Pronounce_IPA_Translated:
-			label=QString("%1 [%2] (%3)").arg(getNamePronounce(), nativeNameIPA, nameI18);
-			break;
-		case CulturalDisplayStyle::Pronounce_Translated_Modern:
-			label=QString("%1 (%2, %3)").arg(getNamePronounce(), nameI18, englishName);
-			break;
-		case CulturalDisplayStyle::Pronounce_IPA_Translated_Modern:
-			label=QString("%1 [%2] (%3, %4)").arg(getNamePronounce(), nativeNameIPA, nameI18, englishName);
-			break;
-		case CulturalDisplayStyle::Native_Pronounce:
-			label=QString("%1 [%2]").arg(nativeName, getNamePronounce());
-			break;
-		case CulturalDisplayStyle::Native_Pronounce_Translated:
-			label=QString("%1 [%2] (%3)").arg(nativeName, getNamePronounce(), nameI18);
-			break;
-		case CulturalDisplayStyle::Native_Pronounce_IPA_Translated:
-			label=QString("%1 [%2%3] (%4)").arg(nativeName, getNamePronounce(), nativeNameIPA.length() > 0 ? QString(", %1").arg(nativeNameIPA) : "", nameI18);
-			break;
-		case  CulturalDisplayStyle::Native_Translated:
-			label=QString("%1 (%2)").arg(nativeName, nameI18);
-			break;
-		case  CulturalDisplayStyle::Native_Translit_Translated:
-			label=QString("%1 [%2] (%3)").arg(nativeName, nativeNameTranslit, nameI18);
-			break;
-		case  CulturalDisplayStyle::Native_Translit_Pronounce_Translated:
-			label=QString("%1 [%2, %3] (%4)").arg(nativeName, nativeNameTranslit, getNamePronounce(), nameI18);
-			break;
-		case  CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated:
-			label=QString("%1 [%2, %3, %4] (%5)").arg(nativeName, nativeNameTranslit, getNamePronounce(), nativeNameIPA, nameI18);
-			break;
-		case  CulturalDisplayStyle::Native_Translit_IPA_Translated:
-			label=QString("%1 [%2, %3] (%4)").arg(nativeName, nativeNameTranslit, nativeNameIPA, nameI18);
-			break;
-		case  CulturalDisplayStyle::Translit_Translated:
-			label=QString("%1 (%2)").arg(nativeNameTranslit, nameI18);
-			break;
-		case  CulturalDisplayStyle::Translit_Pronounce_Translated:
-			label=QString("%1 [%2] (%3)").arg(nativeNameTranslit, getNamePronounce(), nameI18);
-			break;
-		case  CulturalDisplayStyle::Translit_Pronounce_IPA_Translated:
-			label=QString("%1 [%2, %3] (%4)").arg(nativeNameTranslit, getNamePronounce(), nativeNameIPA, nameI18);
-			break;
-		case  CulturalDisplayStyle::Translit_IPA_Translated:
-			label=QString("%1 [%2] (%4)").arg(nativeNameTranslit, nativeNameIPA, nameI18);
-			break;
-		// NO default here, else we may forget one.
-	}
-	return label;
+	return StelSkyCultureMgr::createCulturalLabel(culturalName, style, culturalName.translatedI18n, abbreviationI18n);
 }
 
 void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const

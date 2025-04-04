@@ -92,7 +92,8 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
-	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
+	// TODO later: Identify constellation from coordinate
+	//QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! @return the matching constellation object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensitive constellation name

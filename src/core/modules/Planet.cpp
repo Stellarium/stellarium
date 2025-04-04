@@ -489,53 +489,20 @@ QString Planet::getPlanetLabel() const
 	if (englishName==L1S("Pluto")) // We must prepend minor planet number here. Actually Dwarf Planet Pluto is still a "Planet" object in Stellarium...
 		oss << QString("(134340) ");
 
-//	if (getFlagNativeName())
-//	{
-//		switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
-//		{
-//			case 1: // constellationsNative
-//				oss << (nativeName.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNameNative(), getNameI18n()));
-//				break;
-//			case 2: // constellationsTranslated
-//				oss << (nativeNameMeaningI18n.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNameNativeI18n(), getNameI18n()));
-//				break;
-//			case 3: // constellationsEnglish
-//				oss << (nativeNameMeaning.isEmpty() ? getEnglishName() : QString("%1 [%2]").arg(nativeNameMeaning, getEnglishName()));
-//				break;
-//			default:
-//				oss << getNameI18n();
-//				break;
-//		}
-//	}
-//	else
-//	{
-//		switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
-//		{
-//			case 3: // constellationsEnglish
-//				oss << getEnglishName();
-//				break;
-//			case 1: // constellationsNative
-//			case 2: // constellationsTranslated
-//			default:
-//				oss << getNameI18n();
-//				break;
-//		}
-//	}
-
-	// AND NOW:
-	oss << getScreenLabel();
+	QString culturalScreenLabel=getScreenLabel();
+	oss << (culturalScreenLabel.isEmpty() ? getNameI18n() : culturalScreenLabel);
 	return str;
 }
 
 QString Planet::getScreenLabel() const
 {
 	QStringList list=getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle());
-	return list.isEmpty() ? "" : list.constFirst();
+	return list.isEmpty() ? getNameI18n() : list.constFirst();
 }
 QString Planet::getInfoLabel() const
 {
 	QStringList list=getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle());
-	return list.isEmpty() ? "" : list.join("; ");
+	return list.isEmpty() ? getNameI18n() : list.join(" -- ");
 }
 
 QStringList Planet::getCultureLabels(StelObject::CulturalDisplayStyle style) const
@@ -547,9 +514,8 @@ QStringList Planet::getCultureLabels(StelObject::CulturalDisplayStyle style) con
 			labels << label;
 		}
 	labels.removeDuplicates();
-	int nullStrIdx=labels.indexOf("");
-	if (nullStrIdx>=0)
-		labels.remove(nullStrIdx);
+	labels.removeAll(QString(""));
+	labels.removeAll(QString());
 	return labels;
 }
 

@@ -354,17 +354,18 @@ Asterism* AsterismMgr::findFromAbbreviation(const QString& abbreviation) const
 
 
 // Can't find asterism from a position because it's not well localized
-QList<StelObjectP> AsterismMgr::searchAround(const Vec3d&, double, const StelCore*) const
-{
-	return QList<StelObjectP>();
-}
+//QList<StelObjectP> AsterismMgr::searchAround(const Vec3d&, double, const StelCore*) const
+//{
+//	return QList<StelObjectP>();
+//}
 
 void AsterismMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	for (auto* asterism : asterisms)
 	{
-		asterism->nameI18 = trans.qtranslate(asterism->englishName, asterism->context);
+		asterism->culturalName.pronounceI18n = trans.qtranslate(asterism->culturalName.pronounce, asterism->context);
+		asterism->culturalName.translatedI18n = trans.qtranslate(asterism->culturalName.translated, asterism->context);
 	}
 }
 
@@ -449,26 +450,25 @@ bool AsterismMgr::getFlagLabels(void) const
 
 StelObjectP AsterismMgr::searchByNameI18n(const QString& nameI18n) const
 {
-	QString objw = nameI18n.toUpper();
-
+	QString nameI18nUpper = nameI18n.toUpper();
 	for (auto* asterism : asterisms)
 	{
-		QString objwcap = asterism->nameI18.toUpper();
-		if (objwcap == objw) return asterism;
+		QString astNameI18nUpper = asterism->culturalName.translatedI18n.toUpper();
+		if (astNameI18nUpper == nameI18nUpper) return asterism;
 	}
 	return nullptr;
 }
 
 StelObjectP AsterismMgr::searchByName(const QString& name) const
 {
-	QString objw = name.toUpper();
+	QString nameUpper = name.toUpper();
 	for (auto* asterism : asterisms)
 	{
-		QString objwcap = asterism->englishName.toUpper();
-		if (objwcap == objw) return asterism;
+		QString astNameUpper = asterism->culturalName.translated.toUpper();
+		if (astNameUpper == nameUpper) return asterism;
 
-		objwcap = asterism->abbreviation.toUpper();
-		if (objwcap == objw) return asterism;
+		astNameUpper = asterism->abbreviation.toUpper();
+		if (astNameUpper == nameUpper) return asterism;
 	}
 	return nullptr;
 }

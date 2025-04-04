@@ -100,15 +100,15 @@ private:
 	StelObjectP getBrightestStarInConstellation(void) const;
 
 	//! Get the translated name for the Constellation.
-	QString getNameI18n() const override {return nameI18;}
+	QString getNameI18n() const override {return culturalName.translatedI18n;}
 	//! Get the English name for the Constellation.
-	QString getEnglishName() const override {return englishName;}
+	QString getEnglishName() const override {return culturalName.translated;}
+	//! Get the native name for the Constellation
+	QString getNameNative() const override {return culturalName.native;}
+	//! Get (translated) pronouncement of the native name for the Constellation
+	QString getNamePronounce() const override {return (culturalName.pronounceI18n.isEmpty() ? culturalName.native : culturalName.pronounceI18n);}
 	//! Get the short name for the Constellation (returns the translated version of abbreviation).
 	QString getShortName() const {return abbreviationI18n;}
-	//! Get the native name for the Constellation
-	QString getNameNative() const override {return nativeName;}
-	//! Get (translated) pronouncement of the native name for the Constellation
-	QString getNamePronounce() const override {return (nativeNamePronounceI18n.length()>0 ? nativeNamePronounceI18n : nativeName);}
 	//! Combine screen label from various components, depending on settings in SkyCultureMgr
 	QString getScreenLabel() const override;
 	//! Combine InfoString label from various components, depending on settings in SkyCultureMgr
@@ -152,22 +152,25 @@ private:
 	//! @return true if sky culture elements rendering it turned on, else false.
 	bool checkVisibility() const;
 
-	//! International name (translated using gettext)
-	QString nameI18;
-	//! Name in English language
-	QString englishName;
-	//! Name in native language (original name of constellation in the source)
-	//! According to practice as of V0.13.1, this may be an empty string.
-	//! If empty, will be filled with englishName.
-	QString nativeName;
-	//! Latin-letter based transliteration geared at english pronounciation
-	QString nativeNamePronounce;
-	//! Translated transliteration geared at pronounciation in user language
-	QString nativeNamePronounceI18n;
-	//! Pronunciation aid in International Phonetic Alphabet (optional)
-	QString nativeNameIPA;
-	//! A scientific transliteration that does not help pronunciation. (Example: Tibetan/Wylie.)
-	QString nativeNameTranslit;
+	//! Constellation name. This is a culture-dependent thing, and in each skyculture a constellation has one name entry only.
+	//! Given multiple aspects of naming, we need all the components and more.
+	CulturalName culturalName;
+	////! International name (translated using gettext)
+	//QString nameI18;
+	////! Name in English language
+	//QString englishName;
+	////! Name in native language (original name of constellation in the source)
+	////! According to practice as of V0.13.1, this may be an empty string.
+	////! If empty, will be filled with englishName.
+	//QString nativeName;
+	////! Latin-letter based transliteration geared at english pronounciation
+	//QString nativeNamePronounce;
+	////! Translated transliteration geared at pronounciation in user language
+	//QString nativeNamePronounceI18n;
+	////! Pronunciation aid in International Phonetic Alphabet (optional)
+	//QString nativeNameIPA;
+	////! A scientific transliteration that does not help pronunciation. (Example: Tibetan/Wylie.)
+	//QString nativeNameTranslit;
 	//! Abbreviation (the short name or designation of constellations)
 	//! For non-western, a skyculture designer must invent it. (usually 2-5 Latin letters and numerics)
 	//! This MUST be filled and be unique within a sky culture.
