@@ -88,6 +88,9 @@ void MosaicCameraDialog::updateDialogFields()
 	ui->RotationSpinBox->blockSignals(false);
 	ui->visibleCheckBox->blockSignals(false);
 	ui->cameraListWidget->blockSignals(false);
+
+	QString html = QString("<h1>%1</h1>\n <p>%2</p>").arg(currentCameraFullName, currentCameraDescription);
+	ui->cameraTextBrowser->setHtml(html);
 }
 
 void MosaicCameraDialog::setRA(double ra)
@@ -110,9 +113,11 @@ void MosaicCameraDialog::setVisibility(bool visible)
 	ui->visibleCheckBox->setChecked(visible);
 }
 
-void MosaicCameraDialog::setCurrentCameraName(const QString& cameraName)
+void MosaicCameraDialog::setCurrentCameraName(const QString& cameraName, const QString& cameraFullName, const QString& cameraDescription)
 {
 	currentCameraName = cameraName;
+	currentCameraFullName = cameraFullName;
+	currentCameraDescription = cameraDescription;
 	updateDialogFields();
 }
 
@@ -197,26 +202,6 @@ void MosaicCameraDialog::setAboutHtml(void)
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + MOSAICCAMERA_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Josh Meyers &lt;jmeyers314@gmail.com&gt;</td></tr></table>";
 	html += "<p>" + q_("The Mosaic Camera plugin overlays camera sensor boundaries on the sky.  The position of an overlay is defined by its J2000 RA/Dec coordinates, and a camera rotation angle.") + "</p>";
-	html += "<h3>" + q_("Default Cameras") + "</h3>";
-	html += "<p>" + q_("A number of cameras are available to Stellarium by default.  See the User Guide for information about adding user-defined camera mosaics.") + "</p>";
-	html += "<h4>" + q_("LSSTCam") + "</h4>";
-	html += "<p>" + q_("The largest (as of 2025) digital camera ever assembled at 3.2 gigapixels. Now mounted on the Simonyi Survey Telescope at the Vera C. Rubin Observatory, this camera will be used to execute the Legacy Survey of Space and Time, creating a 10-year multicolor 'movie' of the southern sky. See more at: ") + "<a href=\"https://noirlab.edu/public/programs/vera-c-rubin-observatory/\">https://noirlab.edu/public/programs/vera-c-rubin-observatory/</a>" + "</p>";
-	html += "<h4>" + q_("HSC") + "</h4>";
-	html += "<p>" + q_("Hyper Suprime-Cam. A 900 megapixel camera mounted on the Subaru telescope at the Mauna Kea Observatory.  See more at: ") + "<a href=\"https://www.naoj.org/Projects/HSC/\">https://www.naoj.org/Projects/HSC/</a>" + "</p>";
-	html += "<h4>" + q_("DECam") + "</h4>";
-	html += "<p>" + q_("The Dark Energy Camera. A 570 megapixel camera mounted on the Blanco telescope at the Cerro Tololo Inter-American Observatory.  See more at: ") + "<a href=\"https://www.darkenergysurvey.org/the-des-project/instrument/\">https://www.darkenergysurvey.org/the-des-project/instrument/</a>" + "</p>";
-	html += "<h4>" + q_("MegaPrime") + "</h4>";
-	html += "<p>" + q_("A 378 megapixel camera mounted on the Canada-France-Hawaii Telescope at Mauna Kea Observatory.  See more at: ") + "<a href=\"https://www.cfht.hawaii.edu/Instruments/Imaging/MegaPrime/\">https://www.cfht.hawaii.edu/Instruments/Imaging/MegaPrime/</a>" + "</p>";
-	html += "<h4>" + q_("LATISS") + "</h4>";
-	html += "<p>" + q_("The LSST Atmospheric Transmission Imager and Slitless Spectrograph.  A 16 megapixel camera mounted on the Rubin Observatory Auxiliary telescope.  See more at: ") + "<a href=\"https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/\">https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/</a>" + "</p>";
-	html += "<h4>" + q_("JWST") + "</h4>";
-	html += "<p>" + q_("The James Webb Space Telescope's focal plane. See more at: ") + "<a href=\"https://jwst-docs.stsci.edu/jwst-observatory-hardware/jwst-telescope/jwst-focal-plane#gsc.tab=0/\">https://jwst-docs.stsci.edu/jwst-observatory-hardware/jwst-telescope/jwst-focal-plane#gsc.tab=0</a>" + "</p>";
-	html += "<h4>" + q_("HST") + "</h4>";
-	html += "<p>" + q_("The Hubble Space Telescope's focal plane. See more at: ") + "<a href=\"https://hst-docs.stsci.edu/acsihb/chapter-3-acs-capabilities-design-and-operations/3-1-acs-location-in-the-hst-focal-plane\">https://hst-docs.stsci.edu/acsihb/chapter-3-acs-capabilities-design-and-operations/3-1-acs-location-in-the-hst-focal-plane</a>" + "</p>";
-	html += "<h4>" + q_("Roman") + "</h4>";
-	html += "<p>" + q_("The Nancy Grace Roman Space Telescope's focal plane. See more at: ") + "<a href=\"https://roman.gsfc.nasa.gov/science/WFI_technical.html\">https://roman.gsfc.nasa.gov/science/WFI_technical.html</a>" + "</p>";
-	html += "<h4>" + q_("Euclid") + "</h4>";
-	html += "<p>" + q_("The Euclid Space Telescope's focal plane. See more at: ") + "<a href=\"https://www.euclid-ec.org/public/mission/vis/\">https://www.euclid-ec.org/public/mission/vis/</a>" + "</p>";
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());

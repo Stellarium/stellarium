@@ -40,7 +40,7 @@ public:
 	void setRotation(double rot);
 	void setVisibility(bool visible);
 	QString getCurrentCameraName() const;
-	void setCurrentCameraName(const QString& cameraName);
+	void setCurrentCameraName(const QString& cameraName, const QString& cameraFullName, const QString& cameraDescription);
 
 protected:
 	void createDialogContent() override;
@@ -55,6 +55,8 @@ public slots:
 
 private:
 	QString currentCameraName;
+	QString currentCameraFullName;
+	QString currentCameraDescription;
 
 	MosaicCamera* mc;
 	Ui_mosaicCameraDialog* ui;
