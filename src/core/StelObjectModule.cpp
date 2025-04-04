@@ -37,6 +37,11 @@ bool StelObjectModule::matchObjectName(const QString& objName, const QString& ob
 		return objName.contains(objPrefix, Qt::CaseInsensitive);
 }
 
+QList<StelObjectP> StelObjectModule::searchAround(const Vec3d& v, double limitFov, const StelCore* core) const
+{
+	return QList<StelObjectP>();
+}
+
 QStringList StelObjectModule::listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
