@@ -63,8 +63,8 @@ Constellation::~Constellation()
 
 bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 {
-	const auto id = data["id"].toString();
-	const auto idParts = id.split(" ");
+	const QString id = data["id"].toString();
+	const QStringList idParts = id.split(" ");
 	if (idParts.size() == 3 && idParts[0] == "CON")
 	{
 		abbreviation = idParts[2];
@@ -75,14 +75,22 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 		return false;
 	}
 
-	const auto names = data["common_name"].toObject();
-	nativeName = names["native"].toString();
-	nativeNamePronounce = names["pronounce"].toString();
-	nativeNameIPA = names["IPA"].toString();
-	nativeNameTranslit = names["transliteration"].toString();
-	englishName = names["english"].toString();
-	context = names["context"].toString();
-	if (englishName.isEmpty() && nativeName.isEmpty() && nativeNamePronounce.isEmpty())
+	const QJsonValue names = data["common_name"].toObject();
+	culturalName.translated = names["english"].toString().trimmed();
+	culturalName.native = names["native"].toString().trimmed();
+	culturalName.pronounce = names["pronounce"].toString().trimmed();
+	//if (culturalName.native.isEmpty())
+	//{
+	//	if (culturalName.pronounce.isEmpty())
+	//		culturalName.native=culturalName.translated;
+	//	else
+	//		culturalName.native=culturalName.pronounce;
+	//}
+	culturalName.IPA = names["IPA"].toString().trimmed();
+	culturalName.transliteration = names["transliteration"].toString().trimmed();
+
+	context = names["context"].toString().trimmed();
+	if (culturalName.translated.isEmpty() && culturalName.native.isEmpty() && culturalName.pronounce.isEmpty())
 		qWarning() << "No name for constellation" << id;
 
 	constellation.clear();
@@ -172,81 +180,7 @@ QString Constellation::getInfoLabel() const
 
 QString Constellation::getCultureLabel(StelObject::CulturalDisplayStyle style) const
 {
-	QString label;
-	switch (style)
-	{
-		case CulturalDisplayStyle::Abbreviated:
-			label=(abbreviationI18n.startsWith('.') ? "" : abbreviationI18n);
-			break;
-		case CulturalDisplayStyle::Native:
-			label=nativeName;
-			break;
-		case CulturalDisplayStyle::Translated:
-			label=nameI18;
-			break;
-		case CulturalDisplayStyle::Modern:
-			label=englishName;
-			break;
-		case CulturalDisplayStyle::Pronounce:
-			label=getNamePronounce();
-			break;
-		case CulturalDisplayStyle::Translit:
-			label=nativeNameTranslit;
-			break;
-		case CulturalDisplayStyle::IPA:
-			label=nativeNameIPA;
-			break;
-		case CulturalDisplayStyle::Pronounce_Translated:
-			label=QString("%1 (%2)").arg(getNamePronounce(), nameI18);
-			break;
-		case CulturalDisplayStyle::Pronounce_IPA_Translated:
-			label=QString("%1 [%2] (%3)").arg(getNamePronounce(), nativeNameIPA, nameI18);
-			break;
-		case CulturalDisplayStyle::Pronounce_Translated_Modern:
-			label=QString("%1 (%2, %3)").arg(getNamePronounce(), nameI18, englishName);
-			break;
-		case CulturalDisplayStyle::Pronounce_IPA_Translated_Modern:
-			label=QString("%1 [%2] (%3, %4)").arg(getNamePronounce(), nativeNameIPA, nameI18, englishName);
-			break;
-		case CulturalDisplayStyle::Native_Pronounce:
-			label=QString("%1 [%2]").arg(nativeName, getNamePronounce());
-			break;
-		case CulturalDisplayStyle::Native_Pronounce_Translated:
-			label=QString("%1 [%2] (%3)").arg(nativeName, getNamePronounce(), nameI18);
-			break;
-		case CulturalDisplayStyle::Native_Pronounce_IPA_Translated:
-			label=QString("%1 [%2%3] (%4)").arg(nativeName, getNamePronounce(), nativeNameIPA.length() > 0 ? QString(", %1").arg(nativeNameIPA) : "", nameI18);
-			break;
-		case  CulturalDisplayStyle::Native_Translated:
-			label=QString("%1 (%2)").arg(nativeName, nameI18);
-			break;
-		case  CulturalDisplayStyle::Native_Translit_Translated:
-			label=QString("%1 [%2] (%3)").arg(nativeName, nativeNameTranslit, nameI18);
-			break;
-		case  CulturalDisplayStyle::Native_Translit_Pronounce_Translated:
-			label=QString("%1 [%2, %3] (%4)").arg(nativeName, nativeNameTranslit, getNamePronounce(), nameI18);
-			break;
-		case  CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated:
-			label=QString("%1 [%2, %3, %4] (%5)").arg(nativeName, nativeNameTranslit, getNamePronounce(), nativeNameIPA, nameI18);
-			break;
-		case  CulturalDisplayStyle::Native_Translit_IPA_Translated:
-			label=QString("%1 [%2, %3] (%4)").arg(nativeName, nativeNameTranslit, nativeNameIPA, nameI18);
-			break;
-		case  CulturalDisplayStyle::Translit_Translated:
-			label=QString("%1 (%2)").arg(nativeNameTranslit, nameI18);
-			break;
-		case  CulturalDisplayStyle::Translit_Pronounce_Translated:
-			label=QString("%1 [%2] (%3)").arg(nativeNameTranslit, getNamePronounce(), nameI18);
-			break;
-		case  CulturalDisplayStyle::Translit_Pronounce_IPA_Translated:
-			label=QString("%1 [%2, %3] (%4)").arg(nativeNameTranslit, getNamePronounce(), nativeNameIPA, nameI18);
-			break;
-		case  CulturalDisplayStyle::Translit_IPA_Translated:
-			label=QString("%1 [%2] (%4)").arg(nativeNameTranslit, nativeNameIPA, nameI18);
-			break;
-		// NO default here, else we may forget one.
-	}
-	return label;
+	return StelSkyCultureMgr::createCulturalLabel(culturalName, style, culturalName.translatedI18n, abbreviationI18n);
 }
 
 void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const

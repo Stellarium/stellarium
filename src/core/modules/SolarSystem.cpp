@@ -578,12 +578,21 @@ void SolarSystem::loadCultureSpecificNames(const QJsonObject& data)
 				//break;
 
 				StelObject::CulturalName cName;
+				cName.translated=json["english"].toString();
 				cName.native=json["native"].toString();
+				//if (cName.native.isEmpty()) cName.native=cName.translated;
 				cName.pronounce=json["pronounce"].toString();
+				if (cName.native.isEmpty())
+				{
+					if (cName.pronounce.isEmpty())
+						cName.native=cName.pronounce=cName.translated;
+					else
+						cName.native=cName.pronounce;
+				}
+
+				cName.translatedI18n=trans.qtranslate(cName.translated, json["context"].toString());
 				cName.pronounceI18n=trans.qtranslate(cName.pronounce, json["context"].toString());
 				cName.transliteration=json["transliteration"].toString();
-				cName.translated=json["english"].toString();
-				cName.translatedI18n=trans.qtranslate(cName.translated, json["context"].toString());
 				cName.IPA=json["IPA"].toString();
 
 				planet->addCulturalName(cName);

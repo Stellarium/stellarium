@@ -148,6 +148,10 @@ class StelSkyCultureMgr : public StelModule
 		   READ getInfoLabelStyle
 		   WRITE setInfoLabelStyle
 		   NOTIFY infoLabelStyleChanged)
+	Q_PROPERTY(bool flagOverrideUseCommonNames
+		   READ getFlagOverrideUseCommonNames
+		   WRITE setFlagOverrideUseCommonNames
+		   NOTIFY flagOverrideUseCommonNamesChanged)
 
 public:
 	StelSkyCultureMgr();
@@ -159,7 +163,12 @@ public:
 	void init();
 
 	//! Creates one label from cName
-	static QString createCulturalLabel(const StelObject::CulturalName cName, const StelObject::CulturalDisplayStyle style, const QString commonNameI18n);
+	//! @param commonNameI18n object common name in user language.
+	//! @param shortI18n string to use in the Abbrev... settings
+	static QString createCulturalLabel(const StelObject::CulturalName &cName,
+					   const StelObject::CulturalDisplayStyle style,
+					   const QString &commonNameI18n,
+					   const QString &abbrevI18n=QString());
 	
 public slots:
 	//! Get the current sky culture English name.
@@ -230,15 +239,20 @@ public slots:
 	StelObject::CulturalDisplayStyle getScreenLabelStyle() const;
 	//! Sets the screen labeling setting for the currently active skyculture
 	void setScreenLabelStyle(const StelObject::CulturalDisplayStyle style);
-	//! TODO: scripting version
+	//! scripting version
 	void setScreenLabelStyle(const QString &style);
 
 	//! Returns the InfoString labeling setting for the currently active skyculture
 	StelObject::CulturalDisplayStyle getInfoLabelStyle() const;
 	//! sets the InfoString labeling setting for the currently active skyculture
 	void setInfoLabelStyle(const StelObject::CulturalDisplayStyle style);
-	//! TODO: scripting version
+	//! scripting version
 	void setInfoLabelStyle(const QString &style);
+
+	//! Returns whether we ignore SC authors' settings "fallback_to_international_names"
+	bool getFlagOverrideUseCommonNames() const {return flagOverrideUseCommonNames; }
+	//! Set whether we ignore SC authors' settings "fallback_to_international_names"
+	void setFlagOverrideUseCommonNames(bool override);
 
 signals:
 	//! Emitted whenever the default sky culture changed.
@@ -255,6 +269,8 @@ signals:
 	void infoLabelStyleChanged(const StelObject::CulturalDisplayStyle style);
 	//! Emitted when ScreenLabelStyle has changed
 	void screenLabelStyleChanged(const StelObject::CulturalDisplayStyle style);
+
+	void flagOverrideUseCommonNamesChanged(bool override);
 
 private:
 	//! Scan all sky cultures to get their names and other properties.
@@ -289,6 +305,9 @@ private:
 	StelSkyCulture currentSkyCulture;
 	
 	QString defaultSkyCultureID;
+
+	//! Ignore skyculture dict setting "fallback_to_international_names"
+	bool flagOverrideUseCommonNames;
 };
 
 #endif // STELSKYCULTUREMGR_HPP
