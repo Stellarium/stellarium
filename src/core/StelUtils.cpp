@@ -1814,7 +1814,7 @@ double getDeltaTByChaprontTouze(const double jDay)
 
 	if (-391 < year && year <= 948)
 		deltaT = (42.4*u +495.0)*u + 2177.0;
-	if (948 < year && year <= 1600)
+	if (948 < year) // && year <= 1600)
 		deltaT = (23.6*u +100.0)*u + 102.0;
 
 	return deltaT;

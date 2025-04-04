@@ -1011,7 +1011,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 		{
 			drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
 		}
-		else if (landscape->getDefaultAtmosphericPressure() < 0.0)
+		else if (landscape->getDefaultAtmosphericPressure() < 0.0 && landscape->getDefaultAtmosphericPressure() > -1.5)
 		{
 			// compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
 			// International altitude formula found in Wikipedia.
