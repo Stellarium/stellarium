@@ -47,7 +47,8 @@ public:
 	//! @param limitFov angular diameter of the searching zone in degree.
 	//! @param core the StelCore instance to use.
 	//! @return the list of all the displayed objects contained in the defined zone.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const = 0;
+	//! @note the default just returns an empty list.
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	
 	//! Find a StelObject by name.
 	//! @param nameI18n The translated name for the current sky locale.
