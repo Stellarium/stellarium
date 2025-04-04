@@ -80,6 +80,7 @@ QString Star1::getDesignation() const
 	else
 		starNames << QString("Gaia DR3 %1").arg(star_id);
 	starNames.removeAll(QString(""));
+	starNames.removeAll(QString());
 	if (starNames.count()>0)
 		return starNames.first();
 	else

@@ -836,8 +836,8 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 		StelObject::CulturalName cName{entry["native"].toString(), entry["pronounce"].toString(), trans.qTranslateStar(entry["pronounce"].toString()),
 					entry["transliteration"].toString(), entry["english"].toString(), trans.qTranslateStar(entry["english"].toString()), entry["IPA"].toString()};
 
-		if (culturalNamesMap.contains(HIP))
-			qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated;
+		//if (culturalNamesMap.contains(HIP))
+		//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated;
 		culturalNamesMap.insert(HIP, cName); // add as possibly multiple entry to HIP.
 		if (!cName.native.isEmpty())
 			culturalNamesIndex.insert(cName.native.toUpper(), HIP);
@@ -892,8 +892,8 @@ void StarMgr::loadCultureSpecificNameForStar(const QJsonArray& data, const StarI
 
 		StelObject::CulturalName cName{entry["native"].toString(), entry["pronounce"].toString(), trans.qTranslateStar(entry["pronounce"].toString()),
 					entry["transliteration"].toString(), entry["english"].toString(), trans.qTranslateStar(entry["english"].toString()), entry["IPA"].toString()};
-		if (culturalNamesMap.contains(HIP))
-			qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated << "/" << cName.translatedI18n;
+		//if (culturalNamesMap.contains(HIP))
+		//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated << "/" << cName.translatedI18n;
 		culturalNamesMap.insert(HIP, cName); // add as possibly multiple entry to HIP.
 		if (!cName.native.isEmpty())
 			culturalNamesIndex.insert(cName.native.toUpper(), HIP);
@@ -904,7 +904,7 @@ void StarMgr::loadCultureSpecificNameForStar(const QJsonArray& data, const StarI
 		if (!cName.translatedI18n.isEmpty())
 			culturalNamesIndex.insert(cName.translatedI18n.toUpper(), HIP);
 	}
-	qInfo() << "Skyculture has " << culturalNamesMap.size() << "entries, index has" << culturalNamesIndex.size();
+	//qInfo() << "Skyculture has " << culturalNamesMap.size() << "entries, index has" << culturalNamesIndex.size();
 }
 
 void StarMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QString, int>& commonNamesIndexToSearchWhileLoading)
@@ -2512,7 +2512,7 @@ QString StarMgr::getCulturalScreenLabel(StarId hip)
 QString StarMgr::getCulturalInfoLabel(StarId hip)
 {
 	QStringList list=getCultureLabels(hip, GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle());
-	return list.isEmpty() ? "" : list.join("; ");
+	return list.isEmpty() ? "" : list.join(" -- ");
 }
 
 QStringList StarMgr::getCultureLabels(StarId hip, StelObject::CulturalDisplayStyle style)

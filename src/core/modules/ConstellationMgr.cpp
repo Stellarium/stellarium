@@ -687,10 +687,12 @@ Constellation* ConstellationMgr::findFromAbbreviation(const QString& abbreviatio
 }
 
 // Can't find constellation from a position because it's not well localized
-QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d&, double, const StelCore*) const
-{
-	return QList<StelObjectP>();
-}
+// TODO: For modern... SCs, this can just identify IAU constellations.
+// TODO later: identify from convex hulls.
+//QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d&, double, const StelCore*) const
+//{
+//	return QList<StelObjectP>();
+//}
 
 QStringList ConstellationMgr::getConstellationsEnglishNames()
 {
@@ -709,21 +711,21 @@ void ConstellationMgr::updateI18n()
 	for (auto* constellation : constellations)
 	{
 		QString context = constellation->context;
-		constellation->nameI18 = trans.tryQtranslate(constellation->englishName, context);
-		if (constellation->nameI18.isEmpty())
+		constellation->culturalName.translatedI18n = trans.tryQtranslate(constellation->culturalName.translated, context);
+		if (constellation->culturalName.translatedI18n.isEmpty())
 		{
 			if (context.isEmpty())
-				constellation->nameI18 = q_(constellation->englishName);
+				constellation->culturalName.translatedI18n = q_(constellation->culturalName.translated);
 			else
-				constellation->nameI18 = qc_(constellation->englishName, context);
+				constellation->culturalName.translatedI18n = qc_(constellation->culturalName.translated, context);
 		}
-		constellation->nativeNamePronounceI18n = trans.tryQtranslate(constellation->nativeNamePronounce, context);
-		if (constellation->nativeNamePronounceI18n.isEmpty())
+		constellation->culturalName.pronounceI18n = trans.tryQtranslate(constellation->culturalName.pronounce, context);
+		if (constellation->culturalName.pronounceI18n.isEmpty())
 		{
 			if (context.isEmpty())
-				constellation->nativeNamePronounceI18n = q_(constellation->nativeNamePronounce);
+				constellation->culturalName.pronounceI18n = q_(constellation->culturalName.pronounce);
 			else
-				constellation->nativeNamePronounceI18n = qc_(constellation->nativeNamePronounce, context);
+				constellation->culturalName.pronounceI18n = qc_(constellation->culturalName.pronounce, context);
 		}
 		constellation->abbreviationI18n = trans.tryQtranslate(constellation->abbreviation, context);
 		if (constellation->abbreviationI18n.isEmpty())
@@ -1366,26 +1368,26 @@ void ConstellationMgr::drawBoundaries(StelPainter& sPainter, const Vec3d &obsVel
 
 StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const
 {
-	QString objw = nameI18n.toUpper();
+	QString nameI18nUpper = nameI18n.toUpper();
 
 	for (auto* constellation : constellations)
 	{
-		QString objwcap = constellation->nameI18.toUpper();
-		if (objwcap == objw) return constellation;
+		QString connameI18nUpper = constellation->culturalName.translatedI18n.toUpper();
+		if (connameI18nUpper == nameI18nUpper) return constellation;
 	}
 	return nullptr;
 }
 
 StelObjectP ConstellationMgr::searchByName(const QString& name) const
 {
-	QString objw = name.toUpper();
+	QString nameUpper = name.toUpper();
 	for (auto* constellation : constellations)
 	{
-		QString objwcap = constellation->englishName.toUpper();
-		if (objwcap == objw) return constellation;
+		QString conNameUpper = constellation->culturalName.translated.toUpper();
+		if (conNameUpper == nameUpper) return constellation;
 
-		objwcap = constellation->abbreviation.toUpper();
-		if (objwcap == objw) return constellation;
+		conNameUpper = constellation->abbreviation.toUpper();
+		if (conNameUpper == nameUpper) return constellation;
 	}
 	return nullptr;
 }

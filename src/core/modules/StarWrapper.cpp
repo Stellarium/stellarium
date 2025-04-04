@@ -240,27 +240,16 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	if (flags&Name)
 	{
-		QString commonNames;
-		if (!commonNameI18.isEmpty())
-			commonNames = commonNameI18;
-
-		//if (!additionalNameI18.isEmpty() && StarMgr::getFlagAdditionalNames())
-		//{
-		//	QStringList additionalNames = additionalNameI18.split(" - ");
-		//	additionalNames.removeDuplicates();
-
-		//	commonNames.append(QString(" (%1)").arg(additionalNames.join(" - ")));
-		//}
-
-		if (!commonNames.isEmpty())
-			oss << StelUtils::wrapText(commonNames, 80);
+		QString allNames = culturalInfoName;
 
 		// TODO: Finalize appearance of cultural Names
-		if (!culturalInfoName.isEmpty())
-			oss << culturalInfoName << "<br />";
+		if (culturalInfoName.isEmpty())
+			allNames = commonNameI18;
 
+		if (!allNames.isEmpty())
+			oss << StelUtils::wrapText(allNames, 80);
 
-		if (!commonNameI18.isEmpty() && !designationsList.isEmpty() && flags&CatalogNumber)
+		if (!allNames.isEmpty() && !designationsList.isEmpty() && flags&CatalogNumber)
 			oss << "<br />";
 	}
 
