@@ -1212,35 +1212,35 @@ void StarMgr::loadBinaryOrbitalData(const QString& orbitalParamFile)
 		else
 		{
 			// The record is the right format.  Extract the fields
-			bool ok;
-			orbitalData.binary_period = fields.at(2).toDouble(&ok);
-			orbitalData.eccentricity = fields.at(3).toFloat(&ok);
-			orbitalData.inclination = fields.at(4).toFloat(&ok);
-			orbitalData.big_omega = fields.at(5).toFloat(&ok);
-			orbitalData.small_omega = fields.at(6).toFloat(&ok);
-			orbitalData.periastron_epoch = fields.at(7).toDouble(&ok);
-			orbitalData.semi_major = fields.at(8).toDouble(&ok);
-			orbitalData.bary_distance = fields.at(9).toDouble(&ok);
-			orbitalData.data_epoch = fields.at(10).toDouble(&ok);
-			orbitalData.bary_ra = fields.at(11).toDouble(&ok);
-			orbitalData.bary_dec = fields.at(12).toDouble(&ok);
-			orbitalData.bary_rv = fields.at(13).toDouble(&ok);
-			orbitalData.bary_pmra = fields.at(14).toDouble(&ok);
-			orbitalData.bary_pmdec = fields.at(15).toDouble(&ok);
-			orbitalData.primary_mass = fields.at(16).toFloat(&ok);
-			orbitalData.secondary_mass = fields.at(17).toFloat(&ok);
+			bool ok, allOK=true;
+			orbitalData.binary_period    = fields.at(2).toDouble(&ok);  allOK &= ok;
+			orbitalData.eccentricity     = fields.at(3).toFloat(&ok);   allOK &= ok;
+			orbitalData.inclination      = fields.at(4).toFloat(&ok);   allOK &= ok;
+			orbitalData.big_omega        = fields.at(5).toFloat(&ok);   allOK &= ok;
+			orbitalData.small_omega      = fields.at(6).toFloat(&ok);   allOK &= ok;
+			orbitalData.periastron_epoch = fields.at(7).toDouble(&ok);  allOK &= ok;
+			orbitalData.semi_major       = fields.at(8).toDouble(&ok);  allOK &= ok;
+			orbitalData.bary_distance    = fields.at(9).toDouble(&ok);  allOK &= ok;
+			orbitalData.data_epoch       = fields.at(10).toDouble(&ok); allOK &= ok;
+			orbitalData.bary_ra          = fields.at(11).toDouble(&ok); allOK &= ok;
+			orbitalData.bary_dec         = fields.at(12).toDouble(&ok); allOK &= ok;
+			orbitalData.bary_rv          = fields.at(13).toDouble(&ok); allOK &= ok;
+			orbitalData.bary_pmra        = fields.at(14).toDouble(&ok); allOK &= ok;
+			orbitalData.bary_pmdec       = fields.at(15).toDouble(&ok); allOK &= ok;
+			orbitalData.primary_mass     = fields.at(16).toFloat(&ok);  allOK &= ok;
+			orbitalData.secondary_mass   = fields.at(17).toFloat(&ok);  allOK &= ok;
 			// do primary star
-			hip = fields.at(0).toLongLong(&ok);
+			hip = fields.at(0).toLongLong(&ok); allOK &= ok;
 			orbitalData.hip = hip;
 			orbitalData.primary = true;
 			binaryOrbitStarMap[hip] = orbitalData;
 			// do secondary star
-			hip = fields.at(1).toLongLong(&ok);
+			hip = fields.at(1).toLongLong(&ok); allOK &= ok;
 			orbitalData.hip = hip;
 			orbitalData.primary = false;
 			binaryOrbitStarMap[hip] = orbitalData;
 
-			if (!ok)
+			if (!allOK)
 			{
 				qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(orbitalParamFile)
 						     << " - failed to convert " << fields.at(0) << "to a number";
