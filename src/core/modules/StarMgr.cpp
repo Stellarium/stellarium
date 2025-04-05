@@ -696,8 +696,7 @@ void StarMgr::populateHipparcosLists()
 		   variableHipStars.count() << " variable (" << algolTypeStars.count() << " Algol-type, " << classicalCepheidsTypeStars.count() << " Cepheids), " <<
 		   carbonStars.count() << " Carbon stars, " << bariumStars.count() << " Barium stars, and " << hipStarsHighPM.count() << " have PM>1000mas/yr.";
 
-	qInfo() << classicalCepheidsTypeStars;
-
+	//qInfo() << classicalCepheidsTypeStars;
 }
 
 // Load common names from file
@@ -810,7 +809,6 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 
 	for (const QJsonValue& entry : data)
 	{
-
 		// See if we have configured unwanted references. We can only attempt to exclude entries which actually have references.
 		QVariantList refsVariants=entry["references"].toArray().toVariantList();
 		if (!refsVariants.isEmpty())
@@ -903,21 +901,12 @@ void StarMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QStri
 	}
 }
 
-// Load scientific names from file
-void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
+// Load scientific designations from file
+void StarMgr::loadSciDesignations(const QString& sciNameFile, QHash<StarId, QString>map, QHash<QString, StarId>index)
 {
-	if (extraData)
-	{
-		sciExtraDesignationsMap.clear();
-		sciExtraDesignationsIndex.clear();
-		qInfo().noquote() << "Loading scientific star extra names from" << QDir::toNativeSeparators(sciNameFile);
-	}
-	else
-	{
-		sciDesignationsMap.clear();
-		sciDesignationsIndex.clear();
-		qInfo().noquote() << "Loading scientific star names from" << QDir::toNativeSeparators(sciNameFile);
-	}
+	map.clear();
+	index.clear();
+	qInfo().noquote() << "Loading scientific star designations from" << QDir::toNativeSeparators(sciNameFile);
 
 	QFile snFile(sciNameFile);
 	if (!snFile.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -934,7 +923,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
 	// record structure is delimited with a | character. Example record strings:
 	// " 10819|c_And"
 	// "113726|1_And"
-	for (const auto& record : allRecords)
+	for (const QString& record : allRecords)
 	{
 		++lineNumber;
 		// skip comments and empty lines
@@ -970,52 +959,33 @@ void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
 			}
 
 			sci_name.replace('_',' ');
-			if (extraData)
+			// Don't set the main sci name if it's already set - it's additional sci name
+			if (map.contains(hip))
 			{
-				// Don't set the main sci name if it's already set - it's additional sci name
-				if (sciExtraDesignationsMap.contains(hip))
-				{
-					sciExtraDesignationsMap[hip].append(" - " + sci_name);
-				}
-				else
-					sciExtraDesignationsMap.insert(hip, sci_name);
-				sciExtraDesignationsIndex[sci_name] = hip;
+				map[hip].append(" - " + sci_name);
 			}
 			else
-			{
-				// The file is expected to contain Bayer/Flamsteed designations only. With multiple components, we still need stringlists...
-				// Don't set the main sci name if it's already set - it's additional sci name
-				if (sciDesignationsMap.contains(hip))
-				{
-					//qInfo() << "Unexpected additional Bayer/Flamsteed designation for " << hip << "=" << sciDesignationsMapI18n.value(hip) << ":" << sci_name;
-					sciDesignationsMap[hip].append(" - " + sci_name);
-				}
-				else
-					sciDesignationsMap.insert(hip, sci_name);
-				sciDesignationsIndex[sci_name] = hip;
-			}
+				map.insert(hip, sci_name);
+			index[sci_name] = hip;
+
 			++readOk;
 		}
 	}
-
-	if (extraData)
-		qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "scientific star extra names";
-	else
-		qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "scientific star names";
+	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "scientific designations";
 }
 
 // Load GCVS from file
-void StarMgr::loadGcvs(const QString& GcvsFile)
+void StarMgr::loadGcvs(const QString& GcvsFileName)
 {
 	varStarsMap.clear();
 	varStarsIndex.clear();
 
-	qInfo().noquote() << "Loading variable stars data from" << QDir::toNativeSeparators(GcvsFile);
+	qInfo().noquote() << "Loading variable stars data from" << QDir::toNativeSeparators(GcvsFileName);
 
-	QFile vsFile(GcvsFile);
+	QFile vsFile(GcvsFileName);
 	if (!vsFile.open(QIODevice::ReadOnly))
 	{
-		qDebug().noquote() << "Cannot open file" << QDir::toNativeSeparators(GcvsFile);
+		qDebug().noquote() << "Cannot open file" << QDir::toNativeSeparators(GcvsFileName);
 		return;
 	}
 	QByteArray data = StelUtils::uncompress(vsFile);
@@ -1023,7 +993,7 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 	//check if decompressing was successful
 	if(data.isEmpty())
 	{
-		qDebug().noquote() << "Could not decompress file" << QDir::toNativeSeparators(GcvsFile);
+		qDebug().noquote() << "Could not decompress file" << QDir::toNativeSeparators(GcvsFileName);
 		return;
 	}
 	//create and open a QBuffer for reading
@@ -1087,16 +1057,16 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 }
 
 // Load WDS from file
-void StarMgr::loadWds(const QString& WdsFile)
+void StarMgr::loadWds(const QString& WdsFileName)
 {
 	wdsStarsMap.clear();
 	wdsStarsIndex.clear();
 
-	qInfo().noquote() << "Loading double stars from" << QDir::toNativeSeparators(WdsFile);
-	QFile dsFile(WdsFile);
+	qInfo().noquote() << "Loading double stars from" << QDir::toNativeSeparators(WdsFileName);
+	QFile dsFile(WdsFileName);
 	if (!dsFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning().noquote() << "Could not open" << QDir::toNativeSeparators(WdsFile);
+		qWarning().noquote() << "Could not open" << QDir::toNativeSeparators(WdsFileName);
 		return;
 	}
 	const QStringList& allRecords = QString::fromUtf8(dsFile.readAll()).split('\n');
@@ -1121,7 +1091,7 @@ void StarMgr::loadWds(const QString& WdsFile)
 		StarId hip = fields.at(0).toLongLong(&ok);
 		if (!ok)
 		{
-			qWarning() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(WdsFile)
+			qWarning() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(WdsFileName)
 				   << " - failed to convert " << fields.at(0) << "to a number";
 			continue;
 		}
@@ -1133,13 +1103,7 @@ void StarMgr::loadWds(const QString& WdsFile)
 			continue;
 		}
 
-		wds doubleStar;
-
-		doubleStar.designation = fields.at(1).trimmed();
-		doubleStar.observation = fields.at(2).toInt();
-		doubleStar.positionAngle = fields.at(3).toFloat();
-		doubleStar.separation = fields.at(4).toFloat();
-
+		wds doubleStar = {fields.at(1).trimmed(), fields.at(2).toInt(), fields.at(3).toFloat(),fields.at(4).toFloat()};
 		wdsStarsMap[hip] = doubleStar;
 		wdsStarsIndex[QString("WDS J%1").arg(doubleStar.designation.toUpper())] = hip;
 		++readOk;
@@ -2299,13 +2263,13 @@ void StarMgr::populateStarsDesignations()
 	if (filePath.isEmpty())
 		qWarning() << "Could not load scientific star names file: stars/hip_gaia3/name.fab";
 	else
-		loadSciNames(filePath, false);
+		loadSciDesignations(filePath, sciDesignationsMap, sciDesignationsIndex);
 
 	filePath = StelFileMgr::findFile("stars/hip_gaia3/extra_name.fab");
 	if (filePath.isEmpty())
 		qWarning() << "Could not load scientific star extra names file: stars/hip_gaia3/extra_name.fab";
 	else
-		loadSciNames(filePath, true);
+		loadSciDesignations(filePath, sciExtraDesignationsMap, sciExtraDesignationsIndex);
 
 	filePath = StelFileMgr::findFile("stars/hip_gaia3/gcvs.cat");
 	if (filePath.isEmpty())
