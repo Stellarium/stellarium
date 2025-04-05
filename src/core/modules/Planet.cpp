@@ -514,9 +514,8 @@ QStringList Planet::getCultureLabels(StelObject::CulturalDisplayStyle style) con
 			labels << label;
 		}
 	labels.removeDuplicates();
-	int nullStrIdx=labels.indexOf("");
-	if (nullStrIdx>=0)
-		labels.remove(nullStrIdx);
+	labels.removeAll(QString(""));
+	labels.removeAll(QString());
 	return labels;
 }
 
