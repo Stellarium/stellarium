@@ -508,10 +508,10 @@ private:
 	CommonNames loadCommonNames(const QString& commonNameFile) const;
 
 	//! Load culture-specific names for stars from JSON data
-	void loadCultureSpecificNames(const QJsonObject& data, const QMap<QString, int>& commonNamesIndexToSearchWhileLoading);
-	void loadCultureSpecificNameForStar(const QJsonArray& data, StarId HIP);
+	void loadCultureSpecificNames(const QJsonObject& data, const QMap<QString, int>& commonNamesIndexToSearchWhileLoading, const QSet<int> &excludedRefs);
+	void loadCultureSpecificNameForStar(const QJsonArray& data, StarId HIP, const QSet<int> &excludedRefs);
 	void loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName,
-	                                           const QMap<QString, int>& commonNamesIndexToSearchWhileLoading);
+						   const QMap<QString, int>& commonNamesIndexToSearchWhileLoading, const QSet<int> &excludedRefs);
 
 	//! Loads scientific names for stars from a file.
 	//! Called when the SkyCulture is updated.
