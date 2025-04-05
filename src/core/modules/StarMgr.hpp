@@ -516,16 +516,17 @@ private:
 	//! Loads scientific names for stars from a file.
 	//! Called when the SkyCulture is updated.
 	//! @param the path to a file containing the scientific names for bright stars.
-	//! @param flag to load the extra designations
-	void loadSciNames(const QString& sciNameFile, const bool extraData);
+	//! @param map the forward mapping StarId->names
+	//! @param index the backward mapping name->StarId
+	static void loadSciDesignations(const QString& sciNameFile, QHash<StarId, QString>map, QHash<QString, StarId>index);
 
 	//! Loads GCVS from a file.
 	//! @param the path to a file containing the GCVS.
-	void loadGcvs(const QString& GcvsFile);
+	void loadGcvs(const QString& GcvsFileName);
 
 	//! Loads WDS from a file.
 	//! @param the path to a file containing the WDS.
-	void loadWds(const QString& WdsFile);
+	void loadWds(const QString& WdsFileName);
 
 	//! Loads cross-identification data from a file.
 	//! @param the path to a file containing the cross-identification data.
@@ -553,7 +554,6 @@ private:
 
 	//! List of all Hipparcos stars.
 	QList<StelObjectP> hipparcosStars, carbonStars, bariumStars;
-	// TODO: Document why this is a list of 1-element(?) QMAPs, not just a QMap itself
 	QList<StelACStarData> doubleHipStars, variableHipStars, algolTypeStars, classicalCepheidsTypeStars, hipStarsHighPM;
 
 	LinearFader labelsFader;
@@ -585,10 +585,10 @@ private:
 	HipIndexStruct *hipIndex; // array of Hipparcos stars
 
 	//! CommonNames: unique 1:1 names
-	static QHash<StarId, QString> commonNamesMap;     // the original names from skyculture (star_names.fab)
+	static QHash<StarId, QString> commonNamesMap;     // the original names from skycultures/common_star_names.fab
+	static QHash<QString, StarId> commonNamesIndex;    // back-references upper-case names
 	static QHash<StarId, QString> commonNamesMapI18n; // translated names
 	static QHash<QString, StarId> commonNamesIndexI18n;
-	static QHash<QString, StarId> commonNamesIndex;    // back-references upper-case names
 
 	//static QHash<StarId, QString> additionalNamesMap; // additional names. These will be replaced by the CulturalNames
 	//static QHash<StarId, QString> additionalNamesMapI18n;

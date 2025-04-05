@@ -197,7 +197,7 @@ StarMgr::~StarMgr(void)
 // Allow untranslated name here if set in constellationMgr!
 QString StarMgr::getCommonName(StarId hip)
 {
-	static StelSkyCultureMgr* cmgr=GETSTELMODULE(StelSkyCultureMgr);
+	//static StelSkyCultureMgr* cmgr=GETSTELMODULE(StelSkyCultureMgr);
 	//// TODO: This function will likely go away, or prepare for use in InfoString context
 	//if (cmgr->getScreenLabelStyle() == StelObject::CulturalDisplayStyle::Native)
 	//	return getCommonEnglishName(hip);
@@ -697,8 +697,7 @@ void StarMgr::populateHipparcosLists()
 		   variableHipStars.count() << " variable (" << algolTypeStars.count() << " Algol-type, " << classicalCepheidsTypeStars.count() << " Cepheids), " <<
 		   carbonStars.count() << " Carbon stars, " << bariumStars.count() << " Barium stars, and " << hipStarsHighPM.count() << " have PM>1000mas/yr.";
 
-	qInfo() << classicalCepheidsTypeStars;
-
+	//qInfo() << classicalCepheidsTypeStars;
 }
 
 // Load common names from file
@@ -811,7 +810,6 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 
 	for (const QJsonValue& entry : data)
 	{
-
 		// See if we have configured unwanted references. We can only attempt to exclude entries which actually have references.
 		QVariantList refsVariants=entry["references"].toArray().toVariantList();
 		if (!refsVariants.isEmpty())
@@ -904,21 +902,12 @@ void StarMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QStri
 	}
 }
 
-// Load scientific names from file
-void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
+// Load scientific designations from file
+void StarMgr::loadSciDesignations(const QString& sciNameFile, QHash<StarId, QString>map, QHash<QString, StarId>index)
 {
-	if (extraData)
-	{
-		sciExtraDesignationsMap.clear();
-		sciExtraDesignationsIndex.clear();
-		qInfo().noquote() << "Loading scientific star extra names from" << QDir::toNativeSeparators(sciNameFile);
-	}
-	else
-	{
-		sciDesignationsMap.clear();
-		sciDesignationsIndex.clear();
-		qInfo().noquote() << "Loading scientific star names from" << QDir::toNativeSeparators(sciNameFile);
-	}
+	map.clear();
+	index.clear();
+	qInfo().noquote() << "Loading scientific star designations from" << QDir::toNativeSeparators(sciNameFile);
 
 	QFile snFile(sciNameFile);
 	if (!snFile.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -935,7 +924,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
 	// record structure is delimited with a | character. Example record strings:
 	// " 10819|c_And"
 	// "113726|1_And"
-	for (const auto& record : allRecords)
+	for (const QString& record : allRecords)
 	{
 		++lineNumber;
 		// skip comments and empty lines
@@ -971,52 +960,33 @@ void StarMgr::loadSciNames(const QString& sciNameFile, const bool extraData)
 			}
 
 			sci_name.replace('_',' ');
-			if (extraData)
+			// Don't set the main sci name if it's already set - it's additional sci name
+			if (map.contains(hip))
 			{
-				// Don't set the main sci name if it's already set - it's additional sci name
-				if (sciExtraDesignationsMap.contains(hip))
-				{
-					sciExtraDesignationsMap[hip].append(" - " + sci_name);
-				}
-				else
-					sciExtraDesignationsMap.insert(hip, sci_name);
-				sciExtraDesignationsIndex[sci_name] = hip;
+				map[hip].append(" - " + sci_name);
 			}
 			else
-			{
-				// The file is expected to contain Bayer/Flamsteed designations only. With multiple components, we still need stringlists...
-				// Don't set the main sci name if it's already set - it's additional sci name
-				if (sciDesignationsMap.contains(hip))
-				{
-					//qInfo() << "Unexpected additional Bayer/Flamsteed designation for " << hip << "=" << sciDesignationsMapI18n.value(hip) << ":" << sci_name;
-					sciDesignationsMap[hip].append(" - " + sci_name);
-				}
-				else
-					sciDesignationsMap.insert(hip, sci_name);
-				sciDesignationsIndex[sci_name] = hip;
-			}
+				map.insert(hip, sci_name);
+			index[sci_name] = hip;
+
 			++readOk;
 		}
 	}
-
-	if (extraData)
-		qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "scientific star extra names";
-	else
-		qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "scientific star names";
+	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "scientific designations";
 }
 
 // Load GCVS from file
-void StarMgr::loadGcvs(const QString& GcvsFile)
+void StarMgr::loadGcvs(const QString& GcvsFileName)
 {
 	varStarsMap.clear();
 	varStarsIndex.clear();
 
-	qInfo().noquote() << "Loading variable stars data from" << QDir::toNativeSeparators(GcvsFile);
+	qInfo().noquote() << "Loading variable stars data from" << QDir::toNativeSeparators(GcvsFileName);
 
-	QFile vsFile(GcvsFile);
+	QFile vsFile(GcvsFileName);
 	if (!vsFile.open(QIODevice::ReadOnly))
 	{
-		qDebug().noquote() << "Cannot open file" << QDir::toNativeSeparators(GcvsFile);
+		qDebug().noquote() << "Cannot open file" << QDir::toNativeSeparators(GcvsFileName);
 		return;
 	}
 	QByteArray data = StelUtils::uncompress(vsFile);
@@ -1024,7 +994,7 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 	//check if decompressing was successful
 	if(data.isEmpty())
 	{
-		qDebug().noquote() << "Could not decompress file" << QDir::toNativeSeparators(GcvsFile);
+		qDebug().noquote() << "Could not decompress file" << QDir::toNativeSeparators(GcvsFileName);
 		return;
 	}
 	//create and open a QBuffer for reading
@@ -1088,16 +1058,16 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 }
 
 // Load WDS from file
-void StarMgr::loadWds(const QString& WdsFile)
+void StarMgr::loadWds(const QString& WdsFileName)
 {
 	wdsStarsMap.clear();
 	wdsStarsIndex.clear();
 
-	qInfo().noquote() << "Loading double stars from" << QDir::toNativeSeparators(WdsFile);
-	QFile dsFile(WdsFile);
+	qInfo().noquote() << "Loading double stars from" << QDir::toNativeSeparators(WdsFileName);
+	QFile dsFile(WdsFileName);
 	if (!dsFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning().noquote() << "Could not open" << QDir::toNativeSeparators(WdsFile);
+		qWarning().noquote() << "Could not open" << QDir::toNativeSeparators(WdsFileName);
 		return;
 	}
 	const QStringList& allRecords = QString::fromUtf8(dsFile.readAll()).split('\n');
@@ -1122,7 +1092,7 @@ void StarMgr::loadWds(const QString& WdsFile)
 		StarId hip = fields.at(0).toLongLong(&ok);
 		if (!ok)
 		{
-			qWarning() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(WdsFile)
+			qWarning() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(WdsFileName)
 				   << " - failed to convert " << fields.at(0) << "to a number";
 			continue;
 		}
@@ -1134,13 +1104,7 @@ void StarMgr::loadWds(const QString& WdsFile)
 			continue;
 		}
 
-		wds doubleStar;
-
-		doubleStar.designation = fields.at(1).trimmed();
-		doubleStar.observation = fields.at(2).toInt();
-		doubleStar.positionAngle = fields.at(3).toFloat();
-		doubleStar.separation = fields.at(4).toFloat();
-
+		wds doubleStar = {fields.at(1).trimmed(), fields.at(2).toInt(), fields.at(3).toFloat(),fields.at(4).toFloat()};
 		wdsStarsMap[hip] = doubleStar;
 		wdsStarsIndex[QString("WDS J%1").arg(doubleStar.designation.toUpper())] = hip;
 		++readOk;
@@ -1249,35 +1213,35 @@ void StarMgr::loadBinaryOrbitalData(const QString& orbitalParamFile)
 		else
 		{
 			// The record is the right format.  Extract the fields
-			bool ok;
-			orbitalData.binary_period = fields.at(2).toDouble(&ok);
-			orbitalData.eccentricity = fields.at(3).toFloat(&ok);
-			orbitalData.inclination = fields.at(4).toFloat(&ok);
-			orbitalData.big_omega = fields.at(5).toFloat(&ok);
-			orbitalData.small_omega = fields.at(6).toFloat(&ok);
-			orbitalData.periastron_epoch = fields.at(7).toDouble(&ok);
-			orbitalData.semi_major = fields.at(8).toDouble(&ok);
-			orbitalData.bary_distance = fields.at(9).toDouble(&ok);
-			orbitalData.data_epoch = fields.at(10).toDouble(&ok);
-			orbitalData.bary_ra = fields.at(11).toDouble(&ok);
-			orbitalData.bary_dec = fields.at(12).toDouble(&ok);
-			orbitalData.bary_rv = fields.at(13).toDouble(&ok);
-			orbitalData.bary_pmra = fields.at(14).toDouble(&ok);
-			orbitalData.bary_pmdec = fields.at(15).toDouble(&ok);
-			orbitalData.primary_mass = fields.at(16).toFloat(&ok);
-			orbitalData.secondary_mass = fields.at(17).toFloat(&ok);
+			bool ok, allOK=true;
+			orbitalData.binary_period    = fields.at(2).toDouble(&ok);  allOK &= ok;
+			orbitalData.eccentricity     = fields.at(3).toFloat(&ok);   allOK &= ok;
+			orbitalData.inclination      = fields.at(4).toFloat(&ok);   allOK &= ok;
+			orbitalData.big_omega        = fields.at(5).toFloat(&ok);   allOK &= ok;
+			orbitalData.small_omega      = fields.at(6).toFloat(&ok);   allOK &= ok;
+			orbitalData.periastron_epoch = fields.at(7).toDouble(&ok);  allOK &= ok;
+			orbitalData.semi_major       = fields.at(8).toDouble(&ok);  allOK &= ok;
+			orbitalData.bary_distance    = fields.at(9).toDouble(&ok);  allOK &= ok;
+			orbitalData.data_epoch       = fields.at(10).toDouble(&ok); allOK &= ok;
+			orbitalData.bary_ra          = fields.at(11).toDouble(&ok); allOK &= ok;
+			orbitalData.bary_dec         = fields.at(12).toDouble(&ok); allOK &= ok;
+			orbitalData.bary_rv          = fields.at(13).toDouble(&ok); allOK &= ok;
+			orbitalData.bary_pmra        = fields.at(14).toDouble(&ok); allOK &= ok;
+			orbitalData.bary_pmdec       = fields.at(15).toDouble(&ok); allOK &= ok;
+			orbitalData.primary_mass     = fields.at(16).toFloat(&ok);  allOK &= ok;
+			orbitalData.secondary_mass   = fields.at(17).toFloat(&ok);  allOK &= ok;
 			// do primary star
-			hip = fields.at(0).toLongLong(&ok);
+			hip = fields.at(0).toLongLong(&ok); allOK &= ok;
 			orbitalData.hip = hip;
 			orbitalData.primary = true;
 			binaryOrbitStarMap[hip] = orbitalData;
 			// do secondary star
-			hip = fields.at(1).toLongLong(&ok);
+			hip = fields.at(1).toLongLong(&ok); allOK &= ok;
 			orbitalData.hip = hip;
 			orbitalData.primary = false;
 			binaryOrbitStarMap[hip] = orbitalData;
 
-			if (!ok)
+			if (!allOK)
 			{
 				qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(orbitalParamFile)
 						     << " - failed to convert " << fields.at(0) << "to a number";
@@ -1828,7 +1792,11 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		//	}
 		//}
 
+#if  (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+		QMapIterator<QString, StarId>it(culturalNamesIndex);
+#else
 		QMultiMapIterator<QString, StarId>it(culturalNamesIndex);
+#endif
 		while (it.hasNext())
 		{
 			it.next();
@@ -1998,11 +1966,11 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	while (itv.hasNext())
 	{
 		itv.next();
-		if (it.key().startsWith(objPrefixUpper))
+		if (itv.key().startsWith(objPrefixUpper))
 		{
 			if (maxNbItem<=0)
 				break;
-			result << getGcvsName(it.value());
+			result << getGcvsName(itv.value());
 			--maxNbItem;
 		}
 		else
@@ -2231,7 +2199,11 @@ void StarMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	QSet<int>excludeRefs;
 	if (!exclude.isEmpty())
 	{
+#if  (QT_VERSION<QT_VERSION_CHECK(5,14,0))
+		const QStringList excludeRefStrings = exclude.split(",", QString::SkipEmptyParts);
+#else
 		const QStringList excludeRefStrings = exclude.split(",", Qt::SkipEmptyParts);
+#endif
 		//qInfo() << "Skyculture" << skyCulture.id << "configured to exclude references" << excludeRefStrings;
 		for (const QString &s: excludeRefStrings)
 		{
@@ -2300,13 +2272,13 @@ void StarMgr::populateStarsDesignations()
 	if (filePath.isEmpty())
 		qWarning() << "Could not load scientific star names file: stars/hip_gaia3/name.fab";
 	else
-		loadSciNames(filePath, false);
+		loadSciDesignations(filePath, sciDesignationsMap, sciDesignationsIndex);
 
 	filePath = StelFileMgr::findFile("stars/hip_gaia3/extra_name.fab");
 	if (filePath.isEmpty())
 		qWarning() << "Could not load scientific star extra names file: stars/hip_gaia3/extra_name.fab";
 	else
-		loadSciNames(filePath, true);
+		loadSciDesignations(filePath, sciExtraDesignationsMap, sciExtraDesignationsIndex);
 
 	filePath = StelFileMgr::findFile("stars/hip_gaia3/gcvs.cat");
 	if (filePath.isEmpty())
@@ -2522,9 +2494,8 @@ QStringList StarMgr::getCultureLabels(StarId hip, StelObject::CulturalDisplaySty
 			labels << label;
 		}
 	labels.removeDuplicates();
-	int nullStrIdx=labels.indexOf("");
-	if (nullStrIdx>=0)
-		labels.remove(nullStrIdx);
+	labels.removeAll(QString(""));
+	labels.removeAll(QString());
 	return labels;
 }
 
