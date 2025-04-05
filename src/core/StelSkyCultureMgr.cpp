@@ -280,7 +280,7 @@ void StelSkyCultureMgr::init()
 {
 	QSettings* settings = StelApp::getInstance().getSettings();
 	Q_ASSERT(settings);
-	setFlagOverrideUseCommonNames(settings->value("viewing/flag_skyculture_ignore_fallback_to_international_names", false).toBool());
+	setFlagOverrideUseCommonNames(settings->value("viewing/flag_skyculture_always_fallback_to_international_names", false).toBool());
 
 	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "modern").toString();
 	if (defaultSkyCultureID=="western") // switch to new Sky Culture ID
@@ -888,7 +888,7 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 			if (!cName.translatedI18n.isEmpty() || !commonNameI18n.isEmpty()) label.append(QString(" ("));
 			if (!cName.translatedI18n.isEmpty()) label.append(cName.translatedI18n);
 			if (!cName.translatedI18n.isEmpty() && !commonNameI18n.isEmpty()) label.append(QString(", "));
-			if (!commonNameI18n.isEmpty()) label.append(commonNameI18n);
+			if (!commonNameI18n.isEmpty()) label.append(QString("<i>%1</i>").arg(commonNameI18n));
 			if (!cName.translatedI18n.isEmpty() || !commonNameI18n.isEmpty()) label.append(QString(")"));
 			break;
 		case StelObject::CulturalDisplayStyle::Pronounce_IPA_Translated_Modern:
@@ -898,7 +898,7 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 			if (!cName.translatedI18n.isEmpty() || !commonNameI18n.isEmpty()) label.append(QString(" ("));
 			if (!cName.translatedI18n.isEmpty()) label.append(cName.translatedI18n);
 			if (!cName.translatedI18n.isEmpty() && !commonNameI18n.isEmpty()) label.append(QString(", "));
-			if (!commonNameI18n.isEmpty()) label.append(commonNameI18n);
+			if (!commonNameI18n.isEmpty()) label.append(QString("<i>%1</i>").arg(commonNameI18n));
 			if (!cName.translatedI18n.isEmpty() || !commonNameI18n.isEmpty()) label.append(QString(")"));
 			break;
 		case StelObject::CulturalDisplayStyle::Native_Pronounce:
