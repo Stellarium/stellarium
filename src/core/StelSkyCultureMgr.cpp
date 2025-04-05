@@ -150,11 +150,9 @@ QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& idFromJSON) c
 	return idFromJSON;
 }
 
-StelSkyCultureMgr::StelSkyCultureMgr()
+StelSkyCultureMgr::StelSkyCultureMgr(): flagOverrideUseCommonNames(false)
 {
 	setObjectName("StelSkyCultureMgr");
-	QSettings* settings = StelApp::getInstance().getSettings();
-	setFlagOverrideUseCommonNames(settings->value("viewing/flag_skyculture_ignore_fallback_to_international_names", false).toBool());
 	makeCulturesList();
 }
 
@@ -280,6 +278,10 @@ void StelSkyCultureMgr::makeCulturesList()
 //! Init itself from a config file.
 void StelSkyCultureMgr::init()
 {
+	QSettings* settings = StelApp::getInstance().getSettings();
+	Q_ASSERT(settings);
+	setFlagOverrideUseCommonNames(settings->value("viewing/flag_skyculture_ignore_fallback_to_international_names", false).toBool());
+
 	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "modern").toString();
 	if (defaultSkyCultureID=="western") // switch to new Sky Culture ID
 		defaultSkyCultureID = "modern";
