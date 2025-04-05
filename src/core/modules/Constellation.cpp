@@ -29,6 +29,8 @@
 #include "StelUtils.hpp"
 #include "ConstellationMgr.hpp"
 #include "ZoneArray.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 #include <QString>
 #include <QJsonArray>
@@ -59,10 +61,10 @@ Constellation::~Constellation()
 {
 }
 
-bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool preferNativeName)
+bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 {
-	const auto id = data["id"].toString();
-	const auto idParts = id.split(" ");
+	const QString id = data["id"].toString();
+	const QStringList idParts = id.split(" ");
 	if (idParts.size() == 3 && idParts[0] == "CON")
 	{
 		abbreviation = idParts[2];
@@ -73,12 +75,22 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool p
 		return false;
 	}
 
-	const auto names = data["common_name"].toObject();
-	nativeName = names["native"].toString();
-	nativeNamePronounce = names["pronounce"].toString();
-	englishName = preferNativeName && !nativeName.isEmpty() ? nativeName : names["english"].toString();
-	context = names["context"].toString();
-	if (englishName.isEmpty() && nativeName.isEmpty())
+	const QJsonValue names = data["common_name"].toObject();
+	culturalName.translated = names["english"].toString().trimmed();
+	culturalName.native = names["native"].toString().trimmed();
+	culturalName.pronounce = names["pronounce"].toString().trimmed();
+	//if (culturalName.native.isEmpty())
+	//{
+	//	if (culturalName.pronounce.isEmpty())
+	//		culturalName.native=culturalName.translated;
+	//	else
+	//		culturalName.native=culturalName.pronounce;
+	//}
+	culturalName.IPA = names["IPA"].toString().trimmed();
+	culturalName.transliteration = names["transliteration"].toString().trimmed();
+
+	context = names["context"].toString().trimmed();
+	if (culturalName.translated.isEmpty() && culturalName.native.isEmpty() && culturalName.pronounce.isEmpty())
 		qWarning() << "No name for constellation" << id;
 
 	constellation.clear();
@@ -157,6 +169,20 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool p
 	return true;
 }
 
+QString Constellation::getScreenLabel() const
+{
+	return getCultureLabel(GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle());
+}
+QString Constellation::getInfoLabel() const
+{
+	return getCultureLabel(GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle());
+}
+
+QString Constellation::getCultureLabel(StelObject::CulturalDisplayStyle style) const
+{
+	return StelSkyCultureMgr::createCulturalLabel(culturalName, style, culturalName.translatedI18n, abbreviationI18n);
+}
+
 void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const
 {
 	if (lineFader.getInterstate()<=0.0001f)
@@ -186,30 +212,15 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 	}
 }
 
-void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const
+void Constellation::drawName(StelPainter& sPainter, StelObject::CulturalDisplayStyle style) const
 {
 	if (nameFader.getInterstate()==0.0f)
 		return;
 
+	// TODO: Find a solution of fallbacks when components are missing?
 	if (checkVisibility())
 	{
-		QString name;
-		switch (style)
-		{
-			case ConstellationMgr::constellationsTranslated:
-				name=nameI18;
-				break;
-			case ConstellationMgr::constellationsNative:
-				name=nativeName;
-				break;
-			case ConstellationMgr::constellationsEnglish:
-				name=englishName;
-				break;
-			case ConstellationMgr::constellationsAbbreviated:
-				name=(abbreviation.startsWith('.') ? "" : abbreviation);
-				break;
-		}
-
+		QString name=getScreenLabel();
 		sPainter.setColor(labelColor, nameFader.getInterstate());
 		sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 	}
@@ -256,13 +267,13 @@ const Constellation* Constellation::isStarIn(const StelObject* s) const
 	for(unsigned int i=0;i<numberOfSegments*2;++i)
 	{
 		// constellation[i]==s test was not working
-		if (constellation[i]->getEnglishName()==s->getEnglishName())
+		if (constellation[i]->getID()==s->getID()) // don't compare englishNames, we may have duplicate names!
 		{
 			// qDebug() << "Const matched. " << getEnglishName();
 			return this;
 		}
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 void Constellation::update(int deltaTime)
@@ -340,20 +351,7 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 
 	if (flags&Name)
 	{
-		QStringList names;
-		if (getNativeNamePronounce().isEmpty())
-			names << getNativeName();
-		else
-			names << QString("%1 [%2]").arg(getNativeName(), getNativeNamePronounce());
-
-		QString shortname = getShortName();
-		if (!shortname.isEmpty() && shortname.toInt()==0)
-			names << shortname;
-
-		oss << "<h2>" << getNameI18n();
-		if (!names.empty())
-			oss << " (" << names.join(" - ") << ")";
-		oss << "</h2>";
+		oss << "<h2>" << getInfoLabel() << "</h2>";
 	}
 
 	if (flags&ObjectType)

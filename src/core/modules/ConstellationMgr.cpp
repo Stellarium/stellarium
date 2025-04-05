@@ -49,24 +49,24 @@
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
-        : hipStarMgr(_hip_stars),
-          isolateSelected(false),
-          flagConstellationPick(false),
-          constellationDisplayStyle(ConstellationMgr::constellationsTranslated),
-          artFadeDuration(2.),
-          artIntensity(0),
-          artIntensityMinimumFov(1.0),
-          artIntensityMaximumFov(2.0),
-          artDisplayed(0),
-          boundariesDisplayed(0),
-          boundariesFadeDuration(1.),
-          linesDisplayed(0),
-          linesFadeDuration(0.),
-          namesDisplayed(0),
-          namesFadeDuration(1.),
-          checkLoadingData(false),
-          constellationLineThickness(1),
-          constellationBoundariesThickness(1)
+	: hipStarMgr(_hip_stars),
+	  isolateSelected(false),
+	  flagConstellationPick(false),
+	  //constellationDisplayStyle(StelObject::CulturalDisplayStyle::Translated),
+	  artFadeDuration(2.),
+	  artIntensity(0),
+	  artIntensityMinimumFov(1.0),
+	  artIntensityMaximumFov(2.0),
+	  artDisplayed(0),
+	  boundariesDisplayed(0),
+	  boundariesFadeDuration(1.),
+	  linesDisplayed(0),
+	  linesFadeDuration(0.),
+	  namesDisplayed(0),
+	  namesFadeDuration(1.),
+	  checkLoadingData(false),
+	  constellationLineThickness(1),
+	  constellationBoundariesThickness(1)
 {
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
@@ -107,13 +107,13 @@ void ConstellationMgr::init()
 	// The setting for developers
 	setFlagCheckLoadingData(conf->value("devel/check_loading_constellation_data","false").toBool());
 
-	QString skyCultureDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
-	if (!ConstellationDisplayStyleMap.contains(skyCultureDisplayStyle))
-	{
-		qWarning() << "viewing/constellation_name_style (" << skyCultureDisplayStyle << ") invalid. Using translated style.";
-		conf->setValue("viewing/constellation_name_style", "translated");
-	}
-	setConstellationDisplayStyle(ConstellationDisplayStyleMap.value(skyCultureDisplayStyle, constellationsTranslated));
+//	QString skyCultureDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
+//	if (!ConstellationDisplayStyleMap.contains(skyCultureDisplayStyle))
+//	{
+//		qWarning() << "viewing/constellation_name_style (" << skyCultureDisplayStyle << ") invalid. Using translated style.";
+//		conf->setValue("viewing/constellation_name_style", "translated");
+//	}
+//	setConstellationDisplayStyle(ConstellationDisplayStyleMap.value(skyCultureDisplayStyle, StelObject::CulturalDisplayStyle::Translated));
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -160,14 +160,7 @@ void ConstellationMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
 	// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
 	deselectConstellations();
-	loadLinesNamesAndArt(skyCulture.constellations, skyCulture,
-	                     skyCulture.langsUseNativeNames.contains("en"));
-
-	constellationsEnglishNames.clear();
-	for (const auto*const cons : constellations)
-	{
-		constellationsEnglishNames.push_back(cons->englishName);
-	}
+	loadLinesNamesAndArt(skyCulture);
 
 	// Translate constellation names for the new sky culture
 	updateI18n();
@@ -194,7 +187,7 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 	{
 		// Even if do not have anything selected, KEEP constellation selection intact
 		// (allows viewing constellations without distraction from star pointer animation)
-		// setSelected(Q_NULLPTR);
+		// setSelected(nullptr);
 		return;
 	}
 
@@ -226,7 +219,7 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 		}
 		else
 		{
-			setSelected(Q_NULLPTR);
+			setSelected(nullptr);
 		}
 	}
 }
@@ -397,22 +390,23 @@ int ConstellationMgr::getFontSize() const
 	return asterFont.pixelSize();
 }
 
-void ConstellationMgr::setConstellationDisplayStyle(ConstellationDisplayStyle style)
-{
-	constellationDisplayStyle=style;
-	StelApp::immediateSave("viewing/constellation_name_style", ConstellationDisplayStyleMap.key(style));
-	emit constellationsDisplayStyleChanged(constellationDisplayStyle);
-}
+//void ConstellationMgr::setConstellationDisplayStyle(StelObject::CulturalDisplayStyle style)
+//{
+//	// TODO: Store this per-skyculture! Maybe open a new group in config.ini?
+//	constellationDisplayStyle=style;
+//	StelApp::immediateSave("viewing/constellation_name_style", ConstellationDisplayStyleMap.key(style));
+//	emit constellationsDisplayStyleChanged(constellationDisplayStyle);
+//}
 
-QString ConstellationMgr::getConstellationDisplayStyleString(ConstellationDisplayStyle style)
-{
-	return (style == constellationsAbbreviated ? "abbreviated" : (style == constellationsNative ? "native" : "translated"));
-}
+//QString ConstellationMgr::getConstellationDisplayStyleString(StelObject::CulturalDisplayStyle style)
+//{
+//	return (style == StelObject::CulturalDisplayStyle::Abbreviated ? "abbreviated" : (style == StelObject::CulturalDisplayStyle::Native ? "native" : "translated"));
+//}
 
-ConstellationMgr::ConstellationDisplayStyle ConstellationMgr::getConstellationDisplayStyle()
-{
-	return constellationDisplayStyle;
-}
+//StelObject::CulturalDisplayStyle ConstellationMgr::getConstellationDisplayStyle()
+//{
+//	return constellationDisplayStyle;
+//}
 
 void ConstellationMgr::setConstellationLineThickness(const int thickness)
 {
@@ -438,17 +432,17 @@ void ConstellationMgr::setConstellationBoundariesThickness(const int thickness)
 	}
 }
 
-void ConstellationMgr::loadLinesNamesAndArt(const QJsonArray &constellationsData, const StelSkyCulture &culture, const bool preferNativeNames)
+void ConstellationMgr::loadLinesNamesAndArt(const StelSkyCulture &culture)
 {
 	constellations.clear();
 	Constellation::seasonalRuleEnabled = false;
 
 	int readOk = 0;
-	for (const auto& constellationData : constellationsData)
+	for (const auto& constellationData : culture.constellations)
 	{
 		Constellation*const cons = new Constellation;
 		const auto consObj = constellationData.toObject();
-		if (!cons->read(consObj, hipStarMgr, preferNativeNames))
+		if (!cons->read(consObj, hipStarMgr)) //, preferNativeNames))
 		{
 			delete cons;
 			continue;
@@ -644,6 +638,8 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) co
 // Draw the names of all the constellations
 void ConstellationMgr::drawNames(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
+	static StelSkyCultureMgr* scMgr= GETSTELMODULE(StelSkyCultureMgr);
+	StelObject::CulturalDisplayStyle culturalDisplayStyle=scMgr->getScreenLabelStyle();
 	sPainter.setBlending(true);
 	for (auto* constellation : constellations)
 	{
@@ -654,7 +650,7 @@ void ConstellationMgr::drawNames(StelPainter& sPainter, const Vec3d &obsVelocity
 
 		// Check if in the field of view
 		if (sPainter.getProjector()->projectCheck(XYZname, constellation->XYname))
-			constellation->drawName(sPainter, constellationDisplayStyle);
+			constellation->drawName(sPainter, culturalDisplayStyle);
 	}
 }
 
@@ -662,13 +658,13 @@ Constellation *ConstellationMgr::isStarIn(const StelObject* s) const
 {
 	for (auto* constellation : constellations)
 	{
-		// Check if the star is in one of the constellation
+		// Check if the star is in one of the constellations
 		if (constellation->isStarIn(s))
 		{
 			return constellation;
 		}
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 Constellation* ConstellationMgr::findFromAbbreviation(const QString& abbreviation) const
@@ -687,17 +683,24 @@ Constellation* ConstellationMgr::findFromAbbreviation(const QString& abbreviatio
 		}
 		//else qDebug() << "Comparison mismatch: " << abbreviation << "vs." << constellation->abbreviation;
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 // Can't find constellation from a position because it's not well localized
-QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d&, double, const StelCore*) const
-{
-	return QList<StelObjectP>();
-}
+// TODO: For modern... SCs, this can just identify IAU constellations.
+// TODO later: identify from convex hulls.
+//QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d&, double, const StelCore*) const
+//{
+//	return QList<StelObjectP>();
+//}
 
 QStringList ConstellationMgr::getConstellationsEnglishNames()
 {
+	QStringList constellationsEnglishNames;
+	for (auto* constellation : constellations)
+	{
+		constellationsEnglishNames << constellation->getEnglishName();
+	}
 	return  constellationsEnglishNames;
 }
 
@@ -708,13 +711,29 @@ void ConstellationMgr::updateI18n()
 	for (auto* constellation : constellations)
 	{
 		QString context = constellation->context;
-		constellation->nameI18 = trans.tryQtranslate(constellation->englishName, context);
-		if (constellation->nameI18.isEmpty())
+		constellation->culturalName.translatedI18n = trans.tryQtranslate(constellation->culturalName.translated, context);
+		if (constellation->culturalName.translatedI18n.isEmpty())
 		{
 			if (context.isEmpty())
-				constellation->nameI18 = q_(constellation->englishName);
+				constellation->culturalName.translatedI18n = q_(constellation->culturalName.translated);
 			else
-				constellation->nameI18 = qc_(constellation->englishName, context);
+				constellation->culturalName.translatedI18n = qc_(constellation->culturalName.translated, context);
+		}
+		constellation->culturalName.pronounceI18n = trans.tryQtranslate(constellation->culturalName.pronounce, context);
+		if (constellation->culturalName.pronounceI18n.isEmpty())
+		{
+			if (context.isEmpty())
+				constellation->culturalName.pronounceI18n = q_(constellation->culturalName.pronounce);
+			else
+				constellation->culturalName.pronounceI18n = qc_(constellation->culturalName.pronounce, context);
+		}
+		constellation->abbreviationI18n = trans.tryQtranslate(constellation->abbreviation, context);
+		if (constellation->abbreviationI18n.isEmpty())
+		{
+			if (context.isEmpty())
+				constellation->abbreviationI18n = q_(constellation->abbreviation);
+			else
+				constellation->abbreviationI18n = qc_(constellation->abbreviation, context);
 		}
 	}
 }
@@ -1012,24 +1031,24 @@ StelObject* ConstellationMgr::getSelected(void) const
 void ConstellationMgr::setSelected(const QString& abbreviation)
 {
 	Constellation * c = findFromAbbreviation(abbreviation);
-	if(c != Q_NULLPTR) setSelectedConst(c);
+	if(c != nullptr) setSelectedConst(c);
 }
 
 StelObjectP ConstellationMgr::setSelectedStar(const QString& abbreviation)
 {
 	Constellation * c = findFromAbbreviation(abbreviation);
-	if(c != Q_NULLPTR)
+	if(c != nullptr)
 	{
 		setSelectedConst(c);
 		return c->getBrightestStarInConstellation();
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 void ConstellationMgr::setSelectedConst(Constellation * c)
 {
 	// update states for other constellations to fade them out
-	if (c != Q_NULLPTR)
+	if (c != nullptr)
 	{
 		selected.push_back(c);
 
@@ -1108,7 +1127,7 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 //! Remove a constellation from the selected constellation list
 void ConstellationMgr::unsetSelectedConst(Constellation * c)
 {
-	if (c != Q_NULLPTR)
+	if (c != nullptr)
 	{
 		for (auto iter = selected.begin(); iter != selected.end();)
 		{
@@ -1172,7 +1191,7 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 	{
 		// Allow "Bxxxx.x", "Jxxxx.x", "JDjjjjjjjj.jjj" and pure doubles as JD
 		bool ok=false;
-		double boundariesEpochJD;
+		double boundariesEpochJD=StelUtils::J2000;
 
 		if (boundariesEpoch.startsWith("JD", Qt::CaseInsensitive))
 		{
@@ -1301,7 +1320,7 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 			points->push_back(xyz);
 		}
 
-		Constellation *cons = Q_NULLPTR;
+		Constellation *cons = nullptr;
 		for (QString consName : constellationNames)
 		{
 			// not used?
@@ -1349,28 +1368,28 @@ void ConstellationMgr::drawBoundaries(StelPainter& sPainter, const Vec3d &obsVel
 
 StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const
 {
-	QString objw = nameI18n.toUpper();
+	QString nameI18nUpper = nameI18n.toUpper();
 
 	for (auto* constellation : constellations)
 	{
-		QString objwcap = constellation->nameI18.toUpper();
-		if (objwcap == objw) return constellation;
+		QString connameI18nUpper = constellation->culturalName.translatedI18n.toUpper();
+		if (connameI18nUpper == nameI18nUpper) return constellation;
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 StelObjectP ConstellationMgr::searchByName(const QString& name) const
 {
-	QString objw = name.toUpper();
+	QString nameUpper = name.toUpper();
 	for (auto* constellation : constellations)
 	{
-		QString objwcap = constellation->englishName.toUpper();
-		if (objwcap == objw) return constellation;
+		QString conNameUpper = constellation->culturalName.translated.toUpper();
+		if (conNameUpper == nameUpper) return constellation;
 
-		objwcap = constellation->abbreviation.toUpper();
-		if (objwcap == objw) return constellation;
+		conNameUpper = constellation->abbreviation.toUpper();
+		if (conNameUpper == nameUpper) return constellation;
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 StelObjectP ConstellationMgr::searchByID(const QString &id) const
@@ -1379,7 +1398,7 @@ StelObjectP ConstellationMgr::searchByID(const QString &id) const
 	{
 		if (constellation->getID() == id) return constellation;
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 QStringList ConstellationMgr::listAllObjects(bool inEnglish) const
@@ -1410,7 +1429,7 @@ QString ConstellationMgr::getStelObjectType() const
 void ConstellationMgr::setSelected(const StelObject *s)
 {
 	if (!s)
-		setSelectedConst(Q_NULLPTR);
+		setSelectedConst(nullptr);
 	else
 	{
 		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
@@ -1430,11 +1449,12 @@ Constellation* ConstellationMgr::isObjectIn(const StelObject *s) const
 		if (constellation->getShortName().toUpper() == IAUConst.toUpper())
 			return constellation;
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
-const QMap<QString, ConstellationMgr::ConstellationDisplayStyle>ConstellationMgr::ConstellationDisplayStyleMap={
-	{ "translated",  constellationsTranslated},
-	{ "native",      constellationsNative},
-	{ "abbreviated", constellationsAbbreviated},
-	{ "english",     constellationsEnglish}};
+//// TODO: More to come. Probably move to StelObject!
+//const QMap<QString, StelObject::CulturalDisplayStyle>ConstellationMgr::ConstellationDisplayStyleMap={
+//	{ "translated",  StelObject::CulturalDisplayStyle::Translated},
+//	{ "native",      StelObject::CulturalDisplayStyle::Native},
+//	{ "abbreviated", StelObject::CulturalDisplayStyle::Abbreviated},
+//	{ "english",     StelObject::CulturalDisplayStyle::Modern}};

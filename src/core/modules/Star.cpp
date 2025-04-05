@@ -44,7 +44,13 @@ QString Star1::getScreenNameI18n(void) const
 	QStringList starNames;
 	StarId star_id = getHip() ? getHip() : 	getGaia();
 	if (!StarMgr::getDesignationUsage())
-		starNames << StarMgr::getCommonName(star_id);
+	{
+		const QString culturalLabel=StarMgr::getCulturalScreenLabel(star_id);
+		if (culturalLabel.isEmpty())
+			starNames << StarMgr::getCommonName(star_id);
+		else
+			starNames << culturalLabel;
+	}
 	if (StarMgr::getFlagSciNames()) // The scientific designations can be used for western sky cultures only
 	{
 		starNames << StarMgr::getSciName(star_id).split(" - ");
@@ -74,6 +80,7 @@ QString Star1::getDesignation() const
 	else
 		starNames << QString("Gaia DR3 %1").arg(star_id);
 	starNames.removeAll(QString(""));
+	starNames.removeAll(QString());
 	if (starNames.count()>0)
 		return starNames.first();
 	else

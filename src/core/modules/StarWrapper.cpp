@@ -133,7 +133,8 @@ QString StarWrapper1::getObjectTypeI18n() const
 	{
 		if (stype.contains(","))
 		{
-			QStringList stypesI18n, stypes = stype.split(",");
+			const QStringList stypes = stype.split(",");
+			QStringList stypesI18n;
 			for (const auto &st: stypes) { stypesI18n << q_(st.trimmed()); }
 			stypefinal = stypesI18n.join(", ");
 		}
@@ -174,7 +175,8 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << "<h2>";
 
 	const QString commonNameI18 = StarMgr::getCommonName(star_id);
-	const QString additionalNameI18 = StarMgr::getAdditionalNames(star_id);
+	//const QString additionalNameI18 = StarMgr::getAdditionalNames(star_id);
+	const QString culturalInfoName=StarMgr::getCulturalInfoLabel(star_id);
 	const QString sciName = StarMgr::getSciName(star_id);
 	const QString sciExtraName = StarMgr::getSciExtraName(star_id);
 	const QString varSciName = StarMgr::getGcvsName(star_id);
@@ -198,12 +200,12 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		else
 		{
 			hip = QString("HIP %1").arg(s->getHip());
-			hipq = QString("%1").arg(s->getHip());
+			hipq = QString::number(s->getHip());
 		}
 		designations.append(hip);
 	}
 	else
-		hipq = QString("%1").arg(s->getGaia());  // need to look up with Gaia number
+		hipq = QString::number(s->getGaia());  // need to look up with Gaia number
 
 	const QString crossIndexData = StarMgr::getCrossIdentificationDesignations(hipq);
 	if (!crossIndexData.isEmpty())
@@ -238,22 +240,16 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	if (flags&Name)
 	{
-		QString commonNames;
-		if (!commonNameI18.isEmpty())
-			commonNames = commonNameI18;
+		QString allNames = culturalInfoName;
 
-		if (!additionalNameI18.isEmpty() && StarMgr::getFlagAdditionalNames())
-		{
-			QStringList additionalNames = additionalNameI18.split(" - ");
-			additionalNames.removeDuplicates();
+		// TODO: Finalize appearance of cultural Names
+		if (culturalInfoName.isEmpty())
+			allNames = commonNameI18;
 
-			commonNames.append(QString(" (%1)").arg(additionalNames.join(" - ")));
-		}
+		if (!allNames.isEmpty())
+			oss << StelUtils::wrapText(allNames, 80);
 
-		if (!commonNames.isEmpty())
-			oss << StelUtils::wrapText(commonNames, 80);
-
-		if (!commonNameI18.isEmpty() && !designationsList.isEmpty() && flags&CatalogNumber)
+		if (!allNames.isEmpty() && !designationsList.isEmpty() && flags&CatalogNumber)
 			oss << "<br />";
 	}
 
@@ -566,7 +562,8 @@ QString StarWrapper2::getObjectTypeI18n() const
 	{
 		if (stype.contains(","))
 		{
-			QStringList stypesI18n, stypes = stype.split(",");
+			const QStringList stypes = stype.split(",");
+			QStringList stypesI18n;
 			for (const auto &st: stypes) { stypesI18n << q_(st.trimmed()); }
 			stypefinal = stypesI18n.join(", ");
 		}
@@ -586,7 +583,8 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	StarId star_id = s->getGaia();
 	const QString commonNameI18 = StarMgr::getCommonName(star_id);
-	const QString additionalNameI18 = StarMgr::getAdditionalNames(star_id);
+	//const QString additionalNameI18 = StarMgr::getAdditionalNames(star_id);
+	const QString culturalInfoName=StarMgr::getCulturalInfoLabel(star_id);
 	const QString sciName = StarMgr::getSciName(star_id);
 	const QString sciExtraName = StarMgr::getSciExtraName(star_id);
 	const QString varSciName = StarMgr::getGcvsName(star_id);
@@ -603,7 +601,7 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 	if (!varSciName.isEmpty() && !sciName.contains(varSciName, Qt::CaseInsensitive))
 		designations.append(varSciName);
 
-	const QString crossIndexData = StarMgr::getCrossIdentificationDesignations(QString("%1").arg(s->getGaia()));
+	const QString crossIndexData = StarMgr::getCrossIdentificationDesignations(QString::number(s->getGaia()));
 	if (!crossIndexData.isEmpty())
 		designations.append(crossIndexData);
 
@@ -636,13 +634,16 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (!commonNameI18.isEmpty())
 			commonNames = commonNameI18;
 
-		if (!additionalNameI18.isEmpty() && StarMgr::getFlagAdditionalNames())
-		{
-			QStringList additionalNames = additionalNameI18.split(" - ");
-			additionalNames.removeDuplicates();
+		//if (!additionalNameI18.isEmpty() && StarMgr::getFlagAdditionalNames())
+		//{
+		//	QStringList additionalNames = additionalNameI18.split(" - ");
+		//	additionalNames.removeDuplicates();
 
-			commonNames.append(QString(" (%1)").arg(additionalNames.join(" - ")));
-		}
+		//	commonNames.append(QString(" (%1)").arg(additionalNames.join(" - ")));
+		//}
+		// TODO: Finalize appearance of cultural Names
+		if (!culturalInfoName.isEmpty() && StarMgr::getFlagAdditionalNames())
+			oss << culturalInfoName << "<br />";
 
 		if (!commonNames.isEmpty())
 			oss << StelUtils::wrapText(commonNames, 80);
@@ -845,7 +846,8 @@ QString StarWrapper3::getObjectTypeI18n() const
 	{
 		if (stype.contains(","))
 		{
-			QStringList stypesI18n, stypes = stype.split(",");
+			const QStringList stypes = stype.split(",");
+			QStringList stypesI18n;
 			for (const auto &st: stypes) { stypesI18n << q_(st.trimmed()); }
 			stypefinal = stypesI18n.join(", ");
 		}
