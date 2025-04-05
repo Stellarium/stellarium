@@ -796,7 +796,8 @@ auto StarMgr::loadCommonNames(const QString& commonNameFile) const -> CommonName
 // @param commonName the name given in the common_names entry in the current skyculture's index.json
 // @param commonNamesIndexToSearchWhileLoading the part of CommonNames that provides HIPO for a given name.
 void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName,
-                                                    const QMap<QString, int>& commonNamesIndexToSearchWhileLoading)
+                                                    const QMap<QString, int>& commonNamesIndexToSearchWhileLoading,
+                                                    const QSet<int> &excludedRefs)
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 
@@ -810,29 +811,19 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 
 	for (const QJsonValue& entry : data)
 	{
-		//for (const char*const nameType : {"english", "native"})
-		//{
-		//	const QString specificName = entry.toObject().value(nameType).toString();
-		//	if (specificName.isEmpty())
-		//		continue;
 
-		//	const QString specificNameUpper = specificName.toUpper();
-		//	if (additionalNamesMap.contains(HIP))
-		//	{
-		//		const QString newName = additionalNamesMap[HIP].append(" - " + specificName);
-		//		additionalNamesMap[HIP] = newName;
-		//		additionalNamesMapI18n[HIP] = newName;
-		//		additionalNamesIndex[specificNameUpper] = HIP;
-		//		additionalNamesIndexI18n[specificNameUpper] = HIP;
-		//	}
-		//	else
-		//	{
-		//		additionalNamesMap[HIP] = specificName;
-		//		additionalNamesMapI18n[HIP] = specificName;
-		//		additionalNamesIndex[specificNameUpper] = HIP;
-		//		additionalNamesIndexI18n[specificNameUpper] = HIP;
-		//	}
-		//}
+		// See if we have configured unwanted references. We can only attempt to exclude entries which actually have references.
+		QVariantList refsVariants=entry["references"].toArray().toVariantList();
+		if (!refsVariants.isEmpty())
+		{
+			QSet<int> refs;
+			foreach(const QVariant &v, refsVariants) {
+			    refs << v.value<int>();
+			}
+			if (refs.subtract(excludedRefs).isEmpty())
+				continue;
+		}
+
 		StelObject::CulturalName cName{entry["native"].toString(), entry["pronounce"].toString(), trans.qTranslateStar(entry["pronounce"].toString()),
 					entry["transliteration"].toString(), entry["english"].toString(), trans.qTranslateStar(entry["english"].toString()), entry["IPA"].toString()};
 
@@ -850,45 +841,30 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 	}
 }
 
-void StarMgr::loadCultureSpecificNameForStar(const QJsonArray& data, const StarId HIP)
+// data: the array containing one or more name dicts
+void StarMgr::loadCultureSpecificNameForStar(const QJsonArray& data, const StarId HIP, const QSet<int> &excludedRefs)
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 
 	for (const QJsonValue& entry : data)
 	{
-		//for (const char*const nameType : {"english", "native"})
-		//{
-		//	const QString specificName = entry.toObject().value(nameType).toString();
-		//	if (specificName.isEmpty())
-		//		continue;
-
-		//	const QString englishNameCap = specificName.toUpper();
-		//	if (commonNamesMap.contains(HIP))
-		//	{
-		//		if (additionalNamesMap.contains(HIP))
-		//		{
-		//			const QString newName = additionalNamesMap[HIP].append(" - " + specificName);
-		//			additionalNamesMap[HIP] = newName;
-		//			additionalNamesMapI18n[HIP] = newName;
-		//			additionalNamesIndex[englishNameCap] = HIP;
-		//			additionalNamesIndexI18n[englishNameCap] = HIP;
-		//		}
-		//		else
-		//		{
-		//			additionalNamesMap[HIP] = specificName;
-		//			additionalNamesMapI18n[HIP] = specificName;
-		//			additionalNamesIndex[englishNameCap] = HIP;
-		//			additionalNamesIndexI18n[englishNameCap] = HIP;
-		//		}
-		//	}
-		//	else
-		//	{
-		//		commonNamesMap[HIP] = specificName;
-		//		commonNamesMapI18n[HIP] = specificName;
-		//		commonNamesIndexI18n[englishNameCap] = HIP;
-		//		commonNamesIndex[englishNameCap] = HIP;
-		//	}
-		//}
+		// See if we have configured unwanted references. We can only attempt to exclude entries which actually have references.
+		QVariantList refsVariants=entry["references"].toArray().toVariantList();
+		if (!refsVariants.isEmpty())
+		{
+			QSet<int> refs;
+			foreach(const QVariant &v, refsVariants) {
+			    refs << v.value<int>();
+			}
+			//qInfo() << "Star" << entry["native"].toString() << "has refs" << refs;
+			if (refs.subtract(excludedRefs).isEmpty())
+			{
+				//qInfo() << "Star name" << entry["native"].toString() << "has lost support. Skipping.";
+				continue;
+			}
+			//else
+			//	qInfo() << "Star" << entry["native"].toString() << "still has refs" << refs.subtract(excludedRefs);
+		}
 
 		StelObject::CulturalName cName{entry["native"].toString(), entry["pronounce"].toString(), trans.qTranslateStar(entry["pronounce"].toString()),
 					entry["transliteration"].toString(), entry["english"].toString(), trans.qTranslateStar(entry["english"].toString()), entry["IPA"].toString()};
@@ -907,7 +883,7 @@ void StarMgr::loadCultureSpecificNameForStar(const QJsonArray& data, const StarI
 	//qInfo() << "Skyculture has " << culturalNamesMap.size() << "entries, index has" << culturalNamesIndex.size();
 }
 
-void StarMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QString, int>& commonNamesIndexToSearchWhileLoading)
+void StarMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QString, int>& commonNamesIndexToSearchWhileLoading, const QSet<int> &excludedRefs)
 {
 	for (auto it = data.begin(); it != data.end(); ++it)
 	{
@@ -915,15 +891,15 @@ void StarMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QStri
 		// Let's allow Hipparcos and Gaia designations only
 		if (key.startsWith("HIP "))
 		{
-			loadCultureSpecificNameForStar(it.value().toArray(), key.mid(4).toUInt());
+			loadCultureSpecificNameForStar(it.value().toArray(), key.mid(4).toUInt(), excludedRefs);
 		}
 		else if (key.startsWith("Gaia DR3 "))
 		{
-			loadCultureSpecificNameForStar(it.value().toArray(), key.mid(9).toULongLong());
+			loadCultureSpecificNameForStar(it.value().toArray(), key.mid(9).toULongLong(), excludedRefs);
 		}
 		else if (key.startsWith("NAME "))
 		{
-			loadCultureSpecificNameForNamedObject(it.value().toArray(), key.mid(5), commonNamesIndexToSearchWhileLoading);
+			loadCultureSpecificNameForNamedObject(it.value().toArray(), key.mid(5), commonNamesIndexToSearchWhileLoading, excludedRefs);
 		}
 	}
 }
@@ -2249,8 +2225,23 @@ void StarMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	culturalNamesMap.clear();
 	culturalNamesIndex.clear();
 
+	static QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	QString exclude=conf->value("SCExcludeReferences/"+skyCulture.id, QString()).toString();
+	QSet<int>excludeRefs;
+	if (!exclude.isEmpty())
+	{
+		const QStringList excludeRefStrings = exclude.split(",", Qt::SkipEmptyParts);
+		//qInfo() << "Skyculture" << skyCulture.id << "configured to exclude references" << excludeRefStrings;
+		for (const QString &s: excludeRefStrings)
+		{
+			excludeRefs.insert(s.toInt());
+		}
+		qInfo() << "Skyculture" << skyCulture.id << "configured to exclude references" << excludeRefs;
+	}
+
 	if (!skyCulture.names.isEmpty())
-		loadCultureSpecificNames(skyCulture.names, commonNamesIndexToSearchWhileLoading);
+		loadCultureSpecificNames(skyCulture.names, commonNamesIndexToSearchWhileLoading, excludeRefs);
 
 	if (skyCulture.fallbackToInternationalNames)
 	{
