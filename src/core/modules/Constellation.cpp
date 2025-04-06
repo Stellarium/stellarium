@@ -180,7 +180,7 @@ QString Constellation::getInfoLabel() const
 
 QString Constellation::getCultureLabel(StelObject::CulturalDisplayStyle style) const
 {
-	return StelSkyCultureMgr::createCulturalLabel(culturalName, style, culturalName.translatedI18n, abbreviationI18n);
+	return StelSkyCultureMgr::createCulturalLabel(culturalName, style, QString(), abbreviationI18n);
 }
 
 void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const

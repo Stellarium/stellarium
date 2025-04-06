@@ -239,7 +239,7 @@ QString Asterism::getInfoLabel() const
 
 QString Asterism::getCultureLabel(StelObject::CulturalDisplayStyle style) const
 {
-	return StelSkyCultureMgr::createCulturalLabel(culturalName, style, culturalName.translatedI18n, abbreviationI18n);
+	return StelSkyCultureMgr::createCulturalLabel(culturalName, style, QString(), abbreviationI18n);
 }
 
 void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const
@@ -286,7 +286,7 @@ void Asterism::drawName(StelPainter& sPainter) const
 	if (typeOfAsterism==Type::TelescopicAsterism && sPainter.getProjector()->getFov()>60.f)
 		return;
 
-	QString name = getNameI18n();
+	QString name = getScreenLabel();
 	sPainter.setColor(labelColor, nameFader.getInterstate());
 	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 }
