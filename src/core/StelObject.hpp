@@ -81,11 +81,11 @@ public:
 
 
 	//! Describes how to display culture aware labels for constellation, planets, star names, .... The viewDialog GUI has comboboxes which corresponds to these values.
-	//! It may be necessary to have different settings for screen labels (usually shorter) and InfoString labels (may be set to more complete)
+	//! It is necessary to have different settings for screen labels (usually shorter) and InfoString labels (may be set to more complete)
 	//! Then apply separately to Constellations and Planets, and whether applied to screen labels or infoString.
-	//! TODO: This could of course become a bitfield, but having just a choice of discrete options may still be easier to maintain.
-	//! TODO: In any case, this will require methods getScreenLabel() and getInfoLabel() in StelObject.
-	//! NOTE: Changing names here MUST be reflected in ViewDialog::populateSkyCultureLabelStyleComboboxes()
+	//! This setting is handled by methods getScreenLabel() and getInfoLabel() in StelObject and descendants.
+	//! note: This could of course become a bitfield, but having just a choice of discrete options may still be easier to maintain.
+	//! @note: Changing names here MUST be reflected in ViewDialog::populateSkyCultureLabelStyleComboboxes()
 	enum class CulturalDisplayStyle
 	{
 		Abbreviated	= 0, // short label
@@ -95,23 +95,36 @@ public:
 		Pronounce	= 4, // user-language transliteration/pronunciation aid. Usually the original form like pinyin is also used in users' languages, but it may be translatable to user language, e.g. into another coding system like Cyrillic.
 		Translit	= 5, // Non-translatable scientific transliteration that is not a pronounciation aid. Only known use case is Tibetan/Wiley.
 		IPA		= 6, // International Phonetic Alphabet, a standardized pronunciation aid
-		Pronounce_Translated,        // combinations: user language letters + translation
-		Pronounce_IPA_Translated,                  // user language letters + phonetic + translation
-		Pronounce_Translated_Modern,               // user language letters + translation + Modern Name
-		Pronounce_IPA_Translated_Modern,           // user language letters + phonetics + translation + Modern Name
-		Native_Pronounce,                          // just help reading foreign glyphs.
-		Native_Pronounce_Translated,               // foreign glyphs, own pronunciation aid, translation
-		Native_Pronounce_IPA_Translated,           // foreign glyphs, own pronunciation aid, phonetics, translation
-		Native_Translated,                         // glyphs + user language
-		Native_Translit_Translated,                // glyphs + sci.transliteration, translation
-		Native_Translit_Pronounce_Translated,      // glyphs + sci.transliteration, pronunciation for mortals, translation
-		Native_Translit_Pronounce_IPA_Translated,  // glyphs + sci.transliteration, pronunciation for mortals, phonetics, translation
-		Native_Translit_IPA_Translated,            // glyphs + sci.transliteration, phonetics, translation
-		Translit_Translated,                       // sci.transliteration, translation
-		Translit_Pronounce_Translated,             // sci.transliteration, pronunciation for mortals, translation
-		Translit_Pronounce_IPA_Translated,         // sci.transliteration, pronunciation for mortals, phonetics, translation
-		Translit_IPA_Translated,                   // sci.transliteration, phonetics, translation
-	};                                                 // MORE OPTIONS NEEDED?
+		Pronounce_Modern,                   // combinations: user language letters + Modern Name
+		Pronounce_Translated,                             // user language letters + translation
+		Pronounce_Translated_Modern,                      // user language letters + translation + Modern Name
+		Pronounce_IPA_Translated,                         // user language letters + phonetic + translation
+		Pronounce_IPA_Translated_Modern,                  // user language letters + phonetics + translation + Modern Name
+		Native_Pronounce,                                 // just help reading foreign glyphs.
+		Native_Pronounce_Modern,                          // just help reading foreign glyphs + Modern Name
+		Native_Pronounce_Translated,                      // foreign glyphs, own pronunciation aid, translation
+		Native_Pronounce_Translated_Modern,               // foreign glyphs, own pronunciation aid, translation + Modern Name
+		Native_Pronounce_IPA_Translated,                  // foreign glyphs, own pronunciation aid, phonetics, translation
+		Native_Pronounce_IPA_Translated_Modern,           // foreign glyphs, own pronunciation aid, phonetics, translation + Modern Name
+		Native_Translated,                                // glyphs + user language
+		Native_Translated_Modern,                         // glyphs + user language + Modern Name
+		Native_Translit_Translated,                       // glyphs + sci.transliteration, translation
+		Native_Translit_Translated_Modern,                // glyphs + sci.transliteration, translation + Modern Name
+		Native_Translit_Pronounce_Translated,             // glyphs + sci.transliteration, pronunciation for mortals, translation
+		Native_Translit_Pronounce_Translated_Modern,      // glyphs + sci.transliteration, pronunciation for mortals, translation + Modern Name
+		Native_Translit_Pronounce_IPA_Translated,         // glyphs + sci.transliteration, pronunciation for mortals, phonetics, translation
+		Native_Translit_Pronounce_IPA_Translated_Modern,  // glyphs + sci.transliteration, pronunciation for mortals, phonetics, translation + Modern Name
+		Native_Translit_IPA_Translated,                   // glyphs + sci.transliteration, phonetics, translation
+		Native_Translit_IPA_Translated_Modern,            // glyphs + sci.transliteration, phonetics, translation + Modern Name
+		Translit_Translated,                              // sci.transliteration, translation
+		Translit_Translated_Modern,                       // sci.transliteration, translation + Modern Name
+		Translit_Pronounce_Translated,                    // sci.transliteration, pronunciation for mortals, translation
+		Translit_Pronounce_Translated_Modern,             // sci.transliteration, pronunciation for mortals, translation + Modern Name
+		Translit_Pronounce_IPA_Translated,                // sci.transliteration, pronunciation for mortals, phonetics, translation
+		Translit_Pronounce_IPA_Translated_Modern,         // sci.transliteration, pronunciation for mortals, phonetics, translation + Modern Name
+		Translit_IPA_Translated,                          // sci.transliteration, phonetics, translation
+		Translit_IPA_Translated_Modern,                   // sci.transliteration, phonetics, translation + Modern Name
+	};                                                        // MORE OPTIONS NEEDED?
 	Q_ENUM(CulturalDisplayStyle)
 
 	//! @struct CulturalName
