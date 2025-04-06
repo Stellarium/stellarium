@@ -153,7 +153,7 @@ QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& idFromJSON) c
 StelSkyCultureMgr::StelSkyCultureMgr(): flagOverrideUseCommonNames(false)
 {
 	setObjectName("StelSkyCultureMgr");
-	makeCulturesList();
+	makeCulturesList(); // First load needed for testing only.
 }
 
 StelSkyCultureMgr::~StelSkyCultureMgr()
@@ -244,7 +244,7 @@ void StelSkyCultureMgr::makeCulturesList()
 		}
 		culture.boundaries = data["edges"].toArray();
 		culture.boundariesEpoch = data["edges_epoch"].toString("J2000");
-		culture.fallbackToInternationalNames = flagOverrideUseCommonNames || data["fallback_to_international_names"].toBool();
+		culture.fallbackToInternationalNames = (flagOverrideUseCommonNames || data["fallback_to_international_names"].toBool());
 		culture.names = data["common_names"].toObject();
 
 		const auto classifications = data["classification"].toArray();
@@ -282,6 +282,7 @@ void StelSkyCultureMgr::init()
 	Q_ASSERT(settings);
 	setFlagOverrideUseCommonNames(settings->value("viewing/flag_skyculture_always_fallback_to_international_names", false).toBool());
 
+	makeCulturesList(); // Reload after setting this flag!
 	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "modern").toString();
 	if (defaultSkyCultureID=="western") // switch to new Sky Culture ID
 		defaultSkyCultureID = "modern";
@@ -841,6 +842,7 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 					       const QString &abbrevI18n)
 {
 	// At least while many fields have not been filled, we should create a few fallbacks
+	// If native contains non-Latin glyphs, pronounce or transliteration is mandatory.
 	//QString pronounceStr=(cName.pronounceI18n.isEmpty() ? (cName.pronounce.isEmpty() ? cName.native : cName.pronounce) : cName.pronounceI18n);
 	QString pronounceStr=(cName.pronounceI18n.isEmpty() ? cName.pronounce : cName.pronounceI18n);
 	QString pronounceOrNative = (cName.pronounceI18n.isEmpty() ? cName.native : cName.pronounceI18n);
@@ -864,7 +866,8 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 			label=commonNameI18n; // fully non-cultural!
 			break;
 		case StelObject::CulturalDisplayStyle::Pronounce:
-			label=pronounceStr;
+		case StelObject::CulturalDisplayStyle::Pronounce_Modern:
+			label=pronounceOrNative;
 			break;
 		case StelObject::StelObject::CulturalDisplayStyle::Translit:
 			label = translitOrPronounce;
@@ -873,46 +876,32 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 			label=cName.IPA;
 			break;
 		case StelObject::CulturalDisplayStyle::Pronounce_Translated:
+		case StelObject::CulturalDisplayStyle::Pronounce_Translated_Modern:
 			label=pronounceOrNative;
 			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
 			break;
 		case StelObject::CulturalDisplayStyle::Pronounce_IPA_Translated:
+		case StelObject::CulturalDisplayStyle::Pronounce_IPA_Translated_Modern:
 			//label=QString("%1 [%2] (%3)").arg(pronounceOrNative, cName.IPA, cName.translatedI18n);
 			label=pronounceOrNative;
 			if (!cName.IPA.isEmpty()) label.append(QString(" [%1]").arg(cName.IPA));
 			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
 			break;
-		case StelObject::CulturalDisplayStyle::Pronounce_Translated_Modern:
-			//label=QString("%1 (%2, %3)").arg(pronounceOrNative, cName.translatedI18n, commonNameI18n);
-			label=pronounceOrNative;
-			if (!cName.translatedI18n.isEmpty() || !commonNameI18n.isEmpty()) label.append(QString(" ("));
-			if (!cName.translatedI18n.isEmpty()) label.append(cName.translatedI18n);
-			if (!cName.translatedI18n.isEmpty() && !commonNameI18n.isEmpty()) label.append(QString(", "));
-			if (!commonNameI18n.isEmpty()) label.append(QString("<i>%1</i>").arg(commonNameI18n));
-			if (!cName.translatedI18n.isEmpty() || !commonNameI18n.isEmpty()) label.append(QString(")"));
-			break;
-		case StelObject::CulturalDisplayStyle::Pronounce_IPA_Translated_Modern:
-			//label=QString("%1 [%2] (%3, %4)").arg(pronounceOrNative, cName.IPA, cName.translatedI18n, commonNameI18n);
-			label=pronounceOrNative;
-			if (!cName.IPA.isEmpty()) label.append(QString(" [%1]").arg(cName.IPA));
-			if (!cName.translatedI18n.isEmpty() || !commonNameI18n.isEmpty()) label.append(QString(" ("));
-			if (!cName.translatedI18n.isEmpty()) label.append(cName.translatedI18n);
-			if (!cName.translatedI18n.isEmpty() && !commonNameI18n.isEmpty()) label.append(QString(", "));
-			if (!commonNameI18n.isEmpty()) label.append(QString("<i>%1</i>").arg(commonNameI18n));
-			if (!cName.translatedI18n.isEmpty() || !commonNameI18n.isEmpty()) label.append(QString(")"));
-			break;
 		case StelObject::CulturalDisplayStyle::Native_Pronounce:
+		case StelObject::CulturalDisplayStyle::Native_Pronounce_Modern:
 			//label=QString("%1 [%2]").arg(cName.native, pronounceStr);
 			label=cName.native;
 			if (!pronounceStr.isEmpty()) label.append(QString(" [%1]").arg(pronounceStr));
 			break;
 		case StelObject::CulturalDisplayStyle::Native_Pronounce_Translated:
+		case StelObject::CulturalDisplayStyle::Native_Pronounce_Translated_Modern:
 			//label=QString("%1 [%2] (%3)").arg(cName.native, pronounceStr, cName.translatedI18n);
 			label=cName.native;
 			if (!pronounceStr.isEmpty()) label.append(QString(" [%1]").arg(pronounceStr));
 			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
 			break;
 		case StelObject::CulturalDisplayStyle::Native_Pronounce_IPA_Translated:
+		case StelObject::CulturalDisplayStyle::Native_Pronounce_IPA_Translated_Modern:
 			//label=QString("%1 [%2%3] (%4)").arg(cName.native, pronounceStr, cName.IPA.length() > 0 ? QString(", %1").arg(cName.IPA) : "", cName.translatedI18n);
 			label=cName.native;
 			if (!pronounceStr.isEmpty() || !cName.IPA.isEmpty()) label.append(QString(" ["));
@@ -923,18 +912,21 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
 			break;
 		case  StelObject::CulturalDisplayStyle::Native_Translated:
+		case  StelObject::CulturalDisplayStyle::Native_Translated_Modern:
 			//label=QString("%1 (%2)").arg(cName.native, cName.translatedI18n);
 			// Note that cName.translated is json.english, and many SC items are only given in english tags
 			label=cName.native.isEmpty() ? (cName.pronounceI18n.isEmpty() ? cName.translated : cName.pronounceI18n) : cName.native;
 			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
 			break;
 		case  StelObject::CulturalDisplayStyle::Native_Translit_Translated:
+		case  StelObject::CulturalDisplayStyle::Native_Translit_Translated_Modern:
 			//label=QString("%1 [%2] (%3)").arg(cName.native, translitOrPronounce, cName.translatedI18n);
 			label=cName.native;
 			if (!translitOrPronounce.isEmpty())  label.append(QString(" [%1]").arg(translitOrPronounce));
 			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
 			break;
 		case  StelObject::CulturalDisplayStyle::Native_Translit_Pronounce_Translated:
+		case  StelObject::CulturalDisplayStyle::Native_Translit_Pronounce_Translated_Modern:
 			//label=QString("%1 [%2, %3] (%4)").arg(cName.native, cName.transliteration, pronounceStr, cName.translatedI18n);
 			label=cName.native;
 			if (!cName.transliteration.isEmpty() || !cName.pronounceI18n.isEmpty()) label.append(QString(" ["));
@@ -945,6 +937,7 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
 			break;
 		case  StelObject::CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated:
+		case  StelObject::CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated_Modern:
 			//label=QString("%1 [%2, %3, %4] (%5)").arg(cName.native, cName.transliteration, pronounceStr, cName.IPA, cName.translatedI18n);
 			label=cName.native;
 			if (!cName.transliteration.isEmpty() || !cName.pronounceI18n.isEmpty()) label.append(QString(" ["));
@@ -955,6 +948,7 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
 			break;
 		case  StelObject::CulturalDisplayStyle::Native_Translit_IPA_Translated:
+		case  StelObject::CulturalDisplayStyle::Native_Translit_IPA_Translated_Modern:
 			//label=QString("%1 [%2, %3] (%4)").arg(cName.native, translitOrPronounce, cName.IPA, cName.translatedI18n);
 			label=cName.native;
 			if (!translitOrPronounce.isEmpty() || !cName.IPA.isEmpty()) label.append(QString(" ["));
@@ -965,17 +959,20 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
 			break;
 		case  StelObject::CulturalDisplayStyle::Translit_Translated:
+		case  StelObject::CulturalDisplayStyle::Translit_Translated_Modern:
 			//label=QString("%1 (%2)").arg(translitOrPronounce, cName.translatedI18n);
 			label=translitOrPronounce;
 			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
 			break;
 		case  StelObject::CulturalDisplayStyle::Translit_Pronounce_Translated:
+		case  StelObject::CulturalDisplayStyle::Translit_Pronounce_Translated_Modern:
 			//label=QString("%1 [%2] (%3)").arg(translitOrPronounce, pronounceStr, cName.translatedI18n);
 			label=translitOrPronounce;
 			if (!cName.pronounceI18n.isEmpty()) label.append(QString(" [%1]").arg(cName.pronounceI18n));
 			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
 			break;
 		case  StelObject::CulturalDisplayStyle::Translit_Pronounce_IPA_Translated:
+		case  StelObject::CulturalDisplayStyle::Translit_Pronounce_IPA_Translated_Modern:
 			//label=QString("%1 [%2, %3] (%4)").arg(translitOrPronounce, pronounceStr, cName.IPA, cName.translatedI18n);
 			label=translitOrPronounce;
 			if (!cName.pronounceI18n.isEmpty() || !cName.IPA.isEmpty()) label.append(QString(" ["));
@@ -986,6 +983,7 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
 			break;
 		case  StelObject::CulturalDisplayStyle::Translit_IPA_Translated:
+		case  StelObject::CulturalDisplayStyle::Translit_IPA_Translated_Modern:
 			//label=QString("%1 [%2] (%4)").arg(translitOrPronounce, cName.IPA, cName.translatedI18n);
 			label=translitOrPronounce;
 			if (!cName.IPA.isEmpty()) label.append(QString(" [%1]").arg(cName.IPA));
@@ -993,5 +991,24 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 			break;
 			// NO default here, else we may forget one.
 	}
+	static const QList<StelObject::CulturalDisplayStyle>modernList({StelObject::CulturalDisplayStyle::Pronounce_Modern,
+									StelObject::CulturalDisplayStyle::Pronounce_Translated_Modern,
+									StelObject::CulturalDisplayStyle::Pronounce_IPA_Translated_Modern,
+									StelObject::CulturalDisplayStyle::Native_Pronounce_Modern,
+									StelObject::CulturalDisplayStyle::Native_Pronounce_Translated_Modern,
+									StelObject::CulturalDisplayStyle::Native_Pronounce_IPA_Translated_Modern,
+									StelObject::CulturalDisplayStyle::Native_Translated_Modern,
+									StelObject::CulturalDisplayStyle::Native_Translit_Translated_Modern,
+									StelObject::CulturalDisplayStyle::Native_Translit_Pronounce_Translated_Modern,
+									StelObject::CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated_Modern,
+									StelObject::CulturalDisplayStyle::Native_Translit_IPA_Translated_Modern,
+									StelObject::CulturalDisplayStyle::Translit_Translated_Modern,
+									StelObject::CulturalDisplayStyle::Translit_Pronounce_Translated_Modern,
+									StelObject::CulturalDisplayStyle::Translit_Pronounce_IPA_Translated_Modern,
+									StelObject::CulturalDisplayStyle::Translit_IPA_Translated_Modern});
+	// Add modern science-approved name curvy angle brackets (29FC/29FD). Alternative: tortoise shell brackets (3014/3015).
+	if ((modernList.contains(style)) && (!commonNameI18n.isEmpty()))
+		label.append(QString(" %1%3%2").arg(QChar(0x29FC), QChar(0x29FD), commonNameI18n));
+
 	return label;
 }
