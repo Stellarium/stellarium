@@ -1403,12 +1403,15 @@ StelObjectP ConstellationMgr::searchByID(const QString &id) const
 
 QStringList ConstellationMgr::listAllObjects(bool inEnglish) const
 {
+	// TODO: This is needed for the search dialog.
 	QStringList result;
 	if (inEnglish)
 	{
 		for (auto* constellation : constellations)
 		{
 			result << constellation->getEnglishName();
+			result << constellation->culturalName.pronounce;
+			result << constellation->culturalName.native;
 		}
 	}
 	else
@@ -1416,8 +1419,11 @@ QStringList ConstellationMgr::listAllObjects(bool inEnglish) const
 		for (auto* constellation : constellations)
 		{
 			result << constellation->getNameI18n();
+			result << constellation->culturalName.pronounceI18n;
+			result << constellation->culturalName.native;
 		}
 	}
+	result.removeDuplicates();
 	return result;
 }
 
