@@ -306,44 +306,54 @@ public:
 	//! one was not found.
 	StelObjectP searchGaia(StarId source_id) const;
 
-	//! Get the (translated) common name for a star with a specified
+	//! Get the scientific (Bayer/Flamsteed) name for a star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
-	//! @return translated common name of star
-	//! @todo Rename to getCommonNameI18n
-	static QString getCommonName(StarId hip);
+	//! @return scientific name(s) of star.
+	//! @note Multiple entries are packed into a string and delimited with " - ".
+	//! @todo Return a QStringList instead?
+	static QString getSciDesignation(StarId hip);
 
-	//! Get the (translated) scientific name for a star with a specified
+	//! Get additional scientific name(s) for a star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
-	//! @return translated scientific name of star
-	static QString getSciName(StarId hip);
+	//! @return scientific name(s) of star other than Bayer/Flamsteed designations,
+	//! for example double star or variable star designations.
+	//! @note Multiple entries are packed into a string and delimited with " - ".
+	//! @todo Return a QStringList instead?
+	static QString getSciExtraDesignation(StarId hip);
 
-	//! Get the (translated) scientific extra name for a star with a specified
+	//! Get the GCVS catalog designation for a variable star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
-	//! @return translated scientific name of star
-	static QString getSciExtraName(StarId hip);
+	//! @return GCVS designation of variable star
+	static QString getGcvsDesignation(StarId hip);
 
-	//! Get the (translated) scientific name for a variable star with a specified
+	//! Get the WDS catalog designation for a double star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
-	//! @return translated scientific name of variable star
-	static QString getGcvsName(StarId hip);
-
-	//! Get the (translated) scientific name for a double star with a specified
-	//! Hipparcos or Gaia catalogue number.
-	//! @param hip The Hipparcos/Gaia number of star
-	//! @return translated scientific name of double star
-	static QString getWdsName(StarId hip);
+	//! @return WDS designation of double star
+	static QString getWdsDesignation(StarId hip);
 
 	//! Get the (English) common name for a star with a specified
 	//! Hipparcos or Gaia catalogue number.
+	//! This is at most one name per star,
+	//! and no name can appear more than once, giving a 1:1 relationship.
 	//! @param hip The Hipparcos/Gaia number of star
-	//! @return common name of star (from skyculture file star_names.fab)
+	//! @return common name of star (from file skycultures/common_star_names.fab)
+	//! @todo The list should represent the IAU named stars list,
+	//! including references as to what is e.g. a traditional or an exoplanet-bearing star.
 	static QString getCommonEnglishName(StarId hip);
 
-	//! Get the (translated) additional names for a star with a specified
+	//! Get the (translated) common name for a star with a specified
+	//! Hipparcos or Gaia catalogue number.
+	//! This is at most one name per star,
+	//! and no name can appear more than once, giving a 1:1 relationship.
+	//! @param hip The Hipparcos/Gaia number of star
+	//! @return translated common name of star (based on file skycultures/common_star_names.fab)
+	static QString getCommonNameI18n(StarId hip);
+
+	//! Get the additional names for a star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
 	//! @return translated additional names of star

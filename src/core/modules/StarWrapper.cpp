@@ -174,13 +174,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "<h2>";
 
-	const QString commonNameI18 = StarMgr::getCommonName(star_id);
+	const QString commonNameI18 = StarMgr::getCommonNameI18n(star_id);
 	//const QString additionalNameI18 = StarMgr::getAdditionalNames(star_id);
 	const QString culturalInfoName=StarMgr::getCulturalInfoLabel(star_id);
-	const QString sciName = StarMgr::getSciName(star_id);
-	const QString sciExtraName = StarMgr::getSciExtraName(star_id);
-	const QString varSciName = StarMgr::getGcvsName(star_id);
-	const QString wdsSciName = StarMgr::getWdsName(star_id);
+	const QString sciName = StarMgr::getSciDesignation(star_id);
+	const QString sciExtraName = StarMgr::getSciExtraDesignation(star_id);
+	const QString varSciName = StarMgr::getGcvsDesignation(star_id);
+	const QString wdsSciName = StarMgr::getWdsDesignation(star_id);
 	QStringList designations;
 	if (!sciName.isEmpty())
 		designations.append(sciName);
@@ -582,12 +582,12 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 	QTextStream oss(&str);
 
 	StarId star_id = s->getGaia();
-	const QString commonNameI18 = StarMgr::getCommonName(star_id);
+	const QString commonNameI18 = StarMgr::getCommonNameI18n(star_id);
 	//const QString additionalNameI18 = StarMgr::getAdditionalNames(star_id);
 	const QString culturalInfoName=StarMgr::getCulturalInfoLabel(star_id);
-	const QString sciName = StarMgr::getSciName(star_id);
-	const QString sciExtraName = StarMgr::getSciExtraName(star_id);
-	const QString varSciName = StarMgr::getGcvsName(star_id);
+	const QString sciName = StarMgr::getSciDesignation(star_id);
+	const QString sciExtraName = StarMgr::getSciExtraDesignation(star_id);
+	const QString varSciName = StarMgr::getGcvsDesignation(star_id);
 	const QString varType = StarMgr::getGcvsVariabilityType(star_id);
 
 	if ((flags&Name) || (flags&CatalogNumber))
@@ -874,7 +874,7 @@ QString StarWrapper3::getInfoString(const StelCore *core, const InfoStringGroup&
 
 		QStringList designations;
 
-		const QString varSciName = StarMgr::getGcvsName(star_id);
+		const QString varSciName = StarMgr::getGcvsDesignation(star_id);
 		if (!varSciName.isEmpty())
 			designations.append(varSciName);
 

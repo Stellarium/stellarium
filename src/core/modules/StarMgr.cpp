@@ -195,7 +195,7 @@ StarMgr::~StarMgr(void)
 }
 
 // Allow untranslated name here if set in constellationMgr!
-QString StarMgr::getCommonName(StarId hip)
+QString StarMgr::getCommonNameI18n(StarId hip)
 {
 	//static StelSkyCultureMgr* cmgr=GETSTELMODULE(StelSkyCultureMgr);
 	//// TODO: This function will likely go away, or prepare for use in InfoString context
@@ -234,12 +234,12 @@ QString StarMgr::getCommonEnglishName(StarId hip)
 	return commonNamesMap.value(hip, QString());
 }
 
-QString StarMgr::getSciName(StarId hip)
+QString StarMgr::getSciDesignation(StarId hip)
 {
 	return sciDesignationsMap.value(hip, QString());
 }
 
-QString StarMgr::getSciExtraName(StarId hip)
+QString StarMgr::getSciExtraDesignation(StarId hip)
 {
 	return sciExtraDesignationsMap.value(hip, QString());
 }
@@ -268,7 +268,7 @@ QString StarMgr::getCrossIdentificationDesignations(const QString &hip)
 	return designations.join(" - ");
 }
 
-QString StarMgr::getWdsName(StarId hip)
+QString StarMgr::getWdsDesignation(StarId hip)
 {
 	return (wdsStarsMap.contains(hip) ? QString("WDS J%1").arg(wdsStarsMap.value(hip).designation) : QString());
 }
@@ -288,7 +288,7 @@ float StarMgr::getWdsLastSeparation(StarId hip)
 	return (wdsStarsMap.contains(hip) ? wdsStarsMap.value(hip).separation : 0);
 }
 
-QString StarMgr::getGcvsName(StarId hip)
+QString StarMgr::getGcvsDesignation(StarId hip)
 {
 	return (varStarsMap.contains(hip) ? varStarsMap.value(hip).designation : QString());
 }
@@ -681,7 +681,7 @@ void StarMgr::populateHipparcosLists()
 				else if (vartype.contains("DCEP") && !vartype.contains("DCEPS"))
 					classicalCepheidsTypeStars.push_back(QPair<StelObjectP, float>(so, sa.second));
 			}
-			if (!getWdsName(s->getHip()).isEmpty())
+			if (!getWdsDesignation(s->getHip()).isEmpty())
 			{
 				doubleHipStars.push_back(QPair<StelObjectP, float>(so, getWdsLastSeparation(s->getHip())));
 			}
@@ -1564,7 +1564,11 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 
 	// Search by cultural names? (Any names: native/pronounceI18n/translatedI18n/transliteration
 	if (getFlagAdditionalNames() && culturalNamesIndex.contains(nameI18nUpper))
-		return searchHP(culturalNamesIndex.value(nameI18nUpper)); // This only returns the first-found number.
+	{
+		// This only returns the first-found number.
+		StarId starId=culturalNamesIndex.value(nameI18nUpper);
+		return (starId <= NR_OF_HIP ? searchHP(starId) : searchGaia(starId));
+	}
 
 	return searchByName(nameI18n);
 }
@@ -1642,7 +1646,11 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 		//}
 
 		if (culturalNamesIndex.contains(nameUpper))
-			return searchHP(culturalNamesIndex.value(nameUpper)); // This only returns the first-found number.
+		{
+			// This only returns the first-found number.
+			sid=culturalNamesIndex.value(nameUpper);
+			return (sid <= NR_OF_HIP ? searchHP(sid) : searchGaia(sid));
+		}
 	}
 
 	// Search by scientific name
@@ -1717,7 +1725,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem<=0)
 				break;
-			result.append(getCommonName(i.value()));
+			result.append(getCommonNameI18n(i.value()));
 			--maxNbItem;
 		}
 	}
@@ -1841,7 +1849,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem<=0)
 				break;
-			QStringList names = getSciName(it.value()).split(" - ");
+			QStringList names = getSciDesignation(it.value()).split(" - ");
 			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
@@ -1873,7 +1881,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem<=0)
 				break;
-			QStringList names = getSciName(it.value()).split(" - ");
+			QStringList names = getSciDesignation(it.value()).split(" - ");
 			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
@@ -1905,7 +1913,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem<=0)
 				break;
-			QStringList names = getSciExtraName(ite.value()).split(" - ");
+			QStringList names = getSciExtraDesignation(ite.value()).split(" - ");
 			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
@@ -1937,7 +1945,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem<=0)
 				break;
-			QStringList names = getSciExtraName(ite.value()).split(" - ");
+			QStringList names = getSciExtraDesignation(ite.value()).split(" - ");
 			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
@@ -1970,7 +1978,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			if (maxNbItem<=0)
 				break;
-			result << getGcvsName(itv.value());
+			result << getGcvsDesignation(itv.value());
 			--maxNbItem;
 		}
 		else
@@ -2063,7 +2071,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			{
 				if (maxNbItem==0)
 					break;
-				result << getWdsName(wds.value());
+				result << getWdsDesignation(wds.value());
 				--maxNbItem;
 			}
 			else
@@ -2490,7 +2498,7 @@ QStringList StarMgr::getCultureLabels(StarId hip, StelObject::CulturalDisplaySty
 	QStringList labels;
 	for (auto &cName: culturalNames)
 		{
-			QString label=StelSkyCultureMgr::createCulturalLabel(cName, style, getCommonName(hip));
+			QString label=StelSkyCultureMgr::createCulturalLabel(cName, style, getCommonNameI18n(hip));
 			labels << label;
 		}
 	labels.removeDuplicates();
