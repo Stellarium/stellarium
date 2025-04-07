@@ -334,9 +334,6 @@ public:
 	PlanetType getPlanetType() const {return pType;}
 	Orbit* getOrbit() const {return orbitPtr;}
 
-	//void setNativeName(QString planet) { nativeName = planet; }
-	//void setNativeNameMeaning(QString planet) { nativeNameMeaning = planet; }
-
 	//! set the IAU moon number (designation of the moon), if any.
 	void setIAUMoonNumber(const QString& designation);
 
@@ -539,9 +536,9 @@ public:
 	void setFlagLabels(bool b){flagLabels = b;}
 	bool getFlagLabels(void) const {return flagLabels;}
 
-	bool flagNativeName;
-	void setFlagNativeName(bool b) { flagNativeName = b; }
-	bool getFlagNativeName(void) const { return flagNativeName; }
+	//bool flagNativeName;
+	//void setFlagNativeName(bool b) { flagNativeName = b; }
+	//bool getFlagNativeName(void) const { return flagNativeName; }
 
 	///////////////////////////////////////////////////////////////////////////
 	///// Orbit related code
@@ -763,80 +760,77 @@ protected:
 
 	PlanetOBJModel* loadObjModel() const;
 
-	QString englishName;             // english planet name
-	QString nameI18;                 // International translated name
-	//QString nativeName;              // Can be used in a skyculture
-	//QString nativeNameMeaning;       // Can be used in a skyculture
-	//QString nativeNameMeaningI18n;   // Can be used in a skyculture
-	QString texMapName;              // Texture file path
-	QString normalMapName;           // Texture file path
-	QString horizonMapName;          // Texture file path
-	RotationElements re;             // Rotation and axis orientation parameters
-	double siderealPeriod;           // sidereal period (Planet year or a moon's sidereal month) [earth days]
-	double equatorialRadius;         // Planet's equatorial radius in AU
-	double oneMinusOblateness;       // OneMinusOblateness=(polar radius)/(equatorial radius). Geometric flattening f=1-oneMinusOblateness (ExplanSup2013 10.1)
-	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system (J2000) centered on the parent body.
-	                                 // To get heliocentric coordinates, use getHeliocentricEclipticPos()
-	Vec3d eclipticVelocity;          // Speed in AU/d in the rectangular ecliptic coordinate system (J2000) around the parent body.
-	                                 // NEW FEATURE in late 2017. For now, this may be 0/0/0 when we are not yet able to compute it.
-	                                 // to get velocity, preferably read getEclipticVelocity() and getHeliocentricEclipticVelocity()
-	                                 // The "State Vector" [Heafner 1999] can be formed from (JDE, eclipticPos, eclipticVelocity)
-	Vec3d aberrationPush;            // 0.21.2+: a small displacement to be applied if aberred positions are requested.
-	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen. We need double for moons. Observe Styx from Pluto w/o atmosphere to see that.
-	Vec3f haloColor;                 // used for drawing the planet halo. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
+	QString englishName;             //!< english planet name
+	QString nameI18;                 //!< International translated name
+	QString texMapName;              //!< Texture file path
+	QString normalMapName;           //!< Texture file path
+	QString horizonMapName;          //!< Texture file path
+	RotationElements re;             //!< Rotation and axis orientation parameters
+	double siderealPeriod;           //!< sidereal period (Planet year or a moon's sidereal month) [earth days]
+	double equatorialRadius;         //!< Planet's equatorial radius in AU
+	double oneMinusOblateness;       //!< OneMinusOblateness=(polar radius)/(equatorial radius). Geometric flattening f=1-oneMinusOblateness (ExplanSup2013 10.1)
+	Vec3d eclipticPos;               //!< Position in AU in the rectangular ecliptic coordinate system (J2000) centered on the parent body.
+					 //!< To get heliocentric coordinates, use getHeliocentricEclipticPos()
+	Vec3d eclipticVelocity;          //!< Speed in AU/d in the rectangular ecliptic coordinate system (J2000) around the parent body.
+					 //!< NEW FEATURE in late 2017. For now, this may be 0/0/0 when we are not yet able to compute it.
+					 //!< to get velocity, preferably read getEclipticVelocity() and getHeliocentricEclipticVelocity()
+					 //!< The "State Vector" [Heafner 1999] can be formed from (JDE, eclipticPos, eclipticVelocity)
+	Vec3d aberrationPush;            //!< 0.21.2+: a small displacement to be applied if aberred positions are requested.
+	Vec3d screenPos;                 //!< Used to store temporarily the 2D position on screen. We need double for moons. Observe Styx from Pluto w/o atmosphere to see that.
+	Vec3f haloColor;                 //!< used for drawing the planet halo. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
 
-	float absoluteMagnitude;         // since 2017 this moved to the Planet class: V(1,0) from Explanatory Supplement or WGCCRE2009 paper for the planets, H in the H,G magnitude system for Minor planets, H10 for comets.
-	                                 // This is the apparent visual magnitude when 1AU from sun and observer, with zero phase angle.
-	double massKg;                   // 23.1+: mass of the planet in kg
-	float albedo;                    // Planet albedo. Used for magnitude computation when no other formula in use. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
-	float roughness;                 // Oren-Nayar roughness for Moon and OBJ-based models
-	float outgas_intensity;          // The intensity of a pseudo-outgas effect, based on an inverse exponential Lambert shading, with the light at the viewing position
-	                                 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
-	float outgas_falloff;            // Exponent for falloff of outgas effect, should probably be < 1
-	                                 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
-	Mat4d rotLocalToParent;          // retro-documented:
-	                                 // rotation matrix of axis orientation with respect to the rotation axes of the parent body.
-	                                 // For planets, this is the axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
-	                                 // For planets' satellites, this used to be a rotation into the planet's equatorial system.
-	                                 // 0.21+: if rot_pole... data available in ssystem_*.ini (and therefore re.method==WGCCRE), this is not the rotation from planet axes over ICRF to the VSOP frame on which Stellarium is defined.
-	                                 //
-	float axisRotation;              // Rotation angle of the Planet on its axis, degrees.
-	                                 // For Earth, this should be Greenwich Mean Sidereal Time GMST.
-	                                 // For V0.21+, and for planets computed after the IAU2009/WGCCRE papers this is angle W (rotDeg),
-	                                 // i.e. angle between ascending node of body equator w.r.t. ICRF equator and its prime meridian.
-	StelTextureSP texMap;            // Planet map texture
-	StelTextureSP normalMap;         // Planet normal map texture
-	StelTextureSP horizonMap;        // Planet horizon map texture
+	float absoluteMagnitude;         //!< since 2017 this moved to the Planet class: V(1,0) from Explanatory Supplement or WGCCRE2009 paper for the planets, H in the H,G magnitude system for Minor planets, H10 for comets.
+					 //!< This is the apparent visual magnitude when 1AU from sun and observer, with zero phase angle.
+	double massKg;                   //!< 23.1+: mass of the planet in kg
+	float albedo;                    //!< Planet albedo. Used for magnitude computation when no other formula in use. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
+	float roughness;                 //!< Oren-Nayar roughness for Moon and OBJ-based models
+	float outgas_intensity;          //!< The intensity of a pseudo-outgas effect, based on an inverse exponential Lambert shading, with the light at the viewing position
+					 //!< Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
+	float outgas_falloff;            //!< Exponent for falloff of outgas effect, should probably be < 1
+					 //!< Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
+	Mat4d rotLocalToParent;          //!< retro-documented:
+					 //!< rotation matrix of axis orientation with respect to the rotation axes of the parent body.
+					 //!< For planets, this is the axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
+					 //!< For planets' satellites, this used to be a rotation into the planet's equatorial system.
+					 //!< 0.21+: if rot_pole... data available in ssystem_*.ini (and therefore re.method==WGCCRE), this is not the rotation from planet axes over ICRF to the VSOP frame on which Stellarium is defined.
+					 //!<
+	float axisRotation;              //!< Rotation angle of the Planet on its axis, degrees.
+					 //!< For Earth, this should be Greenwich Mean Sidereal Time GMST.
+					 //!< For V0.21+, and for planets computed after the IAU2009/WGCCRE papers this is angle W (rotDeg),
+					 //!< i.e. angle between ascending node of body equator w.r.t. ICRF equator and its prime meridian.
+	StelTextureSP texMap;            //!< Planet map texture
+	StelTextureSP normalMap;         //!< Planet normal map texture
+	StelTextureSP horizonMap;        //!< Planet horizon map texture
 
-	PlanetOBJModel* objModel;               // Planet model (when it has been loaded)
-	QFuture<PlanetOBJModel*>* objModelLoader;// For async loading of the OBJ file
+	PlanetOBJModel* objModel;                 //!< Planet model (when it has been loaded)
+	QFuture<PlanetOBJModel*>* objModelLoader; //!< For async loading of the OBJ file
 	QString objModelPath;
 
 	HipsSurveyP survey;
 	HipsSurveyP surveyForNormals;
 	HipsSurveyP surveyForHorizons;
 
-	Ring* rings;                     // Planet rings
-	double distance;                 // Temporary variable used to store the distance to a given point
-	                                 // it is used for sorting while drawing
-	double sphereScale;              // Artificial scaling for better viewing.
-	double lastJDE;                  // caches JDE of last positional computation
+	Ring* rings;                     //!< Planet rings
+	double distance;                 //!< Temporary variable used to store the distance to a given point
+					 //!< it is used for sorting while drawing
+	double sphereScale;              //!< Artificial scaling for better viewing.
+	double lastJDE;                  //!< caches JDE of last positional computation
 
-	posFuncType coordFunc;           // callback for the calculation of the equatorial rectangular heliocentric position at time JDE.
-	Orbit* orbitPtr;                 // Usually a KeplerOrbit for positional computations of Minor Planets, Comets and Moons.
-	                                 // For an "observer", it is GimbalOrbit.
-	                                 // For the major planets, it is Q_NULLPTR.
+	posFuncType coordFunc;           //!< callback for the calculation of the equatorial rectangular heliocentric position at time JDE.
+	Orbit* orbitPtr;                 //!< Usually a KeplerOrbit for positional computations of Minor Planets, Comets and Moons.
+					 //!< For an "observer", it is GimbalOrbit.
+					 //!< For the major planets, it is Q_NULLPTR.
 
 	OsculatingFunctType *const osculatingFunc;
-	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth
-	QList<QSharedPointer<Planet> > satellites;      // satellites of the Planet
+	QSharedPointer<Planet> parent;                  //!< Planet parent i.e. sun for earth
+	QList<QSharedPointer<Planet> > satellites;      //!< satellites of the Planet
 	LinearFader hintFader;
-	LinearFader labelsFader;         // Store the current state of the label for this planet
-	bool flagLabels;                 // Define whether labels should be displayed
-	bool hidden;                     // useful for fake planets used as observation positions - not drawn or labeled
-	bool atmosphere;                 // Does the planet have an atmosphere?
-	bool halo;                       // Does the planet have a halo?
-	PlanetType pType;                // Type of body
+	LinearFader labelsFader;         //!< Store the current state of the label for this planet
+	bool flagLabels;                 //!< Define whether labels should be displayed
+	bool hidden;                     //!< useful for fake planets used as observation positions - not drawn or labeled
+	bool atmosphere;                 //!< Does the planet have an atmosphere?
+	bool halo;                       //!< Does the planet have a halo?
+	PlanetType pType;                //!< Type of body
 	bool multisamplingEnabled_;
 	bool planetShadowsSupersampEnabled_;
 
@@ -845,9 +839,9 @@ protected:
 	QOpenGLFunctions* gl;
 
 	static Vec3f labelColor;
-	static StelTextureSP hintCircleTex; // The circle around an SSO
-	static const QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
-	static const QMap<QString, QString> nPlanetMap; // Maps fast IAU number to IAU designation.
+	static StelTextureSP hintCircleTex;              //!< The circle around an SSO
+	static const QMap<PlanetType, QString> pTypeMap; //!< Maps fast type to english name.
+	static const QMap<QString, QString> nPlanetMap;  //!< Maps fast IAU number to IAU designation.
 	static bool drawMoonHalo;
 	static bool drawSunHalo;
 	//! If true, planet orbits will be drawn even if planet is off screen.
@@ -858,15 +852,15 @@ private:
 	class StelPropertyMgr* propMgr;
 	QString iauMoonNumber;
 	float b_v;
-	// Discovery data
-	QString discoverer;
-	QString discoveryDate;
-	QList<StelObject::CulturalName> culturalNames; //!< describes native names used in non-modern Skycultures. Usually just one, but there may be more!
 
-	// File path for texture and normal map; both variables used for saving original names of files
-	QString texMapFileOrig;
-	QString normalMapFileOrig;
-	QString horizonMapFileOrig;
+	QString discoverer;    //!< Discovery data
+	QString discoveryDate; //!< Discovery data
+	QList<StelObject::CulturalName> culturalNames; //!< names loaded from non-modern Skycultures. Usually just one, but there may be more!
+
+
+	QString texMapFileOrig;     //!< File path for texture; used for saving original filename
+	QString normalMapFileOrig;  //!< File path for normal map; used for saving original filename
+	QString horizonMapFileOrig; //!< File path for horizon map; used for saving original filename
 
 	std::unique_ptr<QOpenGLVertexArrayObject> sphereVAO;
 	std::unique_ptr<QOpenGLVertexArrayObject> ringsVAO;
