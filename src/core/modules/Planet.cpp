@@ -51,6 +51,7 @@
 
 #include <limits>
 #include <QByteArray>
+#include <QFile>
 #include <QTextStream>
 #include <QString>
 #include <QDebug>
@@ -65,7 +66,7 @@
 #include <QOpenGLVersionFunctionsFactory>
 #endif
 #include <QOpenGLShader>
-#include <QtConcurrent>
+#include <QtConcurrent/QtConcurrentRun>
 #include <QElapsedTimer>
 
 const QString Planet::PLANET_TYPE = QStringLiteral("Planet");
@@ -220,7 +221,7 @@ Planet::Planet(const QString& englishName,
                bool hasAtmosphere,
                bool hasHalo,
                const QString& pTypeStr)
-	: flagNativeName(true),
+	: //flagNativeName(true),
 	  deltaJDE(StelCore::JD_SECOND),
 	  deltaOrbitJDE(0.0),
 	  closeOrbit(acloseOrbit),
@@ -403,16 +404,6 @@ void Planet::translateName(const StelTranslator& trans)
 	nameI18 = trans.tryQtranslate(englishName, getContextString());
 	if (nameI18.isEmpty())
 		nameI18 = qc_(englishName, getContextString());
-//	if (!nativeNameMeaning.isEmpty())
-//	{
-//		nativeNameMeaningI18n = trans.tryQtranslate(nativeNameMeaning);
-//		if (nativeNameMeaningI18n.isEmpty())
-//			nativeNameMeaningI18n = q_(nativeNameMeaning);
-//	}
-//	else
-//	{
-//		nativeNameMeaningI18n = "";
-//	}
 
 	if (!culturalNames.isEmpty())
 	{
@@ -1016,22 +1007,22 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 
 #ifndef NDEBUG
 		oss << QString("DEBUG: AberrationPush: %1/%2/%3 km<br/>")
-			.arg(QString::number(AU * aberrationPush[0], 'f', 6))
-			.arg(QString::number(AU * aberrationPush[1], 'f', 6))
-			.arg(QString::number(AU * aberrationPush[2], 'f', 6));
+			.arg(QString::number(AU * aberrationPush[0], 'f', 6),
+			     QString::number(AU * aberrationPush[1], 'f', 6),
+			     QString::number(AU * aberrationPush[2], 'f', 6));
 
 		Vec3d earthAberrationPush=earth->getAberrationPush();
 		oss << QString("DEBUG: Earth's AberrationPush: %1/%2/%3 km<br/>")
-			.arg(QString::number(AU * earthAberrationPush[0], 'f', 6))
-			.arg(QString::number(AU * earthAberrationPush[1], 'f', 6))
-			.arg(QString::number(AU * earthAberrationPush[2], 'f', 6));
+			.arg(QString::number(AU * earthAberrationPush[0], 'f', 6),
+			     QString::number(AU * earthAberrationPush[1], 'f', 6),
+			     QString::number(AU * earthAberrationPush[2], 'f', 6));
 
 		PlanetP sun = ssystem->getSun();
 		Vec3d sunAberrationPush=sun->getAberrationPush();
 		oss << QString("DEBUG: Sun's AberrationPush: %1/%2/%3 km<br/>")
-			.arg(QString::number(AU * sunAberrationPush[0], 'f', 6))
-			.arg(QString::number(AU * sunAberrationPush[1], 'f', 6))
-			.arg(QString::number(AU * sunAberrationPush[2], 'f', 6));
+			.arg(QString::number(AU * sunAberrationPush[0], 'f', 6),
+			     QString::number(AU * sunAberrationPush[1], 'f', 6),
+			     QString::number(AU * sunAberrationPush[2], 'f', 6));
 #endif
 
 		//PlanetP currentPlanet = core->getCurrentPlanet();
@@ -1925,16 +1916,16 @@ Vec4d Planet::getRectangularCoordinates(const double longDeg, const double latDe
 	// See some previous issues at https://github.com/Stellarium/stellarium/issues/391
 	// For unclear reasons latDeg can be nan. Safety measure:
 	const double latRad = std::isnan(latDeg) ? 0. : latDeg*M_PI_180;
-	Q_ASSERT_X(!std::isnan(latRad), "Planet.cpp", QString("NaN result for latRad. Object %1 latitude %2").arg(englishName).arg(QString::number(latDeg, 'f', 5)).toLatin1());
+	Q_ASSERT_X(!std::isnan(latRad), "Planet.cpp", QString("NaN result for latRad. Object %1 latitude %2").arg(englishName, QString::number(latDeg, 'f', 5)).toLatin1());
 	const double u = (M_PI_2 - (abs(latRad)) < 1e-10 ? latRad : atan( bByA * tan(latRad)) );
 	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
 	// There seem to be numerical issues around tan/atan. Relieve the test a bit.
 	Q_ASSERT_X( fabs(u)-fabs(latRad) <= 1e-10, "Planet.cpp", QString("u: %1 latRad: %2 bByA: %3 latRad-u: %4 (%5)")
-	                                                              .arg(QString::number(u))
-	                                                              .arg(QString::number(latRad))
-	                                                              .arg(QString::number(bByA, 'f', 10))
-	                                                              .arg(QString::number(latRad-u))
-	                                                              .arg(englishName).toLatin1() );
+								      .arg(QString::number(u),
+									   QString::number(latRad),
+									   QString::number(bByA, 'f', 10),
+									   QString::number(latRad-u),
+									   englishName).toLatin1() );
 	const double altFix = altMetres/(1000.0*AU*a);
 
 	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
