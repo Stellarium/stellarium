@@ -23509,8 +23509,8 @@ msgid ""
 "Provides remote control functionality using a webserver interface. See "
 "manual for detailed description."
 msgstr ""
-"Fournit une fonctionnalité de commande à distance au moyen d'une interface "
-"web. Voir le manuel pour une description détaillée."
+"Fournit une commande à distance  via une interface web. Voir le manuel pour "
+"une description détaillée."
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:58
 msgid ""
@@ -23632,7 +23632,7 @@ msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:240
 msgid "Your changes require a restart of the server."
-msgstr "Vos modifications requièrent un redémarrage du serveur."
+msgstr "Les modifications requièrent un redémarrage du serveur."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:241
 msgid "Restart server"
@@ -23745,7 +23745,7 @@ msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
 msgstr ""
-"Ceci peut être utilisé, par exemple, pour créer un usage multi-écrans en "
+"Ceci peut être utilisé, par exemple, pour des configurations multi-écrans "
 "utilisant plusieurs PC."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:217
@@ -23876,8 +23876,8 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
-"Ce plugin affiche la position des étoiles ayant des exoplanètes. Les données"
-" des exoplanètes proviennent de « Extrasolar Planets Encyclopaedia » sur "
+"Ce plugin affiche la position des étoiles avec exoplanètes. Les données des "
+"exoplanètes proviennent de l'« Extrasolar Planets Encyclopaedia » sur "
 "exoplanet.eu"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:174
@@ -23892,12 +23892,13 @@ msgstr "Afficher la distribution des exoplanètes"
 #: plugins/Exoplanets/src/Exoplanets.cpp:178
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:543
 msgid "Enable timeline discovery of exoplanets"
-msgstr "Afficher les exoplanètes selon leur date de découverte"
+msgstr "Permettre la découverte chronologique d'exoplanètes"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:179
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:547
 msgid "Enable display of the potential habitable exoplanets only"
-msgstr "N'activer l'affichage que des exoplanètes potentiellement habitables"
+msgstr ""
+"Activer l'affichage des exoplanètes potentiellement habitables uniquement"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:180
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:548
@@ -24170,8 +24171,8 @@ msgid ""
 "exoplanets)."
 msgstr ""
 "Le catalogue contient actuellement des informations sur environ %1 systèmes "
-"planétaires, comprenant un total de %2 exoplanètes (incluant %3 exoplanètes "
-"potentiellement habitables)."
+"planétaires, comprenant un total de %2 exoplanètes (y compris %3 exoplanètes"
+" potentiellement habitables)."
 
 #. TRANSLATORS: duration
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
@@ -24189,8 +24190,8 @@ msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
-"Ce plugin peut afficher les exoplanètes potentiellement habitable (marqueur "
-"orange) et des informations y relatives."
+"Ce plugin peut afficher les exoplanètes potentiellement habitables (marqueur"
+" orange) et des informations y relatives."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:319
 msgid ""
@@ -24227,10 +24228,10 @@ msgid ""
 "body being heated only by its parent star (assuming a 0.3 bond albedo). As "
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
-"La température d'équilibre d'une planète est la température théorique en °C "
-"que la planète aurait si on la considère comme un corps noir uniquement "
-"chauffé par son étoile hôte, en supposant un albédo de 0.3). Par exemple, la"
-" température d'équilibre de la Terre est de –18.15 °C (255 K)."
+"La température d'équilibre d'une planète est la température théorique (en "
+"°C) que la planète aurait si on la considère comme un corps noir uniquement "
+"chauffé par son étoile hôte (en supposant un albédo de 0.3). Par exemple, la"
+" température d'équilibre de la Terre est de -18.15 °C (255 K)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:326
 msgid ""
@@ -24282,7 +24283,7 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
-"Mesure la similarité à la Terre sur une échelle de 0 à 1, la valeur 1 "
+"Mesure la similarité avec la Terre, sur une échelle de 0 à 1, la valeur 1 "
 "correspondant à une planète de propriétés identiques à la Terre. L'ESI "
 "dépend du rayon de la planète, de sa densité, de sa vitesse de libération et"
 " de sa température de surface."
@@ -24403,7 +24404,7 @@ msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
 msgstr ""
-"Helvetios est le terme celte pour <em>les Helvètes</em> et désigne la tribu "
+"Helvetios est le terme celte pour <em>Helvètes</em> et désigne la tribu "
 "celte qui occupait le territoire de la Suisse actuelle dans l'antiquité "
 "romaine."
 
@@ -24582,32 +24583,32 @@ msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
-"Don Quichotte, le héros du roman <em>L’Ingénieux Hidalgo Don Quichotte de la"
-" Manche</em> de Cervantes."
+"Le héros du roman <em>L’Ingénieux Hidalgo Don Quichotte de la Manche</em> de"
+" Cervantes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:376
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
-"Dulcinée, dame des pensées de Don Quichotte, dans le roman <em>L’Ingénieux "
-"Hidalgo Don Quichotte de la Manche</em> de Cervantes."
+"La dame des pensées de Don Quichotte, dans le roman <em>L’Ingénieux Hidalgo "
+"Don Quichotte de la Manche</em> de Cervantes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:377
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
-"Rossinante est le cheval de Don Quichotte, dans le roman <em>L’Ingénieux "
-"Hidalgo Don Quichotte de la Manche</em> de Cervantes."
+"Le cheval de Don Quichotte, dans le roman <em>L’Ingénieux Hidalgo Don "
+"Quichotte de la Manche</em> de Cervantes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:378
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
-"Sancho Panza, écuyer de Don Quichotte dans <em>L’Ingénieux Hidalgo Don "
-"Quichotte de la Manche</em> de Cervantes."
+"L'écuyer de Don Quichotte dans <em>L’Ingénieux Hidalgo Don Quichotte de la "
+"Manche</em> de Cervantes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:379
 msgid ""
@@ -24719,8 +24720,8 @@ msgid ""
 "Historians largely believe that the Albanians are descendants of the "
 "Illyrians, a term Albanians proudly call themselves."
 msgstr ""
-"Les historiens pensent que les Albanais sont les descendants des Illyriens, "
-"un terme par lequel les Albanais s'appellent eux-mêmes."
+"Les Albanais sont les descendants des Illyriens, un terme par lequel les "
+"Albanais s'appellent eux-mêmes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:392
 msgid ""
@@ -26713,7 +26714,7 @@ msgstr "Masse planétaire, Mjup"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:951
 msgid "Planetary Radius, Rjup"
-msgstr "Rayon planétaire, Mjup"
+msgstr "Rayon planétaire, Rjup"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:952
 msgid "Orbital Period, days"
@@ -26757,7 +26758,7 @@ msgstr "Masse de l'étoile hôte, en Msol"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:962
 msgid "Radius of host star, Rsol"
-msgstr "Rayon de l'étoile hôte, en Rsol"
+msgstr "Rayon de l'étoile hôte, Rsol"
 
 #. TRANSLATORS: Name of temperature scale
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:996
@@ -26799,7 +26800,7 @@ msgstr "Afficher tous les systèmes avec exoplanètes, sans les noms"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:541
 msgid "Display exoplanets since their discovery"
-msgstr "Affiche les exoplanètes à partir de leur date de découverte"
+msgstr "Afficher les exoplanètes à partir de leur date de découverte"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:545
 msgid ""
@@ -27015,12 +27016,12 @@ msgstr "Cette année :"
 #: plugins/Observability/src/Observability.cpp:182
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
-msgstr "Pleine lune précédente : %1 %2 à %3h%4. "
+msgstr "Pleine Lune précédente : %1 %2 à %3h%4. "
 
 #: plugins/Observability/src/Observability.cpp:183
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
-msgstr "Prochaine pleine lune : %1 %2 à %3h%4. "
+msgstr "Prochaine Pleine Lune : %1 %2 à %3h%4. "
 
 #: plugins/Observability/src/Observability.cpp:197
 #: plugins/Observability/src/Observability.cpp:198
@@ -27209,7 +27210,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:163
 msgid "Full Moon:"
-msgstr "Pleine lune :"
+msgstr "Pleine Lune :"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:163
 msgid ""
@@ -28342,7 +28343,7 @@ msgstr "Pluies de météores : recherche"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:140
 msgid "Year:"
-msgstr "Année:"
+msgstr "Année :"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:142
 msgid "Results"
@@ -28577,7 +28578,7 @@ msgstr "Long/lat gal."
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
-msgstr "Lon/Lat supergal."
+msgstr "Long/lat supergal."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:227
 msgctxt "abbreviated in the plugin"
