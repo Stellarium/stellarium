@@ -373,7 +373,7 @@ public:
 
 	//! Get the cross-identification designations for a star with a specified
 	//! Hipparcos or Gaia catalogue number.
-	//! @param hip The Hipparcos/Gaia number of star
+	//! @param hip The Hipparcos/Gaia number of star, including HIP component letters
 	//! @return cross-identification data
 	static QString getCrossIdentificationDesignations(const QString &hip);
 
@@ -595,10 +595,10 @@ private:
 	HipIndexStruct *hipIndex; // array of Hipparcos stars
 
 	//! CommonNames: unique 1:1 names
-	static QHash<StarId, QString> commonNamesMap;     // the original names from skycultures/common_star_names.fab
-	static QHash<QString, StarId> commonNamesIndex;    // back-references upper-case names
-	static QHash<StarId, QString> commonNamesMapI18n; // translated names
-	static QHash<QString, StarId> commonNamesIndexI18n;
+	static QHash<StarId, QString> commonNamesMap;                //!< the original names from skycultures/common_star_names.fab
+	static QHash<QString, StarId> commonNamesUppercaseIndex;     //!< back-references upper-case names
+	static QHash<StarId, QString> commonNamesMapI18n;            //!< translated names
+	static QHash<QString, StarId> commonNamesUppercaseIndexI18n; //!< back-references upper-case names
 
 	//static QHash<StarId, QString> additionalNamesMap; // additional names. These will be replaced by the CulturalNames
 	//static QHash<StarId, QString> additionalNamesMapI18n;
@@ -622,9 +622,11 @@ private:
 	static QHash<StarId, varstar> varStarsMap;
 	static QHash<QString, StarId> varStarsIndex;
 
+	//! Washington Double Star catalog
 	static QHash<StarId, wds> wdsStarsMap;
 	static QHash<QString, StarId> wdsStarsIndex;
 
+	//! Cross index HIP/SAO/HD/HR
 	static QMap<QString, crossid> crossIdMap;
 	static QHash<int, StarId> saoStarsIndex;
 	static QHash<int, StarId> hdStarsIndex;
