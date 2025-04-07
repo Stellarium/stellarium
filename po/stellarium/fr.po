@@ -2991,23 +2991,23 @@ msgstr "Objet sélectionné en altitude le lendemain matin"
 
 #: src/core/modules/SpecificTimeMgr.cpp:77
 msgid "Selected object at altitude this morning"
-msgstr "Objet sélectionné en altitude ce matin"
+msgstr "Objet sélectionné ce matin à la hauteur"
 
 #: src/core/modules/SpecificTimeMgr.cpp:78
 msgid "Selected object at altitude at previous morning"
-msgstr "Objet sélectionné en altitude le matin précédent"
+msgstr "Objet sélectionné le matin précédent à la hauteur"
 
 #: src/core/modules/SpecificTimeMgr.cpp:79
 msgid "Selected object at altitude at next evening"
-msgstr "Objet sélectionné en altitude le lendemain soir"
+msgstr "Objet sélectionné le soir suivant à la hauteur"
 
 #: src/core/modules/SpecificTimeMgr.cpp:80
 msgid "Selected object at altitude this evening"
-msgstr "Objet sélectionné en altitude ce soir"
+msgstr "Objet sélectionné ce soir à la hauteur"
 
 #: src/core/modules/SpecificTimeMgr.cpp:81
 msgid "Selected object at altitude at previous evening"
-msgstr "Objet sélectionné en altitude hier matin"
+msgstr "Objet sélectionné le soir précédent à la hauteur"
 
 #: src/core/modules/SpecificTimeMgr.cpp:83
 msgid "March equinox at current year"
@@ -28742,7 +28742,7 @@ msgstr "Chargement de la scène. Veuillez patienter…"
 #: plugins/Scenery3d/src/Scenery3d.cpp:441
 #, qt-format
 msgid "Loading scene '%1'"
-msgstr "Chargement de la scène \"%1\""
+msgstr "Chargement de la scène « %1 »"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:463
 msgid "Loading model..."
@@ -28825,7 +28825,7 @@ msgstr "Ombres désactivées ou impossibles."
 #: plugins/Scenery3d/src/Scenery3d.cpp:753
 #, qt-format
 msgid "Surface bumps %1."
-msgstr "Reliefs %1"
+msgstr "Reliefs %1."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:801
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
@@ -29021,7 +29021,7 @@ msgid ""
 msgstr ""
 "Le <b>nuanceur géométrique</b> utilise une fonctionnalité GPU moderne pour "
 "effectuer le rendu des 6 faces du cube simultanément. C'est la méthode la "
-"plus rapide, selon la scène et votre matériel (GPU). Si votre matériel ne "
+"plus rapide, selon la scène et votre GPU matériel. Si votre matériel ne "
 "permet pas ce mode, il est désactivé."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:283
@@ -29390,7 +29390,7 @@ msgstr "Afficher le vertical pour l'azimut personnalisé 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:311
 msgid "Show Vertical for Custom Azimuth 2"
-msgstr "Afficher le vertical pour l'azimut personnalisé 1"
+msgstr "Afficher le vertical pour l'azimut personnalisé 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:312
 msgid "Show Line for Custom Altitude 1"
@@ -29410,7 +29410,7 @@ msgstr "Afficher la ligne de Déclinaison personnalisée 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1428
 msgid "Equinox"
-msgstr "Equinoxe"
+msgstr "Équinoxe"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1431
 msgid "Solstice"
@@ -29724,7 +29724,7 @@ msgstr "Lieux"
 
 #: plugins/Vts/src/Vts.cpp:152
 msgid "Vts"
-msgstr "VTS : atelier de visualisation pour les données spatiales"
+msgstr "VTS"
 
 #: plugins/Vts/src/Vts.cpp:155
 msgid "Allow to use Stellarium as a plugin in CNES VTS."
