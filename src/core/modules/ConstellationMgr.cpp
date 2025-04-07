@@ -1184,7 +1184,7 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 		b1875 = true;
 	else if (boundariesEpoch.toUpper() != "J2000")
 	{
-		qWarning() << "Custom epoch for boundaries:" << boundariesEpoch;
+		qInfo() << "Custom epoch for boundaries:" << boundariesEpoch;
 		customEdgeEpoch = true;
 	}
 	if (customEdgeEpoch)
@@ -1201,7 +1201,7 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 		else if (boundariesEpoch.startsWith("B", Qt::CaseInsensitive))
 		{
 			QString boundariesEpochStrV=boundariesEpoch.right(boundariesEpoch.length()-1);
-			double boundariesEpochY=boundariesEpochStrV.toDouble(&ok); // pureJD
+			double boundariesEpochY=boundariesEpochStrV.toDouble(&ok);
 			if (ok)
 			{
 				boundariesEpochJD=StelUtils::getJDFromBesselianEpoch(boundariesEpochY);
@@ -1210,7 +1210,7 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 		else if (boundariesEpoch.startsWith("J", Qt::CaseInsensitive))
 		{
 			QString boundariesEpochStrV=boundariesEpoch.right(boundariesEpoch.length()-1);
-			double boundariesEpochY=boundariesEpochStrV.toDouble(&ok); // pureJD
+			double boundariesEpochY=boundariesEpochStrV.toDouble(&ok);
 			if (ok)
 			{
 				boundariesEpochJD=StelUtils::getJDFromJulianEpoch(boundariesEpochY);
@@ -1231,18 +1231,19 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 			customEdgeEpoch = false;
 		}
 	}
-	const auto& core = *StelApp::getInstance().getCore();
+	const StelCore& core = *StelApp::getInstance().getCore();
 	qInfo().noquote() << "Loading constellation boundary data ... ";
 
 	for (int n = 0; n < boundaryData.size(); ++n)
 	{
-		const auto line = boundaryData[n].toString().toStdString();
+		const QByteArray ba = boundaryData[n].toString().toLatin1();
+		const char *cstr = ba.data();
 		char edgeType, edgeDir;
 		char dec1_sign, dec2_sign;
 		int ra1_h, ra1_m, ra1_s, dec1_d, dec1_m, dec1_s;
 		int ra2_h, ra2_m, ra2_s, dec2_d, dec2_m, dec2_s;
 		char constellationNames[2][8];
-		if (sscanf(line.c_str(),
+		if (sscanf(cstr,
 		           "%*s %c%c "
 		           "%d:%d:%d %c%d:%d:%d "
 		           "%d:%d:%d %c%d:%d:%d "
@@ -1254,7 +1255,7 @@ bool ConstellationMgr::loadBoundaries(const QJsonArray& boundaryData, const QStr
 		           &dec2_sign, &dec2_d, &dec2_m, &dec2_s,
 		           constellationNames[0], constellationNames[1]) != 18)
 		{
-			qWarning().nospace() << "Failed to parse skyculture boundary line: \"" << line.c_str() << "\"";
+			qWarning().nospace() << "Failed to parse skyculture boundary line: \"" << cstr << "\"";
 			continue;
 		}
 
