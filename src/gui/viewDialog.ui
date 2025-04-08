@@ -5472,6 +5472,12 @@
                </item>
                <item row="0" column="1">
                 <widget class="QComboBox" name="infoLabelComboBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="toolTip">
                   <string>Combination of names for the object description</string>
                  </property>
@@ -5479,6 +5485,12 @@
                </item>
                <item row="1" column="1">
                 <widget class="QComboBox" name="screenLabelComboBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="toolTip">
                   <string>Combination of names for the object screen label</string>
                  </property>
