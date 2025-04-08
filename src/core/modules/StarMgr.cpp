@@ -2488,7 +2488,7 @@ QString StarMgr::getCulturalScreenLabel(StarId hip)
 QString StarMgr::getCulturalInfoLabel(StarId hip)
 {
 	QStringList list=getCultureLabels(hip, GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle());
-	return list.isEmpty() ? "" : list.join(" -- ");
+	return list.isEmpty() ? "" : list.join(" - ");
 }
 
 QStringList StarMgr::getCultureLabels(StarId hip, StelObject::CulturalDisplayStyle style)

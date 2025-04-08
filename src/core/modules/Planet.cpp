@@ -493,7 +493,7 @@ QString Planet::getScreenLabel() const
 QString Planet::getInfoLabel() const
 {
 	QStringList list=getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle());
-	return list.isEmpty() ? getNameI18n() : list.join(" -- ");
+	return list.isEmpty() ? getNameI18n() : list.join(" - ");
 }
 
 QStringList Planet::getCultureLabels(StelObject::CulturalDisplayStyle style) const
