@@ -506,11 +506,11 @@ private:
 
 	void copyDefaultConfigFile();
 
-	struct CommonNames
+	typedef struct
 	{
 		QHash<int, QString> byHIP;
 		QMap<QString, int> hipByName; // Reverse mapping of uppercased name to HIP number
-	};
+	} CommonNames;
 	//! Loads common names for stars from a file. (typical: skycultures/common_star_names.fab)
 	//! Called when the SkyCulture is updated.
 	//! @param the path to a file containing the common names for bright stars.
@@ -597,8 +597,8 @@ private:
 	//! CommonNames: unique 1:1 names
 	static QHash<StarId, QString> commonNamesMap;                //!< the original names from skycultures/common_star_names.fab
 	static QHash<QString, StarId> commonNamesUppercaseIndex;     //!< back-references upper-case names
-	static QHash<StarId, QString> commonNamesMapI18n;            //!< translated names
-	static QHash<QString, StarId> commonNamesUppercaseIndexI18n; //!< back-references upper-case names
+	static QHash<StarId, QString> commonNamesI18nMap;            //!< translated names
+	static QHash<QString, StarId> commonNamesI18nUppercaseIndex; //!< back-references upper-case names
 
 	//static QHash<StarId, QString> additionalNamesMap; // additional names. These will be replaced by the CulturalNames
 	//static QHash<StarId, QString> additionalNamesMapI18n;
