@@ -206,23 +206,27 @@ QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGro
 
 QString Nebula::getScreenLabel() const
 {
-	return getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle()).constFirst();
+	QStringList labels = getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle());
+	return (labels.isEmpty() ? QString() : labels.constFirst());
 }
 QString Nebula::getInfoLabel() const
 {
-	return getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle()).join("; ");
+	return getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle()).join(" - ");
 }
 
 QStringList Nebula::getCultureLabels(StelObject::CulturalDisplayStyle style) const
 {
 	QStringList labels;
+	if (culturalNames.isEmpty())
+		return labels;
 	for (auto &cName: culturalNames)
 		{
 			QString label=StelSkyCultureMgr::createCulturalLabel(cName, style, nameI18);
 			labels << label;
 		}
 	labels.removeDuplicates();
-	labels.removeOne("");
+	labels.removeAll(QString(""));
+	labels.removeAll(QString());
 	return labels;
 }
 
