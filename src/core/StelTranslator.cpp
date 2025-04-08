@@ -156,8 +156,9 @@ QString StelTranslator::tryTranslateChineseStar(const QString& s, const QString&
 	const QString extra = match.captured(3);
 	if (!addedPresent) return translatedConstellation + number + extra;
 
-	const QString& translatedAdded = qtranslate("Added", "chinese skycultures");
-	return translatedConstellation + " " + translatedAdded + number + extra;
+	// TRANSLATORS: The string " Added" stars with a space. Carefully keep the space if needed with your language.
+	const QString& translatedAdded = qtranslate(" Added", "chinese skycultures");
+	return translatedConstellation + translatedAdded + number + extra;
 }
 
 QString StelTranslator::tryQtranslate(const QString &s, const QString &c) const
