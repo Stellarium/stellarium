@@ -424,7 +424,8 @@ template<class Star>
 void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const RCMag* rcmag_table,
 				  int limitMagIndex, StelCore* core, int maxMagStarName, float names_brightness,
 				  const QVector<SphericalCap> &boundingCaps,
-				  const bool withAberration, const Vec3d vel, const double withParallax, const Vec3d diffPos) const
+				  const bool withAberration, const Vec3d vel, const double withParallax, const Vec3d diffPos,
+				  const bool withCommonNameI18n) const
 {
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	Vec3d v;
@@ -553,7 +554,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			const float offset = tmpRcmag->radius*0.7f;
 			const Vec3f color = StelSkyDrawer::indexToColor(s->getBVIndex())*0.75f;
 			sPainter->setColor(color, names_brightness);
-			sPainter->drawText(v, s->getScreenNameI18n(), 0, offset, offset, false);
+			sPainter->drawText(v, s->getScreenNameI18n(withCommonNameI18n), 0, offset, offset, false);
 		}
 	}
 }

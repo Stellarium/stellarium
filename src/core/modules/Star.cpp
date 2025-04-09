@@ -39,14 +39,15 @@ QString Star1::getNameI18n(void) const
 		return QString();
 }
 
-QString Star1::getScreenNameI18n(void) const
+// Return modern name only if Skyculture allows this!
+QString Star1::getScreenNameI18n(const bool withCommonNameI18n) const
 {
 	QStringList starNames;
 	StarId star_id = getHip() ? getHip() : 	getGaia();
 	if (!StarMgr::getDesignationUsage())
 	{
 		const QString culturalLabel=StarMgr::getCulturalScreenLabel(star_id);
-		if (culturalLabel.isEmpty())
+		if (culturalLabel.isEmpty() && withCommonNameI18n)
 			starNames << StarMgr::getCommonNameI18n(star_id);
 		else
 			starNames << culturalLabel;
