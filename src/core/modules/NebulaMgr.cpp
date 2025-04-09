@@ -2063,28 +2063,27 @@ void NebulaMgr::updateI18n()
 //! Return the matching Nebula object's pointer if exists or an "empty" StelObjectP
 StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 {
-	QString objw = nameI18n.toUpper();
+	const QString nameI18nUpper = nameI18n.toUpper();
 
 	// Search by common names
 	for (const auto& n : std::as_const(dsoArray))
 	{
-		QString objwcap = n->nameI18.toUpper();
-		if (objwcap==objw)
+		if (n->nameI18.toUpper() == nameI18nUpper)
 			return qSharedPointerCast<StelObject>(n);
 	}
 
 	// Search by aliases of common names
 	for (const auto& n : std::as_const(dsoArray))
 	{
-		for (auto &objwcapa : n->nameI18Aliases)
+		for (auto &nameI18Alias : n->nameI18Aliases)
 		{
-			if (objwcapa.toUpper()==objw)
+			if (nameI18Alias.toUpper()==nameI18nUpper)
 				return qSharedPointerCast<StelObject>(n);
 		}
 	}
 
 	// Search by designation
-	NebulaP n = searchByDesignation(objw);
+	NebulaP n = searchByDesignation(nameI18nUpper);
 	return qSharedPointerCast<StelObject>(n);
 }
 

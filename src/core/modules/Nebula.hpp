@@ -277,6 +277,12 @@ private:
 		nameI18Aliases.clear();
 		for (auto &alias : englishAliases)
 			nameI18Aliases.append(trans.qtranslate(alias));
+
+		for (StelObject::CulturalName cName : std::as_const(culturalNames))
+		{
+			cName.pronounceI18n = trans.qtranslate(cName.pronounce);
+			cName.translatedI18n = trans.qtranslate(cName.translated);
+		}
 	}	
 
 	void readDSO(QDataStream& in);

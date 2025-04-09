@@ -129,18 +129,18 @@ Nebula::Nebula()
 	, St_nb(0)
 	, Ru_nb(0)
 	, VdBHa_nb(0)
-	, Ced_nb("")
-	, PK_nb("")
-	, PNG_nb("")
-	, SNRG_nb("")
-	, ACO_nb("")
-	, HCG_nb("")
-	, ESO_nb("")
-	, VdBH_nb("")
+	, Ced_nb()
+	, PK_nb()
+	, PNG_nb()
+	, SNRG_nb()
+	, ACO_nb()
+	, HCG_nb()
+	, ESO_nb()
+	, VdBH_nb()
 	, withoutID(false)
-	, nameI18("")
-	, discoverer("")
-	, discoveryYear("")
+	, nameI18()
+	, discoverer()
+	, discoveryYear()
 	, mTypeString()
 	, bMag(99.)
 	, vMag(99.)
@@ -209,6 +209,8 @@ QString Nebula::getScreenLabel() const
 	QStringList cLabels = getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle());
 	//QString cLabel = (cLabels.isEmpty() ? QString() : cLabels.constFirst());
 
+	// TODO: Decide whether SCs with DSO names should only show common names of these objects, or use common names for all objects.
+
 	QString nameI18n=getNameI18n();
 	// DEBUG: show what is what.
 	return (cLabels.isEmpty() ? (nameI18n.isEmpty() ? QString() : "i18"+nameI18n) : "CL:"+cLabels.constFirst());
@@ -227,8 +229,8 @@ QStringList Nebula::getCultureLabels(StelObject::CulturalDisplayStyle style) con
 		return labels;
 	for (auto &cName: culturalNames)
 		{
-			QString label=StelSkyCultureMgr::createCulturalLabel(cName, style, nameI18);
-			labels << label;
+			const QString modernName= nameI18.isEmpty() ? getDSODesignation() : nameI18;
+			labels << StelSkyCultureMgr::createCulturalLabel(cName, style, modernName);
 		}
 	labels.removeDuplicates();
 	labels.removeAll(QString(""));
@@ -507,7 +509,7 @@ QVariantMap Nebula::getInfoMap(const StelCore *core) const
 
 QString Nebula::getEnglishAliases() const
 {
-	QString aliases = "";	
+	QString aliases;
 	int asize = englishAliases.size();
 	if (asize!=0)
 	{
@@ -537,7 +539,7 @@ QString Nebula::getEnglishAliases() const
 
 QString Nebula::getI18nAliases() const
 {
-	QString aliases = "";
+	QString aliases;
 	int asize = nameI18Aliases.size();
 	if (asize!=0)
 	{
