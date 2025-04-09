@@ -188,9 +188,9 @@ public:
 	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! Search for a SolarSystem object based on the localised name.
-	//! @param nameI18n the case in-sensitive translated planet name.
+	//! @param planetNameI18n the case in-sensitive translated planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
-	StelObjectP searchByNameI18n(const QString& nameI18n) const override;
+	StelObjectP searchByNameI18n(const QString& planetNameI18n) const override;
 
 	//! Search for a SolarSystem object based on the English name.
 	//! @param name the case in-sensitive English planet name.

@@ -2287,14 +2287,15 @@ void SolarSystem::fillEphemerisDates()
 
 PlanetP SolarSystem::searchByEnglishName(const QString &planetEnglishName) const
 {
+	const QString planetEnglishNameUpper=planetEnglishName.toUpper();
 	for (const auto& p : systemPlanets)
 	{
-		if (p->getEnglishName().toUpper() == planetEnglishName.toUpper() || p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper())
+		if (p->getEnglishName().toUpper() == planetEnglishNameUpper || p->getCommonEnglishName().toUpper() == planetEnglishNameUpper)
 			return p;
 
 		// IAU designation?
 		QString iau = p->getIAUDesignation();
-		if (!iau.isEmpty() && iau.toUpper()==planetEnglishName.toUpper())
+		if (!iau.isEmpty() && iau.toUpper()==planetEnglishNameUpper)
 			return p;
 	}
 	for (const auto& p : systemMinorBodies)
@@ -2309,9 +2310,9 @@ PlanetP SolarSystem::searchByEnglishName(const QString &planetEnglishName) const
 			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
 			c = mp->getExtraDesignations();
 		}
-		for (const auto& d : c)
+		for (const auto& d : std::as_const(c))
 		{
-			if (d.toUpper()==planetEnglishName.toUpper())
+			if (d.toUpper()==planetEnglishNameUpper)
 				return p;
 		}
 	}
@@ -2320,14 +2321,15 @@ PlanetP SolarSystem::searchByEnglishName(const QString &planetEnglishName) const
 
 PlanetP SolarSystem::searchMinorPlanetByEnglishName(const QString &planetEnglishName) const
 {
+	const QString planetEnglishNameUpper=planetEnglishName.toUpper();
 	for (const auto& p : systemMinorBodies)
 	{
-		if (p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper() || p->getEnglishName().toUpper() == planetEnglishName.toUpper())
+		if (p->getCommonEnglishName().toUpper() == planetEnglishNameUpper || p->getEnglishName().toUpper() == planetEnglishNameUpper)
 			return p;
 
 		// IAU designation?
 		QString iau = p->getIAUDesignation();
-		if (!iau.isEmpty() && iau.toUpper()==planetEnglishName.toUpper())
+		if (!iau.isEmpty() && iau.toUpper()==planetEnglishNameUpper)
 			return p;
 
 		QStringList c;
@@ -2342,9 +2344,9 @@ PlanetP SolarSystem::searchMinorPlanetByEnglishName(const QString &planetEnglish
 			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
 			c = mp->getExtraDesignations();
 		}
-		for (const auto& d : c)
+		for (const auto& d : std::as_const(c))
 		{
-			if (d.toUpper()==planetEnglishName.toUpper())
+			if (d.toUpper()==planetEnglishNameUpper)
 				return p;
 		}
 	}
@@ -2352,12 +2354,13 @@ PlanetP SolarSystem::searchMinorPlanetByEnglishName(const QString &planetEnglish
 }
 
 
-StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
+StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18n) const
 {
+	const QString planetNameI18Upper=planetNameI18n.toUpper();
 	for (const auto& p : systemPlanets)
 	{
-		QString nativeName = p->getNameNativeI18n().toUpper();
-		if (p->getNameI18n().toUpper() == planetNameI18.toUpper() || (!nativeName.isEmpty() && nativeName == planetNameI18.toUpper()))
+		QString nativeNameI18nUpper = p->getNameNativeI18n().toUpper();
+		if (p->getNameI18n().toUpper() == planetNameI18Upper || (!nativeNameI18nUpper.isEmpty() && nativeNameI18nUpper == planetNameI18Upper))
 			return qSharedPointerCast<StelObject>(p);
 	}
 	return StelObjectP();
@@ -2366,15 +2369,16 @@ StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
 
 StelObjectP SolarSystem::searchByName(const QString& name) const
 {
+	const QString nameUpper=name.toUpper();
 	for (const auto& p : systemPlanets)
 	{
 		QString nativeName = p->getNameNative().toUpper();
-		if (p->getEnglishName().toUpper() == name.toUpper() || (!nativeName.isEmpty() && nativeName == name.toUpper()))
+		if (p->getEnglishName().toUpper() == nameUpper || (!nativeName.isEmpty() && nativeName == nameUpper))
 			return qSharedPointerCast<StelObject>(p);
 
 		// IAU designation?
 		QString iau = p->getIAUDesignation();
-		if (!iau.isEmpty() && iau.toUpper()==name.toUpper())
+		if (!iau.isEmpty() && iau.toUpper()==nameUpper)
 			return qSharedPointerCast<StelObject>(p);
 	}
 	for (const auto& p : systemMinorBodies)
@@ -2391,9 +2395,9 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
 			c = mp->getExtraDesignations();
 		}
-		for (const auto& d : c)
+		for (const auto& d : std::as_const(c))
 		{
-			if (d.toUpper()==name.toUpper())
+			if (d.toUpper()==nameUpper)
 				return qSharedPointerCast<StelObject>(p);
 		}
 	}
