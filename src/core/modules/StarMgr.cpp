@@ -1275,6 +1275,10 @@ void StarMgr::draw(StelCore* core)
 	if (!static_cast<bool>(starsFader.getInterstate()))
 		return;
 
+	static StelSkyCultureMgr* scMgr = GETSTELMODULE(StelSkyCultureMgr);
+	const bool currentSkycultureUsesCommonStarnames=scMgr->getFlagOverrideUseCommonNames() ||
+							scMgr->currentSkycultureUsesCommonNames();
+
 	int maxSearchLevel = getMaxSearchLevel();
 	double margin = 0.;  // pixel margin to be applied to viewport convex polygon
 	if (core->getSkyDrawer()->getFlagHasAtmosphere())
@@ -1352,11 +1356,11 @@ void StarMgr::draw(StelCore* core)
 			diffPos = core->getParallaxDiff(core->getJDE());
 		}
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, vel, withParallax, diffPos);
+			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, vel, withParallax, diffPos, currentSkycultureUsesCommonStarnames);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
-			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, vel, withParallax, diffPos);
+			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps, withAberration, vel, withParallax, diffPos, currentSkycultureUsesCommonStarnames);
 		// always check the last zone because it is a global zone
-		z->draw(&sPainter, (20<<(z->level<<1)), false, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, vel, withParallax, diffPos);
+		z->draw(&sPainter, (20<<(z->level<<1)), false, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps, withAberration, vel, withParallax, diffPos, currentSkycultureUsesCommonStarnames);
 	}
 	exit_loop:
 
@@ -2482,7 +2486,7 @@ QString StarMgr::getCulturalScreenLabel(StarId hip)
 {
 	QStringList list=getCultureLabels(hip, GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle());
 	//qDebug() << "culturalScreenLabel: " << list;
-	return list.isEmpty() ? "" : list.constFirst();
+	return list.isEmpty() ? QString() : list.constFirst();
 }
 
 //! Return InfoString label (to be used in the InfoString).
