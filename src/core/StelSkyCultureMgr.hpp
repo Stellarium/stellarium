@@ -254,6 +254,9 @@ public slots:
 	//! Set whether we ignore SC authors' settings "fallback_to_international_names"
 	void setFlagOverrideUseCommonNames(bool override);
 
+	//! Returns whether current skyculture uses (incorporates) common names.
+	bool currentSkycultureUsesCommonNames() const;
+
 signals:
 	//! Emitted whenever the default sky culture changed.
 	//! @see setDefaultSkyCultureID
