@@ -254,15 +254,6 @@ QVariantMap Comet::getInfoMap(const StelCore *core) const
 	return map;
 }
 
-QString Comet::getDiscoveryCircumstances() const
-{
-	QString ddate = StelUtils::localeDiscoveryDateString(discoveryDate);
-	if (discoverer.isEmpty())
-		return ddate;
-	else
-		return QString("%1 (%2)").arg(ddate, discoverer);
-}
-
 double Comet::getSiderealPeriod() const
 {
 	const double semiMajorAxis=static_cast<KeplerOrbit*>(orbitPtr)->getSemimajorAxis();

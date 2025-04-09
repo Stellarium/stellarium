@@ -80,8 +80,9 @@ public:
 	//! sets the nameI18 property with the appropriate translation.
 	//! Function overridden to handle the problem with name conflicts.
 	void translateName(const StelTranslator& trans) override;
-	QString getEnglishName(void) const override {return englishName;}
-	QString getNameI18n(void) const override {return nameI18;}
+	// Currently no overrides over what Planet does:
+	//QString getEnglishName(void) const override {return englishName;}
+	//QString getNameI18n(void) const override {return nameI18;}
 	//! gets an IAU designation.
 	QString getIAUDesignation() const override { return iauDesignation; }
 
@@ -128,7 +129,7 @@ protected:
 	//! Any flag=Extra information to be displayed at the end
 	QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const override;
 
-	QString getDiscoveryCircumstances() const override;
+	//QString getDiscoveryCircumstances() const override; // nothing new.
 
 private:
 	//! @returns estimates for (Coma diameter [AU], gas tail length [AU]).

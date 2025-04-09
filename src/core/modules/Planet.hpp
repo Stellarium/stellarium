@@ -255,8 +255,9 @@ public:
 	//! The end result is a non-normalized 3D vector which allows retrieving distances etc.
 	//! The positional computation is called by SolarSystem. If the core's aberration setting is active, the J2000 position will then include it.
 	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
-	QString getEnglishName(void) const override;
-	QString getNameI18n(void) const override;
+	QString getEnglishName(void) const override {return englishName;}
+	QString getNameI18n(void) const override {return nameI18;}
+
 	virtual QString getIAUDesignation(void) const;
 	QString getNameNative(void) const override { return (culturalNames.isEmpty() ? "" : culturalNames.constFirst().native); }
 	QString getNameNativeI18n(void) const { return (culturalNames.isEmpty() ? "" : culturalNames.constFirst().translatedI18n); }
