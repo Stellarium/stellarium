@@ -1012,3 +1012,9 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 
 	return label;
 }
+
+//! Returns whether current skyculture uses (incorporates) common names.
+bool StelSkyCultureMgr::currentSkycultureUsesCommonNames() const
+{
+	return currentSkyCulture.fallbackToInternationalNames;
+}
