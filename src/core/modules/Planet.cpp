@@ -427,11 +427,6 @@ void Planet::setIAUMoonNumber(const QString &designation)
 	iauMoonNumber = designation;
 }
 
-QString Planet::getEnglishName() const
-{
-	return englishName;
-}
-
 QString Planet::getIAUDesignation() const
 {
 	if (iauMoonNumber.isEmpty())
@@ -443,11 +438,6 @@ QString Planet::getIAUDesignation() const
 		else
 			return QString();
 	}
-}
-
-QString Planet::getNameI18n() const
-{
-	return nameI18;
 }
 
 QString Planet::getDiscoveryCircumstances() const
@@ -836,7 +826,7 @@ QString Planet::getInfoStringExtraMag(const StelCore *core, const InfoStringGrou
 	if (flags&Extra && b_v<99.f)
 		return QString("%1: <b>%2</b><br/>").arg(q_("Color Index (B-V)"), QString::number(b_v, 'f', 2));
 	else
-		return "";
+		return QString();
 }
 
 QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGroup& flags, const bool withIllum) const
