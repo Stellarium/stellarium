@@ -56,13 +56,13 @@ const QString NebulaMgr::StellariumDSOCatalogVersion = QStringLiteral("3.20");
 namespace
 {
 
-void setName(const NebulaP& nebula, const QString& specificName)
+void addEnglishOrAliasName(const NebulaP& nebula, const QString& name)
 {
-	const auto currentName = nebula->getEnglishName();
+	const QString &currentName = nebula->getEnglishName();
 	if (currentName.isEmpty()) // Set native name of DSO
-		nebula->setProperName(specificName);
-	else if (currentName != specificName) // Add traditional (well-known?) name of DSO as alias
-		nebula->addNameAlias(specificName);
+		nebula->setEnglishName(name);
+	else if (currentName != name) // Add traditional (well-known?) name of DSO as alias
+		nebula->addNameAlias(name);
 }
 
 }
@@ -908,7 +908,7 @@ NebulaP NebulaMgr::searchForCommonName(const QString& name)
 {
 	QString uname = name.toUpper();
 
-	if (const auto it = commonNameMap.find(uname); it != commonNameMap.end())
+	if (const auto it = commonNameIndex.find(uname); it != commonNameIndex.end())
 		return (it->nebula);
 
 	return searchByDesignation(uname);
@@ -1594,7 +1594,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 {
 	qInfo() << "Loading DSO name data ...";
 
-	defaultNameMap.clear();
+	commonNameMap.clear();
 
 	QFile dsoNameFile(filename);
 	if (!dsoNameFile.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -1772,9 +1772,9 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 
 				if (accept)
 				{
-					defaultNameMap[e].push_back(propName);
+					commonNameMap[e].push_back(propName);
 					NebulaWithReferences nr = {e, refList };
-					commonNameMap[propName.toUpper()] = nr;  // add with reduced refList.
+					commonNameIndex[propName.toUpper()] = nr;  // add with reduced refList.
 				}
 			}
 			readOk++;
@@ -1937,11 +1937,6 @@ void NebulaMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	for (const auto& n : std::as_const(dsoArray))
 		n->removeAllNames();
 
-	if (skyCulture.fallbackToInternationalNames)
-	{
-		for (auto it = commonNameMap.begin(); it != commonNameMap.end(); ++it)
-			setName(it.value().nebula, it.key());
-	}
 
 	int numLoaded = 0;
 	if (!skyCulture.names.isEmpty())
@@ -1951,11 +1946,13 @@ void NebulaMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	{
 		qInfo().noquote() << "Loaded" << numLoaded << "culture-specific DSO names";
 	}
-	else
+
+	// Shall we still use common names if a skycultures has no own DSO names?
+	if (numLoaded==0 || skyCulture.fallbackToInternationalNames)
 	{
-		for (auto it = defaultNameMap.cbegin(); it != defaultNameMap.cend(); ++it)
+		for (auto it = commonNameMap.cbegin(); it != commonNameMap.cend(); ++it)
 			for (const auto& name : it.value())
-				setName(it.key(), name);
+				addEnglishOrAliasName(it.key(), name);
 	}
 
 	updateI18n();
@@ -1964,6 +1961,9 @@ void NebulaMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data)
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+
+	for (const auto& n : std::as_const(dsoArray))
+		n->culturalNames.clear();
 
 	int loadedTotal = 0;
 	for (auto it = data.begin(); it != data.end(); ++it)
@@ -2004,13 +2004,13 @@ int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data)
 				//}
 				QJsonObject json=entry.toObject();
 				StelObject::CulturalName cName;
-				cName.native          = json["native"].toString("");
-				cName.pronounce       = json["pronounce"].toString("");
-				cName.pronounceI18n   = trans.qtranslate(json["pronounce"].toString(""), json["context"].toString());
-				cName.transliteration = json["transliteration"].toString("");
-				cName.translated      = json["english"].toString("");
-				cName.translatedI18n  = trans.qtranslate(json["english"].toString(""), json["context"].toString());
-				cName.IPA             = json["IPA"].toString("");
+				cName.native          = json["native"].toString().trimmed();
+				cName.pronounce       = json["pronounce"].toString().trimmed();
+				cName.pronounceI18n   = trans.qtranslate(json["pronounce"].toString(), json["context"].toString());
+				cName.transliteration = json["transliteration"].toString().trimmed();
+				cName.translated      = json["english"].toString().trimmed();
+				cName.translatedI18n  = trans.qtranslate(json["english"].toString(), json["context"].toString());
+				cName.IPA             = json["IPA"].toString().trimmed();
 
 				n->addCulturalName(cName);
 			}
@@ -2022,8 +2022,8 @@ int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data)
 // Add names from data to the object locatable by commonname
 void NebulaMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName)
 {
-	const auto commonNameIndexIt = commonNameMap.find(commonName.toUpper());
-	if (commonNameIndexIt == commonNameMap.end())
+	const auto commonNameIndexIt = commonNameIndex.find(commonName.toUpper());
+	if (commonNameIndexIt == commonNameIndex.end())
 	{
 		// This may actually not even be a nebula, so we shouldn't emit any warning, just return
 		return;
@@ -2040,13 +2040,13 @@ void NebulaMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, co
 
 		QJsonObject json=entry.toObject();
 		StelObject::CulturalName cName;
-		cName.native          = json["native"].toString("");
-		cName.pronounce       = json["pronounce"].toString("");
-		cName.pronounceI18n   = qc_(json["pronounce"].toString(""), json["context"].toString("")); // TODO: Clarify if context is available
-		cName.transliteration = json["transliteration"].toString("");
-		cName.translated      = json["english"].toString("");
-		cName.translatedI18n  = qc_(json["english"].toString(""), json["context"].toString("")); // TODO: Clarify if context is available
-		cName.IPA             = json["IPA"].toString("");
+		cName.native          = json["native"].toString().trimmed();
+		cName.pronounce       = json["pronounce"].toString().trimmed();
+		cName.pronounceI18n   = qc_(json["pronounce"].toString(), json["context"].toString()); // TODO: Clarify if context is available
+		cName.transliteration = json["transliteration"].toString().trimmed();
+		cName.translated      = json["english"].toString().trimmed();
+		cName.translatedI18n  = qc_(json["english"].toString(), json["context"].toString()); // TODO: Clarify if context is available
+		cName.IPA             = json["IPA"].toString().trimmed();
 
 		commonNameIndexIt.value().nebula->addCulturalName(cName);
 	}
@@ -2091,13 +2091,12 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 //! Return the matching Nebula object's pointer if exists or an "empty" StelObjectP
 StelObjectP NebulaMgr::searchByName(const QString& name) const
 {
-	QString objw = name.toUpper();
+	const QString nameUpper = name.toUpper();
 
 	// Search by common names
 	for (const auto& n : dsoArray)
 	{
-		QString objwcap = n->englishName.toUpper();
-		if (objwcap==objw)
+		if (n->englishName.toUpper()==nameUpper)
 			return qSharedPointerCast<StelObject>(n);
 	}
 
@@ -2106,16 +2105,16 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 		// Search by aliases of common names
 		for (const auto& n : dsoArray)
 		{
-			for (auto &objwcapa : n->englishAliases)
+			for (auto &englishAlias : n->englishAliases)
 			{
-				if (objwcapa.toUpper()==objw)
+				if (englishAlias.toUpper()==nameUpper)
 					return qSharedPointerCast<StelObject>(n);
 			}
 		}
 	}
 
 	// Search by designation
-	NebulaP n = searchByDesignation(objw);
+	NebulaP n = searchByDesignation(nameUpper);
 	return qSharedPointerCast<StelObject>(n);
 }
 
@@ -2124,10 +2123,10 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 NebulaP NebulaMgr::searchByDesignation(const QString &designation) const
 {
 	NebulaP n;
-	QString uname = designation.toUpper();
+	QString designationUpper = designation.toUpper();
 	// If no match found, try search by catalog reference
 	static const QRegularExpression catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|ARP|VV|DWB|TR|TRUMPLER|ST|STOCK|RU|RUPRECHT|VDB-HA)\\s*(\\d+)$");
-	QRegularExpressionMatch catNumMatch=catNumRx.match(uname);
+	QRegularExpressionMatch catNumMatch=catNumRx.match(designationUpper);
 	if (catNumMatch.hasMatch())
 	{
 		QString cat = catNumMatch.captured(1);
@@ -2154,7 +2153,7 @@ NebulaP NebulaMgr::searchByDesignation(const QString &designation) const
 		if (cat == "RU" || cat == "RUPRECHT") n = searchRu(num);
 	}
 	static const QRegularExpression dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
-	QRegularExpressionMatch dCatNumMatch=dCatNumRx.match(uname);
+	QRegularExpressionMatch dCatNumMatch=dCatNumRx.match(designationUpper);
 	if (dCatNumMatch.hasMatch())
 	{
 		QString dcat = dCatNumMatch.captured(1);
@@ -2163,7 +2162,7 @@ NebulaP NebulaMgr::searchByDesignation(const QString &designation) const
 		if (dcat == "SH") n = searchSh2(dnum);
 	}
 	static const QRegularExpression sCatNumRx("^(CED|PK|ACO|ABELL|HCG|ESO|VDBH)\\s*(.+)$");
-	QRegularExpressionMatch sCatNumMatch=sCatNumRx.match(uname);
+	QRegularExpressionMatch sCatNumMatch=sCatNumRx.match(designationUpper);
 	if (sCatNumMatch.hasMatch())
 	{
 		QString cat = sCatNumMatch.captured(1);
@@ -2177,7 +2176,7 @@ NebulaP NebulaMgr::searchByDesignation(const QString &designation) const
 		if (cat == "VDBH") n = searchVdBH(num);
 	}
 	static const QRegularExpression gCatNumRx("^(PN|SNR)\\s*G(.+)$");
-	QRegularExpressionMatch gCatNumMatch=gCatNumRx.match(uname);
+	QRegularExpressionMatch gCatNumMatch=gCatNumRx.match(designationUpper);
 	if (gCatNumMatch.hasMatch())
 	{
 		QString cat = gCatNumMatch.captured(1);
@@ -2197,66 +2196,66 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	if (maxNbItem <= 0)
 		return result;
 
-	QString objw = objPrefix.toUpper();
+	QString objUpper = objPrefix.toUpper();
 
 	// Search by Messier objects number (possible formats are "M31" or "M 31")
-	if (objw.size()>=1 && objw.at(0)=='M' && objw.left(3)!="MEL")
+	if (objUpper.size()>=1 && objUpper.at(0)=='M' && objUpper.left(3)!="MEL")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->M_nb==0) continue;
 			QString constw = QString("M%1").arg(n->M_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("M %1").arg(n->M_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by Melotte objects number (possible formats are "Mel31" or "Mel 31")
-	if (objw.size()>=1 && objw.left(3)=="MEL")
+	if (objUpper.size()>=1 && objUpper.left(3)=="MEL")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->Mel_nb==0) continue;
 			QString constw = QString("Mel%1").arg(n->Mel_nb);
-			QString constws = constw.mid(0, objw.size());
-			QString constws2 = QString("Melotte%1").arg(n->Mel_nb).mid(0, objw.size());
-			if (constws.toUpper()==objw || constws2.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			QString constws2 = QString("Melotte%1").arg(n->Mel_nb).mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("Mel %1").arg(n->Mel_nb);
-			constws = constw.mid(0, objw.size());
-			constws2 = QString("Melotte %1").arg(n->Mel_nb).mid(0, objw.size());
-			if (constws.toUpper()==objw || constws2.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			constws2 = QString("Melotte %1").arg(n->Mel_nb).mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by IC objects number (possible formats are "IC466" or "IC 466")
-	if (objw.size()>=1 && objw.left(2)=="IC")
+	if (objUpper.size()>=1 && objUpper.left(2)=="IC")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->IC_nb==0) continue;
 			QString constw = QString("IC%1").arg(n->IC_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("IC %1").arg(n->IC_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
@@ -2266,524 +2265,524 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	{
 		if (n->NGC_nb==0) continue;
 		QString constw = QString("NGC%1").arg(n->NGC_nb);
-		QString constws = constw.mid(0, objw.size());
-		if (constws.toUpper()==objw)
+		QString constws = constw.mid(0, objUpper.size());
+		if (constws.toUpper()==objUpper)
 		{
 			result << constws;
 			continue;
 		}
 		constw = QString("NGC %1").arg(n->NGC_nb);
-		constws = constw.mid(0, objw.size());
-		if (constws.toUpper()==objw)
+		constws = constw.mid(0, objUpper.size());
+		if (constws.toUpper()==objUpper)
 			result << constw;
 	}
 
 	// Search by PGC object numbers (possible formats are "PGC31" or "PGC 31")
-	if (objw.size()>=1 && objw.left(3)=="PGC")
+	if (objUpper.size()>=1 && objUpper.left(3)=="PGC")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->PGC_nb==0) continue;
 			QString constw = QString("PGC%1").arg(n->PGC_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;	// Prevent adding both forms for name
 				continue;
 			}
 			constw = QString("PGC %1").arg(n->PGC_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by UGC object numbers (possible formats are "UGC31" or "UGC 31")
-	if (objw.size()>=1 && objw.left(3)=="UGC")
+	if (objUpper.size()>=1 && objUpper.left(3)=="UGC")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->UGC_nb==0) continue;
 			QString constw = QString("UGC%1").arg(n->UGC_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("UGC %1").arg(n->UGC_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by Caldwell objects number (possible formats are "C31" or "C 31")
-	if (objw.size()>=1 && objw.at(0)=='C' && objw.left(2)!="CR" && objw.left(2)!="CE")
+	if (objUpper.size()>=1 && objUpper.at(0)=='C' && objUpper.left(2)!="CR" && objUpper.left(2)!="CE")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->C_nb==0) continue;
 			QString constw = QString("C%1").arg(n->C_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("C %1").arg(n->C_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by Collinder objects number (possible formats are "Cr31" or "Cr 31")
-	if (objw.size()>=1 && (objw.left(2)=="CR" || objw.left(9)=="COLLINDER"))
+	if (objUpper.size()>=1 && (objUpper.left(2)=="CR" || objUpper.left(9)=="COLLINDER"))
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->Cr_nb==0) continue;
 			QString constw = QString("Cr%1").arg(n->Cr_nb);
-			QString constws = constw.mid(0, objw.size());
-			QString constws2 = QString("Collinder%1").arg(n->Cr_nb).mid(0, objw.size());
-			if (constws.toUpper()==objw || constws2.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			QString constws2 = QString("Collinder%1").arg(n->Cr_nb).mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("Cr %1").arg(n->Cr_nb);
-			constws = constw.mid(0, objw.size());
-			constws2 = QString("Collinder %1").arg(n->Cr_nb).mid(0, objw.size());
-			if (constws.toUpper()==objw || constws2.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			constws2 = QString("Collinder %1").arg(n->Cr_nb).mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by Ced objects number (possible formats are "Ced31" or "Ced 31")
-	if (objw.size()>=1 && objw.left(3)=="CED")
+	if (objUpper.size()>=1 && objUpper.left(3)=="CED")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->Ced_nb.isEmpty()) continue;
 			QString constw = QString("Ced%1").arg(n->Ced_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("Ced %1").arg(n->Ced_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by Barnard objects number (possible formats are "B31" or "B 31")
-	if (objw.size()>=1 && objw.at(0)=='B')
+	if (objUpper.size()>=1 && objUpper.at(0)=='B')
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->B_nb==0) continue;
 			QString constw = QString("B%1").arg(n->B_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("B %1").arg(n->B_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by Sharpless objects number (possible formats are "Sh2-31" or "Sh 2-31")
-	if (objw.size()>=1 && objw.left(2)=="SH")
+	if (objUpper.size()>=1 && objUpper.left(2)=="SH")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->Sh2_nb==0) continue;
 			QString constw = QString("SH2-%1").arg(n->Sh2_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("SH 2-%1").arg(n->Sh2_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by van den Bergh objects number (possible formats are "vdB31" or "vdB 31")
-	if (objw.size()>=1 && objw.left(3)=="VDB" && objw.left(6)!="VDB-HA" && objw.left(4)!="VDBH")
+	if (objUpper.size()>=1 && objUpper.left(3)=="VDB" && objUpper.left(6)!="VDB-HA" && objUpper.left(4)!="VDBH")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->VdB_nb==0) continue;
 			QString constw = QString("vdB%1").arg(n->VdB_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("vdB %1").arg(n->VdB_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by RCW objects number (possible formats are "RCW31" or "RCW 31")
-	if (objw.size()>=1 && objw.left(3)=="RCW")
+	if (objUpper.size()>=1 && objUpper.left(3)=="RCW")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->RCW_nb==0) continue;
 			QString constw = QString("RCW%1").arg(n->RCW_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("RCW %1").arg(n->RCW_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by LDN objects number (possible formats are "LDN31" or "LDN 31")
-	if (objw.size()>=1 && objw.left(3)=="LDN")
+	if (objUpper.size()>=1 && objUpper.left(3)=="LDN")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->LDN_nb==0) continue;
 			QString constw = QString("LDN%1").arg(n->LDN_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("LDN %1").arg(n->LDN_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by LBN objects number (possible formats are "LBN31" or "LBN 31")
-	if (objw.size()>=1 && objw.left(3)=="LBN")
+	if (objUpper.size()>=1 && objUpper.left(3)=="LBN")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->LBN_nb==0) continue;
 			QString constw = QString("LBN%1").arg(n->LBN_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("LBN %1").arg(n->LBN_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by Arp objects number
-	if (objw.size()>=1 && objw.left(3)=="ARP")
+	if (objUpper.size()>=1 && objUpper.left(3)=="ARP")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->Arp_nb==0) continue;
 			QString constw = QString("Arp%1").arg(n->Arp_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("Arp %1").arg(n->Arp_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by VV objects number
-	if (objw.size()>=1 && objw.left(2)=="VV")
+	if (objUpper.size()>=1 && objUpper.left(2)=="VV")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->VV_nb==0) continue;
 			QString constw = QString("VV%1").arg(n->VV_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("VV %1").arg(n->VV_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by PK objects number
-	if (objw.size()>=1 && objw.left(2)=="PK")
+	if (objUpper.size()>=1 && objUpper.left(2)=="PK")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->PK_nb.isEmpty()) continue;
 			QString constw = QString("PK%1").arg(n->PK_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("PK %1").arg(n->PK_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by PN G objects number
-	if (objw.size()>=1 && objw.left(2)=="PN")
+	if (objUpper.size()>=1 && objUpper.left(2)=="PN")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->PNG_nb.isEmpty()) continue;
 			QString constw = QString("PNG%1").arg(n->PNG_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("PN G%1").arg(n->PNG_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by SNR G objects number
-	if (objw.size()>=1 && objw.left(3)=="SNR")
+	if (objUpper.size()>=1 && objUpper.left(3)=="SNR")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->SNRG_nb.isEmpty()) continue;
 			QString constw = QString("SNRG%1").arg(n->SNRG_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("SNR G%1").arg(n->SNRG_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by ACO (Abell) objects number
-	if (objw.size()>=1 && (objw.left(5)=="ABELL" || objw.left(3)=="ACO"))
+	if (objUpper.size()>=1 && (objUpper.left(5)=="ABELL" || objUpper.left(3)=="ACO"))
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->ACO_nb.isEmpty()) continue;
 			QString constw = QString("Abell%1").arg(n->ACO_nb);
-			QString constws = constw.mid(0, objw.size());
-			QString constws2 = QString("ACO%1").arg(n->ACO_nb).mid(0, objw.size());
-			if (constws.toUpper()==objw || constws2.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			QString constws2 = QString("ACO%1").arg(n->ACO_nb).mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("Abell %1").arg(n->ACO_nb);
-			constws = constw.mid(0, objw.size());
-			constws2 = QString("ACO %1").arg(n->ACO_nb).mid(0, objw.size());
-			if (constws.toUpper()==objw || constws2.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			constws2 = QString("ACO %1").arg(n->ACO_nb).mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by HCG objects number
-	if (objw.size()>=1 && objw.left(3)=="HCG")
+	if (objUpper.size()>=1 && objUpper.left(3)=="HCG")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->HCG_nb.isEmpty()) continue;
 			QString constw = QString("HCG%1").arg(n->HCG_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("HCG %1").arg(n->HCG_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by ESO objects number
-	if (objw.size()>=1 && objw.left(3)=="ESO")
+	if (objUpper.size()>=1 && objUpper.left(3)=="ESO")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->ESO_nb.isEmpty()) continue;
 			QString constw = QString("ESO%1").arg(n->ESO_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("ESO %1").arg(n->ESO_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by VdBH objects number
-	if (objw.size()>=1 && objw.left(4)=="VDBH")
+	if (objUpper.size()>=1 && objUpper.left(4)=="VDBH")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->VdBH_nb.isEmpty()) continue;
 			QString constw = QString("vdBH%1").arg(n->VdBH_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("vdBH %1").arg(n->VdBH_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by DWB objects number
-	if (objw.size()>=1 && objw.left(3)=="DWB")
+	if (objUpper.size()>=1 && objUpper.left(3)=="DWB")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->DWB_nb==0) continue;
 			QString constw = QString("DWB%1").arg(n->DWB_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("DWB %1").arg(n->DWB_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by Tr (Trumpler) objects number
-	if (objw.size()>=1 && (objw.left(8)=="TRUMPLER" || objw.left(2)=="TR"))
+	if (objUpper.size()>=1 && (objUpper.left(8)=="TRUMPLER" || objUpper.left(2)=="TR"))
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->Tr_nb==0) continue;
 			QString constw = QString("Tr%1").arg(n->Tr_nb);
-			QString constws = constw.mid(0, objw.size());
-			QString constws2 = QString("Trumpler%1").arg(n->Tr_nb).mid(0, objw.size());
-			if (constws.toUpper()==objw || constws2.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			QString constws2 = QString("Trumpler%1").arg(n->Tr_nb).mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("Tr %1").arg(n->Tr_nb);
-			constws = constw.mid(0, objw.size());
-			constws2 = QString("Trumpler %1").arg(n->Tr_nb).mid(0, objw.size());
-			if (constws.toUpper()==objw || constws2.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			constws2 = QString("Trumpler %1").arg(n->Tr_nb).mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by St (Stock) objects number
-	if (objw.size()>=1 && (objw.left(5)=="STOCK" || objw.left(2)=="ST"))
+	if (objUpper.size()>=1 && (objUpper.left(5)=="STOCK" || objUpper.left(2)=="ST"))
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->St_nb==0) continue;
 			QString constw = QString("St%1").arg(n->St_nb);
-			QString constws = constw.mid(0, objw.size());
-			QString constws2 = QString("Stock%1").arg(n->St_nb).mid(0, objw.size());
-			if (constws.toUpper()==objw || constws2.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			QString constws2 = QString("Stock%1").arg(n->St_nb).mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("St %1").arg(n->St_nb);
-			constws = constw.mid(0, objw.size());
-			constws2 = QString("Stock %1").arg(n->St_nb).mid(0, objw.size());
-			if (constws.toUpper()==objw || constws2.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			constws2 = QString("Stock %1").arg(n->St_nb).mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by Ru (Ruprecht) objects number
-	if (objw.size()>=1 && (objw.left(8)=="RUPRECHT" || objw.left(2)=="RU"))
+	if (objUpper.size()>=1 && (objUpper.left(8)=="RUPRECHT" || objUpper.left(2)=="RU"))
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->Ru_nb==0) continue;
 			QString constw = QString("Ru%1").arg(n->Ru_nb);
-			QString constws = constw.mid(0, objw.size());
-			QString constws2 = QString("Ruprecht%1").arg(n->Ru_nb).mid(0, objw.size());
-			if (constws.toUpper()==objw || constws2.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			QString constws2 = QString("Ruprecht%1").arg(n->Ru_nb).mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("Ru %1").arg(n->Ru_nb);
-			constws = constw.mid(0, objw.size());
-			constws2 = QString("Ruprecht %1").arg(n->Ru_nb).mid(0, objw.size());
-			if (constws.toUpper()==objw || constws2.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			constws2 = QString("Ruprecht %1").arg(n->Ru_nb).mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper || constws2.toUpper()==objUpper)
 				result << constw;
 		}
 	}
 
 	// Search by van den Bergh-Hagen Catalogue objects number
-	if (objw.size()>=1 && objw.left(6)=="VDB-HA")
+	if (objUpper.size()>=1 && objUpper.left(6)=="VDB-HA")
 	{
 		for (const auto& n : dsoArray)
 		{
 			if (n->VdBHa_nb==0) continue;
 			QString constw = QString("vdB-Ha%1").arg(n->VdBHa_nb);
-			QString constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			QString constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("vdB-Ha %1").arg(n->VdBHa_nb);
-			constws = constw.mid(0, objw.size());
-			if (constws.toUpper()==objw)
+			constws = constw.mid(0, objUpper.size());
+			if (constws.toUpper()==objUpper)
 				result << constw;
 		}
 	}
@@ -2796,13 +2795,17 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		names.append(n->englishName);
 		if (getFlagAdditionalNames())
 		{
-			QStringList nameList = n->nameI18Aliases;
-			for (const auto &name : nameList)
-				names.append(name);
+			//QStringList nameList = n->nameI18Aliases;
+			//for (const auto &name : nameList)
+			//	names.append(name);
 
-			nameList = n->englishAliases;
-			for (const auto &name : std::as_const(nameList))
-				names.append(name);
+			//nameList = n->englishAliases;
+			//for (const auto &name : std::as_const(nameList))
+			//	names.append(name);
+			// Why not just:
+			names.append(n->nameI18Aliases);
+			names.append(n->englishAliases);
+
 		}
 	}
 

@@ -243,12 +243,17 @@ public:
 	//! @return surface area in square degrees.
 	float getSurfaceArea(void) const;
 
-	void setProperName(QString name) { englishName = name; }
-	void setDiscoveryData(QString name, QString year) { discoverer = name; discoveryYear = year; }
-	void addNameAlias(QString name) { englishAliases.append(name); englishAliases.removeDuplicates(); }
+	//! Sets englishName
+	void setEnglishName(QString name) { englishName = name; }
+	//! adds a name to the list of common alias names
+	void addNameAlias(QString name) { if (!englishAliases.contains(name)) englishAliases.append(name);}
+	//! Removes englishName, any aliases and cultural names
 	void removeAllNames() { englishName=""; englishAliases.clear(); culturalNames.clear();}
 	//! Add a name for the currently set skyculture
 	void addCulturalName(StelObject::CulturalName culturalName){culturalNames.append(culturalName);}
+
+	//! Set additional information pieces
+	void setDiscoveryData(QString discovererName, QString year) { discoverer = discovererName; discoveryYear = year; }
 
 	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, vdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO, vdBH, DWB, Tr, St, Ru, vdB-Ha)
 	//! from the first catalog that is activated.
