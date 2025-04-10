@@ -1307,7 +1307,7 @@ void StelCore::setParallaxFactor(double factor)
 {
 	if (!fuzzyEquals(parallaxFactor, factor))
 	{
-		parallaxFactor=qBound(0.,factor, 10000.);
+		parallaxFactor=qBound(0.,factor, 100000.);
 		StelApp::immediateSave("astro/parallax_factor", parallaxFactor);
 		emit parallaxFactorChanged(factor);
 	}
