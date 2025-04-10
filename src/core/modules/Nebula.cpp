@@ -206,15 +206,19 @@ QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGro
 
 QString Nebula::getScreenLabel() const
 {
-	QStringList cLabels = getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle());
+	StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	QStringList cLabels = getCultureLabels(scMgr->getScreenLabelStyle());
+	bool skycultureUsesCommonNames = scMgr->currentSkycultureUsesCommonNames();
 	//QString cLabel = (cLabels.isEmpty() ? QString() : cLabels.constFirst());
 
 	// TODO: Decide whether SCs with DSO names should only show common names of these objects, or use common names for all objects.
 
-	QString nameI18n=getNameI18n();
+	QString nameI18n=skycultureUsesCommonNames ? getNameI18n() : QString();
 	// DEBUG: show what is what.
 	return (cLabels.isEmpty() ? (nameI18n.isEmpty() ? QString() : "i18"+nameI18n) : "CL:"+cLabels.constFirst());
-	//QString str = getNameI18n();
+	//return (cLabels.isEmpty() ? "i18"+nameI18n : "CL:"+cLabels.constFirst());
+
+//	return (cLabels.isEmpty() ? QString() : "CL:"+cLabels.constFirst());
 
 }
 QString Nebula::getInfoLabel() const
