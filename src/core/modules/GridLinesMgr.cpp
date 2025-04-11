@@ -1330,8 +1330,8 @@ void SkyLine::draw(StelCore *core) const
 							case LONGITUDE:
 								value=( i<180 ? 90-i : i-270 );
 								shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
-								shiftx = (i<180) ^ southernHemi ? 3.f : -static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
-								extraTextAngle = (i<180) ^ southernHemi ? 0.f : 180.f;
+								shiftx = ((i<180) ^ southernHemi) ? 3.f : -static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+								extraTextAngle = ((i<180) ^ southernHemi) ? 0.f : 180.f;
 								break;
 							case GALACTICEQUATOR:
 							case SUPERGALACTICEQUATOR:

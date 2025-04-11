@@ -106,13 +106,12 @@ void healpix_get_mat3(int nside, int pix, double out[3][3])
 static void healpix_xy2_z_phi(const double xy[2], double *z, double *phi)
 {
     double x = xy[0], y = xy[1];
-    double sigma, xc;
 
     if (fabs(y) > M_PI / 4) {
 	// Polar
-	sigma = 2 - fabs(y * 4) / M_PI;
+	double sigma = 2 - fabs(y * 4) / M_PI;
 	*z = (y > 0 ? 1 : -1) * (1 - sigma * sigma / 3);
-	xc = -M_PI + (2 * std::floor((x + M_PI) * 4 / (2 * M_PI)) + 1) * M_PI / 4;
+	double xc = -M_PI + (2 * std::floor((x + M_PI) * 4 / (2 * M_PI)) + 1) * M_PI / 4;
 	*phi = sigma ? (xc + (x - xc) / sigma) : x;
     } else {
 	// Equatorial
@@ -183,21 +182,16 @@ void za2tu(double z, double a, double *t, double *u)
 // q: coord in north west axis of base pixel
 void tu2fpq(double t, double u, long long int *f, double *p, double *q)
 {
-    double pp;
-    int PP;
-    double qq;
-    int QQ;
-    int V;
     t /= (M_PI / 4.);
     u /= (M_PI / 4.);
     t = healpix_wrap(t, 8.);
     t += -4.;
     u += 5.;
-    pp = healpix_clip((u + t) / 2., 0., 5.);
-    PP = floor(pp);
-    qq = healpix_clip((u - t) / 2., 3. - PP, 6. - PP);
-    QQ = floor(qq);
-    V = 5 - (PP + QQ);
+    const double pp = healpix_clip((u + t) / 2., 0., 5.);
+    const int PP = floor(pp);
+    const double qq = healpix_clip((u - t) / 2., 3. - PP, 6. - PP);
+    const int QQ = floor(qq);
+    const int V = 5 - (PP + QQ);
     if (V < 0)
     { // clip
         *f = 0;

@@ -24,11 +24,14 @@
 #include "StelObject.hpp"
 #include "Planet.hpp"
 
-TrailGroup::TrailGroup(float te, int maxPoints) : timeExtent(te), maxPoints(maxPoints), opacity(1.f)
+TrailGroup::TrailGroup(float te, int maxPoints) :
+	core(StelApp::getInstance().getCore()),
+	timeExtent(te),
+	maxPoints(maxPoints),
+	j2000ToTrailNative(Mat4d::identity()),
+	j2000ToTrailNativeInverted(Mat4d::identity()),
+	opacity(1.f)
 {
-	j2000ToTrailNative=Mat4d::identity();
-	j2000ToTrailNativeInverted=Mat4d::identity();
-	core=StelApp::getInstance().getCore();
 	Q_ASSERT(core);
 }
 

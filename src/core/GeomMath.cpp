@@ -26,10 +26,8 @@ AABBox::AABBox()
 	*this = AABBox(Vec3f(std::numeric_limits<float>::infinity()),Vec3f(-std::numeric_limits<float>::infinity()));
 }
 
-AABBox::AABBox(const Vec3f& min, const Vec3f& max)
+AABBox::AABBox(const Vec3f& min, const Vec3f& max): min(min), max(max)
 {
-	this->min = min;
-	this->max = max;
 }
 
 void AABBox::expand(const Vec3f &vec)
@@ -145,10 +143,8 @@ Vec3f AABBox::negativeVertex(Vec3f& normal) const
 	return out;
 }
 
-Line::Line(const Vec3f &p, const Vec3f &dir)
+Line::Line(const Vec3f &p, const Vec3f &dir): startPoint(p), direction(dir)
 {
-	startPoint = p;
-	direction = dir;
 	endPoint = startPoint + direction;
 }
 

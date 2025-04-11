@@ -2072,13 +2072,12 @@ void StelPainter::sCylinder(double radius, double height, int slices, int orient
 	texCoordArray.clear();
 	vertexArray.clear();
 	float s = 0.f;
-	double x, y;
 	const float ds = 1.f / static_cast<float>(slices);
 	const double da = 2. * M_PI / slices;
 	for (int i = 0; i <= slices; ++i)
 	{
-		x = std::sin(da*i);
-		y = std::cos(da*i);
+		double x = std::sin(da*i);
+		double y = std::cos(da*i);
 		texCoordArray.append(Vec2f(s, 0.f));
 		vertexArray.append(Vec3d(x*radius, y*radius, 0.));
 		texCoordArray.append(Vec2f(s, 1.f));

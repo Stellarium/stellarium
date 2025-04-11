@@ -1227,8 +1227,6 @@ void AstroCalcDialog::currentCelestialPositions()
 		QString distanceUM = qc_("AU", "distance, astronomical unit");
 		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
 		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arc-sec"));
-		Vec3d pos;
-		bool passByType;
 
 		QList<PlanetP> planets;
 		switch (celTypeId)
@@ -1251,7 +1249,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 		for (const auto& planet : std::as_const(planets))
 		{
-			passByType = false;
+			bool passByType = false;
 
 			switch (celTypeId)
 			{
@@ -1284,7 +1282,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 			if (passByType && planet != core->getCurrentPlanet() && static_cast<double>(planet->getVMagnitudeWithExtinction(core)) <= mag && planet->isAboveRealHorizon(core))
 			{
-				pos = planet->getJ2000EquatorialPos(core);
+				Vec3d pos = planet->getJ2000EquatorialPos(core);
 
 				if (horizon)
 					coordStrings = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
@@ -2242,13 +2240,12 @@ void AstroCalcDialog::generateRTS()
 			double stopJD = startJD + ui->rtsToMonthSpinBox->value()*30.4375; // month = 1/12 of year in days
 
 			int elements = static_cast<int>((stopJD - startJD) / currentStep);
-			double JD, JDn, az, alt;
-			float magnitude;
-			QString riseStr, setStr, transitStr, altStr, magStr, elongSStr = dash, elongLStr = dash;
+
 			for (int i = 0; i <= elements; i++)
 			{
-				JD = startJD + i * currentStep;
-				JDn = JD +.5 - core->getUTCOffset(JD)*StelCore::JD_HOUR; // JD at noon of local date
+				QString riseStr, setStr, transitStr, altStr, magStr, elongSStr = dash, elongLStr = dash;
+				double JD = startJD + i * currentStep;
+				double JDn = JD +.5 - core->getUTCOffset(JD)*StelCore::JD_HOUR; // JD at noon of local date
 				core->setJD(JDn); // start the calculation 
 				core->update(0); // force update to get new coordinates
 				Vec4d rts = selectedObject->getRTSTime(core);
@@ -2257,6 +2254,7 @@ void AstroCalcDialog::generateRTS()
 				core->setJD(JD);
 				core->update(0); // force update to get new coordinates
 
+				double az, alt;
 				StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
 				if (withDecimalDegree)
 				{
@@ -2270,7 +2268,7 @@ void AstroCalcDialog::generateRTS()
 					elongSStr = (selectedObject==sun)                   ? dash : StelUtils::radToDmsStr(selectedObject->getJ2000EquatorialPos(core).angle(sun->getJ2000EquatorialPos(core)), true);
 					elongLStr = (selectedObject==moon || planet!=earth) ? dash : StelUtils::radToDmsStr(selectedObject->getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core)), true);
 				}
-				magnitude = selectedObject->getVMagnitudeWithExtinction(core);
+				float magnitude = selectedObject->getVMagnitudeWithExtinction(core);
 				magStr = (magnitude > 50.f || selectedObject->getEnglishName().contains("marker", Qt::CaseInsensitive)? dash : QString::number(magnitude, 'f', 2));
 
 				int year, month, day, currentdate;
@@ -3200,12 +3198,12 @@ void AstroCalcDialog::generateSolarEclipses()
 				double dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude;
 				calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 
-				bool noncentraleclipse = false; // Non-central includes partial and total/annular eclipses that shadow axis miss Earth
 
 				// Determine the type of solar eclipse
 				// Source: Astronomical Algorithms (1991), Jean Meeus
 				if (abs(gamma) <= (1.5433 + L2))
 				{
+					bool noncentraleclipse = false; // Non-central includes partial and total/annular eclipses that shadow axis miss Earth
 					bool add = false;
 					if (abs(gamma) > 0.9972 && abs(gamma) < (1.5433 + L2))
 					{
@@ -3450,8 +3448,6 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 				if (abs(gamma) <= (1.5433 + L2)) // Solar eclipse occurs on this date
 				{
 					double magLocal = 0., altitudeMideclipse = 0.;
-					double altitudeFirstcontact = 0.;
-					double altitudeLastcontact = 0.;
 
 					// Find time of maximum eclipse for current location
 					double dt = 1.;
@@ -3470,6 +3466,8 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 
 					if (magLocal > 0.) // Eclipse occurs for transparent Earth, need to check altitude of the Sun at each contacts
 					{
+						double altitudeFirstcontact = 0.;
+						double altitudeLastcontact = 0.;
 						double JD1 = JD;
 						double JD2 = JD;
 						double JDmax = JD;
@@ -6596,7 +6594,7 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 		{
 			if (objects.contains(it.key(), Qt::CaseInsensitive))
 				limit = qMin(it.value(), limit);
-			it++;
+			++it;
 		}
 	}
 
@@ -7004,18 +7002,16 @@ QMap<double, double> AstroCalcDialog::findStationaryPointApproach(PlanetP &objec
 
 bool AstroCalcDialog::findPreciseStationaryPoint(QPair<double, double> *out, PlanetP object, double JD, double stopJD, double step, bool retrograde)
 {
-	double RA, prevRA;
-
 	if (out == nullptr)
 		return false;
 
-	prevRA = findRightAscension(JD, object);
+	double prevRA = findRightAscension(JD, object);
 	step /= -2.;
 
 	while (true)
 	{
 		JD += step;
-		RA = findRightAscension(JD, object);
+		double RA = findRightAscension(JD, object);
 
 		if (qAbs(step) < 1. / 1440.)
 		{
@@ -7171,19 +7167,18 @@ QMap<double, double> AstroCalcDialog::findOrbitalPointApproach(PlanetP &object1,
 
 bool AstroCalcDialog::findPreciseOrbitalPoint(QPair<double, double>* out, PlanetP object1, double JD, double stopJD, double step, bool minimal)
 {
-	double dist, prevDist, timeDist = qAbs(stopJD-JD);
-
 	if (out == nullptr)
 		return false;
 
-	prevDist = findHeliocentricDistance(JD, object1);
+	const double timeDist = qAbs(stopJD-JD);
+	double prevDist = findHeliocentricDistance(JD, object1);
 	step /= -2.;
 
 	bool result;
 	while (true)
 	{
 		JD += step;
-		dist = findHeliocentricDistance(JD, object1);
+		double dist = findHeliocentricDistance(JD, object1);
 
 		if (qAbs(step) < 1. / 1440.)
 		{

@@ -171,8 +171,8 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 		const float fontSizeRatio = StelApp::getInstance().screenFontSizeRatio();
 		StelPainter sPainter(prj);
 		sPainter.setFont(font4WCR);
-		float sshift=0.f, bshift=0.f, cshift=0.f, dshift=0.f, vshift=1.f;
-		bool flagMask = (core->getProjection(StelCore::FrameJ2000)->getMaskType() != StelProjector::MaskDisk);
+		const bool flagMask = (core->getProjection(StelCore::FrameJ2000)->getMaskType() != StelProjector::MaskDisk);
+		float vshift=1.f;
 		if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
 			vshift = static_cast<float>(screenFontSize + 12*fontSizeRatio)*ppx;
 
@@ -185,8 +185,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 			it4w.next();
 			QString directionLabel = labels.value(it4w.key(), "");
 
-			if (flagMask)
-				sshift = ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f;
+			const float sshift = (flagMask ? ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f : 0.0f);
 
 			if (prj->project(it4w.value(), xy))
 			{
@@ -211,9 +210,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 			{
 				it8w.next();
 				QString directionLabel = labels.value(it8w.key(), "");
-
-				if (flagMask)
-					bshift = ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f;
+				const float bshift = (flagMask ? ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f : 0.0f);
 
 				if (prj->project(it8w.value(), xy))
 				{
@@ -238,8 +235,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 					it16w.next();
 					QString directionLabel = labels.value(it16w.key(), "");
 
-					if (flagMask)
-						cshift = ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f;
+					const float cshift = (flagMask ? ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f : 0.0f);
 
 					if (prj->project(it16w.value(), xy))
 					{
@@ -264,8 +260,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 						it32w.next();
 						QString directionLabel = labels.value(it32w.key(), "");
 
-						if (flagMask)
-							dshift = ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f;
+						const float dshift = (flagMask ? ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f : 0.0f);
 
 						if (prj->project(it32w.value(), xy))
 						{

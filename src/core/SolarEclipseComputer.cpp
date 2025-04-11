@@ -822,7 +822,7 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 
 	bool partialEclipse = false;
 	bool nonCentralEclipse = false;
-	double dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude;
+	double dRatio,altitude,pathWidth,duration,magnitude;
 	core->setJD(JDMid);
 	core->update(0);
 	const auto ep = calcSolarEclipseBessel();
@@ -871,7 +871,6 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 	// Eclipse begins/ends at sunrise/sunset curve
 	if (bothPenumbralLimits)
 	{
-		double latP2, lngP2, latP3, lngP3;
 		bool first = true;
 		for (int j = 0; j < 2; j++)
 		{
@@ -881,8 +880,8 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 			core->update(0);
 			auto ep = calcSolarEclipseBessel();
 			coordinates = getContactCoordinates(ep.x, ep.y, ep.d, ep.mu);
-			latP2 = coordinates.latitude;
-			lngP2 = coordinates.longitude;
+			double latP2 = coordinates.latitude;
+			double lngP2 = coordinates.longitude;
 			auto& limit = data.riseSetLimits[j].emplace<EclipseMapData::TwoLimits>();
 
 			limit.p12curve.emplace_back(data.firstContactWithEarth.longitude,
@@ -907,8 +906,8 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 			core->update(0);
 			ep = calcSolarEclipseBessel();
 			coordinates = getContactCoordinates(ep.x, ep.y, ep.d, ep.mu);
-			latP3 = coordinates.latitude;
-			lngP3 = coordinates.longitude;
+			double latP3 = coordinates.latitude;
+			double lngP3 = coordinates.longitude;
 			limit.p34curve.emplace_back(lngP3, latP3);
 			JD = JDP3;
 			i = 0;
@@ -1180,6 +1179,7 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 
 	if (!partialEclipse)
 	{
+		double latDeg,lngDeg;
 		double JDC1 = JDMid, JDC2 = JDMid;
 		const double JDU1 = getJDofContact(JDMid,true,false,true,true); // beginning of external (ant)umbral contact
 		const double JDU4 = getJDofContact(JDMid,false,false,true,true); // end of external (ant)umbral contact
@@ -1278,7 +1278,6 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 			core->update(0);
 			const auto ep = calcSolarEclipseBessel();
 			calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
-			double angle = 0.;
 			bool firstPoint = false;
 			auto& outline = data.umbraOutlines.emplace_back();
 			outline.JD = JD;
@@ -1289,7 +1288,7 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 			int pointNumber = 0;
 			while (pointNumber < 60)
 			{
-				angle = pointNumber*M_PI*2./60.;
+				double angle = pointNumber*M_PI*2./60.;
 				coordinates = getShadowOutlineCoordinates(angle, ep.x, ep.y, ep.d, ep.L2, ep.tf2, ep.mu);
 				if (coordinates.latitude <= 90.)
 				{
@@ -1726,10 +1725,10 @@ auto SolarEclipseComputer::getShadowOutlineCoordinates(double angle,double x,dou
 
 	GeoPoint coordinates(99., 0.);
 
-	double L1, xi, eta1, zeta1 = 0;
+	double xi, eta1, zeta1 = 0;
 	for(int n = 0; n < 3; ++n)
 	{
-		L1 = L-zeta1*tf;
+		double L1 = L-zeta1*tf;
 		xi = x-L1*sinAngle;
 		eta1 = (y-L1*cosAngle)/rho1;
 		const double zeta1sqr = 1.-xi*xi-eta1*eta1;

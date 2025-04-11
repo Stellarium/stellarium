@@ -592,7 +592,6 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	// Init sides parameters
 	nbSide = static_cast<unsigned short>(landscapeIni.value("landscape/nbside", 0).toUInt());
 	sides = new landscapeTexCoord[static_cast<size_t>(nbSide)];
-	unsigned int texnum;
 	for (unsigned int i=0;i<nbSide;++i)
 	{
 		const QString key = QString("landscape/side%1").arg(i);                             // e.g. side0
@@ -600,7 +599,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		const QStringList parameters = landscapeIni.value(key).toString().split(':');  // e.g. tex0:0:0:1:1
 		//TODO: How should be handled an invalid texture description?
 		QString textureName = parameters.value(0);                                    // tex0
-		texnum = textureName.right(textureName.length() - 3).toUInt();             // 0
+		unsigned int texnum = textureName.right(textureName.length() - 3).toUInt();             // 0
 		sides[i].tex = sideTexs[texnum];
 		sides[i].tex_illum = sideTexs[nbSide+texnum];
 		sides[i].texCoords[0] = parameters.at(1).toFloat();
@@ -1032,10 +1031,9 @@ void main(void)
 	if(!renderProgram || !renderProgram->isLinked())
 		return;
 
-	auto& gl = *QOpenGLContext::currentContext()->functions();
-
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
+		auto& gl = *QOpenGLContext::currentContext()->functions();
 		renderProgram->bind();
 		bindVAO();
 
@@ -1705,10 +1703,9 @@ void main(void)
 	if(!renderProgram || !renderProgram->isLinked())
 		return;
 
-	auto& gl = *QOpenGLContext::currentContext()->functions();
-
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
+		auto& gl = *QOpenGLContext::currentContext()->functions();
 		renderProgram->bind();
                 renderProgram->setUniformValue(shaderVars.brightness,
                                                 landscapeBrightness*landscapeTint[0],
@@ -2060,10 +2057,9 @@ void main(void)
 	if(!renderProgram || !renderProgram->isLinked())
 		return;
 
-	auto& gl = *QOpenGLContext::currentContext()->functions();
-
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
+		auto& gl = *QOpenGLContext::currentContext()->functions();
 		renderProgram->bind();
 		renderProgram->setUniformValue(shaderVars.bottomCapColor,
 					       landscapeBrightness*bottomCapColor[0],

@@ -1095,7 +1095,6 @@ void StelOBJ::generateNormals()
 	float edge1[3] = {0.0f, 0.0f, 0.0f};
 	float edge2[3] = {0.0f, 0.0f, 0.0f};
 	float normal[3] = {0.0f, 0.0f, 0.0f};
-	float invlength = 0.0f;
 	int totalVertices = m_vertices.size();
 	int totalTriangles = m_indices.size() / 3;
 
@@ -1150,7 +1149,7 @@ void StelOBJ::generateNormals()
 	{
 		pVertex0 = &m_vertices[i];
 
-		invlength = 1.0f / std::sqrt(pVertex0->normal[0]*pVertex0->normal[0] +
+		float invlength = 1.0f / std::sqrt(pVertex0->normal[0]*pVertex0->normal[0] +
 				pVertex0->normal[1]*pVertex0->normal[1] +
 				pVertex0->normal[2]*pVertex0->normal[2]);
 
@@ -1174,10 +1173,6 @@ void StelOBJ::generateTangents()
 	float texEdge2[2] = {0.0f, 0.0f};
 	float tangent[3] = {0.0f, 0.0f, 0.0f};
 	float bitangent[3] = {0.0f, 0.0f, 0.0f};
-	float det = 0.0f;
-	float nDotT = 0.0f;
-	float bDotB = 0.0f;
-	float invlength = 0.0f;
 	const int totalVertices = m_vertices.size();
 	const int totalTriangles = m_indices.size() / 3;
 
@@ -1221,7 +1216,7 @@ void StelOBJ::generateTangents()
 		texEdge2[0] = pVertex2->texCoord[0] - pVertex0->texCoord[0];
 		texEdge2[1] = pVertex2->texCoord[1] - pVertex0->texCoord[1];
 
-		det = texEdge1[0]*texEdge2[1] - texEdge2[0]*texEdge1[1];
+		float det = texEdge1[0]*texEdge2[1] - texEdge2[0]*texEdge1[1];
 
 		if (fabs(det) < 1e-6f)
 		{
@@ -1277,9 +1272,9 @@ void StelOBJ::generateTangents()
 
 		// Gram-Schmidt orthogonalize tangent with normal.
 
-		nDotT = pVertex0->normal[0]*pVertex0->tangent[0] +
-			pVertex0->normal[1]*pVertex0->tangent[1] +
-			pVertex0->normal[2]*pVertex0->tangent[2];
+		float nDotT = pVertex0->normal[0]*pVertex0->tangent[0] +
+			      pVertex0->normal[1]*pVertex0->tangent[1] +
+			      pVertex0->normal[2]*pVertex0->tangent[2];
 
 		pVertex0->tangent[0] -= pVertex0->normal[0]*nDotT;
 		pVertex0->tangent[1] -= pVertex0->normal[1]*nDotT;
@@ -1287,9 +1282,9 @@ void StelOBJ::generateTangents()
 
 		// Normalize the tangent.
 
-		invlength = 1.0f / sqrtf(pVertex0->tangent[0]*pVertex0->tangent[0] +
-				      pVertex0->tangent[1]*pVertex0->tangent[1] +
-				      pVertex0->tangent[2]*pVertex0->tangent[2]);
+		float invlength = 1.0f / sqrtf(pVertex0->tangent[0]*pVertex0->tangent[0] +
+					       pVertex0->tangent[1]*pVertex0->tangent[1] +
+					       pVertex0->tangent[2]*pVertex0->tangent[2]);
 
 		pVertex0->tangent[0] *= invlength;
 		pVertex0->tangent[1] *= invlength;
@@ -1323,9 +1318,9 @@ void StelOBJ::generateTangents()
 		bitangent[2] = (pVertex0->normal[0]*pVertex0->tangent[1]) -
 			       (pVertex0->normal[1]*pVertex0->tangent[0]);
 
-		bDotB = bitangent[0]*pVertex0->bitangent[0] +
-			bitangent[1]*pVertex0->bitangent[1] +
-			bitangent[2]*pVertex0->bitangent[2];
+		float bDotB = bitangent[0]*pVertex0->bitangent[0] +
+			      bitangent[1]*pVertex0->bitangent[1] +
+			      bitangent[2]*pVertex0->bitangent[2];
 
 		pVertex0->tangent[3] = (bDotB < 0.0f) ? 1.0f : -1.0f;
 
