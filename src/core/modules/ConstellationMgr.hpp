@@ -108,18 +108,6 @@ public:
 	QStringList listAllObjects(bool inEnglish) const override;
 	QString getName() const override { return "Constellations"; }
 	QString getStelObjectType() const override;
-	// Moved to become StelObject::CulturalDisplayStyle, Then apply maybe even separately to Constellations and Planets, and whether applied to screen labels or infoString.
-	// Describes how to display constellation labels. The viewDialog GUI has a combobox which corresponds to these values.
-	// TODO: This could of course become a bitfield, but having just discrete options may still be easier to maintain.
-	//enum ConstellationDisplayStyle
-	//{
-	//	Abbreviated	= 0, // short label
-	//	Native		= 1, // may show non-Latin glyphs
-	//	Translated	= 2, // user language
-	//	English		= 3, // Useful in case of adding names in modern English terminology (planets etc.). Maybe "Modern" would be better, and should show object scientific name in modern terminology, translated.
-	//	Pronounce	= 4, // user-language transliteration/pronunciation aid. Usually the original form like pinyin is also used in users' languages, but it may be translatable to user language, e.g. for other coding system.
-	//};
-	//Q_ENUM(ConstellationDisplayStyle)
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -227,24 +215,15 @@ public slots:
 	//! Set whether constellation names are displayed
 	bool getFlagLabels(void) const;
 
-	//! Set constellation labels fade duration in second
+	//! Set constellation labels fade duration in seconds
 	void setLabelsFadeDuration(const float duration);
-	//! Get constellation labels fade duration in second
+	//! Get constellation labels fade duration in seconds
 	float getLabelsFadeDuration() const;
 
 	//! Set the font size used for constellation names display
 	void setFontSize(const int newFontSize);
 	//! Get the font size used for constellation names display
 	int getFontSize() const;
-
-//	//! Set the way how constellation names are displayed: abbreviated/as-given/translated
-//	//! @param style the new display style
-//	void setConstellationDisplayStyle(StelObject::CulturalDisplayStyle style);
-//	//! get the way how constellation names are displayed: abbreviated/as-given/translated
-//	StelObject::CulturalDisplayStyle getConstellationDisplayStyle();
-//	//! Returns the currently set constellation display style as string, instead of enum
-//	//! @see getConstellationDisplayStyle()
-//	static QString getConstellationDisplayStyleString(StelObject::CulturalDisplayStyle style);
 
 	//! Set the thickness of lines of the constellations
 	//! @param thickness of line in pixels
@@ -264,7 +243,7 @@ public slots:
 	//! Select all constellations
 	void selectAllConstellations(void);
 
-	//! Select the constellation by his English name. Calling this method will enable
+	//! Select the constellation by its English name. Calling this method will enable
 	//! isolated selection for the constellations if it is not enabled yet.
 	//! @param englishName the English name of the constellation
 	//! @code
@@ -280,18 +259,18 @@ public slots:
 	//! // example of usage in scripts: select constellation where Venus is located
 	//! ConstellationMgr.selectConstellationByObjectName("Venus");
 	//! @endcode
-	//! @note the method will be correct work for sky cultures with boundaries
+	//! @note the method will correctly work for sky cultures with boundaries
 	//! otherwise you may use star names from constellation lines as celestial body
 	void selectConstellationByObjectName(const QString& englishName);
-	//! Remove the constellation from list of selected constellations by his English
+	//! Remove the constellation from list of selected constellations by its English
 	//! name. Calling this method will enable isolated selection for the constellations
 	//! if it is not enabled yet.
 	//! @param englishName the English name of the constellation
 	//! @code
-	//! // example of usage in scripts: remove selection from the Orion constellation
+	//! // example of usage in scripts: remove Orion from the selection of constellations
 	//! ConstellationMgr.deselectConstellation("Orion");
 	//! @endcode
-	//! @note all constellations will be hidden when list of selected constellations will be empty
+	//! @note all constellations will be hidden when list of selected constellations is empty
 	void deselectConstellation(const QString& englishName);
 
 	//! Get the list of English names of all constellations for loaded sky culture
@@ -387,14 +366,9 @@ private:
 	QFont asterFont;
 	StarMgr* hipStarMgr;
 
-	bool isolateSelected; // true to pick individual constellations.
+	bool isolateSelected; //!< true to pick individual constellations.
 	bool flagConstellationPick; // TODO: CLEAR DESCRIPTION
 	std::vector<std::vector<Vec3d> *> allBoundarySegments;
-
-	// DEPRECATED. StelSkyCultureMgr.infoLabelStyle and StelSkyCultureMgr.screenLabelStyle will take over.
-	//! this controls how constellations (and also star names) are printed: Abbreviated/as-given/translated
-	//StelObject::CulturalDisplayStyle constellationDisplayStyle;
-//	static const QMap<QString, StelObject::CulturalDisplayStyle>ConstellationDisplayStyleMap;
 
 	// These are THE master settings - individual constellation settings can vary based on selection status
 	float artFadeDuration;
