@@ -364,8 +364,31 @@ void AsterismMgr::updateI18n()
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	for (auto* asterism : asterisms)
 	{
-		asterism->culturalName.pronounceI18n = trans.qtranslate(asterism->culturalName.pronounce, asterism->context);
-		asterism->culturalName.translatedI18n = trans.qtranslate(asterism->culturalName.translated, asterism->context);
+		const QString context = asterism->context;
+		asterism->culturalName.translatedI18n = trans.tryQtranslate(asterism->culturalName.translated, context);
+		if (asterism->culturalName.translatedI18n.isEmpty())
+		{
+			if (context.isEmpty())
+				asterism->culturalName.translatedI18n = q_(asterism->culturalName.translated);
+			else
+				asterism->culturalName.translatedI18n = qc_(asterism->culturalName.translated, context);
+		}
+		asterism->culturalName.pronounceI18n = trans.tryQtranslate(asterism->culturalName.pronounce, context);
+		if (asterism->culturalName.pronounceI18n.isEmpty())
+		{
+			if (context.isEmpty())
+				asterism->culturalName.pronounceI18n = q_(asterism->culturalName.pronounce);
+			else
+				asterism->culturalName.pronounceI18n = qc_(asterism->culturalName.pronounce, context);
+		}
+		asterism->abbreviationI18n = trans.tryQtranslate(asterism->abbreviation, context);
+		if (asterism->abbreviationI18n.isEmpty())
+		{
+			if (context.isEmpty())
+				asterism->abbreviationI18n = q_(asterism->abbreviation);
+			else
+				asterism->abbreviationI18n = qc_(asterism->abbreviation, context);
+		}
 	}
 }
 
@@ -453,8 +476,8 @@ StelObjectP AsterismMgr::searchByNameI18n(const QString& nameI18n) const
 	QString nameI18nUpper = nameI18n.toUpper();
 	for (auto* asterism : asterisms)
 	{
-		QString astNameI18nUpper = asterism->culturalName.translatedI18n.toUpper();
-		if (astNameI18nUpper == nameI18nUpper) return asterism;
+		if (asterism->culturalName.translatedI18n.toUpper() == nameI18nUpper) return asterism;
+		if (asterism->culturalName.pronounceI18n.toUpper()  == nameI18nUpper) return asterism;
 	}
 	return nullptr;
 }
@@ -464,11 +487,11 @@ StelObjectP AsterismMgr::searchByName(const QString& name) const
 	QString nameUpper = name.toUpper();
 	for (auto* asterism : asterisms)
 	{
-		QString astNameUpper = asterism->culturalName.translated.toUpper();
-		if (astNameUpper == nameUpper) return asterism;
-
-		astNameUpper = asterism->abbreviation.toUpper();
-		if (astNameUpper == nameUpper) return asterism;
+		if (asterism->culturalName.translated.toUpper()      == nameUpper) return asterism;
+		if (asterism->culturalName.native.toUpper()          == nameUpper) return asterism;
+		if (asterism->culturalName.pronounce.toUpper()       == nameUpper) return asterism;
+		if (asterism->culturalName.transliteration.toUpper() == nameUpper) return asterism;
+		if (asterism->abbreviation.toUpper() == nameUpper)                 return asterism;
 	}
 	return nullptr;
 }
