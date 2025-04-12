@@ -89,7 +89,8 @@ void MosaicCameraDialog::updateDialogFields()
 	ui->visibleCheckBox->blockSignals(false);
 	ui->cameraListWidget->blockSignals(false);
 
-	QString html = QString("<h1>%1</h1>\n <p>%2</p>").arg(currentCameraFullName, currentCameraDescription);
+	// QString html = QString("<h1>%1</h1>\n <p>%2</p>").arg(currentCameraFullName, currentCameraDescription);
+	QString html = QString("<h1>%1</h1>\n <p>%2 %3: <a href='%4'>%4</a>.</p>").arg(q_(currentCameraFullName), q_(currentCameraDescription), q_("See more at"), currentCameraURLDetails);
 	ui->cameraTextBrowser->setHtml(html);
 }
 
@@ -113,11 +114,12 @@ void MosaicCameraDialog::setVisibility(bool visible)
 	ui->visibleCheckBox->setChecked(visible);
 }
 
-void MosaicCameraDialog::setCurrentCameraName(const QString& cameraName, const QString& cameraFullName, const QString& cameraDescription)
+void MosaicCameraDialog::setCurrentCameraName(const QString& cameraName, const QString& cameraFullName, const QString& cameraDescription, const QString& cameraURLDetails)
 {
 	currentCameraName = cameraName;
 	currentCameraFullName = cameraFullName;
 	currentCameraDescription = cameraDescription;
+	currentCameraURLDetails = cameraURLDetails;
 	updateDialogFields();
 }
 
@@ -201,7 +203,7 @@ void MosaicCameraDialog::setAboutHtml(void)
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + MOSAICCAMERA_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + MOSAICCAMERA_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Josh Meyers &lt;jmeyers314@gmail.com&gt;</td></tr></table>";
-	html += "<p>" + q_("The Mosaic Camera plugin overlays camera sensor boundaries on the sky.  The position of an overlay is defined by its J2000 RA/Dec coordinates, and a camera rotation angle.") + "</p>";
+	html += "<p>" + q_("The Mosaic Camera plugin overlays camera sensor boundaries on the sky. The position of an overlay is defined by its J2000 RA/Dec coordinates, and a camera rotation angle.") + "</p>";
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());

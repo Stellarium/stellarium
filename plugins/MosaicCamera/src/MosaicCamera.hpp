@@ -47,6 +47,7 @@ struct Camera
 	QString name;						///< The name of the camera.
 	QString cameraName;					///< The name of the camera in the GUI.
 	QString cameraDescription;			///< The description of the camera.
+	QString cameraURLDetails;			///< URL for more details about the camera.
 	double ra;							///< Right Ascension of camera pointing [deg]
 	double dec;							///< Declination of camera pointing [deg]
 	double rotation;					///< Rotation angle of the camera [deg]
