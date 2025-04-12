@@ -89,7 +89,12 @@ void MosaicCameraDialog::updateDialogFields()
 	ui->visibleCheckBox->blockSignals(false);
 	ui->cameraListWidget->blockSignals(false);
 
-	// QString html = QString("<h1>%1</h1>\n <p>%2</p>").arg(currentCameraFullName, currentCameraDescription);
+	// don't display anything if the camera name is empty
+	if (currentCameraFullName.isEmpty() || currentCameraDescription.isEmpty() || currentCameraURLDetails.isEmpty())
+	{
+		ui->cameraTextBrowser->setHtml("<h1></h1><p></p>");
+		return;
+	}
 	QString html = QString("<h1>%1</h1>\n <p>%2 %3: <a href='%4'>%4</a>.</p>").arg(q_(currentCameraFullName), q_(currentCameraDescription), q_("See more at"), currentCameraURLDetails);
 	ui->cameraTextBrowser->setHtml(html);
 }

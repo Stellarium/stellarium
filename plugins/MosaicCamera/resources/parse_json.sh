@@ -29,9 +29,3 @@ done
 
 # write a new line to the output file
 echo "" >> "$output_file"
-
-# Check if jq command was successful
-if [ $? -ne 0 ]; then
-    echo "Error processing $json_file"
-    exit 1
-fi
