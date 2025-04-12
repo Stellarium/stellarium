@@ -223,8 +223,23 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 		for(const auto& point : asterism)
 			XYZname += point->getJ2000EquatorialPos(core);
 		XYZname.normalize();
-	}
 
+		// Sometimes label placement is suboptimal. Allow a correction from the automatic solution in label_offset:[dRA_deg, dDec_deg]
+		if (data.contains("label_offset"))
+		{
+			QJsonArray offset=data["label_offset"].toArray();
+			if (offset.size()!=2)
+				qWarning() << "Bad constellation label offset given for " << id << ", ignoring";
+			else
+			{
+				double ra, dec;
+				StelUtils::rectToSphe(&ra, &dec, XYZname);
+				ra  += offset[0].toDouble()*M_PI_180;
+				dec += offset[1].toDouble()*M_PI_180;
+				StelUtils::spheToRect(ra, dec, XYZname);
+			}
+		}
+	}
 	return true;
 }
 
