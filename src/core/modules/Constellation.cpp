@@ -195,7 +195,8 @@ QString Constellation::getInfoLabel() const
 
 QString Constellation::getCultureLabel(StelObject::CulturalDisplayStyle style) const
 {
-	return StelSkyCultureMgr::createCulturalLabel(culturalName, style, QString(), abbreviationI18n);
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	return scMgr->createCulturalLabel(culturalName, style, getNameI18n(), abbreviationI18n);
 }
 
 void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const
@@ -227,7 +228,7 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 	}
 }
 
-void Constellation::drawName(StelPainter& sPainter, StelObject::CulturalDisplayStyle style) const
+void Constellation::drawName(StelPainter& sPainter, bool abbreviateLabel) const
 {
 	if (nameFader.getInterstate()==0.0f)
 		return;
@@ -235,7 +236,7 @@ void Constellation::drawName(StelPainter& sPainter, StelObject::CulturalDisplayS
 	// TODO: Find a solution of fallbacks when components are missing?
 	if (checkVisibility())
 	{
-		QString name=getScreenLabel();
+		QString name = abbreviateLabel ? abbreviationI18n : getScreenLabel();
 		sPainter.setColor(labelColor, nameFader.getInterstate());
 		sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 	}

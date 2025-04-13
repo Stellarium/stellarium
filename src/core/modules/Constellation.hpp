@@ -80,7 +80,7 @@ private:
 	bool read(const QJsonObject& data, StarMgr *starMgr);
 
 	//! Draw the constellation name. Depending on completeness of names and data, there may be a rich set of options to display.
-	void drawName(StelPainter& sPainter, CulturalDisplayStyle style) const;
+	void drawName(StelPainter& sPainter, bool abbreviateLabel) const;
 	//! Draw the constellation art
 	void drawArt(StelPainter& sPainter) const;
 	//! Draw the constellation boundary. obsVelocity used for aberration

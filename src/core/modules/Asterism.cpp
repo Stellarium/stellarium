@@ -254,7 +254,8 @@ QString Asterism::getInfoLabel() const
 
 QString Asterism::getCultureLabel(StelObject::CulturalDisplayStyle style) const
 {
-	return StelSkyCultureMgr::createCulturalLabel(culturalName, style, QString(), abbreviationI18n);
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	return scMgr->createCulturalLabel(culturalName, style, getNameI18n(), abbreviationI18n);
 }
 
 void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const
@@ -293,7 +294,7 @@ void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const Sphe
 	}
 }
 
-void Asterism::drawName(StelPainter& sPainter) const
+void Asterism::drawName(StelPainter& sPainter, bool abbreviateLabel) const
 {
 	if ((nameFader.getInterstate()==0.0f) || !flagAsterism)
 		return;
@@ -301,7 +302,7 @@ void Asterism::drawName(StelPainter& sPainter) const
 	if (typeOfAsterism==Type::TelescopicAsterism && sPainter.getProjector()->getFov()>60.f)
 		return;
 
-	QString name = getScreenLabel();
+	QString name = abbreviateLabel ? abbreviationI18n : getScreenLabel();
 	sPainter.setColor(labelColor, nameFader.getInterstate());
 	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 }

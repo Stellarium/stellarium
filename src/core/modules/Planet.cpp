@@ -488,10 +488,11 @@ QString Planet::getInfoLabel() const
 
 QStringList Planet::getCultureLabels(StelObject::CulturalDisplayStyle style) const
 {
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
 	QStringList labels;
 	for (auto &cName: culturalNames)
 		{
-			QString label=StelSkyCultureMgr::createCulturalLabel(cName, style, getNameI18n());
+			QString label=scMgr->createCulturalLabel(cName, style, getNameI18n());
 			labels << label;
 		}
 	labels.removeDuplicates();
@@ -1525,7 +1526,7 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		}
 	}
 
-	map.insert("cultural-names", getCultureLabels(StelObject::CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated));
+	map.insert("cultural-names", getCultureLabels(StelObject::CulturalDisplayStyle::Native_Pronounce_Translit_Translated_IPA));
 
 	return map;
 }

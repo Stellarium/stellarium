@@ -555,45 +555,60 @@ void ViewDialog::createDialogContent()
 	        this, &ViewDialog::updateDefaultSkyCulture);
 	updateDefaultSkyCulture();
 
-	// allow to display short names and inhibit translation.
 	// TODO: Remove
-//	connectIntProperty(ui->skyCultureNamesStyleComboBox,		"ConstellationMgr.constellationDisplayStyle");
-	ui->skyCultureNamesStyleComboBox->hide();
-	ui->labelConstellationsNameStyle->hide();
-	//connectCheckBox(ui->nativePlanetNamesCheckBox,			"actionShow_Skyculture_NativePlanetNames");
-	ui->nativePlanetNamesCheckBox->hide();
+	ui->screenLabelComboBox->hide();
+	ui->infoLabelComboBox->hide();
+	ui->labelScreenLabel->hide();
+	ui->labelInfoLabel->hide();
 
-	connectIntProperty(ui->screenLabelComboBox,		"StelSkyCultureMgr.screenLabelStyle");
-	connectIntProperty(ui->infoLabelComboBox,		"StelSkyCultureMgr.infoLabelStyle");
-	connectCheckBox(ui->showConstellationLinesCheckBox,			"actionShow_Constellation_Lines");
-	connectIntProperty(ui->constellationLineThicknessSpinBox,		"ConstellationMgr.constellationLineThickness");
-	connectCheckBox(ui->showConstellationLabelsCheckBox,		"actionShow_Constellation_Labels");
-	connectCheckBox(ui->showConstellationBoundariesCheckBox,		"actionShow_Constellation_Boundaries");
+	configureSkyCultureCheckboxes();
+
+	connect(ui->infoLabelNativeCheckBox           , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelPronounceCheckBox        , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelTransliterationCheckBox  , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelTranslationCheckBox      , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelIPACheckBox              , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelModernCheckBox           , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+
+	connect(ui->screenLabelNativeCheckBox         , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelPronounceCheckBox      , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelTransliterationCheckBox, &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelTranslationCheckBox    , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelIPACheckBox            , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelModernCheckBox         , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+
+	connectBoolProperty(ui->abbreviatedNamesCheckBox,               "StelSkyCultureMgr.flagUseAbbreviatedNames");
+	connectIntProperty(ui->screenLabelComboBox,                     "StelSkyCultureMgr.screenLabelStyle");
+	connectIntProperty(ui->infoLabelComboBox,                       "StelSkyCultureMgr.infoLabelStyle");
+	connectCheckBox(ui->showConstellationLinesCheckBox,             "actionShow_Constellation_Lines");
+	connectIntProperty(ui->constellationLineThicknessSpinBox,       "ConstellationMgr.constellationLineThickness");
+	connectCheckBox(ui->showConstellationLabelsCheckBox,            "actionShow_Constellation_Labels");
+	connectCheckBox(ui->showConstellationBoundariesCheckBox,        "actionShow_Constellation_Boundaries");
 	connectIntProperty(ui->constellationBoundariesThicknessSpinBox,	"ConstellationMgr.constellationBoundariesThickness");
-	connectCheckBox(ui->showConstellationArtCheckBox,			"actionShow_Constellation_Art");
-	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,		"ConstellationMgr.artIntensity");
+	connectCheckBox(ui->showConstellationArtCheckBox,               "actionShow_Constellation_Art");
+	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,    "ConstellationMgr.artIntensity");
 
 	// fade duration
-	connectDoubleProperty(ui->artFadeDurationDoubleSpinBox,		"ConstellationMgr.artFadeDuration");
-	connectDoubleProperty(ui->boundariesFadeDurationDoubleSpinBox,	"ConstellationMgr.boundariesFadeDuration");
-	connectDoubleProperty(ui->linesFadeDurationDoubleSpinBox,		"ConstellationMgr.linesFadeDuration");
-	connectDoubleProperty(ui->namesFadeDurationDoubleSpinBox,		"ConstellationMgr.namesFadeDuration");
-	connectDoubleProperty(ui->asterismNamesFadeDurationDoubleSpinBox,	"AsterismMgr.namesFadeDuration");
-	connectDoubleProperty(ui->asterismLinesFadeDurationDoubleSpinBox,	"AsterismMgr.linesFadeDuration");
-	connectDoubleProperty(ui->rayHelpersFadeDurationDoubleSpinBox,	"AsterismMgr.rayHelpersFadeDuration");
+	connectDoubleProperty(ui->artFadeDurationDoubleSpinBox,           "ConstellationMgr.artFadeDuration");
+	connectDoubleProperty(ui->boundariesFadeDurationDoubleSpinBox,    "ConstellationMgr.boundariesFadeDuration");
+	connectDoubleProperty(ui->linesFadeDurationDoubleSpinBox,         "ConstellationMgr.linesFadeDuration");
+	connectDoubleProperty(ui->namesFadeDurationDoubleSpinBox,         "ConstellationMgr.namesFadeDuration");
+	connectDoubleProperty(ui->asterismNamesFadeDurationDoubleSpinBox, "AsterismMgr.namesFadeDuration");
+	connectDoubleProperty(ui->asterismLinesFadeDurationDoubleSpinBox, "AsterismMgr.linesFadeDuration");
+	connectDoubleProperty(ui->rayHelpersFadeDurationDoubleSpinBox,    "AsterismMgr.rayHelpersFadeDuration");
 
 	ui->colorConstellationBoundaries->setup("ConstellationMgr.boundariesColor", "color/const_boundary_color");
 	ui->colorConstellationLabels    ->setup("ConstellationMgr.namesColor",      "color/const_names_color");
 	ui->colorConstellationLines     ->setup("ConstellationMgr.linesColor",      "color/const_lines_color");
 
-	connectCheckBox(ui->showAsterismLinesCheckBox,		"actionShow_Asterism_Lines");
-	connectIntProperty(ui->asterismLineThicknessSpinBox,		"AsterismMgr.asterismLineThickness");
-	connectCheckBox(ui->showAsterismLabelsCheckBox,		"actionShow_Asterism_Labels");
-	connectCheckBox(ui->showRayHelpersCheckBox,		"actionShow_Ray_Helpers");
-	connectIntProperty(ui->rayHelperThicknessSpinBox,		"AsterismMgr.rayHelperThickness");
+	connectCheckBox(ui->showAsterismLinesCheckBox,          "actionShow_Asterism_Lines");
+	connectIntProperty(ui->asterismLineThicknessSpinBox,    "AsterismMgr.asterismLineThickness");
+	connectCheckBox(ui->showAsterismLabelsCheckBox,         "actionShow_Asterism_Labels");
+	connectCheckBox(ui->showRayHelpersCheckBox,             "actionShow_Ray_Helpers");
+	connectIntProperty(ui->rayHelperThicknessSpinBox,       "AsterismMgr.rayHelperThickness");
 
 	connectBoolProperty(ui->selectSingleConstellationCheckBox, "ConstellationMgr.isolateSelected");
-	connectBoolProperty(ui->constellationPickCheckBox, "ConstellationMgr.flagConstellationPick");
+	connectBoolProperty(ui->constellationPickCheckBox,         "ConstellationMgr.flagConstellationPick");
 
 	ui->colorAsterismLabels->setup("AsterismMgr.namesColor",      "color/asterism_names_color");
 	ui->colorAsterismLines ->setup("AsterismMgr.linesColor",      "color/asterism_lines_color");
@@ -717,7 +732,6 @@ void ViewDialog::updateHips()
 		return;
 	}
 
-	QJsonObject currentInfo;
 	QString currentSurvey = l->currentItem() ? l->currentItem()->data(Qt::UserRole).toString() : "";
 	QListWidgetItem* currentItem = nullptr;
 	HipsSurveyP currentHips;
@@ -1093,28 +1107,6 @@ void ViewDialog::populateLists()
 	l->blockSignals(false);
 	updateSkyCultureText();
 
-//	// populate language printing combo. (taken from DeltaT combo)
-//	StelModule* cmgr = app.getModule("ConstellationMgr");
-//	Q_ASSERT(cmgr);
-//	Q_ASSERT(ui->skyCultureNamesStyleComboBox);
-//	QComboBox* cultureNamesStyleComboBox = ui->skyCultureNamesStyleComboBox;
-//
-//	cultureNamesStyleComboBox->blockSignals(true);
-//	cultureNamesStyleComboBox->clear();
-//	QMetaEnum enumerator = cmgr->metaObject()->property(cmgr->metaObject()->indexOfProperty("constellationDisplayStyle")).enumerator();
-//	cultureNamesStyleComboBox->addItem(q_("Abbreviated"), enumerator.keyToValue("constellationsAbbreviated"));
-//	cultureNamesStyleComboBox->addItem(q_("Native"), enumerator.keyToValue("constellationsNative"));  // Please make this always a transcript into European letters!
-//	cultureNamesStyleComboBox->addItem(q_("Translated"), enumerator.keyToValue("constellationsTranslated"));
-//	//cultureNamesStyleComboBox->addItem(q_("English"),    ConstellationMgr::constellationsEnglish); // This is not useful.
-//	//Restore the selection
-//	int index = cultureNamesStyleComboBox->findData(cmgr->property("constellationDisplayStyle").toInt(), Qt::UserRole, Qt::MatchCaseSensitive);
-//	if (index==-1) index=2; // Default: Translated
-//	cultureNamesStyleComboBox->setCurrentIndex(index);
-//	cultureNamesStyleComboBox->blockSignals(false);
-
-	// This is too long, placed into own method
-	populateSkyCultureLabelStyleComboboxes();
-
 	const StelCore* core = app.getCore();
 	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
 
@@ -1167,71 +1159,52 @@ void ViewDialog::populateLists()
 	updateDefaultLandscape();
 }
 
-// populate label formatting combos. (taken from DeltaT combo)
-void ViewDialog::populateSkyCultureLabelStyleComboboxes()
+void ViewDialog::configureSkyCultureCheckboxes()
 {
-//	StelApp& app = StelApp::getInstance();
-	StelModule* scMgr = GETSTELMODULE(StelSkyCultureMgr);
-	Q_ASSERT(scMgr);
-	//StelModule* cmgr = app.getModule("ConstellationMgr");
-	//Q_ASSERT(cmgr);
-	Q_ASSERT(ui->skyCultureNamesStyleComboBox);
-	//QComboBox* cultureNamesStyleComboBox = ui->skyCultureNamesStyleComboBox;
+	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
+	StelObject::CulturalDisplayStyle infoStyle   = scMgr->getInfoLabelStyle();
+	StelObject::CulturalDisplayStyle screenStyle = scMgr->getScreenLabelStyle();
 
-	QList<QComboBox *>comboBoxes={ui->screenLabelComboBox, ui->infoLabelComboBox};
-	for (QComboBox *comboBox: comboBoxes)
-	{
-		comboBox->blockSignals(true);
-		comboBox->clear();
-		// I am not sure if this is the best way. The actual enum is in StelObject.
-		QMetaEnum enumerator = scMgr->metaObject()->property(scMgr->metaObject()->indexOfProperty("screenLabelStyle")).enumerator();
-		comboBox->addItem(q_("Abbreviated"), enumerator.keyToValue("Abbreviated"));
-		comboBox->addItem(q_("Native"),      enumerator.keyToValue("Native"));
-		comboBox->addItem(q_("Translated"),  enumerator.keyToValue("Translated"));
-		comboBox->addItem(q_("Modern"),              enumerator.keyToValue("Modern"));
-		comboBox->addItem(q_("Transliteration"),     enumerator.keyToValue("Pronounce"));
-		comboBox->addItem(q_("Sci.Transliteration"), enumerator.keyToValue("Translit"));
-		comboBox->addItem(q_("IPA"),                 enumerator.keyToValue("IPA"));
-		comboBox->addItem(q_("Transliteration and modern name"),                                           enumerator.keyToValue("Pronounce_Modern"));
-		comboBox->addItem(q_("Transliteration and translation"),                                           enumerator.keyToValue("Pronounce_Translated"));
-		comboBox->addItem(q_("Transliteration, translation, and modern name"),                             enumerator.keyToValue("Pronounce_Translated_Modern"));
-		comboBox->addItem(q_("Transliteration, IPA and translation"),                                      enumerator.keyToValue("Pronounce_IPA_Translated"));
-		comboBox->addItem(q_("Transliteration, IPA, translation, and modern name"),                        enumerator.keyToValue("Pronounce_IPA_Translated_Modern"));
-		comboBox->addItem(q_("Native and transliteration"),                                                enumerator.keyToValue("Native_Pronounce"));
-		comboBox->addItem(q_("Native, transliteration, and modern name"),                                  enumerator.keyToValue("Native_Pronounce_Modern"));
-		comboBox->addItem(q_("Native, transliteration and translation"),                                   enumerator.keyToValue("Native_Pronounce_Translated"));
-		comboBox->addItem(q_("Native, transliteration, translation, and modern name"),                     enumerator.keyToValue("Native_Pronounce_Translated_Modern"));
-		comboBox->addItem(q_("Native, transliteration, IPA and translation"),                              enumerator.keyToValue("Native_Pronounce_IPA_Translated"));
-		comboBox->addItem(q_("Native, transliteration, IPA, translation, and modern name"),                enumerator.keyToValue("Native_Pronounce_IPA_Translated_Modern"));
-		comboBox->addItem(q_("Native and translation"),                                                    enumerator.keyToValue("Native_Translated"));
-		comboBox->addItem(q_("Native, translation, and modern name"),                                      enumerator.keyToValue("Native_Translated_Modern"));
-		comboBox->addItem(q_("Native, sci.transliteration and translation"),                               enumerator.keyToValue("Native_Translit_Translated"));
-		comboBox->addItem(q_("Native, sci.transliteration, translation, and modern name"),                 enumerator.keyToValue("Native_Translit_Translated_Modern"));
-		comboBox->addItem(q_("Native, sci.transliteration, transliteration and translation"),              enumerator.keyToValue("Native_Translit_Pronounce_Translated"));
-		comboBox->addItem(q_("Native, sci.transliteration, transliteration, translation, and modern name"),enumerator.keyToValue("Native_Translit_Pronounce_Translated_Modern"));
-		comboBox->addItem(q_("Native, sci.transliteration, transliteration, IPA and translation"),         enumerator.keyToValue("Native_Translit_Pronounce_IPA_Translated"));
-		comboBox->addItem(q_("Native, sci.transliteration, transliteration, IPA, translation, and modern name"), enumerator.keyToValue("Native_Translit_Pronounce_IPA_Translated_Modern"));
-		comboBox->addItem(q_("Native, sci.transliteration, IPA and translation"),                          enumerator.keyToValue("Native_Translit_IPA_Translated"));
-		comboBox->addItem(q_("Native, sci.transliteration, IPA, translation, and modern name"),            enumerator.keyToValue("Native_Translit_IPA_Translated_Modern"));
-		comboBox->addItem(q_("Sci.transliteration and translation"),                                       enumerator.keyToValue("Translit_Translated"));
-		comboBox->addItem(q_("Sci.transliteration, translation, and modern name"),                         enumerator.keyToValue("Translit_Translated_Modern"));
-		comboBox->addItem(q_("Sci.transliteration, transliteration and translation"),                      enumerator.keyToValue("Translit_Pronounce_Translated"));
-		comboBox->addItem(q_("Sci.transliteration, transliteration, translation, and modern name"),        enumerator.keyToValue("Translit_Pronounce_Translated_Modern"));
-		comboBox->addItem(q_("Sci.transliteration, transliteration, IPA and translation"),                 enumerator.keyToValue("Translit_Pronounce_IPA_Translated"));
-		comboBox->addItem(q_("Sci.transliteration, transliteration, IPA, translation, and modern name"),   enumerator.keyToValue("Translit_Pronounce_IPA_Translated_Modern"));
-		comboBox->addItem(q_("Sci.transliteration, IPA and translation"),                                  enumerator.keyToValue("Translit_IPA_Translated"));
-		comboBox->addItem(q_("Sci.transliteration, IPA, translation, and modern name"),                    enumerator.keyToValue("Translit_IPA_Translated_Modern"));
-	}
-	//Restore the selections
-	int index = ui->screenLabelComboBox->findData(scMgr->property("screenLabelStyle").toInt(), Qt::UserRole, Qt::MatchCaseSensitive);
-	if (index==-1) index=2; // Default: Translated
-	ui->screenLabelComboBox->setCurrentIndex(index);
-	ui->screenLabelComboBox->blockSignals(false);
+	ui->infoLabelNativeCheckBox           ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Native));
+	ui->infoLabelPronounceCheckBox        ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Pronounce));
+	ui->infoLabelTransliterationCheckBox         ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Translit));
+	ui->infoLabelTranslationCheckBox      ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Translated));
+	ui->infoLabelIPACheckBox              ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::IPA));
+	ui->infoLabelModernCheckBox           ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Modern));
+	ui->screenLabelNativeCheckBox         ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Native));
+	ui->screenLabelPronounceCheckBox      ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Pronounce));
+	ui->screenLabelTransliterationCheckBox->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Translit));
+	ui->screenLabelTranslationCheckBox    ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Translated));
+	ui->screenLabelIPACheckBox            ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::IPA));
+	ui->screenLabelModernCheckBox         ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Modern));
+}
 
-	index = ui->infoLabelComboBox->findData(scMgr->property("infoLabelStyle").toInt(), Qt::UserRole, Qt::MatchCaseSensitive);
-	if (index==-1) index=2; // Default: Translated
-	ui->infoLabelComboBox->setCurrentIndex(index);
-	ui->infoLabelComboBox->blockSignals(false);
+void ViewDialog::updateSkyCultureInfoStyleFromCheckboxes()
+{
+	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
+
+	scMgr->setInfoLabelStyle(static_cast<StelObject::CulturalDisplayStyle>(
+				int(ui->infoLabelNativeCheckBox     ->isChecked()) << 5 |
+				int(ui->infoLabelPronounceCheckBox  ->isChecked()) << 4 |
+				int(ui->infoLabelTransliterationCheckBox   ->isChecked()) << 3 |
+				int(ui->infoLabelTranslationCheckBox->isChecked()) << 2 |
+				int(ui->infoLabelIPACheckBox        ->isChecked()) << 1 |
+				int(ui->infoLabelModernCheckBox     ->isChecked())
+				));
+}
+
+void ViewDialog::updateSkyCultureScreenStyleFromCheckboxes()
+{
+	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
+
+	scMgr->setScreenLabelStyle(static_cast<StelObject::CulturalDisplayStyle>(
+				int(ui->screenLabelNativeCheckBox         ->isChecked()) << 5 |
+				int(ui->screenLabelPronounceCheckBox      ->isChecked()) << 4 |
+				int(ui->screenLabelTransliterationCheckBox->isChecked()) << 3 |
+				int(ui->screenLabelTranslationCheckBox    ->isChecked()) << 2 |
+				int(ui->screenLabelIPACheckBox            ->isChecked()) << 1 |
+				int(ui->screenLabelModernCheckBox         ->isChecked())
+				));
 }
 
 void ViewDialog::skyCultureChanged()
@@ -1240,6 +1213,7 @@ void ViewDialog::skyCultureChanged()
 	l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	updateSkyCultureText();
 	updateDefaultSkyCulture();
+	configureSkyCultureCheckboxes();
 }
 
 // fill the description text window, not the names in the sky.

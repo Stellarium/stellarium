@@ -612,7 +612,8 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) co
 void ConstellationMgr::drawNames(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
 	static StelSkyCultureMgr* scMgr= GETSTELMODULE(StelSkyCultureMgr);
-	StelObject::CulturalDisplayStyle culturalDisplayStyle=scMgr->getScreenLabelStyle();
+	const bool abbreviateLabel=scMgr->getFlagUseAbbreviatedNames();
+
 	sPainter.setBlending(true);
 	for (auto* constellation : constellations)
 	{
@@ -623,7 +624,7 @@ void ConstellationMgr::drawNames(StelPainter& sPainter, const Vec3d &obsVelocity
 
 		// Check if in the field of view
 		if (sPainter.getProjector()->projectCheck(XYZname, constellation->XYname))
-			constellation->drawName(sPainter, culturalDisplayStyle);
+			constellation->drawName(sPainter, abbreviateLabel);
 	}
 }
 
