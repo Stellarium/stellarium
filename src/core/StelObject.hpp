@@ -80,51 +80,88 @@ public:
 	Q_FLAG(InfoStringGroup)
 
 
-	//! Describes how to display culture aware labels for constellation, planets, star names, .... The viewDialog GUI has comboboxes which corresponds to these values.
+	//! A 6-bit code with all options for displaying relevant CulturalName parts.
+	//! Describes how to display culture aware labels for constellation, planets, star names, ....
+	//! The viewDialog GUI has checkboxes which corresponds to these values.
 	//! It is necessary to have different settings for screen labels (usually shorter) and InfoString labels (may be set to more complete)
-	//! Then apply separately to Constellations and Planets, and whether applied to screen labels or infoString.
+
 	//! This setting is handled by methods getScreenLabel() and getInfoLabel() in StelObject and descendants.
-	//! note: This could of course become a bitfield, but having just a choice of discrete options may still be easier to maintain.
-	//! @note: Changing names here MUST be reflected in ViewDialog::populateSkyCultureLabelStyleComboboxes()
+
+	//! The names are explicitly long and descriptive, usable in config.ini.
+	//! Example: Native_Pronounce_Translit_Translated_IPA_Modern shows everything:
+	//! - native name,
+	//! - simple translatable pronunciation
+	//! - non-translatable scientific transliteration (in rare cases only)
+	//! - translated meaning
+	//! - IPA reading/pronunciation aid in International Phonetic Alphabet
+	//! - Modern name (useful for stars and planets only). Helpful to see the modern name in context.
 	enum class CulturalDisplayStyle
 	{
-		Abbreviated	= 0, // short label
-		Native		= 1, // may show non-Latin glyphs
-		Translated	= 2, // Just user language. This is the most common case for people casually interested in the topic.
-		Modern		= 3, // Was: English. Useful in case of adding names in modern English/userlanguage terminology (planets etc.). Should show object scientific name in modern terminology, translated.
-		Pronounce	= 4, // user-language transliteration/pronunciation aid. Usually the original form like pinyin is also used in users' languages, but it may be translatable to user language, e.g. into another coding system like Cyrillic.
-		Translit	= 5, // Non-translatable scientific transliteration that is not a pronounciation aid. Only known use case is Tibetan/Wiley.
-		IPA		= 6, // International Phonetic Alphabet, a standardized pronunciation aid
-		Pronounce_Modern,                   // combinations: user language letters + Modern Name
-		Pronounce_Translated,                             // user language letters + translation
-		Pronounce_Translated_Modern,                      // user language letters + translation + Modern Name
-		Pronounce_IPA_Translated,                         // user language letters + phonetic + translation
-		Pronounce_IPA_Translated_Modern,                  // user language letters + phonetics + translation + Modern Name
-		Native_Pronounce,                                 // just help reading foreign glyphs.
-		Native_Pronounce_Modern,                          // just help reading foreign glyphs + Modern Name
-		Native_Pronounce_Translated,                      // foreign glyphs, own pronunciation aid, translation
-		Native_Pronounce_Translated_Modern,               // foreign glyphs, own pronunciation aid, translation + Modern Name
-		Native_Pronounce_IPA_Translated,                  // foreign glyphs, own pronunciation aid, phonetics, translation
-		Native_Pronounce_IPA_Translated_Modern,           // foreign glyphs, own pronunciation aid, phonetics, translation + Modern Name
-		Native_Translated,                                // glyphs + user language
-		Native_Translated_Modern,                         // glyphs + user language + Modern Name
-		Native_Translit_Translated,                       // glyphs + sci.transliteration, translation
-		Native_Translit_Translated_Modern,                // glyphs + sci.transliteration, translation + Modern Name
-		Native_Translit_Pronounce_Translated,             // glyphs + sci.transliteration, pronunciation for mortals, translation
-		Native_Translit_Pronounce_Translated_Modern,      // glyphs + sci.transliteration, pronunciation for mortals, translation + Modern Name
-		Native_Translit_Pronounce_IPA_Translated,         // glyphs + sci.transliteration, pronunciation for mortals, phonetics, translation
-		Native_Translit_Pronounce_IPA_Translated_Modern,  // glyphs + sci.transliteration, pronunciation for mortals, phonetics, translation + Modern Name
-		Native_Translit_IPA_Translated,                   // glyphs + sci.transliteration, phonetics, translation
-		Native_Translit_IPA_Translated_Modern,            // glyphs + sci.transliteration, phonetics, translation + Modern Name
-		Translit_Translated,                              // sci.transliteration, translation
-		Translit_Translated_Modern,                       // sci.transliteration, translation + Modern Name
-		Translit_Pronounce_Translated,                    // sci.transliteration, pronunciation for mortals, translation
-		Translit_Pronounce_Translated_Modern,             // sci.transliteration, pronunciation for mortals, translation + Modern Name
-		Translit_Pronounce_IPA_Translated,                // sci.transliteration, pronunciation for mortals, phonetics, translation
-		Translit_Pronounce_IPA_Translated_Modern,         // sci.transliteration, pronunciation for mortals, phonetics, translation + Modern Name
-		Translit_IPA_Translated,                          // sci.transliteration, phonetics, translation
-		Translit_IPA_Translated_Modern,                   // sci.transliteration, phonetics, translation + Modern Name
-	};                                                        // MORE OPTIONS NEEDED?
+		NONE                                            = 0x00,
+		Modern                                          = 0x01,
+		IPA                                             = 0x02,
+		IPA_Modern                                      = 0x03,
+		Translated                                      = 0x04,
+		Translated_Modern                               = 0x05,
+		Translated_IPA                                  = 0x06,
+		Translated_IPA_Modern                           = 0x07,
+		Translit                                        = 0x08,
+		Translit_Modern                                 = 0x09,
+		Translit_IPA                                    = 0x0A,
+		Translit_IPA_Modern                             = 0x0B,
+		Translit_Translated                             = 0x0C,
+		Translit_Translated_Modern                      = 0x0D,
+		Translit_Translated_IPA                         = 0x0E,
+		Translit_Translated_IPA_Modern                  = 0x0F,
+		Pronounce                                       = 0x10,
+		Pronounce_Modern                                = 0x11,
+		Pronounce_IPA                                   = 0x12,
+		Pronounce_IPA_Modern                            = 0x13,
+		Pronounce_Translated                            = 0x14,
+		Pronounce_Translated_Modern                     = 0x15,
+		Pronounce_Translated_IPA                        = 0x16,
+		Pronounce_Translated_IPA_Modern                 = 0x17,
+		Pronounce_Translit                              = 0x18,
+		Pronounce_Translit_Modern                       = 0x19,
+		Pronounce_Translit_IPA                          = 0x1A,
+		Pronounce_Translit_IPA_Modern                   = 0x1B,
+		Pronounce_Translit_Translated                   = 0x1C,
+		Pronounce_Translit_Translated_Modern            = 0x1D,
+		Pronounce_Translit_Translated_IPA               = 0x1E,
+		Pronounce_Translit_Translated_IPA_Modern        = 0x1F,
+		Native                                          = 0x20,
+		Native_Modern                                   = 0x21,
+		Native_IPA                                      = 0x22,
+		Native_IPA_Modern                               = 0x23,
+		Native_Translated                               = 0x24,
+		Native_Translated_Modern                        = 0x25,
+		Native_Translated_IPA                           = 0x26,
+		Native_Translated_IPA_Modern                    = 0x27,
+		Native_Translit                                 = 0x28,
+		Native_Translit_Modern                          = 0x29,
+		Native_Translit_IPA                             = 0x2A,
+		Native_Translit_IPA_Modern                      = 0x2B,
+		Native_Translit_Translated                      = 0x2C,
+		Native_Translit_Translated_Modern               = 0x2D,
+		Native_Translit_Translated_IPA                  = 0x2E,
+		Native_Translit_Translated_IPA_Modern           = 0x2F,
+		Native_Pronounce                                = 0x30,
+		Native_Pronounce_Modern                         = 0x31,
+		Native_Pronounce_IPA                            = 0x32,
+		Native_Pronounce_IPA_Modern                     = 0x33,
+		Native_Pronounce_Translated                     = 0x34,
+		Native_Pronounce_Translated_Modern              = 0x35,
+		Native_Pronounce_Translated_IPA                 = 0x36,
+		Native_Pronounce_Translated_IPA_Modern          = 0x37,
+		Native_Pronounce_Translit                       = 0x38,
+		Native_Pronounce_Translit_Modern                = 0x39,
+		Native_Pronounce_Translit_IPA                   = 0x3A,
+		Native_Pronounce_Translit_IPA_Modern            = 0x3B,
+		Native_Pronounce_Translit_Translated            = 0x3C,
+		Native_Pronounce_Translit_Translated_Modern     = 0x3D,
+		Native_Pronounce_Translit_Translated_IPA        = 0x3E,
+		Native_Pronounce_Translit_Translated_IPA_Modern = 0x3F
+	};
 	Q_ENUM(CulturalDisplayStyle)
 
 	//! @struct CulturalName
@@ -256,27 +293,27 @@ public:
 
 	//! Return object's native name in the glyphs as written in skyculture descriptions (index.json).
 	//! For non-default skycultures, this is as close to the original as possible.
-	virtual QString getNameNative() const {return "";}
+	virtual QString getNameNative() const {return QString();}
 
 	//! Return a Latin-letter based transliteration geared at english pronounciation of the native name.
 	//! This is optional but essential for all skycultures in languages which use non-Latin glyphs.
 	//! When user language is English, this is the string from index.json.
 	//! TBD: When user language is different, this may appear adapted to user language.
-	virtual QString getNamePronounce() const {return "";}
+	virtual QString getNamePronounce() const {return QString();}
 
 	//! Return a secondary scientific transliteration of the native name.
 	//! This is optional and in fact rarely used. An example would be Wylie-transliteration of Tibetan.
-	virtual QString getNameTransliteration() const {return "";}
+	virtual QString getNameTransliteration() const {return QString();}
 
 	//! Return native name in International Phonetic Alphabet. Optional.
-	virtual QString getNameIPA() const {return "";}
+	virtual QString getNameIPA() const {return QString();}
 
 	//! Return screen label (to be used in the sky display. Most users will use some short label)
-	virtual QString getScreenLabel() const {return "";}
+	virtual QString getScreenLabel() const {return QString();}
 
 	//! Return InfoString label (to be used in the InfoString).
 	//! When dealing with foreign skycultures, many users will want this to be longer, with more name components.
-	virtual QString getInfoLabel() const {return "";}
+	virtual QString getInfoLabel() const {return QString();}
 
 	//! Get observer-centered equatorial coordinates at equinox J2000, including aberration
 	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const = 0;

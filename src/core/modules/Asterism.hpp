@@ -77,7 +77,7 @@ private:
 	bool read(const QJsonObject& data, StarMgr *starMgr);
 
 	//! Draw the asterism name
-	void drawName(StelPainter& sPainter) const;
+	void drawName(StelPainter& sPainter, bool abbreviateLabel) const;
 
 	//! Get the translated name for the Asterism.
 	QString getNameI18n() const override {return culturalName.translatedI18n;}

@@ -148,6 +148,10 @@ class StelSkyCultureMgr : public StelModule
 		   READ getInfoLabelStyle
 		   WRITE setInfoLabelStyle
 		   NOTIFY infoLabelStyleChanged)
+	Q_PROPERTY(bool flagUseAbbreviatedNames
+		   READ getFlagUseAbbreviatedNames
+		   WRITE setFlagUseAbbreviatedNames
+		   NOTIFY flagUseAbbreviatedNamesChanged)
 	Q_PROPERTY(bool flagOverrideUseCommonNames
 		   READ getFlagOverrideUseCommonNames
 		   WRITE setFlagOverrideUseCommonNames
@@ -164,11 +168,14 @@ public:
 
 	//! Creates one label from cName
 	//! @param commonNameI18n object common name in user language.
-	//! @param shortI18n string to use in the Abbrev... settings
-	static QString createCulturalLabel(const StelObject::CulturalName &cName,
+	//! @param abbrevI18n string to use as shortest possible label.
+	//! If you call this with an actual non-default argument abbrevI18n,
+	//! you really only want this short label, and style is not evaluated.
+	//! If abbrevI18n starts with a dot, an empty string is returned.
+	QString createCulturalLabel(const StelObject::CulturalName &cName,
 					   const StelObject::CulturalDisplayStyle style,
 					   const QString &commonNameI18n,
-					   const QString &abbrevI18n=QString());
+					   const QString &abbrevI18n=QString()) const;
 	
 public slots:
 	//! Get the current sky culture English name.
@@ -254,6 +261,11 @@ public slots:
 	//! Set whether we ignore SC authors' settings "fallback_to_international_names"
 	void setFlagOverrideUseCommonNames(bool override);
 
+	//! Returns whether we show shortest name as screen label
+	bool getFlagUseAbbreviatedNames() const {return flagUseAbbreviatedNames; }
+	//! Set whether we ignore SC authors' settings "fallback_to_international_names"
+	void setFlagUseAbbreviatedNames(bool b);
+
 	//! Returns whether current skyculture uses (incorporates) common names.
 	bool currentSkycultureUsesCommonNames() const;
 
@@ -273,7 +285,11 @@ signals:
 	//! Emitted when ScreenLabelStyle has changed
 	void screenLabelStyleChanged(const StelObject::CulturalDisplayStyle style);
 
+	//! Emitted on flag change.
 	void flagOverrideUseCommonNamesChanged(bool override);
+
+	//! Emitted on flag change.
+	void flagUseAbbreviatedNamesChanged(bool b);
 
 private:
 	//! Scan all sky cultures to get their names and other properties.
@@ -311,6 +327,10 @@ private:
 
 	//! Ignore skyculture dict setting "fallback_to_international_names"
 	bool flagOverrideUseCommonNames;
+
+	//! Replace any detailed cultural label by the short label (from constellation ID)
+	//! This should be a short string, some skycultures still have numerical IDs here.
+	bool flagUseAbbreviatedNames;
 };
 
 #endif // STELSKYCULTUREMGR_HPP

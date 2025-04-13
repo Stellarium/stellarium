@@ -2499,6 +2499,7 @@ QString StarMgr::getCulturalInfoLabel(StarId hip)
 
 QStringList StarMgr::getCultureLabels(StarId hip, StelObject::CulturalDisplayStyle style)
 {
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
 	// Retrieve list in order as read from JSON
 	QList<StelObject::CulturalName>culturalNames=getCulturalNames(hip);
 	if (culturalNames.isEmpty())
@@ -2509,7 +2510,7 @@ QStringList StarMgr::getCultureLabels(StarId hip, StelObject::CulturalDisplaySty
 	QStringList labels;
 	for (auto &cName: culturalNames)
 		{
-			QString label=StelSkyCultureMgr::createCulturalLabel(cName, style, getCommonNameI18n(hip));
+			QString label=scMgr->createCulturalLabel(cName, style, getCommonNameI18n(hip));
 			labels << label;
 		}
 	labels.removeDuplicates();

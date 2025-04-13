@@ -322,6 +322,9 @@ void AsterismMgr::drawNames(StelPainter& sPainter) const
 		return;
 
 	StelCore *core=StelApp::getInstance().getCore();
+	static StelSkyCultureMgr* scMgr= GETSTELMODULE(StelSkyCultureMgr);
+	const bool abbreviateLabel=scMgr->getFlagUseAbbreviatedNames();
+	StelObject::CulturalDisplayStyle culturalDisplayStyle=scMgr->getScreenLabelStyle();
 
 	sPainter.setBlending(true);
 	for (auto* asterism : asterisms)
@@ -338,7 +341,7 @@ void AsterismMgr::drawNames(StelPainter& sPainter) const
 		}
 
 		if (sPainter.getProjector()->projectCheck(XYZname, asterism->XYname))
-			asterism->drawName(sPainter);
+			asterism->drawName(sPainter, abbreviateLabel);
 	}
 }
 

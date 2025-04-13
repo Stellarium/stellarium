@@ -215,12 +215,10 @@ QString Nebula::getScreenLabel() const
 
 	QString nameI18n=skycultureUsesCommonNames ? getNameI18n() : QString();
 	// DEBUG: show what is what.
-	return (cLabels.isEmpty() ? (nameI18n.isEmpty() ? QString() : "i18"+nameI18n) : "CL:"+cLabels.constFirst());
-	//return (cLabels.isEmpty() ? "i18"+nameI18n : "CL:"+cLabels.constFirst());
-
-//	return (cLabels.isEmpty() ? QString() : "CL:"+cLabels.constFirst());
-
+	//return (cLabels.isEmpty() ? (nameI18n.isEmpty() ? QString() : "i18"+nameI18n) : "CL:"+cLabels.constFirst());
+	return (cLabels.isEmpty() ? (nameI18n.isEmpty() ? QString() : nameI18n) : cLabels.constFirst());
 }
+
 QString Nebula::getInfoLabel() const
 {
 	return getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle()).join(" - ");
@@ -228,13 +226,14 @@ QString Nebula::getInfoLabel() const
 
 QStringList Nebula::getCultureLabels(StelObject::CulturalDisplayStyle style) const
 {
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
 	QStringList labels;
 	if (culturalNames.isEmpty())
 		return labels;
 	for (auto &cName: culturalNames)
 		{
 			const QString modernName= nameI18.isEmpty() ? getDSODesignation() : nameI18;
-			labels << StelSkyCultureMgr::createCulturalLabel(cName, style, modernName);
+			labels << scMgr->createCulturalLabel(cName, style, modernName);
 		}
 	labels.removeDuplicates();
 	labels.removeAll(QString(""));
@@ -505,7 +504,7 @@ QVariantMap Nebula::getInfoMap(const StelCore *core) const
 	map.insert("axis-minor-deg", StelUtils::radToDecDegStr(axisMinor, 5));
 	map.insert("axis-minor-dms", StelUtils::radToDmsPStr(axisMinor, 2));
 	map.insert("orientation-angle", axisPA);
-	map.insert("cultural-names", getCultureLabels(StelObject::CulturalDisplayStyle::Native_Translit_Pronounce_IPA_Translated));
+	map.insert("cultural-names", getCultureLabels(StelObject::CulturalDisplayStyle::Native_Pronounce_Translit_Translated_IPA));
 
 	// TODO: more? Names? Data?
 	return map;

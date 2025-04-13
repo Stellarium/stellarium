@@ -4971,7 +4971,14 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="5" column="0" rowspan="2">
+             <item row="0" column="0" colspan="2">
+              <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
+               <property name="text">
+                <string>Use this sky culture as default</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0" rowspan="2">
               <layout class="QGridLayout" name="skyCultureGridLayout">
                <item row="2" column="6" colspan="2">
                 <widget class="QCheckBox" name="showAsterismLinesCheckBox">
@@ -5066,16 +5073,6 @@
                  </property>
                  <property name="singleStep">
                   <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="2" colspan="3">
-                <widget class="QComboBox" name="skyCultureNamesStyleComboBox">
-                 <property name="toolTip">
-                  <string>Select if you want names abbreviated, original or translated</string>
-                 </property>
-                 <property name="currentText">
-                  <string/>
                  </property>
                 </widget>
                </item>
@@ -5264,19 +5261,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QLabel" name="labelConstellationsNameStyle">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Constellations name style</string>
-                 </property>
-                </widget>
-               </item>
                <item row="1" column="8">
                 <widget class="QSpinBox" name="asterismsFontSizeSpinBox">
                  <property name="toolTip">
@@ -5370,22 +5354,6 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="6" colspan="4">
-                <widget class="QCheckBox" name="nativePlanetNamesCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>Use native names for planets from current culture</string>
-                 </property>
-                 <property name="text">
-                  <string>Use native names for planets</string>
-                 </property>
-                </widget>
-               </item>
                <item row="2" column="9">
                 <widget class="QDoubleSpinBox" name="asterismLinesFadeDurationDoubleSpinBox">
                  <property name="toolTip">
@@ -5440,9 +5408,16 @@
                  </property>
                 </widget>
                </item>
+               <item row="0" column="6">
+                <widget class="QCheckBox" name="abbreviatedNamesCheckBox">
+                 <property name="text">
+                  <string>Abbreviated names</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
-             <item row="3" column="0">
+             <item row="5" column="0">
               <layout class="QGridLayout" name="gridLayout_LabelStyle">
                <item row="0" column="0">
                 <widget class="QLabel" name="labelInfoLabel">
@@ -5498,12 +5473,179 @@
                </item>
               </layout>
              </item>
-             <item row="0" column="0" colspan="2">
-              <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
-               <property name="text">
-                <string>Use this sky culture as default</string>
-               </property>
-              </widget>
+             <item row="3" column="0">
+              <layout class="QGridLayout" name="gridLayout_CulturalLabeling">
+               <item row="1" column="1">
+                <widget class="QCheckBox" name="infoLabelNativeCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>native</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="6">
+                <widget class="QCheckBox" name="infoLabelModernCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>modern</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="labelInfoLabel2">
+                 <property name="text">
+                  <string>Info label</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="5">
+                <widget class="QCheckBox" name="screenLabelTranslationCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>translation</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QCheckBox" name="infoLabelPronounceCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>transliteration</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="6">
+                <widget class="QCheckBox" name="screenLabelModernCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>modern</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QCheckBox" name="infoLabelTransliterationCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>sci. translit.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="labelScreenLabel2">
+                 <property name="text">
+                  <string>Screen label</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <widget class="QCheckBox" name="screenLabelPronounceCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>transliteration</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <widget class="QCheckBox" name="screenLabelTransliterationCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>sci. translit.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QCheckBox" name="screenLabelNativeCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>native</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="5">
+                <widget class="QCheckBox" name="infoLabelTranslationCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>translation</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="4">
+                <widget class="QCheckBox" name="infoLabelIPACheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>IPA</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="4">
+                <widget class="QCheckBox" name="screenLabelIPACheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>IPA</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
@@ -5673,8 +5815,6 @@
   <tabstop>culturesListWidget</tabstop>
   <tabstop>skyCultureTextBrowser</tabstop>
   <tabstop>useAsDefaultSkyCultureCheckBox</tabstop>
-  <tabstop>skyCultureNamesStyleComboBox</tabstop>
-  <tabstop>nativePlanetNamesCheckBox</tabstop>
   <tabstop>showConstellationLabelsCheckBox</tabstop>
   <tabstop>constellationsFontSizeSpinBox</tabstop>
   <tabstop>showConstellationLinesCheckBox</tabstop>
