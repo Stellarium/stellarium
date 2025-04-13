@@ -58,6 +58,10 @@ public:
 	//! Only trigger refresh when the textures are initially loaded on screen (including both default and custom, twice) to avoid conflicts
 	int countRefresh, maxCountRefresh;
 
+	//
+	QString imagePath_src, imagePath_dst;
+	QString imagePathTemp_src, imagePathTemp_dst;
+
 public slots:
 	void retranslate() override;
 
@@ -88,6 +92,8 @@ public slots:
 	//! Delete the images listed in the given configuration file
 	void deleteImagesFromCfg(const QString& cfgFilePath);
 
+	//! update temporary texture rendering for debugging
+	void updateTempCustomTexture(double inf);
 
 	//! Add the texture to the custom textures configuration
 	void addCustomTexture();

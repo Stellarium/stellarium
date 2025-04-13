@@ -129,6 +129,15 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(ui->addCustomTextureButton, SIGNAL(clicked()), this, SLOT(addCustomTexture()));
 	connect(ui->removeTextureButton, SIGNAL(clicked()), this, SLOT(removeTexture()));
 
+	connect(ui->topLeftX, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
+	connect(ui->topLeftY, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
+	connect(ui->topRightX, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
+	connect(ui->topRightY, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
+	connect(ui->bottomLeftX, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
+	connect(ui->bottomLeftY, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
+	connect(ui->bottomRightX, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
+	connect(ui->bottomRightY, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
+
 	connect(ui->reloadButton, SIGNAL(clicked()), this, SLOT(reloadData()));
 	// connect(ui->checkBoxShow, SIGNAL(clicked(bool)), this, SLOT(setShowCustomTextures(bool)));
 	connectCheckBox(ui->checkBoxShow,"actionShow_NebulaTextures");
@@ -1005,34 +1014,36 @@ void NebulaTexturesDialog::onBrightnessChanged(int index)
  */
 void NebulaTexturesDialog::renderTempCustomTexture()
 {
-	QString imagePath = ui->lineEditImagePath->text();
-	if (imagePath.isEmpty()) {
-		qWarning() << "[NebulaTextures] Image path is empty.";
-		updateStatus(q_("Image path is empty."));
-		return;
-	}
+	QString path = StelFileMgr::getUserDir()+tmpcfgFile;
 
-	QFileInfo fileInfo(imagePath);
-	if (!fileInfo.exists()) {
-		updateStatus(q_("The specified image file does not exist."));
-		return;
-	}
-	if (!fileInfo.isReadable()) {
-		updateStatus(q_("The specified image file is not readable."));
-		return;
-	}
-	QString suffix = fileInfo.suffix().toLower();
-	QStringList allowedSuffixes = {"png", "jpg", "gif", "tif", "tiff", "jpeg"};
-	if (!allowedSuffixes.contains(suffix)) {
-		updateStatus(q_("Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."));
-		return;
+	QString imagePath = ui->lineEditImagePath->text();
+	if(imagePath != imagePathTemp_src)
+	{
+		if (imagePath.isEmpty()) {
+			qWarning() << "[NebulaTextures] Image path is empty.";
+			updateStatus(q_("Image path is empty."));
+			return;
+		}
+
+		QFileInfo fileInfo(imagePath);
+		if (!fileInfo.exists()) {
+			updateStatus(q_("The specified image file does not exist."));
+			return;
+		}
+		if (!fileInfo.isReadable()) {
+			updateStatus(q_("The specified image file is not readable."));
+			return;
+		}
+		QString suffix = fileInfo.suffix().toLower();
+		QStringList allowedSuffixes = {"png", "jpg", "gif", "tif", "tiff", "jpeg"};
+		if (!allowedSuffixes.contains(suffix)) {
+			updateStatus(q_("Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."));
+			return;
+		}
+		deleteImagesFromCfg(tmpcfgFile);
 	}
 
 	// updateStatus(q_("Rendering..."));
-
-	QString path = StelFileMgr::getUserDir()+tmpcfgFile;
-
-	deleteImagesFromCfg(tmpcfgFile);
 
 	addTexture(tmpcfgFile, TEST_TEXNAME);
 
@@ -1056,6 +1067,20 @@ void NebulaTexturesDialog::renderTempCustomTexture()
 	}
 }
 
+
+void NebulaTexturesDialog::updateTempCustomTexture(double inf)
+{
+	if(flag_renderTempTex)
+	{
+		QString path = StelFileMgr::getUserDir()+tmpcfgFile;
+		// deleteImagesFromCfg(tmpcfgFile);
+		addTexture(tmpcfgFile, TEST_TEXNAME);
+
+		StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+		skyLayerMgr->removeSkyLayer(TEST_TEXNAME);
+		skyLayerMgr->insertSkyImage(path, QString(), true, 1);
+	}
+}
 
 /*
  * Cancel temporary custom texture rendering and restore the default texture.
@@ -1178,40 +1203,49 @@ void NebulaTexturesDialog::addCustomTexture()
 void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 {
 	QString imagePath = ui->lineEditImagePath->text();
-	if (imagePath.isEmpty()) {
-		qWarning() << "[NebulaTextures] Image path is empty.";
-		updateStatus(q_("Image path is empty."));
-		return;
-	}
+	if(imagePath != imagePath_src && groupName == CUSTOM_TEXNAME || imagePath != imagePathTemp_src && groupName == TEST_TEXNAME)
+	{
+		if (imagePath.isEmpty()) {
+			qWarning() << "[NebulaTextures] Image path is empty.";
+			updateStatus(q_("Image path is empty."));
+			return;
+		}
 
-	QFileInfo fileInfo(imagePath);
-	if (!fileInfo.exists()) {
-		updateStatus(q_("The specified image file does not exist."));
-		return;
-	}
-	if (!fileInfo.isReadable()) {
-		updateStatus(q_("The specified image file is not readable."));
-		return;
-	}
-	QString suffix = fileInfo.suffix().toLower();
-	QStringList allowedSuffixes = {"png", "jpg", "gif", "tif", "tiff", "jpeg"};
-	if (!allowedSuffixes.contains(suffix)) {
-		updateStatus(q_("Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."));
-		return;
-	}
-
-	QString pluginFolder = StelFileMgr::getUserDir() + pluginDir;
-	QDir().mkpath(pluginFolder);
-
-	QString baseName = fileInfo.completeBaseName();
-	QString extension = fileInfo.suffix();
-	QString timestamp = QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss");
-	QString imageUrl = QString("%1_%2.%3").arg(baseName, timestamp, extension);
-	QString targetFilePath = pluginFolder + imageUrl;
-	if (!QFile::copy(imagePath, targetFilePath)) {
-		qWarning() << "[NebulaTextures] Failed to copy image file to target path:" << targetFilePath;
-		// updateStatus(q_("Failed to copy image file to user folder!"));
-		return;
+		QFileInfo fileInfo(imagePath);
+		if (!fileInfo.exists()) {
+			updateStatus(q_("The specified image file does not exist."));
+			return;
+		}
+		if (!fileInfo.isReadable()) {
+			updateStatus(q_("The specified image file is not readable."));
+			return;
+		}
+		QString suffix = fileInfo.suffix().toLower();
+		QStringList allowedSuffixes = {"png", "jpg", "gif", "tif", "tiff", "jpeg"};
+		if (!allowedSuffixes.contains(suffix)) {
+			updateStatus(q_("Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."));
+			return;
+		}
+		QString pluginFolder = StelFileMgr::getUserDir() + pluginDir;
+		QDir().mkpath(pluginFolder);
+		QString baseName = fileInfo.completeBaseName();
+		QString extension = fileInfo.suffix();
+		QString timestamp = QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss");
+		QString imageUrl = QString("%1_%2.%3").arg(baseName, timestamp, extension);
+		if(groupName == TEST_TEXNAME){
+			imagePathTemp_src = imagePath;
+			imagePathTemp_dst = imageUrl;
+		}
+		else if(groupName == CUSTOM_TEXNAME){
+			imagePath_src = imagePath;
+			imagePath_dst = imageUrl;
+		}
+		QString targetFilePath = pluginFolder + imageUrl;
+		if (!QFile::copy(imagePath, targetFilePath)) {
+			qWarning() << "[NebulaTextures] Failed to copy image file to target path:" << targetFilePath;
+			// updateStatus(q_("Failed to copy image file to user folder!"));
+			return;
+		}
 	}
 
 	// Retrieve coordinates from the QDoubleSpinBoxes
@@ -1232,7 +1266,7 @@ void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 	innerWorldCoords.append(QJsonArray({topRightRA, topRightDec}));
 	innerWorldCoords.append(QJsonArray({topLeftRA, topLeftDec}));
 
-	registerTexture(imageUrl, innerWorldCoords, 0.2, ui->brightComboBox->currentData().toDouble(), cfgPath, groupName);
+	registerTexture(groupName == TEST_TEXNAME ? imagePathTemp_dst: imagePath_dst, innerWorldCoords, 0.2, ui->brightComboBox->currentData().toDouble(), cfgPath, groupName);
 }
 
 
