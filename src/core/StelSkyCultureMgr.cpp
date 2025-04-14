@@ -1088,8 +1088,6 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 		if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
 		{
 			label=translitOrPronounce;
-			if (styleInt & int(StelObject::CulturalDisplayStyle::Pronounce))
-				braced.append(cName.pronounceI18n);
 			if (styleInt & int(StelObject::CulturalDisplayStyle::IPA))
 				braced.append(cName.IPA);
 		}
@@ -1116,7 +1114,7 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 		else
 			label.append(QString(" (%1)").arg(cName.translatedI18n));
 	}
-	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && (!commonNameI18n.isEmpty()) && (commonNameI18n != label) && (commonNameI18n!=cName.translatedI18n))
+	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && (!commonNameI18n.isEmpty()) && (!label.startsWith(commonNameI18n)) && (commonNameI18n!=cName.translatedI18n))
 		label.append(QString(" %1%3%2").arg(QChar(0x29FC), QChar(0x29FD), commonNameI18n));
 
 	return label;
