@@ -82,10 +82,6 @@ QHash<StarId,QString> StarMgr::commonNamesMap;
 QHash<StarId,QString> StarMgr::commonNamesI18nMap;
 QHash<QString,StarId> StarMgr::commonNamesI18nUppercaseIndex;
 QHash<QString,StarId> StarMgr::commonNamesUppercaseIndex;
-//QHash<StarId,QString> StarMgr::additionalNamesMap;
-//QHash<StarId,QString> StarMgr::additionalNamesMapI18n;
-//QMap<QString,StarId> StarMgr::additionalNamesIndex;     // ATTN: some names are not unique! map target type may need to become QList<StarId>
-//QMap<QString,StarId> StarMgr::additionalNamesIndexI18n; // ATTN: Stores uppercase variant of additionalNameI18n, BUT WHY? Also, some names are not unique! map target type may need to be QList<StarId>
 
 // Cultural names: We must store all data here, and have even 4 indices to native names&spelling, pronunciation, english and user-language spelling
 QMultiHash<StarId, StelObject::CulturalName> StarMgr::culturalNamesMap; // cultural names
@@ -197,23 +193,8 @@ StarMgr::~StarMgr(void)
 // Allow untranslated name here if set in constellationMgr!
 QString StarMgr::getCommonNameI18n(StarId hip)
 {
-	//static StelSkyCultureMgr* cmgr=GETSTELMODULE(StelSkyCultureMgr);
-	//// TODO: This function will likely go away, or prepare for use in InfoString context
-	//if (cmgr->getScreenLabelStyle() == StelObject::CulturalDisplayStyle::Native)
-	//	return getCommonEnglishName(hip);
-
 	return commonNamesI18nMap.value(hip, QString());
 }
-
-//QString StarMgr::getAdditionalNames(StarId hip)
-//{
-//	return additionalNamesMapI18n.value(hip, QString());
-//}
-//
-//QString StarMgr::getAdditionalEnglishNames(StarId hip)
-//{
-//	return additionalNamesMap.value(hip, QString());
-//}
 
 // Get the cultural names for a star with a specified
 // Hipparcos or Gaia catalogue number.
@@ -1461,8 +1442,6 @@ void StarMgr::updateI18n()
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	commonNamesI18nMap.clear();
 	commonNamesI18nUppercaseIndex.clear();
-	//additionalNamesMapI18n.clear();
-	//additionalNamesIndexI18n.clear();
 	for (QHash<StarId,QString>::ConstIterator it(commonNamesMap.constBegin());it!=commonNamesMap.constEnd();it++)
 	{
 		const StarId i = it.key();
@@ -1470,20 +1449,6 @@ void StarMgr::updateI18n()
 		commonNamesI18nMap[i] = t;
 		commonNamesI18nUppercaseIndex[t.toUpper()] = i;
 	}
-	//for (QHash<StarId,QString>::ConstIterator ita(additionalNamesMap.constBegin());ita!=additionalNamesMap.constEnd();ita++)
-	//{
-	//	const StarId i = ita.key();
-	//	const QStringList a = ita.value().split(" - ");
-	//	QStringList tn;
-	//	for (const auto& str : a)
-	//	{
-	//		QString tns = trans.qTranslateStar(str);
-	//		tn << tns;
-	//		additionalNamesIndexI18n[tns.toUpper()] = i;
-	//	}
-	//	const QString r = tn.join(" - ");
-	//	additionalNamesMapI18n[i] = r;
-	//}
 	culturalNamesIndex.clear();
 	for (QMultiHash<StarId,StelObject::CulturalName>::iterator it(culturalNamesMap.begin());it!=culturalNamesMap.end();++it)
 	{
@@ -1557,10 +1522,6 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by I18n common name
 	if (commonNamesI18nUppercaseIndex.contains(nameI18nUpper))
 		return searchHP(commonNamesI18nUppercaseIndex.value(nameI18nUpper));
-
-	//// Search by I18n additional common names?
-	//if (getFlagAdditionalNames() && additionalNamesIndexI18n.contains(nameI18nUpper))
-	//	return searchHP(additionalNamesIndexI18n.value(nameI18nUpper));
 
 	// Search by cultural names? (Any names: native/pronounceI18n/translatedI18n/transliteration
 	if (getFlagAdditionalNames() && culturalNamesIndex.contains(nameI18nUpper))
@@ -1746,54 +1707,6 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 
 	if (getFlagAdditionalNames())
 	{
-		//QMapIterator<QString, StarId> k(additionalNamesIndexI18n);
-		//while (k.hasNext())
-		//{
-		//	k.next();
-		//	QStringList names = getAdditionalNames(k.value()).split(" - ");
-		//	for (const auto &name : std::as_const(names))
-		//	{
-		//		if (useStartOfWords && name.startsWith(objPrefixUpper, Qt::CaseInsensitive))
-		//			found = true;
-		//		else if (!useStartOfWords && name.contains(objPrefixUpper, Qt::CaseInsensitive))
-		//			found = true;
-		//		else
-		//			found = false;
-
-		//		if (found)
-		//		{
-		//			if (maxNbItem<=0)
-		//				break;
-		//			result.append(name);
-		//			--maxNbItem;
-		//		}
-		//	}
-		//}
-
-		//QMapIterator<QString, StarId> l(additionalNamesIndex);
-		//while (l.hasNext())
-		//{
-		//	l.next();
-		//	QStringList names = getAdditionalEnglishNames(l.value()).split(" - ");
-		//	for (const auto &name : std::as_const(names))
-		//	{
-		//		if (useStartOfWords && name.startsWith(objPrefixUpper, Qt::CaseInsensitive))
-		//			found = true;
-		//		else if (!useStartOfWords && name.contains(objPrefixUpper, Qt::CaseInsensitive))
-		//			found = true;
-		//		else
-		//			found = false;
-
-		//		if (found)
-		//		{
-		//			if (maxNbItem<=0)
-		//				break;
-		//			result.append(name);
-		//			--maxNbItem;
-		//		}
-		//	}
-		//}
-
 #if  (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 		QMapIterator<QString, StarId>it(culturalNamesIndex);
 #else
@@ -2209,21 +2122,27 @@ void StarMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 		const QString& englishName = commonNames.byHIP[HIP];
 		const QString englishNameUpper = englishName.toUpper();
 
-		const QString& englishNameI18n = trans.qTranslateStar(commonNames.byHIP[HIP]);
-		const QString englishNameI18nUpper = englishNameI18n.toUpper();
+		const QString& i18nName = trans.qTranslateStar(commonNames.byHIP[HIP]);
+		const QString i18nNameUpper = i18nName.toUpper();
 
-		// TODO: Why do we have to reload the commonname* structures? Just load one at program start? Translate if needed, OK.
+		// TODO: Why do we have to reload the commonname* structures? Just load once at program start? Translate if needed, OK.
 		if (!commonNamesMap.contains(HIP))
 		{
 			commonNamesMap[HIP] = englishName;
 			commonNamesUppercaseIndex[englishNameUpper] = HIP;
-			commonNamesI18nMap[HIP] = englishNameI18n;
-			commonNamesI18nUppercaseIndex[englishNameI18nUpper] = HIP;
+			commonNamesI18nMap[HIP] = i18nName;
+			commonNamesI18nUppercaseIndex[i18nNameUpper] = HIP;
 		}
+
 		if (skyCulture.fallbackToInternationalNames)
 		{
+			// Add name from commonNames, but only if not already in list.
+			auto starIds=culturalNamesIndex.values(englishNameUpper);
+			if (!starIds.contains(HIP))
+			{
+
 			StelObject::CulturalName cName{englishName, QString(), QString(),
-						englishName, englishName, englishNameI18n, QString()};
+						englishName, englishName, i18nName, QString()};
 			//if (culturalNamesMap.contains(HIP))
 			//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated << "/" << cName.translatedI18n;
 			culturalNamesMap.insert(HIP, cName); // add as possibly multiple entry to HIP.
@@ -2231,6 +2150,8 @@ void StarMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 				culturalNamesIndex.insert(cName.native.toUpper(), HIP);
 			if (!cName.translatedI18n.isEmpty())
 				culturalNamesIndex.insert(cName.translatedI18n.toUpper(), HIP);
+
+			}
 		}
 	}
 
