@@ -41,8 +41,6 @@ Source: "@CMAKE_SOURCE_DIR@\data\qt.conf"; DestDir: "{app}"; Flags: ignoreversio
 Source: "@CMAKE_SOURCE_DIR@\*.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "@CMAKE_SOURCE_DIR@\COPYING"; DestDir: "{app}"; Flags: ignoreversion; DestName: "GPL.txt"
 Source: "@CMAKE_SOURCE_DIR@\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.txt"
-; Qt stuff
-Source: "@CMAKE_INSTALL_PREFIX@\qtstuff\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
 ; Stellarium's stuff
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
 @ISS_OPENSSL_LIBS@
