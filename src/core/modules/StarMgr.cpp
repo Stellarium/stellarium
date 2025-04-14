@@ -561,7 +561,7 @@ void StarMgr::setCheckFlag(const QString& catId, bool b)
 	}
 }
 
-void StarMgr::loadData(QVariantMap starsConfig)
+void StarMgr::loadData(const QVariantMap &starsConfig)
 {
 	// Please do not init twice:
 	Q_ASSERT(maxGeodesicGridLevel < 0);
@@ -880,7 +880,7 @@ void StarMgr::loadCultureSpecificNames(const QJsonObject& data, const QMap<QStri
 }
 
 // Load scientific designations from file
-void StarMgr::loadSciDesignations(const QString& sciNameFile, QHash<StarId, QString>map, QHash<QString, StarId>index)
+void StarMgr::loadSciDesignations(const QString& sciNameFile, QHash<StarId, QString>&map, QHash<QString, StarId>&index)
 {
 	map.clear();
 	index.clear();

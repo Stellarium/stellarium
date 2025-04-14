@@ -528,7 +528,7 @@ private:
 	//! @param the path to a file containing the scientific names for bright stars.
 	//! @param map the forward mapping StarId->names
 	//! @param index the backward mapping name->StarId
-	static void loadSciDesignations(const QString& sciNameFile, QHash<StarId, QString>map, QHash<QString, StarId>index);
+	static void loadSciDesignations(const QString& sciNameFile, QHash<StarId, QString> &map, QHash<QString, StarId> &index);
 
 	//! Loads GCVS from a file.
 	//! @param the path to a file containing the GCVS.
@@ -551,7 +551,7 @@ private:
 	int getMaxSearchLevel() const;
 
 	//! Load all the stars from the files.
-	void loadData(QVariantMap starsConfigFile);
+	void loadData(const QVariantMap &starsConfigFile);
 
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(StelPainter& sPainter, const StelCore* core);
