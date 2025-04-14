@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>686</width>
-    <height>578</height>
+    <height>585</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -216,6 +216,16 @@
               </property>
              </widget>
             </item>
+            <item row="2" column="4">
+             <widget class="QToolButton" name="recoverCoordsButton">
+              <property name="toolTip">
+               <string>Recover Plate Solution</string>
+              </property>
+              <property name="text">
+               <string notr="true">↺</string>
+              </property>
+             </widget>
+            </item>
             <item row="4" column="6">
              <widget class="QDoubleSpinBox" name="bottomRightX">
               <property name="decimals">
@@ -257,6 +267,11 @@
             </item>
             <item row="2" column="3">
              <widget class="QLabel" name="label_rd">
+              <property name="font">
+               <font>
+                <pointsize>9</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Dec (Center)</string>
               </property>
@@ -287,6 +302,11 @@
             </item>
             <item row="2" column="2">
              <widget class="QLabel" name="label_rr">
+              <property name="font">
+               <font>
+                <pointsize>9</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>RA (Center)</string>
               </property>
@@ -357,21 +377,6 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="4">
-             <widget class="QToolButton" name="goPushButton">
-              <property name="toolTip">
-               <string>Go to position</string>
-              </property>
-              <property name="text">
-               <string notr="true"/>
-              </property>
-              <property name="icon">
-               <iconset resource="../../../../data/gui/guiRes.qrc">
-                <normaloff>:/graphicGui/uibtProcess.png</normaloff>
-                <disabledoff>:/graphicGui/uibtProcess.png</disabledoff>:/graphicGui/uibtProcess.png</iconset>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="6">
              <widget class="QDoubleSpinBox" name="topRightX">
               <property name="decimals">
@@ -431,6 +436,21 @@
               </property>
               <property name="singleStep">
                <double>0.010000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="4">
+             <widget class="QToolButton" name="goPushButton">
+              <property name="toolTip">
+               <string>Go to position</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../../data/gui/guiRes.qrc">
+                <normaloff>:/graphicGui/uibtProcess.png</normaloff>
+                <disabledoff>:/graphicGui/uibtProcess.png</disabledoff>:/graphicGui/uibtProcess.png</iconset>
               </property>
              </widget>
             </item>

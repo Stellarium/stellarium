@@ -58,10 +58,6 @@ public:
 	//! Only trigger refresh when the textures are initially loaded on screen (including both default and custom, twice) to avoid conflicts
 	int countRefresh, maxCountRefresh;
 
-	//
-	QString imagePath_src, imagePath_dst;
-	QString imagePathTemp_src, imagePathTemp_dst;
-
 public slots:
 	void retranslate() override;
 
@@ -73,6 +69,9 @@ public slots:
 
 	//! Goto the center coordinates (RA and Dec) of texture
 	void goPush();
+
+	//! Recover image coords from plate-solving
+	void recoverCoords();
 
 	//! toggle temporary texture render testing
 	void toggleTempTextureRendering();
@@ -211,19 +210,25 @@ private:
 	// limit of status timer retry count
 	const int maxRetryCount = 99;
 
+	// Flag for online plate-solving
+	bool solvedFlag;
+
 	// Calibration parameters for the image (CRPIX, CRVAL, CD values)
 	double CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2;
 
 	// Image width and height values
 	int IMAGEW, IMAGEH;
 
-	// Right Ascension and Declination for the four corners of the image
+	// Right Ascension and Declination for the four corners of the images (by plate-solved.)
 	double topLeftRA, topLeftDec, bottomLeftRA, bottomLeftDec;
 	double topRightRA, topRightDec, bottomRightRA, bottomRightDec;
 
 	// Reference Right Ascension and Declination for the image center
 	double referRA, referDec;
 
+
+	// Control image copying when adding texture, avoiding frequent file io
+	QString imagePath_src, imagePath_dst, imagePathTemp_src, imagePathTemp_dst;
 
 	// Directory path where plugin-related files are stored
 	QString pluginDir  = "/modules/NebulaTextures/";

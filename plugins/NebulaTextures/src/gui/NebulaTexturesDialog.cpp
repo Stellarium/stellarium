@@ -58,6 +58,8 @@ NebulaTexturesDialog::NebulaTexturesDialog()
 	retryCount(0),
 	countRefresh(0),
 	maxCountRefresh(2),
+	solvedFlag(false),
+	imagePath_src(""),imagePath_dst(""),imagePathTemp_src(""),imagePathTemp_dst(""),
 	progressBar(Q_NULLPTR)
 {
 	ui = new Ui_nebulaTexturesDialog();
@@ -99,6 +101,7 @@ void NebulaTexturesDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	// load config
+	ui->recoverCoordsButton->setVisible(false);
 	ui->checkBoxShow->setChecked(getShowCustomTextures());
 	ui->checkBoxAvoid->setChecked(getAvoidAreaConflict());
 	ui->cancelButton->setVisible(false);
@@ -121,6 +124,7 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(ui->openFileButton, SIGNAL(clicked()), this, SLOT(openImageFile()));
 	connect(ui->uploadImageButton, SIGNAL(clicked()), this, SLOT(uploadImage()));
 	connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(cancelSolve()));
+	connect(ui->recoverCoordsButton, SIGNAL(clicked()), this, SLOT(recoverCoords()));
 	connect(ui->goPushButton, SIGNAL(clicked()), this, SLOT(goPush()));
 	connect(ui->renderButton, SIGNAL(clicked()), this, SLOT(toggleTempTextureRendering()));
 	connect(ui->disableDefault, SIGNAL(clicked()), this, SLOT(toggleDisableDefaultTexture()));
@@ -804,6 +808,7 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
 	ui->bottomRightX->setValue(bottomRightRA);
 	ui->bottomRightY->setValue(bottomRightDec);
 
+	solvedFlag = true;
 	freezeUiState(false);
 	updateStatus(q_("Processing completed! Goto Center Point, Try to Render, Check and Add to Local Storage."));
 }
@@ -837,7 +842,7 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
  * but the code itself has been modified and is not directly copied.
  *
  * The code in this function is used under the terms of the Apache License, Version 2.0.
- * You may not use this file except in compliance with the License.
+ * You may not use the original code except in compliance with the License.
  * You may obtain a copy of the License at:
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -966,6 +971,24 @@ void NebulaTexturesDialog::goPush()
 	// mvmgr->setFlagLockEquPos(useLockPosition);
 }
 
+void NebulaTexturesDialog::recoverCoords()
+{
+	if(solvedFlag && askConfirmation("Are you sure to recover the solution?"))
+	{
+		ui->topLeftX->setValue(topLeftRA);
+		ui->topLeftY->setValue(topLeftDec);
+
+		ui->bottomLeftX->setValue(bottomLeftRA);
+		ui->bottomLeftY->setValue(bottomLeftDec);
+
+		ui->topRightX->setValue(topRightRA);
+		ui->topRightY->setValue(topRightDec);
+
+		ui->bottomRightX->setValue(bottomRightRA);
+		ui->bottomRightY->setValue(bottomRightDec);
+	}
+}
+
 // Toggle the rendering state of the temporary texture
 void NebulaTexturesDialog::toggleTempTextureRendering()
 {
@@ -1080,6 +1103,9 @@ void NebulaTexturesDialog::updateTempCustomTexture(double inf)
 		skyLayerMgr->removeSkyLayer(TEST_TEXNAME);
 		skyLayerMgr->insertSkyImage(path, QString(), true, 1);
 	}
+
+	if(solvedFlag)
+		ui->recoverCoordsButton->setVisible(true);
 }
 
 /*
@@ -1236,7 +1262,7 @@ void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 			imagePathTemp_src = imagePath;
 			imagePathTemp_dst = imageUrl;
 		}
-		else if(groupName == CUSTOM_TEXNAME){
+		else{ // if(groupName == CUSTOM_TEXNAME){
 			imagePath_src = imagePath;
 			imagePath_dst = imageUrl;
 		}
@@ -1249,22 +1275,22 @@ void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 	}
 
 	// Retrieve coordinates from the QDoubleSpinBoxes
-	topLeftRA = ui->topLeftX->value();
-	topLeftDec = ui->topLeftY->value();
-	topRightRA = ui->topRightX->value();
-	topRightDec = ui->topRightY->value();
-	bottomLeftRA = ui->bottomLeftX->value();
-	bottomLeftDec = ui->bottomLeftY->value();
-	bottomRightRA = ui->bottomRightX->value();
-	bottomRightDec = ui->bottomRightY->value();
-	referRA = ui->referX->value();
-	referDec = ui->referY->value();
+	double _topLeftRA = ui->topLeftX->value();
+	double _topLeftDec = ui->topLeftY->value();
+	double _topRightRA = ui->topRightX->value();
+	double _topRightDec = ui->topRightY->value();
+	double _bottomLeftRA = ui->bottomLeftX->value();
+	double _bottomLeftDec = ui->bottomLeftY->value();
+	double _bottomRightRA = ui->bottomRightX->value();
+	double _bottomRightDec = ui->bottomRightY->value();
+	double _referRA = ui->referX->value();
+	double _referDec = ui->referY->value();
 
 	QJsonArray innerWorldCoords;
-	innerWorldCoords.append(QJsonArray({bottomLeftRA, bottomLeftDec}));
-	innerWorldCoords.append(QJsonArray({bottomRightRA, bottomRightDec}));
-	innerWorldCoords.append(QJsonArray({topRightRA, topRightDec}));
-	innerWorldCoords.append(QJsonArray({topLeftRA, topLeftDec}));
+	innerWorldCoords.append(QJsonArray({_bottomLeftRA, _bottomLeftDec}));
+	innerWorldCoords.append(QJsonArray({_bottomRightRA, _bottomRightDec}));
+	innerWorldCoords.append(QJsonArray({_topRightRA, _topRightDec}));
+	innerWorldCoords.append(QJsonArray({_topLeftRA, _topLeftDec}));
 
 	registerTexture(groupName == TEST_TEXNAME ? imagePathTemp_dst: imagePath_dst, innerWorldCoords, 0.2, ui->brightComboBox->currentData().toDouble(), cfgPath, groupName);
 }
