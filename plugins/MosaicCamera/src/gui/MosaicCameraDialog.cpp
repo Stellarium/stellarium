@@ -92,10 +92,10 @@ void MosaicCameraDialog::updateDialogFields()
 	// don't display anything if the camera name is empty
 	if (currentCameraFullName.isEmpty() || currentCameraDescription.isEmpty() || currentCameraURLDetails.isEmpty())
 	{
-		ui->cameraTextBrowser->setHtml("<h1></h1><p></p>");
+		ui->cameraTextBrowser->setHtml("");
 		return;
 	}
-	QString html = QString("<h1>%1</h1>\n <p>%2 %3: <a href='%4'>%4</a>.</p>").arg(q_(currentCameraFullName), q_(currentCameraDescription), q_("See more at"), currentCameraURLDetails);
+	QString html = QString("<p><strong>%1</strong></p>\n<p>%2 %3: <a href='%4'>%4</a>.</p>").arg(q_(currentCameraFullName), q_(currentCameraDescription), q_("See more at"), currentCameraURLDetails);
 	ui->cameraTextBrowser->setHtml(html);
 }
 
@@ -139,9 +139,21 @@ void MosaicCameraDialog::retranslate()
 
 void MosaicCameraDialog::onCameraSelectionChanged(const QString& cameraName)
 {
+	enableUIElements(true);
 	currentCameraName = cameraName;
 	mc->setCurrentCamera(cameraName);
 	updateDialogFields();
+}
+
+void MosaicCameraDialog::enableUIElements(bool state)
+{
+	ui->RASpinBox->setEnabled(state);
+	ui->DecSpinBox->setEnabled(state);
+	ui->RotationSpinBox->setEnabled(state);
+	ui->visibleCheckBox->setEnabled(state);
+	ui->setMosaicToObjectButton->setEnabled(state);
+	ui->setMosaicToViewButton->setEnabled(state);
+	ui->setViewToCameraButton->setEnabled(state);
 }
 
 // Initialize the dialog widgets and connect the signals/slots
@@ -153,15 +165,9 @@ void MosaicCameraDialog::createDialogContent()
 
 	QStringList cameraNames = mc->getCameraNames();
 	ui->cameraListWidget->addItems(cameraNames);
-	if (!cameraNames.isEmpty())
-	{
-		ui->cameraListWidget->setCurrentRow(0);
-		currentCameraName = cameraNames[0];
-		updateDialogFields();
-	}
+	enableUIElements(false);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-	        this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser;

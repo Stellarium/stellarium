@@ -63,6 +63,7 @@ private:
 	Ui_mosaicCameraDialog* ui;
 	void setAboutHtml(void);
 	void updateDialogFields();
+	void enableUIElements(bool state);
 };
 
 #endif // MOSAICCAMERADIALOG_HPP
