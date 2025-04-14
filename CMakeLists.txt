@@ -916,8 +916,6 @@ IF(WIN32)
      ### Generate an Inno Setup project file
      #######################################################
 
-     FIND_PACKAGE(ISCC)
-
      IF(STELLARIUM_BUILD_ARM64) # 64bit ARM build?
           SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on arm64:\nArchitecturesAllowed=arm64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=arm64")
           SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-arm64")
@@ -933,9 +931,9 @@ IF(WIN32)
      GET_FILENAME_COMPONENT(_qt_bin_dir "${QMAKE_LOCATION}" DIRECTORY)
      FIND_PROGRAM(WINDEPLOYQT_COMMAND windeployqt HINTS "${_qt_bin_dir}")
      IF(WINDEPLOYQT_COMMAND)
-	  MESSAGE(STATUS "Found windeployqt: ${WINDEPLOYQT_COMMAND}")
+          MESSAGE(STATUS "Found windeployqt: ${WINDEPLOYQT_COMMAND}")
      ELSE()
-	  MESSAGE(STATUS "Could NOT find windeployqt")
+          MESSAGE(STATUS "Could NOT find windeployqt")
      ENDIF()
 
      SET(ISS_STELLARIUM_STUFF "; Additional libraries")
