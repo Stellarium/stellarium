@@ -55,21 +55,13 @@ NebulaTexturesDialog::NebulaTexturesDialog()
 	: StelDialog("NebulaTextures"),
 	flag_renderTempTex(false),
 	conf(StelApp::getInstance().getSettings()),
-	retryCount(0),
-	countRefresh(0),
-	maxCountRefresh(2),
+	countRefresh(0), maxCountRefresh(2),
 	solvedFlag(false),
-	imagePath_src(""),imagePath_dst(""),imagePathTemp_src(""),imagePathTemp_dst(""),
+	imagePath_src(""), imagePath_dst(""),
+	imagePathTemp_src(""), imagePathTemp_dst(""),
 	progressBar(Q_NULLPTR)
 {
 	ui = new Ui_nebulaTexturesDialog();
-
-	networkManager = new QNetworkAccessManager(this);
-
-	subStatusTimer = new QTimer(this);
-	jobStatusTimer = new QTimer(this);
-	connect(subStatusTimer, &QTimer::timeout, this, &NebulaTexturesDialog::checkSubStatus);
-	connect(jobStatusTimer, &QTimer::timeout, this, &NebulaTexturesDialog::checkJobStatus);
 
 	plateSolver = new PlateSolver(this);
 
@@ -99,15 +91,10 @@ NebulaTexturesDialog::NebulaTexturesDialog()
 		processWcsContent(wcsText);
 		freezeUiState(false);
 	});
-
 }
 
 NebulaTexturesDialog::~NebulaTexturesDialog()
 {
-	for (QNetworkReply *reply : activeReplies) {
-		reply->abort();
-		reply->deleteLater();
-	}
 	delete ui;
 }
 
@@ -152,7 +139,7 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->openFileButton, SIGNAL(clicked()), this, SLOT(openImageFile()));
-	connect(ui->uploadImageButton, SIGNAL(clicked()), this, SLOT(uploadImage()));
+	connect(ui->solveButton, SIGNAL(clicked()), this, SLOT(solveImage()));
 	connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(cancelSolve()));
 	connect(ui->recoverCoordsButton, SIGNAL(clicked()), this, SLOT(recoverCoords()));
 	connect(ui->goPushButton, SIGNAL(clicked()), this, SLOT(goPush()));
@@ -281,7 +268,7 @@ void NebulaTexturesDialog::setAboutHtml(void)
 void NebulaTexturesDialog::freezeUiState(bool freeze)
 {
 	ui->openFileButton->setDisabled(freeze);
-	ui->uploadImageButton->setDisabled(freeze);
+	ui->solveButton->setDisabled(freeze);
 	ui->goPushButton->setDisabled(freeze);
 	ui->renderButton->setDisabled(freeze);
 	ui->addCustomTextureButton->setDisabled(freeze);
@@ -322,19 +309,6 @@ void NebulaTexturesDialog::cancelSolve()
 	}
 	updateStatus(q_("Operation cancelled by user."));
 	freezeUiState(false);
-	/*
-	for (QNetworkReply *reply : activeReplies) {
-		reply->abort();
-		reply->deleteLater();
-	}
-	activeReplies.clear();
-	subStatusTimer->stop();
-	jobStatusTimer->stop();
-	retryCount = 0;
-
-	updateStatus(q_("Operation cancelled by user."));
-	freezeUiState(false);
-	*/
 }
 
 
@@ -349,9 +323,8 @@ void NebulaTexturesDialog::cancelSolve()
  *   - Send the JSON data in a POST request to the server's login API.
  *   - Update the UI to indicate the upload process is in progress.
  */
-void NebulaTexturesDialog::uploadImage() // WARN: image should not be flip
+void NebulaTexturesDialog::solveImage() // WARN: image should not be flip
 {
-
 	QString apiKey = ui->lineEditApiKey->text();
 	QString imagePath = ui->lineEditImagePath->text();
 
@@ -381,506 +354,6 @@ void NebulaTexturesDialog::uploadImage() // WARN: image should not be flip
 
 	plateSolver->startPlateSolving(apiKey, imagePath);
 	return;
-
-	/*
-	QString apiKey = ui->lineEditApiKey->text();
-	QString imagePath = ui->lineEditImagePath->text();
-
-	if (imagePath.isEmpty() || apiKey.isEmpty())
-	{
-		updateStatus(q_("Please provide both API key and image path."));
-		return;
-	}
-
-	QFileInfo fileInfo(imagePath);
-	if (!fileInfo.exists()) {
-		updateStatus(q_("The specified image file does not exist."));
-		return;
-	}
-	if (!fileInfo.isReadable()) {
-		updateStatus(q_("The specified image file is not readable."));
-		return;
-	}
-	QString suffix = fileInfo.suffix().toLower();
-	QStringList allowedSuffixes = {"png", "jpg", "gif", "tif", "tiff", "jpeg"};
-	if (!allowedSuffixes.contains(suffix)) {
-		updateStatus(q_("Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."));
-		return;
-	}
-
-	if (ui->checkBoxKeepApi->isChecked())
-		conf->setValue(NT_CONFIG_PREFIX + "/AstroMetry_Apikey", apiKey);
-
-	// Create the JSON object
-	QJsonObject json;
-	json["apikey"] = apiKey;
-
-	// Convert JSON object to JSON document
-	QJsonDocument jsonDoc(json);
-	QByteArray jsonData = jsonDoc.toJson();
-
-	// Create the POST request URL
-	QUrl url(API_URL+"api/login");
-
-	// Create the form data for x-www-form-urlencoded
-	QUrlQuery query;
-	query.addQueryItem("request-json", QString(jsonData));
-
-	// Set the URL with query
-	url.setQuery(query);
-
-	// Create the POST request
-	QNetworkRequest request(url);
-	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
-
-	// Send the POST request
-	QNetworkReply *loginReply = networkManager->post(request, query.toString().toUtf8());
-	activeReplies.append(loginReply);
-
-	// Connect the reply finished signal to a slot
-	connect(loginReply, &QNetworkReply::finished, this, [this, loginReply]() {
-		onLoginReply(loginReply);
-		activeReplies.removeOne(loginReply);
-		loginReply->deleteLater();
-	});
-
-	// Perform image upload logic here, e.g., using an API call
-	updateStatus(q_("Sending requests..."));
-
-	freezeUiState(true);
-	*/
-}
-
-/*
- * Handle the response after a login request.
- * If the login is successful, uploads the selected image file to the server.
- *
- * Steps:
- *   - Read the response content from the login request.
- *   - If the login failed, update the UI and return.
- *   - If the login succeeded, open the selected image file.
- *   - Generate a unique boundary key for multipart form-data.
- *   - Prepare the POST body with the session data and image file.
- *   - Send the upload request to the server with the image and metadata.
- *   - Update the UI to reflect the upload status.
- *
- * @param reply The network reply object containing the server response.
- */
-void NebulaTexturesDialog::onLoginReply(QNetworkReply *reply)
-{
-	QByteArray content = reply->readAll();
-	if (reply->error() != QNetworkReply::NoError) {
-		qWarning() << "[NebulaTextures] Login failed.";
-		updateStatus(q_("Login failed!"));
-		freezeUiState(false);
-		return;
-	}
-	updateStatus(q_("Login success..."));
-
-	QFile imageFile(ui->lineEditImagePath->text());
-	if (!imageFile.open(QIODevice::ReadOnly)) {
-		qWarning() << "[NebulaTextures] Failed to open image file.";
-		updateStatus(q_("Failed to open image file!"));
-		freezeUiState(false);
-		return;
-	}
-
-	QJsonDocument doc = QJsonDocument::fromJson(content);
-	QJsonObject json = doc.object();
-
-	if(!json.contains("session") || json["status"].toString() == QString("error")) {
-		qWarning() << "[NebulaTextures] Login failed. Please check if your API key is valid.";
-		updateStatus(q_("Login failed! Please check if your API key is valid."));
-		freezeUiState(false);
-		return;
-	}
-
-	session = json["session"].toString();
-
-	QUrl uploadUrl(API_URL + "api/upload");
-	QNetworkRequest request(uploadUrl);
-	QJsonObject uploadJson;
-	uploadJson["session"] = session;
-	uploadJson["allow_commercial_use"] = "n";
-	uploadJson["allow_modifications"] = "n";
-	uploadJson["publicly_visible"] = "n";
-	uploadJson["tweak_order"] = 0;
-	uploadJson["crpix_center"] = true;
-
-	QString boundary_key;
-	// Generate 19 random digits (0-9)
-	for (int i = 0; i < 19; ++i) {
-		boundary_key += QString::number(QRandomGenerator::global()->bounded(10));  // Generates a random digit (0-9)
-	}
-
-	QByteArray boundary = "===============" + boundary_key.toUtf8() + "==";
-
-	QByteArray contentType = "multipart/form-data; boundary=\"" + boundary +"\"";
-	// QNetworkRequest request;
-	request.setHeader(QNetworkRequest::ContentTypeHeader, contentType);
-
-	QByteArray body;
-	QByteArray jsonPart = "--" + boundary + "\r\n"
-		"Content-Type: text/plain\r\n"
-		"MIME-Version: 1.0\r\n"
-		"Content-disposition: form-data; name=\"request-json\"\r\n"
-		"\r\n" +
-		QJsonDocument(uploadJson).toJson() + "\r\n";
-
-	body.append(jsonPart);
-
-	QByteArray filePart = "--" + boundary + "\r\n"
-		"Content-Type: application/octet-stream\r\n"
-		"MIME-Version: 1.0\r\n"
-		"Content-disposition: form-data; name=\"file\"; filename=\"" + imageFile.fileName().toUtf8() + "\"\r\n"
-		"\r\n";
-
-	body.append(filePart);
-	body.append(imageFile.readAll());
-	imageFile.close();
-	body.append("\r\n");
-	body.append("--" + boundary + "--\r\n");
-
-	request.setHeader(QNetworkRequest::ContentLengthHeader, QByteArray::number(body.size()));
-
-
-	QNetworkReply *uploadReply = networkManager->post(request, body);
-	activeReplies.append(uploadReply);
-	connect(uploadReply, &QNetworkReply::finished, this, [this, uploadReply]() {
-		onUploadReply(uploadReply);
-		activeReplies.removeOne(uploadReply);
-		uploadReply->deleteLater();
-	});
-
-	updateStatus(q_("Uploading image..."));
-}
-
-
-/*
- * Handle the response after an image upload request.
- *
- * Steps:
- *   - Read the response content from the upload request.
- *   - If the upload fails, update the UI with an error message and return.
- *   - If the upload is successful, parse the response JSON to retrieve the sub-id.
- *   - Start a timer to check the upload status after a short delay.
- *   - Update the UI to indicate the upload was successful.
- *
- * @param reply The network reply object containing the server response.
- */
-void NebulaTexturesDialog::onUploadReply(QNetworkReply *reply)
-{
-	QByteArray content = reply->readAll();
-	if (reply->error() != QNetworkReply::NoError) {
-		qWarning() << "[NebulaTextures] Image upload failed.";
-		updateStatus(q_("Image upload failed!"));
-		freezeUiState(false);
-		return;
-	}
-
-	QJsonDocument doc = QJsonDocument::fromJson(content);
-	QJsonObject json = doc.object();
-	subId = QString::number(json["subid"].toInt());
-	subStatusTimer->start(5000);
-	qDebug() << "[NebulaTextures] subid" << subId;//debug
-	updateStatus(q_("Image uploaded. Please wait..."));
-}
-
-
-/*
- * Send a request to check the status of a submitted image.
- * It queries the API to retrieve the current status of the image submission.
- *
- * Steps:
- *   - Construct the URL for checking the submission status using the sub-id.
- *   - Create a network request with the appropriate header and URL.
- *   - Send the request and connect to the finished signal to handle the response.
- *   - Update the UI to indicate the submission status is being checked.
- */
-void NebulaTexturesDialog::checkSubStatus()
-{
-	QUrl statusUrl(API_URL + "api/submissions/" + subId);
-	QNetworkRequest request(statusUrl);
-	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-	QNetworkReply *subStatusReply = networkManager->get(request);
-	activeReplies.append(subStatusReply);
-	connect(subStatusReply, &QNetworkReply::finished, this, [this, subStatusReply]() {
-		onsubStatusReply(subStatusReply);
-		activeReplies.removeOne(subStatusReply);
-		subStatusReply->deleteLater();
-	});
-	updateStatus(q_("Requesting submission status. Please wait...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
-}
-
-
-/*
- * Handle the response for a submission status request.
- *
- * Steps:
- *   - If the reply has an error:
- *     - Increment the retry counter.
- *     - If retry count exceeds the limit, stop retrying and notify the user.
- *     - Otherwise, notify the user and retry.
- *   - If the reply is successful:
- *     - Reset the retry counter.
- *     - Parse the JSON response and check for a valid job ID.
- *     - If a valid job ID is found:
- *       - Save the job ID, stop the submission timer, and start the job timer.
- *       - Notify the user that the submission ID has been received.
- *   - Delete the reply object to free resources.
- *
- * @param reply The QNetworkReply object containing the submission status response.
- */
-void NebulaTexturesDialog::onsubStatusReply(QNetworkReply *reply)
-{
-	if (reply->error() != QNetworkReply::NoError) {
-		qWarning() << "[NebulaTextures] Failed to get submission status.";
-		if (retryCount >= maxRetryCount) {
-			qWarning() << "[NebulaTextures] Max retry count reached. Aborting.";
-			updateStatus(q_("Failed to get submission status after multiple attempts. Please try again later."));
-			subStatusTimer->stop();
-			freezeUiState(false);
-			retryCount = 0;
-		} else {
-			updateStatus(q_("Failed to get submission status. Retry now...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
-			retryCount++;
-		}
-		return;
-	}
-
-
-	QByteArray cont = reply->readAll();
-	QJsonDocument doc = QJsonDocument::fromJson(cont);
-	QJsonObject json = doc.object();
-	QJsonArray jobs = json["jobs"].toArray();
-
-	if (!jobs.isEmpty() && !jobs[0].isNull()) {
-		retryCount = 0;
-		jobId = QString::number(jobs[0].toInt());
-		subStatusTimer->stop();
-		jobStatusTimer->start(5000);
-		updateStatus(q_("Job id got. Please wait..."));
-	}
-	else if (json.contains("error_message")) {
-		retryCount = 0;
-		qWarning() << "[NebulaTextures] Error message received:" << json["error_message"].toString();
-		updateStatus(q_("Error occurred!"));
-		subStatusTimer->stop();
-		freezeUiState(false);
-	}
-	else {
-		if (retryCount >= maxRetryCount) {
-			retryCount = 0;
-			qWarning() << "[NebulaTextures] Max retry count reached. Aborting.";
-			updateStatus(q_("Failed to get job id after multiple attempts. Please try again later."));
-			subStatusTimer->stop();
-			freezeUiState(false);
-		} else {
-			updateStatus(q_("Requesting job id. Please wait...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
-			retryCount++;
-		}
-	}
-}
-
-
-/*
- * Send a request to check the status of the current job.
- * It queries the API to retrieve the processing status of the job.
- *
- * Steps:
- *   - Construct the URL using the job ID.
- *   - Create a network request with the correct header and URL.
- *   - Send the GET request and connect to the finished signal to process the response.
- *   - Update the UI to indicate the job status is being checked.
- */
-void NebulaTexturesDialog::checkJobStatus()
-{
-	QUrl jobStatusUrl(API_URL + "api/jobs/" + jobId);
-	QNetworkRequest request(jobStatusUrl);
-	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-	QNetworkReply *jobStatusReply = networkManager->get(request);
-	activeReplies.append(jobStatusReply);
-	connect(jobStatusReply, &QNetworkReply::finished, this, [this, jobStatusReply]() {
-		onJobStatusReply(jobStatusReply);
-		activeReplies.removeOne(jobStatusReply);
-		jobStatusReply->deleteLater();
-	});
-	updateStatus(q_("Requesting job status. Please wait...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
-}
-
-
-/*
- * Handle the API response for checking the job status.
- *
- * Steps:
- *   - Check for errors in the network reply. If any, update the status and stop processing.
- *   - Parse the JSON response to extract the job status.
- *   - If the status is "success":
- *       - Notify the user about the job completion.
- *       - Stop the job status timer.
- *       - Initiate a request to download the WCS file.
- *   - If the status is "error":
- *       - Notify the user about the error.
- *       - Stop the job status timer and reset the UI state.
- *   - Clean up the reply object.
- *
- * @param reply The QNetworkReply object containing the job status response.
- */
-void NebulaTexturesDialog::onJobStatusReply(QNetworkReply *reply)
-{
-	if (reply->error() != QNetworkReply::NoError) {
-		qWarning() << "[NebulaTextures] Failed to get job status.";
-		if (retryCount >= maxRetryCount) {
-			qWarning() << "[NebulaTextures] Max retry count reached. Aborting.";
-			updateStatus(q_("Failed to get job status after multiple attempts. Please try again later."));
-			jobStatusTimer->stop(); // Stop the job status timer
-			freezeUiState(false); // Reset the UI state
-			retryCount = 0; // Reset the retry counter
-		} else {
-			updateStatus(q_("Failed to get job status. Retry now...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
-			retryCount++; // Increment the retry counter
-		}
-		return;
-	}
-
-	QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
-	QJsonObject json = doc.object();
-	QString status = json["status"].toString();
-
-	if (status == "success") {
-		retryCount = 0;
-		updateStatus(q_("Job completed successfully! Downloading WCS file..."));
-		jobStatusTimer->stop();
-		QUrl wcsUrl(API_URL+ "wcs_file/" + jobId);
-		QNetworkRequest request(wcsUrl);
-		QNetworkReply *wcsReply = networkManager->get(request);
-		activeReplies.append(wcsReply);
-		connect(wcsReply, &QNetworkReply::finished, this, [this, wcsReply]() {
-			onWcsDownloadReply(wcsReply);
-			activeReplies.removeOne(wcsReply);
-			wcsReply->deleteLater();
-		});
-	} else if (status == "error" || status == "failure") {
-		retryCount = 0;
-		qWarning() << "[NebulaTextures] Error in job processing.";
-		updateStatus(q_("Error in job processing!"));
-		jobStatusTimer->stop();
-		freezeUiState(false);
-	} else {
-		if (retryCount >= maxRetryCount) {
-			retryCount = 0;
-			qWarning() << "[NebulaTextures] Max retry count reached. Aborting.";
-			updateStatus(q_("Failed to get job result after multiple attempts. Please try again later."));
-			jobStatusTimer->stop();
-			freezeUiState(false);
-		} else {
-			updateStatus(q_("Requesting job result. Please wait...") + QString(" (%1: %2/%3)").arg(q_("Retry")).arg(retryCount + 1).arg(maxRetryCount));
-			retryCount++;
-		}
-	}
-}
-
-
-/*
- * Handle the response for downloading the WCS file and process coordinates calculating.
- *
- * Steps:
- *   - Check for errors in the network reply. If any, update the status, reset the UI state, and stop processing.
- *   - Parse the WCS file content into lines and extract key parameters using a regular expression.
- *   - Map the extracted WCS parameters (e.g., CRPIX1, CRPIX2, CRVAL1, CRVAL2, etc.) to corresponding member variables.
- *   - Use the WCS parameters to calculate celestial coordinates (RA, Dec) for the image corners:
- *       - Top-left
- *       - Bottom-left
- *       - Top-right
- *       - Bottom-right
- *   - Update the UI fields with the calculated coordinates for reference and display purposes.
- *   - Notify the user about the successful completion of processing and prompt them to proceed with rendering or saving the result.
- *
- * @param reply The QNetworkReply object containing the wcs downloading response.
- */
-void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
-{
-	if (reply->error() != QNetworkReply::NoError) {
-		qWarning() << "[NebulaTextures] Failed to download WCS file.";
-		updateStatus(q_("Failed to download WCS file..."));
-		freezeUiState(false);
-		return;
-	}
-	QByteArray cont = reply->readAll();
-	QString content = QString::fromUtf8(cont);
-
-	QRegularExpression regex("(CRPIX1|CRPIX2|CRVAL1|CRVAL2|CD1_1|CD1_2|CD2_1|CD2_2|IMAGEW|IMAGEH)\\s*=\\s*(-?\\d*\\.?\\d+([eE][-+]?\\d+)?)(.*)");
-	QStringList lines;
-	for (int i = 0; i < content.length(); i += 80) {
-		lines.append(content.mid(i, 80));
-	}
-
-	for (const QString &line : lines) {
-		QRegularExpressionMatch match = regex.match(line);
-		if (match.hasMatch()) {
-			QString key = match.captured(1);
-			double value = match.captured(2).toDouble();
-			if (key == "CRPIX1") {
-				CRPIX1 = value;
-			} else if (key == "CRPIX2") {
-				CRPIX2 = value;
-			} else if (key == "CRVAL1") {
-				CRVAL1 = value;
-			} else if (key == "CRVAL2") {
-				CRVAL2 = value;
-			} else if (key == "CD1_1") {
-				CD1_1 = value;
-			} else if (key == "CD1_2") {
-				CD1_2 = value;
-			} else if (key == "CD2_1") {
-				CD2_1 = value;
-			} else if (key == "CD2_2") {
-				CD2_2 = value;
-			} else if (key == "IMAGEW") {
-				IMAGEW = value;
-			} else if (key == "IMAGEH") {
-				IMAGEH = value;
-			}
-		}
-	}
-
-	referRA = CRVAL1;
-	referDec = CRVAL2;
-	ui->referX->setValue(CRVAL1);
-	ui->referY->setValue(CRVAL2);
-
-	QPair<double, double> result;
-	int X=0,Y=0;
-	result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
-	topLeftRA = result.first;
-	topLeftDec = result.second;
-	ui->topLeftX->setValue(topLeftRA);
-	ui->topLeftY->setValue(topLeftDec);
-
-	X = 0, Y = IMAGEH - 1;
-	result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
-	bottomLeftRA = result.first;
-	bottomLeftDec = result.second;
-	ui->bottomLeftX->setValue(bottomLeftRA);
-	ui->bottomLeftY->setValue(bottomLeftDec);
-
-	X = IMAGEW - 1, Y = 0;
-	result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
-	topRightRA = result.first;
-	topRightDec = result.second;
-	ui->topRightX->setValue(topRightRA);
-	ui->topRightY->setValue(topRightDec);
-
-	X = IMAGEW - 1, Y = IMAGEH - 1;
-	result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
-	bottomRightRA = result.first;
-	bottomRightDec = result.second;
-	ui->bottomRightX->setValue(bottomRightRA);
-	ui->bottomRightY->setValue(bottomRightDec);
-
-	solvedFlag = true;
-	freezeUiState(false);
-	updateStatus(q_("Processing completed! Goto Center Point, Try to Render, Check and Add to Local Storage."));
 }
 
 

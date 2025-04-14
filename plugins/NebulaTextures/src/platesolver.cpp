@@ -43,7 +43,6 @@ void PlateSolver::cancel()
 	subStatusTimer->stop();
 	jobStatusTimer->stop();
 	retryCount = 0;
-	emit solvingStatusUpdated("Operation cancelled.");
 }
 
 void PlateSolver::sendLoginRequest()
@@ -64,7 +63,7 @@ void PlateSolver::sendLoginRequest()
 	activeReplies.append(reply);
 	connect(reply, &QNetworkReply::finished, this, &PlateSolver::onLoginReply);
 
-	emit solvingStatusUpdated("Sending login request...");
+	emit solvingStatusUpdated(q_("Sending login request..."));
 }
 
 void PlateSolver::onLoginReply()
@@ -77,19 +76,18 @@ void PlateSolver::onLoginReply()
 	reply->deleteLater();
 
 	if (reply->error() != QNetworkReply::NoError) {
-		emit loginFailed("Login failed!");
+		emit loginFailed(q_("Network reply error."));
 		return;
 	}
 
 	QJsonObject json = QJsonDocument::fromJson(content).object();
 	if (!json.contains("session") || json["status"].toString() == "error") {
-		emit loginFailed("Invalid API key or login error.");
+		emit loginFailed(q_("Invalid API key or login error."));
 		return;
 	}
 
 	session = json["session"].toString();
 	emit loginSuccess();
-	emit solvingStatusUpdated("Login successful.");
 
 	sendUploadRequest();
 }
@@ -98,7 +96,7 @@ void PlateSolver::sendUploadRequest()
 {
 	QFile imageFile(imagePath);
 	if (!imageFile.open(QIODevice::ReadOnly)) {
-		emit uploadFailed("Failed to open image file.");
+		emit uploadFailed(q_("Failed to open image file."));
 		return;
 	}
 
@@ -139,7 +137,7 @@ void PlateSolver::sendUploadRequest()
 	activeReplies.append(reply);
 	connect(reply, &QNetworkReply::finished, this, &PlateSolver::onUploadReply);
 
-	emit solvingStatusUpdated("Uploading image...");
+	emit solvingStatusUpdated(q_("Uploading image..."));
 }
 
 void PlateSolver::onUploadReply()
@@ -152,7 +150,7 @@ void PlateSolver::onUploadReply()
 	reply->deleteLater();
 
 	if (reply->error() != QNetworkReply::NoError) {
-		emit uploadFailed("Image upload failed.");
+		emit uploadFailed(q_("Network reply error."));
 		return;
 	}
 
@@ -161,7 +159,6 @@ void PlateSolver::onUploadReply()
 
 	subStatusTimer->start(5000);
 	emit uploadSuccess();
-	emit solvingStatusUpdated("Image uploaded. Checking submission...");
 }
 
 void PlateSolver::sendSubStatusRequest()
@@ -173,7 +170,7 @@ void PlateSolver::sendSubStatusRequest()
 	activeReplies.append(reply);
 	connect(reply, &QNetworkReply::finished, this, &PlateSolver::onSubStatusReply);
 
-	emit solvingStatusUpdated(QString("Checking submission status (%1/%2)...").arg(retryCount + 1).arg(maxRetryCount));
+	emit solvingStatusUpdated(q_("Checking submission status") +QString(" (%1/%2)...").arg(retryCount + 1).arg(maxRetryCount));
 }
 
 void PlateSolver::onSubStatusReply()
@@ -188,7 +185,7 @@ void PlateSolver::onSubStatusReply()
 	if (reply->error() != QNetworkReply::NoError) {
 		if (++retryCount >= maxRetryCount) {
 			subStatusTimer->stop();
-			emit failed("Submission status request failed after retries.");
+			emit failed(q_("Submission status request failed after retries."));
 		}
 		return;
 	}
@@ -200,10 +197,10 @@ void PlateSolver::onSubStatusReply()
 		subStatusTimer->stop();
 		jobStatusTimer->start(5000);
 		retryCount = 0;
-		emit solvingStatusUpdated("Job ID received. Processing...");
+		emit solvingStatusUpdated(q_("Job ID received. Processing..."));
 	} else if (json.contains("error_message")) {
 		subStatusTimer->stop();
-		emit failed("Astrometry error: " + json["error_message"].toString());
+		emit failed(q_("Astrometry error.") +" " + json["error_message"].toString());
 	}
 }
 
@@ -216,7 +213,7 @@ void PlateSolver::sendJobStatusRequest()
 	activeReplies.append(reply);
 	connect(reply, &QNetworkReply::finished, this, &PlateSolver::onJobStatusReply);
 
-	emit solvingStatusUpdated(QString("Checking job status (%1/%2)...").arg(retryCount + 1).arg(maxRetryCount));
+	emit solvingStatusUpdated(q_("Checking job status") +QString(" (%1/%2)...").arg(retryCount + 1).arg(maxRetryCount));
 }
 
 void PlateSolver::onJobStatusReply()
@@ -231,7 +228,7 @@ void PlateSolver::onJobStatusReply()
 	if (reply->error() != QNetworkReply::NoError) {
 		if (++retryCount >= maxRetryCount) {
 			jobStatusTimer->stop();
-			emit failed("Job status request failed after retries.");
+			emit failed(q_("Job status request failed after retries."));
 		}
 		return;
 	}
@@ -242,11 +239,11 @@ void PlateSolver::onJobStatusReply()
 	if (status == "success") {
 		jobStatusTimer->stop();
 		retryCount = 0;
-		emit solvingStatusUpdated("Job completed. Downloading WCS file...");
+		emit solvingStatusUpdated(q_("Job completed. Downloading WCS file..."));
 		downloadWcsFile();
 	} else if (status == "error" || status == "failure") {
 		jobStatusTimer->stop();
-		emit failed("Job failed during processing.");
+		emit failed(q_("Job failed during processing."));
 	}
 }
 
@@ -268,7 +265,7 @@ void PlateSolver::onWcsDownloadReply()
 	reply->deleteLater();
 
 	if (reply->error() != QNetworkReply::NoError) {
-		emit failed("Failed to download WCS file.");
+		emit failed(q_("Failed to download WCS file."));
 		return;
 	}
 

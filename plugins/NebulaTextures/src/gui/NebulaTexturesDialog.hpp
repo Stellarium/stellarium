@@ -104,18 +104,14 @@ public slots:
 	//! Register the texture to the custom textures configuration
 	void registerTexture(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness, QString cfgPath, QString groupName);
 
-
 	//! Remove the selected texture from the list and deletes the associated image file
 	void removeTexture();
-
 
 	//! Reload texture configuration data
 	void reloadData();
 
-
 	//! Refresh textures and manage their visibility
 	void refreshTextures();
-
 
 	//! Set the visibility of the specified texture and its sub-tiles
 	bool setTexturesVisible(QString TexName, bool visible);
@@ -146,33 +142,14 @@ private slots:
 	//! Open a file dialog to select an image file
 	void openImageFile();
 
+	//! Solve an image online
+	void solveImage();
+
+	//! Cancel image solving
 	void cancelSolve();
 
-	/***** Upload image and solve, calculate *****/
-	//! Upload an image to the server
-	void uploadImage();
-
-	//! Handle the response after a login request
-	void onLoginReply(QNetworkReply *reply);
-
-	//! Handle the response after an image upload request
-	void onUploadReply(QNetworkReply *reply);
-
-	//! Check the status of a submitted image
-	void checkSubStatus();
-
-	//! Handle the response for a submission status request
-	void onsubStatusReply(QNetworkReply *reply);
-
-	//! Check the status of the current job
-	void checkJobStatus();
-
-	//! Handle the response for checking the job status
-	void onJobStatusReply(QNetworkReply *reply);
-
-	//! Handle the response for downloading the WCS file and process coordinates calculating
-	void onWcsDownloadReply(QNetworkReply *reply);
-	//////////////////////////////////////////////
+	//! Process WCS of image
+	void processWcsContent(const QString& wcsText);
 
 private:
 	Ui_nebulaTexturesDialog* ui;
@@ -180,38 +157,10 @@ private:
 	// Pointer to QSettings
 	QSettings* conf;
 
-	PlateSolver* plateSolver = Q_NULLPTR;
-
 	class StelProgressController* progressBar;
 
-	// URL for the Astrometry
-	QString API_URL = "http://nova.astrometry.net/";
 
-	// Network manager for sending and receiving network requests
-	QNetworkAccessManager *networkManager;
-
-	QList<QNetworkReply*> activeReplies;
-
-	// Session identifier for the current session
-	QString session;
-
-	// Submission ID for the image submission
-	QString subId;
-
-	// Job ID for the processing job
-	QString jobId;
-
-	// Timer for tracking submission status updates
-	QTimer *subStatusTimer;
-
-	// Timer for tracking job status updates
-	QTimer *jobStatusTimer;
-
-	// status timer retry count
-	int retryCount;
-
-	// limit of status timer retry count
-	const int maxRetryCount = 99;
+	PlateSolver* plateSolver = Q_NULLPTR;
 
 	// Flag for online plate-solving
 	bool solvedFlag;
@@ -253,8 +202,6 @@ private:
 
 	//! Toggle the enabled/disabled freezing state of UI components
 	void freezeUiState(bool freeze);
-
-	void processWcsContent(const QString& wcsText);
 
 };
 

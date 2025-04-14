@@ -20,6 +20,7 @@
 #ifndef NEBULATEXTURES_HPP
 #define NEBULATEXTURES_HPP
 
+
 #include "StelModule.hpp"
 #include <QFont>
 
