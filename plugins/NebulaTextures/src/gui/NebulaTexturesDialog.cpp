@@ -70,6 +70,36 @@ NebulaTexturesDialog::NebulaTexturesDialog()
 	jobStatusTimer = new QTimer(this);
 	connect(subStatusTimer, &QTimer::timeout, this, &NebulaTexturesDialog::checkSubStatus);
 	connect(jobStatusTimer, &QTimer::timeout, this, &NebulaTexturesDialog::checkJobStatus);
+
+	plateSolver = new PlateSolver(this);
+
+	connect(plateSolver, &PlateSolver::loginSuccess, this, [this]() {
+		updateStatus(q_("Login success..."));
+	});
+	connect(plateSolver, &PlateSolver::loginFailed, this, [this](const QString& reason) {
+		updateStatus(q_("Login failed: ") + reason);
+		freezeUiState(false);
+	});
+	connect(plateSolver, &PlateSolver::uploadSuccess, this, [this]() {
+		updateStatus(q_("Image uploaded. Please wait..."));
+	});
+	connect(plateSolver, &PlateSolver::uploadFailed, this, [this](const QString& reason) {
+		updateStatus(q_("Upload failed: ") + reason);
+		freezeUiState(false);
+	});
+	connect(plateSolver, &PlateSolver::solvingStatusUpdated, this, [this](const QString& status) {
+		updateStatus(status);
+	});
+	connect(plateSolver, &PlateSolver::failed, this, [this](const QString& msg) {
+		updateStatus(q_("Solve failed: ") + msg);
+		freezeUiState(false);
+	});
+	connect(plateSolver, &PlateSolver::solutionAvailable, this, [this](const QString& wcsText) {
+		updateStatus(q_("WCS download complete. Processing..."));
+		processWcsContent(wcsText);
+		freezeUiState(false);
+	});
+
 }
 
 NebulaTexturesDialog::~NebulaTexturesDialog()
@@ -287,6 +317,12 @@ void NebulaTexturesDialog::openImageFile()
 
 void NebulaTexturesDialog::cancelSolve()
 {
+	if (plateSolver) {
+		plateSolver->cancel();
+	}
+	updateStatus(q_("Operation cancelled by user."));
+	freezeUiState(false);
+	/*
 	for (QNetworkReply *reply : activeReplies) {
 		reply->abort();
 		reply->deleteLater();
@@ -298,6 +334,7 @@ void NebulaTexturesDialog::cancelSolve()
 
 	updateStatus(q_("Operation cancelled by user."));
 	freezeUiState(false);
+	*/
 }
 
 
@@ -314,6 +351,38 @@ void NebulaTexturesDialog::cancelSolve()
  */
 void NebulaTexturesDialog::uploadImage() // WARN: image should not be flip
 {
+
+	QString apiKey = ui->lineEditApiKey->text();
+	QString imagePath = ui->lineEditImagePath->text();
+
+	if (imagePath.isEmpty() || apiKey.isEmpty()) {
+		updateStatus(q_("Please provide both API key and image path."));
+		return;
+	}
+
+	QFileInfo fileInfo(imagePath);
+	if (!fileInfo.exists() || !fileInfo.isReadable()) {
+		updateStatus(q_("The specified image file does not exist or is not readable."));
+		return;
+	}
+
+	QString suffix = fileInfo.suffix().toLower();
+	QStringList allowedSuffixes = {"png", "jpg", "gif", "tif", "tiff", "jpeg"};
+	if (!allowedSuffixes.contains(suffix)) {
+		updateStatus(q_("Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."));
+		return;
+	}
+
+	if (ui->checkBoxKeepApi->isChecked())
+		conf->setValue(NT_CONFIG_PREFIX + "/AstroMetry_Apikey", apiKey);
+
+	updateStatus(q_("Sending requests..."));
+	freezeUiState(true);
+
+	plateSolver->startPlateSolving(apiKey, imagePath);
+	return;
+
+	/*
 	QString apiKey = ui->lineEditApiKey->text();
 	QString imagePath = ui->lineEditImagePath->text();
 
@@ -379,6 +448,7 @@ void NebulaTexturesDialog::uploadImage() // WARN: image should not be flip
 	updateStatus(q_("Sending requests..."));
 
 	freezeUiState(true);
+	*/
 }
 
 /*
@@ -814,6 +884,82 @@ void NebulaTexturesDialog::onWcsDownloadReply(QNetworkReply *reply)
 }
 
 
+void NebulaTexturesDialog::processWcsContent(const QString& wcsText)
+{
+	QString content = wcsText;
+	QRegularExpression regex("(CRPIX1|CRPIX2|CRVAL1|CRVAL2|CD1_1|CD1_2|CD2_1|CD2_2|IMAGEW|IMAGEH)\\s*=\\s*(-?\\d*\\.?\\d+([eE][-+]?\\d+)?)(.*)");
+	QStringList lines;
+	for (int i = 0; i < content.length(); i += 80) {
+		lines.append(content.mid(i, 80));
+	}
+
+	for (const QString &line : lines) {
+		QRegularExpressionMatch match = regex.match(line);
+		if (match.hasMatch()) {
+			QString key = match.captured(1);
+			double value = match.captured(2).toDouble();
+			if (key == "CRPIX1") {
+				CRPIX1 = value;
+			} else if (key == "CRPIX2") {
+				CRPIX2 = value;
+			} else if (key == "CRVAL1") {
+				CRVAL1 = value;
+			} else if (key == "CRVAL2") {
+				CRVAL2 = value;
+			} else if (key == "CD1_1") {
+				CD1_1 = value;
+			} else if (key == "CD1_2") {
+				CD1_2 = value;
+			} else if (key == "CD2_1") {
+				CD2_1 = value;
+			} else if (key == "CD2_2") {
+				CD2_2 = value;
+			} else if (key == "IMAGEW") {
+				IMAGEW = value;
+			} else if (key == "IMAGEH") {
+				IMAGEH = value;
+			}
+		}
+	}
+
+	referRA = CRVAL1;
+	referDec = CRVAL2;
+	ui->referX->setValue(CRVAL1);
+	ui->referY->setValue(CRVAL2);
+
+	QPair<double, double> result;
+	int X=0,Y=0;
+	result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+	topLeftRA = result.first;
+	topLeftDec = result.second;
+	ui->topLeftX->setValue(topLeftRA);
+	ui->topLeftY->setValue(topLeftDec);
+
+	X = 0, Y = IMAGEH - 1;
+	result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+	bottomLeftRA = result.first;
+	bottomLeftDec = result.second;
+	ui->bottomLeftX->setValue(bottomLeftRA);
+	ui->bottomLeftY->setValue(bottomLeftDec);
+
+	X = IMAGEW - 1, Y = 0;
+	result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+	topRightRA = result.first;
+	topRightDec = result.second;
+	ui->topRightX->setValue(topRightRA);
+	ui->topRightY->setValue(topRightDec);
+
+	X = IMAGEW - 1, Y = IMAGEH - 1;
+	result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+	bottomRightRA = result.first;
+	bottomRightDec = result.second;
+	ui->bottomRightX->setValue(bottomRightRA);
+	ui->bottomRightY->setValue(bottomRightDec);
+
+	solvedFlag = true;
+	freezeUiState(false);
+	updateStatus(q_("Processing completed! Goto Center Point, Try to Render, Check and Add to Local Storage."));
+}
 
 
 /*

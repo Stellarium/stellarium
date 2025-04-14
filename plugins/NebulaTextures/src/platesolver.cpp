@@ -1,0 +1,279 @@
+#include "PlateSolver.hpp"
+#include <QFile>
+#include <QFileInfo>
+#include <QDateTime>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QNetworkRequest>
+#include <QUrlQuery>
+#include <QRandomGenerator>
+#include <QRegularExpression>
+#include <QDebug>
+
+#define API_URL "http://nova.astrometry.net/"
+
+PlateSolver::PlateSolver(QObject* parent)
+	: QObject(parent),
+	retryCount(0),
+	networkManager(new QNetworkAccessManager(this)),
+	subStatusTimer(new QTimer(this)),
+	jobStatusTimer(new QTimer(this))
+{
+	connect(subStatusTimer, &QTimer::timeout, this, &PlateSolver::sendSubStatusRequest);
+	connect(jobStatusTimer, &QTimer::timeout, this, &PlateSolver::sendJobStatusRequest);
+}
+
+void PlateSolver::startPlateSolving(const QString& _apiKey, const QString& _imagePath)
+{
+	apiKey = _apiKey;
+	imagePath = _imagePath;
+	retryCount = 0;
+	sendLoginRequest();
+}
+
+void PlateSolver::cancel()
+{
+	for (QNetworkReply* reply : activeReplies)
+	{
+		reply->abort();
+		reply->deleteLater();
+	}
+	activeReplies.clear();
+	subStatusTimer->stop();
+	jobStatusTimer->stop();
+	retryCount = 0;
+	emit solvingStatusUpdated("Operation cancelled.");
+}
+
+void PlateSolver::sendLoginRequest()
+{
+	QJsonObject json;
+	json["apikey"] = apiKey;
+	QByteArray jsonData = QJsonDocument(json).toJson();
+
+	QUrl url(API_URL "api/login");
+	QUrlQuery query;
+	query.addQueryItem("request-json", QString(jsonData));
+	url.setQuery(query);
+
+	QNetworkRequest request(url);
+	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+
+	QNetworkReply* reply = networkManager->post(request, query.toString().toUtf8());
+	activeReplies.append(reply);
+	connect(reply, &QNetworkReply::finished, this, &PlateSolver::onLoginReply);
+
+	emit solvingStatusUpdated("Sending login request...");
+}
+
+void PlateSolver::onLoginReply()
+{
+	QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+	if (!reply) return;
+
+	activeReplies.removeOne(reply);
+	QByteArray content = reply->readAll();
+	reply->deleteLater();
+
+	if (reply->error() != QNetworkReply::NoError) {
+		emit loginFailed("Login failed!");
+		return;
+	}
+
+	QJsonObject json = QJsonDocument::fromJson(content).object();
+	if (!json.contains("session") || json["status"].toString() == "error") {
+		emit loginFailed("Invalid API key or login error.");
+		return;
+	}
+
+	session = json["session"].toString();
+	emit loginSuccess();
+	emit solvingStatusUpdated("Login successful.");
+
+	sendUploadRequest();
+}
+
+void PlateSolver::sendUploadRequest()
+{
+	QFile imageFile(imagePath);
+	if (!imageFile.open(QIODevice::ReadOnly)) {
+		emit uploadFailed("Failed to open image file.");
+		return;
+	}
+
+	QJsonObject uploadJson;
+	uploadJson["session"] = session;
+	uploadJson["allow_commercial_use"] = "n";
+	uploadJson["allow_modifications"] = "n";
+	uploadJson["publicly_visible"] = "n";
+	uploadJson["tweak_order"] = 0;
+	uploadJson["crpix_center"] = true;
+
+	QString boundary_key;
+	for (int i = 0; i < 19; ++i)
+		boundary_key += QString::number(QRandomGenerator::global()->bounded(10));
+
+	QByteArray boundary = "===============" + boundary_key.toUtf8() + "==";
+	QByteArray contentType = "multipart/form-data; boundary=\"" + boundary + "\"";
+
+	QByteArray body;
+	body.append("--" + boundary + "\r\n"
+				"Content-Type: text/plain\r\n"
+				"MIME-Version: 1.0\r\n"
+				"Content-disposition: form-data; name=\"request-json\"\r\n\r\n");
+	body.append(QJsonDocument(uploadJson).toJson() + "\r\n");
+
+	body.append("--" + boundary + "\r\n"
+				"Content-Type: application/octet-stream\r\n"
+				"MIME-Version: 1.0\r\n"
+				"Content-disposition: form-data; name=\"file\"; filename=\"" + QFileInfo(imageFile.fileName()).fileName().toUtf8() + "\"\r\n\r\n");
+	body.append(imageFile.readAll() + "\r\n");
+	body.append("--" + boundary + "--\r\n");
+
+	QNetworkRequest request(QUrl(API_URL "api/upload"));
+	request.setHeader(QNetworkRequest::ContentTypeHeader, contentType);
+	request.setHeader(QNetworkRequest::ContentLengthHeader, QByteArray::number(body.size()));
+
+	QNetworkReply* reply = networkManager->post(request, body);
+	activeReplies.append(reply);
+	connect(reply, &QNetworkReply::finished, this, &PlateSolver::onUploadReply);
+
+	emit solvingStatusUpdated("Uploading image...");
+}
+
+void PlateSolver::onUploadReply()
+{
+	QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+	if (!reply) return;
+
+	activeReplies.removeOne(reply);
+	QByteArray content = reply->readAll();
+	reply->deleteLater();
+
+	if (reply->error() != QNetworkReply::NoError) {
+		emit uploadFailed("Image upload failed.");
+		return;
+	}
+
+	QJsonObject json = QJsonDocument::fromJson(content).object();
+	subId = QString::number(json["subid"].toInt());
+
+	subStatusTimer->start(5000);
+	emit uploadSuccess();
+	emit solvingStatusUpdated("Image uploaded. Checking submission...");
+}
+
+void PlateSolver::sendSubStatusRequest()
+{
+	QNetworkRequest request(QUrl(API_URL "api/submissions/" + subId));
+	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+	QNetworkReply* reply = networkManager->get(request);
+	activeReplies.append(reply);
+	connect(reply, &QNetworkReply::finished, this, &PlateSolver::onSubStatusReply);
+
+	emit solvingStatusUpdated(QString("Checking submission status (%1/%2)...").arg(retryCount + 1).arg(maxRetryCount));
+}
+
+void PlateSolver::onSubStatusReply()
+{
+	QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+	if (!reply) return;
+
+	activeReplies.removeOne(reply);
+	QByteArray content = reply->readAll();
+	reply->deleteLater();
+
+	if (reply->error() != QNetworkReply::NoError) {
+		if (++retryCount >= maxRetryCount) {
+			subStatusTimer->stop();
+			emit failed("Submission status request failed after retries.");
+		}
+		return;
+	}
+
+	QJsonObject json = QJsonDocument::fromJson(content).object();
+	QJsonArray jobs = json["jobs"].toArray();
+	if (!jobs.isEmpty() && !jobs[0].isNull()) {
+		jobId = QString::number(jobs[0].toInt());
+		subStatusTimer->stop();
+		jobStatusTimer->start(5000);
+		retryCount = 0;
+		emit solvingStatusUpdated("Job ID received. Processing...");
+	} else if (json.contains("error_message")) {
+		subStatusTimer->stop();
+		emit failed("Astrometry error: " + json["error_message"].toString());
+	}
+}
+
+void PlateSolver::sendJobStatusRequest()
+{
+	QNetworkRequest request(QUrl(API_URL "api/jobs/" + jobId));
+	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+	QNetworkReply* reply = networkManager->get(request);
+	activeReplies.append(reply);
+	connect(reply, &QNetworkReply::finished, this, &PlateSolver::onJobStatusReply);
+
+	emit solvingStatusUpdated(QString("Checking job status (%1/%2)...").arg(retryCount + 1).arg(maxRetryCount));
+}
+
+void PlateSolver::onJobStatusReply()
+{
+	QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+	if (!reply) return;
+
+	activeReplies.removeOne(reply);
+	QByteArray content = reply->readAll();
+	reply->deleteLater();
+
+	if (reply->error() != QNetworkReply::NoError) {
+		if (++retryCount >= maxRetryCount) {
+			jobStatusTimer->stop();
+			emit failed("Job status request failed after retries.");
+		}
+		return;
+	}
+
+	QJsonObject json = QJsonDocument::fromJson(content).object();
+	QString status = json["status"].toString();
+
+	if (status == "success") {
+		jobStatusTimer->stop();
+		retryCount = 0;
+		emit solvingStatusUpdated("Job completed. Downloading WCS file...");
+		downloadWcsFile();
+	} else if (status == "error" || status == "failure") {
+		jobStatusTimer->stop();
+		emit failed("Job failed during processing.");
+	}
+}
+
+void PlateSolver::downloadWcsFile()
+{
+	QNetworkRequest request(QUrl(API_URL "wcs_file/" + jobId));
+	QNetworkReply* reply = networkManager->get(request);
+	activeReplies.append(reply);
+	connect(reply, &QNetworkReply::finished, this, &PlateSolver::onWcsDownloadReply);
+}
+
+void PlateSolver::onWcsDownloadReply()
+{
+	QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+	if (!reply) return;
+
+	activeReplies.removeOne(reply);
+	QByteArray content = reply->readAll();
+	reply->deleteLater();
+
+	if (reply->error() != QNetworkReply::NoError) {
+		emit failed("Failed to download WCS file.");
+		return;
+	}
+
+	QString wcsText = QString::fromUtf8(content);
+	emit solutionAvailable(wcsText);
+	emit finished();
+	reply->deleteLater();
+}

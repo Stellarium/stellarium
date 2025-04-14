@@ -31,6 +31,7 @@
 #include "NebulaTextures.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelApp.hpp"
+#include "PlateSolver.hpp"
 
 #define NT_CONFIG_PREFIX QString("NebulaTextures")
 #define CUSTOM_TEXNAME QString("Custom Textures")
@@ -179,6 +180,8 @@ private:
 	// Pointer to QSettings
 	QSettings* conf;
 
+	PlateSolver* plateSolver = Q_NULLPTR;
+
 	class StelProgressController* progressBar;
 
 	// URL for the Astrometry
@@ -242,8 +245,6 @@ private:
 	// Flag indicating whether to render temporary textures
 	bool flag_renderTempTex = false;
 
-
-
 	//! Set the HTML content for the "About" section in the dialog
 	void setAboutHtml();
 
@@ -252,6 +253,9 @@ private:
 
 	//! Toggle the enabled/disabled freezing state of UI components
 	void freezeUiState(bool freeze);
+
+	void processWcsContent(const QString& wcsText);
+
 };
 
 #endif /* NEBULATEXTURESDIALOG_HPP */

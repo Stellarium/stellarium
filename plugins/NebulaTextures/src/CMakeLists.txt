@@ -13,6 +13,8 @@ SET(NebulaTextures_SRCS
      NebulaTextures.cpp
      gui/NebulaTexturesDialog.hpp
      gui/NebulaTexturesDialog.cpp
+     platesolver.hpp
+     platesolver.cpp
 )
 
 SET(NebulaTextures_UIS
