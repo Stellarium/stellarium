@@ -62,7 +62,9 @@ QString Star1::getScreenNameI18n(const bool withCommonNameI18n) const
 		if (StarMgr::getFlagHIPDesignation()) // append the HIP numbers of stars
 			starNames << QString("HIP %1").arg(star_id);
 	}
+	starNames.removeDuplicates();
 	starNames.removeAll(QString(""));
+	starNames.removeAll(QString());
 	if (starNames.count()>0)
 		return starNames.first();
 	else
