@@ -65,32 +65,6 @@ NebulaTexturesDialog::NebulaTexturesDialog()
 
 	plateSolver = new PlateSolver(this);
 
-	connect(plateSolver, &PlateSolver::loginSuccess, this, [this]() {
-		updateStatus(q_("Login success..."));
-	});
-	connect(plateSolver, &PlateSolver::loginFailed, this, [this](const QString& reason) {
-		updateStatus(q_("Login failed: ") + reason);
-		freezeUiState(false);
-	});
-	connect(plateSolver, &PlateSolver::uploadSuccess, this, [this]() {
-		updateStatus(q_("Image uploaded. Please wait..."));
-	});
-	connect(plateSolver, &PlateSolver::uploadFailed, this, [this](const QString& reason) {
-		updateStatus(q_("Upload failed: ") + reason);
-		freezeUiState(false);
-	});
-	connect(plateSolver, &PlateSolver::solvingStatusUpdated, this, [this](const QString& status) {
-		updateStatus(status);
-	});
-	connect(plateSolver, &PlateSolver::failed, this, [this](const QString& msg) {
-		updateStatus(q_("Solve failed: ") + msg);
-		freezeUiState(false);
-	});
-	connect(plateSolver, &PlateSolver::solutionAvailable, this, [this](const QString& wcsText) {
-		updateStatus(q_("WCS download complete. Processing..."));
-		processWcsContent(wcsText);
-		freezeUiState(false);
-	});
 }
 
 NebulaTexturesDialog::~NebulaTexturesDialog()
@@ -146,8 +120,12 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(ui->renderButton, SIGNAL(clicked()), this, SLOT(toggleTempTextureRendering()));
 	connect(ui->disableDefault, SIGNAL(clicked()), this, SLOT(toggleDisableDefaultTexture()));
 	connect(ui->brightComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(onBrightnessChanged(int)));
-
 	connect(ui->addCustomTextureButton, SIGNAL(clicked()), this, SLOT(addCustomTexture()));
+
+	connect(ui->reloadButton, SIGNAL(clicked()), this, SLOT(reloadData()));
+	connectCheckBox(ui->checkBoxShow,"actionShow_NebulaTextures");
+	connect(ui->checkBoxAvoid, SIGNAL(clicked(bool)), this, SLOT(setAvoidAreaConflict(bool)));
+	connect(ui->listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(gotoSelectedItem(QListWidgetItem*)));
 	connect(ui->removeTextureButton, SIGNAL(clicked()), this, SLOT(removeTexture()));
 
 	connect(ui->topLeftX, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
@@ -159,19 +137,36 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(ui->bottomRightX, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
 	connect(ui->bottomRightY, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
 
-	connect(ui->reloadButton, SIGNAL(clicked()), this, SLOT(reloadData()));
-	// connect(ui->checkBoxShow, SIGNAL(clicked(bool)), this, SLOT(setShowCustomTextures(bool)));
-	connectCheckBox(ui->checkBoxShow,"actionShow_NebulaTextures");
-	connect(ui->checkBoxAvoid, SIGNAL(clicked(bool)), this, SLOT(setAvoidAreaConflict(bool)));
+	connect(plateSolver, &PlateSolver::loginSuccess, this, [this]() {
+		updateStatus(q_("Login success..."));
+	});
+	connect(plateSolver, &PlateSolver::loginFailed, this, [this](const QString& reason) {
+		updateStatus(q_("Login failed: ") + reason);
+		freezeUiState(false);
+	});
+	connect(plateSolver, &PlateSolver::uploadSuccess, this, [this]() {
+		updateStatus(q_("Image uploaded. Please wait..."));
+	});
+	connect(plateSolver, &PlateSolver::uploadFailed, this, [this](const QString& reason) {
+		updateStatus(q_("Upload failed: ") + reason);
+		freezeUiState(false);
+	});
+	connect(plateSolver, &PlateSolver::solvingStatusUpdated, this, [this](const QString& status) {
+		updateStatus(status);
+	});
+	connect(plateSolver, &PlateSolver::failed, this, [this](const QString& msg) {
+		updateStatus(q_("Solve failed: ") + msg);
+		freezeUiState(false);
+	});
+	connect(plateSolver, &PlateSolver::solutionAvailable, this, [this](const QString& wcsText) {
+		updateStatus(q_("WCS download complete. Processing..."));
+		processWcsContent(wcsText);
+		freezeUiState(false);
+	});
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
-
-	connect(ui->listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(gotoSelectedItem(QListWidgetItem*)));
-
 	setAboutHtml();
-
 	reloadData();
-
 	ui->lineEditApiKey->setText(conf->value(NT_CONFIG_PREFIX + "/AstroMetry_Apikey", "").toString());
 }
 

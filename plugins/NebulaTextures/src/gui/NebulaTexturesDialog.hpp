@@ -31,7 +31,7 @@
 #include "NebulaTextures.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelApp.hpp"
-#include "PlateSolver.hpp"
+#include "platesolver.hpp"
 
 #define NT_CONFIG_PREFIX QString("NebulaTextures")
 #define CUSTOM_TEXNAME QString("Custom Textures")
@@ -53,11 +53,26 @@ public:
 	//! Destructor
 	~NebulaTexturesDialog() override;
 
+	// Only trigger refresh when the textures are initially loaded on screen (including both default and custom, twice) to avoid conflicts
+	int countRefresh, maxCountRefresh;
+
 	//! Get a StelSkyImageTile texture
 	StelSkyImageTile* get_aTile(QString key);
 
-	//! Only trigger refresh when the textures are initially loaded on screen (including both default and custom, twice) to avoid conflicts
-	int countRefresh, maxCountRefresh;
+	//! Convert pixel coordinates on the image to celestial coordinates with WCS parameters
+	QPair<double, double> PixelToCelestial(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2, double CD1_1, double CD1_2, double CD2_1, double CD2_2);
+
+	//! Set the visibility of the specified texture and its sub-tiles
+	bool setTexturesVisible(QString TexName, bool visible);
+
+	//! Register the texture to the custom textures configuration
+	void registerTexture(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness, QString cfgPath, QString groupName);
+
+	//! Delete the images listed in the given configuration file
+	void deleteImagesFromCfg(const QString& cfgFilePath);
+
+	//! Avoid conflicts between custom and default textures by hiding overlapping tiles
+	void avoidConflict();
 
 public slots:
 	void retranslate() override;
@@ -65,60 +80,11 @@ public slots:
 	//! refresh when textures painted on screen
 	void refreshInit();
 
-	//! Convert pixel coordinates on the image to celestial coordinates with WCS parameters
-	QPair<double, double> PixelToCelestial(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2, double CD1_1, double CD1_2, double CD2_1, double CD2_2);
-
-	//! Goto the center coordinates (RA and Dec) of texture
-	void goPush();
-
-	//! Recover image coords from plate-solving
-	void recoverCoords();
-
-	//! toggle temporary texture render testing
-	void toggleTempTextureRendering();
-
-	//! toggle showing default texture when testing temporary texture rendering
-	void toggleDisableDefaultTexture();
-
-	//! toggle brightness change to render again
-	void onBrightnessChanged(int index);
-
-	//! Temporary texture rendering for debugging
-	void renderTempCustomTexture();
-
-	//! Cancel temporary texture rendering for debugging
-	void unRenderTempCustomTexture();
-
-	//! Delete the images listed in the given configuration file
-	void deleteImagesFromCfg(const QString& cfgFilePath);
-
-	//! update temporary texture rendering for debugging
-	void updateTempCustomTexture(double inf);
-
-	//! Add the texture to the custom textures configuration
-	void addCustomTexture();
-
-	//! Add the texture to configuration, need to specify the texture groupname
-	void addTexture(QString cfgPath, QString groupName);
-
-	//! Register the texture to the custom textures configuration
-	void registerTexture(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness, QString cfgPath, QString groupName);
-
-	//! Remove the selected texture from the list and deletes the associated image file
-	void removeTexture();
 
 	//! Reload texture configuration data
 	void reloadData();
-
 	//! Refresh textures and manage their visibility
 	void refreshTextures();
-
-	//! Set the visibility of the specified texture and its sub-tiles
-	bool setTexturesVisible(QString TexName, bool visible);
-
-	//! Avoid conflicts between custom and default textures by hiding overlapping tiles
-	void avoidConflict();
-
 
 	//! Get the value for showing custom textures
 	bool getShowCustomTextures();
@@ -130,14 +96,13 @@ public slots:
 	//! Set the value for avoiding area conflicts
 	void setAvoidAreaConflict(bool b);
 
-	void gotoSelectedItem(QListWidgetItem* item);
-
 protected:
 	//! Set up the content and interactions of the NebulaTexturesDialog
 	void createDialogContent() override;
 
 private slots:
 	void restoreDefaults();
+
 
 	//! Open a file dialog to select an image file
 	void openImageFile();
@@ -148,8 +113,32 @@ private slots:
 	//! Cancel image solving
 	void cancelSolve();
 
-	//! Process WCS of image
-	void processWcsContent(const QString& wcsText);
+	//! Recover image coords from plate-solving
+	void recoverCoords();
+
+	//! Goto the center coordinates (RA and Dec) of texture
+	void goPush();
+
+	//! toggle temporary texture render testing
+	void toggleTempTextureRendering();
+
+	//! toggle showing default texture when testing temporary texture rendering
+	void toggleDisableDefaultTexture();
+
+	//! toggle brightness change to render again
+	void onBrightnessChanged(int index);
+
+	//! Add the texture to the custom textures configuration
+	void addCustomTexture();
+
+	//! update temporary texture rendering for debugging
+	void updateTempCustomTexture(double inf);
+
+	//! Goto center of the selected image in list view
+	void gotoSelectedItem(QListWidgetItem* item);
+
+	//! Remove the selected texture from the list and deletes the associated image file
+	void removeTexture();
 
 private:
 	Ui_nebulaTexturesDialog* ui;
@@ -159,6 +148,9 @@ private:
 
 	class StelProgressController* progressBar;
 
+
+	// Control image copying when adding texture, avoiding frequent file io
+	QString imagePath_src, imagePath_dst, imagePathTemp_src, imagePathTemp_dst;
 
 	PlateSolver* plateSolver = Q_NULLPTR;
 
@@ -178,10 +170,6 @@ private:
 	// Reference Right Ascension and Declination for the image center
 	double referRA, referDec;
 
-
-	// Control image copying when adding texture, avoiding frequent file io
-	QString imagePath_src, imagePath_dst, imagePathTemp_src, imagePathTemp_dst;
-
 	// Directory path where plugin-related files are stored
 	QString pluginDir  = "/modules/NebulaTextures/";
 
@@ -194,6 +182,19 @@ private:
 	// Flag indicating whether to render temporary textures
 	bool flag_renderTempTex = false;
 
+
+
+	//! Process WCS of image
+	void processWcsContent(const QString& wcsText);
+
+	//! Add the texture to configuration, need to specify the texture groupname
+	void addTexture(QString cfgPath, QString groupName);
+
+	//! Temporary texture rendering for debugging
+	void renderTempCustomTexture();
+	//! Cancel temporary texture rendering for debugging
+	void unRenderTempCustomTexture();
+
 	//! Set the HTML content for the "About" section in the dialog
 	void setAboutHtml();
 
@@ -202,7 +203,6 @@ private:
 
 	//! Toggle the enabled/disabled freezing state of UI components
 	void freezeUiState(bool freeze);
-
 };
 
 #endif /* NEBULATEXTURESDIALOG_HPP */
