@@ -1217,7 +1217,9 @@ bool NebulaTexturesDialog::setTexturesVisible(QString TexName, bool visible)
 StelSkyImageTile* NebulaTexturesDialog::get_aTile(QString key)
 {
 	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-	auto aTex = skyLayerMgr->allSkyLayers.find(key);
+	// Keep the same form with getShortName()
+	QString keyname = qc_(key, "dataset short name");
+	auto aTex = skyLayerMgr->allSkyLayers.find(keyname);
 	if(aTex == skyLayerMgr->allSkyLayers.end())
 		return Q_NULLPTR;
 	StelSkyLayerMgr::SkyLayerElem* aElem = aTex.value();
