@@ -36,16 +36,16 @@ environment:
     exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
     exiv2baseName: exiv2-0.28.0-2019msvc64
     scConverterEnabled: 1
-#  - BUILD_NAME: Win64 Qt5.12
-#    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-#    VSPATH: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\SDK\ScopeCppSDK\VC\bin
-#    QT_VERSION_MAJOR: 5
-#    QT_BASEDIR: C:\Qt\5.12\msvc2017_64
-#    CMAKE_GENERATOR: Visual Studio 15 2017 Win64
-#    CMAKE_ARGS:
-#    exiv2url: https://github.com/10110111/exiv2/releases/download/ver0.28.0-final/exiv2-0.28.0-2017msvc64.zip
-#    exiv2baseName: exiv2-0.28.0-2017msvc64
-#    scConverterEnabled: 0
+  - BUILD_NAME: Win64 Qt5.12
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    VSPATH: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\SDK\ScopeCppSDK\VC\bin
+    QT_VERSION_MAJOR: 5
+    QT_BASEDIR: C:\Qt\5.12\msvc2017_64
+    CMAKE_GENERATOR: Visual Studio 15 2017 Win64
+    CMAKE_ARGS:
+    exiv2url: https://github.com/10110111/exiv2/releases/download/ver0.28.0-final/exiv2-0.28.0-2017msvc64.zip
+    exiv2baseName: exiv2-0.28.0-2017msvc64
+    scConverterEnabled: 0
   - BUILD_NAME: Win64 Qt5.15
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
     VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
@@ -77,6 +77,7 @@ before_build:
   - ps: if($env:QT_BASEDIR.contains('_64')) { $env:PKGARCH="x64" } else { $env:PKGARCH="x86" }
   - ps: if($env:QT_VERSION_MAJOR -eq "6") { $env:SSL="OpenSSL-" } else { $env:SSL="OpenSSL-1-" }
   - set PUBLISH_BINARY=false
+  - set USE_LIBGLES=false
   - set USE_EXT_LIBGLES=false
   - set SIGNING=false
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\Inno Setup 6
@@ -87,6 +88,7 @@ before_build:
   - ps: if($env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next" -or $env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { $env:USE_EXTRA_EXE = 'true' } else { $env:USE_EXTRA_EXE = 'false' }
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:QT_VERSION_MAJOR -eq "5") { $env:USE_EXT_LIBGLES = 'true' }
+  - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:BUILD_NAME.contains('Win')) { $env:USE_LIBGLES = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable" -and $env:QT_VERSION_MAJOR -eq "6") { $env:SIGNING = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable" -and $env:QT_VERSION_MAJOR -eq "5") { $env:SIGNING = 'true' }
   - ps: if($env:exiv2url -ne $null) { appveyor DownloadFile $env:exiv2url -FileName c:\$env:exiv2baseName.zip }
@@ -142,7 +144,7 @@ after_test:
   - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\sc-converter\Qt6Xml.dll c:\stellarium-package\bin\
   - if [%USE_EXT_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win%BITS%.zip -FileName c:\stellarium\build\libGLES.zip
   - if [%USE_EXT_LIBGLES%]==[true] 7z e c:\stellarium\build\libGLES.zip -aoa -oc:\stellarium-package\qtstuff
-  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-%PKGARCH%.dll -FileName c:\stellarium-package\qtstuff\opengl32sw.dll
+  - if [%USE_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-%PKGARCH%.dll -FileName c:\stellarium-package\qtstuff\opengl32sw.dll
   - if [%PUBLISH_BINARY%]==[true] if NOT [%exiv2url%] == [] copy c:\%exiv2baseName%\bin\exiv2.dll c:\stellarium-package\bin\
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-installer
   - if [%USE_EXTRA_EXE%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-patch-installer
