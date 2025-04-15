@@ -20,6 +20,7 @@
 #ifndef SKYCOORDS_HPP
 #define SKYCOORDS_HPP
 
+#include "StelUtils.hpp"
 #include <QPair>
 #include <QJsonArray>
 

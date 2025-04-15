@@ -66,10 +66,6 @@ QPair<double, double> SkyCoords::pixelToRaDec(int X, int Y,
 	double CD1_1, double CD1_2,
 	double CD2_1, double CD2_2)
 {
-	// Constants
-	const double D2R = M_PI / 180.0;  // Degree to radian
-	const double R2D = 180.0 / M_PI;  // Radian to degree
-
 	// Convert the reference values (RA, Dec) to radians
 	double RA0 = CRVAL1 * D2R;
 	double Dec0 = CRVAL2 * D2R;
@@ -120,7 +116,7 @@ QPair<double, double> SkyCoords::pixelToRaDec(int X, int Y,
 		}
 	}
 
-	lng = std::fmod(lng, 360.0);
+	lng = StelUtils::fmodpos(lng, 360.0);
 	if (lng < 0.0) {
 		lng += 360.0;
 	}
