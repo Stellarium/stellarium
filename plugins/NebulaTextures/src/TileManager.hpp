@@ -1,10 +1,20 @@
 /*
- * TileManager - manages sky image tiles for Stellarium NebulaTextures plugin
+ * Nebula Textures plug-in for Stellarium
  *
- * Handles loading, visibility, conflict resolution, and file cleanup
+ * Copyright (C) 2024-2025 WANG Siliang
  *
- * Copyright (C) 2025 WANG Siliang
- * Released under the GNU General Public License
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef TILEMANAGER_HPP
@@ -14,31 +24,32 @@
 #include "StelSkyImageTile.hpp"
 #include "TextureConfigManager.hpp"
 
-// 管理所有 tile 的加载、显示、冲突处理与图像文件操作
+//! Manages loading, visibility, conflict resolution, and file operations for sky tiles.
 class TileManager
 {
 public:
+	//! Constructor.
 	TileManager();
 
-	// 获取贴图图层（顶层）
+	//! Returns the top-level tile by key.
 	StelSkyImageTile* getTile(const QString& key);
 
-	// 设置贴图图层及其所有子贴图的可见性
+	//! Sets visibility for the specified tile and its subtiles.
 	bool setTileVisible(const QString& key, bool visible);
 
-	// 从配置文件加载贴图（自动插入）
+	//! Loads and inserts a tile from a configuration file.
 	bool insertTileFromConfig(const QString& configFilePath, const QString& texName, bool show = true);
 
-	// 从 SkyLayer 中移除图层
+	//! Removes a tile from the sky layer manager.
 	void removeTile(const QString& texName);
 
-	// 判断两个图层是否冲突（任意子贴图相交）
+	//! Checks if two tiles have overlapping subtiles.
 	bool hasConflict(StelSkyImageTile* tileA, StelSkyImageTile* tileB);
 
-	// 解决默认贴图与自定义贴图之间的区域冲突（隐藏重叠部分）
+	//! Hides default tile regions that overlap with custom tiles.
 	void resolveConflicts(const QString& defaultTexName, const QString& customTexName);
 
-	// 删除配置文件中所有 imageUrl 对应的图像文件
+	//! Deletes image files listed in the configuration.
 	void deleteImagesFromConfig(TextureConfigManager* configManager, const QString& pluginDir);
 };
 

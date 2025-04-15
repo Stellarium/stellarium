@@ -30,11 +30,13 @@
 
 #include <QDebug>
 
+// Returns a new instance of NebulaTextures module.
 StelModule* NebulaTexturesStelPluginInterface::getStelModule() const
 {
 	return new NebulaTextures();
 }
 
+// Provides plugin information, including metadata like ID, authors, description, version, and license.
 StelPluginInfo NebulaTexturesStelPluginInterface::getPluginInfo() const
 {
 	// Allow to load the resources when used as a static plugin
@@ -51,6 +53,7 @@ StelPluginInfo NebulaTexturesStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
+// Constructor for NebulaTextures module, initializes GUI and connects signals.
 NebulaTextures::NebulaTextures()
 {
 	setObjectName("NebulaTextures");
@@ -60,11 +63,13 @@ NebulaTextures::NebulaTextures()
 			SIGNAL(collectionLoaded()),configDialog,SLOT(initializeRefreshIfNeeded()));
 }
 
+// Destructor for NebulaTextures, cleaning up resources if necessary.
 NebulaTextures::~NebulaTextures()
 {
-	// delete configDialog;
+	// delete configDialog; // Resources are cleaned up automatically by Qt
 }
 
+// Configures the GUI, displaying the settings dialog if 'show' is true.
 bool NebulaTextures::configureGui(bool show)
 {
 	if (show)
@@ -72,46 +77,50 @@ bool NebulaTextures::configureGui(bool show)
 	return true;
 }
 
+// Returns the call order for the "Draw" action, used to determine when the module should be drawn.
 double NebulaTextures::getCallOrder(StelModuleActionName actionName) const
 {
-	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("NebulaMgr")->getCallOrder(actionName)+10.;
+	if (actionName == StelModule::ActionDraw)
+		return StelApp::getInstance().getModuleMgr().getModule("NebulaMgr")->getCallOrder(actionName) + 10.0;
 	return 0;
 }
 
+// Initializes actions, UI elements, and toolbar button for the NebulaTextures module.
 void NebulaTextures::init()
 {
 	// Create action for enable/disable & hook up signals
-	addAction("actionShow_NebulaTextures",        N_("Nebula Textures"), N_("Toggle Custom Nebula Textures"), "flagShow");
+	addAction("actionShow_NebulaTextures", N_("Nebula Textures"), N_("Toggle Custom Nebula Textures"), "flagShow");
 	addAction("actionShow_NebulaTextures_config_dialog", N_("Nebula Textures"), N_("Show settings dialog"), configDialog, "visible"); // no default hotkey
 
 	// Add a toolbar button
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		if (gui!=Q_NULLPTR)
+		if (gui != Q_NULLPTR)
 		{
 			StelButton* nebulaTexturesButton = new StelButton(Q_NULLPTR,
-								QPixmap(":/NebulaTextures/btNebulaTextures-on.png"),
-								QPixmap(":/NebulaTextures/btNebulaTextures-off.png"),
-								QPixmap(":/graphicGui/miscGlow32x32.png"),
-								"actionShow_NebulaTextures",
-								false,
-								"actionShow_NebulaTextures_config_dialog");
+				QPixmap(":/NebulaTextures/btNebulaTextures-on.png"),
+				QPixmap(":/NebulaTextures/btNebulaTextures-off.png"),
+				QPixmap(":/graphicGui/miscGlow32x32.png"),
+				"actionShow_NebulaTextures",
+				false,
+				"actionShow_NebulaTextures_config_dialog");
 			gui->getButtonBar()->addButton(nebulaTexturesButton, "065-pluginsGroup");
 		}
 	}
 	catch (std::runtime_error& e)
 	{
 		qWarning() << "[NebulaTextures] unable to manage toolbar buttons for NebulaTextures plugin!"
-				   << e.what();
+			<< e.what();
 	}
 }
 
+// Draw method for the NebulaTextures module. Currently, it does nothing.
 void NebulaTextures::draw(StelCore* core)
 {
 }
 
+// Sets whether custom textures should be shown and refreshes the texture display.
 void NebulaTextures::setShow(bool b)
 {
 	configDialog->setShowCustomTextures(b);
@@ -119,6 +128,7 @@ void NebulaTextures::setShow(bool b)
 	emit showChanged(b);
 }
 
+// Returns whether custom textures are currently displayed.
 bool NebulaTextures::getShow()
 {
 	return configDialog->getShowCustomTextures();

@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "PlateSolver.hpp"
 #include <QFile>
 #include <QFileInfo>
@@ -31,6 +32,14 @@
 
 #define API_URL "http://nova.astrometry.net/"
 
+/**
+ * @brief Constructs a PlateSolver instance.
+ *
+ * Initializes the network manager, timers, and connects internal slots
+ * for polling submission and job status from astrometry.net API.
+ *
+ * @param parent Optional QObject parent.
+ */
 PlateSolver::PlateSolver(QObject* parent)
 	: QObject(parent),
 	retryCount(0),
@@ -42,7 +51,14 @@ PlateSolver::PlateSolver(QObject* parent)
 	connect(jobStatusTimer, &QTimer::timeout, this, &PlateSolver::sendJobStatusRequest);
 }
 
-
+/**
+ * @brief Parses a WCS (World Coordinate System) text block into structured data.
+ *
+ * Extracts CRPIX, CRVAL, CD matrix, and image size parameters from the raw WCS string.
+ *
+ * @param wcsText Raw WCS text (typically from downloaded `.wcs` file).
+ * @return WcsResult Struct containing parsed values and a validity flag.
+ */
 WcsResult PlateSolver::parseWcsText(const QString& wcsText)
 {
 	WcsResult result;
@@ -72,12 +88,18 @@ WcsResult PlateSolver::parseWcsText(const QString& wcsText)
 		}
 	}
 
-	// 可增加基本有效性判断
 	result.valid = true;
 	return result;
 }
 
-
+/**
+ * @brief Starts the plate solving process using an API key and a local image file.
+ *
+ * Sends a login request, then proceeds to image upload and status polling.
+ *
+ * @param _apiKey Astrometry.net API key.
+ * @param _imagePath Path to the image file to be solved.
+ */
 void PlateSolver::startPlateSolving(const QString& _apiKey, const QString& _imagePath)
 {
 	apiKey = _apiKey;
@@ -86,6 +108,9 @@ void PlateSolver::startPlateSolving(const QString& _apiKey, const QString& _imag
 	sendLoginRequest();
 }
 
+/**
+ * @brief Cancels any ongoing network requests and status polling timers.
+ */
 void PlateSolver::cancel()
 {
 	for (QNetworkReply* reply : activeReplies)
@@ -99,6 +124,9 @@ void PlateSolver::cancel()
 	retryCount = 0;
 }
 
+/**
+ * @brief Sends the login request to astrometry.net using the API key.
+ */
 void PlateSolver::sendLoginRequest()
 {
 	QJsonObject json;
@@ -120,6 +148,11 @@ void PlateSolver::sendLoginRequest()
 	emit solvingStatusUpdated(q_("Sending login request..."));
 }
 
+/**
+ * @brief Handles the reply for the login request.
+ *
+ * Extracts the session ID or emits an error signal if login fails.
+ */
 void PlateSolver::onLoginReply()
 {
 	QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
@@ -146,6 +179,9 @@ void PlateSolver::onLoginReply()
 	sendUploadRequest();
 }
 
+/**
+ * @brief Uploads the image and JSON parameters to astrometry.net.
+ */
 void PlateSolver::sendUploadRequest()
 {
 	QFile imageFile(imagePath);
@@ -194,6 +230,11 @@ void PlateSolver::sendUploadRequest()
 	emit solvingStatusUpdated(q_("Uploading image..."));
 }
 
+/**
+ * @brief Handles the reply after the image upload.
+ *
+ * Starts polling submission status if successful.
+ */
 void PlateSolver::onUploadReply()
 {
 	QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
@@ -215,6 +256,12 @@ void PlateSolver::onUploadReply()
 	emit uploadSuccess();
 }
 
+/**
+ * @brief Sends a request to check the submission status using the submission ID.
+ *
+ * If a job ID is returned, it stops the submission polling timer and starts the job polling timer.
+ * Emits a status update with retry count.
+ */
 void PlateSolver::sendSubStatusRequest()
 {
 	QNetworkRequest request(QUrl(API_URL "api/submissions/" + subId));
@@ -227,6 +274,12 @@ void PlateSolver::sendSubStatusRequest()
 	emit solvingStatusUpdated(q_("Checking submission status") +QString(" (%1/%2)...").arg(retryCount + 1).arg(maxRetryCount));
 }
 
+/**
+ * @brief Handles the reply from the submission status request.
+ *
+ * If the job ID is received, begins polling the job status.
+ * Stops retrying if an error is returned or retries exceed the limit.
+ */
 void PlateSolver::onSubStatusReply()
 {
 	QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
@@ -258,6 +311,12 @@ void PlateSolver::onSubStatusReply()
 	}
 }
 
+/**
+ * @brief Sends a request to check the status of the current solving job.
+ *
+ * Uses the job ID obtained from the previous stage.
+ * Emits a status update with retry count.
+ */
 void PlateSolver::sendJobStatusRequest()
 {
 	QNetworkRequest request(QUrl(API_URL "api/jobs/" + jobId));
@@ -270,6 +329,12 @@ void PlateSolver::sendJobStatusRequest()
 	emit solvingStatusUpdated(q_("Checking job status") +QString(" (%1/%2)...").arg(retryCount + 1).arg(maxRetryCount));
 }
 
+/**
+ * @brief Handles the reply from the job status request.
+ *
+ * If the job succeeded, it proceeds to download the WCS result.
+ * If the job failed or an error occurred, stops polling and emits a failure signal.
+ */
 void PlateSolver::onJobStatusReply()
 {
 	QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
@@ -301,6 +366,11 @@ void PlateSolver::onJobStatusReply()
 	}
 }
 
+/**
+ * @brief Initiates the download of the WCS file from the completed job.
+ *
+ * Uses the job ID to construct the WCS file URL.
+ */
 void PlateSolver::downloadWcsFile()
 {
 	QNetworkRequest request(QUrl(API_URL "wcs_file/" + jobId));
@@ -309,6 +379,12 @@ void PlateSolver::downloadWcsFile()
 	connect(reply, &QNetworkReply::finished, this, &PlateSolver::onWcsDownloadReply);
 }
 
+/**
+ * @brief Handles the downloaded WCS file reply.
+ *
+ * If the file is successfully retrieved, emits the WCS data and a finished signal.
+ * Emits a failure signal if the download fails.
+ */
 void PlateSolver::onWcsDownloadReply()
 {
 	QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());

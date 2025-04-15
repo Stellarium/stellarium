@@ -46,9 +46,9 @@
 #include <QRegularExpression>
 #include <QStringList>
 
-/*
- * Constructor for the NebulaTexturesDialog class. Initializes the dialog, sets up
- * network management, and configures timers for periodic status checking.
+/**
+ * @brief Constructor for the NebulaTexturesDialog class.
+ * Initializes the dialog, sets up network management, and configures timers for periodic status checking.
  * Also loads nebula textures on initialization.
  */
 NebulaTexturesDialog::NebulaTexturesDialog()
@@ -69,6 +69,10 @@ NebulaTexturesDialog::NebulaTexturesDialog()
 	tmpCfgManager = new TextureConfigManager(StelFileMgr::getUserDir() + tmpcfgFile);
 }
 
+/**
+ * @brief Destructor for the NebulaTexturesDialog class.
+ * Cleans up UI and manager objects.
+ */
 NebulaTexturesDialog::~NebulaTexturesDialog()
 {
 	delete ui;
@@ -77,7 +81,9 @@ NebulaTexturesDialog::~NebulaTexturesDialog()
 	delete tmpCfgManager;
 }
 
-
+/**
+ * @brief Retranslates UI elements in response to a language change.
+ */
 void NebulaTexturesDialog::retranslate()
 {
 	if (dialog)
@@ -87,8 +93,8 @@ void NebulaTexturesDialog::retranslate()
 	}
 }
 
-/*
- * Set up the content and interactions of the NebulaTexturesDialog.
+/**
+ * @brief Set up the content and interactions of the NebulaTexturesDialog.
  * Configure UI elements, establish signal-slot connections,
  * and load necessary settings and data for the dialog.
  */
@@ -184,7 +190,10 @@ void NebulaTexturesDialog::createDialogContent()
 	ui->lineEditApiKey->setText(conf->value(NT_CONFIG_PREFIX + "/AstroMetry_Apikey", "").toString());
 }
 
-
+/**
+ * @brief Restore all plugin settings to their default values.
+ * This includes removing saved configuration files and resetting UI elements.
+ */
 void NebulaTexturesDialog::restoreDefaults()
 {
 	if (askConfirmation())
@@ -237,8 +246,8 @@ void NebulaTexturesDialog::restoreDefaults()
 		qDebug() << "[NebulaTextures] Restore defaults is canceled...";
 }
 
-/*
- * Set the HTML content for the "About" section in the dialog.
+/**
+ * @brief Set the HTML content for the "About" section in the dialog.
  */
 void NebulaTexturesDialog::setAboutHtml(void)
 {
@@ -269,10 +278,9 @@ void NebulaTexturesDialog::setAboutHtml(void)
 }
 
 
-/*
- * Toggle the enabled/disabled state of UI components based on the provided "freeze" flag.
- *
- * @param freeze  A boolean value indicating whether to disable (true) or enable (false) the UI elements.
+/**
+ * @brief Toggle the enabled/disabled state of UI components.
+ * @param freeze  A boolean indicating whether to disable (true) or enable (false) the UI.
  */
 void NebulaTexturesDialog::freezeUiState(bool freeze)
 {
@@ -284,12 +292,18 @@ void NebulaTexturesDialog::freezeUiState(bool freeze)
 	ui->cancelButton->setVisible(freeze);
 }
 
-// Update the status text displayed in the UI
+/**
+ * @brief Update the status message shown in the dialog.
+ * @param status The message to be displayed in the status text.
+ */
 void NebulaTexturesDialog::updateStatus(const QString &status)
 {
 	ui->statusText->setText(status);
 }
 
+/**
+ * @brief Trigger a refresh of textures if the refresh count is within the allowed limit.
+ */
 void NebulaTexturesDialog::initializeRefreshIfNeeded()
 {
 	if(refreshCount < refreshLimit){
@@ -298,7 +312,9 @@ void NebulaTexturesDialog::initializeRefreshIfNeeded()
 	}
 }
 
-
+/**
+ * @brief Open a file dialog to allow the user to select an image file.
+ */
 void NebulaTexturesDialog::openImageFile()
 {
 	QString fileName = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Open Image"), QDir::homePath(), tr("Images (*.png *.jpg *.gif *.tif *.tiff *.jpeg)"));
@@ -309,6 +325,9 @@ void NebulaTexturesDialog::openImageFile()
 	}
 }
 
+/**
+ * @brief Cancel the current plate solving operation.
+ */
 void NebulaTexturesDialog::cancelSolve()
 {
 	if (plateSolver) {
@@ -318,7 +337,11 @@ void NebulaTexturesDialog::cancelSolve()
 	freezeUiState(false);
 }
 
-
+/**
+ * @brief Start solving the selected image via Astrometry.net.
+ * This sends the image to the API and handles the plate solving process.
+ * @warning The image should not be flipped horizontally or vertically.
+ */
 void NebulaTexturesDialog::solveImage() // WARN: image should not be flip
 {
 	QString apiKey = ui->lineEditApiKey->text();
@@ -352,7 +375,10 @@ void NebulaTexturesDialog::solveImage() // WARN: image should not be flip
 	return;
 }
 
-
+/**
+ * @brief Apply the WCS (World Coordinate System) solution to the UI and internal state.
+ * @param wcsText The WCS data string returned from Astrometry.net.
+ */
 void NebulaTexturesDialog::applyWcsSolution(const QString& wcsText)
 {
 
@@ -411,7 +437,12 @@ void NebulaTexturesDialog::applyWcsSolution(const QString& wcsText)
 	updateStatus(q_("Processing completed! Goto Center Point, Try to Render, Check and Add to Local Storage."));
 }
 
-
+/**
+ * @brief Moves the view to the coordinates specified in the "Center Coord" input fields.
+ *
+ * Uses Right Ascension and Declination (RA/Dec) values to calculate a J2000 position
+ * and moves the Stellarium viewport to it.
+ */
 void NebulaTexturesDialog::moveToCenterCoord()
 {
 	centerRA = ui->referX->value();
@@ -439,6 +470,12 @@ void NebulaTexturesDialog::moveToCenterCoord()
 	// mvmgr->setFlagLockEquPos(useLockPosition);
 }
 
+/**
+ * @brief Restores the previously solved WCS corner coordinates to the UI fields.
+ *
+ * Only effective if WCS solving has been done.
+ * Prompts the user for confirmation before overwriting current values.
+ */
 void NebulaTexturesDialog::recoverSolvedCorners()
 {
 	if(isWcsSolved && askConfirmation("Are you sure to recover the solution?"))
@@ -457,7 +494,12 @@ void NebulaTexturesDialog::recoverSolvedCorners()
 	}
 }
 
-// Toggle the rendering state of the temporary texture
+/**
+ * @brief Toggles the visibility of the temporary texture preview.
+ *
+ * If a temporary texture is already shown, it will be removed.
+ * Otherwise, the currently selected image will be rendered on the sky.
+ */
 void NebulaTexturesDialog::toggleTempTexturePreview()
 {
 	if (isTempTextureVisible) {
@@ -473,7 +515,11 @@ void NebulaTexturesDialog::toggleTempTexturePreview()
 		ui->renderButton->setText(q_("Test this texture"));
 }
 
-// Toggle the visibility of the default texture when testing temp texture rendering
+/**
+ * @brief Toggles the visibility of the default texture layer when a temporary texture is shown.
+ *
+ * Only takes effect if a temporary texture is currently visible.
+ */
 void NebulaTexturesDialog::toggleDefaultTextureVisibility()
 {
 	if(!isTempTextureVisible)
@@ -486,14 +532,24 @@ void NebulaTexturesDialog::toggleDefaultTextureVisibility()
 	}
 }
 
-// Redo rendering when toggling Brightness Change
+/**
+ * @brief Refreshes and re-renders the temporary texture when the brightness level is changed.
+ *
+ * This is triggered by a brightness selection combo box.
+ * @param index The index of the selected brightness level.
+ */
 void NebulaTexturesDialog::updateBrightnessLevel(int index)
 {
 	if(isTempTextureVisible)
 		showTempTexturePreview();
 }
 
-
+/**
+ * @brief Loads and displays the currently selected image as a temporary texture.
+ *
+ * Copies the selected image (if needed), updates temporary config, and renders it.
+ * May hide the default texture if requested.
+ */
 void NebulaTexturesDialog::showTempTexturePreview()
 {
 	QString imagePath = ui->lineEditImagePath->text();
@@ -523,7 +579,11 @@ void NebulaTexturesDialog::showTempTexturePreview()
 	}
 }
 
-
+/**
+ * @brief Re-renders the temporary texture using the latest coordinate and brightness settings.
+ *
+ * Only takes effect if a temporary texture is currently visible.
+ */
 void NebulaTexturesDialog::refreshTempTexturePreview()
 {
 	if(isTempTextureVisible)
@@ -538,14 +598,20 @@ void NebulaTexturesDialog::refreshTempTexturePreview()
 	}
 }
 
-
+/**
+ * @brief Displays the "Recover Coordinates" button if WCS solving has succeeded.
+ */
 void NebulaTexturesDialog::showRecoverCoordsButton()
 {
 	if(isWcsSolved)
 		ui->recoverCoordsButton->setVisible(true);
 }
 
-
+/**
+ * @brief Removes the temporary texture from the sky.
+ *
+ * Restores visibility of the default texture and refreshes the texture layers.
+ */
 void NebulaTexturesDialog::removeTempTexturePreview()
 {
 	if(!isTempTextureVisible)
@@ -556,7 +622,12 @@ void NebulaTexturesDialog::removeTempTexturePreview()
 	refreshTextures();
 }
 
-
+/**
+ * @brief Adds the current image and coordinates as a custom texture to config.
+ *
+ * Prompts for user confirmation before modifying persistent configuration.
+ * Changes only take effect after restarting Stellarium.
+ */
 void NebulaTexturesDialog::addCustomTexture()
 {
 	if(!askConfirmation("Caution! Are you sure to add this texture? It will only take effect after restarting Stellarium."))
@@ -565,7 +636,14 @@ void NebulaTexturesDialog::addCustomTexture()
 	addTexture(configFile, CUSTOM_TEXNAME);
 }
 
-
+/**
+ * @brief Adds a texture entry to the given configuration file.
+ *
+ * Copies the image, builds coordinate data, and writes it to a JSON config manager.
+ *
+ * @param cfgPath Path to the JSON configuration file (relative to user dir).
+ * @param groupName Texture group name (e.g., test or custom).
+ */
 void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 {
 	QString imagePath = ui->lineEditImagePath->text();
@@ -595,6 +673,15 @@ void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 	updateStatus(q_("Importing custom textures successfully!"));
 }
 
+/**
+ * @brief Copies the image to the plugin directory with a unique timestamped filename.
+ *
+ * Also updates the internal tracking path for source and destination, depending on texture type.
+ *
+ * @param imagePath Path to the original image.
+ * @param groupName Texture group name (test or custom).
+ * @return The relative path (URL) to the copied image within the plugin folder, or empty if failed.
+ */
 QString NebulaTexturesDialog::ensureImageCopied(const QString& imagePath, const QString& groupName)
 {
 	if (imagePath.isEmpty()) {
@@ -643,7 +730,11 @@ QString NebulaTexturesDialog::ensureImageCopied(const QString& imagePath, const 
 	return imageUrl;
 }
 
-
+/**
+ * @brief Removes the currently selected texture from the config and deletes its image file.
+ *
+ * Prompts the user for confirmation. If successful, removes from both config and UI list.
+ */
 void NebulaTexturesDialog::removeTexture()
 {
 	QListWidgetItem* selectedItem = ui->listWidget->currentItem();
@@ -665,7 +756,9 @@ void NebulaTexturesDialog::removeTexture()
 	}
 }
 
-
+/**
+ * @brief Reloads all custom texture entries and populates the texture list widget.
+ */
 void NebulaTexturesDialog::reloadData()
 {	
 	refreshTextures();
@@ -687,7 +780,12 @@ void NebulaTexturesDialog::reloadData()
 	}
 }
 
-
+/**
+ * @brief Sets the visibility of the custom and default textures based on current UI state.
+ *
+ * If "show custom" is disabled, only the default texture is shown.
+ * If area conflict avoidance is enabled, conflicts will be resolved.
+ */
 void NebulaTexturesDialog::refreshTextures()
 {
 	bool showCustom = getShowCustomTextures();
@@ -704,7 +802,13 @@ void NebulaTexturesDialog::refreshTextures()
 	}
 }
 
-
+/**
+ * @brief Moves the view to center on the texture selected in the list widget.
+ *
+ * Extracts RA/Dec from the texture's stored world coordinates, and navigates to it.
+ *
+ * @param item The selected list item representing a custom texture.
+ */
 void NebulaTexturesDialog::gotoSelectedItem(QListWidgetItem* item)
 {
 	if (!item) return;

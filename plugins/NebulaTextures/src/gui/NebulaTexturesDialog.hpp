@@ -56,147 +56,157 @@ public:
 	//! Destructor
 	~NebulaTexturesDialog() override;
 
-	// Only trigger refresh when the textures are initially loaded on screen (including both default and custom, twice) to avoid conflicts
+	//! Only trigger refresh when the textures are initially loaded on screen
+	//! (including both default and custom, twice) to avoid conflicts
 	int refreshCount, refreshLimit;
 
 public slots:
+	//! Retranslate UI components based on current language settings
 	void retranslate() override;
 
-	//! refresh when textures painted on screen
+	//! Refresh textures when they are painted on screen
 	void initializeRefreshIfNeeded();
 
-
-	//! Reload texture configuration data
+	//! Reload texture configuration data from disk
 	void reloadData();
+
 	//! Refresh textures and manage their visibility
 	void refreshTextures();
 
 	//! Get the value for showing custom textures
-	bool getShowCustomTextures(){return conf->value(NT_CONFIG_PREFIX + "/showCustomTextures", false).toBool();}
+	bool getShowCustomTextures() { return conf->value(NT_CONFIG_PREFIX + "/showCustomTextures", false).toBool(); }
+
 	//! Set the value for showing custom textures
-	void setShowCustomTextures(bool b) {conf->setValue(NT_CONFIG_PREFIX + "/showCustomTextures", b);}
+	void setShowCustomTextures(bool b) { conf->setValue(NT_CONFIG_PREFIX + "/showCustomTextures", b); }
 
 	//! Get the value for avoiding area conflicts
-	bool getAvoidAreaConflict(){return conf->value(NT_CONFIG_PREFIX + "/avoidAreaConflict", false).toBool();}
-	//! Set the value for avoiding area conflicts
-	void setAvoidAreaConflict(bool b){conf->setValue(NT_CONFIG_PREFIX + "/avoidAreaConflict", b); refreshTextures();}
+	bool getAvoidAreaConflict() { return conf->value(NT_CONFIG_PREFIX + "/avoidAreaConflict", false).toBool(); }
+
+	//! Set the value for avoiding area conflicts and refresh textures
+	void setAvoidAreaConflict(bool b) { conf->setValue(NT_CONFIG_PREFIX + "/avoidAreaConflict", b); refreshTextures(); }
 
 protected:
 	//! Set up the content and interactions of the NebulaTexturesDialog
 	void createDialogContent() override;
 
 private slots:
+	//! Restore default settings for the dialog
 	void restoreDefaults();
-
 
 	//! Open a file dialog to select an image file
 	void openImageFile();
 
-	//! Solve an image online
+	//! Solve an image online using plate-solving
 	void solveImage();
 
-	//! Cancel image solving
+	//! Cancel the image solving process
 	void cancelSolve();
 
-	//! Recover image coords from plate-solving
+	//! Recover image coordinates from plate-solving solution
 	void recoverSolvedCorners();
 
-	//! Goto the center coordinates (RA and Dec) of texture
+	//! Move view to the center coordinates (RA, Dec) of the texture
 	void moveToCenterCoord();
 
-	//! toggle temporary texture render testing
+	//! Toggle temporary texture render testing for debugging
 	void toggleTempTexturePreview();
 
-	//! toggle showing default texture when testing temporary texture rendering
+	//! Toggle visibility of the default texture when testing temporary texture rendering
 	void toggleDefaultTextureVisibility();
 
-	//! toggle brightness change to render again
+	//! Update brightness level of the texture rendering
 	void updateBrightnessLevel(int index);
 
 	//! Add the texture to the custom textures configuration
 	void addCustomTexture();
 
+	//! Refresh temporary texture preview for debugging
 	void refreshTempTexturePreview();
-	//! update temporary texture rendering for debugging
+
+	//! Update temporary texture rendering for debugging
 	void showRecoverCoordsButton();
 
-	//! Goto center of the selected image in list view
+	//! Move view to the center of the selected image in the list view
 	void gotoSelectedItem(QListWidgetItem* item);
 
-	//! Remove the selected texture from the list and deletes the associated image file
+	//! Remove the selected texture from the list and delete the associated image file
 	void removeTexture();
 
 private:
+	//! UI components for the dialog
 	Ui_nebulaTexturesDialog* ui;
 
-	// Pointer to QSettings
+	//! Pointer to the QSettings used for storing configuration
 	QSettings* conf;
 
+	//! Progress bar controller for long operations
 	class StelProgressController* progressBar;
 
-
-	// Control image copying when adding texture, avoiding frequent file io
+	//! Control image copying when adding texture, avoiding frequent file I/O
 	QString imagePath_src, imagePath_dst, imagePathTemp_src, imagePathTemp_dst;
 
+	//! Plate solver for solving image coordinates
 	PlateSolver* plateSolver;
 
+	//! Tile manager for handling texture tiles
 	TileManager* tileManager;
 
+	//! Configuration manager for custom textures
 	TextureConfigManager* configManager;
 
+	//! Temporary configuration manager for temporary textures
 	TextureConfigManager* tmpCfgManager;
 
-
-	// Flag for online plate-solving
+	//! Flag for online plate-solving
 	bool isWcsSolved;
 
-	// Calibration parameters for the image (CRPIX, CRVAL, CD values)
+	//! Calibration parameters for the image (CRPIX, CRVAL, CD values)
 	double CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2;
 
-	// Image width and height values
+	//! Image width and height values
 	int imageWidth, imageHeight;
 
-	// Right Ascension and Declination for the four corners of the images (by plate-solved.)
+	//! Right Ascension and Declination for the four corners of the images (by plate-solved)
 	double topLeftRA, topLeftDec, bottomLeftRA, bottomLeftDec;
 	double topRightRA, topRightDec, bottomRightRA, bottomRightDec;
 
-	// Reference Right Ascension and Declination for the image center
+	//! Reference Right Ascension and Declination for the image center
 	double centerRA, centerDec;
 
-	// Directory path where plugin-related files are stored
-	QString pluginDir  = "/modules/NebulaTextures/";
+	//! Directory path where plugin-related files are stored
+	QString pluginDir = "/modules/NebulaTextures/";
 
-	// Path to the custom textures configuration file
+	//! Path to the custom textures configuration file
 	QString configFile = "/modules/NebulaTextures/custom_textures.json";
 
-	// Path to the temporary textures configuration file
+	//! Path to the temporary textures configuration file
 	QString tmpcfgFile = "/modules/NebulaTextures/temp_textures.json";
 
-	// Flag indicating whether to render temporary textures
+	//! Flag indicating whether to render temporary textures
 	bool isTempTextureVisible;
 
-
-
-	//! Process WCS of image
+	//! Process WCS (World Coordinate System) of the image
 	void applyWcsSolution(const QString& wcsText);
 
-	//! Add the texture to configuration, need to specify the texture groupname
+	//! Add the texture to configuration, specifying the texture group name
 	void addTexture(QString cfgPath, QString groupName);
 
+	//! Ensure the image is copied correctly before adding to configuration
 	QString ensureImageCopied(const QString& imagePath, const QString& groupName);
 
-	//! Temporary texture rendering for debugging
+	//! Show temporary texture preview for debugging
 	void showTempTexturePreview();
-	//! Cancel temporary texture rendering for debugging
+
+	//! Remove temporary texture preview for debugging
 	void removeTempTexturePreview();
 
 	//! Set the HTML content for the "About" section in the dialog
 	void setAboutHtml();
 
 	//! Update the status text displayed in the UI
-	void updateStatus(const QString &status);
+	void updateStatus(const QString& status);
 
-	//! Toggle the enabled/disabled freezing state of UI components
+	//! Freeze or unfreeze the UI components for interaction
 	void freezeUiState(bool freeze);
 };
 

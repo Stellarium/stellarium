@@ -1,3 +1,22 @@
+/*
+ * Nebula Textures plug-in for Stellarium
+ *
+ * Copyright (C) 2024-2025 WANG Siliang
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "SkyCoords.hpp"
 #include <QtMath>
 #include <QDebug>
@@ -124,9 +143,21 @@ QPair<double, double> SkyCoords::pixelToRaDec(int X, int Y,
 	return qMakePair(lng, lat);
 }
 
+/**
+ * @brief Calculates the central RA/Dec coordinate from a list of corner sky coordinates.
+ *
+ * The input is a JSON array of [RA, Dec] pairs (in degrees).
+ * Each pair is converted to 3D Cartesian coordinates on the unit sphere.
+ * The average vector is normalized and converted back to spherical coordinates (RA/Dec).
+ *
+ * @param corners A QJsonArray of arrays, where each sub-array contains two doubles: [RA, Dec] in degrees.
+ * @return QPair<double, double> The computed center coordinates as (RA, Dec) in degrees.
+ */
 QPair<double, double> SkyCoords::calculateCenter(const QJsonArray& corners)
 {
 	const int N = corners.size();
+
+	// Check for empty input
 	if (N < 1) {
 		qWarning() << "[SkyCoords] Empty or invalid corners array.";
 		return qMakePair(0.0, 0.0);
@@ -134,6 +165,7 @@ QPair<double, double> SkyCoords::calculateCenter(const QJsonArray& corners)
 
 	double sum_x = 0.0, sum_y = 0.0, sum_z = 0.0;
 
+	// Convert each (RA, Dec) to Cartesian coordinates and accumulate
 	for (const QJsonValue& val : corners)
 	{
 		if (!val.isArray() || val.toArray().size() != 2) {
@@ -142,9 +174,10 @@ QPair<double, double> SkyCoords::calculateCenter(const QJsonArray& corners)
 		}
 
 		QJsonArray coord = val.toArray();
-		double ra  = coord[0].toDouble() * D2R;
-		double dec = coord[1].toDouble() * D2R;
+		double ra  = coord[0].toDouble() * D2R; // Convert RA to radians
+		double dec = coord[1].toDouble() * D2R; // Convert Dec to radians
 
+		// Spherical to Cartesian
 		double x = cos(dec) * cos(ra);
 		double y = cos(dec) * sin(ra);
 		double z = sin(dec);
@@ -154,11 +187,13 @@ QPair<double, double> SkyCoords::calculateCenter(const QJsonArray& corners)
 		sum_z += z;
 	}
 
+	// Check for degenerate vector
 	if (sum_x == 0.0 && sum_y == 0.0 && sum_z == 0.0) {
 		qWarning() << "[SkyCoords] Zero vector sum; cannot compute center.";
 		return qMakePair(0.0, 0.0);
 	}
 
+	// Normalize the average vector
 	double avg_x = sum_x / N;
 	double avg_y = sum_y / N;
 	double avg_z = sum_z / N;
@@ -173,6 +208,7 @@ QPair<double, double> SkyCoords::calculateCenter(const QJsonArray& corners)
 	avg_y /= norm;
 	avg_z /= norm;
 
+	// Convert back to spherical coordinates (RA in [0, 360), Dec in degrees)
 	double ra_center  = fmod(R2D * atan2(avg_y, avg_x) + 360.0, 360.0);
 	double dec_center = R2D * asin(avg_z);
 
