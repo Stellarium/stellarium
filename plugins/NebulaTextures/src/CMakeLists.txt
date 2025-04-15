@@ -15,6 +15,12 @@ SET(NebulaTextures_SRCS
      gui/NebulaTexturesDialog.cpp
      PlateSolver.hpp
      PlateSolver.cpp
+     TextureConfigManager.hpp
+     TextureConfigManager.cpp
+     SkyCoords.hpp
+     SkyCoords.cpp
+     TileManager.hpp
+     TileManager.cpp
 )
 
 SET(NebulaTextures_UIS

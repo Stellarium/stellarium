@@ -64,12 +64,17 @@ NebulaTexturesDialog::NebulaTexturesDialog()
 	ui = new Ui_nebulaTexturesDialog();
 
 	plateSolver = new PlateSolver(this);
-
+	tileManager = new TileManager();
+	configManager = new TextureConfigManager(StelFileMgr::getUserDir() + configFile);
+	tmpCfgManager = new TextureConfigManager(StelFileMgr::getUserDir() + tmpcfgFile);
 }
 
 NebulaTexturesDialog::~NebulaTexturesDialog()
 {
 	delete ui;
+	delete plateSolver;
+	delete configManager;
+	delete tmpCfgManager;
 }
 
 
@@ -178,7 +183,9 @@ void NebulaTexturesDialog::restoreDefaults()
 		qDebug() << "[NebulaTextures] Restore defaults...";
 		// GETSTELMODULE(NebulaTextures)->restoreDefaultSettings();
 
-		deleteImagesFromCfg(configFile);
+		// deleteImagesFromCfg(configFile);
+		tileManager->deleteImagesFromConfig(configManager, pluginDir);
+
 		QString cfgPath = StelFileMgr::getUserDir() + configFile;
 		if (QFile::exists(cfgPath)) {
 			if (QFile::remove(cfgPath)) {
@@ -188,7 +195,8 @@ void NebulaTexturesDialog::restoreDefaults()
 			}
 		}
 
-		deleteImagesFromCfg(tmpcfgFile);
+		// deleteImagesFromCfg(tmpcfgFile);
+		tileManager->deleteImagesFromConfig(tmpCfgManager, pluginDir);
 		cfgPath = StelFileMgr::getUserDir() + tmpcfgFile;
 		if (QFile::exists(cfgPath)) {
 			if (QFile::remove(cfgPath)) {
@@ -203,11 +211,9 @@ void NebulaTexturesDialog::restoreDefaults()
 
 		ui->lineEditApiKey->setText("");
 		conf->setValue(NT_CONFIG_PREFIX + "/AstroMetry_Apikey", "");
-
 		ui->lineEditImagePath->setText("");
 		ui->referX->setValue(0);
 		ui->referY->setValue(0);
-
 		ui->topLeftX->setValue(0);
 		ui->topLeftY->setValue(0);
 		ui->bottomLeftX->setValue(0);
@@ -216,7 +222,6 @@ void NebulaTexturesDialog::restoreDefaults()
 		ui->topRightY->setValue(0);
 		ui->bottomRightX->setValue(0);
 		ui->bottomRightY->setValue(0);
-
 		ui->listWidget->clear();
 	}
 	else
@@ -397,28 +402,28 @@ void NebulaTexturesDialog::processWcsContent(const QString& wcsText)
 
 	QPair<double, double> result;
 	int X=0,Y=0;
-	result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+	result = SkyCoords::pixelToRaDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
 	topLeftRA = result.first;
 	topLeftDec = result.second;
 	ui->topLeftX->setValue(topLeftRA);
 	ui->topLeftY->setValue(topLeftDec);
 
 	X = 0, Y = IMAGEH - 1;
-	result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+	result = SkyCoords::pixelToRaDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
 	bottomLeftRA = result.first;
 	bottomLeftDec = result.second;
 	ui->bottomLeftX->setValue(bottomLeftRA);
 	ui->bottomLeftY->setValue(bottomLeftDec);
 
 	X = IMAGEW - 1, Y = 0;
-	result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+	result = SkyCoords::pixelToRaDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
 	topRightRA = result.first;
 	topRightDec = result.second;
 	ui->topRightX->setValue(topRightRA);
 	ui->topRightY->setValue(topRightDec);
 
 	X = IMAGEW - 1, Y = IMAGEH - 1;
-	result = PixelToCelestial(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
+	result = SkyCoords::pixelToRaDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
 	bottomRightRA = result.first;
 	bottomRightDec = result.second;
 	ui->bottomRightX->setValue(bottomRightRA);
@@ -427,125 +432,6 @@ void NebulaTexturesDialog::processWcsContent(const QString& wcsText)
 	solvedFlag = true;
 	freezeUiState(false);
 	updateStatus(q_("Processing completed! Goto Center Point, Try to Render, Check and Add to Local Storage."));
-}
-
-
-/*
- * Convert pixel coordinates (X, Y) on an image to celestial coordinates (RA, Dec) using the World Coordinate System (WCS) parameters.
- * Apply a series of transformations to convert pixel-based coordinates into the corresponding celestial coordinates,
- * taking into account the reference coordinates, rotation matrix, and other transformation parameters.
- *
- * Parameters:
- *   - X, Y: The pixel coordinates in the image.
- *   - CRPIX1, CRPIX2: The reference pixel coordinates (the center of the image).
- *   - CRVAL1, CRVAL2: The celestial coordinates (right ascension and declination) corresponding to the reference pixel.
- *   - CD1_1, CD1_2, CD2_1, CD2_2: The linear transformation matrix elements that map pixel coordinates to celestial coordinates.
- *
- * Returns:
- *   - A QPair containing the longitude and latitude corresponding to the input pixel coordinates.
- *
- * * * * * * * * * * * * * * * * * * * *
- *
- * This function is based on the algorithm and approach from the code licensed under the Apache License, Version 2.0.
- * The original code can be found at:
- * https://github.com/PlanetaryResources/NTL-Asteroid-Data-Hunter/blob/master/Algorithms/Algorithm%20%231/alg1_psyho.h
- *
- * Copyright (C) [Year] [Original Authors].
- *
- * The function implementation is rewritten based on the logic and approach of the original code,
- * but the code itself has been modified and is not directly copied.
- *
- * The code in this function is used under the terms of the Apache License, Version 2.0.
- * You may not use the original code except in compliance with the License.
- * You may obtain a copy of the License at:
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied. See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * If you modified this code, include a description of the changes made below:
- * [Optional: Describe any modifications made]
- */
-QPair<double, double> NebulaTexturesDialog::PixelToCelestial(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2,
-						double CD1_1, double CD1_2, double CD2_1, double CD2_2){
-	// Constants
-	const double D2R = M_PI / 180.0;  // Degree to radian
-	const double R2D = 180.0 / M_PI;  // Radian to degree
-
-	// Convert the reference values (RA, Dec) to radians
-	double RA0 = CRVAL1 * D2R;
-	double Dec0 = CRVAL2 * D2R;
-
-	// Calculate dx and dy
-	double dx = X - CRPIX1;
-	double dy = Y - CRPIX2;
-
-	// Calculate xx and yy
-	double xx = CD1_1 * dx + CD1_2 * dy;
-	double yy = CD2_1 * dx + CD2_2 * dy;
-
-	// Calculate the celestial coordinates
-	double px = std::atan2(xx, -yy) * R2D;
-	double py = std::atan2(R2D, std::sqrt(xx * xx + yy * yy)) * R2D;
-
-	// Calculate sin(Dec) and cos(Dec)
-	double sin_dec = std::sin(D2R * (90.0 - CRVAL2));
-	double cos_dec = std::cos(D2R * (90.0 - CRVAL2));
-
-	// Calculate longitude offset (dphi)
-	double dphi = px - 180.0;
-
-	// Calculate celestial longitude and latitude
-	double sinthe = std::sin(py * D2R);
-	double costhe = std::cos(py * D2R);
-	double costhe3 = costhe * cos_dec;
-	double costhe4 = costhe * sin_dec;
-	double sinthe3 = sinthe * cos_dec;
-	double sinthe4 = sinthe * sin_dec;
-	double sinphi = std::sin(dphi * D2R);
-	double cosphi = std::cos(dphi * D2R);
-
-	// Calculate celestial longitude
-	double x = sinthe4 - costhe3 * cosphi;
-	double y = -costhe * sinphi;
-	double dlng = R2D * std::atan2(y, x);
-	double lng = CRVAL1 + dlng;
-
-	// Normalize the celestial longitude
-	if (CRVAL1 >= 0.0) {
-		if (lng < 0.0) {
-			lng += 360.0;
-		}
-	} else {
-		if (lng > 0.0) {
-			lng -= 360.0;
-		}
-	}
-
-	lng = std::fmod(lng, 360.0);
-	if (lng < 0.0) {
-		lng += 360.0;
-	}
-
-	// Calculate celestial latitude
-	double z = sinthe3 + costhe4 * cosphi;
-	double lat;
-	if (std::abs(z) > 0.99) {
-		// For higher precision, use an alternative formula
-		if (z < 0.0) {
-			lat = -std::abs(R2D * std::acos(std::sqrt(x * x + y * y)));
-		} else {
-			lat = std::abs(R2D * std::acos(std::sqrt(x * x + y * y)));
-		}
-	} else {
-		lat = R2D * std::asin(z);
-	}
-
-	// Return the result as a QPair of doubles
-	return QPair<double, double>(lng, lat);
 }
 
 
@@ -625,9 +511,9 @@ void NebulaTexturesDialog::toggleDisableDefaultTexture()
 	if(!flag_renderTempTex)
 		return;
 	if(ui->disableDefault->isChecked())
-		setTexturesVisible(DEFAULT_TEXNAME, false);
+		tileManager->setTileVisible(DEFAULT_TEXNAME, false);
 	else{
-		setTexturesVisible(DEFAULT_TEXNAME, true);
+		tileManager->setTileVisible(DEFAULT_TEXNAME, true);
 		refreshTextures();
 	}
 }
@@ -651,56 +537,37 @@ void NebulaTexturesDialog::onBrightnessChanged(int index)
  */
 void NebulaTexturesDialog::renderTempCustomTexture()
 {
-	QString path = StelFileMgr::getUserDir()+tmpcfgFile;
-
 	QString imagePath = ui->lineEditImagePath->text();
-	if(imagePath != imagePathTemp_src)
-	{
-		if (imagePath.isEmpty()) {
-			qWarning() << "[NebulaTextures] Image path is empty.";
-			updateStatus(q_("Image path is empty."));
-			return;
-		}
 
-		QFileInfo fileInfo(imagePath);
-		if (!fileInfo.exists()) {
-			updateStatus(q_("The specified image file does not exist."));
-			return;
-		}
-		if (!fileInfo.isReadable()) {
-			updateStatus(q_("The specified image file is not readable."));
-			return;
-		}
-		QString suffix = fileInfo.suffix().toLower();
-		QStringList allowedSuffixes = {"png", "jpg", "gif", "tif", "tiff", "jpeg"};
-		if (!allowedSuffixes.contains(suffix)) {
-			updateStatus(q_("Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."));
-			return;
-		}
-		deleteImagesFromCfg(tmpcfgFile);
+	// clean outtime image if select new
+	if (imagePath != imagePathTemp_src) {
+		QString copiedName = ensureImageCopied(imagePath, TEST_TEXNAME);
+		if (copiedName.isEmpty()) return;  // error
+
+		// deleteImagesFromCfg(tmpcfgFile);  // delete outtime image
+		tileManager->deleteImagesFromConfig(tmpCfgManager, pluginDir);
 	}
 
-	// updateStatus(q_("Rendering..."));
-
+	// add test texture
 	addTexture(tmpcfgFile, TEST_TEXNAME);
 
-	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-
-	if (path.isEmpty()){
-		qWarning() << "[NebulaTextures] Error while loading nebula texture.";
-		// updateStatus(q_("Rendering failed."));
+	// load test texture
+	const QString fullPath = StelFileMgr::getUserDir() + tmpcfgFile;
+	if (fullPath.isEmpty()) {
+		qWarning() << "[NebulaTextures] Failed to resolve config path.";
+		return;
 	}
-	else{
-		if(flag_renderTempTex){
-			StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-			skyLayerMgr->removeSkyLayer(TEST_TEXNAME);
-		}
 
-		skyLayerMgr->insertSkyImage(path, QString(), true, 1);
-		flag_renderTempTex = true;
+	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+	if (flag_renderTempTex) {
+		skyLayerMgr->removeSkyLayer(TEST_TEXNAME);
+	}
 
-		if(ui->disableDefault->isChecked())
-			setTexturesVisible(DEFAULT_TEXNAME, false);
+	skyLayerMgr->insertSkyImage(fullPath, QString(), true, 1);
+	flag_renderTempTex = true;
+
+	if (ui->disableDefault->isChecked()) {
+		tileManager->setTileVisible(DEFAULT_TEXNAME, false);
 	}
 }
 
@@ -738,81 +605,8 @@ void NebulaTexturesDialog::unRenderTempCustomTexture()
 	skyLayerMgr->removeSkyLayer(TEST_TEXNAME);
 
 	flag_renderTempTex = false;
-	setTexturesVisible(DEFAULT_TEXNAME, true);
+	tileManager->setTileVisible(DEFAULT_TEXNAME, true);
 	refreshTextures();
-}
-
-
-/*
- * Delete the images listed in the given configuration file.
- *
- * Steps:
- *   - Open the given configuration file and read the JSON data.
- *   - Loop through each subTile to extract the "imageUrl".
- *   - Delete the file corresponding to each "imageUrl" if it exists.
- *   - Log the process and update the UI.
- *
- * @param cfgFile The path to the configuration file.
- */
-void NebulaTexturesDialog::deleteImagesFromCfg(const QString& cfgFile)
-{
-	QString cfgFilePath = StelFileMgr::getUserDir() + cfgFile;
-
-	QFile jsonFile(cfgFilePath);
-
-	if (!jsonFile.exists()) {
-		qWarning() << "[NebulaTextures] JSON file does not exist:" << cfgFilePath;
-		ui->listWidget->clear();
-		return;
-	}
-
-	if (!jsonFile.open(QIODevice::ReadOnly)) {
-		qWarning() << "[NebulaTextures] Failed to open JSON file for reading:" << cfgFilePath;
-		// updateStatus(q_("Failed to open Configuration File!"));
-		return;
-	}
-
-	QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
-	jsonFile.close();
-
-	if (!jsonDoc.isObject()) {
-		qWarning() << "[NebulaTextures] Invalid JSON structure in file:" << cfgFilePath;
-		// updateStatus(q_("Invalid JSON structure in Configuration File!"));
-		return;
-	}
-
-	QJsonObject rootObject = jsonDoc.object();
-	if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()) {
-		qWarning() << "[NebulaTextures] No 'subTiles' array found in JSON file:" << cfgFilePath;
-		// updateStatus(q_("No 'subTiles' array in Configuration File!"));
-		return;
-	}
-
-	QJsonArray subTiles = rootObject["subTiles"].toArray();
-
-	// Loop through each subTile and delete the "imageUrl"
-	foreach (const QJsonValue &subTileValue, subTiles) {
-		if (!subTileValue.isObject()) {
-			continue;
-		}
-
-		QJsonObject subTileObject = subTileValue.toObject();
-
-		if (subTileObject.contains("imageUrl") && subTileObject["imageUrl"].isString()) {
-			QString imageUrl = subTileObject["imageUrl"].toString();
-			QString imagePath = StelFileMgr::getUserDir() + pluginDir + imageUrl;
-
-			// Delete the file if it exists
-			if (QFile::exists(imagePath)) {
-				if (!QFile::remove(imagePath)) {
-					qWarning() << "[NebulaTextures] Failed to delete image file:" << imagePath;
-				}
-			} else {
-				qWarning() << "[NebulaTextures] Image file does not exist:" << imagePath;
-			}
-		}
-	}
-	// updateStatus(q_("Images deletion completed."));
 }
 
 
@@ -843,161 +637,78 @@ void NebulaTexturesDialog::addCustomTexture()
 void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 {
 	QString imagePath = ui->lineEditImagePath->text();
-	if(imagePath != imagePath_src && groupName == CUSTOM_TEXNAME || imagePath != imagePathTemp_src && groupName == TEST_TEXNAME)
-	{
-		if (imagePath.isEmpty()) {
-			qWarning() << "[NebulaTextures] Image path is empty.";
-			updateStatus(q_("Image path is empty."));
-			return;
-		}
+	QString imageUrl = ensureImageCopied(imagePath, groupName);
+	if (imageUrl.isEmpty()) return;
 
-		QFileInfo fileInfo(imagePath);
-		if (!fileInfo.exists()) {
-			updateStatus(q_("The specified image file does not exist."));
-			return;
-		}
-		if (!fileInfo.isReadable()) {
-			updateStatus(q_("The specified image file is not readable."));
-			return;
-		}
-		QString suffix = fileInfo.suffix().toLower();
-		QStringList allowedSuffixes = {"png", "jpg", "gif", "tif", "tiff", "jpeg"};
-		if (!allowedSuffixes.contains(suffix)) {
-			updateStatus(q_("Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."));
-			return;
-		}
-		QString pluginFolder = StelFileMgr::getUserDir() + pluginDir;
-		QDir().mkpath(pluginFolder);
-		QString baseName = fileInfo.completeBaseName();
-		QString extension = fileInfo.suffix();
-		QString timestamp = QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss");
-		QString imageUrl = QString("%1_%2.%3").arg(baseName, timestamp, extension);
-		if(groupName == TEST_TEXNAME){
-			imagePathTemp_src = imagePath;
-			imagePathTemp_dst = imageUrl;
-		}
-		else{ // if(groupName == CUSTOM_TEXNAME){
-			imagePath_src = imagePath;
-			imagePath_dst = imageUrl;
-		}
-		QString targetFilePath = pluginFolder + imageUrl;
-		if (!QFile::copy(imagePath, targetFilePath)) {
-			qWarning() << "[NebulaTextures] Failed to copy image file to target path:" << targetFilePath;
-			// updateStatus(q_("Failed to copy image file to user folder!"));
-			return;
-		}
-	}
+	QJsonArray coords;
+	coords.append(QJsonArray({ ui->bottomLeftX->value(), ui->bottomLeftY->value() }));
+	coords.append(QJsonArray({ ui->bottomRightX->value(), ui->bottomRightY->value() }));
+	coords.append(QJsonArray({ ui->topRightX->value(), ui->topRightY->value() }));
+	coords.append(QJsonArray({ ui->topLeftX->value(), ui->topLeftY->value() }));
 
-	// Retrieve coordinates from the QDoubleSpinBoxes
-	double _topLeftRA = ui->topLeftX->value();
-	double _topLeftDec = ui->topLeftY->value();
-	double _topRightRA = ui->topRightX->value();
-	double _topRightDec = ui->topRightY->value();
-	double _bottomLeftRA = ui->bottomLeftX->value();
-	double _bottomLeftDec = ui->bottomLeftY->value();
-	double _bottomRightRA = ui->bottomRightX->value();
-	double _bottomRightDec = ui->bottomRightY->value();
-	double _referRA = ui->referX->value();
-	double _referDec = ui->referY->value();
+	double brightness = ui->brightComboBox->currentData().toDouble();
 
-	QJsonArray innerWorldCoords;
-	innerWorldCoords.append(QJsonArray({_bottomLeftRA, _bottomLeftDec}));
-	innerWorldCoords.append(QJsonArray({_bottomRightRA, _bottomRightDec}));
-	innerWorldCoords.append(QJsonArray({_topRightRA, _topRightDec}));
-	innerWorldCoords.append(QJsonArray({_topLeftRA, _topLeftDec}));
-
-	registerTexture(groupName == TEST_TEXNAME ? imagePathTemp_dst: imagePath_dst, innerWorldCoords, 0.2, ui->brightComboBox->currentData().toDouble(), cfgPath, groupName);
-}
-
-
-/*
- * Register the texture to the custom textures configuration JSON file with new texture data.
- *
- * Steps:
- *   - Check if the specified JSON configuration file exists.
- *   - If it exists, open and read the file, then update it with new texture information (world coordinates, texture coordinates, resolution, brightness).
- *   - If the file does not exist, create a new configuration with default values.
- *   - Append the new texture data to the configuration file and write the updated file back to disk.
- *   - Update the UI status to reflect success or failure.
- *
- * @param imageUrl        The URL of the texture image.
- * @param innerWorldCoords The world coordinates corresponding to the texture.
- * @param minResolution   The minimum resolution of the texture.
- * @param maxBrightness   The maximum brightness of the texture.
- * @param cfgPath  The path of the configuration file to update.
- * @param groupName  The group name for the texture, custom or temporary.
- */
-void NebulaTexturesDialog::registerTexture(const QString& imageUrl, const QJsonArray& innerWorldCoords, double minResolution, double maxBrightness, QString cfgPath, QString groupName)
-{
-	QString pluginFolder = StelFileMgr::getUserDir() + pluginDir;
-	QDir().mkpath(pluginFolder);
-
-	QString path = StelFileMgr::getUserDir() + cfgPath;
-	QFile jsonFile(path);
-	QJsonObject rootObject;
-
-	if (jsonFile.exists() && groupName!=TEST_TEXNAME) {
-		if (!jsonFile.open(QIODevice::ReadOnly)) {
-			qWarning() << "[NebulaTextures] Failed to open existing JSON file for reading:" << path;
-			// updateStatus(q_("Failed to open Configuration File!"));
-			return;
-		}
-
-		QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
-		if (!jsonDoc.isObject()) {
-			qWarning() << "[NebulaTextures] Invalid JSON structure in file:" << path;
-			// updateStatus(q_("Invalid JSON structure in Configuration File!"));
-			return;
-		}
-		rootObject = jsonDoc.object();
-		jsonFile.close();
-	} else {
-		rootObject["shortName"] = groupName;
-		rootObject["description"] = "User specified low resolution nebula texture set.";
-		rootObject["minResolution"] = 0.05;
-		rootObject["alphaBlend"] = true;
-		rootObject["subTiles"] = QJsonArray();
-	}
-
-	QJsonArray subTiles = rootObject.value("subTiles").toArray();
-
-	QJsonObject newSubTile;
-	QJsonObject imageCredits;
-	imageCredits["short"] = "Local User";
-	newSubTile["imageCredits"] = imageCredits;
-	newSubTile["imageUrl"] = imageUrl;
-
-	QJsonArray outerWorldCoords;
-	outerWorldCoords.append(innerWorldCoords);
-	newSubTile["worldCoords"] = outerWorldCoords;
-
-	QJsonArray innerTextureCoords;
-	innerTextureCoords.append(QJsonArray({0, 0}));
-	innerTextureCoords.append(QJsonArray({1, 0}));
-	innerTextureCoords.append(QJsonArray({1, 1}));
-	innerTextureCoords.append(QJsonArray({0, 1}));
-
-	QJsonArray outerTextureCoords;
-	outerTextureCoords.append(innerTextureCoords);
-	newSubTile["textureCoords"] = outerTextureCoords;
-	newSubTile["minResolution"] = minResolution;
-	newSubTile["maxBrightness"] = maxBrightness;
-
-	subTiles.append(newSubTile);
-	rootObject["subTiles"] = subTiles;
-
-	if (!jsonFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
-		qWarning() << "[NebulaTextures] Failed to open JSON file for writing:" << path;
-		// updateStatus(q_("Failed to open Configuration File for writing!"));
+	TextureConfigManager* manager = (groupName == TEST_TEXNAME) ? tmpCfgManager : configManager;
+	if (!manager->load()) {
+		updateStatus(q_("Failed to load texture configuration."));
 		return;
 	}
 
-	QJsonDocument updatedDoc(rootObject);
-	jsonFile.write(updatedDoc.toJson(QJsonDocument::Indented));
-	jsonFile.flush();
-	jsonFile.close();
+	if (groupName == TEST_TEXNAME)
+		manager->addSubTileOverwrite(imageUrl, coords, 0.2, brightness);
+	else
+		manager->addSubTile(imageUrl, coords, 0.2, brightness);
 
+	manager->save();
 	updateStatus(q_("Importing custom textures successfully!"));
+}
+
+QString NebulaTexturesDialog::ensureImageCopied(const QString& imagePath, const QString& groupName)
+{
+	if (imagePath.isEmpty()) {
+		updateStatus(q_("Image path is empty."));
+		return "";
+	}
+
+	bool alreadyCopied = (groupName == CUSTOM_TEXNAME && imagePath == imagePath_src)
+					  || (groupName == TEST_TEXNAME && imagePath == imagePathTemp_src);
+	if (alreadyCopied)
+		return (groupName == TEST_TEXNAME) ? imagePathTemp_dst : imagePath_dst;
+
+	QFileInfo fileInfo(imagePath);
+	if (!fileInfo.exists() || !fileInfo.isReadable()) {
+		updateStatus(q_("Image file invalid or unreadable."));
+		return "";
+	}
+
+	QString suffix = fileInfo.suffix().toLower();
+	QStringList allowed = {"png", "jpg", "gif", "tif", "tiff", "jpeg"};
+	if (!allowed.contains(suffix)) {
+		updateStatus(q_("Invalid image format."));
+		return "";
+	}
+
+	QString baseName = fileInfo.completeBaseName();
+	QString timestamp = QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss");
+	QString imageUrl = QString("%1_%2.%3").arg(baseName, timestamp, suffix);
+	QString targetPath = StelFileMgr::getUserDir() + pluginDir + imageUrl;
+
+	QDir().mkpath(StelFileMgr::getUserDir() + pluginDir);
+	if (!QFile::copy(imagePath, targetPath)) {
+		updateStatus(q_("Failed to copy image file."));
+		return "";
+	}
+
+	// update path log
+	if (groupName == TEST_TEXNAME) {
+		imagePathTemp_src = imagePath;
+		imagePathTemp_dst = imageUrl;
+	} else {
+		imagePath_src = imagePath;
+		imagePath_dst = imageUrl;
+	}
+
+	return imageUrl;
 }
 
 
@@ -1017,70 +728,22 @@ void NebulaTexturesDialog::registerTexture(const QString& imageUrl, const QJsonA
 void NebulaTexturesDialog::removeTexture()
 {
 	QListWidgetItem* selectedItem = ui->listWidget->currentItem();
-	if (!selectedItem)
-		return;
+	if (!selectedItem) return;
 
-	QString selectedText = selectedItem->text();
+	QString imageUrl = selectedItem->text();
+	if (!askConfirmation("Are you sure to remove this texture?")) return;
 
-	if(!askConfirmation("Caution! Are you sure to remove this texture? It will only take effect after restarting Stellarium."))
-		return;
+	if (!configManager->load()) return;
 
-	QString path = StelFileMgr::getUserDir() + configFile;
-	QFile jsonFile(path);
-	if (!jsonFile.open(QIODevice::ReadOnly)){
-		qWarning() << "[NebulaTextures] Failed to open existing JSON file for reading:" << path;
-		return;
+	if (configManager->removeSubTileByImageUrl(imageUrl)) {
+		QString imgPath = StelFileMgr::getUserDir() + pluginDir + imageUrl;
+		if (QFile::exists(imgPath))
+			QFile::remove(imgPath);
+
+		configManager->save();
+		delete selectedItem;
+		updateStatus(q_("Texture removed."));
 	}
-
-	QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
-	jsonFile.close();
-
-	if (!jsonDoc.isObject()){
-		qWarning() << "[NebulaTextures] Invalid JSON structure in file:" << path;
-		return;
-	}
-
-	QJsonObject rootObject = jsonDoc.object();
-	if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()){
-		qWarning() << "[NebulaTextures] No 'subTiles' array found in JSON file:" << path;
-		return;
-	}
-
-	QJsonArray subTiles = rootObject["subTiles"].toArray();
-	QJsonArray updatedSubTiles;
-	bool found = false;
-
-	for (const QJsonValue& subTileValue : subTiles) {
-		if (!subTileValue.isObject()) {
-			updatedSubTiles.append(subTileValue);
-			continue;
-		}
-
-		QJsonObject subTileObject = subTileValue.toObject();
-		if (subTileObject.contains("imageUrl") && subTileObject["imageUrl"].toString() == selectedText) {
-			found = true;
-			QString imageUrl = subTileObject["imageUrl"].toString();
-			QString imagePath = StelFileMgr::getUserDir() + pluginDir + imageUrl;
-			QFile imageFile(imagePath);
-			if (imageFile.exists()) {
-				imageFile.remove();
-			}
-			continue;
-		}
-		updatedSubTiles.append(subTileValue);
-	}
-	if (!found)
-		return;
-
-	rootObject["subTiles"] = updatedSubTiles;
-	if (!jsonFile.open(QIODevice::WriteOnly)){
-		qWarning() << "[NebulaTextures] Failed to open JSON file for writing:" << path;
-		return;
-	}
-
-	jsonFile.write(QJsonDocument(rootObject).toJson(QJsonDocument::Indented));
-	jsonFile.close();
-	delete selectedItem;
 }
 
 
@@ -1097,62 +760,23 @@ void NebulaTexturesDialog::removeTexture()
  *   - Associate metadata from each sub-tile with its corresponding list widget item.
  */
 void NebulaTexturesDialog::reloadData()
-{
+{	
 	refreshTextures();
 
-	QString path = StelFileMgr::getUserDir()+configFile;
-
-	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-
-	QFile jsonFile(path);
-	QJsonObject rootObject;
-
-	if (!jsonFile.exists()) {
-		qWarning() << "[NebulaTextures] JSON file does not exist:" << path;
+	if (!configManager->load()) {
 		ui->listWidget->clear();
 		return;
 	}
-
-	if (!jsonFile.open(QIODevice::ReadOnly)) {
-		qWarning() << "[NebulaTextures] Failed to open JSON file for reading:" << path;
-		ui->listWidget->clear();
-		return;
-	}
-
-	QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
-	if (!jsonDoc.isObject()) {
-		qWarning() << "[NebulaTextures] Invalid JSON structure in file:" << path;
-		return;
-	}
-
-	rootObject = jsonDoc.object();
-	jsonFile.close();
-
-	// read and show into listWidget
-	if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()) {
-		qWarning() << "[NebulaTextures] No 'subTiles' array found in JSON file:" << path;
-		return;
-	}
-
-	QJsonArray subTiles = rootObject["subTiles"].toArray();
 
 	ui->listWidget->clear();
+	QJsonArray tiles = configManager->getSubTiles();
 
-	for (const QJsonValue& subTileValue : subTiles) {
-		if (!subTileValue.isObject()) {
-			qWarning() << "[NebulaTextures] Invalid subTile entry found, skipping...";
-			continue;
-		}
-
-		QJsonObject subTileObject = subTileValue.toObject();
-
-		if (subTileObject.contains("imageUrl") && subTileObject["imageUrl"].isString()) {
-			QString imageUrl = subTileObject["imageUrl"].toString();
-			QListWidgetItem* item = new QListWidgetItem(imageUrl, ui->listWidget);
-			QVariant data = QVariant::fromValue(subTileObject);
-			item->setData(Qt::UserRole, data);
-			ui->listWidget->addItem(item);
-		}
+	for (const QJsonValue& tile : tiles) {
+		QJsonObject obj = tile.toObject();
+		QString url = obj["imageUrl"].toString();
+		QListWidgetItem* item = new QListWidgetItem(url, ui->listWidget);
+		item->setData(Qt::UserRole, obj);
+		ui->listWidget->addItem(item);
 	}
 }
 
@@ -1169,103 +793,13 @@ void NebulaTexturesDialog::refreshTextures()
 {
 	bool showCustom = getShowCustomTextures();
 	if (!showCustom){
-		setTexturesVisible(CUSTOM_TEXNAME,false);
-		setTexturesVisible(DEFAULT_TEXNAME,true);
+		tileManager->setTileVisible(CUSTOM_TEXNAME,false);
+		tileManager->setTileVisible(DEFAULT_TEXNAME,true);
 	}
 	else{
-		setTexturesVisible(CUSTOM_TEXNAME,true);
-		avoidConflict(); // only when show_custom && avoid_conflict
-	}
-}
-
-
-/*
- * Set the visibility of the specified texture and its sub-tiles.
- *
- * Steps:
- *   - Retrieve the texture identified by `TexName`.
- *   - If the texture is found, iterate through its sub-tiles.
- *   - Set the visibility of each sub-tile based on the `visible` parameter.
- *   - Return false if the texture or its sub-tiles cannot be found.
- *
- * @param TexName  The name of the texture to modify.
- * @param visible  The visibility state to set for the texture and its sub-tiles.
- *
- * @return true if the texture and its sub-tiles are found and visibility is set successfully.
- *         false if the texture or its sub-tiles cannot be found.
- */
-bool NebulaTexturesDialog::setTexturesVisible(QString TexName, bool visible)
-{
-	StelSkyImageTile* mTile = get_aTile(TexName);
-	if(!mTile) return false;
-	for (int i = 0; i < mTile->getSubTiles().size(); ++i) {
-		auto subTile = mTile->getSubTiles()[i];
-		StelSkyImageTile* subImageTile = dynamic_cast<StelSkyImageTile*>(subTile);
-		subImageTile->setVisible(visible);
-	}
-	return true;
-}
-
-
-/*
- * Retrieve a StelSkyImageTile object based on the provided texture key.
- *
- * Searches for the sky layer associated with the given key in the StelSkyLayerMgr.
- * If found, it attempts to cast the layer to a StelSkyImageTile and returns it.
- * Returns Q_NULLPTR if no layer is found or the cast fails.
- */
-StelSkyImageTile* NebulaTexturesDialog::get_aTile(QString key)
-{
-	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-	// Keep the same form with getShortName()
-	QString keyname = qc_(key, "dataset short name");
-	auto aTex = skyLayerMgr->allSkyLayers.find(keyname);
-	if(aTex == skyLayerMgr->allSkyLayers.end())
-		return Q_NULLPTR;
-	StelSkyLayerMgr::SkyLayerElem* aElem = aTex.value();
-	if (!aElem || !aElem->layer) return Q_NULLPTR;
-	StelSkyImageTile* aTile = dynamic_cast<StelSkyImageTile*>(aElem->layer.data());
-	return aTile;
-}
-
-
-/*
- * Avoid conflicts between custom and default textures by hiding overlapping tiles.
- *
- * Steps:
- *   - Check if the 'Avoid Area Conflict' flag is enabled.
- *   - Retrieve the custom and default texture tiles.
- *   - Loop through the sub-tiles of the default texture.
- *   - For each visible sub-tile, check for overlap with custom texture sub-tiles.
- *   - Hide the default texture sub-tile if overlap is detected.
- *   - If conflicts are not to be avoided, make all default texture tiles visible.
- */
-void NebulaTexturesDialog::avoidConflict()
-{
-	if (getAvoidAreaConflict()){
-		StelSkyImageTile* cusTile = get_aTile(CUSTOM_TEXNAME);
-		StelSkyImageTile* defTile = get_aTile(DEFAULT_TEXNAME);
-		if(!cusTile) return;
-		if(!defTile) return;
-
-		for (int i = 0; i < defTile->getSubTiles().size(); ++i) {
-			StelSkyImageTile* subdefTile = dynamic_cast<StelSkyImageTile*>(defTile->getSubTiles()[i]);
-			if(subdefTile->getVisible() == true && subdefTile->getSkyConvexPolygons().size()>0){
-				SphericalRegionP subdefPoly = subdefTile->getSkyConvexPolygons()[0];
-				for (int j = 0; j < cusTile->getSubTiles().size(); ++j) {
-					StelSkyImageTile* subcusTile = dynamic_cast<StelSkyImageTile*>(cusTile->getSubTiles()[j]);
-					if(subcusTile->getVisible() == true && subcusTile->getSkyConvexPolygons().size()>0){
-						SphericalRegionP subcusPoly = subcusTile->getSkyConvexPolygons()[0];
-						if (subcusPoly->intersects(subdefPoly)){
-							subdefTile->setVisible(false);
-						}
-					}
-				}
-			}
-		}
-	}
-	else{
-		setTexturesVisible(DEFAULT_TEXNAME, true);
+		tileManager->setTileVisible(CUSTOM_TEXNAME,true);
+		if (getAvoidAreaConflict())
+			tileManager->resolveConflicts(DEFAULT_TEXNAME, CUSTOM_TEXNAME);
 	}
 }
 
@@ -1286,134 +820,49 @@ void NebulaTexturesDialog::gotoSelectedItem(QListWidgetItem* item)
 {
 	if (!item) return;
 
-	// Constants
-	const double D2R = M_PI / 180.0;  // Degree to radian
-	const double R2D = 180.0 / M_PI;  // Radian to degree
+	QString imageUrl = item->text();
 
-	QString selectedText = item->text();
-	QString path = StelFileMgr::getUserDir() + configFile;
-	QFile jsonFile(path);
-	if (!jsonFile.open(QIODevice::ReadOnly)) {
-		qWarning() << "[NebulaTextures] Failed to open JSON file:" << path;
+	if (!configManager->load()) {
+		qWarning() << "[NebulaTextures] Failed to load config for selection.";
 		return;
 	}
 
-	QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll());
-	jsonFile.close();
-	if (!jsonDoc.isObject()) {
-		qWarning() << "[NebulaTextures] Invalid JSON structure in file:" << path;
+	QJsonObject subTile = configManager->getSubTileByImageUrl(imageUrl);
+	if (subTile.isEmpty() || !subTile.contains("worldCoords"))
+		return;
+
+	QJsonArray worldCoords = subTile["worldCoords"].toArray();
+	if (worldCoords.size() != 1 || !worldCoords[0].isArray()) {
+		qWarning() << "[NebulaTextures] Invalid or missing worldCoords.";
 		return;
 	}
 
-	QJsonObject rootObject = jsonDoc.object();
-	if (!rootObject.contains("subTiles") || !rootObject["subTiles"].isArray()) {
-		qWarning() << "[NebulaTextures] No 'subTiles' array found in JSON file:" << path;
+	QJsonArray corners = worldCoords[0].toArray();
+	if (corners.size() != 4) {
+		qWarning() << "[NebulaTextures] Invalid corner count.";
 		return;
 	}
 
-	QJsonArray subTiles = rootObject["subTiles"].toArray();
-	for (const QJsonValue& subTileValue : subTiles) {
-		if (!subTileValue.isObject()) continue;
+	// calculate center
+	QPair<double, double> center = SkyCoords::calculateCenter(corners);
+	double centerRA = center.first;
+	double centerDec = center.second;
+	double spinLong = D2R * centerRA;
+	double spinLat = D2R * centerDec;
 
-		QJsonObject subTileObject = subTileValue.toObject();
-		if (!subTileObject.contains("imageUrl") || subTileObject["imageUrl"].toString() != selectedText)
-			continue;
+	// move View port
+	StelCore* core = StelApp::getInstance().getCore();
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	Vec3d pos;
 
-		if (!subTileObject.contains("worldCoords") || !subTileObject["worldCoords"].isArray()) {
-			qWarning() << "[NebulaTextures] Missing 'worldCoords' in subTileObject.";
-			return;
-		}
-
-		QJsonArray worldCoords = subTileObject["worldCoords"].toArray();
-		if (worldCoords.size() != 1 || !worldCoords[0].isArray() || worldCoords[0].toArray().size() != 4) {
-			qWarning() << "[NebulaTextures] Invalid 'worldCoords' format.";
-			return;
-		}
-
-		QJsonArray corners = worldCoords[0].toArray();
-		QVector<QPair<double, double>> raDecList;
-		for (const QJsonValue& corner : corners) {
-			if (!corner.isArray() || corner.toArray().size() != 2) {
-				qWarning() << "[NebulaTextures] Invalid coordinate format.";
-				return;
-			}
-			raDecList.append(qMakePair(corner.toArray()[0].toDouble(), corner.toArray()[1].toDouble()));
-		}
-
-		// calculate center coordinates (approximately)
-		double sum_x = 0.0, sum_y = 0.0, sum_z = 0.0;
-		for (const auto& point : raDecList) {
-			double ra_rad = D2R * point.first;
-			double dec_rad = D2R * point.second;
-			double x = cos(dec_rad) * cos(ra_rad);
-			double y = cos(dec_rad) * sin(ra_rad);
-			double z = sin(dec_rad);
-			sum_x += x;
-			sum_y += y;
-			sum_z += z;
-		}
-
-		double avg_x = sum_x / 4.0;
-		double avg_y = sum_y / 4.0;
-		double avg_z = sum_z / 4.0;
-		double norm = sqrt(avg_x * avg_x + avg_y * avg_y + avg_z * avg_z);
-		if (norm == 0.0) {
-			qWarning() << "[NebulaTextures] Invalid input: zero vector sum.";
-			return;
-		}
-
-		avg_x /= norm;
-		avg_y /= norm;
-		avg_z /= norm;
-		double centerRA = fmod(R2D* atan2(avg_y, avg_x) + 360.0, 360.0);
-		double centerDec = R2D * asin(avg_z);
-		centerDec = qBound(-90.0, centerDec, 90.0);
-
-		// goto center view
-		StelCore* core = StelApp::getInstance().getCore();
-		StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-		Vec3d pos;
-		double spinLong = D2R * centerRA;
-		double spinLat = D2R * centerDec;
-
-		mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
-		Vec3d aimUp = mvmgr->getViewUpVectorJ2000();
-		StelMovementMgr::MountMode mountMode = mvmgr->getMountMode();
-
-		StelUtils::spheToRect(spinLong, spinLat, pos);
-		if ((mountMode == StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat) > (0.9 * M_PI_2))) {
-			mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat > 0. ? 1. : -1.));
-			aimUp = mvmgr->getViewUpVectorJ2000();
-		}
-
-		mvmgr->setFlagTracking(false);
-		mvmgr->moveToJ2000(pos, aimUp, mvmgr->getAutoMoveDuration());
-		return;
+	mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
+	Vec3d aimUp = mvmgr->getViewUpVectorJ2000();
+	if ((mvmgr->getMountMode() == StelMovementMgr::MountEquinoxEquatorial) && fabs(spinLat) > (0.9 * M_PI_2)) {
+		mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat > 0. ? 1. : -1.));
+		aimUp = mvmgr->getViewUpVectorJ2000();
 	}
-}
 
-
-// Set the value for showing custom textures in the configuration and refresh textures.
-void NebulaTexturesDialog::setShowCustomTextures(bool b)
-{
-	conf->setValue(NT_CONFIG_PREFIX + "/showCustomTextures", b);
-}
-
-// Get the value for showing custom textures from the configuration.
-bool NebulaTexturesDialog::getShowCustomTextures()
-{
-	return conf->value(NT_CONFIG_PREFIX + "/showCustomTextures", false).toBool();
-}
-
-// Set the value for avoiding area conflicts in the configuration and refresh textures.
-void NebulaTexturesDialog::setAvoidAreaConflict(bool b)
-{
-	conf->setValue(NT_CONFIG_PREFIX + "/avoidAreaConflict", b);
-	refreshTextures();
-}
-
-// Get the value for avoiding area conflicts from the configuration.
-bool NebulaTexturesDialog::getAvoidAreaConflict()
-{
-	return conf->value(NT_CONFIG_PREFIX + "/avoidAreaConflict", false).toBool();
+	StelUtils::spheToRect(spinLong, spinLat, pos);
+	mvmgr->setFlagTracking(false);
+	mvmgr->moveToJ2000(pos, aimUp, mvmgr->getAutoMoveDuration());
 }

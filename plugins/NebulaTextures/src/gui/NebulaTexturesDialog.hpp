@@ -32,6 +32,9 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelApp.hpp"
 #include "PlateSolver.hpp"
+#include "TextureConfigManager.hpp"
+#include "TileManager.hpp"
+#include "SkyCoords.hpp"
 
 #define NT_CONFIG_PREFIX QString("NebulaTextures")
 #define CUSTOM_TEXNAME QString("Custom Textures")
@@ -56,24 +59,6 @@ public:
 	// Only trigger refresh when the textures are initially loaded on screen (including both default and custom, twice) to avoid conflicts
 	int countRefresh, maxCountRefresh;
 
-	//! Get a StelSkyImageTile texture
-	StelSkyImageTile* get_aTile(QString key);
-
-	//! Convert pixel coordinates on the image to celestial coordinates with WCS parameters
-	QPair<double, double> PixelToCelestial(int X, int Y, double CRPIX1, double CRPIX2, double CRVAL1, double CRVAL2, double CD1_1, double CD1_2, double CD2_1, double CD2_2);
-
-	//! Set the visibility of the specified texture and its sub-tiles
-	bool setTexturesVisible(QString TexName, bool visible);
-
-	//! Register the texture to the custom textures configuration
-	void registerTexture(const QString& imageUrl, const QJsonArray& worldCoords, double minResolution, double maxBrightness, QString cfgPath, QString groupName);
-
-	//! Delete the images listed in the given configuration file
-	void deleteImagesFromCfg(const QString& cfgFilePath);
-
-	//! Avoid conflicts between custom and default textures by hiding overlapping tiles
-	void avoidConflict();
-
 public slots:
 	void retranslate() override;
 
@@ -87,14 +72,14 @@ public slots:
 	void refreshTextures();
 
 	//! Get the value for showing custom textures
-	bool getShowCustomTextures();
+	bool getShowCustomTextures(){return conf->value(NT_CONFIG_PREFIX + "/showCustomTextures", false).toBool();}
 	//! Set the value for showing custom textures
-	void setShowCustomTextures(bool b);
+	void setShowCustomTextures(bool b) {conf->setValue(NT_CONFIG_PREFIX + "/showCustomTextures", b);}
 
 	//! Get the value for avoiding area conflicts
-	bool getAvoidAreaConflict();
+	bool getAvoidAreaConflict(){return conf->value(NT_CONFIG_PREFIX + "/avoidAreaConflict", false).toBool();}
 	//! Set the value for avoiding area conflicts
-	void setAvoidAreaConflict(bool b);
+	void setAvoidAreaConflict(bool b){conf->setValue(NT_CONFIG_PREFIX + "/avoidAreaConflict", b); refreshTextures();}
 
 protected:
 	//! Set up the content and interactions of the NebulaTexturesDialog
@@ -152,7 +137,14 @@ private:
 	// Control image copying when adding texture, avoiding frequent file io
 	QString imagePath_src, imagePath_dst, imagePathTemp_src, imagePathTemp_dst;
 
-	PlateSolver* plateSolver = Q_NULLPTR;
+	PlateSolver* plateSolver;
+
+	TileManager* tileManager;
+
+	TextureConfigManager* configManager;
+
+	TextureConfigManager* tmpCfgManager;
+
 
 	// Flag for online plate-solving
 	bool solvedFlag;
@@ -189,6 +181,8 @@ private:
 
 	//! Add the texture to configuration, need to specify the texture groupname
 	void addTexture(QString cfgPath, QString groupName);
+
+	QString ensureImageCopied(const QString& imagePath, const QString& groupName);
 
 	//! Temporary texture rendering for debugging
 	void renderTempCustomTexture();
