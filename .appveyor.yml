@@ -52,7 +52,7 @@ environment:
     QT_VERSION_MAJOR: 5
     QT_BASEDIR: C:\Qt\5.15\msvc2019_64
     CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A x64 -DENABLE_NLS=Off
+    CMAKE_ARGS: -A x64
     exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
     exiv2baseName: exiv2-0.28.0-2019msvc64
     scConverterEnabled: 0
@@ -123,7 +123,7 @@ before_build:
 
   - cd c:\stellarium
   - mkdir build && cd build
-  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName% -DENABLE_MEDIA=On -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
+  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName% -DENABLE_MEDIA=On -DENABLE_PODIR=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
   - if [%PUBLISH_BINARY%]==[false] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName% -DENABLE_MEDIA=On -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
 
 build:
@@ -145,6 +145,8 @@ after_test:
   - if [%USE_EXT_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win%BITS%.zip -FileName c:\stellarium\build\libGLES.zip
   - if [%USE_EXT_LIBGLES%]==[true] 7z e c:\stellarium\build\libGLES.zip -aoa -oc:\stellarium-package\bin
   - if [%USE_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-%PKGARCH%.dll -FileName c:\stellarium-package\bin\opengl32sw.dll
+  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/translations/translations.tar.gz -FileName c:\translations.tar.gz
+  - if [%PUBLISH_BINARY%]==[true] 7z e c:\translations.tar.gz -aoa -oc:\stellarium-package\share\stellarium\
   - if [%PUBLISH_BINARY%]==[true] if NOT [%exiv2url%] == [] copy c:\%exiv2baseName%\bin\exiv2.dll c:\stellarium-package\bin\
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-installer
   - if [%USE_EXTRA_EXE%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-patch-installer

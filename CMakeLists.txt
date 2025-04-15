@@ -394,6 +394,8 @@ SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be suppor
 IF(ENABLE_NLS)
      ADD_DEFINITIONS(-DENABLE_NLS)
 ENDIF()
+# This option toggle manipulations with files in po directory
+SET(ENABLE_PODIR 1 CACHE BOOL "Define whether program translation should be supported.")
 
 # Activate media support
 SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
@@ -1128,6 +1130,6 @@ IF(ENABLE_SHOWMYSKY)
      # add atmosphere models
      ADD_SUBDIRECTORY( atmosphere )
 ENDIF()
-IF(ENABLE_NLS)
+IF(ENABLE_NLS AND ENABLE_PODIR)
      ADD_SUBDIRECTORY( po )
 ENDIF()
