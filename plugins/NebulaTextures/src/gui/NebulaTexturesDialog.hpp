@@ -31,7 +31,7 @@
 #include "NebulaTextures.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelApp.hpp"
-#include "platesolver.hpp"
+#include "PlateSolver.hpp"
 
 #define NT_CONFIG_PREFIX QString("NebulaTextures")
 #define CUSTOM_TEXNAME QString("Custom Textures")
