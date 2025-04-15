@@ -57,7 +57,7 @@ public:
 	~NebulaTexturesDialog() override;
 
 	// Only trigger refresh when the textures are initially loaded on screen (including both default and custom, twice) to avoid conflicts
-	int countRefresh, maxCountRefresh;
+	int refreshCount, refreshLimit;
 
 public slots:
 	void retranslate() override;
@@ -116,8 +116,9 @@ private slots:
 	//! Add the texture to the custom textures configuration
 	void addCustomTexture();
 
+	void refreshTempTexturePreview();
 	//! update temporary texture rendering for debugging
-	void updateTempCustomTexture(double inf);
+	void showRecoverCoordsButton();
 
 	//! Goto center of the selected image in list view
 	void gotoSelectedItem(QListWidgetItem* item);
@@ -147,20 +148,20 @@ private:
 
 
 	// Flag for online plate-solving
-	bool solvedFlag;
+	bool isWcsSolved;
 
 	// Calibration parameters for the image (CRPIX, CRVAL, CD values)
 	double CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2;
 
 	// Image width and height values
-	int IMAGEW, IMAGEH;
+	int imageWidth, imageHeight;
 
 	// Right Ascension and Declination for the four corners of the images (by plate-solved.)
 	double topLeftRA, topLeftDec, bottomLeftRA, bottomLeftDec;
 	double topRightRA, topRightDec, bottomRightRA, bottomRightDec;
 
 	// Reference Right Ascension and Declination for the image center
-	double referRA, referDec;
+	double centerRA, centerDec;
 
 	// Directory path where plugin-related files are stored
 	QString pluginDir  = "/modules/NebulaTextures/";
@@ -172,7 +173,7 @@ private:
 	QString tmpcfgFile = "/modules/NebulaTextures/temp_textures.json";
 
 	// Flag indicating whether to render temporary textures
-	bool flag_renderTempTex = false;
+	bool isTempTextureVisible;
 
 
 
@@ -185,9 +186,9 @@ private:
 	QString ensureImageCopied(const QString& imagePath, const QString& groupName);
 
 	//! Temporary texture rendering for debugging
-	void renderTempCustomTexture();
+	void showTempTexturePreview();
 	//! Cancel temporary texture rendering for debugging
-	void unRenderTempCustomTexture();
+	void removeTempTexturePreview();
 
 	//! Set the HTML content for the "About" section in the dialog
 	void setAboutHtml();

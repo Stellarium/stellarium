@@ -53,10 +53,10 @@
  */
 NebulaTexturesDialog::NebulaTexturesDialog()
 	: StelDialog("NebulaTextures"),
-	flag_renderTempTex(false),
+	isTempTextureVisible(false),
 	conf(StelApp::getInstance().getSettings()),
-	countRefresh(0), maxCountRefresh(2),
-	solvedFlag(false),
+	refreshCount(0), refreshLimit(2),
+	isWcsSolved(false),
 	imagePath_src(""), imagePath_dst(""),
 	imagePathTemp_src(""), imagePathTemp_dst(""),
 	progressBar(Q_NULLPTR)
@@ -124,7 +124,7 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(ui->goPushButton, SIGNAL(clicked()), this, SLOT(moveToCenterCoord()));
 	connect(ui->renderButton, SIGNAL(clicked()), this, SLOT(toggleTempTexturePreview()));
 	connect(ui->disableDefault, SIGNAL(clicked()), this, SLOT(toggleDefaultTextureVisibility()));
-	connect(ui->brightComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateBrightnessLevel(int)));
+	connect(ui->brightComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(refreshTempTexturePreview()));
 	connect(ui->addCustomTextureButton, SIGNAL(clicked()), this, SLOT(addCustomTexture()));
 
 	connect(ui->reloadButton, SIGNAL(clicked()), this, SLOT(reloadData()));
@@ -133,14 +133,23 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(ui->listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(gotoSelectedItem(QListWidgetItem*)));
 	connect(ui->removeTextureButton, SIGNAL(clicked()), this, SLOT(removeTexture()));
 
-	connect(ui->topLeftX, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
-	connect(ui->topLeftY, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
-	connect(ui->topRightX, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
-	connect(ui->topRightY, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
-	connect(ui->bottomLeftX, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
-	connect(ui->bottomLeftY, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
-	connect(ui->bottomRightX, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
-	connect(ui->bottomRightY, SIGNAL(valueChanged(double)), this, SLOT(updateTempCustomTexture(double)));
+	connect(ui->topLeftX, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
+	connect(ui->topLeftY, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
+	connect(ui->topRightX, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
+	connect(ui->topRightY, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
+	connect(ui->bottomLeftX, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
+	connect(ui->bottomLeftY, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
+	connect(ui->bottomRightX, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
+	connect(ui->bottomRightY, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
+
+	connect(ui->topLeftX, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
+	connect(ui->topLeftY, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
+	connect(ui->topRightX, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
+	connect(ui->topRightY, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
+	connect(ui->bottomLeftX, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
+	connect(ui->bottomLeftY, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
+	connect(ui->bottomRightX, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
+	connect(ui->bottomRightY, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
 
 	connect(plateSolver, &PlateSolver::loginSuccess, this, [this]() {
 		updateStatus(q_("Login success..."));
@@ -283,9 +292,9 @@ void NebulaTexturesDialog::updateStatus(const QString &status)
 
 void NebulaTexturesDialog::initializeRefreshIfNeeded()
 {
-	if(countRefresh < maxCountRefresh){
+	if(refreshCount < refreshLimit){
 		refreshTextures();
-		countRefresh++;
+		refreshCount++;
 	}
 }
 
@@ -361,10 +370,10 @@ void NebulaTexturesDialog::applyWcsSolution(const QString& wcsText)
 	CD1_2 = wcs.CD1_2;
 	CD2_1 = wcs.CD2_1;
 	CD2_2 = wcs.CD2_2;
-	IMAGEW = wcs.IMAGEW;
-	IMAGEH = wcs.IMAGEH;
-	referRA = CRVAL1;
-	referDec = CRVAL2;
+	imageWidth = wcs.IMAGEW;
+	imageHeight = wcs.IMAGEH;
+	centerRA = CRVAL1;
+	centerDec = CRVAL2;
 	ui->referX->setValue(CRVAL1);
 	ui->referY->setValue(CRVAL2);
 
@@ -376,28 +385,28 @@ void NebulaTexturesDialog::applyWcsSolution(const QString& wcsText)
 	ui->topLeftX->setValue(topLeftRA);
 	ui->topLeftY->setValue(topLeftDec);
 
-	X = 0, Y = IMAGEH - 1;
+	X = 0, Y = imageHeight - 1;
 	result = SkyCoords::pixelToRaDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
 	bottomLeftRA = result.first;
 	bottomLeftDec = result.second;
 	ui->bottomLeftX->setValue(bottomLeftRA);
 	ui->bottomLeftY->setValue(bottomLeftDec);
 
-	X = IMAGEW - 1, Y = 0;
+	X = imageWidth - 1, Y = 0;
 	result = SkyCoords::pixelToRaDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
 	topRightRA = result.first;
 	topRightDec = result.second;
 	ui->topRightX->setValue(topRightRA);
 	ui->topRightY->setValue(topRightDec);
 
-	X = IMAGEW - 1, Y = IMAGEH - 1;
+	X = imageWidth - 1, Y = imageHeight - 1;
 	result = SkyCoords::pixelToRaDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
 	bottomRightRA = result.first;
 	bottomRightDec = result.second;
 	ui->bottomRightX->setValue(bottomRightRA);
 	ui->bottomRightY->setValue(bottomRightDec);
 
-	solvedFlag = true;
+	isWcsSolved = true;
 	freezeUiState(false);
 	updateStatus(q_("Processing completed! Goto Center Point, Try to Render, Check and Add to Local Storage."));
 }
@@ -405,13 +414,13 @@ void NebulaTexturesDialog::applyWcsSolution(const QString& wcsText)
 
 void NebulaTexturesDialog::moveToCenterCoord()
 {
-	referRA = ui->referX->value();
-	referDec = ui->referY->value();
+	centerRA = ui->referX->value();
+	centerDec = ui->referY->value();
 	StelCore* core = StelApp::getInstance().getCore();
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Vec3d pos;
-	double spinLong=referRA/180.*M_PI;
-	double spinLat=referDec/180.*M_PI;
+	double spinLong=centerRA/180.*M_PI;
+	double spinLat=centerDec/180.*M_PI;
 
 	mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
 	Vec3d aimUp = mvmgr->getViewUpVectorJ2000();
@@ -432,7 +441,7 @@ void NebulaTexturesDialog::moveToCenterCoord()
 
 void NebulaTexturesDialog::recoverSolvedCorners()
 {
-	if(solvedFlag && askConfirmation("Are you sure to recover the solution?"))
+	if(isWcsSolved && askConfirmation("Are you sure to recover the solution?"))
 	{
 		ui->topLeftX->setValue(topLeftRA);
 		ui->topLeftY->setValue(topLeftDec);
@@ -451,14 +460,14 @@ void NebulaTexturesDialog::recoverSolvedCorners()
 // Toggle the rendering state of the temporary texture
 void NebulaTexturesDialog::toggleTempTexturePreview()
 {
-	if (flag_renderTempTex) {
-		unRenderTempCustomTexture();
+	if (isTempTextureVisible) {
+		removeTempTexturePreview();
 	} else {
-		renderTempCustomTexture();
+		showTempTexturePreview();
 	}
-	ui->renderButton->setChecked(flag_renderTempTex);
+	ui->renderButton->setChecked(isTempTextureVisible);
 
-	if(flag_renderTempTex)
+	if(isTempTextureVisible)
 		ui->renderButton->setText(q_("Stop test"));
 	else
 		ui->renderButton->setText(q_("Test this texture"));
@@ -467,7 +476,7 @@ void NebulaTexturesDialog::toggleTempTexturePreview()
 // Toggle the visibility of the default texture when testing temp texture rendering
 void NebulaTexturesDialog::toggleDefaultTextureVisibility()
 {
-	if(!flag_renderTempTex)
+	if(!isTempTextureVisible)
 		return;
 	if(ui->disableDefault->isChecked())
 		tileManager->setTileVisible(DEFAULT_TEXNAME, false);
@@ -480,12 +489,12 @@ void NebulaTexturesDialog::toggleDefaultTextureVisibility()
 // Redo rendering when toggling Brightness Change
 void NebulaTexturesDialog::updateBrightnessLevel(int index)
 {
-	if(flag_renderTempTex)
-		renderTempCustomTexture();
+	if(isTempTextureVisible)
+		showTempTexturePreview();
 }
 
 
-void NebulaTexturesDialog::renderTempCustomTexture()
+void NebulaTexturesDialog::showTempTexturePreview()
 {
 	QString imagePath = ui->lineEditImagePath->text();
 
@@ -506,7 +515,7 @@ void NebulaTexturesDialog::renderTempCustomTexture()
 		return;
 	}
 
-	flag_renderTempTex = true;
+	isTempTextureVisible = true;
 
 	// optionally hide default texture if requested
 	if (ui->disableDefault->isChecked()) {
@@ -515,9 +524,9 @@ void NebulaTexturesDialog::renderTempCustomTexture()
 }
 
 
-void NebulaTexturesDialog::updateTempCustomTexture(double inf)
+void NebulaTexturesDialog::refreshTempTexturePreview()
 {
-	if(flag_renderTempTex)
+	if(isTempTextureVisible)
 	{
 		QString path = StelFileMgr::getUserDir()+tmpcfgFile;
 		// deleteImagesFromCfg(tmpcfgFile);
@@ -527,20 +536,22 @@ void NebulaTexturesDialog::updateTempCustomTexture(double inf)
 			qWarning() << "[NebulaTextures] Failed to update temp texture from config.";
 		}
 	}
+}
 
-	if(solvedFlag)
+
+void NebulaTexturesDialog::showRecoverCoordsButton()
+{
+	if(isWcsSolved)
 		ui->recoverCoordsButton->setVisible(true);
 }
 
 
-void NebulaTexturesDialog::unRenderTempCustomTexture()
+void NebulaTexturesDialog::removeTempTexturePreview()
 {
-	if(!flag_renderTempTex)
+	if(!isTempTextureVisible)
 		return;
-
 	tileManager->removeTile(TEST_TEXNAME);
-
-	flag_renderTempTex = false;
+	isTempTextureVisible = false;
 	tileManager->setTileVisible(DEFAULT_TEXNAME, true);
 	refreshTextures();
 }
