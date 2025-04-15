@@ -146,7 +146,7 @@ after_test:
   - if [%USE_EXT_LIBGLES%]==[true] 7z e c:\stellarium\build\libGLES.zip -aoa -oc:\stellarium-package\qtstuff
   - if [%USE_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-%PKGARCH%.dll -FileName c:\stellarium-package\qtstuff\opengl32sw.dll
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/translations/translations.zip -FileName c:\translations.zip
-  - if [%PUBLISH_BINARY%]==[true] 7z e c:\translations.zip -aoa -oc:\stellarium-package\share\stellarium\
+  - if [%PUBLISH_BINARY%]==[true] 7z e c:\translations.zip -spf -oc:\stellarium-package\share\stellarium\
   - if [%PUBLISH_BINARY%]==[true] if NOT [%exiv2url%] == [] copy c:\%exiv2baseName%\bin\exiv2.dll c:\stellarium-package\bin\
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-installer
   - if [%USE_EXTRA_EXE%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-patch-installer
