@@ -3,4 +3,4 @@ get_filename_component(skyculture ${skyculturePath} NAME)
 
 install(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/${skyculture}
         FILES_MATCHING PATTERN "*"
-        PATTERN "CMakeLists.txt" EXCLUDE)
+        PATTERN "CMakeLists.txt" "*.png" EXCLUDE)
