@@ -57,7 +57,7 @@ NebulaTextures::NebulaTextures()
 	font.setPixelSize(25);
 	configDialog = new NebulaTexturesDialog();
 	connect(StelApp::getInstance().getModule("StelSkyLayerMgr"),
-			SIGNAL(collectionLoaded()),configDialog,SLOT(refreshInit()));
+			SIGNAL(collectionLoaded()),configDialog,SLOT(initializeRefreshIfNeeded()));
 }
 
 NebulaTextures::~NebulaTextures()

@@ -63,7 +63,7 @@ public slots:
 	void retranslate() override;
 
 	//! refresh when textures painted on screen
-	void refreshInit();
+	void initializeRefreshIfNeeded();
 
 
 	//! Reload texture configuration data
@@ -99,19 +99,19 @@ private slots:
 	void cancelSolve();
 
 	//! Recover image coords from plate-solving
-	void recoverCoords();
+	void recoverSolvedCorners();
 
 	//! Goto the center coordinates (RA and Dec) of texture
-	void goPush();
+	void moveToCenterCoord();
 
 	//! toggle temporary texture render testing
-	void toggleTempTextureRendering();
+	void toggleTempTexturePreview();
 
 	//! toggle showing default texture when testing temporary texture rendering
-	void toggleDisableDefaultTexture();
+	void toggleDefaultTextureVisibility();
 
 	//! toggle brightness change to render again
-	void onBrightnessChanged(int index);
+	void updateBrightnessLevel(int index);
 
 	//! Add the texture to the custom textures configuration
 	void addCustomTexture();
@@ -177,7 +177,7 @@ private:
 
 
 	//! Process WCS of image
-	void processWcsContent(const QString& wcsText);
+	void applyWcsSolution(const QString& wcsText);
 
 	//! Add the texture to configuration, need to specify the texture groupname
 	void addTexture(QString cfgPath, QString groupName);

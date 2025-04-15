@@ -120,11 +120,11 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(ui->openFileButton, SIGNAL(clicked()), this, SLOT(openImageFile()));
 	connect(ui->solveButton, SIGNAL(clicked()), this, SLOT(solveImage()));
 	connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(cancelSolve()));
-	connect(ui->recoverCoordsButton, SIGNAL(clicked()), this, SLOT(recoverCoords()));
-	connect(ui->goPushButton, SIGNAL(clicked()), this, SLOT(goPush()));
-	connect(ui->renderButton, SIGNAL(clicked()), this, SLOT(toggleTempTextureRendering()));
-	connect(ui->disableDefault, SIGNAL(clicked()), this, SLOT(toggleDisableDefaultTexture()));
-	connect(ui->brightComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(onBrightnessChanged(int)));
+	connect(ui->recoverCoordsButton, SIGNAL(clicked()), this, SLOT(recoverSolvedCorners()));
+	connect(ui->goPushButton, SIGNAL(clicked()), this, SLOT(moveToCenterCoord()));
+	connect(ui->renderButton, SIGNAL(clicked()), this, SLOT(toggleTempTexturePreview()));
+	connect(ui->disableDefault, SIGNAL(clicked()), this, SLOT(toggleDefaultTextureVisibility()));
+	connect(ui->brightComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateBrightnessLevel(int)));
 	connect(ui->addCustomTextureButton, SIGNAL(clicked()), this, SLOT(addCustomTexture()));
 
 	connect(ui->reloadButton, SIGNAL(clicked()), this, SLOT(reloadData()));
@@ -165,7 +165,7 @@ void NebulaTexturesDialog::createDialogContent()
 	});
 	connect(plateSolver, &PlateSolver::solutionAvailable, this, [this](const QString& wcsText) {
 		updateStatus(q_("WCS download complete. Processing..."));
-		processWcsContent(wcsText);
+		applyWcsSolution(wcsText);
 		freezeUiState(false);
 	});
 
@@ -281,7 +281,7 @@ void NebulaTexturesDialog::updateStatus(const QString &status)
 	ui->statusText->setText(status);
 }
 
-void NebulaTexturesDialog::refreshInit()
+void NebulaTexturesDialog::initializeRefreshIfNeeded()
 {
 	if(countRefresh < maxCountRefresh){
 		refreshTextures();
@@ -289,9 +289,7 @@ void NebulaTexturesDialog::refreshInit()
 	}
 }
 
-/*
- * Open a file dialog to select an image file and update the UI.
- */
+
 void NebulaTexturesDialog::openImageFile()
 {
 	QString fileName = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Open Image"), QDir::homePath(), tr("Images (*.png *.jpg *.gif *.tif *.tiff *.jpeg)"));
@@ -312,17 +310,6 @@ void NebulaTexturesDialog::cancelSolve()
 }
 
 
-/*
- * Upload an image to the server after validating input.
- * Send the API key and image path via a POST request to the server.
- *
- * Steps:
- *   - Validate the API key and image path.
- *   - Optionally save the API key for future use.
- *   - Create a JSON object with the API key.
- *   - Send the JSON data in a POST request to the server's login API.
- *   - Update the UI to indicate the upload process is in progress.
- */
 void NebulaTexturesDialog::solveImage() // WARN: image should not be flip
 {
 	QString apiKey = ui->lineEditApiKey->text();
@@ -357,44 +344,25 @@ void NebulaTexturesDialog::solveImage() // WARN: image should not be flip
 }
 
 
-void NebulaTexturesDialog::processWcsContent(const QString& wcsText)
+void NebulaTexturesDialog::applyWcsSolution(const QString& wcsText)
 {
-	QString content = wcsText;
-	QRegularExpression regex("(CRPIX1|CRPIX2|CRVAL1|CRVAL2|CD1_1|CD1_2|CD2_1|CD2_2|IMAGEW|IMAGEH)\\s*=\\s*(-?\\d*\\.?\\d+([eE][-+]?\\d+)?)(.*)");
-	QStringList lines;
-	for (int i = 0; i < content.length(); i += 80) {
-		lines.append(content.mid(i, 80));
+
+	WcsResult wcs = PlateSolver::parseWcsText(wcsText);
+	if (!wcs.valid) {
+		updateStatus(q_("Invalid WCS data."));
+		return;
 	}
 
-	for (const QString &line : lines) {
-		QRegularExpressionMatch match = regex.match(line);
-		if (match.hasMatch()) {
-			QString key = match.captured(1);
-			double value = match.captured(2).toDouble();
-			if (key == "CRPIX1") {
-				CRPIX1 = value;
-			} else if (key == "CRPIX2") {
-				CRPIX2 = value;
-			} else if (key == "CRVAL1") {
-				CRVAL1 = value;
-			} else if (key == "CRVAL2") {
-				CRVAL2 = value;
-			} else if (key == "CD1_1") {
-				CD1_1 = value;
-			} else if (key == "CD1_2") {
-				CD1_2 = value;
-			} else if (key == "CD2_1") {
-				CD2_1 = value;
-			} else if (key == "CD2_2") {
-				CD2_2 = value;
-			} else if (key == "IMAGEW") {
-				IMAGEW = value;
-			} else if (key == "IMAGEH") {
-				IMAGEH = value;
-			}
-		}
-	}
-
+	CRPIX1 = wcs.CRPIX1;
+	CRPIX2 = wcs.CRPIX2;
+	CRVAL1 = wcs.CRVAL1;
+	CRVAL2 = wcs.CRVAL2;
+	CD1_1 = wcs.CD1_1;
+	CD1_2 = wcs.CD1_2;
+	CD2_1 = wcs.CD2_1;
+	CD2_2 = wcs.CD2_2;
+	IMAGEW = wcs.IMAGEW;
+	IMAGEH = wcs.IMAGEH;
 	referRA = CRVAL1;
 	referDec = CRVAL2;
 	ui->referX->setValue(CRVAL1);
@@ -435,16 +403,7 @@ void NebulaTexturesDialog::processWcsContent(const QString& wcsText)
 }
 
 
-/*
- * Goto the center coordinates (RA and Dec) of texture in view.
- *
- * Steps:
- *   - Convert the reference right ascension and declination (referRA, referDec) into radians for spherical calculations.
- *   - Set the view up vector to a stable direction (J2000 coordinate system).
- *   - Adjust the view up vector based on the equatorial mount mode and latitude for stability.
- *   - Call the movement manager to move the view to the target coordinates, ensuring smooth transition with auto-duration.
- */
-void NebulaTexturesDialog::goPush()
+void NebulaTexturesDialog::moveToCenterCoord()
 {
 	referRA = ui->referX->value();
 	referDec = ui->referY->value();
@@ -471,7 +430,7 @@ void NebulaTexturesDialog::goPush()
 	// mvmgr->setFlagLockEquPos(useLockPosition);
 }
 
-void NebulaTexturesDialog::recoverCoords()
+void NebulaTexturesDialog::recoverSolvedCorners()
 {
 	if(solvedFlag && askConfirmation("Are you sure to recover the solution?"))
 	{
@@ -490,7 +449,7 @@ void NebulaTexturesDialog::recoverCoords()
 }
 
 // Toggle the rendering state of the temporary texture
-void NebulaTexturesDialog::toggleTempTextureRendering()
+void NebulaTexturesDialog::toggleTempTexturePreview()
 {
 	if (flag_renderTempTex) {
 		unRenderTempCustomTexture();
@@ -506,7 +465,7 @@ void NebulaTexturesDialog::toggleTempTextureRendering()
 }
 
 // Toggle the visibility of the default texture when testing temp texture rendering
-void NebulaTexturesDialog::toggleDisableDefaultTexture()
+void NebulaTexturesDialog::toggleDefaultTextureVisibility()
 {
 	if(!flag_renderTempTex)
 		return;
@@ -519,22 +478,13 @@ void NebulaTexturesDialog::toggleDisableDefaultTexture()
 }
 
 // Redo rendering when toggling Brightness Change
-void NebulaTexturesDialog::onBrightnessChanged(int index)
+void NebulaTexturesDialog::updateBrightnessLevel(int index)
 {
 	if(flag_renderTempTex)
 		renderTempCustomTexture();
 }
 
-/*
- * Render temporary custom texture for the nebula based on the user-provided image path.
- * Check if the path is valid, add the texture to the system, and insert it into the sky layer.
- * Update the UI status on success or failure and optionally hide the default texture if enabled.
- *
- * Steps:
- *   - Validate image path.
- *   - Render the custom texture by adding it to the sky layer.
- *   - Update UI status and manage default texture visibility based on user preferences.
- */
+
 void NebulaTexturesDialog::renderTempCustomTexture()
 {
 	QString imagePath = ui->lineEditImagePath->text();
@@ -544,28 +494,21 @@ void NebulaTexturesDialog::renderTempCustomTexture()
 		QString copiedName = ensureImageCopied(imagePath, TEST_TEXNAME);
 		if (copiedName.isEmpty()) return;  // error
 
-		// deleteImagesFromCfg(tmpcfgFile);  // delete outtime image
 		tileManager->deleteImagesFromConfig(tmpCfgManager, pluginDir);
 	}
 
-	// add test texture
+	// add test texture config entry
 	addTexture(tmpcfgFile, TEST_TEXNAME);
 
-	// load test texture
-	const QString fullPath = StelFileMgr::getUserDir() + tmpcfgFile;
-	if (fullPath.isEmpty()) {
-		qWarning() << "[NebulaTextures] Failed to resolve config path.";
+	// load test texture from config
+	if (!tileManager->insertTileFromConfig(tmpcfgFile, TEST_TEXNAME, true)) {
+		qWarning() << "[NebulaTextures] Failed to load temp texture from config.";
 		return;
 	}
 
-	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-	if (flag_renderTempTex) {
-		skyLayerMgr->removeSkyLayer(TEST_TEXNAME);
-	}
-
-	skyLayerMgr->insertSkyImage(fullPath, QString(), true, 1);
 	flag_renderTempTex = true;
 
+	// optionally hide default texture if requested
 	if (ui->disableDefault->isChecked()) {
 		tileManager->setTileVisible(DEFAULT_TEXNAME, false);
 	}
@@ -580,29 +523,22 @@ void NebulaTexturesDialog::updateTempCustomTexture(double inf)
 		// deleteImagesFromCfg(tmpcfgFile);
 		addTexture(tmpcfgFile, TEST_TEXNAME);
 
-		StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-		skyLayerMgr->removeSkyLayer(TEST_TEXNAME);
-		skyLayerMgr->insertSkyImage(path, QString(), true, 1);
+		if (!tileManager->insertTileFromConfig(tmpcfgFile, TEST_TEXNAME, true)) {
+			qWarning() << "[NebulaTextures] Failed to update temp texture from config.";
+		}
 	}
 
 	if(solvedFlag)
 		ui->recoverCoordsButton->setVisible(true);
 }
 
-/*
- * Cancel temporary custom texture rendering and restore the default texture.
- *
- * Steps:
- *   - Remove the temporary texture from the sky layer.
- *   - Restore the default texture and reload all textures.
- *   - Update the UI status to reflect the cancellation.
- */
+
 void NebulaTexturesDialog::unRenderTempCustomTexture()
 {
 	if(!flag_renderTempTex)
 		return;
-	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-	skyLayerMgr->removeSkyLayer(TEST_TEXNAME);
+
+	tileManager->removeTile(TEST_TEXNAME);
 
 	flag_renderTempTex = false;
 	tileManager->setTileVisible(DEFAULT_TEXNAME, true);
@@ -610,9 +546,6 @@ void NebulaTexturesDialog::unRenderTempCustomTexture()
 }
 
 
-/*
- *  Add the texture to the custom textures configuration
- */
 void NebulaTexturesDialog::addCustomTexture()
 {
 	if(!askConfirmation("Caution! Are you sure to add this texture? It will only take effect after restarting Stellarium."))
@@ -621,19 +554,7 @@ void NebulaTexturesDialog::addCustomTexture()
 	addTexture(configFile, CUSTOM_TEXNAME);
 }
 
-/*
- * Add the texture to configuration, groupName needed.
- *
- * Steps:
- *   - Validate the image path from the input field.
- *   - Copy the image file to the user folder with a timestamped name.
- *   - Retrieve celestial coordinates (RA, Dec) from the UI for the image's corners and reference point.
- *   - Organize the coordinates into a JSON array for later use.
- *   - Call `registerTexture` to store the texture and its associated coordinates.
- *
- * @param cfgPath  The path of the configuration file to update.
- * @param groupName  The group name for the texture, custom or temporary.
- */
+
 void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 {
 	QString imagePath = ui->lineEditImagePath->text();
@@ -712,19 +633,6 @@ QString NebulaTexturesDialog::ensureImageCopied(const QString& imagePath, const 
 }
 
 
-/*
- * Remove the selected texture from the list and deletes the associated image file.
- *
- * Steps:
- *   - Get the currently selected item from the texture list.
- *   - Prompt the user with a confirmation dialog asking whether they want to remove the texture.
- *   - If the user confirms, proceed with the removal process.
- *   - Open and parse the JSON configuration file that contains texture information.
- *   - Search for the texture in the "subTiles" array by matching the texture name (`imageUrl`).
- *   - If the texture is found, delete the corresponding image file from the disk.
- *   - Remove the texture entry from the JSON and save the updated configuration file.
- *   - Finally, remove the texture from the UI list.
- */
 void NebulaTexturesDialog::removeTexture()
 {
 	QListWidgetItem* selectedItem = ui->listWidget->currentItem();
@@ -747,18 +655,6 @@ void NebulaTexturesDialog::removeTexture()
 }
 
 
-/*
- * Reload texture data and update the UI list widget with available sub-tiles.
- *
- * Steps:
- *   - Refresh textures by calling the `refreshTextures()` function.
- *   - Retrieve the path to the JSON configuration file.
- *   - Open and parse the JSON file to extract texture data.
- *   - Validate the JSON structure, ensuring it contains a "subTiles" array.
- *   - Clear the existing list widget items.
- *   - Populate the list widget with entries from the "subTiles" array, displaying the image URL.
- *   - Associate metadata from each sub-tile with its corresponding list widget item.
- */
 void NebulaTexturesDialog::reloadData()
 {	
 	refreshTextures();
@@ -781,14 +677,6 @@ void NebulaTexturesDialog::reloadData()
 }
 
 
-/*
- * Refresh textures and manage their visibility.
- *
- * Steps:
- *   - Check "show custom textures" flag
- *   - If enabled, make them visible and calls avoidConflict to handle potential conflicts.
- *   - If disabled, ensure the custom textures are hidden and the default textures are visible.
- */
 void NebulaTexturesDialog::refreshTextures()
 {
 	bool showCustom = getShowCustomTextures();
@@ -800,22 +688,12 @@ void NebulaTexturesDialog::refreshTextures()
 		tileManager->setTileVisible(CUSTOM_TEXNAME,true);
 		if (getAvoidAreaConflict())
 			tileManager->resolveConflicts(DEFAULT_TEXNAME, CUSTOM_TEXNAME);
+		else
+			tileManager->setTileVisible(DEFAULT_TEXNAME,true);
 	}
 }
 
 
-/*
- * Move the view to the center coordinates of the selected nebula texture.
- *
- * Steps:
- *   - Retrieve the selected item from the list.
- *   - Open and parse the JSON configuration file.
- *   - Find the corresponding texture entry based on the selected item.
- *   - Extract world coordinate information from the JSON data.
- *   - Compute the spherical center of the texture using vector averaging.
- *   - Convert the computed center to Right Ascension (RA) and Declination (Dec).
- *   - Adjust the camera's view to focus on the computed coordinates.
- */
 void NebulaTexturesDialog::gotoSelectedItem(QListWidgetItem* item)
 {
 	if (!item) return;

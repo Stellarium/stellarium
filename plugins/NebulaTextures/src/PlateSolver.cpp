@@ -42,6 +42,42 @@ PlateSolver::PlateSolver(QObject* parent)
 	connect(jobStatusTimer, &QTimer::timeout, this, &PlateSolver::sendJobStatusRequest);
 }
 
+
+WcsResult PlateSolver::parseWcsText(const QString& wcsText)
+{
+	WcsResult result;
+	result.valid = false;
+
+	QRegularExpression regex(R"((CRPIX1|CRPIX2|CRVAL1|CRVAL2|CD1_1|CD1_2|CD2_1|CD2_2|IMAGEW|IMAGEH)\s*=\s*(-?\d+(\.\d+)?([eE][-+]?\d+)?))");
+	QStringList lines;
+	for (int i = 0; i < wcsText.length(); i += 80)
+		lines.append(wcsText.mid(i, 80));
+
+	for (const QString& line : lines) {
+		auto match = regex.match(line);
+		if (match.hasMatch()) {
+			QString key = match.captured(1);
+			double value = match.captured(2).toDouble();
+
+			if (key == "CRPIX1") result.CRPIX1 = value;
+			else if (key == "CRPIX2") result.CRPIX2 = value;
+			else if (key == "CRVAL1") result.CRVAL1 = value;
+			else if (key == "CRVAL2") result.CRVAL2 = value;
+			else if (key == "CD1_1")  result.CD1_1  = value;
+			else if (key == "CD1_2")  result.CD1_2  = value;
+			else if (key == "CD2_1")  result.CD2_1  = value;
+			else if (key == "CD2_2")  result.CD2_2  = value;
+			else if (key == "IMAGEW") result.IMAGEW = value;
+			else if (key == "IMAGEH") result.IMAGEH = value;
+		}
+	}
+
+	// 可增加基本有效性判断
+	result.valid = true;
+	return result;
+}
+
+
 void PlateSolver::startPlateSolving(const QString& _apiKey, const QString& _imagePath)
 {
 	apiKey = _apiKey;

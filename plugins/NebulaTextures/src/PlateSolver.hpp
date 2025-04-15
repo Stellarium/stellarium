@@ -27,12 +27,20 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
+struct WcsResult {
+	double CRPIX1, CRPIX2, CRVAL1, CRVAL2;
+	double CD1_1, CD1_2, CD2_1, CD2_2;
+	int IMAGEW, IMAGEH;
+	bool valid = false;
+};
+
 class PlateSolver : public QObject
 {
 	Q_OBJECT
 
 public:
 	explicit PlateSolver(QObject* parent = nullptr);
+	static WcsResult parseWcsText(const QString& wcsText);
 	void startPlateSolving(const QString& apiKey, const QString& imagePath);
 	void cancel();
 
