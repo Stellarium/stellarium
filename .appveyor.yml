@@ -78,6 +78,7 @@ before_build:
   - ps: if($env:QT_VERSION_MAJOR -eq "6") { $env:SSL="OpenSSL-" } else { $env:SSL="OpenSSL-1-" }
   - set PUBLISH_BINARY=false
   - set USE_LIBGLES=false
+  - set USE_EXT_LIBSSL=false
   - set USE_EXT_LIBGLES=false
   - set SIGNING=false
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\Inno Setup 6
@@ -89,15 +90,12 @@ before_build:
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next" -or $env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { $env:USE_EXTRA_EXE = 'true' } else { $env:USE_EXTRA_EXE = 'false' }
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:QT_VERSION_MAJOR -eq "5") { $env:USE_EXT_LIBGLES = 'true' }
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:BUILD_NAME.contains('Win')) { $env:USE_LIBGLES = 'true' }
+  - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:BUILD_NAME.contains('Win')) { $env:USE_LIBSSL = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable" -and $env:QT_VERSION_MAJOR -eq "6") { $env:SIGNING = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable" -and $env:QT_VERSION_MAJOR -eq "5") { $env:SIGNING = 'true' }
   - ps: if($env:exiv2url -ne $null) { appveyor DownloadFile $env:exiv2url -FileName c:\$env:exiv2baseName.zip }
   - ps: if($env:exiv2url -ne $null) { 7z e c:\$env:exiv2baseName.zip -spf -oc:\ }
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
-  - if [%PUBLISH_BINARY%]==[true] mkdir c:\stellarium-OpenSSL
-  - if [%PUBLISH_BINARY%]==[true] set PATH=C:\stellarium-OpenSSL;%PATH%
-  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/%SSL%Win%BITS%.zip -FileName c:\stellarium-OpenSSL.zip
-  - if [%PUBLISH_BINARY%]==[true] 7z e c:\stellarium-OpenSSL.zip -aoa -oc:\stellarium-OpenSSL
 
   - ps: if ($env:scConverterEnabled) { appveyor DownloadFile $env:gettextURL -FileName c:\$env:gettextBaseName.zip }
   - ps: if ($env:scConverterEnabled) { 7z e c:\$env:gettextBaseName.zip -spf -oc:\$env:gettextBaseName }
@@ -145,6 +143,8 @@ after_test:
   - if [%USE_EXT_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win%BITS%.zip -FileName c:\stellarium\build\libGLES.zip
   - if [%USE_EXT_LIBGLES%]==[true] 7z e c:\stellarium\build\libGLES.zip -aoa -oc:\stellarium-package\qtstuff
   - if [%USE_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-%PKGARCH%.dll -FileName c:\stellarium-package\qtstuff\opengl32sw.dll
+  - if [%USE_EXT_LIBSSL%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/%SSL%Win%BITS%.zip -FileName c:\stellarium-OpenSSL.zip
+  - if [%USE_EXT_LIBSSL%]==[true] 7z e c:\stellarium-OpenSSL.zip -aoa -oc:\stellarium-package\qtstuff\
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/translations/translations.zip -FileName c:\translations.zip
   - if [%PUBLISH_BINARY%]==[true] 7z e c:\translations.zip -spf -oc:\stellarium-package\share\stellarium\
   - if [%PUBLISH_BINARY%]==[true] if NOT [%exiv2url%] == [] copy c:\%exiv2baseName%\bin\exiv2.dll c:\stellarium-package\bin\
