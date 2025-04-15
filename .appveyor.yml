@@ -90,7 +90,7 @@ before_build:
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next" -or $env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { $env:USE_EXTRA_EXE = 'true' } else { $env:USE_EXTRA_EXE = 'false' }
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:QT_VERSION_MAJOR -eq "5") { $env:USE_EXT_LIBGLES = 'true' }
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:BUILD_NAME.contains('Win')) { $env:USE_LIBGLES = 'true' }
-  - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:BUILD_NAME.contains('Win')) { $env:USE_LIBSSL = 'true' }
+  - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:BUILD_NAME.contains('Win')) { $env:USE_EXT_LIBSSL = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable" -and $env:QT_VERSION_MAJOR -eq "6") { $env:SIGNING = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable" -and $env:QT_VERSION_MAJOR -eq "5") { $env:SIGNING = 'true' }
   - ps: if($env:exiv2url -ne $null) { appveyor DownloadFile $env:exiv2url -FileName c:\$env:exiv2baseName.zip }
