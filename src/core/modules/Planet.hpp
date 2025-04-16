@@ -261,8 +261,6 @@ public:
 	virtual QString getIAUDesignation(void) const;
 	QString getNameNative(void) const override { return (culturalNames.isEmpty() ? "" : culturalNames.constFirst().native); }
 	QString getNameNativeI18n(void) const { return (culturalNames.isEmpty() ? "" : culturalNames.constFirst().translatedI18n); }
-	QString getCommonEnglishName(void) const {return englishName;}
-	QString getCommonNameI18n(void) const {return nameI18;}
 
 	// NEW Skyculture-related names
 	//! retrieve pronunciation from the first of the cultural names

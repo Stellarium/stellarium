@@ -1603,7 +1603,7 @@ void AstroCalcDialog::currentHECPositions()
 				coordStrings.second = StelUtils::radToDmsStr(longitude, true);
 			}
 
-			fillHECPositionTable(planet->getNameI18n(), symbol.value(planet->getCommonEnglishName(), QChar(0x200B)), coordStrings.first, coordStrings.second, distance);
+			fillHECPositionTable(planet->getNameI18n(), symbol.value(planet->getEnglishName(), QChar(0x200B)), coordStrings.first, coordStrings.second, distance);
 			object.objectName = planet->getNameI18n();
 			object.angle = 360.-dl;
 			object.dist = log(distance);
