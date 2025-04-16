@@ -79,6 +79,8 @@ After downloading, place them in the following directory structure (example for 
 
 > The filename must match the URL exactly, and the directory name is the package name in lowercase.
 
+You can also write a script to automate this process.
+
 ### Installing these packages
 
 To install all of these, use the following commands:
