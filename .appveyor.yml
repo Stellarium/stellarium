@@ -73,9 +73,7 @@ environment:
     CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.8\msvc2022_64 -DQt6LinguistTools_DIR=C:\Qt\6.8\msvc2022_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
     scConverterEnabled: 0
 before_build:
-  - ps: if($env:QT_BASEDIR.contains('_64')) { $env:BITS=64 } else { $env:BITS=32 }
-  - ps: if($env:QT_BASEDIR.contains('_64')) { $env:PKGARCH="x64" } else { $env:PKGARCH="x86" }
-  - ps: if($env:QT_VERSION_MAJOR -eq "6") { $env:SSL="OpenSSL-" } else { $env:SSL="OpenSSL-1-" }
+  - set DEBUG_WINDEPLOYQT=true
   - set PUBLISH_BINARY=false
   - set USE_LIBGLES=false
   - set USE_EXT_LIBSSL=false
@@ -83,16 +81,21 @@ before_build:
   - set SIGNING=false
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\Inno Setup 6
   - set PATH=%VSPATH%;%QT_BASEDIR%\bin;c:\%exiv2baseName%\bin;%INNSPATH%;%PATH%
+
+  - ps: if($env:QT_BASEDIR.contains('_64') -or $env:QT_BASEDIR.contains('arm64')) { $env:BITS=64 } else { $env:BITS=32 }
+  - ps: if($env:QT_BASEDIR.contains('_64')) { $env:PKGARCH="x64" } else { $env:PKGARCH="x86" }
+  - ps: if($env:QT_BASEDIR.contains('arm64')) { $env:PKGARCH="arm64" }
+  - ps: if($env:QT_VERSION_MAJOR -eq "6") { $env:SSL="OpenSSL-" } else { $env:SSL="OpenSSL-1-" }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next" -or $env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { $env:USE_EXTRA_EXE = 'true' } else { $env:USE_EXTRA_EXE = 'false' }
-  - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:QT_VERSION_MAJOR -eq "5") { $env:USE_EXT_LIBGLES = 'true' }
-  - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:BUILD_NAME.contains('Win')) { $env:USE_LIBGLES = 'true' }
+  - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:QT_VERSION_MAJOR -eq "5" -and $env:BUILD_NAME.contains('Win')) { $env:USE_EXT_LIBGLES = 'true' }
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:BUILD_NAME.contains('Win')) { $env:USE_EXT_LIBSSL = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable" -and $env:QT_VERSION_MAJOR -eq "6") { $env:SIGNING = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable" -and $env:QT_VERSION_MAJOR -eq "5") { $env:SIGNING = 'true' }
+
   - ps: if($env:exiv2url -ne $null) { appveyor DownloadFile $env:exiv2url -FileName c:\$env:exiv2baseName.zip }
   - ps: if($env:exiv2url -ne $null) { 7z e c:\$env:exiv2baseName.zip -spf -oc:\ }
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
@@ -134,6 +137,8 @@ test_script:
 
 after_test:
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target install
+  - if [%DEBUG_WINDEPLOYQT%]==[true] cd c:\stellarium\build\
+  - if [%DEBUG_WINDEPLOYQT%]==[true] for %%i in (windeployqt.*) do appveyor PushArtifact %%i
   - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\%gettextBaseName%\bin\libgettextpo-0.dll c:\stellarium-package\bin\libgettextpo.dll
   - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\%gettextBaseName%\bin\libintl-8.dll c:\stellarium-package\bin\
   - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\%gettextBaseName%\bin\libiconv-2.dll c:\stellarium-package\bin\
