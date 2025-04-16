@@ -157,28 +157,35 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(ui->bottomRightX, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
 	connect(ui->bottomRightY, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
 
-	connect(plateSolver, &PlateSolver::loginSuccess, this, [this]() {
+	connect(plateSolver, &PlateSolver::loginSuccess, this, [this]()
+	{
 		updateStatus(q_("Login success..."));
 	});
-	connect(plateSolver, &PlateSolver::loginFailed, this, [this](const QString& reason) {
+	connect(plateSolver, &PlateSolver::loginFailed, this, [this](const QString& reason)
+	{
 		updateStatus(q_("Login failed: ") + reason);
 		freezeUiState(false);
 	});
-	connect(plateSolver, &PlateSolver::uploadSuccess, this, [this]() {
+	connect(plateSolver, &PlateSolver::uploadSuccess, this, [this]()
+	{
 		updateStatus(q_("Image uploaded. Please wait..."));
 	});
-	connect(plateSolver, &PlateSolver::uploadFailed, this, [this](const QString& reason) {
+	connect(plateSolver, &PlateSolver::uploadFailed, this, [this](const QString& reason)
+	{
 		updateStatus(q_("Upload failed: ") + reason);
 		freezeUiState(false);
 	});
-	connect(plateSolver, &PlateSolver::solvingStatusUpdated, this, [this](const QString& status) {
+	connect(plateSolver, &PlateSolver::solvingStatusUpdated, this, [this](const QString& status)
+	{
 		updateStatus(status);
 	});
-	connect(plateSolver, &PlateSolver::failed, this, [this](const QString& msg) {
+	connect(plateSolver, &PlateSolver::failed, this, [this](const QString& msg)
+	{
 		updateStatus(q_("Solve failed: ") + msg);
 		freezeUiState(false);
 	});
-	connect(plateSolver, &PlateSolver::solutionAvailable, this, [this](const QString& wcsText) {
+	connect(plateSolver, &PlateSolver::solutionAvailable, this, [this](const QString& wcsText)
+	{
 		updateStatus(q_("WCS download complete. Processing..."));
 		applyWcsSolution(wcsText);
 		freezeUiState(false);
@@ -205,8 +212,10 @@ void NebulaTexturesDialog::restoreDefaults()
 		tileManager->deleteImagesFromConfig(configManager, pluginDir);
 
 		QString cfgPath = StelFileMgr::getUserDir() + configFile;
-		if (QFile::exists(cfgPath)) {
-			if (QFile::remove(cfgPath)) {
+		if (QFile::exists(cfgPath))
+		{
+			if (QFile::remove(cfgPath))
+			{
 				qDebug() << "[NebulaTextures] Deleted texture config file:" << cfgPath;
 			} else {
 				qWarning() << "[NebulaTextures] Failed to delete config file:" << cfgPath;
@@ -216,8 +225,10 @@ void NebulaTexturesDialog::restoreDefaults()
 		// deleteImagesFromCfg(tmpcfgFile);
 		tileManager->deleteImagesFromConfig(tmpCfgManager, pluginDir);
 		cfgPath = StelFileMgr::getUserDir() + tmpcfgFile;
-		if (QFile::exists(cfgPath)) {
-			if (QFile::remove(cfgPath)) {
+		if (QFile::exists(cfgPath))
+		{
+			if (QFile::remove(cfgPath))
+			{
 				qDebug() << "[NebulaTextures] Deleted temporary texture config file:" << cfgPath;
 			} else {
 				qWarning() << "[NebulaTextures] Failed to delete temporary config file:" << cfgPath;
@@ -306,7 +317,8 @@ void NebulaTexturesDialog::updateStatus(const QString &status)
  */
 void NebulaTexturesDialog::initializeRefreshIfNeeded()
 {
-	if(refreshCount < refreshLimit){
+	if(refreshCount < refreshLimit)
+	{
 		refreshTextures();
 		refreshCount++;
 	}
@@ -330,7 +342,8 @@ void NebulaTexturesDialog::openImageFile()
  */
 void NebulaTexturesDialog::cancelSolve()
 {
-	if (plateSolver) {
+	if (plateSolver)
+	{
 		plateSolver->cancel();
 	}
 	updateStatus(q_("Operation cancelled by user."));
@@ -347,20 +360,23 @@ void NebulaTexturesDialog::solveImage() // WARN: image should not be flip
 	QString apiKey = ui->lineEditApiKey->text();
 	QString imagePath = ui->lineEditImagePath->text();
 
-	if (imagePath.isEmpty() || apiKey.isEmpty()) {
+	if (imagePath.isEmpty() || apiKey.isEmpty())
+	{
 		updateStatus(q_("Please provide both API key and image path."));
 		return;
 	}
 
 	QFileInfo fileInfo(imagePath);
-	if (!fileInfo.exists() || !fileInfo.isReadable()) {
+	if (!fileInfo.exists() || !fileInfo.isReadable())
+	{
 		updateStatus(q_("The specified image file does not exist or is not readable."));
 		return;
 	}
 
 	QString suffix = fileInfo.suffix().toLower();
 	QStringList allowedSuffixes = {"png", "jpg", "gif", "tif", "tiff", "jpeg"};
-	if (!allowedSuffixes.contains(suffix)) {
+	if (!allowedSuffixes.contains(suffix))
+	{
 		updateStatus(q_("Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."));
 		return;
 	}
@@ -383,7 +399,8 @@ void NebulaTexturesDialog::applyWcsSolution(const QString& wcsText)
 {
 
 	WcsResult wcs = PlateSolver::parseWcsText(wcsText);
-	if (!wcs.valid) {
+	if (!wcs.valid)
+	{
 		updateStatus(q_("Invalid WCS data."));
 		return;
 	}
@@ -502,7 +519,8 @@ void NebulaTexturesDialog::recoverSolvedCorners()
  */
 void NebulaTexturesDialog::toggleTempTexturePreview()
 {
-	if (isTempTextureVisible) {
+	if (isTempTextureVisible)
+	{
 		removeTempTexturePreview();
 	} else {
 		showTempTexturePreview();
@@ -526,7 +544,8 @@ void NebulaTexturesDialog::toggleDefaultTextureVisibility()
 		return;
 	if(ui->disableDefault->isChecked())
 		tileManager->setTileVisible(DEFAULT_TEXNAME, false);
-	else{
+	else
+	{
 		tileManager->setTileVisible(DEFAULT_TEXNAME, true);
 		refreshTextures();
 	}
@@ -555,7 +574,8 @@ void NebulaTexturesDialog::showTempTexturePreview()
 	QString imagePath = ui->lineEditImagePath->text();
 
 	// clean outtime image if select new
-	if (imagePath != imagePathTemp_src) {
+	if (imagePath != imagePathTemp_src)
+	{
 		QString copiedName = ensureImageCopied(imagePath, TEST_TEXNAME);
 		if (copiedName.isEmpty()) return;  // error
 
@@ -566,7 +586,8 @@ void NebulaTexturesDialog::showTempTexturePreview()
 	addTexture(tmpcfgFile, TEST_TEXNAME);
 
 	// load test texture from config
-	if (!tileManager->insertTileFromConfig(tmpcfgFile, TEST_TEXNAME, true)) {
+	if (!tileManager->insertTileFromConfig(tmpcfgFile, TEST_TEXNAME, true))
+	{
 		qWarning() << "[NebulaTextures] Failed to load temp texture from config.";
 		return;
 	}
@@ -574,7 +595,8 @@ void NebulaTexturesDialog::showTempTexturePreview()
 	isTempTextureVisible = true;
 
 	// optionally hide default texture if requested
-	if (ui->disableDefault->isChecked()) {
+	if (ui->disableDefault->isChecked())
+	{
 		tileManager->setTileVisible(DEFAULT_TEXNAME, false);
 	}
 }
@@ -592,7 +614,8 @@ void NebulaTexturesDialog::refreshTempTexturePreview()
 		// deleteImagesFromCfg(tmpcfgFile);
 		addTexture(tmpcfgFile, TEST_TEXNAME);
 
-		if (!tileManager->insertTileFromConfig(tmpcfgFile, TEST_TEXNAME, true)) {
+		if (!tileManager->insertTileFromConfig(tmpcfgFile, TEST_TEXNAME, true))
+		{
 			qWarning() << "[NebulaTextures] Failed to update temp texture from config.";
 		}
 	}
@@ -659,7 +682,8 @@ void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 	double brightness = ui->brightComboBox->currentData().toDouble();
 
 	TextureConfigManager* manager = (groupName == TEST_TEXNAME) ? tmpCfgManager : configManager;
-	if (!manager->load()) {
+	if (!manager->load())
+	{
 		updateStatus(q_("Failed to load texture configuration."));
 		return;
 	}
@@ -684,7 +708,8 @@ void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
  */
 QString NebulaTexturesDialog::ensureImageCopied(const QString& imagePath, const QString& groupName)
 {
-	if (imagePath.isEmpty()) {
+	if (imagePath.isEmpty())
+	{
 		updateStatus(q_("Image path is empty."));
 		return "";
 	}
@@ -695,14 +720,16 @@ QString NebulaTexturesDialog::ensureImageCopied(const QString& imagePath, const 
 		return (groupName == TEST_TEXNAME) ? imagePathTemp_dst : imagePath_dst;
 
 	QFileInfo fileInfo(imagePath);
-	if (!fileInfo.exists() || !fileInfo.isReadable()) {
+	if (!fileInfo.exists() || !fileInfo.isReadable())
+	{
 		updateStatus(q_("Image file invalid or unreadable."));
 		return "";
 	}
 
 	QString suffix = fileInfo.suffix().toLower();
 	QStringList allowed = {"png", "jpg", "gif", "tif", "tiff", "jpeg"};
-	if (!allowed.contains(suffix)) {
+	if (!allowed.contains(suffix))
+	{
 		updateStatus(q_("Invalid image format."));
 		return "";
 	}
@@ -713,13 +740,15 @@ QString NebulaTexturesDialog::ensureImageCopied(const QString& imagePath, const 
 	QString targetPath = StelFileMgr::getUserDir() + pluginDir + imageUrl;
 
 	QDir().mkpath(StelFileMgr::getUserDir() + pluginDir);
-	if (!QFile::copy(imagePath, targetPath)) {
+	if (!QFile::copy(imagePath, targetPath))
+	{
 		updateStatus(q_("Failed to copy image file."));
 		return "";
 	}
 
 	// update path log
-	if (groupName == TEST_TEXNAME) {
+	if (groupName == TEST_TEXNAME)
+	{
 		imagePathTemp_src = imagePath;
 		imagePathTemp_dst = imageUrl;
 	} else {
@@ -745,7 +774,8 @@ void NebulaTexturesDialog::removeTexture()
 
 	if (!configManager->load()) return;
 
-	if (configManager->removeSubTileByImageUrl(imageUrl)) {
+	if (configManager->removeSubTileByImageUrl(imageUrl))
+	{
 		QString imgPath = StelFileMgr::getUserDir() + pluginDir + imageUrl;
 		if (QFile::exists(imgPath))
 			QFile::remove(imgPath);
@@ -763,7 +793,8 @@ void NebulaTexturesDialog::reloadData()
 {	
 	refreshTextures();
 
-	if (!configManager->load()) {
+	if (!configManager->load())
+	{
 		ui->listWidget->clear();
 		return;
 	}
@@ -771,7 +802,8 @@ void NebulaTexturesDialog::reloadData()
 	ui->listWidget->clear();
 	QJsonArray tiles = configManager->getSubTiles();
 
-	for (const QJsonValue& tile : tiles) {
+	for (const QJsonValue& tile : tiles)
+	{
 		QJsonObject obj = tile.toObject();
 		QString url = obj["imageUrl"].toString();
 		QListWidgetItem* item = new QListWidgetItem(url, ui->listWidget);
@@ -789,11 +821,13 @@ void NebulaTexturesDialog::reloadData()
 void NebulaTexturesDialog::refreshTextures()
 {
 	bool showCustom = getShowCustomTextures();
-	if (!showCustom){
+	if (!showCustom)
+	{
 		tileManager->setTileVisible(CUSTOM_TEXNAME,false);
 		tileManager->setTileVisible(DEFAULT_TEXNAME,true);
 	}
-	else{
+	else
+	{
 		tileManager->setTileVisible(CUSTOM_TEXNAME,true);
 		if (getAvoidAreaConflict())
 			tileManager->resolveConflicts(DEFAULT_TEXNAME, CUSTOM_TEXNAME);
@@ -815,7 +849,8 @@ void NebulaTexturesDialog::gotoSelectedItem(QListWidgetItem* item)
 
 	QString imageUrl = item->text();
 
-	if (!configManager->load()) {
+	if (!configManager->load())
+	{
 		qWarning() << "[NebulaTextures] Failed to load config for selection.";
 		return;
 	}
@@ -825,13 +860,15 @@ void NebulaTexturesDialog::gotoSelectedItem(QListWidgetItem* item)
 		return;
 
 	QJsonArray worldCoords = subTile["worldCoords"].toArray();
-	if (worldCoords.size() != 1 || !worldCoords[0].isArray()) {
+	if (worldCoords.size() != 1 || !worldCoords[0].isArray())
+	{
 		qWarning() << "[NebulaTextures] Invalid or missing worldCoords.";
 		return;
 	}
 
 	QJsonArray corners = worldCoords[0].toArray();
-	if (corners.size() != 4) {
+	if (corners.size() != 4)
+	{
 		qWarning() << "[NebulaTextures] Invalid corner count.";
 		return;
 	}
@@ -850,7 +887,8 @@ void NebulaTexturesDialog::gotoSelectedItem(QListWidgetItem* item)
 
 	mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
 	Vec3d aimUp = mvmgr->getViewUpVectorJ2000();
-	if ((mvmgr->getMountMode() == StelMovementMgr::MountEquinoxEquatorial) && fabs(spinLat) > (0.9 * M_PI_2)) {
+	if ((mvmgr->getMountMode() == StelMovementMgr::MountEquinoxEquatorial) && fabs(spinLat) > (0.9 * M_PI_2))
+	{
 		mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat > 0. ? 1. : -1.));
 		aimUp = mvmgr->getViewUpVectorJ2000();
 	}

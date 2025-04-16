@@ -63,8 +63,10 @@ bool TileManager::setTileVisible(const QString& key, bool visible)
 	StelSkyImageTile* tile = getTile(key);
 	if (!tile) return false;
 
-	for (auto subTile : tile->getSubTiles()) {
-		if (auto imageTile = dynamic_cast<StelSkyImageTile*>(subTile)) {
+	for (auto subTile : tile->getSubTiles())
+	{
+		if (auto imageTile = dynamic_cast<StelSkyImageTile*>(subTile))
+		{
 			imageTile->setVisible(visible);
 		}
 	}
@@ -82,7 +84,8 @@ bool TileManager::insertTileFromConfig(const QString& configFilePath, const QStr
 	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
 	QString fullPath = StelFileMgr::getUserDir() + configFilePath;
 
-	if (fullPath.isEmpty()) {
+	if (fullPath.isEmpty())
+	{
 		qWarning() << "[TileManager] Invalid config path:" << configFilePath;
 		return false;
 	}
@@ -113,14 +116,16 @@ bool TileManager::hasConflict(StelSkyImageTile* tileA, StelSkyImageTile* tileB)
 {
 	if (!tileA || !tileB) return false;
 
-	for (auto subA : tileA->getSubTiles()) {
+	for (auto subA : tileA->getSubTiles())
+	{
 		auto imageA = dynamic_cast<StelSkyImageTile*>(subA);
 		if (!imageA || !imageA->getVisible() || imageA->getSkyConvexPolygons().isEmpty())
 			continue;
 
 		auto polyA = imageA->getSkyConvexPolygons()[0];
 
-		for (auto subB : tileB->getSubTiles()) {
+		for (auto subB : tileB->getSubTiles())
+		{
 			auto imageB = dynamic_cast<StelSkyImageTile*>(subB);
 			if (!imageB || !imageB->getVisible() || imageB->getSkyConvexPolygons().isEmpty())
 				continue;
@@ -144,20 +149,23 @@ void TileManager::resolveConflicts(const QString& defaultTexName, const QString&
 
 	if (!defTile || !cusTile) return;
 
-	for (auto subDef : defTile->getSubTiles()) {
+	for (auto subDef : defTile->getSubTiles())
+	{
 		auto tileDef = dynamic_cast<StelSkyImageTile*>(subDef);
 		if (!tileDef || !tileDef->getVisible() || tileDef->getSkyConvexPolygons().isEmpty())
 			continue;
 
 		auto polyDef = tileDef->getSkyConvexPolygons()[0];
 
-		for (auto subCus : cusTile->getSubTiles()) {
+		for (auto subCus : cusTile->getSubTiles())
+		{
 			auto tileCus = dynamic_cast<StelSkyImageTile*>(subCus);
 			if (!tileCus || !tileCus->getVisible() || tileCus->getSkyConvexPolygons().isEmpty())
 				continue;
 
 			auto polyCus = tileCus->getSkyConvexPolygons()[0];
-			if (polyCus->intersects(polyDef)) {
+			if (polyCus->intersects(polyDef))
+			{
 				// Hide the default tile if it overlaps with custom tile
 				tileDef->setVisible(false);
 				break;
@@ -172,21 +180,25 @@ void TileManager::resolveConflicts(const QString& defaultTexName, const QString&
 //! @param pluginDir Directory path prefix where the image files are located.
 void TileManager::deleteImagesFromConfig(TextureConfigManager* configManager, const QString& pluginDir)
 {
-	if (!configManager || !configManager->load()) {
+	if (!configManager || !configManager->load())
+	{
 		qWarning() << "[TileManager] Failed to load configManager";
 		return;
 	}
 
 	QJsonArray subTiles = configManager->getSubTiles();
-	for (const QJsonValue& tileVal : subTiles) {
+	for (const QJsonValue& tileVal : subTiles)
+	{
 		if (!tileVal.isObject()) continue;
 		QJsonObject obj = tileVal.toObject();
 		QString imageUrl = obj.value("imageUrl").toString();
 		QString imagePath = StelFileMgr::getUserDir() + pluginDir + imageUrl;
 
-		if (QFile::exists(imagePath)) {
+		if (QFile::exists(imagePath))
+		{
 			// Try deleting the image file
-			if (!QFile::remove(imagePath)) {
+			if (!QFile::remove(imagePath))
+			{
 				qWarning() << "[TileManager] Failed to delete:" << imagePath;
 			}
 		} else {

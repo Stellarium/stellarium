@@ -103,7 +103,8 @@ void TextureConfigManager::addSubTile(const QString& imageUrl, const QJsonArray&
 	tile["worldCoords"] = outerWorldCoords;
 
 	// Define default texture coordinates (normalized quad)
-	QJsonArray texCoords = {
+	QJsonArray texCoords =
+	{
 		QJsonArray({0, 0}),
 		QJsonArray({1, 0}),
 		QJsonArray({1, 1}),
@@ -145,7 +146,8 @@ void TextureConfigManager::addSubTileOverwrite(const QString& imageUrl, const QJ
 	tile["worldCoords"] = outerWorldCoords;
 
 	// Default texture quad
-	QJsonArray texCoords = {
+	QJsonArray texCoords =
+	{
 		QJsonArray({0, 0}),
 		QJsonArray({1, 0}),
 		QJsonArray({1, 1}),
@@ -177,7 +179,8 @@ bool TextureConfigManager::removeSubTileByImageUrl(const QString& imageUrl)
 	bool found = false;
 
 	// Filter out the tile to be removed
-	for (const QJsonValue& val : subTiles) {
+	for (const QJsonValue& val : subTiles)
+	{
 		QJsonObject obj = val.toObject();
 		if (obj["imageUrl"].toString() != imageUrl)
 			updatedTiles.append(val);
@@ -206,7 +209,8 @@ QJsonArray TextureConfigManager::getSubTiles() const
 QJsonObject TextureConfigManager::getSubTileByImageUrl(const QString& imageUrl) const
 {
 	QJsonArray subTiles = rootObject.value("subTiles").toArray();
-	for (const QJsonValue& val : subTiles) {
+	for (const QJsonValue& val : subTiles)
+	{
 		QJsonObject obj = val.toObject();
 		if (obj["imageUrl"].toString() == imageUrl)
 			return obj;

@@ -69,9 +69,11 @@ WcsResult PlateSolver::parseWcsText(const QString& wcsText)
 	for (int i = 0; i < wcsText.length(); i += 80)
 		lines.append(wcsText.mid(i, 80));
 
-	for (const QString& line : lines) {
+	for (const QString& line : lines)
+	{
 		auto match = regex.match(line);
-		if (match.hasMatch()) {
+		if (match.hasMatch())
+		{
 			QString key = match.captured(1);
 			double value = match.captured(2).toDouble();
 
@@ -162,13 +164,15 @@ void PlateSolver::onLoginReply()
 	QByteArray content = reply->readAll();
 	reply->deleteLater();
 
-	if (reply->error() != QNetworkReply::NoError) {
+	if (reply->error() != QNetworkReply::NoError)
+	{
 		emit loginFailed(q_("Network reply error."));
 		return;
 	}
 
 	QJsonObject json = QJsonDocument::fromJson(content).object();
-	if (!json.contains("session") || json["status"].toString() == "error") {
+	if (!json.contains("session") || json["status"].toString() == "error")
+	{
 		emit loginFailed(q_("Invalid API key or login error."));
 		return;
 	}
@@ -185,7 +189,8 @@ void PlateSolver::onLoginReply()
 void PlateSolver::sendUploadRequest()
 {
 	QFile imageFile(imagePath);
-	if (!imageFile.open(QIODevice::ReadOnly)) {
+	if (!imageFile.open(QIODevice::ReadOnly))
+	{
 		emit uploadFailed(q_("Failed to open image file."));
 		return;
 	}
@@ -244,7 +249,8 @@ void PlateSolver::onUploadReply()
 	QByteArray content = reply->readAll();
 	reply->deleteLater();
 
-	if (reply->error() != QNetworkReply::NoError) {
+	if (reply->error() != QNetworkReply::NoError)
+	{
 		emit uploadFailed(q_("Network reply error."));
 		return;
 	}
@@ -289,8 +295,10 @@ void PlateSolver::onSubStatusReply()
 	QByteArray content = reply->readAll();
 	reply->deleteLater();
 
-	if (reply->error() != QNetworkReply::NoError) {
-		if (++retryCount >= maxRetryCount) {
+	if (reply->error() != QNetworkReply::NoError)
+	{
+		if (++retryCount >= maxRetryCount)
+		{
 			subStatusTimer->stop();
 			emit failed(q_("Submission status request failed after retries."));
 		}
@@ -299,7 +307,8 @@ void PlateSolver::onSubStatusReply()
 
 	QJsonObject json = QJsonDocument::fromJson(content).object();
 	QJsonArray jobs = json["jobs"].toArray();
-	if (!jobs.isEmpty() && !jobs[0].isNull()) {
+	if (!jobs.isEmpty() && !jobs[0].isNull())
+	{
 		jobId = QString::number(jobs[0].toInt());
 		subStatusTimer->stop();
 		jobStatusTimer->start(5000);
@@ -344,8 +353,10 @@ void PlateSolver::onJobStatusReply()
 	QByteArray content = reply->readAll();
 	reply->deleteLater();
 
-	if (reply->error() != QNetworkReply::NoError) {
-		if (++retryCount >= maxRetryCount) {
+	if (reply->error() != QNetworkReply::NoError)
+	{
+		if (++retryCount >= maxRetryCount)
+		{
 			jobStatusTimer->stop();
 			emit failed(q_("Job status request failed after retries."));
 		}
@@ -355,7 +366,8 @@ void PlateSolver::onJobStatusReply()
 	QJsonObject json = QJsonDocument::fromJson(content).object();
 	QString status = json["status"].toString();
 
-	if (status == "success") {
+	if (status == "success")
+	{
 		jobStatusTimer->stop();
 		retryCount = 0;
 		emit solvingStatusUpdated(q_("Job completed. Downloading WCS file..."));
@@ -394,7 +406,8 @@ void PlateSolver::onWcsDownloadReply()
 	QByteArray content = reply->readAll();
 	reply->deleteLater();
 
-	if (reply->error() != QNetworkReply::NoError) {
+	if (reply->error() != QNetworkReply::NoError)
+	{
 		emit failed(q_("Failed to download WCS file."));
 		return;
 	}

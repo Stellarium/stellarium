@@ -106,27 +106,33 @@ QPair<double, double> SkyCoords::pixelToRaDec(int X, int Y,
 	double lng = CRVAL1 + dlng;
 
 	// Normalize the celestial longitude
-	if (CRVAL1 >= 0.0) {
-		if (lng < 0.0) {
+	if (CRVAL1 >= 0.0)
+	{
+		if (lng < 0.0)
+		{
 			lng += 360.0;
 		}
 	} else {
-		if (lng > 0.0) {
+		if (lng > 0.0)
+		{
 			lng -= 360.0;
 		}
 	}
 
 	lng = StelUtils::fmodpos(lng, 360.0);
-	if (lng < 0.0) {
+	if (lng < 0.0)
+	{
 		lng += 360.0;
 	}
 
 	// Calculate celestial latitude
 	double z = sinthe3 + costhe4 * cosphi;
 	double lat;
-	if (std::abs(z) > 0.99) {
+	if (std::abs(z) > 0.99)
+	{
 		// For higher precision, use an alternative formula
-		if (z < 0.0) {
+		if (z < 0.0)
+		{
 			lat = -std::abs(R2D * std::acos(std::sqrt(x * x + y * y)));
 		} else {
 			lat = std::abs(R2D * std::acos(std::sqrt(x * x + y * y)));
@@ -154,7 +160,8 @@ QPair<double, double> SkyCoords::calculateCenter(const QJsonArray& corners)
 	const int N = corners.size();
 
 	// Check for empty input
-	if (N < 1) {
+	if (N < 1)
+	{
 		qWarning() << "[SkyCoords] Empty or invalid corners array.";
 		return qMakePair(0.0, 0.0);
 	}
@@ -164,7 +171,8 @@ QPair<double, double> SkyCoords::calculateCenter(const QJsonArray& corners)
 	// Convert each (RA, Dec) to Cartesian coordinates and accumulate
 	for (const QJsonValue& val : corners)
 	{
-		if (!val.isArray() || val.toArray().size() != 2) {
+		if (!val.isArray() || val.toArray().size() != 2)
+		{
 			qWarning() << "[SkyCoords] Invalid corner format.";
 			continue;
 		}
@@ -184,7 +192,8 @@ QPair<double, double> SkyCoords::calculateCenter(const QJsonArray& corners)
 	}
 
 	// Check for degenerate vector
-	if (sum_x == 0.0 && sum_y == 0.0 && sum_z == 0.0) {
+	if (sum_x == 0.0 && sum_y == 0.0 && sum_z == 0.0)
+	{
 		qWarning() << "[SkyCoords] Zero vector sum; cannot compute center.";
 		return qMakePair(0.0, 0.0);
 	}
@@ -195,7 +204,8 @@ QPair<double, double> SkyCoords::calculateCenter(const QJsonArray& corners)
 	double avg_z = sum_z / N;
 
 	double norm = sqrt(avg_x * avg_x + avg_y * avg_y + avg_z * avg_z);
-	if (norm == 0.0) {
+	if (norm == 0.0)
+	{
 		qWarning() << "[SkyCoords] Normalization failed due to zero norm.";
 		return qMakePair(0.0, 0.0);
 	}
