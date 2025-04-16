@@ -918,6 +918,9 @@ public:
 	//! Get the list of all the planet localized names
 	QStringList getAllPlanetLocalizedNames() const;
 
+	//! Get the list of all the minor planet english names
+	QStringList getAllMinorPlanetEnglishNames() const;
+
 	//! New 0.16: delete a planet from the solar system. Writes a warning to log if this is not a minor object.
 	bool removeMinorPlanet(const QString &name);
 

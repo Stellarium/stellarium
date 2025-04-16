@@ -3811,6 +3811,14 @@ QStringList SolarSystem::getAllPlanetLocalizedNames() const
 	return res;
 }
 
+QStringList SolarSystem::getAllMinorPlanetEnglishNames() const
+{
+	QStringList res;
+	for (const auto& p : systemMinorBodies)
+		res.append(p->getEnglishName());
+	return res;
+}
+
 // GZ TODO: This could be modified to only delete&reload the minor objects. For now, we really load both parts again like in the 0.10?-0.15 series.
 void SolarSystem::reloadPlanets()
 {
