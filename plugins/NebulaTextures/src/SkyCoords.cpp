@@ -55,6 +55,7 @@ QPair<double, double> SkyCoords::pixelToRaDec(
 	double xi  = CD1_1 * dx + CD1_2 * dy;
 	double eta = CD2_1 * dx + CD2_2 * dy;
 
+	// Step 2: Inverse gnomonic projection
 	double xi_r   = xi * D2R;
 	double eta_r  = eta * D2R;
 	double alpha0 = CRVAL1 * D2R;
