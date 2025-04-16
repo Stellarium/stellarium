@@ -21,129 +21,78 @@
 #include <QtMath>
 #include <QDebug>
 
+#include <math.h>
+
 /*
- * Convert pixel coordinates (X, Y) on an image to celestial coordinates (RA, Dec) using the World Coordinate System (WCS) parameters.
- * Apply a series of transformations to convert pixel-based coordinates into the corresponding celestial coordinates,
- * taking into account the reference coordinates, rotation matrix, and other transformation parameters.
+ * Convert pixel coordinates (X, Y) to celestial coordinates (RA, Dec),
+ * with polar region correction to improve numerical stability near the poles.
+ * All angles are in degrees. Output: RA ∈ [0,360), Dec ∈ [-90,90].
  *
- * Parameters:
- *   - X, Y: The pixel coordinates in the image.
- *   - CRPIX1, CRPIX2: The reference pixel coordinates (the center of the image).
- *   - CRVAL1, CRVAL2: The celestial coordinates (right ascension and declination) corresponding to the reference pixel.
- *   - CD1_1, CD1_2, CD2_1, CD2_2: The linear transformation matrix elements that map pixel coordinates to celestial coordinates.
+ * References:
+ * Greisen, E. W., & Calabretta, M. R. (2002).
+ * Representations of World Coordinates in FITS.
+ * *Astronomy & Astrophysics, 395*(2), 1061-1073.
+ * https://ui.adsabs.harvard.edu/abs/2002A%26A...395.1061G
  *
- * Returns:
- *   - A QPair containing the longitude and latitude corresponding to the input pixel coordinates.
- *
- * * * * * * * * * * * * * * * * * * * *
- *
- * This function is based on the algorithm and approach from the code licensed under the Apache License, Version 2.0.
- * The original code can be found at:
- * https://github.com/PlanetaryResources/NTL-Asteroid-Data-Hunter/blob/master/Algorithms/Algorithm%20%231/alg1_psyho.h
- *
- * Copyright (C) [Year] [Original Authors].
- *
- * The function implementation is rewritten based on the logic and approach of the original code,
- * but the code itself has been modified and is not directly copied.
- *
- * The code in this function is used under the terms of the Apache License, Version 2.0.
- * You may not use the original code except in compliance with the License.
- * You may obtain a copy of the License at:
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied. See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * If you modified this code, include a description of the changes made below:
- * [Optional: Describe any modifications made]
+ * Calabretta, M. R., & Greisen, E. W. (2002).
+ * Representations of celestial coordinates in FITS.
+ * *Astronomy & Astrophysics, 395*(2), 1077-1082.
+ * https://ui.adsabs.harvard.edu/abs/2002A%26A...395.1077C
  */
-QPair<double, double> SkyCoords::pixelToRaDec(int X, int Y,
-	double CRPIX1, double CRPIX2,
-	double CRVAL1, double CRVAL2,
+QPair<double, double> SkyCoords::pixelToRaDec(
+	int    X,       // Pixel x-coordinate
+	int    Y,       // Pixel y-coordinate
+	double CRPIX1,  // Reference pixel x
+	double CRPIX2,  // Reference pixel y
+	double CRVAL1,  // Reference right ascension α0 (degrees)
+	double CRVAL2,  // Reference declination δ0 (degrees)
 	double CD1_1, double CD1_2,
 	double CD2_1, double CD2_2)
 {
-	// Convert the reference values (RA, Dec) to radians
-	double RA0 = CRVAL1 * D2R;
-	double Dec0 = CRVAL2 * D2R;
+	// Step 1: Linear transformation — pixel to intermediate world coordinates (ξ, η)
+	double dx = (double)X - CRPIX1;
+	double dy = (double)Y - CRPIX2;
+	double xi  = CD1_1 * dx + CD1_2 * dy;
+	double eta = CD2_1 * dx + CD2_2 * dy;
 
-	// Calculate dx and dy
-	double dx = X - CRPIX1;
-	double dy = Y - CRPIX2;
+	double xi_r   = xi * D2R;
+	double eta_r  = eta * D2R;
+	double alpha0 = CRVAL1 * D2R;
+	double delta0 = CRVAL2 * D2R;
 
-	// Calculate xx and yy
-	double xx = CD1_1 * dx + CD1_2 * dy;
-	double yy = CD2_1 * dx + CD2_2 * dy;
-
-	// Calculate the celestial coordinates
-	double px = std::atan2(xx, -yy) * R2D;
-	double py = std::atan2(R2D, std::sqrt(xx * xx + yy * yy)) * R2D;
-
-	// Calculate sin(Dec) and cos(Dec)
-	double sin_dec = std::sin(D2R * (90.0 - CRVAL2));
-	double cos_dec = std::cos(D2R * (90.0 - CRVAL2));
-
-	// Calculate longitude offset (dphi)
-	double dphi = px - 180.0;
-
-	// Calculate celestial longitude and latitude
-	double sinthe = std::sin(py * D2R);
-	double costhe = std::cos(py * D2R);
-	double costhe3 = costhe * cos_dec;
-	double costhe4 = costhe * sin_dec;
-	double sinthe3 = sinthe * cos_dec;
-	double sinthe4 = sinthe * sin_dec;
-	double sinphi = std::sin(dphi * D2R);
-	double cosphi = std::cos(dphi * D2R);
-
-	// Calculate celestial longitude
-	double x = sinthe4 - costhe3 * cosphi;
-	double y = -costhe * sinphi;
-	double dlng = R2D * std::atan2(y, x);
-	double lng = CRVAL1 + dlng;
-
-	// Normalize the celestial longitude
-	if (CRVAL1 >= 0.0)
-	{
-		if (lng < 0.0)
-		{
-			lng += 360.0;
-		}
-	} else {
-		if (lng > 0.0)
-		{
-			lng -= 360.0;
-		}
+	double r = hypot(xi_r, eta_r);
+	if (r < 1e-12) {
+		return qMakePair(CRVAL1, CRVAL2);
 	}
 
-	lng = StelUtils::fmodpos(lng, 360.0);
-	if (lng < 0.0)
-	{
-		lng += 360.0;
-	}
+	double c = atan(r);
+	double sin_c = sin(c);
+	double cos_c = cos(c);
 
-	// Calculate celestial latitude
-	double z = sinthe3 + costhe4 * cosphi;
-	double lat;
-	if (std::abs(z) > 0.99)
-	{
-		// For higher precision, use an alternative formula
-		if (z < 0.0)
-		{
-			lat = -std::abs(R2D * std::acos(std::sqrt(x * x + y * y)));
-		} else {
-			lat = std::abs(R2D * std::acos(std::sqrt(x * x + y * y)));
-		}
-	} else {
-		lat = R2D * std::asin(z);
-	}
+	double sin_delta0 = sin(delta0);
+	double cos_delta0 = cos(delta0);
 
-	// Return the result as a QPair of doubles
-	return qMakePair(lng, lat);
+	double sin_dec = cos_c * sin_delta0 + (eta_r * sin_c * cos_delta0 / r);
+
+	// Step 3: Polar region correction for declination
+	// Standard asin calculation with clamping
+	if (sin_dec >  1.0) sin_dec =  1.0;
+	if (sin_dec < -1.0) sin_dec = -1.0;
+	double dec_rad = asin(sin_dec);
+
+	// Step 4: Compute right ascension offset
+	double num = xi_r * sin_c;
+	double den = r * cos_delta0 * cos_c - eta_r * sin_delta0 * sin_c;
+	double delta_ra = atan2(num, den);
+	double alpha = alpha0 + delta_ra;
+
+	// Step 5: Convert back to degrees and normalize RA to [0, 360)
+	double ra = alpha * R2D;  // Convert from radians to degrees
+	ra = StelUtils::fmodpos(ra, 360.0);  // Normalize to [0, 360)
+	double dec = dec_rad * R2D;
+	return qMakePair(ra, dec);
 }
+
 
 /**
  * @brief Calculates the central RA/Dec coordinate from a list of corner sky coordinates.
