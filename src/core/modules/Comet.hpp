@@ -159,9 +159,6 @@ private:
 	QString iauDesignation;
 	QStringList extraDesignations;
 	QStringList extraDesignationsHtml;
-	// Discovery data
-	QString discoverer;
-	QString discoveryDate;
 
 	//GZ Tail additions
 	Vec2f tailFactors; // result of latest call to getComaDiameterAndTailLengthAU(); Results cached here for infostring. [0]=Coma diameter, [1] gas tail length.

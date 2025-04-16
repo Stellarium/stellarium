@@ -846,14 +846,14 @@ protected:
 	//! If true, planet orbits will be drawn even if planet is off screen.
 	static bool permanentDrawingOrbits;
 	static int orbitsThickness;
+	QString discoverer;    //!< Discovery data
+	QString discoveryDate; //!< Discovery data
 
 private:
 	class StelPropertyMgr* propMgr;
 	QString iauMoonNumber;
 	float b_v;
 
-	QString discoverer;    //!< Discovery data
-	QString discoveryDate; //!< Discovery data
 	QList<StelObject::CulturalName> culturalNames; //!< names loaded from non-modern Skycultures. Usually just one, but there may be more!
 
 

@@ -139,9 +139,6 @@ private:
 
 	float b_v;
 	QString specT, specB;
-	// Discovery data
-	QString discoverer;
-	QString discoveryDate;
 };
 
 #endif // MINORPLANET_HPP

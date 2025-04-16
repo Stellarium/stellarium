@@ -88,11 +88,9 @@ Comet::Comet(const QString& englishName,
 		  pTypeStr),
 	  slopeParameter(-10.f), // -10 == uninitialized: used in getVMagnitude()
 	  isCometFragment(false),
-	  iauDesignation(""),
+	  iauDesignation(QString()),
 	  extraDesignations(),
 	  extraDesignationsHtml(),
-	  discoverer(""),
-	  discoveryDate(""),
 	  tailFactors(-1., -1.), // mark "invalid"
 	  tailActive(false),
 	  tailBright(false),
