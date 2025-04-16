@@ -69,7 +69,7 @@ See [MAINTAINER BUSINESS](MAINTAINER_BUSINESS.md) for details.
 
 ### Manually Download Dependencies (CPM)
 
-If you are unable to download dependencies automatically due to network restrictions, you can manually fetch them. Dependencies are usually listed with URLs like `URL https://github.com/...` in `CMakeLists.txt` using `CPMAddPackage`, `CPMFindPackage`, etc.  
+If you are unable to download dependencies automatically due to network restrictions, you can manually fetch them. Dependencies are usually listed with URLs like `URL https://github.com/...` in all `CMakeLists.txt` files using `CPMAddPackage`, `CPMFindPackage`, etc.
 
 After downloading, place them in the following directory structure (example for `QXlsxQt6` in Windows):
 
