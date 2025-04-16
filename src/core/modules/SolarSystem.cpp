@@ -998,7 +998,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// Look in the other planets the one named with strParent
 			for (const auto& p : std::as_const(systemPlanets))
 			{
-				if (p->getCommonEnglishName()==strParent)
+				if (p->getEnglishName()==strParent)
 				{
 					parent = p;
 					break;
@@ -2290,7 +2290,7 @@ PlanetP SolarSystem::searchByEnglishName(const QString &planetEnglishName) const
 	const QString planetEnglishNameUpper=planetEnglishName.toUpper();
 	for (const auto& p : systemPlanets)
 	{
-		if (p->getEnglishName().toUpper() == planetEnglishNameUpper || p->getCommonEnglishName().toUpper() == planetEnglishNameUpper)
+		if (p->getEnglishName().toUpper() == planetEnglishNameUpper)
 			return p;
 
 		// IAU designation?
@@ -2324,7 +2324,7 @@ PlanetP SolarSystem::searchMinorPlanetByEnglishName(const QString &planetEnglish
 	const QString planetEnglishNameUpper=planetEnglishName.toUpper();
 	for (const auto& p : systemMinorBodies)
 	{
-		if (p->getCommonEnglishName().toUpper() == planetEnglishNameUpper || p->getEnglishName().toUpper() == planetEnglishNameUpper)
+		if (p->getEnglishName().toUpper() == planetEnglishNameUpper)
 			return p;
 
 		// IAU designation?
@@ -3811,15 +3811,6 @@ QStringList SolarSystem::getAllPlanetLocalizedNames() const
 	return res;
 }
 
-QStringList SolarSystem::getAllMinorPlanetCommonEnglishNames() const
-{
-	QStringList res;
-	for (const auto& p : systemMinorBodies)
-		res.append(p->getCommonEnglishName());
-	return res;
-}
-
-
 // GZ TODO: This could be modified to only delete&reload the minor objects. For now, we really load both parts again like in the 0.10?-0.15 series.
 void SolarSystem::reloadPlanets()
 {
@@ -4243,7 +4234,7 @@ void SolarSystem::onNewSurvey(HipsSurveyP survey)
 		if (pl->surveyForHorizons) return;
 		pl->surveyForHorizons = survey;
 	}
-	survey->setProperty("planet", pl->getCommonEnglishName());
+	survey->setProperty("planet", pl->getEnglishName());
 	// Not visible by default for the moment.
 	survey->setProperty("visible", false);
 }
