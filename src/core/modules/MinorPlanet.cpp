@@ -65,14 +65,12 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	minorPlanetNumber(0),
 	slopeParameter(-10.0f), // -10 == mark as uninitialized: used in getVMagnitude()
 	nameIsIAUDesignation(false),
-	iauDesignationText(""),
+	iauDesignationText(QString()),
 	extraDesignations(),
 	properName(englishName),
 	b_v(99.f),
-	specT(""),
-	specB(""),
-	discoverer(""),
-	discoveryDate("")
+	specT(QString()),
+	specB(QString())
 {
 	//Try to handle an occasional naming conflict between a moon and asteroid. Conflicting names are also shown with appended *.
 	if (englishName.endsWith('*'))
