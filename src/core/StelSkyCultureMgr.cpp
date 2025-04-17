@@ -871,188 +871,26 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 
 	const int styleInt=int(style);
 	QString label;
-	/*
 	switch (style)
 	{
-//		case StelObject::CulturalDisplayStyle::Abbreviated:
-//			label=abbrev;
-//			break;
 		case StelObject::CulturalDisplayStyle::Native: // native if available. fallback to pronounce and english entries
-			label=cName.native.isEmpty() ? (cName.pronounceI18n.isEmpty() ? cName.translatedI18n : cName.pronounceI18n) : cName.native;
-			break;
+			return cName.native.isEmpty() ? (cName.pronounceI18n.isEmpty() ? cName.translatedI18n : cName.pronounceI18n) : cName.native;
+		case StelObject::CulturalDisplayStyle::Pronounce: // pronounce if available. fallback to native
+			return pronounceOrNative;
+		case StelObject::CulturalDisplayStyle::Translit:
+			return translitOrPronounce;
 		case StelObject::CulturalDisplayStyle::Translated:
-			label = (cName.translatedI18n.isEmpty() ? (pronounceStr.isEmpty() ? cName.native : pronounceStr) : cName.translatedI18n);
-			break;
-		case StelObject::CulturalDisplayStyle::NONE:
+			return (cName.translatedI18n.isEmpty() ? (pronounceStr.isEmpty() ? cName.native : pronounceStr) : cName.translatedI18n);
+		case StelObject::CulturalDisplayStyle::IPA: // really only IPA?
+			return cName.IPA;
+		case StelObject::CulturalDisplayStyle::NONE: // fully non-cultural!
 		case StelObject::CulturalDisplayStyle::Modern:
-			label=commonNameI18n; // fully non-cultural!
+			return commonNameI18n;
+		default:
 			break;
-		case StelObject::CulturalDisplayStyle::Pronounce:
-		case StelObject::CulturalDisplayStyle::Pronounce_Modern:
-			label=pronounceOrNative;
-			break;
-		case StelObject::StelObject::CulturalDisplayStyle::Translit:
-			label = translitOrPronounce;
-			break;
-		case StelObject::CulturalDisplayStyle::IPA:
-			label=cName.IPA;
-			break;
-		case StelObject::CulturalDisplayStyle::Pronounce_Translated:
-		case StelObject::CulturalDisplayStyle::Pronounce_Translated_Modern:
-			label=pronounceOrNative;
-			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
-			break;
-		case StelObject::CulturalDisplayStyle::Pronounce_Translated_IPA:
-		case StelObject::CulturalDisplayStyle::Pronounce_Translated_IPA_Modern:
-			//label=QString("%1 [%2] (%3)").arg(pronounceOrNative, cName.IPA, cName.translatedI18n);
-			label=pronounceOrNative;
-			if (!cName.IPA.isEmpty()) label.append(QString(" [%1]").arg(cName.IPA));
-			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
-			break;
-		case StelObject::CulturalDisplayStyle::Native_Pronounce:
-		case StelObject::CulturalDisplayStyle::Native_Pronounce_Modern:
-			//label=QString("%1 [%2]").arg(cName.native, pronounceStr);
-			label=cName.native;
-			if (!pronounceStr.isEmpty()) label.append(QString(" [%1]").arg(pronounceStr));
-			break;
-		case StelObject::CulturalDisplayStyle::Native_Pronounce_Translated:
-		case StelObject::CulturalDisplayStyle::Native_Pronounce_Translated_Modern:
-			//label=QString("%1 [%2] (%3)").arg(cName.native, pronounceStr, cName.translatedI18n);
-			label=cName.native;
-			if (!pronounceStr.isEmpty()) label.append(QString(" [%1]").arg(pronounceStr));
-			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
-			break;
-		case StelObject::CulturalDisplayStyle::Native_Pronounce_Translated_IPA:
-		case StelObject::CulturalDisplayStyle::Native_Pronounce_Translated_IPA_Modern:
-			//label=QString("%1 [%2%3] (%4)").arg(cName.native, pronounceStr, cName.IPA.length() > 0 ? QString(", %1").arg(cName.IPA) : "", cName.translatedI18n);
-			label=cName.native;
-			if (!pronounceStr.isEmpty() || !cName.IPA.isEmpty()) label.append(QString(" ["));
-			label.append(pronounceStr);
-			if (!pronounceStr.isEmpty() && !cName.IPA.isEmpty()) label.append(QString(", "));
-			label.append(cName.IPA);
-			if (!pronounceStr.isEmpty() || !cName.IPA.isEmpty()) label.append(QString("]"));
-			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
-			break;
-		case  StelObject::CulturalDisplayStyle::Native_Translated:
-		case  StelObject::CulturalDisplayStyle::Native_Translated_Modern:
-			//label=QString("%1 (%2)").arg(cName.native, cName.translatedI18n);
-			// Note that cName.translated is json.english, and many SC items are only given in english tags
-			label=cName.native.isEmpty() ? (cName.pronounceI18n.isEmpty() ? cName.translated : cName.pronounceI18n) : cName.native;
-			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
-			break;
-		case  StelObject::CulturalDisplayStyle::Native_Translit_Translated:
-		case  StelObject::CulturalDisplayStyle::Native_Translit_Translated_Modern:
-			//label=QString("%1 [%2] (%3)").arg(cName.native, translitOrPronounce, cName.translatedI18n);
-			label=cName.native;
-			if (!translitOrPronounce.isEmpty())  label.append(QString(" [%1]").arg(translitOrPronounce));
-			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
-			break;
-		case  StelObject::CulturalDisplayStyle::Native_Pronounce_Translit_Translated:
-		case  StelObject::CulturalDisplayStyle::Native_Pronounce_Translit_Translated_Modern:
-			//label=QString("%1 [%2, %3] (%4)").arg(cName.native, cName.transliteration, pronounceStr, cName.translatedI18n);
-			label=cName.native;
-			if (!cName.transliteration.isEmpty() || !cName.pronounceI18n.isEmpty()) label.append(QString(" ["));
-			label.append(cName.transliteration);
-			if (!cName.transliteration.isEmpty() && !cName.pronounceI18n.isEmpty()) label.append(QString(", "));
-			label.append(cName.pronounceI18n);
-			if (!cName.transliteration.isEmpty() || !cName.pronounceI18n.isEmpty()) label.append(QString("]"));
-			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
-			break;
-		case  StelObject::CulturalDisplayStyle::Native_Pronounce_Translit_Translated_IPA:
-		case  StelObject::CulturalDisplayStyle::Native_Pronounce_Translit_Translated_IPA_Modern:
-			//label=QString("%1 [%2, %3, %4] (%5)").arg(cName.native, cName.transliteration, pronounceStr, cName.IPA, cName.translatedI18n);
-			label=cName.native;
-			if (!cName.transliteration.isEmpty() || !cName.pronounceI18n.isEmpty()) label.append(QString(" ["));
-			label.append(cName.transliteration);
-			if (!cName.transliteration.isEmpty() && !cName.pronounceI18n.isEmpty()) label.append(QString(", "));
-			label.append(cName.pronounceI18n);
-			if (!cName.transliteration.isEmpty() || !cName.pronounceI18n.isEmpty()) label.append(QString("]"));
-			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
-			break;
-		case  StelObject::CulturalDisplayStyle::Native_Translit_Translated_IPA:
-		case  StelObject::CulturalDisplayStyle::Native_Translit_Translated_IPA_Modern:
-			//label=QString("%1 [%2, %3] (%4)").arg(cName.native, translitOrPronounce, cName.IPA, cName.translatedI18n);
-			label=cName.native;
-			if (!translitOrPronounce.isEmpty() || !cName.IPA.isEmpty()) label.append(QString(" ["));
-			label.append(translitOrPronounce);
-			if (!translitOrPronounce.isEmpty() && !cName.IPA.isEmpty()) label.append(QString(", "));
-			label.append(cName.IPA);
-			if (!translitOrPronounce.isEmpty() || !cName.IPA.isEmpty()) label.append(QString("]"));
-			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
-			break;
-		case  StelObject::CulturalDisplayStyle::Translit_Translated:
-		case  StelObject::CulturalDisplayStyle::Translit_Translated_Modern:
-			//label=QString("%1 (%2)").arg(translitOrPronounce, cName.translatedI18n);
-			label=translitOrPronounce;
-			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
-			break;
-		case  StelObject::CulturalDisplayStyle::Pronounce_Translit_Translated:
-		case  StelObject::CulturalDisplayStyle::Pronounce_Translit_Translated_Modern:
-			//label=QString("%1 [%2] (%3)").arg(translitOrPronounce, pronounceStr, cName.translatedI18n);
-			label=translitOrPronounce;
-			if (!cName.pronounceI18n.isEmpty()) label.append(QString(" [%1]").arg(cName.pronounceI18n));
-			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
-			break;
-		case  StelObject::CulturalDisplayStyle::Pronounce_Translit_Translated_IPA:
-		case  StelObject::CulturalDisplayStyle::Pronounce_Translit_Translated_IPA_Modern:
-			//label=QString("%1 [%2, %3] (%4)").arg(translitOrPronounce, pronounceStr, cName.IPA, cName.translatedI18n);
-			label=translitOrPronounce;
-			if (!cName.pronounceI18n.isEmpty() || !cName.IPA.isEmpty()) label.append(QString(" ["));
-			label.append(cName.pronounceI18n);
-			if (!cName.pronounceI18n.isEmpty() && !cName.IPA.isEmpty()) label.append(QString(", "));
-			label.append(cName.IPA);
-			if (!cName.pronounceI18n.isEmpty() || !cName.IPA.isEmpty()) label.append(QString("]"));
-			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
-			break;
-		case  StelObject::CulturalDisplayStyle::Translit_Translated_IPA:
-		case  StelObject::CulturalDisplayStyle::Translit_Translated_IPA_Modern:
-			//label=QString("%1 [%2] (%4)").arg(translitOrPronounce, cName.IPA, cName.translatedI18n);
-			label=translitOrPronounce;
-			if (!cName.IPA.isEmpty()) label.append(QString(" [%1]").arg(cName.IPA));
-			if (!cName.translatedI18n.isEmpty()) label.append(QString(" (%1)").arg(cName.translatedI18n));
-			break;
-			// NO default here, else we may forget one.
-	}
-	static const QList<StelObject::CulturalDisplayStyle>modernList({StelObject::CulturalDisplayStyle::Pronounce_Modern,
-									StelObject::CulturalDisplayStyle::Pronounce_Translated_Modern,
-									StelObject::CulturalDisplayStyle::Pronounce_Translated_IPA_Modern,
-									StelObject::CulturalDisplayStyle::Native_Pronounce_Modern,
-									StelObject::CulturalDisplayStyle::Native_Pronounce_Translated_Modern,
-									StelObject::CulturalDisplayStyle::Native_Pronounce_Translated_IPA_Modern,
-									StelObject::CulturalDisplayStyle::Native_Translated_Modern,
-									StelObject::CulturalDisplayStyle::Native_Translit_Translated_Modern,
-									StelObject::CulturalDisplayStyle::Native_Pronounce_Translit_Translated_Modern,
-									StelObject::CulturalDisplayStyle::Native_Pronounce_Translit_Translated_IPA_Modern,
-									StelObject::CulturalDisplayStyle::Native_Translit_Translated_IPA_Modern,
-									StelObject::CulturalDisplayStyle::Translit_Translated_Modern,
-									StelObject::CulturalDisplayStyle::Pronounce_Translit_Translated_Modern,
-									StelObject::CulturalDisplayStyle::Pronounce_Translit_Translated_IPA_Modern,
-									StelObject::CulturalDisplayStyle::Translit_Translated_IPA_Modern});
-	// Add modern science-approved name curvy angle brackets (29FC/29FD). Alternative: tortoise shell brackets (3014/3015).
-	if ((modernList.contains(style)) && (!commonNameI18n.isEmpty()))
-		label.append(QString(" %1%3%2").arg(QChar(0x29FC), QChar(0x29FD), commonNameI18n));
-*/
-
-	switch (style)
-	{
-	case StelObject::CulturalDisplayStyle::Native: // native if available. fallback to pronounce and english entries
-		return cName.native.isEmpty() ? (cName.pronounceI18n.isEmpty() ? cName.translatedI18n : cName.pronounceI18n) : cName.native;
-	case StelObject::CulturalDisplayStyle::Pronounce: // pronounce if available. fallback to native
-		return pronounceOrNative;
-	case StelObject::CulturalDisplayStyle::Translit:
-		return translitOrPronounce;
-	case StelObject::CulturalDisplayStyle::Translated:
-		return (cName.translatedI18n.isEmpty() ? (pronounceStr.isEmpty() ? cName.native : pronounceStr) : cName.translatedI18n);
-	case StelObject::CulturalDisplayStyle::IPA: // really only IPA?
-		return cName.IPA;
-	case StelObject::CulturalDisplayStyle::NONE: // fully non-cultural!
-	case StelObject::CulturalDisplayStyle::Modern:
-		return commonNameI18n;
-	default:
-	break;
 	}
 	// simple cases done. Now build-up label of form "primary [common transliteration aka pronounce, scientific transliteration, IPA] (translation) <modern>"
-	// "primary" is either native or one of the reading aids
+	// "primary" is usually either native or one of the reading aids, or translation or even modern when other options are switched off.
 	// Rules:
 	// Styles with Native_* start with just native, but we must fallback to other strings if native is empty.
 	// Styles with Pronounce_* start with Pronounce or transliteration, but Pronounce_Translit_... must show Translit in braces when both exist.

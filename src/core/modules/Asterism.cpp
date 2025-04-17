@@ -245,11 +245,13 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 
 QString Asterism::getScreenLabel() const
 {
-	return getCultureLabel(GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle());
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	return getCultureLabel(scMgr->getScreenLabelStyle());
 }
 QString Asterism::getInfoLabel() const
 {
-	return getCultureLabel(GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle());
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	return getCultureLabel(scMgr->getInfoLabelStyle());
 }
 
 QString Asterism::getCultureLabel(StelObject::CulturalDisplayStyle style) const
