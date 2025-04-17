@@ -954,6 +954,8 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	}
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && (!commonNameI18n.isEmpty()) && (!label.startsWith(commonNameI18n)) && (commonNameI18n!=cName.translatedI18n))
 		label.append(QString(" %1%3%2").arg(QChar(0x29FC), QChar(0x29FD), commonNameI18n));
+	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && label.isEmpty()) // if something went wrong?
+		label=commonNameI18n;
 
 	return label;
 }
