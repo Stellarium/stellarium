@@ -477,12 +477,14 @@ QString Planet::getPlanetLabel() const
 
 QString Planet::getScreenLabel() const
 {
-	QStringList list=getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle());
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	QStringList list=getCultureLabels(scMgr->getScreenLabelStyle());
 	return list.isEmpty() ? getNameI18n() : list.constFirst();
 }
 QString Planet::getInfoLabel() const
 {
-	QStringList list=getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle());
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	QStringList list=getCultureLabels(scMgr->getInfoLabelStyle());
 	return list.isEmpty() ? getNameI18n() : list.join(" - ");
 }
 

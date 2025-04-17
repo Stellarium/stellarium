@@ -83,9 +83,9 @@ QHash<StarId,QString> StarMgr::commonNamesI18nMap;
 QHash<QString,StarId> StarMgr::commonNamesI18nUppercaseIndex;
 QHash<QString,StarId> StarMgr::commonNamesUppercaseIndex;
 
-// Cultural names: We must store all data here, and have even 4 indices to native names&spelling, pronunciation, english and user-language spelling
+// Cultural names: We must store all data here, and have one common index to native names&spelling, pronunciation, english and user-language spelling
 QMultiHash<StarId, StelObject::CulturalName> StarMgr::culturalNamesMap; // cultural names
-QMultiMap<QString, StarId> StarMgr::culturalNamesIndex; // reverse mappings. For names, unfortunately multiple results are possible!
+QMultiMap<QString, StarId> StarMgr::culturalNamesIndex; // reverse mappings of uppercased names. For names, unfortunately multiple results are possible!
 
 QHash<StarId,QString> StarMgr::sciDesignationsMap;      // Bayer/Flamsteed. TODO: Convert map target to QStringList?
 QHash<QString,StarId> StarMgr::sciDesignationsIndex;
@@ -2140,17 +2140,15 @@ void StarMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 			auto starIds=culturalNamesIndex.values(englishNameUpper);
 			if (!starIds.contains(HIP))
 			{
-
-			StelObject::CulturalName cName{englishName, QString(), QString(),
-						englishName, englishName, i18nName, QString()};
-			//if (culturalNamesMap.contains(HIP))
-			//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated << "/" << cName.translatedI18n;
-			culturalNamesMap.insert(HIP, cName); // add as possibly multiple entry to HIP.
-			if (!cName.native.isEmpty())
-				culturalNamesIndex.insert(cName.native.toUpper(), HIP);
-			if (!cName.translatedI18n.isEmpty())
-				culturalNamesIndex.insert(cName.translatedI18n.toUpper(), HIP);
-
+				StelObject::CulturalName cName{englishName, QString(), QString(),
+							englishName, englishName, i18nName, QString()};
+				//if (culturalNamesMap.contains(HIP))
+				//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated << "/" << cName.translatedI18n;
+				culturalNamesMap.insert(HIP, cName); // add as possibly multiple entry to HIP.
+				if (!cName.native.isEmpty())
+					culturalNamesIndex.insert(cName.native.toUpper(), HIP);
+				if (!cName.translatedI18n.isEmpty())
+					culturalNamesIndex.insert(cName.translatedI18n.toUpper(), HIP);
 			}
 		}
 	}
@@ -2405,7 +2403,8 @@ QString StarMgr::getStelObjectType() const
 //! Return screen label (to be used in the sky display. Most users will use some short label)
 QString StarMgr::getCulturalScreenLabel(StarId hip)
 {
-	QStringList list=getCultureLabels(hip, GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle());
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	QStringList list=getCultureLabels(hip, scMgr->getScreenLabelStyle());
 	//qDebug() << "culturalScreenLabel: " << list;
 	return list.isEmpty() ? QString() : list.constFirst();
 }
@@ -2414,7 +2413,8 @@ QString StarMgr::getCulturalScreenLabel(StarId hip)
 //! When dealing with foreign skycultures, many users will want this to be longer, with more name components.
 QString StarMgr::getCulturalInfoLabel(StarId hip)
 {
-	QStringList list=getCultureLabels(hip, GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle());
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	QStringList list=getCultureLabels(hip, scMgr->getInfoLabelStyle());
 	return list.isEmpty() ? "" : list.join(" - ");
 }
 

@@ -186,11 +186,13 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 
 QString Constellation::getScreenLabel() const
 {
-	return getCultureLabel(GETSTELMODULE(StelSkyCultureMgr)->getScreenLabelStyle());
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	return getCultureLabel(scMgr->getScreenLabelStyle());
 }
 QString Constellation::getInfoLabel() const
 {
-	return getCultureLabel(GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle());
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	return getCultureLabel(scMgr->getInfoLabelStyle());
 }
 
 QString Constellation::getCultureLabel(StelObject::CulturalDisplayStyle style) const

@@ -2795,17 +2795,8 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		names.append(n->englishName);
 		if (getFlagAdditionalNames())
 		{
-			//QStringList nameList = n->nameI18Aliases;
-			//for (const auto &name : nameList)
-			//	names.append(name);
-
-			//nameList = n->englishAliases;
-			//for (const auto &name : std::as_const(nameList))
-			//	names.append(name);
-			// Why not just:
 			names.append(n->nameI18Aliases);
 			names.append(n->englishAliases);
-
 		}
 	}
 
