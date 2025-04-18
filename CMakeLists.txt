@@ -1003,6 +1003,7 @@ ENDIF()
 
 ########### Windows packaging ###############
 IF(WIN32)
+     FIND_PACKAGE(ISCC)
      IF(ISS_COMPILER_FOUND)
           IF(${ISS_COMPILER_VERSION_MAJOR} EQUAL 6)
                CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium.iss6.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
