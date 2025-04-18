@@ -46,6 +46,7 @@
 #include "StelUtils.hpp"
 #include "StelHealpix.hpp"
 
+#include <QGlobalStatic>
 #include <QTextStream>
 #include <QFile>
 #include <QBuffer>
@@ -59,9 +60,9 @@
 
 #include <cstdlib>
 
-static QStringList spectral_array;
-static QStringList component_array;
-static QStringList objtype_array;
+Q_GLOBAL_STATIC(QStringList, spectral_array);
+Q_GLOBAL_STATIC(QStringList, component_array);
+Q_GLOBAL_STATIC(QStringList, objtype_array);
 
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
@@ -117,32 +118,32 @@ QStringList initStringListFromFile(const QString& file_name)
 
 QString StarMgr::convertToSpectralType(int index)
 {
-	if (index < 0 || index >= spectral_array.size())
+	if (index < 0 || index >= spectral_array->size())
 	{
-		qDebug() << "convertToSpectralType: bad index: " << index << ", max: " << spectral_array.size();
+		qDebug() << "convertToSpectralType: bad index: " << index << ", max: " << spectral_array->size();
 		return "";
 	}
-	return spectral_array.at(index);
+	return spectral_array->at(index);
 }
 
 QString StarMgr::convertToComponentIds(int index)
 {
-	if (index < 0 || index >= component_array.size())
+	if (index < 0 || index >= component_array->size())
 	{
-		qDebug() << "convertToComponentIds: bad index: " << index << ", max: " << component_array.size();
+		qDebug() << "convertToComponentIds: bad index: " << index << ", max: " << component_array->size();
 		return "";
 	}
-	return component_array.at(index);
+	return component_array->at(index);
 }
 
 QString StarMgr::convertToOjectTypes(int index)
 {
-	if (index < 0 || index >= objtype_array.size())
+	if (index < 0 || index >= objtype_array->size())
 	{
-		qDebug() << "convertToObjTypeIds: bad index: " << index << ", max: " << objtype_array.size();
+		qDebug() << "convertToObjTypeIds: bad index: " << index << ", max: " << objtype_array->size();
 		return "";
 	}
-	return objtype_array.at(index).trimmed();
+	return objtype_array->at(index).trimmed();
 }
 
 
@@ -659,7 +660,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 		if (tmpFic.isEmpty())
 			qWarning() << "ERROR while loading data from" << QDir::toNativeSeparators(("stars/hip_gaia3/" + cat_hip_sp_file_name));
 		else
-			spectral_array = initStringListFromFile(tmpFic);
+			*spectral_array = initStringListFromFile(tmpFic);
 	}
 
 	const QString cat_objtype_file_name = starsConfig.value("objecttypesFile").toString();
@@ -673,13 +674,13 @@ void StarMgr::loadData(QVariantMap starsConfig)
 		if (tmpFic.isEmpty())
 			qWarning() << "ERROR while loading data from" << QDir::toNativeSeparators(("stars/hip_gaia3/" + cat_objtype_file_name));
 		else
-			objtype_array = initStringListFromFile(tmpFic);
+			*objtype_array = initStringListFromFile(tmpFic);
 	}
 
 	// create an array with the first element being an empty string, and then contain strings A,B,C,...,Z
-	component_array.append("");
+	component_array->append("");
 	for (int i=0; i<26; i++)
-		component_array.append(QString(QChar('A'+i)));
+		component_array->append(QString(QChar('A'+i)));
 
 	lastMaxSearchLevel = maxGeodesicGridLevel;
 	qInfo().noquote() << "Finished loading star catalogue data, max_geodesic_level:" << maxGeodesicGridLevel;
