@@ -86,10 +86,11 @@ double DLL_FUNC jpl_get_double(const void *ephem, const int value)
 	return(*reinterpret_cast<const double *>(static_cast<const char *>(ephem) + value));
 }
 
-long DLL_FUNC jpl_get_long(const void *ephem, const int value)
-{
-	return(*reinterpret_cast<const int32_t *>(static_cast<const char *>(ephem) + value));
-}
+// This is actually unused. Strange to cast to int32_t but then return the vague "long" type. Some code analysis tools complain.
+//long DLL_FUNC jpl_get_long(const void *ephem, const int value)
+//{
+//	return(*reinterpret_cast<const int32_t *>(static_cast<const char *>(ephem) + value));
+//}
 
 
 /*****************************************************************************
