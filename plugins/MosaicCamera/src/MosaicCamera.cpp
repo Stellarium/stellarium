@@ -290,7 +290,7 @@ void MosaicCamera::readPolygonSetsFromJson(const QString& cameraName, const QStr
 	QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
 	QJsonArray jsonArray = loadDoc.array();
 
-	for (int i = 0; i < jsonArray.size(); ++i)
+	for (int i = 1; i < jsonArray.size(); ++i)
 	{
 		QJsonObject setObject = jsonArray[i].toObject();
 		PolygonSet set;
@@ -329,6 +329,11 @@ void MosaicCamera::readPolygonSetsFromJson(const QString& cameraName, const QStr
 
 	if (cameras.contains(cameraName))
 	{
+		// read the first one which is metadata
+		QJsonObject setObject = jsonArray[0].toObject();
+		cameras[cameraName].cameraName = setObject["camera_name"].toString();
+		cameras[cameraName].cameraDescription = setObject["camera_description"].toString();
+		cameras[cameraName].cameraURLDetails = setObject["camera_url"].toString();
 		cameras[cameraName].polygon_sets = polygonSets;
 	}
 }
@@ -527,7 +532,7 @@ void MosaicCamera::setCurrentCamera(const QString& cameraName)
 		currentCamera = cameraName;
 		emit currentCameraChanged(cameraName);
 		if(configDialog->visible())
-			configDialog->setCurrentCameraName(cameraName);
+			configDialog->setCurrentCameraName(cameraName, cameras[cameraName].cameraName, cameras[cameraName].cameraDescription, cameras[cameraName].cameraURLDetails);
 	}
 }
 

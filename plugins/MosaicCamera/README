@@ -11,7 +11,11 @@ Built-in cameras include:
   HSC : https://www.naoj.org/Projects/HSC/
   DECam : https://www.darkenergysurvey.org/the-des-project/instrument/the-camera/
   MegaPrime : https://www.cfht.hawaii.edu/Instruments/Imaging/Megacam/
-  Latiss : https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/
+  LATISS : https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/
+  JWST: https://jwst-docs.stsci.edu/jwst-observatory-hardware/jwst-telescope/jwst-focal-plane#gsc.tab=0
+  HST: https://hst-docs.stsci.edu/acsihb/chapter-3-acs-capabilities-design-and-operations/3-1-acs-location-in-the-hst-focal-plane
+  Roman: https://roman.gsfc.nasa.gov/science/WFI_technical.html
+  Euclid: https://www.euclid-ec.org/public/mission/vis/
 
 Camera sensors are specified via their corners, which are assumed to form spherical
 polygons.  The corners should be specified as gnomonic projections from the sphere to a
@@ -22,6 +26,11 @@ each of two types of science sensors.
 Each camera is defined via a JSON file with the structure:
 
 [
+    {
+        "camera_name": "telescope/camera full name",
+        "camera_description": "telescope/camera description in HTML",
+        "camera_url": "https://www.nasa.gov/"
+    },
     {
         "name": "name-of-group-1",
         "corners": [
