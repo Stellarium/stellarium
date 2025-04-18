@@ -345,7 +345,6 @@ void Landscape::drawHorizonLine(StelCore* core, StelPainter& painter)
 	painter.setLineSmooth(false);
 }
 
-#include <iostream>
 const QString Landscape::getTexturePath(const QString& basename, const QString& landscapeId)
 {
 	// look in the landscape directory first, and if not found default to global textures directory

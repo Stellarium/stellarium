@@ -23,8 +23,6 @@
 #include "Orbit.hpp"
 #include "StelCore.hpp"
 #include "StelTranslator.hpp"
-#include "StelLocaleMgr.hpp"
-#include "StelObserver.hpp"
 
 #include <QRegularExpression>
 #include <QDebug>

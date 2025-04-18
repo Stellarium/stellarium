@@ -25,7 +25,6 @@
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
 #include "StelUtils.hpp"
-#include "StelTextureMgr.hpp"
 #include "SaturationShader.hpp"
 
 #include <QDebug>

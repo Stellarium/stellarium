@@ -33,7 +33,6 @@
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
-#include "StelLocaleMgr.hpp"
 
 #include <QDebug>
 #include <QElapsedTimer>
@@ -697,7 +696,7 @@ void Comet::setIAUDesignation(const QString& designation)
 void Comet::setExtraDesignations(QStringList codes)
 {
 	extraDesignations = codes;
-	for (const auto& c : codes)
+	for (const auto& c : std::as_const(codes))
 	{
 		extraDesignationsHtml << renderDiscoveryDesignationHtml(c);
 	}
