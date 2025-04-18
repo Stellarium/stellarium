@@ -60,8 +60,6 @@ void TestComputations::testJDFromBesselianEpoch()
 
 void TestComputations::testIsPowerOfTwo()
 {
-	int n;
-	bool f, r;
 	QVariantList data;
 	data	<< 0	<< true;
 	data	<< 1	<< true;
@@ -76,10 +74,10 @@ void TestComputations::testIsPowerOfTwo()
 
 	while (data.count() >= 2)
 	{
-		n	= data.takeFirst().toInt();
-		f	= data.takeFirst().toBool();
+		int n	= data.takeFirst().toInt();
+		bool f	= data.takeFirst().toBool();
 
-		r = StelUtils::isPowerOfTwo(n);
+		bool r = StelUtils::isPowerOfTwo(n);
 
 		QVERIFY2(r==f, qPrintable(QString("%1 %2 power of two (expected: %3)")
 			.arg(n).arg(r ? "is":"is not").arg(f)));
@@ -88,7 +86,6 @@ void TestComputations::testIsPowerOfTwo()
 
 void TestComputations::testGetBiggerPowerOfTwo()
 {
-	int n, e, r;
 	QVariantList data;
 	data	<< 0	<< 1;
 	data	<< 1	<< 1;
@@ -110,9 +107,9 @@ void TestComputations::testGetBiggerPowerOfTwo()
 
 	while (data.count() >= 2)
 	{
-		n	= data.takeFirst().toInt();
-		e	= data.takeFirst().toInt();
-		r	= StelUtils::getBiggerPowerOfTwo(n);
+		int n	= data.takeFirst().toInt();
+		int e	= data.takeFirst().toInt();
+		int r	= StelUtils::getBiggerPowerOfTwo(n);
 
 		QVERIFY2(r==e, qPrintable(QString("Number: %1 getBiggerPowerOfTwo(): %2 (expected: %3)")
 			.arg(n).arg(r).arg(e)));
@@ -121,8 +118,6 @@ void TestComputations::testGetBiggerPowerOfTwo()
 
 void TestComputations::testDayInYear()
 {
-	int year, month, day, en, n;
-
 	QVariantList data;
 	data	<< 2000	<< 1	<< 1	<< 1;
 	data	<< 2019	<< 1	<< 1	<< 1;
@@ -133,12 +128,12 @@ void TestComputations::testDayInYear()
 
 	while (data.count() >= 4)
 	{
-		year	= data.takeFirst().toInt();
-		month	= data.takeFirst().toInt();
-		day	= data.takeFirst().toInt();
-		en	= data.takeFirst().toInt();
+		int year	= data.takeFirst().toInt();
+		int month	= data.takeFirst().toInt();
+		int day	= data.takeFirst().toInt();
+		int en	= data.takeFirst().toInt();
 
-		n = StelUtils::dayInYear(year, month, day);
+		int n = StelUtils::dayInYear(year, month, day);
 
 		QVERIFY2(n==en, qPrintable(QString("%1-%2-%3 is %4 day (expected: %5)")
 				.arg(year).arg(month).arg(day).arg(n).arg(en)));
@@ -147,9 +142,6 @@ void TestComputations::testDayInYear()
 
 void TestComputations::testYearFraction()
 {
-	int year, month, day;
-	double fraction, efrac;
-
 	QVariantList data;
 	data	<< 2000	<< 1	<< 1	<< 2000.00274;
 	data	<< 2019	<< 1	<< 1	<< 2019.00274;
@@ -160,12 +152,12 @@ void TestComputations::testYearFraction()
 
 	while (data.count() >= 4)
 	{
-		year	= data.takeFirst().toInt();
-		month	= data.takeFirst().toInt();
-		day	= data.takeFirst().toInt();
-		efrac	= data.takeFirst().toDouble();
+		int year	= data.takeFirst().toInt();
+		int month	= data.takeFirst().toInt();
+		int day	= data.takeFirst().toInt();
+		double efrac	= data.takeFirst().toDouble();
 
-		fraction = StelUtils::yearFraction(year, month, day);
+		double fraction = StelUtils::yearFraction(year, month, day);
 
 		QVERIFY2(qAbs(fraction-efrac)<=ERROR_HIGH_LIMIT, qPrintable(QString("%1-%2-%3 is %4 (expected: %5)")
 			.arg(year).arg(month).arg(day).arg(QString::number(fraction, 'f', 5), QString::number(efrac, 'f', 5))));
@@ -174,8 +166,7 @@ void TestComputations::testYearFraction()
 
 void TestComputations::testEquToEqlTransformations()
 {
-	double eps0 = 23.4392911*M_PI/180.;
-	double ra, dec, lambdaE, lambda, betaE, beta;
+	const double eps0 = 23.4392911*M_PI/180.;
 
 	QVariantList data;
 	//                  RA                   DE                     Lambda           Beta
@@ -187,11 +178,12 @@ void TestComputations::testEquToEqlTransformations()
 
 	while (data.count() >= 4)
 	{
-		ra	= data.takeFirst().toDouble();
-		dec	= data.takeFirst().toDouble();
-		lambdaE	= data.takeFirst().toDouble();
-		betaE	= data.takeFirst().toDouble();
+		double ra	= data.takeFirst().toDouble();
+		double dec	= data.takeFirst().toDouble();
+		double lambdaE	= data.takeFirst().toDouble();
+		double betaE	= data.takeFirst().toDouble();
 
+		double lambda, beta;
 		StelUtils::equToEcl(ra*M_PI/180., dec*M_PI/180., eps0, &lambda, &beta);
 
 		lambda *= 180/M_PI;
@@ -206,8 +198,7 @@ void TestComputations::testEquToEqlTransformations()
 
 void TestComputations::testEclToEquTransformations()
 {
-	double eps0 = 23.4392911*M_PI/180.;
-	double ra, dec, raE, decE, lambda, beta;
+	const double eps0 = 23.4392911*M_PI/180.;
 
 	QVariantList data;
 	//                  RA                   DE                     Lambda           Beta
@@ -219,11 +210,12 @@ void TestComputations::testEclToEquTransformations()
 
 	while (data.count() >= 4)
 	{
-		raE	= data.takeFirst().toDouble();
-		decE	= data.takeFirst().toDouble();
-		lambda	= data.takeFirst().toDouble();
-		beta	= data.takeFirst().toDouble();
+		double raE	= data.takeFirst().toDouble();
+		double decE	= data.takeFirst().toDouble();
+		double lambda	= data.takeFirst().toDouble();
+		double beta	= data.takeFirst().toDouble();
 
+		double ra, dec;
 		StelUtils::eclToEqu(lambda*M_PI/180., beta*M_PI/180., eps0, &ra, &dec);
 
 		ra *= 180/M_PI;
@@ -238,10 +230,7 @@ void TestComputations::testEclToEquTransformations()
 
 void TestComputations::testSpheToRectTransformations()
 {
-	double longitude, latitude, r = 1.;
-	float longitudeF1, latitudeF1, longitudeF2, latitudeF2;
-	Vec3f eVec3f, rVec3f;
-	Vec3d eVec3d, rVec3d1, rVec3d2, rVec3d1r;
+	const double r = 1.;
 
 	QVariantList data;
 	//     Longitude          Latitude         Expected
@@ -255,15 +244,17 @@ void TestComputations::testSpheToRectTransformations()
 
 	while (data.count() >= 3)
 	{
-		longitude	= data.takeFirst().toDouble();
-		latitude	= data.takeFirst().toDouble();
-		longitudeF1	= float(longitude);
-		latitudeF1	= float(latitude);
-		longitudeF2	= float(longitude);
-		latitudeF2	= float(latitude);
-		eVec3f		= Vec3f(data.takeFirst().toString());
-		eVec3d		= eVec3f.toVec3d();
+		double longitude	= data.takeFirst().toDouble();
+		double latitude	= data.takeFirst().toDouble();
+		float longitudeF1	= float(longitude);
+		float latitudeF1	= float(latitude);
+		float longitudeF2	= float(longitude);
+		float latitudeF2	= float(latitude);
+		Vec3f eVec3f		= Vec3f(data.takeFirst().toString());
+		Vec3d eVec3d		= eVec3f.toVec3d();
 
+		Vec3f rVec3f;
+		Vec3d rVec3d1, rVec3d2, rVec3d1r;
 		StelUtils::spheToRect(longitudeF1*M_PI_180f, latitudeF1*M_PI_180f, rVec3f);
 		StelUtils::spheToRect(longitudeF2*M_PI_180f, latitudeF2*M_PI_180f, rVec3d2);
 		StelUtils::spheToRect(longitude*M_PI/180.,   latitude*M_PI/180.,   rVec3d1);
@@ -294,11 +285,6 @@ void TestComputations::testSpheToRectTransformations()
 
 void TestComputations::testRectToSpheTransformations()
 {
-	float longitude, latitude, longitudef, latitudef, longitudeE, latitudeE;
-	double longituded, latituded, longitudes, latitudes, longitude1r, latitude1r, r = 1.;
-	Vec3f rVec3f;
-	Vec3d rVec3d, rVec3d1r;
-
 	QVariantList data;
 	//     Longitude          Latitude         Source
 	data <<     0.		<<   0.		<< "1,0,0";
@@ -309,12 +295,14 @@ void TestComputations::testRectToSpheTransformations()
 
 	while (data.count() >= 3)
 	{
-		longitudeE	= data.takeFirst().toFloat();
-		latitudeE	= data.takeFirst().toFloat();
-		rVec3f		= Vec3f(data.takeFirst().toString());
-		rVec3d		= rVec3f.toVec3d();
-		rVec3d1r	= rVec3d;
+		float longitudeE	= data.takeFirst().toFloat();
+		float latitudeE	= data.takeFirst().toFloat();
+		Vec3f rVec3f		= Vec3f(data.takeFirst().toString());
+		Vec3d rVec3d		= rVec3f.toVec3d();
+		Vec3d rVec3d1r	= rVec3d;
 
+		float longitude, latitude, longitudef, latitudef;
+		double longituded, latituded, longitudes, latitudes, longitude1r, latitude1r, r = 1.;
 		StelUtils::rectToSphe(&longitude,  &latitude,  rVec3f);
 		StelUtils::rectToSphe(&longitudef, &latitudef, rVec3d);
 		StelUtils::rectToSphe(&longituded, &latituded, rVec3d);
@@ -702,13 +690,12 @@ void TestComputations::testExp()
 {
 	QList<float> data;
 	data << -1.f << -0.75f << -0.5f << -0.25f << 0.f << 0.25f << 0.5f << 0.75f << 1.f;
-	float v, e, r, err;
 	for (int i = 0; i < data.size(); ++i)
 	{
-		v = data.at(i);
-		e = exp(v);
-		r = StelUtils::fastExp(v);
-		err = qAbs(e-r);
+		float v = data.at(i);
+		float e = exp(v);
+		float r = StelUtils::fastExp(v);
+		float err = qAbs(e-r);
 		QVERIFY2(err<=1e-2, qPrintable(QString("value: %1 std. exp: %2 fast exp: %3 (error: %4)")
 			.arg(QString::number(v, 'f', 5), QString::number(e, 'f', 5), QString::number(r, 'f', 5), QString::number(err, 'f', 5))));
 	}
@@ -718,13 +705,12 @@ void TestComputations::testACos()
 {
 	QList<float> data;
 	data << 0.f << 0.25f << 0.75f << -0.75f << -0.25f << 0.5f << -0.5f;
-	float v, e, r, err;
 	for (int i = 0; i < data.size(); ++i)
 	{
-		v = data.at(i);
-		e = acos(v);
-		r = StelUtils::fastAcos(v);
-		err = qAbs(e-r);
+		float v = data.at(i);
+		float e = acos(v);
+		float r = StelUtils::fastAcos(v);
+		float err = qAbs(e-r);
 		QVERIFY2(err<=2e-2, qPrintable(QString("value: %1 std. acos: %2 fast acos: %3 (error: %4)")
 			.arg(QString::number(v, 'f', 5), QString::number(e, 'f', 5), QString::number(r, 'f', 5), QString::number(err, 'f', 5))));
 	}
