@@ -156,6 +156,24 @@ void MosaicCameraDialog::enableUIElements(bool state)
 	ui->setViewToCameraButton->setEnabled(state);
 }
 
+void MosaicCameraDialog::setCameraNames(const QStringList& cameraNames)
+{
+	ui->cameraListWidget->blockSignals(true);
+	ui->cameraListWidget->clear();
+	ui->cameraListWidget->addItems(cameraNames);
+	if (cameraNames.size() > 0)
+	{
+		currentCameraName = cameraNames[0];
+		mc->setCurrentCamera(currentCameraName);
+	}
+	else
+	{
+		currentCameraName = "";
+	}
+	ui->cameraListWidget->blockSignals(false);
+	enableUIElements(false);
+}
+
 // Initialize the dialog widgets and connect the signals/slots
 void MosaicCameraDialog::createDialogContent()
 {
@@ -163,9 +181,7 @@ void MosaicCameraDialog::createDialogContent()
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(1);
 
-	QStringList cameraNames = mc->getCameraNames();
-	ui->cameraListWidget->addItems(cameraNames);
-	enableUIElements(false);
+	setCameraNames(mc->getCameraNames());
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
@@ -205,6 +221,7 @@ void MosaicCameraDialog::createDialogContent()
 	// General tab
 	connectBoolProperty(ui->checkBoxShowButton, "MosaicCamera.showButton");
 	connect(ui->pushButtonSaveSettings, SIGNAL(clicked()), mc, SLOT(saveSettings()));
+	connect(ui->pushButtonRestoreDefaults, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 }
 
 void MosaicCameraDialog::setAboutHtml(void)
@@ -225,4 +242,15 @@ void MosaicCameraDialog::setAboutHtml(void)
 	}
 
 	ui->aboutTextBrowser->setHtml(html);
+}
+
+void MosaicCameraDialog::restoreDefaults()
+{
+	if (!askConfirmation()) {
+		qDebug() << "[MosaicCamera] Restore defaults cancelled.";
+		return;
+	}
+	qDebug() << "[MosaicCamera] Restoring defaults...";
+	mc->restoreDefaults();
+	setCameraNames(mc->getCameraNames());
 }
