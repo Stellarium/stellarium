@@ -81,7 +81,7 @@ before_build:
   - set SIGNING=false
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\Inno Setup 6
   - set PATH=%VSPATH%;%QT_BASEDIR%\bin;c:\%exiv2baseName%\bin;%INNSPATH%;%PATH%
-  - dir %QT_BASEDIR%\bin
+  - appveyor PushArtifact %QT_BASEDIR%\bin\qtpaths.bat
 
   - ps: if($env:QT_BASEDIR.contains('_64') -or $env:QT_BASEDIR.contains('arm64')) { $env:BITS=64 } else { $env:BITS=32 }
   - ps: if($env:QT_BASEDIR.contains('_64')) { $env:PKGARCH="x64" } else { $env:PKGARCH="x86" }
