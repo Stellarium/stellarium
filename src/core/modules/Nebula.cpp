@@ -325,13 +325,12 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (flags&Distance)
 	{
-		float distance, distanceErr, distanceLY, distanceErrLY;
 		if (qAbs(parallax)>0.f)
 		{
 			QString dx;
 			// distance in light years from parallax
-			distance = 3.162e-5f/(qAbs(parallax)*4.848e-9f);
-			distanceErr = 0.f;
+			float distance = 3.162e-5f/(qAbs(parallax)*4.848e-9f);
+			float distanceErr = 0.f;
 
 			if (parallaxErr>0.f)
 				distanceErr = qAbs(3.162e-5f/(qAbs(parallaxErr + parallax)*4.848e-9f) - distance);
@@ -359,10 +358,10 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			//TRANSLATORS: Unit of measure for distance - Light Years
 			QString duly = qc_("ly", "distance");
 
-			distance = oDistance;
-			distanceErr = oDistanceErr;
-			distanceLY = oDistance*dc;
-			distanceErrLY= oDistanceErr*dc;
+			float distance = oDistance;
+			float distanceErr = oDistanceErr;
+			float distanceLY = oDistance*dc;
+			float distanceErrLY= oDistanceErr*dc;
 			if (oDistance>=1000.f)
 			{
 				distance = oDistance/1000.f;

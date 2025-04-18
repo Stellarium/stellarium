@@ -4934,7 +4934,6 @@ void Planet::computeOrbit()
 	KeplerOrbit *keplerOrbit=static_cast<KeplerOrbit*>(orbitPtr);
 	if (keplerOrbit && !closeOrbit)
 		dateJDE = keplerOrbit->getEpochJDE();
-	double calc_date;
 	Vec3d parentPos;
 	if (parent)
 		parentPos = parent->getHeliocentricEclipticPos(dateJDE)+ parent->getAberrationPush(); // aberrationPush is not strictly correct, but helps a lot...
@@ -4963,7 +4962,7 @@ void Planet::computeOrbit()
 	else
 		for(int d = 0; d < ORBIT_SEGMENTS; d++)
 		{
-			calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
+			double calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
 			// Round to a number of deltaOrbitJDE to improve caching.
 			if (d != ORBIT_SEGMENTS / 2)
 			{
@@ -5004,7 +5003,6 @@ void Planet::drawOrbit(const StelCore* core)
 
 	if (fromMoonPerspective) {
 		double dateJDE = lastJDE;
-		double calc_date;
 
 		Vec3d myPos = core->getCurrentPlanet()->getHeliocentricEclipticPos(dateJDE);
 		Vec3d myparentPos = getHeliocentricEclipticPos(dateJDE);
@@ -5022,7 +5020,7 @@ void Planet::drawOrbit(const StelCore* core)
 			const double f = (d - ORBIT_SEGMENTS/2.) / (ORBIT_SEGMENTS/2.);
 			// make sure only sample half of the orbit forward and half backward
 			// the sampling spacing is trial and error, but power of 13 seems to be good (i.e., densely sample around the current date)
-			calc_date = dateJDE + pow(f, 13)*deltaOrbitJDE*ORBIT_SEGMENTS/2. + theta*deltaOrbitJDE*ORBIT_SEGMENTS/2;
+			double calc_date = dateJDE + pow(f, 13)*deltaOrbitJDE*ORBIT_SEGMENTS/2. + theta*deltaOrbitJDE*ORBIT_SEGMENTS/2;
 			orbit[d] = getEclipticPos(calc_date);
 		}
 	}

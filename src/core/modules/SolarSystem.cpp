@@ -2040,7 +2040,6 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 	QString info = "";
 	Vec3d win;
 	Vec3f markerColor;
-	bool skipFlag = false;
 
 	if (getFlagEphemerisLine() && getFlagEphemerisScaleMarkers())
 		baseSize = 3.f; // The line lies through center of marker
@@ -2068,7 +2067,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 
 	for (int i =0; i < fsize; i++)
 	{
-		skipFlag = (((i + 1)%dataStep)!=1 && dataStep!=1);
+		bool skipFlag = (((i + 1)%dataStep)!=1 && dataStep!=1);
 
 		// Check visibility of pointer
 		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
@@ -2099,9 +2098,9 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 			continue;
 
 		Vec3f win;
-		float solarAngle=0.f; // Angle to possibly rotate the texture. Degrees.
 		if (prj->project(AstroCalcDialog::EphemerisList[i].coord, win))
 		{
+			float solarAngle=0.f; // Angle to possibly rotate the texture. Degrees.
 			if (isComet)
 			{
 				// compute solarAngle in screen space.
@@ -2491,7 +2490,6 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	
 	double cosLimFov = std::cos(limitFov * M_PI/180.);
 	Vec3d equPos;
-	double cosAngularSize;
 
 	const QString weAreHere = core->getCurrentPlanet()->getEnglishName();
 	for (const auto& p : systemPlanets)
@@ -2499,7 +2497,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 		equPos = p->getJ2000EquatorialPos(core);
 		equPos.normalize();
 
-		cosAngularSize = std::cos(p->getSpheroidAngularRadius(core) * M_PI/180.);
+		double cosAngularSize = std::cos(p->getSpheroidAngularRadius(core) * M_PI/180.);
 
 		if (equPos*v>=std::min(cosLimFov, cosAngularSize) && p->getEnglishName()!=weAreHere)
 		{
