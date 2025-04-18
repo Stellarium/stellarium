@@ -2480,7 +2480,7 @@ void AstroCalcDialog::initListLunarEclipseContact()
 	ui->lunareclipsecontactsTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
 }
 
-LunarEclipseBessel::LunarEclipseBessel(double &besX, double &besY, double &besL1, double &besL2, double &besL3, double &latDeg, double &lngDeg)
+void LunarEclipseBessel::computeElements(double &besX, double &besY, double &besL1, double &besL2, double &besL3, double &latDeg, double &lngDeg)
 {
 	// Besselian elements
 	// Source: Explanatory Supplement to the Astronomical Ephemeris 
@@ -2534,7 +2534,7 @@ LunarEclipseParameters lunarEclipseContacts(double JD, bool beforeMaximum, int e
 	core->setJD(JD);
 	core->update(0);
 	double x,y,L1,L2,L3,latitude,longitude,L=0.;
-	LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+	LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
 	switch (eclipseType)
 	{
 		case 0: // penumbral
@@ -2551,11 +2551,11 @@ LunarEclipseParameters lunarEclipseContacts(double JD, bool beforeMaximum, int e
 	core->setJD(JD - 5./1440.);
 	core->update(0);
 	double x1,y1;
-	LunarEclipseBessel(x1,y1,L1,L2,L3,latitude,longitude);
+	LunarEclipseBessel::computeElements(x1,y1,L1,L2,L3,latitude,longitude);
 	core->setJD(JD + 5./1440.);
 	core->update(0);
 	double x2,y2;
-	LunarEclipseBessel(x2,y2,L1,L2,L3,latitude,longitude);
+	LunarEclipseBessel::computeElements(x2,y2,L1,L2,L3,latitude,longitude);
 
 	const double xdot = (x2 - x1) * 6.;
 	const double ydot = (y2 - y1) * 6.;
@@ -2627,15 +2627,15 @@ void AstroCalcDialog::generateLunarEclipses()
 					core->setJD(JD);
 					core->update(0);
 					double x,y,L1,L2,L3,latitude,longitude;
-					LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+					LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
 					core->setJD(JD - 5./1440.);
 					core->update(0);
 					double x1,y1;
-					LunarEclipseBessel(x1,y1,L1,L2,L3,latitude,longitude);
+					LunarEclipseBessel::computeElements(x1,y1,L1,L2,L3,latitude,longitude);
 					core->setJD(JD + 5./1440.);
 					core->update(0);
 					double x2,y2;
-					LunarEclipseBessel(x2,y2,L1,L2,L3,latitude,longitude);
+					LunarEclipseBessel::computeElements(x2,y2,L1,L2,L3,latitude,longitude);
 					double xdot = (x2 - x1) * 6.;
 					double ydot = (y2 - y1) * 6.;
 					double n2 = xdot * xdot + ydot * ydot;
@@ -2655,7 +2655,7 @@ void AstroCalcDialog::generateLunarEclipses()
 				const double dist=moon->getEclipticPos().norm();  // geocentric Lunar distance [AU]
 				const double mSD=atan(moon->getEquatorialRadius()/dist) * M_180_PI*3600.; // arcsec
 				double x,y,L1,L2,L3,latitude,longitude;
-				LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+				LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
 				const double m = sqrt(x * x + y * y); // distance between lunar centre and shadow centre
 				const double pMag = (L1 - m) / (2. * mSD); // penumbral magnitude
 				const double uMag = (L2 - m) / (2. * mSD); // umbral magnitude
@@ -2814,7 +2814,7 @@ void AstroCalcDialog::enableLunarEclipsesCircumstancesButtons(bool enable)
 	ui->lunareclipsescontactsSaveButton->setEnabled(enable);
 }
 
-LunarEclipseIteration::LunarEclipseIteration(double &JD, double &positionAngle, double &axisDistance, bool beforeMaximum, int eclipseType)
+void LunarEclipseBessel::iteration(double &JD, double &positionAngle, double &axisDistance, const bool beforeMaximum, const int eclipseType)
 {
 	double dt = 1.;
 	int iterations = 0;
@@ -2824,7 +2824,7 @@ LunarEclipseIteration::LunarEclipseIteration(double &JD, double &positionAngle, 
 		eclipseData = lunarEclipseContacts(JD,beforeMaximum,eclipseType);
 		dt = eclipseData.dt;
 		JD += dt/24.;
-		iterations += 1;
+		++iterations;
 	}
 	positionAngle = eclipseData.positionAngle;
 	if (eclipseType < 2)
@@ -2862,46 +2862,46 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 		double JD = JDMid;
 		if (i==0)
 		{
-			LunarEclipseIteration(JD,positionAngle,axisDistance,true,0);
-			LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+			LunarEclipseBessel::iteration(JD,positionAngle,axisDistance,true,0);
+			LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
 			event = true;
 		}
 		else if (i==1 && uMag>0.)
 		{
-			LunarEclipseIteration(JD,positionAngle,axisDistance,true,1);
-			LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+			LunarEclipseBessel::iteration(JD,positionAngle,axisDistance,true,1);
+			LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
 			event = true;
 		}
 		else if (i==2 && uMag>=1.)
 		{
-			LunarEclipseIteration(JD,positionAngle,axisDistance,true,2);
-			LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+			LunarEclipseBessel::iteration(JD,positionAngle,axisDistance,true,2);
+			LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
 			event = true;
 		}
 		else if (i==3)
 		{
 			eclipseData = lunarEclipseContacts(JD,true,2);
-			LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+			LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
 			positionAngle = eclipseData.positionAngle;
 			axisDistance = eclipseData.axisDistance;
 			event = true;
 		}
 		else if (i==4 && uMag>=1.)
 		{
-			LunarEclipseIteration(JD,positionAngle,axisDistance,false,2);
-			LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+			LunarEclipseBessel::iteration(JD,positionAngle,axisDistance,false,2);
+			LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
 			event = true;
 		}
 		else if (i==5 && uMag>0.)
 		{
-			LunarEclipseIteration(JD,positionAngle,axisDistance,false,1);
-			LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+			LunarEclipseBessel::iteration(JD,positionAngle,axisDistance,false,1);
+			LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
 			event = true;
 		}
 		else if (i==6)
 		{
-			LunarEclipseIteration(JD,positionAngle,axisDistance,false,0);
-			LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+			LunarEclipseBessel::iteration(JD,positionAngle,axisDistance,false,0);
+			LunarEclipseBessel::computeElements(x,y,L1,L2,L3,latitude,longitude);
 			event = true;
 		}
 		if (event)
@@ -4150,17 +4150,17 @@ LocalTransitparams localTransit(double JD, int contact, bool central, PlanetP ob
 	core->update(0);
 
 	double x,y,d,tf1,tf2,L1,L2,mu;
-	TransitBessel(object,x,y,d,tf1,tf2,L1,L2,mu);
+	TransitBessel::computeElements(object,x,y,d,tf1,tf2,L1,L2,mu);
 
 	core->setJD(JD - 5./1440.);
 	core->update(0);
 	double x1,y1,d1,mu1;
-	TransitBessel(object,x1,y1,d1,tf1,tf2,L1,L2,mu1);
+	TransitBessel::computeElements(object,x1,y1,d1,tf1,tf2,L1,L2,mu1);
 
 	core->setJD(JD + 5./1440.);
 	core->update(0);
 	double x2,y2,d2,mu2;
-	TransitBessel(object,x2,y2,d2,tf1,tf2,L1,L2,mu2);
+	TransitBessel::computeElements(object,x2,y2,d2,tf1,tf2,L1,L2,mu2);
 
 	// Hourly rate of changes
 	const double xdot = (x2 - x1) * 6.;
@@ -4201,7 +4201,7 @@ LocalTransitparams localTransit(double JD, int contact, bool central, PlanetP ob
 	return result;
 }
 
-TransitBessel::TransitBessel(PlanetP object, double &besX, double &besY,
+void TransitBessel::computeElements(PlanetP object, double &besX, double &besY,
 	double &besD, double &bestf1, double &bestf2, double &besL1, double &besL2, double &besMu)
 {
 	// Besselian elements (adapted from solar eclipse)
@@ -4321,17 +4321,17 @@ void AstroCalcDialog::generateTransits()
 						core->setJD(JD);
 						core->update(0);
 						double x,y,d,tf1,tf2,L1,L2,mu;
-						TransitBessel(object,x,y,d,tf1,tf2,L1,L2,mu);
+						TransitBessel::computeElements(object,x,y,d,tf1,tf2,L1,L2,mu);
 
 						core->setJD(JD - 5./1440.);
 						core->update(0);
 						double x1,y1;
-						TransitBessel(object,x1,y1,d,tf1,tf2,L1,L2,mu);
+						TransitBessel::computeElements(object,x1,y1,d,tf1,tf2,L1,L2,mu);
 
 						core->setJD(JD + 5./1440.);
 						core->update(0);
 						double x2,y2;
-						TransitBessel(object,x2,y2,d,tf1,tf2,L1,L2,mu);
+						TransitBessel::computeElements(object,x2,y2,d,tf1,tf2,L1,L2,mu);
 
 						double xdot1 = (x - x1) * 12.;
 						double xdot2 = (x2 - x) * 12.;
@@ -4342,13 +4342,13 @@ void AstroCalcDialog::generateTransits()
 						double n2 = xdot * xdot + ydot * ydot;
 						dt  = -(x * xdot + y * ydot) / n2;
 						JD += dt / 24.;
-						iteration += 1;
+						++iteration;
 					}
 					core->setJD(JD);
 					core->update(0);
 					
 					double x,y,d,tf1,tf2,L1,L2,mu;
-					TransitBessel(object,x,y,d,tf1,tf2,L1,L2,mu);
+					TransitBessel::computeElements(object,x,y,d,tf1,tf2,L1,L2,mu);
 					double gamma = sqrt(x * x + y * y);
 					if (gamma <= (0.9972+L1) && (JD <= stopJD)) // Transit occurs on this JD
 					{
@@ -4367,7 +4367,7 @@ void AstroCalcDialog::generateTransits()
 							transitData = localTransit(JD,0,false,object,saveTopocentric);
 							dt = transitData.dt;
 							JD += dt / 24.;
-							iteration += 1;
+							++iteration;
 						}
 						JDMid = JD;
 						transitMagnitude = transitData.magnitude;
@@ -7752,15 +7752,12 @@ void AstroCalcDialog::calculateWutObjects()
 		const Nebula::TypeGroup tflags = static_cast<Nebula::TypeGroup>(dsoMgr->getTypeFilters());
 		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 		const bool angularSizeLimit = ui->wutAngularSizeLimitCheckBox->isChecked();
-		bool passByType, visible = true;
 		bool enableAngular = true;
 		const double angularSizeLimitMin = ui->wutAngularSizeLimitMinSpinBox->valueDegrees();
 		const double angularSizeLimitMax = ui->wutAngularSizeLimitMaxSpinBox->valueDegrees();
 		const double altitudeLimitMin = ui->wutAltitudeMinSpinBox->valueDegrees();
 		const float magLimit = static_cast<float>(ui->wutMagnitudeDoubleSpinBox->value());
 		const double JD = core->getJD();
-		double alt;
-		float mag;
 		QSet<QString> objectsList;
 		QString designation, starName, constellation, otype;
 
@@ -7817,7 +7814,7 @@ void AstroCalcDialog::calculateWutObjects()
 					for (const auto& object : std::as_const(stars))
 					{
 						// Filter for angular size is not applicable
-						mag = object->getVMagnitude(core);
+						const float mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
@@ -7831,7 +7828,7 @@ void AstroCalcDialog::calculateWutObjects()
 									starName = designation;
 
 								rts = object->getRTSTime(core, altitudeLimitMin);
-								alt = computeMaxElevation(object);
+								const double alt = computeMaxElevation(object);
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 								otype = object->getObjectTypeI18n();
 
@@ -7865,8 +7862,8 @@ void AstroCalcDialog::calculateWutObjects()
 
 					for (const auto& object : allDSO)
 					{
-						passByType = false;
-						mag = object->getVMagnitude(core);
+						bool passByType = false;
+						float mag = object->getVMagnitude(core);
 						Nebula::NebulaType ntype = object->getDSOType();						
 						switch (categoryId)
 						{
@@ -7900,21 +7897,21 @@ void AstroCalcDialog::calculateWutObjects()
 								break;
 							case EWSupernovaeCandidates:
 							{
-								visible = ((mag <= magLimit) || (mag > 90.f && magLimit >= 19.f));
+								bool visible = ((mag <= magLimit) || (mag > 90.f && magLimit >= 19.f));
 								if (static_cast<bool>(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNC) && visible)
 									passByType = true;
 								break;
 							}
 							case EWSupernovaeRemnantCandidates:
 							{
-								visible = ((mag <= magLimit) || (mag > 90.f && magLimit >= 19.f));
+								bool visible = ((mag <= magLimit) || (mag > 90.f && magLimit >= 19.f));
 								if (static_cast<bool>(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNRC) && visible)
 									passByType = true;
 								break;
 							}
 							case EWSupernovaeRemnants:
 							{
-								visible = ((mag <= magLimit) || (mag > 90.f && magLimit >= 19.f));
+								bool visible = ((mag <= magLimit) || (mag > 90.f && magLimit >= 19.f));
 								if (static_cast<bool>(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNR) && visible)
 									passByType = true;
 								break;
@@ -7962,7 +7959,7 @@ void AstroCalcDialog::calculateWutObjects()
 							if (!objectsList.contains(designation))
 							{
 								rts = object->getRTSTime(core, altitudeLimitMin);
-								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
+								const double alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 								otype = object->getObjectTypeI18n();
 
@@ -8012,7 +8009,7 @@ void AstroCalcDialog::calculateWutObjects()
 
 					for (const auto& object : allObjects)
 					{
-						mag = object->getVMagnitude(core);
+						const float mag = object->getVMagnitude(core);
 						if (object->getPlanetType() == pType && mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							if ((angularSizeLimit) && (!StelUtils::isWithin(object->getAngularRadius(core), angularSizeLimitMin, angularSizeLimitMax)))
@@ -8022,7 +8019,7 @@ void AstroCalcDialog::calculateWutObjects()
 							if (!objectsList.contains(designation))
 							{
 								rts = object->getRTSTime(core, altitudeLimitMin);
-								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
+								const double alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 								otype = object->getObjectTypeI18n();
 
@@ -8049,7 +8046,7 @@ void AstroCalcDialog::calculateWutObjects()
 					for (const auto& dblStar : dblHipStars)
 					{
 						StelObjectP object = dblStar.firstKey();
-						mag = object->getVMagnitude(core);
+						const float mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							// convert from arc-seconds to degrees
@@ -8067,7 +8064,7 @@ void AstroCalcDialog::calculateWutObjects()
 									starName = designation;
 
 								rts = object->getRTSTime(core, altitudeLimitMin);
-								alt = computeMaxElevation(object);
+								const double alt = computeMaxElevation(object);
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 								otype = object->getObjectTypeI18n();
 
@@ -8089,7 +8086,7 @@ void AstroCalcDialog::calculateWutObjects()
 					for (const auto& varStar : map.value(categoryId, varHipStars))
 					{
 						StelObjectP object = varStar.firstKey();
-						mag = object->getVMagnitude(core);
+						const float mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
@@ -8103,7 +8100,7 @@ void AstroCalcDialog::calculateWutObjects()
 									starName = designation;
 
 								rts = object->getRTSTime(core, altitudeLimitMin);
-								alt = computeMaxElevation(object);
+								const double alt = computeMaxElevation(object);
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 								otype = object->getObjectTypeI18n();
 
@@ -8119,7 +8116,7 @@ void AstroCalcDialog::calculateWutObjects()
 					for (const auto& hpmStar : hpmHipStars)
 					{
 						StelObjectP object = hpmStar.firstKey();
-						mag = object->getVMagnitude(core);
+						const float mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
@@ -8133,7 +8130,7 @@ void AstroCalcDialog::calculateWutObjects()
 									starName = designation;
 
 								rts = object->getRTSTime(core, altitudeLimitMin);
-								alt = computeMaxElevation(object);
+								const double alt = computeMaxElevation(object);
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 								otype = object->getObjectTypeI18n();
 
@@ -8147,8 +8144,7 @@ void AstroCalcDialog::calculateWutObjects()
 					enableAngular = false;
 					for (const auto& object : allDSO)
 					{
-						passByType = false;
-						mag = object->getVMagnitude(core);
+						const float mag = object->getVMagnitude(core);
 						Nebula::NebulaType ntype = object->getDSOType();
 						if (static_cast<bool>(tflags & Nebula::TypeActiveGalaxies) && (ntype == Nebula::NebQSO || ntype == Nebula::NebPossQSO || ntype == Nebula::NebAGx || ntype == Nebula::NebRGx || ntype == Nebula::NebBLA || ntype == Nebula::NebBLL) && mag <= magLimit && object->isAboveRealHorizon(core))
 						{
@@ -8167,7 +8163,7 @@ void AstroCalcDialog::calculateWutObjects()
 							if (!objectsList.contains(designation))
 							{
 								rts = object->getRTSTime(core, altitudeLimitMin);
-								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
+								const double alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 								otype = object->getObjectTypeI18n();
 
@@ -8190,14 +8186,14 @@ void AstroCalcDialog::calculateWutObjects()
 						{
 							for (const auto& object : GETSTELMODULE(Quasars)->getAllQuasars())
 							{
-								mag = object->getVMagnitude(core);
+								const float mag = object->getVMagnitude(core);
 								if (mag <= magLimit && object->isAboveRealHorizon(core))
 								{
 									designation = object->getEnglishName();
 									if (!objectsList.contains(designation) && !designation.isEmpty())
 									{
 										rts = object->getRTSTime(core, altitudeLimitMin);
-										alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
+										const double alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 										constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 										otype = object->getObjectTypeI18n();
 
@@ -8228,7 +8224,7 @@ void AstroCalcDialog::calculateWutObjects()
 									starName = designation;
 
 								rts = object->getRTSTime(core, altitudeLimitMin);
-								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
+								const double alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 								otype = object->getObjectTypeI18n();
 
@@ -8245,14 +8241,14 @@ void AstroCalcDialog::calculateWutObjects()
 					#ifdef USE_STATIC_PLUGIN_EXOPLANETS					
 					for (const auto& object : GETSTELMODULE(Exoplanets)->getAllExoplanetarySystems())
 					{
-						mag = object->getVMagnitude(core);
+						const float mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isVMagnitudeDefined() && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
 							if (!objectsList.contains(designation) && !designation.isEmpty())
 							{
 								rts = object->getRTSTime(core, altitudeLimitMin);
-								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
+								const double alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 								otype = object->getObjectTypeI18n();
 
@@ -8268,14 +8264,14 @@ void AstroCalcDialog::calculateWutObjects()
 					#ifdef USE_STATIC_PLUGIN_NOVAE					
 					for (const auto& object : GETSTELMODULE(Novae)->getAllBrightNovae())
 					{
-						mag = object->getVMagnitude(core);
+						const float mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
 							if (!objectsList.contains(designation))
 							{
 								rts = object->getRTSTime(core, altitudeLimitMin);
-								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
+								const double alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 								otype = object->getObjectTypeI18n();
 
@@ -8291,14 +8287,14 @@ void AstroCalcDialog::calculateWutObjects()
 					#ifdef USE_STATIC_PLUGIN_SUPERNOVAE					
 					for (const auto& object : GETSTELMODULE(Supernovae)->getAllBrightSupernovae())
 					{
-						mag = object->getVMagnitude(core);
+						const float mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
 							if (!objectsList.contains(designation))
 							{
 								rts = object->getRTSTime(core, altitudeLimitMin);
-								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
+								const double alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 								otype = object->getObjectTypeI18n();
 
@@ -8337,7 +8333,7 @@ void AstroCalcDialog::calculateWutObjects()
 
 					for (const auto& object : std::as_const(catDSO))
 					{
-						mag = object->getVMagnitude(core);
+						const float mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							QString d = object->getDSODesignation();
@@ -8355,7 +8351,7 @@ void AstroCalcDialog::calculateWutObjects()
 							if (!objectsList.contains(designation))
 							{
 								rts = object->getRTSTime(core, altitudeLimitMin);
-								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
+								const double alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
 								otype = object->getObjectTypeI18n();
 
