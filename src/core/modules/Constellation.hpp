@@ -91,6 +91,7 @@ private:
 	//! the lines of a Constellation.
 	//! @return a pointer to the constellation which the star is a part of,
 	//! or nullptr if the star is not part of a constellation
+	//! @note: Dark constellations by definition cannot be found here.
 	const Constellation* isStarIn(const StelObject*) const;
 
 	//! Get the brightest star in a Constellation.
@@ -150,7 +151,7 @@ private:
 
 	//! Check visibility of sky culture elements (using for seasonal rules)
 	//! @return true if sky culture elements rendering it turned on, else false.
-	bool checkVisibility() const;
+	bool isSeasonallyVisible() const;
 
 	//! Constellation name. This is a culture-dependent thing, and in each skyculture a constellation has one name entry only.
 	//! Given multiple aspects of naming, we need all the components and more.
@@ -191,6 +192,9 @@ private:
 	int endSeason;
 	//! List of stars forming the segments
 	std::vector<StelObjectP> constellation;
+	//! List of coordinates forming the segments of a dark constellation (outlining dark cloud in front of the Milky Way)
+	//! If this is not null, the constellation is a "dark constellation"
+	std::vector<Vec3d> dark_constellation;
 	//! In case this describes a single-star constellation (i.e. just one line segment that starts and ends at the same star),
 	//! or we have a line segment with such single star somewhere within the constellation,
 	//! we will draw a circle with this opening radius.
