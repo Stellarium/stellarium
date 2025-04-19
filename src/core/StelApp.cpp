@@ -216,6 +216,10 @@ Q_IMPORT_PLUGIN(VtsStelPluginInterface)
 Q_IMPORT_PLUGIN(OnlineQueriesPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_NEBULATEXTURES
+Q_IMPORT_PLUGIN(NebulaTexturesStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_MOSAICCAMERA
 Q_IMPORT_PLUGIN(MosaicCameraStelPluginInterface)
 #endif
