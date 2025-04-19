@@ -75,7 +75,7 @@ environment:
 before_build:
   - set DEBUG_WINDEPLOYQT=false
   - set PUBLISH_BINARY=false
-  - set USE_LIBGLES=false
+  - set USE_MESA=false
   - set USE_EXT_LIBSSL=false
   - set USE_EXT_LIBGLES=false
   - set SIGNING=false
@@ -86,6 +86,7 @@ before_build:
   - ps: if($env:QT_BASEDIR.contains('_64')) { $env:PKGARCH="x64" } else { $env:PKGARCH="x86" }
   - ps: if($env:QT_BASEDIR.contains('arm64')) { $env:PKGARCH="arm64" }
   - ps: if($env:QT_VERSION_MAJOR -eq "6") { $env:SSL="OpenSSL-" } else { $env:SSL="OpenSSL-1-" }
+  - ps: if($env:BUILD_NAME.contains('Win')) { $env:USE_MESA = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable") { $env:PUBLISH_BINARY = 'true' }
@@ -147,7 +148,7 @@ after_test:
   - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\sc-converter\Qt6Xml.dll c:\stellarium-package\qtstuff\
   - if [%USE_EXT_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win%BITS%.zip -FileName c:\stellarium\build\libGLES.zip
   - if [%USE_EXT_LIBGLES%]==[true] 7z e c:\stellarium\build\libGLES.zip -aoa -oc:\stellarium-package\qtstuff
-  - if [%USE_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-%PKGARCH%.dll -FileName c:\stellarium-package\qtstuff\opengl32sw.dll
+  - if [%USE_MESA%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-%PKGARCH%.dll -FileName c:\stellarium-package\qtstuff\opengl32sw.dll
   - if [%USE_EXT_LIBSSL%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/%SSL%Win%BITS%.zip -FileName c:\stellarium-OpenSSL.zip
   - if [%USE_EXT_LIBSSL%]==[true] 7z e c:\stellarium-OpenSSL.zip -aoa -oc:\stellarium-package\qtstuff\
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/translations/translations.zip -FileName c:\translations.zip
