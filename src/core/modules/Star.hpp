@@ -446,6 +446,36 @@ struct Star
       pmdec = sky_orbit_vel.dot(q2) * 1000.;
       StelUtils::rectToSphe(&ra, &dec, v);
    }
+
+   inline void getVarStarOffset(double epoch, double &offset) const // get brightness offset for variable stars (not actual brightness)
+   {
+      StarId star_id;  // star ID
+      if (getGaia() == 0)
+      {
+         star_id = getHip();
+      }
+      else
+      {
+         star_id = getGaia();
+      }
+      double period = StarMgr::getGcvsPeriod(star_id) / 365.25;
+      if (period <=0.)  // not a variable star
+         return;
+      double dyrs = (epoch - STAR_CATALOG_JDEPOCH) / 365.25;
+      double min1mag = StarMgr::getGcvsMinMagnitude(star_id) * 1000.;
+      double maxmag = StarMgr::getGcvsMaxMagnitude(star_id) * 1000.;
+      double epoch_offset = (StarMgr::getGcvsEpoch(star_id) - STAR_CATALOG_JDEPOCH) / 365.25;
+      double phase = fmod(dyrs - epoch_offset, period) / period;
+   
+      if (period && min1mag && maxmag && min1mag > maxmag)
+      {
+         double amplitude = (min1mag - maxmag) / 2.;
+         if (phase < 0.0)
+            phase += 1.0;
+         // sine wave
+         offset = amplitude * sin(2. * M_PI * phase);
+      }
+   }   
 };
 
 struct Star1 : public Star<Star1>
