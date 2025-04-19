@@ -39,6 +39,7 @@ CustomObjectMgr::CustomObjectMgr()
 {
 	setObjectName("CustomObjectMgr");
 	conf = StelApp::getInstance().getSettings();
+	echoToLogfile=conf->value("devel/markers_to_logfile", false).toBool();
 	setFontSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 }
@@ -69,6 +70,16 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 	if (modifierIsShift && e->button()==Qt::LeftButton && e->type()==QEvent::MouseButtonPress)
 	{
 		addCustomObject(QString("%1 %2").arg(N_("Marker")).arg(countMarkers + 1), mousePosition, true);
+		if (echoToLogfile)
+		{
+			// This is a somewhat hacky way to echo th marker positions to coordinate text.
+			// Usable to create coordinate lists e.g. for dark constellations (starless coordinate polygons).
+			double ra, dec;
+			StelUtils::rectToSphe(&ra, &dec, mousePosition);
+			qInfo() << QString("%1: [%2, %3]").arg(QString::number(countMarkers), // this has already be increased!
+							       QString::number(StelUtils::fmodpos(ra*M_180_PI/15., 24.), 'g', 7),
+							       QString::number(dec*M_180_PI, 'g', 7));
+		}
 
 		e->setAccepted(true);
 		return;
@@ -161,10 +172,10 @@ void CustomObjectMgr::loadPersistentObjects()
 		dataFile.close();
 
 		QVariantMap pcoMap = map.value("customObjects").toMap();
-		for (auto &pcoKey : pcoMap.keys())
+		for (auto it=pcoMap.cbegin(), end=pcoMap.cend(); it!=end; ++it)
 		{
-			Vec3d coordinates(pcoMap.value(pcoKey).toString());
-			CustomObjectP custObj(new CustomObject(pcoKey, coordinates, false));
+			Vec3d coordinates(it.value().toString());
+			CustomObjectP custObj(new CustomObject(it.key(), coordinates, false));
 			if (custObj->initialized)
 				persistentObjects.append(custObj);
 		}

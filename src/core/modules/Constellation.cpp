@@ -95,60 +95,130 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 
 	constellation.clear();
 	const QJsonArray &linesArray=data["lines"].toArray();
-	for (const auto& polyLineObj : linesArray)
+	if (linesArray.isEmpty())
 	{
-		const auto& polyLine = polyLineObj.toArray();
-		if (polyLine.size() < 2) continue; // one point doesn't define a segment
+		qWarning().nospace() << "Empty lines array found for constellation " << id << " (" << culturalName.native << ")";
+		return false;
+	}
 
-		const auto numSegments = polyLine.size() - 1;
-		constellation.reserve(constellation.size() + 2 * numSegments);
-
-		StelObjectP prevPoint = nullptr;
-		for (qsizetype i = 0; i < polyLine.size(); ++i)
+	const bool isDarkConstellation = (!linesArray[0].toArray().isEmpty() && linesArray[0].toArray()[0].isArray());
+	if (isDarkConstellation)
+	{
+		for (const auto& polyLineObj : linesArray) // auto=[[ra, dec], [ra, dec], ...]
 		{
-			if (polyLine[i].isString())
-			{
-				// Can be "thin" or "bold", but we don't support these modifiers yet, so ignore this entry
-				const auto s = polyLine[i].toString();
-				if (s == "thin" || s == "bold")
-					continue;
-			}
-			const StarId HP = StelUtils::getLongLong(polyLine[i]);
-			if (HP == 0)
-			{
-				qWarning().nospace() << "Error in constellation " << abbreviation << ": bad HIP " << HP;
-				return false;
-			}
+			const auto& polyLine = polyLineObj.toArray();
+			if (polyLine.size() < 2) continue; // one point doesn't define a segment
 
-			const auto newPoint = HP <= NR_OF_HIP ? starMgr->searchHP(HP)
-			                                      : starMgr->searchGaia(HP);
-			if (!newPoint)
+			const auto numSegments = polyLine.size() - 1;
+			dark_constellation.reserve(dark_constellation.size() + 2 * numSegments);
+
+			Vec3d prevPoint = Vec3d(0.);
+			for (qsizetype i = 0; i < polyLine.size(); ++i)
 			{
-				qWarning().nospace() << "Error in constellation " << abbreviation << ": can't find star HIP " << HP;
-				return false;
+				if (polyLine[i].isString())
+				{
+					// Can be "thin" or "bold", but we don't support these modifiers yet, so ignore this entry
+					const auto s = polyLine[i].toString();
+					if (s == "thin" || s == "bold")
+						continue;
+				}
+
+				if (!polyLine[i].isArray())
+				{
+					qWarning().nospace() << "Error in constellation " << id << ": bad point"
+							     << polyLine[i].toString() << ": isn't an array of two numbers (RA and dec)";
+					return false;
+				}
+				const QJsonArray arr = polyLine[i].toArray();
+				if (arr.size() != 2 || !arr[0].isDouble() || !arr[1].isDouble())
+				{
+					qWarning().nospace() << "Error in constellation " << id << ": bad point"
+							     << polyLine[i].toString() << ": isn't an array of two numbers (RA and dec)";
+					return false;
+				}
+
+				const double RA = arr[0].toDouble() * (M_PI_180*15.);
+				const double DE = arr[1].toDouble() * M_PI_180;
+				Vec3d newPoint;
+				StelUtils::spheToRect(RA, DE, newPoint);
+
+				if (prevPoint != Vec3d(0.))
+				{
+					dark_constellation.push_back(prevPoint);
+					dark_constellation.push_back(newPoint);
+				}
+				prevPoint = newPoint;
 			}
-			if (prevPoint)
+		}
+		numberOfSegments = dark_constellation.size() / 2;
+		// Name tag should go to constellation's centre of gravity
+		XYZname.set(0.,0.,0.);
+		for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
+		{
+			XYZname+= dark_constellation[ii];
+		}
+	}
+	else
+	{
+		for (const auto& polyLineObj : linesArray)
+		{
+			const auto& polyLine = polyLineObj.toArray();
+			if (polyLine.size() < 2) continue; // one point doesn't define a segment
+
+			const auto numSegments = polyLine.size() - 1;
+			constellation.reserve(constellation.size() + 2 * numSegments);
+
+			StelObjectP prevPoint = nullptr;
+			for (qsizetype i = 0; i < polyLine.size(); ++i)
 			{
-				constellation.push_back(prevPoint);
-				constellation.push_back(newPoint);
+				if (polyLine[i].isString())
+				{
+					// Can be "thin" or "bold", but we don't support these modifiers yet, so ignore this entry
+					const auto s = polyLine[i].toString();
+					if (s == "thin" || s == "bold")
+						continue;
+				}
+				const StarId HP = StelUtils::getLongLong(polyLine[i]);
+				if (HP == 0)
+				{
+					qWarning().nospace() << "Error in constellation " << abbreviation << ": bad HIP " << HP;
+					return false;
+				}
+
+				const auto newPoint = HP <= NR_OF_HIP ? starMgr->searchHP(HP)
+								      : starMgr->searchGaia(HP);
+				if (!newPoint)
+				{
+					qWarning().nospace() << "Error in constellation " << abbreviation << ": can't find star HIP " << HP;
+					return false;
+				}
+				if (prevPoint)
+				{
+					constellation.push_back(prevPoint);
+					constellation.push_back(newPoint);
+				}
+				prevPoint = newPoint;
 			}
-			prevPoint = newPoint;
+		}
+
+		numberOfSegments = constellation.size() / 2;
+		if (data.contains("single_star_radius"))
+		{
+			double rd = data["single_star_radius"].toDouble(0.5);
+			singleStarConstellationRadius = cos(rd*M_PI/180.);
+		}
+
+		// Name tag should go to constellation's centre of gravity
+		XYZname.set(0.,0.,0.);
+		for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
+		{
+			XYZname+= constellation[ii]->getJ2000EquatorialPos(StelApp::getInstance().getCore());
 		}
 	}
 
-	numberOfSegments = constellation.size() / 2;
-	if (data.contains("single_star_radius"))
-	{
-		double rd = data["single_star_radius"].toDouble(0.5);
-		singleStarConstellationRadius = cos(rd*M_PI/180.);
-	}
+	// At this point we have either a constellation or a dark_constellation filled
 
-	// Name tag should go to constellation's centre of gravity
-	XYZname.set(0.,0.,0.);
-	for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
-	{
-		XYZname+= constellation[ii]->getJ2000EquatorialPos(StelApp::getInstance().getCore());
-	}
+
 	XYZname.normalize();
 	// Sometimes label placement is suboptimal. Allow a correction from the automatic solution in label_offset:[dRA_deg, dDec_deg]
 	if (data.contains("label_offset"))
@@ -205,17 +275,27 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 {
 	if (lineFader.getInterstate()<=0.0001f)
 		return;
+	if (!isSeasonallyVisible())
+		return;
 
-	if (checkVisibility())
-	{
-		sPainter.setColor(lineColor, lineFader.getInterstate());
+	const bool isDarkConstellation = !(dark_constellation.empty());
+	const float darkFactor = (isDarkConstellation? 0.6667f : 1.0f);
+	sPainter.setColor(lineColor*darkFactor, lineFader.getInterstate());
 
-		Vec3d star1;
-		Vec3d star2;
+	if (isDarkConstellation)
 		for (unsigned int i=0;i<numberOfSegments;++i)
 		{
-			star1=constellation[2*i]->getJ2000EquatorialPos(core);
-			star2=constellation[2*i+1]->getJ2000EquatorialPos(core);
+			Vec3d pos1=dark_constellation[2*i];
+			Vec3d pos2=dark_constellation[2*i+1];
+			//pos1.normalize();
+			//pos2.normalize();
+			sPainter.drawGreatCircleArc(pos1, pos2, &viewportHalfspace);
+		}
+	else
+		for (unsigned int i=0;i<numberOfSegments;++i)
+		{
+			Vec3d star1=constellation[2*i]->getJ2000EquatorialPos(core);
+			Vec3d star2=constellation[2*i+1]->getJ2000EquatorialPos(core);
 			star1.normalize();
 			star2.normalize();
 			if (star1.fuzzyEquals(star2))
@@ -227,7 +307,6 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 			else
 				sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);
 		}
-	}
 }
 
 void Constellation::drawName(StelPainter& sPainter, bool abbreviateLabel) const
@@ -236,7 +315,7 @@ void Constellation::drawName(StelPainter& sPainter, bool abbreviateLabel) const
 		return;
 
 	// TODO: Find a solution of fallbacks when components are missing?
-	if (checkVisibility())
+	if (isSeasonallyVisible())
 	{
 		QString name = abbreviateLabel ? abbreviationI18n : getScreenLabel();
 		sPainter.setColor(labelColor, nameFader.getInterstate());
@@ -246,7 +325,7 @@ void Constellation::drawName(StelPainter& sPainter, bool abbreviateLabel) const
 
 void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& region, const Vec3d& obsVelocity) const
 {
-	if (checkVisibility())
+	if (isSeasonallyVisible())
 	{
 		const float intensity = artFader.getInterstate() * artOpacity * artIntensityFovScale;
 		if (artTexture && intensity > 0.0f && region.intersects(boundingCap))
@@ -282,6 +361,9 @@ void Constellation::drawArt(StelPainter& sPainter) const
 
 const Constellation* Constellation::isStarIn(const StelObject* s) const
 {
+	if (constellation.empty())
+		return nullptr;
+
 	for(unsigned int i=0;i<numberOfSegments*2;++i)
 	{
 		// constellation[i]==s test was not working
@@ -336,7 +418,7 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter, const Vec3d& obsVel
 	}
 }
 
-bool Constellation::checkVisibility() const
+bool Constellation::isSeasonallyVisible() const
 {
 	// Is supported seasonal rules by current sky culture?
 	if (!seasonalRuleEnabled)
@@ -381,9 +463,11 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 	return str;
 }
 
-
 StelObjectP Constellation::getBrightestStarInConstellation(void) const
 {
+	if (constellation.empty())
+		return nullptr;
+
 	float maxMag = 99.f;
 	StelObjectP brightest;
 	// maybe the brightest star has always odd index,
