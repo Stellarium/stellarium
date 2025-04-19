@@ -454,33 +454,40 @@ where
 \item[\jtag{id}] A unique figure identifier, consisting of \texttt{CON} (for constellations), skyculture id, and a short label still unique within the skyculture.
                  For IAU-based skycultures, these short labels must be the IAU standard labels. For others, you can invent your own. It is not necessary to have exactly
                  3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended:  
-				 the short label is displayed when setting Constellation name style to ``short'' (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
-				 certain abbreviations from being displayed, let them start with a dot. See the effect in the \file{Modern (H.A.Rey)} sky culture: In
-				 \menu{Abbreviated} mode, only the official abbreviations are displayed.
-				 
-				 
-\item[\jtag{lines}] an array of arrays, each describing a polygon with star numbers. The star numbers are usually the Hipparcos (HIP) numbers. 
-                    For very dim stars, the longer numbers from the Gaia DR3 catalog are acceptable, but they must be written as string.
-					
-					\emph{Single-star constellations}\newFeature{25.1}  or particular highlights can be described with just one star repeated in a two-element segment,
-					the respective star will be encircled with a radius of \jtag{single\_star\_radius}.
-					
-					To describe \indexterm{dark constellations}\newFeature{25.2} formed from dust clouds in the Milky Way or other non-stellar items, 
-					another variant can use coordinate lists and is technically an array of arrays of 2-part arrays of float numbers, 
-					each pair being right ascension $\alpha$ (decimal hours) and declination $\delta$ (decimal degrees) in equinox J2000.0. 
-\item[\jtag{single\_star\_radius}] (float, default 0.5)\newFeature{25.1}  radius of a circle (degrees) marking single-star segments in \jtag{lines}.
-\item[\jtag{image}] Optional, see \ref{SC:image}
-\item[\jtag{common\_name}] Dictionary of names. Required entries: \jtag{english}. Optional: \jtag{native}
+                 the short label is displayed when setting Constellation name style to ``short'' (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
+                 certain abbreviations from being displayed, let them start with a dot. See the effect in the \file{Modern (H.A.Rey)} sky culture: In
+                 \menu{Abbreviated} mode, only the official abbreviations are displayed.
 
-	These names are used in the Constellation name style settings (s.~\ref{sec:gui:view:skyculture}): In \menu{Native} mode, the native element is shown. 
-	Only with setting \menu{Translated}, the text translated from the english element is shown. If your sky culture is a variant of the \file{Modern}
-	sky culture, please use the canonical Latin names, they have all been translated already.
+\item[\jtag{lines}] an array of arrays, each describing a polyline with star numbers. The star numbers are usually the Hipparcos (HIP) numbers. 
+                    For very dim stars, the longer numbers from the Gaia DR3 catalog are acceptable, but they must be written as string.
+
+                    To describe \indexterm{dark constellations}\newFeature{25.2} formed from dust clouds in the Milky Way or other non-stellar items, 
+                    another variant can use coordinate lists and is technically an array of arrays of 2-part arrays of float numbers, 
+                    each pair being right ascension $\alpha$ (decimal hours) and declination $\delta$ (decimal degrees) in equinox J2000.0. 
+		    See below how Stellarium can help you write these arrays.
+
+                    \emph{Single-star constellations}\newFeature{25.1}  or particular highlights can be described with just one star repeated in a two-element segment.
+                    The respective star will be encircled with a radius of 
+\item[\jtag{single\_star\_radius}] (float, default 0.5)\newFeature{25.1}.
+\item[\jtag{image}] Optional, see \ref{SC:image}
+\item[\jtag{common\_name}] Dictionary of names. %Required entries: \jtag{english}. Optional: \jtag{native}
+
+	\begin{description}
+	    \item[\jtag{native}] name in the original language of the skyculture. 
+	    \item[\jtag{english}] translation of the name's meaning. This is translated to users' language.
+	    \item[\jtag{pronounce}] (optional, but recommended) a Latin-character based transliteration/pronunciation aid, e.g. Pinyin for Chinese. This may also be translated to user language.
+	    \item[\jtag{transliteration}] (optional) a scientific transliteration where applicable. 
+	    \item[\jtag{IPA}] (optional) International Phonetic Alphabet, a standardardized phonetic spelling.
+	\end{description}
+
+	These names are used in the Constellation name style settings (s.~\ref{sec:gui:view:skyculture}). 
+	If your sky culture is a variant of the \file{Modern} sky culture, 
+	please use the canonical Latin as \jtag{native} and \jtag{english} names, they have all been translated already.
 
 	If your sky culture is not a variant of the generally known \file{Modern} (western)
 	sky culture, please provide an English translation in addition to the name given in
 	the native language. Else translators will not be able to translate
-	the name. 
-
+	the name, and users will be less interested. 
 \item[\jtag{visibility}] (optional) special cases for rule-based visibility, e.g. seasonally changing aspects of figures. 
 	Currently only a \jtag{months} rule has been defined. 
 	Its ``payload'' is an array of two integers, start and end of visibility in months, e.g:
@@ -498,17 +505,18 @@ that would be visible from April to May, would be specified as:
 \end{description}
 
 
-
-
-
-
-
-\iffalse REFERENCE?
-You can \newFeature{0.19.2} add a reference comment after each
-3-column entry. Just add a white-space, and then a comma-separated list
-of numerical references to the books listed in \file{reference.fab}.
-\fi
-
+\paragraph{Drawing dark constellations}
+The outlines of figures like the ``Emu in the Sky'' cannot be described with connect-the-dot star patterns, 
+as they are formed from the absence of luminous patterns. We need to describe them using coordinate lists. 
+To make the process less tedious, we can extend setting Markers (see \ref{sec:tour:markers}). 
+For this to work, add the following key to \file{config.ini}:
+\begin{configfile}
+[devel]
+markers_to_logfile = true
+\end{configfile}
+After program restart, setting a marker also writes a numbered line into the logfile, 
+containing marker number and the array of coordinates (\texttt{[RA, dec]}). 
+The arrays can be collated into the format required to code coordinate lists for dark constellations.
 
 
 \subsubsection{Constellation Artwork}
@@ -594,13 +602,9 @@ Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help ra
 					each pair being right ascension $\alpha$ (decimal hours) and declination $\delta$ (decimal degrees) in equinox J2000.0. 
 
 					\emph{Single-star asterisms} \newFeature{25.1} can be described with a two-element array that repeats the first entry (star or coordinate pair)
-					-- the respective star/coordinate will be encircled with a radius of \jtag{single\_star\_radius}.
+					-- the respective star/coordinate will be encircled with a radius of
 \item[\jtag{single\_star\_radius}] (float, default 0.5)\newFeature{25.1}  radius of a circle (degrees) marking single-star segments in \jtag{lines}.
 \end{description}
-
-
-
-
 
 
 
@@ -610,6 +614,20 @@ Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help ra
 
 Many cultures have defined their own names for stars, planets and even a few deep-sky objects bright enough to be seen with the unaided eye. 
 The \jtag{common\_names} dict in a skyculture file \file{index.json} contains entries of arrays tagged with HIP catalog numbers or other names.
+
+Names for stars, constellations, \newFeature{25.2}asterisms, planets and DSOs can be specified with a plethora of options:
+\begin{description}
+    \item[\jtag{native}] name in the original language of the skyculture. 
+    \item[\jtag{english}] translation of the name's meaning. This is translated to users' language.
+    \item[\jtag{pronounce}] (optional, but recommended) a Latin-character based transliteration/pronunciation aid, 
+    required when \jtag{native} is written in non-Latin-based glyphs (e.g., Chinese, Arab, Hindu, Tibetan, \ldots), 
+    e.g. Pinyin for Chinese. This may also be translated to user language to adopt different customs.
+    \item[\jtag{transliteration}] (optional) a scientific transliteration where applicable. For example, Wylie for Tibetan.
+    \item[\jtag{IPA}] (optional) International Phonetic Alphabet, a standardardized phonetic spelling.
+    \item[\jtag{translator\_comments}] (optional):  comments to be shown to translators on Transifex.    
+    \item[\jtag{references}] (optional): array of integers, referring to the references list in \file{description.md}. 
+\end{description}
+
 
 As example, we show a part of the Samoan skyculture:
 \begin{jsonfile}[\scriptsize]
@@ -640,7 +658,6 @@ The Keys for stars generally start with \jtag{HIP }.
 The associated array contains again dicts providing english spellings of the star names 
 and \jtag{references} (optional but highly recommended) which indicates 
 in which sources (see \ref{SC:references}) these star names or particular spellings occur.
-Currently this has only documentary value for skyculture authors and researchers, but may become useful in later versions of Stellarium.
 The \jtag{english} name will be translated. An additional \jtag{native} entry can be given, 
 which is the culture-native version of the spelling 
 (also in language-specific glyphs when available in UTF8 and the current font) and will never be translated but can be shown on screen if so configured.
@@ -648,10 +665,10 @@ which is the culture-native version of the spelling
 
 \begin{jsonfile}[\scriptsize]
 "common_names": {
-    "HIP 677": [{"english": "Alpheratz", "references": [1,2,5,6,11,12,37]},
-                {"english": "Sirrah", "references": [23,37]}],
-    "HIP 746": [{"english": "Caph", "references": [1,2,6,11,12,23,37]},
-                {"english": "Al Sanam al Nakah", "references": [37]}],
+    "HIP 677": [{"native": "Alpheratz", "references": [1,2,5,6,11,12,37]},
+                {"native": "Sirrah", "references": [23,37]}],
+    "HIP 746": [{"native": "Caph", "references": [1,2,6,11,12,23,37]},
+                {"native": "Al Sanam al Nakah", "references": [37]}],
 	... }
 \end{jsonfile}
 
@@ -667,23 +684,13 @@ When there is more than one name for a star, the first in the list is used as sc
 
 The  \jtag{common\_names} dict can also contain native names of the planets. 
 For these, the JSON key is formed from \jtag{NAME }, a space and the English name of the planet. 
-The value vector provides dicts which include 
-\begin{description}
-\item[\jtag{english}] (the translated name), 
-\item[\jtag{native}] (optional) native spelling, may be in native glyphs when supported by UTF8, 
-\item[\jtag{pronounce}] (optional) Native name in European glyphs, if needed. For Chinese, expect Pinyin here.
-%\item[\jtag{transliteration}] (optional) Scientific transliteration of the native name in European glyphs, if needed. For Tibetan, this is for Wylie.
-%\item[\jtag{IPA}] (optional) International Phonetic Alphabet.
-\item[\jtag{translators\_comments}] (optional) comments to be shown to translators on Transifex, 
-\item[\jtag{references}] (optional) the sources for these names where applicable.
-\end{description}
+The value vector provides the dict entries (\jtag{native}, \jtag{english}, \ldots) listed above. 
 
 Currently, if two \jtag{english} strings are given, the first is used as screen label. This may change as the features further evolve.
 
 In earlier versions it was recommended to combine the native name with an English translation. 
-In the new format here we should keep them separate, and the actual screen label can be combined from available components on the fly.\newFeature{25.2}
-However, for languages with non-European glyphs please add a widely used transliteration as pronunciation aid in the \jtag{pronounce} tag.
-% TODO: Shall we add an optional \jtag{transliteration} tag which could itself again be translatable?
+In the new format here we should keep them separate, and the actual screen label can be combined from available 
+components on the fly (see \ref{sec:gui:view:skyculture}).\newFeature{25.2}
 
 
 
@@ -703,6 +710,67 @@ Known tags are
 \item[\jtag{translators\_comments}] (optional) English explanations that help in translation. Not displayed in the program.
 \item[\jtag{references}]  (optional) the sources for these names where applicable
 \end{description}
+
+\subsection{User Settings for the Skycultures}
+\label{SC:settings}
+
+The large number\newFeature{25.2} of label combinations requires storing them in a user accessible way. In essence, we are using a 6-bit scheme with name elements that either show up or are omitted.
+\begin{description}
+\item{\texttt{Native}} to show the native name in native glyphs.
+\item{\texttt{Pronounce}} to show a Latin-character based transliteration usable as pronunciation aid.
+\item{\texttt{Translit}} to show a scienticic transliteration that is not necessarily aimed at pronunciation.
+\item{\texttt{Translated}} to show the meaning of the name translated to user language. 
+\item{\texttt{IPA}} to show the name in Ingternational Phonetic Alphabet.
+\item{\texttt{Modern}} to show the contemporary scientific object name.
+\end{description}
+
+The names for the active parts are joined with underscore (\texttt{\_}), and the resulting strings stored in \file{config.ini} in two dedicated sections like: 
+\begin{configfile}[\scriptsize]
+[SCInfoLabelStyle]
+arabic_arabian_peninsula  = Native_Pronounce_Modern
+boorong                   = Native_Translated
+chinese                   = Native_Pronounce_Translated_Modern
+modern                    = Native_Modern
+russian_siberian          = Native_Pronounce_Translit_Translated_IPA_Modern
+
+[SCScreenLabelStyle]
+arabic_arabian_peninsula  = Pronounce_Translated_Modern
+aztec                     = Native_Translated
+chinese                   = Pronounce_Translated_Modern
+modern                    = Native_Modern
+russian_siberian          = Pronounce_Translated_Modern
+\end{configfile}
+
+
+
+\subsubsection{Not enough, or too many names?}
+\label{sec:skycultures:fallback_names}
+Over the years,\newFeature{25.2} we have collected a quite extensive list of star names from many references. 
+Until recently, the scientific community was not interested in standardizing names. 
+With the introduction of Exoplanet naming contests, the International Astronomical Union started 
+to also be concerned with the names of the brighter stars, and a proper Working Group on Star Names has formed. 
+
+Stellarium comes with a list of standardized names in \file{skycultures/common\_star\_names.fab}. 
+These are always used when a skyculture shows \jtag{fallback\_to\_international\_names} (see \ref{SC:index.json}).
+If you always want to see these names, regardless of whether they are used or not in the respective skyculture, add the following to your \file{config.ini}:
+\begin{configfile}
+[viewing]
+flag_skyculture_always_fallback_to_international_names = true
+\end{configfile}
+Activating this flag for non-modern skycultures may feel weird, though.
+
+In contrast, some of the collected names may be too fanciful for your taste. 
+If you can identify that those names that irritate you all come from a single or just a few entries of the reference list, 
+you can exclude those sources, and thus the names they bring into the program. Note that if a fancy name comes from more than one book, 
+you would have to exclude all books to ban that name from your display.
+
+To exclude entries from being referenced by a particular skyculture, add the following keys to \file{config.ini}:
+\begin{configfile}
+[SCExcludeReferences]
+modern  = 11,36
+\end{configfile}
+%
+Here, \texttt{modern} names the skyculture, and the comma-separated entries are references you want excluded from \file{description.md}.
 
 
 

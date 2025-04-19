@@ -923,9 +923,6 @@ Modern or Inuit), and the rest do not. Configurable options include
 \item[Constellations name style]  You can 
   select whether you want to display abbreviated, original or
   translated names.
-\item[Use native names for planets] If provided, show the planet names
-  as used in this sky culture (also shows modern planet name for
-  reference). %% TODO THIS FEATURE NEEDS SOME REWORK!
 \item[Constellation labels] Activate display of constellation labels, like
   \guibutton{0.6}{bt_constellation_name.png} or \keys{V}. 
 \item[Constellation lines] Activate display of stick
@@ -945,6 +942,19 @@ Modern or Inuit), and the rest do not. Configurable options include
   and you can configure thickness of those lines as well.\newFeature{0.17.0}
 \item[Select single constellation/Isolated] See section~\ref{sec:skyculture:singleConstellations} for details.
 \end{description}
+
+The new skyculture system\newFeature{25.2} has introduced a plethora of new name elements, 
+the complete set of which is not required to exist. There are name components that may come 
+in the skyculture's original (\emph{native}) language. If such culture uses non-Latin glyphs in their writing, 
+non-native users need a \emph{transliteration} that also helps pronunciation, which even depends on user language. 
+Then there are \emph{scientific transliteration} systems for some cases. 
+Finally, a pronunciation aid can be given using the International Phonetic Alphabet (\emph{IPA}).
+And, for reference, you may want to add the commonly used \emph{modern} name to an object. 
+
+There are two sets of settings, for the screen label and for the label used in the information area in the top-left. 
+The currently configured settings are immediately stored per-skyculture, so that you can adapt the system to 
+your knowledge of languages and character systems. See \ref{SC:settings} for more.
+
 
 \subsubsection{Select single constellations}
 \label{sec:skyculture:singleConstellations}
