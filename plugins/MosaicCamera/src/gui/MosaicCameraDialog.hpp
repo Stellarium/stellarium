@@ -41,6 +41,7 @@ public:
 	void setVisibility(bool visible);
 	QString getCurrentCameraName() const;
 	void setCurrentCameraName(const QString& cameraName, const QString& cameraFullName, const QString& cameraDescription, const QString& cameraURLDetails);
+	void setCameraNames(const QStringList& cameraNames);
 
 protected:
 	void createDialogContent() override;
@@ -52,6 +53,7 @@ public slots:
 	void updateRotation();
 	void updateVisibility(bool visible);
 	void onCameraSelectionChanged(const QString& cameraName);
+	void restoreDefaults();
 
 private:
 	QString currentCameraName;

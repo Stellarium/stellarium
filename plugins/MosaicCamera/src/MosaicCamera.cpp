@@ -130,6 +130,27 @@ void MosaicCamera::saveSettings() const
 	conf->endGroup();
 }
 
+void MosaicCamera::restoreDefaults()
+{
+	conf->beginGroup("MosaicCamera");
+	conf->remove("currentCamera");
+	conf->remove("showButton");
+	conf->remove("enabled");
+	conf->remove("cameraVisibility");
+	for (auto it = cameras.constBegin(); it != cameras.constEnd(); ++it)
+	{
+		conf->remove(it.key());
+	}
+	conf->endGroup();
+
+	StelFileMgr::makeSureDirExistsAndIsWritable(userDirectory);
+	copyResourcesToUserDirectory();
+
+	// Reload the cameras
+	loadBuiltInCameras();
+	setCurrentCamera(cameraOrder[0]);
+}
+
 /*************************************************************************
  Reimplementation of the getCallOrder method
 *************************************************************************/
@@ -224,13 +245,20 @@ void MosaicCamera::copyResourcesToUserDirectory()
 	{
 		QString resourcePath = ":/MosaicCamera/" + fileName;
 		QString destPath = userDirectory + fileName;
+		QFile destFile(destPath);
+		QFile resourceFile(resourcePath);
 
-		if (QFile::copy(resourcePath, destPath))
+		if (destFile.exists()) {
+			if (!destFile.remove()) {
+				qWarning() << "[MosaicCamera] Failed to remove existing file:" << destPath;
+			}
+		}
+
+		if (resourceFile.copy(destPath))
 		{
+			// Copy the file to the user directory
 			qDebug() << "[MosaicCamera] Copied" << resourcePath << "to" << destPath;
-
 			// Ensure the copied file is writable
-			QFile destFile(destPath);
 			destFile.setPermissions(destFile.permissions() | QFile::WriteOwner);
 		}
 		else

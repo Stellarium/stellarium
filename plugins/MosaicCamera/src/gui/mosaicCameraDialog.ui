@@ -94,6 +94,13 @@
           </spacer>
          </item>
          <item>
+          <widget class="QPushButton" name="pushButtonRestoreDefaults">
+           <property name="text">
+            <string>Restore Defaults</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="pushButtonSaveSettings">
            <property name="text">
             <string>Save settings</string>
