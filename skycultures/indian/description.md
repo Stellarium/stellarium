@@ -16,7 +16,7 @@ In traditional astronomy there are two systems of measuring time - Lunar Calende
 
 ### <notr>Nakṣatra (नक्षत्रम्)</notr>
 
-In Hindu tradition the ecliptic is divided into 27 parts of approximately 13°20', which correspond with 27 asterisms known as the nakṣatra-s (full list, with western equivalents here: https://goo.gl/2PVi28 ). In the earliest extant layers of the tradition this number is 28. This division is critical for several purposes including timing rituals and determining the birth lunar mansions. Since these asterisms define an area in the sky, they are also technically constellations.
+In Hindu tradition the ecliptic is divided into 27 parts of approximately 13°20', which correspond with 27 asterisms known as the nakṣatra-s (full list, with western equivalents here: https://en.wikipedia.org/wiki/Nakshatra ). In the earliest extant layers of the tradition this number is 28. This division is critical for several purposes including timing rituals and determining the birth lunar mansions. Since these asterisms define an area in the sky, they are also technically constellations.
 
 sUrya-siddhAnta and vedAnga-jyotiSha specify start coordinates for the 13°20' divisions using some stars (Please see penultimate paragraph in [this page](https://archive.org/stream/HistoryOfCalendarPanchangaCommittee/History-of-Calendar-Panchanga-Committee#page/n42/mode/1up))
 

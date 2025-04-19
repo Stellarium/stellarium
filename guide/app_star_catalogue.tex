@@ -1830,7 +1830,7 @@ Yng & YNG &   & C.A. Young & 1881---1887 \\
 \section{Cross-Identification Data}
 \label{sec:StarCatalogues:CrossIdentificationData}
 
-Since version 0.14.0\newFeature{0.14.0} Stellarium supports cross-identification between stars from 
+Stellarium supports\newFeature{0.14.0} cross-identification between stars from 
 Hipparcos (HIP)~\citep{2012AstL...38..331A}, 
 Smithsonian Astrophysical Observatory (SAO) Star Catalog J2000.0~\citep{1995yCat.1131....0S}, Henry Draper Catalogue and Extension (HD)~\citep{1993yCat.3135....0C} and 
 \citetp{1964cbs..book.....H}  (BSC5 or HR) % $5^{th}$ Revised Ed. of Bright Star Catalog (Hoffleit+, 1991; HR)
@@ -1848,16 +1848,16 @@ in the \file{stars/hip\_gaia3} sub-directory of the Installation Directory and/o
 \subsubsection{File Format}
 \label{sec:StarCatalogues:CrossIdentificationData:file}
 
-The file \file{cross-id.cat} contains cross reference data for catalogues HIP, SAO, HD and HR, which stored in the binary format.
+The file \file{cross-id.cat} contains cross reference data for catalogues HIP, SAO, HD and HR, which are stored in a binary format.
 
 \begin{table}[htb]
 \begin{tabularx}{\textwidth}{l|c|X}\toprule
-\emph{Name} & \emph{Type} & \emph{Description}\\\midrule
-HIP	      & uint64\_t     & HIP or Gaia identifier for the star. Used for reference to the main star catalogue.\\
-Component & unsigned char & Component of the star in the multiple star system.\\
-SAO    	  & int           & SAO identifier for the star.\\
-HD	      & int           & HD identifier for the star.\\
-HR	      & int           & HR identifier for the star.\\\bottomrule
+\emph{Name} & \emph{Type}   & \emph{Description}\\\midrule
+HIP         & uint64\_t     & HIP or Gaia identifier for the star. Used for reference to the main star catalogue.\\
+Component   & unsigned char & Component of the star in the multiple star system.\\
+SAO    	    & int           & SAO identifier for the star.\\
+HD          & int           & HD identifier for the star.\\
+HR          & int           & HR identifier for the star.\\\bottomrule
 \end{tabularx}
 \caption{Format of \file{cross-id.cat}}
 \label{tab:StarCatalogues:CrossIdentificationData:file}
@@ -1867,7 +1867,7 @@ HR	      & int           & HR identifier for the star.\\\bottomrule
 \section{Binary Star System Orbital Parameters}
 \label{sec:StarCatalogues:BinaryOrbitalParameters}
 
-Since version 25.1\newFeature{25.1} Stellarium supports modelling orbital motion of a handful of binary stars. This includes
+Since version 25.1\newFeature{25.1} Stellarium supports modelling orbital motion of a handful of binary stars. These include
 
 \begin{itemize}
 	\item $\alpha$ Centauri A \& B
@@ -1895,7 +1895,8 @@ in the \file{stars/hip\_gaia3} sub-directory of the Installation Directory and/o
 \subsubsection{File Format}
 \label{sec:StarCatalogues:BinaryOrbitalParameters:file}
 
-The file \file{binary\_orbitparam.dat} contains binary system orbital parameter data, which are stored in plain text format.
+The file \file{binary\_orbitparam.dat} contains binary system orbital parameter data, which are stored in 
+plain text format (\ref{tab:StarCatalogues:BinaryOrbitalParameters:file}).
 
 \begin{table}[htb]
 	\begin{tabularx}{\textwidth}{l|c|X}\toprule
@@ -1917,6 +1918,7 @@ The file \file{binary\_orbitparam.dat} contains binary system orbital parameter 
 	  bary pmra      $\dot{\alpha}$  & double      & Barycenter RA proper motion [mas/yr]   \\%\midrule
 	  bary pmdec     $\dot{\delta}$  & double      & Barycenter DEC proper motion [mas/yr]  \\\bottomrule
 	\end{tabularx}
+\caption{Format of \file{binary\_orbitparam.dat}}
 \label{tab:StarCatalogues:BinaryOrbitalParameters:file}
 \end{table}
 

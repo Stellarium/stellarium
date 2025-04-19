@@ -1009,7 +1009,7 @@ void SearchDialog::adjustMatchesResult(QStringList &allMatches, QStringList& rec
 	// Combine list: ordered by recent searches then relevance
 	allMatches << recentMatches << matches;
 
-	// Remove possible duplicates from both listQSt
+	// Remove possible duplicates from both lists
 	allMatches.removeDuplicates();
 }
 

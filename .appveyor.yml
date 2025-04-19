@@ -49,20 +49,10 @@ environment:
   - BUILD_NAME: Win64 Qt5.15
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
     VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
-    QT_VERSION_MAJOR: 5
-    QT_BASEDIR: C:\Qt\5.15\msvc2019_64
-    CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A x64
-    exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
-    exiv2baseName: exiv2-0.28.0-2019msvc64
-    scConverterEnabled: 0
-  - BUILD_NAME: Arm64 Qt6.5
-    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
-    QT_VERSION_MAJOR: 6
-    QT_BASEDIR: C:\Qt\6.5\msvc2019_arm64
-    CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.5\msvc2019_64 -DQt6LinguistTools_DIR=C:\Qt\6.5\msvc2019_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
+    qtver: 6.5
+    qtbin: msvc2019_arm64
+    msvcname: Visual Studio 17 2022
+    cmake_args: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.5/msvc2019_64 -DQt6LinguistTools_DIR=C:/Qt/6.5/msvc2019_64/lib/cmake/Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
     scConverterEnabled: 0
 before_build:
   - ps: if($env:QT_BASEDIR.contains('_64')) { $env:BITS=64 } else { $env:BITS=32 }
