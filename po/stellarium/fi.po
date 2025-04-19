@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-03-28 23:45+0700\n"
+"POT-Creation-Date: 2025-04-18 12:27+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Ilpo Kantonen, 2025\n"
 "Language-Team: Finnish (https://app.transifex.com/stellarium/teams/80998/fi/)\n"
@@ -36,9 +36,9 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:290 src/core/modules/StarWrapper.cpp:292
 #: src/core/modules/StarWrapper.cpp:664 src/core/modules/StarWrapper.cpp:666
 #: src/core/modules/StarWrapper.cpp:889 src/core/modules/StarWrapper.cpp:891
-#: src/gui/AstroCalcDialog.cpp:933 src/gui/AstroCalcDialog.cpp:2426
-#: src/gui/AstroCalcDialog.cpp:3018 src/gui/AstroCalcDialog.cpp:3050
-#: src/gui/AstroCalcDialog.cpp:3374 src/gui/AstroCalcDialog.cpp:7653
+#: src/gui/AstroCalcDialog.cpp:933 src/gui/AstroCalcDialog.cpp:2424
+#: src/gui/AstroCalcDialog.cpp:3016 src/gui/AstroCalcDialog.cpp:3048
+#: src/gui/AstroCalcDialog.cpp:3372 src/gui/AstroCalcDialog.cpp:7648
 #: src/gui/ObsListDialog.cpp:293 src/ui_configurationDialog.h:2031
 #: plugins/Satellites/src/Satellite.cpp:341
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:145
@@ -70,7 +70,7 @@ msgstr "asterismi"
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:471
 #: src/core/modules/GridLinesMgr.cpp:2007
 #: src/core/modules/SpecialMarkersMgr.cpp:311
-#: src/core/modules/LandscapeMgr.cpp:892
+#: src/core/modules/LandscapeMgr.cpp:887
 #: src/core/modules/NomenclatureMgr.cpp:89 src/core/modules/NebulaMgr.cpp:467
 #: src/core/modules/NebulaMgr.cpp:468 src/core/modules/SolarSystem.cpp:347
 #: src/core/modules/MilkyWay.cpp:108 src/core/modules/ZodiacalLight.cpp:113
@@ -215,8 +215,8 @@ msgstr "Ensivertikaali"
 #. TRANSLATORS: altitude
 #. TRANSLATORS: Satellite altitude
 #: src/core/modules/GridLinesMgr.cpp:796 src/gui/SearchDialog.cpp:312
-#: src/gui/AstroCalcDialog.cpp:871 src/gui/AstroCalcDialog.cpp:1779
-#: src/gui/AstroCalcDialog.cpp:2178 src/gui/AstroCalcDialog.cpp:2449
+#: src/gui/AstroCalcDialog.cpp:871 src/gui/AstroCalcDialog.cpp:1777
+#: src/gui/AstroCalcDialog.cpp:2176 src/gui/AstroCalcDialog.cpp:2447
 #: src/gui/AstroCalcChart.cpp:82 src/gui/AstroCalcChart.cpp:420
 #: src/ui_viewDialog.h:4395 plugins/Satellites/src/Satellite.cpp:365
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1543
@@ -341,7 +341,7 @@ msgstr "Antiapeksi"
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1602 src/core/modules/Planet.cpp:737
 #: src/core/modules/Planet.cpp:1031 src/core/modules/StarWrapper.cpp:382
-#: src/gui/AstroCalcDialog.cpp:8540 plugins/Satellites/src/Satellite.cpp:363
+#: src/gui/AstroCalcDialog.cpp:8535 plugins/Satellites/src/Satellite.cpp:363
 #: plugins/Satellites/src/Satellite.cpp:406
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
@@ -548,276 +548,276 @@ msgid "Compass marks"
 msgstr "Kompassin asteluvut"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:292 src/core/modules/Planet.cpp:1155
+#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1155
 msgctxt "compass direction"
 msgid "N"
 msgstr "P"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:294 src/core/modules/Planet.cpp:1147
+#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1147
 msgctxt "compass direction"
 msgid "S"
 msgstr "E"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:296 src/core/modules/Planet.cpp:1159
+#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1159
 msgctxt "compass direction"
 msgid "E"
 msgstr "I"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:298 src/core/modules/Planet.cpp:1151
+#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1151
 msgctxt "compass direction"
 msgid "W"
 msgstr "L"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:300 src/core/modules/Planet.cpp:1157
+#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1157
 msgctxt "compass direction"
 msgid "NE"
 msgstr "Ko"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:302 src/core/modules/Planet.cpp:1161
+#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1161
 msgctxt "compass direction"
 msgid "SE"
 msgstr "Ka"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:304 src/core/modules/Planet.cpp:1149
+#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1149
 msgctxt "compass direction"
 msgid "SW"
 msgstr "Lo"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:306 src/core/modules/Planet.cpp:1153
+#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1153
 msgctxt "compass direction"
 msgid "NW"
 msgstr "Lu"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:308 src/core/modules/Planet.cpp:1156
+#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1156
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "P-Ko"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:310 src/core/modules/Planet.cpp:1158
+#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1158
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "I-Ko"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:312 src/core/modules/Planet.cpp:1160
+#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1160
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "I-Ka"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:314 src/core/modules/Planet.cpp:1162
+#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1162
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "E-Ka"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:316 src/core/modules/Planet.cpp:1148
+#: src/core/modules/LandscapeMgr.cpp:311 src/core/modules/Planet.cpp:1148
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "E-Lo"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:318 src/core/modules/Planet.cpp:1150
+#: src/core/modules/LandscapeMgr.cpp:313 src/core/modules/Planet.cpp:1150
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "L-Lo"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:320 src/core/modules/Planet.cpp:1152
+#: src/core/modules/LandscapeMgr.cpp:315 src/core/modules/Planet.cpp:1152
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "L-Lu"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:322 src/core/modules/Planet.cpp:1154
+#: src/core/modules/LandscapeMgr.cpp:317 src/core/modules/Planet.cpp:1154
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "P-Lu"
 
 #. TRANSLATORS: North by east
-#: src/core/modules/LandscapeMgr.cpp:324
+#: src/core/modules/LandscapeMgr.cpp:319
 msgctxt "compass direction"
 msgid "NbE"
 msgstr "P-Ko-P"
 
 #. TRANSLATORS: Northeast by north
-#: src/core/modules/LandscapeMgr.cpp:326
+#: src/core/modules/LandscapeMgr.cpp:321
 msgctxt "compass direction"
 msgid "NEbN"
 msgstr "P-Ko-Ko"
 
 #. TRANSLATORS: Northeast by east
-#: src/core/modules/LandscapeMgr.cpp:328
+#: src/core/modules/LandscapeMgr.cpp:323
 msgctxt "compass direction"
 msgid "NEbE"
 msgstr "Ko-P"
 
 #. TRANSLATORS: East by north
-#: src/core/modules/LandscapeMgr.cpp:330
+#: src/core/modules/LandscapeMgr.cpp:325
 msgctxt "compass direction"
 msgid "EbN"
 msgstr "I-P"
 
 #. TRANSLATORS: East by south
-#: src/core/modules/LandscapeMgr.cpp:332
+#: src/core/modules/LandscapeMgr.cpp:327
 msgctxt "compass direction"
 msgid "EbS"
 msgstr "I-E"
 
 #. TRANSLATORS: Southeast by east
-#: src/core/modules/LandscapeMgr.cpp:334
+#: src/core/modules/LandscapeMgr.cpp:329
 msgctxt "compass direction"
 msgid "SEbE"
 msgstr "EI-I"
 
 #. TRANSLATORS: Southeast by south
-#: src/core/modules/LandscapeMgr.cpp:336
+#: src/core/modules/LandscapeMgr.cpp:331
 msgctxt "compass direction"
 msgid "SEbS"
 msgstr "EI-E"
 
 #. TRANSLATORS: South by east
-#: src/core/modules/LandscapeMgr.cpp:338
+#: src/core/modules/LandscapeMgr.cpp:333
 msgctxt "compass direction"
 msgid "SbE"
 msgstr "E-I"
 
 #. TRANSLATORS: South by west
-#: src/core/modules/LandscapeMgr.cpp:340
+#: src/core/modules/LandscapeMgr.cpp:335
 msgctxt "compass direction"
 msgid "SbW"
 msgstr "E-L"
 
 #. TRANSLATORS: Southwest by south
-#: src/core/modules/LandscapeMgr.cpp:342
+#: src/core/modules/LandscapeMgr.cpp:337
 msgctxt "compass direction"
 msgid "SWbS"
 msgstr "EL-E"
 
 #. TRANSLATORS: Southwest by west
-#: src/core/modules/LandscapeMgr.cpp:344
+#: src/core/modules/LandscapeMgr.cpp:339
 msgctxt "compass direction"
 msgid "SWbW"
 msgstr "EL-L"
 
 #. TRANSLATORS: West by south
-#: src/core/modules/LandscapeMgr.cpp:346
+#: src/core/modules/LandscapeMgr.cpp:341
 msgctxt "compass direction"
 msgid "WbS"
 msgstr "L-E"
 
 #. TRANSLATORS: West by north
-#: src/core/modules/LandscapeMgr.cpp:348
+#: src/core/modules/LandscapeMgr.cpp:343
 msgctxt "compass direction"
 msgid "WbN"
 msgstr "L-P"
 
 #. TRANSLATORS: Northwest by west
-#: src/core/modules/LandscapeMgr.cpp:350
+#: src/core/modules/LandscapeMgr.cpp:345
 msgctxt "compass direction"
 msgid "NWbW"
 msgstr "PL-L"
 
 #. TRANSLATORS: Northwest by north
-#: src/core/modules/LandscapeMgr.cpp:352
+#: src/core/modules/LandscapeMgr.cpp:347
 msgctxt "compass direction"
 msgid "NWbN"
 msgstr "PL-P"
 
 #. TRANSLATORS: North by west
-#: src/core/modules/LandscapeMgr.cpp:354
+#: src/core/modules/LandscapeMgr.cpp:349
 msgctxt "compass direction"
 msgid "NbW"
 msgstr "P-L"
 
-#: src/core/modules/LandscapeMgr.cpp:447 src/core/modules/LandscapeMgr.cpp:771
+#: src/core/modules/LandscapeMgr.cpp:442 src/core/modules/LandscapeMgr.cpp:766
 #: src/gui/ViewDialog.cpp:703
 msgid "Loading..."
 msgstr "Lataa..."
 
-#: src/core/modules/LandscapeMgr.cpp:447 src/core/modules/LandscapeMgr.cpp:771
+#: src/core/modules/LandscapeMgr.cpp:442 src/core/modules/LandscapeMgr.cpp:766
 msgctxt "percentage of done"
 msgid "done"
 msgstr "valmis"
 
-#: src/core/modules/LandscapeMgr.cpp:452
+#: src/core/modules/LandscapeMgr.cpp:447
 msgid "Switching models..."
 msgstr "Vaihdetaan mallia..."
 
-#: src/core/modules/LandscapeMgr.cpp:493 src/core/modules/LandscapeMgr.cpp:766
+#: src/core/modules/LandscapeMgr.cpp:488 src/core/modules/LandscapeMgr.cpp:761
 msgid "Loaded successfully"
 msgstr "Ladattu onnistuneesti"
 
-#: src/core/modules/LandscapeMgr.cpp:546
+#: src/core/modules/LandscapeMgr.cpp:541
 msgid ""
 "ShowMySky atmosphere model crashed. Loading Preetham model as a fallback."
 msgstr ""
 "ShowMySky-ilmakehämalli kaatui. Ladataan Preetham-mallia varavaihtoehtona."
 
-#: src/core/modules/LandscapeMgr.cpp:893
+#: src/core/modules/LandscapeMgr.cpp:888
 msgid "Atmosphere"
 msgstr "Ilmakehä"
 
-#: src/core/modules/LandscapeMgr.cpp:894
+#: src/core/modules/LandscapeMgr.cpp:889
 msgid "Fog"
 msgstr "Sumu"
 
-#: src/core/modules/LandscapeMgr.cpp:895 src/ui_viewDialog.h:4483
+#: src/core/modules/LandscapeMgr.cpp:890 src/ui_viewDialog.h:4483
 #: src/ui_configurationDialog.h:2114
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:343
 msgid "Cardinal points"
 msgstr "Ilmansuunnat"
 
-#: src/core/modules/LandscapeMgr.cpp:896
+#: src/core/modules/LandscapeMgr.cpp:891
 msgid "Ordinal (Intercardinal) points"
 msgstr "Väli-ilmansuunnat"
 
-#: src/core/modules/LandscapeMgr.cpp:897
+#: src/core/modules/LandscapeMgr.cpp:892
 msgid "Secondary Intercardinal points"
 msgstr "Väli-väli-ilmansuunnat"
 
-#: src/core/modules/LandscapeMgr.cpp:898
+#: src/core/modules/LandscapeMgr.cpp:893
 msgid "Tertiary Intercardinal points"
 msgstr "Tertiääriset väli-ilmansuunnat"
 
-#: src/core/modules/LandscapeMgr.cpp:899
+#: src/core/modules/LandscapeMgr.cpp:894
 msgid "Ground"
 msgstr "Maanpinta"
 
-#: src/core/modules/LandscapeMgr.cpp:900
+#: src/core/modules/LandscapeMgr.cpp:895
 msgid "Landscape illumination"
 msgstr "Maiseman valaistus"
 
-#: src/core/modules/LandscapeMgr.cpp:901 src/ui_viewDialog.h:4538
+#: src/core/modules/LandscapeMgr.cpp:896 src/ui_viewDialog.h:4538
 msgid "Landscape labels"
 msgstr "Maiseman tekstit"
 
-#: src/core/modules/LandscapeMgr.cpp:902
+#: src/core/modules/LandscapeMgr.cpp:897
 msgid "Light pollution data from locations database"
 msgstr "Valosaastetiedot paikkakuntatietokannasta"
 
-#: src/core/modules/LandscapeMgr.cpp:904
+#: src/core/modules/LandscapeMgr.cpp:899
 msgid "Increase light pollution"
 msgstr "Lisää valosaastetta"
 
-#: src/core/modules/LandscapeMgr.cpp:905
+#: src/core/modules/LandscapeMgr.cpp:900
 msgid "Reduce light pollution"
 msgstr "Vähennä valosaastetta"
 
-#: src/core/modules/LandscapeMgr.cpp:906
+#: src/core/modules/LandscapeMgr.cpp:901
 msgid "Cyclic change in light pollution"
 msgstr "Valosaasteen jaksollinen muutos"
 
-#: src/core/modules/LandscapeMgr.cpp:1536 src/scripting/StelScriptMgr.cpp:647
+#: src/core/modules/LandscapeMgr.cpp:1531 src/scripting/StelScriptMgr.cpp:647
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:628
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:257
@@ -829,7 +829,7 @@ msgstr "Valosaasteen jaksollinen muutos"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:88
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:196
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:198
+#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:216
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:473
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:215
@@ -840,7 +840,7 @@ msgid "Author"
 msgstr "Tekijä"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1542 src/gui/StelGuiItems.cpp:953
+#: src/core/modules/LandscapeMgr.cpp:1537 src/gui/StelGuiItems.cpp:953
 #: plugins/Satellites/src/Satellite.cpp:436
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1189
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
@@ -848,7 +848,7 @@ msgctxt "distance"
 msgid "m"
 msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:1545 src/gui/ObsListDialog.cpp:299
+#: src/core/modules/LandscapeMgr.cpp:1540 src/gui/ObsListDialog.cpp:299
 #: src/ui_locationDialogGui.h:414 src/ui_obsListDialog.h:416
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
@@ -856,36 +856,36 @@ msgid "Location"
 msgstr "Paikkakunta"
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:1567
+#: src/core/modules/LandscapeMgr.cpp:1562
 msgctxt "pressure"
 msgid "hPa"
 msgstr "hPa"
 
-#: src/core/modules/LandscapeMgr.cpp:1577
+#: src/core/modules/LandscapeMgr.cpp:1572
 msgid "extinction coefficient"
 msgstr "ekstinktiokerroin"
 
-#: src/core/modules/LandscapeMgr.cpp:1580
+#: src/core/modules/LandscapeMgr.cpp:1575
 msgid "Atmospheric conditions"
 msgstr "Ilmakehän olosuhteet"
 
-#: src/core/modules/LandscapeMgr.cpp:1587
+#: src/core/modules/LandscapeMgr.cpp:1582
 msgid "cd/m<sup>2</sup>"
 msgstr "cd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1591
+#: src/core/modules/LandscapeMgr.cpp:1586
 msgid "ncd/m<sup>2</sup>"
 msgstr "ncd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1596
+#: src/core/modules/LandscapeMgr.cpp:1591
 msgid "&mu;cd/m<sup>2</sup>"
 msgstr "&mu;cd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1601
+#: src/core/modules/LandscapeMgr.cpp:1596
 msgid "mcd/m<sup>2</sup>"
 msgstr "mcd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1603
+#: src/core/modules/LandscapeMgr.cpp:1598
 #, qt-format
 msgid "<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)"
 msgstr "<b>Valosaaste</b>: %1 %2 (NELM: %3; Bortle-luokka: %4)"
@@ -940,8 +940,8 @@ msgstr "Halkaisija"
 #: src/core/modules/Planet.cpp:709 src/core/modules/Planet.cpp:827
 #: src/core/modules/Planet.cpp:1358 src/core/modules/Comet.cpp:194
 #: src/core/modules/Comet.cpp:204 src/gui/StelGuiItems.cpp:981
-#: src/gui/AstroCalcDialog.cpp:3169 src/gui/AstroCalcDialog.cpp:3717
-#: src/gui/AstroCalcDialog.cpp:8475 plugins/Satellites/src/Satellites.cpp:2992
+#: src/gui/AstroCalcDialog.cpp:3167 src/gui/AstroCalcDialog.cpp:3715
+#: src/gui/AstroCalcDialog.cpp:8470 plugins/Satellites/src/Satellites.cpp:2992
 #: plugins/Satellites/src/Satellite.cpp:359
 #: plugins/Satellites/src/Satellite.cpp:402
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1198
@@ -2257,7 +2257,7 @@ msgid "undocumented type"
 msgstr "tuntematon tyyppi"
 
 #: src/core/modules/NebulaMgr.cpp:467 src/gui/AstroCalcDialog.cpp:1035
-#: src/gui/AstroCalcDialog.cpp:7501
+#: src/gui/AstroCalcDialog.cpp:7496
 msgid "Deep-sky objects"
 msgstr "Syvän taivaan kohteet"
 
@@ -2392,9 +2392,9 @@ msgstr "suuntaan"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
 #: src/core/modules/Planet.cpp:677 src/gui/AstroCalcDialog.cpp:914
-#: src/gui/AstroCalcDialog.cpp:1227 src/gui/AstroCalcDialog.cpp:1525
-#: src/gui/AstroCalcDialog.cpp:1793 src/gui/AstroCalcDialog.cpp:1955
-#: src/gui/AstroCalcDialog.cpp:8500 src/gui/AstroCalcChart.cpp:430
+#: src/gui/AstroCalcDialog.cpp:1227 src/gui/AstroCalcDialog.cpp:1523
+#: src/gui/AstroCalcDialog.cpp:1791 src/gui/AstroCalcDialog.cpp:1953
+#: src/gui/AstroCalcDialog.cpp:8495 src/gui/AstroCalcChart.cpp:430
 #: src/gui/AstroCalcChart.cpp:434 src/gui/AstroCalcChart.cpp:449
 #: src/gui/AstroCalcChart.cpp:456 src/gui/AstroCalcChart.cpp:460
 #: plugins/Exoplanets/src/Exoplanet.cpp:364
@@ -2412,7 +2412,7 @@ msgstr "Valoaika"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:695 src/core/modules/Planet.cpp:716
-#: src/core/modules/Comet.cpp:196 src/gui/AstroCalcDialog.cpp:8477
+#: src/core/modules/Comet.cpp:196 src/gui/AstroCalcDialog.cpp:8472
 msgctxt "distance"
 msgid "M km"
 msgstr "milj. km"
@@ -2475,7 +2475,7 @@ msgstr "Valaistu"
 msgid "Elong. in Ecl.Long."
 msgstr "Elong. Ecl.Long:issa"
 
-#: src/core/modules/Planet.cpp:915 src/gui/AstroCalcDialog.cpp:8710
+#: src/core/modules/Planet.cpp:915 src/gui/AstroCalcDialog.cpp:8705
 #: src/gui/AstroCalcChart.cpp:475
 msgid "Angular distance"
 msgstr "Kulmaetäisyys"
@@ -2483,7 +2483,7 @@ msgstr "Kulmaetäisyys"
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:933 src/core/modules/StarWrapper.cpp:403
 #: src/core/modules/StarWrapper.cpp:768 src/core/modules/StarWrapper.cpp:943
-#: src/gui/AstroCalcDialog.cpp:8511 src/gui/AstroCalcAlmanacWidget.cpp:190
+#: src/gui/AstroCalcDialog.cpp:8506 src/gui/AstroCalcAlmanacWidget.cpp:190
 msgctxt "duration"
 msgid "days"
 msgstr "vuorokautta"
@@ -2700,8 +2700,8 @@ msgid "Orthographic"
 msgstr "Ortograafinen"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:348 src/gui/AstroCalcDialog.cpp:5128
-#: src/gui/AstroCalcDialog.cpp:7472 src/translations.h:37
+#: src/core/modules/SolarSystem.cpp:348 src/gui/AstroCalcDialog.cpp:5126
+#: src/gui/AstroCalcDialog.cpp:7467 src/translations.h:37
 msgid "Planets"
 msgstr "Planeetat"
 
@@ -2867,7 +2867,7 @@ msgid "on date"
 msgstr "nykyinen"
 
 #: src/core/modules/StarWrapper.cpp:439 src/core/modules/StarWrapper.cpp:444
-#: src/gui/AstroCalcDialog.cpp:5799
+#: src/gui/AstroCalcDialog.cpp:5797
 msgid "Separation"
 msgstr "Kulmaerotus"
 
@@ -2891,31 +2891,31 @@ msgstr "Aseta Hierarchical Progressive Surveys -luettelo"
 msgid "Toggle HiPS dialog"
 msgstr "Vaihda HiPS-valintaikkuna"
 
-#: src/core/SolarEclipseComputer.cpp:2032 src/gui/AstroCalcDialog.cpp:4006
+#: src/core/SolarEclipseComputer.cpp:2031 src/gui/AstroCalcDialog.cpp:4004
 msgid "Solar Eclipse"
 msgstr "Auringonpimennys"
 
-#: src/core/SolarEclipseComputer.cpp:2032
+#: src/core/SolarEclipseComputer.cpp:2031
 msgid "Created by Stellarium"
 msgstr "Stellariumin luoma"
 
-#: src/core/SolarEclipseComputer.cpp:2044 src/gui/AstroCalcDialog.cpp:3818
+#: src/core/SolarEclipseComputer.cpp:2043 src/gui/AstroCalcDialog.cpp:3816
 msgid "Greatest eclipse"
 msgstr "Suurin pimennys"
 
-#: src/core/SolarEclipseComputer.cpp:2051
+#: src/core/SolarEclipseComputer.cpp:2050
 msgid "First contact with Earth"
 msgstr "Ensimmäinen kontakti maan kanssa"
 
-#: src/core/SolarEclipseComputer.cpp:2058
+#: src/core/SolarEclipseComputer.cpp:2057
 msgid "Last contact with Earth"
 msgstr "Viimeinen kontakti maan kanssa"
 
-#: src/core/SolarEclipseComputer.cpp:2141
+#: src/core/SolarEclipseComputer.cpp:2140
 msgid "Central eclipse begins"
 msgstr "Keskipimennys alkaa"
 
-#: src/core/SolarEclipseComputer.cpp:2149
+#: src/core/SolarEclipseComputer.cpp:2148
 msgid "Central eclipse ends"
 msgstr "Keskipimennys päättyy"
 
@@ -3196,9 +3196,9 @@ msgid "Loading plugin"
 msgstr "Ladataan laajennus"
 
 #: src/core/StelCore.cpp:309 src/gui/StelGui.cpp:255
-#: src/gui/AstroCalcDialog.cpp:1773 src/gui/AstroCalcDialog.cpp:2424
-#: src/gui/AstroCalcDialog.cpp:2448 src/gui/AstroCalcDialog.cpp:3016
-#: src/gui/AstroCalcDialog.cpp:3045 src/gui/AstroCalcDialog.cpp:5792
+#: src/gui/AstroCalcDialog.cpp:1771 src/gui/AstroCalcDialog.cpp:2422
+#: src/gui/AstroCalcDialog.cpp:2446 src/gui/AstroCalcDialog.cpp:3014
+#: src/gui/AstroCalcDialog.cpp:3043 src/gui/AstroCalcDialog.cpp:5790
 #: src/ui_dateTimeDialogGui.h:321 src/ui_dateTimeDialogGui.h:323
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
@@ -4109,19 +4109,19 @@ msgstr "Todellinen tähtiaika"
 
 #. TRANSLATORS: time of transit
 #: src/core/StelObject.cpp:756 src/gui/AstroCalcDialog.cpp:927
-#: src/gui/AstroCalcDialog.cpp:2175 src/gui/AstroCalcDialog.cpp:7637
+#: src/gui/AstroCalcDialog.cpp:2173 src/gui/AstroCalcDialog.cpp:7632
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "Kulminoi"
 
-#: src/core/StelObject.cpp:757 src/gui/AstroCalcDialog.cpp:2174
-#: src/gui/AstroCalcDialog.cpp:7636
+#: src/core/StelObject.cpp:757 src/gui/AstroCalcDialog.cpp:2172
+#: src/gui/AstroCalcDialog.cpp:7631
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "Nousee"
 
-#: src/core/StelObject.cpp:758 src/gui/AstroCalcDialog.cpp:2176
-#: src/gui/AstroCalcDialog.cpp:7640
+#: src/core/StelObject.cpp:758 src/gui/AstroCalcDialog.cpp:2174
+#: src/gui/AstroCalcDialog.cpp:7635
 msgctxt "celestial event"
 msgid "Set"
 msgstr "Laskee"
@@ -4193,7 +4193,7 @@ msgstr "Max. W. Digression"
 msgid "Parallactic Angle"
 msgstr "Parallaksikulma"
 
-#: src/core/StelObject.cpp:972 src/gui/AstroCalcDialog.cpp:7735
+#: src/core/StelObject.cpp:972 src/gui/AstroCalcDialog.cpp:7730
 msgid "IAU Constellation"
 msgstr "IAU:n tähtikuvio"
 
@@ -4485,7 +4485,7 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:87
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:195
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:197
+#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:215
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:186
@@ -4992,7 +4992,7 @@ msgstr "Yhteystieto"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:86
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:194
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:196
+#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:214
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:213
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:185
@@ -6071,11 +6071,11 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Vaihekulman ja albedon perusteella laskettu visuaalinen magnitudi"
 
-#: src/gui/LocationDialog.cpp:173 src/gui/LocationDialog.cpp:973
+#: src/gui/LocationDialog.cpp:173 src/gui/LocationDialog.cpp:975
 msgid "Get location from GPS or system service"
 msgstr "Hae paikka GPS:stä tai järjestelmän sijaintipalvelusta"
 
-#: src/gui/LocationDialog.cpp:175 src/gui/LocationDialog.cpp:975
+#: src/gui/LocationDialog.cpp:175 src/gui/LocationDialog.cpp:977
 #: src/ui_locationDialogGui.h:432
 msgid "Get location from GPS"
 msgstr "Paikanna GPS:llä"
@@ -6103,23 +6103,23 @@ msgstr ""
 "kunnossa, poista paikannus käytöstä vapauttaaksesi GPS-laite muiden "
 "ohjelmien käyttöön."
 
-#: src/gui/LocationDialog.cpp:917
+#: src/gui/LocationDialog.cpp:919
 msgid "GPS listening..."
 msgstr "GPS kuuntelee..."
 
-#: src/gui/LocationDialog.cpp:924
+#: src/gui/LocationDialog.cpp:926
 msgid "GPS disconnecting..."
 msgstr "GPS katkaisee yhteyttä..."
 
-#: src/gui/LocationDialog.cpp:946
+#: src/gui/LocationDialog.cpp:948
 msgid "2D location fix"
 msgstr "20 paikkakorjausta"
 
-#: src/gui/LocationDialog.cpp:951
+#: src/gui/LocationDialog.cpp:953
 msgid "3D location fix"
 msgstr "30 paikkakorjausta"
 
-#: src/gui/LocationDialog.cpp:960
+#: src/gui/LocationDialog.cpp:962
 msgid "GPS:FAILED"
 msgstr "GPS: EPÄONNISTUI"
 
@@ -6353,7 +6353,7 @@ msgstr "Deklinaatio"
 
 #. TRANSLATORS: azimuth
 #: src/gui/SearchDialog.cpp:309 src/gui/AstroCalcDialog.cpp:869
-#: src/gui/AstroCalcDialog.cpp:1777 src/gui/AstroCalcDialog.cpp:2450
+#: src/gui/AstroCalcDialog.cpp:1775 src/gui/AstroCalcDialog.cpp:2448
 #: src/gui/AstroCalcChart.cpp:90 src/gui/AstroCalcChart.cpp:422
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1544
 msgid "Azimuth"
@@ -6361,7 +6361,7 @@ msgstr "Atsimuutti"
 
 #. TRANSLATORS: ecliptic longitude
 #: src/gui/SearchDialog.cpp:323 src/gui/AstroCalcDialog.cpp:966
-#: src/gui/AstroCalcDialog.cpp:2452 src/gui/AstroCalcDialog.cpp:3047
+#: src/gui/AstroCalcDialog.cpp:2450 src/gui/AstroCalcDialog.cpp:3045
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:711
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:757
 msgid "Longitude"
@@ -6369,7 +6369,7 @@ msgstr "Pituus"
 
 #. TRANSLATORS: ecliptic latitude
 #: src/gui/SearchDialog.cpp:326 src/gui/AstroCalcDialog.cpp:964
-#: src/gui/AstroCalcDialog.cpp:2451 src/gui/AstroCalcDialog.cpp:3046
+#: src/gui/AstroCalcDialog.cpp:2449 src/gui/AstroCalcDialog.cpp:3044
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:731
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:756
 msgid "Latitude"
@@ -6464,7 +6464,7 @@ msgstr "Kuun sekulaarinen kiihtyvyys"
 msgid "Valid range years:"
 msgstr "Voimassa olevat vuodet:"
 
-#: src/gui/AstroCalcDialog.cpp:628 src/gui/AstroCalcDialog.cpp:1947
+#: src/gui/AstroCalcDialog.cpp:628 src/gui/AstroCalcDialog.cpp:1945
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1188
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:136
 msgid "Valid range"
@@ -6496,8 +6496,8 @@ msgstr "Valitse kohde piirtääksesi sen kaavion \"Atsimuutti vs. aika\"."
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:865 src/gui/AstroCalcDialog.cpp:961
-#: src/gui/AstroCalcDialog.cpp:1772 src/gui/AstroCalcDialog.cpp:2173
-#: src/gui/AstroCalcDialog.cpp:7625 src/ui_configurationDialog.h:2051
+#: src/gui/AstroCalcDialog.cpp:1770 src/gui/AstroCalcDialog.cpp:2171
+#: src/gui/AstroCalcDialog.cpp:7620 src/ui_configurationDialog.h:2051
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:532
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:103
 #: plugins/Exoplanets/src/Exoplanet.cpp:360
@@ -6506,23 +6506,23 @@ msgid "Name"
 msgstr "Nimi"
 
 #. TRANSLATORS: right ascension
-#: src/gui/AstroCalcDialog.cpp:876 src/gui/AstroCalcDialog.cpp:1784
+#: src/gui/AstroCalcDialog.cpp:876 src/gui/AstroCalcDialog.cpp:1782
 msgid "RA (J2000)"
 msgstr "Rekt. (J2000)"
 
 #. TRANSLATORS: declination
-#: src/gui/AstroCalcDialog.cpp:878 src/gui/AstroCalcDialog.cpp:1786
+#: src/gui/AstroCalcDialog.cpp:878 src/gui/AstroCalcDialog.cpp:1784
 msgid "Dec (J2000)"
 msgstr "Dekl. (J2000)"
 
 #. TRANSLATORS: opacity
-#: src/gui/AstroCalcDialog.cpp:883 src/gui/AstroCalcDialog.cpp:7634
+#: src/gui/AstroCalcDialog.cpp:883 src/gui/AstroCalcDialog.cpp:7629
 msgid "Opac."
 msgstr "Läpinäk."
 
 #. TRANSLATORS: magnitude
-#: src/gui/AstroCalcDialog.cpp:888 src/gui/AstroCalcDialog.cpp:1789
-#: src/gui/AstroCalcDialog.cpp:2180 src/gui/AstroCalcDialog.cpp:7629
+#: src/gui/AstroCalcDialog.cpp:888 src/gui/AstroCalcDialog.cpp:1787
+#: src/gui/AstroCalcDialog.cpp:2178 src/gui/AstroCalcDialog.cpp:7624
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid "Mag."
 msgstr "Mag."
@@ -6535,7 +6535,7 @@ msgstr "läpim."
 
 #. TRANSLATORS: separation, arc-seconds
 #. TRANSLATORS: separation
-#: src/gui/AstroCalcDialog.cpp:904 src/gui/AstroCalcDialog.cpp:7644
+#: src/gui/AstroCalcDialog.cpp:904 src/gui/AstroCalcDialog.cpp:7639
 msgid "Sep."
 msgstr "Erot."
 
@@ -6550,7 +6550,7 @@ msgid "d"
 msgstr "d"
 
 #. TRANSLATORS: distance, AU
-#: src/gui/AstroCalcDialog.cpp:914 src/gui/AstroCalcDialog.cpp:1793
+#: src/gui/AstroCalcDialog.cpp:914 src/gui/AstroCalcDialog.cpp:1791
 msgid "Dist."
 msgstr "Et."
 
@@ -6570,12 +6570,12 @@ msgid "S.B."
 msgstr "P.K."
 
 #. TRANSLATORS: elevation
-#: src/gui/AstroCalcDialog.cpp:929 src/gui/AstroCalcDialog.cpp:7639
+#: src/gui/AstroCalcDialog.cpp:929 src/gui/AstroCalcDialog.cpp:7634
 msgid "Elev."
 msgstr "Kork."
 
 #. TRANSLATORS: elongation
-#: src/gui/AstroCalcDialog.cpp:931 src/gui/AstroCalcDialog.cpp:1795
+#: src/gui/AstroCalcDialog.cpp:931 src/gui/AstroCalcDialog.cpp:1793
 msgid "Elong."
 msgstr "Elong."
 
@@ -6591,7 +6591,7 @@ msgstr "Aurinkokunnan kohteet"
 msgid "Solar system objects: comets"
 msgstr "Aurinkokunnan kohteet: komeetat"
 
-#: src/gui/AstroCalcDialog.cpp:1038 src/gui/AstroCalcDialog.cpp:5140
+#: src/gui/AstroCalcDialog.cpp:1038 src/gui/AstroCalcDialog.cpp:5138
 msgid "Solar system objects: minor bodies"
 msgstr "Aurinkokunnan kohteet: pienkappaleet"
 
@@ -6611,7 +6611,7 @@ msgstr "Kohteen korkeus yläkulminaatiossa"
 msgid "Angular distance from the Sun at the moment of computation of position"
 msgstr "Kulmaetäisyys Auringosta sijainnin laskentahetkellä"
 
-#: src/gui/AstroCalcDialog.cpp:1125 src/gui/AstroCalcDialog.cpp:1569
+#: src/gui/AstroCalcDialog.cpp:1125 src/gui/AstroCalcDialog.cpp:1567
 #, qt-format
 msgid "Positions on %1"
 msgstr "Sijainnit %1"
@@ -6620,11 +6620,11 @@ msgstr "Sijainnit %1"
 msgid "Average angular size"
 msgstr "Keskimäärinen kulmaläpimitta"
 
-#: src/gui/AstroCalcDialog.cpp:1224 src/gui/AstroCalcDialog.cpp:1954
+#: src/gui/AstroCalcDialog.cpp:1224 src/gui/AstroCalcDialog.cpp:1952
 msgid "Planetocentric distance"
 msgstr "Planeettakeskinen etäisyys"
 
-#: src/gui/AstroCalcDialog.cpp:1226 src/gui/AstroCalcDialog.cpp:1954
+#: src/gui/AstroCalcDialog.cpp:1226 src/gui/AstroCalcDialog.cpp:1952
 msgid "Topocentric distance"
 msgstr "Paikkakeskinen etäisyys"
 
@@ -6632,216 +6632,216 @@ msgstr "Paikkakeskinen etäisyys"
 msgid "Angular size (with rings, if any)"
 msgstr "Kulmaläpimitta (renkaineen, jos on)"
 
-#: src/gui/AstroCalcDialog.cpp:1463 src/gui/AstroCalcDialog.cpp:1719
+#: src/gui/AstroCalcDialog.cpp:1461 src/gui/AstroCalcDialog.cpp:1717
 msgid "Save celestial positions of objects as..."
 msgstr "Tallenna taivaankappaleiden sijainnit nimellä..."
 
-#: src/gui/AstroCalcDialog.cpp:1467
+#: src/gui/AstroCalcDialog.cpp:1465
 msgid "Celestial positions of objects"
 msgstr "Kohteiden sijainnit"
 
-#: src/gui/AstroCalcDialog.cpp:1509
+#: src/gui/AstroCalcDialog.cpp:1507
 msgid "Unnamed star"
 msgstr "Nimetön tähti"
 
-#: src/gui/AstroCalcDialog.cpp:1528
+#: src/gui/AstroCalcDialog.cpp:1526
 msgid "Distance from the Sun at the moment of computation of position"
 msgstr "Etäisyys Auringosta sijainnin laskemishetkellä"
 
-#: src/gui/AstroCalcDialog.cpp:1723 src/ui_astroCalcDialog.h:2331
+#: src/gui/AstroCalcDialog.cpp:1721 src/ui_astroCalcDialog.h:2331
 msgid "Heliocentric ecliptic positions of the major planets"
 msgstr "Suurten planeettojen heliosentriset ekliptiset sijainnit"
 
-#: src/gui/AstroCalcDialog.cpp:1723 src/ui_viewDialog.h:3729
+#: src/gui/AstroCalcDialog.cpp:1721 src/ui_viewDialog.h:3729
 #: src/ui_astroCalcDialog.h:2340
 msgid "Major planets"
 msgstr "Suuret planeetat"
 
 #. TRANSLATORS: phase
-#: src/gui/AstroCalcDialog.cpp:1791 src/gui/AstroCalcChart.cpp:99
+#: src/gui/AstroCalcDialog.cpp:1789 src/gui/AstroCalcChart.cpp:99
 #: src/gui/AstroCalcChart.cpp:109 src/gui/AstroCalcChart.cpp:443
 #: src/gui/AstroCalcChart.cpp:469
 msgid "Phase"
 msgstr "Vaihe"
 
-#: src/gui/AstroCalcDialog.cpp:1940
+#: src/gui/AstroCalcDialog.cpp:1938
 msgid "Duration in minutes"
 msgstr "Kesto minuuteissa"
 
-#: src/gui/AstroCalcDialog.cpp:1941
+#: src/gui/AstroCalcDialog.cpp:1939
 msgid "Duration in hours"
 msgstr "Kesto tunneissa"
 
-#: src/gui/AstroCalcDialog.cpp:1942
+#: src/gui/AstroCalcDialog.cpp:1940
 msgid "Duration in days"
 msgstr "Kesto päivissä"
 
-#: src/gui/AstroCalcDialog.cpp:1943
+#: src/gui/AstroCalcDialog.cpp:1941
 msgid "Duration in weeks"
 msgstr "Kesto viikoissa"
 
-#: src/gui/AstroCalcDialog.cpp:1944 src/gui/AstroCalcDialog.cpp:1947
+#: src/gui/AstroCalcDialog.cpp:1942 src/gui/AstroCalcDialog.cpp:1945
 #: src/ui_astroCalcDialog.h:2448 src/ui_astroCalcDialog.h:2468
 msgid "Duration in months"
 msgstr "Kesto kuukausissa"
 
-#: src/gui/AstroCalcDialog.cpp:1945 src/ui_astroCalcDialog.h:2597
+#: src/gui/AstroCalcDialog.cpp:1943 src/ui_astroCalcDialog.h:2597
 msgid "Duration in years"
 msgstr "Kesto vuosissa"
 
-#: src/gui/AstroCalcDialog.cpp:2156
+#: src/gui/AstroCalcDialog.cpp:2154
 msgid "Save calculated ephemeris as..."
 msgstr "Tallenna lasketut efemeridit nimellä..."
 
-#: src/gui/AstroCalcDialog.cpp:2160 src/ui_astroCalcDialog.h:2284
+#: src/gui/AstroCalcDialog.cpp:2158 src/ui_astroCalcDialog.h:2284
 msgid "Ephemeris"
 msgstr "Efemeridit"
 
-#: src/gui/AstroCalcDialog.cpp:2181 src/gui/AstroCalcDialog.cpp:5801
+#: src/gui/AstroCalcDialog.cpp:2179 src/gui/AstroCalcDialog.cpp:5799
 msgid "Solar Elongation"
 msgstr "Auringon elongaatio"
 
-#: src/gui/AstroCalcDialog.cpp:2182 src/gui/AstroCalcDialog.cpp:5802
+#: src/gui/AstroCalcDialog.cpp:2180 src/gui/AstroCalcDialog.cpp:5800
 #: src/gui/AstroCalcChart.cpp:112 src/ui_astroCalcDialog.h:2529
 msgid "Lunar Elongation"
 msgstr "Kuun elongaatio"
 
-#: src/gui/AstroCalcDialog.cpp:2324
+#: src/gui/AstroCalcDialog.cpp:2322
 msgid "Altitude of celestial object at transit"
 msgstr "Taivaankappaleen korkeus kulkemisen aikana"
 
-#: src/gui/AstroCalcDialog.cpp:2328
+#: src/gui/AstroCalcDialog.cpp:2326
 msgid "Magnitude of celestial object at transit"
 msgstr "Taivaankappaleen magnitudi kulkemisen aikana"
 
-#: src/gui/AstroCalcDialog.cpp:2331
+#: src/gui/AstroCalcDialog.cpp:2329
 msgid "Celestial object's angular distance from the Sun at transit"
 msgstr "Taivaankappaleen kulmaetäisyys Auringosta kulkemisessa"
 
-#: src/gui/AstroCalcDialog.cpp:2334
+#: src/gui/AstroCalcDialog.cpp:2332
 msgid "Celestial object's angular distance from the Moon at transit"
 msgstr "Taivaankappaleen kulman etäisyys Kuusta kulkemisen aikana"
 
-#: src/gui/AstroCalcDialog.cpp:2414
+#: src/gui/AstroCalcDialog.cpp:2412
 msgid "Save calculated data as..."
 msgstr "Tallenna laskettu data nimellä..."
 
-#: src/gui/AstroCalcDialog.cpp:2418 src/ui_configurationDialog.h:2036
+#: src/gui/AstroCalcDialog.cpp:2416 src/ui_configurationDialog.h:2036
 #: src/ui_astroCalcDialog.h:2288
 msgid "Risings, Transits, and Settings"
 msgstr "Nousut, ylikulut ja laskut"
 
-#: src/gui/AstroCalcDialog.cpp:2425 src/gui/AstroCalcDialog.cpp:3017
+#: src/gui/AstroCalcDialog.cpp:2423 src/gui/AstroCalcDialog.cpp:3015
 msgid "Saros"
 msgstr "Saros"
 
-#: src/gui/AstroCalcDialog.cpp:2427 src/gui/AstroCalcDialog.cpp:3019
+#: src/gui/AstroCalcDialog.cpp:2425 src/gui/AstroCalcDialog.cpp:3017
 msgid "Gamma"
 msgstr "Gamma"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2429
+#: src/gui/AstroCalcDialog.cpp:2427
 msgctxt "column name"
 msgid "Penumbral eclipse magnitude"
 msgstr "Puolivarjopimennyksen magnitudi"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2431
+#: src/gui/AstroCalcDialog.cpp:2429
 msgctxt "column name"
 msgid "Umbral eclipse magnitude"
 msgstr "Täysvarjopimennyksen magnitudi"
 
 #. TRANSLATORS: Visibility conditions; the name of column in
 #. AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2433
+#: src/gui/AstroCalcDialog.cpp:2431
 msgctxt "column name"
 msgid "Vis. Cond."
 msgstr "Visuaalinen kunto"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2447 src/gui/AstroCalcDialog.cpp:3044
+#: src/gui/AstroCalcDialog.cpp:2445 src/gui/AstroCalcDialog.cpp:3042
 msgctxt "column name"
 msgid "Circumstances"
 msgstr "Olosuhteet"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2454
+#: src/gui/AstroCalcDialog.cpp:2452
 msgctxt "column name"
 msgid "Position Angle"
 msgstr "Sijoituskulma"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2456
+#: src/gui/AstroCalcDialog.cpp:2454
 msgctxt "column name"
 msgid "Axis Distance"
 msgstr "Akselin etäisyys"
 
-#: src/gui/AstroCalcDialog.cpp:2670 src/gui/AstroCalcDialog.cpp:3214
-#: src/gui/AstroCalcDialog.cpp:3236 src/gui/AstroCalcDialog.cpp:3591
-#: src/gui/AstroCalcDialog.cpp:3857 src/gui/AstroCalcDialog.cpp:3886
+#: src/gui/AstroCalcDialog.cpp:2668 src/gui/AstroCalcDialog.cpp:3212
+#: src/gui/AstroCalcDialog.cpp:3234 src/gui/AstroCalcDialog.cpp:3589
+#: src/gui/AstroCalcDialog.cpp:3855 src/gui/AstroCalcDialog.cpp:3884
 msgctxt "eclipse type"
 msgid "Total"
 msgstr "Kaikki"
 
-#: src/gui/AstroCalcDialog.cpp:2676 src/gui/AstroCalcDialog.cpp:3226
-#: src/gui/AstroCalcDialog.cpp:3605 src/gui/AstroCalcDialog.cpp:3846
-#: src/gui/AstroCalcDialog.cpp:3865
+#: src/gui/AstroCalcDialog.cpp:2674 src/gui/AstroCalcDialog.cpp:3224
+#: src/gui/AstroCalcDialog.cpp:3603 src/gui/AstroCalcDialog.cpp:3844
+#: src/gui/AstroCalcDialog.cpp:3863
 msgctxt "eclipse type"
 msgid "Partial"
 msgstr "Osittainen"
 
-#: src/gui/AstroCalcDialog.cpp:2682
+#: src/gui/AstroCalcDialog.cpp:2680
 msgctxt "eclipse type"
 msgid "Penumbral"
 msgstr "Puolivarjollinen"
 
-#: src/gui/AstroCalcDialog.cpp:2695
+#: src/gui/AstroCalcDialog.cpp:2693
 msgctxt "visibility conditions"
 msgid "Perfect"
 msgstr "Täydellinen"
 
-#: src/gui/AstroCalcDialog.cpp:2696
+#: src/gui/AstroCalcDialog.cpp:2694
 msgid "Perfect visibility conditions for current location"
 msgstr "Täydelliset näkyvyysolosuhteet nykyisessä sijainnissa"
 
-#: src/gui/AstroCalcDialog.cpp:2700
+#: src/gui/AstroCalcDialog.cpp:2698
 msgctxt "visibility conditions"
 msgid "Good"
 msgstr "Hyvä"
 
-#: src/gui/AstroCalcDialog.cpp:2701
+#: src/gui/AstroCalcDialog.cpp:2699
 msgid "Good visibility conditions for current location"
 msgstr "Hyvät näkyvyysolosuhteet nykyisessä sijainnissa"
 
-#: src/gui/AstroCalcDialog.cpp:2705
+#: src/gui/AstroCalcDialog.cpp:2703
 msgctxt "visibility conditions"
 msgid "Bad"
 msgstr "Huono"
 
-#: src/gui/AstroCalcDialog.cpp:2706
+#: src/gui/AstroCalcDialog.cpp:2704
 msgid "Bad visibility conditions for current location"
 msgstr "Huonot näkyvyysolosuhteet nykyisessä sijainnissa"
 
 #. TRANSLATORS: Not obs. = Not observable
-#: src/gui/AstroCalcDialog.cpp:2714
+#: src/gui/AstroCalcDialog.cpp:2712
 msgctxt "visibility conditions"
 msgid "Not obs."
 msgstr "Ei havaittavissa"
 
-#: src/gui/AstroCalcDialog.cpp:2715
+#: src/gui/AstroCalcDialog.cpp:2713
 msgid "Not observable eclipse"
 msgstr "Ei havaittavissa oleva pimennys"
 
-#: src/gui/AstroCalcDialog.cpp:2720
+#: src/gui/AstroCalcDialog.cpp:2718
 msgctxt "visibility conditions"
 msgid "Invisible"
 msgstr "Näkymätön"
 
-#: src/gui/AstroCalcDialog.cpp:2721
+#: src/gui/AstroCalcDialog.cpp:2719
 msgid "The greatest eclipse is invisible in current location"
 msgstr "Suurin pimennys ei ole näkyvissä nykyisessä paikassa."
 
-#: src/gui/AstroCalcDialog.cpp:2759 src/gui/AstroCalcDialog.cpp:3325
+#: src/gui/AstroCalcDialog.cpp:2757 src/gui/AstroCalcDialog.cpp:3323
 msgid ""
 "Saros series number of eclipse (each eclipse in a Saros is separated by an "
 "interval of 18 years 11.3 days)"
@@ -6849,7 +6849,7 @@ msgstr ""
 "Saros-sarjan pimennyskerta (jokaista Saroksen pimennystä erottaa 18 vuoden "
 "11,3 päivän tauko)"
 
-#: src/gui/AstroCalcDialog.cpp:2763
+#: src/gui/AstroCalcDialog.cpp:2761
 msgid ""
 "Penumbral magnitude is the fraction of the Moon's diameter immersed in the "
 "penumbra"
@@ -6857,50 +6857,50 @@ msgstr ""
 "Puolivarjon magnitudi on osa Kuun halkaisijasta, joka on upotettu "
 "puolivarjoon"
 
-#: src/gui/AstroCalcDialog.cpp:2766
+#: src/gui/AstroCalcDialog.cpp:2764
 msgid ""
 "Umbral magnitude is the fraction of the Moon's diameter immersed in the "
 "umbra"
 msgstr ""
 "Täysvarjon magnitudi on murto-osa Kuun halkaisijasta upotettuna täysvarjoon"
 
-#: src/gui/AstroCalcDialog.cpp:2913
+#: src/gui/AstroCalcDialog.cpp:2911
 msgid "Moon enters penumbra"
 msgstr "Kuu saauu puolivarjoon"
 
-#: src/gui/AstroCalcDialog.cpp:2914
+#: src/gui/AstroCalcDialog.cpp:2912
 msgid "Moon enters umbra"
 msgstr "Kuu saapuu täysvarjoon"
 
-#: src/gui/AstroCalcDialog.cpp:2915
+#: src/gui/AstroCalcDialog.cpp:2913
 msgid "Total eclipse begins"
 msgstr "Täydellinen pimennys alkaa"
 
-#: src/gui/AstroCalcDialog.cpp:2916
+#: src/gui/AstroCalcDialog.cpp:2914
 msgid "Maximum eclipse"
 msgstr "Maksimipimennys"
 
-#: src/gui/AstroCalcDialog.cpp:2917
+#: src/gui/AstroCalcDialog.cpp:2915
 msgid "Total eclipse ends"
 msgstr "Täydellinen pimennys päättyy"
 
-#: src/gui/AstroCalcDialog.cpp:2918
+#: src/gui/AstroCalcDialog.cpp:2916
 msgid "Moon leaves umbra"
 msgstr "Kuu poistuu puolivarjosta"
 
-#: src/gui/AstroCalcDialog.cpp:2919
+#: src/gui/AstroCalcDialog.cpp:2917
 msgid "Moon leaves penumbra"
 msgstr "Kuu poistuu puolivarjosta"
 
-#: src/gui/AstroCalcDialog.cpp:2940
+#: src/gui/AstroCalcDialog.cpp:2938
 msgid "Geographic latitude where the Moon appears in the zenith"
 msgstr "Maantieteellinen leveysaste, jossa Kuu esiintyy zeniitissä"
 
-#: src/gui/AstroCalcDialog.cpp:2943
+#: src/gui/AstroCalcDialog.cpp:2941
 msgid "Geographic longitude where the Moon appears in the zenith"
 msgstr "Maantieteellinen pituusaste, jossa Kuu esiintyy zeniitissä"
 
-#: src/gui/AstroCalcDialog.cpp:2957
+#: src/gui/AstroCalcDialog.cpp:2955
 msgid ""
 "Position angle of contact point with respect to center of the Moon measured "
 "counter-clockwise from celestial north"
@@ -6908,7 +6908,7 @@ msgstr ""
 "Kosketuspisteen sijaintikulma kuun keskipisteeseen nähden mitattuna "
 "vastapäivään taivaan pohjoisesta"
 
-#: src/gui/AstroCalcDialog.cpp:2960
+#: src/gui/AstroCalcDialog.cpp:2958
 msgid ""
 "Geocentric angular distance of center of the Moon from the axis or center of"
 " the Earth's shadow"
@@ -6916,16 +6916,16 @@ msgstr ""
 "Kosketuspisteen sijaintikulma kuun keskipisteeseen nähden mitattuna "
 "vastapäivään taivaan pohjoisesta"
 
-#: src/gui/AstroCalcDialog.cpp:2997
+#: src/gui/AstroCalcDialog.cpp:2995
 msgid "Save calculated lunar eclipses as..."
 msgstr "Tallenna lasketut kuunpimennykset nimellä..."
 
-#: src/gui/AstroCalcDialog.cpp:3001 src/ui_astroCalcDialog.h:2589
+#: src/gui/AstroCalcDialog.cpp:2999 src/ui_astroCalcDialog.h:2589
 msgid "Lunar Eclipses"
 msgstr "Kuunpimennykset"
 
-#: src/gui/AstroCalcDialog.cpp:3001 src/gui/AstroCalcDialog.cpp:3010
-#: src/gui/AstroCalcDialog.cpp:4075 src/ui_astroCalcDialog.h:2582
+#: src/gui/AstroCalcDialog.cpp:2999 src/gui/AstroCalcDialog.cpp:3008
+#: src/gui/AstroCalcDialog.cpp:4073 src/ui_astroCalcDialog.h:2582
 msgid ""
 "Note: Local circumstances for eclipses during thousands of years in the past"
 " and future are not reliable due to uncertainty in ΔT which is caused by "
@@ -6935,196 +6935,196 @@ msgstr ""
 "menneisyydessä ja tulevaisuudessa eivät ole luotettavia ΔT:n epävarmuuden "
 "vuoksi, joka johtuu Maan pyörimisen vaihteluista."
 
-#: src/gui/AstroCalcDialog.cpp:3006
+#: src/gui/AstroCalcDialog.cpp:3004
 msgid "Save lunar eclipse circumstances as..."
 msgstr "Tallenna kuunpimennysolosuhteet..."
 
-#: src/gui/AstroCalcDialog.cpp:3010
+#: src/gui/AstroCalcDialog.cpp:3008
 msgid "Circumstances of Lunar Eclipse"
 msgstr "Kuunpimennyksen olosuhteet"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3021 src/gui/AstroCalcDialog.cpp:3382
+#: src/gui/AstroCalcDialog.cpp:3019 src/gui/AstroCalcDialog.cpp:3380
 msgctxt "column name"
 msgid "Eclipse Magnitude"
 msgstr "Pimennyksen magnitudi"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3023
+#: src/gui/AstroCalcDialog.cpp:3021
 msgctxt "column name"
 msgid "Latitude"
 msgstr "Latitude"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3025
+#: src/gui/AstroCalcDialog.cpp:3023
 msgctxt "column name"
 msgid "Longitude"
 msgstr "Longitude"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3027
+#: src/gui/AstroCalcDialog.cpp:3025
 msgctxt "column name"
 msgid "Altitude"
 msgstr "Altitude"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3029 src/gui/AstroCalcDialog.cpp:3048
+#: src/gui/AstroCalcDialog.cpp:3027 src/gui/AstroCalcDialog.cpp:3046
 msgctxt "column name"
 msgid "Path Width"
 msgstr "Polun leveys"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3031 src/gui/AstroCalcDialog.cpp:3049
+#: src/gui/AstroCalcDialog.cpp:3029 src/gui/AstroCalcDialog.cpp:3047
 msgctxt "column name"
 msgid "Central Duration"
 msgstr "Keskusaika"
 
-#: src/gui/AstroCalcDialog.cpp:3220 src/gui/AstroCalcDialog.cpp:3242
-#: src/gui/AstroCalcDialog.cpp:3256 src/gui/AstroCalcDialog.cpp:3598
-#: src/gui/AstroCalcDialog.cpp:3861 src/gui/AstroCalcDialog.cpp:3888
+#: src/gui/AstroCalcDialog.cpp:3218 src/gui/AstroCalcDialog.cpp:3240
+#: src/gui/AstroCalcDialog.cpp:3254 src/gui/AstroCalcDialog.cpp:3596
+#: src/gui/AstroCalcDialog.cpp:3859 src/gui/AstroCalcDialog.cpp:3886
 msgctxt "eclipse type"
 msgid "Annular"
 msgstr "Rengasmainen"
 
-#: src/gui/AstroCalcDialog.cpp:3250
+#: src/gui/AstroCalcDialog.cpp:3248
 msgctxt "eclipse type"
 msgid "Hybrid"
 msgstr "Yhdistelmä"
 
-#: src/gui/AstroCalcDialog.cpp:3329
+#: src/gui/AstroCalcDialog.cpp:3327
 msgid ""
 "Eclipse magnitude is the fraction of the Sun's diameter obscured by the Moon"
 msgstr ""
 "Pimennyksen magnitudi on murto-osa Auringon halkaisijasta, jonka Kuu peittää"
 
-#: src/gui/AstroCalcDialog.cpp:3336
+#: src/gui/AstroCalcDialog.cpp:3334
 msgid "Sun's altitude at greatest eclipse"
 msgstr "Auringon korkeus suurimmassa pimennyksessä"
 
-#: src/gui/AstroCalcDialog.cpp:3339
+#: src/gui/AstroCalcDialog.cpp:3337
 msgid "Width of the path of totality or annularity at greatest eclipse"
 msgstr ""
 "Totaalisuuden tai rengasmaisuuden polun leveys suurimmassa pimennyksessä"
 
-#: src/gui/AstroCalcDialog.cpp:3342
+#: src/gui/AstroCalcDialog.cpp:3340
 msgid "Duration of total or annular phase at greatest eclipse"
 msgstr "Kokonais- tai rengasvaiheen kesto suurimmassa pimennyksessä"
 
-#: src/gui/AstroCalcDialog.cpp:3373 src/gui/AstroCalcChart.cpp:380
+#: src/gui/AstroCalcDialog.cpp:3371 src/gui/AstroCalcChart.cpp:380
 #: src/gui/ObsListDialog.cpp:298 src/ui_obsListDialog.h:412
 msgid "Date"
 msgstr "Päiväys"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3376
+#: src/gui/AstroCalcDialog.cpp:3374
 msgctxt "column name"
 msgid "Partial Eclipse Begins"
 msgstr "Osittainen pimennys alkaa"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3378
+#: src/gui/AstroCalcDialog.cpp:3376
 msgctxt "column name"
 msgid "Central Eclipse Begins"
 msgstr "Keskipimennys alkaa"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3380
+#: src/gui/AstroCalcDialog.cpp:3378
 msgctxt "column name"
 msgid "Maximum Eclipse"
 msgstr "Maksimaalinen pimennys"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3384
+#: src/gui/AstroCalcDialog.cpp:3382
 msgctxt "column name"
 msgid "Central Eclipse Ends"
 msgstr "Keskipimennys päättyy"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3386
+#: src/gui/AstroCalcDialog.cpp:3384
 msgctxt "column name"
 msgid "Partial Eclipse Ends"
 msgstr "Osittainen pimennys päättyy"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:3388 src/gui/AstroCalcDialog.cpp:4097
+#: src/gui/AstroCalcDialog.cpp:3386 src/gui/AstroCalcDialog.cpp:4095
 msgctxt "column name"
 msgid "Duration"
 msgstr "Kesto"
 
-#: src/gui/AstroCalcDialog.cpp:3636
+#: src/gui/AstroCalcDialog.cpp:3634
 msgid "The time of first contact"
 msgstr "Ensimmäisen kontaktin aika"
 
-#: src/gui/AstroCalcDialog.cpp:3642
+#: src/gui/AstroCalcDialog.cpp:3640
 msgid "The time of second contact"
 msgstr "Toisen kontaktin aika"
 
-#: src/gui/AstroCalcDialog.cpp:3644
+#: src/gui/AstroCalcDialog.cpp:3642
 msgid "The time of greatest eclipse"
 msgstr "Syyrimman pimennyksen aika"
 
-#: src/gui/AstroCalcDialog.cpp:3650
+#: src/gui/AstroCalcDialog.cpp:3648
 msgid "The time of third contact"
 msgstr "Kolmannen kontaktin aika"
 
-#: src/gui/AstroCalcDialog.cpp:3654
+#: src/gui/AstroCalcDialog.cpp:3652
 msgid "The time of fourth contact"
 msgstr "Neljännen kontaktin aika"
 
-#: src/gui/AstroCalcDialog.cpp:3659
+#: src/gui/AstroCalcDialog.cpp:3657
 msgid "Duration of total or annular eclipse"
 msgstr "Täydellisen tai rengaspimennyksen kesto"
 
-#: src/gui/AstroCalcDialog.cpp:3810
+#: src/gui/AstroCalcDialog.cpp:3808
 msgid "Eclipse begins; first contact with Earth"
 msgstr "Pimennys alkaa; ensimmäinen kontakti Maan kanssa"
 
-#: src/gui/AstroCalcDialog.cpp:3814
+#: src/gui/AstroCalcDialog.cpp:3812
 msgid "Beginning of center line; central eclipse begins"
 msgstr "Keskilinjan alku; keskipimennys alkaa"
 
-#: src/gui/AstroCalcDialog.cpp:3822
+#: src/gui/AstroCalcDialog.cpp:3820
 msgid "End of center line; central eclipse ends"
 msgstr "Keskilinjan loppu; keskipimennys päättyy"
 
-#: src/gui/AstroCalcDialog.cpp:3826
+#: src/gui/AstroCalcDialog.cpp:3824
 msgid "Eclipse ends; last contact with Earth"
 msgstr "Pimennys päättyy; viimeinen kontakti Maan kanssa"
 
-#: src/gui/AstroCalcDialog.cpp:3835
+#: src/gui/AstroCalcDialog.cpp:3833
 msgid "Geographic latitude of contact point"
 msgstr "Kontaktikohdan maantieteellinen latitude"
 
-#: src/gui/AstroCalcDialog.cpp:3838
+#: src/gui/AstroCalcDialog.cpp:3836
 msgid "Geographic longitude of contact point"
 msgstr "Kontaktikohdan maantieteellinen longitude"
 
-#: src/gui/AstroCalcDialog.cpp:3895
+#: src/gui/AstroCalcDialog.cpp:3893
 msgid "Width of the path of totality or annularity"
 msgstr "Kokonaisuuden tai rengasmaisuuden polun leveys"
 
-#: src/gui/AstroCalcDialog.cpp:3897
+#: src/gui/AstroCalcDialog.cpp:3895
 msgid "Duration of total or annular phase"
 msgstr "Kokonais- tai rengasvaiheen kesto"
 
-#: src/gui/AstroCalcDialog.cpp:3931 src/gui/AstroCalcDialog.cpp:3963
+#: src/gui/AstroCalcDialog.cpp:3929 src/gui/AstroCalcDialog.cpp:3961
 msgid "Greatest eclipse’s point"
 msgstr "Suurin pimennyksen piste"
 
-#: src/gui/AstroCalcDialog.cpp:3931
+#: src/gui/AstroCalcDialog.cpp:3929
 msgid "Eclipse’s contact point"
 msgstr "Pimennyksen kontaktipiste"
 
-#: src/gui/AstroCalcDialog.cpp:3941 src/gui/AstroCalcDialog.cpp:4071
+#: src/gui/AstroCalcDialog.cpp:3939 src/gui/AstroCalcDialog.cpp:4069
 msgid "Save calculated solar eclipses as..."
 msgstr "Tallenna lasketut auringonpimennykset nimellä..."
 
-#: src/gui/AstroCalcDialog.cpp:3945 src/gui/AstroCalcDialog.cpp:4075
+#: src/gui/AstroCalcDialog.cpp:3943 src/gui/AstroCalcDialog.cpp:4073
 msgid "Solar Eclipses"
 msgstr "Auringonpimennys"
 
-#: src/gui/AstroCalcDialog.cpp:3945 src/gui/AstroCalcDialog.cpp:3954
+#: src/gui/AstroCalcDialog.cpp:3943 src/gui/AstroCalcDialog.cpp:3952
 msgid ""
 "Note: Path of eclipses during thousands of years in the past and future are "
 "not reliable due to uncertainty in ΔT which is caused by fluctuations in "
@@ -7134,102 +7134,102 @@ msgstr ""
 "tulevaisuudessa ei ole luotettava ΔT:n epävarmuuden vuoksi, joka johtuu Maan"
 " pyörimisen vaihteluista."
 
-#: src/gui/AstroCalcDialog.cpp:3950
+#: src/gui/AstroCalcDialog.cpp:3948
 msgid "Save solar eclipse circumstances as..."
 msgstr "Tallenna auringonpimennysolosuhteet..."
 
-#: src/gui/AstroCalcDialog.cpp:3954
+#: src/gui/AstroCalcDialog.cpp:3952
 msgid "Circumstances of Solar Eclipse"
 msgstr "Auringonpimennyksen olosuhteet"
 
-#: src/gui/AstroCalcDialog.cpp:4009
+#: src/gui/AstroCalcDialog.cpp:4007
 msgid "Save map as..."
 msgstr "Tallenna kartta nimellä..."
 
-#: src/gui/AstroCalcDialog.cpp:4011
+#: src/gui/AstroCalcDialog.cpp:4009
 msgid "KML map (*.kml);;PNG equirectangular map (*.png)"
 msgstr "KML-kartta (*.kml);;PNG:n tasakulmainen kartta (*.png)"
 
-#: src/gui/AstroCalcDialog.cpp:4020
+#: src/gui/AstroCalcDialog.cpp:4018
 msgid "Failed to open output file"
 msgstr "Tulostiedoston avaaminen epäonnistui"
 
-#: src/gui/AstroCalcDialog.cpp:4021
+#: src/gui/AstroCalcDialog.cpp:4019
 #, qt-format
 msgid "Failed to open output KML file: %1"
 msgstr "KML-lähtötiedoston %1 avaaminen epäonnistui"
 
-#: src/gui/AstroCalcDialog.cpp:4037
+#: src/gui/AstroCalcDialog.cpp:4035
 msgid "Failed to save image"
 msgstr "Kuvan tallennus epäonnistui"
 
-#: src/gui/AstroCalcDialog.cpp:4038
+#: src/gui/AstroCalcDialog.cpp:4036
 msgid "Failed to save PNG map image"
 msgstr "PNG-karttakuvan tallentaminen epäonnistui"
 
-#: src/gui/AstroCalcDialog.cpp:4081
+#: src/gui/AstroCalcDialog.cpp:4079
 msgctxt "column name"
 msgid "Date of mid-transit"
 msgstr "Keskiylikulun päiväys"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4083
+#: src/gui/AstroCalcDialog.cpp:4081
 msgid "Planet"
 msgstr "Planeetta"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4085
+#: src/gui/AstroCalcDialog.cpp:4083
 msgctxt "column name"
 msgid "Exterior Ingress"
 msgstr "Ensimmäinen kosketus"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4087
+#: src/gui/AstroCalcDialog.cpp:4085
 msgctxt "column name"
 msgid "Interior Ingress"
 msgstr "Toinen kosketus"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4089
+#: src/gui/AstroCalcDialog.cpp:4087
 msgctxt "column name"
 msgid "Mid-transit"
 msgstr "Keskiylikulku"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4091
+#: src/gui/AstroCalcDialog.cpp:4089
 msgctxt "column name"
 msgid "Angular Distance"
 msgstr "Kulmaetäisyys"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4093
+#: src/gui/AstroCalcDialog.cpp:4091
 msgctxt "column name"
 msgid "Interior Egress"
 msgstr "Kolmas kosketus"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4095
+#: src/gui/AstroCalcDialog.cpp:4093
 msgctxt "column name"
 msgid "Exterior Egress"
 msgstr "Neljäs kosketus"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4099
+#: src/gui/AstroCalcDialog.cpp:4097
 msgctxt "column name"
 msgid "Observable Duration"
 msgstr "Havaittava kesto"
 
-#: src/gui/AstroCalcDialog.cpp:4313
+#: src/gui/AstroCalcDialog.cpp:4311
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1466
 msgid "Mercury"
 msgstr "Merkurius"
 
-#: src/gui/AstroCalcDialog.cpp:4318
+#: src/gui/AstroCalcDialog.cpp:4316
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1469
 msgid "Venus"
 msgstr "Venus"
 
-#: src/gui/AstroCalcDialog.cpp:4540
+#: src/gui/AstroCalcDialog.cpp:4538
 msgid ""
 "The time of first contact, the instant when the planet's disk is externally "
 "tangent to the Sun (transit begins)"
@@ -7237,7 +7237,7 @@ msgstr ""
 "Ensimmäisen kontaktin aika, hetki, jolloin planeetan levy on ulkoisesti "
 "tangentti aurinkoon nähden (ylikulku alkaa)"
 
-#: src/gui/AstroCalcDialog.cpp:4555
+#: src/gui/AstroCalcDialog.cpp:4553
 msgid ""
 "The time of second contact, the entire disk of the planet is internally "
 "tangent to the Sun"
@@ -7245,15 +7245,15 @@ msgstr ""
 "Toisen kontaktin aika, planeetan koko levy on sisäisesti tangentti aurinkoon"
 " nähden"
 
-#: src/gui/AstroCalcDialog.cpp:4573
+#: src/gui/AstroCalcDialog.cpp:4571
 msgid "The time of minimum angular distance of planet to Sun's center"
 msgstr "Aika planeetan minimikulmaetäisyydelle Auringon keskustasta"
 
-#: src/gui/AstroCalcDialog.cpp:4590
+#: src/gui/AstroCalcDialog.cpp:4588
 msgid "Minimum angular distance of planet to Sun's center"
 msgstr "Planeetan pienin kulmaetäisyys Auringon keskustasta"
 
-#: src/gui/AstroCalcDialog.cpp:4605
+#: src/gui/AstroCalcDialog.cpp:4603
 msgid ""
 "The time of third contact, the planet reaches the opposite limb and is once "
 "again internally tangent to the Sun"
@@ -7261,7 +7261,7 @@ msgstr ""
 "Kolmannen kontaktin aikaan planeetta saavuttaa vastakkaisen raajan ja on "
 "jälleen sisäisesti tangentti Auringon suhteen"
 
-#: src/gui/AstroCalcDialog.cpp:4623
+#: src/gui/AstroCalcDialog.cpp:4621
 msgid ""
 "The time of fourth contact, the planet's disk is externally tangent to the "
 "Sun (transit ends)"
@@ -7269,23 +7269,23 @@ msgstr ""
 "Neljännen kontaktin aika, planeetan kiekko on ulkoisesti tangentti aurinkoon"
 " nähden (ylikulku päättyy)"
 
-#: src/gui/AstroCalcDialog.cpp:4634
+#: src/gui/AstroCalcDialog.cpp:4632
 msgid "Total duration of transit"
 msgstr "Ylikulun kokonaiskesto"
 
-#: src/gui/AstroCalcDialog.cpp:4685
+#: src/gui/AstroCalcDialog.cpp:4683
 msgid "Observable duration of transit"
 msgstr "Havaittavissa oleva ylikulun kesto"
 
-#: src/gui/AstroCalcDialog.cpp:4748
+#: src/gui/AstroCalcDialog.cpp:4746
 msgid "Save calculated transits as..."
 msgstr "Tallenna lasketut kulminoinnit nimellä..."
 
-#: src/gui/AstroCalcDialog.cpp:4752
+#: src/gui/AstroCalcDialog.cpp:4750
 msgid "Transits across the Sun"
 msgstr "Kulku Auringon yli"
 
-#: src/gui/AstroCalcDialog.cpp:4752 src/ui_astroCalcDialog.h:2590
+#: src/gui/AstroCalcDialog.cpp:4750 src/ui_astroCalcDialog.h:2590
 msgid ""
 "Notes: Time in parentheses means the contact is invisible at current "
 "location. Transit times during thousands of years in the past and future are"
@@ -7297,407 +7297,407 @@ msgstr ""
 " tulevaisuudessa eivät ole luotettavia ΔT:n epävarmuuden vuoksi, joka johtuu"
 " Maan pyörimisen vaihteluista."
 
-#: src/gui/AstroCalcDialog.cpp:4940
+#: src/gui/AstroCalcDialog.cpp:4938
 msgid "1 minute"
 msgstr "1 minuutti"
 
-#: src/gui/AstroCalcDialog.cpp:4940
+#: src/gui/AstroCalcDialog.cpp:4938
 msgid "10 minutes"
 msgstr "10 minuuttia"
 
-#: src/gui/AstroCalcDialog.cpp:4940
+#: src/gui/AstroCalcDialog.cpp:4938
 msgid "30 minutes"
 msgstr "30 minuuttia"
 
-#: src/gui/AstroCalcDialog.cpp:4940
+#: src/gui/AstroCalcDialog.cpp:4938
 msgid "1 hour"
 msgstr "1 tunti"
 
-#: src/gui/AstroCalcDialog.cpp:4940
+#: src/gui/AstroCalcDialog.cpp:4938
 msgid "6 hours"
 msgstr "6 tuntia"
 
-#: src/gui/AstroCalcDialog.cpp:4940
+#: src/gui/AstroCalcDialog.cpp:4938
 msgid "12 hours"
 msgstr "12 tuntia"
 
-#: src/gui/AstroCalcDialog.cpp:4941
+#: src/gui/AstroCalcDialog.cpp:4939
 msgid "1 solar day"
 msgstr "1 aurinkovuorokausi"
 
-#: src/gui/AstroCalcDialog.cpp:4941
+#: src/gui/AstroCalcDialog.cpp:4939
 msgid "3 solar days"
 msgstr "3 aurinkopäivää"
 
-#: src/gui/AstroCalcDialog.cpp:4941
+#: src/gui/AstroCalcDialog.cpp:4939
 msgid "5 solar days"
 msgstr "5 aurinkovuorokautta"
 
-#: src/gui/AstroCalcDialog.cpp:4941
+#: src/gui/AstroCalcDialog.cpp:4939
 msgid "10 solar days"
 msgstr "10 aurinkovuorokautta"
 
-#: src/gui/AstroCalcDialog.cpp:4941
+#: src/gui/AstroCalcDialog.cpp:4939
 msgid "15 solar days"
 msgstr "15 aurinkovuorokautta"
 
-#: src/gui/AstroCalcDialog.cpp:4942
+#: src/gui/AstroCalcDialog.cpp:4940
 msgid "30 solar days"
 msgstr "30 aurinkovuorokautta"
 
-#: src/gui/AstroCalcDialog.cpp:4942
+#: src/gui/AstroCalcDialog.cpp:4940
 msgid "60 solar days"
 msgstr "60 aurinkovuorokautta"
 
-#: src/gui/AstroCalcDialog.cpp:4942
+#: src/gui/AstroCalcDialog.cpp:4940
 msgid "100 solar days"
 msgstr "100 aurinkovuorokautta"
 
-#: src/gui/AstroCalcDialog.cpp:4942
+#: src/gui/AstroCalcDialog.cpp:4940
 msgid "500 solar days"
 msgstr "500 aurinkovuorokautta"
 
-#: src/gui/AstroCalcDialog.cpp:4942
+#: src/gui/AstroCalcDialog.cpp:4940
 msgid "1 sidereal day"
 msgstr "1 tähtivuorokausi"
 
-#: src/gui/AstroCalcDialog.cpp:4943
+#: src/gui/AstroCalcDialog.cpp:4941
 msgid "3 sidereal days"
 msgstr "3 sideeristä päivää"
 
-#: src/gui/AstroCalcDialog.cpp:4943
+#: src/gui/AstroCalcDialog.cpp:4941
 msgid "5 sidereal days"
 msgstr "5 tähtivuorokautta"
 
-#: src/gui/AstroCalcDialog.cpp:4943
+#: src/gui/AstroCalcDialog.cpp:4941
 msgid "10 sidereal days"
 msgstr "10 tähtivuorokautta"
 
-#: src/gui/AstroCalcDialog.cpp:4943
+#: src/gui/AstroCalcDialog.cpp:4941
 msgid "15 sidereal days"
 msgstr "15 tähtivuorokautta"
 
-#: src/gui/AstroCalcDialog.cpp:4944
+#: src/gui/AstroCalcDialog.cpp:4942
 msgid "30 sidereal days"
 msgstr "30 tähtivuorokautta"
 
-#: src/gui/AstroCalcDialog.cpp:4944
+#: src/gui/AstroCalcDialog.cpp:4942
 msgid "60 sidereal days"
 msgstr "60 tähtivuorokautta"
 
-#: src/gui/AstroCalcDialog.cpp:4944
+#: src/gui/AstroCalcDialog.cpp:4942
 msgid "100 sidereal days"
 msgstr "100 tähtivuorokautta"
 
-#: src/gui/AstroCalcDialog.cpp:4944
+#: src/gui/AstroCalcDialog.cpp:4942
 msgid "500 sidereal days"
 msgstr "500 tähtivuorokautta"
 
-#: src/gui/AstroCalcDialog.cpp:4945
+#: src/gui/AstroCalcDialog.cpp:4943
 msgid "1 sidereal year"
 msgstr "1 tähtivuosi"
 
-#: src/gui/AstroCalcDialog.cpp:4945
+#: src/gui/AstroCalcDialog.cpp:4943
 msgid "1 Julian day"
 msgstr "1 juliaaninen päivä"
 
-#: src/gui/AstroCalcDialog.cpp:4945
+#: src/gui/AstroCalcDialog.cpp:4943
 msgid "5 Julian days"
 msgstr "5 juliaanista päivää"
 
-#: src/gui/AstroCalcDialog.cpp:4945
+#: src/gui/AstroCalcDialog.cpp:4943
 msgid "10 Julian days"
 msgstr "10 juliaanista päivää"
 
-#: src/gui/AstroCalcDialog.cpp:4945
+#: src/gui/AstroCalcDialog.cpp:4943
 msgid "15 Julian days"
 msgstr "15 juliaanista päivää"
 
-#: src/gui/AstroCalcDialog.cpp:4946
+#: src/gui/AstroCalcDialog.cpp:4944
 msgid "30 Julian days"
 msgstr "30 juliaanista päivää"
 
-#: src/gui/AstroCalcDialog.cpp:4946
+#: src/gui/AstroCalcDialog.cpp:4944
 msgid "60 Julian days"
 msgstr "60 juliaanista päivää"
 
-#: src/gui/AstroCalcDialog.cpp:4946
+#: src/gui/AstroCalcDialog.cpp:4944
 msgid "100 Julian days"
 msgstr "100 juliaanista päivää"
 
-#: src/gui/AstroCalcDialog.cpp:4946
+#: src/gui/AstroCalcDialog.cpp:4944
 msgid "1 Julian year"
 msgstr "1 juliaaninen vuosi"
 
-#: src/gui/AstroCalcDialog.cpp:4947
+#: src/gui/AstroCalcDialog.cpp:4945
 msgid "1 Gaussian year"
 msgstr "1 gaussinen vuosi"
 
-#: src/gui/AstroCalcDialog.cpp:4947
+#: src/gui/AstroCalcDialog.cpp:4945
 msgid "1 synodic month"
 msgstr "1 synodinen kuukusi"
 
-#: src/gui/AstroCalcDialog.cpp:4947
+#: src/gui/AstroCalcDialog.cpp:4945
 msgid "1 draconic month"
 msgstr "1 drakoniittinen kuukausi"
 
-#: src/gui/AstroCalcDialog.cpp:4947
+#: src/gui/AstroCalcDialog.cpp:4945
 msgid "1 mean tropical month"
 msgstr "1 trooppinen kuukausi"
 
-#: src/gui/AstroCalcDialog.cpp:4948
+#: src/gui/AstroCalcDialog.cpp:4946
 msgid "1 anomalistic month"
 msgstr "1 anomalistinen kuukausi"
 
-#: src/gui/AstroCalcDialog.cpp:4948
+#: src/gui/AstroCalcDialog.cpp:4946
 msgid "1 anomalistic year"
 msgstr "1 anomalistinen vuosi"
 
-#: src/gui/AstroCalcDialog.cpp:4948
+#: src/gui/AstroCalcDialog.cpp:4946
 msgid "1 saros"
 msgstr "1 saros-jakso"
 
-#: src/gui/AstroCalcDialog.cpp:4948
+#: src/gui/AstroCalcDialog.cpp:4946
 msgid "custom interval"
 msgstr "oma aikaväli"
 
-#: src/gui/AstroCalcDialog.cpp:4984
+#: src/gui/AstroCalcDialog.cpp:4982
 msgctxt "time unit measurement"
 msgid "minutes"
 msgstr "minuuttia"
 
-#: src/gui/AstroCalcDialog.cpp:4984
+#: src/gui/AstroCalcDialog.cpp:4982
 msgctxt "time unit measurement"
 msgid "hours"
 msgstr "tuntia"
 
-#: src/gui/AstroCalcDialog.cpp:4985
+#: src/gui/AstroCalcDialog.cpp:4983
 msgctxt "time unit measurement"
 msgid "days"
 msgstr "päivää"
 
-#: src/gui/AstroCalcDialog.cpp:4985
+#: src/gui/AstroCalcDialog.cpp:4983
 msgctxt "time unit measurement"
 msgid "weeks"
 msgstr "viikkoa"
 
-#: src/gui/AstroCalcDialog.cpp:4986
+#: src/gui/AstroCalcDialog.cpp:4984
 msgctxt "time unit measurement"
 msgid "months"
 msgstr "kuukautta"
 
-#: src/gui/AstroCalcDialog.cpp:4986
+#: src/gui/AstroCalcDialog.cpp:4984
 msgctxt "time unit measurement"
 msgid "years"
 msgstr "vuotta"
 
-#: src/gui/AstroCalcDialog.cpp:5128
+#: src/gui/AstroCalcDialog.cpp:5126
 msgid "Latest selected object"
 msgstr "Viimeisin valittu kohde"
 
-#: src/gui/AstroCalcDialog.cpp:5128
+#: src/gui/AstroCalcDialog.cpp:5126
 msgid "Solar system"
 msgstr "Aurinkokunta"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5129 src/gui/AstroCalcDialog.cpp:7478
+#: src/gui/AstroCalcDialog.cpp:5127 src/gui/AstroCalcDialog.cpp:7473
 #: src/translations.h:41
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:480
 msgid "Asteroids"
 msgstr "Asteroidit"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5129 src/gui/AstroCalcDialog.cpp:7480
+#: src/gui/AstroCalcDialog.cpp:5127 src/gui/AstroCalcDialog.cpp:7475
 #: src/translations.h:45
 msgid "Plutinos"
 msgstr "Plutinot"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5129 src/gui/AstroCalcDialog.cpp:7479
+#: src/gui/AstroCalcDialog.cpp:5127 src/gui/AstroCalcDialog.cpp:7474
 #: src/translations.h:39
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:481
 msgid "Comets"
 msgstr "Komeetat"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5129 src/gui/AstroCalcDialog.cpp:7481
+#: src/gui/AstroCalcDialog.cpp:5127 src/gui/AstroCalcDialog.cpp:7476
 #: src/translations.h:47
 msgid "Dwarf planets"
 msgstr "Kääpiöplaneetat"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5130 src/gui/AstroCalcDialog.cpp:7482
+#: src/gui/AstroCalcDialog.cpp:5128 src/gui/AstroCalcDialog.cpp:7477
 #: src/translations.h:49
 msgid "Cubewanos"
 msgstr "Cubewanot"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5130 src/gui/AstroCalcDialog.cpp:7483
+#: src/gui/AstroCalcDialog.cpp:5128 src/gui/AstroCalcDialog.cpp:7478
 #: src/translations.h:51
 msgid "Scattered disc objects"
 msgstr "Hajanaisen kiekon kohteet"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5130 src/gui/AstroCalcDialog.cpp:7484
+#: src/gui/AstroCalcDialog.cpp:5128 src/gui/AstroCalcDialog.cpp:7479
 #: src/translations.h:53
 msgid "Oort cloud objects"
 msgstr "Oortin pilven kohteet"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5131 src/gui/AstroCalcDialog.cpp:7485
+#: src/gui/AstroCalcDialog.cpp:5129 src/gui/AstroCalcDialog.cpp:7480
 #: src/translations.h:55
 msgid "Sednoids"
 msgstr "Sednoidit"
 
-#: src/gui/AstroCalcDialog.cpp:5131
+#: src/gui/AstroCalcDialog.cpp:5129
 #, qt-format
 msgid "Bright stars (<%1 mag)"
 msgstr "Kirkkaat tähdet (<%1 mag.)"
 
-#: src/gui/AstroCalcDialog.cpp:5132
+#: src/gui/AstroCalcDialog.cpp:5130
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
 msgstr "Kirkkaat kaksoistähdet (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:5133
+#: src/gui/AstroCalcDialog.cpp:5131
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
 msgstr "Kirkkaat muuttuvat tähdet (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:5134
+#: src/gui/AstroCalcDialog.cpp:5132
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
 msgstr "Kirkkaat tähtijoukot (<%1 mag.)"
 
-#: src/gui/AstroCalcDialog.cpp:5134
+#: src/gui/AstroCalcDialog.cpp:5132
 #, qt-format
 msgid "Planetary nebulae (<%1 mag)"
 msgstr "Planetaariset sumut (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:5135
+#: src/gui/AstroCalcDialog.cpp:5133
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
 msgstr "Kirkkaat sumut (<%1 mag.)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5135 src/gui/AstroCalcDialog.cpp:7475
+#: src/gui/AstroCalcDialog.cpp:5133 src/gui/AstroCalcDialog.cpp:7470
 #: src/translations.h:292 src/ui_viewDialog.h:3934
 #: src/ui_dsoColorsDialog.h:603
 msgid "Dark nebulae"
 msgstr "Pimeät sumut"
 
-#: src/gui/AstroCalcDialog.cpp:5136
+#: src/gui/AstroCalcDialog.cpp:5134
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
 msgstr "Kirkkaat galaksit (<%1 mag.)"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5136 src/gui/AstroCalcDialog.cpp:7490
+#: src/gui/AstroCalcDialog.cpp:5134 src/gui/AstroCalcDialog.cpp:7485
 #: src/translations.h:342 src/ui_dsoColorsDialog.h:636
 msgid "Symbiotic stars"
 msgstr "Symbioottiset tähdet"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5137 src/gui/AstroCalcDialog.cpp:7491
+#: src/gui/AstroCalcDialog.cpp:5135 src/gui/AstroCalcDialog.cpp:7486
 #: src/translations.h:344 src/ui_dsoColorsDialog.h:615
 msgid "Emission-line stars"
 msgstr "Emissioviivatähdet"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5137 src/gui/AstroCalcDialog.cpp:7496
+#: src/gui/AstroCalcDialog.cpp:5135 src/gui/AstroCalcDialog.cpp:7491
 #: src/translations.h:57
 msgid "Interstellar objects"
 msgstr "Tähtienväliset kohteet"
 
-#: src/gui/AstroCalcDialog.cpp:5138
+#: src/gui/AstroCalcDialog.cpp:5136
 msgid "Planets and Sun"
 msgstr "Planeetat ja Aurinko"
 
-#: src/gui/AstroCalcDialog.cpp:5138
+#: src/gui/AstroCalcDialog.cpp:5136
 msgid "Sun, planets and moons of observer's planet"
 msgstr "Aurinko, planeetat ja tarkkailijaplaneetan kuut"
 
-#: src/gui/AstroCalcDialog.cpp:5139
+#: src/gui/AstroCalcDialog.cpp:5137
 #, qt-format
 msgid "Bright Solar system objects (<%1 mag)"
 msgstr "Kirkkaat aurinkokunnan kohteet (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:5140
+#: src/gui/AstroCalcDialog.cpp:5138
 msgid "Moons of first body"
 msgstr "Ensimmäisen kappaleen kuut"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5141 src/gui/AstroCalcDialog.cpp:7508
+#: src/gui/AstroCalcDialog.cpp:5139 src/gui/AstroCalcDialog.cpp:7503
 #: src/translations.h:429
 msgid "Bright carbon stars"
 msgstr "Kirkkaat hiilitähdet"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5141 src/gui/AstroCalcDialog.cpp:7509
+#: src/gui/AstroCalcDialog.cpp:5139 src/gui/AstroCalcDialog.cpp:7504
 #: src/translations.h:431
 msgid "Bright barium stars"
 msgstr "Kirkkaat bariumtähdet"
 
-#: src/gui/AstroCalcDialog.cpp:5142
+#: src/gui/AstroCalcDialog.cpp:5140
 msgid "Sun, planets and moons of first body and observer's planet"
 msgstr ""
 "Ensimmäisen taivaankappaleen aurinko, planeetat ja kuut ja "
 "tarkkailijaplaneetta"
 
-#: src/gui/AstroCalcDialog.cpp:5361
+#: src/gui/AstroCalcDialog.cpp:5359
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr "Valitse kohde, jonka kaavion haluat piirtää."
 
-#: src/gui/AstroCalcDialog.cpp:5588 src/gui/AstroCalcDialog.cpp:5602
+#: src/gui/AstroCalcDialog.cpp:5586 src/gui/AstroCalcDialog.cpp:5600
 msgid "Magnitude vs. Time"
 msgstr "Magnitudi vs. aika"
 
-#: src/gui/AstroCalcDialog.cpp:5589 src/gui/AstroCalcDialog.cpp:5603
+#: src/gui/AstroCalcDialog.cpp:5587 src/gui/AstroCalcDialog.cpp:5601
 msgid "Phase vs. Time"
 msgstr "Vaihe vs. aika"
 
-#: src/gui/AstroCalcDialog.cpp:5590 src/gui/AstroCalcDialog.cpp:5604
+#: src/gui/AstroCalcDialog.cpp:5588 src/gui/AstroCalcDialog.cpp:5602
 msgid "Distance vs. Time"
 msgstr "Etäisyys vs. aika"
 
-#: src/gui/AstroCalcDialog.cpp:5591 src/gui/AstroCalcDialog.cpp:5605
+#: src/gui/AstroCalcDialog.cpp:5589 src/gui/AstroCalcDialog.cpp:5603
 msgid "Elongation vs. Time"
 msgstr "Elongaatio vs. aika"
 
-#: src/gui/AstroCalcDialog.cpp:5592 src/gui/AstroCalcDialog.cpp:5606
+#: src/gui/AstroCalcDialog.cpp:5590 src/gui/AstroCalcDialog.cpp:5604
 msgid "Angular size vs. Time"
 msgstr "Kulmaläpimitta vs. aika"
 
-#: src/gui/AstroCalcDialog.cpp:5593 src/gui/AstroCalcDialog.cpp:5607
+#: src/gui/AstroCalcDialog.cpp:5591 src/gui/AstroCalcDialog.cpp:5605
 msgid "Phase angle vs. Time"
 msgstr "Vaihekulma vs. aika"
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some
 #. languages and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:5595 src/gui/AstroCalcDialog.cpp:5609
+#: src/gui/AstroCalcDialog.cpp:5593 src/gui/AstroCalcDialog.cpp:5607
 msgid "Heliocentric distance vs. Time"
 msgstr "Heliosentrinen etäisyys vs. aika"
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages
 #. and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:5597 src/gui/AstroCalcDialog.cpp:5611
+#: src/gui/AstroCalcDialog.cpp:5595 src/gui/AstroCalcDialog.cpp:5609
 msgid "Transit altitude vs. Time"
 msgstr "Kulminointikorkeus vs. aika"
 
 #. TRANSLATORS: The phrase "Right ascension" may be long in some languages and
 #. you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:5599 src/gui/AstroCalcDialog.cpp:5613
+#: src/gui/AstroCalcDialog.cpp:5597 src/gui/AstroCalcDialog.cpp:5611
 msgid "Right ascension vs. Time"
 msgstr "Rektaskensio vs. aika"
 
-#: src/gui/AstroCalcDialog.cpp:5600 src/gui/AstroCalcDialog.cpp:5614
+#: src/gui/AstroCalcDialog.cpp:5598 src/gui/AstroCalcDialog.cpp:5612
 msgid "Declination vs. Time"
 msgstr "Deklinaatio vs. aika"
 
 #. TRANSLATORS: hours.
 #. TRANSLATORS: duration in hours
 #. TRANSLATORS: hours.
-#: src/gui/AstroCalcDialog.cpp:5656 src/gui/AstroCalcChart.cpp:445
+#: src/gui/AstroCalcDialog.cpp:5654 src/gui/AstroCalcChart.cpp:445
 #: src/gui/AstroCalcChart.cpp:471
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:903
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1196
@@ -7710,7 +7710,7 @@ msgctxt "time"
 msgid "h"
 msgstr "h "
 
-#: src/gui/AstroCalcDialog.cpp:5752
+#: src/gui/AstroCalcDialog.cpp:5750
 msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
@@ -7718,384 +7718,384 @@ msgstr ""
 "Valitse kohde tulostaaksesi sen 'Kuukausittainen korkeus' -kuvaaja asetetun "
 "ajankohdan vuotena. "
 
-#: src/gui/AstroCalcDialog.cpp:5791
+#: src/gui/AstroCalcDialog.cpp:5789
 msgid "Phenomenon"
 msgstr "Tapahtuma"
 
-#: src/gui/AstroCalcDialog.cpp:5793
+#: src/gui/AstroCalcDialog.cpp:5791
 msgid "Object 1"
 msgstr "Taivaankappale 1"
 
 #. TRANSLATORS: Magnitude of object 1
-#: src/gui/AstroCalcDialog.cpp:5795
+#: src/gui/AstroCalcDialog.cpp:5793
 msgid "Mag. 1"
 msgstr "Mag. 1"
 
-#: src/gui/AstroCalcDialog.cpp:5796
+#: src/gui/AstroCalcDialog.cpp:5794
 msgid "Object 2"
 msgstr "Taivaankappale 2"
 
 #. TRANSLATORS: Magnitude of object 2
-#: src/gui/AstroCalcDialog.cpp:5798
+#: src/gui/AstroCalcDialog.cpp:5796
 msgid "Mag. 2"
 msgstr "Mag. 2"
 
-#: src/gui/AstroCalcDialog.cpp:5800
+#: src/gui/AstroCalcDialog.cpp:5798
 msgid "Elevation"
 msgstr "Korkeus"
 
-#: src/gui/AstroCalcDialog.cpp:6157
+#: src/gui/AstroCalcDialog.cpp:6155
 msgid "Save calculated phenomena as..."
 msgstr "Tallenna lasketut tapahtumat nimellä..."
 
-#: src/gui/AstroCalcDialog.cpp:6161 src/ui_astroCalcDialog.h:2291
+#: src/gui/AstroCalcDialog.cpp:6159 src/ui_astroCalcDialog.h:2291
 msgid "Phenomena"
 msgstr "Tapahtumat"
 
-#: src/gui/AstroCalcDialog.cpp:6178
+#: src/gui/AstroCalcDialog.cpp:6176
 msgid "Magnitude of first object"
 msgstr "Ensimmäisen kohteen magnitudi"
 
-#: src/gui/AstroCalcDialog.cpp:6181
+#: src/gui/AstroCalcDialog.cpp:6179
 msgid "Magnitude of second object"
 msgstr "Toisen kohteen magnitudi"
 
-#: src/gui/AstroCalcDialog.cpp:6187
+#: src/gui/AstroCalcDialog.cpp:6185
 msgid "Elevation of first object at moment of phenomena"
 msgstr "Ensimmäisen kohteen korkeus ilmiön tapahtumishetkellä"
 
-#: src/gui/AstroCalcDialog.cpp:6189 src/gui/AstroCalcDialog.cpp:6336
+#: src/gui/AstroCalcDialog.cpp:6187 src/gui/AstroCalcDialog.cpp:6334
 msgid "Angular distance from the Sun"
 msgstr "Kulmaetäisyys Auringosta"
 
-#: src/gui/AstroCalcDialog.cpp:6192 src/gui/AstroCalcDialog.cpp:6337
+#: src/gui/AstroCalcDialog.cpp:6190 src/gui/AstroCalcDialog.cpp:6335
 msgid "Angular distance from the Moon"
 msgstr "Kulmaetäisyys Kuusta"
 
-#: src/gui/AstroCalcDialog.cpp:6210 src/gui/AstroCalcDialog.cpp:6389
-#: src/gui/AstroCalcDialog.cpp:6464
+#: src/gui/AstroCalcDialog.cpp:6208 src/gui/AstroCalcDialog.cpp:6387
+#: src/gui/AstroCalcDialog.cpp:6462
 msgid "Conjunction"
 msgstr "Konjunktio"
 
-#: src/gui/AstroCalcDialog.cpp:6219
+#: src/gui/AstroCalcDialog.cpp:6217
 msgid "Shadow transit"
 msgstr "Varjon kulku"
 
-#: src/gui/AstroCalcDialog.cpp:6222 src/gui/AstroCalcDialog.cpp:6229
-#: src/gui/AstroCalcDialog.cpp:6285 src/gui/AstroCalcDialog.cpp:6291
-#: src/gui/AstroCalcDialog.cpp:6476 src/gui/AstroCalcDialog.cpp:6492
-#: src/gui/AstroCalcDialog.cpp:6498
+#: src/gui/AstroCalcDialog.cpp:6220 src/gui/AstroCalcDialog.cpp:6227
+#: src/gui/AstroCalcDialog.cpp:6283 src/gui/AstroCalcDialog.cpp:6289
+#: src/gui/AstroCalcDialog.cpp:6474 src/gui/AstroCalcDialog.cpp:6490
+#: src/gui/AstroCalcDialog.cpp:6496
 msgid "Eclipse"
 msgstr "Pimennys"
 
-#: src/gui/AstroCalcDialog.cpp:6226 src/gui/AstroCalcDialog.cpp:6473
+#: src/gui/AstroCalcDialog.cpp:6224 src/gui/AstroCalcDialog.cpp:6471
 msgid "Opposition"
 msgstr "Oppositio"
 
-#: src/gui/AstroCalcDialog.cpp:6238
+#: src/gui/AstroCalcDialog.cpp:6236
 msgid "Greatest eastern elongation"
 msgstr "Suurin itäinen elongaatio"
 
-#: src/gui/AstroCalcDialog.cpp:6241
+#: src/gui/AstroCalcDialog.cpp:6239
 msgid "Greatest western elongation"
 msgstr "Suurin läntinen elongaatio"
 
-#: src/gui/AstroCalcDialog.cpp:6248
+#: src/gui/AstroCalcDialog.cpp:6246
 msgid "Eastern quadrature"
 msgstr "Itäinen kvadratuuri"
 
-#: src/gui/AstroCalcDialog.cpp:6251
+#: src/gui/AstroCalcDialog.cpp:6249
 msgid "Western quadrature"
 msgstr "Läntinen kvadratuuri"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:6258
+#: src/gui/AstroCalcDialog.cpp:6256
 msgid "Stationary (begin retrograde motion)"
 msgstr "Stationaarinen (taantuva liike alkaa)"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:6263
+#: src/gui/AstroCalcDialog.cpp:6261
 msgid "Stationary (begin prograde motion)"
 msgstr "Stationaarinen (etenevä liike alkaa)"
 
-#: src/gui/AstroCalcDialog.cpp:6269
+#: src/gui/AstroCalcDialog.cpp:6267
 msgid "Perihelion"
 msgstr "Periheli"
 
-#: src/gui/AstroCalcDialog.cpp:6271
+#: src/gui/AstroCalcDialog.cpp:6269
 msgid "Aphelion"
 msgstr "Apheli"
 
-#: src/gui/AstroCalcDialog.cpp:6278 src/gui/AstroCalcDialog.cpp:6485
+#: src/gui/AstroCalcDialog.cpp:6276 src/gui/AstroCalcDialog.cpp:6483
 msgctxt "passage of a celestial body in front of another"
 msgid "Transit"
 msgstr "Ylikulku"
 
-#: src/gui/AstroCalcDialog.cpp:6281 src/gui/AstroCalcDialog.cpp:6394
-#: src/gui/AstroCalcDialog.cpp:6488
+#: src/gui/AstroCalcDialog.cpp:6279 src/gui/AstroCalcDialog.cpp:6392
+#: src/gui/AstroCalcDialog.cpp:6486
 msgid "Occultation"
 msgstr "Peitto"
 
-#: src/gui/AstroCalcDialog.cpp:6301 src/gui/AstroCalcDialog.cpp:6303
-#: src/gui/AstroCalcDialog.cpp:6511 src/gui/AstroCalcDialog.cpp:6513
+#: src/gui/AstroCalcDialog.cpp:6299 src/gui/AstroCalcDialog.cpp:6301
+#: src/gui/AstroCalcDialog.cpp:6509 src/gui/AstroCalcDialog.cpp:6511
 msgid "Superior conjunction"
 msgstr "Yläkonjunktio"
 
-#: src/gui/AstroCalcDialog.cpp:6301 src/gui/AstroCalcDialog.cpp:6303
-#: src/gui/AstroCalcDialog.cpp:6511 src/gui/AstroCalcDialog.cpp:6513
+#: src/gui/AstroCalcDialog.cpp:6299 src/gui/AstroCalcDialog.cpp:6301
+#: src/gui/AstroCalcDialog.cpp:6509 src/gui/AstroCalcDialog.cpp:6511
 msgid "Inferior conjunction"
 msgstr "Alakonjunktio"
 
-#: src/gui/AstroCalcDialog.cpp:6340
+#: src/gui/AstroCalcDialog.cpp:6338
 msgid "Angular distance from the Sun for second object"
 msgstr "Auringon ja toisen kohteen välinen kulmaetäisyys"
 
-#: src/gui/AstroCalcDialog.cpp:6341
+#: src/gui/AstroCalcDialog.cpp:6339
 msgid "Angular distance from the Moon for second object"
 msgstr "Kuun ja toisen kohteen välinen kulmaetäisyys"
 
-#: src/gui/AstroCalcDialog.cpp:7351 src/gui/AstroCalcDialog.cpp:7356
+#: src/gui/AstroCalcDialog.cpp:7346 src/gui/AstroCalcDialog.cpp:7351
 #: src/ui_astroCalcDialog.h:2600
 msgid "Table of solar eclipses"
 msgstr "Auringonpimennysten taulu"
 
-#: src/gui/AstroCalcDialog.cpp:7352
+#: src/gui/AstroCalcDialog.cpp:7347
 msgid "Table of solar eclipses visible in current location"
 msgstr "Taulukko auringonpimennyksistä näkyvissä nykyisessä sijainnissa"
 
-#: src/gui/AstroCalcDialog.cpp:7353
+#: src/gui/AstroCalcDialog.cpp:7348
 msgid "Table of lunar eclipses"
 msgstr "Kuunpimennysten taulu"
 
-#: src/gui/AstroCalcDialog.cpp:7354
+#: src/gui/AstroCalcDialog.cpp:7349
 msgid "Transits of Mercury and Venus across the Sun"
 msgstr "Merkuriuksen ja Venuksen kulku Auringon yli"
 
-#: src/gui/AstroCalcDialog.cpp:7450
+#: src/gui/AstroCalcDialog.cpp:7445
 msgctxt "Celestial object is observed..."
 msgid "In the Evening"
 msgstr "Illalla"
 
-#: src/gui/AstroCalcDialog.cpp:7451
+#: src/gui/AstroCalcDialog.cpp:7446
 msgctxt "Celestial object is observed..."
 msgid "In the Morning"
 msgstr "Aamulla"
 
-#: src/gui/AstroCalcDialog.cpp:7452
+#: src/gui/AstroCalcDialog.cpp:7447
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
 msgstr "Keskiyöllä"
 
-#: src/gui/AstroCalcDialog.cpp:7453
+#: src/gui/AstroCalcDialog.cpp:7448
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
 msgstr "Koko yön"
 
-#: src/gui/AstroCalcDialog.cpp:7473
+#: src/gui/AstroCalcDialog.cpp:7468
 msgid "Bright stars"
 msgstr "Kirkkaat tähdet"
 
-#: src/gui/AstroCalcDialog.cpp:7474 src/ui_viewDialog.h:3933
+#: src/gui/AstroCalcDialog.cpp:7469 src/ui_viewDialog.h:3933
 msgid "Bright nebulae"
 msgstr "Kirkkaat sumut"
 
-#: src/gui/AstroCalcDialog.cpp:7476 src/ui_viewDialog.h:3937
+#: src/gui/AstroCalcDialog.cpp:7471 src/ui_viewDialog.h:3937
 #: src/ui_dsoColorsDialog.h:543
 msgid "Galaxies"
 msgstr "Galaksit"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7477 src/translations.h:284
+#: src/gui/AstroCalcDialog.cpp:7472 src/translations.h:284
 #: src/ui_viewDialog.h:3940 src/ui_dsoColorsDialog.h:547
 msgid "Open star clusters"
 msgstr "Avonaiset tähtijoukot"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7486 src/translations.h:290
+#: src/gui/AstroCalcDialog.cpp:7481 src/translations.h:290
 #: src/ui_viewDialog.h:3932 src/ui_dsoColorsDialog.h:536
 msgid "Planetary nebulae"
 msgstr "Planetaariset sumut"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7487 src/translations.h:419
+#: src/gui/AstroCalcDialog.cpp:7482 src/translations.h:419
 msgid "Bright double stars"
 msgstr "Kirkkaat kaksoistähdet"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7488 src/translations.h:421
+#: src/gui/AstroCalcDialog.cpp:7483 src/translations.h:421
 msgid "Bright variable stars"
 msgstr "Kirkkaat muuttuvat tähdet"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7489 src/translations.h:423
+#: src/gui/AstroCalcDialog.cpp:7484 src/translations.h:423
 msgid "Bright stars with high proper motion"
 msgstr "Nopean ominaisliikkeen kirkkaat tähdet"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7492 src/translations.h:320
+#: src/gui/AstroCalcDialog.cpp:7487 src/translations.h:320
 #: src/ui_dsoColorsDialog.h:584
 msgid "Supernova candidates"
 msgstr "Supernovaehdokkaat"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7493 src/translations.h:322
+#: src/gui/AstroCalcDialog.cpp:7488 src/translations.h:322
 #: src/ui_dsoColorsDialog.h:622
 msgid "Supernova remnant candidates"
 msgstr "Supernovajäännösten ehdokkaat"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7494 src/translations.h:318
+#: src/gui/AstroCalcDialog.cpp:7489 src/translations.h:318
 #: src/ui_viewDialog.h:3939 src/ui_dsoColorsDialog.h:529
 msgid "Supernova remnants"
 msgstr "Supernovajäänteet"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7495 src/translations.h:346
+#: src/gui/AstroCalcDialog.cpp:7490 src/translations.h:346
 #: src/ui_viewDialog.h:3936 src/ui_dsoColorsDialog.h:635
 msgid "Clusters of galaxies"
 msgstr "Galaksijoukot"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7497 src/translations.h:286
+#: src/gui/AstroCalcDialog.cpp:7492 src/translations.h:286
 #: src/ui_viewDialog.h:3942 src/ui_dsoColorsDialog.h:522
 msgid "Globular star clusters"
 msgstr "Pallomaiset tähtijoukot"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7498 src/translations.h:348
+#: src/gui/AstroCalcDialog.cpp:7493 src/translations.h:348
 #: src/ui_dsoColorsDialog.h:648
 msgid "Regions of the sky"
 msgstr "Taivaan alueet"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7499 src/translations.h:300
+#: src/gui/AstroCalcDialog.cpp:7494 src/translations.h:300
 #: src/ui_viewDialog.h:3931 src/ui_dsoColorsDialog.h:513
 msgid "Active galaxies"
 msgstr "Aktiiviset galaksit"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7500 src/translations.h:304
+#: src/gui/AstroCalcDialog.cpp:7495 src/translations.h:304
 #: src/ui_viewDialog.h:3938 src/ui_dsoColorsDialog.h:594
 msgid "Interacting galaxies"
 msgstr "Törmäävät galaksit"
 
-#: src/gui/AstroCalcDialog.cpp:7502
+#: src/gui/AstroCalcDialog.cpp:7497
 msgid "Messier objects"
 msgstr "Messierin kohteet"
 
-#: src/gui/AstroCalcDialog.cpp:7503
+#: src/gui/AstroCalcDialog.cpp:7498
 msgid "NGC/IC objects"
 msgstr "NGC/IC-kohteet"
 
-#: src/gui/AstroCalcDialog.cpp:7504
+#: src/gui/AstroCalcDialog.cpp:7499
 msgid "Caldwell objects"
 msgstr "Caldwellin kohteet"
 
-#: src/gui/AstroCalcDialog.cpp:7505
+#: src/gui/AstroCalcDialog.cpp:7500
 msgid "Herschel 400 objects"
 msgstr "Herschel 400 -kohteet"
 
-#: src/gui/AstroCalcDialog.cpp:7506
+#: src/gui/AstroCalcDialog.cpp:7501
 msgid "Algol-type eclipsing systems"
 msgstr "Algol-tyyppiset pimennysmuuttujat"
 
-#: src/gui/AstroCalcDialog.cpp:7507
+#: src/gui/AstroCalcDialog.cpp:7502
 msgid "The classical cepheids"
 msgstr "Klassiset kefeidit"
 
-#: src/gui/AstroCalcDialog.cpp:7511
+#: src/gui/AstroCalcDialog.cpp:7506
 msgid "Bright nova stars"
 msgstr "Kirkkaat novat"
 
-#: src/gui/AstroCalcDialog.cpp:7513
+#: src/gui/AstroCalcDialog.cpp:7508
 msgid "Bright supernova stars"
 msgstr "Kirkkaat supernovat"
 
-#: src/gui/AstroCalcDialog.cpp:7516 plugins/Pulsars/src/Pulsars.cpp:71
+#: src/gui/AstroCalcDialog.cpp:7511 plugins/Pulsars/src/Pulsars.cpp:71
 #: plugins/Pulsars/src/Pulsars.cpp:169
 msgid "Pulsars"
 msgstr "Pulsarit"
 
-#: src/gui/AstroCalcDialog.cpp:7519
+#: src/gui/AstroCalcDialog.cpp:7514
 msgid "Exoplanetary systems"
 msgstr "Eksoplaneettakunnat"
 
 #. TRANSLATORS: angular size
-#: src/gui/AstroCalcDialog.cpp:7649
+#: src/gui/AstroCalcDialog.cpp:7644
 msgid "Ang. Size"
 msgstr "Kulmaläpimitta"
 
 #. TRANSLATORS: IAU Constellation
-#: src/gui/AstroCalcDialog.cpp:7652
+#: src/gui/AstroCalcDialog.cpp:7647
 msgctxt "IAU Constellation"
 msgid "Const."
 msgstr "Kiinteä"
 
-#: src/gui/AstroCalcDialog.cpp:7772 src/ui_viewDialog.h:3971
+#: src/gui/AstroCalcDialog.cpp:7767 src/ui_viewDialog.h:3971
 #: src/ui_astroCalcDialog.h:2541
 msgid "Limit angular size:"
 msgstr "Rajoita kulmaläpimittaa:"
 
-#: src/gui/AstroCalcDialog.cpp:7773 src/ui_astroCalcDialog.h:2539
+#: src/gui/AstroCalcDialog.cpp:7768 src/ui_astroCalcDialog.h:2539
 msgid "Set limits for angular size for visible celestial objects"
 msgstr "Rajoita näytettävien kohteiden kulmaläpimittaa"
 
-#: src/gui/AstroCalcDialog.cpp:7774 src/ui_astroCalcDialog.h:2533
+#: src/gui/AstroCalcDialog.cpp:7769 src/ui_astroCalcDialog.h:2533
 msgid "Minimal angular size for visible celestial objects"
 msgstr "Näytettävien kohteiden vähimmäiskulmaläpimitta"
 
-#: src/gui/AstroCalcDialog.cpp:7775 src/ui_astroCalcDialog.h:2536
+#: src/gui/AstroCalcDialog.cpp:7770 src/ui_astroCalcDialog.h:2536
 msgid "Maximum angular size for visible celestial objects"
 msgstr "Näytettävien kohteiden enimmäiskulmaläpimitta"
 
-#: src/gui/AstroCalcDialog.cpp:8047
+#: src/gui/AstroCalcDialog.cpp:8042
 msgid "Limit angular separation:"
 msgstr "Rajoita kulmaerotusta:"
 
-#: src/gui/AstroCalcDialog.cpp:8048
+#: src/gui/AstroCalcDialog.cpp:8043
 msgid "Set limits for angular separation for visible double stars"
 msgstr "Rajoita näytettävien kaksoistähtien kulmaerotusta"
 
-#: src/gui/AstroCalcDialog.cpp:8049
+#: src/gui/AstroCalcDialog.cpp:8044
 msgid "Minimal angular separation for visible double stars"
 msgstr "Näytettävien kaksoistähtien vähimmäiskulmaläpimitta"
 
-#: src/gui/AstroCalcDialog.cpp:8050
+#: src/gui/AstroCalcDialog.cpp:8045
 msgid "Maximum angular separation for visible double stars"
 msgstr "Näytettävien kaksoistähtien enimmäiskulmaläpimitta"
 
-#: src/gui/AstroCalcDialog.cpp:8425
+#: src/gui/AstroCalcDialog.cpp:8420
 msgid "Save list of objects as..."
 msgstr "Tallenna kohdeluettelo nimellä..."
 
-#: src/gui/AstroCalcDialog.cpp:8431 src/ui_astroCalcDialog.h:2297
+#: src/gui/AstroCalcDialog.cpp:8426 src/ui_astroCalcDialog.h:2297
 msgid "What's Up Tonight"
 msgstr "Mitä tänään"
 
 #. TRANSLATORS: Part of unit of measure for mean motion - degrees per day
-#: src/gui/AstroCalcDialog.cpp:8509
+#: src/gui/AstroCalcDialog.cpp:8504
 msgctxt "mean motion"
 msgid "day"
 msgstr "päivä"
 
-#: src/gui/AstroCalcDialog.cpp:8573
+#: src/gui/AstroCalcDialog.cpp:8568
 msgid "Linear and angular distances between selected objects"
 msgstr "Lineaariset ja kulmaetäisyydet valittujen kohteiden välillä"
 
-#: src/gui/AstroCalcDialog.cpp:8643
+#: src/gui/AstroCalcDialog.cpp:8638
 msgid "Angular distance between the Moon and selected object"
 msgstr "Kuun ja valitun kohteen välinen kulmaetäisyys"
 
-#: src/gui/AstroCalcDialog.cpp:8709
+#: src/gui/AstroCalcDialog.cpp:8704
 msgid "Angular distance between the Moon and celestial object"
 msgstr "Kuun ja taivaankappaleen välinen kulmaetäisyys"
 
-#: src/gui/AstroCalcDialog.cpp:8860
+#: src/gui/AstroCalcDialog.cpp:8855
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1619
 msgid "CSV (Comma delimited)"
 msgstr "CSV (pilkkueroteltu)"
 
-#: src/gui/AstroCalcDialog.cpp:8863
+#: src/gui/AstroCalcDialog.cpp:8858
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1620
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Microsoft Excel Open XML-laskentataulukko"
@@ -13868,7 +13868,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:562
 #: plugins/Observability/src/ui_ObservabilityDialog.h:308
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:219
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:243
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:242
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
 msgid "Save settings"
 msgstr "Tallenna asetukset"
@@ -16612,7 +16612,7 @@ msgstr "Salli napsautus valittuun kohteeseen"
 #: plugins/Observability/src/ui_ObservabilityDialog.h:310
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:221
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:434
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:253
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:252
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:299
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:781
 #: plugins/Calendars/src/ui_calendarsDialog.h:995
@@ -17977,6 +17977,7 @@ msgstr "Imaging X-ray Polarimetry Explorer"
 
 #. TRANSLATORS: Satellite description. "James Webb" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1475
+#: plugins/MosaicCamera/src/translations.fab:25
 msgid "James Webb Space Telescope"
 msgstr "James Webb avaruusteleskooppi"
 
@@ -28094,9 +28095,9 @@ msgstr "Tulokset"
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:160
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:161
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:162
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:239
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:240
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:241
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:244
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:243
 msgid "Mosaic Camera"
 msgstr "Mosaiikkikamera"
 
@@ -28136,13 +28137,17 @@ msgstr "Seuraava kamera"
 msgid "Previous camera"
 msgstr "Edellinen kamera"
 
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:195
+#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:98
+msgid "See more at"
+msgstr "Katso enemmän"
+
+#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:213
 msgid "Mosaic Camera Plug-in"
 msgstr "Mosaiikkikameran laajennusohjelma"
 
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:199
+#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:217
 msgid ""
-"The Mosaic Camera plugin overlays camera sensor boundaries on the sky.  The "
+"The Mosaic Camera plugin overlays camera sensor boundaries on the sky. The "
 "position of an overlay is defined by its J2000 RA/Dec coordinates, and a "
 "camera rotation angle."
 msgstr ""
@@ -28150,128 +28155,139 @@ msgstr ""
 "Peittokuvan sijainti määritellään sen J2000 RA/Dec -koordinaateilla ja "
 "kameran kiertokulmalla."
 
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:200
-msgid "Default Cameras"
-msgstr "Oletuskamerat"
-
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:201
-msgid ""
-"A number of cameras are available to Stellarium by default.  See the User "
-"Guide for information about adding user-defined camera mosaics."
-msgstr ""
-"Stellariumin käytettävissä on oletusarvoisesti useita kameroita. Katso "
-"Käyttöoppaasta tietoja käyttäjän määrittämien kameramosaiikkien "
-"lisäämisestä."
-
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:202
-msgid "LSSTCam"
-msgstr "LSSTCam"
-
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:203
-msgid ""
-"The largest (as of 2025) digital camera ever assembled at 3.2 gigapixels. "
-"Now mounted on the Simonyi Survey Telescope at the Vera C. Rubin "
-"Observatory, this camera will be used to execute the Legacy Survey of Space "
-"and Time, creating a 10-year multicolor 'movie' of the southern sky. See "
-"more at: "
-msgstr ""
-"Suurin (vuodelta 2025) koskaan koottu digitaalikamera 3,2 gigapikselillä. "
-"Nyt asennettuna Vera C. Rubinin observatorion Simonyi Survey -teleskooppiin,"
-" tätä kameraa käytetään Legacy Survey of Space and Time -tutkimuksen "
-"suorittamiseen, jolloin luodaan 10 vuoden monivärinen \"elokuva\" "
-"eteläisestä taivaasta. Katso lisää osoitteessa:"
-
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:204
-msgid "HSC"
-msgstr "HSC"
-
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:205
-msgid ""
-"Hyper Suprime-Cam. A 900 megapixel camera mounted on the Subaru telescope at"
-" the Mauna Kea Observatory.  See more at: "
-msgstr ""
-"Hyper Suprime-kamera. 900 megapikselin kamera, joka on asennettu Mauna Kean "
-"observatorion Subaru-teleskooppiin. Katso lisää osoitteessa:"
-
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:206
-msgid "DECam"
-msgstr "DECam"
-
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:207
-msgid ""
-"The Dark Energy Camera. A 570 megapixel camera mounted on the Blanco "
-"telescope at the Cerro Tololo Inter-American Observatory.  See more at: "
-msgstr ""
-"Pimeän energian kamera. 570 megapikselin kamera, joka on asennettu Blanco-"
-"teleskooppiin Cerro Tololo Inter-American Observatoryssa. Katso lisää "
-"osoitteessa:"
-
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:208
-msgid "MegaPrime"
-msgstr "MegaPrime"
-
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:209
-msgid ""
-"A 378 megapixel camera mounted on the Canada-France-Hawaii Telescope at "
-"Mauna Kea Observatory.  See more at: "
-msgstr ""
-"378 megapikselin kamera, joka on asennettu Kanada-Ranska-Hawaii-"
-"teleskooppiin Mauna Kean observatoriossa. Katso lisää osoitteessa:"
-
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:210
-msgid "LATISS"
-msgstr "LATISS"
-
-#: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:211
-msgid ""
-"The LSST Atmospheric Transmission Imager and Slitless Spectrograph.  A 16 "
-"megapixel camera mounted on the Rubin Observatory Auxiliary telescope.  See "
-"more at: "
-msgstr ""
-"LSST Atmospheric Transmission Imager ja rakoton spektrografi. 16 "
-"megapikselin kamera, joka on asennettu Rubin Observatory Auxiliary "
-"-teleskooppiin. Katso lisää osoitteessa:"
-
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:239
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:238
 msgid "Mosaic Camera Configuration"
 msgstr "Mosaiikkikameran asetukset"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:242
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:241
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:268
 msgid "Show plug-in button on toolbar"
 msgstr "Näytä laajennuksen näppäin työkalupalkissa"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:245
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:244
 msgid "Right Ascension:"
 msgstr "Oikea askensio:"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:246
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:245
 msgid "Declination:"
 msgstr "Deklinaatio:"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:247
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:246
 msgid "Rotation:"
 msgstr "Kierto:"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:248
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:247
 msgid "Visible:"
 msgstr "Näkyminen:"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:249
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:248
 msgid "Center view on camera"
 msgstr "Keskitä kameran näkymä"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:250
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:249
 msgid "Center camera on current view"
 msgstr "Keskitä kamera nykyiseen näkymään"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:251
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:250
 msgid "Center camera on current object"
 msgstr "Keskitä kamera nykyiseen kohteeseen"
 
-#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:252
+#: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:251
 msgid "Cameras"
 msgstr "Kamerat"
+
+#: plugins/MosaicCamera/src/translations.fab:5
+msgid "The Dark Energy Camera"
+msgstr "Pimeän energian kamera"
+
+#: plugins/MosaicCamera/src/translations.fab:7
+msgid ""
+"A 570 megapixel camera mounted on the Blanco telescope at the Cerro Tololo "
+"Inter-American Observatory."
+msgstr ""
+"570 megapikselin kamera, joka on asennettu Blanco-teleskooppiin Cerro Tololo"
+" Inter-American Observatoryssa."
+
+#: plugins/MosaicCamera/src/translations.fab:10
+msgid "The Euclid Space Telescope"
+msgstr "Euklidisen avaruuden teleskooppi"
+
+#: plugins/MosaicCamera/src/translations.fab:12
+msgid "The Euclid Space Telescope's focal plane."
+msgstr "Euklidisen avaruuden teleskoopin polttotaso."
+
+#: plugins/MosaicCamera/src/translations.fab:15
+msgid "Hyper Suprime-Cam"
+msgstr "Hyper Suprime -kamera"
+
+#: plugins/MosaicCamera/src/translations.fab:17
+msgid ""
+"A 900 megapixel camera mounted on the Subaru telescope at the Mauna Kea "
+"Observatory."
+msgstr ""
+"900 megapikselin kamera, joka on asennettu Subaru-teleskooppiin Mauna Kean "
+"observatoriossa."
+
+#: plugins/MosaicCamera/src/translations.fab:20
+msgid "Hubble Space Telescope"
+msgstr "Hubble-avaruuskaukoputki"
+
+#: plugins/MosaicCamera/src/translations.fab:22
+msgid "The Hubble Space Telescope's focal plane."
+msgstr "Hubble-avaruusteleskoopin polttotaso."
+
+#: plugins/MosaicCamera/src/translations.fab:27
+msgid "The James Webb Space Telescope's focal plane."
+msgstr "James Webbin avaruusteleskoopin polttotaso."
+
+#: plugins/MosaicCamera/src/translations.fab:30
+msgid ""
+"The LSST Atmospheric Transmission Imager and Slitless Spectrograph (LATISS)"
+msgstr "LSST ilmakehän lähetyskamera ja Slitless spektrografi (LATISS)"
+
+#: plugins/MosaicCamera/src/translations.fab:32
+msgid ""
+"A 16 megapixel camera mounted on the Rubin Observatory Auxiliary telescope."
+msgstr ""
+"16 megapikselin kamera, joka on asennettu Rubin Observatory Auxiliary "
+"-teleskooppiin."
+
+#: plugins/MosaicCamera/src/translations.fab:35
+msgid "LSST Camera"
+msgstr "LSST-kamera"
+
+#: plugins/MosaicCamera/src/translations.fab:37
+msgid ""
+"The largest (as of 2025) digital camera ever assembled at 3.2 gigapixels. "
+"Now mounted on the Simonyi Survey Telescope at the Vera C. Rubin "
+"Observatory, this camera will be used to execute the Legacy Survey of Space "
+"and Time, creating a 10-year multicolor 'movie' of the southern sky."
+msgstr ""
+"Suurin (vuonna 2025) digitaalikamera, joka on koskaan koottu 3,2 "
+"gigapikselillä. Nyt asennettuna Vera C. Rubinin observatorion Simonyi Survey"
+" -teleskooppiin, tätä kameraa käytetään Legacy Survey of Space and Time "
+"-tutkimuksen suorittamiseen, jolloin luodaan 10 vuoden monivärinen "
+"\"elokuva\" eteläisestä taivaasta."
+
+#: plugins/MosaicCamera/src/translations.fab:40
+msgid "CFHT MegaPrime"
+msgstr "CFHT MegaPrime"
+
+#: plugins/MosaicCamera/src/translations.fab:42
+msgid ""
+"A 378 megapixel camera mounted on the Canada-France-Hawaii Telescope at "
+"Mauna Kea Observatory."
+msgstr ""
+"378 megapikselin kamera, joka on asennettu Kanada-Ranska-Hawaii-"
+"teleskooppiin Mauna Kean observatoriossa."
+
+#: plugins/MosaicCamera/src/translations.fab:45
+msgid "Nancy Grace Roman Space Telescope"
+msgstr "Nancy Gracen roomalainen avaruusteleskooppi"
+
+#: plugins/MosaicCamera/src/translations.fab:47
+msgid "The Nancy Grace Roman Space Telescope's focal plane."
+msgstr "Nancy Gracen roomalaisen avaruusteleskoopin polttotaso."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:55
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:101
