@@ -394,8 +394,8 @@ SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be suppor
 IF(ENABLE_NLS)
      ADD_DEFINITIONS(-DENABLE_NLS)
 ENDIF()
-# This option toggle manipulations with files in po directory
-SET(ENABLE_PODIR 1 CACHE BOOL "Define whether the manipulation for files of translations should be supported.")
+# This option toggle processing files in po directory
+SET(ENABLE_PODIR 1 CACHE BOOL "Define whether processing of translation files should be supported.")
 
 # Activate media support
 SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
