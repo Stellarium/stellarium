@@ -188,6 +188,7 @@ private:
 	StelTextureSP artTexture;
 	StelVertexArray artPolygon;
 	SphericalCap boundingCap;
+	SphericalRegionP convexHull; // The convex hull formed by stars contained in the defined lines plus extra stars.
 
 	//! Define whether art, lines, names and boundary must be drawn
 	LinearFader artFader, lineFader, nameFader, boundaryFader;

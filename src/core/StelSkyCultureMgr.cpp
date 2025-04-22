@@ -18,6 +18,7 @@
  */
 
 #include "StelSkyCultureMgr.hpp"
+#include "StarMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
@@ -991,4 +992,175 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 bool StelSkyCultureMgr::currentSkycultureUsesCommonNames() const
 {
 	return currentSkyCulture.fallbackToInternationalNames;
+}
+
+struct hullEntry
+{
+	StelObjectP obj;
+	double x;
+	double y;
+	//double angle;
+};
+// simple function only for ordering from Sedgewick 1990, Algorithms in C (p.353) used for sorting.
+// The result fulfills the same purpose as some atan2, but with simpler operations.
+static double theta(const hullEntry &p1, const hullEntry &p2)
+{
+	const double dx = p2.x-p1.x;
+	const double ax = abs(dx);
+	const double dy = p2.y-p1.y;
+	const double ay = abs(dy);
+	const double asum = ax+ay;
+	double t = (asum==0) ? 0.0 : dy/asum;
+	if (dx<0.)
+		t=2-t;
+	else if (dy<0.)
+		t=4+t;
+	return t*M_PI_2;
+}
+
+SphericalRegionP StelSkyCultureMgr::makeConvexHull(const std::vector<StelObjectP> &starLines, const std::vector<Vec3d> &darkLines, const Vec3d projectionCenter)
+{
+	static StelCore *core=StelApp::getInstance().getCore();
+	// 1. Project every first star of a line pair (or just coordinates from a dark constellation) into a 2D tangential plane around projectionCenter.
+	// Stars more than 90° from center cannot be projected of course and are skipped.
+	double raC, deC;
+	StelUtils::rectToSphe(&raC, &deC, projectionCenter);
+
+	// starLines contains pairs of vertices, and some stars occur more than twice.
+	QStringList idList;
+	QList<StelObjectP>uniqueStarList;
+	foreach(auto &star, starLines)
+	{
+		if (!idList.contains(star->getID()))
+		{
+			// Take this star into consideration. However, the "star"s may be pointers to the same star, we must compare IDs.
+			idList.append(star->getID());
+			uniqueStarList.append(star);
+		}
+	}
+
+	QList<hullEntry> hullList;
+	// Perspective (gnomonic) projection from Snyder 1987, Map Projections: A Working Manual (USGS).
+	foreach(auto &star, uniqueStarList)
+	{
+		hullEntry entry;
+		entry.obj=star;
+		double ra, de;
+		StelUtils::rectToSphe(&ra, &de, entry.obj->getJ2000EquatorialPos(core));
+		const double cosC=sin(deC)*sin(de) + cos(deC)*cos(de)*cos(ra-raC);
+		if (cosC<=0.)
+			continue;
+		const double kP=1./cosC;
+		entry.x=-kP*cos(de)*sin(ra-raC); // x must be inverted here.
+		entry.y=kP*(cos(deC)*sin(de)-sin(deC)*cos(de)*cos(ra-raC));
+		hullList.append(entry);
+		//qDebug().noquote().nospace() << "[ " << entry.x << " " << entry.y << " " << ra*M_180_PI/15 << " " << de*M_180_PI << " (" << entry.obj->getID() << ") ]"; // allows Postscript graphics, looks OK.
+	}
+	//qDebug() << "Hull candidates: " << hullList.length();
+	if (hullList.count() < 3)
+	{
+		//qDebug() << "List length" << hullList.count() << " not enough for a convex hull... skipping";
+		EmptySphericalRegion *empty = new EmptySphericalRegion;
+		return empty;
+	}
+
+	// 2. Apply Package Wrapping from Sedgewick 1990, Algorithms in C to find the outer points wrapping all points.
+	// find minY
+	int min=0;
+	for(int i=1; i<hullList.count(); ++i)
+	{
+		const hullEntry &entry=hullList.at(i);
+		if (entry.y<hullList.at(min).y)
+			min=i;
+	}
+	//qDebug() << "min entry is " << hullList.at(min).obj->getID();
+
+	const int N=hullList.count(); // N...number of unique stars in constellation.
+	//qDebug() << "unique stars N=" << N;
+	hullList.append(hullList.at(min));
+
+	//QStringList debugList;
+	//// DUMP HULL LINE
+	//for(int i=0; i<hullList.count(); ++i)
+	//{
+	//	const hullEntry &entry=hullList.at(i);
+	//	debugList << entry.obj->getID();
+	//}
+	//qDebug() << "Hull candidate: " << debugList.join(" - ");
+	//debugList.clear();
+
+	int M=0;
+	double th=0.0;
+	for (M=0; M<N; ++M)
+	{
+		hullList.swapItemsAt(M, min);
+
+		//// DUMP HULL LINE
+		//for(int i=0; i<hullList.count(); ++i)
+		//{
+		//	const hullEntry &entry=hullList.at(i);
+		//	debugList << entry.obj->getID();
+		//	if (i==M)
+		//		debugList << "|";
+		//}
+		//qDebug() << "Hull candidate after swap at M=" << M << debugList.join(" - ");
+		//debugList.clear();
+
+		min=N; double v=th; th=M_PI*2.0;
+		for (int i=M+1; i<=N; ++i)
+		{
+			//qDebug() << "From M:" << M << "(" << hullList.at(M).obj->getID() << ") to i: " << i << "=" << hullList.at(i).obj->getID() << ": th=" << theta(hullList.at(M), hullList.at(i)) * M_180_PI ;
+
+			if (theta(hullList.at(M), hullList.at(i)) > v)
+				if(theta(hullList.at(M), hullList.at(i))< th)
+				{
+					min=i;
+					th=theta(hullList.at(M), hullList.at(min));
+					//qDebug() << "min:" << min << "th:" << th * M_180_PI;
+				}
+		}
+
+		//// DUMP HULL LINE
+		//for(int i=0; i<hullList.count(); ++i)
+		//{
+		//	const hullEntry &entry=hullList.at(i);
+		//	debugList << entry.obj->getID();
+		//	if (i==M)
+		//		debugList << "|";
+		//}
+		//qDebug() << "Hull candidate after  sort at M=" << M << debugList.join(" - ");
+		//debugList.clear();
+
+		if (min==N)
+		{
+			//qDebug().nospace() << "min==N=" << N << ", we're done sorting. Hull should be of length M=" << M;
+			break; // now M+1 is holds number of "valid" hull points.
+		}
+	}
+	++M;
+	//qDebug() << "Hull length" << M << "of" << hullList.count();
+	hullList.remove(M, N-M);
+	//hullList.remove(M-1, N-M+1);
+
+	//// DUMP HULL LINE
+	//for(int i=0; i<hullList.count(); ++i)
+	//{
+	//	const hullEntry &entry=hullList.at(i);
+	//	debugList << entry.obj->getID();
+	//}
+	//qDebug() << "Final Hull, M=" << M << debugList.join(" - ");
+	//debugList.clear();
+
+	//Now create a SphericalRegion
+	QList<Vec3d> hullPoints;
+	foreach(const hullEntry &entry, hullList)
+	{
+		Vec3d pos=entry.obj->getJ2000EquatorialPos(core);
+		hullPoints.append(pos);
+	}
+	// With perspective x inverted, we don't need to reverse.
+	//std::reverse(hullPoints.begin(), hullPoints.end());
+	SphericalPolygon *hull=new SphericalPolygon(hullPoints);
+	//qDebug() << "Successful hull:" << hull->toJSON();
+	return hull;
 }

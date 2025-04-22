@@ -28,6 +28,9 @@
 #include <QJsonArray>
 #include "StelObject.hpp"
 #include "StelModule.hpp"
+#include "StelObjectType.hpp"
+#include "StelSphereGeometry.hpp"
+#include "VecMath.hpp"
 
 class StelTranslator;
 
@@ -269,6 +272,19 @@ public slots:
 
 	//! Returns whether current skyculture uses (incorporates) common names.
 	bool currentSkycultureUsesCommonNames() const;
+
+	//! Compute the convex hull of a constellation or asterism.
+	//! The convex hull around stars on the sphere is described as problematic.
+	//! For constellations of limited size we follow the recommendation to
+	//! - project the stars (perspectively) around the projectionCenter on a tangential plane on the unit sphere.
+	//! - apply simple Package-Wrapping from Sedgewick 1990, Algorithms in C, chapter 25.
+	//! @param starLines the line array for a single constellation (Constellation::constellation or Asterism::asterism).
+	//! @param darkOutline line array of simple Vec3d J2000 equatorial coordinates.
+	//! @param projectionCenter (normalized Vec3d) as computed from these stars when finding the label position (XYZname)
+	//! @return SphericalRegion in equatorial J2000 coordinates.
+	//! @note the hull should be recreated occasionally as it can change by stellar proper motion.
+	//! @todo Connect some time trigger to recreate automatically, maybe once per year, decade or so.
+	static SphericalRegionP makeConvexHull(const std::vector<StelObjectP> &starLines, const std::vector<Vec3d> &darkLines, const Vec3d projectionCenter);
 
 signals:
 	//! Emitted whenever the default sky culture changed.
