@@ -28,6 +28,7 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "ConstellationMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
 #include "ZoneArray.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -53,6 +54,7 @@ Constellation::Constellation()
 	, beginSeason(0)
 	, endSeason(0)
 	, singleStarConstellationRadius(cos(M_PI/360.)) // default radius of 1/2 degrees
+	, convexHull(nullptr)
 	, artOpacity(1.f)
 {
 }
@@ -228,6 +230,9 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 			StelUtils::spheToRect(ra, dec, XYZname);
 		}
 	}
+
+	//qDebug() << "Convex hull for " << englishName;
+	convexHull=StelSkyCultureMgr::makeConvexHull(constellation, std::vector<Vec3d>(), XYZname);
 
 	beginSeason = 1;
 	endSeason = 12;
@@ -408,6 +413,14 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter, const Vec3d& obsVel
 
 			sPainter.drawGreatCircleArc(point0, point1, &viewportHalfspace);
 		}
+	}
+
+	// Also draw Convex hull
+	// TODO: separate hull drawing, obviously...
+	if (convexHull)
+	{
+		sPainter.setColor(boundaryColor*1.7, boundaryFader.getInterstate());
+		sPainter.drawSphericalRegion(convexHull.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 	}
 }
 
