@@ -159,6 +159,7 @@ public slots:
 	void setCurrentVisibility(bool visible);
 
 	void saveSettings() const;
+	void restoreDefaults();
 
 private:
 	QHash<QString, Camera> cameras;
