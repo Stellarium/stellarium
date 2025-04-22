@@ -122,7 +122,7 @@ Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl,@CMAKE_SOURCE_DIR@\uti
 Name: "sl"; MessagesFile: "compiler:Languages\Slovenian.isl"
 Name: "es"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "uk"; MessagesFile: "compiler:Languages\Ukrainian.isl,@CMAKE_SOURCE_DIR@\util\ISL\UkrainianCM.isl"
-Name: "ko"; MessagesFile: "compiler:Languages\Korean.isl,@CMAKE_SOURCE_DIR@\util\ISL\KoreanCM.isl"
 ; Unofficial translations of GUI of Inno Setup
+Name: "ko"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Korean.isl,@CMAKE_SOURCE_DIR@\util\ISL\KoreanCM.isl"
 Name: "zh_CN"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\ChineseSimplified.isl,@CMAKE_SOURCE_DIR@\util\ISL\ChineseSimplifiedCM.isl"
 Name: "zh_TW"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\ChineseTraditional.isl,@CMAKE_SOURCE_DIR@\util\ISL\ChineseTraditionalCM.isl"

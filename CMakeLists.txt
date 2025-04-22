@@ -394,6 +394,8 @@ SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be suppor
 IF(ENABLE_NLS)
      ADD_DEFINITIONS(-DENABLE_NLS)
 ENDIF()
+# This option toggle processing files in po directory
+SET(ENABLE_PODIR 1 CACHE BOOL "Define whether processing of translation files should be supported.")
 
 # Activate media support
 SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
@@ -597,38 +599,6 @@ IF(WIN32)
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Svg REQUIRED)
      IF(${QT_VERSION_MAJOR} EQUAL 5)
           FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS XmlPatterns REQUIRED)
-     ENDIF()
-
-     # Qt 5.12 (LTS) and newest version of Qt use OpenSSL 1.1*
-     # Source: https://lists.qt-project.org/pipermail/releasing/2019-March/002614.html
-     SET(OPENSSL_LIBRARY_ARCH "")
-     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
-	  SET(OPENSSL_LIBRARY_ARCH "-x64")
-     ENDIF()
-     # Try found OpenSSL 3.x DLL's on Windows (newest Qt)
-     FIND_FILE(OPENSSL_SSL_LIBRARY_DLL libssl-3${OPENSSL_LIBRARY_ARCH}.dll)
-     FIND_FILE(OPENSSL_CRYPTO_LIBRARY_DLL libcrypto-3${OPENSSL_LIBRARY_ARCH}.dll)
-     # OK, OpenSSL 3.x is not exist, let's try found OpenSSL 1.1.x DLL's
-     IF(NOT EXISTS ${OPENSSL_SSL_LIBRARY_DLL})
-	  FIND_FILE(OPENSSL_SSL_LIBRARY_DLL libssl-1_1${OPENSSL_LIBRARY_ARCH}.dll)
-     ENDIF()
-     IF(NOT EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL})
-	  FIND_FILE(OPENSSL_CRYPTO_LIBRARY_DLL libcrypto-1_1${OPENSSL_LIBRARY_ARCH}.dll)
-     ENDIF()
-
-     IF(NOT STELLARIUM_BUILD_ARM64)
-       SET(ISS_OPENSSL_LIBS "; OpenSSL support")
-       IF(EXISTS ${OPENSSL_SSL_LIBRARY_DLL})
-         MESSAGE(STATUS "Found OpenSSL SSL library: ${OPENSSL_SSL_LIBRARY_DLL}")
-         SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_SSL_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-       ENDIF()
-       IF(EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL})
-         MESSAGE(STATUS "Found OpenSSL crypto library: ${OPENSSL_CRYPTO_LIBRARY_DLL}")
-         SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_CRYPTO_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-       ENDIF()
-       IF((NOT EXISTS ${OPENSSL_SSL_LIBRARY_DLL}) AND (NOT EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL}))
-         SET(ISS_OPENSSL_LIBS "; OpenSSL libraries not found")
-       ENDIF()
      ENDIF()
 
      IF(STELLARIUM_BUILD_ARM64 AND ${QT_VERSION} VERSION_LESS "6.5.0")
@@ -916,8 +886,6 @@ IF(WIN32)
      ### Generate an Inno Setup project file
      #######################################################
 
-     FIND_PACKAGE(ISCC)
-
      IF(STELLARIUM_BUILD_ARM64) # 64bit ARM build?
           SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on arm64:\nArchitecturesAllowed=arm64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=arm64")
           SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-arm64")
@@ -933,9 +901,9 @@ IF(WIN32)
      GET_FILENAME_COMPONENT(_qt_bin_dir "${QMAKE_LOCATION}" DIRECTORY)
      FIND_PROGRAM(WINDEPLOYQT_COMMAND windeployqt HINTS "${_qt_bin_dir}")
      IF(WINDEPLOYQT_COMMAND)
-	  MESSAGE(STATUS "Found windeployqt: ${WINDEPLOYQT_COMMAND}")
+          MESSAGE(STATUS "Found windeployqt: ${WINDEPLOYQT_COMMAND}")
      ELSE()
-	  MESSAGE(STATUS "Could NOT find windeployqt")
+          MESSAGE(STATUS "Could NOT find windeployqt")
      ENDIF()
 
      SET(ISS_STELLARIUM_STUFF "; Additional libraries")
@@ -1035,6 +1003,7 @@ ENDIF()
 
 ########### Windows packaging ###############
 IF(WIN32)
+     FIND_PACKAGE(ISCC)
      IF(ISS_COMPILER_FOUND)
           IF(${ISS_COMPILER_VERSION_MAJOR} EQUAL 6)
                CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium.iss6.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
@@ -1130,6 +1099,6 @@ IF(ENABLE_SHOWMYSKY)
      # add atmosphere models
      ADD_SUBDIRECTORY( atmosphere )
 ENDIF()
-IF(ENABLE_NLS)
+IF(ENABLE_NLS AND ENABLE_PODIR)
      ADD_SUBDIRECTORY( po )
 ENDIF()
