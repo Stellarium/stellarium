@@ -5484,7 +5484,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>native</string>
+                  <string comment="menu item">native</string>
                  </property>
                 </widget>
                </item>
@@ -5497,7 +5497,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>modern</string>
+                  <string comment="menu item">modern</string>
                  </property>
                 </widget>
                </item>
@@ -5517,7 +5517,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>translation</string>
+                  <string comment="menu item">translation</string>
                  </property>
                 </widget>
                </item>
@@ -5530,7 +5530,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>transliteration</string>
+                  <string comment="menu item">transliteration</string>
                  </property>
                 </widget>
                </item>
@@ -5543,7 +5543,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>modern</string>
+                  <string comment="menu item">modern</string>
                  </property>
                 </widget>
                </item>
@@ -5555,8 +5555,11 @@
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
+                 <property name="toolTip">
+                  <string>Scientific transliteration</string>
+                 </property>
                  <property name="text">
-                  <string>sci. translit.</string>
+                  <string comment="menu item">sci. translit.</string>
                  </property>
                 </widget>
                </item>
@@ -5576,7 +5579,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>transliteration</string>
+                  <string comment="menu item">transliteration</string>
                  </property>
                 </widget>
                </item>
@@ -5588,8 +5591,11 @@
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
+                 <property name="toolTip">
+                  <string>Scientific transliteration</string>
+                 </property>
                  <property name="text">
-                  <string>sci. translit.</string>
+                  <string comment="menu item">sci. translit.</string>
                  </property>
                 </widget>
                </item>
@@ -5602,7 +5608,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>native</string>
+                  <string comment="menu item">native</string>
                  </property>
                 </widget>
                </item>
@@ -5615,7 +5621,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>translation</string>
+                  <string comment="menu item">translation</string>
                  </property>
                 </widget>
                </item>
@@ -5627,8 +5633,11 @@
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
+                 <property name="toolTip">
+                  <string>International Phonetic Alphabet</string>
+                 </property>
                  <property name="text">
-                  <string>IPA</string>
+                  <string comment="menu item">IPA</string>
                  </property>
                 </widget>
                </item>
@@ -5640,8 +5649,11 @@
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
+                 <property name="toolTip">
+                  <string>International Phonetic Alphabet</string>
+                 </property>
                  <property name="text">
-                  <string>IPA</string>
+                  <string comment="menu item">IPA</string>
                  </property>
                 </widget>
                </item>
