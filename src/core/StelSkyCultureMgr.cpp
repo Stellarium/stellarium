@@ -1018,7 +1018,7 @@ static double theta(const hullEntry &p1, const hullEntry &p2)
 	return t*M_PI_2;
 }
 
-SphericalRegionP StelSkyCultureMgr::makeConvexHull(const std::vector<StelObjectP> &starLines, const std::vector<Vec3d> &darkLines, const Vec3d projectionCenter)
+SphericalRegionP StelSkyCultureMgr::makeConvexHull(const std::vector<StelObjectP> &starLines, const std::vector<StelObjectP> &hullExtension, const std::vector<Vec3d> &darkLines, const Vec3d projectionCenter)
 {
 	static StelCore *core=StelApp::getInstance().getCore();
 	// 1. Project every first star of a line pair (or just coordinates from a dark constellation) into a 2D tangential plane around projectionCenter.
@@ -1038,6 +1038,15 @@ SphericalRegionP StelSkyCultureMgr::makeConvexHull(const std::vector<StelObjectP
 			uniqueStarList.append(star);
 		}
 	}
+	foreach(auto &star, hullExtension)
+	{
+		if (!idList.contains(star->getID()))
+		{
+			// Take this star into consideration. However, the "star"s may be pointers to the same star, we must compare IDs.
+			idList.append(star->getID());
+			uniqueStarList.append(star);
+		}
+	}
 
 	QList<hullEntry> hullList;
 	// Perspective (gnomonic) projection from Snyder 1987, Map Projections: A Working Manual (USGS).
@@ -1048,7 +1057,7 @@ SphericalRegionP StelSkyCultureMgr::makeConvexHull(const std::vector<StelObjectP
 		double ra, de;
 		StelUtils::rectToSphe(&ra, &de, entry.obj->getJ2000EquatorialPos(core));
 		const double cosC=sin(deC)*sin(de) + cos(deC)*cos(de)*cos(ra-raC);
-		if (cosC<=0.)
+		if (cosC<=0.) // distance 90° or more from projection center? Discard!
 			continue;
 		const double kP=1./cosC;
 		entry.x=-kP*cos(de)*sin(ra-raC); // x must be inverted here.
@@ -1119,17 +1128,6 @@ SphericalRegionP StelSkyCultureMgr::makeConvexHull(const std::vector<StelObjectP
 					//qDebug() << "min:" << min << "th:" << th * M_180_PI;
 				}
 		}
-
-		//// DUMP HULL LINE
-		//for(int i=0; i<hullList.count(); ++i)
-		//{
-		//	const hullEntry &entry=hullList.at(i);
-		//	debugList << entry.obj->getID();
-		//	if (i==M)
-		//		debugList << "|";
-		//}
-		//qDebug() << "Hull candidate after  sort at M=" << M << debugList.join(" - ");
-		//debugList.clear();
 
 		if (min==N)
 		{

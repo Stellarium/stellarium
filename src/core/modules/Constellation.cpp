@@ -232,7 +232,30 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 	}
 
 	//qDebug() << "Convex hull for " << englishName;
-	convexHull=StelSkyCultureMgr::makeConvexHull(constellation, std::vector<Vec3d>(), XYZname);
+	std::vector<StelObjectP>hullExtension;
+	if (data.contains("hull_extension"))
+	{
+		const QJsonArray &hullExtraArray=data["hull_extension"].toArray();
+
+		for (qsizetype i = 0; i < hullExtraArray.size(); ++i)
+		{
+			const StarId HP = StelUtils::getLongLong(hullExtraArray[i]);
+			if (HP == 0)
+			{
+				qWarning().nospace() << "Error in hull_extension for constellation " << abbreviation << ": bad StarId " << HP;
+				return false;
+			}
+			const StelObjectP newPoint = HP <= NR_OF_HIP ? starMgr->searchHP(HP)
+								     : starMgr->searchGaia(HP);
+			if (!newPoint)
+			{
+				qWarning().nospace() << "Error in hull_extension for constellation " << abbreviation << ": can't find StarId " << HP;
+				return false;
+			}
+		}
+	}
+
+	convexHull=StelSkyCultureMgr::makeConvexHull(constellation, hullExtension, std::vector<Vec3d>(), XYZname);
 
 	beginSeason = 1;
 	endSeason = 12;
