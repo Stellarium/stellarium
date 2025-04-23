@@ -275,7 +275,10 @@ public slots:
 
 	//! Create a list of entries: Constellation: Hull_area to logfile
 	//! @todo: Extend with GUI etc?
-	void dumpHullAreas();
+	void dumpHullAreas() const;
+
+	//! Create a list of stars within the convex hull of constellation
+	void starsInHullOf(const QString &englishName) const;
 
 
 signals:
