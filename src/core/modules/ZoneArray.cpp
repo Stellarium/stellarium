@@ -591,6 +591,44 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 }
 
 template<class Star>
+void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly,
+						  QList<StelObjectP > &result)
+{
+	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
+	const SpecialZoneData<Star> *const z = getZones()+index;
+	Vec3d tmp;
+	double RA, DEC, pmra, pmdec, Plx, RadialVel;
+	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
+	{
+		s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+		StelUtils::spheToRect(RA, DEC, tmp);
+		// s->getJ2000Pos(dyrs, tmp);
+		// in case it is in a binary system
+		s->getBinaryOrbit(core->getJDE(), tmp);
+		s->getPlxEffect(withParallax * Plx, tmp, diffPos);
+		tmp.normalize();
+		if (core->getUseAberration())
+		{
+			const Vec3d vel = core->getAberrationVec(core->getJDE());
+			tmp+=vel;
+			tmp.normalize();
+		}
+		if (region->contains(tmp))
+		{
+			qDebug() << "Region match: " <<  s->getHip() << "(Index:" << index << ")";
+			// Exclude non-HIP?
+			if (hipOnly && s->getHip()==0)
+				continue;
+			else
+				result.push_back(s->createStelObject(this,z));
+		}
+		else
+			qDebug() << "NO Region match: " <<  s->getHip() << "(Index:" << index << ")";
+	}
+}
+
+
+template<class Star>
 StelObjectP SpecialZoneArray<Star>::searchGaiaID(int index, const StarId source_id, int &matched) const
 {
 	const SpecialZoneData<Star> *const z = getZones()+index;
