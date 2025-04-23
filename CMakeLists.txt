@@ -311,8 +311,14 @@ IF(WIN32)
      # This should also prevent some Winsock.h warnings
      ADD_DEFINITIONS(-DWIN32_LEAN_AND_MEAN)
      IF(NOT MSVC)
-          # MinGW requires enabling of exceptions, version number storage and MinGW-specific threading
-          SET(STEL_MINGW_FLAGS "-fexceptions -fident -mthreads")
+          # MinGW requires enabling of exceptions
+          SET(STEL_MINGW_FLAGS "-fexceptions")
+          # -Og and -s removes symbols an relocation information as otherwise the ordinal gets out of maximum 16-bit range.
+          SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Og") 
+          # MinGW clang compiler does not have a these flag, but MinGW gcc requires MinGW-specific threading, version number storage
+          IF(NOT ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang"))
+               SET(STEL_MINGW_FLAGS "${STEL_MINGW_FLAGS} -fident -mthreads -s")
+          ENDIF()
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_GCC_C_FLAGS} ${STEL_MINGW_FLAGS}")
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_GCC_CXX_FLAGS} ${STEL_MINGW_FLAGS}")
      ELSE()
