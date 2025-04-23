@@ -1389,7 +1389,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 
 	// Now we have h0*v=h1*v=h0*h1=0.
 	// Construct a region with 4 corners e0,e1,e2,e3 inside which all desired stars must be:
-	double f = 1.4142136 * tan(limFov * M_PI/180.0);
+	double f = 1.4142136 * tan(limFov * M_PI_180);
 	h0 *= f;
 	h1 *= f;
 	Vec3d e0 = v + h0;
@@ -1433,6 +1433,47 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	}
 	return result;
 }
+
+// Return a QList containing the stars located
+// inside the limFov circle around position vv (in J2000 frame without aberration)
+QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const StelCore* core, const bool hipOnly) const
+{
+	QList<StelObjectP > result;
+	if (!getFlagStars())
+		return result;
+
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(lastMaxSearchLevel)->search(region->getBoundingSphericalCaps(),lastMaxSearchLevel);
+
+
+	double withParallax = core->getUseParallax() * core->getParallaxFactor();
+	Vec3d diffPos(0., 0., 0.);
+	if (withParallax) {
+		diffPos = core->getParallaxDiff(core->getJDE());
+	}
+
+	// Iterate over the stars inside the triangles
+	for (auto* z : gridLevels)
+	{
+		//qDebug() << "search inside(" << it->first << "):";
+		int zone;
+		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
+		{
+			z->searchWithin(core, zone, region, withParallax, diffPos, hipOnly, result);
+			//qDebug() << " " << zone;
+		}
+		//qDebug() << StelUtils::getEndLineChar() << "search border(" << it->first << "):";
+		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
+		{
+			z->searchWithin(core, zone, region, withParallax, diffPos, hipOnly, result);
+			//qDebug() << " " << zone;
+		}
+		// always search the last zone because it is a global zone
+		z->searchWithin(core, (20<<(z->level<<1)), region, withParallax, diffPos, hipOnly, result);
+	}
+	qInfo() << "Region contains" << result.length() << "entries";
+	return result;
+}
+
 
 
 //! Update i18 names from english names according to passed translator.

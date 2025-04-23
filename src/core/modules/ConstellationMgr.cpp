@@ -1433,12 +1433,36 @@ Constellation* ConstellationMgr::isObjectIn(const StelObject *s) const
 	return nullptr;
 }
 
-void ConstellationMgr::dumpHullAreas()
+void ConstellationMgr::dumpHullAreas() const
 {
 	foreach(const Constellation *constellation, constellations)
 	{
 		double area_sr=constellation->convexHull->getArea();
 		qInfo().nospace() << constellation->getEnglishName() << ": "
 				  <<  area_sr << "sr or " << area_sr*(M_180_PI*M_180_PI) << "°²";
+	}
+}
+
+//! Create a list of stars within the convex hull of constellation
+void ConstellationMgr::starsInHullOf(const QString &englishName) const
+{
+	static StelCore *core=StelApp::getInstance().getCore();
+	StelObjectP constell=searchByName(englishName);
+	//Constellation *cst=searchByName(englishName)->getRegion();
+	if (!constell)
+	{
+		qWarning() << "Constellation" << englishName << "not found, not creating star list";
+		return;
+	}
+
+	//SphericalRegionP region=constell->convexHull;
+	//QList<StelObjectP> starList=GETSTELMODULE(StarMgr)->searchWithin(qobject_cast<Constellation>(constell)->convexHull, core, true);
+	QList<StelObjectP> starList=GETSTELMODULE(StarMgr)->searchWithin(constell->getRegion(), core, true);
+	qInfo() << "Stars within the convex hull of" << englishName;
+	foreach(const auto &star, starList)
+	{
+		double ra, dec;
+		StelUtils::rectToSphe(&ra, &dec, star->getJ2000EquatorialPos(core));
+		qInfo().nospace() << star->getID() << ", " << star->getVMagnitude(core) << ", " << StelUtils::radToHmsStr(ra) << ", " << StelUtils::decDegToDmsStr(dec*M_180_PI);
 	}
 }

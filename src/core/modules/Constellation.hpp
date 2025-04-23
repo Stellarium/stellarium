@@ -74,6 +74,10 @@ private:
 	//! observer centered J2000 coordinates.
 	Vec3d getJ2000EquatorialPos(const StelCore*) const override {return XYZname;}
 
+	//! Specialized implementation of the getRegion method.
+	//! Return the convex hull of the object.
+	SphericalRegionP getRegion() const override {return SphericalRegionP(convexHull);}
+
 	//! @param data a JSON formatted constellation record from index.json
 	//! @param starMgr a pointer to the StarManager object.
 	//! @return false if can't parse record (invalid result!), else true.
