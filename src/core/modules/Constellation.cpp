@@ -254,8 +254,9 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 			}
 		}
 	}
+	double hullRadius=data["hull_radius"].toDouble(data["single_star_radius"].toDouble(0.5));
 
-	convexHull=StelSkyCultureMgr::makeConvexHull(constellation, hullExtension, std::vector<Vec3d>(), XYZname);
+	convexHull=StelSkyCultureMgr::makeConvexHull(constellation, hullExtension, std::vector<Vec3d>(), XYZname, hullRadius);
 
 	beginSeason = 1;
 	endSeason = 12;
