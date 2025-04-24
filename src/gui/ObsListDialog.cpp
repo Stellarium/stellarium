@@ -43,7 +43,6 @@
 #include "StelUtils.hpp"
 #include "ObsListDialog.hpp"
 #include "LabelMgr.hpp"
-#include "StelLogger.hpp"
 
 #include "ui_obsListDialog.h"
 
@@ -52,7 +51,6 @@ ObsListDialog::ObsListDialog(QObject *parent) :
 	ui(new Ui_obsListDialogForm()),
 	core(StelApp::getInstance().getCore()),
 	objectMgr(GETSTELMODULE(StelObjectMgr)),
-	landscapeMgr(GETSTELMODULE(LandscapeMgr)),
 	labelMgr(GETSTELMODULE(LabelMgr)),
 	itemModel(new QStandardItemModel(0, ColumnCount)),
 	observingListJsonPath(StelFileMgr::findFile("data", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) + "/" + JSON_FILE_NAME),
