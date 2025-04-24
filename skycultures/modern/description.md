@@ -119,6 +119,7 @@ The IAU is the only scientifically accepted authority to assign new names to sta
  - [#55]: [Atlas Coeli Skalnaté Pleso 1950.0](https://en.wikipedia.org/wiki/Skalnate_Pleso_Atlas_of_the_Heavens)
  - [#56]: [Karlseiche](https://de.wikipedia.org/wiki/Karlseiche)
  - [#57]: [Mural Quadrant](https://de.wikipedia.org/wiki/Mauerquadrant_(Sternbild))
+ - [#58]: WAA/Alexander Pikhard. Own creation, 2001. https://www.waa.at/bericht/2001/06_sofiexp/20010612/bb20010612.html. 
 
 ## Authors
 
