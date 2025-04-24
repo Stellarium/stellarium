@@ -19,7 +19,9 @@
 
 #include "StelProjector.hpp"
 #include "Asterism.hpp"
+#include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
+#include "NebulaMgr.hpp"
 
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
@@ -55,6 +57,7 @@ Asterism::~Asterism()
 
 bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &excludeRefs)
 {
+	static NebulaMgr *nebulaMgr=GETSTELMODULE(NebulaMgr);
 	static QSettings *conf=StelApp::getInstance().getSettings();
 
 	const QString id = data["id"].toString();
@@ -179,27 +182,54 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &
 		for (int pointIndex = 0; pointIndex < polyline.size(); ++pointIndex)
 		{
 			const auto point = polyline[pointIndex];
+			StelObjectP newObj;
 			switch (typeOfAsterism)
 			{
 			case Type::RayHelper:
 			case Type::Asterism:
 			{
-				if (!point.isDouble() && !point.isString())
+				if (point.isString() && point.toString().startsWith("DSO:"))
+				{
+					QString DSOname=point.toString().remove(0,4);
+					newObj = nebulaMgr->searchByID(DSOname);
+					if (!newObj)
+					{
+						qWarning().nospace() << "Error in asterism " << abbreviation << ": can't find DSO " << DSOname << "... skipping asterism";
+						return false;
+					}
+				}
+				else if (!point.isDouble() && !point.isString())
 				{
 					qWarning().nospace() << "Error in asterism " << abbreviation << ": bad point at line #"
 					                     << lineIndex << ": isn't a number";
 					return false;
 				}
-				const StarId HIP = StelUtils::getLongLong(point);
-				if (HIP <= NR_OF_HIP)
-					asterism.push_back(starMgr->searchHP(HIP));
 				else
-					asterism.push_back(starMgr->searchGaia(HIP));
+				{
+					const StarId HIP = StelUtils::getLongLong(point);
+					if (HIP>0)
+					{
+						newObj = HIP <= NR_OF_HIP ? starMgr->searchHP(HIP)
+									  : starMgr->searchGaia(HIP);
+
+						if (!newObj)
+						{
+							qWarning().nospace() << "Error in asterism " << abbreviation << ": can't find star HIP " << HIP << "... skipping asterism";
+							return false;
+						}
+					}
+					else
+					{
+						qWarning().nospace() << "Error in asterism " << abbreviation << ": bad element: " << point.toString() << "... skipping asterism";
+						return false;
+					}
+				}
+				asterism.push_back(newObj);
+
 				if (!asterism.back())
 				{
 					asterism.pop_back();
 					qWarning().nospace() << "Error in asterism " << abbreviation <<
-								": can't find star " << (HIP <= NR_OF_HIP ? "HIP ":"DR3 ") << HIP <<
 								" (Skipping asterism. Install more catalogs?)";
 					return false;
 				}
