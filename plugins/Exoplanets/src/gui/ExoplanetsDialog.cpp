@@ -149,9 +149,10 @@ void ExoplanetsDialog::createDialogContent()
 	setWebsitesHtml();
 	if(gui!=Q_NULLPTR)
 	{
-		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-		ui->infoTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-		ui->websitesTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+		QString css = gui->getStelStyle().htmlStyleSheet;
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(css);
+		ui->infoTextBrowser->document()->setDefaultStyleSheet(css);
+		ui->websitesTextBrowser->document()->setDefaultStyleSheet(css);
 	}
 
 	populateDiagramsList();	
