@@ -161,7 +161,7 @@ public:
 	       const QString& objModelName,
 	       posFuncType _coordFunc,
 	       Orbit *anOrbitPtr,
-	       OsculatingFunctType *osculatingFunc,
+	       OsculatingFunctType *osculFunc,
 	       bool closeOrbit,
 	       bool hidden,
 	       bool hasAtmosphere,

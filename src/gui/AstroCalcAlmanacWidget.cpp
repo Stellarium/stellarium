@@ -32,6 +32,9 @@
 
 AstroCalcAlmanacWidget::AstroCalcAlmanacWidget(QWidget* parent)
 	: QWidget(parent)
+	, core(nullptr)
+	, specMgr(nullptr)
+	, localeMgr(nullptr)
 	, sunriseJD(0.)
 	, sunsetJD(0.)
 	, moonriseJD(0.)

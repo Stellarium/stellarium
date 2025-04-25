@@ -500,6 +500,8 @@ LandscapeOldStyle::LandscapeOldStyle(float _radius)
 	, drawGroundFirst(false)
 	, tanMode(false)
 	, calibrated(false)  // start with just the known entries.
+	, shaderVars()
+
 {
 	memorySize=sizeof(LandscapeOldStyle);
 }
@@ -1545,6 +1547,7 @@ LandscapeFisheye::LandscapeFisheye(float _radius)
 	, mapTexIllum(StelTextureSP())
 	, mapImage(nullptr)
 	, texFov(360.)
+	, shaderVars()
 {
 	memorySize=sizeof(LandscapeFisheye);
 }
@@ -1814,6 +1817,7 @@ LandscapeSpherical::LandscapeSpherical(float _radius)
 	, illumTexBottom(0.)
 	, mapImage(nullptr)
 	, bottomCapColor(-1.0f, 0.0f, 0.0f)
+	, shaderVars()
 {
 	memorySize=sizeof(LandscapeSpherical);
 }

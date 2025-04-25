@@ -61,6 +61,8 @@ ZodiacalLight::ZodiacalLight()
 	, intensityMinFov(0.25) // when zooming in further, Z.L. is no longer visible.
 	, intensityMaxFov(2.5) // when zooming out further, Z.L. is fully visible (when enabled).
 	, lastJD(-1.0E6)
+	, lambdaSun(0.0)
+	, shaderVars()
 {
 	setObjectName("ZodiacalLight");
 	fader = new LinearFader();

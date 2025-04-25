@@ -788,7 +788,7 @@ void NavStars::addExtraInfo(StelCore *core)
 			{
 				for (QVector<StelObjectP>::const_iterator itor = stars.constBegin();
 					itor != stars.constEnd();
-					itor++)
+					++itor)
 				{
 					StelObjectP p = *itor;
 					if (!p.isNull() && p->getEnglishName() == selectedObject->getEnglishName())

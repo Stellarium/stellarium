@@ -81,7 +81,7 @@ public:
 
 	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.),
 		method(Traditional), ra0(0.), ra1(0.), de0(0.), de1(0.), W0(0.), W1(0.),
-		currentAxisRA(0.), currentAxisDE(0.), currentAxisW(0.) {}
+		currentAxisRA(0.), currentAxisDE(0.), currentAxisW(0.), corrW(nullptr), corrOri(nullptr) {}
 	double period;          // [deprecated] (sidereal) rotation period [earth days]
 	double offset;          // [deprecated] rotation at epoch  [degrees]
 	double epoch;           // JDE (JD TT) of epoch for these elements
