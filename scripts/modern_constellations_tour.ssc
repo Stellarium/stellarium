@@ -3,7 +3,7 @@
 // License: Public Domain
 // Author: Alexander Wolf
 // Shortcut: Ctrl+D,1
-// Version: 1.4
+// Version: 1.5
 // Description: A tour of the modern constellations.
 
 include("common_objects.inc");
@@ -14,6 +14,8 @@ var skyculture = core.getSkyCulture();
 core.setSkyCulture("modern");
 GridLinesMgr.setFlagEquatorGrid(false);
 NebulaMgr.setFlagHints(false);
+StelSkyCultureMgr.setScreenLabelStyle("Native_Translated_Modern");
+ConstellationMgr.deselectConstellations();
 ConstellationMgr.setFlagArt(false);
 ConstellationMgr.setFlagBoundaries(false);
 ConstellationMgr.setFlagLines(false);

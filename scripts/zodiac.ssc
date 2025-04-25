@@ -1,17 +1,16 @@
 // Name: Zodiac
 // Author: Matthew Gates
 // License: Public Domain
-// Version: 1.2
+// Version: 1.3
 // Description: This script displays the constellations of the Zodiac.
 //              That means the constellations which lie along the line which
 //              the Sun traces across the celestial sphere over the course 
 //              of a year.
 //
 
-var constellations = new Array("Twins", "Crab", "Lion", "Maiden", "Scales", "Scorpion", "Serpent Bearer", "Archer", "Sea Goat", "Water Bearer", "Fishes", "Ram", "Bull");
+var constellations = new Array("Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpius", "Ophiuchus", "Sagittarius", "Capricornus", "Aquarius", "Pisces", "Aries", "Taurus");
 
-
-ConstellationMgr.setConstellationDisplayStyle(1);
+StelSkyCultureMgr.setScreenLabelStyle("Native_Translated_Modern");
 ConstellationMgr.deselectConstellations();
 
 core.setSkyCulture("modern");
