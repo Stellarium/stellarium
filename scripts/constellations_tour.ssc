@@ -2,7 +2,7 @@
 // Name: Constellations Tour
 // License: Public Domain
 // Author: Alexander Wolf
-// Version: 1.1
+// Version: 1.2
 // Description: A tour of the constellations of the selected sky culture.
 
 include("i18n.inc");
@@ -11,6 +11,8 @@ core.clear("starchart");
 GridLinesMgr.setFlagEquatorGrid(false);
 NebulaMgr.setFlagHints(false);
 var constellations = ConstellationMgr.getConstellationsEnglishNames();
+StelSkyCultureMgr.setScreenLabelStyle("Native_Translated_Modern");
+ConstellationMgr.deselectConstellations();
 ConstellationMgr.setFlagArt(false);
 ConstellationMgr.setFlagBoundaries(false);
 ConstellationMgr.setFlagLines(false);

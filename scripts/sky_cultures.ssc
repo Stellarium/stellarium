@@ -3,6 +3,7 @@
 // License: Public Domain
 // Author: Matthew Gates
 // Shortcut: Ctrl+D,2
+// Version: 1.1
 // Description: Look at each installed sky culture.
 //
 
@@ -12,6 +13,8 @@ core.setDate("2006:03:14T21:21:32");
 core.clear("deepspace");
 core.moveToRaDec("17h 53m 0s", "66d 25m 0s");
 StelMovementMgr.zoomTo(210, 5);
+StelSkyCultureMgr.setScreenLabelStyle("Native_Translated_Modern");
+ConstellationMgr.deselectConstellations();
 ConstellationMgr.setFlagBoundaries(true);
 ConstellationMgr.setFlagLabels(true);
 ConstellationMgr.setFlagLines(true);
