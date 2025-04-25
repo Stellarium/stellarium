@@ -23,7 +23,6 @@
 
 #include <QAbstractSpinBox>
 #include <QString>
-#include <cmath>
 
 //! @class AngleSpinBox
 //! A spin box for displaying/entering angular values.
@@ -48,6 +47,7 @@ public:
 		HMSSymbols,		//!< Hours, minutes and seconds, e.g. 12h 4' 6s"
 		DecimalDeg		//!< Decimal degrees, e.g. 180.06888
 	};
+	Q_ENUM(DisplayFormat);
 
 	//! @enum PrefixType
 	//! Determines how positive and negative values are indicated.
@@ -59,7 +59,8 @@ public:
 		Latitude,		//!< positive values have 'N' prefix, negative values have 'S' prefix.
  		Unknown
 	};
-	
+	Q_ENUM(PrefixType);
+
 	AngleSpinBox(QWidget* parent=Q_NULLPTR, DisplayFormat format=DMSSymbols, PrefixType prefix=Normal);
 	~AngleSpinBox() override;
 
