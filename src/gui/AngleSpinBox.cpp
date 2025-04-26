@@ -27,8 +27,6 @@
 #include <QLocale>
 #include <limits>
 #include <QRegularExpression>
-#include <cmath>
-
 
 AngleSpinBox::AngleSpinBox(QWidget* parent, DisplayFormat format, PrefixType prefix)
 	: QAbstractSpinBox(parent),
