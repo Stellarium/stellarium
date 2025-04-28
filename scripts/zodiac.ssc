@@ -6,15 +6,15 @@
 //              That means the constellations which lie along the line which
 //              the Sun traces across the celestial sphere over the course 
 //              of a year.
-//
+//              It ends with changes in skyculture, labeling style, 
+//              and shows constellation figures, boundaries and ecliptic. 
 
 var constellations = new Array("Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpius", "Ophiuchus", "Sagittarius", "Capricornus", "Aquarius", "Pisces", "Aries", "Taurus");
 
-StelSkyCultureMgr.setScreenLabelStyle("Native_Translated_Modern");
 ConstellationMgr.deselectConstellations();
-
-core.setSkyCulture("modern");
 core.clear("deepspace");
+core.setSkyCulture("modern");
+StelSkyCultureMgr.setScreenLabelStyle("Native_Translated_Modern");
 core.wait(1);
 
 core.setDate("2006:03:14T21:21:32");
