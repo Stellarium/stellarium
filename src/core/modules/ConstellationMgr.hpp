@@ -278,7 +278,7 @@ public slots:
 	void dumpHullAreas() const;
 
 	//! Create a list of stars within the convex hull of constellation
-	void starsInHullOf(const QString &englishName) const;
+	void starsInHullOf(const QString &englishName, const bool hipOnly=true) const;
 
 
 signals:

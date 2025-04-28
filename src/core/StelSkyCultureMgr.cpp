@@ -999,7 +999,6 @@ struct hullEntry
 	StelObjectP obj;
 	double x;
 	double y;
-	//double angle;
 };
 // simple function only for ordering from Sedgewick 1990, Algorithms in C (p.353) used for sorting.
 // The result fulfills the same purpose as some atan2, but with simpler operations.
@@ -1026,42 +1025,45 @@ SphericalRegionP StelSkyCultureMgr::makeConvexHull(const std::vector<StelObjectP
 	double raC, deC;
 	StelUtils::rectToSphe(&raC, &deC, projectionCenter);
 
-	// starLines contains pairs of vertices, and some stars occur more than twice.
+	// starLines contains pairs of vertices, and some stars (or DSO) occur more than twice.
 	QStringList idList;
-	QList<StelObjectP>uniqueStarList;
-	foreach(auto &star, starLines)
+	QList<StelObjectP>uniqueObjectList;
+	foreach(auto &obj, starLines)
 	{
-		if (!idList.contains(star->getID()))
+		if (!idList.contains(obj->getID()))
 		{
 			// Take this star into consideration. However, the "star"s may be pointers to the same star, we must compare IDs.
-			idList.append(star->getID());
-			uniqueStarList.append(star);
+			idList.append(obj->getID());
+			uniqueObjectList.append(obj);
 		}
 	}
-	foreach(auto &star, hullExtension)
+	foreach(auto &obj, hullExtension)
 	{
-		if (!idList.contains(star->getID()))
+		if (!idList.contains(obj->getID()))
 		{
 			// Take this star into consideration. However, the "star"s may be pointers to the same star, we must compare IDs.
-			idList.append(star->getID());
-			uniqueStarList.append(star);
+			idList.append(obj->getID());
+			uniqueObjectList.append(obj);
 		}
 	}
 
 	QList<hullEntry> hullList;
 	// Perspective (gnomonic) projection from Snyder 1987, Map Projections: A Working Manual (USGS).
-	foreach(auto &star, uniqueStarList)
+	foreach(auto &obj, uniqueObjectList)
 	{
 		hullEntry entry;
-		entry.obj=star;
+		entry.obj=obj;
 		double ra, de;
 		StelUtils::rectToSphe(&ra, &de, entry.obj->getJ2000EquatorialPos(core));
 		const double cosC=sin(deC)*sin(de) + cos(deC)*cos(de)*cos(ra-raC);
 		if (cosC<=0.) // distance 90° or more from projection center? Discard!
+		{
+			qWarning() << "Cannot include object" << entry.obj->getID() <<  "in convex hull: too far from projection center.";
 			continue;
+		}
 		const double kP=1./cosC;
-		entry.x=-kP*cos(de)*sin(ra-raC); // x must be inverted here.
-		entry.y=kP*(cos(deC)*sin(de)-sin(deC)*cos(de)*cos(ra-raC));
+		entry.x = -kP*cos(de)*sin(ra-raC); // x must be negative here.
+		entry.y =  kP*(cos(deC)*sin(de)-sin(deC)*cos(de)*cos(ra-raC));
 		hullList.append(entry);
 		//qDebug().noquote().nospace() << "[ " << entry.x << " " << entry.y << " " << ra*M_180_PI/15 << " " << de*M_180_PI << " (" << entry.obj->getID() << ") ]"; // allows Postscript graphics, looks OK.
 	}
@@ -1115,7 +1117,11 @@ SphericalRegionP StelSkyCultureMgr::makeConvexHull(const std::vector<StelObjectP
 	double th=0.0;
 	for (M=0; M<N; ++M)
 	{
+#if (QT_VERSION<QT_VERSION_CHECK(5,13,0))
+		std::swap(hullList[M], hullList[min]);
+#else
 		hullList.swapItemsAt(M, min);
+#endif
 
 		//// DUMP HULL LINE
 		//for(int i=0; i<hullList.count(); ++i)
@@ -1173,8 +1179,6 @@ SphericalRegionP StelSkyCultureMgr::makeConvexHull(const std::vector<StelObjectP
 		Vec3d pos=entry.obj->getJ2000EquatorialPos(core);
 		hullPoints.append(pos);
 	}
-	// With perspective x inverted, we don't need to reverse.
-	//std::reverse(hullPoints.begin(), hullPoints.end());
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	SphericalPolygon *hull=new SphericalPolygon(hullPoints.toVector());
 #else

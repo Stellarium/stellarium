@@ -1444,21 +1444,48 @@ void ConstellationMgr::dumpHullAreas() const
 }
 
 //! Create a list of stars within the convex hull of constellation
-void ConstellationMgr::starsInHullOf(const QString &englishName) const
+void ConstellationMgr::starsInHullOf(const QString &englishName, const bool hipOnly) const
 {
 	static StelCore *core=StelApp::getInstance().getCore();
 	StelObjectP constell=searchByName(englishName);
-	//Constellation *cst=searchByName(englishName)->getRegion();
 	if (!constell)
 	{
 		qWarning() << "Constellation" << englishName << "not found, not creating star list";
 		return;
 	}
 
-	//SphericalRegionP region=constell->convexHull;
-	//QList<StelObjectP> starList=GETSTELMODULE(StarMgr)->searchWithin(qobject_cast<Constellation>(constell)->convexHull, core, true);
-	QList<StelObjectP> starList=GETSTELMODULE(StarMgr)->searchWithin(constell->getRegion(), core, true);
-	qInfo() << "Stars within the convex hull of" << englishName;
+	QList<StelObjectP> starList=GETSTELMODULE(StarMgr)->searchWithin(constell->getRegion(), core, hipOnly);
+
+	// Add the actual hull-defining stars, but only if they are not already included. Unfortunately, we need to test via IDs!
+	Constellation* constel=reinterpret_cast<Constellation*>(constell.data());
+	foreach(auto &star, constel->constellation)
+	{
+		QString id=star->getID();
+		bool wanted=true;
+		foreach (auto obj, starList)
+			if (obj->getID()==id)
+			{
+				wanted=false;
+				break;
+			}
+		if (wanted)
+			starList.append(star);
+	}
+	foreach(auto &star, constel->hullExtension)
+	{
+		QString id=star->getID();
+		bool wanted=true;
+		foreach (auto obj, starList)
+			if (obj->getID()==id)
+			{
+				wanted=false;
+				break;
+			}
+		if (wanted)
+			starList.append(star);
+	}
+
+	qInfo() << "Stars within the convex hull (" << constell->getRegion()->getArea()*(M_180_PI*M_180_PI) << " sq degrees) of" << englishName;
 	foreach(const auto &star, starList)
 	{
 		double ra, dec;
