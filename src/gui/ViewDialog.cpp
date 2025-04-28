@@ -562,6 +562,9 @@ void ViewDialog::createDialogContent()
 	ui->labelInfoLabel->hide();
 
 	configureSkyCultureCheckboxes();
+	StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	connect(scMgr, &StelSkyCultureMgr::screenLabelStyleChanged, this, &ViewDialog::configureSkyCultureCheckboxes);
+	connect(scMgr, &StelSkyCultureMgr::infoLabelStyleChanged, this, &ViewDialog::configureSkyCultureCheckboxes);
 
 	connect(ui->infoLabelNativeCheckBox           , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
 	connect(ui->infoLabelPronounceCheckBox        , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
@@ -1167,7 +1170,7 @@ void ViewDialog::configureSkyCultureCheckboxes()
 
 	ui->infoLabelNativeCheckBox           ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Native));
 	ui->infoLabelPronounceCheckBox        ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Pronounce));
-	ui->infoLabelTransliterationCheckBox         ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Translit));
+	ui->infoLabelTransliterationCheckBox  ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Translit));
 	ui->infoLabelTranslationCheckBox      ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Translated));
 	ui->infoLabelIPACheckBox              ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::IPA));
 	ui->infoLabelModernCheckBox           ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Modern));
