@@ -324,6 +324,10 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/Dialog.cpp
           gui/MapWidget.hpp
           gui/MapWidget.cpp
+          gui/SkycultureMapGraphicsView.hpp
+          gui/SkycultureMapGraphicsView.cpp
+          gui/SkyculturePolygonItem.hpp
+          gui/SkyculturePolygonItem.cpp
           gui/AngleSpinBox.hpp
           gui/AngleSpinBox.cpp
           gui/LocationDialog.hpp
