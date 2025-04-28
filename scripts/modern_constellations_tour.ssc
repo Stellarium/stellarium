@@ -10,10 +10,11 @@ include("common_objects.inc");
 include("i18n.inc");
 
 core.clear("starchart");
-var skyculture = core.getSkyCulture();
-core.setSkyCulture("modern");
 GridLinesMgr.setFlagEquatorGrid(false);
 NebulaMgr.setFlagHints(false);
+var skyculture = core.getSkyCulture();
+core.setSkyCulture("modern");
+var oldScreenLabelStyle=StelSkyCultureMgr.getScreenLabelStyle();
 StelSkyCultureMgr.setScreenLabelStyle("Native_Translated_Modern");
 ConstellationMgr.deselectConstellations();
 ConstellationMgr.setFlagArt(false);
@@ -43,6 +44,7 @@ for (i=0; i<constellations.length; i++)
 	core.wait(10);
 	ConstellationMgr.setFlagArt(false);
 }
+StelSkyCultureMgr.setScreenLabelStyle(oldScreenLabelStyle);
 core.setSkyCulture(skyculture);
 core.setGuiVisible(true);
 core.clear("natural");

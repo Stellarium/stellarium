@@ -11,6 +11,7 @@ core.clear("starchart");
 GridLinesMgr.setFlagEquatorGrid(false);
 NebulaMgr.setFlagHints(false);
 var constellations = ConstellationMgr.getConstellationsEnglishNames();
+var oldScreenLabelStyle=StelSkyCultureMgr.getScreenLabelStyle();
 StelSkyCultureMgr.setScreenLabelStyle("Native_Translated_Modern");
 ConstellationMgr.deselectConstellations();
 ConstellationMgr.setFlagArt(false);
@@ -41,5 +42,6 @@ for (i=0; i<constellations.length; i++)
 	ConstellationMgr.setFlagArt(false);
 }
 
+StelSkyCultureMgr.setScreenLabelStyle(oldScreenLabelStyle);
 core.setGuiVisible(true);
 core.clear("natural");
