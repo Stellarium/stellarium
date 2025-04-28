@@ -4903,28 +4903,6 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <item row="0" column="1">
-           <widget class="QTextBrowser" name="skyCultureTextBrowser">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAsNeeded</enum>
-            </property>
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="openExternalLinks">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0" rowspan="3">
            <widget class="QListWidget" name="culturesListWidget">
             <property name="sizePolicy">
@@ -5452,6 +5430,50 @@
             </layout>
            </widget>
           </item>
+          <item row="0" column="1">
+           <widget class="QStackedWidget" name="skyCultureStackedWidget">
+            <widget class="QWidget" name="skyCulturePage_map">
+             <layout class="QGridLayout" name="gridLayout_24">
+              <item row="0" column="0">
+               <widget class="SkycultureMapGraphicsView" name="skyCultureMapGraphicsView"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QSlider" name="skyCultureTimeSlider">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="skyCulturePage_browser">
+             <layout class="QGridLayout" name="gridLayout_25">
+              <item row="0" column="0">
+               <widget class="QTextBrowser" name="skyCultureTextBrowser">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAsNeeded</enum>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="openExternalLinks">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
          </layout>
         </widget>
         <widget class="QWidget" name="page_surveys">
@@ -5529,6 +5551,11 @@
    <class>AngleSpinBox</class>
    <extends>QSpinBox</extends>
    <header>AngleSpinBox.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>SkycultureMapGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header>SkycultureMapGraphicsView.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -5615,7 +5642,6 @@
   <tabstop>pushButtonAddRemoveLandscapes</tabstop>
   <tabstop>page_skyculture</tabstop>
   <tabstop>culturesListWidget</tabstop>
-  <tabstop>skyCultureTextBrowser</tabstop>
   <tabstop>useAsDefaultSkyCultureCheckBox</tabstop>
   <tabstop>skyCultureNamesStyleComboBox</tabstop>
   <tabstop>nativePlanetNamesCheckBox</tabstop>
