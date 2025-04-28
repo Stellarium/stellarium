@@ -200,13 +200,7 @@ public slots:
 	StelSkyCulture::BoundariesType getCurrentSkyCultureBoundariesType() const;
 
 	//! Get the classification index for the current sky culture
-	//! Config option: info/classification
-	//! Possible values:
-	//! - scientific (1)
-	//! - traditional (2; using by default)
-	//! - personal (3)
-	//! - single (4)
-	int getCurrentSkyCultureClassificationIdx() const;
+	StelSkyCulture::CLASSIFICATION getCurrentSkyCultureClassificationIdx() const;
 
 	//! @return a localized HTML description of the classification for the current sky culture
 	QString getCurrentSkyCultureHtmlClassification() const;
@@ -244,6 +238,8 @@ public slots:
 
 	//! Returns the screen labeling setting for the currently active skyculture
 	StelObject::CulturalDisplayStyle getScreenLabelStyle() const;
+	//! Scripting version
+	QString getScreenLabelStyleString() const;
 	//! Sets the screen labeling setting for the currently active skyculture
 	void setScreenLabelStyle(const StelObject::CulturalDisplayStyle style);
 	//! scripting version
@@ -251,6 +247,8 @@ public slots:
 
 	//! Returns the InfoString labeling setting for the currently active skyculture
 	StelObject::CulturalDisplayStyle getInfoLabelStyle() const;
+	//! Scripting version
+	QString getInfoLabelStyleString() const;
 	//! sets the InfoString labeling setting for the currently active skyculture
 	void setInfoLabelStyle(const StelObject::CulturalDisplayStyle style);
 	//! scripting version

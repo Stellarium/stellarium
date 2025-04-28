@@ -359,7 +359,7 @@ StelSkyCulture::BoundariesType StelSkyCultureMgr::getCurrentSkyCultureBoundaries
 	return currentSkyCulture.boundariesType;
 }
 
-int StelSkyCultureMgr::getCurrentSkyCultureClassificationIdx() const
+StelSkyCulture::CLASSIFICATION StelSkyCultureMgr::getCurrentSkyCultureClassificationIdx() const
 {
 	return currentSkyCulture.classification;
 }
@@ -800,6 +800,14 @@ StelObject::CulturalDisplayStyle StelSkyCultureMgr::getScreenLabelStyle() const
 	else
 		return StelObject::CulturalDisplayStyle::Translated;
 }
+// Scripting version
+QString StelSkyCultureMgr::getScreenLabelStyleString() const
+{
+	StelObject::CulturalDisplayStyle style=getScreenLabelStyle();
+	return QVariant::fromValue(style).toString();
+}
+
+
 // Sets the screen labeling setting for the currently active skyculture
 void StelSkyCultureMgr::setScreenLabelStyle(const StelObject::CulturalDisplayStyle style)
 {
@@ -831,6 +839,12 @@ StelObject::CulturalDisplayStyle StelSkyCultureMgr::getInfoLabelStyle() const
 		return val.value<StelObject::CulturalDisplayStyle>();
 	else
 		return StelObject::CulturalDisplayStyle::Translated;
+}
+// Scripting version
+QString StelSkyCultureMgr::getInfoLabelStyleString() const
+{
+	StelObject::CulturalDisplayStyle style=getInfoLabelStyle();
+	return QVariant::fromValue(style).toString();
 }
 
 // Sets the InfoString Labeling setting for the currently active skyculture
