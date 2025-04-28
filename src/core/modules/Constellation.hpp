@@ -184,8 +184,10 @@ private:
 	//! List of coordinates forming the segments of a dark constellation (outlining dark cloud in front of the Milky Way)
 	//! If this is not null, the constellation is a "dark constellation"
 	std::vector<Vec3d> dark_constellation;
+	//! List of additional stars defining the hull together with the stars from constellation
+	std::vector<StelObjectP> hullExtension;
 	//! In case this describes a single-star constellation (i.e. just one line segment that starts and ends at the same star),
-	//! or we have a line segment with such single star somewhere within the constellation,
+	//! or we have a line segment with such single star (start==end) somewhere within the constellation,
 	//! we will draw a circle with this opening radius.
 	double singleStarConstellationRadius;
 
