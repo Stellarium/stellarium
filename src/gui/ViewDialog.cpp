@@ -1187,12 +1187,12 @@ void ViewDialog::updateSkyCultureInfoStyleFromCheckboxes()
 	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
 
 	scMgr->setInfoLabelStyle(static_cast<StelObject::CulturalDisplayStyle>(
-				int(ui->infoLabelNativeCheckBox     ->isChecked()) << 5 |
-				int(ui->infoLabelPronounceCheckBox  ->isChecked()) << 4 |
-				int(ui->infoLabelTransliterationCheckBox   ->isChecked()) << 3 |
-				int(ui->infoLabelTranslationCheckBox->isChecked()) << 2 |
-				int(ui->infoLabelIPACheckBox        ->isChecked()) << 1 |
-				int(ui->infoLabelModernCheckBox     ->isChecked())
+				int(ui->infoLabelNativeCheckBox         ->isChecked()) << 5 |
+				int(ui->infoLabelPronounceCheckBox      ->isChecked()) << 4 |
+				int(ui->infoLabelTransliterationCheckBox->isChecked()) << 3 |
+				int(ui->infoLabelTranslationCheckBox    ->isChecked()) << 2 |
+				int(ui->infoLabelIPACheckBox            ->isChecked()) << 1 |
+				int(ui->infoLabelModernCheckBox         ->isChecked())
 				));
 }
 
