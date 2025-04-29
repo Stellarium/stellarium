@@ -104,7 +104,7 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 
 	if (!polylines[0].toArray().isEmpty() && polylines[0].toArray()[0].isArray())
 	{
-		qWarning().nospace() << "Coordinate array detected for asterism" << id << ". This is obsolete. Skipping.";
+		qWarning().nospace() << "Coordinate array detected for asterism" << id << ". This is obsolete. Reformulate with Gaia stars. Skipping.";
 		//if (polylines[0].toArray()[0].toArray().size() != 2)
 		//{
 		//	qWarning().nospace() << "Bad asterism point entry for asterism " << id
