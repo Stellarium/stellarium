@@ -15195,6 +15195,10 @@ msgid "Seat Flags"
 msgstr "Sätesflaggor"
 
 #. This word is used in Chinese star names, e.g. "Wang Liang Added IX"
+#. Note that the English source starts with a space. If you remove it in your
+#. translation, you'll get no space between it and the preceding word,
+#. something like "Wang LiangAdded IX" on the screen in Stellarium, which may
+#. or may not be suitable for your locale.
 msgctxt "chinese skycultures"
 msgid " Added"
 msgstr " lades till"
@@ -35153,11 +35157,11 @@ msgstr "Harrington 7"
 
 #. Modern asterism
 msgid "Kemble's Cascade (Kemble 1)"
-msgstr "Kemble's Cascade (Kemble 1)"
+msgstr "Kembles kaskad (Kemble 1)"
 
 #. Modern asterism
 msgid "Kemble's Kite (Kemble 3)"
-msgstr "Kemble's Kite (Kemble 3)"
+msgstr "Kembles drake (Kemble 3)"
 
 #. Modern asterism
 msgid "Mini-Cassiopeia (Kemble 2)"
