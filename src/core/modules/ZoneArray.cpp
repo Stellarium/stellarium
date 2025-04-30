@@ -591,7 +591,7 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 
 template<class Star>
 void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly,
-						  QList<StelObjectP > &result)
+						  QList<StelObjectP > &result) const
 {
 	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	const SpecialZoneData<Star> *const z = getZones()+index;
@@ -614,7 +614,7 @@ void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const
 		}
 		if (region->contains(tmp))
 		{
-			qDebug() << "Region match: " <<  s->getHip() << "(Index:" << index << ")";
+			qDebug() << "Region match: " <<  s->getHip() << "(Index (Zone):" << index << ")";
 			// Exclude non-HIP?
 			if (hipOnly && s->getHip()==0)
 				continue;
@@ -622,7 +622,7 @@ void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const
 				result.push_back(s->createStelObject(this,z));
 		}
 		else
-			qDebug() << "NO Region match: " <<  s->getHip() << "(Index:" << index << ")";
+			qDebug() << "NO Region match: " <<  s->getHip() << "(Index (Zone):" << index << ")";
 	}
 }
 

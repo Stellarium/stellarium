@@ -1532,38 +1532,50 @@ QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const S
 	if (!getFlagStars())
 		return result;
 
-	qDebug() << "maxGeodesicGridLevel (should be 8):" << maxGeodesicGridLevel << ", " << gridLevels << "gridLevels";
-
 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxGeodesicGridLevel)->search(region->getBoundingSphericalCaps(),maxGeodesicGridLevel);
 
+	// Just some temporary debug output.
+	geodesic_search_result->print();
 
-	double withParallax = core->getUseParallax() * core->getParallaxFactor();
-	Vec3d diffPos(0., 0., 0.);
-	if (withParallax) {
-		diffPos = core->getParallaxDiff(core->getJDE());
+	// prepare for aberration: Explan. Suppl. 2013, (7.38)
+	const bool withAberration=core->getUseAberration();
+	Vec3d vel(0.);
+	if (withAberration)
+	{
+		vel = core->getAberrationVec(core->getJDE());
 	}
 
-	// Iterate over the stars inside the triangles
-	for (auto* z : gridLevels)
+	qDebug() << "We have" << gridLevels.count() << " ZoneArrays in gridLevels at maxGeodesicGridLevel:" << maxGeodesicGridLevel;
+	// Draw all the stars of all the selected zones
+	for (const  auto* z : std::as_const(gridLevels))
 	{
-		qDebug() << "Level:" << z->level << z->fname << z->mag_min;
-		//qDebug() << "search inside(" << z->first << "):";
+		//lastMaxSearchLevel = z->level;
+
+		qDebug() << "Z level=" << z->level << "mag_min=" << z->mag_min;
+
 		int zone;
-		for (GeodesicSearchInsideIterator it(*geodesic_search_result,z->level);(zone = it.next()) >= 0;)
+		double withParallax = core->getUseParallax() * core->getParallaxFactor();
+		Vec3d diffPos(0., 0., 0.);
+		if (withParallax) {
+			diffPos = core->getParallaxDiff(core->getJDE());
+		}
+
+		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 		{
-			qDebug() << "Zone " << zone;
+			qDebug() << "Inside: Zone z->fname:" << z->fname << "Level z=" << z->level << "zone=" << zone;
 			z->searchWithin(core, zone, region, withParallax, diffPos, hipOnly, result);
 		}
-		//qDebug() << StelUtils::getEndLineChar() << "search border(" << it->first << "):";
-		for (GeodesicSearchBorderIterator it(*geodesic_search_result,z->level);(zone = it.next()) >= 0;)
+		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 		{
-			qDebug() << "Border " << zone;
+			qDebug() << "Border: Zone z->fname:" << z->fname << "Level z=" << z->level << "zone=" << zone;
 			z->searchWithin(core, zone, region, withParallax, diffPos, hipOnly, result);
 		}
-		// always search the last zone because it is a global zone
-		qDebug() << "Global " << zone << "20<<(z->level<<1)=" << (20<<(z->level<<1));
+		// always check the last zone because it is a global zone
+		// AND WHY IS IT THE ONLY ZONE ACTUALLY SEARCHED?
+		qDebug() << "Global 20<<(z->level<<1)=" << (20<<(z->level<<1));
 		z->searchWithin(core, (20<<(z->level<<1)), region, withParallax, diffPos, hipOnly, result);
 	}
+
 	qInfo() << "Region contains" << result.length() << "entries";
 	return result;
 }
