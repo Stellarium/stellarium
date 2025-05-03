@@ -182,7 +182,6 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool p
 	}
 
 	//qDebug() << "Convex hull for " << englishName;
-	std::vector<StelObjectP>hullExtension;
 	if (data.contains("hull_extension"))
 	{
 		const QJsonArray &hullExtraArray=data["hull_extension"].toArray();
