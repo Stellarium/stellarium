@@ -431,14 +431,28 @@ static bool isClipped(int n, double (*pos)[4])
     return false;
 }
 
-
-void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
-                          const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback)
+bool HipsSurvey::bindTextures(const HipsTile& tile)
 {
 	constexpr int colorTexUnit = 0;
 	constexpr int normalTexUnit = 2;
 	constexpr int horizonTexUnit = 4;
 
+	if (normals && !tile.normalTexture && !tile.normalAllsky) return false;
+	if (horizons && !tile.horizonTexture && !tile.horizonAllsky) return false;
+
+	if (!tile.texture->bind(colorTexUnit) && (!tile.allsky || !tile.allsky->bind(colorTexUnit)))
+		return false;
+	if (normals && tile.normalTexture && !tile.normalTexture->bind(normalTexUnit) && (!tile.normalAllsky || !tile.normalAllsky->bind(normalTexUnit)))
+		return false;
+	if (horizons && tile.horizonTexture && !tile.horizonTexture->bind(horizonTexUnit) && (!tile.horizonAllsky || !tile.horizonAllsky->bind(horizonTexUnit)))
+		return false;
+
+	return true;
+}
+
+void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
+                          const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback)
+{
 	Vec3d pos;
 	Mat3d mat3;
 	const Vec2d uv[4] = {Vec2d(0, 0), Vec2d(0, 1), Vec2d(1, 0), Vec2d(1, 1)};
@@ -501,15 +515,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	tile = getTile(order, pix);
 
 	if (!tile) return;
-	if (normals && !tile->normalTexture && !tile->normalAllsky) return;
-	if (horizons && !tile->horizonTexture && !tile->horizonAllsky) return;
-
-	if (!tile->texture->bind(colorTexUnit) && (!tile->allsky || !tile->allsky->bind(colorTexUnit)))
-		return;
-	if (normals && tile->normalTexture && !tile->normalTexture->bind(normalTexUnit) && (!tile->normalAllsky || !tile->normalAllsky->bind(normalTexUnit)))
-		return;
-	if (horizons && tile->horizonTexture && !tile->horizonTexture->bind(horizonTexUnit) && (!tile->horizonAllsky || !tile->horizonAllsky->bind(horizonTexUnit)))
-		return;
+	if (!bindTextures(*tile)) return;
 
 	if (tile->texFader.state() == QTimeLine::NotRunning && tile->texFader.currentValue() == 0.0)
 		tile->texFader.start();
