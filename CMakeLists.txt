@@ -317,7 +317,7 @@ IF(WIN32)
           SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Og") 
           # MinGW clang compiler does not have a these flag, but MinGW gcc requires MinGW-specific threading, version number storage
           IF(NOT ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang"))
-               SET(STEL_MINGW_FLAGS "${STEL_MINGW_FLAGS} -fident -mthreads -s")
+               SET(STEL_MINGW_FLAGS "${STEL_MINGW_FLAGS} -fident -mthreads")
           ENDIF()
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_GCC_C_FLAGS} ${STEL_MINGW_FLAGS}")
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_GCC_CXX_FLAGS} ${STEL_MINGW_FLAGS}")
