@@ -12,7 +12,7 @@ The sidereal zodiac is an imaginary belt of 360 degrees (like the tropical zodia
 
 In stellarium, we show Rāśi constellations attached to the corresponding asterisms, and not as divisions of the ecliptic offset away from their original locations to account for precession.
 
-In traditional astronomy there are two systems of measuring time - Lunar Calender & Solar calender. In both cases one year is divided into 12 months or "māsā". Name of the solar months originated from these constellation' names.
+In traditional astronomy there are two systems of measuring time - Lunar Calendar & Solar calendar. In both cases one year is divided into 12 months or "māsā". Name of the solar months originated from these constellation' names.
 
 ### <notr>Nakṣatra (नक्षत्रम्)</notr>
 
