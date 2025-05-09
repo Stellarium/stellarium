@@ -75,7 +75,7 @@ public:
 	//! - PlainText
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
-	//! @return a QString containing an HMTL encoded description of the Telescope.
+	//! @return a QString containing an HTML encoded description of the Telescope.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
 	QString getType(void) const override {return TELESCOPECLIENT_TYPE;}
 	QString getObjectType(void) const override {return N_("telescope");}
