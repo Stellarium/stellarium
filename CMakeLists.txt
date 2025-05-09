@@ -313,7 +313,7 @@ IF(WIN32)
      IF(NOT MSVC)
           # MinGW requires enabling of exceptions
           SET(STEL_MINGW_FLAGS "-fexceptions")
-          # -Og and -s removes symbols an relocation information as otherwise the ordinal gets out of maximum 16-bit range.
+          # -Og removes some symbols as otherwise the ordinal exceeds the maximum of the 16-bit range.
           SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Og") 
           # MinGW clang compiler does not have a these flag, but MinGW gcc requires MinGW-specific threading, version number storage
           IF(NOT ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang"))
