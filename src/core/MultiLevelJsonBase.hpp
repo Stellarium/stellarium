@@ -53,6 +53,7 @@ public:
 	~MultiLevelJsonBase() override;
 
 	//! Return the short name for this image to be used in the loading bar.
+	//! Note: ShortName should be used in the same form by NebulaTexturesDialog::get_aTile (NebulaTextures Plugin).
 	QString getShortName() const override {return qc_(shortName, "dataset short name");}
 
 	//! Return true if an error occurred while loading the data.
@@ -68,6 +69,9 @@ public:
 	//! Schedule a deletion for all the children.
 	//! It will practically occur after the deletionDelay has expired.
 	void scheduleChildsDeletion();
+
+	//! Return the list of all the created subtiles for this tile
+	QList<MultiLevelJsonBase*> getSubTiles(){return subTiles;}
 
 private slots:
 	//! Called when the download for the JSON file terminated.
