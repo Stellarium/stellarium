@@ -3,7 +3,230 @@
   "region": "Southern Asia",
   "classification": ["traditional"],
   "fallback_to_international_names": false,
+  "asterisms_comment": "G. Zotti repeated entries from constellation list below, reformulated to allow display as asterisms. English translation taken from Wikipedia",
   "asterisms": [
+  
+      {
+      "id": "AST indian Aśv",
+      "lines": [[8832, 8903]],
+      "common_name": {"english": "The Horsemen", "native": "Aśvinī"}
+    },
+    {
+      "id": "AST indian Bhar",
+      "lines": [[12719, 13061, 13209]],
+      "common_name": {"english": "The Bearer", "native": "Bharanī"}
+    },
+    {
+      "id": "AST indian Kṛt",
+      "lines": [[17851, 17847, 17702, 17608, 17499, 17531, 17573, 17579]],
+      "common_name": {"english": "To Cut", "native": "Kṛttikā"}
+    },
+    {
+      "id": "AST indian Roh",
+      "lines": [[21421, 21421]],
+      "common_name": {"english": "Radiant Maiden", "native": "Rohiṇī"}
+    },
+    {
+      "id": "AST indian Mṛg",
+      "lines": [[26207, 26176, 26366]],
+      "image": {
+        "file": "illustrations/mRgashIrSha.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [344, 213], "hip": 25336},
+          {"pos": [255, 306], "hip": 26311},
+          {"pos": [278, 390], "hip": 24436}
+        ]
+      },
+      "common_name": {"english": "The Deer's head", "native": "Mṛgaśiras"}
+    },
+    {
+      "id": "AST indian Ārd",
+      "lines": [[27989, 27989]],
+      "common_name": {"english": "The Moist One", "native": "Ārdrā"}
+    },
+    {
+      "id": "AST indian PVas",
+      "lines": [[36850, 37826]],
+      "common_name": {"english": "Return of the Light", "native": "Punarvasū"}
+    },
+    {
+      "id": "AST indian Puṣ",
+      "lines": [[42911, 41822]],
+      "common_name": {"english": "The Nourisher", "native": "Puṣya"}
+    },
+    {
+      "id": "AST indian Aśl",
+      "lines": [[43109, 42313, 42402, 42799, 43234]],
+      "image": {
+        "file": "illustrations/hydra.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [26, 491], "hip": 64962},
+          {"pos": [111, 149], "hip": 55434},
+          {"pos": [401, 33], "hip": 43813}
+        ]
+      },
+      "common_name": {"english": "The Embrace", "native": "Aśleṣa"}
+    },
+    {
+      "id": "AST indian Magh",
+      "lines": [[49669, 49669]],
+      "common_name": {"english": "The Mighty", "native": "Maghā"}
+    },
+    {
+      "id": "AST indian PPhā",
+      "lines": [[54872, 54879]],
+      "common_name": {"english": "The Former Reddish One", "native": "Pūrva phālgunī"}
+    },
+    {
+      "id": "AST indian UPhā",
+      "lines": [[57632, 57565]],
+      "common_name": {"english": "The Latter Reddish One", "native": "Uttara phālgunī"}
+    },
+    {
+      "id": "AST indian Hasta",
+      "lines": [[60965, 61359], [60965, 59803, 59316, 59199], [59316, 61359]],
+      "image": {
+        "file": "illustrations/hasta.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [306, 430], "hip": 60965},
+          {"pos": [93, 435], "hip": 59803},
+          {"pos": [312, 14], "hip": 61359}
+        ]
+      },
+      "common_name": {"english": "The Hand", "native": "Hasta"}
+    },
+    {
+      "id": "AST indian Chitr",
+      "lines": [[65474, 65474]],
+      "common_name": {"english": "The Bright One", "native": "Chitrā"}
+    },
+    {
+      "id": "AST indian Svā",
+      "lines": [[69673, 69673]],
+      "common_name": {"english": "The Independent One", "native": "Svātī"}
+    },
+    {
+      "id": "AST indian Viś",
+      "lines": [[76333, 74785, 72622], [74785, 74392]],
+      "image": {
+        "file": "illustrations/vishAkhA.png",
+        "size": [232, 218],
+        "anchors": [
+          {"pos": [101, 163], "hip": 72622},
+          {"pos": [14, 63], "hip": 73714},
+          {"pos": [193, 59], "hip": 74785}
+        ]
+      },
+      "common_name": {"english": "Branching Out", "native": "Viśākhā"}
+    },
+    {
+      "id": "AST indian Anur",
+      "lines": [[78820, 78401, 78265]],
+      "common_name": {"english": "Following Rādhā", "native": "Anurādhā"}
+    },
+    {
+      "id": "AST indian Jyeṣ",
+      "lines": [[80112, 80763, 81266]],
+      "common_name": {"english": "The Eldest", "native": "Jyeṣṭhā"}
+    },
+    {
+      "id": "AST indian Mūl",
+      "lines": [[82396, 82545, 82729, 84143, 86228, 87073, 86670, 85927, 85696]],
+      "image": {
+        "file": "illustrations/mUlam.png",
+        "size": [271, 243],
+        "anchors": [
+          {"pos": [234, 32], "hip": 82396},
+          {"pos": [50, 94], "hip": 85927},
+          {"pos": [85, 216], "hip": 86228}
+        ]
+      },
+      "common_name": {"english": "The Root", "native": "Mūla"}
+    },
+    {
+      "id": "AST indian PAṣ",
+      "lines": [[90185, 89931]],
+      "common_name": {"english": "The Former Invincible", "native": "Pūrvāṣāḍhā"}
+    },
+    {
+      "id": "AST indian UAṣ",
+      "lines": [[92855, 93506]],
+      "common_name": {"english": "The Latter Invincible", "native": "Uttarāṣāḍhā"}
+    },
+    {
+      "id": "AST indian Abh",
+      "lines": [[91926, 91262, 91971]],
+      "common_name": {"english": "The Victorious", "native": "Abhijit"}
+    },
+    {
+      "id": "AST indian Śra",
+      "lines": [[98036, 97649, 97278]],
+      "image": {
+        "file": "illustrations/shravaNa.png",
+        "size": [232, 218],
+        "anchors": [
+          {"pos": [130, 100], "hip": 97649},
+          {"pos": [130, 22], "hip": 97278},
+          {"pos": [140, 181], "hip": 98036}
+        ]
+      },
+      "common_name": {"english": "To Hear", "native": "Śravaṇa"}
+    },
+    {
+      "id": "AST indian Dhani",
+      "lines": [[102281, 101958]],
+      "image": {
+        "file": "illustrations/dhaniShThA.png",
+        "size": [232, 218],
+        "anchors": [
+          {"pos": [32, 101], "hip": 102532},
+          {"pos": [108, 58], "hip": 101958},
+          {"pos": [153, 115], "hip": 101769}
+        ]
+      },
+      "common_name": {"english": "Wealthiest", "native": "Dhaniṣṭhā"}
+    },
+    {
+      "id": "AST indian Śata",
+      "lines": [[110395, 110395]],
+      "common_name": {"english": "A Hundred Physicians", "native": "Śatabhiṣa"}
+    },
+    {
+      "id": "AST indian PBhā",
+      "lines": [[113881, 113963]],
+      "image": {
+        "file": "illustrations/proShThapada.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [219, 52], "hip": 113881},
+          {"pos": [233, 379], "hip": 113963},
+          {"pos": [300, 108], "hip": 112748}
+        ]
+      },
+      "common_name": {"english": "The Former Blessed Feet", "native": "Pūrva bhādrapada"}
+    },
+    {
+      "id": "AST indian UBhā",
+      "lines": [[1067, 667]],
+      "image": {
+        "file": "illustrations/proShThapada.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [219, 52], "hip": 667},
+          {"pos": [233, 379], "hip": 1067},
+          {"pos": [313, 130], "hip": 118131}
+        ]
+      },
+      "common_name": {"english": "The latter Blessed Feet", "native": "Uttara bhādrapada"}
+    },
+    {
+      "id": "AST indian Rev",
+      "lines": [[5737, 5737]],
+      "common_name": {"english": "Prosperous", "native": "Revatī"}
+    }
   ],
   "constellations": [
     {
@@ -431,7 +654,7 @@
     {
       "id": "CON indian C01",
       "lines": [[26727, 26311, 25930], [29038, 27913], [28614, 27989, 26727, 27366], [24436, 24674, 25281, 25930, 25336, 26207, 27989], [25336, 22449, 22549, 22730, 23123], [22449, 22509, 22845], [29038, 28614], [30419, 29038], [26727, 26549, 26237, 26241]],
-      "common_name": {"english": ""}
+      "common_name": {"english": "C01"}
     },
     {
       "id": "CON indian Shim",
@@ -510,45 +733,45 @@
     }
   ],
   "common_names": {
-    "HIP 746": [{"english": "Jamadagni", "translators_comments": "A great sage (Caph)"}],
-    "HIP 5737": [{"english": "Revatī"}],
-    "HIP 11767": [{"english": "Dhruva", "translators_comments": "A hero. Literally: Steadfast one; Fixed (Pole star)"}],
-    "HIP 21421": [{"english": "Rohiṇī", "translators_comments": "Red (Aldebaran)"}],
-    "HIP 24436": [{"english": "Vānrājā", "translators_comments": "Monarch (Rigel)"}],
-    "HIP 24608": [{"english": "Bramha-hṛdaya", "translators_comments": "Heart of the Creator (Capella)"}],
-    "HIP 25336": [{"english": "Kārtikeya", "translators_comments": "Son of lord Shiva (Bellatrix)"}],
-    "HIP 25428": [{"english": "Agni", "translators_comments": "Fire (Elnath)"}],
-    "HIP 25930": [{"english": "Chitralekhā", "translators_comments": "As beautiful as a picture (Mintaka)"}],
-    "HIP 26311": [{"english": "Aniruddha", "translators_comments": "Unbounded (Alnilam)"}],
-    "HIP 26727": [{"english": "Uṣā", "translators_comments": "Dawn (Alnitak)"}],
-    "HIP 27366": [{"english": "Kārtavīrya"}],
-    "HIP 27989": [{"english": "Ārdrā", "translators_comments": "Moist (Betelgeuse)"}],
-    "HIP 30438": [{"english": "Agastya", "translators_comments": "A great sage who went south (Canopus)"}],
-    "HIP 31681": [{"english": "Anala", "translators_comments": "Fire (Alhena)"}],
-    "HIP 32349": [{"english": "Lubdhaka", "translators_comments": "Hunter (Sirius)"}],
-    "HIP 36850": [{"english": "Aditi", "translators_comments": "Mother of gods (Castor)"}],
-    "HIP 37826": [{"english": "Diti", "translators_comments": "Mother of demons (Pollux)"}],
-    "HIP 49669": [{"english": "Maghā", "translators_comments": "Bountiful one (Regulus)"}],
-    "HIP 53910": [{"english": "Pulaha", "translators_comments": "One of the seven sages (Merak)"}],
-    "HIP 54061": [{"english": "Kratu", "translators_comments": "One of the seven sages (Dubhe)"}],
-    "HIP 58001": [{"english": "Pulasta", "translators_comments": "One of the seven sages (Phecda)"}],
-    "HIP 59774": [{"english": "Atri", "translators_comments": "One of the seven sages (Megrez)"}],
-    "HIP 62956": [{"english": "Angirā", "translators_comments": "One of the seven sages (Alioth)"}],
-    "HIP 65378": [{"english": "Vaśisṭha", "translators_comments": "One of the seven sages (Mizar)"}],
-    "HIP 65474": [{"english": "Chitrā", "translators_comments": "Spectacular (Spica)"}],
-    "HIP 65477": [{"english": "Arundhati", "translators_comments": "Wife of Vasisṭha, a great sage (Alcor)"}],
-    "HIP 67301": [{"english": "Mārīchi", "translators_comments": "One of the seven sages (Alkaid)"}],
-    "HIP 69673": [{"english": "Svāti", "translators_comments": "Honest one (Arcturus)"}],
-    "HIP 80763": [{"english": "jyeṣṭhā", "translators_comments": "Eldest (Antares)"}],
-    "HIP 91262": [{"english": "Abhijit", "translators_comments": "Invincible (Vega)"}],
-    "HIP 97649": [{"english": "Śravaṇa", "translators_comments": "To hear or Ear (Altair)"}],
-    "HIP 110395": [{"english": "Śatabhiṣak"}],
-    "NAME Jupiter": [{"english": "Mentor", "native": "Guru", "translators_comments": "Native name for Jupiter"}],
-    "NAME Mars": [{"english": "Auspicious one", "native": "Maṇgala", "translators_comments": "Native name for Mars"}],
-    "NAME Mercury": [{"english": "Wise one", "native": "Budha", "translators_comments": "Native name for Mercury"}],
-    "NAME Moon": [{"english": "Delighter", "native": "Candra", "translators_comments": "Native name for the Moon"}],
-    "NAME Saturn": [{"english": "Slow mover", "native": "Śani", "translators_comments": "Native name for Saturn"}],
-    "NAME Sun": [{"english": "Vigorous", "native": "Sūrya", "translators_comments": "Native name for the Sun"}],
-    "NAME Venus": [{"english": "Bright one", "native": "Śukra", "translators_comments": "Native name for Venus"}]
+    "HIP 746": [{"pronounce": "Jamadagni", "english": "A great sage"}],
+    "HIP 5737": [{"pronounce": "Revatī"}],
+    "HIP 11767": [{"pronounce": "Dhruva", "english": "A hero. Literally: Steadfast one; Fixed"}],
+    "HIP 21421": [{"pronounce": "Rohiṇī", "english": "Red"}],
+    "HIP 24436": [{"pronounce": "Vānrājā", "english": "Monarch"}],
+    "HIP 24608": [{"pronounce": "Bramha-hṛdaya", "english": "Heart of the Creator"}],
+    "HIP 25336": [{"pronounce": "Kārtikeya", "english": "Son of lord Shiva"}],
+    "HIP 25428": [{"pronounce": "Agni", "english": "Fire"}],
+    "HIP 25930": [{"pronounce": "Chitralekhā", "english": "As beautiful as a picture"}],
+    "HIP 26311": [{"pronounce": "Aniruddha", "english": "Unbounded"}],
+    "HIP 26727": [{"pronounce": "Uṣā", "english": "Dawn"}],
+    "HIP 27366": [{"pronounce": "Kārtavīrya"}],
+    "HIP 27989": [{"pronounce": "Ārdrā", "english": "Moist"}],
+    "HIP 30438": [{"pronounce": "Agastya", "english": "A great sage who went south"}],
+    "HIP 31681": [{"pronounce": "Anala", "english": "Fire"}],
+    "HIP 32349": [{"pronounce": "Lubdhaka", "english": "Hunter"}],
+    "HIP 36850": [{"pronounce": "Aditi", "english": "Mother of gods"}],
+    "HIP 37826": [{"pronounce": "Diti", "english": "Mother of demons"}],
+    "HIP 49669": [{"pronounce": "Maghā", "english": "Bountiful one"}],
+    "HIP 53910": [{"pronounce": "Pulaha", "english": "One of the seven sages"}],
+    "HIP 54061": [{"pronounce": "Kratu", "english": "One of the seven sages"}],
+    "HIP 58001": [{"pronounce": "Pulasta", "english": "One of the seven sages"}],
+    "HIP 59774": [{"pronounce": "Atri", "english": "One of the seven sages"}],
+    "HIP 62956": [{"pronounce": "Angirā", "english": "One of the seven sages"}],
+    "HIP 65378": [{"pronounce": "Vaśisṭha", "english": "One of the seven sages"}],
+    "HIP 65474": [{"pronounce": "Chitrā", "english": "Spectacular (Spica)"}],
+    "HIP 65477": [{"pronounce": "Arundhati", "english": "Wife of Vaśisṭha"}],
+    "HIP 67301": [{"pronounce": "Mārīchi", "english": "One of the seven sages"}],
+    "HIP 69673": [{"pronounce": "Svāti", "english": "Honest one"}],
+    "HIP 80763": [{"pronounce": "jyeṣṭhā", "english": "Eldest"}],
+    "HIP 91262": [{"pronounce": "Abhijit", "english": "Invincible"}],
+    "HIP 97649": [{"pronounce": "Śravaṇa", "english": "To hear or Ear"}],
+    "HIP 110395": [{"pronounce": "Śatabhiṣak"}],
+    "NAME Jupiter": [{"english": "Mentor", "pronounce": "Guru", "translators_comments": "Native name for Jupiter"}],
+    "NAME Mars": [{"english": "Auspicious one", "pronounce": "Maṇgala", "translators_comments": "Native name for Mars"}],
+    "NAME Mercury": [{"english": "Wise one", "pronounce": "Budha", "translators_comments": "Native name for Mercury"}],
+    "NAME Moon": [{"english": "Delighter", "pronounce": "Candra", "translators_comments": "Native name for the Moon"}],
+    "NAME Saturn": [{"english": "Slow mover", "pronounce": "Śani", "translators_comments": "Native name for Saturn"}],
+    "NAME Sun": [{"english": "Vigorous", "pronounce": "Sūrya", "translators_comments": "Native name for the Sun"}],
+    "NAME Venus": [{"english": "Bright one", "pronounce": "Śukra", "translators_comments": "Native name for Venus"}]
   }
 }

@@ -150,10 +150,15 @@ QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& idFromJSON) c
 	return idFromJSON;
 }
 
-StelSkyCultureMgr::StelSkyCultureMgr()
+StelSkyCultureMgr::StelSkyCultureMgr(): flagOverrideUseCommonNames(false), flagUseAbbreviatedNames(false)
 {
 	setObjectName("StelSkyCultureMgr");
-	makeCulturesList();
+	if (StelApp::isInitialized()) // allow unit test...
+	{
+		QSettings *conf=StelApp::getInstance().getSettings();
+		setFlagUseAbbreviatedNames(conf->value("viewing/flag_constellation_abbreviations", false).toBool());
+	}
+	makeCulturesList(); // First load needed for testing only.
 }
 
 StelSkyCultureMgr::~StelSkyCultureMgr()
@@ -244,7 +249,7 @@ void StelSkyCultureMgr::makeCulturesList()
 		}
 		culture.boundaries = data["edges"].toArray();
 		culture.boundariesEpoch = data["edges_epoch"].toString("J2000");
-		culture.fallbackToInternationalNames = data["fallback_to_international_names"].toBool();
+		culture.fallbackToInternationalNames = (flagOverrideUseCommonNames || data["fallback_to_international_names"].toBool());
 		culture.names = data["common_names"].toObject();
 
 		const auto classifications = data["classification"].toArray();
@@ -278,6 +283,11 @@ void StelSkyCultureMgr::makeCulturesList()
 //! Init itself from a config file.
 void StelSkyCultureMgr::init()
 {
+	QSettings* settings = StelApp::getInstance().getSettings();
+	Q_ASSERT(settings);
+	setFlagOverrideUseCommonNames(settings->value("viewing/flag_skyculture_always_fallback_to_international_names", false).toBool());
+
+	makeCulturesList(); // Reload after setting this flag!
 	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "modern").toString();
 	if (defaultSkyCultureID=="western") // switch to new Sky Culture ID
 		defaultSkyCultureID = "modern";
@@ -305,6 +315,10 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 	}
 
 	currentSkyCulture = dirToNameEnglish[scID];
+
+	// Lookup culture Style!
+	setScreenLabelStyle(getScreenLabelStyle());
+	setInfoLabelStyle(getInfoLabelStyle());
 
 	emit currentSkyCultureChanged(currentSkyCulture);
 	emit currentSkyCultureIDChanged(currentSkyCulture.id);
@@ -345,7 +359,7 @@ StelSkyCulture::BoundariesType StelSkyCultureMgr::getCurrentSkyCultureBoundaries
 	return currentSkyCulture.boundariesType;
 }
 
-int StelSkyCultureMgr::getCurrentSkyCultureClassificationIdx() const
+StelSkyCulture::CLASSIFICATION StelSkyCultureMgr::getCurrentSkyCultureClassificationIdx() const
 {
 	return currentSkyCulture.classification;
 }
@@ -564,14 +578,14 @@ bool StelSkyCultureMgr::setCurrentSkyCultureNameI18(const QString& cultureName)
 }
 
 //! returns newline delimited list of human readable culture names in english
-QString StelSkyCultureMgr::getSkyCultureListEnglish(void) const
+QStringList StelSkyCultureMgr::getSkyCultureListEnglish(void) const
 {
-	QString cultures;
+	QStringList cultures;
 	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
 	while(i.hasNext())
 	{
 		i.next();
-		cultures += QString("%1\n").arg(i.value().englishName);
+		cultures << i.value().englishName;
 	}
 	return cultures;
 }
@@ -755,4 +769,213 @@ QString StelSkyCultureMgr::skyCultureI18ToDirectory(const QString& cultureName) 
 			return i.key();
 	}
 	return "";
+}
+
+void StelSkyCultureMgr::setFlagOverrideUseCommonNames(bool override)
+{
+	flagOverrideUseCommonNames=override;
+	emit flagOverrideUseCommonNamesChanged(override);
+}
+
+void StelSkyCultureMgr::setFlagUseAbbreviatedNames(bool b)
+{
+	flagUseAbbreviatedNames=b;
+	StelApp::immediateSave("viewing/flag_constellation_abbreviations", b);
+	qInfo() << "StelSkyCultureMgr::setFlagUseAbbreviatedNames(bool b):" << b;
+	emit flagUseAbbreviatedNamesChanged(b);
+}
+
+// Returns the screen labeling setting for the currently active skyculture
+StelObject::CulturalDisplayStyle StelSkyCultureMgr::getScreenLabelStyle() const
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return StelObject::CulturalDisplayStyle::Translated;
+
+	QSettings *conf=StelApp::getInstance().getSettings();
+	QVariant val= conf->value(QString("SCScreenLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
+	//qDebug() << "StelSkyCultureMgr::getScreenLabelStyle(): found " << val << "(" << val.toString() << ")";
+	if (val.canConvert<StelObject::CulturalDisplayStyle>())
+		return val.value<StelObject::CulturalDisplayStyle>();
+	else
+		return StelObject::CulturalDisplayStyle::Translated;
+}
+// Scripting version
+QString StelSkyCultureMgr::getScreenLabelStyleString() const
+{
+	StelObject::CulturalDisplayStyle style=getScreenLabelStyle();
+	return QVariant::fromValue(style).toString();
+}
+
+
+// Sets the screen labeling setting for the currently active skyculture
+void StelSkyCultureMgr::setScreenLabelStyle(const StelObject::CulturalDisplayStyle style)
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return;
+
+	QSettings *conf=StelApp::getInstance().getSettings();
+	conf->setValue(QString("SCScreenLabelStyle/%1").arg(getCurrentSkyCultureID()), QVariant::fromValue(style).toString());
+	qInfo() << QString("SCScreenLabelStyle/%1=%2").arg(getCurrentSkyCultureID(), QVariant::fromValue(style).toString());
+	emit screenLabelStyleChanged(style);
+}
+void StelSkyCultureMgr::setScreenLabelStyle(const QString &style)
+{
+	setScreenLabelStyle(QVariant(style).value<StelObject::CulturalDisplayStyle>());
+}
+
+// Returns the InfoString Labeling setting for the currently active skyculture
+StelObject::CulturalDisplayStyle StelSkyCultureMgr::getInfoLabelStyle() const
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return StelObject::CulturalDisplayStyle::Translated;
+
+	QSettings *conf=StelApp::getInstance().getSettings();
+	QVariant val= conf->value(QString("SCInfoLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
+	//qDebug() << "StelSkyCultureMgr::getScreenLabelStyle(): found " << val << "(" << val.toString() << ")";
+	if (val.canConvert<StelObject::CulturalDisplayStyle>())
+		return val.value<StelObject::CulturalDisplayStyle>();
+	else
+		return StelObject::CulturalDisplayStyle::Translated;
+}
+// Scripting version
+QString StelSkyCultureMgr::getInfoLabelStyleString() const
+{
+	StelObject::CulturalDisplayStyle style=getInfoLabelStyle();
+	return QVariant::fromValue(style).toString();
+}
+
+// Sets the InfoString Labeling setting for the currently active skyculture
+void StelSkyCultureMgr::setInfoLabelStyle(const StelObject::CulturalDisplayStyle style)
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return;
+
+	QSettings *conf=StelApp::getInstance().getSettings();
+	conf->setValue(QString("SCInfoLabelStyle/%1").arg(getCurrentSkyCultureID()), QVariant::fromValue(style).toString());
+	qInfo() << QString("SCInfoLabelStyle/%1=%2").arg(getCurrentSkyCultureID(), QVariant::fromValue(style).toString());
+	emit infoLabelStyleChanged(style);
+}
+
+void StelSkyCultureMgr::setInfoLabelStyle(const QString &style)
+{
+	setInfoLabelStyle(QVariant(style).value<StelObject::CulturalDisplayStyle>());
+}
+
+QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &cName,
+					       const StelObject::CulturalDisplayStyle style,
+					       const QString &commonNameI18n,
+					       const QString &abbrevI18n) const
+{
+	// At least while many fields have not been filled, we should create a few fallbacks
+	// If native contains non-Latin glyphs, pronounce or transliteration is mandatory.
+	//QString pronounceStr=(cName.pronounceI18n.isEmpty() ? (cName.pronounce.isEmpty() ? cName.native : cName.pronounce) : cName.pronounceI18n);
+	QString pronounceStr=(cName.pronounceI18n.isEmpty() ? cName.pronounce : cName.pronounceI18n);
+	QString nativeOrPronounce = (cName.native.isEmpty() ? cName.pronounceI18n : cName.native);
+	QString pronounceOrNative = (cName.pronounceI18n.isEmpty() ? cName.native : cName.pronounceI18n);
+	QString pronounceNativeOrTranslated = (cName.pronounceI18n.isEmpty() ? (cName.native.isEmpty() ? cName.translatedI18n : cName.native ) : cName.pronounceI18n);
+	QString translitOrPronounce = (cName.transliteration.isEmpty() ? pronounceStr : cName.transliteration);
+
+	// If you call this with an actual argument abbrevI18n, you really only want a short label.
+	if (flagUseAbbreviatedNames && !abbrevI18n.isNull())
+		return (abbrevI18n.startsWith('.') ? QString("") : abbrevI18n);
+
+	const int styleInt=int(style);
+	QString label;
+	switch (style)
+	{
+		case StelObject::CulturalDisplayStyle::Native: // native if available. fallback to pronounce and english entries
+			return cName.native.isEmpty() ? (cName.pronounceI18n.isEmpty() ? cName.translatedI18n : cName.pronounceI18n) : cName.native;
+		case StelObject::CulturalDisplayStyle::Pronounce: // pronounce if available. fallback to native
+			return pronounceOrNative;
+		case StelObject::CulturalDisplayStyle::Translit:
+			return translitOrPronounce;
+		case StelObject::CulturalDisplayStyle::Translated:
+			return (cName.translatedI18n.isEmpty() ? (pronounceStr.isEmpty() ? cName.native : pronounceStr) : cName.translatedI18n);
+		case StelObject::CulturalDisplayStyle::IPA: // really only IPA?
+			return cName.IPA;
+		case StelObject::CulturalDisplayStyle::NONE: // fully non-cultural!
+		case StelObject::CulturalDisplayStyle::Modern:
+			return commonNameI18n;
+		default:
+			break;
+	}
+	// simple cases done. Now build-up label of form "primary [common transliteration aka pronounce, scientific transliteration, IPA] (translation) <modern>"
+	// "primary" is usually either native or one of the reading aids, or translation or even modern when other options are switched off.
+	// Rules:
+	// Styles with Native_* start with just native, but we must fallback to other strings if native is empty.
+	// Styles with Pronounce_* start with Pronounce or transliteration, but Pronounce_Translit_... must show Translit in braces when both exist.
+	// Styles with Translit_* start with Transliteration or fallback to Pronounce
+	// Styles with ...IPA... must add IPA (when exists) in braces, conditionally comma-separated in the same braces after Transliteration
+	// Styles with ...Translated have translation in brackets appended
+	// Styles with ...Modern have the modern name (commonNameI18n) in brackets appended
+
+	QStringList braced; // the contents of the secondary term
+	if (styleInt & int(StelObject::CulturalDisplayStyle::Native))
+	{
+		label=nativeOrPronounce;
+		// TODO: Add pronounciation, Translit and IPA in braces
+		if (styleInt & int(StelObject::CulturalDisplayStyle::Pronounce))
+			braced.append(pronounceStr);
+		if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
+			braced.append(cName.transliteration);
+		if (styleInt & int(StelObject::CulturalDisplayStyle::IPA))
+			braced.append(cName.IPA);
+	}
+	else // not including native // if (styleInt ^ int(StelObject::CulturalDisplayStyle::Native))
+	{
+		// Use the first valid of pronunciation, transliteration or translation as main name, add the others in braces if applicable
+		if (styleInt & int(StelObject::CulturalDisplayStyle::Pronounce))
+		{
+			label=pronounceOrNative;
+			if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
+				braced.append(cName.transliteration);
+			if (styleInt & int(StelObject::CulturalDisplayStyle::IPA))
+				braced.append(cName.IPA);
+		}
+
+		if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
+		{
+			label=translitOrPronounce;
+			if (styleInt & int(StelObject::CulturalDisplayStyle::IPA))
+				braced.append(cName.IPA);
+		}
+
+		// Neither native nor pronounce nor translit. Not sure if IPA alone is meaningful.
+		if ((styleInt ^ (int(StelObject::CulturalDisplayStyle::Pronounce) | int(StelObject::CulturalDisplayStyle::Translit))) &&
+		    (styleInt & int(StelObject::CulturalDisplayStyle::IPA)))
+		{
+			label=cName.IPA;
+		}
+	}
+
+	braced.removeDuplicates();
+	braced.removeOne(QString(""));
+	braced.removeOne(QString());
+	braced.removeOne(label); // avoid repeating the main thing if it was used as fallback!
+	if (!braced.isEmpty()) label.append(" [" + braced.join(", ") + "]");
+
+
+	if ((styleInt & int(StelObject::CulturalDisplayStyle::Translated)) && (!cName.translatedI18n.isEmpty()))
+	{
+		if (label.isEmpty())
+			label=cName.translatedI18n;
+		else
+			label.append(QString(" (%1)").arg(cName.translatedI18n));
+	}
+	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && (!commonNameI18n.isEmpty()) && (!label.startsWith(commonNameI18n)) && (commonNameI18n!=cName.translatedI18n))
+		label.append(QString(" %1%3%2").arg(QChar(0x29FC), QChar(0x29FD), commonNameI18n));
+	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && label.isEmpty()) // if something went wrong?
+		label=commonNameI18n;
+
+	return label;
+}
+
+//! Returns whether current skyculture uses (incorporates) common names.
+bool StelSkyCultureMgr::currentSkycultureUsesCommonNames() const
+{
+	return currentSkyCulture.fallbackToInternationalNames;
 }
