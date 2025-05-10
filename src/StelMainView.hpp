@@ -128,6 +128,19 @@ public:
 	//! This is required for externally accessing Stellarium from other programs, do not delete!
 	QRectF setWindowSize(int width, int height);
 
+	//! Return the QGLWidget encapsulating the Stellarium main sky view.
+	//! Use its layout if you want to rendering OpenGL Graphics.
+	//! Added for PrintSky plugin.
+	StelGLWidget* getStelQGLWidget() {return glWidget;}
+
+	//! make screenshot and retrieve it as QImage. This observes custom screenshot size, HiDPI etc.
+	//! @returns true on success (valid image), false if something went wrong.
+	//! @arg im pointer to QImage.
+	//! @arg useCustomSize obey properties for custom size
+	//! @arg invert make black stars on white background
+	//! @arg nightmode red-filtered view
+	bool getScreenshot(QImage &im, bool useCustomSize, bool invert, bool nightmode);
+
 public slots:
 
 	//! Set whether fullscreen is activated or not
