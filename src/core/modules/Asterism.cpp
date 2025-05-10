@@ -19,7 +19,9 @@
 
 #include "StelProjector.hpp"
 #include "Asterism.hpp"
+#include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
+#include "NebulaMgr.hpp"
 
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
@@ -53,6 +55,7 @@ Asterism::~Asterism()
 
 bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 {
+	static NebulaMgr *nebulaMgr=GETSTELMODULE(NebulaMgr);
 	abbreviation = data["id"].toString();
 	const auto commonName = data["common_name"];
 	if (commonName.isObject())
@@ -99,6 +102,7 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 		for (int pointIndex = 0; pointIndex < polyline.size(); ++pointIndex)
 		{
 			const auto point = polyline[pointIndex];
+			StelObjectP newObj;
 			switch (typeOfAsterism)
 			{
 			case Type::RayHelper:
@@ -111,10 +115,34 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 					return false;
 				}
 				const StarId HIP = StelUtils::getLongLong(point);
-				if (HIP <= NR_OF_HIP)
-					asterism.push_back(starMgr->searchHP(HIP));
+				if (HIP>0)
+				{
+					newObj = HIP <= NR_OF_HIP ? starMgr->searchHP(HIP)
+								  : starMgr->searchGaia(HIP);
+
+					if (!newObj)
+					{
+						qWarning().nospace() << "Error in asterism " << abbreviation << ": can't find star HIP " << HIP << "... skipping asterism";
+						return false;
+					}
+				}
+				else if (point.isString() && point.toString().startsWith("DSO:"))
+				{
+					QString DSOname=point.toString().remove(0,4);
+					newObj = nebulaMgr->searchByID(DSOname);
+					if (!newObj)
+					{
+						qWarning().nospace() << "Error in asterism " << abbreviation << ": can't find DSO " << DSOname << "... skipping asterism";
+						return false;
+					}
+				}
 				else
-					asterism.push_back(starMgr->searchGaia(HIP));
+				{
+					qWarning().nospace() << "Error in asterism " << abbreviation << ": bad element: " << point.toString() << "... skipping asterism";
+					return false;
+				}
+				asterism.push_back(newObj);
+
 				if (!asterism.back())
 				{
 					asterism.pop_back();

@@ -289,6 +289,14 @@ public slots:
 	//! Get the list of English names of all constellations for loaded sky culture
 	QStringList getConstellationsEnglishNames();
 
+	//! Create a list of entries: Constellation: Hull_area to logfile
+	//! @todo: Extend with GUI etc?
+	void dumpHullAreas() const;
+
+	//! Create a list of stars within the convex hull of constellation
+	void starsInHullOf(const QString &englishName) const;
+
+
 signals:
 	void artDisplayedChanged(const bool displayed);
 	void artFadeDurationChanged(const float duration);

@@ -74,6 +74,10 @@ private:
 	//! observer centered J2000 coordinates.
 	Vec3d getJ2000EquatorialPos(const StelCore*) const override {return XYZname;}
 
+	//! Specialized implementation of the getRegion method.
+	//! Return the convex hull of the object.
+	SphericalRegionP getRegion() const override {return SphericalRegionP(convexHull);}
+
 	//! @param record string containing the following whitespace
 	//! separated fields: abbreviation - a three character abbreviation
 	//! for the constellation, a number of lines (pairs), and a list of Hipparcos
@@ -185,6 +189,7 @@ private:
 	StelTextureSP artTexture;
 	StelVertexArray artPolygon;
 	SphericalCap boundingCap;
+	SphericalRegionP convexHull; // The convex hull formed by stars contained in the defined lines plus extra stars.
 
 	//! Define whether art, lines, names and boundary must be drawn
 	LinearFader artFader, lineFader, nameFader, boundaryFader;
