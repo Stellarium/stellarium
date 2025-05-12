@@ -535,10 +535,6 @@ public:
 	void setFlagLabels(bool b){flagLabels = b;}
 	bool getFlagLabels(void) const {return flagLabels;}
 
-	//bool flagNativeName;
-	//void setFlagNativeName(bool b) { flagNativeName = b; }
-	//bool getFlagNativeName(void) const { return flagNativeName; }
-
 	///////////////////////////////////////////////////////////////////////////
 	///// Orbit related code
 	// Should move to an OrbitPath class which works on a SolarSystemObject, not a Planet

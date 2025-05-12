@@ -1152,7 +1152,6 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 
 	const float shift = 15.f + (drawHintProportional ? getHintSize(sPainter) : 0.f);
 
-	//QString str = getNameI18n();
 	QString str = getScreenLabel();
 	if (str.isEmpty() || designationUsage)
 		str = getDSODesignation();

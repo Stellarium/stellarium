@@ -62,7 +62,6 @@ class SolarSystem : public StelObjectModule, protected QOpenGLFunctions
 	Q_PROPERTY(bool flagHints			READ getFlagHints			WRITE setFlagHints			NOTIFY flagHintsChanged)
 	Q_PROPERTY(bool flagMarkers			READ getFlagMarkers			WRITE setFlagMarkers			NOTIFY markersDisplayedChanged)
 	Q_PROPERTY(bool flagPointer			READ getFlagPointer			WRITE setFlagPointer			NOTIFY flagPointerChanged)
-	//Q_PROPERTY(bool //		READ getFlagNativePlanetNames		WRITE setFlagNativePlanetNames		NOTIFY flagNativePlanetNamesChanged)
 	Q_PROPERTY(bool planetsDisplayed		READ getFlagPlanets			WRITE setFlagPlanets			NOTIFY flagPlanetsDisplayedChanged)
 	Q_PROPERTY(bool flagOrbits			READ getFlagOrbits			WRITE setFlagOrbits			NOTIFY flagOrbitsChanged)
 	Q_PROPERTY(bool flagPlanetsOrbits		READ getFlagPlanetsOrbits		WRITE setFlagPlanetsOrbits		NOTIFY flagPlanetsOrbitsChanged)
@@ -677,11 +676,6 @@ public slots:
 	//! @see setApparentMagnitudeAlgorithmOnEarth()
 	QString getApparentMagnitudeAlgorithmOnEarth() const;
 
-	////! Set flag which enable use native names for planets or not.
-	//void setFlagNativePlanetNames(bool b);
-	////! Get the current value of the flag which enables showing native names for planets or not.
-	//bool getFlagNativePlanetNames(void) const;
-
 	//! Set flag which enabled the showing of isolated trails for selected objects only or not
 	void setFlagIsolatedTrails(bool b);
 	//! Get the current value of the flag which enables showing of isolated trails for selected objects only or not.
@@ -806,7 +800,6 @@ signals:
 	void maxTrailPointsChanged(int max);
 	void maxTrailTimeExtentChanged(int max);
 	void flagPointerChanged(bool b);
-	//void flagNativePlanetNamesChanged(bool b);
 	void flagPlanetsDisplayedChanged(bool b);
 	void flagPlanetsOrbitsChanged(bool b);
 	void flagPlanetsOrbitsOnlyChanged(bool b);
@@ -1168,7 +1161,6 @@ private:
 
 	bool flagShow;
 	bool flagPointer;                           // show red cross selection pointer?
-	//bool flagNativePlanetNames;                 // show native names for planets?
 	bool flagIsolatedTrails;
 	int numberIsolatedTrails;
 	int maxTrailPoints;                         // limit trails to a manageable size.
@@ -1209,7 +1201,6 @@ private:
 
 	static const QMap<Planet::ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 
-	//QHash<QString, QString> planetNativeNamesMap, planetNativeNamesMeaningMap;
 	QStringList minorBodies;
 
 	// 0.16pre observation GZ: this list contains pointers to all orbit objects,

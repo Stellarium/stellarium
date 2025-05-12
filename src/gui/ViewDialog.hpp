@@ -56,7 +56,6 @@ protected:
 	bool eventFilter(QObject* object, QEvent* event) override;
 private slots:
 	void populateLists();
-	//void populateSkyCultureLabelStyleComboboxes();
 	void configureSkyCultureCheckboxes();
 	void updateSkyCultureInfoStyleFromCheckboxes();
 	void updateSkyCultureScreenStyleFromCheckboxes();

@@ -30,7 +30,6 @@
 #include "StelSkyCultureMgr.hpp"
 #include <QMessageBox>
 
-//#include <algorithm>
 #include <QString>
 #include <QTextStream>
 #include <QDebug>
@@ -62,7 +61,7 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 	const QStringList idParts = id.split(" ");
 	if (idParts.size() == 3 && idParts[0] == "AST")
 	{
-		abbreviation = idParts[2];
+		abbreviation = idParts[2].trimmed();
 	}
 	else
 	{
@@ -77,13 +76,6 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 		culturalName.translated = names["english"].toString().trimmed();
 		culturalName.native = names["native"].toString().trimmed();
 		culturalName.pronounce = names["pronounce"].toString().trimmed();
-		//if (culturalName.native.isEmpty())
-		//{
-		//	if (culturalName.pronounce.isEmpty())
-		//		culturalName.native=culturalName.translated;
-		//	else
-		//		culturalName.native=culturalName.pronounce;
-		//}
 		culturalName.IPA = names["IPA"].toString().trimmed();
 		culturalName.transliteration = names["transliteration"].toString().trimmed();
 	}

@@ -219,10 +219,6 @@ QString MinorPlanet::getInfoStringExtra(const StelCore *core, const InfoStringGr
 			// TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
 			oss << QString("%1: %2<br/>").arg(q_("SMASSII spectral type"), specB);
 		}		
-
-		// Already in Planet::getInfoStringExtra()...
-		//if (!discoveryDate.isEmpty())
-		//	oss << QString("%1: %2<br/>").arg(q_("Discovered"), getDiscoveryCircumstances());
 	}
 	return str;
 }
