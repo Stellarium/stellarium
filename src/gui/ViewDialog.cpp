@@ -555,12 +555,6 @@ void ViewDialog::createDialogContent()
 	        this, &ViewDialog::updateDefaultSkyCulture);
 	updateDefaultSkyCulture();
 
-	// TODO: Remove
-	ui->screenLabelComboBox->hide();
-	ui->infoLabelComboBox->hide();
-	ui->labelScreenLabel->hide();
-	ui->labelInfoLabel->hide();
-
 	configureSkyCultureCheckboxes();
 	StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
 	connect(scMgr, &StelSkyCultureMgr::screenLabelStyleChanged, this, &ViewDialog::configureSkyCultureCheckboxes);
@@ -581,8 +575,6 @@ void ViewDialog::createDialogContent()
 	connect(ui->screenLabelModernCheckBox         , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
 
 	connectBoolProperty(ui->abbreviatedNamesCheckBox,               "StelSkyCultureMgr.flagUseAbbreviatedNames");
-	connectIntProperty(ui->screenLabelComboBox,                     "StelSkyCultureMgr.screenLabelStyle");
-	connectIntProperty(ui->infoLabelComboBox,                       "StelSkyCultureMgr.infoLabelStyle");
 	connectCheckBox(ui->showConstellationLinesCheckBox,             "actionShow_Constellation_Lines");
 	connectIntProperty(ui->constellationLineThicknessSpinBox,       "ConstellationMgr.constellationLineThickness");
 	connectCheckBox(ui->showConstellationLabelsCheckBox,            "actionShow_Constellation_Labels");
