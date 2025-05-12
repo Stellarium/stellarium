@@ -355,13 +355,6 @@ Asterism* AsterismMgr::findFromAbbreviation(const QString& abbreviation) const
 	return nullptr;
 }
 
-
-// Can't find asterism from a position because it's not well localized
-//QList<StelObjectP> AsterismMgr::searchAround(const Vec3d&, double, const StelCore*) const
-//{
-//	return QList<StelObjectP>();
-//}
-
 void AsterismMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();

@@ -125,8 +125,6 @@ protected:
 	//! Any flag=Extra information to be displayed at the end
 	QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const override;
 
-	//QString getDiscoveryCircumstances() const override; // nothing new.
-
 private:
 	int minorPlanetNumber;
 	float  slopeParameter; // This is G from the H, G system for computation of apparent magnitude.

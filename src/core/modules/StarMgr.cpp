@@ -1599,13 +1599,6 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 
 	if (getFlagAdditionalNames())
 	{
-		//// Search by English additional common names
-		//if (additionalNamesIndex.contains(nameUpper))
-		//{
-		//	sid = additionalNamesIndex.value(nameUpper);
-		//	return (sid <= NR_OF_HIP) ? searchHP(sid) : searchGaia(sid);
-		//}
-
 		if (culturalNamesIndex.contains(nameUpper))
 		{
 			// This only returns the first-found number.
@@ -1745,7 +1738,6 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	if (objPrefixUpper.at(0).unicode() >= 0x0391 && objPrefixUpper.at(0).unicode() <= 0x03A9)
 		bayerRegExCI.setPattern(bayerPatternCI.insert(1,"\\d?"));
 
-	//for (auto it = sciDesignationsIndex.begin(objPrefix); it != sciDesignationsIndex.end(); ++it)
 	QHashIterator<QString,StarId>it(sciDesignationsIndex);
 	while (it.hasNext())
 	{
@@ -1774,7 +1766,6 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			break;
 	}
 
-	//for (auto it = sciDesignationsIndex.lowerBound(objPrefixUpper); it != sciDesignationsIndex.end(); ++it)
 	it.toFront(); // reset
 	while (it.hasNext())
 	{
@@ -1803,7 +1794,6 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			break;
 	}
 
-	//for (auto it = sciExtraDesignationsIndex.lowerBound(objPrefix); it != sciExtraDesignationsIndex.end(); ++it)
 	QHashIterator<QString,StarId>ite(sciExtraDesignationsIndex);
 	while (ite.hasNext())
 	{
@@ -1832,7 +1822,6 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			break;
 	}
 
-	//for (auto it = sciExtraDesignationsIndex.lowerBound(objPrefixUpper); it != sciExtraDesignationsIndex.end(); ++it)
 	ite.toFront(); // reset
 	while (ite.hasNext())
 	{
@@ -1862,7 +1851,6 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Search for sci names for var stars
-	//for (auto it = varStarsIndex.lowerBound(objPrefixUpper); it != varStarsIndex.end(); ++it)
 	QHashIterator<QString,StarId>itv(varStarsIndex);
 	while (itv.hasNext())
 	{
@@ -1955,7 +1943,6 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	static const QRegularExpression wdsRx("^(WDS)\\s*(\\S+)\\s*$", QRegularExpression::CaseInsensitiveOption);
 	if (wdsRx.match(objPrefixUpper).hasMatch())
 	{
-		//for (auto wds = wdsStarsIndex.lowerBound(objPrefixUpper); wds != wdsStarsIndex.end(); ++wds)
 		QHashIterator<QString, StarId>wds(wdsStarsIndex);
 		while (wds.hasNext())
 		{
@@ -2215,15 +2202,7 @@ QStringList StarMgr::listAllObjects(bool inEnglish) const
 	QStringList result;
 	if (inEnglish)
 	{
-		//QHashIterator<QString, StarId> i(commonNamesUppercaseIndex);
-		//while (i.hasNext())
-		//{
-		//	i.next();
-		//	result << getCommonEnglishName(i.value());
-		//}
-		// TBD: This should do the same, right?
-		//result=commonNamesUppercaseIndex.keys(); // No, it's uppercase
-		result = commonNamesMap.values(); // probably yes!
+		result = commonNamesMap.values();
 
 #if  (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 		QHashIterator<StarId, StelObject::CulturalName> ci(culturalNamesMap);
@@ -2241,15 +2220,7 @@ QStringList StarMgr::listAllObjects(bool inEnglish) const
 	}
 	else
 	{
-		//QMapIterator<QString, StarId> i(commonNamesUppercaseIndexI18n);
-		//while (i.hasNext())
-		//{
-		//	i.next();
-		//	result << getCommonName(i.value());
-		//}
-		// TBD: This should do the same, right?
-		//result=commonNamesUppercaseIndexI18n.keys(); // No, it's uppercase
-		result=commonNamesI18nMap.values(); // probably yes!
+		result=commonNamesI18nMap.values();
 
 #if  (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 		QHashIterator<StarId, StelObject::CulturalName> ci(culturalNamesMap);

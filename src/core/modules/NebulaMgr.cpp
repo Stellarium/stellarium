@@ -623,7 +623,7 @@ struct DrawNebulaFuncObject
 		if (!n->objectInDisplayedCatalog())
 			return;
 
-		if (n->flagShowOnlyNamedDSO && n->getEnglishName().isEmpty())
+		if (n->flagShowOnlyNamedDSO && n->getEnglishName().isEmpty() && n->culturalNames.isEmpty())
 			return;
 
 		if (!n->objectInAllowedSizeRangeLimits())
@@ -1994,14 +1994,6 @@ int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data)
 		{
 			for (const auto& entry : specificNames)
 			{
-				//for (const char*const nameType : {"english", "native"})
-				//{
-				//	const auto specificName = entry.toObject()[nameType].toString();
-				//	if (specificName.isEmpty())
-				//		continue;
-				//	setName(n, specificName);
-				//	++loadedTotal;
-				//}
 				QJsonObject json=entry.toObject();
 				StelObject::CulturalName cName;
 				cName.native          = json["native"].toString().trimmed();
@@ -2013,6 +2005,7 @@ int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data)
 				cName.IPA             = json["IPA"].toString().trimmed();
 
 				n->addCulturalName(cName);
+				++loadedTotal;
 			}
 		}
 	}
@@ -2031,9 +2024,6 @@ void NebulaMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, co
 
 	for (const auto& entry : data)
 	{
-		//const auto specificName = entry.toObject()["english"].toString();
-		//if (specificName.isEmpty()) continue;
-
 		//// TODO: Filter away unwanted sources per-skyculture!
 		//// For now, just accept as before.
 		//setName(commonNameIndexIt.value().nebula, specificName);

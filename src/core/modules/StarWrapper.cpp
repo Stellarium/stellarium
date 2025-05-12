@@ -175,7 +175,6 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << "<h2>";
 
 	const QString commonNameI18 = StarMgr::getCommonNameI18n(star_id);
-	//const QString additionalNameI18 = StarMgr::getAdditionalNames(star_id);
 	const QString culturalInfoName=StarMgr::getCulturalInfoLabel(star_id);
 	const QString sciName = StarMgr::getSciDesignation(star_id);
 	const QString sciExtraName = StarMgr::getSciExtraDesignation(star_id);
@@ -583,7 +582,6 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	StarId star_id = s->getGaia();
 	const QString commonNameI18 = StarMgr::getCommonNameI18n(star_id);
-	//const QString additionalNameI18 = StarMgr::getAdditionalNames(star_id);
 	const QString culturalInfoName=StarMgr::getCulturalInfoLabel(star_id);
 	const QString sciName = StarMgr::getSciDesignation(star_id);
 	const QString sciExtraName = StarMgr::getSciExtraDesignation(star_id);
@@ -634,13 +632,6 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (!commonNameI18.isEmpty())
 			commonNames = commonNameI18;
 
-		//if (!additionalNameI18.isEmpty() && StarMgr::getFlagAdditionalNames())
-		//{
-		//	QStringList additionalNames = additionalNameI18.split(" - ");
-		//	additionalNames.removeDuplicates();
-
-		//	commonNames.append(QString(" (%1)").arg(additionalNames.join(" - ")));
-		//}
 		// TODO: Finalize appearance of cultural Names
 		if (!culturalInfoName.isEmpty() && StarMgr::getFlagAdditionalNames())
 			oss << culturalInfoName << "<br />";

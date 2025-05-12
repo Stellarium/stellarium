@@ -600,11 +600,6 @@ private:
 	static QHash<StarId, QString> commonNamesI18nMap;            //!< translated names
 	static QHash<QString, StarId> commonNamesI18nUppercaseIndex; //!< back-references upper-case names
 
-	//static QHash<StarId, QString> additionalNamesMap; // additional names. These will be replaced by the CulturalNames
-	//static QHash<StarId, QString> additionalNamesMapI18n;
-	//static QMap<QString, StarId> additionalNamesIndex;
-	//static QMap<QString, StarId> additionalNamesIndexI18n;
-
 	// Cultural names: We must store all data here, and have even 3 indices to native names&spelling, pronunciation, english and user-language spelling
 	static QMultiHash<StarId, StelObject::CulturalName> culturalNamesMap; // cultural names
 	//! reverse mappings of UPPERCASEd native, pronounceI18n, transliteration and translatedI18n names. Multiple results are possible!
@@ -655,4 +650,3 @@ private:
 
 
 #endif // STARMGR_HPP
-

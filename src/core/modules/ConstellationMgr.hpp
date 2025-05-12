@@ -59,9 +59,6 @@ class ConstellationMgr : public StelObjectModule
 	Q_PROPERTY(Vec3f namesColor               READ getLabelsColor                    WRITE setLabelsColor                   NOTIFY namesColorChanged)
 	Q_PROPERTY(bool namesDisplayed            READ getFlagLabels                     WRITE setFlagLabels                    NOTIFY namesDisplayedChanged)
 	Q_PROPERTY(float namesFadeDuration        READ getLabelsFadeDuration             WRITE setLabelsFadeDuration            NOTIFY namesFadeDurationChanged)
-//	Q_PROPERTY(ConstellationDisplayStyle constellationDisplayStyle	READ getConstellationDisplayStyle WRITE setConstellationDisplayStyle NOTIFY constellationsDisplayStyleChanged)
-//	Q_PROPERTY(StelObject::CulturalDisplayStyle constellationDisplayStyle
-//						  READ getConstellationDisplayStyle      WRITE setConstellationDisplayStyle     NOTIFY constellationsDisplayStyleChanged)
 	Q_PROPERTY(int constellationLineThickness READ getConstellationLineThickness     WRITE setConstellationLineThickness    NOTIFY constellationLineThicknessChanged)
 	Q_PROPERTY(int constellationBoundariesThickness	READ getConstellationBoundariesThickness WRITE setConstellationBoundariesThickness NOTIFY constellationBoundariesThicknessChanged)
 

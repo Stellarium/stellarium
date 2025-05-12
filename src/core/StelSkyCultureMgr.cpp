@@ -915,7 +915,7 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	if (styleInt & int(StelObject::CulturalDisplayStyle::Native))
 	{
 		label=nativeOrPronounce;
-		// TODO: Add pronounciation, Translit and IPA in braces
+		// Add pronounciation, Translit and IPA in braces
 		if (styleInt & int(StelObject::CulturalDisplayStyle::Pronounce))
 			braced.append(pronounceStr);
 		if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
