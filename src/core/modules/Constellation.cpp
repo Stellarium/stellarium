@@ -67,7 +67,7 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 	const QStringList idParts = id.split(" ");
 	if (idParts.size() == 3 && idParts[0] == "CON")
 	{
-		abbreviation = idParts[2];
+		abbreviation = idParts[2].trimmed();
 	}
 	else
 	{
@@ -309,7 +309,7 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 		}
 }
 
-void Constellation::drawName(StelPainter& sPainter, bool abbreviateLabel) const
+void Constellation::drawName(StelPainter& sPainter) const
 {
 	if (nameFader.getInterstate()==0.0f)
 		return;
@@ -317,7 +317,7 @@ void Constellation::drawName(StelPainter& sPainter, bool abbreviateLabel) const
 	// TODO: Find a solution of fallbacks when components are missing?
 	if (isSeasonallyVisible())
 	{
-		QString name = abbreviateLabel ? abbreviationI18n : getScreenLabel();
+		QString name = getScreenLabel();
 		sPainter.setColor(labelColor, nameFader.getInterstate());
 		sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 	}
