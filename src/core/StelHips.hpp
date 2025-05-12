@@ -143,6 +143,7 @@ private:
 	int getPropertyInt(const QString& key, int fallback = 0);
 	bool getAllsky();
 	HipsTile* getTile(int order, int pix);
+	bool bindTextures(const HipsTile& tile);
 	// draw a single tile. observerVelocity (in the correct hipsFrame) is necessary for aberration correction. Set to 0 for no aberration correction.
 	void drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
 	              const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback);

@@ -17104,7 +17104,7 @@ msgstr "Den visuella upplösningen baseras på ögats egenskaper och förstoring
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:895
 msgctxt "Limiting magnitude of device"
 msgid "Limiting magnitude"
-msgstr "Begränsande magnitud"
+msgstr "Gränsmagnitud"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
 msgid "Approximate limiting magnitude of this binocular"
@@ -27162,7 +27162,7 @@ msgstr "Lokal timfrekvens"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:728
 #: plugins/MeteorShowers/src/MeteorShower.cpp:759
 msgid "Limiting magnitude"
-msgstr "Begränsande magnitud"
+msgstr "Gränsmagnitud"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:734
 msgid "variable"
@@ -27730,7 +27730,7 @@ msgstr ""
 "Detta insticksprogram använder två modeller för att beräkna ZHR, förutsatt "
 "att aktivitetsprofilen för meteorregn följer den dubbla exponentiella "
 "formen. För att förutsäga den lokala timfrekvensen tas hänsyn till "
-"strålningshöjden och himlens begränsande magnitud. Månljus kan också minska "
+"strålningshöjden och himlens gränsmagnitud. Månljus kan också minska "
 "timfrekvensen, men det tas inte med i beräkningen."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:240
@@ -27845,9 +27845,8 @@ msgstr ""
 "Antalet meteorer på en timme för aktuell plats, det är den faktiska "
 "förväntade hastigheten, beräknad genom att ta hänsyn till strålningshöjden "
 "(timhastigheten minskar ju närmare strålningen är horisonten) och "
-"begränsande magnitud på himlen. Den är nästan alltid lägre än <i>aktuell "
-"ZHR</i>. Månljus kan också minska timfrekvensen, men det tar inte hänsyn "
-"till..."
+"gränsmagnitud på himlen. Den är nästan alltid lägre än <i>aktuell ZHR</i>. "
+"Månljus kan också minska timfrekvensen, men det tar inte hänsyn till..."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:285
 msgid "Population index"
@@ -33059,7 +33058,7 @@ msgstr "Taisho (Stor värme)"
 #: plugins/Calendars/src/JapaneseCalendar.cpp:49
 msgctxt "Japanese calendar major Solar term"
 msgid "Shosho (Limit of Heat)"
-msgstr "Shosho (gräns för värme)"
+msgstr "Shosho (Värmens gräns)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:50
 msgctxt "Japanese calendar major Solar term"
@@ -33196,7 +33195,7 @@ msgstr "Dae-Suh (Great Heat)"
 #: plugins/Calendars/src/KoreanCalendar.cpp:49
 msgctxt "Korean calendar major Solar term"
 msgid "Chu-Suh (Limit of Heat)"
-msgstr "Chu-Suh (gräns för värme)"
+msgstr "Chu-Suh (Värmens gräns)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:50
 msgctxt "Korean calendar major Solar term"
@@ -33503,7 +33502,7 @@ msgstr "Đại thử (Stor hetta)"
 #: plugins/Calendars/src/VietnameseCalendar.cpp:62
 msgctxt "Vietnamese calendar major Solar term"
 msgid "Xử thử (Limit of Heat)"
-msgstr "Xử thử (gräns för värme)"
+msgstr "Xử thử (Värmens gräns)"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:63
 msgctxt "Vietnamese calendar major Solar term"

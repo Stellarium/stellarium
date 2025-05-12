@@ -26,7 +26,7 @@ Yarran (also called mingga) is the roots of the Yarran tree, an Acacia, which is
 
 ##### Old Wiringin
 
-A Wiringin is a "Clever Man" or Aboriginal doctor. This Wiringin located in the Small Magellanic Cloud is there because he controls who can go on to Bulimah. If the person who died is not initiated, they are not allowed, because they don't know the rules, so he sends them to Wadhaagudjaaylwan in the Large Magellanic Cloud. This birth spirit will send the unitiated back to Earth as a new baby, so they can be initiated. This Wiringin is represented in every Aboriginal cemetary as the Wilga tree (Native Willow).
+A Wiringin is a "Clever Man" or Aboriginal doctor. This Wiringin located in the Small Magellanic Cloud is there because he controls who can go on to Bulimah. If the person who died is not initiated, they are not allowed, because they don't know the rules, so he sends them to Wadhaagudjaaylwan in the Large Magellanic Cloud. This birth spirit will send the uninitiated back to Earth as a new baby, so they can be initiated. This Wiringin is represented in every Aboriginal cemetery as the Wilga tree (Native Willow).
 
 ##### Birray Birray
 

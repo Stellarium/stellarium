@@ -577,6 +577,9 @@ void StelApp::init(QSettings* conf)
 	if (audioOK)
 		SplashScreen::showMessage(q_("Initializing audio..."));
 	audioMgr = new StelAudioMgr(audioOK);
+	// QtMultimedia can create and destroy intermediate contexts during initialization,
+	// displacing our main context, see GH#4143. So restore our context.
+	ensureGLContextCurrent();
 
 	// Init video manager
 #ifdef ENABLE_MEDIA
