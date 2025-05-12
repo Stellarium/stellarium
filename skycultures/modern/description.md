@@ -71,7 +71,7 @@ The IAU is the only scientifically accepted authority to assign new names to sta
  - [#7]: [Covington, Michael (2002). "Celestial Objects for Modern Telescopes: Practical Amateur Astronomy". Cambridge University Press.](https://books.google.com/books?id=ql7wLq1fP5QC&pg=PA209)
  - [#8]: ["61 Cyg (Piazzi's Flying Star)". Science&Space News. Retrieved June 1, 2015.](http://news.sky-map.org/starview?object_type=1&object_id=2282&object_name=HD+201091&locale=EN)
  - [#9]: [Kruger 60](https://en.wikipedia.org/wiki/Kruger_60)
- - [#10]: [List of Named Stars in Alphabetical Order](http://www.astro.wisc.edu/~dolan/constellations/starname_list.html)
+ - [#10]: [List of Named Stars in Alphabetical Order](https://web.archive.org/web/20220701073320/http://www.astro.wisc.edu/~dolan/constellations/starname_list.html)
  - [#11]: [Jack W. Rhoads (1971). "Reduced Star Catalog Containing 537 Named Stars", Jet Propulsion Laboratory, California Institute of Technology; November 15, 1971](https://ntrs.nasa.gov/citations/19720005197)
  - [#12]: [IAU Naming Stars](https://www.iau.org/public/themes/naming_stars/)
  - [#13]: [Bright Star Catalogue, 5th Revised Ed. (Hoffleit+, 1991)](http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=V/50)
