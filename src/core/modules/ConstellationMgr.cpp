@@ -611,9 +611,6 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) co
 // Draw the names of all the constellations
 void ConstellationMgr::drawNames(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
-	static StelSkyCultureMgr* scMgr= GETSTELMODULE(StelSkyCultureMgr);
-	const bool abbreviateLabel=scMgr->getFlagUseAbbreviatedNames();
-
 	sPainter.setBlending(true);
 	for (auto* constellation : constellations)
 	{
@@ -624,7 +621,7 @@ void ConstellationMgr::drawNames(StelPainter& sPainter, const Vec3d &obsVelocity
 
 		// Check if in the field of view
 		if (sPainter.getProjector()->projectCheck(XYZname, constellation->XYname))
-			constellation->drawName(sPainter, abbreviateLabel);
+			constellation->drawName(sPainter);
 	}
 }
 
@@ -701,13 +698,13 @@ void ConstellationMgr::updateI18n()
 			else
 				constellation->culturalName.pronounceI18n = qc_(constellation->culturalName.pronounce, context);
 		}
-		constellation->abbreviationI18n = trans.tryQtranslate(constellation->abbreviation, context);
+		constellation->abbreviationI18n = trans.tryQtranslate(constellation->abbreviation, context).trimmed();
 		if (constellation->abbreviationI18n.isEmpty())
 		{
 			if (context.isEmpty())
-				constellation->abbreviationI18n = q_(constellation->abbreviation);
+				constellation->abbreviationI18n = q_(constellation->abbreviation).trimmed();
 			else
-				constellation->abbreviationI18n = qc_(constellation->abbreviation, context);
+				constellation->abbreviationI18n = qc_(constellation->abbreviation, context).trimmed();
 		}
 	}
 }

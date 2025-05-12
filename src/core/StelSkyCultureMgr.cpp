@@ -872,16 +872,14 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 {
 	// At least while many fields have not been filled, we should create a few fallbacks
 	// If native contains non-Latin glyphs, pronounce or transliteration is mandatory.
-	//QString pronounceStr=(cName.pronounceI18n.isEmpty() ? (cName.pronounce.isEmpty() ? cName.native : cName.pronounce) : cName.pronounceI18n);
 	QString pronounceStr=(cName.pronounceI18n.isEmpty() ? cName.pronounce : cName.pronounceI18n);
 	QString nativeOrPronounce = (cName.native.isEmpty() ? cName.pronounceI18n : cName.native);
 	QString pronounceOrNative = (cName.pronounceI18n.isEmpty() ? cName.native : cName.pronounceI18n);
-	QString pronounceNativeOrTranslated = (cName.pronounceI18n.isEmpty() ? (cName.native.isEmpty() ? cName.translatedI18n : cName.native ) : cName.pronounceI18n);
 	QString translitOrPronounce = (cName.transliteration.isEmpty() ? pronounceStr : cName.transliteration);
 
 	// If you call this with an actual argument abbrevI18n, you really only want a short label.
 	if (flagUseAbbreviatedNames && !abbrevI18n.isNull())
-		return (abbrevI18n.startsWith('.') ? QString("") : abbrevI18n);
+		return (abbrevI18n.startsWith('.') ? QString() : abbrevI18n);
 
 	const int styleInt=int(style);
 	QString label;
@@ -959,13 +957,16 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	if (!braced.isEmpty()) label.append(" [" + braced.join(", ") + "]");
 
 
+	// Add translation in brackets
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::Translated)) && (!cName.translatedI18n.isEmpty()))
 	{
 		if (label.isEmpty())
 			label=cName.translatedI18n;
-		else
+		else if (!label.startsWith(cName.translatedI18n, Qt::CaseInsensitive)) // seems useless to add translation into same string
 			label.append(QString(" (%1)").arg(cName.translatedI18n));
 	}
+
+	// Add an explanatory modern name in decorative angle brackets
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && (!commonNameI18n.isEmpty()) && (!label.startsWith(commonNameI18n)) && (commonNameI18n!=cName.translatedI18n))
 		label.append(QString(" %1%3%2").arg(QChar(0x29FC), QChar(0x29FD), commonNameI18n));
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && label.isEmpty()) // if something went wrong?
