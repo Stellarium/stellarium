@@ -451,22 +451,22 @@ Constellations are coded as array of dictionaries:
 where
 
 \begin{description}
-\item[\jtag{id}] A unique figure identifier, consisting of \texttt{CON} (for constellations), skyculture id, and a short label still unique within the skyculture.
+\item[\jtag{id}] A unique figure identifier, consisting of \texttt{CON} (for \indexterm{constellations}), skyculture id, and a short label still unique within the skyculture.
                  For IAU-based skycultures, these short labels must be the IAU standard labels. For others, you can invent your own. It is not necessary to have exactly
                  3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended:  
-                 the short label is displayed when setting Constellation name style to ``short'' (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
-                 certain abbreviations from being displayed, let them start with a dot. See the effect in the \file{Modern (H.A.Rey)} sky culture: In
-                 \menu{Abbreviated} mode, only the official abbreviations are displayed.
+                 the short label is displayed when enabling abbreviated screen labels (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
+                 certain abbreviations from being displayed, let them start with a dot. See the effect in the \file{Modern (H.A.Rey)} sky culture: with abbreviated labels enabled,
+                 only the official abbreviations are displayed.
 
 \item[\jtag{lines}] an array of arrays, each describing a polyline with star numbers. The star numbers are usually the Hipparcos (HIP) numbers. 
                     For very dim stars, the longer numbers from the Gaia DR3 catalog are acceptable, but they must be written as string.
 
-                    To describe \indexterm{dark constellations}\newFeature{25.2} formed from dust clouds in the Milky Way or other non-stellar items, 
+                    To describe \indexterm[constellations!dark]{dark constellations}\newFeature{25.2} formed from dust clouds in the Milky Way or other non-stellar items, 
                     another variant can use coordinate lists and is technically an array of arrays of 2-part arrays of float numbers, 
                     each pair being right ascension $\alpha$ (decimal hours) and declination $\delta$ (decimal degrees) in equinox J2000.0. 
-		    See below how Stellarium can help you write these arrays.
+                    See below how Stellarium can help you write these arrays.
 
-                    \emph{Single-star constellations}\newFeature{25.1}  or particular highlights can be described with just one star repeated in a two-element segment.
+                    \indexterm[constellations!single-star]{Single-star constellations}\newFeature{25.1}  or particular highlights can be described with just one star repeated in a two-element segment.
                     The respective star will be encircled with a radius of 
 \item[\jtag{single\_star\_radius}] (float, default 0.5)\newFeature{25.1}.
 \item[\jtag{image}] Optional, see \ref{SC:image}
@@ -480,14 +480,18 @@ where
 	    \item[\jtag{IPA}] (optional) International Phonetic Alphabet, a standardardized phonetic spelling.
 	\end{description}
 
-	These names are used in the Constellation name style settings (s.~\ref{sec:gui:view:skyculture}). 
+	These names are used in the sky culture name style settings (s.~\ref{sec:gui:view:skyculture}). 
 	If your sky culture is a variant of the \file{Modern} sky culture, 
-	please use the canonical Latin as \jtag{native} and \jtag{english} names, they have all been translated already.
+	please use the canonical Latin as \jtag{native} name and the \jtag{english} names from the default Modern skyculture, they have all been translated already.
+	Also star names should provide both \jtag{native} and \jtag{english} entries, even if both are identical, 
+	to allow translation/transliteration to languages with other script systems or spelling variants.
 
 	If your sky culture is not a variant of the generally known \file{Modern} (western)
-	sky culture, please provide an English translation in addition to the name given in
-	the native language. Else translators will not be able to translate
-	the name, and users will be less interested. 
+	sky culture, please make sure to provide an \jtag{english} translation (where possible) in addition to the name given in
+	the \jtag{native} language. Else translators will not be able to translate
+	the name, and users will be less interested to learn about the culture. 
+	Also make very sure to use the same spelling consistently in \file{index.json} and \file{description.md}, 
+	and explain the context of stars, especially where only an untranslatable proper name is given.
 \item[\jtag{visibility}] (optional) special cases for rule-based visibility, e.g. seasonally changing aspects of figures. 
 	Currently only a \jtag{months} rule has been defined. 
 	Its ``payload'' is an array of two integers, start and end of visibility in months, e.g:
@@ -496,7 +500,7 @@ where
 "visibility": {"months": [6, 3]},
 	\end{jsonfile}
 %
-This specifies that the afflicted constellation is visible only from June to March. 
+This specifies that the afflicted constellation is visible only from June to March, wrapping over the 12-month cycle. 
 A second entry of the same constellation (with possibly different lines, artwork, or even name) 
 that would be visible from April to May, would be specified as:
 \begin{jsonfile}
@@ -505,7 +509,7 @@ that would be visible from April to May, would be specified as:
 \end{description}
 
 
-\paragraph{Drawing dark constellations}
+\paragraph{Drawing dark constellations}\index{constellations!dark}
 The outlines of figures like the ``Emu in the Sky'' cannot be described with connect-the-dot star patterns, 
 as they are formed from the absence of luminous patterns. We need to describe them using coordinate lists. 
 To make the process less tedious, we can extend setting Markers (see \ref{sec:tour:markers}). 
@@ -516,7 +520,8 @@ markers_to_logfile = true
 \end{configfile}
 After program restart, setting a marker also writes a numbered line into the logfile, 
 containing marker number and the array of coordinates (\texttt{[RA, dec]}). 
-The arrays can be collated into the format required to code coordinate lists for dark constellations.
+In the text editor you are using to edit \file{index.json}, 
+the arrays can be collated into the format required to code coordinate lists for dark constellations.
 
 
 \subsubsection{Constellation Artwork}
@@ -563,11 +568,11 @@ creation/matching, you can just press \key{Ctrl+\Alt+I} to reload.
 \label{SC:asterisms}
 
 Sometimes auxiliary figures were created for easier orientation. Some part of a 
-constellation was redefined into a figure in its own right, or  parts from different 
-constellations were merged into one big figure --- e.g. ``Big Dipper'' as part of Ursa Major or the 
+constellation may have been redefined into a figure in its own right, or  parts from different 
+constellations were merged into one big figure --- e.g. ``Big Dipper'' as part of Ursa Major, or the 
 ``Summer Triangle'' consisting of 3 stars from the constellations Cygnus, Lyra and Aquila. 
 After the codification of the official 88 constellations by the IAU, those additional figures
-are generally called \indexterm{asterisms}. \footnote{In a more generalized context when describing the sky of
+have generally been called \indexterm{asterisms}. \footnote{In a more generalized context when describing the sky of
   other cultures, the distinction may be less strict, and the term ``asterism'' may even be used 
   for the ``primary figures'' observed by those cultures.}
 
@@ -589,11 +594,13 @@ Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help ra
 \begin{description}
 \item[\jtag{id}] A unique asterism identifier, consisting of \texttt{AST} (for asterism), skyculture id, and a short label still unique within the skyculture.
                  It is not necessary to have exactly 3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended:  
-				 the short label is displayed when setting Constellation name style to ``short'' (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
+				 the short label is displayed when activating abbbreviated labels (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
 				 certain abbreviations from being displayed at all, let them start with a dot. 				 
-\item[\jtag{common\_name}] Another dict with entries \jtag{english} (the translatable english name), 
+\item[\jtag{common\_name}] Another dict with entries \jtag{native} (as used in the source), \jtag{english} (the translatable english name), 
+                \jtag{pronounce}, \jtag{transliteration} and \jtag{IPA} as defined for constellations,
 				and an optional array \jtag{references} which lists from which sources (from \ref{SC:references}) this asterism was taken. 
-				Collecting sources and giving such references is always a good idea. This entry may be used in later versions of Stellarium.
+				Collecting sources and giving such references is always a good idea. If you feel ther are more in the collection than you like, 
+				read \ref{sec:skycultures:exclude_references} about suppressing excessive entries.
 \item[\jtag{is\_ray\_helper}] (optional, default=\texttt{false}). 
                 Set to \texttt{true} to declare this asterism as ``ray helper'' which is shown in a different color and without label. 
 \item[\jtag{lines}] an array of arrays, each describing a polygon with integer star numbers. The star numbers are usually the Hipparcos (HIP) numbers. 
@@ -655,7 +662,8 @@ As example, we show a part of the Samoan skyculture:
 
 
 The Keys for stars generally start with \jtag{HIP }. 
-The associated array contains again dicts providing english spellings of the star names 
+The associated array contains again dicts providing \jtag{native} (original) and 
+\jtag{english} (translatable) spellings of the star names, 
 and \jtag{references} (optional but highly recommended) which indicates 
 in which sources (see \ref{SC:references}) these star names or particular spellings occur.
 The \jtag{english} name will be translated. An additional \jtag{native} entry can be given, 
@@ -663,12 +671,12 @@ which is the culture-native version of the spelling
 (also in language-specific glyphs when available in UTF8 and the current font) and will never be translated but can be shown on screen if so configured.
 
 
-\begin{jsonfile}[\scriptsize]
+\begin{jsonfile}[\tiny]
 "common_names": {
-    "HIP 677": [{"native": "Alpheratz", "references": [1,2,5,6,11,12,37]},
-                {"native": "Sirrah", "references": [23,37]}],
-    "HIP 746": [{"native": "Caph", "references": [1,2,6,11,12,23,37]},
-                {"native": "Al Sanam al Nakah", "references": [37]}],
+    "HIP 677": [{"native": "Alpheratz",         "english": "Alpheratz",         "references": [1,2,5,6,11,12,37]},
+                {"native": "Sirrah",            "english": "Sirrah",            "references": [23,37]}],
+    "HIP 746": [{"native": "Caph",              "english": "Caph",              "references": [1,2,6,11,12,23,37]},
+                {"native": "Al Sanam al Nakah", "english": "Al Sanam al Nakah", "references": [37]}],
 	... }
 \end{jsonfile}
 
@@ -759,6 +767,7 @@ flag_skyculture_always_fallback_to_international_names = true
 \end{configfile}
 Activating this flag for non-modern skycultures may feel weird, though.
 
+\label{sec:skycultures:exclude_references}
 In contrast, some of the collected names may be too fanciful for your taste. 
 If you can identify that those names that irritate you all come from a single or just a few entries of the reference list, 
 you can exclude those sources, and thus the names they bring into the program. Note that if a fancy name comes from more than one book, 
@@ -786,7 +795,8 @@ On Windows, press the Windows key and type \texttt{cmd} to startup the command c
 
 Let us assume you have created a skyculture following the format used until version 24.4 and described in previous editions of this Guide, 
 and that this skyculture \texttt{mine} resides in the default user data directory on Windows (see \ref{sec:Directories} for other platforms). 
-First we rename the skyculture to indicate that it is old and outdated. Then we must call the converter in its absolute path name.
+First we rename the skyculture to indicate that it is old and outdated. Then we must call the converter in its absolute path name, 
+with names of old (source) and new (target) directories as \emph{program arguments}.
 
  
 Example command to run it:
