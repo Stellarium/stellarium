@@ -79,13 +79,6 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 	culturalName.translated = names["english"].toString().trimmed();
 	culturalName.native = names["native"].toString().trimmed();
 	culturalName.pronounce = names["pronounce"].toString().trimmed();
-	//if (culturalName.native.isEmpty())
-	//{
-	//	if (culturalName.pronounce.isEmpty())
-	//		culturalName.native=culturalName.translated;
-	//	else
-	//		culturalName.native=culturalName.pronounce;
-	//}
 	culturalName.IPA = names["IPA"].toString().trimmed();
 	culturalName.transliteration = names["transliteration"].toString().trimmed();
 

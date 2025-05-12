@@ -206,17 +206,13 @@ QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGro
 
 QString Nebula::getScreenLabel() const
 {
-	StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
 	QStringList cLabels = getCultureLabels(scMgr->getScreenLabelStyle());
-	bool skycultureUsesCommonNames = scMgr->currentSkycultureUsesCommonNames();
-	//QString cLabel = (cLabels.isEmpty() ? QString() : cLabels.constFirst());
 
 	// TODO: Decide whether SCs with DSO names should only show common names of these objects, or use common names for all objects.
 
-	QString nameI18n=skycultureUsesCommonNames ? getNameI18n() : QString();
-	// DEBUG: show what is what.
-	//return (cLabels.isEmpty() ? (nameI18n.isEmpty() ? QString() : "i18"+nameI18n) : "CL:"+cLabels.constFirst());
-	return (cLabels.isEmpty() ? (nameI18n.isEmpty() ? QString() : nameI18n) : cLabels.constFirst());
+	QString nameI18n = scMgr->currentSkycultureUsesCommonNames() ? getNameI18n() : QString();
+	return (cLabels.isEmpty() ? nameI18n : cLabels.constFirst());
 }
 
 QString Nebula::getInfoLabel() const
@@ -1152,7 +1148,6 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 
 	const float shift = 15.f + (drawHintProportional ? getHintSize(sPainter) : 0.f);
 
-	//QString str = getNameI18n();
 	QString str = getScreenLabel();
 	if (str.isEmpty() || designationUsage)
 		str = getDSODesignation();
