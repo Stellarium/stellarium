@@ -157,7 +157,7 @@ public:
 	//! - PlainText
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
-	//! @return a QString containing an HMTL encoded description of the Nebula.
+	//! @return a QString containing an HTML encoded description of the Nebula.
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 	//! In addition to the entries from StelObject::getInfoMap(), Nebula objects provide
 	//! - bmag (photometric B magnitude. 99 if unknown)

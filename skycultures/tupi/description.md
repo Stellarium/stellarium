@@ -25,7 +25,7 @@ In the second half of December, the constellation is fully visible in the evenin
 ## References
 
  - [#1]: [The Tupi People](http://en.wikipedia.org/wiki/Tupi_people)
- - [#2]: [The Brazilian Indigenous Constellations](http://www.telescopiosnaescola.pro.br/indigenas.pdf) by Germano Bruno Afonso (Portugese)
+ - [#2]: [The Brazilian Indigenous Constellations](http://www.telescopiosnaescola.pro.br/indigenas.pdf) by Germano Bruno Afonso (Portuguese)
  - [#3]: [Claude d'Abbeville, Histoire de la Mission des Pères Capucins en l'Isle de Maragnan et terres circonvoisines. Paris, 1614.](http://gallica.bnf.fr/ark:/12148/btv1b86057861)
 
 ## Authors

@@ -4515,7 +4515,7 @@ bool Planet::ensureObjLoaded()
 {
 	if(!objModel && !objModelLoader)
 	{
-		qDebug()<<"Queueing aysnc load of OBJ model for"<<englishName;
+		qDebug()<<"Queueing async load of OBJ model for"<<englishName;
 		//create the async OBJ model loader
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 		objModelLoader = new QFuture<PlanetOBJModel*>(QtConcurrent::run(&Planet::loadObjModel,this));

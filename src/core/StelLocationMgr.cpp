@@ -1173,7 +1173,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			{
 				auto closeLocations = pickLocationsNearby("Earth", longitude, latitude, 0.5f);
 				// find closest location to (longitude,latitude) to grab light pollution info from.
-				// This is a bit awkard to begin with. Consider being 40km from an isolated larger city.
+				// This is a bit awkward to begin with. Consider being 40km from an isolated larger city.
 				// Sky is good, and you take LP value for the city?
 				double minDistanceKm=1E12;
 				StelLocation candLoc;
