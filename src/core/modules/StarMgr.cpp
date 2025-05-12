@@ -2431,7 +2431,16 @@ QStringList StarMgr::getCultureLabels(StarId hip, StelObject::CulturalDisplaySty
 	QStringList labels;
 	for (auto &cName: culturalNames)
 		{
-			QString label=scMgr->createCulturalLabel(cName, style, getCommonNameI18n(hip));
+			QString commonNamei18=getCommonNameI18n(hip);
+			if (commonNamei18.isEmpty())
+			{
+				QString sciDes=getSciDesignation(hip);
+				if (sciDes.isEmpty())
+					sciDes=getSciExtraDesignation(hip);
+
+				commonNamei18=sciDes.split(" - ").first();
+			}
+			QString label=scMgr->createCulturalLabel(cName, style, commonNamei18);
 			labels << label;
 		}
 	labels.removeDuplicates();
