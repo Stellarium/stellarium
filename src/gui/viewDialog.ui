@@ -4903,23 +4903,41 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <item row="0" column="0" rowspan="3">
-           <widget class="QListWidget" name="culturesListWidget">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-              <horstretch>100</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="selectionRectVisible">
-             <bool>false</bool>
-            </property>
+          <item row="0" column="1">
+           <widget class="QStackedWidget" name="skyCultureStackedWidget">
+            <widget class="QWidget" name="skyCulturePage_browser">
+             <layout class="QGridLayout" name="gridLayout_24">
+              <item row="0" column="0">
+               <widget class="QTextBrowser" name="skyCultureTextBrowser">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAsNeeded</enum>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="openExternalLinks">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="skyCulturePage_map">
+             <layout class="QGridLayout" name="gridLayout_25">
+              <item row="0" column="0">
+               <widget class="SkycultureMapGraphicsView" name="skyCultureMapGraphicsView"/>
+              </item>
+             </layout>
+            </widget>
            </widget>
           </item>
           <item row="1" column="1">
@@ -5430,49 +5448,53 @@
             </layout>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QStackedWidget" name="skyCultureStackedWidget">
-            <widget class="QWidget" name="skyCulturePage_map">
-             <layout class="QGridLayout" name="gridLayout_24">
-              <item row="0" column="0">
-               <widget class="SkycultureMapGraphicsView" name="skyCultureMapGraphicsView"/>
-              </item>
-              <item row="1" column="0">
-               <widget class="QSlider" name="skyCultureTimeSlider">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-            <widget class="QWidget" name="skyCulturePage_browser">
-             <layout class="QGridLayout" name="gridLayout_25">
-              <item row="0" column="0">
-               <widget class="QTextBrowser" name="skyCultureTextBrowser">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
-                </property>
-                <property name="verticalScrollBarPolicy">
-                 <enum>Qt::ScrollBarAsNeeded</enum>
-                </property>
-                <property name="horizontalScrollBarPolicy">
-                 <enum>Qt::ScrollBarAlwaysOff</enum>
-                </property>
-                <property name="openExternalLinks">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </widget>
+          <item row="0" column="0" rowspan="2">
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>5</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <property name="spacing">
+            <number>10</number>
+           </property>
+            <item>
+             <widget class="QPushButton" name="switchSkyCulturePageButton">
+             <property name="styleSheet">
+              <string notr="true">margin-left: 15px; margin-right: 15px;</string>
+             </property>
+              <property name="text">
+               <string>switch Page</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QListWidget" name="culturesListWidget">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                <horstretch>100</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="focusPolicy">
+               <enum>Qt::NoFocus</enum>
+              </property>
+              <property name="horizontalScrollBarPolicy">
+               <enum>Qt::ScrollBarAlwaysOff</enum>
+              </property>
+              <property name="selectionRectVisible">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -5641,7 +5663,6 @@
   <tabstop>landscapeIlluminationCheckBox</tabstop>
   <tabstop>pushButtonAddRemoveLandscapes</tabstop>
   <tabstop>page_skyculture</tabstop>
-  <tabstop>culturesListWidget</tabstop>
   <tabstop>useAsDefaultSkyCultureCheckBox</tabstop>
   <tabstop>skyCultureNamesStyleComboBox</tabstop>
   <tabstop>nativePlanetNamesCheckBox</tabstop>

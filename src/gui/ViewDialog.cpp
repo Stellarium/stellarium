@@ -549,6 +549,9 @@ void ViewDialog::createDialogContent()
 	        this, &ViewDialog::updateDefaultSkyCulture);
 	updateDefaultSkyCulture();
 
+   ui->skyCultureStackedWidget->setCurrentIndex(1);
+   connect(ui->switchSkyCulturePageButton,SIGNAL(clicked()), this, SLOT(switchSkyCulturePage()));
+
 	// allow to display short names and inhibit translation.
 	connectIntProperty(ui->skyCultureNamesStyleComboBox,		"ConstellationMgr.constellationDisplayStyle");
 	connectCheckBox(ui->nativePlanetNamesCheckBox,			"actionShow_Skyculture_NativePlanetNames");
@@ -1344,6 +1347,14 @@ void ViewDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 	if (!current)
 		current = previous;
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
+}
+
+void ViewDialog::switchSkyCulturePage()
+{
+   int pageCount = ui->skyCultureStackedWidget->count();
+   int currentIndex = ui->skyCultureStackedWidget->currentIndex();
+
+   ui->skyCultureStackedWidget->setCurrentIndex((currentIndex + 1) % pageCount);
 }
 
 void ViewDialog::populatePlanetMagnitudeAlgorithmsList()
