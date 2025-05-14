@@ -118,6 +118,7 @@ double AsterismMgr::getCallOrder(StelModuleActionName actionName) const
 
 void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
+	static QSettings *conf=StelApp::getInstance().getSettings();
 	currentSkyCultureID = skyCulture.id;
 
 	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
@@ -141,11 +142,36 @@ void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 		asterisms.clear();
 		asterisms.resize(skyCulture.asterisms.size());
 		unsigned readOK = 0;
+
+		// Configure exclusion by user preference!
+		QString exclude=conf->value(QString("SCExcludeReferences/%1").arg(currentSkyCultureID), QString()).toString();
+		QSet<int>excludeRefs;
+		if (!exclude.isEmpty())
+		{
+	#if  (QT_VERSION<QT_VERSION_CHECK(5,14,0))
+			QStringList excludeRefStrings=exclude.split(',', QString::SkipEmptyParts);
+	#else
+			QStringList excludeRefStrings=exclude.split(',', Qt::SkipEmptyParts);
+	#endif
+			QMutableListIterator<QString> it(excludeRefStrings);
+			while (it.hasNext())
+			{
+				bool ok;
+				int numRef=it.next().toInt(&ok); // ok=false for strings e.g. from asterisms
+				if (ok)
+				{
+					excludeRefs.insert(numRef);
+					it.remove();
+				}
+			}
+			qInfo() << "Skyculture" << currentSkyCultureID << "configured to exclude asterisms referenced from" << excludeRefs;
+		}
+
 		for (unsigned n = 0, m=0; n < asterisms.size(); ++n, ++m)
 		{
 			auto& aster = asterisms[n];
 			aster = new Asterism;
-			if (aster->read(skyCulture.asterisms[m].toObject(), hipStarMgr))
+			if (aster->read(skyCulture.asterisms[m].toObject(), hipStarMgr, excludeRefs))
 			{
 				aster->lineFader.setDuration(static_cast<int>(linesFadeDuration * 1000.f));
 				aster->rayHelperFader.setDuration(static_cast<int>(rayHelpersFadeDuration * 1000.f));
