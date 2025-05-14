@@ -1701,7 +1701,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	if (getFlagAdditionalNames())
 	{
 #if  (QT_VERSION<QT_VERSION_CHECK(6,0,0))
-		QMapIterator<QString, StarId>it(culturalNamesIndex);
+		QMapIterator<QString, StarId>it(culturalNamesUppercaseIndex);
 #else
 		QMultiMapIterator<QString, StarId>it(culturalNamesUppercaseIndex);
 #endif
