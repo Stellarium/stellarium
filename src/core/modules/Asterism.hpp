@@ -73,8 +73,9 @@ private:
 	//! catalogue numbers which, when connected pairwise, form the lines of the
 	//! asterism.
 	//! @param starMgr a pointer to the StarManager object.
+	//! @param excludeRefs a QSet of reference exclusions (user-defined preference in config.ini)
 	//! @return false if can't parse record, else true.
-	bool read(const QJsonObject& data, StarMgr *starMgr);
+	bool read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &excludeRefs);
 
 	//! Draw the asterism name
 	void drawName(StelPainter& sPainter, bool abbreviateLabel) const;

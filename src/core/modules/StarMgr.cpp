@@ -2093,7 +2093,10 @@ void StarMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 		//qInfo() << "Skyculture" << skyCulture.id << "configured to exclude references" << excludeRefStrings;
 		for (const QString &s: excludeRefStrings)
 		{
-			excludeRefs.insert(s.toInt());
+			bool ok;
+			int numRef=s.toInt(&ok); // ok=false for strings e.g. from asterisms
+			if (ok)
+				excludeRefs.insert(numRef);
 		}
 		qInfo() << "Skyculture" << skyCulture.id << "configured to exclude references" << excludeRefs;
 	}

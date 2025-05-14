@@ -728,7 +728,7 @@ The large number\newFeature{25.2} of label combinations requires storing them in
 \item{\texttt{Pronounce}} to show a Latin-character based transliteration usable as pronunciation aid.
 \item{\texttt{Translit}} to show a scienticic transliteration that is not necessarily aimed at pronunciation.
 \item{\texttt{Translated}} to show the meaning of the name translated to user language. 
-\item{\texttt{IPA}} to show the name in Ingternational Phonetic Alphabet.
+\item{\texttt{IPA}} to show the name in International Phonetic Alphabet.
 \item{\texttt{Modern}} to show the contemporary scientific object name.
 \end{description}
 
@@ -765,21 +765,29 @@ If you always want to see these names, regardless of whether they are used or no
 [viewing]
 flag_skyculture_always_fallback_to_international_names = true
 \end{configfile}
-Activating this flag for non-modern skycultures may feel weird, though.
+Activating this flag for non-modern skycultures may feel weird, though, as it mixes these names into the other-cultural namespace.
 
+\paragraph{Excluding excessive names}
 \label{sec:skycultures:exclude_references}
 In contrast, some of the collected names may be too fanciful for your taste. 
 If you can identify that those names that irritate you all come from a single or just a few entries of the reference list, 
 you can exclude those sources, and thus the names they bring into the program. Note that if a fancy name comes from more than one book, 
 you would have to exclude all books to ban that name from your display.
 
-To exclude entries from being referenced by a particular skyculture, add the following keys to \file{config.ini}:
+In a similar way, some of the collected asterisms (secondary figures), especially in the default Modern sky culture, may be too much for you. 
+There are overlapping entries like the ``Winter Hexagon'' vs. ``Heavenly G'', 
+or parts of constellations like Orion's shield and cudgel are marked as asterism. Some users may find that this clutters their screens too much. 
+If you cannot identify a reference which introduces the unwanted asterism (for some entries we cannot specify a source, unfortunately), 
+you can also exclude them by their unique abbreviation, which is the last part of their \jtag{id} entries.
+
+To exclude entries from being displayed by a particular skyculture, add an entry like this to \file{config.ini}:
 \begin{configfile}
 [SCExcludeReferences]
-modern  = 11,36
+modern  = 11,36,OrB,OrS,OSh,OrC,HeG,Sal,TPT
 \end{configfile}
 %
-Here, \texttt{modern} names the skyculture, and the comma-separated entries are references you want excluded from \file{description.md}.
+Here, \texttt{modern} names the skyculture, and the comma-separated entries are references from the file \file{description.md} or 
+asterism abbreviations you want to be ignored.
 
 
 
@@ -807,8 +815,8 @@ move mine mine.old
 "c:\Program Files\stellarium\skyculture-converter" mine.old mine
 \end{commands}
 
-While the converter tries hard to convert the description text from HTML to Markdown adding some sections from other parts of the sky culture, the conversion may not be ideal. 
-Formerly the description was completely free in structure, while now there are some requirements on it, so the text may need some editing to conform.
+While the converter tries hard to convert the description text from HTML to Markdown adding some sections from other parts of the sky culture, the conversion result may not be perfect. 
+Formerly the description was completely free in structure, while now there are some structural requirements on it, so the text may need some editing to conform.
 
 If you have \program{gettext} translation files (the ones whose names are in the form \file{locale-name.po}) for the names of stars, constellations etc., 
 you can pass the path to the directory that contains them as an optional third positional argument to the converter.
