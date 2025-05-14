@@ -78,7 +78,7 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &
 		return false;
 	}
 
-	// TODO: Allow exclusion by user configuration!
+	// Allow exclusion by user configuration!
 	QString exclude=conf->value(QString("SCExcludeReferences/%1").arg(scName), QString()).toString();
 	if (!exclude.isEmpty())
 	{
@@ -207,7 +207,7 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &
 			}
 			case Type::TelescopicAsterism:
 			{
-					QMessageBox::information(nullptr, "Bad asterism", "Asterism with coord list found: " + id);
+				qWarning() << "Asterisms with coord list no longer supported. Skipping " << id;
 				/*
 				if (!point.isArray())
 				{

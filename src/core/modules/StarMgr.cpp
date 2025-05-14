@@ -85,7 +85,7 @@ QHash<QString,StarId> StarMgr::commonNamesUppercaseIndex;
 
 // Cultural names: We must store all data here, and have one common index to native names&spelling, pronunciation, english and user-language spelling
 QMultiHash<StarId, StelObject::CulturalName> StarMgr::culturalNamesMap; // cultural names
-QMultiMap<QString, StarId> StarMgr::culturalNamesIndex; // reverse mappings of uppercased names. For names, unfortunately multiple results are possible!
+QMultiMap<QString, StarId> StarMgr::culturalNamesUppercaseIndex; // reverse mappings of uppercased names. For names, unfortunately multiple results are possible!
 
 QHash<StarId,QString> StarMgr::sciDesignationsMap;      // Bayer/Flamsteed. TODO: Convert map target to QStringList?
 QHash<QString,StarId> StarMgr::sciDesignationsIndex;
@@ -806,13 +806,13 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 		//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated;
 		culturalNamesMap.insert(HIP, cName); // add as possibly multiple entry to HIP.
 		if (!cName.native.isEmpty())
-			culturalNamesIndex.insert(cName.native.toUpper(), HIP);
+			culturalNamesUppercaseIndex.insert(cName.native.toUpper(), HIP);
 		if (!cName.pronounceI18n.isEmpty())
-			culturalNamesIndex.insert(cName.pronounceI18n.toUpper(), HIP);
+			culturalNamesUppercaseIndex.insert(cName.pronounceI18n.toUpper(), HIP);
 		if (!cName.transliteration.isEmpty())
-			culturalNamesIndex.insert(cName.transliteration.toUpper(), HIP);
+			culturalNamesUppercaseIndex.insert(cName.transliteration.toUpper(), HIP);
 		if (!cName.translatedI18n.isEmpty())
-			culturalNamesIndex.insert(cName.translatedI18n.toUpper(), HIP);
+			culturalNamesUppercaseIndex.insert(cName.translatedI18n.toUpper(), HIP);
 	}
 }
 
@@ -847,13 +847,13 @@ void StarMgr::loadCultureSpecificNameForStar(const QJsonArray& data, const StarI
 		//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated << "/" << cName.translatedI18n;
 		culturalNamesMap.insert(HIP, cName); // add as possibly multiple entry to HIP.
 		if (!cName.native.isEmpty())
-			culturalNamesIndex.insert(cName.native.toUpper(), HIP);
+			culturalNamesUppercaseIndex.insert(cName.native.toUpper(), HIP);
 		if (!cName.pronounceI18n.isEmpty())
-			culturalNamesIndex.insert(cName.pronounceI18n.toUpper(), HIP);
+			culturalNamesUppercaseIndex.insert(cName.pronounceI18n.toUpper(), HIP);
 		if (!cName.transliteration.isEmpty())
-			culturalNamesIndex.insert(cName.transliteration.toUpper(), HIP);
+			culturalNamesUppercaseIndex.insert(cName.transliteration.toUpper(), HIP);
 		if (!cName.translatedI18n.isEmpty())
-			culturalNamesIndex.insert(cName.translatedI18n.toUpper(), HIP);
+			culturalNamesUppercaseIndex.insert(cName.translatedI18n.toUpper(), HIP);
 	}
 	//qInfo() << "Skyculture has " << culturalNamesMap.size() << "entries, index has" << culturalNamesIndex.size();
 }
@@ -1449,7 +1449,7 @@ void StarMgr::updateI18n()
 		commonNamesI18nMap[i] = t;
 		commonNamesI18nUppercaseIndex[t.toUpper()] = i;
 	}
-	culturalNamesIndex.clear();
+	culturalNamesUppercaseIndex.clear();
 	for (QMultiHash<StarId,StelObject::CulturalName>::iterator it(culturalNamesMap.begin());it!=culturalNamesMap.end();++it)
 	{
 		StarId HIP=it.key();
@@ -1460,13 +1460,13 @@ void StarMgr::updateI18n()
 
 		// rebuild index
 		if (!cName.native.isEmpty())
-			culturalNamesIndex.insert(cName.native.toUpper(), HIP);
+			culturalNamesUppercaseIndex.insert(cName.native.toUpper(), HIP);
 		if (!cName.pronounceI18n.isEmpty())
-			culturalNamesIndex.insert(cName.pronounceI18n.toUpper(), HIP);
+			culturalNamesUppercaseIndex.insert(cName.pronounceI18n.toUpper(), HIP);
 		if (!cName.transliteration.isEmpty())
-			culturalNamesIndex.insert(cName.transliteration.toUpper(), HIP);
+			culturalNamesUppercaseIndex.insert(cName.transliteration.toUpper(), HIP);
 		if (!cName.translatedI18n.isEmpty())
-			culturalNamesIndex.insert(cName.translatedI18n.toUpper(), HIP);
+			culturalNamesUppercaseIndex.insert(cName.translatedI18n.toUpper(), HIP);
 	}
 }
 
@@ -1524,10 +1524,10 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 		return searchHP(commonNamesI18nUppercaseIndex.value(nameI18nUpper));
 
 	// Search by cultural names? (Any names: native/pronounceI18n/translatedI18n/transliteration
-	if (getFlagAdditionalNames() && culturalNamesIndex.contains(nameI18nUpper))
+	if (getFlagAdditionalNames() && culturalNamesUppercaseIndex.contains(nameI18nUpper))
 	{
 		// This only returns the first-found number.
-		StarId starId=culturalNamesIndex.value(nameI18nUpper);
+		StarId starId=culturalNamesUppercaseIndex.value(nameI18nUpper);
 		return (starId <= NR_OF_HIP ? searchHP(starId) : searchGaia(starId));
 	}
 
@@ -1599,10 +1599,10 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 
 	if (getFlagAdditionalNames())
 	{
-		if (culturalNamesIndex.contains(nameUpper))
+		if (culturalNamesUppercaseIndex.contains(nameUpper))
 		{
 			// This only returns the first-found number.
-			sid=culturalNamesIndex.value(nameUpper);
+			sid=culturalNamesUppercaseIndex.value(nameUpper);
 			return (sid <= NR_OF_HIP ? searchHP(sid) : searchGaia(sid));
 		}
 	}
@@ -1701,9 +1701,9 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	if (getFlagAdditionalNames())
 	{
 #if  (QT_VERSION<QT_VERSION_CHECK(6,0,0))
-		QMapIterator<QString, StarId>it(culturalNamesIndex);
+		QMapIterator<QString, StarId>it(culturalNamesUppercaseIndex);
 #else
-		QMultiMapIterator<QString, StarId>it(culturalNamesIndex);
+		QMultiMapIterator<QString, StarId>it(culturalNamesUppercaseIndex);
 #endif
 		while (it.hasNext())
 		{
@@ -1718,7 +1718,29 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			{
 				if (maxNbItem<=0)
 					break;
-				result.append(name);
+
+				// We must retrieve the original mixed-case spelling
+				QList<StelObject::CulturalName> cNames=getCulturalNames(it.value());
+				QString finalName;
+				for (const StelObject::CulturalName &cName: cNames)
+				{
+					if (!cName.native.compare(name, Qt::CaseInsensitive))
+						finalName=cName.native;
+					else if (!cName.pronounceI18n.compare(name, Qt::CaseInsensitive))
+						finalName=cName.pronounceI18n;
+					else if (!cName.transliteration.compare(name, Qt::CaseInsensitive))
+						finalName=cName.transliteration;
+					else if (!cName.translatedI18n.compare(name, Qt::CaseInsensitive))
+						finalName=cName.translatedI18n;
+				}
+				if (finalName.isEmpty())
+				{
+					qWarning() << "No original string found for " << name
+						   << "(This should not be possible...)";
+					finalName=name;
+				}
+
+				result.append(finalName);
 				--maxNbItem;
 			}
 		}
@@ -2077,7 +2099,7 @@ void StarMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	commonNamesI18nUppercaseIndex.clear();
 	commonNamesUppercaseIndex.clear();
 	culturalNamesMap.clear();
-	culturalNamesIndex.clear();
+	culturalNamesUppercaseIndex.clear();
 
 	static QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -2127,7 +2149,7 @@ void StarMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 		if (skyCulture.fallbackToInternationalNames)
 		{
 			// Add name from commonNames, but only if not already in list.
-			auto starIds=culturalNamesIndex.values(englishNameUpper);
+			auto starIds=culturalNamesUppercaseIndex.values(englishNameUpper);
 			if (!starIds.contains(HIP))
 			{
 				StelObject::CulturalName cName{englishName, QString(), QString(),
@@ -2136,9 +2158,9 @@ void StarMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 				//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated << "/" << cName.translatedI18n;
 				culturalNamesMap.insert(HIP, cName); // add as possibly multiple entry to HIP.
 				if (!cName.native.isEmpty())
-					culturalNamesIndex.insert(cName.native.toUpper(), HIP);
+					culturalNamesUppercaseIndex.insert(cName.native.toUpper(), HIP);
 				if (!cName.translatedI18n.isEmpty())
-					culturalNamesIndex.insert(cName.translatedI18n.toUpper(), HIP);
+					culturalNamesUppercaseIndex.insert(cName.translatedI18n.toUpper(), HIP);
 			}
 		}
 	}
