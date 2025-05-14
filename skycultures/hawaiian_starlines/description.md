@@ -54,7 +54,7 @@ The star line itself starts with *Hokupa’a* (North Star), the ultimate norther
 
 This star line consists of two constellations. The Navigator’s Triangle on the north and Maui’s fish hook on the south. The Navigator’s Triangle is made of three stars *Hawaiki* (Deneb), *Keoe* (Vega), and *Humu* (Altair). (It is the same figure as the Summer Triangle for modern amateur astronomers.) These stars also represent the Polynesian triangle: Hawai’i (*Hawaiki*), Rapanui (*Keoe*), and Aotearoa (*Humu*). These three islands are pulled by the fish hook of Maui (Scorpius).
 
-The northern pointer is found in the Navigator’s Triangle when you connect *Hawaiki* (Deneb) and *Momonapikowalu* (&gamma; Cyg, Sadr). Southern pointers are in the fish hook when you connect *Mili’opu* (&delta; Sco, Dschubba) and *Kahe* (&pi; Sco, Fang), the stars on the top of the hook.
+The northern pointer is found in the Navigator’s Triangle when you connect *Wainielela* (&epsilon; Cyg, Aljanah (Gienah)) and *Hawaiki* (Deneb). Southern pointers are in the fish hook when you connect *Mili’opu* (&delta; Sco, Dschubba) and *Kahe* (&pi; Sco, Fang), the stars on the top of the hook.
 
 ### <notr>Ka Lupe o Kawelo</notr>
 
