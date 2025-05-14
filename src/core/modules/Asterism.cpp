@@ -53,15 +53,24 @@ Asterism::~Asterism()
 {
 }
 
-bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
+bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &excludeRefs)
 {
-	//abbreviation = data["id"].toString();
+	static QSettings *conf=StelApp::getInstance().getSettings();
 
 	const QString id = data["id"].toString();
 	const QStringList idParts = id.split(" ");
+	QString scName;
 	if (idParts.size() == 3 && idParts[0] == "AST")
 	{
 		abbreviation = idParts[2].trimmed();
+		scName = idParts[1].trimmed();
+		if (scName != GETSTELMODULE(StelSkyCultureMgr)->getCurrentSkyCultureID())
+		{
+			qWarning().nospace() << "Skyculture definition error (skyculture name mismatch) in asterism " << id
+					     << " of skyculture " << GETSTELMODULE(StelSkyCultureMgr)->getCurrentSkyCultureID()
+					     << ". Skipping this asterism.";
+			return false;
+		}
 	}
 	else
 	{
@@ -69,6 +78,51 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 		return false;
 	}
 
+	// TODO: Allow exclusion by user configuration!
+	QString exclude=conf->value(QString("SCExcludeReferences/%1").arg(scName), QString()).toString();
+	if (!exclude.isEmpty())
+	{
+#if  (QT_VERSION<QT_VERSION_CHECK(5,14,0))
+		QStringList excludeRefStrings=exclude.split(',', QString::SkipEmptyParts);
+#else
+		QStringList excludeRefStrings=exclude.split(',', Qt::SkipEmptyParts);
+#endif
+		// The list has potentially both, unwanted references (which we just take out) and additional asterism abbrevations.
+		QMutableListIterator<QString> it(excludeRefStrings);
+		while (it.hasNext())
+		{
+			bool ok;
+			int numRef=it.next().toInt(&ok); // ok=false for strings e.g. from asterisms
+			if (ok)
+			{
+				Q_UNUSED(numRef);
+				it.remove();
+			}
+		}
+		//qInfo() << "Skyculture" << scName << "configured to exclude asterisms referenced from" << excludeRefs;
+
+		QVariantList refsVariants=data["references"].toArray().toVariantList();
+		if (!refsVariants.isEmpty())
+		{
+			QSet<int> refs;
+			foreach(const QVariant &v, refsVariants) {
+			    refs << v.value<int>();
+			}
+			//qInfo() << "Asterism" << id << "has refs" << refs;
+			if (refs.subtract(excludeRefs).isEmpty())
+			{
+				//qInfo() << "Asterism" << id << "has lost reference support. Skipping.";
+				return false;
+			}
+		}
+
+		// The remaining elements are (hopefully) unique asterism abbreviations.
+		if (excludeRefStrings.contains(abbreviation))
+		{
+			qDebug().nospace() << "Asterism " << id << " excluded by user config. Skipping.";
+			return false;
+		}
+	}
 
 	const QJsonValue names = data["common_name"];
 	if (names.isObject())
