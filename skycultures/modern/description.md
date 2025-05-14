@@ -85,7 +85,7 @@ The IAU is the only scientifically accepted authority to assign new names to sta
  - [#21]: Peters, C. A. F. (1853). "On the Parallax of Argelander's Star". Monthly Notices of the Royal Astronomical Society, Vol. 14, p.49. DOI: 10.1093/mnras/14.2.49
  - [#22]: Maddocks, Hugh C. (1991). "Deep-Sky Name Index 2000.0". Foxon-Maddocks Associates. ISBN 0-9628305-0-X.
  - [#23]: Josef Klepesta, Antonin Rükl (1977). "Constellations: A concise guide in colour". ISBN 0600008932.
- - [#24]: Oswald Thomas (1945). "Atlas der Sternbilder". Salzburg.
+ - [#24]: Oswald Thomas (1945). "Atlas der Sternbilder". Das Bergland-Buch, Salzburg.
  - [#25]: Fred Schaaf (2019). "An Assortment of Asterisms". Sky & Telescope, p.45 (Nov 2019)
  - [#26]: Gary Seronik (2017). "Binocular Highlights Revised & Expanded: 109 Celestial Sights for Binocular Users". F W Publications Inc. ISBN 9781940038445
  - [#27]: Tony Flanders (2019). "Constellation Close-up: Centaurus and Crux". Sky & Telescope, pp.22-27 (Apr 2019).
