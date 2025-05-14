@@ -603,8 +603,8 @@ private:
 	// Cultural names: We must store all data here, and have even 3 indices to native names&spelling, pronunciation, english and user-language spelling
 	static QMultiHash<StarId, StelObject::CulturalName> culturalNamesMap; // cultural names
 	//! reverse mappings of UPPERCASEd native, pronounceI18n, transliteration and translatedI18n names. Multiple results are possible!
-	//! Retrieve with QList<StarId> ids=culturalNamesIndex.values(name)
-	static QMultiMap<QString, StarId>  culturalNamesIndex;
+	//! Retrieve with QList<StarId> ids=culturalNamesUppercaseIndex.values(name)
+	static QMultiMap<QString, StarId> culturalNamesUppercaseIndex;
 
 	//! Scientific designations:
 	//! Bayer/Flamsteed

@@ -78,7 +78,7 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &
 		return false;
 	}
 
-	// TODO: Allow exclusion by user configuration!
+	// Allow exclusion by user configuration!
 	QString exclude=conf->value(QString("SCExcludeReferences/%1").arg(scName), QString()).toString();
 	if (!exclude.isEmpty())
 	{
