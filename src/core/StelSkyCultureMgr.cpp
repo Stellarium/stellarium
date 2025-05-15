@@ -882,7 +882,11 @@ SphericalRegionP StelSkyCultureMgr::makeConvexHull(const std::vector<StelObjectP
 	double th=0.0;
 	for (M=0; M<N; ++M)
 	{
+#if (QT_VERSION<QT_VERSION_CHECK(5,13,0))
+		std::swap(hullList[M], hullList[min]);
+#else
 		hullList.swapItemsAt(M, min);
+#endif
 
 		//// DUMP HULL LINE
 		//for(int i=0; i<hullList.count(); ++i)
