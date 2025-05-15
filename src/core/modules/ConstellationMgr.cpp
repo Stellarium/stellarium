@@ -614,14 +614,18 @@ void ConstellationMgr::drawNames(StelPainter& sPainter, const Vec3d &obsVelocity
 	sPainter.setBlending(true);
 	for (auto* constellation : constellations)
 	{
-		Vec3d XYZname=constellation->XYZname;
-		XYZname.normalize();
-		XYZname+=obsVelocity;
-		XYZname.normalize();
+		for (int i=0; i<constellation->XYZname.size(); ++i)
+		{
+			Vec3d XYZname=constellation->XYZname.at(i);
+			XYZname.normalize();
+			XYZname+=obsVelocity;
+			XYZname.normalize();
 
-		// Check if in the field of view
-		if (sPainter.getProjector()->projectCheck(XYZname, constellation->XYname))
-			constellation->drawName(sPainter);
+			Vec3d xyName;
+			// Check if in the field of view
+			if (sPainter.getProjector()->projectCheck(XYZname, xyName))
+				constellation->drawName(xyName, sPainter);
+		}
 	}
 }
 

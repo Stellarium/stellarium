@@ -255,7 +255,7 @@ private:
 	//! Draw the ray helpers at the epoch given by the StelCore.
 	void drawRayHelpers(StelPainter& sPainter, const StelCore* core) const;
 	//! Draw the asterism name labels.
-	void drawNames(StelPainter& sPainter) const;
+	void drawNames(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 	//! Handle single and multi-asterism selections.
 	void setSelectedAsterism(Asterism* a);
 	//! Handle unselecting a single asterism.

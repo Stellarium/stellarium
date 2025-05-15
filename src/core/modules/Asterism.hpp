@@ -65,7 +65,9 @@ private:
 	QString getID() const override { return abbreviation; }
 
 	//! observer centered J2000 coordinates.
-	Vec3d getJ2000EquatorialPos(const StelCore*) const override {return XYZname;}
+	//! These are either automatically computed from all stars forming the lines,
+	//! or from the manually defined label point(s).
+	Vec3d getJ2000EquatorialPos(const StelCore*) const override;
 
 	//! @param record string containing the following whitespace
 	//! separated fields: abbreviation - a three character abbreviation
@@ -78,7 +80,7 @@ private:
 	bool read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &excludeRefs);
 
 	//! Draw the asterism name
-	void drawName(StelPainter& sPainter, bool abbreviateLabel) const;
+	void drawName(const Vec3d &xyName, StelPainter& sPainter) const;
 
 	//! Get the translated name for the Asterism.
 	QString getNameI18n() const override {return culturalName.translatedI18n;}
@@ -137,9 +139,10 @@ private:
 	QString abbreviationI18n;
 	//! Context for name
 	QString context;
-	//! Direction vector pointing on constellation name drawing position
-	Vec3d XYZname;
-	Vec3d XYname;
+	//! Direction vectors pointing on constellation name drawing position (J2000.0 coordinates)
+	//! Usually a single position is computed from averaging star positions forming the constellation, but we can override with an entry in index.json,
+	//! and even give more positions (e.g. for long or split-up constellations like Serpens.
+	QList<Vec3d> XYZname;
 	enum class Type
 	{
 		RayHelper,          //!< Ray helper

@@ -150,11 +150,13 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 		}
 		numberOfSegments = dark_constellation.size() / 2;
 		// Name tag should go to constellation's centre of gravity
-		XYZname.set(0.,0.,0.);
+		Vec3d XYZname1(0.);
 		for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
 		{
-			XYZname+= dark_constellation[ii];
+			XYZname1 += dark_constellation[ii];
 		}
+		XYZname1.normalize();
+		XYZname.append(XYZname1);
 	}
 	else
 	{
@@ -221,17 +223,17 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 		}
 
 		// Name tag should go to constellation's centre of gravity
-		XYZname.set(0.,0.,0.);
+		Vec3d XYZname1(0.);
 		for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
 		{
-			XYZname+= constellation[ii]->getJ2000EquatorialPos(StelApp::getInstance().getCore());
+			XYZname1 += constellation[ii]->getJ2000EquatorialPos(StelApp::getInstance().getCore());
 		}
+		XYZname1.normalize();
+		XYZname.append(XYZname1);
 	}
 
 	// At this point we have either a constellation or a dark_constellation filled
 
-
-	XYZname.normalize();
 	// Sometimes label placement is suboptimal. Allow a correction from the automatic solution in label_offset:[dRA_deg, dDec_deg]
 	if (data.contains("label_offset"))
 	{
@@ -241,10 +243,30 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 		else
 		{
 			double ra, dec;
-			StelUtils::rectToSphe(&ra, &dec, XYZname);
+			StelUtils::rectToSphe(&ra, &dec, XYZname[0]);
 			ra  += offset[0].toDouble()*M_PI_180;
 			dec += offset[1].toDouble()*M_PI_180;
-			StelUtils::spheToRect(ra, dec, XYZname);
+			StelUtils::spheToRect(ra, dec, XYZname[0]);
+		}
+	}
+	// Manual label placement: Manual positions can have more than one (e.g., Serpens has two parts). In this case, discard automatically derived position.
+	if (data.contains("label_positions"))
+	{
+		XYZname.clear();
+		const QJsonArray &labelPosArray=data["label_positions"].toArray();
+		for (const auto& labelPos : labelPosArray)
+		{
+			const auto& labelArray=labelPos.toArray();
+			if (labelArray.size() != 2)
+			{
+				qWarning() << "Bad label position given for constellation" << id << "... skipping";
+				continue;
+			}
+			const double RA = labelArray[0].toDouble() * (M_PI_180*15.);
+			const double DE = labelArray[1].toDouble() * M_PI_180;
+			Vec3d newPoint;
+			StelUtils::spheToRect(RA, DE, newPoint);
+			XYZname.append(newPoint);
 		}
 	}
 
@@ -286,7 +308,7 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 	}
 	double hullRadius=data["hull_radius"].toDouble(data["single_star_radius"].toDouble(0.5));
 
-	convexHull=StelSkyCultureMgr::makeConvexHull(constellation, hullExtension, std::vector<Vec3d>(), XYZname, hullRadius);
+	convexHull=StelSkyCultureMgr::makeConvexHull(constellation, hullExtension, std::vector<Vec3d>(), XYZname.constFirst(), hullRadius);
 
 	beginSeason = 1;
 	endSeason = 12;
@@ -361,7 +383,26 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 		}
 }
 
-void Constellation::drawName(StelPainter& sPainter) const
+// observer centered J2000 coordinates.
+// These are either automatically computed from all stars forming the lines,
+// or from the manually defined label point(s).
+Vec3d Constellation::getJ2000EquatorialPos(const StelCore*) const
+{
+	if (XYZname.length() ==1)
+		return XYZname.first();
+	else
+	{
+		Vec3d point(0.0);
+		for (Vec3d namePoint: XYZname)
+		{
+			point += namePoint;
+		}
+		point.normalize();
+		return point;
+	}
+}
+
+void Constellation::drawName(const Vec3d &xyName, StelPainter& sPainter) const
 {
 	if (nameFader.getInterstate()==0.0f)
 		return;
@@ -371,7 +412,7 @@ void Constellation::drawName(StelPainter& sPainter) const
 	{
 		QString name = getScreenLabel();
 		sPainter.setColor(labelColor, nameFader.getInterstate());
-		sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
+		sPainter.drawText(static_cast<float>(xyName[0]), static_cast<float>(xyName[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 	}
 }
 
