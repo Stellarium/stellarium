@@ -491,7 +491,15 @@ where
 	the \jtag{native} language. Else translators will not be able to translate
 	the name, and users will be less interested to learn about the culture. 
 	Also make very sure to use the same spelling consistently in \file{index.json} and \file{description.md}, 
-	and explain the context of stars, especially where only an untranslatable proper name is given.
+	and explain the context of stars (how these stars are used, or what they mean to the respective members of the culture), 
+	especially where only an untranslatable proper name is given.
+
+\item[\jtag{label\_offset}] optional. An array of \texttt{[deltaRA, deltaDE]} (decimal hours, decimal degrees) 
+                            used as offset that shifts the auto-computed label positions. 
+
+\item[\jtag{label\_positions}] optional. An array of sub-arrays of \texttt{[RA, DE]} tuples (decimal hours, decimal degrees) used as label positions. 
+                               By default, the label position is computed from the star positions used in the \jtag{lines}. 
+			                   With this entry you can set specialized positions, or also use more than one label per constellation. 
 \item[\jtag{visibility}] (optional) special cases for rule-based visibility, e.g. seasonally changing aspects of figures. 
 	Currently only a \jtag{months} rule has been defined. 
 	Its ``payload'' is an array of two integers, start and end of visibility in months, e.g:
@@ -510,7 +518,7 @@ that would be visible from April to May, would be specified as:
 
 
 \paragraph{Drawing dark constellations}\index{constellations!dark}
-The outlines of figures like the ``Emu in the Sky'' cannot be described with connect-the-dot star patterns, 
+The outlines \newFeature{25.2}of figures like the ``Emu in the Sky'' cannot be described with connect-the-dot star patterns, 
 as they are formed from the absence of luminous patterns. We need to describe them using coordinate lists. 
 To make the process less tedious, we can extend setting Markers (see \ref{sec:tour:markers}). 
 For this to work, add the following key to \file{config.ini}:
@@ -599,8 +607,16 @@ Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help ra
 \item[\jtag{common\_name}] Another dict with entries \jtag{native} (as used in the source), \jtag{english} (the translatable english name), 
                 \jtag{pronounce}, \jtag{transliteration} and \jtag{IPA} as defined for constellations,
 				and an optional array \jtag{references} which lists from which sources (from \ref{SC:references}) this asterism was taken. 
+
 				Collecting sources and giving such references is always a good idea. If you feel ther are more in the collection than you like, 
 				read \ref{sec:skycultures:exclude_references} about suppressing excessive entries.
+				
+\item[\jtag{label\_offset}] optional. An array of \texttt{[deltaRA, deltaDE]} (decimal hours, decimal degrees) 
+                            used as offset that shifts the auto-computed label positions. 
+				
+\item[\jtag{label\_positions}] optional. An array of sub-arrays of \texttt{[RA, DE]} tuples (decimal hours, decimal degrees) used as label positions. 
+                               By default, the label position is computed from the star positions used in the \jtag{lines}. 
+                               With this entry you can set specialized positions, or also use more than one label per asterism. 
 \item[\jtag{is\_ray\_helper}] (optional, default=\texttt{false}). 
                 Set to \texttt{true} to declare this asterism as ``ray helper'' which is shown in a different color and without label. 
 \item[\jtag{lines}] an array of arrays, each describing a polygon with integer star numbers. The star numbers are usually the Hipparcos (HIP) numbers. 
@@ -732,28 +748,29 @@ The large number\newFeature{25.2} of label combinations requires storing them in
 \item{\texttt{Modern}} to show the contemporary scientific object name.
 \end{description}
 
-The names for the active parts are joined with underscore (\texttt{\_}), and the resulting strings stored in \file{config.ini} in two dedicated sections like: 
+The names for the active parts are joined with commas (the sequence of entries is irrelevant and does not influence displayed order), 
+and the resulting strings stored in \file{config.ini} in two dedicated sections like: 
 \begin{configfile}[\scriptsize]
 [SCInfoLabelStyle]
-arabic_arabian_peninsula  = Native_Pronounce_Modern
-boorong                   = Native_Translated
-chinese                   = Native_Pronounce_Translated_Modern
-modern                    = Native_Modern
-russian_siberian          = Native_Pronounce_Translit_Translated_IPA_Modern
+arabic_arabian_peninsula  = Native,Pronounce,Modern
+boorong                   = Native,Translated
+chinese                   = Native,Pronounce,Translated,Modern
+modern                    = Native,Modern
+russian_siberian          = Native,Pronounce,Translit,Translated,IPA,Modern
 
 [SCScreenLabelStyle]
-arabic_arabian_peninsula  = Pronounce_Translated_Modern
-aztec                     = Native_Translated
-chinese                   = Pronounce_Translated_Modern
-modern                    = Native_Modern
-russian_siberian          = Pronounce_Translated_Modern
+arabic_arabian_peninsula  = Pronounce,Translated,Modern
+aztec                     = Native,Translated
+chinese                   = Pronounce,Translated,Modern
+modern                    = Native,Modern
+russian_siberian          = Pronounce,Translated,Modern
 \end{configfile}
 
 
 
 \subsubsection{Not enough, or too many names?}
 \label{sec:skycultures:fallback_names}
-Over the years,\newFeature{25.2} we have collected a quite extensive list of star names from many references. 
+Over the years, we have collected a quite extensive list of star names from many references. 
 Until recently, the scientific community was not interested in standardizing names. 
 With the introduction of Exoplanet naming contests, the International Astronomical Union started 
 to also be concerned with the names of the brighter stars, and a proper Working Group on Star Names has formed. 
@@ -770,7 +787,7 @@ Activating this flag for non-modern skycultures may feel weird, though, as it mi
 \paragraph{Excluding excessive names}
 \label{sec:skycultures:exclude_references}
 In contrast, some of the collected names may be too fanciful for your taste. 
-If you can identify that those names that irritate you all come from a single or just a few entries of the reference list, 
+If you can \newFeature{25.2}identify that those names that irritate you all come from a single or just a few entries of the reference list, 
 you can exclude those sources, and thus the names they bring into the program. Note that if a fancy name comes from more than one book, 
 you would have to exclude all books to ban that name from your display.
 
@@ -780,7 +797,7 @@ or parts of constellations like Orion's shield and cudgel are marked as asterism
 If you cannot identify a reference which introduces the unwanted asterism (for some entries we cannot specify a source, unfortunately), 
 you can also exclude them by their unique abbreviation, which is the last part of their \jtag{id} entries.
 
-To exclude entries from being displayed by a particular skyculture, add an entry like this to \file{config.ini}:
+To exclude entries from being displayed for a particular skyculture, add an entry like this to \file{config.ini}:
 \begin{configfile}
 [SCExcludeReferences]
 modern  = 11,36,OrB,OrS,OSh,OrC,HeG,Sal,TPT

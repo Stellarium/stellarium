@@ -72,7 +72,9 @@ private:
 	QString getID() const override { return abbreviation; }
 
 	//! observer centered J2000 coordinates.
-	Vec3d getJ2000EquatorialPos(const StelCore*) const override {return XYZname;}
+	//! These are either automatically computed from all stars forming the constellation lines,
+	//! or from the manually defined label point(s).
+	Vec3d getJ2000EquatorialPos(const StelCore*) const override;
 
 	//! Specialized implementation of the getRegion method.
 	//! Return the convex hull of the object.
@@ -84,7 +86,7 @@ private:
 	bool read(const QJsonObject& data, StarMgr *starMgr);
 
 	//! Draw the constellation name. Depending on completeness of names and data, there may be a rich set of options to display.
-	void drawName(StelPainter& sPainter) const;
+	void drawName(const Vec3d &xyName, StelPainter& sPainter) const;
 	//! Draw the constellation art
 	void drawArt(StelPainter& sPainter) const;
 	//! Draw the constellation boundary. obsVelocity used for aberration
@@ -170,9 +172,10 @@ private:
 	QString abbreviationI18n;
 	//! The context for English name of constellation (using for correct translation via gettext)
 	QString context;
-	//! Direction vector pointing on constellation name drawing position
-	Vec3d XYZname;
-	Vec3d XYname;
+	//! Direction vectors pointing on constellation name drawing position (J2000.0 coordinates)
+	//! Usually a single position is computed from averaging star positions forming the constellation, but we can override with an entry in index.json,
+	//! and even give more positions (e.g. for long or split-up constellations like Serpens.
+	QList<Vec3d> XYZname;
 	//! Number of segments in the lines
 	unsigned int numberOfSegments;
 	//! Month [1..12] of start visibility of constellation (seasonal rules)

@@ -295,10 +295,11 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &
 
 	if (typeOfAsterism != Type::RayHelper)
 	{
-		XYZname.set(0.,0.,0.);
+		Vec3d XYZname1(0.);
 		for(const auto& point : asterism)
-			XYZname += point->getJ2000EquatorialPos(core);
-		XYZname.normalize();
+			XYZname1 += point->getJ2000EquatorialPos(core);
+		XYZname1.normalize();
+		XYZname.append(XYZname1);
 
 		// Sometimes label placement is suboptimal. Allow a correction from the automatic solution in label_offset:[dRA_deg, dDec_deg]
 		if (data.contains("label_offset"))
@@ -309,10 +310,30 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &
 			else
 			{
 				double ra, dec;
-				StelUtils::rectToSphe(&ra, &dec, XYZname);
+				StelUtils::rectToSphe(&ra, &dec, XYZname[0]);
 				ra  += offset[0].toDouble()*M_PI_180;
 				dec += offset[1].toDouble()*M_PI_180;
-				StelUtils::spheToRect(ra, dec, XYZname);
+				StelUtils::spheToRect(ra, dec, XYZname[0]);
+			}
+		}
+		// Asterism label placement: Manual position can have more than one.
+		if (data.contains("label_positions"))
+		{
+			XYZname.clear();
+			const QJsonArray &labelPosArray=data["label_positions"].toArray();
+			for (const auto& labelPos : labelPosArray)
+			{
+				const auto& labelArray=labelPos.toArray();
+				if (labelArray.size() != 2)
+				{
+					qWarning() << "Bad label position given for asterism" << abbreviation << "... skipping";
+					continue;
+				}
+				const double RA = labelArray[0].toDouble() * (M_PI_180*15.);
+				const double DE = labelArray[1].toDouble() * M_PI_180;
+				Vec3d newPoint;
+				StelUtils::spheToRect(RA, DE, newPoint);
+				XYZname.append(newPoint);
 			}
 		}
 	}
@@ -372,7 +393,26 @@ void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const Sphe
 	}
 }
 
-void Asterism::drawName(StelPainter& sPainter, bool abbreviateLabel) const
+// observer centered J2000 coordinates.
+// These are either automatically computed from all stars forming the lines,
+// or from the manually defined label point(s).
+Vec3d Asterism::getJ2000EquatorialPos(const StelCore*) const
+{
+	if (XYZname.length() ==1)
+		return XYZname.first();
+	else
+	{
+		Vec3d point(0.0);
+		for (Vec3d namePoint: XYZname)
+		{
+			point += namePoint;
+		}
+		point.normalize();
+		return point;
+	}
+}
+
+void Asterism::drawName(const Vec3d &xyName, StelPainter& sPainter) const
 {
 	if ((nameFader.getInterstate()==0.0f) || !flagAsterism)
 		return;
@@ -380,9 +420,9 @@ void Asterism::drawName(StelPainter& sPainter, bool abbreviateLabel) const
 	if (typeOfAsterism==Type::TelescopicAsterism && sPainter.getProjector()->getFov()>60.f)
 		return;
 
-	QString name = abbreviateLabel ? abbreviationI18n : getScreenLabel();
+	QString name = getScreenLabel();
 	sPainter.setColor(labelColor, nameFader.getInterstate());
-	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
+	sPainter.drawText(static_cast<float>(xyName[0]), static_cast<float>(xyName[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 }
 
 void Asterism::update(int deltaTime)
