@@ -150,13 +150,36 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool p
 		singleStarConstellationRadius = cos(rd*M_PI/180.);
 	}
 
-	// Name tag should go to constellation's centre of gravity
-	XYZname.set(0.,0.,0.);
-	for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
+	XYZname.clear();
+	// Constellation label placement: Manual position can have more than one.
+	if (data.contains("label_positions"))
 	{
-		XYZname+= constellation[ii]->getJ2000EquatorialPos(StelApp::getInstance().getCore());
+		const QJsonArray &labelPosArray=data["label_positions"].toArray();
+		for (const auto& labelPos : labelPosArray)
+		{
+			const auto& labelArray=labelPos.toArray();
+			if (labelArray.size() != 2)
+			{
+				qWarning() << "Bad label position given for constellation" << id << "... skipping";
+				continue;
+			}
+			const double RA = labelArray[0].toDouble() * (M_PI_180*15.);
+			const double DE = labelArray[1].toDouble() * M_PI_180;
+			Vec3d newPoint;
+			StelUtils::spheToRect(RA, DE, newPoint);
+			XYZname.append(newPoint);
+		}
 	}
-	XYZname.normalize();
+	if (XYZname.isEmpty())	// bad or missing definition of manual label placement: Just one name tag goes to constellation's centre of gravity
+	{
+		Vec3d XYZnamePos(0.,0.,0.);
+		for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
+		{
+			XYZnamePos+= constellation[ii]->getJ2000EquatorialPos(StelApp::getInstance().getCore());
+		}
+		XYZnamePos.normalize();
+		XYZname.append(XYZnamePos);
+	}
 
 	//qDebug() << "Convex hull for " << englishName;
 	std::vector<StelObjectP>hullExtension;
@@ -197,7 +220,7 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool p
 	}
 	double hullRadius=data["hull_radius"].toDouble(data["single_star_radius"].toDouble(0.5));
 
-	convexHull=StelSkyCultureMgr::makeConvexHull(constellation, hullExtension, std::vector<Vec3d>(), XYZname, hullRadius);
+	convexHull=StelSkyCultureMgr::makeConvexHull(constellation, hullExtension, std::vector<Vec3d>(), XYZname.constFirst(), hullRadius);
 
 	beginSeason = 1;
 	endSeason = 12;
@@ -246,7 +269,26 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 	}
 }
 
-void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const
+// observer centered J2000 coordinates.
+// These are either automatically computed from all stars forming constellations and convex hulls,
+// or from the manually defined label point(s).
+Vec3d Constellation::getJ2000EquatorialPos(const StelCore*) const
+{
+	if (XYZname.length() ==1)
+		return XYZname.first();
+	else
+	{
+		Vec3d point(0.0);
+		for (Vec3d namePoint: XYZname)
+		{
+			point += namePoint;
+		}
+		point.normalize();
+		return point;
+	}
+}
+
+void Constellation::drawName(const Vec3d &xyName, StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const
 {
 	if (nameFader.getInterstate()==0.0f)
 		return;
@@ -271,7 +313,7 @@ void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::Constellat
 		}
 
 		sPainter.setColor(labelColor, nameFader.getInterstate());
-		sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
+		sPainter.drawText(static_cast<float>(xyName[0]), static_cast<float>(xyName[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 	}
 }
 
