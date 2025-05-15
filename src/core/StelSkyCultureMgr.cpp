@@ -911,17 +911,15 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	// Styles with ...Translated have translation in brackets appended
 	// Styles with ...Modern have the modern name (commonNameI18n) in brackets appended
 
-	QStringList braced; // the contents of the secondary term
+	QStringList braced; // the contents of the secondary term, i.e. pronunciation and transliteration
 	if (styleInt & int(StelObject::CulturalDisplayStyle::Native))
 	{
 		label=nativeOrPronounce;
-		// Add pronounciation, Translit and IPA in braces
+		// Add pronounciation and Translit in braces
 		if (styleInt & int(StelObject::CulturalDisplayStyle::Pronounce))
 			braced.append(pronounceStr);
 		if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
 			braced.append(cName.transliteration);
-		if (styleInt & int(StelObject::CulturalDisplayStyle::IPA))
-			braced.append(cName.IPA);
 	}
 	else // not including native // if (styleInt ^ int(StelObject::CulturalDisplayStyle::Native))
 	{
@@ -931,15 +929,11 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 			label=pronounceOrNative;
 			if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
 				braced.append(cName.transliteration);
-			if (styleInt & int(StelObject::CulturalDisplayStyle::IPA))
-				braced.append(cName.IPA);
 		}
 
 		if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
 		{
 			label=translitOrPronounce;
-			if (styleInt & int(StelObject::CulturalDisplayStyle::IPA))
-				braced.append(cName.IPA);
 		}
 
 		// Neither native nor pronounce nor translit. Not sure if IPA alone is meaningful.
@@ -954,8 +948,11 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	braced.removeOne(QString(""));
 	braced.removeOne(QString());
 	braced.removeOne(label); // avoid repeating the main thing if it was used as fallback!
-	if (!braced.isEmpty()) label.append(" [" + braced.join(", ") + "]");
+	if (!braced.isEmpty()) label.append(QString(" %1%3%2").arg(QChar(0x2997), QChar(0x2998), braced.join(", ")));
 
+	// Add IPA (where possible)
+	if ((styleInt & int(StelObject::CulturalDisplayStyle::IPA)) && (!cName.IPA.isEmpty()) && (label != cName.IPA))
+		label.append(QString(" [%1]").arg(cName.IPA));
 
 	// Add translation in brackets
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::Translated)) && (!cName.translatedI18n.isEmpty()))
