@@ -623,7 +623,7 @@ struct DrawNebulaFuncObject
 		if (!n->objectInDisplayedCatalog())
 			return;
 
-		if (n->flagShowOnlyNamedDSO && n->getEnglishName().isEmpty())
+		if (n->flagShowOnlyNamedDSO && n->getEnglishName().isEmpty() && n->culturalNames.isEmpty())
 			return;
 
 		if (!n->objectInAllowedSizeRangeLimits())
