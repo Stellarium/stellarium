@@ -269,7 +269,7 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 }
 
 // observer centered J2000 coordinates.
-// These are either automatically computed from all stars forming constellations and convex hulls,
+// These are either automatically computed from all stars forming the lines,
 // or from the manually defined label point(s).
 Vec3d Constellation::getJ2000EquatorialPos(const StelCore*) const
 {

@@ -72,7 +72,7 @@ private:
 	QString getID() const override { return abbreviation; }
 
 	//! observer centered J2000 coordinates.
-	//! These are either automatically computed from all stars forming constellations and convex hulls,
+	//! These are either automatically computed from all stars forming the constellation lines,
 	//! or from the manually defined label point(s).
 	Vec3d getJ2000EquatorialPos(const StelCore*) const override;
 
