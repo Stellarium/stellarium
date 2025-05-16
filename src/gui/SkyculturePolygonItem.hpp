@@ -8,26 +8,34 @@ class SkyculturePolygonItem : public QGraphicsPolygonItem
 {
 
 public:
-   SkyculturePolygonItem(QString skycultureId);
+	SkyculturePolygonItem(QString skycultureId, int startTime, int endTime);
 
-   // public functions
-   QString getSkycultureId() const {return skycultureId;}
-   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	// public functions
+	const QString& getSkycultureId() const {return skycultureId;}
+	int getStartTime() const {return startTime;}
+	int getEndTime() const {return endTime;}
+
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
 public slots:
-   // slots
+	// slots
 
 signals:
-   // signals
+	// signals
 
 protected:
-   // protected functions
-   void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
-   void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+	// protected functions
+	void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
 private:
-   QString skycultureId;
-   bool isHovered;
+	// important culture data
+	QString skycultureId;
+	int startTime;
+	int endTime;
+
+	// utility for change of appearance at runtime
+	bool isHovered;
 };
 
 #endif // SKYCULTUREPOLYGONITEM_HPP
