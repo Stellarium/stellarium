@@ -785,6 +785,33 @@ void StelSkyCultureMgr::setFlagUseAbbreviatedNames(bool b)
 	emit flagUseAbbreviatedNamesChanged(b);
 }
 
+StelObject::CulturalDisplayStyle StelSkyCultureMgr::convertCulturalDisplayStyleFromCSVstring(const QString &csv)
+{
+	static const QMap<QString, StelObject::CulturalDisplayStyle> cdsEnumParts=
+	{ {"none", StelObject::CulturalDisplayStyle::NONE},
+	  {"modern", StelObject::CulturalDisplayStyle::Modern},
+	  {"ipa", StelObject::CulturalDisplayStyle::IPA},
+	  {"translated", StelObject::CulturalDisplayStyle::Translated},
+	  {"translit", StelObject::CulturalDisplayStyle::Translit},
+	  {"pronounce", StelObject::CulturalDisplayStyle::Pronounce},
+	  {"native", StelObject::CulturalDisplayStyle::Native}};
+
+	StelObject::CulturalDisplayStyle styleEnum = StelObject::CulturalDisplayStyle::NONE;
+	const QStringList styleParts=csv.split(",", Qt::SkipEmptyParts);
+
+	for (const QString &part: styleParts)
+	{
+		styleEnum = static_cast<StelObject::CulturalDisplayStyle>( int(styleEnum) |  int(cdsEnumParts.value(part.trimmed().toLower(), StelObject::CulturalDisplayStyle::NONE)));
+	}
+	return styleEnum;
+}
+
+QString StelSkyCultureMgr::convertCulturalDisplayStyleToCSVstring(const StelObject::CulturalDisplayStyle style)
+{
+	return QVariant::fromValue(style).toString().replace('_', ',');
+}
+
+
 // Returns the screen labeling setting for the currently active skyculture
 StelObject::CulturalDisplayStyle StelSkyCultureMgr::getScreenLabelStyle() const
 {
@@ -792,19 +819,15 @@ StelObject::CulturalDisplayStyle StelSkyCultureMgr::getScreenLabelStyle() const
 	if (defaultSkyCultureID.isEmpty())
 		return StelObject::CulturalDisplayStyle::Translated;
 
-	QSettings *conf=StelApp::getInstance().getSettings();
+	static QSettings *conf=StelApp::getInstance().getSettings();
 	QVariant val= conf->value(QString("SCScreenLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
 	//qDebug() << "StelSkyCultureMgr::getScreenLabelStyle(): found " << val << "(" << val.toString() << ")";
-	if (val.canConvert<StelObject::CulturalDisplayStyle>())
-		return val.value<StelObject::CulturalDisplayStyle>();
-	else
-		return StelObject::CulturalDisplayStyle::Translated;
+	return convertCulturalDisplayStyleFromCSVstring(val.toString());
 }
 // Scripting version
 QString StelSkyCultureMgr::getScreenLabelStyleString() const
 {
-	StelObject::CulturalDisplayStyle style=getScreenLabelStyle();
-	return QVariant::fromValue(style).toString();
+	return convertCulturalDisplayStyleToCSVstring(getScreenLabelStyle());
 }
 
 
@@ -815,14 +838,22 @@ void StelSkyCultureMgr::setScreenLabelStyle(const StelObject::CulturalDisplaySty
 	if (defaultSkyCultureID.isEmpty())
 		return;
 
-	QSettings *conf=StelApp::getInstance().getSettings();
-	conf->setValue(QString("SCScreenLabelStyle/%1").arg(getCurrentSkyCultureID()), QVariant::fromValue(style).toString());
-	qInfo() << QString("SCScreenLabelStyle/%1=%2").arg(getCurrentSkyCultureID(), QVariant::fromValue(style).toString());
+	static QSettings *conf=StelApp::getInstance().getSettings();
+	conf->setValue(QString("SCScreenLabelStyle/%1").arg(getCurrentSkyCultureID()), convertCulturalDisplayStyleToCSVstring(style));
+	//qInfo() << QString("SCScreenLabelStyle/%1=%2").arg(getCurrentSkyCultureID(), convertCulturalDisplayStyleToCSVstring(style));
 	emit screenLabelStyleChanged(style);
 }
+
+// style can be the enum string like Native_IPA_Translated, or a comma-separated string like "Translated, native, IPA"
 void StelSkyCultureMgr::setScreenLabelStyle(const QString &style)
 {
-	setScreenLabelStyle(QVariant(style).value<StelObject::CulturalDisplayStyle>());
+	StelObject::CulturalDisplayStyle styleEnum;
+	if (QVariant(style).canConvert<StelObject::CulturalDisplayStyle>())
+		styleEnum=QVariant(style).value<StelObject::CulturalDisplayStyle>();
+	else
+		styleEnum=convertCulturalDisplayStyleFromCSVstring(style);
+
+	setScreenLabelStyle(styleEnum);
 }
 
 // Returns the InfoString Labeling setting for the currently active skyculture
@@ -832,19 +863,15 @@ StelObject::CulturalDisplayStyle StelSkyCultureMgr::getInfoLabelStyle() const
 	if (defaultSkyCultureID.isEmpty())
 		return StelObject::CulturalDisplayStyle::Translated;
 
-	QSettings *conf=StelApp::getInstance().getSettings();
+	static QSettings *conf=StelApp::getInstance().getSettings();
 	QVariant val= conf->value(QString("SCInfoLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
-	//qDebug() << "StelSkyCultureMgr::getScreenLabelStyle(): found " << val << "(" << val.toString() << ")";
-	if (val.canConvert<StelObject::CulturalDisplayStyle>())
-		return val.value<StelObject::CulturalDisplayStyle>();
-	else
-		return StelObject::CulturalDisplayStyle::Translated;
+	//qDebug() << "StelSkyCultureMgr::getInfoLabelStyle(): found " << val << "(" << val.toString() << ")";
+	return convertCulturalDisplayStyleFromCSVstring(val.toString());
 }
 // Scripting version
 QString StelSkyCultureMgr::getInfoLabelStyleString() const
 {
-	StelObject::CulturalDisplayStyle style=getInfoLabelStyle();
-	return QVariant::fromValue(style).toString();
+	return convertCulturalDisplayStyleToCSVstring(getInfoLabelStyle());
 }
 
 // Sets the InfoString Labeling setting for the currently active skyculture
@@ -854,15 +881,22 @@ void StelSkyCultureMgr::setInfoLabelStyle(const StelObject::CulturalDisplayStyle
 	if (defaultSkyCultureID.isEmpty())
 		return;
 
-	QSettings *conf=StelApp::getInstance().getSettings();
-	conf->setValue(QString("SCInfoLabelStyle/%1").arg(getCurrentSkyCultureID()), QVariant::fromValue(style).toString());
-	qInfo() << QString("SCInfoLabelStyle/%1=%2").arg(getCurrentSkyCultureID(), QVariant::fromValue(style).toString());
+	static QSettings *conf=StelApp::getInstance().getSettings();
+	conf->setValue(QString("SCInfoLabelStyle/%1").arg(getCurrentSkyCultureID()), convertCulturalDisplayStyleToCSVstring(style));
+	//qInfo() << QString("SCInfoLabelStyle/%1=%2").arg(getCurrentSkyCultureID(), convertCulturalDisplayStyleToCSVstring(style));
 	emit infoLabelStyleChanged(style);
 }
 
 void StelSkyCultureMgr::setInfoLabelStyle(const QString &style)
 {
-	setInfoLabelStyle(QVariant(style).value<StelObject::CulturalDisplayStyle>());
+
+	StelObject::CulturalDisplayStyle styleEnum;
+	if (QVariant(style).canConvert<StelObject::CulturalDisplayStyle>())
+		styleEnum=QVariant(style).value<StelObject::CulturalDisplayStyle>();
+	else
+		styleEnum=convertCulturalDisplayStyleFromCSVstring(style);
+
+	setInfoLabelStyle(styleEnum);
 }
 
 QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &cName,
