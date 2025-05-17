@@ -847,13 +847,7 @@ void StelSkyCultureMgr::setScreenLabelStyle(const StelObject::CulturalDisplaySty
 // style can be the enum string like Native_IPA_Translated, or a comma-separated string like "Translated, native, IPA"
 void StelSkyCultureMgr::setScreenLabelStyle(const QString &style)
 {
-	StelObject::CulturalDisplayStyle styleEnum;
-	if (QVariant(style).canConvert<StelObject::CulturalDisplayStyle>())
-		styleEnum=QVariant(style).value<StelObject::CulturalDisplayStyle>();
-	else
-		styleEnum=convertCulturalDisplayStyleFromCSVstring(style);
-
-	setScreenLabelStyle(styleEnum);
+	setScreenLabelStyle(convertCulturalDisplayStyleFromCSVstring(style));
 }
 
 // Returns the InfoString Labeling setting for the currently active skyculture
@@ -889,14 +883,7 @@ void StelSkyCultureMgr::setInfoLabelStyle(const StelObject::CulturalDisplayStyle
 
 void StelSkyCultureMgr::setInfoLabelStyle(const QString &style)
 {
-
-	StelObject::CulturalDisplayStyle styleEnum;
-	if (QVariant(style).canConvert<StelObject::CulturalDisplayStyle>())
-		styleEnum=QVariant(style).value<StelObject::CulturalDisplayStyle>();
-	else
-		styleEnum=convertCulturalDisplayStyleFromCSVstring(style);
-
-	setInfoLabelStyle(styleEnum);
+	setInfoLabelStyle(convertCulturalDisplayStyleFromCSVstring(style));
 }
 
 QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &cName,
