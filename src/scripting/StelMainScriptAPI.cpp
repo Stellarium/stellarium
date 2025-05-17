@@ -1204,9 +1204,9 @@ void StelMainScriptAPI::clear(const QString& state)
 		StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
 
 		// Hide artificial satellites through StelProperties to avoid crash if plugin was not loaded
-		propMgr->setStelPropertyValue("Satellites.flagHintsVisible",   false);
-		propMgr->setStelPropertyValue("Satellites.flagLabelsVisible",  false);
-		propMgr->setStelPropertyValue("Satellites.flagOrbitLines", false);
+		propMgr->setStelPropertyValue("Satellites.flagHintsVisible",   false, true);
+		propMgr->setStelPropertyValue("Satellites.flagLabelsVisible",  false, true);
+		propMgr->setStelPropertyValue("Satellites.flagOrbitLines", false, true);
 
 		// identical for all states
 		glmgr->setFlagAllGrids(false);
