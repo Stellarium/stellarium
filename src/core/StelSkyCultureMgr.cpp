@@ -797,7 +797,7 @@ StelObject::CulturalDisplayStyle StelSkyCultureMgr::convertCulturalDisplayStyleF
 	  {"native", StelObject::CulturalDisplayStyle::Native}};
 
 	StelObject::CulturalDisplayStyle styleEnum = StelObject::CulturalDisplayStyle::NONE;
-	const QStringList styleParts=csv.split(",", Qt::SkipEmptyParts);
+	const QStringList styleParts=csv.split(",", SkipEmptyParts);
 
 	for (const QString &part: styleParts)
 	{
@@ -965,16 +965,9 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 				braced.append(cName.transliteration);
 		}
 
-		if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
+		else if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
 		{
 			label=translitOrPronounce;
-		}
-
-		// Neither native nor pronounce nor translit. Not sure if IPA alone is meaningful.
-		if ((styleInt ^ (int(StelObject::CulturalDisplayStyle::Pronounce) | int(StelObject::CulturalDisplayStyle::Translit))) &&
-		    (styleInt & int(StelObject::CulturalDisplayStyle::IPA)))
-		{
-			label=cName.IPA;
 		}
 	}
 
