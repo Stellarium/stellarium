@@ -3,7 +3,9 @@
 // License: Public Domain
 // Author: Alexander Wolf
 // Version: 1.2
-// Description: A tour of the constellations of the selected sky culture.
+// Description: A tour of the constellations of the selected sky culture. 
+//              Label style is forced to be "Native,Translated,Modern" regardless of user setting.
+//              (It is restored at end.)
 
 include("i18n.inc");
 
@@ -12,7 +14,7 @@ GridLinesMgr.setFlagEquatorGrid(false);
 NebulaMgr.setFlagHints(false);
 var constellations = ConstellationMgr.getConstellationsEnglishNames();
 var oldScreenLabelStyle=StelSkyCultureMgr.getScreenLabelStyle();
-StelSkyCultureMgr.setScreenLabelStyle("Native_Translated_Modern");
+StelSkyCultureMgr.setScreenLabelStyle("Native,Translated,Modern");
 ConstellationMgr.deselectConstellations();
 ConstellationMgr.setFlagArt(false);
 ConstellationMgr.setFlagBoundaries(false);

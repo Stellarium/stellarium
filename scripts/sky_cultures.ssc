@@ -31,7 +31,7 @@ for(i=0; i<allIDs.length; i++)
 	core.debug("setting sky culture: " + id);
 	core.setSkyCulture(id);
 	var oldScreenLabelStyle=StelSkyCultureMgr.getScreenLabelStyle();
-	StelSkyCultureMgr.setScreenLabelStyle("Native_Translated_Modern");
+	StelSkyCultureMgr.setScreenLabelStyle("Native,Translated,Modern");
 	core.wait(2);
 	name = core.getSkyCultureNameI18n();
 	lab = LabelMgr.labelScreen(name, 100, 100, false, 25, "#ff2200");

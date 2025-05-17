@@ -14,7 +14,7 @@ var constellations = new Array("Gemini", "Cancer", "Leo", "Virgo", "Libra", "Sco
 ConstellationMgr.deselectConstellations();
 core.clear("deepspace");
 core.setSkyCulture("modern");
-StelSkyCultureMgr.setScreenLabelStyle("Native_Translated_Modern");
+StelSkyCultureMgr.setScreenLabelStyle("Native,Translated,Modern");
 core.wait(1);
 
 core.setDate("2006:03:14T21:21:32");

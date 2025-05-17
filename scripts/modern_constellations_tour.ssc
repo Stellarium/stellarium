@@ -5,6 +5,8 @@
 // Shortcut: Ctrl+D,1
 // Version: 1.5
 // Description: A tour of the modern constellations.
+//              Label style is forced to be "Native,Translated,Modern" regardless of user setting.
+//              (It is restored at end.)
 
 include("common_objects.inc");
 include("i18n.inc");
@@ -15,7 +17,7 @@ NebulaMgr.setFlagHints(false);
 var skyculture = core.getSkyCulture();
 core.setSkyCulture("modern");
 var oldScreenLabelStyle=StelSkyCultureMgr.getScreenLabelStyle();
-StelSkyCultureMgr.setScreenLabelStyle("Native_Translated_Modern");
+StelSkyCultureMgr.setScreenLabelStyle("Native,Translated,Modern");
 ConstellationMgr.deselectConstellations();
 ConstellationMgr.setFlagArt(false);
 ConstellationMgr.setFlagBoundaries(false);
