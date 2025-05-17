@@ -458,7 +458,6 @@ where
 				 certain abbreviations from being displayed, let them start with a dot. See the effect in the \file{Modern (H.A.Rey)} sky culture: In
 				 \menu{Abbreviated} mode, only the official abbreviations are displayed.
 				 
-				 
 \item[\jtag{lines}] an array of arrays, each describing a polygon with star numbers. The star numbers are usually the Hipparcos (HIP) numbers. 
                     For very dim stars, the longer numbers from the Gaia DR3 catalog are acceptable, but they must be written as string.
 					
@@ -481,6 +480,9 @@ where
 	the native language. Else translators will not be able to translate
 	the name. 
 
+\item[\jtag{label\_positions}] optional. An array of sub-arrays of \texttt{[RA, DE]} tuples (decimal hours, decimal degrees) used as label positions. 
+                               By default, the label position is computed from the star positions used in the \jtag{lines}. 
+			       With this entry you can set specialized positions, or also use more than one label per asterism. 
 \item[\jtag{visibility}] (optional) special cases for rule-based visibility, e.g. seasonally changing aspects of figures. 
 	Currently only a \jtag{months} rule has been defined. 
 	Its ``payload'' is an array of two integers, start and end of visibility in months, e.g:
@@ -586,6 +588,9 @@ Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help ra
 \item[\jtag{common\_name}] Another dict with entries \jtag{english} (the translatable english name), 
 				and an optional array \jtag{references} which lists from which sources (from \ref{SC:references}) this asterism was taken. 
 				Collecting sources and giving such references is always a good idea. This entry may be used in later versions of Stellarium.
+\item[\jtag{label\_positions}] optional. An array of sub-arrays of \texttt{[RA, DE]} tuples (decimal hours, decimal degrees) used as label positions. 
+                               By default, the label position is computed from the star positions used in the \jtag{lines}. 
+			       With this entry you can set specialized positions, or also use more than one label per asterism. 
 \item[\jtag{is\_ray\_helper}] (optional, default=\texttt{false}). 
                 Set to \texttt{true} to declare this asterism as ``ray helper'' which is shown in a different color and without label. 
 \item[\jtag{lines}] an array of arrays, each describing a polygon with integer star numbers. The star numbers are usually the Hipparcos (HIP) numbers. 

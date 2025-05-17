@@ -72,7 +72,13 @@ private:
 	QString getID() const override { return abbreviation; }
 
 	//! observer centered J2000 coordinates.
-	Vec3d getJ2000EquatorialPos(const StelCore*) const override {return XYZname;}
+	//! These are either automatically computed from all stars forming the constellation lines,
+	//! or from the manually defined label point(s).
+	Vec3d getJ2000EquatorialPos(const StelCore*) const override;
+
+	//! Specialized implementation of the getRegion method.
+	//! Return the convex hull of the object.
+	SphericalRegionP getRegion() const override {return SphericalRegionP(convexHull);}
 
 	//! @param record string containing the following whitespace
 	//! separated fields: abbreviation - a three character abbreviation
@@ -84,7 +90,7 @@ private:
 	bool read(const QJsonObject& data, StarMgr *starMgr, bool preferNativeNames);
 
 	//! Draw the constellation name
-	void drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const;
+	void drawName(const Vec3d &xyName, StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const;
 	//! Draw the constellation art
 	void drawArt(StelPainter& sPainter) const;
 	//! Draw the constellation boundary. obsVelocity used for aberration
@@ -166,9 +172,10 @@ private:
 	QString abbreviation;
 	//! The context for English name of constellation (using for correct translation via gettext)
 	QString context;
-	//! Direction vector pointing on constellation name drawing position
-	Vec3d XYZname;
-	Vec3d XYname;
+	//! Direction vectors pointing on constellation name drawing position (J2000.0 coordinates)
+	//! Usually a single position is computed from averaging star positions forming the constellation, but we can override with an entry in index.json,
+	//! and even give more positions (e.g. for long or split-up constellations like Serpens.
+	QList<Vec3d> XYZname;
 	//! Number of segments in the lines
 	unsigned int numberOfSegments;
 	//! Month [1..12] of start visibility of constellation (seasonal rules)
@@ -177,6 +184,8 @@ private:
 	int endSeason;
 	//! List of stars forming the segments
 	std::vector<StelObjectP> constellation;
+	//! List of additional stars defining the hull together wit the stars from constellation
+	std::vector<StelObjectP> hullExtension;
 	//! In case this describes a single-star constellation (i.e. just one line segment that starts and ends at the same star),
 	//! or we have a line segment with such single star somewhere within the constellation,
 	//! we will draw a circle with this opening radius.
@@ -185,6 +194,7 @@ private:
 	StelTextureSP artTexture;
 	StelVertexArray artPolygon;
 	SphericalCap boundingCap;
+	SphericalRegionP convexHull; // The convex hull formed by stars contained in the defined lines plus extra stars.
 
 	//! Define whether art, lines, names and boundary must be drawn
 	LinearFader artFader, lineFader, nameFader, boundaryFader;
