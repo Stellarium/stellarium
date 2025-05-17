@@ -88,7 +88,6 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, flagShowObjSelfShadows(true)
 	, flagShow(false)
 	, flagPointer(false)
-	, flagNativePlanetNames(false)
 	, flagIsolatedTrails(true)
 	, numberIsolatedTrails(0)
 	, maxTrailPoints(5000)
@@ -251,7 +250,6 @@ void SolarSystem::init()
 	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
 	// planets in case  observer on the Earth by default
 	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "Mallama2018").toString());
-	setFlagNativePlanetNames(conf->value("viewing/flag_planets_native_names", true).toBool());
 	// Is enabled the showing of isolated trails for selected objects only?
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 	setNumberIsolatedTrails(conf->value("viewing/number_isolated_trails", 1).toInt());
@@ -357,7 +355,6 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_EnlargeMinor", displayGroup, N_("Enlarge minor bodies"), "flagMinorBodyScale");
 	addAction("actionShow_Planets_EnlargePlanets", displayGroup, N_("Enlarge Planets"), "flagPlanetScale");
 	addAction("actionShow_Planets_EnlargeSun", displayGroup, N_("Enlarge Sun"), "flagSunScale");
-	addAction("actionShow_Skyculture_NativePlanetNames", displayGroup, N_("Native planet names (from sky culture)"), "flagNativePlanetNames", "Ctrl+Shift+N");
 	addAction("actionShow_Planets_ShowMinorBodyMarkers", displayGroup, N_("Mark minor bodies"), "flagMarkers");
 
 	connect(StelApp::getInstance().getModule("HipsMgr"), SIGNAL(gotNewSurvey(HipsSurveyP)),
@@ -534,8 +531,8 @@ void SolarSystem::recreateTrails()
 
 void SolarSystem::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
-	planetNativeNamesMap.clear();
-	planetNativeNamesMeaningMap.clear();
+	for (const auto& p : std::as_const(systemPlanets))
+		p->removeAllCulturalNames();
 
 	if (!skyCulture.names.isEmpty())
 		loadCultureSpecificNames(skyCulture.names);
@@ -545,42 +542,45 @@ void SolarSystem::updateSkyCulture(const StelSkyCulture& skyCulture)
 
 void SolarSystem::loadCultureSpecificNames(const QJsonObject& data)
 {
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+
 	for (auto it = data.begin(); it != data.end(); ++it)
 	{
 		const auto key = it.key();
-		const auto specificNames = it->toArray();
 
 		if (key.startsWith("NAME "))
 		{
-			const auto planetId = key.mid(5);
-			const auto names = it.value().toArray();
+			const QString planetId = key.mid(5);
+			const QJsonArray names = it.value().toArray(); // The array of name dicts
 
-			// We store only one name per planet, so just take the first valid one
-			// FIXME: maybe we should somehow store all
-			QString nativeName, nativeNameMeaning;
+			PlanetP planet = searchByEnglishName(planetId);
+			if (!planet)
+				continue;
+
 			for (const auto& nameVal : names)
 			{
-				const auto nameObj = nameVal.toObject();
-				if (nameObj.find("english") == nameObj.end())
-					continue;
-				nativeNameMeaning = nameObj["english"].toString();
-				if (nameObj.find("native") != nameObj.end())
-					nativeName = nameObj["native"].toString();
-				else
-					nativeName = nativeNameMeaning;
-				break;
-			}
-			planetNativeNamesMap[planetId] = nativeName;
-			planetNativeNamesMeaningMap[planetId] = nativeNameMeaning;
-		}
-	}
+				const QJsonObject json = nameVal.toObject();
 
-	for (const auto& p : std::as_const(systemPlanets))
-	{
-		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
-		{
-			p->setNativeName(planetNativeNamesMap[p->getEnglishName()]);
-			p->setNativeNameMeaning(planetNativeNamesMeaningMap[p->getEnglishName()]);
+				StelObject::CulturalName cName;
+				cName.translated=json["english"].toString();
+				cName.native=json["native"].toString();
+				//if (cName.native.isEmpty()) cName.native=cName.translated;
+				cName.pronounce=json["pronounce"].toString();
+				if (cName.native.isEmpty())
+				{
+					if (cName.pronounce.isEmpty())
+						cName.native=cName.pronounce=cName.translated;
+					else
+						cName.native=cName.pronounce;
+				}
+
+				cName.translatedI18n=trans.qtranslate(cName.translated, json["context"].toString());
+				cName.pronounceI18n=trans.qtranslate(cName.pronounce, json["context"].toString());
+				cName.transliteration=json["transliteration"].toString();
+				cName.IPA=json["IPA"].toString();
+
+				planet->addCulturalName(cName);
+			}
 		}
 	}
 }
@@ -971,7 +971,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// Look in the other planets the one named with strParent
 			for (const auto& p : std::as_const(systemPlanets))
 			{
-				if (p->getCommonEnglishName()==strParent)
+				if (p->getEnglishName()==strParent)
 				{
 					parent = p;
 					break;
@@ -2260,14 +2260,15 @@ void SolarSystem::fillEphemerisDates()
 
 PlanetP SolarSystem::searchByEnglishName(const QString &planetEnglishName) const
 {
+	const QString planetEnglishNameUpper=planetEnglishName.toUpper();
 	for (const auto& p : systemPlanets)
 	{
-		if (p->getEnglishName().toUpper() == planetEnglishName.toUpper() || p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper())
+		if (p->getEnglishName().toUpper() == planetEnglishNameUpper)
 			return p;
 
 		// IAU designation?
 		QString iau = p->getIAUDesignation();
-		if (!iau.isEmpty() && iau.toUpper()==planetEnglishName.toUpper())
+		if (!iau.isEmpty() && iau.toUpper()==planetEnglishNameUpper)
 			return p;
 	}
 	for (const auto& p : systemMinorBodies)
@@ -2282,9 +2283,9 @@ PlanetP SolarSystem::searchByEnglishName(const QString &planetEnglishName) const
 			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
 			c = mp->getExtraDesignations();
 		}
-		for (const auto& d : c)
+		for (const auto& d : std::as_const(c))
 		{
-			if (d.toUpper()==planetEnglishName.toUpper())
+			if (d.toUpper()==planetEnglishNameUpper)
 				return p;
 		}
 	}
@@ -2293,14 +2294,15 @@ PlanetP SolarSystem::searchByEnglishName(const QString &planetEnglishName) const
 
 PlanetP SolarSystem::searchMinorPlanetByEnglishName(const QString &planetEnglishName) const
 {
+	const QString planetEnglishNameUpper=planetEnglishName.toUpper();
 	for (const auto& p : systemMinorBodies)
 	{
-		if (p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper() || p->getEnglishName().toUpper() == planetEnglishName.toUpper())
+		if (p->getEnglishName().toUpper() == planetEnglishNameUpper)
 			return p;
 
 		// IAU designation?
 		QString iau = p->getIAUDesignation();
-		if (!iau.isEmpty() && iau.toUpper()==planetEnglishName.toUpper())
+		if (!iau.isEmpty() && iau.toUpper()==planetEnglishNameUpper)
 			return p;
 
 		QStringList c;
@@ -2315,9 +2317,9 @@ PlanetP SolarSystem::searchMinorPlanetByEnglishName(const QString &planetEnglish
 			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
 			c = mp->getExtraDesignations();
 		}
-		for (const auto& d : c)
+		for (const auto& d : std::as_const(c))
 		{
-			if (d.toUpper()==planetEnglishName.toUpper())
+			if (d.toUpper()==planetEnglishNameUpper)
 				return p;
 		}
 	}
@@ -2325,12 +2327,13 @@ PlanetP SolarSystem::searchMinorPlanetByEnglishName(const QString &planetEnglish
 }
 
 
-StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
+StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18n) const
 {
+	const QString planetNameI18Upper=planetNameI18n.toUpper();
 	for (const auto& p : systemPlanets)
 	{
-		QString nativeName = p->getNativeNameI18n().toUpper();
-		if (p->getNameI18n().toUpper() == planetNameI18.toUpper() || (!nativeName.isEmpty() && nativeName == planetNameI18.toUpper()))
+		QString nativeNameI18nUpper = p->getNameNativeI18n().toUpper();
+		if (p->getNameI18n().toUpper() == planetNameI18Upper || (!nativeNameI18nUpper.isEmpty() && nativeNameI18nUpper == planetNameI18Upper))
 			return qSharedPointerCast<StelObject>(p);
 	}
 	return StelObjectP();
@@ -2339,15 +2342,16 @@ StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
 
 StelObjectP SolarSystem::searchByName(const QString& name) const
 {
+	const QString nameUpper=name.toUpper();
 	for (const auto& p : systemPlanets)
 	{
-		QString nativeName = p->getNativeName().toUpper();
-		if (p->getEnglishName().toUpper() == name.toUpper() || (!nativeName.isEmpty() && nativeName == name.toUpper()))
+		QString nativeName = p->getNameNative().toUpper();
+		if (p->getEnglishName().toUpper() == nameUpper || (!nativeName.isEmpty() && nativeName == nameUpper))
 			return qSharedPointerCast<StelObject>(p);
 
 		// IAU designation?
 		QString iau = p->getIAUDesignation();
-		if (!iau.isEmpty() && iau.toUpper()==name.toUpper())
+		if (!iau.isEmpty() && iau.toUpper()==nameUpper)
 			return qSharedPointerCast<StelObject>(p);
 	}
 	for (const auto& p : systemMinorBodies)
@@ -2364,9 +2368,9 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
 			c = mp->getExtraDesignations();
 		}
-		for (const auto& d : c)
+		for (const auto& d : std::as_const(c))
 		{
-			if (d.toUpper()==name.toUpper())
+			if (d.toUpper()==nameUpper)
 				return qSharedPointerCast<StelObject>(p);
 		}
 	}
@@ -2728,8 +2732,8 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 		for (const auto& p : systemPlanets)
 		{
 			result << p->getNameI18n();
-			if (!p->getNativeNameI18n().isEmpty())
-				result << p->getNativeNameI18n() << p->getNativeName();
+			if (!p->getNameNativeI18n().isEmpty())
+				result << p->getNameNativeI18n() << p->getNameNative();
 			if (!p->getIAUDesignation().isEmpty())
 				result << p->getIAUDesignation();
 		}
@@ -3141,27 +3145,6 @@ void SolarSystem::setEphemerisSaturnMarkerColor(const Vec3f& color)
 Vec3f SolarSystem::getEphemerisSaturnMarkerColor() const
 {
 	return ephemerisSaturnMarkerColor;
-}
-
-void SolarSystem::setFlagNativePlanetNames(bool b)
-{
-	if (b!=flagNativePlanetNames)
-	{
-		flagNativePlanetNames=b;
-		for (const auto& p : std::as_const(systemPlanets))
-		{
-			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
-				p->setFlagNativeName(flagNativePlanetNames);
-		}
-		updateI18n();
-		StelApp::immediateSave("viewing/flag_planets_native_names", b);
-		emit flagNativePlanetNamesChanged(b);
-	}
-}
-
-bool SolarSystem::getFlagNativePlanetNames() const
-{
-	return flagNativePlanetNames;
 }
 
 void SolarSystem::setFlagIsolatedTrails(bool b)
@@ -3780,14 +3763,13 @@ QStringList SolarSystem::getAllPlanetLocalizedNames() const
 	return res;
 }
 
-QStringList SolarSystem::getAllMinorPlanetCommonEnglishNames() const
+QStringList SolarSystem::getAllMinorPlanetEnglishNames() const
 {
 	QStringList res;
 	for (const auto& p : systemMinorBodies)
-		res.append(p->getCommonEnglishName());
+		res.append(p->getEnglishName());
 	return res;
 }
-
 
 // GZ TODO: This could be modified to only delete&reload the minor objects. For now, we really load both parts again like in the 0.10?-0.15 series.
 void SolarSystem::reloadPlanets()
@@ -3801,7 +3783,6 @@ void SolarSystem::reloadPlanets()
 	const bool flagHints = getFlagHints();
 	const bool flagLabels = getFlagLabels();
 	const bool flagOrbits = getFlagOrbits();
-	const bool flagNative = getFlagNativePlanetNames();
 	bool hasSelection = false;
 
 	// Save observer location (fix for LP bug # 969211)
@@ -3867,7 +3848,6 @@ void SolarSystem::reloadPlanets()
 	setFlagHints(flagHints);
 	setFlagLabels(flagLabels);
 	setFlagOrbits(flagOrbits);
-	setFlagNativePlanetNames(flagNative);
 
 	// Restore translations
 	updateI18n();
@@ -4212,7 +4192,7 @@ void SolarSystem::onNewSurvey(HipsSurveyP survey)
 		if (pl->surveyForHorizons) return;
 		pl->surveyForHorizons = survey;
 	}
-	survey->setProperty("planet", pl->getCommonEnglishName());
+	survey->setProperty("planet", pl->getEnglishName());
 	// Not visible by default for the moment.
 	survey->setProperty("visible", false);
 }

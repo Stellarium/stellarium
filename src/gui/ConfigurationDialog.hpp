@@ -133,8 +133,11 @@ private slots:
 	void populatePluginsList();
 	void pluginsSelectionChanged(QListWidgetItem *item, QListWidgetItem *previousItem);
 	void pluginConfigureCurrentSelection();
-	void loadAtStartupChanged(int);
-
+#if (QT_VERSION<QT_VERSION_CHECK(6,7,0))
+	void loadAtStartupChanged(int state);
+#else
+	void loadAtStartupChanged(Qt::CheckState state);
+#endif
 	void populateDeltaTAlgorithmsList();
 	void setDeltaTAlgorithm(int algorithmID);
 	void setDeltaTAlgorithmDescription();

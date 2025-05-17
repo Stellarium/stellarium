@@ -65,14 +65,12 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	minorPlanetNumber(0),
 	slopeParameter(-10.0f), // -10 == mark as uninitialized: used in getVMagnitude()
 	nameIsIAUDesignation(false),
-	iauDesignationText(""),
+	iauDesignationText(QString()),
 	extraDesignations(),
 	properName(englishName),
 	b_v(99.f),
-	specT(""),
-	specB(""),
-	discoverer(""),
-	discoveryDate("")
+	specT(QString()),
+	specB(QString())
 {
 	//Try to handle an occasional naming conflict between a moon and asteroid. Conflicting names are also shown with appended *.
 	if (englishName.endsWith('*'))
@@ -160,12 +158,12 @@ void MinorPlanet::setIAUDesignation(const QString &designation)
 
 QString MinorPlanet::getEnglishName() const
 {
-	return (minorPlanetNumber ? QString("(%1) %2").arg(minorPlanetNumber).arg(englishName) : englishName);
+	return (minorPlanetNumber ? QString("(%1) %2").arg(QString::number(minorPlanetNumber), englishName) : englishName);
 }
 
 QString MinorPlanet::getNameI18n() const
 {
-	return (minorPlanetNumber ?  QString("(%1) %2").arg(minorPlanetNumber).arg(nameI18) : nameI18);
+	return (minorPlanetNumber ? QString("(%1) %2").arg(QString::number(minorPlanetNumber), nameI18) : nameI18);
 }
 
 QString MinorPlanet::getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const
@@ -202,15 +200,6 @@ QString MinorPlanet::getInfoStringName(const StelCore *core, const InfoStringGro
 	return str;
 }
 
-QString MinorPlanet::getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const
-{
-	Q_UNUSED(core)
-	if (flags&Extra && b_v<99.f)
-		return QString("%1: <b>%2</b><br/>").arg(q_("Color Index (B-V)"), QString::number(b_v, 'f', 2));
-	else
-		return QString();
-}
-
 QString MinorPlanet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const
 {
 	Q_UNUSED(core)
@@ -218,6 +207,7 @@ QString MinorPlanet::getInfoStringExtra(const StelCore *core, const InfoStringGr
 	QTextStream oss(&str);
 	if (flags&Extra)
 	{
+		oss << Planet::getInfoStringExtra(core, flags);
 		if (!specT.isEmpty())
 		{
 			// TRANSLATORS: Tholen spectral taxonomic classification of asteroids
@@ -229,20 +219,8 @@ QString MinorPlanet::getInfoStringExtra(const StelCore *core, const InfoStringGr
 			// TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
 			oss << QString("%1: %2<br/>").arg(q_("SMASSII spectral type"), specB);
 		}		
-
-		if (!discoveryDate.isEmpty())
-			oss << QString("%1: %2<br/>").arg(q_("Discovered"), getDiscoveryCircumstances());
 	}
 	return str;
-}
-
-QString MinorPlanet::getDiscoveryCircumstances() const
-{
-	QString ddate = StelUtils::localeDiscoveryDateString(discoveryDate);
-	if (discoverer.isEmpty())
-		return ddate;
-	else
-		return QString("%1 (%2)").arg(ddate, discoverer);
 }
 
 double MinorPlanet::getSiderealPeriod() const

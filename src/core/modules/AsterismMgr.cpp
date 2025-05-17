@@ -118,6 +118,7 @@ double AsterismMgr::getCallOrder(StelModuleActionName actionName) const
 
 void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
+	static QSettings *conf=StelApp::getInstance().getSettings();
 	currentSkyCultureID = skyCulture.id;
 
 	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
@@ -141,11 +142,36 @@ void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 		asterisms.clear();
 		asterisms.resize(skyCulture.asterisms.size());
 		unsigned readOK = 0;
+
+		// Configure exclusion by user preference!
+		QString exclude=conf->value(QString("SCExcludeReferences/%1").arg(currentSkyCultureID), QString()).toString();
+		QSet<int>excludeRefs;
+		if (!exclude.isEmpty())
+		{
+	#if  (QT_VERSION<QT_VERSION_CHECK(5,14,0))
+			QStringList excludeRefStrings=exclude.split(',', QString::SkipEmptyParts);
+	#else
+			QStringList excludeRefStrings=exclude.split(',', Qt::SkipEmptyParts);
+	#endif
+			QMutableListIterator<QString> it(excludeRefStrings);
+			while (it.hasNext())
+			{
+				bool ok;
+				int numRef=it.next().toInt(&ok); // ok=false for strings e.g. from asterisms
+				if (ok)
+				{
+					excludeRefs.insert(numRef);
+					it.remove();
+				}
+			}
+			qInfo() << "Skyculture" << currentSkyCultureID << "configured to exclude asterisms referenced from" << excludeRefs;
+		}
+
 		for (unsigned n = 0, m=0; n < asterisms.size(); ++n, ++m)
 		{
 			auto& aster = asterisms[n];
 			aster = new Asterism;
-			if (aster->read(skyCulture.asterisms[m].toObject(), hipStarMgr))
+			if (aster->read(skyCulture.asterisms[m].toObject(), hipStarMgr, excludeRefs))
 			{
 				aster->lineFader.setDuration(static_cast<int>(linesFadeDuration * 1000.f));
 				aster->rayHelperFader.setDuration(static_cast<int>(rayHelpersFadeDuration * 1000.f));
@@ -322,6 +348,9 @@ void AsterismMgr::drawNames(StelPainter& sPainter) const
 		return;
 
 	StelCore *core=StelApp::getInstance().getCore();
+	static StelSkyCultureMgr* scMgr= GETSTELMODULE(StelSkyCultureMgr);
+	const bool abbreviateLabel=scMgr->getFlagUseAbbreviatedNames();
+	StelObject::CulturalDisplayStyle culturalDisplayStyle=scMgr->getScreenLabelStyle();
 
 	sPainter.setBlending(true);
 	for (auto* asterism : asterisms)
@@ -338,7 +367,7 @@ void AsterismMgr::drawNames(StelPainter& sPainter) const
 		}
 
 		if (sPainter.getProjector()->projectCheck(XYZname, asterism->XYname))
-			asterism->drawName(sPainter);
+			asterism->drawName(sPainter, abbreviateLabel);
 	}
 }
 
@@ -352,19 +381,36 @@ Asterism* AsterismMgr::findFromAbbreviation(const QString& abbreviation) const
 	return nullptr;
 }
 
-
-// Can't find asterism from a position because it's not well localized
-QList<StelObjectP> AsterismMgr::searchAround(const Vec3d&, double, const StelCore*) const
-{
-	return QList<StelObjectP>();
-}
-
 void AsterismMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	for (auto* asterism : asterisms)
 	{
-		asterism->nameI18 = trans.qtranslate(asterism->englishName, asterism->context);
+		const QString context = asterism->context;
+		asterism->culturalName.translatedI18n = trans.tryQtranslate(asterism->culturalName.translated, context);
+		if (asterism->culturalName.translatedI18n.isEmpty())
+		{
+			if (context.isEmpty())
+				asterism->culturalName.translatedI18n = q_(asterism->culturalName.translated);
+			else
+				asterism->culturalName.translatedI18n = qc_(asterism->culturalName.translated, context);
+		}
+		asterism->culturalName.pronounceI18n = trans.tryQtranslate(asterism->culturalName.pronounce, context);
+		if (asterism->culturalName.pronounceI18n.isEmpty())
+		{
+			if (context.isEmpty())
+				asterism->culturalName.pronounceI18n = q_(asterism->culturalName.pronounce);
+			else
+				asterism->culturalName.pronounceI18n = qc_(asterism->culturalName.pronounce, context);
+		}
+		asterism->abbreviationI18n = trans.tryQtranslate(asterism->abbreviation, context);
+		if (asterism->abbreviationI18n.isEmpty())
+		{
+			if (context.isEmpty())
+				asterism->abbreviationI18n = q_(asterism->abbreviation);
+			else
+				asterism->abbreviationI18n = qc_(asterism->abbreviation, context);
+		}
 	}
 }
 
@@ -449,26 +495,25 @@ bool AsterismMgr::getFlagLabels(void) const
 
 StelObjectP AsterismMgr::searchByNameI18n(const QString& nameI18n) const
 {
-	QString objw = nameI18n.toUpper();
-
+	QString nameI18nUpper = nameI18n.toUpper();
 	for (auto* asterism : asterisms)
 	{
-		QString objwcap = asterism->nameI18.toUpper();
-		if (objwcap == objw) return asterism;
+		if (asterism->culturalName.translatedI18n.toUpper() == nameI18nUpper) return asterism;
+		if (asterism->culturalName.pronounceI18n.toUpper()  == nameI18nUpper) return asterism;
 	}
 	return nullptr;
 }
 
 StelObjectP AsterismMgr::searchByName(const QString& name) const
 {
-	QString objw = name.toUpper();
+	QString nameUpper = name.toUpper();
 	for (auto* asterism : asterisms)
 	{
-		QString objwcap = asterism->englishName.toUpper();
-		if (objwcap == objw) return asterism;
-
-		objwcap = asterism->abbreviation.toUpper();
-		if (objwcap == objw) return asterism;
+		if (asterism->culturalName.translated.toUpper()      == nameUpper) return asterism;
+		if (asterism->culturalName.native.toUpper()          == nameUpper) return asterism;
+		if (asterism->culturalName.pronounce.toUpper()       == nameUpper) return asterism;
+		if (asterism->culturalName.transliteration.toUpper() == nameUpper) return asterism;
+		if (asterism->abbreviation.toUpper() == nameUpper)                 return asterism;
 	}
 	return nullptr;
 }

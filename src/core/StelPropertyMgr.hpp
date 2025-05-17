@@ -323,7 +323,10 @@ public:
 	//! @returns \c true when the value of the StelProperty with the ID \p id
 	//! has been successfully changed, and \c false if the value change failed
 	//! or when no property with the given ID is found.
-	bool setStelPropertyValue(const QString& id, const QVariant &value) const;
+	//! If not found, a warning is written to logfile unless noWarning is true.
+	//! This may be useful to suppress warnings about plugin module properties
+	//! when these are not loaded, but should else be left true.
+	bool setStelPropertyValue(const QString& id, const QVariant &value, const bool noWarning=false) const;
 	//! Returns the QMetaProperty information for the given \p id.
 	QMetaProperty getMetaProperty(const QString& id) const;
 signals:

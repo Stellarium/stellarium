@@ -73,16 +73,29 @@ private:
 	//! catalogue numbers which, when connected pairwise, form the lines of the
 	//! asterism.
 	//! @param starMgr a pointer to the StarManager object.
+	//! @param excludeRefs a QSet of reference exclusions (user-defined preference in config.ini)
 	//! @return false if can't parse record, else true.
-	bool read(const QJsonObject& data, StarMgr *starMgr);
+	bool read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &excludeRefs);
 
 	//! Draw the asterism name
-	void drawName(StelPainter& sPainter) const;
+	void drawName(StelPainter& sPainter, bool abbreviateLabel) const;
 
 	//! Get the translated name for the Asterism.
-	QString getNameI18n() const override {return nameI18;}
+	QString getNameI18n() const override {return culturalName.translatedI18n;}
 	//! Get the English name for the Asterism.
-	QString getEnglishName() const override {return englishName;}
+	QString getEnglishName() const override {return culturalName.translated;}
+	//! Get the native name for the Asterism
+	QString getNameNative() const override {return culturalName.native;}
+	//! Get (translated) pronouncement of the native name for the Asterism
+	QString getNamePronounce() const override {return (culturalName.pronounceI18n.isEmpty() ? culturalName.native : culturalName.pronounceI18n);}
+	//! Get the short name for the Asterism (returns the translated version of abbreviation).
+	QString getShortName() const {return abbreviationI18n;}
+	//! Combine screen label from various components, depending on settings in SkyCultureMgr
+	QString getScreenLabel() const override;
+	//! Combine InfoString label from various components, depending on settings in SkyCultureMgr
+	QString getInfoLabel() const override;
+	//! Underlying worker
+	QString getCultureLabel(StelObject::CulturalDisplayStyle style) const;
 	//! Draw the lines for the Asterism.
 	//! This method uses the coords of the stars (optimized for use through
 	//! the class AsterismMgr only).
@@ -111,14 +124,17 @@ private:
 	//! @return true if a (real) named asterism, false for a ray helper
 	bool isAsterism() const { return flagAsterism; }
 
-	//! International name (translated using gettext)
-	QString nameI18;
-	//! Name in english (second column in asterism_names.eng.fab)
-	QString englishName;
+	//! Asterism name. This is a culture-dependent thing, and in each skyculture an asterism has one name entry only.
+	//! Given multiple aspects of naming, we need all the components and more.
+	CulturalName culturalName;
 	//! Abbreviation
 	//! A skyculture designer must invent it. (usually 2-5 letters)
 	//! This MUST be filled and be unique within a sky culture.
-	QString abbreviation;	
+	//! @note Given their possible screen use, using numerical labels as abbreviation is not recommended.
+	QString abbreviation;
+	//! Translated version of abbreviation (the short name or designation of asterism)
+	//! Latin-based languages should not translate it, but it may be useful to translate for other glyph systems.
+	QString abbreviationI18n;
 	//! Context for name
 	QString context;
 	//! Direction vector pointing on constellation name drawing position

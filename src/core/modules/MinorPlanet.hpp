@@ -122,11 +122,8 @@ public:
 protected:
 	// components for Planet::getInfoString() that are overridden here:
 	QString getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const override;
-	QString getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const override;
 	//! Any flag=Extra information to be displayed at the end
 	QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const override;
-
-	QString getDiscoveryCircumstances() const override;
 
 private:
 	int minorPlanetNumber;
@@ -140,9 +137,6 @@ private:
 
 	float b_v;
 	QString specT, specB;
-	// Discovery data
-	QString discoverer;
-	QString discoveryDate;
 };
 
 #endif // MINORPLANET_HPP

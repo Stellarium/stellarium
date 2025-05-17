@@ -20,75 +20,75 @@ In general, we can say that a Tukano constellation, or parts of it, are observed
 
 The name of each constellation was written in this sequence: Tukano, Portuguese and English. Ex. Pamõ\Tatu\Armadillo.
 
-### Aña or Aña Diaso\Jararaca\Fer-de-lance
+##### Aña or Aña Diaso\Jararaca\Fer-de-lance
 
-### [Aña - Jararaca - Jararaca (snake)](http://en.wikipedia.org/wiki/Bothrops_jararaca)
+##### [Aña - Jararaca - Jararaca (snake)](http://en.wikipedia.org/wiki/Bothrops_jararaca)
 
 A big snake that is found in part of our Scorpius, Sagittarius and Corona Australis constellations. Its setting with the sunset correspond of the beginning of the year to this group of Tukanos.
 
-### Pamõ\Tatu\Armadillo
+##### Pamõ\Tatu\Armadillo
 
-### [Pamõ - Tatu - Armadillo](http://en.wikipedia.org/wiki/Armadillo)
+##### [Pamõ - Tatu - Armadillo](http://en.wikipedia.org/wiki/Armadillo)
 
 This constellation is found in our Dolphin constellation and part of Aquila constellation. This group of faint stars takes place inside a poor stellar field with exception of the bright Altair (Alfa Aquilae).
 
-### Darsiu\camarão de rio\freshwater shrimp
+##### Darsiu\camarão de rio\freshwater shrimp
 
-### [Darsiu - Pitu - Caridean Shrimp](http://en.wikipedia.org/wiki/Caridea)
+##### [Darsiu - Pitu - Caridean Shrimp](http://en.wikipedia.org/wiki/Caridea)
 
-### Mhua\Jacundá (peixe)\A kind of fish
+##### Mhua\Jacundá (peixe)\A kind of fish
 
-### [Mhua - Jacundá (peixe) - Jacundá (a kind of fish)](http://pt.wikipedia.org/wiki/Jacund%C3%A1)
+##### [Mhua - Jacundá (peixe) - Jacundá (a kind of fish)](http://pt.wikipedia.org/wiki/Jacund%C3%A1)
 
 Both constellations are jointed together in a few bright stars of Aquarius and Pisces area. But it is a wonderful challenge to try to see it during the night.
 
-### Yai\onça\puma or jaguar
+##### Yai\onça\puma or jaguar
 
-### [Yai - Onça - Jaguar](http://en.wikipedia.org/wiki/Jaguar)
+##### [Yai - Onça - Jaguar](http://en.wikipedia.org/wiki/Jaguar)
 
 It is a big constellation – one of the biggest – inside the north portions of night skies. All night long near the horizon, the big puma is described inside our Cepheus, Cassiopeia and Perseus constellations.
 
-### Yhe\garça\egret
+##### Yhe\garça\egret
 
-### [Yhé - Garça - Egret](http://en.wikipedia.org/wiki/Egret)
+##### [Yhé - Garça - Egret](http://en.wikipedia.org/wiki/Egret)
 
 It is still in discussion the real position of this constellation, if those stars are in the Berenices’ hair region or inside the Corvus. We choose the first region because it was present as the real one by the Tukanos of São José II tribe.
 
-### Yurara\tartaruga\turtle
+##### Yurara\tartaruga\turtle
 
-### [Yurara - Cágado - Tortoise](http://en.wikipedia.org/wiki/Tortoise)
+##### [Yurara - Cágado - Tortoise](http://en.wikipedia.org/wiki/Tortoise)
 
 This constellation is described as the occidental Southern Cross constellation. Sometimes this traditional occidental constellation also means an Otter or a turtle by the Tukano people.
 
-### Nhorkoatero\grupo de estrelas\Pleiades
+##### Nhorkoatero\grupo de estrelas\Pleiades
 
-### Nhorkoatero - Grupo de Estrelas - Group of Stars
+##### Nhorkoatero - Grupo de Estrelas - Group of Stars
 
 The translation of *nhorkoatero* is literally group of stars. Identified as our Pleiades this is very significant as a time keeper within a complex calendar to Tukano people. It is also used as a rainy period pointer.
 
-### Waikhasa\moquém\a kind of recipient to cook fish
+##### Waikhasa\moquém\a kind of recipient to cook fish
 
-### [Waikasa - Moquém - Moquém (a kind of grill to cook fish)](http://cozinhacomz.com.br/?food=muquiar-ou-moquear)
+##### [Waikasa - Moquém - Moquém (a kind of grill to cook fish)](http://cozinhacomz.com.br/?food=muquiar-ou-moquear)
 
 It is identified with our Taurus Hyades open cluster of stars with the bright Aldebaran following the Pleiades. This is an easy asterism to be seen all over the sky.
 
-### Sioyahpu\enxó\instrument do carve wood
+##### Sioyahpu\enxó\instrument do carve wood
 
-### [Sioyahpu - Cabo do Enxó - Adze Handle](http://en.wikipedia.org/wiki/Adze)
+##### [Sioyahpu - Cabo do Enxó - Adze Handle](http://en.wikipedia.org/wiki/Adze)
 
 As a part of Orion belt and two of the others brightest stars of this constellation – our Betelgeuse and Bellatrix – this constellation represents to Tukano group a part of a tool which is used to carve wood.
 
-### Sipé Phairo\cobra de ânus grande\a snake
+##### Sipé Phairo\cobra de ânus grande\a snake
 
-### Sipé Phairo - Cobra de Ânus Grande - Snake Large Anus
+##### Sipé Phairo - Cobra de Ânus Grande - Snake Large Anus
 
 This snake corresponds to our brightest Big Dipper stars. In a legend when this constellation touches the horizon after the sunset almost all fishes in the main river are swallowed by it.
 
-### Diayo/lontra/otter
+##### Diayo/lontra/otter
 
 Described as our Southern Cross by part of the Tukanos in half Tiquié river, this constellation is also associated with star as Sirius in Canis Major in that region.
 
-### Kai Sariró/Circulo de dança/Circle dances
+##### Kai Sariró/Circulo de dança/Circle dances
 
 Those stars are mainly at Orion constellation and mean a circle of dances in some special Tukano ceremonies.
 

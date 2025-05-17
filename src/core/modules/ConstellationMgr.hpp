@@ -23,6 +23,7 @@
 
 #include "StelObjectType.hpp"
 #include "StelObjectModule.hpp"
+#include "StelObject.hpp"
 
 #include <vector>
 #include <QString>
@@ -43,24 +44,24 @@ class StelSkyCulture;
 class ConstellationMgr : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool artDisplayed					READ getFlagArt							WRITE setFlagArt							NOTIFY artDisplayedChanged)
-	Q_PROPERTY(float artFadeDuration				READ getArtFadeDuration					WRITE setArtFadeDuration					NOTIFY artFadeDurationChanged)
-	Q_PROPERTY(float artIntensity					READ getArtIntensity						WRITE setArtIntensity						NOTIFY artIntensityChanged)
-	Q_PROPERTY(Vec3f boundariesColor				READ getBoundariesColor					WRITE setBoundariesColor					NOTIFY boundariesColorChanged)
-	Q_PROPERTY(bool boundariesDisplayed			READ getFlagBoundaries					WRITE setFlagBoundaries					NOTIFY boundariesDisplayedChanged)
-	Q_PROPERTY(float boundariesFadeDuration		READ getBoundariesFadeDuration			WRITE setBoundariesFadeDuration			NOTIFY boundariesFadeDurationChanged)
-	Q_PROPERTY(int fontSize						READ getFontSize							WRITE setFontSize							NOTIFY fontSizeChanged)
-	Q_PROPERTY(bool isolateSelected				READ getFlagIsolateSelected				WRITE setFlagIsolateSelected				NOTIFY isolateSelectedChanged)
-	Q_PROPERTY(bool flagConstellationPick			READ getFlagConstellationPick				WRITE setFlagConstellationPick				NOTIFY flagConstellationPickChanged)
-	Q_PROPERTY(Vec3f linesColor					READ getLinesColor						WRITE setLinesColor						NOTIFY linesColorChanged)
-	Q_PROPERTY(bool linesDisplayed				READ getFlagLines						WRITE setFlagLines						NOTIFY linesDisplayedChanged)
-	Q_PROPERTY(float linesFadeDuration				READ getLinesFadeDuration					WRITE setLinesFadeDuration				NOTIFY linesFadeDurationChanged)
-	Q_PROPERTY(Vec3f namesColor					READ getLabelsColor						WRITE setLabelsColor						NOTIFY namesColorChanged)
-	Q_PROPERTY(bool namesDisplayed				READ getFlagLabels						WRITE setFlagLabels						NOTIFY namesDisplayedChanged)
-	Q_PROPERTY(float namesFadeDuration			READ getLabelsFadeDuration				WRITE setLabelsFadeDuration				NOTIFY namesFadeDurationChanged)
-	Q_PROPERTY(ConstellationDisplayStyle constellationDisplayStyle	READ getConstellationDisplayStyle	WRITE setConstellationDisplayStyle		NOTIFY constellationsDisplayStyleChanged)
-	Q_PROPERTY(int constellationLineThickness		READ getConstellationLineThickness			WRITE setConstellationLineThickness			NOTIFY constellationLineThicknessChanged)
-	Q_PROPERTY(int constellationBoundariesThickness	READ getConstellationBoundariesThickness	WRITE setConstellationBoundariesThickness	NOTIFY constellationBoundariesThicknessChanged)
+	Q_PROPERTY(bool artDisplayed              READ getFlagArt                        WRITE setFlagArt                       NOTIFY artDisplayedChanged)
+	Q_PROPERTY(float artFadeDuration          READ getArtFadeDuration                WRITE setArtFadeDuration               NOTIFY artFadeDurationChanged)
+	Q_PROPERTY(float artIntensity             READ getArtIntensity                   WRITE setArtIntensity                  NOTIFY artIntensityChanged)
+	Q_PROPERTY(Vec3f boundariesColor          READ getBoundariesColor                WRITE setBoundariesColor               NOTIFY boundariesColorChanged)
+	Q_PROPERTY(bool boundariesDisplayed       READ getFlagBoundaries                 WRITE setFlagBoundaries                NOTIFY boundariesDisplayedChanged)
+	Q_PROPERTY(float boundariesFadeDuration	  READ getBoundariesFadeDuration         WRITE setBoundariesFadeDuration        NOTIFY boundariesFadeDurationChanged)
+	Q_PROPERTY(int fontSize	                  READ getFontSize                       WRITE setFontSize                      NOTIFY fontSizeChanged)
+	Q_PROPERTY(bool isolateSelected	          READ getFlagIsolateSelected            WRITE setFlagIsolateSelected           NOTIFY isolateSelectedChanged)
+	Q_PROPERTY(bool flagConstellationPick     READ getFlagConstellationPick          WRITE setFlagConstellationPick	        NOTIFY flagConstellationPickChanged)
+	Q_PROPERTY(Vec3f linesColor               READ getLinesColor                     WRITE setLinesColor                    NOTIFY linesColorChanged)
+	Q_PROPERTY(bool linesDisplayed            READ getFlagLines                      WRITE setFlagLines                     NOTIFY linesDisplayedChanged)
+	Q_PROPERTY(float linesFadeDuration        READ getLinesFadeDuration              WRITE setLinesFadeDuration             NOTIFY linesFadeDurationChanged)
+	Q_PROPERTY(Vec3f namesColor               READ getLabelsColor                    WRITE setLabelsColor                   NOTIFY namesColorChanged)
+	Q_PROPERTY(bool namesDisplayed            READ getFlagLabels                     WRITE setFlagLabels                    NOTIFY namesDisplayedChanged)
+	Q_PROPERTY(float namesFadeDuration        READ getLabelsFadeDuration             WRITE setLabelsFadeDuration            NOTIFY namesFadeDurationChanged)
+	Q_PROPERTY(int constellationLineThickness READ getConstellationLineThickness     WRITE setConstellationLineThickness    NOTIFY constellationLineThicknessChanged)
+	Q_PROPERTY(int constellationBoundariesThickness	READ getConstellationBoundariesThickness WRITE setConstellationBoundariesThickness NOTIFY constellationBoundariesThicknessChanged)
+
 
 public:
 	//! Constructor
@@ -88,7 +89,8 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
-	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
+	// TODO later: Identify constellation from coordinate
+	//QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! @return the matching constellation object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensitive constellation name
@@ -103,15 +105,6 @@ public:
 	QStringList listAllObjects(bool inEnglish) const override;
 	QString getName() const override { return "Constellations"; }
 	QString getStelObjectType() const override;
-	//! Describes how to display constellation labels. The viewDialog GUI has a combobox which corresponds to these values.
-	enum ConstellationDisplayStyle
-	{
-		constellationsAbbreviated	= 0,
-		constellationsNative		= 1,
-		constellationsTranslated	= 2,
-		constellationsEnglish		= 3 // Maybe this is not useful?
-	};	
-	Q_ENUM(ConstellationDisplayStyle)
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -219,24 +212,15 @@ public slots:
 	//! Set whether constellation names are displayed
 	bool getFlagLabels(void) const;
 
-	//! Set constellation labels fade duration in second
+	//! Set constellation labels fade duration in seconds
 	void setLabelsFadeDuration(const float duration);
-	//! Get constellation labels fade duration in second
+	//! Get constellation labels fade duration in seconds
 	float getLabelsFadeDuration() const;
 
 	//! Set the font size used for constellation names display
 	void setFontSize(const int newFontSize);
 	//! Get the font size used for constellation names display
 	int getFontSize() const;
-
-	//! Set the way how constellation names are displayed: abbreviated/as-given/translated
-	//! @param style the new display style
-	void setConstellationDisplayStyle(ConstellationMgr::ConstellationDisplayStyle style);
-	//! get the way how constellation names are displayed: abbreviated/as-given/translated
-	ConstellationMgr::ConstellationDisplayStyle getConstellationDisplayStyle();
-	//! Returns the currently set constellation display style as string, instead of enum
-	//! @see getConstellationDisplayStyle()
-	static QString getConstellationDisplayStyleString(ConstellationMgr::ConstellationDisplayStyle style);
 
 	//! Set the thickness of lines of the constellations
 	//! @param thickness of line in pixels
@@ -256,7 +240,7 @@ public slots:
 	//! Select all constellations
 	void selectAllConstellations(void);
 
-	//! Select the constellation by his English name. Calling this method will enable
+	//! Select the constellation by its English name. Calling this method will enable
 	//! isolated selection for the constellations if it is not enabled yet.
 	//! @param englishName the English name of the constellation
 	//! @code
@@ -272,18 +256,18 @@ public slots:
 	//! // example of usage in scripts: select constellation where Venus is located
 	//! ConstellationMgr.selectConstellationByObjectName("Venus");
 	//! @endcode
-	//! @note the method will be correct work for sky cultures with boundaries
+	//! @note the method will correctly work for sky cultures with boundaries
 	//! otherwise you may use star names from constellation lines as celestial body
 	void selectConstellationByObjectName(const QString& englishName);
-	//! Remove the constellation from list of selected constellations by his English
+	//! Remove the constellation from list of selected constellations by its English
 	//! name. Calling this method will enable isolated selection for the constellations
 	//! if it is not enabled yet.
 	//! @param englishName the English name of the constellation
 	//! @code
-	//! // example of usage in scripts: remove selection from the Orion constellation
+	//! // example of usage in scripts: remove Orion from the selection of constellations
 	//! ConstellationMgr.deselectConstellation("Orion");
 	//! @endcode
-	//! @note all constellations will be hidden when list of selected constellations will be empty
+	//! @note all constellations will be hidden when list of selected constellations is empty
 	void deselectConstellation(const QString& englishName);
 
 	//! Get the list of English names of all constellations for loaded sky culture
@@ -305,7 +289,7 @@ signals:
 	void namesColorChanged(const Vec3f & color);
 	void namesDisplayedChanged(const bool displayed);
 	void namesFadeDurationChanged(const float duration);
-	void constellationsDisplayStyleChanged(const ConstellationMgr::ConstellationDisplayStyle style);
+	void constellationsDisplayStyleChanged(const StelObject::CulturalDisplayStyle style);
 	void constellationLineThicknessChanged(int thickness);
 	void constellationBoundariesThicknessChanged(int thickness);
 
@@ -334,7 +318,7 @@ private:
 
 	//! Load constellation line shapes, art textures and boundaries shapes from data files.
 	//! @param constellationsData The structure describing all the constellations
-	void loadLinesNamesAndArt(const QJsonArray& constellationsData, const StelSkyCulture& culture, bool preferNativeNames);
+	void loadLinesNamesAndArt(const StelSkyCulture& culture);
 
 	//! Load the constellation boundary file.
 	//! This function deletes any currently loaded constellation boundaries
@@ -379,15 +363,9 @@ private:
 	QFont asterFont;
 	StarMgr* hipStarMgr;
 
-	bool isolateSelected; // true to pick individual constellations.
+	bool isolateSelected; //!< true to pick individual constellations.
 	bool flagConstellationPick; // TODO: CLEAR DESCRIPTION
 	std::vector<std::vector<Vec3d> *> allBoundarySegments;
-
-	QStringList constellationsEnglishNames;
-
-	//! this controls how constellations (and also star names) are printed: Abbreviated/as-given/translated
-	ConstellationDisplayStyle constellationDisplayStyle;
-	static const QMap<QString, ConstellationDisplayStyle>ConstellationDisplayStyleMap;
 
 	// These are THE master settings - individual constellation settings can vary based on selection status
 	float artFadeDuration;

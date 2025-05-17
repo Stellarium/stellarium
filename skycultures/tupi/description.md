@@ -10,13 +10,13 @@ Tupi-Guarani is a name given to a family of languages spoken by the indigenous p
 
 As with many cultures, constellations were identified and used to help keep track of the seasons and predict the seasonal variations which affect daily life. In the book [#3] it is stated that the Tupi people identified some thirty constellations, but the book only details seven.
 
-##### Ema
+### Nandu (Rhea)
 
-The Tupi name for this constellation is *Iandutim* (*Guirá Nhandu* in Guarani), which literally translates to *White Ostrich*. The constellation depicts a large bird.
+The Tupi name for this constellation is *Iandutim* (*Guirá Nhandu* in Guarani), which literally translates to *White Ostrich*. The constellation depicts a large bird. 
 
 In the first two weeks of June this constellation is fully visible in the Eastern sky in the evening, indicating the beginning of Winter in the South of Brazil, and the start of the dry season in the North.
 
-##### Homem Velho (the Old Man)
+### The Old Man
 
 This constellation depicts an old man holding a stick.
 

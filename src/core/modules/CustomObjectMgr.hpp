@@ -180,6 +180,7 @@ private:
 	Vec3f hightlightColor;
 	int countMarkers;
 	int radiusLimit;
+	bool echoToLogfile;
 
 	QString persistentCOFile;
 	//! Loading list of saved custom objects (all of them are available in history of Search Tool)
