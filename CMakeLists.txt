@@ -315,7 +315,7 @@ IF(WIN32)
           SET(STEL_MINGW_FLAGS "-fexceptions")
           # -Og removes some symbols as otherwise the ordinal exceeds the maximum of the 16-bit range.
           SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Og") 
-          # MinGW clang compiler does not have a these flag, but MinGW gcc requires MinGW-specific threading, version number storage
+          # MinGW clang compiler does not have these flags, but MinGW gcc requires MinGW-specific threading, version number storage
           IF(NOT ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang"))
                SET(STEL_MINGW_FLAGS "${STEL_MINGW_FLAGS} -fident -mthreads")
           ENDIF()
