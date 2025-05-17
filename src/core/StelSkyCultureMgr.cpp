@@ -975,7 +975,7 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	braced.removeOne(QString(""));
 	braced.removeOne(QString());
 	braced.removeOne(label); // avoid repeating the main thing if it was used as fallback!
-	if (!braced.isEmpty()) label.append(QString(" %1%3%2").arg(QChar(0x3014), QChar(0x3015), braced.join(", ")));
+	if (!braced.isEmpty()) label.append(QString(" %1%3%2").arg(QChar(0x2997), QChar(0x2998), braced.join(", ")));
 
 	// Add IPA (where possible)
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::IPA)) && (!cName.IPA.isEmpty()) && (label != cName.IPA))
