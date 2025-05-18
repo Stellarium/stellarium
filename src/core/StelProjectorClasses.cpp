@@ -666,7 +666,7 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 
     // Handle potential division by zero when cosTheta is near zero (at poles)
     float lambda;
-    if (abs(cosTheta) < 0.0000001)
+    if (abs(cosTheta) < 0.0000001) {
         lambda = 0.0; // arbitrary value when at poles
     } else {
         lambda = (x * 3.14159265) / (2.0 * 1.41421356 * cosTheta);
