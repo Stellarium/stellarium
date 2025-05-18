@@ -550,8 +550,11 @@ void ViewDialog::createDialogContent()
 	        this, &ViewDialog::updateDefaultSkyCulture);
 	updateDefaultSkyCulture();
 
-   ui->skyCultureStackedWidget->setCurrentIndex(1);
-   connect(ui->switchSkyCulturePageButton,SIGNAL(clicked()), this, SLOT(switchSkyCulturePage()));
+	ui->skyCultureStackedWidget->setCurrentIndex(1);
+	connect(ui->switchSkyCulturePageButton,SIGNAL(clicked()), this, SLOT(switchSkyCulturePage()));
+
+	connect(ui->skyCultureTimeSlider, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTime(int)));
+	connect(ui->skyCultureTimeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTime(int)));
 
 	// allow to display short names and inhibit translation.
 	connectIntProperty(ui->skyCultureNamesStyleComboBox,		"ConstellationMgr.constellationDisplayStyle");
@@ -1352,10 +1355,24 @@ void ViewDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 
 void ViewDialog::switchSkyCulturePage()
 {
-   int pageCount = ui->skyCultureStackedWidget->count();
-   int currentIndex = ui->skyCultureStackedWidget->currentIndex();
+	int pageCount = ui->skyCultureStackedWidget->count();
+	int currentIndex = ui->skyCultureStackedWidget->currentIndex();
 
-   ui->skyCultureStackedWidget->setCurrentIndex((currentIndex + 1) % pageCount);
+	ui->skyCultureStackedWidget->setCurrentIndex((currentIndex + 1) % pageCount);
+}
+
+void ViewDialog::updateSkyCultureTime(int year)
+{
+	ui->skyCultureTimeSlider->blockSignals(true);
+	ui->skyCultureTimeSpinBox->blockSignals(true);
+
+	ui->skyCultureTimeSlider->setValue(year);
+	ui->skyCultureTimeSpinBox->setValue(year);
+
+	ui->skyCultureTimeSlider->blockSignals(false);
+	ui->skyCultureTimeSpinBox->blockSignals(false);
+
+	ui->skyCultureMapGraphicsView->updateTime(year);
 }
 
 void ViewDialog::populatePlanetMagnitudeAlgorithmsList()

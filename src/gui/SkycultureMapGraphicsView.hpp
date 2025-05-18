@@ -17,6 +17,7 @@ public:
 
 public slots:
 	//void selectCulture(const QString &skycultureId);
+	void updateTime(int year);
 
 
 signals:
@@ -32,9 +33,11 @@ protected:
 private:
    // private functions
 	//int _numScheduledScalings;
-	int time;
+	int currentYear;
 	QString oldSkyCulture;
+
 	QList<QPointF> convertIrlToView(const QList<QPointF>  &irl);
+	void updateCultureVisibility();
 
 private slots:
 	// void scalingTime(qreal x);
