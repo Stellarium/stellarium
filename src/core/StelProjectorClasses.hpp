@@ -113,7 +113,8 @@ protected:
 	}
 };
 
-class StelProjectorMollweide : public StelProjector {
+class StelProjectorMollweide : public StelProjector
+{
 public:
 	StelProjectorMollweide(ModelViewTranformP func) : StelProjector(func) {}
 	QString getNameI18() const override;
@@ -128,10 +129,12 @@ public:
 	QByteArray getBackwardTransformShader() const override;
 protected:
 	bool hasDiscontinuity() const override { return true; }
-	bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const override {
+	bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const override
+	{
 		return p1[0] * p2[0] < 0 && !(p1[2] < 0 && p2[2] < 0);
 	}
-	bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const override {
+	bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const override
+	{
 		static const SphericalCap cap1(1, 0, 0);
 		static const SphericalCap cap2(-1, 0, 0);
 		static const SphericalCap cap3(0, 0, -1);
