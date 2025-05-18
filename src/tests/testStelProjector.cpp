@@ -268,8 +268,6 @@ void TestStelProjector::testStelProjectorFisheye()
 	QVERIFY(projection->backward(b));
 	b.set(-1.,-1.,-1.);
 	QVERIFY(projection->backward(b));
-
-
 }
 
 void TestStelProjector::testStelProjectorHammer()
