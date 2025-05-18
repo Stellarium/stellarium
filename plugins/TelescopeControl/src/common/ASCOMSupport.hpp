@@ -31,6 +31,7 @@ class ASCOMSupport final : public QObject
 
 public:
 	static bool isASCOMSupported();
+	static int getASCOMMajorVersion();
 
 	ASCOMSupport(QObject* parent = nullptr);
 

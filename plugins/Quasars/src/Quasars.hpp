@@ -229,8 +229,9 @@ public slots:
 	//! Set color for quasars markers
 	//! @param c color
 	//! @code
-	//! // example of usage in scripts
-	//! Quasars.setMarkerColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! Quasars.setMarkerColor(c.toVec3f());
 	//! @endcode
 	void setMarkerColor(const Vec3f& c);
 

@@ -30,17 +30,20 @@ full specification is part of the HiPS format, and looks like that:
 # Example of a hipslist file.
 # Date: 2018-03-19
 
+obs_title         = callisto
 hips_service_url  = https://data.stellarium.org/surveys/callisto
 hips_release_date = 2018-03-18T14:01Z
 hips_status       = public mirror clonableOnce
+...
 \end{configfileScr}
 
-As of v0.18.0, by default Stellarium tries to load HiPS from two sources:
-\url{http://alaskybis.unistra.fr/hipslist}\footnote{Since version 0.20.3 the first URL 
-was changed to \url{http://alasky.u-strasbg.fr/MocServer/query?*/P/*&get=record} due to changes in HiPS services} and
-\url{https://data.stellarium.org/surveys/hipslist}.
-This can be changed with the hips/sources options in the configuration
-file (see also section~\ref{sec:config.ini:hips}).  For example, you can add your
+Stellarium by default tries to load HiPS from two sources:
+\begin{itemize}
+\item\url{http://alasky.u-strasbg.fr/MocServer/query?*/P/*&get=record} (deep sky)
+\item\url{https://data.stellarium.org/surveys/hipslist} (planets)
+\end{itemize}
+This can be changed with the \texttt{sources} entries in the \texttt{[hips]} section of the configuration
+file (see also section~\ref{sec:config.ini:hips}).  You can add your
 own private HiPS surveys by running a local webserver and adding:
 
 \begin{configfile}[\scriptsize]

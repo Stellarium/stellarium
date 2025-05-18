@@ -661,14 +661,15 @@ void Oculars::init()
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
+		qWarning() << "Unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
 	}
 
-	protractorTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/Protractor.png");
-	protractorFlipHTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/ProtractorFlipH.png");
-	protractorFlipVTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/ProtractorFlipV.png");
-	protractorFlipHVTexture = StelApp::getInstance().getTextureManager().createTexture(":/ocular/ProtractorFlipHV.png");
+	auto& texMan = StelApp::getInstance().getTextureManager();
+	protractorTexture = texMan.createTexture(":/ocular/Protractor.png");
+	protractorFlipHTexture = texMan.createTexture(":/ocular/ProtractorFlipH.png");
+	protractorFlipVTexture = texMan.createTexture(":/ocular/ProtractorFlipV.png");
+	protractorFlipHVTexture = texMan.createTexture(":/ocular/ProtractorFlipHV.png");
 	// enforce check existence of reticle for the current eyepiece
 	updateOcularReticle();
 
@@ -1629,7 +1630,7 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const 
 			const auto z = cropTanFovY * (2.f / (numPointsPerLine - 1) * n - 1);
 			Vec3f win;
 			projector->project(derotate * Vec3f(x,y,z), win);
-			lineLoopPoints.push_back(Vec2f(win[0], win[1]));
+			lineLoopPoints.emplace_back(Vec2f(win[0], win[1]));
 		}
 		// Top line
 		for(int n = 1; n < numPointsPerLine; ++n)
@@ -1639,7 +1640,7 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const 
 			const auto z = cropTanFovY;
 			Vec3f win;
 			projector->project(derotate * Vec3f(x,y,z), win);
-			lineLoopPoints.push_back(Vec2f(win[0], win[1]));
+			lineLoopPoints.emplace_back(Vec2f(win[0], win[1]));
 		}
 		// Right line
 		for(int n = 1; n < numPointsPerLine; ++n)
@@ -1649,7 +1650,7 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const 
 			const auto z = cropTanFovY * (1 - 2.f / (numPointsPerLine - 1) * n);
 			Vec3f win;
 			projector->project(derotate * Vec3f(x,y,z), win);
-			lineLoopPoints.push_back(Vec2f(win[0], win[1]));
+			lineLoopPoints.emplace_back(Vec2f(win[0], win[1]));
 		}
 		// Bottom line
 		for(int n = 1; n < numPointsPerLine-1; ++n)
@@ -1659,7 +1660,7 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const 
 			const auto z = -cropTanFovY;
 			Vec3f win;
 			projector->project(derotate * Vec3f(x,y,z), win);
-			lineLoopPoints.push_back(Vec2f(win[0], win[1]));
+			lineLoopPoints.emplace_back(Vec2f(win[0], win[1]));
 		}
 		for(const auto& p : lineLoopPoints)
 		{
@@ -1687,16 +1688,16 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const 
 	const int numOverlayPixelsY = overlaySize.height() / ccd.binningY();
 
 	// Vertical lines of the pixel grid
-	for(float line = 1; line < numOverlayPixelsX; ++line)
+	for(int line = 1; line < numOverlayPixelsX; ++line)
 	{
-		for(float p = 0; p < numPointsPerLine; ++p)
+		for(int p = 0; p < numPointsPerLine; ++p)
 		{
 			const auto x = 1;
 			const auto y = cropTanFovX * (1 - 2 * line / numOverlayPixelsX);
 			const auto z = cropTanFovY * (2.f / (numPointsPerLine - 1) * p - 1);
 			Vec3f win;
 			projector->project(derotate * Vec3f(x,y,z), win);
-			lineStripPoints.push_back(Vec2f(win[0], win[1]));
+			lineStripPoints.emplace_back(Vec2f(win[0], win[1]));
 		}
 		sPainter.setVertexPointer(2, GL_FLOAT, lineStripPoints.data());
 		sPainter.drawFromArray(StelPainter::LineStrip, lineStripPoints.size(), 0, false);
@@ -1704,16 +1705,16 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const 
 	}
 
 	// Horizontal lines of the pixel grid
-	for(float line = 1; line < numOverlayPixelsY; ++line)
+	for(int line = 1; line < numOverlayPixelsY; ++line)
 	{
-		for(float p = 0; p < numPointsPerLine; ++p)
+		for(int p = 0; p < numPointsPerLine; ++p)
 		{
 			const auto x = 1;
 			const auto y = -cropTanFovX * (2.f / (numPointsPerLine - 1) * p - 1);
 			const auto z = cropTanFovY * (1 - 2 * line / numOverlayPixelsX);
 			Vec3f win;
 			projector->project(derotate * Vec3f(x,y,z), win);
-			lineStripPoints.push_back(Vec2f(win[0], win[1]));
+			lineStripPoints.emplace_back(Vec2f(win[0], win[1]));
 		}
 		sPainter.setVertexPointer(2, GL_FLOAT, lineStripPoints.data());
 		sPainter.drawFromArray(StelPainter::LineStrip, lineStripPoints.size(), 0, false);
@@ -1742,7 +1743,7 @@ void Oculars::drawCirclesOfConstantAngularRadii(StelPainter& sPainter, const Mat
 			const float z = tanAngRadius*cosb;
 			Vec3f win;
 			sPainter.getProjector()->project(derotate * Vec3f(x,y,z), win);
-			lineLoopPoints.push_back(Vec2f(win[0], win[1]));
+			lineLoopPoints.emplace_back(Vec2f(win[0], win[1]));
 		}
 		sPainter.setVertexPointer(2, GL_FLOAT, lineLoopPoints.data());
 		sPainter.drawFromArray(StelPainter::LineLoop, lineLoopPoints.size(), 0, false);
@@ -1782,7 +1783,7 @@ void Oculars::drawOAG(const StelProjectorP& projector, const Mat4f& derotate,
 		const auto z = (tanOuterRadius-tanInnerRadius) * n / (numPointsPerLine-1) + tanInnerRadius;
 		Vec3f win;
 		projector->project(derotate * Vec3f(x,y,z), win);
-		lineLoopPoints.push_back(Vec2f(win[0], win[1]));
+		lineLoopPoints.emplace_back(Vec2f(win[0], win[1]));
 	}
 	// Top line
 	for(int n = 1; n < numPointsPerLine; ++n)
@@ -1792,7 +1793,7 @@ void Oculars::drawOAG(const StelProjectorP& projector, const Mat4f& derotate,
 		const auto z = tanOuterRadius;
 		Vec3f win;
 		projector->project(derotate * Vec3f(x,y,z), win);
-		lineLoopPoints.push_back(Vec2f(win[0], win[1]));
+		lineLoopPoints.emplace_back(Vec2f(win[0], win[1]));
 	}
 	// Right line
 	for(int n = 1; n < numPointsPerLine; ++n)
@@ -1802,7 +1803,7 @@ void Oculars::drawOAG(const StelProjectorP& projector, const Mat4f& derotate,
 		const auto z = (tanInnerRadius-tanOuterRadius) * n / (numPointsPerLine-1) + tanOuterRadius;
 		Vec3f win;
 		projector->project(derotate * Vec3f(x,y,z), win);
-		lineLoopPoints.push_back(Vec2f(win[0], win[1]));
+		lineLoopPoints.emplace_back(Vec2f(win[0], win[1]));
 	}
 	// Bottom line
 	for(int n = 1; n < numPointsPerLine-1; ++n)
@@ -1812,7 +1813,7 @@ void Oculars::drawOAG(const StelProjectorP& projector, const Mat4f& derotate,
 		const auto z = tanInnerRadius;
 		Vec3f win;
 		projector->project(derotate * Vec3f(x,y,z), win);
-		lineLoopPoints.push_back(Vec2f(win[0], win[1]));
+		lineLoopPoints.emplace_back(Vec2f(win[0], win[1]));
 	}
 	sPainter.enableClientStates(true);
 	sPainter.setVertexPointer(2, GL_FLOAT, lineLoopPoints.data());
@@ -2443,7 +2444,7 @@ void Oculars::validateAndLoadIniFile()
 		}
 		else
 		{
-			qDebug() << "Oculars::validateAndLoadIniFile() copied default_ocular.ini to " << QDir::toNativeSeparators(ocularIniPath);
+			qWarning() << "Oculars::validateAndLoadIniFile() copied default_ocular.ini to " << QDir::toNativeSeparators(ocularIniPath);
 			// The resource is read only, and the new file inherits this, so set write-able.
 			QFile dest(ocularIniPath);
 			dest.setPermissions(dest.permissions() | QFile::WriteOwner);
@@ -2451,10 +2452,10 @@ void Oculars::validateAndLoadIniFile()
 	}
 	else
 	{
-		qDebug().noquote() << "Oculars::validateAndLoadIniFile() ocular.ini exists at:" << QDir::toNativeSeparators(ocularIniPath) << ". Checking version...";
+		qInfo().noquote() << "Oculars::validateAndLoadIniFile() ocular.ini exists at:" << QDir::toNativeSeparators(ocularIniPath) << ". Checking version...";
 		QSettings mySettings(ocularIniPath, QSettings::IniFormat);
 		const float ocularsVersion = mySettings.value("oculars_version", 0.0).toFloat();
-		qWarning() << "Oculars::validateAndLoadIniFile() found existing ini file version" << ocularsVersion;
+		qInfo().noquote() << "Oculars::validateAndLoadIniFile() found existing ini file version" << ocularsVersion;
 
 		if (ocularsVersion < MIN_OCULARS_INI_VERSION)
 		{
@@ -2524,10 +2525,11 @@ void Oculars::unzoomOcular()
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseZooming(true);
 
-	GETSTELMODULE(SolarSystem)->setFlagMoonScale(flagMoonScaleMain);
-	GETSTELMODULE(SolarSystem)->setFlagMinorBodyScale(flagMinorBodiesScaleMain);
-	GETSTELMODULE(SolarSystem)->setFlagSunScale(flagSunScaleMain);
-	GETSTELMODULE(SolarSystem)->setFlagPlanetScale(flagPlanetsScaleMain);
+	SolarSystem *solarSystem = GETSTELMODULE(SolarSystem);
+	solarSystem->setFlagMoonScale(flagMoonScaleMain);
+	solarSystem->setFlagMinorBodyScale(flagMinorBodiesScaleMain);
+	solarSystem->setFlagSunScale(flagSunScaleMain);
+	solarSystem->setFlagPlanetScale(flagPlanetsScaleMain);
 	GETSTELMODULE(NebulaMgr)->setHintsProportional(flagDSOPropHintMain);
 
 	// Set the screen display
@@ -2646,10 +2648,11 @@ void Oculars::zoomOcular()
 	skyDrawer->setFlagLuminanceAdaptation(false);
 	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("MilkyWay.saturation", 0.f);
 
-	GETSTELMODULE(SolarSystem)->setFlagMoonScale(false);
-	GETSTELMODULE(SolarSystem)->setFlagMinorBodyScale(false);
-	GETSTELMODULE(SolarSystem)->setFlagSunScale(false);
-	GETSTELMODULE(SolarSystem)->setFlagPlanetScale(false);
+	SolarSystem *solarSystem = GETSTELMODULE(SolarSystem);
+	solarSystem->setFlagMoonScale(false);
+	solarSystem->setFlagMinorBodyScale(false);
+	solarSystem->setFlagSunScale(false);
+	solarSystem->setFlagPlanetScale(false);
 	GETSTELMODULE(NebulaMgr)->setHintsProportional(false);
 
 	movementManager->setFlagTracking(true);

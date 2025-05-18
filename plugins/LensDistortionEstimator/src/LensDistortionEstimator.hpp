@@ -39,6 +39,7 @@ class LensDistortionEstimator : public StelModule
 	Q_PROPERTY(bool imageAxesEnabled READ areImageAxesEnabled WRITE setImageAxesEnabled NOTIFY imageAxesToggled)
 	Q_PROPERTY(bool pointMarkersEnabled READ arePointMarkersEnabled WRITE setPointMarkersEnabled NOTIFY pointMarkersToggled)
 	Q_PROPERTY(bool projectionCenterMarkerEnabled READ isProjectionCenterMarkerEnabled WRITE setProjectionCenterMarkerEnabled NOTIFY projectionCenterMarkerToggled)
+	Q_PROPERTY(bool imgPosResetOnLoadingEnabled READ isImgPosResetOnLoadingEnabled WRITE setImgPosResetOnLoadingEnabled NOTIFY imgPosResetOnLoadingToggled)
 	Q_PROPERTY(Vec3f selectedPointMarkerColor READ getSelectedPointMarkerColor WRITE setSelectedPointMarkerColor NOTIFY selectedPointMarkerColorChanged )
 	Q_PROPERTY(Vec3f pointMarkerColor READ getPointMarkerColor WRITE setPointMarkerColor NOTIFY pointMarkerColorChanged )
 	Q_PROPERTY(Vec3f projectionCenterMarkerColor READ getProjectionCenterMarkerColor WRITE setProjectionCenterMarkerColor NOTIFY projectionCenterMarkerColorChanged )
@@ -62,6 +63,7 @@ public:
 	bool configureGui(bool show = true) override;
 	bool arePointMarkersEnabled() const { return pointMarkersEnabled; }
 	bool isProjectionCenterMarkerEnabled() const { return projectionCenterMarkerEnabled; }
+	bool isImgPosResetOnLoadingEnabled() const { return imgPosResetOnLoadingEnabled; }
 	bool areImageAxesEnabled() const { return imageAxesEnabled; }
 	bool isImageEnabled() const { return imageEnabled; }
 	bool isDialogVisible() const { return dialogVisible; }
@@ -78,6 +80,7 @@ public slots:
 	void setImageAxesEnabled(bool enabled);
 	void setPointMarkersEnabled(bool enabled);
 	void setProjectionCenterMarkerEnabled(bool enabled);
+	void setImgPosResetOnLoadingEnabled(bool enabled);
 	void setProjectionCenterMarkerColor(const Vec3f& color);
 	void setSelectedPointMarkerColor(const Vec3f& color);
 	void setPointMarkerColor(const Vec3f& color);
@@ -87,6 +90,7 @@ signals:
 	void dialogToggled(bool enabled);
 	void imageAxesToggled(bool enabled);
 	void pointMarkersToggled(bool enabled);
+	void imgPosResetOnLoadingToggled(bool enabled);
 	void projectionCenterMarkerToggled(bool enabled);
 	void projectionCenterMarkerColorChanged(const Vec3f& color);
 	void selectedPointMarkerColorChanged(const Vec3f& color);
@@ -141,6 +145,7 @@ private:
 	bool rotatingImage_ = false;
 	bool pointMarkersEnabled = true;
 	bool projectionCenterMarkerEnabled = false;
+	bool imgPosResetOnLoadingEnabled = true;
 	bool imageAxesEnabled = false;
 	bool imageEnabled = true;
 	bool dialogVisible = false;

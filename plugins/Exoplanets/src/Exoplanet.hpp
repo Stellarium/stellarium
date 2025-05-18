@@ -99,7 +99,7 @@ public:
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
-	//! @flags a set of flags with information types to include.
+	//! @param flags a set of flags with information types to include.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
 	//! Return a map like StelObject, but with a few extra tags also available in getMap().
 	//! - distance = distance in pc

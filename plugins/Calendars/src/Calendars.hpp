@@ -70,7 +70,7 @@ See Qt documentation on QtTimeZone.
 */
 
 //! @class Calendars
-//! StelModule plugin which provides display and a scripting interface to a multitude of calendrical functions.
+//! @brief StelModule plugin which provides display and a scripting interface to a multitude of calendrical functions.
 //! @author Georg Zotti
 //! @ingroup calendars
 

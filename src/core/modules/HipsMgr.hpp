@@ -65,6 +65,7 @@ signals:
 	void stateChanged(State value) const;
 	//! Emitted when a new survey has been loaded.
 	void gotNewSurvey(HipsSurveyP survey) const;
+	void toggleDialog() const;
 
 public slots:
 	//! Start to load the default sources.

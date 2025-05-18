@@ -75,8 +75,9 @@ declinations very slightly move as well.
 */
 
 //! @class ArchaeoLine
-//! Class which manages a line (small circle) to display around the sky like the solstices line.
-//! Modelled after @class SkyLine found in GridLinesMgr.cpp at V0.13.2, but with small-circle drawing.
+//! @brief Class which manages a line (small circle) to display around the sky like the solstices line.
+//!
+//! Modelled after @c SkyLine found in GridLinesMgr.cpp at V0.13.2, but with small-circle drawing.
 //! @author Georg Zotti
 //! @ingroup archaeoLines
 class ArchaeoLine : public QObject

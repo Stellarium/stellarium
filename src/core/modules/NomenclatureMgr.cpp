@@ -140,7 +140,7 @@ void NomenclatureMgr::loadSpecialNomenclature()
 
 void NomenclatureMgr::loadNomenclature()
 {
-	qDebug() << "Loading nomenclature for Solar system bodies ...";
+	qInfo() << "Loading nomenclature for Solar system bodies ...";
 
 	nomenclatureItems.clear();	
 
@@ -263,12 +263,12 @@ void NomenclatureMgr::loadNomenclature()
 		}
 
 		buf.close();
-		qDebug() << "Loaded" << readOk << "/" << totalRecords << "items of planetary surface nomenclature";
+		qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "items of planetary surface nomenclature";
 
 		missingPlanets.removeDuplicates();
 		if (!missingPlanets.isEmpty())
 			// Nothing to worry about - We still don't include all objects.
-			qInfo() << "INFO: Cannot find these planetary objects to assign nomenclature items:" << missingPlanets.join(", ");
+			qInfo().noquote() << "INFO: Cannot find these planetary objects to assign nomenclature items:" << missingPlanets.join(", ");
 	}
 }
 

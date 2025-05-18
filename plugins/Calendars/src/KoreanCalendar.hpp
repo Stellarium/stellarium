@@ -22,7 +22,7 @@
 #include "ChineseCalendar.hpp"
 
 //! @class KoreanCalendar
-//! Functions for the Korean calendar (as derived from the Chinese calendar)
+//! @brief Functions for the Korean calendar (as derived from the Chinese calendar)
 //! @author Georg Zotti
 //! @ingroup calendars
 //! The Korean calendar is derived from the Chinese calendar (like Japanese and Vietnamese).

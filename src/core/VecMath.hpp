@@ -275,7 +275,7 @@ public:
 	//! convert from a QVector3D
 	static Vector3<T>fromQVector3D(QVector3D v);
 	//! Compact comma-separated string without brackets and spaces.
-	//! The result can be restored into a Vector2 by the Vector3(QString s) constructors.
+	//! The result can be restored into a Vector3 by the Vector3(QString s) constructors.
 	QString toStr() const;
 	inline QString toStringLonLat() const {return QString("[") + QString::number(longitude()*180./M_PI, 'g', 12) + "," + QString::number(latitude()*180./M_PI, 'g', 12)+"]";}
 	//! Convert a Vec3i/Vec3f/Vec3d to HTML color notation. In case of Vec3i, components are 0...255, else 0...1

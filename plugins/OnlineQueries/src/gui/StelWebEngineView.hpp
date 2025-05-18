@@ -25,7 +25,9 @@
 
 #include <QWebEngineView>
 
-//! @class StelWebEngineView A trivial extension of QWebEngineView. 
+//! @class StelWebEngineView
+//! @brief A trivial extension of @c QWebEngineView.
+//!
 //! This class provides a mouse button handler override which uses the mouse back/forward buttons for navigation.
 //! To use in an .ui file in QCreator designer, add a QWebEngineView first,
 //! then define it as "placeholder" for StelWebEngineView and import this header.
@@ -44,8 +46,10 @@ protected:
 #else
 #include <QTextBrowser>
 
-//! @class StelWebEngineView Almost dummy class identical to @class QTextBrowser.
-//! This is compiled on platforms without QWebEngine. It has QTextBrowser's setHtml(),
+//! @class StelWebEngineView
+//! @brief Almost dummy class identical to @c QTextBrowser.
+//!
+//! This is compiled on platforms without @c QWebEngine. It has @c QTextBrowser's @c setHtml(),
 //! but any URL opening must be forwarded to the system's webbrowser.
 class StelWebEngineView: public QTextBrowser {
 	Q_OBJECT

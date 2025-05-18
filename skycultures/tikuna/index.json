@@ -1,0 +1,64 @@
+{
+  "id": "tikuna",
+  "region": "South America",
+  "classification": ["ethnographic"],
+  "fallback_to_international_names": false,
+  "constellations": [
+    {
+      "id": "CON tikuna 001",
+      "lines": [[17702, 17448], [17702, 18246]],
+      "image": {
+        "file": "illustrations/Baweta.png",
+        "size": [445, 283],
+        "anchors": [
+          {"pos": [270, 173], "hip": 17702},
+          {"pos": [87, 96], "hip": 18246},
+          {"pos": [109, 65], "hip": 17448}
+        ]
+      },
+      "common_name": {"english": "Turtle Collective", "native": "Baweta"}
+    },
+    {
+      "id": "CON tikuna 002",
+      "lines": [[25930, 26311, 26727], [26311, 26241, 27366, 28103, 28816, 27654, 26862]],
+      "image": {
+        "file": "illustrations/Wucutcha.png",
+        "size": [514, 294],
+        "anchors": [
+          {"pos": [47, 88], "hip": 25930},
+          {"pos": [66, 105], "hip": 26311},
+          {"pos": [84, 124], "hip": 26727}
+        ]
+      },
+      "common_name": {"english": "Wücütcha's leg", "native": "Wücütcha"}
+    },
+    {
+      "id": "CON tikuna 003",
+      "lines": [[21421, 20205, 20889]],
+      "image": {
+        "file": "illustrations/Coyatchicura.png",
+        "size": [1005, 548],
+        "anchors": [
+          {"pos": [883, 127], "hip": 21421},
+          {"pos": [352, 445], "hip": 23416},
+          {"pos": [36, 236], "hip": 14328}
+        ]
+      },
+      "common_name": {"english": "Cayman’s Jaw", "native": "Coyatchicüra"}
+    },
+    {
+      "id": "CON tikuna 004",
+      "lines": [[60718, 59747, 61084, 66657, 74395, 71683, 71908], [74395, 82396, 80763], [82396, 85927], [84143, 86228, 83081, 82363, 79664, 77952]],
+      "image": {
+        "file": "illustrations/Tchatu_Ai.png",
+        "size": [862, 688],
+        "anchors": [
+          {"pos": [96, 35], "hip": 60718},
+          {"pos": [110, 223], "hip": 66657},
+          {"pos": [433, 656], "hip": 80763}
+        ]
+      },
+      "common_name": {"english": "Anteater’s Jaguar", "native": "Tchatü-Ai"}
+    }
+  ]
+}

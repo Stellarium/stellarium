@@ -302,8 +302,9 @@ public slots:
 	//! @param c color
 	//! @param h set true if you want set color for potentially habitable exoplanets
 	//! @code
-	//! // example of usage in scripts
-	//! Exoplanets.setMarkerColor(Vec3f(1.0,0.0,0.0), true);
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! Exoplanets.setMarkerColor(c.toVec3f(), true);
 	//! @endcode
 	void setMarkerColor(const Vec3f& c);
 
@@ -315,8 +316,9 @@ public slots:
 	//! @param c color
 	//! @param h set true if you want set color for potentially habitable exoplanets
 	//! @code
-	//! // example of usage in scripts
-	//! Exoplanets.setHabitableColor(Vec3f(1.0,0.0,0.0), true);
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! Exoplanets.setHabitableColor(c.toVec3f(), true);
 	//! @endcode
 	void setHabitableColor(const Vec3f& c);
 

@@ -22,7 +22,8 @@
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelApp.hpp"
-#include "StelIniParser.hpp"
+
+#include <md4c-html.h>
 
 #include <QSettings>
 #include <QString>
@@ -32,69 +33,246 @@
 #include <QMap>
 #include <QMapIterator>
 #include <QDir>
+#include <QJsonObject>
+#include <QJsonDocument>
 #include <QRegularExpression>
+
+namespace
+{
+
+#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+constexpr auto SkipEmptyParts = Qt::SkipEmptyParts;
+#else
+constexpr auto SkipEmptyParts = QString::SkipEmptyParts;
+#endif
+
+void applyStyleToMarkdown(QString& string)
+{
+	static const auto pPattern = []{
+		// Locates any paragraph. This will make sure we get the smallest paragraphs. If
+		// we look for the styled ones from the beginning, we'll get too greedy matches.
+		QRegularExpression p("<p>.+?</p>", QRegularExpression::DotMatchesEverythingOption);
+		p.optimize();
+		return p;
+	}();
+	static const auto pStyledPattern = []{
+		// This is for the actual paragraphs we are interested in.
+		QRegularExpression sp(R"regex(<p>(.+?){:\s*\.(\S+?)\s*}\s*</p>)regex",
+		                      QRegularExpression::DotMatchesEverythingOption);
+		sp.optimize();
+		return sp;
+	}();
+	bool replaced;
+	do
+	{
+		replaced = false;
+		for(auto matches = pPattern.globalMatch(string); matches.hasNext(); )
+		{
+			const auto& match = matches.next();
+			const auto substr = match.captured(0);
+			if(substr.contains(pStyledPattern))
+			{
+				// Don't replace the original string directly: otherwise
+				// we'll again have greedy matches.
+				auto newSubstr = substr;
+				newSubstr.replace(pStyledPattern, R"(<p class="\2">\1</p>)");
+
+				// Also force the caption to be below the image,
+				// rather than to the right of it.
+				static const QRegularExpression re("(<img [^>]+>)");
+				newSubstr.replace(re, "\\1<br>");
+
+				string.replace(substr, newSubstr);
+
+				replaced = true;
+				break;
+			}
+		}
+	} while(replaced);
+}
+
+QString markdownToHTML(QString input)
+{
+	const auto inputUTF8 = input.toStdString();
+
+	std::string outputUTF8;
+	::md_html(inputUTF8.data(), inputUTF8.size(),
+	          [](const char* html, const MD_SIZE size, void* output)
+	          { static_cast<std::string*>(output)->append(html, size); },
+	          &outputUTF8, MD_DIALECT_GITHUB, 0);
+
+	auto result = QString::fromStdString(outputUTF8);
+	applyStyleToMarkdown(result);
+	return result;
+}
+
+QString convertReferenceLinks(QString text)
+{
+	static const QRegularExpression re(" ?\\[#([0-9]+)\\]", QRegularExpression::MultilineOption);
+	text.replace(re,
+	             "<sup><a href=\"#cite_\\1\">[\\1]</a></sup>");
+	return text;
+}
+
+}
+
+QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& idFromJSON) const
+{
+	const auto skyCultureId = idFromJSON;
+	const QString descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description.md");
+	if (descPath.isEmpty())
+	{
+		qWarning() << "Can't find description for skyculture" << skyCultureId;
+		return idFromJSON;
+	}
+
+	QFile f(descPath);
+	if (!f.open(QIODevice::ReadOnly))
+	{
+		qWarning().nospace() << "Failed to open sky culture description file " << descPath << ": " << f.errorString();
+		return idFromJSON;
+	}
+
+	for (int lineNum = 1;; ++lineNum)
+	{
+		const auto line = QString::fromUtf8(f.readLine()).trimmed();
+		if (line.isEmpty()) continue;
+		if (!line.startsWith("#"))
+		{
+			qWarning().nospace() << "Sky culture description file " << descPath << " at line "
+			                     << lineNum << " has wrong format (expected a top-level header, got " << line;
+			return idFromJSON;
+		}
+		return line.mid(1).trimmed();
+	}
+
+	qWarning() << "Failed to find sky culture name in" << descPath;
+	return idFromJSON;
+}
 
 StelSkyCultureMgr::StelSkyCultureMgr()
 {
 	setObjectName("StelSkyCultureMgr");
-
-	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
-	
-	for (const auto& dir : std::as_const(cultureDirNames))
-	{
-		QString pdFile = StelFileMgr::findFile("skycultures/" + dir + "/info.ini");
-		if (pdFile.isEmpty())
-		{
-			qWarning() << "WARNING: unable to successfully read info.ini file from skyculture dir" << QDir::toNativeSeparators(dir);
-			continue;
-		}
-		QSettings pd(pdFile, StelIniFormat);
-		dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
-		dirToNameEnglish[dir].author = pd.value("info/author").toString();
-		dirToNameEnglish[dir].credit = pd.value("info/credit").toString();		
-		dirToNameEnglish[dir].license = pd.value("info/license", "").toString();
-		dirToNameEnglish[dir].region = pd.value("info/region", "").toString();
-		QString boundariesStr = pd.value("info/boundaries", "none").toString();
-		static const QMap<QString, StelSkyCulture::BoundariesType> boundariesMap = {
-			{ "none",    StelSkyCulture::BoundariesType::None},
-			{ "iau",     StelSkyCulture::BoundariesType::IAU},
-			{ "generic", StelSkyCulture::BoundariesType::IAU}, // deprecated, add warning below
-			{ "own",     StelSkyCulture::BoundariesType::Own},
-		};
-		const auto boundariesType = boundariesMap.value(boundariesStr.toLower(), StelSkyCulture::BoundariesType::None);
-		if (boundariesStr.contains("generic", Qt::CaseInsensitive))
-		{
-			qDebug() << "Skyculture " << dir << "'s boundaries is given with deprecated 'generic'. Please edit info.ini and change to 'iau'";
-		}
-		else if (!boundariesMap.contains(boundariesStr.toLower()))
-		{
-			qDebug() << "Skyculture " << dir << "'s boundaries value unknown:" << boundariesStr;
-			qDebug() << "Please edit info.ini and change to a supported value. For now, this equals 'none'";
-		}
-		dirToNameEnglish[dir].boundariesType = boundariesType;
-		// Use 'traditional' as default
-		QString classificationStr = pd.value("info/classification", "traditional").toString();
-		static const QMap <QString, StelSkyCulture::CLASSIFICATION>classificationMap={
-			{ "traditional",  StelSkyCulture::TRADITIONAL},
-			{ "historical",   StelSkyCulture::HISTORICAL},
-			{ "ethnographic", StelSkyCulture::ETHNOGRAPHIC},
-			{ "single",       StelSkyCulture::SINGLE},
-			{ "comparative",  StelSkyCulture::COMPARATIVE},
-			{ "personal",     StelSkyCulture::PERSONAL},			
-			{ "incomplete",   StelSkyCulture::INCOMPLETE},
-		};
-		StelSkyCulture::CLASSIFICATION classification=classificationMap.value(classificationStr.toLower(), StelSkyCulture::INCOMPLETE);
-		if (classificationMap.constFind(classificationStr.toLower()) == classificationMap.constEnd()) // not included
-		{
-			qDebug() << "Skyculture " << dir << "has UNKNOWN classification: " << classificationStr;
-			qDebug() << "Please edit info.ini and change to a supported value. For now, this equals 'incomplete'";
-		}
-		dirToNameEnglish[dir].classification = classification;
-	}	
+	makeCulturesList();
 }
 
 StelSkyCultureMgr::~StelSkyCultureMgr()
 {
+}
+
+void StelSkyCultureMgr::makeCulturesList()
+{
+	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
+	for (const auto& dir : std::as_const(cultureDirNames))
+	{
+		constexpr char indexFileName[] = "/index.json";
+		const QString filePath = StelFileMgr::findFile("skycultures/" + dir + indexFileName);
+		if (filePath.isEmpty())
+		{
+			qCritical() << "Failed to find" << indexFileName << "file in sky culture directory" << QDir::toNativeSeparators(dir);
+			continue;
+		}
+		QFile file(filePath);
+		if (!file.open(QFile::ReadOnly))
+		{
+			qCritical() << "Failed to open" << indexFileName << "file in sky culture directory" << QDir::toNativeSeparators(dir);
+			continue;
+		}
+		const auto jsonText = file.readAll();
+		if (jsonText.isEmpty())
+		{
+			qCritical() << "Failed to read data from" << indexFileName << "file in sky culture directory"
+			           << QDir::toNativeSeparators(dir);
+			continue;
+		}
+		QJsonParseError error;
+		const auto jsonDoc = QJsonDocument::fromJson(jsonText, &error);
+		if (error.error != QJsonParseError::NoError)
+		{
+			qCritical().nospace() << "Failed to parse " << indexFileName << " from sky culture directory "
+			                     << QDir::toNativeSeparators(dir) << ": " << error.errorString();
+			continue;
+		}
+		if (!jsonDoc.isObject())
+		{
+			qCritical() << "Failed to find the expected JSON structure in" << indexFileName << " from sky culture directory"
+			           << QDir::toNativeSeparators(dir);
+			continue;
+		}
+		const auto data = jsonDoc.object();
+
+		auto& culture = dirToNameEnglish[dir];
+		culture.path = StelFileMgr::dirName(filePath);
+		const auto id = data["id"].toString();
+		if(id != dir)
+			qWarning() << "Sky culture id" << id << "doesn't match directory name" << dir;
+		culture.id = id;
+		culture.englishName = getSkyCultureEnglishName(dir);
+		culture.region = data["region"].toString();
+		if (culture.region.length()==0)
+		{
+			qWarning() << "No geographic region declared in skyculture" << id << ". setting \"World\"";
+			culture.region = "World";
+		}
+		if (data["constellations"].isArray())
+		{
+			culture.constellations = data["constellations"].toArray();
+		}
+		else
+		{
+			qWarning() << "No \"constellations\" array found in JSON data in sky culture directory"
+			           << QDir::toNativeSeparators(dir);
+		}
+
+		culture.asterisms = data["asterisms"].toArray();
+		culture.langsUseNativeNames = data["langs_use_native_names"].toArray();
+
+		culture.boundariesType = StelSkyCulture::BoundariesType::None; // default value if not specified in the JSON file
+		if (data.contains("edges") && data.contains("edges_type"))
+		{
+			const QString type = data["edges_type"].toString();
+			const QString typeSimp = type.simplified().toUpper();
+			static const QMap<QString, StelSkyCulture::BoundariesType> map={
+			        {"IAU", StelSkyCulture::BoundariesType::IAU},
+			        {"OWN", StelSkyCulture::BoundariesType::Own},
+			        {"NONE", StelSkyCulture::BoundariesType::None}
+			};
+			if (!map.contains(typeSimp))
+				qWarning().nospace() << "Unexpected edges_type value in sky culture " << dir
+				                     << ": " << type << ". Will resort to Own.";
+			culture.boundariesType = map.value(typeSimp, StelSkyCulture::BoundariesType::Own);
+		}
+		culture.boundaries = data["edges"].toArray();
+		culture.boundariesEpoch = data["edges_epoch"].toString("J2000");
+		culture.fallbackToInternationalNames = data["fallback_to_international_names"].toBool();
+		culture.names = data["common_names"].toObject();
+
+		const auto classifications = data["classification"].toArray();
+		if (classifications.isEmpty())
+		{
+			culture.classification = StelSkyCulture::INCOMPLETE;
+		}
+		else
+		{
+			static const QMap <QString, StelSkyCulture::CLASSIFICATION>classificationMap={
+				{ "traditional",  StelSkyCulture::TRADITIONAL},
+				{ "historical",   StelSkyCulture::HISTORICAL},
+				{ "ethnographic", StelSkyCulture::ETHNOGRAPHIC},
+				{ "single",       StelSkyCulture::SINGLE},
+				{ "comparative",  StelSkyCulture::COMPARATIVE},
+				{ "personal",     StelSkyCulture::PERSONAL},
+				{ "incomplete",   StelSkyCulture::INCOMPLETE},
+			};
+			const auto classificationStr = classifications[0].toString(); // We'll take only the first item for now.
+			const auto classification=classificationMap.value(classificationStr.toLower(), StelSkyCulture::INCOMPLETE);
+			if (!classificationMap.contains(classificationStr.toLower()))
+			{
+				qInfo() << "Skyculture " << dir << "has UNKNOWN classification: " << classificationStr;
+				qInfo() << "Please edit index.json and change to a supported value. For now, this equals 'incomplete'";
+			}
+			culture.classification = classification;
+		}
+	}
 }
 
 //! Init itself from a config file.
@@ -108,16 +286,14 @@ void StelSkyCultureMgr::init()
 
 void StelSkyCultureMgr::reloadSkyCulture()
 {
-	emit currentSkyCultureIDChanged(currentSkyCultureDir);
+	const QString currentID=currentSkyCulture.id;
+	makeCulturesList();
+	setCurrentSkyCultureID(currentID);
 }
 
 //! Set the current sky culture from the passed directory
 bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 {
-	//prevent unnecessary changes
-	if(cultureDir==currentSkyCultureDir)
-		return false;
-
 	QString scID = cultureDir;
 	bool result = true;
 	// make sure culture definition exists before attempting or will die
@@ -128,10 +304,10 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 		result = false;
 	}
 
-	currentSkyCultureDir = scID;
 	currentSkyCulture = dirToNameEnglish[scID];
 
-	emit currentSkyCultureIDChanged(currentSkyCultureDir);	
+	emit currentSkyCultureChanged(currentSkyCulture);
+	emit currentSkyCultureIDChanged(currentSkyCulture.id);
 	return result;
 }
 
@@ -155,7 +331,8 @@ bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
 	
 QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const
 {
-	return qc_(currentSkyCulture.englishName, "sky culture");
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
+	return trans.qtranslate(currentSkyCulture.englishName, "sky culture");
 }
 
 QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const
@@ -227,73 +404,139 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlClassification() const
 	return html;
 }
 
-QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
-{
-	QString description, color, license = currentSkyCulture.license.trimmed();
 
-	if (license.isEmpty()) // License is not defined
+std::pair<QString/*color*/,QString/*info*/> StelSkyCultureMgr::getLicenseDescription(const QString& license, const bool singleLicenseForAll) const
+{
+	QString color, description;
+
+	if (license.isEmpty())
 	{
 		color = "#2090ff"; // "blue" area
-		license = q_("unknown");
 		description = q_("This sky culture is provided under unknown license. Please ask authors for details about license for this sky culture.");
+	}
+	else if (license.contains("GPL", Qt::CaseSensitive))
+	{
+		color = "#33ff33"; // "green" area; free license
+		if (singleLicenseForAll)
+			description = q_("This sky culture is provided under GNU General Public License. You can use it for commercial "
+			                 "and non-commercial purposes, freely adapt it and share adapted work.");
+		else
+			description = q_("You can use it for commercial and non-commercial purposes, freely adapt it and share adapted work.");
+	}
+	else if (license.contains("MIT", Qt::CaseSensitive))
+	{
+		color = "#33ff33"; // "green" area; free license
+		if (singleLicenseForAll)
+			description = q_("This sky culture is provided under MIT License. You can use it for commercial and non-commercial "
+			                 "purposes, freely adapt it and share adapted work.");
+		else
+			description = q_("You can use it for commercial and non-commercial purposes, freely adapt it and share adapted work.");
+	}
+	else if (license.contains("Public Domain"))
+	{
+		color = "#33ff33"; // "green" area; free license
+		if (singleLicenseForAll)
+			description = q_("This sky culture is distributed as public domain.");
+		else
+			description = q_("This is distributed as public domain.");
+	}
+	else if (license.startsWith("CC", Qt::CaseSensitive) || license.contains("Creative Commons", Qt::CaseInsensitive))
+	{
+		if (singleLicenseForAll)
+			description = q_("This sky culture is provided under Creative Commons License.");
+
+		QStringList details = license.split(" ", SkipEmptyParts);
+
+		const QMap<QString, QString>options = {
+			{ "BY",       q_("You may distribute, remix, adapt, and build upon this sky culture, even commercially, as long "
+			                 "as you credit authors for the original creation.") },
+			{ "BY-SA",    q_("You may remix, adapt, and build upon this sky culture even for commercial purposes, as long as "
+			                 "you credit authors and license the new creations under the identical terms. This license is often "
+			                 "compared to “copyleft” free and open source software licenses.") },
+			{ "BY-ND",    q_("You may reuse this sky culture for any purpose, including commercially; however, adapted work "
+			                 "cannot be shared with others, and credit must be provided by you.") },
+			{ "BY-NC",    q_("You may remix, adapt, and build upon this sky culture non-commercially, and although your new works "
+			                 "must also acknowledge authors and be non-commercial, you don’t have to license your derivative works "
+			                 "on the same terms.") },
+			{ "BY-NC-SA", q_("You may remix, adapt, and build upon this sky culture non-commercially, as long as you credit "
+			                 "authors and license your new creations under the identical terms.") },
+			{ "BY-NC-ND", q_("You may use this sky culture and share them with others as long as you credit authors, but you can’t "
+			                 "change it in any way or use it commercially.") },
+		};
+
+		color = "#33ff33"; // "green" area; free license
+		if (license.contains("ND", Qt::CaseSensitive))
+			color = "#ffff00"; // "yellow" area; nonfree license - weak restrictions
+		if (license.contains("NC", Qt::CaseSensitive))
+			color = "#ff6633"; // "red" area; nonfree license - strong restrictions
+
+		if (!details.at(0).startsWith("CC0", Qt::CaseInsensitive)) // Not public domain!
+			description.append(QString(" %1").arg(options.value(details.at(1), "")));
+		else
+			description = q_("This sky culture is distributed as public domain.");
+	}
+	else if (license.contains("FAL", Qt::CaseSensitive) || license.contains("Free Art License", Qt::CaseSensitive))
+	{
+		color = "#33ff33"; // "green" area; free license
+		description.append(QString(" %1").arg(q_("Free Art License grants the right to freely copy, distribute, and transform.")));
+	}
+
+	return std::make_pair(color, description);
+}
+
+QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
+{
+	static const QRegularExpression licRe("\\s*\n+\\s*");
+	const auto lines = currentSkyCulture.license.split(licRe, SkipEmptyParts);
+	if (lines.isEmpty()) return "";
+
+	if (lines.size() == 1)
+	{
+		const auto parts = lines[0].split(":", SkipEmptyParts);
+		const auto licenseName = convertReferenceLinks(parts.size() == 1 ? parts[0] : parts[1]);
+		const auto [color, description] = getLicenseDescription(licenseName, true);
+		if (!description.isEmpty())
+		{
+			return QString("<dl><dt><span style='color:%4;'>%5</span> <strong>%1: %2</strong></dt><dd><em>%3</em></dd></dl>")
+				.arg(q_("License"),
+				     currentSkyCulture.license.isEmpty() ? q_("unknown") : licenseName,
+				     description, color, QChar(0x25CF));
+		}
+		else
+		{
+			return QString("<dl><dt><span style='color:%3;'>%4</span> <strong>%1: %2</strong></dt></dl>")
+				.arg(q_("License"),
+				     currentSkyCulture.license.isEmpty() ? q_("unknown") : licenseName, color, QChar(0x25CF));
+		}
+		return QString{};
 	}
 	else
 	{
-		if (license.contains("GPL", Qt::CaseSensitive))
+		QString html = "<h1>" + q_("License") + "</h1>\n";
+		QString addendum;
+		for (const auto& line : lines)
 		{
-			color = "#33ff33"; // "green" area; free license
-			description = q_("This sky culture is provided under GNU General Public License. You can use it for commercial and non-commercial purposes, freely adapt it and share adapted work.");
-		}
-		else if (license.contains("MIT", Qt::CaseSensitive))
-		{
-			color = "#33ff33"; // "green" area; free license
-			description = q_("This sky culture is provided under MIT License. You can use it for commercial and non-commercial purposes, freely adapt it and share adapted work.");
-		}
-		else if (license.startsWith("CC", Qt::CaseSensitive) || license.contains("Creative Commons", Qt::CaseInsensitive))
-		{
-			description = q_("This sky culture is provided under Creative Commons License.");
-			#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-			QStringList details = license.split(" ", Qt::SkipEmptyParts);
-			#else
-			QStringList details = license.split(" ", QString::SkipEmptyParts);
-			#endif
-
-			const QMap<QString, QString>options = {
-				{ "BY",       q_("You may distribute, remix, adapt, and build upon this sky culture, even commercially, as long as you credit authors for the original creation.") },
-				{ "BY-SA",    q_("You may remix, adapt, and build upon this sky culture even for commercial purposes, as long as you credit authors and license the new creations under the identical terms. This license is often compared to “copyleft” free and open source software licenses.") },
-				{ "BY-ND",    q_("You may reuse this sky culture for any purpose, including commercially; however, adapted work cannot be shared with others, and credit must be provided by you.") },
-				{ "BY-NC",    q_("You may remix, adapt, and build upon this sky culture non-commercially, and although your new works must also acknowledge authors and be non-commercial, you don’t have to license your derivative works on the same terms.") },
-				{ "BY-NC-SA", q_("You may remix, adapt, and build upon this sky culture non-commercially, as long as you credit authors and license your new creations under the identical terms.") },
-				{ "BY-NC-ND", q_("You may use this sky culture and share them with others as long as you credit authors, but you can’t change it in any way or use it commercially.") },
-			};
-
-			color = "#33ff33"; // "green" area; free license
-			if (license.contains("ND", Qt::CaseSensitive))
-				color = "#ffff00"; // "yellow" area; nonfree license - weak restrictions
-			if (license.contains("NC", Qt::CaseSensitive))
-				color = "#ff6633"; // "red" area; nonfree license - strong restrictions
-
-			if (!details.at(0).startsWith("CC0", Qt::CaseInsensitive)) // Not public domain!
-				description.append(QString(" %1").arg(options.value(details.at(1), "")));
+			static const QRegularExpression re("\\s*:\\s*");
+			const auto parts = line.split(re, SkipEmptyParts);
+			if (parts.size() == 1)
+			{
+				addendum += line + "<br>\n";
+				continue;
+			}
+			const auto [color, description] = getLicenseDescription(parts[1], false);
+			if (description.isEmpty())
+			{
+				html += QString("<dl><dt><span style='color:%2;'>%3</span> <strong>%1</strong></dt></dl>")
+				               .arg(convertReferenceLinks(line), color, QChar(0x25CF));
+			}
 			else
-				description = q_("This sky culture is distributed as public domain.");
+			{
+				html += QString("<dl><dt><span style='color:%3;'>%4</span> <strong>%1</strong></dt><dd><em>%2</em></dd></dl>")
+				               .arg(convertReferenceLinks(line), description, color, QChar(0x25CF));
+			}
 		}
-
-		if (!currentSkyCulture.credit.isEmpty())
-		{
-			// TRANSLATORS: A phrase like "Please credit: XY Museum". The creditee is in a skyculture's info.ini.
-			description.append(QString(" %1 %2.").arg(q_("Please credit:"), currentSkyCulture.credit));
-		}
-
-		if (license.contains("FAL", Qt::CaseSensitive) || license.contains("Free Art License", Qt::CaseSensitive))
-			description.append(QString(" %1").arg(q_("Illustrations are provided under Free Art License that grants the right to freely copy, distribute, and transform.")));
+		return html + addendum;
 	}
-
-	QString html = QString();
-	if (!description.isEmpty()) // additional info for sky culture (metainfo): let's use italic
-		html = QString("<dl><dt><span style='color:%4;'>%5</span> <strong>%1: %2</strong></dt><dd><em>%3</em></dd></dl>").arg(q_("License"), license, description, color, QChar(0x25CF));
-
-	return html;
 }
 
 QString StelSkyCultureMgr::getCurrentSkyCultureHtmlRegion() const
@@ -336,15 +579,17 @@ QString StelSkyCultureMgr::getSkyCultureListEnglish(void) const
 //! returns newline delimited list of human readable culture names translated to current locale
 QStringList StelSkyCultureMgr::getSkyCultureListI18(void) const
 {
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
 	QStringList cultures;
 	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
 	while (i.hasNext())
 	{
 		i.next();
-		cultures += qc_(i.value().englishName, "sky culture");
+		cultures += trans.qtranslate(i.value().englishName, "sky culture");
 	}
-	// Sort for GUI use. Note that e.g. German Umlauts are sorted after Z. TODO: Fix this!
-	cultures.sort(Qt::CaseInsensitive);
+	// Sort for GUI use.
+	std::sort(cultures.begin(), cultures.end(), [](const QString& a, const QString& b)
+	          { return a.localeAwareCompare(b) < 0; });
 	return cultures;
 }
 
@@ -353,24 +598,110 @@ QStringList StelSkyCultureMgr::getSkyCultureListIDs(void) const
 	return dirToNameEnglish.keys();
 }
 
-QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription() const
+QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown, const QString& sectionName,
+                                                        const qsizetype bodyStartPos, const qsizetype bodyEndPos,
+                                                        const StelTranslator& trans)
 {
-	QString skyCultureId = getCurrentSkyCultureID();
+	auto text = markdown.mid(bodyStartPos, bodyEndPos - bodyStartPos);
+	static const QRegularExpression re("^\n*|\n*$");
+	text.replace(re, "");
+	text = trans.qtranslate(text);
+
+	if (sectionName.trimmed() == "References")
+	{
+		static const QRegularExpression refRe("^ *- \\[#([0-9]+)\\]: (.*)$", QRegularExpression::MultilineOption);
+		text.replace(refRe, "\\1. <span id=\"cite_\\1\">\\2</span>");
+	}
+	else
+	{
+		text = convertReferenceLinks(text);
+	}
+
+	if (sectionName.trimmed() == "License")
+	{
+		currentSkyCulture.license = text;
+		return "";
+	}
+
+	return markdownToHTML(text);
+}
+
+QString StelSkyCultureMgr::descriptionMarkdownToHTML(const QString& markdownInput, const QString& descrPath)
+{
+	// Section names should be available for translation
+	(void)NC_("Extras"      , "Name of a section in sky culture description");
+	(void)NC_("References"  , "Name of a section in sky culture description");
+	(void)NC_("Authors"     , "Name of a section in sky culture description");
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
+
+	// Strip comments before translating
+	static const QRegularExpression commentPat("<!--.*?-->");
+	const auto markdown = QString(markdownInput).replace(commentPat, "");
+
+	static const QRegularExpression headerPat("^# +(.+)$", QRegularExpression::MultilineOption);
+	const auto match = headerPat.match(markdown);
+	QString name;
+	if (match.isValid())
+	{
+		name = match.captured(1);
+	}
+	else
+	{
+		qCritical().nospace() << "Failed to get sky culture name in file " << descrPath
+		                      << ": got " << match.lastCapturedIndex() << " matches instead of 1";
+		name = "Unknown";
+	}
+
+	QString text = "<h1>" + trans.qtranslate(name, "sky culture") + "</h1>";
+	static const QRegularExpression sectionNamePat("^## +(.+)$", QRegularExpression::MultilineOption);
+	QString prevSectionName;
+	qsizetype prevBodyStartPos = -1;
+	for (auto it = sectionNamePat.globalMatch(markdown); it.hasNext(); )
+	{
+		const auto match = it.next();
+		const auto sectionName = match.captured(1);
+		const auto nameStartPos = match.capturedStart(0);
+		const auto bodyStartPos = match.capturedEnd(0);
+		if (!prevSectionName.isEmpty())
+		{
+			const auto sectionText = convertMarkdownLevel2Section(markdown, prevSectionName, prevBodyStartPos, nameStartPos, trans);
+			if(prevSectionName != "Introduction" && prevSectionName != "Description")
+				text += "<h2>" + qc_(prevSectionName, "Name of a section in sky culture description") + "</h2>\n";
+			if (!sectionText.isEmpty())
+			{
+				text += sectionText + "\n";
+			}
+		}
+		prevBodyStartPos = bodyStartPos;
+		prevSectionName = sectionName;
+	}
+	if (prevBodyStartPos >= 0)
+	{
+		const auto sectionText = convertMarkdownLevel2Section(markdown, prevSectionName, prevBodyStartPos, markdown.size(), trans);
+		if (!sectionText.isEmpty())
+		{
+			text += "<h2>" + qc_(prevSectionName, "Name of a section in sky culture description") + "</h2>\n";
+			text += sectionText;
+		}
+	}
+
+	return text;
+}
+
+QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription()
+{
 	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
 	if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
 	{
 		lang = lang.split("_").at(0);
 	}
-	QString descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description."+lang+".utf8");
-	if (descPath.isEmpty())
-	{
-		descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description.en.utf8");
-		if (descPath.isEmpty())
-			qWarning() << "WARNING: can't find description for skyculture" << skyCultureId;
-	}
+	const QString descPath = currentSkyCulture.path + "/description.md";
+	const bool pathExists = QFileInfo::exists(descPath);
+	if (!pathExists)
+		qWarning() << "Can't find description for skyculture" << currentSkyCulture.id;
 
 	QString description;
-	if (descPath.isEmpty())
+	if (!pathExists)
 	{
 		description = QString("<h2>%1</2><p>%2</p>").arg(getCurrentSkyCultureNameI18(), q_("No description"));
 	}
@@ -379,75 +710,21 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription() const
 		QFile f(descPath);
 		if(f.open(QIODevice::ReadOnly))
 		{
-			description = QString::fromUtf8(f.readAll());
-			f.close();
+			const auto markdown = QString::fromUtf8(f.readAll());
+			description = descriptionMarkdownToHTML(markdown, descPath);
+		}
+		else
+		{
+			qWarning().nospace() << "Failed to open sky culture description file " << descPath << ": " << f.errorString();
 		}
 	}
 
-	description.append(getCurrentSkyCultureHtmlReferences());
 	description.append(getCurrentSkyCultureHtmlLicense());
 	description.append(getCurrentSkyCultureHtmlClassification());
 	description.append(getCurrentSkyCultureHtmlRegion());
 
+
 	return description;
-}
-
-QString StelSkyCultureMgr::getCurrentSkyCultureHtmlReferences() const
-{
-	QString reference = "";
-	QString referencePath = StelFileMgr::findFile("skycultures/" + getCurrentSkyCultureID() + "/reference.fab");
-	if (!referencePath.isEmpty())
-	{
-		QFile refFile(referencePath);
-		if (!refFile.open(QIODevice::ReadOnly | QIODevice::Text))
-		{
-			qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(referencePath);
-			return reference;
-		}
-		QString record;
-		// Allow empty and comment lines where first char (after optional blanks) is #
-		static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
-		reference = QString("<h2>%1</h2><ol>").arg(q_("References / Further Reading"));
-		int totalRecords=0;
-		int readOk=0;
-		int lineNumber=0;
-		while(!refFile.atEnd())
-		{
-			record = QString::fromUtf8(refFile.readLine()).trimmed();
-			lineNumber++;
-			if (commentRx.match(record).hasMatch())
-				continue;
-
-			totalRecords++;
-			static const QRegularExpression refRx("\\|");
-			#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-			QStringList ref = record.split(refRx, Qt::KeepEmptyParts);
-			#else
-			QStringList ref = record.split(refRx, QString::KeepEmptyParts);
-			#endif
-			// 1 - URID; 2 - Reference; 3 - URL (optional)
-			if (ref.count()<2)
-				qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in references file" << QDir::toNativeSeparators(referencePath);
-			else if (ref.count()<3)
-			{
-				qWarning() << "WARNING - record at line" << lineNumber << "in references file" << QDir::toNativeSeparators(referencePath) << " has wrong format (RefID: " << ref.at(0) << ")! Let's use fallback mode...";
-				reference.append(QString("<li>%1</li>").arg(ref.at(1)));
-				readOk++;
-			}
-			else
-			{
-				if (ref.at(2).isEmpty())
-					reference.append(QString("<li>%1</li>").arg(ref.at(1)));
-				else
-					reference.append(QString("<li><a href='%2' class='external text' rel='nofollow'>%1</a></li>").arg(ref.at(1), ref.at(2)));
-				readOk++;
-			}
-		}
-		refFile.close();
-		reference.append("</ol>");
-		qDebug() << "Loaded" << readOk << "/" << totalRecords << "references";
-	}
-	return reference;
 }
 
 QString StelSkyCultureMgr::directoryToSkyCultureEnglish(const QString& directory) const
@@ -460,8 +737,8 @@ QString StelSkyCultureMgr::directoryToSkyCultureI18(const QString& directory) co
 	QString culture = dirToNameEnglish[directory].englishName;
 	if (culture=="")
 	{
-		qWarning() << "WARNING: StelSkyCultureMgr::directoryToSkyCultureI18(\""
-			   << QDir::toNativeSeparators(directory) << "\"): could not find directory";
+		qWarning().nospace() << "StelSkyCultureMgr::directoryToSkyCultureI18("
+			<< QDir::toNativeSeparators(directory) << "): could not find directory";
 		return "";
 	}
 	return q_(culture);
@@ -469,11 +746,12 @@ QString StelSkyCultureMgr::directoryToSkyCultureI18(const QString& directory) co
 
 QString StelSkyCultureMgr::skyCultureI18ToDirectory(const QString& cultureName) const
 {
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
 	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
 	while (i.hasNext())
 	{
 		i.next();
-		if (qc_(i.value().englishName, "sky culture") == cultureName)
+		if (trans.qtranslate(i.value().englishName, "sky culture") == cultureName)
 			return i.key();
 	}
 	return "";

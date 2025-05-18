@@ -44,7 +44,7 @@ $prefix = "        ";
 		 'arya-s'=>'Andrei Borza', 'alex'=>'Alexander Duytschaever','GunChleoc'=>'Fòram na Gàidhlig',
 		 'miroslavbroz'=>'Miroslav Broz', 'espie'=>'Marc Espie', 'rich'=>'Pavel Klimenko',
 		 'Snow Sailor'=>'Nick Kanel', 'JAY-Githb'=>'Jay Respler', 'Jonas-Persson-NTNU'=>'Jonas Persson',
-		 'sunshuwei'=>'Sun Shuwei');
+		 'sunshuwei'=>'Sun Shuwei', 'ultrapre'=>'Wang Siliang');
 
 open(GITSL, "git shortlog -sn |") or die "Can't execute git shortlog: $!";
 while (<GITSL>) {

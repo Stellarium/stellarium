@@ -43,6 +43,7 @@
 #include "StelStyle.hpp"
 #include "StelGuiBase.hpp"
 #include "StelGui.hpp"
+#include "HipsMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelHips.hpp"
@@ -58,6 +59,22 @@
 #include <QStringList>
 #include <QJsonArray>
 
+struct Page
+{
+	enum
+	{
+		Sky,
+		SSO,
+		DSO,
+		Markings,
+		Landscape,
+		SkyCulture,
+		Surveys,
+
+		COUNT
+	};
+};
+
 ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
 	, addRemoveLandscapesDialog(nullptr)
 	, atmosphereDialog(nullptr)
@@ -68,6 +85,10 @@ ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
 	, configureOrbitColorsDialog(nullptr)
 {
 	ui = new Ui_viewDialogForm;	
+	// This connection should be made here, rather than in createDialogContent, because otherwise it
+	// won't be possible to open the dialog for the first time by right-clicking the HiPS button.
+	const auto hipsmgr = qobject_cast<HipsMgr*>(StelApp::getInstance().getModule("HipsMgr"));
+	connect(qobject_cast<HipsMgr*>(hipsmgr), &HipsMgr::toggleDialog, this, &ViewDialog::toggleHipsDialog);
 }
 
 ViewDialog::~ViewDialog()
@@ -134,13 +155,14 @@ void ViewDialog::connectGroupBox(QGroupBox* groupBox, const QString& actionId)
 void ViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+	Q_ASSERT(ui->stackedWidget->count() == Page::COUNT);
 	dialog->installEventFilter(this);
 
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	// Set the Sky tab activated by default
-	ui->stackedWidget->setCurrentIndex(0);
-	ui->stackListWidget->setCurrentRow(0);
+	ui->stackedWidget->setCurrentIndex(Page::Sky);
+	ui->stackListWidget->setCurrentRow(Page::Sky);
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 	// Kinetic scrolling
 	kineticScrollingList << ui->projectionListWidget << ui->culturesListWidget << ui->skyCultureTextBrowser << ui->landscapesListWidget
@@ -326,6 +348,7 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxSurfaceBrightnessUsage, "NebulaMgr.flagSurfaceBrightnessUsage");
 	connectBoolProperty(ui->nebulaLimitMagnitudeCheckBox,"StelSkyDrawer.flagNebulaMagnitudeLimit");
 	connectBoolProperty(ui->checkBoxAdditionalNamesDSO, "NebulaMgr.flagAdditionalNamesDisplayed");
+	connectBoolProperty(ui->checkBoxShowOnlyNamedDSO, "NebulaMgr.flagShowOnlyNamedDSO");
 	connectDoubleProperty(ui->nebulaLimitMagnitudeDoubleSpinBox,"StelSkyDrawer.customNebulaMagLimit");
 	connectBoolProperty(ui->nebulaLimitSizeCheckBox, "NebulaMgr.flagUseSizeLimits");
 	connectDoubleProperty(ui->nebulaLimitSizeMinDoubleSpinBox, "NebulaMgr.minSizeLimit");
@@ -527,25 +550,34 @@ void ViewDialog::createDialogContent()
 	updateDefaultSkyCulture();
 
 	// allow to display short names and inhibit translation.
-	connectIntProperty(ui->skyCultureNamesStyleComboBox,            "ConstellationMgr.constellationDisplayStyle");
-	connectCheckBox(ui->nativePlanetNamesCheckBox,                  "actionShow_Skyculture_NativePlanetNames");
-	connectCheckBox(ui->showConstellationLinesCheckBox,             "actionShow_Constellation_Lines");
-	connectIntProperty(ui->constellationLineThicknessSpinBox,       "ConstellationMgr.constellationLineThickness");
+	connectIntProperty(ui->skyCultureNamesStyleComboBox,		"ConstellationMgr.constellationDisplayStyle");
+	connectCheckBox(ui->nativePlanetNamesCheckBox,			"actionShow_Skyculture_NativePlanetNames");
+	connectCheckBox(ui->showConstellationLinesCheckBox,			"actionShow_Constellation_Lines");
+	connectIntProperty(ui->constellationLineThicknessSpinBox,		"ConstellationMgr.constellationLineThickness");
 	connectCheckBox(ui->showConstellationLabelsCheckBox,		"actionShow_Constellation_Labels");
-	connectCheckBox(ui->showConstellationBoundariesCheckBox,        "actionShow_Constellation_Boundaries");
-	connectIntProperty(ui->constellationBoundariesThicknessSpinBox, "ConstellationMgr.constellationBoundariesThickness");
-	connectCheckBox(ui->showConstellationArtCheckBox,               "actionShow_Constellation_Art");
-	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,    "ConstellationMgr.artIntensity");
+	connectCheckBox(ui->showConstellationBoundariesCheckBox,		"actionShow_Constellation_Boundaries");
+	connectIntProperty(ui->constellationBoundariesThicknessSpinBox,	"ConstellationMgr.constellationBoundariesThickness");
+	connectCheckBox(ui->showConstellationArtCheckBox,			"actionShow_Constellation_Art");
+	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,		"ConstellationMgr.artIntensity");
+
+	// fade duration
+	connectDoubleProperty(ui->artFadeDurationDoubleSpinBox,		"ConstellationMgr.artFadeDuration");
+	connectDoubleProperty(ui->boundariesFadeDurationDoubleSpinBox,	"ConstellationMgr.boundariesFadeDuration");
+	connectDoubleProperty(ui->linesFadeDurationDoubleSpinBox,		"ConstellationMgr.linesFadeDuration");
+	connectDoubleProperty(ui->namesFadeDurationDoubleSpinBox,		"ConstellationMgr.namesFadeDuration");
+	connectDoubleProperty(ui->asterismNamesFadeDurationDoubleSpinBox,	"AsterismMgr.namesFadeDuration");
+	connectDoubleProperty(ui->asterismLinesFadeDurationDoubleSpinBox,	"AsterismMgr.linesFadeDuration");
+	connectDoubleProperty(ui->rayHelpersFadeDurationDoubleSpinBox,	"AsterismMgr.rayHelpersFadeDuration");
 
 	ui->colorConstellationBoundaries->setup("ConstellationMgr.boundariesColor", "color/const_boundary_color");
 	ui->colorConstellationLabels    ->setup("ConstellationMgr.namesColor",      "color/const_names_color");
 	ui->colorConstellationLines     ->setup("ConstellationMgr.linesColor",      "color/const_lines_color");
 
-	connectCheckBox(ui->showAsterismLinesCheckBox,       "actionShow_Asterism_Lines");
-	connectIntProperty(ui->asterismLineThicknessSpinBox, "AsterismMgr.asterismLineThickness");
-	connectCheckBox(ui->showAsterismLabelsCheckBox,      "actionShow_Asterism_Labels");
-	connectCheckBox(ui->showRayHelpersCheckBox,          "actionShow_Ray_Helpers");
-	connectIntProperty(ui->rayHelperThicknessSpinBox,    "AsterismMgr.rayHelperThickness");
+	connectCheckBox(ui->showAsterismLinesCheckBox,		"actionShow_Asterism_Lines");
+	connectIntProperty(ui->asterismLineThicknessSpinBox,		"AsterismMgr.asterismLineThickness");
+	connectCheckBox(ui->showAsterismLabelsCheckBox,		"actionShow_Asterism_Labels");
+	connectCheckBox(ui->showRayHelpersCheckBox,		"actionShow_Ray_Helpers");
+	connectIntProperty(ui->rayHelperThicknessSpinBox,		"AsterismMgr.rayHelperThickness");
 
 	connectBoolProperty(ui->selectSingleConstellationCheckBox, "ConstellationMgr.isolateSelected");
 	connectBoolProperty(ui->constellationPickCheckBox, "ConstellationMgr.flagConstellationPick");
@@ -561,11 +593,20 @@ void ViewDialog::createDialogContent()
 	// Hips mgr.
 	populateHipsGroups();
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");	
-	connect(hipsmgr, SIGNAL(surveysChanged()), this, SLOT(updateHips()));
+	// HiPS updates may be very frequent when we are getting a list of
+	// surveys, we don't want to update the widget on each of them, so the
+	// timer is used to delay the update a bit.
+	hipsUpdateTimer.setInterval(50);
+	hipsUpdateTimer.setSingleShot(true);
+	connect(&hipsUpdateTimer, &QTimer::timeout, this, &ViewDialog::updateHips);
+	connect(qobject_cast<HipsMgr*>(hipsmgr), &HipsMgr::surveysChanged, this,
+	        [this]{ if(!hipsUpdateTimer.isActive()) hipsUpdateTimer.start(); });
+
 	connect(ui->surveyTypeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateHips()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(updateHips()));
 	connect(ui->surveysListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(updateHips()), Qt::QueuedConnection);
 	connect(ui->surveysListWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(hipsListItemChanged(QListWidgetItem*)));
+	connect(ui->surveysFilter, &QLineEdit::textChanged, this, &ViewDialog::filterSurveys);
 	updateHips();
 
 	updateTabBarListWidgetWidth();
@@ -722,6 +763,7 @@ void ViewDialog::updateHips()
 			ui->surveysTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 		ui->surveysTextBrowser->setHtml(html);
 	}
+	filterSurveys();
 }
 
 void ViewDialog::populateHipsGroups()
@@ -737,6 +779,42 @@ void ViewDialog::populateHipsGroups()
 	typeComboBox->addItem(q_("Solar System"), "sol");
 	index = typeComboBox->findData(selectedType, Qt::UserRole, Qt::MatchCaseSensitive);
 	typeComboBox->setCurrentIndex(index);
+}
+
+void ViewDialog::toggleHipsDialog()
+{
+	if (visible())
+	{
+		if (ui->stackListWidget->currentRow() == Page::Surveys)
+		{
+			setVisible(false);
+		}
+		else
+		{
+			ui->stackListWidget->setCurrentRow(Page::Surveys);
+			// Force it to become active and bring it to the top
+			setVisible(false);
+			setVisible(true);
+		}
+	}
+	else
+	{
+		setVisible(true);
+		ui->stackListWidget->setCurrentRow(Page::Surveys);
+	}
+}
+
+void ViewDialog::filterSurveys()
+{
+	const QString pattern = ui->surveysFilter->text().simplified();
+	const auto& list = *ui->surveysListWidget;
+	for (int row = 0; row < list.count(); ++row)
+	{
+		auto& item = *list.item(row);
+		const QString text = item.text().simplified();
+		const bool show = pattern.isEmpty() || text.contains(pattern, Qt::CaseInsensitive);
+		item.setHidden(!show);
+	}
 }
 
 void ViewDialog::hipsListItemChanged(QListWidgetItem* item)
@@ -973,6 +1051,16 @@ void ViewDialog::populateToolTips()
 	ui->fovRectangularMarkerHeightDoubleSpinBox->setSuffix(degree);
 	ui->fovRectangularMarkerWidthDoubleSpinBox->setSuffix(degree);
 	ui->fovRectangularMarkerRotationAngleDoubleSpinBox->setSuffix(degree);
+
+	// TRANSLATORS: duration in seconds
+	QString seconds = qc_("s", "duration, suffix");
+	ui->artFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->linesFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->namesFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->boundariesFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->asterismLinesFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->asterismNamesFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->rayHelpersFadeDurationDoubleSpinBox->setSuffix(seconds);
 }
 
 void ViewDialog::populateLists()
@@ -982,8 +1070,8 @@ void ViewDialog::populateLists()
 	QListWidget* l = ui->culturesListWidget;
 	l->blockSignals(true);
 	l->clear();
-	QStringList starlore = app.getSkyCultureMgr().getSkyCultureListI18();
-	for ( const auto& s : starlore  )
+	QStringList skyculture = app.getSkyCultureMgr().getSkyCultureListI18();
+	for ( const auto& s : skyculture  )
 	{
 		l->addItem(s);
 		l->findItems(s, Qt::MatchExactly).at(0)->setToolTip(s);

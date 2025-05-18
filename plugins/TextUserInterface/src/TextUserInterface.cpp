@@ -269,7 +269,7 @@ void TextUserInterface::init()
 	                                  skyDrawer,
 	                                  SLOT(setAbsoluteStarScale(double)),
 	                                  skyDrawer->getAbsoluteStarScale(),
-	                                  0.0, 9., 0.15,
+	                                  0.0, 10., 0.15,
 	                                  m4, m4_2);
 	TuiNode* m4_4 = new TuiNodeDouble(N_("Twinkle:"),
 	                                  skyDrawer, SLOT(setTwinkleAmount(double)),
@@ -710,7 +710,7 @@ void TextUserInterface::handleKeys(QKeyEvent* event)
 {
 	if (currentNode == Q_NULLPTR)
 	{
-		qWarning() << "WARNING: no current node in TextUserInterface plugin";
+		qWarning() << "No current node in TextUserInterface plugin";
 		event->setAccepted(false);
 		return;
 	}

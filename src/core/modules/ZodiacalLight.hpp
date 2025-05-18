@@ -104,8 +104,9 @@ public slots:
 	//! Sets the color to use for rendering the Zodiacal Light
 	//! @param c The color to use for rendering the Zodiacal Light. Default (1.0, 1.0, 1.0).
 	//! @code
-	//! // example of usage in scripts
-	//! ZodiacalLight.setColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! ZodiacalLight.setColor(c.toVec3f());
 	//! @endcode
 	void setColor(const Vec3f& c) {if (c!=color) { color=c; emit colorChanged(c);}}
 	

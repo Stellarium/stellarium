@@ -196,11 +196,11 @@ void Pulsars::init()
 	}
 	else
 	{
-		qDebug().noquote() << "[Pulsars] pulsars.json does not exist - copying default file to" << QDir::toNativeSeparators(jsonCatalogPath);
+		qInfo().noquote() << "[Pulsars] pulsars.json does not exist - copying default file to" << QDir::toNativeSeparators(jsonCatalogPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug().noquote() << "[Pulsars] Loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
+	qInfo().noquote() << "[Pulsars] Loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
 
 	readJsonFile();
 
@@ -436,14 +436,14 @@ bool Pulsars::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "[Pulsars] WARNING - could not remove old pulsars.json file";
+				qWarning() << "[Pulsars] Could not remove old pulsars.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "[Pulsars] WARNING - failed to copy pulsars.json to pulsars.json.old";
+		qWarning() << "[Pulsars] Failed to copy pulsars.json to pulsars.json.old";
 		return false;
 	}
 
@@ -529,7 +529,7 @@ int Pulsars::getJsonFileFormatVersion(void)
 	{
 		jsonVersion = map.value("version").toInt();
 	}
-	qDebug() << "[Pulsars] Version of the format of the catalog:" << jsonVersion;
+	qInfo().noquote() << "[Pulsars] Version of the format of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
 

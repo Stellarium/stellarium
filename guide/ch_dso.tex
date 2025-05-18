@@ -231,12 +231,28 @@ The record structure is as follows:
 \midrule
 0  &  5 & \%5s & Designator for catalog (prefix)\\
 5  & 15 & \%d  & Identificator for object in the catalog\\
-20 & 60 & \%s  & Proper name of the object (translatable)\\
+20 & end & \%s  & Proper name of the object (translatable) [\# references]\\
 \bottomrule
 \end{tabularx}
 
 \noindent If an object has more than one record in the file \file{names.dat},
 the last record in the file will be used for the nebula label.
+
+\subsubsection{Too many names?}
+Over the years,\newFeature{25.1} a large collection of names from many references has been added. 
+DSO names are not standardized and are generally not used by professional astronomers, but are often used for popularisation of objects. 
+Some of the collected names may be too fanciful for your taste. 
+If you can identify that those names that annoy you all come from a single or just a few entries of the reference list, 
+you can exclude those sources, and thus the names they bring. Note that if a fancy name comes from more than one book, 
+you would have to exclude all books to ban that name from your display.
+
+To exclude entries, add the following key to \file{config.ini}:
+\begin{configfile}
+[astro]
+nebula_exclude_references = default:ADI,DSC-HT
+\end{configfile}
+%
+Here, \texttt{default} names the nebula set, and the comma-separated entries are references you want excluded from \file{nebulae/default/names.dat}.
 
 \subsection{Modifying textures.json}%\label{modifying-textures.json}
 \label{sec:dso:modifyingTexturesJson}

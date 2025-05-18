@@ -1,0 +1,438 @@
+{
+  "id": "boorong",
+  "region": "Australasia",
+  "classification": ["ethnographic"],
+  "fallback_to_international_names": false,
+  "constellations": [
+    {
+      "id": "CON boorong Wjl",
+      "lines": [[37740, 38538], [37740, 36962], [38538, 37629], [36962, 37629, 36393, 35941]],
+      "image": {
+        "file": "illustrations/wanjel.png",
+        "size": [732, 511],
+        "anchors": [
+          {"pos": [563, 28], "hip": 37740},
+          {"pos": [377, 448], "hip": 37629},
+          {"pos": [22, 186], "hip": 35941}
+        ]
+      },
+      "common_name": {"english": "Long-necked tortoise", "native": "Wanjel"}
+    },
+    {
+      "id": "CON boorong Yur",
+      "lines": [[36366, 36850], [36896, 36850, 37204], [36850, 38319], [37204, 37265, 37580, 38016, 38319]],
+      "image": {
+        "file": "illustrations/yurree.png",
+        "size": [674, 674],
+        "anchors": [
+          {"pos": [120, 297], "hip": 38319},
+          {"pos": [419, 105], "hip": 37204},
+          {"pos": [634, 473], "hip": 36366}
+        ]
+      },
+      "common_name": {"english": "Fan-tailed cockatoo", "native": "Yurree"}
+    },
+    {
+      "id": "CON boorong Kul",
+      "lines": [[26594, 26795, 26870, 26885, 26762, 26727], [26762, 27253, 27588, 27750], [25930, 25737], [26727, 26549], [26213, 26210, 26188, 26149, 25976, 25930], [26149, 26762], [26213, 26174, 26106, 26063, 25980, 26020, 26117, 26319, 26439, 26508, 26727]],
+      "image": {
+        "file": "illustrations/kulkunbulla.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [650, 56], "hip": 25923},
+          {"pos": [262, 322], "hip": 25281},
+          {"pos": [510, 982], "hip": 27588}
+        ]
+      },
+      "common_name": {"english": "Two teenage boys", "native": "Kulkunbulla"}
+    },
+    {
+      "id": "CON boorong Lnk",
+      "lines": [[17664, 17579, 17531, 17489, 17499, 17608, 17702, 17851, 17847, 17900, 17776]],
+      "image": {
+        "file": "illustrations/larnankurrk.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [526, 174], "hip": 17776},
+          {"pos": [688, 842], "hip": 17664},
+          {"pos": [439, 589], "hip": 17608}
+        ]
+      },
+      "common_name": {"english": "Girls", "native": "Lamankurrk"}
+    },
+    {
+      "id": "CON boorong Pur",
+      "lines": [[18246, 18614, 19811, 21476], [23416, 21928, 19811], [21928, 24608], [24902, 24813], [23767, 24902, 24813, 25143], [24902, 25143], [23767, 23453, 21476, 19811], [23416, 25816], [25143, 25816]],
+      "image": {
+        "file": "illustrations/purra.png",
+        "size": [635, 635],
+        "anchors": [
+          {"pos": [626, 427], "hip": 25816},
+          {"pos": [3, 69], "hip": 18246},
+          {"pos": [531, 560], "hip": 24608}
+        ]
+      },
+      "common_name": {"english": "Red kangaroo", "native": "Purra"}
+    },
+    {
+      "id": "CON boorong Bun",
+      "lines": [[60851, 60718, 59747, 61084], [60969, 60870, 60308, 60379, 60781, 61136, 61966, 62434, 63007], [59397, 59747]],
+      "image": {
+        "file": "illustrations/bunya.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [242, 61], "hip": 60969},
+          {"pos": [117, 236], "hip": 62434},
+          {"pos": [260, 421], "hip": 60718}
+        ]
+      },
+      "common_name": {"english": "Ring-tail possum", "native": "Bunya"}
+    },
+    {
+      "id": "CON boorong Djt",
+      "lines": [[78820, 78401, 78265, 78104], [81266, 80763, 80112, 76742]],
+      "image": {
+        "file": "illustrations/djuit.png",
+        "size": [512, 518],
+        "anchors": [
+          {"pos": [342, 279], "hip": 81616},
+          {"pos": [302, 23], "hip": 78105},
+          {"pos": [66, 449], "hip": 81010}
+        ]
+      },
+      "common_name": {"english": "Red-rumped parrot", "native": "Djuit"}
+    },
+    {
+      "id": "CON boorong War",
+      "lines": [[32402, 31407, 30438, 29990, 30104]],
+      "image": {
+        "file": "illustrations/war.png",
+        "size": [636, 554],
+        "anchors": [
+          {"pos": [45, 87], "hip": 32402},
+          {"pos": [127, 481], "hip": 30438},
+          {"pos": [609, 434], "hip": 30104}
+        ]
+      },
+      "common_name": {"english": "Crow", "native": "War"}
+    },
+    {
+      "id": "CON boorong Cwr",
+      "lines": [[50785, 51232, 52102, 52405, 52558, 52922, 53253, 54463]],
+      "image": {
+        "file": "illustrations/cwar.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [88, 111], "hip": 51192},
+          {"pos": [243, 354], "hip": 53253},
+          {"pos": [349, 225], "hip": 52468}
+        ]
+      },
+      "common_name": {"english": "Female crow, wife of War", "native": "Collowgulloric War"}
+    },
+    {
+      "id": "CON boorong Ydk",
+      "lines": [[7506, 7387, 7588, 7699, 7751]],
+      "image": {
+        "file": "illustrations/yerredkr.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [104, 93], "hip": 7990},
+          {"pos": [110, 435], "hip": 6838},
+          {"pos": [451, 254], "hip": 7751}
+        ]
+      },
+      "common_name": {"english": "Owlet nightjar", "native": "Yerredetkurrk"}
+    },
+    {
+      "id": "CON boorong Tbg",
+      "lines": [[65245, 64394, 64022, 62763, 62576, 60746, 60351], [64394, 64417, 63950, 61418]],
+      "image": {
+        "file": "illustrations/tourtbg.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [53, 249], "hip": 60742},
+          {"pos": [298, 391], "hip": 64394},
+          {"pos": [455, 141], "hip": 64241}
+        ]
+      },
+      "common_name": {"english": "Needlewood hakea and willie wagtails", "native": "Tourtchinboiongerra"}
+    },
+    {
+      "id": "CON boorong Bbg",
+      "lines": [[73776, 72131, 71908], [72131, 73036], [72131, 70035], [72131, 71683]],
+      "image": {
+        "file": "illustrations/berm.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [24, 182], "hip": 73036},
+          {"pos": [209, 486], "hip": 73483},
+          {"pos": [414, 67], "hip": 69628}
+        ]
+      },
+      "common_name": {"english": "Red-kneed dotterel", "native": "Berm-Berm-Gle"}
+    },
+    {
+      "id": "CON boorong Krk",
+      "lines": [[85927, 86670], [85696, 86670, 87073], [86670, 85889, 84143], [86670, 89642]],
+      "image": {
+        "file": "illustrations/karik.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [201, 136], "hip": 85696},
+          {"pos": [72, 456], "hip": 89642},
+          {"pos": [454, 105], "hip": 84143}
+        ]
+      },
+      "common_name": {"english": "Australian kestrel", "native": "Karik Karik"}
+    },
+    {
+      "id": "CON boorong Nln",
+      "lines": [[91262, 91971], [91926, 91971], [91926, 92791, 92833, 93017, 93194, 93279, 92405, 92420, 91852, 91971]],
+      "image": {
+        "file": "illustrations/neilloan.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [358, 58], "hip": 93279},
+          {"pos": [123, 426], "hip": 91373},
+          {"pos": [477, 424], "hip": 94481}
+        ]
+      },
+      "common_name": {"english": "Mallee fowl", "native": "Neilloan"}
+    },
+    {
+      "id": "CON boorong Unu",
+      "lines": [[33152, 33478, 33575, 33804, 34041, 34318, 34579, 34798, 34981, 35037, 35044, 34924, 34814, 34624, 34331], [33804, 33817, 33611, 33532, 33492], [33532, 33040], [33492, 33856, 33760, 33492], [33856, 33817]],
+      "image": {
+        "file": "illustrations/unurgun.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [277, 161], "hip": 34331},
+          {"pos": [72, 151], "hip": 33760},
+          {"pos": [294, 421], "hip": 33478}
+        ]
+      },
+      "common_name": {"english": "Jacky lizard", "native": "Unurgunite"}
+    },
+    {
+      "id": "CON boorong Kts",
+      "lines": [[2021, 2021]],
+      "image": {
+        "file": "illustrations/kourtchins.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [70, 236], "hip": 5896},
+          {"pos": [225, 130], "hip": 2629},
+          {"pos": [470, 233], "hip": 2021}
+        ]
+      },
+      "common_name": {"english": ""}
+    },
+    {
+      "id": "CON boorong Ktc",
+      "lines": [[15371, 16245, 17440, 24372, 34481, 33682, 35228], [24372, 37331], [24372, 26069], [24372, 17678]],
+      "image": {
+        "file": "illustrations/kourtchinl.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [667, 134], "hip": 16245},
+          {"pos": [525, 954], "hip": 37504},
+          {"pos": [826, 491], "hip": 17678}
+        ]
+      },
+      "common_name": {"english": "Male and female brolga", "native": "Kourt-chin"}
+    },
+    {
+      "id": "CON boorong Otc",
+      "lines": [[101589, 102080, 102281, 102532, 102029, 101958], [102029, 101909], [102029, 101589], [102532, 102611]],
+      "image": {
+        "file": "illustrations/otchocut.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [899, 411], "hip": 102611},
+          {"pos": [530, 370], "hip": 102281},
+          {"pos": [120, 653], "hip": 101589}
+        ]
+      },
+      "common_name": {"english": "Great fish", "native": "Otchocut"}
+    },
+    {
+      "id": "CON boorong Wpl",
+      "lines": [[30324, 31592, 32349, 33347, 34045]],
+      "image": {
+        "file": "illustrations/warepil.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [35, 258], "hip": 30324},
+          {"pos": [384, 214], "hip": 31592},
+          {"pos": [929, 704], "hip": 34045}
+        ]
+      },
+      "common_name": {"english": "Wedge tailed eagle", "native": "Warepil"}
+    },
+    {
+      "id": "CON boorong Cwp",
+      "lines": [[22701, 23364, 23972, 24244, 24327, 24305], [23972, 24436]],
+      "image": {
+        "file": "illustrations/cwarepil.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [526, 471], "hip": 23972},
+          {"pos": [120, 73], "hip": 24305},
+          {"pos": [539, 866], "hip": 22701}
+        ]
+      },
+      "common_name": {"english": "Female eagle, wife of Warepil", "native": "Collowgulloric Warepil"}
+    },
+    {
+      "id": "CON boorong Tch",
+      "lines": [[74395, 74395]],
+      "image": {
+        "file": "illustrations/tchingal.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [945, 200], "hip": 62027},
+          {"pos": [203, 387], "hip": 76297},
+          {"pos": [76, 687], "hip": 82514}
+        ]
+      },
+      "common_name": {"english": "Emu", "native": "Tchingal"}
+    },
+    {
+      "id": "CON boorong Tot",
+      "lines": [[96229, 97229, 97938, 98526, 99158], [97278, 97649, 98036]],
+      "image": {
+        "file": "illustrations/totyarguil.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [795, 398], "hip": 98036},
+          {"pos": [148, 148], "hip": 96071},
+          {"pos": [941, 874], "hip": 99158}
+        ]
+      },
+      "common_name": {"english": "Purple crowned lorikeet", "native": "Totyarguil"}
+    },
+    {
+      "id": "CON boorong Mar",
+      "lines": [[67459, 67275, 67927, 69673, 71762, 71795], [69673, 72105], [69673, 71053], [72105, 74666], [71053, 73555, 74666]],
+      "image": {
+        "file": "illustrations/marpeank.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [343, 200], "hip": 69673},
+          {"pos": [363, 924], "hip": 71075},
+          {"pos": [943, 621], "hip": 76267}
+        ]
+      },
+      "common_name": {"english": "Meat ant", "native": "Marpeankurrk"}
+    },
+    {
+      "id": "CON boorong Wrn",
+      "lines": [[89931, 89931]],
+      "common_name": {"english": "Galaxy", "native": "Warring"}
+    },
+    {
+      "id": "CON boorong Wkr",
+      "lines": [[67480, 67480]],
+      "image": {
+        "file": "illustrations/weetkurrk.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [102, 337], "hip": 66763},
+          {"pos": [211, 134], "hip": 66727},
+          {"pos": [332, 340], "hip": 67480}
+        ]
+      },
+      "common_name": {"english": "Singing bushlark", "native": "Weetkurrk"}
+    },
+    {
+      "id": "CON boorong Gel",
+      "lines": [[21421, 21421]],
+      "image": {
+        "file": "illustrations/gellarlec.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [308, 958], "hip": 20171},
+          {"pos": [679, 409], "hip": 21421},
+          {"pos": [454, 55], "hip": 20901}
+        ]
+      },
+      "common_name": {"english": "Pink cockatoo", "native": "Gellarlec"}
+    },
+    {
+      "id": "CON boorong Col",
+      "lines": [[100064, 100064]],
+      "image": {
+        "file": "illustrations/collenbit.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [458, 22], "hip": 100623},
+          {"pos": [489, 481], "hip": 99918},
+          {"pos": [144, 807], "hip": 98953}
+        ]
+      },
+      "common_name": {"english": "Species of ant", "native": "Collenbitchick"}
+    },
+    {
+      "id": "CON boorong Won",
+      "lines": [[92953, 93542, 94005, 94160, 94114, 93825, 93174, 91875]],
+      "image": {
+        "file": "illustrations/won.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [61, 650], "hip": 92953},
+          {"pos": [563, 206], "hip": 94160},
+          {"pos": [784, 940], "hip": 91875}
+        ]
+      },
+      "common_name": {"english": "Boomerang", "native": "Won"}
+    },
+    {
+      "id": "CON boorong Min",
+      "lines": [[44816, 44816]],
+      "image": {
+        "file": "illustrations/mindi.png",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [895, 578], "hip": 35264},
+          {"pos": [564, 391], "hip": 44816},
+          {"pos": [41, 588], "hip": 57669}
+        ]
+      },
+      "common_name": {"english": "The maned snake", "native": "Mindi"}
+    }
+  ],
+  "common_names": {
+    "HIP 7588": [{"english": "Yerredetkurrk"}],
+    "HIP 17702": [{"english": "Lamankurrk"}],
+    "HIP 21421": [{"english": "Gellarlec"}],
+    "HIP 24372": [{"english": "Kourt-chin"}],
+    "HIP 24436": [{"english": "Colowgulloric Warepil"}],
+    "HIP 24608": [{"english": "Purra"}],
+    "HIP 26311": [{"english": "Kulkanbulla"}],
+    "HIP 30438": [{"english": "War"}],
+    "HIP 32349": [{"english": "Warepil"}],
+    "HIP 33856": [{"english": "Unurgunite"}],
+    "HIP 36850": [{"english": "Yurree"}],
+    "HIP 37826": [{"english": "Wanjel"}],
+    "HIP 52526": [{"english": "Collowgulloric War"}],
+    "HIP 61084": [{"english": "Bunya"}],
+    "HIP 64394": [{"english": "Tourchingboiongerra"}],
+    "HIP 67480": [{"english": "Weetkurrk"}],
+    "HIP 68702": [{"english": "Berm-berm-gle"}],
+    "HIP 69673": [{"english": "Marpeankurrk"}],
+    "HIP 71683": [{"english": "Berm-berm-gle"}],
+    "HIP 80763": [{"english": "Djuit"}],
+    "HIP 85927": [{"english": "Karik Karik"}],
+    "HIP 89931": [{"english": "Warring"}],
+    "HIP 91262": [{"english": "Neilloan"}],
+    "HIP 94114": [{"english": "Won"}],
+    "HIP 97649": [{"english": "Totyarguil"}],
+    "HIP 100027": [{"english": "Collenbitchick"}],
+    "HIP 101958": [{"english": "Otchocut"}],
+    "NAME Jupiter": [{"english": "Sulphur-crested white cockatoo", "native": "Ginabongbearp", "translators_comments": "Native name of Jupiter in Boorong culture"}],
+    "NAME Moon": [{"english": "Mityan", "native": "Mityan", "translators_comments": "Native name of the Moon in Boorong culture"}],
+    "NAME Sun": [{"english": "Day", "native": "Gnowee", "translators_comments": "Native name of the Sun in Boorong culture"}],
+    "NAME Venus": [{"english": "Elder sister", "native": "Chargee Gnowee", "translators_comments": "Native name of Venus in Boorong culture"}]
+  }
+}

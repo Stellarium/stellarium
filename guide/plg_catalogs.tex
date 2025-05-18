@@ -1477,52 +1477,6 @@ Use the bottom right button in the Sources tab (Figure~\ref{fig:plugins:Satellit
 %their orientations and flare events are no longer predictable, therefore the
 %``Iridium flares'' dialog has been removed.
 
-
-\newpage
-
-\section{Missing Stars Plugin}
-\label{sec:plugins:MissingStars}
-
-
-Over the years some users have reported that some stars, usually telescopic targets only, are missing from Stellarium's star catalogs. 
-This can be hardly avoided given selection criteria of catalogs (see Appendix~\ref{ch:Catalogues}). There are doubtlessly many more stars missing. 
-If you need to compare your own photographs or observations and check for stars that may be missing from Stellarium's catalog, 
-it is best to switch on the DSS layer (see section~\ref{sec:TOAST}). 
-
-This plugin \newFeature{23.3} is enabled by default and has no UI button. 
-If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), it just draws the stars from its add-on catalog.
-
-\iffalse
-% GZ: I prepared this section for when this may become active one day.
-\subsection{Missing Stars Catalog}
-\label{sec:plugins:MissingStars:catalog}
-
-The catalog of missing stars is stored on disk in JSON\footnote{\url{https://www.json.org/}}
-format. A default copy is embedded in the plug-in at compile time. 
-A working copy can be used in the user data directory, in a file named \file{modules/MissingStars/MissingStars.json}
-
-\begin{configfileScr}
-{
-	"shortName": "Missing stars data",
-	"catalog":
-	{
-		"TYC 1309-1609-1":
-		{
-			"RA": "05h35m04.9551206928s",
-			"DEC": "+22d09m26.060109732s",
-			"pmRA": 1.595,
-			"pmDEC": -1.389,
-                        "bMag": 11.5,
-                        "vMag": 11.3,
-                        "parallax": 0.3988,
-                        "parallaxErr": 0.0214
-		},
-		...
-	}
-}
-\end{configfileScr}
-\fi
-
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "guide"

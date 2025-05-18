@@ -29,6 +29,7 @@
 
 class StelObject;
 class StelToneReproducer;
+class StelSkyCulture;
 class StelProjector;
 class StelPainter;
 class QSettings;
@@ -70,6 +71,29 @@ typedef struct
 
 typedef QMap<StelObjectP, float> StelACStarData;
 typedef uint64_t StarId;
+
+typedef struct
+{
+	StarId hip;
+	bool primary;
+	double binary_period;
+	float eccentricity;
+	float inclination;
+	float big_omega;
+	float small_omega;
+	double periastron_epoch;
+	double semi_major;
+	double bary_distance;
+	double data_epoch;
+	double bary_ra;
+	double bary_dec;
+	double bary_rv;
+	double bary_pmra;
+	double bary_pmdec;
+	float primary_mass;
+	float secondary_mass;
+} binaryorbitstar;
+
 
 //! @class StarMgr
 //! Stores the star catalogue data.
@@ -383,6 +407,11 @@ public:
 	//! @return separation in arcseconds
 	static float getWdsLastSeparation(StarId hip);
 
+	//! Get binary orbit data for a star with a specified Hipparcos or Gaia catalogue number.
+	//! @param hip The Hipparcos/Gaia number of star
+	//! @return binary orbit data
+	static binaryorbitstar getBinaryOrbitData(StarId hip);
+
 	static QString convertToSpectralType(int index);
 	static QString convertToComponentIds(int index);
 	static QString convertToOjectTypes(int index);
@@ -391,8 +420,10 @@ public:
 
 	//! Try to load the given catalog, even if it is marched as unchecked.
 	//! Mark it as checked if checksum is correct.
+	//! @param m the catalog data.
+	//! @param load true if the catalog should be loaded, otherwise just check but don't load.
 	//! @return false in case of failure.
-	bool checkAndLoadCatalog(const QVariantMap& m);
+	bool checkAndLoadCatalog(const QVariantMap& m, bool load);
 
 	//! Get the list of all Hipparcos stars.
 	const QList<StelObjectP>& getHipparcosStars() const { return hipparcosStars; }	
@@ -410,8 +441,7 @@ private slots:
 
 	//! Called when the sky culture is updated.
 	//! Loads common and scientific names of stars for a given sky culture.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	void updateSkyCulture(const QString& skyCultureDir);
+	void updateSkyCulture(const StelSkyCulture& skyCulture);
 
 	//! increase artificial cutoff magnitude slightly (can be linked to an action/hotkey)
 	void increaseStarsMagnitudeLimit();
@@ -433,11 +463,22 @@ private:
 
 	void copyDefaultConfigFile();
 
+	struct CommonNames
+	{
+		QHash<int, QString> byHIP;
+		QMap<QString, int> hipByName;
+	};
 	//! Loads common names for stars from a file.
 	//! Called when the SkyCulture is updated.
 	//! @param the path to a file containing the common names for bright stars.
 	//! @note Stellarium doesn't support sky cultures made prior version 0.10.6 now!
-	int loadCommonNames(const QString& commonNameFile);
+	CommonNames loadCommonNames(const QString& commonNameFile) const;
+
+	//! Load culture-specific names for stars from JSON data
+	void loadCultureSpecificNames(const QJsonObject& data, const QMap<QString, int>& commonNamesIndexToSearchWhileLoading);
+	void loadCultureSpecificNameForStar(const QJsonArray& data, StarId HIP);
+	void loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName,
+	                                           const QMap<QString, int>& commonNamesIndexToSearchWhileLoading);
 
 	//! Loads scientific names for stars from a file.
 	//! Called when the SkyCulture is updated.
@@ -456,6 +497,10 @@ private:
 	//! Loads cross-identification data from a file.
 	//! @param the path to a file containing the cross-identification data.
 	void loadCrossIdentificationData(const QString& crossIdFile);
+
+	//! Loads orbital parameters data for binary systems data from a file.
+	//! @param the path to a file containing the orbital parameters data for binary systems.
+	void loadBinaryOrbitalData(const QString& orbitalParamFile);
 
 	//! Gets the maximum search level.
 	// TODO: add a non-lame description - what is the purpose of the max search level?
@@ -524,11 +569,13 @@ private:
 	static QMap<QString, StarId> wdsStarsIndexI18n;
 
 	static QMap<QString, crossid> crossIdMap;
-	static QMap<int, StarId> saoStarsIndex;
-	static QMap<int, StarId> hdStarsIndex;
-	static QMap<int, StarId> hrStarsIndex;
+	static QHash<int, StarId> saoStarsIndex;
+	static QHash<int, StarId> hdStarsIndex;
+	static QHash<int, StarId> hrStarsIndex;
 
 	static QHash<StarId, QString> referenceMap;
+
+	static QHash<StarId, binaryorbitstar> binaryOrbitStarMap;
 
 	QFont starFont;
 	static bool flagSciNames;

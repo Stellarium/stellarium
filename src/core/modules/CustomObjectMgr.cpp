@@ -445,7 +445,6 @@ QStringList CustomObjectMgr::listAllObjects(bool inEnglish) const
 		{
 			result << pObj->getEnglishName();
 		}
-
 	}
 	else
 	{

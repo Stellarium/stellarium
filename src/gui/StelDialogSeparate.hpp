@@ -26,12 +26,14 @@
 
 class NightCover;
 
-//! @class StelDialogSeparate Base class for windows NOT embedded in the graphics scene.
+//! @class StelDialogSeparate
+//! @brief Base class for windows NOT embedded in the graphics scene.
+//!
 //! Some GUI elements like QWebEngineView don't like to be embedded into our MainView.
 //! Another motivation may be to have windows on another screen.
 //!
-//! The dialog behaves almost like @class StelDialog. However, given how night mode is applied as screen effect,
-//! this dialog does not adhere to the global night mode. Therefore a semitransparent QWidget (@class NightCover)
+//! The dialog behaves almost like #StelDialog. However, given how night mode is applied as screen effect,
+//! this dialog does not adhere to the global night mode. Therefore a semitransparent @c QWidget (@c NightCover)
 //! is placed on top. This does not filter away all blue light, but at least dims bright non-red colors.
 //!
 class StelDialogSeparate : public StelDialog

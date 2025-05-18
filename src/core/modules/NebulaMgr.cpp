@@ -39,7 +39,6 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 
-#include <algorithm>
 #include <vector>
 #include <QDebug>
 #include <QFile>
@@ -52,7 +51,21 @@
 
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
-static const QString StellariumDSOCatalogVersion = "3.20";
+const QString NebulaMgr::StellariumDSOCatalogVersion = QStringLiteral("3.20");
+
+namespace
+{
+
+void setName(const NebulaP& nebula, const QString& specificName)
+{
+	const auto currentName = nebula->getEnglishName();
+	if (currentName.isEmpty()) // Set native name of DSO
+		nebula->setProperName(specificName);
+	else if (currentName != specificName) // Add traditional (well-known?) name of DSO as alias
+		nebula->addNameAlias(specificName);
+}
+
+}
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c; emit labelsColorChanged(c);}
 const Vec3f NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
@@ -170,6 +183,17 @@ void NebulaMgr::setFlagOutlines(const bool flag)
 	}
 }
 
+bool NebulaMgr::getFlagShowOnlyNamedDSO(void) const {return Nebula::flagShowOnlyNamedDSO; }
+void NebulaMgr::setFlagShowOnlyNamedDSO(const bool flag)
+{
+	if(Nebula::flagShowOnlyNamedDSO!=flag)
+	{
+		Nebula::flagShowOnlyNamedDSO=flag;
+		StelApp::immediateSave("astro/flag_dso_show_only_named", flag);
+		emit flagShowOnlyNamedDSOChanged(flag);
+	}
+}
+
 NebulaMgr::NebulaMgr(void) : StelObjectModule()
 	, nebGrid(200)
 	, hintsAmount(0)
@@ -228,6 +252,7 @@ void NebulaMgr::init()
 	setFlagSurfaceBrightnessUsage(conf->value("astro/flag_surface_brightness_usage", false).toBool());
 	setFlagSurfaceBrightnessArcsecUsage(conf->value("gui/flag_surface_brightness_arcsec", false).toBool());
 	setFlagSurfaceBrightnessShortNotationUsage(conf->value("gui/flag_surface_brightness_short", false).toBool());
+	setFlagShowOnlyNamedDSO(conf->value("astro/flag_dso_show_only_named", false).toBool());
 
 	setFlagSizeLimitsUsage(conf->value("astro/flag_size_limits_usage", false).toBool());
 	setMinSizeLimit(conf->value("astro/size_limit_min", 1.0).toDouble());
@@ -386,20 +411,57 @@ void NebulaMgr::init()
 
 	setTypeFilters(typeFilters);
 
-	// TODO: mechanism to specify which sets get loaded at start time.
-	// candidate methods:
-	// 1. config file option (list of sets to load at startup)
-	// 2. load all
-	// 3. flag in nebula_textures.fab (yuk)
-	// 4. info.ini file in each set containing a "load at startup" item
-	// For now (0.9.0), just load the default set
-	loadNebulaSet("default");
+	// specify which sets get loaded at start time.
+	const QString nebulaSetName=conf->value("astro/nebula_set", "default").toString();
+
+	// Load the list of unwanted references.
+	const QString allSetsUnwantedRefsRaw = conf->value("astro/nebula_exclude_references").toString(); // Later: read this from config.ini. Syntax: "setName:unrefA,unrefB,..."
+	QString allUnwantedReferencesFromOneSetRaw;
+	if (allSetsUnwantedRefsRaw.contains(';'))
+	{
+		// full specification: SetA:refA,refB;SetB:refC
+#if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
+		QStringList allSetsUnwantedRefs=allSetsUnwantedRefsRaw.split(';', Qt::SkipEmptyParts);
+#else
+		QStringList allSetsUnwantedRefs=allSetsUnwantedRefsRaw.split(';', QString::SkipEmptyParts);
+#endif
+		foreach (const QString &entry, allSetsUnwantedRefs)
+		{
+			QStringList oneSetList=entry.split(':');
+			if (oneSetList.length()==2 && oneSetList.at(0)==nebulaSetName)
+			{
+				allUnwantedReferencesFromOneSetRaw=oneSetList.at(1); // Now this has the packed list without nebulaSet name
+				break;
+			}
+		}
+		if (allUnwantedReferencesFromOneSetRaw.isEmpty())
+		{
+			qInfo() << "NebulaMgr: FYI: No references found to be excluded for set" << nebulaSetName;
+		}
+	}
+	else if (allSetsUnwantedRefsRaw.contains(':'))
+	{
+		// Presumably only a packed list for default nebulaSet.
+		allUnwantedReferencesFromOneSetRaw=allSetsUnwantedRefsRaw.section(':', 1, 1);
+	}
+	else
+		allUnwantedReferencesFromOneSetRaw=allSetsUnwantedRefsRaw;
+	// At this point allUnwantedReferencesFromOneSetRaw is assumed to be a comma-separated list for the current nebulaSet.
+#if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
+	unwantedReferences=allUnwantedReferencesFromOneSetRaw.split(',', Qt::SkipEmptyParts);
+#else
+	unwantedReferences=allUnwantedReferencesFromOneSetRaw.split(',', QString::SkipEmptyParts);
+#endif
+	if (!unwantedReferences.isEmpty()) // Do not show unwanted references when they does not defined
+		qInfo() << "NebulaMgr: Unwanted References:" << unwantedReferences;
+
+	loadNebulaSet(nebulaSetName);
 
 	updateI18n();
 
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &NebulaMgr::updateSkyCulture);
+	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &NebulaMgr::updateSkyCulture);
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
@@ -566,6 +628,9 @@ struct DrawNebulaFuncObject
 			return;
 
 		if (!n->objectInDisplayedCatalog())
+			return;
+
+		if (n->flagShowOnlyNamedDSO && n->getEnglishName().isEmpty())
 			return;
 
 		if (!n->objectInAllowedSizeRangeLimits())
@@ -840,15 +905,12 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 }
 
 // Search by name
-NebulaP NebulaMgr::search(const QString& name)
+NebulaP NebulaMgr::searchForCommonName(const QString& name)
 {
 	QString uname = name.toUpper();
 
-	for (const auto& n : std::as_const(dsoArray))
-	{
-		QString testName = n->getEnglishName().toUpper();
-		if (testName==uname) return n;
-	}
+	if (const auto it = commonNameMap.find(uname); it != commonNameMap.end())
+		return (it->nebula);
 
 	return searchByDesignation(uname);
 }
@@ -861,6 +923,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 		dsoCatalogPath	= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
 	QString dsoOutlinesPath	= StelFileMgr::findFile("nebulae/" + setName + "/outlines.dat");
 	QString dsoDiscoveryPath = StelFileMgr::findFile("nebulae/" + setName + "/discovery.dat");
+	QString dsoNamesPath = StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
 
 	dsoArray.clear();
 	dsoIndex.clear();
@@ -871,7 +934,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 		if (!srcCatalogPath.isEmpty())
 			convertDSOCatalog(srcCatalogPath, StelFileMgr::findFile("nebulae/" + setName + "/catalog.pack", StelFileMgr::New), flagDecimalCoordinates);
 		else
-			qWarning() << "ERROR convert catalogue, because source data set does not exist for " << setName;
+			qWarning() << "ERROR converting catalogue, because source data set does not exist for " << setName;
 	}
 
 	if (dsoCatalogPath.isEmpty())
@@ -881,6 +944,15 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	}
 
 	loadDSOCatalog(dsoCatalogPath);
+
+	if (dsoNamesPath.isEmpty())
+	{
+		qWarning().noquote() << "ERROR while loading deep-sky names data set" << setName;
+	}
+	else
+	{
+		loadDSONames(dsoNamesPath);
+	}
 
 	if (!dsoOutlinesPath.isEmpty())
 		loadDSOOutlines(dsoOutlinesPath);
@@ -1064,8 +1136,9 @@ NebulaP NebulaMgr::searchUGC(unsigned int UGC) const
 
 NebulaP NebulaMgr::searchCed(QString Ced) const
 {
+	Ced = Ced.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->Ced_nb.trimmed().toUpper() == Ced.trimmed().toUpper())
+		if (n->Ced_nb.compare(Ced, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
@@ -1088,56 +1161,63 @@ NebulaP NebulaMgr::searchVV(unsigned int VV) const
 
 NebulaP NebulaMgr::searchPK(QString PK) const
 {
+	PK = PK.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->PK_nb.trimmed().toUpper() == PK.trimmed().toUpper())
+		if (n->PK_nb.compare(PK, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchPNG(QString PNG) const
 {
+	PNG = PNG.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->PNG_nb.trimmed().toUpper() == PNG.trimmed().toUpper())
+		if (n->PNG_nb.compare(PNG, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchSNRG(QString SNRG) const
 {
+	SNRG = SNRG.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->SNRG_nb.trimmed().toUpper() == SNRG.trimmed().toUpper())
+		if (n->SNRG_nb.compare(SNRG, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchACO(QString ACO) const
 {
+	ACO = ACO.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->ACO_nb.trimmed().toUpper() == ACO.trimmed().toUpper())
+		if (n->ACO_nb.compare(ACO, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchHCG(QString HCG) const
 {
+	HCG = HCG.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->HCG_nb.trimmed().toUpper() == HCG.trimmed().toUpper())
+		if (n->HCG_nb.compare(HCG, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchESO(QString ESO) const
 {
+	ESO = ESO.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->ESO_nb.trimmed().toUpper() == ESO.trimmed().toUpper())
+		if (n->ESO_nb.compare(ESO, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchVdBH(QString VdBH) const
 {
+	VdBH = VdBH.trimmed();
 	for (const auto& n : dsoArray)
-		if (n->VdBH_nb.trimmed().toUpper() == VdBH.trimmed().toUpper())
+		if (n->VdBH_nb.compare(VdBH, Qt::CaseInsensitive) == 0)
 			return n;
 	return NebulaP();
 }
@@ -1450,8 +1530,8 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 	dsoIn.close();
 	dsoOut.flush();
 	dsoOut.close();
-	qDebug().noquote() << "Converted" << readOk << "/" << totalRecords << "DSO records";
-	qDebug().noquote() << "[...] Please use 'gzip -nc catalog.pack > catalog.dat' to pack the catalog.";
+	qInfo().noquote() << "Converted" << readOk << "/" << totalRecords << "DSO records";
+	qInfo().noquote() << "[...] Please use 'gzip -nc catalog.pack > catalog.dat' to pack the catalog.";
 }
 
 bool NebulaMgr::loadDSOCatalog(const QString &filename)
@@ -1460,7 +1540,7 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 	if (!in.open(QIODevice::ReadOnly))
 		return false;
 
-	qDebug().noquote() << "Loading DSO data ...";
+	qInfo().noquote() << "Loading DSO data ...";
 
 	// Let's begin use gzipped data
 	QDataStream ins(StelUtils::uncompress(in.readAll()));
@@ -1477,12 +1557,12 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 				version = "3.1"; // The first version of extended edition of the catalog
 			if (edition.isEmpty())
 				edition = "unknown";
-			qDebug().noquote() << "[...]" << QString("Stellarium DSO Catalog, version %1 (%2 edition)").arg(version, edition);
+			qInfo().noquote() << "[...]" << QString("Stellarium DSO Catalog, version %1 (%2 edition)").arg(version, edition);
 			if (StelUtils::compareVersions(version, StellariumDSOCatalogVersion)!=0)
 			{
 				++totalRecords;
-				qDebug().noquote() << "WARNING: Mismatch of DSO catalog version (" << version << ")! The expected version is" << StellariumDSOCatalogVersion;
-				qDebug().noquote() << "         See section 5.5 of the User Guide and install the right version of the catalog!";
+				qWarning().noquote() << "Mismatch of DSO catalog version (" << version << ")! The expected version is" << StellariumDSOCatalogVersion;
+				qWarning().noquote() << "See section 5.5 of the User Guide and install the right version of the catalog!";
 				QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"),
 				                     QString("%1. %2: %3 - %4: %5. %6").arg(q_("DSO catalog version mismatch"),
 				                                                            q_("Found"),
@@ -1507,13 +1587,16 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 		++totalRecords;
 	}
 	in.close();
-	qDebug().noquote() << "Loaded" << --totalRecords << "DSO records";
+	qInfo().noquote() << "Loaded" << --totalRecords << "DSO records";
 	return true;
 }
 
 bool NebulaMgr::loadDSONames(const QString &filename)
 {
-	qDebug() << "Loading DSO name data ...";
+	qInfo() << "Loading DSO name data ...";
+
+	defaultNameMap.clear();
+
 	QFile dsoNameFile(filename);
 	if (!dsoNameFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
@@ -1653,11 +1736,47 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 			if (transMatch.hasMatch())
 			{
 				QString propName = transMatch.captured(1).trimmed();
-				QString currName = e->getEnglishName();
-				if (currName.isEmpty())
-					e->setProperName(propName);
-				else if (currName!=propName)
-					e->addNameAlias(propName);
+				// TODO: Check if name is in the unwanted list and then don't include.
+				QString refs = transMatch.captured(2).trimmed(); // a null string should not complain.
+				QStringList refList;
+				bool accept=refs.isNull(); // if we don't have a reference, we must accept it.
+				if (!accept)
+				{
+					refs=refs.right(refs.length()-1); // Chop off # sign. Use slice after switch to Qt6!
+					refList=refs.split(",");
+					// trim all sub-strings
+					for (int i=0; i<refList.length(); ++i)
+					{
+						refList[i]=refList.at(i).trimmed();
+					}
+
+					//qDebug() << "References for object " << e->getDSODesignation() << "as" << propName << ":" << refList;
+					accept=refList.isEmpty(); // if we don't have a reference list, we must accept it.
+				}
+				// Now refList contains the DSO's reference strings.
+				// Compare with the list of unwantedReferences and accept only "allowed" ones.
+				if (!accept)
+				{
+					//refList.removeAll()
+
+					foreach(QString str, refList)
+					{
+						if (unwantedReferences.contains(str))
+						{
+							//qDebug() << "Unwanted reference" << str << "detected for DSO name" << propName;
+							refList.removeOne(str);
+						}
+					}
+					// Now it's inverse: if there are still references, we use the name.
+					accept=!refList.isEmpty();
+				}
+
+				if (accept)
+				{
+					defaultNameMap[e].push_back(propName);
+					NebulaWithReferences nr = {e, refList };
+					commonNameMap[propName.toUpper()] = nr;  // add with reduced refList.
+				}
 			}
 			readOk++;
 		}
@@ -1665,18 +1784,18 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 			nodata.append(QString("%1 %2").arg(ref.trimmed(), cdes.trimmed()));
 	}
 	dsoNameFile.close();
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "DSO name records successfully";
+	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "DSO name records successfully";
 
 	int err = nodata.size();
 	if (err>0)
-		qDebug().noquote() << "WARNING - No position data for" << err << "objects:" << nodata.join(", ");
+		qWarning().noquote() << "No position data for" << err << "objects:" << nodata.join(", ");
 
 	return true;
 }
 
 bool NebulaMgr::loadDSODiscoveryData(const QString &filename)
 {
-	qDebug() << "Loading DSO discovery data ...";
+	qInfo() << "Loading DSO discovery data ...";
 	QFile dsoDiscoveryFile(filename);
 	if (!dsoDiscoveryFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
@@ -1705,7 +1824,7 @@ bool NebulaMgr::loadDSODiscoveryData(const QString &filename)
 		dYear	= list.at(1).trimmed();
 		dName	= list.at(2).trimmed();
 
-		e = search(dso);
+		e = searchForCommonName(dso);
 		if (e.isNull()) // maybe this is inner number of DSO
 			e = searchDSO(dso.toUInt());
 
@@ -1716,13 +1835,13 @@ bool NebulaMgr::loadDSODiscoveryData(const QString &filename)
 		}
 	}
 	dsoDiscoveryFile.close();
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "DSO discovery records successfully";
+	qInfo().noquote() << "Loaded" << readOk << "/" << totalRecords << "DSO discovery records successfully";
 	return true;
 }
 
 bool NebulaMgr::loadDSOOutlines(const QString &filename)
 {
-	qDebug() << "Loading DSO outline data ...";
+	qInfo() << "Loading DSO outline data ...";
 	QFile dsoOutlineFile(filename);
 	if (!dsoOutlineFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
@@ -1769,7 +1888,7 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 		if (command.contains("start", Qt::CaseInsensitive))
 		{
 			outline.clear();
-			e = search(dso);
+			e = searchForCommonName(dso);
 			if (e.isNull()) // maybe this is inner number of DSO
 				e = searchDSO(dso.toUInt());
 
@@ -1810,90 +1929,102 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 		}
 	}
 	dsoOutlineFile.close();
-	qDebug().noquote() << "Loaded" << readOk << "DSO outline records successfully";
+	qInfo().noquote() << "Loaded" << readOk << "DSO outline records successfully";
 	return true;
 }
 
-void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
+void NebulaMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
-	QString namesFile = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/dso_names.fab");
-
 	for (const auto& n : std::as_const(dsoArray))
 		n->removeAllNames();
 
-	if (namesFile.isEmpty())
+	if (skyCulture.fallbackToInternationalNames)
 	{
-		QString setName = "default";
-		QString dsoNamesPath = StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
-		if (dsoNamesPath.isEmpty())
-		{
-			qWarning().noquote() << "ERROR while loading deep-sky names data set " << setName;
-			return;
-		}
-		loadDSONames(dsoNamesPath);
+		for (auto it = commonNameMap.begin(); it != commonNameMap.end(); ++it)
+			setName(it.value().nebula, it.key());
+	}
+
+	int numLoaded = 0;
+	if (!skyCulture.names.isEmpty())
+		numLoaded = loadCultureSpecificNames(skyCulture.names);
+
+	if (numLoaded)
+	{
+		qInfo().noquote() << "Loaded" << numLoaded << "culture-specific DSO names";
 	}
 	else
 	{
-		// Open file
-		QFile dsoNamesFile(namesFile);
-		if (!dsoNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
-		{
-			qDebug().noquote() << "Cannot open file" << QDir::toNativeSeparators(namesFile);
-			return;
-		}
-
-		// Now parse the file
-		// lines to ignore which start with a # or are empty
-		static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
-
-		// lines which look like records - we use the RE to extract the fields
-		// which will be available in recMatch.capturedTexts()
-		static const QRegularExpression recRx("^\\s*([\\w\\s\\-\\+\\.]+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)");
-
-		QString record, dsoId, nativeName;
-		int totalRecords=0;
-		int readOk=0;
-		int lineNumber=0;
-		while (!dsoNamesFile.atEnd())
-		{
-			record = QString::fromUtf8(dsoNamesFile.readLine()).trimmed();
-			lineNumber++;
-
-			// Skip comments
-			if (commentRx.match(record).hasMatch())
-				continue;
-
-			totalRecords++;
-
-			QRegularExpressionMatch recMatch=recRx.match(record);
-			if (!recMatch.hasMatch())
-			{
-				qWarning().noquote() << "ERROR - cannot parse record at line" << lineNumber << "in native deep-sky object names file" << QDir::toNativeSeparators(namesFile);
-			}
-			else
-			{
-				dsoId = recMatch.captured(1).trimmed();
-				nativeName = recMatch.captured(2).trimmed(); // Use translatable text
-				NebulaP e = search(dsoId);
-				if (!e.isNull()) // avoid crash
-				{
-					QString currentName = e->getEnglishName();
-					if (currentName.isEmpty()) // Set native name of DSO
-						e->setProperName(nativeName);
-					else if (currentName!=nativeName) // Add traditional (well-known?) name of DSO as alias
-						e->addNameAlias(nativeName);
-				}
-				else
-					qWarning().noquote() << "ERROR - could NOT found DSO " << dsoId;
-
-				readOk++;
-			}
-		}
-		dsoNamesFile.close();
-		qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "native names of deep-sky objects";
+		for (auto it = defaultNameMap.begin(); it != defaultNameMap.end(); ++it)
+			for (const auto& name : it.value())
+				setName(it.key(), name);
 	}
 
 	updateI18n();
+}
+
+int NebulaMgr::loadCultureSpecificNames(const QJsonObject& data)
+{
+	int loadedTotal = 0;
+	for (auto it = data.begin(); it != data.end(); ++it)
+	{
+		const auto key = it.key();
+		const auto specificNames = it->toArray();
+
+		if (key.startsWith("HIP "))
+		{
+			// skip since it's a star
+		}
+		else if (key.startsWith("NAME "))
+		{
+			// FIXME: this is a kludge for the discrepancy between stellarium-skycultures database
+			// and Stellarium's internal database. Maybe we should make use of the former and drop
+			// the latter instead of doing this name translation.
+			auto name = key.mid(5);
+			static const QHash<QString, QString> renamer{
+				{"Beehive Cluster" , "Beehive"           },
+				{"Carina Nebula"   , "Eta Carinae Nebula"},
+				{u8"ω Cen Cluster" , "Omega Centauri"    },
+			};
+			if (const auto it = renamer.find(name); it != renamer.end())
+				name = it.value();
+			loadCultureSpecificNameForNamedObject(it.value().toArray(), name);
+		}
+		else if (const NebulaP n = searchByDesignation(key))
+		{
+			for (const auto& entry : specificNames)
+			{
+				for (const char*const nameType : {"english", "native"})
+				{
+					const auto specificName = entry.toObject()[nameType].toString();
+					if (specificName.isEmpty())
+						continue;
+					setName(n, specificName);
+					++loadedTotal;
+				}
+			}
+		}
+	}
+	return loadedTotal;
+}
+
+void NebulaMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName)
+{
+	const auto commonNameIndexIt = commonNameMap.find(commonName.toUpper());
+	if (commonNameIndexIt == commonNameMap.end())
+	{
+		// This may actually not even be a nebula, so we shouldn't emit any warning, just return
+		return;
+	}
+
+	for (const auto& entry : data)
+	{
+		const auto specificName = entry.toObject()["english"].toString();
+		if (specificName.isEmpty()) continue;
+
+		// TODO: Filter away unwanted sources per-skyculture!
+		// For now, just accept as before.
+		setName(commonNameIndexIt.value().nebula, specificName);
+	}
 }
 
 void NebulaMgr::updateI18n()
@@ -2211,14 +2342,14 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		for (const auto& n : dsoArray)
 		{
 			if (n->Ced_nb.isEmpty()) continue;
-			QString constw = QString("Ced%1").arg(n->Ced_nb.trimmed());
+			QString constw = QString("Ced%1").arg(n->Ced_nb);
 			QString constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("Ced %1").arg(n->Ced_nb.trimmed());
+			constw = QString("Ced %1").arg(n->Ced_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 				result << constw;
@@ -2391,14 +2522,14 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		for (const auto& n : dsoArray)
 		{
 			if (n->PK_nb.isEmpty()) continue;
-			QString constw = QString("PK%1").arg(n->PK_nb.trimmed());
+			QString constw = QString("PK%1").arg(n->PK_nb);
 			QString constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("PK %1").arg(n->PK_nb.trimmed());
+			constw = QString("PK %1").arg(n->PK_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 				result << constw;
@@ -2411,14 +2542,14 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		for (const auto& n : dsoArray)
 		{
 			if (n->PNG_nb.isEmpty()) continue;
-			QString constw = QString("PNG%1").arg(n->PNG_nb.trimmed());
+			QString constw = QString("PNG%1").arg(n->PNG_nb);
 			QString constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("PN G%1").arg(n->PNG_nb.trimmed());
+			constw = QString("PN G%1").arg(n->PNG_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 				result << constw;
@@ -2431,14 +2562,14 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		for (const auto& n : dsoArray)
 		{
 			if (n->SNRG_nb.isEmpty()) continue;
-			QString constw = QString("SNRG%1").arg(n->SNRG_nb.trimmed());
+			QString constw = QString("SNRG%1").arg(n->SNRG_nb);
 			QString constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("SNR G%1").arg(n->SNRG_nb.trimmed());
+			constw = QString("SNR G%1").arg(n->SNRG_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 				result << constw;
@@ -2451,17 +2582,17 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		for (const auto& n : dsoArray)
 		{
 			if (n->ACO_nb.isEmpty()) continue;
-			QString constw = QString("Abell%1").arg(n->ACO_nb.trimmed());
+			QString constw = QString("Abell%1").arg(n->ACO_nb);
 			QString constws = constw.mid(0, objw.size());
-			QString constws2 = QString("ACO%1").arg(n->ACO_nb.trimmed()).mid(0, objw.size());
+			QString constws2 = QString("ACO%1").arg(n->ACO_nb).mid(0, objw.size());
 			if (constws.toUpper()==objw || constws2.toUpper()==objw)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("Abell %1").arg(n->ACO_nb.trimmed());
+			constw = QString("Abell %1").arg(n->ACO_nb);
 			constws = constw.mid(0, objw.size());
-			constws2 = QString("ACO %1").arg(n->ACO_nb.trimmed()).mid(0, objw.size());
+			constws2 = QString("ACO %1").arg(n->ACO_nb).mid(0, objw.size());
 			if (constws.toUpper()==objw || constws2.toUpper()==objw)
 				result << constw;
 		}
@@ -2473,14 +2604,14 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		for (const auto& n : dsoArray)
 		{
 			if (n->HCG_nb.isEmpty()) continue;
-			QString constw = QString("HCG%1").arg(n->HCG_nb.trimmed());
+			QString constw = QString("HCG%1").arg(n->HCG_nb);
 			QString constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("HCG %1").arg(n->HCG_nb.trimmed());
+			constw = QString("HCG %1").arg(n->HCG_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 				result << constw;
@@ -2493,14 +2624,14 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		for (const auto& n : dsoArray)
 		{
 			if (n->ESO_nb.isEmpty()) continue;
-			QString constw = QString("ESO%1").arg(n->ESO_nb.trimmed());
+			QString constw = QString("ESO%1").arg(n->ESO_nb);
 			QString constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("ESO %1").arg(n->ESO_nb.trimmed());
+			constw = QString("ESO %1").arg(n->ESO_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 				result << constw;
@@ -2513,14 +2644,14 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		for (const auto& n : dsoArray)
 		{
 			if (n->VdBH_nb.isEmpty()) continue;
-			QString constw = QString("vdBH%1").arg(n->VdBH_nb.trimmed());
+			QString constw = QString("vdBH%1").arg(n->VdBH_nb);
 			QString constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("vdBH %1").arg(n->VdBH_nb.trimmed());
+			constw = QString("vdBH %1").arg(n->VdBH_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws.toUpper()==objw)
 				result << constw;

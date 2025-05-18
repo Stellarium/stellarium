@@ -22,7 +22,7 @@
 #include "BahaiArithmeticCalendar.hpp"
 
 //! @class BahaiAstronomicalCalendar
-//! Functions for the Bahá´á Astronomical calendar
+//! @brief Functions for the Bahá´á Astronomical calendar
 //! @author Georg Zotti
 //! @ingroup calendars
 //! The Bahá´í faith, founded in 1844, uses its own calendar, based on the number 19.

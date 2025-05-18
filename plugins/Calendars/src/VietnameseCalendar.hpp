@@ -22,7 +22,7 @@
 #include "ChineseCalendar.hpp"
 
 //! @class VietnameseCalendar
-//! Functions for the Vietnamese calendar (as derived from the Chinese calendar)
+//! @brief Functions for the Vietnamese calendar (as derived from the Chinese calendar)
 //! @author Georg Zotti
 //! @ingroup calendars
 //! The Vietnamese calendar is derived from the Chinese calendar (like Japanese and Korean).

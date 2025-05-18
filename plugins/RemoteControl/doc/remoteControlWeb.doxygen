@@ -338,7 +338,7 @@ define(["jquery", "api/remotecontrol"], function($,rc) {
     //do something as soon as this module is loaded
     console.log("my awesome module is being loaded!");
 
-    //do something when the DOM is ready (because that is not guaranteed while the module is first bein loaded!)
+    //do something when the DOM is ready (because that isn't guaranteed while the module is first being loaded!)
     $(function(){
         console.log("the document is ready, you can access the elements now!");
         //access an element and modify it

@@ -294,22 +294,24 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << getExtraInfoStrings(flags&ObjectType).join("");
 	}
 
-	double RA, DEC, pmra, pmdec;
+	double RA, DEC, pmra, pmdec, Plx, RadialVel;
 	double PlxErr = s->getPlxErr();
-	double Plx = s->getPlx();
-	double RadialVel = s->getRV();
 	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+	Vec3d v;
+	double binary_sep = 0.0, binary_pa = 0.0;  // binary star separation and position angle
+	s->getBinaryOrbit(core->getJDE(), v, RA, DEC, Plx, pmra, pmdec, RadialVel, binary_sep, binary_pa);
+	binary_pa *= M_180_PIf;
 
 	float magOffset = 0.f;
-	if (Plx)
+	if (Plx && s->getPlx())
 	{
-		magOffset = 5.f * log10((s->getPlx())/Plx);
+		magOffset = 5.f * log10(s->getPlx()/Plx);
 	} 
 	oss << getMagnitudeInfoString(core, flags, 2, magOffset);
 
-	if ((flags&AbsoluteMagnitude) && Plx && !isNan(Plx) && !isInf(Plx))
-		// should use Plx from getPlx because Plx can change with time, but not absolute magnitude
+	// should use Plx from getPlx because Plx can change with time, but not absolute magnitude
+	if ((flags&AbsoluteMagnitude) && s->getPlx())
 		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.001*s->getPlx())), 0, 'f', 2) << "<br />";
 	if (flags&AbsoluteMagnitude)
 		oss << getExtraInfoStrings(AbsoluteMagnitude).join("");
@@ -424,19 +426,20 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << QString("%1: %2% (%3)").arg(mmStr).arg(vMm).arg(dms) << "<br />";
 		}
 
-		if (wdsObs>0)
+		if ((wdsObs>0) || (binary_sep>0.f))  // either have a WDS observation or a separation modelled by the binary orbit
 		{
+			// use separation and position angle from the binary orbit if available
 			oss << QString("%1 (%3): %2°").arg(q_("Position angle"),
-							QString::number(wdsPA, 'f', 2),
-							QString::number(wdsObs)) << "<br />";
+							QString::number((binary_sep>0.f) ? binary_pa: wdsPA, 'f', 2),
+							(binary_sep>0.f) ? qc_("on date", "coordinates for current epoch"): QString::number(wdsObs)) << "<br />";
 			if (wdsSep>0.f && wdsSep<999.f) // A spectroscopic binary or not?
 			{
 				if (wdsSep>60.f) // A wide binary star?
 					oss << QString("%1 (%4): %2\" (%3)").arg(
 									    q_("Separation"),
-									    QString::number(wdsSep, 'f', 3),
-									    StelUtils::decDegToDmsStr(wdsSep/3600.f),
-									    QString::number(wdsObs)) << "<br />";
+									    QString::number((binary_sep>0.f) ? binary_sep: wdsSep, 'f', 3),
+									    StelUtils::decDegToDmsStr(((binary_sep>0.f) ? binary_sep: wdsSep)/3600.f),
+									    (binary_sep>0.f) ? qc_("on date", "coordinates for current epoch"): QString::number(wdsObs)) << "<br />";
 				else
 					oss << QString("%1 (%3): %2\"").arg(q_("Separation"), QString::number(wdsSep, 'f', 3), QString::number(wdsObs)) << "<br />";
 			}
@@ -546,6 +549,11 @@ QString StarWrapper2::getObjectType() const
 	}
 	else
 		return startype;
+}
+
+QString StarWrapper2::getID(void) const
+{
+	return QString("Gaia DR3 %1").arg(s->getGaia());
 }
 
 QString StarWrapper2::getObjectTypeI18n() const
@@ -660,10 +668,8 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	oss << getMagnitudeInfoString(core, flags, 2);
 
-	double RA, DEC, pmra, pmdec;
-	double Plx = s->getPlx();
+	double RA, DEC, pmra, pmdec, Plx, RadialVel;
 	double PlxErr = s->getPlxErr();
-	double RadialVel = s->getRV();
 	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
 	bool computeAstrometryFlag = (flags&ProperMotion) && (pmra || pmdec);
@@ -733,7 +739,7 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 			double distance = PARSEC_LY * 1000. / Plx;
 			oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(distance * PlxErr / Plx, 'f', 2), ly) << "<br />";
 		}
-		if ((Plx!=0) && (PlxErr!=0))  // as long as having parallax, display it (but not neccessarily displaying inverse parallax)
+		if ((Plx!=0) && (PlxErr!=0))  // as long as having parallax, display it (but not necessarily displaying inverse parallax)
 		{
 			QString plx = q_("Parallax");
 			if (PlxErr>0.f)
@@ -791,6 +797,11 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 	StelObject::postProcessInfoString(str, flags);
 
 	return str;
+}
+
+QString StarWrapper3::getID(void) const
+{
+	return QString("Gaia DR3 %1").arg(s->getGaia());
 }
 
 QString StarWrapper3::getObjectType() const

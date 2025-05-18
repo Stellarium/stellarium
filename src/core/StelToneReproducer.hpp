@@ -75,7 +75,7 @@ public:
 public slots:
 	//! Set the eye adaptation luminance for the display (and precompute what can be)
 	//! Usual luminance range is 1-100 cd/m^2 for a CRT screen
-	//! @param displayAdaptationLuminance the new display luminance in cd/m^2. The initial default value is 50 cd/m^2
+	//! @param Lda the new display luminance in cd/m^2. The initial default value is 50 cd/m^2.
 	void setDisplayAdaptationLuminance(float Lda);
 	float getDisplayAdaptationLuminance() const {return Lda;}
 

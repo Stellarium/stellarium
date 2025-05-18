@@ -165,7 +165,7 @@ void AngleMeasure::init()
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: unable create toolbar button for AngleMeasure plugin: " << e.what();
+		qWarning() << "Unable create toolbar button for AngleMeasure plugin: " << e.what();
 	}
 }
 

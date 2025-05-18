@@ -1,0 +1,82 @@
+{
+  "id": "xhosa",
+  "region": "Southern Africa",
+  "classification": ["ethnographic"],
+  "fallback_to_international_names": false,
+  "constellations": [
+    {
+      "id": "CON xhosa 001",
+      "lines": [[17573, 17499]],
+      "image": {
+        "file": "illustrations/digging-stars.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [237, 504], "hip": 20205},
+          {"pos": [187, 127], "hip": 17499},
+          {"pos": [175, 120], "hip": 17573}
+        ]
+      },
+      "common_name": {"english": "Digging Stars", "native": "isiLimela"}
+    },
+    {
+      "id": "CON xhosa 002",
+      "lines": [[32349, 30324]],
+      "image": {
+        "file": "illustrations/the-champion.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [270, 22], "hip": 26311},
+          {"pos": [229, 214], "hip": 32349},
+          {"pos": [427, 406], "hip": 30438}
+        ]
+      },
+      "common_name": {"english": "The Champion", "native": "iQhawe"}
+    },
+    {
+      "id": "CON xhosa 003",
+      "lines": [[30438, 31407]],
+      "image": {
+        "file": "illustrations/boys-dancing.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [88, 17], "hip": 32349},
+          {"pos": [253, 177], "hip": 30438},
+          {"pos": [222, 475], "hip": 60260}
+        ]
+      },
+      "common_name": {"english": "Boys dancing", "native": "uCanzibe"}
+    },
+    {
+      "id": "CON xhosa 004",
+      "lines": [[85927, 85696]],
+      "image": {
+        "file": "illustrations/angry-dog.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [105, 143], "hip": 80569},
+          {"pos": [409, 53], "hip": 63613},
+          {"pos": [433, 202], "hip": 93015}
+        ]
+      },
+      "common_name": {"english": "Angry dog", "native": "umNyele"}
+    },
+    {
+      "id": "CON xhosa 005",
+      "lines": [[26311, 26174]],
+      "image": {
+        "file": "illustrations/in-a-queue.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [288, 12], "hip": 24436},
+          {"pos": [266, 249], "hip": 26311},
+          {"pos": [200, 505], "hip": 27989}
+        ]
+      },
+      "common_name": {"english": "In a queue", "native": "amaKroza"}
+    }
+  ],
+  "common_names": {
+    "HIP 30438": [{"english": "uCanzibe"}],
+    "HIP 32349": [{"english": "iQhawa"}]
+  }
+}

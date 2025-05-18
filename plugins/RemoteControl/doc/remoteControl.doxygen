@@ -44,9 +44,9 @@ It is also possible to define interfaces that control plugins, and dynamically s
 Because the API is based on simple HTTP calls, it can also be called from command-line clients. For example,
 to execute the script "double_stars.ssc", one could use one of the following lines:
 @code
-wget -q --post-data 'id=double_stars.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&amp;1
-curl --data 'id=double_stars.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&amp;1
-curl -d     'id=double_stars.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&amp;1
+wget --post-data "id=double_stars.ssc" http://localhost:8090/api/scripts/run -O /dev/null
+curl --data "id=double_stars.ssc" http://localhost:8090/api/scripts/run
+curl -d     "id=double_stars.ssc" http://localhost:8090/api/scripts/run
 @endcode
 This allows triggering automatic show setups for museums etc.
 

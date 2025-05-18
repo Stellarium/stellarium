@@ -819,6 +819,15 @@ void LensDistortionEstimator::setProjectionCenterMarkerEnabled(const bool enable
 	emit pointMarkersToggled(enable);
 }
 
+void LensDistortionEstimator::setImgPosResetOnLoadingEnabled(const bool enable)
+{
+	if(imgPosResetOnLoadingEnabled == enable) return;
+
+	imgPosResetOnLoadingEnabled = enable;
+	conf_->setValue("LensDistortionEstimator/reset_img_pos_on_loading", enable);
+	emit pointMarkersToggled(enable);
+}
+
 void LensDistortionEstimator::setImageAxesEnabled(const bool enable)
 {
 	if(imageAxesEnabled == enable) return;
@@ -853,6 +862,7 @@ void LensDistortionEstimator::loadSettings()
 	setImageAxesEnabled(conf_->value("LensDistortionEstimator/show_image_axes", false).toBool());
 	setPointMarkersEnabled(conf_->value("LensDistortionEstimator/mark_picked_points", true).toBool());
 	setProjectionCenterMarkerEnabled(conf_->value("LensDistortionEstimator/mark_center_of_projection", false).toBool());
+	setImgPosResetOnLoadingEnabled(conf_->value("LensDistortionEstimator/reset_img_pos_on_loading", true).toBool());
 	imageAxesColor = Vec3f(conf_->value("LensDistortionEstimator/image_axes_color", defaultImageAxesColor).toString());
 	pointMarkerColor = Vec3f(conf_->value("LensDistortionEstimator/point_marker_color", defaultPointMarkerColor).toString());
 	selectedPointMarkerColor = Vec3f(conf_->value("LensDistortionEstimator/selected_point_marker_color", defaultSelectedPointMarkerColor).toString());

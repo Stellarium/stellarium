@@ -50,7 +50,7 @@ public slots:
 //	QString getFormattedDateString() const override;
 
 	//! find RD number for date in the Persian astronomical calendar (CC:UE 15.5)
-	//! @input {year, month, date}
+	//! @param persian {year, month, date}
 	static int fixedFromPersianAstronomical(const QVector<int> &persian);
 	//! alias for fixedFromPersianAstronomical();
 	static int fixedFromPersian(const QVector<int> &persian){return fixedFromPersianAstronomical(persian);}

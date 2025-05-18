@@ -1,0 +1,602 @@
+{
+  "id": "arabic_lunar_mansions",
+  "region": "Western Asia",
+  "classification": ["traditional"],
+  "fallback_to_international_names": false,
+  "constellations": [
+    {
+      "id": "CON arabic_lunar_mansions 0199",
+      "lines": [[72607, 75097]],
+      "common_name": {"english": "The Two Oryx Calves", "native": "الفرقدان", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 0299",
+      "lines": [[11767, 85822, 82080, 77055, 72607, 70692, 69112, 62572, 11767]],
+      "common_name": {"english": "The Axe Of The Grindstone", "native": "فأس الرحى", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 0399",
+      "lines": [[54061, 53910, 58001, 59774, 62956, 65378, 67301]],
+      "common_name": {"english": "Daughters Of Na'sh", "native": "بنات نعش", "references": [1,2,3,4], "translators_comments": "Na'sh is a proper name"}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 0410",
+      "lines": [[55219, 55203]],
+      "common_name": {"english": "The First Leap", "native": "القفزة الأولى", "references": [3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 0420",
+      "lines": [[50372, 50801]],
+      "common_name": {"english": "The Second Leap", "native": "القفزة الثانية", "references": [3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 0430",
+      "lines": [[44127, 44471]],
+      "common_name": {"english": "The Third Leap", "native": "القفزة الثالثة", "references": [3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 0699",
+      "lines": [[83895, 80331]],
+      "common_name": {"english": "The Two Wolves", "native": "الذئبان", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 0799",
+      "lines": [[85819, 85670, 87833, 87585, 85819]],
+      "common_name": {"english": "The Mother Camels", "native": "العوائذ", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 1499",
+      "lines": [[77048, 76127, 75695, 76267, 76952, 77512, 78159, 78493]],
+      "common_name": {"english": "The Bowl Of The Poor", "native": "قصعة المساكين", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 1901",
+      "lines": [[116631, 116805, 116584, 117221]],
+      "common_name": {"english": "The Camel Head", "native": "رأس الناقة", "references": [1,2,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 1902",
+      "lines": [[117221, 841, 2225, 2900, 3414, 3504, 3300, 2920]],
+      "common_name": {"english": "The Camel Neck", "native": "عنق الناقة", "references": [1,2,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 1903",
+      "lines": [[5251, 8068], [4998, 7607]],
+      "common_name": {"english": "The Camel Front Legs", "native": "يدا الناقة", "references": [4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 1999",
+      "lines": [[116631, 116805, 116584, 117221, 841, 2225, 2900, 3414, 3504, 3300, 2920, 2505, 746, 2599, 8886], [2505, 3179, 3821, 4292, 4427, 2599]],
+      "common_name": {"english": "The She-Camel", "native": "الناقة", "references": [1,2,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2501",
+      "lines": [[115250, 115623]],
+      "common_name": {"english": "The Bucket Rope Knot - The Well Poles", "native": "الكرب - النعام", "references": [4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2502",
+      "lines": [[113881, 113963]],
+      "common_name": {"english": "The Front Bucket Mouth", "native": "الفرغ المقدم", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2504",
+      "lines": [[677, 1067]],
+      "common_name": {"english": "The Rear Bucket Mouth", "native": "الفرغ المؤخر", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2550",
+      "lines": [[3881, 3231, 2912, 3031, 3693, 5454, 5571, 6193, 6315, 5447, 3881]],
+      "common_name": {"english": "The Fish", "native": "الرشاء", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2602",
+      "lines": [[9884, 8903]],
+      "common_name": {"english": "The Two Signs", "native": "الشرطان", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2603",
+      "lines": [[12719, 13209, 13061, 12719]],
+      "common_name": {"english": "The Little Abdomen", "native": "البطين", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2604",
+      "lines": [[17608, 17608], [18163, 18163]],
+      "common_name": {"english": "Al-Thurayya", "native": "الثريا", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2605",
+      "lines": [[21421, 21421]],
+      "common_name": {"english": "Al-Dabaran", "native": "الدبران", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2801",
+      "lines": [[37279, 36188]],
+      "common_name": {"english": "The Retracted Arm", "native": "الذراع المقبوضة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2802",
+      "lines": [[36850, 37826]],
+      "common_name": {"english": "The Extended Arm", "native": "الذراع المبسوطة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2803",
+      "lines": [[42806, 42556, 42911], [43004, 43004]],
+      "common_name": {"english": "The Nostrils", "native": "النثرة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2804",
+      "lines": [[47908, 47508]],
+      "common_name": {"english": "The Eyes", "native": "الطرف", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2805",
+      "lines": [[50335, 50583, 49583, 49669]],
+      "common_name": {"english": "The Forehead", "native": "الجبهة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2806",
+      "lines": [[54872, 54879]],
+      "common_name": {"english": "The Mane", "native": "الزبرة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2807",
+      "lines": [[57632, 57632]],
+      "common_name": {"english": "Star Of Weather Change", "native": "الصرفة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2808",
+      "lines": [[63608, 63090, 61941, 60129, 57757]],
+      "common_name": {"english": "The Bend", "native": "العوا", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2809",
+      "lines": [[65474, 65474]],
+      "common_name": {"english": "The Unarmed High One", "native": "السماك الأعزل", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2810",
+      "lines": [[69701, 69427, 69974], [70784, 70784]],
+      "common_name": {"english": "The Cover", "native": "الغفر", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2901",
+      "lines": [[72622, 74785]],
+      "common_name": {"english": "Claws Of The Scorpion", "native": "الزبانى", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2902",
+      "lines": [[78820, 78401, 78265]],
+      "common_name": {"english": "The Diadem", "native": "الإكليل", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2903",
+      "lines": [[80763, 80763]],
+      "common_name": {"english": "The Heart", "native": "القلب", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2906",
+      "lines": [[85927, 85696]],
+      "common_name": {"english": "Raised Tail Of The Scorpion", "native": "الشولة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 2999",
+      "lines": [[74785, 78820, 80112], [72622, 78265, 80112], [78401, 80112, 80763, 81266, 82396, 82514, 82729, 84143, 86228, 87073, 86670, 85927]],
+      "common_name": {"english": "The Scorpion", "native": "العقرب", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 3001",
+      "lines": [[88635, 89642, 90185, 89931, 88635]],
+      "common_name": {"english": "The Ostriches Drinking At The River", "native": "النعام الوارد", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 3002",
+      "lines": [[92855, 93864, 93506, 92041, 92855]],
+      "common_name": {"english": "The Ostriches Leaving The River", "native": "النعام الصادر", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 3003",
+      "lines": [[93085, 93683, 94141, 94820, 95168, 95176]],
+      "common_name": {"english": "The Ostrich Nest - The Necklace", "native": "الأدحي - القلادة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 3005",
+      "lines": [[97290, 96760, 95503, 95564, 96440, 97290]],
+      "common_name": {"english": "The Empty Place", "native": "البلدة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 3099",
+      "lines": [[89931, 90185, 93506, 92041, 89931], [88635, 89642, 90185, 89931, 88635], [92855, 93864, 93506, 92041, 92855], [89931, 90496, 92041]],
+      "common_name": {"english": "The Ostriches", "native": "النعائم", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 3199",
+      "lines": [[100064, 100310, 100345]],
+      "common_name": {"english": "The Lucky Star Of The Slaughterer", "native": "سعد الذابح", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 3299",
+      "lines": [[102618, 103045, 104459]],
+      "common_name": {"english": "The Lucky Star Of The Swallower", "native": "سعد بلع", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 3399",
+      "lines": [[106278, 106786, 107382]],
+      "common_name": {"english": "The Luckiest Of The Lucky Stars", "native": "سعد السعود", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 3499",
+      "lines": [[110395, 110960, 110672], [110960, 111497], [110395, 110672], [110395, 111497]],
+      "common_name": {"english": "The Lucky Star Of The Tents", "native": "سعد الأخبية", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 3599",
+      "lines": [[106985, 107556]],
+      "common_name": {"english": "The Lucky Star Of Nashira", "native": "سعد ناشرة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 3699",
+      "lines": [[109074, 108874]],
+      "common_name": {"english": "The Lucky Star Of The King", "native": "سعد الملك", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 3799",
+      "lines": [[109427, 109068]],
+      "common_name": {"english": "The Lucky Star Of The Young Sheep", "native": "سعد البهام", "references": [2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 3899",
+      "lines": [[112029, 112447]],
+      "common_name": {"english": "The Lucky Star Of The One With Great Endeavour", "native": "سعد الهمام", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 3999",
+      "lines": [[112440, 112748]],
+      "common_name": {"english": "The Lucky Star Of The Excellent One", "native": "سعد البارع", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 4099",
+      "lines": [[112158, 112051]],
+      "common_name": {"english": "The Lucky Star Of Matar", "native": "سعد مطر", "references": [1,2,3,4], "translators_comments": "Matar is a proper name meaning rain."}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 4201",
+      "lines": [[26207, 26176, 26366, 26207], [26444, 26444]],
+      "common_name": {"english": "The Circular Mark", "native": "الهقعة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 4202",
+      "lines": [[25930, 26311, 26727]],
+      "common_name": {"english": "The String", "native": "النظم", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 4206",
+      "lines": [[31681, 32362]],
+      "common_name": {"english": "The Downward Bend", "native": "الهنعة", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 4299",
+      "lines": [[26207, 26487], [25336, 26487, 27989], [25336, 25930, 26311, 26727, 27366, 24436], [27989, 32362], [30419, 31216, 31978, 32362, 31681, 30883, 30343, 29655], [24010, 23607, 22957, 22509, 22449, 22549, 22797, 23123], [25336, 22449], [24436, 25930], [27989, 26727]],
+      "common_name": {"english": "Al-Jawza", "native": "الجوزاء", "references": [1,2,3,4], "translators_comments": "Al-Jawza is a proper name"}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 5599",
+      "lines": [[101772, 100751]],
+      "common_name": {"english": "The Two Shrikes", "native": "الصردان", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 5699",
+      "lines": [[112122, 109268]],
+      "common_name": {"english": "The Two Doves", "native": "اليمامتان", "references": [1,2,3,4]}
+    },
+    {
+      "id": "CON arabic_lunar_mansions 5799",
+      "lines": [[113368, 3419]],
+      "common_name": {"english": "The Two Male Ostriches", "native": "الظليمان", "references": [1,2,3,4]}
+    }
+  ],
+  "edges_type": "own",
+  "edges": [
+    "___:___ __ 03:34:48 +08:58:02 03:24:45 +18:39:58 2604 2603",
+    "___:___ __ 03:24:45 +18:39:58 03:13:28 +28:19:38 2604 2603",
+    "___:___ __ 03:13:28 +28:19:38 03:41:33 +29:54:20 2604 0199",
+    "___:___ __ 03:41:33 +29:54:20 04:10:19 +31:13:22 2604 0199",
+    "___:___ __ 04:25:12 +11:31:16 03:59:51 +10:21:57 2604 5699",
+    "___:___ __ 03:59:51 +10:21:57 03:34:48 +08:58:02 2604 5699",
+    "___:___ __ 04:25:12 +11:31:16 04:18:16 +21:22:56 2605 2604",
+    "___:___ __ 04:18:16 +21:22:56 04:10:19 +31:13:22 2605 2604",
+    "___:___ __ 04:10:19 +31:13:22 04:39:42 +32:15:09 2605 0199",
+    "___:___ __ 04:39:42 +32:15:09 05:09:35 +32:58:18 2605 0199",
+    "___:___ __ 05:16:40 +13:02:14 04:50:50 +12:24:58 2605 5699",
+    "___:___ __ 04:50:50 +12:24:58 04:25:12 +11:31:16 2605 5699",
+    "___:___ __ 05:18:12 +08:03:05 05:16:40 +13:02:14 4201 0199",
+    "___:___ __ 05:16:40 +13:02:14 05:13:23 +23:00:25 2605 4201",
+    "___:___ __ 05:13:23 +23:00:25 05:09:35 +32:58:18 2605 4201",
+    "___:___ __ 05:09:35 +32:58:18 05:39:47 +33:21:51 4201 0199",
+    "___:___ __ 05:39:47 +33:21:51 06:10:07 +33:25:14 4201 0199",
+    "___:___ __ 06:08:22 +08:25:25 05:43:16 +08:22:37 4201 5699",
+    "___:___ __ 05:43:16 +08:22:37 05:18:12 +08:03:05 4201 5699",
+    "___:___ __ 06:08:37 +12:25:24 06:08:22 +08:25:25 4201 5699",
+    "___:___ __ 06:08:37 +12:25:24 06:09:20 +23:25:19 4206 4201",
+    "___:___ __ 06:09:20 +23:25:19 06:10:07 +33:25:14 4206 4201",
+    "___:___ __ 06:10:07 +33:25:14 06:40:23 +33:08:22 4206 0199",
+    "___:___ __ 06:40:23 +33:08:22 07:10:23 +32:31:39 4206 0199",
+    "___:___ __ 07:00:09 +11:39:35 06:34:26 +12:11:01 4206 5699",
+    "___:___ __ 06:34:26 +12:11:01 06:08:37 +12:25:24 4206 5699",
+    "___:___ __ 07:10:58 +33:31:12 07:10:23 +32:31:39 2801 0199",
+    "___:___ __ 07:00:09 +11:39:35 07:05:07 +22:35:44 2801 4206",
+    "___:___ __ 07:05:07 +22:35:44 07:10:23 +32:31:39 2801 4206",
+    "___:___ __ 07:00:09 +11:39:35 06:57:37 +05:41:33 2801 5699",
+    "___:___ __ 07:10:58 +33:31:12 07:40:46 +32:35:04 2801 0199",
+    "___:___ __ 07:40:46 +32:35:04 08:09:57 +31:21:05 2801 0199",
+    "___:___ __ 07:46:26 +03:54:11 07:22:07 +04:55:31 2801 5699",
+    "___:___ __ 07:22:07 +04:55:31 06:57:37 +05:41:33 2801 5699",
+    "___:___ __ 08:09:57 +31:21:05 08:08:56 +30:22:30 2801 0199",
+    "___:___ __ 07:51:44 +10:46:44 07:46:26 +03:54:11 2801 5699",
+    "___:___ __ 07:51:44 +10:46:44 07:59:47 +20:35:25 2803 2801",
+    "___:___ __ 07:59:47 +20:35:25 08:08:56 +30:22:30 2803 2801",
+    "___:___ __ 08:08:56 +30:22:30 08:37:15 +28:52:50 2803 0199",
+    "___:___ __ 08:37:15 +28:52:50 09:04:51 +27:08:42 2803 0199",
+    "___:___ __ 08:41:44 +07:54:33 08:16:53 +09:27:33 2803 5699",
+    "___:___ __ 08:16:53 +09:27:33 07:51:44 +10:46:44 2803 5699",
+    "___:___ __ 08:41:44 +07:54:33 08:52:40 +17:32:53 2804 2803",
+    "___:___ __ 08:52:40 +17:32:53 09:04:51 +27:08:42 2804 2803",
+    "___:___ __ 09:04:51 +27:08:42 09:31:42 +25:11:57 2804 0199",
+    "___:___ __ 09:31:42 +25:11:57 09:57:51 +23:04:31 2804 0199",
+    "___:___ __ 09:30:26 +04:12:13 09:06:14 +06:08:59 2804 5699",
+    "___:___ __ 09:06:14 +06:08:59 08:41:44 +07:54:33 2804 5699",
+    "___:___ __ 10:02:29 +25:53:01 09:57:51 +23:04:31 2805 0199",
+    "___:___ __ 09:30:26 +04:12:13 09:43:35 +13:39:46 2805 2804",
+    "___:___ __ 09:43:35 +13:39:46 09:57:51 +23:04:31 2805 2804",
+    "___:___ __ 10:02:29 +25:53:01 10:28:09 +23:35:22 2805 0199",
+    "___:___ __ 10:28:09 +23:35:22 10:53:11 +21:11:06 2805 0199",
+    "___:___ __ 10:18:02 -00:09:10 09:54:21 +02:05:40 2805 5699",
+    "___:___ __ 09:54:21 +02:05:40 09:30:26 +04:12:13 2805 5699",
+    "___:___ __ 10:56:35 +23:01:25 10:53:11 +21:11:06 2806 0199",
+    "___:___ __ 10:18:02 -00:09:10 10:32:44 +09:09:10 2806 2805",
+    "___:___ __ 10:32:44 +09:09:10 10:53:11 +21:11:06 2806 2805",
+    "___:___ __ 10:56:35 +23:01:25 11:21:05 +20:31:51 2806 0199",
+    "___:___ __ 11:21:05 +20:31:51 11:45:06 +17:59:33 2806 0199",
+    "___:___ __ 11:04:56 -04:57:42 10:41:32 -02:30:48 2806 5699",
+    "___:___ __ 10:41:32 -02:30:48 10:18:02 -00:09:10 2806 5699",
+    "___:___ __ 11:04:56 -04:57:42 11:20:36 +04:14:27 2807 2806",
+    "___:___ __ 11:20:36 +04:14:27 11:45:06 +17:59:33 2807 2806",
+    "___:___ __ 11:45:06 +17:59:33 12:08:44 +15:26:12 2807 0199",
+    "___:___ __ 12:08:44 +15:26:12 12:32:06 +12:53:27 2807 0199",
+    "___:___ __ 11:51:47 -10:01:07 11:28:20 -07:28:20 2807 5699",
+    "___:___ __ 11:28:20 -07:28:20 11:04:56 -04:57:42 2807 5699",
+    "___:___ __ 12:35:28 +14:42:56 12:32:06 +12:53:27 2808 0199",
+    "___:___ __ 11:51:47 -10:01:07 12:07:52 -00:51:08 2808 2807",
+    "___:___ __ 12:07:52 -00:51:08 12:32:06 +12:53:27 2808 2807",
+    "___:___ __ 12:35:28 +14:42:56 12:58:34 +12:12:48 2808 0199",
+    "___:___ __ 12:58:34 +12:12:48 13:21:34 +09:46:33 2808 0199",
+    "___:___ __ 12:39:19 -15:06:43 12:15:25 -12:34:27 2808 5699",
+    "___:___ __ 12:15:25 -12:34:27 11:51:47 -10:01:07 2808 5699",
+    "___:___ __ 13:21:34 +09:46:33 13:10:39 +03:19:16 2808 0199",
+    "___:___ __ 12:39:19 -15:06:43 12:55:15 -05:54:33 2809 2808",
+    "___:___ __ 12:55:15 -05:54:33 13:10:39 +03:19:16 2809 2808",
+    "___:___ __ 13:10:39 +03:19:16 13:34:07 +00:55:42 2809 0199",
+    "___:___ __ 13:34:07 +00:55:42 13:57:44 -01:21:34 2809 0199",
+    "___:___ __ 13:28:18 -20:01:15 13:03:34 -17:36:14 2809 5699",
+    "___:___ __ 13:03:34 -17:36:14 12:39:19 -15:06:43 2809 5699",
+    "___:___ __ 13:28:18 -20:01:15 13:43:29 -10:42:42 2810 2809",
+    "___:___ __ 13:43:29 -10:42:42 13:57:44 -01:21:34 2810 2809",
+    "___:___ __ 13:57:44 -01:21:34 14:21:34 -03:31:03 2810 0199",
+    "___:___ __ 14:21:34 -03:31:03 14:45:40 -05:31:14 2810 0199",
+    "___:___ __ 14:19:31 -24:30:34 13:53:35 -22:19:59 2810 5699",
+    "___:___ __ 13:53:35 -22:19:59 13:28:18 -20:01:15 2810 5699",
+    "___:___ __ 14:19:31 -24:30:34 14:33:10 -15:02:18 2901 2810",
+    "___:___ __ 14:33:10 -15:02:18 14:45:40 -05:31:14 2901 2810",
+    "___:___ __ 14:45:40 -05:31:14 15:10:04 -07:20:42 2901 0199",
+    "___:___ __ 15:10:04 -07:20:42 15:34:48 -08:58:02 2901 0199",
+    "___:___ __ 15:13:28 -28:19:38 14:46:07 -26:31:05 2901 5699",
+    "___:___ __ 14:46:07 -26:31:05 14:19:31 -24:30:34 2901 5699",
+    "___:___ __ 15:13:28 -28:19:38 15:24:45 -18:39:58 2902 2901",
+    "___:___ __ 15:24:45 -18:39:58 15:34:48 -08:58:02 2902 2901",
+    "___:___ __ 15:34:48 -08:58:02 15:59:51 -10:21:57 2902 0199",
+    "___:___ __ 15:59:51 -10:21:57 16:25:12 -11:31:16 2902 0199",
+    "___:___ __ 16:10:19 -31:13:22 15:41:33 -29:54:20 2902 5699",
+    "___:___ __ 15:41:33 -29:54:20 15:13:28 -28:19:38 2902 5699",
+    "___:___ __ 16:10:19 -31:13:22 16:18:16 -21:22:56 2903 2902",
+    "___:___ __ 16:18:16 -21:22:56 16:25:12 -11:31:16 2903 2902",
+    "___:___ __ 16:25:12 -11:31:16 16:50:50 -12:24:58 2903 0199",
+    "___:___ __ 16:50:50 -12:24:58 17:16:40 -13:02:14 2903 0199",
+    "___:___ __ 17:09:35 -32:58:18 16:39:42 -32:15:09 2903 5699",
+    "___:___ __ 16:39:42 -32:15:09 16:10:19 -31:13:22 2903 5699",
+    "___:___ __ 17:09:35 -32:58:18 17:07:21 -37:57:03 2906 5699",
+    "___:___ __ 17:09:35 -32:58:18 17:13:23 -23:00:25 2906 2903",
+    "___:___ __ 17:13:23 -23:00:25 17:16:40 -13:02:14 2906 2903",
+    "___:___ __ 17:16:40 -13:02:14 17:42:39 -13:22:29 2906 0199",
+    "___:___ __ 17:42:39 -13:22:29 18:08:41 -13:25:23 2906 0199",
+    "___:___ __ 18:10:34 -38:25:11 17:38:52 -38:21:39 2906 5699",
+    "___:___ __ 17:38:52 -38:21:39 17:07:21 -37:57:03 2906 5699",
+    "___:___ __ 18:10:34 -38:25:11 18:09:20 -23:25:19 3099 2906",
+    "___:___ __ 18:09:20 -23:25:19 18:08:41 -13:25:23 3099 2906",
+    "___:___ __ 18:08:41 -13:25:23 18:34:41 -13:10:54 3099 0199",
+    "___:___ __ 18:34:41 -13:10:54 19:00:34 -12:39:15 3099 0199",
+    "___:___ __ 19:13:28 -37:29:16 18:42:11 -38:07:34 3099 5699",
+    "___:___ __ 18:42:11 -38:07:34 18:10:34 -38:25:11 3099 5699",
+    "___:___ __ 19:10:23 -32:31:39 19:13:28 -37:29:16 3099 5699",
+    "___:___ __ 19:10:23 -32:31:39 19:05:07 -22:35:44 3005 3099",
+    "___:___ __ 19:05:07 -22:35:44 19:00:34 -12:39:15 3005 3099",
+    "___:___ __ 19:00:34 -12:39:15 19:26:17 -11:50:57 3005 0199",
+    "___:___ __ 19:26:17 -11:50:57 19:51:44 -10:46:44 3005 0199",
+    "___:___ __ 20:08:56 -30:22:30 19:39:57 -31:35:57 3005 5699",
+    "___:___ __ 19:39:57 -31:35:57 19:10:23 -32:31:39 3005 5699",
+    "___:___ __ 20:08:56 -30:22:30 19:59:47 -20:35:25 3199 3005",
+    "___:___ __ 19:59:47 -20:35:25 19:51:44 -10:46:44 3199 3005",
+    "___:___ __ 19:51:44 -10:46:44 20:16:53 -09:27:33 3199 0199",
+    "___:___ __ 20:16:53 -09:27:33 20:41:44 -07:54:33 3199 0199",
+    "___:___ __ 21:04:51 -27:08:42 20:37:15 -28:52:50 3199 5699",
+    "___:___ __ 20:37:15 -28:52:50 20:08:56 -30:22:30 3199 5699",
+    "___:___ __ 21:04:51 -27:08:42 20:52:40 -17:32:53 3299 3199",
+    "___:___ __ 20:52:40 -17:32:53 20:41:44 -07:54:33 3299 3199",
+    "___:___ __ 20:41:44 -07:54:33 21:06:14 -06:08:59 3299 0199",
+    "___:___ __ 21:06:14 -06:08:59 21:30:26 -04:12:13 3299 0199",
+    "___:___ __ 21:57:51 -23:04:31 21:31:42 -25:11:57 3299 5699",
+    "___:___ __ 21:31:42 -25:11:57 21:04:51 -27:08:42 3299 5699",
+    "___:___ __ 21:57:51 -23:04:31 21:43:35 -13:39:46 3399 3299",
+    "___:___ __ 21:43:35 -13:39:46 21:30:26 -04:12:13 3399 3299",
+    "___:___ __ 21:30:26 -04:12:13 21:54:21 -02:05:40 3399 0199",
+    "___:___ __ 21:54:21 -02:05:40 22:18:02 +00:09:10 3399 0199",
+    "___:___ __ 22:48:14 -18:25:10 22:23:20 -20:48:17 3399 5699",
+    "___:___ __ 22:23:20 -20:48:17 21:57:51 -23:04:31 3399 5699",
+    "___:___ __ 22:15:07 +02:00:54 22:18:02 +00:09:10 3499 0199",
+    "___:___ __ 22:48:14 -18:25:10 22:32:44 -09:09:10 3499 3399",
+    "___:___ __ 22:32:44 -09:09:10 22:18:02 +00:09:10 3499 3399",
+    "___:___ __ 22:15:07 +02:00:54 22:38:29 +04:21:46 3499 0199",
+    "___:___ __ 22:38:29 +04:21:46 23:01:47 +06:48:03 3499 0199",
+    "___:___ __ 23:36:39 -13:25:25 23:12:39 -15:56:57 3499 5699",
+    "___:___ __ 23:12:39 -15:56:57 22:48:14 -18:25:10 3499 5699",
+    "___:___ __ 22:25:40 +25:57:20 23:01:47 +06:48:03 2502 0199",
+    "___:___ __ 23:36:39 -13:25:25 23:20:36 -04:14:27 2502 3499",
+    "___:___ __ 23:20:36 -04:14:27 23:01:47 +06:48:03 2502 3499",
+    "___:___ __ 22:25:40 +25:57:20 22:47:24 +28:20:39 2502 0199",
+    "___:___ __ 22:47:24 +28:20:39 23:09:28 +30:48:31 2502 0199",
+    "___:___ __ 00:23:52 -08:19:06 00:00:22 -10:52:15 2502 5699",
+    "___:___ __ 00:00:22 -10:52:15 23:36:39 -13:25:25 2502 5699",
+    "___:___ __ 23:09:28 +30:48:31 23:21:45 +25:27:13 2502 0199",
+    "___:___ __ 00:23:52 -08:19:06 00:07:52 +00:51:08 2504 2502",
+    "___:___ __ 00:07:52 +00:51:08 23:21:45 +25:27:13 2504 2502",
+    "___:___ __ 23:21:45 +25:27:13 23:44:44 +27:59:32 2504 0199",
+    "___:___ __ 23:44:44 +27:59:32 00:08:15 +30:32:53 2504 0199",
+    "___:___ __ 01:10:39 -03:19:16 00:47:16 -05:47:35 2504 5699",
+    "___:___ __ 00:47:16 -05:47:35 00:23:52 -08:19:06 2504 5699",
+    "___:___ __ 23:50:16 +37:37:53 00:08:15 +30:32:53 2550 0199",
+    "___:___ __ 01:10:39 -03:19:16 00:55:15 +05:54:33 2550 2504",
+    "___:___ __ 00:55:15 +05:54:33 00:08:15 +30:32:53 2550 2504",
+    "___:___ __ 23:50:16 +37:37:53 00:13:56 +40:11:14 2550 0199",
+    "___:___ __ 00:13:56 +40:11:14 00:38:34 +42:43:36 2550 0199",
+    "___:___ __ 01:57:44 +01:21:34 01:34:07 -00:55:42 2550 5699",
+    "___:___ __ 01:34:07 -00:55:42 01:10:39 -03:19:16 2550 5699",
+    "___:___ __ 00:38:34 +42:43:36 01:25:05 +21:52:25 2550 0199",
+    "___:___ __ 01:57:44 +01:21:34 01:43:29 +10:42:42 2602 2550",
+    "___:___ __ 01:43:29 +10:42:42 01:25:05 +21:52:25 2602 2550",
+    "___:___ __ 01:25:05 +21:52:25 01:50:28 +24:12:03 2602 0199",
+    "___:___ __ 01:50:28 +24:12:03 02:16:33 +26:23:40 2602 0199",
+    "___:___ __ 02:45:40 +05:31:14 02:21:34 +03:31:03 2602 5699",
+    "___:___ __ 02:21:34 +03:31:03 01:57:44 +01:21:34 2602 5699",
+    "___:___ __ 02:11:55 +29:12:53 02:16:33 +26:23:40 2603 0199",
+    "___:___ __ 02:45:40 +05:31:14 02:33:10 +15:02:18 2603 2602",
+    "___:___ __ 02:33:10 +15:02:18 02:16:33 +26:23:40 2603 2602",
+    "___:___ __ 02:11:55 +29:12:53 02:39:03 +31:16:23 2603 0199",
+    "___:___ __ 02:39:03 +31:16:23 03:07:04 +33:08:04 2603 0199",
+    "___:___ __ 03:34:48 +08:58:02 03:10:04 +07:20:42 2603 5699",
+    "___:___ __ 03:10:04 +07:20:42 02:45:40 +05:31:14 2603 5699",
+    "___:___ __ 03:07:04 +33:08:04 03:13:28 +28:19:38 2603 0199"
+  ],
+  "common_names": {
+    "HIP 677": [{"english": "The Rear Bucket Mouth 2", "references": [1,2,3,4]}],
+    "HIP 746": [{"english": "The Camel Hump", "references": [1,2,3,4]}],
+    "HIP 1067": [{"english": "The Rear Bucket Mouth 1", "references": [1,2,3,4]}],
+    "HIP 2081": [{"english": "Hadari", "references": [1,2,3,4], "translators_comments": "This is a proper name"}],
+    "HIP 3419": [{"english": "The Two Male Ostriches 2", "references": [1,2,3,4]}],
+    "HIP 5447": [{"english": "Abdomen Of The Fish", "references": [1,2]}],
+    "HIP 7588": [{"english": "Oath Star", "references": [1,2,3,4]},
+                 {"english": "Al-Wazn", "references": [1,2,3,4], "translators_comments": "This is a proper name"}],
+    "HIP 8796": [{"english": "The Two Forelegs 1", "references": [1,2,3,4]}],
+    "HIP 9640": [{"english": "The Caracal", "references": [1,2,3,4]}],
+    "HIP 10064": [{"english": "The Two Forelegs 2", "references": [1,2,3,4]}],
+    "HIP 11020": [{"english": "The Wrist", "references": [1,2,3,4]}],
+    "HIP 11767": [{"english": "The Kid", "references": [1,2,3,4]}],
+    "HIP 14328": [{"english": "The Forearm", "references": [2,3,4]}],
+    "HIP 15863": [{"english": "The Elbow", "references": [1,2,3,4]}],
+    "HIP 16335": [{"english": "Bend Of The Hand", "references": [1,2,3,4]}],
+    "HIP 17358": [{"english": "Tip Of The Elbow", "references": [1,2,3,4]}],
+    "HIP 18246": [{"english": "The Shoulder Blade", "references": [1,2,3,4]}],
+    "HIP 18532": [{"english": "The Arm", "references": [1,2,3,4]}],
+    "HIP 18614": [{"english": "The Shoulder", "references": [1,2,3,4]}],
+    "HIP 21421": [{"english": "Al-Dabaran", "references": [1,2,3,4], "translators_comments": "This is a proper name"}],
+    "HIP 23015": [{"english": "Foot Of Al-Ayyuq", "references": [1,2,3], "translators_comments": "Al-Ayyuq is a proper name"}],
+    "HIP 24436": [{"english": "Leg Of Al-Jawza", "references": [1,2,3,4], "translators_comments": "Al-Jawza is a proper name"}],
+    "HIP 24608": [{"english": "Al-Ayyuq", "references": [1,2,3,4], "translators_comments": "This is a proper name"}],
+    "HIP 25336": [{"english": "Al-Najidh", "references": [2,3,4], "translators_comments": "This is a proper name"}],
+    "HIP 25428": [{"english": "The Posts 3", "references": [1,2,3,4]}],
+    "HIP 26366": [{"english": "The Circular Mark", "references": [1,2,3,4]}],
+    "HIP 27989": [{"english": "Shoulder Of Al-Jawza", "references": [2,3,4], "translators_comments": "Al-Jawza is a proper name"}],
+    "HIP 28360": [{"english": "The Posts 1", "references": [1,2,3,4]}],
+    "HIP 28380": [{"english": "The Posts 2", "references": [1,2,3,4]}],
+    "HIP 29655": [{"english": "Stars Of Abundant Rain 1", "references": [1,2,3,4]}],
+    "HIP 30324": [{"english": "Mirzam Of The Crossing Shi'ra", "references": [1,2,3,4], "translators_comments": "Mirzam is an associate star of the crossing Shi'ra which is a proper Arabic name of Sirius"}],
+    "HIP 30343": [{"english": "Stars Of Abundant Rain 2", "references": [1,2,3,4]}],
+    "HIP 30438": [{"english": "Suhayl", "references": [1,2,3,4], "translators_comments": "This is a proper name"}],
+    "HIP 30883": [{"english": "Stars Of Abundant Rain 3", "references": [1,2,3,4]}],
+    "HIP 31681": [{"english": "Az-Zir", "references": [1,2,3,4], "translators_comments": "This is a proper name"}],
+    "HIP 32349": [{"english": "The Southern Shi'ra", "references": [1,2,3,4], "translators_comments": "Al-Shi'ra is a proper name of Sirius"}],
+    "HIP 32362": [{"english": "Al-Maysan", "references": [1,2,3,4], "translators_comments": "This is a proper name"}],
+    "HIP 32768": [{"english": "Suhayl Balqayn", "references": [1,2,3,4], "translators_comments": "This is a proper name"}],
+    "HIP 34088": [{"english": "The Claws 5", "references": [1,3,4]}],
+    "HIP 35350": [{"english": "The Claws 6", "references": [1,3,4]}],
+    "HIP 35550": [{"english": "The Claws 4", "references": [1,3,4]}],
+    "HIP 36046": [{"english": "The Claws 1", "references": [1,3,4]}],
+    "HIP 36188": [{"english": "Mirzam of The Arm", "references": [1,2,3], "translators_comments": "Mirzam is an associate star of the tearful Shi'ra, which is a proper Arabic name of Procyon. The two stars together are called the Arm."}],
+    "HIP 36962": [{"english": "The Claws 2", "references": [1,3,4]}],
+    "HIP 37279": [{"english": "The Northern Shi'ra", "references": [1,2,3,4], "translators_comments": "Al-Shi'ra is a proper name"}],
+    "HIP 37740": [{"english": "The Claws 3", "references": [1,3,4]}],
+    "HIP 39429": [{"english": "Suhayl Hadari", "references": [4], "translators_comments": "This is a proper name"}],
+    "HIP 39953": [{"english": "Suhayl Al-Wazn", "references": [4], "translators_comments": "This is a proper name"}],
+    "HIP 44816": [{"english": "Suhayl Raqashi", "references": [4], "translators_comments": "This is a proper name"}],
+    "HIP 46390": [{"english": "The sole one", "references": [1,2,3,4]}],
+    "HIP 57632": [{"english": "Star Of Weather Change", "references": [1,2,3,4]}],
+    "HIP 62956": [{"english": "The Dark Camel", "references": [2,4]}],
+    "HIP 63125": [{"english": "Liver Of The Lion", "references": [1,2,3,4]}],
+    "HIP 65378": [{"english": "The Little Goat", "references": [1,2,3,4]}],
+    "HIP 65474": [{"english": "The Unarmed High One", "references": [1,2,3,4]}],
+    "HIP 65477": [{"english": "Al-Suha", "references": [1,2,3,4], "translators_comments": "This is a proper name"}],
+    "HIP 67301": [{"english": "The Leader", "references": [1,2,3,4]}],
+    "HIP 67927": [{"english": "The Spear 1", "references": [2,3,4]}],
+    "HIP 69673": [{"english": "The High One With The Spear", "references": [1,2,3,4]}],
+    "HIP 72105": [{"english": "The Spear 2", "references": [2,3,4]}],
+    "HIP 72607": [{"english": "The Two Calves 1", "references": [1,2,3,4]}],
+    "HIP 75097": [{"english": "The Two Calves 2", "references": [1,2,3,4]}],
+    "HIP 75458": [{"english": "The Male Hyena", "references": [1,2,3,4]}],
+    "HIP 76267": [{"english": "The Bright Star Of Al-Fakkah", "references": [1,2,3,4]}],
+    "HIP 80112": [{"english": "Veins Of The Heart 1", "references": [1,2,3,4]}],
+    "HIP 80331": [{"english": "The Two Wolves 2", "references": [1,2,3,4]}],
+    "HIP 80763": [{"english": "The Heart", "references": [1,2,3,4]}],
+    "HIP 81266": [{"english": "Veins Of The Heart 2", "references": [1,2,3,4]}],
+    "HIP 82396": [{"english": "Tail Segments Of The Scorpion 1", "references": [2,3,4]}],
+    "HIP 82514": [{"english": "Tail Segments Of The Scorpion 2", "references": [2,3,4]}],
+    "HIP 82729": [{"english": "Tail Segments Of The Scorpion 3", "references": [2,3,4]}],
+    "HIP 83895": [{"english": "The Two Wolves 1", "references": [1,2,3,4]}],
+    "HIP 84143": [{"english": "Tail Segments Of The Scorpion 4", "references": [2,3,4]}],
+    "HIP 84345": [{"english": "First Dog Of The [Southern] Shepherd", "references": [2,3,4]}],
+    "HIP 85927": [{"english": "Raised Tail Of The Scorpion", "references": [1,2,3,4]}],
+    "HIP 86032": [{"english": "The [Southern] Shepherd", "references": [1,2,3,4]}],
+    "HIP 86228": [{"english": "Tail Segments Of The Scorpion 5", "references": [2,3,4]}],
+    "HIP 86670": [{"english": "Tail Segments Of The Scorpion 7", "references": [2,3,4]}],
+    "HIP 86742": [{"english": "Second Dog Of The [Southern] Shepherd", "references": [4]}],
+    "HIP 86782": [{"english": "The Baby Camel", "references": [1,2,3,4]}],
+    "HIP 87073": [{"english": "Tail Segments Of The Scorpion 6", "references": [2,3,4]}],
+    "HIP 91262": [{"english": "The Landing Eagle", "references": [1,2,3,4]}],
+    "HIP 94779": [{"english": "The Knights 1", "references": [1,2,3,4]}],
+    "HIP 97165": [{"english": "The Knights 2", "references": [1,2,3,4]}],
+    "HIP 97649": [{"english": "The Flying Eagle", "references": [1,2,3,4]}],
+    "HIP 100453": [{"english": "The Knights 3", "references": [1,2,3,4]}],
+    "HIP 100751": [{"english": "The Two Shrikes 2", "references": [1,2,3]}],
+    "HIP 101772": [{"english": "The Two Shrikes 1", "references": [1,2,3]}],
+    "HIP 102098": [{"english": "The Rear Knight", "references": [1,2,3,4]}],
+    "HIP 102488": [{"english": "The Knights 4", "references": [1,2,3,4]}],
+    "HIP 104732": [{"english": "The Knights 5", "references": [1,2,3,4]}],
+    "HIP 105199": [{"english": "The White One", "references": [1,3]}],
+    "HIP 108917": [{"english": "The Horse Forehead Star", "references": [1,2,3,4]}],
+    "HIP 109268": [{"english": "The Two Doves 1", "references": [1,2,3]}],
+    "HIP 112122": [{"english": "The Two Doves 2", "references": [1,2,3]}],
+    "HIP 113368": [{"english": "The Two Male Ostriches 1", "references": [1,2,3,4]}],
+    "HIP 113881": [{"english": "The Front Bucket Mouth 2", "references": [1,2,3,4]}],
+    "HIP 113963": [{"english": "The Front Bucket Mouth 1", "references": [1,2,3,4]}],
+    "HIP 114222": [{"english": "The [Northern] Shepherd Dog", "references": [1,2,3,4]}],
+    "HIP 116727": [{"english": "The [Northern] Shepherd", "references": [1,2,3,4]}],
+    "M 44": [{"english": "The Lion's Nostrils", "references": [1,2,3,4]}],
+    "M 45": [{"english": "Al-Thurayya", "references": [1,2,3,4], "translators_comments": "Al-Thurayya is a proper name for the Pleiades"}],
+    "NGC 869": [{"english": "The Wrist 1", "references": [1,2,4]}],
+    "NGC 884": [{"english": "The Wrist 2", "references": [1,2,4]}],
+    "NAME Jupiter": [{"english": "The Shining One", "native": "المشتري", "translators_comments": "Al-Mushtari is the native proper name for Jupiter, derived from shining like light shining. See Ref. # 2."}],
+    "NAME Mars": [{"english": "The Fire Starter", "native": "المريخ", "translators_comments": "Al-Merrikh is the native proper name for Mars, derived from Marakh (ARABIC: مرخ), a plant which is used to start fire. See Ref. # 2."}],
+    "NAME Mercury": [{"english": "The Unstable", "native": "عطارد", "translators_comments": "Utarid is the native proper name for Mercury, derived from unstableness (mercurial).  See Ref. # 2."}],
+    "NAME Moon": [{"english": "The Strongly White", "native": "القمر", "translators_comments": "Al-Qamar is the native proper name for the Moon, derived from strong whiteness.  See Ref. # 2. and Taj al-Arous lexicon."}],
+    "NAME Saturn": [{"english": "The Remote One", "native": "زحل", "translators_comments": "Zuhal is the native proper name for Saturn, derived from remoteness.  See Ref. # 2."}],
+    "NAME Sun": [{"english": "Ush-Shams", "native": "الشمس", "translators_comments": "Ush-shams is the native proper name for the Sun."}],
+    "NAME Venus": [{"english": "The Beautiful Bright One", "native": "الزهرة", "translators_comments": "Az- Zuharah is the native proper name for Venus, derived from brightness and beauty. See Ref. # 2."}]
+  }
+}

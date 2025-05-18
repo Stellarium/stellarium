@@ -1,0 +1,1794 @@
+{
+  "id": "modern_rey",
+  "region": "World",
+  "classification": ["single"],
+  "fallback_to_international_names": false,
+  "asterisms": [
+    {
+      "id": "AST modern_rey BigD",
+      "common_name": {"english": "Big Dipper"},
+      "lines": [[67301, 65378, 62956, 59774, 54061, 53910, 58001, 59774]]
+    },
+    {
+      "id": "AST modern_rey VirD",
+      "common_name": {"english": "Virgin's Diamond"},
+      "lines": [[65474, 57632, 63125, 69673, 65474]]
+    },
+    {
+      "id": "AST modern_rey GSq",
+      "common_name": {"english": "Great Square"},
+      "lines": [[113963, 113881, 677, 1067, 113963]]
+    },
+    {
+      "id": "AST modern_rey GHx",
+      "common_name": {"english": "Great Hexagon"},
+      "lines": [[24608, 37826, 37279, 32349, 24436, 21421, 24608]]
+    },
+    {
+      "id": "AST modern_rey SerCd",
+      "common_name": {"english": "Serpent's tail"},
+      "lines": [[92946, 88771, 88601, 89962, 88048, 86565, 86263, 84880]]
+    },
+    {
+      "id": "AST modern_rey SerCp",
+      "common_name": {"english": "Serpent's head"},
+      "lines": [[80628, 79882, 79593, 77516, 77622, 77070, 77257, 76276, 77233, 78072, 77450, 76852, 77233]]
+    },
+    {
+      "id": "AST modern_rey SumT",
+      "common_name": {"english": "Summer Triangle"},
+      "lines": [[97649, 91262, 102098, 97649]]
+    },
+    {
+      "id": "AST modern_rey CruF",
+      "common_name": {"english": "False Cross"},
+      "lines": [[45941, 41037], [45556, 42913]]
+    },
+    {
+      "id": "AST modern_rey HR01",
+      "is_ray_helper": true,
+      "lines": [[53910, 54061, 11767, 116727]]
+    },
+    {
+      "id": "AST modern_rey HR02",
+      "is_ray_helper": true,
+      "lines": [[59774, 11767, 746, 677, 1067, 1562, 2081]]
+    },
+    {
+      "id": "AST modern_rey HR03",
+      "is_ray_helper": true,
+      "lines": [[59774, 58001, 49669]]
+    },
+    {
+      "id": "AST modern_rey HR04",
+      "is_ray_helper": true,
+      "lines": [[65378, 67301, 69673, 68520, 65474]]
+    },
+    {
+      "id": "AST modern_rey HR05",
+      "is_ray_helper": true,
+      "lines": [[58001, 59774, 102098]]
+    },
+    {
+      "id": "AST modern_rey HR06",
+      "is_ray_helper": true,
+      "lines": [[1067, 9884, 17702]]
+    },
+    {
+      "id": "AST modern_rey HR07",
+      "is_ray_helper": true,
+      "lines": [[59774, 54061, 24608]]
+    },
+    {
+      "id": "AST modern_rey HR08",
+      "is_ray_helper": true,
+      "lines": [[59774, 53910, 36850]]
+    },
+    {
+      "id": "AST modern_rey HR09",
+      "is_ray_helper": true,
+      "lines": [[24608, 28360, 36850, 37826, 37279, 32349]]
+    },
+    {
+      "id": "AST modern_rey HR10",
+      "is_ray_helper": true,
+      "lines": [[49669, 47508, 43813]]
+    },
+    {
+      "id": "AST modern_rey HR11",
+      "is_ray_helper": true,
+      "lines": [[97649, 107556, 113368]]
+    },
+    {
+      "id": "AST modern_rey HR12",
+      "is_ray_helper": true,
+      "lines": [[677, 113963, 109074]]
+    },
+    {
+      "id": "AST modern_rey HR13",
+      "is_ray_helper": true,
+      "lines": [[113881, 113963, 113368]]
+    },
+    {
+      "id": "AST modern_rey HR14",
+      "is_ray_helper": true,
+      "lines": [[9640, 9884, 9487]]
+    }
+  ],
+  "constellations": [
+    {
+      "id": "CON modern_rey UMi",
+      "lines": [[11767, 85822, 82080, 77055, 79822, 75097, 72607, 77055]],
+      "common_name": {"english": "Ursa Minor", "native": "LITTLE DIPPER"}
+    },
+    {
+      "id": "CON modern_rey .UMig",
+      "lines": [[72607, 75097]],
+      "common_name": {"english": "Guardians", "native": "Guardians"}
+    },
+    {
+      "id": "CON modern_rey Dra",
+      "lines": [[87585, 87833, 85670, 85829, 87585, 94376, 97433], [94376, 89908], [89937, 89908, 83895, 80331, 78527, 75458, 68756, 61281, 56211]],
+      "common_name": {"english": "Draco", "native": "DRAGON"}
+    },
+    {
+      "id": "CON modern_rey .Draf",
+      "lines": [[89937, 89908, 94376, 97433]],
+      "common_name": {"english": "feet", "native": "feet"}
+    },
+    {
+      "id": "CON modern_rey .Drah",
+      "lines": [[87585, 87833, 85670, 85829, 87585]],
+      "common_name": {"english": "head", "native": "head"}
+    },
+    {
+      "id": "CON modern_rey .Drat1",
+      "lines": [[89908, 83895, 80331, 78527]],
+      "common_name": {"english": "tail", "native": "tail"}
+    },
+    {
+      "id": "CON modern_rey .Drat2",
+      "lines": [[78527, 75458, 68756, 61281, 56211]],
+      "common_name": {"english": "tail", "native": "tail"}
+    },
+    {
+      "id": "CON modern_rey Cas",
+      "lines": [[9598, 8886, 6686, 4427, 3179, 746]],
+      "common_name": {"english": "Cassiopeia", "native": "CASSIOPEIA"}
+    },
+    {
+      "id": "CON modern_rey Cep",
+      "lines": [[110991, 112724, 106032, 105199, 102422, 101093], [105199, 107259, 109857, 109492, 110991], [109492, 107418], [112724, 116727, 106032]],
+      "common_name": {"english": "Cepheus", "native": "CEPHEUS"}
+    },
+    {
+      "id": "CON modern_rey Cam",
+      "lines": [[23040, 23522, 17884, 16228], [17884, 17959, 22783, 23522], [22783, 33694, 29997]],
+      "common_name": {"english": "Camelopardalis", "native": "GIRAFFE"}
+    },
+    {
+      "id": "CON modern_rey UMa",
+      "lines": [[67301, 65378, 62956, 59774, 54061, 53910, 58001, 59774], [54061, 46733, 41704, 44127, 44471, 50801], [50372, 46853, 48319, 46733], [50801, 55203], [55219, 54539, 57399, 67301]],
+      "common_name": {"english": "Ursa Major", "native": "GREAT BEAR"}
+    },
+    {
+      "id": "CON modern_rey .UMap",
+      "lines": [[53910, 54061]],
+      "common_name": {"english": "Pointers", "native": "Pointers"}
+    },
+    {
+      "id": "CON modern_rey .UMah",
+      "lines": [[64468, 64468]],
+      "common_name": {"english": "head", "native": "head"}
+    },
+    {
+      "id": "CON modern_rey .UMap1",
+      "lines": [[55203, 50801]],
+      "common_name": {"english": "paws", "native": "paws"}
+    },
+    {
+      "id": "CON modern_rey .UMap2",
+      "lines": [[50801, 44471]],
+      "common_name": {"english": "paws", "native": "paws"}
+    },
+    {
+      "id": "CON modern_rey .UMar",
+      "lines": [[46853, 48319, 46733, 41704, 44127]],
+      "common_name": {"english": "rump", "native": "rump"}
+    },
+    {
+      "id": "CON modern_rey Leo",
+      "lines": [[57632, 54872, 54879, 55642, 55434], [54879, 51624], [54879, 49583, 49669], [49583, 47508], [49583, 50583, 53954, 54872], [50583, 50335, 48455, 46146, 46750, 47908, 48455], [47908, 49583]],
+      "common_name": {"english": "Leo", "native": "LION"}
+    },
+    {
+      "id": "CON modern_rey .Leoh",
+      "lines": [[48455, 46146, 46750, 47908, 48455]],
+      "common_name": {"english": "head", "native": "head"}
+    },
+    {
+      "id": "CON modern_rey .Leot",
+      "lines": [[57632, 54872]],
+      "common_name": {"english": "tail", "native": "tail"}
+    },
+    {
+      "id": "CON modern_rey CVn",
+      "lines": [[61317, 63125]],
+      "common_name": {"english": "Canes Venatici", "native": "HUNTING DOGS"}
+    },
+    {
+      "id": "CON modern_rey LMi",
+      "lines": [[53229, 51233, 49593, 46952], [49593, 51056, 53229]],
+      "common_name": {"english": "Leo Minor", "native": "LITTLE LION"}
+    },
+    {
+      "id": "CON modern_rey Boo",
+      "lines": [[67275, 67459, 67927, 69673, 71795, 72105, 69673], [72105, 74666, 75411, 73555, 74666], [73555, 71075, 71053, 71284, 72105], [71075, 69732, 70497, 69483, 69732]],
+      "common_name": {"english": "Bootes", "native": "HERDSMAN"}
+    },
+    {
+      "id": "CON modern_rey .Boob",
+      "lines": [[69673, 71795, 72105, 69673]],
+      "common_name": {"english": "body", "native": "body"}
+    },
+    {
+      "id": "CON modern_rey .Booh",
+      "lines": [[72105, 74666, 73555, 71075, 71053, 71284, 72105]],
+      "common_name": {"english": "head", "native": "head"}
+    },
+    {
+      "id": "CON modern_rey .Boop",
+      "lines": [[71075, 69732, 70497, 69483, 69732]],
+      "common_name": {"english": "pipe", "native": "pipe"}
+    },
+    {
+      "id": "CON modern_rey CrB",
+      "lines": [[76127, 75695, 76267, 76952, 77512, 78159]],
+      "common_name": {"english": "Corona Borealis", "native": "NORTHERN CROWN"}
+    },
+    {
+      "id": "CON modern_rey Com",
+      "lines": [[64241, 64394, 60742], [64394, 60697], [64394, 60746], [64394, 60904]],
+      "common_name": {"english": "Coma Berenices", "native": "BERENICE'S HAIR"}
+    },
+    {
+      "id": "CON modern_rey Lyr",
+      "lines": [[91262, 91926, 92862, 94481, 94713, 93194, 92420, 89826, 91262], [93194, 92791], [92420, 91971]],
+      "common_name": {"english": "Lyra", "native": "LYRE"}
+    },
+    {
+      "id": "CON modern_rey Cyg",
+      "lines": [[94779, 97165, 100453, 102098, 104060], [102098, 99848, 95853, 94779], [100453, 102488, 104732, 103413, 102098], [103413, 105102, 104887], [100453, 98110, 96683, 95947]],
+      "common_name": {"english": "Cygnus", "native": "SWAN"}
+    },
+    {
+      "id": "CON modern_rey .Cygw1",
+      "lines": [[100453, 97165, 94779, 95853, 99848, 102098]],
+      "common_name": {"english": "wing", "native": "wing"}
+    },
+    {
+      "id": "CON modern_rey .Cygw2",
+      "lines": [[100453, 102488, 104732, 103413, 102098]],
+      "common_name": {"english": "wing", "native": "wing"}
+    },
+    {
+      "id": "CON modern_rey .Cygf",
+      "lines": [[104060, 102098, 103413, 105102, 104887]],
+      "common_name": {"english": "feet", "native": "feet"}
+    },
+    {
+      "id": "CON modern_rey .Cygn",
+      "lines": [[100453, 98110, 96683, 95947]],
+      "common_name": {"english": "outstretched neck", "native": "outstretched neck"}
+    },
+    {
+      "id": "CON modern_rey Her",
+      "lines": [[84345, 84379, 85693, 86974, 88794, 88267, 88886, 90139, 92043, 92161], [88794, 87933, 84380, 85112, 87808, 86414, 81126, 79101, 79992, 86414], [86974, 83207, 81693, 81833, 84380, 83207, 80816, 80170]],
+      "common_name": {"english": "Hercules", "native": "HERCULES"}
+    },
+    {
+      "id": "CON modern_rey .Herk",
+      "lines": [[84380, 81833, 81693, 83207, 84380]],
+      "common_name": {"english": "Keystone", "native": "Keystone"}
+    },
+    {
+      "id": "CON modern_rey .Herc",
+      "lines": [[86414, 79992, 79101, 81126, 86414]],
+      "common_name": {"english": "club", "native": "club"}
+    },
+    {
+      "id": "CON modern_rey Vul",
+      "lines": [[95771, 98543]],
+      "common_name": {"english": "Vulpecula", "native": "L. FOX"}
+    },
+    {
+      "id": "CON modern_rey And",
+      "lines": [[677, 3092, 2912, 5447, 3092, 3031, 3693, 4463], [5447, 7513, 9640], [5447, 4436, 3881, 5434, 7607], [2912, 1411, 116631], [116584, 116805, 116631, 113726]],
+      "common_name": {"english": "Andromeda", "native": "ANDROMEDA"}
+    },
+    {
+      "id": "CON modern_rey .Andc",
+      "lines": [[116584, 116805, 116631, 113726]],
+      "common_name": {"english": "the chain", "native": "the chain"}
+    },
+    {
+      "id": "CON modern_rey Peg",
+      "lines": [[113963, 113881, 1067, 113963, 112440, 112748, 112158, 109410], [114520, 113963, 114144], [113963, 112447, 112029, 109427], [112029, 107315], [112447, 109176, 107348], [112440, 109176, 107354, 105502]],
+      "common_name": {"english": "Pegasus", "native": "PEGASUS"}
+    },
+    {
+      "id": "CON modern_rey .Pegh",
+      "lines": [[112440, 112748, 112158, 109410]],
+      "common_name": {"english": "head", "native": "head"}
+    },
+    {
+      "id": "CON modern_rey .Pegt",
+      "lines": [[114144, 113963, 114520]],
+      "common_name": {"english": "tail", "native": "tail"}
+    },
+    {
+      "id": "CON modern_rey .Pegw",
+      "lines": [[113963, 113881, 1067, 113963]],
+      "common_name": {"english": "wing", "native": "wing"}
+    },
+    {
+      "id": "CON modern_rey Tri",
+      "lines": [[10670, 10064, 8796, 10670]],
+      "common_name": {"english": "Triangulum", "native": "TRIANGLE"}
+    },
+    {
+      "id": "CON modern_rey Lac",
+      "lines": [[109937, 109754, 111104, 111944, 111022, 110351, 111104], [111022, 110609, 110538, 111169, 111022]],
+      "common_name": {"english": "Lacerta", "native": "LIZARD"}
+    },
+    {
+      "id": "CON modern_rey Per",
+      "lines": [[17448, 18246, 18614, 18532, 14576, 14354, 13254], [18532, 17529, 16335, 15863, 16826, 17358, 19343, 19812, 20070, 19167], [14576, 14668, 14632, 13531, 13268, 14328, 13531], [14328, 15863, 14632, 12777, 8068]],
+      "common_name": {"english": "Perseus", "native": "PERSEUS"}
+    },
+    {
+      "id": "CON modern_rey Tau",
+      "lines": [[25428, 21881, 20711, 17702], [21881, 26451, 21421, 20894, 20205, 20455, 20648, 20889, 20711], [20205, 21589, 21402], [20205, 19860], [20205, 18724, 16083, 16369], [16083, 15900, 16852], [15900, 18907]],
+      "common_name": {"english": "Taurus", "native": "BULL"}
+    },
+    {
+      "id": "CON modern_rey .Tauh",
+      "lines": [[20205, 20894, 21421, 26451, 21881, 20711, 20889, 20648, 20455, 20205]],
+      "common_name": {"english": "head", "native": "head"}
+    },
+    {
+      "id": "CON modern_rey .Tauc1",
+      "lines": [[25428, 21881]],
+      "common_name": {"english": "horn", "native": "horn"}
+    },
+    {
+      "id": "CON modern_rey .Tauc2",
+      "lines": [[17702, 20711]],
+      "common_name": {"english": "horn", "native": "horn"}
+    },
+    {
+      "id": "CON modern_rey .Taut",
+      "lines": [[16083, 16369]],
+      "common_name": {"english": "tail", "native": "tail"}
+    },
+    {
+      "id": "CON modern_rey Ari",
+      "lines": [[14838, 13914, 10306, 8832], [13914, 13209, 13061, 12719, 13209], [12719, 9884, 9153, 8903, 9884, 10306]],
+      "common_name": {"english": "Aries", "native": "RAM"}
+    },
+    {
+      "id": "CON modern_rey .Arih",
+      "lines": [[9884, 8903, 9153, 9884]],
+      "common_name": {"english": "head", "native": "head"}
+    },
+    {
+      "id": "CON modern_rey .Arit",
+      "lines": [[13209, 13061, 12719, 13209]],
+      "common_name": {"english": "tail", "native": "tail"}
+    },
+    {
+      "id": "CON modern_rey Gem",
+      "lines": [[31681, 34088, 35550, 35350, 32362], [35550, 36962, 37740], [36962, 37826], [36962, 36046, 34693, 36366, 36850], [34693, 33018], [34693, 32246, 30883], [32246, 30343, 29655, 28734]],
+      "common_name": {"english": "Gemini", "native": "TWINS"}
+    },
+    {
+      "id": "CON modern_rey Aur",
+      "lines": [[23015, 28380, 28360, 28358, 24608, 28360], [23015, 23767, 24608, 23416, 23453, 23767]],
+      "common_name": {"english": "Auriga", "native": "CHARIOTEER"}
+    },
+    {
+      "id": "CON modern_rey CMi",
+      "lines": [[37279, 36188]],
+      "common_name": {"english": "Canis Minor", "native": "LITTLE DOG"}
+    },
+    {
+      "id": "CON modern_rey Cnc",
+      "lines": [[43103, 42806, 40167, 40526, 42911, 42806], [42911, 44066]],
+      "common_name": {"english": "Cancer", "native": "CRAB"}
+    },
+    {
+      "id": "CON modern_rey Lyn",
+      "lines": [[45860, 45688, 44248, 41075, 36145, 33449, 30060]],
+      "common_name": {"english": "Lynx", "native": "LYNX"}
+    },
+    {
+      "id": "CON modern_rey Ori",
+      "lines": [[26727, 26311, 25930], [28716, 29426, 29038, 27913, 28716], [29239, 28614, 27989, 26727, 27366], [24436, 25281, 25930, 25336, 25813, 26207], [25813, 27989], [25336, 22449, 22549, 22797, 23123], [22449, 22509, 22845, 22957]],
+      "common_name": {"english": "Orion", "native": "ORION"}
+    },
+    {
+      "id": "CON modern_rey .Orib",
+      "lines": [[26727, 26311, 25930]],
+      "common_name": {"english": "belt", "native": "belt"}
+    },
+    {
+      "id": "CON modern_rey .Oric",
+      "lines": [[29426, 28716, 27913, 29038, 29426]],
+      "common_name": {"english": "club", "native": "club"}
+    },
+    {
+      "id": "CON modern_rey .Oris",
+      "lines": [[22957, 22845, 22509, 22449, 22549, 22797, 23123]],
+      "common_name": {"english": "shield", "native": "shield"}
+    },
+    {
+      "id": "CON modern_rey CMa",
+      "lines": [[33160, 34045, 33347, 32349, 33977, 34444, 35037, 35904], [33579, 33856, 34444], [33579, 33152, 31592, 31125], [31592, 30324], [31592, 32349], [33579, 32759], [30122, 33579], [33347, 33160]],
+      "common_name": {"english": "Canis Major", "native": "BIG DOG"}
+    },
+    {
+      "id": "CON modern_rey Lep",
+      "lines": [[28910, 28103, 27288, 25985, 24305], [28910, 27654, 27072, 25606, 23685], [25985, 25606], [24305, 24845], [24305, 24327], [23685, 24305]],
+      "common_name": {"english": "Lepus", "native": "HARE"}
+    },
+    {
+      "id": "CON modern_rey Mon",
+      "lines": [[41307, 39863], [29651, 30867, 34769, 32578, 30419], [34769, 39863, 37447], [32578, 31216], [30419, 31216, 31978]],
+      "common_name": {"english": "Monoceros", "native": "UNICORN"}
+    },
+    {
+      "id": "CON modern_rey Eri",
+      "lines": [[7588, 9007, 10602, 11407, 12486, 13847, 15510, 17874, 20042, 20535, 21393, 18673, 18216, 17717, 17651, 16611, 15474, 14146, 13701, 16537, 17378, 18543, 19849, 19587, 21444, 22109, 23875, 21594]],
+      "common_name": {"english": "Eridanus", "native": "RIVER ERIDANUS"}
+    },
+    {
+      "id": "CON modern_rey Hya",
+      "lines": [[42799, 42402, 42313, 43109, 43813, 42799], [43813, 45336, 47431, 46390, 49841, 51069, 52943, 53740, 54682, 56343, 57936, 64962, 68895]],
+      "common_name": {"english": "Hydra", "native": "HYDRA"}
+    },
+    {
+      "id": "CON modern_rey .Hyah",
+      "lines": [[43813, 43109, 42313, 42402, 42799, 43813]],
+      "common_name": {"english": "Hydra's head", "native": "HYDRA's head"}
+    },
+    {
+      "id": "CON modern_rey .Hyat",
+      "lines": [[56343, 57936, 64962, 68895]],
+      "common_name": {"english": "Hydra's tail", "native": "HYDRA's tail"}
+    },
+    {
+      "id": "CON modern_rey Crt",
+      "lines": [[53740, 54682, 55705, 55282, 53740], [55282, 55687, 56633, 58188, 57283, 55705]],
+      "common_name": {"english": "Crater", "native": "CUP"}
+    },
+    {
+      "id": "CON modern_rey Ant",
+      "lines": [[51172, 51172]],
+      "common_name": {"english": "Antlia", "native": "PUMP"}
+    },
+    {
+      "id": "CON modern_rey Vir",
+      "lines": [[57380, 57757, 60129, 61941, 58948, 57380], [61941, 64238, 65474, 69427, 69701, 71957], [65474, 66249, 68520, 72220], [66249, 63090, 63608], [63090, 61941], [69701, 68520]],
+      "common_name": {"english": "Virgo", "native": "VIRGIN"}
+    },
+    {
+      "id": "CON modern_rey .Virh",
+      "lines": [[61941, 58948, 57380, 57757, 60129, 61941]],
+      "common_name": {"english": "head", "native": "head"}
+    },
+    {
+      "id": "CON modern_rey .Virf",
+      "lines": [[72220, 68520, 69701, 71957]],
+      "common_name": {"english": "feet", "native": "feet"}
+    },
+    {
+      "id": "CON modern_rey Lib",
+      "lines": [[73714, 72622, 74785, 76333, 72622], [76333, 76470, 76600]],
+      "common_name": {"english": "Libra", "native": "SCALES"}
+    },
+    {
+      "id": "CON modern_rey Crv",
+      "lines": [[61174, 60965, 59803, 59316, 59199], [59316, 60189, 61359], [60189, 60965]],
+      "common_name": {"english": "Corvus", "native": "CROW"}
+    },
+    {
+      "id": "CON modern_rey .Crvb",
+      "lines": [[60965, 61174]],
+      "common_name": {"english": "bill", "native": "bill"}
+    },
+    {
+      "id": "CON modern_rey .Crvf",
+      "lines": [[60189, 61359]],
+      "common_name": {"english": "foot", "native": "foot"}
+    },
+    {
+      "id": "CON modern_rey .Crvt",
+      "lines": [[59316, 59199]],
+      "common_name": {"english": "tail", "native": "tail"}
+    },
+    {
+      "id": "CON modern_rey Oph",
+      "lines": [[85423, 84405, 84970, 85340, 84893, 84012, 85365, 86742, 87108, 88601], [86742, 86032, 83000, 86742], [83000, 82673, 80883, 79593], [83000, 81377, 80894, 80569, 80343, 80975], [81377, 84012]],
+      "common_name": {"english": "Ophiuchus", "native": "SERPENT BEARER"}
+    },
+    {
+      "id": "CON modern_rey .Ophb",
+      "lines": [[86742, 83000, 81377, 84012, 85365, 86742]],
+      "common_name": {"english": "body", "native": "body"}
+    },
+    {
+      "id": "CON modern_rey .Ophh",
+      "lines": [[86742, 86032, 83000, 86742]],
+      "common_name": {"english": "head", "native": "head"}
+    },
+    {
+      "id": "CON modern_rey .Opha1",
+      "lines": [[86742, 87108, 88601]],
+      "common_name": {"english": "arm", "native": "arm"}
+    },
+    {
+      "id": "CON modern_rey .Opha2",
+      "lines": [[83000, 82673, 80883, 79593]],
+      "common_name": {"english": "arm", "native": "arm"}
+    },
+    {
+      "id": "CON modern_rey .Ophf1",
+      "lines": [[84012, 84893, 85340, 84970, 84405, 85423]],
+      "common_name": {"english": "foot", "native": "foot"}
+    },
+    {
+      "id": "CON modern_rey .Ophf2",
+      "lines": [[81377, 80894, 80569, 80343, 80975]],
+      "common_name": {"english": "foot", "native": "foot"}
+    },
+    {
+      "id": "CON modern_rey Ser",
+      "lines": [[92946, 88771, 88601, 89962, 88048, 86565, 86263, 84880], [80628, 79882, 79593, 77516, 77622, 77070, 77257, 76276, 77233, 78072, 77450, 76852, 77233]],
+      "common_name": {"english": "Serpens", "native": "SERPENT"}
+    },
+    {
+      "id": "CON modern_rey .Serh",
+      "lines": [[77233, 78072, 77450, 76852, 77233]],
+      "common_name": {"english": "head", "native": "head"}
+    },
+    {
+      "id": "CON modern_rey Sco",
+      "lines": [[87261, 85927, 85696, 86170, 86670, 87073, 86228, 84143, 82729, 82514, 82396, 81266, 80763, 80112, 79404, 78104, 78265], [80112, 79374, 78820, 78401]],
+      "common_name": {"english": "Scorpius", "native": "SCORPION"}
+    },
+    {
+      "id": "CON modern_rey .Scoe",
+      "lines": [[85696, 85927]],
+      "common_name": {"english": "cat's eyes", "native": "cat's eyes"}
+    },
+    {
+      "id": "CON modern_rey .Scoc",
+      "lines": [[78401, 78820, 79374, 80112, 79404, 78104, 78265]],
+      "common_name": {"english": "claws", "native": "claws"}
+    },
+    {
+      "id": "CON modern_rey .Scot",
+      "lines": [[82729, 84143, 86228, 87073, 86670, 86170]],
+      "common_name": {"english": "tail", "native": "tail"}
+    },
+    {
+      "id": "CON modern_rey Aql",
+      "lines": [[98036, 97649, 97278, 96229, 95501, 97804], [99473, 97804], [95501, 93747, 93244], [95501, 93805, 93429]],
+      "common_name": {"english": "Aquila", "native": "EAGLE"}
+    },
+    {
+      "id": "CON modern_rey .Aqlh",
+      "lines": [[96229, 97278, 97649, 98036]],
+      "common_name": {"english": "head", "native": "head"}
+    },
+    {
+      "id": "CON modern_rey .Aqlw1",
+      "lines": [[95501, 93747, 93244]],
+      "common_name": {"english": "wing", "native": "wing"}
+    },
+    {
+      "id": "CON modern_rey .Aqlw2",
+      "lines": [[95501, 97804, 99473]],
+      "common_name": {"english": "wing", "native": "wing"}
+    },
+    {
+      "id": "CON modern_rey .Aqlt",
+      "lines": [[95501, 93805, 93429]],
+      "common_name": {"english": "tail", "native": "tail"}
+    },
+    {
+      "id": "CON modern_rey Sgr",
+      "lines": [[88635, 89931, 90185, 89642, 88635, 89341, 90496, 89931, 92041, 92855, 94141, 95168, 95176], [94141, 93085, 92855, 93864, 93506, 92041], [93864, 98412, 98032], [95241, 95347, 98412], [95347, 93506]],
+      "common_name": {"english": "Sagittarius", "native": "ARCHER"}
+    },
+    {
+      "id": "CON modern_rey .Sgrh",
+      "lines": [[92855, 94141, 93085, 92855]],
+      "common_name": {"english": "head", "native": "head"}
+    },
+    {
+      "id": "CON modern_rey .Sgrb",
+      "lines": [[92855, 92041, 93506, 93864, 92855]],
+      "common_name": {"english": "body", "native": "body"}
+    },
+    {
+      "id": "CON modern_rey .Sgrs",
+      "lines": [[93506, 95347, 98412, 93864, 93506]],
+      "common_name": {"english": "skirt", "native": "skirt"}
+    },
+    {
+      "id": "CON modern_rey .Sgrt",
+      "lines": [[89931, 90496, 89341, 88635, 89642, 90185, 89931]],
+      "common_name": {"english": "the bow", "native": "the bow"}
+    },
+    {
+      "id": "CON modern_rey Sge",
+      "lines": [[98337, 97365, 96837], [97365, 96757]],
+      "common_name": {"english": "Sagitta", "native": "ARROW"}
+    },
+    {
+      "id": "CON modern_rey Del",
+      "lines": [[101421, 101916], [101421, 101800], [101916, 101800, 101882, 102281, 102532, 101958, 101769, 101483, 101800]],
+      "common_name": {"english": "Delphinus", "native": "DOLPHIN"}
+    },
+    {
+      "id": "CON modern_rey CrA",
+      "lines": [[92989, 93174, 93825, 94114, 94160, 94005, 93542, 92953]],
+      "common_name": {"english": "Corona Australis", "native": "SOUTHERN CROWN"}
+    },
+    {
+      "id": "CON modern_rey Sct",
+      "lines": [[92175, 91726, 90595, 91117, 92175]],
+      "common_name": {"english": "Scutum", "native": "SHIELD"}
+    },
+    {
+      "id": "CON modern_rey Cap",
+      "lines": [[100064, 100345, 104139, 105515, 106985, 107556], [105515, 106039, 105881, 104139, 104019, 104234], [104019, 101027], [100345, 101027, 102485, 102978]],
+      "common_name": {"english": "Capricornus", "native": "GOAT"}
+    },
+    {
+      "id": "CON modern_rey Aqr",
+      "lines": [[102618, 103045, 104459, 106278, 109139], [106278, 109074, 110395, 111497, 110672, 109074, 110003, 112961, 114855, 114724, 112961, 112716, 113136, 114855, 114341, 114375, 114119], [114855, 115438, 115669, 116247]],
+      "common_name": {"english": "Aquarius", "native": "WATER CARRIER"}
+    },
+    {
+      "id": "CON modern_rey .Aqrh",
+      "lines": [[109074, 110395, 111497, 110672, 109074]],
+      "common_name": {"english": "head", "native": "head"}
+    },
+    {
+      "id": "CON modern_rey .Aqra",
+      "lines": [[109074, 110003, 112961]],
+      "common_name": {"english": "arm", "native": "arm"}
+    },
+    {
+      "id": "CON modern_rey .Aqrv",
+      "lines": [[114855, 114724, 112961, 112716, 113136, 114855, 112961]],
+      "common_name": {"english": "vessel", "native": "vessel"}
+    },
+    {
+      "id": "CON modern_rey Equ",
+      "lines": [[104987, 104858, 104521]],
+      "common_name": {"english": "Equuleus", "native": "LITTLE HORSE"}
+    },
+    {
+      "id": "CON modern_rey PsA",
+      "lines": [[113368, 111954, 109285, 107380, 107608, 109285, 111188, 112948, 113246, 113368]],
+      "common_name": {"english": "Piscis Austrinus", "native": "SOUTHERN FISH"}
+    },
+    {
+      "id": "CON modern_rey Gru",
+      "lines": [[114131, 110997, 109268, 112122, 114421, 114131], [112122, 113638], [112122, 112623], [109268, 109111, 108085]],
+      "common_name": {"english": "Grus", "native": "CRANE"}
+    },
+    {
+      "id": "CON modern_rey Phe",
+      "lines": [[5348, 5165, 3245, 2072], [3245, 5348], [5165, 7083, 8837, 5165, 6867, 3245], [2072, 2081, 765, 2072]],
+      "common_name": {"english": "Phoenix", "native": "PHOENIX"}
+    },
+    {
+      "id": "CON modern_rey Psc",
+      "lines": [[5586, 5742], [5586, 6193, 5742, 6706, 7097, 8198, 9487, 7884, 7007, 5737, 4906, 3786, 118268, 116771, 116928, 115738, 114971, 115227, 115830, 116771]],
+      "common_name": {"english": "Pisces", "native": "FISHES"}
+    },
+    {
+      "id": "CON modern_rey .Psck",
+      "lines": [[9487, 9487]],
+      "common_name": {"english": "Knot", "native": "Knot"}
+    },
+    {
+      "id": "CON modern_rey .Pscn",
+      "lines": [[5742, 6193, 5586, 5742]],
+      "common_name": {"english": "Northern Fish", "native": "N. Fish"}
+    },
+    {
+      "id": "CON modern_rey .Pscw",
+      "lines": [[116771, 115830, 115227, 114971, 115738, 116928, 116771]],
+      "common_name": {"english": "Western Fish", "native": "W. Fish"}
+    },
+    {
+      "id": "CON modern_rey Cet",
+      "lines": [[12706, 11484, 12828, 13954, 14135, 12706, 12387, 10826, 8645, 6537, 1562, 3419, 8102], [3419, 9347, 12387]],
+      "common_name": {"english": "Cetus", "native": "WHALE"}
+    },
+    {
+      "id": "CON modern_rey .Cett",
+      "lines": [[12706, 14135, 13954, 12828, 11484, 12706]],
+      "common_name": {"english": "tail", "native": "tail"}
+    },
+    {
+      "id": "CON modern_rey Scl",
+      "lines": [[4577, 4577]],
+      "common_name": {"english": "Sculptor", "native": "SCULPTOR"}
+    },
+    {
+      "id": "CON modern_rey Car",
+      "lines": [[39953, 38827, 41037, 45556, 50371, 51232, 51849, 53253, 54463], [53253, 52468, 51576, 52419, 50099, 45238, 30438]],
+      "common_name": {"english": "Carina", "native": "SHIP'S KEEL"}
+    },
+    {
+      "id": "CON modern_rey .Carh",
+      "lines": [[51576, 52468, 53253, 54463], [53253, 51849, 51232, 50371]],
+      "common_name": {"english": "figurehead", "native": "figurehead"}
+    },
+    {
+      "id": "CON modern_rey Pup",
+      "lines": [[30438, 31685, 35264, 36917, 37229, 37173, 38170, 38070, 37677, 36917], [38170, 39757, 39429, 39953]],
+      "common_name": {"english": "Puppis", "native": "SHIP'S STERN"}
+    },
+    {
+      "id": "CON modern_rey .Pupt",
+      "lines": [[38170, 37173, 37229, 36917, 37677, 38070, 38170]],
+      "common_name": {"english": "transom", "native": "transom"}
+    },
+    {
+      "id": "CON modern_rey Vel",
+      "lines": [[39953, 42913, 45941, 48774, 52727, 51986, 50191, 46651, 44816, 39953]],
+      "common_name": {"english": "Vela", "native": "SHIP's SAIL"}
+    },
+    {
+      "id": "CON modern_rey Pyx",
+      "lines": [[39429, 42515, 42828, 43409]],
+      "common_name": {"english": "Pyxis", "native": "SHIP'S COMPASS"}
+    },
+    {
+      "id": "CON modern_rey Vol",
+      "lines": [[37504, 34481, 39794, 37504], [39794, 35228], [39794, 41312, 44382, 39794], [40817, 39794]],
+      "common_name": {"english": "Volans", "native": "FLYING FISH"}
+    },
+    {
+      "id": "CON modern_rey .Volw1",
+      "lines": [[39794, 40817]],
+      "common_name": {"english": "wing", "native": "wing"}
+    },
+    {
+      "id": "CON modern_rey .Volw2",
+      "lines": [[39794, 35228]],
+      "common_name": {"english": "wing", "native": "wing"}
+    },
+    {
+      "id": "CON modern_rey Dor",
+      "lines": [[27100, 27890, 26069, 27100], [26069, 21281, 19893], [26069, 23693, 21281]],
+      "common_name": {"english": "Dorado", "native": "SWORDFISH"}
+    },
+    {
+      "id": "CON modern_rey Col",
+      "lines": [[28328, 28199, 30277, 29807, 28199, 27628, 28328], [27628, 26634, 25859]],
+      "common_name": {"english": "Columba", "native": "DOVE"}
+    },
+    {
+      "id": "CON modern_rey .Colh",
+      "lines": [[27628, 26634, 25859]],
+      "common_name": {"english": "head", "native": "head"}
+    },
+    {
+      "id": "CON modern_rey .Colt",
+      "lines": [[28199, 29807, 30277, 28199]],
+      "common_name": {"english": "tail", "native": "tail"}
+    },
+    {
+      "id": "CON modern_rey .Colw",
+      "lines": [[28199, 27628, 28328, 28199]],
+      "common_name": {"english": "wing", "native": "wing"}
+    },
+    {
+      "id": "CON modern_rey Hyi",
+      "lines": [[2021, 17678, 12394, 11001, 8928, 9236]],
+      "common_name": {"english": "Hydrus", "native": "HYDRUS"}
+    },
+    {
+      "id": "CON modern_rey Pic",
+      "lines": [[32607, 27530, 27321], [32607, 27321]],
+      "common_name": {"english": "Pictor", "native": "EASEL"}
+    },
+    {
+      "id": "CON modern_rey Ret",
+      "lines": [[19780, 19921, 18597, 17440, 19780]],
+      "common_name": {"english": "Reticulum", "native": "NET"}
+    },
+    {
+      "id": "CON modern_rey Hor",
+      "lines": [[19747, 19747]],
+      "common_name": {"english": "Horologium", "native": "CLOCK"}
+    },
+    {
+      "id": "CON modern_rey For",
+      "lines": [[14879, 14879]],
+      "common_name": {"english": "Fornax", "native": "FURNACE"}
+    },
+    {
+      "id": "CON modern_rey Cen",
+      "lines": [[72010, 71865, 73334, 71352, 68245, 68862, 70300, 70090, 68933, 67464, 68245], [67153, 67457], [67153, 67669], [67153, 67786], [67153, 65109, 65936, 67464, 67472, 68002, 68523, 68282, 68245], [68002, 66657, 71683], [66657, 68702], [66657, 61932, 68002], [61932, 60823, 59449, 56561], [60823, 59196, 55425]],
+      "common_name": {"english": "Centaurus", "native": "CENTAUR"}
+    },
+    {
+      "id": "CON modern_rey .Cenh",
+      "lines": [[68245, 68862, 70300, 70090, 68933, 67464, 68245]],
+      "common_name": {"english": "head", "native": "head"}
+    },
+    {
+      "id": "CON modern_rey .Cena1",
+      "lines": [[68245, 71352, 73334, 71865, 72010]],
+      "common_name": {"english": "arm", "native": "arm"}
+    },
+    {
+      "id": "CON modern_rey .Cena2",
+      "lines": [[67464, 65936, 65109, 67153, 67457], [67153, 67669], [67153, 67786]],
+      "common_name": {"english": "arm", "native": "arm"}
+    },
+    {
+      "id": "CON modern_rey .Cenb",
+      "lines": [[68002, 61932, 66657, 68002]],
+      "common_name": {"english": "body", "native": "body"}
+    },
+    {
+      "id": "CON modern_rey .Cenl1",
+      "lines": [[66657, 71683], [66657, 68702]],
+      "common_name": {"english": "front legs", "native": "front legs"}
+    },
+    {
+      "id": "CON modern_rey .Cenl2",
+      "lines": [[60823, 59449, 56561], [60823, 59196, 55425]],
+      "common_name": {"english": "hind legs", "native": "hind legs"}
+    },
+    {
+      "id": "CON modern_rey Cru",
+      "lines": [[61084, 60718], [62434, 59747]],
+      "common_name": {"english": "Crux", "native": "SOUTHERN CROSS"}
+    },
+    {
+      "id": "CON modern_rey Pav",
+      "lines": [[100751, 105858, 102395, 99240, 100751], [99240, 98495, 91792, 93015, 99240], [93015, 92609, 90098, 88866, 92609], [88866, 86929]],
+      "common_name": {"english": "Pavo", "native": "PEACOCK"}
+    },
+    {
+      "id": "CON modern_rey TrA",
+      "lines": [[82273, 74946, 76440, 77952, 82273]],
+      "common_name": {"english": "Triangulum Australe", "native": "SOUTHERN TRIANGLE"}
+    },
+    {
+      "id": "CON modern_rey Lup",
+      "lines": [[78918, 77634, 76705, 75177, 78384], [75177, 75304, 75501, 76297, 76552, 76829], [75501, 75141, 74117, 74911, 75264], [74117, 73807, 74376, 74395], [73807, 71536, 71121], [71536, 71860, 69996], [71860, 70576], [71860, 72683, 73273, 75177]],
+      "common_name": {"english": "Lupus", "native": "WOLF"}
+    },
+    {
+      "id": "CON modern_rey .Lupt",
+      "lines": [[75177, 76705, 77634, 78918]],
+      "common_name": {"english": "tail", "native": "tail"}
+    },
+    {
+      "id": "CON modern_rey .Lupe",
+      "lines": [[71860, 70576], [71860, 69996]],
+      "common_name": {"english": "ears", "native": "ears"}
+    },
+    {
+      "id": "CON modern_rey Mus",
+      "lines": [[62322, 61585, 63613, 61199, 61585, 59929, 57363]],
+      "common_name": {"english": "Fly", "native": "FLY"}
+    },
+    {
+      "id": "CON modern_rey Oct",
+      "lines": [[107089, 112405, 70638, 107089]],
+      "common_name": {"english": "Octans", "native": "OCTANT"}
+    },
+    {
+      "id": "CON modern_rey Cir",
+      "lines": [[71908, 75323], [71908, 74824]],
+      "common_name": {"english": "Circinus", "native": "DIVIDERS"}
+    },
+    {
+      "id": "CON modern_rey Nor",
+      "lines": [[80000, 80582, 78914, 78639, 80000]],
+      "common_name": {"english": "Norma", "native": "SQUARE"}
+    },
+    {
+      "id": "CON modern_rey Aps",
+      "lines": [[80047, 81065, 81852, 80047, 72370]],
+      "common_name": {"english": "Apus", "native": "BIRD OF PARADISE"}
+    },
+    {
+      "id": "CON modern_rey Cha",
+      "lines": [[40702, 51839, 52595, 60000, 58484, 51839]],
+      "common_name": {"english": "Chamaeleon", "native": "CHAMELEON"}
+    },
+    {
+      "id": "CON modern_rey .Chae",
+      "lines": [[40702, 40888]],
+      "common_name": {"english": "eyes", "native": "eyes"}
+    },
+    {
+      "id": "CON modern_rey Tuc",
+      "lines": [[110130, 114996, 118322, 1599, 2484, 114996]],
+      "common_name": {"english": "Tucana", "native": "TOUCAN"}
+    },
+    {
+      "id": "CON modern_rey Ind",
+      "lines": [[101772, 102333, 103227, 108870, 108431, 103227]],
+      "common_name": {"english": "Indus", "native": "INDIAN"}
+    },
+    {
+      "id": "CON modern_rey Tel",
+      "lines": [[90568, 90422]],
+      "common_name": {"english": "Telescopium", "native": "TELESCOPE"}
+    },
+    {
+      "id": "CON modern_rey Ara",
+      "lines": [[88714, 85792, 83153, 83081, 82363, 85727, 88714]],
+      "common_name": {"english": "Ara", "native": "ALTAR"}
+    },
+    {
+      "id": "CON modern_rey Mic",
+      "lines": [[102831, 102831]],
+      "common_name": {"english": "Microscopium", "native": "MICROSCOPE"}
+    },
+    {
+      "id": "CON modern_rey Cae",
+      "lines": [[21770, 21770]],
+      "common_name": {"english": "Caelum", "native": "CHISEL"}
+    },
+    {
+      "id": "CON modern_rey Men",
+      "lines": [[29271, 29271]],
+      "common_name": {"english": "Mensa", "native": "TABLE MOUNTAIN"}
+    },
+    {
+      "id": "CON modern_rey Sex",
+      "lines": [[49641, 49641]],
+      "common_name": {"english": "Sextans", "native": "SEXTANT"}
+    }
+  ],
+  "edges_type": "iau",
+  "edges_source": "https://pbarbier.com/constellations/edges_18.txt",
+  "edges_epoch": "B1875",
+  "edges": [
+    "001:002 M+ 22:52:00 +34:30:00 22:52:00 +52:30:00 AND LAC",
+    "002:003 P+ 22:52:00 +52:30:00 23:20:00 +52:30:00 AND CAS",
+    "004:005 P+ 23:20:00 +50:00:00 23:35:00 +50:00:00 AND CAS",
+    "006:007 P+ 23:35:00 +48:00:00 00:10:00 +48:00:00 AND CAS",
+    "008:009 P+ 00:10:00 +46:00:00 00:52:00 +46:00:00 AND CAS",
+    "009:010 M+ 00:52:00 +46:00:00 00:52:00 +48:00:00 AND CAS",
+    "010:011 P+ 00:52:00 +48:00:00 01:07:00 +48:00:00 AND CAS",
+    "011:012 M+ 01:07:00 +48:00:00 01:07:00 +50:00:00 AND CAS",
+    "012:013 P+ 01:07:00 +50:00:00 01:22:00 +50:00:00 AND CAS",
+    "013:014 P+ 01:22:00 +50:00:00 01:40:00 +50:00:00 AND PER",
+    "015:016 P+ 01:40:00 +47:00:00 02:02:30 +47:00:00 AND PER",
+    "016:017 M+ 02:02:30 +47:00:00 02:02:30 +50:30:00 AND PER",
+    "017:018 P+ 02:02:30 +50:30:00 02:31:00 +50:30:00 AND PER",
+    "025:026 P+ 00:43:00 +23:45:00 00:51:00 +23:45:00 AND PSC",
+    "028:029 M+ 00:08:30 +21:00:00 00:08:30 +22:00:00 AND PEG",
+    "030:031 M+ 00:04:00 +22:00:00 00:04:00 +28:00:00 AND PEG",
+    "032:033 M+ 00:00:00 +28:00:00 00:00:00 +31:20:00 AND PEG",
+    "034:035 M+ 23:45:00 +31:20:00 23:45:00 +32:05:00 AND PEG",
+    "036:037 M+ 23:30:00 +32:05:00 23:30:00 +34:30:00 AND PEG",
+    "038:050 P+ 09:22:00 -24:00:00 09:45:00 -24:00:00 ANT HYA",
+    "049:048 P+ 09:45:00 -26:30:00 10:15:00 -26:30:00 ANT HYA",
+    "047:046 P+ 10:15:00 -29:10:00 10:35:00 -29:10:00 ANT HYA",
+    "045:044 P+ 10:35:00 -31:10:00 10:50:00 -31:10:00 ANT HYA",
+    "043:042 P+ 10:50:00 -35:00:00 11:00:00 -35:00:00 ANT HYA",
+    "040:039 M+ 09:22:00 -39:45:00 09:22:00 -36:45:00 ANT VEL",
+    "039:038 M+ 09:22:00 -36:45:00 09:22:00 -24:00:00 ANT PYX",
+    "051:060 M+ 13:40:00 -82:30:00 13:40:00 -75:00:00 APS CHA",
+    "060:059 M+ 13:40:00 -75:00:00 13:40:00 -70:00:00 APS MUS",
+    "059:058 P+ 13:40:00 -70:00:00 14:45:00 -70:00:00 APS CIR",
+    "058:057 P+ 14:45:00 -70:00:00 17:00:00 -70:00:00 APS TRA",
+    "057:056 M+ 17:00:00 -70:00:00 17:00:00 -67:30:00 APS TRA",
+    "056:055 P+ 17:00:00 -67:30:00 17:30:00 -67:30:00 APS ARA",
+    "055:054 P+ 17:30:00 -67:30:00 18:00:00 -67:30:00 APS PAV",
+    "061:062 M+ 20:32:00 +00:00:00 20:32:00 +02:00:00 AQR AQL",
+    "062:063 P+ 20:32:00 +02:00:00 20:50:00 +02:00:00 AQR DEL",
+    "063:064 P+ 20:50:00 +02:00:00 21:20:00 +02:00:00 AQR EQU",
+    "064:065 P+ 21:20:00 +02:00:00 21:28:00 +02:00:00 AQR PEG",
+    "065:066 M+ 21:28:00 +02:00:00 21:28:00 +02:45:00 AQR PEG",
+    "066:067 P+ 21:28:00 +02:45:00 21:40:00 +02:45:00 AQR PEG",
+    "068:069 P+ 21:40:00 +01:45:00 22:00:00 +01:45:00 AQR PEG",
+    "069:070 M+ 22:00:00 +01:45:00 22:00:00 +02:00:00 AQR PEG",
+    "070:071 P+ 22:00:00 +02:00:00 22:45:00 +02:00:00 AQR PEG",
+    "073:074 P+ 22:45:00 -04:00:00 23:50:00 -04:00:00 AQR PSC",
+    "078:079 M+ 21:52:00 -25:30:00 21:52:00 -09:00:00 AQR CAP",
+    "082:083 M+ 20:32:00 -15:00:00 20:32:00 -09:00:00 AQR CAP",
+    "083:061 M+ 20:32:00 -09:00:00 20:32:00 +00:00:00 AQR AQL",
+    "084:085 M+ 18:35:00 +00:00:00 18:35:00 +02:00:00 AQL SER2",
+    "085:086 P+ 18:35:00 +02:00:00 18:52:00 +02:00:00 AQL SER2",
+    "086:087 M+ 18:52:00 +02:00:00 18:52:00 +06:15:00 AQL SER2",
+    "088:089 M+ 18:39:44 +06:15:00 18:39:44 +12:00:00 AQL OPH",
+    "089:090 P+ 18:39:44 +12:00:00 18:52:00 +12:00:00 AQL HER",
+    "090:091 M+ 18:52:00 +12:00:00 18:52:00 +18:30:00 AQL HER",
+    "091:092 P+ 18:52:00 +18:30:00 19:00:00 +18:30:00 AQL SGE",
+    "093:094 P+ 19:00:00 +16:10:00 19:50:00 +16:10:00 AQL SGE",
+    "095:096 P+ 19:50:00 +15:45:00 20:08:30 +15:45:00 AQL SGE",
+    "097:098 P+ 20:08:30 +08:30:00 20:18:00 +08:30:00 AQL DEL",
+    "099:062 P+ 20:18:00 +02:00:00 20:32:00 +02:00:00 AQL DEL",
+    "102:103 M+ 18:52:00 -12:02:00 18:52:00 -04:00:00 AQL SCT",
+    "104:084 M+ 18:35:00 -04:00:00 18:35:00 +00:00:00 AQL SER2",
+    "105:106 M+ 16:25:15 -60:00:00 16:25:15 -45:30:00 ARA NOR",
+    "106:107 P+ 16:25:15 -45:30:00 17:50:00 -45:30:00 ARA SCO",
+    "107:108 P+ 17:50:00 -45:30:00 18:00:00 -45:30:00 ARA CRA",
+    "111:112 M+ 16:50:00 -67:30:00 16:50:00 -65:00:00 ARA TRA",
+    "113:114 M+ 16:45:00 -65:00:00 16:45:00 -63:35:00 ARA TRA",
+    "115:116 M+ 16:35:00 -63:35:00 16:35:00 -61:00:00 ARA TRA",
+    "117:105 M+ 16:25:15 -61:00:00 16:25:15 -60:00:00 ARA TRA",
+    "119:120 M+ 01:40:00 +09:55:00 01:40:00 +25:00:00 ARI PSC",
+    "120:121 P+ 01:40:00 +25:00:00 01:55:00 +25:00:00 ARI TRI",
+    "121:122 M+ 01:55:00 +25:00:00 01:55:00 +27:15:00 ARI TRI",
+    "122:123 P+ 01:55:00 +27:15:00 02:25:00 +27:15:00 ARI TRI",
+    "123:124 M+ 02:25:00 +27:15:00 02:25:00 +30:40:00 ARI TRI",
+    "124:125 P+ 02:25:00 +30:40:00 02:43:00 +30:40:00 ARI TRI",
+    "125:126 P+ 02:43:00 +30:40:00 03:22:00 +30:40:00 ARI PER",
+    "130:131 M+ 04:30:00 +30:40:00 04:30:00 +36:00:00 AUR PER",
+    "131:132 P+ 04:30:00 +36:00:00 04:41:30 +36:00:00 AUR PER",
+    "132:133 M+ 04:41:30 +36:00:00 04:41:30 +52:30:00 AUR PER",
+    "133:134 P+ 04:41:30 +52:30:00 05:00:00 +52:30:00 AUR CAM",
+    "134:135 M+ 05:00:00 +52:30:00 05:00:00 +56:00:00 AUR CAM",
+    "135:136 P+ 05:00:00 +56:00:00 06:06:00 +56:00:00 AUR CAM",
+    "137:138 P+ 06:06:00 +54:00:00 06:30:00 +54:00:00 AUR LYN",
+    "139:140 P+ 06:30:00 +50:00:00 06:48:00 +50:00:00 AUR LYN",
+    "141:142 P+ 06:48:00 +44:30:00 07:22:00 +44:30:00 AUR LYN",
+    "146:147 M+ 05:53:00 +28:00:00 05:53:00 +28:30:00 AUR TAU",
+    "148:149 M+ 04:45:00 +28:30:00 04:45:00 +30:00:00 AUR TAU",
+    "150:130 M+ 04:30:00 +30:00:00 04:30:00 +30:40:00 AUR TAU",
+    "152:153 M+ 13:30:00 +08:00:00 13:30:00 +15:00:00 BOO VIR",
+    "153:154 M+ 13:30:00 +15:00:00 13:30:00 +28:30:00 BOO COM",
+    "154:155 P+ 13:30:00 +28:30:00 13:57:30 +28:30:00 BOO CVN",
+    "155:156 M+ 13:57:30 +28:30:00 13:57:30 +30:45:00 BOO CVN",
+    "156:157 P+ 13:57:30 +30:45:00 14:02:00 +30:45:00 BOO CVN",
+    "157:158 M+ 14:02:00 +30:45:00 14:02:00 +48:30:00 BOO CVN",
+    "158:159 M+ 14:02:00 +48:30:00 14:02:00 +55:30:00 BOO UMA",
+    "159:160 P+ 14:02:00 +55:30:00 14:25:00 +55:30:00 BOO UMA",
+    "160:161 P+ 14:25:00 +55:30:00 15:15:00 +55:30:00 BOO DRA",
+    "162:163 P+ 15:15:00 +53:00:00 15:45:00 +53:00:00 BOO DRA",
+    "171:184 M+ 04:16:00 -40:00:00 04:16:00 -37:00:00 CAE ERI",
+    "184:183 P+ 04:16:00 -37:00:00 04:35:00 -37:00:00 CAE ERI",
+    "183:182 M+ 04:35:00 -37:00:00 04:35:00 -30:00:00 CAE ERI",
+    "182:181 P+ 04:35:00 -30:00:00 04:42:00 -30:00:00 CAE ERI",
+    "181:180 M+ 04:42:00 -30:00:00 04:42:00 -27:15:00 CAE ERI",
+    "180:179 P+ 04:42:00 -27:15:00 04:50:00 -27:15:00 CAE ERI",
+    "179:178 P+ 04:50:00 -27:15:00 05:00:00 -27:15:00 CAE LEP",
+    "172:171 M+ 04:16:00 -49:00:00 04:16:00 -40:00:00 CAE HOR",
+    "185:186 M+ 03:20:00 +52:30:00 03:20:00 +55:00:00 CAM PER",
+    "187:188 M+ 03:10:00 +55:00:00 03:10:00 +57:00:00 CAM PER",
+    "189:190 M+ 03:06:00 +57:00:00 03:06:00 +68:00:00 CAM CAS",
+    "190:191 P+ 03:06:00 +68:00:00 03:25:00 +68:00:00 CAM CAS",
+    "191:192 M+ 03:25:00 +68:00:00 03:25:00 +77:00:00 CAM CAS",
+    "192:193 P+ 03:25:00 +77:00:00 03:30:30 +77:00:00 CAM CEP",
+    "193:194 M+ 03:30:30 +77:00:00 03:30:30 +80:00:00 CAM CEP",
+    "194:195 P+ 03:30:30 +80:00:00 05:00:00 +80:00:00 CAM CEP",
+    "195:196 M+ 05:00:00 +80:00:00 05:00:00 +85:00:00 CAM CEP",
+    "196:197 P+ 05:00:00 +85:00:00 08:00:00 +85:00:00 CAM CEP",
+    "197:198 M+ 08:00:00 +85:00:00 08:00:00 +86:30:00 CAM CEP",
+    "198:199 P+ 08:00:00 +86:30:00 14:30:00 +86:30:00 CAM UMI",
+    "204:205 M+ 11:30:00 +77:00:00 11:30:00 +80:00:00 CAM DRA",
+    "206:207 M+ 10:40:00 +80:00:00 10:40:00 +82:00:00 CAM DRA",
+    "212:213 M+ 07:00:00 +60:00:00 07:00:00 +62:00:00 CAM LYN",
+    "217:218 M+ 07:55:30 +07:00:00 07:55:30 +10:00:00 CNC CMI",
+    "219:220 M+ 07:48:30 +10:00:00 07:48:30 +13:30:00 CNC CMI",
+    "220:221 M+ 07:48:30 +13:30:00 07:48:30 +20:00:00 CNC GEM",
+    "221:222 P+ 07:48:30 +20:00:00 07:53:00 +20:00:00 CNC GEM",
+    "222:223 M+ 07:53:00 +20:00:00 07:53:00 +28:00:00 CNC GEM",
+    "223:224 P+ 07:53:00 +28:00:00 08:00:00 +28:00:00 CNC GEM",
+    "224:225 M+ 08:00:00 +28:00:00 08:00:00 +33:30:00 CNC GEM",
+    "225:226 P+ 08:00:00 +33:30:00 09:15:00 +33:30:00 CNC LYN",
+    "227:228 M+ 12:00:00 +34:00:00 12:00:00 +45:00:00 CVN UMA",
+    "228:229 P+ 12:00:00 +45:00:00 12:05:00 +45:00:00 CVN UMA",
+    "229:230 M+ 12:05:00 +45:00:00 12:05:00 +53:00:00 CVN UMA",
+    "230:231 P+ 12:05:00 +53:00:00 13:30:00 +53:00:00 CVN UMA",
+    "232:158 P+ 13:30:00 +48:30:00 14:02:00 +48:30:00 CVN UMA",
+    "233:234 M+ 13:15:00 +28:30:00 13:15:00 +32:00:00 CVN COM",
+    "235:236 M+ 12:20:00 +32:00:00 12:20:00 +34:00:00 CVN COM",
+    "237:238 P+ 06:07:00 -11:00:00 07:22:00 -11:00:00 CMA MON",
+    "241:242 M+ 06:07:00 -33:00:00 06:07:00 -27:15:00 CMA COL",
+    "242:237 M+ 06:07:00 -27:15:00 06:07:00 -11:00:00 CMA LEP",
+    "244:245 M+ 07:12:00 +00:00:00 07:12:00 +01:30:00 CMI MON",
+    "246:247 M+ 07:01:00 +01:30:00 07:01:00 +05:30:00 CMI MON",
+    "248:249 M+ 07:00:00 +05:30:00 07:00:00 +10:00:00 CMI MON",
+    "249:250 M+ 07:00:00 +10:00:00 07:00:00 +12:30:00 CMI GEM",
+    "250:251 P+ 07:00:00 +12:30:00 07:30:00 +12:30:00 CMI GEM",
+    "251:252 M+ 07:30:00 +12:30:00 07:30:00 +13:30:00 CMI GEM",
+    "252:220 P+ 07:30:00 +13:30:00 07:48:30 +13:30:00 CMI GEM",
+    "219:218 P+ 07:48:30 +10:00:00 07:55:30 +10:00:00 CMI CNC",
+    "217:216 P+ 07:55:30 +07:00:00 08:05:00 +07:00:00 CMI CNC",
+    "082:081 P+ 20:32:00 -15:00:00 21:20:00 -15:00:00 CAP AQR",
+    "081:080 M+ 21:20:00 -15:00:00 21:20:00 -09:00:00 CAP AQR",
+    "080:079 P+ 21:20:00 -09:00:00 21:52:00 -09:00:00 CAP AQR",
+    "253:101 M+ 20:00:00 -28:00:00 20:00:00 -12:02:00 CAP SGR",
+    "101:100 M+ 20:00:00 -12:02:00 20:00:00 -09:00:00 CAP AQL",
+    "100:083 P+ 20:00:00 -09:00:00 20:32:00 -09:00:00 CAP AQL",
+    "275:274 M+ 09:02:00 -75:00:00 09:02:00 -64:00:00 CAR VOL",
+    "273:272 M+ 06:50:00 -64:00:00 06:50:00 -58:00:00 CAR PIC",
+    "271:270 M+ 06:30:00 -58:00:00 06:30:00 -55:00:00 CAR PIC",
+    "269:268 M+ 06:10:00 -55:00:00 06:10:00 -52:30:00 CAR PIC",
+    "267:266 M+ 06:00:00 -52:30:00 06:00:00 -50:45:00 CAR PIC",
+    "266:265 P+ 06:00:00 -50:45:00 08:00:00 -50:45:00 CAR PUP",
+    "265:264 P+ 08:00:00 -50:45:00 08:10:00 -50:45:00 CAR VEL",
+    "263:262 P+ 08:10:00 -53:00:00 08:27:00 -53:00:00 CAR VEL",
+    "261:260 P+ 08:27:00 -54:30:00 08:50:00 -54:30:00 CAR VEL",
+    "259:258 P+ 08:50:00 -56:30:00 11:00:00 -56:30:00 CAR VEL",
+    "258:257 P+ 11:00:00 -56:30:00 11:15:00 -56:30:00 CAR CEN",
+    "002:278 M+ 22:52:00 +52:30:00 22:52:00 +56:15:00 CAS LAC",
+    "278:279 M+ 22:52:00 +56:15:00 22:52:00 +59:05:00 CAS CEP",
+    "279:280 P+ 22:52:00 +59:05:00 23:10:00 +59:05:00 CAS CEP",
+    "280:281 M+ 23:10:00 +59:05:00 23:10:00 +63:00:00 CAS CEP",
+    "281:282 P+ 23:10:00 +63:00:00 23:35:00 +63:00:00 CAS CEP",
+    "282:283 M+ 23:35:00 +63:00:00 23:35:00 +66:00:00 CAS CEP",
+    "283:284 P+ 23:35:00 +66:00:00 00:20:00 +66:00:00 CAS CEP",
+    "284:285 M+ 00:20:00 +66:00:00 00:20:00 +77:00:00 CAS CEP",
+    "285:192 P+ 00:20:00 +77:00:00 03:25:00 +77:00:00 CAS CEP",
+    "286:287 M+ 02:26:00 +57:00:00 02:26:00 +58:30:00 CAS PER",
+    "008:007 M+ 00:10:00 +46:00:00 00:10:00 +48:00:00 CAS AND",
+    "006:005 M+ 23:35:00 +48:00:00 23:35:00 +50:00:00 CAS AND",
+    "004:003 M+ 23:20:00 +50:00:00 23:20:00 +52:30:00 CAS AND",
+    "042:307 P+ 11:00:00 -35:00:00 12:15:00 -35:00:00 CEN HYA",
+    "307:306 M+ 12:15:00 -35:00:00 12:15:00 -33:00:00 CEN HYA",
+    "306:305 P+ 12:15:00 -33:00:00 12:35:00 -33:00:00 CEN HYA",
+    "305:304 M+ 12:35:00 -33:00:00 12:35:00 -29:30:00 CEN HYA",
+    "304:303 P+ 12:35:00 -29:30:00 14:55:00 -29:30:00 CEN HYA",
+    "300:299 P+ 14:10:00 -55:00:00 14:32:00 -55:00:00 CEN LUP",
+    "296:295 M+ 12:50:00 -64:00:00 12:50:00 -55:00:00 CEN CRU",
+    "277:257 M+ 11:15:00 -64:00:00 11:15:00 -56:30:00 CEN CAR",
+    "258:041 M+ 11:00:00 -56:30:00 11:00:00 -39:45:00 CEN VEL",
+    "041:042 M+ 11:00:00 -39:45:00 11:00:00 -35:00:00 CEN ANT",
+    "308:309 M+ 20:00:00 +59:30:00 20:00:00 +61:30:00 CEP DRA",
+    "309:310 P+ 20:00:00 +61:30:00 20:25:00 +61:30:00 CEP DRA",
+    "310:311 M+ 20:25:00 +61:30:00 20:25:00 +67:00:00 CEP DRA",
+    "311:312 P+ 20:25:00 +67:00:00 20:40:00 +67:00:00 CEP DRA",
+    "312:313 M+ 20:40:00 +67:00:00 20:40:00 +75:00:00 CEP DRA",
+    "314:315 M+ 20:10:00 +75:00:00 20:10:00 +80:00:00 CEP DRA",
+    "315:316 P+ 20:10:00 +80:00:00 21:00:00 +80:00:00 CEP DRA",
+    "316:317 M+ 21:00:00 +80:00:00 21:00:00 +86:00:00 CEP DRA",
+    "317:318 M+ 21:00:00 +86:00:00 21:00:00 +86:10:00 CEP UMI",
+    "318:319 P+ 21:00:00 +86:10:00 23:00:00 +86:10:00 CEP UMI",
+    "319:320 M+ 23:00:00 +86:10:00 23:00:00 +88:00:00 CEP UMI",
+    "320:321 P+ 23:00:00 +88:00:00 08:00:00 +88:00:00 CEP UMI",
+    "326:327 M+ 21:58:00 +52:45:00 21:58:00 +54:50:00 CEP CYG",
+    "328:329 M+ 20:36:00 +54:50:00 20:36:00 +60:55:00 CEP CYG",
+    "332:333 M+ 00:20:00 +00:00:00 00:20:00 +02:00:00 CET PSC",
+    "333:334 P+ 00:20:00 +02:00:00 02:00:00 +02:00:00 CET PSC",
+    "334:118 M+ 02:00:00 +02:00:00 02:00:00 +09:55:00 CET PSC",
+    "118:129 P+ 02:00:00 +09:55:00 03:17:00 +09:55:00 CET ARI",
+    "076:075 M+ 23:50:00 -25:30:00 23:50:00 -07:00:00 CET AQR",
+    "075:341 P+ 23:50:00 -07:00:00 00:20:00 -07:00:00 CET PSC",
+    "341:332 M+ 00:20:00 -07:00:00 00:20:00 +00:00:00 CET PSC",
+    "342:343 M+ 07:40:00 -82:30:00 07:40:00 -75:00:00 CHA MEN",
+    "343:275 P+ 07:40:00 -75:00:00 09:02:00 -75:00:00 CHA VOL",
+    "275:276 P+ 09:02:00 -75:00:00 11:15:00 -75:00:00 CHA CAR",
+    "276:060 P+ 11:15:00 -75:00:00 13:40:00 -75:00:00 CHA MUS",
+    "297:298 P+ 13:30:00 -64:00:00 14:32:00 -64:00:00 CIR CEN",
+    "298:299 M+ 14:32:00 -64:00:00 14:32:00 -55:00:00 CIR CEN",
+    "299:354 P+ 14:32:00 -55:00:00 15:03:00 -55:00:00 CIR LUP",
+    "354:353 P+ 15:03:00 -55:00:00 15:20:00 -55:00:00 CIR NOR",
+    "059:345 M+ 13:40:00 -70:00:00 13:40:00 -65:00:00 CIR MUS",
+    "344:297 M+ 13:30:00 -65:00:00 13:30:00 -64:00:00 CIR MUS",
+    "177:178 M+ 05:00:00 -43:00:00 05:00:00 -27:15:00 COL CAE",
+    "178:242 P+ 05:00:00 -27:15:00 06:07:00 -27:15:00 COL LEP",
+    "241:240 P+ 06:07:00 -33:00:00 06:35:00 -33:00:00 COL CMA",
+    "357:358 M+ 11:52:00 +14:00:00 11:52:00 +29:00:00 COM LEO",
+    "358:359 P+ 11:52:00 +29:00:00 12:00:00 +29:00:00 COM UMA",
+    "359:227 M+ 12:00:00 +29:00:00 12:00:00 +34:00:00 COM UMA",
+    "227:236 P+ 12:00:00 +34:00:00 12:20:00 +34:00:00 COM CVN",
+    "235:234 P+ 12:20:00 +32:00:00 13:15:00 +32:00:00 COM CVN",
+    "233:154 P+ 13:15:00 +28:30:00 13:30:00 +28:30:00 COM CVN",
+    "362:363 P+ 17:50:00 -37:00:00 19:10:00 -37:00:00 CRA SGR",
+    "107:362 M+ 17:50:00 -45:30:00 17:50:00 -37:00:00 CRA SCO",
+    "169:168 M+ 15:11:00 +26:00:00 15:11:00 +33:00:00 CRB BOO",
+    "168:167 P+ 15:11:00 +33:00:00 15:26:00 +33:00:00 CRB BOO",
+    "167:166 M+ 15:26:00 +33:00:00 15:26:00 +40:00:00 CRB BOO",
+    "166:165 P+ 15:26:00 +40:00:00 15:45:00 +40:00:00 CRB BOO",
+    "165:365 P+ 15:45:00 +40:00:00 16:20:00 +40:00:00 CRB HER",
+    "372:371 M+ 11:50:00 -24:30:00 11:50:00 -11:00:00 CRV CRT",
+    "371:370 P+ 11:50:00 -11:00:00 12:50:00 -11:00:00 CRV VIR",
+    "376:382 P+ 10:45:00 -06:00:00 11:31:00 -06:00:00 CRT LEO",
+    "382:381 P+ 11:31:00 -06:00:00 11:50:00 -06:00:00 CRT VIR",
+    "380:379 M+ 10:50:00 -24:30:00 10:50:00 -19:00:00 CRT HYA",
+    "378:377 M+ 10:45:00 -19:00:00 10:45:00 -11:00:00 CRT HYA",
+    "377:376 M+ 10:45:00 -11:00:00 10:45:00 -06:00:00 CRT SEX",
+    "294:295 P+ 11:50:00 -55:00:00 12:50:00 -55:00:00 CRU CEN",
+    "293:294 M+ 11:50:00 -64:00:00 11:50:00 -55:00:00 CRU CEN",
+    "383:384 M+ 19:15:30 +27:30:00 19:15:30 +30:00:00 CYG LYR",
+    "384:385 P+ 19:15:30 +30:00:00 19:21:30 +30:00:00 CYG LYR",
+    "385:386 M+ 19:21:30 +30:00:00 19:21:30 +36:30:00 CYG LYR",
+    "386:387 P+ 19:21:30 +36:30:00 19:24:00 +36:30:00 CYG LYR",
+    "387:388 M+ 19:24:00 +36:30:00 19:24:00 +43:30:00 CYG LYR",
+    "389:390 M+ 19:10:00 +43:30:00 19:10:00 +47:30:00 CYG LYR",
+    "391:392 M+ 19:05:00 +47:30:00 19:05:00 +55:30:00 CYG DRA",
+    "392:393 P+ 19:05:00 +55:30:00 19:25:00 +55:30:00 CYG DRA",
+    "393:394 M+ 19:25:00 +55:30:00 19:25:00 +58:00:00 CYG DRA",
+    "394:395 P+ 19:25:00 +58:00:00 19:46:00 +58:00:00 CYG DRA",
+    "395:396 M+ 19:46:00 +58:00:00 19:46:00 +59:30:00 CYG DRA",
+    "396:308 P+ 19:46:00 +59:30:00 20:00:00 +59:30:00 CYG DRA",
+    "308:331 P+ 20:00:00 +59:30:00 20:32:12 +59:30:00 CYG CEP",
+    "331:330 M+ 20:32:12 +59:30:00 20:32:12 +60:55:00 CYG CEP",
+    "330:329 P+ 20:32:12 +60:55:00 20:36:00 +60:55:00 CYG CEP",
+    "328:327 P+ 20:36:00 +54:50:00 21:58:00 +54:50:00 CYG CEP",
+    "405:406 M+ 20:55:00 +28:00:00 20:55:00 +29:00:00 CYG VUL",
+    "099:098 M+ 20:18:00 +02:00:00 20:18:00 +08:30:00 DEL AQL",
+    "097:096 M+ 20:08:30 +08:30:00 20:08:30 +15:45:00 DEL AQL",
+    "096:409 P+ 20:08:30 +15:45:00 20:15:00 +15:45:00 DEL SGE",
+    "409:410 M+ 20:15:00 +15:45:00 20:15:00 +20:30:00 DEL SGE",
+    "410:411 P+ 20:15:00 +20:30:00 20:34:00 +20:30:00 DEL VUL",
+    "412:413 P+ 20:34:00 +19:30:00 21:03:00 +19:30:00 DEL VUL",
+    "418:437 M+ 03:50:00 -53:10:00 03:50:00 -51:00:00 DOR HOR",
+    "437:436 P+ 03:50:00 -51:00:00 04:05:00 -51:00:00 DOR HOR",
+    "436:435 M+ 04:05:00 -51:00:00 04:05:00 -49:00:00 DOR HOR",
+    "435:172 P+ 04:05:00 -49:00:00 04:16:00 -49:00:00 DOR HOR",
+    "172:173 P+ 04:16:00 -49:00:00 04:30:00 -49:00:00 DOR CAE",
+    "434:433 P+ 04:30:00 -54:00:00 05:00:00 -54:00:00 DOR PIC",
+    "432:431 P+ 05:00:00 -57:30:00 05:30:00 -57:30:00 DOR PIC",
+    "430:429 P+ 05:30:00 -61:00:00 06:00:00 -61:00:00 DOR PIC",
+    "428:427 P+ 06:00:00 -64:00:00 06:35:00 -64:00:00 DOR PIC",
+    "425:424 M+ 04:35:00 -70:00:00 04:35:00 -67:30:00 DOR HYI",
+    "424:423 M+ 04:35:00 -67:30:00 04:35:00 -59:00:00 DOR RET",
+    "422:421 M+ 04:20:00 -59:00:00 04:20:00 -56:30:00 DOR RET",
+    "420:419 M+ 04:00:00 -56:30:00 04:00:00 -53:10:00 DOR RET",
+    "209:208 M+ 09:10:00 +73:30:00 09:10:00 +82:00:00 DRA CAM",
+    "208:207 P+ 09:10:00 +82:00:00 10:40:00 +82:00:00 DRA CAM",
+    "206:205 P+ 10:40:00 +80:00:00 11:30:00 +80:00:00 DRA CAM",
+    "204:203 P+ 11:30:00 +77:00:00 13:00:00 +77:00:00 DRA CAM",
+    "438:439 P+ 13:00:00 +70:00:00 14:00:00 +70:00:00 DRA UMI",
+    "440:441 P+ 14:00:00 +66:00:00 15:40:00 +66:00:00 DRA UMI",
+    "441:442 M+ 15:40:00 +66:00:00 15:40:00 +70:00:00 DRA UMI",
+    "442:443 P+ 15:40:00 +70:00:00 16:32:00 +70:00:00 DRA UMI",
+    "443:444 M+ 16:32:00 +70:00:00 16:32:00 +75:00:00 DRA UMI",
+    "444:445 P+ 16:32:00 +75:00:00 17:30:00 +75:00:00 DRA UMI",
+    "445:446 M+ 17:30:00 +75:00:00 17:30:00 +80:00:00 DRA UMI",
+    "446:447 P+ 17:30:00 +80:00:00 18:00:00 +80:00:00 DRA UMI",
+    "447:448 M+ 18:00:00 +80:00:00 18:00:00 +86:00:00 DRA UMI",
+    "448:317 P+ 18:00:00 +86:00:00 21:00:00 +86:00:00 DRA UMI",
+    "314:313 P+ 20:10:00 +75:00:00 20:40:00 +75:00:00 DRA CEP",
+    "449:450 M+ 18:14:00 +47:30:00 18:14:00 +50:30:00 DRA HER",
+    "451:452 M+ 17:00:00 +50:30:00 17:00:00 +51:30:00 DRA HER",
+    "164:163 M+ 15:45:00 +51:30:00 15:45:00 +53:00:00 DRA BOO",
+    "162:161 M+ 15:15:00 +53:00:00 15:15:00 +55:30:00 DRA BOO",
+    "160:453 M+ 14:25:00 +55:30:00 14:25:00 +63:00:00 DRA UMA",
+    "454:455 M+ 13:30:00 +63:00:00 13:30:00 +64:00:00 DRA UMA",
+    "456:457 M+ 12:00:00 +64:00:00 12:00:00 +66:30:00 DRA UMA",
+    "458:459 M+ 11:20:00 +66:30:00 11:20:00 +73:30:00 DRA UMA",
+    "063:417 M+ 20:50:00 +02:00:00 20:50:00 +06:00:00 EQU DEL",
+    "417:416 P+ 20:50:00 +06:00:00 20:52:30 +06:00:00 EQU DEL",
+    "416:415 M+ 20:52:30 +06:00:00 20:52:30 +11:50:00 EQU DEL",
+    "415:414 P+ 20:52:30 +11:50:00 21:03:00 +11:50:00 EQU DEL",
+    "414:460 P+ 21:03:00 +11:50:00 21:07:00 +11:50:00 EQU PEG",
+    "460:461 M+ 21:07:00 +11:50:00 21:07:00 +12:30:00 EQU PEG",
+    "461:462 P+ 21:07:00 +12:30:00 21:20:00 +12:30:00 EQU PEG",
+    "463:464 P+ 03:35:00 +00:00:00 04:37:00 +00:00:00 ERI TAU",
+    "464:465 P+ 04:37:00 +00:00:00 04:40:00 +00:00:00 ERI ORI",
+    "466:467 P+ 04:40:00 -04:00:00 05:05:00 -04:00:00 ERI ORI",
+    "484:485 M+ 01:20:00 -58:30:00 01:20:00 -53:30:00 ERI PHE",
+    "485:486 P+ 01:20:00 -53:30:00 01:35:00 -53:30:00 ERI PHE",
+    "486:487 M+ 01:35:00 -53:30:00 01:35:00 -51:30:00 ERI PHE",
+    "487:488 P+ 01:35:00 -51:30:00 01:50:00 -51:30:00 ERI PHE",
+    "488:489 M+ 01:50:00 -51:30:00 01:50:00 -48:10:00 ERI PHE",
+    "489:490 P+ 01:50:00 -48:10:00 02:20:00 -48:10:00 ERI PHE",
+    "490:491 M+ 02:20:00 -48:10:00 02:20:00 -40:00:00 ERI PHE",
+    "491:492 P+ 02:20:00 -40:00:00 03:00:00 -40:00:00 ERI FOR",
+    "492:493 M+ 03:00:00 -40:00:00 03:00:00 -39:35:00 ERI FOR",
+    "493:494 P+ 03:00:00 -39:35:00 03:30:00 -39:35:00 ERI FOR",
+    "494:495 M+ 03:30:00 -39:35:00 03:30:00 -36:00:00 ERI FOR",
+    "495:496 P+ 03:30:00 -36:00:00 03:45:00 -36:00:00 ERI FOR",
+    "496:497 M+ 03:45:00 -36:00:00 03:45:00 -24:23:00 ERI FOR",
+    "338:337 M+ 02:39:00 -24:23:00 02:39:00 -01:45:00 ERI CET",
+    "337:336 P+ 02:39:00 -01:45:00 03:17:00 -01:45:00 ERI CET",
+    "336:498 P+ 03:17:00 -01:45:00 03:35:00 -01:45:00 ERI TAU",
+    "498:463 M+ 03:35:00 -01:45:00 03:35:00 +00:00:00 ERI TAU",
+    "339:338 P+ 01:40:00 -24:23:00 02:39:00 -24:23:00 FOR CET",
+    "338:497 P+ 02:39:00 -24:23:00 03:45:00 -24:23:00 FOR ERI",
+    "499:340 M+ 01:40:00 -40:00:00 01:40:00 -25:30:00 FOR SCL",
+    "340:339 M+ 01:40:00 -25:30:00 01:40:00 -24:23:00 FOR CET",
+    "500:501 M+ 06:18:30 +12:00:00 06:18:30 +17:30:00 GEM ORI",
+    "502:503 M+ 06:13:00 +17:30:00 06:13:00 +21:30:00 GEM ORI",
+    "504:505 M+ 05:53:00 +21:30:00 05:53:00 +22:50:00 GEM ORI",
+    "505:146 M+ 05:53:00 +22:50:00 05:53:00 +28:00:00 GEM TAU",
+    "146:145 P+ 05:53:00 +28:00:00 06:32:00 +28:00:00 GEM AUR",
+    "145:144 M+ 06:32:00 +28:00:00 06:32:00 +35:30:00 GEM AUR",
+    "144:143 P+ 06:32:00 +35:30:00 07:22:00 +35:30:00 GEM AUR",
+    "143:506 P+ 07:22:00 +35:30:00 07:45:00 +35:30:00 GEM LYN",
+    "507:225 P+ 07:45:00 +33:30:00 08:00:00 +33:30:00 GEM LYN",
+    "508:509 M+ 06:56:00 +10:00:00 06:56:00 +12:00:00 GEM MON",
+    "510:518 P+ 21:20:00 -37:00:00 23:00:00 -37:00:00 GRU PSA",
+    "518:517 P+ 23:00:00 -37:00:00 23:20:00 -37:00:00 GRU SCL",
+    "514:513 M+ 22:00:00 -57:00:00 22:00:00 -50:00:00 GRU IND",
+    "512:511 M+ 21:20:00 -50:00:00 21:20:00 -45:30:00 GRU IND",
+    "511:510 M+ 21:20:00 -45:30:00 21:20:00 -37:00:00 GRU MIC",
+    "520:521 M+ 16:05:00 +04:00:00 16:05:00 +16:00:00 HER SER1",
+    "522:523 M+ 15:55:00 +16:00:00 15:55:00 +22:00:00 HER SER1",
+    "523:524 P+ 15:55:00 +22:00:00 16:02:00 +22:00:00 HER SER1",
+    "524:369 M+ 16:02:00 +22:00:00 16:02:00 +26:00:00 HER SER1",
+    "369:368 P+ 16:02:00 +26:00:00 16:10:00 +26:00:00 HER CRB",
+    "368:367 M+ 16:10:00 +26:00:00 16:10:00 +27:00:00 HER CRB",
+    "367:366 P+ 16:10:00 +27:00:00 16:20:00 +27:00:00 HER CRB",
+    "366:365 M+ 16:20:00 +27:00:00 16:20:00 +40:00:00 HER CRB",
+    "165:164 M+ 15:45:00 +40:00:00 15:45:00 +51:30:00 HER BOO",
+    "164:452 P+ 15:45:00 +51:30:00 17:00:00 +51:30:00 HER DRA",
+    "451:450 P+ 17:00:00 +50:30:00 18:14:00 +50:30:00 HER DRA",
+    "526:527 P+ 18:10:30 +30:00:00 18:22:00 +30:00:00 HER LYR",
+    "528:529 P+ 18:22:00 +26:00:00 18:52:00 +26:00:00 HER LYR",
+    "532:533 M+ 18:15:00 +12:00:00 18:15:00 +14:20:00 HER OPH",
+    "542:483 M+ 02:10:00 -67:30:00 02:10:00 -58:30:00 HOR HYI",
+    "483:482 M+ 02:10:00 -58:30:00 02:10:00 -54:00:00 HOR ERI",
+    "482:481 P+ 02:10:00 -54:00:00 02:25:00 -54:00:00 HOR ERI",
+    "481:480 M+ 02:25:00 -54:00:00 02:25:00 -51:00:00 HOR ERI",
+    "480:479 P+ 02:25:00 -51:00:00 02:40:00 -51:00:00 HOR ERI",
+    "479:478 M+ 02:40:00 -51:00:00 02:40:00 -49:00:00 HOR ERI",
+    "478:477 P+ 02:40:00 -49:00:00 03:00:00 -49:00:00 HOR ERI",
+    "477:476 M+ 03:00:00 -49:00:00 03:00:00 -46:00:00 HOR ERI",
+    "476:475 P+ 03:00:00 -46:00:00 03:25:00 -46:00:00 HOR ERI",
+    "475:474 M+ 03:25:00 -46:00:00 03:25:00 -44:00:00 HOR ERI",
+    "474:473 P+ 03:25:00 -44:00:00 03:52:00 -44:00:00 HOR ERI",
+    "473:472 M+ 03:52:00 -44:00:00 03:52:00 -40:00:00 HOR ERI",
+    "472:171 P+ 03:52:00 -40:00:00 04:16:00 -40:00:00 HOR ERI",
+    "243:216 M+ 08:05:00 +00:00:00 08:05:00 +07:00:00 HYA CMI",
+    "216:215 P+ 08:05:00 +07:00:00 09:15:00 +07:00:00 HYA CNC",
+    "215:543 P+ 09:15:00 +07:00:00 09:35:00 +07:00:00 HYA LEO",
+    "545:377 P+ 09:35:00 -11:00:00 10:45:00 -11:00:00 HYA SEX",
+    "378:379 P+ 10:45:00 -19:00:00 10:50:00 -19:00:00 HYA CRT",
+    "380:372 P+ 10:50:00 -24:30:00 11:50:00 -24:30:00 HYA CRT",
+    "372:373 P+ 11:50:00 -24:30:00 12:35:00 -24:30:00 HYA CRV",
+    "373:374 M+ 12:35:00 -24:30:00 12:35:00 -22:00:00 HYA CRV",
+    "374:375 P+ 12:35:00 -22:00:00 12:50:00 -22:00:00 HYA CRV",
+    "375:546 P+ 12:50:00 -22:00:00 14:15:00 -22:00:00 HYA VIR",
+    "547:548 P+ 14:15:00 -24:30:00 14:55:00 -24:30:00 HYA LIB",
+    "043:044 M+ 10:50:00 -35:00:00 10:50:00 -31:10:00 HYA ANT",
+    "045:046 M+ 10:35:00 -31:10:00 10:35:00 -29:10:00 HYA ANT",
+    "047:048 M+ 10:15:00 -29:10:00 10:15:00 -26:30:00 HYA ANT",
+    "049:050 M+ 09:45:00 -26:30:00 09:45:00 -24:00:00 HYA ANT",
+    "549:550 M+ 09:05:00 -24:00:00 09:05:00 -19:00:00 HYA PYX",
+    "551:552 M+ 08:35:00 -19:00:00 08:35:00 -17:00:00 HYA PYX",
+    "553:554 M+ 08:22:00 -17:00:00 08:22:00 -11:00:00 HYA PUP",
+    "555:243 M+ 08:05:00 -11:00:00 08:05:00 +00:00:00 HYA MON",
+    "559:560 M+ 00:00:00 -82:30:00 00:00:00 -75:00:00 HYI OCT",
+    "560:561 P+ 00:00:00 -75:00:00 00:45:00 -75:00:00 HYI TUC",
+    "562:563 P+ 00:45:00 -76:00:00 01:20:00 -76:00:00 HYI TUC",
+    "563:484 M+ 01:20:00 -76:00:00 01:20:00 -58:30:00 HYI TUC",
+    "484:483 P+ 01:20:00 -58:30:00 02:10:00 -58:30:00 HYI ERI",
+    "542:541 P+ 02:10:00 -67:30:00 03:12:00 -67:30:00 HYI HOR",
+    "541:424 P+ 03:12:00 -67:30:00 04:35:00 -67:30:00 HYI RET",
+    "564:571 M+ 21:20:00 -75:00:00 21:20:00 -60:00:00 IND PAV",
+    "570:569 M+ 20:20:00 -60:00:00 20:20:00 -57:00:00 IND PAV",
+    "569:568 M+ 20:20:00 -57:00:00 20:20:00 -45:30:00 IND TEL",
+    "568:511 P+ 20:20:00 -45:30:00 21:20:00 -45:30:00 IND MIC",
+    "512:513 P+ 21:20:00 -50:00:00 22:00:00 -50:00:00 IND GRU",
+    "567:566 P+ 22:00:00 -67:30:00 23:20:00 -67:30:00 IND TUC",
+    "401:400 M+ 21:52:30 +36:00:00 21:52:30 +43:45:00 LAC CYG",
+    "400:399 P+ 21:52:30 +43:45:00 21:54:30 +43:45:00 LAC CYG",
+    "399:398 M+ 21:54:30 +43:45:00 21:54:30 +44:00:00 LAC CYG",
+    "398:397 P+ 21:54:30 +44:00:00 21:58:00 +44:00:00 LAC CYG",
+    "397:326 M+ 21:58:00 +44:00:00 21:58:00 +52:45:00 LAC CYG",
+    "326:325 P+ 21:58:00 +52:45:00 22:08:00 +52:45:00 LAC CEP",
+    "325:324 M+ 22:08:00 +52:45:00 22:08:00 +55:00:00 LAC CEP",
+    "324:323 P+ 22:08:00 +55:00:00 22:19:00 +55:00:00 LAC CEP",
+    "323:322 M+ 22:19:00 +55:00:00 22:19:00 +56:15:00 LAC CEP",
+    "322:278 P+ 22:19:00 +56:15:00 22:52:00 +56:15:00 LAC CEP",
+    "572:573 M+ 22:49:00 +34:30:00 22:49:00 +35:00:00 LAC PEG",
+    "574:575 M+ 22:00:00 +35:00:00 22:00:00 +36:00:00 LAC PEG",
+    "576:577 M+ 10:45:00 +00:00:00 10:45:00 +07:00:00 LEO SEX",
+    "215:226 M+ 09:15:00 +07:00:00 09:15:00 +33:30:00 LEO CNC",
+    "226:578 P+ 09:15:00 +33:30:00 09:53:00 +33:30:00 LEO LMI",
+    "579:580 P+ 09:53:00 +28:30:00 10:30:00 +28:30:00 LEO LMI",
+    "581:582 P+ 10:30:00 +23:30:00 10:45:00 +23:30:00 LEO LMI",
+    "582:583 M+ 10:45:00 +23:30:00 10:45:00 +25:30:00 LEO LMI",
+    "583:584 P+ 10:45:00 +25:30:00 11:00:00 +25:30:00 LEO LMI",
+    "584:585 M+ 11:00:00 +25:30:00 11:00:00 +29:00:00 LEO LMI",
+    "585:358 P+ 11:00:00 +29:00:00 11:52:00 +29:00:00 LEO UMA",
+    "376:576 M+ 10:45:00 -06:00:00 10:45:00 +00:00:00 LEO SEX",
+    "226:589 M+ 09:15:00 +33:30:00 09:15:00 +39:45:00 LMI LYN",
+    "589:590 P+ 09:15:00 +39:45:00 09:35:00 +39:45:00 LMI LYN",
+    "590:591 M+ 09:35:00 +39:45:00 09:35:00 +42:00:00 LMI LYN",
+    "591:592 P+ 09:35:00 +42:00:00 10:10:00 +42:00:00 LMI UMA",
+    "593:594 P+ 10:10:00 +40:00:00 10:47:00 +40:00:00 LMI UMA",
+    "595:596 P+ 10:47:00 +34:00:00 11:00:00 +34:00:00 LMI UMA",
+    "581:580 M+ 10:30:00 +23:30:00 10:30:00 +28:30:00 LMI LEO",
+    "579:578 M+ 09:53:00 +28:30:00 09:53:00 +33:30:00 LMI LEO",
+    "179:471 M+ 04:50:00 -27:15:00 04:50:00 -14:30:00 LEP ERI",
+    "471:470 P+ 04:50:00 -14:30:00 04:55:00 -14:30:00 LEP ERI",
+    "470:469 M+ 04:55:00 -14:30:00 04:55:00 -11:00:00 LEP ERI",
+    "469:468 P+ 04:55:00 -11:00:00 05:05:00 -11:00:00 LEP ERI",
+    "468:597 P+ 05:05:00 -11:00:00 05:50:00 -11:00:00 LEP ORI",
+    "597:237 P+ 05:50:00 -11:00:00 06:07:00 -11:00:00 LEP MON",
+    "607:606 P+ 15:05:00 -03:15:00 15:55:00 -03:15:00 LIB SER1",
+    "303:548 M+ 14:55:00 -29:30:00 14:55:00 -24:30:00 LIB HYA",
+    "547:546 M+ 14:15:00 -24:30:00 14:15:00 -22:00:00 LIB HYA",
+    "546:601 M+ 14:15:00 -22:00:00 14:15:00 -08:00:00 LIB VIR",
+    "601:600 P+ 14:15:00 -08:00:00 14:40:00 -08:00:00 LIB VIR",
+    "600:599 M+ 14:40:00 -08:00:00 14:40:00 +00:00:00 LIB VIR",
+    "599:598 P+ 14:40:00 +00:00:00 15:05:00 +00:00:00 LIB VIR",
+    "300:301 M+ 14:10:00 -55:00:00 14:10:00 -42:00:00 LUP CEN",
+    "301:302 P+ 14:10:00 -42:00:00 14:55:00 -42:00:00 LUP CEN",
+    "302:303 M+ 14:55:00 -42:00:00 14:55:00 -29:30:00 LUP CEN",
+    "303:602 P+ 14:55:00 -29:30:00 15:40:00 -29:30:00 LUP LIB",
+    "602:614 P+ 15:40:00 -29:30:00 16:00:00 -29:30:00 LUP SCO",
+    "143:142 M+ 07:22:00 +35:30:00 07:22:00 +44:30:00 LYN AUR",
+    "141:140 M+ 06:48:00 +44:30:00 06:48:00 +50:00:00 LYN AUR",
+    "139:138 M+ 06:30:00 +50:00:00 06:30:00 +54:00:00 LYN AUR",
+    "137:136 M+ 06:06:00 +54:00:00 06:06:00 +56:00:00 LYN AUR",
+    "136:214 M+ 06:06:00 +56:00:00 06:06:00 +62:00:00 LYN CAM",
+    "214:213 P+ 06:06:00 +62:00:00 07:00:00 +62:00:00 LYN CAM",
+    "212:211 P+ 07:00:00 +60:00:00 07:58:00 +60:00:00 LYN CAM",
+    "211:615 P+ 07:58:00 +60:00:00 08:25:00 +60:00:00 LYN UMA",
+    "616:617 P+ 08:25:00 +47:00:00 09:10:00 +47:00:00 LYN UMA",
+    "618:591 P+ 09:10:00 +42:00:00 09:35:00 +42:00:00 LYN UMA",
+    "507:506 M+ 07:45:00 +33:30:00 07:45:00 +35:30:00 LYN GEM",
+    "530:529 M+ 18:52:00 +25:30:00 18:52:00 +26:00:00 LYR HER",
+    "528:527 M+ 18:22:00 +26:00:00 18:22:00 +30:00:00 LYR HER",
+    "526:525 M+ 18:10:30 +30:00:00 18:10:30 +47:30:00 LYR HER",
+    "525:449 P+ 18:10:30 +47:30:00 18:14:00 +47:30:00 LYR HER",
+    "449:391 P+ 18:14:00 +47:30:00 19:05:00 +47:30:00 LYR DRA",
+    "391:390 P+ 19:05:00 +47:30:00 19:10:00 +47:30:00 LYR CYG",
+    "389:388 P+ 19:10:00 +43:30:00 19:24:00 +43:30:00 LYR CYG",
+    "621:558 M+ 03:30:00 -85:00:00 03:30:00 -82:30:00 MEN OCT",
+    "558:557 M+ 03:30:00 -82:30:00 03:30:00 -75:00:00 MEN HYI",
+    "557:556 P+ 03:30:00 -75:00:00 04:35:00 -75:00:00 MEN HYI",
+    "556:425 M+ 04:35:00 -75:00:00 04:35:00 -70:00:00 MEN HYI",
+    "425:426 P+ 04:35:00 -70:00:00 06:35:00 -70:00:00 MEN DOR",
+    "622:343 P+ 06:35:00 -75:00:00 07:40:00 -75:00:00 MEN VOL",
+    "254:255 P+ 20:20:00 -28:00:00 21:20:00 -28:00:00 MIC CAP",
+    "568:254 M+ 20:20:00 -45:30:00 20:20:00 -28:00:00 MIC SGR",
+    "623:624 M+ 06:14:30 +00:00:00 06:14:30 +10:00:00 MON ORI",
+    "624:625 P+ 06:14:30 +10:00:00 06:18:30 +10:00:00 MON ORI",
+    "625:500 M+ 06:18:30 +10:00:00 06:18:30 +12:00:00 MON ORI",
+    "500:509 P+ 06:18:30 +12:00:00 06:56:00 +12:00:00 MON GEM",
+    "508:249 P+ 06:56:00 +10:00:00 07:00:00 +10:00:00 MON GEM",
+    "248:247 P+ 07:00:00 +05:30:00 07:01:00 +05:30:00 MON CMI",
+    "246:245 P+ 07:01:00 +01:30:00 07:12:00 +01:30:00 MON CMI",
+    "244:243 P+ 07:12:00 +00:00:00 08:05:00 +00:00:00 MON CMI",
+    "597:626 M+ 05:50:00 -11:00:00 05:50:00 -04:00:00 MON ORI",
+    "626:627 P+ 05:50:00 -04:00:00 06:14:30 -04:00:00 MON ORI",
+    "627:623 M+ 06:14:30 -04:00:00 06:14:30 +00:00:00 MON ORI",
+    "277:293 P+ 11:15:00 -64:00:00 11:50:00 -64:00:00 MUS CEN",
+    "293:296 P+ 11:50:00 -64:00:00 12:50:00 -64:00:00 MUS CRU",
+    "296:297 P+ 12:50:00 -64:00:00 13:30:00 -64:00:00 MUS CEN",
+    "344:345 P+ 13:30:00 -65:00:00 13:40:00 -65:00:00 MUS CIR",
+    "276:277 M+ 11:15:00 -75:00:00 11:15:00 -64:00:00 MUS CAR",
+    "352:353 M+ 15:20:00 -60:00:00 15:20:00 -55:00:00 NOR CIR",
+    "354:608 M+ 15:03:00 -55:00:00 15:03:00 -54:00:00 NOR LUP",
+    "608:609 P+ 15:03:00 -54:00:00 15:20:00 -54:00:00 NOR LUP",
+    "609:610 M+ 15:20:00 -54:00:00 15:20:00 -48:00:00 NOR LUP",
+    "610:611 P+ 15:20:00 -48:00:00 15:40:00 -48:00:00 NOR LUP",
+    "611:612 M+ 15:40:00 -48:00:00 15:40:00 -42:00:00 NOR LUP",
+    "612:613 P+ 15:40:00 -42:00:00 16:00:00 -42:00:00 NOR LUP",
+    "613:628 P+ 16:00:00 -42:00:00 16:25:15 -42:00:00 NOR SCO",
+    "559:558 P+ 00:00:00 -82:30:00 03:30:00 -82:30:00 OCT HYI",
+    "621:620 P+ 03:30:00 -85:00:00 07:40:00 -85:00:00 OCT MEN",
+    "620:342 M+ 07:40:00 -85:00:00 07:40:00 -82:30:00 OCT MEN",
+    "342:051 P+ 07:40:00 -82:30:00 13:40:00 -82:30:00 OCT CHA",
+    "051:052 P+ 13:40:00 -82:30:00 18:00:00 -82:30:00 OCT APS",
+    "052:053 M+ 18:00:00 -82:30:00 18:00:00 -75:00:00 OCT APS",
+    "053:564 P+ 18:00:00 -75:00:00 21:20:00 -75:00:00 OCT PAV",
+    "564:565 P+ 21:20:00 -75:00:00 23:20:00 -75:00:00 OCT IND",
+    "565:560 P+ 23:20:00 -75:00:00 00:00:00 -75:00:00 OCT TUC",
+    "629:519 M+ 16:16:00 +00:00:00 16:16:00 +04:00:00 OPH SER1",
+    "519:537 P+ 16:16:00 +04:00:00 16:45:00 +04:00:00 OPH HER",
+    "537:536 M+ 16:45:00 +04:00:00 16:45:00 +12:50:00 OPH HER",
+    "536:535 P+ 16:45:00 +12:50:00 17:15:00 +12:50:00 OPH HER",
+    "535:534 M+ 17:15:00 +12:50:00 17:15:00 +14:20:00 OPH HER",
+    "534:533 P+ 17:15:00 +14:20:00 18:15:00 +14:20:00 OPH HER",
+    "532:089 P+ 18:15:00 +12:00:00 18:39:44 +12:00:00 OPH HER",
+    "631:632 P+ 18:15:00 +04:30:00 18:25:30 +04:30:00 OPH SER2",
+    "637:638 P+ 17:50:00 -04:00:00 17:58:00 -04:00:00 OPH SER2",
+    "642:643 M+ 17:35:00 -11:40:00 17:35:00 -10:00:00 OPH SER2",
+    "645:646 P+ 17:10:00 -16:00:00 17:36:00 -16:00:00 OPH SER2",
+    "648:649 M+ 16:45:00 -30:00:00 16:45:00 -24:35:00 OPH SCO",
+    "650:651 M+ 16:16:00 -24:35:00 16:16:00 -19:15:00 OPH SCO",
+    "651:652 P+ 16:16:00 -19:15:00 16:22:30 -19:15:00 OPH SCO",
+    "652:653 M+ 16:22:30 -19:15:00 16:22:30 -18:15:00 OPH SCO",
+    "654:655 M+ 16:16:00 -18:15:00 16:16:00 -08:00:00 OPH SCO",
+    "605:606 M+ 15:55:00 -08:00:00 15:55:00 -03:15:00 OPH LIB",
+    "606:656 P+ 15:55:00 -03:15:00 16:16:00 -03:15:00 OPH SER1",
+    "656:629 M+ 16:16:00 -03:15:00 16:16:00 +00:00:00 OPH SER1",
+    "464:657 M+ 04:37:00 +00:00:00 04:37:00 +15:30:00 ORI TAU",
+    "657:658 P+ 04:37:00 +15:30:00 04:58:00 +15:30:00 ORI TAU",
+    "658:659 M+ 04:58:00 +15:30:00 04:58:00 +16:00:00 ORI TAU",
+    "659:660 P+ 04:58:00 +16:00:00 05:20:00 +16:00:00 ORI TAU",
+    "661:662 P+ 05:20:00 +15:30:00 05:36:00 +15:30:00 ORI TAU",
+    "663:664 P+ 05:36:00 +12:30:00 05:46:00 +12:30:00 ORI TAU",
+    "664:665 M+ 05:46:00 +12:30:00 05:46:00 +18:00:00 ORI TAU",
+    "666:667 M+ 05:42:00 +18:00:00 05:42:00 +22:50:00 ORI TAU",
+    "667:505 P+ 05:42:00 +22:50:00 05:53:00 +22:50:00 ORI TAU",
+    "504:503 P+ 05:53:00 +21:30:00 06:13:00 +21:30:00 ORI GEM",
+    "502:501 P+ 06:13:00 +17:30:00 06:18:30 +17:30:00 ORI GEM",
+    "468:467 M+ 05:05:00 -11:00:00 05:05:00 -04:00:00 ORI ERI",
+    "466:465 M+ 04:40:00 -04:00:00 04:40:00 +00:00:00 ORI ERI",
+    "053:054 M+ 18:00:00 -75:00:00 18:00:00 -67:30:00 PAV APS",
+    "055:110 M+ 17:30:00 -67:30:00 17:30:00 -57:00:00 PAV ARA",
+    "110:109 P+ 17:30:00 -57:00:00 18:00:00 -57:00:00 PAV ARA",
+    "109:569 P+ 18:00:00 -57:00:00 20:20:00 -57:00:00 PAV TEL",
+    "570:571 P+ 20:20:00 -60:00:00 21:20:00 -60:00:00 PAV IND",
+    "064:462 M+ 21:20:00 +02:00:00 21:20:00 +12:30:00 PEG EQU",
+    "414:413 M+ 21:03:00 +11:50:00 21:03:00 +19:30:00 PEG DEL",
+    "413:668 P+ 21:03:00 +19:30:00 21:15:00 +19:30:00 PEG VUL",
+    "668:669 M+ 21:15:00 +19:30:00 21:15:00 +23:30:00 PEG VUL",
+    "669:670 P+ 21:15:00 +23:30:00 21:25:00 +23:30:00 PEG VUL",
+    "670:404 M+ 21:25:00 +23:30:00 21:25:00 +28:00:00 PEG VUL",
+    "404:403 P+ 21:25:00 +28:00:00 21:44:00 +28:00:00 PEG CYG",
+    "403:402 M+ 21:44:00 +28:00:00 21:44:00 +36:00:00 PEG CYG",
+    "402:401 P+ 21:44:00 +36:00:00 21:52:30 +36:00:00 PEG CYG",
+    "401:575 P+ 21:52:30 +36:00:00 22:00:00 +36:00:00 PEG LAC",
+    "574:573 P+ 22:00:00 +35:00:00 22:49:00 +35:00:00 PEG LAC",
+    "572:001 P+ 22:49:00 +34:30:00 22:52:00 +34:30:00 PEG LAC",
+    "001:037 P+ 22:52:00 +34:30:00 23:30:00 +34:30:00 PEG AND",
+    "036:035 P+ 23:30:00 +32:05:00 23:45:00 +32:05:00 PEG AND",
+    "034:033 P+ 23:45:00 +31:20:00 00:00:00 +31:20:00 PEG AND",
+    "032:031 P+ 00:00:00 +28:00:00 00:04:00 +28:00:00 PEG AND",
+    "030:029 P+ 00:04:00 +22:00:00 00:08:30 +22:00:00 PEG AND",
+    "068:067 M+ 21:40:00 +01:45:00 21:40:00 +02:45:00 PEG AQR",
+    "125:677 M+ 02:43:00 +30:40:00 02:43:00 +34:00:00 PER TRI",
+    "678:679 M+ 02:34:00 +34:00:00 02:34:00 +36:45:00 PER TRI",
+    "019:018 M+ 02:31:00 +36:45:00 02:31:00 +50:30:00 PER AND",
+    "015:014 M+ 01:40:00 +47:00:00 01:40:00 +50:00:00 PER AND",
+    "013:292 M+ 01:22:00 +50:00:00 01:22:00 +54:00:00 PER CAS",
+    "292:291 P+ 01:22:00 +54:00:00 01:42:00 +54:00:00 PER CAS",
+    "291:290 M+ 01:42:00 +54:00:00 01:42:00 +57:30:00 PER CAS",
+    "290:289 P+ 01:42:00 +57:30:00 01:54:30 +57:30:00 PER CAS",
+    "289:288 M+ 01:54:30 +57:30:00 01:54:30 +58:30:00 PER CAS",
+    "288:287 P+ 01:54:30 +58:30:00 02:26:00 +58:30:00 PER CAS",
+    "286:189 P+ 02:26:00 +57:00:00 03:06:00 +57:00:00 PER CAS",
+    "189:188 P+ 03:06:00 +57:00:00 03:10:00 +57:00:00 PER CAM",
+    "187:186 P+ 03:10:00 +55:00:00 03:20:00 +55:00:00 PER CAM",
+    "185:133 P+ 03:20:00 +52:30:00 04:41:30 +52:30:00 PER CAM",
+    "516:499 P+ 23:20:00 -40:00:00 01:40:00 -40:00:00 PHE SCL",
+    "499:491 P+ 01:40:00 -40:00:00 02:20:00 -40:00:00 PHE FOR",
+    "680:515 M+ 23:20:00 -58:30:00 23:20:00 -57:00:00 PHE TUC",
+    "515:516 M+ 23:20:00 -57:00:00 23:20:00 -40:00:00 PHE GRU",
+    "267:268 P+ 06:00:00 -52:30:00 06:10:00 -52:30:00 PIC CAR",
+    "269:270 P+ 06:10:00 -55:00:00 06:30:00 -55:00:00 PIC CAR",
+    "271:272 P+ 06:30:00 -58:00:00 06:50:00 -58:00:00 PIC CAR",
+    "428:429 M+ 06:00:00 -64:00:00 06:00:00 -61:00:00 PIC DOR",
+    "430:431 M+ 05:30:00 -61:00:00 05:30:00 -57:30:00 PIC DOR",
+    "432:433 M+ 05:00:00 -57:30:00 05:00:00 -54:00:00 PIC DOR",
+    "434:173 M+ 04:30:00 -54:00:00 04:30:00 -49:00:00 PIC DOR",
+    "173:174 M+ 04:30:00 -49:00:00 04:30:00 -46:30:00 PIC CAE",
+    "174:175 P+ 04:30:00 -46:30:00 04:50:00 -46:30:00 PIC CAE",
+    "175:176 M+ 04:50:00 -46:30:00 04:50:00 -43:00:00 PIC CAE",
+    "176:177 P+ 04:50:00 -43:00:00 05:00:00 -43:00:00 PIC CAE",
+    "177:356 P+ 05:00:00 -43:00:00 06:00:00 -43:00:00 PIC COL",
+    "072:071 M+ 22:45:00 +00:00:00 22:45:00 +02:00:00 PSC AQR",
+    "071:676 M+ 22:45:00 +02:00:00 22:45:00 +07:30:00 PSC PEG",
+    "676:675 P+ 22:45:00 +07:30:00 23:50:00 +07:30:00 PSC PEG",
+    "675:674 M+ 23:50:00 +07:30:00 23:50:00 +10:00:00 PSC PEG",
+    "674:673 P+ 23:50:00 +10:00:00 00:00:00 +10:00:00 PSC PEG",
+    "673:672 M+ 00:00:00 +10:00:00 00:00:00 +12:30:00 PSC PEG",
+    "672:671 P+ 00:00:00 +12:30:00 00:08:30 +12:30:00 PSC PEG",
+    "671:028 M+ 00:08:30 +12:30:00 00:08:30 +21:00:00 PSC PEG",
+    "028:027 P+ 00:08:30 +21:00:00 00:51:00 +21:00:00 PSC AND",
+    "027:026 M+ 00:51:00 +21:00:00 00:51:00 +23:45:00 PSC AND",
+    "025:024 M+ 00:43:00 +23:45:00 00:43:00 +33:00:00 PSC AND",
+    "024:023 P+ 00:43:00 +33:00:00 01:24:30 +33:00:00 PSC AND",
+    "681:682 P+ 01:24:30 +28:00:00 01:40:00 +28:00:00 PSC TRI",
+    "119:118 P+ 01:40:00 +09:55:00 02:00:00 +09:55:00 PSC ARI",
+    "075:074 M+ 23:50:00 -07:00:00 23:50:00 -04:00:00 PSC AQR",
+    "073:072 M+ 22:45:00 -04:00:00 22:45:00 +00:00:00 PSC AQR",
+    "510:255 M+ 21:20:00 -37:00:00 21:20:00 -28:00:00 PSA MIC",
+    "255:256 M+ 21:20:00 -28:00:00 21:20:00 -25:30:00 PSA CAP",
+    "256:078 P+ 21:20:00 -25:30:00 21:52:00 -25:30:00 PSA CAP",
+    "078:077 P+ 21:52:00 -25:30:00 23:00:00 -25:30:00 PSA AQR",
+    "238:555 P+ 07:22:00 -11:00:00 08:05:00 -11:00:00 PUP MON",
+    "555:554 P+ 08:05:00 -11:00:00 08:22:00 -11:00:00 PUP HYA",
+    "266:356 M+ 06:00:00 -50:45:00 06:00:00 -43:00:00 PUP PIC",
+    "356:355 P+ 06:00:00 -43:00:00 06:35:00 -43:00:00 PUP COL",
+    "355:240 M+ 06:35:00 -43:00:00 06:35:00 -33:00:00 PUP COL",
+    "240:239 P+ 06:35:00 -33:00:00 07:22:00 -33:00:00 PUP CMA",
+    "239:238 M+ 07:22:00 -33:00:00 07:22:00 -11:00:00 PUP CMA",
+    "553:552 P+ 08:22:00 -17:00:00 08:35:00 -17:00:00 PYX HYA",
+    "551:550 P+ 08:35:00 -19:00:00 09:05:00 -19:00:00 PYX HYA",
+    "549:038 P+ 09:05:00 -24:00:00 09:22:00 -24:00:00 PYX HYA",
+    "685:553 M+ 08:22:00 -36:45:00 08:22:00 -17:00:00 PYX PUP",
+    "541:540 M+ 03:12:00 -67:30:00 03:12:00 -57:30:00 RET HOR",
+    "540:539 P+ 03:12:00 -57:30:00 03:30:00 -57:30:00 RET HOR",
+    "539:538 M+ 03:30:00 -57:30:00 03:30:00 -53:10:00 RET HOR",
+    "538:418 P+ 03:30:00 -53:10:00 03:50:00 -53:10:00 RET HOR",
+    "418:419 P+ 03:50:00 -53:10:00 04:00:00 -53:10:00 RET DOR",
+    "420:421 P+ 04:00:00 -56:30:00 04:20:00 -56:30:00 RET DOR",
+    "422:423 P+ 04:20:00 -59:00:00 04:35:00 -59:00:00 RET DOR",
+    "091:531 M+ 18:52:00 +18:30:00 18:52:00 +21:05:00 SGE HER",
+    "531:686 P+ 18:52:00 +21:05:00 19:15:00 +21:05:00 SGE VUL",
+    "687:688 P+ 19:15:00 +19:10:00 19:50:00 +19:10:00 SGE VUL",
+    "688:689 M+ 19:50:00 +19:10:00 19:50:00 +21:15:00 SGE VUL",
+    "689:690 P+ 19:50:00 +21:15:00 20:15:00 +21:15:00 SGE VUL",
+    "095:094 M+ 19:50:00 +15:45:00 19:50:00 +16:10:00 SGE AQL",
+    "093:092 M+ 19:00:00 +16:10:00 19:00:00 +18:30:00 SGE AQL",
+    "102:101 P+ 18:52:00 -12:02:00 20:00:00 -12:02:00 SGR AQL",
+    "253:254 P+ 20:00:00 -28:00:00 20:20:00 -28:00:00 SGR CAP",
+    "364:363 M+ 19:10:00 -45:30:00 19:10:00 -37:00:00 SGR CRA",
+    "362:693 M+ 17:50:00 -37:00:00 17:50:00 -30:00:00 SGR SCO",
+    "647:646 M+ 17:36:00 -30:00:00 17:36:00 -16:00:00 SGR OPH",
+    "646:692 P+ 17:36:00 -16:00:00 18:15:00 -16:00:00 SGR SER2",
+    "692:691 P+ 18:15:00 -16:00:00 18:52:00 -16:00:00 SGR SCT",
+    "691:102 M+ 18:52:00 -16:00:00 18:52:00 -12:02:00 SGR SCT",
+    "605:655 P+ 15:55:00 -08:00:00 16:16:00 -08:00:00 SCO OPH",
+    "654:653 P+ 16:16:00 -18:15:00 16:22:30 -18:15:00 SCO OPH",
+    "650:649 P+ 16:16:00 -24:35:00 16:45:00 -24:35:00 SCO OPH",
+    "648:647 P+ 16:45:00 -30:00:00 17:36:00 -30:00:00 SCO OPH",
+    "647:693 P+ 17:36:00 -30:00:00 17:50:00 -30:00:00 SCO SGR",
+    "106:628 M+ 16:25:15 -45:30:00 16:25:15 -42:00:00 SCO NOR",
+    "613:614 M+ 16:00:00 -42:00:00 16:00:00 -29:30:00 SCO LUP",
+    "602:603 M+ 15:40:00 -29:30:00 15:40:00 -20:00:00 SCO LIB",
+    "603:604 P+ 15:40:00 -20:00:00 15:55:00 -20:00:00 SCO LIB",
+    "604:605 M+ 15:55:00 -20:00:00 15:55:00 -08:00:00 SCO LIB",
+    "077:076 P+ 23:00:00 -25:30:00 23:50:00 -25:30:00 SCL AQR",
+    "076:340 P+ 23:50:00 -25:30:00 01:40:00 -25:30:00 SCL CET",
+    "516:517 M+ 23:20:00 -40:00:00 23:20:00 -37:00:00 SCL GRU",
+    "518:077 M+ 23:00:00 -37:00:00 23:00:00 -25:30:00 SCL PSA",
+    "692:694 M+ 18:15:00 -16:00:00 18:15:00 -04:00:00 SCT SER2",
+    "694:104 P+ 18:15:00 -04:00:00 18:35:00 -04:00:00 SCT SER2",
+    "104:103 P+ 18:35:00 -04:00:00 18:52:00 -04:00:00 SCT AQL",
+    "598:151 M+ 15:05:00 +00:00:00 15:05:00 +08:00:00 SER1 VIR",
+    "151:170 M+ 15:05:00 +08:00:00 15:05:00 +26:00:00 SER1 BOO",
+    "170:169 P+ 15:05:00 +26:00:00 15:11:00 +26:00:00 SER1 BOO",
+    "169:369 P+ 15:11:00 +26:00:00 16:02:00 +26:00:00 SER1 CRB",
+    "522:521 P+ 15:55:00 +16:00:00 16:05:00 +16:00:00 SER1 HER",
+    "520:519 P+ 16:05:00 +04:00:00 16:16:00 +04:00:00 SER1 HER",
+    "607:598 M+ 15:05:00 -03:15:00 15:05:00 +00:00:00 SER1 LIB",
+    "635:634 M+ 18:15:00 +00:00:00 18:15:00 +03:00:00 SER2 OPH",
+    "634:633 P+ 18:15:00 +03:00:00 18:25:30 +03:00:00 SER2 OPH",
+    "633:632 M+ 18:25:30 +03:00:00 18:25:30 +04:30:00 SER2 OPH",
+    "631:630 M+ 18:15:00 +04:30:00 18:15:00 +06:15:00 SER2 OPH",
+    "630:088 P+ 18:15:00 +06:15:00 18:39:44 +06:15:00 SER2 OPH",
+    "088:087 P+ 18:39:44 +06:15:00 18:52:00 +06:15:00 SER2 AQL",
+    "645:644 M+ 17:10:00 -16:00:00 17:10:00 -10:00:00 SER2 OPH",
+    "644:643 P+ 17:10:00 -10:00:00 17:35:00 -10:00:00 SER2 OPH",
+    "642:641 P+ 17:35:00 -11:40:00 17:40:00 -11:40:00 SER2 OPH",
+    "641:640 M+ 17:40:00 -11:40:00 17:40:00 -10:00:00 SER2 OPH",
+    "640:639 P+ 17:40:00 -10:00:00 17:58:00 -10:00:00 SER2 OPH",
+    "639:638 M+ 17:58:00 -10:00:00 17:58:00 -04:00:00 SER2 OPH",
+    "637:636 M+ 17:50:00 -04:00:00 17:50:00 +00:00:00 SER2 OPH",
+    "636:635 P+ 17:50:00 +00:00:00 18:15:00 +00:00:00 SER2 OPH",
+    "544:543 M+ 09:35:00 +00:00:00 09:35:00 +07:00:00 SEX HYA",
+    "543:577 P+ 09:35:00 +07:00:00 10:45:00 +07:00:00 SEX LEO",
+    "545:544 M+ 09:35:00 -11:00:00 09:35:00 +00:00:00 SEX HYA",
+    "336:335 M+ 03:17:00 -01:45:00 03:17:00 +00:00:00 TAU CET",
+    "335:129 M+ 03:17:00 +00:00:00 03:17:00 +09:55:00 TAU CET",
+    "129:128 M+ 03:17:00 +09:55:00 03:17:00 +19:00:00 TAU ARI",
+    "128:127 P+ 03:17:00 +19:00:00 03:22:00 +19:00:00 TAU ARI",
+    "127:126 M+ 03:22:00 +19:00:00 03:22:00 +30:40:00 TAU ARI",
+    "126:130 P+ 03:22:00 +30:40:00 04:30:00 +30:40:00 TAU PER",
+    "150:149 P+ 04:30:00 +30:00:00 04:45:00 +30:00:00 TAU AUR",
+    "148:147 P+ 04:45:00 +28:30:00 05:53:00 +28:30:00 TAU AUR",
+    "666:665 P+ 05:42:00 +18:00:00 05:46:00 +18:00:00 TAU ORI",
+    "663:662 M+ 05:36:00 +12:30:00 05:36:00 +15:30:00 TAU ORI",
+    "661:660 M+ 05:20:00 +15:30:00 05:20:00 +16:00:00 TAU ORI",
+    "109:108 M+ 18:00:00 -57:00:00 18:00:00 -45:30:00 TEL ARA",
+    "108:364 P+ 18:00:00 -45:30:00 19:10:00 -45:30:00 TEL CRA",
+    "364:568 P+ 19:10:00 -45:30:00 20:20:00 -45:30:00 TEL SGR",
+    "120:682 M+ 01:40:00 +25:00:00 01:40:00 +28:00:00 TRI PSC",
+    "681:023 M+ 01:24:30 +28:00:00 01:24:30 +33:00:00 TRI PSC",
+    "023:022 M+ 01:24:30 +33:00:00 01:24:30 +35:00:00 TRI AND",
+    "022:021 P+ 01:24:30 +35:00:00 02:00:00 +35:00:00 TRI AND",
+    "021:020 M+ 02:00:00 +35:00:00 02:00:00 +36:45:00 TRI AND",
+    "020:019 P+ 02:00:00 +36:45:00 02:31:00 +36:45:00 TRI AND",
+    "019:679 P+ 02:31:00 +36:45:00 02:34:00 +36:45:00 TRI PER",
+    "678:677 P+ 02:34:00 +34:00:00 02:43:00 +34:00:00 TRI PER",
+    "058:346 M+ 14:45:00 -70:00:00 14:45:00 -67:30:00 TRA CIR",
+    "346:347 P+ 14:45:00 -67:30:00 14:55:00 -67:30:00 TRA CIR",
+    "347:348 M+ 14:55:00 -67:30:00 14:55:00 -63:35:00 TRA CIR",
+    "348:349 P+ 14:55:00 -63:35:00 15:10:00 -63:35:00 TRA CIR",
+    "349:350 M+ 15:10:00 -63:35:00 15:10:00 -61:00:00 TRA CIR",
+    "350:351 P+ 15:10:00 -61:00:00 15:20:00 -61:00:00 TRA CIR",
+    "351:352 M+ 15:20:00 -61:00:00 15:20:00 -60:00:00 TRA CIR",
+    "352:105 P+ 15:20:00 -60:00:00 16:25:15 -60:00:00 TRA NOR",
+    "117:116 P+ 16:25:15 -61:00:00 16:35:00 -61:00:00 TRA ARA",
+    "115:114 P+ 16:35:00 -63:35:00 16:45:00 -63:35:00 TRA ARA",
+    "113:112 P+ 16:45:00 -65:00:00 16:50:00 -65:00:00 TRA ARA",
+    "111:056 P+ 16:50:00 -67:30:00 17:00:00 -67:30:00 TRA ARA",
+    "565:566 M+ 23:20:00 -75:00:00 23:20:00 -67:30:00 TUC IND",
+    "567:514 M+ 22:00:00 -67:30:00 22:00:00 -57:00:00 TUC IND",
+    "514:515 P+ 22:00:00 -57:00:00 23:20:00 -57:00:00 TUC GRU",
+    "680:484 P+ 23:20:00 -58:30:00 01:20:00 -58:30:00 TUC PHE",
+    "562:561 M+ 00:45:00 -76:00:00 00:45:00 -75:00:00 TUC HYI",
+    "618:617 M+ 09:10:00 +42:00:00 09:10:00 +47:00:00 UMA LYN",
+    "616:615 M+ 08:25:00 +47:00:00 08:25:00 +60:00:00 UMA LYN",
+    "211:210 M+ 07:58:00 +60:00:00 07:58:00 +73:30:00 UMA CAM",
+    "210:209 P+ 07:58:00 +73:30:00 09:10:00 +73:30:00 UMA CAM",
+    "209:459 P+ 09:10:00 +73:30:00 11:20:00 +73:30:00 UMA DRA",
+    "458:457 P+ 11:20:00 +66:30:00 12:00:00 +66:30:00 UMA DRA",
+    "456:455 P+ 12:00:00 +64:00:00 13:30:00 +64:00:00 UMA DRA",
+    "454:453 P+ 13:30:00 +63:00:00 14:25:00 +63:00:00 UMA DRA",
+    "232:231 M+ 13:30:00 +48:30:00 13:30:00 +53:00:00 UMA CVN",
+    "585:596 M+ 11:00:00 +29:00:00 11:00:00 +34:00:00 UMA LMI",
+    "595:594 M+ 10:47:00 +34:00:00 10:47:00 +40:00:00 UMA LMI",
+    "593:592 M+ 10:10:00 +40:00:00 10:10:00 +42:00:00 UMA LMI",
+    "203:202 P+ 13:00:00 +77:00:00 13:35:00 +77:00:00 UMI CAM",
+    "202:201 M+ 13:35:00 +77:00:00 13:35:00 +80:00:00 UMI CAM",
+    "201:200 P+ 13:35:00 +80:00:00 14:30:00 +80:00:00 UMI CAM",
+    "200:199 M+ 14:30:00 +80:00:00 14:30:00 +86:30:00 UMI CAM",
+    "198:321 M+ 08:00:00 +86:30:00 08:00:00 +88:00:00 UMI CEP",
+    "440:439 M+ 14:00:00 +66:00:00 14:00:00 +70:00:00 UMI DRA",
+    "438:203 M+ 13:00:00 +70:00:00 13:00:00 +77:00:00 UMI DRA",
+    "259:260 M+ 08:50:00 -56:30:00 08:50:00 -54:30:00 VEL CAR",
+    "261:262 M+ 08:27:00 -54:30:00 08:27:00 -53:00:00 VEL CAR",
+    "263:264 M+ 08:10:00 -53:00:00 08:10:00 -50:45:00 VEL CAR",
+    "265:683 M+ 08:00:00 -50:45:00 08:00:00 -43:00:00 VEL PUP",
+    "683:684 P+ 08:00:00 -43:00:00 08:22:00 -43:00:00 VEL PUP",
+    "684:685 M+ 08:22:00 -43:00:00 08:22:00 -36:45:00 VEL PUP",
+    "685:039 P+ 08:22:00 -36:45:00 09:22:00 -36:45:00 VEL PYX",
+    "040:041 P+ 09:22:00 -39:45:00 11:00:00 -39:45:00 VEL ANT",
+    "588:587 M+ 11:31:00 +00:00:00 11:31:00 +11:00:00 VIR LEO",
+    "587:586 P+ 11:31:00 +11:00:00 11:52:00 +11:00:00 VIR LEO",
+    "586:357 M+ 11:52:00 +11:00:00 11:52:00 +14:00:00 VIR LEO",
+    "357:361 P+ 11:52:00 +14:00:00 12:50:00 +14:00:00 VIR COM",
+    "361:360 M+ 12:50:00 +14:00:00 12:50:00 +15:00:00 VIR COM",
+    "360:153 P+ 12:50:00 +15:00:00 13:30:00 +15:00:00 VIR COM",
+    "152:151 P+ 13:30:00 +08:00:00 15:05:00 +08:00:00 VIR BOO",
+    "375:370 M+ 12:50:00 -22:00:00 12:50:00 -11:00:00 VIR CRV",
+    "371:381 M+ 11:50:00 -11:00:00 11:50:00 -06:00:00 VIR CRT",
+    "382:588 M+ 11:31:00 -06:00:00 11:31:00 +00:00:00 VIR LEO",
+    "427:273 P+ 06:35:00 -64:00:00 06:50:00 -64:00:00 VOL PIC",
+    "273:274 P+ 06:50:00 -64:00:00 09:02:00 -64:00:00 VOL CAR",
+    "622:426 M+ 06:35:00 -75:00:00 06:35:00 -70:00:00 VOL MEN",
+    "426:427 M+ 06:35:00 -70:00:00 06:35:00 -64:00:00 VOL DOR",
+    "531:530 M+ 18:52:00 +21:05:00 18:52:00 +25:30:00 VUL HER",
+    "530:619 P+ 18:52:00 +25:30:00 19:15:30 +25:30:00 VUL LYR",
+    "619:383 M+ 19:15:30 +25:30:00 19:15:30 +27:30:00 VUL LYR",
+    "383:408 P+ 19:15:30 +27:30:00 19:40:00 +27:30:00 VUL CYG",
+    "408:407 M+ 19:40:00 +27:30:00 19:40:00 +29:00:00 VUL CYG",
+    "407:406 P+ 19:40:00 +29:00:00 20:55:00 +29:00:00 VUL CYG",
+    "405:404 P+ 20:55:00 +28:00:00 21:25:00 +28:00:00 VUL CYG",
+    "412:411 M+ 20:34:00 +19:30:00 20:34:00 +20:30:00 VUL DEL",
+    "410:690 M+ 20:15:00 +20:30:00 20:15:00 +21:15:00 VUL SGE",
+    "687:686 M+ 19:15:00 +19:10:00 19:15:00 +21:05:00 VUL SGE"
+  ],
+  "common_names": {
+    "HIP 7588": [{"english": "Achernar"}],
+    "HIP 8102": [{"english": "Tau Ceti"}],
+    "HIP 9487": [{"english": "Knot"}],
+    "HIP 10826": [{"english": "Mira"}],
+    "HIP 11767": [{"english": "Pole Star"}],
+    "HIP 14576": [{"english": "Algol"}],
+    "HIP 17702": [{"english": "Pleiades"}],
+    "HIP 21421": [{"english": "Aldebaran"}],
+    "HIP 24436": [{"english": "Rigel"}],
+    "HIP 24608": [{"english": "Capella"}],
+    "HIP 27989": [{"english": "Betelgeuse"}],
+    "HIP 30438": [{"english": "Canopus"}],
+    "HIP 32349": [{"english": "Sirius"}],
+    "HIP 36850": [{"english": "Castor"}],
+    "HIP 37279": [{"english": "Procyon"}],
+    "HIP 37826": [{"english": "Pollux"}],
+    "HIP 46390": [{"english": "Alphard"}],
+    "HIP 49669": [{"english": "Regulus"}],
+    "HIP 57632": [{"english": "Denebola"}],
+    "HIP 60718": [{"english": "Acrux"}],
+    "HIP 63125": [{"english": "Cor Caroli"}],
+    "HIP 65378": [{"english": "Mizar"}],
+    "HIP 65474": [{"english": "Spica"}],
+    "HIP 65477": [{"english": "Alcor"}],
+    "HIP 68702": [{"english": "Beta Centauri"}],
+    "HIP 68756": [{"english": "Thuban"}],
+    "HIP 69673": [{"english": "Arcturus"}],
+    "HIP 71683": [{"english": "Alpha Centauri"}],
+    "HIP 72607": [{"english": "Kochab"}],
+    "HIP 76267": [{"english": "Gemma"}],
+    "HIP 80763": [{"english": "Antares"}],
+    "HIP 91262": [{"english": "Vega"}],
+    "HIP 95947": [{"english": "Albireo"}],
+    "HIP 97649": [{"english": "Altair"}],
+    "HIP 102098": [{"english": "Deneb"}],
+    "HIP 113368": [{"english": "Fomalhaut"}]
+  }
+}

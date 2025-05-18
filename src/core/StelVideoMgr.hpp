@@ -207,6 +207,7 @@ public slots:
 	int getVideoHeight(const QString& id) const;
 
 	//! set mute state of video player
+	//! @param id name assigned during loadVideo().
 	//! @param muteVideo true to silence the video, false to hear audio.
 	void muteVideo(const QString& id, bool muteVideo=true);
 	//! set volume for video. Valid values are 0..100, values outside this range will be clamped.

@@ -26,7 +26,8 @@
 #include "StelTranslator.hpp"
 
 //! @class MeteorShower
-//! A MeteorShower object represents one meteor shower on the sky.
+//! @brief A MeteorShower object represents one meteor shower on the sky.
+//!
 //! Details about the meteor showers are passed using a QVariant which contains
 //! a map of data from the json file.
 //! @ingroup meteorShowers
@@ -36,7 +37,7 @@ class MeteorShower : public StelObject
 public:
 	static const QString METEORSHOWER_TYPE;
 
-	//! @enum Meteor Shower status.
+	//! @brief Meteor Shower status.
 	enum Status {
 		INVALID,          // not initialized properly
 		UNDEFINED,        // it's loaded but with 'activity' undefined

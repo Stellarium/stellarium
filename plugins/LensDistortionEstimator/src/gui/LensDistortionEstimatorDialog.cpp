@@ -273,6 +273,7 @@ void LensDistortionEstimatorDialog::createDialogContent()
 	connectBoolProperty(ui_->imageAxesEnabled, "LensDistortionEstimator.imageAxesEnabled");
 	connectBoolProperty(ui_->markPickedPoints, "LensDistortionEstimator.pointMarkersEnabled");
 	connectBoolProperty(ui_->markProjectionCenter, "LensDistortionEstimator.projectionCenterMarkerEnabled");
+	connectBoolProperty(ui_->imgPosResetOnLoadingEnabled, "LensDistortionEstimator.imgPosResetOnLoadingEnabled");
 	ui_->imageAxesColor->setup("LensDistortionEstimator.imageAxesColor", "LensDistortionEstimator/image_axes_color");
 	ui_->pointMarkerColor->setup("LensDistortionEstimator.pointMarkerColor", "LensDistortionEstimator/point_marker_color");
 	ui_->selectedPointMarkerColor->setup("LensDistortionEstimator.selectedPointMarkerColor",
@@ -1246,7 +1247,8 @@ void LensDistortionEstimatorDialog::updateImage()
 	imageChanged_ = true;
 	setupGenerateLensfunModelButton();
 	computeColorToSubtract();
-	placeImageInCenterOfScreen();
+	if(ui_->imgPosResetOnLoadingEnabled->isChecked())
+		placeImageInCenterOfScreen();
 
 #ifdef HAVE_EXIV2
 	try

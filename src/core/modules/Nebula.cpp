@@ -58,6 +58,7 @@ bool Nebula::flagUseArcsecSurfaceBrightness = false;
 bool Nebula::flagUseShortNotationSurfaceBrightness = true;
 bool Nebula::flagUseOutlines = false;
 bool Nebula::flagShowAdditionalNames = true;
+bool Nebula::flagShowOnlyNamedDSO = false;
 bool Nebula::flagUseSizeLimits = false;
 double Nebula::minSizeLimit = 1.0;
 double Nebula::maxSizeLimit = 600.0;
@@ -324,13 +325,12 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (flags&Distance)
 	{
-		float distance, distanceErr, distanceLY, distanceErrLY;
 		if (qAbs(parallax)>0.f)
 		{
 			QString dx;
 			// distance in light years from parallax
-			distance = 3.162e-5f/(qAbs(parallax)*4.848e-9f);
-			distanceErr = 0.f;
+			float distance = 3.162e-5f/(qAbs(parallax)*4.848e-9f);
+			float distanceErr = 0.f;
 
 			if (parallaxErr>0.f)
 				distanceErr = qAbs(3.162e-5f/(qAbs(parallaxErr + parallax)*4.848e-9f) - distance);
@@ -358,10 +358,10 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			//TRANSLATORS: Unit of measure for distance - Light Years
 			QString duly = qc_("ly", "distance");
 
-			distance = oDistance;
-			distanceErr = oDistanceErr;
-			distanceLY = oDistance*dc;
-			distanceErrLY= oDistanceErr*dc;
+			float distance = oDistance;
+			float distanceErr = oDistanceErr;
+			float distanceLY = oDistance*dc;
+			float distanceErrLY= oDistanceErr*dc;
 			if (oDistance>=1000.f)
 			{
 				distance = oDistance/1000.f;
@@ -967,11 +967,14 @@ void Nebula::renderMarkerPointedCircle(StelPainter& sPainter, const float x, con
 	if(insideRect)
 		size -= spriteSize*2;
 	const float*const cossin = StelUtils::ComputeCosSinRhoZone((2*M_PIf)/numPoints, numPoints, 0);
-	for(int n = 0; n < numPoints; ++n)
+	std::vector<Vec2f> points;
+	points.reserve(numPoints);
+	for (int n = 0; n < numPoints; ++n)
 	{
-		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
-		sPainter.drawSprite2dModeNoDeviceScale(x - size*sina, y - size*cosa, spriteSize);
+		const auto cosa = cossin[2 * n], sina = cossin[2 * n + 1];
+		points.emplace_back(x - size * sina, y - size * cosa);
 	}
+	sPainter.drawSprite2dModeNoDeviceScale(points, spriteSize);
 }
 
 float Nebula::getHintSize(StelPainter& sPainter) const
@@ -1198,6 +1201,15 @@ void Nebula::readDSO(QDataStream &in)
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
 		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb >> SNRG_nb >> ACO_nb
 		>> HCG_nb >> ESO_nb >> VdBH_nb >> DWB_nb >> Tr_nb >> St_nb >> Ru_nb >> VdBHa_nb;
+
+	Ced_nb = Ced_nb.trimmed();
+	PK_nb = PK_nb.trimmed();
+	PNG_nb = PNG_nb.trimmed();
+	SNRG_nb = SNRG_nb.trimmed();
+	ACO_nb = ACO_nb.trimmed();
+	HCG_nb = HCG_nb.trimmed();
+	ESO_nb = ESO_nb.trimmed();
+	VdBH_nb = VdBH_nb.trimmed();
 
 	const unsigned int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb + DWB_nb + Tr_nb + St_nb + Ru_nb + VdBHa_nb;
 	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty() && ACO_nb.isEmpty() && HCG_nb.isEmpty() && ESO_nb.isEmpty() && VdBH_nb.isEmpty())

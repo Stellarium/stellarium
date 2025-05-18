@@ -8,7 +8,11 @@
 //              of a year.
 //
 
-var constellations = new Array("Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpius", "Ophiuchus", "Sagittarius", "Capricornus", "Aquarius", "Pisces", "Aries", "Taurus");
+var constellations = new Array("Twins", "Crab", "Lion", "Maiden", "Scales", "Scorpion", "Serpent Bearer", "Archer", "Sea Goat", "Water Bearer", "Fishes", "Ram", "Bull");
+
+
+ConstellationMgr.setConstellationDisplayStyle(1);
+ConstellationMgr.deselectConstellations();
 
 core.setSkyCulture("modern");
 core.clear("deepspace");

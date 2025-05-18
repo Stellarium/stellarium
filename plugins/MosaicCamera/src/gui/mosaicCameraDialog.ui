@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mosaicCameraDialog</class>
+ <widget class="QWidget" name="mosaicCameraDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>530</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Mosaic Camera Configuration</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="TitleBar" name="titleBar">
+     <property name="title" stdset="0">
+      <string>Mosaic Camera</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTabWidget" name="tabs">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <property name="documentMode">
+      <bool>false</bool>
+     </property>
+     <widget class="QWidget" name="generalTab">
+      <attribute name="title">
+       <string>Mosaic Camera</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QGroupBox" name="groupBoxMosaicCamera">
+         <property name="title">
+          <string>Mosaic Camera</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QCheckBox" name="checkBoxShowButton">
+            <property name="text">
+             <string>Show plug-in button on toolbar</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButtonRestoreDefaults">
+           <property name="text">
+            <string>Restore Defaults</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButtonSaveSettings">
+           <property name="text">
+            <string>Save settings</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="CameraTab">
+      <attribute name="title">
+       <string>Cameras</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout1">
+       <item>
+        <widget class="QListWidget" name="cameraListWidget">
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,1,0,0,0,0">
+         <item>
+          <layout class="QFormLayout" name="formLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="RALabel">
+             <property name="text">
+              <string>Right Ascension:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="AngleSpinBox" name="RASpinBox">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="minimum">
+              <number>-360</number>
+             </property>
+             <property name="maximum">
+              <number>360</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="DecLabel">
+             <property name="text">
+              <string>Declination:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="AngleSpinBox" name="DecSpinBox">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="minimum">
+              <number>-90</number>
+             </property>
+             <property name="maximum">
+              <number>90</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="RotationLabel">
+             <property name="text">
+              <string>Rotation:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="AngleSpinBox" name="RotationSpinBox">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="minimum">
+              <number>-90</number>
+             </property>
+             <property name="maximum">
+              <number>90</number>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="visibleLabel">
+             <property name="text">
+              <string>Visible:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QCheckBox" name="visibleCheckBox"/>
+           </item>
+         <item row="4" column="0" colspan="2">
+         <widget class="QTextBrowser" name="cameraTextBrowser">
+         <property name="openExternalLinks">
+             <bool>true</bool>
+         </property>
+         </widget>
+         </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QPushButton" name="setViewToCameraButton">
+           <property name="text">
+            <string>Center view on camera</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="setMosaicToViewButton">
+           <property name="text">
+            <string>Center camera on current view</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="setMosaicToObjectButton">
+           <property name="text">
+            <string>Center camera on current object</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="aboutTab">
+      <attribute name="title">
+       <string comment="tab in plugin windows">About</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_11">
+       <property name="spacing">
+        <number>9</number>
+       </property>
+       <item>
+        <widget class="QTextBrowser" name="aboutTextBrowser">
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+         <property name="openLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TitleBar</class>
+   <extends>QFrame</extends>
+   <header>Dialog.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AngleSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>AngleSpinBox.hpp</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

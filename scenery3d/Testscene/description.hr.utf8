@@ -1,0 +1,33 @@
+<h2>Testna scena</h2>
+
+<p>Ova scena uglavnom služi kao testno okruženje za vlastiti razvoj. Trebali
+biste napraviti kopiju mape sa scenom i slobodno je mijenjati, isprobavati
+postavke materijala ili druge detalje kako biste otkrili kako ovaj dodatak
+funkcionira. Zatim izradite i predstavite vlastiti rad!</p>
+
+<h4>Testovi koordinata i orijentacije</h4>
+
+<p>Stupovi prikazani ovdje, gledano iz središta strukture, pružaju približan
+prikaz (nije visokoprecizan!) položaja izlaska/zalaska Sunca tijekom
+solsticija i ekvinocija za geografske širine središnje Europe. Središnji
+stupovi čine liniju istok-zapad. Koordinatna mreža vidljiva na podu nije
+usklađena s geografskim sjeverom. Potrebno je kompenzirati rotaciju od -4,2
+stupnja (test za meridijansku konvergenciju), tj. iako središnji stupovi
+moraju apsolutno i uvijek pokazivati u smjeru zapad-istok, linije mreže
+dosežu sjeverni horizont malo ulijevo od sjevera (4,2 stupnja)!</p>
+
+<p>Koordinate tla za obilazak (Ctrl-R, T) trebale bi prikazivati koordinate
+vidljive duž južne i zapadne granice tla.</p>
+
+<h4>Test materijala</h4>
+
+<p>Ovaj model također se koristi za testiranje grafičkih mogućnosti
+dodatka. Možete eksperimentirati s parametrima materijala kako biste
+stvorili zabavne efekte poput poluprozirnih ili svjetlećih kugli od opeke.</p>
+
+<p>Za testiranje vremenskih značajki, stupovi i kugle vidljivi su samo u
+razdoblju od 2000. do 2020. godine. Uredite datoteku materijala kako biste
+to promijenili!</p>
+
+<h4>Model</h4>
+<p>Testna scena za razvoj Stellarium/scenery3d. Izvoz iz SU8-Kerkythea-KT2OBJ.</p>

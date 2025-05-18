@@ -345,7 +345,6 @@ void Landscape::drawHorizonLine(StelCore* core, StelPainter& painter)
 	painter.setLineSmooth(false);
 }
 
-#include <iostream>
 const QString Landscape::getTexturePath(const QString& basename, const QString& landscapeId)
 {
 	// look in the landscape directory first, and if not found default to global textures directory
@@ -353,7 +352,7 @@ const QString Landscape::getTexturePath(const QString& basename, const QString& 
 	if (path.isEmpty())
 		path = StelFileMgr::findFile("textures/" + basename);
 	if (path.isEmpty())
-		qWarning() << "Warning: Landscape" << landscapeId << ": File" << basename << "does not exist.";
+		qWarning().noquote() << "Landscape" << landscapeId << ": File" << basename << "does not exist.";
 	return path;
 }
 
@@ -418,8 +417,8 @@ void Landscape::loadLabels(const QString& landscapeId)
 					      parts.at(1).toFloat()*M_PI_180f, newLabel.featurePoint);
 			StelUtils::spheToRect((180.0f-parts.at(0).toFloat() - parts.at(3).toFloat())*M_PI_180f,
 					      (parts.at(1).toFloat() + parts.at(2).toFloat())*M_PI_180f, newLabel.labelPoint);
+			newLabel.isLabelAboveFeature=(parts.at(2).toFloat() >= 0);
 			landscapeLabels.append(newLabel);
-			//qDebug() << "Added landscape label " << newLabel.name;
 		}
 		file.close();
 	}
@@ -434,6 +433,7 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 
 	// We must reset painter to pure altaz coordinates without pano-based rotation
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	const float ppx = static_cast<float>(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
 	painter->setProjector(prj);
 	QFont font;
 	font.setPixelSize(fontSize);
@@ -446,6 +446,8 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 
 	for (int i = 0; i < landscapeLabels.size(); ++i)
 	{
+		int textWidth=ppx*fm.boundingRect(landscapeLabels.at(i).name).width();
+		int textHeight=ppx*fm.boundingRect(landscapeLabels.at(i).name).height();
 		// in case of gravityLabels, we cannot shift-adjust centered placename, sorry!
 		if (prj->getFlagGravityLabels())
 		{
@@ -453,13 +455,27 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 		}
 		else if (labelAngle>0)
 		{
-			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, labelAngle, 0.5f*fontSize*sinf(labelAngle*M_PI_180f),
+			if (landscapeLabels.at(i).isLabelAboveFeature)
+			{
+				painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, labelAngle, 0.5f*fontSize*sinf(labelAngle*M_PI_180f),
 					  -0.5f*fontSize*sinf(labelAngle*M_PI_180f), true);
+			}
+			else
+			{
+				painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, labelAngle, -0.5f*fontSize*sinf(labelAngle*M_PI_180f)-textWidth,
+					  -0.5f*fontSize*sinf(labelAngle*M_PI_180f), true);
+			}
 		}
 		else
 		{
-			int textWidth=fm.boundingRect(landscapeLabels.at(i).name).width();
-			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth/2, 2, true);
+			if (landscapeLabels.at(i).isLabelAboveFeature)
+			{
+				painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth/2, 2, true);
+			}
+			else
+			{
+				painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth/2, -2-textHeight/2, true);
+			}
 		}
 		painter->drawGreatCircleArc(landscapeLabels.at(i).featurePoint, landscapeLabels.at(i).labelPoint, nullptr);
 	}
@@ -484,6 +500,8 @@ LandscapeOldStyle::LandscapeOldStyle(float _radius)
 	, drawGroundFirst(false)
 	, tanMode(false)
 	, calibrated(false)  // start with just the known entries.
+	, shaderVars()
+
 {
 	memorySize=sizeof(LandscapeOldStyle);
 }
@@ -575,7 +593,6 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	// Init sides parameters
 	nbSide = static_cast<unsigned short>(landscapeIni.value("landscape/nbside", 0).toUInt());
 	sides = new landscapeTexCoord[static_cast<size_t>(nbSide)];
-	unsigned int texnum;
 	for (unsigned int i=0;i<nbSide;++i)
 	{
 		const QString key = QString("landscape/side%1").arg(i);                             // e.g. side0
@@ -583,7 +600,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		const QStringList parameters = landscapeIni.value(key).toString().split(':');  // e.g. tex0:0:0:1:1
 		//TODO: How should be handled an invalid texture description?
 		QString textureName = parameters.value(0);                                    // tex0
-		texnum = textureName.right(textureName.length() - 3).toUInt();             // 0
+		unsigned int texnum = textureName.right(textureName.length() - 3).toUInt();             // 0
 		sides[i].tex = sideTexs[texnum];
 		sides[i].tex_illum = sideTexs[nbSide+texnum];
 		sides[i].texCoords[0] = parameters.at(1).toFloat();
@@ -676,7 +693,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	unsigned short int limit;
 
 	LOSSide precompSide;
-	precompSide.arr.primitiveType=StelVertexArray::Triangles;	
+	precompSide.arr.primitiveType=StelVertexArray::Triangles;
 	for (unsigned int n=0;n<nbDecorRepeat;n++)
 	{
 		for (unsigned int i=0;i<nbSide;i++)
@@ -698,7 +715,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 			float tx0 = sides[ti].texCoords[0];
 			const float d_tx = (sides[ti].texCoords[2]-sides[ti].texCoords[0]) / slices_per_side;
-			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;			
+			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;
 			for (unsigned short int j=0;j<slices_per_side;j++)
 			{
 				const float y1 = y0*ca - x0*sa;
@@ -1015,10 +1032,9 @@ void main(void)
 	if(!renderProgram || !renderProgram->isLinked())
 		return;
 
-	auto& gl = *QOpenGLContext::currentContext()->functions();
-
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
+		auto& gl = *QOpenGLContext::currentContext()->functions();
 		renderProgram->bind();
 		bindVAO();
 
@@ -1531,6 +1547,7 @@ LandscapeFisheye::LandscapeFisheye(float _radius)
 	, mapTexIllum(StelTextureSP())
 	, mapImage(nullptr)
 	, texFov(360.)
+	, shaderVars()
 {
 	memorySize=sizeof(LandscapeFisheye);
 }
@@ -1688,10 +1705,9 @@ void main(void)
 	if(!renderProgram || !renderProgram->isLinked())
 		return;
 
-	auto& gl = *QOpenGLContext::currentContext()->functions();
-
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
+		auto& gl = *QOpenGLContext::currentContext()->functions();
 		renderProgram->bind();
                 renderProgram->setUniformValue(shaderVars.brightness,
                                                 landscapeBrightness*landscapeTint[0],
@@ -1801,6 +1817,7 @@ LandscapeSpherical::LandscapeSpherical(float _radius)
 	, illumTexBottom(0.)
 	, mapImage(nullptr)
 	, bottomCapColor(-1.0f, 0.0f, 0.0f)
+	, shaderVars()
 {
 	memorySize=sizeof(LandscapeSpherical);
 }
@@ -1908,7 +1925,7 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 			gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 			mapTexFog->release();
 		}
-	}	
+	}
 
 	// Add a bottom cap in case of maptex_bottom.
 	if ((mapTexBottom>-90.f*M_PI_180f) && (_bottomCapColor != Vec3f(-1.0f, 0.0f, 0.0f)))
@@ -2043,10 +2060,9 @@ void main(void)
 	if(!renderProgram || !renderProgram->isLinked())
 		return;
 
-	auto& gl = *QOpenGLContext::currentContext()->functions();
-
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
+		auto& gl = *QOpenGLContext::currentContext()->functions();
 		renderProgram->bind();
 		renderProgram->setUniformValue(shaderVars.bottomCapColor,
 					       landscapeBrightness*bottomCapColor[0],

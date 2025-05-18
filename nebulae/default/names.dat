@@ -6,6 +6,7 @@
 #  6 - 20  string id      identificator for object in the catalog
 # 21 - end string name    proper name of the object (translatable). Format: _("name") [# comment]
 # comment is optional but should be used to indicate source for names. See source list below for keys.
+# The source keys must not contain hash, colon, comma
 #
 # Sources: 
 #   WK:   Well-known name which does not need special source. 
@@ -975,10 +976,10 @@ NGC  7654            _("Cassiopeia Salt-and-Pepper Cluster") # SEDSM
 NGC  7654            _("October Salt-and-Pepper Cluster") # SEDSM
 NGC  7654            _("The Scorpion Cluster") # DSC-MO, CSOG-MSC, B500
 NGC  7656            _("Anthead Galaxy") # SGN
+NGC  7662            _("Light Blue Snowball") # DSC-CO
 NGC  7662            _("Blue Snowball") # WK, WSO, PSA, CC, DSNI, DSNI, B500, WP, RNGCIC, U2K, CO-HOT
 NGC  7662            _("Copeland's Blue Snowball") # SIMBAD, DSW
 NGC  7662            _("Snowball Nebula") # NASA, WP
-NGC  7662            _("Little Blue Showball") # DSC-CO
 NGC  7732            _("Zwicky's Pierced Galaxy") # SGN
 NGC  7742            _("Fried-egg Galaxy")
 NGC  7789            _("Caroline's Rose Cluster") # OGSC, APOD, CSOG-MSC, B500
@@ -1024,6 +1025,7 @@ IC   1805            _("Heart Nebula") # CSOG-MSC, B500
 IC   1805            _("The Running Dog Nebula") # B500
 IC   1805            _("Valentine Nebula") # B500
 IC   1805            _("AFGL 333 Cloud") # SIMBAD
+IC   1848            _("Soul Nebula") # WP
 IC   1848            _("Baby Nebula") # SGN
 IC   2087            _("Little Flame Nebula") # MISC, CSOG-BCH
 IC   2118            _("Witch Head Nebula") # WK, DSW, TSS, PSA, RNGCIC, U2K

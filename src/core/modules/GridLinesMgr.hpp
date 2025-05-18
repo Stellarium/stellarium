@@ -251,8 +251,9 @@ public slots:
 	//! Set the color of the Azimuthal Grid.
 	//! @param newColor The color of azimuthal grid
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorAzimuthalGrid(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorAzimuthalGrid(c.toVec3f());
 	//! @endcode
 	void setColorAzimuthalGrid(const Vec3f& newColor);
 
@@ -265,8 +266,9 @@ public slots:
 	//! Set the color of the Equatorial Grid.
 	//! @param newColor The color of equatorial grid
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorEquatorGrid(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorEquatorGrid(c.toVec3f());
 	//! @endcode
 	void setColorEquatorGrid(const Vec3f& newColor);
 
@@ -279,8 +281,9 @@ public slots:
 	//! Set the color of the FixedEquatorial Grid.
 	//! @param newColor The color of fixed equatorial grid
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorFixedEquatorGrid(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorFixedEquatorGrid(c.toVec3f());
 	//! @endcode
 	void setColorFixedEquatorGrid(const Vec3f& newColor);
 
@@ -293,8 +296,9 @@ public slots:
 	//! Set the color of the Equatorial J2000 Grid.
 	//! @param newColor The color of equatorial J2000 grid
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorEquatorJ2000Grid(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorEquatorJ2000Grid(c.toVec3f());
 	//! @endcode
 	void setColorEquatorJ2000Grid(const Vec3f& newColor);
 
@@ -307,8 +311,9 @@ public slots:
 	//! Set the color of the Ecliptic J2000 Grid.
 	//! @param newColor The color of ecliptic J2000 grid
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorEclipticJ2000Grid(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorEclipticJ2000Grid(c.toVec3f());
 	//! @endcode
 	void setColorEclipticJ2000Grid(const Vec3f& newColor);
 
@@ -321,8 +326,9 @@ public slots:
 	//! Set the color of the Ecliptic Grid.
 	//! @param newColor The color of Ecliptic of Date grid
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorEclipticGrid(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorEclipticGrid(c.toVec3f());
 	//! @endcode
 	void setColorEclipticGrid(const Vec3f& newColor);
 
@@ -335,8 +341,9 @@ public slots:
 	//! Set the color of the Galactic Grid.
 	//! @param newColor The color of galactic grid
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorGalacticGrid(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorGalacticGrid(c.toVec3f());
 	//! @endcode
 	void setColorGalacticGrid(const Vec3f& newColor);
 
@@ -349,8 +356,9 @@ public slots:
 	//! Set the color of the Supergalactic Grid.
 	//! @param newColor The color of supergalactic grid
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorSupergalacticGrid(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorSupergalacticGrid(c.toVec3f());
 	//! @endcode
 	void setColorSupergalacticGrid(const Vec3f& newColor);
 
@@ -371,8 +379,9 @@ public slots:
 	//! Set the color of the Equator Line.
 	//! @param newColor The color of equator line
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorEquatorLine(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorEquatorLine(c.toVec3f());
 	//! @endcode
 	void setColorEquatorLine(const Vec3f& newColor);
 
@@ -393,8 +402,9 @@ public slots:
 	//! Set the color of the J2000 Equator Line.
 	//! @param newColor The color of J2000 equator line
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorEquatorJ2000Line(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorEquatorJ2000Line(c.toVec3f());
 	//! @endcode
 	void setColorEquatorJ2000Line(const Vec3f& newColor);
 
@@ -415,8 +425,9 @@ public slots:
 	//! Set the color of the Fixed Equator Line (hour angles).
 	//! @param newColor The color of fixed equator line
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorFixedEquatorLine(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorFixedEquatorLine(c.toVec3f());
 	//! @endcode
 	void setColorFixedEquatorLine(const Vec3f& newColor);
 
@@ -437,8 +448,9 @@ public slots:
 	//! Set the color of the Ecliptic of J2000 Line.
 	//! @param newColor The color of ecliptic 2000 line
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorEcliptic2000Line(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorEcliptic2000Line(c.toVec3f());
 	//! @endcode
 	void setColorEclipticJ2000Line(const Vec3f& newColor);
 
@@ -464,8 +476,9 @@ public slots:
 	//! Set the color of the Ecliptic Line.
 	//! @param newColor The color of ecliptic line
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorEclipticLine(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorEclipticLine(c.toVec3f());
 	//! @endcode
 	void setColorEclipticLine(const Vec3f& newColor);
 
@@ -478,8 +491,9 @@ public slots:
 	//! Set the color of the Line for the Invariable Plane.
 	//! @param newColor The color of the Invariable Plane line
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorInvariablePlaneLine(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorInvariablePlaneLine(c.toVec3f());
 	//! @endcode
 	void setColorInvariablePlaneLine(const Vec3f& newColor);
 
@@ -500,8 +514,9 @@ public slots:
 	//! Set the color of the Solar Equator Line.
 	//! @param newColor The color of Solar Equator line
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorSolarEquatorLine(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorSolarEquatorLine(c.toVec3f());
 	//! @endcode
 	void setColorSolarEquatorLine(const Vec3f& newColor);
 
@@ -522,8 +537,9 @@ public slots:
 	//! Set the color of the precession circles.
 	//! @param newColor The color of precession circles
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorPrecessionCircles(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorPrecessionCircles(c.toVec3f());
 	//! @endcode
 	void setColorPrecessionCircles(const Vec3f& newColor);
 
@@ -544,8 +560,9 @@ public slots:
 	//! Set the color of the Meridian Line.
 	//! @param newColor The color of meridian line
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorMeridianLine(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorMeridianLine(c.toVec3f());
 	//! @endcode
 	void setColorMeridianLine(const Vec3f& newColor);
 
@@ -566,8 +583,9 @@ public slots:
 	//! Set the color of the opposition/conjunction longitude line.
 	//! @param newColor The color of opposition/conjunction longitude line
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorLongitudeLine(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorLongitudeLine(c.toVec3f());
 	//! @endcode
 	void setColorLongitudeLine(const Vec3f& newColor);
 
@@ -580,8 +598,9 @@ public slots:
 	//! Set the color of the quadrature line.
 	//! @param newColor The color of quadrature line
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorQuadratureLine(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorQuadratureLine(c.toVec3f());
 	//! @endcode
 	void setColorQuadratureLine(const Vec3f& newColor);
 
@@ -602,8 +621,9 @@ public slots:
 	//! Set the color of the Horizon Line.
 	//! @param newColor The color of horizon line
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorHorizonLine(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorHorizonLine(c.toVec3f());
 	//! @endcode
 	void setColorHorizonLine(const Vec3f& newColor);
 
@@ -624,8 +644,9 @@ public slots:
 	//! Set the color of the Galactic Equator Line.
 	//! @param newColor The color of galactic equator line
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorGalacticEquatorLine(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorGalacticEquatorLine(c.toVec3f());
 	//! @endcode
 	void setColorGalacticEquatorLine(const Vec3f& newColor);
 
@@ -646,8 +667,9 @@ public slots:
 	//! Set the color of the Supergalactic Equator Line.
 	//! @param newColor The color of supergalactic equator line
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorSupergalacticEquatorLine(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorSupergalacticEquatorLine(c.toVec3f());
 	//! @endcode
 	void setColorSupergalacticEquatorLine(const Vec3f& newColor);
 
@@ -668,8 +690,9 @@ public slots:
 	//! Set the color of the Prime Vertical Line.
 	//! @param newColor The color of the Prime Vertical line
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorPrimeVerticalLine(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorPrimeVerticalLine(c.toVec3f());
 	//! @endcode
 	void setColorPrimeVerticalLine(const Vec3f& newColor);
 
@@ -690,8 +713,9 @@ public slots:
 	//! Set the color of the Current Vertical Line.
 	//! @param newColor The color of the Current Vertical line
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorCurrentVerticalLine(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorCurrentVerticalLine(c.toVec3f());
 	//! @endcode
 	void setColorCurrentVerticalLine(const Vec3f& newColor);
 
@@ -712,8 +736,9 @@ public slots:
 	//! Set the color of the Colure Lines.
 	//! @param newColor The color of the Colure lines
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorColureLines(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorColureLines(c.toVec3f());
 	//! @endcode
 	void setColorColureLines(const Vec3f& newColor);
 
@@ -726,8 +751,9 @@ public slots:
 	//! Set the color of the circumpolar circles.
 	//! @param newColor The color of circumpolar circles
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorCircumpolarCircles(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorCircumpolarCircles(c.toVec3f());
 	//! @endcode
 	void setColorCircumpolarCircles(const Vec3f& newColor);
 
@@ -740,8 +766,9 @@ public slots:
 	//! Set the color of the umbra circle.
 	//! @param newColor The color of umbra circle
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorUmbraCircle(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorUmbraCircle(c.toVec3f());
 	//! @endcode
 	void setColorUmbraCircle(const Vec3f& newColor);
 
@@ -754,8 +781,9 @@ public slots:
 	//! Set the color of the penumbra circle.
 	//! @param newColor The color of penumbra circle
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorPenumbraCircle(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorPenumbraCircle(c.toVec3f());
 	//! @endcode
 	void setColorPenumbraCircle(const Vec3f& newColor);
 
@@ -768,8 +796,9 @@ public slots:
 	//! Set the color of the celestial poles of J2000.
 	//! @param newColor The color of celestial poles of J2000
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorCelestialJ2000Poles(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorCelestialJ2000Poles(c.toVec3f());
 	//! @endcode
 	void setColorCelestialJ2000Poles(const Vec3f& newColor);
 
@@ -782,8 +811,9 @@ public slots:
 	//! Set the color of the celestial poles.
 	//! @param newColor The color of celestial poles
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorCelestialPoles(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorCelestialPoles(c.toVec3f());
 	//! @endcode
 	void setColorCelestialPoles(const Vec3f& newColor);
 
@@ -796,8 +826,9 @@ public slots:
 	//! Set the color of the zenith and nadir.
 	//! @param newColor The color of zenith and nadir
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorZenithNadir(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorZenithNadir(c.toVec3f());
 	//! @endcode
 	void setColorZenithNadir(const Vec3f& newColor);
 
@@ -810,8 +841,9 @@ public slots:
 	//! Set the color of the ecliptic poles of J2000.
 	//! @param newColor The color of ecliptic poles of J2000
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorEclipticJ2000Poles(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorEclipticJ2000Poles(c.toVec3f());
 	//! @endcode
 	void setColorEclipticJ2000Poles(const Vec3f& newColor);
 
@@ -824,8 +856,9 @@ public slots:
 	//! Set the color of the ecliptic poles.
 	//! @param newColor The color of ecliptic poles
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorEclipticPoles(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorEclipticPoles(c.toVec3f());
 	//! @endcode
 	void setColorEclipticPoles(const Vec3f& newColor);
 
@@ -838,8 +871,9 @@ public slots:
 	//! Set the color of the galactic poles.
 	//! @param newColor The color of galactic poles
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorGalacticPoles(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorGalacticPoles(c.toVec3f());
 	//! @endcode
 	void setColorGalacticPoles(const Vec3f& newColor);
 
@@ -852,8 +886,9 @@ public slots:
 	//! Set the color of the galactic center and anticenter markers.
 	//! @param newColor The color of galactic center and anticenter markers
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorGalacticCenter(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorGalacticCenter(c.toVec3f());
 	//! @endcode
 	void setColorGalacticCenter(const Vec3f& newColor);
 
@@ -866,8 +901,9 @@ public slots:
 	//! Set the color of the supergalactic poles.
 	//! @param newColor The color of supergalactic poles
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorSupergalacticPoles(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorSupergalacticPoles(c.toVec3f());
 	//! @endcode
 	void setColorSupergalacticPoles(const Vec3f& newColor);
 
@@ -880,8 +916,9 @@ public slots:
 	//! Set the color of the equinox points of J2000.
 	//! @param newColor The color of equinox points
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorEquinoxJ2000Points(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorEquinoxJ2000Points(c.toVec3f());
 	//! @endcode
 	void setColorEquinoxJ2000Points(const Vec3f& newColor);
 
@@ -894,8 +931,9 @@ public slots:
 	//! Set the color of the equinox points.
 	//! @param newColor The color of equinox points
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorEquinoxPoints(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorEquinoxPoints(c.toVec3f());
 	//! @endcode
 	void setColorEquinoxPoints(const Vec3f& newColor);
 
@@ -908,8 +946,9 @@ public slots:
 	//! Set the color of the solstice points of J2000.
 	//! @param newColor The color of solstice points
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorSolsticeJ2000Points(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorSolsticeJ2000Points(c.toVec3f());
 	//! @endcode
 	void setColorSolsticeJ2000Points(const Vec3f& newColor);
 
@@ -922,8 +961,9 @@ public slots:
 	//! Set the color of the solstice points.
 	//! @param newColor The color of solstice points
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorSolsticePoints(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorSolsticePoints(c.toVec3f());
 	//! @endcode
 	void setColorSolsticePoints(const Vec3f& newColor);
 
@@ -936,8 +976,9 @@ public slots:
 	//! Set the color of the antisolar point.
 	//! @param newColor The color of antisolar point
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorAntisolarPoint(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorAntisolarPoint(c.toVec3f());
 	//! @endcode
 	void setColorAntisolarPoint(const Vec3f& newColor);
 
@@ -955,8 +996,9 @@ public slots:
 	//! Set the color of the Apex/Antapex points.
 	//! @param newColor The color of Apex/Antapex points.
 	//! @code
-	//! // example of usage in scripts
-	//! GridLinesMgr.setColorApexPoints(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! GridLinesMgr.setColorApexPoints(c.toVec3f());
 	//! @endcode
 	void setColorApexPoints(const Vec3f& newColor);
 

@@ -95,8 +95,9 @@ public slots:
 	//! Set the color of the FOV center marker.
 	//! @param newColor The color of FOV center marker.
 	//! @code
-	//! // example of usage in scripts
-	//! SpecialMarkersMgr.setColorFOVCenterMarker(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SpecialMarkersMgr.setColorFOVCenterMarker(c.toVec3f());
 	//! @endcode
 	void setColorFOVCenterMarker(const Vec3f& newColor);
 
@@ -113,8 +114,9 @@ public slots:
 	//! Set the color of the circular FOV marker.
 	//! @param newColor The color of circular FOV marker.
 	//! @code
-	//! // example of usage in scripts
-	//! SpecialMarkersMgr.setColorFOVCircularMarker(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SpecialMarkersMgr.setColorFOVCircularMarker(c.toVec3f());
 	//! @endcode
 	void setColorFOVCircularMarker(const Vec3f& newColor);
 
@@ -139,8 +141,9 @@ public slots:
 	//! Set the color of the rectangular FOV marker.
 	//! @param newColor The color of rectangular FOV marker.
 	//! @code
-	//! // example of usage in scripts
-	//! SpecialMarkersMgr.setColorFOVRectangularMarker(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SpecialMarkersMgr.setColorFOVRectangularMarker(c.toVec3f());
 	//! @endcode
 	void setColorFOVRectangularMarker(const Vec3f& newColor);
 
@@ -153,8 +156,9 @@ public slots:
 	//! Set the color of the compass marks.
 	//! @param newColor The color of compass marks.
 	//! @code
-	//! // example of usage in scripts
-	//! SpecialMarkersMgr.setColorCompassMarks(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! SpecialMarkersMgr.setColorCompassMarks(c.toVec3f());
 	//! @endcode
 	void setColorCompassMarks(const Vec3f& newColor);
 

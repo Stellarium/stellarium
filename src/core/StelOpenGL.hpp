@@ -55,7 +55,7 @@ namespace StelOpenGL
 		VERTEX_SHADER,
 		FRAGMENT_SHADER,
 	};
-	//! Returns a prefix containing #version directive and a few defines for
+	//! Returns a prefix containing \#version directive and a few defines for
 	//  the GLSL version supported in current GL context.
 	QByteArray globalShaderPrefix(ShaderType);
 	//! Returns high-graphics OpenGL functions, for use in non-ANGLE/CompatProfile/etc. modes.

@@ -289,8 +289,9 @@ public slots:
 
 	//! Set the telescope reticle color
 	//! @code
-	//! // example of usage in scripts
-	//! TelescopeControl.setReticleColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! TelescopeControl.setReticleColor(c.toVec3f());
 	//! @endcode
 	void setReticleColor(const Vec3f& c) { reticleColor = c; emit reticleColorChanged(c);}
 	//! Get the telescope reticle color
@@ -310,15 +311,17 @@ public slots:
 	const Vec3f& getLabelColor() const { return labelColor; }
 	//! Set the telescope labels color
 	//! @code
-	//! // example of usage in scripts
-	//! TelescopeControl.setLabelColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! TelescopeControl.setLabelColor(c.toVec3f());
 	//! @endcode
 	void setLabelColor(const Vec3f& c) { labelColor = c; emit labelColorChanged(c);}
 
 	//! Set the field of view circles color
 	//! @code
-	//! // example of usage in scripts
-	//! TelescopeControl.setCircleColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! TelescopeControl.setCircleColor(c.toVec3f());
 	//! @endcode
 	void setCircleColor(const Vec3f& c) { circleColor = c; emit circleColorChanged(c);}
 	//! Get the field of view circles color

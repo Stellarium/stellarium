@@ -492,13 +492,13 @@ void HelpDialog::updateAboutText(void) const
 
 	typedef QPair<QString, int> donator;
 	QVector<donator> financialContributors = {
-		// Individuals
-		{ "Daniel", 1600 }, { "Laurence Holt", 1000 }, { "John Bellora", 670 }, { "Marla Pinaire", 530 }, { "Jeff Moe", 512 },
-		{ "Vernon Hermsen", 324 }, { "Walter Dörfler", 300 }, { "Michel Payette", 290 },  { "Salvatore Ficicchia", 261 },
-		{ "Satish Mallesh", 260 }, { "Raul Prisacariu", 260 }, { "Philippe Renoux", 250 }, { "Fito Martin", 250 },
-		{ "SuEllen Shepard", 250 },  { "Vlad Magdalin", 250  },
-		// Organizations
-		{ "BairesDev", 9500 }, { "Dotcom-Monitor", 1000 }, { "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 790 },
+	        // Individuals
+	        { "Daniel", 1900 }, { "Bryan", 1000 }, { "Laurence Holt", 1000 }, { "John Bellora", 670 }, { "Marla Pinaire", 560 }, { "Jeff Moe", 512 },
+	        { "Vernon Hermsen", 324 }, { "Michel Payette", 305 },  { "James Lattis", 300 }, { "Walter Dörfler", 300 }, { "Salvatore Ficicchia", 276 },
+	        { "Satish Mallesh", 260 }, { "Raul Prisacariu", 260 }, { "Philippe Renoux", 250 }, { "Fito Martin", 250 },  { "SuEllen Shepard", 250 },
+	        { "Vlad Magdalin", 250  },
+	        // Organizations
+	        { "BairesDev", 11000 }, { "Dotcom-Monitor", 1000 }, { "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 820 },
 	        { "SSSTwitter", 500 }, { "Triplebyte", 280 }
 	};
 	std::sort(financialContributors.begin(), financialContributors.end(), [](donator i, donator j){ return i.second > j.second; });
@@ -543,8 +543,8 @@ void HelpDialog::updateAboutText(void) const
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Alexander V. Wolf")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Ruslan Kabatsayev")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Worachate Boonplod")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Henry Leung")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Sky cultures researcher: %1").arg(QString("Susanne M. Hoffmann")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Tester: %1").arg(QString("Khalid AlAjaji")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<h3>" + q_("Former Developers").toHtmlEscaped() + "</h3>";
 	newHtml += "<p>"  + q_("Several people have made significant contributions, but are no longer active. Their work has made a big difference to the project:").toHtmlEscaped() + "</p><ul>";
@@ -559,9 +559,10 @@ void HelpDialog::updateAboutText(void) const
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Mike Storm")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Ferdinand Majerech")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Jörg Müller")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Marcos Cardinot")).toHtmlEscaped() + "</li>";	
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Marcos Cardinot")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Nigel Kerr")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Diego Marcos")).toHtmlEscaped() + "</li></ul>";
+	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Diego Marcos")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<h3>" + q_("Contributors").toHtmlEscaped() + "</h3>";
 	newHtml += "<p>"  + q_("Many individuals have made contributions to the project and their work has made Stellarium better. Alphabetically sorted list of all contributors: %1.").arg(allContributors.join(", ")).toHtmlEscaped() + "</p>";
 	newHtml += "<h3>" + q_("Financial support").toHtmlEscaped() + "</h3>";

@@ -134,8 +134,9 @@ public slots:
 	//! Set the color used to draw custom object markers.
 	//! @param c The color of the custom object markers (R,G,B)
 	//! @code
-	//! // example of usage in scripts
-	//! CustomObjectMgr.setMarkersColor(Vec3f(1.0,0.0,0.0));
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! CustomObjectMgr.setMarkersColor(c.toVec3f());
 	//! @endcode
 	void setMarkersColor(const Vec3f& c);
 	//! Get the current color used to draw custom object markers.

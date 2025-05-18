@@ -22,7 +22,7 @@
 #include "Calendar.hpp"
 
 //! @class ChineseCalendar
-//! Functions for the Chinese calendar (1645 Qing dynasty version)
+//! @brief Functions for the Chinese calendar (1645 Qing dynasty version)
 //! @author Georg Zotti
 //! @ingroup calendars
 //! The Chinese calendar (and related Japanese, Korean and Vietnamese) is a Lunisolar calendar based on astronomical events.

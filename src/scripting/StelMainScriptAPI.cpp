@@ -1185,7 +1185,7 @@ void StelMainScriptAPI::clear(const QString& state)
 	const int stateInt = stateMap.value(state.toLower(), 0);
 	if (stateInt == 0)
 	{
-		qWarning() << "WARNING clear(" << state << ") - state not known";
+		qWarning() << "State for command clear(" << state << ") not known";
 	}
 	else
 	{

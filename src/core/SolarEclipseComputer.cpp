@@ -26,6 +26,7 @@
 #include "StelCore.hpp"
 #include "sidereal_time.h"
 
+#include <QGlobalStatic>
 #include <utility>
 #include <QPainter>
 
@@ -34,10 +35,10 @@ namespace
 
 double sqr(const double x) { return x*x; }
 
-static const QColor hybridEclipseColor ("#800080");
-static const QColor totalEclipseColor  ("#ff0000");
-static const QColor annularEclipseColor("#0000ff");
-static const QColor eclipseLimitsColor ("#00ff00");
+Q_GLOBAL_STATIC_WITH_ARGS(QColor, hybridEclipseColor ,(128, 0, 128));
+Q_GLOBAL_STATIC_WITH_ARGS(QColor, totalEclipseColor  ,(255, 0, 0));
+Q_GLOBAL_STATIC_WITH_ARGS(QColor, annularEclipseColor,(0, 0, 255));
+Q_GLOBAL_STATIC_WITH_ARGS(QColor, eclipseLimitsColor ,(0, 255, 0));
 
 QString toKMLColorString(const QColor& c)
 {
@@ -80,10 +81,10 @@ void drawContinuousEquirectGeoLine(QPainter& painter, QPointF pointA, QPointF po
 	auto prevPoint = firstDir;
 	// Keep the step no greater than 2°
 	const double numPoints = max(3., ceil(lineLengthDeg / 2.));
-	for(double n = 1; n < numPoints; ++n)
+	for(int n = 1; n < numPoints; ++n)
 	{
-		const auto alpha = n / (numPoints-1) * angleMax;
-		const auto currPoint = cos(alpha)*firstDir + sin(alpha)*secondDir;
+		const double alpha = double(n) / (numPoints-1) * angleMax;
+		const Vec3d currPoint = cos(alpha)*firstDir + sin(alpha)*secondDir;
 
 		double lon1, lat1;
 		StelUtils::rectToSphe(&lon1, &lat1, prevPoint);
@@ -111,17 +112,17 @@ void drawGeoLinesForEquirectMap(QPainter& painter, const std::vector<QPointF>& p
 	StelUtils::spheToRect(M_PI/180 * points[0].x(), M_PI/180 * points[0].y(), prevDir);
 	for(unsigned n = 1; n < points.size(); ++n)
 	{
-		const auto currLon = M_PI/180 * points[n].x();
-		const auto currLat = M_PI/180 * points[n].y();
+		const double currLon = M_PI/180 * points[n].x();
+		const double currLat = M_PI/180 * points[n].y();
 		Vec3d currDir;
 		StelUtils::spheToRect(currLon, currLat, currDir);
 
-		const auto cosAngleBetweenDirs = dot(prevDir, currDir);
+		const double cosAngleBetweenDirs = dot(prevDir, currDir);
 		// Create an orthonormal pair of vectors that will define a plane in which we'll
 		// rotate from one of the vectors towards the second one, thus creating the
 		// shortest line on a unit sphere between the previous and the current directions.
-		const auto firstDir = prevDir;
-		const auto secondDir = normalize(currDir - cosAngleBetweenDirs*firstDir);
+		const Vec3d firstDir = prevDir;
+		const Vec3d secondDir = normalize(currDir - cosAngleBetweenDirs*firstDir);
 		// The parametric equation for the connecting line is:
 		//  P(alpha) = cos(alpha)*firstDir+sin(alpha)*secondDir.
 		// Here we assume alpha>0 (otherwise we'll go the longer route over the sphere).
@@ -129,8 +130,8 @@ void drawGeoLinesForEquirectMap(QPainter& painter, const std::vector<QPointF>& p
 		// Now we need to find out if this line crosses the 180° meridian. This happens
 		// if there exists an alpha such that P(alpha).y==0 && P(alpha).x<0.
 		// These are the solutions of this equation for alpha.
-		const auto alpha1 = atan2(firstDir[1], -secondDir[1]);
-		const auto alpha2 = atan2(-firstDir[1], secondDir[1]);
+		const double alpha1 = atan2(firstDir[1], -secondDir[1]);
+		const double alpha2 = atan2(-firstDir[1], secondDir[1]);
 		const bool firstSolutionBad  = alpha1 < 0 || cos(alpha1) < cosAngleBetweenDirs;
 		const bool secondSolutionBad = alpha2 < 0 || cos(alpha2) < cosAngleBetweenDirs;
 		// If the line doesn't cross 180°, we are not splitting it
@@ -141,8 +142,8 @@ void drawGeoLinesForEquirectMap(QPainter& painter, const std::vector<QPointF>& p
 			continue;
 		}
 
-		const auto alpha = firstSolutionBad ? alpha2 : alpha1;
-		const auto P = cos(alpha)*firstDir + sin(alpha)*secondDir;
+		const double alpha = firstSolutionBad ? alpha2 : alpha1;
+		const Vec3d P = cos(alpha)*firstDir + sin(alpha)*secondDir;
 		// Ignore the crossing of 0°
 		if(P[0] > 0)
 		{
@@ -359,21 +360,21 @@ ShadowLimitPoints getShadowLimitQs(StelCore*const core, const double JD, const d
 	// LHS(Q) of the equation and its derivative
 	const auto lhsAndDerivative = [=](const double Q) -> std::pair<double,double>
 	{
-		const auto sinQ = std::sin(Q);
-		const auto cosQ = std::cos(Q);
-		const auto sinQ_2 = sqr(sinQ);
-		const auto cosQ_2 = sqr(cosQ);
-		const auto sinQ_3 = sinQ_2 * sinQ;
-		const auto cosQ_3 = cosQ_2 * cosQ;
-		const auto sinQ_4 = sqr(sinQ_2);
-		const auto cosQ_4 = sqr(cosQ_2);
-		const auto lhs = cC0S0 +
+		const double sinQ = std::sin(Q);
+		const double cosQ = std::cos(Q);
+		const double sinQ_2 = sqr(sinQ);
+		const double cosQ_2 = sqr(cosQ);
+		const double sinQ_3 = sinQ_2 * sinQ;
+		const double cosQ_3 = cosQ_2 * cosQ;
+		const double sinQ_4 = sqr(sinQ_2);
+		const double cosQ_4 = sqr(cosQ_2);
+		const double lhs = cC0S0 +
 		                 cC1S0*cosQ + cC2S0*cosQ_2 + cC3S0*cosQ_3 + cC4S0*cosQ_4 +
 		                 cC0S1*sinQ + cC0S2*sinQ_2 + cC0S3*sinQ_3 + cC0S4*sinQ_4 +
 		                 cC1S1*cosQ*sinQ + cC1S2*cosQ*sinQ_2 + cC1S3*cosQ*sinQ_3 +
 		                 cC2S1*cosQ_2*sinQ + cC2S2*cosQ_2*sinQ_2 +
 		                 cC3S1*cosQ_3*sinQ;
-		const auto lhsPrime =
+		const double lhsPrime =
 		    -cC1S0*sinQ -2*cC2S0*cosQ*sinQ - 3*cC3S0*cosQ_2*sinQ - 4*cC4S0*cosQ_3*sinQ +
 		     cC0S1*cosQ + 2*cC0S2*sinQ*cosQ + 3*cC0S3*sinQ_2*cosQ + 4*cC0S4*sinQ_3*cosQ +
 		     cC1S1*(cosQ_2-sinQ_2) + cC1S2*(2*cosQ_2*sinQ-sinQ_3) + cC1S3*(3*cosQ_2*sinQ_2-sinQ_4) +
@@ -406,15 +407,15 @@ ShadowLimitPoints getShadowLimitQs(StelCore*const core, const double JD, const d
 				const auto [lhs, lhsPrime] = lhsAndDerivative(Q);
 
 				// Cancel the known roots to avoid finding them instead of the remaining ones
-				auto newLHSPrime = lhsPrime;
-				auto newLHS = lhs;
+				double newLHSPrime = lhsPrime;
+				double newLHS = lhs;
 				for(const auto root : points.values)
 				{
-					const auto rootQ = root.Q;
+					const double rootQ = root.Q;
 					// We need a 2pi-periodic root-canceling function,
 					// so take a sine of half the difference.
-					const auto sinDiff = sin((Q - rootQ)/2);
-					const auto cosDiff = cos((Q - rootQ)/2);
+					const double sinDiff = sin((Q - rootQ)/2);
+					const double cosDiff = cos((Q - rootQ)/2);
 
 					newLHS /= sinDiff;
 					newLHSPrime = (newLHSPrime - 0.5*cosDiff*newLHS)/sinDiff;
@@ -429,7 +430,7 @@ ShadowLimitPoints getShadowLimitQs(StelCore*const core, const double JD, const d
 				if(abs(newLHS) < 1e-10*lhsScale)
 					finalIteration = true;
 
-				const auto deltaQ = newLHS / newLHSPrime;
+				const double deltaQ = newLHS / newLHSPrime;
 				if(newLHSPrime==0 || abs(deltaQ) > 1000)
 				{
 					// We are shooting too far away, convergence may be too slow.
@@ -822,7 +823,7 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 
 	bool partialEclipse = false;
 	bool nonCentralEclipse = false;
-	double dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude;
+	double dRatio,altitude,pathWidth,duration,magnitude;
 	core->setJD(JDMid);
 	core->update(0);
 	const auto ep = calcSolarEclipseBessel();
@@ -871,7 +872,6 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 	// Eclipse begins/ends at sunrise/sunset curve
 	if (bothPenumbralLimits)
 	{
-		double latP2, lngP2, latP3, lngP3;
 		bool first = true;
 		for (int j = 0; j < 2; j++)
 		{
@@ -881,8 +881,8 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 			core->update(0);
 			auto ep = calcSolarEclipseBessel();
 			coordinates = getContactCoordinates(ep.x, ep.y, ep.d, ep.mu);
-			latP2 = coordinates.latitude;
-			lngP2 = coordinates.longitude;
+			double latP2 = coordinates.latitude;
+			double lngP2 = coordinates.longitude;
 			auto& limit = data.riseSetLimits[j].emplace<EclipseMapData::TwoLimits>();
 
 			limit.p12curve.emplace_back(data.firstContactWithEarth.longitude,
@@ -907,8 +907,8 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 			core->update(0);
 			ep = calcSolarEclipseBessel();
 			coordinates = getContactCoordinates(ep.x, ep.y, ep.d, ep.mu);
-			latP3 = coordinates.latitude;
-			lngP3 = coordinates.longitude;
+			double latP3 = coordinates.latitude;
+			double lngP3 = coordinates.longitude;
 			limit.p34curve.emplace_back(lngP3, latP3);
 			JD = JDP3;
 			i = 0;
@@ -1009,7 +1009,7 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 			{
 				curve->clear();
 				numPoints = 2*numPoints+1;
-				const auto step = (JDmax-JDmin)/numPoints;
+				const double step = (JDmax-JDmin)/numPoints;
 				// We use an extended interval of n to include min and max values of JD. The internal
 				// values of JD are chosen in such a way that after increasing numPoints at the next
 				// iteration we'd check the points between the ones we checked in the previous
@@ -1017,7 +1017,7 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 				// the same JD values.
 				for(int n = -1; n < numPoints+1; ++n)
 				{
-					const auto JD = std::clamp(JDmin + step*(n+0.5), JDmin, JDmax);
+					const double JD = std::clamp(JDmin + step*(n+0.5), JDmin, JDmax);
 					const auto coordinates = getMaximumEclipseAtRiseSet(first,JD);
 					curve->emplace_back(JD, coordinates.longitude, coordinates.latitude);
 					if (abs(coordinates.latitude) <= 90.)
@@ -1037,8 +1037,8 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 			// The curve corresponding to P1-P4 time interval
 			data.maxEclipseAtRiseSet.emplace_back();
 			auto*const curve = &data.maxEclipseAtRiseSet.back();
-			const auto JDmin = JDP1;
-			const auto JDmax = JDP4;
+			const double JDmin = JDP1;
+			const double JDmax = JDP4;
 			int numPoints = 5;
 			bool goodPointFound = false;
 			do
@@ -1053,7 +1053,7 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 				// the same JD values.
 				for(int n = -1; n < numPoints+1; ++n)
 				{
-					const auto JD = std::clamp(JDmin + step*(n+0.5), JDmin, JDmax);
+					const double JD = std::clamp(JDmin + step*(n+0.5), JDmin, JDmax);
 					const auto coordinates = getMaximumEclipseAtRiseSet(first,JD);
 					curve->emplace_back(JD, coordinates.longitude, coordinates.latitude);
 					if (abs(coordinates.latitude) <= 90.)
@@ -1113,7 +1113,7 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 			// Bisect between these times. The sufficient number of iterations was found empirically.
 			for (int n = 0; n < 15; ++n)
 			{
-				const auto currTime = (firstInvalidTime + lastValidTime) / 2;
+				const double currTime = (firstInvalidTime + lastValidTime) / 2;
 				const auto coords = getMaximumEclipseAtRiseSet(first, currTime);
 				if (coords.latitude > 90)
 				{
@@ -1140,10 +1140,10 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 			const unsigned origNumPoints = points.size();
 			for(unsigned n = 1; n < origNumPoints; ++n)
 			{
-				const auto prevLat = points[n-1].latitude;
-				const auto currLat = points[n].latitude;
-				const auto prevLon = points[n-1].longitude;
-				const auto currLon = points[n].longitude;
+				const double prevLat = points[n-1].latitude;
+				const double currLat = points[n].latitude;
+				const double prevLon = points[n-1].longitude;
+				const double currLon = points[n].longitude;
 				auto lonDiff = currLon - prevLon;
 				while(lonDiff >  180) lonDiff -= 360;
 				while(lonDiff < -180) lonDiff += 360;
@@ -1154,7 +1154,7 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 				if(Vec2d(prevLat - currLat, lonDiff).normSquared() < admissibleStepDegSqr)
 					continue;
 
-				const auto JD = (points[n-1].JD + points[n].JD) / 2;
+				const double JD = (points[n-1].JD + points[n].JD) / 2;
 				const auto coordinates = getMaximumEclipseAtRiseSet(first,JD);
 				points.emplace_back(JD, coordinates.longitude, coordinates.latitude);
 				newPointsInserted = true;
@@ -1180,6 +1180,7 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 
 	if (!partialEclipse)
 	{
+		double latDeg,lngDeg;
 		double JDC1 = JDMid, JDC2 = JDMid;
 		const double JDU1 = getJDofContact(JDMid,true,false,true,true); // beginning of external (ant)umbral contact
 		const double JDU4 = getJDofContact(JDMid,false,false,true,true); // end of external (ant)umbral contact
@@ -1258,11 +1259,11 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 			}
 			data.centerLine.emplace_back(lngC2, latC2);
 		}
-		else
-		{
-			JDC1 = JDMid;
-			JDC2 = JDMid;
-		}
+		//else // N.B. already done above!
+		//{
+		//	JDC1 = JDMid;
+		//	double = JDMid;
+		//}
 
 		// Umbra/antumbra outline
 		// we want to draw (ant)umbral shadow on world map at exact times like 09:00, 09:10, 09:20, ...
@@ -1278,7 +1279,6 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 			core->update(0);
 			const auto ep = calcSolarEclipseBessel();
 			calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
-			double angle = 0.;
 			bool firstPoint = false;
 			auto& outline = data.umbraOutlines.emplace_back();
 			outline.JD = JD;
@@ -1289,7 +1289,7 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 			int pointNumber = 0;
 			while (pointNumber < 60)
 			{
-				angle = pointNumber*M_PI*2./60.;
+				double angle = pointNumber*M_PI*2./60.;
 				coordinates = getShadowOutlineCoordinates(angle, ep.x, ep.y, ep.d, ep.L2, ep.tf2, ep.mu);
 				if (coordinates.latitude <= 90.)
 				{
@@ -1598,10 +1598,10 @@ auto SolarEclipseComputer::getRiseSetLineCoordinates(bool first, double x,double
 	*/
 	const auto lhsAndDerivative = [=](const double t) -> std::pair<double,double>
 	{
-		const auto cost = cos(t);
-		const auto sint = sin(t);
-		const auto lhs = sqr(cost-x) + sqr(k*sint-y) - sqr(L);
-		const auto lhsPrime = 2*x*sint + 2*cost*((k*k-1)*sint - k*y);
+		const double cost = cos(t);
+		const double sint = sin(t);
+		const double lhs = sqr(cost-x) + sqr(k*sint-y) - sqr(L);
+		const double lhsPrime = 2*x*sint + 2*cost*((k*k-1)*sint - k*y);
 		return std::make_pair(lhs,lhsPrime);
 	};
 
@@ -1619,14 +1619,14 @@ auto SolarEclipseComputer::getRiseSetLineCoordinates(bool first, double x,double
 			const auto [lhs, lhsPrime] = lhsAndDerivative(t);
 
 			// Cancel the known roots to avoid finding them instead of the remaining ones
-			auto newLHSPrime = lhsPrime;
-			auto newLHS = lhs;
+			double newLHSPrime = lhsPrime;
+			double newLHS = lhs;
 			for(const auto rootT : ts)
 			{
 				// We need a 2pi-periodic root-canceling function,
 				// so take a sine of half the difference.
-				const auto sinDiff = sin((t - rootT)/2);
-				const auto cosDiff = cos((t - rootT)/2);
+				const double sinDiff = sin((t - rootT)/2);
+				const double cosDiff = cos((t - rootT)/2);
 
 				newLHS /= sinDiff;
 				newLHSPrime = (newLHSPrime - 0.5*cosDiff*newLHS)/sinDiff;
@@ -1635,7 +1635,7 @@ auto SolarEclipseComputer::getRiseSetLineCoordinates(bool first, double x,double
 			if(abs(newLHS) < 1e-10)
 				finalIteration = true;
 
-			const auto deltaT = newLHS / newLHSPrime;
+			const double deltaT = newLHS / newLHSPrime;
 			if(newLHSPrime==0 || abs(deltaT) > 1000)
 			{
 				// We are shooting too far away, convergence may be too slow.
@@ -1675,17 +1675,17 @@ auto SolarEclipseComputer::getRiseSetLineCoordinates(bool first, double x,double
 		// Whether a solution is "first" or "second" depends on which side from the
 		// (0,0)-(x,y) line it is. To find this out we'll use the z component of
 		// the vector product (x,y,0)×(xi,eta,0).
-		const auto sin_t0 = sin(ts[0]);
-		const auto cos_t0 = cos(ts[0]);
-		const auto sin_t1 = sin(ts[1]);
-		const auto cos_t1 = cos(ts[1]);
+		const double sin_t0 = sin(ts[0]);
+		const double cos_t0 = cos(ts[0]);
+		const double sin_t1 = sin(ts[1]);
+		const double cos_t1 = cos(ts[1]);
 
-		const auto xi0 = cos_t0;
-		const auto xi1 = cos_t1;
-		const auto eta0 = k*sin_t0;
-		const auto eta1 = k*sin_t1;
+		const double xi0 = cos_t0;
+		const double xi1 = cos_t1;
+		const double eta0 = k*sin_t0;
+		const double eta1 = k*sin_t1;
 
-		const auto vecProdZ0 = x * eta0 - y * xi0;
+		const double vecProdZ0 = x * eta0 - y * xi0;
 
 		const bool use0 = first ? vecProdZ0 < 0 : vecProdZ0 > 0;
 
@@ -1726,10 +1726,10 @@ auto SolarEclipseComputer::getShadowOutlineCoordinates(double angle,double x,dou
 
 	GeoPoint coordinates(99., 0.);
 
-	double L1, xi, eta1, zeta1 = 0;
+	double xi, eta1, zeta1 = 0;
 	for(int n = 0; n < 3; ++n)
 	{
-		L1 = L-zeta1*tf;
+		double L1 = L-zeta1*tf;
 		xi = x-L1*sinAngle;
 		eta1 = (y-L1*cosAngle)/rho1;
 		const double zeta1sqr = 1.-xi*xi-eta1*eta1;
@@ -1920,16 +1920,16 @@ bool SolarEclipseComputer::generatePNGMap(const EclipseMapData& data, const QStr
 		switch(type)
 		{
 		case EclipseMapData::EclipseType::Total:
-			painter.setPen(QPen(totalEclipseColor, penWidth));
+			painter.setPen(QPen(*totalEclipseColor, penWidth));
 			break;
 		case EclipseMapData::EclipseType::Annular:
-			painter.setPen(QPen(annularEclipseColor, penWidth));
+			painter.setPen(QPen(*annularEclipseColor, penWidth));
 			break;
 		case EclipseMapData::EclipseType::Hybrid:
-			painter.setPen(QPen(hybridEclipseColor, penWidth));
+			painter.setPen(QPen(*hybridEclipseColor, penWidth));
 			break;
 		default:
-			painter.setPen(QPen(eclipseLimitsColor, penWidth));
+			painter.setPen(QPen(*eclipseLimitsColor, penWidth));
 			break;
 		}
 	};
@@ -2030,14 +2030,14 @@ void SolarEclipseComputer::generateKML(const EclipseMapData& data, const QString
 
 	stream << "<?xml version='1.0' encoding='UTF-8'?>\n<kml xmlns='http://www.opengis.net/kml/2.2'>\n<Document>" << '\n';
 	stream << "<name>"+q_("Solar Eclipse")+" "+dateString+"</name>\n<description>"+q_("Created by Stellarium")+"</description>\n";
-	stream << "<Style id='Hybrid'>\n<LineStyle>\n<color>" << toKMLColorString(hybridEclipseColor) << "</color>\n<width>1</width>\n</LineStyle>\n";
-	stream << "<PolyStyle>\n<color>" << toKMLColorString(hybridEclipseColor) << "</color>\n</PolyStyle>\n</Style>\n";
-	stream << "<Style id='Total'>\n<LineStyle>\n<color>" << toKMLColorString(totalEclipseColor) << "</color>\n<width>1</width>\n</LineStyle>\n";
-	stream << "<PolyStyle>\n<color>" << toKMLColorString(totalEclipseColor) << "</color>\n</PolyStyle>\n</Style>\n";
-	stream << "<Style id='Annular'>\n<LineStyle>\n<color>" << toKMLColorString(annularEclipseColor) << "</color>\n<width>1</width>\n</LineStyle>\n";
-	stream << "<PolyStyle>\n<color>" << toKMLColorString(annularEclipseColor) << "</color>\n</PolyStyle>\n</Style>\n";
-	stream << "<Style id='PLimits'>\n<LineStyle>\n<color>" << toKMLColorString(eclipseLimitsColor) << "</color>\n<width>1</width>\n</LineStyle>\n";
-	stream << "<PolyStyle>\n<color>" << toKMLColorString(eclipseLimitsColor) << "</color>\n</PolyStyle>\n</Style>\n";
+	stream << "<Style id='Hybrid'>\n<LineStyle>\n<color>" << toKMLColorString(*hybridEclipseColor) << "</color>\n<width>1</width>\n</LineStyle>\n";
+	stream << "<PolyStyle>\n<color>" << toKMLColorString(*hybridEclipseColor) << "</color>\n</PolyStyle>\n</Style>\n";
+	stream << "<Style id='Total'>\n<LineStyle>\n<color>" << toKMLColorString(*totalEclipseColor) << "</color>\n<width>1</width>\n</LineStyle>\n";
+	stream << "<PolyStyle>\n<color>" << toKMLColorString(*totalEclipseColor) << "</color>\n</PolyStyle>\n</Style>\n";
+	stream << "<Style id='Annular'>\n<LineStyle>\n<color>" << toKMLColorString(*annularEclipseColor) << "</color>\n<width>1</width>\n</LineStyle>\n";
+	stream << "<PolyStyle>\n<color>" << toKMLColorString(*annularEclipseColor) << "</color>\n</PolyStyle>\n</Style>\n";
+	stream << "<Style id='PLimits'>\n<LineStyle>\n<color>" << toKMLColorString(*eclipseLimitsColor) << "</color>\n<width>1</width>\n</LineStyle>\n";
+	stream << "<PolyStyle>\n<color>" << toKMLColorString(*eclipseLimitsColor) << "</color>\n</PolyStyle>\n</Style>\n";
 
 	{
 		const auto timeStr = localeMgr->getPrintableTimeLocal(data.greatestEclipse.JD, core->getUTCOffset(data.greatestEclipse.JD));

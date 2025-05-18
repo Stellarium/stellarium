@@ -141,8 +141,8 @@ public:
 
 	struct GeoPoint
 	{
-		double latitude;
-		double longitude;
+		double latitude;  //!< latitude  [degrees]
+		double longitude; //!< longitude [degrees]
 		GeoPoint() = default;
 		GeoPoint(double latitude, double longitude)
 			: latitude(latitude), longitude(longitude)

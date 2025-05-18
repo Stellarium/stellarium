@@ -5,6 +5,7 @@
 # 
 # Translators:
 # tommy <tmhrozw@gmail.com>, 2022
+# Tatsuki Yonezawa, 2025
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2023-11-28 13:04+0700\n"
 "PO-Revision-Date: 2022-10-05 17:03+0000\n"
-"Last-Translator: tommy <tmhrozw@gmail.com>, 2022\n"
+"Last-Translator: Tatsuki Yonezawa, 2025\n"
 "Language-Team: Japanese (https://app.transifex.com/stellarium/teams/80998/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,11 +35,13 @@ msgid ""
 "or some other details to find out how this plugin behaves. Then build and "
 "present your own work!"
 msgstr ""
+"このシーンは、主に独自の開発のテストベッドとして役立ちます。シーン "
+"フォルダーのコピーを作成し、自由に変更し、マテリアル設定やその他の詳細を試して、このプラグインの動作を確認してください。その後、独自の作品を構築して発表してください。"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:8
 msgid "Coordinate and orientation tests"
-msgstr ""
+msgstr "座標と方向のテスト"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:10
@@ -52,18 +55,22 @@ msgid ""
 "absolutely and always point west-east, the grid lines hit the northern "
 "horizon slightly (4.2 deg) left of north!"
 msgstr ""
+"ここに示されている柱は、構造物の中心から見たもので、中央ヨーロッパの緯度における夏至/春分/秋分の日の出/日の入りの位置を大まかに示しています "
+"(高精度ではありません)。中央の柱は東西の線を示しています。床に見える測量座標グリッドは、地理的な北と一致していません。-4.2 度の回転 "
+"(子午線収束のテスト) を補正する必要があります。つまり、中央の柱は必ず西から東を指す必要がありますが、グリッド ラインは北の地平線に北の少し左 "
+"(4.2 度) で当たることになります。"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:19
 msgid ""
 "Walkaround ground coordinates (Ctrl-R, T) should display the coordinates "
 "visible along the south and west border of the ground."
-msgstr ""
+msgstr "地上座標 (Ctrl-R、T) には、地上の南と西の境界に沿って表示される座標が表示されます。"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:23
 msgid "Material test"
-msgstr ""
+msgstr "マテリアルテスト"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:25
@@ -72,6 +79,8 @@ msgid ""
 " can play with material parameters to create funny effects like "
 "semitransparent or glow-in-the-dark brick spheres."
 msgstr ""
+"このモデルは、プラグインのグラフィック機能をテストするためにも使用されます。マテリアル "
+"パラメータを操作して、半透明や暗闇で光るレンガの球体などの面白い効果を作成できます。"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:29
@@ -79,12 +88,14 @@ msgid ""
 "To test temporal features, the pillars and spheres are visible only from the"
 " years 2000 until 2020.  Edit the material file to change that!"
 msgstr ""
+"時間的特徴をテストするため、柱と球体は 2000 年から 2020 年までしか表示されません。これを変更するには、マテリアル "
+"ファイルを編集してください。"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:32
 #: ../../scenery3d/Sterngarten/description.en.utf8:56
 msgid "Model"
-msgstr ""
+msgstr "モデル"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:33
@@ -108,7 +119,7 @@ msgstr ""
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:7
 msgid "Idea"
-msgstr ""
+msgstr "アイデア"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:9
@@ -117,11 +128,13 @@ msgid ""
 "Astronomical Bureau (1907) and Austrian Astronomical Society (1924). "
 "Director of first Vienna Planetarium (1927) and Urania observatory."
 msgstr ""
+"オスワルド・トーマス大学教授（1882年クロンシュタット - "
+"1963年ウィーン）。天文局（1907年）およびオーストリア天文学会（1924年）の創設者。ウィーン初のプラネタリウム（1927年）およびウラニア天文台の所長。"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:14
 msgid "Construction"
-msgstr ""
+msgstr "構造物"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:16
@@ -135,18 +148,23 @@ msgid ""
 "Calendar)  and the monthly journal \"Der Sternenbote\" (The Starry "
 "Messenger)."
 msgstr ""
+"シュテルンガルテンは、トーマスの弟子であり天文局の後継者であるヘルマン・ミュッケ教授 (1935-2019) "
+"とその協力者によって開発されました。ミュッケは、1963年から2018年までオーストリア天文学協会の事務局長、1963 年から 2001 "
+"年までウィーン天文館の所長、1971 年から 2001 年までウィーン・ウラニア公共天文台の所長も務めました。ミュッケと協会は 60 "
+"年以上にわたり、「オーストリア天文カレンダー」 (オーストリア天文カレンダー) と月刊誌「デア・シュテルネンボーテ」 (星空の使者) "
+"を発行してきました。"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:22
 msgid ""
 "It was built 1997-2001 by the Austrian Astronomical Society, supported by "
 "public and private sponsors."
-msgstr ""
+msgstr "1997年から2001年にかけて、オーストリア天文学会によって公的および民間のスポンサーの支援を受けて建設されました。"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:24
 msgid "Purpose"
-msgstr ""
+msgstr "目的"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:26
@@ -222,17 +240,17 @@ msgstr ""
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:46
 msgid "Information panels."
-msgstr ""
+msgstr "情報パネル"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:49
 msgid "Further Information"
-msgstr ""
+msgstr "詳細情報"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:50
 msgid "Websites in German only."
-msgstr ""
+msgstr "ウェブサイトはドイツ語のみです。"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:52
@@ -240,6 +258,8 @@ msgid ""
 "Österreichischer Astronomischer Verein: <a "
 "href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
 msgstr ""
+"Österreichischer Astronomischer Verein: <a "
+"href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:53
@@ -247,6 +267,8 @@ msgid ""
 "German Wikipedia article on the <a "
 "href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
 msgstr ""
+"Wikipedia（ドイツ版）の記事  <a "
+"href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:57
@@ -256,6 +278,10 @@ msgid ""
 "by Mucke in his primary school days. Mucke's spirit will remain alive in the"
 " Sterngarten."
 msgstr ""
+"Created by Georg Zotti following plans by H. Mucke; Like countless amateur "
+"and professional astronomers in Austria, Zotti was introduced to astronomy "
+"by Mucke in his primary school days. Mucke's spirit will remain alive in the"
+" Sterngarten."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:60
@@ -263,3 +289,5 @@ msgid ""
 "Model created in 2010 with Google Sketchup 8, exported from Google Sketchup "
 "8.0.14346."
 msgstr ""
+"Model created in 2010 with Google Sketchup 8, exported from Google Sketchup "
+"8.0.14346."

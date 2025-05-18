@@ -39,6 +39,10 @@
 #include <QSettings>
 #include <QStandardItem>
 #include <QRegularExpression>
+#if defined(Q_OS_WIN)
+	#include "../common/ASCOMSupport.hpp"
+	#include <QMessageBox>
+#endif
 
 
 TelescopeDialog::TelescopeDialog(const QString &dialogName, QObject *parent)
@@ -107,6 +111,11 @@ void TelescopeDialog::createDialogContent()
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
+
+#ifdef Q_OS_WIN
+	if ((ASCOMSupport::getASCOMMajorVersion() > 0) && (ASCOMSupport::getASCOMMajorVersion() < 7))
+		QMessageBox::warning(nullptr, q_("Outdated ASCOM!"), q_("Your ASCOM is below version 7. Upgrade to avoid problems!") );
+#endif
 
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));

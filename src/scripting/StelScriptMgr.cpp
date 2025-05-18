@@ -600,7 +600,7 @@ QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QS
 	QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		QString msg = QString("WARNING: script file %1 could not be opened for reading").arg(QDir::toNativeSeparators(s));
+		QString msg = QString("Script file %1 could not be opened for reading").arg(QDir::toNativeSeparators(s));
 		emit scriptDebug(msg);
 		qWarning() << msg;
 		return QString();
@@ -700,7 +700,7 @@ QString StelScriptMgr::getDescription(const QString& s)
 	QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		QString msg = QString("WARNING: script file %1 could not be opened for reading").arg(QDir::toNativeSeparators(s));
+		QString msg = QString("Script file %1 could not be opened for reading").arg(QDir::toNativeSeparators(s));
 		emit scriptDebug(msg);
 		qWarning() << msg;
 		return QString();
@@ -833,7 +833,7 @@ bool StelScriptMgr::prepareScript( QString &script, const QString &fileName, con
 
 	if (absPath.isEmpty())
 	{
-		QString msg = QString("WARNING: could not find script file %1").arg(QDir::toNativeSeparators(fileName));
+		QString msg = QString("Could not find script file %1").arg(QDir::toNativeSeparators(fileName));
 		emit scriptDebug(msg);
 		qWarning() << msg;
 		return false;
@@ -844,7 +844,7 @@ bool StelScriptMgr::prepareScript( QString &script, const QString &fileName, con
 	QFile fic(absPath);
 	if (!fic.open(QIODevice::ReadOnly))
 	{
-		QString msg = QString("WARNING: cannot open script: %1").arg(QDir::toNativeSeparators(fileName));
+		QString msg = QString("Cannot open script: %1").arg(QDir::toNativeSeparators(fileName));
 		emit scriptDebug(msg);
 		qWarning() << msg;
 		return false;
@@ -1088,7 +1088,7 @@ void StelScriptMgr::expand(const QString fileName, const QString &input, QString
 				if (incPath.isEmpty())
 				{
 					QString fail = scriptDir + "/" + incName;
-					qWarning() << "WARNING: file not found! Let's check standard scripts directory...";
+					qWarning() << "File not found! Let's check standard scripts directory...";
 
 					// OK, file is not exists in relative path; Let's check standard scripts directory
 					incPath = StelFileMgr::findFile("scripts/" + incName);
@@ -1097,7 +1097,7 @@ void StelScriptMgr::expand(const QString fileName, const QString &input, QString
 					{
 						fail += " or scripts/" + incName;
 						emit scriptDebug(QString("WARNING: could not find script include file: %1").arg(QDir::toNativeSeparators(incName)));
-						qWarning() << "WARNING: could not find script include file: " << QDir::toNativeSeparators(incName);
+						qWarning() << "Could not find script include file: " << QDir::toNativeSeparators(incName);
 						if( errLoc == -1 ) errLoc = output.length();
 						output += line + " // <<< " + fail + " not found\n";
 						outline++;
@@ -1125,7 +1125,7 @@ void StelScriptMgr::expand(const QString fileName, const QString &input, QString
 				else
 				{
 					emit scriptDebug(QString("WARNING: could not open script include file for reading: %1").arg(QDir::toNativeSeparators(incPath)));
-					qWarning() << "WARNING: could not open script include file for reading: " << QDir::toNativeSeparators(incPath);
+					qWarning() << "Could not open script include file for reading: " << QDir::toNativeSeparators(incPath);
 				   	if( errLoc == -1 ) errLoc = output.length();
 					output += line + " // <<< " + incPath + ": cannot open\n";
 					outline++;

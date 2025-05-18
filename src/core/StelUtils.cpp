@@ -30,7 +30,9 @@
 #include <QRegularExpression>
 #include <QProcess>
 #include <QSysInfo>
+#include <QJsonValue>
 #include <cmath> // std::fmod
+#include <limits>
 #include <zlib.h>
 
 #ifdef CYGWIN
@@ -632,11 +634,11 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	static const int JB_MAX_WITHOUT_OVERFLOW = 107374182;
 	const long julian = static_cast<long>(std::floor(jd + 0.5));
 
-	long ta, jalpha, tb, tc, td, te;
+	long ta, tc;
 
 	if (julian >= JD_GREG_CAL)
 	{
-		jalpha = (4*(julian - 1867216) - 1) / 146097;
+		long jalpha = (4*(julian - 1867216) - 1) / 146097;
 		ta = julian + 1 + jalpha - jalpha / 4;
 	}
 	else if (julian < 0)
@@ -648,7 +650,7 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 		ta = julian;
 	}
 
-	tb = ta + 1524;
+	long tb = ta + 1524;
 	if (tb <= JB_MAX_WITHOUT_OVERFLOW)
 	{
 		tc = (tb*20 - 2442) / 7305;
@@ -657,8 +659,8 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	{
 		tc = static_cast<long>((static_cast<unsigned long long>(tb)*20 - 2442) / 7305);
 	}
-	td = 365 * tc + tc/4;
-	te = ((tb - td) * 10000)/306001;
+	long td = 365 * tc + tc/4;
+	long te = ((tb - td) * 10000)/306001;
 
 	*dd = tb - td - (306001 * te) / 10000;
 
@@ -917,6 +919,12 @@ double getJDFromBesselianEpoch(const double epoch)
 	return 2400000.5 + (15019.81352 + (epoch - 1900.0) * 365.242198781);
 }
 
+double getJDFromJulianEpoch(const double epoch)
+{
+	return 2451545.0 + (epoch - 2000.0) * 365.25;
+}
+
+
 double qTimeToJDFraction(const QTime& time)
 {
 	return static_cast<double>(1./(24*60*60*1000)*QTime(0, 0, 0, 0).msecsTo(time))-0.5;
@@ -946,7 +954,7 @@ QTime jdFractionToQTime(const double jd)
 		hours+=1;
 	}
 	if (hours >= 24)
-		qDebug() << "WARNING: hours exceed a full day!" << hours;
+		qWarning() << "Hours exceed a full day!" << hours;
 	hours %= 24;
 
 	QTime tm=QTime(hours, mins, sec, ms);
@@ -976,9 +984,7 @@ bool getJDFromDate(double* newjd, const int y, const int m, const int d, const i
 		/*
 		 * Algorithm taken from "Numerical Recipes in C, 2nd Ed." (1992), pp. 11-12
 		 */
-		long ljul;
 		long jy, jm;
-		long laa, lbb, lcc, lee;
 
 		jy = y;
 		if (m > 2)
@@ -991,22 +997,22 @@ bool getJDFromDate(double* newjd, const int y, const int m, const int d, const i
 			jm = m + 13;
 		}
 
-		laa = 1461 * jy / 4;
+		long laa = 1461 * jy / 4;
 		if (jy < 0 && jy % 4)
 		{
 			--laa;
 		}
-		lbb = 306001 * jm / 10000;
-		ljul = laa + lbb + d + 1720995L;
+		long lbb = 306001 * jm / 10000;
+		long ljul = laa + lbb + d + 1720995L;
 
 		if (d + 31L*(m + 12L * y) >= IGREG2)
 		{
-			lcc = jy/100;
+			long lcc = jy/100;
 			if (jy < 0 && jy % 100)
 			{
 				--lcc;
 			}
-			lee = lcc/4;
+			long lee = lcc/4;
 			if (lcc < 0 && lcc % 4)
 			{
 				--lee;
@@ -1806,7 +1812,7 @@ double getDeltaTByChaprontTouze(const double jDay)
 
 	if (-391 < year && year <= 948)
 		deltaT = (42.4*u +495.0)*u + 2177.0;
-	if (948 < year && year <= 1600)
+	if (948 < year) // && year <= 1600)
 		deltaT = (23.6*u +100.0)*u + 102.0;
 
 	return deltaT;
@@ -2512,12 +2518,12 @@ static const double MoonFluctuationTable[2555] = {
 double getMoonFluctuation(const double jDay)
 {
 	double f = 0.;
-	int year, month, day, index;
+	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	double t = yearFraction(year, month, day);
 	if (t>=1681.0 && t<=1936.5) {
-		index = qRound(std::floor((t - 1681.0)*10));
+		int index = qRound(std::floor((t - 1681.0)*10));
 		f = MoonFluctuationTable[index]*0.07; // Get interpolated data and convert to seconds of time
 	}
 
@@ -2790,6 +2796,32 @@ QByteArray uncompress(QIODevice& device, qint64 maxBytes)
 	return out;
 }
 
+qint64 getLongLong(const QJsonValue& v)
+{
+	const auto reportError = [&v]{
+		qWarning().nospace() << "Cannot obtain an integer from JSON value "
+		                     << v << ". Please format it as a JSON string or"
+		                     " make sure it's an integer smaller than 2^53.";
+		return 0;
+	};
+
+	bool ok = false;
+	if(v.isString())
+	{
+		const auto integer = v.toString().toLongLong(&ok);
+		if(!ok) return reportError();
+		return integer;
+	}
+	const auto value = v.toDouble();
+	constexpr qint64 max = (1LL<<std::numeric_limits<double>::digits) - 1;
+
+	if(std::abs(value) > max) return reportError();
+
+	const auto integer = static_cast<qint64>(value);
+	if(value != integer) // fractional part must be zero
+		return reportError();
+	return integer;
+}
 
 } // end of the StelUtils namespace
 

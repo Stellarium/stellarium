@@ -1,0 +1,91 @@
+{
+  "id": "zulu",
+  "region": "Southern Africa",
+  "classification": ["ethnographic"],
+  "fallback_to_international_names": false,
+  "constellations": [
+    {
+      "id": "CON zulu 001",
+      "lines": [[17573, 17499]],
+      "image": {
+        "file": "illustrations/digging-stars.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [237, 504], "hip": 20205},
+          {"pos": [187, 127], "hip": 17499},
+          {"pos": [175, 120], "hip": 17573}
+        ]
+      },
+      "common_name": {"english": "Digging Stars", "native": "isiLimela"}
+    },
+    {
+      "id": "CON zulu 002",
+      "lines": [[26563, 25923]],
+      "image": {
+        "file": "illustrations/flower.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [191, 83], "hip": 16852},
+          {"pos": [323, 180], "hip": 26563},
+          {"pos": [350, 501], "hip": 31681}
+        ]
+      },
+      "common_name": {"english": "Long-stemmed flower", "native": "oNdwenjana"}
+    },
+    {
+      "id": "CON zulu 003",
+      "lines": [[41483, 41373]],
+      "image": {
+        "file": "illustrations/cattle.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [88, 17], "hip": 32349},
+          {"pos": [253, 177], "hip": 30438},
+          {"pos": [222, 475], "hip": 60260}
+        ]
+      },
+      "common_name": {"english": "Journey to new grazing lands", "native": "isAndulela"}
+    },
+    {
+      "id": "CON zulu 004",
+      "lines": [[85696, 85927]],
+      "image": {
+        "file": "illustrations/spears.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [105, 143], "hip": 80569},
+          {"pos": [409, 53], "hip": 63613},
+          {"pos": [433, 202], "hip": 93015}
+        ]
+      },
+      "common_name": {"english": "Stream of spears", "native": "Umthala Wezinkanyezi"}
+    },
+    {
+      "id": "CON zulu 005",
+      "lines": [[26063, 25727]],
+      "image": {
+        "file": "illustrations/crossing.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [307, 3], "hip": 24041},
+          {"pos": [423, 136], "hip": 26311},
+          {"pos": [139, 511], "hip": 24197}
+        ]
+      },
+      "common_name": {"english": "Crossing", "native": "Impanbana"}
+    }
+  ],
+  "common_names": {
+    "HIP 7588": [{"english": "Achernar"}],
+    "HIP 21421": [{"english": "Aldebaran"}],
+    "HIP 24436": [{"english": "Rigel"}],
+    "HIP 24608": [{"english": "Capella"}],
+    "HIP 27989": [{"english": "Betelgeuse"}],
+    "HIP 30438": [{"english": "Canopus"}],
+    "HIP 32349": [{"english": "Sirius"}],
+    "HIP 60718": [{"english": "Acrux"}],
+    "HIP 68702": [{"english": "Hadar"}],
+    "HIP 71683": [{"english": "Rigil Kent"}],
+    "HIP 80763": [{"english": "Antares"}]
+  }
+}

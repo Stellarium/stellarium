@@ -16,7 +16,7 @@
 
 /***************************************************************************
  *   Copyright (C) 2006 by J.L. Canales                                    *
- *   jlcanales.gasco@gmail.com                                  *
+ *   jlcanales.gasco@gmail.com                                             *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -31,7 +31,7 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.             *
+ *   51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.           *
  ***************************************************************************/
 
 #ifndef GSATTEME_HPP
@@ -48,7 +48,7 @@
 //! @brief Sat position and velocity predictions over TEME reference system.
 //! @details
 //! Class to abstract all the SGP4 complexity.
-//! It implementation wrap whit an object oriented class the revised David. A. Vallado
+//! It implementation wrap with an object oriented class the revised David. A. Vallado
 //! code for SGP4 Calculation. (Spacetrack report #6 revised AIAA-2006-6753-rev1)
 //! @ingroup satellites
 class gSatTEME

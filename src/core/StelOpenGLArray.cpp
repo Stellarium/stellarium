@@ -46,11 +46,11 @@ void StelOpenGLArray::initGL()
 
 	if( s_vaosSupported )
 	{
-		qCDebug(stelOpenGLArray)<<"Vertex Array Objects are supported";
+		qInfo(stelOpenGLArray)<<"Vertex Array Objects are supported";
 	}
 	else
 	{
-		qCDebug(stelOpenGLArray)<<"Vertex Array Objects are not supported on your hardware (this is not an error)";
+		qInfo(stelOpenGLArray)<<"Vertex Array Objects are not supported on your hardware (this is not an error)";
 	}
 
 	//check if we can enable int index buffers

@@ -198,11 +198,11 @@ void Quasars::init()
 	}
 	else
 	{
-		qDebug().noquote() << "[Quasars] quasars.json does not exist - copying default file to" << QDir::toNativeSeparators(catalogJsonPath);
+		qInfo().noquote() << "[Quasars] quasars.json does not exist - copying default file to" << QDir::toNativeSeparators(catalogJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug().noquote() << "[Quasars] Loading catalog file:" << QDir::toNativeSeparators(catalogJsonPath);
+	qInfo().noquote() << "[Quasars] Loading catalog file:" << QDir::toNativeSeparators(catalogJsonPath);
 
 	readJsonFile();
 
@@ -405,14 +405,14 @@ bool Quasars::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "[Quasars] WARNING - could not remove old quasars.json file";
+				qWarning() << "[Quasars] Could not remove old quasars.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "[Quasars] WARNING - failed to copy quasars.json to quasars.json.old";
+		qWarning() << "[Quasars] Failed to copy quasars.json to quasars.json.old";
 		return false;
 	}
 
@@ -501,7 +501,7 @@ int Quasars::getJsonFileFormatVersion(void)
 	{
 		jsonVersion = map.value("version").toInt();
 	}
-	qDebug() << "[Quasars] Version of the format of the catalog:" << jsonVersion;
+	qInfo().noquote() << "[Quasars] Version of the format of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
 

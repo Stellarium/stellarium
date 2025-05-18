@@ -22,7 +22,7 @@
 #include "JulianCalendar.hpp"
 
 //! @class GregorianCalendar
-//! Functions for the Gregorian calendar
+//! @brief Functions for the Gregorian calendar
 //! @author Georg Zotti
 //! @ingroup calendars
 //! Stellarium uses Julian Day numbers internally, and the conventional approach of using the Gregorian calendar for dates after 1582-10-15.

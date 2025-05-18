@@ -2,20 +2,16 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
 # CMake 3.20+ is required if x-compiling for Windows on ARM
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
-# Fix behavior of CMAKE_CXX_STANDARD and CMAKE_C_STANDARD when targeting macOS.
-IF(POLICY CMP0025)
-     CMAKE_POLICY(SET CMP0025 NEW)
-ENDIF()
-# Potential dangerous comparison of variables. Details: https://cmake.org/cmake/help/v3.1/policy/CMP0054.html
-IF(POLICY CMP0054)
-     CMAKE_POLICY(SET CMP0054 NEW)
-ENDIF()
-IF(POLICY CMP0071)
-     CMAKE_POLICY(SET CMP0071 NEW)
-ENDIF()
+CMAKE_POLICY(VERSION 3.16)
+# CMake Policies introduced after version CMAKE_MINIMUM_REQUIRED
 IF(POLICY CMP0175)
      CMAKE_POLICY(SET CMP0175 OLD)
 ENDIF()
+
+SET(ENABLE_EXPORT_COMPILE_COMMANDS 0 CACHE BOOL "Export CMake compile commands for code analysis")
+IF(ENABLE_EXPORT_COMPILE_COMMANDS)
+    SET(CMAKE_EXPORT_COMPILE_COMMANDS on)
+ENDIF(ENABLE_EXPORT_COMPILE_COMMANDS)
 
 # warn about deprecated stuff so that we may try fixing it
 SET(CMAKE_WARN_DEPRECATED 1)
@@ -47,7 +43,7 @@ ENDIF()
 # Note: Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR 25)
 # Number of the release (0 is used before first release)
-SET(STELLARIUM_MINOR 0)
+SET(STELLARIUM_MINOR 1)
 IF(STELLARIUM_RELEASE_BUILD)
     ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
     SET(CMAKE_BUILD_TYPE Release)
@@ -150,8 +146,8 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
                APPEND_COVERAGE_COMPILER_FLAGS()
                MESSAGE(STATUS "Found lcov ${LCOV_PATH} (enable coverage support)")
                SETUP_TARGET_FOR_COVERAGE_LCOV(
-                    NAME coverage 
-                    EXECUTABLE ctest -j ${PROCESSOR_COUNT} 
+                    NAME coverage
+                    EXECUTABLE ctest -j ${PROCESSOR_COUNT}
                     DEPENDENCIES buildTests
                )
           ENDIF()
@@ -174,7 +170,7 @@ ELSE()
           EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} describe --tags --abbrev=0 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_TAGS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
 	  IF(GIT_REVISION)
                # Let's use short hash in all cases
-               STRING(SUBSTRING ${GIT_REVISION} 0 7 REVISION)               
+               STRING(SUBSTRING ${GIT_REVISION} 0 7 REVISION)
 	       ADD_DEFINITIONS(-DGIT_REVISION="${REVISION}")
                ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
 	  ENDIF()
@@ -371,7 +367,7 @@ IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
 ENDIF()
 
 # FreeBSD-specific compiler flags
-# resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers 
+# resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers
 IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
      # Use -pthread compilation option to properly link to threading library
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -Wno-unused-local-typedefs")
@@ -398,6 +394,8 @@ SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be suppor
 IF(ENABLE_NLS)
      ADD_DEFINITIONS(-DENABLE_NLS)
 ENDIF()
+# This option toggle processing files in po directory
+SET(ENABLE_PODIR 1 CACHE BOOL "Define whether processing of translation files should be supported.")
 
 # Activate media support
 SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
@@ -544,6 +542,7 @@ ADD_PLUGIN(Calendars 1)
 ADD_PLUGIN(Exoplanets 1)
 ADD_PLUGIN(EquationOfTime 1)
 ADD_PLUGIN(MeteorShowers 1)
+ADD_PLUGIN(MosaicCamera 1)
 ADD_PLUGIN(NavStars 1)
 ADD_PLUGIN(Novae 1)
 ADD_PLUGIN(Observability 1)
@@ -600,38 +599,6 @@ IF(WIN32)
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Svg REQUIRED)
      IF(${QT_VERSION_MAJOR} EQUAL 5)
           FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS XmlPatterns REQUIRED)
-     ENDIF()
-
-     # Qt 5.12 (LTS) and newest version of Qt use OpenSSL 1.1*
-     # Source: https://lists.qt-project.org/pipermail/releasing/2019-March/002614.html
-     SET(OPENSSL_LIBRARY_ARCH "")
-     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
-	  SET(OPENSSL_LIBRARY_ARCH "-x64")
-     ENDIF()
-     # Try found OpenSSL 3.x DLL's on Windows (newest Qt)
-     FIND_FILE(OPENSSL_SSL_LIBRARY_DLL libssl-3${OPENSSL_LIBRARY_ARCH}.dll)
-     FIND_FILE(OPENSSL_CRYPTO_LIBRARY_DLL libcrypto-3${OPENSSL_LIBRARY_ARCH}.dll)
-     # OK, OpenSSL 3.x is not exist, let's try found OpenSSL 1.1.x DLL's
-     IF(NOT EXISTS ${OPENSSL_SSL_LIBRARY_DLL})
-	  FIND_FILE(OPENSSL_SSL_LIBRARY_DLL libssl-1_1${OPENSSL_LIBRARY_ARCH}.dll)
-     ENDIF()
-     IF(NOT EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL})
-	  FIND_FILE(OPENSSL_CRYPTO_LIBRARY_DLL libcrypto-1_1${OPENSSL_LIBRARY_ARCH}.dll)
-     ENDIF()
-
-     IF(NOT STELLARIUM_BUILD_ARM64)
-       SET(ISS_OPENSSL_LIBS "; OpenSSL support")
-       IF(EXISTS ${OPENSSL_SSL_LIBRARY_DLL})
-         MESSAGE(STATUS "Found OpenSSL SSL library: ${OPENSSL_SSL_LIBRARY_DLL}")
-         SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_SSL_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-       ENDIF()
-       IF(EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL})
-         MESSAGE(STATUS "Found OpenSSL crypto library: ${OPENSSL_CRYPTO_LIBRARY_DLL}")
-         SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_CRYPTO_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-       ENDIF()
-       IF((NOT EXISTS ${OPENSSL_SSL_LIBRARY_DLL}) AND (NOT EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL}))
-         SET(ISS_OPENSSL_LIBS "; OpenSSL libraries not found")
-       ENDIF()
      ENDIF()
 
      IF(STELLARIUM_BUILD_ARM64 AND ${QT_VERSION} VERSION_LESS "6.5.0")
@@ -704,8 +671,8 @@ SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 IF(ENABLE_SHOWMYSKY)
     ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
     CPMFindPackage(NAME ShowMySky-Qt${QT_VERSION_MAJOR}
-        URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.3.3.tar.gz
-        URL_HASH SHA256=21cce3187009ce62a4a08a72b4e22ae7bc00654edfbc7fa9fe8ab65b412791df
+        URL https://github.com/10110111/CalcMySky/archive/refs/heads/master.zip
+        #URL_HASH SHA256=29ef4c81cf020e131ec79a28c78946d80d422d05818197079cbaa6353ffba16a
         EXCLUDE_FROM_ALL yes
         OPTIONS "QT_VERSION ${QT_VERSION_MAJOR}")
     IF(ShowMySky-Qt${QT_VERSION_MAJOR}_ADDED)
@@ -717,7 +684,7 @@ IF(ENABLE_SHOWMYSKY)
         MESSAGE(STATUS "Will build ShowMySky library")
         INCLUDE(GNUInstallDirs)
 	IF(APPLE)
-	    INSTALL(TARGETS ShowMySky LIBRARY DESTINATION Frameworks)	
+	    INSTALL(TARGETS ShowMySky LIBRARY DESTINATION Frameworks)
 	ELSE()
 	    INSTALL(TARGETS ShowMySky
 		    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -737,7 +704,7 @@ IF(ENABLE_SHOWMYSKY)
         GET_TARGET_PROPERTY(ShowMySky_LIBRARY
             ShowMySky::ShowMySky LOCATION)
         IF(EXISTS ${ShowMySky_LIBRARY})
-            MESSAGE(STATUS "Found ShowMySky library: ${ShowMySky_LIBRARY}")	    
+            MESSAGE(STATUS "Found ShowMySky library: ${ShowMySky_LIBRARY}")
         ELSE()
             MESSAGE(FATAL_ERROR "Could NOT found ShowMySky library")
         ENDIF()
@@ -831,24 +798,33 @@ ELSE()
 ENDIF()
 
 IF(ENABLE_XLSX)
-     # TODO: switch to something like vcpkg or conan, and plain find_package,
-     # without the fallback of cmake downloading the dep itself.
-     # But some libraries are not available there yet.
-
      # Version 1.4.4 exports "QXlsx", but future (unreleased as of 10 Nov 2022)
      # version exports "QXlsxQt5" (or ...Qt6) instead. Try both, but
      # download newer one, because 1.4.4 doesn't link on windows when
      # added via add_subdirectory().
-     FIND_PACKAGE(QXlsx NAMES QXlsxQt${QT_VERSION_MAJOR} QXlsx)
+     FIND_PACKAGE(QXlsx NAMES QXlsxQt${QT_VERSION_MAJOR} QXlsx QUIET)
      IF(QXlsx_FOUND)
-         MESSAGE(STATUS "Using system-provided QXlsx ${QXlsx_VERSION}")
+          MESSAGE(STATUS "Using system-provided QXlsx ${QXlsx_VERSION}")
      ELSE()
-         CPMAddPackage(NAME QXlsxQt${QT_VERSION_MAJOR}
-             URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.4.8.tar.gz
-             URL_HASH SHA256=5b2a5aad08f07e6b099d934c4c4f75bcd83a0421538aec1e8582d8c8596b0956
-             EXCLUDE_FROM_ALL ON
-             SOURCE_SUBDIR QXlsx)
+          CPMAddPackage(NAME QXlsxQt${QT_VERSION_MAJOR}
+               URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.5.0.tar.gz
+               URL_HASH SHA256=4461bb0fc9b88b6a970520e8b32eb7d2fc391a1a5c326b139a0af836278cdb09
+               EXCLUDE_FROM_ALL ON
+               SOURCE_SUBDIR QXlsx)
      ENDIF()
+ENDIF()
+
+CPMFindPackage(NAME md4c
+     URL https://github.com/mity/md4c/archive/refs/tags/release-0.5.2.tar.gz
+     URL_HASH SHA256=55d0111d48fb11883aaee91465e642b8b640775a4d6993c2d0e7a8092758ef21
+     EXCLUDE_FROM_ALL yes
+     OPTIONS "BUILD_MD2HTML_EXECUTABLE OFF")
+IF(md4c_ADDED)
+     SET(MD4C_STEL_LIBRARIES md4c-html)
+ELSE()
+     # *_LIBRARIES variable is not set by CPM (unlike find_package; see
+     # https://github.com/cpm-cmake/CPM.cmake/issues/132).
+     SET(MD4C_STEL_LIBRARIES md4c::md4c-html)
 ENDIF()
 
 ########### Set some global variables ###########
@@ -856,7 +832,7 @@ IF(UNIX AND NOT WIN32)
      IF(APPLE)
           SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
      ELSE()
-          ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/${SDATALOC}")          
+          ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/${SDATALOC}")
           # Used in generating the documentation (doc/stellarium.pod.cmake):
           SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/${SDATALOC}")
      ENDIF()
@@ -911,23 +887,23 @@ IF(WIN32)
      #######################################################
 
      IF(STELLARIUM_BUILD_ARM64) # 64bit ARM build?
-	  SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on arm64:\nArchitecturesAllowed=arm64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=arm64")
-	  SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-arm64")
+          SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on arm64:\nArchitecturesAllowed=arm64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=arm64")
+          SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-arm64")
      ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
-	  SET(ISS_ARCHITECTURE_SPECIFIC "")
-	  SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-win32")
+          SET(ISS_ARCHITECTURE_SPECIFIC "")
+          SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-win32")
      ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
-	  SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
-	  SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-win64")
+          SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
+          SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-win64")
      ENDIF()
      SET(ISS_AUTOGENERATED_WARNING "Do not edit this file! It has been automatically generated by CMake. Your changes will be lost the next time CMake is run.")
 
      GET_FILENAME_COMPONENT(_qt_bin_dir "${QMAKE_LOCATION}" DIRECTORY)
      FIND_PROGRAM(WINDEPLOYQT_COMMAND windeployqt HINTS "${_qt_bin_dir}")
      IF(WINDEPLOYQT_COMMAND)
-	  MESSAGE(STATUS "Found windeployqt: ${WINDEPLOYQT_COMMAND}")
+          MESSAGE(STATUS "Found windeployqt: ${WINDEPLOYQT_COMMAND}")
      ELSE()
-	  MESSAGE(STATUS "Could NOT find windeployqt")
+          MESSAGE(STATUS "Could NOT find windeployqt")
      ENDIF()
 
      SET(ISS_STELLARIUM_STUFF "; Additional libraries")
@@ -995,7 +971,7 @@ IF(GENERATE_PACKAGE_TARGET)
      SET(CPACK_PACKAGE_CHECKSUM "SHA256")
      SET(CPACK_STRIP_FILES "bin/stellarium")
      SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
-     SET(CPACK_SOURCE_IGNORE_FILES "/.git/" "/.github/" "builds/" "installers/" "po/stellarium-landscapes-descriptions" "po/stellarium-scenery3d-descriptions" "po/stellarium-skycultures-descriptions" "po/stellarium-desktop" "po/stellarium-metainfo" "util/spout2" "util/DSSToStellarium/toastForShape$" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "/CITATION*" "\\\\.gitignore$" "\\\\.clang-format$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
+     SET(CPACK_SOURCE_IGNORE_FILES "/.git/" "/.github/" "builds/" "installers/" "po/stellarium-landscapes-descriptions" "po/stellarium-scenery3d-descriptions" "po/stellarium-desktop" "po/stellarium-metainfo" "util/spout2" "util/DSSToStellarium/toastForShape$" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "/CITATION*" "\\\\.gitignore$" "\\\\.clang-format$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
      SET(CPACK_RPM_PACKAGE_LICENSE "GNU GPLv2 or later")
      SET(CPACK_RPM_PACKAGE_GROUP "Sciences/Astronomy")
      SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_VENDOR} <stellarium@googlegroups.com>")
@@ -1027,26 +1003,32 @@ ENDIF()
 
 ########### Windows packaging ###############
 IF(WIN32)
-     CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
-     CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium-patch.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium-patch.iss @ONLY)
      FIND_PACKAGE(ISCC)
      IF(ISS_COMPILER_FOUND)
-	  # Add a full installer target
+          IF(${ISS_COMPILER_VERSION_MAJOR} EQUAL 6)
+               CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium.iss6.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
+               CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium-patch.iss6.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium-patch.iss @ONLY)
+          ELSE()
+               CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
+               CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium-patch.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium-patch.iss @ONLY)
+          ENDIF()
+
+          # Add a full installer target
           ADD_CUSTOM_TARGET(
                stellarium-installer
-	       COMMAND ${ISS_COMPILER_EXECUTABLE} "${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss"
+               COMMAND ${ISS_COMPILER_EXECUTABLE} "${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss"
                COMMENT "Making an installer package for Windows..."
                VERBATIM
           )
-	  # Add installer target
-	  ADD_CUSTOM_TARGET(
-	       stellarium-patch-installer
-	       COMMAND ${ISS_COMPILER_EXECUTABLE} "${CMAKE_CURRENT_BINARY_DIR}/stellarium-patch.iss"
-	       COMMENT "Making an installer package for Windows..."
-	       VERBATIM
-	  )
+          # Add installer target
+          ADD_CUSTOM_TARGET(
+               stellarium-patch-installer
+               COMMAND ${ISS_COMPILER_EXECUTABLE} "${CMAKE_CURRENT_BINARY_DIR}/stellarium-patch.iss"
+               COMMENT "Making an installer package for Windows..."
+               VERBATIM
+          )
      ELSE()
-	  MESSAGE(STATUS "Could NOT find Inno Setup compiler. You won't be able to build setup files.")
+          MESSAGE(STATUS "Could NOT find Inno Setup compiler. You won't be able to build setup files.")
      ENDIF()
 ENDIF()
 
@@ -1117,6 +1099,6 @@ IF(ENABLE_SHOWMYSKY)
      # add atmosphere models
      ADD_SUBDIRECTORY( atmosphere )
 ENDIF()
-IF(ENABLE_NLS)
+IF(ENABLE_NLS AND ENABLE_PODIR)
      ADD_SUBDIRECTORY( po )
 ENDIF()

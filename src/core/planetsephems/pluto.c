@@ -230,9 +230,6 @@ void sphe_to_rect(const double lng, const double lat, const double r, double *x,
 void get_pluto_helio_coords (double JD, double * X, double * Y, double * Z)
 {
 	double sum_longitude = 0, sum_latitude = 0, sum_radius = 0;
-	double a, sin_a, cos_a;
-	int i;
-	double L, B, R;
 
 	/* get julian centuries since J2000 */
 	const double t = (JD - 2451545) / 36525;
@@ -243,11 +240,11 @@ void get_pluto_helio_coords (double JD, double * X, double * Y, double * Z)
 	const double P = 238.96 +  144.9600 * t;
  		
 	/* calc periodic terms in table 37.A */
-	for (i=0; i < PLUTO_COEFFS; i++)
+	for (int i=0; i < PLUTO_COEFFS; i++)
 	{
-		a = argument[i].J * J + argument[i].S * S + argument[i].P * P;
-		sin_a = sin(PI/180.*a);
-		cos_a = cos(PI/180.*a);
+		double a = argument[i].J * J + argument[i].S * S + argument[i].P * P;
+		double sin_a = sin(PI/180.*a);
+		double cos_a = cos(PI/180.*a);
 
 		/* longitude */
 		sum_longitude += longitude[i].A * sin_a + longitude[i].B * cos_a;
@@ -260,9 +257,9 @@ void get_pluto_helio_coords (double JD, double * X, double * Y, double * Z)
 	}
 	
 	/* calc L, B, R */
-	L = PI/180. * (238.958116 + 144.96 * t + sum_longitude * 0.000001);
-	B = PI/180. * (-3.908239 + sum_latitude * 0.000001);
-	R = (40.7241346 + sum_radius * 0.0000001);
+	double L = PI/180. * (238.958116 + 144.96 * t + sum_longitude * 0.000001);
+	double B = PI/180. * (-3.908239 + sum_latitude * 0.000001);
+	double R = (40.7241346 + sum_radius * 0.0000001);
 
 	/* convert to rectangular coord */
 	sphe_to_rect(L, B, R, X, Y, Z);

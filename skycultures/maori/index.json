@@ -1,0 +1,108 @@
+{
+  "id": "maori",
+  "region": "Australasia",
+  "classification": ["traditional"],
+  "fallback_to_international_names": false,
+  "constellations": [
+    {
+      "id": "CON maori 001",
+      "lines": [[61084, 60718], [62434, 59747]],
+      "image": {
+        "file": "illustrations/taki.png",
+        "size": [248, 247],
+        "anchors": [
+          {"pos": [125, 42], "hip": 61084},
+          {"pos": [74, 106], "hip": 62434},
+          {"pos": [122, 202], "hip": 60718}
+        ]
+      },
+      "common_name": {"english": "Taki-o-Autahi", "native": "Taki-o-Autahi"}
+    },
+    {
+      "id": "CON maori 002",
+      "lines": [[68702, 71683]],
+      "image": {
+        "file": "illustrations/taura.png",
+        "size": [197, 132],
+        "anchors": [
+          {"pos": [13, 65], "hip": 71683},
+          {"pos": [182, 66], "hip": 68702},
+          {"pos": [102, 119], "hip": 69670}
+        ]
+      },
+      "common_name": {"english": "Te Taura-o-te-waka-o-tamarereti", "native": "Te Taura-o-te-waka-o-tamarereti"}
+    },
+    {
+      "id": "CON maori 003",
+      "lines": [[26727, 26311, 25930]],
+      "common_name": {"english": "Tau-toro", "native": "Tau-toro"}
+    },
+    {
+      "id": "CON maori 004",
+      "lines": [[82396, 82514, 82671, 84143, 86228, 87073, 86670, 85927, 85696]],
+      "image": {
+        "file": "illustrations/tama.png",
+        "size": [255, 439],
+        "anchors": [
+          {"pos": [149, 24], "hip": 80763},
+          {"pos": [198, 368], "hip": 84720},
+          {"pos": [47, 280], "hip": 85927}
+        ]
+      },
+      "common_name": {"english": "The Great Boat of Tama Rereti", "native": "Te-Waka-o-Tama-Rereti"}
+    },
+    {
+      "id": "CON maori 005",
+      "lines": [[21421, 20894, 20205, 20455, 20889]],
+      "common_name": {"english": "Matakarehu", "native": "Matakarehu"}
+    },
+    {
+      "id": "CON maori 006",
+      "lines": [[21421, 20894, 20205, 20455, 20889], [21421, 20889], [20205, 25930], [17499, 20205], [26727, 26311, 25930]],
+      "image": {
+        "file": "illustrations/tainui.png",
+        "size": [380, 205],
+        "anchors": [
+          {"pos": [53, 138], "hip": 26311},
+          {"pos": [348, 135], "hip": 17702},
+          {"pos": [185, 12], "hip": 26451}
+        ]
+      },
+      "common_name": {"english": "The Sail of Tainui", "native": "Te-Ra-o-Tainui"}
+    }
+  ],
+  "common_names": {
+    "HIP 7588": [{"english": "Turu"}],
+    "HIP 17489": [{"english": "Hiwa-i-te-rangi"}],
+    "HIP 17499": [{"english": "Waipunarangi"}],
+    "HIP 17531": [{"english": "Waita"}],
+    "HIP 17573": [{"english": "Waiti"}],
+    "HIP 17579": [{"english": "Pohutukawa"}],
+    "HIP 17608": [{"english": "Ururangi"}],
+    "HIP 17702": [{"english": "Matariki"}],
+    "HIP 17847": [{"english": "Tupuarangi"}],
+    "HIP 17851": [{"english": "Tupuanuku"}],
+    "HIP 21421": [{"english": "Taumata-kuku"}],
+    "HIP 24436": [{"english": "Puanga"}],
+    "HIP 30438": [{"english": "Atutahi"}],
+    "HIP 32349": [{"english": "Takarua"}],
+    "HIP 36850": [{"english": "Whakaahu"}],
+    "HIP 37279": [{"english": "Puanga Hori"}],
+    "HIP 50583": [{"english": "Pipiri"}],
+    "HIP 65474": [{"english": "Mariao"}],
+    "HIP 69673": [{"english": "Ruawahia"}],
+    "HIP 80112": [{"english": "Pekehawani"}],
+    "HIP 80763": [{"english": "Rehua"}],
+    "HIP 81266": [{"english": "Whakaonge-kai"}],
+    "HIP 91262": [{"english": "Whanui"}],
+    "HIP 97649": [{"english": "Poutu-te-Rangi"}],
+    "NAME Earth": [{"english": "Papa", "native": "Papa", "translators_comments": "Native name of Earth in Maori culture"}],
+    "NAME Jupiter": [{"english": "Perearau", "native": "Perearau", "translators_comments": "Native name of Jupiter in Maori culture"}],
+    "NAME Mars": [{"english": "Rangiwhenua", "native": "Rangiwhenua", "translators_comments": "Native name of Mars in Maori culture"}],
+    "NAME Mercury": [{"english": "Takero", "native": "Takero", "translators_comments": "Native name of Mercury in Maori culture"}],
+    "NAME Moon": [{"english": "Te Marama", "native": "Te Marama", "translators_comments": "Native name of the Moon in Maori culture"}],
+    "NAME Saturn": [{"english": "Perearau*", "native": "Perearau*", "translators_comments": "Native name of Saturn in Maori culture"}],
+    "NAME Sun": [{"english": "Te Ra", "native": "Te Ra", "translators_comments": "Native name of the Sun in Maori culture"}],
+    "NAME Venus": [{"english": "Tawera/Meremere", "native": "Tawera/Meremere", "translators_comments": "Native name of Venus in Maori culture"}]
+  }
+}

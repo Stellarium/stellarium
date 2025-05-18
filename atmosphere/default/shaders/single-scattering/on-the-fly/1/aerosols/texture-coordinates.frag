@@ -536,7 +536,7 @@ vec4 sample3DTextureGuided(const sampler3D tex,
     indicesCurrRow[2] =     currRow;
     indicesNextRow[2] = min(currRow+1, scatteringTextureSize[2]-1);
 
-    // The caller will handle the internal interpolation guides: the ones between rows in each 2D "picture".
+    // The callee will handle the internal interpolation guides: the ones between rows in each 2D "picture".
     CONST vec4 logValCurrRow = sample3DTextureGuided01_log(tex, interpolationGuides01Tex, indicesCurrRow);
     CONST vec4 logValNextRow = sample3DTextureGuided01_log(tex, interpolationGuides01Tex, indicesNextRow);
     return exp((logValNextRow-logValCurrRow) * posBetweenRows + logValCurrRow);
@@ -730,12 +730,12 @@ LightPollutionTexVars scatteringTexIndicesToLightPollutionTexVars(const vec2 tex
 {
     CONST vec2 indexMax=lightPollutionTextureSize-vec2(1);
 
-    CONST float altitudeURCoord = texIndices[1] / (indexMax[1]-1);
+    CONST float altitudeURCoord = texIndices[1] / indexMax[1];
     CONST float distToHorizon = altitudeURCoord*LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
     // Rounding errors can result in altitude>max, breaking the code after this calculation, so we have to clamp.
     CONST float altitude=clampAltitude(sqrt(sqr(distToHorizon)+sqr(earthRadius))-earthRadius);
 
-    CONST bool viewRayIntersectsGround = texIndices[0] < indexMax[0]/2;
+    CONST bool viewRayIntersectsGround = texIndices[0] < lightPollutionTextureSize[0]/2;
     CONST float cosViewZenithAngleCoord = viewRayIntersectsGround ?
                                    1-2*texIndices[0]/(indexMax[0]-1) :
                                    2*(texIndices[0]-1)/(indexMax[0]-1)-1;

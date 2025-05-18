@@ -2,7 +2,7 @@ a {
 	color: rgb(162, 140, 66);
 }
 
-/* style for tables with nomenclature (first usage in Tongan starlore) */
+/* style for tables with nomenclature (first usage in Tongan sky culture) */
 table {
         margin: 3px auto;
         border-color: black;
@@ -19,4 +19,10 @@ table.layout, table.layout tr td, table.layout tr th {
         margin: 0;
         padding: 0;
         border-style: none;
+}
+
+.img_and_caption {
+	font-style: italic;
+	margin-right: 3%;
+	margin-left: 3%;
 }

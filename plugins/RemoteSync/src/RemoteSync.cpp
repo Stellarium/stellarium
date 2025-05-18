@@ -160,7 +160,7 @@ void RemoteSync::init()
 
 	loadSettings();
 
-	qCDebug(remoteSync)<<"Plugin initialized";
+	qCInfo(remoteSync)<<"Plugin initialized";
 
 	//parse command line args
 	QStringList args = StelApp::getCommandlineArguments();
@@ -172,7 +172,7 @@ void RemoteSync::init()
 	{
 		if(syncPort!=0)
 			setServerPort(syncPort);
-		qCDebug(remoteSync)<<"Starting server from command line";
+		qCInfo(remoteSync)<<"Starting server from command line";
 		startServer();
 	}
 	else if(syncMode=="client")
@@ -181,7 +181,7 @@ void RemoteSync::init()
 			setClientServerHost(syncHost);
 		if(syncPort!=0)
 			setClientServerPort(syncPort);
-		qCDebug(remoteSync)<<"Connecting to server from command line";
+		qCInfo(remoteSync)<<"Connecting to server from command line";
 		connectToServer();
 	}
 

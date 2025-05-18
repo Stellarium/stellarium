@@ -508,14 +508,17 @@ program when it is called via the command line. See table for a full list:
                                            unless they start with a ``\file{.}'', which may be used to explicitly
                                            specify a file in the current directory or similar.
 
-For example, using the option \texttt{-c\ my\_config.ini} would resolve to the file 
-\file{\textless{}user\ directory\textgreater{}/my\_config.ini} whereas 
-\file{-c\ ./my\_config.ini} can be used to explicitly point to the file
-\file{my\_config.ini} in the current working directory.\\
+                                           For example, using the option \texttt{-c\ my\_config.ini} would resolve to the file 
+                                           \file{\textless{}user\ directory\textgreater{}/my\_config.ini} whereas 
+                                           \file{-c\ ./my\_config.ini} can be used to explicitly point to the file
+                                           \file{my\_config.ini} in the current working directory.\\
 -\/-log-file or -l   & log file name     & Specify the log file name. The default value is \file{log.txt}.
 
-Any path is stripped from the filename. When a path is specified like \texttt{-l\ /mypath/my\_log.txt}, 
-the file will be written to \file{\textless{}user\ directory\textgreater{}/my\_log.txt}\\\midrule
+                                           The value of parameter can be a simple filename or absolute path to the log file. 
+
+                                           When a path is specified like \texttt{-l\ my\_log.txt}, the file will be written 
+                                           to \file{\textless{}user\ directory\textgreater{}/my\_log.txt}. When a path is 
+                                           specified like \texttt{-l\ /home/user/stellarium.log} \file{/home/user/stellarium.log}\\\midrule
 -\/-restore-defaults &  [none]    & Stellarium will start with the default configuration. 
                                     Note: The old configuration file will be overwritten. \\\midrule
 -\/-user-dir         & path       & Specify the user data directory. \\
@@ -615,6 +618,16 @@ problems.
 \item[QT\_ANGLE\_PLATFORM]\footref{FN:WinOnly}\textsuperscript{,}\footref{FN:Qt5only} May be one of \texttt{d3d9} (DirectX~9) or \texttt{d3d11} (DirectX~11),
   or \texttt{warp} for another software-only solution. Note that command line options take precedence over this environment variable.
 \end{description}
+
+\subsection{Logfile tweaks}
+\label{sec:Environment:Logfile}
+
+The amount of logging messages in Qt-based programs can be tuned by setting an environment variable \texttt{QT\_LOGGING\_RULES}. 
+For example, to remove all ``Debug'' messages, set it to \texttt{*.debug=false}. To remove even the ``Info'' messages, add \texttt{;*.info=false}. (Combine several rules with semicola.)
+If you experience operating trouble, make sure you allow all messages, i.e., set these entries shown here to \texttt{true} (or delete the variable).
+
+More information can be found online\footnote{\scriptsize{\url{https://doc.qt.io/qt-6/qloggingcategory.html}, \url{https://doc.qt.io/qt-6/debug.html}}}.
+
 
 \section{GUI Customizations}
 

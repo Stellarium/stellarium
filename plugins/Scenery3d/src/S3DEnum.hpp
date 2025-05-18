@@ -23,7 +23,8 @@
 
 #include <QObject>
 
-//! @file This file contains some enums useful throughout the Scenery3d plugin (settings, etc)
+//! @file
+//! This file contains some enums useful throughout the Scenery3d plugin (settings, etc)
 
 struct S3DEnum
 {

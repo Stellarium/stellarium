@@ -31,6 +31,9 @@ ArchaeoLinesDialogLocations::ArchaeoLinesDialogLocations()
 	: StelDialog("ArchaeoLinesLocations")
 	, al(Q_NULLPTR)
 	, modalContext(0)
+	, allModel(new QStringListModel(this))
+	, pickedModel(new QStringListModel(this))
+	, proxyModel(nullptr)
 {
 	ui = new Ui_archaeoLinesDialogLocations();
 }
@@ -64,8 +67,6 @@ void ArchaeoLinesDialogLocations::createDialogContent()
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	//initialize list model
-	allModel = new QStringListModel(this);
-	pickedModel = new QStringListModel(this);
 	StelLocationMgr *locMgr=&(StelApp::getInstance().getLocationMgr());
 	connect(locMgr, SIGNAL(locationListChanged()), this, SLOT(reloadLocations()));
 	reloadLocations();

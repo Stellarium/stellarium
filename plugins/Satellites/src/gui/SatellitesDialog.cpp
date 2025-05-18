@@ -1189,10 +1189,10 @@ void SatellitesDialog::populateInfo()
 	ui->labelRCS->setText(QString("%1, %2<sup>2</sup>:").arg(q_("RCS"), qc_("m","distance")));
 	ui->labelRCS->setToolTip(QString("<p>%1</p>").arg(q_("Radar cross-section (RCS) is a measure of how detectable an object is with a radar. A larger RCS indicates that an object is more easily detected.")));
 	ui->labelStdMagnitude->setToolTip(QString("<p>%1</p>").arg(q_("The standard magnitude of a satellite is defined as its apparent magnitude when at half-phase and at a distance 1000 km from the observer.")));
-	// TRANSLATORS: duration
+	// TRANSLATORS: duration in seconds
 	QString s = qc_("s","time");
 	ui->orbitDurationSpin->setSuffix(QString(" %1").arg(s));
-	// TRANSLATORS: duration
+	// TRANSLATORS: duration in hours
 	ui->updateFrequencySpinBox->setSuffix(QString(" %1").arg(qc_("h","time")));
 	// TRANSLATORS: Unit of measure for distance - kilometers
 	QString km = qc_("km", "distance");

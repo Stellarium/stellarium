@@ -72,7 +72,7 @@ public:
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
-	//! @flags a set of flags with information types to include.
+	//! @param flags a set of flags with information types to include.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
 	Vec3f getInfoColor(void) const override;
 	Vec3d getJ2000EquatorialPos(const StelCore* core) const override;

@@ -205,11 +205,11 @@ void Satellites::init()
 	}
 	else
 	{
-		qDebug().noquote() << "[Satellites] satellites.json does not exist - copying default file to " << QDir::toNativeSeparators(catalogPath);
+		qInfo().noquote() << "[Satellites] satellites.json does not exist - copying default file to " << QDir::toNativeSeparators(catalogPath);
 		restoreDefaultCatalog();
 	}
 
-	qDebug().noquote() << "[Satellites] loading catalogue file:" << QDir::toNativeSeparators(catalogPath);
+	qInfo().noquote() << "[Satellites] loading catalogue file:" << QDir::toNativeSeparators(catalogPath);
 
 	// create satellites according to content of satellites.json file
 	loadCatalog();
@@ -330,14 +330,14 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "[Satellites] WARNING: unable to remove old catalogue file!";
+				qWarning() << "[Satellites] Unable to remove old catalogue file!";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "[Satellites] WARNING: failed to back up catalogue file as"
+		qWarning() << "[Satellites] Failed to back up catalogue file as"
 			   << QDir::toNativeSeparators(backupPath);
 		return false;
 	}

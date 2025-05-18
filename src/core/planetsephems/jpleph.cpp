@@ -86,10 +86,11 @@ double DLL_FUNC jpl_get_double(const void *ephem, const int value)
 	return(*reinterpret_cast<const double *>(static_cast<const char *>(ephem) + value));
 }
 
-long DLL_FUNC jpl_get_long(const void *ephem, const int value)
-{
-	return(*reinterpret_cast<const int32_t *>(static_cast<const char *>(ephem) + value));
-}
+// This is actually unused. Strange to cast to int32_t but then return the vague "long" type. Some code analysis tools complain.
+//long DLL_FUNC jpl_get_long(const void *ephem, const int value)
+//{
+//	return(*reinterpret_cast<const int32_t *>(static_cast<const char *>(ephem) + value));
+//}
 
 
 /*****************************************************************************
@@ -465,17 +466,18 @@ static void swap_32_bit_val(void *ptr)
 
 static void swap_64_bit_val(void *ptr, long count)
 {
-    char *tptr = static_cast<char *>(ptr), tchar;
-    
-    while(count--)
-    {
-      SWAP_MACRO(tptr[0], tptr[7], tchar)
-      SWAP_MACRO(tptr[1], tptr[6], tchar)
-      SWAP_MACRO(tptr[2], tptr[5], tchar)
-      SWAP_MACRO(tptr[3], tptr[4], tchar)
+	char *tptr = static_cast<char *>(ptr);
 
-      tptr += 8;
-    }
+	while(count--)
+	{
+		char tchar;
+		SWAP_MACRO(tptr[0], tptr[7], tchar)
+		SWAP_MACRO(tptr[1], tptr[6], tchar)
+		SWAP_MACRO(tptr[2], tptr[5], tchar)
+		SWAP_MACRO(tptr[3], tptr[4], tchar)
+
+		tptr += 8;
+	}
 }
 
 /* Most ephemeris quantities have a dimension of three.  Planet positions
@@ -580,6 +582,8 @@ static unsigned int dimension(const unsigned int idx)
 int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
                           double pv[][6], double nut[4], const int bary)
 {
+	QMutexLocker locker(&mutex);
+
 	struct jpl_eph_data *eph = static_cast<struct jpl_eph_data *>(ephem);
 	unsigned i, j, n_intervals;
 	double *buf = eph->cache;
@@ -587,8 +591,6 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
 	const double block_loc = (et - eph->ephem_start) / eph->ephem_step;
 	bool recompute_pvsun;
 	const double aufac = 1.0 / eph->au;
-
-	QMutexLocker locker(&mutex);
 
 	/*   error return for epoch out of range  */
 	if(et < eph->ephem_start || et > eph->ephem_end)
@@ -752,7 +754,6 @@ const char * jpl_init_error_message(void)
 void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
                           char nam[][6], double *val)
 {
-    unsigned i, j;
     unsigned long de_version;
     char title[84];
 
@@ -844,9 +845,9 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
 
     if(temp_data.swap_bytes)     /* byte order is wrong for current platform */
     {  
-        for(j = 0; j < 3; j++)
+	for(unsigned j = 0; j < 3; j++)
         {
-            for(i = 0; i < 15; i++)
+	    for(unsigned i = 0; i < 15; i++)
             { 
                 swap_32_bit_val(&temp_data.ipt[i][j]);
             }
@@ -883,7 +884,7 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
          /* meant that when the code faced a new version,  it broke.   */
          /* Now we use some logic to compute the kernel size.          */
     temp_data.kernel_size = 4;
-    for(i = 0; i < 15; i++)
+    for(unsigned i = 0; i < 15; i++)
       temp_data.kernel_size +=
 	     2 * temp_data.ipt[i][1] * temp_data.ipt[i][2] * dimension(i);
 // for(i = 0; i < 13; i++)
@@ -951,7 +952,7 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
    if(!init_err_code && nam)
       {
       FSeek(ifile, 84L * 3L, SEEK_SET);   /* just after the 3 'title' lines */
-      for(i = 0; i < rval->ncon && !init_err_code; i++)
+      for(unsigned i = 0; i < rval->ncon && !init_err_code; i++)
       {
         if(i == 400)
 	  FSeek(ifile, START_400TH_CONSTANT_NAME, SEEK_SET);

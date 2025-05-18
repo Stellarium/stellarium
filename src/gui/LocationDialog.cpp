@@ -894,9 +894,11 @@ void LocationDialog::ipQueryLocation(bool state)
 	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
 	locMgr.locationFromIP(); // This just triggers asynchronous lookup.
 	// NOTE: These steps seem to assume IP lookup is successful!
-	ui->useAsDefaultLocationCheckBox->setChecked(!state);
-	ui->pushButtonReturnToDefault->setEnabled(!state);
-	updateTimeZoneControls(!state);
+	ui->useAsDefaultLocationCheckBox->setChecked(false);
+	ui->useAsDefaultLocationCheckBox->setEnabled(!state);
+	ui->pushButtonReturnToDefault->setEnabled(false);
+	ui->addLocationToListPushButton->setEnabled(true);
+	//updateTimeZoneControls(!state);
 	connectEditSignals();
 	ui->citySearchLineEdit->setFocus();
 	QSettings* conf = StelApp::getInstance().getSettings();

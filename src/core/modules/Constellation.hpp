@@ -30,6 +30,7 @@
 #include "ConstellationMgr.hpp"
 
 #include <vector>
+#include <QJsonObject>
 #include <QString>
 #include <QFont>
 
@@ -41,8 +42,7 @@ class StelPainter;
 //! Each Constellation consists of a list of stars identified by their
 //! abbreviation and Hipparcos catalogue numbers (taken from file: constellationship.fab),
 //! another entry in file constellation_names.eng.fab with the defining abbreviated name,
-//! nativeName, and translatable englishName (translation goes into nameI18),
-//! boundary shape from file constellation_boundaries.dat and an (optional) artistic pictorial representation.
+//! nativeName, and translatable englishName (translation goes into nameI18).
 //! GZ NEW: The nativeName should be accessible in a GUI option, so that e.g. original names as written in a
 //! concrete book where a skyculture has been taken from can be assured even when translation is available.
 //! TODO: There should be a distinction between constellations and asterisms, which are "unofficial" figures within a sky culture.
@@ -81,7 +81,7 @@ private:
 	//! constellation.
 	//! @param starMgr a pointer to the StarManager object.
 	//! @return false if can't parse record (invalid result!), else true.
-	bool read(const QString& record, StarMgr *starMgr);
+	bool read(const QJsonObject& data, StarMgr *starMgr, bool preferNativeNames);
 
 	//! Draw the constellation name
 	void drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const;
@@ -109,6 +109,10 @@ private:
 	QString getEnglishName() const override {return englishName;}
 	//! Get the short name for the Constellation (returns the abbreviation).
 	QString getShortName() const {return abbreviation;}
+	//! Get the native name for the Constellation
+	QString getNativeName() const {return nativeName;}
+	//! Get pronouncement of the native name for the Constellation
+	QString getNativeNamePronounce() const {return nativeNamePronounce;}
 	//! Draw the lines for the Constellation.
 	//! This method uses the coords of the stars (optimized for use through
 	//! the class ConstellationMgr only).
@@ -142,22 +146,25 @@ private:
 	//! @return true if Constellation art rendering it turned on, else false.
 	bool getFlagArt() const {return artFader;}
 
-	//! Check visibility of starlore elements (using for seasonal rules)
-	//! @return true if starlore elements rendering it turned on, else false.
+	//! Check visibility of sky culture elements (using for seasonal rules)
+	//! @return true if sky culture elements rendering it turned on, else false.
 	bool checkVisibility() const;
 
 	//! International name (translated using gettext)
 	QString nameI18;
-	//! Name in english (column 3 in constellation_names.eng.fab)
+	//! Name in English language
 	QString englishName;
-	//! Name in native language (column 2 in constellation_names.eng.fab).
+	//! Name in native language (original name of constellation in the source)
 	//! According to practice as of V0.13.1, this may be an empty string.
 	//! If empty, will be filled with englishName.
 	QString nativeName;
-	//! Abbreviation (of the latin name for western constellations)
+	//! Pronouncement of the native name or the romanized version of native name of constellation
+	QString nativeNamePronounce;
+	//! Abbreviation (the short name or designation of constellations)
 	//! For non-western, a skyculture designer must invent it. (usually 2-5 letters)
 	//! This MUST be filled and be unique within a sky culture.
 	QString abbreviation;
+	//! The context for English name of constellation (using for correct translation via gettext)
 	QString context;
 	//! Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;
@@ -169,7 +176,11 @@ private:
 	//! Month [1..12] of end visibility of constellation (seasonal rules)
 	int endSeason;
 	//! List of stars forming the segments
-	StelObjectP* constellation;
+	std::vector<StelObjectP> constellation;
+	//! In case this describes a single-star constellation (i.e. just one line segment that starts and ends at the same star),
+	//! or we have a line segment with such single star somewhere within the constellation,
+	//! we will draw a circle with this opening radius.
+	double singleStarConstellationRadius;
 
 	StelTextureSP artTexture;
 	StelVertexArray artPolygon;

@@ -205,7 +205,6 @@ public slots:
 	{
 		objectPointerVisibility=b;
 		emit flagSelectedObjectPointerChanged(b);
-
 	}
 	//! Get whether a pointer is to be drawn over selected object.
 	bool getFlagSelectedObjectPointer(void) { return objectPointerVisibility; }

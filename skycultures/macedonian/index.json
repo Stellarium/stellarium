@@ -1,0 +1,268 @@
+{
+  "id": "macedonian",
+  "region": "Southern Europe",
+  "classification": ["traditional"],
+  "fallback_to_international_names": false,
+  "constellations": [
+    {
+      "id": "CON macedonian 001",
+      "lines": [[67301, 65378, 62956, 59774, 58001, 53910, 54061, 59774]],
+      "image": {
+        "file": "illustrations/komiti.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [97, 342], "hip": 67301},
+          {"pos": [207, 188], "hip": 68756},
+          {"pos": [417, 393], "hip": 53910}
+        ]
+      },
+      "common_name": {"english": "'Aramii' (organized group of thieves)", "native": "арамии"}
+    },
+    {
+      "id": "CON macedonian 002",
+      "lines": [[17847, 17702, 17608, 17499, 17531, 17573, 17702]],
+      "image": {
+        "file": "illustrations/kvacka.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [208, 400], "hip": 17847},
+          {"pos": [257, 163], "hip": 17812},
+          {"pos": [311, 400], "hip": 17499}
+        ]
+      },
+      "common_name": {"english": "Mother Hen", "native": "квачка"}
+    },
+    {
+      "id": "CON macedonian 003",
+      "lines": [[26549, 26727, 26311]],
+      "common_name": {"english": "Plough", "native": "рало"}
+    },
+    {
+      "id": "CON macedonian 004",
+      "lines": [[26311, 25930]],
+      "image": {
+        "file": "illustrations/volovi.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [62, 214], "hip": 26727},
+          {"pos": [390, 204], "hip": 24331},
+          {"pos": [486, 321], "hip": 23123}
+        ]
+      },
+      "common_name": {"english": "Oxen", "native": "волови"}
+    },
+    {
+      "id": "CON macedonian 005",
+      "lines": [[27366, 24436], [25247, 24244], [25247, 24873], [25247, 25353, 24873, 24244, 24327, 24845, 25353]],
+      "image": {
+        "file": "illustrations/terezii.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [54, 185], "hip": 27366},
+          {"pos": [335, 172], "hip": 24436},
+          {"pos": [331, 326], "hip": 24327}
+        ]
+      },
+      "common_name": {"english": "Libra", "native": "терезии"}
+    },
+    {
+      "id": "CON macedonian 006",
+      "lines": [[18532, 14576]],
+      "image": {
+        "file": "illustrations/jarem.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [74, 161], "hip": 18532},
+          {"pos": [465, 224], "hip": 14576},
+          {"pos": [471, 317], "hip": 14354}
+        ]
+      },
+      "common_name": {"english": "Yoke", "native": "јарем"}
+    },
+    {
+      "id": "CON macedonian 007",
+      "lines": [[37279, 32349]],
+      "image": {
+        "file": "illustrations/volci.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [166, 131], "hip": 37279},
+          {"pos": [397, 479], "hip": 32349},
+          {"pos": [353, 484], "hip": 33347}
+        ]
+      },
+      "common_name": {"english": "Wolves", "native": "волци"}
+    },
+    {
+      "id": "CON macedonian 008",
+      "lines": [[3677, 3293]],
+      "image": {
+        "file": "illustrations/gumno.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [169, 362], "hip": 3881},
+          {"pos": [342, 220], "hip": 2948},
+          {"pos": [376, 322], "hip": 3231}
+        ]
+      },
+      "common_name": {"english": "Threshing Floor", "native": "гумно"}
+    },
+    {
+      "id": "CON macedonian 009",
+      "lines": [[24951, 24109]],
+      "image": {
+        "file": "illustrations/jastreb.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [266, 297], "hip": 24608},
+          {"pos": [197, 189], "hip": 25569},
+          {"pos": [340, 171], "hip": 23964}
+        ]
+      },
+      "common_name": {"english": "Hawk", "native": "јастреб"}
+    },
+    {
+      "id": "CON macedonian 010",
+      "lines": [[102532, 101769], [102281, 101958]],
+      "image": {
+        "file": "illustrations/krst.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [139, 207], "hip": 102532},
+          {"pos": [212, 309], "hip": 102281},
+          {"pos": [319, 224], "hip": 101909}
+        ]
+      },
+      "common_name": {"english": "Cross", "native": "крст"}
+    },
+    {
+      "id": "CON macedonian 011",
+      "lines": [[21421, 21251, 21517, 22176]],
+      "image": {
+        "file": "illustrations/lisica.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [99, 371], "hip": 22347},
+          {"pos": [376, 359], "hip": 21421},
+          {"pos": [421, 211], "hip": 21251}
+        ]
+      },
+      "common_name": {"english": "Fox", "native": "лисица"}
+    },
+    {
+      "id": "CON macedonian 012",
+      "lines": [[94713, 94685, 95673]],
+      "image": {
+        "file": "illustrations/masha.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [52, 221], "hip": 94713},
+          {"pos": [460, 292], "hip": 94685},
+          {"pos": [42, 315], "hip": 95673}
+        ]
+      },
+      "common_name": {"english": "Tongs", "native": "маши"}
+    },
+    {
+      "id": "CON macedonian 013",
+      "lines": [[27989, 29038, 29426]],
+      "image": {
+        "file": "illustrations/orach.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [320, 425], "hip": 27989},
+          {"pos": [223, 349], "hip": 29138},
+          {"pos": [304, 144], "hip": 29038}
+        ]
+      },
+      "common_name": {"english": "Ploughman", "native": "орач"}
+    },
+    {
+      "id": "CON macedonian 014",
+      "lines": [[25428, 25492, 25291, 24504]],
+      "image": {
+        "file": "illustrations/petel.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [221, 372], "hip": 25428},
+          {"pos": [112, 173], "hip": 26712},
+          {"pos": [413, 198], "hip": 24504}
+        ]
+      },
+      "common_name": {"english": "Cock", "native": "петел"}
+    },
+    {
+      "id": "CON macedonian 015",
+      "lines": [[91262, 92420], [91262, 94481], [92420, 93194]],
+      "image": {
+        "file": "illustrations/pirustija.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [204, 158], "hip": 91262},
+          {"pos": [364, 292], "hip": 93194},
+          {"pos": [148, 384], "hip": 95056}
+        ]
+      },
+      "common_name": {"english": "Trivet", "native": "пирустија"}
+    },
+    {
+      "id": "CON macedonian 016",
+      "lines": [[78493, 78159, 77512, 76952, 76267, 75695, 76127]],
+      "image": {
+        "file": "illustrations/sofra.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [83, 253], "hip": 78159},
+          {"pos": [154, 314], "hip": 77512},
+          {"pos": [443, 233], "hip": 75695}
+        ]
+      },
+      "common_name": {"english": "Round Table", "native": "софра"}
+    },
+    {
+      "id": "CON macedonian 017",
+      "lines": [[20889, 20455, 20205]],
+      "image": {
+        "file": "illustrations/svinji.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [118, 258], "hip": 20889},
+          {"pos": [242, 192], "hip": 20255},
+          {"pos": [394, 343], "hip": 20205}
+        ]
+      },
+      "common_name": {"english": "Pigs", "native": "свињи"}
+    },
+    {
+      "id": "CON macedonian 018",
+      "lines": [[100453, 102488], [100453, 102098], [100453, 97165], [100453, 95947]],
+      "image": {
+        "file": "illustrations/svrdel.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [140, 75], "hip": 102488},
+          {"pos": [274, 97], "hip": 100453},
+          {"pos": [240, 449], "hip": 95947}
+        ]
+      },
+      "common_name": {"english": "Auger", "native": "сврдел"}
+    },
+    {
+      "id": "CON macedonian 019",
+      "lines": [[6686, 4427, 746, 3179]],
+      "image": {
+        "file": "illustrations/ushi.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [219, 166], "hip": 6686},
+          {"pos": [337, 335], "hip": 746},
+          {"pos": [213, 304], "hip": 3179}
+        ]
+      },
+      "common_name": {"english": "Part of Plough 'Ushi'", "native": "уши"}
+    }
+  ],
+  "common_names": {
+    "HIP 11767": [{"english": "Mediterranean star"}]
+  }
+}

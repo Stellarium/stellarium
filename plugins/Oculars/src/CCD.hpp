@@ -27,8 +27,10 @@ class Telescope;
 class Lens;
 
 //! @ingroup oculars
-//! @class CCD describes CCD properties for the Oculars plugin.
-//! pixel count, sensor size and pixel size are obviously related, and should all be given in data sheets or manuals.
+//! @class CCD
+//! @brief Describes CCD properties for the Oculars plugin.
+//!
+//! Pixel count, sensor size and pixel size are obviously related, and should all be given in data sheets or manuals.
 //! Sometimes one of them is lacking, or given only approximately like "APS-C" which can have some tolerance.
 //! As a consequence, it seems natural to assume one fixed and one updateable when setting one of those.
 //! The logic used here:

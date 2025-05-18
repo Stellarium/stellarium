@@ -39,10 +39,17 @@
 # define GL_TEXTURE_MAX_ANISOTROPY 0x84FE
 #endif
 
+// Let's try to keep 120 FPS even if textures are loaded every frame
+// (60 FPS if all the other computations take the same time per frame).
+constexpr quint64 MAX_LOAD_NANOSEC_PER_FRAME = 1e9 / 120;
+
 QPointer<StelTextureMgr> StelTexture::textureMgr;
 
 StelTexture::StelTexture()
 {
+	// Note: we don't set gl to OpenGL functions here, because this
+	// constructor may be called from another thread, which doesn't
+	// have a GL context associated with it.
 }
 
 StelTexture::~StelTexture()
@@ -61,7 +68,7 @@ StelTexture::~StelTexture()
 		if (gl->glIsTexture(id)==GL_FALSE)
 		{
 			GLenum err = gl->glGetError();
-			qWarning() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID="
+			qWarning() << "StelTexture::~StelTexture() tried to delete invalid texture with ID="
 			           << id << "Current GL ERROR status is" << err << "(" << StelOpenGL::getGLErrorText(err) << ")";
 		}
 		else
@@ -202,14 +209,19 @@ bool StelTexture::bind(uint slot)
 
 	if(load())
 	{
+		if(textureMgr->getTotalLoadTimeTaken() > MAX_LOAD_NANOSEC_PER_FRAME)
+			return false;
+		gl = QOpenGLContext::currentContext()->functions();
 		// Finally load the data in the main thread.
+		gl->glActiveTexture(GL_TEXTURE0 + slot);
+		textureMgr->reportTextureLoadStart();
 		glLoad(loader->result());
 		delete loader;
 		loader = Q_NULLPTR;
+		textureMgr->reportTextureLoadEnd();
 		if (id != 0)
 		{
 			// The texture is already fully loaded, just bind and return true;
-			gl->glActiveTexture(GL_TEXTURE0 + slot);
 			gl->glBindTexture(GL_TEXTURE_2D, id);
 			return true;
 		}
@@ -227,7 +239,13 @@ void StelTexture::waitForLoaded()
 		Q_ASSERT(0);
 	}
 	if(loader)
+	{
 		loader->waitForFinished();
+
+		glLoad(loader->result());
+		delete loader;
+		loader = nullptr;
+	}
 }
 
 template <typename T, typename...Params, typename...Args>
@@ -415,7 +433,6 @@ bool StelTexture::glLoad(const GLData& data)
 		return false;
 	}
 
-	gl->glActiveTexture(GL_TEXTURE0);
 	gl->glGenTextures(1, &id);
 	gl->glBindTexture(GL_TEXTURE_2D, id);
 	gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, loadParams.filtering);
@@ -453,12 +470,6 @@ bool StelTexture::glLoad(const GLData& data)
 	//for now, assume full sized 8 bit GL formats used internally
 	glSize = static_cast<uint>(data.data.size());
 
-#ifndef NDEBUG
-	if (qApp->property("verbose") == true)
-		qDebug() << "StelTexture" << id << "uploaded, total memory usage "
-		         << textureMgr->glMemoryUsage / (1024.0 * 1024.0) << "MB";
-#endif
-
 	//restore old value
 	gl->glPixelStorei(GL_UNPACK_ALIGNMENT, oldalignment);
 
@@ -494,6 +505,12 @@ bool StelTexture::glLoad(const GLData& data)
 	textureMgr->glMemoryUsage += glSize;
 	textureMgr->idMap.insert(id,sharedFromThis());
 
+#ifndef NDEBUG
+	if (qApp->property("verbose") == true)
+		qDebug() << "StelTexture" << id << "of size" << width << u8"×" << height
+		         << "uploaded, total memory usage "
+		         << textureMgr->glMemoryUsage / (1024.0 * 1024.0) << "MB";
+#endif
 
 	// Report success of texture loading
 	emit loadingProcessFinished(false);

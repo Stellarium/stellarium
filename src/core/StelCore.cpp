@@ -45,15 +45,13 @@
 
 #include <QSettings>
 #include <QDebug>
+#include <QGlobalStatic>
 #include <QMetaEnum>
 #include <QTimeZone>
 #include <QFile>
 #include <QDir>
 #include <QRegularExpression>
 #include <QOpenGLShaderProgram>
-
-#include <iostream>
-#include <fstream>
 
 // Init static transfo matrices
 // See vsop87.doc:
@@ -232,7 +230,7 @@ void StelCore::init()
 
 	if (!location.isValid())
 	{
-		qWarning() << "Warning: location" << defaultLocationID << "is unknown.";
+		qWarning() << "Location" << defaultLocationID << "is unknown.";
 		location = locationMgr->getLastResortLocation();
 	}
 	position = new StelObserver(location);
@@ -264,11 +262,11 @@ void StelCore::init()
 	presetSkyTime = presetTimeStr.toDouble(&ok);
 	if (ok)
 	{
-		qDebug().noquote() << "navigation/preset_sky_time is a double - treating as jday:" << QString::number(presetSkyTime, 'f', 5);
+		qInfo().noquote() << "navigation/preset_sky_time is a double - treating as jday:" << QString::number(presetSkyTime, 'f', 5);
 	}
 	else
 	{
-		qDebug().noquote() << "navigation/preset_sky_time was not a double, treating as string date:" << presetTimeStr;
+		qWarning().noquote() << "navigation/preset_sky_time was not a double, treating as string date:" << presetTimeStr;
 		presetSkyTime = StelUtils::qDateTimeToJd(QDateTime::fromString(presetTimeStr));
 	}
 	setInitTodayTime(QTime::fromString(conf->value("navigation/today_time", "22:00").toString()));
@@ -885,6 +883,11 @@ Vec3d StelCore::j2000ToJ1875(const Vec3d& v) const
 	return matJ2000ToJ1875*v;
 }
 
+Vec3d StelCore::j1875ToJ2000(const Vec3d& v) const
+{
+	return matJ2000ToJ1875.transpose()*v;
+}
+
 Vec3d StelCore::j2000ToGalactic(const Vec3d& v) const
 {
 	return matJ2000ToGalactic*v;
@@ -1305,7 +1308,7 @@ void StelCore::setParallaxFactor(double factor)
 {
 	if (!fuzzyEquals(parallaxFactor, factor))
 	{
-		parallaxFactor=qBound(0.,factor, 10000.);
+		parallaxFactor=qBound(0.,factor, 100000.);
 		StelApp::immediateSave("astro/parallax_factor", parallaxFactor);
 		emit parallaxFactorChanged(factor);
 	}
@@ -1722,7 +1725,7 @@ void StelCore::setTodayTime(const QTime& target)
 	}
 	else
 	{
-		qWarning() << "WARNING - time passed to StelCore::setTodayTime is not valid. The system time will be used." << target;
+		qWarning().noquote() << "Time passed to StelCore::setTodayTime is not valid. The system time will be used." << target;
 		setTimeNow();
 	}
 }
@@ -2966,7 +2969,7 @@ void StelCore::initEphemeridesFunctions()
 	de430Available=!de430FilePath.isEmpty();
 	if(de430Available)
 	{
-		qDebug().noquote() << "DE430 at:" << de430FilePath;
+		qInfo().noquote() << "DE430 at:" << de430FilePath;
 		EphemWrapper::init_de430(de430FilePath.toStdString().c_str());
 	}
 	setDe430Active(de430Available && conf->value("astro/flag_use_de430", false).toBool());
@@ -2980,7 +2983,7 @@ void StelCore::initEphemeridesFunctions()
 	de431Available=!de431FilePath.isEmpty();
 	if(de431Available)
 	{
-		qDebug().noquote() << "DE431 at:" << de431FilePath;
+		qInfo().noquote() << "DE431 at:" << de431FilePath;
 		EphemWrapper::init_de431(de431FilePath.toStdString().c_str());
 	}
 	setDe431Active(de431Available && conf->value("astro/flag_use_de431", false).toBool());
@@ -2994,7 +2997,7 @@ void StelCore::initEphemeridesFunctions()
 	de440Available=!de440FilePath.isEmpty();
 	if(de440Available)
 	{
-		qDebug().noquote() << "DE440 at:" << de440FilePath;
+		qInfo().noquote() << "DE440 at:" << de440FilePath;
 		EphemWrapper::init_de440(de440FilePath.toStdString().c_str());
 	}
 	setDe440Active(de440Available && conf->value("astro/flag_use_de440", false).toBool());
@@ -3008,7 +3011,7 @@ void StelCore::initEphemeridesFunctions()
 	de441Available=!de441FilePath.isEmpty();
 	if(de441Available)
 	{
-		qDebug().noquote() << "DE441 at:" << de441FilePath;
+		qInfo().noquote() << "DE441 at:" << de441FilePath;
 		EphemWrapper::init_de441(de441FilePath.toStdString().c_str());
 	}
 	setDe441Active(de441Available && conf->value("astro/flag_use_de441", false).toBool());
@@ -3028,13 +3031,14 @@ typedef struct iau_constline{
 	QString constellation; // 3-letter code of constellation
 } iau_constelspan;
 
-static QVector<iau_constelspan> iau_constlineVec;
+Q_GLOBAL_STATIC(QVector<iau_constelspan>, iau_constlineVec);
 static bool iau_constlineVecInitialized=false;
 
 // File iau_constellations_spans.dat is converted from file data.dat from ADC catalog VI/42.
 // We converted back to HH:MM:SS format to avoid the inherent rounding errors present in that file (Bug LP:#1690615).
 QString StelCore::getIAUConstellation(const Vec3d &positionEqJnow) const
 {
+	Q_ASSERT(positionEqJnow.norm()>0); // Just make sure it looks like a valid posititon.
 	// Precess positionJ2000 to 1875.0
 	const Vec3d pos1875=j2000ToJ1875(equinoxEquToJ2000(positionEqJnow, RefractionOff));
 	double RA1875;
@@ -3089,7 +3093,7 @@ QString StelCore::getIAUConstellation(const Vec3d &positionEqJnow) const
 			else
 				span.decLow += atof(numList.at(1).toLatin1())/60.;
 			span.constellation=list.at(3);
-			iau_constlineVec.append(span);
+			iau_constlineVec->append(span);
 		}
 		file.close();
 		iau_constlineVecInitialized=true;
@@ -3097,20 +3101,20 @@ QString StelCore::getIAUConstellation(const Vec3d &positionEqJnow) const
 
 	// iterate through vector, find entry where declination is lower.
 	int entry=0;
-	while (iau_constlineVec.at(entry).decLow > dec1875)
+	while (iau_constlineVec->at(entry).decLow > dec1875)
 		entry++;
-	while (entry<iau_constlineVec.size())
+	while (entry<iau_constlineVec->size())
 	{
-		while (iau_constlineVec.at(entry).RAhigh <= RA1875)
+		while (iau_constlineVec->at(entry).RAhigh <= RA1875)
 			entry++;
-		while (iau_constlineVec.at(entry).RAlow >= RA1875)
+		while (iau_constlineVec->at(entry).RAlow >= RA1875)
 			entry++;
-		if (iau_constlineVec.at(entry).RAhigh > RA1875)
-			return iau_constlineVec.at(entry).constellation;
+		if (iau_constlineVec->at(entry).RAhigh > RA1875)
+			return iau_constlineVec->at(entry).constellation;
 		else
 			entry++;
 	}
-	qDebug() << "getIAUconstellation error: Cannot determine, algorithm failed.";
+	qWarning() << "getIAUconstellation error: Cannot determine, algorithm failed.";
 	return "(?)";
 }
 

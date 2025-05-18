@@ -31,6 +31,8 @@
 #include <QString>
 #include <QTextStream>
 #include <QDebug>
+#include <QJsonArray>
+#include <QJsonObject>
 #include <QFontMetrics>
 #include <QIODevice>
 
@@ -40,73 +42,113 @@ Vec3f Asterism::labelColor = Vec3f(0.4f,0.4f,0.8f);
 const QString Asterism::ASTERISM_TYPE = QStringLiteral("Asterism");
 
 Asterism::Asterism()
-	: numberOfSegments(0)
-	, typeOfAsterism(1)
-	, flagAsterism(true)
-	, asterism(Q_NULLPTR)
+	: flagAsterism(true)
+	, singleStarAsterismRadius(cos(M_PI/360.)) // default radius of 1/2 degrees
 {
 }
 
 Asterism::~Asterism()
 {
-	delete[] asterism;
-	asterism = Q_NULLPTR;
 }
 
-bool Asterism::read(const QString& record, StarMgr *starMgr)
+bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 {
-	abbreviation.clear();
-	numberOfSegments = 0;
-	typeOfAsterism = 1;
-	flagAsterism = true;
+	abbreviation = data["id"].toString();
+	const auto commonName = data["common_name"];
+	if (commonName.isObject())
+		englishName = commonName.toObject()["english"].toString();
+	const auto polylines = data["lines"].toArray();
+	asterism.clear();
 
-	QString buf(record);
-	QTextStream istr(&buf, QIODevice::ReadOnly);
-	// We allow mixed-case abbreviations now that they can be displayed on screen. We then need toUpper() in comparisons.
-	istr >> abbreviation >> typeOfAsterism >> numberOfSegments;
-	if (istr.status()!=QTextStream::Ok)
+	flagAsterism = !data["is_ray_helper"].toBool();
+	typeOfAsterism = flagAsterism ? Type::Asterism : Type::RayHelper;
+
+	if (polylines.isEmpty())
+	{
+		qWarning().nospace() << "Empty asterism lines array found for asterism " << abbreviation << " (" << englishName << ")";
 		return false;
+	}
+
+	if (!polylines[0].toArray().isEmpty() && polylines[0].toArray()[0].isArray())
+	{
+		if (polylines[0].toArray()[0].toArray().size() != 2)
+		{
+			qWarning().nospace() << "Bad asterism point entry for asterism " << abbreviation
+			                     << " (" << englishName << "): expected size 2, got " << polylines[0].toArray()[0].toArray().size();
+			return false;
+		}
+		if (typeOfAsterism == Type::RayHelper)
+		{
+			qWarning() << "Mismatch between asterism type and line data: got a ray helper, "
+			              "but the line points contain two entries instead of one";
+			return false;
+		}
+		// The entry contains RA and dec instead of HIP catalog number
+		typeOfAsterism = Type::TelescopicAsterism;
+	}
 
 	StelCore *core = StelApp::getInstance().getCore();
-	asterism = new StelObjectP[numberOfSegments*2];
-	for (unsigned int i=0;i<numberOfSegments*2;++i)
+	for (int lineIndex = 0; lineIndex < polylines.size(); ++lineIndex)
 	{
-		switch (typeOfAsterism)
+		if (!polylines[lineIndex].isArray())
 		{
-			case 0: // Ray helpers
-			case 1: // A big asterism with lines by HIP stars
+			qWarning().nospace() << "Bad asterism line #" << lineIndex << ": is not an array";
+			return false;
+		}
+		const auto polyline = polylines[lineIndex].toArray();
+		for (int pointIndex = 0; pointIndex < polyline.size(); ++pointIndex)
+		{
+			const auto point = polyline[pointIndex];
+			switch (typeOfAsterism)
 			{
-				StarId HP = 0;
-				istr >> HP;
-				if(HP == 0)
+			case Type::RayHelper:
+			case Type::Asterism:
+			{
+				if (!point.isDouble() && !point.isString())
 				{
+					qWarning().nospace() << "Error in asterism " << abbreviation << ": bad point at line #"
+					                     << lineIndex << ": isn't a number";
 					return false;
 				}
-				if (HP <= NR_OF_HIP)
-				{
-					asterism[i]=starMgr->searchHP(static_cast<int>(HP));
-				}
+				const StarId HIP = StelUtils::getLongLong(point);
+				if (HIP <= NR_OF_HIP)
+					asterism.push_back(starMgr->searchHP(HIP));
 				else
+					asterism.push_back(starMgr->searchGaia(HIP));
+				if (!asterism.back())
 				{
-					asterism[i]=starMgr->searchGaia(HP);
-				}
-				
-				if (!asterism[i])
-				{
-					qWarning() << "Error in asterism" << abbreviation << "- can't find star HIP" << HP;
+					asterism.pop_back();
+					qWarning().nospace() << "Error in asterism " << abbreviation <<
+								": can't find star " << (HIP <= NR_OF_HIP ? "HIP ":"DR3 ") << HIP <<
+								" (Skipping asterism. Install more catalogs?)";
 					return false;
 				}
 				break;
 			}
-			case 2: // A small asterism with lines by J2000.0 coordinates
+			case Type::TelescopicAsterism:
 			{
-				double RA, DE;
-				Vec3d coords;
+				if (!point.isArray())
+				{
+					qWarning().nospace() << "Error in asterism " << abbreviation << ": bad point at line #"
+					                     << lineIndex << ": isn't an array of two numbers (RA and dec)";
+					return false;
+				}
+				const auto arr = point.toArray();
+				if (arr.size() != 2 || !arr[0].isDouble() || !arr[1].isDouble())
+				{
+					qWarning().nospace() << "Error in asterism " << abbreviation << ": bad point at line #"
+					                     << lineIndex << ": isn't an array of two numbers (RA and dec)";
+					return false;
+				}
 
-				istr >> RA >> DE;				
+				const double RA = arr[0].toDouble();
+				const double DE = arr[1].toDouble();
+
+				Vec3d coords;
 				StelUtils::spheToRect(RA*M_PI/12., DE*M_PI/180., coords);
-				QList<StelObjectP> stars = starMgr->searchAround(coords, 0.1, core);
-				StelObjectP s = Q_NULLPTR;
+				const QList<StelObjectP> stars = starMgr->searchAround(coords, 0.25, core);
+				// Find star closest to coordinates
+				StelObjectP s = nullptr;
 				double d = 10.;
 				for (const auto& p : stars)
 				{
@@ -117,26 +159,34 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 						s = p;
 					}
 				}
-				asterism[i] = s;
-				if (!asterism[i])
+				asterism.push_back(s);
+				if (!asterism.back())
 				{
 					qWarning() << "Error in asterism" << abbreviation << "- can't find star with coordinates" << RA << "/" << DE;
 					return false;
 				}
 				break;
 			}
+			}
+			// Expand the polyline into a sequence of segments
+			if (pointIndex != 0 && pointIndex != polyline.size() - 1)
+				asterism.push_back(asterism.back());
 		}
 	}
 
-	if (typeOfAsterism>0)
+	if (data.contains("single_star_radius"))
+	{
+		double rd = data["single_star_radius"].toDouble(0.5);
+		singleStarAsterismRadius = cos(rd*M_PI/180.);
+	}
+
+	if (typeOfAsterism != Type::RayHelper)
 	{
 		XYZname.set(0.,0.,0.);
-		for(unsigned int j=0;j<numberOfSegments*2;++j)
-			XYZname+= asterism[j]->getJ2000EquatorialPos(core);
+		for(const auto& point : asterism)
+			XYZname += point->getJ2000EquatorialPos(core);
 		XYZname.normalize();
 	}
-	else
-		flagAsterism = false;
 
 	return true;
 }
@@ -160,13 +210,20 @@ void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const Sphe
 
 	Vec3d star1;
 	Vec3d star2;
-	for (unsigned int i=0;i<numberOfSegments;++i)
+	for (unsigned int i = 0; i < asterism.size() / 2; ++i)
 	{
 		star1=asterism[2*i]->getJ2000EquatorialPos(core);
 		star2=asterism[2*i+1]->getJ2000EquatorialPos(core);
 		star1.normalize();
 		star2.normalize();
-		sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);
+		if (star1.fuzzyEquals(star2))
+		{
+			// draw single-star segment as circle
+			SphericalCap saCircle(star1, singleStarAsterismRadius);
+			sPainter.drawSphericalRegion(&saCircle, StelPainter::SphericalPolygonDrawModeBoundary);
+		}
+		else
+			sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);
 	}
 }
 
@@ -175,7 +232,7 @@ void Asterism::drawName(StelPainter& sPainter) const
 	if ((nameFader.getInterstate()==0.0f) || !flagAsterism)
 		return;
 
-	if (typeOfAsterism==2 && sPainter.getProjector()->getFov()>60.f)
+	if (typeOfAsterism==Type::TelescopicAsterism && sPainter.getProjector()->getFov()>60.f)
 		return;
 
 	QString name = getNameI18n();

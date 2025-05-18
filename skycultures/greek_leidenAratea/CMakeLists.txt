@@ -1,12 +1,6 @@
-########### install files ###############
+get_filename_component(skyculturePath "${CMAKE_CURRENT_SOURCE_DIR}" REALPATH)
+get_filename_component(skyculture ${skyculturePath} NAME)
 
-# install info.ini
-INSTALL(FILES info.ini DESTINATION ${SDATALOC}/skycultures/greek_leidenAratea )
-
-# install constellations data, native names data, artwork and descriptions
-INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/greek_leidenAratea
-	FILES_MATCHING PATTERN "constellation*" 
-	PATTERN "*_names.fab"
-	PATTERN "description.*.utf8"
-	PATTERN "*.jpg"
- 	PATTERN "CMakeFiles" EXCLUDE )
+install(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/${skyculture}
+        FILES_MATCHING PATTERN "*"
+        PATTERN "CMakeLists.txt" EXCLUDE)

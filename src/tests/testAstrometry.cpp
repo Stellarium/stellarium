@@ -33,31 +33,26 @@ QTEST_GUILESS_MAIN(TestAstrometry)
 void TestAstrometry::initTestCase()
 {
     // Define the directory to search in
-    QDir dir("../../stars/hip_gaia3/");
-    
-    // Make sure the directory exists
-    if (!dir.exists()) {
-        qDebug() << "Directory does not exist!";
-        return;
-    }
-
+    QDir dir(STELLARIUM_SOURCE_DIR);
     // make a list of star catalog files stars_0_*.cat, stars_1_*.cat, stars_2_*.cat and stars_3_*.cat
     QStringList filters;
     filters << "stars_0_*.cat" << "stars_1_*.cat" << "stars_2_*.cat" << "stars_3_*.cat";
+    QStringList files;
+    QString file;
+
+    // Go to star catalog directory...
+    dir.cd("stars/hip_gaia3");
+
+    // assert the directory exists
+    QVERIFY2(dir.exists(), "Star catalog directory does not exist! Can't perform the rest of the tests.");
 
     // loop through the filters and set the ZoneArray pointers
     for (int i = 0; i < filters.size(); i++)
     {
         dir.setNameFilters(QStringList() << filters[i]);
-        QStringList files = dir.entryList(QDir::Files);
-        QString file;
-
-        if (!files.isEmpty()) {
-            qDebug() << "Found files:" << files[0];
-            file = files[0];
-        } else {
-            qDebug() << "No matching files found.";
-        }
+        files = dir.entryList(QDir::Files);  // get the list of files in the directory
+        QVERIFY2(!files.isEmpty(), qPrintable(QString("No matching star catalog found at %1").arg(dir.path().toStdString().c_str())));
+        file = files[0];
 
         file = dir.path() + "/" + file;
         ZoneArray* z = ZoneArray::create(file, true);

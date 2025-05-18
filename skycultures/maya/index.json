@@ -1,0 +1,211 @@
+{
+  "id": "maya",
+  "region": "Central America",
+  "classification": ["historical"],
+  "fallback_to_international_names": false,
+  "constellations": [
+    {
+      "id": "CON maya 001",
+      "lines": [[6686, 4427, 3179, 746, 102098, 100453, 99824], [100453, 91262]],
+      "image": {
+        "file": "illustrations/14.png",
+        "size": [256, 512],
+        "anchors": [
+          {"pos": [107, 43], "hip": 6686},
+          {"pos": [24, 291], "hip": 107664},
+          {"pos": [209, 455], "hip": 91971}
+        ]
+      },
+      "common_name": {"english": "Hole-backed Caiman", "native": "Way Paat Ahiin"}
+    },
+    {
+      "id": "CON maya 002",
+      "lines": [[26727, 25930]],
+      "image": {
+        "file": "illustrations/12.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [78, 142], "hip": 25930},
+          {"pos": [155, 132], "hip": 26727},
+          {"pos": [56, 21], "hip": 25281}
+        ]
+      },
+      "common_name": {"english": "Turtle", "native": "Aak"}
+    },
+    {
+      "id": "CON maya 003",
+      "lines": [[27366, 24436, 26727], [27366, 26727]],
+      "image": {
+        "file": "illustrations/13.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [251, 206], "hip": 24436},
+          {"pos": [4, 235], "hip": 27341},
+          {"pos": [132, 22], "hip": 26237}
+        ]
+      },
+      "common_name": {"english": "Primordial Fire", "native": "Oxib' Xk'ub'"}
+    },
+    {
+      "id": "CON maya 004",
+      "lines": [[37826, 36850, 38016]],
+      "image": {
+        "file": "illustrations/11.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [225, 188], "hip": 37826},
+          {"pos": [66, 83], "hip": 36850},
+          {"pos": [8, 169], "hip": 38016}
+        ]
+      },
+      "common_name": {"english": "Peccaries", "native": "kitamob"}
+    },
+    {
+      "id": "CON maya 005",
+      "lines": [[68895, 68933, 76470], [68933, 65109, 68002, 71352, 73273, 71860]],
+      "image": {
+        "file": "illustrations/1.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [204, 68], "hip": 68895},
+          {"pos": [21, 45], "hip": 76470},
+          {"pos": [69, 186], "hip": 71860}
+        ]
+      },
+      "common_name": {"english": "Shark", "native": "Xoc"}
+    },
+    {
+      "id": "CON maya 006",
+      "lines": [[80763, 78104, 80911, 82729], [80911, 76939]],
+      "image": {
+        "file": "illustrations/6.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [130, 33], "hip": 80763},
+          {"pos": [28, 221], "hip": 82729},
+          {"pos": [229, 209], "hip": 76939}
+        ]
+      },
+      "common_name": {"english": "Scorpion", "native": "Siina'an"}
+    },
+    {
+      "id": "CON maya 007",
+      "lines": [[92855, 93506, 90185, 88635], [90185, 89642, 86228, 90422, 93174, 93825, 94160, 93542]],
+      "image": {
+        "file": "illustrations/8.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [40, 16], "hip": 92855},
+          {"pos": [222, 203], "hip": 86228},
+          {"pos": [50, 180], "hip": 93542}
+        ]
+      },
+      "common_name": {"english": "Snake", "native": "Kaan"}
+    },
+    {
+      "id": "CON maya 008",
+      "lines": [[60718, 32349]],
+      "image": {
+        "file": "illustrations/15.png",
+        "size": [1024, 256],
+        "anchors": [
+          {"pos": [22, 217], "hip": 60718},
+          {"pos": [537, 20], "hip": 47224},
+          {"pos": [1035, 202], "hip": 32349}
+        ]
+      },
+      "common_name": {"english": "Paddler Gods", "native": "Paddler Gods"}
+    },
+    {
+      "id": "CON maya 009",
+      "lines": [[5364, 3419, 1562], [4577, 5364], [1562, 1708, 4577]],
+      "image": {
+        "file": "illustrations/9.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [33, 53], "hip": 5364},
+          {"pos": [253, 40], "hip": 355},
+          {"pos": [132, 121], "hip": 3419}
+        ]
+      },
+      "common_name": {"english": "Bat", "native": "Zool"}
+    },
+    {
+      "id": "CON maya 010",
+      "lines": [[18907, 19860], [21421, 20205, 20889], [20205, 18724], [20205, 19860], [21589, 20205], [21589, 22449], [18724, 17771, 17563]],
+      "image": {
+        "file": "illustrations/2.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [33, 77], "hip": 21421},
+          {"pos": [10, 194], "hip": 22449},
+          {"pos": [172, 165], "hip": 18907}
+        ]
+      },
+      "common_name": {"english": "Owl", "native": "Kulte'"}
+    },
+    {
+      "id": "CON maya 011",
+      "lines": [[12832, 12828, 11249], [12828, 11484], [12828, 14135], [11484, 12706]],
+      "image": {
+        "file": "illustrations/5.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [15, 211], "hip": 14135},
+          {"pos": [207, 67], "hip": 11484},
+          {"pos": [153, 209], "hip": 12706}
+        ]
+      },
+      "common_name": {"english": "Vulture", "native": "Ch'oom"}
+    },
+    {
+      "id": "CON maya 012",
+      "lines": [[50851, 46771, 47431, 50851]],
+      "image": {
+        "file": "illustrations/4.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [17, 51], "hip": 50851},
+          {"pos": [249, 53], "hip": 46771},
+          {"pos": [129, 253], "hip": 47431}
+        ]
+      },
+      "common_name": {"english": "Death", "native": "Kimi"}
+    },
+    {
+      "id": "CON maya 013",
+      "lines": [[107380, 98353, 98761, 107380]],
+      "image": {
+        "file": "illustrations/3.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [19, 58], "hip": 105881},
+          {"pos": [232, 48], "hip": 98353},
+          {"pos": [244, 141], "hip": 98412}
+        ]
+      },
+      "common_name": {"english": "Jaguar", "native": "B'alaam"}
+    },
+    {
+      "id": "CON maya 014",
+      "lines": [[64962, 60965, 59316, 64962]],
+      "image": {
+        "file": "illustrations/10.png",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [20, 125], "hip": 64962},
+          {"pos": [157, 100], "hip": 60965},
+          {"pos": [180, 192], "hip": 59199}
+        ]
+      },
+      "common_name": {"english": "Toad", "native": "Uo"}
+    }
+  ],
+  "common_names": {
+    "HIP 36850": [{"english": "Two brilliant ones"}],
+    "HIP 37826": [{"english": "Two brilliant ones"}],
+    "HIP 49669": [{"english": "Single Star"}],
+    "HIP 71683": [{"english": "Corner Star"}],
+    "NAME Venus": [{"english": "Bright Star", "native": "Chac 'Ek", "translators_comments": "Native name of Venus in Maya culture"}]
+  }
+}

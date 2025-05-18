@@ -352,7 +352,8 @@ private:
 	QGraphicsSimpleTextItem* helpLabel;
 };
 
-//! @class StelBarsFrame: The path around the bottom and left button bars
+//! @class StelBarsFrame
+//! @brief The path around the bottom and left button bars
 class StelBarsFrame : public QGraphicsPathItem
 {
 	public:

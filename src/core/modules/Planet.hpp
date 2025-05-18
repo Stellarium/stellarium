@@ -161,7 +161,7 @@ public:
 	       const QString& objModelName,
 	       posFuncType _coordFunc,
 	       Orbit *anOrbitPtr,
-	       OsculatingFunctType *osculatingFunc,
+	       OsculatingFunctType *osculFunc,
 	       bool closeOrbit,
 	       bool hidden,
 	       bool hasAtmosphere,
@@ -189,7 +189,7 @@ public:
 	//! @note subclasses should prefer to override only the component infostrings getInfoString...(), not this method!
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
-	//! @return a QString containing an HMTL encoded description of the Planet.
+	//! @return a QString containing an HTML encoded description of the Planet.
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 	//! In addition to the entries from StelObject::getInfoMap(), Planet objects provide
 	//! - phase (result of getPhase)
@@ -795,6 +795,8 @@ protected:
 	QString objModelPath;
 
 	HipsSurveyP survey;
+	HipsSurveyP surveyForNormals;
+	HipsSurveyP surveyForHorizons;
 
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
@@ -888,6 +890,8 @@ private:
 		int eclipsePush; // apparent brightness push for partial Lunar Eclipse (make bright rim overbright)
 		int normalMap;
 		int horizonMap;
+		int hasNormalMap;
+		int hasHorizonMap;
 
 		// Rings-specific variables
 		int isRing;
@@ -915,7 +919,8 @@ private:
 	};
 
 	//! Calculates and uploads the common shader uniforms (projection matrix, texture, lighting&shadow data)
-	RenderData setCommonShaderUniforms(const StelPainter &painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars); // const;
+	RenderData setCommonShaderUniforms(const StelPainter &painter, QOpenGLShaderProgram* shader,
+	                                   const PlanetShaderVars& shaderVars, bool hasNormalMap, bool hasHorizonMap);
 
 	static PlanetShaderVars planetShaderVars;
 	static QOpenGLShaderProgram* planetShaderProgram;
