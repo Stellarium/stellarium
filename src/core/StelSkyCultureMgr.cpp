@@ -187,7 +187,7 @@ void StelSkyCultureMgr::makeCulturesList()
 		if (jsonText.isEmpty())
 		{
 			qCritical() << "Failed to read data from" << indexFileName << "file in sky culture directory"
-			           << QDir::toNativeSeparators(dir);
+			            << QDir::toNativeSeparators(dir);
 			continue;
 		}
 		QJsonParseError error;
@@ -195,13 +195,13 @@ void StelSkyCultureMgr::makeCulturesList()
 		if (error.error != QJsonParseError::NoError)
 		{
 			qCritical().nospace() << "Failed to parse " << indexFileName << " from sky culture directory "
-			                     << QDir::toNativeSeparators(dir) << ": " << error.errorString();
+			                      << QDir::toNativeSeparators(dir) << ": " << error.errorString();
 			continue;
 		}
 		if (!jsonDoc.isObject())
 		{
 			qCritical() << "Failed to find the expected JSON structure in" << indexFileName << " from sky culture directory"
-			           << QDir::toNativeSeparators(dir);
+			            << QDir::toNativeSeparators(dir);
 			continue;
 		}
 		const auto data = jsonDoc.object();
@@ -291,7 +291,7 @@ void StelSkyCultureMgr::init()
 	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "modern").toString();
 	if (defaultSkyCultureID=="western") // switch to new Sky Culture ID
 		defaultSkyCultureID = "modern";
-	setCurrentSkyCultureID(defaultSkyCultureID);	
+	setCurrentSkyCultureID(defaultSkyCultureID);
 }
 
 void StelSkyCultureMgr::reloadSkyCulture()
@@ -342,7 +342,7 @@ bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
 	emit defaultSkyCultureIDChanged(id);
 	return true;
 }
-	
+
 QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
@@ -577,7 +577,7 @@ bool StelSkyCultureMgr::setCurrentSkyCultureNameI18(const QString& cultureName)
 	return setCurrentSkyCultureID(skyCultureI18ToDirectory(cultureName));
 }
 
-//! returns newline delimited list of human readable culture names in english
+// returns list of human readable culture names in english
 QStringList StelSkyCultureMgr::getSkyCultureListEnglish(void) const
 {
 	QStringList cultures;
@@ -752,7 +752,7 @@ QString StelSkyCultureMgr::directoryToSkyCultureI18(const QString& directory) co
 	if (culture=="")
 	{
 		qWarning().nospace() << "StelSkyCultureMgr::directoryToSkyCultureI18("
-			<< QDir::toNativeSeparators(directory) << "): could not find directory";
+		                     << QDir::toNativeSeparators(directory) << "): could not find directory";
 		return "";
 	}
 	return q_(culture);
@@ -922,15 +922,16 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 		default:
 			break;
 	}
-	// simple cases done. Now build-up label of form "primary [common transliteration aka pronounce, scientific transliteration, IPA] (translation) <modern>"
+	// simple cases done. Now build-up label of form "primary [common transliteration aka pronounce, scientific transliteration] [IPA] (translation) <modern>"
+	// (The first of the square brackets is formatted with "turtle brackets" so that only IPA is in regular square brackets.)
 	// "primary" is usually either native or one of the reading aids, or translation or even modern when other options are switched off.
 	// Rules:
 	// Styles with Native_* start with just native, but we must fallback to other strings if native is empty.
-	// Styles with Pronounce_* start with Pronounce or transliteration, but Pronounce_Translit_... must show Translit in braces when both exist.
+	// Styles with Pronounce_* start with Pronounce or transliteration, but Pronounce_Translit_... must show Translit in turtle brackets when both exist.
 	// Styles with Translit_* start with Transliteration or fallback to Pronounce
-	// Styles with ...IPA... must add IPA (when exists) in braces, conditionally comma-separated in the same braces after Transliteration
+	// Styles with ...IPA... must add IPA (when exists) in square brackets, conditionally after the comma-separated turtle brackets with Pronounce and Transliteration
 	// Styles with ...Translated have translation in brackets appended
-	// Styles with ...Modern have the modern name (commonNameI18n) in brackets appended
+	// Styles with ...Modern have the modern name (commonNameI18n) in slightly decorative curved angle brackets appended
 
 	QStringList braced; // the contents of the secondary term, i.e. pronunciation and transliteration
 	if (styleInt & int(StelObject::CulturalDisplayStyle::Native))
@@ -942,9 +943,9 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 		if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
 			braced.append(cName.transliteration);
 	}
-	else // not including native // if (styleInt ^ int(StelObject::CulturalDisplayStyle::Native))
+	else // not including native
 	{
-		// Use the first valid of pronunciation, transliteration or translation as main name, add the others in braces if applicable
+		// Use the first valid of pronunciation or transliteration as main name (fallback to native), add the others in braces if applicable
 		if (styleInt & int(StelObject::CulturalDisplayStyle::Pronounce))
 		{
 			label=pronounceOrNative;
