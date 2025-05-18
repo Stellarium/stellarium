@@ -122,12 +122,11 @@ public:
 	bool forward(Vec3f &v) const override;
 	bool backward(Vec3d &v) const override;
 	// float fovToViewScalingFactor(float fov) const override;
-	//float viewScalingFactorToFov(float vsf) const override;
-	//float deltaZoom(float fov) const override;
+	// float viewScalingFactorToFov(float vsf) const override;
+	// float deltaZoom(float fov) const override;
 	QByteArray getForwardTransformShader() const override;
 	QByteArray getBackwardTransformShader() const override;
 protected:
-// TODO: take a look at the discontinuities => might be the reason for weird display glitches at high FOV
 	bool hasDiscontinuity() const override { return true; }
 	bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const override {
 		return p1[0] * p2[0] < 0 && !(p1[2] < 0 && p2[2] < 0);
@@ -275,4 +274,3 @@ protected:
 };
 
 #endif // STELPROJECTIONS_HPP
-
