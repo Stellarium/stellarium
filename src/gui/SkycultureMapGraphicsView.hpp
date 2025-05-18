@@ -33,6 +33,7 @@ private:
    // private functions
 	//int _numScheduledScalings;
 	int time;
+	QString oldSkyCulture;
 	QList<QPointF> convertIrlToView(const QList<QPointF>  &irl);
 
 private slots:

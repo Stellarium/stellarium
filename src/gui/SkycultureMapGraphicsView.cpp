@@ -4,6 +4,7 @@
 
 SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
    :QGraphicsView(parent)
+	, oldSkyCulture("")
 {
    QGraphicsScene *scene = new QGraphicsScene(this);
    // scene->setItemIndexMethod(QGraphicsScene::NoIndex); // noIndex better when adding / removing many items
@@ -62,37 +63,67 @@ void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *event)
 void SkycultureMapGraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
 
-   // if(event->buttons() == Qt::LeftButton)
-   // {
-   //    //viewport()->setCursor(Qt::ClosedHandCursor); // QGuiApplication::overrideCursor()
-   //    QGuiApplication::setOverrideCursor(Qt::ClosedHandCursor);
-   // }
-   // else
-   // {
-   //    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
-   //    //viewport()->setCursor(Qt::ArrowCursor);
-   // }
+	// if(event->buttons() == Qt::LeftButton)
+	// {
+	//    //viewport()->setCursor(Qt::ClosedHandCursor); // QGuiApplication::overrideCursor()
+	//    QGuiApplication::setOverrideCursor(Qt::ClosedHandCursor);
+	// }
+	// else
+	// {
+	//    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
+	//    //viewport()->setCursor(Qt::ArrowCursor);
+	// }
 
-   QGraphicsView::mouseMoveEvent(event);
+	QGraphicsView::mouseMoveEvent(event);
 }
 
 void SkycultureMapGraphicsView::mousePressEvent(QMouseEvent *event)
 {
-   scene()->clearSelection();
+	// safe the currently selected skyculture before de-selecting
+	if(scene()->selectedItems().length() > 0)
+	{
+		const QString previousCulture = qgraphicsitem_cast<SkyculturePolygonItem *>(scene()->selectedItems()[0])->getSkycultureId();
+	}
 
-   QGraphicsView::mousePressEvent(event);
+	// de-select all graphic items present in the scene so the cursor can be set for dragging
+	scene()->clearSelection();
 
-   if(scene()->selectedItems().length() == 0)
-   {
-      QGuiApplication::setOverrideCursor(Qt::ClosedHandCursor);
-   }
+	QGraphicsView::mousePressEvent(event);
+
+	// if no item is selected (no polygon is clicked) set the right cursor for drag-mode
+	if(scene()->selectedItems().length() == 0)
+	{
+		QGuiApplication::setOverrideCursor(Qt::ClosedHandCursor);
+	}
+	else
+	{
+		// get the skyculture identifier (QString) of the current selected SkyculturePolygonItem
+		const QString currentSkyCulture = qgraphicsitem_cast<SkyculturePolygonItem *>(scene()->selectedItems()[0])->getSkycultureId();
+
+		// if the current culture is the same as before --> do not emit the signal so that the skyCulture isn't updated unnecessarily
+		if(currentSkyCulture != oldSkyCulture)
+		{
+			// emit the current skyCulture, so viewDialog can handle the change
+			emit cultureSelected(currentSkyCulture);
+			oldSkyCulture = currentSkyCulture;
+		}
+	}
 }
 
 void SkycultureMapGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
-   QGraphicsView::mouseReleaseEvent(event);
+	QGraphicsView::mouseReleaseEvent(event);
 
-   QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
+	QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
+}
+
+void SkycultureMapGraphicsView::scaleView(double factor)
+{
+	const double scaling = transform().scale(factor, factor).mapRect(QRectF(0, 0, 1, 1)).width();
+	if (scaling < 0.2 || scaling > 40.0) // min / max zoom level
+		return;
+
+	scale(factor, factor);
 }
 
 void SkycultureMapGraphicsView::scaleView(double scaleFactor)
