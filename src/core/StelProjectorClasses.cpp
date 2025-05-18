@@ -544,24 +544,27 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 )";
 }
 
-QString StelProjectorMollweide::getNameI18() const {
+QString StelProjectorMollweide::getNameI18() const
+{
     return q_("Mollweide");
 }
 
-QString StelProjectorMollweide::getDescriptionI18() const {
+QString StelProjectorMollweide::getDescriptionI18() const
+{
     return q_("The Mollweide projection is an equal-area map projection introduced by Karl Mollweide in 1805.");
 }
 
 bool StelProjectorMollweide::forward(Vec3f &v) const
 {
     const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
-    const float lambda = std::atan2(v[0], -v[2]); // Longitude
-    const float sinDelta = v[1] / r; // Latitude (delta) sine
+    const float lambda = std::atan2(v[0], -v[2]);
+    const float sinDelta = v[1] / r;
     const float delta = std::asin(sinDelta);
 
     // Solve 2θ + sin(2θ) = π sinδ using Newton-Raphson
     float theta = delta;
-    for (int i=0; i<5; ++i) {
+    for (int i=0; i<5; ++i)
+    {
         float f = 2.f*theta + sin(2.f*theta) - M_PIf * sinDelta;
         float df = 2.f + 2.f*cos(2.f*theta);
         theta -= f / df;
@@ -575,15 +578,14 @@ bool StelProjectorMollweide::forward(Vec3f &v) const
 }
 
 
-bool StelProjectorMollweide::backward(Vec3d &v) const {
+bool StelProjectorMollweide::backward(Vec3d &v) const
+{
     v[0] /= widthStretch;
     const double x = v[0];
     const double y = v[1];
 
-    // Check if point lies within Mollweide ellipse bounds
     const bool ok = (x*x + 4.0*y*y <= 8.0);
 
-    // Clamp y to ensure asin(y/M_SQRT2) is valid
     double y_clamped = (std::abs(y) > M_SQRT2) ? (y > 0 ? M_SQRT2 : -M_SQRT2) : y;
     const double theta = asin(y_clamped / M_SQRT2);
 
@@ -591,16 +593,17 @@ bool StelProjectorMollweide::backward(Vec3d &v) const {
 
     // Handle potential division by zero when cosTheta is near zero (at poles)
     double lambda;
-    if (std::abs(cosTheta) < 1e-10) {
-        lambda = 0.0;  // arbitrary value when at poles
-    } else {
+    if (std::abs(cosTheta) < 1e-10)
+    {
+        lambda = 0.0;
+    } else
+    {
         lambda = (x * M_PI) / (2.0 * M_SQRT2 * cosTheta);
     }
 
     const double sinDelta = (2.0 * theta + sin(2.0*theta)) / M_PI;
     const double delta = std::asin(sinDelta);
 
-    // Convert to 3D Cartesian
     const double cosDelta = std::cos(delta);
     v[0] = cosDelta * std::sin(lambda);
     v[1] = sinDelta;
@@ -627,7 +630,8 @@ vec3 projectorForwardTransform(vec3 v)
 
     // Newton-Raphson iterations for theta
     float theta = delta;
-    for (int i=0; i<5; i++) {
+    for (int i=0; i<5; i++)
+    {
         float f = 2.0*theta + sin(2.0*theta) - PI * sinDelta;
         float df = 2.0 + 2.0*cos(2.0*theta);
         theta = theta - f/df;
@@ -655,10 +659,8 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
     float x = v[0];
     float y = v[1];
 
-    // Validity check: lies within Mollweide ellipse
     ok = (x*x + 4.0*y*y <= 8.0);
 
-    // Clamp y to valid range for asin
     float y_clamped = clamp(y, -1.41421356, 1.41421356);
     float theta = asin(y_clamped / 1.41421356);
 
@@ -666,9 +668,11 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 
     // Handle potential division by zero when cosTheta is near zero (at poles)
     float lambda;
-    if (abs(cosTheta) < 0.0000001) {
+    if (abs(cosTheta) < 0.0000001)
+    {
         lambda = 0.0; // arbitrary value when at poles
-    } else {
+    } else
+    {
         lambda = (x * 3.14159265) / (2.0 * 1.41421356 * cosTheta);
     }
 
