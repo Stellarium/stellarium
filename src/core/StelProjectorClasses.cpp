@@ -544,6 +544,150 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 )";
 }
 
+QString StelProjectorMollweide::getNameI18() const
+{
+    return q_("Mollweide");
+}
+
+QString StelProjectorMollweide::getDescriptionI18() const
+{
+    return q_("The Mollweide projection is an equal-area map projection introduced by Karl Mollweide in 1805.");
+}
+
+bool StelProjectorMollweide::forward(Vec3f &v) const
+{
+    const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+    const float lambda = std::atan2(v[0], -v[2]);
+    const float sinDelta = v[1] / r;
+    const float delta = std::asin(sinDelta);
+
+    // Solve 2θ + sin(2θ) = π sinδ using Newton-Raphson
+    float theta = delta;
+    for (int i=0; i<5; ++i)
+    {
+        float f = 2.f*theta + sin(2.f*theta) - M_PIf * sinDelta;
+        float df = 2.f + 2.f*cos(2.f*theta);
+        theta -= f / df;
+    }
+
+    const float cosTheta = cos(theta);
+    v[0] = (2.0f * M_SQRT2 / M_PIf) * lambda * cosTheta * widthStretch;
+    v[1] = M_SQRT2 * sin(theta);
+    v[2] = r;
+    return true;
+}
+
+
+bool StelProjectorMollweide::backward(Vec3d &v) const
+{
+    v[0] /= widthStretch;
+    const double x = v[0];
+    const double y = v[1];
+
+    const bool ok = (x*x + 4.0*y*y <= 8.0);
+
+    double y_clamped = (std::abs(y) > M_SQRT2) ? (y > 0 ? M_SQRT2 : -M_SQRT2) : y;
+    const double theta = asin(y_clamped / M_SQRT2);
+
+    const double cosTheta = std::cos(theta);
+
+    // Handle potential division by zero when cosTheta is near zero (at poles)
+    double lambda;
+    if (std::abs(cosTheta) < 1e-10)
+    {
+        lambda = 0.0;
+    } else
+    {
+        lambda = (x * M_PI) / (2.0 * M_SQRT2 * cosTheta);
+    }
+
+    const double sinDelta = (2.0 * theta + sin(2.0*theta)) / M_PI;
+    const double delta = std::asin(sinDelta);
+
+    const double cosDelta = std::cos(delta);
+    v[0] = cosDelta * std::sin(lambda);
+    v[1] = sinDelta;
+    v[2] = -cosDelta * std::cos(lambda);
+    return ok;
+}
+
+
+QByteArray StelProjectorMollweide::getForwardTransformShader() const
+{
+    return modelViewTransform->getForwardTransformShader() + R"(
+#line 1 102
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorForwardTransform(vec3 v)
+{
+    const float M_SQRT2 = 1.41421356;
+    const float PI = 3.14159265;
+    float widthStretch = PROJECTOR_FWD_widthStretch;
+
+    float r = length(v);
+    float lambda = atan(v[0], -v[2]);
+    float sinDelta = v[1] / r;
+    float delta = asin(sinDelta);
+
+    // Newton-Raphson iterations for theta
+    float theta = delta;
+    for (int i=0; i<5; i++)
+    {
+        float f = 2.0*theta + sin(2.0*theta) - PI * sinDelta;
+        float df = 2.0 + 2.0*cos(2.0*theta);
+        theta = theta - f/df;
+    }
+
+    float cosTheta = cos(theta);
+    v[0] = (2.0 * M_SQRT2 / PI) * lambda * cosTheta * widthStretch;
+    v[1] = M_SQRT2 * sin(theta);
+    v[2] = r;
+    return v;
+}
+#line 1 0
+)";
+}
+
+QByteArray StelProjectorMollweide::getBackwardTransformShader() const
+{
+    return modelViewTransform->getBackwardTransformShader() + R"(
+#line 1 103
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorBackwardTransform(vec3 v, out bool ok)
+{
+    float widthStretch = PROJECTOR_FWD_widthStretch;
+    v[0] /= widthStretch;
+    float x = v[0];
+    float y = v[1];
+
+    ok = (x*x + 4.0*y*y <= 8.0);
+
+    float y_clamped = clamp(y, -1.41421356, 1.41421356);
+    float theta = asin(y_clamped / 1.41421356);
+
+    float cosTheta = cos(theta);
+
+    // Handle potential division by zero when cosTheta is near zero (at poles)
+    float lambda;
+    if (abs(cosTheta) < 0.0000001)
+    {
+        lambda = 0.0; // arbitrary value when at poles
+    } else
+    {
+        lambda = (x * 3.14159265) / (2.0 * 1.41421356 * cosTheta);
+    }
+
+    float sinDelta = (2.0*theta + sin(2.0*theta)) / 3.14159265;
+    float delta = asin(sinDelta);
+
+    float cosDelta = cos(delta);
+    v[0] = cosDelta * sin(lambda);
+    v[1] = sinDelta;
+    v[2] = -cosDelta * cos(lambda);
+    return v;
+}
+#line 1 0
+)";
+}
 
 
 QString StelProjectorCylinder::getNameI18() const
@@ -835,7 +979,7 @@ bool StelProjectorSinusoidal::forward(Vec3f &v) const
 	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const bool rval = (-r < v[1] && v[1] < r);
 	const float alpha = std::atan2(v[0],-v[2]);
-	const float delta = std::asin(v[1]/r);	
+	const float delta = std::asin(v[1]/r);
 	v[0] = alpha*std::cos(delta) *static_cast<float>(widthStretch);
 	v[1] = delta;
 	v[2] = r;

@@ -430,6 +430,9 @@ StelProjectorP StelCore::getProjection(StelProjector::ModelViewTranformP modelVi
 		case ProjectionHammer:
 			prj = StelProjectorP(new StelProjectorHammer(modelViewTransform));
 			break;
+		case ProjectionMollweide:
+			prj = StelProjectorP(new StelProjectorMollweide(modelViewTransform));
+			break;
 		case ProjectionCylinder:
 			prj = StelProjectorP(new StelProjectorCylinder(modelViewTransform));
 			break;

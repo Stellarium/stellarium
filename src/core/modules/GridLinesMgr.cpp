@@ -1393,6 +1393,7 @@ void SkyLine::draw(StelCore *core) const
 					if (alt*M_180_PI> 89.0) StelUtils::spheToRect(az, -89.5*M_PI_180, p2);
 					break;
 				case StelCore::ProjectionHammer:
+				case StelCore::ProjectionMollweide:
 				case StelCore::ProjectionSinusoidal:
 				case StelCore::ProjectionMercator:
 				case StelCore::ProjectionMiller:
