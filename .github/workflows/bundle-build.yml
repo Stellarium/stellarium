@@ -18,6 +18,9 @@ jobs:
     strategy:
       matrix:
         build_type: ["MinSizeRel"]
+    defaults:
+      run:
+        shell: msys2 {0}
 
     steps:
     - run: git config --global core.autocrlf input # Workaround: https://github.com/msys2/setup-msys2?tab=readme-ov-file#actionscheckout-and-line-endings
@@ -29,15 +32,22 @@ jobs:
         update: true
         msystem: UCRT64
         install: >-
-          mingw-w64-ucrt-x86_64-qt6 
-          mingw-w64-ucrt-x86_64-zlib
+          git
+          make
+        pacboy: >-
+          toolchain:p
+          cmake:p
+          ninja:p
+          zlib:p
+          qt6:p
+
 
     - name: Configure CMake
       # Choose CMakeLists.text from a specific source directory with -S.
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: |
-        cmake -S ${{github.workspace}} -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.build_type}}
+        cmake -S ${{github.workspace}} -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -G Ninja
 
     - name: Build
       # Build your program with the given configuration
