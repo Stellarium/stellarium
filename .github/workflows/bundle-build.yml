@@ -45,16 +45,16 @@ jobs:
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: |
-        cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -G Ninja
+        cmake -B build -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -G Ninja
 
     - name: Build
       # Build your program with the given configuration
       run: |
-        cmake --build ${{github.workspace}}/build --config ${{matrix.build_type}} -j ${{env.parallel_processes}} --target stellarium
+        cmake --build build --config ${{matrix.build_type}} -j ${{env.parallel_processes}} --target stellarium
     
     - name: Deploy Artifact
       uses: actions/upload-artifact@v4
       with:
         name: stellarium-windows-${{matrix.build_type}}
-        path: ${{github.workspace}}/build/src
+        path: build/src
         retention-days: 3  # Don't store to long as stellarium builds are large
