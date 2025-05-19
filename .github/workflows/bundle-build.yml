@@ -1,0 +1,52 @@
+name: Bundle Build
+
+on:
+  push:
+
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch: 
+
+env:
+  parallel_processes: 6 # A good default counts is: available Threads + 2
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        build_type: ["MinSizeRel"]
+
+    steps:
+    - run: git config --global core.autocrlf input # Workaround: https://github.com/msys2/setup-msys2?tab=readme-ov-file#actionscheckout-and-line-endings
+    - uses: actions/checkout@v4
+
+    - name: Requirements
+      uses: msys2/setup-msys2@v2
+      with:
+        update: true
+        msystem: UCRT64
+        install: >-
+          mingw-w64-ucrt-x86_64-qt6 
+          mingw-w64-ucrt-x86_64-zlib
+
+    - name: Configure CMake
+      # Choose CMakeLists.text from a specific source directory with -S.
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: |
+        cmake -S ${{github.workspace}} -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.build_type}}
+
+    - name: Build
+      # Build your program with the given configuration
+      run: |
+        cmake --build ${{github.workspace}}/build --config ${{matrix.build_type}} -j ${{env.parallel_processes}} --target stellarium
+    
+    - name: Deploy Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: stellarium-windows-${{matrix.build_type}}
+        path: ${{github.workspace}}/build/src
+        retention-days: 3  # Don't store to long as stellarium builds are large
