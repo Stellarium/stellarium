@@ -23,7 +23,6 @@ jobs:
         shell: msys2 {0}
 
     steps:
-    - run: git config --global core.autocrlf input # Workaround: https://github.com/msys2/setup-msys2?tab=readme-ov-file#actionscheckout-and-line-endings
     - uses: actions/checkout@v4
 
     - name: Requirements
@@ -40,7 +39,6 @@ jobs:
           ninja:p
           zlib:p
           qt6:p
-
 
     - name: Configure CMake
       # Choose CMakeLists.text from a specific source directory with -S.
