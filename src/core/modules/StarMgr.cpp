@@ -1439,16 +1439,16 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 // Note that most of the stars that define the region are NOT found!
 QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const StelCore* core, const bool hipOnly) const
 {
-	QList<StelObjectP > result;
+	QList<StelObjectP> result;
 	if (!getFlagStars())
 		return result;
 
 	// For unidentified reasons, the geodesic search result is empty when the cap used in search (below) has d>0.83.
-	QVector<SphericalCap > caps=region->getBoundingSphericalCaps();
-	QVector<SphericalCap > largerCaps;
+	QVector<SphericalCap> caps=region->getBoundingSphericalCaps();
+	QVector<SphericalCap> largerCaps;
 	foreach (auto &cap, caps)
 	{
-		qDebug() << "Cap: " << cap.n << cap.d;
+		//qDebug() << "Cap: " << cap.n << cap.d;
 		largerCaps.append(SphericalCap(cap.n, qMin(cap.d, 0.83)));
 	}
 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxGeodesicGridLevel)->search(largerCaps,maxGeodesicGridLevel);
@@ -1470,10 +1470,10 @@ QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const S
 	{
 		if (hipOnly && z->level>3) // There are no hip numbers after level 3.
 		{
-			qDebug() << "StarMgr::searchWithin(): Skip ZoneArray with level" << z->level << "(" << z->fname << ")";
+			//qDebug() << "StarMgr::searchWithin(): Skip ZoneArray with level" << z->level << "(" << z->fname << ")";
 			continue;
 		}
-		qDebug() << "Z level=" << z->level << "mag_min=" << z->mag_min;
+		//qDebug() << "Z level=" << z->level << "mag_min=" << z->mag_min;
 
 		int zone;
 		double withParallax = core->getUseParallax() * core->getParallaxFactor();
@@ -1484,12 +1484,12 @@ QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const S
 
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 		{
-			//qDebug() << "Inside: Zone z->fname:" << z->fname << "Level z=" << z->level << "zone=" << zone;
+			qDebug() << "Inside: Zone z->fname:" << z->fname << "Level z=" << z->level << "zone=" << zone;
 			z->searchWithin(core, zone, region, withParallax, diffPos, hipOnly, result);
 		}
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 		{
-			//qDebug() << "Border: Zone z->fname:" << z->fname << "Level z=" << z->level << "zone=" << zone;
+			qDebug() << "Border: Zone z->fname:" << z->fname << "Level z=" << z->level << "zone=" << zone;
 			z->searchWithin(core, zone, region, withParallax, diffPos, hipOnly, result);
 		}
 		// always check the last zone because it is a global zone
@@ -1788,7 +1788,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 					break;
 
 				// We must retrieve the original mixed-case spelling
-				QList<StelObject::CulturalName> cNames=getCulturalNames(it.value());
+				const QList<StelObject::CulturalName> cNames=getCulturalNames(it.value());
 				QString finalName;
 				for (const StelObject::CulturalName &cName: cNames)
 				{

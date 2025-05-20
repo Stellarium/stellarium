@@ -594,8 +594,10 @@ template<class Star>
 void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly,
 						  QList<StelObjectP > &result) const
 {
-	if (hipOnly && level>3)
-			return;
+	//if (hipOnly && level>3)
+	//		return;
+
+	qDebug() << "SpecialZoneArray<Star>::searchWithin(): Level" << level << "MagMin" << mag_min << "fname" << fname << "nr_of_zones" << nr_of_zones << "nr_of_stars" << nr_of_stars;
 
 	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	const SpecialZoneData<Star> *const z = getZones()+index;
@@ -604,7 +606,10 @@ void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const
 	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
 	{
 		if (hipOnly && s->getHip()==0)
+		{
+			qInfo() << "exclude DR3 " << s->getGaia();
 			continue;
+		}
 
 		s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
 		StelUtils::spheToRect(RA, DEC, tmp);
@@ -613,19 +618,21 @@ void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const
 		s->getBinaryOrbit(core->getJDE(), tmp);
 		s->getPlxEffect(withParallax * Plx, tmp, diffPos);
 		tmp.normalize();
+		// TODO: Move vel into arg.list
 		if (core->getUseAberration())
 		{
 			const Vec3d vel = core->getAberrationVec(core->getJDE());
 			tmp+=vel;
 			tmp.normalize();
 		}
+		// By trying, region is a SphericalPolygon. We are calling SphericalPolygon::contains(Vec3d)
 		if (region->contains(tmp))
 		{
-			qDebug() << "Region match: " <<  s->getHip() << "(Index (Zone):" << index << ", Level="<< level << ")";
+			qDebug() << "Region match: " <<  s->getHip() << s->getGaia()  << "(Index (Zone):" << index << ", Level="<< level << ")";
 			result.push_back(s->createStelObject(this,z));
 		}
-		//else
-		//	qDebug() << "NO Region match: " <<  s->getHip() << "(Index (Zone):" << index << ")";
+		else
+			qDebug() << "NO Region match: " <<  s->getHip() <<  s->getGaia() << "(Index (Zone):" << index << ", Level="<< level << ")";
 	}
 }
 
