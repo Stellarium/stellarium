@@ -1494,6 +1494,6 @@ void ConstellationMgr::starsInHullOf(const QString &englishName, const bool hipO
 	{
 		double ra, dec;
 		StelUtils::rectToSphe(&ra, &dec, star->getJ2000EquatorialPos(core));
-		qInfo().nospace() << star->getID() << ", " << star->getVMagnitude(core) << ", " << StelUtils::radToHmsStr(ra) << ", " << StelUtils::decDegToDmsStr(dec*M_180_PI);
+		qInfo().nospace().noquote() << star->getID() << ", " << star->getVMagnitude(core) << ", " << StelUtils::radToHmsStr(ra) << ", " << StelUtils::decDegToDmsStr(dec*M_180_PI) << QString::number(ra*M_180_PI / 15., 'g', 6) << ", " << QString::number(dec*M_180_PI, 'g', 6);
 	}
 }
