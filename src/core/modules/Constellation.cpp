@@ -172,25 +172,7 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 			for (qsizetype i = 0; i < polyLine.size(); ++i)
 			{
 				StelObjectP newPoint;
-				if (polyLine[i].isString())
-				{
-					// Can be "thin" or "bold", but we don't support these modifiers yet, so ignore this entry
-					const auto s = polyLine[i].toString();
-					if (s == "thin" || s == "bold")
-						continue;
-				}
-				const StarId HP = StelUtils::getLongLong(polyLine[i]);
-				if (HP > 0)
-				{
-					newPoint = HP <= NR_OF_HIP ? starMgr->searchHP(HP)
-								   : starMgr->searchGaia(HP);
-					if (!newPoint)
-					{
-						qWarning().nospace() << "Error in constellation " << abbreviation << ": can't find star HIP " << HP << "... skipping constellation";
-						return false;
-					}
-				}
-				else if (polyLine[i].isString() && polyLine[i].toString().startsWith("DSO:"))
+				if (polyLine[i].isString() && polyLine[i].toString().startsWith("DSO:"))
 				{
 					QString DSOname=polyLine[i].toString().remove(0,4);
 					newPoint = nebulaMgr->searchByID(DSOname);
@@ -202,8 +184,24 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 				}
 				else
 				{
-					qWarning().nospace() << "Error in constellation " << abbreviation << ": bad element: " << polyLine[i].toString() << "... skipping constellation";
-					return false;
+					if (polyLine[i].isString())
+					{
+						// Can be "thin" or "bold", but we don't support these modifiers yet, so ignore this entry
+						const auto s = polyLine[i].toString();
+						if (s == "thin" || s == "bold")
+							continue;
+					}
+					const StarId HP = StelUtils::getLongLong(polyLine[i]);
+					if (HP > 0)
+					{
+						newPoint = HP <= NR_OF_HIP ? starMgr->searchHP(HP)
+									   : starMgr->searchGaia(HP);
+						if (!newPoint)
+						{
+							qWarning().nospace() << "Error in constellation " << abbreviation << ": can't find star HIP " << HP << "... skipping constellation";
+							return false;
+						}
+					}
 				}
 
 				if (prevPoint)
@@ -277,19 +275,7 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 
 		for (qsizetype i = 0; i < hullExtraArray.size(); ++i)
 		{
-			const StarId HP = StelUtils::getLongLong(hullExtraArray[i]);
-			if (HP > 0)
-			{
-				const StelObjectP newStar = HP <= NR_OF_HIP ? starMgr->searchHP(HP)
-									    : starMgr->searchGaia(HP);
-				if (!newStar)
-				{
-					qWarning().nospace() << "Error in hull_extension for constellation " << abbreviation << ": can't find StarId " << HP << "... skipping";
-				}
-				else
-					hullExtension.push_back(newStar);
-			}
-			else if (hullExtraArray[i].isString() && hullExtraArray[i].toString().startsWith("DSO:"))
+			if (hullExtraArray[i].isString() && hullExtraArray[i].toString().startsWith("DSO:"))
 			{
 				QString DSOname=hullExtraArray[i].toString().remove(0,4);
 				const StelObjectP newDSO = nebulaMgr->searchByID(DSOname);
@@ -302,7 +288,22 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 			}
 			else
 			{
-				qWarning().nospace() << "Error in hull_extension for constellation " << abbreviation << ": bad element: " << hullExtraArray[i].toString() << "... skipping";
+				const StarId HP = StelUtils::getLongLong(hullExtraArray[i]);
+				if (HP > 0)
+				{
+					const StelObjectP newStar = HP <= NR_OF_HIP ? starMgr->searchHP(HP)
+										    : starMgr->searchGaia(HP);
+					if (!newStar)
+					{
+						qWarning().nospace() << "Error in hull_extension for constellation " << abbreviation << ": can't find StarId " << HP << "... skipping";
+					}
+					else
+						hullExtension.push_back(newStar);
+				}
+				else
+				{
+					qWarning().nospace() << "Error in hull_extension for constellation " << abbreviation << ": bad element: " << hullExtraArray[i].toString() << "... skipping";
+				}
 			}
 		}
 	}
@@ -517,24 +518,22 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter, const Vec3d& obsVel
 		sPainter.setColor(boundaryColor*1.7, boundaryFader.getInterstate());
 		sPainter.drawSphericalRegion(convexHull.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 
-		// DEBUG: Paint hulls' getBoundingSphericalCaps(). It seems it's one cap anyhow, but what defines it?
-		const QVector<SphericalCap> &caps= convexHull->getBoundingSphericalCaps();
-		if (caps.length()>1)
-			qInfo() << "caps has more than 1 entries!";
-		sPainter.setColor(1., 1., 0., boundaryFader.getInterstate());
-		foreach(const SphericalCap &cap, caps)
-		{
-			//sPainter.drawSphericalRegion(cap.getBoundingCap().getClosedOutlineContour(), StelPainter::SphericalPolygonDrawModeBoundary);
-
-			QVector<Vec3d> contour=cap.getClosedOutlineContour();
-			contour.append(contour.at(0)); // close loop
-			QVector<Vec4f> colors;
-			for (int i=0; i<contour.length(); ++i)
-			{
-				colors.append(Vec4f(1., 1., 0., boundaryFader.getInterstate()));
-			}
-			sPainter.drawPath(contour, colors);
-		}
+		//// DEBUG: Paint hulls' getBoundingSphericalCaps(). It seems it's one cap anyhow, but what defines it?
+		//const QVector<SphericalCap> &caps= convexHull->getBoundingSphericalCaps();
+		//if (caps.length()>1)
+		//	qInfo() << "caps has more than 1 entries!";
+		//sPainter.setColor(1., 1., 0., boundaryFader.getInterstate());
+		//foreach(const SphericalCap &cap, caps)
+		//{
+		//	QVector<Vec3d> contour=cap.getClosedOutlineContour();
+		//	contour.append(contour.at(0)); // close loop
+		//	QVector<Vec4f> colors;
+		//	for (int i=0; i<contour.length(); ++i)
+		//	{
+		//		colors.append(Vec4f(1., 1., 0., boundaryFader.getInterstate()));
+		//	}
+		//	sPainter.drawPath(contour, colors);
+		//}
 	}
 }
 
