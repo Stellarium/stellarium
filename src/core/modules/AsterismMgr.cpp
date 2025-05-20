@@ -27,11 +27,9 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "Planet.hpp"
-#include "StelUtils.hpp"
 
 #include <vector>
 #include <QDebug>
@@ -351,11 +349,6 @@ void AsterismMgr::drawNames(StelPainter& sPainter, const Vec3d &obsVelocity) con
 {
 	if (!hasAsterism)
 		return;
-
-	StelCore *core=StelApp::getInstance().getCore();
-	static StelSkyCultureMgr* scMgr= GETSTELMODULE(StelSkyCultureMgr);
-	const bool abbreviateLabel=scMgr->getFlagUseAbbreviatedNames();
-	StelObject::CulturalDisplayStyle culturalDisplayStyle=scMgr->getScreenLabelStyle();
 
 	sPainter.setBlending(true);
 	for (auto* asterism : asterisms)
