@@ -91,6 +91,8 @@ private:
 	void drawArt(StelPainter& sPainter) const;
 	//! Draw the constellation boundary. obsVelocity used for aberration
 	void drawBoundaryOptim(StelPainter& sPainter, const Vec3d &obsVelocity) const;
+	//! Draw the constellation hull. obsVelocity used for aberration
+	void drawHullOptim(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 
 	//! Test if a star is part of a Constellation.
 	//! This member tests to see if a star is one of those which make up
@@ -136,6 +138,9 @@ private:
 	//! Turn on and off Constellation boundary rendering.
 	//! @param b new state for boundary drawing.
 	void setFlagBoundaries(const bool b) {boundaryFader=b;}
+	//! Turn on and off Constellation hull rendering.
+	//! @param b new state for hull drawing.
+	void setFlagHull(const bool b) {hullFader=b;}
 	//! Turn on and off Constellation name label rendering.
 	//! @param b new state for name label drawing.
 	void setFlagLabels(const bool b) {nameFader=b;}
@@ -148,6 +153,11 @@ private:
 	//! Get the current state of Constellation boundary rendering.
 	//! @return true if Constellation boundary rendering it turned on, else false.
 	bool getFlagBoundaries() const {return boundaryFader;}
+	//! Get the current state of Constellation name label rendering.
+	//! @return true if Constellation name label rendering it turned on, else false.
+	//! Get the current state of Constellation hull rendering.
+	//! @return true if Constellation hull rendering it turned on, else false.
+	bool getFlagHull() const {return hullFader;}
 	//! Get the current state of Constellation name label rendering.
 	//! @return true if Constellation name label rendering it turned on, else false.
 	bool getFlagLabels() const {return nameFader;}
@@ -170,7 +180,7 @@ private:
 	//! Translated version of abbreviation (the short name or designation of constellations)
 	//! Latin-based languages should not translate it, but it may be useful to translate for other glyph systems.
 	QString abbreviationI18n;
-	//! The context for English name of constellation (using for correct translation via gettext)
+	//! The context for English name of constellation (used for correct translation via gettext)
 	QString context;
 	//! Direction vectors pointing on constellation name drawing position (J2000.0 coordinates)
 	//! Usually a single position is computed from averaging star positions forming the constellation, but we can override with an entry in index.json,
@@ -187,7 +197,7 @@ private:
 	//! List of coordinates forming the segments of a dark constellation (outlining dark cloud in front of the Milky Way)
 	//! If this is not null, the constellation is a "dark constellation"
 	std::vector<Vec3d> dark_constellation;
-	//! List of additional stars defining the hull together with the stars from constellation
+	//! List of additional stars (or Nebula objects) defining the hull together with the stars from constellation
 	std::vector<StelObjectP> hullExtension;
 	//! In case this describes a single-star constellation (i.e. just one line segment that starts and ends at the same star),
 	//! or we have a line segment with such single star (start==end) somewhere within the constellation,
@@ -197,10 +207,10 @@ private:
 	StelTextureSP artTexture;
 	StelVertexArray artPolygon;
 	SphericalCap boundingCap;
-	SphericalRegionP convexHull; // The convex hull formed by stars contained in the defined lines plus extra stars.
+	SphericalRegionP convexHull; //!< The convex hull formed by stars contained in the defined lines plus extra stars.
 
 	//! Define whether art, lines, names and boundary must be drawn
-	LinearFader artFader, lineFader, nameFader, boundaryFader;
+	LinearFader artFader, lineFader, nameFader, boundaryFader, hullFader;
 	//! Constellation art opacity
 	float artOpacity;
 	std::vector<std::vector<Vec3d> *> isolatedBoundarySegments;
@@ -210,6 +220,7 @@ private:
 	static Vec3f lineColor;
 	static Vec3f labelColor;
 	static Vec3f boundaryColor;
+	static Vec3f hullColor;
 
 	static bool singleSelected;	
 	static bool seasonalRuleEnabled;
