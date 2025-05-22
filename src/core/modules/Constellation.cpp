@@ -47,6 +47,7 @@ const QString Constellation::CONSTELLATION_TYPE = QStringLiteral("Constellation"
 Vec3f Constellation::lineColor = Vec3f(0.4f,0.4f,0.8f);
 Vec3f Constellation::labelColor = Vec3f(0.4f,0.4f,0.8f);
 Vec3f Constellation::boundaryColor = Vec3f(0.8f,0.3f,0.3f);
+Vec3f Constellation::hullColor = Vec3f(0.6f,0.2f,0.2f);
 bool Constellation::singleSelected = false;
 bool Constellation::seasonalRuleEnabled = false;
 float Constellation::artIntensityFovScale = 1.0f;
@@ -476,6 +477,7 @@ void Constellation::update(int deltaTime)
 	nameFader.update(deltaTime);
 	artFader.update(deltaTime);
 	boundaryFader.update(deltaTime);
+	hullFader.update(deltaTime);
 }
 
 void Constellation::drawBoundaryOptim(StelPainter& sPainter, const Vec3d& obsVelocity) const
@@ -510,32 +512,35 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter, const Vec3d& obsVel
 			sPainter.drawGreatCircleArc(point0, point1, &viewportHalfspace);
 		}
 	}
-
-	// Also draw Convex hull
-	// TODO: separate hull drawing, obviously...
-	if (convexHull)
-	{
-		sPainter.setColor(boundaryColor*1.7, boundaryFader.getInterstate());
-		sPainter.drawSphericalRegion(convexHull.data(), StelPainter::SphericalPolygonDrawModeBoundary);
-
-		//// DEBUG: Paint hulls' getBoundingSphericalCaps(). It seems it's one cap anyhow, but what defines it?
-		//const QVector<SphericalCap> &caps= convexHull->getBoundingSphericalCaps();
-		//if (caps.length()>1)
-		//	qInfo() << "caps has more than 1 entries!";
-		//sPainter.setColor(1., 1., 0., boundaryFader.getInterstate());
-		//foreach(const SphericalCap &cap, caps)
-		//{
-		//	QVector<Vec3d> contour=cap.getClosedOutlineContour();
-		//	contour.append(contour.at(0)); // close loop
-		//	QVector<Vec4f> colors;
-		//	for (int i=0; i<contour.length(); ++i)
-		//	{
-		//		colors.append(Vec4f(1., 1., 0., boundaryFader.getInterstate()));
-		//	}
-		//	sPainter.drawPath(contour, colors);
-		//}
-	}
 }
+
+void Constellation::drawHullOptim(StelPainter& sPainter, const Vec3d& obsVelocity) const
+{
+	if (hullFader.getInterstate()==0.0f || (!convexHull) )
+		return;
+
+	sPainter.setBlending(true);
+	sPainter.setColor(hullColor, hullFader.getInterstate());
+	sPainter.drawSphericalRegion(convexHull.data(), StelPainter::SphericalPolygonDrawModeBoundary);
+
+	//// DEBUG: Paint hulls' getBoundingSphericalCaps(). It seems it's one cap anyhow, but what defines it?
+	//const QVector<SphericalCap> &caps= convexHull->getBoundingSphericalCaps();
+	//if (caps.length()>1)
+	//	qInfo() << "caps has more than 1 entries!";
+	//sPainter.setColor(1., 1., 0., hullFader.getInterstate());
+	//foreach(const SphericalCap &cap, caps)
+	//{
+	//	QVector<Vec3d> contour=cap.getClosedOutlineContour();
+	//	contour.append(contour.at(0)); // close loop
+	//	QVector<Vec4f> colors;
+	//	for (int i=0; i<contour.length(); ++i)
+	//	{
+	//		colors.append(Vec4f(1., 1., 0., hullFader.getInterstate()));
+	//	}
+	//	sPainter.drawPath(contour, colors);
+	//}
+}
+
 
 bool Constellation::isSeasonallyVisible() const
 {

@@ -60,8 +60,11 @@ class ConstellationMgr : public StelObjectModule
 	Q_PROPERTY(bool namesDisplayed            READ getFlagLabels                     WRITE setFlagLabels                    NOTIFY namesDisplayedChanged)
 	Q_PROPERTY(float namesFadeDuration        READ getLabelsFadeDuration             WRITE setLabelsFadeDuration            NOTIFY namesFadeDurationChanged)
 	Q_PROPERTY(int constellationLineThickness READ getConstellationLineThickness     WRITE setConstellationLineThickness    NOTIFY constellationLineThicknessChanged)
-	Q_PROPERTY(int constellationBoundariesThickness	READ getConstellationBoundariesThickness WRITE setConstellationBoundariesThickness NOTIFY constellationBoundariesThicknessChanged)
-
+	Q_PROPERTY(int boundariesThickness	  READ getBoundariesThickness            WRITE setBoundariesThickness           NOTIFY boundariesThicknessChanged)
+	Q_PROPERTY(bool  hullsDisplayed           READ getFlagHulls                      WRITE setFlagHulls                     NOTIFY hullsDisplayedChanged)
+	Q_PROPERTY(Vec3f hullsColor               READ getHullsColor                     WRITE setHullsColor                    NOTIFY hullsColorChanged)
+	Q_PROPERTY(int   hullsThickness	          READ getHullsThickness                 WRITE setHullsThickness                NOTIFY hullsThicknessChanged)
+	Q_PROPERTY(float hullsFadeDuration	  READ getHullsFadeDuration              WRITE setHullsFadeDuration             NOTIFY hullsFadeDurationChanged)
 
 public:
 	//! Constructor
@@ -217,6 +220,27 @@ public slots:
 	//! Get constellation labels fade duration in seconds
 	float getLabelsFadeDuration() const;
 
+	//! Define hull line color
+	//! @param color The color of hull lines
+	//! @code
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! ConstellationMgr.setHullsColor(c.toVec3f());
+	//! @endcode
+	void setHullsColor(const Vec3f& color);
+	//! Get current hulls color
+	Vec3f getHullsColor() const;
+
+	//! Set whether constellation hull lines will be displayed
+	void setFlagHulls(const bool displayed);
+	//! Get whether constellation boundaries lines are displayed
+	bool getFlagHulls(void) const;
+
+	//! Set constellation hulls fade duration in second
+	void setHullsFadeDuration(const float duration);
+	//! Get constellation hulls fade duration in second
+	float getHullsFadeDuration() const;
+
 	//! Set the font size used for constellation names display
 	void setFontSize(const int newFontSize);
 	//! Get the font size used for constellation names display
@@ -230,9 +254,15 @@ public slots:
 
 	//! Set the thickness of boundaries of the constellations
 	//! @param thickness of line in pixels
-	void setConstellationBoundariesThickness(const int thickness);
+	void setBoundariesThickness(const int thickness);
 	//! Get the thickness of boundaries of the constellations
-	int getConstellationBoundariesThickness() const { return constellationBoundariesThickness; }
+	int getBoundariesThickness() const { return boundariesThickness; }
+
+	//! Set the thickness of constellation hulls
+	//! @param thickness of line in pixels
+	void setHullsThickness(const int thickness);
+	//! Get the thickness of constellations hulls
+	int getHullsThickness() const { return hullsThickness; }
 
 	//! Remove constellations from selected objects
 	void deselectConstellations(void);
@@ -288,6 +318,11 @@ signals:
 	void boundariesColorChanged(const Vec3f & color);
 	void boundariesDisplayedChanged(const bool displayed);
 	void boundariesFadeDurationChanged(const float duration);
+	void boundariesThicknessChanged(int thickness);
+	void hullsColorChanged(const Vec3f & color);
+	void hullsDisplayedChanged(const bool displayed);
+	void hullsFadeDurationChanged(const float duration);
+	void hullsThicknessChanged(int thickness);
 	void fontSizeChanged(const int newSize);
 	void isolateSelectedChanged(const bool isolate);
 	void flagConstellationPickChanged(const bool mode);
@@ -299,7 +334,6 @@ signals:
 	void namesFadeDurationChanged(const float duration);
 	void constellationsDisplayStyleChanged(const StelObject::CulturalDisplayStyle style);
 	void constellationLineThicknessChanged(int thickness);
-	void constellationBoundariesThicknessChanged(int thickness);
 
 private slots:
 	//! Limit the number of constellations to draw based on selected stars.
@@ -345,6 +379,9 @@ private:
 	//! Draw the constellation boundaries.
 	//! @param obsVelocity is the speed vector of the observer planet to distort boundaries by aberration.
 	void drawBoundaries(StelPainter& sPainter, const Vec3d &obsVelocity) const;
+	//! Draw the constellation hulls.
+	//! @param obsVelocity is the speed vector of the observer planet to distort hulls by aberration.
+	void drawHulls(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 	//! Handle single and multi-constellation selections.
 	void setSelectedConst(Constellation* c);
 	//! Handle unselecting a single constellation.
@@ -387,13 +424,13 @@ private:
 	float linesFadeDuration;
 	bool namesDisplayed;
 	float namesFadeDuration;
+	bool hullsDisplayed;
+	float hullsFadeDuration;
 	bool checkLoadingData;
 
-	// Store the thickness of lines of the constellations
-	int constellationLineThickness;
-
-	// Store the thickness of boundaries of the constellations
-	int constellationBoundariesThickness;
+	int constellationLineThickness;   //!< thickness of the constellation lines
+	int boundariesThickness;          //!< thickness of the constellation boundaries
+	int hullsThickness;               //!< thickness of the constellation boundaries
 };
 
 #endif // CONSTELLATIONMGR_HPP

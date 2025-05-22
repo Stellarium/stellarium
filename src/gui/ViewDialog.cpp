@@ -579,7 +579,7 @@ void ViewDialog::createDialogContent()
 	connectIntProperty(ui->constellationLineThicknessSpinBox,       "ConstellationMgr.constellationLineThickness");
 	connectCheckBox(ui->showConstellationLabelsCheckBox,            "actionShow_Constellation_Labels");
 	connectCheckBox(ui->showConstellationBoundariesCheckBox,        "actionShow_Constellation_Boundaries");
-	connectIntProperty(ui->constellationBoundariesThicknessSpinBox,	"ConstellationMgr.constellationBoundariesThickness");
+	connectIntProperty(ui->constellationBoundariesThicknessSpinBox,	"ConstellationMgr.boundariesThickness");
 	connectCheckBox(ui->showConstellationArtCheckBox,               "actionShow_Constellation_Art");
 	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,    "ConstellationMgr.artIntensity");
 
@@ -608,6 +608,23 @@ void ViewDialog::createDialogContent()
 	ui->colorAsterismLabels->setup("AsterismMgr.namesColor",      "color/asterism_names_color");
 	ui->colorAsterismLines ->setup("AsterismMgr.linesColor",      "color/asterism_lines_color");
 	ui->colorRayHelpers    ->setup("AsterismMgr.rayHelpersColor", "color/rayhelper_lines_color");
+
+	QSettings *conf=StelApp::getInstance().getSettings();
+	if (conf->value("gui/skyculture_enable_hulls", "false").toBool())
+	{
+		connectCheckBox(ui->constellationHullsCheckBox,                          "actionShow_Constellation_Hulls");
+		ui->constellationHullsColorButton                               ->setup("ConstellationMgr.hullsColor",  "color/const_hulls_color");
+		connectIntProperty(ui->constellationHullsThicknessSpinBox,              "ConstellationMgr.hullsThickness");
+		connectDoubleProperty(ui->constellationHullsFadeDurationDoubleSpinBox,  "ConstellationMgr.hullsFadeDuration");
+	}
+	else
+	{
+		ui->constellationHullsCheckBox->hide();
+		ui->constellationHullsColorButton->hide();
+		ui->constellationHullsThicknessSpinBox->hide();
+		ui->constellationHullsFadeDurationDoubleSpinBox->hide();
+	}
+
 
 	// Font selection
 	connectIntProperty(ui->constellationsFontSizeSpinBox, "ConstellationMgr.fontSize");
@@ -1080,6 +1097,7 @@ void ViewDialog::populateToolTips()
 	ui->linesFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->namesFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->boundariesFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->constellationHullsFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->asterismLinesFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->asterismNamesFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->rayHelpersFadeDurationDoubleSpinBox->setSuffix(seconds);
