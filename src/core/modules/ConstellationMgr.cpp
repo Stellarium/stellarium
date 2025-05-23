@@ -1538,6 +1538,21 @@ void ConstellationMgr::setSelected(const StelObject *s)
 	}
 }
 
+QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitFov, const StelCore* core) const
+{
+	QList<StelObjectP> result;
+	for (auto* constellation : constellations)
+	{
+		if (constellation->convexHull && constellation->convexHull->contains(v))
+		{
+			qDebug() << "ConstellationMgr::searchAround(): point in hull of constellation " << constellation->getID();
+			result.append(constellation);
+		}
+	}
+	qDebug() << "Point within hulls of " << result.count() << "constellations";
+	return result;
+}
+
 Constellation* ConstellationMgr::isObjectIn(const StelObject *s) const
 {
 	StelCore *core = StelApp::getInstance().getCore();
