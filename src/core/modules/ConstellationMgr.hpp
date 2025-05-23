@@ -92,8 +92,16 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
-	// TODO later: Identify constellation from coordinate
-	//QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
+
+	//! Search for StelObject in an area around a specified point.
+	//! The function searches in a disk of diameter limitFov centered on v.
+	//! Only visible objects (i.e. currently displayed on screen) should be returned.
+	//! @param v equatorial position at epoch J2000 (without aberration).
+	//! @param limitFov angular diameter of the searching zone in degree. (ignored here. Only v is queried.)
+	//! @param core the StelCore instance to use.
+	//! @return a list of constellations identified from their hulls when clicked inside.
+	//! This can probably be used for selection when IAU borders don't exist and click does not identify a star in a constellation line.
+	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! @return the matching constellation object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensitive constellation name
