@@ -591,23 +591,23 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly,
+void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly, const float maxMag,
 						  QList<StelObjectP > &result) const
 {
-	//if (hipOnly && level>3)
-	//		return;
-
+	if (hipOnly && level>3)
+			return;
+#ifndef NDEBUG
 	qDebug() << "SpecialZoneArray<Star>::searchWithin(): Level" << level << "MagMin" << mag_min << "fname" << fname << "nr_of_zones" << nr_of_zones << "nr_of_stars" << nr_of_stars;
-
+#endif
 	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	const SpecialZoneData<Star> *const z = getZones()+index;
+	const float maxMilliMag = 1000.f*maxMag;
 	Vec3d tmp;
 	double RA, DEC, pmra, pmdec, Plx, RadialVel;
 	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
 	{
 		if (hipOnly && s->getHip()==0)
 		{
-			qInfo() << "exclude DR3 " << s->getGaia();
 			continue;
 		}
 
@@ -626,13 +626,13 @@ void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const
 			tmp.normalize();
 		}
 		// By trying, region is a SphericalPolygon. We are calling SphericalPolygon::contains(Vec3d)
-		if (region->contains(tmp))
+		if (region->contains(tmp) && (s->getMag() < maxMilliMag) )
 		{
-			qDebug() << "Region match: " <<  s->getHip() << s->getGaia()  << "(Index (Zone):" << index << ", Level="<< level << ")";
+#ifndef NDEBUG
+			//qDebug() << "Region match: " <<  s->getHip() << s->getGaia()  << "(Index (Zone):" << index << ", Level="<< level << ")";
+#endif
 			result.push_back(s->createStelObject(this,z));
 		}
-		else
-			qDebug() << "NO Region match: " <<  s->getHip() <<  s->getGaia() << "(Index (Zone):" << index << ", Level="<< level << ")";
 	}
 }
 

@@ -1434,10 +1434,9 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	return result;
 }
 
-// Return a QList containing the stars located
-// within region (in J2000 frame without aberration)
-// Note that most of the stars that define the region are NOT found!
-QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const StelCore* core, const bool hipOnly) const
+// Return a QList containing the stars located within region (in J2000 frame without aberration)
+// Debugging info is available in a debug build. The reason for the minimum opening angle in StelCore::getGeodesicGrid() is still a bit unclear.
+QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const StelCore* core, const bool hipOnly, const float maxMag) const
 {
 	QList<StelObjectP> result;
 	if (!getFlagStars())
@@ -1448,14 +1447,17 @@ QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const S
 	QVector<SphericalCap> largerCaps;
 	foreach (auto &cap, caps)
 	{
-		//qDebug() << "Cap: " << cap.n << cap.d;
-		largerCaps.append(SphericalCap(cap.n, qMin(cap.d, 0.83)));
+#ifndef NDEBUG
+		qDebug() << "Cap: " << cap.n << cap.d;
+#endif
+		largerCaps.append(SphericalCap(cap.n, qMin(cap.d, 0.75))); // 0.83 seemed still too small, unclear why. 0.75 seems to work.
 	}
 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxGeodesicGridLevel)->search(largerCaps,maxGeodesicGridLevel);
 
+#ifndef NDEBUG
 	// Just some temporary debug output.
 	geodesic_search_result->print();
-
+#endif
 	// prepare for aberration: Explan. Suppl. 2013, (7.38)
 	const bool withAberration=core->getUseAberration();
 	Vec3d vel(0.);
@@ -1464,17 +1466,22 @@ QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const S
 		vel = core->getAberrationVec(core->getJDE());
 	}
 
+#ifndef NDEBUG
 	qDebug() << "We have" << gridLevels.count() << " ZoneArrays in gridLevels at maxGeodesicGridLevel:" << maxGeodesicGridLevel;
+#endif
 	// Draw all the stars of all the selected zones
 	for (const  auto* z : std::as_const(gridLevels))
 	{
 		if (hipOnly && z->level>3) // There are no hip numbers after level 3.
 		{
-			//qDebug() << "StarMgr::searchWithin(): Skip ZoneArray with level" << z->level << "(" << z->fname << ")";
+#ifndef NDEBUG
+			qDebug() << "StarMgr::searchWithin(): Skip ZoneArray with level" << z->level << "(" << z->fname << ")";
+#endif
 			continue;
 		}
-		//qDebug() << "Z level=" << z->level << "mag_min=" << z->mag_min;
-
+#ifndef NDEBUG
+		qDebug() << "Z level=" << z->level << "mag_min=" << z->mag_min;
+#endif
 		int zone;
 		double withParallax = core->getUseParallax() * core->getParallaxFactor();
 		Vec3d diffPos(0., 0., 0.);
@@ -1484,20 +1491,28 @@ QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const S
 
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 		{
+#ifndef NDEBUG
 			qDebug() << "Inside: Zone z->fname:" << z->fname << "Level z=" << z->level << "zone=" << zone;
-			z->searchWithin(core, zone, region, withParallax, diffPos, hipOnly, result);
+#endif
+			z->searchWithin(core, zone, region, withParallax, diffPos, hipOnly, maxMag, result);
 		}
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 		{
+#ifndef NDEBUG
 			qDebug() << "Border: Zone z->fname:" << z->fname << "Level z=" << z->level << "zone=" << zone;
-			z->searchWithin(core, zone, region, withParallax, diffPos, hipOnly, result);
+#endif
+			z->searchWithin(core, zone, region, withParallax, diffPos, hipOnly, maxMag, result);
 		}
 		// always check the last zone because it is a global zone
+#ifndef NDEBUG
 		qDebug() << "Global 20<<(z->level<<1)=" << (20<<(z->level<<1));
-		z->searchWithin(core, (20<<(z->level<<1)), region, withParallax, diffPos, hipOnly, result);
+#endif
+		z->searchWithin(core, (20<<(z->level<<1)), region, withParallax, diffPos, hipOnly, maxMag, result);
 	}
 
+#ifndef NDEBUG
 	qInfo() << "Region contains" << result.length() << "entries";
+#endif
 	return result;
 }
 
