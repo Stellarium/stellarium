@@ -1437,7 +1437,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 // Return a QList containing the stars located
 // within region (in J2000 frame without aberration)
 // Note that most of the stars that define the region are NOT found!
-QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const StelCore* core, const bool hipOnly) const
+QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const StelCore* core, const bool hipOnly, const float maxMag) const
 {
 	QList<StelObjectP> result;
 	if (!getFlagStars())
@@ -1449,12 +1449,12 @@ QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const S
 	foreach (auto &cap, caps)
 	{
 		//qDebug() << "Cap: " << cap.n << cap.d;
-		largerCaps.append(SphericalCap(cap.n, qMin(cap.d, 0.83)));
+		largerCaps.append(SphericalCap(cap.n, qMin(cap.d, 0.75)));
 	}
 	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxGeodesicGridLevel)->search(largerCaps,maxGeodesicGridLevel);
 
 	// Just some temporary debug output.
-	geodesic_search_result->print();
+	//geodesic_search_result->print();
 
 	// prepare for aberration: Explan. Suppl. 2013, (7.38)
 	const bool withAberration=core->getUseAberration();
@@ -1464,7 +1464,7 @@ QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const S
 		vel = core->getAberrationVec(core->getJDE());
 	}
 
-	qDebug() << "We have" << gridLevels.count() << " ZoneArrays in gridLevels at maxGeodesicGridLevel:" << maxGeodesicGridLevel;
+	//qDebug() << "We have" << gridLevels.count() << " ZoneArrays in gridLevels at maxGeodesicGridLevel:" << maxGeodesicGridLevel;
 	// Draw all the stars of all the selected zones
 	for (const  auto* z : std::as_const(gridLevels))
 	{
@@ -1484,20 +1484,20 @@ QList<StelObjectP > StarMgr::searchWithin(const SphericalRegionP region, const S
 
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 		{
-			qDebug() << "Inside: Zone z->fname:" << z->fname << "Level z=" << z->level << "zone=" << zone;
-			z->searchWithin(core, zone, region, withParallax, diffPos, hipOnly, result);
+			//qDebug() << "Inside: Zone z->fname:" << z->fname << "Level z=" << z->level << "zone=" << zone;
+			z->searchWithin(core, zone, region, withParallax, diffPos, hipOnly, maxMag, result);
 		}
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 		{
-			qDebug() << "Border: Zone z->fname:" << z->fname << "Level z=" << z->level << "zone=" << zone;
-			z->searchWithin(core, zone, region, withParallax, diffPos, hipOnly, result);
+			//qDebug() << "Border: Zone z->fname:" << z->fname << "Level z=" << z->level << "zone=" << zone;
+			z->searchWithin(core, zone, region, withParallax, diffPos, hipOnly, maxMag, result);
 		}
 		// always check the last zone because it is a global zone
-		qDebug() << "Global 20<<(z->level<<1)=" << (20<<(z->level<<1));
-		z->searchWithin(core, (20<<(z->level<<1)), region, withParallax, diffPos, hipOnly, result);
+		//qDebug() << "Global 20<<(z->level<<1)=" << (20<<(z->level<<1));
+		z->searchWithin(core, (20<<(z->level<<1)), region, withParallax, diffPos, hipOnly, maxMag, result);
 	}
 
-	qInfo() << "Region contains" << result.length() << "entries";
+	//qInfo() << "Region contains" << result.length() << "entries";
 	return result;
 }
 

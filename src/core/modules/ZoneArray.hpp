@@ -97,7 +97,7 @@ public:
 	//! Pure virtual method. See subclass implementation.
 	virtual void searchAround(const StelCore* core, int index, const Vec3d &v, const double withParallax, const Vec3d diffPos,
 							  double cosLimFov, QList<StelObjectP > &result) = 0;
-	virtual void searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly,
+	virtual void searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly, const float maxMag,
 							  QList<StelObjectP > &result) const = 0;
 
     virtual StelObjectP searchGaiaID(int index, const StarId source_id, int& matched) const = 0;
@@ -191,7 +191,7 @@ protected:
 
 	void searchAround(const StelCore* core, int index, const Vec3d &v, const double withParallax, 
 					  const Vec3d diffPos, double cosLimFov, QList<StelObjectP > &result) override;
-	void searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly,
+	void searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly, const float maxMag,
 			  QList<StelObjectP > &result) const override;
 	StelObjectP searchGaiaID(int index, const StarId source_id, int& matched) const override;
  	void searchGaiaIDepochPos(const StarId source_id, float dyrs,
