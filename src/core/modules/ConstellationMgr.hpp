@@ -315,8 +315,15 @@ public slots:
 	//! @todo: Extend with GUI etc?
 	void dumpHullAreas() const;
 
-	//! Create a list of stars within the convex hull of constellation
-	void starsInHullOf(const QString &englishName, const bool hipOnly=true) const;
+	//! Create a list of stars (CSV file) within the convex hull of constellation.
+	//! This command is perfect to be used as scripting command to extract a data list.
+	//! @param englishName name of the constellation. Either englishName or abbreviation.
+	//! @param hipOnly (default: true) list only Hipparcos stars
+	//! @param maxMag (default: 25) list stars down to this magnitude.
+	//! @param fileNamePrefix prefix (name start) name of CSV file to be written.
+	//! The file will be written into the Stellarium User Data directory,
+	//! the full filename will be fileNamePrefix_englishName_maxMag.csv.
+	void starsInHullOf(const QString &englishName, const bool hipOnly=true, const float maxMag=25.0f, const QString &fileNamePrefix="hullStars") const;
 
 
 signals:

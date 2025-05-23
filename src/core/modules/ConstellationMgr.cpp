@@ -1577,7 +1577,7 @@ void ConstellationMgr::dumpHullAreas() const
 }
 
 //! Create a list of stars within the convex hull of constellation
-void ConstellationMgr::starsInHullOf(const QString &englishName, const bool hipOnly) const
+void ConstellationMgr::starsInHullOf(const QString &englishName, const bool hipOnly, const float maxMag, const QString &fileNamePrefix) const
 {
 	static StelCore *core=StelApp::getInstance().getCore();
 	StelObjectP constell=searchByName(englishName);
@@ -1587,9 +1587,10 @@ void ConstellationMgr::starsInHullOf(const QString &englishName, const bool hipO
 		return;
 	}
 
-	QList<StelObjectP> starList=GETSTELMODULE(StarMgr)->searchWithin(constell->getRegion(), core, hipOnly);
+	QList<StelObjectP> starList=GETSTELMODULE(StarMgr)->searchWithin(constell->getRegion(), core, hipOnly, maxMag);
 
 	// Add the actual hull-defining stars, but only if they are not already included. Unfortunately, we need to test via IDs!
+	// Results are prepended, so that usually hull-defining HIP stars are in the beginning of the list.
 	Constellation* constel=reinterpret_cast<Constellation*>(constell.data());
 	foreach(auto &star, constel->constellation)
 	{
@@ -1602,7 +1603,7 @@ void ConstellationMgr::starsInHullOf(const QString &englishName, const bool hipO
 				break;
 			}
 		if (wanted)
-			starList.append(star);
+			starList.prepend(star);
 	}
 	foreach(auto &star, constel->hullExtension)
 	{
@@ -1615,14 +1616,47 @@ void ConstellationMgr::starsInHullOf(const QString &englishName, const bool hipO
 				break;
 			}
 		if (wanted)
-			starList.append(star);
+			starList.prepend(star);
 	}
 
-	qInfo() << "Stars within the convex hull (" << constell->getRegion()->getArea()*(M_180_PI*M_180_PI) << " sq degrees) of" << englishName;
-	foreach(const auto &star, starList)
+	qInfo().nospace() << starList.length() << " stars within the convex hull (" << constell->getRegion()->getArea()*(M_180_PI*M_180_PI) << " sq degrees) of " << englishName;
+	int day, month, year;
+	StelUtils::getDateFromJulianDay(core->getJD(), &year, &month, &day);
+	const double yearFraction=StelUtils::yearFraction(year, month, day);
+	const QString dateString=QString::number(yearFraction, 'f', 1);
+	const QString scName=GETSTELMODULE(StelSkyCultureMgr)->getCurrentSkyCultureEnglishName();
+
+	QString fileName=StelFileMgr::getUserDir() + QString("/%1_%2_%3-%4.csv").arg(fileNamePrefix, scName, englishName, QString::number(maxMag, 'f', 2));
+	QFile file(fileName);
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	if (file.open(QIODevice::Text | QIODevice::WriteOnly))
+#else
+	if (file.open(QIODeviceBase::Text | QIODeviceBase::WriteOnly))
+#endif
 	{
-		double ra, dec;
-		StelUtils::rectToSphe(&ra, &dec, star->getJ2000EquatorialPos(core));
-		qInfo().nospace().noquote() << star->getID() << ", " << star->getVMagnitude(core) << ", " << StelUtils::radToHmsStr(ra) << ", " << StelUtils::decDegToDmsStr(dec*M_180_PI) << QString::number(ra*M_180_PI / 15., 'g', 6) << ", " << QString::number(dec*M_180_PI, 'g', 6);
+		qInfo().nospace() << "Writing to:" << fileName;
+		file.write(QString("ID, mag, RA_J%1, DE_J%1, RA_J%1(h), DE_J%1(deg)\n").arg(dateString).toLatin1());
+
+		foreach(const auto &star, starList)
+		{
+			double ra, dec;
+			StelUtils::rectToSphe(&ra, &dec, star->getEquinoxEquatorialPos(core));
+			file.write(QString("%1, %2, %3, %4, %5, %6\n").arg(star->getID(), QString::number(star->getVMagnitude(core), 'f', 2),
+				   StelUtils::radToHmsStr(ra), StelUtils::decDegToDmsStr(dec*M_180_PI),
+				   QString::number(ra*M_180_PI / 15., 'f', 6), QString::number(dec*M_180_PI, 'f', 6)).toLatin1());
+		}
+		file.close();
+	}
+	else
+	{
+		qCritical() << "Cannot open file for writing! Dump to logfile:";
+		foreach(const auto &star, starList)
+		{
+			double ra, dec;
+			StelUtils::rectToSphe(&ra, &dec, star->getEquinoxEquatorialPos(core));
+			qInfo().nospace().noquote() << star->getID() << ", " << star->getVMagnitude(core) << ", " <<
+						       StelUtils::radToHmsStr(ra) << ", " << StelUtils::decDegToDmsStr(dec*M_180_PI) <<
+						       QString::number(ra*M_180_PI / 15., 'f', 6) << ", " << QString::number(dec*M_180_PI, 'f', 6);
+		}
 	}
 }
