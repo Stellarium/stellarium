@@ -396,7 +396,6 @@ const StelGeodesicGrid* StelCore::getGeodesicGrid(int maxLevel) const
 	{
 		delete geodesicGrid;
 		geodesicGrid = new StelGeodesicGrid(maxLevel);
-		qDebug() << "StelCore::getGeodesicGrid(), maxlevel=" << maxLevel;
 	}
 	return geodesicGrid;
 }
