@@ -1566,13 +1566,40 @@ Constellation* ConstellationMgr::isObjectIn(const StelObject *s) const
 	return nullptr;
 }
 
-void ConstellationMgr::dumpHullAreas() const
+void ConstellationMgr::outputHullAreas(const QString &fileNamePrefix) const
 {
-	foreach(const Constellation *constellation, constellations)
+	const QString scName=GETSTELMODULE(StelSkyCultureMgr)->getCurrentSkyCultureEnglishName();
+
+	QString fileName=StelFileMgr::getUserDir() + QString("/%1_%2.csv").arg(fileNamePrefix, scName);
+	QFile file(fileName);
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	if (file.open(QIODevice::Text | QIODevice::WriteOnly))
+#else
+	if (file.open(QIODeviceBase::Text | QIODeviceBase::WriteOnly))
+#endif
 	{
-		double area_sr=constellation->convexHull->getArea();
-		qInfo().nospace() << constellation->getEnglishName() << ": "
-				  <<  area_sr << "sr or " << area_sr*(M_180_PI*M_180_PI) << "°²";
+		qInfo().nospace() << "Writing to:" << fileName;
+		file.write(QString("ID, Native, English, Translated, Area (sr), Area (sqdeg)\n").toLatin1());
+		foreach(const Constellation *constellation, constellations)
+		{
+			double area_sr=constellation->convexHull->getArea();
+			file.write(QString("%1, %2, %3, %4, %5, %6\n").arg(constellation->getID(),
+									   constellation->getNameNative(),
+									   constellation->getEnglishName(),
+									   constellation->getNameI18n(),
+									   QString::number(area_sr, 'f', 6),
+									   QString::number(area_sr*(M_180_PI*M_180_PI), 'f', 6)).toLatin1());
+		}
+	}
+	else
+	{
+		qCritical() << "Cannot open file for writing! Output to logfile:";
+		foreach(const Constellation *constellation, constellations)
+		{
+			double area_sr=constellation->convexHull->getArea();
+			qInfo().nospace() << constellation->getEnglishName() << ": "
+					  <<  area_sr << "sr or " << area_sr*(M_180_PI*M_180_PI) << "°²";
+		}
 	}
 }
 
