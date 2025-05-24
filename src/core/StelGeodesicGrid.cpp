@@ -499,7 +499,6 @@ void GeodesicSearchResult::print() const
 	{
 		qDebug() << "     Zone " << i << ": " << static_cast<size_t>(StelGeodesicGrid::nrOfZones(i)) << "entries";
 	}
-
 }
 
 void GeodesicSearchResult::search(const QVector<SphericalCap>& convex, int maxSearchLevel)
