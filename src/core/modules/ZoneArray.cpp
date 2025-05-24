@@ -596,9 +596,9 @@ void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const
 {
 	if (hipOnly && level>3)
 			return;
-
-	//qDebug() << "SpecialZoneArray<Star>::searchWithin(): Level" << level << "MagMin" << mag_min << "fname" << fname << "nr_of_zones" << nr_of_zones << "nr_of_stars" << nr_of_stars;
-
+#ifndef NDEBUG
+	qDebug() << "SpecialZoneArray<Star>::searchWithin(): Level" << level << "MagMin" << mag_min << "fname" << fname << "nr_of_zones" << nr_of_zones << "nr_of_stars" << nr_of_stars;
+#endif
 	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	const float maxMilliMag = 1000.f*maxMag;
@@ -608,7 +608,6 @@ void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const
 	{
 		if (hipOnly && s->getHip()==0)
 		{
-			//qInfo() << "exclude DR3 " << s->getGaia();
 			continue;
 		}
 
@@ -629,11 +628,11 @@ void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const
 		// By trying, region is a SphericalPolygon. We are calling SphericalPolygon::contains(Vec3d)
 		if (region->contains(tmp) && (s->getMag() < maxMilliMag) )
 		{
+#ifndef NDEBUG
 			//qDebug() << "Region match: " <<  s->getHip() << s->getGaia()  << "(Index (Zone):" << index << ", Level="<< level << ")";
+#endif
 			result.push_back(s->createStelObject(this,z));
 		}
-		//else
-		//	qDebug() << "NO Region match: " <<  s->getHip() <<  s->getGaia() << "(Index (Zone):" << index << ", Level="<< level << ")";
 	}
 }
 
