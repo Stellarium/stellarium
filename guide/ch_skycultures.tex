@@ -451,7 +451,7 @@ Constellations are coded as array of dictionaries:
 where
 
 \begin{description}
-\item[\jtag{id}] A unique figure identifier, consisting of \texttt{CON} (for \indexterm{constellations}), skyculture id, and a short label still unique within the skyculture.
+\item[\jtag{id}] A unique figure identifier, consisting of \texttt{CON} (for \indexterm[constellation]{constellations}), skyculture id, and a short label still unique within the skyculture.
                  For IAU-based skycultures, these short labels must be the IAU standard labels. For others, you can invent your own. It is not necessary to have exactly
                  3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended:  
                  the short label is displayed when enabling abbreviated screen labels (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
@@ -460,6 +460,8 @@ where
 
 \item[\jtag{lines}] an array of arrays, each describing a polyline with star numbers. The star numbers are usually the Hipparcos (HIP) numbers. 
                     For very dim stars, the longer numbers from the Gaia DR3 catalog are acceptable, but they must be written as string.
+		    Even Deep-Sky objects \newFeature{25.2}(like a naked-eye open cluster) can be added to a constellation line when written as 
+		    string starting with \texttt{"DSO:"}, like \jtag{DSO:M7}.
 
                     To describe \indexterm[constellations!dark]{dark constellations}\newFeature{25.2} formed from dust clouds in the Milky Way or other non-stellar items, 
                     another variant can use coordinate lists and is technically an array of arrays of 2-part arrays of float numbers, 
@@ -469,6 +471,11 @@ where
                     \indexterm[constellations!single-star]{Single-star constellations}\newFeature{25.1}  or particular highlights can be described with just one star repeated in a two-element segment.
                     The respective star will be encircled with a radius of 
 \item[\jtag{single\_star\_radius}] (float, default 0.5)\newFeature{25.1}.
+\item[\jtag{hull\_extension}] (optional)\newFeature{25.2} A vector of star IDs (HIP number as integer, Gaia DR3 long integer number as string, 
+                              or a Deep-Sky object (like a naked-eye cluster) as string starting with \texttt{"DSO:"}, like \jtag{DSO:M44} that are seen as part of the constellation.
+			      See below about \emph{convex hull}.
+\item[\jtag{hull\_radius}] (float, defaults to \jtag{single\_star\_radius} or (if that is not defined)0.5)\newFeature{25.2}.
+
 \item[\jtag{image}] Optional, see \ref{SC:image}
 \item[\jtag{common\_name}] Dictionary of names. %Required entries: \jtag{english}. Optional: \jtag{native}
 
@@ -531,6 +538,46 @@ containing marker number and the array of coordinates (\texttt{[RA, dec]}).
 In the text editor you are using to edit \file{index.json}, 
 the arrays can be collated into the format required to code coordinate lists for dark constellations.
 
+\paragraph{Constellation area (convex hull)}
+The \indexterm[constellation!area]{constellation area}, \newFeature{25.2}or \indexterm[constellation!convex hull]{convex hull} of a constellation, 
+is an area of the sky described by a convex polygon which surrounds all stars that are part of the lines that form the constellation ``stick figure'', 
+plus those objects which are listed in \jtag{hull\_extension}. 
+While the IAU has defined 88 constellation areas in 1930, constellations of other cultures are not as clearly defined. These areas can help analyzing historical records.
+Note that a point may lie in zero, one or more than one constellation area(s) when it overlaps two or even more adjacent figures. 
+
+This functionality is an advanced topic mostly used by sky culture researchers \citep[e.g.][94-98]{Hoffmann2017a} who are also not afraid of calling scripting functions (see ch.~\ref{ch:scripting}), 
+and is therefore hidden from beginning users. To make use of it, edit your \file{config.ini} and add a key:
+\begin{configfile}
+[gui]
+skyculture_enable_hulls = true 
+\end{configfile}
+
+%% Huh? For some reasons the glitch went away just before merge! If it comes back, reactivate this.
+% Please note that there is a little glitch when drawing the polygon. At some coordinates (0/6h/12h/18h in $\alpha$, 
+% and the celestial equator cause these problems) the lines are interrupted. 
+% This is a purely optical problem. The following query functions are not impeded by this.
+
+The constellation areas of a skyculture can be queried by a scripting function:
+\begin{script}
+ConstellationMgr.outputHullAreas(<filename_start>);
+\end{script}
+The argument \texttt{<filename\_start>} is optional and defaults to \texttt{"hullAreas"}. 
+The created CSV file \file{<filename\_start>\_skycultureName.csv} in your Stellarium user data directory lists hull areas for all constellations of the current skyculture. 
+
+
+You can list stars which belong to a thusly defined constellation with a scripting function:
+\begin{script}
+ConstellationMgr.starsInHullOf("Taurus", false, 12.0, <start>);
+\end{script}
+This creates a file \file{hullStars\_Modern\_Taurus-12.00.csv} in your Stellarium user data directory which contains all stars within the convex hull of Taurus in the current (here: ``Modern'') sky culture. 
+The arguments to the function are:
+\begin{description}
+\item[constellation] string; name or abbreviation.
+\item[hipOnly] Boolean, optional, defaults to \texttt{true}; if you are only interested in brighter stars contained in the Hipparcos catalog, set it \texttt{true}. 
+\item[maxMag] float, optional, default: 25.0. Dimmest stellar magnitude to use. The default value just makes sure all stars that are contained in the catalogs are listed, 
+              the result will only have few entries dimmer than mag 18.
+\item[\texttt{<start>}] string, optional, default \texttt{hullStars}; the start of the filename can be changed here. 
+\end{description}
 
 \subsubsection{Constellation Artwork}
 \label{sec:skycultures:artwork}
