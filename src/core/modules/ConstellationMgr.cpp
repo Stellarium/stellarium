@@ -1624,10 +1624,17 @@ void ConstellationMgr::starsInHullOf(const QString &englishName, const bool hipO
 	StelUtils::getDateFromJulianDay(core->getJD(), &year, &month, &day);
 	const double yearFraction=StelUtils::yearFraction(year, month, day);
 	const QString dateString=QString::number(yearFraction, 'f', 1);
+	const QString scName=GETSTELMODULE(StelSkyCultureMgr)->getCurrentSkyCultureEnglishName();
 
-	QFile file(StelFileMgr::getUserDir() + QString("/%1_%2_%3.csv").arg(fileNamePrefix, englishName, QString::number(maxMag, 'f', 2)));
+	QString fileName=StelFileMgr::getUserDir() + QString("/%1_%2_%3-%4.csv").arg(fileNamePrefix, scName, englishName, QString::number(maxMag, 'f', 2));
+	QFile file(fileName);
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	if (file.open(QIODevice::Text | QIODevice::WriteOnly))
+#else
 	if (file.open(QIODeviceBase::Text | QIODeviceBase::WriteOnly))
+#endif
 	{
+		qInfo().nospace() << "Writing to:" << fileName;
 		file.write(QString("ID, mag, RA_J%1, DE_J%1, RA_J%1(h), DE_J%1(deg)\n").arg(dateString).toLatin1());
 
 		foreach(const auto &star, starList)
