@@ -27,11 +27,9 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "Planet.hpp"
-#include "StelUtils.hpp"
 
 #include <vector>
 #include <QDebug>
@@ -292,7 +290,12 @@ void AsterismMgr::draw(StelCore* core)
 	sPainter.setFont(asterFont);
 	drawLines(sPainter, core);
 	drawRayHelpers(sPainter, core);
-	drawNames(sPainter);
+	Vec3d vel(0.);
+	if (core->getUseAberration())
+	{
+		vel = core->getAberrationVec(core->getJDE());
+	}
+	drawNames(sPainter, vel);
 }
 
 // Draw asterisms lines
@@ -342,32 +345,28 @@ void AsterismMgr::drawRayHelpers(StelPainter& sPainter, const StelCore* core) co
 }
 
 // Draw the names of all the asterisms
-void AsterismMgr::drawNames(StelPainter& sPainter) const
+void AsterismMgr::drawNames(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
 	if (!hasAsterism)
 		return;
-
-	StelCore *core=StelApp::getInstance().getCore();
-	static StelSkyCultureMgr* scMgr= GETSTELMODULE(StelSkyCultureMgr);
-	const bool abbreviateLabel=scMgr->getFlagUseAbbreviatedNames();
-	StelObject::CulturalDisplayStyle culturalDisplayStyle=scMgr->getScreenLabelStyle();
 
 	sPainter.setBlending(true);
 	for (auto* asterism : asterisms)
 	{
 		if (!asterism->flagAsterism) continue;
-		// Check if in the field of view
-		Vec3d XYZname=asterism->XYZname;
-		if (core->getUseAberration())
-		{
-			const Vec3d vel = core->getAberrationVec(core->getJDE());
-			XYZname.normalize();
-			XYZname+=vel;
-			XYZname.normalize();
-		}
 
-		if (sPainter.getProjector()->projectCheck(XYZname, asterism->XYname))
-			asterism->drawName(sPainter, abbreviateLabel);
+		for (int i=0; i<asterism->XYZname.size(); ++i)
+		{
+			Vec3d XYZname=asterism->XYZname.at(i);
+			XYZname.normalize();
+			XYZname+=obsVelocity;
+			XYZname.normalize();
+
+			Vec3d xyName;
+			// Check if in the field of view
+			if (sPainter.getProjector()->projectCheck(XYZname, xyName))
+				asterism->drawName(xyName, sPainter);
+		}
 	}
 }
 
