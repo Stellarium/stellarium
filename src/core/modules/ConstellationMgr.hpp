@@ -313,7 +313,7 @@ public slots:
 
 	//! Create a list of entries: Constellation: Hull_area to logfile
 	//! @todo: Extend with GUI etc?
-	void dumpHullAreas() const;
+	void outputHullAreas(const QString &fileNamePrefix="hullAreas") const;
 
 	//! Create a list of stars (CSV file) within the convex hull of constellation.
 	//! This command is perfect to be used as scripting command to extract a data list.
