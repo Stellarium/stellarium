@@ -168,7 +168,7 @@ void ConstellationMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	if (getFlagCheckLoadingData())
 	{
 		int i = 1;
-		for (auto* constellation : constellations)
+		for (auto* constellation : qAsConst(constellations))
 		{
 			qInfo() << "[Constellation] #" << i << " abbr:" << constellation->abbreviation << " name:" << constellation->getEnglishName() << " segments:" << constellation->numberOfSegments;
 			i++;
@@ -200,7 +200,9 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 		else
 		{
 			// Add constellation to selected list (do not select a star, just the constellation)
-			setSelectedConst(static_cast<Constellation *>(newSelectedConst[0].data()));
+			QList<Constellation*>cList;
+			cList.append(static_cast<Constellation *>(newSelectedConst[0].data()));
+			setSelectedConst(cList);
 		}
 	}
 	else
@@ -208,6 +210,16 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 		QList<StelObjectP> newSelectedObject;
 		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
 			newSelectedObject = omgr->getSelectedObject();
+		// TODO: Add constellation for non-IAU constellations
+		else if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::Own)
+		{
+
+		}
+		// TODO: Add constellation for non-IAU constellations
+		else if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::None)
+		{
+
+		}
 		else
 			newSelectedObject = omgr->getSelectedObject("Star");
 
@@ -232,7 +244,7 @@ void ConstellationMgr::deselectConstellations(void)
 		if (selected.size()==0)
 		{
 			// ...let's unselect all constellations for guarantee
-			for (auto* constellation : constellations)
+			for (auto& constellation : constellations)
 			{
 				constellation->setFlagLines(false);
 				constellation->setFlagLabels(false);
@@ -247,7 +259,7 @@ void ConstellationMgr::deselectConstellations(void)
 			selected.pop_back();
 
 		// Let's hide all previously selected constellations
-		for (auto* constellation : selected)
+		for (auto& constellation : selected)
 		{
 			constellation->setFlagLines(false);
 			constellation->setFlagLabels(false);
@@ -267,10 +279,11 @@ void ConstellationMgr::deselectConstellations(void)
 
 void ConstellationMgr::selectAllConstellations()
 {
-	for (auto* constellation : constellations)
-	{
-		setSelectedConst(constellation);
-	}
+	//for (auto* constellation : constellations)
+	//{
+	//	setSelectedConst(constellation);
+	//}
+	setSelectedConst(constellations);
 }
 
 void ConstellationMgr::selectConstellation(const QString &englishName)
@@ -279,16 +292,18 @@ void ConstellationMgr::selectConstellation(const QString &englishName)
 		setFlagIsolateSelected(true); // Enable isolated selection
 
 	bool found = false;
-	for (auto* constellation : constellations)
+	QList<Constellation *>cList;
+	for (auto& constellation : constellations)
 	{
 		if (constellation->getEnglishName().toLower()==englishName.toLower())
 		{
-			setSelectedConst(constellation);
+			cList.append(constellation);
+			setSelectedConst(cList);
 			found = true;
 		}
 	}
 	if (!found)
-		qDebug() << "The constellation" << englishName << "is not found";
+		qDebug() << "The constellation" << englishName << "was not found";
 }
 
 void ConstellationMgr::selectConstellationByObjectName(const QString &englishName)
@@ -297,9 +312,10 @@ void ConstellationMgr::selectConstellationByObjectName(const QString &englishNam
 		setFlagIsolateSelected(true); // Enable isolated selection
 
 	if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
-		setSelectedConst(isObjectIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data()));
+		setSelectedConst(isObjectIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data(), false));
 	else
-		setSelectedConst(isStarIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data()));
+		setSelectedConst(isObjectIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data(), true));
+		//setSelectedConst(isStarIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data()));
 }
 
 void ConstellationMgr::deselectConstellation(const QString &englishName)
@@ -308,7 +324,7 @@ void ConstellationMgr::deselectConstellation(const QString &englishName)
 		setFlagIsolateSelected(true); // Enable isolated selection
 
 	bool found = false;
-	for (auto* constellation : constellations)
+	for (auto& constellation : constellations)
 	{
 		if (constellation->getEnglishName().toLower()==englishName.toLower())
 		{
@@ -320,7 +336,7 @@ void ConstellationMgr::deselectConstellation(const QString &englishName)
 	if (selected.size()==0 && found)
 	{
 		// Let's remove the selection for all constellations if the list of selected constellations is empty
-		for (auto* constellation : constellations)
+		for (auto& constellation : constellations)
 		{
 			constellation->setFlagLines(false);
 			constellation->setFlagLabels(false);
@@ -668,19 +684,6 @@ void ConstellationMgr::drawNames(StelPainter& sPainter, const Vec3d &obsVelocity
 	}
 }
 
-Constellation *ConstellationMgr::isStarIn(const StelObject* s) const
-{
-	for (auto* constellation : constellations)
-	{
-		// Check if the star is in one of the constellations
-		if (constellation->isStarIn(s))
-		{
-			return constellation;
-		}
-	}
-	return nullptr;
-}
-
 Constellation* ConstellationMgr::findFromAbbreviation(const QString& abbreviation) const
 {
 	// search in uppercase only
@@ -700,20 +703,12 @@ Constellation* ConstellationMgr::findFromAbbreviation(const QString& abbreviatio
 	return nullptr;
 }
 
-// Can't find constellation from a position because it's not well localized
-// TODO: For modern... SCs, this can just identify IAU constellations.
-// TODO later: identify from convex hulls.
-//QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d&, double, const StelCore*) const
-//{
-//	return QList<StelObjectP>();
-//}
-
 QStringList ConstellationMgr::getConstellationsEnglishNames()
 {
 	QStringList constellationsEnglishNames;
-	for (auto* constellation : constellations)
+	for (auto* constellation : qAsConst(constellations))
 	{
-		constellationsEnglishNames << constellation->getEnglishName();
+		constellationsEnglishNames.append(constellation->getEnglishName());
 	}
 	return  constellationsEnglishNames;
 }
@@ -722,7 +717,7 @@ void ConstellationMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 
-	for (auto* constellation : constellations)
+	for (auto* constellation : qAsConst(constellations))
 	{
 		QString context = constellation->context;
 		constellation->culturalName.translatedI18n = trans.tryQtranslate(constellation->culturalName.translated, context);
@@ -760,7 +755,7 @@ void ConstellationMgr::update(double deltaTime)
 	Constellation::artIntensityFovScale = static_cast<float>(qBound(0.0,(fov - artIntensityMinimumFov) / (artIntensityMaximumFov - artIntensityMinimumFov),1.0));
 
 	const int delta = static_cast<int>(deltaTime*1000);
-	for (auto* constellation : constellations)
+	for (auto* constellation : qAsConst(constellations))
 	{
 		constellation->update(delta);
 	}
@@ -772,7 +767,7 @@ void ConstellationMgr::setArtIntensity(const float intensity)
 	{
 		artIntensity = intensity;
 
-		for (auto* constellation : constellations)
+		for (auto* constellation : qAsConst(constellations))
 		{
 			constellation->artOpacity = artIntensity;
 		}
@@ -812,7 +807,7 @@ void ConstellationMgr::setArtFadeDuration(const float duration)
 	{
 		artFadeDuration = duration;
 
-		for (auto* constellation : constellations)
+		for (auto &constellation : constellations)
 		{
 			constellation->artFader.setDuration(static_cast<int>(duration * 1000.f));
 		}
@@ -832,7 +827,7 @@ void ConstellationMgr::setBoundariesFadeDuration(const float duration)
 	{
 		boundariesFadeDuration = duration;
 
-		for (auto* constellation : constellations)
+		for (auto& constellation : constellations)
 		{
 			constellation->boundaryFader.setDuration(static_cast<int>(duration * 1000.f));
 		}
@@ -852,7 +847,7 @@ void ConstellationMgr::setHullsFadeDuration(const float duration)
 	{
 		hullsFadeDuration = duration;
 
-		for (auto* constellation : constellations)
+		for (auto& constellation : constellations)
 		{
 			constellation->hullFader.setDuration(static_cast<int>(duration * 1000.f));
 		}
@@ -872,7 +867,7 @@ void ConstellationMgr::setLinesFadeDuration(const float duration)
 	{
 		linesFadeDuration = duration;
 
-		for (auto* constellation : constellations)
+		for (auto& constellation : constellations)
 		{
 			constellation->lineFader.setDuration(static_cast<int>(duration * 1000.f));
 		}
@@ -892,7 +887,7 @@ void ConstellationMgr::setLabelsFadeDuration(const float duration)
 	{
 		namesFadeDuration = duration;
 
-		for (auto* constellation : constellations)
+		for (auto& constellation : constellations)
 		{
 			constellation->nameFader.setDuration(static_cast<int>(duration * 1000.f));
 		}
@@ -913,14 +908,14 @@ void ConstellationMgr::setFlagLines(const bool displayed)
 		linesDisplayed = displayed;
 		if (!selected.empty() && isolateSelected)
 		{
-			for (auto* constellation : selected)
+			for (auto& constellation : selected)
 			{
 				constellation->setFlagLines(linesDisplayed);
 			}
 		}
 		else
 		{
-			for (auto* constellation : constellations)
+			for (auto& constellation : constellations)
 			{
 				constellation->setFlagLines(linesDisplayed);
 			}
@@ -942,14 +937,14 @@ void ConstellationMgr::setFlagBoundaries(const bool displayed)
 		boundariesDisplayed = displayed;
 		if (!selected.empty() && isolateSelected)
 		{
-			for (auto* constellation : selected)
+			for (auto& constellation : selected)
 			{
 				constellation->setFlagBoundaries(boundariesDisplayed);
 			}
 		}
 		else
 		{
-			for (auto* constellation : constellations)
+			for (auto& constellation : constellations)
 			{
 				constellation->setFlagBoundaries(boundariesDisplayed);
 			}
@@ -971,14 +966,14 @@ void ConstellationMgr::setFlagHulls(const bool displayed)
 		hullsDisplayed = displayed;
 		if (!selected.empty() && isolateSelected)
 		{
-			for (auto* constellation : selected)
+			for (auto& constellation : selected)
 			{
 				constellation->setFlagHull(hullsDisplayed);
 			}
 		}
 		else
 		{
-			for (auto* constellation : constellations)
+			for (auto& constellation : constellations)
 			{
 				constellation->setFlagHull(hullsDisplayed);
 			}
@@ -1000,14 +995,14 @@ void ConstellationMgr::setFlagArt(const bool displayed)
 		artDisplayed = displayed;
 		if (!selected.empty() && isolateSelected)
 		{
-			for (auto* constellation : selected)
+			for (auto& constellation : selected)
 			{
 				constellation->setFlagArt(artDisplayed);
 			}
 		}
 		else
 		{
-			for (auto* constellation : constellations)
+			for (auto& constellation : constellations)
 			{
 				constellation->setFlagArt(artDisplayed);
 			}
@@ -1029,12 +1024,12 @@ void ConstellationMgr::setFlagLabels(const bool displayed)
 		namesDisplayed = displayed;
 		if (!selected.empty() && isolateSelected)
 		{
-			for (auto* constellation : selected)
+			for (auto& constellation : selected)
 				constellation->setFlagLabels(namesDisplayed);
 		}
 		else
 		{
-			for (auto* constellation : constellations)
+			for (auto& constellation : constellations)
 				constellation->setFlagLabels(namesDisplayed);
 		}
 		StelApp::immediateSave("viewing/flag_constellation_name", displayed);
@@ -1056,7 +1051,7 @@ void ConstellationMgr::setFlagIsolateSelected(const bool isolate)
 		// when turning off isolated selection mode, clear existing isolated selections.
 		if (!isolateSelected)
 		{
-			for (auto* constellation : constellations)
+			for (auto& constellation : constellations)
 			{
 				constellation->setFlagLines(getFlagLines());
 				constellation->setFlagLabels(getFlagLabels());
@@ -1087,15 +1082,21 @@ bool ConstellationMgr::getFlagConstellationPick(void) const
 	return flagConstellationPick;
 }
 
-StelObject* ConstellationMgr::getSelected(void) const
+QList<Constellation *> ConstellationMgr::getSelected(void) const
 {
-	return *selected.begin();  // TODO return all or just remove this method
+//	return *selected.begin();  // TODO return all or just remove this method // Finally fix this TODO from 2006...
+	return selected;
 }
 
 void ConstellationMgr::setSelected(const QString& abbreviation)
 {
 	Constellation * c = findFromAbbreviation(abbreviation);
-	if(c != nullptr) setSelectedConst(c);
+	if(c != nullptr)
+	{
+		QList<Constellation *>cList;
+		cList.append(c);
+		setSelectedConst(cList);
+	}
 }
 
 StelObjectP ConstellationMgr::setSelectedStar(const QString& abbreviation)
@@ -1103,34 +1104,36 @@ StelObjectP ConstellationMgr::setSelectedStar(const QString& abbreviation)
 	Constellation * c = findFromAbbreviation(abbreviation);
 	if(c != nullptr)
 	{
-		setSelectedConst(c);
+		QList<Constellation *>cList;
+		cList.append(c);
+		setSelectedConst(cList);
 		return c->getBrightestStarInConstellation();
 	}
 	return nullptr;
 }
 
-void ConstellationMgr::setSelectedConst(Constellation * c)
+void ConstellationMgr::setSelectedConst(QList<Constellation *> cList)
 {
 	// update states for other constellations to fade them out
-	if (c != nullptr)
+	if (cList.length()>0)
 	{
-		selected.push_back(c);
+		selected.append(cList);  //selected.push_back(c);
 
 		if (isolateSelected)
 		{
 			if (!getFlagConstellationPick())
 			{
 				// Propagate current settings to newly selected constellation
-				c->setFlagLines(getFlagLines());
-				c->setFlagLabels(getFlagLabels());
-				c->setFlagArt(getFlagArt());
-				c->setFlagBoundaries(getFlagBoundaries());
-				c->setFlagHull(getFlagHulls());
+				cList.at(0)->setFlagLines(getFlagLines());
+				cList.at(0)->setFlagLabels(getFlagLabels());
+				cList.at(0)->setFlagArt(getFlagArt());
+				cList.at(0)->setFlagBoundaries(getFlagBoundaries());
+				cList.at(0)->setFlagHull(getFlagHulls());
 
-				for (auto* constellation : constellations)
+				for (auto& constellation : constellations)
 				{
 					bool match = false;
-					for (auto* selected_constellation : selected)
+					for (auto& selected_constellation : selected)
 					{
 						if (constellation == selected_constellation)
 						{
@@ -1152,7 +1155,7 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 			}
 			else
 			{
-				for (auto* constellation : constellations)
+				for (auto& constellation : constellations)
 				{
 					constellation->setFlagLines(false);
 					constellation->setFlagLabels(false);
@@ -1162,11 +1165,11 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 				}
 
 				// Propagate current settings to newly selected constellation
-				c->setFlagLines(getFlagLines());
-				c->setFlagLabels(getFlagLabels());
-				c->setFlagArt(getFlagArt());
-				c->setFlagBoundaries(getFlagBoundaries());
-				c->setFlagHull(getFlagHulls());
+				cList.at(0)->setFlagLines(getFlagLines());
+				cList.at(0)->setFlagLabels(getFlagLabels());
+				cList.at(0)->setFlagArt(getFlagArt());
+				cList.at(0)->setFlagBoundaries(getFlagBoundaries());
+				cList.at(0)->setFlagHull(getFlagHulls());
 			}
 
 			Constellation::singleSelected = true;  // For boundaries
@@ -1179,7 +1182,7 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 		if (selected.empty()) return;
 
 		// Otherwise apply standard flags to all constellations
-		for (auto* constellation : constellations)
+		for (auto& constellation : constellations)
 		{
 			constellation->setFlagLines(getFlagLines());
 			constellation->setFlagLabels(getFlagLabels());
@@ -1214,7 +1217,7 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 		if (selected.empty())
 		{
 			// Otherwise apply standard flags to all constellations
-			for (auto* constellation : constellations)
+			for (auto& constellation : constellations)
 			{
 				constellation->setFlagLines(getFlagLines());
 				constellation->setFlagLabels(getFlagLabels());
@@ -1525,22 +1528,28 @@ QString ConstellationMgr::getStelObjectType() const
 	return Constellation::CONSTELLATION_TYPE;
 }
 
-void ConstellationMgr::setSelected(const StelObject *s)
-{
-	if (!s)
-		setSelectedConst(nullptr);
-	else
-	{
-		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
-			setSelectedConst(isObjectIn(s));
-		else
-			setSelectedConst(isStarIn(s));
-	}
-}
-
+// Can't find constellation from a position because it's not well localized
+// TODO: For modern... SCs, this can just identify IAU constellations.
+// TODO later: identify from convex hulls.
 QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitFov, const StelCore* core) const
 {
 	QList<StelObjectP> result;
+
+	if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
+	{
+		QString cName=core->getIAUConstellation(v);
+		for (auto* constellation : qAsConst(constellations))
+		{
+			if (constellation->getShortName()==cName)
+			{
+				result.append(constellation);
+			}
+		}
+		if (result.isEmpty())
+			qDebug() << "ConstellationMgr::searchAround(): The IAU constellation" << cName << "was not found";
+	}
+	else
+	{
 	for (auto* constellation : constellations)
 	{
 		if (constellation->convexHull && constellation->convexHull->contains(v))
@@ -1550,20 +1559,65 @@ QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitFo
 		}
 	}
 	qDebug() << "Point within hulls of " << result.count() << "constellations";
+	}
 	return result;
 }
 
-Constellation* ConstellationMgr::isObjectIn(const StelObject *s) const
+void ConstellationMgr::setSelected(const StelObject *s)
+{
+	if (!s)
+	{
+		setSelectedConst(QList<Constellation*>()); // actually deselect...
+	}
+	else
+	{
+		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
+			setSelectedConst(isObjectIn(s, false));
+		else
+			setSelectedConst(isObjectIn(s, true));
+			//setSelectedConst(isStarIn(s));
+	}
+}
+
+// CHANGED: Return a QList<Constellation*>, will allow result from overlapping hulls
+QList<Constellation*> ConstellationMgr::isObjectIn(const StelObject *s, bool useHull) const
 {
 	StelCore *core = StelApp::getInstance().getCore();
-	QString IAUConst = core->getIAUConstellation(s->getEquinoxEquatorialPos(core));
+	QList<Constellation*> result;
+	if (useHull)
+	{
+		for (auto* constellation : constellations)
+		{
+			// Check if the object is in the constellation
+			if (constellation->convexHull->contains(s->getEquinoxEquatorialPos(core)))
+				result.append(constellation);
+		}
+	}
+	else
+	{
+		QString IAUConstUpper = core->getIAUConstellation(s->getEquinoxEquatorialPos(core)).toUpper();
+		for (auto* constellation : constellations)
+		{
+			// Check if the object is in the constellation
+			if (constellation->getShortName().toUpper() == IAUConstUpper)
+				result.append(constellation);
+		}
+	}
+	return result;
+}
+
+QList<Constellation*> ConstellationMgr::isStarIn(const StelObject* s) const
+{
+	QList<Constellation*> result;
 	for (auto* constellation : constellations)
 	{
-		// Check if the object is in the constellation
-		if (constellation->getShortName().toUpper() == IAUConst.toUpper())
-			return constellation;
+		// Check if the star is in one of the constellations
+		if (constellation->isStarIn(s))
+		{
+			result.append(constellation);
+		}
 	}
-	return nullptr;
+	return result;
 }
 
 void ConstellationMgr::outputHullAreas(const QString &fileNamePrefix) const
