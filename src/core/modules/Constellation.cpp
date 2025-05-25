@@ -581,7 +581,7 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 	if (flags&ObjectType)
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
 
-	getSolarLunarInfoString(core, flags);
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 
 	return str;
@@ -602,6 +602,15 @@ StelObjectP Constellation::getBrightestStarInConstellation(void) const
 		if (Mag < maxMag)
 		{
 			brightest = constellation[i];
+			maxMag = Mag;
+		}
+	}
+	for (int i=0; i<hullExtension.size();++i)
+	{
+		const float Mag = hullExtension[i]->getVMagnitude(Q_NULLPTR);
+		if (Mag < maxMag)
+		{
+			brightest = hullExtension[i];
 			maxMag = Mag;
 		}
 	}
