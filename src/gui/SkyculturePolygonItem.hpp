@@ -14,6 +14,7 @@ public:
 	const QString& getSkycultureId() const {return skycultureId;}
 	int getStartTime() const {return startTime;}
 	int getEndTime() const {return endTime;}
+	bool existsAtPointInTime(int year) const;
 
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 

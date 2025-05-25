@@ -20,6 +20,11 @@ SkyculturePolygonItem::SkyculturePolygonItem(QString scId, int startTime, int en
 	setBrush(QBrush(QColor(255, 0, 0, 100)));
 }
 
+bool SkyculturePolygonItem::existsAtPointInTime(int year) const
+{
+	return startTime <= year and endTime >= year;
+}
+
 void SkyculturePolygonItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
 	isHovered = true;

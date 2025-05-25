@@ -186,8 +186,9 @@ void ViewDialog::createDialogContent()
 
 	// TODOs after properties merge:
 	// Jupiter's GRS should become property, and recheck the other "from trunk" entries.
-	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)),&StelApp::getInstance().getSkyCultureMgr(),SLOT(setCurrentSkyCultureNameI18(QString)));
-	connect(ui->skyCultureMapGraphicsView, SIGNAL(cultureSelected(QString)),&StelApp::getInstance().getSkyCultureMgr(),SLOT(setCurrentSkyCultureNameI18(QString)));
+	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), ui->skyCultureMapGraphicsView, SLOT(selectCulture(QString)));
+	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureNameI18(QString)));
+	connect(ui->skyCultureMapGraphicsView, SIGNAL(cultureSelected(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureNameI18(QString)));
 	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &ViewDialog::skyCultureChanged);
 
 	// Connect and initialize checkboxes and other widgets
@@ -555,6 +556,7 @@ void ViewDialog::createDialogContent()
 
 	connect(ui->skyCultureTimeSlider, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTime(int)));
 	connect(ui->skyCultureTimeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTime(int)));
+	connect(ui->skyCultureMapGraphicsView, SIGNAL(timeChanged(int)), this, SLOT(updateSkyCultureTime(int)));
 
 	// allow to display short names and inhibit translation.
 	connectIntProperty(ui->skyCultureNamesStyleComboBox,		"ConstellationMgr.constellationDisplayStyle");
@@ -1083,6 +1085,13 @@ void ViewDialog::populateLists()
 		l->addItem(s);
 		l->findItems(s, Qt::MatchExactly).at(0)->setToolTip(s);
 	}
+	QListWidgetItem *test_item = new QListWidgetItem();
+	test_item->setText("Gruppierungs-Breaker");
+	test_item->setFlags(Qt::NoItemFlags);
+	test_item->setForeground(QBrush(Qt::white));
+	test_item->setBackground(QBrush(Qt::black));
+	l->addItem(test_item);
+	//l->insertItem(0, &test_item);
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	updateSkyCultureText();
@@ -1161,7 +1170,11 @@ void ViewDialog::populateLists()
 void ViewDialog::skyCultureChanged()
 {
 	QListWidget* l = ui->culturesListWidget;
+
+	l->blockSignals(true); // block signals needed so the currentTextChanged signals doesnt loop with the selectCulture slot
 	l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
+	l->blockSignals(false);
+
 	updateSkyCultureText();
 	updateDefaultSkyCulture();
 }

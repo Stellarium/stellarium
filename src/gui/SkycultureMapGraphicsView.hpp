@@ -16,12 +16,13 @@ public:
 
 
 public slots:
-	//void selectCulture(const QString &skycultureId);
+	void selectCulture(const QString &skycultureId);
 	void updateTime(int year);
 
 
 signals:
 	void cultureSelected(const QString &skycultureId);
+	void timeChanged(int year);
 
 protected:
 	void wheelEvent(QWheelEvent *event) override;

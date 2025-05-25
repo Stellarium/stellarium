@@ -81,15 +81,19 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	scene->addRect(0.0, 0.0, 500.0, 500.0, QPen(Qt::yellow), QBrush(Qt::blue));
 	scene->addRect(250.0, 250.0, 500.0, 500.0, QPen(Qt::yellow), QBrush(QColor(255, 0, 0, 100)));
 
-	SkyculturePolygonItem *poly_test = new SkyculturePolygonItem("Lokono", 550, 2500);
-	poly_test->setPolygon(QPolygonF(QList<QPoint>{QPoint(800.0, 800.0), QPoint(840.0, 800.0), QPoint(880.0, 840.0), QPoint(880.0, 880.0),
+	SkyculturePolygonItem *lokono_early = new SkyculturePolygonItem("Lokono", 550, 1560);
+	lokono_early->setPolygon(QPolygonF(QList<QPoint>{QPoint(800.0, 800.0), QPoint(840.0, 800.0), QPoint(880.0, 840.0), QPoint(880.0, 880.0),
 												  QPoint(840.0, 920.0), QPoint(800.0, 920.0), QPoint(760.0, 880.0), QPoint(760.0, 840.0)}));
 
-	SkyculturePolygonItem *poly_test_2 = new SkyculturePolygonItem("Aztekisch", 1000, 1200);
+	SkyculturePolygonItem *lokono_late = new SkyculturePolygonItem("Lokono", 1561, 2014);
+	lokono_late->setPolygon(QPolygonF(QList<QPoint>{QPoint(900.0, 500.0), QPoint(940.0, 500.0), QPoint(980.0, 540.0), QPoint(980.0, 580.0),
+													 QPoint(940.0, 620.0), QPoint(900.0, 620.0), QPoint(860.0, 580.0), QPoint(860.0, 540.0)}));
+
+	SkyculturePolygonItem *aztec = new SkyculturePolygonItem("Aztekisch", 1000, 1200);
 
 	// umrechnung lon in x:
 	//lon + 180 / 360 = faktor (z.B. 0 = 0.5)  -->  width of map (boundingRect) * faktor
-	//test_width = poly_test->boundingRect().width();
+	//test_width = lokono_early->boundingRect().width();
 
 	//madagaskar(lat lon): unten -25.6246, 45.1646 | -24.9961, 47.1033 | -18.1623, 49.4327 | -17.6631, 49.5309 | -17.3732, 49.4139
 	// QList<QPointF> irl_coords{QPointF(45.1646, -25.6246), QPointF(47.1033, -24.9961) , QPointF(49.4327, -18.1623) , QPointF(49.5309, -17.6631) , QPointF(49.4139, -17.3732)};
@@ -115,8 +119,11 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	// scene->addLine(0, 0, 0, heighte, QPen(Qt::red, 20));
 	// scene->addLine(mitte, 0, mitte, heighte, QPen(Qt::red, 20));
 
-	scene->addItem(poly_test);
-	scene->addItem(poly_test_2);
+	scene->addItem(lokono_early);
+	scene->addItem(lokono_late);
+	scene->addItem(aztec);
+
+	updateTime(0);
 }
 
 void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *event)
@@ -213,7 +220,9 @@ void SkycultureMapGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 
 void SkycultureMapGraphicsView::scaleView(double factor)
 {
+	// calculate requested zoom before executing the zoom operation to limit the min / max zoom level
 	const double scaling = transform().scale(factor, factor).mapRect(QRectF(0, 0, 1, 1)).width();
+
 	if (scaling < 0.2 || scaling > 40.0) // min / max zoom level
 		return;
 
@@ -248,14 +257,58 @@ QList<QPointF> SkycultureMapGraphicsView::convertIrlToView(const QList<QPointF> 
 	return view_coords;
 }
 
-// void selectCulture(const QString &skycultureId)
-// {
-//    // determine the right culture polygon from its name
-//    qInfo() << "tets";
-//    // start zoom (async?) to polygon and set TimeSlider to correct time (startTime of selected polygon?)
+void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId)
+{
+	qInfo() << "beginning of selectCulture!";
+	// variable to the best fitting polygon (either one that exists at the current year or the one with the earliest startTime)
+	SkyculturePolygonItem *skyCulturePolygon = nullptr;
 
-//    // select item
-// }
+	// determine the right culture polygon from its name and time
+	for(auto *item : scene()->items())
+	{
+		// cast QGraphicsItem to SkyculturePolygonItem --> if the item is not a SkyculturePolygonItem: skip it to prevent errors
+		SkyculturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyculturePolygonItem *>(item);
+		if(!scPolyItem)
+		{
+			continue;
+		}
+		if(skycultureId == scPolyItem->getSkycultureId())
+		{
+			// if there is an polygon in the current time --> safe it and continue
+			if(scPolyItem->existsAtPointInTime(currentYear))
+			{
+				skyCulturePolygon = scPolyItem;
+
+				break;
+			}
+			// otherwise safe the polygon with the earliest startTime
+			else
+			{
+				if(skyCulturePolygon != nullptr)
+				{
+					if(skyCulturePolygon->getStartTime() < scPolyItem->getStartTime())
+					{
+						continue;
+					}
+				}
+				skyCulturePolygon = scPolyItem;
+			}
+		}
+	}
+
+	// if needed change the current year and update the polygon visibility
+	if(!skyCulturePolygon->existsAtPointInTime(currentYear))
+	{
+		// signal connects to updateSkyCultureTime in ViewDialog which invokes updateTime (in this class)
+		emit(timeChanged(skyCulturePolygon->getStartTime()));
+	}
+
+	// select the new culture
+	scene()->clearSelection();
+	skyCulturePolygon->setSelected(true);
+
+	// start zoom (async?) to polygon and set TimeSlider to correct time (startTime of selected polygon?)
+}
 
 void SkycultureMapGraphicsView::updateTime(int year)
 {
@@ -270,12 +323,12 @@ void SkycultureMapGraphicsView::updateCultureVisibility()
 		// cast generic QGraphicsItem to subclass SkyculturePolygonItem
 		SkyculturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyculturePolygonItem *>(item);
 
-		// if cast was unsuccessful (item is not an SkyculturePolygonItem) --> go for the next item
+		// if cast was unsuccessful (item is not an SkyculturePolygonItem) --> look at the next item
 		if(!scPolyItem)
 			continue;
 
 		// if the current year is between the start and end time of the polygon --> show (otherwise hide the item)
-		if(currentYear >= scPolyItem->getStartTime() and currentYear <= scPolyItem->getEndTime())
+		if(scPolyItem->existsAtPointInTime(currentYear))
 		{
 			scPolyItem->setVisible(true);
 		}
