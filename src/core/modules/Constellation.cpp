@@ -310,7 +310,7 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 	}
 	double hullRadius=data["hull_radius"].toDouble(data["single_star_radius"].toDouble(0.5));
 
-	convexHull=StelSkyCultureMgr::makeConvexHull(constellation, hullExtension, std::vector<Vec3d>(), XYZname.constFirst(), hullRadius);
+	convexHull=StelSkyCultureMgr::makeConvexHull(constellation, hullExtension, dark_constellation, XYZname.constFirst(), hullRadius);
 
 	beginSeason = 1;
 	endSeason = 12;
@@ -539,6 +539,11 @@ void Constellation::drawHullOptim(StelPainter& sPainter, const Vec3d& obsVelocit
 	//	}
 	//	sPainter.drawPath(contour, colors);
 	//}
+
+	//// MORE DEBUG: Paint hulls' enlargedHull. HMM, this is just a circle (SphericalCap) surrounding the hull polygon.
+	//SphericalRegionP enlargedHull=convexHull->getEnlarged(1.*M_PI_180);
+	//sPainter.drawSphericalRegion(enlargedHull.data(), StelPainter::SphericalPolygonDrawModeBoundary);
+
 }
 
 

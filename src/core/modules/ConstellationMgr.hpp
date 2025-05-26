@@ -420,7 +420,7 @@ private:
 
 	//! Return list of constellations the star is member of.
 	//! In case of IAU constellations, the list is guaranteed to be of length 1.
-	QList<Constellation*> isStarIn(const StelObject *s) const;
+	//QList<Constellation*> isStarIn(const StelObject *s) const;
 	//! Return list of constellations the object is member of.
 	//! In case of IAU constellations, the list is guaranteed to be of length 1.
 	//! @param useHull Prefer to use constellation hull, not IAU borders

@@ -188,6 +188,12 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 		// setSelected(nullptr);
 		return;
 	}
+	else
+	{
+		qDebug() << "ConstellationMgr::selectedObjectChange(): selected objects:";
+		foreach (StelObjectP obj, newSelected)
+			qDebug() << "   " << obj->getID();
+	}
 
 	const QList<StelObjectP> newSelectedConst = omgr->getSelectedObject("Constellation");
 	if (!newSelectedConst.empty())
@@ -208,20 +214,13 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 	else
 	{
 		QList<StelObjectP> newSelectedObject;
-		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
+//		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
 			newSelectedObject = omgr->getSelectedObject();
-		// TODO: Add constellation for non-IAU constellations
-		else if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::Own)
-		{
-
-		}
-		// TODO: Add constellation for non-IAU constellations
-		else if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::None)
-		{
-
-		}
-		else
-			newSelectedObject = omgr->getSelectedObject("Star");
+//		else
+//		{
+//			// The old way: select constellation only if selected object (which had to be a star only) was part of the constellation lines.
+//			newSelectedObject = omgr->getSelectedObject("Star");
+//		}
 
 		if (!newSelectedObject.empty())
 		{
@@ -1580,6 +1579,7 @@ void ConstellationMgr::setSelected(const StelObject *s)
 }
 
 // CHANGED: Return a QList<Constellation*>, will allow result from overlapping hulls
+// TODO: A problem persists in selecting a star defining the hull which is then declared not to be inside! Maybe check intersecting with a tiny spherical cap centered on the object?
 QList<Constellation*> ConstellationMgr::isObjectIn(const StelObject *s, bool useHull) const
 {
 	StelCore *core = StelApp::getInstance().getCore();
@@ -1589,7 +1589,8 @@ QList<Constellation*> ConstellationMgr::isObjectIn(const StelObject *s, bool use
 		for (auto* constellation : constellations)
 		{
 			// Check if the object is in the constellation
-			if (constellation->convexHull->contains(s->getEquinoxEquatorialPos(core)))
+//			if (constellation->convexHull->contains(s->getEquinoxEquatorialPos(core)))
+			if (constellation->convexHull->contains(s->getJ2000EquatorialPos(core)))
 				result.append(constellation);
 		}
 	}
@@ -1606,19 +1607,19 @@ QList<Constellation*> ConstellationMgr::isObjectIn(const StelObject *s, bool use
 	return result;
 }
 
-QList<Constellation*> ConstellationMgr::isStarIn(const StelObject* s) const
-{
-	QList<Constellation*> result;
-	for (auto* constellation : constellations)
-	{
-		// Check if the star is in one of the constellations
-		if (constellation->isStarIn(s))
-		{
-			result.append(constellation);
-		}
-	}
-	return result;
-}
+//QList<Constellation*> ConstellationMgr::isStarIn(const StelObject* s) const
+//{
+//	QList<Constellation*> result;
+//	for (auto* constellation : constellations)
+//	{
+//		// Check if the star is in one of the constellations
+//		if (constellation->isStarIn(s))
+//		{
+//			result.append(constellation);
+//		}
+//	}
+//	return result;
+//}
 
 void ConstellationMgr::outputHullAreas(const QString &fileNamePrefix) const
 {

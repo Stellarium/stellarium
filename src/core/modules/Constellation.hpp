@@ -78,7 +78,7 @@ private:
 
 	//! Specialized implementation of the getRegion method.
 	//! Return the convex hull of the object.
-	SphericalRegionP getRegion() const override {return SphericalRegionP(convexHull);}
+	SphericalRegionP getRegion() const override {return convexHull;}
 
 	//! @param data a JSON formatted constellation record from index.json
 	//! @param starMgr a pointer to the StarManager object.
