@@ -23,6 +23,7 @@
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelApp.hpp"
+#include "HullObject.hpp"
 
 #include <md4c-html.h>
 
@@ -1049,6 +1050,27 @@ SphericalRegionP StelSkyCultureMgr::makeConvexHull(const std::vector<StelObjectP
 
 	QList<hullEntry> hullList;
 	// Perspective (gnomonic) projection from Snyder 1987, Map Projections: A Working Manual (USGS).
+	// we must use an almost-dummy object type with unique name.
+	int hullInt=0;
+	foreach(auto &v3d, darkLines)
+	{
+		hullEntry entry;
+		entry.obj = StelObjectP(new HullObject("hullNode"+QString::number(hullInt), v3d));
+		double ra, de;
+		StelUtils::rectToSphe(&ra, &de, v3d);
+		const double cosC=sin(deC)*sin(de) + cos(deC)*cos(de)*cos(ra-raC);
+		if (cosC<=0.) // distance 90° or more from projection center? Discard!
+		{
+			qWarning() << "Cannot include dark constellation vertex" << v3d <<  "in convex hull: too far from projection center.";
+			continue;
+		}
+		const double kP=1./cosC;
+		entry.x = -kP*cos(de)*sin(ra-raC); // x must be negative here.
+		entry.y =  kP*(cos(deC)*sin(de)-sin(deC)*cos(de)*cos(ra-raC));
+		hullList.append(entry);
+		++hullInt;
+		//qDebug().noquote().nospace() << "[ " << entry.x << " " << entry.y << " " << ra*M_180_PI/15 << " " << de*M_180_PI << " (" << entry.obj->getID() << ") ]"; // allows Postscript graphics, looks OK.
+	}
 	foreach(auto &obj, uniqueObjectList)
 	{
 		hullEntry entry;
