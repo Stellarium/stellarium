@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef HULLOBJECT_HPP
-#define HULLOBJECT_HPP
+#ifndef COORDOBJECT_HPP
+#define COORDOBJECT_HPP
 
 //#include <QVariant>
 #include <QString>
@@ -30,45 +30,49 @@
 #include "VecMath.hpp"
 
 
-class StelPainter;
-
-//! @class HullObject
+//! @class CoordObject
 //!
-//! The HullObject is used for tracking otherwise object-less vertices of dark constellations.
-class HullObject : public StelObject
+//! The CoordObject is used for tracking otherwise object-less vertices of dark constellations.
+//! Coordinates are in J2000 frame only, but may undergo aberration.
+class CoordObject : public StelObject
 {
-//	friend class CustomObjectMgr;
 public:
-	static const QString HULLOBJECT_TYPE;
+	static const QString COORDOBJECT_TYPE;
 
-	HullObject(const QString& name, const Vec3d& coordJ2000);
-	~HullObject() override {};
+	CoordObject(const QString& name, const Vec3d& coordJ2000);
+	~CoordObject() override {};
 
 	//! Get the type of object
 	QString getType(void) const override
 	{
-		return HULLOBJECT_TYPE;
+		return COORDOBJECT_TYPE;
 	}
 
 	//! Get the type of object
 	QString getObjectType(void) const override
 	{
-		return N_("hull node object");
+		return N_("CoordObject");
 	}
 	QString getObjectTypeI18n(void) const override
 	{
 		return q_(getObjectType());
 	}
 
+	//! @return ID (name).
 	QString getID(void) const override
 	{
 		return name;
 	}
 
+	//! Get the J2000 coordinates.
+	//! @param core is ignored and may be nullptr.
 	Vec3d getJ2000EquatorialPos(const StelCore* core) const override;
-	//! Get the localized name of hull object
-	QString getNameI18n(void) const override;
-	//! Get the english name of hull object
+	//! Get the localized name of coord object. It is never shown, therefore just the name.
+	QString getNameI18n(void) const override
+	{
+		return name;
+	}
+	//! Get the english name of coord object, equals getID().
 	QString getEnglishName(void) const override
 	{
 		return name;
@@ -76,15 +80,14 @@ public:
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override {return QString();}
 
 private:
-	Vec3d XYZ;                         // holds J2000 position
-	QString name;
+	Vec3d XYZ;    //!< J2000 position, normalized
+	QString name; //!< This should be unique for debugging purposes, but is not guaranteed nor required.
 };
 
-//! @typedef HullObjectP
+//! @typedef CoordObjectP
 //! Intrusive pointer used to manage StelObject with smart pointers
-typedef QSharedPointerNoDelete<HullObject> HullObjectP;
+typedef QSharedPointer<CoordObject> CoordObjectP;
 
-Q_DECLARE_METATYPE(HullObjectP)
+Q_DECLARE_METATYPE(CoordObjectP)
 
-
-#endif // HULLOBJECT_HPP
+#endif // COORDOBJECT_HPP

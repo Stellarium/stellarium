@@ -168,7 +168,7 @@ void ConstellationMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	if (getFlagCheckLoadingData())
 	{
 		int i = 1;
-		for (auto* constellation : qAsConst(constellations))
+		for (auto* constellation : std::as_const(constellations))
 		{
 			qInfo() << "[Constellation] #" << i << " abbr:" << constellation->abbreviation << " name:" << constellation->getEnglishName() << " segments:" << constellation->numberOfSegments;
 			i++;
@@ -608,6 +608,7 @@ void ConstellationMgr::loadLinesNamesAndArt(const StelSkyCulture &culture)
 	setFlagLabels(namesDisplayed);
 	setFlagBoundaries(boundariesDisplayed);
 	setFlagHulls(hullsDisplayed);
+	lastHullJDE=StelApp::getInstance().getCore()->getJDE();
 }
 
 void ConstellationMgr::draw(StelCore* core)
@@ -705,7 +706,7 @@ Constellation* ConstellationMgr::findFromAbbreviation(const QString& abbreviatio
 QStringList ConstellationMgr::getConstellationsEnglishNames()
 {
 	QStringList constellationsEnglishNames;
-	for (auto* constellation : qAsConst(constellations))
+	for (auto* constellation : std::as_const(constellations))
 	{
 		constellationsEnglishNames.append(constellation->getEnglishName());
 	}
@@ -716,7 +717,7 @@ void ConstellationMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 
-	for (auto* constellation : qAsConst(constellations))
+	for (auto* constellation : std::as_const(constellations))
 	{
 		QString context = constellation->context;
 		constellation->culturalName.translatedI18n = trans.tryQtranslate(constellation->culturalName.translated, context);
@@ -750,11 +751,19 @@ void ConstellationMgr::updateI18n()
 void ConstellationMgr::update(double deltaTime)
 {
 	//calculate FOV fade value, linear fade between artIntensityMaximumFov and artIntensityMinimumFov
-	double fov = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
+	static StelCore *core = StelApp::getInstance().getCore();
+	double fov = core->getMovementMgr()->getCurrentFov();
 	Constellation::artIntensityFovScale = static_cast<float>(qBound(0.0,(fov - artIntensityMinimumFov) / (artIntensityMaximumFov - artIntensityMinimumFov),1.0));
 
+	const double jde=core->getJDE();
+	if (fabs(jde-lastHullJDE)>365.) // run once a year
+	{
+		recreateHulls();
+		lastHullJDE=jde;
+	}
+
 	const int delta = static_cast<int>(deltaTime*1000);
-	for (auto* constellation : qAsConst(constellations))
+	for (auto* constellation : std::as_const(constellations))
 	{
 		constellation->update(delta);
 	}
@@ -766,7 +775,7 @@ void ConstellationMgr::setArtIntensity(const float intensity)
 	{
 		artIntensity = intensity;
 
-		for (auto* constellation : qAsConst(constellations))
+		for (auto* constellation : std::as_const(constellations))
 		{
 			constellation->artOpacity = artIntensity;
 		}
@@ -1537,7 +1546,7 @@ QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitFo
 	if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
 	{
 		QString cName=core->getIAUConstellation(v);
-		for (auto* constellation : qAsConst(constellations))
+		for (auto* constellation : std::as_const(constellations))
 		{
 			if (constellation->getShortName()==cName)
 			{
@@ -1740,5 +1749,13 @@ void ConstellationMgr::starsInHullOf(const QString &englishName, const bool hipO
 						       StelUtils::radToHmsStr(ra) << ", " << StelUtils::decDegToDmsStr(dec*M_180_PI) <<
 						       QString::number(ra*M_180_PI / 15., 'f', 6) << ", " << QString::number(dec*M_180_PI, 'f', 6);
 		}
+	}
+}
+
+void ConstellationMgr::recreateHulls()
+{
+	for (auto* constellation : std::as_const(constellations))
+	{
+		constellation->makeConvexHull();
 	}
 }
