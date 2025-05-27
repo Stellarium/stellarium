@@ -16,24 +16,21 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "HullObject.hpp"
+#include "CoordObject.hpp"
 #include "StelObject.hpp"
 
-const QString HullObject::HULLOBJECT_TYPE = QStringLiteral("HullObject");
+const QString CoordObject::COORDOBJECT_TYPE = QStringLiteral("CoordObject");
 
-HullObject::HullObject(const QString& aName, const Vec3d& coordJ2000) : StelObject()
+CoordObject::CoordObject(const QString& aName, const Vec3d& coordJ2000) : StelObject()
 	, XYZ(coordJ2000)
 	, name(aName)
 {
 	XYZ.normalize();
 }
 
-QString HullObject::getNameI18n() const
+Vec3d CoordObject::getJ2000EquatorialPos(const StelCore* core) const
 {
-	return name;
-}
-
-Vec3d HullObject::getJ2000EquatorialPos(const StelCore* core) const
-{
+	Q_UNUSED(core)
+	Q_ASSERT(qFuzzyCompare(XYZ.normSquared(), 1.0));
 	return XYZ;
 }

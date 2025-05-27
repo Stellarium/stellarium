@@ -28,9 +28,6 @@
 #include <QJsonArray>
 #include "StelObject.hpp"
 #include "StelModule.hpp"
-#include "StelObjectType.hpp"
-#include "StelSphereGeometry.hpp"
-#include "VecMath.hpp"
 
 class StelTranslator;
 
@@ -272,22 +269,6 @@ public slots:
 
 	//! Returns whether current skyculture uses (incorporates) common names.
 	bool currentSkycultureUsesCommonNames() const;
-
-	//! Compute the convex hull of a constellation or asterism.
-	//! The convex hull around stars on the sphere is described as problematic.
-	//! For constellations of limited size we follow the recommendation to
-	//! - project the stars (perspectively) around the projectionCenter on a tangential plane on the unit sphere.
-	//! - apply simple Package-Wrapping from Sedgewick 1990, Algorithms in C, chapter 25.
-	//! @note Due to the projection requirement, constellations are not allowed to span more than 90° from projectionCenter. Outliers violating this rule will be silently discarded.
-	//! @param starLines the line array for a single constellation (Constellation::constellation or Asterism::asterism). Every second entry is used.
-	//! @param hullExtension a list of stars (important outliers) that extends the hull without being part of the stick figures.
-	//! @param darkOutline line array of simple Vec3d J2000 equatorial coordinates.
-	//! @param projectionCenter (normalized Vec3d) as computed from these stars when finding the label position (XYZname)
-	//! @param hullRadius For constellations with only 1-2 stars, define hull as circle of this radius (degrees), or a circle of half-distance between the two plus this value (degrees), around projectionCenter.
-	//! @return SphericalRegion in equatorial J2000 coordinates.
-	//! @note the hull should be recreated occasionally as it can change by stellar proper motion.
-	//! @todo Connect some time trigger to recreate automatically, maybe once per year, decade or so.
-	static SphericalRegionP makeConvexHull(const std::vector<StelObjectP> &starLines, const std::vector<StelObjectP> &hullExtension, const std::vector<Vec3d> &darkLines, const Vec3d projectionCenter, const double hullRadius);
 
 signals:
 	//! Emitted whenever the default sky culture changed.

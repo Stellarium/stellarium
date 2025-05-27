@@ -377,6 +377,10 @@ private:
 	//! @param constellationsData The structure describing all the constellations
 	void loadLinesNamesAndArt(const StelSkyCulture& culture);
 
+	//! Recreate convex hulls. This needs to be done when stars have shifted due to proper motion.
+	//! Should be ocasionally triggered in update().
+	void recreateHulls();
+
 	//! Load the constellation boundary file.
 	//! This function deletes any currently loaded constellation boundaries
 	//! and loads a new set from the data passed as the parameter.
@@ -454,6 +458,7 @@ private:
 	int constellationLineThickness;   //!< thickness of the constellation lines
 	int boundariesThickness;          //!< thickness of the constellation boundaries
 	int hullsThickness;               //!< thickness of the constellation boundaries
+	double lastHullJDE;               //!< JDE of last hull creation. Needed to periodically recreate the constellation hulls.
 };
 
 #endif // CONSTELLATIONMGR_HPP
