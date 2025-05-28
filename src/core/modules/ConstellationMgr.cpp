@@ -1582,8 +1582,7 @@ void ConstellationMgr::setSelected(const StelObject *s)
 	}
 }
 
-// CHANGED: Return a QList<Constellation*>, will allow result from overlapping hulls
-// TODO: A problem persists in selecting a star defining the hull which is then declared not to be inside! Maybe check intersecting with a tiny spherical cap centered on the object?
+// Return a QList<Constellation*>, will allow result from overlapping hulls
 QList<Constellation*> ConstellationMgr::isObjectIn(const StelObject *s, bool useHull) const
 {
 	StelCore *core = StelApp::getInstance().getCore();
@@ -1592,10 +1591,27 @@ QList<Constellation*> ConstellationMgr::isObjectIn(const StelObject *s, bool use
 	{
 		for (auto* constellation : constellations)
 		{
-			// Check if the object is in the constellation
-//			if (constellation->convexHull->contains(s->getEquinoxEquatorialPos(core)))
 			if (constellation->convexHull->contains(s->getJ2000EquatorialPos(core)))
 				result.append(constellation);
+			else foreach(auto &obj, constellation->constellation)
+			{
+				// A problem persisted in selecting a star defining the hull which was then found just not to be contained!
+				if (obj->getID() == s->getID())
+				{
+					result.append(constellation);
+					break;
+				}
+			}
+			// finally also test the hull outliers...
+			foreach(auto &obj, constellation->hullExtension)
+			{
+				if (obj->getID() == s->getID())
+				{
+					result.append(constellation);
+					break;
+				}
+			}
+			// N.B. dark constellations: not forgotten, just not that critically defined around stars!
 		}
 	}
 	else
@@ -1610,20 +1626,6 @@ QList<Constellation*> ConstellationMgr::isObjectIn(const StelObject *s, bool use
 	}
 	return result;
 }
-
-//QList<Constellation*> ConstellationMgr::isStarIn(const StelObject* s) const
-//{
-//	QList<Constellation*> result;
-//	for (auto* constellation : constellations)
-//	{
-//		// Check if the star is in one of the constellations
-//		if (constellation->isStarIn(s))
-//		{
-//			result.append(constellation);
-//		}
-//	}
-//	return result;
-//}
 
 void ConstellationMgr::outputHullAreas(const QString &fileNamePrefix) const
 {
