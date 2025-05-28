@@ -188,12 +188,14 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 		// setSelected(nullptr);
 		return;
 	}
+#ifndef NDEBUG
 	else
 	{
 		qDebug() << "ConstellationMgr::selectedObjectChange(): selected objects:";
 		foreach (StelObjectP obj, newSelected)
 			qDebug() << "   " << obj->getID();
 	}
+#endif
 
 	const QList<StelObjectP> newSelectedConst = omgr->getSelectedObject("Constellation");
 	if (!newSelectedConst.empty())
@@ -213,15 +215,7 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 	}
 	else
 	{
-		QList<StelObjectP> newSelectedObject;
-//		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
-			newSelectedObject = omgr->getSelectedObject();
-//		else
-//		{
-//			// The old way: select constellation only if selected object (which had to be a star only) was part of the constellation lines.
-//			newSelectedObject = omgr->getSelectedObject("Star");
-//		}
-
+		QList<StelObjectP> newSelectedObject = omgr->getSelectedObject();
 		if (!newSelectedObject.empty())
 		{
 			setSelected(newSelectedObject[0].data());
@@ -278,10 +272,6 @@ void ConstellationMgr::deselectConstellations(void)
 
 void ConstellationMgr::selectAllConstellations()
 {
-	//for (auto* constellation : constellations)
-	//{
-	//	setSelectedConst(constellation);
-	//}
 	setSelectedConst(constellations);
 }
 
@@ -314,7 +304,6 @@ void ConstellationMgr::selectConstellationByObjectName(const QString &englishNam
 		setSelectedConst(isObjectIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data(), false));
 	else
 		setSelectedConst(isObjectIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data(), true));
-		//setSelectedConst(isStarIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data()));
 }
 
 void ConstellationMgr::deselectConstellation(const QString &englishName)
@@ -346,7 +335,7 @@ void ConstellationMgr::deselectConstellation(const QString &englishName)
 	}
 
 	if (!found)
-		qDebug() << "The constellation" << englishName << "is not found";
+		qDebug() << "The constellation" << englishName << "was not found";
 }
 
 void ConstellationMgr::setLinesColor(const Vec3f& color)
@@ -424,9 +413,7 @@ void ConstellationMgr::setConstellationLineThickness(const int thickness)
 {
 	if(thickness!=constellationLineThickness)
 	{
-		constellationLineThickness = thickness;
-		if (constellationLineThickness<=0) // The line can not be negative or zero thickness
-			constellationLineThickness = 1;
+		constellationLineThickness = qMax(1, thickness); // cannot be 0 or neg.
 
 		StelApp::immediateSave("viewing/constellation_line_thickness", thickness);
 		emit constellationLineThicknessChanged(thickness);
@@ -465,7 +452,7 @@ void ConstellationMgr::loadLinesNamesAndArt(const StelSkyCulture &culture)
 	{
 		Constellation*const cons = new Constellation;
 		const auto consObj = constellationData.toObject();
-		if (!cons->read(consObj, hipStarMgr)) //, preferNativeNames))
+		if (!cons->read(consObj, hipStarMgr))
 		{
 			delete cons;
 			continue;
@@ -685,19 +672,16 @@ void ConstellationMgr::drawNames(StelPainter& sPainter, const Vec3d &obsVelocity
 
 Constellation* ConstellationMgr::findFromAbbreviation(const QString& abbreviation) const
 {
-	// search in uppercase only
-	//QString tname = abbreviation.toUpper();
-
 	for (auto* constellation : constellations)
 	{
-		//if (constellation->abbreviation.toUpper() == tname)
 		if (constellation->abbreviation.compare(abbreviation, Qt::CaseInsensitive) == 0)
 		{
-			//if (constellation->abbreviation != abbreviation)
-			//	qDebug() << "ConstellationMgr::findFromAbbreviation: not a perfect match, but sufficient:" << constellation->abbreviation << "vs." << abbreviation;
+#ifndef NDEBUG
+			if (constellation->abbreviation != abbreviation)
+				qDebug() << "ConstellationMgr::findFromAbbreviation: not a perfect match, but sufficient:" << constellation->abbreviation << "vs." << abbreviation;
+#endif
 			return constellation;
 		}
-		//else qDebug() << "Comparison mismatch: " << abbreviation << "vs." << constellation->abbreviation;
 	}
 	return nullptr;
 }
@@ -1087,7 +1071,6 @@ bool ConstellationMgr::getFlagConstellationPick(void) const
 
 QList<Constellation *> ConstellationMgr::getSelected(void) const
 {
-//	return *selected.begin();  // TODO return all or just remove this method // Finally fix this TODO from 2006...
 	return selected;
 }
 
@@ -1120,7 +1103,7 @@ void ConstellationMgr::setSelectedConst(QList<Constellation *> cList)
 	// update states for other constellations to fade them out
 	if (cList.length()>0)
 	{
-		selected.append(cList);  //selected.push_back(c);
+		selected.append(cList);
 
 		if (isolateSelected)
 		{
@@ -1531,9 +1514,8 @@ QString ConstellationMgr::getStelObjectType() const
 	return Constellation::CONSTELLATION_TYPE;
 }
 
-// Can't find constellation from a position because it's not well localized
-// TODO: For modern... SCs, this can just identify IAU constellations.
-// TODO later: identify from convex hulls.
+// For modern... SCs (with IAU borders), this can just identify IAU constellations.
+// For others: identify from convex hulls.
 QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitFov, const StelCore* core) const
 {
 	QList<StelObjectP> result;
@@ -1548,8 +1530,10 @@ QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitFo
 				result.append(constellation);
 			}
 		}
+#ifndef NDEBUG
 		if (result.isEmpty())
 			qDebug() << "ConstellationMgr::searchAround(): The IAU constellation" << cName << "was not found";
+#endif
 	}
 	else
 	{
@@ -1557,11 +1541,15 @@ QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitFo
 	{
 		if (constellation->convexHull && constellation->convexHull->contains(v))
 		{
-			qDebug() << "ConstellationMgr::searchAround(): point in hull of constellation " << constellation->getID();
+#ifndef NDEBUG
+			qDebug() << "ConstellationMgr::searchAround(): point in hull of constellation" << constellation->getID();
+#endif
 			result.append(constellation);
 		}
 	}
-	qDebug() << "Point within hulls of " << result.count() << "constellations";
+#ifndef NDEBUG
+	qDebug() << "Point within hulls of" << result.count() << "constellations";
+#endif
 	}
 	return result;
 }
@@ -1569,17 +1557,9 @@ QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitFo
 void ConstellationMgr::setSelected(const StelObject *s)
 {
 	if (!s)
-	{
 		setSelectedConst(QList<Constellation*>()); // actually deselect...
-	}
 	else
-	{
-		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
-			setSelectedConst(isObjectIn(s, false));
-		else
-			setSelectedConst(isObjectIn(s, true));
-			//setSelectedConst(isStarIn(s));
-	}
+		setSelectedConst(isObjectIn(s, !(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)));
 }
 
 // Return a QList<Constellation*>, will allow result from overlapping hulls

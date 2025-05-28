@@ -414,8 +414,6 @@ private:
 	//! Remove all selected constellations.
 	void deselect() { setSelected(Q_NULLPTR); }
 	//! Get the first selected constellation.
-	//! NOTE: this function should return a list of all, or may be deleted. Please
-	//! do not use until it exhibits the proper behavior.
 	QList<Constellation*> getSelected(void) const;
 
 	QList<Constellation*> selected; // More than one can be selected at a time
