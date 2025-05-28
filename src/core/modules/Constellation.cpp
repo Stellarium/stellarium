@@ -69,6 +69,7 @@ Constellation::~Constellation()
 bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 {
 	static NebulaMgr *nebulaMgr=GETSTELMODULE(NebulaMgr);
+	static StelCore *core=StelApp::getInstance().getCore();
 	const QString id = data["id"].toString();
 	const QStringList idParts = id.split(" ");
 	if (idParts.size() == 3 && idParts[0] == "CON")
@@ -227,7 +228,7 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 		Vec3d XYZname1(0.);
 		for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
 		{
-			XYZname1 += constellation[ii]->getJ2000EquatorialPos(StelApp::getInstance().getCore());
+			XYZname1 += constellation[ii]->getJ2000EquatorialPos(core);
 		}
 		XYZname1.normalize();
 		XYZname.append(XYZname1);
@@ -523,29 +524,8 @@ void Constellation::drawHullOptim(StelPainter& sPainter, const Vec3d& obsVelocit
 
 	sPainter.setBlending(true);
 	sPainter.setColor(hullColor, hullFader.getInterstate());
-	sPainter.drawSphericalRegion(convexHull.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 
-	//// DEBUG: Paint hulls' getBoundingSphericalCaps(). It seems it's one cap anyhow, but what defines it?
-	//const QVector<SphericalCap> &caps= convexHull->getBoundingSphericalCaps();
-	//if (caps.length()>1)
-	//	qInfo() << "caps has more than 1 entries!";
-	//sPainter.setColor(1., 1., 0., hullFader.getInterstate());
-	//foreach(const SphericalCap &cap, caps)
-	//{
-	//	QVector<Vec3d> contour=cap.getClosedOutlineContour();
-	//	contour.append(contour.at(0)); // close loop
-	//	QVector<Vec4f> colors;
-	//	for (int i=0; i<contour.length(); ++i)
-	//	{
-	//		colors.append(Vec4f(1., 1., 0., hullFader.getInterstate()));
-	//	}
-	//	sPainter.drawPath(contour, colors);
-	//}
-
-	//// MORE DEBUG: Paint hulls' enlargedHull. HMM, this is just a circle (SphericalCap) surrounding the hull polygon.
-	//SphericalRegionP enlargedHull=convexHull->getEnlarged(1.*M_PI_180);
-	//sPainter.drawSphericalRegion(enlargedHull.data(), StelPainter::SphericalPolygonDrawModeBoundary);
-
+	sPainter.drawSphericalRegion(convexHull.data(), StelPainter::SphericalPolygonDrawModeBoundary, nullptr, true, 5, obsVelocity); // draw nice with aberration
 }
 
 
@@ -612,7 +592,7 @@ StelObjectP Constellation::getBrightestStarInConstellation(void) const
 			maxMag = Mag;
 		}
 	}
-	for (int i=0; i<hullExtension.size();++i)
+	for (unsigned int i=0; i<hullExtension.size();++i)
 	{
 		const float Mag = hullExtension[i]->getVMagnitude(Q_NULLPTR);
 		if (Mag < maxMag)
@@ -822,7 +802,7 @@ SphericalRegionP Constellation::makeConvexHull(const std::vector<StelObjectP> &s
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	SphericalPolygon *hull=new SphericalPolygon(hullPoints.toVector());
 #else
-	SphericalPolygon *hull=new SphericalPolygon(hullPoints);
+	SphericalConvexPolygon *hull=new SphericalConvexPolygon(hullPoints);
 #endif
 	//qDebug() << "Successful hull:" << hull->toJSON();
 	return hull;
@@ -830,5 +810,19 @@ SphericalRegionP Constellation::makeConvexHull(const std::vector<StelObjectP> &s
 
 void Constellation::makeConvexHull()
 {
+	// For 2-star automatic hulls, we must recreate XYZname, the hull circle center.
+	if (constellation.size()==2 && XYZname.length()==1)
+	{
+		StelCore *core=StelApp::getInstance().getCore();
+		Vec3d XYZname1(0.);
+		XYZname.clear();
+		for(unsigned int i=0;i<constellation.size();++i)
+		{
+			XYZname1 += constellation.at(i)->getJ2000EquatorialPos(core);
+		}
+		XYZname1.normalize();
+		XYZname.append(XYZname1);
+	}
+
 	convexHull=makeConvexHull(constellation, hullExtension, dark_constellation, XYZname.constFirst(), hullRadius);
 }

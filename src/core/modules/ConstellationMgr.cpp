@@ -608,7 +608,6 @@ void ConstellationMgr::loadLinesNamesAndArt(const StelSkyCulture &culture)
 	setFlagLabels(namesDisplayed);
 	setFlagBoundaries(boundariesDisplayed);
 	setFlagHulls(hullsDisplayed);
-	lastHullJDE=StelApp::getInstance().getCore()->getJDE();
 }
 
 void ConstellationMgr::draw(StelCore* core)
@@ -755,12 +754,8 @@ void ConstellationMgr::update(double deltaTime)
 	double fov = core->getMovementMgr()->getCurrentFov();
 	Constellation::artIntensityFovScale = static_cast<float>(qBound(0.0,(fov - artIntensityMinimumFov) / (artIntensityMaximumFov - artIntensityMinimumFov),1.0));
 
-	const double jde=core->getJDE();
-	if (fabs(jde-lastHullJDE)>365.) // run once a year
-	{
+	if (hullsDisplayed) // Computational cost is fortunately negligible, but at least by rapid aberration changes we really need dense interval. So, basically, every frame...
 		recreateHulls();
-		lastHullJDE=jde;
-	}
 
 	const int delta = static_cast<int>(deltaTime*1000);
 	for (auto* constellation : std::as_const(constellations))
@@ -1755,7 +1750,5 @@ void ConstellationMgr::starsInHullOf(const QString &englishName, const bool hipO
 void ConstellationMgr::recreateHulls()
 {
 	for (auto* constellation : std::as_const(constellations))
-	{
 		constellation->makeConvexHull();
-	}
 }

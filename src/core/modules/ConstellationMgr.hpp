@@ -458,7 +458,6 @@ private:
 	int constellationLineThickness;   //!< thickness of the constellation lines
 	int boundariesThickness;          //!< thickness of the constellation boundaries
 	int hullsThickness;               //!< thickness of the constellation boundaries
-	double lastHullJDE;               //!< JDE of last hull creation. Needed to periodically recreate the constellation hulls.
 };
 
 #endif // CONSTELLATIONMGR_HPP
