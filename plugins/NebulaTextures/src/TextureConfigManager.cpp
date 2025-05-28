@@ -26,8 +26,8 @@
  * @brief Constructs a TextureConfigManager with the specified config file path.
  * @param configFilePath Path to the JSON configuration file.
  */
-TextureConfigManager::TextureConfigManager(const QString& configFilePath)
-	: filePath(configFilePath)
+TextureConfigManager::TextureConfigManager(const QString& configFilePath, const QString& texname)
+	: filePath(configFilePath), texname(texname)
 {}
 
 /**
@@ -38,8 +38,13 @@ bool TextureConfigManager::load()
 {
 	QFile file(filePath);
 	// Check if file exists and can be opened for reading
-	if (!file.exists() || !file.open(QIODevice::ReadOnly))
-		return false;
+	if (!file.exists())
+	{
+		rootObject = QJsonObject{ { "alphaBlend", true }, { "description", "User specified nebula texture set." }, { "shortName", texname }, { "minResolution", 0.05 }, { "subTiles", QJsonArray{} }};
+		return true;
+	}
+
+	if (!file.open(QIODevice::ReadOnly)) return false;
 
 	// Parse JSON content
 	QJsonDocument doc = QJsonDocument::fromJson(file.readAll());

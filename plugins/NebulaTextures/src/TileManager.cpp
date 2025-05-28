@@ -91,7 +91,8 @@ bool TileManager::insertTileFromConfig(const QString& configFilePath, const QStr
 	}
 
 	// Remove existing tile with the same name if present
-	skyLayerMgr->removeSkyLayer(texName);
+	if (skyLayerMgr->getAllKeys().contains(texName))
+		skyLayerMgr->removeSkyLayer(texName);
 
 	// Insert new tile using provided config
 	skyLayerMgr->insertSkyImage(fullPath, QString(), show, 1);

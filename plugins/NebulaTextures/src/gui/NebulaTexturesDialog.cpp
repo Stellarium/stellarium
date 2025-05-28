@@ -65,8 +65,8 @@ NebulaTexturesDialog::NebulaTexturesDialog()
 
 	plateSolver = new PlateSolver(this);
 	tileManager = new TileManager();
-	configManager = new TextureConfigManager(StelFileMgr::getUserDir() + configFile);
-	tmpCfgManager = new TextureConfigManager(StelFileMgr::getUserDir() + tmpcfgFile);
+	configManager = new TextureConfigManager(StelFileMgr::getUserDir() + configFile, CUSTOM_TEXNAME);
+	tmpCfgManager = new TextureConfigManager(StelFileMgr::getUserDir() + tmpcfgFile, TEST_TEXNAME);
 }
 
 /**

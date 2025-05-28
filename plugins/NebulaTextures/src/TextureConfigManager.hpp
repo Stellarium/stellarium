@@ -29,7 +29,7 @@ class TextureConfigManager
 {
 public:
 	//! Constructs with the given config file path.
-	explicit TextureConfigManager(const QString& configFilePath);
+	explicit TextureConfigManager(const QString& configFilePath, const QString& texname);
 
 	//! Loads the texture configuration from the specified file.
 	bool load();
@@ -60,6 +60,7 @@ public:
 
 private:
 	QString filePath;  //!< Path to the configuration file.
+	QString texname;  //!< Group Name of configuration file.
 	QJsonObject rootObject;  //!< The root JSON object for the config.
 };
 
