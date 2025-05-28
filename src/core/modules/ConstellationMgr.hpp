@@ -416,21 +416,15 @@ private:
 	//! Get the first selected constellation.
 	//! NOTE: this function should return a list of all, or may be deleted. Please
 	//! do not use until it exhibits the proper behavior.
-	//StelObject* getSelected(void) const;
 	QList<Constellation*> getSelected(void) const;
 
-	//std::vector<Constellation*> selected; // More than one can be selected at a time
 	QList<Constellation*> selected; // More than one can be selected at a time
 
-	//! Return list of constellations the star is member of.
-	//! In case of IAU constellations, the list is guaranteed to be of length 1.
-	//QList<Constellation*> isStarIn(const StelObject *s) const;
 	//! Return list of constellations the object is member of.
 	//! In case of IAU constellations, the list is guaranteed to be of length 1.
 	//! @param useHull Prefer to use constellation hull, not IAU borders
 	QList<Constellation*> isObjectIn(const StelObject *s, bool useHull) const;
 	Constellation* findFromAbbreviation(const QString& abbreviation) const;
-	//std::vector<Constellation*> constellations;
 	QList<Constellation*> constellations; //!< Constellations in the current SkyCulture
 	QFont asterFont;
 	StarMgr* hipStarMgr;
