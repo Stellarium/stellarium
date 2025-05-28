@@ -21,6 +21,7 @@
 #define STELPROJECTIONS_HPP
 
 #include "StelProjector.hpp"
+#include "StelUtils.hpp"
 
 class StelProjectorPerspective : public StelProjector
 {
