@@ -159,6 +159,9 @@ void ConstellationMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
 	deselectConstellations();
 	loadLinesNamesAndArt(skyCulture);
+	// TODO: Load optional StelSkyCultureSkyPartitions
+	zodiac = StelSkyCultureSkyPartitionP(new StelSkyCultureSkyPartition(skyCulture.zodiac));
+	lunarSystem = StelSkyCultureSkyPartitionP(new StelSkyCultureSkyPartition(skyCulture.lunarSystem));
 
 	// Translate constellation names for the new sky culture
 	updateI18n();

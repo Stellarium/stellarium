@@ -24,6 +24,7 @@
 #include "StelObjectType.hpp"
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
+#include "StelSkyCultureSkyPartition.hpp"
 
 #include <vector>
 #include <QString>
@@ -450,6 +451,11 @@ private:
 	int constellationLineThickness;   //!< thickness of the constellation lines
 	int boundariesThickness;          //!< thickness of the constellation boundaries
 	int hullsThickness;               //!< thickness of the constellation boundaries
+
+	//! optional zodiac description from index.json
+	StelSkyCultureSkyPartitionP zodiac;
+	//! optional lunarSystem description from index.json
+	StelSkyCultureSkyPartitionP lunarSystem;
 };
 
 #endif // CONSTELLATIONMGR_HPP

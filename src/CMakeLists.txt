@@ -73,6 +73,8 @@ SET(stellarium_lib_SRCS
      core/StelRegionObject.hpp
      core/StelSkyCultureMgr.cpp
      core/StelSkyCultureMgr.hpp
+     core/StelSkyCultureSkyPartition.cpp
+     core/StelSkyCultureSkyPartition.hpp
      core/StelTextureMgr.cpp
      core/StelTextureMgr.hpp
      core/StelTexture.cpp
