@@ -167,45 +167,10 @@
          <layout class="QVBoxLayout" name="verticalLayout_9">
           <item>
            <layout class="QGridLayout" name="gridLayout_3">
-            <item row="4" column="1">
-             <widget class="QDoubleSpinBox" name="bottomLeftX">
-              <property name="decimals">
-               <number>10</number>
-              </property>
-              <property name="minimum">
-               <double>0.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>360.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.010000000000000</double>
-              </property>
-             </widget>
-            </item>
             <item row="5" column="5">
              <widget class="QLabel" name="label_brd">
               <property name="text">
                <string>Dec (↘)</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="3">
-             <widget class="QDoubleSpinBox" name="referY">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="decimals">
-               <number>10</number>
-              </property>
-              <property name="minimum">
-               <double>-90.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>90.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.010000000000000</double>
               </property>
              </widget>
             </item>
@@ -223,38 +188,6 @@
               </property>
               <property name="text">
                <string notr="true">↺</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="6">
-             <widget class="QDoubleSpinBox" name="bottomRightX">
-              <property name="decimals">
-               <number>10</number>
-              </property>
-              <property name="minimum">
-               <double>0.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>360.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.010000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QDoubleSpinBox" name="topLeftY">
-              <property name="decimals">
-               <number>10</number>
-              </property>
-              <property name="minimum">
-               <double>-90.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>90.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.010000000000000</double>
               </property>
              </widget>
             </item>
@@ -284,22 +217,6 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="6">
-             <widget class="QDoubleSpinBox" name="topRightY">
-              <property name="decimals">
-               <number>10</number>
-              </property>
-              <property name="minimum">
-               <double>-90.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>90.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.010000000000000</double>
-              </property>
-             </widget>
-            </item>
             <item row="2" column="2">
              <widget class="QLabel" name="label_rr">
               <property name="font">
@@ -312,25 +229,6 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="6">
-             <widget class="QDoubleSpinBox" name="bottomRightY">
-              <property name="decimals">
-               <number>10</number>
-              </property>
-              <property name="minimum">
-               <double>-90.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>90.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.010000000000000</double>
-              </property>
-              <property name="value">
-               <double>0.000000000000000</double>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="0">
              <widget class="QLabel" name="label_tlr">
               <property name="text">
@@ -338,58 +236,10 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QDoubleSpinBox" name="topLeftX">
-              <property name="decimals">
-               <number>10</number>
-              </property>
-              <property name="minimum">
-               <double>0.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>360.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.010000000000000</double>
-              </property>
-             </widget>
-            </item>
             <item row="4" column="5">
              <widget class="QLabel" name="label_brr">
               <property name="text">
                <string>RA (↘)</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QDoubleSpinBox" name="bottomLeftY">
-              <property name="decimals">
-               <number>10</number>
-              </property>
-              <property name="minimum">
-               <double>-90.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>90.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.010000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="6">
-             <widget class="QDoubleSpinBox" name="topRightX">
-              <property name="decimals">
-               <number>10</number>
-              </property>
-              <property name="minimum">
-               <double>0.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>360.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.010000000000000</double>
               </property>
              </widget>
             </item>
@@ -420,25 +270,6 @@
               </property>
              </spacer>
             </item>
-            <item row="3" column="2">
-             <widget class="QDoubleSpinBox" name="referX">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="decimals">
-               <number>10</number>
-              </property>
-              <property name="minimum">
-               <double>0.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>360.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.010000000000000</double>
-              </property>
-             </widget>
-            </item>
             <item row="3" column="4">
              <widget class="QToolButton" name="goPushButton">
               <property name="toolTip">
@@ -451,6 +282,44 @@
                <iconset resource="../../../../data/gui/guiRes.qrc">
                 <normaloff>:/graphicGui/uibtProcess.png</normaloff>
                 <disabledoff>:/graphicGui/uibtProcess.png</disabledoff>:/graphicGui/uibtProcess.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="AngleSpinBox" name="topLeftX"/>
+            </item>
+            <item row="1" column="1">
+             <widget class="AngleSpinBox" name="topLeftY"/>
+            </item>
+            <item row="4" column="1">
+             <widget class="AngleSpinBox" name="bottomLeftX"/>
+            </item>
+            <item row="5" column="1">
+             <widget class="AngleSpinBox" name="bottomLeftY"/>
+            </item>
+            <item row="0" column="6">
+             <widget class="AngleSpinBox" name="topRightX"/>
+            </item>
+            <item row="1" column="6">
+             <widget class="AngleSpinBox" name="topRightY"/>
+            </item>
+            <item row="4" column="6">
+             <widget class="AngleSpinBox" name="bottomRightX"/>
+            </item>
+            <item row="5" column="6">
+             <widget class="AngleSpinBox" name="bottomRightY"/>
+            </item>
+            <item row="3" column="2">
+             <widget class="AngleSpinBox" name="referX">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="AngleSpinBox" name="referY">
+              <property name="enabled">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -647,6 +516,11 @@
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AngleSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>AngleSpinBox.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>

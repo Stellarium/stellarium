@@ -67,6 +67,8 @@ NebulaTexturesDialog::NebulaTexturesDialog()
 	tileManager = new TileManager();
 	configManager = new TextureConfigManager(StelFileMgr::getUserDir() + configFile, CUSTOM_TEXNAME);
 	tmpCfgManager = new TextureConfigManager(StelFileMgr::getUserDir() + tmpcfgFile, TEST_TEXNAME);
+
+	lastOpenedDirectoryPath = QDir::homePath();
 }
 
 /**
@@ -139,23 +141,23 @@ void NebulaTexturesDialog::createDialogContent()
 	connect(ui->listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(gotoSelectedItem(QListWidgetItem*)));
 	connect(ui->removeTextureButton, SIGNAL(clicked()), this, SLOT(removeTexture()));
 
-	connect(ui->topLeftX, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
-	connect(ui->topLeftY, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
-	connect(ui->topRightX, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
-	connect(ui->topRightY, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
-	connect(ui->bottomLeftX, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
-	connect(ui->bottomLeftY, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
-	connect(ui->bottomRightX, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
-	connect(ui->bottomRightY, SIGNAL(valueChanged(double)), this, SLOT(refreshTempTexturePreview()));
+	QList<QPair<AngleSpinBox*, bool>> allCornerSpins = {
+		qMakePair(ui->topLeftX, true), qMakePair(ui->topLeftY, false),
+		qMakePair(ui->topRightX, true), qMakePair(ui->topRightY, false),
+		qMakePair(ui->bottomLeftX, true), qMakePair(ui->bottomLeftY, false),
+		qMakePair(ui->bottomRightX, true), qMakePair(ui->bottomRightY, false)
+	};
 
-	connect(ui->topLeftX, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
-	connect(ui->topLeftY, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
-	connect(ui->topRightX, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
-	connect(ui->topRightY, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
-	connect(ui->bottomLeftX, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
-	connect(ui->bottomLeftY, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
-	connect(ui->bottomRightX, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
-	connect(ui->bottomRightY, SIGNAL(valueChanged(double)), this, SLOT(showRecoverCoordsButton()));
+	for (const auto& pair : allCornerSpins) {
+		AngleSpinBox* spin = pair.first;
+		bool isLongitude = pair.second;
+
+		spin->setMinimum(isLongitude ? -180.0 : -90.0, true);
+		spin->setMaximum(isLongitude ? 180.0 : 90.0, true);
+		spin->setWrapping(isLongitude);
+		connect(spin, SIGNAL(valueChanged()), this, SLOT(refreshTempTexturePreview()));
+		connect(spin, SIGNAL(valueChanged()), this, SLOT(showRecoverCoordsButton()));
+	}
 
 	connect(plateSolver, &PlateSolver::loginSuccess, this, [this]()
 	{
@@ -241,16 +243,18 @@ void NebulaTexturesDialog::restoreDefaults()
 		ui->lineEditApiKey->setText("");
 		conf->setValue(NT_CONFIG_PREFIX + "/AstroMetry_Apikey", "");
 		ui->lineEditImagePath->setText("");
-		ui->referX->setValue(0);
-		ui->referY->setValue(0);
-		ui->topLeftX->setValue(0);
-		ui->topLeftY->setValue(0);
-		ui->bottomLeftX->setValue(0);
-		ui->bottomLeftY->setValue(0);
-		ui->topRightX->setValue(0);
-		ui->topRightY->setValue(0);
-		ui->bottomRightX->setValue(0);
-		ui->bottomRightY->setValue(0);
+
+		ui->referX->setDegrees(0);
+		ui->referY->setDegrees(0);
+		ui->topLeftX->setDegrees(0);
+		ui->topLeftY->setDegrees(0);
+		ui->bottomLeftX->setDegrees(0);
+		ui->bottomLeftY->setDegrees(0);
+		ui->topRightX->setDegrees(0);
+		ui->topRightY->setDegrees(0);
+		ui->bottomRightX->setDegrees(0);
+		ui->bottomRightY->setDegrees(0);
+
 		ui->listWidget->clear();
 	}
 	else
@@ -329,10 +333,11 @@ void NebulaTexturesDialog::initializeRefreshIfNeeded()
  */
 void NebulaTexturesDialog::openImageFile()
 {
-	QString fileName = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Open Image"), QDir::homePath(), tr("Images (*.png *.jpg *.gif *.tif *.tiff *.jpeg)"));
+	QString fileName = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Open Image"), lastOpenedDirectoryPath, tr("Images (*.png *.jpg *.gif *.tif *.tiff *.jpeg)"));
 	if (!fileName.isEmpty())
 	{
 		ui->lineEditImagePath->setText(fileName);
+		lastOpenedDirectoryPath =  QFileInfo(fileName).path();
 		updateStatus(q_("File selected: ") + fileName);
 	}
 }
@@ -417,41 +422,41 @@ void NebulaTexturesDialog::applyWcsSolution(const QString& wcsText)
 	imageHeight = wcs.IMAGEH;
 	centerRA = CRVAL1;
 	centerDec = CRVAL2;
-	ui->referX->setValue(CRVAL1);
-	ui->referY->setValue(CRVAL2);
+	ui->referX->setDegrees(CRVAL1);
+	ui->referY->setDegrees(CRVAL2);
 
 	QPair<double, double> result;
 	int X=0,Y=0;
 	result = SkyCoords::pixelToRaDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
 	topLeftRA = result.first;
 	topLeftDec = result.second;
-	ui->topLeftX->setValue(topLeftRA);
-	ui->topLeftY->setValue(topLeftDec);
+	ui->topLeftX->setDegrees(topLeftRA);
+	ui->topLeftY->setDegrees(topLeftDec);
 
 	X = 0, Y = imageHeight - 1;
 	result = SkyCoords::pixelToRaDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
 	bottomLeftRA = result.first;
 	bottomLeftDec = result.second;
-	ui->bottomLeftX->setValue(bottomLeftRA);
-	ui->bottomLeftY->setValue(bottomLeftDec);
+	ui->bottomLeftX->setDegrees(bottomLeftRA);
+	ui->bottomLeftY->setDegrees(bottomLeftDec);
 
 	X = imageWidth - 1, Y = 0;
 	result = SkyCoords::pixelToRaDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
 	topRightRA = result.first;
 	topRightDec = result.second;
-	ui->topRightX->setValue(topRightRA);
-	ui->topRightY->setValue(topRightDec);
+	ui->topRightX->setDegrees(topRightRA);
+	ui->topRightY->setDegrees(topRightDec);
 
 	X = imageWidth - 1, Y = imageHeight - 1;
 	result = SkyCoords::pixelToRaDec(X, Y, CRPIX1, CRPIX2, CRVAL1, CRVAL2, CD1_1, CD1_2, CD2_1, CD2_2);
 	bottomRightRA = result.first;
 	bottomRightDec = result.second;
-	ui->bottomRightX->setValue(bottomRightRA);
-	ui->bottomRightY->setValue(bottomRightDec);
+	ui->bottomRightX->setDegrees(bottomRightRA);
+	ui->bottomRightY->setDegrees(bottomRightDec);
 
 	isWcsSolved = true;
 	freezeUiState(false);
-	updateStatus(q_("Processing completed! Goto Center Point, Try to Render, Check and Add to Local Storage."));
+	updateStatus(q_("Processing completed! Goto Center Point, Test this texture, and Add to Custom Storage."));
 }
 
 /**
@@ -462,8 +467,8 @@ void NebulaTexturesDialog::applyWcsSolution(const QString& wcsText)
  */
 void NebulaTexturesDialog::moveToCenterCoord()
 {
-	centerRA = ui->referX->value();
-	centerDec = ui->referY->value();
+	centerRA = ui->referX->valueDegrees();
+	centerDec = ui->referY->valueDegrees();
 	StelCore* core = StelApp::getInstance().getCore();
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Vec3d pos;
@@ -497,17 +502,20 @@ void NebulaTexturesDialog::recoverSolvedCorners()
 {
 	if(isWcsSolved && askConfirmation("Are you sure to recover the solution?"))
 	{
-		ui->topLeftX->setValue(topLeftRA);
-		ui->topLeftY->setValue(topLeftDec);
+		ui->topLeftX->setDegrees(topLeftRA);
+		ui->topLeftY->setDegrees(topLeftDec);
 
-		ui->bottomLeftX->setValue(bottomLeftRA);
-		ui->bottomLeftY->setValue(bottomLeftDec);
+		ui->bottomLeftX->setDegrees(bottomLeftRA);
+		ui->bottomLeftY->setDegrees(bottomLeftDec);
 
-		ui->topRightX->setValue(topRightRA);
-		ui->topRightY->setValue(topRightDec);
+		ui->topRightX->setDegrees(topRightRA);
+		ui->topRightY->setDegrees(topRightDec);
 
-		ui->bottomRightX->setValue(bottomRightRA);
-		ui->bottomRightY->setValue(bottomRightDec);
+		ui->bottomRightX->setDegrees(bottomRightRA);
+		ui->bottomRightY->setDegrees(bottomRightDec);
+
+		if(isTempTextureVisible)
+			showTempTexturePreview();
 	}
 }
 
@@ -674,10 +682,10 @@ void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 	if (imageUrl.isEmpty()) return;
 
 	QJsonArray coords;
-	coords.append(QJsonArray({ ui->bottomLeftX->value(), ui->bottomLeftY->value() }));
-	coords.append(QJsonArray({ ui->bottomRightX->value(), ui->bottomRightY->value() }));
-	coords.append(QJsonArray({ ui->topRightX->value(), ui->topRightY->value() }));
-	coords.append(QJsonArray({ ui->topLeftX->value(), ui->topLeftY->value() }));
+	coords.append(QJsonArray({ ui->bottomLeftX->valueDegrees(), ui->bottomLeftY->valueDegrees() }));
+	coords.append(QJsonArray({ ui->bottomRightX->valueDegrees(), ui->bottomRightY->valueDegrees() }));
+	coords.append(QJsonArray({ ui->topRightX->valueDegrees(), ui->topRightY->valueDegrees() }));
+	coords.append(QJsonArray({ ui->topLeftX->valueDegrees(), ui->topLeftY->valueDegrees() }));
 
 	double brightness = ui->brightComboBox->currentData().toDouble();
 

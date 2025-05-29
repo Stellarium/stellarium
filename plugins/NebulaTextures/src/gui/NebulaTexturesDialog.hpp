@@ -185,6 +185,9 @@ private:
 	//! Flag indicating whether to render temporary textures
 	bool isTempTextureVisible;
 
+	//! Path to the directory last used by QFileDialog in openImageFile()
+	QString lastOpenedDirectoryPath;
+
 	//! Process WCS (World Coordinate System) of the image
 	void applyWcsSolution(const QString& wcsText);
 
