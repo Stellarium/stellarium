@@ -20,8 +20,7 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        sudo apt remove php7.* -y
-        sudo apt remove php8.* -y
+        sudo apt remove php* -y
         sudo apt update
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
@@ -60,8 +59,7 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        sudo apt remove php7.* -y
-        sudo apt remove php8.* -y
+        sudo apt remove php* -y
         sudo apt update
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
@@ -101,8 +99,7 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        sudo apt remove php7.* -y
-        sudo apt remove php8.* -y
+        sudo apt remove php* -y
         sudo apt update
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
