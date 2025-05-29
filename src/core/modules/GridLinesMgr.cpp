@@ -35,7 +35,6 @@
 #include "StelMovementMgr.hpp"
 #include "precession.h"
 
-#include <set>
 #include <vector>
 #include <QSettings>
 #include <QDebug>
@@ -115,79 +114,6 @@ private:
 };
 
 
-//! @class SkyLine
-//! Class which manages a line to display around the sky like the ecliptic line.
-class SkyLine
-{
-public:
-	enum SKY_LINE_TYPE
-	{
-		EQUATOR_J2000,
-		EQUATOR_OF_DATE,
-		FIXED_EQUATOR,
-		ECLIPTIC_J2000,
-		ECLIPTIC_OF_DATE,
-		ECLIPTIC_WITH_DATE,
-		PRECESSIONCIRCLE_N,
-		PRECESSIONCIRCLE_S,
-		MERIDIAN,
-		HORIZON,
-		GALACTICEQUATOR,
-		SUPERGALACTICEQUATOR,
-		LONGITUDE,
-		QUADRATURE,
-		PRIME_VERTICAL,
-		CURRENT_VERTICAL,
-		COLURE_1,
-		COLURE_2,
-		CIRCUMPOLARCIRCLE_N,
-		CIRCUMPOLARCIRCLE_S,
-		INVARIABLEPLANE,
-		SOLAR_EQUATOR,
-		EARTH_UMBRA,
-		EARTH_PENUMBRA
-	};
-	// Create and precompute positions of a SkyGrid
-	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR_J2000);
-	virtual ~SkyLine();
-	static void init(); //! call once before creating the first line.
-	static void deinit(); //! call once after deleting all lines.
-	void draw(StelCore* core) const;
-	void setColor(const Vec3f& c) {color = c;}
-	void setPartitions(bool visible) {showPartitions = visible;}
-	bool showsPartitions() const {return showPartitions;}
-	const Vec3f& getColor() const {return color;}
-	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
-	void setFadeDuration(float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
-	void setDisplayed(const bool displayed){fader = displayed;}
-	bool isDisplayed() const {return fader;}
-	void setLabeled(const bool displayed){showLabel = displayed;}
-	bool isLabeled() const {return showLabel;}
-	void setFontSize(int newSize);
-	void setLineThickness(const float thickness) {lineThickness = thickness;}
-	float getLineThickness() const {return lineThickness;}
-	void setPartThickness(const float thickness) {partThickness = thickness;}
-	float getPartThickness() const {return partThickness;}
-	//! Re-translates the label and sets the frameType. Must be called in the constructor!
-	void updateLabel();
-	static void setSolarSystem(SolarSystem* ss);
-	//! Compute eclipticOnDatePartitions for @param year. Trigger a call to this from a signal StelCore::dateChangedByYear()
-	static void computeEclipticDatePartitions(int year = std::numeric_limits<int>::min());
-private:
-	static QSharedPointer<Planet> earth, sun, moon;
-	SKY_LINE_TYPE line_type;
-	Vec3f color;
-	StelCore::FrameType frameType;
-	LinearFader fader;
-	QFont font;
-	QString label;
-	float lineThickness;
-	float partThickness;
-	bool showPartitions;
-	bool showLabel;
-	static QMap<int, double> precessionPartitions;
-	static std::vector<QPair<Vec3d, QString>> eclipticOnDatePartitions; //!< Collection of up to 366 entries Vec3d={eclLongitude, aberration, nutation}, QString label
-};
 
 // rms added color as parameter
 SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2f,0.2f,0.2f), frameType(frame), lineThickness(1)
@@ -747,6 +673,7 @@ void SkyLine::updateLabel()
 			label = q_("Ecliptic of Date");
 			break;
 		case ECLIPTIC_WITH_DATE:
+		case ECLIPTIC_CULTURAL:
 			frameType = StelCore::FrameObservercentricEclipticOfDate;
 			label = QString(); // No label: parallel to ecliptic.
 			break;
@@ -757,6 +684,10 @@ void SkyLine::updateLabel()
 		case EQUATOR_OF_DATE:
 			frameType = StelCore::FrameEquinoxEqu;
 			label = q_("Equator");
+			break;
+		case EQUATORIAL_CULTURAL:
+			frameType = StelCore::FrameEquinoxEqu;
+			label = QString(); // No label: parallel to equator.
 			break;
 		case FIXED_EQUATOR:
 			frameType = StelCore::FrameFixedEquatorial; // Apparent Hour Angle is a non-refraction frame.
@@ -856,7 +787,7 @@ void SkyLine::draw(StelCore *core) const
 	/////////////////////////////////////////////////
 	// Draw the line
 
-	// Precession and Circumpolar circles are Small Circles, all others are Great Circles.
+	// Precession, Circumpolar and umbra circles are Small Circles, all others are Great Circles.
 	if (QList<SKY_LINE_TYPE>({PRECESSIONCIRCLE_N, PRECESSIONCIRCLE_S, CIRCUMPOLARCIRCLE_N, CIRCUMPOLARCIRCLE_S, EARTH_UMBRA, EARTH_PENUMBRA}).contains(line_type))
 	{
 		// partitions for precession. (mark millennia!)
@@ -1239,6 +1170,41 @@ void SkyLine::draw(StelCore *core) const
 					// Gravity labels look outright terrible here! Disable them.
 					float shiftx = - static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) * 0.5f;
 					sPainter.drawText(end10, label, textAngle*M_180_PIf, shiftx, shifty, true);
+				}
+			}
+		}
+		else if (line_type==ECLIPTIC_CULTURAL || line_type==EQUATORIAL_CULTURAL)
+		{
+			// TODO: define std::vector<std::vector<double>>culturalPartitions. element 0 is the main partitions (12 signs, 27 lunar stations, ...)
+			if (culturalPartitions.size()>1)
+			{
+				foreach (const double partition, culturalPartitions[1])
+				{
+					const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, partition*M_PI_180);
+					Vec3d part0 = rotZ1*fpt;
+					Vec3d part10=part0; part10.transfo4d(Mat4d::rotation(partAxis, rotSign*0.45*M_PI/180));
+
+					sPainter.drawGreatCircleArc(part0, part10, nullptr, nullptr, nullptr);
+				}
+			}
+			if (culturalPartitions.size()>2)
+			{
+				foreach (const double partition, culturalPartitions[2])
+				{
+					const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, partition*M_PI_180);
+					Vec3d part0 = rotZ1*fpt;
+					Vec3d part5=part0;  part5.transfo4d(Mat4d::rotation(partAxis, rotSign*0.25*M_PI/180));
+					sPainter.drawGreatCircleArc(part0, part5, nullptr, nullptr, nullptr);
+				}
+			}
+			if (culturalPartitions.size()>3)
+			{
+				foreach (const double partition, culturalPartitions[3])
+				{
+					const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, partition*M_PI_180);
+					Vec3d part0 = rotZ1*fpt;
+					Vec3d part1=part0;  part1.transfo4d(Mat4d::rotation(partAxis, rotSign*0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
+					sPainter.drawGreatCircleArc(part0, part1, nullptr, nullptr, nullptr);
 				}
 			}
 		}
