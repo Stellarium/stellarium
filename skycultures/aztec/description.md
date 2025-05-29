@@ -14,29 +14,29 @@ Now, in this work we have an explanation of some Aztec stellar figures for Stell
 
 ## Description
 
-### Mamalhuaztli
+##### Mamalhuaztli
 
 <p><img src="illustrations/mamalhuaztli_t.png" width="100" height="107" hspace="7" align="left" />Ancient Aztec identified the Orion's Belt as Mamalhuaztli, and it represented the wood sticks used to light the new fire in the commemoration celebrated every 52 years by the Mexicans and their neighbors named <em>toxiuh molpilia</em> which means binding of the years and coincided with the beginning of the new year named <em>xiuhtzitzquilo</em>.</p>
 <p align="center"><img src="illustrations/mamalhuaztli_image.png" width="147" height="135" /></p>
 
-### Tianquiztli
+##### Tianquiztli
 
 <p><img src="illustrations/Tianquiztli_T.png" width="100" height="107" align="left" />The group of stars that we know as Pleiades symbolized for the Mexicas <em>Tianquiztli</em>, which means market, perhaps because of the crowd that gathers on them, they're generally represented by one or two people inside a circle with goods.</p>
 <p align="center"><img src="illustrations/tiaquitztli_image.png" width="141" height="141" /></p>
 <p>Currently,  in Mexico the informal market or street markets are called <em>Tianguis</em>.</p>
 
-### Citlaltlachtli
+##### Citlaltlachtli
 
 <p><img src="illustrations/citlaltlachtli_t.png" width="100" height="107" align="left" />The constellation of Gemini was called <em>Citlaltlachtli</em>, which means the ball game of the stars. This game was endowed with a ritual significance and used a natural rubber ball. It is said that the movement of the ball within the playing field refers to the movement of the sun and moon.</p>
 
-### Xonecuilli
+##### Xonecuilli
 
 <p><img src="illustrations/xonecuilli_t.png" width="100" height="107" align="left" />The Ursa Minor constellation is identified as <em>Xonecuilli</em> which means twisted foot, and is related to Nanahuatzin, this character is represented with twisted feet, filled with boils and sores, this sick and poor God sacrificed himself to become <em>Tonatiuh</em> the Sun god.</p>
 <p align="center"><img src="illustrations/nanahuatzin.png" width="141" height="138" /></p>
 <p>Apparently, this constellation can also be associated with the Southern Cross and its surrounding stars as is referred by <em>Tezozomoc</em>. For its part, Sahagun speaks of his resemblance to bread made in the form of letter S and called by the Aztecs <em>xonecuilli</em>.</p>
 <p align="center"><img src="illustrations/xonecuilli_Glifo.png" width="300" height="149" /><br /><em>xonecuilli</em></p>
 
-### Citlalcolotl
+##### Citlalcolotl
 
 <p><img src="illustrations/colotlixayac_t.png" width="100" height="100" align="left" />According to the Florentino Codex Sahagun's informants identified a group of stars known as <em>Citlalcolotl</em>, the scorpion star. In turn, Tezozomoc also mentions the scorpion star  and he called it  <em>Colotlixayac</em>, which means face of a scorpion.</p>
 <p align="center"><img src="illustrations/colotlixayac_image.png" width="158" height="266" /><br />

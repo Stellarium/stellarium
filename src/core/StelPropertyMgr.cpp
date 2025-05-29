@@ -172,9 +172,9 @@ QVariant StelPropertyMgr::getStelPropertyValue(const QString &id, const bool noW
 	return QVariant();
 }
 
-bool StelPropertyMgr::setStelPropertyValue(const QString &id, const QVariant &value) const
+bool StelPropertyMgr::setStelPropertyValue(const QString &id, const QVariant &value, const bool noWarning) const
 {
-	StelProperty* prop = getProperty(id);
+	StelProperty* prop = getProperty(id, noWarning);
 	if(prop)
 	{
 		return prop->setValue(value);

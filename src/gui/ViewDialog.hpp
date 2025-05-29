@@ -56,6 +56,9 @@ protected:
 	bool eventFilter(QObject* object, QEvent* event) override;
 private slots:
 	void populateLists();
+	void configureSkyCultureCheckboxes();
+	void updateSkyCultureInfoStyleFromCheckboxes();
+	void updateSkyCultureScreenStyleFromCheckboxes();
 	void populateToolTips();
 	void skyCultureChanged();
 	void changeProjection(const QString& projectionNameI18n);

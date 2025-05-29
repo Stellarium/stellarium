@@ -26,8 +26,10 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "ZoneArray.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
+#include <QMessageBox>
 
-#include <algorithm>
 #include <QString>
 #include <QTextStream>
 #include <QDebug>
@@ -51,38 +53,116 @@ Asterism::~Asterism()
 {
 }
 
-bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
+bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &excludeRefs)
 {
-	abbreviation = data["id"].toString();
-	const auto commonName = data["common_name"];
-	if (commonName.isObject())
-		englishName = commonName.toObject()["english"].toString();
-	const auto polylines = data["lines"].toArray();
+	static QSettings *conf=StelApp::getInstance().getSettings();
+
+	const QString id = data["id"].toString();
+	const QStringList idParts = id.split(" ");
+	QString scName;
+	if (idParts.size() == 3 && idParts[0] == "AST")
+	{
+		abbreviation = idParts[2].trimmed();
+		scName = idParts[1].trimmed();
+		if (scName != GETSTELMODULE(StelSkyCultureMgr)->getCurrentSkyCultureID())
+		{
+			qWarning().nospace() << "Skyculture definition error (skyculture name mismatch) in asterism " << id
+					     << " of skyculture " << GETSTELMODULE(StelSkyCultureMgr)->getCurrentSkyCultureID()
+					     << ". Skipping this asterism.";
+			return false;
+		}
+	}
+	else
+	{
+		qWarning().nospace() << "Bad asterism id: expected \"AST cultureName Abbrev\", got " << id;
+		return false;
+	}
+
+	// Allow exclusion by user configuration!
+	QString exclude=conf->value(QString("SCExcludeReferences/%1").arg(scName), QString()).toString();
+	if (!exclude.isEmpty())
+	{
+#if  (QT_VERSION<QT_VERSION_CHECK(5,14,0))
+		QStringList excludeRefStrings=exclude.split(',', QString::SkipEmptyParts);
+#else
+		QStringList excludeRefStrings=exclude.split(',', Qt::SkipEmptyParts);
+#endif
+		// The list has potentially both, unwanted references (which we just take out) and additional asterism abbrevations.
+		QMutableListIterator<QString> it(excludeRefStrings);
+		while (it.hasNext())
+		{
+			bool ok;
+			int numRef=it.next().toInt(&ok); // ok=false for strings e.g. from asterisms
+			if (ok)
+			{
+				Q_UNUSED(numRef);
+				it.remove();
+			}
+		}
+		//qInfo() << "Skyculture" << scName << "configured to exclude asterisms referenced from" << excludeRefs;
+
+		QVariantList refsVariants=data["references"].toArray().toVariantList();
+		if (!refsVariants.isEmpty())
+		{
+			QSet<int> refs;
+			foreach(const QVariant &v, refsVariants) {
+			    refs << v.value<int>();
+			}
+			//qInfo() << "Asterism" << id << "has refs" << refs;
+			if (refs.subtract(excludeRefs).isEmpty())
+			{
+				//qInfo() << "Asterism" << id << "has lost reference support. Skipping.";
+				return false;
+			}
+		}
+
+		// The remaining elements are (hopefully) unique asterism abbreviations.
+		if (excludeRefStrings.contains(abbreviation))
+		{
+			qDebug().nospace() << "Asterism " << id << " excluded by user config. Skipping.";
+			return false;
+		}
+	}
+
+	const QJsonValue names = data["common_name"];
+	if (names.isObject())
+	{
+		culturalName.translated = names["english"].toString().trimmed();
+		culturalName.native = names["native"].toString().trimmed();
+		culturalName.pronounce = names["pronounce"].toString().trimmed();
+		culturalName.IPA = names["IPA"].toString().trimmed();
+		culturalName.transliteration = names["transliteration"].toString().trimmed();
+	}
+	const QJsonArray polylines = data["lines"].toArray();
 	asterism.clear();
 
 	flagAsterism = !data["is_ray_helper"].toBool();
 	typeOfAsterism = flagAsterism ? Type::Asterism : Type::RayHelper;
 
+	// TODO: Apparently ray helpers have no name. This could act to autodetect all this.
+	if(names.isObject()) Q_ASSERT(flagAsterism);
+
 	if (polylines.isEmpty())
 	{
-		qWarning().nospace() << "Empty asterism lines array found for asterism " << abbreviation << " (" << englishName << ")";
+		qWarning().nospace() << "Empty asterism lines array found for asterism " << id << " (" << culturalName.native << ")";
 		return false;
 	}
 
 	if (!polylines[0].toArray().isEmpty() && polylines[0].toArray()[0].isArray())
 	{
-		if (polylines[0].toArray()[0].toArray().size() != 2)
-		{
-			qWarning().nospace() << "Bad asterism point entry for asterism " << abbreviation
-			                     << " (" << englishName << "): expected size 2, got " << polylines[0].toArray()[0].toArray().size();
-			return false;
-		}
-		if (typeOfAsterism == Type::RayHelper)
-		{
-			qWarning() << "Mismatch between asterism type and line data: got a ray helper, "
-			              "but the line points contain two entries instead of one";
-			return false;
-		}
+		qWarning().nospace() << "Coordinate array detected for asterism" << id << ". This is obsolete. Reformulate with Gaia stars. Skipping.";
+		//if (polylines[0].toArray()[0].toArray().size() != 2)
+		//{
+		//	qWarning().nospace() << "Bad asterism point entry for asterism " << id
+		//			     << " (" << culturalName.native << "): expected size 2, got " << polylines[0].toArray()[0].toArray().size();
+		//	return false;
+		//}
+		//if (typeOfAsterism == Type::RayHelper)
+		//{
+		//	qWarning() << "Mismatch between asterism type and line data: got a ray helper, "
+		//	              "but the line points contain two entries instead of one";
+		//	return false;
+		//}
 		// The entry contains RA and dec instead of HIP catalog number
 		typeOfAsterism = Type::TelescopicAsterism;
 	}
@@ -127,16 +207,18 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 			}
 			case Type::TelescopicAsterism:
 			{
+				qWarning() << "Asterisms with coord list no longer supported. Skipping " << id;
+				/*
 				if (!point.isArray())
 				{
-					qWarning().nospace() << "Error in asterism " << abbreviation << ": bad point at line #"
+					qWarning().nospace() << "Error in asterism " << id << ": bad point at line #"
 					                     << lineIndex << ": isn't an array of two numbers (RA and dec)";
 					return false;
 				}
-				const auto arr = point.toArray();
+				const QJsonArray arr = point.toArray();
 				if (arr.size() != 2 || !arr[0].isDouble() || !arr[1].isDouble())
 				{
-					qWarning().nospace() << "Error in asterism " << abbreviation << ": bad point at line #"
+					qWarning().nospace() << "Error in asterism " << id << ": bad point at line #"
 					                     << lineIndex << ": isn't an array of two numbers (RA and dec)";
 					return false;
 				}
@@ -162,9 +244,10 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 				asterism.push_back(s);
 				if (!asterism.back())
 				{
-					qWarning() << "Error in asterism" << abbreviation << "- can't find star with coordinates" << RA << "/" << DE;
+					qWarning() << "Error in asterism" << id << "- can't find star with coordinates" << RA << "/" << DE;
 					return false;
 				}
+				*/
 				break;
 			}
 			}
@@ -186,9 +269,41 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr)
 		for(const auto& point : asterism)
 			XYZname += point->getJ2000EquatorialPos(core);
 		XYZname.normalize();
-	}
 
+		// Sometimes label placement is suboptimal. Allow a correction from the automatic solution in label_offset:[dRA_deg, dDec_deg]
+		if (data.contains("label_offset"))
+		{
+			QJsonArray offset=data["label_offset"].toArray();
+			if (offset.size()!=2)
+				qWarning() << "Bad constellation label offset given for " << id << ", ignoring";
+			else
+			{
+				double ra, dec;
+				StelUtils::rectToSphe(&ra, &dec, XYZname);
+				ra  += offset[0].toDouble()*M_PI_180;
+				dec += offset[1].toDouble()*M_PI_180;
+				StelUtils::spheToRect(ra, dec, XYZname);
+			}
+		}
+	}
 	return true;
+}
+
+QString Asterism::getScreenLabel() const
+{
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	return getCultureLabel(scMgr->getScreenLabelStyle());
+}
+QString Asterism::getInfoLabel() const
+{
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	return getCultureLabel(scMgr->getInfoLabelStyle());
+}
+
+QString Asterism::getCultureLabel(StelObject::CulturalDisplayStyle style) const
+{
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	return scMgr->createCulturalLabel(culturalName, style, getNameI18n(), abbreviationI18n);
 }
 
 void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const
@@ -227,7 +342,7 @@ void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const Sphe
 	}
 }
 
-void Asterism::drawName(StelPainter& sPainter) const
+void Asterism::drawName(StelPainter& sPainter, bool abbreviateLabel) const
 {
 	if ((nameFader.getInterstate()==0.0f) || !flagAsterism)
 		return;
@@ -235,7 +350,7 @@ void Asterism::drawName(StelPainter& sPainter) const
 	if (typeOfAsterism==Type::TelescopicAsterism && sPainter.getProjector()->getFov()>60.f)
 		return;
 
-	QString name = getNameI18n();
+	QString name = abbreviateLabel ? abbreviationI18n : getScreenLabel();
 	sPainter.setColor(labelColor, nameFader.getInterstate());
 	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 }
@@ -254,7 +369,7 @@ QString Asterism::getInfoString(const StelCore *core, const InfoStringGroup &fla
 	QTextStream oss(&str);
 
 	if (flags&Name)
-		oss << "<h2>" << getNameI18n() << "</h2>";
+		oss << "<h2>" << getInfoLabel() << "</h2>";
 
 	if (flags&ObjectType)
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";

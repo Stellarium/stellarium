@@ -532,9 +532,15 @@ void ViewDialog::createDialogContent()
 	ui->colorCardinalPoints          ->setup("LandscapeMgr.cardinalPointsColor",            "color/cardinal_color");
 	ui->colorCompassMarks            ->setup("SpecialMarkersMgr.compassMarksColor",         "color/compass_marks_color");
 
+#if (QT_VERSION<QT_VERSION_CHECK(6,7,0))
 	connect(ui->showCardinalPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
 	connect(ui->showOrdinal8WRPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
 	connect(ui->showOrdinal16WRPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
+#else
+	connect(ui->showCardinalPointsCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)), this, SLOT(setSelectedCardinalCheckBoxes()));
+	connect(ui->showOrdinal8WRPointsCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)), this, SLOT(setSelectedCardinalCheckBoxes()));
+	connect(ui->showOrdinal16WRPointsCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)), this, SLOT(setSelectedCardinalCheckBoxes()));
+#endif
 	setSelectedCardinalCheckBoxes();
 
 	// Projection
@@ -565,31 +571,55 @@ void ViewDialog::createDialogContent()
 	connectIntProperty(ui->constellationLineThicknessSpinBox,		"ConstellationMgr.constellationLineThickness");
 	connectCheckBox(ui->showConstellationLabelsCheckBox,		"actionShow_Constellation_Labels");
 	connectCheckBox(ui->showConstellationBoundariesCheckBox,		"actionShow_Constellation_Boundaries");
+	configureSkyCultureCheckboxes();
+	StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	connect(scMgr, &StelSkyCultureMgr::screenLabelStyleChanged, this, &ViewDialog::configureSkyCultureCheckboxes);
+	connect(scMgr, &StelSkyCultureMgr::infoLabelStyleChanged, this, &ViewDialog::configureSkyCultureCheckboxes);
+
+	connect(ui->infoLabelNativeCheckBox           , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelPronounceCheckBox        , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelTransliterationCheckBox  , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelTranslationCheckBox      , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelIPACheckBox              , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelModernCheckBox           , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+
+	connect(ui->screenLabelNativeCheckBox         , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelPronounceCheckBox      , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelTransliterationCheckBox, &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelTranslationCheckBox    , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelIPACheckBox            , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelModernCheckBox         , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+
+	connectBoolProperty(ui->abbreviatedNamesCheckBox,               "StelSkyCultureMgr.flagUseAbbreviatedNames");
+	connectCheckBox(ui->showConstellationLinesCheckBox,             "actionShow_Constellation_Lines");
+	connectIntProperty(ui->constellationLineThicknessSpinBox,       "ConstellationMgr.constellationLineThickness");
+	connectCheckBox(ui->showConstellationLabelsCheckBox,            "actionShow_Constellation_Labels");
+	connectCheckBox(ui->showConstellationBoundariesCheckBox,        "actionShow_Constellation_Boundaries");
 	connectIntProperty(ui->constellationBoundariesThicknessSpinBox,	"ConstellationMgr.constellationBoundariesThickness");
-	connectCheckBox(ui->showConstellationArtCheckBox,			"actionShow_Constellation_Art");
-	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,		"ConstellationMgr.artIntensity");
+	connectCheckBox(ui->showConstellationArtCheckBox,               "actionShow_Constellation_Art");
+	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,    "ConstellationMgr.artIntensity");
 
 	// fade duration
-	connectDoubleProperty(ui->artFadeDurationDoubleSpinBox,		"ConstellationMgr.artFadeDuration");
-	connectDoubleProperty(ui->boundariesFadeDurationDoubleSpinBox,	"ConstellationMgr.boundariesFadeDuration");
-	connectDoubleProperty(ui->linesFadeDurationDoubleSpinBox,		"ConstellationMgr.linesFadeDuration");
-	connectDoubleProperty(ui->namesFadeDurationDoubleSpinBox,		"ConstellationMgr.namesFadeDuration");
-	connectDoubleProperty(ui->asterismNamesFadeDurationDoubleSpinBox,	"AsterismMgr.namesFadeDuration");
-	connectDoubleProperty(ui->asterismLinesFadeDurationDoubleSpinBox,	"AsterismMgr.linesFadeDuration");
-	connectDoubleProperty(ui->rayHelpersFadeDurationDoubleSpinBox,	"AsterismMgr.rayHelpersFadeDuration");
+	connectDoubleProperty(ui->artFadeDurationDoubleSpinBox,           "ConstellationMgr.artFadeDuration");
+	connectDoubleProperty(ui->boundariesFadeDurationDoubleSpinBox,    "ConstellationMgr.boundariesFadeDuration");
+	connectDoubleProperty(ui->linesFadeDurationDoubleSpinBox,         "ConstellationMgr.linesFadeDuration");
+	connectDoubleProperty(ui->namesFadeDurationDoubleSpinBox,         "ConstellationMgr.namesFadeDuration");
+	connectDoubleProperty(ui->asterismNamesFadeDurationDoubleSpinBox, "AsterismMgr.namesFadeDuration");
+	connectDoubleProperty(ui->asterismLinesFadeDurationDoubleSpinBox, "AsterismMgr.linesFadeDuration");
+	connectDoubleProperty(ui->rayHelpersFadeDurationDoubleSpinBox,    "AsterismMgr.rayHelpersFadeDuration");
 
 	ui->colorConstellationBoundaries->setup("ConstellationMgr.boundariesColor", "color/const_boundary_color");
 	ui->colorConstellationLabels    ->setup("ConstellationMgr.namesColor",      "color/const_names_color");
 	ui->colorConstellationLines     ->setup("ConstellationMgr.linesColor",      "color/const_lines_color");
 
-	connectCheckBox(ui->showAsterismLinesCheckBox,		"actionShow_Asterism_Lines");
-	connectIntProperty(ui->asterismLineThicknessSpinBox,		"AsterismMgr.asterismLineThickness");
-	connectCheckBox(ui->showAsterismLabelsCheckBox,		"actionShow_Asterism_Labels");
-	connectCheckBox(ui->showRayHelpersCheckBox,		"actionShow_Ray_Helpers");
-	connectIntProperty(ui->rayHelperThicknessSpinBox,		"AsterismMgr.rayHelperThickness");
+	connectCheckBox(ui->showAsterismLinesCheckBox,          "actionShow_Asterism_Lines");
+	connectIntProperty(ui->asterismLineThicknessSpinBox,    "AsterismMgr.asterismLineThickness");
+	connectCheckBox(ui->showAsterismLabelsCheckBox,         "actionShow_Asterism_Labels");
+	connectCheckBox(ui->showRayHelpersCheckBox,             "actionShow_Ray_Helpers");
+	connectIntProperty(ui->rayHelperThicknessSpinBox,       "AsterismMgr.rayHelperThickness");
 
 	connectBoolProperty(ui->selectSingleConstellationCheckBox, "ConstellationMgr.isolateSelected");
-	connectBoolProperty(ui->constellationPickCheckBox, "ConstellationMgr.flagConstellationPick");
+	connectBoolProperty(ui->constellationPickCheckBox,         "ConstellationMgr.flagConstellationPick");
 
 	ui->colorAsterismLabels->setup("AsterismMgr.namesColor",      "color/asterism_names_color");
 	ui->colorAsterismLines ->setup("AsterismMgr.linesColor",      "color/asterism_lines_color");
@@ -713,7 +743,6 @@ void ViewDialog::updateHips()
 		return;
 	}
 
-	QJsonObject currentInfo;
 	QString currentSurvey = l->currentItem() ? l->currentItem()->data(Qt::UserRole).toString() : "";
 	QListWidgetItem* currentItem = nullptr;
 	HipsSurveyP currentHips;
@@ -1079,8 +1108,8 @@ void ViewDialog::populateLists()
 	QListWidget* l = ui->culturesListWidget;
 	l->blockSignals(true);
 	l->clear();
-	QStringList skyculture = app.getSkyCultureMgr().getSkyCultureListI18();
-	for ( const auto& s : skyculture  )
+	const QStringList &skycultures = app.getSkyCultureMgr().getSkyCultureListI18();
+	for ( const auto& s : skycultures  )
 	{
 		l->addItem(s);
 		l->findItems(s, Qt::MatchExactly).at(0)->setToolTip(s);
@@ -1095,25 +1124,6 @@ void ViewDialog::populateLists()
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	updateSkyCultureText();
-
-	// populate language printing combo. (taken from DeltaT combo)
-	StelModule* cmgr = app.getModule("ConstellationMgr");
-	Q_ASSERT(cmgr);
-	Q_ASSERT(ui->skyCultureNamesStyleComboBox);
-	QComboBox* cultureNamesStyleComboBox = ui->skyCultureNamesStyleComboBox;
-
-	cultureNamesStyleComboBox->blockSignals(true);
-	cultureNamesStyleComboBox->clear();
-	QMetaEnum enumerator = cmgr->metaObject()->property(cmgr->metaObject()->indexOfProperty("constellationDisplayStyle")).enumerator();
-	cultureNamesStyleComboBox->addItem(q_("Abbreviated"), enumerator.keyToValue("constellationsAbbreviated"));
-	cultureNamesStyleComboBox->addItem(q_("Native"), enumerator.keyToValue("constellationsNative"));  // Please make this always a transcript into European letters!
-	cultureNamesStyleComboBox->addItem(q_("Translated"), enumerator.keyToValue("constellationsTranslated"));
-	//cultureNamesStyleComboBox->addItem(q_("English"),    ConstellationMgr::constellationsEnglish); // This is not useful.
-	//Restore the selection
-	int index = cultureNamesStyleComboBox->findData(cmgr->property("constellationDisplayStyle").toInt(), Qt::UserRole, Qt::MatchCaseSensitive);
-	if (index==-1) index=2; // Default: Translated
-	cultureNamesStyleComboBox->setCurrentIndex(index);
-	cultureNamesStyleComboBox->blockSignals(false);
 
 	const StelCore* core = app.getCore();
 	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
@@ -1167,6 +1177,54 @@ void ViewDialog::populateLists()
 	updateDefaultLandscape();
 }
 
+void ViewDialog::configureSkyCultureCheckboxes()
+{
+	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
+	StelObject::CulturalDisplayStyle infoStyle   = scMgr->getInfoLabelStyle();
+	StelObject::CulturalDisplayStyle screenStyle = scMgr->getScreenLabelStyle();
+
+	ui->infoLabelNativeCheckBox           ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Native));
+	ui->infoLabelPronounceCheckBox        ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Pronounce));
+	ui->infoLabelTransliterationCheckBox  ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Translit));
+	ui->infoLabelTranslationCheckBox      ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Translated));
+	ui->infoLabelIPACheckBox              ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::IPA));
+	ui->infoLabelModernCheckBox           ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Modern));
+	ui->screenLabelNativeCheckBox         ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Native));
+	ui->screenLabelPronounceCheckBox      ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Pronounce));
+	ui->screenLabelTransliterationCheckBox->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Translit));
+	ui->screenLabelTranslationCheckBox    ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Translated));
+	ui->screenLabelIPACheckBox            ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::IPA));
+	ui->screenLabelModernCheckBox         ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Modern));
+}
+
+void ViewDialog::updateSkyCultureInfoStyleFromCheckboxes()
+{
+	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
+
+	scMgr->setInfoLabelStyle(static_cast<StelObject::CulturalDisplayStyle>(
+				int(ui->infoLabelNativeCheckBox         ->isChecked()) << 5 |
+				int(ui->infoLabelPronounceCheckBox      ->isChecked()) << 4 |
+				int(ui->infoLabelTransliterationCheckBox->isChecked()) << 3 |
+				int(ui->infoLabelTranslationCheckBox    ->isChecked()) << 2 |
+				int(ui->infoLabelIPACheckBox            ->isChecked()) << 1 |
+				int(ui->infoLabelModernCheckBox         ->isChecked())
+				));
+}
+
+void ViewDialog::updateSkyCultureScreenStyleFromCheckboxes()
+{
+	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
+
+	scMgr->setScreenLabelStyle(static_cast<StelObject::CulturalDisplayStyle>(
+				int(ui->screenLabelNativeCheckBox         ->isChecked()) << 5 |
+				int(ui->screenLabelPronounceCheckBox      ->isChecked()) << 4 |
+				int(ui->screenLabelTransliterationCheckBox->isChecked()) << 3 |
+				int(ui->screenLabelTranslationCheckBox    ->isChecked()) << 2 |
+				int(ui->screenLabelIPACheckBox            ->isChecked()) << 1 |
+				int(ui->screenLabelModernCheckBox         ->isChecked())
+				));
+}
+
 void ViewDialog::skyCultureChanged()
 {
 	QListWidget* l = ui->culturesListWidget;
@@ -1177,6 +1235,7 @@ void ViewDialog::skyCultureChanged()
 
 	updateSkyCultureText();
 	updateDefaultSkyCulture();
+	configureSkyCultureCheckboxes();
 }
 
 // fill the description text window, not the names in the sky.

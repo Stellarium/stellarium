@@ -1095,9 +1095,12 @@ private:
 		NebulaP nebula;
 		QStringList references;
 	};
-	QHash<QString/*name*/,NebulaWithReferences> commonNameMap;
-
-	QHash<NebulaP,QVector<QString>> defaultNameMap;
+	//! A Hash that holds a QStringList of all "accepted" names from nebulae/default/names.dat
+	//! @note "accepted" means that users can exclude DSO listed only in selected (unwanted) references.
+	QHash<NebulaP,QStringList> commonNameMap;
+	//! A Hash that holds NebulaP for each "accepted" uppercased name from nebulae/default/names.dat
+	//! @note "accepted" means that users can exclude DSO listed only in selected (unwanted) references.
+	QHash<QString/*name*/,NebulaWithReferences> commonNameIndex;
 
 	LinearFader hintsFader;
 	LinearFader flagShow;

@@ -6,7 +6,9 @@ The cave of Armintxe was lost because of the urban development. On May first 201
 
 ## Description
 
+<p/>
 <img src="illustrations/Armintxesala.png" width="800" height="380" />
+<img src="illustrations/osoa.png" width="800" height="380" />
 
 ### Animal constellations
 
