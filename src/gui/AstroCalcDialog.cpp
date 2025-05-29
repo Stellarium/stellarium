@@ -2160,6 +2160,7 @@ void AstroCalcDialog::saveEphemeris()
 
 void AstroCalcDialog::cleanupEphemeris()
 {
+	computeEphemeris = false;
 	EphemerisList.clear();
 	ui->ephemerisTreeWidget->clear();
 	enableEphemerisButtons(false);
