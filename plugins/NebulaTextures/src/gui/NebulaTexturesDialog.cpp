@@ -150,11 +150,11 @@ void NebulaTexturesDialog::createDialogContent()
 
 	for (const auto& pair : allCornerSpins) {
 		AngleSpinBox* spin = pair.first;
-		bool isLongitude = pair.second;
+		bool isRA = pair.second;
 
-		spin->setMinimum(isLongitude ? -180.0 : -90.0, true);
-		spin->setMaximum(isLongitude ? 180.0 : 90.0, true);
-		spin->setWrapping(isLongitude);
+		spin->setMinimum(isRA ? 0.0 : -90.0, true);
+		spin->setMaximum(isRA ? 360.0 : 90.0, true);
+		spin->setWrapping(isRA);
 		connect(spin, SIGNAL(valueChanged()), this, SLOT(refreshTempTexturePreview()));
 		connect(spin, SIGNAL(valueChanged()), this, SLOT(showRecoverCoordsButton()));
 	}
