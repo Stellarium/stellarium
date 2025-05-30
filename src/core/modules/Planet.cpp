@@ -262,10 +262,10 @@ Planet::Planet(const QString& englishName,
 	  multisamplingEnabled_(StelApp::getInstance().getSettings()->value("video/multisampling", 0).toUInt() != 0),
 	  planetShadowsSupersampEnabled_(StelApp::getInstance().getSettings()->value("video/planet_shadows_supersampling",false).toBool()),
 	  gl(Q_NULLPTR),
-	  iauMoonNumber(QString()),
-	  b_v(99.f),
 	  discoverer(QString()),
 	  discoveryDate(QString()),
+	  iauMoonNumber(QString()),
+	  b_v(99.f),
 	  orbitPositionsCache(ORBIT_SEGMENTS * 2)
 {
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
