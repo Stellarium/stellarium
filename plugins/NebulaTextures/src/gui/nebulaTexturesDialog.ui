@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>519</width>
-    <height>520</height>
+    <height>502</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -50,16 +50,16 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_6">
        <property name="leftMargin">
-        <number>6</number>
+        <number>0</number>
        </property>
        <property name="topMargin">
-        <number>6</number>
+        <number>0</number>
        </property>
        <property name="rightMargin">
-        <number>6</number>
+        <number>0</number>
        </property>
        <property name="bottomMargin">
-        <number>6</number>
+        <number>0</number>
        </property>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -103,7 +103,7 @@
               <item row="1" column="0">
                <widget class="QLabel" name="label_apiKey">
                 <property name="text">
-                 <string>Astrometry ApiKey:</string>
+                 <string notr="true">Astrometry ApiKey:</string>
                 </property>
                 <property name="textFormat">
                  <enum>Qt::RichText</enum>
@@ -133,7 +133,7 @@
               <item row="1" column="1">
                <widget class="QLineEdit" name="lineEditApiKey">
                 <property name="echoMode">
-                 <enum>QLineEdit::EchoMode::PasswordEchoOnEdit</enum>
+                 <enum>QLineEdit::PasswordEchoOnEdit</enum>
                 </property>
                </widget>
               </item>
@@ -189,6 +189,12 @@
            <layout class="QGridLayout" name="gridLayout_3">
             <item row="1" column="0">
              <widget class="QLabel" name="label_tld">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Dec (↖)</string>
               </property>
@@ -196,6 +202,12 @@
             </item>
             <item row="4" column="0">
              <widget class="QLabel" name="label_blr">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>RA (↙)</string>
               </property>
@@ -203,6 +215,12 @@
             </item>
             <item row="5" column="0">
              <widget class="QLabel" name="label_bld">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Dec (↙)</string>
               </property>
@@ -210,6 +228,12 @@
             </item>
             <item row="2" column="2">
              <widget class="QLabel" name="label_rr">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <pointsize>9</pointsize>
@@ -222,27 +246,52 @@
             </item>
             <item row="0" column="0">
              <widget class="QLabel" name="label_tlr">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>RA (↖)</string>
               </property>
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="AngleSpinBox" name="topLeftX"/>
+             <widget class="AngleSpinBox" name="topLeftX">
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
             </item>
             <item row="1" column="1">
-             <widget class="AngleSpinBox" name="topLeftY"/>
+             <widget class="AngleSpinBox" name="topLeftY">
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
             </item>
             <item row="4" column="1">
-             <widget class="AngleSpinBox" name="bottomLeftX"/>
+             <widget class="AngleSpinBox" name="bottomLeftX">
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
             </item>
             <item row="5" column="1">
-             <widget class="AngleSpinBox" name="bottomLeftY"/>
+             <widget class="AngleSpinBox" name="bottomLeftY">
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
             </item>
             <item row="3" column="3">
              <widget class="AngleSpinBox" name="referY">
               <property name="enabled">
                <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -251,10 +300,19 @@
               <property name="enabled">
                <bool>true</bool>
               </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
              </widget>
             </item>
             <item row="3" column="2">
              <widget class="QLabel" name="label_rd">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <pointsize>9</pointsize>
@@ -265,35 +323,14 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="3">
-             <widget class="QPushButton" name="goPushButton">
-              <property name="text">
-               <string>Goto Center</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="3">
-             <widget class="QPushButton" name="recoverCoordsButton">
-              <property name="text">
-               <string>Reset</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2" colspan="2">
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
             <item row="0" column="4">
              <widget class="QLabel" name="label_trr">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>RA (↗)</string>
               </property>
@@ -301,6 +338,12 @@
             </item>
             <item row="1" column="4">
              <widget class="QLabel" name="label_trd">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Dec (↗)</string>
               </property>
@@ -308,6 +351,12 @@
             </item>
             <item row="4" column="4">
              <widget class="QLabel" name="label_brr">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>RA (↘)</string>
               </property>
@@ -315,22 +364,58 @@
             </item>
             <item row="5" column="4">
              <widget class="QLabel" name="label_brd">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Dec (↘)</string>
               </property>
              </widget>
             </item>
             <item row="0" column="5">
-             <widget class="AngleSpinBox" name="topRightX"/>
+             <widget class="AngleSpinBox" name="topRightX">
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
             </item>
             <item row="1" column="5">
-             <widget class="AngleSpinBox" name="topRightY"/>
+             <widget class="AngleSpinBox" name="topRightY">
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
             </item>
             <item row="4" column="5">
-             <widget class="AngleSpinBox" name="bottomRightX"/>
+             <widget class="AngleSpinBox" name="bottomRightX">
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
             </item>
             <item row="5" column="5">
-             <widget class="AngleSpinBox" name="bottomRightY"/>
+             <widget class="AngleSpinBox" name="bottomRightY">
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2" colspan="2">
+             <widget class="QPushButton" name="goPushButton">
+              <property name="text">
+               <string>Goto Center</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2" colspan="2">
+             <widget class="QPushButton" name="recoverCoordsButton">
+              <property name="text">
+               <string>Reset</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -342,7 +427,7 @@
          <property name="title">
           <string>Rendering tester</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_10">
+         <layout class="QGridLayout" name="gridLayout">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -355,77 +440,90 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QPushButton" name="renderButton">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="text">
-               <string>Test this texture</string>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="brightComboBox">
-              <property name="maximumSize">
-               <size>
-                <width>100</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>Brightness</string>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="disableDefault">
-              <property name="text">
-               <string>Disable default textures</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="disableDefault">
+            <property name="text">
+             <string>Disable default textures</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="renderButton">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Test this texture</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="brightComboBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Brightness</string>
+            </property>
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="addCustomTextureButton">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <property name="leftMargin">
+          <number>9</number>
          </property>
-         <property name="text">
-          <string>Add the Texture to Custom Storage</string>
+         <property name="rightMargin">
+          <number>9</number>
          </property>
-        </widget>
+         <item>
+          <widget class="QPushButton" name="addCustomTextureButton">
+           <property name="text">
+            <string>Add the Texture to Custom Storage</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="restoreDefaultsButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Restore defaults</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
-        <widget class="QPushButton" name="restoreDefaultsButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
-         <property name="text">
-          <string>Restore defaults</string>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
          </property>
-        </widget>
+        </spacer>
        </item>
       </layout>
      </widget>
