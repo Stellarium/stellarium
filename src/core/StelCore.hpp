@@ -101,6 +101,7 @@ public:
 		ProjectionOrthographic,		//!< Orthographic projection
 		ProjectionEqualArea,		//!< Equal Area projection
 		ProjectionHammer,		//!< Hammer-Aitoff projection
+		ProjectionMollweide,	//!< Mollweide projection
 		ProjectionSinusoidal,		//!< Sinusoidal projection
 		ProjectionMercator,		//!< Mercator projection
 		ProjectionMiller,		//!< Miller cylindrical projection

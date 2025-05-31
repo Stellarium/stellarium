@@ -591,6 +591,53 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 }
 
 template<class Star>
+void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly, const float maxMag,
+						  QList<StelObjectP > &result) const
+{
+	if (hipOnly && level>3)
+			return;
+#ifndef NDEBUG
+	qDebug() << "SpecialZoneArray<Star>::searchWithin(): Level" << level << "MagMin" << mag_min << "fname" << fname << "nr_of_zones" << nr_of_zones << "nr_of_stars" << nr_of_stars;
+#endif
+	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
+	const SpecialZoneData<Star> *const z = getZones()+index;
+	const float maxMilliMag = 1000.f*maxMag;
+	Vec3d tmp;
+	double RA, DEC, pmra, pmdec, Plx, RadialVel;
+	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
+	{
+		if (hipOnly && s->getHip()==0)
+		{
+			continue;
+		}
+
+		s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+		StelUtils::spheToRect(RA, DEC, tmp);
+		// s->getJ2000Pos(dyrs, tmp);
+		// in case it is in a binary system
+		s->getBinaryOrbit(core->getJDE(), tmp);
+		s->getPlxEffect(withParallax * Plx, tmp, diffPos);
+		tmp.normalize();
+		// TODO: Move vel into arg.list
+		if (core->getUseAberration())
+		{
+			const Vec3d vel = core->getAberrationVec(core->getJDE());
+			tmp+=vel;
+			tmp.normalize();
+		}
+		// By trying, region is a SphericalPolygon. We are calling SphericalPolygon::contains(Vec3d)
+		if (region->contains(tmp) && (s->getMag() < maxMilliMag) )
+		{
+#ifndef NDEBUG
+			//qDebug() << "Region match: " <<  s->getHip() << s->getGaia()  << "(Index (Zone):" << index << ", Level="<< level << ")";
+#endif
+			result.push_back(s->createStelObject(this,z));
+		}
+	}
+}
+
+
+template<class Star>
 StelObjectP SpecialZoneArray<Star>::searchGaiaID(int index, const StarId source_id, int &matched) const
 {
 	const SpecialZoneData<Star> *const z = getZones()+index;

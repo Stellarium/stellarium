@@ -781,7 +781,6 @@ void StelSkyCultureMgr::setFlagUseAbbreviatedNames(bool b)
 {
 	flagUseAbbreviatedNames=b;
 	StelApp::immediateSave("viewing/flag_constellation_abbreviations", b);
-	qInfo() << "StelSkyCultureMgr::setFlagUseAbbreviatedNames(bool b):" << b;
 	emit flagUseAbbreviatedNamesChanged(b);
 }
 

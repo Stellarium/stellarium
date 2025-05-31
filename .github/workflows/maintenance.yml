@@ -51,8 +51,7 @@ jobs:
     steps:
       - name: Install JSON linter
         run: |
-          sudo apt remove php7.* -y
-          sudo apt remove php8.* -y
+          sudo apt remove php* -y
           sudo apt update
           sudo apt install -y jsonlint python3-demjson
 

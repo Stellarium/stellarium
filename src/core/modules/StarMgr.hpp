@@ -25,6 +25,7 @@
 #include <QVector>
 #include "StelFader.hpp"
 #include "StelObjectModule.hpp"
+#include "StelSphereGeometry.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelObject.hpp"
 
@@ -189,6 +190,12 @@ public:
 	// Methods defined in StelObjectModule class
 	//! Return a list containing the stars located inside the limFov circle around position v
 	QList<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
+
+	//! Return a list containing the stars located inside the region.
+	//! @param hipOnly Only return Hipparcos stars.
+	//! @param maxMag only return results brighter than that (default 25).
+	//! @note May become large!
+	QList<StelObjectP > searchWithin(const SphericalRegionP region, const StelCore* core, const bool hipOnly=true, const float maxMag=25.f) const;
 
 	//! Return the matching Stars object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensitive localized star common name or HIP/HP, SAO, HD, HR, GCVS or WDS number

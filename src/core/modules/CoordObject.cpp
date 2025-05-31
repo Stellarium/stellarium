@@ -1,6 +1,5 @@
 /*
- * Stellarium
- * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2025 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,27 +16,21 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef TESTSTELPROJECTOR_HPP
-#define TESTSTELPROJECTOR_HPP
+#include "CoordObject.hpp"
+#include "StelObject.hpp"
 
-#include <QObject>
-#include <QtTest>
+const QString CoordObject::COORDOBJECT_TYPE = QStringLiteral("CoordObject");
 
-class TestStelProjector : public QObject
+CoordObject::CoordObject(const QString& aName, const Vec3d& coordJ2000) : StelObject()
+	, XYZ(coordJ2000)
+	, name(aName)
 {
-	Q_OBJECT
-private slots:
-	void testStelProjectorPerspective();
-	void testStelProjectorEqualArea();
-	void testStelProjectorStereographic();
-	void testStelProjectorFisheye();
-	void testStelProjectorHammer();
-	void testStelProjectorMollweide();
-	void testStelProjectorCylinder();
-	void testStelProjectorMercator();
-	void testStelProjectorOrthographic();
-	void testStelProjectorSinusoidal();
-	void testStelProjectorMiller();
-};
+	XYZ.normalize();
+}
 
-#endif // _TESTSTELPROJECTOR_HPP
+Vec3d CoordObject::getJ2000EquatorialPos(const StelCore* core) const
+{
+	Q_UNUSED(core)
+	Q_ASSERT(qFuzzyCompare(XYZ.normSquared(), 1.0));
+	return XYZ;
+}

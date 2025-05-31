@@ -19,7 +19,9 @@
 
 #include "StelProjector.hpp"
 #include "Asterism.hpp"
+#include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
+#include "NebulaMgr.hpp"
 
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
@@ -55,6 +57,7 @@ Asterism::~Asterism()
 
 bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &excludeRefs)
 {
+	static NebulaMgr *nebulaMgr=GETSTELMODULE(NebulaMgr);
 	static QSettings *conf=StelApp::getInstance().getSettings();
 
 	const QString id = data["id"].toString();
@@ -179,27 +182,54 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &
 		for (int pointIndex = 0; pointIndex < polyline.size(); ++pointIndex)
 		{
 			const auto point = polyline[pointIndex];
+			StelObjectP newObj;
 			switch (typeOfAsterism)
 			{
 			case Type::RayHelper:
 			case Type::Asterism:
 			{
-				if (!point.isDouble() && !point.isString())
+				if (point.isString() && point.toString().startsWith("DSO:"))
+				{
+					QString DSOname=point.toString().remove(0,4);
+					newObj = nebulaMgr->searchByID(DSOname);
+					if (!newObj)
+					{
+						qWarning().nospace() << "Error in asterism " << abbreviation << ": can't find DSO " << DSOname << "... skipping asterism";
+						return false;
+					}
+				}
+				else if (!point.isDouble() && !point.isString())
 				{
 					qWarning().nospace() << "Error in asterism " << abbreviation << ": bad point at line #"
 					                     << lineIndex << ": isn't a number";
 					return false;
 				}
-				const StarId HIP = StelUtils::getLongLong(point);
-				if (HIP <= NR_OF_HIP)
-					asterism.push_back(starMgr->searchHP(HIP));
 				else
-					asterism.push_back(starMgr->searchGaia(HIP));
+				{
+					const StarId HIP = StelUtils::getLongLong(point);
+					if (HIP>0)
+					{
+						newObj = HIP <= NR_OF_HIP ? starMgr->searchHP(HIP)
+									  : starMgr->searchGaia(HIP);
+
+						if (!newObj)
+						{
+							qWarning().nospace() << "Error in asterism " << abbreviation << ": can't find star HIP " << HIP << "... skipping asterism";
+							return false;
+						}
+					}
+					else
+					{
+						qWarning().nospace() << "Error in asterism " << abbreviation << ": bad element: " << point.toString() << "... skipping asterism";
+						return false;
+					}
+				}
+				asterism.push_back(newObj);
+
 				if (!asterism.back())
 				{
 					asterism.pop_back();
 					qWarning().nospace() << "Error in asterism " << abbreviation <<
-								": can't find star " << (HIP <= NR_OF_HIP ? "HIP ":"DR3 ") << HIP <<
 								" (Skipping asterism. Install more catalogs?)";
 					return false;
 				}
@@ -265,10 +295,11 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &
 
 	if (typeOfAsterism != Type::RayHelper)
 	{
-		XYZname.set(0.,0.,0.);
+		Vec3d XYZname1(0.);
 		for(const auto& point : asterism)
-			XYZname += point->getJ2000EquatorialPos(core);
-		XYZname.normalize();
+			XYZname1 += point->getJ2000EquatorialPos(core);
+		XYZname1.normalize();
+		XYZname.append(XYZname1);
 
 		// Sometimes label placement is suboptimal. Allow a correction from the automatic solution in label_offset:[dRA_deg, dDec_deg]
 		if (data.contains("label_offset"))
@@ -279,10 +310,30 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &
 			else
 			{
 				double ra, dec;
-				StelUtils::rectToSphe(&ra, &dec, XYZname);
+				StelUtils::rectToSphe(&ra, &dec, XYZname[0]);
 				ra  += offset[0].toDouble()*M_PI_180;
 				dec += offset[1].toDouble()*M_PI_180;
-				StelUtils::spheToRect(ra, dec, XYZname);
+				StelUtils::spheToRect(ra, dec, XYZname[0]);
+			}
+		}
+		// Asterism label placement: Manual position can have more than one.
+		if (data.contains("label_positions"))
+		{
+			XYZname.clear();
+			const QJsonArray &labelPosArray=data["label_positions"].toArray();
+			for (const auto& labelPos : labelPosArray)
+			{
+				const auto& labelArray=labelPos.toArray();
+				if (labelArray.size() != 2)
+				{
+					qWarning() << "Bad label position given for asterism" << abbreviation << "... skipping";
+					continue;
+				}
+				const double RA = labelArray[0].toDouble() * (M_PI_180*15.);
+				const double DE = labelArray[1].toDouble() * M_PI_180;
+				Vec3d newPoint;
+				StelUtils::spheToRect(RA, DE, newPoint);
+				XYZname.append(newPoint);
 			}
 		}
 	}
@@ -342,7 +393,26 @@ void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const Sphe
 	}
 }
 
-void Asterism::drawName(StelPainter& sPainter, bool abbreviateLabel) const
+// observer centered J2000 coordinates.
+// These are either automatically computed from all stars forming the lines,
+// or from the manually defined label point(s).
+Vec3d Asterism::getJ2000EquatorialPos(const StelCore*) const
+{
+	if (XYZname.length() ==1)
+		return XYZname.first();
+	else
+	{
+		Vec3d point(0.0);
+		for (Vec3d namePoint: XYZname)
+		{
+			point += namePoint;
+		}
+		point.normalize();
+		return point;
+	}
+}
+
+void Asterism::drawName(const Vec3d &xyName, StelPainter& sPainter) const
 {
 	if ((nameFader.getInterstate()==0.0f) || !flagAsterism)
 		return;
@@ -350,9 +420,9 @@ void Asterism::drawName(StelPainter& sPainter, bool abbreviateLabel) const
 	if (typeOfAsterism==Type::TelescopicAsterism && sPainter.getProjector()->getFov()>60.f)
 		return;
 
-	QString name = abbreviateLabel ? abbreviationI18n : getScreenLabel();
+	QString name = getScreenLabel();
 	sPainter.setColor(labelColor, nameFader.getInterstate());
-	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
+	sPainter.drawText(static_cast<float>(xyName[0]), static_cast<float>(xyName[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 }
 
 void Asterism::update(int deltaTime)

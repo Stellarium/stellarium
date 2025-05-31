@@ -1050,6 +1050,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_constellation_drawing",		propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_name",		propMgr->getStelPropertyValue("ConstellationMgr.namesDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_boundaries",	propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool());
+	conf->setValue("viewing/flag_constellation_hulls",	propMgr->getStelPropertyValue("ConstellationMgr.hullsDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_art",		propMgr->getStelPropertyValue("ConstellationMgr.artDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_isolate_selected",	propMgr->getStelPropertyValue("ConstellationMgr.isolateSelected").toBool());
 	conf->setValue("viewing/flag_asterism_isolate_selected",	propMgr->getStelPropertyValue("AsterismMgr.isolateAsterismSelected").toBool());
@@ -1058,9 +1059,11 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_environment_auto_enable",	propMgr->getStelPropertyValue("LandscapeMgr.flagEnvironmentAutoEnabling").toBool());
 	conf->setValue("viewing/constellation_art_intensity",		propMgr->getStelPropertyValue("ConstellationMgr.artIntensity").toFloat());
 	conf->setValue("viewing/constellation_line_thickness",		propMgr->getStelPropertyValue("ConstellationMgr.constellationLineThickness").toInt());
-	conf->setValue("viewing/constellation_boundaries_thickness",	propMgr->getStelPropertyValue("ConstellationMgr.constellationBoundariesThickness").toInt());
+	conf->setValue("viewing/constellation_boundaries_thickness",	propMgr->getStelPropertyValue("ConstellationMgr.boundariesThickness").toInt());
+	conf->setValue("viewing/constellation_hulls_thickness",		propMgr->getStelPropertyValue("ConstellationMgr.hullsThickness").toInt());
 	conf->setValue("viewing/constellation_art_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.artFadeDuration").toDouble(), 'f', 1));
 	conf->setValue("viewing/constellation_boundaries_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.boundariesFadeDuration").toDouble(), 'f', 1));
+	conf->setValue("viewing/constellation_hulls_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.hullsFadeDuration").toDouble(), 'f', 1));
 	conf->setValue("viewing/constellation_lines_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.linesFadeDuration").toDouble(), 'f', 1));
 	conf->setValue("viewing/constellation_labels_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.namesFadeDuration").toDouble(), 'f', 1));
 

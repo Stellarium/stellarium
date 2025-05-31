@@ -451,7 +451,7 @@ Constellations are coded as array of dictionaries:
 where
 
 \begin{description}
-\item[\jtag{id}] A unique figure identifier, consisting of \texttt{CON} (for \indexterm{constellations}), skyculture id, and a short label still unique within the skyculture.
+\item[\jtag{id}] A unique figure identifier, consisting of \texttt{CON} (for \indexterm[constellation]{constellations}), skyculture id, and a short label still unique within the skyculture.
                  For IAU-based skycultures, these short labels must be the IAU standard labels. For others, you can invent your own. It is not necessary to have exactly
                  3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended:  
                  the short label is displayed when enabling abbreviated screen labels (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
@@ -460,6 +460,8 @@ where
 
 \item[\jtag{lines}] an array of arrays, each describing a polyline with star numbers. The star numbers are usually the Hipparcos (HIP) numbers. 
                     For very dim stars, the longer numbers from the Gaia DR3 catalog are acceptable, but they must be written as string.
+		    Even Deep-Sky objects \newFeature{25.2}(like a naked-eye open cluster) can be added to a constellation line when written as 
+		    string starting with \texttt{"DSO:"}, like \jtag{DSO:M7}.
 
                     To describe \indexterm[constellations!dark]{dark constellations}\newFeature{25.2} formed from dust clouds in the Milky Way or other non-stellar items, 
                     another variant can use coordinate lists and is technically an array of arrays of 2-part arrays of float numbers, 
@@ -469,6 +471,11 @@ where
                     \indexterm[constellations!single-star]{Single-star constellations}\newFeature{25.1}  or particular highlights can be described with just one star repeated in a two-element segment.
                     The respective star will be encircled with a radius of 
 \item[\jtag{single\_star\_radius}] (float, default 0.5)\newFeature{25.1}.
+\item[\jtag{hull\_extension}] (optional)\newFeature{25.2} A vector of star IDs (HIP number as integer, Gaia DR3 long integer number as string, 
+                              or a Deep-Sky object (like a naked-eye cluster) as string starting with \texttt{"DSO:"}, like \jtag{DSO:M44} that are seen as part of the constellation.
+			      See below about \emph{convex hull}.
+\item[\jtag{hull\_radius}] (float, defaults to \jtag{single\_star\_radius} or (if that is not defined)0.5)\newFeature{25.2}.
+
 \item[\jtag{image}] Optional, see \ref{SC:image}
 \item[\jtag{common\_name}] Dictionary of names. %Required entries: \jtag{english}. Optional: \jtag{native}
 
@@ -491,7 +498,15 @@ where
 	the \jtag{native} language. Else translators will not be able to translate
 	the name, and users will be less interested to learn about the culture. 
 	Also make very sure to use the same spelling consistently in \file{index.json} and \file{description.md}, 
-	and explain the context of stars, especially where only an untranslatable proper name is given.
+	and explain the context of stars (how these stars are used, or what they mean to the respective members of the culture), 
+	especially where only an untranslatable proper name is given.
+
+\item[\jtag{label\_offset}] optional. An array of \texttt{[deltaRA, deltaDE]} (decimal hours, decimal degrees) 
+                            used as offset that shifts the auto-computed label positions. 
+
+\item[\jtag{label\_positions}] optional. An array of sub-arrays of \texttt{[RA, DE]} tuples (decimal hours, decimal degrees) used as label positions. 
+                               By default, the label position is computed from the star positions used in the \jtag{lines}. 
+			                   With this entry you can set specialized positions, or also use more than one label per constellation. 
 \item[\jtag{visibility}] (optional) special cases for rule-based visibility, e.g. seasonally changing aspects of figures. 
 	Currently only a \jtag{months} rule has been defined. 
 	Its ``payload'' is an array of two integers, start and end of visibility in months, e.g:
@@ -510,7 +525,7 @@ that would be visible from April to May, would be specified as:
 
 
 \paragraph{Drawing dark constellations}\index{constellations!dark}
-The outlines of figures like the ``Emu in the Sky'' cannot be described with connect-the-dot star patterns, 
+The outlines \newFeature{25.2}of figures like the ``Emu in the Sky'' cannot be described with connect-the-dot star patterns, 
 as they are formed from the absence of luminous patterns. We need to describe them using coordinate lists. 
 To make the process less tedious, we can extend setting Markers (see \ref{sec:tour:markers}). 
 For this to work, add the following key to \file{config.ini}:
@@ -523,6 +538,46 @@ containing marker number and the array of coordinates (\texttt{[RA, dec]}).
 In the text editor you are using to edit \file{index.json}, 
 the arrays can be collated into the format required to code coordinate lists for dark constellations.
 
+\paragraph{Constellation area (convex hull)}
+The \indexterm[constellation!area]{constellation area}, \newFeature{25.2}or \indexterm[constellation!convex hull]{convex hull} of a constellation, 
+is an area of the sky described by a convex polygon which surrounds all stars that are part of the lines that form the constellation ``stick figure'', 
+plus those objects which are listed in \jtag{hull\_extension}. 
+While the IAU has defined 88 constellation areas in 1930, constellations of other cultures are not as clearly defined. These areas can help analyzing historical records.
+Note that a point may lie in zero, one or more than one constellation area(s) when it overlaps two or even more adjacent figures. 
+
+This functionality is an advanced topic mostly used by sky culture researchers \citep[e.g.][94-98]{Hoffmann2017a} who are also not afraid of calling scripting functions (see ch.~\ref{ch:scripting}), 
+and is therefore hidden from beginning users. To make use of it, edit your \file{config.ini} and add a key:
+\begin{configfile}
+[gui]
+skyculture_enable_hulls = true 
+\end{configfile}
+
+%% Huh? For some reasons the glitch went away just before merge! If it comes back, reactivate this.
+% Please note that there is a little glitch when drawing the polygon. At some coordinates (0/6h/12h/18h in $\alpha$, 
+% and the celestial equator cause these problems) the lines are interrupted. 
+% This is a purely optical problem. The following query functions are not impeded by this.
+
+The constellation areas of a skyculture can be queried by a scripting function:
+\begin{script}
+ConstellationMgr.outputHullAreas(<filename_start>);
+\end{script}
+The argument \texttt{<filename\_start>} is optional and defaults to \texttt{"hullAreas"}. 
+The created CSV file \file{<filename\_start>\_skycultureName.csv} in your Stellarium user data directory lists hull areas for all constellations of the current skyculture. 
+
+
+You can list stars which belong to a thusly defined constellation with a scripting function:
+\begin{script}
+ConstellationMgr.starsInHullOf("Taurus", false, 12.0, <start>);
+\end{script}
+This creates a file \file{hullStars\_Modern\_Taurus-12.00.csv} in your Stellarium user data directory which contains all stars within the convex hull of Taurus in the current (here: ``Modern'') sky culture. 
+The arguments to the function are:
+\begin{description}
+\item[constellation] string; name or abbreviation.
+\item[hipOnly] Boolean, optional, defaults to \texttt{true}; if you are only interested in brighter stars contained in the Hipparcos catalog, set it \texttt{true}. 
+\item[maxMag] float, optional, default: 25.0. Dimmest stellar magnitude to use. The default value just makes sure all stars that are contained in the catalogs are listed, 
+              the result will only have few entries dimmer than mag 18.
+\item[\texttt{<start>}] string, optional, default \texttt{hullStars}; the start of the filename can be changed here. 
+\end{description}
 
 \subsubsection{Constellation Artwork}
 \label{sec:skycultures:artwork}
@@ -599,8 +654,16 @@ Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help ra
 \item[\jtag{common\_name}] Another dict with entries \jtag{native} (as used in the source), \jtag{english} (the translatable english name), 
                 \jtag{pronounce}, \jtag{transliteration} and \jtag{IPA} as defined for constellations,
 				and an optional array \jtag{references} which lists from which sources (from \ref{SC:references}) this asterism was taken. 
+
 				Collecting sources and giving such references is always a good idea. If you feel ther are more in the collection than you like, 
 				read \ref{sec:skycultures:exclude_references} about suppressing excessive entries.
+				
+\item[\jtag{label\_offset}] optional. An array of \texttt{[deltaRA, deltaDE]} (decimal hours, decimal degrees) 
+                            used as offset that shifts the auto-computed label positions. 
+				
+\item[\jtag{label\_positions}] optional. An array of sub-arrays of \texttt{[RA, DE]} tuples (decimal hours, decimal degrees) used as label positions. 
+                               By default, the label position is computed from the star positions used in the \jtag{lines}. 
+                               With this entry you can set specialized positions, or also use more than one label per asterism. 
 \item[\jtag{is\_ray\_helper}] (optional, default=\texttt{false}). 
                 Set to \texttt{true} to declare this asterism as ``ray helper'' which is shown in a different color and without label. 
 \item[\jtag{lines}] an array of arrays, each describing a polygon with integer star numbers. The star numbers are usually the Hipparcos (HIP) numbers. 
@@ -732,28 +795,29 @@ The large number\newFeature{25.2} of label combinations requires storing them in
 \item{\texttt{Modern}} to show the contemporary scientific object name.
 \end{description}
 
-The names for the active parts are joined with underscore (\texttt{\_}), and the resulting strings stored in \file{config.ini} in two dedicated sections like: 
+The names for the active parts are joined with commas (the sequence of entries is irrelevant and does not influence displayed order), 
+and the resulting strings stored in \file{config.ini} in two dedicated sections like: 
 \begin{configfile}[\scriptsize]
 [SCInfoLabelStyle]
-arabic_arabian_peninsula  = Native_Pronounce_Modern
-boorong                   = Native_Translated
-chinese                   = Native_Pronounce_Translated_Modern
-modern                    = Native_Modern
-russian_siberian          = Native_Pronounce_Translit_Translated_IPA_Modern
+arabic_arabian_peninsula  = Native,Pronounce,Modern
+boorong                   = Native,Translated
+chinese                   = Native,Pronounce,Translated,Modern
+modern                    = Native,Modern
+russian_siberian          = Native,Pronounce,Translit,Translated,IPA,Modern
 
 [SCScreenLabelStyle]
-arabic_arabian_peninsula  = Pronounce_Translated_Modern
-aztec                     = Native_Translated
-chinese                   = Pronounce_Translated_Modern
-modern                    = Native_Modern
-russian_siberian          = Pronounce_Translated_Modern
+arabic_arabian_peninsula  = Pronounce,Translated,Modern
+aztec                     = Native,Translated
+chinese                   = Pronounce,Translated,Modern
+modern                    = Native,Modern
+russian_siberian          = Pronounce,Translated,Modern
 \end{configfile}
 
 
 
 \subsubsection{Not enough, or too many names?}
 \label{sec:skycultures:fallback_names}
-Over the years,\newFeature{25.2} we have collected a quite extensive list of star names from many references. 
+Over the years, we have collected a quite extensive list of star names from many references. 
 Until recently, the scientific community was not interested in standardizing names. 
 With the introduction of Exoplanet naming contests, the International Astronomical Union started 
 to also be concerned with the names of the brighter stars, and a proper Working Group on Star Names has formed. 
@@ -770,7 +834,7 @@ Activating this flag for non-modern skycultures may feel weird, though, as it mi
 \paragraph{Excluding excessive names}
 \label{sec:skycultures:exclude_references}
 In contrast, some of the collected names may be too fanciful for your taste. 
-If you can identify that those names that irritate you all come from a single or just a few entries of the reference list, 
+If you can \newFeature{25.2}identify that those names that irritate you all come from a single or just a few entries of the reference list, 
 you can exclude those sources, and thus the names they bring into the program. Note that if a fancy name comes from more than one book, 
 you would have to exclude all books to ban that name from your display.
 
@@ -780,7 +844,7 @@ or parts of constellations like Orion's shield and cudgel are marked as asterism
 If you cannot identify a reference which introduces the unwanted asterism (for some entries we cannot specify a source, unfortunately), 
 you can also exclude them by their unique abbreviation, which is the last part of their \jtag{id} entries.
 
-To exclude entries from being displayed by a particular skyculture, add an entry like this to \file{config.ini}:
+To exclude entries from being displayed for a particular skyculture, add an entry like this to \file{config.ini}:
 \begin{configfile}
 [SCExcludeReferences]
 modern  = 11,36,OrB,OrS,OSh,OrC,HeG,Sal,TPT
