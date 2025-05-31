@@ -1,6 +1,7 @@
 #include "SkycultureMapGraphicsView.hpp"
 #include "SkyculturePolygonItem.hpp"
 #include <qtimeline.h>
+#include <qgraphicssvgitem.h>
 
 
 SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
@@ -74,8 +75,11 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	// !!!  test basemap drawing  !!!
 
 
-	QGraphicsPixmapItem *baseMap = scene->addPixmap(QPixmap(":/graphicGui/miscWorldMap.jpg"));
-	baseMap->setTransformationMode(Qt::SmoothTransformation);
+	//QGraphicsPixmapItem *baseMap = scene->addPixmap(QPixmap(":/graphicGui/miscWorldMap.jpg"));
+	//baseMap->setTransformationMode(Qt::SmoothTransformation);
+
+	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/testmap.svg");
+	scene->addItem(baseMap);
 
 	scene->addRect(300.0, 600.0, 400.0, 200.0, QPen(Qt::black), QBrush(Qt::yellow));
 	scene->addRect(0.0, 0.0, 500.0, 500.0, QPen(Qt::yellow), QBrush(Qt::blue));

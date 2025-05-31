@@ -564,13 +564,6 @@ void ViewDialog::createDialogContent()
 	connect(ui->skyCultureTimeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTime(int)));
 	connect(ui->skyCultureMapGraphicsView, SIGNAL(timeChanged(int)), this, SLOT(updateSkyCultureTime(int)));
 
-	// allow to display short names and inhibit translation.
-	connectIntProperty(ui->skyCultureNamesStyleComboBox,		"ConstellationMgr.constellationDisplayStyle");
-	connectCheckBox(ui->nativePlanetNamesCheckBox,			"actionShow_Skyculture_NativePlanetNames");
-	connectCheckBox(ui->showConstellationLinesCheckBox,			"actionShow_Constellation_Lines");
-	connectIntProperty(ui->constellationLineThicknessSpinBox,		"ConstellationMgr.constellationLineThickness");
-	connectCheckBox(ui->showConstellationLabelsCheckBox,		"actionShow_Constellation_Labels");
-	connectCheckBox(ui->showConstellationBoundariesCheckBox,		"actionShow_Constellation_Boundaries");
 	configureSkyCultureCheckboxes();
 	StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
 	connect(scMgr, &StelSkyCultureMgr::screenLabelStyleChanged, this, &ViewDialog::configureSkyCultureCheckboxes);
