@@ -277,6 +277,13 @@ void PlateSolver::sendSubStatusRequest()
 	activeReplies.append(reply);
 	connect(reply, &QNetworkReply::finished, this, &PlateSolver::onSubStatusReply);
 
+	QTimer::singleShot(5000, reply, [reply]() {
+		if (reply && reply->isRunning()) {
+			qDebug() << "[NebulaTextures] Submission status request timed out, aborting...";
+			reply->abort();
+		}
+	});
+
 	emit solvingStatusUpdated(q_("Checking submission status") +QString(" (%1/%2)...").arg(retryCount + 1).arg(maxRetryCount));
 }
 
@@ -334,6 +341,13 @@ void PlateSolver::sendJobStatusRequest()
 	QNetworkReply* reply = networkManager->get(request);
 	activeReplies.append(reply);
 	connect(reply, &QNetworkReply::finished, this, &PlateSolver::onJobStatusReply);
+
+	QTimer::singleShot(5000, reply, [reply]() {
+		if (reply && reply->isRunning()) {
+			qDebug() << "[NebulaTextures] Job status request timed out, aborting...";
+			reply->abort();
+		}
+	});
 
 	emit solvingStatusUpdated(q_("Checking job status") +QString(" (%1/%2)...").arg(retryCount + 1).arg(maxRetryCount));
 }
