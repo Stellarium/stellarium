@@ -195,6 +195,9 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="toolTip">
+               <string>Declination of top left corner of image</string>
+              </property>
               <property name="text">
                <string>Dec (↖)</string>
               </property>
@@ -207,6 +210,9 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Right ascension of bottom left corner of image</string>
               </property>
               <property name="text">
                <string>RA (↙)</string>
@@ -221,6 +227,9 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="toolTip">
+               <string>Declination of bottom left corner of image</string>
+              </property>
               <property name="text">
                <string>Dec (↙)</string>
               </property>
@@ -234,10 +243,8 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="font">
-               <font>
-                <pointsize>9</pointsize>
-               </font>
+              <property name="toolTip">
+               <string>Right ascension of center of image</string>
               </property>
               <property name="text">
                <string>RA (Center)</string>
@@ -251,6 +258,9 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Right ascension of top left corner of image</string>
               </property>
               <property name="text">
                <string>RA (↖)</string>
@@ -313,10 +323,8 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="font">
-               <font>
-                <pointsize>9</pointsize>
-               </font>
+              <property name="toolTip">
+               <string>Declination of center of image</string>
               </property>
               <property name="text">
                <string>Dec (Center)</string>
@@ -331,6 +339,9 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="toolTip">
+               <string>Right ascension of top right corner of image</string>
+              </property>
               <property name="text">
                <string>RA (↗)</string>
               </property>
@@ -343,6 +354,9 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Declination of top right corner of image</string>
               </property>
               <property name="text">
                <string>Dec (↗)</string>
@@ -357,6 +371,9 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="toolTip">
+               <string>Right ascension of bottom right corner of image</string>
+              </property>
               <property name="text">
                <string>RA (↘)</string>
               </property>
@@ -369,6 +386,9 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Declination of bottom right corner of image</string>
               </property>
               <property name="text">
                <string>Dec (↘)</string>
