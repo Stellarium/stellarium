@@ -46,6 +46,13 @@
 #include <QRegularExpression>
 #include <QStringList>
 
+#define NT_CONFIG_PREFIX QString("NebulaTextures")
+#define CUSTOM_TEXNAME QString("Custom Textures")
+#define DEFAULT_TEXNAME QString("Nebulae")
+#define TEST_TEXNAME QString("Test Textures")
+
+const QString NebulaTexturesDialog::ConfigPrefix = NT_CONFIG_PREFIX;
+
 /**
  * @brief Constructor for the NebulaTexturesDialog class.
  * Initializes the dialog, sets up network management, and configures timers for periodic status checking.
@@ -165,7 +172,7 @@ void NebulaTexturesDialog::createDialogContent()
 	});
 	connect(plateSolver, &PlateSolver::loginFailed, this, [this](const QString& reason)
 	{
-		updateStatus(q_("Login failed: ") + reason);
+		updateStatus(q_("Login failed: %1").arg(reason));
 		freezeUiState(false);
 	});
 	connect(plateSolver, &PlateSolver::uploadSuccess, this, [this]()
@@ -174,7 +181,7 @@ void NebulaTexturesDialog::createDialogContent()
 	});
 	connect(plateSolver, &PlateSolver::uploadFailed, this, [this](const QString& reason)
 	{
-		updateStatus(q_("Upload failed: ") + reason);
+		updateStatus(q_("Upload failed: %1").arg(reason));
 		freezeUiState(false);
 	});
 	connect(plateSolver, &PlateSolver::solvingStatusUpdated, this, [this](const QString& status)
@@ -183,12 +190,12 @@ void NebulaTexturesDialog::createDialogContent()
 	});
 	connect(plateSolver, &PlateSolver::failed, this, [this](const QString& msg)
 	{
-		updateStatus(q_("Solve failed: ") + msg);
+		updateStatus(q_("Solve failed: %1").arg(msg));
 		freezeUiState(false);
 	});
 	connect(plateSolver, &PlateSolver::solutionAvailable, this, [this](const QString& wcsText)
 	{
-		updateStatus(q_("WCS download complete. Processing..."));
+		updateStatus(q_("World Coordinate System data download complete. Processing..."));
 		applyWcsSolution(wcsText);
 		freezeUiState(false);
 	});
@@ -219,7 +226,9 @@ void NebulaTexturesDialog::restoreDefaults()
 			if (QFile::remove(cfgPath))
 			{
 				qDebug() << "[NebulaTextures] Deleted texture config file:" << cfgPath;
-			} else {
+			}
+			else
+			{
 				qWarning() << "[NebulaTextures] Failed to delete config file:" << cfgPath;
 			}
 		}
@@ -232,7 +241,9 @@ void NebulaTexturesDialog::restoreDefaults()
 			if (QFile::remove(cfgPath))
 			{
 				qDebug() << "[NebulaTextures] Deleted temporary texture config file:" << cfgPath;
-			} else {
+			}
+			else
+			{
 				qWarning() << "[NebulaTextures] Failed to delete temporary config file:" << cfgPath;
 			}
 		}
@@ -268,7 +279,7 @@ void NebulaTexturesDialog::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
 
-	html += "<h2>" + q_("Nebula Textures Plug-in") + "</h2><table class='layout' width=\"90%\">";
+	html += "<h2>" + q_("Nebula Textures Plugin") + "</h2><table class='layout' width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + NEBULATEXTURES_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + NEBULATEXTURES_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>WANG Siliang</td></tr>";
@@ -279,7 +290,9 @@ void NebulaTexturesDialog::setAboutHtml(void)
 					   "It also supports online plate-solving via Astrometry.net for precise positioning of astronomical images. "
 					   "Simply upload your image (ensure it is not flipped horizontally or vertically), solve its coordinates, and enjoy a personalized celestial view!") + "</p>";
 
-	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Nebula Textures plugin");
+	html += "<p>" + q_("See User Guide for details. Plugin data is located in:") + "<br>" + StelFileMgr::getUserDir() + pluginDir + "</br>" + "</p>";
+
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Nebula Textures Plugin");
 
 	html += "</body></html>";
 
@@ -338,7 +351,7 @@ void NebulaTexturesDialog::openImageFile()
 	{
 		ui->lineEditImagePath->setText(fileName);
 		lastOpenedDirectoryPath =  QFileInfo(fileName).path();
-		updateStatus(q_("File selected: ") + fileName);
+		updateStatus(q_("File selected: %1").arg(fileName));
 	}
 }
 
@@ -528,11 +541,10 @@ void NebulaTexturesDialog::recoverSolvedCorners()
 void NebulaTexturesDialog::toggleTempTexturePreview()
 {
 	if (isTempTextureVisible)
-	{
 		removeTempTexturePreview();
-	} else {
+	else
 		showTempTexturePreview();
-	}
+
 	ui->renderButton->setChecked(isTempTextureVisible);
 
 	if(isTempTextureVisible)
@@ -702,7 +714,7 @@ void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 		manager->addSubTile(imageUrl, coords, 0.2, brightness);
 
 	manager->save();
-	updateStatus(q_("Importing custom textures successfully!"));
+	updateStatus(q_("Imported custom textures successfully!"));
 }
 
 /**
@@ -759,7 +771,9 @@ QString NebulaTexturesDialog::ensureImageCopied(const QString& imagePath, const 
 	{
 		imagePathTemp_src = imagePath;
 		imagePathTemp_dst = imageUrl;
-	} else {
+	}
+	else
+	{
 		imagePath_src = imagePath;
 		imagePath_dst = imageUrl;
 	}
@@ -895,7 +909,7 @@ void NebulaTexturesDialog::gotoSelectedItem(QListWidgetItem* item)
 
 	mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
 	Vec3d aimUp = mvmgr->getViewUpVectorJ2000();
-	if ((mvmgr->getMountMode() == StelMovementMgr::MountEquinoxEquatorial) && fabs(spinLat) > (0.9 * M_PI_2))
+	if (mvmgr->getMountMode() == StelMovementMgr::MountEquinoxEquatorial && fabs(spinLat) > 0.9 * M_PI_2)
 	{
 		mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat > 0. ? 1. : -1.));
 		aimUp = mvmgr->getViewUpVectorJ2000();

@@ -202,7 +202,9 @@ void TileManager::deleteImagesFromConfig(TextureConfigManager* configManager, co
 			{
 				qWarning() << "[TileManager] Failed to delete:" << imagePath;
 			}
-		} else {
+		}
+		else
+		{
 			qDebug() << "[TileManager] Image not found:" << imagePath;
 		}
 	}

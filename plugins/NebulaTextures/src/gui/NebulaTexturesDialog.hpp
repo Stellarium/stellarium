@@ -36,11 +36,6 @@
 #include "TileManager.hpp"
 #include "SkyCoords.hpp"
 
-#define NT_CONFIG_PREFIX QString("NebulaTextures")
-#define CUSTOM_TEXNAME QString("Custom Textures")
-#define DEFAULT_TEXNAME QString("Nebulae")
-#define TEST_TEXNAME QString("Test Textures")
-
 class Ui_nebulaTexturesDialog;
 
 //! Main window of the Nebula Textures plug-in.
@@ -50,6 +45,8 @@ class NebulaTexturesDialog : public StelDialog
 	Q_OBJECT
 
 public:
+	static const QString ConfigPrefix;
+
 	//! Constructor
 	NebulaTexturesDialog();
 
@@ -74,16 +71,16 @@ public slots:
 	void refreshTextures();
 
 	//! Get the value for showing custom textures
-	bool getShowCustomTextures() { return conf->value(NT_CONFIG_PREFIX + "/showCustomTextures", false).toBool(); }
+	bool getShowCustomTextures() { return conf->value(ConfigPrefix + "/showCustomTextures", false).toBool(); }
 
 	//! Set the value for showing custom textures
-	void setShowCustomTextures(bool b) { conf->setValue(NT_CONFIG_PREFIX + "/showCustomTextures", b); }
+	void setShowCustomTextures(bool b) { conf->setValue(ConfigPrefix + "/showCustomTextures", b); }
 
 	//! Get the value for avoiding area conflicts
-	bool getAvoidAreaConflict() { return conf->value(NT_CONFIG_PREFIX + "/avoidAreaConflict", false).toBool(); }
+	bool getAvoidAreaConflict() { return conf->value(ConfigPrefix + "/avoidAreaConflict", false).toBool(); }
 
 	//! Set the value for avoiding area conflicts and refresh textures
-	void setAvoidAreaConflict(bool b) { conf->setValue(NT_CONFIG_PREFIX + "/avoidAreaConflict", b); refreshTextures(); }
+	void setAvoidAreaConflict(bool b) { conf->setValue(ConfigPrefix + "/avoidAreaConflict", b); refreshTextures(); }
 
 protected:
 	//! Set up the content and interactions of the NebulaTexturesDialog
