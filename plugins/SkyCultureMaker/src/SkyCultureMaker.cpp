@@ -7,11 +7,33 @@
 #include "SkyCultureMaker.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
+#include "gui/ScmStartDialog.hpp"
+#include "gui/ScmSkyCultureDialog.hpp"
+#include "gui/ScmConstellationDialog.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QApplication>
 #include <QDebug>
 #include <QMouseEvent>
 #include <QPixmap>
+#include <QKeyEvent>
+#include "ScmDraw.hpp"
+#include <vector>
+
+/**
+ * Managing the creation process of a new sky culture.
+ * 1. Navigate in stellarium (UI) to the location of interest (from where the culture should be created)
+ * 2. Starting creation process (click in UI)
+ * 3. Draw lines from start to star
+ *   a) Only stars should be selectable
+ *   b) Add functionality to draw separated/unconnected lines (e.g. cross constelation)
+ *   c) Add functionality to delete a line
+ *     I)  Deleting a inner line of a stick figure should split the figure into two stick figures
+ *     II) Connecting two stick figures should merge them into one stick figure
+ * 4. Add button to save sky culture
+ * 5. Click save button opens dialog to name: sky culture, lines, aliass, ...
+ * 6. Completing the dialog (check that all needed arguments are existing and valid) converts intern c++ object to json
+ */
 
 /*************************************************************************
  This method is the one called automatically by the StelModuleMgr just
@@ -30,8 +52,10 @@ StelPluginInfo SkyCultureMakerStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "SkyCultureMaker";
 	info.displayedName = "Sky Culture Maker";
-	info.authors = "Vincent Gerlach (RivinHD), Luca-Philipp Grumbach (xLPMG), Fabian Hofer (Integer-Ctrl), Richard Hofmann (ZeyxRew), Mher Mnatsakanyan (MherMnatsakanyan03)";
-	info.contact = "Contact us using our GitHub usernames, via an Issue or the Discussion tab in the Stellarium repository.";
+	info.authors = "Vincent Gerlach (RivinHD), Luca-Philipp Grumbach (xLPMG), Fabian Hofer (Integer-Ctrl), Richard "
+		       "Hofmann (ZeyxRew), Mher Mnatsakanyan (MherMnatsakanyan03)";
+	info.contact =
+	    "Contact us using our GitHub usernames, via an Issue or the Discussion tab in the Stellarium repository.";
 	info.description = "Plugin to draw and export sky cultures in Stellarium.";
 	info.version = SKYCULTUREMAKER_PLUGIN_VERSION;
 	info.license = SKYCULTUREMAKER_PLUGIN_LICENSE;
@@ -42,14 +66,18 @@ StelPluginInfo SkyCultureMakerStelPluginInterface::getPluginInfo() const
  Constructor
 *************************************************************************/
 SkyCultureMaker::SkyCultureMaker()
-	: isLineDrawEnabled(false)
-	, drawState(None)
+	: isScmEnabled(false)
+	, isLineDrawEnabled(false)
 {
-	startPoint.set(0, 0, 0);
-	endPoint.set(0, 0, 0);
+	qDebug() << "SkyCulture Maker constructed";
 
 	setObjectName("SkyCultureMaker");
 	font.setPixelSize(25);
+
+	drawObj = new scm::ScmDraw();
+	scmStartDialog = new ScmStartDialog(this);
+	scmSkyCultureDialog = new ScmSkyCultureDialog(this);
+	scmConstellationDialog = new ScmConstellationDialog(this);
 }
 
 /*************************************************************************
@@ -57,6 +85,30 @@ SkyCultureMaker::SkyCultureMaker()
 *************************************************************************/
 SkyCultureMaker::~SkyCultureMaker()
 {
+	// Initalized on start
+	delete drawObj;
+	delete scmStartDialog;
+	delete scmSkyCultureDialog;
+	delete scmConstellationDialog;
+
+	if (currentSkyCulture != nullptr)
+	{
+		delete currentSkyCulture;
+	}
+}
+
+void SkyCultureMaker::setActionToggle(const QString &id, bool toggle)
+{
+	StelActionMgr *actionMgr = StelApp::getInstance().getStelActionManager();
+	auto action = actionMgr->findAction(id);
+	if (action)
+	{
+		action->setChecked(toggle);
+	}
+	else
+	{
+		qDebug() << "Sky Culture Maker: Could not find action: " << id;
+	}
 }
 
 /*************************************************************************
@@ -80,24 +132,24 @@ void SkyCultureMaker::init()
 
 	StelApp &app = StelApp::getInstance();
 
-	addAction(actionIdLine, groupId, N_("Sky Culture Maker Line"), "enabledDrawLine");
+	addAction(actionIdLine, groupId, N_("Sky Culture Maker"), "enabledScm");
 
-	// Add a toolbar button
+	// Add a SCM toolbar button for starting creation process
 	try
 	{
-		QPixmap iconLineDisabled(":/SkyCultureMaker/bt_LineDraw_Off.png");
-		QPixmap iconLineEnabled(":/SkyCultureMaker/bt_LineDraw_On.png");
-		qDebug() << (iconLineDisabled.isNull() ? "Failed to load image: bt_LineDraw_Off.png"
-						      : "Loaded image: bt_LineDraw_Off.png");
-		qDebug() << (iconLineEnabled.isNull() ? "Failed to load image: bt_LineDraw_On.png"
-						      : "Loaded image: bt_LineDraw_On.png");
+		QPixmap iconScmDisabled(":/SkyCultureMaker/bt_SCM_Off.png");
+		QPixmap iconScmEnabled(":/SkyCultureMaker/bt_SCM_On.png");
+		qDebug() << (iconScmDisabled.isNull() ? "Failed to load image: bt_SCM_Off.png"
+						      : "Loaded image: bt_SCM_Off.png");
+		qDebug() << (iconScmEnabled.isNull() ? "Failed to load image: bt_SCM_On.png"
+						     : "Loaded image: bt_SCM_On.png");
 
 		StelGui *gui = dynamic_cast<StelGui *>(app.getGui());
 		if (gui != Q_NULLPTR)
 		{
 			toolbarButton = new StelButton(Q_NULLPTR,
-						       iconLineEnabled,
-						       iconLineDisabled,
+						       iconScmEnabled,
+						       iconScmDisabled,
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
 						       actionIdLine,
 						       false);
@@ -110,90 +162,153 @@ void SkyCultureMaker::init()
 	}
 }
 
-/*************************************************************************
- Draw our module. This should print "Hello world!" in the main window
-*************************************************************************/
+/***********************
+ Manage creation process
+***********************/
+
+void SkyCultureMaker::startScmProcess()
+{
+	if (true != isScmEnabled)
+	{
+		isScmEnabled = true;
+		emit eventIsScmEnabled(true);
+	}
+
+	scmStartDialog->setVisible(true);
+}
+
+void SkyCultureMaker::stopScmProcess()
+{
+	if (false != isScmEnabled)
+	{
+		isScmEnabled = false;
+		emit eventIsScmEnabled(false);
+	}
+
+	// TODO: close or delete all dialogs related to the creation process
+	if (scmStartDialog->visible())
+	{
+		scmStartDialog->setVisible(false);
+	}
+
+	setSkyCultureDialogVisibility(false);
+	setConstellationDialogVisibility(false);
+}
+
 void SkyCultureMaker::draw(StelCore *core)
 {
-	if (isLineDrawEnabled)
+	if (isLineDrawEnabled && drawObj != nullptr)
 	{
-		drawLine(core);
+		drawObj->drawLine(core);
+	}
+
+	if (isScmEnabled && currentSkyCulture != nullptr)
+	{
+		currentSkyCulture->draw(core);
 	}
 }
 
-bool SkyCultureMaker::handleMouseMoves(int x, int y, Qt::MouseButtons)
+bool SkyCultureMaker::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 {
-	if (drawState & (hasStart | hasFloatingEnd))
+	if (isLineDrawEnabled)
 	{
-		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz);
-		prj->unProject(x, y, endPoint);
-		drawState = hasFloatingEnd;
-		return true;
+		if (drawObj->handleMouseMoves(x, y, b))
+		{
+			return true;
+		}
 	}
 
 	return false;
 }
 
-void SkyCultureMaker::drawLine(StelCore *core)
+void SkyCultureMaker::handleMouseClicks(QMouseEvent *event)
 {
-	if (!(drawState & (hasEnd | hasFloatingEnd)))
+	if (isLineDrawEnabled)
 	{
-		return;
+		drawObj->handleMouseClicks(event);
+		if (event->isAccepted())
+		{
+			return;
+		}
 	}
 
-	StelPainter painter(core->getProjection(StelCore::FrameAltAz));
-	painter.setBlending(true);
-	painter.setLineSmooth(true);
-	Vec3f color = {1.f, 0.5f, 0.5f};
-	bool alpha = (drawState == hasEnd ? 1.0f : 0.5f);
-	painter.setColor(color, alpha);
-	painter.drawGreatCircleArc(startPoint, endPoint);
+	// Continue any other events to be handled...
+}
+void SkyCultureMaker::handleKeys(QKeyEvent *e)
+{
+	if (isLineDrawEnabled)
+	{
+		drawObj->handleKeys(e);
+		if (e->isAccepted())
+		{
+			return;
+		}
+	}
 }
 
-void SkyCultureMaker::handleMouseClicks(class QMouseEvent *event)
+void SkyCultureMaker::setIsScmEnabled(bool b)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-	qreal x = event->position().x(), y = event->position().y();
-#else
-	qreal x = event->x(), y = event->y();
-#endif
-
-	if (event->type() == QEvent::MouseButtonPress && event->button() == Qt::RightButton)
+	if (b == true)
 	{
-		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz);
-		Vec3d point;
-		prj->unProject(x, y, point);
-
-		if (drawState & (hasStart | hasFloatingEnd))
-		{
-			endPoint = point;
-			drawState = hasEnd;
-		}
-		else
-		{
-			startPoint = point;
-			drawState = hasStart;
-		}
-
-		event->setAccepted(true);
-		return;
+		startScmProcess();
 	}
-	else if (event->type() == QEvent::MouseButtonDblClick && event->button() == Qt::RightButton)
+	else
 	{
-		// Reset line drawing
-		drawState = None;
-		event->setAccepted(true);
-		return;
+		stopScmProcess();
+	}
+}
+
+void SkyCultureMaker::setSkyCultureDialogVisibility(bool b)
+{
+	if (b != scmSkyCultureDialog->visible())
+	{
+		scmSkyCultureDialog->setVisible(b);
+	}
+}
+
+void SkyCultureMaker::setConstellationDialogVisibility(bool b)
+{
+	if (b != scmConstellationDialog->visible())
+	{
+		scmConstellationDialog->setVisible(b);
 	}
 
-	event->setAccepted(false);
+	setIsLineDrawEnabled(b);
 }
 
 void SkyCultureMaker::setIsLineDrawEnabled(bool b)
 {
-	if (b != isLineDrawEnabled)
+	isLineDrawEnabled = b;
+}
+
+void SkyCultureMaker::triggerDrawUndo()
+{
+	if (isLineDrawEnabled)
 	{
-		isLineDrawEnabled = b;
-		emit eventIsLineDrawEnabled(b);
+		drawObj->undoLastLine();
 	}
+}
+
+void SkyCultureMaker::setDrawTool(scm::DrawTools tool)
+{
+	drawObj->setTool(tool);
+}
+
+void SkyCultureMaker::setNewSkyCulture()
+{
+	if (currentSkyCulture != nullptr)
+	{
+		delete currentSkyCulture;
+	}
+	currentSkyCulture = new scm::ScmSkyCulture();
+}
+
+scm::ScmSkyCulture *SkyCultureMaker::getCurrentSkyCulture()
+{
+	return currentSkyCulture;
+}
+
+scm::ScmDraw *SkyCultureMaker::getScmDraw()
+{
+	return drawObj;
 }
