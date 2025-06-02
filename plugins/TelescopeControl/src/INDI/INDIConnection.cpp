@@ -321,7 +321,7 @@ void INDIConnection::setSpeed(int speed)
 	auto slewRateSP = mTelescope.getSwitch("TELESCOPE_SLEW_RATE");
 
 	if (!slewRateSP.isValid() || speed < 0 ||
-			static_cast<std::size_t>(speed) > slewRateSP.count())
+			static_cast<std::size_t>(speed) > slewRateSP.size())
 		return;
 
 	slewRateSP.reset();

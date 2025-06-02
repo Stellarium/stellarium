@@ -22,8 +22,7 @@ jobs:
       shell: bash
       run: |
         # Update installed packages
-        sudo apt remove php7.* -y
-        sudo apt remove php8.* -y
+        sudo apt remove php* -y
         sudo apt update
         sudo apt install libfuse2
         # using force-overwrite due to
@@ -67,7 +66,7 @@ jobs:
       shell: bash
       run: |
         # Update installed packages
-        sudo apt remove php8.* -y
+        sudo apt remove php* -y
         sudo apt update
         sudo apt install libfuse2
         # using force-overwrite due to

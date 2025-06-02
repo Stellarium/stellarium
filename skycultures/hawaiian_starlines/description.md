@@ -40,7 +40,7 @@ Each star line is a group of main stars that will be remembered by the navigator
 
 The direct translation means the “Bailer of *Makali’i*”. The lines are shaped as a canoe bailer which scoops *Ka Hei-Hei o Na Keiki* (Orion) and *Makali’i* (Pleiades) up into the night sky. In voyaging a bailer is used to scoop up water out of the hulls.
 
-The main stars of *Ke Ka o Makali’i* from North to South are *Hokulei* (Capella), *Nanamua* (Castor), *Nanahope* (Pollux), *Puana* (Procyon), and *‘A’a* (Sirius). These stars connect together to create the bailer in the sky. Mintaka in Orion is an important star in this line because it rises/sets directly east or west giving the navigator an easy pointer star for direction. Mirzim (next to *‘A’a* (Sirius)) and *Ke Ali’i Kona i Ka Lewa* (Canopus) connect together to create a southern pointer. *‘Ekekeuehuehu* (&theta; Aur, Mahasim) and *‘Ekekeu’ena’ena* (&beta; Aur, Menkalinan) connect to create a northern pointer. Different north/south pointers are found in the star lines and used heavily by navigators.
+The main stars of *Ke Ka o Makali’i* from North to South are *Hokulei* (Capella), *Nanamua* (Castor), *Nanahope* (Pollux), *Puana* (Procyon), and *‘A’a* (Sirius). These stars connect together to create the bailer in the sky. Mintaka (&delta; Ori) is an important star in this line because it rises/sets directly east or west giving the navigator an easy pointer star for direction. Mirzam (&beta; CMa next to *‘A’a* (Sirius)) and *Ke Ali’i Kona i Ka Lewa* (Canopus) connect together to create a southern pointer. *‘Ekekeuehuehu* (&theta; Aur, Mahasim) and *‘Ekekeu’ena’ena* (&beta; Aur, Menkalinan) connect to create a northern pointer. Different north/south pointers are found in the star lines and used heavily by navigators.
 
 ### <notr>Ka Iwikuamo’o</notr>
 
@@ -54,7 +54,7 @@ The star line itself starts with *Hokupa’a* (North Star), the ultimate norther
 
 This star line consists of two constellations. The Navigator’s Triangle on the north and Maui’s fish hook on the south. The Navigator’s Triangle is made of three stars *Hawaiki* (Deneb), *Keoe* (Vega), and *Humu* (Altair). (It is the same figure as the Summer Triangle for modern amateur astronomers.) These stars also represent the Polynesian triangle: Hawai’i (*Hawaiki*), Rapanui (*Keoe*), and Aotearoa (*Humu*). These three islands are pulled by the fish hook of Maui (Scorpius).
 
-The northern pointer is found in the Navigator’s Triangle when you connect *Hawaiki* (Deneb) and *Momonapikowalu* (&gamma; Cyg, Sadr). Southern pointers are in the fish hook when you connect *Mili’opu* (&delta; Sco, Dschubba) and *Kahe* (&pi; Sco, Nur), the stars on the top of the hook.
+The northern pointer is found in the Navigator’s Triangle when you connect *Wainielela* (&epsilon; Cyg, Aljanah (Gienah)) and *Hawaiki* (Deneb). Southern pointers are in the fish hook when you connect *Mili’opu* (&delta; Sco, Dschubba) and *Kahe* (&pi; Sco, Fang), the stars on the top of the hook.
 
 ### <notr>Ka Lupe o Kawelo</notr>
 

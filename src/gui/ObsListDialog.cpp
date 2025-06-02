@@ -957,6 +957,9 @@ void ObsListDialog::editListButtonPressed()
 {
 	Q_ASSERT(!selectedOlud.isEmpty());
 
+        // Objects shouldn't be highlighted when observing list is edited!
+        clearHighlights();
+
 	if (!selectedOlud.isEmpty())
 	{
 		switchEditMode(true, false);

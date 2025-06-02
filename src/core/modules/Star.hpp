@@ -521,7 +521,8 @@ public:
    bool       isVIP() const { return true; }
    bool       hasName() const { return getHip(); } // OR gaia??
    QString    getNameI18n(void) const;
-   QString    getScreenNameI18n(void) const;
+   //! Retrieve the cultural screen label, translated version of the commonName (if withCommonNameI18n), or a designation.
+   QString    getScreenNameI18n(const bool withCommonNameI18n) const;
    QString    getDesignation(void) const;
    int        hasComponentID(void) const;
 };
@@ -560,7 +561,7 @@ public:
    StarId         getGaia() const { return d.gaia_id; }
    float          getBV(void) const { return static_cast<float>(d.b_v) / 1000.f; }
    QString        getNameI18n(void) const { return QString(); }
-   QString        getScreenNameI18n(void) const { return QString(); }
+   QString        getScreenNameI18n(const bool) const { return QString(); }
    QString        getDesignation(void) const { return QString(); }
    int            hasComponentID(void) const { return 0; }
    bool           isVIP() const { return false; }
@@ -613,7 +614,7 @@ public:
    StarId         getHip() const { return 0; }
    StarId         getGaia() const { return d.gaia_id; }
    QString        getNameI18n() const { return QString(); }
-   QString        getScreenNameI18n() const { return QString(); }
+   QString        getScreenNameI18n(const bool) const { return QString(); }
    QString        getDesignation() const { return QString(); }
    bool           isVIP() const { return false; }
    int            hasComponentID() const { return 0; }

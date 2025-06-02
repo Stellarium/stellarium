@@ -47,9 +47,11 @@
 #include "StelOpenGLArray.hpp"
 #include "StelHips.hpp"
 #include "RefractionExtinction.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 #include <limits>
 #include <QByteArray>
+#include <QFile>
 #include <QTextStream>
 #include <QString>
 #include <QDebug>
@@ -64,7 +66,7 @@
 #include <QOpenGLVersionFunctionsFactory>
 #endif
 #include <QOpenGLShader>
-#include <QtConcurrent>
+#include <QtConcurrent/QtConcurrentRun>
 #include <QElapsedTimer>
 
 const QString Planet::PLANET_TYPE = QStringLiteral("Planet");
@@ -219,13 +221,11 @@ Planet::Planet(const QString& englishName,
                bool hasAtmosphere,
                bool hasHalo,
                const QString& pTypeStr)
-	: flagNativeName(true),
-	  deltaJDE(StelCore::JD_SECOND),
+	: deltaJDE(StelCore::JD_SECOND),
 	  deltaOrbitJDE(0.0),
 	  closeOrbit(acloseOrbit),
 	  englishName(englishName),
 	  nameI18(englishName),
-	  nativeName(""),
 	  texMapName(atexMapName),
 	  normalMapName(anormalMapName),
 	  horizonMapName(ahorizonMapName),
@@ -262,10 +262,10 @@ Planet::Planet(const QString& englishName,
 	  multisamplingEnabled_(StelApp::getInstance().getSettings()->value("video/multisampling", 0).toUInt() != 0),
 	  planetShadowsSupersampEnabled_(StelApp::getInstance().getSettings()->value("video/planet_shadows_supersampling",false).toBool()),
 	  gl(Q_NULLPTR),
-	  iauMoonNumber(""),
+	  discoverer(QString()),
+	  discoveryDate(QString()),
+	  iauMoonNumber(QString()),
 	  b_v(99.f),
-	  discoverer(""),
-	  discoveryDate(""),
 	  orbitPositionsCache(ORBIT_SEGMENTS * 2)
 {
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
@@ -402,15 +402,18 @@ void Planet::translateName(const StelTranslator& trans)
 	nameI18 = trans.tryQtranslate(englishName, getContextString());
 	if (nameI18.isEmpty())
 		nameI18 = qc_(englishName, getContextString());
-	if (!nativeNameMeaning.isEmpty())
+
+	if (!culturalNames.isEmpty())
 	{
-		nativeNameMeaningI18n = trans.tryQtranslate(nativeNameMeaning);
-		if (nativeNameMeaningI18n.isEmpty())
-			nativeNameMeaningI18n = q_(nativeNameMeaning);
-	}
-	else
-	{
-		nativeNameMeaningI18n = "";
+		for (CulturalName &cname: culturalNames )
+		{
+			cname.translatedI18n = trans.tryQtranslate(cname.translated);
+			if (cname.translatedI18n.isEmpty())
+				cname.translatedI18n = q_(cname.translated);
+			cname.pronounceI18n = trans.tryQtranslate(cname.pronounce);
+			if (cname.pronounceI18n.isEmpty())
+				cname.pronounceI18n = q_(cname.pronounce);
+		}
 	}
 }
 
@@ -420,11 +423,6 @@ void Planet::setIAUMoonNumber(const QString &designation)
 		return;
 
 	iauMoonNumber = designation;
-}
-
-QString Planet::getEnglishName() const
-{
-	return englishName;
 }
 
 QString Planet::getIAUDesignation() const
@@ -438,11 +436,6 @@ QString Planet::getIAUDesignation() const
 		else
 			return QString();
 	}
-}
-
-QString Planet::getNameI18n() const
-{
-	return nameI18;
 }
 
 QString Planet::getDiscoveryCircumstances() const
@@ -475,41 +468,39 @@ QString Planet::getPlanetLabel() const
 	if (englishName==L1S("Pluto")) // We must prepend minor planet number here. Actually Dwarf Planet Pluto is still a "Planet" object in Stellarium...
 		oss << QString("(134340) ");
 
-	if (getFlagNativeName())
-	{
-		switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
-		{
-			case 1: // constellationsNative
-				oss << (nativeName.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNativeName(), getNameI18n()));
-				break;
-			case 2: // constellationsTranslated
-				oss << (nativeNameMeaningI18n.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNativeNameI18n(), getNameI18n()));
-				break;
-			case 3: // constellationsEnglish
-				oss << (nativeNameMeaning.isEmpty() ? getEnglishName() : QString("%1 [%2]").arg(nativeNameMeaning, getEnglishName()));
-				break;
-			default:
-				oss << getNameI18n();
-				break;
-		}
-	}
-	else
-	{
-		switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
-		{
-			case 3: // constellationsEnglish
-				oss << getEnglishName();
-				break;
-			case 1: // constellationsNative
-			case 2: // constellationsTranslated
-			default:
-				oss << getNameI18n();
-				break;
-		}
-	}
-
+	QString culturalScreenLabel=getScreenLabel();
+	oss << (culturalScreenLabel.isEmpty() ? getNameI18n() : culturalScreenLabel);
 	return str;
 }
+
+QString Planet::getScreenLabel() const
+{
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	QStringList list=getCultureLabels(scMgr->getScreenLabelStyle());
+	return list.isEmpty() ? getNameI18n() : list.constFirst();
+}
+QString Planet::getInfoLabel() const
+{
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	QStringList list=getCultureLabels(scMgr->getInfoLabelStyle());
+	return list.isEmpty() ? getNameI18n() : list.join(" - ");
+}
+
+QStringList Planet::getCultureLabels(StelObject::CulturalDisplayStyle style) const
+{
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	QStringList labels;
+	for (auto &cName: culturalNames)
+		{
+			QString label=scMgr->createCulturalLabel(cName, style, getNameI18n());
+			labels << label;
+		}
+	labels.removeDuplicates();
+	labels.removeAll(QString(""));
+	labels.removeAll(QString());
+	return labels;
+}
+
 
 QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const
 {
@@ -522,7 +513,7 @@ QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& f
 	if (!iauMoonNumber.isEmpty())
 		oss << QString("(%1) ").arg(iauMoonNumber);
 
-	oss << getPlanetLabel();
+	oss << getInfoLabel();
 
 	// NOTE: currently only moons have an IAU designation
 	QString iau = getIAUDesignation();
@@ -836,7 +827,7 @@ QString Planet::getInfoStringExtraMag(const StelCore *core, const InfoStringGrou
 	if (flags&Extra && b_v<99.f)
 		return QString("%1: <b>%2</b><br/>").arg(q_("Color Index (B-V)"), QString::number(b_v, 'f', 2));
 	else
-		return "";
+		return QString();
 }
 
 QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGroup& flags, const bool withIllum) const
@@ -1007,22 +998,22 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 
 #ifndef NDEBUG
 		oss << QString("DEBUG: AberrationPush: %1/%2/%3 km<br/>")
-			.arg(QString::number(AU * aberrationPush[0], 'f', 6))
-			.arg(QString::number(AU * aberrationPush[1], 'f', 6))
-			.arg(QString::number(AU * aberrationPush[2], 'f', 6));
+			.arg(QString::number(AU * aberrationPush[0], 'f', 6),
+			     QString::number(AU * aberrationPush[1], 'f', 6),
+			     QString::number(AU * aberrationPush[2], 'f', 6));
 
 		Vec3d earthAberrationPush=earth->getAberrationPush();
 		oss << QString("DEBUG: Earth's AberrationPush: %1/%2/%3 km<br/>")
-			.arg(QString::number(AU * earthAberrationPush[0], 'f', 6))
-			.arg(QString::number(AU * earthAberrationPush[1], 'f', 6))
-			.arg(QString::number(AU * earthAberrationPush[2], 'f', 6));
+			.arg(QString::number(AU * earthAberrationPush[0], 'f', 6),
+			     QString::number(AU * earthAberrationPush[1], 'f', 6),
+			     QString::number(AU * earthAberrationPush[2], 'f', 6));
 
 		PlanetP sun = ssystem->getSun();
 		Vec3d sunAberrationPush=sun->getAberrationPush();
 		oss << QString("DEBUG: Sun's AberrationPush: %1/%2/%3 km<br/>")
-			.arg(QString::number(AU * sunAberrationPush[0], 'f', 6))
-			.arg(QString::number(AU * sunAberrationPush[1], 'f', 6))
-			.arg(QString::number(AU * sunAberrationPush[2], 'f', 6));
+			.arg(QString::number(AU * sunAberrationPush[0], 'f', 6),
+			     QString::number(AU * sunAberrationPush[1], 'f', 6),
+			     QString::number(AU * sunAberrationPush[2], 'f', 6));
 #endif
 
 		//PlanetP currentPlanet = core->getCurrentPlanet();
@@ -1535,6 +1526,8 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		}
 	}
 
+	map.insert("cultural-names", getCultureLabels(StelObject::CulturalDisplayStyle::Native_Pronounce_Translit_Translated_IPA));
+
 	return map;
 }
 
@@ -1914,16 +1907,16 @@ Vec4d Planet::getRectangularCoordinates(const double longDeg, const double latDe
 	// See some previous issues at https://github.com/Stellarium/stellarium/issues/391
 	// For unclear reasons latDeg can be nan. Safety measure:
 	const double latRad = std::isnan(latDeg) ? 0. : latDeg*M_PI_180;
-	Q_ASSERT_X(!std::isnan(latRad), "Planet.cpp", QString("NaN result for latRad. Object %1 latitude %2").arg(englishName).arg(QString::number(latDeg, 'f', 5)).toLatin1());
+	Q_ASSERT_X(!std::isnan(latRad), "Planet.cpp", QString("NaN result for latRad. Object %1 latitude %2").arg(englishName, QString::number(latDeg, 'f', 5)).toLatin1());
 	const double u = (M_PI_2 - (abs(latRad)) < 1e-10 ? latRad : atan( bByA * tan(latRad)) );
 	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
 	// There seem to be numerical issues around tan/atan. Relieve the test a bit.
 	Q_ASSERT_X( fabs(u)-fabs(latRad) <= 1e-10, "Planet.cpp", QString("u: %1 latRad: %2 bByA: %3 latRad-u: %4 (%5)")
-	                                                              .arg(QString::number(u))
-	                                                              .arg(QString::number(latRad))
-	                                                              .arg(QString::number(bByA, 'f', 10))
-	                                                              .arg(QString::number(latRad-u))
-	                                                              .arg(englishName).toLatin1() );
+								      .arg(QString::number(u),
+									   QString::number(latRad),
+									   QString::number(bByA, 'f', 10),
+									   QString::number(latRad-u),
+									   englishName).toLatin1() );
 	const double altFix = altMetres/(1000.0*AU*a);
 
 	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
