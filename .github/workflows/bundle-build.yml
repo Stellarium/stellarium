@@ -1,0 +1,93 @@
+name: Bundle Build
+
+on:
+  push:
+
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch: 
+
+env:
+  parallel_processes: 6 # A good default counts is: available Threads + 2
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        build_type: ["MinSizeRel"]
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v4
+      with:
+        aqtversion: '==3.1.*'
+        version: '6.5.1'
+        host: 'windows'
+        target: 'desktop'
+        cache: true
+        arch: 'win64_msvc2019_64'
+        modules: 'qt3d qtactiveqt qtcharts qtconnectivity qtdatavis3d qtgrpc qthttpserver qtimageformats qtlanguageserver qtlocation qtlottie qtmultimedia qtnetworkauth qtpdf qtpositioning qtquick3dphysics qtquickeffectmaker qtremoteobjects qtscxml qtsensors qtserialbus qtserialport qtspeech qtvirtualkeyboard qtwebchannel qtwebengine qtwebsockets qtwebview debug_info qt5compat qtquick3d qtquicktimeline qtshadertools'
+    
+    - name: Cache Inno Setup
+      id: cache-innosetup
+      uses: actions/cache@v4
+      with:
+        path: innosetup.exe
+        key: innosetup-6.4.3
+
+    - name: Download Inno Setup
+      if: steps.cache-innosetup.outputs.cache-hit != 'true'
+      shell: powershell
+      run: |
+        wget -O innosetup.exe "https://jrsoftware.org/download.php/innosetup-6.4.3.exe"
+
+    - name: Install Inno Setup
+      run: |
+        ./innosetup.exe /silent /dir=${{github.workspace}}/innoSetup /CURRENTUSER /NOICONS
+        set innoPath=
+        set PATH=%PATH%;${{github.workspace}}/innoSetup
+
+    # Packages should be automatically downloaded using vcpkg through the toolchain
+    - name: Configure CMake
+      env:
+        CMAKE_PREFIX_PATH: ${{env.QT_ROOT_DIR}}
+      # Choose CMakeLists.text from a specific source directory with -S.
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: |
+        cmake -B build -S . -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DCMAKE_INSTALL_PREFIX=stellarium-bin
+
+    - name: Build
+      # Build your program with the given configuration
+      run: |
+        cmake --build build --config ${{matrix.build_type}} -j ${{env.parallel_processes}} --target install
+        cmake --build build --config ${{matrix.build_type}} -j ${{env.parallel_processes}} --target stellarium-installer
+    
+    # We use the first find as it should only be one
+    - name: Install Stellarium for Bundeling
+      run: |
+        $installer = Get-ChildItem -Path installers -Recurse -Filter 'stellarium-*-qt6-win64.exe' | Select-Object -First 1
+        if ($installer) {
+          New-Item -ItemType Directory -Path stellarium-installer -Force | Out-Null
+          Copy-Item $installer.FullName stellarium-installer\
+
+          $quickInstallScript = "stellarium-installer\quickInstall.bat"
+          $installerRelativePath = ".\" + $installer.Name
+          $quickInstallContent = "`"$installerRelativePath`" /silent /dir=stellarium /CURRENTUSER /NOICONS /LOG=`"installation.log`" /MERGETASKS=`"!desktopicon`""
+          $quickInstallContent += "`r`nmklink stellarium.exe stellarium\stellarium.exe"
+          Set-Content -Path $quickInstallScript -Value $quickInstallContent
+        } else {
+          Write-Error "Installer not found."
+        }
+    
+    - name: Deploy Stellarium installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: stellarium-windows-installer
+        path: stellarium-installer
+        retention-days: 3  # Don't store to long as stellarium builds are large

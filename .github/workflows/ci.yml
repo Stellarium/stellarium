@@ -9,13 +9,17 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [master]
+    types: [opened, reopened, synchronize, ready_for_review]
+
+env:
+  parallel_processes: 6 # A good default counts is: available Threads + 2
 
 jobs:
   # CI on Linux (Qt5)
   ci-linux-qt5:
     name: "Linux (amd64; qt5)"
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && github.event.pull_request.draft == false"
 
     steps:
     - name: Install dependencies
@@ -42,7 +46,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j3
+      run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -54,7 +58,7 @@ jobs:
   ci-linux-qt6:
     name: "Linux (amd64; qt6)"
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && github.event.pull_request.draft == false"
 
     steps:
     - name: Install dependencies
@@ -82,7 +86,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j3
+      run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -94,7 +98,7 @@ jobs:
   ci-linux-qt6-pch:
     name: "Linux (amd64; qt6; core)"
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && github.event.pull_request.draft == false"
 
     steps:
     - name: Install dependencies
@@ -128,7 +132,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j3
+      run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -140,7 +144,7 @@ jobs:
   ci-macos-qt5:
     name: "macOS (x86_64; qt5)"
     runs-on: macos-13
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && github.event.pull_request.draft == false"
 
     # @TODO Enable gpsd on macOS instance for CI testing
     # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
@@ -167,7 +171,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j3
+      run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -179,7 +183,7 @@ jobs:
   ci-macos-intel-qt6:
     name: "macOS (x86_64; qt6)"
     runs-on: macos-13
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && github.event.pull_request.draft == false"
 
     # @TODO Enable gpsd on macOS instance for CI testing
     # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
@@ -206,7 +210,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j3
+      run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -218,7 +222,7 @@ jobs:
   ci-macos-silicon-qt6:
     name: "macOS (arm64; qt6)"
     runs-on: macos-14
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && github.event.pull_request.draft == false"
 
     # @TODO Enable gpsd on macOS instance for CI testing
     # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
@@ -248,7 +252,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j3
+      run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -260,7 +264,7 @@ jobs:
   ci-freebsd-qt6:
     name: "FreeBSD (x86_64; qt5)"
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && github.event.pull_request.draft == false"
 
     steps:
     - name: Checkout repository
@@ -284,7 +288,7 @@ jobs:
           mkdir builds
           cd builds
           cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On "${{ github.workspace }}"
-          make -j3
+          make -j ${{env.parallel_processes}}
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
           sleep 3
           ctest --output-on-failure

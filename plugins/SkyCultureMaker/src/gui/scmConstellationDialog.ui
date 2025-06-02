@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>scmConstellationDialog</class>
+ <widget class="QWidget" name="scmConstellationDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>360</width>
+    <height>454</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>360</width>
+    <height>454</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1000000</width>
+    <height>999999</height>
+   </size>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="TitleBar" name="titleBar">
+     <property name="title" stdset="0">
+      <string>SCM: Constellation Editor</string>
+     </property>
+    </widget>
+   </item>
+   <item alignment="Qt::AlignTop">
+    <widget class="QFrame" name="Content">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QTabWidget" name="tabs">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>400</height>
+         </size>
+        </property>
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+        <widget class="QWidget" name="drawingTab">
+         <attribute name="title">
+          <string>Drawing</string>
+         </attribute>
+         <widget class="QTextBrowser" name="drawInfoBox">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>71</y>
+            <width>311</width>
+            <height>271</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QWidget" name="layoutWidget">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>20</y>
+            <width>311</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <layout class="QHBoxLayout" name="drawBtnLayout">
+           <item>
+            <widget class="QPushButton" name="undoBtn">
+             <property name="text">
+              <string>Undo</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="eraserBtn">
+             <property name="text">
+              <string>Eraser</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="penBtn">
+             <property name="text">
+              <string>Pen</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="constellationNameTab">
+         <attribute name="title">
+          <string>Constellation Name</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="leftMargin">
+           <number>15</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="rightMargin">
+           <number>15</number>
+          </property>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="labelsTitle">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Please name the Constellation</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="enNameLbl">
+            <property name="text">
+             <string>English name</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="enNameTE">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="idLbl">
+            <property name="text">
+             <string>ID (Do not include 'CON' or the sky culture name)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="idTE">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="natNameLbl">
+            <property name="text">
+             <string>Native name (optional)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="natNameTE">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="pronounceLbl">
+            <property name="text">
+             <string>Pronounciation (optional, European glyphs or Pinyin)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="pronounceTE">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="ipaLbl">
+            <property name="text">
+             <string>IPA (optional)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="ipaTE">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="artworkTab">
+         <attribute name="title">
+          <string>Artwork</string>
+         </attribute>
+         <widget class="QGraphicsView" name="graphicsView">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>20</y>
+            <width>300</width>
+            <height>300</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="imagePathLabel">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>330</y>
+            <width>351</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="uploadBtn">
+          <property name="geometry">
+           <rect>
+            <x>210</x>
+            <y>330</y>
+            <width>119</width>
+            <height>32</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Upload</string>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="bottomBtnLayout">
+        <property name="spacing">
+         <number>10</number>
+        </property>
+        <property name="leftMargin">
+         <number>20</number>
+        </property>
+        <property name="rightMargin">
+         <number>20</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="saveBtn">
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="cancelBtn">
+          <property name="text">
+           <string>Cancel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="infoLayout">
+        <property name="leftMargin">
+         <number>20</number>
+        </property>
+        <property name="topMargin">
+         <number>5</number>
+        </property>
+        <property name="rightMargin">
+         <number>20</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="infoLbl">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="ConstEditorSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>10</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TitleBar</class>
+   <extends>QFrame</extends>
+   <header location="global">Dialog.hpp</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../resources/SkyCultureMaker.qrc"/>
+ </resources>
+ <connections/>
+</ui>
