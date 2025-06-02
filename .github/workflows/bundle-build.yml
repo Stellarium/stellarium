@@ -66,6 +66,9 @@ jobs:
       # Build your program with the given configuration
       run: |
         cmake --build build --config ${{matrix.build_type}} -j ${{env.parallel_processes}} --target install
+    
+    - name: Build Installer
+      run: |
         cmake --build build --config ${{matrix.build_type}} -j ${{env.parallel_processes}} --target stellarium-installer
     
     # We use the first find as it should only be one

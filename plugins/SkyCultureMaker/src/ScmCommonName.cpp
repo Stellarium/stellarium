@@ -44,8 +44,3 @@ std::optional<std::vector<int>> scm::ScmCommonName::getReferences() const
 {
 	return references;
 }
-
-QJsonObject scm::ScmCommonName::toJson() const
-{
-	// TODO implement
-}
