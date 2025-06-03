@@ -1,8 +1,11 @@
 #include "SkycultureMapGraphicsView.hpp"
 #include "SkyculturePolygonItem.hpp"
+#include <qjsonarray.h>
 #include <qtimeline.h>
 #include <qgraphicssvgitem.h>
 
+#include <QJsonObject>
+#include <QJsonDocument>
 
 SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	: QGraphicsView(parent)
@@ -80,6 +83,7 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 
 	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/testmap.svg");
 	scene->addItem(baseMap);
+	//qInfo() << "basemap width = " << baseMap->boundingRect().width() << " and height = " << baseMap->boundingRect().height();
 
 	scene->addRect(300.0, 600.0, 400.0, 200.0, QPen(Qt::black), QBrush(Qt::yellow));
 	scene->addRect(0.0, 0.0, 500.0, 500.0, QPen(Qt::yellow), QBrush(Qt::blue));
@@ -94,6 +98,9 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 													 QPoint(940.0, 620.0), QPoint(900.0, 620.0), QPoint(860.0, 580.0), QPoint(860.0, 540.0)}));
 
 	SkyculturePolygonItem *aztec = new SkyculturePolygonItem("Aztekisch", 1000, 1200);
+
+	SkyculturePolygonItem *tupi_test = new SkyculturePolygonItem("Tupi", -100, 100);
+	auto tupiPolyList = QList<QPointF>();
 
 	// umrechnung lon in x:
 	//lon + 180 / 360 = faktor (z.B. 0 = 0.5)  -->  width of map (boundingRect) * faktor
@@ -122,6 +129,76 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	// }
 	// scene->addLine(0, 0, 0, heighte, QPen(Qt::red, 20));
 	// scene->addLine(mitte, 0, mitte, heighte, QPen(Qt::red, 20));
+
+	const QString filePath = StelFileMgr::findFile("skycultures/tupi/tupi_coords.geojson");
+	if (filePath.isEmpty())
+	{
+		qCritical() << "Failed to * find *" << " [tupi polygon coordinate] " << "file in sky culture directory";
+	}
+	else
+	{
+		QFile file(filePath);
+		if (!file.open(QFile::ReadOnly))
+		{
+			qCritical() << "Failed to * open *" << " [tupi polygon coordinate] " << "file in sky culture directory";
+		}
+		else
+		{
+			const auto jsonText = file.readAll();
+			if (jsonText.isEmpty())
+			{
+				qCritical() << "Failed to read data from" << " [tupi polygon coordinate] " << "file in sky culture directory";
+			}
+			else
+			{
+				QJsonParseError error;
+				const auto jsonDoc = QJsonDocument::fromJson(jsonText, &error);
+
+				if (error.error != QJsonParseError::NoError)
+				{
+					qCritical().nospace() << "Failed to parse " << " [tupi polygon coordinate] " << " from sky culture directory " << ": " << error.errorString();
+				}
+				else
+				{
+					if (!jsonDoc.isObject())
+					{
+						qCritical() << "Failed to find the expected JSON structure in" << " [tupi polygon coordinate] " << " from sky culture directory";
+					}
+					else
+					{
+						const auto data = jsonDoc.object();
+						qInfo() << "json object keys: " << data.keys();
+						qInfo() << "data[features].toString(): " << data["features"].toString();
+						qInfo() << "data[features][type].toString(): " << data["features"]["type"].toString();
+						const auto feattures = data["features"];
+						if (data["features"].isArray())
+						{
+							auto featureArray = data["features"].toArray(); // auto = QJasonArray --> header inlcude
+							auto geoArray = featureArray[0].toObject().value("geometry").toArray();
+							qInfo() << "geoArray size: " << geoArray.size();
+							qInfo() << "geoArray[0]: " << geoArray[0];
+
+							//tupi_test->setPolygon(QPolygonF(QList<QPoint>{QPoint(800.0, 800.0), QPoint(840.0, 800.0), QPoint(880.0, 840.0), QPoint(880.0, 880.0),
+							//												 QPoint(840.0, 920.0), QPoint(800.0, 920.0), QPoint(760.0, 880.0), QPoint(760.0, 840.0)}));
+							for(auto i : geoArray)
+							{
+								auto pointArray = i.toArray();
+								qInfo() << "values: x = " << pointArray[0].toDouble() << " and y = " << pointArray[1].toDouble();
+								tupiPolyList.append(QPointF(pointArray[0].toDouble(), pointArray[1].toDouble()));
+							}
+							//qInfo() << "featureArray size: " << featureArray;
+							//qInfo() << "featureArray coordinates: " << featureArray[0].toObject().value("geometry").toArray().size();
+						}
+						//qInfo() << "features len: " << data["features"]["type"].toString().length();
+						//qInfo() << "features[id].toString: " << data["features"].toString();
+					}
+				}
+			}
+		}
+	}
+
+	tupi_test->setPolygon(QPolygonF(convertIrlToView(tupiPolyList)));
+	scene->addItem(tupi_test);
 
 	scene->addItem(lokono_early);
 	scene->addItem(lokono_late);
@@ -240,7 +317,7 @@ QList<QPointF> SkycultureMapGraphicsView::convertIrlToView(const QList<QPointF> 
 	qreal map_width;
 	qreal map_height;
 	for(auto *item : scene()->items()) {
-		if(item->type() == QGraphicsPixmapItem::Type)
+		if(item->type() == QGraphicsSvgItem::Type)
 		{
 			map_width = item->boundingRect().width();
 			map_height = item->boundingRect().height();
@@ -300,6 +377,13 @@ void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId)
 		}
 	}
 
+	// if no fitting polygon was found --> return to prevent errors
+	if(skyCulturePolygon == nullptr)
+	{
+		qInfo() << "couldn't find any polygon with name [" << skycultureId << "]!";
+		return;
+	}
+
 	// if needed change the current year and update the polygon visibility
 	if(!skyCulturePolygon->existsAtPointInTime(currentYear))
 	{
@@ -312,6 +396,16 @@ void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId)
 	skyCulturePolygon->setSelected(true);
 
 	// start zoom (async?) to polygon and set TimeSlider to correct time (startTime of selected polygon?)
+	//fitInView(skyCulturePolygon->boundingRect(), Qt::KeepAspectRatio); --> funktioniert aber sehr passgenau
+	// x = x - 1/4 width, y = y - 1/4 height, width = width * 1.5, height = height * 1.5 --> entweder dynamisch oder min (z.B. 100 oder so)
+	const QRectF polyBbox = skyCulturePolygon->boundingRect();
+
+	// qInfo() << "pre eval width: " << polyBbox.width() << " height: " << polyBbox.height();
+	// int width = (polyBbox.width() < 130) ? 130 : polyBbox.width();
+	// int height = (polyBbox.height() < 130) ? 130 : polyBbox.height();
+	// qInfo() << "post eval width: " << width << " height: " << height;
+
+	fitInView(polyBbox.x() - polyBbox.width() / 4, polyBbox.y() - polyBbox.height() / 4, polyBbox.width() * 1.5, polyBbox.height() * 1.5, Qt::KeepAspectRatio);
 }
 
 void SkycultureMapGraphicsView::updateTime(int year)
