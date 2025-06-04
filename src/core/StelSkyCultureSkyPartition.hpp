@@ -25,12 +25,12 @@
 #include <QString>
 #include <QStringList>
 
+#include "GridLinesMgr.hpp"
 #include "StelCore.hpp"
 #include "StelObject.hpp"
 //#include "StelModule.hpp"
 
 class StelTranslator;
-class SkyLine;
 class QJsonObject;
 
 //! @class StelSkyCultureSkyPartition
@@ -47,7 +47,7 @@ class QJsonObject;
 //! 	       { "symbol": "\u264C", "native": "Leo",         "english": "Lion"},
 //! 	       { "symbol": "\u264D", "native": "Virgo",       "english": "Virgin"},
 //! 	       { "symbol": "\u264E", "native": "Libra",       "english": "Scales"},
-//! 	       { "symbol": "\u264F", "native": "Scorpio",     "english": "Scorpion"},
+//! 	       { "symbol": "\u264F", "native": "Scorpius",     "english": "Scorpion"},
 //! 	       { "symbol": "\u2650", "native": "Capricornus", "english": "Capricorn"},
 //! 	       { "symbol": "\u2651", "native": "Sagittarius", "english": "Archer"},
 //! 	       { "symbol": "\u2652", "native": "Aquarius",    "english": "Water bearer"},
@@ -88,7 +88,8 @@ class QJsonObject;
 //!
 //! //! "lunar_system": {
 //! "name": "Chinese",
-//! "partitions_deg": [0, ... <27 longitude numbers>],
+//! "defining_stars": [0, ... <27 star HIP indices which define the start of a Lunar Mansion>],
+//! "epoch": double, // optional. If existent, positions of defining stars are computed for epoch, and arcs drawn through their positions, which don't move by precession.
 //! "coordsys": "equatorial"
 //! "extent": 90,
 //! "link": { "star": 65474, "offset": 180},
@@ -127,27 +128,26 @@ class StelSkyCultureSkyPartition
 	Q_GADGET
 public:
 	StelSkyCultureSkyPartition(const QJsonObject &description);
-	void draw(StelCore *core) const;
+	~StelSkyCultureSkyPartition();
+	void draw(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 	void setFontSize(int newFontSize);
-	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
+	void update(double deltaTime) {centerLine->update(static_cast<int>(deltaTime*1000));}
 	void updateLabels();
 
 private:
-	void drawCap(StelPainter &sPainter, const SphericalCap& viewPortSphericalCap, SphericalCap *cap) const;
+	void drawCap(StelPainter &sPainter, const SphericalCap& viewPortSphericalCap, double latDeg) const;
 	//void drawLabels(StelPainter &sPainter) const;
 
 	StelCore::FrameType frameType;         //!< Useful seem only: FrameObservercentricEclipticOfDate (e.g. Zodiac), FrameEquinoxEqu (e.g. Chin. Lunar Mansions)
 	QVector<double> partitions;            //!< A partition into [0] large parts of [1] smaller parts of [2] smaller parts... Currently only 2-part zodiacs [12, 30] or nakshatras [27, 4] are in use.
+	StelObject::CulturalName name;         //!< Full culture-sensitive naming support: name of the system.
 	QList<StelObject::CulturalName> names; //!< Full culture-sensitive naming support: names of the first-grade partition.
 	QStringList symbols;                   //!< A list of very short or optimally 1-char Unicode strings with representative symbols usable as abbreviations.
 	double extent;                         //!< (degrees) the displayed partition zone runs so far north and south of the center line.
+public:
 	SkyLine *centerLine;                   //!< See GridlineMgr: a CUSTOM_ECLIPTIC or CUSTOM_EQUATORIAL SkyLine
-	SphericalCap *northernCap;             //!< Limiting cap around the respective pole.
-	SphericalCap *southernCap;             //!< Limiting cap around the respective pole.
-	Vec3f color;                           //!< color to draw all lines and labels
-	LinearFader fader;                     //!< for smooth fade in/out
+private:
 	QFont font;                            //!< font for labels
-	float lineThickness;                   //!< width of lines
 };
 //! @typedef StelSkyCultureSkyPartitionP
 //! Shared pointer on a StelSkyCultureSkyPartition with smart pointers

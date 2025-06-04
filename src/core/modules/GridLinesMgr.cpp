@@ -261,6 +261,8 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 			}
 		}
 	}
+	else if (d->text==".")
+		text=QString();
 	else
 		text = d->text;
 
@@ -348,14 +350,12 @@ void SkyGrid::draw(const StelCore* core) const
 	if (lineThickness>1.f)
 		sPainter.setLineWidth(lineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
-
-	// make text colors just a bit brighter. (But if >1, QColor::setRgb fails and makes text invisible.)
-	Vec4f textColor(qMin(1.0f, 1.25f*color[0]), qMin(1.0f, 1.25f*color[1]), qMin(1.0f, 1.25f*color[2]), fader.getInterstate());
 	sPainter.setColor(color, fader.getInterstate());
-
 	sPainter.setFont(font);
+
 	ViewportEdgeIntersectCallbackData userData(&sPainter);
-	userData.textColor = textColor;
+	// make text colors just a bit brighter. (But if >1, QColor::setRgb fails and makes text invisible.)
+	userData.textColor.set(qMin(1.0f, 1.25f*color[0]), qMin(1.0f, 1.25f*color[1]), qMin(1.0f, 1.25f*color[2]), fader.getInterstate());
 	userData.frameType = frameType;
 	userData.gridStepMeridianRad = gridStepMeridianRad;
 
@@ -675,7 +675,7 @@ void SkyLine::updateLabel()
 		case ECLIPTIC_WITH_DATE:
 		case ECLIPTIC_CULTURAL:
 			frameType = StelCore::FrameObservercentricEclipticOfDate;
-			label = QString(); // No label: parallel to ecliptic.
+			label = "."; // No label: parallel to ecliptic.
 			break;
 		case EQUATOR_J2000:
 			frameType = StelCore::FrameJ2000;
@@ -687,7 +687,7 @@ void SkyLine::updateLabel()
 			break;
 		case EQUATORIAL_CULTURAL:
 			frameType = StelCore::FrameEquinoxEqu;
-			label = QString(); // No label: parallel to equator.
+			label = "."; // No label: parallel to equator.
 			break;
 		case FIXED_EQUATOR:
 			frameType = StelCore::FrameFixedEquatorial; // Apparent Hour Angle is a non-refraction frame.
@@ -764,12 +764,7 @@ void SkyLine::draw(StelCore *core) const
 	if (fader.getInterstate() <= 0.f)
 		return;
 
-	static StelMovementMgr *sMvMgr=GETSTELMODULE(StelMovementMgr);
-	Q_ASSERT(sMvMgr);
 	StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
-
-	// Get the bounding halfspace
-	const SphericalCap& viewPortSphericalCap = prj->getBoundingCap();
 
 	// Initialize a painter and set openGL state
 	StelPainter sPainter(prj);
@@ -778,9 +773,22 @@ void SkyLine::draw(StelCore *core) const
 	const float oldLineWidth=sPainter.getLineWidth();
 	sPainter.setLineWidth(lineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
-
-	ViewportEdgeIntersectCallbackData userData(&sPainter);	
 	sPainter.setFont(font);
+
+	draw(sPainter, oldLineWidth);
+}
+
+void SkyLine::draw(StelPainter &sPainter, const float oldLineWidth) const
+{
+	static StelCore *core=StelApp::getInstance().getCore();
+	StelProjectorP prj=sPainter.getProjector();
+	// Get the bounding halfspace
+	const SphericalCap& viewPortSphericalCap = prj->getBoundingCap();
+
+	static StelMovementMgr *sMvMgr=GETSTELMODULE(StelMovementMgr);
+	Q_ASSERT(sMvMgr);
+
+	ViewportEdgeIntersectCallbackData userData(&sPainter);
 	userData.textColor = Vec4f(color, fader.getInterstate());
 	userData.text = label;
 	double alt=0, az=0; // Required only for CURRENT_VERTICAL line. Will contain alt/az of view.
@@ -857,9 +865,7 @@ void SkyLine::draw(StelCore *core) const
 						|| (viewPortSphericalCap.d<-declinationCap.d && viewPortSphericalCap.contains(-declinationCap.n)))
 				{
 					// The line is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
-					Vec3d pt1;
-					Vec3d pt2;
-					Vec3d pt3;
+					Vec3d pt1, pt2, pt3;
 					const double lon1=0.0;
 					const double lon2=120.0*M_PI_180;
 					const double lon3=240.0*M_PI_180;

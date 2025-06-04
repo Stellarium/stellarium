@@ -69,7 +69,8 @@ public:
 	virtual ~SkyLine();
 	static void init(); //! call once before creating the first line.
 	static void deinit(); //! call once after deleting all lines.
-	void draw(StelCore* core) const;
+	void draw(StelCore* core) const;       // set up a painter and draw
+	void draw(StelPainter &painter, const float oldLineWidth) const; // draw with given painter
 	void setColor(const Vec3f& c) {color = c;}
 	void setPartitions(bool visible) {showPartitions = visible;}
 	bool showsPartitions() const {return showPartitions;}
