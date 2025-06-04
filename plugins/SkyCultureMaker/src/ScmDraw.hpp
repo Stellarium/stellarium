@@ -54,6 +54,7 @@ private:
 
 	/// Holds the position of the eraser on the last frame.
 	Vec2d lastEraserPos = ScmDraw::defaultLastEraserPos;
+
 	/**
 	 * @brief Indicates if two segments intersect.
 	 * 
