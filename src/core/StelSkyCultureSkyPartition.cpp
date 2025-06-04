@@ -28,9 +28,7 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 	frameType(StelCore::FrameObservercentricEclipticOfDate),
 	partitions(),
 	extent(90.),
-	centerLine(nullptr), northernCap(nullptr), southernCap(nullptr),
-	color(1., 1., 0),
-	lineThickness(1)
+	centerLine(nullptr)
 {
 	// Parse defining centerline type
 	SkyLine::SKY_LINE_TYPE skylineType=SkyLine::ECLIPTIC_CULTURAL;
@@ -42,13 +40,12 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 		skylineType=map.value(json["coordsys"].toString(), SkyLine::ECLIPTIC_CULTURAL);
 	}
 	centerLine=new SkyLine(skylineType);
+	centerLine->setDisplayed(true);
 
 	// Parse extent, create polar caps where needed.
 	if (json.contains("extent") && json["extent"].isDouble())
 	{
 		extent=json["extent"].toDouble();
-		northernCap = new SphericalCap(Vec3d(0., 0.,  1.), cos((90.-extent)*M_PI_180));
-		southernCap = new SphericalCap(Vec3d(0., 0., -1.), cos((90.-extent)*M_PI_180));
 	}
 	else
 		qWarning() << "Bad \"extent\" given in JSON file.";
@@ -61,68 +58,99 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 	}
 	else
 	{
-		qWarning() << "No \"partitions\" array found in JSON data for zodiac or lunar description";
+		qWarning() << "No \"partitions\" array found in JSON data for zodiac or lunarSystem description";
 	}
 	// TODO: Parse names
-	// TODO: Parse symbols
+	if (json.contains("name"))
+	{
+		QJsonObject nameObj = json["name"].toObject();
+		name.native = nameObj["native"].toString();
+		name.pronounce = nameObj["pronounce"].toString();
+		name.transliteration = nameObj["transliteration"].toString();
+		name.translated = nameObj["english"].toString();
+	}
+	else
+	{
+		qWarning() << "No \"name\" found in JSON data for zodiac or lunarSystem description";
+	}
+	if (json.contains("names") && json["names"].isArray())
+	{
+		QJsonArray jNames = json["names"].toArray();
+		for (unsigned int i=0; i<jNames.size(); ++i)
+		{
+			const QJsonObject jName = jNames[i].toObject();
+			StelObject::CulturalName cName;
+			cName.native=jName["native"].toString();
+			cName.pronounce=jName["pronounce"].toString();
+			cName.transliteration=jName["transliteration"].toString();
+			cName.translated=jName["english"].toString();
+			names.append(cName);
+			symbols.append(jName["symbol"].toString());
+		}
+	}
+	else
+	{
+		qWarning() << "No \"names\" array found in JSON data for zodiac or lunarSystem description";
+	}
+	Q_ASSERT(symbols.length() == names.length());
+
 
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
 	updateLabels();
 }
 
-
-
-void StelSkyCultureSkyPartition::draw(StelCore *core) const
+StelSkyCultureSkyPartition::~StelSkyCultureSkyPartition()
 {
-	if (fader.getInterstate() <= 0.f)
-		return;
+//	if (centerLine) delete centerLine;
+}
 
+
+void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVelocity) const
+{
+	StelCore *core=StelApp::getInstance().getCore();
 	StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
+	sPainter.setProjector(prj);	
+
+	// Draw the major partitions
+	for (int p=0; p<partitions[0]; ++p)
+	{
+		const double lng=360./partitions[0]*p *M_PI_180;
+		Vec3d eqPt, nPt, sPt;
+		StelUtils::spheToRect(lng, 0., eqPt);
+		StelUtils::spheToRect(lng, extent*M_PI_180, nPt);
+		StelUtils::spheToRect(lng, -extent*M_PI_180, sPt);
+		sPainter.drawGreatCircleArc(eqPt, nPt);
+		sPainter.drawGreatCircleArc(eqPt, sPt);
+	}
 
 	// Get the bounding halfspace
-	const SphericalCap& viewPortSphericalCap = prj->getBoundingCap();
+	const SphericalCap& viewPortSphericalCap = sPainter.getProjector()->getBoundingCap();
+	if (extent<90.)
+	{
+		drawCap(sPainter, viewPortSphericalCap, extent);
+		drawCap(sPainter, viewPortSphericalCap, -extent);
+	}
 
-	// Initialize a painter and set openGL state
-	StelPainter sPainter(prj);
-	sPainter.setColor(color, fader.getInterstate());
-	sPainter.setBlending(true);
-	const float oldLineWidth=sPainter.getLineWidth();
-	sPainter.setLineWidth(lineThickness); // set line thickness
-	sPainter.setLineSmooth(true);
-
-	//ViewportEdgeIntersectCallbackData userData(&sPainter);
-	//sPainter.setFont(font);
-	//userData.textColor = Vec4f(color, fader.getInterstate());
-	//userData.text = label;
-
-
-
-
-
-	if (northernCap)
-		drawCap(sPainter, viewPortSphericalCap, northernCap);
-	if (southernCap)
-		drawCap(sPainter, viewPortSphericalCap, southernCap);
+	centerLine->draw(sPainter, 1.f); // The second arg. is irrelevant, will be restored again in the caller...
 }
 
 
 // shamelessly copied from SkyLine::draw (small circles part)
-void StelSkyCultureSkyPartition::drawCap(StelPainter &sPainter, const SphericalCap& viewPortSphericalCap, SphericalCap *cap) const
+void StelSkyCultureSkyPartition::drawCap(StelPainter &sPainter, const SphericalCap& viewPortSphericalCap, double latDeg) const
 {
-	const Vec3d rotCenter(0,0,cap->d);
+	double lat=latDeg*M_PI_180;
+	SphericalCap declinationCap(Vec3d(0.,0.,1.), std::sin(lat));
+	const Vec3d rotCenter(0,0,declinationCap.d);
 
-	const double lat=std::acos(cap->d);
 	Vec3d p1, p2;
-	if (!SphericalCap::intersectionPoints(viewPortSphericalCap, *cap, p1, p2))
+	if (!SphericalCap::intersectionPoints(viewPortSphericalCap, declinationCap, p1, p2))
 	{
-		if ((viewPortSphericalCap.d<cap->d && viewPortSphericalCap.contains(cap->n))
-				|| (viewPortSphericalCap.d<-cap->d && viewPortSphericalCap.contains(-cap->n)))
+		if ((viewPortSphericalCap.d<declinationCap.d && viewPortSphericalCap.contains(declinationCap.n))
+				|| (viewPortSphericalCap.d<-declinationCap.d && viewPortSphericalCap.contains(-declinationCap.n)))
 		{
 			// The line is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
-			Vec3d pt1;
-			Vec3d pt2;
-			Vec3d pt3;
+			Vec3d pt1, pt2, pt3;
 			const double lon1=0.0;
 			const double lon2=120.0*M_PI_180;
 			const double lon3=240.0*M_PI_180;
