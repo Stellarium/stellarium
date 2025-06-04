@@ -204,7 +204,7 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 	}
 	else if (activeTool == DrawTools::Eraser)
 	{
-		if (b.testAnyFlag(Qt::MouseButton::RightButton))
+		if (b.testFlag(Qt::MouseButton::RightButton))
 		{
 			Vec2d currentPos(x, y);
 
