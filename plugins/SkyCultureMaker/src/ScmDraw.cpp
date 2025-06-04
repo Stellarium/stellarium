@@ -8,7 +8,7 @@
 
 const Vec2d scm::ScmDraw::defaultLastEraserPos(std::nan("1"), std::nan("1"));
 
-bool scm::ScmDraw::lineIntersect(Vec2d startA, Vec2d directionA, Vec2d startB, Vec2d directionB)
+bool scm::ScmDraw::segmentIntersect(Vec2d startA, Vec2d directionA, Vec2d startB, Vec2d directionB)
 {
 	if (std::abs(directionA.dot(directionB)) < std::numeric_limits<double>::epsilon()) // check with near zero value
 	{
@@ -217,7 +217,6 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 
 				std::vector<int> erasedIndicies;
 
-				// TODO improve performance
 				for (auto line = drawnLines.coordinates.begin(); line != drawnLines.coordinates.end();
 				     ++line)
 				{
@@ -228,8 +227,8 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 					Vec2d lineEnd2d(lineEnd.v[0], lineEnd.v[1]);
 					auto lineDirection = lineEnd2d - lineStart2d;
 
-					bool intersect = lineIntersect(currentPos, mouseDirection, lineStart2d,
-					                               lineDirection);
+					bool intersect = segmentIntersect(currentPos, mouseDirection, lineStart2d,
+					                                  lineDirection);
 					if (intersect)
 					{
 						erasedIndicies.push_back(

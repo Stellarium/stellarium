@@ -54,8 +54,17 @@ private:
 
 	/// Holds the position of the eraser on the last frame.
 	Vec2d lastEraserPos = ScmDraw::defaultLastEraserPos;
-
-	static bool lineIntersect(Vec2d startA, Vec2d directionA, Vec2d startB, Vec2d directionB);
+	/**
+	 * @brief Indicates if two segments intersect.
+	 * 
+	 * @param startA The start point of A.
+	 * @param directionA The direction vector of A pointing to the end point of A.
+	 * @param startB The start point of B.
+	 * @param directionB The direction vector of B pointing to the end point of B.
+	 * @return true When both segments intersect.
+	 * @return false When both segments do NOT intersect.
+	 */
+	static bool segmentIntersect(Vec2d startA, Vec2d directionA, Vec2d startB, Vec2d directionB);
 
 	/**
 	 * @brief Calculates the perpendicular dot product vector of a and b i.e. a^T dot b
