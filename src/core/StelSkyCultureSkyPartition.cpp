@@ -21,7 +21,9 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
+#include "StarMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelSkyCultureSkyPartition.hpp"
 #include "GridLinesMgr.hpp"
@@ -30,7 +32,9 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 	frameType(StelCore::FrameObservercentricEclipticOfDate),
 	partitions(),
 	extent(90.),
-	centerLine(nullptr)
+	centerLine(nullptr),
+	linkStar(0),
+	offset(0.0)
 {
 	// Parse defining centerline type
 	SkyLine::SKY_LINE_TYPE skylineType=SkyLine::ECLIPTIC_CULTURAL;
@@ -96,6 +100,13 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 	}
 	Q_ASSERT(symbols.length() == names.length());
 
+	if (json.contains("link"))
+	{
+		QJsonObject obj=json["link"].toObject();
+		linkStar=obj["star"].toInt();
+		offset=obj["offset"].toDouble();
+	}
+
 
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
@@ -115,10 +126,31 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 	StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	sPainter.setProjector(prj);	
 
+	double offsetFromAries=0.;
+	// IF DEFINED, find the necessary shift from linkStar and offset
+	if (linkStar>0)
+	{
+		const StelObjectP star=GETSTELMODULE(StarMgr)->searchHP(linkStar);
+		Vec3d pos=star->getEquinoxEquatorialPosAuto(core);
+		double ra, dec;
+		StelUtils::rectToSphe(&ra, &dec, pos);
+		if (frameType==StelCore::FrameObservercentricEclipticOfDate)
+		{
+			const double ecl = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
+			double lambda, beta;
+			Vec3d eclPos;
+			StelUtils::equToEcl(ra, dec, ecl, &lambda, &beta);
+			offsetFromAries=lambda*M_180_PI-offset;
+		}
+		else
+			offsetFromAries=ra*M_180_PI-offset;
+	}
+
+
 	// Draw the major partitions
 	for (int p=0; p<partitions[0]; ++p)
 	{
-		const double lng=360./partitions[0]*p *M_PI_180;
+		const double lng=(360./partitions[0]*p +offsetFromAries)*M_PI_180;
 		Vec3d eqPt, nPt, sPt;
 		StelUtils::spheToRect(lng, 0., eqPt);
 		StelUtils::spheToRect(lng, extent*M_PI_180, nPt);
@@ -144,8 +176,8 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 		for (int i=0; i<partitions[0]; ++i)
 		{
 			// To have tilted labels, we project a point 0.1deg from the actual label point and derive screen-based angle.
-			double lng  = (360./partitions[0]*i + 2.)*M_PI_180;
-			double lng1 = (360./partitions[0]*i + 1.9)*M_PI_180;
+			double lng  = (360./partitions[0]*i + 2.+offsetFromAries)*M_PI_180;
+			double lng1 = (360./partitions[0]*i + 1.9+offsetFromAries)*M_PI_180;
 			double lat  = (extent<50. ? -extent+0.2 : -10.) *M_PI_180;
 			Vec3d pos, pos1, scr, scr1;
 			StelUtils::spheToRect(lng, lat, pos);
@@ -164,8 +196,8 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 		{
 			QString label=scMgr->createCulturalLabel(names.at(i), StelObject::CulturalDisplayStyle::Pronounce,names.at(i).pronounceI18n);
 			// To have tilted labels, we project a point 0.1deg from the actual label point and derive screen-based angle.
-			double lng  = (360./partitions[0]*(double(i)+0.5) + 2.)*M_PI_180;
-			double lng1 = (360./partitions[0]*(double(i)+0.5) + 1.9)*M_PI_180;
+			double lng  = (360./partitions[0]*(double(i)+0.5) + 2.+offsetFromAries)*M_PI_180;
+			double lng1 = (360./partitions[0]*(double(i)+0.5) + 1.9+offsetFromAries)*M_PI_180;
 			double lat  = (extent<50. ? -extent+0.2 : -10.) *M_PI_180;
 			Vec3d pos, pos1, scr, scr1;
 			StelUtils::spheToRect(lng, lat, pos);
