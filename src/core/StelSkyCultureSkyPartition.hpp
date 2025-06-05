@@ -86,41 +86,45 @@ class QJsonObject;
 //! 	       { "symbol": "LS27", "native": "रेवती",                            "pronounce": "Revati",                "english": "Prosperous"},
 //! 	       { "symbol": "LS27", "native": "अभिजित",                       "pronounce": "Abhijit",               "english": "Invincible"}]},
 //!
+//! The Chinese define 28 Lunar Mansions of different sizes in equatorial coordinates, and use defining stars for the onset of a mansion. The sky is dissected into 28 slices from pole to pole.
+//! What is still unclear is whether we should keep the link to the stars "live", or let the stars move out of epoch.
 //! //! "lunar_system": {
 //! "name": "Chinese",
-//! "defining_stars": [0, ... <27 star HIP indices which define the start of a Lunar Mansion>],
+//! "defining_stars": [65474, 69427, 72622, 78265, 80763. 82514, 88635, 92041, 100345, 102618, 106278, 109074, 113963, 1067,
+//!                    4463, 8903, 12719, 17499, 20889, 26207, 26727, 30343, 41822, 42313, 46390, 48356, 53740, 59803],
+//!                   // 28 star HIP indices which define the start of a Lunar Mansion
 //! "epoch": double, // optional. If existent, positions of defining stars are computed for epoch, and arcs drawn through their positions, which don't move by precession.
 //! "coordsys": "equatorial"
 //! "extent": 90,
 //! "link": { "star": 65474, "offset": 180},
-//! "names": [ { "symbol": "LS01", "native": "", "pronounce": "", "english": "1"},
-//! 	       { "symbol": "LS02", "native": "", "pronounce": "", "english": "2"},
-//! 	       { "symbol": "LS03", "native": "", "pronounce": "", "english": "3"},
-//! 	       { "symbol": "LS04", "native": "", "pronounce": "", "english": "4"},
-//! 	       { "symbol": "LS05", "native": "", "pronounce": "", "english": "5"},
-//! 	       { "symbol": "LS06", "native": "", "pronounce": "", "english": "6"},
-//! 	       { "symbol": "LS07", "native": "", "pronounce": "", "english": "7"},
-//! 	       { "symbol": "LS08", "native": "", "pronounce": "", "english": "8"},
-//! 	       { "symbol": "LS09", "native": "", "pronounce": "", "english": "9"},
-//! 	       { "symbol": "LS10", "native": "", "pronounce": "", "english": "10"},
-//! 	       { "symbol": "LS11", "native": "", "pronounce": "", "english": "11"},
-//! 	       { "symbol": "LS12", "native": "", "pronounce": "", "english": "12"},
-//! 	       { "symbol": "LS13", "native": "", "pronounce": "", "english": "13"},
-//! 	       { "symbol": "LS14", "native": "", "pronounce": "", "english": "14"},
-//! 	       { "symbol": "LS15", "native": "", "pronounce": "", "english": "15"},
-//! 	       { "symbol": "LS16", "native": "", "pronounce": "", "english": "16"},
-//! 	       { "symbol": "LS17", "native": "", "pronounce": "", "english": "17"},
-//! 	       { "symbol": "LS18", "native": "", "pronounce": "", "english": "18"},
-//! 	       { "symbol": "LS19", "native": "", "pronounce": "", "english": "19"},
-//! 	       { "symbol": "LS20", "native": "", "pronounce": "", "english": "20"},
-//! 	       { "symbol": "LS21", "native": "", "pronounce": "", "english": "21"},
-//! 	       { "symbol": "LS22", "native": "", "pronounce": "", "english": "22"},
-//! 	       { "symbol": "LS23", "native": "", "pronounce": "", "english": "23"},
-//! 	       { "symbol": "LS24", "native": "", "pronounce": "", "english": "24"},
-//! 	       { "symbol": "LS25", "native": "", "pronounce": "", "english": "25"},
-//! 	       { "symbol": "LS26", "native": "", "pronounce": "", "english": "26"},
-//! 	       { "symbol": "LS27", "native": "", "pronounce": "", "english": "27"},
-//! 	       { "symbol": "LS27", "native": "", "pronounce": "", "english": "28"}]},
+//! "names": [ { "symbol": "LS01", "native": "", "pronounce": "", "english": "Horn"},
+//! 	       { "symbol": "LS02", "native": "", "pronounce": "", "english": "Neck"},
+//! 	       { "symbol": "LS03", "native": "", "pronounce": "", "english": "Root"},
+//! 	       { "symbol": "LS04", "native": "", "pronounce": "", "english": "Room"},
+//! 	       { "symbol": "LS05", "native": "", "pronounce": "", "english": "Heart"},
+//! 	       { "symbol": "LS06", "native": "", "pronounce": "", "english": "Tail"},
+//! 	       { "symbol": "LS07", "native": "", "pronounce": "", "english": "Winnowing Basket"},
+//! 	       { "symbol": "LS08", "native": "", "pronounce": "", "english": "Dipper"},
+//! 	       { "symbol": "LS09", "native": "", "pronounce": "", "english": "Ox"},
+//! 	       { "symbol": "LS10", "native": "", "pronounce": "", "english": "Girl"},
+//! 	       { "symbol": "LS11", "native": "", "pronounce": "", "english": "Emptiness"},
+//! 	       { "symbol": "LS12", "native": "", "pronounce": "", "english": "Rooftop"},
+//! 	       { "symbol": "LS13", "native": "", "pronounce": "", "english": "Encampment"},
+//! 	       { "symbol": "LS14", "native": "", "pronounce": "", "english": "Wall"},
+//! 	       { "symbol": "LS15", "native": "", "pronounce": "", "english": "Legs"},
+//! 	       { "symbol": "LS16", "native": "", "pronounce": "", "english": "Bond"},
+//! 	       { "symbol": "LS17", "native": "", "pronounce": "", "english": "Stomach"},
+//! 	       { "symbol": "LS18", "native": "", "pronounce": "", "english": "Hairy Head"},
+//! 	       { "symbol": "LS19", "native": "", "pronounce": "", "english": "Net"},
+//! 	       { "symbol": "LS20", "native": "", "pronounce": "", "english": "Turtle Beak"},
+//! 	       { "symbol": "LS21", "native": "", "pronounce": "", "english": "Three Stars"},
+//! 	       { "symbol": "LS22", "native": "", "pronounce": "", "english": "Well"},
+//! 	       { "symbol": "LS23", "native": "", "pronounce": "", "english": "Ghost"},
+//! 	       { "symbol": "LS24", "native": "", "pronounce": "", "english": "Willow"},
+//! 	       { "symbol": "LS25", "native": "", "pronounce": "", "english": "Star"},
+//! 	       { "symbol": "LS26", "native": "", "pronounce": "", "english": "Extended Net"},
+//! 	       { "symbol": "LS27", "native": "", "pronounce": "", "english": "Wings"},
+//! 	       { "symbol": "LS27", "native": "", "pronounce": "", "english": "Chariot"}]},
 //! It is usually parallel to the ecliptical or equatorial coordinates of date, and splits the ecliptic (or equator) in @param partitions[0] partitions of equal number of @param partitions[1] subpartitions.
 //!
 class StelSkyCultureSkyPartition
@@ -148,6 +152,8 @@ public:
 	SkyLine *centerLine;                   //!< See GridlineMgr: a CUSTOM_ECLIPTIC or CUSTOM_EQUATORIAL SkyLine
 private:
 	QFont font;                            //!< font for labels
+	int linkStar;                          //!< HIP number of star that defines a given offset longitude
+	double offset;                         //!< the longitude (degrees) in the respective culturalpartition which is defined by linkStar
 };
 //! @typedef StelSkyCultureSkyPartitionP
 //! Shared pointer on a StelSkyCultureSkyPartition with smart pointers
