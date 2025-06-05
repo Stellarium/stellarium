@@ -21,6 +21,8 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
+#include "StelModuleMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
 #include "StelSkyCultureSkyPartition.hpp"
 #include "GridLinesMgr.hpp"
 
@@ -108,7 +110,8 @@ StelSkyCultureSkyPartition::~StelSkyCultureSkyPartition()
 
 void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
-	StelCore *core=StelApp::getInstance().getCore();
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	static StelCore *core=StelApp::getInstance().getCore();
 	StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	sPainter.setProjector(prj);	
 
@@ -124,15 +127,59 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 		sPainter.drawGreatCircleArc(eqPt, sPt);
 	}
 
-	// Get the bounding halfspace
-	const SphericalCap& viewPortSphericalCap = sPainter.getProjector()->getBoundingCap();
+	// Draw top/bottom lines where applicable
 	if (extent<90.)
 	{
+		// Get the bounding halfspace
+		const SphericalCap& viewPortSphericalCap = sPainter.getProjector()->getBoundingCap();
 		drawCap(sPainter, viewPortSphericalCap, extent);
 		drawCap(sPainter, viewPortSphericalCap, -extent);
 	}
 
 	centerLine->draw(sPainter, 1.f); // The second arg. is irrelevant, will be restored again in the caller...
+
+	// Symbols: At the beginning of the respective zone.
+	if (symbols.length())
+	{
+		for (int i=0; i<partitions[0]; ++i)
+		{
+			// To have tilted labels, we project a point 0.1deg from the actual label point and derive screen-based angle.
+			double lng  = (360./partitions[0]*i + 2.)*M_PI_180;
+			double lng1 = (360./partitions[0]*i + 1.9)*M_PI_180;
+			double lat  = (extent<50. ? -extent+0.2 : -10.) *M_PI_180;
+			Vec3d pos, pos1, scr, scr1;
+			StelUtils::spheToRect(lng, lat, pos);
+			StelUtils::spheToRect(lng1, lat, pos1);
+			prj->project(pos, scr);
+			prj->project(pos1, scr1);
+			double angle=atan2(scr1[1]-scr[1], scr1[0]-scr[0])*M_180_PI;
+			sPainter.drawText(pos, symbols.at(i), angle);
+		}
+	}
+
+	// Labels:
+	if (names.length())
+	{
+		for (int i=0; i<partitions[0]; ++i)
+		{
+			QString label=scMgr->createCulturalLabel(names.at(i), StelObject::CulturalDisplayStyle::Pronounce,names.at(i).pronounceI18n);
+			// To have tilted labels, we project a point 0.1deg from the actual label point and derive screen-based angle.
+			double lng  = (360./partitions[0]*(double(i)+0.5) + 2.)*M_PI_180;
+			double lng1 = (360./partitions[0]*(double(i)+0.5) + 1.9)*M_PI_180;
+			double lat  = (extent<50. ? -extent+0.2 : -10.) *M_PI_180;
+			Vec3d pos, pos1, scr, scr1;
+			StelUtils::spheToRect(lng, lat, pos);
+			StelUtils::spheToRect(lng1, lat, pos1);
+			prj->project(pos, scr);
+			prj->project(pos1, scr1);
+			float angle=atan2(scr1[1]-scr[1], scr1[0]-scr[0])*M_180_PIf;
+			QFontMetrics metrics(font);
+			float xShift= -0.5 * metrics.boundingRect(label).width();
+
+			sPainter.drawText(pos, label, angle, xShift);
+		}
+	}
+
 }
 
 
