@@ -152,6 +152,22 @@ p, li { white-space: pre-wrap; }
               <height>64</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">
+              QListWidget, QListWidget::viewport {
+                  margin: 0px;
+                  padding: 0px;
+                  border: none;
+                  outline: none;
+              }
+              QListWidget::item {
+                  margin: 0px;
+                  padding: 4px;
+                  border: none;
+                  outline: none;
+              }
+             </string>
+            </property>
            </widget>
           </item>
           <item>
@@ -160,7 +176,7 @@ p, li { white-space: pre-wrap; }
              <widget class="QPushButton" name="AddConstellationBtn">
               <property name="minimumSize">
                <size>
-                <width>135</width>
+                <width>150</width>
                 <height>0</height>
                </size>
               </property>
@@ -178,7 +194,7 @@ p, li { white-space: pre-wrap; }
              <widget class="QPushButton" name="RemoveConstellationBtn">
               <property name="minimumSize">
                <size>
-                <width>135</width>
+                <width>150</width>
                 <height>0</height>
                </size>
               </property>
