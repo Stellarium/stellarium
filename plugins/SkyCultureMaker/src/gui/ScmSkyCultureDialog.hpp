@@ -41,10 +41,18 @@ private:
 	Ui_scmSkyCultureDialog *ui = nullptr;
 	SkyCultureMaker *maker = nullptr;
 
-	QString name;
+	/// The name of the sky culture.
+	QString name = "";
 
-	std::vector<scm::ScmConstellation> *constellations;
+	/// The vector of constellations to be displayed in the dialog.
+	std::vector<scm::ScmConstellation> *constellations = nullptr;
 
+	/**
+	 * @brief Gets the display name from a constellation.
+	 *
+	 * @param constellation The constellation to get the display name from.
+	 * @return The display name of the constellation.
+	 */
 	QString getDisplayNameFromConstellation(const scm::ScmConstellation &constellation) const;
 
 	void setIdFromName(QString &name);

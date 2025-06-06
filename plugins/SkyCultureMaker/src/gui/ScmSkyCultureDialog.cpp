@@ -15,12 +15,13 @@ ScmSkyCultureDialog::~ScmSkyCultureDialog()
 
 void ScmSkyCultureDialog::setConstellations(std::vector<scm::ScmConstellation> *constellations)
 {
-	this->constellations = constellations;
+	ScmSkyCultureDialog::constellations = constellations;
 	if (ui && dialog)
 	{
 		ui->constellationsList->clear();
 		for (const auto &constellation : *constellations)
 		{
+			// Add the constellation to the list widget
 			ui->constellationsList->addItem(getDisplayNameFromConstellation(constellation));
 		}
 	}
@@ -68,6 +69,8 @@ void ScmSkyCultureDialog::createDialogContent()
 	connect(ui->SaveSkyCultureBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::saveSkyCulture);
 	connect(ui->AddConstellationBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::constellationDialog);
 	connect(ui->RemoveConstellationBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::removeSelectedConstellation);
+	connect(ui->constellationsList, &QListWidget::itemSelectionChanged, this,
+	        &ScmSkyCultureDialog::updateRemoveConstellationButton);
 }
 
 void ScmSkyCultureDialog::saveSkyCulture()
@@ -95,18 +98,18 @@ void ScmSkyCultureDialog::removeSelectedConstellation()
 		}
 		// Remove the constellation from the SC
 		maker->getCurrentSkyCulture()->removeConstellation(selectedConstellationId);
+		// Disable removal button
+		ui->RemoveConstellationBtn->setEnabled(false);
 		// The reason for not just removing the constellation in the UI here is that
 		// in case the constellation could not be removed from the SC, the UI
 		// and the SC would be out of sync
 		maker->updateSkyCultureDialog();
-		// Disable removal button again
-		ui->RemoveConstellationBtn->setEnabled(false);
 	}
 }
 
 void ScmSkyCultureDialog::constellationDialog()
 {
-	maker->setConstellationDialogVisibility(true); // Disable the Sky Culture Maker
+	maker->setConstellationDialogVisibility(true);
 }
 
 void ScmSkyCultureDialog::setIdFromName(QString &name)
