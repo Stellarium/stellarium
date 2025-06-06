@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>516</width>
-    <height>500</height>
+    <width>400</width>
+    <height>340</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>516</width>
-    <height>500</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -111,6 +111,12 @@
           </item>
           <item>
            <widget class="QTextEdit" name="skyCultureNameTE">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>32</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
@@ -132,23 +138,6 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="currentSCIdLbl">
-            <property name="text">
-             <string>ID of the Sky Culture</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QTextEdit" name="skyCultureIdTE">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>32</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QLabel" name="constellationsLbl">
             <property name="text">
              <string>Constellations:</string>
@@ -156,19 +145,30 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item>
-           <widget class="QListWidget" name="constellationsList"/>
+           <widget class="QListWidget" name="constellationsList">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>64</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="QPushButton" name="SaveSkyCultureBtn">
-              <property name="text">
-               <string>Save Sky Culture</string>
-              </property>
-             </widget>
-            </item>
+           <layout class="QHBoxLayout" name="overviewConstellationBtnLayout">
             <item>
              <widget class="QPushButton" name="AddConstellationBtn">
+              <property name="minimumSize">
+               <size>
+                <width>135</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Add Constellation</string>
               </property>
@@ -176,6 +176,17 @@ p, li { white-space: pre-wrap; }
             </item>
             <item>
              <widget class="QPushButton" name="RemoveConstellationBtn">
+              <property name="minimumSize">
+               <size>
+                <width>135</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Remove Constellation</string>
               </property>
@@ -184,11 +195,26 @@ p, li { white-space: pre-wrap; }
            </layout>
           </item>
           <item>
-           <widget class="QLabel" name="infoBoxLbl">
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
+           <layout class="QVBoxLayout" name="overviewSCBtnLayout">
+            <item>
+             <widget class="QPushButton" name="SaveSkyCultureBtn">
+              <property name="minimumSize">
+               <size>
+                <width>130</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Save Sky Culture</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -207,6 +233,16 @@ p, li { white-space: pre-wrap; }
           <string>License</string>
          </attribute>
         </widget>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="infoBoxLbl">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="margin">
+         <number>5</number>
+        </property>
        </widget>
       </item>
      </layout>
