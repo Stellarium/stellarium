@@ -91,7 +91,7 @@ public:
 	void setNewSkyCulture();
 
 	/**
-	 * @brief Gets the current set sky culutre.
+	 * @brief Gets the current set sky culture.
 	 */
 	scm::ScmSkyCulture *getCurrentSkyCulture();
 
@@ -101,7 +101,7 @@ public:
 	scm::ScmDraw *getScmDraw();
 
 	/**
-	 * @brief Triggers the update of the sky culture dialog.
+	 * @brief Triggers an update of the sky culture dialog.
 	 */
 	void updateSkyCultureDialog();
 

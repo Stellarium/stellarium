@@ -188,6 +188,9 @@ void ScmConstellationDialog::saveConstellation()
 void ScmConstellationDialog::resetDialog()
 {
 	activeTool = scm::DrawTools::None;
+	ui->penBtn->setChecked(false);
+	ui->eraserBtn->setChecked(false);
+	maker->setDrawTool(activeTool);
 
 	constellationId.clear();
 	ui->idTE->clear();
