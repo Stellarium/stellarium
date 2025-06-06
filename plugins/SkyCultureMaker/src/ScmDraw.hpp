@@ -11,26 +11,29 @@
 
 #include "StelCore.hpp"
 #include "StelObjectMgr.hpp"
-#include <vector>
-#include <QString>
-#include "enumBitops.hpp"
-#include <optional>
-#include <tuple>
 #include "StelObjectType.hpp"
-#include <variant>
+#include "enumBitops.hpp"
+#include "types/CoordinateLine.hpp"
 #include "types/DrawTools.hpp"
 #include "types/Drawing.hpp"
-#include "types/CoordinateLine.hpp"
-#include "types/StarLine.hpp"
 #include "types/Lines.hpp"
+#include "types/StarLine.hpp"
 #include "types/StarPoint.hpp"
+#include <optional>
+#include <tuple>
+#include <variant>
+#include <vector>
+#include <QObject>
+#include <QString>
 
 namespace scm
 {
 
-class ScmDraw
+class ScmDraw : public QObject
 {
 private:
+	static constexpr const char id_search_window[] = "actionShow_Search_Window_Global";
+
 	/// The search radius to attach to a point on a existing line.
 	uint32_t maxSnapRadiusInPixels = 25;
 
@@ -48,6 +51,31 @@ private:
 
 	/// The current active tool
 	DrawTools activeTool = DrawTools::None;
+
+	/// Indicates if the user is navigating in stellarium i.e. changing position of camera
+	bool isNavigating = false;
+
+	/// Indicates if the users searches for a star.
+	bool inSearchMode = false;
+
+	/// Indicates if the currently selected star was searched.
+	bool selectedStarIsSearched = false;
+
+	/**
+	 * @brief Appends a draw point to the list of drawn points.
+	 * 
+	 * @param point The coordinate in J2000 frame.
+	 * @param starID The id of the star to use.
+	 */
+	void appendDrawPoint(Vec3d point, std::optional<QString> starID);
+
+public slots:
+	void setSearchMode(bool b);
+
+	/**
+	 * @brief Is called when the the user is moved to another star.
+	 */
+	void setMoveToAnotherStart();
 
 public:
 	/// The frame that is used for calculation and is drawn on.
@@ -110,12 +138,13 @@ public:
 	void setTool(DrawTools tool);
 };
 
-}  // namespace scm
+} // namespace scm
 
 // Opt In for Drawing to use bitops & and |
-template <> struct generic_enum_bitops::allow_bitops<scm::Drawing>
+template<>
+struct generic_enum_bitops::allow_bitops<scm::Drawing>
 {
 	static constexpr bool value = true;
 };
 
-#endif	// SCMDRAW_H
+#endif // SCMDRAW_H
