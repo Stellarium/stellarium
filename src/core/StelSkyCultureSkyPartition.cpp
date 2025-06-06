@@ -33,7 +33,7 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 	partitions(),
 	extent(90.),
 	centerLine(nullptr),
-	linkStar(0),
+	linkStars(),
 	offset(0.0)
 {
 	// Parse defining centerline type
@@ -44,6 +44,10 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 			{"ecliptical", SkyLine::ECLIPTIC_CULTURAL},
 			{"equatorial", SkyLine::EQUATORIAL_CULTURAL}};
 		skylineType=map.value(json["coordsys"].toString(), SkyLine::ECLIPTIC_CULTURAL);
+		static const QMap<SkyLine::SKY_LINE_TYPE, StelCore::FrameType>frameMap={
+			{SkyLine::ECLIPTIC_CULTURAL   , StelCore::FrameObservercentricEclipticOfDate},
+			{SkyLine::EQUATORIAL_CULTURAL , StelCore::FrameEquinoxEqu}};
+		frameType=frameMap.value(skylineType, StelCore::FrameObservercentricEclipticOfDate);
 	}
 	centerLine=new SkyLine(skylineType);
 	centerLine->setDisplayed(true);
@@ -103,14 +107,23 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 	if (json.contains("link"))
 	{
 		QJsonObject obj=json["link"].toObject();
-		linkStar=obj["star"].toInt();
+		linkStars.append(obj["star"].toInt());
 		offset=obj["offset"].toDouble();
 	}
-
+	else if (json.contains("defining_stars"))
+	{
+		QJsonArray jStars=json["defining_stars"].toArray();
+		for (unsigned int i=0; i<jStars.size(); ++i)
+			linkStars.append(jStars.at(i).toInt());
+	}
 
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
 	updateLabels();
+
+	// Recapitulate what we have loaded:
+	qDebug() << "Cultural Sky Partition: Loaded partitions:" << partitions << names.length() << "names, " << symbols.length() << "symbols." <<
+		    linkStars.length() << "link stars, or offset" << offset << "with star" << (linkStars.length()>0 ? QString::number(linkStars.first()) : "UNDEF");
 }
 
 StelSkyCultureSkyPartition::~StelSkyCultureSkyPartition()
@@ -122,15 +135,16 @@ StelSkyCultureSkyPartition::~StelSkyCultureSkyPartition()
 void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	static StarMgr *starMgr=GETSTELMODULE(StarMgr);
 	static StelCore *core=StelApp::getInstance().getCore();
 	StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	sPainter.setProjector(prj);	
 
 	double offsetFromAries=0.;
-	// IF DEFINED, find the necessary shift from linkStar and offset
-	if (linkStar>0)
+	// If defined, find the necessary shift from single linkStar and offset
+	if (linkStars.length()==1)
 	{
-		const StelObjectP star=GETSTELMODULE(StarMgr)->searchHP(linkStar);
+		const StelObjectP star=starMgr->searchHP(linkStars.first());
 		Vec3d pos=star->getEquinoxEquatorialPosAuto(core);
 		double ra, dec;
 		StelUtils::rectToSphe(&ra, &dec, pos);
@@ -147,16 +161,43 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 	}
 
 
-	// Draw the major partitions
-	for (int p=0; p<partitions[0]; ++p)
+	if (linkStars.length()>1)
 	{
-		const double lng=(360./partitions[0]*p +offsetFromAries)*M_PI_180;
-		Vec3d eqPt, nPt, sPt;
-		StelUtils::spheToRect(lng, 0., eqPt);
-		StelUtils::spheToRect(lng, extent*M_PI_180, nPt);
-		StelUtils::spheToRect(lng, -extent*M_PI_180, sPt);
-		sPainter.drawGreatCircleArc(eqPt, nPt);
-		sPainter.drawGreatCircleArc(eqPt, sPt);
+		// Chinese systems: Unequal partitions defined by stars.
+		foreach(const int starId, linkStars)
+		{
+			//qDebug() << "drawing line for HIP"  << starId;
+			StelObjectP star=starMgr->searchHP(starId);
+			//const double lng=(360./partitions[0]*p +offsetFromAries)*M_PI_180;
+			Vec3d posDate=star->getEquinoxEquatorialPos(core);
+			double ra, dec;
+			StelUtils::rectToSphe(&ra, &dec, posDate);
+			Vec3d eqPt, nPt, sPt;
+			StelUtils::spheToRect(ra, 0., eqPt);
+			StelUtils::spheToRect(ra, extent*M_PI_180, nPt);
+			StelUtils::spheToRect(ra, -extent*M_PI_180, sPt);
+			sPainter.drawGreatCircleArc(eqPt, nPt);
+			sPainter.drawGreatCircleArc(eqPt, sPt);
+			//qDebug() << "done line for HIP"  << starId;
+
+			// Mark the defining star with a circlet.
+			SphericalCap scCircle(posDate, cos(0.25*M_PI_180));
+			sPainter.drawSphericalRegion(&scCircle, StelPainter::SphericalPolygonDrawModeBoundary);
+		}
+	}
+	else
+	{
+		// Draw the equal-sized major partitions
+		for (int p=0; p<partitions[0]; ++p)
+		{
+			const double lng=(360./partitions[0]*p +offsetFromAries)*M_PI_180;
+			Vec3d eqPt, nPt, sPt;
+			StelUtils::spheToRect(lng, 0., eqPt);
+			StelUtils::spheToRect(lng, extent*M_PI_180, nPt);
+			StelUtils::spheToRect(lng, -extent*M_PI_180, sPt);
+			sPainter.drawGreatCircleArc(eqPt, nPt);
+			sPainter.drawGreatCircleArc(eqPt, sPt);
+		}
 	}
 
 	// Draw top/bottom lines where applicable
@@ -171,7 +212,7 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 	centerLine->draw(sPainter, 1.f); // The second arg. is irrelevant, will be restored again in the caller...
 
 	// Symbols: At the beginning of the respective zone.
-	if (symbols.length())
+	if (symbols.length() && linkStars.length()<2)
 	{
 		for (int i=0; i<partitions[0]; ++i)
 		{
@@ -188,9 +229,36 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 			sPainter.drawText(pos, symbols.at(i), angle);
 		}
 	}
+	else if (symbols.length()==linkStars.length()  && linkStars.length()>1)
+	{
+		// Chinese Symbols
+		for (int i=0; i<linkStars.length(); ++i)
+		{
+			QString label=symbols.at(i);
+			StelObjectP starBegin = starMgr->searchHP(linkStars.at(i));
+
+			Vec3d eq=starBegin->getEquinoxEquatorialPos(core);
+			double ra, dec;
+			StelUtils::rectToSphe(&ra, &dec, eq);
+
+			ra += 2.*M_PI_180; // push a bit into the mansion area. Problem: the narrow mansions...
+			double ra1 = ra-0.1*M_PI_180;
+			double dec1  = (extent<50. ? -extent+0.2 : -10.) *M_PI_180;
+			Vec3d pos, pos1, scr, scr1;
+			StelUtils::spheToRect(ra, dec1, pos);
+			StelUtils::spheToRect(ra1, dec1, pos1);
+			prj->project(pos, scr);
+			prj->project(pos1, scr1);
+			float angle=atan2(scr1[1]-scr[1], scr1[0]-scr[0])*M_180_PIf;
+			QFontMetrics metrics(font);
+			float xShift= -0.5 * metrics.boundingRect(label).width();
+
+			sPainter.drawText(pos, label, angle, xShift);
+		}
+	}
 
 	// Labels:
-	if (names.length())
+	if (names.length()  && linkStars.length()<2)
 	{
 		for (int i=0; i<partitions[0]; ++i)
 		{
@@ -211,9 +279,33 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 			sPainter.drawText(pos, label, angle, xShift);
 		}
 	}
+	else if (names.length()==linkStars.length()  && linkStars.length()>1)
+	{
+		for (int i=0; i<linkStars.length(); ++i)
+		{
+			QString label=scMgr->createCulturalLabel(names.at(i), StelObject::CulturalDisplayStyle::Pronounce,names.at(i).pronounceI18n);
+			StelObjectP starBegin = starMgr->searchHP(linkStars.at(i));
+			StelObjectP starEnd   = starMgr->searchHP(linkStars.at((i==linkStars.length()-1? 0 : i+1)));
 
+			Vec3d mid=starBegin->getEquinoxEquatorialPos(core)+starEnd->getEquinoxEquatorialPos(core); // no need to normalize!
+			double ra, dec;
+			StelUtils::rectToSphe(&ra, &dec, mid);
+
+			double ra1 = ra-0.1*M_PI_180;
+			double dec1  = (extent<50. ? -extent+0.2 : -10.) *M_PI_180;
+			Vec3d pos, pos1, scr, scr1;
+			StelUtils::spheToRect(ra, dec1, pos);
+			StelUtils::spheToRect(ra1, dec1, pos1);
+			prj->project(pos, scr);
+			prj->project(pos1, scr1);
+			float angle=atan2(scr1[1]-scr[1], scr1[0]-scr[0])*M_180_PIf;
+			QFontMetrics metrics(font);
+			float xShift= -0.5 * metrics.boundingRect(label).width();
+
+			sPainter.drawText(pos, label, angle, xShift);
+		}
+	}
 }
-
 
 // shamelessly copied from SkyLine::draw (small circles part)
 void StelSkyCultureSkyPartition::drawCap(StelPainter &sPainter, const SphericalCap& viewPortSphericalCap, double latDeg) const
