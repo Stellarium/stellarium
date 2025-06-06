@@ -100,6 +100,11 @@ public:
 	 */
 	scm::ScmDraw *getScmDraw();
 
+	/**
+	 * @brief Triggers the update of the sky culture dialog.
+	 */
+	void updateSkyCultureDialog();
+
 signals:
 	void eventIsScmEnabled(bool b);
 
@@ -151,9 +156,6 @@ private:
 
 	/// The current sky culture
 	scm::ScmSkyCulture *currentSkyCulture = nullptr;
-
-	/// The current constellation
-	scm::ScmConstellation *currentConstellation = nullptr;
 };
 
 #include <QObject>

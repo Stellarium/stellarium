@@ -26,6 +26,11 @@ void scm::ScmConstellation::setEnglishName(QString name)
 	englishName = name;
 }
 
+QString scm::ScmConstellation::getEnglishName() const
+{
+	return englishName;
+}
+
 void scm::ScmConstellation::setNativeName(std::optional<QString> name)
 {
 	nativeName = name;

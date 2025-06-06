@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>516</width>
-    <height>800</height>
+    <height>500</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>516</width>
-    <height>800</height>
+    <height>500</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -98,14 +98,14 @@
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QLabel" name="currentSCLbl">
+           <widget class="QLabel" name="currentSCNameLbl">
             <property name="font">
              <font>
               <pointsize>14</pointsize>
              </font>
             </property>
             <property name="text">
-             <string>Current Sky Culture:</string>
+             <string>Name of the Sky Culture</string>
             </property>
            </widget>
           </item>
@@ -114,7 +114,36 @@
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>40</height>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="html">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="currentSCIdLbl">
+            <property name="text">
+             <string>ID of the Sky Culture</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="skyCultureIdTE">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>32</height>
              </size>
             </property>
            </widget>
@@ -179,19 +208,6 @@
          </attribute>
         </widget>
        </widget>
-      </item>
-      <item>
-       <spacer name="SCEditorSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>10</height>
-         </size>
-        </property>
-       </spacer>
       </item>
      </layout>
     </widget>

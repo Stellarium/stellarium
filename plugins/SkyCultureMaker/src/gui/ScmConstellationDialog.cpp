@@ -179,6 +179,7 @@ void ScmConstellationDialog::saveConstellation()
 		constellationObj->setPronounce(constellationPronounce);
 		constellationObj->setIPA(constellationIPA);
 
+		maker->updateSkyCultureDialog();
 		resetDialog();
 		ScmConstellationDialog::close();
 	}

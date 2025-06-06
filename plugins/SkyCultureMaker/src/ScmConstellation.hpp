@@ -54,6 +54,13 @@ public:
 	void setEnglishName(QString name);
 
 	/**
+	* @brief Gets the english name of the constellation
+	* 
+	* @return The english name
+	*/
+	QString getEnglishName() const;
+
+	/**
     * @brief Sets the native name of the constellation
     * 
     * @param name The native name

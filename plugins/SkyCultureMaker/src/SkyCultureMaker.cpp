@@ -312,3 +312,12 @@ scm::ScmDraw *SkyCultureMaker::getScmDraw()
 {
 	return drawObj;
 }
+
+void SkyCultureMaker::updateSkyCultureDialog()
+{
+	if(scmSkyCultureDialog == nullptr)
+	{
+		return;
+	}
+	scmSkyCultureDialog->setConstellations(currentSkyCulture->getConstellations());
+}

@@ -59,9 +59,9 @@ scm::ScmConstellation *scm::ScmSkyCulture::getConstellation(QString id)
 	return nullptr;
 }
 
-std::vector<scm::ScmConstellation> scm::ScmSkyCulture::getConstellations() const
+std::vector<scm::ScmConstellation> *scm::ScmSkyCulture::getConstellations()
 {
-	return constellations;
+	return &constellations;
 }
 
 void scm::ScmSkyCulture::draw(StelCore *core)
