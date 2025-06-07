@@ -147,6 +147,9 @@ void ConstellationMgr::init()
 	addAction("actionShow_Constellation_Art", displayGroup, N_("Constellation art"), "artDisplayed", "R");
 	addAction("actionShow_Constellation_Labels", displayGroup, N_("Constellation labels"), "namesDisplayed", "V");
 	addAction("actionShow_Constellation_Boundaries", displayGroup, N_("Constellation boundaries"), "boundariesDisplayed", "B");
+	addAction("actionShow_Zodiac", displayGroup, N_("Zodiac (if defined in skyculture)"), "zodiacDisplayed");
+	addAction("actionShow_LunarSystem", displayGroup, N_("Lunar stations/mansions (if defined in skyculture)"), "lunarSystemDisplayed");
+
 	if (conf->value("gui/skyculture_enable_hulls", "false").toBool())
 		addAction("actionShow_Constellation_Hulls", displayGroup, N_("Constellation areas (hulls)"), "hullsDisplayed", "Shift+B");
 	addAction("actionShow_Constellation_Isolated", displayGroup, N_("Select single constellation"), "isolateSelected"); // no shortcut, sync with GUI
@@ -941,10 +944,10 @@ float ConstellationMgr::getHullsFadeDuration() const
 
 void ConstellationMgr::setZodiacFadeDuration(const float duration)
 {
-	if (!qFuzzyCompare(zodiacFader.getDuration(), duration))
+	if (!qFuzzyCompare(zodiacFadeDuration, duration))
 	{
-		zodiacFader.setDuration(static_cast<int>(zodiacFadeDuration * 1000.f));
 		zodiacFadeDuration = duration;
+		zodiacFader.setDuration(static_cast<int>(zodiacFadeDuration * 1000.f));
 		StelApp::immediateSave("viewing/skyculture_zodiac_fade_duration", duration);
 		emit zodiacFadeDurationChanged(duration);
 	}
@@ -952,22 +955,23 @@ void ConstellationMgr::setZodiacFadeDuration(const float duration)
 
 float ConstellationMgr::getZodiacFadeDuration() const
 {
-	return zodiacFader.getDuration();
+	return zodiacFadeDuration;
 }
 
 void ConstellationMgr::setLunarSystemFadeDuration(const float duration)
 {
-	if (!qFuzzyCompare(lunarSystemFader.getDuration(), duration))
+	if (!qFuzzyCompare(lunarSystemFadeDuration, duration))
 	{
-		lunarSystemFader.setDuration(duration);
+		lunarSystemFadeDuration=duration;
+		lunarSystemFader.setDuration(static_cast<int>(lunarSystemFadeDuration * 1000.f));
 		StelApp::immediateSave("viewing/skyculture_lunarsystem_fade_duration", duration);
-		emit hullsFadeDurationChanged(duration);
+		emit lunarSystemFadeDurationChanged(duration);
 	}
 }
 
 float ConstellationMgr::getLunarSystemFadeDuration() const
 {
-	return lunarSystemFader.getDuration();
+	return lunarSystemFadeDuration;
 }
 
 void ConstellationMgr::setLinesFadeDuration(const float duration)
@@ -1600,7 +1604,7 @@ void ConstellationMgr::drawHulls(StelPainter& sPainter, const Vec3d &obsVelocity
 // @param obsVelocity is the speed vector of the observer planet to distort zodiac lines by aberration.
 void ConstellationMgr::drawZodiac(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
-	if (!zodiac || !zodiacFader)
+	if (!zodiac || zodiacFader.getInterstate()==0.)
 		return;
 
 	sPainter.setColor(zodiacColor, zodiacFader.getInterstate());
@@ -1618,7 +1622,7 @@ void ConstellationMgr::drawZodiac(StelPainter& sPainter, const Vec3d &obsVelocit
 // @param obsVelocity is the speed vector of the observer planet to distort lunarSystem lines by aberration.
 void ConstellationMgr::drawLunarSystem(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
-	if (!lunarSystem || !lunarSystemFader)
+	if (!lunarSystem || lunarSystemFader.getInterstate()==0.)
 		return;
 
 	//qDebug() << "Drawing LunarSystem element";
