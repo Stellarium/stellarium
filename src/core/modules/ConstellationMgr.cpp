@@ -147,6 +147,9 @@ void ConstellationMgr::init()
 	addAction("actionShow_Constellation_Art", displayGroup, N_("Constellation art"), "artDisplayed", "R");
 	addAction("actionShow_Constellation_Labels", displayGroup, N_("Constellation labels"), "namesDisplayed", "V");
 	addAction("actionShow_Constellation_Boundaries", displayGroup, N_("Constellation boundaries"), "boundariesDisplayed", "B");
+	addAction("actionShow_Zodiac", displayGroup, N_("Zodiac (if defined in skyculture)"), "zodiacDisplayed");
+	addAction("actionShow_LunarSystem", displayGroup, N_("Lunar stations/mansions (if defined in skyculture)"), "lunarSystemDisplayed");
+
 	if (conf->value("gui/skyculture_enable_hulls", "false").toBool())
 		addAction("actionShow_Constellation_Hulls", displayGroup, N_("Constellation areas (hulls)"), "hullsDisplayed", "Shift+B");
 	addAction("actionShow_Constellation_Isolated", displayGroup, N_("Select single constellation"), "isolateSelected"); // no shortcut, sync with GUI
