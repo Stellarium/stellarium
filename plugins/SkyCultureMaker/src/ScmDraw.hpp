@@ -11,19 +11,20 @@
 
 #include "StelCore.hpp"
 #include "StelObjectMgr.hpp"
-#include <vector>
-#include <QString>
-#include "enumBitops.hpp"
-#include <optional>
-#include <tuple>
 #include "StelObjectType.hpp"
-#include <variant>
+#include "enumBitops.hpp"
+#include "types/CoordinateLine.hpp"
 #include "types/DrawTools.hpp"
 #include "types/Drawing.hpp"
-#include "types/CoordinateLine.hpp"
-#include "types/StarLine.hpp"
 #include "types/Lines.hpp"
+#include "types/StarLine.hpp"
 #include "types/StarPoint.hpp"
+#include <cmath>
+#include <optional>
+#include <tuple>
+#include <variant>
+#include <vector>
+#include <QString>
 
 namespace scm
 {
@@ -31,6 +32,8 @@ namespace scm
 class ScmDraw
 {
 private:
+	static const Vec2d defaultLastEraserPos;
+
 	/// The search radius to attach to a point on a existing line.
 	uint32_t maxSnapRadiusInPixels = 25;
 
@@ -46,8 +49,37 @@ private:
 	/// The fixed points.
 	Lines drawnLines;
 
-	/// The current active tool
+	/// The current active tool.
 	DrawTools activeTool = DrawTools::None;
+
+	/// Holds the position of the eraser on the last frame.
+	Vec2d lastEraserPos = ScmDraw::defaultLastEraserPos;
+
+	/**
+	 * @brief Indicates if two segments intersect.
+	 * 
+	 * @param startA The start point of A.
+	 * @param directionA The direction vector of A pointing to the end point of A.
+	 * @param startB The start point of B.
+	 * @param directionB The direction vector of B pointing to the end point of B.
+	 * @return true When both segments intersect.
+	 * @return false When both segments do NOT intersect.
+	 */
+	static bool segmentIntersect(Vec2d startA, Vec2d directionA, Vec2d startB, Vec2d directionB);
+
+	/**
+	 * @brief Calculates the perpendicular dot product vector of a and b i.e. a^T dot b
+	 * 
+	 * @tparam T The type of the vector
+	 * @param a The first vector.
+	 * @param b The second vector.
+	 * @return T The perp dot product of a and b.
+	 */
+	template<typename T>
+	static T perpDot(Vector2<T> a, Vector2<T> b)
+	{
+		return -a.v[1] * b.v[0] + a.v[0] * b.v[1];
+	}
 
 public:
 	/// The frame that is used for calculation and is drawn on.
@@ -110,12 +142,13 @@ public:
 	void setTool(DrawTools tool);
 };
 
-}  // namespace scm
+} // namespace scm
 
 // Opt In for Drawing to use bitops & and |
-template <> struct generic_enum_bitops::allow_bitops<scm::Drawing>
+template<>
+struct generic_enum_bitops::allow_bitops<scm::Drawing>
 {
 	static constexpr bool value = true;
 };
 
-#endif	// SCMDRAW_H
+#endif // SCMDRAW_H
