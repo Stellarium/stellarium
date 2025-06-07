@@ -24,14 +24,16 @@
 #include <tuple>
 #include <variant>
 #include <vector>
+#include <QObject>
 #include <QString>
 
 namespace scm
 {
 
-class ScmDraw
+class ScmDraw : public QObject
 {
 private:
+	static constexpr const char id_search_window[] = "actionShow_Search_Window_Global";
 	static const Vec2d defaultLastEraserPos;
 
 	/// The search radius to attach to a point on a existing line.
@@ -52,8 +54,25 @@ private:
 	/// The current active tool.
 	DrawTools activeTool = DrawTools::None;
 
-	/// Holds the position of the eraser on the last frame.
+	/// Indicates if the user is navigating in stellarium i.e. changing position of camera
+	bool isNavigating = false;
+
+	/// Indicates if the users searches for a star.
+	bool inSearchMode = false;
+
+	/// Indicates if the currently selected star was searched.
+	bool selectedStarIsSearched = false;
+  
+  /// Holds the position of the eraser on the last frame.
 	Vec2d lastEraserPos = ScmDraw::defaultLastEraserPos;
+
+	/**
+	 * @brief Appends a draw point to the list of drawn points.
+	 * 
+	 * @param point The coordinate in J2000 frame.
+	 * @param starID The id of the star to use.
+	 */
+	void appendDrawPoint(Vec3d point, std::optional<QString> starID);
 
 	/**
 	 * @brief Indicates if two segments intersect.
@@ -80,6 +99,17 @@ private:
 	{
 		return -a.v[1] * b.v[0] + a.v[0] * b.v[1];
 	}
+
+public slots:
+  /**
+   * @brief Is called when the search dialog is opend and closed.
+  */
+	void setSearchMode(bool b);
+
+	/**
+	 * @brief Is called when the the user is moved to another star.
+	 */
+	void setMoveToAnotherStart();
 
 public:
 	/// The frame that is used for calculation and is drawn on.
