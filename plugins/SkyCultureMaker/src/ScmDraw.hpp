@@ -140,6 +140,11 @@ public:
 	 * @param tool The tool to be used.
 	 */
 	void setTool(DrawTools tool);
+
+	/**
+	 * @brief Resets the currently drawn lines.
+	 */
+	void resetDrawing();
 };
 
 } // namespace scm

@@ -179,6 +179,7 @@ void ScmConstellationDialog::saveConstellation()
 		constellationObj->setPronounce(constellationPronounce);
 		constellationObj->setIPA(constellationIPA);
 
+		maker->updateSkyCultureDialog();
 		resetDialog();
 		ScmConstellationDialog::close();
 	}
@@ -187,6 +188,9 @@ void ScmConstellationDialog::saveConstellation()
 void ScmConstellationDialog::resetDialog()
 {
 	activeTool = scm::DrawTools::None;
+	ui->penBtn->setChecked(false);
+	ui->eraserBtn->setChecked(false);
+	maker->setDrawTool(activeTool);
 
 	constellationId.clear();
 	ui->idTE->clear();
@@ -205,4 +209,7 @@ void ScmConstellationDialog::resetDialog()
 
 	constellationIPA = std::nullopt;
 	ui->ipaTE->clear();
+
+	// reset ScmDraw
+	maker->resetScmDraw();
 }

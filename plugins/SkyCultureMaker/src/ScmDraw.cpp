@@ -370,3 +370,14 @@ std::optional<scm::StarPoint> scm::ScmDraw::findNearestPoint(int x, int y, StelP
 
 	return {};
 }
+
+void scm::ScmDraw::resetDrawing()
+{
+	drawnLines.coordinates.clear();
+	drawnLines.stars.clear();
+	drawState = Drawing::None;
+	std::get<CoordinateLine>(currentLine).start.set(0, 0, 0);
+	std::get<CoordinateLine>(currentLine).end.set(0, 0, 0);
+	std::get<StarLine>(currentLine).start.reset();
+	std::get<StarLine>(currentLine).end.reset();
+}

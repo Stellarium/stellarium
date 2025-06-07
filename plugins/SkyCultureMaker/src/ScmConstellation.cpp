@@ -26,6 +26,11 @@ void scm::ScmConstellation::setEnglishName(QString name)
 	englishName = name;
 }
 
+QString scm::ScmConstellation::getEnglishName() const
+{
+	return englishName;
+}
+
 void scm::ScmConstellation::setNativeName(std::optional<QString> name)
 {
 	nativeName = name;
@@ -68,8 +73,6 @@ void scm::ScmConstellation::drawConstellation(StelCore *core, Vec3f color)
 	XYZname.normalize();
 
 	drawNames(core, painter, colorLabelDefault);
-	
-	
 }
 
 void scm::ScmConstellation::drawNames(StelCore *core, StelPainter sPainter, Vec3f labelColor) 
