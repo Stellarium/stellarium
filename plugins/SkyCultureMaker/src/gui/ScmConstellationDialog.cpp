@@ -209,4 +209,7 @@ void ScmConstellationDialog::resetDialog()
 
 	constellationIPA = std::nullopt;
 	ui->ipaTE->clear();
+
+	// reset ScmDraw
+	maker->resetScmDraw();
 }

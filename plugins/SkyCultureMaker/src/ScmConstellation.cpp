@@ -73,8 +73,6 @@ void scm::ScmConstellation::drawConstellation(StelCore *core, Vec3f color)
 	XYZname.normalize();
 
 	drawNames(core, painter, colorLabelDefault);
-	
-	
 }
 
 void scm::ScmConstellation::drawNames(StelCore *core, StelPainter sPainter, Vec3f labelColor) 

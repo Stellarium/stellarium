@@ -101,6 +101,11 @@ public:
 	scm::ScmDraw *getScmDraw();
 
 	/**
+	 * @brief Resets the SCM drawing object.
+	 */
+	void resetScmDraw();
+
+	/**
 	 * @brief Triggers an update of the sky culture dialog.
 	 */
 	void updateSkyCultureDialog();
