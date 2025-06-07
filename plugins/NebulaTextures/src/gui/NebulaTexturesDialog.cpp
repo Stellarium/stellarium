@@ -155,7 +155,8 @@ void NebulaTexturesDialog::createDialogContent()
 		qMakePair(ui->bottomRightX, true), qMakePair(ui->bottomRightY, false)
 	};
 
-	for (const auto& pair : allCornerSpins) {
+	for (const auto& pair : allCornerSpins)
+	{
 		AngleSpinBox* spin = pair.first;
 		bool isRA = pair.second;
 
@@ -177,6 +178,12 @@ void NebulaTexturesDialog::createDialogContent()
 		connect(spin, SIGNAL(valueChanged()), this, SLOT(refreshTempTexturePreview()));
 		connect(spin, SIGNAL(valueChanged()), this, SLOT(showRecoverCoordsButton()));
 	}
+	// Center RA
+	ui->referX->setDisplayFormat(AngleSpinBox::HMSLetters);
+	ui->referX->setPrefixType(AngleSpinBox::Normal);
+	ui->referX->setMinimum(0.0, true);
+	ui->referX->setMaximum(360.0, true);
+	ui->referX->setWrapping(true);
 
 	connect(plateSolver, &PlateSolver::loginSuccess, this, [this]()
 	{
