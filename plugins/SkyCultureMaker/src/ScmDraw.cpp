@@ -215,7 +215,7 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 				StelProjectorP prj  = core->getProjection(drawFrame);
 				auto mouseDirection = lastEraserPos - currentPos;
 
-				std::vector<int> erasedIndicies;
+				std::vector<int> erasedIndices;
 
 				for (auto line = drawnLines.coordinates.begin(); line != drawnLines.coordinates.end();
 				     ++line)
@@ -231,12 +231,12 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 					                                  lineDirection);
 					if (intersect)
 					{
-						erasedIndicies.push_back(
+						erasedIndices.push_back(
 							std::distance(drawnLines.coordinates.begin(), line));
 					}
 				}
 
-				for (auto index : erasedIndicies)
+				for (auto index : erasedIndices)
 				{
 					drawnLines.coordinates[index] = drawnLines.coordinates.back();
 					drawnLines.coordinates.pop_back();
