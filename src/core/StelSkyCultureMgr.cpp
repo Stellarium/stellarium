@@ -252,6 +252,11 @@ void StelSkyCultureMgr::makeCulturesList()
 		culture.fallbackToInternationalNames = (flagOverrideUseCommonNames || data["fallback_to_international_names"].toBool());
 		culture.names = data["common_names"].toObject();
 
+		if (data.contains("zodiac"))
+			culture.zodiac = data["zodiac"].toObject();
+		if (data.contains("lunar_system"))
+			culture.lunarSystem = data["lunar_system"].toObject();
+
 		const auto classifications = data["classification"].toArray();
 		if (classifications.isEmpty())
 		{

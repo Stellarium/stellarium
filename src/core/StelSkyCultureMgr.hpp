@@ -28,6 +28,7 @@
 #include <QJsonArray>
 #include "StelObject.hpp"
 #include "StelModule.hpp"
+#include "StelSkyCultureSkyPartition.hpp"
 
 class StelTranslator;
 
@@ -121,6 +122,10 @@ public:
 	QJsonArray langsUseNativeNames;
 	//! Whether to show common names in addition to the culture-specific ones
 	bool fallbackToInternationalNames = false;
+	//! optional element: Zodiac. Classical SCs usually have 12 signs of 30 degrees with 60 minutes.
+	QJsonObject zodiac;
+	//! optional element. This is more elaborate, with variants in India (ecliptical) and China (equatorial!)
+	QJsonObject lunarSystem;
 };
 
 //! @class StelSkyCultureMgr
