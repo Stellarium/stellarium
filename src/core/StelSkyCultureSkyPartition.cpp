@@ -66,11 +66,18 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 		for (unsigned int i=0; i<p.size(); ++i)
 			partitions.append(p.at(i).toDouble());
 	}
+	else if (json.contains("defining_stars"))
+	{
+		QJsonArray jStars=json["defining_stars"].toArray();
+		for (unsigned int i=0; i<jStars.size(); ++i)
+			linkStars.append(jStars.at(i).toInt());
+	}
 	else
 	{
-		qWarning() << "No \"partitions\" array found in JSON data for zodiac or lunarSystem description";
+		qWarning() << "Neither \"partitions\" nor \"defining_stars\" array found in JSON data for zodiac or lunarSystem description";
 	}
-	// TODO: Parse names
+
+	// Parse names
 	if (json.contains("name"))
 	{
 		QJsonObject nameObj = json["name"].toObject();
@@ -106,15 +113,10 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 
 	if (json.contains("link"))
 	{
+		Q_ASSERT(linkStars.isEmpty());
 		QJsonObject obj=json["link"].toObject();
 		linkStars.append(obj["star"].toInt());
 		offset=obj["offset"].toDouble();
-	}
-	else if (json.contains("defining_stars"))
-	{
-		QJsonArray jStars=json["defining_stars"].toArray();
-		for (unsigned int i=0; i<jStars.size(); ++i)
-			linkStars.append(jStars.at(i).toInt());
 	}
 
 	// Font size is 14
@@ -123,7 +125,7 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 
 	// Recapitulate what we have loaded:
 	qDebug() << "Cultural Sky Partition: Loaded partitions:" << partitions << names.length() << "names, " << symbols.length() << "symbols." <<
-		    linkStars.length() << "link stars, or offset" << offset << "with star" << (linkStars.length()>0 ? QString::number(linkStars.first()) : "UNDEF");
+		    linkStars.length() << "link stars. " << (linkStars.length()==1 ? QString("Offset %1 at star %2").arg(QString::number(offset), QString::number(linkStars.first())) : QString());
 }
 
 StelSkyCultureSkyPartition::~StelSkyCultureSkyPartition()
