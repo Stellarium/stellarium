@@ -16,7 +16,7 @@ ScmSkyCultureDialog::~ScmSkyCultureDialog()
 void ScmSkyCultureDialog::setConstellations(std::vector<scm::ScmConstellation> *constellations)
 {
 	ScmSkyCultureDialog::constellations = constellations;
-	if (ui && dialog)
+	if (ui && dialog && constellations != nullptr)
 	{
 		ui->constellationsList->clear();
 		for (const auto &constellation : *constellations)
@@ -81,16 +81,18 @@ void ScmSkyCultureDialog::saveSkyCulture()
 void ScmSkyCultureDialog::removeSelectedConstellation()
 {
 	auto selectedItems = ui->constellationsList->selectedItems();
-	if (!selectedItems.isEmpty())
+	if (!selectedItems.isEmpty() && constellations != nullptr)
 	{
 		QListWidgetItem *item = selectedItems.first();
+		QString constellationName = item->text();
+		
 		// Get Id by comparing to the display name
 		// This will always work, even when the constellation id
 		// or name contains special characters
 		QString selectedConstellationId = "";
 		for (const auto &constellation : *constellations)
 		{
-			if (item->text() == (getDisplayNameFromConstellation(constellation)))
+			if (constellationName == (getDisplayNameFromConstellation(constellation)))
 			{
 				selectedConstellationId = constellation.getId();
 				break;

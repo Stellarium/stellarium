@@ -315,7 +315,7 @@ scm::ScmDraw *SkyCultureMaker::getScmDraw()
 
 void SkyCultureMaker::updateSkyCultureDialog()
 {
-	if(scmSkyCultureDialog == nullptr)
+	if(scmSkyCultureDialog == nullptr || currentSkyCulture == nullptr)
 	{
 		return;
 	}
