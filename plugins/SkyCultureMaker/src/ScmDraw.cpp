@@ -322,29 +322,50 @@ std::optional<scm::StarPoint> scm::ScmDraw::findNearestPoint(int x, int y, StelP
 	Vec3d minPosition;
 	prj->project(min->start, minPosition);
 	double minDistance = (minPosition - position).dot(minPosition - position);
+	bool isStartPoint  = true;
 
 	for (auto line = drawnLines.coordinates.begin(); line != drawnLines.coordinates.end(); ++line)
 	{
 		Vec3d iPosition;
-		if (!prj->project(line->start, iPosition))
+		if (prj->project(line->start, iPosition))
 		{
-			continue;
+			double distance = (iPosition - position).dot(iPosition - position);
+			if (distance < minDistance)
+			{
+				min          = line;
+				minPosition  = iPosition;
+				minDistance  = distance;
+				isStartPoint = true;
+			}
 		}
 
-		double distance = (iPosition - position).dot(iPosition - position);
-		if (distance < minDistance)
+		if (prj->project(line->end, iPosition))
 		{
-			min         = line;
-			minPosition = iPosition;
-			minDistance = distance;
+			double distance = (iPosition - position).dot(iPosition - position);
+			if (distance < minDistance)
+			{
+				min          = line;
+				minPosition  = iPosition;
+				minDistance  = distance;
+				isStartPoint = false;
+			}
 		}
 	}
 
 	if (minDistance < maxSnapRadiusInPixels * maxSnapRadiusInPixels)
 	{
-		StarPoint point = {min->start,
-		                   drawnLines.stars.at(std::distance(drawnLines.coordinates.begin(), min)).start};
-		return point;
+		if (isStartPoint)
+		{
+			StarPoint point = {min->start,
+			                   drawnLines.stars.at(std::distance(drawnLines.coordinates.begin(), min)).start};
+			return point;
+		}
+		else
+		{
+			StarPoint point = {min->end,
+			                   drawnLines.stars.at(std::distance(drawnLines.coordinates.begin(), min)).end};
+			return point;
+		}
 	}
 
 	return {};
