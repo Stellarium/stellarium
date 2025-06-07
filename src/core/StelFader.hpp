@@ -81,7 +81,7 @@ public:
 
 	~LinearFader() override {}
 
-	// Increments the internal counter of deltaMs milliseconds
+	//! Increments the internal counter of deltaMs milliseconds
 	void update(int deltaMs) override
 	{
 		if (!isTransiting()) return; // We are not in transition
@@ -97,10 +97,10 @@ public:
 		}
 	}
 
-	// Get current switch state
+	//! Get current switch state. 0=switched off, 1=fully on.
 	float getInterstate() const override { return interstate;}
 
-	// StelFaders can be used just as bools
+	//! StelFaders can be used just as bools
 	StelFader& operator=(bool s) override
 	{
 		if (isTransiting()) {
