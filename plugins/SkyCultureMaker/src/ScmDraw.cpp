@@ -76,6 +76,7 @@ void scm::ScmDraw::setMoveToAnotherStart()
 
 		selectedStarIsSearched = false;
 	}
+}
 
 const Vec2d scm::ScmDraw::defaultLastEraserPos(std::nan("1"), std::nan("1"));
 
