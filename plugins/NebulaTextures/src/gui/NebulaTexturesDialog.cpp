@@ -159,8 +159,20 @@ void NebulaTexturesDialog::createDialogContent()
 		AngleSpinBox* spin = pair.first;
 		bool isRA = pair.second;
 
-		spin->setMinimum(isRA ? 0.0 : -90.0, true);
-		spin->setMaximum(isRA ? 360.0 : 90.0, true);
+		if(isRA)
+		{
+			spin->setDisplayFormat(AngleSpinBox::HMSLetters);
+			spin->setPrefixType(AngleSpinBox::Normal);
+			spin->setMinimum(0.0, true);
+			spin->setMaximum(360.0, true);
+		}
+		else
+		{
+			spin->setDisplayFormat(AngleSpinBox::DMSSymbols);
+			spin->setPrefixType(AngleSpinBox::NormalPlus);
+			spin->setMinimum(-90.0, true);
+			spin->setMaximum(90.0, true);
+		}
 		spin->setWrapping(isRA);
 		connect(spin, SIGNAL(valueChanged()), this, SLOT(refreshTempTexturePreview()));
 		connect(spin, SIGNAL(valueChanged()), this, SLOT(showRecoverCoordsButton()));
