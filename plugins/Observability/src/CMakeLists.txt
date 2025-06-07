@@ -32,6 +32,12 @@ ENDIF()
 
 ADD_LIBRARY(Observability-static STATIC ${Observability_SRCS} ${Observability_RES_CXX} ${ObservabilityDialog_UIS_H})
 TARGET_LINK_LIBRARIES(Observability-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
+
+IF(ENABLE_TESTING)
+    add_definitions("-DWITH_TESTING_ON")
+    ADD_SUBDIRECTORY(test)
+ENDIF(ENABLE_TESTING)
+
 SET_TARGET_PROPERTIES(Observability-static PROPERTIES OUTPUT_NAME "Observability")
 SET_TARGET_PROPERTIES(Observability-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins Observability-static)
