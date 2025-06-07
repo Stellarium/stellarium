@@ -47,13 +47,13 @@ class QJsonObject;
 //! 	       { "symbol": "\u264C", "native": "Leo",         "english": "Lion"},
 //! 	       { "symbol": "\u264D", "native": "Virgo",       "english": "Virgin"},
 //! 	       { "symbol": "\u264E", "native": "Libra",       "english": "Scales"},
-//! 	       { "symbol": "\u264F", "native": "Scorpio",     "english": "Scorpion"}, // Note: Scorpio seems more common than Scorpius for the Zodiacal Sign.
+//! 	       { "symbol": "\u264F", "native": "Scorpius",     "english": "Scorpion"},
 //! 	       { "symbol": "\u2650", "native": "Capricornus", "english": "Capricorn"},
 //! 	       { "symbol": "\u2651", "native": "Sagittarius", "english": "Archer"},
 //! 	       { "symbol": "\u2652", "native": "Aquarius",    "english": "Water bearer"},
 //! 	       { "symbol": "\u2653", "native": "Pisces",      "english": "Fishes"}]},
 //! The INDIAN Nakshatras are a system of 27 equal-sized stations, 13°20' in longitude each, divided in 4 equal parts.
-//! The sequence is rotated along the ecliptic so that it is tarting either with beta Ari at 8° in the first Nakshatra,
+//! The sequence is rotated along the ecliptic so that it is starting either with beta Ari at 8° in the first Nakshatra,
 //! or with Spica at 180°. The literature lists both, probably these are regional differences. This example is for Spica:
 //! "lunar_system": {
 //! "name": "Nakshatras",
@@ -89,7 +89,8 @@ class QJsonObject;
 //! 	       { "symbol": "27", "native": "रेवती",                            "pronounce": "Revati",                "english": "Prosperous"},
 //! 	       { "symbol": "28", "native": "अभिजित",                       "pronounce": "Abhijit",               "english": "Invincible"}]}, // The #28 is weird, sometimes listed but apparently not used.
 //!
-//! The Chinese define 28 Lunar Mansions of different sizes in equatorial coordinates, and use defining stars for the onset of a mansion. The sky is dissected into 28 slices from pole to pole.
+//! The Chinese define 28 Lunar Mansions of different sizes in equatorial coordinates, and use defining stars for the onset of a mansion.
+//! The sky is dissected into 28 slices which extend from pole to pole.
 //! What is still unclear is whether we should keep the link to the stars "live", or let the stars move out of epoch.
 //! Currently the lines are kept "live", following the idea that, with each new official star map "from now on the Mansions should be defined like this".
 //! //! "lunar_system": {
