@@ -19,6 +19,7 @@
 #include "types/Lines.hpp"
 #include "types/StarLine.hpp"
 #include "types/StarPoint.hpp"
+#include <cmath>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -33,6 +34,7 @@ class ScmDraw : public QObject
 {
 private:
 	static constexpr const char id_search_window[] = "actionShow_Search_Window_Global";
+	static const Vec2d defaultLastEraserPos;
 
 	/// The search radius to attach to a point on a existing line.
 	uint32_t maxSnapRadiusInPixels = 25;
@@ -49,7 +51,7 @@ private:
 	/// The fixed points.
 	Lines drawnLines;
 
-	/// The current active tool
+	/// The current active tool.
 	DrawTools activeTool = DrawTools::None;
 
 	/// Indicates if the user is navigating in stellarium i.e. changing position of camera
@@ -60,6 +62,9 @@ private:
 
 	/// Indicates if the currently selected star was searched.
 	bool selectedStarIsSearched = false;
+  
+  /// Holds the position of the eraser on the last frame.
+	Vec2d lastEraserPos = ScmDraw::defaultLastEraserPos;
 
 	/**
 	 * @brief Appends a draw point to the list of drawn points.
@@ -69,7 +74,36 @@ private:
 	 */
 	void appendDrawPoint(Vec3d point, std::optional<QString> starID);
 
+	/**
+	 * @brief Indicates if two segments intersect.
+	 * 
+	 * @param startA The start point of A.
+	 * @param directionA The direction vector of A pointing to the end point of A.
+	 * @param startB The start point of B.
+	 * @param directionB The direction vector of B pointing to the end point of B.
+	 * @return true When both segments intersect.
+	 * @return false When both segments do NOT intersect.
+	 */
+	static bool segmentIntersect(Vec2d startA, Vec2d directionA, Vec2d startB, Vec2d directionB);
+
+	/**
+	 * @brief Calculates the perpendicular dot product vector of a and b i.e. a^T dot b
+	 * 
+	 * @tparam T The type of the vector
+	 * @param a The first vector.
+	 * @param b The second vector.
+	 * @return T The perp dot product of a and b.
+	 */
+	template<typename T>
+	static T perpDot(Vector2<T> a, Vector2<T> b)
+	{
+		return -a.v[1] * b.v[0] + a.v[0] * b.v[1];
+	}
+
 public slots:
+  /**
+   * @brief Is called when the search dialog is opend and closed.
+  */
 	void setSearchMode(bool b);
 
 	/**
@@ -136,6 +170,11 @@ public:
 	 * @param tool The tool to be used.
 	 */
 	void setTool(DrawTools tool);
+
+	/**
+	 * @brief Resets the currently drawn lines.
+	 */
+	void resetDrawing();
 };
 
 } // namespace scm

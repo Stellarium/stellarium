@@ -65,8 +65,8 @@ public:
 	/// Returns the asterisms of the sky culture
 	// TODO: QVector<ScmAsterism> getAsterisms() const;
 
-	/// Returns the constellations of the sky culture
-	std::vector<ScmConstellation> getConstellations() const;
+	/// Returns a pointer to the constellations of the sky culture
+	std::vector<ScmConstellation> *getConstellations();
 
 	/// Returns the common names of the stars, planets and nonstellar objects
 	std::vector<ScmCommonName> getCommonNames() const;

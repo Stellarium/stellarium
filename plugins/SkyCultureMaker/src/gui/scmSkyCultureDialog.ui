@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>516</width>
-    <height>800</height>
+    <width>400</width>
+    <height>340</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>516</width>
-    <height>800</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -98,24 +98,42 @@
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QLabel" name="currentSCLbl">
+           <widget class="QLabel" name="currentSCNameLbl">
             <property name="font">
              <font>
               <pointsize>14</pointsize>
              </font>
             </property>
             <property name="text">
-             <string>Current Sky Culture:</string>
+             <string>Name of the Sky Culture</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QTextEdit" name="skyCultureNameTE">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>32</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>40</height>
+              <height>32</height>
              </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="html">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -127,19 +145,46 @@
            </widget>
           </item>
           <item>
-           <widget class="QListWidget" name="constellationsList"/>
+           <widget class="QListWidget" name="constellationsList">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>64</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">
+              QListWidget, QListWidget::viewport {
+                  margin: 0px;
+                  padding: 0px;
+                  border: none;
+                  outline: none;
+              }
+              QListWidget::item {
+                  margin: 0px;
+                  padding: 4px;
+                  border: none;
+                  outline: none;
+              }
+             </string>
+            </property>
+           </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="QPushButton" name="SaveSkyCultureBtn">
-              <property name="text">
-               <string>Save Sky Culture</string>
-              </property>
-             </widget>
-            </item>
+           <layout class="QHBoxLayout" name="overviewConstellationBtnLayout">
             <item>
              <widget class="QPushButton" name="AddConstellationBtn">
+              <property name="minimumSize">
+               <size>
+                <width>150</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Add Constellation</string>
               </property>
@@ -147,6 +192,17 @@
             </item>
             <item>
              <widget class="QPushButton" name="RemoveConstellationBtn">
+              <property name="minimumSize">
+               <size>
+                <width>150</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Remove Constellation</string>
               </property>
@@ -155,11 +211,26 @@
            </layout>
           </item>
           <item>
-           <widget class="QLabel" name="infoBoxLbl">
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
+           <layout class="QVBoxLayout" name="overviewSCBtnLayout">
+            <item>
+             <widget class="QPushButton" name="SaveSkyCultureBtn">
+              <property name="minimumSize">
+               <size>
+                <width>130</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Save Sky Culture</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -181,17 +252,14 @@
        </widget>
       </item>
       <item>
-       <spacer name="SCEditorSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
+       <widget class="QLabel" name="infoBoxLbl">
+        <property name="text">
+         <string/>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>10</height>
-         </size>
+        <property name="margin">
+         <number>5</number>
         </property>
-       </spacer>
+       </widget>
       </item>
      </layout>
     </widget>

@@ -76,6 +76,24 @@ void scm::ScmDraw::setMoveToAnotherStart()
 
 		selectedStarIsSearched = false;
 	}
+
+const Vec2d scm::ScmDraw::defaultLastEraserPos(std::nan("1"), std::nan("1"));
+
+bool scm::ScmDraw::segmentIntersect(Vec2d startA, Vec2d directionA, Vec2d startB, Vec2d directionB)
+{
+	if (std::abs(directionA.dot(directionB)) < std::numeric_limits<double>::epsilon()) // check with near zero value
+	{
+		// No intersection if lines are parallel
+		return false;
+	}
+
+	// Also see: https://www.sunshine2k.de/coding/javascript/lineintersection2d/LineIntersect2D.html
+	// endA = startA + s * directionA with s=1
+	double s = perpDot(directionB, startB - startA) / perpDot(directionB, directionA);
+	// endB = startB + t * directionB with t=1
+	double t = perpDot(directionA, startA - startB) / perpDot(directionA, directionB);
+
+	return 0 <= s && s <= 1 && 0 <= t && t <= 1;
 }
 
 scm::ScmDraw::ScmDraw()
@@ -84,6 +102,7 @@ scm::ScmDraw::ScmDraw()
 {
 	std::get<CoordinateLine>(currentLine).start.set(0, 0, 0);
 	std::get<CoordinateLine>(currentLine).end.set(0, 0, 0);
+	lastEraserPos.set(std::nan("1"), std::nan("1"));
 
 	StelApp &app   = StelApp::getInstance();
 	StelCore *core = app.getCore();
@@ -204,6 +223,19 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 			return;
 		}
 	}
+	else if (activeTool == DrawTools::Eraser)
+	{
+		if (event->button() == Qt::RightButton && event->type() == QEvent::MouseButtonPress)
+		{
+			Vec2d currentPos(x, y);
+			lastEraserPos = currentPos;
+		}
+		else if (event->button() == Qt::RightButton && event->type() == QEvent::MouseButtonRelease)
+		{
+			// Reset
+			lastEraserPos = defaultLastEraserPos;
+		}
+	}
 }
 
 bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
@@ -244,6 +276,50 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 			}
 
 			drawState = Drawing::hasFloatingEnd;
+		}
+	}
+	else if (activeTool == DrawTools::Eraser)
+	{
+		if (b.testFlag(Qt::MouseButton::RightButton))
+		{
+			Vec2d currentPos(x, y);
+
+			if (lastEraserPos != defaultLastEraserPos && lastEraserPos != currentPos)
+			{
+				StelApp &app        = StelApp::getInstance();
+				StelCore *core      = app.getCore();
+				StelProjectorP prj  = core->getProjection(drawFrame);
+				auto mouseDirection = lastEraserPos - currentPos;
+
+				std::vector<int> erasedIndices;
+
+				for (auto line = drawnLines.coordinates.begin(); line != drawnLines.coordinates.end();
+				     ++line)
+				{
+					Vec3d lineEnd, lineStart;
+					prj->project(line->start, lineStart);
+					prj->project(line->end, lineEnd);
+					Vec2d lineStart2d(lineStart.v[0], lineStart.v[1]);
+					Vec2d lineEnd2d(lineEnd.v[0], lineEnd.v[1]);
+					auto lineDirection = lineEnd2d - lineStart2d;
+
+					bool intersect = segmentIntersect(currentPos, mouseDirection, lineStart2d,
+					                                  lineDirection);
+					if (intersect)
+					{
+						erasedIndices.push_back(
+							std::distance(drawnLines.coordinates.begin(), line));
+					}
+				}
+
+				for (auto index : erasedIndices)
+				{
+					drawnLines.coordinates[index] = drawnLines.coordinates.back();
+					drawnLines.coordinates.pop_back();
+				}
+			}
+
+			lastEraserPos = currentPos;
 		}
 	}
 
@@ -305,7 +381,9 @@ std::vector<scm::CoordinateLine> scm::ScmDraw::getCoordinates()
 
 void scm::ScmDraw::setTool(scm::DrawTools tool)
 {
-	activeTool = tool;
+	activeTool    = tool;
+	lastEraserPos = defaultLastEraserPos;
+	drawState     = Drawing::None;
 }
 
 std::optional<scm::StarPoint> scm::ScmDraw::findNearestPoint(int x, int y, StelProjectorP prj)
@@ -320,30 +398,62 @@ std::optional<scm::StarPoint> scm::ScmDraw::findNearestPoint(int x, int y, StelP
 	Vec3d minPosition;
 	prj->project(min->start, minPosition);
 	double minDistance = (minPosition - position).dot(minPosition - position);
+	bool isStartPoint  = true;
 
 	for (auto line = drawnLines.coordinates.begin(); line != drawnLines.coordinates.end(); ++line)
 	{
 		Vec3d iPosition;
-		if (!prj->project(line->start, iPosition))
+		if (prj->project(line->start, iPosition))
 		{
-			continue;
+			double distance = (iPosition - position).dot(iPosition - position);
+			if (distance < minDistance)
+			{
+				min          = line;
+				minPosition  = iPosition;
+				minDistance  = distance;
+				isStartPoint = true;
+			}
 		}
 
-		double distance = (iPosition - position).dot(iPosition - position);
-		if (distance < minDistance)
+		if (prj->project(line->end, iPosition))
 		{
-			min         = line;
-			minPosition = iPosition;
-			minDistance = distance;
+			double distance = (iPosition - position).dot(iPosition - position);
+			if (distance < minDistance)
+			{
+				min          = line;
+				minPosition  = iPosition;
+				minDistance  = distance;
+				isStartPoint = false;
+			}
 		}
 	}
 
 	if (minDistance < maxSnapRadiusInPixels * maxSnapRadiusInPixels)
 	{
-		StarPoint point = {min->start,
-		                   drawnLines.stars.at(std::distance(drawnLines.coordinates.begin(), min)).start};
-		return point;
+		if (isStartPoint)
+		{
+			StarPoint point = {min->start,
+			                   drawnLines.stars.at(std::distance(drawnLines.coordinates.begin(), min)).start};
+			return point;
+		}
+		else
+		{
+			StarPoint point = {min->end,
+			                   drawnLines.stars.at(std::distance(drawnLines.coordinates.begin(), min)).end};
+			return point;
+		}
 	}
 
 	return {};
+}
+
+void scm::ScmDraw::resetDrawing()
+{
+	drawnLines.coordinates.clear();
+	drawnLines.stars.clear();
+	drawState = Drawing::None;
+	std::get<CoordinateLine>(currentLine).start.set(0, 0, 0);
+	std::get<CoordinateLine>(currentLine).end.set(0, 0, 0);
+	std::get<StarLine>(currentLine).start.reset();
+	std::get<StarLine>(currentLine).end.reset();
 }
