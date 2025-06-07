@@ -625,6 +625,16 @@ void ViewDialog::createDialogContent()
 		ui->constellationHullsFadeDurationDoubleSpinBox->hide();
 	}
 
+	connectBoolProperty(ui->zodiacCheckBox, "ConstellationMgr.zodiacDisplayed");
+	connectBoolProperty(ui->lunarSystemCheckBox, "ConstellationMgr.lunarSystemDisplayed");
+	ui->zodiacColorButton->setup("ConstellationMgr.zodiacColor", "color/sc_zodiac_color");
+	ui->lunarSystemColorButton->setup("ConstellationMgr.lunarSystemColor", "color/sc_lunarsystem_color");
+
+	connectIntProperty(ui->zodiacThicknessSpinBox,	                "ConstellationMgr.zodiacThickness");
+	connectIntProperty(ui->lunarSystemThicknessSpinBox,	        "ConstellationMgr.lunarSystemThickness");
+	connectDoubleProperty(ui->zodiacFadeDurationDoubleSpinBox,      "ConstellationMgr.zodiacFadeDuration");
+	connectDoubleProperty(ui->lunarSystemFadeDurationDoubleSpinBox, "ConstellationMgr.lunarSystemFadeDuration");
+
 
 	// Font selection
 	connectIntProperty(ui->constellationsFontSizeSpinBox, "ConstellationMgr.fontSize");
@@ -1101,6 +1111,8 @@ void ViewDialog::populateToolTips()
 	ui->asterismLinesFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->asterismNamesFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->rayHelpersFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->zodiacFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->lunarSystemFadeDurationDoubleSpinBox->setSuffix(seconds);
 }
 
 void ViewDialog::populateLists()
