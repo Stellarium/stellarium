@@ -28,8 +28,8 @@
 #include "GridLinesMgr.hpp"
 #include "StelCore.hpp"
 #include "StelObject.hpp"
-//#include "StelModule.hpp"
 
+class ConstellationMgr;
 class StelTranslator;
 class QJsonObject;
 
@@ -135,6 +135,7 @@ class QJsonObject;
 class StelSkyCultureSkyPartition
 {
 	Q_GADGET
+friend ConstellationMgr;
 public:
 	StelSkyCultureSkyPartition(const QJsonObject &description);
 	~StelSkyCultureSkyPartition();
@@ -146,6 +147,8 @@ public:
 private:
 	void drawCap(StelPainter &sPainter, const SphericalCap& viewPortSphericalCap, double latDeg) const;
 	//void drawLabels(StelPainter &sPainter) const;
+	//! Update i18n names from English names according to current locale.
+	void updateI18n();
 
 	StelCore::FrameType frameType;         //!< Useful seem only: FrameObservercentricEclipticOfDate (e.g. Zodiac), FrameEquinoxEqu (e.g. Chin. Lunar Mansions)
 	QVector<double> partitions;            //!< A partition into [0] large parts of [1] smaller parts of [2] smaller parts... Currently only 2-part zodiacs [12, 30] or nakshatras [27, 4] are in use.

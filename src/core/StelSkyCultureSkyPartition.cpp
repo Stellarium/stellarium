@@ -22,6 +22,7 @@
 #include <QJsonArray>
 
 #include "StarMgr.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -264,7 +265,7 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 	{
 		for (int i=0; i<partitions[0]; ++i)
 		{
-			QString label=scMgr->createCulturalLabel(names.at(i), StelObject::CulturalDisplayStyle::Pronounce,names.at(i).pronounceI18n);
+			QString label=scMgr->createCulturalLabel(names.at(i), scMgr->getScreenLabelStyle(), names.at(i).pronounceI18n);
 			// To have tilted labels, we project a point 0.1deg from the actual label point and derive screen-based angle.
 			double lng  = (360./partitions[0]*(double(i)+0.5) + 2.+offsetFromAries)*M_PI_180;
 			double lng1 = (360./partitions[0]*(double(i)+0.5) + 1.9+offsetFromAries)*M_PI_180;
@@ -285,7 +286,7 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 	{
 		for (int i=0; i<linkStars.length(); ++i)
 		{
-			QString label=scMgr->createCulturalLabel(names.at(i), StelObject::CulturalDisplayStyle::Pronounce,names.at(i).pronounceI18n);
+			QString label=scMgr->createCulturalLabel(names.at(i), scMgr->getScreenLabelStyle(),names.at(i).pronounceI18n);
 			StelObjectP starBegin = starMgr->searchHP(linkStars.at(i));
 			StelObjectP starEnd   = starMgr->searchHP(linkStars.at((i==linkStars.length()-1? 0 : i+1)));
 
@@ -363,4 +364,30 @@ void StelSkyCultureSkyPartition::setFontSize(int newFontSize)
 void StelSkyCultureSkyPartition::updateLabels()
 {
 	// TODO: Extract short cultural labels and apply here.
+}
+
+void StelSkyCultureSkyPartition::updateI18n()
+{
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+
+	for (auto &name : names)
+	{
+		QString context = name.translated;
+		name.translatedI18n = trans.tryQtranslate(name.translated, context);
+		if (name.translatedI18n.isEmpty())
+		{
+			if (context.isEmpty())
+				name.translatedI18n = q_(name.translated);
+			else
+				name.translatedI18n = qc_(name.translated, context);
+		}
+		name.pronounceI18n = trans.tryQtranslate(name.pronounce, context);
+		if (name.pronounceI18n.isEmpty())
+		{
+			if (context.isEmpty())
+				name.pronounceI18n = q_(name.pronounce);
+			else
+				name.pronounceI18n = qc_(name.pronounce, context);
+		}
+	}
 }
