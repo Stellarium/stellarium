@@ -816,6 +816,10 @@ void ConstellationMgr::updateI18n()
 			constellation->abbreviationI18n = qc_(constellation->abbreviation, abbrContext).trimmed();
 		}
 	}
+	if (zodiac)
+		zodiac->updateI18n();
+	if (lunarSystem)
+		lunarSystem->updateI18n();
 }
 
 // update faders
