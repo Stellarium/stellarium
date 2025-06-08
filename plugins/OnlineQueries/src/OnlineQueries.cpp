@@ -27,6 +27,8 @@
 #include "StarMgr.hpp"
 #include "Planet.hpp"
 #include "NebulaMgr.hpp"
+#include "Constellation.hpp"
+#include "Asterism.hpp"
 #include "StelDialog.hpp"
 #include "OnlineQueries.hpp"
 #include "OnlineQueriesDialog.hpp"
@@ -150,6 +152,7 @@ void OnlineQueries::loadConfiguration(void)
 	aavsoOidUrl    =conf->value("aavso_oid_url",    "https://www.aavso.org/vsx/index.php?view=detail.top&oid=%1").toString();
 	gcvsUrl        =conf->value("gcvs_url",         "http://www.sai.msu.su/gcvs/cgi-bin/ident.cgi?cat=Hip+&num=%1").toString();
 	wikipediaUrl   =conf->value("wikipedia_url",    "https://en.wikipedia.org/wiki/%1").toString();
+	customUrl1=conf->value("custom1_url", "").toString();
 	if (!customUrl1.isEmpty() && !customUrl1.contains("%1"))
 	{
 		qWarning() << "OnlineQueries: custom1_url invalid: no '%1' found in " << customUrl1;
@@ -348,9 +351,17 @@ void OnlineQueries::query(const QString &url, bool useHip)
 				return;
 			}
 		}
+		else if (obj->getType()==Constellation::CONSTELLATION_TYPE)
+		{
+			objName=obj->getEnglishName();
+		}
+		else if (obj->getType()==Asterism::ASTERISM_TYPE)
+		{
+			objName=obj->getEnglishName();
+		}
 		else
 		{
-			setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(q_("ERROR"), q_("We can request data for stars, planets and deep-sky objects only.")));
+			setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(q_("ERROR"), q_("We can request data for stars, constellations, asterisms, planets and deep-sky objects only.")));
 			return;
 		}
 		setOutputUrl(QUrl(url.arg(objName)));

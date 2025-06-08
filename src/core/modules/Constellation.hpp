@@ -51,8 +51,9 @@ class StelPainter;
 class Constellation : public StelObject
 {
 	friend class ConstellationMgr;
-private:
+public:
 	static const QString CONSTELLATION_TYPE;
+private:
 	Constellation();
 	~Constellation() override;
 
