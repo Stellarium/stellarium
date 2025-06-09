@@ -66,6 +66,39 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 		QJsonArray p = json["partitions"].toArray();
 		for (unsigned int i=0; i<p.size(); ++i)
 			partitions.append(p.at(i).toDouble());
+
+		// From this definition, build the list of sub-tick lists for the central line.
+		QList<QList<double>>cParts;
+		for (int i=0; i<partitions.length(); ++i)
+		{
+			QList<double> partList;
+			double angle=0;
+			double partNum=1.;
+			for (int j=0; j<=i; ++j)
+			{
+				partNum*=partitions[j];
+			}
+			//qDebug() << "partNum" << partNum;
+			while (angle <360.)
+			{
+				partList.append(angle);
+				angle+=360./partNum;
+				bool take=true;
+				// build test...
+				for (int j=0; j<=i; ++j)
+				{
+					if (cParts.length() > j && cParts.at(j).contains(angle))
+					{
+						take=false;
+						//qDebug() << "Angle taken:" << QString::number(angle);
+					}
+				}
+				if (take)
+					partList.append(angle);
+			}
+			cParts.append(partList);
+		}
+		centerLine->setCulturalPartitions(cParts);
 	}
 	else if (json.contains("defining_stars"))
 	{
