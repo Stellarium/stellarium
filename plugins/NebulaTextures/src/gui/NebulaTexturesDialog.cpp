@@ -116,7 +116,7 @@ void NebulaTexturesDialog::createDialogContent()
 	ui->checkBoxShow->setChecked(getShowCustomTextures());
 	ui->checkBoxAvoid->setChecked(getAvoidAreaConflict());
 	ui->cancelButton->setVisible(false);
-	ui->label_apiKey->setText(QString("<a href=\"https://nova.astrometry.net/api_help\">Astrometry API key:</a>"));
+	ui->label_apiKey->setText(QString("<a href=\"https://nova.astrometry.net/api_help\">") + q_("Astrometry API key:") + "</a>");
 	ui->brightComboBox->addItem(q_("Bright"), QVariant(12));
 	ui->brightComboBox->addItem(q_("Normal"), QVariant(13.5));
 	ui->brightComboBox->addItem(q_("Dark"), QVariant(15));
