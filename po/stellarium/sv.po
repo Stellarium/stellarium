@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-06-09 21:24+0700\n"
+"POT-Creation-Date: 2025-06-10 02:49+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Karl Birgersson <birgerssonkarl@outlook.com>, 2025\n"
 "Language-Team: Swedish (https://app.transifex.com/stellarium/teams/80998/sv/)\n"
@@ -34824,7 +34824,7 @@ msgstr "Tillverkare:"
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:769
 msgctxt "Lens mount on a camera"
 msgid "Mount:"
-msgstr "Mount:"
+msgstr "Montering:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:771
 msgid "Generate"
@@ -34939,7 +34939,7 @@ msgid ""
 "This plugin can plate-solve and position astronomical images, adding them as"
 " custom deep-sky object textures for rendering."
 msgstr ""
-"Detta plugin kan lösa och positionera astronomiska bilder och lägga till "
+"Detta plugin kan beräkna och positionera astronomiska bilder och lägga till "
 "egenanpassade djuprymdstexturer för rendering."
 
 #: plugins/NebulaTextures/src/NebulaTextures.cpp:92
@@ -34951,14 +34951,17 @@ msgid "Astrometry API key:"
 msgstr "Astrometry API-nyckel:"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:120
+msgctxt "overlay mode"
 msgid "Bright"
 msgstr "Ljus"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:121
+msgctxt "overlay mode"
 msgid "Normal"
 msgstr "Normal"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:122
+msgctxt "overlay mode"
 msgid "Dark"
 msgstr "Mörk"
 
@@ -34983,7 +34986,7 @@ msgstr "Uppladdning misslyckad: %1"
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:212
 #, qt-format
 msgid "Solve failed: %1"
-msgstr "Lösning misslyckad: %1"
+msgstr "Beräkning misslyckad: %1"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:217
 msgid "World Coordinate System data download complete. Processing..."
@@ -35008,9 +35011,9 @@ msgstr ""
 " dig anpassa och rendera texturer för djuprymdsobjekt (Deep Sky Object, "
 "DSO). Vare sig du är astrofotograf eller målar eller ritar astronomiska "
 "motiv, låter detta plugin dig integrera dessa bilder i Stellarium. Det "
-"stödjer också online-lösningar genom Astrometry.net för exakt placering av "
-"bilder. Ladda bara upp din bild (var noga att den inte är spegelvänd eller "
-"uppochnervänd), lös dess koordinater, och njut av en helt egenanpassad "
+"stödjer också online-beräkningar genom Astrometry.net för exakt placering av"
+" bilder. Ladda bara upp din bild (var noga att den inte är spegelvänd eller "
+"uppochnervänd), beräkna dess koordinater, och njut av en helt egenanpassad "
 "himmelsvy!"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:312
@@ -35114,7 +35117,7 @@ msgstr "Bildsökväg:"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:485
 msgid "Online Solve"
-msgstr "Lös online"
+msgstr "Beräkna online"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:486
 msgid "Remember me"
@@ -35125,7 +35128,7 @@ msgid ""
 "Select and upload astrophotography image to solve coordinates with "
 "Astrometry.net"
 msgstr ""
-"Välj och ladda upp en astrofotografisk bild för att lösa koordinater med "
+"Välj och ladda upp en astrofotografisk bild för att beräkna koordinater med "
 "Astrometry.net"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:488
