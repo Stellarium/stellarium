@@ -73,6 +73,20 @@ public:
 	//! Get whether Sky Background should be displayed
 	bool getFlagShow() const {return flagShow;}
 
+	//! Store the information needed for a graphical element layer.
+	class SkyLayerElem
+	{
+	public:
+		SkyLayerElem(StelSkyLayerP t, bool show=true);
+		~SkyLayerElem();
+		StelSkyLayerP layer;
+		class StelProgressController* progressBar;
+		bool show;
+	};
+
+	//! Map image key/layer
+	QMap<QString, SkyLayerElem*> allSkyLayers;
+
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -146,6 +160,7 @@ public slots:
 
 signals:
 	void flagShowChanged(bool b);
+	void collectionLoaded();
 
 private slots:
 	//! Called when loading of data started or stopped for one collection
@@ -161,23 +176,9 @@ private slots:
 	void loadCollection(int decimateBy=1);
 
 private:
-	//! Store the information needed for a graphical element layer.
-	class SkyLayerElem
-	{
-	public:
-		SkyLayerElem(StelSkyLayerP t, bool show=true);
-		~SkyLayerElem();
-		StelSkyLayerP layer;
-		class StelProgressController* progressBar;
-		bool show;
-	};
-
 	SkyLayerElem* skyLayerElemForLayer(const StelSkyLayer*);
 
 	QString keyForLayer(const StelSkyLayer*);
-
-	//! Map image key/layer
-	QMap<QString, SkyLayerElem*> allSkyLayers;
 
 	// Whether to draw at all
 	bool flagShow;
