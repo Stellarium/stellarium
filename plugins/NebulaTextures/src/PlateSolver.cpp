@@ -284,7 +284,7 @@ void PlateSolver::sendSubStatusRequest()
 		}
 	});
 
-	emit solvingStatusUpdated(q_("Checking submission status") +QString(" (%1/%2)...").arg(retryCount + 1).arg(maxRetryCount));
+	emit solvingStatusUpdated(q_("Checking submission status (%1/%2)...").arg(retryCount + 1).arg(maxRetryCount));
 }
 
 /**
@@ -323,7 +323,7 @@ void PlateSolver::onSubStatusReply()
 		emit solvingStatusUpdated(q_("Job ID received. Processing..."));
 	} else if (json.contains("error_message")) {
 		subStatusTimer->stop();
-		emit failed(q_("Astrometry error.") +" " + json["error_message"].toString());
+		emit failed(q_("Astrometry error. %1").arg(json["error_message"].toString()));
 	}
 }
 
@@ -349,7 +349,7 @@ void PlateSolver::sendJobStatusRequest()
 		}
 	});
 
-	emit solvingStatusUpdated(q_("Checking job status") +QString(" (%1/%2)...").arg(retryCount + 1).arg(maxRetryCount));
+	emit solvingStatusUpdated(q_("Checking job status (%1/%2)...").arg(retryCount + 1).arg(maxRetryCount));
 }
 
 /**

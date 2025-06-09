@@ -871,7 +871,7 @@ Once MPC data has been downloaded, the user can select objects for updating the 
 
 \clearpage
 
-\section{Nebula Textures Plugin User Guide}
+\section{Nebula Textures Plugin}
 \label{sec:plugins:NebulaTextures}
 
 The Nebula Textures plugin allows users to customize deep-sky object (DSO) textures, precisely 
@@ -881,7 +881,8 @@ Stellarium. It also serves as a simple client for Astrometry.net, enabling blind
 positioning of astronomical images. The plugin's full functionality includes online plate-solving 
 and positioning of astronomical images, as well as the management and rendering of custom textures.
 
-\subsection{Steps for Online Solving and Texture Management (For Astrophotography)}
+\subsection{Online Solving and Texture Management}
+Instructions for integrating astrophotography images via online plate solving.
 \begin{enumerate}
     \item \textbf{Prepare an Image}: Prepare a processed rectangular bitmap file of a deep-sky object, 
 	in a format that supports both Astrometry analysis and rendering, such as PNG, JPG, TIF, or GIF. 
@@ -898,7 +899,7 @@ and positioning of astronomical images, as well as the management and rendering 
 	button to select an image file or paste the file path into the “Image Filepath” text box.
 
     \item \textbf{Enter API Key}: Paste your Astrometry API key into the corresponding text box (password 
-	mode by default). If you don’t have one, click \href{https://nova.astrometry.net/api_help}{\textcolor{blue}{\underline{Astrometry API key}}} to obtain it 
+	mode by default). If you don’t have one, click \href{https://nova.astrometry.net/api_help}{\textcolor{blue}{\underline{Astrometry ApiKey}}} to obtain it 
 	after registering or logging in. Check \checkbox{Remember me} to store the key for future use.
 
     \item \textbf{Upload and Solve}: Click \button{Online Solve} to begin uploading and solving the image. Ensure system 
@@ -937,11 +938,11 @@ and positioning of astronomical images, as well as the management and rendering 
 	Stellarium may continue rendering the texture until it is restarted.
 \end{enumerate}
 
-\subsection{Steps for Manual Texture Addition (For Sketches, Paintings, etc.)}
-The process is similar to the above, except that you don’t need to upload the texture file for solving:
+\subsection{Manual Texture Addition)}
+Instructions for adding manual textures (e.g., sketches, paintings). The process is similar to the one above, but performing online solving is not required:
 \begin{itemize}
     \item Open the image file. Stars in non-astrophotographic images may not align precisely with the 
-	software's stars, so it is recommended to use the texture without stars (de-starring).
+	software's stars, so it is recommended to use the texture without stars (de-star it).
     \item Input the J2000 equatorial coordinates (in decimal degrees) for the image corners, aligning 
 	with the bitmap display.
     \item If needed, use an astrophotography image with a similar field of view (FOV) to obtain 
@@ -962,7 +963,7 @@ The process is similar to the above, except that you don’t need to upload the 
     \item After adding a texture, you must restart Stellarium to fully integrate the texture into the 
 	module. The same applies when deleting a texture.
     \item To back up your texture library or share it with others, copy the plugin folder from your user 
-	config directory. For Windows, the path is typically:
+	config directory. You can find the exact plugin storage path in the “About” section of the plugin GUI. For Windows systems, this path is usually something like:
     \begin{quote}
     \texttt{\%APPDATA\%\textbackslash Stellarium\textbackslash modules\textbackslash NebulaTextures}
     \end{quote}
