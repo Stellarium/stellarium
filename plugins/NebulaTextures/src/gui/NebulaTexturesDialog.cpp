@@ -117,9 +117,9 @@ void NebulaTexturesDialog::createDialogContent()
 	ui->checkBoxAvoid->setChecked(getAvoidAreaConflict());
 	ui->cancelButton->setVisible(false);
 	ui->label_apiKey->setText(QString("<a href=\"https://nova.astrometry.net/api_help\">") + q_("Astrometry API key:") + "</a>");
-	ui->brightComboBox->addItem(q_("Bright"), QVariant(12));
-	ui->brightComboBox->addItem(q_("Normal"), QVariant(13.5));
-	ui->brightComboBox->addItem(q_("Dark"), QVariant(15));
+	ui->brightComboBox->addItem(qc_("Bright", "overlay mode"), QVariant(12));
+	ui->brightComboBox->addItem(qc_("Normal", "overlay mode"), QVariant(13.5));
+	ui->brightComboBox->addItem(qc_("Dark", "overlay mode"), QVariant(15));
 	ui->brightComboBox->setCurrentIndex(1);
 
 	// Kinetic scrolling
