@@ -88,8 +88,15 @@ public:
 	float getPartThickness() const {return partThickness;}
 	//! Re-translates the label and sets the frameType. Must be called in the constructor!
 	void updateLabel();
-	//! setup the small partitions in a ECLIPTIC_CULTURAL or EQUATORIAL_CULTURAL line.
-	void setCulturalPartitions(std::vector<std::vector<double>>cParts){culturalPartitions=cParts;}
+	//! setup the small partitions in a ECLIPTIC_CULTURAL or EQUATORIAL_CULTURAL line, in degrees.
+	//! Element nr.0 is a vector of the major divisions. It is not used directly, just here for completion.
+	//! Element nr.1 is a vector of all main divisions of all major divisions. This may be 10-degrees in a 12x30 degree zodiac, or the quarter-lines in the Indian 27-part nakshatras.
+	//! Element nr.2 is a vector of all minor divisions, like the 5-degrees in a 12x30 degrees zodiac defined as [12 3 2 5].
+	//! Element nr.3 is a vector of all sub-minor divisions, like the 1-degrees in a 12x30 degrees zodiac  defined as [12 3 2 5].
+	//! Up to these 4 lists is supported with drawing ever-smaller sub-ticks
+	//! @todo: Currently the partitions are falsely plotted extending the wrong axis.
+	void setCulturalPartitions(QList<QList<double>>cParts){culturalPartitions=cParts;}
+	void setCulturalOffset(const double offset){culturalOffset=offset;}
 	static void setSolarSystem(SolarSystem* ss);
 	//! Compute eclipticOnDatePartitions for @param year. Trigger a call to this from a signal StelCore::dateChangedByYear()
 	static void computeEclipticDatePartitions(int year = std::numeric_limits<int>::min());
@@ -105,7 +112,8 @@ private:
 	float partThickness;
 	bool showPartitions;
 	bool showLabel;
-	std::vector<std::vector<double>>culturalPartitions; //!< only in ECLIPTIC_CULTURAL and EQUATORIAL_CULTURAL lines.
+	QList<QList<double>>culturalPartitions; //!< only in ECLIPTIC_CULTURAL and EQUATORIAL_CULTURAL lines.
+	double culturalOffset;  //!< the origin of cultural partitions can be rotated from the first point of Aries.
 	static QMap<int, double> precessionPartitions;
 	static std::vector<QPair<Vec3d, QString>> eclipticOnDatePartitions; //!< Collection of up to 366 entries Vec3d={eclLongitude, aberration, nutation}, QString label
 };

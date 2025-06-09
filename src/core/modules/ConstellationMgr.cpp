@@ -1612,8 +1612,9 @@ void ConstellationMgr::drawZodiac(StelPainter& sPainter, const Vec3d &obsVelocit
 		return;
 
 	sPainter.setColor(zodiacColor, zodiacFader.getInterstate());
-	zodiac->centerLine->setColor(zodiacColor); // TODO: ENCAPSULATE!
-	//qDebug() << "zodiacFader.getInterstate());" << zodiacFader.getInterstate();
+	zodiac->centerLine->setColor(zodiacColor);
+	zodiac->centerLine->setLineThickness(zodiacThickness);
+	zodiac->centerLine->setPartThickness(zodiacThickness);
 	sPainter.setBlending(true);
 	const float oldLineWidth=sPainter.getLineWidth();
 	sPainter.setLineWidth(zodiacThickness); // set line thickness
@@ -1629,10 +1630,10 @@ void ConstellationMgr::drawLunarSystem(StelPainter& sPainter, const Vec3d &obsVe
 	if (!lunarSystem || lunarSystemFader.getInterstate()==0.)
 		return;
 
-	//qDebug() << "Drawing LunarSystem element";
 	sPainter.setColor(lunarSystemColor, lunarSystemFader.getInterstate());
-	lunarSystem->centerLine->setColor(lunarSystemColor); // TODO: ENCAPSULATE!
-	//qDebug() << "lunarSystemFader.getInterstate());" << lunarSystemFader.getInterstate();
+	lunarSystem->centerLine->setColor(lunarSystemColor);
+	lunarSystem->centerLine->setLineThickness(lunarSystemThickness);
+	lunarSystem->centerLine->setPartThickness(lunarSystemThickness);
 	sPainter.setBlending(true);
 	const float oldLineWidth=sPainter.getLineWidth();
 	sPainter.setLineWidth(lunarSystemThickness); // set line thickness
