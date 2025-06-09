@@ -53,6 +53,8 @@ static QString getExt(const QString& format)
 		if (ext == "jpeg") return "jpg";
 		if (ext == "png") return "png";
 		if (ext == "webp") return "webp";
+		if (ext == "tiff") return "tiff";
+		if (ext == "bmp") return "bmp";
 	}
 	return QString();
 }
@@ -67,7 +69,8 @@ QUrl HipsSurvey::getUrlFor(const QString& path) const
 	return QString("%1/%2%3").arg(base.url(), path, args);
 }
 
-HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString& type, double releaseDate_):
+HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString& type,
+                       const QMap<QString, QString>& hipslistProps, const double releaseDate_) :
 	url(url_),
 	type(type),
 	hipsFrame(frame),
@@ -77,7 +80,12 @@ HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString&
 	nbVisibleTiles(0),
 	nbLoadedTiles(0)
 {
-	// Immediately download the properties.
+	// First save properties from hipslist
+	for (auto it = hipslistProps.begin(); it != hipslistProps.end(); ++it)
+		properties[it.key()] = it.value();
+	checkForPlanetarySurvey();
+
+	// Immediately download the properties and replace the hipslist data with them.
 	QNetworkRequest req = QNetworkRequest(getUrlFor("properties"));
 	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 	req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
@@ -105,13 +113,7 @@ HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString&
 		if (properties.contains("hips_frame"))
 			hipsFrame = properties["hips_frame"].toString().toLower();
 
-		QStringList DSSSurveys;
-		DSSSurveys << "equatorial" << "galactic" << "ecliptic"; // HiPS frames for DSS surveys
-		if (DSSSurveys.contains(hipsFrame, Qt::CaseInsensitive) && !(properties["creator_did"].toString().contains("moon", Qt::CaseInsensitive)) && !(properties["client_category"].toString().contains("solar system", Qt::CaseInsensitive)))
-			planetarySurvey = false;
-		else
-			planetarySurvey = true;
-
+		checkForPlanetarySurvey();
 		emit propertiesChanged();
 		emit statusChanged();
 		networkReply->deleteLater();
@@ -120,6 +122,13 @@ HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString&
 
 HipsSurvey::~HipsSurvey()
 {
+}
+
+void HipsSurvey::checkForPlanetarySurvey()
+{
+	planetarySurvey = !QStringList{"equatorial","galactic","ecliptic"}.contains(hipsFrame, Qt::CaseInsensitive) ||
+	                  std::as_const(properties)["creator_did"].toString().contains("moon", Qt::CaseInsensitive) ||
+	                  std::as_const(properties)["client_category"].toString().contains("solar system", Qt::CaseInsensitive);
 }
 
 bool HipsSurvey::isVisible() const
@@ -422,14 +431,28 @@ static bool isClipped(int n, double (*pos)[4])
     return false;
 }
 
-
-void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
-                          const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback)
+bool HipsSurvey::bindTextures(const HipsTile& tile)
 {
 	constexpr int colorTexUnit = 0;
 	constexpr int normalTexUnit = 2;
 	constexpr int horizonTexUnit = 4;
 
+	if (normals && !tile.normalTexture && !tile.normalAllsky) return false;
+	if (horizons && !tile.horizonTexture && !tile.horizonAllsky) return false;
+
+	if (!tile.texture->bind(colorTexUnit) && (!tile.allsky || !tile.allsky->bind(colorTexUnit)))
+		return false;
+	if (normals && tile.normalTexture && !tile.normalTexture->bind(normalTexUnit) && (!tile.normalAllsky || !tile.normalAllsky->bind(normalTexUnit)))
+		return false;
+	if (horizons && tile.horizonTexture && !tile.horizonTexture->bind(horizonTexUnit) && (!tile.horizonAllsky || !tile.horizonAllsky->bind(horizonTexUnit)))
+		return false;
+
+	return true;
+}
+
+void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
+                          const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback)
+{
 	Vec3d pos;
 	Mat3d mat3;
 	const Vec2d uv[4] = {Vec2d(0, 0), Vec2d(0, 1), Vec2d(1, 0), Vec2d(1, 1)};
@@ -492,15 +515,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	tile = getTile(order, pix);
 
 	if (!tile) return;
-	if (normals && !tile->normalTexture && !tile->normalAllsky) return;
-	if (horizons && !tile->horizonTexture && !tile->horizonAllsky) return;
-
-	if (!tile->texture->bind(colorTexUnit) && (!tile->allsky || !tile->allsky->bind(colorTexUnit)))
-		return;
-	if (normals && tile->normalTexture && !tile->normalTexture->bind(normalTexUnit) && (!tile->normalAllsky || !tile->normalAllsky->bind(normalTexUnit)))
-		return;
-	if (horizons && tile->horizonTexture && !tile->horizonTexture->bind(horizonTexUnit) && (!tile->horizonAllsky || !tile->horizonAllsky->bind(horizonTexUnit)))
-		return;
+	if (!bindTextures(*tile)) return;
 
 	if (tile->texFader.state() == QTimeLine::NotRunning && tile->texFader.currentValue() == 0.0)
 		tile->texFader.start();
@@ -638,37 +653,46 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 {
 	QList<HipsSurveyP> ret;
-	QString url;
-	QString type;
 	static const QString defaultFrame = "equatorial";
-	QString frame = defaultFrame;
-	double releaseDate = 0;
-	for (auto &line : data.split('\n'))
+	for (const auto& entry : data.split(QRegularExpression("\n\\s*\n")))
 	{
-		if (line.startsWith('#')) continue;
-		QString key = line.section("=", 0, 0).trimmed();
-		QString value = line.section("=", 1, -1).trimmed();
-		if (key == "hips_service_url") url = value;
-		// special case: https://github.com/Stellarium/stellarium/issues/1276
-		if (url.contains("data.stellarium.org/surveys/dss")) continue;
-		if (key == "hips_release_date")
+		QString url;
+		QString type;
+		QString frame = defaultFrame;
+		QString status;
+		double releaseDate = 0;
+		QMap<QString, QString> hipslistProps;
+		for (const auto &line : entry.split('\n'))
 		{
-			// XXX: StelUtils::getJulianDayFromISO8601String does not work
-			// without the seconds!
-			QDateTime date = QDateTime::fromString(value, Qt::ISODate);
-			date.setTimeSpec(Qt::UTC);
-			releaseDate = StelUtils::qDateTimeToJd(date);
+			if (line.startsWith('#')) continue;
+			QString key = line.section("=", 0, 0).trimmed();
+			QString value = line.section("=", 1, -1).trimmed();
+
+			hipslistProps[key] = value;
+
+			if (key == "hips_service_url")
+			{
+				url = value;
+				// special case: https://github.com/Stellarium/stellarium/issues/1276
+				if (url.contains("data.stellarium.org/surveys/dss")) continue;
+			}
+			else if (key == "hips_release_date")
+			{
+				// XXX: StelUtils::getJulianDayFromISO8601String does not work
+				// without the seconds!
+				QDateTime date = QDateTime::fromString(value, Qt::ISODate);
+				date.setTimeSpec(Qt::UTC);
+				releaseDate = StelUtils::qDateTimeToJd(date);
+			}
+			else if (key == "hips_frame")
+				frame = value.toLower();
+			else if (key == "type")
+				type = value.toLower();
+			else if (key == "hips_status")
+				status = value.toLower();
 		}
-		if (key == "hips_frame")
-			frame = value.toLower();
-		if (key == "type")
-			type = value.toLower();
-		if (key == "hips_status" && value.split(' ').contains("public")) {
-			ret.append(HipsSurveyP(new HipsSurvey(url, frame, type, releaseDate)));
-			url = "";
-			frame = defaultFrame;
-			releaseDate = 0;
-		}
+		if(status.split(' ').contains("public"))
+			ret.append(HipsSurveyP(new HipsSurvey(url, frame, type, hipslistProps, releaseDate)));
 	}
 	return ret;
 }

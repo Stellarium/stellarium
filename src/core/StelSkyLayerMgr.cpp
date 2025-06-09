@@ -94,6 +94,18 @@ void StelSkyLayerMgr::loadCollection(int decimateBy)
 		qWarning() << "ERROR while loading nebula texture set default";
 	else
 		insertSkyImage(path, QString(), true, decimateBy);
+
+#ifdef USE_STATIC_PLUGIN_NEBULATEXTURES
+	// [NebulaTextures] The custom textures need to be loaded synchronously at the program startup in order to take effect
+	QSettings* conf = StelApp::getInstance().getSettings();
+	if(conf->value("plugins_load_at_startup/NebulaTextures", false).toBool()){
+		path = StelFileMgr::findFile(StelFileMgr::getUserDir()+"/modules/NebulaTextures/custom_textures.json");
+		if (path.isEmpty())
+			qWarning() << "[NebulaTextures] Custom Nebula Textures doesn't exist.";
+		else
+			insertSkyImage(path, QString(), true, decimateBy);
+	}
+#endif
 }
 
 QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, const QString& keyHint, bool ashow)
@@ -210,6 +222,7 @@ void StelSkyLayerMgr::loadingStateChanged(bool b)
 		Q_ASSERT(elem->progressBar!=Q_NULLPTR);
 		StelApp::getInstance().removeProgressBar(elem->progressBar);
 		elem->progressBar = Q_NULLPTR;
+		emit collectionLoaded();
 	}
 }
 

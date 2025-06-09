@@ -90,6 +90,6 @@ void StelScriptOutput::saveOutputAs(const QString &name)
 		return;
 	}
 	qDebug() << "saving copy of output.txt to " << asFile.fileName();
-	asFile.write(qPrintable(outputText), outputText.size());
+	asFile.write(outputText.toUtf8());
 	asFile.close();
 }

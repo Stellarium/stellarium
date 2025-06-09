@@ -63,7 +63,8 @@ public:
 	//! @param frame The reference frame from the survey's \c hips_frame property.
 	//! @param type Survey type from the survey's \c type property.
 	//! @param releaseDate If known the UTC JD release date of the survey.  Used for cache busting.
-	HipsSurvey(const QString& url, const QString& frame, const QString& type, double releaseDate=0.0);
+	HipsSurvey(const QString& url, const QString& frame, const QString& type,
+	           const QMap<QString, QString>& hipslistProps, double releaseDate=0.0);
 	~HipsSurvey() override;
 
 	//! Get whether the survey is visible.
@@ -107,6 +108,9 @@ signals:
 	void visibleChanged(bool);
 
 private:
+	void checkForPlanetarySurvey();
+
+private:
 	LinearFader fader;
 	QString url;
 	QString type;
@@ -139,6 +143,7 @@ private:
 	int getPropertyInt(const QString& key, int fallback = 0);
 	bool getAllsky();
 	HipsTile* getTile(int order, int pix);
+	bool bindTextures(const HipsTile& tile);
 	// draw a single tile. observerVelocity (in the correct hipsFrame) is necessary for aberration correction. Set to 0 for no aberration correction.
 	void drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
 	              const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback);

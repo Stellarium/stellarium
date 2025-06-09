@@ -40,7 +40,8 @@ public:
 	void setRotation(double rot);
 	void setVisibility(bool visible);
 	QString getCurrentCameraName() const;
-	void setCurrentCameraName(const QString& cameraName);
+	void setCurrentCameraName(const QString& cameraName, const QString& cameraFullName, const QString& cameraDescription, const QString& cameraURLDetails);
+	void setCameraNames(const QStringList& cameraNames);
 
 protected:
 	void createDialogContent() override;
@@ -51,15 +52,20 @@ public slots:
 	void updateDec();
 	void updateRotation();
 	void updateVisibility(bool visible);
-    void onCameraSelectionChanged(const QString& cameraName);
+	void onCameraSelectionChanged(const QString& cameraName);
+	void restoreDefaults();
 
 private:
 	QString currentCameraName;
+	QString currentCameraFullName;
+	QString currentCameraDescription;
+	QString currentCameraURLDetails;
 
 	MosaicCamera* mc;
 	Ui_mosaicCameraDialog* ui;
 	void setAboutHtml(void);
 	void updateDialogFields();
+	void enableUIElements(bool state);
 };
 
 #endif // MOSAICCAMERADIALOG_HPP

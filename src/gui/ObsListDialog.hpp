@@ -142,9 +142,31 @@ public:
 
 	~ObsListDialog() override;
 
+	enum ObsListColumns {
+		ColumnUUID,          //! UUID of object
+		ColumnDesignation,   //! English name or catalog designation of object
+		ColumnNameI18n,      //! Localized name/nickname of object
+		ColumnType,          //! Localized detailed Type of the object
+		ColumnRa,            //! Right ascension of the object
+		ColumnDec,           //! Declination of the object
+		ColumnMagnitude,     //! Magnitude of the object
+		ColumnConstellation, //! Constellation in which the object is located
+		ColumnDate,          //! Date
+		ColumnLocation,      //! Location where the object is observed
+		ColumnLandscapeID,   //! LandscapeID linked to object observation
+		ColumnCount          //! Total number of columns
+	};
+	Q_ENUM(ObsListColumns)
+
+protected:
+	Ui_obsListDialogForm *ui;
+
+	//! Initialize the dialog widgets and connect the signals/slots.
+	void createDialogContent() override;
+
+private:
 	struct observingListItem
 	{
-	public:
 		QString designation;   //!< Relates to designation in the JSON file
 		QString name;          //!< Relates to name in the JSON file. This is the object's englishName
 		QString nameI18n;      //!< Relates to nameI18n in the JSON file. This is recreated from the actual object and current language during loading of the list. In the JSON file, it has purely add-on value.
@@ -197,32 +219,8 @@ public:
 		}
 	};
 
-	enum ObsListColumns {
-		ColumnUUID,          //! UUID of object
-		ColumnDesignation,   //! English name or catalog designation of object
-		ColumnNameI18n,      //! Localized name/nickname of object
-		ColumnType,          //! Localized detailed Type of the object
-		ColumnRa,            //! Right ascension of the object
-		ColumnDec,           //! Declination of the object
-		ColumnMagnitude,     //! Magnitude of the object
-		ColumnConstellation, //! Constellation in which the object is located
-		ColumnDate,          //! Date
-		ColumnLocation,      //! Location where the object is observed
-		ColumnLandscapeID,   //! LandscapeID linked to object observation
-		ColumnCount          //! Total number of columns
-	};
-	Q_ENUM(ObsListColumns)
-
-protected:
-	Ui_obsListDialogForm *ui;
-
-	//! Initialize the dialog widgets and connect the signals/slots.
-	void createDialogContent() override;
-
-private:
 	class StelCore *core;
 	class StelObjectMgr *objectMgr;
-	class LandscapeMgr *landscapeMgr;
 	class LabelMgr *labelMgr;
 
 	QStandardItemModel *itemModel;       //!< Data for the table display.
@@ -310,9 +308,6 @@ private:
 	//! NEW: Switch between regular and edit modes.
 	//! @param newList activate creation mode. This is only relevant to aborts
 	void switchEditMode(bool enableEditMode, bool newList);
-
-	//! Save the object information into json file
-	void saveObservedObjectsInJsonFile();
 
 	//! Get the magnitude from selected object (or a dash if unavailable)
 	static QString getMagnitude(const QList<StelObjectP> &selectedObject, StelCore *core);

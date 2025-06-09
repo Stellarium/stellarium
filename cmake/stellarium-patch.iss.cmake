@@ -1,4 +1,4 @@
-; Stellarium patch installer
+; Stellarium patch installer (InnoSetup 5 compatible)
 ; Run "make install" first to generate the executable and translation files.
 ; The CMake-generated patch script is supposed to be edited manually after
 ; generation, but all changes will be OVERWRITTEN the next time CMake is run!

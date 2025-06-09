@@ -48,6 +48,7 @@ void StelSkyImageTile::initCtor()
 	birthJD = -1e10;
 	withAberration = true;
 	decimation = 1;
+	flagVisible = true;
 }
 
 // Constructor
@@ -159,6 +160,13 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 	}
 
 	if (birthJD>-1e10 && birthJD>core->getJD())
+	{
+		// Schedule a deletion
+		scheduleChildsDeletion();
+		return;
+	}
+
+	if (flagVisible == false)
 	{
 		// Schedule a deletion
 		scheduleChildsDeletion();

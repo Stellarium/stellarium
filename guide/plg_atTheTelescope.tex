@@ -21,7 +21,7 @@ In addition, the Observability plugin (section~\ref{sec:plugins:Observability})
 can be used for planning the best times to observe your favorite
 objects.
 
-The Mosaic Camera plugin (section~\ref{sec:plugins:Mosaic}) can be used to
+The Mosaic Camera plugin (section~\ref{sec:plugins:MosaicCamera}) can be used to
 show the orientations of more complicated camera mosaics.
 
 \section{Oculars Plugin}
@@ -1198,7 +1198,7 @@ Light blue corresponds to sensors made by Imaging Technology Laboratory, while d
 The white sensors in the middle show the field-of-view of the Rubin Commissioning Camera, a smaller camera used to commission the telescope mount and mirrors before the main LSSTCam camera was ready.
 The red sensors in the corners are wavefront sensors, used to monitor and correct the telescope's optical alignment in real time.
 The green sensors are the guider sensors, used to inform the telescope's tracking system.
-See more at \url{https://noirlab.edu/public/programs/vera-c-rubin-observatory/}.
+See more at \url{https://rubinobservatory.org/explore/how-rubin-works/technology/camera}.
 
 \paragraph{HyperSuprimeCam (HSC)}
 
@@ -1217,8 +1217,24 @@ See more at \url{https://www.cfht.hawaii.edu/Instruments/Imaging/MegaPrime/}.
 
 \paragraph{LATISS}
 
-The LSST Atmospheric Transmission Imager and Slitless Spectrograph.  A 16 megapixel camera mounted on the Rubin Observatory Auxiliary telescope.
-See more at \url{https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/}.
+The LSST Atmospheric Transmission Imager and Slitless Spectrograph. A 16 megapixel camera mounted on the Rubin Observatory Auxiliary telescope.
+See more at \url{https://rubinobservatory.org/explore/how-rubin-works/technology/auxtel}.
+
+\paragraph{JWST}
+
+The James Webb Space Telescope's focal plane. See more at \url{https://jwst-docs.stsci.edu/jwst-observatory-hardware/jwst-telescope/jwst-focal-plane#gsc.tab=0}.
+
+\paragraph{HST}
+
+The Hubble Space Telescope's focal plane. See more at \url{https://hst-docs.stsci.edu/acsihb/chapter-3-acs-capabilities-design-and-operations/3-1-acs-location-in-the-hst-focal-plane}.
+
+\paragraph{Roman}
+
+The Nancy Grace Roman Space Telescope's focal plane. See more at \url{https://roman.gsfc.nasa.gov/science/WFI_technical.html}.
+
+\paragraph{Euclid}
+
+The Euclid Space Telescope's focal plane. See more at \url{https://www.euclid-ec.org/public/mission/vis/}.
 
 \subsubsection{Adding a Camera}
 \label{sec:plugins:MosaicCamera:cameras:add}
@@ -1238,6 +1254,10 @@ Each camera is defined via a JSON file with the structure:
 
 \begin{jsonfile}[\scriptsize]
 [
+    {
+        "camera_name": "telescope/camera full name",
+        "camera_description": "telescope/camera description in HTML"
+    },
     {
         "name": "name-of-group-1",
         "corners": [

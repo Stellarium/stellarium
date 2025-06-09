@@ -240,6 +240,7 @@ struct ViewportEdgeIntersectCallbackData
 	ViewportEdgeIntersectCallbackData(StelPainter* p)
 		: sPainter(p)
 		, raAngle(0.0)
+		, gridStepMeridianRad(0.1)
 		, frameType(StelCore::FrameUninitialized) {}
 	StelPainter* sPainter;
 	Vec4f textColor;
@@ -1330,8 +1331,8 @@ void SkyLine::draw(StelCore *core) const
 							case LONGITUDE:
 								value=( i<180 ? 90-i : i-270 );
 								shifty = - static_cast<float>(sPainter.getFontMetrics().height()) * 0.25f;
-								shiftx = (i<180) ^ southernHemi ? 3.f : -static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
-								extraTextAngle = (i<180) ^ southernHemi ? 0.f : 180.f;
+								shiftx = ((i<180) ^ southernHemi) ? 3.f : -static_cast<float>(sPainter.getFontMetrics().boundingRect(QString("%1°").arg(value)).width()) - 3.f;
+								extraTextAngle = ((i<180) ^ southernHemi) ? 0.f : 180.f;
 								break;
 							case GALACTICEQUATOR:
 							case SUPERGALACTICEQUATOR:
@@ -1392,6 +1393,7 @@ void SkyLine::draw(StelCore *core) const
 					if (alt*M_180_PI> 89.0) StelUtils::spheToRect(az, -89.5*M_PI_180, p2);
 					break;
 				case StelCore::ProjectionHammer:
+				case StelCore::ProjectionMollweide:
 				case StelCore::ProjectionSinusoidal:
 				case StelCore::ProjectionMercator:
 				case StelCore::ProjectionMiller:

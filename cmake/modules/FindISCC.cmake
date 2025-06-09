@@ -2,10 +2,11 @@
 # Once done this will define
 #
 #  ISS_COMPILER_FOUND - system has Inno Setup compiler
-#  ISS_COMPILER_EXECUTABLE: the full path to the Inno Setup compiler.
+#  ISS_COMPILER_EXECUTABLE - the full path to the Inno Setup compiler
+#  ISS_COMPILER_VERSION_MAJOR - the major version of the Inno Setup compiler
 #
 # =====================================================================
-# Copyright 2022 Alexander Wolf
+# Copyright 2022, 2025 Alexander Wolf
 #
 # All rights reserved.
 #
@@ -49,6 +50,11 @@ IF (ISS_COMPILER_EXECUTABLE)
   IF (NOT ISS_COMPILER_FIND_QUIETLY)
     MESSAGE(STATUS "Found Inno Setup (.iss) compiler: ${ISS_COMPILER_EXECUTABLE}")
   ENDIF (NOT ISS_COMPILER_FIND_QUIETLY)
+  IF(${ISS_COMPILER_EXECUTABLE} MATCHES "6/")
+    SET(ISS_COMPILER_VERSION_MAJOR 6)
+  ELSE(${ISS_COMPILER_EXECUTABLE} MATCHES "6/")
+    SET(ISS_COMPILER_VERSION_MAJOR 5)
+  ENDIF (${ISS_COMPILER_EXECUTABLE} MATCHES "6/")
 ELSE (ISS_COMPILER_EXECUTABLE)
   SET(ISS_COMPILER_FOUND FALSE)
   IF (ISS_COMPILER_REQUIRED)

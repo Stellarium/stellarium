@@ -2,16 +2,16 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
 # CMake 3.20+ is required if x-compiling for Windows on ARM
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
-# Fix behavior of CMAKE_CXX_STANDARD and CMAKE_C_STANDARD when targeting macOS.
-CMAKE_POLICY(SET CMP0025 NEW)
-# Potential dangerous comparison of variables. Details: https://cmake.org/cmake/help/v3.1/policy/CMP0054.html
-CMAKE_POLICY(SET CMP0054 NEW)
-# Let AUTOMOC and AUTOUIC process GENERATED files.
-CMAKE_POLICY(SET CMP0071 NEW)
+CMAKE_POLICY(VERSION 3.16)
 # CMake Policies introduced after version CMAKE_MINIMUM_REQUIRED
 IF(POLICY CMP0175)
      CMAKE_POLICY(SET CMP0175 OLD)
 ENDIF()
+
+SET(ENABLE_EXPORT_COMPILE_COMMANDS 0 CACHE BOOL "Export CMake compile commands for code analysis")
+IF(ENABLE_EXPORT_COMPILE_COMMANDS)
+    SET(CMAKE_EXPORT_COMPILE_COMMANDS on)
+ENDIF(ENABLE_EXPORT_COMPILE_COMMANDS)
 
 # warn about deprecated stuff so that we may try fixing it
 SET(CMAKE_WARN_DEPRECATED 1)
@@ -311,8 +311,14 @@ IF(WIN32)
      # This should also prevent some Winsock.h warnings
      ADD_DEFINITIONS(-DWIN32_LEAN_AND_MEAN)
      IF(NOT MSVC)
-          # MinGW requires enabling of exceptions, version number storage and MinGW-specific threading
-          SET(STEL_MINGW_FLAGS "-fexceptions -fident -mthreads")
+          # MinGW requires enabling of exceptions
+          SET(STEL_MINGW_FLAGS "-fexceptions")
+          # -Og removes some symbols as otherwise the ordinal exceeds the maximum of the 16-bit range.
+          SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Og") 
+          # MinGW clang compiler does not have these flags, but MinGW gcc requires MinGW-specific threading, version number storage
+          IF(NOT ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang"))
+               SET(STEL_MINGW_FLAGS "${STEL_MINGW_FLAGS} -fident -mthreads")
+          ENDIF()
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_GCC_C_FLAGS} ${STEL_MINGW_FLAGS}")
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_GCC_CXX_FLAGS} ${STEL_MINGW_FLAGS}")
      ELSE()
@@ -394,6 +400,8 @@ SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be suppor
 IF(ENABLE_NLS)
      ADD_DEFINITIONS(-DENABLE_NLS)
 ENDIF()
+# This option toggle processing files in po directory
+SET(ENABLE_PODIR 1 CACHE BOOL "Define whether processing of translation files should be supported.")
 
 # Activate media support
 SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
@@ -542,6 +550,7 @@ ADD_PLUGIN(EquationOfTime 1)
 ADD_PLUGIN(MeteorShowers 1)
 ADD_PLUGIN(MosaicCamera 1)
 ADD_PLUGIN(NavStars 1)
+ADD_PLUGIN(NebulaTextures 1)
 ADD_PLUGIN(Novae 1)
 ADD_PLUGIN(Observability 1)
 ADD_PLUGIN(Oculars 1)
@@ -603,38 +612,6 @@ IF(WIN32)
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Svg REQUIRED)
      IF(${QT_VERSION_MAJOR} EQUAL 5)
           FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS XmlPatterns REQUIRED)
-     ENDIF()
-
-     # Qt 5.12 (LTS) and newest version of Qt use OpenSSL 1.1*
-     # Source: https://lists.qt-project.org/pipermail/releasing/2019-March/002614.html
-     SET(OPENSSL_LIBRARY_ARCH "")
-     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
-	  SET(OPENSSL_LIBRARY_ARCH "-x64")
-     ENDIF()
-     # Try found OpenSSL 3.x DLL's on Windows (newest Qt)
-     FIND_FILE(OPENSSL_SSL_LIBRARY_DLL libssl-3${OPENSSL_LIBRARY_ARCH}.dll)
-     FIND_FILE(OPENSSL_CRYPTO_LIBRARY_DLL libcrypto-3${OPENSSL_LIBRARY_ARCH}.dll)
-     # OK, OpenSSL 3.x is not exist, let's try found OpenSSL 1.1.x DLL's
-     IF(NOT EXISTS ${OPENSSL_SSL_LIBRARY_DLL})
-	  FIND_FILE(OPENSSL_SSL_LIBRARY_DLL libssl-1_1${OPENSSL_LIBRARY_ARCH}.dll)
-     ENDIF()
-     IF(NOT EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL})
-	  FIND_FILE(OPENSSL_CRYPTO_LIBRARY_DLL libcrypto-1_1${OPENSSL_LIBRARY_ARCH}.dll)
-     ENDIF()
-
-     IF(NOT STELLARIUM_BUILD_ARM64)
-       SET(ISS_OPENSSL_LIBS "; OpenSSL support")
-       IF(EXISTS ${OPENSSL_SSL_LIBRARY_DLL})
-         MESSAGE(STATUS "Found OpenSSL SSL library: ${OPENSSL_SSL_LIBRARY_DLL}")
-         SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_SSL_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-       ENDIF()
-       IF(EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL})
-         MESSAGE(STATUS "Found OpenSSL crypto library: ${OPENSSL_CRYPTO_LIBRARY_DLL}")
-         SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_CRYPTO_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-       ENDIF()
-       IF((NOT EXISTS ${OPENSSL_SSL_LIBRARY_DLL}) AND (NOT EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL}))
-         SET(ISS_OPENSSL_LIBS "; OpenSSL libraries not found")
-       ENDIF()
      ENDIF()
 
      IF(STELLARIUM_BUILD_ARM64 AND ${QT_VERSION} VERSION_LESS "6.5.0")
@@ -707,8 +684,8 @@ SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 IF(ENABLE_SHOWMYSKY)
     ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
     CPMFindPackage(NAME ShowMySky-Qt${QT_VERSION_MAJOR}
-        URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.3.4.tar.gz
-        URL_HASH SHA256=29ef4c81cf020e131ec79a28c78946d80d422d05818197079cbaa6353ffba16a
+        URL https://github.com/10110111/CalcMySky/archive/refs/heads/master.zip
+        #URL_HASH SHA256=29ef4c81cf020e131ec79a28c78946d80d422d05818197079cbaa6353ffba16a
         EXCLUDE_FROM_ALL yes
         OPTIONS "QT_VERSION ${QT_VERSION_MAJOR}")
     IF(ShowMySky-Qt${QT_VERSION_MAJOR}_ADDED)
@@ -851,8 +828,8 @@ IF(ENABLE_XLSX)
 ENDIF()
 
 CPMFindPackage(NAME md4c
-     URL https://github.com/mity/md4c/archive/refs/tags/release-0.4.8.tar.gz
-     URL_HASH SHA256=4a457df853425b6bb6e3457aa1d1a13bccec587a04c38c622b1013a0da41439f
+     URL https://github.com/mity/md4c/archive/refs/tags/release-0.5.2.tar.gz
+     URL_HASH SHA256=55d0111d48fb11883aaee91465e642b8b640775a4d6993c2d0e7a8092758ef21
      EXCLUDE_FROM_ALL yes
      OPTIONS "BUILD_MD2HTML_EXECUTABLE OFF")
 IF(md4c_ADDED)
@@ -923,23 +900,23 @@ IF(WIN32)
      #######################################################
 
      IF(STELLARIUM_BUILD_ARM64) # 64bit ARM build?
-	  SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on arm64:\nArchitecturesAllowed=arm64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=arm64")
-	  SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-arm64")
+          SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on arm64:\nArchitecturesAllowed=arm64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=arm64")
+          SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-arm64")
      ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
-	  SET(ISS_ARCHITECTURE_SPECIFIC "")
-	  SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-win32")
+          SET(ISS_ARCHITECTURE_SPECIFIC "")
+          SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-win32")
      ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
-	  SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
-	  SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-win64")
+          SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
+          SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-win64")
      ENDIF()
      SET(ISS_AUTOGENERATED_WARNING "Do not edit this file! It has been automatically generated by CMake. Your changes will be lost the next time CMake is run.")
 
      GET_FILENAME_COMPONENT(_qt_bin_dir "${QMAKE_LOCATION}" DIRECTORY)
      FIND_PROGRAM(WINDEPLOYQT_COMMAND windeployqt HINTS "${_qt_bin_dir}")
      IF(WINDEPLOYQT_COMMAND)
-	  MESSAGE(STATUS "Found windeployqt: ${WINDEPLOYQT_COMMAND}")
+          MESSAGE(STATUS "Found windeployqt: ${WINDEPLOYQT_COMMAND}")
      ELSE()
-	  MESSAGE(STATUS "Could NOT find windeployqt")
+          MESSAGE(STATUS "Could NOT find windeployqt")
      ENDIF()
 
      SET(ISS_STELLARIUM_STUFF "; Additional libraries")
@@ -1039,26 +1016,32 @@ ENDIF()
 
 ########### Windows packaging ###############
 IF(WIN32)
-     CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
-     CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium-patch.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium-patch.iss @ONLY)
      FIND_PACKAGE(ISCC)
      IF(ISS_COMPILER_FOUND)
-	  # Add a full installer target
+          IF(${ISS_COMPILER_VERSION_MAJOR} EQUAL 6)
+               CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium.iss6.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
+               CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium-patch.iss6.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium-patch.iss @ONLY)
+          ELSE()
+               CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
+               CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium-patch.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium-patch.iss @ONLY)
+          ENDIF()
+
+          # Add a full installer target
           ADD_CUSTOM_TARGET(
                stellarium-installer
-	       COMMAND ${ISS_COMPILER_EXECUTABLE} "${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss"
+               COMMAND ${ISS_COMPILER_EXECUTABLE} "${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss"
                COMMENT "Making an installer package for Windows..."
                VERBATIM
           )
-	  # Add installer target
-	  ADD_CUSTOM_TARGET(
-	       stellarium-patch-installer
-	       COMMAND ${ISS_COMPILER_EXECUTABLE} "${CMAKE_CURRENT_BINARY_DIR}/stellarium-patch.iss"
-	       COMMENT "Making an installer package for Windows..."
-	       VERBATIM
-	  )
+          # Add installer target
+          ADD_CUSTOM_TARGET(
+               stellarium-patch-installer
+               COMMAND ${ISS_COMPILER_EXECUTABLE} "${CMAKE_CURRENT_BINARY_DIR}/stellarium-patch.iss"
+               COMMENT "Making an installer package for Windows..."
+               VERBATIM
+          )
      ELSE()
-	  MESSAGE(STATUS "Could NOT find Inno Setup compiler. You won't be able to build setup files.")
+          MESSAGE(STATUS "Could NOT find Inno Setup compiler. You won't be able to build setup files.")
      ENDIF()
 ENDIF()
 
@@ -1129,6 +1112,6 @@ IF(ENABLE_SHOWMYSKY)
      # add atmosphere models
      ADD_SUBDIRECTORY( atmosphere )
 ENDIF()
-IF(ENABLE_NLS)
+IF(ENABLE_NLS AND ENABLE_PODIR)
      ADD_SUBDIRECTORY( po )
 ENDIF()

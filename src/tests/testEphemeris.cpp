@@ -1031,16 +1031,15 @@ void TestEphemeris::testMercuryHeliocentricEphemerisVsop87()
 {
 	const int planet_id = 0; // Mercury
 	const double acceptableError = 1E-04;
-	double jd, x, y, z;
 	double xyz[6];
 
 	QVariantList mercuryVSOP = mercury;
 	while(mercuryVSOP.count() >= 3)
 	{
-		jd = mercuryVSOP.takeFirst().toDouble();
-		x  = mercuryVSOP.takeFirst().toDouble();
-		y  = mercuryVSOP.takeFirst().toDouble();
-		z  = mercuryVSOP.takeFirst().toDouble();
+		double jd = mercuryVSOP.takeFirst().toDouble();
+		double x  = mercuryVSOP.takeFirst().toDouble();
+		double y  = mercuryVSOP.takeFirst().toDouble();
+		double z  = mercuryVSOP.takeFirst().toDouble();
 
 		GetVsop87Coor(jd, planet_id, xyz);
 
@@ -1065,16 +1064,15 @@ void TestEphemeris::testVenusHeliocentricEphemerisVsop87()
 {
 	const int planet_id = 1; // Venus
 	const double acceptableError = 1E-05;
-	double jd, x, y, z;
 	double xyz[6];
 
 	QVariantList venusVSOP = venus;
 	while(venusVSOP.count() >= 3)
 	{
-		jd = venusVSOP.takeFirst().toDouble();
-		x  = venusVSOP.takeFirst().toDouble();
-		y  = venusVSOP.takeFirst().toDouble();
-		z  = venusVSOP.takeFirst().toDouble();
+		double jd = venusVSOP.takeFirst().toDouble();
+		double x  = venusVSOP.takeFirst().toDouble();
+		double y  = venusVSOP.takeFirst().toDouble();
+		double z  = venusVSOP.takeFirst().toDouble();
 
 		GetVsop87Coor(jd, planet_id, xyz);
 
@@ -1099,16 +1097,15 @@ void TestEphemeris::testMarsHeliocentricEphemerisVsop87()
 {
 	const int planet_id = 3; // Mars
 	const double acceptableError = 1E-04;
-	double jd, x, y, z;
 	double xyz[6];
 
 	QVariantList marsVSOP = mars;
 	while(marsVSOP.count() >= 3)
 	{
-		jd = marsVSOP.takeFirst().toDouble();
-		x  = marsVSOP.takeFirst().toDouble();
-		y  = marsVSOP.takeFirst().toDouble();
-		z  = marsVSOP.takeFirst().toDouble();
+		double jd = marsVSOP.takeFirst().toDouble();
+		double x  = marsVSOP.takeFirst().toDouble();
+		double y  = marsVSOP.takeFirst().toDouble();
+		double z  = marsVSOP.takeFirst().toDouble();
 
 		GetVsop87Coor(jd, planet_id, xyz);
 
@@ -1133,16 +1130,15 @@ void TestEphemeris::testJupiterHeliocentricEphemerisVsop87()
 {
 	const int planet_id = 4; // Jupiter
 	const double acceptableError = 1E-04;
-	double jd, x, y, z;
 	double xyz[6];
 
 	QVariantList jupiterVSOP = jupiter;
 	while(jupiterVSOP.count() >= 3)
 	{
-		jd = jupiterVSOP.takeFirst().toDouble();
-		x  = jupiterVSOP.takeFirst().toDouble();
-		y  = jupiterVSOP.takeFirst().toDouble();
-		z  = jupiterVSOP.takeFirst().toDouble();
+		double jd = jupiterVSOP.takeFirst().toDouble();
+		double x  = jupiterVSOP.takeFirst().toDouble();
+		double y  = jupiterVSOP.takeFirst().toDouble();
+		double z  = jupiterVSOP.takeFirst().toDouble();
 
 		GetVsop87Coor(jd, planet_id, xyz);
 
@@ -1167,16 +1163,15 @@ void TestEphemeris::testSaturnHeliocentricEphemerisVsop87()
 {
 	const int planet_id = 5; // Saturn
 	const double acceptableError = 1E-04;
-	double jd, x, y, z;
 	double xyz[6];
 
 	QVariantList saturnVSOP = saturn;
 	while(saturnVSOP.count() >= 3)
 	{
-		jd = saturnVSOP.takeFirst().toDouble();
-		x  = saturnVSOP.takeFirst().toDouble();
-		y  = saturnVSOP.takeFirst().toDouble();
-		z  = saturnVSOP.takeFirst().toDouble();
+		double jd = saturnVSOP.takeFirst().toDouble();
+		double x  = saturnVSOP.takeFirst().toDouble();
+		double y  = saturnVSOP.takeFirst().toDouble();
+		double z  = saturnVSOP.takeFirst().toDouble();
 
 		GetVsop87Coor(jd, planet_id, xyz);
 
@@ -1201,16 +1196,15 @@ void TestEphemeris::testUranusHeliocentricEphemerisVsop87()
 {
 	const int planet_id = 6; // Uranus
 	const double acceptableError = 1E-03;
-	double jd, x, y, z;
 	double xyz[6];
 
 	QVariantList uranusVSOP = uranus;
 	while(uranusVSOP.count() >= 3)
 	{
-		jd = uranusVSOP.takeFirst().toDouble();
-		x  = uranusVSOP.takeFirst().toDouble();
-		y  = uranusVSOP.takeFirst().toDouble();
-		z  = uranusVSOP.takeFirst().toDouble();
+		double jd = uranusVSOP.takeFirst().toDouble();
+		double x  = uranusVSOP.takeFirst().toDouble();
+		double y  = uranusVSOP.takeFirst().toDouble();
+		double z  = uranusVSOP.takeFirst().toDouble();
 
 		GetVsop87Coor(jd, planet_id, xyz);
 
@@ -1235,16 +1229,15 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisVsop87()
 {
 	const int planet_id = 7; // Neptune
 	const double acceptableError = 1E-03;
-	double jd, x, y, z;
 	double xyz[6];
 
 	QVariantList neptuneVSOP = neptune;
 	while(neptuneVSOP.count() >= 3)
 	{
-		jd = neptuneVSOP.takeFirst().toDouble();
-		x  = neptuneVSOP.takeFirst().toDouble();
-		y  = neptuneVSOP.takeFirst().toDouble();
-		z  = neptuneVSOP.takeFirst().toDouble();
+		double jd = neptuneVSOP.takeFirst().toDouble();
+		double x  = neptuneVSOP.takeFirst().toDouble();
+		double y  = neptuneVSOP.takeFirst().toDouble();
+		double z  = neptuneVSOP.takeFirst().toDouble();
 
 		GetVsop87Coor(jd, planet_id, xyz);
 
@@ -1273,16 +1266,15 @@ void TestEphemeris::testMercuryHeliocentricEphemerisDe430()
 	{
 		const int planet_id = 1; // Mercury (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList mercuryDEx = mercury;
 		while(mercuryDEx.count() >= 3)
 		{
-			jd = mercuryDEx.takeFirst().toDouble();
-			x  = mercuryDEx.takeFirst().toDouble();
-			y  = mercuryDEx.takeFirst().toDouble();
-			z  = mercuryDEx.takeFirst().toDouble();
+			double jd = mercuryDEx.takeFirst().toDouble();
+			double x  = mercuryDEx.takeFirst().toDouble();
+			double y  = mercuryDEx.takeFirst().toDouble();
+			double z  = mercuryDEx.takeFirst().toDouble();
 
 			if (jd > 2287184.5 && jd < 2688976.5)
 			{
@@ -1315,16 +1307,15 @@ void TestEphemeris::testVenusHeliocentricEphemerisDe430()
 	{
 		const int planet_id = 2; // Venus (JPL ID)
 		const double acceptableError = 1E-05;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList venusDEx = venus;
 		while(venusDEx.count() >= 3)
 		{
-			jd = venusDEx.takeFirst().toDouble();
-			x  = venusDEx.takeFirst().toDouble();
-			y  = venusDEx.takeFirst().toDouble();
-			z  = venusDEx.takeFirst().toDouble();
+			double jd = venusDEx.takeFirst().toDouble();
+			double x  = venusDEx.takeFirst().toDouble();
+			double y  = venusDEx.takeFirst().toDouble();
+			double z  = venusDEx.takeFirst().toDouble();
 
 			if (jd > 2287184.5 && jd < 2688976.5)
 			{
@@ -1357,16 +1348,15 @@ void TestEphemeris::testMarsHeliocentricEphemerisDe430()
 	{
 		const int planet_id = 4; // Mars (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList marsDEx = mars;
 		while(marsDEx.count() >= 3)
 		{
-			jd = marsDEx.takeFirst().toDouble();
-			x  = marsDEx.takeFirst().toDouble();
-			y  = marsDEx.takeFirst().toDouble();
-			z  = marsDEx.takeFirst().toDouble();
+			double jd = marsDEx.takeFirst().toDouble();
+			double x  = marsDEx.takeFirst().toDouble();
+			double y  = marsDEx.takeFirst().toDouble();
+			double z  = marsDEx.takeFirst().toDouble();
 
 			if (jd > 2287184.5 && jd < 2688976.5)
 			{
@@ -1399,16 +1389,15 @@ void TestEphemeris::testJupiterHeliocentricEphemerisDe430()
 	{
 		const int planet_id = 5; // Jupiter (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList jupiterDEx = jupiter;
 		while(jupiterDEx.count() >= 3)
 		{
-			jd = jupiterDEx.takeFirst().toDouble();
-			x  = jupiterDEx.takeFirst().toDouble();
-			y  = jupiterDEx.takeFirst().toDouble();
-			z  = jupiterDEx.takeFirst().toDouble();
+			double jd = jupiterDEx.takeFirst().toDouble();
+			double x  = jupiterDEx.takeFirst().toDouble();
+			double y  = jupiterDEx.takeFirst().toDouble();
+			double z  = jupiterDEx.takeFirst().toDouble();
 
 			if (jd > 2287184.5 && jd < 2688976.5)
 			{
@@ -1441,16 +1430,15 @@ void TestEphemeris::testSaturnHeliocentricEphemerisDe430()
 	{
 		const int planet_id = 6; // Saturn (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList saturnDEx = saturn;
 		while(saturnDEx.count() >= 3)
 		{
-			jd = saturnDEx.takeFirst().toDouble();
-			x  = saturnDEx.takeFirst().toDouble();
-			y  = saturnDEx.takeFirst().toDouble();
-			z  = saturnDEx.takeFirst().toDouble();
+			double jd = saturnDEx.takeFirst().toDouble();
+			double x  = saturnDEx.takeFirst().toDouble();
+			double y  = saturnDEx.takeFirst().toDouble();
+			double z  = saturnDEx.takeFirst().toDouble();
 
 			if (jd > 2287184.5 && jd < 2688976.5)
 			{
@@ -1483,16 +1471,15 @@ void TestEphemeris::testUranusHeliocentricEphemerisDe430()
 	{
 		const int planet_id = 7; // Uranus (JPL ID)
 		const double acceptableError = 1E-03;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList uranusDEx = uranus;
 		while(uranusDEx.count() >= 3)
 		{
-			jd = uranusDEx.takeFirst().toDouble();
-			x  = uranusDEx.takeFirst().toDouble();
-			y  = uranusDEx.takeFirst().toDouble();
-			z  = uranusDEx.takeFirst().toDouble();
+			double jd = uranusDEx.takeFirst().toDouble();
+			double x  = uranusDEx.takeFirst().toDouble();
+			double y  = uranusDEx.takeFirst().toDouble();
+			double z  = uranusDEx.takeFirst().toDouble();
 
 			if (jd > 2287184.5 && jd < 2688976.5)
 			{
@@ -1525,16 +1512,15 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe430()
 	{
 		const int planet_id = 8; // Neptune (JPL ID)
 		const double acceptableError = 1E-03;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList neptuneDEx = neptune;
 		while(neptuneDEx.count() >= 3)
 		{
-			jd = neptuneDEx.takeFirst().toDouble();
-			x  = neptuneDEx.takeFirst().toDouble();
-			y  = neptuneDEx.takeFirst().toDouble();
-			z  = neptuneDEx.takeFirst().toDouble();
+			double jd = neptuneDEx.takeFirst().toDouble();
+			double x  = neptuneDEx.takeFirst().toDouble();
+			double y  = neptuneDEx.takeFirst().toDouble();
+			double z  = neptuneDEx.takeFirst().toDouble();
 
 			if (jd > 2287184.5 && jd < 2688976.5)
 			{
@@ -1567,16 +1553,15 @@ void TestEphemeris::testMercuryHeliocentricEphemerisDe431()
 	{
 		const int planet_id = 1; // Mercury (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList mercuryDEx = mercury;
 		while(mercuryDEx.count() >= 3)
 		{
-			jd = mercuryDEx.takeFirst().toDouble();
-			x  = mercuryDEx.takeFirst().toDouble();
-			y  = mercuryDEx.takeFirst().toDouble();
-			z  = mercuryDEx.takeFirst().toDouble();
+			double jd = mercuryDEx.takeFirst().toDouble();
+			double x  = mercuryDEx.takeFirst().toDouble();
+			double y  = mercuryDEx.takeFirst().toDouble();
+			double z  = mercuryDEx.takeFirst().toDouble();
 
 			if (jd > -3027188.25 && jd < 7930056.87916)
 			{
@@ -1609,16 +1594,15 @@ void TestEphemeris::testVenusHeliocentricEphemerisDe431()
 	{
 		const int planet_id = 2; // Venus (JPL ID)
 		const double acceptableError = 1E-05;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList venusDEx = venus;
 		while(venusDEx.count() >= 3)
 		{
-			jd = venusDEx.takeFirst().toDouble();
-			x  = venusDEx.takeFirst().toDouble();
-			y  = venusDEx.takeFirst().toDouble();
-			z  = venusDEx.takeFirst().toDouble();
+			double jd = venusDEx.takeFirst().toDouble();
+			double x  = venusDEx.takeFirst().toDouble();
+			double y  = venusDEx.takeFirst().toDouble();
+			double z  = venusDEx.takeFirst().toDouble();
 
 			if (jd > -3027188.25 && jd < 7930056.87916)
 			{
@@ -1651,16 +1635,15 @@ void TestEphemeris::testMarsHeliocentricEphemerisDe431()
 	{
 		const int planet_id = 4; // Mars (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList marsDEx = mars;
 		while(marsDEx.count() >= 3)
 		{
-			jd = marsDEx.takeFirst().toDouble();
-			x  = marsDEx.takeFirst().toDouble();
-			y  = marsDEx.takeFirst().toDouble();
-			z  = marsDEx.takeFirst().toDouble();
+			double jd = marsDEx.takeFirst().toDouble();
+			double x  = marsDEx.takeFirst().toDouble();
+			double y  = marsDEx.takeFirst().toDouble();
+			double z  = marsDEx.takeFirst().toDouble();
 
 			if (jd > -3027188.25 && jd < 7930056.87916)
 			{
@@ -1693,16 +1676,15 @@ void TestEphemeris::testJupiterHeliocentricEphemerisDe431()
 	{
 		const int planet_id = 5; // Jupiter (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList jupiterDEx = jupiter;
 		while(jupiterDEx.count() >= 3)
 		{
-			jd = jupiterDEx.takeFirst().toDouble();
-			x  = jupiterDEx.takeFirst().toDouble();
-			y  = jupiterDEx.takeFirst().toDouble();
-			z  = jupiterDEx.takeFirst().toDouble();
+			double jd = jupiterDEx.takeFirst().toDouble();
+			double x  = jupiterDEx.takeFirst().toDouble();
+			double y  = jupiterDEx.takeFirst().toDouble();
+			double z  = jupiterDEx.takeFirst().toDouble();
 
 			if (jd > -3027188.25 && jd < 7930056.87916)
 			{
@@ -1735,16 +1717,15 @@ void TestEphemeris::testSaturnHeliocentricEphemerisDe431()
 	{
 		const int planet_id = 6; // Saturn (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList saturnDEx = saturn;
 		while(saturnDEx.count() >= 3)
 		{
-			jd = saturnDEx.takeFirst().toDouble();
-			x  = saturnDEx.takeFirst().toDouble();
-			y  = saturnDEx.takeFirst().toDouble();
-			z  = saturnDEx.takeFirst().toDouble();
+			double jd = saturnDEx.takeFirst().toDouble();
+			double x  = saturnDEx.takeFirst().toDouble();
+			double y  = saturnDEx.takeFirst().toDouble();
+			double z  = saturnDEx.takeFirst().toDouble();
 
 			if (jd > -3027188.25 && jd < 7930056.87916)
 			{
@@ -1777,16 +1758,15 @@ void TestEphemeris::testUranusHeliocentricEphemerisDe431()
 	{
 		const int planet_id = 7; // Uranus (JPL ID)
 		const double acceptableError = 1E-03;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList uranusDEx = uranus;
 		while(uranusDEx.count() >= 3)
 		{
-			jd = uranusDEx.takeFirst().toDouble();
-			x  = uranusDEx.takeFirst().toDouble();
-			y  = uranusDEx.takeFirst().toDouble();
-			z  = uranusDEx.takeFirst().toDouble();
+			double jd = uranusDEx.takeFirst().toDouble();
+			double x  = uranusDEx.takeFirst().toDouble();
+			double y  = uranusDEx.takeFirst().toDouble();
+			double z  = uranusDEx.takeFirst().toDouble();
 
 			if (jd > -3027188.25 && jd < 7930056.87916)
 			{
@@ -1819,16 +1799,15 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe431()
 	{
 		const int planet_id = 8; // Neptune (JPL ID)
 		const double acceptableError = 1E-03;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList neptuneDEx = neptune;
 		while(neptuneDEx.count() >= 3)
 		{
-			jd = neptuneDEx.takeFirst().toDouble();
-			x  = neptuneDEx.takeFirst().toDouble();
-			y  = neptuneDEx.takeFirst().toDouble();
-			z  = neptuneDEx.takeFirst().toDouble();
+			double jd = neptuneDEx.takeFirst().toDouble();
+			double x  = neptuneDEx.takeFirst().toDouble();
+			double y  = neptuneDEx.takeFirst().toDouble();
+			double z  = neptuneDEx.takeFirst().toDouble();
 
 			if (jd > -3027188.25 && jd < 7930056.87916)
 			{
@@ -1861,16 +1840,15 @@ void TestEphemeris::testMercuryHeliocentricEphemerisDe440()
 	{
 		const int planet_id = 1; // Mercury (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList mercuryDEx = mercury;
 		while(mercuryDEx.count() >= 3)
 		{
-			jd = mercuryDEx.takeFirst().toDouble();
-			x  = mercuryDEx.takeFirst().toDouble();
-			y  = mercuryDEx.takeFirst().toDouble();
-			z  = mercuryDEx.takeFirst().toDouble();
+			double jd = mercuryDEx.takeFirst().toDouble();
+			double x  = mercuryDEx.takeFirst().toDouble();
+			double y  = mercuryDEx.takeFirst().toDouble();
+			double z  = mercuryDEx.takeFirst().toDouble();
 
 			if (jd > 2287184.5 && jd < 2688976.5)
 			{
@@ -1903,16 +1881,15 @@ void TestEphemeris::testVenusHeliocentricEphemerisDe440()
 	{
 		const int planet_id = 2; // Venus (JPL ID)
 		const double acceptableError = 1E-05;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList venusDEx = venus;
 		while(venusDEx.count() >= 3)
 		{
-			jd = venusDEx.takeFirst().toDouble();
-			x  = venusDEx.takeFirst().toDouble();
-			y  = venusDEx.takeFirst().toDouble();
-			z  = venusDEx.takeFirst().toDouble();
+			double jd = venusDEx.takeFirst().toDouble();
+			double x  = venusDEx.takeFirst().toDouble();
+			double y  = venusDEx.takeFirst().toDouble();
+			double z  = venusDEx.takeFirst().toDouble();
 
 			if (jd > 2287184.5 && jd < 2688976.5)
 			{
@@ -1945,16 +1922,15 @@ void TestEphemeris::testMarsHeliocentricEphemerisDe440()
 	{
 		const int planet_id = 4; // Mars (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList marsDEx = mars;
 		while(marsDEx.count() >= 3)
 		{
-			jd = marsDEx.takeFirst().toDouble();
-			x  = marsDEx.takeFirst().toDouble();
-			y  = marsDEx.takeFirst().toDouble();
-			z  = marsDEx.takeFirst().toDouble();
+			double jd = marsDEx.takeFirst().toDouble();
+			double x  = marsDEx.takeFirst().toDouble();
+			double y  = marsDEx.takeFirst().toDouble();
+			double z  = marsDEx.takeFirst().toDouble();
 
 			if (jd > 2287184.5 && jd < 2688976.5)
 			{
@@ -1987,16 +1963,15 @@ void TestEphemeris::testJupiterHeliocentricEphemerisDe440()
 	{
 		const int planet_id = 5; // Jupiter (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList jupiterDEx = jupiter;
 		while(jupiterDEx.count() >= 3)
 		{
-			jd = jupiterDEx.takeFirst().toDouble();
-			x  = jupiterDEx.takeFirst().toDouble();
-			y  = jupiterDEx.takeFirst().toDouble();
-			z  = jupiterDEx.takeFirst().toDouble();
+			double jd = jupiterDEx.takeFirst().toDouble();
+			double x  = jupiterDEx.takeFirst().toDouble();
+			double y  = jupiterDEx.takeFirst().toDouble();
+			double z  = jupiterDEx.takeFirst().toDouble();
 
 			if (jd > 2287184.5 && jd < 2688976.5)
 			{
@@ -2029,16 +2004,15 @@ void TestEphemeris::testSaturnHeliocentricEphemerisDe440()
 	{
 		const int planet_id = 6; // Saturn (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList saturnDEx = saturn;
 		while(saturnDEx.count() >= 3)
 		{
-			jd = saturnDEx.takeFirst().toDouble();
-			x  = saturnDEx.takeFirst().toDouble();
-			y  = saturnDEx.takeFirst().toDouble();
-			z  = saturnDEx.takeFirst().toDouble();
+			double jd = saturnDEx.takeFirst().toDouble();
+			double x  = saturnDEx.takeFirst().toDouble();
+			double y  = saturnDEx.takeFirst().toDouble();
+			double z  = saturnDEx.takeFirst().toDouble();
 
 			if (jd > 2287184.5 && jd < 2688976.5)
 			{
@@ -2071,16 +2045,15 @@ void TestEphemeris::testUranusHeliocentricEphemerisDe440()
 	{
 		const int planet_id = 7; // Uranus (JPL ID)
 		const double acceptableError = 1E-03;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList uranusDEx = uranus;
 		while(uranusDEx.count() >= 3)
 		{
-			jd = uranusDEx.takeFirst().toDouble();
-			x  = uranusDEx.takeFirst().toDouble();
-			y  = uranusDEx.takeFirst().toDouble();
-			z  = uranusDEx.takeFirst().toDouble();
+			double jd = uranusDEx.takeFirst().toDouble();
+			double x  = uranusDEx.takeFirst().toDouble();
+			double y  = uranusDEx.takeFirst().toDouble();
+			double z  = uranusDEx.takeFirst().toDouble();
 
 			if (jd > 2287184.5 && jd < 2688976.5)
 			{
@@ -2113,16 +2086,15 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe440()
 	{
 		const int planet_id = 8; // Neptune (JPL ID)
 		const double acceptableError = 1E-03;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList neptuneDEx = neptune;
 		while(neptuneDEx.count() >= 3)
 		{
-			jd = neptuneDEx.takeFirst().toDouble();
-			x  = neptuneDEx.takeFirst().toDouble();
-			y  = neptuneDEx.takeFirst().toDouble();
-			z  = neptuneDEx.takeFirst().toDouble();
+			double jd = neptuneDEx.takeFirst().toDouble();
+			double x  = neptuneDEx.takeFirst().toDouble();
+			double y  = neptuneDEx.takeFirst().toDouble();
+			double z  = neptuneDEx.takeFirst().toDouble();
 
 			if (jd > 2287184.5 && jd < 2688976.5)
 			{
@@ -2155,16 +2127,15 @@ void TestEphemeris::testMercuryHeliocentricEphemerisDe441()
 	{
 		const int planet_id = 1; // Mercury (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList mercuryDEx = mercury;
 		while(mercuryDEx.count() >= 3)
 		{
-			jd = mercuryDEx.takeFirst().toDouble();
-			x  = mercuryDEx.takeFirst().toDouble();
-			y  = mercuryDEx.takeFirst().toDouble();
-			z  = mercuryDEx.takeFirst().toDouble();
+			double jd = mercuryDEx.takeFirst().toDouble();
+			double x  = mercuryDEx.takeFirst().toDouble();
+			double y  = mercuryDEx.takeFirst().toDouble();
+			double z  = mercuryDEx.takeFirst().toDouble();
 
 			if (jd > -3027188.25 && jd < 7930056.87916)
 			{
@@ -2197,16 +2168,15 @@ void TestEphemeris::testVenusHeliocentricEphemerisDe441()
 	{
 		const int planet_id = 2; // Venus (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList venusDEx = venus;
 		while(venusDEx.count() >= 3)
 		{
-			jd = venusDEx.takeFirst().toDouble();
-			x  = venusDEx.takeFirst().toDouble();
-			y  = venusDEx.takeFirst().toDouble();
-			z  = venusDEx.takeFirst().toDouble();
+			double jd = venusDEx.takeFirst().toDouble();
+			double x  = venusDEx.takeFirst().toDouble();
+			double y  = venusDEx.takeFirst().toDouble();
+			double z  = venusDEx.takeFirst().toDouble();
 
 			if (jd > -3027188.25 && jd < 7930056.87916)
 			{
@@ -2239,16 +2209,15 @@ void TestEphemeris::testMarsHeliocentricEphemerisDe441()
 	{
 		const int planet_id = 4; // Mars (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList marsDEx = mars;
 		while(marsDEx.count() >= 3)
 		{
-			jd = marsDEx.takeFirst().toDouble();
-			x  = marsDEx.takeFirst().toDouble();
-			y  = marsDEx.takeFirst().toDouble();
-			z  = marsDEx.takeFirst().toDouble();
+			double jd = marsDEx.takeFirst().toDouble();
+			double x  = marsDEx.takeFirst().toDouble();
+			double y  = marsDEx.takeFirst().toDouble();
+			double z  = marsDEx.takeFirst().toDouble();
 
 			if (jd > -3027188.25 && jd < 7930056.87916)
 			{
@@ -2281,16 +2250,15 @@ void TestEphemeris::testJupiterHeliocentricEphemerisDe441()
 	{
 		const int planet_id = 5; // Jupiter (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList jupiterDEx = jupiter;
 		while(jupiterDEx.count() >= 3)
 		{
-			jd = jupiterDEx.takeFirst().toDouble();
-			x  = jupiterDEx.takeFirst().toDouble();
-			y  = jupiterDEx.takeFirst().toDouble();
-			z  = jupiterDEx.takeFirst().toDouble();
+			double jd = jupiterDEx.takeFirst().toDouble();
+			double x  = jupiterDEx.takeFirst().toDouble();
+			double y  = jupiterDEx.takeFirst().toDouble();
+			double z  = jupiterDEx.takeFirst().toDouble();
 
 			if (jd > -3027188.25 && jd < 7930056.87916)
 			{
@@ -2323,16 +2291,15 @@ void TestEphemeris::testSaturnHeliocentricEphemerisDe441()
 	{
 		const int planet_id = 6; // Saturn (JPL ID)
 		const double acceptableError = 1E-04;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList saturnDEx = saturn;
 		while(saturnDEx.count() >= 3)
 		{
-			jd = saturnDEx.takeFirst().toDouble();
-			x  = saturnDEx.takeFirst().toDouble();
-			y  = saturnDEx.takeFirst().toDouble();
-			z  = saturnDEx.takeFirst().toDouble();
+			double jd = saturnDEx.takeFirst().toDouble();
+			double x  = saturnDEx.takeFirst().toDouble();
+			double y  = saturnDEx.takeFirst().toDouble();
+			double z  = saturnDEx.takeFirst().toDouble();
 
 			if (jd > -3027188.25 && jd < 7930056.87916)
 			{
@@ -2365,16 +2332,15 @@ void TestEphemeris::testUranusHeliocentricEphemerisDe441()
 	{
 		const int planet_id = 7; // Uranus (JPL ID)
 		const double acceptableError = 1E-03;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList uranusDEx = uranus;
 		while(uranusDEx.count() >= 3)
 		{
-			jd = uranusDEx.takeFirst().toDouble();
-			x  = uranusDEx.takeFirst().toDouble();
-			y  = uranusDEx.takeFirst().toDouble();
-			z  = uranusDEx.takeFirst().toDouble();
+			double jd = uranusDEx.takeFirst().toDouble();
+			double x  = uranusDEx.takeFirst().toDouble();
+			double y  = uranusDEx.takeFirst().toDouble();
+			double z  = uranusDEx.takeFirst().toDouble();
 
 			if (jd > -3027188.25 && jd < 7930056.87916)
 			{
@@ -2407,16 +2373,15 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe441()
 	{
 		const int planet_id = 8; // Neptune (JPL ID)
 		const double acceptableError = 1E-03;
-		double jd, x, y, z;
 		double xyz[6];
 
 		QVariantList neptuneDEx = neptune;
 		while(neptuneDEx.count() >= 3)
 		{
-			jd = neptuneDEx.takeFirst().toDouble();
-			x  = neptuneDEx.takeFirst().toDouble();
-			y  = neptuneDEx.takeFirst().toDouble();
-			z  = neptuneDEx.takeFirst().toDouble();
+			double jd = neptuneDEx.takeFirst().toDouble();
+			double x  = neptuneDEx.takeFirst().toDouble();
+			double y  = neptuneDEx.takeFirst().toDouble();
+			double z  = neptuneDEx.takeFirst().toDouble();
 
 			if (jd > -3027188.25 && jd < 7930056.87916)
 			{
@@ -2445,7 +2410,6 @@ void TestEphemeris::testL12Theory()
 {
 	double pos[3], vel[3];
 	double acceptableError = 1E-2; // need re-check
-	double JD, t1, t2, t3, ae1, ae2, ae3;
 
 	// test data: ftp://ftp.imcce.fr/pub/ephem/satel/galilean/L1/L1.2/TestL1.2.res
 	// Should we use differences on elements as source of acceptable errors?
@@ -2467,16 +2431,16 @@ void TestEphemeris::testL12Theory()
 
 	while (sat1TestData.count() >= 4)
 	{
-		JD = sat1TestData.takeFirst().toDouble();
+		double JD = sat1TestData.takeFirst().toDouble();
 		// position
-		t1  = sat1TestData.takeFirst().toDouble();
-		t2  = sat1TestData.takeFirst().toDouble();
-		t3  = sat1TestData.takeFirst().toDouble();
+		double t1  = sat1TestData.takeFirst().toDouble();
+		double t2  = sat1TestData.takeFirst().toDouble();
+		double t3  = sat1TestData.takeFirst().toDouble();
 
 		GetL12Coor(JD, 0, pos, vel);
-		ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
-		ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
-		ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
+		double ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
+		double ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
+		double ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
 		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,
 			 QString("Sat 1; JD=%1 P[0]=%2 (%5) P[1]=%3 (%6) P[2]=%4 (%7)")
 			 .arg(QString::number(JD, 'f', 2))
@@ -2506,16 +2470,16 @@ void TestEphemeris::testL12Theory()
 
 	while (sat2TestData.count() >= 4)
 	{
-		JD = sat2TestData.takeFirst().toDouble();
+		double JD = sat2TestData.takeFirst().toDouble();
 		// position
-		t1  = sat2TestData.takeFirst().toDouble();
-		t2  = sat2TestData.takeFirst().toDouble();
-		t3  = sat2TestData.takeFirst().toDouble();
+		double t1  = sat2TestData.takeFirst().toDouble();
+		double t2  = sat2TestData.takeFirst().toDouble();
+		double t3  = sat2TestData.takeFirst().toDouble();
 
 		GetL12Coor(JD, 1, pos, vel);
-		ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
-		ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
-		ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
+		double ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
+		double ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
+		double ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
 		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,
 			 QString("Sat 2; JD=%1 P[0]=%2 (%5) P[1]=%3 (%6) P[2]=%4 (%7)")
 			 .arg(QString::number(JD, 'f', 2))
@@ -2545,16 +2509,16 @@ void TestEphemeris::testL12Theory()
 
 	while (sat3TestData.count() >= 4)
 	{
-		JD = sat3TestData.takeFirst().toDouble();
+		double JD = sat3TestData.takeFirst().toDouble();
 		// position
-		t1  = sat3TestData.takeFirst().toDouble();
-		t2  = sat3TestData.takeFirst().toDouble();
-		t3  = sat3TestData.takeFirst().toDouble();
+		double t1  = sat3TestData.takeFirst().toDouble();
+		double t2  = sat3TestData.takeFirst().toDouble();
+		double t3  = sat3TestData.takeFirst().toDouble();
 
 		GetL12Coor(JD, 2, pos, vel);
-		ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
-		ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
-		ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
+		double ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
+		double ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
+		double ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
 		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,
 			 QString("Sat 3; JD=%1 P[0]=%2 (%5) P[1]=%3 (%6) P[2]=%4 (%7)")
 			 .arg(QString::number(JD, 'f', 2))
@@ -2584,16 +2548,16 @@ void TestEphemeris::testL12Theory()
 
 	while (sat4TestData.count() >= 4)
 	{
-		JD = sat4TestData.takeFirst().toDouble();
+		double JD = sat4TestData.takeFirst().toDouble();
 		// position
-		t1  = sat4TestData.takeFirst().toDouble();
-		t2  = sat4TestData.takeFirst().toDouble();
-		t3  = sat4TestData.takeFirst().toDouble();
+		double t1  = sat4TestData.takeFirst().toDouble();
+		double t2  = sat4TestData.takeFirst().toDouble();
+		double t3  = sat4TestData.takeFirst().toDouble();
 
 		GetL12Coor(JD, 3, pos, vel);
-		ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
-		ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
-		ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
+		double ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
+		double ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
+		double ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
 		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,
 			 QString("Sat 4; JD=%1 P[0]=%2 (%5) P[1]=%3 (%6) P[2]=%4 (%7)")
 			 .arg(QString::number(JD, 'f', 2))
@@ -2611,7 +2575,6 @@ void TestEphemeris::testMarsSatTheory()
 {
 	double pos[3], vel[3];
 	double acceptableError = 1E-4; // need re-check
-	double JD, t1, t2, t3, ae1, ae2, ae3;
 
 	// test data: ftp://ftp.imcce.fr/pub/ephem/satel/martian/README.txt
 
@@ -2627,16 +2590,16 @@ void TestEphemeris::testMarsSatTheory()
 
 	while (phobosTestData.count() >= 4)
 	{
-		JD = phobosTestData.takeFirst().toDouble();
+		double JD = phobosTestData.takeFirst().toDouble();
 		// position
-		t1  = phobosTestData.takeFirst().toDouble();
-		t2  = phobosTestData.takeFirst().toDouble();
-		t3  = phobosTestData.takeFirst().toDouble();
+		double t1  = phobosTestData.takeFirst().toDouble();
+		double t2  = phobosTestData.takeFirst().toDouble();
+		double t3  = phobosTestData.takeFirst().toDouble();
 
 		GetMarsSatCoor(JD, 0, pos, vel);
-		ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
-		ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
-		ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
+		double ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
+		double ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
+		double ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
 		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,
 			 QString("Phobos; JD=%1 P[0]=%2 (%5) P[1]=%3 (%6) P[2]=%4 (%7)")
 			 .arg(QString::number(JD, 'f', 2))
@@ -2661,16 +2624,16 @@ void TestEphemeris::testMarsSatTheory()
 
 	while (deimosTestData.count() >= 4)
 	{
-		JD = deimosTestData.takeFirst().toDouble();
+		double JD = deimosTestData.takeFirst().toDouble();
 		// position
-		t1  = deimosTestData.takeFirst().toDouble();
-		t2  = deimosTestData.takeFirst().toDouble();
-		t3  = deimosTestData.takeFirst().toDouble();
+		double t1  = deimosTestData.takeFirst().toDouble();
+		double t2  = deimosTestData.takeFirst().toDouble();
+		double t3  = deimosTestData.takeFirst().toDouble();
 
 		GetMarsSatCoor(JD, 1, pos, vel);
-		ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
-		ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
-		ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
+		double ae1 = qAbs(qAbs(pos[0]) - qAbs(t1));
+		double ae2 = qAbs(qAbs(pos[1]) - qAbs(t2));
+		double ae3 = qAbs(qAbs(pos[2]) - qAbs(t3));
 		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,
 			 QString("Deimos; JD=%1 P[0]=%2 (%5) P[1]=%3 (%6) P[2]=%4 (%7)")
 			 .arg(QString::number(JD, 'f', 2))
@@ -2695,10 +2658,7 @@ void TestEphemeris::testHTC20Theory()
 	double AU_IN_KM = 1.495978707e+8;
 	double pos[3], vel[3];
 	double acceptableError = 1E-3; // need re-check
-	double t1, t2, t3, ae1, ae2, ae3;
 	double JD = 2451590.;
-	int r, ID;
-	QString name;
 
 	QVariantList testData;
 	testData << "Helene"  << HTC2_HELENE  << -351737.078 <<  126965.254 << -33017.275;
@@ -2707,17 +2667,17 @@ void TestEphemeris::testHTC20Theory()
 
 	while (testData.count() >= 5)
 	{
-		name = testData.takeFirst().toString();
-		ID   = testData.takeFirst().toInt();
+		QString name = testData.takeFirst().toString();
+		int ID   = testData.takeFirst().toInt();
 		// position
-		t1   = testData.takeFirst().toDouble();
-		t2   = testData.takeFirst().toDouble();
-		t3   = testData.takeFirst().toDouble();
+		double t1   = testData.takeFirst().toDouble();
+		double t2   = testData.takeFirst().toDouble();
+		double t3   = testData.takeFirst().toDouble();
 
-		r = htc20(JD, ID, pos, vel);
-		ae1 = qAbs(qAbs(pos[0]*AU_IN_KM) - qAbs(t1));
-		ae2 = qAbs(qAbs(pos[1]*AU_IN_KM) - qAbs(t2));
-		ae3 = qAbs(qAbs(pos[2]*AU_IN_KM) - qAbs(t3));
+		int r = htc20(JD, ID, pos, vel);
+		double ae1 = qAbs(qAbs(pos[0]*AU_IN_KM) - qAbs(t1));
+		double ae2 = qAbs(qAbs(pos[1]*AU_IN_KM) - qAbs(t2));
+		double ae3 = qAbs(qAbs(pos[2]*AU_IN_KM) - qAbs(t3));
 		Q_UNUSED(r)
 
 		QVERIFY2(ae1 <= acceptableError && ae2 <= acceptableError && ae3 <= acceptableError,

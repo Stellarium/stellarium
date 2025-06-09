@@ -67,6 +67,20 @@ See [MAINTAINER BUSINESS](MAINTAINER_BUSINESS.md) for details.
 - [ShowMySky](https://10110111.github.io/CalcMySky/), can be disabled with
   `-DENABLE_SHOWMYSKY=OFF` CMake parameter. If enabled (the default), it also requires `libglm-dev libeigen3-dev`.
 
+### Manually Download Dependencies (CPM)
+
+If you are unable to download dependencies automatically due to network restrictions, you can manually fetch them. Dependencies are usually listed with URLs like `URL https://github.com/...` in all `CMakeLists.txt` files using `CPMAddPackage`, `CPMFindPackage`, etc.
+
+After downloading, place them in the following directory structure (example for `QXlsxQt6` in Windows):
+
+```
+<build_dir>/_deps/qxlsxqt6-subbuild/qxlsxqt6-populate-prefix/src/v1.5.0.tar.gz
+```
+
+> The filename must match the URL exactly, and the directory name is the package name in lowercase.
+
+You can also write a script to automate this process.
+
 ### Installing these packages
 
 To install all of these, use the following commands:

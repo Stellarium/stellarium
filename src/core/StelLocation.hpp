@@ -31,7 +31,7 @@ class StelLocation
 {
 public:
 	StelLocation() : altitude(0), population(0), role('X'), isUserLocation(true), longitude(0.f), latitude(0.f) {}
-	//! constructors for ad-hoc locations. The first, shorter version is only for earth locations
+	//! constructors for ad-hoc locations. The shorter version is only for earth locations
 	//! @arg lName location name
 	//! @arg lState may be usedful if region has more than one such name
 	//! @arg lRegion must be the long name of UN UM49 only! (E.g., "Western Europe")
@@ -43,11 +43,11 @@ public:
 	//! @arg timeZone IANA timezone string like "Europe/Vienna" or "UT-7"
 	//! @arg bortleIndex light pollution hint
 	//! @arg roleKey code for location role.
-	//! @arg landscapeID a fitting landscape
+	//! @arg landscapeID a fitting landscape (optional)
+	StelLocation(const QString &lName, const QString &lState, const QString &lRegion, const QString &plName, const float lng, const float lat, const int alt,
+							   const int populationK, const QString &timeZone, const int bortleIndex, const QChar roleKey, const QString &landscapeID=QString());
 	StelLocation(const QString &lName, const QString &lState, const QString &lRegion, const float lng, const float lat, const int alt,
 				 const int populationK, const QString &timeZone, const int bortleIndex, const QChar roleKey='X', const QString &landscapeID=QString());
-	StelLocation(const QString &lName, const QString &lState, const QString &lRegion, const QString &plName, const float lng, const float lat, const int alt,
-							   const int populationK, const QString &timeZone, const int bortleIndex, const QChar roleKey, const QString &landscapeID);
 
 	//! Return a short string which can be used in a list view.
 	QString getID() const;

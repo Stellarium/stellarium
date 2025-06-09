@@ -58,6 +58,7 @@ MilkyWay::MilkyWay()
 	, intensityFovScale(1.0)
 	, intensityMinFov(0.25) // when zooming in further, MilkyWay is no longer visible.
 	, intensityMaxFov(2.5) // when zooming out further, MilkyWay is fully visible (when enabled).
+	, shaderVars()
 {
 	setObjectName("MilkyWay");
 	fader = new LinearFader();

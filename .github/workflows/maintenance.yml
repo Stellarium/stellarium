@@ -51,8 +51,7 @@ jobs:
     steps:
       - name: Install JSON linter
         run: |
-          sudo apt remove php7.* -y
-          sudo apt remove php8.* -y
+          sudo apt remove php* -y
           sudo apt update
           sudo apt install -y jsonlint python3-demjson
 
@@ -60,4 +59,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Linting JSON
-        run: jsonlint -S ${{github.workspace}}/skycultures/*/index.json
+        run: find ${{github.workspace}}/{src,plugins,nebulae,skycultures} -iname '*.json' -exec jsonlint -S {} +

@@ -187,6 +187,8 @@ SET(stellarium_lib_SRCS
      core/modules/Constellation.hpp
      core/modules/ConstellationMgr.cpp
      core/modules/ConstellationMgr.hpp
+     core/modules/CoordObject.cpp
+     core/modules/CoordObject.hpp
      core/modules/CustomObject.cpp
      core/modules/CustomObject.hpp
      core/modules/CustomObjectMgr.cpp
@@ -537,6 +539,11 @@ ENDIF()
 
 IF(HAIKU)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} network)
+ENDIF()
+
+IF(WIN32 AND NOT MSVC)
+     # explicit link to wbemuuid for mingw setup, otherwise CLSID_WbemLocator and IID_IWbemLocator are undefined.
+     SET(STELMAIN_DEPS ${STELMAIN_DEPS} wbemuuid)
 ENDIF()
 
 # Main executable/library setup

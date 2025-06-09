@@ -246,7 +246,11 @@ def update_cultures_pot(sclist, pot):
                     english = cleaned
 
                     if has_added:
-                        comment = 'This word is used in Chinese star names, e.g. "Wang Liang Added IX"'
+                        comment = ('This word is used in Chinese star names, e.g. "Wang Liang Added IX"\n'+
+                                   'Note that the English source starts with a space. If you remove it in '+
+                                   'your translation, you\'ll get no space between it and the preceding '+
+                                   'word, something like "Wang LiangAdded IX" on the screen in Stellarium, '+
+                                   'which may or may not be suitable for your locale.')
                         entry = polib.POEntry(msgid=' Added', comment=comment, msgctxt='chinese skycultures')
                         if entry not in pot:
                             pot.append(entry)

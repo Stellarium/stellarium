@@ -424,7 +424,8 @@ template<class Star>
 void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const RCMag* rcmag_table,
 				  int limitMagIndex, StelCore* core, int maxMagStarName, float names_brightness,
 				  const QVector<SphericalCap> &boundingCaps,
-				  const bool withAberration, const Vec3d vel, const double withParallax, const Vec3d diffPos) const
+				  const bool withAberration, const Vec3d vel, const double withParallax, const Vec3d diffPos,
+				  const bool withCommonNameI18n) const
 {
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	Vec3d v;
@@ -442,7 +443,8 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		if (cutoffMagStep>limitMagIndex)
 			cutoffMagStep = limitMagIndex;
 	}
-	Q_ASSERT(cutoffMagStep<RCMAG_TABLE_SIZE);
+	Q_ASSERT_X(cutoffMagStep<=RCMAG_TABLE_SIZE, "ZoneArray.cpp",
+		   QString("RCMAG_TABLE_SIZE: %1, cutoffmagStep: %2").arg(QString::number(RCMAG_TABLE_SIZE), QString::number(cutoffMagStep)).toLatin1());
     
 	// Go through all stars, which are sorted by magnitude (bright stars first)
 	const SpecialZoneData<Star>* zoneToDraw = getZones() + index;
@@ -552,7 +554,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			const float offset = tmpRcmag->radius*0.7f;
 			const Vec3f color = StelSkyDrawer::indexToColor(s->getBVIndex())*0.75f;
 			sPainter->setColor(color, names_brightness);
-			sPainter->drawText(v, s->getScreenNameI18n(), 0, offset, offset, false);
+			sPainter->drawText(v, s->getScreenNameI18n(withCommonNameI18n), 0, offset, offset, false);
 		}
 	}
 }
@@ -589,6 +591,53 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 }
 
 template<class Star>
+void SpecialZoneArray<Star>::searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly, const float maxMag,
+						  QList<StelObjectP > &result) const
+{
+	if (hipOnly && level>3)
+			return;
+#ifndef NDEBUG
+	qDebug() << "SpecialZoneArray<Star>::searchWithin(): Level" << level << "MagMin" << mag_min << "fname" << fname << "nr_of_zones" << nr_of_zones << "nr_of_stars" << nr_of_stars;
+#endif
+	const float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
+	const SpecialZoneData<Star> *const z = getZones()+index;
+	const float maxMilliMag = 1000.f*maxMag;
+	Vec3d tmp;
+	double RA, DEC, pmra, pmdec, Plx, RadialVel;
+	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
+	{
+		if (hipOnly && s->getHip()==0)
+		{
+			continue;
+		}
+
+		s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+		StelUtils::spheToRect(RA, DEC, tmp);
+		// s->getJ2000Pos(dyrs, tmp);
+		// in case it is in a binary system
+		s->getBinaryOrbit(core->getJDE(), tmp);
+		s->getPlxEffect(withParallax * Plx, tmp, diffPos);
+		tmp.normalize();
+		// TODO: Move vel into arg.list
+		if (core->getUseAberration())
+		{
+			const Vec3d vel = core->getAberrationVec(core->getJDE());
+			tmp+=vel;
+			tmp.normalize();
+		}
+		// By trying, region is a SphericalPolygon. We are calling SphericalPolygon::contains(Vec3d)
+		if (region->contains(tmp) && (s->getMag() < maxMilliMag) )
+		{
+#ifndef NDEBUG
+			//qDebug() << "Region match: " <<  s->getHip() << s->getGaia()  << "(Index (Zone):" << index << ", Level="<< level << ")";
+#endif
+			result.push_back(s->createStelObject(this,z));
+		}
+	}
+}
+
+
+template<class Star>
 StelObjectP SpecialZoneArray<Star>::searchGaiaID(int index, const StarId source_id, int &matched) const
 {
 	const SpecialZoneData<Star> *const z = getZones()+index;
@@ -614,7 +663,7 @@ void SpecialZoneArray<Star>::searchGaiaIDepochPos(const StarId source_id,
                                                   double &      pmdec,
                                                   double &      RV) const
 {
-   // loop throught each zone in the level which is 20 * 4 ** level + 1 as index
+   // loop through each zone in the level which is 20 * 4 ** level + 1 as index
    for (int i = 0; i < 20 * pow(4, (level)) + 1; i++) {
       // get the zone data
       const SpecialZoneData<Star> * const z = getZones() + i;

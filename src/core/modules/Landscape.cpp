@@ -345,7 +345,6 @@ void Landscape::drawHorizonLine(StelCore* core, StelPainter& painter)
 	painter.setLineSmooth(false);
 }
 
-#include <iostream>
 const QString Landscape::getTexturePath(const QString& basename, const QString& landscapeId)
 {
 	// look in the landscape directory first, and if not found default to global textures directory
@@ -501,6 +500,8 @@ LandscapeOldStyle::LandscapeOldStyle(float _radius)
 	, drawGroundFirst(false)
 	, tanMode(false)
 	, calibrated(false)  // start with just the known entries.
+	, shaderVars()
+
 {
 	memorySize=sizeof(LandscapeOldStyle);
 }
@@ -592,7 +593,6 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	// Init sides parameters
 	nbSide = static_cast<unsigned short>(landscapeIni.value("landscape/nbside", 0).toUInt());
 	sides = new landscapeTexCoord[static_cast<size_t>(nbSide)];
-	unsigned int texnum;
 	for (unsigned int i=0;i<nbSide;++i)
 	{
 		const QString key = QString("landscape/side%1").arg(i);                             // e.g. side0
@@ -600,7 +600,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		const QStringList parameters = landscapeIni.value(key).toString().split(':');  // e.g. tex0:0:0:1:1
 		//TODO: How should be handled an invalid texture description?
 		QString textureName = parameters.value(0);                                    // tex0
-		texnum = textureName.right(textureName.length() - 3).toUInt();             // 0
+		unsigned int texnum = textureName.right(textureName.length() - 3).toUInt();             // 0
 		sides[i].tex = sideTexs[texnum];
 		sides[i].tex_illum = sideTexs[nbSide+texnum];
 		sides[i].texCoords[0] = parameters.at(1).toFloat();
@@ -1032,10 +1032,9 @@ void main(void)
 	if(!renderProgram || !renderProgram->isLinked())
 		return;
 
-	auto& gl = *QOpenGLContext::currentContext()->functions();
-
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
+		auto& gl = *QOpenGLContext::currentContext()->functions();
 		renderProgram->bind();
 		bindVAO();
 
@@ -1548,6 +1547,7 @@ LandscapeFisheye::LandscapeFisheye(float _radius)
 	, mapTexIllum(StelTextureSP())
 	, mapImage(nullptr)
 	, texFov(360.)
+	, shaderVars()
 {
 	memorySize=sizeof(LandscapeFisheye);
 }
@@ -1705,10 +1705,9 @@ void main(void)
 	if(!renderProgram || !renderProgram->isLinked())
 		return;
 
-	auto& gl = *QOpenGLContext::currentContext()->functions();
-
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
+		auto& gl = *QOpenGLContext::currentContext()->functions();
 		renderProgram->bind();
                 renderProgram->setUniformValue(shaderVars.brightness,
                                                 landscapeBrightness*landscapeTint[0],
@@ -1818,6 +1817,7 @@ LandscapeSpherical::LandscapeSpherical(float _radius)
 	, illumTexBottom(0.)
 	, mapImage(nullptr)
 	, bottomCapColor(-1.0f, 0.0f, 0.0f)
+	, shaderVars()
 {
 	memorySize=sizeof(LandscapeSpherical);
 }
@@ -2060,10 +2060,9 @@ void main(void)
 	if(!renderProgram || !renderProgram->isLinked())
 		return;
 
-	auto& gl = *QOpenGLContext::currentContext()->functions();
-
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
+		auto& gl = *QOpenGLContext::currentContext()->functions();
 		renderProgram->bind();
 		renderProgram->setUniformValue(shaderVars.bottomCapColor,
 					       landscapeBrightness*bottomCapColor[0],

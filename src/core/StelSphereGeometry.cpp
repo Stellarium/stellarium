@@ -718,7 +718,7 @@ struct TriangleSerializer
 	TriangleSerializer(const TriangleSerializer& ts) : triangleList(ts.triangleList) {}
 
 	TriangleSerializer() {}
-	inline void operator=(const TriangleSerializer &other){triangleList=other.triangleList;}
+	inline TriangleSerializer& operator=(const TriangleSerializer &other){triangleList=other.triangleList; return *this;}
 	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
 			       const Vec2f* , const Vec2f* , const Vec2f* ,
 			       const Vec3f* , const Vec3f* , const Vec3f* ,
@@ -1235,7 +1235,7 @@ struct TriangleDumper
 	TriangleDumper(const TriangleDumper& ts) : triangleList(ts.triangleList) {}
 
 	TriangleDumper() {}
-	inline void operator=(const TriangleDumper &other){triangleList=other.triangleList;}
+	inline TriangleDumper& operator=(const TriangleDumper &other){triangleList=other.triangleList; return *this;}
 	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
 			       const Vec2f* , const Vec2f* , const Vec2f* ,
 			       const Vec3f* , const Vec3f* , const Vec3f* ,

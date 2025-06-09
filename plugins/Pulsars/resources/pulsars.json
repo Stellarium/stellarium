@@ -1,6 +1,6 @@
 {
 	"version": "2",
-	"shortName": "A catalogue of pulsars, based on ATNF Pulsar Catalogue v2.6.0",
+	"shortName": "A catalogue of pulsars, based on ATNF Pulsar Catalogue v2.6.1",
 	"originalCatalogURL": "http://www.atnf.csiro.au/research/pulsar/psrcat/",
 	"pulsars":
 	{
@@ -579,6 +579,7 @@
 			"dmeasure": 85.7,
 			"frequency": 2.50842466468,
 			"pfrequency": -3.5271E-14,
+			"w50": 24.2,
 			"RA": "00h40m23.77s",
 			"DE": "-73d26m26.09s"
 		},
@@ -588,6 +589,7 @@
 			"dmeasure": 198.27,
 			"frequency": 6.88618772429,
 			"pfrequency": -1.13108E-12,
+			"w50": 2,
 			"glitch": 1,
 			"RA": "00h40m54.59s",
 			"DE": "-73d35m53.6s"
@@ -598,6 +600,7 @@
 			"dmeasure": 101.79,
 			"frequency": 16.69767930,
 			"pfrequency": -9.4910E-12,
+			"w50": 0.87,
 			"glitch": 1,
 			"RA": "00h40m46.7s",
 			"DE": "-73d37m07s"
@@ -608,6 +611,7 @@
 			"dmeasure": 120.8,
 			"frequency": 1.066741330241,
 			"pfrequency": -1.06156E-14,
+			"w50": 20.9,
 			"s1400": 0.047,
 			"RA": "00h43m13.21s",
 			"DE": "-73d19m55.62s"
@@ -618,6 +622,7 @@
 			"dmeasure": 78.6,
 			"frequency": 2.51944095060,
 			"pfrequency": -1.1184E-14,
+			"w50": 23,
 			"RA": "00h44m56.95s",
 			"DE": "-73d13m59.3s"
 		},
@@ -666,6 +671,7 @@
 			"dmeasure": 292.42,
 			"frequency": 12.608085313,
 			"pfrequency": -5.24925E-12,
+			"w50": 2.1,
 			"glitch": 1,
 			"RA": "00h48m56.89s",
 			"DE": "-73d17m46s"
@@ -683,7 +689,6 @@
 		{
 			"distance": 0.624,
 			"period": 0.354732,
-			"pderivative": 7.0E-18,
 			"dmeasure": 13.93,
 			"w50": 11.8,
 			"s400": 3,
@@ -697,6 +702,7 @@
 			"dmeasure": 159.3,
 			"frequency": 5.22337600249,
 			"pfrequency": -3.77282E-13,
+			"w50": 6.5,
 			"s1400": 0.039,
 			"RA": "00h51m34.529s",
 			"DE": "-72d04m23.74s"
@@ -741,6 +747,7 @@
 			"dmeasure": 92.40,
 			"frequency": 3.43707814666,
 			"pfrequency": -1.12930E-13,
+			"w50": 6.2,
 			"RA": "00h54m54.2s",
 			"DE": "-72d28m33.39s"
 		},
@@ -907,6 +914,7 @@
 			"dmeasure": 120.4,
 			"frequency": 3.2601205007,
 			"pfrequency": -2.5102E-13,
+			"w50": 9.6,
 			"RA": "01h05m38.5s",
 			"DE": "-72d08m53.4s"
 		},
@@ -2148,8 +2156,8 @@
 			"bperiod": 6.955717217,
 			"frequency": 383.339448073778,
 			"pfrequency": -1.22083E-15,
-			"RA": "21h35m23.398s",
-			"DE": "59d35m41.374s"
+			"RA": "04h06m32.518s",
+			"DE": "30d39m42.406s"
 		},
 		"PSR J0406+6138":
 		{
@@ -28828,21 +28836,11 @@
 			"RA": "18h43m05.487s",
 			"DE": "-07d44m30.1s"
 		},
-		"PSR J1843-0757":
-		{
-			"distance": 4.868,
-			"period": 2.03194008516,
-			"pderivative": 4.13E-15,
-			"dmeasure": 254,
-			"w50": 4.6,
-			"notes": "RRAT",
-			"RA": "18h43m33.06s",
-			"DE": "-07d57m33s"
-		},
 		"PSR J1843-08":
 		{
 			"distance": 4.877,
 			"period": 2031.96198,
+			"pderivative": 4.13E-15,
 			"dmeasure": 256.0,
 			"w50": 31.8,
 			"s1400": 0.09,

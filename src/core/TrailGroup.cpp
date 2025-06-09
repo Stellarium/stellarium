@@ -19,21 +19,25 @@
 
 #include "TrailGroup.hpp"
 
+#include <QGlobalStatic>
 #include "StelApp.hpp"
 #include "StelPainter.hpp"
 #include "StelObject.hpp"
 #include "Planet.hpp"
 
-TrailGroup::TrailGroup(float te, int maxPoints) : timeExtent(te), maxPoints(maxPoints), opacity(1.f)
+TrailGroup::TrailGroup(float te, int maxPoints) :
+	core(StelApp::getInstance().getCore()),
+	timeExtent(te),
+	maxPoints(maxPoints),
+	j2000ToTrailNative(Mat4d::identity()),
+	j2000ToTrailNativeInverted(Mat4d::identity()),
+	opacity(1.f)
 {
-	j2000ToTrailNative=Mat4d::identity();
-	j2000ToTrailNativeInverted=Mat4d::identity();
-	core=StelApp::getInstance().getCore();
 	Q_ASSERT(core);
 }
 
-static QVector<Vec3d> vertexArray;
-static QVector<Vec4f> colorArray;
+Q_GLOBAL_STATIC(QVector<Vec3d>, vertexArray);
+Q_GLOBAL_STATIC(QVector<Vec4f>, colorArray);
 void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 {
 	sPainter->setBlending(true);
@@ -52,15 +56,15 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 				continue;
 		}
 		const QList<Vec3d>& posHistory = trail.posHistory;
-		vertexArray.resize(posHistory.size());
-		colorArray.resize(posHistory.size());
+		vertexArray->resize(posHistory.size());
+		colorArray->resize(posHistory.size());
 		for (int i=0;i<posHistory.size();++i)
 		{
 			float colorRatio = 1.f-fabsf(currentTime-times.at(i))/timeExtent;
-			colorArray[i].set(trail.color[0], trail.color[1], trail.color[2], colorRatio*opacity);
-			vertexArray[i]=posHistory.at(i);
+			(*colorArray)[i].set(trail.color[0], trail.color[1], trail.color[2], colorRatio*opacity);
+			(*vertexArray)[i]=posHistory.at(i);
 		}
-		sPainter->drawPath(vertexArray, colorArray);
+		sPainter->drawPath(*vertexArray, *colorArray);
 	}
 }
 

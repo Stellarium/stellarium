@@ -25,11 +25,7 @@
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
-
-#include "StelProjector.hpp"
 #include "StelModule.hpp"
-#include "StelUtils.hpp"
-#include "VecMath.hpp"
 
 #include <QGraphicsPixmapItem>
 #include <QPixmap>

@@ -70,7 +70,7 @@
 static QString applyScaleToCSS(const QString& css, const double scale)
 {
 	auto out = css;
-	const QRegularExpression pat("\\b([0-9.]+)px\\b");
+	static const QRegularExpression pat("\\b([0-9.]+)px\\b");
 	QRegularExpressionMatch match;
 	int pos = 0;
 	while((pos = out.indexOf(pat, pos, &match)) >= 0)

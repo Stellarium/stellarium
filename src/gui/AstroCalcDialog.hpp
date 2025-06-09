@@ -961,20 +961,6 @@ private:
 	}
 };
 
-//! Besselian elements for lunar eclipse
-class LunarEclipseBessel
-{
-public:
-	LunarEclipseBessel(double &besX, double &besY, double &besL1, double &besL2, double &besL3, double &latDeg, double &lngDeg);
-};
-
-//! Iteration to compute contact times of lunar eclipse
-class LunarEclipseIteration
-{
-public:
-	LunarEclipseIteration(double &JD, double &positionAngle, double &axisDistance, bool beforeMaximum, int eclipseType);
-};
-
 //! Derived from QTreeWidgetItem class, but currently nothing else.
 class ACLunarEclipseContactsTreeWidgetItem : public QTreeWidgetItem
 {
@@ -1089,11 +1075,20 @@ private:
 	}
 };
 
+//! Besselian elements for lunar eclipse
+class LunarEclipseBessel
+{
+public:
+	static void computeElements(double &besX, double &besY, double &besL1, double &besL2, double &besL3, double &latDeg, double &lngDeg);
+	//! Iteration to compute contact times of lunar eclipse
+	static void iteration(double &JD, double &positionAngle, double &axisDistance, const bool beforeMaximum, const int eclipseType);
+};
+
 //! Besselian elements for transit of Mercury and Venus across the Sun
 class TransitBessel
 {
 public:
-	TransitBessel(PlanetP object, double &besX, double &besY,
+	static void computeElements(PlanetP object, double &besX, double &besY,
 	double &besDec, double &besTf1, double &besTf2, double &besL1, double &besL2, double &besMu);
 };
 

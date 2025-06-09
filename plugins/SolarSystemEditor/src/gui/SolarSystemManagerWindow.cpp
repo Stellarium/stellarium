@@ -178,7 +178,7 @@ void SolarSystemManagerWindow::populateSolarSystemList()
 	for (const auto& object : GETSTELMODULE(SolarSystem)->getAllMinorBodies())
 	{
 		// GZ new for 0.16: only insert objects which are minor bodies.
-		unlocalizedNames.insert(object->getCommonNameI18n(), object->getCommonEnglishName());
+		unlocalizedNames.insert(object->getNameI18n(), object->getEnglishName());
 	}
 
 	ui->listWidgetObjects->clear();

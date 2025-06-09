@@ -189,6 +189,7 @@ SearchDialog::SearchDialog(QObject* parent)
 	useFOVCenterMarker = conf->value("search/flag_fov_center_marker", true).toBool();
 	fovCenterMarkerState = GETSTELMODULE(SpecialMarkersMgr)->getFlagFOVCenterMarker();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
+        useAutoClosing = conf->value("search/flag_auto_closing", true).toBool();
 	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "equatorialJ2000").toString());	
 
 	setSimbadQueryDist( conf->value("search/simbad_query_dist",  30).toInt());
@@ -424,7 +425,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 	connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 
-	connectBoolProperty(ui->simbadGroupBox, "SearchDialog.useSimbad");	
+        connectBoolProperty(ui->simbadGroupBox,        "SearchDialog.useSimbad");
 	connectIntProperty(ui->searchRadiusSpinBox,    "SearchDialog.simbadDist");
 	connectIntProperty(ui->resultsSpinBox,         "SearchDialog.simbadCount");
 	connectBoolProperty(ui->allIDsCheckBox,        "SearchDialog.simbadGetIds");
@@ -450,6 +451,9 @@ void SearchDialog::createDialogContent()
 
 	connect(ui->checkBoxLockPosition, SIGNAL(clicked(bool)), this, SLOT(enableLockPosition(bool)));
 	ui->checkBoxLockPosition->setChecked(useLockPosition);
+
+        connect(ui->checkBoxAutoClosing, SIGNAL(clicked(bool)), this, SLOT(enableAutoClosing(bool)));
+        ui->checkBoxAutoClosing->setChecked(useAutoClosing);
 
 	// list views initialization
 	listModel = new QStringListModel(this);
@@ -656,6 +660,12 @@ void SearchDialog::enableLockPosition(bool enable)
 {
 	useLockPosition = enable;
 	conf->setValue("search/flag_lock_position", useLockPosition);
+}
+
+void SearchDialog::enableAutoClosing(bool enable)
+{
+        useAutoClosing = enable;
+        conf->setValue("search/flag_auto_closing", useAutoClosing);
 }
 
 void SearchDialog::enableFOVCenterMarker(bool enable)
@@ -1009,7 +1019,7 @@ void SearchDialog::adjustMatchesResult(QStringList &allMatches, QStringList& rec
 	// Combine list: ordered by recent searches then relevance
 	allMatches << recentMatches << matches;
 
-	// Remove possible duplicates from both listQSt
+	// Remove possible duplicates from both lists
 	allMatches.removeDuplicates();
 }
 
@@ -1256,7 +1266,8 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 			if (!newSelected.empty())
 			{
-				close();
+                                if (useAutoClosing)
+                                        close();
 				ui->lineEditSearchSkyObject->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 
 				// Can't point to home planet
@@ -1271,7 +1282,8 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 		}
 		else
 		{
-			close();
+                        if (useAutoClosing)
+                                close();
 			GETSTELMODULE(CustomObjectMgr)->addPersistentObject(nameI18n, simbadResults[nameI18n]);
 			ui->lineEditSearchSkyObject->clear();
 			searchListModel->clearValues();
@@ -1294,7 +1306,8 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
 		{
-			close();
+                        if (useAutoClosing)
+                                close();
 			ui->lineEditSearchSkyObject->clear();
 
 			// Can't point to home planet
@@ -1321,7 +1334,8 @@ void SearchDialog::gotoObject(const QString &nameI18n, const QString &objType)
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
 		{
-			close();
+                        if (useAutoClosing)
+                                close();
 			ui->lineEditSearchSkyObject->clear();
 			
 			// Can't point to home planet

@@ -22,7 +22,8 @@ configuration window (\guibutton[0.35]{2}{btd_config.png} or
 settings, more information is available as \emph{tooltips}, small text
 boxes which appear when you hover the mouse cursor over a
 button.\footnote{Unfortunately, on Windows~7 and later, with some Nvidia
-  and AMD GPUs in OpenGL mode, these tooltips sometimes do not work.}
+  and AMD GPUs in OpenGL mode, these tooltips sometimes do not work. 
+  Sometimes it is enough to leave fullscreen mode to see them.}
 
 You can drag the
 windows around\newFeature{0.15}, and the position will be used again when you restart
@@ -631,6 +632,10 @@ Selecting items in this list changes the
     projection, described by \name[Ernst von]{Hammer} (1858--1925) in 1892 and directly inspired
     by the Aitoff projection. The maximum field of view in this mode is
     360\degree.
+  \item[Mollweide] The Mollweide projection is a pseudocylindrical equal‑area map projection,
+    widely used for whole‑sky displays; it preserves relative areas across the sphere while
+    trading off shape and angular fidelity, especially near the poles.
+    The maximum field of view in this mode is 360\degree.
   \item[Sinusoidal] The sinusoidal projection is a
     \emph{pseudocylindrical equal-area map projection}, sometimes
     called the Sanson--Flamsteed or the Mercator equal-area
@@ -887,10 +892,10 @@ See section~\ref{sec:configini:landscape}.
 \end{figure}
 
 \noindent If you want to explore humankind's cultural history, you could also
-switch to the viewpoint of other ancient or contemporary
-people. Constellations are defined as patterns in the sky serving to
-set calendar marks and to navigate while travelling on Earth. Which
-patterns are seen depends on the natural environment and the cultural
+switch to the viewpoint of ancient or other contemporary peoples. 
+Constellations are defined as patterns in the sky shaped from fixed celestial objects, 
+often serving to set calendar marks and to navigate while travelling on Earth. 
+Which patterns are seen depends on the natural environment and the cultural
 habits of the people, i.e., the Inuit in the arctic area might have
 seen an Elk where the Chinese have seen a huge spoon or dipper. There
 cannot be any astrological influence from these patterns as they had
@@ -900,7 +905,7 @@ educational function, too.
 
 \noindent%
 \colorbox{light-gray}{\fbox{\parbox[t]{0.975\linewidth}{
-\paragraph{Caution} Some of our native peoples' constellations are contributed for noncommercial use only.
+\paragraph{Caution} Some of our native peoples' constellations have been contributed for noncommercial use only.
 Please respect their heritage holders and check-out the CC licence
 version in the description before you use sky cultures for
 broadcasting! See section~\ref{sec:skycultures:licenses} for details.}}}
@@ -915,11 +920,31 @@ broadcasting! See section~\ref{sec:skycultures:licenses} for details.}}}
 The Sky Culture tab of the View window (Fig.~\ref{fig:gui:view:skyculture})
 controls which culture's constellations and bright star names will be
 used in the main display.  Some cultures have constellation art (e.g.,
-Western and Inuit), and the rest do not. Configurable options include
+Modern or Inuit), and the rest do not. Configurable options include
 \begin{description}
 \item[Use this sky culture as default] Activate this option to load
   this sky culture when Stellarium starts.
-\item[Constellations name style]  You can 
+\item[Info and screen label styles] 
+
+%You can select from a choice of native, transliteration (as pronounciation aid), 
+%scientific transliteration where such system exists, 
+%phonetic annotation using the International Phonetic Alphabet (IPA), translation and augmentation by modern names.
+%These items are stored immediately and per-skyculture, so that you can easily configure the program matching to your language skills.
+%Not all data items may be available, and fallbacks will be used where applicable.
+
+The new skyculture system\newFeature{25.2} has introduced a plethora of new name elements, 
+the complete set of which is not required to exist. There are name components that may come 
+in the skyculture's original (\emph{native}) language. If such a culture uses non-Latin glyphs in its writing, 
+non-native users need a \emph{transliteration} that also helps pronunciation, which even depends on user language. 
+Then there are \emph{scientific transliteration} systems for some cases. 
+Finally, a pronunciation aid can be given using the \emph{International Phonetic Alphabet} (IPA).
+And, for reference, you may want to add the commonly used \emph{modern} name to an object. 
+
+There are two sets of settings, for the screen label and for the label used in the information area in the top-left. 
+The currently configured settings are immediately stored per-skyculture and retrieved when you load another skyculture, 
+so that you can adapt the system to your knowledge of languages and character systems. See \ref{SC:settings} for more.
+
+\item[Constellations name style]  You can
   select whether you want to display abbreviated, original or
   translated names.
 \item[Use native names for planets] If provided, show the planet names
@@ -944,6 +969,8 @@ Western and Inuit), and the rest do not. Configurable options include
   and you can configure thickness of those lines as well.\newFeature{0.17.0}
 \item[Select single constellation/Isolated] See section~\ref{sec:skyculture:singleConstellations} for details.
 \end{description}
+
+
 
 \subsubsection{Select single constellations}
 \label{sec:skyculture:singleConstellations}
@@ -1060,7 +1087,7 @@ Hitting the \key{\return} key will center on the
 currently highlighted object and close the Search window.
 
 For example, suppose we want to locate Saturn's moon Mimas (SI).
-Open the Search window (\guibutton[0.5]{2.5}{btd_find.png}, \key{F3}, or \key{Ctrl+F}).
+Open the Search window (\guibutton[0.35]{1.5}{btd_find.png}, \key{F3}, or \key{Ctrl+F}).
 Type the first letter of the name, \emph{m}, to see a list
 of objects whose name contains \emph{m}:
 \begin{center}

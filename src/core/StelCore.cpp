@@ -45,15 +45,13 @@
 
 #include <QSettings>
 #include <QDebug>
+#include <QGlobalStatic>
 #include <QMetaEnum>
 #include <QTimeZone>
 #include <QFile>
 #include <QDir>
 #include <QRegularExpression>
 #include <QOpenGLShaderProgram>
-
-#include <iostream>
-#include <fstream>
 
 // Init static transfo matrices
 // See vsop87.doc:
@@ -431,6 +429,9 @@ StelProjectorP StelCore::getProjection(StelProjector::ModelViewTranformP modelVi
 			break;
 		case ProjectionHammer:
 			prj = StelProjectorP(new StelProjectorHammer(modelViewTransform));
+			break;
+		case ProjectionMollweide:
+			prj = StelProjectorP(new StelProjectorMollweide(modelViewTransform));
 			break;
 		case ProjectionCylinder:
 			prj = StelProjectorP(new StelProjectorCylinder(modelViewTransform));
@@ -1307,7 +1308,7 @@ void StelCore::setParallaxFactor(double factor)
 {
 	if (!fuzzyEquals(parallaxFactor, factor))
 	{
-		parallaxFactor=qBound(0.,factor, 10000.);
+		parallaxFactor=qBound(0.,factor, 100000.);
 		StelApp::immediateSave("astro/parallax_factor", parallaxFactor);
 		emit parallaxFactorChanged(factor);
 	}
@@ -3030,7 +3031,7 @@ typedef struct iau_constline{
 	QString constellation; // 3-letter code of constellation
 } iau_constelspan;
 
-static QVector<iau_constelspan> iau_constlineVec;
+Q_GLOBAL_STATIC(QVector<iau_constelspan>, iau_constlineVec);
 static bool iau_constlineVecInitialized=false;
 
 // File iau_constellations_spans.dat is converted from file data.dat from ADC catalog VI/42.
@@ -3092,7 +3093,7 @@ QString StelCore::getIAUConstellation(const Vec3d &positionEqJnow) const
 			else
 				span.decLow += atof(numList.at(1).toLatin1())/60.;
 			span.constellation=list.at(3);
-			iau_constlineVec.append(span);
+			iau_constlineVec->append(span);
 		}
 		file.close();
 		iau_constlineVecInitialized=true;
@@ -3100,16 +3101,16 @@ QString StelCore::getIAUConstellation(const Vec3d &positionEqJnow) const
 
 	// iterate through vector, find entry where declination is lower.
 	int entry=0;
-	while (iau_constlineVec.at(entry).decLow > dec1875)
+	while (iau_constlineVec->at(entry).decLow > dec1875)
 		entry++;
-	while (entry<iau_constlineVec.size())
+	while (entry<iau_constlineVec->size())
 	{
-		while (iau_constlineVec.at(entry).RAhigh <= RA1875)
+		while (iau_constlineVec->at(entry).RAhigh <= RA1875)
 			entry++;
-		while (iau_constlineVec.at(entry).RAlow >= RA1875)
+		while (iau_constlineVec->at(entry).RAlow >= RA1875)
 			entry++;
-		if (iau_constlineVec.at(entry).RAhigh > RA1875)
-			return iau_constlineVec.at(entry).constellation;
+		if (iau_constlineVec->at(entry).RAhigh > RA1875)
+			return iau_constlineVec->at(entry).constellation;
 		else
 			entry++;
 	}

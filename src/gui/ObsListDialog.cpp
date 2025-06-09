@@ -43,7 +43,6 @@
 #include "StelUtils.hpp"
 #include "ObsListDialog.hpp"
 #include "LabelMgr.hpp"
-#include "StelLogger.hpp"
 
 #include "ui_obsListDialog.h"
 
@@ -52,7 +51,6 @@ ObsListDialog::ObsListDialog(QObject *parent) :
 	ui(new Ui_obsListDialogForm()),
 	core(StelApp::getInstance().getCore()),
 	objectMgr(GETSTELMODULE(StelObjectMgr)),
-	landscapeMgr(GETSTELMODULE(LandscapeMgr)),
 	labelMgr(GETSTELMODULE(LabelMgr)),
 	itemModel(new QStandardItemModel(0, ColumnCount)),
 	observingListJsonPath(StelFileMgr::findFile("data", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) + "/" + JSON_FILE_NAME),
@@ -612,7 +610,6 @@ QHash<QString, ObsListDialog::observingListItem> ObsListDialog::loadBookmarksFil
 	qWarning() << "  Loading old-style Bookmarks file. This file format is deprecated.";
 	qWarning() << "  If you are loading this as a separate file, ";
 	qWarning() << "  Please update the file (re-export the list into *.sol format).";
-	bool importWarning=false;
 
 	QHash<QString, observingListItem> bookmarksItemHash;
 
@@ -633,6 +630,7 @@ QHash<QString, ObsListDialog::observingListItem> ObsListDialog::loadBookmarksFil
 		}
 
 		try {
+			bool importWarning=false;
 			QVariantMap map = StelJsonParser::parse(file.readAll()).toMap();
 			file.close();
 			QVariantMap bookmarksMap = map.value(KEY_BOOKMARKS).toMap();
@@ -959,6 +957,9 @@ void ObsListDialog::editListButtonPressed()
 {
 	Q_ASSERT(!selectedOlud.isEmpty());
 
+        // Objects shouldn't be highlighted when observing list is edited!
+        clearHighlights();
+
 	if (!selectedOlud.isEmpty())
 	{
 		switchEditMode(true, false);
@@ -1063,7 +1064,7 @@ void ObsListDialog::importListButtonPressed()
 				else
 				{
 					QVariantMap::const_iterator it;
-					for (it = observingListMapToImport.begin(); it != observingListMapToImport.end(); it++) {
+					for (it = observingListMapToImport.begin(); it != observingListMapToImport.end(); ++it) {
 						if (it.value().canConvert<QVariantMap>())
 						{
 							// check here to avoid overwriting of existing lists

@@ -35,22 +35,25 @@ The Mosaic Camera plugin overlays camera sensor boundaries on the sky.
 /// @brief Represents a set of polygons with associated properties.
 struct PolygonSet
 {
-    QString name;                      ///< The name of the polygon set.
-    QVector<QVector<QPointF>> corners; ///< Polygons as vectors of corner points.
-    QColor color;                      ///< Color associated with the polygon set.
+	QString name;						///< The name of the polygon set.
+	QVector<QVector<QPointF>> corners;	///< Polygons as vectors of corner points.
+	QColor color;						///< Color associated with the polygon set.
 };
 
 
 /// @brief Represents a camera with its properties and associated polygon sets.
 struct Camera
 {
-    QString name;                     ///< The name of the camera.
-    double ra;                        ///< Right Ascension of camera pointing [deg]
-    double dec;                       ///< Declination of camera pointing [deg]
-    double rotation;                  ///< Rotation angle of the camera [deg]
-    bool visible;                     ///< Visibility status of the camera.
-    QVector<PolygonSet> polygon_sets; ///< Collection of polygon sets associated with the camera.
-	double fieldDiameter;             ///< Estimated field diameter of the camera [deg]
+	QString name;						///< The name of the camera.
+	QString cameraName;					///< The name of the camera in the GUI.
+	QString cameraDescription;			///< The description of the camera.
+	QString cameraURLDetails;			///< URL for more details about the camera.
+	double ra;							///< Right Ascension of camera pointing [deg]
+	double dec;							///< Declination of camera pointing [deg]
+	double rotation;					///< Rotation angle of the camera [deg]
+	bool visible;						///< Visibility status of the camera.
+	QVector<PolygonSet> polygon_sets;	///< Collection of polygon sets associated with the camera.
+	double fieldDiameter;				///< Estimated field diameter of the camera [deg]
 };
 
 //! @class MosaicCamera
@@ -60,40 +63,40 @@ struct Camera
 class MosaicCamera : public StelModule
 {
 	Q_OBJECT
-    /**
-     * @name Camera properties
-     * @{
-     * We maintain the concept of a "current" camera primarily for the convenience of
-	 * setting and getting properties through the Stellarium Remove Control HTTP API.
-     */
+	/**
+	* @name Camera properties
+	* @{
+	* We maintain the concept of a "current" camera primarily for the convenience of
+	* setting and getting properties through the Stellarium Remove Control HTTP API.
+	*/
 
 	/// @property enabled
 	/// @brief Are mosaic camera overlays enabled?
-	Q_PROPERTY(bool enabled		     READ isEnabled              WRITE enableMosaicCamera   NOTIFY flagMosaicCameraVisibilityChanged)
+	Q_PROPERTY(bool enabled			READ isEnabled			WRITE enableMosaicCamera		NOTIFY flagMosaicCameraVisibilityChanged)
 
-	Q_PROPERTY(bool showButton       READ getFlagShowButton      WRITE setFlagShowButton    NOTIFY flagShowButtonChanged)
+	Q_PROPERTY(bool showButton		READ getFlagShowButton	WRITE setFlagShowButton		NOTIFY flagShowButtonChanged)
 
 	/// @property currentCamera
 	/// @brief The name of the current camera
-	Q_PROPERTY(QString currentCamera READ getCurrentCamera       WRITE setCurrentCamera     NOTIFY currentCameraChanged)
+	Q_PROPERTY(QString currentCamera	READ getCurrentCamera	WRITE setCurrentCamera		NOTIFY currentCameraChanged)
 
 	/// @property ra
 	/// @brief Set or get the current camera's right ascension [deg]
-	Q_PROPERTY(double ra             READ getCurrentRA           WRITE setCurrentRA         NOTIFY currentRAChanged)
+	Q_PROPERTY(double ra				READ getCurrentRA		WRITE setCurrentRA			NOTIFY currentRAChanged)
 
 	/// @property dec
 	/// @brief Set or get the current camera's declination [deg]
-	Q_PROPERTY(double dec            READ getCurrentDec          WRITE setCurrentDec        NOTIFY currentDecChanged)
+	Q_PROPERTY(double dec			READ getCurrentDec		WRITE setCurrentDec			NOTIFY currentDecChanged)
 
 	/// @property rotation
 	/// @brief Set or get the current camera's rotation [deg]
-	Q_PROPERTY(double rotation       READ getCurrentRotation     WRITE setCurrentRotation   NOTIFY currentRotationChanged)
+	Q_PROPERTY(double rotation		READ getCurrentRotation	WRITE setCurrentRotation		NOTIFY currentRotationChanged)
 
 	/// @property visible
 	/// @brief Set or get the current camera's visibility
-	Q_PROPERTY(bool visible          READ getCurrentVisibility   WRITE setCurrentVisibility NOTIFY currentVisibilityChanged)
+	Q_PROPERTY(bool visible			READ getCurrentVisibility	WRITE setCurrentVisibility		NOTIFY currentVisibilityChanged)
 
-    /** @} */
+	/** @} */
 
 public:
 	MosaicCamera();
@@ -105,10 +108,10 @@ public:
 
 	bool configureGui(bool show=true) override;
 
-    Q_INVOKABLE double getRA(const QString& cameraName) const;
-    Q_INVOKABLE double getDec(const QString& cameraName) const;
-    Q_INVOKABLE double getRotation(const QString& cameraName) const;
-    Q_INVOKABLE bool getVisibility(const QString& cameraName) const;
+	Q_INVOKABLE double getRA(const QString& cameraName) const;
+	Q_INVOKABLE double getDec(const QString& cameraName) const;
+	Q_INVOKABLE double getRotation(const QString& cameraName) const;
+	Q_INVOKABLE bool getVisibility(const QString& cameraName) const;
 
 	QString getCurrentCamera() const { return currentCamera; }
 	double getCurrentRA() const { return getRA(currentCamera); }
@@ -121,8 +124,8 @@ public:
 
 	void loadSettings();
 
-    QStringList getCameraNames() const;
-    void readPolygonSetsFromJson(const QString& cameraName, const QString& filename);
+	QStringList getCameraNames() const;
+	void readPolygonSetsFromJson(const QString& cameraName, const QString& filename);
 
 signals:
 	void flagMosaicCameraVisibilityChanged(bool b);
@@ -134,10 +137,10 @@ signals:
 	void currentVisibilityChanged(bool visible);
 
 public slots:
-    void setRA(const QString& cameraName, double ra);
-    void setDec(const QString& cameraName, double dec);
-    void setRotation(const QString& cameraName, double rotation);
-    void setVisibility(const QString& cameraName, bool visible);
+	void setRA(const QString& cameraName, double ra);
+	void setDec(const QString& cameraName, double dec);
+	void setRotation(const QString& cameraName, double rotation);
+	void setVisibility(const QString& cameraName, bool visible);
 	void setPosition(const QString& cameraName, double ra, double dec, double rotation);
 	void setRADecToView();
 	void setRADecToObject();
@@ -156,6 +159,7 @@ public slots:
 	void setCurrentVisibility(bool visible);
 
 	void saveSettings() const;
+	void restoreDefaults();
 
 private:
 	QHash<QString, Camera> cameras;

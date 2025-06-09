@@ -216,12 +216,16 @@ Q_IMPORT_PLUGIN(VtsStelPluginInterface)
 Q_IMPORT_PLUGIN(OnlineQueriesPluginInterface)
 #endif
 
-#ifdef USE_STATIC_PLUGIN_PLANES
-Q_IMPORT_PLUGIN(PlanesStelPluginInterface)
-#endif
-
 #ifdef USE_STATIC_PLUGIN_MOSAICCAMERA
 Q_IMPORT_PLUGIN(MosaicCameraStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_NEBULATEXTURES
+Q_IMPORT_PLUGIN(NebulaTexturesStelPluginInterface)
+#endif
+  
+#ifdef USE_STATIC_PLUGIN_PLANES
+Q_IMPORT_PLUGIN(PlanesStelPluginInterface)
 #endif
 
 // Initialize static variables
@@ -318,12 +322,12 @@ StelApp::~StelApp()
 	moduleMgr->unloadModule("StelVideoMgr", false);  // We need to delete it afterward
 	moduleMgr->unloadModule("StelSkyLayerMgr", false);  // We need to delete it afterward
 	moduleMgr->unloadModule("StelObjectMgr", false);// We need to delete it afterward
+	moduleMgr->unloadModule("StelSkyCultureMgr", true);// No need to delete only later!
 	StelModuleMgr* tmp = moduleMgr;
 	moduleMgr = new StelModuleMgr(); // Create a secondary instance to avoid crashes at other deinit
 	delete tmp; tmp=Q_NULLPTR;
 	delete skyImageMgr; skyImageMgr=Q_NULLPTR;
 	delete core; core=Q_NULLPTR;
-	delete skyCultureMgr; skyCultureMgr=Q_NULLPTR;
 	delete localeMgr; localeMgr=Q_NULLPTR;
 	delete audioMgr; audioMgr=Q_NULLPTR;
 	delete videoMgr; videoMgr=Q_NULLPTR;
@@ -499,7 +503,9 @@ void StelApp::init(QSettings* conf)
 	//create non-StelModule managers
 	propMgr = new StelPropertyMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
-	propMgr->registerObject(skyCultureMgr);
+	skyCultureMgr->init();
+	getModuleMgr().registerModule(skyCultureMgr);
+
 	planetLocationMgr = new StelLocationMgr();
 	actionMgr = new StelActionMgr();
 
@@ -581,6 +587,9 @@ void StelApp::init(QSettings* conf)
 	if (audioOK)
 		SplashScreen::showMessage(q_("Initializing audio..."));
 	audioMgr = new StelAudioMgr(audioOK);
+	// QtMultimedia can create and destroy intermediate contexts during initialization,
+	// displacing our main context, see GH#4143. So restore our context.
+	ensureGLContextCurrent();
 
 	// Init video manager
 #ifdef ENABLE_MEDIA

@@ -12,11 +12,11 @@ The sidereal zodiac is an imaginary belt of 360 degrees (like the tropical zodia
 
 In stellarium, we show Rāśi constellations attached to the corresponding asterisms, and not as divisions of the ecliptic offset away from their original locations to account for precession.
 
-In traditional astronomy there are two systems of measuring time - Lunar Calender & Solar calender. In both cases one year is divided into 12 months or "māsā". Name of the solar months originated from these constellation' names.
+In traditional astronomy there are two systems of measuring time - Lunar Calendar & Solar calendar. In both cases one year is divided into 12 months or "māsā". Name of the solar months originated from these constellation' names.
 
 ### <notr>Nakṣatra (नक्षत्रम्)</notr>
 
-In Hindu tradition the ecliptic is divided into 27 parts of approximately 13°20', which correspond with 27 asterisms known as the nakṣatra-s (full list, with western equivalents here: https://goo.gl/2PVi28 ). In the earliest extant layers of the tradition this number is 28. This division is critical for several purposes including timing rituals and determining the birth lunar mansions. Since these asterisms define an area in the sky, they are also technically constellations.
+In Hindu tradition the ecliptic is divided into 27 parts of approximately 13°20', which correspond with 27 asterisms known as the nakṣatra-s (full list, with western equivalents here: https://en.wikipedia.org/wiki/Nakshatra ). In the earliest extant layers of the tradition this number is 28. This division is critical for several purposes including timing rituals and determining the birth lunar mansions. Since these asterisms define an area in the sky, they are also technically constellations.
 
 sUrya-siddhAnta and vedAnga-jyotiSha specify start coordinates for the 13°20' divisions using some stars (Please see penultimate paragraph in [this page](https://archive.org/stream/HistoryOfCalendarPanchangaCommittee/History-of-Calendar-Panchanga-Committee#page/n42/mode/1up))
 

@@ -1158,21 +1158,26 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 
 			qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity, ipRegion, ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
 
+			if (latitude==0.0 && longitude==0.0 && ipTimeZone.isEmpty() && ipCountry.isEmpty() && ipCountryCode.isEmpty())
+				throw std::runtime_error("IP lookup provided bogus result.");
+
 			QString regionName = pickRegionFromCountryCode(ipCountryCode.toLower());
 			float luminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 
 			// Check location in our database and fetch light pollution luminance if it possible
 			StelLocation ipLoc;
+			ipLoc.role = '!'; // the location is not valid by default
 			if (!ipCity.isEmpty())
 				ipLoc = locationForString(QString("%1, %2").arg(ipCity, regionName));
 			else
 			{
 				auto closeLocations = pickLocationsNearby("Earth", longitude, latitude, 0.5f);
 				// find closest location to (longitude,latitude) to grab light pollution info from.
-				// This is a bit awkard to begin with. Consider being 40km from an isolated larger city.
+				// This is a bit awkward to begin with. Consider being 40km from an isolated larger city.
 				// Sky is good, and you take LP value for the city?
 				double minDistanceKm=1E12;
 				StelLocation candLoc;
+				candLoc.role = '!'; // the location is not valid by default
 				QMapIterator<QString, StelLocation> it(closeLocations);
 				while (it.hasNext()) {
 					it.next();
@@ -1185,11 +1190,14 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 						qDebug() << "-- TAKEN!";
 					}
 				}
-				qDebug() << "Closest known place:" << candLoc.name << "at" << candLoc.distanceKm(longitude, latitude) << "km";
-				// Consider result valid only in a meaningful distance. Light pollution is changing rapidly.
-				// Try 25 km, YMMV.
-				if (minDistanceKm < 25)
-					ipLoc = candLoc;
+				if (candLoc.isValid() && closeLocations.size()>0)
+				{
+					qDebug() << "Closest known place:" << candLoc.name << "at" << candLoc.distanceKm(longitude, latitude) << "km";
+					// Consider result valid only in a meaningful distance. Light pollution is changing rapidly.
+					// Try 25 km, YMMV.
+					if (minDistanceKm < 25)
+						ipLoc = candLoc;
+				}
 			}
 			if (ipLoc.isValid())
 				luminance = ipLoc.lightPollutionLuminance.toFloat();
@@ -1226,8 +1234,8 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 		}
 		catch (const std::exception& e)
 		{
-			qDebug() << "Failure getting IP-based location: answer is in not acceptable format! Error: " << e.what()
-					<< "\nLet's use Paris, France as default location...";
+			qWarning() << "Failure getting IP-based location: answer is in not acceptable format! Error:" << e.what();
+			qWarning() << "Moving to the fallback location";
 			core->moveObserverTo(getLastResortLocation(), 0.0, 0.0, "guereins"); // Answer is not in JSON format! A possible block by DNS server or firewall
 		}
 	}
