@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-06-02 10:04+0700\n"
+"POT-Creation-Date: 2025-06-09 21:24+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2025\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -58,7 +58,7 @@ msgstr "нетиповий об’єкт"
 msgid "Marker"
 msgstr "Позначка"
 
-#: src/core/modules/Asterism.hpp:63
+#: src/core/modules/Asterism.hpp:64
 msgid "asterism"
 msgstr "астеризм"
 
@@ -71,7 +71,7 @@ msgstr "астеризм"
 #: src/core/modules/NebulaMgr.cpp:468 src/core/modules/SolarSystem.cpp:345
 #: src/core/modules/MilkyWay.cpp:109 src/core/modules/ZodiacalLight.cpp:115
 #: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:156
-#: src/core/modules/HipsMgr.cpp:157 src/core/StelApp.cpp:689
+#: src/core/modules/HipsMgr.cpp:157 src/core/StelApp.cpp:693
 #: src/core/StelCore.cpp:309 src/core/StelSkyLayerMgr.cpp:83
 #: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:962
 msgid "Display Options"
@@ -95,7 +95,7 @@ msgstr "Увімкнути або вимкнути режим вибору од�
 msgid "Ray helpers"
 msgstr "Напрямні"
 
-#: src/core/modules/Constellation.hpp:71
+#: src/core/modules/Constellation.hpp:72
 msgid "constellation"
 msgstr "сузір'я"
 
@@ -214,7 +214,7 @@ msgstr "Головна вертикаль"
 
 #. TRANSLATORS: altitude
 #. TRANSLATORS: Satellite altitude
-#: src/core/modules/GridLinesMgr.cpp:797 src/gui/SearchDialog.cpp:312
+#: src/core/modules/GridLinesMgr.cpp:797 src/gui/SearchDialog.cpp:313
 #: src/gui/AstroCalcDialog.cpp:871 src/gui/AstroCalcDialog.cpp:1777
 #: src/gui/AstroCalcDialog.cpp:2177 src/gui/AstroCalcDialog.cpp:2448
 #: src/gui/AstroCalcChart.cpp:82 src/gui/AstroCalcChart.cpp:420
@@ -837,6 +837,7 @@ msgstr "Циклічна зміна у забрудненні світлом"
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:187
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:184
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1752
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:304
 msgid "Author"
 msgstr "Автор"
 
@@ -1964,7 +1965,7 @@ msgstr "кут. мс"
 msgid "Discoverer"
 msgstr "Першовідкривач"
 
-#: src/core/modules/Nebula.cpp:461 src/ui_searchDialogGui.h:843
+#: src/core/modules/Nebula.cpp:461 src/ui_searchDialogGui.h:849
 msgid "Morphological description"
 msgstr "Морфологічний опис"
 
@@ -3057,143 +3058,143 @@ msgstr "Грудневе сонцестояння наступного року"
 msgid "December solstice at previous year"
 msgstr "Грудневе сонцестояння попереднього року"
 
-#: src/core/StelApp.cpp:471
+#: src/core/StelApp.cpp:475
 msgid "Initializing textures..."
 msgstr "Ініціалізуємо текстури…"
 
-#: src/core/StelApp.cpp:475
+#: src/core/StelApp.cpp:479
 msgid "Initializing network access..."
 msgstr "Ініціалізуємо доступ до мережі…"
 
-#: src/core/StelApp.cpp:478
+#: src/core/StelApp.cpp:482
 msgid "Initializing network disk cache..."
 msgstr "Ініціалізуємо мережевий кеш на диску…"
 
-#: src/core/StelApp.cpp:492
+#: src/core/StelApp.cpp:496
 msgid "Initializing network proxy..."
 msgstr "Ініціалізуємо проксі-сервер мережі…"
 
-#: src/core/StelApp.cpp:509
+#: src/core/StelApp.cpp:513
 msgid "Initializing Object Database..."
 msgstr "Ініціалізуємо базу даних об'єктів…"
 
-#: src/core/StelApp.cpp:515
+#: src/core/StelApp.cpp:519
 msgid "Initializing HiPS survey..."
 msgstr "Ініціалізуємо огляд неба HiPS…"
 
-#: src/core/StelApp.cpp:521
+#: src/core/StelApp.cpp:525
 msgid "Initializing Solar System objects..."
 msgstr "Ініціалізуємо об'єкти сонячної системи…"
 
-#: src/core/StelApp.cpp:527
+#: src/core/StelApp.cpp:531
 msgid "Initializing planetary nomenclature..."
 msgstr "Ініціалізуємо номенклатуру планет…"
 
-#: src/core/StelApp.cpp:533
+#: src/core/StelApp.cpp:537
 msgid "Initializing stars..."
 msgstr "Ініціалізуємо зірки…"
 
-#: src/core/StelApp.cpp:538
+#: src/core/StelApp.cpp:542
 msgid "Initializing core..."
 msgstr "Ініціалізуємо ядро…"
 
-#: src/core/StelApp.cpp:542
+#: src/core/StelApp.cpp:546
 msgid "Initializing deep-sky objects..."
 msgstr "Ініціалізуємо віддалені об'єкти…"
 
-#: src/core/StelApp.cpp:548
+#: src/core/StelApp.cpp:552
 msgid "Initializing Milky Way..."
 msgstr "Ініціалізуємо Чумацький шлях…"
 
-#: src/core/StelApp.cpp:554
+#: src/core/StelApp.cpp:558
 msgid "Initializing zodiacal light..."
 msgstr "Ініціалізуємо зодіакальне світло…"
 
-#: src/core/StelApp.cpp:560
+#: src/core/StelApp.cpp:564
 msgid "Initializing sky image layer..."
 msgstr "Ініціалізуємо шар зоряного неба…"
 
-#: src/core/StelApp.cpp:566
+#: src/core/StelApp.cpp:570
 msgid "Initializing TOAST surveys..."
 msgstr "Ініціалізуємо огляди TOAST…"
 
-#: src/core/StelApp.cpp:580
+#: src/core/StelApp.cpp:584
 msgid "Initializing audio..."
 msgstr "Ініціалізуємо звук…"
 
-#: src/core/StelApp.cpp:588
+#: src/core/StelApp.cpp:592
 msgid "Initializing video..."
 msgstr "Ініціалізуємо відео…"
 
-#: src/core/StelApp.cpp:595
+#: src/core/StelApp.cpp:599
 msgid "Initializing constellations..."
 msgstr "Ініціалізуємо сузір'я…"
 
-#: src/core/StelApp.cpp:601
+#: src/core/StelApp.cpp:605
 msgid "Initializing asterisms..."
 msgstr "Ініціалізуємо астеризми…"
 
-#: src/core/StelApp.cpp:607
+#: src/core/StelApp.cpp:611
 msgid "Initializing landscape..."
 msgstr "Ініціалізуємо ландшафт…"
 
-#: src/core/StelApp.cpp:620
+#: src/core/StelApp.cpp:624
 msgid "Initializing grid lines..."
 msgstr "Ініціалізуємо лінії сітки…"
 
-#: src/core/StelApp.cpp:625
+#: src/core/StelApp.cpp:629
 msgid "Initializing special markers..."
 msgstr "Ініціалізуємо спеціальні позначки…"
 
-#: src/core/StelApp.cpp:631
+#: src/core/StelApp.cpp:635
 msgid "Initializing sporadic meteors..."
 msgstr "Ініціалізуємо спорадичні метеори…"
 
-#: src/core/StelApp.cpp:637
+#: src/core/StelApp.cpp:641
 msgid "Initializing user labels..."
 msgstr "Ініціалізуємо мітки користувача…"
 
-#: src/core/StelApp.cpp:642
+#: src/core/StelApp.cpp:646
 msgid "Initializing sky cultures..."
 msgstr "Ініціалізуємо картини зоряного неба…"
 
-#: src/core/StelApp.cpp:646
+#: src/core/StelApp.cpp:650
 msgid "Initializing user markers..."
 msgstr "Ініціалізуємо позначки користувача…"
 
-#: src/core/StelApp.cpp:652
+#: src/core/StelApp.cpp:656
 msgid "Initializing custom objects..."
 msgstr "Ініціалізуємо нетипові об'єкти…"
 
-#: src/core/StelApp.cpp:658
+#: src/core/StelApp.cpp:662
 msgid "Initializing highlights..."
 msgstr "Ініціалізуємо підсвічування…"
 
-#: src/core/StelApp.cpp:664
+#: src/core/StelApp.cpp:668
 msgid "Initializing specific time..."
 msgstr "Ініціалізуємо вказаний час…"
 
-#: src/core/StelApp.cpp:672
+#: src/core/StelApp.cpp:676
 msgid "Initializing scripting..."
 msgstr "Ініціалізуємо роботу зі скриптами…"
 
-#: src/core/StelApp.cpp:677
+#: src/core/StelApp.cpp:681
 msgid "Initializing color scheme..."
 msgstr "Ініціалізуємо схему кольорів…"
 
-#: src/core/StelApp.cpp:689 src/ui_configurationDialog.h:2142
+#: src/core/StelApp.cpp:693 src/ui_configurationDialog.h:2142
 msgid "Night mode"
 msgstr "Нічний режим"
 
-#: src/core/StelApp.cpp:719
+#: src/core/StelApp.cpp:723
 msgid "Initializing SPOUT sender..."
 msgstr "Ініціалізуємо засіб надсилання SPOUT…"
 
-#: src/core/StelApp.cpp:729
+#: src/core/StelApp.cpp:733
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Не вдалося створити надсилання Spout. Докладніше про це у журналі."
 
-#: src/core/StelApp.cpp:756
+#: src/core/StelApp.cpp:760
 msgid "Loading plugin"
 msgstr "Завантажуємо додаток"
 
@@ -4269,14 +4270,14 @@ msgid "Reload the deep-sky objects background images"
 msgstr "Перезавантажити зображення тла віддалених об'єктів"
 
 #. TRANSLATORS: The full phrase is "Loading '%SHORT_NAME%'" in progress bar
-#: src/core/StelSkyLayerMgr.cpp:199
+#: src/core/StelSkyLayerMgr.cpp:211
 #, qt-format
 msgid "Loading '%1'"
 msgstr "Завантаження «%1»"
 
 #. TRANSLATORS: The full phrase is "Loading '%SHORT_NAME%' from %URL%" in
 #. progress bar
-#: src/core/StelSkyLayerMgr.cpp:204
+#: src/core/StelSkyLayerMgr.cpp:216
 #, qt-format
 msgid "Loading '%1' from %2"
 msgstr "Завантаження «%1» з %2"
@@ -4529,6 +4530,7 @@ msgstr ""
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:186
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:183
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1751
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:303
 msgid "License"
 msgstr "Ліцензування"
 
@@ -5039,6 +5041,7 @@ msgstr "Контакти"
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:185
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:182
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1750
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:302
 msgid "Version"
 msgstr "Версія"
 
@@ -5791,7 +5794,7 @@ msgstr "Вікно довідки"
 msgid "Configuration window"
 msgstr "Вікно налаштування"
 
-#: src/gui/StelGui.cpp:271 src/ui_searchDialogGui.h:758
+#: src/gui/StelGui.cpp:271 src/ui_searchDialogGui.h:764
 msgid "Search window"
 msgstr "Вікно пошуку"
 
@@ -6339,54 +6342,54 @@ msgstr "С"
 msgid "Include File"
 msgstr "Включити файл"
 
-#: src/gui/SearchDialog.cpp:264
+#: src/gui/SearchDialog.cpp:265
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr "Екваторіальні (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:265
+#: src/gui/SearchDialog.cpp:266
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr "Екваторіальні"
 
-#: src/gui/SearchDialog.cpp:266
+#: src/gui/SearchDialog.cpp:267
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr "Горизонтальні"
 
-#: src/gui/SearchDialog.cpp:267
+#: src/gui/SearchDialog.cpp:268
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr "Галактичні"
 
-#: src/gui/SearchDialog.cpp:268
+#: src/gui/SearchDialog.cpp:269
 msgctxt "coordinate system"
 msgid "Supergalactic"
 msgstr "Супергалактична"
 
-#: src/gui/SearchDialog.cpp:269
+#: src/gui/SearchDialog.cpp:270
 msgctxt "coordinate system"
 msgid "Ecliptic"
 msgstr "Екліптична"
 
-#: src/gui/SearchDialog.cpp:270
+#: src/gui/SearchDialog.cpp:271
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
 msgstr "Екліптична (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:298 src/gui/AstroCalcChart.cpp:445
+#: src/gui/SearchDialog.cpp:299 src/gui/AstroCalcChart.cpp:445
 #: src/gui/AstroCalcChart.cpp:471 src/gui/ObsListDialog.cpp:292
 msgid "Right ascension"
 msgstr "Пряме сходження"
 
-#: src/gui/SearchDialog.cpp:301 src/gui/AstroCalcChart.cpp:93
+#: src/gui/SearchDialog.cpp:302 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:428
 #: src/gui/AstroCalcChart.cpp:454 src/gui/ObsListDialog.cpp:293
 msgid "Declination"
 msgstr "Схилення"
 
 #. TRANSLATORS: azimuth
-#: src/gui/SearchDialog.cpp:309 src/gui/AstroCalcDialog.cpp:869
+#: src/gui/SearchDialog.cpp:310 src/gui/AstroCalcDialog.cpp:869
 #: src/gui/AstroCalcDialog.cpp:1775 src/gui/AstroCalcDialog.cpp:2449
 #: src/gui/AstroCalcChart.cpp:90 src/gui/AstroCalcChart.cpp:422
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1544
@@ -6394,7 +6397,7 @@ msgid "Azimuth"
 msgstr "Азимут"
 
 #. TRANSLATORS: ecliptic longitude
-#: src/gui/SearchDialog.cpp:323 src/gui/AstroCalcDialog.cpp:966
+#: src/gui/SearchDialog.cpp:324 src/gui/AstroCalcDialog.cpp:966
 #: src/gui/AstroCalcDialog.cpp:2451 src/gui/AstroCalcDialog.cpp:3046
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:711
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:757
@@ -6402,57 +6405,57 @@ msgid "Longitude"
 msgstr "Довгота"
 
 #. TRANSLATORS: ecliptic latitude
-#: src/gui/SearchDialog.cpp:326 src/gui/AstroCalcDialog.cpp:964
+#: src/gui/SearchDialog.cpp:327 src/gui/AstroCalcDialog.cpp:964
 #: src/gui/AstroCalcDialog.cpp:2450 src/gui/AstroCalcDialog.cpp:3045
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:731
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:756
 msgid "Latitude"
 msgstr "Широта"
 
-#: src/gui/SearchDialog.cpp:498
+#: src/gui/SearchDialog.cpp:502
 msgctxt "search tool"
 msgid "Default"
 msgstr "Типовий"
 
-#: src/gui/SearchDialog.cpp:500
+#: src/gui/SearchDialog.cpp:504
 msgctxt "search tool"
 msgid "Range"
 msgstr "Діапазон"
 
-#: src/gui/SearchDialog.cpp:503
+#: src/gui/SearchDialog.cpp:507
 msgctxt "search tool"
 msgid "searches"
 msgstr "пошуки"
 
-#: src/gui/SearchDialog.cpp:633
+#: src/gui/SearchDialog.cpp:637
 msgid "Clear search history: delete all search objects data"
 msgstr "Спорожнити журнал пошуків: вилучити усі дані пошуку об'єктів"
 
-#: src/gui/SearchDialog.cpp:633
+#: src/gui/SearchDialog.cpp:637
 msgid "Clear search history: no data to delete"
 msgstr "Спорожнити журнал пошуку: немає даних для вилучення"
 
-#: src/gui/SearchDialog.cpp:1180
+#: src/gui/SearchDialog.cpp:1190
 msgid "Simbad Lookup Error"
 msgstr "Помилка під час пошуку у Simbad"
 
-#: src/gui/SearchDialog.cpp:1187
+#: src/gui/SearchDialog.cpp:1197
 msgid "Simbad Lookup"
 msgstr "Пошук у Simbad"
 
-#: src/gui/SearchDialog.cpp:1480
+#: src/gui/SearchDialog.cpp:1494
 msgid "University of Strasbourg (France)"
 msgstr "Стразбурзький університет (Франція)"
 
-#: src/gui/SearchDialog.cpp:1481
+#: src/gui/SearchDialog.cpp:1495
 msgid "Harvard-Smithsonian Center for Astrophysics (USA)"
 msgstr "Гарвард-Смітсонівський астрофізичний центр (США)"
 
-#: src/gui/SearchDialog.cpp:1482
+#: src/gui/SearchDialog.cpp:1496
 msgid "Strasbourg astronomical Data Center (France)"
 msgstr "Страсбурзький центр астрономічних даних (Франція)"
 
-#: src/gui/SearchDialog.cpp:1564
+#: src/gui/SearchDialog.cpp:1578
 msgid "Paste and Search"
 msgstr "Вставити і шукати"
 
@@ -7253,12 +7256,12 @@ msgid "Observable Duration"
 msgstr "Тривалість спостереження"
 
 #: src/gui/AstroCalcDialog.cpp:4312
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1466
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1468
 msgid "Mercury"
 msgstr "Меркурій"
 
 #: src/gui/AstroCalcDialog.cpp:4317
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1469
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1471
 msgid "Venus"
 msgstr "Венера"
 
@@ -8144,7 +8147,7 @@ msgstr "Кульмінація"
 #. TRANSLATORS: Name of landscape
 #: src/gui/AstroCalcChart.cpp:85 src/translations.h:464
 #: src/ui_astroCalcAlmanacWidget.h:798
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1457
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1459
 msgid "Sun"
 msgstr "Сонце"
 
@@ -8164,7 +8167,7 @@ msgstr "Астрономічні сутінки"
 #: src/gui/AstroCalcChart.cpp:89 src/translations.h:440
 #: src/ui_astroCalcAlmanacWidget.h:807
 #: plugins/NavStars/src/ui_navStarsWindow.h:541
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1460
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1462
 msgid "Moon"
 msgstr "Місяць"
 
@@ -9528,17 +9531,17 @@ msgid "Garching"
 msgstr "Ґархінґ"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:448 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1472
+#: src/translations.h:448 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1474
 msgid "Mars"
 msgstr "Марс"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:450 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1475
+#: src/translations.h:450 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1477
 msgid "Jupiter"
 msgstr "Юпітер"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:452 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1478
+#: src/translations.h:452 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1480
 msgid "Saturn"
 msgstr "Сатурн"
 
@@ -10211,7 +10214,7 @@ msgid "Edit keyboard shortcuts..."
 msgstr "Змінити клавіатурні скорочення…"
 
 #. TRANSLATORS: See http://en.wikipedia.org/wiki/Bayer_designation
-#: src/translations.h:648 src/ui_searchDialogGui.h:836
+#: src/translations.h:648 src/ui_searchDialogGui.h:842
 msgid "Greek letters for Bayer designations"
 msgstr "Грецькі літери для позначень Баєра"
 
@@ -10282,6 +10285,7 @@ msgstr "Ви&брати"
 #: src/translations.h:675 src/ui_configurationDialog.h:2076
 #: src/ui_obsListDialog.h:365
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -12039,235 +12043,239 @@ msgstr "Автоматично вмикати атмосфери при змін
 msgid "Auto-enable atmosphere"
 msgstr "Автовмикання атмосфери"
 
-#: src/ui_searchDialogGui.h:754
+#: src/ui_searchDialogGui.h:760
 msgid "Find Object"
 msgstr "Знайти об'єкт"
 
-#: src/ui_searchDialogGui.h:760
+#: src/ui_searchDialogGui.h:766
 msgid "Use tab key for select of found items"
 msgstr "Використовувати клавішу Tab для позначення знайдених об’єктів"
 
-#: src/ui_searchDialogGui.h:765
+#: src/ui_searchDialogGui.h:771
 msgid "iota"
 msgstr "йота"
 
-#: src/ui_searchDialogGui.h:768
+#: src/ui_searchDialogGui.h:774
 msgid "alpha"
 msgstr "альфа"
 
-#: src/ui_searchDialogGui.h:771
+#: src/ui_searchDialogGui.h:777
 msgid "beta"
 msgstr "бета"
 
-#: src/ui_searchDialogGui.h:774
+#: src/ui_searchDialogGui.h:780
 msgid "gamma"
 msgstr "гамма"
 
-#: src/ui_searchDialogGui.h:777
+#: src/ui_searchDialogGui.h:783
 msgid "delta"
 msgstr "дельта"
 
-#: src/ui_searchDialogGui.h:780
+#: src/ui_searchDialogGui.h:786
 msgid "epsilon"
 msgstr "епсилон"
 
-#: src/ui_searchDialogGui.h:783
+#: src/ui_searchDialogGui.h:789
 msgid "zeta"
 msgstr "дзета"
 
-#: src/ui_searchDialogGui.h:786
+#: src/ui_searchDialogGui.h:792
 msgid "eta"
 msgstr "ета"
 
-#: src/ui_searchDialogGui.h:789
+#: src/ui_searchDialogGui.h:795
 msgid "theta"
 msgstr "тета"
 
-#: src/ui_searchDialogGui.h:792
+#: src/ui_searchDialogGui.h:798
 msgid "kappa"
 msgstr "каппа"
 
-#: src/ui_searchDialogGui.h:795
+#: src/ui_searchDialogGui.h:801
 msgid "lambda"
 msgstr "лямбда"
 
-#: src/ui_searchDialogGui.h:798
+#: src/ui_searchDialogGui.h:804
 msgid "mu"
 msgstr "мю"
 
-#: src/ui_searchDialogGui.h:801
+#: src/ui_searchDialogGui.h:807
 msgid "nu"
 msgstr "ню"
 
-#: src/ui_searchDialogGui.h:804
+#: src/ui_searchDialogGui.h:810
 msgid "xi"
 msgstr "ксі"
 
-#: src/ui_searchDialogGui.h:807
+#: src/ui_searchDialogGui.h:813
 msgid "omicron"
 msgstr "омікрон"
 
-#: src/ui_searchDialogGui.h:810
+#: src/ui_searchDialogGui.h:816
 msgid "pi"
 msgstr "пі"
 
-#: src/ui_searchDialogGui.h:813
+#: src/ui_searchDialogGui.h:819
 msgid "rho"
 msgstr "ро"
 
-#: src/ui_searchDialogGui.h:816
+#: src/ui_searchDialogGui.h:822
 msgid "sigma"
 msgstr "сигма"
 
-#: src/ui_searchDialogGui.h:819
+#: src/ui_searchDialogGui.h:825
 msgid "tau"
 msgstr "тау"
 
-#: src/ui_searchDialogGui.h:822
+#: src/ui_searchDialogGui.h:828
 msgid "upsilon"
 msgstr "іпсилон"
 
-#: src/ui_searchDialogGui.h:825
+#: src/ui_searchDialogGui.h:831
 msgid "phi"
 msgstr "фі"
 
-#: src/ui_searchDialogGui.h:828
+#: src/ui_searchDialogGui.h:834
 msgid "chi"
 msgstr "хі"
 
-#: src/ui_searchDialogGui.h:831
+#: src/ui_searchDialogGui.h:837
 msgid "psi"
 msgstr "псі"
 
-#: src/ui_searchDialogGui.h:834
+#: src/ui_searchDialogGui.h:840
 msgid "omega"
 msgstr "омега"
 
-#: src/ui_searchDialogGui.h:837
+#: src/ui_searchDialogGui.h:843
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:759
 msgid "Object"
 msgstr "Об’єкт"
 
-#: src/ui_searchDialogGui.h:838
+#: src/ui_searchDialogGui.h:844
 msgid "Query SIMBAD about selected object"
 msgstr "Шукати позначений об'єкт у SIMBAD"
 
-#: src/ui_searchDialogGui.h:839
+#: src/ui_searchDialogGui.h:845
 msgid "All IDs"
 msgstr "Усі ідентифікатори"
 
-#: src/ui_searchDialogGui.h:840
+#: src/ui_searchDialogGui.h:846
 msgid "Types"
 msgstr "Типи"
 
-#: src/ui_searchDialogGui.h:841
+#: src/ui_searchDialogGui.h:847
 msgid "Spectral Class"
 msgstr "Спектральний клас"
 
-#: src/ui_searchDialogGui.h:845
+#: src/ui_searchDialogGui.h:851
 msgid "Morph. Descr."
 msgstr "Морф. опис"
 
-#: src/ui_searchDialogGui.h:846
+#: src/ui_searchDialogGui.h:852
 msgid "Dimensions"
 msgstr "Розміри"
 
-#: src/ui_searchDialogGui.h:847
+#: src/ui_searchDialogGui.h:853
 msgid "Max. search radius"
 msgstr "Макс. радіус пошуку"
 
-#: src/ui_searchDialogGui.h:848
+#: src/ui_searchDialogGui.h:854
 msgid " arcsec"
 msgstr "кут. с."
 
-#: src/ui_searchDialogGui.h:849
+#: src/ui_searchDialogGui.h:855
 msgid "Max. results "
 msgstr "Макс. к-ть результатів"
 
-#: src/ui_searchDialogGui.h:851
+#: src/ui_searchDialogGui.h:857
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:564
 msgid "Coordinate system:"
 msgstr "Система координат:"
 
-#: src/ui_searchDialogGui.h:855
+#: src/ui_searchDialogGui.h:861
 msgid "Go to position"
 msgstr "Перейти до позиції"
 
-#: src/ui_searchDialogGui.h:857
+#: src/ui_searchDialogGui.h:863
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
 "Зауважте: дія цього інструмента не стосується виправлення рефракції для "
 "координат."
 
-#: src/ui_searchDialogGui.h:858
+#: src/ui_searchDialogGui.h:864
 msgid "Position"
 msgstr "Позиція"
 
-#: src/ui_searchDialogGui.h:860
+#: src/ui_searchDialogGui.h:866
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
 "Пошук деяких з об’єктів можна буде здійснити після вмикання відповідних "
 "додатків"
 
-#: src/ui_searchDialogGui.h:862
+#: src/ui_searchDialogGui.h:868
 msgid "names in English"
 msgstr "назви англійською"
 
-#: src/ui_searchDialogGui.h:863 src/ui_astroCalcDialog.h:2548
+#: src/ui_searchDialogGui.h:869 src/ui_astroCalcDialog.h:2548
 msgid "Search in list..."
 msgstr "Шукати у списку…"
 
-#: src/ui_searchDialogGui.h:864
+#: src/ui_searchDialogGui.h:870
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:491
 msgid "Lists"
 msgstr "Списки"
 
-#: src/ui_searchDialogGui.h:865
+#: src/ui_searchDialogGui.h:871
 msgid "Search options"
 msgstr "Параметри пошуку"
 
-#: src/ui_searchDialogGui.h:866
+#: src/ui_searchDialogGui.h:872
 msgid "Use autofill only from the beginning of words"
 msgstr "Використовувати автодоповнення лише для початків слів"
 
-#: src/ui_searchDialogGui.h:867
+#: src/ui_searchDialogGui.h:873
 msgid "Use sorting by string length"
 msgstr "Упорядкування за довжиною рядка"
 
-#: src/ui_searchDialogGui.h:868
+#: src/ui_searchDialogGui.h:874
 msgid "Lock position when coordinates are used"
 msgstr "Заблокувати позицію, якщо використано координати"
 
-#: src/ui_searchDialogGui.h:869
+#: src/ui_searchDialogGui.h:875
+msgid "Automatic closing dialog"
+msgstr "Автоматичне закриття вікна"
+
+#: src/ui_searchDialogGui.h:876
 msgid "Show FOV center marker when position is search"
 msgstr "Показувати позначку центру поля зору при пошуку позиції"
 
-#: src/ui_searchDialogGui.h:871
+#: src/ui_searchDialogGui.h:878
 msgid "Use on-line astronomical database SIMBAD"
 msgstr "Використовувати інтернет-базу астрономічних даних SIMBAD"
 
-#: src/ui_searchDialogGui.h:873
+#: src/ui_searchDialogGui.h:880
 msgid "Use SIMBAD"
 msgstr "Використовувати SIMBAD"
 
-#: src/ui_searchDialogGui.h:874
+#: src/ui_searchDialogGui.h:881
 msgid "Server:"
 msgstr "Сервер:"
 
-#: src/ui_searchDialogGui.h:875
+#: src/ui_searchDialogGui.h:882
 msgid "Recent Searches"
 msgstr "Нещодавні пошукуи"
 
-#: src/ui_searchDialogGui.h:879
+#: src/ui_searchDialogGui.h:886
 msgid "Max items to display:"
 msgstr "Макс. к-ть показаних записів:"
 
-#: src/ui_searchDialogGui.h:881
+#: src/ui_searchDialogGui.h:888
 msgid "Deletes all recent search object data"
 msgstr "Вилучає усі дані щодо нещодавніх об'єктів пошуку"
 
-#: src/ui_searchDialogGui.h:883 src/ui_viewDialog.h:4658
+#: src/ui_searchDialogGui.h:890 src/ui_viewDialog.h:4658
 #: src/ui_viewDialog.h:4703 src/ui_configurationDialog.h:2318
 #: src/ui_configurationDialog.h:2329
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:304
@@ -12969,6 +12977,7 @@ msgstr "Надписи"
 
 #: src/ui_viewDialog.h:4101 src/ui_viewDialog.h:4104
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1542
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:535
 msgid "Brightness"
 msgstr "Яскравість"
 
@@ -14016,6 +14025,7 @@ msgstr "Відновити типові значення параметрів St
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:709
 #: plugins/Calendars/src/ui_calendarsDialog.h:943
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:785
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:538
 msgid "Restore defaults"
 msgstr "Відновити типові"
 
@@ -16473,6 +16483,7 @@ msgid "Reset to useful defaults"
 msgstr "Скинути до придатних типових значень"
 
 #: src/ui_tonemappingDialog.h:153
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:530
 msgid "Reset"
 msgstr "Скинути"
 
@@ -16740,6 +16751,7 @@ msgstr "Дозволити прилипання до позначеного об
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:781
 #: plugins/Calendars/src/ui_calendarsDialog.h:995
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:787
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:545
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Про програму"
@@ -16861,6 +16873,7 @@ msgstr "Поле зору видошукача"
 #: plugins/Scenery3d/src/Scenery3d.cpp:336
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:272
 #: plugins/Calendars/src/Calendars.cpp:194
+#: plugins/NebulaTextures/src/NebulaTextures.cpp:93
 msgid "Show settings dialog"
 msgstr "Показати діалогове вікно параметрів"
 
@@ -29318,44 +29331,44 @@ msgstr "Показувати лінію нетипового схилення 1"
 msgid "Show Line for Custom Declination 2"
 msgstr "Показувати лінію нетипового схилення 2"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1428
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1430
 msgid "Equinox"
 msgstr "Рівнодення"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1431
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1433
 msgid "Solstice"
 msgstr "Сонцестояння"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1434
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1436
 msgid "Crossquarter"
 msgstr "Квартальний день"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1437
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1439
 msgid "Major Lunar Standstill"
 msgstr "Основна місячна зупинка"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1440
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1442
 msgid "Minor Lunar Standstill"
 msgstr "Мінорна місячна зупинка"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1443
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1445
 msgid "Polar Circle"
 msgstr "Полярне коло"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1446
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1448
 msgid "Zenith Passage"
 msgstr "Проходження зеніту"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1449
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1451
 msgid "Nadir Passage"
 msgstr "Проходження надиру"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1454
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1456
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:699
 msgid "Selected Object"
 msgstr "Позначений об’єкт"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1463
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1465
 msgid "error if you can read this"
 msgstr "помилка, якщо ви це бачите"
 
@@ -34287,19 +34300,19 @@ msgctxt "calendar"
 msgid "Mesoamerica"
 msgstr "Мезоамерика"
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:55
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:105
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:57
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:107
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:108
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:109
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:110
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:111
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:112
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:113
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:114
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:193
 msgid "Online Queries"
 msgstr "Інтернет-запити"
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:58
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:60
 msgid ""
 "This plugin allows object information retrieval from selected online "
 "services."
@@ -34307,55 +34320,55 @@ msgstr ""
 "За допомогою цього додатка можна отримувати відомості з вибраних джерел в "
 "інтернеті."
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:105
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:107
 msgid "Show window for Online Queries"
 msgstr "Показувати вікно для «Інтернет-запитів»"
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:107
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:109
 msgid "Call AAVSO database on current selection"
 msgstr "Запит до AAVSO щодо позначеного"
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:108
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:110
 msgid "Call GCVS database on current selection"
 msgstr "Запит до GCVS щодо позначеного"
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:109
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:111
 msgid "Call Wikipedia on current selection"
 msgstr "Запит до Вікіпедії щодо позначеного"
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:110
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:112
 msgid "Call custom site 1 on current selection"
 msgstr "Запит до нетипового сайта 1 щодо позначеного"
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:111
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:113
 msgid "Call custom site 2 on current selection"
 msgstr "Запит до нетипового сайта 2 щодо позначеного"
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:112
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:114
 msgid "Call custom site 3 on current selection"
 msgstr "Запит до нетипового сайта 3 щодо позначеного"
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:284
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:287
 msgid "Please select an object first!"
 msgstr "Будь ласка, спочатку виберіть об'єкт!"
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:293
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:296
 msgctxt "OnlineQueries"
 msgid "Not a star!"
 msgstr "Не зірка!"
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:300
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:314
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:303
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:317
 msgctxt "OnlineQueries"
 msgid "Not a HIPPARCOS star!"
 msgstr "Не зірка HIPPARCOS!"
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:347
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:353
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:350
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:364
 msgid "ERROR"
 msgstr "ПОМИЛКА"
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:347
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:350
 msgid ""
 "We can request data for stars, planets and deep-sky objects. A valid name "
 "for this object could not be found. Please enable a few DSO catalogs to form"
@@ -34366,11 +34379,13 @@ msgstr ""
 "декілька каталогів віддалених об'єктів для формування принаймні числової "
 "назви."
 
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:353
-msgid "We can request data for stars, planets and deep-sky objects only."
+#: plugins/OnlineQueries/src/OnlineQueries.cpp:364
+msgid ""
+"We can request data for stars, constellations, asterisms, planets and deep-"
+"sky objects only."
 msgstr ""
-"Ми можемо надсилати запит щодо даних лише для зірок, планет та віддалених "
-"об'єктів."
+"Ми можемо надсилати запит щодо даних лише для зірок, сузір'їв, астеризмів, "
+"планет та віддалених об'єктів."
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:109
 msgctxt "GUI label"
@@ -35036,3 +35051,395 @@ msgstr "Позначати центр проєкції"
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:784
 msgid "Reset image position on loading"
 msgstr "Скинути розташування зображення при завантаженні"
+
+#: plugins/NebulaTextures/src/PlateSolver.cpp:150
+msgid "Sending login request..."
+msgstr "Надсилання запиту щодо входу…"
+
+#: plugins/NebulaTextures/src/PlateSolver.cpp:169
+#: plugins/NebulaTextures/src/PlateSolver.cpp:254
+msgid "Network reply error."
+msgstr "Помилка у відповіді мережі."
+
+#: plugins/NebulaTextures/src/PlateSolver.cpp:176
+msgid "Invalid API key or login error."
+msgstr "Некоректний ключ до програмного інтерфейсу або помилка входу."
+
+#: plugins/NebulaTextures/src/PlateSolver.cpp:194
+msgid "Failed to open image file."
+msgstr "Не вдалося відкрити файл зображення."
+
+#: plugins/NebulaTextures/src/PlateSolver.cpp:235
+msgid "Uploading image..."
+msgstr "Вивантаження зображення…"
+
+#: plugins/NebulaTextures/src/PlateSolver.cpp:287
+#, qt-format
+msgid "Checking submission status (%1/%2)..."
+msgstr "Перевірка стану подання (%1 з %2)..."
+
+#: plugins/NebulaTextures/src/PlateSolver.cpp:310
+msgid "Submission status request failed after retries."
+msgstr "Запит щодо стану подання зазнав невдачі після серії повторних спроб."
+
+#: plugins/NebulaTextures/src/PlateSolver.cpp:323
+msgid "Job ID received. Processing..."
+msgstr "Отримано ідентифікатор завдання. Обробляємо…"
+
+#: plugins/NebulaTextures/src/PlateSolver.cpp:326
+#, qt-format
+msgid "Astrometry error. %1"
+msgstr "Помилка астрометрії. %1"
+
+#: plugins/NebulaTextures/src/PlateSolver.cpp:352
+#, qt-format
+msgid "Checking job status (%1/%2)..."
+msgstr "Перевірка стану завдання (%1 з %2)..."
+
+#: plugins/NebulaTextures/src/PlateSolver.cpp:375
+msgid "Job status request failed after retries."
+msgstr "Запит щодо стану завдання зазнав невдачі після серії повторних спроб."
+
+#: plugins/NebulaTextures/src/PlateSolver.cpp:387
+msgid "Job completed. Downloading WCS file..."
+msgstr "Виконання завдання завершено. Отримуємо файл WCS..."
+
+#: plugins/NebulaTextures/src/PlateSolver.cpp:391
+msgid "Job failed during processing."
+msgstr "Виконання завдання зазнало помилки під час обробки."
+
+#: plugins/NebulaTextures/src/PlateSolver.cpp:425
+msgid "Failed to download WCS file."
+msgstr "Не вдалося отримати файл WCS."
+
+#: plugins/NebulaTextures/src/NebulaTextures.cpp:47
+#: plugins/NebulaTextures/src/NebulaTextures.cpp:92
+#: plugins/NebulaTextures/src/NebulaTextures.cpp:93
+msgid "Nebula Textures"
+msgstr "Текстури туманностей"
+
+#: plugins/NebulaTextures/src/NebulaTextures.cpp:50
+msgid ""
+"This plugin can plate-solve and position astronomical images, adding them as"
+" custom deep-sky object textures for rendering."
+msgstr ""
+"За допомогою цього додатка можна розв'язувати знімки і розташовувати "
+"астрономічні зображення, додаючи їх як нетипові текстури віддалених об'єктів"
+" для показу зображення."
+
+#: plugins/NebulaTextures/src/NebulaTextures.cpp:92
+msgid "Toggle Custom Nebula Textures"
+msgstr "Увімкнути/Вимкнути нетипові текстури туманностей"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:119
+msgid "Astrometry API key:"
+msgstr "Ключ до програмного інтерфейсу астрометрії:"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:120
+msgid "Bright"
+msgstr "Яскрава"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:121
+msgid "Normal"
+msgstr "Звичайна"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:122
+msgid "Dark"
+msgstr "Темна"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:190
+msgid "Login success..."
+msgstr "Успішний вхід…"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:194
+#, qt-format
+msgid "Login failed: %1"
+msgstr "Не вдалося увійти: %1"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:199
+msgid "Image uploaded. Please wait..."
+msgstr "Зображення вивантажено. Будь ласка, зачекайте…"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:203
+#, qt-format
+msgid "Upload failed: %1"
+msgstr "Не вдалося вивантажити: %1"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:212
+#, qt-format
+msgid "Solve failed: %1"
+msgstr "Не вдалося розв'язати: %1"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:217
+msgid "World Coordinate System data download complete. Processing..."
+msgstr "Отримання даних всесвітньої координатної системи завершено. Обробка…"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:301
+msgid "Nebula Textures Plugin"
+msgstr "Додаток текстур туманностей"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:307
+msgid ""
+"The Nebula Textures plugin enhances your Stellarium experience by allowing "
+"you to customize and render deep-sky object (DSO) textures. Whether you're "
+"an astronomy enthusiast with astrophotography or astronomical sketches and "
+"paintings, this plugin lets you integrate your own images into Stellarium. "
+"It also supports online plate-solving via Astrometry.net for precise "
+"positioning of astronomical images. Simply upload your image (ensure it is "
+"not flipped horizontally or vertically), solve its coordinates, and enjoy a "
+"personalized celestial view!"
+msgstr ""
+"За допомогою додатка текстур туманностей можна удосконалити Stellarium, "
+"уможлививши налаштовування та показ текстур віддалених об'єктів (DSO). "
+"Незалежно від того, чи ви ентузіаст астрономії з астрофотографічною "
+"програмою, чи любите астрономічні ескізи та картини, цей додаток надає вам "
+"змогу інтегрувати власні зображення у Stellarium. У ньому також передбачено "
+"підтримку інтернет-розв'язання зображень за допомогою Astrometry.net для "
+"точного позиціонування астрономічних знімків. Просто завантажте своє "
+"зображення (переконайтеся, що воно не перевернуте горизонтально чи "
+"вертикально), обчисліть його координати та насолоджуйтесь персоналізованим "
+"виглядом зоряного неба!"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:312
+msgid "See User Guide for details. Plugin data is located in:"
+msgstr ""
+"Див. «Підручник користувача», щоб дізнатися більше. Дані додатка "
+"зберігаються тут:"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:368
+msgid "Open Image"
+msgstr "Відкрити зображення"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:373
+#, qt-format
+msgid "File selected: %1"
+msgstr "Вибраний файл: %1"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:386
+msgid "Operation cancelled by user."
+msgstr "Дію скасовано користувачем."
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:402
+msgid "Please provide both API key and image path."
+msgstr ""
+"Будь ласка, надайте одразу ключ до програмного інтерфейсу та шлях до "
+"зображення."
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:409
+msgid "The specified image file does not exist or is not readable."
+msgstr "Вказаного файла зображення не існує або він є непридатним до читання."
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:417
+msgid "Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."
+msgstr ""
+"Некоректний формат зображення. Підтримувані формати: PNG, JPEG, GIF, TIFF."
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:424
+msgid "Sending requests..."
+msgstr "Надсилання запитів…"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:441
+msgid "Invalid WCS data."
+msgstr "Некоректні дані WCS."
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:491
+msgid ""
+"Processing completed! Goto Center Point, Test this texture, and Add to "
+"Custom Storage."
+msgstr ""
+"Обробку завершено! Перейдіть до центральної точки, перевірте цю текстуру і "
+"додайте дані до сховища нетипових даних."
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:570
+msgid "Stop test"
+msgstr "Припинити тестування"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:572
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:533
+msgid "Test this texture"
+msgstr "Тестувати цю текстуру"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:726
+msgid "Failed to load texture configuration."
+msgstr "Не вдалося завантажити налаштування текстур."
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:736
+msgid "Imported custom textures successfully!"
+msgstr "Нетипові текстури успішно імпортовано!"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:752
+msgid "Image path is empty."
+msgstr "Шлях до зображення є порожнім."
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:764
+msgid "Image file invalid or unreadable."
+msgstr "Файл зображення є некоректним або непридатним до читання."
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:772
+msgid "Invalid image format."
+msgstr "Некоректний формат зображення."
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:784
+msgid "Failed to copy image file."
+msgstr "Не вдалося скопіювати файл зображення."
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:826
+msgid "Texture removed."
+msgstr "Текстуру вимкнено."
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:479
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:480
+msgid "Nebula Textures Plug-in Configuration"
+msgstr "Налаштування додатка текстур туманностей"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:481
+msgid "Online plate-solving"
+msgstr "Прив'язування зображень в інтернеті"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:482
+msgid "Open File"
+msgstr "Відкрити файл"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:483
+msgid "Image Filepath:"
+msgstr "Шлях до файла зображення:"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:485
+msgid "Online Solve"
+msgstr "Інтернет-прив'язування"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:486
+msgid "Remember me"
+msgstr "Запам'ятати мене"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:487
+msgid ""
+"Select and upload astrophotography image to solve coordinates with "
+"Astrometry.net"
+msgstr ""
+"Виберіть і вивантажте астрографічне зображення для прив'язування його до "
+"координат за допомогою Astrometry.net"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:488
+msgid "Goto celestial center and Adjust corner coordinates"
+msgstr "Перейти до небесного центра і скоригувати координати кутів"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:490
+msgid "Declination of top left corner of image"
+msgstr "Схилення верхнього лівого кута зображення"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:492
+msgid "Dec (↖)"
+msgstr "Схил (↖)"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:494
+msgid "Right ascension of bottom left corner of image"
+msgstr "Пряме сходження нижнього лівого кута зображення"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:496
+msgid "RA (↙)"
+msgstr "ПС (↙)"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:498
+msgid "Declination of bottom left corner of image"
+msgstr "Схилення нижнього лівого кута зображення"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:500
+msgid "Dec (↙)"
+msgstr "Схил (↙)"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:502
+msgid "Right ascension of center of image"
+msgstr "Пряме сходження центра зображення"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:504
+msgid "RA (Center)"
+msgstr "ПС (центр)"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:506
+msgid "Right ascension of top left corner of image"
+msgstr "Пряме сходження верхнього лівого кута зображення"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:508
+msgid "RA (↖)"
+msgstr "ПС (↖)"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:510
+msgid "Declination of center of image"
+msgstr "Схилення центра зображення"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:512
+msgid "Dec (Center)"
+msgstr "Схил (центр)"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:514
+msgid "Right ascension of top right corner of image"
+msgstr "Пряме сходження верхнього правого кута зображення"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:516
+msgid "RA (↗)"
+msgstr "ПС (↗)"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:518
+msgid "Declination of top right corner of image"
+msgstr "Схилення верхнього правого кута зображення"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:520
+msgid "Dec (↗)"
+msgstr "Схил (↗)"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:522
+msgid "Right ascension of bottom right corner of image"
+msgstr "Пряме сходження нижнього правого кута зображення"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:524
+msgid "RA (↘)"
+msgstr "ПС (↘)"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:526
+msgid "Declination of bottom right corner of image"
+msgstr "Схилення нижнього правого кута зображення"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:528
+msgid "Dec (↘)"
+msgstr "Схил (↘)"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:529
+msgid "Goto Center"
+msgstr "Перейти до центра"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:531
+msgid "Rendering tester"
+msgstr "Перевірка зображення"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:532
+msgid "Disable default textures"
+msgstr "Вимкнути типові текстури"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:537
+msgid "Add the Texture to Custom Storage"
+msgstr "Додати текстуру до сховища нетипових даних"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:539
+msgid "Import"
+msgstr "Імпортувати"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:540
+msgid "Show Custom Textures"
+msgstr "Показати нетипові текстури"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:541
+msgid "Avoid Area Conflict"
+msgstr "Уникати конфлікту областей"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:542
+msgid "Reload"
+msgstr "Перезавантажити"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:543
+msgid "Remove select item in Custom Textures"
+msgstr "Вилучити позначений запис у нетипових текстурах"
+
+#: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:544
+msgid "Manage"
+msgstr "Керування"
