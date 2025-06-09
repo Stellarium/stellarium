@@ -129,9 +129,9 @@ void ScmConstellationDialog::triggerUndo()
 bool ScmConstellationDialog::canConstellationBeSaved()
 {
 	// shouldnt happen
-	if (nullptr == maker->getCurrentSkyCulture())
+	if (maker->getCurrentSkyCulture() == nullptr)
 	{
-
+		ui->infoLbl->setText("WARNING: Could not save: Sky Culture is not set");
 		return false;
 	}
 
@@ -141,9 +141,17 @@ bool ScmConstellationDialog::canConstellationBeSaved()
 		return false;
 	}
 
-	if (constellationId.isEmpty() && constellationPlaceholderId.isEmpty())
+	// It is okay for the constellationId to be empty, as long as the constellationPlaceholderId is set
+	QString finalId = constellationId.isEmpty() ? constellationPlaceholderId : constellationId;
+	if (finalId.isEmpty())
 	{
 		ui->infoLbl->setText("WARNING: Could not save: Constellation ID is empty");
+		return false;
+	}
+
+	if(maker->getCurrentSkyCulture() != nullptr && maker->getCurrentSkyCulture()->getConstellation(finalId) != nullptr)
+	{
+		ui->infoLbl->setText("WARNING: Could not save: Constellation with this ID already exists");
 		return false;
 	}
 
