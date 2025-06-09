@@ -37,7 +37,8 @@ private:
 	int currentYear;
 	QString oldSkyCulture;
 
-	QList<QPointF> convertIrlToView(const QList<QPointF>  &irl);
+	QList<QPointF> convertLatLonToMeter(const QList<QPointF> &irl, qreal mapWidth, qreal mapHeight);
+	QList<QPointF> convertMeterToView(const QList<QPointF> &irl, qreal mapWidth, qreal mapHeight);
 	void updateCultureVisibility();
 
 private slots:
