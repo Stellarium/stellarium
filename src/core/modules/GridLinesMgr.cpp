@@ -551,7 +551,7 @@ void SkyGrid::draw(const StelCore* core) const
 	sPainter.setLineSmooth(false);
 }
 
-SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0.f, 1.f), lineThickness(1), partThickness(1), showPartitions(true), showLabel(true)
+SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0.f, 1.f), lineThickness(1), partThickness(1), showPartitions(true), showLabel(true), culturalOffset(0.0)
 {
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
@@ -1149,9 +1149,7 @@ void SkyLine::draw(StelPainter &sPainter, const float oldLineWidth) const
 				const QString &label=v.second;
 				// draw and labels: derive the irregular tick lengths from labeling
 				Vec3d start=fpt;
-				Vec3d end= label.isEmpty() ? part1 : part10;
-				if (label.contains("5"))
-					end=part5;
+				Vec3d end= label.isEmpty() ? part1 : (label.contains("5") ? part5 : part10);
 				Vec3d end10=part10;
 
 				const Mat4d& rotDay = Mat4d::rotation(partZAxis, lng);
@@ -1181,35 +1179,34 @@ void SkyLine::draw(StelPainter &sPainter, const float oldLineWidth) const
 		}
 		else if (line_type==ECLIPTIC_CULTURAL || line_type==EQUATORIAL_CULTURAL)
 		{
-			// TODO: define std::vector<std::vector<double>>culturalPartitions. element 0 is the main partitions (12 signs, 27 lunar stations, ...)
 			if (culturalPartitions.size()>1)
 			{
-				foreach (const double partition, culturalPartitions[1])
+				foreach (const double partition, culturalPartitions.at(1))
 				{
-					const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, partition*M_PI_180);
+					const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, (culturalOffset+partition)*M_PI_180);
 					Vec3d part0 = rotZ1*fpt;
-					Vec3d part10=part0; part10.transfo4d(Mat4d::rotation(partAxis, rotSign*0.45*M_PI/180));
+					Vec3d part10=fpt; part10.transfo4d(rotZ1*Mat4d::rotation(partAxis, rotSign*0.45*M_PI_180));
 
 					sPainter.drawGreatCircleArc(part0, part10, nullptr, nullptr, nullptr);
 				}
 			}
 			if (culturalPartitions.size()>2)
 			{
-				foreach (const double partition, culturalPartitions[2])
+				foreach (const double partition, culturalPartitions.at(2))
 				{
-					const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, partition*M_PI_180);
+					const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, (culturalOffset+partition)*M_PI_180);
 					Vec3d part0 = rotZ1*fpt;
-					Vec3d part5=part0;  part5.transfo4d(Mat4d::rotation(partAxis, rotSign*0.25*M_PI/180));
+					Vec3d part5=fpt;  part5.transfo4d(rotZ1*Mat4d::rotation(partAxis, rotSign*0.25*M_PI_180));
 					sPainter.drawGreatCircleArc(part0, part5, nullptr, nullptr, nullptr);
 				}
 			}
 			if (culturalPartitions.size()>3)
 			{
-				foreach (const double partition, culturalPartitions[3])
+				foreach (const double partition, culturalPartitions.at(3))
 				{
-					const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, partition*M_PI_180);
+					const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, (culturalOffset+partition)*M_PI_180);
 					Vec3d part0 = rotZ1*fpt;
-					Vec3d part1=part0;  part1.transfo4d(Mat4d::rotation(partAxis, rotSign*0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
+					Vec3d part1=fpt;  part1.transfo4d(rotZ1*Mat4d::rotation(partAxis, rotSign*0.10*M_PI_180)); // part1 should point to 0.05deg south of "equator"
 					sPainter.drawGreatCircleArc(part0, part1, nullptr, nullptr, nullptr);
 				}
 			}
