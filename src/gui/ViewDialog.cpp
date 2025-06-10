@@ -619,10 +619,10 @@ void ViewDialog::createDialogContent()
 	}
 	else
 	{
-		ui->constellationHullsCheckBox->hide();
-		ui->constellationHullsColorButton->hide();
-		ui->constellationHullsThicknessSpinBox->hide();
-		ui->constellationHullsFadeDurationDoubleSpinBox->hide();
+                ui->constellationHullsCheckBox->setEnabled(false);
+                ui->constellationHullsColorButton->setEnabled(false);
+                ui->constellationHullsThicknessSpinBox->setEnabled(false);
+                ui->constellationHullsFadeDurationDoubleSpinBox->setEnabled(false);
 	}
 
 	connectBoolProperty(ui->zodiacCheckBox, "ConstellationMgr.zodiacDisplayed");
