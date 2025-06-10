@@ -33,6 +33,7 @@
 #include "StelModule.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
+#include "ConstellationMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelModuleMgr.hpp"
@@ -1186,9 +1187,12 @@ void ViewDialog::populateLists()
 
 void ViewDialog::configureSkyCultureCheckboxes()
 {
-	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
+	static StelSkyCultureMgr *scMgr     = GETSTELMODULE(StelSkyCultureMgr);
 	StelObject::CulturalDisplayStyle infoStyle   = scMgr->getInfoLabelStyle();
 	StelObject::CulturalDisplayStyle screenStyle = scMgr->getScreenLabelStyle();
+	static ConstellationMgr *cMgr       = GETSTELMODULE(ConstellationMgr);
+	const bool hasZodiac=cMgr->hasZodiac();
+	const bool hasLunarSystem=cMgr->hasLunarSystem();
 
 	ui->infoLabelNativeCheckBox           ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Native));
 	ui->infoLabelPronounceCheckBox        ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Pronounce));
@@ -1202,6 +1206,15 @@ void ViewDialog::configureSkyCultureCheckboxes()
 	ui->screenLabelTranslationCheckBox    ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Translated));
 	ui->screenLabelIPACheckBox            ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::IPA));
 	ui->screenLabelModernCheckBox         ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Modern));
+
+	ui->zodiacCheckBox->setEnabled(hasZodiac);
+	ui->zodiacColorButton->setEnabled(hasZodiac);
+	ui->zodiacFadeDurationDoubleSpinBox->setEnabled(hasZodiac);
+	ui->zodiacThicknessSpinBox->setEnabled(hasZodiac);
+	ui->lunarSystemCheckBox->setEnabled(hasLunarSystem);
+	ui->lunarSystemColorButton->setEnabled(hasLunarSystem);
+	ui->lunarSystemFadeDurationDoubleSpinBox->setEnabled(hasLunarSystem);
+	ui->lunarSystemThicknessSpinBox->setEnabled(hasLunarSystem);
 }
 
 void ViewDialog::updateSkyCultureInfoStyleFromCheckboxes()

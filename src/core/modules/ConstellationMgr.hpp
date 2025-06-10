@@ -132,6 +132,11 @@ public:
 	QString getStelObjectType() const override;
 
 	///////////////////////////////////////////////////////////////////////////
+	//! Returns whether the current skyculture defines a zodiac-type cultural coordinate system
+	bool hasZodiac() const {return !zodiac.isNull();}
+	//! Returns whether the current skyculture defines a lunar-related cultural coordinate system (lunar stations or mansions)
+	bool hasLunarSystem() const {return !lunarSystem.isNull();}
+
 	// Properties setters and getters
 public slots:	
 	//! Set whether constellation art will be displayed
