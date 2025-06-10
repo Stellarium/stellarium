@@ -1149,9 +1149,7 @@ void SkyLine::draw(StelPainter &sPainter, const float oldLineWidth) const
 				const QString &label=v.second;
 				// draw and labels: derive the irregular tick lengths from labeling
 				Vec3d start=fpt;
-				Vec3d end= label.isEmpty() ? part1 : part10;
-				if (label.contains("5"))
-					end=part5;
+				Vec3d end= label.isEmpty() ? part1 : (label.contains("5") ? part5 : part10);
 				Vec3d end10=part10;
 
 				const Mat4d& rotDay = Mat4d::rotation(partZAxis, lng);
@@ -1188,7 +1186,7 @@ void SkyLine::draw(StelPainter &sPainter, const float oldLineWidth) const
 				{
 					const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, partition*M_PI_180);
 					Vec3d part0 = rotZ1*fpt;
-					Vec3d part10=part0; part10.transfo4d(Mat4d::rotation(partAxis, rotSign*0.45*M_PI/180));
+					Vec3d part10=fpt; part10.transfo4d(rotZ1*Mat4d::rotation(partAxis, rotSign*0.45*M_PI/180));
 
 					sPainter.drawGreatCircleArc(part0, part10, nullptr, nullptr, nullptr);
 				}
@@ -1199,7 +1197,7 @@ void SkyLine::draw(StelPainter &sPainter, const float oldLineWidth) const
 				{
 					const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, partition*M_PI_180);
 					Vec3d part0 = rotZ1*fpt;
-					Vec3d part5=part0;  part5.transfo4d(Mat4d::rotation(partAxis, rotSign*0.25*M_PI/180));
+					Vec3d part5=fpt;  part5.transfo4d(rotZ1*Mat4d::rotation(partAxis, rotSign*0.25*M_PI/180));
 					sPainter.drawGreatCircleArc(part0, part5, nullptr, nullptr, nullptr);
 				}
 			}
@@ -1209,7 +1207,7 @@ void SkyLine::draw(StelPainter &sPainter, const float oldLineWidth) const
 				{
 					const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, partition*M_PI_180);
 					Vec3d part0 = rotZ1*fpt;
-					Vec3d part1=part0;  part1.transfo4d(Mat4d::rotation(partAxis, rotSign*0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
+					Vec3d part1=fpt;  part1.transfo4d(rotZ1*Mat4d::rotation(partAxis, rotSign*0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
 					sPainter.drawGreatCircleArc(part0, part1, nullptr, nullptr, nullptr);
 				}
 			}
