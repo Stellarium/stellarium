@@ -139,10 +139,16 @@ friend ConstellationMgr;
 public:
 	StelSkyCultureSkyPartition(const QJsonObject &description);
 	~StelSkyCultureSkyPartition();
-	void draw(StelPainter& sPainter, const Vec3d &obsVelocity) const;
+	void draw(StelPainter& sPainter, const Vec3d &obsVelocity);
 	void setFontSize(int newFontSize);
 	void update(double deltaTime) {centerLine->update(static_cast<int>(deltaTime*1000));}
 	void updateLabels();
+	//! Return name of this system in screenLabel style.
+	QString getCulturalName() const;
+	//! Return longitudinal coordinate of point eqPos as written in the respective system
+	//! For zodiac, this is SYMBOL:deg°min'
+	//! For Lunar systems, it is usually only STATION or, with partitions, STATION:part
+	QString getLongitudeCoordinate(Vec3d &eqPos) const;
 
 private:
 	void drawCap(StelPainter &sPainter, const SphericalCap& viewPortSphericalCap, double latDeg) const;
@@ -162,6 +168,8 @@ private:
 	QFont font;                            //!< font for labels
 	QList<int> linkStars;                  //!< HIP numbers defining start of mansions (Chinese style), or with just one entry, of star that defines a given offset longitude.
 	double offset;                         //!< the longitude (degrees) in the respective culturalpartition which is defined by linkStar
+	double eclObl;                         //!< Ecliptical obliquity (computed in draw(), also consumed in getLongitudeCoordinate())
+	double offsetFromAries;                //!< (degrees) resulting deviation between ecliptical longitude (or RA) of date and "cultural longitude" (or RA) of date.
 };
 //! @typedef StelSkyCultureSkyPartitionP
 //! Shared pointer on a StelSkyCultureSkyPartition with smart pointers

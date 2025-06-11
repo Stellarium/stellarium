@@ -67,7 +67,7 @@ public:
 		ObjectType		= 0x00020000, //!< The type of the object (star, planet, etc.)
 		EclipticCoordJ2000	= 0x00040000, //!< The ecliptic position (J2000.0 ref) [+ XYZ of VSOP87A (used mainly for debugging, not public)]
 		EclipticCoordOfDate	= 0x00080000, //!< The ecliptic position (of date)
-		IAUConstellation        = 0x00100000, //!< Three-letter constellation code (And, Boo, Cas, ...)
+		IAUConstellation        = 0x00100000, //!< Three-letter constellation code (And, Boo, Cas, ...), and Zodiacal sign and Lunar station/mansion where defined
 		SiderealTime		= 0x00200000, //!< Mean and Apparent Sidereal Time
 		RTSTime			= 0x00400000, //!< Time of rise, transit and set of celestial object
 		SolarLunarPosition      = 0x00800000, //!< Show Solar and Lunar horizontal position (on Earth location only)

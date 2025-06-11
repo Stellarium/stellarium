@@ -1617,11 +1617,10 @@ void ConstellationMgr::drawZodiac(StelPainter& sPainter, const Vec3d &obsVelocit
 	zodiac->centerLine->setPartThickness(zodiacThickness);
 	sPainter.setBlending(true);
 	const float oldLineWidth=sPainter.getLineWidth();
-	sPainter.setLineWidth(zodiacThickness); // set line thickness
+	sPainter.setLineWidth(zodiacThickness);
 	sPainter.setLineSmooth(true);
 	zodiac->draw(sPainter, obsVelocity);
 	sPainter.setLineWidth(oldLineWidth); // restore line thickness
-
 }
 // Draw the lunar system lines, if any is defined in the current skyculture.
 // @param obsVelocity is the speed vector of the observer planet to distort lunarSystem lines by aberration.
@@ -1636,12 +1635,44 @@ void ConstellationMgr::drawLunarSystem(StelPainter& sPainter, const Vec3d &obsVe
 	lunarSystem->centerLine->setPartThickness(lunarSystemThickness);
 	sPainter.setBlending(true);
 	const float oldLineWidth=sPainter.getLineWidth();
-	sPainter.setLineWidth(lunarSystemThickness); // set line thickness
+	sPainter.setLineWidth(lunarSystemThickness);
 	sPainter.setLineSmooth(true);
 	lunarSystem->draw(sPainter, obsVelocity);
 	sPainter.setLineWidth(oldLineWidth); // restore line thickness
 }
 
+//! Returns the translated name of the Zodiac system
+QString ConstellationMgr::getZodiacSystemName() const
+{
+	if (zodiac)
+		return zodiac->getCulturalName();
+	else
+		return QString();
+}
+//! Returns the translated name of the Lunar system
+QString ConstellationMgr::getLunarSystemName() const
+{
+	if (lunarSystem)
+		return lunarSystem->getCulturalName();
+	else
+		return QString();
+}
+//! Return longitude in the culture's zodiacal longitudes
+QString ConstellationMgr::getZodiacCoordinate(Vec3d eqNow) const
+{
+	if (zodiac)
+		return zodiac->getLongitudeCoordinate(eqNow);
+	else
+		return QString();
+}
+//! Return lunar station in the culture's Lunar system
+QString ConstellationMgr::getLunarSystemCoordinate(Vec3d eqNow) const
+{
+	if (lunarSystem)
+		return lunarSystem->getLongitudeCoordinate(eqNow);
+	else
+		return QString();
+}
 
 StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const
 {
