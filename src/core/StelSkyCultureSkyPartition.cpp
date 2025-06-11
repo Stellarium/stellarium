@@ -35,7 +35,9 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 	extent(90.),
 	centerLine(nullptr),
 	linkStars(),
-	offset(0.0)
+	offset(0.0),
+	eclObl(0.0),
+	offsetFromAries(0.0)
 {
 	// Parse defining centerline type
 	SkyLine::SKY_LINE_TYPE skylineType=SkyLine::ECLIPTIC_CULTURAL;
@@ -168,15 +170,15 @@ StelSkyCultureSkyPartition::~StelSkyCultureSkyPartition()
 }
 
 
-void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVelocity) const
+void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVelocity)
 {
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
 	static StarMgr *starMgr=GETSTELMODULE(StarMgr);
 	static StelCore *core=StelApp::getInstance().getCore();
+	eclObl = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
 	StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	sPainter.setProjector(prj);	
 
-	double offsetFromAries=0.;
 	// If defined, find the necessary shift from single linkStar and offset
 	if (linkStars.length()==1)
 	{
@@ -186,10 +188,9 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 		StelUtils::rectToSphe(&ra, &dec, pos);
 		if (frameType==StelCore::FrameObservercentricEclipticOfDate)
 		{
-			const double ecl = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
 			double lambda, beta;
 			Vec3d eclPos;
-			StelUtils::equToEcl(ra, dec, ecl, &lambda, &beta);
+			StelUtils::equToEcl(ra, dec, eclObl, &lambda, &beta);
 			offsetFromAries=lambda*M_180_PI-offset;
 		}
 		else
@@ -404,6 +405,26 @@ void StelSkyCultureSkyPartition::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 
+	// The name of the system
+	QString context = name.translated;
+	name.translatedI18n = trans.tryQtranslate(name.translated, context);
+	if (name.translatedI18n.isEmpty())
+	{
+		if (context.isEmpty())
+			name.translatedI18n = q_(name.translated);
+		else
+			name.translatedI18n = qc_(name.translated, context);
+	}
+	name.pronounceI18n = trans.tryQtranslate(name.pronounce, context);
+	if (name.pronounceI18n.isEmpty())
+	{
+		if (context.isEmpty())
+			name.pronounceI18n = q_(name.pronounce);
+		else
+			name.pronounceI18n = qc_(name.pronounce, context);
+	}
+
+	// names array
 	for (auto &name : names)
 	{
 		QString context = name.translated;
@@ -423,5 +444,80 @@ void StelSkyCultureSkyPartition::updateI18n()
 			else
 				name.pronounceI18n = qc_(name.pronounce, context);
 		}
+	}
+}
+
+QString StelSkyCultureSkyPartition::getCulturalName() const
+{
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	return scMgr->createCulturalLabel(name, scMgr->getScreenLabelStyle(), name.pronounceI18n);
+}
+
+QString StelSkyCultureSkyPartition::getLongitudeCoordinate(Vec3d &eqPos) const
+{
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, eqPos);
+	if (frameType==StelCore::FrameObservercentricEclipticOfDate)
+	{
+		// We can for now assume this is a Zodiac or Indian Lunar system. However, e.g. both Indian are shifted by offsetFromAries.
+		double lambda, beta;
+		StelUtils::equToEcl(ra, dec, eclObl, &lambda, &beta);
+		double cultureLambda=StelUtils::fmodpos((lambda*M_180_PI-offsetFromAries), 360.); // Degrees from zero point of cultural scale
+		const double widthOfSign=(360./partitions.at(0));
+		int sign=int(floor(cultureLambda/widthOfSign));
+		double startOfSign=sign*widthOfSign;
+		double degreeInSign=cultureLambda-startOfSign;
+
+		if (partitions.at(0)==12)
+		{
+			double minuteInSign=(degreeInSign-floor(degreeInSign))*60.;
+			return QString("%1 %2°%3'").arg(symbols.at(sign), QString::number(int(floor(degreeInSign))), QString::number(int(floor(minuteInSign))));
+		}
+		else if (partitions.at(0)==27)
+		{
+			int padaInSign=int(floor((degreeInSign/widthOfSign)*4.));
+			return QString("%1: %2").arg(symbols.at(sign), QString::number(int(floor(padaInSign+1))));
+		}
+		else
+		{
+			static bool reported=false;
+			if (!reported)
+			{
+				qInfo() << "Unknown ecliptical partition scheme for " << name.translated;
+				reported=true;
+			}
+			return QString();
+		}
+	}
+	else
+	{
+		// We only know Chinese mansions here. Provide Mansion symbol+name. So far I don't know any further subdivision.
+		static StarMgr *starMgr=GETSTELMODULE(StarMgr);
+		static StelCore *core=StelApp::getInstance().getCore();
+
+		const double raDeg=StelUtils::fmodpos(ra*M_180_PI, 360.); // object RA of date, degrees
+		const Vec3d starPos0=starMgr->searchHP(linkStars.at(0))->getEquinoxEquatorialPos(core);
+		double raStar0, decStar0;
+		StelUtils::rectToSphe(&raStar0, &decStar0, starPos0); // start of mansion 0.
+		const double raDeg0=StelUtils::fmodpos(raStar0*M_180_PI, 360.); // start RA of mansion 0, date, degrees
+		const double lngInMansions=StelUtils::fmodpos(raDeg-raDeg0, 360.); // object's 'longitude' counted from the start of mansion 0 along the equator, degrees.
+
+		int mansion=0;
+		while (mansion<linkStars.length()-1)
+		{
+			int nextStarIdx=StelUtils::imod(mansion+1, 28);
+			Vec3d starPos=starMgr->searchHP(linkStars.at(nextStarIdx))->getEquinoxEquatorialPos(core);
+			double raStar, decStar;
+			StelUtils::rectToSphe(&raStar, &decStar, starPos); // start of next mansion.
+			double lngNxtMansion=StelUtils::fmodpos(raStar*M_180_PI-raDeg0, 360.);
+			if (lngNxtMansion>lngInMansions)
+				break;
+			++mansion;
+		}
+		QString mnName=scMgr->createCulturalLabel(names.at(mansion), scMgr->getScreenLabelStyle(), names.at(mansion).pronounceI18n);
+
+
+		return QString("%1 - %2").arg(symbols.at(mansion), mnName);
 	}
 }

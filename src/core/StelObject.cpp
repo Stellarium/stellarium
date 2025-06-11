@@ -19,6 +19,7 @@
 
 
 #include "StelObject.hpp"
+#include "ConstellationMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -968,10 +969,23 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 	if (flags&IAUConstellation)
 	{
+		static ConstellationMgr *cMgr=GETSTELMODULE(ConstellationMgr);
 		QString constel = (fuzzyEquals(eqNow.normSquared(),0.) ? "---" : core->getIAUConstellation(eqNow));
 		res += QString("%1: %2<br/>").arg(q_("IAU Constellation"), constel);
 		res += getExtraInfoStrings(flags&IAUConstellation).join("");
 		res += omgr->getExtraInfoStrings(flags&IAUConstellation).join("");
+		if (cMgr->hasZodiac() && (currentPlanet=="Earth"))
+		{
+			QString zodiacSystemLabel = cMgr->getZodiacSystemName();
+			QString zodiacalPos = (fuzzyEquals(eqNow.normSquared(),0.) ? "---" : cMgr->getZodiacCoordinate(eqNow));
+			res += QString("%1: %2<br/>").arg(zodiacSystemLabel, zodiacalPos);
+		}
+		if (cMgr->hasLunarSystem() && (currentPlanet=="Earth"))
+		{
+			QString lunarSystemLabel = cMgr->getLunarSystemName();
+			QString lunarSystemPos = (fuzzyEquals(eqNow.normSquared(),0.) ? "---" : cMgr->getLunarSystemCoordinate(eqNow));
+			res += QString("%1: %2<br/>").arg(lunarSystemLabel, lunarSystemPos);
+		}
 	}
 
 	return res;

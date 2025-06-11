@@ -136,6 +136,14 @@ public:
 	bool hasZodiac() const {return !zodiac.isNull();}
 	//! Returns whether the current skyculture defines a lunar-related cultural coordinate system (lunar stations or mansions)
 	bool hasLunarSystem() const {return !lunarSystem.isNull();}
+	//! @return the translated name of the Zodiac system
+	QString getZodiacSystemName() const;
+	//! @return the translated name of the Lunar system
+	QString getLunarSystemName() const;
+	//!@return longitude in the culture's zodiacal longitudes (usually sign, degrees, minutes)
+	QString getZodiacCoordinate(Vec3d eqNow) const;
+	//! @return lunar station in the culture's Lunar system
+	QString getLunarSystemCoordinate(Vec3d eqNow) const;
 
 	// Properties setters and getters
 public slots:	
