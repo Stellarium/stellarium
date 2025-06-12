@@ -1,14 +1,15 @@
 #include "ScmConstellation.hpp"
 
-const Vec3f scm::ScmConstellation::colorDrawDefault(0.3f, 1.f, 0.f);
-const Vec3f scm::ScmConstellation::colorLabelDefault(0.3f, 1.f, 0.f);
-
 scm::ScmConstellation::ScmConstellation(std::vector<scm::CoordinateLine> coordinates, std::vector<scm::StarLine> stars)
 	: constellationCoordinates(coordinates)
 	, constellationStars(stars)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	constellationLabelFont.setPixelSize(conf->value("viewing/constellation_font_size", 15).toInt());
+ 
+	QString defaultColor = conf->value("color/default_color", "0.5,0.5,0.7").toString();
+	colorDrawDefault = Vec3f(conf->value("color/const_lines_color", defaultColor).toString());
+	colorLabelDefault = Vec3f(conf->value("color/const_names_color", defaultColor).toString());
 }
 
 void scm::ScmConstellation::setId(QString id)
@@ -75,6 +76,11 @@ void scm::ScmConstellation::drawConstellation(StelCore *core, Vec3f color)
 	drawNames(core, painter, colorLabelDefault);
 }
 
+void scm::ScmConstellation::drawConstellation(StelCore *core)
+{
+	drawConstellation(core, colorDrawDefault);
+}
+
 void scm::ScmConstellation::drawNames(StelCore *core, StelPainter sPainter, Vec3f labelColor) 
 {
 	sPainter.setBlending(true);
@@ -96,4 +102,9 @@ void scm::ScmConstellation::drawNames(StelCore *core, StelPainter sPainter, Vec3
 	sPainter.getProjector()->project(XYZname, XYname);
 	sPainter.setColor(labelColor, 1.0f);
 	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), englishName, 0., -sPainter.getFontMetrics().boundingRect(englishName).width()/2, 0, false);
+}
+
+void scm::ScmConstellation::drawNames(StelCore *core, StelPainter sPainter)
+{
+	drawNames(core, sPainter, colorLabelDefault);
 }

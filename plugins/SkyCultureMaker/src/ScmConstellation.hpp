@@ -29,8 +29,6 @@ public:
 
 	/// The frame that is used for calculation and is drawn on.
 	static const StelCore::FrameType drawFrame = StelCore::FrameJ2000;
-	static const Vec3f colorDrawDefault;
-	static const Vec3f colorLabelDefault;
 
     /**
     * @brief Sets the id of the constellation
@@ -93,13 +91,33 @@ public:
 	 * @brief Draws the constellation based on the coordinates.
 	 *
 	 * @param core The core used for drawing.
+	 * @param color The color to use for drawing the constellation.
 	 */
-	void drawConstellation(StelCore *core, Vec3f color = colorDrawDefault);
+	void drawConstellation(StelCore *core, Vec3f color);
+
+	/**
+	 * @brief Draws the constellation based on the coordinates using the default color.
+	 *
+	 * @param core The core used for drawing.
+	 */
+	void drawConstellation(StelCore *core);
 
 	/**
 	 * @brief Draws the label of the constellation.
+	 * 
+	 * @param core The core used for drawing.
+	 * @param painter The painter used for drawing.
+	 * @param labelColor The color of the label.
 	 */
-	void drawNames(StelCore *core, StelPainter painter, Vec3f labelColor = colorLabelDefault);
+	void drawNames(StelCore *core, StelPainter painter, Vec3f labelColor);
+
+	/**
+	 * @brief Draws the label of the constellation using the default color.
+	 * 
+	 * @param core The core used for drawing.
+	 * @param painter The painter used for drawing.
+	 */
+	void drawNames(StelCore *core, StelPainter painter);
 
 private:
 	/// Identifier of the constellation
@@ -132,6 +150,12 @@ private:
 
 	/// The font used for constellation labels
 	QFont constellationLabelFont;
+
+	/// The default color used for drawing the constellation
+	Vec3f colorDrawDefault = Vec3f(0.0f, 0.0f, 0.0f);
+
+	/// The default color used for drawing the constellation label
+	Vec3f colorLabelDefault = Vec3f(0.0f, 0.0f, 0.0f);
 };
 
 }  // namespace scm
