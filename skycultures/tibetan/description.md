@@ -116,7 +116,7 @@ The zodiac is partitioned into 12 figures largely identical to the classical fig
 
 ### The Lunar Mansions
 
-The Men Tsee Khang emblem shows 27 stick figures for the Lunar mansions arranged in a circle around the central figure. The same figures are also laid out in cement with bright stones connected by black lines in the circular platform which has been erected when the observatory was rebuilt. These 27 *gyukar* figures are described as being equal to the Indian *Nakṣatras* and represent sections of 13°20' longitude along the ecliptic. Actually, one of the *gyukars* consists of 2 constellations, therefore 28 *lunar constellations* are named.
+The Men Tsee Khang emblem shows 27 stick figures for the Lunar mansions arranged in a circle around the central figure. The same figures are also laid out in cement with bright stones connected by black lines in the circular platform which has been erected when the observatory was rebuilt. These 27 *gyukar* figures are described as being equal to the Indian *Nakṣatras* and represent sections of 13°20' longitude along the ecliptic. Actually, one of the *gyukars* consists of 2 asterisms, therefore 28 *lunar asterisms* are named.
 
 However, not much is known of the exact identification of the Tibetan Lunar Stations outside of Tibet. Most literature is Tibetan or Chinese only, and there were no Tibetan star maps available. Also our guides could not explain any of the following to us.
 
@@ -314,17 +314,19 @@ The following table was taken from Cornu. Note that Tibetans start counting at z
 	<td> &sigma; Psc</td>
 </tr>
 </table>
-The Lunar Mansions in this skyculture are shown as asterisms among the traditional 12 Ptolemaic zodiacal constellations. It is assumed that most originate from the Indian traditions, esp. Kalacakra Tantra, but it appears that some Chinese influence is also present, e.g. Nr. 11. Only for the Zodiacal constellations artwork is provided. A few more constellations in Ptolemaic tradition are displayed in the northern sky to allow easier orientation, but with their names suppressed. We have no information about their names, relevance or even publicity of these in Tibet.
+The star figures for Lunar Mansions in this skyculture are shown as asterisms among the traditional 12 Ptolemaic zodiacal constellations. It is assumed that most originate from the Indian traditions, esp. Kalacakra Tantra, but it appears that some Chinese influence is also present, e.g. Nr. 11. Only for the Zodiacal constellations artwork is provided. A few more constellations in Ptolemaic tradition are displayed in the northern sky to allow easier orientation, but with their names suppressed. We have no information about their names, relevance or even publicity of these in Tibet.
 
 ### Please help us
 
-The figures are my own attempt of identification of the Lunar mansion figures. We can be sure about the placement of only those which can also be found in other sky cultures, e.g. Japanese Moon Stations. Many stars are rather dim, and the figures in the emblem apparently have to be rotated in arbitrary ways, like *gyukar 3*=Hyades. Others require considerable liberties to accept a topological match. Alternative matches with stars in similar topology arranged in the orientation shown in the emblem (north=outer circle) have been found only in neighboring areas of the sky, making a match rather unlikely. Others appear to have been taken over from Chinese tradition, e.g. Nr. 11. LM21 can be explained only if we accept two separate figures which are not joined as shown in the concrete figure. Then they represent Chinese constellations *Ox* and *Girl* (which is also Japanese Lunar station *Woman*).
+The figures are my own attempt of identification of the Lunar mansion figures. We can be sure about the placement of only those which can also be found in other sky cultures, e.g. Japanese Moon Stations which stem from Chinese tradition. Many stars are rather dim, and the figures in the emblem apparently have to be rotated in arbitrary ways, like *gyukar 3*=Hyades. Others require considerable liberties to accept a topological match. Alternative matches with stars in similar topology arranged in the orientation shown in the emblem (north=outer circle) have been found only in neighboring areas of the sky, making a match rather unlikely. Others appear to have been taken over from Chinese tradition, e.g. Nr. 11. LM21 can be explained only if we accept two separate figures which are not aligned as shown in the concrete figure. Then they represent Chinese constellations *Ox* and *Girl* (which is also Japanese Lunar station *Woman*).
 
 Alternative figures can be found in the old configuration files. We would like to hear from experts of Tibetan astronomy about both confirmed and corrected identification.
 
+The *zodiac* and *gyukar* bands have been taken over from Indian tradition. The link "Spica=180°" is also set here for both circles, but should be confirmed. 
+
 #### Further reading
 
-This work accompanies a 3D model of the Stag Phu observatory for use with the Scenery3D plugin and described in:
+This work accompanies a 3D model of the Stag Phu observatory for use with the Scenery3D plugin, downloadable from https://stellarium.org and described in:
 
 Georg Zotti, Guntram Hazod, Martin Gamon and Hubert Feiglstorfer (2024), "A Calendar Observatory in Tibet". In: Marc Fr&icirc;ncu (coordinator), 
 Proceedings of the 29th Conference of the European Society for Astronomy in Culture (SEAC) Timisoara 2022,  
@@ -338,7 +340,7 @@ Editura Universit&#x103;&#x163;ii de Vest din Timi&#x15F;oara} (pages 123-136). 
 
 ## Authors
 
-Georg Zotti on May 21, 2019, reworked July-October 2023.
+Georg Zotti on May 21, 2019, reworked July-October 2023. *Zodiac* and *Gyukars* added in V25.2. 
 
 ## License
 
