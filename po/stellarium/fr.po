@@ -14885,7 +14885,7 @@ msgstr "Choisir &modèle :"
 
 #: src/ui_atmosphereDialog.h:360
 msgid "Path to &data:"
-msgstr "Chemin vers &données :"
+msgstr "Emplacement des &données :"
 
 #: src/ui_atmosphereDialog.h:362
 msgid "Eclipse simulation &quality:"
@@ -20845,8 +20845,8 @@ msgid ""
 "it is strongly recommended to avoid using the telescope control feature "
 "before sunset without appropriate protection."
 msgstr ""
-"Même de manière fortuite, un déplacement durant la journée pourrait pointer "
-"temporairement votre télescope vers le Soleil, dans son chemin vers sa "
+"Même de manière fortuite, un déplacement du télescope durant la journée "
+"pourrait le faire pointer vers le Soleil, dans son chemin vers sa "
 "destination. Il est donc fortement déconseillé d'utiliser cette "
 "fonctionnalité sans une protection adéquate lorsque le Soleil est levé."
 
@@ -35396,7 +35396,7 @@ msgstr "Opération annulée par l'utilisateur."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:402
 msgid "Please provide both API key and image path."
-msgstr "Veuillez fournir la clef API et le chemin vers l'image."
+msgstr "Indiquer la clef API et l'emplacement de l'image."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:409
 msgid "The specified image file does not exist or is not readable."
@@ -35442,7 +35442,7 @@ msgstr "Textures personnalisées importées !"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:752
 msgid "Image path is empty."
-msgstr "Le chemin vers l'image est vide."
+msgstr "L'emplacement de l'image est vide."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:764
 msgid "Image file invalid or unreadable."
@@ -35475,7 +35475,7 @@ msgstr "Ouvrir un fichier"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:483
 msgid "Image Filepath:"
-msgstr "Chemin de l'image _"
+msgstr "Emplacement de l'image :"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:485
 msgid "Online Solve"
