@@ -23,7 +23,7 @@ struct License
 // Enum class to represent different types of licenses
 enum class LicenseType
 {
-	NONE,
+	NONE = 0,
 	CC0,
 	CC_BY
 };

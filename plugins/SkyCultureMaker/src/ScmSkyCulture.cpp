@@ -10,9 +10,9 @@ void scm::ScmSkyCulture::setRegion(QString region)
 	ScmSkyCulture::region = region;
 }
 
-void scm::ScmSkyCulture::setClassification(StelSkyCulture::CLASSIFICATION classification)
+void scm::ScmSkyCulture::setClassificationType(ClassificationType classificationType)
 {
-	ScmSkyCulture::classification = classification;
+	ScmSkyCulture::classificationType = classificationType;
 }
 
 void scm::ScmSkyCulture::setFallbackToInternationalNames(bool fallback)

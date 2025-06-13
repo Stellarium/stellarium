@@ -77,7 +77,7 @@ void ScmSkyCultureDialog::createDialogContent()
 	// add all licenses to the combo box
 	for (const auto &license : scm::LICENSES)
 	{
-		// add name, description
+		// add name, license type
 		ui->licenseCB->addItem(license.second.name, QVariant::fromValue(license.first));
 		int index = ui->licenseCB->count() - 1;
 		ui->licenseCB->setItemData(index, license.second.description, Qt::ToolTipRole);
@@ -88,10 +88,26 @@ void ScmSkyCultureDialog::createDialogContent()
 		}
 	}
 
+	// add all classifications to the combo box
+	for (const auto &classification : scm::CLASSIFICATIONS)
+	{
+		// add name, classification type
+		ui->classificationCB->addItem(classification.second.name, QVariant::fromValue(classification.first));
+		int index = ui->classificationCB->count() - 1;
+		ui->classificationCB->setItemData(index, classification.second.description, Qt::ToolTipRole);
+		// set NONE as the default classification
+		if (classification.first == scm::ClassificationType::NONE)
+		{
+			ui->classificationCB->setCurrentIndex(index);
+		}
+	}
+
 	// enable/disable the save button based on the current license and authors
 	connect(ui->licenseCB, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
 	        [this](int) { setIsLicenseSavable(); });
 	connect(ui->authorsTE, &QTextEdit::textChanged, this, &ScmSkyCultureDialog::setIsLicenseSavable);
+	connect(ui->classificationCB, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+	        [this](int) { setIsLicenseSavable(); });
 	setIsLicenseSavable();
 
 	connect(ui->saveLicenseBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::saveLicense);
@@ -115,6 +131,13 @@ void ScmSkyCultureDialog::saveLicense()
 		}
 		// set authors
 		maker->getCurrentSkyCulture()->setAuthors(ui->authorsTE->toPlainText());
+		// set classification type
+		index = ui->classificationCB->currentIndex();
+		if (index >= 0 && index < ui->classificationCB->count())
+		{
+			auto classificationType = ui->classificationCB->itemData(index).value<scm::ClassificationType>();
+			maker->getCurrentSkyCulture()->setClassificationType(classificationType);
+		}
 	}
 }
 
@@ -181,9 +204,26 @@ void ScmSkyCultureDialog::setIsLicenseSavable()
 {
 	if (maker->getCurrentSkyCulture() != nullptr)
 	{
-		bool isLicenseNotNone = maker->getCurrentSkyCulture()->getLicense() != scm::LicenseType::NONE;
-		bool isAuthorsListNotEmpty = !maker->getCurrentSkyCulture()->getAuthors().isEmpty();
-		ui->saveLicenseBtn->setEnabled(isLicenseNotNone && isAuthorsListNotEmpty);
+		bool isLicenseNotNone = false;
+		bool isAuthorsListNotEmpty = !ui->authorsTE->toPlainText().isEmpty();
+		bool isClassificationNotNone = false;
+
+		// check if the license is not NONE
+		int index = ui->licenseCB->currentIndex();
+		if (index >= 0 && index < ui->licenseCB->count())
+		{
+			auto licenseType = ui->licenseCB->itemData(index).value<scm::LicenseType>();
+			isLicenseNotNone = (licenseType != scm::LicenseType::NONE);
+		}
+		// check if the classification is not NONE
+		index = ui->classificationCB->currentIndex();
+		if (index >= 0 && index < ui->classificationCB->count())
+		{
+			auto classificationType = ui->classificationCB->itemData(index).value<scm::ClassificationType>();
+			isClassificationNotNone = (classificationType != scm::ClassificationType::NONE);
+		}
+		// set state of the save button
+		ui->saveLicenseBtn->setEnabled(isLicenseNotNone && isAuthorsListNotEmpty && isClassificationNotNone);
 	}
 	else
 	{

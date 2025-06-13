@@ -288,6 +288,11 @@ p, li { white-space: pre-wrap; }
           </item>
           <item>
            <widget class="QLabel" name="authorListLbl">
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>List of all authors (Comma separated)</string>
             </property>
@@ -295,6 +300,27 @@ p, li { white-space: pre-wrap; }
           </item>
           <item>
            <widget class="QTextEdit" name="authorsTE"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="classificationLbl">
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Classification of the Sky Culture</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="classificationCB">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="saveLicenseBtn">

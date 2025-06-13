@@ -9,6 +9,7 @@
 #include "../SkyCultureMaker.hpp"
 #include "../ScmConstellation.hpp"
 #include "../types/License.hpp"
+#include "../types/Classification.hpp"
 
 class Ui_scmSkyCultureDialog;
 
