@@ -4,6 +4,7 @@
 #include <map>
 #include <vector>
 #include <QString>
+#include <QMetaType>
 
 namespace scm
 {
@@ -57,6 +58,6 @@ const std::map<ClassificationType, Classification> CLASSIFICATIONS = {
 
 } // namespace scm
 
-
+Q_DECLARE_METATYPE(scm::ClassificationType);
 
 #endif // SCM_CLASSIFICATION_HPP

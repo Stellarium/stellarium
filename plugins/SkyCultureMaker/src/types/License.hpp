@@ -4,6 +4,7 @@
 #include <map>
 #include <vector>
 #include <QString>
+#include <QMetaType>
 
 namespace scm
 {
@@ -43,6 +44,6 @@ const std::map<LicenseType, License> LICENSES = {
 
 } // namespace scm
 
-
+Q_DECLARE_METATYPE(scm::LicenseType);
 
 #endif // SCM_LICENSE_HPP
