@@ -514,7 +514,8 @@ void HelpDialog::updateAboutText(void) const
 	// populate About tab
 	QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
 	newHtml += QString("<p><strong>%1 %2").arg(q_("Version"), StelUtils::getApplicationVersion());
-	newHtml += QString("<br />%1 %2</strong></p>").arg(q_("Based on Qt"), QT_VERSION_STR);
+        newHtml += QString("<br />%1 %2</strong></p>").arg(q_("Based on Qt"), QT_VERSION_STR);
+        newHtml += QString("<p>%1 %2</p>").arg(q_("Running on Operating System"), StelUtils::getOperatingSystemInfo());
 	if (!message.isEmpty())
 		newHtml += "<p><strong>" + message + "</strong></p>";
 	// Note: this legal notice is not suitable for translation
