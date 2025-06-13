@@ -64,6 +64,26 @@ std::vector<scm::ScmConstellation> *scm::ScmSkyCulture::getConstellations()
 	return &constellations;
 }
 
+void scm::ScmSkyCulture::setLicense(scm::LicenseType license)
+{
+	ScmSkyCulture::license = license;
+}
+
+scm::LicenseType scm::ScmSkyCulture::getLicense() const
+{
+	return ScmSkyCulture::license;
+}
+
+void scm::ScmSkyCulture::setAuthors(const QString authors)
+{
+	ScmSkyCulture::authors = authors;
+}
+
+QString scm::ScmSkyCulture::getAuthors() const
+{
+	return ScmSkyCulture::authors;
+}
+
 void scm::ScmSkyCulture::draw(StelCore *core)
 {
 	for (auto &constellation : constellations)

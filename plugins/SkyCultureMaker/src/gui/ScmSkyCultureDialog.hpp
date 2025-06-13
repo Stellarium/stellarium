@@ -3,10 +3,12 @@
 
 #include <QObject>
 #include <QString>
+#include <QVariant>
 #include <optional>
 #include "StelDialogSeparate.hpp"
 #include "../SkyCultureMaker.hpp"
 #include "../ScmConstellation.hpp"
+#include "../types/License.hpp"
 
 class Ui_scmSkyCultureDialog;
 
@@ -36,6 +38,8 @@ private slots:
 	void constellationDialog();
 	void removeSelectedConstellation();
 	void updateRemoveConstellationButton();
+	void setIsLicenseSavable();
+	void saveLicense();
 
 private:
 	Ui_scmSkyCultureDialog *ui = nullptr;

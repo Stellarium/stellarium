@@ -20,6 +20,7 @@
 #include "ScmAsterism.hpp"
 #include "types/CoordinateLine.hpp"
 #include "types/StarLine.hpp"
+#include "types/License.hpp"
 #include "ScmCommonName.hpp"
 #include "StelCore.hpp"
 
@@ -71,6 +72,18 @@ public:
 	/// Returns the common names of the stars, planets and nonstellar objects
 	std::vector<ScmCommonName> getCommonNames() const;
 
+	/// Sets the license of the sky culture
+	void setLicense(scm::LicenseType license);
+
+	/// Returns the license of the sky culture
+	scm::LicenseType getLicense() const;
+
+	/// Sets the authors of the sky culture
+	void setAuthors(const QString authors);
+
+	/// Returns the authors of the sky culture
+	QString getAuthors() const;
+
 	/**
 	* @brief Returns the sky culture as a JSON object
 	*/
@@ -105,6 +118,12 @@ private:
 
 	/// The common names of the stars, planets and nonstellar objects
 	std::vector<ScmCommonName> commonNames;
+
+	/// The license of the sky culture
+	scm::LicenseType license = scm::LicenseType::NONE;
+
+	/// The authors of the sky culture
+	QString authors;
 
 	// TODO: edges:
 	/// Type of the edges. Can be one of "none", "iau" or "own". TODO: enum?
