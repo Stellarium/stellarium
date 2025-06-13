@@ -1,12 +1,7 @@
+get_filename_component(/skycultures/ruanui_sky_tahiti_and_society_islands "${CMAKE_CURRENT_SOURCE_DIR}" REALPATH)
+get_filename_component(ruanui_sky_tahiti_and_society_islands ${/skycultures/ruanui_sky_tahiti_and_society_islands} NAME)
 
-########### install files ###############
+install(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/${ruanui_sky_tahiti_and_society_islands}
+        FILES_MATCHING PATTERN "*"
+        PATTERN "CMakeLists.txt" EXCLUDE)
 
-# install info.ini and star_names.fab
-INSTALL(FILES info.ini star_names.fab DESTINATION ${SDATALOC}/skycultures/ruanui_sky_tahiti_and_society_islands)
-
-# install constellations data, artwork and descriptions
-INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/ruanui_sky_tahiti_and_society_islands
-	FILES_MATCHING PATTERN "constellation*" 
-	PATTERN "*.png" 
-	PATTERN "description.*.utf8" 
-	PATTERN "CMakeFiles" EXCLUDE )
