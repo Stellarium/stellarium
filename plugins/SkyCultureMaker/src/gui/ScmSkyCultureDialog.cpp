@@ -79,6 +79,7 @@ void ScmSkyCultureDialog::createDialogContent()
 	{
 		// add name, license type
 		ui->licenseCB->addItem(license.second.name, QVariant::fromValue(license.first));
+		// set the license description as tooltip
 		int index = ui->licenseCB->count() - 1;
 		ui->licenseCB->setItemData(index, license.second.description, Qt::ToolTipRole);
 		// set NONE as the default license
@@ -93,6 +94,7 @@ void ScmSkyCultureDialog::createDialogContent()
 	{
 		// add name, classification type
 		ui->classificationCB->addItem(classification.second.name, QVariant::fromValue(classification.first));
+		// set the classification description as tooltip
 		int index = ui->classificationCB->count() - 1;
 		ui->classificationCB->setItemData(index, classification.second.description, Qt::ToolTipRole);
 		// set NONE as the default classification
