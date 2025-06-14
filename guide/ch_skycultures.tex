@@ -698,6 +698,7 @@ so that the Indian or \indexterm[zodiac!sidereal]{sidereal zodiac} moves along t
 \begin{jsonfile}[\scriptsize]
 "zodiac": { 
   "name": { "pronounce": "%(*Rāśi*)", "english": "Indian Zodiac"},
+  "context": "indian zodiac sign",
   "partitions": [ 12, 3, 2, 5],
   "extent": 9,
   "link": { "star": 65474, "offset": 180},
@@ -709,6 +710,8 @@ so that the Indian or \indexterm[zodiac!sidereal]{sidereal zodiac} moves along t
 where 
 \begin{description}
 \item[\jtag{name}] cultural name as described in \ref{SC:common_names}.
+\item[\jtag{context}] (optional, recommended) context data for all English names in zodiac (enhancement of localization support).
+\item[\jtag{comment}] (optional) commentary for zodiac, it will be used as extra commentary for translators also.
 \item[\jtag{partitions}] regular division of the centerline. The first element commonly is 12 (30-degree sign). 
 The other elements (up to 3) are used to describe the tick marks in decreasing order. The example means, 
 the 30 degrees are further divided in 3 sections (large 10-degree ticks), these are split in 2 5-degree sections with 5 sections (1-degrees) each.
@@ -728,6 +731,7 @@ the ecliptic is split into 27 equal-sized partitions, which are then further spl
 \begin{jsonfile}[\scriptsize]
 "lunar_system":  { 
   "name": { "native": "...", ..., "english": "Nakshatras"},
+  "context": "indian lunar mansion",
   "partitions": [ 27, 4],
   "extent": 5,
   "link": { "star": 65474, "offset": 180},
@@ -739,6 +743,8 @@ the ecliptic is split into 27 equal-sized partitions, which are then further spl
 where 
 \begin{description}
 \item[\jtag{name}] cultural name as described in \ref{SC:common_names}.
+\item[\jtag{context}] (optional, recommended) context data for all English names in lunar mansions (enhancement of localization support).
+\item[\jtag{comment}] (optional) commentary for lunar system, it will be used as extra commentary for translators also.
 \item[\jtag{partitions}] regular division of the centerline. 27 stations which are further divided in 4 equal parts.
 \item[\jtag{extent}] The zone of interest. With an obliquity of the Lunar orbit of about 5 degrees, a 5-degree zone seems appropriate.  
 \item[\jtag{link}] (optional) The Indian system is again described to be defined with the longitude of Spica ($\alpha$ Vir, HIP~65474) to lie at 180°.  
@@ -755,6 +761,7 @@ The mansions are quite different in width.
 \begin{jsonfile}[\scriptsize]
 "lunar_system": {
   "name": { "native": "...", "pronounce": "%(*Xiù*)", "english": "Lunar Mansion"},
+  "context": "chinese lunar mansion",
   "defining_stars": [65474, 69427, ...],
   "coordsys": "equatorial",
   "extent": 90,
@@ -765,6 +772,8 @@ The mansions are quite different in width.
 where 
 \begin{description}
 \item[\jtag{name}] cultural name as described in \ref{SC:common_names}.
+\item[\jtag{context}] (optional, recommended) context data for all English names in lunar mansions (enhancement of localization support).
+\item[\jtag{comment}] (optional) commentary for lunar system, it will be used as extra commentary for translators also.
 \item[\jtag{defining\_stars}] List of HIP numbers of the 28 defining stars.
 \item[\jtag{coordsys}] may be \jtag{equatorial} or \jtag{ecliptical} (default).
 \item[\jtag{extent}] The zone of interest. The Chinese mansions extend from pole to pole.   

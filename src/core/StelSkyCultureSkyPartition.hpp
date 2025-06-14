@@ -38,6 +38,7 @@ class QJsonObject;
 //! Currently Stellarium supports two optional such systems per skyculture: Zodiac and LunarSystem.
 //! "zodiac": {
 //! "name": { "native": "Signa Zodiacalia", "english": "Zodiacal signs"},
+//! "context": "western zodiac sign", // optional, improvements for localization support
 //! "partitions": [ 12, 30, 60],
 //! "extent": 8,
 //! "names": [ { "symbol": "\u2648", "native": "Aries",       "english": "Ram"},
@@ -57,6 +58,7 @@ class QJsonObject;
 //! or with Spica at 180°. The literature lists both, probably these are regional differences. This example is for Spica:
 //! "lunar_system": {
 //! "name": "Nakshatras",
+//! "context": "indian lunar mansion", // optional, improvements for localization support
 //! "partitions": [ 27, 4],
 //! "extent": 5,
 //! "link": { "star": 65474, "offset": 180},
@@ -95,6 +97,7 @@ class QJsonObject;
 //! Currently the lines are kept "live", following the idea that, with each new official star map "from now on the Mansions should be defined like this".
 //! //! "lunar_system": {
 //! "name": "Chinese",
+//! "context": "chinese lunar mansion", // optional, improvements for localization support
 //! "defining_stars": [65474, 69427, 72622, 78265, 80763. 82514, 88635, 92041, 100345, 102618, 106278, 109074, 113963, 1067,
 //!                    4463, 8903, 12719, 17499, 20889, 26207, 26727, 30343, 41822, 42313, 46390, 48356, 53740, 59803],
 //!                   // 28 star HIP indices which define the start of a Lunar Mansion
@@ -137,7 +140,7 @@ class StelSkyCultureSkyPartition
 	Q_GADGET
 friend ConstellationMgr;
 public:
-	StelSkyCultureSkyPartition(const QJsonObject &description);
+        StelSkyCultureSkyPartition(const QJsonObject &description);
 	~StelSkyCultureSkyPartition();
 	void draw(StelPainter& sPainter, const Vec3d &obsVelocity);
 	void setFontSize(int newFontSize);
@@ -160,7 +163,7 @@ private:
 	QVector<double> partitions;            //!< A partition into [0] large parts of [1] smaller parts of [2] smaller parts... Currently only 2-part zodiacs [12, 30] or nakshatras [27, 4] are in use.
 	StelObject::CulturalName name;         //!< Full culture-sensitive naming support: name of the system.
 	QList<StelObject::CulturalName> names; //!< Full culture-sensitive naming support: names of the first-grade partition.
-	QStringList symbols;                   //!< A list of very short or optimally 1-char Unicode strings with representative symbols usable as abbreviations.
+	QStringList symbols;                   //!< A list of very short or optimally 1-char Unicode strings with representative symbols usable as abbreviations.	
 	double extent;                         //!< (degrees) the displayed partition zone runs so far north and south of the center line.
 public:
 	SkyLine *centerLine;                   //!< See GridlineMgr: a CUSTOM_ECLIPTIC or CUSTOM_EQUATORIAL SkyLine
@@ -170,6 +173,7 @@ private:
 	double offset;                         //!< the longitude (degrees) in the respective culturalpartition which is defined by linkStar
 	double eclObl;                         //!< Ecliptical obliquity (computed in draw(), also consumed in getLongitudeCoordinate())
 	double offsetFromAries;                //!< (degrees) resulting deviation between ecliptical longitude (or RA) of date and "cultural longitude" (or RA) of date.
+	QString context;				//!< A context data for localization support
 };
 //! @typedef StelSkyCultureSkyPartitionP
 //! Shared pointer on a StelSkyCultureSkyPartition with smart pointers

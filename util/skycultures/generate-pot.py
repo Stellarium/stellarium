@@ -198,7 +198,7 @@ def update_cultures_pot(sclist, pot):
             # process abbreviations of constellations and asterisms
             parts = obj_id.split(' ')
             abbr_comment = f'Abbreviation of {obj_type} in {sc_name} sky culture'
-            abbr_context = "abbreviation"
+            abbr_context = 'abbreviation'
             entry = polib.POEntry(comment = abbr_comment, msgid = parts[2], msgstr = "", msgctxt = abbr_context)
             if entry in pot:
                 prev_entry = pot.find(entry.msgid, msgctxt = abbr_context)
@@ -290,6 +290,41 @@ def update_cultures_pot(sclist, pot):
                 else:
                     pot.append(entry)
 
+    def process_extra_names(objects, pot, sc_name):
+        if 'context' in objects:
+            context = objects["context"]
+        else:
+            context = None
+
+        if 'comment' in objects:
+            ecomment = objects["comment"]
+        else:
+            ecomment = None
+
+        for name in objects["names"]:
+            if 'english' in name:
+                english = name['english']
+                if len(english) == 0:
+                    english = None
+            else:
+                english = None
+
+            if not english:
+                continue
+
+            comment = f'Name of zodiac sign or name of lunar mansion in {sc_name} sky culture'
+            if ecomment:
+                comment += '\n' + ecomment
+
+            entry = polib.POEntry(comment = comment, msgid = english, msgstr = "", msgctxt = context)
+            if entry in pot:
+                prev_entry = pot.find(entry.msgid, msgctxt = context)
+                assert prev_entry
+                if comment:
+                    prev_entry.comment += '\n' + comment
+            else:
+                pot.append(entry)
+
     for sky_culture in sclist:
         data_path = os.path.join(SCDIR, sky_culture)
         index_file = os.path.join(data_path, 'index.json')
@@ -305,6 +340,10 @@ def update_cultures_pot(sclist, pot):
                 process_cons_or_asterism(data['constellations'], "constellation", pot, sc_name)
             if 'asterisms' in data:
                 process_cons_or_asterism(data['asterisms'], "asterism", pot, sc_name)
+            if 'zodiac' in data:
+                process_extra_names(data['zodiac'], pot, sc_name)
+            if 'lunar_system' in data:
+                process_extra_names(data['lunar_system'], pot, sc_name)
             if 'common_names' in data:
                 process_names(data['common_names'], pot, sc_name)
 

@@ -734,6 +734,7 @@
   "zodiac": { "name": { "native": "राशि-चक्रम्", "pronounce": "Rāśi", "english": "Indian Zodiac"},
               "partitions": [ 12, 30],
               "extent": 9,
+              "context": "indian zodiac sign",
 	      "link": { "star": 65474, "offset": 180},
 	      "comment": "Please replace by Indian names, and remove symbols if not used traditionally!",
 	      "names": [ 
@@ -752,6 +753,7 @@
   "lunar_system":  { "name": { "native": "नक्षत्र-चक्रम्", "pronounce": "Naksatra", "english": "Nakshatras"},
 	"partitions": [ 27, 4],
 	"extent": 5,
+	"context": "indian lunar mansion",
 	"link": { "star": 65474, "offset": 180},
 	"names": [ { "symbol":  "१", "native": "अश्विनी", "pronounce": "Aśvinī",    "english": "Physician to the Gods"},
 			 { "symbol":  "२", "native": "भरणी", "pronounce": "Bharaṇī",    "english": "Bearer"},

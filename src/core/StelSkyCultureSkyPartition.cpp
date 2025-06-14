@@ -37,7 +37,8 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 	linkStars(),
 	offset(0.0),
 	eclObl(0.0),
-	offsetFromAries(0.0)
+        offsetFromAries(0.0),
+        context()
 {
 	// Parse defining centerline type
 	SkyLine::SKY_LINE_TYPE skylineType=SkyLine::ECLIPTIC_CULTURAL;
@@ -54,6 +55,10 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 	}
 	centerLine=new SkyLine(skylineType);
 	centerLine->setDisplayed(true);
+
+	// Find the context data for localization support
+	if (json.contains("context"))
+		context = json["context"].toString();
 
 	// Parse extent, create polar caps where needed.
 	if (json.contains("extent") && json["extent"].isDouble())
@@ -410,7 +415,6 @@ void StelSkyCultureSkyPartition::updateI18n()
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 
 	// The name of the system
-	QString context = name.translated;
 	name.translatedI18n = trans.tryQtranslate(name.translated, context);
 	if (name.translatedI18n.isEmpty())
 	{
@@ -431,7 +435,6 @@ void StelSkyCultureSkyPartition::updateI18n()
 	// names array
 	for (auto &name : names)
 	{
-		QString context = name.translated;
 		name.translatedI18n = trans.tryQtranslate(name.translated, context);
 		if (name.translatedI18n.isEmpty())
 		{
