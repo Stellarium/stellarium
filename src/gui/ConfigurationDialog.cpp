@@ -1066,6 +1066,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/constellation_hulls_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.hullsFadeDuration").toDouble(), 'f', 1));
 	conf->setValue("viewing/constellation_lines_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.linesFadeDuration").toDouble(), 'f', 1));
 	conf->setValue("viewing/constellation_labels_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.namesFadeDuration").toDouble(), 'f', 1));
+
 	conf->setValue("viewing/flag_skyculture_zodiac",			propMgr->getStelPropertyValue("ConstellationMgr.zodiacDisplayed").toBool());
 	conf->setValue("viewing/skyculture_zodiac_thickness",		QString::number(propMgr->getStelPropertyValue("ConstellationMgr.zodiacThickness").toDouble(), 'f', 1));
 	conf->setValue("viewing/skyculture_zodiac_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.zodiacFadeDuration").toDouble(), 'f', 1));
