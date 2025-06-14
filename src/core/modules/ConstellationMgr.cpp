@@ -103,8 +103,8 @@ void ConstellationMgr::init()
 	setFlagLabels(conf->value("viewing/flag_constellation_name", false).toBool());
 	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries", false).toBool());
 	setFlagHulls(conf->value("viewing/flag_constellation_hulls", false).toBool());
-	setFlagZodiac(conf->value("viewing/flag_skyculture_zodiac", true).toBool());
-	setFlagLunarSystem(conf->value("viewing/flag_skyculture_lunarsystem", true).toBool());
+	setFlagZodiac(conf->value("viewing/flag_skyculture_zodiac", false).toBool());
+	setFlagLunarSystem(conf->value("viewing/flag_skyculture_lunarsystem", false).toBool());
 	setArtIntensity(conf->value("viewing/constellation_art_intensity", 0.5f).toFloat());
 	setArtFadeDuration(conf->value("viewing/constellation_art_fade_duration",2.f).toFloat());
 	setFlagArt(conf->value("viewing/flag_constellation_art", false).toBool());
