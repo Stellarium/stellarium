@@ -719,13 +719,11 @@ void ConstellationMgr::updateI18n()
 			else
 				constellation->culturalName.pronounceI18n = qc_(constellation->culturalName.pronounce, context);
 		}
-		constellation->abbreviationI18n = trans.tryQtranslate(constellation->abbreviation, context).trimmed();
+		const QString abbrContext = "abbreviation"; // fixed context for all abbreviations
+		constellation->abbreviationI18n = trans.tryQtranslate(constellation->abbreviation, abbrContext).trimmed();
 		if (constellation->abbreviationI18n.isEmpty())
 		{
-			if (context.isEmpty())
-				constellation->abbreviationI18n = q_(constellation->abbreviation).trimmed();
-			else
-				constellation->abbreviationI18n = qc_(constellation->abbreviation, context).trimmed();
+			constellation->abbreviationI18n = qc_(constellation->abbreviation, abbrContext).trimmed();
 		}
 	}
 }
