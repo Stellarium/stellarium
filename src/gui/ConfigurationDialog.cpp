@@ -1066,6 +1066,12 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/constellation_hulls_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.hullsFadeDuration").toDouble(), 'f', 1));
 	conf->setValue("viewing/constellation_lines_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.linesFadeDuration").toDouble(), 'f', 1));
 	conf->setValue("viewing/constellation_labels_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.namesFadeDuration").toDouble(), 'f', 1));
+	conf->setValue("viewing/flag_skyculture_zodiac",			propMgr->getStelPropertyValue("ConstellationMgr.zodiacDisplayed").toBool());
+	conf->setValue("viewing/skyculture_zodiac_thickness",		QString::number(propMgr->getStelPropertyValue("ConstellationMgr.zodiacThickness").toDouble(), 'f', 1));
+	conf->setValue("viewing/skyculture_zodiac_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.zodiacFadeDuration").toDouble(), 'f', 1));
+	conf->setValue("viewing/flag_skyculture_lunarsystem",		propMgr->getStelPropertyValue("ConstellationMgr.lunarSystemDisplayed").toBool());
+	conf->setValue("viewing/skyculture_lunarsystem_thickness",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.lunarSystemThickness").toDouble(), 'f', 1));
+	conf->setValue("viewing/skyculture_lunarsystem_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.lunarSystemFadeDuration").toDouble(), 'f', 1));
 
 	conf->setValue("viewing/asterism_font_size",			propMgr->getStelPropertyValue("AsterismMgr.fontSize").toInt());
 	conf->setValue("viewing/flag_asterism_drawing",		propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool());
