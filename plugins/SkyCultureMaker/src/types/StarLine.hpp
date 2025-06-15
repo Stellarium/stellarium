@@ -62,12 +62,12 @@ struct StarLine
 
             if (start.value().contains("HIP"))
             {
-                // HIP are requiered as int
+                // HIP are required as int
                 json.append(number.toInt());
             }
             else
             {
-                // Gaia is requiered as string
+                // Gaia is required as string
                 json.append(number);
             }
 		}
@@ -82,12 +82,12 @@ struct StarLine
 
             if (end.value().contains("HIP"))
             {
-                // HIP are requiered as int
+                // HIP are required as int
                 json.append(number.toInt());
             }
             else
             {
-                // Gaia is requiered as string
+                // Gaia is required as string
                 json.append(number);
             }
         }
