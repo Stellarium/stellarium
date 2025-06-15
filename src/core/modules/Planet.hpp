@@ -442,8 +442,15 @@ public:
 	double getPhaseAngle(const Vec3d& obsPos) const;
 	//! Check whether the planet is in a waning phase, i.e. its phase angle is increasing
 	bool isWaning(const Vec3d& observerPosition, const Vec3d& observerVelocity) const;
-	//! Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
+	//! Get the elongation angle (angular distance, radians, 0<e<2pi) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getElongation(const Vec3d& obsPos) const;
+	//! Get the elongation angle from the Sun in terms of difference in ecliptical longitude (radians) from the Sun.
+	//! Result e is within [0...2pi[ :
+	//! - A result <pi implies eastern elongation, evening visibility.
+	//! - A result pi<e<2pi implies western elongation, morning visibility.
+	//! Calling this for the Sun returns 0.
+	double getElongationDLambda() const;
+
 	//! Get the angular radius (degrees) of the planet spheroid (i.e. without the rings)
 	double getSpheroidAngularRadius(const StelCore* core) const;
 	//! Get the planet phase (illuminated fraction of the planet disk, [0=dark..1=full]) for an observer at pos obsPos in heliocentric coordinates (in AU)
