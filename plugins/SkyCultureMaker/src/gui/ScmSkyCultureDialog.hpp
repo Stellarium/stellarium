@@ -11,6 +11,10 @@
 #include "../types/License.hpp"
 #include "../types/Classification.hpp"
 
+// debugging
+#include <QJsonObject>
+#include <QJsonDocument>
+
 class Ui_scmSkyCultureDialog;
 
 class ScmSkyCultureDialog : public StelDialogSeparate
