@@ -132,6 +132,18 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	ui->infoLbl->setText("");
 	maker->setSkyCultureDescription(desc);
 	maker->saveSkyCultureDescription();
+
+  // only for debugging purposes
+	if (constellations != nullptr)
+	{
+		qDebug() << "[Constellations as JSON]:";
+		for (const auto &constellation : *constellations)
+		{
+			QJsonObject obj = constellation.toJson(name);
+			QJsonDocument doc(obj);
+			qDebug().noquote() << doc.toJson(QJsonDocument::Compact);
+		}
+	}
 }
 
 void ScmSkyCultureDialog::saveLicense()

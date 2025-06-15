@@ -18,6 +18,8 @@
 #include "types/CoordinateLine.hpp"
 #include "types/StarLine.hpp"
 #include "VecMath.hpp"
+#include <QJsonObject>
+#include <QJsonArray>
 
 namespace scm
 {
@@ -118,6 +120,11 @@ public:
 	 * @param painter The painter used for drawing.
 	 */
 	void drawNames(StelCore *core, StelPainter painter);
+
+	/**
+	 * @brief Returns the constellation data as a JSON object.
+	 */
+	QJsonObject toJson(QString &skyCultureName) const;
 
 private:
 	/// Identifier of the constellation
