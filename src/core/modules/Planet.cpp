@@ -489,12 +489,35 @@ QString Planet::getInfoLabel() const
 QStringList Planet::getCultureLabels(StelObject::CulturalDisplayStyle style) const
 {
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	static StelCore *core=StelApp::getInstance().getCore();
+
+	// DeltaLambda alg. from getInfoStringEloPhase()
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	double raSun, deSun, ra, de, lSun, ecLong, bSun, ecLat;
+	double obl=ssystem->getEarth()->getRotObliquity(core->getJDE());
+	if (core->getUseNutation())
+	{
+		double dEps, dPsi;
+		getNutationAngles(core->getJDE(), &dPsi, &dEps);
+		obl+=dEps;
+	}
+	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+	StelUtils::rectToSphe(&ra, &de, getEquinoxEquatorialPos(core));
+	StelUtils::equToEcl(raSun, deSun, obl, &lSun, &bSun);
+	StelUtils::equToEcl(ra, de, obl, &ecLong, &ecLat);
+	const double elongAlongEcliptic = StelUtils::fmodpos(ecLong-lSun, M_PI*2.);
+
 	QStringList labels;
 	for (auto &cName: culturalNames)
+	{
+		if ( (cName.special==StelObject::CulturalNameSpecial::Morning && elongAlongEcliptic>M_PI) ||
+				(cName.special==StelObject::CulturalNameSpecial::Evening && elongAlongEcliptic<M_PI) ||
+				(cName.special==StelObject::CulturalNameSpecial::None))
 		{
 			QString label=scMgr->createCulturalLabel(cName, style, getNameI18n());
 			labels << label;
 		}
+	}
 	labels.removeDuplicates();
 	labels.removeAll(QString(""));
 	labels.removeAll(QString());
