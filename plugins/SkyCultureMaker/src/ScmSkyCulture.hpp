@@ -121,7 +121,7 @@ private:
 	std::vector<ScmCommonName> commonNames;
 
 	/// The license of the sky culture
-	scm::LicenseType license = LicenseType::NONE;
+	scm::LicenseType license = scm::LicenseType::NONE;
 
 	/// The authors of the sky culture
 	QString authors;
