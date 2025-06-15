@@ -579,6 +579,17 @@ void SolarSystem::loadCultureSpecificNames(const QJsonObject& data)
 				cName.transliteration=json["transliteration"].toString();
 				cName.IPA=json["IPA"].toString();
 
+				if (json.contains("visible"))
+				{
+					QString visible=json["visible"].toString();
+					if (visible==L1S("morning"))
+						cName.special=StelObject::CulturalNameSpecial::Morning;
+					else if (visible==L1S("evening"))
+						cName.special=StelObject::CulturalNameSpecial::Evening;
+					else
+						qWarning() << "Bad value for \"visible\". Ignoring.";
+				}
+
 				planet->addCulturalName(cName);
 			}
 		}

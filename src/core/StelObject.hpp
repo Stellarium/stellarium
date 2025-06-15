@@ -167,6 +167,13 @@ public:
 	//! @struct CulturalName
 	//! Contains name components belonging to an object.
 	//!
+	enum class CulturalNameSpecial
+	{
+		None = 0,        //!< Nothing special
+		Morning = 1,     //!< This name is used for Mercury or Venus in Western elongation, i.e., "morning star"
+		Evening = 2      //!< This name is used for Mercury or Venus in Eastern elongation, i.e., "evening star"
+	};
+	Q_ENUM(CulturalNameSpecial)
 	struct CulturalName
 	{
 		QString native;           //!< native name in native glyphs
@@ -176,6 +183,13 @@ public:
 		QString translated;       //!< Native name translated to English. NOT the same as the usual object's englishName!
 		QString translatedI18n;   //!< Translated name (user language)
 		QString IPA;              //!< native name expressed in International Phonetic Alphabet
+		StelObject::CulturalNameSpecial special;          //!< any particular extra application?
+		CulturalName(): special(StelObject::CulturalNameSpecial::None){};
+		CulturalName(QString nat, QString pr, QString prI18n, QString trl,
+			     QString tra, QString traI18n, QString ipa, StelObject::CulturalNameSpecial sp=StelObject::CulturalNameSpecial::None):
+			native(nat), pronounce(pr), pronounceI18n(prI18n), transliteration(trl),
+			translated(tra), translatedI18n(traI18n), IPA(ipa),
+			special(sp){};
 	};
 
 	//! A pre-defined "all available" set of specifiers for the getInfoString flags argument to getInfoString
