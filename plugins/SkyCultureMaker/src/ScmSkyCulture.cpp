@@ -96,14 +96,13 @@ void scm::ScmSkyCulture::setDescription(const scm::Description &description)
 	ScmSkyCulture::description = description;
 }
 
-void scm::ScmSkyCulture::saveDescriptionAsMarkdown()
+bool scm::ScmSkyCulture::saveDescriptionAsMarkdown(QFile file)
 {
-	QFile mdFile("description.md");
-	if (mdFile.open(QIODevice::WriteOnly | QIODevice::Text))
+	if (file.open(QIODevice::WriteOnly | QIODevice::Text))
 	{
 		const scm::Description &desc = ScmSkyCulture::description;
 		
-		QTextStream out(&mdFile);
+		QTextStream out(&file);
 		out << "# " << desc.name << "\n\n";
 		out << "## Geographical Region\n" << desc.geoRegion << "\n\n";
 		out << "## Classification\n " << classificationTypeToString(desc.classification) << "\n\n";
@@ -120,7 +119,20 @@ void scm::ScmSkyCulture::saveDescriptionAsMarkdown()
 		out << "## Authors\n" << desc.authors << "\n\n";
 		out << "## Acknowledgements\n" << desc.acknowledgements << "\n\n";
 		out << "## References\n" << desc.references << "\n";
-		mdFile.close();
+		
+		try {
+			file.close();
+			return true; // successfully saved
+		}
+		catch (const std::exception &e) {
+			qWarning("Error closing file: %s", e.what());
+			return false; // error occurred while closing the file
+		}
+	}
+	else
+	{
+		qWarning("Could not open file for writing: %s", qPrintable(file.fileName()));
+		return false; // file could not be opened
 	}
 }
 

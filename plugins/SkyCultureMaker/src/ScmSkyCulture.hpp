@@ -104,8 +104,10 @@ public:
 
 	/**
 	 * @brief Saves the current sky culture description as markdown text.
+	 * @param file The file to save the description to.
+	 * @return true if the description was saved successfully, false otherwise.
 	 */
-	void saveDescriptionAsMarkdown();
+	bool saveDescriptionAsMarkdown(QFile file);
 
 private:
 	/// Sky culture identifier

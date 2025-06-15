@@ -104,18 +104,6 @@ void ScmSkyCultureDialog::createDialogContent()
 			ui->classificationCB->setCurrentIndex(index);
 		}
 	}
-
-	// enable/disable the save button based on the current license and authors
-	connect(ui->licenseCB, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-	        [this](int) { setIsLicenseSavable(); });
-	// connect(ui->authorsTE, &QTextEdit::textChanged, this, &ScmSkyCultureDialog::setIsLicenseSavable);
-	// connect(ui->classificationCB, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-	//         [this](int) { setIsLicenseSavable(); });
-	// setIsLicenseSavable();
-
-	connect(ui->saveLicenseBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::saveLicense);
-
-	// Connect description fields
 }
 
 void ScmSkyCultureDialog::saveSkyCulture()
@@ -129,9 +117,17 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	}
 
 	// If valid, save the sky culture as markdown file
-	ui->infoLbl->setText("");
 	maker->setSkyCultureDescription(desc);
-	maker->saveSkyCultureDescription();
+	bool success = maker->saveSkyCultureDescription();
+
+	if (success)
+	{
+		ui->infoLbl->setText("Sky culture saved successfully.");
+	}
+	else
+	{
+		ui->infoLbl->setText("ERROR: Could not save the sky culture.");
+	}
 }
 
 void ScmSkyCultureDialog::saveLicense()
@@ -216,56 +212,24 @@ QString ScmSkyCultureDialog::getDisplayNameFromConstellation(const scm::ScmConst
 	return constellation.getEnglishName() + " (" + constellation.getId() + ")";
 }
 
-void ScmSkyCultureDialog::setIsLicenseSavable()
-{
-	if (maker->getCurrentSkyCulture() != nullptr)
-	{
-		bool isLicenseNotNone        = false;
-		bool isAuthorsListNotEmpty   = !ui->authorsTE->toPlainText().isEmpty();
-		bool isClassificationNotNone = false;
-
-		// check if the license is not NONE
-		int index = ui->licenseCB->currentIndex();
-		if (index >= 0 && index < ui->licenseCB->count())
-		{
-			auto licenseType = ui->licenseCB->itemData(index).value<scm::LicenseType>();
-			isLicenseNotNone = (licenseType != scm::LicenseType::NONE);
-		}
-		// check if the classification is not NONE
-		index = ui->classificationCB->currentIndex();
-		if (index >= 0 && index < ui->classificationCB->count())
-		{
-			auto classificationType = ui->classificationCB->itemData(index).value<scm::ClassificationType>();
-			isClassificationNotNone = (classificationType != scm::ClassificationType::NONE);
-		}
-		// set state of the save button
-		ui->saveLicenseBtn->setEnabled(isLicenseNotNone && isAuthorsListNotEmpty && isClassificationNotNone);
-	}
-	else
-	{
-		ui->saveLicenseBtn->setEnabled(false);
-	}
-}
-
 scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 {
-	scm::Description desc
-	{
-		ui->skyCultureNameTE->toPlainText(),
-		ui->geoRegionTE->toPlainText(),
-		ui->skyTE->toPlainText(),
-		ui->moonSunTE->toPlainText(),
-		ui->zodiacTE->toPlainText(),
-		ui->planetsTE->toPlainText(),
-		ui->constellationsDescTE->toPlainText(),
-		ui->milkyWayTE->toPlainText(),
-		ui->otherObjectsTE->toPlainText(),
-		ui->aboutTE->toPlainText(),
-		ui->authorsTE->toPlainText(),
-		ui->acknowledgementsTE->toPlainText(),
-		ui->referencesTE->toPlainText(),
-		ui->classificationCB->currentData().value<scm::ClassificationType>()
-	};
+	scm::Description desc;
+
+	desc.name = ui->skyCultureNameTE->toPlainText();
+	desc.geoRegion = ui->geoRegionTE->toPlainText();
+	desc.sky = ui->skyTE->toPlainText();
+	desc.moonAndSun = ui->moonSunTE->toPlainText();
+	desc.zodiac = ui->zodiacTE->toPlainText();
+	desc.planets = ui->planetsTE->toPlainText();
+	desc.constellations = ui->constellationsDescTE->toPlainText();
+	desc.milkyWay = ui->milkyWayTE->toPlainText();
+	desc.otherObjects = ui->otherObjectsTE->toPlainText();
+	desc.about = ui->aboutTE->toPlainText();
+	desc.authors = ui->authorsTE->toPlainText();
+	desc.acknowledgements = ui->acknowledgementsTE->toPlainText();
+	desc.references = ui->referencesTE->toPlainText();
+	desc.classification = ui->classificationCB->currentData().value<scm::ClassificationType>();
 
 	return desc;
 }

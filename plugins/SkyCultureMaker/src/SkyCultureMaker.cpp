@@ -55,7 +55,7 @@ StelPluginInfo SkyCultureMakerStelPluginInterface::getPluginInfo() const
 	info.authors = "Vincent Gerlach (RivinHD), Luca-Philipp Grumbach (xLPMG), Fabian Hofer (Integer-Ctrl), Richard "
 		       "Hofmann (ZeyxRew), Mher Mnatsakanyan (MherMnatsakanyan03)";
 	info.contact = "Contact us using our GitHub usernames, via an Issue or the Discussion tab in the Stellarium "
-	               "repository.";
+		       "repository.";
 	info.description = "Plugin to draw and export sky cultures in Stellarium.";
 	info.version     = SKYCULTUREMAKER_PLUGIN_VERSION;
 	info.license     = SKYCULTUREMAKER_PLUGIN_LICENSE;
@@ -334,10 +334,16 @@ void SkyCultureMaker::setSkyCultureDescription(const scm::Description &descripti
 	}
 }
 
-void SkyCultureMaker::saveSkyCultureDescription()
+QFile SkyCultureMaker::getScmDescriptionFile()
+{
+	// TODO: Issue #85
+	return QFile("description.md");
+}
+
+bool SkyCultureMaker::saveSkyCultureDescription()
 {
 	if (currentSkyCulture != nullptr)
 	{
-		currentSkyCulture->saveDescriptionAsMarkdown();
+		return currentSkyCulture->saveDescriptionAsMarkdown(getScmDescriptionFile());
 	}
 }

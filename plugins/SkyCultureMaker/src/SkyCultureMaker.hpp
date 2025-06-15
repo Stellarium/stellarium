@@ -9,6 +9,7 @@
 #include "StelObjectModule.hpp"
 #include "ScmSkyCulture.hpp"
 #include "ScmConstellation.hpp"
+#include <QFile>
 
 #include <QFont>
 
@@ -118,8 +119,15 @@ public:
 
 	/**
 	 * @brief Saves the current sky culture description as markdown text.
+	 * @return true if the description was saved successfully, false otherwise.
 	 */
-	void saveSkyCultureDescription();
+	bool saveSkyCultureDescription();
+
+	/**
+	 * @brief Gets the saving file for the sky culture description.
+	 * @return The file to save the description to.
+	 */
+	QFile getScmDescriptionFile();
 
 signals:
 	void eventIsScmEnabled(bool b);

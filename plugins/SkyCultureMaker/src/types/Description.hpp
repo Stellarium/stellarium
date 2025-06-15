@@ -12,10 +12,6 @@ namespace scm
 
 /**
  * @brief The Description struct represents a sky culture description.
- * It contains various fields that describe the sky culture, including its name,
- * geographical region, sky features, celestial objects, and more.
- * It also includes a classification type to categorize the sky culture.
- * The `isComplete` method checks if all required fields are filled.
  */
 struct Description
 {
@@ -34,6 +30,10 @@ struct Description
 	QString references;
 	scm::ClassificationType classification;
 
+	/**
+	 * @brief Check if the description is complete.
+	 * @return true if all required fields are filled, false otherwise.
+	 */
 	bool isComplete() const
 	{
 		return !name.trimmed().isEmpty() && !geoRegion.trimmed().isEmpty() && !sky.trimmed().isEmpty() &&
