@@ -110,14 +110,41 @@ void ScmSkyCultureDialog::saveSkyCulture()
 {
 	scm::Description desc = getDescriptionFromTextEdit();
 
+	// check if license is selected
+	int index = ui->licenseCB->currentIndex();
+	if (index > 0 && index < ui->licenseCB->count())
+	{
+		auto licenseType = ui->licenseCB->itemData(index).value<scm::LicenseType>();
+		maker->getCurrentSkyCulture()->setLicense(licenseType);
+	}
+	else
+	{
+		ui->infoLbl->setText("ERROR: Please select a license for the sky culture.");
+		return;
+	}
+
+	// check if description is complete
 	if (!desc.isComplete())
 	{
-		ui->infoLbl->setText("WARNING: The sky culture description is not complete.");
+		ui->infoLbl->setText("ERROR: The sky culture description is not complete.");
 		return;
 	}
 
 	// If valid, save the sky culture as markdown file
 	maker->setSkyCultureDescription(desc);
+	maker->saveSkyCultureDescription();
+
+	// only for debugging purposes
+	if (constellations != nullptr)
+	{
+		qDebug() << "[Constellations as JSON]:";
+		for (const auto &constellation : *constellations)
+		{
+			QJsonObject obj = constellation.toJson(name);
+			QJsonDocument doc(obj);
+			qDebug().noquote() << doc.toJson(QJsonDocument::Compact);
+		}
+	}
 	bool success = maker->saveSkyCultureDescription();
 
 	if (success)
@@ -216,20 +243,20 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 {
 	scm::Description desc;
 
-	desc.name = ui->skyCultureNameTE->toPlainText();
-	desc.geoRegion = ui->geoRegionTE->toPlainText();
-	desc.sky = ui->skyTE->toPlainText();
-	desc.moonAndSun = ui->moonSunTE->toPlainText();
-	desc.zodiac = ui->zodiacTE->toPlainText();
-	desc.planets = ui->planetsTE->toPlainText();
-	desc.constellations = ui->constellationsDescTE->toPlainText();
-	desc.milkyWay = ui->milkyWayTE->toPlainText();
-	desc.otherObjects = ui->otherObjectsTE->toPlainText();
-	desc.about = ui->aboutTE->toPlainText();
-	desc.authors = ui->authorsTE->toPlainText();
+	desc.name             = ui->skyCultureNameTE->toPlainText();
+	desc.geoRegion        = ui->geoRegionTE->toPlainText();
+	desc.sky              = ui->skyTE->toPlainText();
+	desc.moonAndSun       = ui->moonSunTE->toPlainText();
+	desc.zodiac           = ui->zodiacTE->toPlainText();
+	desc.planets          = ui->planetsTE->toPlainText();
+	desc.constellations   = ui->constellationsDescTE->toPlainText();
+	desc.milkyWay         = ui->milkyWayTE->toPlainText();
+	desc.otherObjects     = ui->otherObjectsTE->toPlainText();
+	desc.about            = ui->aboutTE->toPlainText();
+	desc.authors          = ui->authorsTE->toPlainText();
 	desc.acknowledgements = ui->acknowledgementsTE->toPlainText();
-	desc.references = ui->referencesTE->toPlainText();
-	desc.classification = ui->classificationCB->currentData().value<scm::ClassificationType>();
+	desc.references       = ui->referencesTE->toPlainText();
+	desc.classification   = ui->classificationCB->currentData().value<scm::ClassificationType>();
 
 	return desc;
 }
