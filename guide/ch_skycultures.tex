@@ -858,11 +858,18 @@ When there is more than one name for a star, the first in the list is used as sc
 \subsubsection{Planet Names}
 \label{sec:skycultures:planetnames}
 
-The  \jtag{common\_names} dict can also contain native names of the planets. 
+The  \jtag{common\_names} array can also contain dicts of native names of the planets. 
 For these, the JSON key is formed from \jtag{NAME }, a space and the English name of the planet. 
-The value vector provides the dict entries (\jtag{native}, \jtag{english}, \ldots) listed above. 
+The value array provides the dict entries (\jtag{native}, \jtag{english}, \ldots) listed above. 
 
-Currently, if two \jtag{english} strings are given, the first is used as screen label. This may change as the features further evolve.
+Currently, if more than one \jtag{english} strings are given, the first is used as screen label. This may change as the features further evolve.
+
+In some cultures,\newFeature{25.2} Venus and even Mercury may have different names, depending on evening or morning visibility. 
+We can add a tag \jtag{visible} which may be either \jtag{morning} or \jtag{evening} to select the name. 
+If the base name should be the screen label, you must repeat it as first entry of the object's \jtag{NAME } name array. 
+If the elongation-dependent name should be screen label, place the names with \jtag{visible} first, then repeat the 
+standard name to be shown in the Info text. 
+See the examples for \indexterm{Venus} as \indexterm{Morning Star} and \indexterm{Evening Star} in the \texttt{modern} skyculture.
 
 In earlier versions it was recommended to combine the native name with an English translation. 
 In the new format here we should keep them separate, and the actual screen label can be combined from available 
