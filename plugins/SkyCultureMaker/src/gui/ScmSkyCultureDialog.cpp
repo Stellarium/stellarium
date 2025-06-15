@@ -107,10 +107,10 @@ void ScmSkyCultureDialog::createDialogContent()
 	// enable/disable the save button based on the current license and authors
 	connect(ui->licenseCB, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
 	        [this](int) { setIsLicenseSavable(); });
-	connect(ui->authorsTE, &QTextEdit::textChanged, this, &ScmSkyCultureDialog::setIsLicenseSavable);
-	connect(ui->classificationCB, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-	        [this](int) { setIsLicenseSavable(); });
-	setIsLicenseSavable();
+	// connect(ui->authorsTE, &QTextEdit::textChanged, this, &ScmSkyCultureDialog::setIsLicenseSavable);
+	// connect(ui->classificationCB, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+	//         [this](int) { setIsLicenseSavable(); });
+	// setIsLicenseSavable();
 
 	connect(ui->saveLicenseBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::saveLicense);
 }

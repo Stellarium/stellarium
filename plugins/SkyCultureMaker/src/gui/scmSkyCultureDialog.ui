@@ -234,15 +234,229 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="boundariesTab">
+         <attribute name="title">
+          <string>Boundaries</string>
+         </attribute>
+        </widget>
         <widget class="QWidget" name="commonNamesTab">
          <attribute name="title">
           <string>Common Names</string>
          </attribute>
         </widget>
-        <widget class="QWidget" name="boundariesTab">
-         <attribute name="title">
-          <string>Boundaries</string>
-         </attribute>
+        <widget class="QWidget" name="descriptionTab">
+          <attribute name="title">
+            <string>Description</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="descriptionTabLayout">
+            <item>
+            <widget class="QScrollArea" name="descriptionScrollArea">
+              <property name="widgetResizable">
+              <bool>true</bool>
+              </property>
+              <widget class="QWidget" name="descriptionScrollContent">
+              <layout class="QVBoxLayout" name="descriptionLayout">
+                <property name="spacing">
+                <number>10</number>
+                </property>
+                <property name="leftMargin">
+                <number>10</number>
+                </property>
+                <property name="topMargin">
+                <number>10</number>
+                </property>
+                <property name="rightMargin">
+                <number>10</number>
+                </property>
+                <property name="bottomMargin">
+                <number>10</number>
+                </property>
+
+                <!-- Culture Description -->
+                <item>
+                <widget class="QLabel" name="cultureDescriptionLbl">
+                  <property name="text">
+                  <string>Culture Description:</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="cultureDescriptionTE"/>
+
+                </item>
+
+                <!-- Geo-Region -->
+                <item>
+                <widget class="QLabel" name="geoRegionLbl">
+                  <property name="text">
+                  <string>Geo-Region:</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="geoRegionTE"/>
+                </item>
+
+                <!-- Sky -->
+                <item>
+                <widget class="QLabel" name="skyLbl">
+                  <property name="text">
+                  <string>Sky (what can the User see here):</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="skyTE"/>
+                </item>
+
+                <!-- Moon & Sun -->
+                <item>
+                <widget class="QLabel" name="moonSunLbl">
+                  <property name="text">
+                  <string>Moon &amp; Sun:</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="moonSunTE"/>
+                </item>
+
+                <!-- Zodiac / Lunar System -->
+                <item>
+                <widget class="QLabel" name="zodiacLbl">
+                  <property name="text">
+                  <string>Zodiac/ Lunar System:</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="zodiacTE"/>
+                </item>
+
+                <!-- Planets -->
+                <item>
+                <widget class="QLabel" name="planetsLbl">
+                  <property name="text">
+                  <string>Planets:</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="planetsTE"/>
+                </item>
+
+                <!-- Constellations -->
+                <item>
+                <widget class="QLabel" name="constellationsDescLbl">
+                  <property name="text">
+                  <string>Constellations:</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="constellationsDescTE"/>
+                </item>
+
+                <!-- Milky Way -->
+                <item>
+                <widget class="QLabel" name="milkyWayLbl">
+                  <property name="text">
+                  <string>Milky Way:</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="milkyWayTE"/>
+                </item>
+
+                <!-- Other Celestial Objects -->
+                <item>
+                <widget class="QLabel" name="otherObjectsLbl">
+                  <property name="text">
+                  <string>Other Celestial Objects:</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="otherObjectsTE"/>
+                </item>
+
+                <!-- About -->
+                <item>
+                <widget class="QLabel" name="aboutLbl">
+                  <property name="text">
+                  <string>About:</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="aboutTE"/>
+                </item>
+
+                <!-- Authors -->
+                <item>
+                <widget class="QLabel" name="authorsLbl">
+                  <property name="text">
+                  <string>Authors:</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="authorsTE"/>
+                </item>
+
+                <!-- Acknowledgements -->
+                <item>
+                <widget class="QLabel" name="acknowledgementsLbl">
+                  <property name="text">
+                  <string>Acknowledgements:</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="acknowledgementsTE"/>
+                </item>
+
+                <!-- References -->
+                <item>
+                <widget class="QLabel" name="referencesLbl">
+                  <property name="text">
+                  <string>References:</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="referencesTE"/>
+                </item>
+
+                <!-- Classification -->
+                <item>
+                  <widget class="QLabel" name="classificationLbl">
+                    <property name="font">
+                    <font>
+                      <pointsize>14</pointsize>
+                    </font>
+                    </property>
+                    <property name="text">
+                    <string>Classification of the Sky Culture</string>
+                    </property>
+                  </widget>
+                  </item>
+                  <item>
+                  <widget class="QComboBox" name="classificationCB">
+                    <property name="font">
+                    <font>
+                      <pointsize>13</pointsize>
+                    </font>
+                    </property>
+                  </widget>
+                </item>
+
+              </layout>
+              </widget>
+            </widget>
+          </item>
+        </layout>
         </widget>
         <widget class="QWidget" name="licenseTab">
          <property name="sizePolicy">
@@ -286,7 +500,7 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
-          <item>
+          <!-- <item>
            <widget class="QLabel" name="authorListLbl">
             <property name="font">
              <font>
@@ -321,7 +535,7 @@ p, li { white-space: pre-wrap; }
              </font>
             </property>
            </widget>
-          </item>
+          </item> -->
           <item>
            <widget class="QPushButton" name="saveLicenseBtn">
             <property name="text">
