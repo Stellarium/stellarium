@@ -8,6 +8,10 @@
 #include "../SkyCultureMaker.hpp"
 #include "../ScmConstellation.hpp"
 
+// debugging
+#include <QJsonObject>
+#include <QJsonDocument>
+
 class Ui_scmSkyCultureDialog;
 
 class ScmSkyCultureDialog : public StelDialogSeparate

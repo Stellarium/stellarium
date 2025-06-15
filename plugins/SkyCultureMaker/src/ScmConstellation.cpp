@@ -108,3 +108,60 @@ void scm::ScmConstellation::drawNames(StelCore *core, StelPainter sPainter)
 {
 	drawNames(core, sPainter, colorLabelDefault);
 }
+
+
+QJsonObject scm::ScmConstellation::toJson(QString &skyCultureName) const
+{
+	QJsonObject json;
+
+	// Assemble lines object
+	QJsonArray linesArray;
+
+	if (constellationStars.size() != 0)
+	{
+		// Stars are NOT empty
+		for (const auto &star: constellationStars)
+		{
+			linesArray.append(star.toJson());
+		}
+	}
+	else
+	{
+		// Stars are empty, use the coorindates
+		for (const auto &coord : constellationCoordinates)
+		{
+			linesArray.append(coord.toJson());
+		}
+	}
+
+	json["id"] = "CON " + skyCultureName + " " + id;
+	json["lines"] = linesArray;
+
+	// Assemble common name object
+	QJsonObject commonNameObj;
+	commonNameObj["english"] = englishName;
+	if (nativeName.has_value())
+	{
+		commonNameObj["native"] = nativeName.value();
+	}
+	if (pronounce.has_value())
+	{
+		commonNameObj["pronounce"] = pronounce.value();
+	}
+	if (ipa.has_value())
+	{
+		commonNameObj["ipa"] = ipa.value();
+	}
+	if (references.has_value() && !references->isEmpty())
+	{
+		QJsonArray refsArray;
+		for (const auto& ref : references.value())
+		{
+			refsArray.append(ref);
+		}
+		commonNameObj["references"] = refsArray;
+	}
+	json["common_name"] = commonNameObj;
+
+	return json;
+}

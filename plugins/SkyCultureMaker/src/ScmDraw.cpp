@@ -193,13 +193,15 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 				{
 					StelObjectMgr &objectMgr = app.getStelObjectMgr();
 
-					objectMgr.findAndSelect(core, x, y);
 					if (objectMgr.getWasSelected())
 					{
 						StelObjectP stelObj = objectMgr.getLastSelectedObject();
 						Vec3d stelPos       = stelObj->getJ2000EquatorialPos(core);
 						point               = stelPos;
-						starID              = stelObj->getID();
+						if (stelObj->getType() == "Star")
+						{
+							starID          = stelObj->getID();
+						}
 					}
 				}
 			}
