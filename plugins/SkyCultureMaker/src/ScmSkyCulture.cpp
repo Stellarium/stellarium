@@ -1,4 +1,6 @@
 #include "ScmSkyCulture.hpp"
+#include <QFile>
+#include "types/Classification.hpp"
 
 void scm::ScmSkyCulture::setId(QString id)
 {
@@ -27,14 +29,13 @@ void scm::ScmSkyCulture::addAsterism(scm::ScmAsterism asterism)
 
 void scm::ScmSkyCulture::removeAsterism(QString id)
 {
-	asterisms.erase(
-	    remove_if(begin(asterisms), end(asterisms), [id](scm::ScmAsterism const &a) { return a.getId() == id; }),
-	    end(asterisms));
+	asterisms.erase(remove_if(begin(asterisms), end(asterisms),
+	                          [id](scm::ScmAsterism const &a) { return a.getId() == id; }),
+	                end(asterisms));
 }
 
-void scm::ScmSkyCulture::addConstellation(QString id,
-					  std::vector<CoordinateLine> coordinates,
-					  std::vector<StarLine> stars)
+void scm::ScmSkyCulture::addConstellation(QString id, std::vector<CoordinateLine> coordinates,
+                                          std::vector<StarLine> stars)
 {
 	scm::ScmConstellation constellationObj(coordinates, stars);
 	constellationObj.setId(id);
@@ -43,18 +44,16 @@ void scm::ScmSkyCulture::addConstellation(QString id,
 
 void scm::ScmSkyCulture::removeConstellation(QString id)
 {
-	constellations.erase(remove_if(begin(constellations),
-				       end(constellations),
-				       [id](ScmConstellation const &c) { return c.getId() == id; }),
-			     end(constellations));
+	constellations.erase(remove_if(begin(constellations), end(constellations),
+	                               [id](ScmConstellation const &c) { return c.getId() == id; }),
+	                     end(constellations));
 }
 
 scm::ScmConstellation *scm::ScmSkyCulture::getConstellation(QString id)
 {
 	for (auto &constellation : constellations)
 	{
-		if (constellation.getId() == id)
-			return &constellation;
+		if (constellation.getId() == id) return &constellation;
 	}
 	return nullptr;
 }
@@ -91,3 +90,38 @@ void scm::ScmSkyCulture::draw(StelCore *core)
 		constellation.drawConstellation(core);
 	}
 }
+
+void scm::ScmSkyCulture::setDescription(const scm::Description &description)
+{
+	ScmSkyCulture::description = description;
+}
+
+void scm::ScmSkyCulture::saveDescriptionAsMarkdown()
+{
+	QFile mdFile("description.md");
+	if (mdFile.open(QIODevice::WriteOnly | QIODevice::Text))
+	{
+		const scm::Description &desc = ScmSkyCulture::description;
+		
+		QTextStream out(&mdFile);
+		out << "# " << desc.name << "\n\n";
+		out << "## Geographical Region\n" << desc.geoRegion << "\n\n";
+		out << "## Classification\n " << classificationTypeToString(desc.classification) << "\n\n";
+
+		out << "## Sky\n" << desc.sky << "\n\n";
+		out << "## Moon and Sun\n" << desc.moonAndSun << "\n\n";
+		out << "## Zodiac\n" << desc.zodiac << "\n\n";
+		out << "## Planets\n" << desc.planets << "\n\n";
+		out << "## Constellations\n" << desc.constellations << "\n\n";
+		out << "## Milky Way\n" << desc.milkyWay << "\n\n";
+		out << "## Other Celestial Objects\n" << desc.otherObjects << "\n\n";
+
+		out << "## About\n" << desc.about << "\n\n";
+		out << "## Authors\n" << desc.authors << "\n\n";
+		out << "## Acknowledgements\n" << desc.acknowledgements << "\n\n";
+		out << "## References\n" << desc.references << "\n";
+		mdFile.close();
+	}
+}
+
+

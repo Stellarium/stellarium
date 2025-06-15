@@ -68,7 +68,8 @@ void ScmSkyCultureDialog::createDialogContent()
 	ui->RemoveConstellationBtn->setEnabled(false);
 	connect(ui->SaveSkyCultureBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::saveSkyCulture);
 	connect(ui->AddConstellationBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::constellationDialog);
-	connect(ui->RemoveConstellationBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::removeSelectedConstellation);
+	connect(ui->RemoveConstellationBtn, &QPushButton::clicked, this,
+	        &ScmSkyCultureDialog::removeSelectedConstellation);
 	connect(ui->constellationsList, &QListWidget::itemSelectionChanged, this,
 	        &ScmSkyCultureDialog::updateRemoveConstellationButton);
 
@@ -113,11 +114,24 @@ void ScmSkyCultureDialog::createDialogContent()
 	// setIsLicenseSavable();
 
 	connect(ui->saveLicenseBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::saveLicense);
+
+	// Connect description fields
 }
 
 void ScmSkyCultureDialog::saveSkyCulture()
 {
+	scm::Description desc = getDescriptionFromTextEdit();
 
+	if (!desc.isComplete())
+	{
+		ui->infoLbl->setText("WARNING: The sky culture description is not complete.");
+		return;
+	}
+
+	// If valid, save the sky culture as markdown file
+	ui->infoLbl->setText("");
+	maker->setSkyCultureDescription(desc);
+	maker->saveSkyCultureDescription();
 }
 
 void ScmSkyCultureDialog::saveLicense()
@@ -148,9 +162,9 @@ void ScmSkyCultureDialog::removeSelectedConstellation()
 	auto selectedItems = ui->constellationsList->selectedItems();
 	if (!selectedItems.isEmpty() && constellations != nullptr)
 	{
-		QListWidgetItem *item = selectedItems.first();
+		QListWidgetItem *item     = selectedItems.first();
 		QString constellationName = item->text();
-		
+
 		// Get Id by comparing to the display name
 		// This will always work, even when the constellation id
 		// or name contains special characters
@@ -206,8 +220,8 @@ void ScmSkyCultureDialog::setIsLicenseSavable()
 {
 	if (maker->getCurrentSkyCulture() != nullptr)
 	{
-		bool isLicenseNotNone = false;
-		bool isAuthorsListNotEmpty = !ui->authorsTE->toPlainText().isEmpty();
+		bool isLicenseNotNone        = false;
+		bool isAuthorsListNotEmpty   = !ui->authorsTE->toPlainText().isEmpty();
 		bool isClassificationNotNone = false;
 
 		// check if the license is not NONE
@@ -231,4 +245,27 @@ void ScmSkyCultureDialog::setIsLicenseSavable()
 	{
 		ui->saveLicenseBtn->setEnabled(false);
 	}
+}
+
+scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
+{
+	scm::Description desc
+	{
+		ui->skyCultureNameTE->toPlainText(),
+		ui->geoRegionTE->toPlainText(),
+		ui->skyTE->toPlainText(),
+		ui->moonSunTE->toPlainText(),
+		ui->zodiacTE->toPlainText(),
+		ui->planetsTE->toPlainText(),
+		ui->constellationsDescTE->toPlainText(),
+		ui->milkyWayTE->toPlainText(),
+		ui->otherObjectsTE->toPlainText(),
+		ui->aboutTE->toPlainText(),
+		ui->authorsTE->toPlainText(),
+		ui->acknowledgementsTE->toPlainText(),
+		ui->referencesTE->toPlainText(),
+		ui->classificationCB->currentData().value<scm::ClassificationType>()
+	};
+
+	return desc;
 }

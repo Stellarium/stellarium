@@ -10,6 +10,7 @@
 #include "../ScmConstellation.hpp"
 #include "../types/License.hpp"
 #include "../types/Classification.hpp"
+#include "types/Description.hpp"
 
 class Ui_scmSkyCultureDialog;
 
@@ -61,6 +62,8 @@ private:
 	QString getDisplayNameFromConstellation(const scm::ScmConstellation &constellation) const;
 
 	void setIdFromName(QString &name);
+
+	scm::Description getDescriptionFromTextEdit() const;
 };
 
 #endif	// SCM_SKY_CULTURE_DIALOG_HPP

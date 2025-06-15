@@ -110,6 +110,17 @@ public:
 	 */
 	void updateSkyCultureDialog();
 
+	/**
+	 * @brief Sets the current sky culture description.
+	 * @param description The description to set.
+	 */
+	void setSkyCultureDescription (const scm::Description &description);
+
+	/**
+	 * @brief Saves the current sky culture description as markdown text.
+	 */
+	void saveSkyCultureDescription();
+
 signals:
 	void eventIsScmEnabled(bool b);
 

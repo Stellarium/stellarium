@@ -561,15 +561,54 @@ p, li { white-space: pre-wrap; }
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="infoBoxLbl">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="margin">
-         <number>5</number>
-        </property>
-       </widget>
-      </item>
+        <layout class="QHBoxLayout">
+          <item>
+          <spacer name="horizontalSpacerLeft">
+            <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+            <size>
+              <width>40</width>
+              <height>20</height>
+            </size>
+            </property>
+          </spacer>
+          </item>
+          <item>
+          <widget class="QLabel" name="infoLbl">
+            <property name="font">
+            <font>
+              <weight>75</weight>
+              <bold>true</bold>
+            </font>
+            </property>
+            <property name="text">
+            <string/>
+            </property>
+            <property name="alignment">
+            <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+            <bool>true</bool>
+            </property>
+          </widget>
+          </item>
+          <item>
+          <spacer name="horizontalSpacerRight">
+            <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+            <size>
+              <width>40</width>
+              <height>20</height>
+            </size>
+            </property>
+          </spacer>
+          </item>
+        </layout>
+        </item>
      </layout>
     </widget>
    </item>
