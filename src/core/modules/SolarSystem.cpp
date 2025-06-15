@@ -579,6 +579,17 @@ void SolarSystem::loadCultureSpecificNames(const QJsonObject& data)
 				cName.transliteration=json["transliteration"].toString();
 				cName.IPA=json["IPA"].toString();
 
+				if (json.contains("elongation"))
+				{
+					QString elong=json["elongation"].toString();
+					if (elong=="western")
+						cName.special=StelObject::CulturalNameSpecial::Morning;
+					else if (elong=="eastern")
+						cName.special=StelObject::CulturalNameSpecial::Evening;
+					else
+						qWarning() << "Bad value for \"elongation\". Ignoring.";
+				}
+
 				planet->addCulturalName(cName);
 			}
 		}
