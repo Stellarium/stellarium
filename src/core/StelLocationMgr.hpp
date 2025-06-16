@@ -69,7 +69,7 @@ public:
 	const StelLocation locationFromCLI() const;
 
 	//! Return a valid location when no valid one was found.
-	const StelLocation& getLastResortLocation() const {return lastResortLocation;}
+	const StelLocation& getLastResortLocation();
 	
 	//! Get whether a location can be permanently added to the list of user locations
 	//! The main constraint is that the small string must be unique
