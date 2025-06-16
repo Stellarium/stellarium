@@ -228,6 +228,7 @@ void LibGPSLookupHelper::query()
 	if (verbose)
 		qDebug() << "GPSD location" << QString("lat %1, long %2, alt %3").arg(loc.getLatitude()).arg(loc.getLongitude()).arg(loc.altitude);
 
+	loc.role = 'X';
 	emit queryFinished(loc);
 }
 
@@ -385,6 +386,7 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 		loc.setLatitude(static_cast<float>(coord.latitude()));
 		// 2D fix may have only long/lat, invalid altitude.
 		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : static_cast<int>(std::floor(coord.altitude())));
+		loc.role='X';
 		emit queryFinished(loc);
 	}
 	else
@@ -747,6 +749,8 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	QRegularExpressionMatch csMatch=csreg.match(s);
 	if (csMatch.hasMatch())
 	{
+		// let's first assume the data will parse OK.
+		ret.role='X';
 		bool ok;
 		// We have a set of coordinates
 		ret.setLatitude(parseAngle(csMatch.captured(1).trimmed(), &ok));
@@ -764,6 +768,8 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	QRegularExpressionMatch match=reg.match(s);
 	if (match.hasMatch())
 	{
+		// let's first assume the data will parse OK.
+		ret.role='X';
 		bool ok;
 		// We have a set of coordinates
 		ret.setLatitude(parseAngle(match.captured(2).trimmed(), &ok));
@@ -789,15 +795,18 @@ const StelLocation StelLocationMgr::locationFromCLI() const
 
 	const auto latVar = conf->value("latitude");
 	if (latVar.isValid())
+	{
 		ret.setLatitude(180/M_PI * latVar.toDouble());
-	else
-		ret.role = '!';
+		ret.role = 'X';
+	}
 
 	const auto lonVar = conf->value("longitude");
 	if (lonVar.isValid())
+	{
 		ret.setLongitude(180/M_PI * lonVar.toDouble());
-	else
-		ret.role = '!';
+		ret.role = 'X';
+	}
+
 	bool ok;
 	ret.altitude = conf->value("altitude", 0).toInt(&ok);
 	ret.planetName = conf->value("home_planet", "Earth").toString();
@@ -811,7 +820,7 @@ const StelLocation StelLocationMgr::locationFromCLI() const
 // Get whether a location can be permanently added to the list of user locations
 bool StelLocationMgr::canSaveUserLocation(const StelLocation& loc) const
 {
-	return loc.isValid() && locations.find(loc.getID())==locations.end();
+	return loc.isValid() && !locations.contains(loc.getID());
 }
 
 // Add permanently a location to the list of user locations
@@ -1145,6 +1154,7 @@ void StelLocationMgr::positionUpdated(QGeoPositionInfo info)
 		loc.setLatitude(info.coordinate().latitude());
 		double a = info.coordinate().altitude();
 		loc.altitude = qIsNaN(a) ? 0 : qRound(a);
+		loc.role='X';
 		changeLocationFromGPSQuery(loc);
 	}
 	else
@@ -1748,4 +1758,14 @@ QColor StelLocationMgr::getColorForCoordinates(const double lng, const double la
 	// Sample the map pixel color. Use a small box to avoid 1-pixel surprises.
 	QImage sampledPix=planetSurfaceMap.copy(QRect(imgPoint-QPoint(1,1), QSize(2,2))).scaled(1,1);
 	return sampledPix.pixelColor(0,0);
+}
+
+//! Return a valid location when no valid one was found.
+const StelLocation& StelLocationMgr::getLastResortLocation()
+{
+	// Unfortunately the isValid test is super lame.
+	if (!lastResortLocation.isValid())
+		// Fallback to Paris France because it's the center of the world.
+		lastResortLocation = locationForString("Paris, Western Europe");
+	return lastResortLocation;
 }
