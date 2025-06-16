@@ -313,7 +313,6 @@ void SkyCultureMaker::resetScmDraw()
 	if (drawObj != nullptr)
 	{
 		drawObj->resetDrawing();
-		drawObj->setTool(scm::DrawTools::None);
 	}
 }
 
@@ -346,4 +345,6 @@ bool SkyCultureMaker::saveSkyCultureDescription()
 	{
 		return currentSkyCulture->saveDescriptionAsMarkdown(getScmDescriptionFile());
 	}
+
+	return false;
 }

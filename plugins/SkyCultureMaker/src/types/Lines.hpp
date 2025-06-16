@@ -8,9 +8,9 @@
 #ifndef SCM_TYPES_LINE_HPP
 #define SCM_TYPES_LINE_HPP
 
-#include <vector>
-#include "CoordinateLine.hpp" 
+#include "CoordinateLine.hpp"
 #include "StarLine.hpp"
+#include <vector>
 
 namespace scm
 {
@@ -23,6 +23,6 @@ struct Lines
 	//! The optional available stars too the coordinates.
 	std::vector<StarLine> stars;
 };
-}  // namespace scm
+} // namespace scm
 
 #endif

@@ -1,18 +1,21 @@
 #include "ScmConstellation.hpp"
 
-scm::ScmConstellation::ScmConstellation(std::vector<scm::CoordinateLine> coordinates, std::vector<scm::StarLine> stars)
+scm::ScmConstellation::ScmConstellation(const std::vector<scm::CoordinateLine> &coordinates,
+                                        const std::vector<scm::StarLine> &stars)
 	: constellationCoordinates(coordinates)
 	, constellationStars(stars)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
+	QSettings *conf = StelApp::getInstance().getSettings();
 	constellationLabelFont.setPixelSize(conf->value("viewing/constellation_font_size", 15).toInt());
- 
+
 	QString defaultColor = conf->value("color/default_color", "0.5,0.5,0.7").toString();
-	colorDrawDefault = Vec3f(conf->value("color/const_lines_color", defaultColor).toString());
-	colorLabelDefault = Vec3f(conf->value("color/const_names_color", defaultColor).toString());
+	colorDrawDefault     = Vec3f(conf->value("color/const_lines_color", defaultColor).toString());
+	colorLabelDefault    = Vec3f(conf->value("color/const_names_color", defaultColor).toString());
+
+	updateTextPosition();
 }
 
-void scm::ScmConstellation::setId(QString id)
+void scm::ScmConstellation::setId(const QString &id)
 {
 	ScmConstellation::id = id;
 }
@@ -22,7 +25,7 @@ QString scm::ScmConstellation::getId() const
 	return id;
 }
 
-void scm::ScmConstellation::setEnglishName(QString name)
+void scm::ScmConstellation::setEnglishName(const QString &name)
 {
 	englishName = name;
 }
@@ -32,56 +35,54 @@ QString scm::ScmConstellation::getEnglishName() const
 	return englishName;
 }
 
-void scm::ScmConstellation::setNativeName(std::optional<QString> name)
+void scm::ScmConstellation::setNativeName(const std::optional<QString> &name)
 {
 	nativeName = name;
 }
 
-void scm::ScmConstellation::setPronounce(std::optional<QString> pronounce)
+void scm::ScmConstellation::setPronounce(const std::optional<QString> &pronounce)
 {
 	ScmConstellation::pronounce = pronounce;
 }
 
-void scm::ScmConstellation::setIPA(std::optional<QString> ipa)
+void scm::ScmConstellation::setIPA(const std::optional<QString> &ipa)
 {
 	ScmConstellation::ipa = ipa;
 }
 
-void scm::ScmConstellation::setConstellation(std::vector<CoordinateLine> coordinates, std::vector<StarLine> stars)
+void scm::ScmConstellation::setConstellation(const std::vector<CoordinateLine> &coordinates,
+                                             const std::vector<StarLine> &stars)
 {
 	constellationCoordinates = coordinates;
-	constellationStars = stars;
+	constellationStars       = stars;
+
+	updateTextPosition();
 }
 
-void scm::ScmConstellation::drawConstellation(StelCore *core, Vec3f color)
+void scm::ScmConstellation::drawConstellation(StelCore *core, const Vec3f &color) const
 {
 	StelPainter painter(core->getProjection(drawFrame));
 	painter.setBlending(true);
 	painter.setLineSmooth(true);
 	painter.setFont(constellationLabelFont);
-	
+
 	bool alpha = 1.0f;
 	painter.setColor(color, alpha);
 
-	XYZname.set(0.,0.,0.);
 	for (CoordinateLine p : constellationCoordinates)
 	{
 		painter.drawGreatCircleArc(p.start, p.end);
-		XYZname += p.end;
-		XYZname += p.start;
 	}
 
-	XYZname.normalize();
-
-	drawNames(core, painter, colorLabelDefault);
+	drawNames(core, painter);
 }
 
-void scm::ScmConstellation::drawConstellation(StelCore *core)
+void scm::ScmConstellation::drawConstellation(StelCore *core) const
 {
 	drawConstellation(core, colorDrawDefault);
 }
 
-void scm::ScmConstellation::drawNames(StelCore *core, StelPainter sPainter, Vec3f labelColor) 
+void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter, const Vec3f &labelColor) const
 {
 	sPainter.setBlending(true);
 
@@ -91,26 +92,27 @@ void scm::ScmConstellation::drawNames(StelCore *core, StelPainter sPainter, Vec3
 		velocityObserver = core->getAberrationVec(core->getJDE());
 	}
 
-	XYZname+=velocityObserver;
-	XYZname.normalize();
+	Vec3d namePose = XYZname;
+	namePose += velocityObserver;
+	namePose.normalize();
 
-	if(!sPainter.getProjector()->projectCheck(XYZname, this->XYname))
+	Vec3d XYname;
+	if (!sPainter.getProjector()->projectCheck(XYZname, XYname))
 	{
 		return;
 	}
 
-	sPainter.getProjector()->project(XYZname, XYname);
 	sPainter.setColor(labelColor, 1.0f);
-	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), englishName, 0., -sPainter.getFontMetrics().boundingRect(englishName).width()/2, 0, false);
+	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), englishName, 0.,
+	                  -sPainter.getFontMetrics().boundingRect(englishName).width() / 2, 0, false);
 }
 
-void scm::ScmConstellation::drawNames(StelCore *core, StelPainter sPainter)
+void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter) const
 {
 	drawNames(core, sPainter, colorLabelDefault);
 }
 
-
-QJsonObject scm::ScmConstellation::toJson(QString &skyCultureName) const
+QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureName) const
 {
 	QJsonObject json;
 
@@ -120,7 +122,7 @@ QJsonObject scm::ScmConstellation::toJson(QString &skyCultureName) const
 	if (constellationStars.size() != 0)
 	{
 		// Stars are NOT empty
-		for (const auto &star: constellationStars)
+		for (const auto &star : constellationStars)
 		{
 			linesArray.append(star.toJson());
 		}
@@ -134,7 +136,7 @@ QJsonObject scm::ScmConstellation::toJson(QString &skyCultureName) const
 		}
 	}
 
-	json["id"] = "CON " + skyCultureName + " " + id;
+	json["id"]    = "CON " + skyCultureName + " " + id;
 	json["lines"] = linesArray;
 
 	// Assemble common name object
@@ -155,7 +157,7 @@ QJsonObject scm::ScmConstellation::toJson(QString &skyCultureName) const
 	if (references.has_value() && !references->isEmpty())
 	{
 		QJsonArray refsArray;
-		for (const auto& ref : references.value())
+		for (const auto &ref : references.value())
 		{
 			refsArray.append(ref);
 		}
@@ -164,4 +166,15 @@ QJsonObject scm::ScmConstellation::toJson(QString &skyCultureName) const
 	json["common_name"] = commonNameObj;
 
 	return json;
+}
+
+void scm::ScmConstellation::updateTextPosition()
+{
+	XYZname.set(0., 0., 0.);
+	for (CoordinateLine p : constellationCoordinates)
+	{
+		XYZname += p.end;
+		XYZname += p.start;
+	}
+	XYZname.normalize();
 }

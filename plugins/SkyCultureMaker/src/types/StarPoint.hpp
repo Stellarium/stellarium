@@ -8,9 +8,9 @@
 #ifndef SCM_TYPES_STAR_POINT_HPP
 #define SCM_TYPES_STAR_POINT_HPP
 
+#include "VecMath.hpp"
 #include <optional>
 #include <QString>
-#include "VecMath.hpp"
 
 namespace scm
 {
@@ -23,6 +23,6 @@ struct StarPoint
 	//! The optional star at that coordinate.
 	std::optional<QString> star;
 };
-}  // namespace scm
+} // namespace scm
 
 #endif

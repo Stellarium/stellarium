@@ -62,8 +62,8 @@ private:
 
 	/// Indicates if the currently selected star was searched.
 	bool selectedStarIsSearched = false;
-  
-  /// Holds the position of the eraser on the last frame.
+
+	/// Holds the position of the eraser on the last frame.
 	Vec2d lastEraserPos = ScmDraw::defaultLastEraserPos;
 
 	/**
@@ -72,7 +72,7 @@ private:
 	 * @param point The coordinate in J2000 frame.
 	 * @param starID The id of the star to use.
 	 */
-	void appendDrawPoint(Vec3d point, std::optional<QString> starID);
+	void appendDrawPoint(const Vec3d &point, const std::optional<QString> &starID);
 
 	/**
 	 * @brief Indicates if two segments intersect.
@@ -84,7 +84,8 @@ private:
 	 * @return true When both segments intersect.
 	 * @return false When both segments do NOT intersect.
 	 */
-	static bool segmentIntersect(Vec2d startA, Vec2d directionA, Vec2d startB, Vec2d directionB);
+	static bool segmentIntersect(const Vec2d &startA, const Vec2d &directionA, const Vec2d &startB,
+	                             const Vec2d &directionB);
 
 	/**
 	 * @brief Calculates the perpendicular dot product vector of a and b i.e. a^T dot b
@@ -95,13 +96,13 @@ private:
 	 * @return T The perp dot product of a and b.
 	 */
 	template<typename T>
-	static T perpDot(Vector2<T> a, Vector2<T> b)
+	static T perpDot(const Vector2<T> &a, const Vector2<T> &b)
 	{
 		return -a.v[1] * b.v[0] + a.v[0] * b.v[1];
 	}
 
 public slots:
-  /**
+	/**
    * @brief Is called when the search dialog is opend and closed.
   */
 	void setSearchMode(bool b);
@@ -122,7 +123,7 @@ public:
 	 *
 	 * @param core The core used for drawing the line.
 	 */
-	void drawLine(StelCore *core);
+	void drawLine(StelCore *core) const;
 
 	/// Handle mouse clicks. Please note that most of the interactions will be done through the GUI module.
 	/// @return set the event as accepted if it was intercepted
@@ -145,7 +146,7 @@ public:
 	 * @param prj The projector to use for the calculation.
 	 * @return std::optional<StarPoint> The found star point if available.
 	 */
-	std::optional<StarPoint> findNearestPoint(int x, int y, StelProjectorP prj);
+	std::optional<StarPoint> findNearestPoint(int x, int y, StelProjectorP prj) const;
 
 	/// Undo the last drawn line.
 	void undoLastLine();
@@ -155,14 +156,14 @@ public:
 	 *
 	 * @return std::vector<StarLine> The optional filled vector of stars matching the coordinates.
 	 */
-	std::vector<StarLine> getStars();
+	std::vector<StarLine> getStars() const;
 
 	/**
 	 * @brief Get the drawn stick figures as coordinates.
 	 *
 	 * @return std::vector<CoordinateLine> The drawn coordinates.
 	 */
-	std::vector<CoordinateLine> getCoordinates();
+	std::vector<CoordinateLine> getCoordinates() const;
 
 	/**
 	 * @brief Set the active draw tool

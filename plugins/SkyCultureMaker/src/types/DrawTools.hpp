@@ -22,6 +22,6 @@ enum class DrawTools
 	//! The eraser tool is selected.
 	Eraser,
 };
-}  // namespace scm
+} // namespace scm
 
 #endif

@@ -10,16 +10,16 @@
 #ifndef SCM_CONSTELLATION_HPP
 #define SCM_CONSTELLATION_HPP
 
-#include <QString>
-#include <vector>
-#include <optional>
-#include <variant>
-#include <StelCore.hpp>
+#include "VecMath.hpp"
 #include "types/CoordinateLine.hpp"
 #include "types/StarLine.hpp"
-#include "VecMath.hpp"
-#include <QJsonObject>
+#include <StelCore.hpp>
+#include <optional>
+#include <variant>
+#include <vector>
 #include <QJsonArray>
+#include <QJsonObject>
+#include <QString>
 
 namespace scm
 {
@@ -27,31 +27,31 @@ namespace scm
 class ScmConstellation
 {
 public:
-	ScmConstellation(std::vector<CoordinateLine> coordinates, std::vector<StarLine> stars);
+	ScmConstellation(const std::vector<CoordinateLine> &coordinates, const std::vector<StarLine> &stars);
 
 	/// The frame that is used for calculation and is drawn on.
 	static const StelCore::FrameType drawFrame = StelCore::FrameJ2000;
 
-    /**
+	/**
     * @brief Sets the id of the constellation
     * 
     * @param id id
     */
-    void setId(QString id);
+	void setId(const QString &id);
 
-    /**
+	/**
     * @brief Gets the id of the constellation
     * 
     * @return id
     */
-    QString getId() const;
+	QString getId() const;
 
 	/**
     * @brief Sets the english name of the constellation
     * 
     * @param name The english name
     */
-	void setEnglishName(QString name);
+	void setEnglishName(const QString &name);
 
 	/**
 	* @brief Gets the english name of the constellation
@@ -65,21 +65,21 @@ public:
     * 
     * @param name The native name
     */
-	void setNativeName(std::optional<QString> name);
+	void setNativeName(const std::optional<QString> &name);
 
 	/**
     * @brief Sets the pronounciation of the constellation
     * 
     * @param pronounce The pronounciation
     */
-	void setPronounce(std::optional<QString> pronounce);
+	void setPronounce(const std::optional<QString> &pronounce);
 
 	/**
     * @brief Sets the IPA.
     * 
     * @param ipa The optional ipa
 	 */
-	void setIPA(std::optional<QString> ipa);
+	void setIPA(const std::optional<QString> &ipa);
 
 	/**
     * @brief Sets the coordinate lines and star lines of the constellation.
@@ -87,7 +87,7 @@ public:
     * @param coordinates The coordinates of the constellation. 
 	* @param stars The equivalent stars to the coordinates.
     */
-	void setConstellation(std::vector<CoordinateLine> coordinates, std::vector<StarLine> stars);
+	void setConstellation(const std::vector<CoordinateLine> &coordinates, const std::vector<StarLine> &stars);
 
 	/**
 	 * @brief Draws the constellation based on the coordinates.
@@ -95,14 +95,14 @@ public:
 	 * @param core The core used for drawing.
 	 * @param color The color to use for drawing the constellation.
 	 */
-	void drawConstellation(StelCore *core, Vec3f color);
+	void drawConstellation(StelCore *core, const Vec3f &color) const;
 
 	/**
 	 * @brief Draws the constellation based on the coordinates using the default color.
 	 *
 	 * @param core The core used for drawing.
 	 */
-	void drawConstellation(StelCore *core);
+	void drawConstellation(StelCore *core) const;
 
 	/**
 	 * @brief Draws the label of the constellation.
@@ -111,7 +111,7 @@ public:
 	 * @param painter The painter used for drawing.
 	 * @param labelColor The color of the label.
 	 */
-	void drawNames(StelCore *core, StelPainter painter, Vec3f labelColor);
+	void drawNames(StelCore *core, StelPainter &painter, const Vec3f &labelColor) const;
 
 	/**
 	 * @brief Draws the label of the constellation using the default color.
@@ -119,12 +119,12 @@ public:
 	 * @param core The core used for drawing.
 	 * @param painter The painter used for drawing.
 	 */
-	void drawNames(StelCore *core, StelPainter painter);
+	void drawNames(StelCore *core, StelPainter &painter) const;
 
 	/**
 	 * @brief Returns the constellation data as a JSON object.
 	 */
-	QJsonObject toJson(QString &skyCultureName) const;
+	QJsonObject toJson(const QString &skyCultureName) const;
 
 private:
 	/// Identifier of the constellation
@@ -153,7 +153,6 @@ private:
 
 	/// Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;
-	Vec3d XYname;
 
 	/// The font used for constellation labels
 	QFont constellationLabelFont;
@@ -163,8 +162,13 @@ private:
 
 	/// The default color used for drawing the constellation label
 	Vec3f colorLabelDefault = Vec3f(0.0f, 0.0f, 0.0f);
+
+	/**
+	 * @brief Updates the XYZname that is used for the text position.
+	 */
+	void updateTextPosition();
 };
 
-}  // namespace scm
+} // namespace scm
 
-#endif	// SCM_CONSTELLATION_HPP
+#endif // SCM_CONSTELLATION_HPP

@@ -1,22 +1,21 @@
 #include "ScmAsterism.hpp"
 
-void scm::ScmAsterism::setCommonName(ScmCommonName name)
+void scm::ScmAsterism::setCommonName(const ScmCommonName &name)
 {
-    commonName = name;
+	commonName = name;
 }
 
-void scm::ScmAsterism::setId(QString id)
+void scm::ScmAsterism::setId(const QString &id)
 {
-    ScmAsterism::id = id;
+	ScmAsterism::id = id;
 }
 
 scm::ScmCommonName scm::ScmAsterism::getCommonName() const
 {
-	return commonName; 
+	return commonName;
 }
-
 
 QString scm::ScmAsterism::getId() const
 {
-    return id;
+	return id;
 }

@@ -1,12 +1,12 @@
 #ifndef SCM_CONSTELLATION_DIALOG_HPP
 #define SCM_CONSTELLATION_DIALOG_HPP
 
+#include "SkyCultureMaker.hpp"
+#include "StelDialogSeparate.hpp"
+#include "types/DrawTools.hpp"
+#include <optional>
 #include <QObject>
 #include <QString>
-#include <optional>
-#include "StelDialogSeparate.hpp"
-#include "../SkyCultureMaker.hpp"
-#include "../types/DrawTools.hpp"
 
 class Ui_scmConstellationDialog;
 
@@ -30,8 +30,8 @@ private slots:
 
 private:
 	Ui_scmConstellationDialog *ui = nullptr;
-	SkyCultureMaker *maker = nullptr;
-	scm::DrawTools activeTool = scm::DrawTools::None;
+	SkyCultureMaker *maker        = nullptr;
+	scm::DrawTools activeTool     = scm::DrawTools::None;
 
 	/// Identifier of the constellation
 	QString constellationId;
@@ -49,7 +49,7 @@ private:
 	/**
 	 * @brief Checks whether the current data is enough for the constellation to be saved.
 	 */
-	bool canConstellationBeSaved();
+	bool canConstellationBeSaved() const;
 
 	/**
 	 * @brief Saves the constellation data as an object in the current sky culture.
@@ -67,4 +67,4 @@ private:
 	void resetDialog();
 };
 
-#endif	// SCM_CONSTELLATION_DIALOG_HPP
+#endif // SCM_CONSTELLATION_DIALOG_HPP

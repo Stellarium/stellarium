@@ -1,10 +1,12 @@
 #include "ScmSkyCultureDialog.hpp"
 #include "ui_scmSkyCultureDialog.h"
+#include <cassert>
 
 ScmSkyCultureDialog::ScmSkyCultureDialog(SkyCultureMaker *maker)
 	: StelDialogSeparate("ScmSkyCultureDialog")
 	, maker(maker)
 {
+	assert(maker != nullptr);
 	ui = new Ui_scmSkyCultureDialog;
 }
 
@@ -68,6 +70,8 @@ void ScmSkyCultureDialog::createDialogContent()
 	ui->RemoveConstellationBtn->setEnabled(false);
 	connect(ui->SaveSkyCultureBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::saveSkyCulture);
 	connect(ui->AddConstellationBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::constellationDialog);
+	connect(ui->RemoveConstellationBtn, &QPushButton::clicked, this,
+	        &ScmSkyCultureDialog::removeSelectedConstellation);
 	connect(ui->RemoveConstellationBtn, &QPushButton::clicked, this,
 	        &ScmSkyCultureDialog::removeSelectedConstellation);
 	connect(ui->constellationsList, &QListWidget::itemSelectionChanged, this,

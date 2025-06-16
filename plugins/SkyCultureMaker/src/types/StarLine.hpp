@@ -9,9 +9,9 @@
 #define SCM_TYPES_STAR_LINE_HPP
 
 #include <optional>
-#include <QString>
 #include <QJsonArray>
 #include <QRegularExpression>
+#include <QString>
 
 namespace scm
 {
@@ -47,7 +47,7 @@ struct StarLine
 		return "-1";
 	}
 
-    /**
+	/**
      * @brief Converts the StartLine to a JSON array.
      *
      * @return QJsonArray The JSON representation of the start line.
@@ -56,50 +56,49 @@ struct StarLine
 	{
 		QJsonArray json;
 
-		if(start.has_value())
+		if (start.has_value())
 		{
-            QString number = getStarIdNumber(start.value());
+			QString number = getStarIdNumber(start.value());
 
-            if (start.value().contains("HIP"))
-            {
-                // HIP are required as int
-                json.append(number.toInt());
-            }
-            else
-            {
-                // Gaia is required as string
-                json.append(number);
-            }
+			if (start.value().contains("HIP"))
+			{
+				// HIP are required as int
+				json.append(number.toInt());
+			}
+			else
+			{
+				// Gaia is required as string
+				json.append(number);
+			}
 		}
-        else
-        {
-            json.append("-1");
-        }
+		else
+		{
+			json.append("-1");
+		}
 
-        if (end.has_value())
-        {
-            QString number = getStarIdNumber(end.value());
+		if (end.has_value())
+		{
+			QString number = getStarIdNumber(end.value());
 
-            if (end.value().contains("HIP"))
-            {
-                // HIP are required as int
-                json.append(number.toInt());
-            }
-            else
-            {
-                // Gaia is required as string
-                json.append(number);
-            }
-        }
-        else
-        {
-            json.append("-1");
-        }
-        
-		
+			if (end.value().contains("HIP"))
+			{
+				// HIP are required as int
+				json.append(number.toInt());
+			}
+			else
+			{
+				// Gaia is required as string
+				json.append(number);
+			}
+		}
+		else
+		{
+			json.append("-1");
+		}
+
 		return json;
 	}
 };
-}  // namespace scm
+} // namespace scm
 
 #endif

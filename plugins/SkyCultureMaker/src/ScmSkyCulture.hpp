@@ -15,16 +15,16 @@
 // #include <vector>
 #include <optional>
 
-#include "StelSkyCultureMgr.hpp"
-#include "ScmConstellation.hpp"
 #include "ScmAsterism.hpp"
-#include "types/CoordinateLine.hpp"
-#include "types/StarLine.hpp"
-#include "types/License.hpp"
-#include "types/Classification.hpp"
 #include "ScmCommonName.hpp"
+#include "ScmConstellation.hpp"
 #include "StelCore.hpp"
+#include "StelSkyCultureMgr.hpp"
+#include "types/Classification.hpp"
+#include "types/CoordinateLine.hpp"
 #include "types/Description.hpp"
+#include "types/License.hpp"
+#include "types/StarLine.hpp"
 
 namespace scm
 {
@@ -33,10 +33,10 @@ class ScmSkyCulture
 {
 public:
 	/// Sets the id of the sky culture
-	void setId(QString id);
+	void setId(const QString &id);
 
 	/// Sets the region of the sky culture
-	void setRegion(QString region);
+	void setRegion(const QString &region);
 
 	/// Sets the classification of the sky culture
 	void setClassificationType(ClassificationType classificationType);
@@ -45,25 +45,26 @@ public:
 	void setFallbackToInternationalNames(bool fallback);
 
 	/// Adds an asterism to the sky culture
-	void addAsterism(ScmAsterism asterism);
+	void addAsterism(const ScmAsterism &asterism);
 
 	/// Removes an asterism from the sky culture by its ID
-	void removeAsterism(QString id);
+	void removeAsterism(const QString &id);
 
 	/// Adds a constellation to the sky culture
-	void addConstellation(QString id, std::vector<CoordinateLine> coordinates, std::vector<StarLine> stars);
+	ScmConstellation &addConstellation(const QString &id, const std::vector<CoordinateLine> &coordinates,
+	                                   const std::vector<StarLine> &stars);
 
 	/// Removes a constellation from the sky culture by its ID
-	void removeConstellation(QString id);
+	void removeConstellation(const QString &id);
 
 	/// Gets a constellation from the sky culture by its ID
-	scm::ScmConstellation *getConstellation(QString id);
+	ScmConstellation *getConstellation(const QString &id);
 
 	/// Adds a common name to the sky culture
 	void addCommonName(ScmCommonName commonName);
 
 	/// Removes a common name from the sky culture by its ID
-	void removeCommonName(QString id);
+	void removeCommonName(const QString &id);
 
 	/// Returns the asterisms of the sky culture
 	// TODO: QVector<ScmAsterism> getAsterisms() const;
@@ -94,7 +95,7 @@ public:
 	/**
 	* @brief Draws the sky culture.
 	*/
-	void draw(StelCore *core);
+	void draw(StelCore *core) const;
 
 	/**
 	 * @brief Sets the description of the sky culture.
@@ -164,6 +165,6 @@ private:
 	// std::optional<QVector<QString>> edges;
 };
 
-}  // namespace scm
+} // namespace scm
 
-#endif	// SCM_SKYCULTURE_HPP
+#endif // SCM_SKYCULTURE_HPP

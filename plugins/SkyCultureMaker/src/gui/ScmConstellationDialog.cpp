@@ -1,11 +1,13 @@
 #include "ScmConstellationDialog.hpp"
-#include "ui_scmConstellationDialog.h"
 #include "StelGui.hpp"
+#include "ui_scmConstellationDialog.h"
+#include <cassert>
 
 ScmConstellationDialog::ScmConstellationDialog(SkyCultureMaker *maker)
 	: StelDialogSeparate("ScmConstellationDialog")
 	, maker(maker)
 {
+	assert(maker != nullptr);
 	ui = new Ui_scmConstellationDialog;
 }
 
@@ -43,45 +45,37 @@ void ScmConstellationDialog::createDialogContent()
 	connect(ui->cancelBtn, &QPushButton::clicked, this, &ScmConstellationDialog::cancel);
 
 	// LABELS TAB
-	connect(ui->enNameTE,
-		&QTextEdit::textChanged,
-		this,
-		[this]()
-		{
+	connect(ui->enNameTE, &QTextEdit::textChanged, this,
+	        [this]()
+	        {
 			constellationEnglishName = ui->enNameTE->toPlainText();
 
-			QString newConstId = constellationEnglishName.toLower().replace(" ", "_");
+			QString newConstId         = constellationEnglishName.toLower().replace(" ", "_");
 			constellationPlaceholderId = newConstId;
 			ui->idTE->setPlaceholderText(newConstId);
 		});
 	connect(ui->idTE, &QTextEdit::textChanged, this, [this]() { constellationId = ui->idTE->toPlainText(); });
-	connect(ui->natNameTE,
-		&QTextEdit::textChanged,
-		this,
-		[this]()
-		{
+	connect(ui->natNameTE, &QTextEdit::textChanged, this,
+	        [this]()
+	        {
 			constellationNativeName = ui->natNameTE->toPlainText();
 			if (constellationNativeName->isEmpty())
 			{
 				constellationNativeName = std::nullopt;
 			}
 		});
-	connect(ui->pronounceTE,
-		&QTextEdit::textChanged,
-		this,
-		[this]()
-		{
+	connect(ui->pronounceTE, &QTextEdit::textChanged, this,
+	        [this]()
+	        {
 			constellationPronounce = ui->pronounceTE->toPlainText();
 			if (constellationPronounce->isEmpty())
 			{
 				constellationPronounce = std::nullopt;
 			}
 		});
-	connect(ui->ipaTE,
-		&QTextEdit::textChanged,
-		this,
-		[this]()
-		{
+	connect(ui->ipaTE, &QTextEdit::textChanged, this,
+	        [this]()
+	        {
 			constellationIPA = ui->ipaTE->toPlainText();
 			if (constellationIPA->isEmpty())
 			{
@@ -126,7 +120,7 @@ void ScmConstellationDialog::triggerUndo()
 	togglePen(true);
 }
 
-bool ScmConstellationDialog::canConstellationBeSaved()
+bool ScmConstellationDialog::canConstellationBeSaved() const
 {
 	// shouldnt happen
 	if (maker->getCurrentSkyCulture() == nullptr)
@@ -149,7 +143,8 @@ bool ScmConstellationDialog::canConstellationBeSaved()
 		return false;
 	}
 
-	if(maker->getCurrentSkyCulture() != nullptr && maker->getCurrentSkyCulture()->getConstellation(finalId) != nullptr)
+	if (maker->getCurrentSkyCulture() != nullptr &&
+	    maker->getCurrentSkyCulture()->getConstellation(finalId) != nullptr)
 	{
 		ui->infoLbl->setText("WARNING: Could not save: Constellation with this ID already exists");
 		return false;
@@ -177,15 +172,18 @@ void ScmConstellationDialog::saveConstellation()
 	if (canConstellationBeSaved())
 	{
 		auto coordinates = maker->getScmDraw()->getCoordinates();
-		auto stars = maker->getScmDraw()->getStars();
-		QString id = constellationId.isEmpty() ? constellationPlaceholderId : constellationId;
-		maker->getCurrentSkyCulture()->addConstellation(id, coordinates, stars);
-		scm::ScmConstellation *constellationObj = maker->getCurrentSkyCulture()->getConstellation(id);
+		auto stars       = maker->getScmDraw()->getStars();
+		QString id       = constellationId.isEmpty() ? constellationPlaceholderId : constellationId;
 
-		constellationObj->setEnglishName(constellationEnglishName);
-		constellationObj->setNativeName(constellationNativeName);
-		constellationObj->setPronounce(constellationPronounce);
-		constellationObj->setIPA(constellationIPA);
+		scm::ScmSkyCulture *culture = maker->getCurrentSkyCulture();
+		assert(culture != nullptr); // already checked by canConstellationBeSaved
+
+		scm::ScmConstellation &constellation = culture->addConstellation(id, coordinates, stars);
+
+		constellation.setEnglishName(constellationEnglishName);
+		constellation.setNativeName(constellationNativeName);
+		constellation.setPronounce(constellationPronounce);
+		constellation.setIPA(constellationIPA);
 
 		maker->updateSkyCultureDialog();
 		resetDialog();

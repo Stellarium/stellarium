@@ -1,27 +1,26 @@
 #ifndef SCM_SKY_CULTURE_DIALOG_HPP
 #define SCM_SKY_CULTURE_DIALOG_HPP
 
+#include "ScmConstellation.hpp"
+#include "SkyCultureMaker.hpp"
+#include "StelDialogSeparate.hpp"
+#include "types/Classification.hpp"
+#include "types/Description.hpp"
+#include "types/License.hpp"
+#include <optional>
+#include <QFile>
 #include <QObject>
 #include <QString>
 #include <QVariant>
-#include <optional>
-#include "StelDialogSeparate.hpp"
-#include "../SkyCultureMaker.hpp"
-#include "../ScmConstellation.hpp"
-#include "../types/License.hpp"
-#include "../types/Classification.hpp"
-#include "types/Description.hpp"
-#include <QFile>
 
 // debugging
-#include <QJsonObject>
 #include <QJsonDocument>
+#include <QJsonObject>
 
 class Ui_scmSkyCultureDialog;
 
 class ScmSkyCultureDialog : public StelDialogSeparate
 {
-
 protected:
 	void createDialogContent() override;
 
@@ -49,7 +48,7 @@ private slots:
 
 private:
 	Ui_scmSkyCultureDialog *ui = nullptr;
-	SkyCultureMaker *maker = nullptr;
+	SkyCultureMaker *maker     = nullptr;
 
 	/// The name of the sky culture.
 	QString name = "";
@@ -80,4 +79,4 @@ private:
 	scm::Description getDescriptionFromTextEdit() const;
 };
 
-#endif	// SCM_SKY_CULTURE_DIALOG_HPP
+#endif // SCM_SKY_CULTURE_DIALOG_HPP

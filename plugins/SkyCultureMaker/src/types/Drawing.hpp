@@ -28,6 +28,6 @@ enum class Drawing
 	//! The end is an already existing point.
 	hasEndExistingPoint = 16,
 };
-}  // namespace scm
+} // namespace scm
 
 #endif

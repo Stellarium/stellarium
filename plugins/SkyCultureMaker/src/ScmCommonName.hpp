@@ -10,10 +10,10 @@
 #ifndef SCM_COMMONNAME_HPP
 #define SCM_COMMONNAME_HPP
 
-#include <QString>
+#include <optional>
 #include <vector>
 #include <QJsonObject>
-#include <optional>
+#include <QString>
 
 namespace scm
 {
@@ -21,22 +21,22 @@ namespace scm
 class ScmCommonName
 {
 public:
-	ScmCommonName(QString id);
+	ScmCommonName(const QString &id);
 
 	/// Sets the english name
-	void setEnglishName(QString name);
+	void setEnglishName(const QString &name);
 
 	/// Sets the native name
-	void setNativeName(QString name);
+	void setNativeName(const QString &name);
 
 	/// Sets the native name in European glyphs or Pinyin for Chinese.
-	void setPronounce(QString pronounce);
+	void setPronounce(const QString &pronounce);
 
 	/// Sets the native name in IPA (International Phonetic Alphabet)
-	void setIpa(QString name);
+	void setIpa(const QString &name);
 
 	/// Sets the references to the sources of the name spellings
-	void setReferences(std::vector<int> refs);
+	void setReferences(const std::vector<int> &refs);
 
 	/// Returns the english name
 	QString getEnglishName() const;
@@ -80,6 +80,6 @@ private:
 	std::optional<std::vector<int>> references;
 };
 
-}  // namespace scm
+} // namespace scm
 
-#endif	// SCM_COMMONNAME_HPP
+#endif // SCM_COMMONNAME_HPP

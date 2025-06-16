@@ -1,31 +1,31 @@
 #include "ScmCommonName.hpp"
 
-scm::ScmCommonName::ScmCommonName(QString id)
+scm::ScmCommonName::ScmCommonName(const QString &id)
 {
 	ScmCommonName::id = id;
 }
 
-void scm::ScmCommonName::setEnglishName(QString name)
+void scm::ScmCommonName::setEnglishName(const QString &name)
 {
 	englishName = name;
 }
 
-void scm::ScmCommonName::setNativeName(QString name)
+void scm::ScmCommonName::setNativeName(const QString &name)
 {
 	nativeName = name;
 }
 
-void scm::ScmCommonName::setPronounce(QString pronounce)
+void scm::ScmCommonName::setPronounce(const QString &pronounce)
 {
 	ScmCommonName::pronounce = pronounce;
 }
 
-void scm::ScmCommonName::setIpa(QString ipa)
+void scm::ScmCommonName::setIpa(const QString &ipa)
 {
 	ScmCommonName::ipa = ipa;
 }
 
-void scm::ScmCommonName::setReferences(std::vector<int> refs)
+void scm::ScmCommonName::setReferences(const std::vector<int> &refs)
 {
 	references = refs;
 }

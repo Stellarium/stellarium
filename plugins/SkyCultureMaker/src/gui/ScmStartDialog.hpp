@@ -1,15 +1,14 @@
 #ifndef SCMSTARTDIALOG_HPP
 #define SCMSTARTDIALOG_HPP
 
-#include <QObject>
+#include "SkyCultureMaker.hpp"
 #include "StelDialog.hpp"
-#include "../SkyCultureMaker.hpp"
+#include <QObject>
 
 class Ui_scmStartDialog;
 
 class ScmStartDialog : public StelDialog
 {
-
 protected:
 	void createDialogContent() override;
 
@@ -25,8 +24,8 @@ private slots:
 	void closeDialog();
 
 private:
-	Ui_scmStartDialog *ui = nullptr;
+	Ui_scmStartDialog *ui  = nullptr;
 	SkyCultureMaker *maker = nullptr;
 };
 
-#endif	// SCMSTARTDIALOG_HPP
+#endif // SCMSTARTDIALOG_HPP
