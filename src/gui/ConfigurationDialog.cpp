@@ -942,8 +942,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/grs_jd",					propMgr->getStelPropertyValue("SolarSystem.grsJD").toDouble());
 	conf->setValue("astro/shadow_enlargement_danjon",		propMgr->getStelPropertyValue("SolarSystem.earthShadowEnlargementDanjon").toBool());
 	conf->setValue("astro/flag_planets_labels",			propMgr->getStelPropertyValue("SolarSystem.labelsDisplayed").toBool());
-	conf->setValue("astro/labels_amount",				propMgr->getStelPropertyValue("SolarSystem.labelsAmount").toDouble());
-	conf->setValue("viewing/flag_planets_native_names",		propMgr->getStelPropertyValue("SolarSystem.flagNativePlanetNames").toBool());
+	conf->setValue("astro/labels_amount",				propMgr->getStelPropertyValue("SolarSystem.labelsAmount").toDouble());	
 	conf->setValue("astro/flag_use_obj_models",			propMgr->getStelPropertyValue("SolarSystem.flagUseObjModels").toBool());
 	conf->setValue("astro/flag_show_obj_self_shadows",		propMgr->getStelPropertyValue("SolarSystem.flagShowObjSelfShadows").toBool());
 	conf->setValue("astro/apparent_magnitude_algorithm",		propMgr->getStelPropertyValue("SolarSystem.apparentMagnitudeAlgorithmOnEarth").toString());
