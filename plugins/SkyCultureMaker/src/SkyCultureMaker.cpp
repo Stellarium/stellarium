@@ -1,24 +1,24 @@
-#include "StelProjector.hpp"
-#include "StelPainter.hpp"
+#include "SkyCultureMaker.hpp"
+#include "StelActionMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelLocaleMgr.hpp"
-#include "StelModuleMgr.hpp"
-#include "SkyCultureMaker.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "gui/ScmStartDialog.hpp"
-#include "gui/ScmSkyCultureDialog.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelPainter.hpp"
+#include "StelProjector.hpp"
 #include "gui/ScmConstellationDialog.hpp"
-#include "StelActionMgr.hpp"
+#include "gui/ScmSkyCultureDialog.hpp"
+#include "gui/ScmStartDialog.hpp"
 
-#include <QApplication>
-#include <QDebug>
-#include <QMouseEvent>
-#include <QPixmap>
-#include <QKeyEvent>
 #include "ScmDraw.hpp"
 #include <vector>
+#include <QApplication>
+#include <QDebug>
+#include <QKeyEvent>
+#include <QMouseEvent>
+#include <QPixmap>
 
 /**
  * Managing the creation process of a new sky culture.
@@ -50,15 +50,15 @@ StelPluginInfo SkyCultureMakerStelPluginInterface::getPluginInfo() const
 	Q_INIT_RESOURCE(SkyCultureMaker);
 
 	StelPluginInfo info;
-	info.id = "SkyCultureMaker";
+	info.id            = "SkyCultureMaker";
 	info.displayedName = "Sky Culture Maker";
 	info.authors = "Vincent Gerlach (RivinHD), Luca-Philipp Grumbach (xLPMG), Fabian Hofer (Integer-Ctrl), Richard "
 		       "Hofmann (ZeyxRew), Mher Mnatsakanyan (MherMnatsakanyan03)";
-	info.contact =
-	    "Contact us using our GitHub usernames, via an Issue or the Discussion tab in the Stellarium repository.";
+	info.contact = "Contact us using our GitHub usernames, via an Issue or the Discussion tab in the Stellarium "
+		       "repository.";
 	info.description = "Plugin to draw and export sky cultures in Stellarium.";
-	info.version = SKYCULTUREMAKER_PLUGIN_VERSION;
-	info.license = SKYCULTUREMAKER_PLUGIN_LICENSE;
+	info.version     = SKYCULTUREMAKER_PLUGIN_VERSION;
+	info.license     = SKYCULTUREMAKER_PLUGIN_LICENSE;
 	return info;
 }
 
@@ -74,9 +74,9 @@ SkyCultureMaker::SkyCultureMaker()
 	setObjectName("SkyCultureMaker");
 	font.setPixelSize(25);
 
-	drawObj = new scm::ScmDraw();
-	scmStartDialog = new ScmStartDialog(this);
-	scmSkyCultureDialog = new ScmSkyCultureDialog(this);
+	drawObj                = new scm::ScmDraw();
+	scmStartDialog         = new ScmStartDialog(this);
+	scmSkyCultureDialog    = new ScmSkyCultureDialog(this);
 	scmConstellationDialog = new ScmConstellationDialog(this);
 }
 
@@ -100,7 +100,7 @@ SkyCultureMaker::~SkyCultureMaker()
 void SkyCultureMaker::setActionToggle(const QString &id, bool toggle)
 {
 	StelActionMgr *actionMgr = StelApp::getInstance().getStelActionManager();
-	auto action = actionMgr->findAction(id);
+	auto action              = actionMgr->findAction(id);
 	if (action)
 	{
 		action->setChecked(toggle);
@@ -118,8 +118,7 @@ double SkyCultureMaker::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName == StelModule::ActionDraw)
 		return StelApp::getInstance().getModuleMgr().getModule("NebulaMgr")->getCallOrder(actionName) + 10.;
-	if (actionName == StelModule::ActionHandleMouseClicks)
-		return -11;
+	if (actionName == StelModule::ActionHandleMouseClicks) return -11;
 	return 0;
 }
 
@@ -140,19 +139,15 @@ void SkyCultureMaker::init()
 		QPixmap iconScmDisabled(":/SkyCultureMaker/bt_SCM_Off.png");
 		QPixmap iconScmEnabled(":/SkyCultureMaker/bt_SCM_On.png");
 		qDebug() << (iconScmDisabled.isNull() ? "Failed to load image: bt_SCM_Off.png"
-						      : "Loaded image: bt_SCM_Off.png");
+		                                      : "Loaded image: bt_SCM_Off.png");
 		qDebug() << (iconScmEnabled.isNull() ? "Failed to load image: bt_SCM_On.png"
-						     : "Loaded image: bt_SCM_On.png");
+		                                     : "Loaded image: bt_SCM_On.png");
 
 		StelGui *gui = dynamic_cast<StelGui *>(app.getGui());
 		if (gui != Q_NULLPTR)
 		{
-			toolbarButton = new StelButton(Q_NULLPTR,
-						       iconScmEnabled,
-						       iconScmDisabled,
-						       QPixmap(":/graphicGui/miscGlow32x32.png"),
-						       actionIdLine,
-						       false);
+			toolbarButton = new StelButton(Q_NULLPTR, iconScmEnabled, iconScmDisabled,
+			                               QPixmap(":/graphicGui/miscGlow32x32.png"), actionIdLine, false);
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}
@@ -324,9 +319,31 @@ void SkyCultureMaker::resetScmDraw()
 
 void SkyCultureMaker::updateSkyCultureDialog()
 {
-	if(scmSkyCultureDialog == nullptr || currentSkyCulture == nullptr)
+	if (scmSkyCultureDialog == nullptr || currentSkyCulture == nullptr)
 	{
 		return;
 	}
 	scmSkyCultureDialog->setConstellations(currentSkyCulture->getConstellations());
+}
+
+void SkyCultureMaker::setSkyCultureDescription(const scm::Description &description)
+{
+	if (currentSkyCulture != nullptr)
+	{
+		currentSkyCulture->setDescription(description);
+	}
+}
+
+QFile SkyCultureMaker::getScmDescriptionFile()
+{
+	// TODO: Issue #85
+	return QFile("description.md");
+}
+
+bool SkyCultureMaker::saveSkyCultureDescription()
+{
+	if (currentSkyCulture != nullptr)
+	{
+		return currentSkyCulture->saveDescriptionAsMarkdown(getScmDescriptionFile());
+	}
 }
