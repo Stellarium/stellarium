@@ -42,7 +42,7 @@ One star having many functions, it could often have many names related to the co
 
 ## Authors
 
-This sky culture was contributed by a working group composed of Christine Briant, Libor Prokop, Regis Plichart and Thibaud Guillaud-Saumur, with the help of association "Fa'afaite i te Ao Ma'ohi" (Rereao Carlson, Titaua Teipoarii) for the Maui's Hook/Hiro's Kite constellation and the association "Te Fare Hiroà no Vavau" for the mention of Ruanui in the skyculture name.
+This sky culture was contributed by a working group composed of Christine Briant, Libor Prokop, Regis Plichart and Thibaud Guillaud-Saumur, with the help of association "Fa'afaite i te Ao Ma'ohi" (Rereao Carlson, Titaua Teipoarii) for the Maui's Hook/Hiro's Kite constellation and the association "Te Fare Hiroà no Vavau" for the mention of Ruanui in the skyculture name. WALKER Maurani did the translation of this text from french to english.
 
 ## License
 
