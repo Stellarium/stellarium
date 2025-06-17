@@ -24,6 +24,7 @@
 #include "StelObjectType.hpp"
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
+#include "StelSkyCultureSkyPartition.hpp"
 
 #include <vector>
 #include <QString>
@@ -41,6 +42,9 @@ class StelSkyCulture;
 //! Display and manage the constellations.
 //! It can display constellations lines, names, art textures and boundaries.
 //! It also supports several different sky cultures.
+//! Some sky cultures have up to 2 optional @ref StelSkycultureSkyPartition elements related to concepts of a Zodiac (the known cases are all similar, 12x30 degrees along the ecliptic),
+//! or of sections along ecliptic or equator related to the Moon, called LunarSystems. These are more diverse, but still only at most one per skyculture.
+//! Both of these systems bear concepts of coordinates and are important for timekeeping, but esp. the Chinese systems also for actual use as celestial coordinates.
 class ConstellationMgr : public StelObjectModule
 {
 	Q_OBJECT
@@ -65,6 +69,16 @@ class ConstellationMgr : public StelObjectModule
 	Q_PROPERTY(Vec3f hullsColor               READ getHullsColor                     WRITE setHullsColor                    NOTIFY hullsColorChanged)
 	Q_PROPERTY(int   hullsThickness	          READ getHullsThickness                 WRITE setHullsThickness                NOTIFY hullsThicknessChanged)
 	Q_PROPERTY(float hullsFadeDuration	  READ getHullsFadeDuration              WRITE setHullsFadeDuration             NOTIFY hullsFadeDurationChanged)
+
+	Q_PROPERTY(bool  zodiacDisplayed          READ getFlagZodiac                     WRITE setFlagZodiac                    NOTIFY zodiacDisplayedChanged)
+	Q_PROPERTY(Vec3f zodiacColor              READ getZodiacColor                    WRITE setZodiacColor                   NOTIFY zodiacColorChanged)
+	Q_PROPERTY(int   zodiacThickness	  READ getZodiacThickness                WRITE setZodiacThickness               NOTIFY zodiacThicknessChanged)
+	Q_PROPERTY(float zodiacFadeDuration	  READ getZodiacFadeDuration             WRITE setZodiacFadeDuration            NOTIFY zodiacFadeDurationChanged)
+	Q_PROPERTY(bool  lunarSystemDisplayed     READ getFlagLunarSystem                WRITE setFlagLunarSystem               NOTIFY lunarSystemDisplayedChanged)
+	Q_PROPERTY(Vec3f lunarSystemColor         READ getLunarSystemColor               WRITE setLunarSystemColor              NOTIFY lunarSystemColorChanged)
+	Q_PROPERTY(int   lunarSystemThickness     READ getLunarSystemThickness           WRITE setLunarSystemThickness          NOTIFY lunarSystemThicknessChanged)
+	Q_PROPERTY(float lunarSystemFadeDuration  READ getLunarSystemFadeDuration        WRITE setLunarSystemFadeDuration       NOTIFY lunarSystemFadeDurationChanged)
+
 
 public:
 	//! Constructor
@@ -118,6 +132,19 @@ public:
 	QString getStelObjectType() const override;
 
 	///////////////////////////////////////////////////////////////////////////
+	//! Returns whether the current skyculture defines a zodiac-type cultural coordinate system
+	bool hasZodiac() const {return !zodiac.isNull();}
+	//! Returns whether the current skyculture defines a lunar-related cultural coordinate system (lunar stations or mansions)
+	bool hasLunarSystem() const {return !lunarSystem.isNull();}
+	//! @return the translated name of the Zodiac system
+	QString getZodiacSystemName() const;
+	//! @return the translated name of the Lunar system
+	QString getLunarSystemName() const;
+	//!@return longitude in the culture's zodiacal longitudes (usually sign, degrees, minutes)
+	QString getZodiacCoordinate(Vec3d eqNow) const;
+	//! @return lunar station in the culture's Lunar system
+	QString getLunarSystemCoordinate(Vec3d eqNow) const;
+
 	// Properties setters and getters
 public slots:	
 	//! Set whether constellation art will be displayed
@@ -272,6 +299,61 @@ public slots:
 	//! Get the thickness of constellations hulls
 	int getHullsThickness() const { return hullsThickness; }
 
+
+	//! Define zodiac line color
+	//! @param color The color of zodiac related lines
+	//! @code
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! ConstellationMgr.setZodiacColor(c.toVec3f());
+	//! @endcode
+	void setZodiacColor(const Vec3f& color);
+	//! Get current zodiac color
+	Vec3f getZodiacColor() const;
+
+	//! Set whether zodiac will be displayed, if defined
+	void setFlagZodiac(const bool displayed);
+	//! Get whether zodiac-related lines are displayed (if defined in the skyculture)
+	bool getFlagZodiac(void) const;
+
+	//! Set zodiac fade duration in second
+	void setZodiacFadeDuration(const float duration);
+	//! Get zodiac fade duration in second
+	float getZodiacFadeDuration() const;
+
+	//! Define lunarSystem line color
+	//! @param color The color of lunarSystem lines
+	//! @code
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! ConstellationMgr.setLunarSystemColor(c.toVec3f());
+	//! @endcode
+	void setLunarSystemColor(const Vec3f& color);
+	//! Get current lunarSystem color
+	Vec3f getLunarSystemColor() const;
+
+	//! Set whether lunarSystem lines will be displayed, if defined
+	void setFlagLunarSystem(const bool displayed);
+	//! Get whether lunarSystem lines are displayed
+	bool getFlagLunarSystem(void) const;
+
+	//! Set lunarSystem fade duration in second
+	void setLunarSystemFadeDuration(const float duration);
+	//! Get lunarSystem fade duration in second
+	float getLunarSystemFadeDuration() const;
+
+	//! Set the thickness of zodiac-related lines
+	//! @param thickness of line in pixels
+	void setZodiacThickness(const int thickness);
+	//! Get the thickness of zodiac-related lines
+	int getZodiacThickness() const { return zodiacThickness; }
+	//! Set the thickness of lunarSystem-related lines
+	//! @param thickness of line in pixels
+	void setLunarSystemThickness(const int thickness);
+	//! Get the thickness of lunarSystem-related lines
+	int getLunarSystemThickness() const { return lunarSystemThickness; }
+
+
 	//! Remove constellations from selected objects
 	void deselectConstellations(void);
 
@@ -338,6 +420,14 @@ signals:
 	void hullsDisplayedChanged(const bool displayed);
 	void hullsFadeDurationChanged(const float duration);
 	void hullsThicknessChanged(int thickness);
+	void zodiacColorChanged(const Vec3f & color);
+	void zodiacDisplayedChanged(const bool displayed);
+	void zodiacFadeDurationChanged(const float duration);
+	void zodiacThicknessChanged(int thickness);
+	void lunarSystemColorChanged(const Vec3f & color);
+	void lunarSystemDisplayedChanged(const bool displayed);
+	void lunarSystemFadeDurationChanged(const float duration);
+	void lunarSystemThicknessChanged(int thickness);
 	void fontSizeChanged(const int newSize);
 	void isolateSelectedChanged(const bool isolate);
 	void flagConstellationPickChanged(const bool mode);
@@ -401,6 +491,13 @@ private:
 	//! Draw the constellation hulls.
 	//! @param obsVelocity is the speed vector of the observer planet to distort hulls by aberration.
 	void drawHulls(StelPainter& sPainter, const Vec3d &obsVelocity) const;
+	//! Draw the zodiac, if any is defined in the current skyculture.
+	//! @param obsVelocity is the speed vector of the observer planet to distort zodiac lines by aberration.
+	void drawZodiac(StelPainter& sPainter, const Vec3d &obsVelocity) const;
+	//! Draw the lunar system lines, if any is defined in the current skyculture.
+	//! @param obsVelocity is the speed vector of the observer planet to distort lunarSystem lines by aberration.
+	void drawLunarSystem(StelPainter& sPainter, const Vec3d &obsVelocity) const;
+
 	//! Handle single and multi-constellation selections.
 	void setSelectedConst(QList <Constellation*> cList);
 	//! Handle unselecting a single constellation.
@@ -445,11 +542,25 @@ private:
 	float namesFadeDuration;
 	bool hullsDisplayed;
 	float hullsFadeDuration;
+	float zodiacFadeDuration;
+	float lunarSystemFadeDuration;
+
 	bool checkLoadingData;
 
-	int constellationLineThickness;   //!< thickness of the constellation lines
-	int boundariesThickness;          //!< thickness of the constellation boundaries
-	int hullsThickness;               //!< thickness of the constellation boundaries
+	int constellationLineThickness;   //!< line width of the constellation lines
+	int boundariesThickness;          //!< line width of the constellation boundaries
+	int hullsThickness;               //!< line width of the constellation boundaries
+	int zodiacThickness;              //!< line width of the zodiac lines, if any
+	int lunarSystemThickness;         //!< line width of the lunarSystem lines, if any
+	Vec3f zodiacColor;
+	Vec3f lunarSystemColor;
+	LinearFader zodiacFader;
+	LinearFader lunarSystemFader;
+
+	//! optional zodiac description from index.json
+	StelSkyCultureSkyPartitionP zodiac;
+	//! optional lunarSystem description from index.json
+	StelSkyCultureSkyPartitionP lunarSystem;
 };
 
 #endif // CONSTELLATIONMGR_HPP

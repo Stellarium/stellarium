@@ -215,6 +215,9 @@ private slots:
 	//! Whether to use lock position when coordinates are used or not.
 	void enableLockPosition(bool enable);
 
+        //! Whether to use automatic closing dialog when search element is selected.
+        void enableAutoClosing(bool enable);
+
 	//! Whether to show FOV center marker when coordinates are used or not.
 	void enableFOVCenterMarker(bool enable);
 
@@ -320,6 +323,7 @@ private:
 	bool useSimbad;
 	bool useFOVCenterMarker;
 	bool fovCenterMarkerState;
+        bool useAutoClosing;
 	//! URL of the server used for SIMBAD queries.
 	QString simbadServerUrl;
 

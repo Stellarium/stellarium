@@ -96,9 +96,7 @@ void OnlineQueriesDialog::createDialogContent()
 	connect(ui->wikipediaPushButton,    SIGNAL(clicked()), plugin, SLOT(queryWikipedia()));
 	connect(ui->aavsoPushButton,        SIGNAL(clicked()), plugin, SLOT(queryAAVSO()));
 	connect(ui->gcvsPushButton,         SIGNAL(clicked()), plugin, SLOT(queryGCVS()));
-	// Unfortunately, Ancient-Skies did not resurface so far. Keep this here, maybe re-activate ~2025.
-	//connect(ui->ancientSkiesPushButton, SIGNAL(clicked()), plugin, SLOT(queryAncientSkies()));
-	ui->ancientSkiesPushButton->hide();
+	connect(ui->ancientSkiesPushButton, SIGNAL(clicked()), plugin, SLOT(queryASE()));
 	// set custom tab buttons to hostnames, or deactivate unconfigured buttons
 	if (!plugin->getCustomUrl1().isEmpty())
 	{
@@ -189,8 +187,8 @@ void OnlineQueriesDialog::setAboutHtml()
 	html += "<ul><li>" + q_("Wikipedia, the free online encyclopedia") + "</li>";
 	html += "<li>" + q_("AAVSO, the International Variable Star Index of the American Association for Variable Star Observers") + "</li>";
 	html += "<li>" + q_("GCVS, the General Catalogue of Variable Stars of the Sternberg Astronomical Institute and the Institute of Astronomy of the Russian Academy of Sciences in Moscow") + "</li>";
-	// Unfortunately, the website this plugin was made for has not come up again. Maybe later, though.
-	//html += "<li>" + q_("Ancient-Skies, a private project which collects information about star names and their mythologies") + "</li>";
+	// Unfortunately, the Ancient-Skies website this plugin was made for in 2021 has not come up again. Replaced by ASE.
+	html += "<li>" + q_("ASE, the All-Skies Encyclopaedia, a private project which collects information about star names and their mythologies") + "</li>";
 	html += "<li>" + q_("3 custom websites of your choice") + "</li>";
 	html += "</ul>";
 	html += "<p>" + q_("Regardless of the current program language, the result is always presented in English or the language of the respective website.") + "</p>";
@@ -200,6 +198,7 @@ void OnlineQueriesDialog::setAboutHtml()
 	html += "<ul>";
 	html += "<li>" + QString("Georg Zotti, Susanne M. Hoffmann, Doris Vickers, Rüdiger Schultz, Alexander Wolf: Revisiting Star Names: Stellarium and the Ancient Skies Database. "
 				 "In: P. Maglova & Alexey Stoev (eds.). Cultural Astronomy & Ancient Skywatching. Proc. SEAC2021, Plovdiv 2023.").toHtmlEscaped() + "</li>";
+	// TODO: After IAUS399, cite the papers.
 	html += "</ul>";
 
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("OnlineQueries plugin");

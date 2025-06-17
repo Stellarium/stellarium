@@ -489,18 +489,25 @@ QString Planet::getInfoLabel() const
 QStringList Planet::getCultureLabels(StelObject::CulturalDisplayStyle style) const
 {
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	static StelCore *core=StelApp::getInstance().getCore();
+	const bool isOnEarth=core->getCurrentPlanet()->getEnglishName()==L1S("Earth");
+	const double elongAlongEcliptic=getElongationDLambda();
 	QStringList labels;
 	for (auto &cName: culturalNames)
+	{
+		if ( (isOnEarth && cName.special==StelObject::CulturalNameSpecial::Morning && elongAlongEcliptic>M_PI) ||
+		     (isOnEarth && cName.special==StelObject::CulturalNameSpecial::Evening && elongAlongEcliptic<M_PI) ||
+		     (cName.special==StelObject::CulturalNameSpecial::None))
 		{
 			QString label=scMgr->createCulturalLabel(cName, style, getNameI18n());
 			labels << label;
 		}
+	}
 	labels.removeDuplicates();
 	labels.removeAll(QString(""));
 	labels.removeAll(QString());
 	return labels;
 }
-
 
 QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const
 {
@@ -840,22 +847,7 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 		const double elongation = getElongation(observerHelioPos);
-
-		// some users require not "modern elongation" but just the DeltaLambda (GH:#1786)
-		static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-		double raSun, deSun, ra, de, lSun, ecLong, bSun, ecLat;
-		double obl=ssystem->getEarth()->getRotObliquity(core->getJDE());
-		if (core->getUseNutation())
-		{
-			double dEps, dPsi;
-			getNutationAngles(core->getJDE(), &dPsi, &dEps);
-			obl+=dEps;
-		}
-		StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
-		StelUtils::rectToSphe(&ra, &de, getEquinoxEquatorialPos(core));
-		StelUtils::equToEcl(raSun, deSun, obl, &lSun, &bSun);
-		StelUtils::equToEcl(ra, de, obl, &ecLong, &ecLat);
-		double elongAlongEcliptic = StelUtils::fmodpos(ecLong-lSun, M_PI*2.);
+		double elongAlongEcliptic = getElongationDLambda();
 		if (elongAlongEcliptic > M_PI) elongAlongEcliptic-=2.*M_PI;
 		double elongationDecDeg=elongAlongEcliptic*M_180_PI;
 
@@ -2384,6 +2376,33 @@ double Planet::getElongation(const Vec3d& obsPos) const
 	const double planetRq = planetHelioPos.normSquared();
 	const double observerPlanetRq = (obsPos - planetHelioPos).normSquared();
 	return std::acos((observerPlanetRq  + observerRq - planetRq)/(2.0*std::sqrt(observerPlanetRq*observerRq)));
+}
+
+// Get the elongation angle from the Sun in terms of difference in ecliptical longitude (radians) from the Sun.
+// Result e is within [0...2pi[ :
+// - A result <pi implies eastern elongation, evening visibility.
+// - A result pi<e<2pi implies western elongation, morning visibility.
+// Calling this for the Sun returns 0.
+double Planet::getElongationDLambda() const
+{
+	if (englishName==L1S("Sun"))
+		return 0.0;
+
+	static StelCore *core=StelApp::getInstance().getCore();
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	double raSun, deSun, ra, de, lSun, ecLong, bSun, ecLat;
+	double obl=ssystem->getEarth()->getRotObliquity(core->getJDE());
+	if (core->getUseNutation())
+	{
+		double dEps, dPsi;
+		getNutationAngles(core->getJDE(), &dPsi, &dEps);
+		obl+=dEps;
+	}
+	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+	StelUtils::rectToSphe(&ra, &de, getEquinoxEquatorialPos(core));
+	StelUtils::equToEcl(raSun, deSun, obl, &lSun, &bSun);
+	StelUtils::equToEcl(ra, de, obl, &ecLong, &ecLat);
+	return StelUtils::fmodpos(ecLong-lSun, M_PI*2.);
 }
 
 // Source: Explanatory Supplement 2013, Table 10.6 and formula (10.5) with semimajorAxis a from Table 8.7.
