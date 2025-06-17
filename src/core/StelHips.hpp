@@ -143,7 +143,27 @@ private:
 	int getPropertyInt(const QString& key, int fallback = 0);
 	bool getAllsky();
 	HipsTile* getTile(int order, int pix);
-	bool bindTextures(const HipsTile& tile);
+	/*! @brief Bind textures for drawing
+
+	    If @p tile is not ready for drawing (e.g. not fully loaded), alter
+	    @p texCoordShift and @p texCoordScale so that they let us address
+	    the corresponding part of a parent texture that will be bound.
+
+	    @param tile The tile to draw
+	    @param orderMin Smallest available HiPS order of the current survey
+	    @param texCoordShift The UV coordinates shift to be applied to the
+	     texture coordinates to address a subtexture in the parent. Must be
+	     set to 0 before the initial call to this function.
+	    @param texCoordScale The UV coordinates scale to be applied to the
+	     texture coordinates to address a subtexture in the parent. Must be
+	     set to 1 before the initial call to this function.
+	    @param tileIsLoaded Gets set to \c false if it was the requested
+	     HiPS level isn't fully loaded. Must be set to \c true before the
+	     initial call to this function.
+
+	    @return Whether a tile has been successfully bound.
+	 */
+	bool bindTextures(HipsTile& tile, int orderMin, Vec2f& texCoordShift, float& texCoordScale, bool& tileIsLoaded);
 	// draw a single tile. observerVelocity (in the correct hipsFrame) is necessary for aberration correction. Set to 0 for no aberration correction.
 	void drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
 	              const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback);
@@ -151,6 +171,7 @@ private:
 	// Fill the array for a given tile.
 	int fillArrays(int order, int pix, int drawOrder, int splitOrder,
 	               bool outside, StelPainter* sPainter, Vec3d observerVelocity,
+	               const Vec2f& texCoordShift, const float texCoordScale,
 	               QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices);
 
 	void updateProgressBar(int nb, int total);
