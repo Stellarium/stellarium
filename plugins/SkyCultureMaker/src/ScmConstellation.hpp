@@ -95,7 +95,7 @@ public:
 	 * @param core The core used for drawing.
 	 * @param color The color to use for drawing the constellation.
 	 */
-	void drawConstellation(StelCore *core, const Vec3f &color) const;
+	void drawConstellation(StelCore *core, const Vec3f &lineColor, const Vec3f &labelColor) const;
 
 	/**
 	 * @brief Draws the constellation based on the coordinates using the default color.
@@ -154,14 +154,14 @@ private:
 	/// Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;
 
-	/// The font used for constellation labels
-	QFont constellationLabelFont;
+	/// The font used for constellation names
+	QFont constellationNameFont;
 
 	/// The default color used for drawing the constellation
-	Vec3f colorDrawDefault = Vec3f(0.0f, 0.0f, 0.0f);
+	Vec3f defaultConstellationLineColor = Vec3f(0.0f, 0.0f, 0.0f);
 
-	/// The default color used for drawing the constellation label
-	Vec3f colorLabelDefault = Vec3f(0.0f, 0.0f, 0.0f);
+	/// The default color used for drawing the constellation names
+	Vec3f defaultConstellationNameColor = Vec3f(0.0f, 0.0f, 0.0f);
 
 	/**
 	 * @brief Updates the XYZname that is used for the text position.

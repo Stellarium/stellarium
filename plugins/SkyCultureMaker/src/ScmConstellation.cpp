@@ -6,11 +6,11 @@ scm::ScmConstellation::ScmConstellation(const std::vector<scm::CoordinateLine> &
 	, constellationStars(stars)
 {
 	QSettings *conf = StelApp::getInstance().getSettings();
-	constellationLabelFont.setPixelSize(conf->value("viewing/constellation_font_size", 15).toInt());
+	constellationNameFont.setPixelSize(conf->value("viewing/constellation_font_size", 15).toInt());
 
 	QString defaultColor = conf->value("color/default_color", "0.5,0.5,0.7").toString();
-	colorDrawDefault     = Vec3f(conf->value("color/const_lines_color", defaultColor).toString());
-	colorLabelDefault    = Vec3f(conf->value("color/const_names_color", defaultColor).toString());
+	defaultConstellationLineColor = Vec3f(conf->value("color/const_lines_color", defaultColor).toString());
+	defaultConstellationNameColor = Vec3f(conf->value("color/const_names_color", defaultColor).toString());
 
 	updateTextPosition();
 }
@@ -59,30 +59,30 @@ void scm::ScmConstellation::setConstellation(const std::vector<CoordinateLine> &
 	updateTextPosition();
 }
 
-void scm::ScmConstellation::drawConstellation(StelCore *core, const Vec3f &color) const
+void scm::ScmConstellation::drawConstellation(StelCore *core, const Vec3f &lineColor, const Vec3f &nameColor) const
 {
 	StelPainter painter(core->getProjection(drawFrame));
 	painter.setBlending(true);
 	painter.setLineSmooth(true);
-	painter.setFont(constellationLabelFont);
+	painter.setFont(constellationNameFont);
 
 	bool alpha = 1.0f;
-	painter.setColor(color, alpha);
+	painter.setColor(lineColor, alpha);
 
 	for (CoordinateLine p : constellationCoordinates)
 	{
 		painter.drawGreatCircleArc(p.start, p.end);
 	}
 
-	drawNames(core, painter);
+	drawNames(core, painter, nameColor);
 }
 
 void scm::ScmConstellation::drawConstellation(StelCore *core) const
 {
-	drawConstellation(core, colorDrawDefault);
+	drawConstellation(core, defaultConstellationLineColor, defaultConstellationNameColor);
 }
 
-void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter, const Vec3f &labelColor) const
+void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter, const Vec3f &nameColor) const
 {
 	sPainter.setBlending(true);
 
@@ -102,14 +102,14 @@ void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter, con
 		return;
 	}
 
-	sPainter.setColor(labelColor, 1.0f);
+	sPainter.setColor(nameColor, 1.0f);
 	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), englishName, 0.,
 	                  -sPainter.getFontMetrics().boundingRect(englishName).width() / 2, 0, false);
 }
 
 void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter) const
 {
-	drawNames(core, sPainter, colorLabelDefault);
+	drawNames(core, sPainter, defaultConstellationNameColor);
 }
 
 QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureName) const
