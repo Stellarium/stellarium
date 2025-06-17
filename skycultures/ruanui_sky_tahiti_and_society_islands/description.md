@@ -23,7 +23,7 @@ the Sun and the planets as a genealogy. Children of the divine couple Rua-tupua-
 bodies to populate the sky. Shell, egg or seed, the sky is seen as a creator space revealing divine manifestations such as clouds, swells, currents and winds 
 and yielding the principle of life.
 
-### Linking space, time and men: an "environnemental" calendar
+### Linking space, time and men: an "environmental" calendar
 
 Based on very precise observations, the experts of ancient times or tahu'a developed an acute knowledge of the stellar movement, linking closely the sky, 
 the space and the time to the cycles of the environment, of the animals and of the plants. They were indissociable. This knowledge was passed down in the 
