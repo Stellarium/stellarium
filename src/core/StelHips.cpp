@@ -189,6 +189,7 @@ bool HipsSurvey::getAllsky()
 	}
 	if (networkReply->isFinished())
 	{
+		updateProgressBar(100, 100);
 		if (networkReply->error() == QNetworkReply::NoError) {
 			qDebug() << "got allsky";
 			QByteArray data = networkReply->readAll();
