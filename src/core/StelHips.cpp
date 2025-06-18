@@ -191,8 +191,8 @@ bool HipsSurvey::getAllsky()
 	{
 		updateProgressBar(100, 100);
 		if (networkReply->error() == QNetworkReply::NoError) {
-			qDebug() << "got allsky";
 			QByteArray data = networkReply->readAll();
+			qDebug().nospace() << "Got allsky for " << getTitle() << ", " << data.size() << " bytes";
 			allsky = QImage::fromData(data);
 			if (allsky.isNull())
 			{
