@@ -60,9 +60,7 @@
 #include <QMessageBox>
 #include <QStandardPaths>
 #include <QStorageInfo>
-#ifdef Q_OS_WIN
-	#include <QPinchGesture>
-#endif
+#include <QPinchGesture>
 #include <QOpenGLShader>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLFramebufferObject>
@@ -365,10 +363,8 @@ public:
 
 		setAcceptHoverEvents(true);
 
-#ifdef Q_OS_WIN
 		setAcceptTouchEvents(true);
 		grabGesture(Qt::PinchGesture);
-#endif
 		setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 		previousPaintTime = StelApp::getTotalRunTime();
 	}
@@ -490,7 +486,6 @@ protected:
 	}
 
 	//*** Gesture and touch support, currently only for Windows
-#ifdef Q_OS_WIN
 	bool event(QEvent * e) override
 	{
 		bool r = false;
@@ -538,7 +533,6 @@ private:
 			}
 		}
 	}
-#endif
 
 private:
 	//! Helper function to convert a QGraphicsSceneMouseEvent to a QMouseEvent suitable for StelApp consumption
