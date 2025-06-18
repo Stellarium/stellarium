@@ -194,6 +194,11 @@ bool HipsSurvey::getAllsky()
 			qDebug() << "got allsky";
 			QByteArray data = networkReply->readAll();
 			allsky = QImage::fromData(data);
+			if (allsky.isNull())
+			{
+				qWarning() << "Failed to decode allsky image data";
+				noAllsky = true;
+			}
 		} else {
 			noAllsky = true;
 		}
