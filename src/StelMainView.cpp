@@ -489,18 +489,44 @@ protected:
 	bool event(QEvent * e) override
 	{
 		bool r = false;
-		switch (e->type()){
+		const auto t = e->type();
+		const bool isTouch = t == QEvent::TouchBegin ||
+		                     t == QEvent::TouchUpdate ||
+		                     t == QEvent::TouchEnd;
+		QTouchEvent *touchEvent;
+		QList<QTouchEvent::TouchPoint> touchPoints;
+		QPointF mousePos;
+		if (isTouch)
+		{
+			touchEvent = static_cast<QTouchEvent *>(e);
+			touchPoints = touchEvent->touchPoints();
+			r = true;
+			if (touchPoints.count() == 1)
+				setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
+			else
+				return r;
+			const auto pos = touchPoints[0].pos();
+			mousePos = QPoint(pos.x(), mainView->height()-1-pos.y());
+		}
+		std::unique_ptr<QMouseEvent> mouseEvent;
+		switch (t)
+		{
 			case QEvent::TouchBegin:
+			{
+				mouseEvent.reset(new QMouseEvent(QEvent::MouseButtonPress, mousePos,
+				                                 Qt::LeftButton, Qt::LeftButton, touchEvent->modifiers()));
+				break;
+			}
 			case QEvent::TouchUpdate:
+			{
+				mouseEvent.reset(new QMouseEvent(QEvent::MouseMove, mousePos,
+				                                 Qt::LeftButton, Qt::LeftButton, touchEvent->modifiers()));
+				break;
+			}
 			case QEvent::TouchEnd:
 			{
-				QTouchEvent *touchEvent = static_cast<QTouchEvent *>(e);
-				QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
-
-				if (touchPoints.count() == 1)
-					setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
-
-				r = true;
+				mouseEvent.reset(new QMouseEvent(QEvent::MouseButtonRelease, mousePos,
+				                                 Qt::LeftButton, Qt::LeftButton, touchEvent->modifiers()));
 				break;
 			}
 			case QEvent::Gesture:
@@ -510,6 +536,21 @@ protected:
 			default:
 				r = QGraphicsObject::event(e);
 		}
+
+		if (isTouch)
+		{
+			if (mouseEvent->type() == QEvent::MouseMove)
+			{
+				r = StelApp::getInstance().handleMove(mouseEvent->pos().x(), mouseEvent->pos().y(), mouseEvent->buttons());
+			}
+			else
+			{
+				StelApp::getInstance().handleClick(mouseEvent.get());
+				r = mouseEvent->isAccepted();
+			}
+			if(r) mainView->thereWasAnEvent();
+		}
+
 		return r;
 	}
 
