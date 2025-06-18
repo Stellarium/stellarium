@@ -28962,7 +28962,7 @@ msgstr "Reliefs %1."
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
 msgstr ""
 "Le mode <i>cubemap</i> choisi n'est pas pris en charge. Retour au mode « 6 "
-"Textures »"
+"textures »"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:970
 #, qt-format
@@ -29049,11 +29049,11 @@ msgstr ""
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 "Le nuanceur géométrique n'est pas pris en charge. Retour au mode « 6 "
-"Textures »"
+"textures »"
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:1803
 msgid "Falling back to '6 Textures' because of ANGLE bug"
-msgstr "Retour au mode « 6 Textures » en raison d'un bogue ANGLE"
+msgstr "Retour au mode « 6 textures » en raison d'un bogue ANGLE"
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:2328
 msgid ""
@@ -29133,7 +29133,7 @@ msgid ""
 "<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
 "the most compatible method, but may be slower than the others."
 msgstr ""
-"<b>6 Textures</b> utilises 6 textures simples, une pour chaque face du cube."
+"<b>6 textures</b> utilises 6 textures simples, une pour chaque face du cube."
 " C'est la méthode la plus compatible, mais elle est parfois plus lente que "
 "les autres."
 
@@ -35345,7 +35345,7 @@ msgstr "Impossible de télécharger le fichier WCS."
 #: plugins/NebulaTextures/src/NebulaTextures.cpp:92
 #: plugins/NebulaTextures/src/NebulaTextures.cpp:93
 msgid "Nebula Textures"
-msgstr "Textures de nébuleuses"
+msgstr "Textures du ciel profond"
 
 #: plugins/NebulaTextures/src/NebulaTextures.cpp:50
 msgid ""
@@ -35407,7 +35407,7 @@ msgstr "Téléchargement des données WCS complet. Traitement…"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:301
 msgid "Nebula Textures Plugin"
-msgstr "Plugin Textures de nébuleuses"
+msgstr "Plugin Textures du ciel profond"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:307
 msgid ""
@@ -35420,11 +35420,11 @@ msgid ""
 "not flipped horizontally or vertically), solve its coordinates, and enjoy a "
 "personalized celestial view!"
 msgstr ""
-"Le plugin Textures de nébuleuses améliore votre expérience avec Stellarium "
-"en permettant de personnaliser les textures des objets du ciel profonds "
-"(DSO). Ce plugin permet d'intégrer vos propres images, photos ou dessins, "
-"dans Stellarium. Il permet en outre de déterminer avec précision la position"
-" et les coordonnées des images astrophotographiques avec le site "
+"Le plugin Textures du ciel profond améliore votre expérience avec Stellarium"
+" en permettant de personnaliser les textures des objets du ciel profond "
+"(DSO). Ce plugin permet d'intégrer dans Stellarium vos propres images, "
+"photos ou dessins. Il permet en outre de déterminer avec précision la "
+"position et les coordonnées des images astrophotographiques avec le site "
 "Astrometry.net. Il suffit d'importer son image en s'assurant qu'elle ait la "
 "bonne orientation horizontale et verticale et de déterminer ses coordonnées "
 "pour jouir d'un ciel nocturne personnalisé !"
@@ -35517,7 +35517,7 @@ msgstr "Texture supprimée."
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:479
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:480
 msgid "Nebula Textures Plug-in Configuration"
-msgstr "Plugin Textures de nébuleuses"
+msgstr "Plugin Textures du ciel profond"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:481
 msgid "Online plate-solving"
