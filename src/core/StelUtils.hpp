@@ -119,6 +119,9 @@ namespace StelUtils
 	//! Return the user agent name, i.e. "Stellarium/0.15.0 (Linux)"
 	QString getUserAgentString();
 
+        //! Return the addressing mode string, i.e. "64-bit"
+        QString getAddressingMode();
+
 	/*! \brief Get a long integer from a JSON value
 	 *
 	 *  QJsonValue stores JSON numbers as double-precision floating-point values. This means
