@@ -99,9 +99,9 @@ void StelSkyLayerMgr::loadCollection(int decimateBy)
 	// [NebulaTextures] The custom textures need to be loaded synchronously at the program startup in order to take effect
 	QSettings* conf = StelApp::getInstance().getSettings();
 	if(conf->value("plugins_load_at_startup/NebulaTextures", false).toBool()){
-		path = StelFileMgr::findFile(StelFileMgr::getUserDir()+"/modules/NebulaTextures/custom_textures.json");
+		path = StelFileMgr::findFile("modules/NebulaTextures/custom_textures.json", StelFileMgr::File);
 		if (path.isEmpty())
-			qWarning() << "[NebulaTextures] Custom Nebula Textures doesn't exist.";
+			qWarning() << "Custom nebula textures doesn't exist";
 		else
 			insertSkyImage(path, QString(), true, decimateBy);
 	}
