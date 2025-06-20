@@ -5,6 +5,11 @@
 #include "StelDialog.hpp"
 #include <QObject>
 
+#ifdef SCM_CONVERTER_ENABLED_CPP
+# include "SkyCultureConverter.hpp"
+# include "unarr.h"
+#endif
+
 class Ui_scmStartDialog;
 
 class ScmStartDialog : public StelDialog
