@@ -33,6 +33,12 @@ jobs:
         arch: 'win64_msvc2019_64'
         modules: 'qt3d qtactiveqt qtcharts qtconnectivity qtdatavis3d qtgrpc qthttpserver qtimageformats qtlanguageserver qtlocation qtlottie qtmultimedia qtnetworkauth qtpdf qtpositioning qtquick3dphysics qtquickeffectmaker qtremoteobjects qtscxml qtsensors qtserialbus qtserialport qtspeech qtvirtualkeyboard qtwebchannel qtwebengine qtwebsockets qtwebview debug_info qt5compat qtquick3d qtquicktimeline qtshadertools'
     
+    - name: Setup vcpkg
+      uses: lukka/run-vcpkg@v11
+
+    - name: Install dependencies
+      run: vcpkg install gettext:x64-windows libtidy:x64-windows
+
     - name: Cache Inno Setup
       id: cache-innosetup
       uses: actions/cache@v4
@@ -60,7 +66,7 @@ jobs:
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: |
-        cmake -B build -S . -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DCMAKE_INSTALL_PREFIX=stellarium-bin
+        cmake -B build -S . -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DCMAKE_INSTALL_PREFIX=stellarium-bin -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake
 
     - name: Build
       # Build your program with the given configuration
