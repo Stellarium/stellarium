@@ -104,6 +104,15 @@ QString getOperatingSystemInfo()
 	return OS;
 }
 
+QString getAddressingMode()
+{
+        QString mode("32-bit");
+        #if defined(__LP64__) || defined(_WIN64)
+        mode = "64-bit";
+        #endif
+        return mode;
+}
+
 double hmsStrToHours(const QString& s)
 {
 	static const QRegularExpression reg("(\\d+)h(\\d+)m(\\d+)s");

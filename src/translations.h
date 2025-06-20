@@ -639,6 +639,9 @@ class Translations
 		// TRANSLATORS: hours
 		N_("h");
 
+		NC_("64-bit", "addressing mode");
+		NC_("32-bit", "addressing mode");
+
 		// src/gui/helpDialogGui.ui:
 		// TRANSLATORS: Same text as in the Configuration window!
 		N_("Edit keyboard shortcuts...");

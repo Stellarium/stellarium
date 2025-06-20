@@ -84,11 +84,7 @@ void printSystemInfo()
 	log(QString("Build ABI: %1").arg(QSysInfo::buildAbi()));
 
 	// write addressing mode
-#if defined(__LP64__) || defined(_WIN64)
-	log("Addressing mode: 64-bit");
-#else
-	log("Addressing mode: 32-bit");
-#endif
+        log(QString("Addressing mode: %1").arg(StelUtils::getAddressingMode()));
 
 	// write CPU and memory info
 	log(QString("Processor architecture: %1").arg(QSysInfo::currentCpuArchitecture()));
