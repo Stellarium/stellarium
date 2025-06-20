@@ -35,6 +35,10 @@ jobs:
     
     - name: Setup vcpkg
       uses: lukka/run-vcpkg@v11
+      with:
+        # Pin vcpkg to a specific commit to ensure reproducible builds
+        # and avoid errors from the action not finding a version.
+        vcpkgGitCommitId: 'b3dd708d38df5c856fe1c18dc0d59ab771f93921'
 
     - name: Install dependencies
       run: vcpkg install gettext:x64-windows libtidy:x64-windows
