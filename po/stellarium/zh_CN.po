@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-06-19 15:17+0700\n"
+"POT-Creation-Date: 2025-06-21 13:18+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Silas Wong <wsl98501@163.com>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -33445,6 +33445,10 @@ msgid ""
 "Custom Storage."
 msgstr "处理完成！请前往中心点，测试此贴图，并添加到自定义存储"
 
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:535
+msgid "Are you sure to recover the solution?"
+msgstr "确定恢复最近的解析坐标吗？"
+
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:570
 msgid "Stop test"
 msgstr "停止测试"
@@ -33453,6 +33457,12 @@ msgstr "停止测试"
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:533
 msgid "Test this texture"
 msgstr "测试贴图"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:695
+msgid ""
+"Caution! Are you sure to add this texture? It will only take effect after "
+"restarting Stellarium."
+msgstr "确定正式添加此贴图吗？渲染将在 Stellarium 重启后真正生效"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:726
 msgid "Failed to load texture configuration."
@@ -33477,6 +33487,10 @@ msgstr "图像格式无效"
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:784
 msgid "Failed to copy image file."
 msgstr "图像复制失败"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:814
+msgid "Are you sure to remove this texture?"
+msgstr "确定要移除此贴图吗？相关数据将会删除"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:826
 msgid "Texture removed."
