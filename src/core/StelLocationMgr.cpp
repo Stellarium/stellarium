@@ -126,7 +126,7 @@ void LibGPSLookupHelper::query()
 		}
 
 		struct gps_data_t* newdata;
-		if ((newdata = gps_rec->read()) == Q_NULLPTR)
+		if ((newdata = gps_rec->read()) == nullptr)
 		{
 			emit queryError("GPSD query: Read error.");
 			return;
@@ -235,7 +235,7 @@ void LibGPSLookupHelper::query()
 #endif
 
 NMEALookupHelper::NMEALookupHelper(QObject *parent)
-	: GPSLookupHelper(parent), serial(Q_NULLPTR), nmea(Q_NULLPTR)
+	: GPSLookupHelper(parent), serial(nullptr), nmea(nullptr)
 {
 	//use RAII
 	// Getting a list of ports may enable auto-detection!
@@ -243,7 +243,7 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 
 	if (portInfoList.size()==0)
 	{
-		qDebug() << "No connected devices found. NMEA GPS lookup failed.";
+		qDebug() << "No serial port found. NMEA GPS lookup failed.";
 		return;
 	}
 
@@ -324,7 +324,7 @@ NMEALookupHelper::~NMEALookupHelper()
 	if(nmea)
 	{
 		delete nmea;
-		nmea=Q_NULLPTR;
+		nmea=nullptr;
 	}
 	if (serial)
 	{
@@ -335,7 +335,7 @@ NMEALookupHelper::~NMEALookupHelper()
 			serial->close();
 		}
 		delete serial;
-		serial=Q_NULLPTR;
+		serial=nullptr;
 	}
 }
 
@@ -414,7 +414,7 @@ void NMEALookupHelper::nmeaTimeout()
 #endif
 
 StelLocationMgr::StelLocationMgr()
-	: nmeaHelper(Q_NULLPTR), libGpsHelper(Q_NULLPTR)
+	: nmeaHelper(nullptr), libGpsHelper(nullptr), positionSource(nullptr), qGeoPositionInfoSource(nullptr)
 {
 	// initialize the static QMap first if necessary.
 	// The first entry is the DB name, the second is as we display it in the program.
@@ -510,9 +510,15 @@ StelLocationMgr::StelLocationMgr()
 
 	// configure the QGeoPositionInfoSource which can be queried from OS
 	qGeoPositionInfoSource = QGeoPositionInfoSource::createDefaultSource(this);
-	if (qGeoPositionInfoSource)
+	if (qGeoPositionInfoSource && (qGeoPositionInfoSource->supportedPositioningMethods() & QGeoPositionInfoSource::AllPositioningMethods))
 		connect(qGeoPositionInfoSource, SIGNAL(positionUpdated(QGeoPositionInfo)),
 			this, SLOT(positionUpdatedFromOS(QGeoPositionInfo)));
+	else
+	{
+		qWarning() << "No valid QPositionInfoSource. Old IP queries should still work.";
+		delete qGeoPositionInfoSource;
+		qGeoPositionInfoSource=nullptr;
+	}
 }
 
 StelLocationMgr::~StelLocationMgr()
@@ -520,17 +526,27 @@ StelLocationMgr::~StelLocationMgr()
 	if (nmeaHelper)
 	{
 		delete nmeaHelper;
-		nmeaHelper=Q_NULLPTR;
+		nmeaHelper=nullptr;
 	}
 	if (libGpsHelper)
 	{
 		delete libGpsHelper;
-		libGpsHelper=Q_NULLPTR;
+		libGpsHelper=nullptr;
+	}
+	if (qGeoPositionInfoSource)
+	{
+		delete qGeoPositionInfoSource;
+		qGeoPositionInfoSource=nullptr;
+	}
+	if (positionSource)
+	{
+		delete positionSource;
+		positionSource=nullptr;
 	}
 }
 
 StelLocationMgr::StelLocationMgr(const LocationList &locations)
-	: nmeaHelper(Q_NULLPTR), libGpsHelper(Q_NULLPTR)
+	: nmeaHelper(nullptr), libGpsHelper(nullptr), positionSource(nullptr), qGeoPositionInfoSource(nullptr)
 {
 	setLocations(locations);
 
@@ -719,11 +735,9 @@ static float parseAngle(const QString& s, bool* ok)
 
 const StelLocation StelLocationMgr::locationForString(const QString& s) const
 {
-	auto iter = locations.find(s);
-	if (iter!=locations.end())
-	{
-		return iter.value();
-	}
+	if (locations.contains(s))
+		return locations.value(s);
+
 	// Maybe this is a city and country names (old format of the data)?
 	static const QRegularExpression cnreg("(.+),\\s+(.+)$");
 	QRegularExpressionMatch cnMatch=cnreg.match(s);
@@ -733,11 +747,9 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 		//       (Asian locations for Russia and for locations on Hawaii for U.S.)
 		QString city = cnMatch.captured(1).trimmed();
 		QString country = cnMatch.captured(2).trimmed();
-		auto iter = locations.find(QString("%1, %2").arg(city, pickRegionFromCountry(country)));
-		if (iter!=locations.end())
-		{
-			return iter.value();
-		}
+		QString candLoc=QString("%1, %2").arg(city, pickRegionFromCountry(country));
+		if (locations.contains(candLoc))
+			return locations.value(candLoc);
 	}
 	// Maybe a full Location line? (e.g. ObservationLists)
 	if (s.count("\t")>6) // heuristic. Regular locations should not have tabs in the name.
@@ -956,10 +968,14 @@ void StelLocationMgr::locationFromIP()
             }
         });
         qApp->requestPermission(locationPermission, [this](const QPermission &permission) {
-            if ((permission.status() == Qt::PermissionStatus::Granted) && qGeoPositionInfoSource)
+	    if ((permission.status() == Qt::PermissionStatus::Granted)
+			    && qGeoPositionInfoSource
+			    && (qGeoPositionInfoSource->supportedPositioningMethods() & QGeoPositionInfoSource::AllPositioningMethods))
             {
                     qDebug() << "permission granted, doing OS service lookup for location...";
-                    // Trigger the actual Qt Location lookup from OS
+		    qDebug() << "Location provider:" << qGeoPositionInfoSource->sourceName();
+		    qDebug() << "Location provider supported caps:" << qGeoPositionInfoSource->supportedPositioningMethods();
+		    // Trigger the actual Qt Location lookup from OS
                     qGeoPositionInfoSource->requestUpdate();
                     qDebug() << "permission granted, doing OS service lookup for location... postRequest ";
             }
@@ -975,7 +991,8 @@ void StelLocationMgr::locationFromIP()
             else
             {
                     // OLD METHOD
-                    qDebug() << "permission not granted, doing IP service lookup for location";
+		    if (qApp->property("verbose").toBool())
+			    qDebug() << "permission not granted or no QGeoPositionInfoSource, doing old IP service lookup for location";
 
                     QSettings* conf = StelApp::getInstance().getSettings();
                     QNetworkRequest req( QUrl( conf->value("main/geoip_api_url", "https://freegeoip.stellarium.org/json/").toString() ) );
@@ -1057,7 +1074,7 @@ void StelLocationMgr::locationFromGPS(int interval)
 				if (verbose)
 					qDebug() << "Deactivating and deleting LibGPShelper...";
 				delete libGpsHelper;
-				libGpsHelper=Q_NULLPTR;
+				libGpsHelper=nullptr;
 				emit gpsQueryFinished(true); // signal "successful operation", avoid showing any error in GUI.
 				if (verbose)
 					qDebug() << "Deactivating and deleting LibGPShelper... DONE";
@@ -1069,21 +1086,22 @@ void StelLocationMgr::locationFromGPS(int interval)
 	{
 		qDebug() << "LibGPSHelper not ready. Attempting a direct NMEA connection instead.";
 		delete libGpsHelper;
-		libGpsHelper=Q_NULLPTR;
+		libGpsHelper=nullptr;
 	}
 #endif
-	if(!nmeaHelper)
+	//If positionSource is working and we are switching off, don't create a nmeaHelper. (Not critical, just no need to handle one failed lookup.)
+	if(!nmeaHelper && !positionSource)
 	{
 		if (verbose)
 			qDebug() << "Creating new NMEAhelper...";
 		nmeaHelper = new NMEALookupHelper(this);
-		connect(nmeaHelper, SIGNAL(queryFinished(StelLocation)), this, SLOT(changeLocationFromGPSQuery(StelLocation)));
-		connect(nmeaHelper, SIGNAL(queryError(QString)), this, SLOT(gpsQueryError(QString)));
 		if (verbose)
 			qDebug() << "Creating new NMEAhelper...done";
 	}
-	if(nmeaHelper->isReady())
+	if(nmeaHelper && nmeaHelper->isReady())
 	{
+		connect(nmeaHelper, SIGNAL(queryFinished(StelLocation)), this, SLOT(changeLocationFromGPSQuery(StelLocation)));
+		connect(nmeaHelper, SIGNAL(queryError(QString)), this, SLOT(gpsQueryError(QString)));
 		if (interval<0)
 			nmeaHelper->query();
 		else
@@ -1094,59 +1112,72 @@ void StelLocationMgr::locationFromGPS(int interval)
 				if (verbose)
 					qDebug() << "Deactivating and deleting NMEAhelper...";
 				delete nmeaHelper;
-				nmeaHelper=Q_NULLPTR;
+				nmeaHelper=nullptr;
 				emit gpsQueryFinished(true); // signal "successful operation", avoid showing any error in GUI.
 				if (verbose)
 					qDebug() << "Deactivating and deleting NMEAhelper... DONE";
 			}
 		}
+		return;
 	}
 	else
 	{
 		// something went wrong. However, a dysfunctional nmeaHelper may still exist, better delete it.
 		if (verbose)
 			qDebug() << "nmeaHelper not ready. Something went wrong.";
-		delete nmeaHelper;
-		nmeaHelper=Q_NULLPTR;
-#ifndef Q_OS_WIN
-		emit gpsQueryFinished(false);
-#else
-		if (!positionSource)
-			positionSource = QGeoPositionInfoSource::createDefaultSource(this);
-		if (positionSource)
+		if (nmeaHelper)
 		{
-			if (interval)
-			{
-				if (verbose)
-					qDebug() << "Creating new positionSource...";
-				positionSource->setUpdateInterval(interval);
-				connect(positionSource, SIGNAL(positionUpdated(QGeoPositionInfo)), this, SLOT(positionUpdated(QGeoPositionInfo)));
-				positionSource->startUpdates();
-				if (verbose)
-					qDebug() << "Creating new positionSource...done";
-			}
-			else
-			{
-				if (verbose)
-					qDebug() << "Deactivating and deleting gps...";
-				positionSource->stopUpdates();
-				delete positionSource;
-				positionSource=Q_NULLPTR;
-			}
-			emit gpsQueryFinished(true); // signal "successful operation", avoid showing any error in GUI.
+			delete nmeaHelper;
+			nmeaHelper=nullptr;
+		}
+	}
+	if (verbose)
+	{
+		qDebug() << "Neither GPSD nor NMEAhelper. Try QGeoPositionInfoSource, one of";
+		qDebug() << QGeoPositionInfoSource::availableSources();
+	}
+	// TBD: Here we may later load a particular preferred source (OS dependent!) configured in config.ini.
+	if (!positionSource && (QGeoPositionInfoSource::availableSources().length()>0))
+		positionSource = QGeoPositionInfoSource::createDefaultSource(this);
+	if (positionSource && (positionSource->supportedPositioningMethods() & QGeoPositionInfoSource::AllPositioningMethods))
+	{
+		if (verbose)
+			qDebug() << "Our QGeoPositionInfoSource is:" << positionSource->sourceName();
+		if (interval)
+		{
+			if (verbose)
+				qDebug() << "Setting up new positionSource...";
+			qDebug() << positionSource->supportedPositioningMethods();
+			positionSource->setUpdateInterval(interval);
+			connect(positionSource, SIGNAL(positionUpdated(QGeoPositionInfo)), this, SLOT(positionUpdated(QGeoPositionInfo)));
+			positionSource->startUpdates();
+			if (verbose)
+				qDebug() << "Setting up new positionSource...done";
 		}
 		else
 		{
-			emit gpsQueryFinished(false);
+			if (verbose)
+				qDebug() << "Deactivating and deleting gps...";
+			positionSource->stopUpdates();
+			delete positionSource;
+			positionSource=nullptr;
 		}
-#endif
+		emit gpsQueryFinished(true); // signal "successful operation", avoid showing any error in GUI.
+	}
+	else
+	{
+		if (positionSource)
+			qWarning() << "positionSource" << positionSource->sourceName() << "does not provide data. Giving up.";
+
+		emit gpsQueryFinished(false);
 	}
 }
 
-#ifdef Q_OS_WIN
+//#ifdef Q_OS_WIN
+// uwes-ufo's new solution for QtPosition
 void StelLocationMgr::positionUpdated(QGeoPositionInfo info)
 {
-	bool verbose=qApp->property("verbose").toBool();
+	const bool verbose=qApp->property("verbose").toBool();
 	StelLocation loc;
 	if (info.isValid())
 	{
@@ -1161,14 +1192,14 @@ void StelLocationMgr::positionUpdated(QGeoPositionInfo info)
 	{
 		// something went wrong. However, a dysfunctional positionSource may still exist, better delete it.
 		if (verbose)
-			qDebug() << "gps not ready. Something went wrong.";
+			qWarning() << "GPS not ready. Something went wrong.";
 		positionSource->stopUpdates();
 		delete positionSource;
-		positionSource=Q_NULLPTR;
+		positionSource=nullptr;
 		emit gpsQueryFinished(false);
 	}
 }
-#endif
+//#endif
 
 void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &locin)
 {
@@ -1216,7 +1247,7 @@ void StelLocationMgr::gpsQueryError(const QString &err)
 		//qDebug() << "Would Close nmeaHelper during error...";
 		// We should close the serial line to let other programs use the GPS device. (Not needed for the GPSD solution!)
 		//delete nmeaHelper;
-		//nmeaHelper=Q_NULLPTR;
+		//nmeaHelper=nullptr;
 		//qDebug() << "Would Close nmeaHelper during error.....successful";
 	}
 	qDebug() << "GPS queryError, resetting GUI";

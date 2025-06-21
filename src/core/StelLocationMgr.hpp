@@ -178,10 +178,12 @@ private slots:
 #ifdef ENABLE_GPS
 	void changeLocationFromGPSQuery(const StelLocation& loc);
 	void gpsQueryError(const QString& err);
-	#ifdef Q_OS_WIN
+	//#ifdef Q_OS_WIN
+	//! uwes-ufo's so-far Windows-only extension of the button
 	void positionUpdated(QGeoPositionInfo gpsPos);
-	#endif
+	//#endif
 #endif
+	/// MAYBE NOT NEEDED AFTER ALL:
 	//! Use QLocation services to get location from OS (via IP, Wifi, ...)
 	//! Needs permissions.
 	void positionUpdatedFromOS(const QGeoPositionInfo &info);
@@ -221,9 +223,8 @@ private:
 	QString planetName;
 
 	GPSLookupHelper *nmeaHelper,*libGpsHelper;
-#ifdef Q_OS_WIN
-	QGeoPositionInfoSource *positionSource=Q_NULLPTR;
-#endif
+	QGeoPositionInfoSource *positionSource; // Used in the "Location from GPS or OS" query button action that may update.
+	// Used in the Location from Network query. Not sure if we really need two.
 	QGeoPositionInfoSource *qGeoPositionInfoSource;
 };
 
