@@ -39,7 +39,7 @@ jobs:
         vcpkgGitCommitId: 'ef7dbf94b9198bc58f45951adcf1f041fcbc5ea0'
 
     - name: Install dependencies
-      run: vcpkg install gettext tidy-html5
+      run: vcpkg install gettext:x86-windows tidy-html5:x86-windows
 
     - name: Cache Inno Setup
       id: cache-innosetup
