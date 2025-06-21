@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-06-19 15:17+0700\n"
+"POT-Creation-Date: 2025-06-21 13:18+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -35248,6 +35248,10 @@ msgstr ""
 "Обработка завершена! Перейдите в Центральную точку, протестируйте эту "
 "текстуру и добавьте в Пользовательское хранилище."
 
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:535
+msgid "Are you sure to recover the solution?"
+msgstr "Вы уверены, что хотите восстановить решение?"
+
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:570
 msgid "Stop test"
 msgstr "Остановить проверку"
@@ -35256,6 +35260,14 @@ msgstr "Остановить проверку"
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:533
 msgid "Test this texture"
 msgstr "Проверить эту текстуру"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:695
+msgid ""
+"Caution! Are you sure to add this texture? It will only take effect after "
+"restarting Stellarium."
+msgstr ""
+"Внимание! Вы уверены, что хотите добавить эту текстуру? Она будет загружена "
+"только после перезапуска Stellarium."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:726
 msgid "Failed to load texture configuration."
@@ -35280,6 +35292,10 @@ msgstr "Недопустимый формат изображения."
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:784
 msgid "Failed to copy image file."
 msgstr "Ошибка копирования файла изображения."
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:814
+msgid "Are you sure to remove this texture?"
+msgstr "Вы уверены, что хотите удалить эту текстуру?"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:826
 msgid "Texture removed."
