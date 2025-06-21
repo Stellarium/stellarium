@@ -139,10 +139,10 @@ public:
 	//! Get landscape id. This is the landscape directory name, used for cache handling.
 	QString getId() const {return id;}
 
-	//! Return the associated location (may be empty!)
+	//! Return the associated location (may be empty/invalid!)
 	const StelLocation& getLocation() const {return location;}
-	//! Return if the location is valid (a valid location has a valid planetName!)
-	bool hasLocation() const {return (!(location.planetName.isEmpty()));}
+	//! Return if the location is valid
+	bool hasLocation() const {return (location.isValid());}
 	//! Return default light pollution luminance in cd/m², if present
 	QVariant getDefaultLightPollutionLuminance() const {return defaultLightPollutionLuminance;}
 	//! Return default fog setting (0/1) or -1 (no change)

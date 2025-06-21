@@ -287,9 +287,10 @@ void StelMainScriptAPI::setObserverLocation(const QString &id, double duration)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForString(id);
-	if (!loc.isValid())
-		return;	// location find failed
-	core->moveObserverTo(loc, duration);
+	if (loc.isValid())
+		core->moveObserverTo(loc, duration);
+	else
+		qWarning() << "core.setObserverLocation: location" << id << "invalid, not changing location:" << loc.serializeToLine();
 }
 
 QString StelMainScriptAPI::getObserverLocation()

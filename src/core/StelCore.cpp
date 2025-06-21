@@ -1150,7 +1150,13 @@ void StelCore::returnToDefaultLocation()
 	if (loc.isValid())
 		moveObserverTo(loc, 1., 2.);
 	else
-		qDebug() << "StelCore::returnToDefaultLocation: Location " << loc.serializeToLine().replace('\t', '|') << "is invalid. Store an entry from the locations list as default location.";
+	{
+		qCritical() << "StelCore::returnToDefaultLocation: " << defaultLocationID << ": returned Location " <<
+			       loc.serializeToLine().replace('\t', '|') <<
+			       "is invalid. Store an entry from the locations list as default location.";
+		// move to lastResortLocation
+		moveObserverTo(locationMgr.getLastResortLocation(), 1., 2.);
+	}
 }
 
 void StelCore::returnToHome()
@@ -1170,6 +1176,8 @@ void StelCore::returnToHome()
 
 	if (loc.isValid())
 		moveObserverTo(loc, conf->value("navigation/return_home_duration", 0.).toDouble()); // ability set a duration of movement (for a demo)
+	else
+		qWarning() << "Invalid location" << loc.serializeToLine();
 
 	PlanetP p = GETSTELMODULE(SolarSystem)->searchByEnglishName(loc.planetName);
 
