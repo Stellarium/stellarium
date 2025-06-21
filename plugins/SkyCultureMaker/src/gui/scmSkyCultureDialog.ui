@@ -313,6 +313,18 @@ p, li { white-space: pre-wrap; }
                 <number>10</number>
                 </property>
 
+                <!-- Authors -->
+                <item>
+                <widget class="QLabel" name="authorsLbl">
+                  <property name="text">
+                  <string>Authors:</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="authorsTE"/>
+                </item>
+
                 <!-- Culture Description -->
                 <item>
                 <widget class="QLabel" name="cultureDescriptionLbl">
@@ -323,7 +335,18 @@ p, li { white-space: pre-wrap; }
                 </item>
                 <item>
                 <widget class="QTextEdit" name="cultureDescriptionTE"/>
+                </item>
 
+                <!-- About -->
+                <item>
+                <widget class="QLabel" name="aboutLbl">
+                  <property name="text">
+                  <string>About:</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="aboutTE"/>
                 </item>
 
                 <!-- Geo-Region -->
@@ -362,18 +385,6 @@ p, li { white-space: pre-wrap; }
                 <widget class="QTextEdit" name="moonSunTE"/>
                 </item>
 
-                <!-- Zodiac / Lunar System -->
-                <item>
-                <widget class="QLabel" name="zodiacLbl">
-                  <property name="text">
-                  <string>Zodiac/ Lunar System:</string>
-                  </property>
-                </widget>
-                </item>
-                <item>
-                <widget class="QTextEdit" name="zodiacTE"/>
-                </item>
-
                 <!-- Planets -->
                 <item>
                 <widget class="QLabel" name="planetsLbl">
@@ -386,16 +397,16 @@ p, li { white-space: pre-wrap; }
                 <widget class="QTextEdit" name="planetsTE"/>
                 </item>
 
-                <!-- Constellations -->
+                <!-- Zodiac / Lunar System -->
                 <item>
-                <widget class="QLabel" name="constellationsDescLbl">
+                <widget class="QLabel" name="zodiacLbl">
                   <property name="text">
-                  <string>Constellations:</string>
+                  <string>Zodiac/ Lunar System:</string>
                   </property>
                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="constellationsDescTE"/>
+                <widget class="QTextEdit" name="zodiacTE"/>
                 </item>
 
                 <!-- Milky Way -->
@@ -422,40 +433,16 @@ p, li { white-space: pre-wrap; }
                 <widget class="QTextEdit" name="otherObjectsTE"/>
                 </item>
 
-                <!-- About -->
+                 <!-- Constellations -->
                 <item>
-                <widget class="QLabel" name="aboutLbl">
+                <widget class="QLabel" name="constellationsDescLbl">
                   <property name="text">
-                  <string>About:</string>
+                  <string>Constellations:</string>
                   </property>
                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="aboutTE"/>
-                </item>
-
-                <!-- Authors -->
-                <item>
-                <widget class="QLabel" name="authorsLbl">
-                  <property name="text">
-                  <string>Authors:</string>
-                  </property>
-                </widget>
-                </item>
-                <item>
-                <widget class="QTextEdit" name="authorsTE"/>
-                </item>
-
-                <!-- Acknowledgements -->
-                <item>
-                <widget class="QLabel" name="acknowledgementsLbl">
-                  <property name="text">
-                  <string>Acknowledgements:</string>
-                  </property>
-                </widget>
-                </item>
-                <item>
-                <widget class="QTextEdit" name="acknowledgementsTE"/>
+                <widget class="QTextEdit" name="constellationsDescTE"/>
                 </item>
 
                 <!-- References -->
@@ -468,6 +455,18 @@ p, li { white-space: pre-wrap; }
                 </item>
                 <item>
                 <widget class="QTextEdit" name="referencesTE"/>
+                </item>
+
+                <!-- Acknowledgements -->
+                <item>
+                <widget class="QLabel" name="acknowledgementsLbl">
+                  <property name="text">
+                  <string>Acknowledgements:</string>
+                  </property>
+                </widget>
+                </item>
+                <item>
+                <widget class="QTextEdit" name="acknowledgementsTE"/>
                 </item>
 
                 <!-- Classification -->
