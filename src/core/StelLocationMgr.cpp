@@ -980,7 +980,7 @@ void StelLocationMgr::locationFromIP()
                     qDebug() << "permission granted, doing OS service lookup for location... postRequest ";
             }
 #else
-        if (qGeoPositionInfoSource)
+	if (qGeoPositionInfoSource  && (qGeoPositionInfoSource->supportedPositioningMethods() & QGeoPositionInfoSource::AllPositioningMethods))
         {
                 qDebug() << "Doing OS service lookup for location...";
                 // Trigger the actual Qt Location lookup from OS
