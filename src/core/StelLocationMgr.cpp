@@ -1267,6 +1267,7 @@ void StelLocationMgr::gpsQueryError(const QString &err)
 // slot that receives IP-based location data from the network.
 void StelLocationMgr::changeLocationFromNetworkLookup()
 {
+	const bool verbose=qApp->property("verbose").toBool();
 	StelCore *core=StelApp::getInstance().getCore();
 	QNetworkReply* networkReply = qobject_cast<QNetworkReply*>(sender());
 	if (!networkReply)
@@ -1291,7 +1292,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			double latitude=locMap.value("latitude").toDouble();
 			double longitude=locMap.value("longitude").toDouble();
 
-			qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity, ipRegion, ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
+			qInfo() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity, ipRegion, ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
 
 			if (latitude==0.0 && longitude==0.0 && ipTimeZone.isEmpty() && ipCountry.isEmpty() && ipCountryCode.isEmpty())
 				throw std::runtime_error("IP lookup provided bogus result.");
@@ -1317,17 +1318,20 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 				while (it.hasNext()) {
 					it.next();
 					const double distanceKm=it.value().distanceKm(longitude, latitude);
-					qDebug() << "Close location: " << it.value().name << " -- " << int(distanceKm) << "km";
+					if (verbose)
+						qDebug() << "Close location: " << it.value().name << " -- " << int(distanceKm) << "km";
 					if (distanceKm < minDistanceKm)
 					{
 						minDistanceKm=distanceKm;
 						candLoc=it.value();
-						qDebug() << "-- TAKEN!";
+						if (verbose)
+							qDebug() << "-- TAKEN!";
 					}
 				}
 				if (candLoc.isValid() && closeLocations.size()>0)
 				{
-					qDebug() << "Closest known place:" << candLoc.name << "at" << candLoc.distanceKm(longitude, latitude) << "km";
+					if (verbose)
+						qInfo() << "Closest known place:" << candLoc.name << "at" << candLoc.distanceKm(longitude, latitude) << "km";
 					// Consider result valid only in a meaningful distance. Light pollution is changing rapidly.
 					// Try 25 km, YMMV.
 					if (minDistanceKm < 25)
