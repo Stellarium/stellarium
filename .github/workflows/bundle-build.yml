@@ -21,7 +21,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: lukka/get-cmake@latest
     
     - name: Install Qt
       uses: jurplel/install-qt-action@v4
@@ -33,14 +32,11 @@ jobs:
         cache: true
         arch: 'win64_msvc2019_64'
         modules: 'qt3d qtactiveqt qtcharts qtconnectivity qtdatavis3d qtgrpc qthttpserver qtimageformats qtlanguageserver qtlocation qtlottie qtmultimedia qtnetworkauth qtpdf qtpositioning qtquick3dphysics qtquickeffectmaker qtremoteobjects qtscxml qtsensors qtserialbus qtserialport qtspeech qtvirtualkeyboard qtwebchannel qtwebengine qtwebsockets qtwebview debug_info qt5compat qtquick3d qtquicktimeline qtshadertools'
-    
+
     - name: Setup vcpkg
       uses: lukka/run-vcpkg@v11
-
-    - name: Run CMake consuming CMakePreset.json and run vcpkg to build packages
-      uses: lukka/run-cmake@v10
       with:
-        configurePreset: 'ninja-multi-vcpkg'
+        vcpkgGitCommitId: 'ef7dbf94b9198bc58f45951adcf1f041fcbc5ea0'
 
     - name: Install dependencies
       run: vcpkg install gettext tidy-html5
