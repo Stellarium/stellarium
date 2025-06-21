@@ -35,9 +35,11 @@ jobs:
     
     - name: Setup vcpkg
       uses: lukka/run-vcpkg@v11
+      with:
+        vcpkgGitCommitId: '7d259227a1fb6471a0253dd5ab7419835228f7d7'
 
     - name: Install dependencies
-      run: vcpkg install gettext:x64-windows libtidy:x64-windows
+      run: vcpkg install gettext tidy-html5
 
     - name: Cache Inno Setup
       id: cache-innosetup
