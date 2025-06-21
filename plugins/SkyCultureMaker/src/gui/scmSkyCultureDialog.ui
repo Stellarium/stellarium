@@ -275,16 +275,6 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="boundariesTab">
-         <attribute name="title">
-          <string>Boundaries</string>
-         </attribute>
-        </widget>
-        <widget class="QWidget" name="commonNamesTab">
-         <attribute name="title">
-          <string>Common Names</string>
-         </attribute>
-        </widget>
         <widget class="QWidget" name="descriptionTab">
           <attribute name="title">
             <string>Description</string>
@@ -493,6 +483,21 @@ p, li { white-space: pre-wrap; }
             </widget>
           </item>
         </layout>
+        </widget>
+        <widget class="QWidget" name="boundariesTab">
+         <attribute name="title">
+          <string>Boundaries</string>
+         </attribute>
+        </widget>
+        <widget class="QWidget" name="commonNamesTab">
+         <attribute name="title">
+          <string>Common Names</string>
+         </attribute>
+        </widget>
+        <widget class="QWidget" name="geoLocationTab">
+         <attribute name="title">
+          <string>Geolocation</string>
+         </attribute>
         </widget>
        </widget>
       </item>
