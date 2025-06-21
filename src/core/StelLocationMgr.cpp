@@ -956,6 +956,8 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 // lookup location from OS location service or IP address.
 void StelLocationMgr::locationFromIP()
 {
+// TODO: Find out how to properly setup geoclue2 on Linux, then reactivate.
+#ifdef Q_OS_WIN
 #if (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
         QLocationPermission locationPermission;
         // Try to get high-precision location first
@@ -972,12 +974,16 @@ void StelLocationMgr::locationFromIP()
 			    && qGeoPositionInfoSource
 			    && (qGeoPositionInfoSource->supportedPositioningMethods() & QGeoPositionInfoSource::AllPositioningMethods))
             {
-                    qDebug() << "permission granted, doing OS service lookup for location...";
-		    qDebug() << "Location provider:" << qGeoPositionInfoSource->sourceName();
-		    qDebug() << "Location provider supported caps:" << qGeoPositionInfoSource->supportedPositioningMethods();
+		    if (qApp->property("verbose").toBool())
+		    {
+			qDebug() << "permission granted, doing OS service lookup for location...";
+			qDebug() << "Location provider:" << qGeoPositionInfoSource->sourceName();
+			qDebug() << "Location provider supported caps:" << qGeoPositionInfoSource->supportedPositioningMethods();
+		    }
 		    // Trigger the actual Qt Location lookup from OS
                     qGeoPositionInfoSource->requestUpdate();
-                    qDebug() << "permission granted, doing OS service lookup for location... postRequest ";
+		    if (qApp->property("verbose").toBool())
+			qDebug() << "permission granted, doing OS service lookup for location... postRequest ";
             }
 #else
 	if (qGeoPositionInfoSource  && (qGeoPositionInfoSource->supportedPositioningMethods() & QGeoPositionInfoSource::AllPositioningMethods))
@@ -990,9 +996,10 @@ void StelLocationMgr::locationFromIP()
 #endif
             else
             {
-                    // OLD METHOD
+#endif
+		// OLD METHOD
 		    if (qApp->property("verbose").toBool())
-			    qDebug() << "permission not granted or no QGeoPositionInfoSource, doing old IP service lookup for location";
+			    qDebug() << "permission not granted or no QGeoPositionInfoSource, doing freegeoIP service lookup for location";
 
                     QSettings* conf = StelApp::getInstance().getSettings();
                     QNetworkRequest req( QUrl( conf->value("main/geoip_api_url", "https://freegeoip.stellarium.org/json/").toString() ) );
@@ -1000,9 +1007,11 @@ void StelLocationMgr::locationFromIP()
                     req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
                     QNetworkReply* networkReply=StelApp::getInstance().getNetworkAccessManager()->get(req);
                     connect(networkReply, SIGNAL(finished()), this, SLOT(changeLocationFromNetworkLookup()));
-            }
+#ifdef Q_OS_WIN
+	    }
 #if (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
         });
+#endif
 #endif
 }
 
