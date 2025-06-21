@@ -21,6 +21,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - uses: lukka/get-cmake@latest
     
     - name: Install Qt
       uses: jurplel/install-qt-action@v4
@@ -35,8 +36,11 @@ jobs:
     
     - name: Setup vcpkg
       uses: lukka/run-vcpkg@v11
+
+    - name: Run CMake consuming CMakePreset.json and run vcpkg to build packages
+      uses: lukka/run-cmake@v10
       with:
-        vcpkgGitCommitId: '7d259227a1fb6471a0253dd5ab7419835228f7d7'
+        configurePreset: 'ninja-multi-vcpkg'
 
     - name: Install dependencies
       run: vcpkg install gettext tidy-html5
