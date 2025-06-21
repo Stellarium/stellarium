@@ -10,6 +10,7 @@
 #include "StelProjector.hpp"
 #include "gui/ScmConstellationDialog.hpp"
 #include "gui/ScmSkyCultureDialog.hpp"
+#include "gui/ScmSkyCultureExportDialog.hpp"
 #include "gui/ScmStartDialog.hpp"
 
 #include "ScmDraw.hpp"
@@ -74,10 +75,11 @@ SkyCultureMaker::SkyCultureMaker()
 	setObjectName("SkyCultureMaker");
 	font.setPixelSize(25);
 
-	drawObj                = new scm::ScmDraw();
-	scmStartDialog         = new ScmStartDialog(this);
-	scmSkyCultureDialog    = new ScmSkyCultureDialog(this);
-	scmConstellationDialog = new ScmConstellationDialog(this);
+	drawObj                	  = new scm::ScmDraw();
+	scmStartDialog         	  = new ScmStartDialog(this);
+	scmSkyCultureDialog    	  = new ScmSkyCultureDialog(this);
+	scmConstellationDialog 	  = new ScmConstellationDialog(this);
+	scmSkyCultureExportDialog = new ScmSkyCultureExportDialog(this);
 }
 
 /*************************************************************************
@@ -90,6 +92,7 @@ SkyCultureMaker::~SkyCultureMaker()
 	delete scmStartDialog;
 	delete scmSkyCultureDialog;
 	delete scmConstellationDialog;
+	delete scmSkyCultureExportDialog;
 
 	if (currentSkyCulture != nullptr)
 	{
@@ -271,6 +274,14 @@ void SkyCultureMaker::setConstellationDialogVisibility(bool b)
 	setIsLineDrawEnabled(b);
 }
 
+void SkyCultureMaker::setSkyCultureExportDialogVisibility(bool b)
+{
+	if (b != scmSkyCultureExportDialog->visible())
+	{
+		scmSkyCultureExportDialog->setVisible(b);
+	}
+}
+
 void SkyCultureMaker::setIsLineDrawEnabled(bool b)
 {
 	isLineDrawEnabled = b;
@@ -323,6 +334,14 @@ void SkyCultureMaker::updateSkyCultureDialog()
 		return;
 	}
 	scmSkyCultureDialog->setConstellations(currentSkyCulture->getConstellations());
+}
+
+void SkyCultureMaker::setSkyCultureDialogInfoLabel(const QString &text)
+{
+	if (scmSkyCultureDialog != nullptr)
+	{
+		scmSkyCultureDialog->setInfoLabel(text);
+	}
 }
 
 void SkyCultureMaker::setSkyCultureDescription(const scm::Description &description)
