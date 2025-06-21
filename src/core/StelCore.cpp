@@ -1150,7 +1150,13 @@ void StelCore::returnToDefaultLocation()
 	if (loc.isValid())
 		moveObserverTo(loc, 1., 2.);
 	else
-		qCritical() << "StelCore::returnToDefaultLocation: Location " << loc.serializeToLine().replace('\t', '|') << "is invalid. Store an entry from the locations list as default location.";
+	{
+		qCritical() << "StelCore::returnToDefaultLocation: " << defaultLocationID << ": returned Location " <<
+			       loc.serializeToLine().replace('\t', '|') <<
+			       "is invalid. Store an entry from the locations list as default location.";
+		// move to lastResortLocation
+		moveObserverTo(locationMgr.getLastResortLocation(), 1., 2.);
+	}
 }
 
 void StelCore::returnToHome()
