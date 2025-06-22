@@ -123,8 +123,10 @@ public:
 
 	/**
 	 * @brief Returns the constellation data as a JSON object.
+	 * 
+	 * @param skyCultureId The ID of the sky culture to which this constellation belongs.
 	 */
-	QJsonObject toJson(const QString &skyCultureName) const;
+	QJsonObject toJson(const QString &skyCultureId) const;
 
 private:
 	/// Identifier of the constellation

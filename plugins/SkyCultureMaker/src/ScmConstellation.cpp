@@ -112,7 +112,7 @@ void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter) con
 	drawNames(core, sPainter, defaultConstellationNameColor);
 }
 
-QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureName) const
+QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId) const
 {
 	QJsonObject json;
 
@@ -136,7 +136,7 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureName) const
 		}
 	}
 
-	json["id"]    = "CON " + skyCultureName + " " + id;
+	json["id"]    = "CON " + skyCultureId + " " + id;
 	json["lines"] = linesArray;
 
 	// Assemble common name object

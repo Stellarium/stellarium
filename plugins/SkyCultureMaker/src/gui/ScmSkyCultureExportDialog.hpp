@@ -3,7 +3,6 @@
 
 #include "SkyCultureMaker.hpp"
 #include "StelDialogSeparate.hpp"
-#include <QObject>
 
 class Ui_scmSkyCultureExportDialog;
 

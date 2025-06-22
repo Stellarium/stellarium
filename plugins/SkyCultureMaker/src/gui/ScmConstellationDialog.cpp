@@ -275,7 +275,7 @@ void ScmConstellationDialog::saveConstellation()
 		scm::ScmSkyCulture *culture = maker->getCurrentSkyCulture();
 		assert(culture != nullptr); // already checked by canConstellationBeSaved
 
-		scm::ScmConstellation constellation = culture->addConstellation(id, coordinates, stars);
+		scm::ScmConstellation &constellation = culture->addConstellation(id, coordinates, stars);
 
 		constellation.setEnglishName(constellationEnglishName);
 		constellation.setNativeName(constellationNativeName);
