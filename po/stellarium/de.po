@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-06-19 15:17+0700\n"
+"POT-Creation-Date: 2025-06-21 13:18+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2025\n"
 "Language-Team: German (https://app.transifex.com/stellarium/teams/80998/de/)\n"
@@ -35328,6 +35328,10 @@ msgstr ""
 "Verarbeitung abgeschlossen! Auf Mitte zentrieren, Textur testen, und zum "
 "Texturatlas hinzufügen."
 
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:535
+msgid "Are you sure to recover the solution?"
+msgstr ""
+
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:570
 msgid "Stop test"
 msgstr "Test beenden"
@@ -35336,6 +35340,12 @@ msgstr "Test beenden"
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:533
 msgid "Test this texture"
 msgstr "Diese Textur probieren"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:695
+msgid ""
+"Caution! Are you sure to add this texture? It will only take effect after "
+"restarting Stellarium."
+msgstr ""
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:726
 msgid "Failed to load texture configuration."
@@ -35360,6 +35370,10 @@ msgstr "Ungültiges Bildformat."
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:784
 msgid "Failed to copy image file."
 msgstr "Bilddatei konnte nicht kopiert werden."
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:814
+msgid "Are you sure to remove this texture?"
+msgstr ""
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:826
 msgid "Texture removed."
