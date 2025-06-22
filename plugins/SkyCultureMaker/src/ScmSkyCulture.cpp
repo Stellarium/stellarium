@@ -104,24 +104,27 @@ bool scm::ScmSkyCulture::saveDescriptionAsMarkdown(QFile file)
 	if (file.open(QIODevice::WriteOnly | QIODevice::Text))
 	{
 		const scm::Description &desc = ScmSkyCulture::description;
+		const scm::License license = scm::LICENSES.at(desc.license);
 
 		QTextStream out(&file);
 		out << "# " << desc.name << "\n\n";
-		out << "## Geographical Region\n" << desc.geoRegion << "\n\n";
-		out << "## Classification\n " << classificationTypeToString(desc.classification) << "\n\n";
+		out << "## Authors\n" << desc.authors << "\n\n";
+		out << "## License\n### " << license.name << "\n"<< license.description << "\n\n";
+		out << "## Culture Description\n" << desc.cultureDescription << "\n\n";
+		out << "## About\n" << desc.about << "\n\n";
 
+		out << "## Geographical Region\n" << desc.geoRegion << "\n\n";
 		out << "## Sky\n" << desc.sky << "\n\n";
 		out << "## Moon and Sun\n" << desc.moonAndSun << "\n\n";
-		out << "## Zodiac\n" << desc.zodiac << "\n\n";
 		out << "## Planets\n" << desc.planets << "\n\n";
-		out << "## Constellations\n" << desc.constellations << "\n\n";
+		out << "## Zodiac\n" << desc.zodiac << "\n\n";
 		out << "## Milky Way\n" << desc.milkyWay << "\n\n";
 		out << "## Other Celestial Objects\n" << desc.otherObjects << "\n\n";
 
-		out << "## About\n" << desc.about << "\n\n";
-		out << "## Authors\n" << desc.authors << "\n\n";
+		out << "## Constellations\n" << desc.constellations << "\n\n";
+		out << "## References\n" << desc.references << "\n\n";
 		out << "## Acknowledgements\n" << desc.acknowledgements << "\n\n";
-		out << "## References\n" << desc.references << "\n";
+		out << "## Classification\n " << classificationTypeToString(desc.classification) << "\n\n";
 
 		try
 		{

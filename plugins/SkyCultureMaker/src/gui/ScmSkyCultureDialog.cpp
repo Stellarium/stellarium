@@ -230,20 +230,24 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 {
 	scm::Description desc;
 
-	desc.name             = ui->skyCultureNameTE->toPlainText();
-	desc.geoRegion        = ui->geoRegionTE->toPlainText();
-	desc.sky              = ui->skyTE->toPlainText();
-	desc.moonAndSun       = ui->moonSunTE->toPlainText();
-	desc.zodiac           = ui->zodiacTE->toPlainText();
-	desc.planets          = ui->planetsTE->toPlainText();
-	desc.constellations   = ui->constellationsDescTE->toPlainText();
-	desc.milkyWay         = ui->milkyWayTE->toPlainText();
-	desc.otherObjects     = ui->otherObjectsTE->toPlainText();
-	desc.about            = ui->aboutTE->toPlainText();
-	desc.authors          = ui->authorsTE->toPlainText();
-	desc.acknowledgements = ui->acknowledgementsTE->toPlainText();
-	desc.references       = ui->referencesTE->toPlainText();
-	desc.classification   = ui->classificationCB->currentData().value<scm::ClassificationType>();
+	desc.name               = ui->skyCultureNameTE->toPlainText();
+	desc.authors            = ui->authorsTE->toPlainText();
+	desc.license            = maker->getCurrentSkyCulture()->getLicense();
+	desc.cultureDescription = ui->cultureDescriptionTE->toPlainText();
+	desc.about              = ui->aboutTE->toPlainText();
+
+	desc.geoRegion          = ui->geoRegionTE->toPlainText();
+	desc.sky                = ui->skyTE->toPlainText();
+	desc.moonAndSun         = ui->moonSunTE->toPlainText();
+	desc.planets            = ui->planetsTE->toPlainText();
+	desc.zodiac             = ui->zodiacTE->toPlainText();
+	desc.milkyWay           = ui->milkyWayTE->toPlainText();
+	desc.otherObjects       = ui->otherObjectsTE->toPlainText();
+
+	desc.constellations     = ui->constellationsDescTE->toPlainText();
+	desc.references         = ui->referencesTE->toPlainText();
+	desc.acknowledgements   = ui->acknowledgementsTE->toPlainText();
+	desc.classification     = ui->classificationCB->currentData().value<scm::ClassificationType>();
 
 	return desc;
 }
