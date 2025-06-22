@@ -2,14 +2,14 @@
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2025
 # Daniel Nylander <po@danielnylander.se>, 2025
-# Karl Birgersson <birgerssonkarl@outlook.com>, 2025
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025
+# Karl Birgersson <birgerssonkarl@outlook.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025\n"
+"Last-Translator: Karl Birgersson <birgerssonkarl@outlook.com>, 2025\n"
 "Language-Team: Swedish (https://app.transifex.com/stellarium/teams/80998/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,6 +44,8 @@ msgstr "Bambun"
 #. Abbreviation of constellation in Navajo sky culture
 #. Abbreviation of constellation in Norse sky culture
 #. Abbreviation of constellation in Northern Andes sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 #. Abbreviation of constellation in Sami sky culture
 #. Abbreviation of constellation in Samoan sky culture
 #. Abbreviation of constellation in Sardinian sky culture
@@ -83,6 +85,8 @@ msgstr "Tre på rad"
 #. Abbreviation of constellation in Navajo sky culture
 #. Abbreviation of constellation in Norse sky culture
 #. Abbreviation of constellation in Northern Andes sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 #. Abbreviation of constellation in Sami sky culture
 #. Abbreviation of constellation in Samoan sky culture
 #. Abbreviation of constellation in Sardinian sky culture
@@ -123,6 +127,8 @@ msgstr "Fågelflykt"
 #. Abbreviation of constellation in Navajo sky culture
 #. Abbreviation of constellation in Norse sky culture
 #. Abbreviation of constellation in Northern Andes sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 #. Abbreviation of constellation in Sami sky culture
 #. Abbreviation of constellation in Samoan sky culture
 #. Abbreviation of constellation in Sardinian sky culture
@@ -163,6 +169,8 @@ msgstr "Griptången"
 #. Abbreviation of constellation in Navajo sky culture
 #. Abbreviation of constellation in Norse sky culture
 #. Abbreviation of constellation in Northern Andes sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 #. Abbreviation of constellation in Sami sky culture
 #. Abbreviation of constellation in Samoan sky culture
 #. Abbreviation of constellation in Sardinian sky culture
@@ -202,6 +210,8 @@ msgstr "Bläckfiskarmen"
 #. Abbreviation of constellation in Navajo sky culture
 #. Abbreviation of constellation in Norse sky culture
 #. Abbreviation of constellation in Northern Andes sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 #. Abbreviation of constellation in Sami sky culture
 #. Abbreviation of constellation in Samoan sky culture
 #. Abbreviation of constellation in Sardinian sky culture
@@ -269,6 +279,8 @@ msgstr "Skarvyxa"
 #. Abbreviation of constellation in Maya sky culture
 #. Abbreviation of asterism in Modern (Chinese) sky culture
 #. Abbreviation of constellation in Navajo sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 #. Abbreviation of constellation in Sami sky culture
 #. Abbreviation of constellation in Samoan sky culture
 #. Abbreviation of constellation in Sardinian sky culture
@@ -300,6 +312,8 @@ msgstr "Bärstaven"
 #. Abbreviation of constellation in Maya sky culture
 #. Abbreviation of asterism in Modern (Chinese) sky culture
 #. Abbreviation of constellation in Navajo sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 #. Abbreviation of constellation in Sami sky culture
 #. Abbreviation of constellation in Samoan sky culture
 #. Abbreviation of constellation in Sardinian sky culture
@@ -356,6 +370,8 @@ msgstr "Taroväxt"
 #. Abbreviation of constellation in Macedonian sky culture
 #. Abbreviation of constellation in Maya sky culture
 #. Abbreviation of asterism in Modern (Chinese) sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 #. Abbreviation of constellation in Sami sky culture
 #. Abbreviation of constellation in Samoan sky culture
 #. Abbreviation of constellation in Sardinian sky culture
@@ -385,6 +401,8 @@ msgstr "Nätet"
 #. Abbreviation of constellation in Macedonian sky culture
 #. Abbreviation of constellation in Maya sky culture
 #. Abbreviation of asterism in Modern (Chinese) sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 #. Abbreviation of constellation in Samoan sky culture
 #. Abbreviation of constellation in Sardinian sky culture
 #. Abbreviation of constellation in Seri sky culture
@@ -431,9 +449,13 @@ msgstr "Fjättrade molnet"
 msgid "The Running Cloud"
 msgstr "Springande molnet"
 
-#. Anutan name for NAME Venus, native: Te Petuu Ao/Tiuriuri
-msgid "Te Petuu Ao/Tiuriuri"
-msgstr "Te Petuu Ao/Tiuriuri"
+#. Anutan name for NAME Venus, native: Te Petuu Ao
+msgid "Te Petuu Ao"
+msgstr "Te Petuu Ao"
+
+#. Anutan name for NAME Venus, native: Tiuriuri
+msgid "Tiuriuri"
+msgstr "Tiuriuri"
 
 #. Arabic (Al-Sufi) constellation, native: الدب الأصغر
 #. Modern (Chinese) constellation, native: Ursa Minor
@@ -12074,11 +12096,27 @@ msgstr "Framdelen 2"
 msgid "The Front 1"
 msgstr "Framdelen 1"
 
-#. Arabic (Arabian Peninsula) name for NAME Venus, native: نجمة الصبح - نجمة
-#. االعشا - الجغمة - نجمة الهودان
+#. Arabic (Arabian Peninsula) name for NAME Venus, native: نجمة االعشا
+#. Modern name for NAME Venus, native: Vesper
+msgid "Evening Star"
+msgstr "Aftonstjärnan "
+
+#. Arabic (Arabian Peninsula) name for NAME Venus, native: نجمة الصبح
+#. Modern name for NAME Venus, native: Lucifer
+#. Romanian name for HIP 32349
+#. Sami constellation
+#. Samoan name for NAME Venus, native: Fētūao
+msgid "Morning Star"
+msgstr "Morgonstjärnan"
+
+#. Arabic (Arabian Peninsula) name for NAME Venus, native: الجغمة
+msgid "The Sip"
+msgstr "Supen"
+
+#. Arabic (Arabian Peninsula) name for NAME Venus, native: نجمة الهودان
 #. Al-Hawdan is a proper name
-msgid "Morning Star - Evening Star - The Sip - The Star Of Al-Hawdan"
-msgstr "Morgonstjärnan - Kvällsstjärnan - Supen - Al-Hawdans stjärna"
+msgid "The Star Of Al-Hawdan"
+msgstr "Al-Hawdans stjärna"
 
 #. Arabic (Indigenous) constellation, native: الفرقدان
 #. Arabic (Lunar Mansions) constellation, native: الفرقدان
@@ -14043,6 +14081,8 @@ msgstr "En riklig"
 #. Abbreviation of constellation in Macedonian sky culture
 #. Abbreviation of constellation in Maya sky culture
 #. Abbreviation of asterism in Modern (Chinese) sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 #. Abbreviation of constellation in Samoan sky culture
 #. Abbreviation of constellation in Sardinian sky culture
 #. Abbreviation of constellation in Seri sky culture
@@ -14067,6 +14107,8 @@ msgstr "Värdighetsasterism"
 #. Abbreviation of constellation in Macedonian sky culture
 #. Abbreviation of constellation in Maya sky culture
 #. Abbreviation of asterism in Modern (Chinese) sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 #. Abbreviation of constellation in Samoan sky culture
 #. Abbreviation of constellation in Seri sky culture
 msgctxt "abbreviation"
@@ -14091,6 +14133,8 @@ msgstr "Vagn"
 #. Abbreviation of constellation in Macedonian sky culture
 #. Abbreviation of constellation in Maya sky culture
 #. Abbreviation of asterism in Modern (Chinese) sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 #. Abbreviation of constellation in Samoan sky culture
 msgctxt "abbreviation"
 msgid "014"
@@ -14109,6 +14153,8 @@ msgstr "Fästa oket"
 #. Abbreviation of constellation in Korean sky culture
 #. Abbreviation of constellation in Macedonian sky culture
 #. Abbreviation of asterism in Modern (Chinese) sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 msgctxt "abbreviation"
 msgid "017"
 msgstr ""
@@ -14128,6 +14174,8 @@ msgstr "Himmelsvagn"
 #. Abbreviation of constellation in Korean sky culture
 #. Abbreviation of constellation in Macedonian sky culture
 #. Abbreviation of asterism in Modern (Chinese) sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 msgctxt "abbreviation"
 msgid "018"
 msgstr ""
@@ -14148,6 +14196,8 @@ msgstr "Det sublima templets arvinge, Anus förste son"
 #. Abbreviation of constellation in Korean sky culture
 #. Abbreviation of constellation in Macedonian sky culture
 #. Abbreviation of asterism in Modern (Chinese) sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 msgctxt "abbreviation"
 msgid "019"
 msgstr ""
@@ -14164,6 +14214,8 @@ msgstr "Gethona"
 #. Abbreviation of constellation in Egyptian (Dendera) sky culture
 #. Abbreviation of constellation in Korean sky culture
 #. Abbreviation of asterism in Modern (Chinese) sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 msgctxt "abbreviation"
 msgid "020"
 msgstr ""
@@ -14195,6 +14247,8 @@ msgstr "Hund"
 #. Abbreviation of constellation in Egyptian sky culture
 #. Abbreviation of constellation in Korean sky culture
 #. Abbreviation of asterism in Modern (Chinese) sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 msgctxt "abbreviation"
 msgid "021"
 msgstr ""
@@ -14777,6 +14831,8 @@ msgstr "Tacka"
 #. Abbreviation of constellation in Korean sky culture
 #. Abbreviation of constellation in Macedonian sky culture
 #. Abbreviation of asterism in Modern (Chinese) sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 msgctxt "abbreviation"
 msgid "016"
 msgstr ""
@@ -14797,6 +14853,8 @@ msgstr "Räv"
 #. Abbreviation of constellation in Korean sky culture
 #. Abbreviation of constellation in Macedonian sky culture
 #. Abbreviation of asterism in Modern (Chinese) sky culture
+#. Abbreviation of constellation in Ruanui sky: Tahiti and Society islands sky
+#. culture
 msgctxt "abbreviation"
 msgid "015"
 msgstr ""
@@ -27668,6 +27726,8 @@ msgstr "Mars"
 #. Chinese Chenzhuo Sky (3rd Century) name for NAME Mercury, native: 辰星
 #. Chinese Song Dynasty Sky name for NAME Mercury, native: 辰星
 #. Mongolian name for NAME Mercury, native: Bud
+#. Ruanui sky: Tahiti and Society islands name for NAME Mercury, native:
+#. Ta'ero
 msgid "Mercury"
 msgstr "Merkurius"
 
@@ -27675,6 +27735,7 @@ msgstr "Merkurius"
 #. Chinese Song Dynasty Sky name for NAME Moon, native: 太阴
 #. Korean constellation, native: Wol
 #. Mongolian name for NAME Moon, native: Sar
+#. Ruanui sky: Tahiti and Society islands name for NAME Moon, native: Marama
 #. Samoan name for NAME Moon, native: Māsina
 #. Tongan name for NAME Moon, native: Mahina
 msgid "Moon"
@@ -27690,6 +27751,7 @@ msgstr "Saturnus"
 #. Chinese Song Dynasty Sky name for NAME Sun, native: 太阳
 #. Korean constellation, native: iil
 #. Mongolian name for NAME Sun, native: Nar
+#. Ruanui sky: Tahiti and Society islands name for NAME Sun, native: Rā
 #. Samoan name for NAME Sun, native: Lā
 #. Tongan name for NAME Sun, native: La'a
 msgid "Sun"
@@ -27697,6 +27759,7 @@ msgstr "Solen"
 
 #. Chinese Chenzhuo Sky (3rd Century) name for NAME Venus, native: 太白
 #. Chinese Song Dynasty Sky name for NAME Venus, native: 太白
+#. Modern name for NAME Venus, native: Venus
 #. Mongolian name for NAME Venus, native: Sugar
 #. Tongan name for NAME Venus, native: Tapukitea
 msgid "Venus"
@@ -39262,7 +39325,7 @@ msgstr ""
 #. Name of zodiac sign or name of lunar mansion in Modern sky culture
 msgctxt "western zodiac sign"
 msgid "Bull"
-msgstr ""
+msgstr "Oxen"
 
 #. Name of zodiac sign or name of lunar mansion in Modern sky culture
 msgctxt "western zodiac sign"
@@ -44421,6 +44484,7 @@ msgid "7.Horse"
 msgstr "7.Häst"
 
 #. Mongolian name for NAME Earth, native: Delkhii
+#. Ruanui sky: Tahiti and Society islands name for NAME Earth
 #. Samoan name for NAME Earth, native: Lalolagi
 msgid "Earth"
 msgstr "Jorden"
@@ -44847,11 +44911,6 @@ msgstr "Grisens ljusa stjärna (alarmklockan)"
 msgid "Alnath"
 msgstr "Alnath"
 
-#. Romanian name for HIP 32349
-#. Sami constellation
-msgid "Morning Star"
-msgstr "Morgonstjärnan"
-
 #. Romanian name for HIP 36850
 msgid "Romulus"
 msgstr "Romulus"
@@ -44867,6 +44926,113 @@ msgstr "Lilla hyndan"
 #. Romanian name for HIP 91262
 msgid "The Shepherd (The Stars Queen)"
 msgstr "Herden (Drottningstjärnan)"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Tau-hā
+msgid "Cluster of four"
+msgstr "Kluster om fyra"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Matau-a-maui
+msgid "Maui's hook"
+msgstr "Mauis fiskekrok"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Matari'i
+msgid "Small eyes"
+msgstr "Små ögon"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Fa'a-nui
+msgid "Great valley"
+msgstr "Stor dal"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Fa'a-iti
+msgid "Little valley"
+msgstr "Liten dal"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Atu-tahi
+msgid "Single bonito"
+msgstr "Ensam bonito"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Atu-
+#. ra'i-putuputu
+msgid "Numerous heavenly fishes"
+msgstr "Flertal himmelsfiskar"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Pira'e-tea
+msgid "White sea swallow"
+msgstr "Vit fisktärna"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Metua-'ai-
+#. papa
+msgid "Parent eater of rock"
+msgstr "Övre stenätare"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Nā-hui-
+#. tārava-ia-mere
+msgid "The aligned stars of Mere"
+msgstr "Meres rad av stjärnor"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Moana-'ohu-
+#. noa-'ei-ha'amoe-hara
+msgid "Vortex ocean in which to lose crime"
+msgstr "Malström i vilken brott försvinner"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Nā-'ainanu
+msgid "The two asking for food"
+msgstr "De två som frågar efter mat"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Fa'a-tā-
+#. potupotu
+msgid "Open valley"
+msgstr "Öppen dal"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Nā-matarua
+msgid "Two eyes"
+msgstr "Två ögon"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Uru-meremere
+msgid "Forest of parental yearnings"
+msgstr "Föräldralängtans skog"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Te-'uo-a-hiro
+msgid "Hiro's kite"
+msgstr "Hiros drake"
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Rua-o-mere
+msgid "Cavern of the parental yearnings"
+msgstr ""
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Tū-i-te-
+#. moana-urifā
+msgid "Stand in the sea of rank odor"
+msgstr ""
+
+#. Ruanui sky: Tahiti and Society islands constellation, native: Pipiri-ma
+msgid "The greedy"
+msgstr ""
+
+#. Ruanui sky: Tahiti and Society islands name for NAME Jupiter, native:
+#. Ta'urua-nui-i-tu'i-i-te-porou-o-te-ra'i
+msgid "Great festivity who struck the zenith of the sky"
+msgstr ""
+
+#. Ruanui sky: Tahiti and Society islands name for NAME Mars, native:
+#. Maunu-'ura
+msgid "Fading redness"
+msgstr ""
+
+#. Ruanui sky: Tahiti and Society islands name for NAME Saturn, native:
+#. Fetūtea
+msgid "Pale star"
+msgstr ""
+
+#. Ruanui sky: Tahiti and Society islands name for NAME Venus, native:
+#. Ta'urua-nui-e-horo-i-te-po'ipo'i
+msgid "Great festivity who runs in the morning"
+msgstr ""
+
+#. Ruanui sky: Tahiti and Society islands name for NAME Venus, native:
+#. Ta'urua-nui-e-horo-i-te-ahiahi
+msgid "Great festivity who runs in the evening"
+msgstr ""
 
 #. Russian (Siberian) constellation, native: Лось, pronounce: Los’
 msgid "Elk"
@@ -45042,8 +45208,8 @@ msgid "Garland Star"
 msgstr "Kransstjärnan"
 
 #. Samoan name for NAME Venus, native: Tapu'itea
-msgid "Morning Star / Forbidden Radiance"
-msgstr "Morgonstjärnan / Förbjudna strålen"
+msgid "Forbidden Radiance"
+msgstr ""
 
 #. Sardinian constellation, native: Su Pinnetu
 msgid "The Hut"
@@ -45674,12 +45840,12 @@ msgid "Met"
 msgstr "Met"
 
 #. Vanuatu (Netwar) name for NAME Venus, native: Fétukai
-msgid "Fétukai (on morning sky)"
-msgstr "Fétukai (på morgonhimlen)"
+msgid "Fétukai"
+msgstr ""
 
 #. Vanuatu (Netwar) name for NAME Venus, native: Kéwita
-msgid "Kéwita (on evening sky)"
-msgstr "Kéwita (på kvällshimlen)"
+msgid "Kéwita"
+msgstr ""
 
 #. Xhosa constellation, native: isiLimela
 #. Zulu constellation, native: isiLimela
