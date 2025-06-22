@@ -28,6 +28,7 @@ SET( SkyCultureMaker_SRCS
      gui/ScmConstellationDialog.cpp
      gui/ScmSkyCultureDialog.hpp
      gui/ScmSkyCultureDialog.cpp
+     gui/ScmConvertDialog.hpp
 
      types/CoordinateLine.hpp
      types/Drawing.hpp
@@ -36,6 +37,12 @@ SET( SkyCultureMaker_SRCS
      types/StarLine.hpp
      types/StarPoint.hpp
 )
+
+if(SCM_CONVERTER_ENABLED)
+  list(APPEND SkyCultureMaker_SRCS
+    gui/ScmConvertDialog.cpp
+  )
+endif()
 
 SET( SCM_UIS
      gui/scmConstellationDialog.ui

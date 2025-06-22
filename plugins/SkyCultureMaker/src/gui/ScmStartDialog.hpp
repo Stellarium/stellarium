@@ -6,8 +6,7 @@
 #include <QObject>
 
 #ifdef SCM_CONVERTER_ENABLED_CPP
-# include "SkyCultureConverter.hpp"
-# include "unarr.h"
+# include "ScmConvertDialog.hpp"
 #endif
 
 class Ui_scmStartDialog;
@@ -31,6 +30,9 @@ private slots:
 private:
 	Ui_scmStartDialog *ui  = nullptr;
 	SkyCultureMaker *maker = nullptr;
+#ifdef SCM_CONVERTER_ENABLED_CPP
+	ScmConvertDialog *converterDialog = nullptr;
+#endif
 };
 
 #endif // SCMSTARTDIALOG_HPP
