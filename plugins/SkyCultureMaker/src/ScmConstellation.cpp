@@ -8,7 +8,7 @@ scm::ScmConstellation::ScmConstellation(const std::vector<scm::CoordinateLine> &
 	QSettings *conf = StelApp::getInstance().getSettings();
 	constellationNameFont.setPixelSize(conf->value("viewing/constellation_font_size", 15).toInt());
 
-	QString defaultColor = conf->value("color/default_color", "0.5,0.5,0.7").toString();
+	QString defaultColor          = conf->value("color/default_color", "0.5,0.5,0.7").toString();
 	defaultConstellationLineColor = Vec3f(conf->value("color/const_lines_color", defaultColor).toString());
 	defaultConstellationNameColor = Vec3f(conf->value("color/const_names_color", defaultColor).toString());
 

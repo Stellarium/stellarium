@@ -1,6 +1,7 @@
 #include "ScmSkyCultureDialog.hpp"
 #include "ui_scmSkyCultureDialog.h"
 #include <cassert>
+#include <QDebug>
 
 ScmSkyCultureDialog::ScmSkyCultureDialog(SkyCultureMaker *maker)
 	: StelDialogSeparate("ScmSkyCultureDialog")
@@ -13,6 +14,8 @@ ScmSkyCultureDialog::ScmSkyCultureDialog(SkyCultureMaker *maker)
 ScmSkyCultureDialog::~ScmSkyCultureDialog()
 {
 	delete ui;
+
+	qDebug() << "Unloaded the ScmSkyCultureDialog";
 }
 
 void ScmSkyCultureDialog::setConstellations(std::vector<scm::ScmConstellation> *constellations)
@@ -123,42 +126,22 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	}
 	else
 	{
-		ui->infoLbl->setText("ERROR: Please select a license for the sky culture.");
+		ui->infoLbl->setText("WARNING: Please select a license for the sky culture.");
 		return;
 	}
 
 	// check if description is complete
 	if (!desc.isComplete())
 	{
-		ui->infoLbl->setText("ERROR: The sky culture description is not complete.");
+		ui->infoLbl->setText("WARNING: The sky culture description is not complete.");
 		return;
 	}
 
-	// If valid, save the sky culture as markdown file
+	// If valid, set the sky culture description
 	maker->setSkyCultureDescription(desc);
-	maker->saveSkyCultureDescription();
 
-	// only for debugging purposes
-	if (constellations != nullptr)
-	{
-		qDebug() << "[Constellations as JSON]:";
-		for (const auto &constellation : *constellations)
-		{
-			QJsonObject obj = constellation.toJson(name);
-			QJsonDocument doc(obj);
-			qDebug().noquote() << doc.toJson(QJsonDocument::Compact);
-		}
-	}
-	bool success = maker->saveSkyCultureDescription();
-
-	if (success)
-	{
-		ui->infoLbl->setText("Sky culture saved successfully.");
-	}
-	else
-	{
-		ui->infoLbl->setText("ERROR: Could not save the sky culture.");
-	}
+	// open export dialog
+	maker->setSkyCultureExportDialogVisibility(true);
 }
 
 void ScmSkyCultureDialog::saveLicense()
@@ -247,20 +230,36 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 {
 	scm::Description desc;
 
-	desc.name             = ui->skyCultureNameTE->toPlainText();
-	desc.geoRegion        = ui->geoRegionTE->toPlainText();
-	desc.sky              = ui->skyTE->toPlainText();
-	desc.moonAndSun       = ui->moonSunTE->toPlainText();
-	desc.zodiac           = ui->zodiacTE->toPlainText();
-	desc.planets          = ui->planetsTE->toPlainText();
-	desc.constellations   = ui->constellationsDescTE->toPlainText();
-	desc.milkyWay         = ui->milkyWayTE->toPlainText();
-	desc.otherObjects     = ui->otherObjectsTE->toPlainText();
-	desc.about            = ui->aboutTE->toPlainText();
-	desc.authors          = ui->authorsTE->toPlainText();
-	desc.acknowledgements = ui->acknowledgementsTE->toPlainText();
-	desc.references       = ui->referencesTE->toPlainText();
-	desc.classification   = ui->classificationCB->currentData().value<scm::ClassificationType>();
+	desc.name               = ui->skyCultureNameTE->toPlainText();
+	desc.authors            = ui->authorsTE->toPlainText();
+	desc.license            = maker->getCurrentSkyCulture()->getLicense();
+	desc.cultureDescription = ui->cultureDescriptionTE->toPlainText();
+	desc.about              = ui->aboutTE->toPlainText();
+
+	desc.geoRegion          = ui->geoRegionTE->toPlainText();
+	desc.sky                = ui->skyTE->toPlainText();
+	desc.moonAndSun         = ui->moonSunTE->toPlainText();
+	desc.planets            = ui->planetsTE->toPlainText();
+	desc.zodiac             = ui->zodiacTE->toPlainText();
+	desc.milkyWay           = ui->milkyWayTE->toPlainText();
+	desc.otherObjects       = ui->otherObjectsTE->toPlainText();
+
+	desc.constellations     = ui->constellationsDescTE->toPlainText();
+	desc.references         = ui->referencesTE->toPlainText();
+	desc.acknowledgements   = ui->acknowledgementsTE->toPlainText();
+	desc.classification     = ui->classificationCB->currentData().value<scm::ClassificationType>();
 
 	return desc;
+}
+
+void ScmSkyCultureDialog::setInfoLabel(const QString &text)
+{
+	if (ui && dialog)
+	{
+		ui->infoLbl->setText(text);
+	}
+	else
+	{
+		qDebug() << "ScmSkyCultureDialog: UI or dialog is not initialized.";
+	}
 }

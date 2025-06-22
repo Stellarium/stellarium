@@ -13,10 +13,6 @@
 #include <QString>
 #include <QVariant>
 
-// debugging
-#include <QJsonDocument>
-#include <QJsonObject>
-
 class Ui_scmSkyCultureDialog;
 
 class ScmSkyCultureDialog : public StelDialogSeparate
@@ -34,6 +30,13 @@ public:
 	 * @param constellations The vector of constellations to be set.
 	 */
 	void setConstellations(std::vector<scm::ScmConstellation> *constellations);
+
+	/**
+	 * @brief Sets the info label text.
+	 *
+	 * @param text The text to set in the info label.
+	 */
+	void setInfoLabel(const QString &text);
 
 public slots:
 	void retranslate() override;

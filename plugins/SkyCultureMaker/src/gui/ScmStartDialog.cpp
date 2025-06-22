@@ -1,6 +1,7 @@
 #include "ScmStartDialog.hpp"
 #include "ui_scmStartDialog.h"
 #include <cassert>
+#include <QDebug>
 
 #ifdef SCM_CONVERTER_ENABLED_CPP
 # include "ScmConvertDialog.hpp"
@@ -27,6 +28,8 @@ ScmStartDialog::~ScmStartDialog()
 	{
 		delete ui;
 	}
+
+	qDebug() << "Unloaded the ScmStartDialog";
 }
 
 void ScmStartDialog::retranslate()
