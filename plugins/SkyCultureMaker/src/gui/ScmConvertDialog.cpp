@@ -1,13 +1,75 @@
 #include "ScmConvertDialog.hpp"
+#include "StelMainView.hpp"
+#include "ui_scmConvertDialog.h"
 #include <QWidget>
-#include "Dialog.hpp"
-
-# define SCM_CONVERTER_ENABLED_CPP
 
 #ifdef SCM_CONVERTER_ENABLED_CPP
 
 # include "SkyCultureConverter.hpp"
 
+ScmConvertDialog::ScmConvertDialog()
+	: StelDialog("ScmConvertDialog")
+	, ui(new Ui_scmConvertDialog)
+	, watcher(new QFutureWatcher<QString>(this))
+{
+	// The dialog widget is created in StelDialog::setVisible, not in the constructor.
+	// The ScmConvertDialog C++ instance is owned by ScmStartDialog.
+}
+
+ScmConvertDialog::~ScmConvertDialog()
+{
+	if (ui != nullptr)
+	{
+		delete ui;
+	}
+}
+
+void ScmConvertDialog::retranslate()
+{
+	if (dialog)
+	{
+		ui->retranslateUi(dialog);
+	}
+}
+
+void ScmConvertDialog::createDialogContent()
+{
+	ui->setupUi(dialog);
+
+	// Connect signals
+	connect(ui->browseButton, &QPushButton::clicked, this, &ScmConvertDialog::browseFile);
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmConvertDialog::closeDialog);
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
+	connect(ui->convertButton, &QPushButton::clicked, this, &ScmConvertDialog::convert);
+	connect(watcher, &QFutureWatcher<QString>::finished, this, &ScmConvertDialog::onConversionFinished);
+}
+
+void ScmConvertDialog::closeDialog()
+{
+	StelDialog::close();
+}
+
+void ScmConvertDialog::browseFile()
+{
+	const QString file = QFileDialog::getOpenFileName(&StelMainView::getInstance(), tr("Select an archive"),
+	                                                  QDir::homePath(), tr("Archives (*.zip *.rar *.7z *.tar)"));
+	if (!file.isEmpty())
+	{
+		ui->filePathLineEdit->setText(file);
+	}
+}
+
+void ScmConvertDialog::onConversionFinished()
+{
+	QString resultText = watcher->future().result();
+	ui->convertResultLabel->setText(resultText);
+	QDir(tempDirPath).removeRecursively();
+	QDir(tempDestDirPath).removeRecursively();
+	ui->convertButton->setEnabled(true);
+}
+
+namespace
+{
 // Code snippet from https://github.com/selmf/unarr/blob/master/test/main.c
 ar_archive *ar_open_any_archive(ar_stream *stream, const char *fileext)
 {
@@ -77,104 +139,6 @@ QString extractArchive(const QString &archivePath, const QString &destinationPat
 
 	return errorString;
 }
-
-ScmConvertDialog::ScmConvertDialog()
-	: StelDialogSeparate("ScmConvertDialog")
-	, watcher(new QFutureWatcher<QString>(this))
-{
-	// The dialog widget is created in StelDialogSeparate::setVisible, not in the constructor.
-	// The ScmConvertDialog C++ instance is owned by ScmStartDialog.
-}
-
-ScmConvertDialog::~ScmConvertDialog() {}
-
-void ScmConvertDialog::retranslate()
-{
-	if (dialog)
-	{
-		titleBar->setTitle(tr("Sky Culture Converter"));
-		infoLabel->setText(tr(
-			"Select a file to convert. The file can be a zip, rar, or 7z archive containing the sky culture files."));
-		browseButton->setText(tr("Browse…"));
-		convertButton->setText(tr("Convert"));
-		filePathLineEdit->setPlaceholderText(tr("Select a file…"));
-	}
-}
-
-void ScmConvertDialog::createDialogContent()
-{
-	// The dialog's layout itself. It should have no margins or spacing.
-	QVBoxLayout *dialogLayout = new QVBoxLayout(dialog);
-	dialogLayout->setContentsMargins(0, 0, 0, 0);
-	dialogLayout->setSpacing(0);
-	dialog->setLayout(dialogLayout);
-
-	// Title bar. Its parent is the dialog.
-	titleBar = new TitleBar(dialog);
-	dialogLayout->addWidget(titleBar);
-
-	// Content frame. Its parent is also the dialog.
-	QFrame *contentFrame = new QFrame(dialog);
-	contentFrame->setObjectName("Content");
-	contentFrame->setFrameShape(QFrame::StyledPanel);
-	dialogLayout->addWidget(contentFrame);
-
-	// Layout for the content frame
-	QVBoxLayout *contentLayout = new QVBoxLayout(contentFrame);
-	contentFrame->setLayout(contentLayout);
-
-	// Create widgets for the dialog, parented to contentFrame
-	infoLabel = new QLabel(contentFrame);
-	infoLabel->setWordWrap(true);
-
-	QHBoxLayout *fileSelectLayout = new QHBoxLayout(); // This is a layout, no parent needed here.
-	filePathLineEdit              = new QLineEdit(contentFrame);
-	filePathLineEdit->setReadOnly(true);
-	browseButton = new QPushButton(contentFrame);
-	fileSelectLayout->addWidget(filePathLineEdit);
-	fileSelectLayout->addWidget(browseButton);
-
-	convertButton      = new QPushButton(contentFrame);
-	convertResultLabel = new QLabel(contentFrame);
-	convertResultLabel->setWordWrap(true);
-
-	contentLayout->addWidget(infoLabel);
-	contentLayout->addLayout(fileSelectLayout);
-	contentLayout->addWidget(convertButton);
-	contentLayout->addWidget(convertResultLabel);
-	contentLayout->addStretch();
-
-	retranslate();
-
-	// Connect signals
-	connect(browseButton, &QPushButton::clicked, this, &ScmConvertDialog::browseFile);
-	connect(titleBar, &TitleBar::closeClicked, dialog, &QWidget::close);
-	connect(titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
-	connect(convertButton, &QPushButton::clicked, this, &ScmConvertDialog::convert);
-	connect(watcher, &QFutureWatcher<QString>::finished, this, &ScmConvertDialog::onConversionFinished);
-}
-
-void ScmConvertDialog::browseFile()
-{
-	const QString file = QFileDialog::getOpenFileName(dialog, tr("Select an archive"), QDir::homePath(),
-	                                                  tr("Archives (*.zip *.rar *.7z *.tar)"));
-	if (!file.isEmpty())
-	{
-		filePathLineEdit->setText(file);
-	}
-}
-
-void ScmConvertDialog::onConversionFinished()
-{
-	QString resultText = watcher->future().result();
-	convertResultLabel->setText(resultText);
-	QDir(tempDirPath).removeRecursively();
-	QDir(tempDestDirPath).removeRecursively();
-	convertButton->setEnabled(true);
-}
-
-namespace
-{
 
 QString validateArchivePath(const QString &path)
 {
@@ -302,14 +266,14 @@ QString moveConvertedFiles(const QString &tempDestDirPath, const QString &stem)
 	}
 }
 
-}
+} // namespace
 
 void ScmConvertDialog::convert()
 {
-	const QString path = filePathLineEdit->text();
+	const QString path = ui->filePathLineEdit->text();
 	if (path.isEmpty())
 	{
-		convertResultLabel->setText(tr("Please select a file."));
+		ui->convertResultLabel->setText(tr("Please select a file to convert."));
 		return;
 	}
 
@@ -331,7 +295,7 @@ void ScmConvertDialog::convert()
 	const QString tempDestDirPath = QDir::tempPath() + "/skycultures/results/" + stem;
 	QDir tempDestFolder(tempDestDirPath);
 
-	convertButton->setEnabled(false);
+	ui->convertButton->setEnabled(false);
 
 	// Run conversion in a background thread
 	QFuture<QString> future = QtConcurrent::run(

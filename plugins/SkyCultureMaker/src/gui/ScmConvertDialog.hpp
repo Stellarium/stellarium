@@ -1,15 +1,18 @@
 #ifndef SCMCONVERTDIALOG_HPP
 #define SCMCONVERTDIALOG_HPP
 
-#include "StelDialogSeparate.hpp"
+#include "StelDialog.hpp"
 
 #ifdef SCM_CONVERTER_ENABLED_CPP
 
-# include "unarr.h"
 # include "StelFileMgr.hpp"
+# include "ui_scmConvertDialog.h"
+# include "unarr.h"
 # include <QDebug>
+# include <QDir>
 # include <QFileDialog>
 # include <QFileInfo>
+# include <QFutureWatcher>
 # include <QHBoxLayout>
 # include <QLabel>
 # include <QLineEdit>
@@ -17,12 +20,10 @@
 # include <QPushButton>
 # include <QVBoxLayout>
 # include <QtConcurrent/QtConcurrent>
-# include <QFutureWatcher>
-# include <QDir>
 
-class TitleBar;
+class Ui_scmConvertDialog;
 
-class ScmConvertDialog : public StelDialogSeparate
+class ScmConvertDialog : public StelDialog
 {
 	Q_OBJECT
 
@@ -30,7 +31,6 @@ public:
 	explicit ScmConvertDialog();
 	~ScmConvertDialog() override;
 	void retranslate() override;
-	QWidget *getDialog() const { return dialog; }
 
 protected:
 	void createDialogContent() override;
@@ -39,29 +39,27 @@ private slots:
 	void browseFile();
 	void convert();
 	void onConversionFinished();
+	void closeDialog();
 
 private:
-	QLineEdit *filePathLineEdit;
-	QLabel *convertResultLabel;
-	QPushButton *convertButton;
+	Ui_scmConvertDialog *ui;
 	QFutureWatcher<QString> *watcher;
 	QString tempDirPath;
 	QString tempDestDirPath;
-
-	// For retranslation
-	TitleBar *titleBar;
-	QLabel *infoLabel;
-	QPushButton *browseButton;
 };
 
 #else // SCM_CONVERTER_ENABLED_CPP
 
-class ScmConvertDialog : public StelDialogSeparate
+class ScmConvertDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	explicit ScmConvertDialog() : StelDialogSeparate("ScmConvertDialog") {}
+	explicit ScmConvertDialog()
+		: StelDialog("ScmConvertDialog")
+	{
+	}
 	void retranslate() override {}
+
 protected:
 	void createDialogContent() override {}
 };
