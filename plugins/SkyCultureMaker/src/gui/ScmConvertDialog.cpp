@@ -143,7 +143,7 @@ QString extractArchive(const QString &archivePath, const QString &destinationPat
 QString validateArchivePath(const QString &path)
 {
 	QMimeDatabase db;
-	QMimeType mime = db.mimeTypeForFile(path, QMimeDatabase::MatchContent);
+	QMimeType mime = db.mimeTypeForFile(path, QMimeDatabase::MatchDefault);
 
 	static const QStringList archiveTypes = {QStringLiteral("application/zip"), QStringLiteral("application/x-tar"),
 	                                         QStringLiteral("application/x-7z-compressed"),
@@ -152,6 +152,7 @@ QString validateArchivePath(const QString &path)
 
 	if (!archiveTypes.contains(mime.name()))
 	{
+		qWarning() << "Unsupported MIME type:" << mime.name() << "for file" << path;
 		return QStringLiteral("Please select a valid archive file "
 		                      "(zip, tar, rar or 7z)");
 	}
@@ -240,29 +241,32 @@ QString moveConvertedFiles(const QString &tempDestDirPath, const QString &stem)
 
 	QString targetPath = QDir(mainSkyCulturesPath).filePath(stem);
 
-	qDebug() << "Target path for moved files:" << targetPath;
-
 	QDir targetDir(targetPath); // QDir object for checking existence
+	const QString absoluteTargetPath = targetDir.absolutePath();
+	const QString absoluteTempDestDirPath = QDir(tempDestDirPath).absolutePath();
+
+	qDebug() << "Target path for moved files:" << absoluteTargetPath;
+
 	if (targetDir.exists())
 	{
 		// Target folder already exists. Do not copy/move.
-		qDebug() << "Target folder" << targetPath
+		qDebug() << "Target folder" << absoluteTargetPath
 			 << "already exists. No move operation "
 			    "performed.";
-		return QString("Target folder already exists: %1").arg(targetPath);
+		return QString("Target folder already exists: %1").arg(absoluteTargetPath);
 	}
-	else if (QDir().rename(tempDestDirPath, targetPath))
+	else if (QDir().rename(absoluteTempDestDirPath, absoluteTargetPath))
 	{
-		qDebug() << "Successfully moved contents of" << tempDestDirPath << "to" << targetPath;
+		qDebug() << "Successfully moved contents of" << absoluteTempDestDirPath << "to" << absoluteTargetPath;
 		return QString("Conversion completed successfully. "
 		               "Files moved "
 		               "to: %1")
-		        .arg(targetPath);
+		        .arg(absoluteTargetPath);
 	}
 	else
 	{
-		qWarning() << "Failed to move" << tempDestDirPath << "to" << targetPath;
-		return QString("Failed to move files to: %1").arg(targetPath);
+		qWarning() << "Failed to move" << absoluteTempDestDirPath << "to" << absoluteTargetPath;
+		return QString("Failed to move files to: %1").arg(absoluteTargetPath);
 	}
 }
 
