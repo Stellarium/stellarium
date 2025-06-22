@@ -135,6 +135,9 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
+            <property name="acceptRichText">
+              <bool>false</bool>
+            </property>
            </widget>
           </item>
           <item>
@@ -312,7 +315,11 @@ p, li { white-space: pre-wrap; }
                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="authorsTE"/>
+                <widget class="QTextEdit" name="authorsTE">
+                  <property name="acceptRichText">
+                    <bool>false</bool>
+                  </property>
+                </widget>
                 </item>
 
                 <!-- Culture Description -->
@@ -324,7 +331,11 @@ p, li { white-space: pre-wrap; }
                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="cultureDescriptionTE"/>
+                <widget class="QTextEdit" name="cultureDescriptionTE">
+                  <property name="acceptRichText">
+                    <bool>false</bool>
+                  </property>
+                </widget>
                 </item>
 
                 <!-- About -->
@@ -336,7 +347,11 @@ p, li { white-space: pre-wrap; }
                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="aboutTE"/>
+                <widget class="QTextEdit" name="aboutTE">
+                  <property name="acceptRichText">
+                    <bool>false</bool>
+                  </property>
+                </widget>
                 </item>
 
                 <!-- Geo-Region -->
@@ -348,7 +363,11 @@ p, li { white-space: pre-wrap; }
                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="geoRegionTE"/>
+                <widget class="QTextEdit" name="geoRegionTE">
+                  <property name="acceptRichText">
+                    <bool>false</bool>
+                  </property>
+                </widget>
                 </item>
 
                 <!-- Sky -->
@@ -360,7 +379,11 @@ p, li { white-space: pre-wrap; }
                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="skyTE"/>
+                <widget class="QTextEdit" name="skyTE">
+                  <property name="acceptRichText">
+                    <bool>false</bool>
+                  </property>
+                </widget>
                 </item>
 
                 <!-- Moon & Sun -->
@@ -372,7 +395,11 @@ p, li { white-space: pre-wrap; }
                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="moonSunTE"/>
+                <widget class="QTextEdit" name="moonSunTE">
+                  <property name="acceptRichText">
+                    <bool>false</bool>
+                  </property>
+                </widget>
                 </item>
 
                 <!-- Planets -->
@@ -384,7 +411,11 @@ p, li { white-space: pre-wrap; }
                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="planetsTE"/>
+                <widget class="QTextEdit" name="planetsTE">
+                  <property name="acceptRichText">
+                    <bool>false</bool>
+                  </property>
+                </widget>
                 </item>
 
                 <!-- Zodiac / Lunar System -->
@@ -396,7 +427,11 @@ p, li { white-space: pre-wrap; }
                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="zodiacTE"/>
+                <widget class="QTextEdit" name="zodiacTE">
+                  <property name="acceptRichText">
+                    <bool>false</bool>
+                  </property>
+                </widget>
                 </item>
 
                 <!-- Milky Way -->
@@ -408,7 +443,11 @@ p, li { white-space: pre-wrap; }
                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="milkyWayTE"/>
+                <widget class="QTextEdit" name="milkyWayTE">
+                  <property name="acceptRichText">
+                    <bool>false</bool>
+                  </property>
+                </widget>
                 </item>
 
                 <!-- Other Celestial Objects -->
@@ -420,7 +459,11 @@ p, li { white-space: pre-wrap; }
                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="otherObjectsTE"/>
+                <widget class="QTextEdit" name="otherObjectsTE">
+                  <property name="acceptRichText">
+                    <bool>false</bool>
+                  </property>
+                </widget>
                 </item>
 
                  <!-- Constellations -->
@@ -432,7 +475,11 @@ p, li { white-space: pre-wrap; }
                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="constellationsDescTE"/>
+                <widget class="QTextEdit" name="constellationsDescTE">
+                  <property name="acceptRichText">
+                    <bool>false</bool>
+                  </property>
+                </widget>
                 </item>
 
                 <!-- References -->
@@ -444,7 +491,11 @@ p, li { white-space: pre-wrap; }
                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="referencesTE"/>
+                <widget class="QTextEdit" name="referencesTE">
+                  <property name="acceptRichText">
+                    <bool>false</bool>
+                  </property>
+                </widget>
                 </item>
 
                 <!-- Acknowledgements -->
@@ -456,7 +507,11 @@ p, li { white-space: pre-wrap; }
                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="acknowledgementsTE"/>
+                <widget class="QTextEdit" name="acknowledgementsTE">
+                  <property name="acceptRichText">
+                    <bool>false</bool>
+                  </property>
+                </widget>
                 </item>
 
                 <!-- Classification -->
