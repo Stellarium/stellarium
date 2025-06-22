@@ -1,10 +1,13 @@
 #ifndef SCM_CONSTELLATION_DIALOG_HPP
 #define SCM_CONSTELLATION_DIALOG_HPP
 
+#include "ScmImageAnchored.hpp"
 #include "SkyCultureMaker.hpp"
 #include "StelDialogSeparate.hpp"
 #include "types/DrawTools.hpp"
+#include <array>
 #include <optional>
+#include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QString>
 
@@ -14,6 +17,7 @@ class ScmConstellationDialog : public StelDialogSeparate
 {
 protected:
 	void createDialogContent() override;
+	void handleDialogSizeChanged(QSizeF size) override;
 
 public:
 	ScmConstellationDialog(SkyCultureMaker *maker);
@@ -27,6 +31,9 @@ private slots:
 	void togglePen(bool checked);
 	void toggleEraser(bool checked);
 	void triggerUndo();
+	void triggerUploadImage();
+	void triggerRemoveImage();
+	void bindSelectedStar();
 
 private:
 	Ui_scmConstellationDialog *ui = nullptr;
@@ -41,10 +48,21 @@ private:
 	QString constellationEnglishName;
 	/// Native name of the constellation
 	std::optional<QString> constellationNativeName;
-	/// Pronounciation of the constellation
+	/// Pronunciation of the constellation
 	std::optional<QString> constellationPronounce;
 	/// IPA representation of the constellation
 	std::optional<QString> constellationIPA;
+	/// The currently displayed artwork
+	ScmImageAnchored *imageItem;
+	/// Holds the last used directory
+	QString lastUsedImageDirectory;
+	/// Holds the help text on how to use the pen.
+	const QString helpDrawInfoPen = "Use RightClick to draw a connected line.\n"
+					"Use Double-RightClick to stop drawing the line.\n"
+					"Use CTRL to disable snap to stars.\n"
+					"Use CTRL + F to search and connect stars.";
+	/// Holds the help text on how to use the eraser.
+	const QString helpDrawInfoEraser = "Hold RightClick to delete the line under the cursor.\n";
 
 	/**
 	 * @brief Checks whether the current data is enough for the constellation to be saved.

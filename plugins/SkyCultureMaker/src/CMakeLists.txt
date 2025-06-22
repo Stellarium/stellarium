@@ -28,6 +28,10 @@ SET( SkyCultureMaker_SRCS
      gui/ScmConstellationDialog.cpp
      gui/ScmSkyCultureDialog.hpp
      gui/ScmSkyCultureDialog.cpp
+     gui/ScmImageAnchor.hpp
+     gui/ScmImageAnchor.cpp
+     gui/ScmImageAnchored.hpp
+     gui/ScmImageAnchored.cpp
      gui/ScmSkyCultureExportDialog.hpp
      gui/ScmSkyCultureExportDialog.cpp
 
