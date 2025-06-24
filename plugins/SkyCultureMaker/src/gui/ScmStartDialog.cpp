@@ -63,12 +63,8 @@ void ScmStartDialog::createDialogContent()
 		if (!converterDialog)
 		{
 			converterDialog = new ScmConvertDialog();
-			converterDialog->setVisible(true);
 		}
-		else
-		{
-			converterDialog->setVisible(true);
-		}
+		converterDialog->setVisible(true);
 	});
 #else   // SCM_CONVERTER_ENABLED_CPP is not defined
 	// Converter is disabled, so disable the button

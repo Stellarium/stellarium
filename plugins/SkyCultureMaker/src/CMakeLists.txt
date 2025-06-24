@@ -44,18 +44,21 @@ SET( SkyCultureMaker_SRCS
      types/StarPoint.hpp
 )
 
-if(SCM_CONVERTER_ENABLED)
-  list(APPEND SkyCultureMaker_SRCS
-    gui/ScmConvertDialog.cpp
-  )
-endif()
-
 SET( SCM_UIS
      gui/scmConstellationDialog.ui
      gui/scmSkyCultureDialog.ui
      gui/scmSkyCultureExportDialog.ui
      gui/scmStartDialog.ui
-)     
+)
+
+if(SCM_CONVERTER_ENABLED)
+  list(APPEND SkyCultureMaker_SRCS
+    gui/ScmConvertDialog.cpp
+  )
+  list(APPEND SCM_UIS
+    gui/scmConvertDialog.ui
+  )
+endif()
 
 ################# compiles resources files ############
 SET(SkyCultureMaker_RES ../resources/SkyCultureMaker.qrc)

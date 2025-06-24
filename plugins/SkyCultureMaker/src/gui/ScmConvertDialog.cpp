@@ -1,11 +1,10 @@
-#include "ScmConvertDialog.hpp"
-#include "StelMainView.hpp"
-#include "ui_scmConvertDialog.h"
-#include <QWidget>
-
 #ifdef SCM_CONVERTER_ENABLED_CPP
 
+# include "ScmConvertDialog.hpp"
 # include "SkyCultureConverter.hpp"
+# include "StelMainView.hpp"
+# include "ui_scmConvertDialog.h"
+# include <QWidget>
 
 ScmConvertDialog::ScmConvertDialog()
 	: StelDialog("ScmConvertDialog")
@@ -18,6 +17,14 @@ ScmConvertDialog::ScmConvertDialog()
 
 ScmConvertDialog::~ScmConvertDialog()
 {
+	// We must wait for the background thread to finish before this object is
+    // destroyed, otherwise the thread will be operating on a dangling 'this'
+    // pointer, which will lead to a crash. This also ensures that
+    // onConversionFinished() is called and temporary files are cleaned up.
+    if (watcher->isRunning())
+    {
+        watcher->waitForFinished();
+    }
 	if (ui != nullptr)
 	{
 		delete ui;
@@ -63,8 +70,14 @@ void ScmConvertDialog::onConversionFinished()
 {
 	QString resultText = watcher->future().result();
 	ui->convertResultLabel->setText(resultText);
-	QDir(tempDirPath).removeRecursively();
-	QDir(tempDestDirPath).removeRecursively();
+	if (!tempDirPath.isEmpty())
+    {
+        QDir(tempDirPath).removeRecursively();
+    }
+    if (!tempDestDirPath.isEmpty())
+    {
+        QDir(tempDestDirPath).removeRecursively();
+    }
 	ui->convertButton->setEnabled(true);
 }
 
@@ -101,7 +114,7 @@ QString extractArchive(const QString &archivePath, const QString &destinationPat
 	while (ar_parse_entry(archive))
 	{
 		QString name    = QString::fromUtf8(ar_entry_get_name(archive));
-		QString outPath = destinationPath + "/" + name;
+		QString outPath = destinationPath + QDir::separator() + name;
 		QDir().mkpath(QFileInfo(outPath).path());
 		QFile outFile(outPath);
 		if (outFile.open(QIODevice::WriteOnly))
@@ -190,15 +203,29 @@ QString extractAndDetermineSource(const QString &archivePath, const QString &tem
 	// set source as the folder that gets converted
 	// Archive can have a single folder with the skyculture files or
 	// an the skyculture files directly in the root
+	bool sourceFound = false;
 	if (extracted_files.contains("info.ini"))
+	{
 		outSourcePath = tempDirPath;
+		sourceFound   = true;
+	}
 	else if (extracted_files.length() == 1)
-		outSourcePath = tempDirPath + "/" + extracted_files.first();
-	else
+	{
+		const QString singleItemPath = QDir(tempDirPath).filePath(extracted_files.first());
+		if (QFileInfo(singleItemPath).isDir() && QFile::exists(QDir(singleItemPath).filePath("info.ini")))
+		{
+			outSourcePath = singleItemPath;
+			sourceFound   = true;
+		}
+	}
+
+	if (!sourceFound)
+	{
 		return "Invalid archive structure. Expected 'info.ini' "
 		       "or a "
 		       "single "
 		       "subfolder.";
+	}
 
 	return QString(); // No error
 }
@@ -242,7 +269,7 @@ QString moveConvertedFiles(const QString &tempDestDirPath, const QString &stem)
 	QString targetPath = QDir(mainSkyCulturesPath).filePath(stem);
 
 	QDir targetDir(targetPath); // QDir object for checking existence
-	const QString absoluteTargetPath = targetDir.absolutePath();
+	const QString absoluteTargetPath      = targetDir.absolutePath();
 	const QString absoluteTempDestDirPath = QDir(tempDestDirPath).absolutePath();
 
 	qDebug() << "Target path for moved files:" << absoluteTargetPath;
@@ -284,11 +311,9 @@ void ScmConvertDialog::convert()
 	qDebug() << "Selected file:" << path;
 
 	// Create a temporary directory for extraction
-	QString baseName = QFileInfo(path).fileName(); // e.g. "foo.zip"
-	int dotPos       = baseName.indexOf('.');
-	QString stem     = (dotPos == -1) ? baseName : baseName.left(dotPos); // Extract the part before the first dot
+	QString stem = QFileInfo(path).baseName(); // e.g. "foo.tar.gz" -> "foo"
 
-	const QString tempDirPath = QDir::tempPath() + "/skycultures/" + stem;
+	tempDirPath = QDir::tempPath() + QDir::separator() + "skycultures" + QDir::separator() + stem;
 	QDir().mkpath(tempDirPath);
 	QDir tempFolder(tempDirPath);
 
@@ -296,14 +321,15 @@ void ScmConvertDialog::convert()
 	// Important: the converter checks if the destination folder already exists
 	// and will not overwrite it, so we do not create it here.
 	// If the destination folder already exists, the converter will return an error.
-	const QString tempDestDirPath = QDir::tempPath() + "/skycultures/results/" + stem;
+	tempDestDirPath = QDir::tempPath() + QDir::separator() + "skycultures" + QDir::separator() + "results" +
+	                  QDir::separator() + stem;
 	QDir tempDestFolder(tempDestDirPath);
 
 	ui->convertButton->setEnabled(false);
 
 	// Run conversion in a background thread
 	QFuture<QString> future = QtConcurrent::run(
-		[path, tempDirPath, tempDestDirPath, stem]() -> QString
+		[this, path, stem]() -> QString
 		{
 			QString error = validateArchivePath(path);
 			if (!error.isEmpty())
@@ -327,8 +353,6 @@ void ScmConvertDialog::convert()
 			return moveConvertedFiles(tempDestDirPath, stem);
 		});
 
-	// Watcher to re-enable the button & report result on UI thread
-	connect(watcher, &QFutureWatcher<QString>::finished, this, &ScmConvertDialog::onConversionFinished);
 	watcher->setFuture(future);
 
 	qDebug() << "Conversion started.";
