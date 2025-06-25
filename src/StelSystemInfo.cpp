@@ -151,8 +151,8 @@ void printSystemInfo()
 			}
 			log(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 
-			// GPU info
-			const std::wstring gpu_query(L"SELECT Name, AdapterRAM, CurrentHorizontalResolution, CurrentVerticalResolution FROM Win32_VideoController");
+			// GPU info (Enabled only)
+			const std::wstring gpu_query(L"SELECT Name, AdapterRAM, CurrentHorizontalResolution, CurrentVerticalResolution FROM Win32_VideoController WHERE Status='OK'");
 			service->ExecQuery(bstr_t(L"WQL"), bstr_t(std::wstring(gpu_query.begin(), gpu_query.end()).c_str()), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &enumerator);
 			while (enumerator)
 			{
