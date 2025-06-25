@@ -48,21 +48,5 @@ private:
 	QString tempDestDirPath;
 };
 
-#else // SCM_CONVERTER_ENABLED_CPP
-
-class ScmConvertDialog : public StelDialog
-{
-	Q_OBJECT
-public:
-	explicit ScmConvertDialog()
-		: StelDialog("ScmConvertDialog")
-	{
-	}
-	void retranslate() override {}
-
-protected:
-	void createDialogContent() override {}
-};
-
 #endif // SCM_CONVERTER_ENABLED_CPP
 #endif // SCMCONVERTDIALOG_HPP

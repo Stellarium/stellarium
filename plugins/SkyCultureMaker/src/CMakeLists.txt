@@ -28,7 +28,6 @@ SET( SkyCultureMaker_SRCS
      gui/ScmConstellationDialog.cpp
      gui/ScmSkyCultureDialog.hpp
      gui/ScmSkyCultureDialog.cpp
-     gui/ScmConvertDialog.hpp
      gui/ScmImageAnchor.hpp
      gui/ScmImageAnchor.cpp
      gui/ScmImageAnchored.hpp
@@ -53,6 +52,7 @@ SET( SCM_UIS
 
 if(SCM_CONVERTER_ENABLED)
   list(APPEND SkyCultureMaker_SRCS
+    gui/ScmConvertDialog.hpp
     gui/ScmConvertDialog.cpp
   )
   list(APPEND SCM_UIS
