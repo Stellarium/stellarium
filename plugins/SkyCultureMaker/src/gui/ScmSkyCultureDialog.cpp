@@ -43,6 +43,9 @@ void ScmSkyCultureDialog::retranslate()
 void ScmSkyCultureDialog::close()
 {
 	maker->setSkyCultureDialogVisibility(false);
+	maker->setConstellationDialogVisibility(false);
+	maker->setSkyCultureExportDialogVisibility(false);
+	maker->setIsScmEnabled(false); // Disable the Sky Culture Maker
 }
 
 void ScmSkyCultureDialog::createDialogContent()

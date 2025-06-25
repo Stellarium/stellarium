@@ -12,6 +12,7 @@
 #include "gui/ScmSkyCultureDialog.hpp"
 #include "gui/ScmSkyCultureExportDialog.hpp"
 #include "gui/ScmStartDialog.hpp"
+#include "gui/ScmHideOrAbortMakerDialog.hpp"
 
 #include "ScmDraw.hpp"
 #include <vector>
@@ -80,6 +81,7 @@ SkyCultureMaker::SkyCultureMaker()
 	scmSkyCultureDialog    	  = new ScmSkyCultureDialog(this);
 	scmConstellationDialog 	  = new ScmConstellationDialog(this);
 	scmSkyCultureExportDialog = new ScmSkyCultureExportDialog(this);
+	scmHideOrAbortMakerDialog = new ScmHideOrAbortMakerDialog(this);
 }
 
 /*************************************************************************
@@ -93,6 +95,7 @@ SkyCultureMaker::~SkyCultureMaker()
 	delete scmSkyCultureDialog;
 	delete scmConstellationDialog;
 	delete scmSkyCultureExportDialog;
+	delete scmHideOrAbortMakerDialog;
 
 	if (currentSkyCulture != nullptr)
 	{
@@ -281,6 +284,14 @@ void SkyCultureMaker::setSkyCultureExportDialogVisibility(bool b)
 	if (b != scmSkyCultureExportDialog->visible())
 	{
 		scmSkyCultureExportDialog->setVisible(b);
+	}
+}
+
+void SkyCultureMaker::setHideOrAbortMakerVisibility(bool b)
+{
+	if (b != scmHideOrAbortMakerDialog->visible())
+	{
+		scmHideOrAbortMakerDialog->setVisible(b);
 	}
 }
 

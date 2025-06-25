@@ -76,6 +76,13 @@ public:
 	void setSkyCultureExportDialogVisibility(bool b);
 
 	/**
+	 * @brief Shows the hide or abort maker dialog.
+	 *
+	 * @param b The boolean value to be set.
+	 */
+	void setHideOrAbortMakerVisibility(bool b);
+
+	/**
 	 * @brief Toggles the usage of the line draw.
 	 *
 	 * @param b The boolean value to be set.
@@ -187,6 +194,9 @@ private:
 
 	/// Dialog for exporting a sky culture
 	ScmSkyCultureExportDialog *scmSkyCultureExportDialog = nullptr;
+
+	/// Dialog for hiding or aborting maker process
+	ScmHideOrAbortMakerDialog *scmHideOrAbortMakerDialog = nullptr;
 
 	/// The current sky culture
 	scm::ScmSkyCulture *currentSkyCulture = nullptr;
