@@ -1664,7 +1664,7 @@ void main(void)
 	float modelZenithAngle = acos(modelPos.z);
 
 	float r = min(modelZenithAngle / texFov, 0.5);
-	vec2 posFromCenter = dot(modelPos,modelPos)==0 ? vec2(0) : r*normalize(modelPos.yx);
+	vec2 posFromCenter = dot(modelPos,modelPos)==0. ? vec2(0) : r*normalize(modelPos.yx);
 	vec2 texc = posFromCenter+vec2(0.5);
 
 	vec4 color = texture2D(mapTex, texc);
