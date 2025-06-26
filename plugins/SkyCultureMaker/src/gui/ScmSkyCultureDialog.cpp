@@ -215,18 +215,18 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 	desc.cultureDescription = ui->cultureDescriptionTE->toPlainText();
 	desc.about              = ui->aboutTE->toPlainText();
 
-	desc.geoRegion          = ui->geoRegionTE->toPlainText();
-	desc.sky                = ui->skyTE->toPlainText();
-	desc.moonAndSun         = ui->moonSunTE->toPlainText();
-	desc.planets            = ui->planetsTE->toPlainText();
-	desc.zodiac             = ui->zodiacTE->toPlainText();
-	desc.milkyWay           = ui->milkyWayTE->toPlainText();
-	desc.otherObjects       = ui->otherObjectsTE->toPlainText();
+	desc.geoRegion    = ui->geoRegionTE->toPlainText();
+	desc.sky          = ui->skyTE->toPlainText();
+	desc.moonAndSun   = ui->moonSunTE->toPlainText();
+	desc.planets      = ui->planetsTE->toPlainText();
+	desc.zodiac       = ui->zodiacTE->toPlainText();
+	desc.milkyWay     = ui->milkyWayTE->toPlainText();
+	desc.otherObjects = ui->otherObjectsTE->toPlainText();
 
-	desc.constellations     = ui->constellationsDescTE->toPlainText();
-	desc.references         = ui->referencesTE->toPlainText();
-	desc.acknowledgements   = ui->acknowledgementsTE->toPlainText();
-	desc.classification     = ui->classificationCB->currentData().value<scm::ClassificationType>();
+	desc.constellations   = ui->constellationsDescTE->toPlainText();
+	desc.references       = ui->referencesTE->toPlainText();
+	desc.acknowledgements = ui->acknowledgementsTE->toPlainText();
+	desc.classification   = ui->classificationCB->currentData().value<scm::ClassificationType>();
 
 	return desc;
 }

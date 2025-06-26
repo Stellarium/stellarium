@@ -44,7 +44,7 @@ private:
 	Ui_scmConstellationDialog *ui = nullptr;
 	SkyCultureMaker *maker        = nullptr;
 	scm::DrawTools activeTool     = scm::DrawTools::None;
-	bool isDialogInitialized = false;
+	bool isDialogInitialized      = false;
 
 	/// Identifier of the constellation
 	QString constellationId;

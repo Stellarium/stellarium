@@ -38,23 +38,26 @@ void ScmHideOrAbortMakerDialog::createDialogContent()
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Buttons
-	connect(ui->scmMakerAbortButton, &QPushButton::clicked, this, &ScmHideOrAbortMakerDialog::abortScmCreationProcess); // Abort
-	connect(ui->scmMakerHidehButton, &QPushButton::clicked, this, &ScmHideOrAbortMakerDialog::hideScmCreationProcess); // Hide
-	connect(ui->scmMakerCancelButton, &QPushButton::clicked, this, &ScmHideOrAbortMakerDialog::cancelDialog); // Cancel
+	connect(ui->scmMakerAbortButton, &QPushButton::clicked, this,
+	        &ScmHideOrAbortMakerDialog::abortScmCreationProcess); // Abort
+	connect(ui->scmMakerHidehButton, &QPushButton::clicked, this,
+	        &ScmHideOrAbortMakerDialog::hideScmCreationProcess); // Hide
+	connect(ui->scmMakerCancelButton, &QPushButton::clicked, this,
+	        &ScmHideOrAbortMakerDialog::cancelDialog); // Cancel
 }
 
 // TODO: save state of the current sky culture
 void ScmHideOrAbortMakerDialog::hideScmCreationProcess()
 {
 	maker->saveScmDialogVisibilityState();
-	maker->hideAllDialogsAndDisableSCM();
+	maker->hideAllDialogs();
 }
 
 // TODO: clear the current sky culture
 void ScmHideOrAbortMakerDialog::abortScmCreationProcess()
 {
 	maker->resetScmDialogs();
-	maker->hideAllDialogsAndDisableSCM();
+	maker->hideAllDialogs();
 }
 
 void ScmHideOrAbortMakerDialog::cancelDialog()

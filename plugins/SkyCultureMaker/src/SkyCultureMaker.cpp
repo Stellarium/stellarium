@@ -9,10 +9,10 @@
 #include "StelPainter.hpp"
 #include "StelProjector.hpp"
 #include "gui/ScmConstellationDialog.hpp"
+#include "gui/ScmHideOrAbortMakerDialog.hpp"
 #include "gui/ScmSkyCultureDialog.hpp"
 #include "gui/ScmSkyCultureExportDialog.hpp"
 #include "gui/ScmStartDialog.hpp"
-#include "gui/ScmHideOrAbortMakerDialog.hpp"
 
 #include "ScmDraw.hpp"
 #include <vector>
@@ -76,10 +76,10 @@ SkyCultureMaker::SkyCultureMaker()
 	setObjectName("SkyCultureMaker");
 	font.setPixelSize(25);
 
-	drawObj                	  = new scm::ScmDraw();
-	scmStartDialog         	  = new ScmStartDialog(this);
-	scmSkyCultureDialog    	  = new ScmSkyCultureDialog(this);
-	scmConstellationDialog 	  = new ScmConstellationDialog(this);
+	drawObj                   = new scm::ScmDraw();
+	scmStartDialog            = new ScmStartDialog(this);
+	scmSkyCultureDialog       = new ScmSkyCultureDialog(this);
+	scmConstellationDialog    = new ScmConstellationDialog(this);
 	scmSkyCultureExportDialog = new ScmSkyCultureExportDialog(this);
 	scmHideOrAbortMakerDialog = new ScmHideOrAbortMakerDialog(this);
 }
@@ -189,6 +189,12 @@ void SkyCultureMaker::startScmProcess()
 
 void SkyCultureMaker::stopScmProcess()
 {
+	// If the hide or abort dialog is visible, we do not want to stop the process directly
+	if (scmHideOrAbortMakerDialog->visible())
+	{
+		return;
+	}
+
 	if (false != isScmEnabled)
 	{
 		isScmEnabled = false;
@@ -199,6 +205,7 @@ void SkyCultureMaker::stopScmProcess()
 	{
 		scmStartDialog->setVisible(false);
 	}
+	// Any dialogs are open -> hide or abort window
 	else
 	{
 		setHideOrAbortMakerDialogVisibility(true);
@@ -388,13 +395,12 @@ bool SkyCultureMaker::saveSkyCultureDescription()
 	return false;
 }
 
-void SkyCultureMaker::hideAllDialogsAndDisableSCM()
+void SkyCultureMaker::hideAllDialogs()
 {
 	setHideOrAbortMakerDialogVisibility(false);
 	setSkyCultureDialogVisibility(false);
 	setConstellationDialogVisibility(false);
 	setSkyCultureExportDialogVisibility(false);
-	setIsScmEnabled(false); // Disable the Sky Culture Maker
 }
 
 void SkyCultureMaker::saveScmDialogVisibilityState()
@@ -448,7 +454,6 @@ void SkyCultureMaker::resetScmDialogsVisibilityState()
 		scmDialogVisibilityMap[key] = false;
 	}
 }
-
 
 void SkyCultureMaker::resetScmDialogs()
 {

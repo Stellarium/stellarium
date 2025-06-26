@@ -25,8 +25,8 @@ private slots:
 	void cancelDialog();
 
 private:
-	Ui_scmHideOrAbortMakerDialog *ui  = nullptr;
-	SkyCultureMaker *maker = nullptr;
+	Ui_scmHideOrAbortMakerDialog *ui = nullptr;
+	SkyCultureMaker *maker           = nullptr;
 };
 
 #endif // SCMHIDEORABORTMAKERDIALOG_HPP

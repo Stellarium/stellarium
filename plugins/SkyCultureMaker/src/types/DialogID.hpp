@@ -6,11 +6,11 @@ namespace scm
 //! The possibles tools used for drawing.
 enum class DialogID
 {
-		StartDialog,
-		SkyCultureDialog,
-		SkyCultureExportDialog,
-		HideOrAbortMakerDialog,
-		ConstellationDialog
+	StartDialog,
+	SkyCultureDialog,
+	SkyCultureExportDialog,
+	HideOrAbortMakerDialog,
+	ConstellationDialog
 };
 } // namespace scm
 

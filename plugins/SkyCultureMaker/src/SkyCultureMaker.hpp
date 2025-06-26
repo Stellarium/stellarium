@@ -26,6 +26,7 @@ class ScmHideOrAbortMakerDialog;
 class SkyCultureMaker : public StelModule
 {
 	Q_OBJECT
+	// TODO: var - getter - setter - trigger
 	Q_PROPERTY(bool enabledScm READ getIsScmEnabled WRITE setIsScmEnabled NOTIFY eventIsScmEnabled)
 public:
 	SkyCultureMaker();
@@ -89,7 +90,7 @@ public:
 	 * 
 	 * @param b The boolean value to be set.
 	 */
-	void hideAllDialogsAndDisableSCM();
+	void hideAllDialogs();
 
 	/**
 	 * @brief Toggles the usage of the line draw.
@@ -240,12 +241,12 @@ private:
 	 * The key is the dialog ID, the value is true if the dialog was hidden, false if newly created.
 	 */
 	QMap<scm::DialogID, bool> scmDialogVisibilityMap = {
-		{scm::DialogID::StartDialog, false},
-		{scm::DialogID::SkyCultureDialog, false},
-		{scm::DialogID::ConstellationDialog, false},
+		{scm::DialogID::StartDialog,            false},
+		{scm::DialogID::SkyCultureDialog,       false},
+		{scm::DialogID::ConstellationDialog,    false},
 		{scm::DialogID::SkyCultureExportDialog, false},
 		{scm::DialogID::HideOrAbortMakerDialog, false}
-	};
+        };
 };
 
 #include "StelPluginInterface.hpp"
