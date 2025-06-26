@@ -18,13 +18,16 @@ ScmConvertDialog::ScmConvertDialog()
 ScmConvertDialog::~ScmConvertDialog()
 {
 	// We must wait for the background thread to finish before this object is
-    // destroyed, otherwise the thread will be operating on a dangling 'this'
-    // pointer, which will lead to a crash. This also ensures that
-    // onConversionFinished() is called and temporary files are cleaned up.
-    if (watcher->isRunning())
-    {
-        watcher->waitForFinished();
-    }
+	// destroyed, otherwise the thread will be operating on a dangling 'this'
+	// pointer, which will lead to a crash. This also ensures that
+	// onConversionFinished() is called and temporary files are cleaned up.
+	// We send a cancel request to the watcher, which will stop the
+	// background task if it is still running, while finishing major steps
+	if (watcher->isRunning())
+	{
+		watcher->cancel();
+		watcher->waitForFinished();
+	}
 	if (ui != nullptr)
 	{
 		delete ui;
@@ -71,13 +74,13 @@ void ScmConvertDialog::onConversionFinished()
 	QString resultText = watcher->future().result();
 	ui->convertResultLabel->setText(resultText);
 	if (!tempDirPath.isEmpty())
-    {
-        QDir(tempDirPath).removeRecursively();
-    }
-    if (!tempDestDirPath.isEmpty())
-    {
-        QDir(tempDestDirPath).removeRecursively();
-    }
+	{
+		QDir(tempDirPath).removeRecursively();
+	}
+	if (!tempDestDirPath.isEmpty())
+	{
+		QDir(tempDestDirPath).removeRecursively();
+	}
 	ui->convertButton->setEnabled(true);
 }
 
@@ -327,29 +330,38 @@ void ScmConvertDialog::convert()
 
 	ui->convertButton->setEnabled(false);
 
-	// Run conversion in a background thread
+	// Run conversion in a background thread.
+	// We pass the QFuture object to the lambda so it can check for cancellation.
 	QFuture<QString> future = QtConcurrent::run(
-		[this, path, stem]() -> QString
+		[this, path, stem](QFuture<QString> &future) -> QString
 		{
-			QString error = validateArchivePath(path);
-			if (!error.isEmpty())
-			{
-				return error;
-			}
+			// Allow this future to be cancelled
+			future.setSuspended(false);
 
+			// Validate the archive path (whether it is a valid archive file)
+			QString error = validateArchivePath(path);
+			if (!error.isEmpty()) return error;
+
+			// Check for cancellation between major steps
+			if (future.isCanceled()) return "Conversion cancelled.";
+
+			// Extract the archive to a temporary directory
+			// Check if the skyculture files are in the root or in a subfolder in the archive
 			QString sourcePath;
 			error = extractAndDetermineSource(path, tempDirPath, sourcePath);
-			if (!error.isEmpty())
-			{
-				return error;
-			}
+			if (!error.isEmpty()) return error;
 
+			// Check for cancellation between major steps
+			if (future.isCanceled()) return "Conversion cancelled.";
+
+			// Call the actual converter
 			error = performConversion(sourcePath, tempDestDirPath);
-			if (!error.isEmpty())
-			{
-				return error;
-			}
+			if (!error.isEmpty()) return error;
 
+			// Check for cancellation between major steps
+			if (future.isCanceled()) return "Conversion cancelled.";
+
+			// Move the converted files to the skycultures folder in the program directory
 			return moveConvertedFiles(tempDestDirPath, stem);
 		});
 
