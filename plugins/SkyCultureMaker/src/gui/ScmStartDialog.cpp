@@ -61,6 +61,5 @@ void ScmStartDialog::startScmCreationProcess()
 
 void ScmStartDialog::closeDialog()
 {
-	StelDialog::close();
 	maker->setIsScmEnabled(false); // Disable the Sky Culture Maker
 }

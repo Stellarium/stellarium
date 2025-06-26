@@ -23,6 +23,11 @@ public:
 	ScmConstellationDialog(SkyCultureMaker *maker);
 	~ScmConstellationDialog() override;
 
+	/**
+	 * @brief Resets the constellation dialog data.
+	 */
+	void resetDialog();
+
 public slots:
 	void retranslate() override;
 	void close() override;
@@ -39,6 +44,7 @@ private:
 	Ui_scmConstellationDialog *ui = nullptr;
 	SkyCultureMaker *maker        = nullptr;
 	scm::DrawTools activeTool     = scm::DrawTools::None;
+	bool isDialogInitialized = false;
 
 	/// Identifier of the constellation
 	QString constellationId;
@@ -78,11 +84,6 @@ private:
 	 * @brief Resets and closes the dialog.
 	 */
 	void cancel();
-
-	/**
-	 * @brief Resets the constellation dialog data.
-	 */
-	void resetDialog();
 };
 
 #endif // SCM_CONSTELLATION_DIALOG_HPP

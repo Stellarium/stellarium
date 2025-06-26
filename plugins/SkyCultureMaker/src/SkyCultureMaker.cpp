@@ -177,7 +177,14 @@ void SkyCultureMaker::startScmProcess()
 		emit eventIsScmEnabled(true);
 	}
 
-	scmStartDialog->setVisible(true);
+	if (isAnyDialogHidden())
+	{
+		restoreScmDialogVisibilityState();
+	}
+	else
+	{
+		scmStartDialog->setVisible(true);
+	}
 }
 
 void SkyCultureMaker::stopScmProcess()
@@ -188,14 +195,14 @@ void SkyCultureMaker::stopScmProcess()
 		emit eventIsScmEnabled(false);
 	}
 
-	// TODO: close or delete all dialogs related to the creation process
 	if (scmStartDialog->visible())
 	{
 		scmStartDialog->setVisible(false);
 	}
-
-	setSkyCultureDialogVisibility(false);
-	setConstellationDialogVisibility(false);
+	else
+	{
+		setHideOrAbortMakerDialogVisibility(true);
+	}
 }
 
 void SkyCultureMaker::draw(StelCore *core)
@@ -287,7 +294,7 @@ void SkyCultureMaker::setSkyCultureExportDialogVisibility(bool b)
 	}
 }
 
-void SkyCultureMaker::setHideOrAbortMakerVisibility(bool b)
+void SkyCultureMaker::setHideOrAbortMakerDialogVisibility(bool b)
 {
 	if (b != scmHideOrAbortMakerDialog->visible())
 	{
@@ -379,4 +386,72 @@ bool SkyCultureMaker::saveSkyCultureDescription()
 	}
 
 	return false;
+}
+
+void SkyCultureMaker::hideAllDialogsAndDisableSCM()
+{
+	setSkyCultureDialogVisibility(false);
+	setConstellationDialogVisibility(false);
+	setSkyCultureExportDialogVisibility(false);
+	setIsScmEnabled(false); // Disable the Sky Culture Maker
+}
+
+void SkyCultureMaker::saveScmDialogVisibilityState()
+{
+	if (scmSkyCultureDialog != nullptr)
+	{
+		scmDialogVisibilityMap[DialogID::SkyCultureDialog] = scmSkyCultureDialog->visible();
+	}
+	if (scmConstellationDialog != nullptr)
+	{
+		scmDialogVisibilityMap[DialogID::ConstellationDialog] = scmConstellationDialog->visible();
+	}
+	if (scmSkyCultureExportDialog != nullptr)
+	{
+		scmDialogVisibilityMap[DialogID::SkyCultureExportDialog] = scmSkyCultureExportDialog->visible();
+	}
+}
+
+void SkyCultureMaker::restoreScmDialogVisibilityState()
+{
+	if (scmSkyCultureDialog != nullptr)
+	{
+		setSkyCultureDialogVisibility(scmDialogVisibilityMap[DialogID::SkyCultureDialog]);
+	}
+	if (scmConstellationDialog != nullptr)
+	{
+		setConstellationDialogVisibility(scmDialogVisibilityMap[DialogID::ConstellationDialog]);
+	}
+	if (scmSkyCultureExportDialog != nullptr)
+	{
+		setSkyCultureExportDialogVisibility(scmDialogVisibilityMap[DialogID::SkyCultureExportDialog]);
+	}
+}
+
+bool SkyCultureMaker::isAnyDialogHidden() const
+{
+	for (bool visible : scmDialogVisibilityMap.values())
+	{
+		if (visible)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void SkyCultureMaker::resetScmDialogsVisibilityState()
+{
+	for (auto key : scmDialogVisibilityMap.keys())
+	{
+		scmDialogVisibilityMap[key] = false;
+	}
+}
+
+
+void SkyCultureMaker::resetScmDialogs()
+{
+	resetScmDialogsVisibilityState(); // Reset the visibility state of all dialogs
+	scmSkyCultureDialog->resetDialog();
+	scmConstellationDialog->resetDialog();
 }

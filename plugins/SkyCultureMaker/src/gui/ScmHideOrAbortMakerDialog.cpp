@@ -3,12 +3,12 @@
 #include <cassert>
 #include <QDebug>
 
-ScmStartDialog::ScmHideOrAbortMakerDialog(SkyCultureMaker *maker)
-	: StelDialog("ScmHideOrAbortMakerDialog")
+ScmHideOrAbortMakerDialog::ScmHideOrAbortMakerDialog(SkyCultureMaker *maker)
+	: StelDialogSeparate("ScmHideOrAbortMakerDialog")
 	, maker(maker)
 {
 	assert(maker != nullptr);
-	ui = new Ui_ScmHideOrAbortMakerDialog;
+	ui = new Ui_scmHideOrAbortMakerDialog;
 }
 
 ScmHideOrAbortMakerDialog::~ScmHideOrAbortMakerDialog()
@@ -34,27 +34,36 @@ void ScmHideOrAbortMakerDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	// connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmHideOrAbortMakerDialog::closeDialog);
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmHideOrAbortMakerDialog::cancelDialog);
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Buttons
-	connect(ui->scmMakerAbortButton, &QPushButton::clicked, this, &ScmHideOrAbortMakerDialog::closeDialog); // Abort
+	connect(ui->scmMakerAbortButton, &QPushButton::clicked, this, &ScmHideOrAbortMakerDialog::abortScmCreationProcess); // Abort
 	connect(ui->scmMakerHidehButton, &QPushButton::clicked, this, &ScmHideOrAbortMakerDialog::hideScmCreationProcess); // Hide
-	connect(ui->scmMakerCancelButton, &QPushButton::clicked, this, &ScmHideOrAbortMakerDialog::closeDialog); // Abort
+	connect(ui->scmMakerCancelButton, &QPushButton::clicked, this, &ScmHideOrAbortMakerDialog::cancelDialog); // Cancel
 }
 
-// TODO
+// TODO: save state of the current sky culture
 void ScmHideOrAbortMakerDialog::hideScmCreationProcess()
 {
-	// dialog->setVisible(false);                  // Close the dialog before starting the editor
-	// maker->setSkyCultureDialogVisibility(true); // Start the editor dialog for creating a new Sky Culture
-	// maker->setNewSkyCulture();
+	maker->saveScmDialogVisibilityState();
+	maker->hideAllDialogsAndDisableSCM();
+	maker->setHideOrAbortMakerDialogVisibility(false);
 }
 
-// TODO
-void ScmHideOrAbortMakerDialog::abortScmCreationProcess() {}
-
-// TODO
-void ScmHideOrAbortMakerDialog::closeDialog()
+// TODO: clear the current sky culture
+void ScmHideOrAbortMakerDialog::abortScmCreationProcess()
 {
+	qDebug() << "Unloaded the ScmHideOrAbortMakerDialog 1";
+	maker->resetScmDialogs();
+	qDebug() << "Unloaded the ScmHideOrAbortMakerDialog 2";
+	maker->hideAllDialogsAndDisableSCM();
+	qDebug() << "Unloaded the ScmHideOrAbortMakerDialog 3";
+	maker->setHideOrAbortMakerDialogVisibility(false);
+	qDebug() << "Unloaded the ScmHideOrAbortMakerDialog 4";
+}
+
+void ScmHideOrAbortMakerDialog::cancelDialog()
+{
+	maker->setHideOrAbortMakerDialogVisibility(false);
 }

@@ -42,6 +42,7 @@ void ScmConstellationDialog::close()
 
 void ScmConstellationDialog::createDialogContent()
 {
+	isDialogInitialized = true;
 	ui->setupUi(dialog);
 	imageItem->hide();
 	ui->artwork_image->setScene(imageItem->scene());
@@ -290,6 +291,12 @@ void ScmConstellationDialog::saveConstellation()
 
 void ScmConstellationDialog::resetDialog()
 {
+	// If the dialog was not initialized, the ui elements do not exist yet.
+	if (!isDialogInitialized)
+	{
+		return;
+	}
+
 	activeTool = scm::DrawTools::None;
 	ui->penBtn->setChecked(false);
 	ui->eraserBtn->setChecked(false);

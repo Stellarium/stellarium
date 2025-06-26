@@ -32,11 +32,21 @@ public:
 	void setConstellations(std::vector<scm::ScmConstellation> *constellations);
 
 	/**
+	 * @brief Resets the constellations to an empty vector.
+	 */
+	void resetConstellations();
+
+	/**
 	 * @brief Sets the info label text.
 	 *
 	 * @param text The text to set in the info label.
 	 */
 	void setInfoLabel(const QString &text);
+
+	/**
+	 * @brief Resets all fields in the dialog to their default values.
+	 */
+	void resetDialog();
 
 public slots:
 	void retranslate() override;

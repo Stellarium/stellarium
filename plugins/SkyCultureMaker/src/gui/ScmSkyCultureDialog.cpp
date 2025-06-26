@@ -32,6 +32,15 @@ void ScmSkyCultureDialog::setConstellations(std::vector<scm::ScmConstellation> *
 	}
 }
 
+void ScmSkyCultureDialog::resetConstellations()
+{
+	if (ui && dialog)
+	{
+		ui->constellationsList->clear();
+		constellations = nullptr; // Reset the constellations pointer
+	}
+}
+
 void ScmSkyCultureDialog::retranslate()
 {
 	if (dialog)
@@ -42,10 +51,7 @@ void ScmSkyCultureDialog::retranslate()
 
 void ScmSkyCultureDialog::close()
 {
-	maker->setSkyCultureDialogVisibility(false);
-	maker->setConstellationDialogVisibility(false);
-	maker->setSkyCultureExportDialogVisibility(false);
-	maker->setIsScmEnabled(false); // Disable the Sky Culture Maker
+	maker->setHideOrAbortMakerDialogVisibility(true);
 }
 
 void ScmSkyCultureDialog::createDialogContent()
@@ -234,5 +240,35 @@ void ScmSkyCultureDialog::setInfoLabel(const QString &text)
 	else
 	{
 		qDebug() << "ScmSkyCultureDialog: UI or dialog is not initialized.";
+	}
+}
+
+void ScmSkyCultureDialog::resetDialog()
+{
+	if (ui && dialog)
+	{
+		ui->skyCultureNameTE->clear();
+		ui->authorsTE->clear();
+		ui->cultureDescriptionTE->clear();
+		ui->aboutTE->clear();
+		ui->geoRegionTE->clear();
+		ui->skyTE->clear();
+		ui->moonSunTE->clear();
+		ui->planetsTE->clear();
+		ui->zodiacTE->clear();
+		ui->milkyWayTE->clear();
+		ui->otherObjectsTE->clear();
+		ui->constellationsDescTE->clear();
+		ui->referencesTE->clear();
+		ui->acknowledgementsTE->clear();
+
+		ui->licenseCB->setCurrentIndex(0);
+		ui->classificationCB->setCurrentIndex(0);
+
+		name.clear();
+		setIdFromName(name);
+		resetConstellations();
+		maker->setSkyCultureDescription(getDescriptionFromTextEdit());
+		updateRemoveConstellationButton();
 	}
 }

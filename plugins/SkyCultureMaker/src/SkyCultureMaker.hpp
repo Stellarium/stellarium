@@ -19,6 +19,7 @@ class ScmSkyCultureDialog;
 class ScmConstellationDialog;
 class ScmStartDialog;
 class ScmSkyCultureExportDialog;
+class ScmHideOrAbortMakerDialog;
 
 /// This is an example of a plug-in which can be dynamically loaded into stellarium
 class SkyCultureMaker : public StelModule
@@ -28,6 +29,16 @@ class SkyCultureMaker : public StelModule
 public:
 	SkyCultureMaker();
 	~SkyCultureMaker() override;
+
+	enum class DialogID
+	{
+		None,
+		StartDialog,
+		SkyCultureDialog,
+		SkyCultureExportDialog,
+		HideOrAbortMakerDialog,
+		ConstellationDialog
+	};
 
 	/// @brief Set the toggle value for a given action.
 	/// @param toggle The toggled value to be set.
@@ -80,7 +91,14 @@ public:
 	 *
 	 * @param b The boolean value to be set.
 	 */
-	void setHideOrAbortMakerVisibility(bool b);
+	void setHideOrAbortMakerDialogVisibility(bool b);
+
+	/**
+	 * @brief Set the visibility of all dialogs.
+	 * 
+	 * @param b The boolean value to be set.
+	 */
+	void hideAllDialogsAndDisableSCM();
 
 	/**
 	 * @brief Toggles the usage of the line draw.
@@ -150,6 +168,31 @@ public:
 	 */
 	QFile getScmDescriptionFile();
 
+	/**
+	 * @brief Saves the visibility state of the SCM dialogs.
+	 */
+	void saveScmDialogVisibilityState();
+
+	/**
+	 * @brief Restores the visibility state of the SCM dialogs.
+	 */
+	void restoreScmDialogVisibilityState();
+
+	/**
+	 * @brief Checks if any SCM dialog is currently hidden.
+	 */
+	bool isAnyDialogHidden() const;
+
+	/**
+	 * @brief Resets all SCM dialogs content and visibility states.
+	*/
+	void resetScmDialogs();
+
+	/**
+	 * @brief Resets the visibility state of the SCM dialogs.
+	 */
+	void resetScmDialogsVisibilityState();
+
 signals:
 	void eventIsScmEnabled(bool b);
 
@@ -200,6 +243,18 @@ private:
 
 	/// The current sky culture
 	scm::ScmSkyCulture *currentSkyCulture = nullptr;
+
+	/**
+	 * Store the visibility state of the SCM dialogs
+	 * The key is the dialog ID, the value is true if the dialog was hidden, false if newly created.
+	 */
+	QMap<DialogID, bool> scmDialogVisibilityMap = {
+		{DialogID::StartDialog, false},
+		{DialogID::SkyCultureDialog, false},
+		{DialogID::ConstellationDialog, false},
+		{DialogID::SkyCultureExportDialog, false},
+		{DialogID::HideOrAbortMakerDialog, false}
+	};
 };
 
 #include "StelPluginInterface.hpp"
