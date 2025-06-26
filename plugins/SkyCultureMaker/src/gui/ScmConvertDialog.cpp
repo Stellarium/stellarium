@@ -10,6 +10,7 @@ ScmConvertDialog::ScmConvertDialog()
 	: StelDialog("ScmConvertDialog")
 	, ui(new Ui_scmConvertDialog)
 	, watcher(new QFutureWatcher<QString>(this))
+	, conversionCancelled(false)
 {
 	// The dialog widget is created in StelDialog::setVisible, not in the constructor.
 	// The ScmConvertDialog C++ instance is owned by ScmStartDialog.
@@ -25,7 +26,7 @@ ScmConvertDialog::~ScmConvertDialog()
 	// background task if it is still running, while finishing major steps
 	if (watcher->isRunning())
 	{
-		watcher->cancel();
+		conversionCancelled = true; // Signal the thread to cancel
 		watcher->waitForFinished();
 	}
 	if (ui != nullptr)
@@ -328,22 +329,19 @@ void ScmConvertDialog::convert()
 	                  QDir::separator() + stem;
 	QDir tempDestFolder(tempDestDirPath);
 
+	conversionCancelled = false; // Reset the flag before starting a new conversion
 	ui->convertButton->setEnabled(false);
 
 	// Run conversion in a background thread.
-	// We pass the QFuture object to the lambda so it can check for cancellation.
 	QFuture<QString> future = QtConcurrent::run(
-		[this, path, stem](QFuture<QString> &future) -> QString
+		[this, path, stem]() -> QString
 		{
-			// Allow this future to be cancelled
-			future.setSuspended(false);
-
 			// Validate the archive path (whether it is a valid archive file)
 			QString error = validateArchivePath(path);
 			if (!error.isEmpty()) return error;
 
 			// Check for cancellation between major steps
-			if (future.isCanceled()) return "Conversion cancelled.";
+			if (conversionCancelled) return "Conversion cancelled.";
 
 			// Extract the archive to a temporary directory
 			// Check if the skyculture files are in the root or in a subfolder in the archive
@@ -352,14 +350,14 @@ void ScmConvertDialog::convert()
 			if (!error.isEmpty()) return error;
 
 			// Check for cancellation between major steps
-			if (future.isCanceled()) return "Conversion cancelled.";
+			if (conversionCancelled) return "Conversion cancelled.";
 
 			// Call the actual converter
 			error = performConversion(sourcePath, tempDestDirPath);
 			if (!error.isEmpty()) return error;
 
 			// Check for cancellation between major steps
-			if (future.isCanceled()) return "Conversion cancelled.";
+			if (conversionCancelled) return "Conversion cancelled.";
 
 			// Move the converted files to the skycultures folder in the program directory
 			return moveConvertedFiles(tempDestDirPath, stem);

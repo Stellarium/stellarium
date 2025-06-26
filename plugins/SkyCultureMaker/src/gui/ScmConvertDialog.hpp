@@ -20,6 +20,7 @@
 # include <QPushButton>
 # include <QVBoxLayout>
 # include <QtConcurrent/QtConcurrent>
+# include <atomic>
 
 class Ui_scmConvertDialog;
 
@@ -46,6 +47,7 @@ private:
 	QFutureWatcher<QString> *watcher;
 	QString tempDirPath;
 	QString tempDestDirPath;
+	std::atomic<bool> conversionCancelled;
 };
 
 #endif // SCM_CONVERTER_ENABLED_CPP
