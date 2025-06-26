@@ -169,12 +169,19 @@ void SkyCultureMaker::init()
  Manage creation process
 ***********************/
 
+void SkyCultureMaker::setToolbarButtonState(bool b)
+{
+	setActionToggle(actionIdLine, b);
+	toolbarButton->setChecked(b);
+}
+
 void SkyCultureMaker::startScmProcess()
 {
-	if (true != isScmEnabled)
+	if (!isScmEnabled)
 	{
 		isScmEnabled = true;
 		emit eventIsScmEnabled(true);
+		setToolbarButtonState(true); // Toggle the toolbar button to enabled
 	}
 
 	if (isAnyDialogHidden())
@@ -183,32 +190,34 @@ void SkyCultureMaker::startScmProcess()
 	}
 	else
 	{
-		scmStartDialog->setVisible(true);
+		setStartDialogVisibility(true);
 	}
 }
 
 void SkyCultureMaker::stopScmProcess()
 {
-	// If the hide or abort dialog is visible, we do not want to stop the process directly
-	if (scmHideOrAbortMakerDialog->visible())
+	// If the start dialog is visible, hide it
+	if (scmStartDialog->visible())
 	{
+		setStartDialogVisibility(false);
+		setToolbarButtonState(false); // Turn OFF the toolbar button (image OFF)
 		return;
 	}
 
-	if (false != isScmEnabled)
+	// If any other dialog is visible, don't stop the process — just keep UI state ON
+	if (isAnyDialogVisible())
+	{
+		setHideOrAbortMakerDialogVisibility(true);
+		setToolbarButtonState(true); // Keep the toolbar button ON
+		return;
+	}
+
+	// Otherwise, actually stop the process
+	if (isScmEnabled)
 	{
 		isScmEnabled = false;
 		emit eventIsScmEnabled(false);
-	}
-
-	if (scmStartDialog->visible())
-	{
-		scmStartDialog->setVisible(false);
-	}
-	// Any dialogs are open -> hide or abort window
-	else
-	{
-		setHideOrAbortMakerDialogVisibility(true);
+		setToolbarButtonState(false); // Toggle the toolbar button to disabled
 	}
 }
 
@@ -272,6 +281,14 @@ void SkyCultureMaker::setIsScmEnabled(bool b)
 	else
 	{
 		stopScmProcess();
+	}
+}
+
+void SkyCultureMaker::setStartDialogVisibility(bool b)
+{
+	if (b != scmStartDialog->visible())
+	{
+		scmStartDialog->setVisible(b);
 	}
 }
 
@@ -453,6 +470,31 @@ void SkyCultureMaker::resetScmDialogsVisibilityState()
 	{
 		scmDialogVisibilityMap[key] = false;
 	}
+}
+
+bool SkyCultureMaker::isAnyDialogVisible() const
+{
+	if (scmSkyCultureDialog != nullptr && scmSkyCultureDialog->visible())
+	{
+		return true;
+	}
+	if (scmConstellationDialog != nullptr && scmConstellationDialog->visible())
+	{
+		return true;
+	}
+	if (scmSkyCultureExportDialog != nullptr && scmSkyCultureExportDialog->visible())
+	{
+		return true;
+	}
+	if (scmHideOrAbortMakerDialog != nullptr && scmHideOrAbortMakerDialog->visible())
+	{
+		return true;
+	}
+	if (scmStartDialog != nullptr && scmStartDialog->visible())
+	{
+		return true;
+	}
+	return false;
 }
 
 void SkyCultureMaker::resetScmDialogs()

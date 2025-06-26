@@ -51,6 +51,7 @@ void ScmHideOrAbortMakerDialog::hideScmCreationProcess()
 {
 	maker->saveScmDialogVisibilityState();
 	maker->hideAllDialogs();
+	maker->setToolbarButtonState(false); // Turn OFF the toolbar button (image OFF)
 }
 
 // TODO: clear the current sky culture
@@ -58,6 +59,7 @@ void ScmHideOrAbortMakerDialog::abortScmCreationProcess()
 {
 	maker->resetScmDialogs();
 	maker->hideAllDialogs();
+	maker->setToolbarButtonState(false); // Turn OFF the toolbar button (image OFF)
 }
 
 void ScmHideOrAbortMakerDialog::cancelDialog()

@@ -58,6 +58,19 @@ public:
 	void handleKeys(QKeyEvent *e) override;
 
 	/**
+	 * @brief Sets the toolbar button state.
+	 * @param b The boolean value to be set.
+	 */
+	void setToolbarButtonState(bool b);
+
+	/**
+	 * @brief Shows the start dialog for the sky culture maker.
+	 * 
+	 * @param b The boolean value to be set.
+	 */
+	void setStartDialogVisibility(bool b);
+
+	/**
 	 * @brief Shows the sky culture dialog.
 	 *
 	 * @param b The boolean value to be set.
@@ -184,6 +197,12 @@ public:
 	 * @brief Resets the visibility state of the SCM dialogs.
 	 */
 	void resetScmDialogsVisibilityState();
+
+	/**
+	 * @brief Checks if any SCM dialog is currently visible.
+	 * @return true if any dialog is visible, false otherwise.
+	 */
+	bool isAnyDialogVisible() const;
 
 signals:
 	void eventIsScmEnabled(bool b);
