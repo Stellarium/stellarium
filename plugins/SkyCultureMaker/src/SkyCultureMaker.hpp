@@ -9,6 +9,7 @@
 #include "StelObjectModule.hpp"
 #include "StelTranslator.hpp"
 #include "VecMath.hpp"
+#include "types/DialogID.hpp"
 #include <QFile>
 
 #include <QFont>
@@ -29,16 +30,6 @@ class SkyCultureMaker : public StelModule
 public:
 	SkyCultureMaker();
 	~SkyCultureMaker() override;
-
-	enum class DialogID
-	{
-		None,
-		StartDialog,
-		SkyCultureDialog,
-		SkyCultureExportDialog,
-		HideOrAbortMakerDialog,
-		ConstellationDialog
-	};
 
 	/// @brief Set the toggle value for a given action.
 	/// @param toggle The toggled value to be set.
@@ -248,12 +239,12 @@ private:
 	 * Store the visibility state of the SCM dialogs
 	 * The key is the dialog ID, the value is true if the dialog was hidden, false if newly created.
 	 */
-	QMap<DialogID, bool> scmDialogVisibilityMap = {
-		{DialogID::StartDialog, false},
-		{DialogID::SkyCultureDialog, false},
-		{DialogID::ConstellationDialog, false},
-		{DialogID::SkyCultureExportDialog, false},
-		{DialogID::HideOrAbortMakerDialog, false}
+	QMap<scm::DialogID, bool> scmDialogVisibilityMap = {
+		{scm::DialogID::StartDialog, false},
+		{scm::DialogID::SkyCultureDialog, false},
+		{scm::DialogID::ConstellationDialog, false},
+		{scm::DialogID::SkyCultureExportDialog, false},
+		{scm::DialogID::HideOrAbortMakerDialog, false}
 	};
 };
 

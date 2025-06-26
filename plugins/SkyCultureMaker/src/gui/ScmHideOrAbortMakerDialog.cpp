@@ -48,19 +48,13 @@ void ScmHideOrAbortMakerDialog::hideScmCreationProcess()
 {
 	maker->saveScmDialogVisibilityState();
 	maker->hideAllDialogsAndDisableSCM();
-	maker->setHideOrAbortMakerDialogVisibility(false);
 }
 
 // TODO: clear the current sky culture
 void ScmHideOrAbortMakerDialog::abortScmCreationProcess()
 {
-	qDebug() << "Unloaded the ScmHideOrAbortMakerDialog 1";
 	maker->resetScmDialogs();
-	qDebug() << "Unloaded the ScmHideOrAbortMakerDialog 2";
 	maker->hideAllDialogsAndDisableSCM();
-	qDebug() << "Unloaded the ScmHideOrAbortMakerDialog 3";
-	maker->setHideOrAbortMakerDialogVisibility(false);
-	qDebug() << "Unloaded the ScmHideOrAbortMakerDialog 4";
 }
 
 void ScmHideOrAbortMakerDialog::cancelDialog()

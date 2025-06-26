@@ -1,5 +1,5 @@
 /**
- * @file StarLine.hpp
+ * @file DrawTools.hpp
  * @author vgerlach, lgrumbach
  * @brief Type describing the possible states of the draw tool.
  * @version 0.1

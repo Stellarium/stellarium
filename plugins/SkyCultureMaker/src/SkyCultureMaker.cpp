@@ -390,6 +390,7 @@ bool SkyCultureMaker::saveSkyCultureDescription()
 
 void SkyCultureMaker::hideAllDialogsAndDisableSCM()
 {
+	setHideOrAbortMakerDialogVisibility(false);
 	setSkyCultureDialogVisibility(false);
 	setConstellationDialogVisibility(false);
 	setSkyCultureExportDialogVisibility(false);
@@ -400,15 +401,15 @@ void SkyCultureMaker::saveScmDialogVisibilityState()
 {
 	if (scmSkyCultureDialog != nullptr)
 	{
-		scmDialogVisibilityMap[DialogID::SkyCultureDialog] = scmSkyCultureDialog->visible();
+		scmDialogVisibilityMap[scm::DialogID::SkyCultureDialog] = scmSkyCultureDialog->visible();
 	}
 	if (scmConstellationDialog != nullptr)
 	{
-		scmDialogVisibilityMap[DialogID::ConstellationDialog] = scmConstellationDialog->visible();
+		scmDialogVisibilityMap[scm::DialogID::ConstellationDialog] = scmConstellationDialog->visible();
 	}
 	if (scmSkyCultureExportDialog != nullptr)
 	{
-		scmDialogVisibilityMap[DialogID::SkyCultureExportDialog] = scmSkyCultureExportDialog->visible();
+		scmDialogVisibilityMap[scm::DialogID::SkyCultureExportDialog] = scmSkyCultureExportDialog->visible();
 	}
 }
 
@@ -416,15 +417,15 @@ void SkyCultureMaker::restoreScmDialogVisibilityState()
 {
 	if (scmSkyCultureDialog != nullptr)
 	{
-		setSkyCultureDialogVisibility(scmDialogVisibilityMap[DialogID::SkyCultureDialog]);
+		setSkyCultureDialogVisibility(scmDialogVisibilityMap[scm::DialogID::SkyCultureDialog]);
 	}
 	if (scmConstellationDialog != nullptr)
 	{
-		setConstellationDialogVisibility(scmDialogVisibilityMap[DialogID::ConstellationDialog]);
+		setConstellationDialogVisibility(scmDialogVisibilityMap[scm::DialogID::ConstellationDialog]);
 	}
 	if (scmSkyCultureExportDialog != nullptr)
 	{
-		setSkyCultureExportDialogVisibility(scmDialogVisibilityMap[DialogID::SkyCultureExportDialog]);
+		setSkyCultureExportDialogVisibility(scmDialogVisibilityMap[scm::DialogID::SkyCultureExportDialog]);
 	}
 }
 

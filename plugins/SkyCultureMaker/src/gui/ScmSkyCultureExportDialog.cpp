@@ -35,11 +35,12 @@ void ScmSkyCultureExportDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmSkyCultureExportDialog::close);
-	connect(ui->exportBtn, &QPushButton::clicked, this, &ScmSkyCultureExportDialog::exportSkyCulture);
+	connect(ui->saveBtn, &QPushButton::clicked, this, &ScmSkyCultureExportDialog::saveSkyCulture);
+	connect(ui->saveAndExitBtn, &QPushButton::clicked, this, &ScmSkyCultureExportDialog::saveAndExitSkyCulture);
 	connect(ui->cancelBtn, &QPushButton::clicked, this, &ScmSkyCultureExportDialog::close);
 }
 
-void ScmSkyCultureExportDialog::exportSkyCulture()
+void ScmSkyCultureExportDialog::saveSkyCulture()
 {
 	if (maker == nullptr) {
 		qWarning() << "SkyCultureMaker: maker is nullptr. Cannot export sky culture.";
@@ -76,4 +77,11 @@ void ScmSkyCultureExportDialog::exportSkyCulture()
 	}
 
 	ScmSkyCultureExportDialog::close();
+}
+
+void ScmSkyCultureExportDialog::saveAndExitSkyCulture()
+{
+	saveSkyCulture();
+	maker->resetScmDialogs();
+	maker->hideAllDialogsAndDisableSCM();
 }

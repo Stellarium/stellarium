@@ -39,6 +39,7 @@ SET( SkyCultureMaker_SRCS
 
      types/CoordinateLine.hpp
      types/Drawing.hpp
+     types/DialogID.hpp
      types/DrawTools.hpp
      types/Lines.hpp
      types/StarLine.hpp

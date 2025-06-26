@@ -268,6 +268,7 @@ void ScmSkyCultureDialog::resetDialog()
 		name.clear();
 		setIdFromName(name);
 		resetConstellations();
+		maker->setSkyCultureDialogInfoLabel("");
 		maker->setSkyCultureDescription(getDescriptionFromTextEdit());
 		updateRemoveConstellationButton();
 	}

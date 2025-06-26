@@ -22,7 +22,8 @@ private:
 	Ui_scmSkyCultureExportDialog *ui  = nullptr;
 	SkyCultureMaker *maker = nullptr;
 
-	void exportSkyCulture();
+	void saveSkyCulture();
+	void saveAndExitSkyCulture();
 };
 
 #endif // SCM_SKY_CULTURE_EXPORT_DIALOG_HPP
