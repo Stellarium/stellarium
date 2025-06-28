@@ -11,6 +11,13 @@ IF(SCM_SHOULD_ENABLE_CONVERTER AND NOT (QT_VERSION_MAJOR EQUAL "5"))
   SET(SCM_CONVERTER_ENABLED TRUE)
   MESSAGE(STATUS "Sky Culture Converter will be enabled.")
 
+  # On macOS, Homebrew is a common way to install dependencies.
+  # We should look for it in the default locations for Apple Silicon and Intel macs
+  # to find the correct version of libtidy. Otherwise a system library might be used.
+  IF(APPLE)
+    LIST(APPEND CMAKE_PREFIX_PATH "/opt/homebrew" "/usr/local")
+  ENDIF()
+
   # download CPM.cmake
   FILE(
     DOWNLOAD
