@@ -60,6 +60,9 @@ After building or installing the plugin:
 4. Enable the plugin and restart Stellarium for changes to take effect.  
 
 The Sky Culture Maker icon should now appear in the Stellarium toolbar. 
+
+<br>
+
 <img src="./resources/bt_SCM_On.png" alt="drawing" width="100"/>
 
 ---
