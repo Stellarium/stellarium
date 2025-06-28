@@ -51,7 +51,17 @@ SET( SCM_UIS
      gui/scmSkyCultureDialog.ui
      gui/scmSkyCultureExportDialog.ui
      gui/scmStartDialog.ui
-)     
+)
+
+if(SCM_CONVERTER_ENABLED)
+  list(APPEND SkyCultureMaker_SRCS
+    gui/ScmConvertDialog.hpp
+    gui/ScmConvertDialog.cpp
+  )
+  list(APPEND SCM_UIS
+    gui/scmConvertDialog.ui
+  )
+endif()
 
 ################# compiles resources files ############
 SET(SkyCultureMaker_RES ../resources/SkyCultureMaker.qrc)
@@ -65,7 +75,14 @@ ENDIF()
 
 ADD_LIBRARY(SkyCultureMaker-static STATIC ${SkyCultureMaker_SRCS} ${SkyCultureMaker_RES_CXX} ${SCM_UIS})
 SET_TARGET_PROPERTIES(SkyCultureMaker-static PROPERTIES OUTPUT_NAME "SkyCultureMaker")
-TARGET_LINK_LIBRARIES(SkyCultureMaker-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
+
+list(APPEND SKYMAKER_PLUGIN_LINK_LIBS Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
+# SCM_CONVERTER_ENABLED is inherited from the parent CMakeLists.txt scope
+if(SCM_CONVERTER_ENABLED)
+  list(APPEND SKYMAKER_PLUGIN_LINK_LIBS skyculture_converter_lib unarr)
+endif()
+
+TARGET_LINK_LIBRARIES(SkyCultureMaker-static ${SKYMAKER_PLUGIN_LINK_LIBS})
 SET_TARGET_PROPERTIES(SkyCultureMaker-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins SkyCultureMaker-static)
 
