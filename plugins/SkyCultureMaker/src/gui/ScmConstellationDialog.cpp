@@ -50,6 +50,7 @@ void ScmConstellationDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmConstellationDialog::close);
+	connect(ui->tabs, &QTabWidget::currentChanged, this, &ScmConstellationDialog::tabChanged);
 
 	connect(ui->penBtn, &QPushButton::toggled, this, &ScmConstellationDialog::togglePen);
 	connect(ui->eraserBtn, &QPushButton::toggled, this, &ScmConstellationDialog::toggleEraser);
@@ -59,7 +60,12 @@ void ScmConstellationDialog::createDialogContent()
 	connect(ui->remove_image, &QPushButton::clicked, this, &ScmConstellationDialog::triggerRemoveImage);
 	connect(ui->bind_star, &QPushButton::clicked, this, &ScmConstellationDialog::bindSelectedStar);
 	imageItem->setAnchorSelectionChangedCallback(
-		[this]() { this->ui->bind_star->setEnabled(this->imageItem->hasAnchorSelection()); });
+		[this]()
+		{
+			this->ui->bind_star->setEnabled(this->imageItem->hasAnchorSelection());
+			this->updateArtwork();
+		});
+	imageItem->setAnchorPositionChangedCallback([this]() { this->updateArtwork(); });
 
 	connect(ui->saveBtn, &QPushButton::clicked, this, &ScmConstellationDialog::saveConstellation);
 	connect(ui->cancelBtn, &QPushButton::clicked, this, &ScmConstellationDialog::cancel);
@@ -157,10 +163,11 @@ void ScmConstellationDialog::triggerUploadImage()
 		return;
 	}
 
-	if (!(fileInfo.suffix().toUpper().compare("PNG") || fileInfo.suffix().toUpper().compare("JPG") ||
-	      fileInfo.suffix().toUpper().compare("JPEG")))
+	if (!(fileInfo.suffix().compare("PNG", Qt::CaseInsensitive) == 0 ||
+	      fileInfo.suffix().compare("JPG", Qt::CaseInsensitive) == 0 ||
+	      fileInfo.suffix().compare("JPEG", Qt::CaseInsensitive) == 0))
 	{
-		ui->infoLbl->setText("Choosen file is not a PNG, JPG or JPEG image:\n" + filePath);
+		ui->infoLbl->setText("Chosen file is not a PNG, JPG or JPEG image:\n" + filePath);
 		return;
 	}
 
@@ -173,12 +180,16 @@ void ScmConstellationDialog::triggerUploadImage()
 	ui->artwork_image->centerOn(imageItem);
 	ui->artwork_image->fitInView(imageItem, Qt::KeepAspectRatio);
 	ui->artwork_image->show();
+
+	updateArtwork();
 }
 
 void ScmConstellationDialog::triggerRemoveImage()
 {
 	imageItem->hide();
 	imageItem->resetAnchors();
+
+	updateArtwork();
 }
 
 void ScmConstellationDialog::bindSelectedStar()
@@ -186,6 +197,7 @@ void ScmConstellationDialog::bindSelectedStar()
 	if (!imageItem->hasAnchorSelection())
 	{
 		ui->infoLbl->setText("WARNING: Select an anchor to bind to.");
+		qDebug() << "WARNING: No anchor was selected.";
 		return;
 	}
 
@@ -195,12 +207,39 @@ void ScmConstellationDialog::bindSelectedStar()
 	if (!objectMgr.getWasSelected())
 	{
 		ui->infoLbl->setText("WARNING: Select a star to bind to the current selected anchor.");
+		qDebug() << "WARNING: No start was selected to bind to.";
 		return;
 	}
 
-	StelObjectP stelObj    = objectMgr.getLastSelectedObject();
+	StelObjectP stelObj = objectMgr.getLastSelectedObject();
+	assert(stelObj != nullptr); // Checked through getWasSelected
+	if (stelObj->getType().compare("star", Qt::CaseInsensitive) != 0)
+	{
+		ui->infoLbl->setText("WARNING: The selected object must be of type star.");
+		qDebug() << "WARNING: The selected object is not of type start, got " << stelObj->getType();
+		return;
+	}
+
 	ScmImageAnchor *anchor = imageItem->getSelectedAnchor();
+	bool success           = anchor->trySetStarHip(stelObj->getID());
+	if (success == false)
+	{
+		ui->infoLbl->setText("WARNING: The selected object must contain a HIP number.");
+		qDebug() << "WARNING: The object does not contain a hip, id = " << stelObj->getID();
+		return;
+	}
+
 	anchor->setStarNameI18n(stelObj->getNameI18n());
+	ui->infoLbl->setText(""); // Reset
+
+	updateArtwork();
+}
+
+void ScmConstellationDialog::tabChanged(int index)
+{
+	ui->penBtn->setChecked(false);
+	ui->eraserBtn->setChecked(false);
+	maker->setDrawTool(scm::DrawTools::None);
 }
 
 bool ScmConstellationDialog::canConstellationBeSaved() const
@@ -209,12 +248,14 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	if (maker->getCurrentSkyCulture() == nullptr)
 	{
 		ui->infoLbl->setText("WARNING: Could not save: Sky Culture is not set");
+		qDebug() << "WARNING: The current sky culture is not set";
 		return false;
 	}
 
 	if (constellationEnglishName.isEmpty())
 	{
 		ui->infoLbl->setText("WARNING: Could not save: English name is empty");
+		qDebug() << "WARNING: No englische name exists";
 		return false;
 	}
 
@@ -223,6 +264,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	if (finalId.isEmpty())
 	{
 		ui->infoLbl->setText("WARNING: Could not save: Constellation ID is empty");
+		qDebug() << "WARNING: no constellation is is set.";
 		return false;
 	}
 
@@ -230,6 +272,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	    maker->getCurrentSkyCulture()->getConstellation(finalId) != nullptr)
 	{
 		ui->infoLbl->setText("WARNING: Could not save: Constellation with this ID already exists");
+		qDebug() << "WARNING: constellation id already exists, id = " << finalId;
 		return false;
 	}
 
@@ -238,20 +281,19 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	if (drawnConstellation.empty())
 	{
 		ui->infoLbl->setText("WARNING: Could not save: The constellation does not contain any drawings");
+		qDebug() << "WARNING: Constellation does not contain any drawings.";
 		return false;
 	}
 
 	// Check if an artwork was added and all anchors have a binding
 	if (imageItem->isVisible())
 	{
-		for (const auto &anchor : imageItem->getAnchors())
+		if (!imageItem->isImageAnchored())
 		{
-			if (anchor.getStarNameI18n().isEmpty())
-			{
-				ui->infoLbl->setText("WARNING: Could not save: An artwork is attached, but not all "
-				                     "anchors have a star bound.");
-				return false;
-			}
+			ui->infoLbl->setText("WARNING: Could not save: An artwork is attached, but not all "
+			                     "anchors have a star bound.");
+			qDebug() << "WARNING: Artwork is attached, but not all anchors have a star bound.";
+			return false;
 		}
 	}
 
@@ -281,6 +323,7 @@ void ScmConstellationDialog::saveConstellation()
 		constellation.setNativeName(constellationNativeName);
 		constellation.setPronounce(constellationPronounce);
 		constellation.setIPA(constellationIPA);
+		constellation.setArtwork(imageItem->getArtwork());
 
 		maker->updateSkyCultureDialog();
 		resetDialog();
@@ -290,10 +333,9 @@ void ScmConstellationDialog::saveConstellation()
 
 void ScmConstellationDialog::resetDialog()
 {
-	activeTool = scm::DrawTools::None;
 	ui->penBtn->setChecked(false);
 	ui->eraserBtn->setChecked(false);
-	maker->setDrawTool(activeTool);
+	maker->setDrawTool(scm::DrawTools::None);
 
 	constellationId.clear();
 	ui->idTE->clear();
@@ -316,9 +358,22 @@ void ScmConstellationDialog::resetDialog()
 	ui->bind_star->setEnabled(false);
 	imageItem->hide();
 	imageItem->resetAnchors();
+	maker->setTempArtwork(nullptr);
 
 	// reset ScmDraw
 	maker->resetScmDraw();
+}
+
+void ScmConstellationDialog::updateArtwork()
+{
+	if (!imageItem->isVisible() || !imageItem->isImageAnchored())
+	{
+		maker->setTempArtwork(nullptr);
+		return;
+	}
+
+	imageItem->updateAnchors();
+	maker->setTempArtwork(&(imageItem->getArtwork()));
 }
 
 void ScmConstellationDialog::handleDialogSizeChanged(QSizeF size)

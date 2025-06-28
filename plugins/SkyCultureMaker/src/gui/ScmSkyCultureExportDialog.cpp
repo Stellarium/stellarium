@@ -1,10 +1,11 @@
 #include "ScmSkyCultureExportDialog.hpp"
-#include "ui_scmSkyCultureExportDialog.h"
+#include "QDir"
 #include "ScmSkyCulture.hpp"
-#include <QJsonObject>
+#include "ui_scmSkyCultureExportDialog.h"
 #include <QJsonDocument>
+#include <QJsonObject>
 
-ScmSkyCultureExportDialog::ScmSkyCultureExportDialog(SkyCultureMaker *maker)
+ScmSkyCultureExportDialog::ScmSkyCultureExportDialog(SkyCultureMaker* maker)
 	: StelDialogSeparate("ScmSkyCultureExportDialog")
 	, maker(maker)
 {
@@ -41,17 +42,31 @@ void ScmSkyCultureExportDialog::createDialogContent()
 
 void ScmSkyCultureExportDialog::exportSkyCulture()
 {
-	if (maker == nullptr) {
+	if (maker == nullptr)
+	{
 		qWarning() << "SkyCultureMaker: maker is nullptr. Cannot export sky culture.";
 		ScmSkyCultureExportDialog::close();
 		return;
 	}
 
 	scm::ScmSkyCulture* currentSkyCulture = maker->getCurrentSkyCulture();
-	if (currentSkyCulture == nullptr) {
+	if (currentSkyCulture == nullptr)
+	{
 		qWarning() << "SkyCultureMaker: current sky culture is nullptr. Cannot export.";
 		maker->setSkyCultureDialogInfoLabel("ERROR: No sky culture is set.");
 		ScmSkyCultureExportDialog::close();
+		return;
+	}
+
+	QString export_directory = currentSkyCulture->getId();
+
+	// save illustrations before json, because the relative illustrations path is required for the json export
+	bool savedIllustrationsSuccessfully = currentSkyCulture->saveIllustrations(export_directory +
+	                                                                           QDir::separator() + "illustrations");
+	if (!savedIllustrationsSuccessfully)
+	{
+		maker->setSkyCultureDialogInfoLabel("WARNING: Failed to save the illustrations.");
+		qWarning() << "SkyCultureMaker: Failed to export sky culture illustrations.";
 		return;
 	}
 
@@ -59,21 +74,19 @@ void ScmSkyCultureExportDialog::exportSkyCulture()
 	qDebug() << "Exporting sky culture...";
 	QJsonObject scJsonObject = currentSkyCulture->toJson();
 	QJsonDocument scJsonDoc(scJsonObject);
- 	qDebug().noquote() << scJsonDoc.toJson(QJsonDocument::Compact);
+	qDebug().noquote() << scJsonDoc.toJson(QJsonDocument::Compact);
 	// TODO: the error handling here should be improved once we also have to
 	// check whether the json file was successfully saved (#88)
 
 	bool savedDescriptionSuccessfully = maker->saveSkyCultureDescription();
 
-	if (savedDescriptionSuccessfully)
-	{
-		maker->setSkyCultureDialogInfoLabel("Sky culture exported successfully!");
-	}
-	else
+	if (!savedDescriptionSuccessfully)
 	{
 		maker->setSkyCultureDialogInfoLabel("WARNING: Failed to export sky culture description.");
 		qWarning() << "SkyCultureMaker: Failed to export sky culture description.";
 	}
+
+	maker->setSkyCultureDialogInfoLabel("Sky culture exported successfully!");
 
 	ScmSkyCultureExportDialog::close();
 }

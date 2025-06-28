@@ -19,6 +19,8 @@ SET( SkyCultureMaker_SRCS
      ScmCommonName.cpp
      ScmConstellation.hpp
      ScmConstellation.cpp
+     ScmConstellationArtwork.hpp
+     ScmConstellationArtwork.cpp
      ScmSkyCulture.hpp
      ScmSkyCulture.cpp
 
@@ -41,6 +43,7 @@ SET( SkyCultureMaker_SRCS
      types/Lines.hpp
      types/StarLine.hpp
      types/StarPoint.hpp
+     types/Anchor.hpp
 )
 
 SET( SCM_UIS

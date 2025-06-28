@@ -1,4 +1,6 @@
 #include "ScmConstellation.hpp"
+#include <QDir>
+#include <QFileInfo>
 
 scm::ScmConstellation::ScmConstellation(const std::vector<scm::CoordinateLine> &coordinates,
                                         const std::vector<scm::StarLine> &stars)
@@ -50,6 +52,11 @@ void scm::ScmConstellation::setIPA(const std::optional<QString> &ipa)
 	ScmConstellation::ipa = ipa;
 }
 
+void scm::ScmConstellation::setArtwork(const ScmConstellationArtwork &artwork)
+{
+	ScmConstellation::artwork = artwork;
+}
+
 void scm::ScmConstellation::setConstellation(const std::vector<CoordinateLine> &coordinates,
                                              const std::vector<StarLine> &stars)
 {
@@ -75,6 +82,8 @@ void scm::ScmConstellation::drawConstellation(StelCore *core, const Vec3f &lineC
 	}
 
 	drawNames(core, painter, nameColor);
+
+	artwork.draw(core, painter);
 }
 
 void scm::ScmConstellation::drawConstellation(StelCore *core) const
@@ -129,7 +138,7 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId) const
 	}
 	else
 	{
-		// Stars are empty, use the coorindates
+		// Stars are empty, use the coordinates
 		for (const auto &coord : constellationCoordinates)
 		{
 			linesArray.append(coord.toJson());
@@ -138,6 +147,17 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId) const
 
 	json["id"]    = "CON " + skyCultureId + " " + id;
 	json["lines"] = linesArray;
+	if (artwork.getHasArt() == true && !artworkPath.isEmpty())
+	{
+		QFileInfo fileInfo(artworkPath);
+		// the '/' separator is default in all skycultures
+		json["image"] = artwork.toJson("illustrations/" + fileInfo.fileName());
+	}
+	else
+	{
+		qWarning() << "WARNING: The artwork of this constellation " << id
+			   << " has no art or was not saved to a file.";
+	}
 
 	// Assemble common name object
 	QJsonObject commonNameObj;
@@ -166,6 +186,20 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId) const
 	json["common_name"] = commonNameObj;
 
 	return json;
+}
+
+bool scm::ScmConstellation::saveArtwork(const QString &directory)
+{
+	if (!artwork.getHasArt())
+	{
+		qWarning() << "WARNING: The artwork of this constellation " << id << " has no art.";
+		return true; // Not an error just a warning
+	}
+
+	QString filename = id.split(" ").back(); // Last part of id as usually used as the illustrations name
+	QString filepath = directory + QDir::separator() + filename + ".png"; // Write every illustrations as png
+	artworkPath      = filepath;
+	return artwork.save(filepath);
 }
 
 void scm::ScmConstellation::updateTextPosition()

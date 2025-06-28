@@ -2,6 +2,7 @@
 #define SKYCULTUREMAKER_HPP
 
 #include "ScmConstellation.hpp"
+#include "ScmConstellationArtwork.hpp"
 #include "ScmDraw.hpp"
 #include "ScmSkyCulture.hpp"
 #include "StelCore.hpp"
@@ -143,6 +144,13 @@ public:
 	 */
 	QFile getScmDescriptionFile();
 
+	/**
+	 * @brief Sets the temporary artwork that should be drawn.
+	 * 
+	 * @param artwork The artwork to draw.
+	 */
+	void setTempArtwork(const scm::ScmConstellationArtwork *artwork);
+
 signals:
 	void eventIsScmEnabled(bool b);
 
@@ -190,6 +198,9 @@ private:
 
 	/// The current sky culture
 	scm::ScmSkyCulture *currentSkyCulture = nullptr;
+
+	/// The artwork to temporary draw on the sky.
+	const scm::ScmConstellationArtwork *tempArtwork = nullptr;
 };
 
 #include "StelPluginInterface.hpp"
