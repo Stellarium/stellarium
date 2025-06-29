@@ -86,4 +86,5 @@ void ScmSkyCultureExportDialog::saveAndExitSkyCulture()
 	saveSkyCulture();
 	maker->resetScmDialogs();
 	maker->hideAllDialogs();
+	maker->setIsScmEnabled(false);
 }

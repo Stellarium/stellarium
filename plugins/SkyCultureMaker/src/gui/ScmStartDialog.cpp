@@ -25,7 +25,8 @@ void ScmStartDialog::retranslate()
 {
 	if (dialog)
 	{
-		ui->retranslateUi(dialog);
+		// Issue #117
+		// ui->retranslateUi(dialog);
 	}
 }
 

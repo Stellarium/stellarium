@@ -40,7 +40,7 @@ void ScmHideOrAbortMakerDialog::createDialogContent()
 	// Buttons
 	connect(ui->scmMakerAbortButton, &QPushButton::clicked, this,
 	        &ScmHideOrAbortMakerDialog::abortScmCreationProcess); // Abort
-	connect(ui->scmMakerHidehButton, &QPushButton::clicked, this,
+	connect(ui->scmMakerHideButton, &QPushButton::clicked, this,
 	        &ScmHideOrAbortMakerDialog::hideScmCreationProcess); // Hide
 	connect(ui->scmMakerCancelButton, &QPushButton::clicked, this,
 	        &ScmHideOrAbortMakerDialog::cancelDialog); // Cancel
