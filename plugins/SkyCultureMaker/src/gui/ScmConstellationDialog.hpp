@@ -23,14 +23,14 @@ public:
 	ScmConstellationDialog(SkyCultureMaker *maker);
 	~ScmConstellationDialog() override;
 
+public slots:
+	void retranslate() override;
+	void close() override;
+
 	/**
 	 * @brief Resets the constellation dialog data.
 	 */
 	void resetDialog();
-
-public slots:
-	void retranslate() override;
-	void close() override;
 
 private slots:
 	void togglePen(bool checked);
@@ -85,11 +85,6 @@ private:
 	 * @brief Resets and closes the dialog.
 	 */
 	void cancel();
-
-	/**
-	 * @brief Resets the constellation dialog data.
-	 */
-	void resetDialog();
 
 	/**
 	 * @brief Updates the state of the artwork.

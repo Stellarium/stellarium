@@ -204,7 +204,7 @@ public:
 	 * @return true if any dialog is visible, false otherwise.
 	 */
 	bool isAnyDialogVisible() const;
-
+	/**
 	 * @brief Sets the temporary artwork that should be drawn.
 	 * @param artwork The artwork to draw.
 	 */
