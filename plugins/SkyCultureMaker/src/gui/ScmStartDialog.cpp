@@ -36,7 +36,8 @@ void ScmStartDialog::retranslate()
 {
 	if (dialog)
 	{
-		ui->retranslateUi(dialog);
+		// Issue #117
+		// ui->retranslateUi(dialog);
 	}
 }
 
@@ -92,6 +93,5 @@ void ScmStartDialog::startScmCreationProcess()
 
 void ScmStartDialog::closeDialog()
 {
-	StelDialog::close();
 	maker->setIsScmEnabled(false); // Disable the Sky Culture Maker
 }

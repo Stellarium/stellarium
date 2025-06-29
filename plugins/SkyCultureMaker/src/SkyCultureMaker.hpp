@@ -10,6 +10,7 @@
 #include "StelObjectModule.hpp"
 #include "StelTranslator.hpp"
 #include "VecMath.hpp"
+#include "types/DialogID.hpp"
 #include <QFile>
 
 #include <QFont>
@@ -20,11 +21,13 @@ class ScmSkyCultureDialog;
 class ScmConstellationDialog;
 class ScmStartDialog;
 class ScmSkyCultureExportDialog;
+class ScmHideOrAbortMakerDialog;
 
 /// This is an example of a plug-in which can be dynamically loaded into stellarium
 class SkyCultureMaker : public StelModule
 {
 	Q_OBJECT
+	// TODO: var - getter - setter - trigger
 	Q_PROPERTY(bool enabledScm READ getIsScmEnabled WRITE setIsScmEnabled NOTIFY eventIsScmEnabled)
 public:
 	SkyCultureMaker();
@@ -56,6 +59,19 @@ public:
 	void handleKeys(QKeyEvent *e) override;
 
 	/**
+	 * @brief Sets the toolbar button state.
+	 * @param b The boolean value to be set.
+	 */
+	void setToolbarButtonState(bool b);
+
+	/**
+	 * @brief Shows the start dialog for the sky culture maker.
+	 * 
+	 * @param b The boolean value to be set.
+	 */
+	void setStartDialogVisibility(bool b);
+
+	/**
 	 * @brief Shows the sky culture dialog.
 	 *
 	 * @param b The boolean value to be set.
@@ -75,6 +91,20 @@ public:
 	 * @param b The boolean value to be set.
 	 */
 	void setSkyCultureExportDialogVisibility(bool b);
+
+	/**
+	 * @brief Shows the hide or abort maker dialog.
+	 *
+	 * @param b The boolean value to be set.
+	 */
+	void setHideOrAbortMakerDialogVisibility(bool b);
+
+	/**
+	 * @brief Set the visibility of all dialogs.
+	 * 
+	 * @param b The boolean value to be set.
+	 */
+	void hideAllDialogs();
 
 	/**
 	 * @brief Toggles the usage of the line draw.
@@ -145,8 +175,37 @@ public:
 	QFile getScmDescriptionFile();
 
 	/**
+	 * @brief Saves the visibility state of the SCM dialogs.
+	 */
+	void saveScmDialogVisibilityState();
+
+	/**
+	 * @brief Restores the visibility state of the SCM dialogs.
+	 */
+	void restoreScmDialogVisibilityState();
+
+	/**
+	 * @brief Checks if any SCM dialog is currently hidden.
+	 */
+	bool isAnyDialogHidden() const;
+
+	/**
+	 * @brief Resets all SCM dialogs content and visibility states.
+	*/
+	void resetScmDialogs();
+
+	/**
+	 * @brief Resets the visibility state of the SCM dialogs.
+	 */
+	void resetScmDialogsVisibilityState();
+
+	/**
+	 * @brief Checks if any SCM dialog is currently visible.
+	 * @return true if any dialog is visible, false otherwise.
+	 */
+	bool isAnyDialogVisible() const;
+	/**
 	 * @brief Sets the temporary artwork that should be drawn.
-	 * 
 	 * @param artwork The artwork to draw.
 	 */
 	void setTempArtwork(const scm::ScmConstellationArtwork *artwork);
@@ -196,8 +255,23 @@ private:
 	/// Dialog for exporting a sky culture
 	ScmSkyCultureExportDialog *scmSkyCultureExportDialog = nullptr;
 
+	/// Dialog for hiding or aborting maker process
+	ScmHideOrAbortMakerDialog *scmHideOrAbortMakerDialog = nullptr;
+
 	/// The current sky culture
 	scm::ScmSkyCulture *currentSkyCulture = nullptr;
+
+	/**
+	 * Store the visibility state of the SCM dialogs
+	 * The key is the dialog ID, the value is true if the dialog was hidden, false if newly created.
+	 */
+	QMap<scm::DialogID, bool> scmDialogVisibilityMap = {
+		{scm::DialogID::StartDialog,            false},
+		{scm::DialogID::SkyCultureDialog,       false},
+		{scm::DialogID::ConstellationDialog,    false},
+		{scm::DialogID::SkyCultureExportDialog, false},
+		{scm::DialogID::HideOrAbortMakerDialog, false}
+        };
 
 	/// The artwork to temporary draw on the sky.
 	const scm::ScmConstellationArtwork *tempArtwork = nullptr;

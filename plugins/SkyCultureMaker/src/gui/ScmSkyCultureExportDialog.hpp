@@ -19,10 +19,11 @@ public slots:
 	void retranslate() override;
 
 private:
-	Ui_scmSkyCultureExportDialog *ui  = nullptr;
-	SkyCultureMaker *maker = nullptr;
+	Ui_scmSkyCultureExportDialog *ui = nullptr;
+	SkyCultureMaker *maker           = nullptr;
 
-	void exportSkyCulture();
+	void saveSkyCulture();
+	void saveAndExitSkyCulture();
 };
 
 #endif // SCM_SKY_CULTURE_EXPORT_DIALOG_HPP

@@ -27,6 +27,11 @@ public slots:
 	void retranslate() override;
 	void close() override;
 
+	/**
+	 * @brief Resets the constellation dialog data.
+	 */
+	void resetDialog();
+
 private slots:
 	void togglePen(bool checked);
 	void toggleEraser(bool checked);
@@ -40,6 +45,7 @@ private:
 	Ui_scmConstellationDialog *ui = nullptr;
 	SkyCultureMaker *maker        = nullptr;
 	scm::DrawTools activeTool     = scm::DrawTools::None;
+	bool isDialogInitialized      = false;
 
 	/// Identifier of the constellation
 	QString constellationId;
@@ -79,11 +85,6 @@ private:
 	 * @brief Resets and closes the dialog.
 	 */
 	void cancel();
-
-	/**
-	 * @brief Resets the constellation dialog data.
-	 */
-	void resetDialog();
 
 	/**
 	 * @brief Updates the state of the artwork.

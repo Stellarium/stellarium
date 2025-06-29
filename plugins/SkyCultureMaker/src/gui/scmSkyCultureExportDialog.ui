@@ -158,9 +158,16 @@
       <number>10</number>
      </property>
      <item>
-      <widget class="QPushButton" name="exportBtn">
+      <widget class="QPushButton" name="saveBtn">
        <property name="text">
-        <string>Export</string>
+        <string>Save</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="saveAndExitBtn">
+       <property name="text">
+        <string>Save and Exit</string>
        </property>
       </widget>
      </item>
