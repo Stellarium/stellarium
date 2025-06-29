@@ -120,6 +120,14 @@ All created constellations, along with their properties, are exported into the `
 
 These files allow your sky culture to be loaded and displayed within Stellarium or shared with others.
 
+---
+
+#### Converting a Sky Culture
+
+To convert a sky culture, click on **Convert** in the main window.  
+Select a `.zip`, `.rar`, or `.7z` archive containing the sky culture files.  
+
+The resulting files of the conversion will then be saved in the sky culture folder of Stellarium.
 
 ---
 
