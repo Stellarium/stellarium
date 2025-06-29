@@ -7,7 +7,7 @@
 The plugin provides an intuitive interface for both amateur astronomers and advanced users to:
 - Create and edit sky cultures without extensive manual configuration  
 - Define new constellations by drawing directly in the Stellarium sky view  
-- convert .fab data  
+- convert .fab data into JSON
 - Contribute to educational projects, preserve cultural astronomical knowledge, or create personalized star maps  
 
 This documentation explains how to install, configure, and use the Sky Culture Maker plugin effectively.
@@ -44,9 +44,6 @@ This documentation explains how to install, configure, and use the Sky Culture M
 
 To use Sky Culture Maker, ensure the following dependencies are installed:
 
-**For building and running the plugin:**  
-
-
 **For converting**  
 - [Tidy HTML](https://www.html-tidy.org/) (used for formatting HTML descriptions)  
 
@@ -70,7 +67,6 @@ The Sky Culture Maker icon should now appear in the Stellarium toolbar.
 ## 2. Getting Started
 
 Sky Culture Maker provides a seamless workflow to create custom sky cultures directly within Stellarium. This section will guide you through the initial steps to get familiar with the interface and start creating your first sky culture.
-
 
 ### Overview of the User Interface
 
@@ -99,7 +95,7 @@ Once the basic information is complete, you can begin drawing constellations.
 
 The constellation editor provides tools for interactive design:
 
-- **Pen Tool:** Click on stars to draw constellation lines between points.  
+- **Pen Tool:** Right click on stars to draw constellation lines between points.  
 - **Erase Tool:** Remove lines or incorrect segments from the constellation.  
 - **Undo:** Revert the most recent drawing action.  
 
@@ -115,14 +111,19 @@ If your constellation consists of multiple separated areas, disable the pen tool
 
 ---
 
-### Exporting Your Sky Culture
+#### Exporting the Sky Culture
 
-*This section is under construction.*  
-You will be able to export the entire sky culture package for use within Stellarium or distribution to others. The export process will generate all required files and directory structures automatically.
+Once your sky culture is saved, it can be exported as a JSON package. The exported files are stored in Stellarium's `skycultures` directory.
+
+The `description.md` file contains all general information provided in the *Overview* tab.  
+All created constellations, along with their properties, are exported into the `index.json` file.  
+
+These files allow your sky culture to be loaded and displayed within Stellarium or shared with others.
+
 
 ---
 
-## 3. File Structure and Output**
+## 3. File Structure and Output
 
 SkyCultureMaker/
 - CMakeLists.txt, README.md, icons.svg 
@@ -171,4 +172,17 @@ Generated sky culture files follow the Stellarium standards for directories, met
 ---
 
 ## 6. **License Information**
+Copyright (C) 2025 The Sky Culture Maker Contributors
 
+This plugin is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This plugin is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this plugin; if not, see https://www.gnu.org/licenses/.
