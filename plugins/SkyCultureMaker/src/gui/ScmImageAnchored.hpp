@@ -1,7 +1,8 @@
 #ifndef SCMIMAGEANCHORED_H
 #define SCMIMAGEANCHORED_H
 
-#include <ScmImageAnchor.hpp>
+#include "ScmConstellationArtwork.hpp"
+#include "ScmImageAnchor.hpp"
 #include <functional>
 #include <vector>
 #include <QGraphicsPathItem>
@@ -42,11 +43,34 @@ public:
 	void setAnchorSelectionChangedCallback(std::function<void()> func);
 
 	/**
+	 * @brief Set the anchor position changed callback function.
+	 */
+	void setAnchorPositionChangedCallback(std::function<void()> func);
+
+	/**
 	 * @brief Resets the anchors to default.
 	 */
 	void resetAnchors();
 
 	const std::vector<ScmImageAnchor> &getAnchors() const;
+
+	/**
+	 * @brief Indicates if all anchors have a star they are bound too.
+	 * 
+	 * @return true All anchors have a bound star.
+	 * @return false Not all anchors have a bound star.
+	 */
+	bool isImageAnchored();
+
+	/**
+	 * @brief Updates the anchors of this object with the drawn artwork.
+	 */
+	void updateAnchors();
+
+	/**
+	 * @brief Gets the artwork;
+	 */
+	const scm::ScmConstellationArtwork &getArtwork() const;
 
 protected:
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
@@ -56,12 +80,18 @@ protected:
 private:
 	/// Holds the scene that is drawn on.
 	QGraphicsScene drawScene;
+
 	/// The anchors in the graphics view.
 	std::vector<ScmImageAnchor> anchorItems{3}; // 3 anchors
+
 	/// The scale of the anchor relative to the image size.
 	const qreal anchorScale = 1 / 50.0;
+
 	// Holds the selected anchor
 	ScmImageAnchor *selectedAnchor = nullptr;
+
+	/// Holds the current artwork
+	scm::ScmConstellationArtwork artwork;
 };
 
 #endif // SCMIMAGEANCHORED_H

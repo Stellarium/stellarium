@@ -117,19 +117,12 @@ void ScmSkyCultureDialog::saveSkyCulture()
 {
 	scm::Description desc = getDescriptionFromTextEdit();
 
-	// check if license is selected
-	int index = ui->licenseCB->currentIndex();
-	if (index > 0 && index < ui->licenseCB->count())
-	{
-		auto licenseType = ui->licenseCB->itemData(index).value<scm::LicenseType>();
-		maker->getCurrentSkyCulture()->setLicense(licenseType);
-	}
-	else
+	// check if license is set
+	if (desc.license == scm::LicenseType::NONE)
 	{
 		ui->infoLbl->setText("WARNING: Please select a license for the sky culture.");
 		return;
 	}
-
 	// check if description is complete
 	if (!desc.isComplete())
 	{
@@ -142,29 +135,6 @@ void ScmSkyCultureDialog::saveSkyCulture()
 
 	// open export dialog
 	maker->setSkyCultureExportDialogVisibility(true);
-}
-
-void ScmSkyCultureDialog::saveLicense()
-{
-	if (maker->getCurrentSkyCulture() != nullptr)
-	{
-		// set license type
-		int index = ui->licenseCB->currentIndex();
-		if (index >= 0 && index < ui->licenseCB->count())
-		{
-			auto licenseType = ui->licenseCB->itemData(index).value<scm::LicenseType>();
-			maker->getCurrentSkyCulture()->setLicense(licenseType);
-		}
-		// set authors
-		maker->getCurrentSkyCulture()->setAuthors(ui->authorsTE->toPlainText());
-		// set classification type
-		index = ui->classificationCB->currentIndex();
-		if (index >= 0 && index < ui->classificationCB->count())
-		{
-			auto classificationType = ui->classificationCB->itemData(index).value<scm::ClassificationType>();
-			maker->getCurrentSkyCulture()->setClassificationType(classificationType);
-		}
-	}
 }
 
 void ScmSkyCultureDialog::removeSelectedConstellation()
@@ -232,7 +202,7 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 
 	desc.name               = ui->skyCultureNameTE->toPlainText();
 	desc.authors            = ui->authorsTE->toPlainText();
-	desc.license            = maker->getCurrentSkyCulture()->getLicense();
+	desc.license            = ui->licenseCB->currentData().value<scm::LicenseType>();
 	desc.cultureDescription = ui->cultureDescriptionTE->toPlainText();
 	desc.about              = ui->aboutTE->toPlainText();
 

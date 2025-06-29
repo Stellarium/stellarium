@@ -5,6 +5,10 @@
 #include "StelDialog.hpp"
 #include <QObject>
 
+#ifdef SCM_CONVERTER_ENABLED_CPP
+# include "ScmConvertDialog.hpp"
+#endif
+
 class Ui_scmStartDialog;
 
 class ScmStartDialog : public StelDialog
@@ -26,6 +30,9 @@ private slots:
 private:
 	Ui_scmStartDialog *ui  = nullptr;
 	SkyCultureMaker *maker = nullptr;
+#ifdef SCM_CONVERTER_ENABLED_CPP
+	ScmConvertDialog *converterDialog = nullptr;
+#endif
 };
 
 #endif // SCMSTARTDIALOG_HPP

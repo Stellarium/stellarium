@@ -46,7 +46,8 @@ struct Description
 		       !constellations.trimmed().isEmpty() && !milkyWay.trimmed().isEmpty() &&
 		       !otherObjects.trimmed().isEmpty() && !about.trimmed().isEmpty() &&
 		       !authors.trimmed().isEmpty() && !acknowledgements.trimmed().isEmpty() &&
-		       !references.trimmed().isEmpty() && classification != scm::ClassificationType::NONE;
+		       !references.trimmed().isEmpty() && classification != scm::ClassificationType::NONE &&
+				license != scm::LicenseType::NONE;
 	}
 };
 } // namespace scm

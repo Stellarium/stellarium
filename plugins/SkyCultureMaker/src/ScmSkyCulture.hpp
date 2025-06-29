@@ -35,11 +35,10 @@ public:
 	/// Sets the id of the sky culture
 	void setId(const QString &id);
 
-	/// Sets the region of the sky culture
-	void setRegion(const QString &region);
-
-	/// Sets the classification of the sky culture
-	void setClassificationType(ClassificationType classificationType);
+	/**
+	 * @brief Gets the id of the sky culture.
+	 */
+	const QString &getId() const;
 
 	/// Sets whether to show common names in addition to the culture-specific ones
 	void setFallbackToInternationalNames(bool fallback);
@@ -75,18 +74,6 @@ public:
 	/// Returns the common names of the stars, planets and nonstellar objects
 	std::vector<ScmCommonName> getCommonNames() const;
 
-	/// Sets the license of the sky culture
-	void setLicense(scm::LicenseType license);
-
-	/// Returns the license of the sky culture
-	scm::LicenseType getLicense() const;
-
-	/// Sets the authors of the sky culture
-	void setAuthors(const QString authors);
-
-	/// Returns the authors of the sky culture
-	QString getAuthors() const;
-
 	/**
 	* @brief Returns the sky culture as a JSON object
 	*/
@@ -110,18 +97,18 @@ public:
 	 */
 	bool saveDescriptionAsMarkdown(QFile file);
 
+	/**
+	 * @brief Saves all illustrations to the directory. No subdirectory is saved.
+	 * 
+	 * @param directory The directory the illustrations are saved in.
+	 * @return true Successful saved.
+	 * @return false Failed to save.
+	 */
+	bool saveIllustrations(const QString &directory);
+
 private:
 	/// Sky culture identifier
 	QString id;
-
-	/*! The name of region following the United Nations geoscheme UN~M49
-	 *   https://unstats.un.org/unsd/methodology/m49/ For skycultures of worldwide applicability (mostly those
-	 *   adhering to IAU constellation borders), use "World".
-	 */
-	QString region;
-
-	/// Classification of the sky culture
-	ClassificationType classificationType = ClassificationType::NONE;
 
 	/// Whether to show common names in addition to the culture-specific ones
 	bool fallbackToInternationalNames = false;
@@ -134,12 +121,6 @@ private:
 
 	/// The common names of the stars, planets and nonstellar objects
 	std::vector<ScmCommonName> commonNames;
-
-	/// The license of the sky culture
-	scm::LicenseType license = scm::LicenseType::NONE;
-
-	/// The authors of the sky culture
-	QString authors;
 
 	/// The description of the sky culture
 	scm::Description description;

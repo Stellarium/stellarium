@@ -1,4 +1,7 @@
-#include <ScmImageAnchored.hpp>
+#include "ScmImageAnchored.hpp"
+#include "StarWrapper.hpp"
+#include "StelApp.hpp"
+#include "types/Anchor.hpp"
 #include <QDebug>
 
 ScmImageAnchored::ScmImageAnchored()
@@ -41,6 +44,13 @@ void ScmImageAnchored::setImage(const QPixmap &image)
 		anchor.setMovementBounds(QRectF(offsetFix.x() - offset, offsetFix.y(), image.width(), image.height()));
 		offset += diameter;
 	}
+
+	artwork.setArtwork(image.toImage());
+
+	if (isImageAnchored())
+	{
+		artwork.setupArt();
+	}
 }
 
 bool ScmImageAnchored::hasAnchorSelection() const
@@ -61,6 +71,14 @@ void ScmImageAnchored::setAnchorSelectionChangedCallback(std::function<void()> f
 	}
 }
 
+void ScmImageAnchored::setAnchorPositionChangedCallback(std::function<void()> func)
+{
+	for (auto &anchor : anchorItems)
+	{
+		anchor.setPositionChangedCallback(func);
+	}
+}
+
 void ScmImageAnchored::resetAnchors()
 {
 	selectedAnchor = nullptr;
@@ -76,6 +94,31 @@ const std::vector<ScmImageAnchor> &ScmImageAnchored::getAnchors() const
 	return anchorItems;
 }
 
+bool ScmImageAnchored::isImageAnchored()
+{
+	for (const auto &anchor : anchorItems)
+	{
+		if (anchor.getStarNameI18n().isEmpty())
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+void ScmImageAnchored::updateAnchors()
+{
+	for (size_t i = 0; i < anchorItems.size(); ++i)
+	{
+		scm::Anchor anchor;
+		anchor.position = anchorItems[i].getPosition();
+		anchor.hip      = anchorItems[i].getStarHip();
+		artwork.setAnchor(i, anchor);
+	}
+
+	artwork.setupArt();
+}
+
 void ScmImageAnchored::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	QGraphicsItem::mousePressEvent(event);
@@ -89,4 +132,9 @@ void ScmImageAnchored::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void ScmImageAnchored::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	QGraphicsItem::mouseMoveEvent(event);
+}
+
+const scm::ScmConstellationArtwork &ScmImageAnchored::getArtwork() const
+{
+	return artwork;
 }

@@ -75,10 +75,10 @@ SkyCultureMaker::SkyCultureMaker()
 	setObjectName("SkyCultureMaker");
 	font.setPixelSize(25);
 
-	drawObj                	  = new scm::ScmDraw();
-	scmStartDialog         	  = new ScmStartDialog(this);
-	scmSkyCultureDialog    	  = new ScmSkyCultureDialog(this);
-	scmConstellationDialog 	  = new ScmConstellationDialog(this);
+	drawObj                   = new scm::ScmDraw();
+	scmStartDialog            = new ScmStartDialog(this);
+	scmSkyCultureDialog       = new ScmSkyCultureDialog(this);
+	scmConstellationDialog    = new ScmConstellationDialog(this);
 	scmSkyCultureExportDialog = new ScmSkyCultureExportDialog(this);
 }
 
@@ -205,6 +205,11 @@ void SkyCultureMaker::draw(StelCore *core)
 	if (isScmEnabled && currentSkyCulture != nullptr)
 	{
 		currentSkyCulture->draw(core);
+	}
+
+	if (isScmEnabled && tempArtwork != nullptr)
+	{
+		tempArtwork->draw(core);
 	}
 }
 
@@ -358,6 +363,11 @@ QFile SkyCultureMaker::getScmDescriptionFile()
 {
 	// TODO: Issue #85
 	return QFile("description.md");
+}
+
+void SkyCultureMaker::setTempArtwork(const scm::ScmConstellationArtwork *artwork)
+{
+	tempArtwork = artwork;
 }
 
 bool SkyCultureMaker::saveSkyCultureDescription()
