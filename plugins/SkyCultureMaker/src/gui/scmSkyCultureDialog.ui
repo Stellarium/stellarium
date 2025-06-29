@@ -372,19 +372,56 @@ p, li { white-space: pre-wrap; }
 
                 <!-- Sky -->
                 <item>
-                <widget class="QLabel" name="skyLbl">
-                  <property name="text">
-                  <string>Sky (what can the User see here):</string>
-                  </property>
-                </widget>
-                </item>
-                <item>
-                <widget class="QTextEdit" name="skyTE">
-                  <property name="acceptRichText">
-                    <bool>false</bool>
-                  </property>
-                </widget>
-                </item>
+                <layout class="QHBoxLayout">
+                  <item>
+                    <widget class="QLabel" name="skyLbl">
+                      <property name="text">
+                        <string>Sky</string>
+                      </property>
+                    </widget>
+                  </item>
+                  <item>
+                    <widget class="QPushButton" name="pushButton">
+                      <property name="enabled">
+                        <bool>false</bool>
+                      </property>
+                      <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                        </sizepolicy>
+                      </property>
+                      <property name="cursor">
+                        <cursorShape>WhatsThisCursor</cursorShape>
+                      </property>
+                      <property name="contextMenuPolicy">
+                        <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
+                      </property>
+                      <property name="toolTip">
+                        <string>what can the User see here</string>
+                      </property>
+                      <property name="autoFillBackground">
+                        <bool>false</bool>
+                      </property>
+                      <property name="icon">
+                        <iconset theme="QIcon::ThemeIcon::HelpAbout"/>
+                      </property>
+                      <property name="autoDefault">
+                        <bool>false</bool>
+                      </property>
+                      <property name="default">
+                        <bool>false</bool>
+                      </property>
+                      <property name="flat">
+                        <bool>true</bool>
+                      </property>
+                    </widget>
+                  </item>
+                </layout>
+              </item>
+              <item>
+                <widget class="QTextEdit" name="skyTE"/>
+              </item>
 
                 <!-- Moon & Sun -->
                 <item>
