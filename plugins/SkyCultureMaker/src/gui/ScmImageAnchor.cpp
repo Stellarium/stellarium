@@ -4,6 +4,7 @@
 #include <QBrush>
 #include <QDebug>
 #include <QGraphicsSceneMouseEvent>
+#include <QRegularExpression>
 
 void ScmImageAnchor::setSelectionReference(ScmImageAnchor *&anchor)
 {
@@ -51,6 +52,11 @@ void ScmImageAnchor::setSelectionChangedCallback(std::function<void()> func)
 	selectionChangedCallback = func;
 }
 
+void ScmImageAnchor::setPositionChangedCallback(std::function<void()> func)
+{
+	positionChangedCallback = func;
+}
+
 void ScmImageAnchor::setMovementBounds(const QRectF &bounds)
 {
 	movementBound = bounds;
@@ -67,6 +73,30 @@ const QString &ScmImageAnchor::getStarNameI18n() const
 	return starNameI18n;
 }
 
+void ScmImageAnchor::setStarHip(StarId hip)
+{
+	ScmImageAnchor::hip = hip;
+}
+
+bool ScmImageAnchor::trySetStarHip(const QString &id)
+{
+	QRegularExpression hipExpression(R"(HIP\s+(\d+))");
+
+	QRegularExpressionMatch hipMatch = hipExpression.match(id);
+	if (hipMatch.hasMatch())
+	{
+		setStarHip(hipMatch.captured(1).toInt());
+		return true;
+	}
+
+	return false;
+}
+
+const StarId &ScmImageAnchor::getStarHip() const
+{
+	return hip;
+}
+
 void ScmImageAnchor::updateColor()
 {
 	if (isSelected == true)
@@ -77,6 +107,16 @@ void ScmImageAnchor::updateColor()
 	{
 		setBrush(starNameI18n.isEmpty() ? colorNoStar : color);
 	}
+}
+
+Vec2i ScmImageAnchor::getPosition() const
+{
+	auto position     = pos();
+	auto origin       = movementBound.topLeft();
+	auto anchorRadius = rect().size() * 0.5f;
+	// offset by the origin of the texture so we have exact pixel mapping starting in the top left corner.
+	return Vec2i(static_cast<int>(position.x() - origin.x() + anchorRadius.width()),
+	             static_cast<int>(position.y() - origin.y() + anchorRadius.height()));
 }
 
 void ScmImageAnchor::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -97,6 +137,11 @@ void ScmImageAnchor::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void ScmImageAnchor::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	QGraphicsItem::mouseMoveEvent(event);
+
+	if (isSelected == false)
+	{
+		return;
+	}
 
 	if (movementBound.isEmpty())
 	{
@@ -125,6 +170,11 @@ void ScmImageAnchor::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 	}
 
 	setPos(new_x, new_y);
+
+	if (positionChangedCallback != nullptr)
+	{
+		positionChangedCallback();
+	}
 }
 
 ScmImageAnchor::ScmImageAnchor()

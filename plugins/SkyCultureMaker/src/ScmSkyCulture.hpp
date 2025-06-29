@@ -35,6 +35,11 @@ public:
 	/// Sets the id of the sky culture
 	void setId(const QString &id);
 
+	/**
+	 * @brief Gets the id of the sky culture.
+	 */
+	const QString &getId() const;
+
 	/// Sets whether to show common names in addition to the culture-specific ones
 	void setFallbackToInternationalNames(bool fallback);
 
@@ -91,6 +96,15 @@ public:
 	 * @return true if the description was saved successfully, false otherwise.
 	 */
 	bool saveDescriptionAsMarkdown(QFile file);
+
+	/**
+	 * @brief Saves all illustrations to the directory. No subdirectory is saved.
+	 * 
+	 * @param directory The directory the illustrations are saved in.
+	 * @return true Successful saved.
+	 * @return false Failed to save.
+	 */
+	bool saveIllustrations(const QString &directory);
 
 private:
 	/// Sky culture identifier

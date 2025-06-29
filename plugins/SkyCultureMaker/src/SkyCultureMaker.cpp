@@ -232,6 +232,11 @@ void SkyCultureMaker::draw(StelCore *core)
 	{
 		currentSkyCulture->draw(core);
 	}
+
+	if (isScmEnabled && tempArtwork != nullptr)
+	{
+		tempArtwork->draw(core);
+	}
 }
 
 bool SkyCultureMaker::handleMouseMoves(int x, int y, Qt::MouseButtons b)
@@ -400,6 +405,11 @@ QFile SkyCultureMaker::getScmDescriptionFile()
 {
 	// TODO: Issue #85
 	return QFile("description.md");
+}
+
+void SkyCultureMaker::setTempArtwork(const scm::ScmConstellationArtwork *artwork)
+{
+	tempArtwork = artwork;
 }
 
 bool SkyCultureMaker::saveSkyCultureDescription()

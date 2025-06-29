@@ -59,7 +59,6 @@ jobs:
     name: "Linux (amd64; qt6)"
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && github.event.pull_request.draft == false"
-
     steps:
     - name: Install dependencies
       run: |
@@ -72,7 +71,7 @@ jobs:
                             qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev \
                             libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libqt6webenginecore6-bin \
                             libqt6webengine6-data libexiv2-dev libnlopt-cxx-dev zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev \
-                            libgps-dev libmd4c-dev libmd4c-html0-dev
+                            libgps-dev libmd4c-dev libmd4c-html0-dev cmake gettext libgettextpo-dev libtidy-dev
 
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -127,7 +126,7 @@ jobs:
               -DUSE_PLUGIN_LENSDISTORTIONESTIMATOR=Off -DUSE_PLUGIN_NEBULATEXTURES=Off -DUSE_PLUGIN_NAVSTARS=Off -DUSE_PLUGIN_NOVAE=Off -DUSE_PLUGIN_OBSERVABILITY=Off \
               -DUSE_PLUGIN_OCULARS=Off -DUSE_PLUGIN_ONLINEQUERIES=Off -DUSE_PLUGIN_POINTERCOORDINATES=Off -DUSE_PLUGIN_PULSARS=Off -DUSE_PLUGIN_QUASARS=Off \
               -DUSE_PLUGIN_REMOTECONTROL=Off -DUSE_PLUGIN_REMOTESYNC=Off -DUSE_PLUGIN_SATELLITES=Off -DUSE_PLUGIN_SCENERY3D=Off -DUSE_PLUGIN_SOLARSYSTEMEDITOR=Off \
-              -DUSE_PLUGIN_SUPERNOVAE=Off -DUSE_PLUGIN_TELESCOPECONTROL=Off -DUSE_PLUGIN_TEXTUSERINTERFACE=Off \
+              -DUSE_PLUGIN_SUPERNOVAE=Off -DUSE_PLUGIN_TELESCOPECONTROL=Off -DUSE_PLUGIN_TEXTUSERINTERFACE=Off -DUSE_PLUGIN_SKYCULTUREMAKER=Off\
               "${{ github.workspace }}"
 
     - name: Compile
@@ -195,7 +194,7 @@ jobs:
       run: |
         # brew update
         # brew upgrade
-        brew install qt@6 nlopt exiv2
+        brew install qt@6 nlopt exiv2 tidy-html5
 
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -206,7 +205,7 @@ jobs:
         export PATH="/usr/local/opt/qt@6/bin:$PATH"
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On ${{ github.workspace }}
+        cmake -DCMAKE_PREFIX_PATH="/usr/local/opt/qt@6;/usr/local/opt/tidy-html5" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On ${{ github.workspace }}
 
     - name: Compile
       working-directory: build
@@ -237,7 +236,7 @@ jobs:
       run: |
         # brew update
         # brew upgrade
-        brew install qt@6 nlopt exiv2
+        brew install qt@6 nlopt exiv2 tidy-html5
 
     - name: Checkout repository
       uses: actions/checkout@v4

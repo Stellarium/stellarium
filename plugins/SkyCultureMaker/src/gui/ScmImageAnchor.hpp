@@ -1,9 +1,12 @@
 #ifndef SCMIMAGEANCHOR_H
 #define SCMIMAGEANCHOR_H
 
+#include "StarMgr.hpp"
+#include "VecMath.hpp"
 #include <array>
 #include <functional>
 #include <QGraphicsItem>
+#include <QString>
 
 class ScmImageAnchor : public QGraphicsEllipseItem
 {
@@ -51,6 +54,11 @@ public:
 	void setSelectionChangedCallback(std::function<void()> func);
 
 	/**
+	 * @brief Set the position changed callback function.
+	 */
+	void setPositionChangedCallback(std::function<void()> func);
+
+	/**
 	 * @brief Set the bounds in which the anchors can be moved.
 	 * 
 	 * @param bounds The bound the anchor can be moved in.
@@ -70,9 +78,37 @@ public:
 	const QString &getStarNameI18n() const;
 
 	/**
+	 * @brief set the bound star ID of this anchor.
+	 */
+	void setStarHip(StarId hip);
+
+	/**
+	 * @brief Tries to extract the hip from the star id.
+	 * 
+	 * @param id The id to extract the hip from.
+	 * @return true Success.
+	 * @return false Failed.
+	 */
+	bool trySetStarHip(const QString &id);
+
+	/**
+	 * @brief Get the star hip id.
+	 * 
+	 * @return const QString& 
+	 */
+	const StarId &getStarHip() const;
+
+	/**
 	 * @brief Updates the color of the anchor based on its current state.
 	 */
 	void updateColor();
+
+	/**
+	 * @brief Get the position of the anchor in the parent image.
+	 * 
+	 * @return Vec2i The position of the anchor.
+	 */
+	Vec2i getPosition() const;
 
 protected:
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
@@ -84,6 +120,8 @@ private:
 	bool isSelected = false;
 	// Holds the selected star
 	QString starNameI18n;
+	// Holds the hip of the selected star
+	StarId hip;
 	// Holds the default color of the anchor.
 	const Qt::GlobalColor color = Qt::GlobalColor::cyan;
 	// Holds the default color if no star is bound.
@@ -96,6 +134,8 @@ private:
 	ScmImageAnchor **selection = nullptr;
 	// Holds the set selection changed callback
 	std::function<void()> selectionChangedCallback = nullptr;
+	// Holds the set position changed callback
+	std::function<void()> positionChangedCallback = nullptr;
 	// Holds the bounds in which the anchor are moveable.
 	QRectF movementBound;
 };

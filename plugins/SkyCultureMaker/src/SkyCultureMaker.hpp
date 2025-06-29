@@ -2,6 +2,7 @@
 #define SKYCULTUREMAKER_HPP
 
 #include "ScmConstellation.hpp"
+#include "ScmConstellationArtwork.hpp"
 #include "ScmDraw.hpp"
 #include "ScmSkyCulture.hpp"
 #include "StelCore.hpp"
@@ -204,6 +205,11 @@ public:
 	 */
 	bool isAnyDialogVisible() const;
 
+	 * @brief Sets the temporary artwork that should be drawn.
+	 * @param artwork The artwork to draw.
+	 */
+	void setTempArtwork(const scm::ScmConstellationArtwork *artwork);
+
 signals:
 	void eventIsScmEnabled(bool b);
 
@@ -266,6 +272,9 @@ private:
 		{scm::DialogID::SkyCultureExportDialog, false},
 		{scm::DialogID::HideOrAbortMakerDialog, false}
         };
+
+	/// The artwork to temporary draw on the sky.
+	const scm::ScmConstellationArtwork *tempArtwork = nullptr;
 };
 
 #include "StelPluginInterface.hpp"

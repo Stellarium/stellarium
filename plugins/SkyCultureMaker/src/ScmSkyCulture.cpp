@@ -136,3 +136,19 @@ bool scm::ScmSkyCulture::saveDescriptionAsMarkdown(QFile file)
 		return false; // file could not be opened
 	}
 }
+
+bool scm::ScmSkyCulture::saveIllustrations(const QString &directory)
+{
+	bool success = true;
+	for (auto &constellation : constellations)
+	{
+		success &= constellation.saveArtwork(directory);
+	}
+
+	return success;
+}
+
+const QString &scm::ScmSkyCulture::getId() const
+{
+	return id;
+}
