@@ -1122,13 +1122,13 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	// This test is apparently not applicable on MacOS X due to its behaving differently from all other known OSes.
 	// The correct way to handle driver issues on MacOS X remains however unclear for now.
 #ifndef Q_OS_MACOS
-        bool isMesa=glDriver.contains("MESA", Qt::CaseInsensitive);
+	bool isMesa=glDriver.contains("Mesa", Qt::CaseInsensitive);
 	#if (defined Q_OS_WIN) && (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	bool isANGLE=glRenderer.startsWith("ANGLE", Qt::CaseSensitive);
 	#endif
 	if ( openGLerror ||
 	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 1)) && !isMesa) ||
-             ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 0)) &&  isMesa) || // MESA defaults to 2.0 but works!
+	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 0)) &&  isMesa) || // Mesa defaults to 2.0 but works!
 	     ((format.renderableType()==QSurfaceFormat::OpenGLES) && (format.version() < QPair<int, int>(2, 0)))  )
 	{
 	#if (defined Q_OS_WIN) && (QT_VERSION<QT_VERSION_CHECK(6,0,0))
