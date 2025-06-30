@@ -3,6 +3,7 @@
 
 #include "SkyCultureMaker.hpp"
 #include "StelDialogSeparate.hpp"
+#include <QString>
 
 class Ui_scmSkyCultureExportDialog;
 
@@ -21,6 +22,7 @@ public slots:
 private:
 	Ui_scmSkyCultureExportDialog *ui = nullptr;
 	SkyCultureMaker *maker           = nullptr;
+  QString skyCulturesPath;
 
 	void saveSkyCulture();
 	void saveAndExitSkyCulture();

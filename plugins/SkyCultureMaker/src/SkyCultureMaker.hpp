@@ -12,7 +12,7 @@
 #include "VecMath.hpp"
 #include "types/DialogID.hpp"
 #include <QFile>
-
+#include <QDir>
 #include <QFont>
 
 class QPixmap;
@@ -164,15 +164,17 @@ public:
 
 	/**
 	 * @brief Saves the current sky culture description as markdown text.
+	 * @param directory The directory to save the description in.
 	 * @return true if the description was saved successfully, false otherwise.
 	 */
-	bool saveSkyCultureDescription();
+	bool saveSkyCultureDescription(const QDir &directory);
 
 	/**
 	 * @brief Gets the saving file for the sky culture description.
+	 * @param directory The directory to save the description in.
 	 * @return The file to save the description to.
 	 */
-	QFile getScmDescriptionFile();
+	QFile getScmDescriptionFile(const QDir &directory);
 
 	/**
 	 * @brief Saves the visibility state of the SCM dialogs.

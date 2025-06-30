@@ -324,8 +324,11 @@ void ScmConstellationDialog::saveConstellation()
 		constellation.setNativeName(constellationNativeName);
 		constellation.setPronounce(constellationPronounce);
 		constellation.setIPA(constellationIPA);
-		constellation.setArtwork(imageItem->getArtwork());
-
+		if (imageItem->isVisible() && imageItem->getArtwork().getHasArt())
+		{
+			constellation.setArtwork(imageItem->getArtwork());
+		}
+		
 		maker->updateSkyCultureDialog();
 		resetDialog();
 		ScmConstellationDialog::close();
