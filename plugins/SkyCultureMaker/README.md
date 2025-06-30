@@ -124,10 +124,23 @@ These files allow your sky culture to be loaded and displayed within Stellarium 
 
 #### Converting a Sky Culture
 
-To convert a sky culture, click on **Convert** in the main window.  
-Select a `.zip`, `.rar`, or `.7z` archive containing the sky culture files.  
+To convert a sky culture:
 
-The resulting files of the conversion will then be saved in the sky culture folder of Stellarium.
+1. Click on **Convert** in the main window.
+2. Select an archive file containing the sky culture files.  
+    **Supported formats:** `.zip`, `.rar`, `.tar`, `.7z`  
+    > ⚠️ **Note:** Only regular `.tar` archives are supported.  
+    > Compressed formats like `.tar.gz` or `.tar.bz2` are **not** supported.
+
+3. The converted files will be saved in Stellarium's sky culture folder.
+
+> **Case Sensitivity:**  
+> The constellation names are **case-sensitive**.  
+> For example, `chinese_chenzhuo` is **not** the same as `chinese_Chenzhuo`.
+
+> <span style="color:#b22222"><strong>Important:</strong></span>  
+> The conversion process **requires Qt6 or later**.  
+> If you are using an older version of Qt, the converter will **not** be built and the conversion feature will be **disabled**.
 
 ---
 
