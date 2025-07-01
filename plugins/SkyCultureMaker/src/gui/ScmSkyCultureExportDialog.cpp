@@ -116,11 +116,25 @@ void ScmSkyCultureExportDialog::saveSkyCulture()
 	scJsonFile.close();
 
 	// Save the sky culture description
-	bool savedDescriptionSuccessfully = maker->saveSkyCultureDescription(skyCultureDirectory.absolutePath());
+	bool savedDescriptionSuccessfully = maker->saveSkyCultureDescription(skyCultureDirectory);
 	if (!savedDescriptionSuccessfully)
 	{
 		maker->setSkyCultureDialogInfoLabel("WARNING: Failed to export sky culture description.");
 		qWarning() << "SkyCultureMaker: Failed to export sky culture description.";
+		skyCultureDirectory.removeRecursively();
+		ScmSkyCultureExportDialog::close();
+		return;
+	}
+
+	// Save the CMakeLists.txt file
+	bool savedCMakeListsSuccessfully = saveSkyCultureCMakeListsFile(skyCultureDirectory);
+	if (!savedCMakeListsSuccessfully)
+	{
+		maker->setSkyCultureDialogInfoLabel("WARNING: Failed to export CMakeLists.txt.");
+		qWarning() << "SkyCultureMaker: Failed to export CMakeLists.txt.";
+		skyCultureDirectory.removeRecursively();
+		ScmSkyCultureExportDialog::close();
+		return;
 	}
 
 	maker->setSkyCultureDialogInfoLabel("Sky culture exported successfully!");
@@ -133,4 +147,24 @@ void ScmSkyCultureExportDialog::saveAndExitSkyCulture()
 	maker->resetScmDialogs();
 	maker->hideAllDialogs();
 	maker->setIsScmEnabled(false);
+}
+
+bool ScmSkyCultureExportDialog::saveSkyCultureCMakeListsFile(const QDir &directory)
+{
+	QFile cmakeListsFile(directory.absoluteFilePath("CMakeLists.txt"));
+	if (!cmakeListsFile.open(QIODevice::WriteOnly | QIODevice::Text))
+	{
+		qWarning() << "SkyCultureMaker: Failed to open CMakeLists.txt for writing.";
+		return false;
+	}
+
+	QTextStream out(&cmakeListsFile);
+	out << "get_filename_component(skyculturePath \"${CMAKE_CURRENT_SOURCE_DIR}\" REALPATH)\n";
+	out << "get_filename_component(skyculture ${skyculturePath} NAME)\n";
+	out << "install(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/${skyculture}\n";
+	out << "        FILES_MATCHING PATTERN \"*\"\n";
+	out << "        PATTERN \"CMakeLists.txt\" EXCLUDE)\n";
+
+	cmakeListsFile.close();
+	return true;
 }

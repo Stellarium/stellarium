@@ -22,10 +22,11 @@ public slots:
 private:
 	Ui_scmSkyCultureExportDialog *ui = nullptr;
 	SkyCultureMaker *maker           = nullptr;
-  QString skyCulturesPath;
+  	QString skyCulturesPath;
 
 	void saveSkyCulture();
 	void saveAndExitSkyCulture();
+	bool saveSkyCultureCMakeListsFile(const QDir &directory);
 };
 
 #endif // SCM_SKY_CULTURE_EXPORT_DIALOG_HPP
