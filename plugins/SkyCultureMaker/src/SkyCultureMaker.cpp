@@ -204,6 +204,18 @@ void SkyCultureMaker::stopScmProcess()
 		return;
 	}
 
+	// If the converter dialog is visible, hide it
+	if (scmStartDialog->isConverterDialogVisible())
+	{
+		scmStartDialog->setConverterDialogVisibility(false);
+		if (isScmEnabled)
+		{
+			isScmEnabled = false;
+			emit eventIsScmEnabled(false);
+			setToolbarButtonState(false); // Toggle the toolbar button to disabled
+		}
+	}
+
 	// If any other dialog is visible, don't stop the process — just keep UI state ON
 	if (isAnyDialogVisible())
 	{

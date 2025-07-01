@@ -5,9 +5,11 @@
 
 #ifdef SCM_CONVERTER_ENABLED_CPP
 
+# include "SkyCultureMaker.hpp"
 # include "StelFileMgr.hpp"
 # include "ui_scmConvertDialog.h"
 # include "unarr.h"
+# include <atomic>
 # include <QDebug>
 # include <QDir>
 # include <QFileDialog>
@@ -20,7 +22,6 @@
 # include <QPushButton>
 # include <QVBoxLayout>
 # include <QtConcurrent/QtConcurrent>
-# include <atomic>
 
 class Ui_scmConvertDialog;
 
@@ -29,7 +30,7 @@ class ScmConvertDialog : public StelDialog
 	Q_OBJECT
 
 public:
-	explicit ScmConvertDialog();
+	explicit ScmConvertDialog(SkyCultureMaker *maker);
 	~ScmConvertDialog() override;
 	void retranslate() override;
 
@@ -48,6 +49,7 @@ private:
 	QString tempDirPath;
 	QString tempDestDirPath;
 	std::atomic<bool> conversionCancelled;
+	SkyCultureMaker *maker = nullptr;
 };
 
 #endif // SCM_CONVERTER_ENABLED_CPP
