@@ -20,6 +20,18 @@ public:
 	ScmStartDialog(SkyCultureMaker *maker);
 	~ScmStartDialog() override;
 
+	/**
+	 * @brief Check if the converter dialog is currently visible.
+	 * @return true if the converter dialog is visible, false otherwise.
+	 */
+	bool isConverterDialogVisible();
+
+	/**
+	 * @brief Set the visibility of the converter dialog.
+	 * @param b The boolean value to be set.
+	 */
+	void setConverterDialogVisibility(bool b);
+
 public slots:
 	void retranslate() override;
 

@@ -6,11 +6,12 @@
 # include "ui_scmConvertDialog.h"
 # include <QWidget>
 
-ScmConvertDialog::ScmConvertDialog()
+ScmConvertDialog::ScmConvertDialog(SkyCultureMaker *maker)
 	: StelDialog("ScmConvertDialog")
 	, ui(new Ui_scmConvertDialog)
 	, watcher(new QFutureWatcher<QString>(this))
 	, conversionCancelled(false)
+	, maker(maker)
 {
 	// The dialog widget is created in StelDialog::setVisible, not in the constructor.
 	// The ScmConvertDialog C++ instance is owned by ScmStartDialog.
@@ -58,6 +59,7 @@ void ScmConvertDialog::createDialogContent()
 void ScmConvertDialog::closeDialog()
 {
 	StelDialog::close();
+	maker->setToolbarButtonState(false); // Toggle the toolbar button to disabled
 }
 
 void ScmConvertDialog::browseFile()

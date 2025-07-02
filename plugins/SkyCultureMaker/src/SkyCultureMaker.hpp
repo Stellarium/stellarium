@@ -11,8 +11,8 @@
 #include "StelTranslator.hpp"
 #include "VecMath.hpp"
 #include "types/DialogID.hpp"
-#include <QFile>
 #include <QDir>
+#include <QFile>
 #include <QFont>
 
 class QPixmap;
