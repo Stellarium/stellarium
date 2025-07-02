@@ -681,10 +681,10 @@ void NavStars::populateNavigationalStarsSet(void)
 		case Apollo:
 		{
 			// Apollo Alignment Star List (37 stars)
-			// Sources: https://history.nasa.gov/alsj/alsj-AOTNavStarsDetents.html
+			// Sources: https://www.nasa.gov/history/alsj/alsj-AOTNavStarsDetents.html
 			//          https://www.spaceartifactsarchive.com/2013/05/the-star-chart-of-apollo.html
 			starNumbers = {
-				   677,   3419,   4427,   7588,  11767,  13847,  13954,      0,
+				   677,   3419,   4427,   7588,  11767,  13847,  14135,      0,
 				     0,  15863,  21421,  24436,  24608,  30438,  32349,  37279,
 				 39953,      0,      0,  44127,  46390,  49669,  57632,  59803,
 				 60718,  65474,  67301,      0,      0,  68933,  69673,  76267,
