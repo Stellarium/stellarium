@@ -77,7 +77,7 @@ void ScmStartDialog::createDialogContent()
 		tr("Converter is only available from Qt6.5 onwards, currently build with version %1")
 			.arg(QT_VERSION_STR));
 #endif  // SCM_CONVERTER_ENABLED_CPP
-	/* ================================================================================================================== */
+/* ================================================================================================================== */
 }
 
 void ScmStartDialog::startScmCreationProcess()
