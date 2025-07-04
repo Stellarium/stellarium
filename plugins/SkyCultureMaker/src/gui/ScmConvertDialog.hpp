@@ -42,6 +42,7 @@ private slots:
 	void convert();
 	void onConversionFinished();
 	void closeDialog();
+	bool chooseFallbackDirectory(QString &skyCulturesPath, QString &skyCultureId);
 
 private:
 	Ui_scmConvertDialog *ui;

@@ -87,6 +87,31 @@ void ScmConvertDialog::onConversionFinished()
 	ui->convertButton->setEnabled(true);
 }
 
+bool ScmConvertDialog::chooseFallbackDirectory(QString &skyCulturesPath, QString &skyCultureId)
+{
+	// 10 is maximum number of tries the user have to select a fallback directory
+	for (size_t i = 0; i < 10; i++)
+	{
+		QString selectedDirectory = QFileDialog::getExistingDirectory(nullptr, tr("Open Directory"));
+		if (!QDir(selectedDirectory).exists())
+		{
+			qDebug() << "Selected fallback directory does not exist!";
+			continue;
+		}
+
+		QDir newSkyCultureDir(selectedDirectory + QDir::separator() + skyCultureId);
+		if (newSkyCultureDir.mkpath("."))
+		{
+			newSkyCultureDir.removeRecursively(); // clean up test directory
+			skyCulturesPath = selectedDirectory;
+			return true;
+		}
+	}
+
+	qDebug() << "User exceeded maximum number (10) of attempts to set a fallback directory.";
+	return false;
+}
+
 namespace
 {
 // Code snippet from https://github.com/selmf/unarr/blob/master/test/main.c
@@ -265,14 +290,10 @@ QString performConversion(const QString &sourcePath, const QString &destPath)
 	}
 }
 
-QString moveConvertedFiles(const QString &tempDestDirPath, const QString &stem)
+QString moveConvertedFiles(const QString &tempDestDirPath, const QString &stem, const QString &skyCulturesPath)
 {
 	// move the converted files into skycultures folder inside programm directory
-	QString appResourceBasePath = StelFileMgr::getInstallationDir();
-
-	QString mainSkyCulturesPath = QDir(appResourceBasePath).filePath("skycultures");
-
-	QString targetPath = QDir(mainSkyCulturesPath).filePath(stem);
+	QString targetPath = QDir(skyCulturesPath).filePath(stem);
 
 	QDir targetDir(targetPath); // QDir object for checking existence
 	const QString absoluteTargetPath      = targetDir.absolutePath();
@@ -291,15 +312,11 @@ QString moveConvertedFiles(const QString &tempDestDirPath, const QString &stem)
 	else if (QDir().rename(absoluteTempDestDirPath, absoluteTargetPath))
 	{
 		qDebug() << "Successfully moved contents of" << absoluteTempDestDirPath << "to" << absoluteTargetPath;
-		return QString("Conversion completed successfully. "
-		               "Files moved "
-		               "to: %1")
-		        .arg(absoluteTargetPath);
+		return QString();
 	}
 	else
 	{
-		qWarning() << "Failed to move" << absoluteTempDestDirPath << "to" << absoluteTargetPath;
-		return QString("Failed to move files to: %1").arg(absoluteTargetPath);
+		return QString("Failed to move converted files to: %1").arg(absoluteTargetPath);
 	}
 }
 
@@ -307,10 +324,20 @@ QString moveConvertedFiles(const QString &tempDestDirPath, const QString &stem)
 
 void ScmConvertDialog::convert()
 {
+	// Clear previous result message
+	ui->convertResultLabel->setText(tr(""));
+
 	const QString path = ui->filePathLineEdit->text();
 	if (path.isEmpty())
 	{
-		ui->convertResultLabel->setText(tr("Please select a file to convert."));
+		ui->convertResultLabel->setText(tr("Please select a file first."));
+		return;
+	}
+
+	QString validationError = validateArchivePath(path);
+	if (!validationError.isEmpty())
+	{
+		ui->convertResultLabel->setText(validationError);
 		return;
 	}
 
@@ -318,6 +345,35 @@ void ScmConvertDialog::convert()
 
 	// Create a temporary directory for extraction
 	QString stem = QFileInfo(path).baseName(); // e.g. "foo.tar.gz" -> "foo"
+
+	QString skyCulturesPath = QDir(StelFileMgr::getInstallationDir()).filePath("skycultures");
+	QDir skyCultureDirectory(skyCulturesPath + QDir::separator() + stem);
+
+	// Since we are creating a test-directory to check for write permissions,
+	// we need to check if the directory already exists, because we would
+	// clean up the test directory after the test for permissions which would delete
+	// the existing skyculture directory if it exists.
+	if (skyCultureDirectory.exists())
+	{
+		ui->convertResultLabel->setText(
+			tr("Target folder already exists: %1").arg(skyCulturesPath + QDir::separator() + stem));
+		return;
+	}
+
+	// Create a test directory to check for write permissions
+	if (!skyCultureDirectory.mkpath("."))
+	{
+		bool fallbackSuccess = chooseFallbackDirectory(skyCulturesPath, stem);
+		if (!fallbackSuccess)
+		{
+			ui->convertResultLabel->setText(tr("Could not create destination directory."));
+			return;
+		}
+	}
+	else
+	{
+		skyCultureDirectory.removeRecursively(); // clean up test directory
+	}
 
 	tempDirPath = QDir::tempPath() + QDir::separator() + "skycultures" + QDir::separator() + stem;
 	QDir().mkpath(tempDirPath);
@@ -336,8 +392,10 @@ void ScmConvertDialog::convert()
 
 	// Run conversion in a background thread.
 	QFuture<QString> future = QtConcurrent::run(
-		[this, path, stem]() -> QString
+		[this, path, stem, skyCulturesPath]() -> QString
 		{
+			QString sourcePath;
+
 			// Validate the archive path (whether it is a valid archive file)
 			QString error = validateArchivePath(path);
 			if (!error.isEmpty()) return error;
@@ -347,7 +405,6 @@ void ScmConvertDialog::convert()
 
 			// Extract the archive to a temporary directory
 			// Check if the skyculture files are in the root or in a subfolder in the archive
-			QString sourcePath;
 			error = extractAndDetermineSource(path, tempDirPath, sourcePath);
 			if (!error.isEmpty()) return error;
 
@@ -361,8 +418,10 @@ void ScmConvertDialog::convert()
 			// Check for cancellation between major steps
 			if (conversionCancelled) return "Conversion cancelled.";
 
-			// Move the converted files to the skycultures folder in the program directory
-			return moveConvertedFiles(tempDestDirPath, stem);
+			error = moveConvertedFiles(tempDestDirPath, stem, skyCulturesPath);
+			if (!error.isEmpty()) return error;
+
+			return QString("Conversion completed successfully. Files are in: %1").arg(skyCulturesPath);
 		});
 
 	watcher->setFuture(future);

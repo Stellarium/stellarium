@@ -95,7 +95,7 @@ public:
 	 * @param file The file to save the description to.
 	 * @return true if the description was saved successfully, false otherwise.
 	 */
-	bool saveDescriptionAsMarkdown(QFile file);
+	bool saveDescriptionAsMarkdown(QFile &file);
 
 	/**
 	 * @brief Saves all illustrations to the directory. No subdirectory is saved.

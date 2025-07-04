@@ -4,6 +4,7 @@
 #include "StelFileMgr.hpp"
 #include "ui_scmSkyCultureExportDialog.h"
 #include <filesystem>
+#include <QFileDialog>
 #include <QJsonDocument>
 #include <QJsonObject>
 
@@ -76,7 +77,15 @@ void ScmSkyCultureExportDialog::saveSkyCulture()
 	}
 
 	// Create the sky culture directory
-	skyCultureDirectory.mkpath(".");
+	bool directorySuccessfully = skyCultureDirectory.mkpath(".");
+	if (!directorySuccessfully) // not possible use alternative user selected directory.
+	{
+		bool fallbackDirectorySuccessfully = chooseFallbackDirectory(skyCultureId, skyCultureDirectory);
+		if (!fallbackDirectorySuccessfully)
+		{
+			return;
+		}
+	}
 
 	// save illustrations before json, because the relative illustrations path is required for the json export
 	bool savedIllustrationsSuccessfully = currentSkyCulture->saveIllustrations(skyCultureDirectory.absolutePath() +
@@ -139,6 +148,32 @@ void ScmSkyCultureExportDialog::saveSkyCulture()
 
 	maker->setSkyCultureDialogInfoLabel("Sky culture exported successfully!");
 	ScmSkyCultureExportDialog::close();
+}
+
+bool ScmSkyCultureExportDialog::chooseFallbackDirectory(const QString& skyCultureId, QDir& skyCultureDirectory)
+{
+	// 10 is maximum number of tries the user have to select a fallback directory
+	for (size_t i = 0; i < 10; i++)
+	{
+		QString selectedDirectory = QFileDialog::getExistingDirectory(nullptr, tr("Open Directory"));
+		if (!QDir(selectedDirectory).exists())
+		{
+			maker->setSkyCultureDialogInfoLabel("ERROR: The selected directory is not valid");
+			qDebug() << "Selected not existing fallback directory";
+			continue;
+		}
+
+		QDir newSkyCultureDir(selectedDirectory + QDir::separator() + skyCultureId);
+		if (newSkyCultureDir.mkpath("."))
+		{
+			skyCultureDirectory = newSkyCultureDir;
+			return true;
+		}
+	}
+
+	maker->setSkyCultureDialogInfoLabel("ERROR: Exceeded maximum attempts to set a fallback directory.");
+	qDebug() << "User exceeded maximum number (10) of attempts to set a fallback directory.";
+	return false;
 }
 
 void ScmSkyCultureExportDialog::saveAndExitSkyCulture()

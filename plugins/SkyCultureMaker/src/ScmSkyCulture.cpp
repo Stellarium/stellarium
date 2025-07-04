@@ -92,7 +92,7 @@ void scm::ScmSkyCulture::setDescription(const scm::Description &description)
 	ScmSkyCulture::description = description;
 }
 
-bool scm::ScmSkyCulture::saveDescriptionAsMarkdown(QFile file)
+bool scm::ScmSkyCulture::saveDescriptionAsMarkdown(QFile &file)
 {
 	if (file.open(QIODevice::WriteOnly | QIODevice::Text))
 	{
