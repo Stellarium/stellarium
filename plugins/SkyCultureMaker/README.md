@@ -83,7 +83,7 @@ Clicking **Create** will start the Maker and open the three windows.
 3. The main window of the maker, which provides several tabs dedicated to different aspects of sky culture creation.
 
 - **Overview:** Manage constellations, remove existing ones, and save your sky culture. The sky culture name and license must be specified here.  
-- **Description:** Enter essential metadata like the sky culture's name, description, and author. See the [Stellarium Guide](https://stellarium.org/files/guide.pdf) for details on recommended attributes.  
+- **Description**: Enter essential information such as authors, cultural descriptions, and constellations. Refer to the Stellarium Guide for details on the description fields.  **Important**: All fields must be filled out, and a classification must be selected from the dropdown menu at the bottom of the description tab.
 - **Boundaries:** (Work in progress) Define boundaries for constellations or cultural sky regions.  
 - **Common Names:** (Work in progress) Specify alternative names or traditional star names.  
 - **Geolocation:** (Work in progress) Assign geographic or cultural origin information.  
