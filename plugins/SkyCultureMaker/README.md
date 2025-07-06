@@ -17,7 +17,7 @@ This documentation explains how to activate and use the Sky Culture Maker plugin
 ## Table of Contents
 
 1. **Installation**  
-    - Plugin Installation and Prerequisites  
+    - Prerequisites  
     - Activating the Plugin in Stellarium  
 2. **Getting Started**  
     - Overview of the User Interface  
