@@ -123,7 +123,7 @@ void SkyCultureMaker::setActionToggle(const QString &id, bool toggle)
 	}
 	else
 	{
-		qDebug() << "Sky Culture Maker: Could not find action: " << id;
+		qDebug() << "SkyCultureMaker: Could not find action: " << id;
 	}
 }
 
