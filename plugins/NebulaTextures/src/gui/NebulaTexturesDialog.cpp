@@ -532,7 +532,7 @@ void NebulaTexturesDialog::moveToCenterCoord()
  */
 void NebulaTexturesDialog::recoverSolvedCorners()
 {
-	if(isWcsSolved && askConfirmation("Are you sure to recover the solution?"))
+	if(isWcsSolved && askConfirmation(q_("Are you sure to recover the solution?")))
 	{
 		ui->topLeftX->setDegrees(topLeftRA);
 		ui->topLeftY->setDegrees(topLeftDec);
@@ -692,7 +692,7 @@ void NebulaTexturesDialog::removeTempTexturePreview()
  */
 void NebulaTexturesDialog::addCustomTexture()
 {
-	if(!askConfirmation("Caution! Are you sure to add this texture? It will only take effect after restarting Stellarium."))
+	if(!askConfirmation(q_("Caution! Are you sure to add this texture? It will only take effect after restarting Stellarium.")))
 		return;
 
 	addTexture(configFile, CUSTOM_TEXNAME);
@@ -811,7 +811,7 @@ void NebulaTexturesDialog::removeTexture()
 	if (!selectedItem) return;
 
 	QString imageUrl = selectedItem->text();
-	if (!askConfirmation("Are you sure to remove this texture?")) return;
+	if (!askConfirmation(q_("Are you sure to remove this texture?"))) return;
 
 	if (!configManager->load()) return;
 

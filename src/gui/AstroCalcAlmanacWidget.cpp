@@ -307,7 +307,9 @@ void AstroCalcAlmanacWidget::setTodayTimes()
 		if (duration2 > 0.)
 			duration2 -= 24.;
 		duration = qAbs(duration1) + qAbs(duration2);
-		nightDuration = StelUtils::hoursToHmsStr(24.0 - qAbs(astronomicalTwilight[2]-astronomicalTwilight[0])*24., true);
+		double durationNight = (astronomicalTwilight[2]-astronomicalTwilight[0])*24.;
+		durationNight = (durationNight<0.) ? qAbs(durationNight) : 24. - durationNight;
+		nightDuration = StelUtils::hoursToHmsStr(durationNight, true);
 		astronomicalTwilightBtn = true;
 	}
 	else

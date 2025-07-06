@@ -493,12 +493,12 @@ void HelpDialog::updateAboutText(void) const
 	typedef QPair<QString, int> donator;
 	QVector<donator> financialContributors = {
 	        // Individuals
-	        { "Daniel", 1900 }, { "Bryan", 1000 }, { "Laurence Holt", 1000 }, { "John Bellora", 670 }, { "Marla Pinaire", 560 }, { "Jeff Moe", 512 },
-	        { "Vernon Hermsen", 324 }, { "Michel Payette", 305 },  { "James Lattis", 300 }, { "Walter Dörfler", 300 }, { "Salvatore Ficicchia", 276 },
-	        { "Satish Mallesh", 260 }, { "Raul Prisacariu", 260 }, { "Philippe Renoux", 250 }, { "Fito Martin", 250 },  { "SuEllen Shepard", 250 },
-	        { "Vlad Magdalin", 250  },
+	        { "Daniel", 2200 }, { "Bryan", 1000 }, { "Laurence Holt", 1000 }, { "John Bellora", 670 }, { "Marla Pinaire", 590 }, { "Jeff Moe", 512 },
+	        { "Peter Reigber", 400 }, { "Vernon Hermsen", 324 }, { "Michel Payette", 320 },  { "James Lattis", 300 }, { "Walter Dörfler", 300 },
+	        { "Incognito", 300 }, { "Salvatore Ficicchia", 291 }, { "Satish Mallesh", 260 }, { "Raul Prisacariu", 260 }, { "Philippe Renoux", 250 },
+	        { "Fito Martin", 250 }, { "SuEllen Shepard", 250 },  { "Vlad Magdalin", 250  },
 	        // Organizations
-	        { "BairesDev", 11000 }, { "Dotcom-Monitor", 1000 }, { "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 820 },
+	        { "BairesDev", 12500 }, { "Dotcom-Monitor", 1000 }, { "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 850 },
 	        { "SSSTwitter", 500 }, { "Triplebyte", 280 }
 	};
 	std::sort(financialContributors.begin(), financialContributors.end(), [](donator i, donator j){ return i.second > j.second; });
@@ -513,9 +513,9 @@ void HelpDialog::updateAboutText(void) const
 
 	// populate About tab
 	QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
-        newHtml += QString("<p><strong>%1 %2 (%3)").arg(q_("Version"), StelUtils::getApplicationVersion(), qc_(StelUtils::getAddressingMode(), "addressing mode"));
-        newHtml += QString("<br />%1 %2</strong></p>").arg(q_("Based on Qt"), QT_VERSION_STR);
-        newHtml += QString("<p>%1 %2</p>").arg(q_("Running on Operating System"), StelUtils::getOperatingSystemInfo());
+        newHtml += QString("<p><strong>%1 %2 (%3)</strong>").arg(q_("Version"), StelUtils::getApplicationVersion(), qc_(StelUtils::getAddressingMode(), "addressing mode"));
+        newHtml += QString("<br />%1 %2").arg(q_("Based on Qt"), QT_VERSION_STR);
+        newHtml += QString("<br />%1 %2</p>").arg(q_("Running on Operating System"), StelUtils::getOperatingSystemInfo());
 	if (!message.isEmpty())
 		newHtml += "<p><strong>" + message + "</strong></p>";
 	// Note: this legal notice is not suitable for translation

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-06-19 15:17+0700\n"
+"POT-Creation-Date: 2025-06-21 13:18+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alejandro Moctezuma <moctezumaalejandro25@gmail.com>, 2025\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/stellarium/teams/80998/es_419/)\n"
@@ -84,7 +84,7 @@ msgstr "Líneas de asterismo"
 #: src/core/modules/AsterismMgr.cpp:102 src/ui_viewDialog.h:4907
 #: src/ui_configurationDialog.h:2110
 msgid "Asterism labels"
-msgstr "Etiqueta de asterismos"
+msgstr "Etiquetas de asterismos"
 
 #: src/core/modules/AsterismMgr.cpp:103
 msgid "Toggle single asterism selection mode"
@@ -4010,7 +4010,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:695
 msgid "Cylinder"
-msgstr "Cilindro"
+msgstr "Cilíndrica"
 
 #: src/core/StelProjectorClasses.cpp:700
 msgid ""
@@ -4076,7 +4076,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:1068
 msgid "Miller cylindrical"
-msgstr "Miller cilíndrica"
+msgstr "Cilíndrica de MIller"
 
 #: src/core/StelProjectorClasses.cpp:1073
 msgid ""
@@ -5818,7 +5818,7 @@ msgstr "Ventana de atajos"
 
 #: src/gui/StelGui.cpp:276
 msgid "Astronomical calculations window"
-msgstr "ventana de cálculos astronómicos"
+msgstr "Ventana de cálculos astronómicos"
 
 #: src/gui/StelGui.cpp:277
 msgid "Observing list"
@@ -14142,7 +14142,7 @@ msgstr "Mostrar menos información"
 #: src/ui_configurationDialog.h:1992
 msgctxt "info group name"
 msgid "Short"
-msgstr "Corto"
+msgstr "Corta"
 
 #: src/ui_configurationDialog.h:1994
 msgid "Display a preconfigured set of information"
@@ -16614,7 +16614,7 @@ msgstr "Utilice sRGB"
 
 #: src/ui_lightPollutionWidget.h:104
 msgid "automatic from locations database"
-msgstr "automático de la base de datos de ubicaciones"
+msgstr "Automática de la base de datos de ubicaciones"
 
 #: src/ui_lightPollutionWidget.h:105
 msgid "manual"
@@ -35424,6 +35424,10 @@ msgstr ""
 "¡Procesamiento completado! Vaya al punto central, pruebe esta textura y "
 "agréguela al almacenamiento personalizado."
 
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:535
+msgid "Are you sure to recover the solution?"
+msgstr "¿Está seguro de que desea recuperar la solución?"
+
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:570
 msgid "Stop test"
 msgstr "Detener prueba"
@@ -35432,6 +35436,14 @@ msgstr "Detener prueba"
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:533
 msgid "Test this texture"
 msgstr "Probar esta textura"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:695
+msgid ""
+"Caution! Are you sure to add this texture? It will only take effect after "
+"restarting Stellarium."
+msgstr ""
+"¡Precaución! ¿Está seguro de añadir esta textura? Solo tendrá efecto tras "
+"reiniciar Stellarium."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:726
 msgid "Failed to load texture configuration."
@@ -35456,6 +35468,10 @@ msgstr "Formato de imagen inválido."
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:784
 msgid "Failed to copy image file."
 msgstr "Error al copiar el archivo de imagen."
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:814
+msgid "Are you sure to remove this texture?"
+msgstr "¿Está seguro de que desea eliminar esta textura?"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:826
 msgid "Texture removed."

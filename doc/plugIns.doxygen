@@ -111,7 +111,7 @@ There are also an example of simple \b dynamic plugin:
 The following instructions can be used to build the Angle Measure plugin and the Compass Marks plugin.
 
 <ul>
- <li>First, you will need to download the Stellarium source code from SVN, according to the instructions in the Stellarium build pages (see <a href="http://www.stellarium.org/wiki/index.php/Compilation_on_Linux">this page</a> for *nix systems, and <a href="http://www.stellarium.org/wiki/index.php/Windows_Build_Instructions">this page</a> for Windows builds).  For the rest of this discussion, I will assume you downloaded the source code in the directory @c /home/me/builds/stellarium. If you put the source code somewhere else, you will need to modify the following instructions accordingly.</li>
+ <li>First, you will need to download the Stellarium source code from GIT, according to the instructions in the Stellarium build pages (see <a href="https://github.com/Stellarium/stellarium/blob/master/BUILDING.md">this page</a>). For the rest of this discussion, I will assume you downloaded the source code in the directory @c /home/me/builds/stellarium. If you put the source code somewhere else, you will need to modify the following instructions accordingly.</li>
  
  <li>After downloading the stellarium source such that it is in @c /home/me/builds/stellarium, change into the @c /home/me/builds directory and fetch the @c extmodules files from SVN. On Linux, you can use these commands to accomplish this:
 @verbatim

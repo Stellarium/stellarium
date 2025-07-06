@@ -604,6 +604,7 @@ StelLocation LocationDialog::locationFromFields() const
 		QString tz=ui->timeZoneNameComboBox->itemData(index).toString();
 		loc.ianaTimeZone = tz;
 	}
+	loc.role='X'; // assert it's valid now
 	return loc;
 }
 

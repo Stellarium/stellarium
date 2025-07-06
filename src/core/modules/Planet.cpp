@@ -694,7 +694,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			}
 
 			if (withTables)
-				oss << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td><td style='text-align:left;'>%3</td><td style='text-align:right;'> (%4</td><td style='text-align:left;'>%5)</td></tr>").arg(q_("Distance from Sun"), distAU, au, distKM, km);
+				oss << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td><td style='text-align:left;'>%3</td><td style='text-align:right;'>(%4</td><td style='text-align:right;'>%5)</td></tr>").arg(q_("Distance from Sun"), distAU, au, distKM, km);
 			else
 				oss << QString("%1: %2 %3 (%4 %5)<br/>").arg(q_("Distance from Sun"), distAU, au, distKM, km);
 		}
@@ -716,7 +716,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 		if (withTables)
 		{
-			oss << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td><td style='text-align:left;'>%3</td><td style='text-align:right;'> (%4</td><td style='text-align:left;'>%5)</td></tr>").arg(q_("Distance"), distAU, au, distKM, km);
+			oss << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td><td style='text-align:left;'>%3</td><td style='text-align:right;'>(%4</td><td style='text-align:right;'>%5)</td></tr>").arg(q_("Distance"), distAU, au, distKM, km);
 			oss << QString("<tr><td>%1:</td><td colspan='4'>%2</td></tr>").arg(lightTime, StelUtils::hoursToHmsStr(distanceKm/SPEED_OF_LIGHT/3600.));
 			oss << "</table>";
 		}
@@ -767,9 +767,15 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 // Print apparent and equatorial diameters
 QString Planet::getInfoStringSize(const StelCore *core, const InfoStringGroup& flags) const
 {
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	StelApp& app = StelApp::getInstance();
+	const bool withTables = app.getFlagUseFormattingOutput();
+	const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
+
 	QString str;
 	QTextStream oss(&str);
+
+	if (withTables)
+		oss << "<br/>";
 
 	const double angularSize = getAngularRadius(core)*(2.*M_PI_180);
 	if (flags&Size && angularSize>=4.8e-8)
