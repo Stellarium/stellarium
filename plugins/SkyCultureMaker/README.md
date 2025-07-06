@@ -40,16 +40,21 @@ This documentation explains how to activate and use the Sky Culture Maker plugin
 
 ## 1. Installation
 
-### 1.1 Plugin Installation and Prerequisites
+The Sky Culture Maker plugin is embedded in the Stellarium project. Therefore, no additional installation is necessary.
+ 
+### 1.1 Prerequisites
 
-To use Sky Culture Maker, ensure the following dependencies are installed:
+The Sky Culture Maker currently consists of two main features. The first is the Maker, which is used to create new sky cultures within Stellarium. The second is a converter that transforms old `.fab` sky culture files into the new JSON format.
 
-**For converting**  
+**Maker**
+- Stellarium already comes with everything you need.
+
+**Converter**  
 - [Tidy HTML](https://www.html-tidy.org/) (used for formatting HTML descriptions)  
 
 ### 1.2 Activating the Plugin in Stellarium
 
-After building or installing the plugin:
+After building or installing Stellarium:
 
 1. Launch Stellarium.  
 2. Navigate to **Settings → Plugins**.  
@@ -66,21 +71,26 @@ The Sky Culture Maker icon should now appear in the Stellarium toolbar.
 
 ## 2. Getting Started
 
-Sky Culture Maker provides a seamless workflow to create custom sky cultures directly within Stellarium. This section will guide you through the initial steps to get familiar with the interface and start creating your first sky culture.
+Sky Culture Maker provides a seamless workflow to create custom sky cultures directly within Stellarium. This section will guide you through the initial steps to get familiar with the interface and start creating your first sky culture and how to use the converter.
 
-### Overview of the User Interface
+After activating the plugin, you can start it via the Stellarium toolbar. After starting the Sky Culture Maker, the Start dialog window will appear. There, you will find the options **Create**, **Convert**, and **Cancel**. Let's look at **Create** first.
 
-Once the plugin is activated, you can access it through the Stellarium toolbar. By clicking on **Create**, the main window will open, providing several tabs, each dedicated to different aspects of sky culture creation:
+### Maker
 
-- **Overview:** Manage constellations, remove existing ones, and save your sky culture. The license must be specified here.  
-- **Description:** Enter essential metadata like the sky culture's name, description, and author. See the [Stellarium Guide](https://stellarium.org/files/guide.pdf) for details on recommended attributes.  
+Clicking **Create** will start the Maker and open the three windows.
+1. The _Location window_ so that the user can navigate to the correct location where to create the sky culture
+2. The _Date/time window_ so that the user can choose the correct date and time of the sky
+3. The main window of the maker, which provides several tabs dedicated to different aspects of sky culture creation.
+
+- **Overview:** Manage constellations, remove existing ones, and save your sky culture. The sky culture name and license must be specified here.  
+- **Description**: Enter essential information such as authors, cultural descriptions, and constellations. Refer to the Stellarium Guide for details on the description fields.  **Important**: All fields must be filled out, and a classification must be selected from the dropdown menu at the bottom of the description tab.
 - **Boundaries:** (Planned for the future) Define boundaries for constellations or cultural sky regions.  
 - **Common Names:** (Planned for the future) Specify alternative names or traditional star names.  
 - **Geolocation:** (Planned for the future) Assign geographic or cultural origin information.  
 
 ---
 
-### Creating a New Sky Culture
+#### Creating a New Sky Culture
 
 1. Open the Sky Culture Maker interface.  
 2. Click **Create New Sky Culture**.  
@@ -101,7 +111,7 @@ The constellation editor provides tools for interactive design:
 
 For each constellation, the following information must be provided:
 
-- **ID:** Unique identifier for the constellation  
+- **ID:** Unique identifier for the constellation . If not set it will automatically be generated based on the **Name**
 - **Name:** Display name for the constellation  
 - **Native Name (optional):** Name in the original language or script  
 - **Pronunciation (optional):** Phonetic pronunciation guide  
