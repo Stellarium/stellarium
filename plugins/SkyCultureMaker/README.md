@@ -5,7 +5,7 @@
 *Sky Culture Maker* is a plugin for **Stellarium**, designed to simplify the creation and customization of sky cultures. With this tool, users can easily define new sky cultures, draw constellations, and visualize their arrangements directly within Stellarium.
 
 The plugin provides an intuitive interface for both amateur astronomers and advanced users to:
-- Create and edit sky cultures without extensive manual configuration  
+- Create sky cultures directly in Stellarium with real-time visualization
 - Define new constellations by drawing directly in the Stellarium sky view  
 - convert .fab data into JSON
 - Contribute to educational projects, preserve cultural astronomical knowledge, or create personalized star maps  
