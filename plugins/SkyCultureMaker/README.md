@@ -71,11 +71,16 @@ The Sky Culture Maker icon should now appear in the Stellarium toolbar.
 
 ## 2. Getting Started
 
-Sky Culture Maker provides a seamless workflow to create custom sky cultures directly within Stellarium. This section will guide you through the initial steps to get familiar with the interface and start creating your first sky culture.
+Sky Culture Maker provides a seamless workflow to create custom sky cultures directly within Stellarium. This section will guide you through the initial steps to get familiar with the interface and start creating your first sky culture and how to use the converter.
 
-### Overview of the User Interface
+After activating the plugin, you can start it via the Stellarium toolbar. After starting the Sky Culture Maker, the Start dialog window will appear. There, you will find the options **Create**, **Convert**, and **Cancel**. Let's look at **Create** first.
 
-Once the plugin is activated, you can access it through the Stellarium toolbar. By clicking on **Create**, the main window will open, providing several tabs, each dedicated to different aspects of sky culture creation:
+### Maker
+
+Clicking **Create** will start the Maker and open the three windows.
+1. The _Location window_ so that the user can navigate to the correct location where to create the sky culture
+2. The _Date/time window_ so that the user can choose the correct date and time of the sky
+3. The main window of the maker, which provides several tabs dedicated to different aspects of sky culture creation.
 
 - **Overview:** Manage constellations, remove existing ones, and save your sky culture. The license must be specified here.  
 - **Description:** Enter essential metadata like the sky culture's name, description, and author. See the [Stellarium Guide](https://stellarium.org/files/guide.pdf) for details on recommended attributes.  
