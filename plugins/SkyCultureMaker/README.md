@@ -74,9 +74,9 @@ Once the plugin is activated, you can access it through the Stellarium toolbar. 
 
 - **Overview:** Manage constellations, remove existing ones, and save your sky culture. The license must be specified here.  
 - **Description:** Enter essential metadata like the sky culture's name, description, and author. See the [Stellarium Guide](https://stellarium.org/files/guide.pdf) for details on recommended attributes.  
-- **Boundaries:** (Work in progress) Define boundaries for constellations or cultural sky regions.  
-- **Common Names:** (Work in progress) Specify alternative names or traditional star names.  
-- **Geolocation:** (Work in progress) Assign geographic or cultural origin information.  
+- **Boundaries:** (Planned for the future) Define boundaries for constellations or cultural sky regions.  
+- **Common Names:** (Planned for the future) Specify alternative names or traditional star names.  
+- **Geolocation:** (Planned for the future) Assign geographic or cultural origin information.  
 
 ---
 
@@ -95,7 +95,7 @@ Once the basic information is complete, you can begin drawing constellations.
 
 The constellation editor provides tools for interactive design:
 
-- **Pen Tool:** Right click on stars to draw constellation lines between points.  
+- **Pen Tool:** Right click on stars to draw constellation lines between points. You can also use the search function to locate specific    stars by name. Once found, those stars can be selected directly to create lines between them.
 - **Erase Tool:** Remove lines or incorrect segments from the constellation.  
 - **Undo:** Revert the most recent drawing action.  
 
@@ -189,6 +189,8 @@ Generated sky culture files follow the Stellarium standards for directories, met
 - Use high-contrast colors for constellation lines to ensure visibility in Stellarium's sky view.  
 - Anchor images carefully to avoid visual misalignment during zooming or panning.  
 - Zooming in on the sky allows for more precise use of the pen tool. The star selection becomes less sensitive to nearby stars, making it easier to accurately connect the intended points.
+- To avoid the pen tool snapping to nearby stars while drawing, press and hold **CTRL**. This allows for free placement of lines without automatic star locking.
+
 
 ---
 
