@@ -1,6 +1,7 @@
 #ifndef SKYCULTUREMAPGRAPHICSVIEW_HPP
 #define SKYCULTUREMAPGRAPHICSVIEW_HPP
 
+#include <qtimeline.h>
 #include <QGraphicsView>
 
 //! @class SkyCultureMapGraphicsView
@@ -32,18 +33,25 @@ protected:
 	void scaleView(double scaleFactor);
 
 private:
-   // private functions
-	//int _numScheduledScalings;
+	// private functions
 	int currentYear;
 	QString oldSkyCulture;
+	QTimeLine zoomToDefaultTimer;
+	QTimeLine zoomOnTargetTimer;
+	QRectF startingRect;
+	QRectF defaultRect;
+	QRectF targetRect;
 
 	QList<QPointF> convertLatLonToMeter(const QList<QPointF> &irl, qreal mapWidth, qreal mapHeight);
 	QList<QPointF> convertMeterToView(const QList<QPointF> &irl, qreal mapWidth, qreal mapHeight);
 	void updateCultureVisibility();
+	void smoothFitInView(QRectF targetRect);
+	qreal calculateScaleRatio(qreal width, qreal height);
+
 
 private slots:
-	// void scalingTime(qreal x);
-	// void animFinished();
+	void zoomToDefault(qreal factor);
+	void zoomOnTarget(qreal factor);
 };
 
 #endif // SKYCULTUREMAPGRAPHICSVIEW_HPP

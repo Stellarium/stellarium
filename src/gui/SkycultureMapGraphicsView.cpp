@@ -1,7 +1,6 @@
 #include "SkycultureMapGraphicsView.hpp"
 #include "SkyculturePolygonItem.hpp"
 #include <qjsonarray.h>
-#include <qtimeline.h>
 #include <qgraphicssvgitem.h>
 
 #include <QJsonObject>
@@ -29,6 +28,17 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	show();
+
+	// set up QTimelines for smooth zoom on culture selection through public 'selectCulture' slot
+	zoomToDefaultTimer.setDuration(2000);
+	zoomOnTargetTimer.setDuration(3000);
+
+	zoomToDefaultTimer.setUpdateInterval(20);
+	zoomOnTargetTimer.setUpdateInterval(20);
+
+	connect(&zoomToDefaultTimer, SIGNAL(valueChanged(qreal)), SLOT(zoomToDefault(qreal)));
+	connect(&zoomToDefaultTimer, SIGNAL(finished()), &zoomOnTargetTimer, SLOT(start()));
+	connect(&zoomOnTargetTimer, SIGNAL(valueChanged(qreal)), SLOT(zoomOnTarget(qreal)));
 
 	// add items (transfer to dedicated function later)
 
@@ -83,9 +93,11 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 
 	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/baseMap_compressed.svgz");
 	scene->addItem(baseMap);
+	scene->setSceneRect(- baseMap->boundingRect().width() * 0.75, - baseMap->boundingRect().height() * 0.5, baseMap->boundingRect().width() * 2.5, baseMap->boundingRect().height() * 2);
 	qInfo() << "basemap width = " << baseMap->boundingRect().width() << " and height = " << baseMap->boundingRect().height();
+	this->defaultRect = baseMap->boundingRect();
 
-	//scene->addRect(300.0, 600.0, 400.0, 200.0, QPen(Qt::black), QBrush(Qt::yellow));
+	//scene->addRect(- 500.0, - 500.0, 200.0, 200.0, QPen(Qt::black), QBrush(Qt::yellow));
 	//scene->addRect(0.0, 0.0, 500.0, 500.0, QPen(Qt::yellow), QBrush(Qt::blue));
 	//scene->addRect(250.0, 250.0, 500.0, 500.0, QPen(Qt::yellow), QBrush(QColor(255, 0, 0, 100)));
 
@@ -99,36 +111,10 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 
 	SkyculturePolygonItem *aztec = new SkyculturePolygonItem("Aztekisch", 1000, 1200);
 
-	SkyculturePolygonItem *tupi_test = new SkyculturePolygonItem("Tupi", -100, 100);
+	SkyculturePolygonItem *tupi_test = new SkyculturePolygonItem("Tupi-Guarani", -100, 100);
 	auto tupiPolyList = QList<QPointF>();
 
-	// umrechnung lon in x:
-	//lon + 180 / 360 = faktor (z.B. 0 = 0.5)  -->  width of map (boundingRect) * faktor
-	//test_width = lokono_early->boundingRect().width();
-
-	//madagaskar(lat lon): unten -25.6246, 45.1646 | -24.9961, 47.1033 | -18.1623, 49.4327 | -17.6631, 49.5309 | -17.3732, 49.4139
-	// QList<QPointF> irl_coords{QPointF(45.1646, -25.6246), QPointF(47.1033, -24.9961) , QPointF(49.4327, -18.1623) , QPointF(49.5309, -17.6631) , QPointF(49.4139, -17.3732)};
-	// qInfo() << "pre addPolygon";
-	// QGraphicsPolygonItem *crash_test = new QGraphicsPolygonItem();
-	// crash_test->setPolygon(QPolygonF(convertIrlToView(irl_coords)));
-	// crash_test->setBrush(QBrush(Qt::yellow));
-	// crash_test->setPen(QPen(Qt::red, 0.25));
-	// scene->addItem(crash_test);
-	// qInfo() << "post addPolygon";
-
-	// qreal mitte;
-	// qreal heighte;
-	// for(auto *items : scene->items()) {
-	//    qInfo() << "typ: " << items->type();
-	//    if(items->type() == QGraphicsPixmapItem::Type)
-	//    {
-	//       qInfo() << "hier!";
-	//       mitte = items->boundingRect().width() / 2;
-	//       heighte = items->boundingRect().height();
-	//    }
-	// }
-	//scene->addLine(0, 0, 0, baseMap->boundingRect().height(), QPen(Qt::red, 20));
-	//scene->addLine(mitte, 0, mitte, heighte, QPen(Qt::red, 20));
+	// load culture Polygon from (geo)JSON
 
 	const QString filePath = StelFileMgr::findFile("skycultures/tupi/tupi_coords.geojson");
 	if (filePath.isEmpty())
@@ -231,14 +217,6 @@ void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *event)
 		qInfo() << "obj: " << pol << " und name: " << pol->getSkycultureId() << " und startZeit: " << pol->getStartTime() << " und endZeit: " << pol->getEndTime();
 	}
 
-	// foreach(QGraphicsItem *item, scene()->selectedItems()) {
-	//    SkyculturePolygonItem *pol = qgraphicsitem_cast<SkyculturePolygonItem *>(item);
-	//    if(!pol)
-	//       continue;
-
-	//    qInfo() << "obj: " << pol << " und name: " << pol->getSkycultureId();
-	// }
-
 	scaleView(pow(2.0, event->angleDelta().y() / 240.0)); // faster scrolling = faster zoom
 }
 
@@ -262,6 +240,7 @@ void SkycultureMapGraphicsView::mouseMoveEvent(QMouseEvent *event)
 void SkycultureMapGraphicsView::mousePressEvent(QMouseEvent *event)
 {
 	qInfo() << "current mouse pos --> raw: " << event->pos() << " mapToScene: " << mapToScene(event->pos());
+	qInfo() << "current transformation" << transform();
 
 	// safe the currently selected skyculture before de-selecting
 	if(scene()->selectedItems().length() > 0)
@@ -439,13 +418,36 @@ void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId)
 	//fitInView(skyCulturePolygon->boundingRect(), Qt::KeepAspectRatio); --> funktioniert aber sehr passgenau
 	// x = x - 1/4 width, y = y - 1/4 height, width = width * 1.5, height = height * 1.5 --> entweder dynamisch oder min (z.B. 100 oder so)
 	const QRectF polyBbox = skyCulturePolygon->boundingRect();
+	int minViewValue = 25;
 
-	// qInfo() << "pre eval width: " << polyBbox.width() << " height: " << polyBbox.height();
-	// int width = (polyBbox.width() < 130) ? 130 : polyBbox.width();
-	// int height = (polyBbox.height() < 130) ? 130 : polyBbox.height();
-	// qInfo() << "post eval width: " << width << " height: " << height;
+	qreal width = polyBbox.width();
+	qreal height = polyBbox.height();
 
-	fitInView(polyBbox.x() - polyBbox.width() / 4, polyBbox.y() - polyBbox.height() / 4, polyBbox.width() * 1.5, polyBbox.height() * 1.5, Qt::KeepAspectRatio);
+
+	if(qMax(polyBbox.width(), polyBbox.height()) / 8 < minViewValue)
+	{
+		qreal factor = 0; // ratio between bigger and smaller dim --> used to scale larger dim accordingly
+
+		if(qMax(polyBbox.width(), polyBbox.height()) == polyBbox.width())
+		{
+			// width is the smaller dim --> set width to minViewValue and scale height accordingly
+			width = minViewValue * 8;
+			factor = polyBbox.height() / polyBbox.width();
+			height = (factor * minViewValue) * 8;
+		}
+		else
+		{
+			// height is the smaller dim --> set height to minViewValue and scale width accordingly
+			height = minViewValue * 8;
+			factor = polyBbox.width() / polyBbox.height();
+			width = (factor * minViewValue) * 8;
+		}
+
+		smoothFitInView(QRectF(polyBbox.center().x() - width / 2, polyBbox.center().y() - height / 2, width, height));
+		return;
+	}
+
+	smoothFitInView(QRectF(polyBbox.x() - width / 8, polyBbox.y() - height / 8, width * 1.25, height * 1.25));
 }
 
 void SkycultureMapGraphicsView::updateTime(int year)
@@ -475,4 +477,67 @@ void SkycultureMapGraphicsView::updateCultureVisibility()
 			scPolyItem->setVisible(false);
 		}
 	}
+}
+
+void SkycultureMapGraphicsView::smoothFitInView(QRectF targetRect)
+{
+	// update global variables so that they can be accessed by the slots 'zoomToDefault' and 'zoomOnTarget'
+	this->targetRect = targetRect;
+	this->startingRect = mapToScene(viewport()->rect()).boundingRect();
+
+	zoomToDefaultTimer.start();
+}
+
+void SkycultureMapGraphicsView::zoomToDefault(qreal zoomFactor)
+{
+	// transform the scene (scaling) to fit the current timestep
+	qreal width = startingRect.width() + (defaultRect.width() - startingRect.width()) * zoomFactor;
+	qreal height = startingRect.height() + (defaultRect.height() - startingRect.height()) * zoomFactor;
+
+	qreal ratio = calculateScaleRatio(width, height);
+
+	scale(ratio, ratio);
+
+	// slowly move the center of the view to the new location
+	QEasingCurve centerEasing(QEasingCurve::OutCubic);
+	centerOn(startingRect.center() - (startingRect.center() - defaultRect.center()) * zoomFactor);
+}
+
+void SkycultureMapGraphicsView::zoomOnTarget(qreal zoomFactor)
+{
+	// transform the scene (scaling) to fit the current timestep
+	qreal width = defaultRect.width() - (defaultRect.width() - targetRect.width()) * zoomFactor;
+	qreal height = defaultRect.height() - (defaultRect.height() - targetRect.height()) * zoomFactor;
+
+	qreal ratio = calculateScaleRatio(width, height);
+
+	scale(ratio, ratio);
+
+	// slowly move the center of the view to the new location
+	QEasingCurve centerEasing(QEasingCurve::InCubic);
+	centerOn(defaultRect.center() - (defaultRect.center() - targetRect.center()) * centerEasing.valueForProgress(zoomFactor));
+}
+
+qreal SkycultureMapGraphicsView::calculateScaleRatio(qreal width, qreal height)
+{
+	// Rect of the current view with a margin of 2
+	QRectF viewRect = viewport()->rect().adjusted(2, 2, - 2, - 2);
+	if (viewRect.isEmpty())
+	{
+		return 0;
+	}
+
+	// Rect of the current transformation in scene coordinates
+	QRectF sceneRect = transform().mapRect(QRectF(2, 2, width, height)); // values of x / y of sceneRect are not important since only the width / height are used for the calculation
+	if (sceneRect.isEmpty())
+	{
+		return 0;
+	}
+
+	// calculate the x / y ratio for scaling
+	qreal xratio = viewRect.width() / sceneRect.width();
+	qreal yratio = viewRect.height() / sceneRect.height();
+
+	// keep original aspect ratio
+	return qMin(xratio, yratio);
 }
