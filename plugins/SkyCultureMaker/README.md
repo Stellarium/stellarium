@@ -91,7 +91,7 @@ Once the basic information is complete, you can begin drawing constellations.
 
 ---
 
-### Drawing Constellations
+#### Drawing Constellations
 
 The constellation editor provides tools for interactive design:
 
