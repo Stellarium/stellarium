@@ -673,12 +673,11 @@ void StarMgr::populateHipparcosLists()
 				hipStarsHighPM.push_back(spm);
 			}
 		}
-	}
-	qInfo().nospace() << "Of " << hipparcosStars.count() << " HIP stars, " << doubleHipStars.count() << " are binaries, " <<
-		   variableHipStars.count() << " variable (" << algolTypeStars.count() << " Algol-type, " << classicalCepheidsTypeStars.count() << " Cepheids), " <<
-		   carbonStars.count() << " Carbon stars, " << bariumStars.count() << " Barium stars, and " << hipStarsHighPM.count() << " have PM>1000mas/yr.";
+        }
 
-	//qInfo() << classicalCepheidsTypeStars;
+        qInfo().nospace() << "Lists of stars: " << hipparcosStars.count() << " HIP stars, " << doubleHipStars.count() << " are binaries, " << variableHipStars.count()
+                          << " variable (" << algolTypeStars.count() << " Algol-type, " << classicalCepheidsTypeStars.count() << " Cepheids), " << carbonStars.count()
+                          << " Carbon stars, " << bariumStars.count() << " Barium stars, and " << hipStarsHighPM.count() << " have PM>1000mas/yr.";
 }
 
 // Load common names from file

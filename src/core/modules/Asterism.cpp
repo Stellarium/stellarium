@@ -209,12 +209,11 @@ bool Asterism::read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &
 					const StarId HIP = StelUtils::getLongLong(point);
 					if (HIP>0)
 					{
-						newObj = HIP <= NR_OF_HIP ? starMgr->searchHP(HIP)
-									  : starMgr->searchGaia(HIP);
+						newObj = HIP <= NR_OF_HIP ? starMgr->searchHP(HIP) : starMgr->searchGaia(HIP);
 
 						if (!newObj)
 						{
-							qWarning().nospace() << "Error in asterism " << abbreviation << ": can't find star HIP " << HIP << "... skipping asterism";
+							qWarning().nospace() << "Possible error in asterism " << abbreviation << ((HIP <= NR_OF_HIP) ? ": can't find star HIP " : ": can't find star Gaia DR3 ")  << HIP << "... skipping asterism, please install more star catalogs";
 							return false;
 						}
 					}

@@ -28,6 +28,7 @@
 #include "NebulaTextures.hpp"
 #include "NebulaTexturesDialog.hpp"
 
+#include <stdexcept>
 #include <QDebug>
 
 // Returns a new instance of NebulaTextures module.

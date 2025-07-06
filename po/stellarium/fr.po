@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-06-19 15:17+0700\n"
+"POT-Creation-Date: 2025-06-21 13:18+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Nicolas Martignoni, 2025\n"
 "Language-Team: French (https://app.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -21612,9 +21612,9 @@ msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
 "Stellarium's original telescope control feature (~2006)."
 msgstr ""
-"Cette fonctionnalité est équivalente au type de télescope « Bidon » supporté"
-" par la fonctionnalité originale de commande de télescope de Stellarium "
-"(~2006)."
+"Cette fonctionnalité est équivalente au type de télescope « Bidon » pris en "
+"charge par la fonctionnalité originale de commande de télescope de "
+"Stellarium (~2006)."
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:528
@@ -35487,6 +35487,10 @@ msgstr ""
 "Traitement terminé ! Centrer le point milieu, tester la texture, puis "
 "l'ajouter au textures personnalisées."
 
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:535
+msgid "Are you sure to recover the solution?"
+msgstr "Voulez-vous vraiment récupérer la position et les coordonnées ?"
+
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:570
 msgid "Stop test"
 msgstr "Terminer le test"
@@ -35495,6 +35499,14 @@ msgstr "Terminer le test"
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:533
 msgid "Test this texture"
 msgstr "Tester cette texture"
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:695
+msgid ""
+"Caution! Are you sure to add this texture? It will only take effect after "
+"restarting Stellarium."
+msgstr ""
+"Attention ! Voulez-vous vraiment ajouter cette texture ? Elle ne sera "
+"visible qu'après redémarrage de Stellarium."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:726
 msgid "Failed to load texture configuration."
@@ -35519,6 +35531,10 @@ msgstr "Format d'image non valide."
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:784
 msgid "Failed to copy image file."
 msgstr "Impossible de copier le fichier image."
+
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:814
+msgid "Are you sure to remove this texture?"
+msgstr "Voulez-vous vraiment supprimer cette texture ?"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:826
 msgid "Texture removed."

@@ -156,32 +156,23 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 
 	if (landscapeIni.childGroups().contains("location"))
 	{
-		if (landscapeIni.contains("location/planet"))
-			location.planetName = landscapeIni.value("location/planet").toString();
-		else
-			location.planetName = "Earth";
+		location.planetName = landscapeIni.value("location/planet", "Earth").toString();
 		// Tolerate decimal values in .ini file, but round to nearest integer
-		if (landscapeIni.contains("location/altitude"))
-			location.altitude = qRound(landscapeIni.value("location/altitude").toDouble());
-		if (landscapeIni.contains("location/latitude"))
-			location.setLatitude(static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/latitude").toString())*M_180_PI));
-		if (landscapeIni.contains("location/longitude"))
-			location.setLongitude(static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/longitude").toString())*M_180_PI));
+		location.altitude = qRound(landscapeIni.value("location/altitude", 0.).toDouble());
+		location.setLatitude(static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/latitude", 0.).toString())*M_180_PI));
+		location.setLongitude(static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/longitude", 0.).toString())*M_180_PI));
 		if (landscapeIni.contains("location/country"))
 			location.region = StelLocationMgr::pickRegionFromCountry(landscapeIni.value("location/country").toString());
 		if (landscapeIni.contains("location/state"))
 			location.state = landscapeIni.value("location/state").toString();
-		if (landscapeIni.contains("location/name"))
-			location.name = landscapeIni.value("location/name").toString();
-		else
-			location.name = name;
+		location.name = landscapeIni.value("location/name", name).toString();
 		location.landscapeKey = name;
 
 		QString tzString=landscapeIni.value("location/timezone", "").toString();
 		if (!tzString.isEmpty())
 			location.ianaTimeZone=StelLocationMgr::sanitizeTimezoneStringFromLocationDB(tzString);
 
-		auto defaultBortleIndex = landscapeIni.value("location/light_pollution", -1).toInt();
+		int defaultBortleIndex = landscapeIni.value("location/light_pollution", -1).toInt();
 		if (defaultBortleIndex<=0) defaultBortleIndex=-1; // neg. values in ini file signal "no change".
 		if (defaultBortleIndex>9) defaultBortleIndex=9; // correct bad values.
 		const auto lum = landscapeIni.value("location/light_pollution_luminance");
@@ -202,6 +193,10 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		defaultExtinctionCoefficient = landscapeIni.value("location/atmospheric_extinction_coefficient", -1.0).toDouble();
 		defaultTemperature = landscapeIni.value("location/atmospheric_temperature", -1000.0).toDouble();
 		defaultPressure = landscapeIni.value("location/atmospheric_pressure", -2.0).toDouble(); // -2=no change! [-1=computeFromAltitude]
+
+		location.role='X';
+		if (location.getLongitude() == 0. || location.getLatitude() == 0.)
+			qWarning() << "Longitude or latitude for landscape are zero. Intended?";
 	}
 
 	// Set minimal brightness for landscape
@@ -1669,7 +1664,7 @@ void main(void)
 	float modelZenithAngle = acos(modelPos.z);
 
 	float r = min(modelZenithAngle / texFov, 0.5);
-	vec2 posFromCenter = dot(modelPos,modelPos)==0 ? vec2(0) : r*normalize(modelPos.yx);
+	vec2 posFromCenter = dot(modelPos,modelPos)==0. ? vec2(0) : r*normalize(modelPos.yx);
 	vec2 texc = posFromCenter+vec2(0.5);
 
 	vec4 color = texture2D(mapTex, texc);

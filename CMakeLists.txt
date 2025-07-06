@@ -43,7 +43,7 @@ ENDIF()
 # Note: Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR 25)
 # Number of the release (0 is used before first release)
-SET(STELLARIUM_MINOR 1)
+SET(STELLARIUM_MINOR 2)
 IF(STELLARIUM_RELEASE_BUILD)
     ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
     SET(CMAKE_BUILD_TYPE Release)
@@ -595,7 +595,7 @@ ELSE()
      MESSAGE(STATUS "Found Qt${QT_VERSION_MAJOR}: ${QMAKE_LOCATION} (found suitable version ${QT_VERSION})")
 ENDIF()
 FIND_PACKAGE(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS
-     Concurrent Gui Network Widgets Charts)
+     Concurrent Gui Network Widgets Charts Positioning)
 IF(USE_PLUGIN_TELESCOPECONTROL OR ENABLE_GPS)
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS SerialPort REQUIRED)
 ENDIF()
@@ -675,8 +675,8 @@ SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 IF(ENABLE_SHOWMYSKY)
     ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
     CPMFindPackage(NAME ShowMySky-Qt${QT_VERSION_MAJOR}
-        URL https://github.com/10110111/CalcMySky/archive/refs/heads/master.zip
-        #URL_HASH SHA256=29ef4c81cf020e131ec79a28c78946d80d422d05818197079cbaa6353ffba16a
+        URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.3.5.tar.gz
+        URL_HASH SHA256=d49eab6bc70a2c82bf294dd8ace9ef2fc6df0afbb72ba493bb6d3f1f8cd8829d
         EXCLUDE_FROM_ALL yes
         OPTIONS "QT_VERSION ${QT_VERSION_MAJOR}")
     IF(ShowMySky-Qt${QT_VERSION_MAJOR}_ADDED)

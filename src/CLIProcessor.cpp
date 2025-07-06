@@ -59,7 +59,7 @@ void CLIProcessor::parseCLIArgsPreQApp(const QStringList argList)
 	if (argsGetOption(argList, "-m", "--mesa-mode"))
 	{
 		qputenv("QT_OPENGL", "software");
-		qputenv("MESA_GL_VERSION_OVERRIDE", "3.3"); // The Mesa 20.1.8 library reports providing 3.1 only. This does the trick for us.
+                qputenv("MESA_GL_VERSION_OVERRIDE", "3.3"); // The Mesa 20.1.8 library reports providing 3.1 only. This does the trick for us.
 		// These prepare using current Mesa3D libraries, should the user install them. Else the vars are harmless.
 		qputenv("QT_OPENGL_DLL", "opengl32sw.dll");
 		qputenv("GALLIUM_DRIVER", "llvmpipe");
@@ -140,7 +140,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--angle-d3d11           : Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine\n"
 			  << "--angle-warp            : Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine\n"
 			  #endif
-			  << "--mesa-mode (or -m)     : Use MESA as software OpenGL rendering engine\n"
+                          << "--mesa-mode (or -m)     : Use Mesa as software OpenGL rendering engine\n"
 			  #ifdef ENABLE_SPOUT
 			  << "--spout (or -S) <sky|all> : Act as SPOUT sender (Sky only/including GUI)\n"
 			  << "--spout-name <name>     : Set particular name for SPOUT sender.\n"
