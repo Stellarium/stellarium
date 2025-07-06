@@ -316,8 +316,8 @@ QList<QPointF> SkycultureMapGraphicsView::convertLatLonToMeter(const QList<QPoin
 		//start = 83.6236 --> 0 --> ???
 
 		qInfo() << "Punkt x: " << point.x() << " y: " << point.y();
-		qreal xMeter = (point.x() * 20037508.34) / 180.0;;
-		qreal yMeter = ((qLn(qTan(((90.0 + point.y())* M_PI) / 360.0)) / (M_PI / 180.0)) * 20037508.34) / 180.0;
+		qreal xMeter = (point.x() * 20037508.3427892439067363739014) / 180.0;;
+		qreal yMeter = ((qLn(qTan(((90.0 + point.y())* M_PI) / 360.0)) / (M_PI / 180.0)) * 20037508.3427892439067363739014) / 180.0;
 		qInfo() << "berechnete x: " << xMeter << " y: " << yMeter;
 
 		meter_coords.append(QPointF(xMeter, yMeter));
@@ -342,13 +342,20 @@ QList<QPointF> SkycultureMapGraphicsView::convertMeterToView(const QList<QPointF
 
 		// cropped EPSG 3857 WGS 84 extent:
 		// x: - 20037507.0672 | 20037507.0672 (corresponds to -180.0 to 180.0 in WGS84 bounds) --> 40,075,014.1344
+		// x: - 20037507,0671618431806564 | 20040258.7695968560874462 --> 40,077,765.8367586992681026
+		// x: - 20037507,0671618431806564 | 20037507,0671618431806564 --> 40,075,014.1343236863613128
+		//		20037508,3427892439067363739014 * 2 = 40,075,016.6855784878134727478028
 		// y: -  7538976.9896 | 18418386.3091 (corresponds to - 90.0 to  83.6236 in WGS84 bounds) --> 25,957,363.2987
+
+		// lat extent:
+		// without Antarctica: -7538976.9895804952830076 | 18418386.3090785145759583 --> 25957363.298659009859
+		// with Antarctica:    -20615645,00034497305751  | 18418386,3090785145759583 --> 39034031.30942348763347
 
 
 
 		qInfo() << "Punkt x: " << point.x() << " y: " << point.y();
-		qreal xView = ((point.x() + 20037507.0672) / 40075014.1344) * mapWidth;
-		qreal yView = ((point.y() - 18418386.3091) / -25957363.2987) * mapHeight;
+		qreal xView = ((point.x() + 20037507.0671618431806564) / 40075014.1343236863613128) * mapWidth;
+		qreal yView = ((point.y() - 18418386.3090785145759583) / -39034031.3094234876334668) * mapHeight;
 		qInfo() << "berechnete x: " << xView << " y: " << yView;
 		view_coords.append(QPointF(xView, yView));
 	}
