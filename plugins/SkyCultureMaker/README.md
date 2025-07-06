@@ -111,7 +111,7 @@ The constellation editor provides tools for interactive design:
 
 For each constellation, the following information must be provided:
 
-- **ID:** Unique identifier for the constellation  
+- **ID:** Unique identifier for the constellation . If not set it will automatically be generated based on the **Name**
 - **Name:** Display name for the constellation  
 - **Native Name (optional):** Name in the original language or script  
 - **Pronunciation (optional):** Phonetic pronunciation guide  
