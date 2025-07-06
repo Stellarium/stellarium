@@ -90,7 +90,7 @@ Clicking **Create** will start the Maker and open the three windows.
 
 ---
 
-### Creating a New Sky Culture
+#### Creating a New Sky Culture
 
 1. Open the Sky Culture Maker interface.  
 2. Click **Create New Sky Culture**.  
