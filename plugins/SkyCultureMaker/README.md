@@ -40,11 +40,14 @@ This documentation explains how to activate and use the Sky Culture Maker plugin
 
 ## 1. Installation
 
-### 1.1 Plugin Installation and Prerequisites
+### 1.1 Prerequisites
 
-To use Sky Culture Maker, ensure the following dependencies are installed:
+The Sky Culture Maker currently consists of two main features. The first is the Maker, which is used to create new sky cultures within Stellarium. The second is a converter that transforms old `.fab` sky culture files into the new JSON format.
 
-**For converting**  
+**Maker**
+- Stellarium already comes with everything you need.
+
+**Converter**  
 - [Tidy HTML](https://www.html-tidy.org/) (used for formatting HTML descriptions)  
 
 ### 1.2 Activating the Plugin in Stellarium
