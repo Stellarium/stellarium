@@ -1,3 +1,26 @@
+/*
+ * Sky Culture Maker plug-in for Stellarium
+ *
+ * Copyright (C) 2025 Vincent Gerlach
+ * Copyright (C) 2025 Luca-Philipp Grumbach
+ * Copyright (C) 2025 Fabian Hofer
+ * Copyright (C) 2025 Mher Mnatsakanyan
+ * Copyright (C) 2025 Richard Hofmann
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "ScmConstellationArtwork.hpp"
 #include "StarMgr.hpp"
 #include "StelApp.hpp"
@@ -24,7 +47,7 @@ void scm::ScmConstellationArtwork::setupArt()
 {
 	if (hasArt == false)
 	{
-		qWarning() << "ERROR: Failed to setup the artwork, because it has no art";
+		qWarning() << "SkyCultureMaker: Failed to setup the artwork, because it has no art";
 		return;
 	}
 
@@ -34,7 +57,7 @@ void scm::ScmConstellationArtwork::setupArt()
 
 	if (starMgr == nullptr)
 	{
-		qWarning() << "ERROR: Failed to setup the artwork, because the starMgr is not available";
+		qWarning() << "SkyCultureMaker: Failed to setup the artwork, because the starMgr is not available";
 		return;
 	}
 
@@ -49,7 +72,7 @@ void scm::ScmConstellationArtwork::setupArt()
 	// check for null pointers
 	if (s1obj.isNull() || s2obj.isNull() || s3obj.isNull())
 	{
-		qWarning() << "ERROR: could not find stars:" << anchors[0].hip << ", " << anchors[1].hip << "or "
+		qWarning() << "SkyCultureMaker: could not find stars:" << anchors[0].hip << ", " << anchors[1].hip << "or "
 			   << anchors[2].hip;
 		return;
 	}
@@ -129,7 +152,7 @@ void scm::ScmConstellationArtwork::setAnchor(int index, const Anchor &anchor)
 {
 	if (index < 0 || index >= static_cast<int>(anchors.size()))
 	{
-		qDebug() << "Index ouf of bounds for setting an anchor.";
+		qDebug() << "SkyCultureMaker: Index ouf of bounds for setting an anchor.";
 		return;
 	}
 
@@ -173,7 +196,7 @@ void scm::ScmConstellationArtwork::draw(StelCore *core, StelPainter &painter) co
 
 	if (isSetup == false)
 	{
-		qWarning() << "ERROR: Failed to draw the artwork: call setup first";
+		qWarning() << "SkyCultureMaker: Failed to draw the artwork: call setup first";
 		return;
 	}
 
@@ -231,7 +254,7 @@ bool scm::ScmConstellationArtwork::save(const QString &filepath) const
 	bool success = fileInfo.absoluteDir().mkpath(fileInfo.absolutePath());
 	if (success == false)
 	{
-		qWarning() << "ERROR: Failed to create the directory structure for: '" << fileInfo.absolutePath()
+		qWarning() << "SkyCultureMaker: Failed to create the directory structure for: '" << fileInfo.absolutePath()
 			   << "'";
 		return false;
 	}
@@ -239,7 +262,7 @@ bool scm::ScmConstellationArtwork::save(const QString &filepath) const
 	success = artwork.save(fileInfo.absoluteFilePath());
 	if (success == false)
 	{
-		qWarning() << "ERROR: Failed to save the image to the given path: '" << fileInfo.absoluteFilePath()
+		qWarning() << "SkyCultureMaker: Failed to save the image to the given path: '" << fileInfo.absoluteFilePath()
 			   << "'";
 		return false;
 	}

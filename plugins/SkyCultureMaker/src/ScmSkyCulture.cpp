@@ -1,3 +1,26 @@
+/*
+ * Sky Culture Maker plug-in for Stellarium
+ *
+ * Copyright (C) 2025 Vincent Gerlach
+ * Copyright (C) 2025 Luca-Philipp Grumbach
+ * Copyright (C) 2025 Fabian Hofer
+ * Copyright (C) 2025 Mher Mnatsakanyan
+ * Copyright (C) 2025 Richard Hofmann
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "ScmSkyCulture.hpp"
 #include "types/Classification.hpp"
 #include <utility>
@@ -126,13 +149,13 @@ bool scm::ScmSkyCulture::saveDescriptionAsMarkdown(QFile &file)
 		}
 		catch (const std::exception &e)
 		{
-			qWarning("Error closing file: %s", e.what());
+			qWarning("SkyCultureMaker: Error closing file: %s", e.what());
 			return false; // error occurred while closing the file
 		}
 	}
 	else
 	{
-		qWarning("Could not open file for writing: %s", qPrintable(file.fileName()));
+		qWarning("SkyCultureMaker: Could not open file for writing: %s", qPrintable(file.fileName()));
 		return false; // file could not be opened
 	}
 }

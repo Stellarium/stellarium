@@ -1,3 +1,26 @@
+/*
+ * Sky Culture Maker plug-in for Stellarium
+ *
+ * Copyright (C) 2025 Vincent Gerlach
+ * Copyright (C) 2025 Luca-Philipp Grumbach
+ * Copyright (C) 2025 Fabian Hofer
+ * Copyright (C) 2025 Mher Mnatsakanyan
+ * Copyright (C) 2025 Richard Hofmann
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "SkyCultureMaker.hpp"
 #include "StelActionMgr.hpp"
 #include "StelApp.hpp"
@@ -21,21 +44,6 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QPixmap>
-
-/**
- * Managing the creation process of a new sky culture.
- * 1. Navigate in stellarium (UI) to the location of interest (from where the culture should be created)
- * 2. Starting creation process (click in UI)
- * 3. Draw lines from start to star
- *   a) Only stars should be selectable
- *   b) Add functionality to draw separated/unconnected lines (e.g. cross constelation)
- *   c) Add functionality to delete a line
- *     I)  Deleting a inner line of a stick figure should split the figure into two stick figures
- *     II) Connecting two stick figures should merge them into one stick figure
- * 4. Add button to save sky culture
- * 5. Click save button opens dialog to name: sky culture, lines, aliass, ...
- * 6. Completing the dialog (check that all needed arguments are existing and valid) converts intern c++ object to json
- */
 
 /*************************************************************************
  This method is the one called automatically by the StelModuleMgr just
@@ -135,7 +143,7 @@ double SkyCultureMaker::getCallOrder(StelModuleActionName actionName) const
 *************************************************************************/
 void SkyCultureMaker::init()
 {
-	qDebug() << "init called for SkyCultureMaker";
+	qDebug() << "SkyCultureMaker: Init called for SkyCultureMaker";
 
 	StelApp &app = StelApp::getInstance();
 
@@ -146,9 +154,9 @@ void SkyCultureMaker::init()
 	{
 		QPixmap iconScmDisabled(":/SkyCultureMaker/bt_SCM_Off.png");
 		QPixmap iconScmEnabled(":/SkyCultureMaker/bt_SCM_On.png");
-		qDebug() << (iconScmDisabled.isNull() ? "Failed to load image: bt_SCM_Off.png"
+		qDebug() << "SkyCultureMaker: " << (iconScmDisabled.isNull() ? "Failed to load image: bt_SCM_Off.png"
 		                                      : "Loaded image: bt_SCM_Off.png");
-		qDebug() << (iconScmEnabled.isNull() ? "Failed to load image: bt_SCM_On.png"
+		qDebug() << "SkyCultureMaker: " << (iconScmEnabled.isNull() ? "Failed to load image: bt_SCM_On.png"
 		                                     : "Loaded image: bt_SCM_On.png");
 
 		StelGui *gui = dynamic_cast<StelGui *>(app.getGui());
@@ -161,7 +169,7 @@ void SkyCultureMaker::init()
 	}
 	catch (std::runtime_error &e)
 	{
-		qWarning() << "Unable create toolbar button for SkyCultureMaker plugin: " << e.what();
+		qWarning() << "SkyCultureMaker: Unable create toolbar button for SkyCultureMaker plugin: " << e.what();
 	}
 }
 
