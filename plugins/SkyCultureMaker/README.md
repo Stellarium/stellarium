@@ -54,7 +54,7 @@ The Sky Culture Maker currently consists of two main features. The first is the 
 
 ### 1.2 Activating the Plugin in Stellarium
 
-After building or installing the plugin:
+After building or installing Stellarium:
 
 1. Launch Stellarium.  
 2. Navigate to **Settings → Plugins**.  
