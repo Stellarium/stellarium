@@ -105,7 +105,7 @@ Once the basic information is complete, you can begin drawing constellations.
 
 The constellation editor provides tools for interactive design:
 
-- **Pen Tool:** Right click on stars to draw constellation lines between points. You can also use the search function to locate specific    stars by name. Once found, those stars can be selected directly to create lines between them.
+- **Pen Tool:** Right click on stars to draw constellation lines between points. You can also use the search function to locate specific stars by name. Once found, those stars can be selected directly to create lines between them.
 - **Erase Tool:** Remove lines or incorrect segments from the constellation.  
 - **Undo:** Revert the most recent drawing action.  
 
