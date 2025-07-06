@@ -109,6 +109,27 @@ For each constellation, the following information must be provided:
 
 If your constellation consists of multiple separated areas, disable the pen tool after completing one area to unlock the drawing cursor from the most recent star.
 
+
+#### Uploading and Anchoring an Image
+
+You can upload a constellation image and align it with specific stars in the sky. Follow these steps to add and anchor your artwork:
+
+1. Open the **Artwork** tab within the Constellation Editor.  
+2. Click on **Upload Image** and select the desired constellation image from your files.  
+3. After uploading, three anchor points will appear at the center of the image. You can use these points to align the image precisely with the stars.  
+
+To bind an anchor to a star:
+
+- Click on one of the anchor points. The selected anchor will turn green to indicate it is active.  
+- Select a star of your choice in the sky.  
+- Click **Bind Star** to link the anchor to the selected star.  
+
+When an anchor is successfully bound to a star, it will be highlighted in a brighter color. Selecting the anchor again will automatically highlight the corresponding star.
+
+**Note:**  
+If an anchor is already bound to a star, clicking **Bind Star** again will overwrite the existing binding with the currently selected star.
+
+
 ---
 
 #### Exporting the Sky Culture
@@ -146,21 +167,9 @@ To convert a sky culture:
 
 ## 3. File Structure and Output
 
-SkyCultureMaker/
-- CMakeLists.txt, README.md, icons.svg 
-- resources/
-	- icons
-	- SkyCultureMaker.qrc
-- src/
-	- CMakeLists.txt
-	- main classes 
-	- gui/
-		- dialogue & windows (Scm*.cpp/hpp)
-		- UI-definitions(.ui)
-	- types/
-		- datatypes (e.f. Classification, Lines, StarPoint)
+After creating or converting a sky culture, the files are stored in Stellarium's `skycultures` directory by default.
 
-
+If the user does not have permission to write to Stellarium's directory, a dialog will prompt the user to select an alternative existing folder where the sky culture can be saved.
 
 Generated sky culture files follow the Stellarium standards for directories, metadata, and constellation definitions.
 
