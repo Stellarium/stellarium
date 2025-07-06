@@ -122,7 +122,7 @@ These files allow your sky culture to be loaded and displayed within Stellarium 
 
 ---
 
-#### Converting a Sky Culture
+### Converting a Sky Culture (Converter)
 
 To convert a sky culture:
 
