@@ -184,11 +184,11 @@ Generated sky culture files follow the Stellarium standards for directories, met
 ---
 
 ## 5 Credits
-- Vincent Gerlach (RivinHD)
-- Luca-Philipp Grumbach (xLPMG)
-- Fabian Hofer (Integer-Ctrl)
-- Mher Mnatsakanyan (MherMnatsakanyan03)
-- Richard Hofmann (ZeyxRew)
+- Vincent Gerlach ([RivinHD@GitHub](https://github.com/RivinHD))
+- Luca-Philipp Grumbach ([xLPMG@GitHub](https://github.com/xLPMG))
+- Fabian Hofer ([Integer-Ctrl@GitHub](https://github.com/Integer-Ctrl))
+- Mher Mnatsakanyan ([MherMnatsakanyan03@GitHub](https://github.com/MherMnatsakanyan03))
+- Richard Hofmann ([ZeyxRew@GitHub](https://github.com/ZeyxRew))
 
 ---
 
