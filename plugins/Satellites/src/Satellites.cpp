@@ -658,7 +658,8 @@ void Satellites::restoreDefaultTleSources()
 		{ "other-comm", false }, { "glo-ops", true },       { "beidou", true },        { "sbas", false },
 		{ "nnss", false },       { "engineering", false },  { "education", false },    { "geodetic", false },
 		{ "radar", false },      { "cubesat", false },      { "other", false },        { "oneweb", true },
-		{ "starlink", true },    { "planet", false },       { "spire", false },        { "swarm", false }
+	        { "starlink", true },    { "planet", false },       { "spire", false },        { "swarm", false },
+	        { "qianfan", false },    { "hulianwang", false },   { "kuiper", false }
 	};
 	// Details: https://celestrak.org/NORAD/documentation/gp-data-formats.php
 	QString celestrackBaseURL = "https://celestrak.org/NORAD/elements/gp.php?GROUP=%1&FORMAT=TLE";
@@ -1579,7 +1580,11 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 		{ "PICO-1A",	"pico-1a" },
 		{ "GLOBALSTAR",	"globalstar" },
 		{ "STRATOSAT",	"stratosat" },
-		{ "COSMO-SKYMED", "cosmo-skymed" }
+	        { "COSMO-SKYMED", "cosmo-skymed" },
+	        { "QIANFAN",	"qianfan"},
+	        { "HULIANWANG",	"hulianwang"},
+	        { "KUIPER",	"kuiper"},
+	        { "YAMAL",	"yamal" }
 	};
 
 	QStringList groups;
@@ -1718,6 +1723,22 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 		satGroups.append("crewed");
 	if (tleData.name.startsWith("PROGRESS-MS") || tleData.name.startsWith("CYGNUS NG"))
 		satGroups.append("resupply");
+	if (tleData.name.startsWith("QIANFAN"))
+	{
+		satGroups.append("qianfan");
+		satGroups.append("communications");
+		satGroups.append("scientific");
+	}
+	if (tleData.name.startsWith("HULIANWANG"))
+	{
+		satGroups.append("hulianwang");
+		satGroups.append("communications");
+	}
+	if (tleData.name.startsWith("KUIPER"))
+	{
+		satGroups.append("kuiper");
+		satGroups.append("communications");
+	}
 
 	// Guessing the groups from CelesTrak's groups (a "supergroups")
 	if (tleData.sourceURL.contains("celestrak.org", Qt::CaseInsensitive))
@@ -3273,6 +3294,10 @@ void Satellites::createSuperGroupsList()
 		{ "iridium", communications },
 		{ "iridium-NEXT", communications },
 		{ "starlink", communications },
+	        { "qianfan", communications },
+	        { "hulianwang", communications },
+	        { "kuiper", communications },
+	        { "yamal", communications },
 		{ "oneweb", communications },
 		{ "orbcomm", communications },
 		{ "globalstar", communications },
@@ -3502,7 +3527,16 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA satellites
 	// TRANSLATORS: CelesTrak source [Molniya]: https://celestrak.org/NORAD/elements/molniya.txt
 	// TRANSLATORS: CelesTrak source [Molniya]: https://celestrak.org/NORAD/elements/gp.php?GROUP=molniya&FORMAT=tle
-	N_("molniya");	
+	N_("molniya");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Qianfan constellation (Qianfan is a proper name)
+	// TRANSLATORS: CelesTrak source [Qianfan]: https://celestrak.org/NORAD/elements/gp.php?GROUP=qianfan&FORMAT=tle
+	N_("qianfan");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Hulianwang constellation (Hulianwang is a proper name)
+	// TRANSLATORS: CelesTrak source [Hulianwang Digui]: https://celestrak.org/NORAD/elements/gp.php?GROUP=hulianwang&FORMAT=tle
+	N_("hulianwang");
+	// TRANSLATORS: CelesTrak source [Kuiper]: https://celestrak.org/NORAD/elements/gp.php?GROUP=kuiper&FORMAT=tle
+	N_("kuiper");
+	N_("yamal");
 	//
 	// *** Navigation Satellites [CelesTrak groups]
 	//

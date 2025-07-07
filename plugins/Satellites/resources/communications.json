@@ -985,6 +985,33 @@
             }
             ]
         },
+        "39022": {
+            "name": "YAMAL 402",
+            "source": "https://en.kingofsat.net/sat-yamal402.php",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 4168.00,
+                "modulation": "QPSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 11059.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 11265.00,
+                "modulation": "QPSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 11385.00,
+                "modulation": "8PSK"
+            }
+            ]
+        },
+
         "39090": {
             "name": "STRAND 1",
             "source": "https://www.n2yo.com/satellite/?s=39090",
@@ -2526,6 +2553,32 @@
                 "description": "downlink",
                 "frequency": 436.730,
                 "modulation": "4k8/9k6 GFSK"
+            }
+            ]
+        },
+        "44307": {
+            "name": "YAMAL 601",
+            "source": "https://en.kingofsat.net/sat-yamal601.php",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 3550.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 3586.00,
+                "modulation": "QPSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 3595.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 3655.00,
+                "modulation": "8PSK"
             }
             ]
         },
@@ -4585,6 +4638,36 @@
                 "modulation": "LoRa"
             }
             ]
+        },
+        "kuiper": {
+            "source": "https://cdn.geekwire.com/wp-content/uploads/2019/07/Kuiper-Technical.pdf",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 18.0,
+                "modulation": "RHCP/LHCP"
+            },
+            {
+                "description": "downlink",
+                "frequency": 19.0,
+                "modulation": "RHCP/LHCP"
+            },
+            {
+                "description": "downlink",
+                "frequency": 20.0,
+                "modulation": "RHCP/LHCP"
+            },
+            {
+                "description": "uplink",
+                "frequency": 28.9,
+                "modulation": "RHCP/LHCP"
+            },
+            {
+                "description": "uplink",
+                "frequency": 29.7,
+                "modulation": "RHCP/LHCP"
+            }            
+	    ]
         },
         "vr3x": {
             "source": "https://db.satnogs.org/transmitters",
