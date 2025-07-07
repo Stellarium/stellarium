@@ -1581,9 +1581,9 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 		{ "GLOBALSTAR",	"globalstar" },
 		{ "STRATOSAT",	"stratosat" },
 	        { "COSMO-SKYMED", "cosmo-skymed" },
-	        { "QIANFAN",	"qianfan"},
-	        { "HULIANWANG",	"hulianwang"},
-	        { "KUIPER",	"kuiper"},
+	        { "QIANFAN",	"qianfan" },
+	        { "HULIANWANG",	"hulianwang" },
+	        { "KUIPER",	"kuiper" },
 	        { "YAMAL",	"yamal" }
 	};
 
