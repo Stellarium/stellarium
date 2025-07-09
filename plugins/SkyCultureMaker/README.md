@@ -8,7 +8,6 @@ The plugin provides an intuitive interface for both amateur astronomers and adva
 - Create sky cultures directly in Stellarium with real-time visualization
 - Define new constellations by drawing directly in the Stellarium sky view  
 - Convert `.fab` data into JSON
-- Contribute to educational projects, preserve cultural astronomical knowledge, or create personalized star maps  
 
 This documentation explains how to activate and use the Sky Culture Maker plugin, as well as its functionalities.
 
