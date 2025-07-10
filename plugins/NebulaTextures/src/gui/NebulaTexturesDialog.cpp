@@ -60,13 +60,13 @@ const QString NebulaTexturesDialog::ConfigPrefix = NT_CONFIG_PREFIX;
  */
 NebulaTexturesDialog::NebulaTexturesDialog()
 	: StelDialog("NebulaTextures"),
-	isTempTextureVisible(false),
-	conf(StelApp::getInstance().getSettings()),
-	refreshCount(0), refreshLimit(2),
-	isWcsSolved(false),
-	imagePath_src(""), imagePath_dst(""),
-	imagePathTemp_src(""), imagePathTemp_dst(""),
-	progressBar(Q_NULLPTR)
+          refreshCount(0), refreshLimit(2),
+          conf(StelApp::getInstance().getSettings()),
+          progressBar(Q_NULLPTR),
+          imagePath_src(""),
+          imagePath_dst(""),
+          imagePathTemp_src(""), imagePathTemp_dst(""),
+          isWcsSolved(false), isTempTextureVisible(false)
 {
 	ui = new Ui_nebulaTexturesDialog();
 
@@ -501,7 +501,6 @@ void NebulaTexturesDialog::moveToCenterCoord()
 {
 	centerRA = ui->referX->valueDegrees();
 	centerDec = ui->referY->valueDegrees();
-	StelCore* core = StelApp::getInstance().getCore();
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Vec3d pos;
 	double spinLong=centerRA/180.*M_PI;
@@ -922,7 +921,6 @@ void NebulaTexturesDialog::gotoSelectedItem(QListWidgetItem* item)
 	double spinLat = D2R * centerDec;
 
 	// move View port
-	StelCore* core = StelApp::getInstance().getCore();
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Vec3d pos;
 
