@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-07-10 14:04+0700\n"
+"POT-Creation-Date: 2025-07-14 13:19+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Gediminas Tauras, 2025\n"
 "Language-Team: Lithuanian (https://app.transifex.com/stellarium/teams/80998/lt/)\n"
@@ -12530,7 +12530,7 @@ msgstr "Žemės šešėlio dydis pagal Danjoną"
 
 #: src/ui_viewDialog.h:3937
 msgid "Limit the magnitude of solar system objects"
-msgstr "Apriboti Saulės sistemos objektų dydį"
+msgstr "Apriboti Saulės sistemos objektų ryškį"
 
 #: src/ui_viewDialog.h:3940
 msgid "Show orbits"
@@ -15453,7 +15453,7 @@ msgstr "Atitinkantys objektai:"
 
 #: src/ui_astroCalcDialog.h:2543
 msgid "Show objects which are up:"
-msgstr "Rodyti objektus, kurie yra įjungti:"
+msgstr "Rodyti objektus, kurie yra matomi:"
 
 #: src/ui_astroCalcDialog.h:2549
 msgid "Export list of objects..."
@@ -22347,7 +22347,7 @@ msgstr "Atnaujnti tik orbitos elementus"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Add objects"
-msgstr "Pridėti objektą"
+msgstr "Pridėti objektus"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:224
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:235
@@ -35190,20 +35190,20 @@ msgstr ""
 "Apdorojimas baigtas! Pereikite į Centro tašką, išbandykite šią tekstūrą ir "
 "įtraukite į pasirinktinę saugyklą."
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:535
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:534
 msgid "Are you sure to recover the solution?"
 msgstr "Ar esate tikri, kad atkuriate sprendimą?"
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:570
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:569
 msgid "Stop test"
 msgstr "Stabdyti bandymą"
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:572
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:571
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:533
 msgid "Test this texture"
 msgstr "Išbandyti šią tekstūrą"
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:695
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:694
 msgid ""
 "Caution! Are you sure to add this texture? It will only take effect after "
 "restarting Stellarium."
@@ -35211,35 +35211,35 @@ msgstr ""
 "Dėmesio! Ar tikrai norite pridėti šią tekstūrą? Ji įsigalios tik iš naujo "
 "paleidus „Stellarium“."
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:726
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:725
 msgid "Failed to load texture configuration."
 msgstr "Nepavyko įkelti tekstūros konfigūracijos."
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:736
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:735
 msgid "Imported custom textures successfully!"
 msgstr "Parinktinės tekstūros importuotos sėkmingai!"
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:752
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:751
 msgid "Image path is empty."
 msgstr "Kelias iki paveikslėlio yra tuščias."
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:764
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:763
 msgid "Image file invalid or unreadable."
 msgstr "Paveikslėlio failas netinkamas arba neįskaitomas."
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:772
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:771
 msgid "Invalid image format."
 msgstr "Netinkamas vaizdo formatas."
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:784
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:783
 msgid "Failed to copy image file."
 msgstr "Vaizdo failo nukopijuoti nepavyko."
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:814
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:813
 msgid "Are you sure to remove this texture?"
 msgstr "Ar tikrai norite pašalinti šią tekstūrą?"
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:826
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:825
 msgid "Texture removed."
 msgstr "Tekstūra pašalinta"
 
