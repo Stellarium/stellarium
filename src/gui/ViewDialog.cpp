@@ -20,6 +20,7 @@
 
 
 #include "ViewDialog.hpp"
+#include "SeperatorListWidgetItem.hpp"
 #include "ui_viewDialog.h"
 #include "AddRemoveLandscapesDialog.hpp"
 #include "AtmosphereDialog.hpp"
@@ -1119,19 +1120,54 @@ void ViewDialog::populateLists()
 	QListWidget* l = ui->culturesListWidget;
 	l->blockSignals(true);
 	l->clear();
-	const QStringList &skycultures = app.getSkyCultureMgr().getSkyCultureListI18();
-	for ( const auto& s : skycultures  )
+
+	// hard coded sequence of UN-regions to maintain thematic proximity (e.g. eastern, northern, southern, western europe)
+	const QStringList sortedRegions =
+		{"Global",
+		 "Eastern Europe", "Northern Europe", "Southern Europe", "Western Europe",
+		 "Eastern Africa", "Middle Africa", "Northern Africa", "Southern Africa", "Western Africa",
+		 "Caribbean", "Central America", "Northern America", "South America",
+		 "Central Asia", "Eastern Asia", "South-eastern Asia", "Southern Asia", "Western Asia",
+		 "Australasia", "Melanesia", "Micronesia", "Polynesia"};
+
+	const QMap<QString, QString> &cultureRegionMap = app.getSkyCultureMgr().getSkyCultureRegionMapI18();
+
+	// remove duplicates in list of occuring regions (optional)
+	QList<QString> occuringRegions = cultureRegionMap.values();
+	std::sort(occuringRegions.begin(), occuringRegions.end());
+	occuringRegions.erase(std::unique(occuringRegions.begin(), occuringRegions.end()));
+
+	QStringList sortedOccuringRegions;
+	for (const auto& region : sortedRegions)
 	{
-		l->addItem(s);
-		l->findItems(s, Qt::MatchExactly).at(0)->setToolTip(s);
+		if (occuringRegions.contains(region))
+		{
+			sortedOccuringRegions.append("------ " + region + " ------");
+		}
 	}
-	QListWidgetItem *test_item = new QListWidgetItem();
-	test_item->setText("Gruppierungs-Breaker");
-	test_item->setFlags(Qt::NoItemFlags);
-	test_item->setForeground(QBrush(Qt::white));
-	test_item->setBackground(QBrush(Qt::black));
-	l->addItem(test_item);
-	//l->insertItem(0, &test_item);
+
+	// add regions to list as custom QListWidgetItem
+	for (const auto region : sortedOccuringRegions)
+	{
+		l->addItem(new SeperatorListWidgetItem(region));
+	}
+
+	QMapIterator<QString, QString> cultureRegionIterator(cultureRegionMap);
+
+	cultureRegionIterator.toBack(); // reverse iteration to preserve alphabetical order
+	while (cultureRegionIterator.hasPrevious())
+	{
+		cultureRegionIterator.previous();
+		l->insertItem(l->row(l->findItems(cultureRegionIterator.value(), Qt::MatchContains).at(0)) + 1, cultureRegionIterator.key());
+	}
+
+	// const QMap<QString, QString> &skycultures = app.getSkyCultureMgr().getSkyCultureListI18();
+	// for ( const auto& s : skycultures  )
+	// {
+	// 	l->addItem(s);
+	// 	l->findItems(s, Qt::MatchExactly).at(0)->setToolTip(s);
+	// }
+
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	updateSkyCultureText();

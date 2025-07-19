@@ -230,6 +230,10 @@ public slots:
 	//! @return A list of translated sky culture names.
 	QStringList getSkyCultureListI18(void) const;
 
+	//! Get a map of sky culture names in the current language and the corresponding region.
+	//! @return A map of translated sky culture names and corresponding regions.
+	QMap<QString, QString> getSkyCultureRegionMapI18(void) const;
+
 	//! Get a list of sky culture IDs
 	QStringList getSkyCultureListIDs(void) const;
 
