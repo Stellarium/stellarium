@@ -69,7 +69,8 @@ struct Page
 		DSO,
 		Markings,
 		Landscape,
-		SkyCulture,
+		SkyCultureMap,
+		SkyCultureDescription,
 		Surveys,
 
 		COUNT
@@ -557,9 +558,6 @@ void ViewDialog::createDialogContent()
 	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::defaultSkyCultureIDChanged,
 	        this, &ViewDialog::updateDefaultSkyCulture);
 	updateDefaultSkyCulture();
-
-	ui->skyCultureStackedWidget->setCurrentIndex(1);
-	connect(ui->switchSkyCulturePageButton,SIGNAL(clicked()), this, SLOT(switchSkyCulturePage()));
 
 	connect(ui->skyCultureTimeSlider, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTime(int)));
 	connect(ui->skyCultureTimeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTime(int)));
@@ -1470,14 +1468,6 @@ void ViewDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 	if (!current)
 		current = previous;
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
-}
-
-void ViewDialog::switchSkyCulturePage()
-{
-	int pageCount = ui->skyCultureStackedWidget->count();
-	int currentIndex = ui->skyCultureStackedWidget->currentIndex();
-
-	ui->skyCultureStackedWidget->setCurrentIndex((currentIndex + 1) % pageCount);
 }
 
 void ViewDialog::updateSkyCultureTime(int year)
