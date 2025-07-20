@@ -70,6 +70,7 @@ private slots:
 	void updateDefaultSkyCulture();
 	void updateDefaultLandscape();
 	void updateSkyCultureTime(int year);
+	void filterSkyCultures(const QString& filter);
 
 	void showAddRemoveLandscapesDialog();
 	// GZ I make this public to have it on a hotkey...

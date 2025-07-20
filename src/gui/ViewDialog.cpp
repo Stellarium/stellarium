@@ -20,7 +20,7 @@
 
 
 #include "ViewDialog.hpp"
-#include "SeperatorListWidgetItem.hpp"
+#include "SeparatorListWidgetItem.hpp"
 #include "ui_viewDialog.h"
 #include "AddRemoveLandscapesDialog.hpp"
 #include "AtmosphereDialog.hpp"
@@ -192,6 +192,9 @@ void ViewDialog::createDialogContent()
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureNameI18(QString)));
 	connect(ui->skyCultureMapGraphicsView, SIGNAL(cultureSelected(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureNameI18(QString)));
 	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &ViewDialog::skyCultureChanged);
+
+	// skyculture list search bar
+	connect(ui->culturesListSearchLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(filterSkyCultures(const QString&)));
 
 	// Connect and initialize checkboxes and other widgets
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
@@ -1147,7 +1150,7 @@ void ViewDialog::populateLists()
 	// add regions to list as custom QListWidgetItem
 	for (const auto region : sortedOccuringRegions)
 	{
-		l->addItem(new SeperatorListWidgetItem(region));
+		l->addItem(new SeparatorListWidgetItem(region));
 	}
 
 	QMapIterator<QString, QString> cultureRegionIterator(cultureRegionMap);
@@ -1482,6 +1485,33 @@ void ViewDialog::updateSkyCultureTime(int year)
 	ui->skyCultureTimeSpinBox->blockSignals(false);
 
 	ui->skyCultureMapGraphicsView->updateTime(year);
+}
+
+void ViewDialog::filterSkyCultures(const QString& filter)
+{
+	// assume all cultureItems associated with a region are hidden --> hide regions (separatorItems) if no culture is visible
+	bool allHidden = true;
+
+	// reverse iteration --> hide / show all items of a region first so that the visibility of the region can be set correctly
+	for (int row = ui->culturesListWidget->count() - 1; row >= 0; row--)
+	{
+		QListWidgetItem* item = ui->culturesListWidget->item(row);
+		if (item->type() == 1318) // type value for SeparatorListWidgetItem
+		{
+			item->setHidden(allHidden);
+			allHidden = true;
+		}
+		else
+		{
+			// hide items if they do not match the filter string
+			item->setHidden(!item->text().contains(filter, Qt::CaseInsensitive));
+
+			if (!item->isHidden())
+			{
+				allHidden = false;
+			}
+		}
+	}
 }
 
 void ViewDialog::populatePlanetMagnitudeAlgorithmsList()
