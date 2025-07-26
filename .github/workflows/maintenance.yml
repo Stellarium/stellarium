@@ -33,16 +33,16 @@ jobs:
   #
   # See https://github.com/marketplace/actions/check-crlf
   #
-#  check-crlf:
-#    name: "Check CRLF line endings"
-#    runs-on: ubuntu-latest
-#    if: "!contains(github.actor, 'transifex')"
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v4
-#
-#      - name: Check CRLF line endings
-#        uses: erclu/check-crlf@v1
+  check-crlf:
+    name: "Check CRLF line endings"
+    runs-on: ubuntu-latest
+    if: "!contains(github.actor, 'transifex')"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check CRLF line endings
+        uses: erclu/check-crlf@master
 
   check-json:
     name: "Linting JSON"
