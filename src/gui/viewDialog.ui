@@ -5760,7 +5760,7 @@
           <item row="0" column="0" rowspan="2">
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <property name="spacing">
-             <number>0</number>
+             <number>3</number>
             </property>
             <property name="leftMargin">
              <number>0</number>
@@ -5772,7 +5772,7 @@
              <number>0</number>
             </property>
             <property name="bottomMargin">
-             <number>0</number>
+             <number>5</number>
             </property>
             <item>
              <widget class="QListWidget" name="culturesListWidget">
@@ -5784,8 +5784,7 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>1000</width>
-                <height>0</height>
+                <width>1500</width>
                </size>
               </property>
               <property name="focusPolicy">
@@ -5801,20 +5800,40 @@
             </item>
             <item>
              <widget class="QLineEdit" name="culturesListSearchLineEdit">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-              <property name="toolTip">
-               <string>Standard list of locations contains only English names (without diacritics!)</string>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="leftMargin">
+               <number>5</number>
+              </property>
+              <property name="rightMargin">
+               <number>5</number>
+              </property>
+              <property name="placeholderText">
+               <string>Enter Culture...</string>
               </property>
               <property name="text">
                <string/>
               </property>
-              <property name="alignment">
-               <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+              <property name="styleSheet">
+               <string notr="true">
+                border: 5px solid rgb(47, 48, 50);
+                border-radius: 10px;
+                background-color: rgb(47, 48, 50);
+                padding-left: 28px;
+                padding-right: 10px;
+                background-image: url(:/graphicGui/uieSearchBoxBackground.png);
+                background-repeat: none;
+                background-position: left center;
+               </string>
               </property>
              </widget>
             </item>
