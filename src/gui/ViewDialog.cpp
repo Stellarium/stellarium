@@ -562,9 +562,12 @@ void ViewDialog::createDialogContent()
 	        this, &ViewDialog::updateDefaultSkyCulture);
 	updateDefaultSkyCulture();
 
-	connect(ui->skyCultureTimeSlider, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTime(int)));
-	connect(ui->skyCultureTimeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTime(int)));
-	connect(ui->skyCultureMapGraphicsView, SIGNAL(timeChanged(int)), this, SLOT(updateSkyCultureTime(int)));
+	connect(ui->skyCultureTimeSlider, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTimeValue(int)));
+	connect(ui->skyCultureTimeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTimeValue(int)));
+	connect(ui->skyCultureMapGraphicsView, SIGNAL(timeValueChanged(int)), this, SLOT(updateSkyCultureTimeValue(int)));
+
+	connect(ui->skyCultureMapGraphicsView, SIGNAL(timeRangeChanged(int, int)), this, SLOT(updateSkyCultureTimeRange(int, int)));
+	ui->skyCultureMapGraphicsView->initializeTime();
 
 	configureSkyCultureCheckboxes();
 	StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
@@ -1473,7 +1476,7 @@ void ViewDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 }
 
-void ViewDialog::updateSkyCultureTime(int year)
+void ViewDialog::updateSkyCultureTimeValue(int year)
 {
 	ui->skyCultureTimeSlider->blockSignals(true);
 	ui->skyCultureTimeSpinBox->blockSignals(true);
@@ -1485,6 +1488,15 @@ void ViewDialog::updateSkyCultureTime(int year)
 	ui->skyCultureTimeSpinBox->blockSignals(false);
 
 	ui->skyCultureMapGraphicsView->updateTime(year);
+}
+
+void ViewDialog::updateSkyCultureTimeRange(int minYear, int maxYear)
+{
+	ui->skyCultureTimeSlider->setMinimum(minYear);
+	ui->skyCultureTimeSlider->setMaximum(maxYear);
+
+	ui->skyCultureTimeSpinBox->setMinimum(minYear);
+	ui->skyCultureTimeSpinBox->setMaximum(maxYear);
 }
 
 void ViewDialog::filterSkyCultures(const QString& filter)

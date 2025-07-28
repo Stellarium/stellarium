@@ -69,7 +69,8 @@ private slots:
 	void setCurrentCultureAsDefault(void);
 	void updateDefaultSkyCulture();
 	void updateDefaultLandscape();
-	void updateSkyCultureTime(int year);
+	void updateSkyCultureTimeValue(int year);
+	void updateSkyCultureTimeRange(int minYear, int maxYear);
 	void filterSkyCultures(const QString& filter);
 
 	void showAddRemoveLandscapesDialog();

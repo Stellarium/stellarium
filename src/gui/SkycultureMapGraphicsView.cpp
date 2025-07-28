@@ -8,6 +8,8 @@
 
 SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	: QGraphicsView(parent)
+	, minYear(-2000)
+	, maxYear(2000)
 	, currentYear(0)
 	, oldSkyCulture("")
 {
@@ -414,7 +416,7 @@ void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId)
 	if(!skyCulturePolygon->existsAtPointInTime(currentYear))
 	{
 		// signal connects to updateSkyCultureTime in ViewDialog which invokes updateTime (in this class)
-		emit(timeChanged(skyCulturePolygon->getStartTime()));
+		emit(timeValueChanged(skyCulturePolygon->getStartTime()));
 	}
 
 	// select the new culture
@@ -547,4 +549,14 @@ qreal SkycultureMapGraphicsView::calculateScaleRatio(qreal width, qreal height)
 
 	// keep original aspect ratio
 	return qMin(xratio, yratio);
+}
+
+void SkycultureMapGraphicsView::initializeTime()
+{
+	minYear = -2000;
+	maxYear = QDateTime::currentDateTime().date().year();
+	currentYear = maxYear;
+
+	emit(timeRangeChanged(minYear, maxYear));
+	emit(timeValueChanged(currentYear));
 }

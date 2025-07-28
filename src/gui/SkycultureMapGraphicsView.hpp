@@ -14,7 +14,7 @@ public:
 	SkycultureMapGraphicsView(QWidget *parent = nullptr);
 
 	// public functions
-
+	void initializeTime();
 
 public slots:
 	void selectCulture(const QString &skycultureId);
@@ -23,7 +23,8 @@ public slots:
 
 signals:
 	void cultureSelected(const QString &skycultureId);
-	void timeChanged(int year);
+	void timeValueChanged(int year);
+	void timeRangeChanged(int minYear, int maxYear);
 
 protected:
 	void wheelEvent(QWheelEvent *event) override;
@@ -33,7 +34,9 @@ protected:
 	void scaleView(double scaleFactor);
 
 private:
-	// private functions
+	// variables
+	int minYear;
+	int maxYear;
 	int currentYear;
 	QString oldSkyCulture;
 	QTimeLine zoomToDefaultTimer;
@@ -42,6 +45,7 @@ private:
 	QRectF defaultRect;
 	QRectF targetRect;
 
+	// functions
 	QList<QPointF> convertLatLonToMeter(const QList<QPointF> &irl, qreal mapWidth, qreal mapHeight);
 	QList<QPointF> convertMeterToView(const QList<QPointF> &irl, qreal mapWidth, qreal mapHeight);
 	void updateCultureVisibility();
