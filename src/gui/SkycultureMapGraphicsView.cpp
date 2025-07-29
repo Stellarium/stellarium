@@ -21,7 +21,7 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	setTransformationAnchor(AnchorUnderMouse);
 
 	// when drawing the basemap picture it's important to zoom out far enough (otherwise the cultureListWidget Layout will be compressed)
-	scale(qreal(0.3), qreal(0.3)); // default transformation (zoom)
+	//scale(qreal(0.3), qreal(0.3)); // default transformation (zoom)
 
 	QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
 	setMouseTracking(true);
@@ -496,7 +496,31 @@ void SkycultureMapGraphicsView::smoothFitInView(QRectF targetRect)
 	this->targetRect = targetRect;
 	this->startingRect = mapToScene(viewport()->rect()).boundingRect();
 
+	qInfo() << "startingRect w: " << startingRect.width() << " h: " << startingRect.height() << " defaultRect w: " << defaultRect.width() << " h: " << defaultRect.height() << " diff w: " << qFabs((startingRect.width() - defaultRect.width())) << " h: " << qFabs(startingRect.height() - defaultRect.height());
+
+	qInfo() << "pre: " << zoomToDefaultTimer.currentTime();
+
+	qreal maxDuration = 2000;
+	qreal threshold = 1200;
+	QEasingCurve factor(QEasingCurve::OutQuad);
+	qInfo() << "normal: " << 0.8 << " " << 2000 * 0.8 << " outQuad: " << factor.valueForProgress(1.2) << " " << 2000 * factor.valueForProgress(1.2);
+	//qreal factor = maxDuration / pow(threshold, 2.0);
+
+	// 500 * 4 = 2000 --> 250 * 4 = 1000 ---> 100 * 4 = 400 --> 2000 / 500 = 4 (Faktor)
+	// für 2000 = a * 500² --> 2000 = 250000a --> a = 2000 / 250000 --> a = 0.008
+
 	zoomToDefaultTimer.start();
+
+	qInfo() << "post: " << zoomToDefaultTimer.currentTime();
+
+	qreal deviation = qMax((qFabs(startingRect.center().x() - defaultRect.center().x()) + qFabs(startingRect.center().y() - defaultRect.center().y())) / 2, qMin(qFabs(startingRect.width() - defaultRect.width()), qFabs(startingRect.height() - defaultRect.height())) );
+	//qreal deviation = (qFabs(startingRect.center().x() - defaultRect.center().x()) + qFabs(startingRect.center().y() - defaultRect.center().y())) / 2;
+
+
+	// if value > threshold --> result > 1.0 --> valueForProgress return 1.0 for all values > 1.0 --> maxDuration
+	zoomToDefaultTimer.setDuration(2000 * factor.valueForProgress(deviation * (1 / threshold)));
+
+	qInfo() << "value: " << deviation << " eased: " << factor.valueForProgress(deviation * (1 / threshold)) <<  "current duration: " << zoomToDefaultTimer.duration();
 }
 
 void SkycultureMapGraphicsView::zoomToDefault(qreal zoomFactor)
@@ -510,8 +534,9 @@ void SkycultureMapGraphicsView::zoomToDefault(qreal zoomFactor)
 	scale(ratio, ratio);
 
 	// slowly move the center of the view to the new location
-	QEasingCurve centerEasing(QEasingCurve::OutCubic);
-	centerOn(startingRect.center() - (startingRect.center() - defaultRect.center()) * zoomFactor);
+	QEasingCurve centerEasing(QEasingCurve::Linear);
+	//centerOn(startingRect.center() - (startingRect.center() - defaultRect.center()) * zoomFactor);
+	centerOn(startingRect.center() - (startingRect.center() - defaultRect.center()) * centerEasing.valueForProgress(zoomFactor));
 }
 
 void SkycultureMapGraphicsView::zoomOnTarget(qreal zoomFactor)
