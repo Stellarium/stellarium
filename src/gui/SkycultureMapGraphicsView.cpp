@@ -171,7 +171,7 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 							for(auto i : geoArray)
 							{
 								auto pointArray = i.toArray();
-								qInfo() << "values: x = " << pointArray[0].toDouble() << " and y = " << pointArray[1].toDouble();
+								//qInfo() << "values: x = " << pointArray[0].toDouble() << " and y = " << pointArray[1].toDouble();
 								tupiPolyList.append(QPointF(pointArray[0].toDouble(), pointArray[1].toDouble()));
 							}
 							//qInfo() << "featureArray size: " << featureArray;
@@ -192,7 +192,9 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	scene->addItem(lokono_late);
 	scene->addItem(aztec);
 
-	updateTime(0);
+	// workaround needed to preserve the correct component sizes (without the 'scale' operation the culturesListWidget is being squished and the culture names are not readable)
+	scale(0.18, 0.18); // empirically determined value at which the list reaches its preferred width
+	smoothFitInView(baseMap->boundingRect()); // reusing the smooth zoom feature from culture selection, in theory only the first part (zoom to default) is needed
 }
 
 void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *event)
@@ -317,10 +319,10 @@ QList<QPointF> SkycultureMapGraphicsView::convertLatLonToMeter(const QList<QPoin
 
 		//start = 83.6236 --> 0 --> ???
 
-		qInfo() << "Punkt x: " << point.x() << " y: " << point.y();
+		// qInfo() << "Punkt x: " << point.x() << " y: " << point.y();
 		qreal xMeter = (point.x() * 20037508.3427892439067363739014) / 180.0;;
 		qreal yMeter = ((qLn(qTan(((90.0 + point.y())* M_PI) / 360.0)) / (M_PI / 180.0)) * 20037508.3427892439067363739014) / 180.0;
-		qInfo() << "berechnete x: " << xMeter << " y: " << yMeter;
+		// qInfo() << "berechnete x: " << xMeter << " y: " << yMeter;
 
 		meter_coords.append(QPointF(xMeter, yMeter));
 	}
@@ -355,10 +357,10 @@ QList<QPointF> SkycultureMapGraphicsView::convertMeterToView(const QList<QPointF
 
 
 
-		qInfo() << "Punkt x: " << point.x() << " y: " << point.y();
+		//qInfo() << "Punkt x: " << point.x() << " y: " << point.y();
 		qreal xView = ((point.x() + 20037507.0671618431806564) / 40075014.1343236863613128) * mapWidth;
 		qreal yView = ((point.y() - 18418386.3090785145759583) / -39034031.3094234876334668) * mapHeight;
-		qInfo() << "berechnete x: " << xView << " y: " << yView;
+		//qInfo() << "berechnete x: " << xView << " y: " << yView;
 		view_coords.append(QPointF(xView, yView));
 	}
 	qInfo() << "pre return --> liste: " << view_coords;
