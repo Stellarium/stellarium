@@ -4921,19 +4921,19 @@
           <property name="verticalSpacing">
            <number>6</number>
           </property>
+           <item row="0" column="0" colspan="3">
+            <widget class="SkycultureMapGraphicsView" name="skyCultureMapGraphicsView"/>
+           </item>
            <item row="1" column="0">
-            <widget class="QLabel" name="skyCultureTimeLabel">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
+            <widget class="QSpinBox" name="skyCultureMinTimeSpinBox">
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
-             <property name="text">
-              <string>Time</string>
+             <property name="minimum">
+              <number>-2000</number>
+             </property>
+             <property name="maximum">
+              <number>2000</number>
              </property>
             </widget>
            </item>
@@ -4959,11 +4959,8 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="0" colspan="3">
-            <widget class="SkycultureMapGraphicsView" name="skyCultureMapGraphicsView"/>
-           </item>
            <item row="1" column="2">
-            <widget class="QSpinBox" name="skyCultureTimeSpinBox">
+            <widget class="QSpinBox" name="skyCultureMaxTimeSpinBox">
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -4974,6 +4971,161 @@
               <number>2000</number>
              </property>
             </widget>
+           </item>
+           <item row="2" column="0" colspan="3">
+            <layout class="QHBoxLayout" name="skyCultureTimeHorizontalLayout">
+             <property name="spacing">
+              <number>3</number>
+             </property>
+             <property name="leftMargin">
+              <number>5</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>5</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="skyCultureMinTimeLabel">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+               <property name="text">
+                <string>min Year</string>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">
+                 font-weight: bold;
+                </string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="skyCultureHorizontalSpacer_1">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="skyCultureTimeSpinBox">
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+               <property name="minimum">
+                <number>-2000</number>
+               </property>
+               <property name="maximum">
+                <number>2000</number>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::PlusMinus</enum>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">
+                QSpinBox
+                {
+                        padding-right: 0;
+                        background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(180, 180, 183), stop: 1 rgb(93, 95, 98));
+                        border: 1px solid rgb(0, 0, 0);
+                        color: rgb(31, 31, 31);
+                        min-height: 25px;
+                        width: 100px;
+                }
+
+                QSpinBox::up-button
+                {
+                        subcontrol-origin: border;
+                        subcontrol-position: center right;
+                        width: 25px;
+                        height: 25px;
+                        border: 1px solid rgba(0, 0, 0, 0%);
+                        border-top: 1px solid rgb(0, 0, 0);
+                        border-right: 1px solid rgb(0, 0, 0);
+                        image: url(:/graphicGui/uibtAdd.png);
+                        background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(70, 70, 70), stop: 1 rgb(40, 40, 40));
+                }
+
+                QSpinBox::down-button
+                {
+                        subcontrol-origin: border;
+                        subcontrol-position: center left;
+                        width: 25px;
+                        height: 25px;
+
+                }
+
+                QSpinBox::down-button:hover
+                {
+                        subcontrol-origin: border;
+                        subcontrol-position: center left;
+                        width: 25px;
+                        height: 25px;
+                        border: 1px solid rgba(0, 0, 0, 100%);
+
+                        image: url(:/graphicGui/uibtRemove.png);
+                    background: rgb(188, 188, 182);
+                }
+
+                QSpinBox::down-button:pressed
+                {
+                        image: url(:/graphicGui/uibtRemove-disabled.png);
+                }
+                </string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="skyCultureHorizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="skyCultureMaxTimeLabel">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+               <property name="text">
+                <string>max Year</string>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">
+                 font-weight: bold;
+                </string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
           </item>
