@@ -41,6 +41,7 @@ public:
 	StelTextureSP allsky; // allsky low res version of the texture.
 	StelTextureSP normalAllsky; // allsky low res version of the texture.
 	StelTextureSP horizonAllsky; // allsky low res version of the texture.
+	int lastFrame = 0; // last frame when this tile was used
 };
 
 static QString getExt(const QString& format)
@@ -233,6 +234,8 @@ void HipsSurvey::setHorizonsSurvey(const HipsSurveyP& horizons)
 
 void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallback callback)
 {
+	++frameNumber;
+
 	// We don't draw anything until we get the properties file and the
 	// allsky texture (if available).
 	const bool outside = qFuzzyCompare(angle, 2.0 * M_PI);
@@ -335,6 +338,23 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 		drawTile(0, i, drawOrder, splitOrder, outside, viewportRegion, sPainter, obsVelocity, callback);
 	}
 
+	if (nbLoadedTiles < nbVisibleTiles)
+	{
+		// Evict the tiles that haven't been used in this frame and have too low download
+		// progress - to give way for the current tiles that should have a higher priority.
+		const double maxProgressSum = 1 + !!normals + !!horizons;
+		for (const auto key : tiles.keys())
+		{
+			const auto tile = tiles[key];
+			if (!tile || tile->lastFrame == frameNumber) continue;
+			const double texPrg = tile->texture->getDownloadProgress();
+			const double normalsPrg = normals ? tile->normalTexture->getDownloadProgress() : 0;
+			const double horizonsPrg = horizons ? tile->horizonTexture->getDownloadProgress() : 0;
+			if (texPrg + normalsPrg + horizonsPrg < 0.8 * maxProgressSum)
+				tiles.remove(key);
+		}
+	}
+
 	updateProgressBar(nbLoadedTiles, nbVisibleTiles);
 }
 
@@ -406,6 +426,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		}
 	}
 
+	tile->lastFrame = frameNumber;
 	return tile;
 }
 
