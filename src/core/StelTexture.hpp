@@ -106,6 +106,9 @@ public:
 	//! If the texture was downloaded from a remote location, this function return the full URL.
 	const QString& getFullPath() const {return fullPath;}
 
+	//! Return the ratio of bytes received to the total size of the texture file
+	double getDownloadProgress() const { return downloadProgress; }
+
 	//! Return whether the image is currently being loaded
 	bool isLoading() const {return (loader || networkReply) && !canBind();}
 
@@ -181,6 +184,7 @@ private:
 
 	//! Used to handle the connection for remote textures.
 	QNetworkReply *networkReply = nullptr;
+	double downloadProgress = 0;
 
 	//! The loader object
 	QFuture<GLData>* loader = nullptr;
