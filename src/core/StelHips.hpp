@@ -137,6 +137,7 @@ private:
 	int nbVisibleTiles;
 	int nbLoadedTiles;
 
+	int frameNumber = 0;
 
 	QString getTitle(void) const;
 	QUrl getUrlFor(const QString& path) const;
