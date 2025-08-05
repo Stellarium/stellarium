@@ -108,6 +108,7 @@ void StelTexture::wrapGLTexture(GLuint texId)
 	bool valid = gl->glIsTexture(texId);
 	if(valid)
 	{
+		downloadProgress = 1;
 		id = texId;
 		//Note: there is no way to retrieve texture width/height on OpenGL ES
 		//so the members will be wrong
@@ -199,6 +200,7 @@ bool StelTexture::bind(uint slot)
 {
 	if (id != 0)
 	{
+		assert(downloadProgress == 1);
 		// The texture is already fully loaded, just bind and return true;
 		gl->glActiveTexture(GL_TEXTURE0 + slot);
 		gl->glBindTexture(GL_TEXTURE_2D, id);
@@ -271,6 +273,8 @@ bool StelTexture::load()
 		req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		connect(networkReply, SIGNAL(finished()), this, SLOT(onNetworkReply()));
+		connect(networkReply, &QNetworkReply::downloadProgress, this,
+		        [this](qint64 rec, qint64 tot) { downloadProgress = double(rec)/tot; });
 		return false;
 	}
 	// The network connection is still running.
@@ -404,6 +408,11 @@ QByteArray StelTexture::convertToGLFormat(QImage image, GLint& format, GLint& ty
 
 bool StelTexture::glLoad(const GLData& data)
 {
+	// Register complete download for the case when we're loading a local
+	// file. A network request must have already completed, so this write
+	// will not change anything in this case.
+	downloadProgress = 1;
+
 	// Don't try to access texture manager or OpenGL context if texture
 	// manager has been deleted, because at this point we are shutting
 	// down, and the OpenGL context may have also been deleted.
