@@ -482,6 +482,7 @@ where
 	\begin{description}
 	    \item[\jtag{native}] name in the original language of the skyculture. 
 	    \item[\jtag{english}] translation of the name's meaning. This is translated to users' language.
+	    \item[\jtag{byname}] an optional explanatory addition to the name. \newFeature{25.3}  May be helpful to explain mythological figures. This is translated to users' language, but is not included in search functions.
 	    \item[\jtag{pronounce}] (optional, but recommended) a Latin-character based transliteration/pronunciation aid, e.g. Pinyin for Chinese. This may also be translated to user language.
 	    \item[\jtag{transliteration}] (optional) a scientific transliteration where applicable. 
 	    \item[\jtag{IPA}] (optional) International Phonetic Alphabet, a standardardized phonetic spelling.
@@ -495,7 +496,7 @@ where
 
 	If your sky culture is not a variant of the generally known \file{Modern} (western)
 	sky culture, please make sure to provide an \jtag{english} translation (where possible) in addition to the name given in
-	the \jtag{native} language. Else translators will not be able to translate
+	the \jtag{native} language, or a \jtag{byname} which may help better understanding a figure. Else translators will not be able to translate
 	the name, and users will be less interested to learn about the culture. 
 	Also make very sure to use the same spelling consistently in \file{index.json} and \file{description.md}, 
 	and explain the context of stars (how these stars are used, or what they mean to the respective members of the culture), 
