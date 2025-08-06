@@ -4967,36 +4967,17 @@
              </item>
              <item row="3" column="0">
               <layout class="QGridLayout" name="gridLayout_CulturalLabeling">
-               <item row="1" column="1">
-                <widget class="QCheckBox" name="infoLabelNativeCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">native</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="6">
-                <widget class="QCheckBox" name="infoLabelModernCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">modern</string>
-                 </property>
-                </widget>
-               </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="labelInfoLabel2">
                  <property name="text">
                   <string>Info label</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="labelScreenLabel2">
+                 <property name="text">
+                  <string>Screen label</string>
                  </property>
                 </widget>
                </item>
@@ -5013,8 +4994,8 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="2">
-                <widget class="QCheckBox" name="infoLabelPronounceCheckBox">
+               <item row="1" column="5">
+                <widget class="QCheckBox" name="infoLabelTranslationCheckBox">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -5022,43 +5003,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string comment="menu item">transliteration</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="6">
-                <widget class="QCheckBox" name="screenLabelModernCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">modern</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="3">
-                <widget class="QCheckBox" name="infoLabelTransliterationCheckBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>Scientific transliteration</string>
-                 </property>
-                 <property name="text">
-                  <string comment="menu item">sci. translit.</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="labelScreenLabel2">
-                 <property name="text">
-                  <string>Screen label</string>
+                  <string comment="menu item">translation</string>
                  </property>
                 </widget>
                </item>
@@ -5072,6 +5017,19 @@
                  </property>
                  <property name="text">
                   <string comment="menu item">transliteration</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="7">
+                <widget class="QCheckBox" name="screenLabelModernCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string comment="menu item">modern</string>
                  </property>
                 </widget>
                </item>
@@ -5091,8 +5049,8 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
-                <widget class="QCheckBox" name="screenLabelNativeCheckBox">
+               <item row="1" column="1">
+                <widget class="QCheckBox" name="infoLabelNativeCheckBox">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -5104,16 +5062,19 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="5">
-                <widget class="QCheckBox" name="infoLabelTranslationCheckBox">
+               <item row="1" column="3">
+                <widget class="QCheckBox" name="infoLabelTransliterationCheckBox">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
+                 <property name="toolTip">
+                  <string>Scientific transliteration</string>
+                 </property>
                  <property name="text">
-                  <string comment="menu item">translation</string>
+                  <string comment="menu item">sci. translit.</string>
                  </property>
                 </widget>
                </item>
@@ -5133,6 +5094,32 @@
                  </property>
                 </widget>
                </item>
+               <item row="2" column="1">
+                <widget class="QCheckBox" name="screenLabelNativeCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string comment="menu item">native</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QCheckBox" name="infoLabelPronounceCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string comment="menu item">transliteration</string>
+                 </property>
+                </widget>
+               </item>
                <item row="2" column="4">
                 <widget class="QCheckBox" name="screenLabelIPACheckBox">
                  <property name="sizePolicy">
@@ -5146,6 +5133,45 @@
                  </property>
                  <property name="text">
                   <string comment="menu item">IPA</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="7">
+                <widget class="QCheckBox" name="infoLabelModernCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string comment="menu item">modern</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="6">
+                <widget class="QCheckBox" name="infoLabelBynameCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string comment="menu item">byname</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="6">
+                <widget class="QCheckBox" name="screenLabelBynameCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string comment="menu item">byname</string>
                  </property>
                 </widget>
                </item>
@@ -6034,12 +6060,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
