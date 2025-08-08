@@ -184,6 +184,7 @@ void printSystemInfo()
 #endif
 
 #ifdef Q_OS_MACOS
+	// CPU info
 	size_t size = 0;
 	sysctlbyname("machdep.cpu.brand_string", nullptr, &size, nullptr, 0);
 	std::string cpuname(size, '\0');
@@ -194,12 +195,26 @@ void printSystemInfo()
 	size = sizeof(maxFreq);
 	if (sysctlbyname("hw.cpufrequency_max", &maxFreq, &size, nullptr, 0) != -1)
                 log(QString("CPU maximum speed: %1 MHz").arg(maxFreq/1000000));
+	else
+	{
+		// Apple Silicon case
+		int64_t tbFreq = 0;
+		size = sizeof(tbFreq);
+		sysctlbyname("hw.tbfrequency", &tbFreq, &size, nullptr, 0);
+
+		struct clockinfo clockinfo;
+		size = sizeof(clockinfo);
+		sysctlbyname("kern.clockrate", &clockinfo, &size, nullptr, 0);
+
+		log(QString("CPU maximum speed: %1 MHz").arg((tbFreq*clockinfo.hz)/1000000));
+	}
 
 	int ncpu = 0;
 	size = sizeof(ncpu);
 	sysctlbyname("hw.ncpu", &ncpu, &size, nullptr, 0);
         log(QString("CPU logical cores: %1").arg(ncpu));
 
+	// RAM info
 	uint64_t totalRAM = 0;
 	size = sizeof(totalRAM);
 	sysctlbyname("hw.memsize", &totalRAM, &size, nullptr, 0);
