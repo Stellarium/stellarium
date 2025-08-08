@@ -638,12 +638,6 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	{
 		const double jde=core->getJDE();
 		double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(jde);
-		if (StelApp::getInstance().getCore()->getUseNutation())
-		{
-			double deltaEps, deltaPsi;
-			getNutationAngles(jde, &deltaPsi, &deltaEps);
-			eclJDE+=deltaEps;
-		}
 		double ra_equ, dec_equ, lambdaJDE, betaJDE;
 
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,eqNow);
