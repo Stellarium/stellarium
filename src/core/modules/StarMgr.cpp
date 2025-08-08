@@ -979,7 +979,6 @@ void StarMgr::loadGcvs(const QString& GcvsFileName)
 
 	int readOk=0;
 	int totalRecords=0;
-	int lineNumber=0;
 	// Version of GCVS catalog
 	static const QRegularExpression versionRx("\\s*Version:\\s*([\\d\\-\\.]+)\\s*");
 
@@ -987,7 +986,6 @@ void StarMgr::loadGcvs(const QString& GcvsFileName)
 	while (!buf.atEnd())
 	{
 		QString record = QString::fromUtf8(buf.readLine());
-		lineNumber++;
 
 		// skip comments and empty lines
 		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
