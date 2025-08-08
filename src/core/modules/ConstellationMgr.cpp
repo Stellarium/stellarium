@@ -307,7 +307,13 @@ void ConstellationMgr::deselectConstellations(void)
 
 void ConstellationMgr::selectAllConstellations()
 {
-	setSelectedConst(constellations);
+	// We really must select in a loop! (GH:#4415)
+	for (auto* constellation : qAsConst(constellations))
+	{
+		QList<Constellation *>cList;
+		cList.append(constellation);
+		setSelectedConst(cList);
+	}
 }
 
 void ConstellationMgr::selectConstellation(const QString &englishName)
