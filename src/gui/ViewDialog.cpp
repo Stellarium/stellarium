@@ -1428,7 +1428,6 @@ void ViewDialog::updateDefaultSkyCulture()
 	ui->rayHelperThicknessSpinBox->setEnabled(b);
 	ui->colorRayHelpers->setEnabled(b);
 	ui->asterismsFontSizeSpinBox->setEnabled(b);
-	ui->constellationPickCheckBox->setEnabled(b);
 }
 
 void ViewDialog::updateDefaultLandscape()
