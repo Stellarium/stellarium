@@ -185,6 +185,9 @@ def update_cultures_pot(sclist, pot):
                 if pronounce:
                     comment += ', pronounce: ' + name['pronounce']
 
+                if english:
+                    comment += ', english: ' + name['english']
+
                 if byname:
                     comment += ', byname: ' + name['byname']
 
@@ -383,7 +386,7 @@ def update_cultures_pot(sclist, pot):
             else:
                 pot.append(entry)
 
-            # pronounce is language dependant! The element is optional. 
+            # pronounce is language dependent! The element is optional. 
             if 'pronounce' in name:
                 pronounce = name['pronounce']
                 if len(pronounce) == 0:
