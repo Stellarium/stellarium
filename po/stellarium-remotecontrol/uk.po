@@ -5,17 +5,17 @@
 # 
 # Translators:
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023
-# Yuri Chornoivan <yurchor@ukr.net>, 2025
 # cardinot <mcardinot@gmail.com>, 2025
+# Yuri Chornoivan <yurchor@ukr.net>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-06-02 10:04+0700\n"
+"POT-Creation-Date: 2025-07-14 13:19+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2025\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2025\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -109,8 +109,8 @@ msgid "Could not retrieve landscape list"
 msgstr "Не вдалося отримати список ландшафтів"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:750
-#: index.html:812 tablet7in.html:835 tablet7in.html:895
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:761
+#: index.html:823 tablet7in.html:845 tablet7in.html:905
 msgid "-none-"
 msgstr "-немає-"
 
@@ -543,83 +543,95 @@ msgstr "Показувати малюнки яскравими"
 msgid "Show boundaries with thickness"
 msgstr "Показувати межі із товщиною"
 
-#: index.html:732 tablet7in.html:805
-msgid "Use native names for planets"
-msgstr "Використовувати перекладені назви планет"
+#: index.html:733 tablet7in.html:805
+msgid "Show zodiac with thickness"
+msgstr "Показувати зодіак із товщиною"
 
-#: index.html:733 tablet7in.html:806
+#: index.html:737 tablet7in.html:809
+msgid "Show lunar stations/mansions with thickness"
+msgstr "Показувати місячні станції із товщиною"
+
+#: index.html:741 tablet7in.html:813
+msgid "Short labels"
+msgstr "Короткі мітки"
+
+#: index.html:742 tablet7in.html:814
 msgid "Constellation selection isolated"
 msgstr "Окремий вибір сузір’їв"
 
-#: index.html:737 tablet7in.html:810
+#: index.html:743 tablet7in.html:815
+msgid "Only last selected"
+msgstr "Лише останнє позначене"
+
+#: index.html:748 tablet7in.html:820
 msgid "Current sky culture"
 msgstr "Поточна картина неба"
 
-#: index.html:750 tablet7in.html:835
+#: index.html:761 tablet7in.html:845
 msgid "Active script:"
 msgstr "Поточний сценарій:"
 
-#: index.html:751 tablet7in.html:836
+#: index.html:762 tablet7in.html:846
 msgid "Run selected script"
 msgstr "Виконати позначений сценарій"
 
-#: index.html:751 tablet7in.html:836
+#: index.html:762 tablet7in.html:846
 msgid "Stop current script"
 msgstr "Припинити виконання поточного сценарію"
 
-#: index.html:756 tablet7in.html:43 tablet7in.html:820
+#: index.html:767 tablet7in.html:43 tablet7in.html:830
 msgid "Actions"
 msgstr "Дії"
 
-#: index.html:760 tablet7in.html:824
+#: index.html:771 tablet7in.html:834
 msgid "Run/toggle action"
 msgstr "Виконати/Перемкнути дію"
 
-#: index.html:771 tablet7in.html:859
+#: index.html:782 tablet7in.html:869
 msgid "Planet map"
 msgstr "Карта планети"
 
-#: index.html:772 tablet7in.html:860
+#: index.html:783 tablet7in.html:870
 msgid "Planet map pointer"
 msgstr "Вказівник на карті планети"
 
-#: index.html:776 tablet7in.html:864
+#: index.html:787 tablet7in.html:874
 msgid "Type to search location"
 msgstr "Введіть щось, щоб знайти місце"
 
-#: index.html:810 tablet7in.html:893
+#: index.html:821 tablet7in.html:903
 msgid "Interaction"
 msgstr "Взаємодія"
 
-#: index.html:811 tablet7in.html:894
+#: index.html:822 tablet7in.html:904
 msgid "Current scene:"
 msgstr "Поточна сцена:"
 
-#: index.html:814 tablet7in.html:897
+#: index.html:825 tablet7in.html:907
 msgid "View controls"
 msgstr "Керування переглядом"
 
-#: index.html:820 tablet7in.html:903
+#: index.html:831 tablet7in.html:913
 msgid "Movement controls"
 msgstr "Керування рухом"
 
-#: index.html:832 tablet7in.html:915
+#: index.html:843 tablet7in.html:925
 msgid "Torchlight"
 msgstr "Місцеве освітлення"
 
-#: index.html:839 tablet7in.html:922
+#: index.html:850 tablet7in.html:932
 msgid "Scene selection"
 msgstr "Вибір сцени"
 
-#: index.html:843 tablet7in.html:926
+#: index.html:854 tablet7in.html:936
 msgid "Load selected scene"
 msgstr "Завантажити позначену сцену"
 
-#: index.html:869 tablet7in.html:953
+#: index.html:880 tablet7in.html:963
 msgid "No response from server"
 msgstr "Немає відповіді від сервера"
 
-#: index.html:870 tablet7in.html:954
+#: index.html:881 tablet7in.html:964
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "Сервер не відповідає уже протягом %1 секунд. Stellarium ще працює?"
 
@@ -763,18 +775,18 @@ msgstr "Водолій"
 msgid "Pisces"
 msgstr "Риби"
 
-#: tablet7in.html:844
+#: tablet7in.html:854
 msgid "Favorites"
 msgstr "Вибране"
 
-#: tablet7in.html:846
+#: tablet7in.html:856
 msgid "Show 1"
 msgstr "Перший показ"
 
-#: tablet7in.html:847
+#: tablet7in.html:857
 msgid "Remove Labels and Images"
 msgstr "Вилучити мітки і зображення"
 
-#: tablet7in.html:847
+#: tablet7in.html:857
 msgid "Cleanup Screen"
 msgstr "Очистити екран"
