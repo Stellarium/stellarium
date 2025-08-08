@@ -233,21 +233,14 @@ void TextUserInterface::init()
 	                                skyCultureMgr.getSkyCultureListI18(),
 	                                skyCultureMgr.getCurrentSkyCultureNameI18(),
 	                                m3);
-	TuiNode* m3_2 = new TuiNodeEnum(N_("Sky Language"),
-	                                this, 
-					SLOT(setSkyLanguage(QString)),
-					StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()),
-					StelTranslator::iso639_1CodeToNativeName(localeMgr.getSkyLanguage()),
-	                                m3, m3_1);
-	TuiNode* m3_3 = new TuiNodeEnum(N_("App Language"),
+	TuiNode* m3_2 = new TuiNodeEnum(N_("App Language"),
 					this,
 					SLOT(setAppLanguage(QString)),
 					StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()),
 					StelTranslator::iso639_1CodeToNativeName(localeMgr.getAppLanguage()),
-					m3, m3_2);
+	                                m3, m3_1);
 	m3_1->setNextNode(m3_2);
-	m3_2->setNextNode(m3_3);
-	m3_3->setNextNode(m3_1);
+	m3_2->setNextNode(m3_1);
 	m3_1->loopToTheLast();
 	m3->setChildNode(m3_1);
 
@@ -823,12 +816,6 @@ void TextUserInterface::setAppLanguage(const QString &lang)
 {
 	QString code = StelTranslator::nativeNameToIso639_1Code(lang);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
-}
-
-void TextUserInterface::setSkyLanguage(const QString &lang)
-{
-	QString code = StelTranslator::nativeNameToIso639_1Code(lang);
-	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
 }
 
 void TextUserInterface::setLightPollutionLevel(const int level)

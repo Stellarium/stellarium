@@ -181,14 +181,6 @@ void ConfigurationDialog::createDialogContent()
 	updateCurrentLanguage();
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentLanguage()));
 	connect(cb, SIGNAL(currentIndexChanged(const int)), this, SLOT(selectLanguage(const int)));
-	// Do the same for sky language:
-	cb = ui->skycultureLanguageComboBox;
-	cb->clear();
-	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir(), "skycultures"));
-	cb->model()->sort(0);
-	updateCurrentSkyLanguage();
-	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentSkyLanguage()));
-	connect(cb, SIGNAL(currentIndexChanged(const int)), this, SLOT(selectSkyLanguage(const int)));	
 	// Language properties are potentially delicate. Accidentally immediate storing may cause obvious problems.
 	connect(ui->languageSaveToolButton, SIGNAL(clicked()), this, SLOT(storeLanguageSettings()));
 	#else
@@ -496,39 +488,12 @@ void ConfigurationDialog::updateCurrentLanguage()
 		cb->setCurrentIndex(lt);
 }
 
-void ConfigurationDialog::updateCurrentSkyLanguage()
-{
-	QComboBox* cb = ui->skycultureLanguageComboBox;
-	QString skyLang = StelApp::getInstance().getLocaleMgr().getSkyLanguage();
-	QString l2 = StelTranslator::iso639_1CodeToNativeName(skyLang);
-
-	if (cb->currentText() == l2)
-		return;
-
-	int lt = cb->findText(l2, Qt::MatchExactly);
-	if (lt == -1 && skyLang.contains('_'))
-	{
-		l2 = skyLang.left(skyLang.indexOf('_'));
-		l2=StelTranslator::iso639_1CodeToNativeName(l2);
-		lt = cb->findText(l2, Qt::MatchExactly);
-	}
-	if (lt!=-1)
-		cb->setCurrentIndex(lt);
-}
-
 void ConfigurationDialog::selectLanguage(const int id)
 {
 	const QString &langName=static_cast<QComboBox*>(sender())->itemText(id);
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
 	StelMainView::getInstance().initTitleI18n();
-}
-
-void ConfigurationDialog::selectSkyLanguage(const int id)
-{
-	const QString &langName=static_cast<QComboBox*>(sender())->itemText(id);
-	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
-	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
 }
 
 void ConfigurationDialog::setStartupTimeMode()
