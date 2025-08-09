@@ -167,7 +167,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 	// Kinetic scrolling
 	kineticScrollingList << ui->projectionListWidget << ui->culturesListWidget << ui->skyCultureTextBrowser << ui->landscapesListWidget
-			     << ui->landscapeTextBrowser << ui->surveysListWidget << ui->surveysTextBrowser;
+			     << ui->landscapeTextBrowser << ui->surveysTreeWidget << ui->surveysTextBrowser;
 	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{
@@ -657,8 +657,8 @@ void ViewDialog::createDialogContent()
 
 	connect(ui->surveyTypeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateHips()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(updateHips()));
-	connect(ui->surveysListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(updateHips()), Qt::QueuedConnection);
-	connect(ui->surveysListWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(hipsListItemChanged(QListWidgetItem*)));
+	connect(ui->surveysTreeWidget, &QTreeWidget::currentItemChanged, this, &ViewDialog::updateHips, Qt::QueuedConnection);
+	connect(ui->surveysTreeWidget, &QTreeWidget::itemChanged, this, &ViewDialog::hipsListItemChanged);
 	connect(ui->surveysFilter, &QLineEdit::textChanged, this, &ViewDialog::filterSurveys);
 	updateHips();
 
@@ -748,17 +748,17 @@ void ViewDialog::updateHips()
 		selectedType = "dss";
 
 	// Update survey list.
-	QListWidget* l = ui->surveysListWidget;
+	auto*const l = ui->surveysTreeWidget;
 
 	if (!hipsmgr->property("loaded").toBool())
 	{
 		l->clear();
-		new QListWidgetItem(q_("Loading..."), l);
+		new QTreeWidgetItem(l, {q_("Loading...")});
 		return;
 	}
 
-	QString currentSurvey = l->currentItem() ? l->currentItem()->data(Qt::UserRole).toString() : "";
-	QListWidgetItem* currentItem = nullptr;
+	QString currentSurvey = l->currentItem() ? l->currentItem()->data(0, Qt::UserRole).toString() : "";
+	QTreeWidgetItem* currentItem = nullptr;
 	HipsSurveyP currentHips;
 
 	l->blockSignals(true);
@@ -774,10 +774,10 @@ void ViewDialog::updateHips()
 		QString title = properties["obs_title"].toString();
 		if (title.isEmpty())
 			continue;
-		QListWidgetItem* item = new QListWidgetItem(title, l);
+		QTreeWidgetItem* item = new QTreeWidgetItem(l, {title});
 		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
-		item->setCheckState(hips->property("visible").toBool() ? Qt::Checked : Qt::Unchecked);
-		item->setData(Qt::UserRole, url);
+		item->setCheckState(0, hips->property("visible").toBool() ? Qt::Checked : Qt::Unchecked);
+		item->setData(0, Qt::UserRole, url);
 		if (url == currentSurvey)
 		{
 			currentItem = item;
@@ -786,7 +786,7 @@ void ViewDialog::updateHips()
 		disconnect(hips.data(), nullptr, this, nullptr);
 		connect(hips.data(), SIGNAL(statusChanged()), this, SLOT(updateHips()));
 	}
-	l->sortItems(Qt::AscendingOrder);
+	l->sortItems(0, Qt::AscendingOrder);
 	l->setCurrentItem(currentItem);
 	l->scrollToItem(currentItem);
 	l->blockSignals(false);
@@ -859,27 +859,27 @@ void ViewDialog::toggleHipsDialog()
 void ViewDialog::filterSurveys()
 {
 	const QString pattern = ui->surveysFilter->text().simplified();
-	const auto& list = *ui->surveysListWidget;
-	for (int row = 0; row < list.count(); ++row)
+	const auto& list = *ui->surveysTreeWidget;
+	for (int row = 0; row < list.topLevelItemCount(); ++row)
 	{
-		auto& item = *list.item(row);
-		const QString text = item.text().simplified();
+		auto& item = *list.topLevelItem(row);
+		const QString text = item.text(0).simplified();
 		const bool show = pattern.isEmpty() || text.contains(pattern, Qt::CaseInsensitive);
 		item.setHidden(!show);
 	}
 }
 
-void ViewDialog::hipsListItemChanged(QListWidgetItem* item)
+void ViewDialog::hipsListItemChanged(QTreeWidgetItem* item)
 {
-	QListWidget* l = item->listWidget();
+	auto*const l = item->treeWidget();
 	l->blockSignals(true);
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
-	QString url = item->data(Qt::UserRole).toString();
+	QString url = item->data(0, Qt::UserRole).toString();
 	HipsSurveyP hips;
 	QMetaObject::invokeMethod(hipsmgr, "getSurveyByUrl", Qt::DirectConnection,
 			Q_RETURN_ARG(HipsSurveyP, hips), Q_ARG(QString, url));
 	Q_ASSERT(hips);
-	if (item->checkState() == Qt::Checked)
+	if (item->checkState(0) == Qt::Checked)
 	{
 		l->setCurrentItem(item);
 		hips->setProperty("visible", true);
