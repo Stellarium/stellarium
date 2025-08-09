@@ -24,6 +24,7 @@
 
 #include <QObject>
 #include <QTimer>
+#include <QHash>
 
 class Ui_viewDialogForm;
 class QListWidgetItem;
@@ -123,6 +124,12 @@ private:
 	ConfigureDSOColorsDialog * configureDSOColorsDialog;
 	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;
 	QTimer hipsUpdateTimer;
+	struct PlanetSurveyPack
+	{
+		QTreeWidgetItem* planetItem = nullptr;
+		QHash<QString/*group*/, QTreeWidgetItem* /*groupItem*/> groupsMap;
+	};
+	QHash<QString/*planet English name*/, PlanetSurveyPack> planetarySurveys;
 };
 
 #endif // _VIEWDIALOG_HPP
