@@ -66,9 +66,10 @@ QUrl HipsSurvey::getUrlFor(const QString& path) const
 	return QString("%1/%2%3").arg(base.url(), path, args);
 }
 
-HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString& type,
+HipsSurvey::HipsSurvey(const QString& url_, const QString& group, const QString& frame, const QString& type,
                        const QMap<QString, QString>& hipslistProps, const double releaseDate_) :
 	url(url_),
+	group(group),
 	type(type),
 	hipsFrame(frame),
 	releaseDate(releaseDate_),
@@ -219,6 +220,9 @@ void HipsSurvey::setNormalsSurvey(const HipsSurveyP& normals)
 		return;
 	}
 	this->normals = normals;
+	// Resetting normals should result in clearing normal maps from all
+	// the tiles. The easiest way to do this is to remove the tiles.
+	if (!normals) tiles.clear();
 }
 
 void HipsSurvey::setHorizonsSurvey(const HipsSurveyP& horizons)
@@ -229,6 +233,9 @@ void HipsSurvey::setHorizonsSurvey(const HipsSurveyP& horizons)
 		return;
 	}
 	this->horizons = horizons;
+	// Resetting horizons should result in clearing horizon maps from all
+	// the tiles. The easiest way to do this is to remove the tiles.
+	if (!horizons) tiles.clear();
 }
 
 void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallback callback)
@@ -675,7 +682,7 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 }
 
 //! Parse a hipslist file into a list of surveys.
-QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
+QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& hipslistURL, const QString& data)
 {
 	QList<HipsSurveyP> ret;
 	static const QString defaultFrame = "equatorial";
@@ -685,6 +692,7 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 		QString type;
 		QString frame = defaultFrame;
 		QString status;
+		QString group = hipslistURL;
 		double releaseDate = 0;
 		QMap<QString, QString> hipslistProps;
 		for (const auto &line : entry.split('\n'))
@@ -715,9 +723,11 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 				type = value.toLower();
 			else if (key == "hips_status")
 				status = value.toLower();
+			else if (key == "group")
+				group = value;
 		}
 		if(status.split(' ').contains("public"))
-			ret.append(HipsSurveyP(new HipsSurvey(url, frame, type, hipslistProps, releaseDate)));
+			ret.append(HipsSurveyP(new HipsSurvey(url, group, frame, type, hipslistProps, releaseDate)));
 	}
 	return ret;
 }

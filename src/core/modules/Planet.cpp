@@ -246,7 +246,6 @@ Planet::Planet(const QString& englishName,
 	  axisRotation(0.f),
 	  objModel(Q_NULLPTR),
 	  objModelLoader(Q_NULLPTR),
-	  survey(Q_NULLPTR),
 	  rings(Q_NULLPTR),
 	  distance(0.0),
 	  sphereScale(1.),
@@ -395,6 +394,27 @@ void Planet::replaceTexture(const QString &texName)
 		else
 			qWarning()<<"Cannot resolve path to texture file"<<texName<<"of object"<<englishName;
 	}
+}
+
+void Planet::setSurvey(const HipsSurveyP& colors, const HipsSurveyP& normals, const HipsSurveyP& horizons)
+{
+	Q_ASSERT(colors);
+	Q_ASSERT(colors->getType() == "planet");
+	Q_ASSERT(!normals || normals->getType() == "planet-normal");
+	Q_ASSERT(!horizons || horizons->getType() == "planet-horizon");
+	Q_ASSERT(!normals || normals->getFrame() == colors->getFrame());
+	Q_ASSERT(!horizons || horizons->getFrame() == colors->getFrame());
+
+	survey.colors = colors;
+	survey.normals = normals;
+	survey.horizons = horizons;
+
+	if (survey.normals)
+		survey.colors->setNormalsSurvey(survey.normals);
+	if (survey.horizons)
+		survey.colors->setHorizonsSurvey(survey.horizons);
+
+	survey.colors->setProperty("planet", getEnglishName());
 }
 
 void Planet::translateName(const StelTranslator& trans)
@@ -3748,12 +3768,12 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 				drawSphere(&sPainter, screenRd, drawOnlyRing);
 			}
 		}
-		else if (!survey || survey->getInterstate() < 1.0f)
+		else if (!survey || survey.colors->getInterstate() < 1.0f)
 		{
 			drawSphere(&sPainter, screenRd, drawOnlyRing);
 		}
 
-		if (survey && survey->getInterstate() > 0.0f)
+		if (survey && survey.colors->getInterstate() > 0.0f)
 		{
 			drawSurvey(core, &sPainter);
 			drawSphere(&sPainter, screenRd, true);
@@ -4374,11 +4394,6 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	if (!Planet::initShader()) return;
 	static SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
-	if (surveyForNormals && survey)
-		survey->setNormalsSurvey(surveyForNormals);
-	if (surveyForHorizons && survey)
-		survey->setHorizonsSurvey(surveyForHorizons);
-
 	painter->setDepthMask(true);
 	painter->setDepthTest(true);
 
@@ -4402,7 +4417,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	}
 
 	GL(shader->bind());
-	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars, surveyForNormals != nullptr, surveyForHorizons != nullptr);
+	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars, !!survey.normals, !!survey.horizons);
 	QVector<Vec3f> projectedVertsArray;
 	QVector<Vec3f> vertsArray;
 	const double angle = 2 * getSpheroidAngularRadius(core) * M_PI_180;
@@ -4432,7 +4447,8 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	painter->getProjector()->getModelViewTransform()->combine(Mat4d::zrotation(M_PI * 0.5));
 	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(Vec3d(1, 1, oneMinusOblateness)));
 
-	survey->draw(painter, angle, [&](const QVector<Vec3d>& verts, const QVector<Vec2f>& tex, const QVector<uint16_t>& indices) {
+	survey.colors->draw(painter, angle, [&](const QVector<Vec3d>& verts, const QVector<Vec2f>& tex,
+	                                        const QVector<uint16_t>& indices) {
 		projectedVertsArray.resize(verts.size());
 		vertsArray.resize(verts.size());
 		for (int i = 0; i < verts.size(); i++)
