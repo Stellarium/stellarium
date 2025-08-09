@@ -27,6 +27,7 @@
 
 class Ui_viewDialogForm;
 class QListWidgetItem;
+class QTreeWidgetItem;
 class QToolButton;
 
 class AddRemoveLandscapesDialog;
@@ -97,7 +98,7 @@ private slots:
 
 	void updateHips();
 	void filterSurveys();
-	void hipsListItemChanged(QListWidgetItem* item);
+	void hipsListItemChanged(QTreeWidgetItem* item);
 	void populateHipsGroups();
 	void toggleHipsDialog();
 
