@@ -4190,18 +4190,15 @@ void SolarSystem::onNewSurvey(HipsSurveyP survey)
 	if (!pl) return;
 	if (isPlanetColor)
 	{
-		if (pl->survey) return;
-		pl->survey = survey;
+		pl->addColorSurvey(survey);
 	}
 	else if (isPlanetNormal)
 	{
-		if (pl->surveyForNormals) return;
-		pl->surveyForNormals = survey;
+		pl->addNormalsSurvey(survey);
 	}
 	else if (isPlanetHorizon)
 	{
-		if (pl->surveyForHorizons) return;
-		pl->surveyForHorizons = survey;
+		pl->addHorizonsSurvey(survey);
 	}
 	survey->setProperty("planet", pl->getEnglishName());
 	// Not visible by default for the moment.

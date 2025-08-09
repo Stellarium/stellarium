@@ -21,6 +21,7 @@
 #define PLANET_HPP
 
 #include <memory>
+#include <unordered_map>
 #include <qopengl.h>
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
@@ -670,6 +671,10 @@ public:
 	void resetTextures();
 	//! Use texture from @param texName (must reside inside the scripts directory!)
 	void replaceTexture(const QString& texName);
+
+	void addColorSurvey(const HipsSurveyP& survey);
+	void addNormalsSurvey(const HipsSurveyP& survey);
+	void addHorizonsSurvey(const HipsSurveyP& survey);
 	
 protected:
 	// These components for getInfoString() can be overridden in subclasses
@@ -808,9 +813,15 @@ protected:
 	QFuture<PlanetOBJModel*>* objModelLoader; //!< For async loading of the OBJ file
 	QString objModelPath;
 
-	HipsSurveyP survey;
-	HipsSurveyP surveyForNormals;
-	HipsSurveyP surveyForHorizons;
+	struct SurveyPack
+	{
+		HipsSurveyP colors;
+		HipsSurveyP normals;
+		HipsSurveyP horizons;
+		operator bool() const { return !!colors; }
+	};
+	std::unordered_map<QString, SurveyPack> surveys;
+	SurveyPack currentSurvey;
 
 	Ring* rings;                     //!< Planet rings
 	double distance;                 //!< Temporary variable used to store the distance to a given point
