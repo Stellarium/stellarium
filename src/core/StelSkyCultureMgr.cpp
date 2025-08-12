@@ -219,6 +219,8 @@ void StelSkyCultureMgr::makeCulturesList()
 			qWarning() << "No geographic region declared in skyculture" << id << ". setting \"World\"";
 			culture.region = "World";
 		}
+		culture.startTime = data["startTime"].toInt();
+		culture.endTime = data["endTime"].toInt();
 		if (data["constellations"].isArray())
 		{
 			culture.constellations = data["constellations"].toArray();

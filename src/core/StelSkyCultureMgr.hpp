@@ -100,8 +100,12 @@ public:
 	//! The license
 	QString license;
 	//! The name of region following the United Nations geoscheme UN~M49 https://unstats.un.org/unsd/methodology/m49/
-	//! For skycultures of worldwide applicability (mostly those adhering to IAU constellation borders), use "World".
+	//! For skycultures of worldwide applicability (mostly those adhering to IAU constellation borders), use "Global".
 	QString region;
+	//! Earliest available year
+	int startTime;
+	//! Latest available year
+	int endTime;
 	//! Type of the boundaries
 	BoundariesType boundariesType;
 	//! JSON data describing the constellations (names, lines, artwork)
