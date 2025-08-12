@@ -70,6 +70,8 @@ private slots:
 	void updateDefaultSkyCulture();
 	void updateDefaultLandscape();
 	void updateSkyCultureTimeValue(int year);
+	void changeMinTime(int minYear);
+	void changeMaxTime(int maxYear);
 	void updateSkyCultureTimeRange(int minYear, int maxYear);
 	void filterSkyCultures(const QString& filter);
 

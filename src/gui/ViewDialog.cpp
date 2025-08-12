@@ -565,11 +565,11 @@ void ViewDialog::createDialogContent()
 	initSkycultureTime();
 
 	connect(ui->skyCultureTimeSlider, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTimeValue(int)));
-	connect(ui->skyCultureTimeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTimeValue(int)));
+	connect(ui->skyCultureCurrentTimeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTimeValue(int)));
 	connect(ui->skyCultureMapGraphicsView, SIGNAL(timeValueChanged(int)), this, SLOT(updateSkyCultureTimeValue(int)));
 
-	connect(ui->skyCultureMapGraphicsView, SIGNAL(timeRangeChanged(int, int)), this, SLOT(updateSkyCultureTimeRange(int, int)));
-	ui->skyCultureMapGraphicsView->initializeTime();
+	connect(ui->skyCultureMinTimeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(changeMinTime(int)));
+	connect(ui->skyCultureMaxTimeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(changeMaxTime(int)));
 
 	configureSkyCultureCheckboxes();
 	StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
@@ -1505,25 +1505,65 @@ void ViewDialog::initSkycultureTime()
 
 void ViewDialog::updateSkyCultureTimeValue(int year)
 {
+	// set timeSlider, currentTimeSpinBox and MapGraphicsView Value to year (block Signals to prevent unwanted functions calls through previous connection)
 	ui->skyCultureTimeSlider->blockSignals(true);
-	ui->skyCultureTimeSpinBox->blockSignals(true);
+	ui->skyCultureCurrentTimeSpinBox->blockSignals(true);
 
 	ui->skyCultureTimeSlider->setValue(year);
-	ui->skyCultureTimeSpinBox->setValue(year);
+	ui->skyCultureCurrentTimeSpinBox->setValue(year);
 
 	ui->skyCultureTimeSlider->blockSignals(false);
-	ui->skyCultureTimeSpinBox->blockSignals(false);
+	ui->skyCultureCurrentTimeSpinBox->blockSignals(false);
 
 	ui->skyCultureMapGraphicsView->updateTime(year);
 }
 
+void ViewDialog::changeMinTime(int minYear)
+{
+	int maxYear = ui->skyCultureMaxTimeSpinBox->value();
+
+	if (minYear <= maxYear)
+	{
+		updateSkyCultureTimeRange(minYear, maxYear);
+	}
+	else
+	{
+		ui->skyCultureMinTimeSpinBox->blockSignals(true);
+		ui->skyCultureMinTimeSpinBox->setValue(maxYear);
+		ui->skyCultureMinTimeSpinBox->blockSignals(false);
+
+		updateSkyCultureTimeRange(maxYear, maxYear);
+	}
+}
+
+void ViewDialog::changeMaxTime(int maxYear)
+{
+	int minYear = ui->skyCultureMinTimeSpinBox->value();
+
+	if (maxYear >= minYear)
+	{
+		updateSkyCultureTimeRange(minYear, maxYear);
+	}
+	else
+	{
+		ui->skyCultureMaxTimeSpinBox->blockSignals(true);
+		ui->skyCultureMaxTimeSpinBox->setValue(minYear);
+		ui->skyCultureMaxTimeSpinBox->blockSignals(false);
+
+		updateSkyCultureTimeRange(minYear, minYear);
+	}
+}
+
 void ViewDialog::updateSkyCultureTimeRange(int minYear, int maxYear)
 {
+	// set the new limits for the timeSlider and currentTimeSpinBox component
+	// in case of new min > value --> value is automatically increased by the component
+	// (the connection between valueChanged (SIGNAL) and updateSkyCultureTimeValue (SLOT) takes care of the other components value)
 	ui->skyCultureTimeSlider->setMinimum(minYear);
 	ui->skyCultureTimeSlider->setMaximum(maxYear);
 
-	ui->skyCultureTimeSpinBox->setMinimum(minYear);
-	ui->skyCultureTimeSpinBox->setMaximum(maxYear);
+	ui->skyCultureCurrentTimeSpinBox->setMinimum(minYear);
+	ui->skyCultureCurrentTimeSpinBox->setMaximum(maxYear);
 }
 
 void ViewDialog::filterSkyCultures(const QString& filter)
