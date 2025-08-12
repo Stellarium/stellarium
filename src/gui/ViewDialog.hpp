@@ -73,7 +73,7 @@ private slots:
 	void changeMinTime(int minYear);
 	void changeMaxTime(int maxYear);
 	void updateSkyCultureTimeRange(int minYear, int maxYear);
-	void filterSkyCultures(const QString& filter);
+	void filterSkyCultures();
 
 	void showAddRemoveLandscapesDialog();
 	// GZ I make this public to have it on a hotkey...

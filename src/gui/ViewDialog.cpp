@@ -194,7 +194,7 @@ void ViewDialog::createDialogContent()
 	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &ViewDialog::skyCultureChanged);
 
 	// skyculture list search bar
-	connect(ui->culturesListSearchLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(filterSkyCultures(const QString&)));
+	connect(ui->culturesListSearchLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(filterSkyCultures()));
 
 	// Connect and initialize checkboxes and other widgets
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
@@ -570,6 +570,9 @@ void ViewDialog::createDialogContent()
 
 	connect(ui->skyCultureMinTimeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(changeMinTime(int)));
 	connect(ui->skyCultureMaxTimeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(changeMaxTime(int)));
+
+	connect(ui->applyTimeOnListCheckBox, SIGNAL(toggled(bool)), this, SLOT(filterSkyCultures()));
+
 
 	configureSkyCultureCheckboxes();
 	StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
@@ -1164,15 +1167,12 @@ void ViewDialog::populateLists()
 	while (cultureRegionIterator.hasPrevious())
 	{
 		cultureRegionIterator.previous();
-		l->insertItem(l->row(l->findItems(cultureRegionIterator.value(), Qt::MatchContains).at(0)) + 1, cultureRegionIterator.key());
-	}
+		QListWidgetItem* item = new QListWidgetItem(cultureRegionIterator.key());
+		item->setData(Qt::UserRole, - 100); // startTime
+		item->setData(Qt::UserRole + 1, 100);
 
-	// const QMap<QString, QString> &skycultures = app.getSkyCultureMgr().getSkyCultureListI18();
-	// for ( const auto& s : skycultures  )
-	// {
-	// 	l->addItem(s);
-	// 	l->findItems(s, Qt::MatchExactly).at(0)->setToolTip(s);
-	// }
+		l->insertItem(l->row(l->findItems(cultureRegionIterator.value(), Qt::MatchContains).at(0)) + 1, item);
+	}
 
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
@@ -1564,10 +1564,21 @@ void ViewDialog::updateSkyCultureTimeRange(int minYear, int maxYear)
 
 	ui->skyCultureCurrentTimeSpinBox->setMinimum(minYear);
 	ui->skyCultureCurrentTimeSpinBox->setMaximum(maxYear);
+
+	// filter the list accordingly (if checkbox is ticked)
+	if (ui->applyTimeOnListCheckBox->isChecked())
+	{
+		filterSkyCultures();
+	}
 }
 
-void ViewDialog::filterSkyCultures(const QString& filter)
+void ViewDialog::filterSkyCultures()
 {
+	const QString filter = ui->culturesListSearchLineEdit->text();
+	int minYear = ui->skyCultureMinTimeSpinBox->value();
+	int maxYear = ui->skyCultureMaxTimeSpinBox->value();
+
+	bool applyTimeFilter = ui->applyTimeOnListCheckBox->isChecked();
 	// assume all cultureItems associated with a region are hidden --> hide regions (separatorItems) if no culture is visible
 	bool allHidden = true;
 
@@ -1584,6 +1595,16 @@ void ViewDialog::filterSkyCultures(const QString& filter)
 		{
 			// hide items if they do not match the filter string
 			item->setHidden(!item->text().contains(filter, Qt::CaseInsensitive));
+
+			// if checkBox is ticked ---> apply additional filter operation
+			if (applyTimeFilter)
+			{
+				// hide items that are not within the time limits (UserRole = startTime, UserRole + 1 = endTime)
+				if (item->data(Qt::UserRole).toInt() > maxYear || item->data(Qt::UserRole + 1).toInt() < minYear)
+				{
+					item->setHidden((true));
+				}
+			}
 
 			if (!item->isHidden())
 			{
