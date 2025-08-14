@@ -1,9 +1,10 @@
 //
 // Name: Messier Objects Tour
 // License: Public Domain
-// Version: 20231127.1
-// Author: C. Gaudion, Bridgend Astronomical Society
+// Author: C. Gaudion FRAS, Bridgend Astronomical Society
+// Version: 20250712
 // Description: A tour of Messier Objects
+
 
 // Build list of Messier object names
 
@@ -131,15 +132,13 @@ var messierText = [
 
 
 core.clear("deepspace");
-core.wait(4);
-
 ConstellationMgr.setFlagIsolateSelected(true);
 
-LabelMgr.labelScreen("BAS Stellarium Messier Object Tour v20231127.1",500,200,true,30,"#ff0000");
+LabelMgr.labelScreen("Bridgend Astronomical Society - Stellarium Messier Object Tour v202507012",250,50,true,30,"#ffffff");
 core.wait(5);
-LabelMgr.labelScreen("Note: Not all objects may be visible from your location!",500,400,true,30,"#ff0000");
+LabelMgr.labelScreen("Note: Not all objects may be visible from your location!",250,100,true,30,"#ffffff");
 core.wait(5);
-LabelMgr.labelScreen("In addition to Stellarium data this shows Object Type - Constellation - Season Viewable",100,600,true,30,"#ff0000");
+LabelMgr.labelScreen("In addition to Stellarium data this shows Object Type - Constellation - Season Viewable",250,150,true,30,"#ffffff");
 core.wait(5);
 LabelMgr.deleteAllLabels();
 
@@ -147,20 +146,23 @@ for (i=0; i<messier.length; i++)
 {
 	objName = messier[i];
 	core.selectObjectByName(objName, true);
+//	core.setSelectedObjectInfo('ShortInfo');
 
 	StelMovementMgr.autoZoomIn(6);
 	core.wait(4);
 	
-	LabelMgr.labelScreen(messierText[i],600,100,true,30,"#ff0000");
-	core.wait(10);
-	LabelMgr.deleteAllLabels();
-	
+	LabelMgr.labelScreen(messierText[i],600,100,true,30,"#ffffff");
+    core.wait(10);
+    LabelMgr.deleteAllLabels();
 	
 	StelMovementMgr.zoomTo(40,8);
 	core.wait(5);
 
 }
 
-LabelMgr.labelScreen("Stellarium Messier Object End of Tour",200,200,true,30,"#ff0000");
+LabelMgr.labelScreen("Stellarium Messier Object End of Tour",200,200,true,30,"#ffffff");
 core.wait(6);
+
+core.clear("natural");
+core.setSelectedObjectInfo('AllInfo');
 LabelMgr.deleteAllLabels();

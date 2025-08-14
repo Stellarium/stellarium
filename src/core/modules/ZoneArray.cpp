@@ -436,10 +436,12 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	
 	// Allow artificial cutoff:
 	// find the (integer) mag at which is just bright enough to be drawn.
-	int cutoffMagStep=limitMagIndex;
+	int cutoffMagStep=limitMagIndex;  // for steps
+	float cutoffMag = 999999.;  // for precise magnitude cutoff
 	if (drawer->getFlagStarMagnitudeLimit())
 	{
-		cutoffMagStep = static_cast<int>((drawer->getCustomStarMagnitudeLimit()*1000.0 - (mag_min - 7000.))*0.02);  // 1/(50 milli-mag)
+		cutoffMag = drawer->getCustomStarMagnitudeLimit() * 1000.0f;  // in milli-mag
+		cutoffMagStep = static_cast<int>((cutoffMag - (mag_min - 7000.))*0.02);  // 1/(50 milli-mag)
 		if (cutoffMagStep>limitMagIndex)
 			cutoffMagStep = limitMagIndex;
 	}
@@ -459,7 +461,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 
 		// first part is check for Star1 and is global zone, so to keep looping for long-range prediction
 		// second part is old behavior, to skip stars below you that are too faint to display for Star2 and Star3
-		if (magIndex > cutoffMagStep) { // should always use catalog magnitude, otherwise will mess up the order
+		if ((magIndex > cutoffMagStep) || (starMag > cutoffMag)) { // should always use catalog magnitude, otherwise will mess up the order
 			if (fabs(dyrs) <= 5000. || !s->isVIP() || !globalzone)  // if any of these true, we should always break
 				break;
 		}
@@ -488,7 +490,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		// recompute magIndex with the new magnitude
 		magIndex = static_cast<int>((starMag - (mag_min - 7000.)) * 0.02);  // 1 / (50 milli-mag)
 
-		if (magIndex > cutoffMagStep) {  // check again with the new magIndex
+		if ((magIndex > cutoffMagStep) || (starMag > cutoffMag)) {  // check again with the new magIndex
 				continue;  // allow continue for other star that might became bright enough in the future
 		}
 		// Array of 2 numbers containing radius and magnitude
