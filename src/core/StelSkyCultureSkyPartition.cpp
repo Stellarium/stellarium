@@ -309,7 +309,7 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 	{
 		for (int i=0; i<partitions[0]; ++i)
 		{
-			QString label=scMgr->createCulturalLabel(names.at(i), scMgr->getScreenLabelStyle(), names.at(i).pronounceI18n);
+			QString label=scMgr->createCulturalLabel(names.at(i), scMgr->getScreenLabelStyle(), QString());
 			// To have tilted labels, we project a point 0.1deg from the actual label point and derive screen-based angle.
 			double lng  = (360./partitions[0]*(double(i)+0.5) + 2.+offsetFromAries)*M_PI_180;
 			double lng1 = (360./partitions[0]*(double(i)+0.5) + 2.+offsetFromAries+txtOffset)*M_PI_180;
@@ -457,7 +457,7 @@ void StelSkyCultureSkyPartition::updateI18n()
 QString StelSkyCultureSkyPartition::getCulturalName() const
 {
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
-	return scMgr->createCulturalLabel(name, scMgr->getScreenLabelStyle(), name.pronounceI18n);
+	return scMgr->createCulturalLabel(name, scMgr->getScreenLabelStyle(), QString());
 }
 
 QString StelSkyCultureSkyPartition::getLongitudeCoordinate(Vec3d &eqPos) const
@@ -483,8 +483,17 @@ QString StelSkyCultureSkyPartition::getLongitudeCoordinate(Vec3d &eqPos) const
 		}
 		else if (partitions.at(0)==27)
 		{
+			// Indian Nakshatras
 			int padaInSign=int(floor((degreeInSign/widthOfSign)*4.));
 			return QString("%1: %2").arg(symbols.at(sign), QString::number(int(floor(padaInSign+1))));
+		}
+		else if (partitions.at(0)==28)
+		{
+			// Arab LM: Presumably a pragmatic three-partition is in use, like "not quite here yet", "central", "slightly past".
+			static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+
+			int thirdInSign=int(floor((degreeInSign/widthOfSign)*3.));
+			return QString("%1: %2").arg(scMgr->createCulturalLabel(names.at(sign), scMgr->getScreenLabelStyle(), QString()), QString::number(int(floor(thirdInSign+1))));
 		}
 		else
 		{
