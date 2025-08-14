@@ -1478,16 +1478,6 @@ void StelMainScriptAPI::setAppLanguage(QString langCode)
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(langCode);
 }
 
-QString StelMainScriptAPI::getSkyLanguage()
-{
-	return StelApp::getInstance().getLocaleMgr().getSkyLanguage();
-}
-
-void StelMainScriptAPI::setSkyLanguage(QString langCode)
-{
-	StelApp::getInstance().getLocaleMgr().setSkyLanguage(langCode);
-}
-
 QString StelMainScriptAPI::translate(QString englishText)
 {
 	return StelApp::getInstance().getLocaleMgr().getScriptsTranslator().qtranslate(englishText);

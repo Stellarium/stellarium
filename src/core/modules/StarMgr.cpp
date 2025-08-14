@@ -68,7 +68,7 @@ Q_GLOBAL_STATIC(QStringList, objtype_array);
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always match the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 23;
+static const int StarCatalogFormatVersion = 24;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -799,7 +799,7 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 		}
 
 		StelObject::CulturalName cName{entry["native"].toString(), entry["pronounce"].toString(), trans.qTranslateStar(entry["pronounce"].toString()),
-					entry["transliteration"].toString(), entry["english"].toString(), trans.qTranslateStar(entry["english"].toString()), entry["IPA"].toString(), StelObject::CulturalNameSpecial::None};
+					entry["transliteration"].toString(), entry["english"].toString(), trans.qTranslateStar(entry["english"].toString()), entry["IPA"].toString(), QString(), QString(), StelObject::CulturalNameSpecial::None};
 
 		//if (culturalNamesMap.contains(HIP))
 		//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated;
@@ -979,7 +979,6 @@ void StarMgr::loadGcvs(const QString& GcvsFileName)
 
 	int readOk=0;
 	int totalRecords=0;
-	int lineNumber=0;
 	// Version of GCVS catalog
 	static const QRegularExpression versionRx("\\s*Version:\\s*([\\d\\-\\.]+)\\s*");
 
@@ -987,7 +986,6 @@ void StarMgr::loadGcvs(const QString& GcvsFileName)
 	while (!buf.atEnd())
 	{
 		QString record = QString::fromUtf8(buf.readLine());
-		lineNumber++;
 
 		// skip comments and empty lines
 		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())

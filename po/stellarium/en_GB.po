@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-06-21 13:18+0700\n"
+"POT-Creation-Date: 2025-07-14 13:19+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2025\n"
 "Language-Team: English (United Kingdom) (https://app.transifex.com/stellarium/teams/80998/en_GB/)\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:445
+#: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:444
 #: src/core/modules/Constellation.cpp:569
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:289
 #: src/core/modules/Nebula.cpp:291 src/core/modules/Planet.cpp:594
@@ -123,15 +123,15 @@ msgstr "Constellation boundaries"
 
 #: src/core/modules/ConstellationMgr.cpp:150
 msgid "Zodiac (if defined in skyculture)"
-msgstr ""
+msgstr "Zodiac (if defined in skyculture)"
 
 #: src/core/modules/ConstellationMgr.cpp:151
 msgid "Lunar stations/mansions (if defined in skyculture)"
-msgstr ""
+msgstr "Lunar stations/mansions (if defined in skyculture)"
 
 #: src/core/modules/ConstellationMgr.cpp:154
 msgid "Constellation areas (hulls)"
-msgstr ""
+msgstr "Constellation areas (hulls)"
 
 #: src/core/modules/ConstellationMgr.cpp:155 src/ui_viewDialog.h:4906
 msgid "Select single constellation"
@@ -333,7 +333,7 @@ msgstr "ASP"
 
 #. TRANSLATORS: Center of the umbra
 #: src/core/modules/GridLinesMgr.cpp:1554
-#: plugins/Satellites/src/Satellites.cpp:2992
+#: plugins/Satellites/src/Satellites.cpp:3013
 msgid "C.U."
 msgstr "C.U."
 
@@ -349,7 +349,7 @@ msgstr "Antapex"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1573 src/core/modules/Planet.cpp:735
-#: src/core/modules/Planet.cpp:1014 src/core/modules/StarWrapper.cpp:377
+#: src/core/modules/Planet.cpp:1020 src/core/modules/StarWrapper.cpp:377
 #: src/gui/AstroCalcDialog.cpp:8532 plugins/Satellites/src/Satellite.cpp:363
 #: plugins/Satellites/src/Satellite.cpp:406
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
@@ -557,97 +557,97 @@ msgid "Compass marks"
 msgstr "Compass marks"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1138
+#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1144
 msgctxt "compass direction"
 msgid "N"
 msgstr "N"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:286 src/core/modules/Planet.cpp:1130
+#: src/core/modules/LandscapeMgr.cpp:286 src/core/modules/Planet.cpp:1136
 msgctxt "compass direction"
 msgid "S"
 msgstr "S"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:288 src/core/modules/Planet.cpp:1142
+#: src/core/modules/LandscapeMgr.cpp:288 src/core/modules/Planet.cpp:1148
 msgctxt "compass direction"
 msgid "E"
 msgstr "E"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:290 src/core/modules/Planet.cpp:1134
+#: src/core/modules/LandscapeMgr.cpp:290 src/core/modules/Planet.cpp:1140
 msgctxt "compass direction"
 msgid "W"
 msgstr "W"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:292 src/core/modules/Planet.cpp:1140
+#: src/core/modules/LandscapeMgr.cpp:292 src/core/modules/Planet.cpp:1146
 msgctxt "compass direction"
 msgid "NE"
 msgstr "NE"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:294 src/core/modules/Planet.cpp:1144
+#: src/core/modules/LandscapeMgr.cpp:294 src/core/modules/Planet.cpp:1150
 msgctxt "compass direction"
 msgid "SE"
 msgstr "SE"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:296 src/core/modules/Planet.cpp:1132
+#: src/core/modules/LandscapeMgr.cpp:296 src/core/modules/Planet.cpp:1138
 msgctxt "compass direction"
 msgid "SW"
 msgstr "SW"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:298 src/core/modules/Planet.cpp:1136
+#: src/core/modules/LandscapeMgr.cpp:298 src/core/modules/Planet.cpp:1142
 msgctxt "compass direction"
 msgid "NW"
 msgstr "NW"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:300 src/core/modules/Planet.cpp:1139
+#: src/core/modules/LandscapeMgr.cpp:300 src/core/modules/Planet.cpp:1145
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "NNE"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:302 src/core/modules/Planet.cpp:1141
+#: src/core/modules/LandscapeMgr.cpp:302 src/core/modules/Planet.cpp:1147
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "ENE"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:304 src/core/modules/Planet.cpp:1143
+#: src/core/modules/LandscapeMgr.cpp:304 src/core/modules/Planet.cpp:1149
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "ESE"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:306 src/core/modules/Planet.cpp:1145
+#: src/core/modules/LandscapeMgr.cpp:306 src/core/modules/Planet.cpp:1151
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "SSE"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:308 src/core/modules/Planet.cpp:1131
+#: src/core/modules/LandscapeMgr.cpp:308 src/core/modules/Planet.cpp:1137
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "SSW"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:310 src/core/modules/Planet.cpp:1133
+#: src/core/modules/LandscapeMgr.cpp:310 src/core/modules/Planet.cpp:1139
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "WSW"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:312 src/core/modules/Planet.cpp:1135
+#: src/core/modules/LandscapeMgr.cpp:312 src/core/modules/Planet.cpp:1141
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "WNW"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:314 src/core/modules/Planet.cpp:1137
+#: src/core/modules/LandscapeMgr.cpp:314 src/core/modules/Planet.cpp:1143
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "NNW"
@@ -939,17 +939,17 @@ msgstr "geologic term"
 msgid "Linear size"
 msgstr "Linear size"
 
-#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:824
+#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:830
 msgid "Diameter"
 msgstr "Diameter"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:686
-#: src/core/modules/Planet.cpp:707 src/core/modules/Planet.cpp:825
-#: src/core/modules/Planet.cpp:1341 src/core/modules/Comet.cpp:191
+#: src/core/modules/Planet.cpp:707 src/core/modules/Planet.cpp:831
+#: src/core/modules/Planet.cpp:1347 src/core/modules/Comet.cpp:191
 #: src/core/modules/Comet.cpp:201 src/gui/StelGuiItems.cpp:981
 #: src/gui/AstroCalcDialog.cpp:3168 src/gui/AstroCalcDialog.cpp:3716
-#: src/gui/AstroCalcDialog.cpp:8467 plugins/Satellites/src/Satellites.cpp:2992
+#: src/gui/AstroCalcDialog.cpp:8467 plugins/Satellites/src/Satellites.cpp:3013
 #: plugins/Satellites/src/Satellite.cpp:359
 #: plugins/Satellites/src/Satellite.cpp:402
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1198
@@ -1866,7 +1866,7 @@ msgstr "Additional names: "
 msgid "Additional catalog numbers: "
 msgstr "Additional catalogue numbers: "
 
-#: src/core/modules/Nebula.cpp:300 src/core/modules/Planet.cpp:835
+#: src/core/modules/Nebula.cpp:300 src/core/modules/Planet.cpp:841
 #: src/core/modules/StarWrapper.cpp:55 src/core/modules/StarWrapper.cpp:316
 #: src/core/modules/StarWrapper.cpp:675 src/core/modules/StarWrapper.cpp:891
 #: plugins/Quasars/src/Quasar.cpp:134
@@ -2295,12 +2295,12 @@ msgstr "See Logfile for instructions."
 #: src/core/modules/NebulaMgr.cpp:2035
 msgctxt "context"
 msgid "pronounce"
-msgstr ""
+msgstr "pronounce"
 
 #: src/core/modules/NebulaMgr.cpp:2038
 msgctxt "context"
 msgid "english"
-msgstr ""
+msgstr "English"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Planet satellites
 #. TRANSLATORS: CelesTrak source [Planet]:
@@ -2309,7 +2309,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=planet&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [Planet TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/planet.txt
-#: src/core/modules/Planet.cpp:132 plugins/Satellites/src/Satellites.cpp:3417
+#: src/core/modules/Planet.cpp:132 plugins/Satellites/src/Satellites.cpp:3442
 msgid "planet"
 msgstr "planet"
 
@@ -2396,8 +2396,8 @@ msgstr "Ecliptical"
 msgid "Hourly motion"
 msgstr "Hourly motion"
 
-#: src/core/modules/Planet.cpp:660 src/core/modules/Planet.cpp:1191
-#: src/core/modules/Planet.cpp:1200 src/core/modules/StarWrapper.cpp:364
+#: src/core/modules/Planet.cpp:660 src/core/modules/Planet.cpp:1197
+#: src/core/modules/Planet.cpp:1206 src/core/modules/StarWrapper.cpp:364
 #: src/core/modules/StarWrapper.cpp:715 plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "into the direction of"
 msgid "towards"
@@ -2448,239 +2448,239 @@ msgid "NOTE: elements for epoch %1 probably outdated. Consider updating data!"
 msgstr ""
 "NOTE: elements for epoch %1 probably outdated. Consider updating data!"
 
-#: src/core/modules/Planet.cpp:792
+#: src/core/modules/Planet.cpp:798
 msgid "with rings"
 msgstr "with rings"
 
-#: src/core/modules/Planet.cpp:809
+#: src/core/modules/Planet.cpp:815
 msgid "scaled up to"
 msgstr "scaled up to"
 
-#: src/core/modules/Planet.cpp:819
+#: src/core/modules/Planet.cpp:825
 msgid "Apparent diameter"
 msgstr "Apparent diameter"
 
-#: src/core/modules/Planet.cpp:824
+#: src/core/modules/Planet.cpp:830
 msgid "Equatorial diameter"
 msgstr "Equatorial diameter"
 
-#: src/core/modules/Planet.cpp:873 src/core/modules/Planet.cpp:874
-#: src/core/modules/Planet.cpp:882 src/gui/AstroCalcChart.cpp:95
+#: src/core/modules/Planet.cpp:879 src/core/modules/Planet.cpp:880
+#: src/core/modules/Planet.cpp:888 src/gui/AstroCalcChart.cpp:95
 #: src/gui/AstroCalcChart.cpp:105 src/gui/AstroCalcChart.cpp:432
 #: src/gui/AstroCalcChart.cpp:458 src/ui_configurationDialog.h:2055
 msgid "Elongation"
 msgstr "Elongation"
 
-#: src/core/modules/Planet.cpp:875 src/core/modules/Planet.cpp:884
+#: src/core/modules/Planet.cpp:881 src/core/modules/Planet.cpp:890
 #: src/gui/AstroCalcChart.cpp:98 src/gui/AstroCalcChart.cpp:108
 #: src/gui/AstroCalcChart.cpp:441 src/gui/AstroCalcChart.cpp:467
 #: plugins/Satellites/src/Satellite.cpp:411
 msgid "Phase angle"
 msgstr "Phase angle"
 
-#: src/core/modules/Planet.cpp:877 src/core/modules/Planet.cpp:886
+#: src/core/modules/Planet.cpp:883 src/core/modules/Planet.cpp:892
 msgid "Illuminated"
 msgstr "Illuminated"
 
-#: src/core/modules/Planet.cpp:883
+#: src/core/modules/Planet.cpp:889
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:323
 msgid "Elong. in Ecl.Long."
 msgstr "Elong. in Ecl.Long."
 
-#: src/core/modules/Planet.cpp:898 src/gui/AstroCalcDialog.cpp:8702
+#: src/core/modules/Planet.cpp:904 src/gui/AstroCalcDialog.cpp:8702
 #: src/gui/AstroCalcChart.cpp:475
 msgid "Angular distance"
 msgstr "Angular distance"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:916 src/core/modules/StarWrapper.cpp:398
+#: src/core/modules/Planet.cpp:922 src/core/modules/StarWrapper.cpp:398
 #: src/core/modules/StarWrapper.cpp:760 src/core/modules/StarWrapper.cpp:936
 #: src/gui/AstroCalcDialog.cpp:8503 src/gui/AstroCalcAlmanacWidget.cpp:193
 msgctxt "duration"
 msgid "days"
 msgstr "days"
 
-#: src/core/modules/Planet.cpp:925
+#: src/core/modules/Planet.cpp:931
 msgid "Sidereal period"
 msgstr "Sidereal period"
 
-#: src/core/modules/Planet.cpp:934
+#: src/core/modules/Planet.cpp:940
 msgid "Synodic period"
 msgstr "Synodic period"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1016
+#: src/core/modules/Planet.cpp:1022
 msgctxt "speed"
 msgid "m/s"
 msgstr "m/s"
 
-#: src/core/modules/Planet.cpp:1031
+#: src/core/modules/Planet.cpp:1037
 msgid "Sidereal day"
 msgstr "Sidereal day"
 
-#: src/core/modules/Planet.cpp:1033
+#: src/core/modules/Planet.cpp:1039
 msgid "Mean solar day"
 msgstr "Mean solar day"
 
-#: src/core/modules/Planet.cpp:1039
+#: src/core/modules/Planet.cpp:1045
 msgid "The period of rotation is chaotic"
 msgstr "The period of rotation is chaotic"
 
-#: src/core/modules/Planet.cpp:1045 src/core/modules/Planet.cpp:1047
-#: src/core/modules/Planet.cpp:1053 src/core/modules/Planet.cpp:1055
+#: src/core/modules/Planet.cpp:1051 src/core/modules/Planet.cpp:1053
+#: src/core/modules/Planet.cpp:1059 src/core/modules/Planet.cpp:1061
 msgid "Equatorial rotation velocity"
 msgstr "Equatorial rotation velocity"
 
-#: src/core/modules/Planet.cpp:1081 src/core/modules/Planet.cpp:1493
+#: src/core/modules/Planet.cpp:1087 src/core/modules/Planet.cpp:1499
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "New Moon"
 
-#: src/core/modules/Planet.cpp:1083 src/core/modules/Planet.cpp:1495
+#: src/core/modules/Planet.cpp:1089 src/core/modules/Planet.cpp:1501
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Waxing Crescent"
 
-#: src/core/modules/Planet.cpp:1085 src/core/modules/Planet.cpp:1497
+#: src/core/modules/Planet.cpp:1091 src/core/modules/Planet.cpp:1503
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "First Quarter"
 
-#: src/core/modules/Planet.cpp:1087 src/core/modules/Planet.cpp:1499
+#: src/core/modules/Planet.cpp:1093 src/core/modules/Planet.cpp:1505
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Waxing Gibbous"
 
-#: src/core/modules/Planet.cpp:1089 src/core/modules/Planet.cpp:1501
+#: src/core/modules/Planet.cpp:1095 src/core/modules/Planet.cpp:1507
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Full Moon"
 
-#: src/core/modules/Planet.cpp:1091 src/core/modules/Planet.cpp:1503
+#: src/core/modules/Planet.cpp:1097 src/core/modules/Planet.cpp:1509
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Waning Gibbous"
 
-#: src/core/modules/Planet.cpp:1093 src/core/modules/Planet.cpp:1505
+#: src/core/modules/Planet.cpp:1099 src/core/modules/Planet.cpp:1511
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Third Quarter"
 
-#: src/core/modules/Planet.cpp:1095 src/core/modules/Planet.cpp:1507
+#: src/core/modules/Planet.cpp:1101 src/core/modules/Planet.cpp:1513
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Waning Crescent"
 
-#: src/core/modules/Planet.cpp:1103
+#: src/core/modules/Planet.cpp:1109
 msgid "Moon age"
 msgstr "Moon age"
 
-#: src/core/modules/Planet.cpp:1103
+#: src/core/modules/Planet.cpp:1109
 msgid "days old"
 msgstr "days old"
 
-#: src/core/modules/Planet.cpp:1123 src/core/modules/Planet.cpp:1126
+#: src/core/modules/Planet.cpp:1129 src/core/modules/Planet.cpp:1132
 msgid "Position angle of bright limb"
 msgstr "Position angle of bright limb"
 
-#: src/core/modules/Planet.cpp:1190 src/core/modules/Planet.cpp:1199
-#: src/core/modules/Planet.cpp:1235 src/core/modules/Planet.cpp:1242
+#: src/core/modules/Planet.cpp:1196 src/core/modules/Planet.cpp:1205
+#: src/core/modules/Planet.cpp:1241 src/core/modules/Planet.cpp:1248
 msgid "Position Angle of axis"
 msgstr "Position Angle of axis"
 
-#: src/core/modules/Planet.cpp:1191 src/core/modules/Planet.cpp:1192
-#: src/core/modules/Planet.cpp:1200 src/core/modules/Planet.cpp:1201
+#: src/core/modules/Planet.cpp:1197 src/core/modules/Planet.cpp:1198
+#: src/core/modules/Planet.cpp:1206 src/core/modules/Planet.cpp:1207
 msgid "Libration"
 msgstr "Libration"
 
-#: src/core/modules/Planet.cpp:1193 src/core/modules/Planet.cpp:1202
-#: src/core/modules/Planet.cpp:1237 src/core/modules/Planet.cpp:1244
+#: src/core/modules/Planet.cpp:1199 src/core/modules/Planet.cpp:1208
+#: src/core/modules/Planet.cpp:1243 src/core/modules/Planet.cpp:1250
 msgid "Subsolar point"
 msgstr "Subsolar point"
 
-#: src/core/modules/Planet.cpp:1194 src/core/modules/Planet.cpp:1203
+#: src/core/modules/Planet.cpp:1200 src/core/modules/Planet.cpp:1209
 msgid "Colongitude"
 msgstr "Colongitude"
 
-#: src/core/modules/Planet.cpp:1236 src/core/modules/Planet.cpp:1243
+#: src/core/modules/Planet.cpp:1242 src/core/modules/Planet.cpp:1249
 msgid "Center point"
 msgstr "Center point"
 
-#: src/core/modules/Planet.cpp:1267
+#: src/core/modules/Planet.cpp:1273
 msgid "Eclipse magnitude"
 msgstr "Eclipse magnitude"
 
-#: src/core/modules/Planet.cpp:1270
+#: src/core/modules/Planet.cpp:1276
 msgid "Eclipse obscuration"
 msgstr "Eclipse obscuration"
 
-#: src/core/modules/Planet.cpp:1272
+#: src/core/modules/Planet.cpp:1278
 msgid "Crescent angle"
 msgstr "Crescent angle"
 
-#: src/core/modules/Planet.cpp:1300
+#: src/core/modules/Planet.cpp:1306
 msgid "Moon/Sun diameter ratio"
 msgstr "Moon/Sun diameter ratio"
 
-#: src/core/modules/Planet.cpp:1303
+#: src/core/modules/Planet.cpp:1309
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(annular)"
 
-#: src/core/modules/Planet.cpp:1305
+#: src/core/modules/Planet.cpp:1311
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(total)"
 
-#: src/core/modules/Planet.cpp:1316
+#: src/core/modules/Planet.cpp:1322
 msgid "Central eclipse duration"
 msgstr "Central eclipse duration"
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1318
+#: src/core/modules/Planet.cpp:1324
 #: plugins/Observability/src/Observability.cpp:153
 msgid "m"
 msgstr "m"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1320
+#: src/core/modules/Planet.cpp:1326
 #: plugins/Observability/src/Observability.cpp:155
 msgid "s"
 msgstr "s"
 
-#: src/core/modules/Planet.cpp:1321
+#: src/core/modules/Planet.cpp:1327
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "Center of solar eclipse (Lat./Long.)"
 
-#: src/core/modules/Planet.cpp:1331
+#: src/core/modules/Planet.cpp:1337
 msgid "Shadow center point is"
 msgstr "Shadow center point is"
 
-#: src/core/modules/Planet.cpp:1333
+#: src/core/modules/Planet.cpp:1339
 msgid "km towards azimuth"
 msgstr "km towards azimuth"
 
-#: src/core/modules/Planet.cpp:1336
+#: src/core/modules/Planet.cpp:1342
 msgid "Width of antumbra"
 msgstr "Width of antumbra"
 
-#: src/core/modules/Planet.cpp:1338
+#: src/core/modules/Planet.cpp:1344
 msgid "Width of umbra"
 msgstr "Width of umbra"
 
-#: src/core/modules/Planet.cpp:1356
+#: src/core/modules/Planet.cpp:1362
 msgid "Penumbral eclipse magnitude"
 msgstr "Penumbral eclipse magnitude"
 
-#: src/core/modules/Planet.cpp:1359
+#: src/core/modules/Planet.cpp:1365
 msgid "Umbral eclipse magnitude"
 msgstr "Umbral eclipse magnitude"
 
-#: src/core/modules/Planet.cpp:1366
+#: src/core/modules/Planet.cpp:1372
 msgid "Albedo"
 msgstr "Albedo"
 
-#: src/core/modules/Planet.cpp:1369 src/core/modules/Comet.cpp:241
+#: src/core/modules/Planet.cpp:1375 src/core/modules/Comet.cpp:241
 msgid "Discovered"
 msgstr "Discovered"
 
@@ -3479,11 +3479,11 @@ msgstr "Flip scene horizontally"
 msgid "Flip scene vertically"
 msgstr "Flip scene vertically"
 
-#: src/core/StelCore.cpp:2668
+#: src/core/StelCore.cpp:2676
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Correction is disabled. Use only if you know what you are doing!"
 
-#: src/core/StelCore.cpp:2671
+#: src/core/StelCore.cpp:2679
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -3494,7 +3494,7 @@ msgstr ""
 " Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 
-#: src/core/StelCore.cpp:2674
+#: src/core/StelCore.cpp:2682
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -3502,31 +3502,31 @@ msgid ""
 msgstr ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
-
-#: src/core/StelCore.cpp:2677
-#, qt-format
-msgid ""
-"This formula is based on a study of post-1650 observations of the Sun, the "
-"Moon and the planets by Spencer Jones (%1) and used by Jean Meeus in his "
-"<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
-"PC program SunTracker Pro."
-msgstr ""
-"This formula is based on a study of post-1650 observations of the Sun, the "
-"Moon and the planets by Spencer Jones (%1) and used by Jean Meeus in his "
-"<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
-"PC program SunTracker Pro."
-
-#: src/core/StelCore.cpp:2681
-msgid ""
-"This is a slightly modified version of the IAU (1952) formula which was "
-"adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
-" Eclipses</em> by Mucke & Meeus (1983)."
-msgstr ""
-"This is a slightly modified version of the IAU (1952) formula which was "
-"adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
-" Eclipses</em> by Mucke & Meeus (1983)."
 
 #: src/core/StelCore.cpp:2685
+#, qt-format
+msgid ""
+"This formula is based on a study of post-1650 observations of the Sun, the "
+"Moon and the planets by Spencer Jones (%1) and used by Jean Meeus in his "
+"<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
+"PC program SunTracker Pro."
+msgstr ""
+"This formula is based on a study of post-1650 observations of the Sun, the "
+"Moon and the planets by Spencer Jones (%1) and used by Jean Meeus in his "
+"<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
+"PC program SunTracker Pro."
+
+#: src/core/StelCore.cpp:2689
+msgid ""
+"This is a slightly modified version of the IAU (1952) formula which was "
+"adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
+" Eclipses</em> by Mucke & Meeus (1983)."
+msgstr ""
+"This is a slightly modified version of the IAU (1952) formula which was "
+"adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
+" Eclipses</em> by Mucke & Meeus (1983)."
+
+#: src/core/StelCore.cpp:2693
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -3538,7 +3538,7 @@ msgstr ""
 "same relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 
-#: src/core/StelCore.cpp:2689
+#: src/core/StelCore.cpp:2697
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -3549,7 +3549,7 @@ msgstr ""
 "article <em>The accelerations of the Earth and Moon from early astronomical "
 "observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2692
+#: src/core/StelCore.cpp:2700
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -3558,7 +3558,7 @@ msgstr ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2695
+#: src/core/StelCore.cpp:2703
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -3571,7 +3571,7 @@ msgstr ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 
-#: src/core/StelCore.cpp:2698
+#: src/core/StelCore.cpp:2706
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -3581,7 +3581,7 @@ msgstr ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 
-#: src/core/StelCore.cpp:2701
+#: src/core/StelCore.cpp:2709
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3592,7 +3592,7 @@ msgstr ""
 "article <em>Long-term changes in the rotation of the Earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 
-#: src/core/StelCore.cpp:2704
+#: src/core/StelCore.cpp:2712
 #, qt-format
 msgid ""
 "This algorithm was published by F. R. Stephenson and M. A. Houlden in the "
@@ -3603,7 +3603,7 @@ msgstr ""
 "book <em>Atlas of Historical Eclipse Maps</em> (%1). This algorithm is used "
 "in the PC planetarium program Guide 7."
 
-#: src/core/StelCore.cpp:2707
+#: src/core/StelCore.cpp:2715
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -3613,7 +3613,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2710
+#: src/core/StelCore.cpp:2718
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -3622,7 +3622,7 @@ msgstr ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 
-#: src/core/StelCore.cpp:2713
+#: src/core/StelCore.cpp:2721
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -3635,7 +3635,7 @@ msgstr ""
 "Period 1800-1988</em> (%1) as data fit through values given by Stephenson & "
 "Morrison (1984)."
 
-#: src/core/StelCore.cpp:2716
+#: src/core/StelCore.cpp:2724
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -3645,7 +3645,7 @@ msgstr ""
 " version of the ELP 2000-85 lunar theory, presented in their <em>Lunar "
 "Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:2719
+#: src/core/StelCore.cpp:2727
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3656,7 +3656,7 @@ msgstr ""
 "article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> (%1)."
 
-#: src/core/StelCore.cpp:2722
+#: src/core/StelCore.cpp:2730
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -3665,7 +3665,7 @@ msgstr ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:2725
+#: src/core/StelCore.cpp:2733
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -3675,7 +3675,7 @@ msgstr ""
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 
-#: src/core/StelCore.cpp:2728
+#: src/core/StelCore.cpp:2736
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -3684,7 +3684,7 @@ msgstr ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:2731
+#: src/core/StelCore.cpp:2739
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -3693,7 +3693,7 @@ msgstr ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2734
+#: src/core/StelCore.cpp:2742
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -3703,7 +3703,7 @@ msgstr ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
 " for the recent past."
 
-#: src/core/StelCore.cpp:2737
+#: src/core/StelCore.cpp:2745
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -3715,7 +3715,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:2740
+#: src/core/StelCore.cpp:2748
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -3726,7 +3726,7 @@ msgstr ""
 " in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 
-#: src/core/StelCore.cpp:2743
+#: src/core/StelCore.cpp:2751
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -3739,7 +3739,7 @@ msgstr ""
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 
-#: src/core/StelCore.cpp:2746
+#: src/core/StelCore.cpp:2754
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -3756,7 +3756,7 @@ msgstr ""
 "Solar Eclipses 1501 to 2500</em> (2014). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 
-#: src/core/StelCore.cpp:2749
+#: src/core/StelCore.cpp:2757
 msgid ""
 "This solution is modified from F. Espenak and J. Meeus, based on Morrison & "
 "Stephenson (2004) and a polynomial fit through tabulated values for "
@@ -3768,15 +3768,15 @@ msgstr ""
 "1600-2000. Values for 2015-2033 are interpolated from observations and "
 "predictions by IERS Rapid Service/Prediction Centre."
 
-#: src/core/StelCore.cpp:2749
+#: src/core/StelCore.cpp:2757
 msgid "Used by default."
 msgstr "Used by default."
 
-#: src/core/StelCore.cpp:2752
+#: src/core/StelCore.cpp:2760
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 
-#: src/core/StelCore.cpp:2752
+#: src/core/StelCore.cpp:2760
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
@@ -3784,7 +3784,7 @@ msgstr ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
 
-#: src/core/StelCore.cpp:2755
+#: src/core/StelCore.cpp:2763
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -3795,7 +3795,7 @@ msgstr ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2758
+#: src/core/StelCore.cpp:2766
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -3806,7 +3806,7 @@ msgstr ""
 "Simons (2000), was published in article <em>Error Minimisation of Polynomial"
 " Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 
-#: src/core/StelCore.cpp:2761
+#: src/core/StelCore.cpp:2769
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -3817,7 +3817,7 @@ msgstr ""
 "Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2764
+#: src/core/StelCore.cpp:2772
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -3836,7 +3836,7 @@ msgstr ""
 "(modelled with a spline fit) it provides values from an approximate "
 "parabola."
 
-#: src/core/StelCore.cpp:2767
+#: src/core/StelCore.cpp:2775
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -3847,7 +3847,7 @@ msgstr ""
 "Acceleration of the Moon and the Universe - the Mass of the Graviton</em> "
 "(%1) and based on C. Schoch's formula (1931)."
 
-#: src/core/StelCore.cpp:2770
+#: src/core/StelCore.cpp:2778
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -3856,7 +3856,7 @@ msgstr ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
 " by the user."
 
-#: src/core/StelCore.cpp:2773 src/core/SimbadSearcher.cpp:178
+#: src/core/StelCore.cpp:2781 src/core/SimbadSearcher.cpp:178
 #: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:972
 #: src/gui/ObsListDialog.cpp:996 src/gui/ObsListDialog.cpp:1045
 #: src/gui/ObsListDialog.cpp:1061 src/gui/ObsListDialog.cpp:1102
@@ -3867,7 +3867,7 @@ msgstr ""
 msgid "Error"
 msgstr "Error"
 
-#: src/core/StelCore.cpp:2781
+#: src/core/StelCore.cpp:2789
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -3876,15 +3876,15 @@ msgstr ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 
-#: src/core/StelCore.cpp:2825
+#: src/core/StelCore.cpp:2833
 msgid "with zero values outside this range"
 msgstr "with zero values outside this range"
 
-#: src/core/StelCore.cpp:2828
+#: src/core/StelCore.cpp:2836
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "with a typical 1-second accuracy and zero values outside this range"
 
-#: src/core/StelCore.cpp:2831
+#: src/core/StelCore.cpp:2839
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -3892,16 +3892,16 @@ msgstr ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 
-#: src/core/StelCore.cpp:2838
+#: src/core/StelCore.cpp:2846
 msgid "with values for the limit years outside this range"
 msgstr "with values for the limit years outside this range"
 
-#: src/core/StelCore.cpp:2848
+#: src/core/StelCore.cpp:2856
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Valid range of usage: between years %1 and %2, %3."
 
-#: src/core/StelCore.cpp:2850
+#: src/core/StelCore.cpp:2858
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Valid range of usage: between years %1 and %2."
@@ -3980,13 +3980,15 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:549
 msgid "Mollweide"
-msgstr ""
+msgstr "Mollweide"
 
 #: src/core/StelProjectorClasses.cpp:554
 msgid ""
 "The Mollweide projection is an equal-area map projection introduced by Karl "
 "Mollweide in 1805."
 msgstr ""
+"The Mollweide projection is an equal-area map projection introduced by Karl "
+"Mollweide in 1805."
 
 #: src/core/StelProjectorClasses.cpp:695
 msgid "Cylinder"
@@ -5575,7 +5577,7 @@ msgstr "Based on Qt"
 
 #: src/gui/HelpDialog.cpp:518
 msgid "Running on Operating System"
-msgstr ""
+msgstr "Running on Operating System"
 
 #: src/gui/HelpDialog.cpp:539
 msgid "Developers"
@@ -6074,11 +6076,11 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Visual magnitude based on phase angle and albedo."
 
-#: src/gui/LocationDialog.cpp:173 src/gui/LocationDialog.cpp:975
+#: src/gui/LocationDialog.cpp:173 src/gui/LocationDialog.cpp:976
 msgid "Get location from GPS or system service"
 msgstr "Get location from GPS or system service"
 
-#: src/gui/LocationDialog.cpp:175 src/gui/LocationDialog.cpp:977
+#: src/gui/LocationDialog.cpp:175 src/gui/LocationDialog.cpp:978
 #: src/ui_locationDialogGui.h:432
 msgid "Get location from GPS"
 msgstr "Get location from GPS"
@@ -6105,23 +6107,23 @@ msgstr ""
 "Toggle fetching GPS location. (Does not change time zone!) When satisfied, "
 "toggle off to let other programs access the GPS device."
 
-#: src/gui/LocationDialog.cpp:919
+#: src/gui/LocationDialog.cpp:920
 msgid "GPS listening..."
 msgstr "GPS listening..."
 
-#: src/gui/LocationDialog.cpp:926
+#: src/gui/LocationDialog.cpp:927
 msgid "GPS disconnecting..."
 msgstr "GPS disconnecting..."
 
-#: src/gui/LocationDialog.cpp:948
+#: src/gui/LocationDialog.cpp:949
 msgid "2D location fix"
 msgstr "2D location fix"
 
-#: src/gui/LocationDialog.cpp:953
+#: src/gui/LocationDialog.cpp:954
 msgid "3D location fix"
 msgstr "3D location fix"
 
-#: src/gui/LocationDialog.cpp:962
+#: src/gui/LocationDialog.cpp:963
 msgid "GPS:FAILED"
 msgstr "GPS:FAILED"
 
@@ -8313,7 +8315,7 @@ msgstr "The duration of the astronomical night"
 msgid "The duration of morning and evening twilights"
 msgstr "The duration of morning and evening twilights"
 
-#: src/gui/AstroCalcAlmanacWidget.cpp:373 src/ui_astroCalcAlmanacWidget.h:839
+#: src/gui/AstroCalcAlmanacWidget.cpp:375 src/ui_astroCalcAlmanacWidget.h:839
 #: plugins/NavStars/src/ui_navStarsWindow.h:546
 msgid "Today"
 msgstr "Today"
@@ -10156,12 +10158,12 @@ msgstr "h"
 #: src/translations.h:642
 msgctxt "addressing mode"
 msgid "64-bit"
-msgstr ""
+msgstr "64-bit"
 
 #: src/translations.h:643
 msgctxt "addressing mode"
 msgid "32-bit"
-msgstr ""
+msgstr "32-bit"
 
 #. TRANSLATORS: Same text as in the Configuration window!
 #: src/translations.h:647 src/ui_helpDialogGui.h:249
@@ -12197,7 +12199,7 @@ msgstr "Lock position when coordinates are used"
 
 #: src/ui_searchDialogGui.h:875
 msgid "Automatic closing dialog"
-msgstr ""
+msgstr "Automatic closing dialog"
 
 #: src/ui_searchDialogGui.h:876
 msgid "Show FOV center marker when position is search"
@@ -13634,52 +13636,52 @@ msgstr "Use this sky culture as default"
 #: src/ui_viewDialog.h:4780 src/ui_viewDialog.h:4796
 msgctxt "menu item"
 msgid "native"
-msgstr ""
+msgstr "native"
 
 #: src/ui_viewDialog.h:4781 src/ui_viewDialog.h:4785
 msgctxt "menu item"
 msgid "modern"
-msgstr ""
+msgstr "modern"
 
 #: src/ui_viewDialog.h:4782
 msgid "Info label"
-msgstr ""
+msgstr "Info label"
 
 #: src/ui_viewDialog.h:4783 src/ui_viewDialog.h:4797
 msgctxt "menu item"
 msgid "translation"
-msgstr ""
+msgstr "translation"
 
 #: src/ui_viewDialog.h:4784 src/ui_viewDialog.h:4791
 msgctxt "menu item"
 msgid "transliteration"
-msgstr ""
+msgstr "transliteration"
 
 #: src/ui_viewDialog.h:4787 src/ui_viewDialog.h:4793
 msgid "Scientific transliteration"
-msgstr ""
+msgstr "Scientific transliteration"
 
 #: src/ui_viewDialog.h:4789 src/ui_viewDialog.h:4795
 msgctxt "menu item"
 msgid "sci. translit."
-msgstr ""
+msgstr "sci. translit."
 
 #: src/ui_viewDialog.h:4790
 msgid "Screen label"
-msgstr ""
+msgstr "Screen label"
 
 #: src/ui_viewDialog.h:4799 src/ui_viewDialog.h:4803
 msgid "International Phonetic Alphabet"
-msgstr ""
+msgstr "International Phonetic Alphabet"
 
 #: src/ui_viewDialog.h:4801 src/ui_viewDialog.h:4805
 msgctxt "menu item"
 msgid "IPA"
-msgstr ""
+msgstr "IPA"
 
 #: src/ui_viewDialog.h:4807
 msgid "Show zodiac (if defined)"
-msgstr ""
+msgstr "Show zodiac (if defined)"
 
 #: src/ui_viewDialog.h:4811
 msgid "Constellations font size"
@@ -13687,7 +13689,7 @@ msgstr "Constellations font size"
 
 #: src/ui_viewDialog.h:4814
 msgid "Color of zodiac lines"
-msgstr ""
+msgstr "Color of zodiac lines"
 
 #: src/ui_viewDialog.h:4821
 msgid "Fading duration for lines of asterisms"
@@ -13699,7 +13701,7 @@ msgstr "Colour of asterism lines"
 
 #: src/ui_viewDialog.h:4828
 msgid "Color of constellation area (convex hull) boundaries"
-msgstr ""
+msgstr "Color of constellation area (convex hull) boundaries"
 
 #: src/ui_viewDialog.h:4832
 msgid "Only one at a time"
@@ -13715,11 +13717,11 @@ msgstr "Colour of ray helpers"
 
 #: src/ui_viewDialog.h:4843
 msgid "Show areas (convex hulls) of constellations"
-msgstr ""
+msgstr "Show areas (convex hulls) of constellations"
 
 #: src/ui_viewDialog.h:4845
 msgid "Constellation areas"
-msgstr ""
+msgstr "Constellation areas"
 
 #: src/ui_viewDialog.h:4847
 msgid "Color of constellation boundaries"
@@ -13727,7 +13729,7 @@ msgstr "Colour of constellation boundaries"
 
 #: src/ui_viewDialog.h:4849
 msgid "Abbreviated names"
-msgstr ""
+msgstr "Abbreviated names"
 
 #: src/ui_viewDialog.h:4851
 msgid "Color of asterism names"
@@ -13735,11 +13737,11 @@ msgstr "Colour of asterism names"
 
 #: src/ui_viewDialog.h:4855
 msgid "Show lunar stations (if defined)"
-msgstr ""
+msgstr "Show lunar stations (if defined)"
 
 #: src/ui_viewDialog.h:4857
 msgid "Lunar Stations"
-msgstr ""
+msgstr "Lunar Stations"
 
 #: src/ui_viewDialog.h:4859
 msgid "Brightness for constellation art"
@@ -13759,7 +13761,7 @@ msgstr "Fading duration for screen labels of constellations"
 
 #: src/ui_viewDialog.h:4876
 msgid "Fading duration for lunar station lines"
-msgstr ""
+msgstr "Fading duration for lunar station lines"
 
 #: src/ui_viewDialog.h:4879
 msgid "Fading duration for screen labels of asterisms "
@@ -13775,7 +13777,7 @@ msgstr "Colour of constellation names"
 
 #: src/ui_viewDialog.h:4892
 msgid "Fading duration for area limits of constellations"
-msgstr ""
+msgstr "Fading duration for area limits of constellations"
 
 #: src/ui_viewDialog.h:4898
 msgid "Color of constellation lines"
@@ -13787,7 +13789,7 @@ msgstr "Click on star to show its constellation"
 
 #: src/ui_viewDialog.h:4909
 msgid "Fading duration for zodiac lines"
-msgstr ""
+msgstr "Fading duration for zodiac lines"
 
 #: src/ui_viewDialog.h:4912
 msgid "Asterisms font size"
@@ -13795,7 +13797,7 @@ msgstr "Asterisms font size"
 
 #: src/ui_viewDialog.h:4918
 msgid "Color of Lunar station lines"
-msgstr ""
+msgstr "Color of Lunar station lines"
 
 #: src/ui_viewDialog.h:4922
 msgid "Fading duration for lines of constellations"
@@ -16803,7 +16805,7 @@ msgstr "Telrad sight"
 #: plugins/Scenery3d/src/Scenery3d.cpp:336
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:272
 #: plugins/Calendars/src/Calendars.cpp:194
-#: plugins/NebulaTextures/src/NebulaTextures.cpp:93
+#: plugins/NebulaTextures/src/NebulaTextures.cpp:94
 msgid "Show settings dialog"
 msgstr "Show settings dialogue"
 
@@ -17911,87 +17913,87 @@ msgid "Hide satellites from the group"
 msgstr "Hide satellites from the group"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1425
+#: plugins/Satellites/src/Satellites.cpp:1426
 msgid "The Hubble Space Telescope"
 msgstr "The Hubble Space Telescope"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1427
+#: plugins/Satellites/src/Satellites.cpp:1428
 msgid "The International Space Station"
 msgstr "The International Space Station"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1429
+#: plugins/Satellites/src/Satellites.cpp:1430
 msgid "The Chandra X-ray Observatory"
 msgstr "The Chandra X-ray Observatory"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1431
+#: plugins/Satellites/src/Satellites.cpp:1432
 msgid "X-ray Multi-Mirror Mission"
 msgstr "X-ray Multi-Mirror Mission"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1433
+#: plugins/Satellites/src/Satellites.cpp:1434
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 msgstr "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1435
+#: plugins/Satellites/src/Satellites.cpp:1436
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "International Gamma-Ray Astrophysics Laboratory"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1437
+#: plugins/Satellites/src/Satellites.cpp:1438
 msgid "The Microvariability and Oscillations of Stars telescope"
 msgstr "The Microvariability and Oscillations of Stars telescope"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1439
+#: plugins/Satellites/src/Satellites.cpp:1440
 msgid "Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)"
 msgstr "Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1441
+#: plugins/Satellites/src/Satellites.cpp:1442
 msgid "Astro‐Rivelatore Gamma a Immagini Leggero"
 msgstr "Astro‐Rivelatore Gamma a Immagini Leggero"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1443
+#: plugins/Satellites/src/Satellites.cpp:1444
 msgid "Fermi Gamma-ray Space Telescope"
 msgstr "Fermi Gamma-ray Space Telescope"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1445
+#: plugins/Satellites/src/Satellites.cpp:1446
 msgid "Wide-field Infrared Survey Explorer"
 msgstr "Wide-field Infrared Survey Explorer"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1447
+#: plugins/Satellites/src/Satellites.cpp:1448
 msgid "Interplanetary Kite-craft Accelerated by Radiation Of the Sun"
 msgstr "Interplanetary Kite-craft Accelerated by Radiation Of the Sun"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1449
+#: plugins/Satellites/src/Satellites.cpp:1450
 msgid "The russian space radio telescope RadioAstron"
 msgstr "The russian space radio telescope RadioAstron"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1451
+#: plugins/Satellites/src/Satellites.cpp:1452
 msgid "Nuclear Spectroscopic Telescope Array"
 msgstr "Nuclear Spectroscopic Telescope Array"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1453
+#: plugins/Satellites/src/Satellites.cpp:1454
 msgid "Near Earth Object Surveillance Satellite"
 msgstr "Near Earth Object Surveillance Satellite"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1455
+#: plugins/Satellites/src/Satellites.cpp:1456
 msgid "The Interface Region Imaging Spectrograph"
 msgstr "The Interface Region Imaging Spectrograph"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1457
+#: plugins/Satellites/src/Satellites.cpp:1458
 msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
@@ -18000,90 +18002,90 @@ msgstr ""
 "Atmosphere"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1459
+#: plugins/Satellites/src/Satellites.cpp:1460
 msgid "The Dark Matter Particle Explorer"
 msgstr "The Dark Matter Particle Explorer"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1461
+#: plugins/Satellites/src/Satellites.cpp:1462
 msgid "Hard X-ray Modulation Telescope"
 msgstr "Hard X-ray Modulation Telescope"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1463
+#: plugins/Satellites/src/Satellites.cpp:1464
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
 msgstr "Arcsecond Space Telescope Enabling Research in Astrophysics"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1465
+#: plugins/Satellites/src/Satellites.cpp:1466
 msgid "Transiting Exoplanet Survey Satellite"
 msgstr "Transiting Exoplanet Survey Satellite"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1467
+#: plugins/Satellites/src/Satellites.cpp:1468
 msgid "Spectrum-X-Gamma"
 msgstr "Spectrum-X-Gamma"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1469
+#: plugins/Satellites/src/Satellites.cpp:1470
 msgid "Characterising Exoplanets Satellite"
 msgstr "Characterising Exoplanets Satellite"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1471
+#: plugins/Satellites/src/Satellites.cpp:1472
 msgid "Tiangong space station (Chinese large modular space station)"
 msgstr "Tiangong space station (Chinese large modular space station)"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1473
+#: plugins/Satellites/src/Satellites.cpp:1474
 msgid "Imaging X-ray Polarimetry Explorer"
 msgstr "Imaging X-ray Polarimetry Explorer"
 
 #. TRANSLATORS: Satellite description. "James Webb" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1475
+#: plugins/Satellites/src/Satellites.cpp:1476
 #: plugins/MosaicCamera/src/translations.fab:25
 msgid "James Webb Space Telescope"
 msgstr "James Webb Space Telescope"
 
 #. TRANSLATORS: The full phrase is 'Loading TLE %VALUE%/%MAX%' in progress bar
-#: plugins/Satellites/src/Satellites.cpp:2328
+#: plugins/Satellites/src/Satellites.cpp:2349
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:152
 msgid "Loading TLE"
 msgstr "Loading TLE"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:3324
+#: plugins/Satellites/src/Satellites.cpp:3349
 msgid "communications"
 msgstr "communications"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:3326
+#: plugins/Satellites/src/Satellites.cpp:3351
 msgid "navigation"
 msgstr "navigation"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:3328
+#: plugins/Satellites/src/Satellites.cpp:3353
 msgid "scientific"
 msgstr "scientific"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:3330
+#: plugins/Satellites/src/Satellites.cpp:3355
 msgid "earth resources"
 msgstr "earth resources"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:3332
+#: plugins/Satellites/src/Satellites.cpp:3357
 msgid "geostationary"
 msgstr "geostationary"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:3334
+#: plugins/Satellites/src/Satellites.cpp:3359
 msgid "non-operational"
 msgstr "non-operational"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:3336
+#: plugins/Satellites/src/Satellites.cpp:3361
 msgid "observatory"
 msgstr "observatory"
 
@@ -18091,7 +18093,7 @@ msgstr "observatory"
 #. System (IRNSS) is an autonomous regional satellite navigation system being
 #. developed by the Indian Space Research Organisation (ISRO) which would be
 #. under complete control of the Indian government.
-#: plugins/Satellites/src/Satellites.cpp:3338
+#: plugins/Satellites/src/Satellites.cpp:3363
 msgid "irnss"
 msgstr "irnss"
 
@@ -18099,51 +18101,51 @@ msgstr "irnss"
 #. a proposed three-satellite regional time transfer system and Satellite
 #. Based Augmentation System for the Global Positioning System, that would be
 #. receivable within Japan.
-#: plugins/Satellites/src/Satellites.cpp:3340
+#: plugins/Satellites/src/Satellites.cpp:3365
 msgid "qzss"
 msgstr "qzss"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:3342
+#: plugins/Satellites/src/Satellites.cpp:3367
 msgid "cosmos"
 msgstr "cosmos"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:3344
+#: plugins/Satellites/src/Satellites.cpp:3369
 msgid "debris"
 msgstr "debris"
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:3346
+#: plugins/Satellites/src/Satellites.cpp:3371
 msgid "crewed"
 msgstr "crewed"
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:3348
+#: plugins/Satellites/src/Satellites.cpp:3373
 msgid "resupply"
 msgstr "resupply"
 
 #. TRANSLATORS: Satellite group: are known to broadcast TV signals
-#: plugins/Satellites/src/Satellites.cpp:3350
+#: plugins/Satellites/src/Satellites.cpp:3375
 msgid "tv"
 msgstr "tv"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GONETS satellites
-#: plugins/Satellites/src/Satellites.cpp:3352
+#: plugins/Satellites/src/Satellites.cpp:3377
 msgid "gonets"
 msgstr "gonets"
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
 #. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
 #. https://celestrak.org/NORAD/elements/tle-new.txt
-#: plugins/Satellites/src/Satellites.cpp:3358
+#: plugins/Satellites/src/Satellites.cpp:3383
 msgid "tle-new"
 msgstr "tle-new"
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
 #. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3361
+#: plugins/Satellites/src/Satellites.cpp:3386
 msgid "last-30-days"
 msgstr "last-30-days"
 
@@ -18152,7 +18154,7 @@ msgstr "last-30-days"
 #. https://celestrak.org/NORAD/elements/stations.txt
 #. TRANSLATORS: CelesTrak source [Space Stations]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3365
+#: plugins/Satellites/src/Satellites.cpp:3390
 msgid "stations"
 msgstr "stations"
 
@@ -18161,7 +18163,7 @@ msgstr "stations"
 #. https://celestrak.org/NORAD/elements/visual.txt
 #. TRANSLATORS: CelesTrak source [100 (or so) Brightest]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=visual&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3369
+#: plugins/Satellites/src/Satellites.cpp:3394
 msgid "visual"
 msgstr "visual"
 
@@ -18170,7 +18172,7 @@ msgstr "visual"
 #. https://celestrak.org/NORAD/elements/active.txt
 #. TRANSLATORS: CelesTrak source [Active Satellites]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3373
+#: plugins/Satellites/src/Satellites.cpp:3398
 msgid "active"
 msgstr "active"
 
@@ -18179,7 +18181,7 @@ msgstr "active"
 #. https://celestrak.org/NORAD/elements/analyst.txt
 #. TRANSLATORS: CelesTrak source [Analyst Satellites]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=analyst&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3377
+#: plugins/Satellites/src/Satellites.cpp:3402
 msgid "analyst"
 msgstr "analyst"
 
@@ -18188,7 +18190,7 @@ msgstr "analyst"
 #. https://celestrak.org/NORAD/elements/weather.txt
 #. TRANSLATORS: CelesTrak source [Weather]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=weather&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3384
+#: plugins/Satellites/src/Satellites.cpp:3409
 msgid "weather"
 msgstr "weather"
 
@@ -18197,7 +18199,7 @@ msgstr "weather"
 #. https://celestrak.org/NORAD/elements/noaa.txt
 #. TRANSLATORS: CelesTrak source [NOAA]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3388
+#: plugins/Satellites/src/Satellites.cpp:3413
 msgid "noaa"
 msgstr "noaa"
 
@@ -18206,7 +18208,7 @@ msgstr "noaa"
 #. https://celestrak.org/NORAD/elements/goes.txt
 #. TRANSLATORS: CelesTrak source [GOES]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=goes&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3392
+#: plugins/Satellites/src/Satellites.cpp:3417
 msgid "goes"
 msgstr "goes"
 
@@ -18215,7 +18217,7 @@ msgstr "goes"
 #. https://celestrak.org/NORAD/elements/resource.txt
 #. TRANSLATORS: CelesTrak source [Earth Resources]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=resource&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3396
+#: plugins/Satellites/src/Satellites.cpp:3421
 msgid "resource"
 msgstr "resource"
 
@@ -18224,7 +18226,7 @@ msgstr "resource"
 #. https://celestrak.org/NORAD/elements/sarsat.txt
 #. TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3400
+#: plugins/Satellites/src/Satellites.cpp:3425
 msgid "sarsat"
 msgstr "sarsat"
 
@@ -18233,7 +18235,7 @@ msgstr "sarsat"
 #. https://celestrak.org/NORAD/elements/dmc.txt
 #. TRANSLATORS: CelesTrak source [Disaster Monitoring]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=dmc&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3404
+#: plugins/Satellites/src/Satellites.cpp:3429
 msgid "dmc"
 msgstr "dmc"
 
@@ -18245,7 +18247,7 @@ msgstr "dmc"
 #. TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System
 #. (TDRSS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3408
+#: plugins/Satellites/src/Satellites.cpp:3433
 msgid "tdrss"
 msgstr "tdrss"
 
@@ -18254,7 +18256,7 @@ msgstr "tdrss"
 #. https://celestrak.org/NORAD/elements/argos.txt
 #. TRANSLATORS: CelesTrak source [ARGOS Data Collection System]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=argos&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3412
+#: plugins/Satellites/src/Satellites.cpp:3437
 msgid "argos"
 msgstr "argos"
 
@@ -18264,7 +18266,7 @@ msgstr "argos"
 #. https://celestrak.org/NORAD/elements/spire.txt
 #. TRANSLATORS: CelesTrak source [Spire]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=spire&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3421
+#: plugins/Satellites/src/Satellites.cpp:3446
 msgid "spire"
 msgstr "spire"
 
@@ -18273,7 +18275,7 @@ msgstr "spire"
 #. https://celestrak.org/NORAD/elements/geo.txt
 #. TRANSLATORS: CelesTrak source [Active Geosynchronous]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=geo&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3428
+#: plugins/Satellites/src/Satellites.cpp:3453
 msgid "geo"
 msgstr "geo"
 
@@ -18282,7 +18284,7 @@ msgstr "geo"
 #. https://celestrak.org/satcat/gpz.php
 #. TRANSLATORS: CelesTrak source [GEO Protected Zone]:
 #. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3432
+#: plugins/Satellites/src/Satellites.cpp:3457
 msgid "gpz"
 msgstr "gpz"
 
@@ -18291,7 +18293,7 @@ msgstr "gpz"
 #. https://celestrak.org/satcat/gpz-plus.php
 #. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]:
 #. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3436
+#: plugins/Satellites/src/Satellites.cpp:3461
 msgid "gpz-plus"
 msgstr "gpz-plus"
 
@@ -18303,7 +18305,7 @@ msgstr "gpz-plus"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [INTELSAT TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/intelsat.txt
-#: plugins/Satellites/src/Satellites.cpp:3441
+#: plugins/Satellites/src/Satellites.cpp:3466
 msgid "intelsat"
 msgstr "intelsat"
 
@@ -18314,7 +18316,7 @@ msgstr "intelsat"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=ses&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [SES TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/ses.txt
-#: plugins/Satellites/src/Satellites.cpp:3446
+#: plugins/Satellites/src/Satellites.cpp:3471
 msgid "ses"
 msgstr "ses"
 
@@ -18324,7 +18326,7 @@ msgstr "ses"
 #. https://celestrak.org/NORAD/elements/iridium.txt
 #. TRANSLATORS: CelesTrak source [Iridium]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3450
+#: plugins/Satellites/src/Satellites.cpp:3475
 msgid "iridium"
 msgstr "Iridium"
 
@@ -18334,7 +18336,7 @@ msgstr "Iridium"
 #. https://celestrak.org/NORAD/elements/iridium-NEXT.txt
 #. TRANSLATORS: CelesTrak source [Iridium NEXT]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3454
+#: plugins/Satellites/src/Satellites.cpp:3479
 msgid "iridium-NEXT"
 msgstr "iridium-NEXT"
 
@@ -18346,7 +18348,7 @@ msgstr "iridium-NEXT"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [Starlink TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/starlink.txt
-#: plugins/Satellites/src/Satellites.cpp:3459
+#: plugins/Satellites/src/Satellites.cpp:3484
 msgid "starlink"
 msgstr "starlink"
 
@@ -18358,7 +18360,7 @@ msgstr "starlink"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [OneWeb TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/oneweb.txt
-#: plugins/Satellites/src/Satellites.cpp:3464
+#: plugins/Satellites/src/Satellites.cpp:3489
 msgid "oneweb"
 msgstr "oneweb"
 
@@ -18370,7 +18372,7 @@ msgstr "oneweb"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=orbcomm&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [ORBCOMM TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/orbcomm.txt
-#: plugins/Satellites/src/Satellites.cpp:3469
+#: plugins/Satellites/src/Satellites.cpp:3494
 msgid "orbcomm"
 msgstr "orbcomm"
 
@@ -18380,7 +18382,7 @@ msgstr "orbcomm"
 #. https://celestrak.org/NORAD/elements/globalstar.txt
 #. TRANSLATORS: CelesTrak source [Globalstar]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3473
+#: plugins/Satellites/src/Satellites.cpp:3498
 msgid "globalstar"
 msgstr "globalstar"
 
@@ -18389,7 +18391,7 @@ msgstr "globalstar"
 #. https://celestrak.org/NORAD/elements/swarm.txt
 #. TRANSLATORS: CelesTrak source [Swarm]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=swarm&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3477
+#: plugins/Satellites/src/Satellites.cpp:3502
 msgid "swarm"
 msgstr "swarm"
 
@@ -18398,7 +18400,7 @@ msgstr "swarm"
 #. https://celestrak.org/NORAD/elements/amateur.txt
 #. TRANSLATORS: CelesTrak source [Amateur Radio]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3481
+#: plugins/Satellites/src/Satellites.cpp:3506
 msgid "amateur"
 msgstr "amateur"
 
@@ -18407,7 +18409,7 @@ msgstr "amateur"
 #. https://celestrak.org/NORAD/elements/x-comm.txt
 #. TRANSLATORS: CelesTrak source [Experimental]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3485
+#: plugins/Satellites/src/Satellites.cpp:3510
 msgid "x-comm"
 msgstr "x-comm"
 
@@ -18416,7 +18418,7 @@ msgstr "x-comm"
 #. https://celestrak.org/NORAD/elements/other-comm.txt
 #. TRANSLATORS: CelesTrak source [Other Comm]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3489
+#: plugins/Satellites/src/Satellites.cpp:3514
 msgid "other-comm"
 msgstr "other-comm"
 
@@ -18426,7 +18428,7 @@ msgstr "other-comm"
 #. https://celestrak.org/NORAD/elements/satnogs.txt
 #. TRANSLATORS: CelesTrak source [SatNOGS]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3493
+#: plugins/Satellites/src/Satellites.cpp:3518
 msgid "satnogs"
 msgstr "satnogs"
 
@@ -18436,7 +18438,7 @@ msgstr "satnogs"
 #. https://celestrak.org/NORAD/elements/gorizont.txt
 #. TRANSLATORS: CelesTrak source [Gorizont]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gorizont&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3497
+#: plugins/Satellites/src/Satellites.cpp:3522
 msgid "gorizont"
 msgstr "gorizont"
 
@@ -18445,7 +18447,7 @@ msgstr "gorizont"
 #. https://celestrak.org/NORAD/elements/raduga.txt
 #. TRANSLATORS: CelesTrak source [Raduga]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=raduga&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3501
+#: plugins/Satellites/src/Satellites.cpp:3526
 msgid "raduga"
 msgstr "raduga"
 
@@ -18455,16 +18457,42 @@ msgstr "raduga"
 #. https://celestrak.org/NORAD/elements/molniya.txt
 #. TRANSLATORS: CelesTrak source [Molniya]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=molniya&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3505
+#: plugins/Satellites/src/Satellites.cpp:3530
 msgid "molniya"
 msgstr "molniya"
+
+#. TRANSLATORS: Satellite group: Satellites belonging to the Qianfan
+#. constellation (Qianfan is a proper name)
+#. TRANSLATORS: CelesTrak source [Qianfan]:
+#. https://celestrak.org/NORAD/elements/gp.php?GROUP=qianfan&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3533
+msgid "qianfan"
+msgstr "qianfan"
+
+#. TRANSLATORS: Satellite group: Satellites belonging to the Hulianwang
+#. constellation (Hulianwang is a proper name)
+#. TRANSLATORS: CelesTrak source [Hulianwang Digui]:
+#. https://celestrak.org/NORAD/elements/gp.php?GROUP=hulianwang&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3536
+msgid "hulianwang"
+msgstr "hulianwang"
+
+#. TRANSLATORS: CelesTrak source [Kuiper]:
+#. https://celestrak.org/NORAD/elements/gp.php?GROUP=kuiper&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3538
+msgid "kuiper"
+msgstr "kuiper"
+
+#: plugins/Satellites/src/Satellites.cpp:3539
+msgid "yamal"
+msgstr "yamal"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GNSS satellites
 #. TRANSLATORS: CelesTrak source [GNSS]:
 #. https://celestrak.org/NORAD/elements/gnss.txt
 #. TRANSLATORS: CelesTrak source [GNSS]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gnss&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3512
+#: plugins/Satellites/src/Satellites.cpp:3546
 msgid "gnss"
 msgstr "gnss"
 
@@ -18472,7 +18500,7 @@ msgstr "gnss"
 #. (the Global Positioning System)
 #. TRANSLATORS: CelesTrak supplemental source [GPS TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/gps.txt
-#: plugins/Satellites/src/Satellites.cpp:3515
+#: plugins/Satellites/src/Satellites.cpp:3549
 msgid "gps"
 msgstr "GPS"
 
@@ -18482,7 +18510,7 @@ msgstr "GPS"
 #. https://celestrak.org/NORAD/elements/gps-ops.txt
 #. TRANSLATORS: CelesTrak source [GPS Operational]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3519
+#: plugins/Satellites/src/Satellites.cpp:3553
 msgid "gps-ops"
 msgstr "gps-ops"
 
@@ -18490,7 +18518,7 @@ msgstr "gps-ops"
 #. constellation (GLObal NAvigation Satellite System)
 #. TRANSLATORS: CelesTrak supplemental source [GLONASS TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/glonass.txt
-#: plugins/Satellites/src/Satellites.cpp:3522
+#: plugins/Satellites/src/Satellites.cpp:3556
 msgid "glonass"
 msgstr "Glonass"
 
@@ -18500,7 +18528,7 @@ msgstr "Glonass"
 #. https://celestrak.org/NORAD/elements/glo-ops.txt
 #. TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3526
+#: plugins/Satellites/src/Satellites.cpp:3560
 msgid "glo-ops"
 msgstr "glo-ops"
 
@@ -18510,7 +18538,7 @@ msgstr "glo-ops"
 #. https://celestrak.org/NORAD/elements/galileo.txt
 #. TRANSLATORS: CelesTrak source [Galileo]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=galileo&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3530
+#: plugins/Satellites/src/Satellites.cpp:3564
 msgid "galileo"
 msgstr "Galileo"
 
@@ -18520,7 +18548,7 @@ msgstr "Galileo"
 #. https://celestrak.org/NORAD/elements/beidou.txt
 #. TRANSLATORS: CelesTrak source [Beidou]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=beidou&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3534
+#: plugins/Satellites/src/Satellites.cpp:3568
 msgid "beidou"
 msgstr "beidou"
 
@@ -18531,7 +18559,7 @@ msgstr "beidou"
 #. TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System
 #. (WAAS/EGNOS/MSAS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sbas&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3538
+#: plugins/Satellites/src/Satellites.cpp:3572
 msgid "sbas"
 msgstr "sbas"
 
@@ -18540,7 +18568,7 @@ msgstr "sbas"
 #. https://celestrak.org/NORAD/elements/nnss.txt
 #. TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=nnss&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3542
+#: plugins/Satellites/src/Satellites.cpp:3576
 msgid "nnss"
 msgstr "nnss"
 
@@ -18549,7 +18577,7 @@ msgstr "nnss"
 #. https://celestrak.org/NORAD/elements/musson.txt
 #. TRANSLATORS: CelesTrak source [Russian LEO Navigation]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=musson&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3546
+#: plugins/Satellites/src/Satellites.cpp:3580
 msgid "musson"
 msgstr "musson"
 
@@ -18558,7 +18586,7 @@ msgstr "musson"
 #. https://celestrak.org/NORAD/elements/science.txt
 #. TRANSLATORS: CelesTrak source [Space & Earth Science]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=science&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3553
+#: plugins/Satellites/src/Satellites.cpp:3587
 msgid "science"
 msgstr "science"
 
@@ -18567,7 +18595,7 @@ msgstr "science"
 #. https://celestrak.org/NORAD/elements/geodetic.txt
 #. TRANSLATORS: CelesTrak source [Geodetic]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=geodetic&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3557
+#: plugins/Satellites/src/Satellites.cpp:3591
 msgid "geodetic"
 msgstr "geodetic"
 
@@ -18576,7 +18604,7 @@ msgstr "geodetic"
 #. https://celestrak.org/NORAD/elements/engineering.txt
 #. TRANSLATORS: CelesTrak source [Engineering]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=engineering&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3561
+#: plugins/Satellites/src/Satellites.cpp:3595
 msgid "engineering"
 msgstr "engineering"
 
@@ -18585,7 +18613,7 @@ msgstr "engineering"
 #. https://celestrak.org/NORAD/elements/education.txt
 #. TRANSLATORS: CelesTrak source [Education]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=education&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3565
+#: plugins/Satellites/src/Satellites.cpp:3599
 msgid "education"
 msgstr "education"
 
@@ -18594,7 +18622,7 @@ msgstr "education"
 #. https://celestrak.org/NORAD/elements/military.txt
 #. TRANSLATORS: CelesTrak source [Miscellaneous Military]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=military&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3572
+#: plugins/Satellites/src/Satellites.cpp:3606
 msgid "military"
 msgstr "military"
 
@@ -18603,7 +18631,7 @@ msgstr "military"
 #. https://celestrak.org/NORAD/elements/radar.txt
 #. TRANSLATORS: CelesTrak source [Radar Calibration]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=radar&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3576
+#: plugins/Satellites/src/Satellites.cpp:3610
 msgid "radar"
 msgstr "radar"
 
@@ -18612,7 +18640,7 @@ msgstr "radar"
 #. https://celestrak.org/NORAD/elements/cubesat.txt
 #. TRANSLATORS: CelesTrak source [CubeSats]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3580
+#: plugins/Satellites/src/Satellites.cpp:3614
 msgid "cubesat"
 msgstr "cubesat"
 
@@ -18621,100 +18649,100 @@ msgstr "cubesat"
 #. https://celestrak.org/NORAD/elements/other.txt
 #. TRANSLATORS: CelesTrak source [Other]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=other&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3584
+#: plugins/Satellites/src/Satellites.cpp:3618
 msgid "other"
 msgstr "other"
 
 #. TRANSLATORS: Satellite group: Meteosat
 #. TRANSLATORS: CelesTrak supplemental source [METEOSAT TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/meteosat.txt
-#: plugins/Satellites/src/Satellites.cpp:3591
+#: plugins/Satellites/src/Satellites.cpp:3625
 msgid "meteosat"
 msgstr "meteosat"
 
 #. TRANSLATORS: Satellite group: Telesat
 #. TRANSLATORS: CelesTrak supplemental source [Telesat TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/telesat.txt
-#: plugins/Satellites/src/Satellites.cpp:3595
+#: plugins/Satellites/src/Satellites.cpp:3629
 msgid "telesat"
 msgstr "telesat"
 
 #. TRANSLATORS: Satellite group: ISS Segments
 #. TRANSLATORS: CelesTrak supplemental source [ISS TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/iss.txt
-#: plugins/Satellites/src/Satellites.cpp:3598
+#: plugins/Satellites/src/Satellites.cpp:3632
 msgid "iss"
 msgstr "iss"
 
 #. TRANSLATORS: Satellite group: CPF
 #. TRANSLATORS: CelesTrak supplemental source [CPF TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/cpf.txt
-#: plugins/Satellites/src/Satellites.cpp:3601
+#: plugins/Satellites/src/Satellites.cpp:3635
 msgid "cpf"
 msgstr "cpf"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3605
+#: plugins/Satellites/src/Satellites.cpp:3639
 msgid "ISS (ZARYA)"
 msgstr "ISS (ZARYA)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3607
+#: plugins/Satellites/src/Satellites.cpp:3641
 msgid "ISS (NAUKA)"
 msgstr "ISS (NAUKA)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3609
+#: plugins/Satellites/src/Satellites.cpp:3643
 msgid "ISS"
 msgstr "ISS"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:3611
+#: plugins/Satellites/src/Satellites.cpp:3645
 msgid "HST"
 msgstr "HST"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:3613
+#: plugins/Satellites/src/Satellites.cpp:3647
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: Spektr-RG Space Observatory
-#: plugins/Satellites/src/Satellites.cpp:3615
+#: plugins/Satellites/src/Satellites.cpp:3649
 msgid "SPEKTR-RG"
 msgstr "SPEKTR-RG"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:3617
+#: plugins/Satellites/src/Satellites.cpp:3651
 msgid "INTEGRAL"
 msgstr "INTEGRAL"
 
 #. TRANSLATORS: Satellite name: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:3619
+#: plugins/Satellites/src/Satellites.cpp:3653
 msgid "TIANGONG 1"
 msgstr "TIANGONG 1"
 
 #. TRANSLATORS: Satellite name: name of China's space station module
-#: plugins/Satellites/src/Satellites.cpp:3621
+#: plugins/Satellites/src/Satellites.cpp:3655
 msgid "TIANHE"
 msgstr "TIANHE"
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base
 #. module)
-#: plugins/Satellites/src/Satellites.cpp:3623
+#: plugins/Satellites/src/Satellites.cpp:3657
 msgid "TIANGONG (TIANHE)"
 msgstr "TIANGONG (TIANHE)"
 
 #. TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a
 #. satellite
-#: plugins/Satellites/src/Satellites.cpp:3628
+#: plugins/Satellites/src/Satellites.cpp:3662
 msgctxt "comms"
 msgid "uplink"
 msgstr "uplink"
 
 #. TRANSLATORS: A downlink (DL) is the link from a satellite to a ground
 #. station
-#: plugins/Satellites/src/Satellites.cpp:3630
+#: plugins/Satellites/src/Satellites.cpp:3664
 msgctxt "comms"
 msgid "downlink"
 msgstr "downlink"
@@ -18723,7 +18751,7 @@ msgstr "downlink"
 #. which emit one or more signals (normally on a fixed frequency) whose
 #. purpose is twofold: station-keeping information (telemetry) and locates the
 #. satellite (determines its azimuth and elevation) in the sky
-#: plugins/Satellites/src/Satellites.cpp:3632
+#: plugins/Satellites/src/Satellites.cpp:3666
 msgctxt "comms"
 msgid "beacon"
 msgstr "beacon"
@@ -18731,65 +18759,65 @@ msgstr "beacon"
 #. TRANSLATORS: Telemetry is the collection of measurements or other data at
 #. satellites and their automatic transmission to receiving equipment
 #. (telecommunication) for monitoring
-#: plugins/Satellites/src/Satellites.cpp:3634
+#: plugins/Satellites/src/Satellites.cpp:3668
 msgctxt "comms"
 msgid "telemetry"
 msgstr "telemetry"
 
 #. TRANSLATORS: The channel for transmission of video data
-#: plugins/Satellites/src/Satellites.cpp:3636
+#: plugins/Satellites/src/Satellites.cpp:3670
 msgctxt "comms"
 msgid "video"
 msgstr "video"
 
 #. TRANSLATORS: The broadband is wide bandwidth data transmission which
 #. transports multiple signals at a wide range of frequencies
-#: plugins/Satellites/src/Satellites.cpp:3638
+#: plugins/Satellites/src/Satellites.cpp:3672
 msgctxt "comms"
 msgid "broadband"
 msgstr "broadband"
 
 #. TRANSLATORS: The channel for transmission of commands
-#: plugins/Satellites/src/Satellites.cpp:3640
+#: plugins/Satellites/src/Satellites.cpp:3674
 msgctxt "comms"
 msgid "command"
 msgstr "command"
 
 #. TRANSLATORS: Meteorological is a service on the satellite for transmitting
 #. meteorological data to a ground station
-#: plugins/Satellites/src/Satellites.cpp:3642
+#: plugins/Satellites/src/Satellites.cpp:3676
 msgctxt "comms"
 msgid "meteorological"
 msgstr "meteorological"
 
 #. TRANSLATORS: Maritime is a service on the satellite
-#: plugins/Satellites/src/Satellites.cpp:3644
+#: plugins/Satellites/src/Satellites.cpp:3678
 msgctxt "comms"
 msgid "maritime"
 msgstr "maritime"
 
 #. TRANSLATORS: Mobile is a service on the satellite
-#: plugins/Satellites/src/Satellites.cpp:3646
+#: plugins/Satellites/src/Satellites.cpp:3680
 msgctxt "comms"
 msgid "mobile"
 msgstr "mobile"
 
 #. TRANSLATORS: Mobile telephony is a service on the satellite
-#: plugins/Satellites/src/Satellites.cpp:3648
+#: plugins/Satellites/src/Satellites.cpp:3682
 msgctxt "comms"
 msgid "mobile telephony"
 msgstr "mobile telephony"
 
 #. TRANSLATORS: A repeater is an electronic device that receives a signal and
 #. retransmits it.
-#: plugins/Satellites/src/Satellites.cpp:3650
+#: plugins/Satellites/src/Satellites.cpp:3684
 msgctxt "comms"
 msgid "repeater"
 msgstr "repeater"
 
 #. TRANSLATORS: The digital repeater (or digipiter) is used in channels that
 #. transmit data by binary digital signals
-#: plugins/Satellites/src/Satellites.cpp:3652
+#: plugins/Satellites/src/Satellites.cpp:3686
 msgctxt "comms"
 msgid "digipeater"
 msgstr "digipeater"
@@ -18797,23 +18825,23 @@ msgstr "digipeater"
 #. TRANSLATORS: A radio band is a small frequency band (a contiguous section
 #. of the range of the radio spectrum) in which channels are usually used or
 #. set aside for the same purpose. S-band for example.
-#: plugins/Satellites/src/Satellites.cpp:3654
+#: plugins/Satellites/src/Satellites.cpp:3688
 msgctxt "comms"
 msgid "-band"
 msgstr "-band"
 
-#: plugins/Satellites/src/Satellites.cpp:3655
+#: plugins/Satellites/src/Satellites.cpp:3689
 msgctxt "comms"
 msgid "crew voice"
 msgstr "crew voice"
 
-#: plugins/Satellites/src/Satellites.cpp:3656
+#: plugins/Satellites/src/Satellites.cpp:3690
 msgctxt "comms"
 msgid "imaging"
 msgstr "imaging"
 
 #. TRANSLATORS: Some mode of communication via radio channel
-#: plugins/Satellites/src/Satellites.cpp:3658
+#: plugins/Satellites/src/Satellites.cpp:3692
 msgctxt "comms"
 msgid "mode"
 msgstr "mode"
@@ -34171,7 +34199,7 @@ msgstr "Show window for Online Queries"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:108
 msgid "Call All Skies Encyclopaedia on current selection"
-msgstr ""
+msgstr "Call All Skies Encyclopaedia on current selection"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:109
 msgid "Call AAVSO database on current selection"
@@ -34232,6 +34260,8 @@ msgid ""
 "We can request data for stars, constellations, asterisms, planets and deep-"
 "sky objects only."
 msgstr ""
+"We can request data for stars, constellations, asterisms, planets and deep-"
+"sky objects only."
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:107
 msgctxt "GUI label"
@@ -34294,6 +34324,8 @@ msgid ""
 "ASE, the All-Skies Encyclopaedia, a private project which collects "
 "information about star names and their mythologies"
 msgstr ""
+"ASE, the All-Skies Encyclopaedia, a private project which collects "
+"information about star names and their mythologies"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:192
 msgid "3 custom websites of your choice"
@@ -34889,133 +34921,135 @@ msgstr "Mark centre of projection"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:784
 msgid "Reset image position on loading"
-msgstr ""
+msgstr "Reset image position on loading"
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:150
 msgid "Sending login request..."
-msgstr ""
+msgstr "Sending login request..."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:169
 #: plugins/NebulaTextures/src/PlateSolver.cpp:254
 msgid "Network reply error."
-msgstr ""
+msgstr "Network reply error."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:176
 msgid "Invalid API key or login error."
-msgstr ""
+msgstr "Invalid API key or login error."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:194
 msgid "Failed to open image file."
-msgstr ""
+msgstr "Failed to open image file."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:235
 msgid "Uploading image..."
-msgstr ""
+msgstr "Uploading image..."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:287
 #, qt-format
 msgid "Checking submission status (%1/%2)..."
-msgstr ""
+msgstr "Checking submission status (%1/%2)..."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:310
 msgid "Submission status request failed after retries."
-msgstr ""
+msgstr "Submission status request failed after retries."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:323
 msgid "Job ID received. Processing..."
-msgstr ""
+msgstr "Job ID received. Processing..."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:326
 #, qt-format
 msgid "Astrometry error. %1"
-msgstr ""
+msgstr "Astrometry error. %1"
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:352
 #, qt-format
 msgid "Checking job status (%1/%2)..."
-msgstr ""
+msgstr "Checking job status (%1/%2)..."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:375
 msgid "Job status request failed after retries."
-msgstr ""
+msgstr "Job status request failed after retries."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:387
 msgid "Job completed. Downloading WCS file..."
-msgstr ""
+msgstr "Job completed. Downloading WCS file..."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:391
 msgid "Job failed during processing."
-msgstr ""
+msgstr "Job failed during processing."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:425
 msgid "Failed to download WCS file."
-msgstr ""
+msgstr "Failed to download WCS file."
 
-#: plugins/NebulaTextures/src/NebulaTextures.cpp:47
-#: plugins/NebulaTextures/src/NebulaTextures.cpp:92
+#: plugins/NebulaTextures/src/NebulaTextures.cpp:48
 #: plugins/NebulaTextures/src/NebulaTextures.cpp:93
+#: plugins/NebulaTextures/src/NebulaTextures.cpp:94
 msgid "Nebula Textures"
-msgstr ""
+msgstr "Nebula Textures"
 
-#: plugins/NebulaTextures/src/NebulaTextures.cpp:50
+#: plugins/NebulaTextures/src/NebulaTextures.cpp:51
 msgid ""
 "This plugin can plate-solve and position astronomical images, adding them as"
 " custom deep-sky object textures for rendering."
 msgstr ""
+"This plugin can plate-solve and position astronomical images, adding them as"
+" custom deep-sky object textures for rendering."
 
-#: plugins/NebulaTextures/src/NebulaTextures.cpp:92
+#: plugins/NebulaTextures/src/NebulaTextures.cpp:93
 msgid "Toggle Custom Nebula Textures"
-msgstr ""
+msgstr "Toggle Custom Nebula Textures"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:119
 msgid "Astrometry API key:"
-msgstr ""
+msgstr "Astrometry API key:"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:120
 msgctxt "overlay mode"
 msgid "Bright"
-msgstr ""
+msgstr "Bright"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:121
 msgctxt "overlay mode"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:122
 msgctxt "overlay mode"
 msgid "Dark"
-msgstr ""
+msgstr "Dark"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:190
 msgid "Login success..."
-msgstr ""
+msgstr "Login success..."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:194
 #, qt-format
 msgid "Login failed: %1"
-msgstr ""
+msgstr "Login failed: %1"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:199
 msgid "Image uploaded. Please wait..."
-msgstr ""
+msgstr "Image uploaded. Please wait..."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:203
 #, qt-format
 msgid "Upload failed: %1"
-msgstr ""
+msgstr "Upload failed: %1"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:212
 #, qt-format
 msgid "Solve failed: %1"
-msgstr ""
+msgstr "Solve failed: %1"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:217
 msgid "World Coordinate System data download complete. Processing..."
-msgstr ""
+msgstr "World Coordinate System data download complete. Processing..."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:301
 msgid "Nebula Textures Plugin"
-msgstr ""
+msgstr "Nebula Textures Plugin"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:307
 msgid ""
@@ -35028,252 +35062,266 @@ msgid ""
 "not flipped horizontally or vertically), solve its coordinates, and enjoy a "
 "personalized celestial view!"
 msgstr ""
+"The Nebula Textures plugin enhances your Stellarium experience by allowing "
+"you to customise and render deep-sky object (DSO) textures. Whether you're "
+"an astronomy enthusiast with astrophotography or astronomical sketches and "
+"paintings, this plugin lets you integrate your own images into Stellarium. "
+"It also supports online plate-solving via Astrometry.net for precise "
+"positioning of astronomical images. Simply upload your image (ensure it is "
+"not flipped horizontally or vertically), solve its coordinates, and enjoy a "
+"personalised celestial view!"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:312
 msgid "See User Guide for details. Plugin data is located in:"
-msgstr ""
+msgstr "See User Guide for details. Plugin data is located in:"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:368
 msgid "Open Image"
-msgstr ""
+msgstr "Open Image"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:373
 #, qt-format
 msgid "File selected: %1"
-msgstr ""
+msgstr "File selected: %1"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:386
 msgid "Operation cancelled by user."
-msgstr ""
+msgstr "Operation cancelled by user."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:402
 msgid "Please provide both API key and image path."
-msgstr ""
+msgstr "Please provide both API key and image path."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:409
 msgid "The specified image file does not exist or is not readable."
-msgstr ""
+msgstr "The specified image file does not exist or is not readable."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:417
 msgid "Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."
-msgstr ""
+msgstr "Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:424
 msgid "Sending requests..."
-msgstr ""
+msgstr "Sending requests..."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:441
 msgid "Invalid WCS data."
-msgstr ""
+msgstr "Invalid WCS data."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:491
 msgid ""
 "Processing completed! Goto Center Point, Test this texture, and Add to "
 "Custom Storage."
 msgstr ""
+"Processing completed! Goto Centre Point, Test this texture, and Add to "
+"Custom Storage."
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:535
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:534
 msgid "Are you sure to recover the solution?"
-msgstr ""
+msgstr "Are you sure to recover the solution?"
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:570
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:569
 msgid "Stop test"
-msgstr ""
+msgstr "Stop test"
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:572
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:571
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:533
 msgid "Test this texture"
-msgstr ""
+msgstr "Test this texture"
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:695
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:694
 msgid ""
 "Caution! Are you sure to add this texture? It will only take effect after "
 "restarting Stellarium."
 msgstr ""
+"Caution! Are you sure to add this texture? It will only take effect after "
+"restarting Stellarium."
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:726
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:725
 msgid "Failed to load texture configuration."
-msgstr ""
+msgstr "Failed to load texture configuration."
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:736
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:735
 msgid "Imported custom textures successfully!"
-msgstr ""
+msgstr "Imported custom textures successfully!"
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:752
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:751
 msgid "Image path is empty."
-msgstr ""
+msgstr "Image path is empty."
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:764
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:763
 msgid "Image file invalid or unreadable."
-msgstr ""
+msgstr "Image file invalid or unreadable."
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:772
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:771
 msgid "Invalid image format."
-msgstr ""
+msgstr "Invalid image format."
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:784
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:783
 msgid "Failed to copy image file."
-msgstr ""
+msgstr "Failed to copy image file."
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:814
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:813
 msgid "Are you sure to remove this texture?"
-msgstr ""
+msgstr "Are you sure to remove this texture?"
 
-#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:826
+#: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:825
 msgid "Texture removed."
-msgstr ""
+msgstr "Texture removed."
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:479
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:480
 msgid "Nebula Textures Plug-in Configuration"
-msgstr ""
+msgstr "Nebula Textures Plug-in Configuration"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:481
 msgid "Online plate-solving"
-msgstr ""
+msgstr "Online plate-solving"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:482
 msgid "Open File"
-msgstr ""
+msgstr "Open File"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:483
 msgid "Image Filepath:"
-msgstr ""
+msgstr "Image Filepath:"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:485
 msgid "Online Solve"
-msgstr ""
+msgstr "Online Solve"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:486
 msgid "Remember me"
-msgstr ""
+msgstr "Remember me"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:487
 msgid ""
 "Select and upload astrophotography image to solve coordinates with "
 "Astrometry.net"
 msgstr ""
+"Select and upload astrophotography image to solve coordinates with "
+"Astrometry.net"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:488
 msgid "Goto celestial center and Adjust corner coordinates"
-msgstr ""
+msgstr "Goto celestial centre and Adjust corner coordinates"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:490
 msgid "Declination of top left corner of image"
-msgstr ""
+msgstr "Declination of top left corner of image"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:492
 msgid "Dec (↖)"
-msgstr ""
+msgstr "Dec (↖)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:494
 msgid "Right ascension of bottom left corner of image"
-msgstr ""
+msgstr "Right ascension of bottom left corner of image"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:496
 msgid "RA (↙)"
-msgstr ""
+msgstr "RA (↙)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:498
 msgid "Declination of bottom left corner of image"
-msgstr ""
+msgstr "Declination of bottom left corner of image"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:500
 msgid "Dec (↙)"
-msgstr ""
+msgstr "Dec (↙)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:502
 msgid "Right ascension of center of image"
-msgstr ""
+msgstr "Right ascension of centre of image"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:504
 msgid "RA (Center)"
-msgstr ""
+msgstr "RA (Centre)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:506
 msgid "Right ascension of top left corner of image"
-msgstr ""
+msgstr "Right ascension of top left corner of image"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:508
 msgid "RA (↖)"
-msgstr ""
+msgstr "RA (↖)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:510
 msgid "Declination of center of image"
-msgstr ""
+msgstr "Declination of centre of image"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:512
 msgid "Dec (Center)"
-msgstr ""
+msgstr "Dec (Centre)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:514
 msgid "Right ascension of top right corner of image"
-msgstr ""
+msgstr "Right ascension of top right corner of image"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:516
 msgid "RA (↗)"
-msgstr ""
+msgstr "RA (↗)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:518
 msgid "Declination of top right corner of image"
-msgstr ""
+msgstr "Declination of top right corner of image"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:520
 msgid "Dec (↗)"
-msgstr ""
+msgstr "Dec (↗)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:522
 msgid "Right ascension of bottom right corner of image"
-msgstr ""
+msgstr "Right ascension of bottom right corner of image"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:524
 msgid "RA (↘)"
-msgstr ""
+msgstr "RA (↘)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:526
 msgid "Declination of bottom right corner of image"
-msgstr ""
+msgstr "Declination of bottom right corner of image"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:528
 msgid "Dec (↘)"
-msgstr ""
+msgstr "Dec (↘)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:529
 msgid "Goto Center"
-msgstr ""
+msgstr "Goto Centre"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:531
 msgid "Rendering tester"
-msgstr ""
+msgstr "Rendering tester"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:532
 msgid "Disable default textures"
-msgstr ""
+msgstr "Disable default textures"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:537
 msgid "Add the Texture to Custom Storage"
-msgstr ""
+msgstr "Add the Texture to Custom Storage"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:539
 msgid "Import"
-msgstr ""
+msgstr "Import"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:540
 msgid "Show Custom Textures"
-msgstr ""
+msgstr "Show Custom Textures"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:541
 msgid "Avoid Area Conflict"
-msgstr ""
+msgstr "Avoid Area Conflict"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:542
 msgid "Reload"
-msgstr ""
+msgstr "Reload"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:543
 msgid "Remove select item in Custom Textures"
-msgstr ""
+msgstr "Remove select item in Custom Textures"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:544
 msgid "Manage"
-msgstr ""
+msgstr "Manage"

@@ -87,7 +87,7 @@ void printSystemInfo()
         log(QString("Addressing mode: %1").arg(StelUtils::getAddressingMode()));
 
 	// write CPU and memory info
-	log(QString("Processor architecture: %1").arg(QSysInfo::currentCpuArchitecture()));
+        log(QString("CPU architecture: %1").arg(QSysInfo::currentCpuArchitecture()));
 
 #ifdef Q_OS_WIN
 	// Use WMI
@@ -121,13 +121,13 @@ void printSystemInfo()
 					break;
 
 				hr = obj->Get(L"Name", 0, &vt_prop, nullptr, nullptr);
-				log(QString("Processor name: %1").arg(vt_prop.bstrVal));
+                                log(QString("CPU name: %1").arg(vt_prop.bstrVal));
 
 				hr = obj->Get(L"MaxClockSpeed", 0, &vt_prop, nullptr, nullptr);
-				log(QString("Processor maximum speed: %1 MHz").arg(vt_prop.uintVal));
+                                log(QString("CPU maximum speed: %1 MHz").arg(vt_prop.uintVal));
 
 				hr = obj->Get(L"NumberOfLogicalProcessors", 0, &vt_prop, nullptr, nullptr);
-				log(QString("Processor logical cores: %1").arg(vt_prop.intVal));
+                                log(QString("CPU logical cores: %1").arg(vt_prop.intVal));
 
 				VariantClear(&vt_prop);
 				obj->Release();
@@ -161,10 +161,10 @@ void printSystemInfo()
 					break;
 
 				hr = obj->Get(L"Name", 0, &vt_prop, nullptr, nullptr);
-				log(QString("Video controller name: %1").arg(vt_prop.bstrVal));
+                                log(QString("GPU name: %1").arg(vt_prop.bstrVal));
 
 				hr = obj->Get(L"AdapterRAM", 0, &vt_prop, nullptr, nullptr);
-				log(QString("Video controller RAM: %1 MB").arg(vt_prop.ullVal/(1024<<10)));
+                                log(QString("GPU RAM: %1 MB").arg(vt_prop.ullVal/(1024<<10)));
 
 				hr = obj->Get(L"CurrentHorizontalResolution", 0, &vt_prop, nullptr, nullptr);
 				int currHRes = vt_prop.intVal;
@@ -184,22 +184,37 @@ void printSystemInfo()
 #endif
 
 #ifdef Q_OS_MACOS
+	// CPU info
 	size_t size = 0;
 	sysctlbyname("machdep.cpu.brand_string", nullptr, &size, nullptr, 0);
 	std::string cpuname(size, '\0');
 	sysctlbyname("machdep.cpu.brand_string", const_cast<char *>(cpuname.data()), &size, nullptr, 0);
-	log(QString("Processor name: %1").arg(cpuname.data()));
+        log(QString("CPU name: %1").arg(cpuname.data()));
 
 	int64_t maxFreq = 0;
 	size = sizeof(maxFreq);
 	if (sysctlbyname("hw.cpufrequency_max", &maxFreq, &size, nullptr, 0) != -1)
-		log(QString("Processor maximum speed: %1 MHz").arg(maxFreq/1000000));
+                log(QString("CPU maximum speed: %1 MHz").arg(maxFreq/1000000));
+	else
+	{
+		// Apple Silicon case
+		int64_t tbFreq = 0;
+		size = sizeof(tbFreq);
+		sysctlbyname("hw.tbfrequency", &tbFreq, &size, nullptr, 0);
+
+		struct clockinfo clockinfo;
+		size = sizeof(clockinfo);
+		sysctlbyname("kern.clockrate", &clockinfo, &size, nullptr, 0);
+
+		log(QString("CPU maximum speed: %1 MHz").arg((tbFreq*clockinfo.hz)/1000000));
+	}
 
 	int ncpu = 0;
 	size = sizeof(ncpu);
 	sysctlbyname("hw.ncpu", &ncpu, &size, nullptr, 0);
-	log(QString("Processor logical cores: %1").arg(ncpu));
+        log(QString("CPU logical cores: %1").arg(ncpu));
 
+	// RAM info
 	uint64_t totalRAM = 0;
 	size = sizeof(totalRAM);
 	sysctlbyname("hw.memsize", &totalRAM, &size, nullptr, 0);
@@ -257,13 +272,13 @@ void printSystemInfo()
 
 	if (cpuOK)
 	{
-		log(QString("Processor name: %1").arg(cpumodel));
+                log(QString("CPU name: %1").arg(cpumodel));
 		if (!hardware.isEmpty())
-			log(QString("Processor hardware: %1").arg(hardware));
+                        log(QString("CPU hardware: %1").arg(hardware));
 		if (!model.isEmpty())
 			log(QString("Device model: %1").arg(model));
-		log(QString("Processor maximum speed: %1 MHz").arg(freq));
-		log(QString("Processor logical cores: %1").arg(ncpu));
+                log(QString("CPU maximum speed: %1 MHz").arg(freq));
+                log(QString("CPU logical cores: %1").arg(ncpu));
 	}
 
 	// memory info
@@ -294,17 +309,17 @@ void printSystemInfo()
 	sysctlbyname(_model, nullptr, &len, nullptr, 0);
 	std::string model(len, '\0');
 	sysctlbyname(_model, const_cast<char *>(model.data()), &len, nullptr, 0);
-	log(QString("Processor name: %1").arg(model.data()));
+        log(QString("CPU name: %1").arg(model.data()));
 
 	int64_t freq = 0;
 	len = sizeof(freq);
 	sysctlbyname("machdep.tsc_freq", &freq, &len, nullptr, 0);
-	log(QString("Processor speed: %1 MHz").arg(freq/1000000));
+        log(QString("CPU speed: %1 MHz").arg(freq/1000000));
 
 	int ncpu = 0;
 	len = sizeof(ncpu);
 	sysctlbyname("hw.ncpu", &ncpu, &len, nullptr, 0);
-	log(QString("Processor logical cores: %1").arg(ncpu));
+        log(QString("CPU logical cores: %1").arg(ncpu));
 
 	// memory info
 	uint64_t totalRAM = 0;
@@ -324,19 +339,19 @@ void printSystemInfo()
 	mib[1] = HW_MODEL;
 	sysctl(mib, 2, model.data(), &len, NULL, 0);
 	model.resize(len);
-	log(QString("Processor name: %1").arg(model.data()));
+        log(QString("CPU name: %1").arg(model.data()));
 
 	mib[0] = CTL_HW;
 	mib[1] = HW_CPUSPEED;
 	len = sizeof(freq);
 	sysctl(mib, 2, &freq, &len, NULL, 0);
-	log(QString("Processor speed: %1 MHz").arg(freq));
+        log(QString("CPU speed: %1 MHz").arg(freq));
 
 	mib[0] = CTL_HW;
 	mib[1] = HW_NCPU;
 	len = sizeof(ncpu);
 	sysctl(mib, 2, &ncpu, &len, NULL, 0);
-	log(QString("Processor logical cores: %1").arg(ncpu));
+        log(QString("CPU logical cores: %1").arg(ncpu));
 
 	// memory info
 	mib[0] = CTL_HW;
@@ -354,11 +369,11 @@ void printSystemInfo()
 #ifdef Q_OS_SOLARIS
 	processor_info_t pinfo;
 	processor_info(0, &pinfo);
-	//log(QString("Processor name: %1").arg(pinfo.pi_processor_type));
-	log(QString("Processor speed: %1 MHz").arg(pinfo.pi_clock));
+        //log(QString("CPU name: %1").arg(pinfo.pi_processor_type));
+        log(QString("CPU speed: %1 MHz").arg(pinfo.pi_clock));
 
 	int ncpu = sysconf( _SC_NPROCESSORS_ONLN );
-	log(QString("Processor logical cores: %1").arg(ncpu));
+        log(QString("CPU logical cores: %1").arg(ncpu));
 
 	// memory info
 	uint64_t totalRAM = (size_t)sysconf( _SC_PHYS_PAGES ) * (size_t)sysconf( _SC_PAGESIZE );
@@ -402,13 +417,13 @@ void printSystemInfo()
 	else
 		clockSpeed = QString("%1 GHz").arg(QString::number(frequency/1000.f, 'f', 2));
 
-	log(QString("Processor name: %1 %2 @ %3").arg(get_cpu_vendor_string(cpuVendor), get_cpu_model_string(platform, cpuVendor, cpuModel), clockSpeed));
-	log(QString("Processor speed: %1 MHz").arg(frequency));
+        log(QString("CPU name: %1 %2 @ %3").arg(get_cpu_vendor_string(cpuVendor), get_cpu_model_string(platform, cpuVendor, cpuModel), clockSpeed));
+        log(QString("CPU speed: %1 MHz").arg(frequency));
 
 	system_info hwinfo;
 	get_system_info(&hwinfo);
 
-	log(QString("Processor logical cores: %1").arg(hwinfo.cpu_count));
+        log(QString("CPU logical cores: %1").arg(hwinfo.cpu_count));
 
 	// memory info
 	uint64_t totalRAM = round(hwinfo.max_pages*B_PAGE_SIZE/1048576.0 + hwinfo.ignored_pages*B_PAGE_SIZE/1048576.0);

@@ -566,6 +566,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->infoLabelTransliterationCheckBox  , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
 	connect(ui->infoLabelTranslationCheckBox      , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
 	connect(ui->infoLabelIPACheckBox              , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelBynameCheckBox           , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
 	connect(ui->infoLabelModernCheckBox           , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
 
 	connect(ui->screenLabelNativeCheckBox         , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
@@ -573,6 +574,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->screenLabelTransliterationCheckBox, &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
 	connect(ui->screenLabelTranslationCheckBox    , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
 	connect(ui->screenLabelIPACheckBox            , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelBynameCheckBox         , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
 	connect(ui->screenLabelModernCheckBox         , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
 
 	connectBoolProperty(ui->abbreviatedNamesCheckBox,               "StelSkyCultureMgr.flagUseAbbreviatedNames");
@@ -1199,12 +1201,14 @@ void ViewDialog::configureSkyCultureCheckboxes()
 	ui->infoLabelTransliterationCheckBox  ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Translit));
 	ui->infoLabelTranslationCheckBox      ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Translated));
 	ui->infoLabelIPACheckBox              ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::IPA));
+	ui->infoLabelBynameCheckBox           ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Byname));
 	ui->infoLabelModernCheckBox           ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Modern));
 	ui->screenLabelNativeCheckBox         ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Native));
 	ui->screenLabelPronounceCheckBox      ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Pronounce));
 	ui->screenLabelTransliterationCheckBox->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Translit));
 	ui->screenLabelTranslationCheckBox    ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Translated));
 	ui->screenLabelIPACheckBox            ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::IPA));
+	ui->screenLabelBynameCheckBox         ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Byname));
 	ui->screenLabelModernCheckBox         ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Modern));
 
 	ui->zodiacCheckBox->setEnabled(hasZodiac);
@@ -1222,6 +1226,7 @@ void ViewDialog::updateSkyCultureInfoStyleFromCheckboxes()
 	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
 
 	scMgr->setInfoLabelStyle(static_cast<StelObject::CulturalDisplayStyle>(
+				int(ui->infoLabelBynameCheckBox         ->isChecked()) << 6 |
 				int(ui->infoLabelNativeCheckBox         ->isChecked()) << 5 |
 				int(ui->infoLabelPronounceCheckBox      ->isChecked()) << 4 |
 				int(ui->infoLabelTransliterationCheckBox->isChecked()) << 3 |
@@ -1236,6 +1241,7 @@ void ViewDialog::updateSkyCultureScreenStyleFromCheckboxes()
 	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
 
 	scMgr->setScreenLabelStyle(static_cast<StelObject::CulturalDisplayStyle>(
+				int(ui->screenLabelBynameCheckBox         ->isChecked()) << 6 |
 				int(ui->screenLabelNativeCheckBox         ->isChecked()) << 5 |
 				int(ui->screenLabelPronounceCheckBox      ->isChecked()) << 4 |
 				int(ui->screenLabelTransliterationCheckBox->isChecked()) << 3 |
@@ -1422,7 +1428,6 @@ void ViewDialog::updateDefaultSkyCulture()
 	ui->rayHelperThicknessSpinBox->setEnabled(b);
 	ui->colorRayHelpers->setEnabled(b);
 	ui->asterismsFontSizeSpinBox->setEnabled(b);
-	ui->constellationPickCheckBox->setEnabled(b);
 }
 
 void ViewDialog::updateDefaultLandscape()

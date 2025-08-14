@@ -88,7 +88,11 @@ public:
 	//! The base client does nothing.
 	//! Derived classes may override this command
 	//! @todo: Properly document method and the arguments
-	virtual void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject){};
+	virtual void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject)
+	{
+		Q_UNUSED(j2000Pos)
+		Q_UNUSED(selectObject)
+	};
 	//! report whether this client can respond to sync commands.
 	//! Can be used for GUI tweaks
 	virtual bool isTelescopeSyncSupported() const {return false;}

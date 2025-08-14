@@ -77,7 +77,6 @@ private slots:
 	void setTimeFormat(const QString &format);
 	void setSkyCulture(const QString &i18);
 	void setAppLanguage(const QString &lang);
-	void setSkyLanguage(const QString &lang);
 	void saveDefaultSettings(void);
 	void shutDown(void);
 

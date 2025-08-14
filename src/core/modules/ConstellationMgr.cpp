@@ -307,7 +307,13 @@ void ConstellationMgr::deselectConstellations(void)
 
 void ConstellationMgr::selectAllConstellations()
 {
-	setSelectedConst(constellations);
+	// We really must select in a loop! (GH:#4415)
+	for (auto* constellation : qAsConst(constellations))
+	{
+		QList<Constellation *>cList;
+		cList.append(constellation);
+		setSelectedConst(cList);
+	}
 }
 
 void ConstellationMgr::selectConstellation(const QString &englishName)
@@ -793,6 +799,7 @@ void ConstellationMgr::updateI18n()
 	for (auto* constellation : std::as_const(constellations))
 	{
 		QString context = constellation->context;
+
 		constellation->culturalName.translatedI18n = trans.tryQtranslate(constellation->culturalName.translated, context);
 		if (constellation->culturalName.translatedI18n.isEmpty())
 		{
@@ -801,6 +808,7 @@ void ConstellationMgr::updateI18n()
 			else
 				constellation->culturalName.translatedI18n = qc_(constellation->culturalName.translated, context);
 		}
+
 		constellation->culturalName.pronounceI18n = trans.tryQtranslate(constellation->culturalName.pronounce, context);
 		if (constellation->culturalName.pronounceI18n.isEmpty())
 		{
@@ -809,6 +817,16 @@ void ConstellationMgr::updateI18n()
 			else
 				constellation->culturalName.pronounceI18n = qc_(constellation->culturalName.pronounce, context);
 		}
+
+		constellation->culturalName.bynameI18n = trans.tryQtranslate(constellation->culturalName.byname, context);
+		if (constellation->culturalName.bynameI18n.isEmpty())
+		{
+			if (context.isEmpty())
+				constellation->culturalName.bynameI18n = q_(constellation->culturalName.byname);
+			else
+				constellation->culturalName.bynameI18n = qc_(constellation->culturalName.byname, context);
+		}
+
 		const QString abbrContext = "abbreviation"; // fixed context for all abbreviations
 		constellation->abbreviationI18n = trans.tryQtranslate(constellation->abbreviation, abbrContext).trimmed();
 		if (constellation->abbreviationI18n.isEmpty())
