@@ -103,10 +103,14 @@ void ScmSkyCultureDialog::createDialogContent()
 
 	ui->SaveSkyCultureBtn->setEnabled(false);
 	ui->RemoveConstellationBtn->setEnabled(false);
+	ui->EditConstellationBtn->setEnabled(false);
 	connect(ui->SaveSkyCultureBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::saveSkyCulture);
 	connect(ui->AddConstellationBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::constellationDialog);
-	connect(ui->RemoveConstellationBtn, &QPushButton::clicked, this,
-	        &ScmSkyCultureDialog::removeSelectedConstellation);
+
+	connect(ui->EditConstellationBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::editSelectedConstellation);
+	connect(ui->constellationsList, &QListWidget::itemSelectionChanged, this,
+	        &ScmSkyCultureDialog::updateEditConstellationButton);
+
 	connect(ui->RemoveConstellationBtn, &QPushButton::clicked, this,
 	        &ScmSkyCultureDialog::removeSelectedConstellation);
 	connect(ui->constellationsList, &QListWidget::itemSelectionChanged, this,
@@ -169,6 +173,31 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	maker->setSkyCultureExportDialogVisibility(true);
 }
 
+void ScmSkyCultureDialog::editSelectedConstellation()
+{
+	auto selectedItems = ui->constellationsList->selectedItems();
+	if (!selectedItems.isEmpty() && constellations != nullptr)
+	{
+		QListWidgetItem *item     = selectedItems.first();
+		QString constellationName = item->text();
+
+		// Get Id by comparing to the display name
+		// This will always work, even when the constellation id
+		// or name contains special characters
+		QString selectedConstellationId = "";
+		for (const auto &constellation : *constellations)
+		{
+			if (constellationName == (getDisplayNameFromConstellation(constellation)))
+			{
+				selectedConstellationId = constellation.getId();
+				break;
+			}
+		}
+
+		maker->openConstellationDialog(selectedConstellationId);
+	}
+}
+
 void ScmSkyCultureDialog::removeSelectedConstellation()
 {
 	auto selectedItems = ui->constellationsList->selectedItems();
@@ -209,6 +238,18 @@ void ScmSkyCultureDialog::setIdFromName(QString &name)
 {
 	QString id = name.toLower().replace(" ", "_");
 	maker->getCurrentSkyCulture()->setId(id);
+}
+
+void ScmSkyCultureDialog::updateEditConstellationButton()
+{
+	if (!ui->constellationsList->selectedItems().isEmpty())
+	{
+		ui->EditConstellationBtn->setEnabled(true);
+	}
+	else
+	{
+		ui->EditConstellationBtn->setEnabled(false);
+	}
 }
 
 void ScmSkyCultureDialog::updateRemoveConstellationButton()

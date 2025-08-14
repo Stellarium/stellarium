@@ -21,13 +21,13 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ScmImageAnchored.hpp"
+#include "ScmConstellationImage.hpp"
 #include "StarWrapper.hpp"
 #include "StelApp.hpp"
 #include "types/Anchor.hpp"
 #include <QDebug>
 
-ScmImageAnchored::ScmImageAnchored()
+ScmConstellationImage::ScmConstellationImage()
 	: QGraphicsPixmapItem()
 {
 	setZValue(1);
@@ -40,12 +40,12 @@ ScmImageAnchored::ScmImageAnchored()
 	}
 }
 
-ScmImageAnchored::~ScmImageAnchored()
+ScmConstellationImage::~ScmConstellationImage()
 {
-	qDebug() << "SkyCultureMaker: Unloaded the ScmImageAnchored";
+	qDebug() << "SkyCultureMaker: Unloaded the ScmConstellationImage";
 }
 
-void ScmImageAnchored::setImage(const QPixmap &image)
+void ScmConstellationImage::setImage(const QPixmap &image)
 {
 	setPixmap(image);
 
@@ -76,17 +76,17 @@ void ScmImageAnchored::setImage(const QPixmap &image)
 	}
 }
 
-bool ScmImageAnchored::hasAnchorSelection() const
+bool ScmConstellationImage::hasAnchorSelection() const
 {
 	return selectedAnchor != nullptr;
 }
 
-ScmImageAnchor *ScmImageAnchored::getSelectedAnchor() const
+ScmConstellationImageAnchor *ScmConstellationImage::getSelectedAnchor() const
 {
 	return selectedAnchor;
 }
 
-void ScmImageAnchored::setAnchorSelectionChangedCallback(std::function<void()> func)
+void ScmConstellationImage::setAnchorSelectionChangedCallback(std::function<void()> func)
 {
 	for (auto &anchor : anchorItems)
 	{
@@ -94,7 +94,7 @@ void ScmImageAnchored::setAnchorSelectionChangedCallback(std::function<void()> f
 	}
 }
 
-void ScmImageAnchored::setAnchorPositionChangedCallback(std::function<void()> func)
+void ScmConstellationImage::setAnchorPositionChangedCallback(std::function<void()> func)
 {
 	for (auto &anchor : anchorItems)
 	{
@@ -102,26 +102,32 @@ void ScmImageAnchored::setAnchorPositionChangedCallback(std::function<void()> fu
 	}
 }
 
-void ScmImageAnchored::resetAnchors()
+void ScmConstellationImage::resetAnchors()
 {
 	selectedAnchor = nullptr;
 	for (auto &anchor : anchorItems)
 	{
-		anchor.setStarNameI18n(QString());
+		anchor.setStarHip(0);
 		anchor.deselect();
 	}
 }
 
-const std::vector<ScmImageAnchor> &ScmImageAnchored::getAnchors() const
+void ScmConstellationImage::resetArtwork()
+{
+	artwork.reset();
+	hide();
+}
+
+const std::vector<ScmConstellationImageAnchor> &ScmConstellationImage::getAnchors() const
 {
 	return anchorItems;
 }
 
-bool ScmImageAnchored::isImageAnchored()
+bool ScmConstellationImage::isImageAnchored()
 {
 	for (const auto &anchor : anchorItems)
 	{
-		if (anchor.getStarNameI18n().isEmpty())
+		if (anchor.getStarHip() == 0)
 		{
 			return false;
 		}
@@ -129,7 +135,7 @@ bool ScmImageAnchored::isImageAnchored()
 	return true;
 }
 
-void ScmImageAnchored::updateAnchors()
+void ScmConstellationImage::updateAnchors()
 {
 	for (size_t i = 0; i < anchorItems.size(); ++i)
 	{
@@ -142,22 +148,46 @@ void ScmImageAnchored::updateAnchors()
 	artwork.setupArt();
 }
 
-void ScmImageAnchored::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void ScmConstellationImage::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	QGraphicsItem::mousePressEvent(event);
 }
 
-void ScmImageAnchored::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void ScmConstellationImage::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
 	QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void ScmImageAnchored::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+void ScmConstellationImage::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	QGraphicsItem::mouseMoveEvent(event);
 }
 
-const scm::ScmConstellationArtwork &ScmImageAnchored::getArtwork() const
+const scm::ScmConstellationArtwork &ScmConstellationImage::getArtwork() const
 {
 	return artwork;
+}
+
+void ScmConstellationImage::setArtwork(const scm::ScmConstellationArtwork &artwork)
+{
+	resetAnchors();
+	resetArtwork();
+
+	if (!artwork.getHasArt())
+	{
+		return;
+	}
+
+	QPixmap pixmap = QPixmap::fromImage(artwork.getArtwork());
+	setImage(pixmap);
+
+	const auto &anchors = artwork.getAnchors();
+	for (size_t i = 0; i < artwork.getAnchors().size(); i++)
+	{
+		anchorItems[i].setPosition(anchors[i].position);
+		anchorItems[i].setStarHip(anchors[i].hip);
+	}
+
+	updateAnchors();
+	show();
 }

@@ -21,8 +21,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCMIMAGEANCHOR_H
-#define SCMIMAGEANCHOR_H
+#ifndef SCM_CONSTELLATION_IMAGE_ANCHOR_H
+#define SCM_CONSTELLATION_IMAGE_ANCHOR_H
 
 #include "StarMgr.hpp"
 #include "VecMath.hpp"
@@ -31,12 +31,12 @@
 #include <QGraphicsItem>
 #include <QString>
 
-class ScmImageAnchor : public QGraphicsEllipseItem
+class ScmConstellationImageAnchor : public QGraphicsEllipseItem
 {
 public:
-	ScmImageAnchor();
-	ScmImageAnchor(QPointF position, qreal diameter);
-	~ScmImageAnchor();
+	ScmConstellationImageAnchor();
+	ScmConstellationImageAnchor(QPointF position, qreal diameter);
+	~ScmConstellationImageAnchor();
 
 	/**
 	 * @brief Set the diameter of this anchor.
@@ -59,7 +59,7 @@ public:
 	 * 
 	 * @param anchor The pointer to the selection anchor.
 	 */
-	void setSelectionReference(ScmImageAnchor *&anchor);
+	void setSelectionReference(ScmConstellationImageAnchor *&anchor);
 
 	/**
 	 * @brief Selects this anchor.
@@ -87,18 +87,6 @@ public:
 	 * @param bounds The bound the anchor can be moved in.
 	 */
 	void setMovementBounds(const QRectF &bounds);
-
-	/**
-	 * @brief set the bound star ID of this anchor.
-	 */
-	void setStarNameI18n(const QString &starNameI18n);
-
-	/**
-	 * @brief Get the star nameI18n that is bound to this anchor.
-	 * 
-	 * @return const QString& The star nameI18n.
-	 */
-	const QString &getStarNameI18n() const;
 
 	/**
 	 * @brief set the bound star ID of this anchor.
@@ -133,6 +121,13 @@ public:
 	 */
 	Vec2i getPosition() const;
 
+	/**
+	 * @brief Set the position of the anchor in the parent image.
+	 * 
+	 * @param position The position of the anchor.
+	 */
+	void setPosition(const Vec2i &position);
+
 protected:
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
@@ -141,10 +136,8 @@ protected:
 private:
 	// Indicates if this anchor is selected.
 	bool isSelected = false;
-	// Holds the selected star
-	QString starNameI18n;
 	// Holds the hip of the selected star
-	StarId hip;
+	StarId hip = 0; // Hip start with 1, 0 = empty value
 	// Holds the default color of the anchor.
 	const Qt::GlobalColor color = Qt::GlobalColor::cyan;
 	// Holds the default color if no star is bound.
@@ -154,7 +147,7 @@ private:
 	// Holds the selected color of the anchor if no star is bound.
 	const Qt::GlobalColor selectedColorNoStar = Qt::GlobalColor::darkGreen;
 	// Holds the selection group of this anchor.
-	ScmImageAnchor **selection = nullptr;
+	ScmConstellationImageAnchor **selection = nullptr;
 	// Holds the set selection changed callback
 	std::function<void()> selectionChangedCallback = nullptr;
 	// Holds the set position changed callback
@@ -163,4 +156,4 @@ private:
 	QRectF movementBound;
 };
 
-#endif // SCMIMAGEANCHOR_H
+#endif // SCM_CONSTELLATION_IMAGE_ANCHOR_H

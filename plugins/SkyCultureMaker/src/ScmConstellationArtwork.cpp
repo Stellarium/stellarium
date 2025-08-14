@@ -72,8 +72,8 @@ void scm::ScmConstellationArtwork::setupArt()
 	// check for null pointers
 	if (s1obj.isNull() || s2obj.isNull() || s3obj.isNull())
 	{
-		qWarning() << "SkyCultureMaker: could not find stars:" << anchors[0].hip << ", " << anchors[1].hip << "or "
-			   << anchors[2].hip;
+		qWarning() << "SkyCultureMaker: could not find stars:" << anchors[0].hip << ", " << anchors[1].hip
+			   << "or " << anchors[2].hip;
 		return;
 	}
 
@@ -180,6 +180,12 @@ bool scm::ScmConstellationArtwork::getHasArt() const
 	return hasArt;
 }
 
+void scm::ScmConstellationArtwork::reset()
+{
+	hasArt  = false;
+	isSetup = false;
+}
+
 void scm::ScmConstellationArtwork::draw(StelCore *core) const
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
@@ -254,16 +260,16 @@ bool scm::ScmConstellationArtwork::save(const QString &filepath) const
 	bool success = fileInfo.absoluteDir().mkpath(fileInfo.absolutePath());
 	if (success == false)
 	{
-		qWarning() << "SkyCultureMaker: Failed to create the directory structure for: '" << fileInfo.absolutePath()
-			   << "'";
+		qWarning() << "SkyCultureMaker: Failed to create the directory structure for: '"
+			   << fileInfo.absolutePath() << "'";
 		return false;
 	}
 
 	success = artwork.save(fileInfo.absoluteFilePath());
 	if (success == false)
 	{
-		qWarning() << "SkyCultureMaker: Failed to save the image to the given path: '" << fileInfo.absoluteFilePath()
-			   << "'";
+		qWarning() << "SkyCultureMaker: Failed to save the image to the given path: '"
+			   << fileInfo.absoluteFilePath() << "'";
 		return false;
 	}
 

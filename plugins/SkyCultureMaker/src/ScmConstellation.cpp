@@ -27,8 +27,8 @@
 
 scm::ScmConstellation::ScmConstellation(const std::vector<scm::CoordinateLine> &coordinates,
                                         const std::vector<scm::StarLine> &stars)
-	: constellationCoordinates(coordinates)
-	, constellationStars(stars)
+	: coordinates(coordinates)
+	, stars(stars)
 {
 	QSettings *conf = StelApp::getInstance().getSettings();
 	constellationNameFont.setPixelSize(conf->value("viewing/constellation_font_size", 15).toInt());
@@ -65,9 +65,19 @@ void scm::ScmConstellation::setNativeName(const std::optional<QString> &name)
 	nativeName = name;
 }
 
+std::optional<QString> scm::ScmConstellation::getNativeName() const
+{
+	return nativeName;
+}
+
 void scm::ScmConstellation::setPronounce(const std::optional<QString> &pronounce)
 {
 	ScmConstellation::pronounce = pronounce;
+}
+
+std::optional<QString> scm::ScmConstellation::getPronounce() const
+{
+	return pronounce;
 }
 
 void scm::ScmConstellation::setIPA(const std::optional<QString> &ipa)
@@ -75,22 +85,46 @@ void scm::ScmConstellation::setIPA(const std::optional<QString> &ipa)
 	ScmConstellation::ipa = ipa;
 }
 
+std::optional<QString> scm::ScmConstellation::getIPA() const
+{
+	return ipa;
+}
+
 void scm::ScmConstellation::setArtwork(const ScmConstellationArtwork &artwork)
 {
 	ScmConstellation::artwork = artwork;
 }
 
+const scm::ScmConstellationArtwork &scm::ScmConstellation::getArtwork() const
+{
+	return artwork;
+}
+
 void scm::ScmConstellation::setConstellation(const std::vector<CoordinateLine> &coordinates,
                                              const std::vector<StarLine> &stars)
 {
-	constellationCoordinates = coordinates;
-	constellationStars       = stars;
+	scm::ScmConstellation::coordinates = coordinates;
+	scm::ScmConstellation::stars       = stars;
 
 	updateTextPosition();
 }
 
+const std::vector<scm::CoordinateLine>& scm::ScmConstellation::getCoordinates() const
+{
+	return coordinates;
+}
+
+const std::vector<scm::StarLine>& scm::ScmConstellation::getStars() const
+{
+	return stars;
+}
+
 void scm::ScmConstellation::drawConstellation(StelCore *core, const Vec3f &lineColor, const Vec3f &nameColor) const
 {
+	if (isHidden)
+	{
+		return;
+	}
 	StelPainter painter(core->getProjection(drawFrame));
 	painter.setBlending(true);
 	painter.setLineSmooth(true);
@@ -99,7 +133,7 @@ void scm::ScmConstellation::drawConstellation(StelCore *core, const Vec3f &lineC
 	bool alpha = 1.0f;
 	painter.setColor(lineColor, alpha);
 
-	for (CoordinateLine p : constellationCoordinates)
+	for (CoordinateLine p : coordinates)
 	{
 		painter.drawGreatCircleArc(p.start, p.end);
 	}
@@ -111,11 +145,20 @@ void scm::ScmConstellation::drawConstellation(StelCore *core, const Vec3f &lineC
 
 void scm::ScmConstellation::drawConstellation(StelCore *core) const
 {
+	if (isHidden)
+	{
+		return;
+	}
 	drawConstellation(core, defaultConstellationLineColor, defaultConstellationNameColor);
 }
 
 void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter, const Vec3f &nameColor) const
 {
+	if (isHidden)
+	{
+		return;
+	}
+
 	sPainter.setBlending(true);
 
 	Vec3d velocityObserver(0.);
@@ -141,6 +184,11 @@ void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter, con
 
 void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter) const
 {
+	if (isHidden)
+	{
+		return;
+	}
+
 	drawNames(core, sPainter, defaultConstellationNameColor);
 }
 
@@ -151,10 +199,10 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId) const
 	// Assemble lines object
 	QJsonArray linesArray;
 
-	if (constellationStars.size() != 0)
+	if (stars.size() != 0)
 	{
 		// Stars are NOT empty
-		for (const auto &star : constellationStars)
+		for (const auto &star : stars)
 		{
 			linesArray.append(star.toJson());
 		}
@@ -162,7 +210,7 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId) const
 	else
 	{
 		// Stars are empty, use the coordinates
-		for (const auto &coord : constellationCoordinates)
+		for (const auto &coord : coordinates)
 		{
 			linesArray.append(coord.toJson());
 		}
@@ -223,10 +271,20 @@ bool scm::ScmConstellation::saveArtwork(const QString &directory)
 void scm::ScmConstellation::updateTextPosition()
 {
 	XYZname.set(0., 0., 0.);
-	for (CoordinateLine p : constellationCoordinates)
+	for (CoordinateLine p : coordinates)
 	{
 		XYZname += p.end;
 		XYZname += p.start;
 	}
 	XYZname.normalize();
+}
+
+void scm::ScmConstellation::hide()
+{
+	isHidden = true;
+}
+
+void scm::ScmConstellation::show()
+{
+	isHidden = false;
 }

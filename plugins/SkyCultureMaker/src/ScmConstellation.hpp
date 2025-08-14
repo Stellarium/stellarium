@@ -83,11 +83,25 @@ public:
 	void setNativeName(const std::optional<QString> &name);
 
 	/**
+	* @brief Gets the native name of the constellation
+	* 
+	* @return The native name
+	*/
+	std::optional<QString> getNativeName() const;
+
+	/**
     * @brief Sets the pronounciation of the constellation
     * 
     * @param pronounce The pronounciation
     */
 	void setPronounce(const std::optional<QString> &pronounce);
+
+	/**
+	 * @brief Gets the pronounciation of the constellation
+	 * 
+	 * @return The pronounciation
+	 */
+	std::optional<QString> getPronounce() const;
 
 	/**
     * @brief Sets the IPA.
@@ -97,11 +111,25 @@ public:
 	void setIPA(const std::optional<QString> &ipa);
 
 	/**
+	 * @brief Gets the IPA.
+	 * 
+	 * @return The optional ipa
+	 */
+	std::optional<QString> getIPA() const;
+
+	/**
 	 * @brief Sets the artwork.
 	 * 
 	 * @param artwork The artwork.
 	 */
 	void setArtwork(const ScmConstellationArtwork &artwork);
+
+	/**
+	 * @brief Gets the artwork.
+	 * 
+	 * @return The artwork.
+	 */
+	const ScmConstellationArtwork &getArtwork() const;
 
 	/**
     * @brief Sets the coordinate lines and star lines of the constellation.
@@ -110,6 +138,20 @@ public:
 	* @param stars The equivalent stars to the coordinates.
     */
 	void setConstellation(const std::vector<CoordinateLine> &coordinates, const std::vector<StarLine> &stars);
+
+	/**
+	 * @brief Gets the coordinates of the constellation.
+	 * 
+	 * @return The coordinates of the constellation.
+	 */
+	const std::vector<CoordinateLine> &getCoordinates() const;
+
+	/**
+	 * @brief Gets the stars of the constellation.
+	 * 
+	 * @return The stars of the constellation.
+	 */
+	const std::vector<StarLine> &getStars() const;
 
 	/**
 	 * @brief Draws the constellation based on the coordinates.
@@ -160,6 +202,16 @@ public:
 	 */
 	bool saveArtwork(const QString &directory);
 
+	/**
+	 * @brief Hides the constellation from being drawn.
+	 */
+	void hide();
+
+	/**
+	 * @brief Enables the constellation to be drawn.
+	 */
+	void show();
+
 private:
 	/// Identifier of the constellation
 	QString id;
@@ -180,10 +232,10 @@ private:
 	std::optional<QVector<int>> references;
 
 	/// List of coordinates forming the segments.
-	std::vector<CoordinateLine> constellationCoordinates;
+	std::vector<CoordinateLine> coordinates;
 
 	/// List of stars forming the segments. Might be empty.
-	std::vector<StarLine> constellationStars;
+	std::vector<StarLine> stars;
 
 	/// Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;
@@ -202,6 +254,9 @@ private:
 
 	/// Holds the path the artwork was saved to.
 	QString artworkPath;
+
+	/// Whether the constellation should be drawn or not.
+	bool isHidden = false;
 
 	/**
 	 * @brief Updates the XYZname that is used for the text position.

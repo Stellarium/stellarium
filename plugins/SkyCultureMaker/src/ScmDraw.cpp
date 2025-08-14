@@ -406,6 +406,24 @@ std::vector<scm::CoordinateLine> scm::ScmDraw::getCoordinates() const
 	return drawnLines.coordinates;
 }
 
+void scm::ScmDraw::loadLines(const std::vector<CoordinateLine>& coordinates, const std::vector<StarLine>& stars)
+{
+	// copy the coordinates and stars to drawnLines
+	drawnLines.coordinates = coordinates;
+	drawnLines.stars       = stars;
+
+	if (!drawnLines.coordinates.empty())
+	{
+		currentLine = std::make_tuple(drawnLines.coordinates.back(), drawnLines.stars.back());
+		drawState   = Drawing::hasFloatingEnd;
+	}
+	else
+	{
+		currentLine = std::make_tuple(CoordinateLine(), StarLine());
+		drawState   = Drawing::None;
+	}
+}
+
 void scm::ScmDraw::setTool(scm::DrawTools tool)
 {
 	activeTool    = tool;

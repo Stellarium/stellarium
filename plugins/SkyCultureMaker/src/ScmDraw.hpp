@@ -181,6 +181,12 @@ public:
 	std::vector<CoordinateLine> getCoordinates() const;
 
 	/**
+	 * @brief Loads lines into the buffer from a tuple of coordinates and stars.
+	 *
+	 */
+	void loadLines(const std::vector<CoordinateLine>& coordinates, const std::vector<StarLine>& stars);
+
+	/**
 	 * @brief Set the active draw tool
 	 *
 	 * @param tool The tool to be used.

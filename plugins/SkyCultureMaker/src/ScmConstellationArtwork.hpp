@@ -114,6 +114,11 @@ public:
 	 */
 	bool save(const QString &filepath) const;
 
+	/**
+	 * @brief Resets the artwork state.
+	 */
+	void reset();
+
 private:
 	/**
      * @brief Draw the artwork in an optimized manner.

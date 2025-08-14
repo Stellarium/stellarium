@@ -21,22 +21,22 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCMIMAGEANCHORED_H
-#define SCMIMAGEANCHORED_H
+#ifndef SCM_CONSTELLATION_IMAGE_H
+#define SCM_CONSTELLATION_IMAGE_H
 
 #include "ScmConstellationArtwork.hpp"
-#include "ScmImageAnchor.hpp"
+#include "ScmConstellationImageAnchor.hpp"
 #include <functional>
 #include <vector>
 #include <QGraphicsPathItem>
 #include <QGraphicsScene>
 #include <QPixmap>
 
-class ScmImageAnchored : public QGraphicsPixmapItem
+class ScmConstellationImage : public QGraphicsPixmapItem
 {
 public:
-	ScmImageAnchored();
-	~ScmImageAnchored();
+	ScmConstellationImage();
+	~ScmConstellationImage();
 
 	/**
 	 * @brief Set the image that is shown by this item.
@@ -56,9 +56,9 @@ public:
 	/**
 	 * @brief Get the selected anchor.
 	 * 
-	 * @return ScmImageAnchor* The selected anchor pointer or nullptr.
+	 * @return ScmConstellationImageAnchor* The selected anchor pointer or nullptr.
 	 */
-	ScmImageAnchor *getSelectedAnchor() const;
+	ScmConstellationImageAnchor *getSelectedAnchor() const;
 
 	/**
 	 * @brief Set the anchor selection changed callback function.
@@ -75,7 +75,17 @@ public:
 	 */
 	void resetAnchors();
 
-	const std::vector<ScmImageAnchor> &getAnchors() const;
+	/**
+	 * @brief Resets the artwork.
+	 */
+	void resetArtwork();
+
+	/**
+	 * @brief Gets the anchors of this object.
+	 * 
+	 * @return const std::vector<ScmConstellationImageAnchor>& The anchors of this object.
+	 */
+	const std::vector<ScmConstellationImageAnchor> &getAnchors() const;
 
 	/**
 	 * @brief Indicates if all anchors have a star they are bound too.
@@ -95,6 +105,13 @@ public:
 	 */
 	const scm::ScmConstellationArtwork &getArtwork() const;
 
+	/**
+	 * @brief Set the artwork in the constellation image.
+	 * 
+	 * @param artwork The artwork to use.
+	 */
+	void setArtwork(const scm::ScmConstellationArtwork &artwork);
+
 protected:
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
@@ -105,16 +122,16 @@ private:
 	QGraphicsScene drawScene;
 
 	/// The anchors in the graphics view.
-	std::vector<ScmImageAnchor> anchorItems{3}; // 3 anchors
+	std::vector<ScmConstellationImageAnchor> anchorItems{3}; // 3 anchors
 
 	/// The scale of the anchor relative to the image size.
 	const qreal anchorScale = 1 / 50.0;
 
 	// Holds the selected anchor
-	ScmImageAnchor *selectedAnchor = nullptr;
+	ScmConstellationImageAnchor *selectedAnchor = nullptr;
 
 	/// Holds the current artwork
 	scm::ScmConstellationArtwork artwork;
 };
 
-#endif // SCMIMAGEANCHORED_H
+#endif // SCM_CONSTELLATION_IMAGE_H

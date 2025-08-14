@@ -225,6 +225,12 @@ public:
 	 */
 	void setTempArtwork(const scm::ScmConstellationArtwork *artwork);
 
+	/**
+	 * @brief Opens the constellation dialog with data for a given constellation.
+	 * @param constellationId The ID of the constellation to open the dialog for.
+	 */
+	void openConstellationDialog(const QString &constellationId);
+
 signals:
 	void eventIsScmEnabled(bool b);
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>340</height>
+    <width>418</width>
+    <height>401</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -57,7 +57,7 @@
       </sizepolicy>
      </property>
      <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+      <enum>QFrame::Shape::StyledPanel</enum>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <property name="spacing">
@@ -130,13 +130,16 @@
             </property>
             <property name="html">
              <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.AppleSystemUIFont';&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="acceptRichText">
-              <bool>false</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -182,9 +185,15 @@ p, li { white-space: pre-wrap; }
            <layout class="QHBoxLayout" name="overviewConstellationBtnLayout">
             <item>
              <widget class="QPushButton" name="AddConstellationBtn">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="minimumSize">
                <size>
-                <width>150</width>
+                <width>100</width>
                 <height>0</height>
                </size>
               </property>
@@ -194,15 +203,45 @@ p, li { white-space: pre-wrap; }
                </font>
               </property>
               <property name="text">
-               <string>Add Constellation</string>
+               <string>Add</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="EditConstellationBtn">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Edit</string>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QPushButton" name="RemoveConstellationBtn">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="minimumSize">
                <size>
-                <width>150</width>
+                <width>100</width>
                 <height>0</height>
                </size>
               </property>
@@ -212,7 +251,7 @@ p, li { white-space: pre-wrap; }
                </font>
               </property>
               <property name="text">
-               <string>Remove Constellation</string>
+               <string>Remove</string>
               </property>
              </widget>
             </item>
@@ -221,40 +260,40 @@ p, li { white-space: pre-wrap; }
           <item>
            <layout class="QVBoxLayout" name="overviewSCBtnLayout">
             <item>
-            <widget class="QLabel" name="selectLicenseLbl">
+             <widget class="QLabel" name="selectLicenseLbl">
               <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
-              </sizepolicy>
+               </sizepolicy>
               </property>
               <property name="font">
-              <font>
+               <font>
                 <pointsize>14</pointsize>
-              </font>
+               </font>
               </property>
               <property name="text">
-              <string>License of the Sky Culture</string>
+               <string>License of the Sky Culture</string>
               </property>
               <property name="alignment">
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
               </property>
-            </widget>
+             </widget>
             </item>
             <item>
-            <widget class="QComboBox" name="licenseCB">
+             <widget class="QComboBox" name="licenseCB">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <pointsize>13</pointsize>
                </font>
               </property>
-              <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-              </sizepolicy>
-              </property>
-            </widget>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="SaveSkyCultureBtn">
@@ -279,301 +318,280 @@ p, li { white-space: pre-wrap; }
          </layout>
         </widget>
         <widget class="QWidget" name="descriptionTab">
-          <attribute name="title">
-            <string>Description</string>
-          </attribute>
-          <layout class="QVBoxLayout" name="descriptionTabLayout">
-            <item>
-            <widget class="QScrollArea" name="descriptionScrollArea">
-              <property name="widgetResizable">
-              <bool>true</bool>
+         <attribute name="title">
+          <string>Description</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="descriptionTabLayout">
+          <item>
+           <widget class="QScrollArea" name="descriptionScrollArea">
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+            <widget class="QWidget" name="descriptionScrollContent">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>187</width>
+               <height>1465</height>
+              </rect>
+             </property>
+             <layout class="QVBoxLayout" name="descriptionLayout">
+              <property name="spacing">
+               <number>10</number>
               </property>
-              <widget class="QWidget" name="descriptionScrollContent">
-              <layout class="QVBoxLayout" name="descriptionLayout">
-                <property name="spacing">
-                <number>10</number>
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>10</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
+              </property>
+              <property name="bottomMargin">
+               <number>10</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="authorsLbl">
+                <property name="text">
+                 <string>Authors:</string>
                 </property>
-                <property name="leftMargin">
-                <number>10</number>
-                </property>
-                <property name="topMargin">
-                <number>10</number>
-                </property>
-                <property name="rightMargin">
-                <number>10</number>
-                </property>
-                <property name="bottomMargin">
-                <number>10</number>
-                </property>
-
-                <!-- Authors -->
-                <item>
-                <widget class="QLabel" name="authorsLbl">
-                  <property name="text">
-                  <string>Authors:</string>
-                  </property>
-                </widget>
-                </item>
-                <item>
-                <widget class="QTextEdit" name="authorsTE">
-                  <property name="acceptRichText">
-                    <bool>false</bool>
-                  </property>
-                </widget>
-                </item>
-
-                <!-- Culture Description -->
-                <item>
-                <widget class="QLabel" name="cultureDescriptionLbl">
-                  <property name="text">
-                  <string>Culture Description:</string>
-                  </property>
-                </widget>
-                </item>
-                <item>
-                <widget class="QTextEdit" name="cultureDescriptionTE">
-                  <property name="acceptRichText">
-                    <bool>false</bool>
-                  </property>
-                </widget>
-                </item>
-
-                <!-- About -->
-                <item>
-                <widget class="QLabel" name="aboutLbl">
-                  <property name="text">
-                  <string>About:</string>
-                  </property>
-                </widget>
-                </item>
-                <item>
-                <widget class="QTextEdit" name="aboutTE">
-                  <property name="acceptRichText">
-                    <bool>false</bool>
-                  </property>
-                </widget>
-                </item>
-
-                <!-- Geo-Region -->
-                <item>
-                <widget class="QLabel" name="geoRegionLbl">
-                  <property name="text">
-                  <string>Geo-Region:</string>
-                  </property>
-                </widget>
-                </item>
-                <item>
-                <widget class="QTextEdit" name="geoRegionTE">
-                  <property name="acceptRichText">
-                    <bool>false</bool>
-                  </property>
-                </widget>
-                </item>
-
-                <!-- Sky -->
-                <item>
-                <layout class="QHBoxLayout">
-                  <item>
-                    <widget class="QLabel" name="skyLbl">
-                      <property name="text">
-                        <string>Sky</string>
-                      </property>
-                    </widget>
-                  </item>
-                  <item>
-                    <widget class="QPushButton" name="pushButton">
-                      <property name="enabled">
-                        <bool>false</bool>
-                      </property>
-                      <property name="sizePolicy">
-                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                        </sizepolicy>
-                      </property>
-                      <property name="cursor">
-                        <cursorShape>WhatsThisCursor</cursorShape>
-                      </property>
-                      <property name="contextMenuPolicy">
-                        <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
-                      </property>
-                      <property name="toolTip">
-                        <string>what can the User see here</string>
-                      </property>
-                      <property name="autoFillBackground">
-                        <bool>false</bool>
-                      </property>
-                      <property name="icon">
-                        <iconset theme="QIcon::ThemeIcon::HelpAbout"/>
-                      </property>
-                      <property name="autoDefault">
-                        <bool>false</bool>
-                      </property>
-                      <property name="default">
-                        <bool>false</bool>
-                      </property>
-                      <property name="flat">
-                        <bool>true</bool>
-                      </property>
-                    </widget>
-                  </item>
-                </layout>
+               </widget>
               </item>
               <item>
-                <widget class="QTextEdit" name="skyTE"/>
+               <widget class="QTextEdit" name="authorsTE">
+                <property name="acceptRichText">
+                 <bool>false</bool>
+                </property>
+               </widget>
               </item>
-
-                <!-- Moon & Sun -->
+              <item>
+               <widget class="QLabel" name="cultureDescriptionLbl">
+                <property name="text">
+                 <string>Culture Description:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="cultureDescriptionTE">
+                <property name="acceptRichText">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="aboutLbl">
+                <property name="text">
+                 <string>About:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="aboutTE">
+                <property name="acceptRichText">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="geoRegionLbl">
+                <property name="text">
+                 <string>Geo-Region:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="geoRegionTE">
+                <property name="acceptRichText">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout">
                 <item>
-                <widget class="QLabel" name="moonSunLbl">
+                 <widget class="QLabel" name="skyLbl">
                   <property name="text">
-                  <string>Moon &amp; Sun:</string>
+                   <string>Sky</string>
                   </property>
-                </widget>
+                 </widget>
                 </item>
                 <item>
-                <widget class="QTextEdit" name="moonSunTE">
-                  <property name="acceptRichText">
-                    <bool>false</bool>
+                 <widget class="QPushButton" name="pushButton">
+                  <property name="enabled">
+                   <bool>false</bool>
                   </property>
-                </widget>
-                </item>
-
-                <!-- Planets -->
-                <item>
-                <widget class="QLabel" name="planetsLbl">
-                  <property name="text">
-                  <string>Planets:</string>
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
-                </widget>
-                </item>
-                <item>
-                <widget class="QTextEdit" name="planetsTE">
-                  <property name="acceptRichText">
-                    <bool>false</bool>
+                  <property name="cursor">
+                   <cursorShape>WhatsThisCursor</cursorShape>
                   </property>
-                </widget>
-                </item>
-
-                <!-- Zodiac / Lunar System -->
-                <item>
-                <widget class="QLabel" name="zodiacLbl">
-                  <property name="text">
-                  <string>Zodiac/ Lunar System:</string>
+                  <property name="contextMenuPolicy">
+                   <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
                   </property>
-                </widget>
-                </item>
-                <item>
-                <widget class="QTextEdit" name="zodiacTE">
-                  <property name="acceptRichText">
-                    <bool>false</bool>
+                  <property name="toolTip">
+                   <string>what can the User see here</string>
                   </property>
-                </widget>
-                </item>
-
-                <!-- Milky Way -->
-                <item>
-                <widget class="QLabel" name="milkyWayLbl">
-                  <property name="text">
-                  <string>Milky Way:</string>
+                  <property name="autoFillBackground">
+                   <bool>false</bool>
                   </property>
-                </widget>
-                </item>
-                <item>
-                <widget class="QTextEdit" name="milkyWayTE">
-                  <property name="acceptRichText">
-                    <bool>false</bool>
+                  <property name="icon">
+                   <iconset theme="QIcon::ThemeIcon::HelpAbout"/>
                   </property>
-                </widget>
-                </item>
-
-                <!-- Other Celestial Objects -->
-                <item>
-                <widget class="QLabel" name="otherObjectsLbl">
-                  <property name="text">
-                  <string>Other Celestial Objects:</string>
+                  <property name="autoDefault">
+                   <bool>false</bool>
                   </property>
-                </widget>
-                </item>
-                <item>
-                <widget class="QTextEdit" name="otherObjectsTE">
-                  <property name="acceptRichText">
-                    <bool>false</bool>
+                  <property name="default">
+                   <bool>false</bool>
                   </property>
-                </widget>
-                </item>
-
-                 <!-- Constellations -->
-                <item>
-                <widget class="QLabel" name="constellationsDescLbl">
-                  <property name="text">
-                  <string>Constellations:</string>
+                  <property name="flat">
+                   <bool>true</bool>
                   </property>
-                </widget>
+                 </widget>
                 </item>
-                <item>
-                <widget class="QTextEdit" name="constellationsDescTE">
-                  <property name="acceptRichText">
-                    <bool>false</bool>
-                  </property>
-                </widget>
-                </item>
-
-                <!-- References -->
-                <item>
-                <widget class="QLabel" name="referencesLbl">
-                  <property name="text">
-                  <string>References:</string>
-                  </property>
-                </widget>
-                </item>
-                <item>
-                <widget class="QTextEdit" name="referencesTE">
-                  <property name="acceptRichText">
-                    <bool>false</bool>
-                  </property>
-                </widget>
-                </item>
-
-                <!-- Acknowledgements -->
-                <item>
-                <widget class="QLabel" name="acknowledgementsLbl">
-                  <property name="text">
-                  <string>Acknowledgements:</string>
-                  </property>
-                </widget>
-                </item>
-                <item>
-                <widget class="QTextEdit" name="acknowledgementsTE">
-                  <property name="acceptRichText">
-                    <bool>false</bool>
-                  </property>
-                </widget>
-                </item>
-
-                <!-- Classification -->
-                <item>
-                  <widget class="QLabel" name="classificationLbl">
-                    <property name="text">
-                    <string>Classification of the Sky Culture</string>
-                    </property>
-                  </widget>
-                  </item>
-                  <item>
-                  <widget class="QComboBox" name="classificationCB">
-                    <property name="font">
-                    <font>
-                      <pointsize>13</pointsize>
-                    </font>
-                    </property>
-                  </widget>
-                </item>
-
-              </layout>
-              </widget>
+               </layout>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="skyTE"/>
+              </item>
+              <item>
+               <widget class="QLabel" name="moonSunLbl">
+                <property name="text">
+                 <string>Moon &amp; Sun:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="moonSunTE">
+                <property name="acceptRichText">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="planetsLbl">
+                <property name="text">
+                 <string>Planets:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="planetsTE">
+                <property name="acceptRichText">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="zodiacLbl">
+                <property name="text">
+                 <string>Zodiac/ Lunar System:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="zodiacTE">
+                <property name="acceptRichText">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="milkyWayLbl">
+                <property name="text">
+                 <string>Milky Way:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="milkyWayTE">
+                <property name="acceptRichText">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="otherObjectsLbl">
+                <property name="text">
+                 <string>Other Celestial Objects:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="otherObjectsTE">
+                <property name="acceptRichText">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="constellationsDescLbl">
+                <property name="text">
+                 <string>Constellations:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="constellationsDescTE">
+                <property name="acceptRichText">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="referencesLbl">
+                <property name="text">
+                 <string>References:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="referencesTE">
+                <property name="acceptRichText">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="acknowledgementsLbl">
+                <property name="text">
+                 <string>Acknowledgements:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="acknowledgementsTE">
+                <property name="acceptRichText">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="classificationLbl">
+                <property name="text">
+                 <string>Classification of the Sky Culture</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="classificationCB">
+                <property name="font">
+                 <font>
+                  <pointsize>13</pointsize>
+                 </font>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
+           </widget>
           </item>
-        </layout>
+         </layout>
         </widget>
         <widget class="QWidget" name="boundariesTab">
          <attribute name="title">
@@ -593,54 +611,53 @@ p, li { white-space: pre-wrap; }
        </widget>
       </item>
       <item>
-        <layout class="QHBoxLayout">
-          <item>
-          <spacer name="horizontalSpacerLeft">
-            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-            <size>
-              <width>40</width>
-              <height>20</height>
-            </size>
-            </property>
-          </spacer>
-          </item>
-          <item>
-          <widget class="QLabel" name="infoLbl">
-            <property name="font">
-            <font>
-              <weight>75</weight>
-              <bold>true</bold>
-            </font>
-            </property>
-            <property name="text">
-            <string/>
-            </property>
-            <property name="alignment">
-            <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-            <bool>true</bool>
-            </property>
-          </widget>
-          </item>
-          <item>
-          <spacer name="horizontalSpacerRight">
-            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-            <size>
-              <width>40</width>
-              <height>20</height>
-            </size>
-            </property>
-          </spacer>
-          </item>
-        </layout>
+       <layout class="QHBoxLayout">
+        <item>
+         <spacer name="horizontalSpacerLeft">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
+        <item>
+         <widget class="QLabel" name="infoLbl">
+          <property name="font">
+           <font>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacerRight">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
      </layout>
     </widget>
    </item>

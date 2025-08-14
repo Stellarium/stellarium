@@ -21,7 +21,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ScmImageAnchor.hpp"
+#include "ScmConstellationImageAnchor.hpp"
 #include "StelApp.hpp"
 #include "StelObjectMgr.hpp"
 #include <QBrush>
@@ -29,12 +29,12 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QRegularExpression>
 
-void ScmImageAnchor::setSelectionReference(ScmImageAnchor *&anchor)
+void ScmConstellationImageAnchor::setSelectionReference(ScmConstellationImageAnchor *&anchor)
 {
 	selection = &anchor;
 }
 
-void ScmImageAnchor::select()
+void ScmConstellationImageAnchor::select()
 {
 	if (selection == nullptr)
 	{
@@ -56,52 +56,41 @@ void ScmImageAnchor::select()
 	}
 
 	// select the bound star
-	if (!starNameI18n.isEmpty())
+	if (hip != 0)
 	{
 		StelApp &app             = StelApp::getInstance();
 		StelObjectMgr &objectMgr = app.getStelObjectMgr();
-		objectMgr.findAndSelectI18n(starNameI18n);
+		objectMgr.findAndSelect(QString("HIP ") + std::to_string(hip).c_str());
 	}
 }
 
-void ScmImageAnchor::deselect()
+void ScmConstellationImageAnchor::deselect()
 {
 	isSelected = false;
 	updateColor();
 }
 
-void ScmImageAnchor::setSelectionChangedCallback(std::function<void()> func)
+void ScmConstellationImageAnchor::setSelectionChangedCallback(std::function<void()> func)
 {
 	selectionChangedCallback = func;
 }
 
-void ScmImageAnchor::setPositionChangedCallback(std::function<void()> func)
+void ScmConstellationImageAnchor::setPositionChangedCallback(std::function<void()> func)
 {
 	positionChangedCallback = func;
 }
 
-void ScmImageAnchor::setMovementBounds(const QRectF &bounds)
+void ScmConstellationImageAnchor::setMovementBounds(const QRectF &bounds)
 {
 	movementBound = bounds;
 }
 
-void ScmImageAnchor::setStarNameI18n(const QString &starNameI18n)
+void ScmConstellationImageAnchor::setStarHip(StarId hip)
 {
-	ScmImageAnchor::starNameI18n = starNameI18n;
-	updateColor();
+	ScmConstellationImageAnchor::hip = hip;
 }
 
-const QString &ScmImageAnchor::getStarNameI18n() const
-{
-	return starNameI18n;
-}
-
-void ScmImageAnchor::setStarHip(StarId hip)
-{
-	ScmImageAnchor::hip = hip;
-}
-
-bool ScmImageAnchor::trySetStarHip(const QString &id)
+bool ScmConstellationImageAnchor::trySetStarHip(const QString &id)
 {
 	QRegularExpression hipExpression(R"(HIP\s+(\d+))");
 
@@ -109,30 +98,31 @@ bool ScmImageAnchor::trySetStarHip(const QString &id)
 	if (hipMatch.hasMatch())
 	{
 		setStarHip(hipMatch.captured(1).toInt());
+		updateColor();
 		return true;
 	}
 
 	return false;
 }
 
-const StarId &ScmImageAnchor::getStarHip() const
+const StarId &ScmConstellationImageAnchor::getStarHip() const
 {
 	return hip;
 }
 
-void ScmImageAnchor::updateColor()
+void ScmConstellationImageAnchor::updateColor()
 {
 	if (isSelected == true)
 	{
-		setBrush(starNameI18n.isEmpty() ? selectedColorNoStar : selectedColor);
+		setBrush(hip == 0 ? selectedColorNoStar : selectedColor);
 	}
 	else
 	{
-		setBrush(starNameI18n.isEmpty() ? colorNoStar : color);
+		setBrush(hip == 0 ? colorNoStar : color);
 	}
 }
 
-Vec2i ScmImageAnchor::getPosition() const
+Vec2i ScmConstellationImageAnchor::getPosition() const
 {
 	auto position     = pos();
 	auto origin       = movementBound.topLeft();
@@ -142,7 +132,18 @@ Vec2i ScmImageAnchor::getPosition() const
 	             static_cast<int>(position.y() - origin.y() + anchorRadius.height()));
 }
 
-void ScmImageAnchor::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void ScmConstellationImageAnchor::setPosition(const Vec2i &position)
+{
+	auto origin       = movementBound.topLeft();
+	auto anchorRadius = rect().size() * 0.5f;
+
+	qreal x = position[0] - anchorRadius.width() + origin.x();
+	qreal y = position[1] - anchorRadius.height() + origin.y();
+
+	setPos(x, y);
+}
+
+void ScmConstellationImageAnchor::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	QGraphicsItem::mousePressEvent(event);
 
@@ -152,12 +153,12 @@ void ScmImageAnchor::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	}
 }
 
-void ScmImageAnchor::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void ScmConstellationImageAnchor::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
 	QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void ScmImageAnchor::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+void ScmConstellationImageAnchor::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	QGraphicsItem::mouseMoveEvent(event);
 
@@ -200,7 +201,7 @@ void ScmImageAnchor::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 	}
 }
 
-ScmImageAnchor::ScmImageAnchor()
+ScmConstellationImageAnchor::ScmConstellationImageAnchor()
 	: QGraphicsEllipseItem()
 {
 	setFlag(ItemIsMovable, true);
@@ -208,7 +209,7 @@ ScmImageAnchor::ScmImageAnchor()
 	setZValue(10);
 }
 
-ScmImageAnchor::ScmImageAnchor(QPointF position, qreal diameter)
+ScmConstellationImageAnchor::ScmConstellationImageAnchor(QPointF position, qreal diameter)
 	: QGraphicsEllipseItem(position.x(), position.y(), diameter, diameter)
 {
 	setFlag(ItemIsMovable, true);
@@ -216,18 +217,18 @@ ScmImageAnchor::ScmImageAnchor(QPointF position, qreal diameter)
 	setZValue(10);
 }
 
-ScmImageAnchor::~ScmImageAnchor()
+ScmConstellationImageAnchor::~ScmConstellationImageAnchor()
 {
-	qDebug() << "SkyCultureMaker: Unloaded the ScmImageAnchor";
+	qDebug() << "SkyCultureMaker: Unloaded the ScmConstellationImageAnchor";
 }
 
-void ScmImageAnchor::setDiameter(qreal diameter)
+void ScmConstellationImageAnchor::setDiameter(qreal diameter)
 {
 	QPointF position = pos();
 	setPosDiameter(position.x(), position.y(), diameter);
 }
 
-void ScmImageAnchor::setPosDiameter(qreal x, qreal y, qreal diameter)
+void ScmConstellationImageAnchor::setPosDiameter(qreal x, qreal y, qreal diameter)
 {
 	setRect(x, y, diameter, diameter);
 	setPos(x, y);

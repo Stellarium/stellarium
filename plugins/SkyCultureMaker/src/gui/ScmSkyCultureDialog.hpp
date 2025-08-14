@@ -78,7 +78,9 @@ public slots:
 private slots:
 	void saveSkyCulture();
 	void constellationDialog();
+	void editSelectedConstellation();
 	void removeSelectedConstellation();
+	void updateEditConstellationButton();
 	void updateRemoveConstellationButton();
 	void saveLicense();
 
