@@ -19,6 +19,7 @@
 
 
 #include "StelObject.hpp"
+#include "Constellation.hpp"
 #include "ConstellationMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
@@ -35,6 +36,7 @@
 #include "SpecificTimeMgr.hpp"
 #include "planetsephems/sidereal_time.h"
 #include "planetsephems/precession.h"
+#include <qforeach.h>
 
 #include <QRegularExpression>
 #include <QDebug>
@@ -968,6 +970,26 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		res += QString("%1: %2<br/>").arg(q_("IAU Constellation"), constel);
 		res += getExtraInfoStrings(flags&IAUConstellation).join("");
 		res += omgr->getExtraInfoStrings(flags&IAUConstellation).join("");
+
+		// Add constellation from convex hull, if that is enabled in the first place.
+		static QSettings *conf=StelApp::getInstance().getSettings();
+		static const bool hullsEnabled = conf->value("gui/skyculture_enable_hulls", "false").toBool();
+		if (hullsEnabled)
+		{
+			QList<Constellation*> constels=cMgr->isObjectIn(this, true);
+			QString constelStr="---";
+			if (!constels.isEmpty())
+			{
+				QStringList cNames;
+				foreach(const auto &cst, constels)
+				{
+					cNames.append(cst->getInfoLabel());
+				}
+				constelStr = cNames.join(", ");
+			}
+			res += QString("%1: %2<br/>").arg(q_("Constellations"), constelStr);
+		}
+
 		if (cMgr->hasZodiac() && (currentPlanet=="Earth"))
 		{
 			QString zodiacSystemLabel = cMgr->getZodiacSystemName();

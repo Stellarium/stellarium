@@ -515,10 +515,12 @@ private:
 
 	QList<Constellation*> selected; // More than one can be selected at a time
 
+public:
 	//! Return list of constellations the object is member of.
 	//! In case of IAU constellations, the list is guaranteed to be of length 1.
 	//! @param useHull Prefer to use constellation hull, not IAU borders
 	QList<Constellation*> isObjectIn(const StelObject *s, bool useHull) const;
+private:
 	Constellation* findFromAbbreviation(const QString& abbreviation) const;
 	QList<Constellation*> constellations; //!< Constellations in the current SkyCulture
 	QFont asterFont;
