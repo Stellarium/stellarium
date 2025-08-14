@@ -43,8 +43,9 @@ class QJsonObject;
 class Asterism : public StelObject
 {
 	friend class AsterismMgr;
-private:
+public:
 	static const QString ASTERISM_TYPE;
+private:
 	Asterism();
 	~Asterism() override;
 

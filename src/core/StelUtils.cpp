@@ -83,16 +83,34 @@ QString getOperatingSystemInfo()
 {
 	QString OS = QSysInfo::prettyProductName();
 
-	#if defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HAIKU || defined Q_OS_SOLARIS
+        #if defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_SOLARIS
 	struct utsname buff;
 	if (uname(&buff) != -1)
 		OS = QString("%1 %2").arg(buff.sysname, buff.release);
 	#endif
 
+        #ifdef Q_OS_HAIKU
+        struct utsname buff;
+        if (uname(&buff) != -1)
+        {
+                QString revision = QString("%1").arg(buff.version).split(" ").first();
+                OS = QString("%1 R%2 (%3)").arg(buff.sysname, buff.release, revision);
+        }
+        #endif
+
 	if (OS.isEmpty() || OS==QStringLiteral("unknown"))
 		OS = "Unknown operating system";
 
 	return OS;
+}
+
+QString getAddressingMode()
+{
+        QString mode("32-bit");
+        #if defined(__LP64__) || defined(_WIN64)
+        mode = "64-bit";
+        #endif
+        return mode;
 }
 
 double hmsStrToHours(const QString& s)

@@ -924,14 +924,6 @@ public slots:
 	//! @param langCode two letter language code, e.g. "en", or "de".
 	static void setAppLanguage(QString langCode);
 
-	//! Get the current sky language.
-	//! @return two letter language code, e.g. "en", or "de" and so on.
-	static QString getSkyLanguage();
-
-	//! Set the current sky language.
-	//! @param langCode two letter language code, e.g. "en", or "de".
-	static void setSkyLanguage(QString langCode);
-
 	//! Translate the string.
 	static QString translate(QString englishText);
 

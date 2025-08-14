@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check CRLF line endings
-        uses: erclu/check-crlf@v1
+        uses: erclu/check-crlf@master
 
   check-json:
     name: "Linting JSON"

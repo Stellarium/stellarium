@@ -36,6 +36,7 @@ src/core/StelProjectorClasses.cpp
 src/core/StelObject.cpp
 src/core/StelObjectMgr.cpp
 src/core/StelSkyLayerMgr.cpp
+src/core/StelSkyCultureSkyPartition.cpp
 src/core/StelSkyCultureMgr.cpp
 src/core/StelMovementMgr.cpp
 src/core/SimbadSearcher.cpp
@@ -253,3 +254,8 @@ plugins/OnlineQueries/src/ui_onlineQueriesDialog.h
 plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp
 plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp
 plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h
+plugins/NebulaTextures/src/TileManager.cpp
+plugins/NebulaTextures/src/PlateSolver.cpp
+plugins/NebulaTextures/src/NebulaTextures.cpp
+plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp
+plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h

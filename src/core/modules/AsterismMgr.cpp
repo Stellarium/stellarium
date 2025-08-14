@@ -402,13 +402,11 @@ void AsterismMgr::updateI18n()
 			else
 				asterism->culturalName.pronounceI18n = qc_(asterism->culturalName.pronounce, context);
 		}
-		asterism->abbreviationI18n = trans.tryQtranslate(asterism->abbreviation, context);
+		const QString abbrContext = "abbreviation"; // fixed context for all abbreviations
+		asterism->abbreviationI18n = trans.tryQtranslate(asterism->abbreviation, abbrContext);
 		if (asterism->abbreviationI18n.isEmpty())
 		{
-			if (context.isEmpty())
-				asterism->abbreviationI18n = q_(asterism->abbreviation);
-			else
-				asterism->abbreviationI18n = qc_(asterism->abbreviation, context);
+			asterism->abbreviationI18n = qc_(asterism->abbreviation, abbrContext);
 		}
 	}
 }

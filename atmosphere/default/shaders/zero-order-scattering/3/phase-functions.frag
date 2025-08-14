@@ -58,3 +58,4 @@ vec4 phaseFunction_aerosols(float dotViewSun)
         CONST float k = 3/(8*PI)*(1-g2)/(2+g2);
         return vec4(k * (1+sqr(dotViewSun)) / pow(1+g2 - 2*g*dotViewSun, 1.5) + 1/((1-dotViewSun)*600+0.05))*0.904;
 }
+vec4 currentPhaseFunction(float dotViewSun) { return vec4(3.4028235e38); }

@@ -51,8 +51,9 @@ class StelPainter;
 class Constellation : public StelObject
 {
 	friend class ConstellationMgr;
-private:
+public:
 	static const QString CONSTELLATION_TYPE;
+private:
 	Constellation();
 	~Constellation() override;
 
@@ -189,7 +190,7 @@ private:
 	void makeConvexHull();
 
 
-	//! Constellation name. This is a culture-dependent thing, and in each skyculture a constellation has one name entry only.
+	//! Constellation name. This is culture-dependent, but in each skyculture a constellation has one name entry only.
 	//! Given multiple aspects of naming, we need all the components and more.
 	CulturalName culturalName;
 	//! Abbreviation (the short name or designation of constellations)
@@ -218,7 +219,7 @@ private:
 	//! If this is not empty, the constellation is a "dark constellation"
 	std::vector<StelObjectP> dark_constellation;
 	//! List of additional stars (or Nebula objects) defining the hull together with the stars from constellation
-	std::vector<StelObjectP> hullExtension; // TODO: generate the list of possible hull objects (stars, extension, dark CoordObjects) once, recreate actual hull periodically.
+	std::vector<StelObjectP> hullExtension;
 	//! In case this describes a single-star constellation (i.e. just one line segment that starts and ends at the same star),
 	//! or we have a line segment with such single star (start==end) somewhere within the constellation,
 	//! we will draw a circle with this opening radius.
@@ -229,7 +230,7 @@ private:
 	StelTextureSP artTexture;
 	StelVertexArray artPolygon;
 	SphericalCap boundingCap;
-	SphericalRegionP convexHull; //!< The convex hull formed by stars contained in the defined lines plus extra stars.
+	SphericalRegionP convexHull; //!< The convex hull formed by stars contained in the defined lines (constellation) plus extra stars (hullExtension).
 
 	//! Define whether art, lines, names and boundary must be drawn
 	LinearFader artFader, lineFader, nameFader, boundaryFader, hullFader;

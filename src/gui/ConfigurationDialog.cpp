@@ -181,14 +181,6 @@ void ConfigurationDialog::createDialogContent()
 	updateCurrentLanguage();
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentLanguage()));
 	connect(cb, SIGNAL(currentIndexChanged(const int)), this, SLOT(selectLanguage(const int)));
-	// Do the same for sky language:
-	cb = ui->skycultureLanguageComboBox;
-	cb->clear();
-	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir(), "skycultures"));
-	cb->model()->sort(0);
-	updateCurrentSkyLanguage();
-	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentSkyLanguage()));
-	connect(cb, SIGNAL(currentIndexChanged(const int)), this, SLOT(selectSkyLanguage(const int)));	
 	// Language properties are potentially delicate. Accidentally immediate storing may cause obvious problems.
 	connect(ui->languageSaveToolButton, SIGNAL(clicked()), this, SLOT(storeLanguageSettings()));
 	#else
@@ -496,39 +488,12 @@ void ConfigurationDialog::updateCurrentLanguage()
 		cb->setCurrentIndex(lt);
 }
 
-void ConfigurationDialog::updateCurrentSkyLanguage()
-{
-	QComboBox* cb = ui->skycultureLanguageComboBox;
-	QString skyLang = StelApp::getInstance().getLocaleMgr().getSkyLanguage();
-	QString l2 = StelTranslator::iso639_1CodeToNativeName(skyLang);
-
-	if (cb->currentText() == l2)
-		return;
-
-	int lt = cb->findText(l2, Qt::MatchExactly);
-	if (lt == -1 && skyLang.contains('_'))
-	{
-		l2 = skyLang.left(skyLang.indexOf('_'));
-		l2=StelTranslator::iso639_1CodeToNativeName(l2);
-		lt = cb->findText(l2, Qt::MatchExactly);
-	}
-	if (lt!=-1)
-		cb->setCurrentIndex(lt);
-}
-
 void ConfigurationDialog::selectLanguage(const int id)
 {
 	const QString &langName=static_cast<QComboBox*>(sender())->itemText(id);
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
 	StelMainView::getInstance().initTitleI18n();
-}
-
-void ConfigurationDialog::selectSkyLanguage(const int id)
-{
-	const QString &langName=static_cast<QComboBox*>(sender())->itemText(id);
-	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
-	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
 }
 
 void ConfigurationDialog::setStartupTimeMode()
@@ -942,8 +907,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/grs_jd",					propMgr->getStelPropertyValue("SolarSystem.grsJD").toDouble());
 	conf->setValue("astro/shadow_enlargement_danjon",		propMgr->getStelPropertyValue("SolarSystem.earthShadowEnlargementDanjon").toBool());
 	conf->setValue("astro/flag_planets_labels",			propMgr->getStelPropertyValue("SolarSystem.labelsDisplayed").toBool());
-	conf->setValue("astro/labels_amount",				propMgr->getStelPropertyValue("SolarSystem.labelsAmount").toDouble());
-	conf->setValue("viewing/flag_planets_native_names",		propMgr->getStelPropertyValue("SolarSystem.flagNativePlanetNames").toBool());
+	conf->setValue("astro/labels_amount",				propMgr->getStelPropertyValue("SolarSystem.labelsAmount").toDouble());	
 	conf->setValue("astro/flag_use_obj_models",			propMgr->getStelPropertyValue("SolarSystem.flagUseObjModels").toBool());
 	conf->setValue("astro/flag_show_obj_self_shadows",		propMgr->getStelPropertyValue("SolarSystem.flagShowObjSelfShadows").toBool());
 	conf->setValue("astro/apparent_magnitude_algorithm",		propMgr->getStelPropertyValue("SolarSystem.apparentMagnitudeAlgorithmOnEarth").toString());
@@ -1053,6 +1017,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_constellation_hulls",	propMgr->getStelPropertyValue("ConstellationMgr.hullsDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_art",		propMgr->getStelPropertyValue("ConstellationMgr.artDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_isolate_selected",	propMgr->getStelPropertyValue("ConstellationMgr.isolateSelected").toBool());
+	conf->setValue("viewing/flag_constellation_pick",		propMgr->getStelPropertyValue("ConstellationMgr.flagConstellationPick").toBool());
 	conf->setValue("viewing/flag_asterism_isolate_selected",	propMgr->getStelPropertyValue("AsterismMgr.isolateAsterismSelected").toBool());
 	conf->setValue("viewing/flag_landscape_autoselection",		propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeAutoSelection").toBool());
 	conf->setValue("viewing/flag_light_pollution_database",		propMgr->getStelPropertyValue("LandscapeMgr.flagUseLightPollutionFromDatabase").toBool());
@@ -1066,6 +1031,13 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/constellation_hulls_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.hullsFadeDuration").toDouble(), 'f', 1));
 	conf->setValue("viewing/constellation_lines_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.linesFadeDuration").toDouble(), 'f', 1));
 	conf->setValue("viewing/constellation_labels_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.namesFadeDuration").toDouble(), 'f', 1));
+
+	conf->setValue("viewing/flag_skyculture_zodiac",			propMgr->getStelPropertyValue("ConstellationMgr.zodiacDisplayed").toBool());
+	conf->setValue("viewing/skyculture_zodiac_thickness",		QString::number(propMgr->getStelPropertyValue("ConstellationMgr.zodiacThickness").toDouble(), 'f', 1));
+	conf->setValue("viewing/skyculture_zodiac_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.zodiacFadeDuration").toDouble(), 'f', 1));
+	conf->setValue("viewing/flag_skyculture_lunarsystem",		propMgr->getStelPropertyValue("ConstellationMgr.lunarSystemDisplayed").toBool());
+	conf->setValue("viewing/skyculture_lunarsystem_thickness",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.lunarSystemThickness").toDouble(), 'f', 1));
+	conf->setValue("viewing/skyculture_lunarsystem_fade_duration",	QString::number(propMgr->getStelPropertyValue("ConstellationMgr.lunarSystemFadeDuration").toDouble(), 'f', 1));
 
 	conf->setValue("viewing/asterism_font_size",			propMgr->getStelPropertyValue("AsterismMgr.fontSize").toInt());
 	conf->setValue("viewing/flag_asterism_drawing",		propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool());

@@ -482,6 +482,7 @@ where
 	\begin{description}
 	    \item[\jtag{native}] name in the original language of the skyculture. 
 	    \item[\jtag{english}] translation of the name's meaning. This is translated to users' language.
+	    \item[\jtag{byname}] an optional explanatory addition to the name. \newFeature{25.3}  May be helpful to explain mythological figures. This is translated to users' language, but is not included in search functions.
 	    \item[\jtag{pronounce}] (optional, but recommended) a Latin-character based transliteration/pronunciation aid, e.g. Pinyin for Chinese. This may also be translated to user language.
 	    \item[\jtag{transliteration}] (optional) a scientific transliteration where applicable. 
 	    \item[\jtag{IPA}] (optional) International Phonetic Alphabet, a standardardized phonetic spelling.
@@ -495,7 +496,7 @@ where
 
 	If your sky culture is not a variant of the generally known \file{Modern} (western)
 	sky culture, please make sure to provide an \jtag{english} translation (where possible) in addition to the name given in
-	the \jtag{native} language. Else translators will not be able to translate
+	the \jtag{native} language, or a \jtag{byname} which may help better understanding a figure. Else translators will not be able to translate
 	the name, and users will be less interested to learn about the culture. 
 	Also make very sure to use the same spelling consistently in \file{index.json} and \file{description.md}, 
 	and explain the context of stars (how these stars are used, or what they mean to the respective members of the culture), 
@@ -539,6 +540,7 @@ In the text editor you are using to edit \file{index.json},
 the arrays can be collated into the format required to code coordinate lists for dark constellations.
 
 \paragraph{Constellation area (convex hull)}
+\label{SC:constellation_area}
 The \indexterm[constellation!area]{constellation area}, \newFeature{25.2}or \indexterm[constellation!convex hull]{convex hull} of a constellation, 
 is an area of the sky described by a convex polygon which surrounds all stars that are part of the lines that form the constellation ``stick figure'', 
 plus those objects which are listed in \jtag{hull\_extension}. 
@@ -677,6 +679,111 @@ Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help ra
 \end{description}
 
 
+\subsection{Culture Relevant Coordinate Systems: Zodiac and Lunar Systems}
+\label{sec:skycultures:skyPartitions}
+\label{SC:zodiac_lunarSystem}
+
+Ancient \newFeature{25.2}high cultures in and around Asia took special note of the zone where the planets move: 
+along the path of the Moon, a system of 27 or 28 lunar stations or lunar mansions were formed, 
+and later the Sun's annual path was split into 12 equal-size parts of 30 degrees along the ecliptic.
+
+The best-known system in modern times is that of the \indexterm[zodiac!tropical]{tropical zodiac} of $12\times30$ degrees along the ecliptic, 
+counted from the equinox point (First point of Aries \Aries). The 12 sections, or \indexterm{zodiacal signs}, 
+were named after the constellations which resided there at the time the system was codified. 
+Precessional movement since antiquity moved the stars eastwards along the ecliptic by about one full sign, so that meanwhile there is usually 
+a mismatch between the \emph{constellation} the sun is in and the \emph{sign} which you find listed in bad newspapers' horoscope pages. 
+Astronomically, the zodiacal sign is just an old-fashioned way to write ecliptical coordinates of date.  
+
+In India, the partitions were defined so that the star Spica rests at the 180° mark, 
+so that the Indian or \indexterm[zodiac!sidereal]{sidereal zodiac} moves along the ecliptic with precession. 
+
+\begin{jsonfile}[\scriptsize]
+"zodiac": { 
+  "name": { "pronounce": "%(*Rāśi*)", "english": "Indian Zodiac"},
+  "context": "indian zodiac sign",
+  "partitions": [ 12, 3, 2, 5],
+  "extent": 9,
+  "link": { "star": 65474, "offset": 180},
+  "names": [ { "symbol": "\u2648", "native": "...", "english": "Ram"},
+             { "symbol": "\u2649", "native": "...", "english": "Bull"},
+               ...
+             { "symbol": "\u2653", "native": "...", "english": "Fishes"}]},
+\end{jsonfile}  
+where 
+\begin{description}
+\item[\jtag{name}] cultural name as described in \ref{SC:common_names}.
+\item[\jtag{context}] (optional, recommended) context data for all English names in zodiac (enhancement of localization support).
+\item[\jtag{comment}] (optional) commentary for zodiac, it will be used as extra commentary for translators also.
+\item[\jtag{partitions}] regular division of the centerline. The first element commonly is 12 (30-degree sign). 
+The other elements (up to 3) are used to describe the tick marks in decreasing order. The example means, 
+the 30 degrees are further divided in 3 sections (large 10-degree ticks), these are split in 2 5-degree sections with 5 sections (1-degrees) each.
+\item[\jtag{extent}] The zone of interest is closed off by parallel lines this many degrees north and south of the centerline. 
+A zodiac of 9 degrees encloses extreme positions of all major planets. 
+\item[\jtag{link}] (optional) The Indian \emph{sidereal zodiac} is described to be defined with the longitude of a certain star. 
+Usually and in this sample, Spica ($\alpha$ Vir, HIP~65474) is declared to lie at 180°.  If missing, the zodiac starts from \Aries. 
+\item[\jtag{names}] Sequence of names. In addition to the elements listed in \ref{SC:common_names}, \jtag{symbol} provides a Unicode symbol 
+(as shown here, these are the common zodiacal signs) or 1-2 letter string (for practical reasons, a number seems generally useful). 
+The number of entries must be equal to (or larger than) the first element of \jtag{partitions}. Excessive entries are ignored. 
+\end{description}
+
+
+\noindent More important for Indians however, and still relevant today, is the traditional system of \indexterm{lunar stations}, the \indexterm{nakshatras}. 
+the ecliptic is split into 27 equal-sized partitions, which are then further split into 4 equal parts.
+
+\begin{jsonfile}[\scriptsize]
+"lunar_system":  { 
+  "name": { "native": "...", ..., "english": "Nakshatras"},
+  "context": "indian lunar mansion",
+  "partitions": [ 27, 4],
+  "extent": 5,
+  "link": { "star": 65474, "offset": 180},
+  "names": [ { "symbol": "1", "native": "...", ..., "english": "Physician to the Gods"},
+             { "symbol": "2", "native": "...", ..., "english": "Bearer"},
+             { "symbol": "3", "native": "...", ..., "english": "Pleiades"},
+               ...
+\end{jsonfile}  
+where 
+\begin{description}
+\item[\jtag{name}] cultural name as described in \ref{SC:common_names}.
+\item[\jtag{context}] (optional, recommended) context data for all English names in lunar mansions (enhancement of localization support).
+\item[\jtag{comment}] (optional) commentary for lunar system, it will be used as extra commentary for translators also.
+\item[\jtag{partitions}] regular division of the centerline. 27 stations which are further divided in 4 equal parts.
+\item[\jtag{extent}] The zone of interest. With an obliquity of the Lunar orbit of about 5 degrees, a 5-degree zone seems appropriate.  
+\item[\jtag{link}] (optional) The Indian system is again described to be defined with the longitude of Spica ($\alpha$ Vir, HIP~65474) to lie at 180°.  
+If missing, the count starts from \Aries. 
+\item[\jtag{names}] Sequence of names. In addition to the elements listed in \ref{SC:common_names}, \jtag{symbol} provides a Unicode symbol 
+or 1-2 letter string (for practical reasons, a sequential number seems generally useful). 
+The number of entries must be equal to (or larger than) the first element of \jtag{partitions}. Excessive entries are ignored. 
+\end{description}
+
+\noindent In China, the 28 \indexterm{lunar mansions} are defined in a different way. 28 \indexterm{defining stars} mark the begin (western edge) of each mansion,
+and great circles are drawn from the celestial poles through these stars. In Stellarium, the defining stars are marked with a little circle. 
+The mansions are quite different in width. 
+
+\begin{jsonfile}[\scriptsize]
+"lunar_system": {
+  "name": { "native": "...", "pronounce": "%(*Xiù*)", "english": "Lunar Mansion"},
+  "context": "chinese lunar mansion",
+  "defining_stars": [65474, 69427, ...],
+  "coordsys": "equatorial",
+  "extent": 90,
+  "names": [ { "symbol": "1", "native": "...", "pronounce": "%(*Jiǎo*)", "english": "Horn"},
+             { "symbol": "2", "native": "...", "pronounce": "%(*Kàng*)", "english": "Neck"},
+               ...
+\end{jsonfile}  
+where 
+\begin{description}
+\item[\jtag{name}] cultural name as described in \ref{SC:common_names}.
+\item[\jtag{context}] (optional, recommended) context data for all English names in lunar mansions (enhancement of localization support).
+\item[\jtag{comment}] (optional) commentary for lunar system, it will be used as extra commentary for translators also.
+\item[\jtag{defining\_stars}] List of HIP numbers of the 28 defining stars.
+\item[\jtag{coordsys}] may be \jtag{equatorial} or \jtag{ecliptical} (default).
+\item[\jtag{extent}] The zone of interest. The Chinese mansions extend from pole to pole.   
+\item[\jtag{names}] Sequence of names. In addition to the elements listed in \ref{SC:common_names}, \jtag{symbol} provides a Unicode symbol 
+or 1-2 letter string (for practical reasons, a number seems generally useful). 
+The number of entries must be equal to (or larger than) the number of elements of \jtag{defining\_stars}. Excessive entries are ignored. 
+\end{description}
+
 
 \subsection{Names of Stars, Planets and Nonstellar Objects}
 \label{sec:skycultures:starnames}
@@ -753,11 +860,18 @@ When there is more than one name for a star, the first in the list is used as sc
 \subsubsection{Planet Names}
 \label{sec:skycultures:planetnames}
 
-The  \jtag{common\_names} dict can also contain native names of the planets. 
+The  \jtag{common\_names} array can also contain dicts of native names of the planets. 
 For these, the JSON key is formed from \jtag{NAME }, a space and the English name of the planet. 
-The value vector provides the dict entries (\jtag{native}, \jtag{english}, \ldots) listed above. 
+The value array provides the dict entries (\jtag{native}, \jtag{english}, \ldots) listed above. 
 
-Currently, if two \jtag{english} strings are given, the first is used as screen label. This may change as the features further evolve.
+Currently, if more than one \jtag{english} strings are given, the first is used as screen label. This may change as the features further evolve.
+
+In some cultures,\newFeature{25.2} Venus and even Mercury may have different names, depending on evening or morning visibility. 
+We can add a tag \jtag{visible} which may be either \jtag{morning} or \jtag{evening} to select the name. 
+If the base name should be the screen label, you must repeat it as first entry of the object's \jtag{NAME } name array. 
+If the elongation-dependent name should be screen label, place the names with \jtag{visible} first, then repeat the 
+standard name to be shown in the Info text. 
+See the examples for \indexterm{Venus} as \indexterm{Morning Star} and \indexterm{Evening Star} in the \texttt{modern} skyculture.
 
 In earlier versions it was recommended to combine the native name with an English translation. 
 In the new format here we should keep them separate, and the actual screen label can be combined from available 

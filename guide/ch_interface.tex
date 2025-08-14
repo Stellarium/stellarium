@@ -912,7 +912,7 @@ broadcasting! See section~\ref{sec:skycultures:licenses} for details.}}}
 
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{view_dialog_skyculture_tab.png}
+\centering\includegraphics[width=0.85\textwidth]{view_dialog_skyculture_tab.png}
 \caption{View Settings Window: Sky Culture Tab}
 \label{fig:gui:view:skyculture}
 \end{figure}
@@ -944,30 +944,34 @@ There are two sets of settings, for the screen label and for the label used in t
 The currently configured settings are immediately stored per-skyculture and retrieved when you load another skyculture, 
 so that you can adapt the system to your knowledge of languages and character systems. See \ref{SC:settings} for more.
 
-\item[Constellations name style]  You can
-  select whether you want to display abbreviated, original or
-  translated names.
-\item[Use native names for planets] If provided, show the planet names
-  as used in this sky culture (also shows modern planet name for
-  reference). %% TODO THIS FEATURE NEEDS SOME REWORK!
+\item[Abbreviated names] To provide a less cluttered screen in case constellation names are long, you can show abbreviations. 
+The Modern skycultures use the 3-letter codes given by the IAU, for the other skycultures we depend on our skyculture authors 
+to define unique short labels that help memorizing. Some skycultures still just show numbers.
+ 
+\item[Select single constellation/Isolated] See section~\ref{sec:skyculture:singleConstellations} for details.
 \item[Constellation labels] Activate display of constellation labels, like
   \guibutton{0.6}{bt_constellation_name.png} or \keys{V}. 
 \item[Constellation lines] Activate display of stick
   figures, like \guibutton{0.6}{bt_constellation.png} or \keys{C}, and you
   can configure constellation line thickness in the right spinbox.
+\item[Constellation art] Activate display of constellation
+  art (if available), like \guibutton{0.6}{bt_constellation_art.png} or
+  \keys{R}. You can also select the brightness here.
 \item[Constellation boundaries] Activate display of constellation boundaries,
   like \keys{B}. Currently, boundaries have been defined only for
   ``Modern'' sky cultures.
-\item[Art in brightness\ldots] Activate display of constellation
-  art (if available), like \guibutton{0.6}{bt_constellation_art.png} or
-  \keys{R}. You can also select the brightness here.
 \item[Asterism labels] Activate display of asterism labels, like \keys{Alt+V}.\newFeature{0.16.0}
 \item[Asterism lines] Activate display of asterism stick figures   
   (like the shortcut \keys{Alt+A}), and you can configure asterism line thickness as well.\newFeature{0.16.0}
 \item[Ray helpers] Activate display of special navigational lines which 
   connect stars often from different constellations (like the shortcut \keys{Alt+R}),
   and you can configure thickness of those lines as well.\newFeature{0.17.0}
-\item[Select single constellation/Isolated] See section~\ref{sec:skyculture:singleConstellations} for details.
+\item[Constellation areas] optional, advanced research feature. See page~\pageref{SC:constellation_area} for details. 
+\item[Zodiac] If this skyculture has a concept of Zodiac (usually a region around the ecliptic split into 12 equal-sized parts), 
+  you can enable it here. 
+\item[Lunar Stations] If this skyculture has a concept of Lunar stations or mansions, you can enable them here. 
+  For example, Indian skycultures observe 27 \emph{nakshatras} along the ecliptic, and Chinese skycultures have 28 Lunar 
+  mansions of unequal width in equatorial coordinates defined by particular stars. 
 \end{description}
 
 
@@ -1475,6 +1479,13 @@ The ``What's Up Tonight'' (WUT) tool\newFeature{0.16.0}%
 \label{fig:gui:AstroCalc:PC:Graphs}
 \end{figure}
 
+\begin{figure}[p]
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_eclipses_ase.jpg}
+\caption{Astronomical Calculations (AstroCalc): Eclipses / All Solar Eclipses}
+\label{fig:gui:AstroCalc:Eclipses:AllSolarEclipses}
+\end{figure}
+
+
 The objects are organized into type categories. Select an object type in the box labeled 
 \emph{Select a Category}, and all objects of that type which are above the horizon on the selected night 
 will be displayed in the box labeled \emph{Matching Objects}. For example, in the screenshot, 
@@ -1525,12 +1536,6 @@ is not reliable due to the principal unpredictability of $\Delta T$, caused by f
 \label{sec:gui:AstroCalc:Eclipses:AllSolarEclipses}
 
 
-\begin{figure}[hb]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_eclipses_ase.jpg}
-\caption{Astronomical Calculations (AstroCalc): Eclipses / All Solar Eclipses}
-\label{fig:gui:AstroCalc:Eclipses:AllSolarEclipses}
-\end{figure}
-
 \noindent This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:AllSolarEclipses}) contains data for all solar eclipses on the Earth in the selected time range. 
 Double click on a line in the table will set location and time of greatest eclipse. Click on the table row will show circumstances of selected eclipse in the lower table.
 
@@ -1576,7 +1581,7 @@ Double click on the table row will set time of greatest eclipse. Click on the ta
 The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius.
 This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis.
 
-\begin{figure}[p]
+\begin{figure}[tbp]
 \centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_eclipses_le.jpg}
 \caption{Astronomical Calculations (AstroCalc): Eclipses / Lunar Eclipses}
 \label{fig:gui:AstroCalc:Eclipses:LunarEclipses}
@@ -1605,7 +1610,7 @@ and setting times into account.
 
 Double click on the table row will set time of mid-transit.
 
-\begin{figure}[htp]
+\begin{figure}[tbp]
 \centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_transits.jpg}
 \caption{Astronomical Calculations (AstroCalc): Eclipses / Planetary Transits}
 \label{fig:gui:AstroCalc:Eclipses:PlanetaryTransits}
@@ -1619,7 +1624,7 @@ The Almanac tool\newFeature{25.1} has one subtab: ``Specific Time''.
 \subsubsection{The ``Specific Time'' Subtab}
 \label{sec:gui:AstroCalc:Almanac:SpecificTime}
 
-\begin{figure}[hb]
+\begin{figure}[tbp]
 \centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_almanac_specifictime.jpg}
 \caption{Astronomical Calculations (AstroCalc): Almanac / Specific Time}
 \label{fig:gui:AstroCalc:Almanac:SpecificTime}

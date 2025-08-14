@@ -56,16 +56,25 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	  artIntensity(0),
 	  artIntensityMinimumFov(1.0),
 	  artIntensityMaximumFov(2.0),
-	  artDisplayed(0),
-	  boundariesDisplayed(0),
+	  artDisplayed(false),
+	  boundariesDisplayed(false),
 	  boundariesFadeDuration(1.),
-	  linesDisplayed(0),
+	  linesDisplayed(false),
 	  linesFadeDuration(0.),
-	  namesDisplayed(0),
+	  namesDisplayed(false),
 	  namesFadeDuration(1.),
+	  hullsDisplayed(false),
+	  hullsFadeDuration(1.),
+	  zodiacFadeDuration(1.),
+	  lunarSystemFadeDuration(1.),
 	  checkLoadingData(false),
 	  constellationLineThickness(1),
-	  boundariesThickness(1)
+	  boundariesThickness(1),
+	  hullsThickness(1),
+	  zodiacThickness(1),
+	  lunarSystemThickness(1),
+	  zodiacColor(1.,1.,0.),
+	  lunarSystemColor(0., 1., 0.5)
 {
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
@@ -94,6 +103,8 @@ void ConstellationMgr::init()
 	setFlagLabels(conf->value("viewing/flag_constellation_name", false).toBool());
 	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries", false).toBool());
 	setFlagHulls(conf->value("viewing/flag_constellation_hulls", false).toBool());
+	setFlagZodiac(conf->value("viewing/flag_skyculture_zodiac", false).toBool());
+	setFlagLunarSystem(conf->value("viewing/flag_skyculture_lunarsystem", false).toBool());
 	setArtIntensity(conf->value("viewing/constellation_art_intensity", 0.5f).toFloat());
 	setArtFadeDuration(conf->value("viewing/constellation_art_fade_duration",2.f).toFloat());
 	setFlagArt(conf->value("viewing/flag_constellation_art", false).toBool());
@@ -104,6 +115,10 @@ void ConstellationMgr::init()
 	setBoundariesFadeDuration(conf->value("viewing/constellation_boundaries_fade_duration", 1.0f).toFloat());
 	setHullsThickness(conf->value("viewing/constellation_hulls_thickness", 1).toInt());
 	setHullsFadeDuration(conf->value("viewing/constellation_hulls_fade_duration", 1.0f).toFloat());
+	setZodiacThickness(conf->value("viewing/skyculture_zodiac_thickness", 1).toInt());
+	setZodiacFadeDuration(conf->value("viewing/skyculture_zodiac_fade_duration", 1.0f).toFloat());
+	setHullsThickness(conf->value("viewing/skyculture_lunarsystem_thickness", 1).toInt());
+	setLunarSystemFadeDuration(conf->value("viewing/skyculture_lunarsystem_fade_duration", 1.0f).toFloat());
 
 	setLinesFadeDuration(conf->value("viewing/constellation_lines_fade_duration", 1.0f).toFloat());
 	setLabelsFadeDuration(conf->value("viewing/constellation_labels_fade_duration", 1.0f).toFloat());
@@ -115,6 +130,8 @@ void ConstellationMgr::init()
 	setLinesColor(Vec3f(conf->value("color/const_lines_color", defaultColor).toString()));
 	setBoundariesColor(Vec3f(conf->value("color/const_boundary_color", "0.8,0.3,0.3").toString()));
 	setHullsColor(Vec3f(conf->value("color/const_hull_color", "0.6,0.2,0.2").toString()));
+	setZodiacColor(Vec3f(conf->value("color/skyculture_zodiac_color", "1.0,1.0,0.0").toString()));
+	setLunarSystemColor(Vec3f(conf->value("color/skyculture_lunarsystem_color", "0.0,1.0,0.5").toString()));
 	setLabelsColor(Vec3f(conf->value("color/const_names_color", defaultColor).toString()));
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
@@ -130,6 +147,9 @@ void ConstellationMgr::init()
 	addAction("actionShow_Constellation_Art", displayGroup, N_("Constellation art"), "artDisplayed", "R");
 	addAction("actionShow_Constellation_Labels", displayGroup, N_("Constellation labels"), "namesDisplayed", "V");
 	addAction("actionShow_Constellation_Boundaries", displayGroup, N_("Constellation boundaries"), "boundariesDisplayed", "B");
+	addAction("actionShow_Zodiac", displayGroup, N_("Zodiac (if defined in skyculture)"), "zodiacDisplayed");
+	addAction("actionShow_LunarSystem", displayGroup, N_("Lunar stations/mansions (if defined in skyculture)"), "lunarSystemDisplayed");
+
 	if (conf->value("gui/skyculture_enable_hulls", "false").toBool())
 		addAction("actionShow_Constellation_Hulls", displayGroup, N_("Constellation areas (hulls)"), "hullsDisplayed", "Shift+B");
 	addAction("actionShow_Constellation_Isolated", displayGroup, N_("Select single constellation"), "isolateSelected"); // no shortcut, sync with GUI
@@ -159,6 +179,21 @@ void ConstellationMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 	// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
 	deselectConstellations();
 	loadLinesNamesAndArt(skyCulture);
+
+	// Load optional StelSkyCultureSkyPartitions, or delete obsolete ones. [PRELIMINARY]
+	if (skyCulture.zodiac.count()>1)
+	{
+		zodiac = StelSkyCultureSkyPartitionP(new StelSkyCultureSkyPartition(skyCulture.zodiac));
+		zodiac->centerLine->setDisplayed(true);
+	}
+	else if (zodiac) zodiac.clear();
+
+	if (skyCulture.lunarSystem.count()>1)
+	{
+		lunarSystem = StelSkyCultureSkyPartitionP(new StelSkyCultureSkyPartition(skyCulture.lunarSystem));
+		lunarSystem->centerLine->setDisplayed(true);
+	}
+	else if (lunarSystem) lunarSystem.clear();
 
 	// Translate constellation names for the new sky culture
 	updateI18n();
@@ -272,7 +307,13 @@ void ConstellationMgr::deselectConstellations(void)
 
 void ConstellationMgr::selectAllConstellations()
 {
-	setSelectedConst(constellations);
+	// We really must select in a loop! (GH:#4415)
+	for (auto* constellation : qAsConst(constellations))
+	{
+		QList<Constellation *>cList;
+		cList.append(constellation);
+		setSelectedConst(cList);
+	}
 }
 
 void ConstellationMgr::selectConstellation(const QString &englishName)
@@ -380,6 +421,34 @@ Vec3f ConstellationMgr::getHullsColor() const
 	return Constellation::hullColor;
 }
 
+void ConstellationMgr::setZodiacColor(const Vec3f& color)
+{
+	if (zodiacColor != color)
+	{
+		zodiacColor = color;
+		emit zodiacColorChanged(color);
+	}
+}
+
+Vec3f ConstellationMgr::getZodiacColor() const
+{
+	return zodiacColor;
+}
+
+void ConstellationMgr::setLunarSystemColor(const Vec3f& color)
+{
+	if (lunarSystemColor != color)
+	{
+		lunarSystemColor = color;
+		emit lunarSystemColorChanged(color);
+	}
+}
+
+Vec3f ConstellationMgr::getLunarSystemColor() const
+{
+	return lunarSystemColor;
+}
+
 void ConstellationMgr::setLabelsColor(const Vec3f& color)
 {
 	if (Constellation::labelColor != color)
@@ -439,6 +508,28 @@ void ConstellationMgr::setHullsThickness(const int thickness)
 
 		StelApp::immediateSave("viewing/constellation_hulls_thickness", thickness);
 		emit hullsThicknessChanged(thickness);
+	}
+}
+
+void ConstellationMgr::setZodiacThickness(const int thickness)
+{
+	if(thickness!=zodiacThickness)
+	{
+		zodiacThickness = qMax(1, thickness); // cannot be 0 or neg.
+
+		StelApp::immediateSave("viewing/skyculture_zodiac_thickness", thickness);
+		emit zodiacThicknessChanged(thickness);
+	}
+}
+
+void ConstellationMgr::setLunarSystemThickness(const int thickness)
+{
+	if(thickness!=lunarSystemThickness)
+	{
+		lunarSystemThickness = qMax(1, thickness); // cannot be 0 or neg.
+
+		StelApp::immediateSave("viewing/skyculture_lunar_system_thickness", thickness);
+		emit lunarSystemThicknessChanged(thickness);
 	}
 }
 
@@ -612,6 +703,11 @@ void ConstellationMgr::draw(StelCore* core)
 	drawArt(sPainter, vel);
 	drawBoundaries(sPainter, vel);
 	drawHulls(sPainter, vel);
+	if (core->getCurrentPlanet()->getEnglishName()=="Earth")
+	{
+		drawZodiac(sPainter, vel);
+		drawLunarSystem(sPainter, vel);
+	}
 }
 
 // Draw constellations art textures
@@ -703,6 +799,7 @@ void ConstellationMgr::updateI18n()
 	for (auto* constellation : std::as_const(constellations))
 	{
 		QString context = constellation->context;
+
 		constellation->culturalName.translatedI18n = trans.tryQtranslate(constellation->culturalName.translated, context);
 		if (constellation->culturalName.translatedI18n.isEmpty())
 		{
@@ -711,6 +808,7 @@ void ConstellationMgr::updateI18n()
 			else
 				constellation->culturalName.translatedI18n = qc_(constellation->culturalName.translated, context);
 		}
+
 		constellation->culturalName.pronounceI18n = trans.tryQtranslate(constellation->culturalName.pronounce, context);
 		if (constellation->culturalName.pronounceI18n.isEmpty())
 		{
@@ -719,15 +817,27 @@ void ConstellationMgr::updateI18n()
 			else
 				constellation->culturalName.pronounceI18n = qc_(constellation->culturalName.pronounce, context);
 		}
-		constellation->abbreviationI18n = trans.tryQtranslate(constellation->abbreviation, context).trimmed();
-		if (constellation->abbreviationI18n.isEmpty())
+
+		constellation->culturalName.bynameI18n = trans.tryQtranslate(constellation->culturalName.byname, context);
+		if (constellation->culturalName.bynameI18n.isEmpty())
 		{
 			if (context.isEmpty())
-				constellation->abbreviationI18n = q_(constellation->abbreviation).trimmed();
+				constellation->culturalName.bynameI18n = q_(constellation->culturalName.byname);
 			else
-				constellation->abbreviationI18n = qc_(constellation->abbreviation, context).trimmed();
+				constellation->culturalName.bynameI18n = qc_(constellation->culturalName.byname, context);
+		}
+
+		const QString abbrContext = "abbreviation"; // fixed context for all abbreviations
+		constellation->abbreviationI18n = trans.tryQtranslate(constellation->abbreviation, abbrContext).trimmed();
+		if (constellation->abbreviationI18n.isEmpty())
+		{
+			constellation->abbreviationI18n = qc_(constellation->abbreviation, abbrContext).trimmed();
 		}
 	}
+	if (zodiac)
+		zodiac->updateI18n();
+	if (lunarSystem)
+		lunarSystem->updateI18n();
 }
 
 // update faders
@@ -746,6 +856,12 @@ void ConstellationMgr::update(double deltaTime)
 	{
 		constellation->update(delta);
 	}
+	zodiacFader.update(delta);
+	lunarSystemFader.update(delta);
+	if (zodiac)
+		zodiac->centerLine->update(deltaTime);
+	if (lunarSystem)
+		lunarSystem->centerLine->update(deltaTime);
 }
 
 void ConstellationMgr::setArtIntensity(const float intensity)
@@ -846,6 +962,38 @@ void ConstellationMgr::setHullsFadeDuration(const float duration)
 float ConstellationMgr::getHullsFadeDuration() const
 {
 	return hullsFadeDuration;
+}
+
+void ConstellationMgr::setZodiacFadeDuration(const float duration)
+{
+	if (!qFuzzyCompare(zodiacFadeDuration, duration))
+	{
+		zodiacFadeDuration = duration;
+		zodiacFader.setDuration(static_cast<int>(zodiacFadeDuration * 1000.f));
+		StelApp::immediateSave("viewing/skyculture_zodiac_fade_duration", duration);
+		emit zodiacFadeDurationChanged(duration);
+	}
+}
+
+float ConstellationMgr::getZodiacFadeDuration() const
+{
+	return zodiacFadeDuration;
+}
+
+void ConstellationMgr::setLunarSystemFadeDuration(const float duration)
+{
+	if (!qFuzzyCompare(lunarSystemFadeDuration, duration))
+	{
+		lunarSystemFadeDuration=duration;
+		lunarSystemFader.setDuration(static_cast<int>(lunarSystemFadeDuration * 1000.f));
+		StelApp::immediateSave("viewing/skyculture_lunarsystem_fade_duration", duration);
+		emit lunarSystemFadeDurationChanged(duration);
+	}
+}
+
+float ConstellationMgr::getLunarSystemFadeDuration() const
+{
+	return lunarSystemFadeDuration;
 }
 
 void ConstellationMgr::setLinesFadeDuration(const float duration)
@@ -973,6 +1121,36 @@ void ConstellationMgr::setFlagHulls(const bool displayed)
 bool ConstellationMgr::getFlagHulls(void) const
 {
 	return hullsDisplayed;
+}
+
+void ConstellationMgr::setFlagZodiac(const bool displayed)
+{
+	if (zodiacFader != displayed)
+	{
+		zodiacFader = displayed;
+		StelApp::immediateSave("viewing/flag_skyculture_zodiac", displayed);
+		emit zodiacDisplayedChanged(displayed);
+	}
+}
+
+bool ConstellationMgr::getFlagZodiac(void) const
+{
+	return zodiacFader;
+}
+
+void ConstellationMgr::setFlagLunarSystem(const bool displayed)
+{
+	if (lunarSystemFader != displayed)
+	{
+		lunarSystemFader = displayed;
+		StelApp::immediateSave("viewing/flag_skyculture_lunarsystem", displayed);
+		emit lunarSystemDisplayedChanged(displayed);
+	}
+}
+
+bool ConstellationMgr::getFlagLunarSystem(void) const
+{
+	return lunarSystemFader;
 }
 
 void ConstellationMgr::setFlagArt(const bool displayed)
@@ -1444,6 +1622,75 @@ void ConstellationMgr::drawHulls(StelPainter& sPainter, const Vec3d &obsVelocity
 	sPainter.setLineSmooth(false);
 }
 
+// Draw the zodiac, if any is defined in the current skyculture.
+// @param obsVelocity is the speed vector of the observer planet to distort zodiac lines by aberration.
+void ConstellationMgr::drawZodiac(StelPainter& sPainter, const Vec3d &obsVelocity) const
+{
+	if (!zodiac || zodiacFader.getInterstate()==0.)
+		return;
+
+	sPainter.setColor(zodiacColor, zodiacFader.getInterstate());
+	zodiac->centerLine->setColor(zodiacColor);
+	zodiac->centerLine->setLineThickness(zodiacThickness);
+	zodiac->centerLine->setPartThickness(zodiacThickness);
+	sPainter.setBlending(true);
+	const float oldLineWidth=sPainter.getLineWidth();
+	sPainter.setLineWidth(zodiacThickness);
+	sPainter.setLineSmooth(true);
+	zodiac->draw(sPainter, obsVelocity);
+	sPainter.setLineWidth(oldLineWidth); // restore line thickness
+}
+// Draw the lunar system lines, if any is defined in the current skyculture.
+// @param obsVelocity is the speed vector of the observer planet to distort lunarSystem lines by aberration.
+void ConstellationMgr::drawLunarSystem(StelPainter& sPainter, const Vec3d &obsVelocity) const
+{
+	if (!lunarSystem || lunarSystemFader.getInterstate()==0.)
+		return;
+
+	sPainter.setColor(lunarSystemColor, lunarSystemFader.getInterstate());
+	lunarSystem->centerLine->setColor(lunarSystemColor);
+	lunarSystem->centerLine->setLineThickness(lunarSystemThickness);
+	lunarSystem->centerLine->setPartThickness(lunarSystemThickness);
+	sPainter.setBlending(true);
+	const float oldLineWidth=sPainter.getLineWidth();
+	sPainter.setLineWidth(lunarSystemThickness);
+	sPainter.setLineSmooth(true);
+	lunarSystem->draw(sPainter, obsVelocity);
+	sPainter.setLineWidth(oldLineWidth); // restore line thickness
+}
+
+//! Returns the translated name of the Zodiac system
+QString ConstellationMgr::getZodiacSystemName() const
+{
+	if (zodiac)
+		return zodiac->getCulturalName();
+	else
+		return QString();
+}
+//! Returns the translated name of the Lunar system
+QString ConstellationMgr::getLunarSystemName() const
+{
+	if (lunarSystem)
+		return lunarSystem->getCulturalName();
+	else
+		return QString();
+}
+//! Return longitude in the culture's zodiacal longitudes
+QString ConstellationMgr::getZodiacCoordinate(Vec3d eqNow) const
+{
+	if (zodiac)
+		return zodiac->getLongitudeCoordinate(eqNow);
+	else
+		return QString();
+}
+//! Return lunar station in the culture's Lunar system
+QString ConstellationMgr::getLunarSystemCoordinate(Vec3d eqNow) const
+{
+	if (lunarSystem)
+		return lunarSystem->getLongitudeCoordinate(eqNow);
+	else
+		return QString();
+}
 
 StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const
 {

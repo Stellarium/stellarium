@@ -41,9 +41,6 @@ public:
 	StelTextureSP allsky; // allsky low res version of the texture.
 	StelTextureSP normalAllsky; // allsky low res version of the texture.
 	StelTextureSP horizonAllsky; // allsky low res version of the texture.
-
-	// Used for smooth fade in
-	QTimeLine texFader;
 };
 
 static QString getExt(const QString& format)
@@ -189,10 +186,16 @@ bool HipsSurvey::getAllsky()
 	}
 	if (networkReply->isFinished())
 	{
+		updateProgressBar(100, 100);
 		if (networkReply->error() == QNetworkReply::NoError) {
-			qDebug() << "got allsky";
 			QByteArray data = networkReply->readAll();
+			qDebug().nospace() << "Got allsky for " << getTitle() << ", " << data.size() << " bytes";
 			allsky = QImage::fromData(data);
+			if (allsky.isNull())
+			{
+				qWarning() << "Failed to decode allsky image data";
+				noAllsky = true;
+			}
 		} else {
 			noAllsky = true;
 		}
@@ -431,7 +434,7 @@ static bool isClipped(int n, double (*pos)[4])
     return false;
 }
 
-bool HipsSurvey::bindTextures(const HipsTile& tile)
+bool HipsSurvey::bindTextures(HipsTile& tile, const int orderMin, Vec2f& texCoordShift, float& texCoordScale, bool& tileIsLoaded)
 {
 	constexpr int colorTexUnit = 0;
 	constexpr int normalTexUnit = 2;
@@ -440,22 +443,53 @@ bool HipsSurvey::bindTextures(const HipsTile& tile)
 	if (normals && !tile.normalTexture && !tile.normalAllsky) return false;
 	if (horizons && !tile.horizonTexture && !tile.horizonAllsky) return false;
 
-	if (!tile.texture->bind(colorTexUnit) && (!tile.allsky || !tile.allsky->bind(colorTexUnit)))
-		return false;
-	if (normals && tile.normalTexture && !tile.normalTexture->bind(normalTexUnit) && (!tile.normalAllsky || !tile.normalAllsky->bind(normalTexUnit)))
-		return false;
-	if (horizons && tile.horizonTexture && !tile.horizonTexture->bind(horizonTexUnit) && (!tile.horizonAllsky || !tile.horizonAllsky->bind(horizonTexUnit)))
-		return false;
+	bool ok = tile.texture->bind(colorTexUnit);
+	if (!ok) ok = tile.allsky && tile.allsky->bind(colorTexUnit);
+	if (ok && normals)
+	{
+		ok = tile.normalTexture && tile.normalTexture->bind(normalTexUnit);
+		if (!ok) ok = tile.normalAllsky && tile.normalAllsky->bind(normalTexUnit);
+	}
+	if (ok && horizons)
+	{
+		ok = tile.horizonTexture && tile.horizonTexture->bind(horizonTexUnit);
+		if (!ok) ok = tile.horizonAllsky && tile.horizonAllsky->bind(horizonTexUnit);
+	}
 
-	return true;
+	if (!ok) tileIsLoaded = false;
+
+	if (!ok && tile.order > orderMin)
+	{
+		// Current-level textures failed to bind, let's try the previous level
+		const auto parentTile = getTile(tile.order - 1, tile.pix / 4);
+		if (!parentTile) return false;
+		assert(parentTile->order == tile.order - 1);
+		assert(parentTile->order >= orderMin);
+
+		static const Vec2f bottomLeftPartUV[] = {Vec2f(0,0.5), Vec2f(0,0), Vec2f(0.5,0.5), Vec2f(0.5,0)};
+		const int pos = tile.pix % 4;
+		// Like the multiplication of the texture transform by scale and shift matrix on the left:
+		// transform = shift(bottomLeftPartUV[pos]) * scale(0.5) * transform
+		texCoordShift = texCoordShift * 0.5f + bottomLeftPartUV[pos];
+		texCoordScale *= 0.5f;
+
+		ok = bindTextures(*parentTile, orderMin, texCoordShift, texCoordScale, tileIsLoaded);
+		if (!ok) return false;
+	}
+
+	return ok;
 }
 
 void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
-                          const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback)
+                          const SphericalCap& viewportShape, StelPainter* sPainter,
+                          Vec3d observerVelocity, DrawCallback callback)
 {
 	Vec3d pos;
 	Mat3d mat3;
 	const Vec2d uv[4] = {Vec2d(0, 0), Vec2d(0, 1), Vec2d(1, 0), Vec2d(1, 1)};
+	bool tileLoaded = true;
+	Vec2f texCoordShift(0,0);
+	float texCoordScale = 1;
 	HipsTile *tile;
 	int orderMin = getPropertyInt("hips_order_min", 3);
 	QVector<Vec3d> vertsArray;
@@ -515,26 +549,16 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	tile = getTile(order, pix);
 
 	if (!tile) return;
-	if (!bindTextures(*tile)) return;
+	if (!bindTextures(*tile, orderMin, texCoordShift, texCoordScale, tileLoaded))
+		return;
 
-	if (tile->texFader.state() == QTimeLine::NotRunning && tile->texFader.currentValue() == 0.0)
-		tile->texFader.start();
-	nbLoadedTiles++;
+	if (tileLoaded)
+		nbLoadedTiles++;
 
-	if (order < drawOrder)
-	{
-		// If all the children tiles are loaded, we can skip the parent.
-		int i;
-		for (i = 0; i < 4; i++)
-		{
-			HipsTile* child = getTile(order + 1, pix * 4 + i);
-			if (!child || child->texFader.currentValue() < 1.0) break;
-		}
-		if (i == 4) goto skip_render;
-	}
+	if (order < drawOrder) goto skip_render;
 
 	// Actually draw the tile, as a single quad.
-	alpha = color[3] * static_cast<float>(tile->texFader.currentValue());
+	alpha = color[3];
 	if (alpha < 1.0f)
 	{
 		sPainter->setBlending(true);
@@ -547,7 +571,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	}
 	sPainter->setCullFace(true);
 	nb = fillArrays(order, pix, drawOrder, splitOrder, outside, sPainter, observerVelocity,
-	                vertsArray, texArray, indicesArray);
+	                texCoordShift, texCoordScale, vertsArray, texArray, indicesArray);
 	if (!callback) {
 		sPainter->setArrays(vertsArray.constData(), texArray.constData());
 		sPainter->drawFromArray(StelPainter::Triangles, nb, 0, true, indicesArray.constData());
@@ -571,6 +595,7 @@ skip_render:
 
 int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
                            bool outside, StelPainter* sPainter, Vec3d observerVelocity,
+                           const Vec2f& texCoordShift, const float texCoordScale,
                            QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices)
 {
 	Q_UNUSED(sPainter)
@@ -605,7 +630,7 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 			}
 
 			verts << pos;
-			tex << texPos;
+			tex << texPos * texCoordScale + texCoordShift;
 		}
 	}
 	for (uint16_t i = 0; i < gridSize; i++)

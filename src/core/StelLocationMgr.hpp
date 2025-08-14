@@ -25,9 +25,7 @@
 #include <QMetaType>
 #include <QMap>
 #include <QImage>
-#ifdef Q_OS_WIN
 #include <QtPositioning/QGeoPositionInfoSource>
-#endif
 #include "VecMath.hpp"
 
 typedef QList<StelLocation> LocationList;
@@ -71,7 +69,7 @@ public:
 	const StelLocation locationFromCLI() const;
 
 	//! Return a valid location when no valid one was found.
-	const StelLocation& getLastResortLocation() const {return lastResortLocation;}
+	const StelLocation& getLastResortLocation();
 	
 	//! Get whether a location can be permanently added to the list of user locations
 	//! The main constraint is that the small string must be unique
@@ -180,10 +178,16 @@ private slots:
 #ifdef ENABLE_GPS
 	void changeLocationFromGPSQuery(const StelLocation& loc);
 	void gpsQueryError(const QString& err);
-	#ifdef Q_OS_WIN
+	//#ifdef Q_OS_WIN
+	//! uwes-ufo's so-far Windows-only extension of the button
 	void positionUpdated(QGeoPositionInfo gpsPos);
-	#endif
+	//#endif
 #endif
+	/// MAYBE NOT NEEDED AFTER ALL:
+	//! Use QLocation services to get location from OS (via IP, Wifi, ...)
+	//! Needs permissions.
+	void positionUpdatedFromOS(const QGeoPositionInfo &info);
+
 private:
 	void loadRegions();
 	void loadCountries();
@@ -219,9 +223,9 @@ private:
 	QString planetName;
 
 	GPSLookupHelper *nmeaHelper,*libGpsHelper;
-#ifdef Q_OS_WIN
-	QGeoPositionInfoSource *positionSource=Q_NULLPTR;
-#endif
+	QGeoPositionInfoSource *positionSource; // Used in the "Location from GPS or OS" query button action that may update.
+	// Used in the Location from Network query. Not sure if we really need two.
+	QGeoPositionInfoSource *qGeoPositionInfoSource;
 };
 
 #endif // STELLOCATIONMGR_HPP

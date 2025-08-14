@@ -268,7 +268,7 @@ void NomenclatureMgr::loadNomenclature()
 		missingPlanets.removeDuplicates();
 		if (!missingPlanets.isEmpty())
 			// Nothing to worry about - We still don't include all objects.
-			qInfo().noquote() << "INFO: Cannot find these planetary objects to assign nomenclature items:" << missingPlanets.join(", ");
+			qInfo().noquote() << "Cannot find these planetary objects to assign nomenclature items:" << missingPlanets.join(", ");
 	}
 }
 

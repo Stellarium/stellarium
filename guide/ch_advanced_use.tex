@@ -103,8 +103,7 @@ endings''.\footnote{This is a very confusing default setting and in fact
 \begin{description}
 \item[installation directory] This is in the
   \file{share/stellarium} sub-directory of the installation prefix,
-  i.e., usually \file{/usr/share/stellarium} or
-  \file{/usr/local/share/stellarium/}.
+  i.e., usually \file{/usr/share/stellarium}.
 \item[user directory] This is the \file{.stellarium} sub-directory of
   user's home directory, i.e.,
   \file{\textasciitilde{}/.stellarium/}. This is a hidden folder, so
@@ -113,6 +112,36 @@ endings''.\footnote{This is a very confusing default setting and in fact
 \item[screenshot save directory] Screenshots are saved to the user's
   home directory.
 \end{description}
+
+\subsection{*BSD/Solaris/OpenIndiana}
+\label{sec:FilesAndDirectories:UNIX}
+
+\begin{description}
+\item[installation directory] This is in the
+  \file{share/stellarium} sub-directory of the installation prefix,
+  i.e., usually \file{/usr/local/share/stellarium/}.
+\item[user directory] This is the \file{.stellarium} sub-directory of
+  user's home directory, i.e.,
+  \file{\textasciitilde{}/.stellarium/}. This is a hidden folder, so
+  if you are using a graphical file browser, you may want to change
+  its settings to ``display hidden folders''.
+\item[screenshot save directory] Screenshots are saved to the user's
+  home directory.
+\end{description}
+
+\subsection{Haiku}
+\label{sec:FilesAndDirectories:Haiku}
+
+\begin{description}
+\item[installation directory] This is in the
+  \file{/boot/system/data/stellarium/} sub-directory.
+\item[user directory] This is in the user's home directory, i.e., 
+  \file{\textasciitilde{}/config/settings/Stellarium/} 
+  or \file{/boot/home/config/settings/Stellarium/} sub-directory.
+\item[screenshot save directory] Screenshots are saved to the user's
+  home directory.
+\end{description}
+
 
 \subsection{Customized Location}
 \label{sec:FilesAndDirectories:Custom}

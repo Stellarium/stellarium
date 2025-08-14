@@ -100,10 +100,11 @@ Name: "{userdesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: 
 
 [Registry]
 ; Set file associations for Stellarium scripts
-Root: HKCR; Subkey: ".ssc"; ValueType: string; ValueName: ""; ValueData: "Stellarium.Script"; Flags: uninsdeletevalue
-Root: HKCR; Subkey: "Stellarium.Script"; ValueType: string; ValueName: ""; ValueData: "Stellarium Script"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "Stellarium.Script\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\stellarium.exe,0"
-Root: HKCR; Subkey: "Stellarium.Script\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\stellarium.exe"" --startup-script ""%1"""
+Root: HKLM; Subkey: "Software\Classes\.ssc"; ValueType: string; ValueName: ""; ValueData: "Stellarium.Script"; Flags: uninsdeletevalue
+Root: HKLM; Subkey: "Software\Classes\Stellarium.Script"; ValueType: string; ValueName: ""; ValueData: "Stellarium Script"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\Classes\Stellarium.Script\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\stellarium.exe,0"
+Root: HKLM; Subkey: "Software\Classes\Stellarium.Script\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\stellarium.exe"" --startup-script ""%1"""
+
 
 ; Recommended use Inno Setup 5.5.3+
 [Languages]

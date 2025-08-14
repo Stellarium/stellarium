@@ -164,22 +164,45 @@ def update_cultures_pot(sclist, pot):
                 if native and obj_name == '':
                     obj_name = native
 
+                if 'pronounce' in name:
+                    pronounce = name['pronounce']
+                    if len(pronounce) == 0:
+                        pronounce = None
+                else:
+                    pronounce = None
+
+                if 'byname' in name:
+                    byname = name['byname']
+                    if len(byname) == 0:
+                        byname = None
+                else:
+                    byname = None
+
+                comment = f'{sc_name} {obj_type}'
+                if native:
+                    comment += f', native: {native}'
+
+                if pronounce:
+                    comment += ', pronounce: ' + name['pronounce']
+
+                if english:
+                    comment += ', english: ' + name['english']
+
+                if byname:
+                    comment += ', byname: ' + name['byname']
+
+                if 'translators_comments' in name:
+                    comment += '\n' + name['translators_comments']
+
+                context = None
+                if 'context' in name:
+                    context = name['context']
+
+
+                # Extract 'english' string for translation (with context for uniqueness) 
                 if english:
                     # Don't extract items that are already translated in other places
                     if not english in common_names:
-                        comment = f'{sc_name} {obj_type}'
-                        if native:
-                            comment += f', native: {native}'
-
-                        if 'pronounce' in name and len(name['pronounce']) != 0:
-                            comment += ', pronounce: ' + name['pronounce']
-
-                        if 'translators_comments' in name:
-                            comment += '\n' + name['translators_comments']
-
-                        context = None
-                        if 'context' in name:
-                            context = name['context']
 
                         cons_ast_names.add(english)
 
@@ -192,8 +215,56 @@ def update_cultures_pot(sclist, pot):
                             pot.append(entry)
                 else:
                     print(f'{sky_culture}: warning: common_name property in {obj_type} "{obj_id}" has no English name', file=sys.stderr)
+
+                # Extract 'pronounce' string for translation (with context for uniqueness)                     
+                if pronounce:
+                    # Don't extract items that are already translated in other places
+                    if not pronounce in common_names:
+                        
+                        cons_ast_names.add(pronounce)
+
+                        entry = polib.POEntry(comment = comment, msgid = pronounce, msgstr = "", msgctxt = context)
+                        if entry in pot:
+                            prev_entry = pot.find(entry.msgid, msgctxt = context)
+                            assert prev_entry
+                            prev_entry.comment += '\n' + comment
+                        else:
+                            pot.append(entry)
+                #else:
+                #    print(f'{sky_culture}: info: common_name property in {obj_type} "{obj_id}" has no pronounce element', file=sys.stderr)
+                    
+                # Extract 'byname' string for translation (with context for uniqueness)                     
+                if byname:
+                    # Don't extract items that are already translated in other places
+                    if not byname in common_names:
+
+                        cons_ast_names.add(byname)
+
+                        entry = polib.POEntry(comment = comment, msgid = byname, msgstr = "", msgctxt = context)
+                        if entry in pot:
+                            prev_entry = pot.find(entry.msgid, msgctxt = context)
+                            assert prev_entry
+                            prev_entry.comment += '\n' + comment
+                        else:
+                            pot.append(entry)
+                #else:
+                #    print(f'{sky_culture}: info: common_name property in {obj_type} "{obj_id}" has no byname element', file=sys.stderr)
+                    
+                    
             else:
                 print(f'{sky_culture}: warning: no common_name key in {obj_type} "{obj_id}"', file=sys.stderr)
+
+            # process abbreviations of constellations and asterisms
+            parts = obj_id.split(' ')
+            abbr_comment = f'Abbreviation of {obj_type} in {sc_name} sky culture'
+            abbr_context = 'abbreviation'
+            entry = polib.POEntry(comment = abbr_comment, msgid = parts[2], msgstr = "", msgctxt = abbr_context)
+            if entry in pot:
+                prev_entry = pot.find(entry.msgid, msgctxt = abbr_context)
+                assert prev_entry
+                prev_entry.comment += '\n' + abbr_comment
+            else:
+                pot.append(entry)
 
             if obj_name == '':
                 obj_name = obj_id
@@ -277,6 +348,68 @@ def update_cultures_pot(sclist, pot):
                         prev_entry.comment += '\n' + comment
                 else:
                     pot.append(entry)
+                    
+                # TODO: Add translation of pronounce tag!
+
+    def process_extra_names(objects, pot, sc_name):
+        if 'context' in objects:
+            context = objects["context"]
+        else:
+            context = None
+
+        if 'comment' in objects:
+            ecomment = objects["comment"]
+        else:
+            ecomment = None
+
+        for name in objects["names"]:
+            if 'english' in name:
+                english = name['english']
+                if len(english) == 0:
+                    english = None
+            else:
+                english = None
+
+            if not english:
+                continue
+
+            comment = f'Name of zodiac sign or name of lunar mansion in {sc_name} sky culture'
+            if ecomment:
+                comment += '\n' + ecomment
+
+            entry = polib.POEntry(comment = comment, msgid = english, msgstr = "", msgctxt = context)
+            if entry in pot:
+                prev_entry = pot.find(entry.msgid, msgctxt = context)
+                assert prev_entry
+                if comment:
+                    prev_entry.comment += '\n' + comment
+            else:
+                pot.append(entry)
+
+            # pronounce is language dependent! The element is optional. 
+            if 'pronounce' in name:
+                pronounce = name['pronounce']
+                if len(pronounce) == 0:
+                    pronounce = None
+            else:
+                pronounce = None
+
+            if not pronounce:
+                continue
+
+            comment = f'Pronunciation of zodiac sign or name of lunar mansion in {sc_name} sky culture'
+            if ecomment:
+                comment += '\n' + ecomment
+
+            entry = polib.POEntry(comment = comment, msgid = pronounce, msgstr = "", msgctxt = context)
+            if entry in pot:
+                prev_entry = pot.find(entry.msgid, msgctxt = context)
+                assert prev_entry
+                if comment:
+                    prev_entry.comment += '\n' + comment
+            else:
+                pot.append(entry)
+
 
     for sky_culture in sclist:
         data_path = os.path.join(SCDIR, sky_culture)
@@ -293,6 +426,10 @@ def update_cultures_pot(sclist, pot):
                 process_cons_or_asterism(data['constellations'], "constellation", pot, sc_name)
             if 'asterisms' in data:
                 process_cons_or_asterism(data['asterisms'], "asterism", pot, sc_name)
+            if 'zodiac' in data:
+                process_extra_names(data['zodiac'], pot, sc_name)
+            if 'lunar_system' in data:
+                process_extra_names(data['lunar_system'], pot, sc_name)
             if 'common_names' in data:
                 process_names(data['common_names'], pot, sc_name)
 

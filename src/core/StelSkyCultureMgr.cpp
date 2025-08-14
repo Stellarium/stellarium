@@ -254,6 +254,11 @@ void StelSkyCultureMgr::makeCulturesList()
 		culture.fallbackToInternationalNames = (flagOverrideUseCommonNames || data["fallback_to_international_names"].toBool());
 		culture.names = data["common_names"].toObject();
 
+		if (data.contains("zodiac"))
+			culture.zodiac = data["zodiac"].toObject();
+		if (data.contains("lunar_system"))
+			culture.lunarSystem = data["lunar_system"].toObject();
+
 		const auto classifications = data["classification"].toArray();
 		if (classifications.isEmpty())
 		{
@@ -814,6 +819,7 @@ StelObject::CulturalDisplayStyle StelSkyCultureMgr::convertCulturalDisplayStyleF
 	static const QMap<QString, StelObject::CulturalDisplayStyle> cdsEnumParts=
 	{ {"none", StelObject::CulturalDisplayStyle::NONE},
 	  {"modern", StelObject::CulturalDisplayStyle::Modern},
+	  {"byname", StelObject::CulturalDisplayStyle::Byname},
 	  {"ipa", StelObject::CulturalDisplayStyle::IPA},
 	  {"translated", StelObject::CulturalDisplayStyle::Translated},
 	  {"translit", StelObject::CulturalDisplayStyle::Translit},
@@ -943,6 +949,8 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 		case StelObject::CulturalDisplayStyle::NONE: // fully non-cultural!
 		case StelObject::CulturalDisplayStyle::Modern:
 			return commonNameI18n;
+		case StelObject::CulturalDisplayStyle::Byname:
+			return (cName.bynameI18n.isEmpty() ? (pronounceStr.isEmpty() ? cName.native : pronounceStr) : cName.bynameI18n);
 		default:
 			break;
 	}
@@ -993,14 +1001,24 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::IPA)) && (!cName.IPA.isEmpty()) && (label != cName.IPA))
 		label.append(QString(" [%1]").arg(cName.IPA));
 
-	// Add translation in brackets
+	// Add translation and optional byname in brackets
+
+	QStringList bracketed;
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::Translated)) && (!cName.translatedI18n.isEmpty()))
 	{
 		if (label.isEmpty())
 			label=cName.translatedI18n;
 		else if (!label.startsWith(cName.translatedI18n, Qt::CaseInsensitive)) // seems useless to add translation into same string
-			label.append(QString(" (%1)").arg(cName.translatedI18n));
+
+			//label.append(QString(" (%1)").arg(cName.translatedI18n));
+			bracketed.append(cName.translatedI18n);
 	}
+
+	if ( (styleInt & int(StelObject::CulturalDisplayStyle::Byname)) && (!cName.bynameI18n.isEmpty()))
+		bracketed.append(cName.bynameI18n);
+	if (!bracketed.isEmpty())
+		label.append(QString(" (%1)").arg(bracketed.join(", ")));
+
 
 	// Add an explanatory modern name in decorative angle brackets
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && (!commonNameI18n.isEmpty()) && (!label.startsWith(commonNameI18n)) && (commonNameI18n!=cName.translatedI18n))

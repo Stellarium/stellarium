@@ -63,12 +63,6 @@ public:
 	//! @return the name of the language (e.g fr).
 	QString getSkyLanguage() const;
 	
-	//! Set the sky language and reload the sky object names with the new 
-	//! translation.  This function has no permanent effect on the global locale.
-	//! @param newSkyLangName The abbreviated name of the locale (e.g fr) to use 
-	//! for sky object labels.
-	void setSkyLanguage(const QString& newSkyLangName, bool refreshAll=true);
-	
 	//! Get a reference to the StelTranslator object currently used for sky objects.
 	const StelTranslator &getSkyTranslator() const;
 

@@ -96,6 +96,10 @@ QString StelLocation::getID() const
 
 float StelLocation::getLatitude(bool suppressObserver)  const
 {
+#ifndef NDEBUG
+	if (!isValid())
+		qCritical() << "Invalid Location:" << serializeToLine();
+#endif
 	if (!suppressObserver && role==QChar('o'))
 		return 90.f;
 	else
@@ -104,6 +108,10 @@ float StelLocation::getLatitude(bool suppressObserver)  const
 
 float StelLocation::getLongitude(bool suppressObserver) const
 {
+#ifndef NDEBUG
+	if (!isValid())
+		qCritical() << "Invalid Location:" << serializeToLine();
+#endif
 	if (!suppressObserver && role==QChar('o'))
 		return 0.f;
 	else
@@ -272,3 +280,16 @@ double StelLocation::getAzimuthForLocation(double longTarget, double latTarget) 
 {
 	return getAzimuthForLocation(static_cast<double>(longitude), static_cast<double>(latitude), longTarget, latTarget);
 }
+
+bool StelLocation::isValid() const
+{
+	if (role == '!')
+		return false;
+
+	// Some ill-fated online lookups may have retrieved garbage. Not sure if there is a better heuristic?
+	if (longitude==0. && latitude==0.)
+		return (planetName.length()>0);
+
+	return true;
+}
+

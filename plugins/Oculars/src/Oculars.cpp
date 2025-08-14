@@ -1688,9 +1688,9 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const 
 	const int numOverlayPixelsY = overlaySize.height() / ccd.binningY();
 
 	// Vertical lines of the pixel grid
-	for(int line = 1; line < numOverlayPixelsX; ++line)
+	for(float line = 1; line < numOverlayPixelsX; ++line)
 	{
-		for(int p = 0; p < numPointsPerLine; ++p)
+		for(float p = 0; p < numPointsPerLine; ++p)
 		{
 			const auto x = 1;
 			const auto y = cropTanFovX * (1 - 2 * line / numOverlayPixelsX);
@@ -1705,9 +1705,9 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const 
 	}
 
 	// Horizontal lines of the pixel grid
-	for(int line = 1; line < numOverlayPixelsY; ++line)
+	for(float line = 1; line < numOverlayPixelsY; ++line)
 	{
-		for(int p = 0; p < numPointsPerLine; ++p)
+		for(float p = 0; p < numPointsPerLine; ++p)
 		{
 			const auto x = 1;
 			const auto y = -cropTanFovX * (2.f / (numPointsPerLine - 1) * p - 1);
