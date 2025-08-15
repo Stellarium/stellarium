@@ -444,6 +444,7 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | USE_PLUGIN_SATELLITES              | bool   | ON      | Enable building the Satellites plugin
 | USE_PLUGIN_SCENERY3D               | bool   | ON      | Enable building the 3D Scenery plugin
 | USE_PLUGIN_SIMPLEDRAWLINE          | bool   | OFF     | Enable building the SimpleDrawLine plugin (example of simple graphics plugin)
+| USE_PLUGIN_SKYCULTUREMAKER         | bool   | ON      | Enable building the Sky Culture Maker plugin
 | USE_PLUGIN_SOLARSYSTEMEDITOR       | bool   | ON      | Enable building the Solar System Editor plugin
 | USE_PLUGIN_SUPERNOVAE              | bool   | ON      | Enable building the Historical Supernovae plugin
 | USE_PLUGIN_TELESCOPECONTROL        | bool   | ON      | Enable building the Telescope Control plugin
