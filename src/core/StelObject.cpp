@@ -36,7 +36,6 @@
 #include "SpecificTimeMgr.hpp"
 #include "planetsephems/sidereal_time.h"
 #include "planetsephems/precession.h"
-#include <qforeach.h>
 
 #include <QRegularExpression>
 #include <QDebug>
@@ -981,7 +980,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			if (!constels.isEmpty())
 			{
 				QStringList cNames;
-				foreach(const auto &cst, constels)
+				for(const auto &cst: std::as_const(constels))
 				{
 					cNames.append(cst->getInfoLabel());
 				}
