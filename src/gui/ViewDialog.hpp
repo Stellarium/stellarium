@@ -97,7 +97,9 @@ private slots:
 	void updateSelectedCatalogsCheckBoxes();
 	void updateSelectedTypesCheckBoxes();
 
+	void clearHips();
 	void updateHips();
+	void updateHipsText();
 	void filterSurveys();
 	void hipsListItemChanged(QTreeWidgetItem* item);
 	void populateHipsGroups();
@@ -123,6 +125,7 @@ private:
 	GreatRedSpotDialog * greatRedSpotDialog;
 	ConfigureDSOColorsDialog * configureDSOColorsDialog;
 	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;
+
 	QTimer hipsUpdateTimer;
 	struct PlanetSurveyPack
 	{
@@ -130,6 +133,8 @@ private:
 		QHash<QString/*group*/, QTreeWidgetItem* /*groupItem*/> groupsMap;
 	};
 	QHash<QString/*planet English name*/, PlanetSurveyPack> planetarySurveys;
+	QHash<QString/*survey URL*/, QTreeWidgetItem*> surveysInTheList;
+	QString selectedSurveyType;
 };
 
 #endif // _VIEWDIALOG_HPP
