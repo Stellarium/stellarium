@@ -127,6 +127,10 @@ void HipsSurvey::checkForPlanetarySurvey()
 	planetarySurvey = !QStringList{"equatorial","galactic","ecliptic"}.contains(hipsFrame, Qt::CaseInsensitive) ||
 	                  std::as_const(properties)["creator_did"].toString().contains("moon", Qt::CaseInsensitive) ||
 	                  std::as_const(properties)["client_category"].toString().contains("solar system", Qt::CaseInsensitive);
+
+	// Assume that all the planetary HiPS describe color maps by default
+	if (planetarySurvey && type.isEmpty())
+		type = "planet";
 }
 
 bool HipsSurvey::isVisible() const
