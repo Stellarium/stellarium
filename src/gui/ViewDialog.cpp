@@ -145,8 +145,11 @@ void ViewDialog::retranslate()
 		populatePlanetMagnitudeAlgorithmsList();
 		populatePlanetMagnitudeAlgorithmDescription();
 		ui->lightPollutionWidget->retranslate();
+
 		populateHipsGroups();
+		clearHips();
 		updateHips();
+
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
 		updateTabBarListWidgetWidth();
@@ -679,7 +682,7 @@ void ViewDialog::createDialogContent()
 
 	connect(ui->surveyTypeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateHips()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(updateHips()));
-	connect(ui->surveysTreeWidget, &QTreeWidget::currentItemChanged, this, &ViewDialog::updateHips, Qt::QueuedConnection);
+	connect(ui->surveysTreeWidget, &QTreeWidget::currentItemChanged, this, &ViewDialog::updateHipsText, Qt::QueuedConnection);
 	connect(ui->surveysTreeWidget, &QTreeWidget::itemChanged, this, &ViewDialog::hipsListItemChanged);
 	connect(ui->surveysFilter, &QLineEdit::textChanged, this, &ViewDialog::filterSurveys);
 	updateHips();
@@ -757,15 +760,59 @@ static QString getHipsType(const HipsSurveyP hips)
 	return "other";
 }
 
+void ViewDialog::updateHipsText()
+{
+	const auto currentItem = ui->surveysTreeWidget->currentItem();
+	if (!currentItem)
+	{
+		ui->surveysTextBrowser->setText("");
+		return;
+	}
+
+	const auto hipsmgr = qobject_cast<HipsMgr*>(StelApp::getInstance().getModule("HipsMgr"));
+	const auto url = currentItem->data(0, HipsRole::URL).toString();
+	const auto hips = hipsmgr->getSurveyByUrl(url);
+	if (!hips)
+	{
+		ui->surveysTextBrowser->setText("");
+		return;
+	}
+	QJsonObject props = hips->property("properties").toJsonObject();
+	QString html = QString("<h1>%1</h1>\n").arg(props["obs_title"].toString());
+	if (props.contains("obs_copyright") && props.contains("obs_copyright_url"))
+	{
+		html += QString("<p>Copyright <a href='%2'>%1</a></p>\n")
+				.arg(props["obs_copyright"].toString(), props["obs_copyright_url"].toString());
+	}
+	html += QString("<p>%1</p>\n").arg(props["obs_description"].toString());
+	html += "<h2>" + q_("properties") + "</h2>\n<ul>\n";
+	for (auto iter = props.constBegin(); iter != props.constEnd(); iter++)
+	{
+		html += QString("<li><b>%1</b> %2</li>\n").arg(iter.key(), iter.value().toString());
+	}
+	html += "</ul>\n";
+	const auto gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+		ui->surveysTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	ui->surveysTextBrowser->setHtml(html);
+}
+
+void ViewDialog::clearHips()
+{
+	ui->surveysTreeWidget->clear();
+	planetarySurveys.clear();
+	surveysInTheList.clear();
+	selectedSurveyType.clear();
+}
+
 void ViewDialog::updateHips()
 {
 	if (!ui->page_surveys->isVisible()) return;
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
 	QMetaObject::invokeMethod(hipsmgr, "loadSources");
 
 	QComboBox* typeComboBox = ui->surveyTypeComboBox;
-	QVariant selectedType = typeComboBox->itemData(typeComboBox->currentIndex());
+	auto selectedType = typeComboBox->itemData(typeComboBox->currentIndex()).toString();
 	if (selectedType.isNull())
 		selectedType = "dss";
 
@@ -774,22 +821,22 @@ void ViewDialog::updateHips()
 
 	if (!hipsmgr->property("loaded").toBool())
 	{
-		l->clear();
+		clearHips();
 		new QTreeWidgetItem(l, {q_("Loading...")});
 		return;
 	}
-	planetarySurveys.clear();
-
-	QString currentSurvey = l->currentItem() ? l->currentItem()->data(0, HipsRole::URL).toString() : "";
-	QTreeWidgetItem* currentItem = nullptr;
-	HipsSurveyP currentHips;
 
 	l->blockSignals(true);
-	l->clear();
+	if (selectedSurveyType != selectedType)
+	{
+		clearHips();
+		selectedSurveyType = selectedType;
+	}
 	const QList<HipsSurveyP> hipslist = hipsmgr->property("surveys").value<QList<HipsSurveyP>>();
 
 	const bool selectedIsPlanetary = selectedType == "sol";
 	l->setRootIsDecorated(selectedIsPlanetary);
+
 	const auto& solarSys = GETSTELMODULE(SolarSystem);
 	for (auto &hips: hipslist)
 	{
@@ -798,8 +845,15 @@ void ViewDialog::updateHips()
 		QString url = hips->property("url").toString();
 		QJsonObject properties = hips->property("properties").toJsonObject();
 		QString title = properties["obs_title"].toString();
-		if (title.isEmpty())
+		if (title.isEmpty() || url.isEmpty())
 			continue;
+
+		// Don't add the survey if it's already present
+		const auto surveyItemIt = surveysInTheList.find(url);
+		if (surveyItemIt != surveysInTheList.end())
+			continue;
+
+		QTreeWidgetItem* surveyItem = nullptr;
 		if (selectedIsPlanetary)
 		{
 			const auto& englishName = hips->getFrame();
@@ -835,63 +889,28 @@ void ViewDialog::updateHips()
 			QString typeName = type;
 			if (const auto it = typeNames.find(type); it != typeNames.end())
 				typeName = it.value();
-			const auto surveyItem = new QTreeWidgetItem(groupItem, {title, typeName});
-			surveyItem->setData(0, HipsRole::ItemType, HipsItemType::Survey);
-			surveyItem->setFlags(surveyItem->flags() | Qt::ItemIsUserCheckable);
-			surveyItem->setData(0, HipsRole::URL, url);
-			if (url == currentSurvey)
-			{
-				currentItem = surveyItem;
-				currentHips = hips;
-				groupItem->setExpanded(true);
-				planetData.planetItem->setExpanded(true);
-			}
+
+			surveyItem = new QTreeWidgetItem(groupItem, {title, typeName});
 		}
 		else
 		{
-			QTreeWidgetItem* item = new QTreeWidgetItem(l, {title});
-			item->setData(0, HipsRole::ItemType, HipsItemType::Survey);
-			item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
-			item->setCheckState(0, hips->property("visible").toBool() ? Qt::Checked : Qt::Unchecked);
-			item->setData(0, HipsRole::URL, url);
-			if (url == currentSurvey)
-			{
-				currentItem = item;
-				currentHips = hips;
-			}
-			disconnect(hips.data(), nullptr, this, nullptr);
-			connect(hips.data(), SIGNAL(statusChanged()), this, SLOT(updateHips()));
+			surveyItem = new QTreeWidgetItem(l, {title});
+			surveyItem->setFlags(surveyItem->flags() | Qt::ItemIsUserCheckable);
+			surveyItem->setCheckState(0, hips->property("visible").toBool() ? Qt::Checked
+			                                                                : Qt::Unchecked);
 		}
+
+		surveysInTheList[url] = surveyItem;
+		surveyItem->setData(0, HipsRole::ItemType, HipsItemType::Survey);
+		surveyItem->setData(0, HipsRole::URL, url);
+		disconnect(hips.data(), nullptr, this, nullptr);
+		connect(hips.data(), &HipsSurvey::statusChanged, this, &ViewDialog::updateHipsText);
 	}
 	l->sortItems(0, Qt::AscendingOrder);
-	l->setCurrentItem(currentItem);
-	l->scrollToItem(currentItem);
-	l->blockSignals(false);
+	if (const auto currentItem = l->currentItem())
+		l->scrollToItem(currentItem);
 
-	if (!currentHips)
-	{
-		ui->surveysTextBrowser->setText("");
-	}
-	else
-	{
-		QJsonObject props = currentHips->property("properties").toJsonObject();
-		QString html = QString("<h1>%1</h1>\n").arg(props["obs_title"].toString());
-		if (props.contains("obs_copyright") && props.contains("obs_copyright_url"))
-		{
-			html += QString("<p>Copyright <a href='%2'>%1</a></p>\n")
-					.arg(props["obs_copyright"].toString(), props["obs_copyright_url"].toString());
-		}
-		html += QString("<p>%1</p>\n").arg(props["obs_description"].toString());
-		html += "<h2>" + q_("properties") + "</h2>\n<ul>\n";
-		for (auto iter = props.constBegin(); iter != props.constEnd(); iter++)
-		{
-			html += QString("<li><b>%1</b> %2</li>\n").arg(iter.key(), iter.value().toString());
-		}
-		html += "</ul>\n";
-		if (gui)
-			ui->surveysTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-		ui->surveysTextBrowser->setHtml(html);
-	}
+	l->blockSignals(false);
 	filterSurveys();
 }
 
