@@ -85,6 +85,7 @@ struct HipsRole
 		URL = Qt::UserRole,
 		PlanetEnglishName,
 		ItemType,
+		SurveyType,
 	};
 };
 
@@ -890,7 +891,26 @@ void ViewDialog::updateHips()
 			if (const auto it = typeNames.find(type); it != typeNames.end())
 				typeName = it.value();
 
+			// Set the first survey of each type as checked by default
+			auto checkState = Qt::Checked;
+			for (int n = 0; n < groupItem->childCount(); ++n)
+			{
+				const auto surveyItem = groupItem->child(n);
+				Q_ASSERT(surveyItem->data(0, HipsRole::ItemType).toInt() == HipsItemType::Survey);
+
+				if (surveyItem->data(0, HipsRole::SurveyType).toString() != type)
+					continue;
+				if (surveyItem->checkState(0) == Qt::Checked)
+				{
+					// A checked survey already exists, don't check the new one
+					checkState = Qt::Unchecked;
+					break;
+				}
+			}
+
 			surveyItem = new QTreeWidgetItem(groupItem, {title, typeName});
+			surveyItem->setFlags(surveyItem->flags() | Qt::ItemIsUserCheckable);
+			surveyItem->setCheckState(0, checkState);
 		}
 		else
 		{
@@ -903,6 +923,7 @@ void ViewDialog::updateHips()
 		surveysInTheList[url] = surveyItem;
 		surveyItem->setData(0, HipsRole::ItemType, HipsItemType::Survey);
 		surveyItem->setData(0, HipsRole::URL, url);
+		surveyItem->setData(0, HipsRole::SurveyType, hips->getType());
 		disconnect(hips.data(), nullptr, this, nullptr);
 		connect(hips.data(), &HipsSurvey::statusChanged, this, &ViewDialog::updateHipsText);
 	}
@@ -975,17 +996,38 @@ void ViewDialog::hipsListItemChanged(QTreeWidgetItem* item)
 	{
 	case HipsItemType::Survey:
 	{
-		QString url = item->data(0, HipsRole::URL).toString();
-		const auto hips = hipsmgr->getSurveyByUrl(url);
-		Q_ASSERT(hips);
-		if (item->checkState(0) == Qt::Checked)
+		const auto url = item->data(0, HipsRole::URL).toString();
+		if (const auto group = item->parent())
 		{
-			l->setCurrentItem(item);
-			hips->setProperty("visible", true);
+			Q_ASSERT(group->data(0, HipsRole::ItemType).toInt() == HipsItemType::Group);
+			for (int n = 0; n < group->childCount(); ++n)
+			{
+				const auto surveyItem = group->child(n);
+				Q_ASSERT(surveyItem->data(0, HipsRole::ItemType).toInt() == HipsItemType::Survey);
+				if (surveyItem == item) continue;
+				// Only consider surveys of the same type
+				if (surveyItem->data(0, HipsRole::SurveyType) != item->data(0, HipsRole::SurveyType))
+					continue;
+				if (surveyItem->checkState(0) == Qt::Checked)
+				{
+					surveyItem->setCheckState(0, Qt::Unchecked);
+				}
+			}
+			hipsListItemChanged(group);
 		}
 		else
 		{
-			hips->setProperty("visible", false);
+			const auto hips = hipsmgr->getSurveyByUrl(url);
+			Q_ASSERT(hips);
+			if (item->checkState(0) == Qt::Checked)
+			{
+				l->setCurrentItem(item);
+				hips->setProperty("visible", true);
+			}
+			else
+			{
+				hips->setProperty("visible", false);
+			}
 		}
 		break;
 	}
@@ -1017,6 +1059,8 @@ void ViewDialog::hipsListItemChanged(QTreeWidgetItem* item)
 		for (int n = 0; n < item->childCount(); ++n)
 		{
 			const auto child = item->child(n);
+			if (child->checkState(0) != Qt::Checked)
+				continue;
 			const auto url = child->data(0, HipsRole::URL).toString();
 			const auto hips = hipsmgr->getSurveyByUrl(url);
 			Q_ASSERT(hips);
