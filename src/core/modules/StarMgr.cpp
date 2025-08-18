@@ -68,7 +68,7 @@ Q_GLOBAL_STATIC(QStringList, objtype_array);
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always match the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 24;
+static const int StarCatalogFormatVersion = 25;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
