@@ -1059,12 +1059,16 @@ void ViewDialog::hipsListItemChanged(QTreeWidgetItem* item)
 		for (int n = 0; n < item->childCount(); ++n)
 		{
 			const auto child = item->child(n);
-			if (child->checkState(0) != Qt::Checked)
-				continue;
 			const auto url = child->data(0, HipsRole::URL).toString();
 			const auto hips = hipsmgr->getSurveyByUrl(url);
 			Q_ASSERT(hips);
 			const auto type = hips->getType();
+			if (child->checkState(0) != Qt::Checked)
+			{
+				if (type == L1S("planet"))
+					hips->setProperty("visible", false);
+				continue;
+			}
 			if (type == L1S("planet"))
 				colors = hips;
 			else if (type == L1S("planet-normal"))
