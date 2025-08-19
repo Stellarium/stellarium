@@ -56,6 +56,17 @@ static QString getExt(const QString& format)
 	return QString();
 }
 
+static int shiftPix180deg(const int order, const int origPix)
+{
+	const int scale = 1 << (2 * order);
+	const int baseSide = origPix / scale; // 0..11
+	Q_ASSERT(baseSide < 12);
+	const int newBaseSide = baseSide / 4 * 4 + (baseSide + 2) % 4;
+	const int newPix = origPix + (newBaseSide - baseSide) * scale;
+	Q_ASSERT(newPix >= 0);
+	return newPix;
+}
+
 QUrl HipsSurvey::getUrlFor(const QString& path) const
 {
 	QUrl base = url;
@@ -379,7 +390,8 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		tile->order = order;
 		tile->pix = pix;
 		QString ext = getExt(properties["hips_tile_format"].toString());
-		QUrl path = getUrlFor(QString("Norder%1/Dir%2/Npix%3.%4").arg(order).arg((pix / 10000) * 10000).arg(pix).arg(ext));
+		const int texturePix = properties["type"].toString().isEmpty() ? shiftPix180deg(order, pix) : pix;
+		QUrl path = getUrlFor(QString("Norder%1/Dir%2/Npix%3.%4").arg(order).arg((texturePix / 10000) * 10000).arg(texturePix).arg(ext));
 		const StelTexture::StelTextureParams texParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, true);
 		tile->texture = texMgr.createTextureThread(path.url(), texParams, false);
 
