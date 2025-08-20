@@ -666,7 +666,7 @@ void SpecialZoneArray<Star>::searchGaiaIDepochPos(const StarId source_id,
                                                   double &      RV) const
 {
    // loop through each zone in the level which is 20 * 4 ** level + 1 as index
-   for (int i = 0; i < 20 * pow(4, (level)) + 1; i++) {
+   for (int i = 0; i < 20 * pow(4., (level)) + 1; i++) {
       // get the zone data
       const SpecialZoneData<Star> * const z = getZones() + i;
       // loop through the stars in the zone
