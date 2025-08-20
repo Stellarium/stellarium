@@ -1576,7 +1576,7 @@ StelObjectP StarMgr::searchGaia(StarId source_id) const
 	int lv12_pix = source_id / 34359738368;
 	Vec3d v;
 	StelObjectP so;
-	healpix_pix2vec(pow(2, 12), lv12_pix, v.v);  // search which pixel the source is in and turn to coordinates
+	healpix_pix2vec(int(pow(2., 12.)), lv12_pix, v.v);  // search which pixel the source is in and turn to coordinates
 	Vec3f vf = v.toVec3f();
 
 	for (const auto* z : gridLevels)
