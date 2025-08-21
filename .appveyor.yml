@@ -106,17 +106,17 @@ before_build:
   - if [%USE_EXT_WEBENGINE%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/6.8.1-0-202411221529qtwebengine-Windows-Windows_11_23H2-MSVC2022-Windows-Windows_11_23H2-X86_64.7z -FileName c:\qtwebengine.7z 
   - if [%USE_EXT_WEBENGINE%]==[true] 7z e c:\qtwebengine.7z -spf -o%QT_BASEDIR%
 
-  - ps: if ($env:scConverterEnabled) { appveyor DownloadFile $env:gettextURL -FileName c:\$env:gettextBaseName.zip }
-  - ps: if ($env:scConverterEnabled) { 7z e c:\$env:gettextBaseName.zip -spf -oc:\$env:gettextBaseName }
-  - ps: if ($env:scConverterEnabled) { mkdir c:\$env:gettextBaseName\include }
-  - ps: if ($env:scConverterEnabled) { appveyor DownloadFile $env:gettextSrcURL -FileName c:\$env:gettextSrcBaseName.tar.xz }
-  - ps: if ($env:scConverterEnabled) { 7z e c:\$env:gettextSrcBaseName.tar.xz -spf -oc:\ }
-  - ps: if ($env:scConverterEnabled) { 7z e c:\$env:gettextSrcBaseName.tar -spf -oc:\ }
-  - ps: if ($env:scConverterEnabled) { (cat c:\$env:gettextSrcBaseName\gettext-tools\libgettextpo\gettext-po.in.h) -replace "extern ([^()]*);","extern __declspec (dllimport) `$1;" > c:\$env:gettextBaseName\include\gettext-po.h }
-  - ps: if ($env:scConverterEnabled) { echo EXPORTS > libgettextpo.def }
-  - ps: if ($env:scConverterEnabled) { cp c:\$env:gettextBaseName\bin\libgettextpo-0.dll c:\$env:gettextBaseName\bin\libgettextpo.dll }
-  - ps: if ($env:scConverterEnabled) { (dumpbin /EXPORTS c:\$env:gettextBaseName\bin\libgettextpo.dll) -match "^.*\b(po_.*)$" -replace "^.*\b(po_.*)$","`$1" >> libgettextpo.def }
-  - ps: if ($env:scConverterEnabled) { lib /def:libgettextpo.def /out:c:\$env:gettextBaseName\lib\libgettextpo.lib }
+  - ps: appveyor DownloadFile $env:gettextURL -FileName c:\$env:gettextBaseName.zip
+  - ps: 7z e c:\$env:gettextBaseName.zip -spf -oc:\$env:gettextBaseName
+  - ps: mkdir c:\$env:gettextBaseName\include
+  - ps: appveyor DownloadFile $env:gettextSrcURL -FileName c:\$env:gettextSrcBaseName.tar.xz
+  - ps: 7z e c:\$env:gettextSrcBaseName.tar.xz -spf -oc:\
+  - ps: 7z e c:\$env:gettextSrcBaseName.tar -spf -oc:\
+  - ps: (cat c:\$env:gettextSrcBaseName\gettext-tools\libgettextpo\gettext-po.in.h) -replace "extern ([^()]*);","extern __declspec (dllimport) `$1;" > c:\$env:gettextBaseName\include\gettext-po.h
+  - ps: echo EXPORTS > libgettextpo.def
+  - ps: cp c:\$env:gettextBaseName\bin\libgettextpo-0.dll c:\$env:gettextBaseName\bin\libgettextpo.dll
+  - ps: (dumpbin /EXPORTS c:\$env:gettextBaseName\bin\libgettextpo.dll) -match "^.*\b(po_.*)$" -replace "^.*\b(po_.*)$","`$1" >> libgettextpo.def
+  - ps: lib /def:libgettextpo.def /out:c:\$env:gettextBaseName\lib\libgettextpo.lib
 
   - ps: appveyor DownloadFile $env:tidyURL -FileName c:\$env:tidyBaseName.zip
   - ps: 7z e c:\$env:tidyBaseName.zip -spf -oc:\

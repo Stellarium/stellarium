@@ -9,17 +9,13 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [master]
-    types: [opened, reopened, synchronize, ready_for_review]
-
-env:
-  parallel_processes: 6 # A good default counts is: available Threads + 2
 
 jobs:
   # CI on Linux (Qt5)
   ci-linux-qt5:
     name: "Linux (amd64; qt5)"
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && github.event.pull_request.draft == false"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     steps:
     - name: Install dependencies
@@ -46,7 +42,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j ${{env.parallel_processes}}
+      run: make -j3
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -58,7 +54,7 @@ jobs:
   ci-linux-qt6:
     name: "Linux (amd64; qt6)"
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && github.event.pull_request.draft == false"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
     steps:
     - name: Install dependencies
       run: |
@@ -85,7 +81,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j ${{env.parallel_processes}}
+      run: make -j3
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -97,7 +93,7 @@ jobs:
   ci-linux-qt6-pch:
     name: "Linux (amd64; qt6; core)"
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && github.event.pull_request.draft == false"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     steps:
     - name: Install dependencies
@@ -126,12 +122,12 @@ jobs:
               -DUSE_PLUGIN_LENSDISTORTIONESTIMATOR=Off -DUSE_PLUGIN_NEBULATEXTURES=Off -DUSE_PLUGIN_NAVSTARS=Off -DUSE_PLUGIN_NOVAE=Off -DUSE_PLUGIN_OBSERVABILITY=Off \
               -DUSE_PLUGIN_OCULARS=Off -DUSE_PLUGIN_ONLINEQUERIES=Off -DUSE_PLUGIN_POINTERCOORDINATES=Off -DUSE_PLUGIN_PULSARS=Off -DUSE_PLUGIN_QUASARS=Off \
               -DUSE_PLUGIN_REMOTECONTROL=Off -DUSE_PLUGIN_REMOTESYNC=Off -DUSE_PLUGIN_SATELLITES=Off -DUSE_PLUGIN_SCENERY3D=Off -DUSE_PLUGIN_SOLARSYSTEMEDITOR=Off \
-              -DUSE_PLUGIN_SUPERNOVAE=Off -DUSE_PLUGIN_TELESCOPECONTROL=Off -DUSE_PLUGIN_TEXTUSERINTERFACE=Off -DUSE_PLUGIN_SKYCULTUREMAKER=Off\
+              -DUSE_PLUGIN_SUPERNOVAE=Off -DUSE_PLUGIN_TELESCOPECONTROL=Off -DUSE_PLUGIN_TEXTUSERINTERFACE=Off -DUSE_PLUGIN_SKYCULTUREMAKER=Off \
               "${{ github.workspace }}"
 
     - name: Compile
       working-directory: build
-      run: make -j ${{env.parallel_processes}}
+      run: make -j3
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -143,7 +139,7 @@ jobs:
   ci-macos-qt5:
     name: "macOS (x86_64; qt5)"
     runs-on: macos-13
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && github.event.pull_request.draft == false"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     # @TODO Enable gpsd on macOS instance for CI testing
     # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
@@ -170,7 +166,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j ${{env.parallel_processes}}
+      run: make -j3
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -182,7 +178,7 @@ jobs:
   ci-macos-intel-qt6:
     name: "macOS (x86_64; qt6)"
     runs-on: macos-13
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && github.event.pull_request.draft == false"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     # @TODO Enable gpsd on macOS instance for CI testing
     # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
@@ -209,7 +205,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j ${{env.parallel_processes}}
+      run: make -j3
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -221,7 +217,7 @@ jobs:
   ci-macos-silicon-qt6:
     name: "macOS (arm64; qt6)"
     runs-on: macos-14
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && github.event.pull_request.draft == false"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     # @TODO Enable gpsd on macOS instance for CI testing
     # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
@@ -251,7 +247,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j ${{env.parallel_processes}}
+      run: make -j3
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -263,7 +259,7 @@ jobs:
   ci-freebsd-qt5:
     name: "FreeBSD (x86_64; qt5)"
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && github.event.pull_request.draft == false"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     steps:
     - name: Checkout repository
@@ -288,7 +284,7 @@ jobs:
           mkdir builds
           cd builds
           cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On "${{ github.workspace }}"
-          make -j ${{env.parallel_processes}}
+          make -j3
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
           sleep 3
           ctest --output-on-failure

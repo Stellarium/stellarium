@@ -1,77 +1,36 @@
 ---
-Checks: >
-  -*, 
-  readability-misleading-indentation,
-  readability-redundant-declaration,
-  readability-redundant-member-init,
-  readability-use-anyofallof,
-  readability-identifier-naming,
-  readability-braces-around-statements,
-  readability-function-cognitive-complexity,
-  readability-magic-numbers,
-  readability-else-after-return,
-  readability-avoid-const-params-in-decls,
-  readability-container-size-empty,
-  readability-redundant-string-cstr,
-  readability-redundant-control-flow,
-  readability-simplify-boolean-expr,
-  readability-uppercase-literal-suffix,
-  readability-static-accessed-through-instance,
-  readability-named-parameter,
-  modernize-use-auto,
-  modernize-use-nullptr,
-  modernize-use-override,
-  modernize-deprecated-headers,
-  modernize-use-using,
-  modernize-avoid-c-arrays,
-  modernize-make-unique,
-  modernize-make-shared,
-  cppcoreguidelines-avoid-magic-numbers,
-  cppcoreguidelines-pro-bounds-constant-array-index,
-  cppcoreguidelines-pro-type-static-cast-downcast,
-  cppcoreguidelines-pro-type-reinterpret-cast,
-  cppcoreguidelines-pro-type-cstyle-cast,
-  cppcoreguidelines-pro-type-member-init,
-  cppcoreguidelines-pro-bounds-pointer-arithmetic,
-  cppcoreguidelines-pro-type-vararg,
-  cppcoreguidelines-no-malloc,
-  cppcoreguidelines-special-member-functions,
-  cppcoreguidelines-avoid-non-const-global-variables,
-  cppcoreguidelines-init-variables,
-  hicpp-no-array-decay,
-  hicpp-signed-bitwise,
-  hicpp-uppercase-literal-suffix,
-  hicpp-use-auto,
-  hicpp-use-nullptr,
-  hicpp-use-override,
-  hicpp-deprecated-headers,
-  hicpp-explicit-conversions,
-  hicpp-multiway-paths-covered,
-  hicpp-no-malloc,
-  hicpp-special-member-functions,
-  hicpp-avoid-goto,
-  performance-for-range-copy,
-  performance-implicit-conversion-in-loop,
-  performance-inefficient-vector-operation,
-  performance-unnecessary-value-param
-WarningsAsErrors: "*"
-HeaderFilterRegex: ".*"
-AnalyzeTemporaryDtors: true
-FormatStyle: file
+Checks:                 '*,-google-default-arguments,-fuchsia-*,-zircon-*,-abseil-*,-llvmlibc-*'
+WarningsAsErrors:       ''
+HeaderFilterRegex:      ''
+AnalyzeTemporaryDtors:  false
+FormatStyle:            file
 CheckOptions:
-  - key: readability-identifier-naming.ClassCase
-    value: CamelCase
-  - key: readability-identifier-naming.MethodCase
-    value: camelBack
-  - key: readability-identifier-naming.VariableCase
-    value: camelBack
-  - key: readability-identifier-naming.ConstantCase
-    value: UPPER_CASE
-  - key: readability-identifier-naming.MacroDefinitionCase
-    value: UPPER_CASE
-  - key: readability-identifier-naming.EnumCase
-    value: CamelCase
-  - key: readability-identifier-naming.EnumConstantCase
-    value: CamelCase
-  - key: readability-braces-around-statements.ShortStatementLines
-    value: 1
+  - key:                cert-dcl16-c.NewSuffixes
+    value:              'L;LL;LU;LLU'
+  - key:                cppcoreguidelines-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
+    value:              '1'
+  - key:                google-readability-braces-around-statements.ShortStatementLines
+    value:              '1'
+  - key:                google-readability-function-size.StatementThreshold
+    value:              '800'
+  - key:                google-readability-namespace-comments.ShortNamespaceLines
+    value:              '10'
+  - key:                google-readability-namespace-comments.SpacesBeforeComments
+    value:              '2'
+  - key:                modernize-loop-convert.MaxCopySize
+    value:              '16'
+  - key:                modernize-loop-convert.MinConfidence
+    value:              reasonable
+  - key:                modernize-loop-convert.NamingStyle
+    value:              CamelCase
+  - key:                modernize-pass-by-value.IncludeStyle
+    value:              llvm
+  - key:                modernize-replace-auto-ptr.IncludeStyle
+    value:              llvm
+  - key:                modernize-use-nullptr.NullMacros
+    value:              'NULL'
+  - key:                misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
+    value:              '1'
+  - key:                modernize-use-default-member-init.UseAssignment
+    value:              '1'
+...

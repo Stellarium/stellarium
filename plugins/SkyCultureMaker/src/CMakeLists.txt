@@ -13,10 +13,6 @@ SET( SkyCultureMaker_SRCS
 
      ScmDraw.hpp
      ScmDraw.cpp
-     ScmAsterism.hpp
-     ScmAsterism.cpp
-     ScmCommonName.hpp
-     ScmCommonName.cpp
      ScmConstellation.hpp
      ScmConstellation.cpp
      ScmConstellationArtwork.hpp

@@ -46,10 +46,14 @@ The Sky Culture Maker plugin is embedded in the Stellarium project. Therefore, n
 The Sky Culture Maker currently consists of two main features. The first is the Maker, which is used to create new sky cultures within Stellarium. The second is a converter that transforms old `.fab` sky culture files into the new JSON format.
 
 **Maker**
+
 - Stellarium already comes with everything you need.
 
-**Converter**  
-- [Tidy HTML](https://www.html-tidy.org/) (used for formatting HTML descriptions)  
+**Converter**
+
+- [Tidy HTML](https://www.html-tidy.org/) (used for formatting HTML descriptions)
+- [gettext](https://www.gnu.org/software/gettext/)
+- [Zlib](https://www.zlib.net)
 
 ### 1.2 Activating the Plugin in Stellarium
 

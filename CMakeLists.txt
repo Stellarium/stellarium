@@ -300,6 +300,13 @@ SET(CMAKE_CXX_STANDARD 17)
 SET(CMAKE_CXX_STANDARD_REQUIRED ON)
 SET(CMAKE_CXX_EXTENSIONS OFF)
 
+# NOTE: C_STANDARD 17 and 23 values added in CMake 3.21
+# https://gitlab.kitware.com/cmake/cmake/-/issues/22366
+# Ubuntu 18.04 have GCC 7.5 - so, C11 only
+SET(CMAKE_C_STANDARD 11)
+SET(CMAKE_C_STANDARD_REQUIRED ON)
+SET(CMAKE_C_EXTENSIONS OFF)
+
 IF(WIN32)
      # We don't need the extra Windows.h stuff, this may speed up compilation a tiny bit
      # This should also prevent some Winsock.h warnings
@@ -324,8 +331,8 @@ IF(WIN32)
           # C4351: "new" behaviour, member array default initialization. Required since at least C++98, but funny MSVC throws a warning.
           # C4996: deprecated POSIX names (used in zlib)
 	     # C5105: defines in macros
-          # Zc:_cplusplus: Qt >5.9.0 requieres a C++17 compiler
-          # permissiv: requiered by Qt >6.9.0
+          # Zc:_cplusplus: Qt >5.9.0 requires a C++17 compiler, because cmake has a bug: https://gitlab.kitware.com/cmake/cmake/-/issues/1883
+          # permissive: required by Qt >=6.9.0 (see qt6\QtCore\qcompilerdetection.h for more information: https://github.com/qt/qtbase/blob/v6.9.0/src/corelib/global/qcompilerdetection.h#L1304-L1316)
           SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996 /wd5105 /utf-8 /Zc:__cplusplus /permissive-")
           # Avoid type conflict with C++17 standard
           # SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_HAS_STD_BYTE=0") # Don't do this in Qt6. Just avoid "using namespace std" anywhere! https://developercommunity.visualstudio.com/t/error-c2872-byte-ambiguous-symbol/93889

@@ -36,18 +36,6 @@ void scm::ScmSkyCulture::setFallbackToInternationalNames(bool fallback)
 	ScmSkyCulture::fallbackToInternationalNames = fallback;
 }
 
-void scm::ScmSkyCulture::addAsterism(const scm::ScmAsterism &asterism)
-{
-	asterisms.push_back(asterism);
-}
-
-void scm::ScmSkyCulture::removeAsterism(const QString &id)
-{
-	asterisms.erase(remove_if(begin(asterisms), end(asterisms),
-	                          [id](scm::ScmAsterism const &a) { return a.getId() == id; }),
-	                end(asterisms));
-}
-
 scm::ScmConstellation &scm::ScmSkyCulture::addConstellation(const QString &id,
                                                             const std::vector<CoordinateLine> &coordinates,
                                                             const std::vector<StarLine> &stars)
@@ -95,9 +83,6 @@ QJsonObject scm::ScmSkyCulture::toJson() const
 		constellationsArray.append(constellation.toJson(id));
 	}
 	scJsonObj["constellations"] = constellationsArray;
-
-	// TODO: Add asterisms to the JSON object (currently out of scope)
-	// TODO: Add common names to the JSON object (currently out of scope)
 
 	return scJsonObj;
 }

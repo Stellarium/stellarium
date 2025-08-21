@@ -41,6 +41,9 @@ IF(SCM_SHOULD_ENABLE_CONVERTER AND NOT (QT_VERSION_MAJOR EQUAL "5"))
     NAME              unarr
     GITHUB_REPOSITORY selmf/unarr
     GIT_TAG           v1.1.1
+    OPTIONS
+      "DUSE_SYSTEM_BZ2 OFF"
+      "DUSE_SYSTEM_LZMA OFF"
   )
 
   IF(WIN32)

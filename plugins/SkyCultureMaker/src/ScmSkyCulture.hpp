@@ -28,8 +28,6 @@
 // #include <vector>
 #include <optional>
 
-#include "ScmAsterism.hpp"
-#include "ScmCommonName.hpp"
 #include "ScmConstellation.hpp"
 #include "StelCore.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -56,12 +54,6 @@ public:
 	/// Sets whether to show common names in addition to the culture-specific ones
 	void setFallbackToInternationalNames(bool fallback);
 
-	/// Adds an asterism to the sky culture
-	void addAsterism(const ScmAsterism &asterism);
-
-	/// Removes an asterism from the sky culture by its ID
-	void removeAsterism(const QString &id);
-
 	/// Adds a constellation to the sky culture
 	ScmConstellation &addConstellation(const QString &id, const std::vector<CoordinateLine> &coordinates,
 	                                   const std::vector<StarLine> &stars);
@@ -72,20 +64,8 @@ public:
 	/// Gets a constellation from the sky culture by its ID
 	ScmConstellation *getConstellation(const QString &id);
 
-	/// Adds a common name to the sky culture
-	void addCommonName(ScmCommonName commonName);
-
-	/// Removes a common name from the sky culture by its ID
-	void removeCommonName(const QString &id);
-
-	/// Returns the asterisms of the sky culture
-	// TODO: QVector<ScmAsterism> getAsterisms() const;
-
 	/// Returns a pointer to the constellations of the sky culture
 	std::vector<ScmConstellation> *getConstellations();
-
-	/// Returns the common names of the stars, planets and nonstellar objects
-	std::vector<ScmCommonName> getCommonNames() const;
 
 	/**
 	* @brief Returns the sky culture as a JSON object
@@ -126,37 +106,11 @@ private:
 	/// Whether to show common names in addition to the culture-specific ones
 	bool fallbackToInternationalNames = false;
 
-	/// The asterisms of the sky culture
-	std::vector<ScmAsterism> asterisms;
-
 	/// The constellations of the sky culture
 	std::vector<ScmConstellation> constellations;
 
-	/// The common names of the stars, planets and nonstellar objects
-	std::vector<ScmCommonName> commonNames;
-
 	/// The description of the sky culture
 	scm::Description description;
-
-	// TODO: edges:
-	/// Type of the edges. Can be one of "none", "iau" or "own". TODO: enum?
-	// std::optional<QString> edgeType;
-
-	/// Source of the edges.
-	// std::optional<QString> edgeSource;
-
-	/*! Describes the coordinate epoch. Allowed values:
-	 *   "J2000" (default)
-	 *   "B1875" used for the edge list defining the IAU borders.
-	 *   "Byyyy.y" (a number with B prepended) Arbitrary epoch as Besselian year.
-	 *   "Jyyyy.y" (a number with J prepended) Arbitrary epoch as Julian year.
-	 *   "JDddddddd.ddd" (a number with JD prepended) Arbitrary epoch as Julian Day number.
-	 *   "ddddddd.ddd"
-	 */
-	// std::optional<QString> edgeEpoch;
-
-	/// Describes the edges of the constellations.
-	// std::optional<QVector<QString>> edges;
 };
 
 } // namespace scm

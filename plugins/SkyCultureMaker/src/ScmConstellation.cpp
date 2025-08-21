@@ -130,8 +130,7 @@ void scm::ScmConstellation::drawConstellation(StelCore *core, const Vec3f &lineC
 	painter.setLineSmooth(true);
 	painter.setFont(constellationNameFont);
 
-	bool alpha = 1.0f;
-	painter.setColor(lineColor, alpha);
+	painter.setColor(lineColor, 1.0f);
 
 	for (CoordinateLine p : coordinates)
 	{
