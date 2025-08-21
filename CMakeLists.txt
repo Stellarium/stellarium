@@ -134,6 +134,7 @@ MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
 SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
 SET(ENABLE_LTO 0 CACHE BOOL "Define whether the Link Time Optimization should be activated.")
 SET(ENABLE_PCH 1 CACHE BOOL "Define whether to use precompiled headers.")
+SET(ENABLE_CCACHE 1 CACHE BOOL "Define whether to use ccache if possible.")
 
 IF(NOT CMAKE_BUILD_TYPE)
      SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)
@@ -197,7 +198,7 @@ IF(OPENGL_DEBUG_LOGGING)
 ENDIF()
 
 # Use ccache if possible
-IF(NOT WIN32)
+IF(NOT WIN32 AND ENABLE_CCACHE)
      FIND_PROGRAM(CCACHE_PROGRAM ccache)
      IF(CCACHE_PROGRAM)
           MESSAGE(STATUS "Found ccache ${CCACHE_PROGRAM}")
