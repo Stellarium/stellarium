@@ -136,7 +136,6 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			qWarning().noquote() << dbStr;
 			use_mmap = false;
 			qWarning().noquote() << "Revert to not using mmap";
-			//return 0;
 		}
 		dbStr += "byteswap ";
 		type = stel_bswap_32(type);
@@ -172,7 +171,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	}
 	if (epochJD != STAR_CATALOG_JDEPOCH)
 	{
-		qDebug().noquote() << epochJD << "!=" << STAR_CATALOG_JDEPOCH;
+		qDebug().noquote() << QString("%1 != %2").arg(QString::number(epochJD, 'f', 5), QString::number(STAR_CATALOG_JDEPOCH, 'f', 5));
 		dbStr += "warning - Star catalog epoch is not what is expected in Stellarium";
 		qDebug().noquote() << dbStr;
 		return Q_NULLPTR;
