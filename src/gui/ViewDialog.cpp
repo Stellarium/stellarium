@@ -809,7 +809,7 @@ void ViewDialog::clearHips()
 void ViewDialog::updateHips()
 {
 	if (!ui->page_surveys->isVisible()) return;
-	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
+	const auto hipsmgr = qobject_cast<HipsMgr*>(StelApp::getInstance().getModule("HipsMgr"));
 	QMetaObject::invokeMethod(hipsmgr, "loadSources");
 
 	QComboBox* typeComboBox = ui->surveyTypeComboBox;
@@ -893,14 +893,33 @@ void ViewDialog::updateHips()
 
 			// Set the first survey of each type as checked by default
 			auto checkState = Qt::Checked;
+			const bool newHipsVisible = hips->property("visible").toBool();
+			if (newHipsVisible)
+			{
+				// The group is also enabled if the survey being added is visible
+				groupItem->setCheckState(0, Qt::Checked);
+			}
 			for (int n = 0; n < groupItem->childCount(); ++n)
 			{
-				const auto surveyItem = groupItem->child(n);
-				Q_ASSERT(surveyItem->data(0, HipsRole::ItemType).toInt() == HipsItemType::Survey);
+				const auto oldHipsItem = groupItem->child(n);
+				Q_ASSERT(oldHipsItem->data(0, HipsRole::ItemType).toInt() == HipsItemType::Survey);
 
-				if (surveyItem->data(0, HipsRole::SurveyType).toString() != type)
+				if (oldHipsItem->data(0, HipsRole::SurveyType).toString() != type)
 					continue;
-				if (surveyItem->checkState(0) == Qt::Checked)
+				bool oldHipsItemChecked = oldHipsItem->checkState(0) == Qt::Checked;
+				if (newHipsVisible && oldHipsItemChecked)
+				{
+					const auto url = oldHipsItem->data(0, HipsRole::URL).toString();
+					const auto oldHips = hipsmgr->getSurveyByUrl(url);
+					Q_ASSERT(oldHips);
+					if (oldHips && !oldHips->property("visible").toBool())
+					{
+						checkState = Qt::Checked;
+						oldHipsItem->setCheckState(0, Qt::Unchecked);
+						oldHipsItemChecked = false;
+					}
+				}
+				if (!newHipsVisible && oldHipsItemChecked)
 				{
 					// A checked survey already exists, don't check the new one
 					checkState = Qt::Unchecked;
