@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-07-14 13:19+0700\n"
+"POT-Creation-Date: 2025-08-18 20:12+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Ilpo Kantonen, 2025\n"
 "Language-Team: Finnish (https://app.transifex.com/stellarium/teams/80998/fi/)\n"
@@ -30,7 +30,7 @@ msgstr ""
 
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:444
-#: src/core/modules/Constellation.cpp:569
+#: src/core/modules/Constellation.cpp:570
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:289
 #: src/core/modules/Nebula.cpp:291 src/core/modules/Planet.cpp:594
 #: src/core/modules/Planet.cpp:597 src/core/modules/StarWrapper.cpp:50
@@ -40,7 +40,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:933 src/gui/AstroCalcDialog.cpp:2425
 #: src/gui/AstroCalcDialog.cpp:3017 src/gui/AstroCalcDialog.cpp:3049
 #: src/gui/AstroCalcDialog.cpp:3373 src/gui/AstroCalcDialog.cpp:7649
-#: src/gui/ObsListDialog.cpp:291 src/ui_configurationDialog.h:2031
+#: src/gui/ObsListDialog.cpp:291 src/ui_configurationDialog.h:2007
 #: plugins/Satellites/src/Satellite.cpp:341
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:145
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
@@ -82,13 +82,13 @@ msgstr "asterismi"
 msgid "Display Options"
 msgstr "Näyttöasetukset"
 
-#: src/core/modules/AsterismMgr.cpp:101 src/ui_viewDialog.h:4838
-#: src/ui_configurationDialog.h:2109
+#: src/core/modules/AsterismMgr.cpp:101 src/ui_viewDialog.h:4856
+#: src/ui_configurationDialog.h:2085
 msgid "Asterism lines"
 msgstr "Asterismiviivat"
 
-#: src/core/modules/AsterismMgr.cpp:102 src/ui_viewDialog.h:4907
-#: src/ui_configurationDialog.h:2110
+#: src/core/modules/AsterismMgr.cpp:102 src/ui_viewDialog.h:4925
+#: src/ui_configurationDialog.h:2086
 msgid "Asterism labels"
 msgstr "Asterismien nimet"
 
@@ -96,7 +96,7 @@ msgstr "Asterismien nimet"
 msgid "Toggle single asterism selection mode"
 msgstr "Aseta yksittäisen asterismin näyttötila"
 
-#: src/core/modules/AsterismMgr.cpp:104 src/ui_viewDialog.h:4884
+#: src/core/modules/AsterismMgr.cpp:104 src/ui_viewDialog.h:4902
 msgid "Ray helpers"
 msgstr "Sädeosoittimet"
 
@@ -104,24 +104,24 @@ msgstr "Sädeosoittimet"
 msgid "constellation"
 msgstr "tähdistö"
 
-#: src/core/modules/ConstellationMgr.cpp:146 src/ui_viewDialog.h:4868
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:319
+#: src/core/modules/ConstellationMgr.cpp:146 src/ui_viewDialog.h:4886
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Constellation lines"
 msgstr "Tähtikuvioviivat"
 
-#: src/core/modules/ConstellationMgr.cpp:147 src/ui_viewDialog.h:4853
-#: src/ui_configurationDialog.h:2100
+#: src/core/modules/ConstellationMgr.cpp:147 src/ui_viewDialog.h:4871
+#: src/ui_configurationDialog.h:2076
 msgid "Constellation art"
 msgstr "Tähdistöjen kuvat"
 
-#: src/core/modules/ConstellationMgr.cpp:148 src/ui_viewDialog.h:4823
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:324
+#: src/core/modules/ConstellationMgr.cpp:148 src/ui_viewDialog.h:4841
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Constellation labels"
 msgstr "Tähdistöjen nimet"
 
-#: src/core/modules/ConstellationMgr.cpp:149 src/ui_viewDialog.h:4864
-#: src/ui_configurationDialog.h:2099
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:337
+#: src/core/modules/ConstellationMgr.cpp:149 src/ui_viewDialog.h:4882
+#: src/ui_configurationDialog.h:2075
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Constellation boundaries"
 msgstr "Tähdistöjen rajat"
 
@@ -137,7 +137,7 @@ msgstr "Kuuasemat/kartanot (jos määritelty taivaskulttuurissa)"
 msgid "Constellation areas (hulls)"
 msgstr "Tähdistöalueet (rungot)"
 
-#: src/core/modules/ConstellationMgr.cpp:155 src/ui_viewDialog.h:4906
+#: src/core/modules/ConstellationMgr.cpp:155 src/ui_viewDialog.h:4924
 msgid "Select single constellation"
 msgstr "Valitse yksittäinen tähdistö"
 
@@ -153,9 +153,9 @@ msgstr "Valitse kaikki tähdistöt"
 msgid "Reload the sky culture"
 msgstr "Lataa tähtitarusto uudelleen"
 
-#: src/core/modules/StarMgr.cpp:409 src/ui_viewDialog.h:3870
+#: src/core/modules/StarMgr.cpp:409 src/ui_viewDialog.h:3886
 #: src/ui_dsoColorsDialog.h:644
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:254
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
 msgid "Stars"
 msgstr "Tähdet"
 
@@ -171,7 +171,7 @@ msgstr "Kasvata tähtien magnitudirajaa"
 msgid "Reduce the magnitude limit for stars"
 msgstr "Pienennä tähtien magnitudirajaa"
 
-#: src/core/modules/GridLinesMgr.cpp:665 src/ui_viewDialog.h:4689
+#: src/core/modules/GridLinesMgr.cpp:665 src/ui_viewDialog.h:4705
 msgid "Meridian"
 msgstr "Meridiaani"
 
@@ -199,7 +199,7 @@ msgstr "Tuntikulma"
 msgid "Precession Circle"
 msgstr "Prekessioympyrä"
 
-#: src/core/modules/GridLinesMgr.cpp:703 src/ui_viewDialog.h:4348
+#: src/core/modules/GridLinesMgr.cpp:703 src/ui_viewDialog.h:4364
 msgid "Horizon"
 msgstr "Horisontti"
 
@@ -212,7 +212,7 @@ msgid "Supergalactic Equator"
 msgstr "Supergalaktinen ekvaattori"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:716 src/ui_viewDialog.h:4693
+#: src/core/modules/GridLinesMgr.cpp:716 src/ui_viewDialog.h:4709
 msgid "O./C. longitude"
 msgstr "Oppositio–konjunktiolinja"
 
@@ -221,7 +221,7 @@ msgid "Quadrature"
 msgstr "Kvadratuuri"
 
 #: src/core/modules/GridLinesMgr.cpp:724
-#: src/core/modules/GridLinesMgr.cpp:2002 src/ui_viewDialog.h:4305
+#: src/core/modules/GridLinesMgr.cpp:2002 src/ui_viewDialog.h:4321
 msgid "Prime Vertical"
 msgstr "Ensivertikaali"
 
@@ -231,7 +231,7 @@ msgstr "Ensivertikaali"
 #: src/gui/AstroCalcDialog.cpp:871 src/gui/AstroCalcDialog.cpp:1777
 #: src/gui/AstroCalcDialog.cpp:2177 src/gui/AstroCalcDialog.cpp:2448
 #: src/gui/AstroCalcChart.cpp:82 src/gui/AstroCalcChart.cpp:420
-#: src/ui_viewDialog.h:4614 plugins/Satellites/src/Satellite.cpp:365
+#: src/ui_viewDialog.h:4630 plugins/Satellites/src/Satellite.cpp:365
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1543
 msgid "Altitude"
 msgstr "Korkeus"
@@ -260,7 +260,7 @@ msgstr "Puolivarjo"
 msgid "Invariable Plane"
 msgstr "Muuttumaton taso"
 
-#: src/core/modules/GridLinesMgr.cpp:757 src/ui_viewDialog.h:4333
+#: src/core/modules/GridLinesMgr.cpp:757 src/ui_viewDialog.h:4349
 msgid "Projected Solar Equator"
 msgstr "Projisoitu auringon päiväntasaaja"
 
@@ -366,21 +366,21 @@ msgid "Grids and lines"
 msgstr "Asteikot ja viivat"
 
 #: src/core/modules/GridLinesMgr.cpp:1980
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:364
 msgid "Equatorial grid"
 msgstr "Ekvatoriaalinen asteikko"
 
-#: src/core/modules/GridLinesMgr.cpp:1981 src/ui_viewDialog.h:4293
+#: src/core/modules/GridLinesMgr.cpp:1981 src/ui_viewDialog.h:4309
 msgid "Fixed Equatorial grid"
 msgstr "Kiinteä ekvatoriaalinen asteikko"
 
-#: src/core/modules/GridLinesMgr.cpp:1982 src/ui_viewDialog.h:4725
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
+#: src/core/modules/GridLinesMgr.cpp:1982 src/ui_viewDialog.h:4741
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Azimuthal grid"
 msgstr "Atsimutaalinen asteikko"
 
 #: src/core/modules/GridLinesMgr.cpp:1983
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:386
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:379
 msgid "Ecliptic line"
 msgstr "Ekliptika"
 
@@ -397,7 +397,7 @@ msgid "Solar Equator Plane line"
 msgstr "Auringon ekvaattorin tason linja"
 
 #: src/core/modules/GridLinesMgr.cpp:1987
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:381
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:374
 msgid "Equator line"
 msgstr "Ekvaattori"
 
@@ -410,17 +410,17 @@ msgid "Fixed Equator line"
 msgstr "Kiinteä ekvaattoriviiva"
 
 #: src/core/modules/GridLinesMgr.cpp:1990
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Meridian line"
 msgstr "Meridiaaniviiva"
 
 #: src/core/modules/GridLinesMgr.cpp:1991
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:418
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:411
 msgid "Horizon line"
 msgstr "Horisonttiviiva"
 
 #: src/core/modules/GridLinesMgr.cpp:1992
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:376
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:369
 msgid "Equatorial J2000 grid"
 msgstr "Ekvatoriaalinen asteikko J2000"
 
@@ -428,30 +428,30 @@ msgstr "Ekvatoriaalinen asteikko J2000"
 msgid "Ecliptic J2000 grid"
 msgstr "Ekliptikaalinen asteikko J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1994 src/ui_configurationDialog.h:2108
+#: src/core/modules/GridLinesMgr.cpp:1994 src/ui_configurationDialog.h:2084
 msgid "Ecliptic grid"
 msgstr "Ekliptikaalinen asteikko"
 
-#: src/core/modules/GridLinesMgr.cpp:1995 src/ui_viewDialog.h:4245
-#: src/ui_configurationDialog.h:2098
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:423
+#: src/core/modules/GridLinesMgr.cpp:1995 src/ui_viewDialog.h:4261
+#: src/ui_configurationDialog.h:2074
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Galactic grid"
 msgstr "Galaktinen asteikko"
 
-#: src/core/modules/GridLinesMgr.cpp:1996 src/ui_viewDialog.h:4325
+#: src/core/modules/GridLinesMgr.cpp:1996 src/ui_viewDialog.h:4341
 msgid "Galactic equator"
 msgstr "Galaktinen ekvaattori"
 
-#: src/core/modules/GridLinesMgr.cpp:1997 src/ui_viewDialog.h:4602
+#: src/core/modules/GridLinesMgr.cpp:1997 src/ui_viewDialog.h:4618
 msgid "Supergalactic grid"
 msgstr "Supergalaktinen asteikko"
 
-#: src/core/modules/GridLinesMgr.cpp:1998 src/ui_viewDialog.h:4410
+#: src/core/modules/GridLinesMgr.cpp:1998 src/ui_viewDialog.h:4426
 msgid "Supergalactic equator"
 msgstr "Supergalaktinen ekvaattori"
 
 #: src/core/modules/GridLinesMgr.cpp:1999
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:426
 msgid "Opposition/conjunction longitude line"
 msgstr "Oppositio–konjunktiolinja"
 
@@ -503,15 +503,15 @@ msgstr "Ekliptikaaliset navat J2000"
 msgid "Ecliptic poles"
 msgstr "Ekliptikaaliset navat"
 
-#: src/core/modules/GridLinesMgr.cpp:2013 src/ui_viewDialog.h:4563
+#: src/core/modules/GridLinesMgr.cpp:2013 src/ui_viewDialog.h:4579
 msgid "Galactic poles"
 msgstr "Galaktiset navat"
 
-#: src/core/modules/GridLinesMgr.cpp:2014 src/ui_viewDialog.h:4498
+#: src/core/modules/GridLinesMgr.cpp:2014 src/ui_viewDialog.h:4514
 msgid "Galactic center and anticenter"
 msgstr "Linnunradan keskus ja vastapiste"
 
-#: src/core/modules/GridLinesMgr.cpp:2015 src/ui_viewDialog.h:4356
+#: src/core/modules/GridLinesMgr.cpp:2015 src/ui_viewDialog.h:4372
 msgid "Supergalactic poles"
 msgstr "Supergalaktiset navat"
 
@@ -531,7 +531,7 @@ msgstr "Seisauspisteet J2000"
 msgid "Solstice points"
 msgstr "Seisauspisteet"
 
-#: src/core/modules/GridLinesMgr.cpp:2020 src/ui_viewDialog.h:4618
+#: src/core/modules/GridLinesMgr.cpp:2020 src/ui_viewDialog.h:4634
 msgid "Antisolar point"
 msgstr "Vasta-aurinkopiste"
 
@@ -539,7 +539,7 @@ msgstr "Vasta-aurinkopiste"
 msgid "The center of the Earth's umbra"
 msgstr "Maan täysvarjon keskipiste"
 
-#: src/core/modules/GridLinesMgr.cpp:2022 src/ui_viewDialog.h:4664
+#: src/core/modules/GridLinesMgr.cpp:2022 src/ui_viewDialog.h:4680
 msgid "Apex points"
 msgstr "Apeksipisteet"
 
@@ -555,8 +555,8 @@ msgstr "Pyöreä näkökentän merkki"
 msgid "Rectangular marker of FOV"
 msgstr "Suorakulmainen näkökentän merkki"
 
-#: src/core/modules/SpecialMarkersMgr.cpp:315 src/ui_viewDialog.h:4306
-#: src/ui_configurationDialog.h:2118
+#: src/core/modules/SpecialMarkersMgr.cpp:315 src/ui_viewDialog.h:4322
+#: src/ui_configurationDialog.h:2094
 msgid "Compass marks"
 msgstr "Kompassin asteluvut"
 
@@ -753,7 +753,7 @@ msgid "NbW"
 msgstr "P-L"
 
 #: src/core/modules/LandscapeMgr.cpp:439 src/core/modules/LandscapeMgr.cpp:763
-#: src/gui/ViewDialog.cpp:754
+#: src/gui/ViewDialog.cpp:756
 msgid "Loading..."
 msgstr "Lataa..."
 
@@ -784,9 +784,9 @@ msgstr "Ilmakehä"
 msgid "Fog"
 msgstr "Sumu"
 
-#: src/core/modules/LandscapeMgr.cpp:887 src/ui_viewDialog.h:4702
-#: src/ui_configurationDialog.h:2114
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:343
+#: src/core/modules/LandscapeMgr.cpp:887 src/ui_viewDialog.h:4718
+#: src/ui_configurationDialog.h:2090
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Cardinal points"
 msgstr "Ilmansuunnat"
 
@@ -810,7 +810,7 @@ msgstr "Maanpinta"
 msgid "Landscape illumination"
 msgstr "Maiseman valaistus"
 
-#: src/core/modules/LandscapeMgr.cpp:893 src/ui_viewDialog.h:4757
+#: src/core/modules/LandscapeMgr.cpp:893 src/ui_viewDialog.h:4773
 msgid "Landscape labels"
 msgstr "Maiseman tekstit"
 
@@ -1837,7 +1837,7 @@ msgstr "taivaan alue"
 msgid "object of unknown nature"
 msgstr "tuntematon kohde"
 
-#: src/core/modules/Nebula.cpp:178 src/core/StelObject.cpp:350
+#: src/core/modules/Nebula.cpp:178 src/core/StelObject.cpp:351
 #: src/gui/AstroCalcChart.cpp:97 src/gui/AstroCalcChart.cpp:107
 #: src/gui/AstroCalcChart.cpp:437 src/gui/AstroCalcChart.cpp:463
 #: src/gui/ObsListDialog.cpp:294 plugins/Supernovae/src/Supernova.cpp:128
@@ -1852,17 +1852,17 @@ msgstr "Peittävyys"
 msgid "photometric passband"
 msgstr "fotometrinen päästökaista"
 
-#: src/core/modules/Nebula.cpp:197 src/core/StelObject.cpp:353
+#: src/core/modules/Nebula.cpp:197 src/core/StelObject.cpp:354
 #: plugins/Satellites/src/Satellite.cpp:350
 msgid "reduced to"
 msgstr "ekstinktiokorjattu mag."
 
-#: src/core/modules/Nebula.cpp:197 src/core/StelObject.cpp:353
+#: src/core/modules/Nebula.cpp:197 src/core/StelObject.cpp:354
 #: plugins/Satellites/src/Satellite.cpp:350
 msgid "by"
 msgstr "(korjaus"
 
-#: src/core/modules/Nebula.cpp:197 src/core/StelObject.cpp:353
+#: src/core/modules/Nebula.cpp:197 src/core/StelObject.cpp:354
 #: plugins/Satellites/src/Satellite.cpp:350
 msgid "Airmasses"
 msgstr "ilmamassaa)"
@@ -1912,7 +1912,7 @@ msgstr "kaarisek."
 msgid "Contrast index"
 msgstr "Kontrasti-indeksi"
 
-#: src/core/modules/Nebula.cpp:340 src/ui_configurationDialog.h:2044
+#: src/core/modules/Nebula.cpp:340 src/ui_configurationDialog.h:2020
 msgid "Size"
 msgstr "Koko"
 
@@ -1937,7 +1937,7 @@ msgstr "valovuotta"
 #: src/core/modules/StarWrapper.cpp:350 src/core/modules/StarWrapper.cpp:732
 #: src/gui/AstroCalcDialog.cpp:968 src/gui/AstroCalcChart.cpp:94
 #: src/gui/AstroCalcChart.cpp:104 src/gui/AstroCalcChart.cpp:430
-#: src/gui/AstroCalcChart.cpp:456 src/ui_configurationDialog.h:2016
+#: src/gui/AstroCalcChart.cpp:456 src/ui_configurationDialog.h:1992
 #: plugins/Supernovae/src/Supernova.cpp:160 plugins/Novae/src/Nova.cpp:165
 #: plugins/Exoplanets/src/Exoplanet.cpp:335
 msgid "Distance"
@@ -1966,7 +1966,7 @@ msgid "Redshift"
 msgstr "Punasiirtymä"
 
 #: src/core/modules/Nebula.cpp:456 src/core/modules/StarWrapper.cpp:386
-#: src/core/modules/StarWrapper.cpp:736 src/ui_configurationDialog.h:2211
+#: src/core/modules/StarWrapper.cpp:736 src/ui_configurationDialog.h:2187
 msgid "Parallax"
 msgstr "Parallaksi"
 
@@ -2479,7 +2479,7 @@ msgstr "Ekvaattorin halkaisija"
 #: src/core/modules/Planet.cpp:879 src/core/modules/Planet.cpp:880
 #: src/core/modules/Planet.cpp:888 src/gui/AstroCalcChart.cpp:95
 #: src/gui/AstroCalcChart.cpp:105 src/gui/AstroCalcChart.cpp:432
-#: src/gui/AstroCalcChart.cpp:458 src/ui_configurationDialog.h:2055
+#: src/gui/AstroCalcChart.cpp:458 src/ui_configurationDialog.h:2031
 msgid "Elongation"
 msgstr "Elongaatio"
 
@@ -2729,17 +2729,17 @@ msgid "Planets"
 msgstr "Planeetat"
 
 #: src/core/modules/SolarSystem.cpp:347
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:348
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Planet labels"
 msgstr "Planeettojen nimet"
 
 #: src/core/modules/SolarSystem.cpp:348
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:352
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:345
 msgid "Planet orbits"
 msgstr "Planeettojen radat"
 
 #: src/core/modules/SolarSystem.cpp:349
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:356
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Planet trails"
 msgstr "Planeettojen kulkureitit"
 
@@ -2747,7 +2747,7 @@ msgstr "Planeettojen kulkureitit"
 msgid "Planet trails reset"
 msgstr "Planeettojen kulkureittien nollaus"
 
-#: src/core/modules/SolarSystem.cpp:352 src/ui_viewDialog.h:3979
+#: src/core/modules/SolarSystem.cpp:352 src/ui_viewDialog.h:3995
 msgid "Planet markers"
 msgstr "Planeettojen osoittimet"
 
@@ -2771,7 +2771,7 @@ msgstr "Surenna planeetat"
 msgid "Enlarge Sun"
 msgstr "Suurenna Aurinko"
 
-#: src/core/modules/SolarSystem.cpp:358 src/ui_viewDialog.h:3996
+#: src/core/modules/SolarSystem.cpp:358 src/ui_viewDialog.h:4012
 msgid "Mark minor bodies"
 msgstr "Merkitse pienet kohteet"
 
@@ -2880,7 +2880,7 @@ msgid "Position angle"
 msgstr "Suuntakulma"
 
 #: src/core/modules/StarWrapper.cpp:429 src/core/modules/StarWrapper.cpp:437
-#: src/core/StelObject.cpp:375
+#: src/core/StelObject.cpp:376
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "nykyinen"
@@ -3198,7 +3198,7 @@ msgstr "Alustetetaan skriptejä..."
 msgid "Initializing color scheme..."
 msgstr "Alustetaan väriskeema..."
 
-#: src/core/StelApp.cpp:693 src/ui_configurationDialog.h:2142
+#: src/core/StelApp.cpp:693 src/ui_configurationDialog.h:2118
 msgid "Night mode"
 msgstr "Yötila"
 
@@ -4087,165 +4087,170 @@ msgstr ""
 "eivät enää kuvaudu äärettömyyteen. Sen keksi Osborn Maitland Miller "
 "(1897–1979) vuonna 1942."
 
-#: src/core/StelObject.cpp:377
+#: src/core/StelObject.cpp:378
 msgid "(apparent)"
 msgstr "(refraktiokorjattu)"
 
 #. TRANSLATORS: Right ascension/Declination
-#: src/core/StelObject.cpp:403
+#: src/core/StelObject.cpp:405
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
 msgstr "Rekt./dekl."
 
 #. TRANSLATORS: Hour angle/Declination
-#: src/core/StelObject.cpp:492
+#: src/core/StelObject.cpp:494
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
 msgstr "Tuntik./dekl."
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:541
+#: src/core/StelObject.cpp:543
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
 msgstr "Ats./kork."
 
 #. TRANSLATORS: Galactic longitude/latitude
-#: src/core/StelObject.cpp:567
+#: src/core/StelObject.cpp:569
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
 msgstr "Gal. pit./lev."
 
 #. TRANSLATORS: Supergalactic longitude/latitude
-#: src/core/StelObject.cpp:592
+#: src/core/StelObject.cpp:594
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
 msgstr "Supergal. pit./lev."
 
-#: src/core/StelObject.cpp:610
+#: src/core/StelObject.cpp:612
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
 msgstr "Ekl. pit./lev."
 
-#: src/core/StelObject.cpp:675
+#: src/core/StelObject.cpp:671
 msgid "Ecliptic obliquity"
 msgstr "Ekliptikan kaltevuus"
 
-#: src/core/StelObject.cpp:704
+#: src/core/StelObject.cpp:700
 msgid "Mean Sidereal Time"
 msgstr "Keskitähtiaika"
 
-#: src/core/StelObject.cpp:719
+#: src/core/StelObject.cpp:715
 msgid "Apparent Sidereal Time"
 msgstr "Todellinen tähtiaika"
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:757 src/gui/AstroCalcDialog.cpp:927
+#: src/core/StelObject.cpp:753 src/gui/AstroCalcDialog.cpp:927
 #: src/gui/AstroCalcDialog.cpp:2174 src/gui/AstroCalcDialog.cpp:7633
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "Kulminoi"
 
-#: src/core/StelObject.cpp:758 src/gui/AstroCalcDialog.cpp:2173
+#: src/core/StelObject.cpp:754 src/gui/AstroCalcDialog.cpp:2173
 #: src/gui/AstroCalcDialog.cpp:7632
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "Nousee"
 
-#: src/core/StelObject.cpp:759 src/gui/AstroCalcDialog.cpp:2175
+#: src/core/StelObject.cpp:755 src/gui/AstroCalcDialog.cpp:2175
 #: src/gui/AstroCalcDialog.cpp:7636
 msgctxt "celestial event"
 msgid "Set"
 msgstr "Laskee"
 
-#: src/core/StelObject.cpp:828
+#: src/core/StelObject.cpp:823
 msgctxt "celestial event"
 msgid "Morning twilight"
 msgstr "Aamuhämärä"
 
-#: src/core/StelObject.cpp:829
+#: src/core/StelObject.cpp:824
 msgctxt "celestial event"
 msgid "Evening twilight"
 msgstr "Iltahämärä"
 
-#: src/core/StelObject.cpp:850 plugins/NavStars/src/ui_navStarsWindow.h:532
+#: src/core/StelObject.cpp:845 plugins/NavStars/src/ui_navStarsWindow.h:532
 msgid "Daytime"
 msgstr "Päivän pituus"
 
-#: src/core/StelObject.cpp:864
+#: src/core/StelObject.cpp:859
 msgid "Polar night"
 msgstr "Kaamos"
 
-#: src/core/StelObject.cpp:866
+#: src/core/StelObject.cpp:861
 msgid "This object never rises"
 msgstr "Ei nouse horisontin yläpuolelle"
 
-#: src/core/StelObject.cpp:871
+#: src/core/StelObject.cpp:866
 msgid "Polar day"
 msgstr "Keskiyön aurinko"
 
-#: src/core/StelObject.cpp:873
+#: src/core/StelObject.cpp:868
 msgid "Circumpolar (never sets)"
 msgstr "Sirkumpolaarinen (ei laske)"
 
 #. TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for stars
 #. with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:891
+#: src/core/StelObject.cpp:886
 msgid "Max. E. Digression"
 msgstr "Max. E. Digression"
 
 #. TRANSLATORS: azimuth (abbrev.)
-#: src/core/StelObject.cpp:893
+#: src/core/StelObject.cpp:888
 msgctxt "celestial coordinate system"
 msgid "A"
 msgstr "A"
 
-#: src/core/StelObject.cpp:893
+#: src/core/StelObject.cpp:888
 msgctxt "celestial coordinate system"
 msgid "Az."
 msgstr "Az."
 
-#: src/core/StelObject.cpp:895
+#: src/core/StelObject.cpp:890
 msgctxt "celestial coordinate system"
 msgid "h"
 msgstr "h "
 
-#: src/core/StelObject.cpp:895
+#: src/core/StelObject.cpp:890
 msgctxt "celestial coordinate system"
 msgid "HA"
 msgstr "HA"
 
 #. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
 #. stars with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:921
+#: src/core/StelObject.cpp:916
 msgid "Max. W. Digression"
 msgstr "Max. W. Digression"
 
-#: src/core/StelObject.cpp:964
+#: src/core/StelObject.cpp:959
 msgid "Parallactic Angle"
 msgstr "Parallaksikulma"
 
-#: src/core/StelObject.cpp:974 src/gui/AstroCalcDialog.cpp:7731
+#: src/core/StelObject.cpp:969 src/gui/AstroCalcDialog.cpp:7731
 msgid "IAU Constellation"
 msgstr "IAU:n tähtikuvio"
 
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/core/StelObject.cpp:989 src/translations.h:59
+msgid "Constellations"
+msgstr "Tähtikuviot"
+
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1354
+#: src/core/StelObject.cpp:1369
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
 msgstr "Aurinko A/a"
 
-#: src/core/StelObject.cpp:1354
+#: src/core/StelObject.cpp:1369
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr "Aurinko Az./Alt."
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1372
+#: src/core/StelObject.cpp:1387
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
 msgstr "Kuu A/a"
 
-#: src/core/StelObject.cpp:1372
+#: src/core/StelObject.cpp:1387
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr "Kuu Az./Alt."
@@ -4498,7 +4503,7 @@ msgstr ""
 "Free Art License antaa oikeuden vapaasti kopioida, levittää ja muunnella."
 
 #: src/core/StelSkyCultureMgr.cpp:520 src/core/StelSkyCultureMgr.cpp:527
-#: src/core/StelSkyCultureMgr.cpp:534 src/gui/ConfigurationDialog.cpp:1391
+#: src/core/StelSkyCultureMgr.cpp:534 src/gui/ConfigurationDialog.cpp:1357
 #: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
@@ -4666,263 +4671,263 @@ msgid "Not found"
 msgstr "ei löytynyt"
 
 #. TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:242
+#: src/core/StelLocaleMgr.cpp:232
 msgctxt "solar time"
 msgid "LMST"
 msgstr "LMST"
 
 #. TRANSLATORS: Local True Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:248
+#: src/core/StelLocaleMgr.cpp:238
 msgctxt "solar time"
 msgid "LTST"
 msgstr "LTST"
 
-#: src/core/StelLocaleMgr.cpp:384
+#: src/core/StelLocaleMgr.cpp:374
 msgctxt "short day name"
 msgid "Sun"
 msgstr "Su"
 
-#: src/core/StelLocaleMgr.cpp:385
+#: src/core/StelLocaleMgr.cpp:375
 msgctxt "short day name"
 msgid "Mon"
 msgstr "Ma"
 
-#: src/core/StelLocaleMgr.cpp:386
+#: src/core/StelLocaleMgr.cpp:376
 msgctxt "short day name"
 msgid "Tue"
 msgstr "Ti"
 
-#: src/core/StelLocaleMgr.cpp:387
+#: src/core/StelLocaleMgr.cpp:377
 msgctxt "short day name"
 msgid "Wed"
 msgstr "Ke"
 
-#: src/core/StelLocaleMgr.cpp:388
+#: src/core/StelLocaleMgr.cpp:378
 msgctxt "short day name"
 msgid "Thu"
 msgstr "To"
 
-#: src/core/StelLocaleMgr.cpp:389
+#: src/core/StelLocaleMgr.cpp:379
 msgctxt "short day name"
 msgid "Fri"
 msgstr "Pe"
 
-#: src/core/StelLocaleMgr.cpp:390
+#: src/core/StelLocaleMgr.cpp:380
 msgctxt "short day name"
 msgid "Sat"
 msgstr "La"
 
-#: src/core/StelLocaleMgr.cpp:393 plugins/Calendars/src/JulianCalendar.cpp:37
+#: src/core/StelLocaleMgr.cpp:383 plugins/Calendars/src/JulianCalendar.cpp:37
 msgctxt "long day name"
 msgid "Sunday"
 msgstr "sunnuntai"
 
-#: src/core/StelLocaleMgr.cpp:394 plugins/Calendars/src/JulianCalendar.cpp:38
+#: src/core/StelLocaleMgr.cpp:384 plugins/Calendars/src/JulianCalendar.cpp:38
 msgctxt "long day name"
 msgid "Monday"
 msgstr "maanantai"
 
-#: src/core/StelLocaleMgr.cpp:395 plugins/Calendars/src/JulianCalendar.cpp:39
+#: src/core/StelLocaleMgr.cpp:385 plugins/Calendars/src/JulianCalendar.cpp:39
 msgctxt "long day name"
 msgid "Tuesday"
 msgstr "tiistai"
 
-#: src/core/StelLocaleMgr.cpp:396 plugins/Calendars/src/JulianCalendar.cpp:40
+#: src/core/StelLocaleMgr.cpp:386 plugins/Calendars/src/JulianCalendar.cpp:40
 msgctxt "long day name"
 msgid "Wednesday"
 msgstr "keskiviikko"
 
-#: src/core/StelLocaleMgr.cpp:397 plugins/Calendars/src/JulianCalendar.cpp:41
+#: src/core/StelLocaleMgr.cpp:387 plugins/Calendars/src/JulianCalendar.cpp:41
 msgctxt "long day name"
 msgid "Thursday"
 msgstr "torstai"
 
-#: src/core/StelLocaleMgr.cpp:398 plugins/Calendars/src/JulianCalendar.cpp:42
+#: src/core/StelLocaleMgr.cpp:388 plugins/Calendars/src/JulianCalendar.cpp:42
 msgctxt "long day name"
 msgid "Friday"
 msgstr "perjantai"
 
-#: src/core/StelLocaleMgr.cpp:399 plugins/Calendars/src/JulianCalendar.cpp:43
+#: src/core/StelLocaleMgr.cpp:389 plugins/Calendars/src/JulianCalendar.cpp:43
 msgctxt "long day name"
 msgid "Saturday"
 msgstr "lauantai"
 
-#: src/core/StelLocaleMgr.cpp:403
+#: src/core/StelLocaleMgr.cpp:393
 msgctxt "short month name"
 msgid "Dec"
 msgstr "joulu"
 
-#: src/core/StelLocaleMgr.cpp:404
+#: src/core/StelLocaleMgr.cpp:394
 msgctxt "short month name"
 msgid "Jan"
 msgstr "tammi"
 
-#: src/core/StelLocaleMgr.cpp:405
+#: src/core/StelLocaleMgr.cpp:395
 msgctxt "short month name"
 msgid "Feb"
 msgstr "helmi"
 
-#: src/core/StelLocaleMgr.cpp:406
+#: src/core/StelLocaleMgr.cpp:396
 msgctxt "short month name"
 msgid "Mar"
 msgstr "maalis"
 
-#: src/core/StelLocaleMgr.cpp:407
+#: src/core/StelLocaleMgr.cpp:397
 msgctxt "short month name"
 msgid "Apr"
 msgstr "huhti"
 
-#: src/core/StelLocaleMgr.cpp:408
+#: src/core/StelLocaleMgr.cpp:398
 msgctxt "short month name"
 msgid "May"
 msgstr "touko"
 
-#: src/core/StelLocaleMgr.cpp:409
+#: src/core/StelLocaleMgr.cpp:399
 msgctxt "short month name"
 msgid "Jun"
 msgstr "kesä"
 
-#: src/core/StelLocaleMgr.cpp:410
+#: src/core/StelLocaleMgr.cpp:400
 msgctxt "short month name"
 msgid "Jul"
 msgstr "heinä"
 
-#: src/core/StelLocaleMgr.cpp:411
+#: src/core/StelLocaleMgr.cpp:401
 msgctxt "short month name"
 msgid "Aug"
 msgstr "elo"
 
-#: src/core/StelLocaleMgr.cpp:412
+#: src/core/StelLocaleMgr.cpp:402
 msgctxt "short month name"
 msgid "Sep"
 msgstr "syys"
 
-#: src/core/StelLocaleMgr.cpp:413
+#: src/core/StelLocaleMgr.cpp:403
 msgctxt "short month name"
 msgid "Oct"
 msgstr "loka"
 
-#: src/core/StelLocaleMgr.cpp:414
+#: src/core/StelLocaleMgr.cpp:404
 msgctxt "short month name"
 msgid "Nov"
 msgstr "marras"
 
-#: src/core/StelLocaleMgr.cpp:418 plugins/Calendars/src/JulianCalendar.cpp:56
+#: src/core/StelLocaleMgr.cpp:408 plugins/Calendars/src/JulianCalendar.cpp:56
 msgctxt "long month name"
 msgid "December"
 msgstr "Joulukuu"
 
-#: src/core/StelLocaleMgr.cpp:419 plugins/Calendars/src/JulianCalendar.cpp:45
+#: src/core/StelLocaleMgr.cpp:409 plugins/Calendars/src/JulianCalendar.cpp:45
 msgctxt "long month name"
 msgid "January"
 msgstr "Tammikuu"
 
-#: src/core/StelLocaleMgr.cpp:420 plugins/Calendars/src/JulianCalendar.cpp:46
+#: src/core/StelLocaleMgr.cpp:410 plugins/Calendars/src/JulianCalendar.cpp:46
 msgctxt "long month name"
 msgid "February"
 msgstr "Helmikuu"
 
-#: src/core/StelLocaleMgr.cpp:421 plugins/Calendars/src/JulianCalendar.cpp:47
+#: src/core/StelLocaleMgr.cpp:411 plugins/Calendars/src/JulianCalendar.cpp:47
 msgctxt "long month name"
 msgid "March"
 msgstr "Maaliskuu"
 
-#: src/core/StelLocaleMgr.cpp:422 plugins/Calendars/src/JulianCalendar.cpp:48
+#: src/core/StelLocaleMgr.cpp:412 plugins/Calendars/src/JulianCalendar.cpp:48
 msgctxt "long month name"
 msgid "April"
 msgstr "Huhtikuu"
 
-#: src/core/StelLocaleMgr.cpp:423 plugins/Calendars/src/JulianCalendar.cpp:49
+#: src/core/StelLocaleMgr.cpp:413 plugins/Calendars/src/JulianCalendar.cpp:49
 msgctxt "long month name"
 msgid "May"
 msgstr "Toukokuu"
 
-#: src/core/StelLocaleMgr.cpp:424 plugins/Calendars/src/JulianCalendar.cpp:50
+#: src/core/StelLocaleMgr.cpp:414 plugins/Calendars/src/JulianCalendar.cpp:50
 msgctxt "long month name"
 msgid "June"
 msgstr "Kesäkuu"
 
-#: src/core/StelLocaleMgr.cpp:425 plugins/Calendars/src/JulianCalendar.cpp:51
+#: src/core/StelLocaleMgr.cpp:415 plugins/Calendars/src/JulianCalendar.cpp:51
 msgctxt "long month name"
 msgid "July"
 msgstr "Heinäkuu"
 
-#: src/core/StelLocaleMgr.cpp:426 plugins/Calendars/src/JulianCalendar.cpp:52
+#: src/core/StelLocaleMgr.cpp:416 plugins/Calendars/src/JulianCalendar.cpp:52
 msgctxt "long month name"
 msgid "August"
 msgstr "Elokuu"
 
-#: src/core/StelLocaleMgr.cpp:427 plugins/Calendars/src/JulianCalendar.cpp:53
+#: src/core/StelLocaleMgr.cpp:417 plugins/Calendars/src/JulianCalendar.cpp:53
 msgctxt "long month name"
 msgid "September"
 msgstr "Syyskuu"
 
-#: src/core/StelLocaleMgr.cpp:428 plugins/Calendars/src/JulianCalendar.cpp:54
+#: src/core/StelLocaleMgr.cpp:418 plugins/Calendars/src/JulianCalendar.cpp:54
 msgctxt "long month name"
 msgid "October"
 msgstr "Lokakuu"
 
-#: src/core/StelLocaleMgr.cpp:429 plugins/Calendars/src/JulianCalendar.cpp:55
+#: src/core/StelLocaleMgr.cpp:419 plugins/Calendars/src/JulianCalendar.cpp:55
 msgctxt "long month name"
 msgid "November"
 msgstr "Marraskuu"
 
-#: src/core/StelLocaleMgr.cpp:432
+#: src/core/StelLocaleMgr.cpp:422
 msgctxt "genitive"
 msgid "December"
 msgstr "joulukuuta"
 
-#: src/core/StelLocaleMgr.cpp:433
+#: src/core/StelLocaleMgr.cpp:423
 msgctxt "genitive"
 msgid "January"
 msgstr "tammikuuta"
 
-#: src/core/StelLocaleMgr.cpp:434
+#: src/core/StelLocaleMgr.cpp:424
 msgctxt "genitive"
 msgid "February"
 msgstr "helmikuuta"
 
-#: src/core/StelLocaleMgr.cpp:435
+#: src/core/StelLocaleMgr.cpp:425
 msgctxt "genitive"
 msgid "March"
 msgstr "maaliskuuta"
 
-#: src/core/StelLocaleMgr.cpp:436
+#: src/core/StelLocaleMgr.cpp:426
 msgctxt "genitive"
 msgid "April"
 msgstr "huhtikuuta"
 
-#: src/core/StelLocaleMgr.cpp:437
+#: src/core/StelLocaleMgr.cpp:427
 msgctxt "genitive"
 msgid "May"
 msgstr "toukokuuta"
 
-#: src/core/StelLocaleMgr.cpp:438
+#: src/core/StelLocaleMgr.cpp:428
 msgctxt "genitive"
 msgid "June"
 msgstr "kesäkuuta"
 
-#: src/core/StelLocaleMgr.cpp:439
+#: src/core/StelLocaleMgr.cpp:429
 msgctxt "genitive"
 msgid "July"
 msgstr "heinäkuuta"
 
-#: src/core/StelLocaleMgr.cpp:440
+#: src/core/StelLocaleMgr.cpp:430
 msgctxt "genitive"
 msgid "August"
 msgstr "elokuuta"
 
-#: src/core/StelLocaleMgr.cpp:441
+#: src/core/StelLocaleMgr.cpp:431
 msgctxt "genitive"
 msgid "September"
 msgstr "syyskuuta"
 
-#: src/core/StelLocaleMgr.cpp:442
+#: src/core/StelLocaleMgr.cpp:432
 msgctxt "genitive"
 msgid "October"
 msgstr "lokakuuta"
 
-#: src/core/StelLocaleMgr.cpp:443
+#: src/core/StelLocaleMgr.cpp:433
 msgctxt "genitive"
 msgid "November"
 msgstr "marraskuuta"
@@ -4955,45 +4960,45 @@ msgstr "Virheraportit ja lisäominaisuuspyynnöt voit tehdä {täällä}."
 msgid "Further information can be found in the {developer documentation}."
 msgstr "Lisätietoa löytyy {kehittäjien dokumentaatiosta}."
 
-#: src/gui/ConfigurationDialog.cpp:128 src/ui_configurationDialog.h:1920
+#: src/gui/ConfigurationDialog.cpp:128 src/ui_configurationDialog.h:1897
 msgid "Plugins"
 msgstr "Laajennukset"
 
-#: src/gui/ConfigurationDialog.cpp:807
+#: src/gui/ConfigurationDialog.cpp:772
 msgid "Select screenshot directory"
 msgstr "Valitse kuvankaappaushakemisto"
 
-#: src/gui/ConfigurationDialog.cpp:837
+#: src/gui/ConfigurationDialog.cpp:802
 #: plugins/Oculars/src/gui/OcularDialog.cpp:592
 #: plugins/Oculars/src/gui/OcularDialog.cpp:598
 msgctxt "millimeters"
 msgid "mm"
 msgstr "mm"
 
-#: src/gui/ConfigurationDialog.cpp:852
+#: src/gui/ConfigurationDialog.cpp:817
 msgid "Dots per Inch (for image metadata)."
 msgstr "Pistettä tuumalla (kuvan metatiedot)."
 
-#: src/gui/ConfigurationDialog.cpp:853
+#: src/gui/ConfigurationDialog.cpp:818
 msgid "Current designated print size"
 msgstr "Nykyinen määritetty tulostuskoko"
 
-#: src/gui/ConfigurationDialog.cpp:1308
+#: src/gui/ConfigurationDialog.cpp:1274
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Aloitusnäkökenttä: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:1316
+#: src/gui/ConfigurationDialog.cpp:1282
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Aloituskatselusuunta (atsim./kork.): %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1385
+#: src/gui/ConfigurationDialog.cpp:1351
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:128
 msgid "Acknowledgments"
 msgstr "Kiitokset"
 
-#: src/gui/ConfigurationDialog.cpp:1387
+#: src/gui/ConfigurationDialog.cpp:1353
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:297
@@ -5002,11 +5007,11 @@ msgstr "Kiitokset"
 msgid "Authors"
 msgstr "Tekijät"
 
-#: src/gui/ConfigurationDialog.cpp:1388
+#: src/gui/ConfigurationDialog.cpp:1354
 msgid "Contact"
 msgstr "Yhteystieto"
 
-#: src/gui/ConfigurationDialog.cpp:1390 src/gui/HelpDialog.cpp:516
+#: src/gui/ConfigurationDialog.cpp:1356 src/gui/HelpDialog.cpp:516
 #: src/scripting/StelScriptMgr.cpp:657
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
@@ -5034,20 +5039,20 @@ msgstr "Yhteystieto"
 msgid "Version"
 msgstr "Versio"
 
-#: src/gui/ConfigurationDialog.cpp:1395
+#: src/gui/ConfigurationDialog.cpp:1361
 msgctxt "license"
 msgid "unknown"
 msgstr "tuntematon"
 
-#: src/gui/ConfigurationDialog.cpp:1507
+#: src/gui/ConfigurationDialog.cpp:1473
 msgid "Running script: "
 msgstr "Suorittaa skriptiä: "
 
-#: src/gui/ConfigurationDialog.cpp:1514
+#: src/gui/ConfigurationDialog.cpp:1480
 msgid "Running script: [none]"
 msgstr "Suorittaa skriptiä: [ei mitään]"
 
-#: src/gui/ConfigurationDialog.cpp:1579
+#: src/gui/ConfigurationDialog.cpp:1545
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -5055,16 +5060,16 @@ msgstr ""
 "Uudet tähtiluettelot haettu!\n"
 "Käynnistä Stellarium uudelleen näyttääksesi ne."
 
-#: src/gui/ConfigurationDialog.cpp:1583
+#: src/gui/ConfigurationDialog.cpp:1549
 msgid "All available star catalogs have been installed."
 msgstr "Kaikki saatavilla olevat tähtiluettelot on asennettu."
 
-#: src/gui/ConfigurationDialog.cpp:1588
+#: src/gui/ConfigurationDialog.cpp:1554
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Hae luettelo %1 / %2"
 
-#: src/gui/ConfigurationDialog.cpp:1595
+#: src/gui/ConfigurationDialog.cpp:1561
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -5073,7 +5078,7 @@ msgstr ""
 "Haetaan %1...\n"
 "(Voit sulkea tämän ikkunan.)"
 
-#: src/gui/ConfigurationDialog.cpp:1602
+#: src/gui/ConfigurationDialog.cpp:1568
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -5084,7 +5089,7 @@ msgstr ""
 "Tähtien määrä: %2 miljoonaa\n"
 "Magnitudiväli: %3–%4"
 
-#: src/gui/ConfigurationDialog.cpp:1648 src/gui/ConfigurationDialog.cpp:1689
+#: src/gui/ConfigurationDialog.cpp:1614 src/gui/ConfigurationDialog.cpp:1655
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5093,11 +5098,11 @@ msgstr ""
 "Virhe haettaessa tiedostoa %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1742
+#: src/gui/ConfigurationDialog.cpp:1708
 msgid "Verifying file integrity..."
 msgstr "Tarkastetaan yhteensopivuutta..."
 
-#: src/gui/ConfigurationDialog.cpp:1746
+#: src/gui/ConfigurationDialog.cpp:1712
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5106,22 +5111,22 @@ msgstr ""
 "Virhe haettaessa tiedostoa %1:\n"
 "Tiedosto vioittunut."
 
-#: src/gui/ConfigurationDialog.cpp:1830 src/gui/ConfigurationDialog.cpp:1842
-#: src/gui/ConfigurationDialog.cpp:1854 src/gui/ConfigurationDialog.cpp:1866
+#: src/gui/ConfigurationDialog.cpp:1796 src/gui/ConfigurationDialog.cpp:1808
+#: src/gui/ConfigurationDialog.cpp:1820 src/gui/ConfigurationDialog.cpp:1832
 msgid "Available"
 msgstr "Saatavilla"
 
-#: src/gui/ConfigurationDialog.cpp:1832 src/gui/ConfigurationDialog.cpp:1844
-#: src/gui/ConfigurationDialog.cpp:1856 src/gui/ConfigurationDialog.cpp:1868
+#: src/gui/ConfigurationDialog.cpp:1798 src/gui/ConfigurationDialog.cpp:1810
+#: src/gui/ConfigurationDialog.cpp:1822 src/gui/ConfigurationDialog.cpp:1834
 msgid "Not Available"
 msgstr "Ei saatavilla"
 
-#: src/gui/ConfigurationDialog.cpp:1911
+#: src/gui/ConfigurationDialog.cpp:1877
 msgid "Annual proper motion (stars) or hourly motion (solar system objects)"
 msgstr ""
 "Vuosittainen ominaisliike (tähdet) tai tunnin liike (aurinkokunnan kohteet)"
 
-#: src/gui/ConfigurationDialog.cpp:1912
+#: src/gui/ConfigurationDialog.cpp:1878
 msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
 " setting events are defined with the upper limb of the celestial body."
@@ -5130,210 +5135,210 @@ msgstr ""
 "laskutapahtumat määritellään taivaankappaleen ylärajojen avulla."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1953
+#: src/gui/ConfigurationDialog.cpp:1919
 msgid "Algorithm of"
 msgstr "Algoritmi"
 
-#: src/gui/ConfigurationDialog.cpp:1964
+#: src/gui/ConfigurationDialog.cpp:1930
 msgid "Without correction"
 msgstr "Ei korjausta"
 
-#: src/gui/ConfigurationDialog.cpp:1965
+#: src/gui/ConfigurationDialog.cpp:1931
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1966
+#: src/gui/ConfigurationDialog.cpp:1932
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1967
+#: src/gui/ConfigurationDialog.cpp:1933
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1968
+#: src/gui/ConfigurationDialog.cpp:1934
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1969
+#: src/gui/ConfigurationDialog.cpp:1935
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1970
+#: src/gui/ConfigurationDialog.cpp:1936
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1971
+#: src/gui/ConfigurationDialog.cpp:1937
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1972
+#: src/gui/ConfigurationDialog.cpp:1938
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1973
+#: src/gui/ConfigurationDialog.cpp:1939
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1974
+#: src/gui/ConfigurationDialog.cpp:1940
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1975
+#: src/gui/ConfigurationDialog.cpp:1941
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1976
+#: src/gui/ConfigurationDialog.cpp:1942
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1977
+#: src/gui/ConfigurationDialog.cpp:1943
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1978
+#: src/gui/ConfigurationDialog.cpp:1944
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1979
+#: src/gui/ConfigurationDialog.cpp:1945
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1980
+#: src/gui/ConfigurationDialog.cpp:1946
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1981
+#: src/gui/ConfigurationDialog.cpp:1947
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1983
+#: src/gui/ConfigurationDialog.cpp:1949
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (Chaprontin, Chapront-Touzen & Francoun kanssa (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1984
+#: src/gui/ConfigurationDialog.cpp:1950
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1985
+#: src/gui/ConfigurationDialog.cpp:1951
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1986
+#: src/gui/ConfigurationDialog.cpp:1952
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1987
+#: src/gui/ConfigurationDialog.cpp:1953
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr "Reingold & Dershowitz (2002, 2007, 2018)"
 
-#: src/gui/ConfigurationDialog.cpp:1988
+#: src/gui/ConfigurationDialog.cpp:1954
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1989
+#: src/gui/ConfigurationDialog.cpp:1955
 msgid "Espenak & Meeus (2006, 2014)"
 msgstr "Espenak & Meeus (2006, 2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1992
+#: src/gui/ConfigurationDialog.cpp:1958
 msgid "Espenak & Meeus (2006, 2014) no extra moon acceleration"
 msgstr "Espenak & Meeus (2006, 2014) ei ylimääräistä kuukiihtyvyyttä"
 
-#: src/gui/ConfigurationDialog.cpp:1995
+#: src/gui/ConfigurationDialog.cpp:1961
 msgid "Modified Espenak & Meeus (2006, 2014, 2023)"
 msgstr "Modified Espenak & Meeus (2006, 2014, 2023)"
 
-#: src/gui/ConfigurationDialog.cpp:1996
+#: src/gui/ConfigurationDialog.cpp:1962
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1997
+#: src/gui/ConfigurationDialog.cpp:1963
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1998
+#: src/gui/ConfigurationDialog.cpp:1964
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1999
+#: src/gui/ConfigurationDialog.cpp:1965
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:2000
+#: src/gui/ConfigurationDialog.cpp:1966
 msgid "Stephenson, Morrison & Hohenkerk (2016, 2021)"
 msgstr "Stephenson, Morrison & Hohenkerk (2016, 2021)"
 
-#: src/gui/ConfigurationDialog.cpp:2001
+#: src/gui/ConfigurationDialog.cpp:1967
 msgid "Henriksson (2017)"
 msgstr "Henriksson (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:2002
+#: src/gui/ConfigurationDialog.cpp:1968
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Käyttäjän määrittelemä %1T"
 
-#: src/gui/ConfigurationDialog.cpp:2058 src/gui/ConfigurationDialog.cpp:2096
+#: src/gui/ConfigurationDialog.cpp:2024 src/gui/ConfigurationDialog.cpp:2062
 #: src/gui/StelGuiItems.cpp:875 src/gui/LocationDialog.cpp:560
 msgid "System default"
 msgstr "Järjestelmän oletus"
 
-#: src/gui/ConfigurationDialog.cpp:2059
+#: src/gui/ConfigurationDialog.cpp:2025
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "yyyy-mm-dd (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:2060
+#: src/gui/ConfigurationDialog.cpp:2026
 msgid "dd-mm-yyyy"
 msgstr "dd-mm-yyyy"
 
-#: src/gui/ConfigurationDialog.cpp:2061
+#: src/gui/ConfigurationDialog.cpp:2027
 msgid "mm-dd-yyyy"
 msgstr "mm-dd-yy"
 
-#: src/gui/ConfigurationDialog.cpp:2062
+#: src/gui/ConfigurationDialog.cpp:2028
 msgid "ww, yyyy-mm-dd"
 msgstr "vko, vvvv-kk-pp"
 
-#: src/gui/ConfigurationDialog.cpp:2063
+#: src/gui/ConfigurationDialog.cpp:2029
 msgid "ww, dd-mm-yyyy"
 msgstr "vko, pp-kk-vvvv"
 
-#: src/gui/ConfigurationDialog.cpp:2064
+#: src/gui/ConfigurationDialog.cpp:2030
 msgid "ww, mm-dd-yyyy"
 msgstr "vko, kk-pp-vvvv"
 
-#: src/gui/ConfigurationDialog.cpp:2097
+#: src/gui/ConfigurationDialog.cpp:2063
 msgid "12-hour format"
 msgstr "12 tunnin näyttö"
 
-#: src/gui/ConfigurationDialog.cpp:2098
+#: src/gui/ConfigurationDialog.cpp:2064
 msgid "24-hour format"
 msgstr "24 tunnin näyttö"
 
-#: src/gui/ConfigurationDialog.cpp:2127
+#: src/gui/ConfigurationDialog.cpp:2093
 msgctxt "disabled"
 msgid "None"
 msgstr "Ei mitään"
 
-#: src/gui/ConfigurationDialog.cpp:2128
+#: src/gui/ConfigurationDialog.cpp:2094
 msgid "5/6/5 bits"
 msgstr "5/6/5 bittiä"
 
-#: src/gui/ConfigurationDialog.cpp:2129
+#: src/gui/ConfigurationDialog.cpp:2095
 msgid "6/6/6 bits"
 msgstr "6/6/6 bittiä"
 
-#: src/gui/ConfigurationDialog.cpp:2130
+#: src/gui/ConfigurationDialog.cpp:2096
 msgid "8/8/8 bits"
 msgstr "8/8/8 bittiä"
 
-#: src/gui/ConfigurationDialog.cpp:2131
+#: src/gui/ConfigurationDialog.cpp:2097
 msgid "10/10/10 bits"
 msgstr "10/10/10 bittiä"
 
-#: src/gui/ConfigurationDialog.cpp:2143
+#: src/gui/ConfigurationDialog.cpp:2109
 msgid "Unsupported"
 msgstr "Ei tuettu"
 
-#: src/gui/ConfigurationDialog.cpp:2145
+#: src/gui/ConfigurationDialog.cpp:2111
 msgid "Unsupported in low-graphics mode"
 msgstr "Ei tueta matalan grafiikan tilassa"
 
@@ -5736,8 +5741,8 @@ msgstr "Tai voit {lataa BibTeX-tiedosto} luodaksesi toisen tavan avustaa."
 msgid "Windows"
 msgstr "Ikkunat"
 
-#: src/gui/StelGui.cpp:251 src/ui_configurationDialog.h:1906
-#: src/ui_configurationDialog.h:1976
+#: src/gui/StelGui.cpp:251 src/ui_configurationDialog.h:1883
+#: src/ui_configurationDialog.h:1952
 msgid "Selected object information"
 msgstr "Valitun kohteen tiedot"
 
@@ -5937,20 +5942,20 @@ msgstr "Kuvataajuus"
 msgid "Are you sure? This will delete your customized data."
 msgstr "Oletko varma? Tämä poistaa mukauttamasi tiedot."
 
-#: src/gui/ViewDialog.cpp:806
+#: src/gui/ViewDialog.cpp:808
 msgid "properties"
 msgstr "ominaisuudet"
 
-#: src/gui/ViewDialog.cpp:828
+#: src/gui/ViewDialog.cpp:830
 msgid "Deep Sky"
 msgstr "Syvä taivas"
 
-#: src/gui/ViewDialog.cpp:829
+#: src/gui/ViewDialog.cpp:831
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:239
 msgid "Solar System"
 msgstr "Aurinkokunta"
 
-#: src/gui/ViewDialog.cpp:1096
+#: src/gui/ViewDialog.cpp:1098
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -5958,7 +5963,7 @@ msgstr ""
 "Käyttää 3D-monikulmiomallia joillekin valikoiduille pienkappaleille (pienet "
 "kuut, asteroidit, komeetat) pallomaisen approksimaation sijaan."
 
-#: src/gui/ViewDialog.cpp:1097
+#: src/gui/ViewDialog.cpp:1099
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -5968,86 +5973,86 @@ msgstr ""
 "laatua."
 
 #. TRANSLATORS: duration in seconds
-#: src/gui/ViewDialog.cpp:1106
+#: src/gui/ViewDialog.cpp:1108
 msgctxt "duration, suffix"
 msgid "s"
 msgstr "s"
 
-#: src/gui/ViewDialog.cpp:1371
+#: src/gui/ViewDialog.cpp:1377
 msgid "No shooting stars"
 msgstr "Ei tähdenlentoja"
 
-#: src/gui/ViewDialog.cpp:1373
+#: src/gui/ViewDialog.cpp:1379
 msgid "Normal rate"
 msgstr "Normaali aktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1375
+#: src/gui/ViewDialog.cpp:1381
 msgid "Standard Orionids rate"
 msgstr "Orionidien normaaliaktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1377
+#: src/gui/ViewDialog.cpp:1383
 msgid "Standard Perseids rate"
 msgstr "Perseidien normaaliaktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1379
+#: src/gui/ViewDialog.cpp:1385
 msgid "Standard Geminids rate"
 msgstr "Geminidien normaaliaktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1381
+#: src/gui/ViewDialog.cpp:1387
 msgid "Exceptional Perseid rate"
 msgstr "Poikkeuksellinen perseidien aktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1383
+#: src/gui/ViewDialog.cpp:1389
 msgid "Meteor storm rate"
 msgstr "Meteoreja tunnissa"
 
-#: src/gui/ViewDialog.cpp:1385
+#: src/gui/ViewDialog.cpp:1391
 msgid "Exceptional Draconid rate"
 msgstr "Poikkeuksellinen draconidien aktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1387
+#: src/gui/ViewDialog.cpp:1393
 msgid "Exceptional Leonid rate"
 msgstr "Poikkeuksellinen leonidien aktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1389
+#: src/gui/ViewDialog.cpp:1395
 msgid "Very high rate (1966 Leonids)"
 msgstr "Erittäin korkea aktiivisuus (leonidit 1966)"
 
-#: src/gui/ViewDialog.cpp:1391
+#: src/gui/ViewDialog.cpp:1397
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Suurin tunnettu aktiivisuus (leonidit 1833)"
 
-#: src/gui/ViewDialog.cpp:1454
+#: src/gui/ViewDialog.cpp:1459
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
 msgstr "G. Müller (1893)"
 
-#: src/gui/ViewDialog.cpp:1455
+#: src/gui/ViewDialog.cpp:1460
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
 msgstr "Astronomical Almanac (1984)"
 
-#: src/gui/ViewDialog.cpp:1456
+#: src/gui/ViewDialog.cpp:1461
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Explanatory Supplement (1992)"
 
-#: src/gui/ViewDialog.cpp:1457
+#: src/gui/ViewDialog.cpp:1462
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Explanatory Supplement (2013)"
 
-#: src/gui/ViewDialog.cpp:1458
+#: src/gui/ViewDialog.cpp:1463
 msgctxt "magnitude algorithm"
 msgid "Mallama & Hilton (2018)"
 msgstr "Mallama & Hilton (2018)"
 
-#: src/gui/ViewDialog.cpp:1459
+#: src/gui/ViewDialog.cpp:1464
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "Geneerinen"
 
-#: src/gui/ViewDialog.cpp:1482
+#: src/gui/ViewDialog.cpp:1487
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -6056,7 +6061,7 @@ msgstr ""
 "uudemmat) ja se antaa V- (laite-) magnitudit (oletettavasti lähteenä D.L. "
 "Harris)."
 
-#: src/gui/ViewDialog.cpp:1483
+#: src/gui/ViewDialog.cpp:1488
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Müller and was"
 " still republished in the <em>Explanatory Supplement to the Astronomical "
@@ -6066,7 +6071,7 @@ msgstr ""
 "teoksessa<em>Explanatory Supplement to the Astronomical Ephemeris</em> "
 "(1961)."
 
-#: src/gui/ViewDialog.cpp:1484
+#: src/gui/ViewDialog.cpp:1489
 msgid ""
 "The algorithm was published in the 2nd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (1992)."
@@ -6074,7 +6079,7 @@ msgstr ""
 "Algoritmi on julkaistu teoksen<em>Explanatory Supplement to the Astronomical"
 " Almanac</em> 2. painoksessa (1992)."
 
-#: src/gui/ViewDialog.cpp:1485
+#: src/gui/ViewDialog.cpp:1490
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -6082,7 +6087,7 @@ msgstr ""
 "Algoritmi on julkaistu <em>Explanatory Supplement to the Astronomical "
 "Almanac</em> -teoksen kolmannessa painoksessa (2013)."
 
-#: src/gui/ViewDialog.cpp:1486
+#: src/gui/ViewDialog.cpp:1491
 msgid ""
 "The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing "
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
@@ -6092,7 +6097,7 @@ msgstr ""
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
 "Astronomy&Computing 25 (2018) 10-24."
 
-#: src/gui/ViewDialog.cpp:1489
+#: src/gui/ViewDialog.cpp:1494
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Vaihekulman ja albedon perusteella laskettu visuaalinen magnitudi"
 
@@ -6522,7 +6527,7 @@ msgstr "Valitse kohde piirtääksesi sen kaavion \"Atsimuutti vs. aika\"."
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:865 src/gui/AstroCalcDialog.cpp:961
 #: src/gui/AstroCalcDialog.cpp:1770 src/gui/AstroCalcDialog.cpp:2172
-#: src/gui/AstroCalcDialog.cpp:7621 src/ui_configurationDialog.h:2051
+#: src/gui/AstroCalcDialog.cpp:7621 src/ui_configurationDialog.h:2027
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:532
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:103
 #: plugins/Exoplanets/src/Exoplanet.cpp:360
@@ -6608,7 +6613,7 @@ msgstr "Elong."
 msgid "Symbol"
 msgstr "Symboli"
 
-#: src/gui/AstroCalcDialog.cpp:1036 src/ui_viewDialog.h:3820
+#: src/gui/AstroCalcDialog.cpp:1036 src/ui_viewDialog.h:3836
 msgid "Solar system objects"
 msgstr "Aurinkokunnan kohteet"
 
@@ -6677,7 +6682,7 @@ msgstr "Etäisyys Auringosta sijainnin laskemishetkellä"
 msgid "Heliocentric ecliptic positions of the major planets"
 msgstr "Suurten planeettojen heliosentriset ekliptiset sijainnit"
 
-#: src/gui/AstroCalcDialog.cpp:1721 src/ui_viewDialog.h:3948
+#: src/gui/AstroCalcDialog.cpp:1721 src/ui_viewDialog.h:3964
 #: src/ui_astroCalcDialog.h:2340
 msgid "Major planets"
 msgstr "Suuret planeetat"
@@ -6751,7 +6756,7 @@ msgstr "Taivaankappaleen kulman etäisyys Kuusta kulkemisen aikana"
 msgid "Save calculated data as..."
 msgstr "Tallenna laskettu data nimellä..."
 
-#: src/gui/AstroCalcDialog.cpp:2417 src/ui_configurationDialog.h:2036
+#: src/gui/AstroCalcDialog.cpp:2417 src/ui_configurationDialog.h:2012
 #: src/ui_astroCalcDialog.h:2288
 msgid "Risings, Transits, and Settings"
 msgstr "Nousut, ylikulut ja laskut"
@@ -7606,7 +7611,7 @@ msgstr "Kirkkaat sumut (<%1 mag.)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5134 src/gui/AstroCalcDialog.cpp:7471
-#: src/translations.h:292 src/ui_viewDialog.h:4153
+#: src/translations.h:292 src/ui_viewDialog.h:4169
 #: src/ui_dsoColorsDialog.h:603
 msgid "Dark nebulae"
 msgstr "Pimeät sumut"
@@ -7920,24 +7925,24 @@ msgstr "Koko yön"
 msgid "Bright stars"
 msgstr "Kirkkaat tähdet"
 
-#: src/gui/AstroCalcDialog.cpp:7470 src/ui_viewDialog.h:4152
+#: src/gui/AstroCalcDialog.cpp:7470 src/ui_viewDialog.h:4168
 msgid "Bright nebulae"
 msgstr "Kirkkaat sumut"
 
-#: src/gui/AstroCalcDialog.cpp:7472 src/ui_viewDialog.h:4156
+#: src/gui/AstroCalcDialog.cpp:7472 src/ui_viewDialog.h:4172
 #: src/ui_dsoColorsDialog.h:543
 msgid "Galaxies"
 msgstr "Galaksit"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7473 src/translations.h:284
-#: src/ui_viewDialog.h:4159 src/ui_dsoColorsDialog.h:547
+#: src/ui_viewDialog.h:4175 src/ui_dsoColorsDialog.h:547
 msgid "Open star clusters"
 msgstr "Avonaiset tähtijoukot"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7482 src/translations.h:290
-#: src/ui_viewDialog.h:4151 src/ui_dsoColorsDialog.h:536
+#: src/ui_viewDialog.h:4167 src/ui_dsoColorsDialog.h:536
 msgid "Planetary nebulae"
 msgstr "Planetaariset sumut"
 
@@ -7970,19 +7975,19 @@ msgstr "Supernovajäännösten ehdokkaat"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7490 src/translations.h:318
-#: src/ui_viewDialog.h:4158 src/ui_dsoColorsDialog.h:529
+#: src/ui_viewDialog.h:4174 src/ui_dsoColorsDialog.h:529
 msgid "Supernova remnants"
 msgstr "Supernovajäänteet"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7491 src/translations.h:346
-#: src/ui_viewDialog.h:4155 src/ui_dsoColorsDialog.h:635
+#: src/ui_viewDialog.h:4171 src/ui_dsoColorsDialog.h:635
 msgid "Clusters of galaxies"
 msgstr "Galaksijoukot"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7493 src/translations.h:286
-#: src/ui_viewDialog.h:4161 src/ui_dsoColorsDialog.h:522
+#: src/ui_viewDialog.h:4177 src/ui_dsoColorsDialog.h:522
 msgid "Globular star clusters"
 msgstr "Pallomaiset tähtijoukot"
 
@@ -7994,13 +7999,13 @@ msgstr "Taivaan alueet"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7495 src/translations.h:300
-#: src/ui_viewDialog.h:4150 src/ui_dsoColorsDialog.h:513
+#: src/ui_viewDialog.h:4166 src/ui_dsoColorsDialog.h:513
 msgid "Active galaxies"
 msgstr "Aktiiviset galaksit"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:7496 src/translations.h:304
-#: src/ui_viewDialog.h:4157 src/ui_dsoColorsDialog.h:594
+#: src/ui_viewDialog.h:4173 src/ui_dsoColorsDialog.h:594
 msgid "Interacting galaxies"
 msgstr "Törmäävät galaksit"
 
@@ -8056,7 +8061,7 @@ msgctxt "IAU Constellation"
 msgid "Const."
 msgstr "Kiinteä"
 
-#: src/gui/AstroCalcDialog.cpp:7765 src/ui_viewDialog.h:4190
+#: src/gui/AstroCalcDialog.cpp:7765 src/ui_viewDialog.h:4206
 #: src/ui_astroCalcDialog.h:2541
 msgid "Limit angular size:"
 msgstr "Rajoita kulmaläpimittaa:"
@@ -8364,13 +8369,13 @@ msgstr "Kohteen nimitys"
 msgid "Object name"
 msgstr "Kohteen nimi"
 
-#: src/gui/ObsListDialog.cpp:295 src/ui_configurationDialog.h:2040
+#: src/gui/ObsListDialog.cpp:295 src/ui_configurationDialog.h:2016
 msgid "Constellation"
 msgstr "Tähtikuvio"
 
-#: src/gui/ObsListDialog.cpp:298 src/ui_viewDialog.h:3830
+#: src/gui/ObsListDialog.cpp:298 src/ui_viewDialog.h:3846
 #: src/ui_obsListDialog.h:420
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:480
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:473
 msgid "Landscape"
 msgstr "Maisemat"
 
@@ -8451,7 +8456,7 @@ msgstr "Väärä tiedostomuoto!"
 msgid "Cannot open JSON output file. Will not delete."
 msgstr "JSON-tulostetiedostoa ei voi avata. Ei poisteta."
 
-#: src/gui/ObsListDialog.cpp:1185 src/ui_configurationDialog.h:1904
+#: src/gui/ObsListDialog.cpp:1185 src/ui_configurationDialog.h:1881
 msgid "Information"
 msgstr "Tiedot"
 
@@ -8471,7 +8476,7 @@ msgstr "Tyhjä nimi"
 msgid "List name already exists"
 msgstr "Luettelolla on jo nimi"
 
-#: src/gui/ObsListDialog.cpp:1394 src/ui_configurationDialog.h:2094
+#: src/gui/ObsListDialog.cpp:1394 src/ui_configurationDialog.h:2070
 #: src/ui_obsListDialog.h:361
 msgid "Observing lists"
 msgstr "Havaintoluettelot"
@@ -8539,8 +8544,8 @@ msgstr ""
 "Bortle-luokka %1: %2\n"
 "Paljaiden silmien rajoittava magnitudi: %3"
 
-#: src/scripting/StelScriptMgr.cpp:521 src/ui_configurationDialog.h:1918
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:533
+#: src/scripting/StelScriptMgr.cpp:521 src/ui_configurationDialog.h:1895
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:526
 msgid "Scripts"
 msgstr "Skriptit"
 
@@ -8633,11 +8638,6 @@ msgstr "Sumut"
 #: src/translations.h:43
 msgid "Moons"
 msgstr "Kuut"
-
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:59
-msgid "Constellations"
-msgstr "Tähtikuviot"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:61
@@ -9313,12 +9313,12 @@ msgid "Protoplanetary Nebulae"
 msgstr "Esiplanetaariset sumut"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:350 src/ui_viewDialog.h:4141
+#: src/translations.h:350 src/ui_viewDialog.h:4157
 msgid "Messier Catalogue"
 msgstr "Messierin luettelo"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:352 src/ui_viewDialog.h:4147
+#: src/translations.h:352 src/ui_viewDialog.h:4163
 msgid "Caldwell Catalogue"
 msgstr "Caldwellin luettelo"
 
@@ -9448,17 +9448,17 @@ msgid "James Dunlop's southern deep sky catalogue"
 msgstr "James Dunlopin eteläisen syvätaivaan luettelo"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:404 src/ui_viewDialog.h:4144
+#: src/translations.h:404 src/ui_viewDialog.h:4160
 msgid "Trumpler Catalogue"
 msgstr "Trumplerin katalogi"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:406 src/ui_viewDialog.h:4080
+#: src/translations.h:406 src/ui_viewDialog.h:4096
 msgid "Stock Catalogue"
 msgstr "Stock katalogi"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:408 src/ui_viewDialog.h:4083
+#: src/translations.h:408 src/ui_viewDialog.h:4099
 msgid "Ruprecht Catalogue"
 msgstr "Ruprecht katalogi"
 
@@ -9593,7 +9593,7 @@ msgid "Startup Script"
 msgstr "Käynnistyskomentojono"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:488 src/ui_viewDialog.h:4809
+#: src/translations.h:488 src/ui_viewDialog.h:4827
 msgid "Zodiac"
 msgstr "Eläinrata"
 
@@ -10196,7 +10196,7 @@ msgstr "32-bittinen"
 
 #. TRANSLATORS: Same text as in the Configuration window!
 #: src/translations.h:647 src/ui_helpDialogGui.h:249
-#: src/ui_configurationDialog.h:2245
+#: src/ui_configurationDialog.h:2221
 msgid "Edit keyboard shortcuts..."
 msgstr "Muokkaa pikanäppäimiä..."
 
@@ -10269,7 +10269,7 @@ msgstr "Kansio"
 msgid "&Choose"
 msgstr "Valitse (&C)"
 
-#: src/translations.h:678 src/ui_configurationDialog.h:2076
+#: src/translations.h:678 src/ui_configurationDialog.h:2052
 #: src/ui_obsListDialog.h:365
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
@@ -10304,8 +10304,8 @@ msgstr "Avaa (&O)"
 msgid "&Save"
 msgstr "Tallenna (&S)"
 
-#: src/translations.h:686 src/ui_configurationDialog.h:1929
-#: src/ui_configurationDialog.h:2303
+#: src/translations.h:686 src/ui_configurationDialog.h:1905
+#: src/ui_configurationDialog.h:2279
 msgid "Save"
 msgstr "Tallenna"
 
@@ -12260,71 +12260,71 @@ msgstr "Näytettävien kohteiden enimmäismäärä:"
 msgid "Deletes all recent search object data"
 msgstr "Poistaa kaikki viimeaikaisten hakukohteiden tiedot"
 
-#: src/ui_searchDialogGui.h:890 src/ui_viewDialog.h:4733
-#: src/ui_viewDialog.h:4778 src/ui_configurationDialog.h:2318
-#: src/ui_configurationDialog.h:2329
+#: src/ui_searchDialogGui.h:890 src/ui_viewDialog.h:4749
+#: src/ui_viewDialog.h:4794 src/ui_configurationDialog.h:2294
+#: src/ui_configurationDialog.h:2305
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:304
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:418
 msgid "Options"
 msgstr "Asetukset"
 
-#: src/ui_viewDialog.h:3811
+#: src/ui_viewDialog.h:3827
 msgid "View"
 msgstr "Näytä"
 
-#: src/ui_viewDialog.h:3816 src/ui_viewDialog.h:3837
+#: src/ui_viewDialog.h:3832 src/ui_viewDialog.h:3853
 msgid "Sky"
 msgstr "Taivas"
 
-#: src/ui_viewDialog.h:3818
+#: src/ui_viewDialog.h:3834
 msgctxt "Solar system objects"
 msgid "SSO"
 msgstr "Aurinkokunta"
 
-#: src/ui_viewDialog.h:3823
+#: src/ui_viewDialog.h:3839
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr "Syvä taivas"
 
-#: src/ui_viewDialog.h:3825
+#: src/ui_viewDialog.h:3841
 msgid "Deep-Sky Objects"
 msgstr "Syvän taivaan kohteet"
 
-#: src/ui_viewDialog.h:3828
+#: src/ui_viewDialog.h:3844
 msgid "Markings"
 msgstr "Merkinnät"
 
-#: src/ui_viewDialog.h:3832
+#: src/ui_viewDialog.h:3848
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:230
 msgid "Sky Culture"
 msgstr "Tähtitarusto"
 
-#: src/ui_viewDialog.h:3834
+#: src/ui_viewDialog.h:3850
 msgid "Surveys"
 msgstr "Kartoitukset"
 
-#: src/ui_viewDialog.h:3840 src/ui_viewDialog.h:3843
+#: src/ui_viewDialog.h:3856 src/ui_viewDialog.h:3859
 msgid "The zenithal hourly rate for the sporadic meteors"
 msgstr "Sporadisten meteorien ZHR-arvo "
 
-#: src/ui_viewDialog.h:3846
+#: src/ui_viewDialog.h:3862
 msgid "Settings for sporadic meteors"
 msgstr "Satunnaisten meteorien asetukset"
 
-#: src/ui_viewDialog.h:3848
+#: src/ui_viewDialog.h:3864
 msgctxt "Zenithal Hourly Rate"
 msgid "Shooting stars:"
 msgstr "Tähdenlennot:"
 
-#: src/ui_viewDialog.h:3849
+#: src/ui_viewDialog.h:3865
 msgid "Solar altitude for Twilight Finder:"
 msgstr "Auringon korkeus hämärän etsijälle:"
 
-#: src/ui_viewDialog.h:3850
+#: src/ui_viewDialog.h:3866
 msgid "Atmosphere visualization"
 msgstr "Ilmakehän visualisointi"
 
-#: src/ui_viewDialog.h:3852
+#: src/ui_viewDialog.h:3868
 msgid ""
 "Atmosphere settings: visual model, pressure, temperature, extinction "
 "coefficient, etc."
@@ -12332,95 +12332,95 @@ msgstr ""
 "Ilmakehän asetukset: visuaalinen malli, paine, lämpötila, sammutuskerroin "
 "jne."
 
-#: src/ui_viewDialog.h:3855
+#: src/ui_viewDialog.h:3871
 msgid "Open skylight details (color tweaks for the atmosphere)"
 msgstr "Avoimet kattoikkunan yksityiskohdat (värisäädöt tunnelmaa varten)"
 
-#: src/ui_viewDialog.h:3858
+#: src/ui_viewDialog.h:3874
 msgid "Open tone mapping details."
 msgstr "Avaa sävykartoituksen tiedot."
 
-#: src/ui_viewDialog.h:3861
+#: src/ui_viewDialog.h:3877
 msgid ""
 "Changing saturation from totally unsaturated (0.00) to default (1.00) value."
 msgstr ""
 "Kyllästyksen muuttaminen täysin tyydyttymättömästä (0,00) oletusarvoon "
 "(1,00)."
 
-#: src/ui_viewDialog.h:3863
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:475
+#: src/ui_viewDialog.h:3879
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:468
 msgid "Light pollution:"
 msgstr "Valosaaste:"
 
-#: src/ui_viewDialog.h:3864
+#: src/ui_viewDialog.h:3880
 msgid "Zodiacal Light brightness:"
 msgstr "Eläinratavalon kirkkaus:"
 
-#: src/ui_viewDialog.h:3865
+#: src/ui_viewDialog.h:3881
 msgid "Milky Way brightness/saturation:"
 msgstr "Linnunradan kirkkaus/värikylläisyys"
 
-#: src/ui_viewDialog.h:3867
+#: src/ui_viewDialog.h:3883
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Heikennä himmeitä tähtiä, jos hyvin kirkas kohde on näkyvissä"
 
-#: src/ui_viewDialog.h:3869
+#: src/ui_viewDialog.h:3885
 msgid "Dynamic eye adaptation"
 msgstr "Dynaaminen silmän sopeutuminen"
 
-#: src/ui_viewDialog.h:3871
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
+#: src/ui_viewDialog.h:3887
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:261
 msgid "Absolute scale:"
 msgstr "Absoluuttinen mittakaava:"
 
-#: src/ui_viewDialog.h:3873
+#: src/ui_viewDialog.h:3889
 msgid "Twinkle amount (magnitudes) along horizon (less in zenith)"
 msgstr ""
 "Tuikkimisen määrä (magnitudit) pitkin horisonttia (vähemmän zeniitissä)"
 
-#: src/ui_viewDialog.h:3875
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:274
+#: src/ui_viewDialog.h:3891
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
 msgid "Twinkle:"
 msgstr "Tuikkiminen:"
 
-#: src/ui_viewDialog.h:3876 src/ui_viewDialog.h:3917 src/ui_viewDialog.h:4162
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:290
+#: src/ui_viewDialog.h:3892 src/ui_viewDialog.h:3933 src/ui_viewDialog.h:4178
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
 msgid "Labels and Markers"
 msgstr "Nimet ja osoittimet"
 
-#: src/ui_viewDialog.h:3878
+#: src/ui_viewDialog.h:3894
 msgid "Show all available proper names"
 msgstr "Näytä kaikki saatavilla olevat oikeilla nimillä"
 
-#: src/ui_viewDialog.h:3880
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:295
+#: src/ui_viewDialog.h:3896
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:288
 msgid "Show additional star names"
 msgstr "Näytä lisää tähtien nimiä"
 
-#: src/ui_viewDialog.h:3882
+#: src/ui_viewDialog.h:3898
 msgid ""
 "Use designations of stars instead of their common names for screen labels"
 msgstr "Käytä tähtien nimityksiä niiden yleisten nimien sijaan näytön nimissä"
 
-#: src/ui_viewDialog.h:3884 src/ui_viewDialog.h:4166
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:298
+#: src/ui_viewDialog.h:3900 src/ui_viewDialog.h:4182
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
 msgid "Use designations for screen labels"
 msgstr "Käytä tunnuksia näyttöniminä"
 
-#: src/ui_viewDialog.h:3886
+#: src/ui_viewDialog.h:3902
 msgid "Limit the magnitude of stars"
 msgstr "Rajoita tähtien magnitudia"
 
-#: src/ui_viewDialog.h:3888 src/ui_viewDialog.h:3939 src/ui_viewDialog.h:4197
+#: src/ui_viewDialog.h:3904 src/ui_viewDialog.h:3955 src/ui_viewDialog.h:4213
 msgid "Limit magnitude:"
 msgstr "Rajoita magnitudia:"
 
-#: src/ui_viewDialog.h:3889
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:262
+#: src/ui_viewDialog.h:3905
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
 msgid "Relative scale:"
 msgstr "Suhteellinen mittakaava:"
 
-#: src/ui_viewDialog.h:3891
+#: src/ui_viewDialog.h:3907
 msgid ""
 "Show traditional designations of double stars if proper name, Bayer or "
 "Flamsteed designations do not exist for the star."
@@ -12428,12 +12428,12 @@ msgstr ""
 "Näytä kaksoistähtien perinteiset nimitykset, jos oikeaa nimeä, Bayer- tai "
 "Flamsteed-merkintää ei ole olemassa tähdelle."
 
-#: src/ui_viewDialog.h:3893
+#: src/ui_viewDialog.h:3909
 msgctxt "double stars"
 msgid "Dbl. stars"
 msgstr "Kaksoistähdet"
 
-#: src/ui_viewDialog.h:3895
+#: src/ui_viewDialog.h:3911
 msgid ""
 "Show designations of variable stars if proper name, Bayer or Flamsteed "
 "designations, or designation of double star do not exist for the star."
@@ -12441,12 +12441,12 @@ msgstr ""
 "Näytä muuttuvien tähtien nimitykset, jos tähdelle ei ole olemassa oikeaa "
 "nimeä, Bayer- tai Flamsteed-nimitystä tai kaksoistähden nimitystä."
 
-#: src/ui_viewDialog.h:3897
+#: src/ui_viewDialog.h:3913
 msgctxt "variable stars"
 msgid "Var. stars"
 msgstr "Muuttuvat tähdet"
 
-#: src/ui_viewDialog.h:3899
+#: src/ui_viewDialog.h:3915
 msgid ""
 "Show designations from Hipparcos catalog (HIP) if available and star doesn't"
 " have other traditional designations."
@@ -12454,16 +12454,16 @@ msgstr ""
 "Näytä merkinnät Hipparcos-luettelosta (HIP), jos saatavilla, eikä tähdellä "
 "ole muita perinteisiä merkintöjä."
 
-#: src/ui_viewDialog.h:3902
+#: src/ui_viewDialog.h:3918
 msgid "Show stars with pointed rays"
 msgstr "Näytä tähdet terävällä säteellä"
 
-#: src/ui_viewDialog.h:3904
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
+#: src/ui_viewDialog.h:3920
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Spiky stars"
 msgstr "Piikikkäät tähdet"
 
-#: src/ui_viewDialog.h:3906
+#: src/ui_viewDialog.h:3922
 msgid ""
 "Twinkle is caused by atmospheric turbulence. This option forces its display "
 "regardless of atmosphere (for artistic purpose)."
@@ -12471,59 +12471,59 @@ msgstr ""
 "Tuikkiminen johtuu ilmakehän turbulenssista. Tämä vaihtoehto pakottaa sen "
 "näyttämään ilmapiiristä riippumatta (taiteelliseen tarkoitukseen)."
 
-#: src/ui_viewDialog.h:3908
+#: src/ui_viewDialog.h:3924
 msgid "even without atmosphere"
 msgstr "jopa ilman ilmakehää"
 
-#: src/ui_viewDialog.h:3909
+#: src/ui_viewDialog.h:3925
 msgid "Projection"
 msgstr "Projektio"
 
-#: src/ui_viewDialog.h:3910
+#: src/ui_viewDialog.h:3926
 msgid "Current FoV"
 msgstr "Nykyinen FoV"
 
-#: src/ui_viewDialog.h:3911
+#: src/ui_viewDialog.h:3927
 msgid "Vertical viewport offset"
 msgstr "Näyttöalueen pystysiirtymä"
 
-#: src/ui_viewDialog.h:3912
+#: src/ui_viewDialog.h:3928
 msgid "Custom FoV limit"
 msgstr "Mukautettu näkökentän raja"
 
-#: src/ui_viewDialog.h:3914
+#: src/ui_viewDialog.h:3930
 msgid "Additional custom limitation (e.g. for planetarium use)"
 msgstr "Mukautettu lisärajoitus (esim. planetaarion käyttöön)"
 
-#: src/ui_viewDialog.h:3916
+#: src/ui_viewDialog.h:3932
 msgid "Solar System objects"
 msgstr "Aurinkokunnan kohteet"
 
-#: src/ui_viewDialog.h:3919
+#: src/ui_viewDialog.h:3935
 msgid "Color of planet labels"
 msgstr "Väri planeettojen nimille"
 
-#: src/ui_viewDialog.h:3922
+#: src/ui_viewDialog.h:3938
 msgid "Planets magnitude algorithm"
 msgstr "Planeettojen magnitudialgoritmi"
 
-#: src/ui_viewDialog.h:3924
+#: src/ui_viewDialog.h:3940
 msgid "Planets magnitude algorithm:"
 msgstr "Planeettojen magnitudialgoritmi:"
 
-#: src/ui_viewDialog.h:3926
+#: src/ui_viewDialog.h:3942
 msgid "Color of trails"
 msgstr "Kulkureittien väri"
 
-#: src/ui_viewDialog.h:3928
+#: src/ui_viewDialog.h:3944
 msgid "Show trails"
 msgstr "Näytä kulkureitit"
 
-#: src/ui_viewDialog.h:3930
+#: src/ui_viewDialog.h:3946
 msgid "Trails thickness in pixels"
 msgstr "Reittien paksuus pikseleinä"
 
-#: src/ui_viewDialog.h:3933
+#: src/ui_viewDialog.h:3949
 #, c-format
 msgid ""
 "Astronomical Almanac (default) has 2% enlargement, Danjon (1951) uses a "
@@ -12532,51 +12532,51 @@ msgstr ""
 "Astronominen almanakalla (oletus) on 2% laajennos, Danjon (1951) käyttää "
 "hieman erilaista mallia"
 
-#: src/ui_viewDialog.h:3935
+#: src/ui_viewDialog.h:3951
 msgid "Earth shadow enlargement after Danjon"
 msgstr "Maan varjon laajentuminen Danjonin jälkeen"
 
-#: src/ui_viewDialog.h:3937
+#: src/ui_viewDialog.h:3953
 msgid "Limit the magnitude of solar system objects"
 msgstr "Rajoita aurinkokunnan kohteiden magnitudia"
 
-#: src/ui_viewDialog.h:3940
+#: src/ui_viewDialog.h:3956
 msgid "Show orbits"
 msgstr "Näytä kiertoradat"
 
-#: src/ui_viewDialog.h:3942
+#: src/ui_viewDialog.h:3958
 msgid "Show orbit even if object is off screen"
 msgstr "Näytä kiertorata, vaikka kohde olisi poissa näytöstä"
 
-#: src/ui_viewDialog.h:3944
+#: src/ui_viewDialog.h:3960
 msgid "permanently"
 msgstr "pysyvästi"
 
-#: src/ui_viewDialog.h:3946
+#: src/ui_viewDialog.h:3962
 msgid "Show orbits of major planets"
 msgstr "Näytä suurten planeettojen kiertoradat"
 
-#: src/ui_viewDialog.h:3950
+#: src/ui_viewDialog.h:3966
 msgid "Configure colors of orbit lines"
 msgstr "Muokkaa kiertoratojen värejä"
 
-#: src/ui_viewDialog.h:3953
+#: src/ui_viewDialog.h:3969
 msgid "Orbits thickness in pixels"
 msgstr "Kiertoradan paksuus pikseleinä"
 
-#: src/ui_viewDialog.h:3956
+#: src/ui_viewDialog.h:3972
 msgid "Color of nomenclature labels"
 msgstr "Väri nimistölle"
 
-#: src/ui_viewDialog.h:3960
+#: src/ui_viewDialog.h:3976
 msgid "Show hints and labels for planetary features"
 msgstr "Näytä vihjeet ja nimet planeettojen pinnanmuodoille"
 
-#: src/ui_viewDialog.h:3962
+#: src/ui_viewDialog.h:3978
 msgid "Show planetary nomenclature"
 msgstr "Näytä planeettojen nimistö"
 
-#: src/ui_viewDialog.h:3964
+#: src/ui_viewDialog.h:3980
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
@@ -12584,242 +12584,242 @@ msgstr ""
 "Poista tämä valinta käytöstä, jos haluat nähdä kaikkien aurinkokunnan "
 "kohteiden kulkureitit."
 
-#: src/ui_viewDialog.h:3966
+#: src/ui_viewDialog.h:3982
 msgid "Only for N latest selected objects:"
 msgstr "Vain N viimeiksi valittua kohdetta:"
 
-#: src/ui_viewDialog.h:3968
+#: src/ui_viewDialog.h:3984
 msgid "Hide orbits of minor bodies."
 msgstr "Piilota pienten kohteiden kiertoradat."
 
-#: src/ui_viewDialog.h:3970
+#: src/ui_viewDialog.h:3986
 msgid "Only orbits of major planets..."
 msgstr "Vain suurten planeettojen kiertoradat..."
 
-#: src/ui_viewDialog.h:3972
+#: src/ui_viewDialog.h:3988
 msgid "Show orbit only for selected SSO"
 msgstr "Näytä kiertorata vain valitulle Aurinkokunnan kohteelle"
 
-#: src/ui_viewDialog.h:3974
+#: src/ui_viewDialog.h:3990
 msgid "Only orbit for selected object..."
 msgstr "Vain valitun kohteen kiertorata..."
 
-#: src/ui_viewDialog.h:3976
+#: src/ui_viewDialog.h:3992
 msgid "Also show moons of selected object or planets."
 msgstr "Näytä myös valitun kohteen tai planeettojen kuut."
 
-#: src/ui_viewDialog.h:3978
+#: src/ui_viewDialog.h:3994
 msgid "... and moons"
 msgstr "...ja kuut"
 
-#: src/ui_viewDialog.h:3981
+#: src/ui_viewDialog.h:3997
 msgid "Toggle permanent drawing of Sun's corona when atmosphere is disabled"
 msgstr ""
 "Vaihda Auringon koronan pysyvä piirustus päälle/pois, kun ilmakehä on "
 "poistettu käytöstä"
 
-#: src/ui_viewDialog.h:3983
+#: src/ui_viewDialog.h:3999
 msgid "Sun's corona"
 msgstr "Auringon korona"
 
-#: src/ui_viewDialog.h:3985
+#: src/ui_viewDialog.h:4001
 msgid "Toggle drawing halo around the Moon"
 msgstr "Kuun halon piirtäminen päälle/pois"
 
-#: src/ui_viewDialog.h:3987
+#: src/ui_viewDialog.h:4003
 msgid "Moon's halo"
 msgstr "Kuun halo"
 
-#: src/ui_viewDialog.h:3988 src/ui_astroCalcDialog.h:2361
+#: src/ui_viewDialog.h:4004 src/ui_astroCalcDialog.h:2361
 msgid "Show:"
 msgstr "Näytä:"
 
-#: src/ui_viewDialog.h:3990
+#: src/ui_viewDialog.h:4006
 msgid "Toggle drawing Sun's glare"
 msgstr "Piirrä Auringon häikäisy päälle/pois"
 
-#: src/ui_viewDialog.h:3992
+#: src/ui_viewDialog.h:4008
 msgid "Sun's glare"
 msgstr "Auringon häikäisy"
 
-#: src/ui_viewDialog.h:3994
+#: src/ui_viewDialog.h:4010
 msgid "Show tiny circles for minor bodies regardless of magnitude"
 msgstr "Näytä pieniä ympyröitä pienille kohteille suuruudesta riippumatta"
 
-#: src/ui_viewDialog.h:3998
+#: src/ui_viewDialog.h:4014
 msgid "Draw markers for objects with magnitude brighter than this"
 msgstr "Piirrä merkit kohteille, joiden magnitudi on tätä kirkkaampi"
 
-#: src/ui_viewDialog.h:4003
+#: src/ui_viewDialog.h:4019
 msgid "Use more accurate 3D models (where available)"
 msgstr "Käytä tarkempia 3D-malleja (kun saatavissa)"
 
-#: src/ui_viewDialog.h:4005
+#: src/ui_viewDialog.h:4021
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr "Ota tämä valinta käyttöön jäljitelläksesi valonnopeutta (suositus)."
 
-#: src/ui_viewDialog.h:4007
+#: src/ui_viewDialog.h:4023
 msgid "Simulate light speed"
 msgstr "Jäljittele valonnopeutta"
 
-#: src/ui_viewDialog.h:4009
+#: src/ui_viewDialog.h:4025
 msgid "Jupiter's Great Red Spot..."
 msgstr "Jupiterin suuri ppunainen piste."
 
-#: src/ui_viewDialog.h:4011
+#: src/ui_viewDialog.h:4027
 msgid "GRS details..."
 msgstr "GSR asetukset..."
 
-#: src/ui_viewDialog.h:4012
+#: src/ui_viewDialog.h:4028
 msgid "Solar System Editor..."
 msgstr "Aurinkokunnan muokkain..."
 
-#: src/ui_viewDialog.h:4013
+#: src/ui_viewDialog.h:4029
 msgctxt "scale"
 msgid "Planets"
 msgstr "Planeetat"
 
-#: src/ui_viewDialog.h:4014
+#: src/ui_viewDialog.h:4030
 msgctxt "scale"
 msgid "Minor bodies"
 msgstr "Pienet taivaankappaleet"
 
-#: src/ui_viewDialog.h:4016
+#: src/ui_viewDialog.h:4032
 msgid "Scale factor"
 msgstr "Mittakaavakerroin"
 
-#: src/ui_viewDialog.h:4018
+#: src/ui_viewDialog.h:4034
 msgctxt "scale"
 msgid "Sun"
 msgstr "Aurinko"
 
-#: src/ui_viewDialog.h:4019
+#: src/ui_viewDialog.h:4035
 msgid "Scale:"
 msgstr "Mittakaava:"
 
-#: src/ui_viewDialog.h:4020
+#: src/ui_viewDialog.h:4036
 msgctxt "scale"
 msgid "Moon"
 msgstr "Kuu"
 
-#: src/ui_viewDialog.h:4021
+#: src/ui_viewDialog.h:4037
 msgid "Hide nomenclature on the celestial body of observer"
 msgstr "Piilota havaitsijan taivaankappaleen nimistö"
 
-#: src/ui_viewDialog.h:4023
+#: src/ui_viewDialog.h:4039
 msgid "Label only features along the terminator"
 msgstr "Merkitse vain piirteitä pitkin terminaattoria"
 
-#: src/ui_viewDialog.h:4025
+#: src/ui_viewDialog.h:4041
 msgid "Only for Solar elevation"
 msgstr "Vain aurinkokunnan elevaatiolle"
 
-#: src/ui_viewDialog.h:4027
+#: src/ui_viewDialog.h:4043
 msgid "Minimum Solar altitude"
 msgstr "Aurinkokunnan minimialtitudi"
 
-#: src/ui_viewDialog.h:4029 src/ui_scriptConsole.h:403
+#: src/ui_viewDialog.h:4045 src/ui_scriptConsole.h:403
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:331
 msgid "..."
 msgstr "..."
 
-#: src/ui_viewDialog.h:4031
+#: src/ui_viewDialog.h:4047
 msgid "Maximum Solar altitude"
 msgstr "Aurinkokunnan maksimialtitudi"
 
-#: src/ui_viewDialog.h:4034
+#: src/ui_viewDialog.h:4050
 msgid "Mark impact features with ellipses"
 msgstr "Merkitse vaikutusominaisuudet ellipsillä"
 
-#: src/ui_viewDialog.h:4036
+#: src/ui_viewDialog.h:4052
 msgid "Outline craters"
 msgstr "Kraatterien ääriviivat"
 
-#: src/ui_viewDialog.h:4038
+#: src/ui_viewDialog.h:4054
 msgid "Show special nomenclature points only"
 msgstr "Näytä vain erikoisnimikkeistön kohdat"
 
-#: src/ui_viewDialog.h:4040
+#: src/ui_viewDialog.h:4056
 msgid "Special points only"
 msgstr "Vain erikoispisteet"
 
-#: src/ui_viewDialog.h:4044
+#: src/ui_viewDialog.h:4060
 msgid "Simulate self-shadowing"
 msgstr "Näytä varjot"
 
-#: src/ui_viewDialog.h:4045
+#: src/ui_viewDialog.h:4061
 msgid "Display objects from catalogs"
 msgstr "Näytä kohteet luetteloista"
 
-#: src/ui_viewDialog.h:4046
+#: src/ui_viewDialog.h:4062
 msgid "Quick selection:"
 msgstr "Pikavalinta:"
 
-#: src/ui_viewDialog.h:4048
+#: src/ui_viewDialog.h:4064
 msgid "Select all catalogs"
 msgstr "Valitse kaikki luettelot"
 
-#: src/ui_viewDialog.h:4050
+#: src/ui_viewDialog.h:4066
 msgid "select all"
 msgstr "valitse kaikki"
 
-#: src/ui_viewDialog.h:4052
+#: src/ui_viewDialog.h:4068
 msgid "Select standard catalogs (NGC/IC and M)"
 msgstr "Valitse oletusluettelot (NGC/IC ja M)"
 
-#: src/ui_viewDialog.h:4054
+#: src/ui_viewDialog.h:4070
 msgid "select standard"
 msgstr "valitse oletus"
 
-#: src/ui_viewDialog.h:4055
+#: src/ui_viewDialog.h:4071
 msgid "select preference"
 msgstr "valitse asetus"
 
-#: src/ui_viewDialog.h:4056
+#: src/ui_viewDialog.h:4072
 msgid "store preference"
 msgstr "tallenna asetus"
 
-#: src/ui_viewDialog.h:4058
+#: src/ui_viewDialog.h:4074
 msgid "Deselect all catalogs"
 msgstr "Poista kaikkien luettelojen valinta"
 
-#: src/ui_viewDialog.h:4060
+#: src/ui_viewDialog.h:4076
 msgid "select none"
 msgstr "älä valitse mitään"
 
-#: src/ui_viewDialog.h:4062
+#: src/ui_viewDialog.h:4078
 msgid "Atlas of Peculiar Galaxies (Arp, 1966)"
 msgstr "Atlas of Peculiar Galaxies (Arp, 1966)"
 
-#: src/ui_viewDialog.h:4065
+#: src/ui_viewDialog.h:4081
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "Uppsalan galaksien yleisluettelo"
 
-#: src/ui_viewDialog.h:4068
+#: src/ui_viewDialog.h:4084
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr "Lyndsin kirkkaiden sumujen luettelo (Lynds, 1965)"
 
-#: src/ui_viewDialog.h:4071
+#: src/ui_viewDialog.h:4087
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, "
 "1960)"
 msgstr "Linnunradan eteläosan Hα-emissioalueiden luettelo (Rodgers+, 1960)"
 
-#: src/ui_viewDialog.h:4074
+#: src/ui_viewDialog.h:4090
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr "HII-alueiden luettelo (Sharpless, 1959)"
 
-#: src/ui_viewDialog.h:4077
+#: src/ui_viewDialog.h:4093
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr "Sumujen ja tähtijoukkojen uusi yleisluettelo (NGC)"
 
-#: src/ui_viewDialog.h:4086
+#: src/ui_viewDialog.h:4102
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
 msgstr "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
 
-#: src/ui_viewDialog.h:4089
+#: src/ui_viewDialog.h:4105
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
@@ -12827,23 +12827,23 @@ msgstr ""
 "Franklinin–Adamsin valokuvalevyillä näkyvien tähtijoukkojen luettelo "
 "(Melotte, 1915)"
 
-#: src/ui_viewDialog.h:4092
+#: src/ui_viewDialog.h:4108
 msgid "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
 msgstr "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
 
-#: src/ui_viewDialog.h:4095
+#: src/ui_viewDialog.h:4111
 msgid "Catalogue of Reflection Nebulae (van den Bergh, 1966)"
 msgstr "Heijastusumujen luettelo (van den Bergh, 1966)"
 
-#: src/ui_viewDialog.h:4098
+#: src/ui_viewDialog.h:4114
 msgid "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
 msgstr "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
 
-#: src/ui_viewDialog.h:4101
+#: src/ui_viewDialog.h:4117
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr "Avointen galaktisten joukkojen luettelo (Collinder, 1931)"
 
-#: src/ui_viewDialog.h:4104
+#: src/ui_viewDialog.h:4120
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh and "
 "Herbst, 1975)"
@@ -12851,56 +12851,56 @@ msgstr ""
 "Luettelo eteläisistä tähdistä upotettuna sumuisuuteen (van den Bergh ja "
 "Herbst, 1975)"
 
-#: src/ui_viewDialog.h:4107
+#: src/ui_viewDialog.h:4123
 msgid "Hickson Compact Group (Hickson+, 1982)"
 msgstr "Hickson Compact Group (Hickson+, 1982)"
 
-#: src/ui_viewDialog.h:4110
+#: src/ui_viewDialog.h:4126
 msgid ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 msgstr ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 
-#: src/ui_viewDialog.h:4113
+#: src/ui_viewDialog.h:4129
 msgid ""
 "Catalogue and distances of optically visible H II regions (Dickel+, 1969)"
 msgstr ""
 "Optisesti näkyvien H II -alueiden luettelo ja etäisyydet (Dickel+, 1969)"
 
-#: src/ui_viewDialog.h:4116
+#: src/ui_viewDialog.h:4132
 msgid "ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)"
 msgstr "ESO/Uppsala-tutkimus ESO(B) Atlasista (Lauberts, 1982)"
 
-#: src/ui_viewDialog.h:4119
+#: src/ui_viewDialog.h:4135
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
 msgstr "A catalogue of Galactic supernova remnants (Green, 2014)"
 
-#: src/ui_viewDialog.h:4122
+#: src/ui_viewDialog.h:4138
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr "Lyndsin pimeiden sumujen luettelo (Lynds, 1962)"
 
-#: src/ui_viewDialog.h:4125
+#: src/ui_viewDialog.h:4141
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr "Barnardin 349 pimeän tähtitaivaan kohteen luettelo (Barnard, 1927)"
 
-#: src/ui_viewDialog.h:4128
+#: src/ui_viewDialog.h:4144
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr "Sumujen ja tähtijoukkojen hakuluettelo (IC)"
 
-#: src/ui_viewDialog.h:4130
+#: src/ui_viewDialog.h:4146
 msgctxt "other catalogs"
 msgid "Other"
 msgstr "Muu"
 
-#: src/ui_viewDialog.h:4132
+#: src/ui_viewDialog.h:4148
 msgid "Principal Galaxy Catalog"
 msgstr "Principal Galaxy Catalog"
 
-#: src/ui_viewDialog.h:4135
+#: src/ui_viewDialog.h:4151
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr "Kirkkaiden hajanaisten galaktisten sumujen luettelo (Cederblad, 1946)"
 
-#: src/ui_viewDialog.h:4138
+#: src/ui_viewDialog.h:4154
 msgid ""
 "van den Bergh-Hagen Catalogue (Uniform survey of clusters in the Southern "
 "Milky Way; van den Bergh and Hagen, 1975)"
@@ -12908,60 +12908,60 @@ msgstr ""
 "van den Bergh-Hagenin katalogi (Eteläisen Linnunradan yhtenäinen tutkimus "
 "klusteista; van den Bergh ja Hagen, 1975)"
 
-#: src/ui_viewDialog.h:4149
+#: src/ui_viewDialog.h:4165
 msgid "Filter by type"
 msgstr "Suodata tyypin mukaan"
 
-#: src/ui_viewDialog.h:4154 src/ui_dsoColorsDialog.h:580
+#: src/ui_viewDialog.h:4170 src/ui_dsoColorsDialog.h:580
 msgid "Hydrogen regions"
 msgstr "Vetyalueet"
 
-#: src/ui_viewDialog.h:4160
+#: src/ui_viewDialog.h:4176
 msgid "Other"
 msgstr "Muut"
 
-#: src/ui_viewDialog.h:4164
+#: src/ui_viewDialog.h:4180
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
 msgstr "Käytä syvän taivaan kohteiden näyttöniminä niiden tunnuksia."
 
-#: src/ui_viewDialog.h:4167
+#: src/ui_viewDialog.h:4183
 msgid "Use additional names of DSO"
 msgstr "Näytä syvän taivaan kohteiden vaihtoehtoiset nimet"
 
-#: src/ui_viewDialog.h:4168
+#: src/ui_viewDialog.h:4184
 msgid "Show only named DSO"
 msgstr "Näytä vain nimetyt DSOt"
 
-#: src/ui_viewDialog.h:4169
+#: src/ui_viewDialog.h:4185
 msgid "Use outlines for big deep-sky objects"
 msgstr "Näytä suurten syvän taivaankohteiden reunaviivat"
 
-#: src/ui_viewDialog.h:4171
+#: src/ui_viewDialog.h:4187
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr ""
 "Käytä syvän taivaan kohteille niiden kulmaläpimitan mukaisia osoittimia"
 
-#: src/ui_viewDialog.h:4173
+#: src/ui_viewDialog.h:4189
 msgid "Use proportional hints"
 msgstr "Käytä kulmaläpimitan mukaisia osoittimia"
 
-#: src/ui_viewDialog.h:4174 plugins/Satellites/src/ui_satellitesDialog.h:1251
+#: src/ui_viewDialog.h:4190 plugins/Satellites/src/ui_satellitesDialog.h:1251
 msgid "Labels"
 msgstr "Nimet"
 
-#: src/ui_viewDialog.h:4176 src/ui_viewDialog.h:4179
+#: src/ui_viewDialog.h:4192 src/ui_viewDialog.h:4195
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1542
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:535
 msgid "Brightness"
 msgstr "Kirkkaus"
 
-#: src/ui_viewDialog.h:4181
+#: src/ui_viewDialog.h:4197
 msgid "Hints"
 msgstr "Osoittimet"
 
-#: src/ui_viewDialog.h:4183
+#: src/ui_viewDialog.h:4199
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
@@ -12969,133 +12969,133 @@ msgstr ""
 "Näytä syvän taivaan kohteiden nimet ja osoittimet niiden pintakirkkauden "
 "mukaan."
 
-#: src/ui_viewDialog.h:4185
+#: src/ui_viewDialog.h:4201
 msgid "Use surface brightness"
 msgstr "Käytä pintakirkkautta"
 
-#: src/ui_viewDialog.h:4186
+#: src/ui_viewDialog.h:4202
 msgid "Configure colors of markers"
 msgstr "Aseta osoittimien värit"
 
-#: src/ui_viewDialog.h:4192
+#: src/ui_viewDialog.h:4208
 msgid "Maximum angular size in arcminutes for visible DSO"
 msgstr ""
 "Näytettävien syvän taivaan kohteiden maksimikulmaläpimitta kaariminuuteissa"
 
-#: src/ui_viewDialog.h:4195
+#: src/ui_viewDialog.h:4211
 msgid "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
 "Rajoita syvän taivaan kohteiden magnitudia (paljaalla silmällä/kiikareilla "
 "havainnoivalle)."
 
-#: src/ui_viewDialog.h:4199
+#: src/ui_viewDialog.h:4215
 msgid "Minimal angular size in arcminutes for visible DSO"
 msgstr ""
 "Näytettävien syvän taivaan kohteiden minimikulmaläpimitta kaariminuuteissa"
 
-#: src/ui_viewDialog.h:4201
+#: src/ui_viewDialog.h:4217
 msgid "Celestial Sphere"
 msgstr "Taivaanpallo"
 
-#: src/ui_viewDialog.h:4203 src/ui_viewDialog.h:4212 src/ui_viewDialog.h:4275
-#: src/ui_viewDialog.h:4283 src/ui_viewDialog.h:4327 src/ui_viewDialog.h:4338
-#: src/ui_viewDialog.h:4365 src/ui_viewDialog.h:4403 src/ui_viewDialog.h:4448
-#: src/ui_viewDialog.h:4492 src/ui_viewDialog.h:4552 src/ui_viewDialog.h:4608
-#: src/ui_viewDialog.h:4620 src/ui_viewDialog.h:4631 src/ui_viewDialog.h:4647
+#: src/ui_viewDialog.h:4219 src/ui_viewDialog.h:4228 src/ui_viewDialog.h:4291
+#: src/ui_viewDialog.h:4299 src/ui_viewDialog.h:4343 src/ui_viewDialog.h:4354
+#: src/ui_viewDialog.h:4381 src/ui_viewDialog.h:4419 src/ui_viewDialog.h:4464
+#: src/ui_viewDialog.h:4508 src/ui_viewDialog.h:4568 src/ui_viewDialog.h:4624
+#: src/ui_viewDialog.h:4636 src/ui_viewDialog.h:4647 src/ui_viewDialog.h:4663
 msgid "Show partitions"
 msgstr "Näytä osat"
 
-#: src/ui_viewDialog.h:4207
+#: src/ui_viewDialog.h:4223
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr "Näytä ekliptika (J2000.0, perustaso VSOP87A)."
 
-#: src/ui_viewDialog.h:4209
+#: src/ui_viewDialog.h:4225
 msgid "Ecliptic (J2000)"
 msgstr "Ekliptika (J2000)"
 
-#: src/ui_viewDialog.h:4210
+#: src/ui_viewDialog.h:4226
 msgid "Zenith and Nadir"
 msgstr "Zeniitti ja nadiiri"
 
-#: src/ui_viewDialog.h:4216
+#: src/ui_viewDialog.h:4232
 msgid "Show ecliptic poles of J2000.0"
 msgstr "Näytä ekliptikaaliset navat (J2000.0)"
 
-#: src/ui_viewDialog.h:4218
+#: src/ui_viewDialog.h:4234
 msgid "Ecliptic poles (J2000)"
 msgstr "Ekliptikaaliset navat (J2000)"
 
-#: src/ui_viewDialog.h:4220
+#: src/ui_viewDialog.h:4236
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
 "Näytä koluurit (napojen sekä päivänseisaus- ja tasauspisteiden kautta "
 "kulkevat isoympyrät)."
 
-#: src/ui_viewDialog.h:4222
+#: src/ui_viewDialog.h:4238
 msgid "Colures"
 msgstr "Koluurit"
 
-#: src/ui_viewDialog.h:4224
+#: src/ui_viewDialog.h:4240
 msgid "Show celestial equator of current planet and date."
 msgstr "Näytä tämänhetkisen planeetan nykyinen taivaanekvaattori."
 
-#: src/ui_viewDialog.h:4226
+#: src/ui_viewDialog.h:4242
 msgid "Equator (of date)"
 msgstr "Ekvaattori (nykyinen)"
 
-#: src/ui_viewDialog.h:4228 src/ui_viewDialog.h:4236 src/ui_viewDialog.h:4248
-#: src/ui_viewDialog.h:4256 src/ui_viewDialog.h:4287 src/ui_viewDialog.h:4295
-#: src/ui_viewDialog.h:4353 src/ui_viewDialog.h:4361 src/ui_viewDialog.h:4377
-#: src/ui_viewDialog.h:4391 src/ui_viewDialog.h:4399 src/ui_viewDialog.h:4541
-#: src/ui_viewDialog.h:4672 src/ui_viewDialog.h:4676 src/ui_viewDialog.h:4716
+#: src/ui_viewDialog.h:4244 src/ui_viewDialog.h:4252 src/ui_viewDialog.h:4264
+#: src/ui_viewDialog.h:4272 src/ui_viewDialog.h:4303 src/ui_viewDialog.h:4311
+#: src/ui_viewDialog.h:4369 src/ui_viewDialog.h:4377 src/ui_viewDialog.h:4393
+#: src/ui_viewDialog.h:4407 src/ui_viewDialog.h:4415 src/ui_viewDialog.h:4557
+#: src/ui_viewDialog.h:4688 src/ui_viewDialog.h:4692 src/ui_viewDialog.h:4732
 msgid "Label partitions"
 msgstr "Osien nimilappu"
 
-#: src/ui_viewDialog.h:4232
+#: src/ui_viewDialog.h:4248
 msgid "Show fixed celestial equator (hour angles) of current planet."
 msgstr "Näytä nykyisen planeetan kiinteä taivaanekvaattori (tuntikulmat)."
 
-#: src/ui_viewDialog.h:4234
+#: src/ui_viewDialog.h:4250
 msgid "Fixed Equator"
 msgstr "Kiinteä päiväntasaaja"
 
-#: src/ui_viewDialog.h:4240
+#: src/ui_viewDialog.h:4256
 msgid "Color of ecliptic poles (of date)"
 msgstr "Ekliptisten napojen (nykyiset) väri"
 
-#: src/ui_viewDialog.h:4243
+#: src/ui_viewDialog.h:4259
 msgid "Galactic Coordinates, System II (IAU 1958)."
 msgstr "Galaktiset koordinaatit, järjestelmä II (IAU 1958)."
 
-#: src/ui_viewDialog.h:4246
+#: src/ui_viewDialog.h:4262
 msgid "Equinoxes (J2000)"
 msgstr "Tasauspisteet (J2000)"
 
-#: src/ui_viewDialog.h:4252 src/ui_viewDialog.h:4299
+#: src/ui_viewDialog.h:4268 src/ui_viewDialog.h:4315
 msgid "Show circles"
 msgstr "Näytä ympyrät"
 
-#: src/ui_viewDialog.h:4260 src/ui_viewDialog.h:4373 src/ui_viewDialog.h:4417
-#: src/ui_viewDialog.h:4444 src/ui_viewDialog.h:4455 src/ui_viewDialog.h:4466
-#: src/ui_viewDialog.h:4473 src/ui_viewDialog.h:4560 src/ui_viewDialog.h:4572
-#: src/ui_viewDialog.h:4576 src/ui_viewDialog.h:4584 src/ui_viewDialog.h:4654
-#: src/ui_viewDialog.h:4680
+#: src/ui_viewDialog.h:4276 src/ui_viewDialog.h:4389 src/ui_viewDialog.h:4433
+#: src/ui_viewDialog.h:4460 src/ui_viewDialog.h:4471 src/ui_viewDialog.h:4482
+#: src/ui_viewDialog.h:4489 src/ui_viewDialog.h:4576 src/ui_viewDialog.h:4588
+#: src/ui_viewDialog.h:4592 src/ui_viewDialog.h:4600 src/ui_viewDialog.h:4670
+#: src/ui_viewDialog.h:4696
 msgid "Show line"
 msgstr "Näytä viiva"
 
-#: src/ui_viewDialog.h:4264
+#: src/ui_viewDialog.h:4280
 msgid "Color of equator (J2000.0)"
 msgstr "Ekvaattorin (J2000.0) väri"
 
-#: src/ui_viewDialog.h:4267
+#: src/ui_viewDialog.h:4283
 msgid "Show celestial poles of J2000.0."
 msgstr "Näytä taivaannavat (J2000.0)"
 
-#: src/ui_viewDialog.h:4269
+#: src/ui_viewDialog.h:4285
 msgid "Celestial poles (J2000)"
 msgstr "Taivaannavat (J2000)"
 
-#: src/ui_viewDialog.h:4271
+#: src/ui_viewDialog.h:4287
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the"
 " mathematical horizon."
@@ -13103,134 +13103,134 @@ msgstr ""
 "Näyttää ympyrät, joiden sisällä oleva alue pysyy jatkuvasti matemaattisen "
 "horisontin yläpuolella (ja vastaavasti sen alapuolella)."
 
-#: src/ui_viewDialog.h:4273
+#: src/ui_viewDialog.h:4289
 msgid "Circumpolar circles"
 msgstr "Sirkumpolaariympyrät"
 
-#: src/ui_viewDialog.h:4279
+#: src/ui_viewDialog.h:4295
 msgid "Color of umbra circle"
 msgstr "Täysvarjoympyrän väri"
 
-#: src/ui_viewDialog.h:4291
+#: src/ui_viewDialog.h:4307
 msgid ""
 "Fixed equatorial coordinates (hour angle/declination) of current planet."
 msgstr ""
 "Nykyisen planeetan kiinteät ekvatoriaaliset koordinaatit "
 "(tuntikulma/deklinaatio)."
 
-#: src/ui_viewDialog.h:4303
+#: src/ui_viewDialog.h:4319
 msgid "Show Prime (East-West) Vertical."
 msgstr "Näytä ensivertikaali (idästä zeniitin kautta länteen kulkeva linja)."
 
-#: src/ui_viewDialog.h:4308
+#: src/ui_viewDialog.h:4324
 msgid "The line thickness for grids and lines"
 msgstr "Viivan paksuus ruudukoille ja viivoille"
 
-#: src/ui_viewDialog.h:4310
+#: src/ui_viewDialog.h:4326
 msgid "Thickness: "
 msgstr "Paksuus:"
 
-#: src/ui_viewDialog.h:4311
+#: src/ui_viewDialog.h:4327
 msgid "lines"
 msgstr "viivat"
 
-#: src/ui_viewDialog.h:4313 src/ui_viewDialog.h:4748 src/ui_viewDialog.h:4818
-#: src/ui_viewDialog.h:4836 src/ui_viewDialog.h:4873 src/ui_viewDialog.h:4882
-#: src/ui_viewDialog.h:4895 src/ui_viewDialog.h:4901 src/ui_viewDialog.h:4915
+#: src/ui_viewDialog.h:4329 src/ui_viewDialog.h:4764 src/ui_viewDialog.h:4836
+#: src/ui_viewDialog.h:4854 src/ui_viewDialog.h:4891 src/ui_viewDialog.h:4900
+#: src/ui_viewDialog.h:4913 src/ui_viewDialog.h:4919 src/ui_viewDialog.h:4933
 msgid "Thickness of line in pixels"
 msgstr "Viivan paksuus pikseleinä"
 
-#: src/ui_viewDialog.h:4316
+#: src/ui_viewDialog.h:4332
 msgid "The line thickness for circle partitions"
 msgstr "Ympyräosien viivan paksuus"
 
-#: src/ui_viewDialog.h:4318
+#: src/ui_viewDialog.h:4334
 msgid "partitions"
 msgstr "osat"
 
-#: src/ui_viewDialog.h:4320
+#: src/ui_viewDialog.h:4336
 msgid "Thickness of partitions in pixels"
 msgstr "Osioiden paksuus pikseleinä"
 
-#: src/ui_viewDialog.h:4323
+#: src/ui_viewDialog.h:4339
 msgid "Show Galactic equator line."
 msgstr "Näytä galaktinen ekvaattori."
 
-#: src/ui_viewDialog.h:4331
+#: src/ui_viewDialog.h:4347
 msgid "Solar equator projected into space."
 msgstr "Auringon ekvaattori projisoituna avaruuteen."
 
-#: src/ui_viewDialog.h:4335
+#: src/ui_viewDialog.h:4351
 msgid "Color of supergalactic equator"
 msgstr "Supergalaktisen ekvaattorin väri"
 
-#: src/ui_viewDialog.h:4342
+#: src/ui_viewDialog.h:4358
 msgid "Show marker of center for field of view (FOV)"
 msgstr "Näytä näkökentän keskikohdan merkki (FOV)"
 
-#: src/ui_viewDialog.h:4344
+#: src/ui_viewDialog.h:4360
 msgid "Center of FOV"
 msgstr "Näkökentän keskikohta"
 
-#: src/ui_viewDialog.h:4346
+#: src/ui_viewDialog.h:4362
 msgid "Show mathematical horizon line."
 msgstr "Näytä matemaattinen horisontti."
 
-#: src/ui_viewDialog.h:4350
+#: src/ui_viewDialog.h:4366
 msgid "Color of the supergalactic grid"
 msgstr "Supergalaktisen asteikon väri"
 
-#: src/ui_viewDialog.h:4358
+#: src/ui_viewDialog.h:4374
 msgid "Color of the equinox points (J2000.0)"
 msgstr "Tasauspisteiden väri (J2000.0)"
 
-#: src/ui_viewDialog.h:4369
+#: src/ui_viewDialog.h:4385
 msgid "Color of the projected Solar equator line"
 msgstr "Projisoidun aurinkoekvaattorin viivan väri"
 
-#: src/ui_viewDialog.h:4381
+#: src/ui_viewDialog.h:4397
 msgid "Color of precession circles"
 msgstr "Prekessioympyröiden väri"
 
-#: src/ui_viewDialog.h:4384
+#: src/ui_viewDialog.h:4400
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr ""
 "Ekliptikaaliset koordinaatit nykyiselle ajankohdalle. Näytetään vain Maassa."
 
-#: src/ui_viewDialog.h:4386
+#: src/ui_viewDialog.h:4402
 msgid "Ecliptic grid (of date)"
 msgstr "Ekliptikaalinen asteikko (nykyinen)"
 
-#: src/ui_viewDialog.h:4388
+#: src/ui_viewDialog.h:4404
 msgid "Color of the celestial poles (J2000.0)"
 msgstr "Taivaannapojen väri (J2000.0)"
 
-#: src/ui_viewDialog.h:4395
+#: src/ui_viewDialog.h:4411
 msgid "Ecliptical coordinates for J2000.0."
 msgstr "Ekliptikaaliset koordinaatit (J2000.0)"
 
-#: src/ui_viewDialog.h:4397
+#: src/ui_viewDialog.h:4413
 msgid "Ecliptic grid (J2000)"
 msgstr "Ekliptikaalinen asteikko (J2000)"
 
-#: src/ui_viewDialog.h:4406
+#: src/ui_viewDialog.h:4422
 msgid "Equinoxes (of date)"
 msgstr "Tasauspisteet (nykyiset)"
 
-#: src/ui_viewDialog.h:4408
+#: src/ui_viewDialog.h:4424
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
 msgstr ""
 "Näytä  de Vaucouleur’n supergalaktisen koordinaatiston (1976) ekvaattori."
 
-#: src/ui_viewDialog.h:4412
+#: src/ui_viewDialog.h:4428
 msgid "Color of the solstice points (J2000.0)"
 msgstr "Seisauspisteiden (J2000.0) väri"
 
-#: src/ui_viewDialog.h:4421
+#: src/ui_viewDialog.h:4437
 msgid "Color of altitude line"
 msgstr "Korkeusviivan väri"
 
-#: src/ui_viewDialog.h:4425
+#: src/ui_viewDialog.h:4441
 msgid ""
 "This circle represents the size of Earth's central, deep shadow in the "
 "distance of the Moon. Will not show when Moon scaling is enabled!"
@@ -13238,148 +13238,148 @@ msgstr ""
 "Tämä ympyrä edustaa Maan keskeisen syvän varjon kokoa Kuun etäisyydellä. Ei "
 "näy, kun Kuun skaalaus on käytössä!"
 
-#: src/ui_viewDialog.h:4427
+#: src/ui_viewDialog.h:4443
 msgid "Earth umbra"
 msgstr "Maan täysvarjo"
 
-#: src/ui_viewDialog.h:4429
+#: src/ui_viewDialog.h:4445
 msgid "Show center point of Earth's shadow in the distance of the Moon."
 msgstr "Näytä Maan varjon keskipiste kuun etäisyydellä."
 
-#: src/ui_viewDialog.h:4433
+#: src/ui_viewDialog.h:4449
 msgid "Color of fixed equator"
 msgstr "Kiinteän päiväntasaajan väri"
 
-#: src/ui_viewDialog.h:4437
+#: src/ui_viewDialog.h:4453
 msgid "Color of ecliptic (of date)"
 msgstr "Ekliptikan (nykyisen) väri"
 
-#: src/ui_viewDialog.h:4440
+#: src/ui_viewDialog.h:4456
 msgid ""
 "A plane perpendicular to the angular momentum vector of the Solar system."
 msgstr "Taso, joka on kohtisuorassa aurinkokunnan liikemäärävektoriin nähden."
 
-#: src/ui_viewDialog.h:4442
+#: src/ui_viewDialog.h:4458
 msgid "Invariable plane of the Solar system"
 msgstr "Aurinkokunnan muuttumaton taso"
 
-#: src/ui_viewDialog.h:4452
+#: src/ui_viewDialog.h:4468
 msgid "Color of the equatorial grid (of date)"
 msgstr "Ekvatoriaalisen asteikon (nykyisen) väri"
 
-#: src/ui_viewDialog.h:4459
+#: src/ui_viewDialog.h:4475
 msgid "Color of equator (of date)"
 msgstr "Ekvaattorin (nykyisen) väri"
 
-#: src/ui_viewDialog.h:4462
+#: src/ui_viewDialog.h:4478
 msgid "Color of antisolar point"
 msgstr "Antisolaaripisteen väri"
 
-#: src/ui_viewDialog.h:4470
+#: src/ui_viewDialog.h:4486
 msgid "Color of colures"
 msgstr "Koluurien väri"
 
-#: src/ui_viewDialog.h:4477
+#: src/ui_viewDialog.h:4493
 msgid "Color of the equinox points (of date)"
 msgstr "Tasauspisteiden (nykyiset) väri"
 
-#: src/ui_viewDialog.h:4480
+#: src/ui_viewDialog.h:4496
 msgid "Color of Apex and Antapex points"
 msgstr "Apex- ja Antapex-pisteiden väri"
 
-#: src/ui_viewDialog.h:4483
+#: src/ui_viewDialog.h:4499
 msgid "Color of the quadrature circle"
 msgstr "Kvadratuuriympyrän väri"
 
-#: src/ui_viewDialog.h:4486
+#: src/ui_viewDialog.h:4502
 msgid "Color of Zenith and Nadir"
 msgstr "Zeniitin ja nadiirin väri"
 
-#: src/ui_viewDialog.h:4489
+#: src/ui_viewDialog.h:4505
 msgid "Color of the galactic grid"
 msgstr "Galaktisen asteikon väri"
 
-#: src/ui_viewDialog.h:4496
+#: src/ui_viewDialog.h:4512
 msgid "Color of celestial poles (of date)"
 msgstr "Taivaannapojen (nykyiset) väri"
 
-#: src/ui_viewDialog.h:4500
+#: src/ui_viewDialog.h:4516
 msgid "Color of the ecliptical grid (of date)"
 msgstr "Ekliptikaalisen asteikon (nykyisen) väri"
 
-#: src/ui_viewDialog.h:4503
+#: src/ui_viewDialog.h:4519
 msgid "Color of the azimuthal grid"
 msgstr "Atsimutaalisen asteikon väri"
 
-#: src/ui_viewDialog.h:4506
+#: src/ui_viewDialog.h:4522
 msgid "Color of circumpolar circles"
 msgstr "Sirkumpolaariympyröiden väri"
 
-#: src/ui_viewDialog.h:4509
+#: src/ui_viewDialog.h:4525
 msgid "Color of supergalactic poles"
 msgstr "Supergalaktisten napojen väri"
 
-#: src/ui_viewDialog.h:4512
+#: src/ui_viewDialog.h:4528
 msgid "Color of the opposition/conjunction longitude line"
 msgstr "Oppositio–konjunktiolinjan väri"
 
-#: src/ui_viewDialog.h:4515
+#: src/ui_viewDialog.h:4531
 msgid "Width of rectangle, in degrees"
 msgstr "Suorakulmion leveys, asteina"
 
-#: src/ui_viewDialog.h:4518
+#: src/ui_viewDialog.h:4534
 msgid "Field of view in degrees"
 msgstr "Näkökenttä asteina"
 
-#: src/ui_viewDialog.h:4521
+#: src/ui_viewDialog.h:4537
 msgid "Show circular marker of field of view (FOV)"
 msgstr "Näytä pyöreä näkökenttämerkki (FOV)"
 
-#: src/ui_viewDialog.h:4523
+#: src/ui_viewDialog.h:4539
 msgid "Circular FOV"
 msgstr "Pyöreä näkökenttä"
 
-#: src/ui_viewDialog.h:4525
+#: src/ui_viewDialog.h:4541
 msgid "Rotation angle of rectangle, in degrees"
 msgstr "Suorakulmion kiertokulma asteina"
 
-#: src/ui_viewDialog.h:4528
+#: src/ui_viewDialog.h:4544
 msgid "Height of rectangle, in degrees"
 msgstr "Suorakulmion korkeus asteina"
 
-#: src/ui_viewDialog.h:4531
+#: src/ui_viewDialog.h:4547
 msgid "Show rectangular marker of field of view (FOV)"
 msgstr "Näytä suorakulmainen näkökentän merkki (FOV)"
 
-#: src/ui_viewDialog.h:4533
+#: src/ui_viewDialog.h:4549
 msgid "Rectangular FOV"
 msgstr "Suorakulmainen näkökenttä"
 
-#: src/ui_viewDialog.h:4535
+#: src/ui_viewDialog.h:4551
 msgid "Color of circular marker of FOV"
 msgstr "Näkökentän pyöreän merkin väri"
 
-#: src/ui_viewDialog.h:4538
+#: src/ui_viewDialog.h:4554
 msgid "Color of rectangular marker of FOV"
 msgstr "Näkökentän suorakaiteen muotoisen merkin väri"
 
-#: src/ui_viewDialog.h:4545
+#: src/ui_viewDialog.h:4561
 msgid "Color of the equatorial grid (J2000.0)"
 msgstr "Ekvatoriaalisen asteikon väri (J2000.0)"
 
-#: src/ui_viewDialog.h:4548
+#: src/ui_viewDialog.h:4564
 msgid "Color of the invariable plane of the Solar system"
 msgstr "Aurinkokunnan muuttumattoman tason väri"
 
-#: src/ui_viewDialog.h:4556
+#: src/ui_viewDialog.h:4572
 msgid "Color of the solstice points (of date)"
 msgstr "Seisauspisteiden (nykyiset) väri"
 
-#: src/ui_viewDialog.h:4565
+#: src/ui_viewDialog.h:4581
 msgid "Color of ecliptic (J2000.0)"
 msgstr "Ekliptikan (J2000.0) väri"
 
-#: src/ui_viewDialog.h:4568
+#: src/ui_viewDialog.h:4584
 msgid ""
 "This circle represents the outermost rim of Earth's shadow in the distance "
 "of the Moon. Will not show when Moon scaling is enabled!"
@@ -13387,39 +13387,39 @@ msgstr ""
 "Tämä ympyrä edustaa Maan varjon ulointa reunaa Kuun etäisyydellä. Ei näy, "
 "kun Kuun skaalaus on käytössä!"
 
-#: src/ui_viewDialog.h:4570
+#: src/ui_viewDialog.h:4586
 msgid "Earth penumbra"
 msgstr "Maan puolivarjo"
 
-#: src/ui_viewDialog.h:4580
+#: src/ui_viewDialog.h:4596
 msgid "Show celestial poles of current planet and date."
 msgstr "Näytä taivaannavat (nykyinen planeetta ja epookki)."
 
-#: src/ui_viewDialog.h:4582
+#: src/ui_viewDialog.h:4598
 msgid "Celestial poles (of date)"
 msgstr "Taivaannavat (nykyiset)"
 
-#: src/ui_viewDialog.h:4588
+#: src/ui_viewDialog.h:4604
 msgid "Color of galactic poles"
 msgstr "Galaktisten napojen väri"
 
-#: src/ui_viewDialog.h:4591
+#: src/ui_viewDialog.h:4607
 msgid "Color of penumbra circle"
 msgstr "Puolivarjoympyrän väri"
 
-#: src/ui_viewDialog.h:4594
+#: src/ui_viewDialog.h:4610
 msgid "Solstices (of date)"
 msgstr "Seisauspisteet (nykyiset)"
 
-#: src/ui_viewDialog.h:4596
+#: src/ui_viewDialog.h:4612
 msgid "Show celestial equator of J2000.0."
 msgstr "Näytä taivaanekvaattori (J2000.0)."
 
-#: src/ui_viewDialog.h:4598
+#: src/ui_viewDialog.h:4614
 msgid "Equator (J2000)"
 msgstr "Ekvaattori (J2000)"
 
-#: src/ui_viewDialog.h:4600
+#: src/ui_viewDialog.h:4616
 msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
@@ -13427,76 +13427,76 @@ msgstr ""
 "de Vaucouleu’n supergalaktinen koordinaatisto (1976) on määritelty "
 "lähigalaksien jakauman perusteella."
 
-#: src/ui_viewDialog.h:4604
+#: src/ui_viewDialog.h:4620
 msgid "Show ecliptic poles of current date."
 msgstr "Näytä ekliptikaaliset navat (nykyiset)"
 
-#: src/ui_viewDialog.h:4606
+#: src/ui_viewDialog.h:4622
 msgid "Ecliptic poles (of date)"
 msgstr "Ekliptikaaliset navat (nykyiset)"
 
-#: src/ui_viewDialog.h:4612
+#: src/ui_viewDialog.h:4628
 msgid ""
 "Show a vertical line (with optional altitude marks) in the screen center."
 msgstr ""
 "Näytä pystysuora viiva (valinnaisilla korkeusmerkeillä) näytön keskellä."
 
-#: src/ui_viewDialog.h:4616
+#: src/ui_viewDialog.h:4632
 msgid "Color of the ecliptic poles (J2000.0)"
 msgstr "Ekliptisten napojen väri (J2000.0)"
 
-#: src/ui_viewDialog.h:4624
+#: src/ui_viewDialog.h:4640
 msgid "Color of the ecliptical grid (J2000.0)"
 msgstr "Ekliptisen asteikon (J2000.0) väri"
 
-#: src/ui_viewDialog.h:4627
+#: src/ui_viewDialog.h:4643
 msgid "A circle 90° from the Sun marking quadrature"
 msgstr "Ympyrä 90° Auringosta, joka merkitsee kvadratuuria"
 
-#: src/ui_viewDialog.h:4629
+#: src/ui_viewDialog.h:4645
 msgid "Quadrature circle"
 msgstr "Kvadratuuriympyrä"
 
-#: src/ui_viewDialog.h:4635
+#: src/ui_viewDialog.h:4651
 msgid "Equatorial coordinates of J2000.0."
 msgstr "Ekvatoriaaliset koordinaatit (J2000.0)."
 
-#: src/ui_viewDialog.h:4637
+#: src/ui_viewDialog.h:4653
 msgid "Equatorial grid (J2000)"
 msgstr "Ekvatoriaalinen asteikko (J2000)"
 
-#: src/ui_viewDialog.h:4639
+#: src/ui_viewDialog.h:4655
 msgid "Show ecliptic line of current date."
 msgstr "Näytä nykyinen ekliptika."
 
-#: src/ui_viewDialog.h:4641
+#: src/ui_viewDialog.h:4657
 msgid "Ecliptic (of date)"
 msgstr "Ekliptika (nykyinen)"
 
-#: src/ui_viewDialog.h:4643
+#: src/ui_viewDialog.h:4659
 msgid "Mark Solar positions along the Ecliptic"
 msgstr "Merkitse auringon ekliptiset asennot"
 
-#: src/ui_viewDialog.h:4645
+#: src/ui_viewDialog.h:4661
 msgid "with Solar Dates"
 msgstr "aurinkokalenterin kanssa"
 
-#: src/ui_viewDialog.h:4651
+#: src/ui_viewDialog.h:4667
 msgid "Color of galactic equator"
 msgstr "Galaktisen ekvaattorin väri"
 
-#: src/ui_viewDialog.h:4658
+#: src/ui_viewDialog.h:4674
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles."
 " Displayed on Earth only."
 msgstr ""
 "Maan akselin liikeympyrät ekliptisten napojen ympäri. Näytetään vain Maassa."
 
-#: src/ui_viewDialog.h:4660
+#: src/ui_viewDialog.h:4676
 msgid "Precession circles"
 msgstr "Prekessioympyrät"
 
-#: src/ui_viewDialog.h:4662
+#: src/ui_viewDialog.h:4678
 msgid ""
 "Apex and Antapex indicate where the observer's planet is heading to or "
 "receding from, respectively."
@@ -13504,23 +13504,23 @@ msgstr ""
 "Apex ja Antapex osoittavat, minne tarkkailijan planeetta on menossa tai "
 "minne vetäytyy vastaavasti."
 
-#: src/ui_viewDialog.h:4666
+#: src/ui_viewDialog.h:4682
 msgid "Color of marker of center of FOV"
 msgstr "Näkökentän keskipisteen merkin väri"
 
-#: src/ui_viewDialog.h:4669
+#: src/ui_viewDialog.h:4685
 msgid "Color of meridian"
 msgstr "Meridiaanin väri"
 
-#: src/ui_viewDialog.h:4684
+#: src/ui_viewDialog.h:4700
 msgid "Color of horizon"
 msgstr "Horisontin väri"
 
-#: src/ui_viewDialog.h:4687
+#: src/ui_viewDialog.h:4703
 msgid "Show meridian line."
 msgstr "Näytä meridiaanilinja."
 
-#: src/ui_viewDialog.h:4691
+#: src/ui_viewDialog.h:4707
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which"
 " passes through both ecliptic poles, the Sun and opposition point."
@@ -13528,400 +13528,401 @@ msgstr ""
 "Oppositio–konjunktiolinja on ekliptisen pituuden linja, joka kulkee "
 "molempien ekliptisten napojen sekä Auringon ja oppositiopisteen kautta."
 
-#: src/ui_viewDialog.h:4694
+#: src/ui_viewDialog.h:4710
 msgid "Solstices (J2000)"
 msgstr "Seisauspisteet (J2000)"
 
-#: src/ui_viewDialog.h:4696
+#: src/ui_viewDialog.h:4712
 msgid "Equatorial coordinates of current date and planet."
 msgstr "Ekvatoriaaliset kordinaatit nykyiselle ajankohdalle ja planeetalle."
 
-#: src/ui_viewDialog.h:4698
+#: src/ui_viewDialog.h:4714
 msgid "Equatorial grid (of date)"
 msgstr "Ekvatoriaalinen asteikko (nykyinen)"
 
-#: src/ui_viewDialog.h:4700
+#: src/ui_viewDialog.h:4716
 msgid "Labels for the cardinal directions (4-wind compass rose)."
 msgstr "Nimikkeet pääilmansuunnille (4-tuulen kompassiruusu)."
 
-#: src/ui_viewDialog.h:4704
+#: src/ui_viewDialog.h:4720
 msgid ""
 "Labels for the intercardinal (or ordinal) directions (8-wind compass rose)."
 msgstr ""
 "Nimikkeet interkardinaalisille (tai järjestyksellisille) suunnille (8-tuulen"
 " kompassiruusu)."
 
-#: src/ui_viewDialog.h:4707
+#: src/ui_viewDialog.h:4723
 msgid ""
 "Labels for the secondary intercardinal directions (16-wind compass rose)."
 msgstr ""
 "Nimikkeet toissijaisille interkardinaalisille suunnille (16 tuulen "
 "kompassiruusu)."
 
-#: src/ui_viewDialog.h:4710
+#: src/ui_viewDialog.h:4726
 msgid ""
 "Labels for the tertiary intercardinal directions (32-wind compass rose)."
 msgstr ""
 "Tertiääriset pääilmansuuntien nimikkeet (32-suuntainen kompassiruusu)."
 
-#: src/ui_viewDialog.h:4713
+#: src/ui_viewDialog.h:4729
 msgid "Color of cardinal points"
 msgstr "Ilmansuuntien väri"
 
-#: src/ui_viewDialog.h:4720
+#: src/ui_viewDialog.h:4736
 msgid "Color of Prime Vertical"
 msgstr "Ensivertikaalin väri"
 
-#: src/ui_viewDialog.h:4723
+#: src/ui_viewDialog.h:4739
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr "Korkeus ja atsimuutti (pohjoisesta itään laskien)."
 
-#: src/ui_viewDialog.h:4727
+#: src/ui_viewDialog.h:4743
 msgid "Color of galactic center and anticenter"
 msgstr "Galaktisen keskuksen ja antikeskuksen väri"
 
-#: src/ui_viewDialog.h:4730
+#: src/ui_viewDialog.h:4746
 msgid "Color of compass marks"
 msgstr "Kompassin merkkien väri"
 
-#: src/ui_viewDialog.h:4732
+#: src/ui_viewDialog.h:4748
 msgid "Add/remove landscapes..."
 msgstr "Lisää/poista maisemia..."
 
-#: src/ui_viewDialog.h:4735
+#: src/ui_viewDialog.h:4751
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
 "Käytä maiseman asetustiedostossa (landscape.ini) määriteltyä "
 "vähimmäiskirkkautta"
 
-#: src/ui_viewDialog.h:4737
+#: src/ui_viewDialog.h:4753
 msgid "from landscape, if given"
 msgstr "Maiseman perusteella, jos annettu"
 
-#: src/ui_viewDialog.h:4739
+#: src/ui_viewDialog.h:4755
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr "Näytä valaistus (loistavat ikkunat, valosaaste, ym.)"
 
-#: src/ui_viewDialog.h:4741
+#: src/ui_viewDialog.h:4757
 msgid "Show illumination "
 msgstr "Näytä valaistus "
 
-#: src/ui_viewDialog.h:4742
+#: src/ui_viewDialog.h:4758
 msgid "Transparency:"
 msgstr "Läpinäkyvyys:"
 
-#: src/ui_viewDialog.h:4744
+#: src/ui_viewDialog.h:4760
 msgid "Draw horizon polyline if one is defined."
 msgstr "Piirrä horisontin poly-viiva, jos sellainen on määritetty."
 
-#: src/ui_viewDialog.h:4746
+#: src/ui_viewDialog.h:4762
 msgid "Draw only polygon"
 msgstr "Piirrä vain monikulmio"
 
-#: src/ui_viewDialog.h:4751
+#: src/ui_viewDialog.h:4767
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
 "Käytä vähimmäiskirkkauden asetusta jättääksesi maisema näkyviin myös "
 "pimeässä"
 
-#: src/ui_viewDialog.h:4753
+#: src/ui_viewDialog.h:4769
 msgid "Minimal brightness:"
 msgstr "Vähimmäiskirkkaus:"
 
-#: src/ui_viewDialog.h:4755
+#: src/ui_viewDialog.h:4771
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 "Arvo välillä 0.. 1 (maisema on täysin pimeä yöllä - maisema on täysin "
 "valaistu)"
 
-#: src/ui_viewDialog.h:4759
+#: src/ui_viewDialog.h:4775
 msgid "Font size"
 msgstr "Kirjasimen koko"
 
-#: src/ui_viewDialog.h:4762
+#: src/ui_viewDialog.h:4778
 msgid "Text angle"
 msgstr "Tekstin kulma"
 
-#: src/ui_viewDialog.h:4765
+#: src/ui_viewDialog.h:4781
 msgid "Color for landscape labels"
 msgstr "Maisemien nimikkeiden väri"
 
-#: src/ui_viewDialog.h:4768
+#: src/ui_viewDialog.h:4784
 msgid "Color for polygon line"
 msgstr "Monikulmioviivan väri"
 
-#: src/ui_viewDialog.h:4771
+#: src/ui_viewDialog.h:4787
 msgid "Show fog"
 msgstr "Näytä sumu"
 
-#: src/ui_viewDialog.h:4772
+#: src/ui_viewDialog.h:4788
 msgid "Show ground"
 msgstr "Näytä maan pinta"
 
-#: src/ui_viewDialog.h:4774
+#: src/ui_viewDialog.h:4790
 msgid "Set the planet and location as specified for the selected landscape"
 msgstr "Aseta planeetta ja sijainti valitun maiseman mukaisesti"
 
-#: src/ui_viewDialog.h:4776
+#: src/ui_viewDialog.h:4792
 msgid "Location from landscape"
 msgstr "Sijainti maisemasta"
 
-#: src/ui_viewDialog.h:4777
+#: src/ui_viewDialog.h:4793
 msgid "Use this landscape as default"
 msgstr "Käytä tätä maisemaa oletuksena"
 
-#: src/ui_viewDialog.h:4779
+#: src/ui_viewDialog.h:4795
 msgid "Use this sky culture as default"
 msgstr "Käytä tätä tähtitarustoa oletuksena"
 
-#: src/ui_viewDialog.h:4780 src/ui_viewDialog.h:4796
-msgctxt "menu item"
-msgid "native"
-msgstr "syntyperäinen"
-
-#: src/ui_viewDialog.h:4781 src/ui_viewDialog.h:4785
-msgctxt "menu item"
-msgid "modern"
-msgstr "nykyaikainen"
-
-#: src/ui_viewDialog.h:4782
+#: src/ui_viewDialog.h:4796
 msgid "Info label"
 msgstr "Tieto"
 
-#: src/ui_viewDialog.h:4783 src/ui_viewDialog.h:4797
+#: src/ui_viewDialog.h:4797
+msgid "Screen label"
+msgstr "Näytön nimi"
+
+#: src/ui_viewDialog.h:4798 src/ui_viewDialog.h:4799
 msgctxt "menu item"
 msgid "translation"
 msgstr "käännös"
 
-#: src/ui_viewDialog.h:4784 src/ui_viewDialog.h:4791
+#: src/ui_viewDialog.h:4800 src/ui_viewDialog.h:4816
 msgctxt "menu item"
 msgid "transliteration"
 msgstr "translitterointi"
 
-#: src/ui_viewDialog.h:4787 src/ui_viewDialog.h:4793
+#: src/ui_viewDialog.h:4801 src/ui_viewDialog.h:4821
+msgctxt "menu item"
+msgid "modern"
+msgstr "nykyaikainen"
+
+#: src/ui_viewDialog.h:4803 src/ui_viewDialog.h:4808
 msgid "Scientific transliteration"
 msgstr "Tieteellinen translitterointi"
 
-#: src/ui_viewDialog.h:4789 src/ui_viewDialog.h:4795
+#: src/ui_viewDialog.h:4805 src/ui_viewDialog.h:4810
 msgctxt "menu item"
 msgid "sci. translit."
 msgstr "tieteellinen translitterointi"
 
-#: src/ui_viewDialog.h:4790
-msgid "Screen label"
-msgstr "Näytön nimi"
+#: src/ui_viewDialog.h:4806 src/ui_viewDialog.h:4815
+msgctxt "menu item"
+msgid "native"
+msgstr "syntyperäinen"
 
-#: src/ui_viewDialog.h:4799 src/ui_viewDialog.h:4803
+#: src/ui_viewDialog.h:4812 src/ui_viewDialog.h:4818
 msgid "International Phonetic Alphabet"
 msgstr "Kansainvälinen foneettinen aakkosto"
 
-#: src/ui_viewDialog.h:4801 src/ui_viewDialog.h:4805
+#: src/ui_viewDialog.h:4814 src/ui_viewDialog.h:4820
 msgctxt "menu item"
 msgid "IPA"
 msgstr "IPA"
 
-#: src/ui_viewDialog.h:4807
+#: src/ui_viewDialog.h:4822 src/ui_viewDialog.h:4823
+msgctxt "menu item"
+msgid "byname"
+msgstr "nimi"
+
+#: src/ui_viewDialog.h:4825
 msgid "Show zodiac (if defined)"
 msgstr "Näytä horoskooppi (jos määritelty)"
 
-#: src/ui_viewDialog.h:4811
+#: src/ui_viewDialog.h:4829
 msgid "Constellations font size"
 msgstr "Kirjasinkoko tähtikuvioille"
 
-#: src/ui_viewDialog.h:4814
+#: src/ui_viewDialog.h:4832
 msgid "Color of zodiac lines"
 msgstr "Horoskooppiviivojen väri"
 
-#: src/ui_viewDialog.h:4821
+#: src/ui_viewDialog.h:4839
 msgid "Fading duration for lines of asterisms"
 msgstr "Asterismien viivojen häipyminsen kesto"
 
-#: src/ui_viewDialog.h:4825
+#: src/ui_viewDialog.h:4843
 msgid "Color of asterism lines"
 msgstr "Asterismiviivojen väri"
 
-#: src/ui_viewDialog.h:4828
+#: src/ui_viewDialog.h:4846
 msgid "Color of constellation area (convex hull) boundaries"
 msgstr "Tähdistöalueen (kuperan rungon) rajojen väri"
 
-#: src/ui_viewDialog.h:4832
+#: src/ui_viewDialog.h:4850
 msgid "Only one at a time"
 msgstr "Vain yksi kerrallaan"
 
-#: src/ui_viewDialog.h:4834
+#: src/ui_viewDialog.h:4852
 msgid "Isolated"
 msgstr "Eristetty"
 
-#: src/ui_viewDialog.h:4840
+#: src/ui_viewDialog.h:4858
 msgid "Color of ray helpers"
 msgstr "Sädeosoittimien väri"
 
-#: src/ui_viewDialog.h:4843
+#: src/ui_viewDialog.h:4861
 msgid "Show areas (convex hulls) of constellations"
 msgstr "Näytä tähdistöjen alueet (kuperat rungot)"
 
-#: src/ui_viewDialog.h:4845
+#: src/ui_viewDialog.h:4863
 msgid "Constellation areas"
 msgstr "Tähtikuvioalueet"
 
-#: src/ui_viewDialog.h:4847
+#: src/ui_viewDialog.h:4865
 msgid "Color of constellation boundaries"
 msgstr "Tähtikuvioiden rajojen väri"
 
-#: src/ui_viewDialog.h:4849
+#: src/ui_viewDialog.h:4867
 msgid "Abbreviated names"
 msgstr "Lyhennetyt nimet"
 
-#: src/ui_viewDialog.h:4851
+#: src/ui_viewDialog.h:4869
 msgid "Color of asterism names"
 msgstr "Asterisminimien väri"
 
-#: src/ui_viewDialog.h:4855
+#: src/ui_viewDialog.h:4873
 msgid "Show lunar stations (if defined)"
 msgstr "Näytä kuuasemat (jos määritelty)"
 
-#: src/ui_viewDialog.h:4857
+#: src/ui_viewDialog.h:4875
 msgid "Lunar Stations"
 msgstr "Kuuasemat"
 
-#: src/ui_viewDialog.h:4859
+#: src/ui_viewDialog.h:4877
 msgid "Brightness for constellation art"
 msgstr "Kirkkaus tähtikuviotaidetta varten"
 
-#: src/ui_viewDialog.h:4862
+#: src/ui_viewDialog.h:4880
 msgid "Show boundaries of constellations"
 msgstr "Näytä tähtikuvioiden rajat"
 
-#: src/ui_viewDialog.h:4866
+#: src/ui_viewDialog.h:4884
 msgid "Fading duration for lines of ray helpers"
 msgstr "Apusäteiden häipymisen kesto"
 
-#: src/ui_viewDialog.h:4870
+#: src/ui_viewDialog.h:4888
 msgid "Fading duration for screen labels of constellations"
 msgstr "Tähtikuvioiden nimien häipymisen kesto näytöllä"
 
-#: src/ui_viewDialog.h:4876
+#: src/ui_viewDialog.h:4894
 msgid "Fading duration for lunar station lines"
 msgstr "Kuun asemaviivojen häipymisen kesto"
 
-#: src/ui_viewDialog.h:4879
+#: src/ui_viewDialog.h:4897
 msgid "Fading duration for screen labels of asterisms "
 msgstr "Asterismien nimien häipymisen kesto"
 
-#: src/ui_viewDialog.h:4886
+#: src/ui_viewDialog.h:4904
 msgid "Fading duration for artwork of constellations "
 msgstr "Tähtikuvioiden taideteosten häipymisen kesto "
 
-#: src/ui_viewDialog.h:4889
+#: src/ui_viewDialog.h:4907
 msgid "Color of constellation names"
 msgstr "Tähtikuvioiden väri"
 
-#: src/ui_viewDialog.h:4892
+#: src/ui_viewDialog.h:4910
 msgid "Fading duration for area limits of constellations"
 msgstr "Tähdistöjen pinta-alarajojen häipymisen kesto"
 
-#: src/ui_viewDialog.h:4898
+#: src/ui_viewDialog.h:4916
 msgid "Color of constellation lines"
 msgstr "Tähtikuvioviivojen väri"
 
-#: src/ui_viewDialog.h:4904
+#: src/ui_viewDialog.h:4922
 msgid "Click on star to show its constellation"
 msgstr "Napsauta tähteä näyttääksesi sen tähtikuvion"
 
-#: src/ui_viewDialog.h:4909
+#: src/ui_viewDialog.h:4927
 msgid "Fading duration for zodiac lines"
 msgstr "Horoskooppiviivojen häipymisaika"
 
-#: src/ui_viewDialog.h:4912
+#: src/ui_viewDialog.h:4930
 msgid "Asterisms font size"
 msgstr "Kirjasinkoko asterismeille"
 
-#: src/ui_viewDialog.h:4918
+#: src/ui_viewDialog.h:4936
 msgid "Color of Lunar station lines"
 msgstr "Kuun asemaviivojen väri"
 
-#: src/ui_viewDialog.h:4922
+#: src/ui_viewDialog.h:4940
 msgid "Fading duration for lines of constellations"
 msgstr "Tähtikuvioiden viivojen häipymisen kesto"
 
-#: src/ui_viewDialog.h:4925
+#: src/ui_viewDialog.h:4943
 msgid "Fading duration for boundaries of constellations"
 msgstr "Tähtikuvioiden rajojen häipymisen kesto"
 
-#: src/ui_viewDialog.h:4927
+#: src/ui_viewDialog.h:4945
 msgid "Filter"
 msgstr "Suodatin"
 
-#: src/ui_configurationDialog.h:1897
+#: src/ui_configurationDialog.h:1874
 msgid "Configuration"
 msgstr "Asetukset"
 
-#: src/ui_configurationDialog.h:1902
+#: src/ui_configurationDialog.h:1879
 msgid "Main"
 msgstr "Pää"
 
-#: src/ui_configurationDialog.h:1909
+#: src/ui_configurationDialog.h:1886
 msgctxt "Additional settings for Graphical User Interface"
 msgid "Extras"
 msgstr "Lisät"
 
-#: src/ui_configurationDialog.h:1911
+#: src/ui_configurationDialog.h:1888
 msgid "Additional settings for Graphical User Interface"
 msgstr "Graafisen käyttöliittymän lisäasetukset"
 
-#: src/ui_configurationDialog.h:1914
+#: src/ui_configurationDialog.h:1891
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1541
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:443
 msgid "Time"
 msgstr "Aika"
 
-#: src/ui_configurationDialog.h:1916
+#: src/ui_configurationDialog.h:1893
 msgid "Tools"
 msgstr "Työkalut"
 
-#: src/ui_configurationDialog.h:1923
+#: src/ui_configurationDialog.h:1900
 msgid "Language settings"
 msgstr "Kieliasetukset"
 
-#: src/ui_configurationDialog.h:1924
-msgid "Sky Culture Language"
-msgstr "Tähtitaruston kieli"
-
-#: src/ui_configurationDialog.h:1925
+#: src/ui_configurationDialog.h:1901
 msgid "Program Language"
 msgstr "Ohjelman kieli"
 
-#: src/ui_configurationDialog.h:1927
+#: src/ui_configurationDialog.h:1903
 msgid "Store language settings"
 msgstr "Talleta kieliasetukset"
 
-#: src/ui_configurationDialog.h:1931
+#: src/ui_configurationDialog.h:1907
 msgid "See User Guide for adding ephemeris data."
 msgstr "Katso käyttöoppaasta efemeriditietojen lisääminen."
 
-#: src/ui_configurationDialog.h:1933
+#: src/ui_configurationDialog.h:1909
 msgid "Ephemeris settings"
 msgstr "Efemeridien asetukset"
 
-#: src/ui_configurationDialog.h:1934 src/ui_configurationDialog.h:1944
-#: src/ui_configurationDialog.h:1949 src/ui_configurationDialog.h:1950
+#: src/ui_configurationDialog.h:1910 src/ui_configurationDialog.h:1920
+#: src/ui_configurationDialog.h:1925 src/ui_configurationDialog.h:1926
 msgid "Not installed"
 msgstr "Ei asennettu"
 
-#: src/ui_configurationDialog.h:1935
+#: src/ui_configurationDialog.h:1911
 msgid "Use DE430 (high accuracy)"
 msgstr "Ota DE430 käyttöön (korkea tarkkuus)"
 
-#: src/ui_configurationDialog.h:1937
+#: src/ui_configurationDialog.h:1913
 msgid "DE440 provides highest accuracy, only for years 1550...2650."
 msgstr "DE440 tarjoaa suurimman tarkkuuden, vain vuosille 1550...2650."
 
-#: src/ui_configurationDialog.h:1939
+#: src/ui_configurationDialog.h:1915
 msgid "Use DE440 (high accuracy)"
 msgstr "Ota DE440 käyttöön (suuri tarkkuus)"
 
-#: src/ui_configurationDialog.h:1941
+#: src/ui_configurationDialog.h:1917
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
@@ -13929,11 +13930,11 @@ msgstr ""
 "DE431 sisältää sijaintitiedot vuosille -13000...+17000. Vain "
 "erikoistarkoituksiin."
 
-#: src/ui_configurationDialog.h:1943
+#: src/ui_configurationDialog.h:1919
 msgid "Use DE431 (long-time data)"
 msgstr "Ota DE431 käyttöön (pitkän aikavälin tiedot)"
 
-#: src/ui_configurationDialog.h:1946
+#: src/ui_configurationDialog.h:1922
 msgid ""
 "DE441 provides position data for years -13000...+17000. For special "
 "applications only."
@@ -13941,11 +13942,11 @@ msgstr ""
 "DE441 tarjoaa sijaintitiedot vuosilta -13000...+17000. Vain "
 "erikoissovelluksiin."
 
-#: src/ui_configurationDialog.h:1948
+#: src/ui_configurationDialog.h:1924
 msgid "Use DE441 (long-time data)"
 msgstr "Ota DE441 käyttöön (pitkän aikavälin tiedot)"
 
-#: src/ui_configurationDialog.h:1952
+#: src/ui_configurationDialog.h:1928
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
@@ -13953,22 +13954,22 @@ msgstr ""
 "VSOP87:n käyttö on suositeltavaa vain vuosille -4000...+8000, mutta se antaa"
 " käyttökelpoisia tietoja myös tämän aikavälin ulkopuolella."
 
-#: src/ui_configurationDialog.h:1954
+#: src/ui_configurationDialog.h:1930
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 "VSOP87/ELP2000-82B on käytössä, jos näitä ei ole asennettu tai otettu "
 "käyttöön."
 
-#: src/ui_configurationDialog.h:1955
+#: src/ui_configurationDialog.h:1931
 msgid "Default options"
 msgstr "Oletusasetukset"
 
-#: src/ui_configurationDialog.h:1956
+#: src/ui_configurationDialog.h:1932
 msgid "Save view"
 msgstr "Tallenna näkymä"
 
-#: src/ui_configurationDialog.h:1958
+#: src/ui_configurationDialog.h:1934
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -13976,7 +13977,7 @@ msgstr ""
 "Tallenna tässä istunnossa muuttamasi asetukset, jotta ne olisivat samat "
 "seuraavalla Stellariumin käynnistyskerralla"
 
-#: src/ui_configurationDialog.h:1960
+#: src/ui_configurationDialog.h:1936
 #: plugins/Satellites/src/ui_satellitesDialog.h:1265
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:206
 #: plugins/NavStars/src/ui_navStarsWindow.h:504
@@ -13993,7 +13994,7 @@ msgstr ""
 msgid "Save settings"
 msgstr "Tallenna asetukset"
 
-#: src/ui_configurationDialog.h:1962
+#: src/ui_configurationDialog.h:1938
 msgid ""
 "Store changes immediately. This makes pressing \"Save settings\" no longer "
 "necessary, the button is then disabled."
@@ -14001,15 +14002,15 @@ msgstr ""
 "Tallenna muutokset välittömästi. Tämän vuoksi \"Tallenna asetukset\" "
 "-painiketta ei enää tarvitse painaa, vaan painike poistetaan käytöstä."
 
-#: src/ui_configurationDialog.h:1964
+#: src/ui_configurationDialog.h:1940
 msgid "Immediate Save"
 msgstr "Välitön tallennus"
 
-#: src/ui_configurationDialog.h:1966
+#: src/ui_configurationDialog.h:1942
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Palauta Stellariumin mukana tulleet oletusasetukset"
 
-#: src/ui_configurationDialog.h:1968
+#: src/ui_configurationDialog.h:1944
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:314
 #: plugins/Satellites/src/ui_satellitesDialog.h:1264
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:228
@@ -14032,7 +14033,7 @@ msgstr "Palauta Stellariumin mukana tulleet oletusasetukset"
 msgid "Restore defaults"
 msgstr "Palauta oletusarvot"
 
-#: src/ui_configurationDialog.h:1969
+#: src/ui_configurationDialog.h:1945
 msgid ""
 "Save either the current FOV and direction of view or all the current options"
 " for use at next startup. Restoring default settings requires a restart of "
@@ -14042,298 +14043,298 @@ msgstr ""
 "asetukset käytettäväksi seuraavassa käynnistyksessä. Oletusasetusten "
 "palauttaminen vaatii Stellariumin uudelleenkäynnistyksen."
 
-#: src/ui_configurationDialog.h:1971
+#: src/ui_configurationDialog.h:1947
 msgid "The vertical field (height) of your view when Stellarium starts"
 msgstr "Pystysuuntainen näkökenttä (korkeus) kun Stellarium käynnistyy"
 
-#: src/ui_configurationDialog.h:1974
+#: src/ui_configurationDialog.h:1950
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Katselusuunta Stellariumin käynnistyessä"
 
-#: src/ui_configurationDialog.h:1978
+#: src/ui_configurationDialog.h:1954
 msgid "Display user customized information"
 msgstr "Näytä käyttäjän mukautetut tiedot"
 
-#: src/ui_configurationDialog.h:1980
+#: src/ui_configurationDialog.h:1956
 msgctxt "info group name"
 msgid "Customized"
 msgstr "Mukautettu"
 
-#: src/ui_configurationDialog.h:1982
+#: src/ui_configurationDialog.h:1958
 msgid "Display all information available"
 msgstr "Näytä kaikki saatavilla olevat tiedot"
 
-#: src/ui_configurationDialog.h:1984
+#: src/ui_configurationDialog.h:1960
 msgctxt "info group name"
 msgid "All available"
 msgstr "Kaikki saatavilla olevat"
 
-#: src/ui_configurationDialog.h:1986
+#: src/ui_configurationDialog.h:1962
 msgid "Display no information"
 msgstr "Älä näytä tietoja"
 
-#: src/ui_configurationDialog.h:1988
+#: src/ui_configurationDialog.h:1964
 msgctxt "info group name"
 msgid "None"
 msgstr "Ei mitään"
 
-#: src/ui_configurationDialog.h:1990
+#: src/ui_configurationDialog.h:1966
 msgid "Display less information"
 msgstr "Näytä vähemmän tietoja"
 
-#: src/ui_configurationDialog.h:1992
+#: src/ui_configurationDialog.h:1968
 msgctxt "info group name"
 msgid "Short"
 msgstr "Lyhyt"
 
-#: src/ui_configurationDialog.h:1994
+#: src/ui_configurationDialog.h:1970
 msgid "Display a preconfigured set of information"
 msgstr "Näytä valmiiksi määritellyt tiedot"
 
-#: src/ui_configurationDialog.h:1996
+#: src/ui_configurationDialog.h:1972
 msgctxt "info group name"
 msgid "Default"
 msgstr "Oletus"
 
-#: src/ui_configurationDialog.h:1997
+#: src/ui_configurationDialog.h:1973
 msgid "Displayed fields"
 msgstr "Näytettävät tiedot"
 
-#: src/ui_configurationDialog.h:1999
+#: src/ui_configurationDialog.h:1975
 msgctxt "hour angle"
 msgid "Equatorial coordinates, equinox of date"
 msgstr "Ekvatoriaaliset koordinaatit, nykyinen epookki"
 
-#: src/ui_configurationDialog.h:2001
+#: src/ui_configurationDialog.h:1977
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
 msgid "Hour angle/Declination"
 msgstr "Tuntikulma/deklinaatio"
 
-#: src/ui_configurationDialog.h:2003
+#: src/ui_configurationDialog.h:1979
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr "Ekliptikaaliset koordinaatit, nykyinen epookki (vain Maalle)"
 
-#: src/ui_configurationDialog.h:2005
+#: src/ui_configurationDialog.h:1981
 msgid "Ecliptic coordinates (of date)"
 msgstr "Ekliptikaaliset koordinaatit (nykyiset)"
 
-#: src/ui_configurationDialog.h:2007
+#: src/ui_configurationDialog.h:1983
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr "Ekvatoriaaliset koordinaatit, J2000.0"
 
-#: src/ui_configurationDialog.h:2009
+#: src/ui_configurationDialog.h:1985
 msgid "Right ascension/Declination (J2000)"
 msgstr "Rektaskensio/deklinaatio (J2000)"
 
-#: src/ui_configurationDialog.h:2010
+#: src/ui_configurationDialog.h:1986
 msgid "Absolute magnitude"
 msgstr "Absoluuttinen magnitudi"
 
-#: src/ui_configurationDialog.h:2011
+#: src/ui_configurationDialog.h:1987
 msgid "Supergalactic coordinates"
 msgstr "Supergalaktiset koordinaatit"
 
-#: src/ui_configurationDialog.h:2013
+#: src/ui_configurationDialog.h:1989
 msgid "Ecliptic coordinates, equinox J2000.0"
 msgstr "Ekliptikaaliset koordinaatit, epookki J2000.0"
 
-#: src/ui_configurationDialog.h:2015
+#: src/ui_configurationDialog.h:1991
 msgid "Ecliptic coordinates (J2000)"
 msgstr "Ekliptikaaliset koordinaatit (J2000)"
 
-#: src/ui_configurationDialog.h:2017
+#: src/ui_configurationDialog.h:1993
 msgid "Velocity"
 msgstr "Nopeus"
 
-#: src/ui_configurationDialog.h:2019
+#: src/ui_configurationDialog.h:1995
 msgctxt "right ascension"
 msgid "Equatorial coordinates, equinox of date"
 msgstr "Ekvatoriaaliset koordinaatit, nykyinen epookki"
 
-#: src/ui_configurationDialog.h:2021
+#: src/ui_configurationDialog.h:1997
 msgid "Right ascension/Declination (of date)"
 msgstr "Rektaskensio/deklinaatio (nykyinen)"
 
-#: src/ui_configurationDialog.h:2022
+#: src/ui_configurationDialog.h:1998
 msgid "Sidereal time"
 msgstr "Tähtiaika"
 
-#: src/ui_configurationDialog.h:2026
+#: src/ui_configurationDialog.h:2002
 msgid "Proper Motion"
 msgstr "Ominaisliike"
 
-#: src/ui_configurationDialog.h:2027
+#: src/ui_configurationDialog.h:2003
 msgid "Galactic coordinates"
 msgstr "Galaktiset koordinaatit"
 
-#: src/ui_configurationDialog.h:2029
+#: src/ui_configurationDialog.h:2005
 msgid "The type of the object (star, planet, etc.)"
 msgstr "Kohteen tyyppi (tähti, planeetta, jne.)"
 
-#: src/ui_configurationDialog.h:2032
+#: src/ui_configurationDialog.h:2008
 msgid "Additional coordinates (from plugins)"
 msgstr "Lisäkoordinaatit (laajennuksista)"
 
-#: src/ui_configurationDialog.h:2038
+#: src/ui_configurationDialog.h:2014
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:270
 msgid "3-letter IAU constellation abbreviation"
 msgstr "IAU:n kolmikirjaiminen tähtikuviolyhenne"
 
-#: src/ui_configurationDialog.h:2042
+#: src/ui_configurationDialog.h:2018
 msgid "Angular or physical size"
 msgstr "Kulmaläpimitta tai todellinen koko"
 
-#: src/ui_configurationDialog.h:2045
+#: src/ui_configurationDialog.h:2021
 msgid "Visual magnitude"
 msgstr "Visuaalinen magnitudi"
 
-#: src/ui_configurationDialog.h:2047
+#: src/ui_configurationDialog.h:2023
 msgid "Horizontal coordinates"
 msgstr "Horisontaaliset koordinaatit"
 
-#: src/ui_configurationDialog.h:2049
+#: src/ui_configurationDialog.h:2025
 msgid "Azimuth/Altitude"
 msgstr "Atsimuutti/korkeus"
 
-#: src/ui_configurationDialog.h:2050
+#: src/ui_configurationDialog.h:2026
 msgid "Catalog number(s)"
 msgstr "Luettelonumero(t)"
 
-#: src/ui_configurationDialog.h:2053
+#: src/ui_configurationDialog.h:2029
 msgid "Elongation and phase angle"
 msgstr "Elognaatio ja vaihekulma"
 
-#: src/ui_configurationDialog.h:2057
+#: src/ui_configurationDialog.h:2033
 msgid "Spectral class, nebula type, etc."
 msgstr "Spektriluokka, sumutyyppi, jne."
 
-#: src/ui_configurationDialog.h:2059
+#: src/ui_configurationDialog.h:2035
 msgid "Additional information"
 msgstr "Lisätietoja"
 
-#: src/ui_configurationDialog.h:2061
+#: src/ui_configurationDialog.h:2037
 msgid "Show Solar and Lunar positions if observed from Earth"
 msgstr "Näytä auringon ja kuun sijainnit, jos niitä tarkastellaan maasta"
 
-#: src/ui_configurationDialog.h:2063
+#: src/ui_configurationDialog.h:2039
 msgid "Solar and Lunar position"
 msgstr "Auringon ja kuun sijainti"
 
-#: src/ui_configurationDialog.h:2064
+#: src/ui_configurationDialog.h:2040
 msgid "Star catalog updates"
 msgstr "Tähtiluetteloiden päivitykset"
 
-#: src/ui_configurationDialog.h:2066
+#: src/ui_configurationDialog.h:2042
 msgid "Click here to start downloading"
 msgstr "Napsauta tästä aloittaaksesi haku"
 
-#: src/ui_configurationDialog.h:2068
+#: src/ui_configurationDialog.h:2044
 msgid "Download this file to view even more stars"
 msgstr "Hae tämä tiedosto näyttääkseni enemmän tähtiä"
 
-#: src/ui_configurationDialog.h:2070
+#: src/ui_configurationDialog.h:2046
 msgid "Restart the download"
 msgstr "Aloita haku uudelleen"
 
-#: src/ui_configurationDialog.h:2072
+#: src/ui_configurationDialog.h:2048
 msgid "Retry"
 msgstr "Yritä uudelleen"
 
-#: src/ui_configurationDialog.h:2074
+#: src/ui_configurationDialog.h:2050
 msgid "Stop the download. You can always restart it later"
 msgstr "Keskeytä haku. Voit aina aloittaa sen myöhemmin uudelleen"
 
-#: src/ui_configurationDialog.h:2077
+#: src/ui_configurationDialog.h:2053
 msgid "Additional information settings"
 msgstr "Lisätietojen asetukset"
 
-#: src/ui_configurationDialog.h:2078
+#: src/ui_configurationDialog.h:2054
 msgid "Short notation for units of surface brightness"
 msgstr "Lyhyt merkintä pinnan kirkkauden yksiköille"
 
-#: src/ui_configurationDialog.h:2079
+#: src/ui_configurationDialog.h:2055
 msgid "Use mag/arcsec^2 for surface brightness"
 msgstr "Käytä mag/arcsec^2:ta pinnan kirkkauteen"
 
-#: src/ui_configurationDialog.h:2080
+#: src/ui_configurationDialog.h:2056
 msgid "Tabular output for coordinates and time"
 msgstr "Taulukkotulostus koordinaateille ja ajalle"
 
-#: src/ui_configurationDialog.h:2082
+#: src/ui_configurationDialog.h:2058
 msgid "Use decimal degrees for coordinates"
 msgstr "Käytä desimaaliasteita koordinaateille"
 
-#: src/ui_configurationDialog.h:2084
+#: src/ui_configurationDialog.h:2060
 msgid "Use decimal degrees"
 msgstr "Käytä desimaaliasteita"
 
-#: src/ui_configurationDialog.h:2086
+#: src/ui_configurationDialog.h:2062
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr "Ota käyttöön atsimuutin laskemiseksi etelästä länteen."
 
-#: src/ui_configurationDialog.h:2088
+#: src/ui_configurationDialog.h:2064
 msgid "Azimuth from South"
 msgstr "Atsimuutti etelästä laskien"
 
-#: src/ui_configurationDialog.h:2089
+#: src/ui_configurationDialog.h:2065
 msgid "Designations for celestial coordinate systems"
 msgstr "Taivaankoordinaattijärjestelmien nimitykset"
 
-#: src/ui_configurationDialog.h:2090
+#: src/ui_configurationDialog.h:2066
 msgid "Show additional buttons"
 msgstr "Näytä lisäpainikkeet"
 
-#: src/ui_configurationDialog.h:2092
+#: src/ui_configurationDialog.h:2068
 msgid "Enable a feature to store favorite views."
 msgstr "Salli suosikkinäkymien tallennusominaisuus."
 
-#: src/ui_configurationDialog.h:2096
+#: src/ui_configurationDialog.h:2072
 msgid "A button to toggle galactic grid"
 msgstr "Painike galaktisen asteikon valintaan"
 
-#: src/ui_configurationDialog.h:2102
+#: src/ui_configurationDialog.h:2078
 msgid "A button to toggle equatorial J2000 grid"
 msgstr "Painike ekvatoriaaliasteikon (J2000) valintaan"
 
-#: src/ui_configurationDialog.h:2104
+#: src/ui_configurationDialog.h:2080
 msgid "ICRS grid"
 msgstr "ICRS ruudukko"
 
-#: src/ui_configurationDialog.h:2106
+#: src/ui_configurationDialog.h:2082
 msgid "A button to toggle ecliptic grid of date"
 msgstr "Painike nykyhetken ekliptikaalisen asteikon valintaan"
 
-#: src/ui_configurationDialog.h:2112 src/ui_configurationDialog.h:2116
-#: src/ui_configurationDialog.h:2140 src/ui_configurationDialog.h:2144
-#: src/ui_configurationDialog.h:2148 src/ui_configurationDialog.h:2152
+#: src/ui_configurationDialog.h:2088 src/ui_configurationDialog.h:2092
+#: src/ui_configurationDialog.h:2116 src/ui_configurationDialog.h:2120
+#: src/ui_configurationDialog.h:2124 src/ui_configurationDialog.h:2128
 msgid "Show button in addition to keyboard shortcut?"
 msgstr "Näytetäänkö painike pikanäppäimen lisäksi?"
 
-#: src/ui_configurationDialog.h:2120
+#: src/ui_configurationDialog.h:2096
 msgid "Toggle display of nebula images."
 msgstr "Näytä/poista tähtisumujen kuvat."
 
-#: src/ui_configurationDialog.h:2122
+#: src/ui_configurationDialog.h:2098
 msgid "Nebula background"
 msgstr "Sumutausta"
 
-#: src/ui_configurationDialog.h:2124
+#: src/ui_configurationDialog.h:2100
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Pysty- ja vaakapeilauksen painikkeet päälle/pois."
 
-#: src/ui_configurationDialog.h:2126
+#: src/ui_configurationDialog.h:2102
 msgid "Flip buttons"
 msgstr "Kääntöpainikkeet"
 
-#: src/ui_configurationDialog.h:2128
+#: src/ui_configurationDialog.h:2104
 msgid "Toggle display of the button for the Digitized Sky Survey."
 msgstr "Näytä/poista painike Digital Sky Survey -kuvien näyttämiseen."
 
-#: src/ui_configurationDialog.h:2130
+#: src/ui_configurationDialog.h:2106
 msgid "DSS survey"
 msgstr "DSS-kysely"
 
-#: src/ui_configurationDialog.h:2132
+#: src/ui_configurationDialog.h:2108
 msgid ""
 "Toggle display of the button for the HiPS Surveys. Select a survey in the "
 "View settings."
@@ -14341,49 +14342,49 @@ msgstr ""
 "Näytä/poista painike HiPS-kartoituksille. Valitse kartoitus "
 "näyttöasetuksista."
 
-#: src/ui_configurationDialog.h:2134
+#: src/ui_configurationDialog.h:2110
 msgid "HiPS Surveys"
 msgstr "HiPS-tutkimukset"
 
-#: src/ui_configurationDialog.h:2136
+#: src/ui_configurationDialog.h:2112
 msgid "Toggle the usage of background under GUI buttons"
 msgstr "Valitse/poista taustan käyttö käyttöliittymäpainikkeiden alla"
 
-#: src/ui_configurationDialog.h:2138
+#: src/ui_configurationDialog.h:2114
 msgid "Use buttons background"
 msgstr "Käytä painikkeiden taustoja"
 
-#: src/ui_configurationDialog.h:2146
+#: src/ui_configurationDialog.h:2122
 msgid "Centering button"
 msgstr "Keskityspainike"
 
-#: src/ui_configurationDialog.h:2150
+#: src/ui_configurationDialog.h:2126
 msgid "Fullscreen button"
 msgstr "Kokoruiutu-painike"
 
-#: src/ui_configurationDialog.h:2154
+#: src/ui_configurationDialog.h:2130
 msgid "Quit button"
 msgstr "Poistu-painike"
 
-#: src/ui_configurationDialog.h:2155
+#: src/ui_configurationDialog.h:2131
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "Aloituspäiväys ja -aika"
 
-#: src/ui_configurationDialog.h:2156
+#: src/ui_configurationDialog.h:2132
 msgid "Stop clock when starting"
 msgstr "Pysäytä kello käynnistyksen yhteydessä"
 
-#: src/ui_configurationDialog.h:2158
+#: src/ui_configurationDialog.h:2134
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr ""
 "Käytä erikseen määriteltyä päiväystä ja aikaa Stellariumin käynnistyessä"
 
-#: src/ui_configurationDialog.h:2160
+#: src/ui_configurationDialog.h:2136
 msgid "Other:"
 msgstr "Muu:"
 
-#: src/ui_configurationDialog.h:2162
+#: src/ui_configurationDialog.h:2138
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -14391,27 +14392,27 @@ msgstr ""
 "Asettaa simulaation ajan seuraavaksi tähän asetetuksi kuluvan vurokauden "
 "ajanhetkeksi Stellariumin käynnistyessä."
 
-#: src/ui_configurationDialog.h:2164
+#: src/ui_configurationDialog.h:2140
 msgid "System date at:"
 msgstr "Järjestelmän päiväys:"
 
-#: src/ui_configurationDialog.h:2166
+#: src/ui_configurationDialog.h:2142
 msgid "Use current local date and time"
 msgstr "Käytä paikallista päivämäärää ja aikaa"
 
-#: src/ui_configurationDialog.h:2168
+#: src/ui_configurationDialog.h:2144
 msgid "use current"
 msgstr "Käytä nykyistä"
 
-#: src/ui_configurationDialog.h:2170
+#: src/ui_configurationDialog.h:2146
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Käynnistää Stellariumin järjestelmän päiväyksellä ja ajalla"
 
-#: src/ui_configurationDialog.h:2172
+#: src/ui_configurationDialog.h:2148
 msgid "System date and time"
 msgstr "Järjestelmän päiväys ja aika"
 
-#: src/ui_configurationDialog.h:2174
+#: src/ui_configurationDialog.h:2150
 msgid ""
 "These settings control the way time and date are displayed in the bottom "
 "bar."
@@ -14419,52 +14420,52 @@ msgstr ""
 "Nämä asetukset määrittelevät, miten aika ja päivämäärä näytetään "
 "alapalkissa."
 
-#: src/ui_configurationDialog.h:2176
+#: src/ui_configurationDialog.h:2152
 msgid "Display formats of date and time"
 msgstr "Ajan ja päivämäärän esitysmuoto"
 
-#: src/ui_configurationDialog.h:2177
+#: src/ui_configurationDialog.h:2153
 msgid "and time:"
 msgstr "ja aika:"
 
-#: src/ui_configurationDialog.h:2178
+#: src/ui_configurationDialog.h:2154
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:429
 msgid "Date:"
 msgstr "Päivämäärä:"
 
-#: src/ui_configurationDialog.h:2179
+#: src/ui_configurationDialog.h:2155
 msgid "Time correction"
 msgstr "Ajan korjaus"
 
-#: src/ui_configurationDialog.h:2182
+#: src/ui_configurationDialog.h:2158
 msgid "Edit equation"
 msgstr "Muokkaa yhtälöä"
 
-#: src/ui_configurationDialog.h:2184
+#: src/ui_configurationDialog.h:2160
 msgid "Planetarium options"
 msgstr "Planetaarioasetukset"
 
-#: src/ui_configurationDialog.h:2186
+#: src/ui_configurationDialog.h:2162
 msgid "Hides the mouse cursor when inactive"
 msgstr "Piilota hiiren osoitin ei-aktiivisessa tilassa"
 
-#: src/ui_configurationDialog.h:2188
+#: src/ui_configurationDialog.h:2164
 msgid "Mouse cursor timeout:"
 msgstr "Hiiren osoittimen aikakatkaisu:"
 
-#: src/ui_configurationDialog.h:2190
+#: src/ui_configurationDialog.h:2166
 msgid "seconds"
 msgstr "sekuntia"
 
-#: src/ui_configurationDialog.h:2193
+#: src/ui_configurationDialog.h:2169
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Peitä päänäkymästä kaikki keskusympyrän ulkopuolinen"
 
-#: src/ui_configurationDialog.h:2195
+#: src/ui_configurationDialog.h:2171
 msgid "Disc viewport"
 msgstr "Putkinäkymä"
 
-#: src/ui_configurationDialog.h:2197
+#: src/ui_configurationDialog.h:2173
 msgid ""
 "Kinetic scrolling means dragging text panels directly instead of dragging "
 "window handles."
@@ -14472,23 +14473,23 @@ msgstr ""
 "Kineettinen vieritys tarkoittaa tekstipaneelien vetämistä suoraan ikkunan "
 "kahvojen vetämisen sijaan."
 
-#: src/ui_configurationDialog.h:2199
+#: src/ui_configurationDialog.h:2175
 msgid "Use kinetic scrolling"
 msgstr "Käytä kineettistä vieritystä"
 
-#: src/ui_configurationDialog.h:2201 src/ui_configurationDialog.h:2203
+#: src/ui_configurationDialog.h:2177 src/ui_configurationDialog.h:2179
 msgid "Info text color at daylight"
 msgstr "Tietotekstin väri päivänvalossa"
 
-#: src/ui_configurationDialog.h:2205
+#: src/ui_configurationDialog.h:2181
 msgid "Allow mouse to pan (drag)"
 msgstr "Salli hiiren panoroida (raahata)"
 
-#: src/ui_configurationDialog.h:2207
+#: src/ui_configurationDialog.h:2183
 msgid "Enable mouse navigation"
 msgstr "Salli hiirellä liikkuminen"
 
-#: src/ui_configurationDialog.h:2209
+#: src/ui_configurationDialog.h:2185
 msgid ""
 "Parallax is the apparent shift in the position of an object when viewed from"
 " two different points."
@@ -14496,11 +14497,11 @@ msgstr ""
 "Parallaksi on näennäinen muutos kohteen sijainnissa katsottuna kahdesta eri "
 "pisteestä."
 
-#: src/ui_configurationDialog.h:2213
+#: src/ui_configurationDialog.h:2189
 msgid "Exaggerate parallax (for didactic explanations)"
 msgstr "Liioittele parallaksia (opetuksellisia selityksiä varten)"
 
-#: src/ui_configurationDialog.h:2216
+#: src/ui_configurationDialog.h:2192
 msgid ""
 "Annual aberration is an annual wobble in positions, amounting to max. about "
 "20 arcseconds for observers on Earth."
@@ -14508,30 +14509,30 @@ msgstr ""
 "Vuotuinen poikkeama on vuotuista heilahtelua paikoissa, joka on enintään. "
 "noin 20 kaarisekuntia tarkkailijoille maan päällä."
 
-#: src/ui_configurationDialog.h:2218
+#: src/ui_configurationDialog.h:2194
 msgid "Aberration"
 msgstr "Poikkeama"
 
-#: src/ui_configurationDialog.h:2220
+#: src/ui_configurationDialog.h:2196
 msgid "Exaggerate aberration (for didactic explanations)"
 msgstr "Liioittele aberraatiota (didaktisia selityksiä varten)"
 
-#: src/ui_configurationDialog.h:2222
+#: src/ui_configurationDialog.h:2198
 msgid "Include "
 msgstr "Sisältää"
 
-#: src/ui_configurationDialog.h:2224
+#: src/ui_configurationDialog.h:2200
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 "Nutaatio tarkoittaa Maan akselin muutamien kaarisekuntien laajuista "
 "huojuntaa."
 
-#: src/ui_configurationDialog.h:2226
+#: src/ui_configurationDialog.h:2202
 msgid "Nutation"
 msgstr "Nutaatio"
 
-#: src/ui_configurationDialog.h:2228
+#: src/ui_configurationDialog.h:2204
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
@@ -14539,19 +14540,19 @@ msgstr ""
 "Ota käyttöön havainnoijan sijoittamiseksi planeetan pinnalle (suositus). Jos"
 " valinta on poistettu käytöstä, havainnoija asetetaan planeetan keskustaan."
 
-#: src/ui_configurationDialog.h:2230
+#: src/ui_configurationDialog.h:2206
 msgid "Topocentric coordinates"
 msgstr "Paikkakeskiset koordinaatit"
 
-#: src/ui_configurationDialog.h:2231
+#: src/ui_configurationDialog.h:2207
 msgid "Framerate intent:"
 msgstr "Ruudunpäivitysnopeus:"
 
-#: src/ui_configurationDialog.h:2232
+#: src/ui_configurationDialog.h:2208
 msgid "min:"
 msgstr "minimi:"
 
-#: src/ui_configurationDialog.h:2234
+#: src/ui_configurationDialog.h:2210
 msgid ""
 "Minimum intended FPS between user interaction. Set very low to conserve "
 "energy or save CPU use."
@@ -14559,35 +14560,35 @@ msgstr ""
 "Pienin suunniteltu FPS käyttäjän vuorovaikutuksen välillä. Aseta erittäin "
 "alhaiseksi säästääksesi energiaa tai säästääksesi prosessorin käyttöä."
 
-#: src/ui_configurationDialog.h:2236
+#: src/ui_configurationDialog.h:2212
 msgid "max:"
 msgstr "maksimi:"
 
-#: src/ui_configurationDialog.h:2238
+#: src/ui_configurationDialog.h:2214
 msgid "Maximum allowed FPS. 1000 just means \"as fast as possible\". "
 msgstr "Suurin sallittu FPS. 1000 tarkoittaa vain \"mahdollisimman nopeasti\"."
 
-#: src/ui_configurationDialog.h:2241
+#: src/ui_configurationDialog.h:2217
 msgid "Allow keyboard to pan and zoom"
 msgstr "Salli siirtyminen ja lähennys/loitonnus näppäimistöllä"
 
-#: src/ui_configurationDialog.h:2243
+#: src/ui_configurationDialog.h:2219
 msgid "Enable keyboard navigation"
 msgstr "Salli liikkuminen näppäimistöllä"
 
-#: src/ui_configurationDialog.h:2247
+#: src/ui_configurationDialog.h:2223
 msgid "Dithering"
 msgstr "Ditterointi"
 
-#: src/ui_configurationDialog.h:2249
+#: src/ui_configurationDialog.h:2225
 msgid "Align labels with the screen center"
 msgstr "Suuntaa nimet näytön keskustan mukaan"
 
-#: src/ui_configurationDialog.h:2251
+#: src/ui_configurationDialog.h:2227
 msgid "Gravity labels"
 msgstr "Gravitaationimet"
 
-#: src/ui_configurationDialog.h:2253
+#: src/ui_configurationDialog.h:2229
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -14595,11 +14596,11 @@ msgstr ""
 "Pallopeilikorjausta käytetään, kun Stellarium heijastetaan pallopeilille "
 "halvoissa planetaariojärjestelmissä."
 
-#: src/ui_configurationDialog.h:2255
+#: src/ui_configurationDialog.h:2231
 msgid "Spheric mirror distortion"
 msgstr "Pallopeilikorjaus"
 
-#: src/ui_configurationDialog.h:2257
+#: src/ui_configurationDialog.h:2233
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -14607,53 +14608,53 @@ msgstr ""
 "Kun käytössä, ”automaattinen loitonnus” -näppäin asettaa myös "
 "aloituskatselusuunnan"
 
-#: src/ui_configurationDialog.h:2259
+#: src/ui_configurationDialog.h:2235
 msgid "Auto-direction at zoom out"
 msgstr "Automaattinen suunta loitonnuksessa"
 
-#: src/ui_configurationDialog.h:2261
+#: src/ui_configurationDialog.h:2237
 msgid "Force date/time tab and focus on day input when activating date panel"
 msgstr ""
 "Pakota päivämäärä/aika-välilehti ja keskity päivän syöttöön, kun aktivoit "
 "päivämääräpaneelin"
 
-#: src/ui_configurationDialog.h:2263
+#: src/ui_configurationDialog.h:2239
 msgid "Set keyboard focus to day input"
 msgstr "Aseta näppäimistön kohdistus päiväsyöttöön"
 
-#: src/ui_configurationDialog.h:2265
+#: src/ui_configurationDialog.h:2241
 msgid "Allow mouse to zoom (mousewheel)"
 msgstr "Salli hiiren lähentää/loitontaa (hiiren rulla)"
 
-#: src/ui_configurationDialog.h:2267
+#: src/ui_configurationDialog.h:2243
 msgid "Enable mouse zooming"
 msgstr "Salli hiirellä lähentäminen/loitontaminen"
 
-#: src/ui_configurationDialog.h:2269
+#: src/ui_configurationDialog.h:2245
 msgid "Flash a short message when toggling mount mode."
 msgstr "Vilauta lyhyt viesti vaihdettaessa jalustatyyppiä."
 
-#: src/ui_configurationDialog.h:2271
+#: src/ui_configurationDialog.h:2247
 msgid "Indication for mount mode"
 msgstr "Jalustatyyppin tunniste"
 
-#: src/ui_configurationDialog.h:2273
+#: src/ui_configurationDialog.h:2249
 msgid "Info text color for overwrite"
 msgstr "Tietotekstin väri päällekirjoitusta varten"
 
-#: src/ui_configurationDialog.h:2276
+#: src/ui_configurationDialog.h:2252
 msgid "Set one color for text in info panel for all objects"
 msgstr "Aseta tietopaneelin tekstille yksi väri kaikille kohteille"
 
-#: src/ui_configurationDialog.h:2278
+#: src/ui_configurationDialog.h:2254
 msgid "Overwrite text color"
 msgstr "Korvaavan tekstin väri"
 
-#: src/ui_configurationDialog.h:2279
+#: src/ui_configurationDialog.h:2255
 msgid "Additional threads for solar system"
 msgstr "Lisäsäie aurinkokuntaan"
 
-#: src/ui_configurationDialog.h:2281
+#: src/ui_configurationDialog.h:2257
 msgid ""
 "A few additional threads may improve speed with many solar system objects. "
 "Observe what works best on your multicore system."
@@ -14661,72 +14662,72 @@ msgstr ""
 "Muutama lisäsäie voi parantaa nopeutta monien aurinkokunnan kohteiden "
 "kanssa. Tarkkaile, mikä toimii parhaiten moniytimisessä järjestelmässäsi."
 
-#: src/ui_configurationDialog.h:2283
+#: src/ui_configurationDialog.h:2259
 msgid "Font size: Screen"
 msgstr "Kirjasinkoko: Näyttö"
 
-#: src/ui_configurationDialog.h:2285
+#: src/ui_configurationDialog.h:2261
 msgid "Base font size for on-screen text"
 msgstr "Peruskirjasinkoko näytön teksteille"
 
-#: src/ui_configurationDialog.h:2288
+#: src/ui_configurationDialog.h:2264
 msgid "Graphical user interface"
 msgstr "Graafinen käyttöliittymä"
 
-#: src/ui_configurationDialog.h:2290
+#: src/ui_configurationDialog.h:2266
 msgctxt "abbreviation"
 msgid "GUI"
 msgstr "GUI"
 
-#: src/ui_configurationDialog.h:2292
+#: src/ui_configurationDialog.h:2268
 msgid "Base font size for dialogs"
 msgstr "Kirjasimen peruskoko ikkunoissa"
 
-#: src/ui_configurationDialog.h:2295
+#: src/ui_configurationDialog.h:2271
 msgid "Pre-select fonts for a particular writing system"
 msgstr "Valitse kirjasimet etukäteen tietylle kirjoitusjärjestelmälle"
 
-#: src/ui_configurationDialog.h:2298
+#: src/ui_configurationDialog.h:2274
 msgid "Application font"
 msgstr "Sovelluksen kirjasin"
 
-#: src/ui_configurationDialog.h:2301
+#: src/ui_configurationDialog.h:2277
 msgid "Store font settings"
 msgstr "allenna kirjasinasetukset"
 
-#: src/ui_configurationDialog.h:2304
+#: src/ui_configurationDialog.h:2280
 msgid "Screen button scale:"
 msgstr "Näytön painikkeen asteikko:"
 
-#: src/ui_configurationDialog.h:2305
+#: src/ui_configurationDialog.h:2281
 msgid "Screenshots"
 msgstr "Kuvankaappaukset"
 
-#: src/ui_configurationDialog.h:2306
+#: src/ui_configurationDialog.h:2282
 msgid "Screenshot Directory"
 msgstr "Kuvankaappaushakemisto"
 
-#: src/ui_configurationDialog.h:2309
+#: src/ui_configurationDialog.h:2285
 msgid "Rules for screenshot file naming"
 msgstr "Säännöt kuvakaappaustiedostojen nimeämiselle"
 
-#: src/ui_configurationDialog.h:2311
+#: src/ui_configurationDialog.h:2287
 msgid "File format"
 msgstr "Tiedostomuoto"
 
-#: src/ui_configurationDialog.h:2312
+#: src/ui_configurationDialog.h:2288
 msgid "Invert colors"
 msgstr "Käänteiset värit"
 
-#: src/ui_configurationDialog.h:2313
+#: src/ui_configurationDialog.h:2289
 msgid "Custom size"
 msgstr "Oma koko"
 
-#: src/ui_configurationDialog.h:2314
+#: src/ui_configurationDialog.h:2290
 msgid "dpi"
 msgstr "dpi"
 
-#: src/ui_configurationDialog.h:2316
+#: src/ui_configurationDialog.h:2292
 msgid ""
 "Dots per Inch (for printing size computation in image metadata). Native "
 "print size in inches is then pixelSize/dpi."
@@ -14734,23 +14735,23 @@ msgstr ""
 "Pistettä tuumalle (tulostuskoon laskemiseen kuvan metatiedoissa). "
 "Alkuperäinen tulostuskoko tuumina on sitten pikselin koko / dpi."
 
-#: src/ui_configurationDialog.h:2320 src/ui_scriptConsole.h:387
+#: src/ui_configurationDialog.h:2296 src/ui_scriptConsole.h:387
 msgid "Close window when script runs"
 msgstr "Sulje ikkuna skriptiä suoritettaessa"
 
-#: src/ui_configurationDialog.h:2322
+#: src/ui_configurationDialog.h:2298
 msgid "Run the selected script"
 msgstr "Suorita valittu skripti"
 
-#: src/ui_configurationDialog.h:2326
+#: src/ui_configurationDialog.h:2302
 msgid "Stop a running script"
 msgstr "Pysäytä suoritettava skripti"
 
-#: src/ui_configurationDialog.h:2330
+#: src/ui_configurationDialog.h:2306
 msgid "Load at startup"
 msgstr "Lataa käynnistettäessä"
 
-#: src/ui_configurationDialog.h:2331
+#: src/ui_configurationDialog.h:2307
 msgid "configure"
 msgstr "Muuta asetuksia"
 
@@ -21896,8 +21897,8 @@ msgid "Clear list"
 msgstr "Tyhjennä luettelo"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:87
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:579
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:580
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:572
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:573
 msgid "Text User Interface"
 msgstr "Tekstikäyttöliittymä"
 
@@ -21974,128 +21975,124 @@ msgid "Time display format"
 msgstr "Ajan näyttömuoto"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:236
-msgid "Sky Language"
-msgstr "Taivaskulttuurin kieli"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "App Language"
 msgstr "Sovelluksen kieli"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:258
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
 msgid "Show stars"
 msgstr "Näytä tähdet"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:279
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:272
 msgid "Mag limit:"
 msgstr "Mag rajoite:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:284
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:277
 msgid "Use mag limit"
 msgstr "Käytä magnitudirajoitusta"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:315
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Colors"
 msgstr "Värit"
 
 #. TRANSLATORS: Refers to constellation art
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:331
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Art brightness:"
 msgstr "Tähdistökuvien kirkkaus:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:391
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:384
 msgid "Ecliptic line (J2000)"
 msgstr "Ekliptika (J2000)"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:398
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:391
 msgid "Nebula names"
 msgstr "Tähtisumujen nimet"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Nebula hints"
 msgstr "Tähtisumujen merkit"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:406
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Galaxy hints"
 msgstr "Galaksien osoittimet"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:410
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:403
 msgid "Dark nebulae hints"
 msgstr "Pimeiden sumujen osoittimet"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:414
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:407
 msgid "Clusters hints"
 msgstr "Tähtijoukkojen osoittimet"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:428
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:421
 msgid "Galactic equator line"
 msgstr "Galaktinen akvaattori"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:439
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:432
 msgid "Sky Background (default: black)"
 msgstr "Taivaan tausta (oletus: musta)"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:472
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:465
 msgid "Effects"
 msgstr "Efektit"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:486
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:479
 msgid "Setting landscape sets location"
 msgstr "Maiseman asettaminen määrittelee sijainnin"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:492
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:485
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Automaattinen loitonnus palauttaa aloituskatselusuunnan"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:497
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:490
 msgid "Zoom duration:"
 msgstr "Suurennuksen kesto:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:503
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:496
 msgid "Milky Way intensity:"
 msgstr "Linnunradan kirkkaus:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:509
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:502
 msgid "Milky Way saturation:"
 msgstr "Linnunradan kylläisyys:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:515
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:508
 msgid "Zodiacal light intensity:"
 msgstr "Eläinratavalon kirkkaus:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:537
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:530
 msgid "Run local script"
 msgstr "Suorita paikallinen skripti"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:543
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:536
 msgid "Stop running script"
 msgstr "Keskeytä suoritettava skripti"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:554
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:558
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:547
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:551
 msgid "Administration"
 msgstr "Ylläpito"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:564
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:557
 msgid "Load default configuration"
 msgstr "Hae oletusasetukset"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:565
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:558
 msgid "Save current configuration"
 msgstr "Tallenna nykyiset asetukset"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:568
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:561
 msgid "Shut down"
 msgstr "Sammuta"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:579
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:572
 msgid "Toggle TUI date&time"
 msgstr "Vaihda TUI-päiväykseen"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:580
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:573
 msgid "Toggle TUI object info"
 msgstr "Vaihda TUI-kohteen infoon"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:649
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:642
 msgid "[no TUI node]"
 msgstr "[ei TUI-solmua]"
 
