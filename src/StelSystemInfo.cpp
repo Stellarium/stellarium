@@ -314,7 +314,8 @@ void printSystemInfo()
 	int64_t freq = 0;
 	len = sizeof(freq);
 	sysctlbyname("machdep.tsc_freq", &freq, &len, nullptr, 0);
-        log(QString("CPU speed: %1 MHz").arg(freq/1000000));
+	if (freq>0)
+		log(QString("CPU speed: %1 MHz").arg(freq/1000000));
 
 	int ncpu = 0;
 	len = sizeof(ncpu);
