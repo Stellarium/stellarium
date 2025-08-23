@@ -857,7 +857,8 @@ void ViewDialog::updateHips()
 		QTreeWidgetItem* surveyItem = nullptr;
 		if (selectedIsPlanetary)
 		{
-			const auto& englishName = hips->getFrame();
+			const auto& frame = hips->getFrame();
+			const auto& englishName = hips->frameToPlanetName(frame);
 			const auto& group = hips->getGroup();
 			auto& planetData = planetarySurveys[englishName];
 			if(!planetData.planetItem)
@@ -866,7 +867,7 @@ void ViewDialog::updateHips()
 				if (!planet)
 				{
 					qWarning().nospace() << "Found a planetary survey with unknown frame: "
-					                     << englishName << ". Skipping it.";
+					                     << frame << ". Skipping it.";
 					continue;
 				}
 				planetData.planetItem = new QTreeWidgetItem(l, {planet->getNameI18n()});
