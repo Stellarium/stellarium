@@ -4199,7 +4199,7 @@ const QMap<Planet::ApparentMagnitudeAlgorithm, QString> SolarSystem::vMagAlgorit
 void SolarSystem::enableSurvey(const HipsSurveyP& colors, const HipsSurveyP& normals, const HipsSurveyP& horizons)
 {
 	Q_ASSERT(colors);
-	QString planetName = colors->getFrame();
+	QString planetName = HipsSurvey::frameToPlanetName(colors->getFrame());
 	PlanetP pl = searchByEnglishName(planetName);
 	if (!pl) return;
 

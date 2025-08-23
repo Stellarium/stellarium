@@ -69,6 +69,8 @@ public:
 	           const QMap<QString, QString>& hipslistProps, double releaseDate=0.0);
 	~HipsSurvey() override;
 
+	static QString frameToPlanetName(const QString& frame);
+
 	//! Get whether the survey is visible.
 	bool isVisible() const;
 

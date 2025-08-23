@@ -133,6 +133,13 @@ HipsSurvey::~HipsSurvey()
 {
 }
 
+QString HipsSurvey::frameToPlanetName(const QString& frame)
+{
+	if (frame == "ceres")
+		return "(1) ceres";
+	return frame;
+}
+
 void HipsSurvey::checkForPlanetarySurvey()
 {
 	planetarySurvey = !QStringList{"equatorial","galactic","ecliptic"}.contains(hipsFrame, Qt::CaseInsensitive) ||
