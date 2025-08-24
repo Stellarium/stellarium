@@ -397,7 +397,8 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		tile->order = order;
 		tile->pix = pix;
 		QString ext = getExt(properties["hips_tile_format"].toString());
-		const int texturePix = properties["type"].toString().isEmpty() ? shiftPix180deg(order, pix) : pix;
+		const bool isShifted = planetarySurvey && properties["type"].toString().isEmpty();
+		const int texturePix = isShifted ? shiftPix180deg(order, pix) : pix;
 		QUrl path = getUrlFor(QString("Norder%1/Dir%2/Npix%3.%4").arg(order).arg((texturePix / 10000) * 10000).arg(texturePix).arg(ext));
 		const StelTexture::StelTextureParams texParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, true);
 		tile->texture = texMgr.createTextureThread(path.url(), texParams, false);
