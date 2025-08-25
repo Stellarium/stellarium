@@ -229,7 +229,7 @@ void printSystemInfo()
 
 #ifdef Q_OS_LINUX
 	// CPU info
-	QString cpumodel = "unknown", hardware = "", model = "";
+	QString cpumodel = "unknown", freq = "", hardware = "", model = "", platform = "", machine = "";
 	int ncpu = 0;
 	bool cpuOK = false;
 	QFile infoFile("/proc/cpuinfo");
@@ -239,6 +239,7 @@ void printSystemInfo()
 	{
 		cpuOK = true;
 		bool readModel = true;
+		bool readClock = true;
 		while(!infoFile.peek(1).isEmpty())
 		{
 			QString line = infoFile.readLine();
@@ -251,34 +252,57 @@ void printSystemInfo()
 				cpumodel = line.split(":").last().trimmed();
 				readModel = false;
 			}
+			#if defined(__powerpc__) || defined(__powerpc64__)
+			if (line.startsWith("cpu", Qt::CaseInsensitive) && readModel)
+			{
+				cpumodel = line.split(":").last().trimmed();
+				readModel = false;
+			}
+			if (line.startsWith("clock", Qt::CaseInsensitive) && readClock)
+			{
+				double frequency = line.split(":").last().trimmed().replace("MHz", "").toDouble();
+				freq = QString("%1 MHz").arg(QString::number(qRound(frequency)));
+				readClock = false;
+			}
+			#endif
+
+			// for PowerPC computers
+			if (line.startsWith("platform", Qt::CaseInsensitive))
+				platform = line.split(":").last().trimmed();
+			if (line.startsWith("machine", Qt::CaseInsensitive))
+				machine = line.split(":").last().trimmed();
 
 			// for ARM-devices, such Raspberry Pi
 			if (line.startsWith("hardware", Qt::CaseInsensitive))
 				hardware = line.split(":").last().trimmed();
-			if (line.startsWith("model", Qt::CaseInsensitive) && !hardware.isEmpty())
+			if (line.startsWith("model", Qt::CaseInsensitive))
 				model = line.split(":").last().trimmed();
 		}
 		infoFile.close();
 	}
 
-	QString freq = "unknown";
 	infoFile.setFileName("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq");
 	if (infoFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		// frequency in kHz: https://www.kernel.org/doc/Documentation/cpu-freq/user-guide.txt
-		freq = QString::number( infoFile.readAll().toInt()/1000);
+		freq = QString("%1 MHz").arg(QString::number( infoFile.readAll().toInt()/1000));
 		infoFile.close();
 	}
 
 	if (cpuOK)
 	{
                 log(QString("CPU name: %1").arg(cpumodel));
+		if (!freq.isEmpty())
+			log(QString("CPU maximum speed: %1").arg(freq));
+                log(QString("CPU logical cores: %1").arg(ncpu));
 		if (!hardware.isEmpty())
                         log(QString("CPU hardware: %1").arg(hardware));
+		if (!platform.isEmpty())
+                        log(QString("Platform: %1").arg(platform));
 		if (!model.isEmpty())
-			log(QString("Device model: %1").arg(model));
-                log(QString("CPU maximum speed: %1 MHz").arg(freq));
-                log(QString("CPU logical cores: %1").arg(ncpu));
+			log(QString("Model: %1").arg(model));
+		if (!machine.isEmpty())
+			log(QString("Machine: %1").arg(machine));
 	}
 
 	// memory info
