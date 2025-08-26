@@ -242,9 +242,7 @@ void printSystemInfo()
                 #if defined(__powerpc__) || defined(__powerpc64__)
 		bool readClock = true;
                 #endif
-                #if defined(__e2k__)
-		bool readVndID = true;
-                #endif
+		bool readVendorId = true;
 		while(!infoFile.peek(1).isEmpty())
 		{
 			QString line = infoFile.readLine();
@@ -271,10 +269,10 @@ void printSystemInfo()
 			}
 			#endif
                         #if defined(__e2k__)
-			if (line.startsWith("vendor_id", Qt::CaseInsensitive) && readVndID)
+			if (line.startsWith("vendor_id", Qt::CaseInsensitive) && readVendorId)
 			{
 				vendor = line.split(":").last().trimmed();
-				readVndID = false;
+				readVendorId = false;
 			}
                         #endif
 
@@ -303,9 +301,10 @@ void printSystemInfo()
 
 	if (cpuOK)
 	{
-		if (!vendor.isEmpty())
-			cpumodel = QString("%1 %2").arg(vendor, cpumodel);
-                log(QString("CPU name: %1").arg(cpumodel));
+		if (readVendorId)
+			log(QString("CPU name: %1").arg(cpumodel));
+		else
+			log(QString("CPU name: %1 %2").arg(vendor, cpumodel));
 		if (!freq.isEmpty())
 			log(QString("CPU maximum speed: %1").arg(freq));
                 log(QString("CPU logical cores: %1").arg(ncpu));
