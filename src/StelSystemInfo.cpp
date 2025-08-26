@@ -238,9 +238,13 @@ void printSystemInfo()
 	else
 	{
 		cpuOK = true;
-		bool readModel = true;
+		bool readCpuModel = true;
+                #if defined(__powerpc__) || defined(__powerpc64__)
 		bool readClock = true;
+                #endif
+                #if defined(__e2k__)
 		bool readVndID = true;
+                #endif
 		while(!infoFile.peek(1).isEmpty())
 		{
 			QString line = infoFile.readLine();
@@ -248,16 +252,16 @@ void printSystemInfo()
 			if (line.startsWith("processor", Qt::CaseInsensitive))
 				ncpu++;
 
-			if (line.startsWith("model name", Qt::CaseInsensitive) && readModel)
+			if (line.startsWith("model name", Qt::CaseInsensitive) && readCpuModel)
 			{
 				cpumodel = line.split(":").last().trimmed();
-				readModel = false;
+				readCpuModel = false;
 			}
 			#if defined(__powerpc__) || defined(__powerpc64__)
-			if (line.startsWith("cpu", Qt::CaseInsensitive) && readModel)
+			if (line.startsWith("cpu", Qt::CaseInsensitive) && readCpuModel)
 			{
 				cpumodel = line.split(":").last().trimmed();
-				readModel = false;
+				readCpuModel = false;
 			}
 			if (line.startsWith("clock", Qt::CaseInsensitive) && readClock)
 			{
@@ -283,7 +287,7 @@ void printSystemInfo()
 			// for ARM-devices, such Raspberry Pi
 			if (line.startsWith("hardware", Qt::CaseInsensitive))
 				hardware = line.split(":").last().trimmed();
-			if (line.startsWith("model", Qt::CaseInsensitive) && !line.startsWith("model name", Qt::CaseInsensitive))
+			if (line.startsWith("model", Qt::CaseInsensitive))
 				model = line.split(":").last().trimmed();
 		}
 		infoFile.close();
@@ -309,7 +313,7 @@ void printSystemInfo()
                         log(QString("CPU hardware: %1").arg(hardware));
 		if (!platform.isEmpty())
                         log(QString("Platform: %1").arg(platform));
-		if (!model.isEmpty())
+		if (!model.isEmpty() && (!hardware.isEmpty() || !platform.isEmpty()))
 			log(QString("Model: %1").arg(model));
 		if (!machine.isEmpty())
 			log(QString("Machine: %1").arg(machine));
