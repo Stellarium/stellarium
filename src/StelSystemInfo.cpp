@@ -229,7 +229,7 @@ void printSystemInfo()
 
 #ifdef Q_OS_LINUX
 	// CPU info
-	QString cpumodel = "unknown", freq = "", hardware = "", model = "", platform = "", machine = "";
+	QString cpumodel = "unknown", freq = "", hardware = "", model = "", platform = "", machine = "", vendor = "";
 	int ncpu = 0;
 	bool cpuOK = false;
 	QFile infoFile("/proc/cpuinfo");
@@ -240,6 +240,7 @@ void printSystemInfo()
 		cpuOK = true;
 		bool readModel = true;
 		bool readClock = true;
+		bool readVndID = true;
 		while(!infoFile.peek(1).isEmpty())
 		{
 			QString line = infoFile.readLine();
@@ -265,6 +266,13 @@ void printSystemInfo()
 				readClock = false;
 			}
 			#endif
+                        #if defined(__e2k__)
+			if (line.startsWith("vendor_id", Qt::CaseInsensitive) && readVndID)
+			{
+				vendor = line.split(":").last().trimmed();
+				readVndID = false;
+			}
+                        #endif
 
 			// for PowerPC computers
 			if (line.startsWith("platform", Qt::CaseInsensitive))
@@ -275,7 +283,7 @@ void printSystemInfo()
 			// for ARM-devices, such Raspberry Pi
 			if (line.startsWith("hardware", Qt::CaseInsensitive))
 				hardware = line.split(":").last().trimmed();
-			if (line.startsWith("model", Qt::CaseInsensitive))
+			if (line.startsWith("model", Qt::CaseInsensitive) && !line.startsWith("model name", Qt::CaseInsensitive))
 				model = line.split(":").last().trimmed();
 		}
 		infoFile.close();
@@ -291,6 +299,8 @@ void printSystemInfo()
 
 	if (cpuOK)
 	{
+		if (!vendor.isEmpty())
+			cpumodel = QString("%1 %2").arg(vendor, cpumodel);
                 log(QString("CPU name: %1").arg(cpumodel));
 		if (!freq.isEmpty())
 			log(QString("CPU maximum speed: %1").arg(freq));
