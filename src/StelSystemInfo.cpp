@@ -232,6 +232,7 @@ void printSystemInfo()
 	QString cpumodel = "unknown", freq = "", hardware = "", model = "", platform = "", machine = "", vendor = "";
 	int ncpu = 0;
 	bool cpuOK = false;
+	bool readVendorId = false;
 	QFile infoFile("/proc/cpuinfo");
 	if (!infoFile.open(QIODevice::ReadOnly | QIODevice::Text))
 		log("Could not get CPU info.");
@@ -242,7 +243,6 @@ void printSystemInfo()
                 #if defined(__powerpc__) || defined(__powerpc64__)
 		bool readClock = true;
                 #endif
-		bool readVendorId = false;
 		while(!infoFile.peek(1).isEmpty())
 		{
 			QString line = infoFile.readLine();
