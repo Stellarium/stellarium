@@ -37,6 +37,7 @@
 #ifdef Q_OS_LINUX
 #include <sys/types.h>
 #include <sys/sysinfo.h>
+#include <cstdint>
 #endif
 
 // all BSD systems
