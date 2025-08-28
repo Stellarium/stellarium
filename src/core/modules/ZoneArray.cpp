@@ -31,15 +31,23 @@
 #include <Windows.h>
 #endif
 
-
 static unsigned int stel_bswap_32(unsigned int val)
 {
 	return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
 	       (((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
 }
 
-static float stel_bswap_32f(int val)
+static float stel_bswap_32f(float val)
 {
+    float f;
+    unsigned int u;
+    std::memcpy(&u, &val, sizeof(val));
+    u = (((u) & 0xff000000) >> 24) | (((u) & 0x00ff0000) >>  8) |
+        (((u) & 0x0000ff00) <<  8) | (((u) & 0x000000ff) << 24);
+    std::memcpy(&f, &u, sizeof(u));
+    return f;
+
+/*
     // Create a union to access the float as an unsigned int
     union {
         float f;
@@ -55,6 +63,7 @@ static float stel_bswap_32f(int val)
 
     // Return the float value from the union
     return u.f;
+*/
 }
 
 static const Vec3f north(0,0,1);
