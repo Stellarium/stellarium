@@ -89,25 +89,33 @@ void ScmSkyCultureExportDialog::saveSkyCulture()
 	}
 
 	QString skyCultureId     = currentSkyCulture->getId();
-	QDir skyCultureDirectory = QDir(skyCulturesPath + QDir::separator() + skyCultureId);
+	
+	// Let the user choose the export directory with skyCulturesPath as default
+	QDir skyCultureDirectory;
+	bool exportDirectoryChosen = chooseExportDirectory(skyCultureId, skyCultureDirectory);
+	if (!exportDirectoryChosen)
+	{
+		qWarning() << "SkyCultureMaker: Could not export sky culture. User cancelled or failed to choose directory.";
+		maker->setSkyCultureDialogInfoLabel("ERROR: Failed to choose export directory.");
+		return; // User cancelled or failed to choose directory
+	}
+	
 	if (skyCultureDirectory.exists())
 	{
 		qWarning() << "SkyCultureMaker: Sky culture with ID" << skyCultureId
-			   << "already exists. Cannot export.";
+			<< "already exists. Cannot export.";
 		maker->setSkyCultureDialogInfoLabel("ERROR: Sky culture with this ID already exists.");
 		// dont close the dialog here, so the user can delete the folder first
 		return;
 	}
 
 	// Create the sky culture directory
-	bool directorySuccessfully = skyCultureDirectory.mkpath(".");
-	if (!directorySuccessfully) // not possible use alternative user selected directory.
+	bool createdDirectorySuccessfully = skyCultureDirectory.mkpath(".");
+	if (!createdDirectorySuccessfully)
 	{
-		bool fallbackDirectorySuccessfully = chooseFallbackDirectory(skyCultureId, skyCultureDirectory);
-		if (!fallbackDirectorySuccessfully)
-		{
-			return;
-		}
+		maker->setSkyCultureDialogInfoLabel("ERROR: Failed to create sky culture directory.");
+		qWarning() << "SkyCultureMaker: Failed to create sky culture directory at" << skyCultureDirectory.absolutePath();
+		return;
 	}
 
 	// save illustrations before json, because the relative illustrations path is required for the json export
@@ -174,30 +182,24 @@ void ScmSkyCultureExportDialog::saveSkyCulture()
 	ScmSkyCultureExportDialog::close();
 }
 
-bool ScmSkyCultureExportDialog::chooseFallbackDirectory(const QString& skyCultureId, QDir& skyCultureDirectory)
+bool ScmSkyCultureExportDialog::chooseExportDirectory(const QString& skyCultureId, QDir& skyCultureDirectory)
 {
-	// 10 is maximum number of tries the user have to select a fallback directory
-	for (size_t i = 0; i < 10; i++)
+	QString selectedDirectory = QFileDialog::getExistingDirectory(nullptr, tr("Choose Export Directory"), skyCulturesPath);
+	if (selectedDirectory.isEmpty())
 	{
-		QString selectedDirectory = QFileDialog::getExistingDirectory(nullptr, tr("Open Directory"));
-		if (!QDir(selectedDirectory).exists())
-		{
-			maker->setSkyCultureDialogInfoLabel("ERROR: The selected directory is not valid");
-			qDebug() << "SkyCultureMaker: Selected not existing fallback directory";
-			continue;
-		}
-
-		QDir newSkyCultureDir(selectedDirectory + QDir::separator() + skyCultureId);
-		if (newSkyCultureDir.mkpath("."))
-		{
-			skyCultureDirectory = newSkyCultureDir;
-			return true;
-		}
+		// User cancelled the dialog
+		return false;
 	}
-
-	maker->setSkyCultureDialogInfoLabel("ERROR: Exceeded maximum attempts to set a fallback directory.");
-	qDebug() << "SkyCultureMaker: User exceeded maximum number (10) of attempts to set a fallback directory.";
-	return false;
+	
+	if (!QDir(selectedDirectory).exists())
+	{
+		maker->setSkyCultureDialogInfoLabel("ERROR: The selected directory is not valid");
+		qDebug() << "SkyCultureMaker: Selected non-existing export directory";
+		return false;
+	}
+	
+	skyCultureDirectory = QDir(selectedDirectory + QDir::separator() + skyCultureId);
+	return true;
 }
 
 void ScmSkyCultureExportDialog::saveAndExitSkyCulture()

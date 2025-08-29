@@ -48,7 +48,7 @@ private:
 	QString skyCulturesPath;
 
 	void saveSkyCulture();
-	bool chooseFallbackDirectory(const QString &skyCultureId, QDir &skyCultureDirectory);
+	bool chooseExportDirectory(const QString &skyCultureId, QDir &skyCultureDirectory);
 	void saveAndExitSkyCulture();
 	bool saveSkyCultureCMakeListsFile(const QDir &directory);
 };
