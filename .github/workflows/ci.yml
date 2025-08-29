@@ -338,7 +338,6 @@ jobs:
                 -DCMAKE_BUILD_TYPE=RelWithDebInfo \
                 -DSTELLARIUM_RELEASE_BUILD=Off \
                 -DENABLE_TESTING=On \
-                -DLIBTIDY_INCLUDE_DIR="/usr/local/include" \
                 -DLIBTIDY_LIBRARY="/usr/local/lib/libtidy5.so" \
                 "${{ github.workspace }}"
           make -j3
