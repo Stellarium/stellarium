@@ -269,11 +269,18 @@ void printSystemInfo()
 				readClock = false;
 			}
 			#endif
-                        #if defined(__e2k__)
+                        #if defined(__e2k__) || defined(__s390__) || defined(__s390x__)
 			if (line.startsWith("vendor_id", Qt::CaseInsensitive) && !readVendorId)
 			{
 				vendor = line.split(":").last().trimmed();
 				readVendorId = true;
+			}
+                        #endif
+                        #if defined(__aarch64__) || defined(__arm__)
+			if (line.startsWith("Processor", Qt::CaseSensitive) && readCpuModel)
+			{
+				cpumodel = line.split(":").last().trimmed();
+				readCpuModel = false;
 			}
                         #endif
 
