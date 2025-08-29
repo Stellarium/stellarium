@@ -56,6 +56,17 @@ static QString getExt(const QString& format)
 	return QString();
 }
 
+static int shiftPix180deg(const int order, const int origPix)
+{
+	const int scale = 1 << (2 * order);
+	const int baseSide = origPix / scale; // 0..11
+	Q_ASSERT(baseSide < 12);
+	const int newBaseSide = baseSide / 4 * 4 + (baseSide + 2) % 4;
+	const int newPix = origPix + (newBaseSide - baseSide) * scale;
+	Q_ASSERT(newPix >= 0);
+	return newPix;
+}
+
 QUrl HipsSurvey::getUrlFor(const QString& path) const
 {
 	QUrl base = url;
@@ -66,9 +77,10 @@ QUrl HipsSurvey::getUrlFor(const QString& path) const
 	return QString("%1/%2%3").arg(base.url(), path, args);
 }
 
-HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString& type,
+HipsSurvey::HipsSurvey(const QString& url_, const QString& group, const QString& frame, const QString& type,
                        const QMap<QString, QString>& hipslistProps, const double releaseDate_) :
 	url(url_),
+	group(group),
 	type(type),
 	hipsFrame(frame),
 	releaseDate(releaseDate_),
@@ -121,11 +133,22 @@ HipsSurvey::~HipsSurvey()
 {
 }
 
+QString HipsSurvey::frameToPlanetName(const QString& frame)
+{
+	if (frame == "ceres")
+		return "(1) ceres";
+	return frame;
+}
+
 void HipsSurvey::checkForPlanetarySurvey()
 {
 	planetarySurvey = !QStringList{"equatorial","galactic","ecliptic"}.contains(hipsFrame, Qt::CaseInsensitive) ||
 	                  std::as_const(properties)["creator_did"].toString().contains("moon", Qt::CaseInsensitive) ||
 	                  std::as_const(properties)["client_category"].toString().contains("solar system", Qt::CaseInsensitive);
+
+	// Assume that all the planetary HiPS describe color maps by default
+	if (planetarySurvey && type.isEmpty())
+		type = "planet";
 }
 
 bool HipsSurvey::isVisible() const
@@ -219,6 +242,9 @@ void HipsSurvey::setNormalsSurvey(const HipsSurveyP& normals)
 		return;
 	}
 	this->normals = normals;
+	// Resetting normals should result in clearing normal maps from all
+	// the tiles. The easiest way to do this is to remove the tiles.
+	if (!normals) tiles.clear();
 }
 
 void HipsSurvey::setHorizonsSurvey(const HipsSurveyP& horizons)
@@ -229,6 +255,9 @@ void HipsSurvey::setHorizonsSurvey(const HipsSurveyP& horizons)
 		return;
 	}
 	this->horizons = horizons;
+	// Resetting horizons should result in clearing horizon maps from all
+	// the tiles. The easiest way to do this is to remove the tiles.
+	if (!horizons) tiles.clear();
 }
 
 void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallback callback)
@@ -368,7 +397,9 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		tile->order = order;
 		tile->pix = pix;
 		QString ext = getExt(properties["hips_tile_format"].toString());
-		QUrl path = getUrlFor(QString("Norder%1/Dir%2/Npix%3.%4").arg(order).arg((pix / 10000) * 10000).arg(pix).arg(ext));
+		const bool isShifted = planetarySurvey && properties["type"].toString().isEmpty();
+		const int texturePix = isShifted ? shiftPix180deg(order, pix) : pix;
+		QUrl path = getUrlFor(QString("Norder%1/Dir%2/Npix%3.%4").arg(order).arg((texturePix / 10000) * 10000).arg(texturePix).arg(ext));
 		const StelTexture::StelTextureParams texParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, true);
 		tile->texture = texMgr.createTextureThread(path.url(), texParams, false);
 
@@ -675,7 +706,7 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 }
 
 //! Parse a hipslist file into a list of surveys.
-QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
+QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& hipslistURL, const QString& data)
 {
 	QList<HipsSurveyP> ret;
 	static const QString defaultFrame = "equatorial";
@@ -685,6 +716,7 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 		QString type;
 		QString frame = defaultFrame;
 		QString status;
+		QString group = hipslistURL;
 		double releaseDate = 0;
 		QMap<QString, QString> hipslistProps;
 		for (const auto &line : entry.split('\n'))
@@ -715,9 +747,11 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 				type = value.toLower();
 			else if (key == "hips_status")
 				status = value.toLower();
+			else if (key == "group")
+				group = value;
 		}
 		if(status.split(' ').contains("public"))
-			ret.append(HipsSurveyP(new HipsSurvey(url, frame, type, hipslistProps, releaseDate)));
+			ret.append(HipsSurveyP(new HipsSurvey(url, group, frame, type, hipslistProps, releaseDate)));
 	}
 	return ret;
 }

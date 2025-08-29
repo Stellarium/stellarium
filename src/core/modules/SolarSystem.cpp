@@ -357,9 +357,6 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_EnlargeSun", displayGroup, N_("Enlarge Sun"), "flagSunScale");
 	addAction("actionShow_Planets_ShowMinorBodyMarkers", displayGroup, N_("Mark minor bodies"), "flagMarkers");
 
-	connect(StelApp::getInstance().getModule("HipsMgr"), SIGNAL(gotNewSurvey(HipsSurveyP)),
-			this, SLOT(onNewSurvey(HipsSurveyP)));
-
 	// Fill ephemeris dates
 	connect(this, SIGNAL(requestEphemerisVisualization()), this, SLOT(fillEphemerisDates()));
 	connect(this, SIGNAL(ephemerisDataStepChanged(int)), this, SLOT(fillEphemerisDates()));
@@ -4174,40 +4171,6 @@ bool SolarSystem::removeMinorPlanet(const QString &name)
 	return true;
 }
 
-void SolarSystem::onNewSurvey(HipsSurveyP survey)
-{
-	if (!survey->isPlanetarySurvey()) return;
-
-	const auto type = survey->getType();
-	const bool isPlanetColor = type == "planet";
-	const bool isPlanetNormal = type == "planet-normal";
-	const bool isPlanetHorizon = type == "planet-horizon";
-	if (!isPlanetColor && !isPlanetNormal && !isPlanetHorizon)
-		return;
-
-	QString planetName = survey->getFrame();
-	PlanetP pl = searchByEnglishName(planetName);
-	if (!pl) return;
-	if (isPlanetColor)
-	{
-		if (pl->survey) return;
-		pl->survey = survey;
-	}
-	else if (isPlanetNormal)
-	{
-		if (pl->surveyForNormals) return;
-		pl->surveyForNormals = survey;
-	}
-	else if (isPlanetHorizon)
-	{
-		if (pl->surveyForHorizons) return;
-		pl->surveyForHorizons = survey;
-	}
-	survey->setProperty("planet", pl->getEnglishName());
-	// Not visible by default for the moment.
-	survey->setProperty("visible", false);
-}
-
 void SolarSystem::setExtraThreads(int n)
 {
 	extraThreads=qBound(0,n,QThreadPool::globalInstance()->maxThreadCount()-1);
@@ -4232,3 +4195,13 @@ const QMap<Planet::ApparentMagnitudeAlgorithm, QString> SolarSystem::vMagAlgorit
 	{Planet::Generic,			"Generic"},
 	{Planet::UndefinedAlgorithm,		""}
 };
+
+void SolarSystem::enableSurvey(const HipsSurveyP& colors, const HipsSurveyP& normals, const HipsSurveyP& horizons)
+{
+	Q_ASSERT(colors);
+	QString planetName = HipsSurvey::frameToPlanetName(colors->getFrame());
+	PlanetP pl = searchByEnglishName(planetName);
+	if (!pl) return;
+
+	pl->setSurvey(colors, normals, horizons);
+}

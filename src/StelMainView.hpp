@@ -210,6 +210,8 @@ public slots:
 	void setMaxFps(float m) {maxfps = qMax(m, minfps); StelApp::immediateSave("video/maximum_fps", m); emit maxFpsChanged(maxfps);}
 	//! Get the current maximum frames per second.
 	float getMaxFps() const {return maxfps;}
+	//! Get the desired frame rate: a number in [minfps, maxfps]
+	float getDesiredFps() const { return needsMaxFPS() ? maxfps : minfps; }
 	//! Set the minimum time between frames (in milliseconds).
 	//! @param m the new setting.
 	void setMinTimeBetweenFrames(int m) {minTimeBetweenFrames = qMax(0, m); StelApp::immediateSave("video/min_time_between_frames", minTimeBetweenFrames); emit minTimeBetweenFramesChanged(minTimeBetweenFrames);}
