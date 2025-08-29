@@ -121,7 +121,7 @@ before_build:
   - ps: appveyor DownloadFile $env:tidyURL -FileName c:\$env:tidyBaseName.zip
   - ps: 7z e c:\$env:tidyBaseName.zip -spf -oc:\
 
-  - if [1]==[%scConverterEnabled%] git clone -q https://github.com/Stellarium/stellarium-skyculture-converter c:\skyculture-converter
+  - if [1]==[%scConverterEnabled%] git clone --depth 5 -q https://github.com/Stellarium/stellarium-skyculture-converter c:\skyculture-converter
   - if [1]==[%scConverterEnabled%] mkdir c:\skyculture-converter\build
   - if [1]==[%scConverterEnabled%] cd c:\skyculture-converter\build
   - if [1]==[%scConverterEnabled%] git show --summary
