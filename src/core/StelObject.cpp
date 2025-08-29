@@ -19,7 +19,6 @@
 
 
 #include "StelObject.hpp"
-#include "Constellation.hpp"
 #include "ConstellationMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
@@ -376,7 +375,6 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	const QString cepoch = qc_("on date", "coordinates for current epoch");
 	const QString currentPlanet = core->getCurrentPlanet()->getEnglishName();
 	const QString apparent = " " + (withAtmosphere && (airmass>-1.f) ? q_("(apparent)") : "");
-	const QString dash = QChar(0x2014);
 	const double currentJD = core->getJD();
 	const double utcShift = core->getUTCOffset(currentJD) / 24.; // Fix DST shift...
 	QString currentObjStr = getEnglishName();
@@ -753,6 +751,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		QString sTransit = qc_("Transit", "celestial event; passage across a meridian");
 		QString sRise = qc_("Rise", "celestial event");
 		QString sSet = qc_("Set", "celestial event");
+		const QString dash = QChar(0x2014);
 		double sunrise = 0.;
 		double sunset = 24.;
 		double hour(0);
@@ -969,26 +968,6 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		res += QString("%1: %2<br/>").arg(q_("IAU Constellation"), constel);
 		res += getExtraInfoStrings(flags&IAUConstellation).join("");
 		res += omgr->getExtraInfoStrings(flags&IAUConstellation).join("");
-
-		// Add constellation from convex hull, if that is enabled in the first place.
-		static QSettings *conf=StelApp::getInstance().getSettings();
-		static const bool hullsEnabled = conf->value("gui/skyculture_enable_hulls", false).toBool();
-		if (hullsEnabled)
-		{
-			QList<Constellation*> constels=cMgr->isObjectIn(this, true);
-			QString constelStr = dash;
-			if (!constels.isEmpty())
-			{
-				QStringList cNames;
-				for(const auto &cst: std::as_const(constels))
-				{
-					cNames.append(cst->getInfoLabel());
-				}
-				constelStr = cNames.join(", ");
-			}
-			res += QString("%1: %2<br/>").arg(q_("Constellations"), constelStr);
-		}
-
 		if (cMgr->hasZodiac() && (currentPlanet=="Earth"))
 		{
 			QString zodiacSystemLabel = cMgr->getZodiacSystemName();

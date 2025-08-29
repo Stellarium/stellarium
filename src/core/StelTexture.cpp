@@ -41,7 +41,7 @@
 
 // Let's try to keep 120 FPS even if textures are loaded every frame
 // (60 FPS if all the other computations take the same time per frame).
-constexpr double MAX_LOAD_NANOSEC_PER_FRAME = 1e9 / 120;
+constexpr quint64 MAX_LOAD_NANOSEC_PER_FRAME = 1e9 / 120;
 
 QPointer<StelTextureMgr> StelTexture::textureMgr;
 
@@ -209,11 +209,7 @@ bool StelTexture::bind(uint slot)
 
 	if(load())
 	{
-		// Take advantage of time given by the desired frame rate (which may be lower than maximum),
-		// but don't give up too much if it's very high.
-		const double maxTimeNS = std::max(1e9 / (2 * StelMainView::getInstance().getDesiredFps()),
-		                                  MAX_LOAD_NANOSEC_PER_FRAME);
-		if(textureMgr->getTotalLoadTimeTaken() > maxTimeNS)
+		if(textureMgr->getTotalLoadTimeTaken() > MAX_LOAD_NANOSEC_PER_FRAME)
 			return false;
 		gl = QOpenGLContext::currentContext()->functions();
 		// Finally load the data in the main thread.

@@ -485,7 +485,7 @@ QString StelSkyCultureSkyPartition::getLongitudeCoordinate(Vec3d &eqPos) const
 		{
 			// Indian Nakshatras
 			int padaInSign=int(floor((degreeInSign/widthOfSign)*4.));
-			return QString("%1: %2").arg(symbols.at(sign), QString::number(padaInSign+1));
+			return QString("%1: %2").arg(symbols.at(sign), QString::number(int(floor(padaInSign+1))));
 		}
 		else if (partitions.at(0)==28)
 		{
@@ -493,7 +493,7 @@ QString StelSkyCultureSkyPartition::getLongitudeCoordinate(Vec3d &eqPos) const
 			static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
 
 			int thirdInSign=int(floor((degreeInSign/widthOfSign)*3.));
-			return QString("%1: %2").arg(scMgr->createCulturalLabel(names.at(sign), scMgr->getScreenLabelStyle(), QString()), QString::number(thirdInSign+1));
+			return QString("%1: %2").arg(scMgr->createCulturalLabel(names.at(sign), scMgr->getScreenLabelStyle(), QString()), QString::number(int(floor(thirdInSign+1))));
 		}
 		else
 		{

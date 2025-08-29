@@ -5904,6 +5904,13 @@
           <item row="0" column="0">
            <widget class="QComboBox" name="surveyTypeComboBox"/>
           </item>
+          <item row="2" column="0">
+           <widget class="QListWidget" name="surveysListWidget">
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="0">
            <widget class="QLineEdit" name="surveysFilter">
             <property name="placeholderText">
@@ -5912,24 +5919,6 @@
             <property name="clearButtonEnabled">
              <bool>true</bool>
             </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QTreeWidget" name="surveysTreeWidget">
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="rootIsDecorated">
-             <bool>false</bool>
-            </property>
-            <property name="headerHidden">
-             <bool>true</bool>
-            </property>
-            <column>
-             <property name="text">
-              <string/>
-             </property>
-            </column>
            </widget>
           </item>
          </layout>

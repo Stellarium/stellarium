@@ -68,7 +68,7 @@ Q_GLOBAL_STATIC(QStringList, objtype_array);
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always match the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 25;
+static const int StarCatalogFormatVersion = 24;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -1576,7 +1576,7 @@ StelObjectP StarMgr::searchGaia(StarId source_id) const
 	int lv12_pix = source_id / 34359738368;
 	Vec3d v;
 	StelObjectP so;
-	healpix_pix2vec(int(pow(2., 12.)), lv12_pix, v.v);  // search which pixel the source is in and turn to coordinates
+	healpix_pix2vec(pow(2, 12), lv12_pix, v.v);  // search which pixel the source is in and turn to coordinates
 	Vec3f vf = v.toVec3f();
 
 	for (const auto* z : gridLevels)

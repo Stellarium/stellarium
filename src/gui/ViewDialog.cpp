@@ -21,7 +21,6 @@
 
 #include "ViewDialog.hpp"
 #include "ui_viewDialog.h"
-#include <QMessageBox>
 #include "AddRemoveLandscapesDialog.hpp"
 #include "AtmosphereDialog.hpp"
 #include "SkylightDialog.hpp"
@@ -32,7 +31,6 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModule.hpp"
-#include "StelMainView.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "ConstellationMgr.hpp"
@@ -75,27 +73,6 @@ struct Page
 		Surveys,
 
 		COUNT
-	};
-};
-
-struct HipsRole
-{
-	enum
-	{
-		URL = Qt::UserRole,
-		PlanetEnglishName,
-		ItemType,
-		SurveyType,
-	};
-};
-
-struct HipsItemType
-{
-	enum
-	{
-		Survey, // The HiPS itself
-		Planet, // The item representing a planet and containing groups of surveys
-		Group,  // Group of planetary surveys: albedo+normals+horizons
 	};
 };
 
@@ -146,11 +123,8 @@ void ViewDialog::retranslate()
 		populatePlanetMagnitudeAlgorithmsList();
 		populatePlanetMagnitudeAlgorithmDescription();
 		ui->lightPollutionWidget->retranslate();
-
 		populateHipsGroups();
-		clearHips();
 		updateHips();
-
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
 		updateTabBarListWidgetWidth();
@@ -193,7 +167,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 	// Kinetic scrolling
 	kineticScrollingList << ui->projectionListWidget << ui->culturesListWidget << ui->skyCultureTextBrowser << ui->landscapesListWidget
-			     << ui->landscapeTextBrowser << ui->surveysTreeWidget << ui->surveysTextBrowser;
+			     << ui->landscapeTextBrowser << ui->surveysListWidget << ui->surveysTextBrowser;
 	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{
@@ -683,8 +657,8 @@ void ViewDialog::createDialogContent()
 
 	connect(ui->surveyTypeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateHips()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(updateHips()));
-	connect(ui->surveysTreeWidget, &QTreeWidget::currentItemChanged, this, &ViewDialog::updateHipsText, Qt::QueuedConnection);
-	connect(ui->surveysTreeWidget, &QTreeWidget::itemChanged, this, &ViewDialog::hipsListItemChanged);
+	connect(ui->surveysListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(updateHips()), Qt::QueuedConnection);
+	connect(ui->surveysListWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(hipsListItemChanged(QListWidgetItem*)));
 	connect(ui->surveysFilter, &QLineEdit::textChanged, this, &ViewDialog::filterSurveys);
 	updateHips();
 
@@ -753,92 +727,44 @@ void ViewDialog::populateNomenclatureControls(bool flag)
 // Heuristic function to decide in which group to put a survey.
 static QString getHipsType(const HipsSurveyP hips)
 {
+	QJsonObject properties = hips->property("properties").toJsonObject();
 	if (!hips->isPlanetarySurvey())
 		return "dss";
-	const auto type = hips->getType();
-	if (type == "planet" || type == "planet-normal" || type == "planet-horizon")
+	if (properties["type"].toString() == "planet") // TODO: switch to use hips->isPlanetarySurvey() and multiple surveys for Solar system bodies
 		return "sol";
 	return "other";
-}
-
-void ViewDialog::updateHipsText()
-{
-	const auto currentItem = ui->surveysTreeWidget->currentItem();
-	if (!currentItem)
-	{
-		ui->surveysTextBrowser->setText("");
-		return;
-	}
-
-	const auto hipsmgr = qobject_cast<HipsMgr*>(StelApp::getInstance().getModule("HipsMgr"));
-	const auto url = currentItem->data(0, HipsRole::URL).toString();
-	const auto hips = hipsmgr->getSurveyByUrl(url);
-	if (!hips)
-	{
-		ui->surveysTextBrowser->setText("");
-		return;
-	}
-	QJsonObject props = hips->property("properties").toJsonObject();
-	QString html = QString("<h1>%1</h1>\n").arg(props["obs_title"].toString());
-	if (props.contains("obs_copyright") && props.contains("obs_copyright_url"))
-	{
-		html += QString("<p>Copyright <a href='%2'>%1</a></p>\n")
-				.arg(props["obs_copyright"].toString(), props["obs_copyright_url"].toString());
-	}
-	html += QString("<p>%1</p>\n").arg(props["obs_description"].toString());
-	html += "<h2>" + q_("properties") + "</h2>\n<ul>\n";
-	for (auto iter = props.constBegin(); iter != props.constEnd(); iter++)
-	{
-		html += QString("<li><b>%1</b> %2</li>\n").arg(iter.key(), iter.value().toString());
-	}
-	html += "</ul>\n";
-	const auto gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (gui)
-		ui->surveysTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->surveysTextBrowser->setHtml(html);
-}
-
-void ViewDialog::clearHips()
-{
-	ui->surveysTreeWidget->clear();
-	planetarySurveys.clear();
-	surveysInTheList.clear();
-	selectedSurveyType.clear();
 }
 
 void ViewDialog::updateHips()
 {
 	if (!ui->page_surveys->isVisible()) return;
-	const auto hipsmgr = qobject_cast<HipsMgr*>(StelApp::getInstance().getModule("HipsMgr"));
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
 	QMetaObject::invokeMethod(hipsmgr, "loadSources");
 
 	QComboBox* typeComboBox = ui->surveyTypeComboBox;
-	auto selectedType = typeComboBox->itemData(typeComboBox->currentIndex()).toString();
+	QVariant selectedType = typeComboBox->itemData(typeComboBox->currentIndex());
 	if (selectedType.isNull())
 		selectedType = "dss";
 
 	// Update survey list.
-	auto*const l = ui->surveysTreeWidget;
+	QListWidget* l = ui->surveysListWidget;
 
 	if (!hipsmgr->property("loaded").toBool())
 	{
-		clearHips();
-		new QTreeWidgetItem(l, {q_("Loading...")});
+		l->clear();
+		new QListWidgetItem(q_("Loading..."), l);
 		return;
 	}
 
+	QString currentSurvey = l->currentItem() ? l->currentItem()->data(Qt::UserRole).toString() : "";
+	QListWidgetItem* currentItem = nullptr;
+	HipsSurveyP currentHips;
+
 	l->blockSignals(true);
-	if (selectedSurveyType != selectedType)
-	{
-		clearHips();
-		selectedSurveyType = selectedType;
-	}
+	l->clear();
 	const QList<HipsSurveyP> hipslist = hipsmgr->property("surveys").value<QList<HipsSurveyP>>();
 
-	const bool selectedIsPlanetary = selectedType == "sol";
-	l->setRootIsDecorated(selectedIsPlanetary);
-
-	const auto& solarSys = GETSTELMODULE(SolarSystem);
 	for (auto &hips: hipslist)
 	{
 		if (getHipsType(hips) != selectedType)
@@ -846,112 +772,49 @@ void ViewDialog::updateHips()
 		QString url = hips->property("url").toString();
 		QJsonObject properties = hips->property("properties").toJsonObject();
 		QString title = properties["obs_title"].toString();
-		if (title.isEmpty() || url.isEmpty())
+		if (title.isEmpty())
 			continue;
-
-		// Don't add the survey if it's already present
-		const auto surveyItemIt = surveysInTheList.find(url);
-		if (surveyItemIt != surveysInTheList.end())
-			continue;
-
-		QTreeWidgetItem* surveyItem = nullptr;
-		if (selectedIsPlanetary)
+		QListWidgetItem* item = new QListWidgetItem(title, l);
+		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+		item->setCheckState(hips->property("visible").toBool() ? Qt::Checked : Qt::Unchecked);
+		item->setData(Qt::UserRole, url);
+		if (url == currentSurvey)
 		{
-			const auto& frame = hips->getFrame();
-			const auto& englishName = hips->frameToPlanetName(frame);
-			const auto& group = hips->getGroup();
-			auto& planetData = planetarySurveys[englishName];
-			if(!planetData.planetItem)
-			{
-				const auto& planet = solarSys->searchByEnglishName(englishName);
-				if (!planet)
-				{
-					qWarning().nospace() << "Found a planetary survey with unknown frame: "
-					                     << frame << ". Skipping it.";
-					continue;
-				}
-				planetData.planetItem = new QTreeWidgetItem(l, {planet->getNameI18n()});
-				planetData.planetItem->setData(0, HipsRole::ItemType, HipsItemType::Planet);
-				planetData.planetItem->setData(0, HipsRole::PlanetEnglishName, englishName);
-			}
-			QTreeWidgetItem*& groupItem = planetData.groupsMap[group];
-			if (!groupItem)
-			{
-				groupItem = new QTreeWidgetItem(planetData.planetItem, {group});
-				groupItem->setData(0, HipsRole::ItemType, HipsItemType::Group);
-				groupItem->setFlags(groupItem->flags() | Qt::ItemIsUserCheckable);
-				groupItem->setCheckState(0, hips->property("visible").toBool() ? Qt::Checked : Qt::Unchecked);
-			}
-			static const QHash<QString, QString> typeNames = {
-				{L1S("planet"),         q_("Albedo")},
-				{L1S("planet-normal"),  q_("Normal map")},
-				{L1S("planet-horizon"), q_("Horizon map")},
-			};
-			const auto type = hips->getType();
-			QString typeName = type;
-			if (const auto it = typeNames.find(type); it != typeNames.end())
-				typeName = it.value();
-
-			// Set the first survey of each type as checked by default
-			auto checkState = Qt::Checked;
-			const bool newHipsVisible = hips->property("visible").toBool();
-			if (newHipsVisible)
-			{
-				// The group is also enabled if the survey being added is visible
-				groupItem->setCheckState(0, Qt::Checked);
-			}
-			for (int n = 0; n < groupItem->childCount(); ++n)
-			{
-				const auto oldHipsItem = groupItem->child(n);
-				Q_ASSERT(oldHipsItem->data(0, HipsRole::ItemType).toInt() == HipsItemType::Survey);
-
-				if (oldHipsItem->data(0, HipsRole::SurveyType).toString() != type)
-					continue;
-				bool oldHipsItemChecked = oldHipsItem->checkState(0) == Qt::Checked;
-				if (newHipsVisible && oldHipsItemChecked)
-				{
-					const auto url = oldHipsItem->data(0, HipsRole::URL).toString();
-					const auto oldHips = hipsmgr->getSurveyByUrl(url);
-					Q_ASSERT(oldHips);
-					if (oldHips && !oldHips->property("visible").toBool())
-					{
-						checkState = Qt::Checked;
-						oldHipsItem->setCheckState(0, Qt::Unchecked);
-						oldHipsItemChecked = false;
-					}
-				}
-				if (!newHipsVisible && oldHipsItemChecked)
-				{
-					// A checked survey already exists, don't check the new one
-					checkState = Qt::Unchecked;
-					break;
-				}
-			}
-
-			surveyItem = new QTreeWidgetItem(groupItem, {title, typeName});
-			surveyItem->setFlags(surveyItem->flags() | Qt::ItemIsUserCheckable);
-			surveyItem->setCheckState(0, checkState);
+			currentItem = item;
+			currentHips = hips;
 		}
-		else
-		{
-			surveyItem = new QTreeWidgetItem(l, {title});
-			surveyItem->setFlags(surveyItem->flags() | Qt::ItemIsUserCheckable);
-			surveyItem->setCheckState(0, hips->property("visible").toBool() ? Qt::Checked
-			                                                                : Qt::Unchecked);
-		}
-
-		surveysInTheList[url] = surveyItem;
-		surveyItem->setData(0, HipsRole::ItemType, HipsItemType::Survey);
-		surveyItem->setData(0, HipsRole::URL, url);
-		surveyItem->setData(0, HipsRole::SurveyType, hips->getType());
 		disconnect(hips.data(), nullptr, this, nullptr);
-		connect(hips.data(), &HipsSurvey::statusChanged, this, &ViewDialog::updateHipsText);
+		connect(hips.data(), SIGNAL(statusChanged()), this, SLOT(updateHips()));
 	}
-	l->sortItems(0, Qt::AscendingOrder);
-	if (const auto currentItem = l->currentItem())
-		l->scrollToItem(currentItem);
-
+	l->sortItems(Qt::AscendingOrder);
+	l->setCurrentItem(currentItem);
+	l->scrollToItem(currentItem);
 	l->blockSignals(false);
+
+	if (!currentHips)
+	{
+		ui->surveysTextBrowser->setText("");
+	}
+	else
+	{
+		QJsonObject props = currentHips->property("properties").toJsonObject();
+		QString html = QString("<h1>%1</h1>\n").arg(props["obs_title"].toString());
+		if (props.contains("obs_copyright") && props.contains("obs_copyright_url"))
+		{
+			html += QString("<p>Copyright <a href='%2'>%1</a></p>\n")
+					.arg(props["obs_copyright"].toString(), props["obs_copyright_url"].toString());
+		}
+		html += QString("<p>%1</p>\n").arg(props["obs_description"].toString());
+		html += "<h2>" + q_("properties") + "</h2>\n<ul>\n";
+		for (auto iter = props.constBegin(); iter != props.constEnd(); iter++)
+		{
+			html += QString("<li><b>%1</b> %2</li>\n").arg(iter.key(), iter.value().toString());
+		}
+		html += "</ul>\n";
+		if (gui)
+			ui->surveysTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+		ui->surveysTextBrowser->setHtml(html);
+	}
 	filterSurveys();
 }
 
@@ -996,131 +859,35 @@ void ViewDialog::toggleHipsDialog()
 void ViewDialog::filterSurveys()
 {
 	const QString pattern = ui->surveysFilter->text().simplified();
-	const auto& list = *ui->surveysTreeWidget;
-	for (int row = 0; row < list.topLevelItemCount(); ++row)
+	const auto& list = *ui->surveysListWidget;
+	for (int row = 0; row < list.count(); ++row)
 	{
-		auto& item = *list.topLevelItem(row);
-		const QString text = item.text(0).simplified();
+		auto& item = *list.item(row);
+		const QString text = item.text().simplified();
 		const bool show = pattern.isEmpty() || text.contains(pattern, Qt::CaseInsensitive);
 		item.setHidden(!show);
 	}
 }
 
-void ViewDialog::hipsListItemChanged(QTreeWidgetItem* item)
+void ViewDialog::hipsListItemChanged(QListWidgetItem* item)
 {
-	auto*const l = item->treeWidget();
+	QListWidget* l = item->listWidget();
 	l->blockSignals(true);
-	const auto hipsmgr = qobject_cast<HipsMgr*>(StelApp::getInstance().getModule("HipsMgr"));
-
-	switch (item->data(0, HipsRole::ItemType).toInt())
+	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
+	QString url = item->data(Qt::UserRole).toString();
+	HipsSurveyP hips;
+	QMetaObject::invokeMethod(hipsmgr, "getSurveyByUrl", Qt::DirectConnection,
+			Q_RETURN_ARG(HipsSurveyP, hips), Q_ARG(QString, url));
+	Q_ASSERT(hips);
+	if (item->checkState() == Qt::Checked)
 	{
-	case HipsItemType::Survey:
+		l->setCurrentItem(item);
+		hips->setProperty("visible", true);
+	}
+	else
 	{
-		const auto url = item->data(0, HipsRole::URL).toString();
-		if (const auto group = item->parent())
-		{
-			Q_ASSERT(group->data(0, HipsRole::ItemType).toInt() == HipsItemType::Group);
-			for (int n = 0; n < group->childCount(); ++n)
-			{
-				const auto surveyItem = group->child(n);
-				Q_ASSERT(surveyItem->data(0, HipsRole::ItemType).toInt() == HipsItemType::Survey);
-				if (surveyItem == item) continue;
-				// Only consider surveys of the same type
-				if (surveyItem->data(0, HipsRole::SurveyType) != item->data(0, HipsRole::SurveyType))
-					continue;
-				if (surveyItem->checkState(0) == Qt::Checked)
-				{
-					surveyItem->setCheckState(0, Qt::Unchecked);
-				}
-			}
-			hipsListItemChanged(group);
-		}
-		else
-		{
-			const auto hips = hipsmgr->getSurveyByUrl(url);
-			Q_ASSERT(hips);
-			if (item->checkState(0) == Qt::Checked)
-			{
-				l->setCurrentItem(item);
-				hips->setProperty("visible", true);
-			}
-			else
-			{
-				hips->setProperty("visible", false);
-			}
-		}
-		break;
+		hips->setProperty("visible", false);
 	}
-	case HipsItemType::Group:
-	{
-		// First, uncheck all the sibling groups except the one we're enabling
-		if (item->checkState(0) == Qt::Checked)
-		{
-			const auto planetItem = item->parent();
-			Q_ASSERT(planetItem);
-			Q_ASSERT(planetItem->data(0, HipsRole::ItemType).toInt() == HipsItemType::Planet);
-			for (int n = 0; n < planetItem->childCount(); ++n)
-			{
-				const auto groupItem = planetItem->child(n);
-				Q_ASSERT(groupItem->data(0, HipsRole::ItemType).toInt() == HipsItemType::Group);
-				if (groupItem == item) continue;
-				if (groupItem->checkState(0) == Qt::Checked)
-				{
-					groupItem->setCheckState(0, Qt::Unchecked);
-					hipsListItemChanged(groupItem);
-				}
-			}
-		}
-
-		// Now configure the survey chosen
-		HipsSurveyP colors;
-		HipsSurveyP normals;
-		HipsSurveyP horizons;
-		for (int n = 0; n < item->childCount(); ++n)
-		{
-			const auto child = item->child(n);
-			const auto url = child->data(0, HipsRole::URL).toString();
-			const auto hips = hipsmgr->getSurveyByUrl(url);
-			Q_ASSERT(hips);
-			const auto type = hips->getType();
-			if (child->checkState(0) != Qt::Checked)
-			{
-				if (type == L1S("planet"))
-					hips->setProperty("visible", false);
-				continue;
-			}
-			if (type == L1S("planet"))
-				colors = hips;
-			else if (type == L1S("planet-normal"))
-				normals = hips;
-			else if (type == L1S("planet-horizon"))
-				horizons = hips;
-		}
-		if (item->checkState(0) == Qt::Checked)
-		{
-			if (!colors)
-			{
-				QMessageBox::critical(&StelMainView::getInstance(), q_("No albedo map"),
-				                      q_("This group of surveys doesn't have an albedo "
-				                         "map. Can't display it."));
-				return;
-			}
-			colors->setProperty("visible", true);
-			const auto solarSys = qobject_cast<SolarSystem*>(StelApp::getInstance().getModule("SolarSystem"));
-			solarSys->enableSurvey(colors, normals, horizons);
-		}
-		else
-		{
-			if (colors) colors->setProperty("visible", false);
-		}
-		break;
-	}
-	case HipsItemType::Planet:
-	{
-		break;
-	}
-	}
-
 	l->blockSignals(false);
 }
 

@@ -111,14 +111,7 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND ENABLE_INDI)
 		VERSION 2.1.3
 		DOWNLOAD_ONLY YES)
 
-	# remove missing definitions
-	file(READ ${indiclient_SOURCE_DIR}/libs/indicore/indicom.c INDICOM_C)
-	string(REPLACE "case 576000: bps = B576000; break;" "" INDICOM_C "${INDICOM_C}")
-	string(REPLACE "case 921600: bps = B921600; break;" "" INDICOM_C "${INDICOM_C}")
-	file(WRITE ${indiclient_SOURCE_DIR}/libs/indicore/indicom.c.new "${INDICOM_C}")
-	configure_file(${indiclient_SOURCE_DIR}/libs/indicore/indicom.c.new ${indiclient_SOURCE_DIR}/libs/indicore/indicom.c COPYONLY)
-
-        # Fix missing include
+        # First, fix a missing include
 	file(READ ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h INDIDEVAPI_H)
 	string(REGEX REPLACE "#include .lilxml.h." "#include \"lilxml.h\"\n#include <stdarg.h>" INDIDEVAPI_H "${INDIDEVAPI_H}")
 	file(WRITE ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h.new "${INDIDEVAPI_H}")
@@ -126,7 +119,7 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND ENABLE_INDI)
 	
 	# Fix missing include
 	file(READ ${indiclient_SOURCE_DIR}/libs/sockets/select.h INDISOCKETSELECT_H)
-	string(REGEX REPLACE "#include .sys/socket.h." "#include <cstring>\n#include <sys/socket.h>\n#include <sys/select.h>" INDISOCKETSELECT_H "${INDISOCKETSELECT_H}")
+	string(REGEX REPLACE "#include .sys/socket.h." "#include <sys/socket.h>\n#include <sys/select.h>" INDISOCKETSELECT_H "${INDISOCKETSELECT_H}")
 	file(WRITE ${indiclient_SOURCE_DIR}/libs/sockets/select.h.new "${INDISOCKETSELECT_H}")
 	configure_file(${indiclient_SOURCE_DIR}/libs/sockets/select.h.new ${indiclient_SOURCE_DIR}/libs/sockets/select.h COPYONLY)
 

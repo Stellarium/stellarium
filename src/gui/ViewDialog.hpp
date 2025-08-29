@@ -24,11 +24,9 @@
 
 #include <QObject>
 #include <QTimer>
-#include <QHash>
 
 class Ui_viewDialogForm;
 class QListWidgetItem;
-class QTreeWidgetItem;
 class QToolButton;
 
 class AddRemoveLandscapesDialog;
@@ -97,11 +95,9 @@ private slots:
 	void updateSelectedCatalogsCheckBoxes();
 	void updateSelectedTypesCheckBoxes();
 
-	void clearHips();
 	void updateHips();
-	void updateHipsText();
 	void filterSurveys();
-	void hipsListItemChanged(QTreeWidgetItem* item);
+	void hipsListItemChanged(QListWidgetItem* item);
 	void populateHipsGroups();
 	void toggleHipsDialog();
 
@@ -125,16 +121,7 @@ private:
 	GreatRedSpotDialog * greatRedSpotDialog;
 	ConfigureDSOColorsDialog * configureDSOColorsDialog;
 	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;
-
 	QTimer hipsUpdateTimer;
-	struct PlanetSurveyPack
-	{
-		QTreeWidgetItem* planetItem = nullptr;
-		QHash<QString/*group*/, QTreeWidgetItem* /*groupItem*/> groupsMap;
-	};
-	QHash<QString/*planet English name*/, PlanetSurveyPack> planetarySurveys;
-	QHash<QString/*survey URL*/, QTreeWidgetItem*> surveysInTheList;
-	QString selectedSurveyType;
 };
 
 #endif // _VIEWDIALOG_HPP
