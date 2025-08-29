@@ -38,7 +38,10 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On "${{ github.workspace }}"
+        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+              -DSTELLARIUM_RELEASE_BUILD=Off \
+              -DENABLE_TESTING=On \
+              "${{ github.workspace }}"
 
     - name: Compile
       working-directory: build
@@ -162,7 +165,10 @@ jobs:
         export PATH="/opt/homebrew/opt/qt@5/bin:/usr/local/opt/qt@5/bin:$PATH"
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On ${{ github.workspace }}
+        cmake -DCMAKE_PREFIX_PATH="/opt/homebrew;/usr/local" \
+              -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+              -DSTELLARIUM_RELEASE_BUILD=Off \
+              -DENABLE_TESTING=On ${{ github.workspace }}
 
     - name: Compile
       working-directory: build
@@ -198,10 +204,13 @@ jobs:
     - name: Configure CMake
       shell: bash
       run: |
-        export PATH="/usr/local/opt/qt@6/bin:$PATH"
+        export PATH="/usr/local/opt/qt@6:$PATH"
         mkdir -p build
         cd build
-        cmake -DCMAKE_PREFIX_PATH="/usr/local/opt/qt@6;/usr/local/opt/tidy-html5" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On ${{ github.workspace }}
+        cmake -DCMAKE_PREFIX_PATH="/usr/local" \
+              -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+              -DSTELLARIUM_RELEASE_BUILD=Off \
+              -DENABLE_TESTING=On ${{ github.workspace }}
 
     - name: Compile
       working-directory: build
@@ -240,10 +249,14 @@ jobs:
     - name: Configure CMake
       shell: bash
       run: |
-        export PATH="/usr/local/opt/qt@6/bin:$PATH"
+        export PATH="/opt/homebrew/opt/qt@6/bin:$PATH"
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On ${{ github.workspace }}
+        cmake -DCMAKE_PREFIX_PATH="/opt/homebrew" \
+              -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+              -DSTELLARIUM_RELEASE_BUILD=Off \
+              -DENABLE_TESTING=On \
+              ${{ github.workspace }}
 
     - name: Compile
       working-directory: build
@@ -282,7 +295,10 @@ jobs:
           export DISPLAY=:0
           mkdir builds
           cd builds
-          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On "${{ github.workspace }}"
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+                -DSTELLARIUM_RELEASE_BUILD=Off \
+                -DENABLE_TESTING=On \
+                "${{ github.workspace }}"
           make -j3
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
           sleep 3
@@ -310,14 +326,21 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg install -y cmake git eigen glm exiv2 nlopt fast_float md4c qxlsx-qt6 perl5 xorg-vfbserver gettext qt6 tidy-html5 unarr
+          pkg install -y cmake git eigen glm exiv2 nlopt fast_float md4c qxlsx-qt6 perl5 xorg-vfbserver gettext qt6 tidy-html5
 
         run: |
           set -e -x
           export DISPLAY=:0
+          export CMAKE_PREFIX_PATH="/usr/local:$CMAKE_PREFIX_PATH"
           mkdir builds
           cd builds
-          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On "${{ github.workspace }}"
+          cmake -DCMAKE_PREFIX_PATH="/usr/local" \
+                -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+                -DSTELLARIUM_RELEASE_BUILD=Off \
+                -DENABLE_TESTING=On \
+                -DLIBTIDY_INCLUDE_DIR="/usr/local/include" \
+                -DLIBTIDY_LIBRARY="/usr/local/lib/libtidy5.so" \
+                "${{ github.workspace }}"
           make -j3
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
           sleep 3
