@@ -31,15 +31,23 @@
 #include <Windows.h>
 #endif
 
-
 static unsigned int stel_bswap_32(unsigned int val)
 {
 	return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
 	       (((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
 }
 
-static float stel_bswap_32f(int val)
+static float stel_bswap_32f(float val)
 {
+    float f;
+    unsigned int u;
+    std::memcpy(&u, &val, sizeof(val));
+    u = (((u) & 0xff000000) >> 24) | (((u) & 0x00ff0000) >>  8) |
+        (((u) & 0x0000ff00) <<  8) | (((u) & 0x000000ff) << 24);
+    std::memcpy(&f, &u, sizeof(u));
+    return f;
+
+/*
     // Create a union to access the float as an unsigned int
     union {
         float f;
@@ -55,6 +63,7 @@ static float stel_bswap_32f(int val)
 
     // Return the float value from the union
     return u.f;
+*/
 }
 
 static const Vec3f north(0,0,1);
@@ -128,17 +137,16 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		// ok, FILE_MAGIC_OTHER_ENDIAN, must swap
 		if (use_mmap)
 		{
-			dbStr += "warning - must convert catalogue";
+			dbStr += "warning - must convert catalogue ";
 #if (!defined(__GNUC__))
-			dbStr += "to native format";
+			dbStr += "to native format ";
 #endif
-			dbStr += "before mmap loading";
+			dbStr += "before mmap loading ";
 			qWarning().noquote() << dbStr;
 			use_mmap = false;
-			qWarning().noquote() << "Revert to not using mmmap";
-			//return 0;
+			qWarning().noquote() << "Revert to not using mmap";
 		}
-		dbStr += "byteswap";
+		dbStr += "byteswap ";
 		type = stel_bswap_32(type);
 		major = stel_bswap_32(major);
 		minor = stel_bswap_32(minor);
@@ -153,7 +161,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		if (use_mmap)
 		{
 			// mmap only with gcc:
-			dbStr += "warning - you must convert catalogue to native format before mmap loading";
+			dbStr += "warning - you must convert catalogue to native format before mmap loading ";
 			qDebug(qPrintable(dbStr));
 
 			return 0;
@@ -166,13 +174,13 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	}
 	else
 	{
-		dbStr += "error - not a catalogue file.";
+		dbStr += "error - not a catalogue file. ";
 		qDebug().noquote() << dbStr;
 		return Q_NULLPTR;
 	}
 	if (epochJD != STAR_CATALOG_JDEPOCH)
 	{
-		qDebug().noquote() << epochJD << "!=" << STAR_CATALOG_JDEPOCH;
+		qDebug().noquote() << QString("%1 != %2").arg(QString::number(epochJD, 'f', 5), QString::number(STAR_CATALOG_JDEPOCH, 'f', 5));
 		dbStr += "warning - Star catalog epoch is not what is expected in Stellarium";
 		qDebug().noquote() << dbStr;
 		return Q_NULLPTR;
@@ -185,7 +193,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		case 0:
 			if (major > MAX_MAJOR_FILE_VERSION)
 			{
-				dbStr += "warning - unsupported version";
+				dbStr += "warning - unsupported version ";
 			}
 			else
 			{
@@ -195,7 +203,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		case 1:
 			if (major > MAX_MAJOR_FILE_VERSION)
 			{
-				dbStr += "warning - unsupported version";
+				dbStr += "warning - unsupported version ";
 			}
 			else
 			{
@@ -205,7 +213,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		case 2:
 			if (major > MAX_MAJOR_FILE_VERSION)
 			{
-				dbStr += "warning - unsupported version";
+				dbStr += "warning - unsupported version ";
 			}
 			else
 			{
@@ -213,7 +221,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			break;
 		default:
-			dbStr += "error - bad file type";
+			dbStr += "error - bad file type ";
 			break;
 	}
 	if (rval && rval->isInitialized())
@@ -223,7 +231,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	}
 	else
 	{
-		dbStr += "- initialization failed";
+		dbStr += "- initialization failed ";
 		qDebug().noquote() << dbStr;
 		if (rval)
 		{
@@ -666,7 +674,7 @@ void SpecialZoneArray<Star>::searchGaiaIDepochPos(const StarId source_id,
                                                   double &      RV) const
 {
    // loop through each zone in the level which is 20 * 4 ** level + 1 as index
-   for (int i = 0; i < 20 * pow(4, (level)) + 1; i++) {
+   for (int i = 0; i < 20 * pow(4., (level)) + 1; i++) {
       // get the zone data
       const SpecialZoneData<Star> * const z = getZones() + i;
       // loop through the stars in the zone
