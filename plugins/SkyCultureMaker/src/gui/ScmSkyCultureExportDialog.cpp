@@ -38,7 +38,7 @@ ScmSkyCultureExportDialog::ScmSkyCultureExportDialog(SkyCultureMaker* maker)
 	assert(maker != nullptr);
 	ui = new Ui_scmSkyCultureExportDialog;
 
-	QString appResourceBasePath = StelFileMgr::getInstallationDir();
+	QString appResourceBasePath = StelFileMgr::getUserDir();
 	skyCulturesPath             = QDir(appResourceBasePath).filePath("skycultures");
 }
 
@@ -169,7 +169,8 @@ void ScmSkyCultureExportDialog::saveSkyCulture()
 		return;
 	}
 
-	maker->setSkyCultureDialogInfoLabel("Sky culture exported successfully!");
+	maker->setSkyCultureDialogInfoLabel("Sky culture exported successfully to " + skyCultureDirectory.absolutePath());
+	qInfo() << "SkyCultureMaker: Sky culture exported successfully to" << skyCultureDirectory.absolutePath();
 	ScmSkyCultureExportDialog::close();
 }
 

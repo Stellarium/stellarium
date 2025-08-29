@@ -1,7 +1,5 @@
 # This is the cmake config file for the Sky Culture Maker plugin
-SET(SCM_VERSION "0.1.0")
-
-
+SET(SCM_VERSION "1.0.0")
 
 # Option to manually control converter, defaults to TRUE, but overridden by Qt version
 OPTION(SCM_SHOULD_ENABLE_CONVERTER "Attempt to enable Sky Culture Converter" TRUE)
@@ -18,15 +16,6 @@ IF(SCM_SHOULD_ENABLE_CONVERTER AND NOT (QT_VERSION_MAJOR EQUAL "5"))
     LIST(APPEND CMAKE_PREFIX_PATH "/opt/homebrew" "/usr/local")
   ENDIF()
 
-  # download CPM.cmake
-  FILE(
-    DOWNLOAD
-    https://github.com/cpm-cmake/CPM.cmake/releases/download/v0.40.8/CPM.cmake
-    ${CMAKE_CURRENT_BINARY_DIR}/cmake/CPM.cmake
-    EXPECTED_HASH SHA256=78ba32abdf798bc616bab7c73aac32a17bbd7b06ad9e26a6add69de8f3ae4791
-  )
-  INCLUDE(${CMAKE_CURRENT_BINARY_DIR}/cmake/CPM.cmake)
-
   # download https://github.com/Stellarium/stellarium-skyculture-converter
   CPMAddPackage(
     NAME              StellariumSkyCultureConverter
@@ -42,8 +31,8 @@ IF(SCM_SHOULD_ENABLE_CONVERTER AND NOT (QT_VERSION_MAJOR EQUAL "5"))
     GITHUB_REPOSITORY selmf/unarr
     GIT_TAG           v1.1.1
     OPTIONS
-      "DUSE_SYSTEM_BZ2 OFF"
-      "DUSE_SYSTEM_LZMA OFF"
+      "USE_SYSTEM_BZ2 OFF"
+      "USE_SYSTEM_LZMA OFF"
   )
 
   IF(WIN32)
