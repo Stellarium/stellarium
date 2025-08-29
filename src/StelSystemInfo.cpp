@@ -230,7 +230,7 @@ void printSystemInfo()
 
 #ifdef Q_OS_LINUX
 	// CPU info
-	QString cpumodel = "unknown", freq = "", hardware = "", model = "", platform = "", machine = "", vendor = "";
+	QString cpumodel = "unknown", freq = "", hardware = "", model = "", platform = "", machine = "", vendor = "", systype = "";
 	int ncpu = 0;
 	bool cpuOK = false;
 	bool readVendorId = false;
@@ -283,8 +283,15 @@ void printSystemInfo()
 				readCpuModel = false;
 			}
                         #endif
+                        #if defined(__mips__)
+			if (line.startsWith("cpu model", Qt::CaseSensitive) && readCpuModel)
+			{
+				cpumodel = line.split(":").last().trimmed();
+				readCpuModel = false;
+			}
+                        #endif
 
-			// for PowerPC computers
+			// for PowerPC/MIPS computers
 			if (line.startsWith("platform", Qt::CaseInsensitive))
 				platform = line.split(":").last().trimmed();
 			if (line.startsWith("machine", Qt::CaseInsensitive))
@@ -295,6 +302,10 @@ void printSystemInfo()
 				hardware = line.split(":").last().trimmed();
 			if (line.startsWith("model", Qt::CaseInsensitive))
 				model = line.split(":").last().trimmed();
+
+			// for MIPS computers
+			if (line.startsWith("system type", Qt::CaseInsensitive))
+				systype = line.split(":").last().trimmed();
 		}
 		infoFile.close();
 	}
@@ -318,6 +329,8 @@ void printSystemInfo()
                 log(QString("CPU logical cores: %1").arg(ncpu));
 		if (!hardware.isEmpty())
                         log(QString("CPU hardware: %1").arg(hardware));
+		if (!systype.isEmpty())
+			log(QString("System type: %1").arg(systype));
 		if (!platform.isEmpty())
                         log(QString("Platform: %1").arg(platform));
 		if (!model.isEmpty() && (!hardware.isEmpty() || !platform.isEmpty()))
@@ -361,6 +374,8 @@ void printSystemInfo()
 	sysctlbyname("machdep.tsc_freq", &freq, &len, nullptr, 0);
 	if (freq>0)
 		log(QString("CPU speed: %1 MHz").arg(freq/1000000));
+	else if (sysctlbyname("hw.clockrate", &freq, &len, nullptr, 0) != -1)
+		log(QString("CPU speed: %1 MHz").arg(freq)); // FreeBSD
 
 	int ncpu = 0;
 	len = sizeof(ncpu);
