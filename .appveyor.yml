@@ -4,7 +4,7 @@ configuration: Release
 # clone directory
 clone_folder: c:\stellarium
 # set clone depth
-clone_depth: 10
+clone_depth: 5
 # Do not build feature branch with open Pull Requests
 skip_branch_with_pr: true
 # Do not build on tags
@@ -121,7 +121,7 @@ before_build:
   - ps: appveyor DownloadFile $env:tidyURL -FileName c:\$env:tidyBaseName.zip
   - ps: 7z e c:\$env:tidyBaseName.zip -spf -oc:\
 
-  - if [1]==[%scConverterEnabled%] git clone -q https://github.com/Stellarium/stellarium-skyculture-converter c:\skyculture-converter
+  - if [1]==[%scConverterEnabled%] git clone -q --depth=2 https://github.com/Stellarium/stellarium-skyculture-converter c:\skyculture-converter
   - if [1]==[%scConverterEnabled%] mkdir c:\skyculture-converter\build
   - if [1]==[%scConverterEnabled%] cd c:\skyculture-converter\build
   - if [1]==[%scConverterEnabled%] git show --summary
