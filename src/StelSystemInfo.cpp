@@ -371,11 +371,16 @@ void printSystemInfo()
 
 	int64_t freq = 0;
 	len = sizeof(freq);
-	sysctlbyname("machdep.tsc_freq", &freq, &len, nullptr, 0);
-	if (freq>0)
-		log(QString("CPU speed: %1 MHz").arg(freq/1000000));
+	if (sysctlbyname("machdep.tsc_freq", &freq, &len, nullptr, 0) != -1)
+		log(QString("CPU speed: %1 MHz").arg(freq/1000000)); // FreeBSD and NetBSD (i386/amd64 by default)
 	else if (sysctlbyname("hw.clockrate", &freq, &len, nullptr, 0) != -1)
-		log(QString("CPU speed: %1 MHz").arg(freq)); // FreeBSD
+		log(QString("CPU speed: %1 MHz").arg(freq)); // FreeBSD/amd64
+	else if (sysctlbyname("hw.freq.cpu", &freq, &len, nullptr, 0) != -1)
+		log(QString("CPU speed: %1 MHz").arg(freq)); // FreeBSD/sparc64
+	else if (sysctlbyname("dev.cpu.0.freq", &freq, &len, nullptr, 0) != -1)
+		log(QString("CPU speed: %1 MHz").arg(freq)); // FreeBSD/powerpc64
+	else if (sysctlbyname("hw.cpu0.clock_frequency", &freq, &len, nullptr, 0) != -1)
+		log(QString("CPU speed: %1 MHz").arg(freq/1000000)); // NetBSD/sparc64
 
 	int ncpu = 0;
 	len = sizeof(ncpu);
@@ -425,6 +430,22 @@ void printSystemInfo()
 	len = sizeof(totalRAM);
 	sysctl(mib, 2, &totalRAM, &len, NULL, 0);
 	log(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+
+	// extra info
+	mib[0] = CTL_HW;
+	mib[1] = HW_VENDOR;
+	sysctl(mib, 2, model.data(), &len, NULL, 0);
+	model.resize(len);
+	QString vendor = model.data();
+
+	mib[0] = CTL_HW;
+	mib[1] = HW_PRODUCT;
+	sysctl(mib, 2, model.data(), &len, NULL, 0);
+	model.resize(len);
+	if (vendor.isEmpty())
+		log(QString("Machine: %1").arg(model.data()));
+	else
+		log(QString("Machine: %1 %2").arg(vendor, model.data()));
 #endif
 
 #ifdef Q_OS_SOLARIS
