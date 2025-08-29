@@ -589,6 +589,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->solareclipseslocalCalculateButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->lunareclipsesCalculateButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->transitsCalculateButton->setShortcut(QKeySequence("Shift+F10"));
+	ui->drawGraphsPushButton->setShortcut(QKeySequence("Shift+F10"));
 
 	// chartview exports:
 	connect(ui->hecPositionsExportButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->hecPositionsChartView); });

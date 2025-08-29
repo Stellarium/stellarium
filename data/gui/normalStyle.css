@@ -55,6 +55,7 @@ QSizeGrip {
 QTextEdit,
 QPlainTextEdit,
 QListWidget,
+QTreeWidget,
 QLineEdit {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 0;
@@ -67,6 +68,7 @@ QLineEdit {
 
 QTextEdit:disabled,
 QListWidget:disabled,
+QTreeWidget:disabled,
 QLineEdit:disabled {
 	background: rgb(90, 90, 90);
 }
@@ -424,6 +426,7 @@ QGroupBox::indicator {
  * indicators, but there's a problem with spacing discussed at
  * https://stackoverflow.com/q/77422984 */
 QListWidget::indicator,
+QTreeWidget::indicator,
 QListView::indicator {
 	margin: 0;
 	background: none;
@@ -431,6 +434,7 @@ QListView::indicator {
 
 QCheckBox::indicator:checked,
 QListWidget::indicator:checked,
+QTreeWidget::indicator:checked,
 QListView::indicator:checked,
 QGroupBox::indicator:checked {
 	image: url(:/graphicGui/uieCheckbox-checked.png);
@@ -438,6 +442,7 @@ QGroupBox::indicator:checked {
 
 QCheckBox::indicator:indeterminate,
 QListWidget::indicator:indeterminate,
+QTreeWidget::indicator:indeterminate,
 QListView::indicator:indeterminate,
 QGroupBox::indicator:indeterminate {
 	image: url(:/graphicGui/uieCheckbox-partial.png);
@@ -445,6 +450,7 @@ QGroupBox::indicator:indeterminate {
 
 QCheckBox::indicator:unchecked,
 QListWidget::indicator:unchecked,
+QTreeWidget::indicator:unchecked,
 QListView::indicator:unchecked,
 QGroupBox::indicator:unchecked {
 	image: url(:/graphicGui/uieCheckbox-unchecked.png);
@@ -452,6 +458,7 @@ QGroupBox::indicator:unchecked {
 
 QCheckBox::indicator:hover:checked,
 QListWidget::indicator:hover:checked,
+QTreeWidget::indicator:hover:checked,
 QListView::indicator:hover:checked,
 QGroupBox::indicator:hover:checked {
 	image: url(:/graphicGui/uieCheckbox-checked-hover.png);
@@ -459,6 +466,7 @@ QGroupBox::indicator:hover:checked {
 
 QCheckBox::indicator:hover:indeterminate,
 QListWidget::indicator:hover:indeterminate,
+QTreeWidget::indicator:hover:indeterminate,
 QListView::indicator:hover:indeterminate,
 QGroupBox::indicator:hover:indeterminate {
 	image: url(:/graphicGui/uieCheckbox-partial-hover.png);
@@ -466,6 +474,7 @@ QGroupBox::indicator:hover:indeterminate {
 
 QCheckBox::indicator:hover:unchecked,
 QListWidget::indicator:hover:unchecked,
+QTreeWidget::indicator:hover:unchecked,
 QListView::indicator:hover:unchecked,
 QGroupBox::indicator:hover:unchecked {
 	image: url(:/graphicGui/uieCheckbox-unchecked-hover.png);
@@ -473,6 +482,7 @@ QGroupBox::indicator:hover:unchecked {
 
 QCheckBox::indicator:checked:disabled,
 QListWidget::indicator:checked:disabled,
+QTreeWidget::indicator:checked:disabled,
 QListView::indicator:checked:disabled,
 QGroupBox::indicator:checked:disabled {
 	image: url(:/graphicGui/uieCheckbox-checked-disabled.png);
@@ -480,6 +490,7 @@ QGroupBox::indicator:checked:disabled {
 
 QCheckBox::indicator:indeterminate:disabled,
 QListWidget::indicator:indeterminate:disabled,
+QTreeWidget::indicator:indeterminate:disabled,
 QListView::indicator:indeterminate:disabled,
 QGroupBox::indicator:indeterminate:disabled {
 	image: url(:/graphicGui/uieCheckbox-partial-disabled.png);
@@ -487,6 +498,7 @@ QGroupBox::indicator:indeterminate:disabled {
 
 QCheckBox::indicator:unchecked:disabled,
 QListWidget::indicator:unchecked:disabled,
+QTreeWidget::indicator:unchecked:disabled,
 QListView::indicator:unchecked:disabled,
 QGroupBox::indicator:unchecked:disabled {
 	image: url(:/graphicGui/uieCheckbox-unchecked-disabled.png);

@@ -525,7 +525,7 @@ that would be visible from April to May, would be specified as:
 \end{description}
 
 
-\paragraph{Drawing dark constellations}\index{constellations!dark}
+\paragraph{Drawing dark constellations}\index{constellations!dark}\label{SC:constellations:dark:markers}
 The outlines \newFeature{25.2}of figures like the ``Emu in the Sky'' cannot be described with connect-the-dot star patterns, 
 as they are formed from the absence of luminous patterns. We need to describe them using coordinate lists. 
 To make the process less tedious, we can extend setting Markers (see \ref{sec:tour:markers}). 
@@ -546,6 +546,14 @@ is an area of the sky described by a convex polygon which surrounds all stars th
 plus those objects which are listed in \jtag{hull\_extension}. 
 While the IAU has defined 88 constellation areas in 1930, constellations of other cultures are not as clearly defined. These areas can help analyzing historical records.
 Note that a point may lie in zero, one or more than one constellation area(s) when it overlaps two or even more adjacent figures. 
+
+Technically, the stars are projected perspectively onto a tangential plane to the celestial sphere 
+at the balance point of all involved stars. 
+Then a simple \emph{package wrapping} algorithm \citep[ch.25]{Sedgewick:AlgorithmsInC} can be applied to find the convex hull. 
+Straight lines in the projection are great circle arcs. 
+Note that this limits constellation size to less than 180 degrees in the sky, 
+outlying stars will currently be discarded. 
+(Please report an error if this affects you, so we might find a better solution.)
 
 This functionality is an advanced topic mostly used by sky culture researchers \citep[e.g.][94-98]{Hoffmann2017a} who are also not afraid of calling scripting functions (see ch.~\ref{ch:scripting}), 
 and is therefore hidden from beginning users. To make use of it, edit your \file{config.ini} and add a key:

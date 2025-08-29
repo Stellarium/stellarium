@@ -91,7 +91,7 @@ To install all of these, use the following commands:
 
 ```
 sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
-                 graphviz doxygen gettext git libgps-dev \
+                 graphviz doxygen gettext git libgps-dev libqt5qxlsx-dev \
                  gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio \
                  gstreamer1.0-libav gstreamer1.0-vaapi qtbase5-dev \
                  qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools \
