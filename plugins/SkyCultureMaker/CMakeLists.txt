@@ -6,8 +6,14 @@ OPTION(SCM_SHOULD_ENABLE_CONVERTER "Attempt to enable Sky Culture Converter" TRU
 SET(SCM_CONVERTER_ENABLED FALSE) # Default to disabled
 
 IF(SCM_SHOULD_ENABLE_CONVERTER AND NOT (QT_VERSION_MAJOR EQUAL "5"))
-  SET(SCM_CONVERTER_ENABLED TRUE)
-  MESSAGE(STATUS "Sky Culture Converter will be enabled.")
+  # Disable converter for Windows ARM64 builds due to missing ARM64 libraries
+  IF(WIN32 AND CMAKE_SYSTEM_PROCESSOR MATCHES "ARM64|arm64")
+    SET(SCM_CONVERTER_ENABLED FALSE)
+    MESSAGE(STATUS "Sky Culture Converter is DISABLED for Windows ARM64 builds (missing ARM64 tidy/gettext libraries).")
+  ELSE()
+    SET(SCM_CONVERTER_ENABLED TRUE)
+    MESSAGE(STATUS "Sky Culture Converter will be enabled.")
+  ENDIF()
 
   # download https://github.com/Stellarium/stellarium-skyculture-converter
   CPMAddPackage(
