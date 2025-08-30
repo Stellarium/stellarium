@@ -5,15 +5,25 @@ SET(SCM_VERSION "1.0.0")
 OPTION(SCM_SHOULD_ENABLE_CONVERTER "Attempt to enable Sky Culture Converter" TRUE)
 SET(SCM_CONVERTER_ENABLED FALSE) # Default to disabled
 
-IF(SCM_SHOULD_ENABLE_CONVERTER AND NOT (QT_VERSION_MAJOR EQUAL "5"))
-  # Disable converter for Windows ARM64 builds due to missing ARM64 libraries
-  IF(WIN32 AND CMAKE_SYSTEM_PROCESSOR MATCHES "ARM64|arm64")
-    SET(SCM_CONVERTER_ENABLED FALSE)
-    MESSAGE(STATUS "Sky Culture Converter is DISABLED for Windows ARM64 builds (missing ARM64 tidy/gettext libraries).")
-  ELSE()
-    SET(SCM_CONVERTER_ENABLED TRUE)
-    MESSAGE(STATUS "Sky Culture Converter will be enabled.")
-  ENDIF()
+# Detect Qt5
+IF(QT_VERSION_MAJOR EQUAL "5")
+  SET(IS_QT_5 TRUE)
+ELSE()
+  SET(IS_QT_5 FALSE)
+ENDIF()
+
+# Detect Windows ARM64
+IF(WIN32 AND (CMAKE_SYSTEM_PROCESSOR MATCHES "ARM64|arm64|aarch64" OR CMAKE_VS_PLATFORM_NAME MATCHES "ARM64|arm64"))
+  SET(IS_WIN_ARM64 TRUE)
+ELSE()
+  SET(IS_WIN_ARM64 FALSE)
+ENDIF()
+
+# Disable converter for Qt5
+# Disable converter for Windows ARM64 builds due to missing ARM64 libraries
+IF(SCM_SHOULD_ENABLE_CONVERTER AND NOT IS_QT_5 AND NOT IS_WIN_ARM64)
+  SET(SCM_CONVERTER_ENABLED TRUE)
+  MESSAGE(STATUS "Sky Culture Converter will be enabled.")
 
   # download https://github.com/Stellarium/stellarium-skyculture-converter
   CPMAddPackage(
@@ -49,7 +59,13 @@ IF(SCM_SHOULD_ENABLE_CONVERTER AND NOT (QT_VERSION_MAJOR EQUAL "5"))
   ENDIF(WIN32)
   ADD_DEFINITIONS(-DSCM_CONVERTER_ENABLED_CPP) # Define for C++
 ELSE()
-  MESSAGE(STATUS "Sky Culture Converter is DISABLED (Qt version 5 or SCM_SHOULD_ENABLE_CONVERTER is OFF). Please ensure you are using Qt 6 or later to enable it.")
+  IF(IS_QT_5)
+    MESSAGE(STATUS "Sky Culture Converter is DISABLED because it requires Qt 6 or later.")
+  ELSEIF(IS_WIN_ARM64)
+    MESSAGE(STATUS "Sky Culture Converter is DISABLED for Windows ARM64 builds (missing ARM64 tidy/gettext libraries).")
+  ELSE()
+    MESSAGE(STATUS "Sky Culture Converter is DISABLED.")
+  ENDIF()
 ENDIF()
 
 ADD_DEFINITIONS(-DSKYCULTUREMAKER_PLUGIN_VERSION="${SCM_VERSION}")
