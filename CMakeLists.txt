@@ -333,10 +333,10 @@ IF(WIN32)
           # C4996: deprecated POSIX names (used in zlib)
           # C5105: defines in macros
           # Zc:_cplusplus: Qt >5.9.0 requires a C++17 compiler, because cmake has a bug: https://gitlab.kitware.com/cmake/cmake/-/issues/1883
-	  SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996 /wd5105 /utf-8 /Zc:__cplusplus")
+          SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996 /wd5105 /utf-8 /Zc:__cplusplus")
 
           # permissive: required by Qt >=6.9.0 (see qt6\QtCore\qcompilerdetection.h for more information: https://github.com/qt/qtbase/blob/v6.9.0/src/corelib/global/qcompilerdetection.h#L1304-L1316)
-	  IF(${QT_VERSION} VERSION_GREATER_EQUAL 6.9.0)
+          IF(QT_VERSION VERSION_GREATER_EQUAL 6.9.0)
                SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /permissive-")
           ENDIF()
 
