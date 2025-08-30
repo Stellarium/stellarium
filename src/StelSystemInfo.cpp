@@ -30,6 +30,7 @@
 #include <windows.h>
 #include <WbemIdl.h>
 #include <comdef.h>
+#include <comutil.h> // For _bstr_t
 #include <string>
 #pragma comment(lib, "wbemuuid.lib")
 #endif
@@ -102,7 +103,7 @@ void printSystemInfo()
 	res &= CoCreateInstance(CLSID_WbemLocator, nullptr, CLSCTX_INPROC_SERVER, IID_IWbemLocator, (LPVOID*)&locator);
 	if (locator)
 	{
-		res &= locator->ConnectServer(_bstr_t(L"ROOT\\CIMV2"), nullptr, nullptr, nullptr, 0, nullptr, nullptr, &service);
+		res &= locator->ConnectServer(bstr_t(L"ROOT\\CIMV2"), nullptr, nullptr, nullptr, 0, nullptr, nullptr, &service);
 		if (service)
 		{
 			res &= CoSetProxyBlanket(service, RPC_C_AUTHN_WINNT, RPC_C_AUTHZ_NONE, nullptr, RPC_C_AUTHN_LEVEL_CALL, RPC_C_IMP_LEVEL_IMPERSONATE, nullptr, EOAC_NONE);
@@ -113,7 +114,7 @@ void printSystemInfo()
 			IWbemClassObject* obj = nullptr;
 
 			// CPU info
-			const std::wstring cpu_query(L"SELECT Name, NumberOfLogicalProcessors, MaxClockSpeed FROM Win32_Processor");
+			const std::wstring cpu_query(bstr_t(L"SELECT Name, NumberOfLogicalProcessors, MaxClockSpeed FROM Win32_Processor"));
 			service->ExecQuery(bstr_t(L"WQL"), bstr_t(std::wstring(cpu_query.begin(), cpu_query.end()).c_str()), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &enumerator);
 			while (enumerator)
 			{
@@ -121,13 +122,13 @@ void printSystemInfo()
 				if (!u_return)
 					break;
 
-				hr = obj->Get(L"Name", 0, &vt_prop, nullptr, nullptr);
+				hr = obj->Get(bstr_t(L"Name"), 0, &vt_prop, nullptr, nullptr);
                                 log(QString("CPU name: %1").arg(vt_prop.bstrVal));
 
-				hr = obj->Get(L"MaxClockSpeed", 0, &vt_prop, nullptr, nullptr);
+				hr = obj->Get(bstr_t(L"MaxClockSpeed"), 0, &vt_prop, nullptr, nullptr);
                                 log(QString("CPU maximum speed: %1 MHz").arg(vt_prop.uintVal));
 
-				hr = obj->Get(L"NumberOfLogicalProcessors", 0, &vt_prop, nullptr, nullptr);
+				hr = obj->Get(bstr_t(L"NumberOfLogicalProcessors"), 0, &vt_prop, nullptr, nullptr);
                                 log(QString("CPU logical cores: %1").arg(vt_prop.intVal));
 
 				VariantClear(&vt_prop);
@@ -136,7 +137,7 @@ void printSystemInfo()
 
 			// RAM info
 			int64_t totalRAM = 0;
-			const std::wstring ram_query(L"SELECT Capacity FROM Win32_PhysicalMemory");
+			const std::wstring ram_query(bstr_t(L"SELECT Capacity FROM Win32_PhysicalMemory"));
 			service->ExecQuery(bstr_t(L"WQL"), bstr_t(std::wstring(ram_query.begin(), ram_query.end()).c_str()), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &enumerator);
 			while (enumerator)
 			{
@@ -144,7 +145,7 @@ void printSystemInfo()
 				if (!u_return)
 					break;
 
-				hr = obj->Get(L"Capacity", 0, &vt_prop, nullptr, nullptr);
+				hr = obj->Get(bstr_t(L"Capacity"), 0, &vt_prop, nullptr, nullptr);
 				totalRAM += std::stoll(vt_prop.bstrVal);
 
 				VariantClear(&vt_prop);
@@ -153,7 +154,7 @@ void printSystemInfo()
 			log(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 
 			// GPU info (Enabled only)
-			const std::wstring gpu_query(L"SELECT Name, AdapterRAM, CurrentHorizontalResolution, CurrentVerticalResolution FROM Win32_VideoController WHERE Status='OK'");
+			const std::wstring gpu_query(bstr_t(L"SELECT Name, AdapterRAM, CurrentHorizontalResolution, CurrentVerticalResolution FROM Win32_VideoController WHERE Status='OK'"));
 			service->ExecQuery(bstr_t(L"WQL"), bstr_t(std::wstring(gpu_query.begin(), gpu_query.end()).c_str()), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &enumerator);
 			while (enumerator)
 			{
@@ -161,15 +162,15 @@ void printSystemInfo()
 				if (!u_return)
 					break;
 
-				hr = obj->Get(L"Name", 0, &vt_prop, nullptr, nullptr);
+				hr = obj->Get(bstr_t(L"Name"), 0, &vt_prop, nullptr, nullptr);
                                 log(QString("GPU name: %1").arg(vt_prop.bstrVal));
 
-				hr = obj->Get(L"AdapterRAM", 0, &vt_prop, nullptr, nullptr);
+				hr = obj->Get(bstr_t(L"AdapterRAM"), 0, &vt_prop, nullptr, nullptr);
                                 log(QString("GPU RAM: %1 MB").arg(vt_prop.ullVal/(1024<<10)));
 
-				hr = obj->Get(L"CurrentHorizontalResolution", 0, &vt_prop, nullptr, nullptr);
+				hr = obj->Get(bstr_t(L"CurrentHorizontalResolution"), 0, &vt_prop, nullptr, nullptr);
 				int currHRes = vt_prop.intVal;
-				hr = obj->Get(L"CurrentVerticalResolution", 0, &vt_prop, nullptr, nullptr);
+				hr = obj->Get(bstr_t(L"CurrentVerticalResolution"), 0, &vt_prop, nullptr, nullptr);
 				int currVRes = vt_prop.intVal;
 				log(QString("Current resolution: %1x%2").arg(currHRes).arg(currVRes));
 
