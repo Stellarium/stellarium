@@ -103,7 +103,7 @@ void printSystemInfo()
 	res &= CoCreateInstance(CLSID_WbemLocator, nullptr, CLSCTX_INPROC_SERVER, IID_IWbemLocator, (LPVOID*)&locator);
 	if (locator)
 	{
-		res &= locator->ConnectServer(bstrSmartPointer(L"ROOT\\CIMV2"), nullptr, nullptr, nullptr, 0, nullptr, nullptr, &service);
+		res &= locator->ConnectServer(_bstr_t(L"ROOT\\CIMV2"), nullptr, nullptr, nullptr, 0, nullptr, nullptr, &service);
 		if (service)
 		{
 			res &= CoSetProxyBlanket(service, RPC_C_AUTHN_WINNT, RPC_C_AUTHZ_NONE, nullptr, RPC_C_AUTHN_LEVEL_CALL, RPC_C_IMP_LEVEL_IMPERSONATE, nullptr, EOAC_NONE);
@@ -114,22 +114,22 @@ void printSystemInfo()
 			IWbemClassObject* obj = nullptr;
 
 			// CPU info
-			const std::wstring cpu_query(bstrSmartPointer(L"SELECT Name, NumberOfLogicalProcessors, MaxClockSpeed FROM Win32_Processor"));
-			service->ExecQuery(bstrSmartPointer(L"WQL"), bstrSmartPointer(std::wstring(cpu_query.begin(), cpu_query.end()).c_str()), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &enumerator);
+			const std::wstring cpu_query(_bstr_t(L"SELECT Name, NumberOfLogicalProcessors, MaxClockSpeed FROM Win32_Processor"));
+			service->ExecQuery(_bstr_t(L"WQL"), _bstr_t(std::wstring(cpu_query.begin(), cpu_query.end()).c_str()), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &enumerator);
 			while (enumerator)
 			{
 				enumerator->Next(WBEM_INFINITE, 1, &obj, &u_return);
 				if (!u_return)
 					break;
 
-				hr = obj->Get(bstrSmartPointer(L"Name"), 0, &vt_prop, nullptr, nullptr);
-                                log(QString("CPU name: %1").arg(vt_prop.bstrVal));
+				hr = obj->Get(_bstr_t(L"Name"), 0, &vt_prop, nullptr, nullptr);
+                log(QString("CPU name: %1").arg(vt_prop.bstrVal));
 
-				hr = obj->Get(bstrSmartPointer(L"MaxClockSpeed"), 0, &vt_prop, nullptr, nullptr);
-                                log(QString("CPU maximum speed: %1 MHz").arg(vt_prop.uintVal));
+				hr = obj->Get(_bstr_t(L"MaxClockSpeed"), 0, &vt_prop, nullptr, nullptr);
+                log(QString("CPU maximum speed: %1 MHz").arg(vt_prop.uintVal));
 
-				hr = obj->Get(bstrSmartPointer(L"NumberOfLogicalProcessors"), 0, &vt_prop, nullptr, nullptr);
-                                log(QString("CPU logical cores: %1").arg(vt_prop.intVal));
+				hr = obj->Get(_bstr_t(L"NumberOfLogicalProcessors"), 0, &vt_prop, nullptr, nullptr);
+                log(QString("CPU logical cores: %1").arg(vt_prop.intVal));
 
 				VariantClear(&vt_prop);
 				obj->Release();
@@ -137,15 +137,15 @@ void printSystemInfo()
 
 			// RAM info
 			int64_t totalRAM = 0;
-			const std::wstring ram_query(bstrSmartPointer(L"SELECT Capacity FROM Win32_PhysicalMemory"));
-			service->ExecQuery(bstrSmartPointer(L"WQL"), bstrSmartPointer(std::wstring(ram_query.begin(), ram_query.end()).c_str()), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &enumerator);
+			const std::wstring ram_query(_bstr_t(L"SELECT Capacity FROM Win32_PhysicalMemory"));
+			service->ExecQuery(_bstr_t(L"WQL"), _bstr_t(std::wstring(ram_query.begin(), ram_query.end()).c_str()), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &enumerator);
 			while (enumerator)
 			{
 				enumerator->Next(WBEM_INFINITE, 1, &obj, &u_return);
 				if (!u_return)
 					break;
 
-				hr = obj->Get(bstrSmartPointer(L"Capacity"), 0, &vt_prop, nullptr, nullptr);
+				hr = obj->Get(_bstr_t(L"Capacity"), 0, &vt_prop, nullptr, nullptr);
 				totalRAM += std::stoll(vt_prop.bstrVal);
 
 				VariantClear(&vt_prop);
@@ -154,23 +154,23 @@ void printSystemInfo()
 			log(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 
 			// GPU info (Enabled only)
-			const std::wstring gpu_query(bstrSmartPointer(L"SELECT Name, AdapterRAM, CurrentHorizontalResolution, CurrentVerticalResolution FROM Win32_VideoController WHERE Status='OK'"));
-			service->ExecQuery(bstrSmartPointer(L"WQL"), bstrSmartPointer(std::wstring(gpu_query.begin(), gpu_query.end()).c_str()), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &enumerator);
+			const std::wstring gpu_query(_bstr_t(L"SELECT Name, AdapterRAM, CurrentHorizontalResolution, CurrentVerticalResolution FROM Win32_VideoController WHERE Status='OK'"));
+			service->ExecQuery(_bstr_t(L"WQL"), _bstr_t(std::wstring(gpu_query.begin(), gpu_query.end()).c_str()), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &enumerator);
 			while (enumerator)
 			{
 				enumerator->Next(WBEM_INFINITE, 1, &obj, &u_return);
 				if (!u_return)
 					break;
 
-				hr = obj->Get(bstrSmartPointer(L"Name"), 0, &vt_prop, nullptr, nullptr);
-                                log(QString("GPU name: %1").arg(vt_prop.bstrVal));
+				hr = obj->Get(_bstr_t(L"Name"), 0, &vt_prop, nullptr, nullptr);
+                log(QString("GPU name: %1").arg(vt_prop.bstrVal));
 
-				hr = obj->Get(bstrSmartPointer(L"AdapterRAM"), 0, &vt_prop, nullptr, nullptr);
-                                log(QString("GPU RAM: %1 MB").arg(vt_prop.ullVal/(1024<<10)));
+				hr = obj->Get(_bstr_t(L"AdapterRAM"), 0, &vt_prop, nullptr, nullptr);
+                log(QString("GPU RAM: %1 MB").arg(vt_prop.ullVal/(1024<<10)));
 
-				hr = obj->Get(bstrSmartPointer(L"CurrentHorizontalResolution"), 0, &vt_prop, nullptr, nullptr);
+				hr = obj->Get(_bstr_t(L"CurrentHorizontalResolution"), 0, &vt_prop, nullptr, nullptr);
 				int currHRes = vt_prop.intVal;
-				hr = obj->Get(bstrSmartPointer(L"CurrentVerticalResolution"), 0, &vt_prop, nullptr, nullptr);
+				hr = obj->Get(_bstr_t(L"CurrentVerticalResolution"), 0, &vt_prop, nullptr, nullptr);
 				int currVRes = vt_prop.intVal;
 				log(QString("Current resolution: %1x%2").arg(currHRes).arg(currVRes));
 
