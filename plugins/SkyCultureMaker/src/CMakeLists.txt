@@ -79,7 +79,7 @@ SET_TARGET_PROPERTIES(SkyCultureMaker-static PROPERTIES OUTPUT_NAME "SkyCultureM
 list(APPEND SKYMAKER_PLUGIN_LINK_LIBS Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
 # SCM_CONVERTER_ENABLED is inherited from the parent CMakeLists.txt scope
 if(SCM_CONVERTER_ENABLED)
-  list(APPEND SKYMAKER_PLUGIN_LINK_LIBS skyculture_converter_lib unarr)
+  list(APPEND SKYMAKER_PLUGIN_LINK_LIBS Qt${QT_VERSION_MAJOR}::Xml skyculture_converter_lib unarr)
 endif()
 
 TARGET_LINK_LIBRARIES(SkyCultureMaker-static ${SKYMAKER_PLUGIN_LINK_LIBS})
