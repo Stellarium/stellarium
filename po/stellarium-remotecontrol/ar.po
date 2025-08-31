@@ -6,17 +6,17 @@
 # Translators:
 # Latein Lebt, 2022
 # Huzaifa <huthaifaalmustafa@gmail.com>, 2023
-# Khalid AlAjaji, 2024
-# cardinot <mcardinot@gmail.com>, 2025
+# cardinot <mcardinot@gmail.com>, 2024
+# Khalid AlAjaji, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-06-02 10:04+0700\n"
+"POT-Creation-Date: 2025-07-14 13:19+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2025\n"
+"Last-Translator: Khalid AlAjaji, 2025\n"
 "Language-Team: Arabic (https://app.transifex.com/stellarium/teams/80998/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -110,8 +110,8 @@ msgid "Could not retrieve landscape list"
 msgstr "لم يتم التمكن من الحصول على قائمة مناظر الرصد الطبيعية"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:750
-#: index.html:812 tablet7in.html:835 tablet7in.html:895
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:761
+#: index.html:823 tablet7in.html:845 tablet7in.html:905
 msgid "-none-"
 msgstr "-لاشيء-"
 
@@ -283,7 +283,7 @@ msgstr "اختر وركز"
 
 #: index.html:245 tablet7in.html:265
 msgid "Select current item"
-msgstr ""
+msgstr "اختر العنصر الحالي"
 
 #: index.html:249 tablet7in.html:269
 msgid "Selection mode"
@@ -323,15 +323,15 @@ msgstr "سطوع درب التبّانة:"
 
 #: index.html:289 tablet7in.html:351
 msgid "Dbl. stars"
-msgstr ""
+msgstr "النجوم المزدوجة"
 
 #: index.html:290 tablet7in.html:352
 msgid "Var. stars"
-msgstr ""
+msgstr "النجوم المتغيرة"
 
 #: index.html:291 tablet7in.html:353
 msgid "HIP"
-msgstr ""
+msgstr "HIP"
 
 #: index.html:294 tablet7in.html:357
 msgid "Digitized Sky Survey"
@@ -347,7 +347,7 @@ msgstr "ضمّن الحركة الاهتزازية"
 
 #: index.html:306 tablet7in.html:371
 msgid "Include parallax"
-msgstr ""
+msgstr "ضمن اختلاف المنظر"
 
 #: index.html:311 tablet7in.html:376
 msgid "Include aberration"
@@ -395,11 +395,11 @@ msgstr "تضخيم حجم الأجرام الصغيرة"
 
 #: index.html:337
 msgid "Mark minor bodies:"
-msgstr ""
+msgstr "علم على الأجرام الثانوية:"
 
 #: index.html:365 tablet7in.html:443
 msgid "Bortle class:"
-msgstr ""
+msgstr "تصنيف بورتل:"
 
 #: index.html:382 tablet7in.html:460
 msgid "Extinction Coefficient:"
@@ -407,11 +407,11 @@ msgstr "معامل الانطفاء"
 
 #: index.html:383 tablet7in.html:461
 msgid "Only extinction/refraction, no blue skylight"
-msgstr ""
+msgstr "التقلص/الانكسار فقط، سماء ليست زرقاء"
 
 #: index.html:383 tablet7in.html:462
 msgid "Suppress scattering"
-msgstr ""
+msgstr "ألغ التشتت"
 
 #: index.html:387 tablet7in.html:467
 msgid "Shooting Stars"
@@ -450,7 +450,7 @@ msgstr "الوقوف الأصغر"
 
 #: index.html:475 tablet7in.html:563
 msgid "Line width:"
-msgstr ""
+msgstr "عرض الخط:"
 
 #: index.html:485 tablet7in.html:573
 msgid "Current Planet:"
@@ -495,7 +495,7 @@ msgstr "الأسماء والعلامات"
 
 #: index.html:665 tablet7in.html:736
 msgid "Limit angular size (arcmin):"
-msgstr "حدود الحجم الزاوي بالدقائق القوسية"
+msgstr "حدد الحجم الزاوي (دقائق قوسية):"
 
 #: index.html:677 tablet7in.html:750
 msgid "Use associated planet and position"
@@ -515,7 +515,7 @@ msgstr "منظر الرصد الحالي"
 
 #: index.html:704 tablet7in.html:777
 msgid "Label constellations with font size"
-msgstr ""
+msgstr "أظهر أسماء الكوكبات بحجم خط:"
 
 #: index.html:708 tablet7in.html:781
 msgid "Show lines with thickness"
@@ -523,7 +523,7 @@ msgstr "أظهر الخطوط بسُمك"
 
 #: index.html:712 tablet7in.html:785
 msgid "Label asterisms with font size"
-msgstr ""
+msgstr "أظهر أسماء التشكيلات بحجم خط:"
 
 #: index.html:716 tablet7in.html:789
 msgid "Show asterisms with thickness"
@@ -535,89 +535,101 @@ msgstr "أظهر خطوط راي المساعدة مع سماكتها"
 
 #: index.html:724 tablet7in.html:797
 msgid "Show art in brightness"
-msgstr "أظهر الرسومات بسطوع"
+msgstr "أظهر الرسومات بإضاءة"
 
 #: index.html:728 tablet7in.html:801
 msgid "Show boundaries with thickness"
 msgstr "أظهر الحدود بسُمْك"
 
-#: index.html:732 tablet7in.html:805
-msgid "Use native names for planets"
-msgstr "استخدم التسمية المحلية للكواكب"
+#: index.html:733 tablet7in.html:805
+msgid "Show zodiac with thickness"
+msgstr "أظهر البروج بسمك"
 
-#: index.html:733 tablet7in.html:806
+#: index.html:737 tablet7in.html:809
+msgid "Show lunar stations/mansions with thickness"
+msgstr "أظهر منازل القمر بسمك"
+
+#: index.html:741 tablet7in.html:813
+msgid "Short labels"
+msgstr "أسماء مختصرة"
+
+#: index.html:742 tablet7in.html:814
 msgid "Constellation selection isolated"
 msgstr "اختيار مجموعة نجمية مفردة"
 
-#: index.html:737 tablet7in.html:810
+#: index.html:743 tablet7in.html:815
+msgid "Only last selected"
+msgstr "آخر اختيار فقط"
+
+#: index.html:748 tablet7in.html:820
 msgid "Current sky culture"
 msgstr "التراث الفلكي الحالي"
 
-#: index.html:750 tablet7in.html:835
+#: index.html:761 tablet7in.html:845
 msgid "Active script:"
 msgstr "السكربت الشغّال:"
 
-#: index.html:751 tablet7in.html:836
+#: index.html:762 tablet7in.html:846
 msgid "Run selected script"
 msgstr "شغّل السكربتات المختارة"
 
-#: index.html:751 tablet7in.html:836
+#: index.html:762 tablet7in.html:846
 msgid "Stop current script"
 msgstr "أوقف السكربت الحالي"
 
-#: index.html:756 tablet7in.html:43 tablet7in.html:820
+#: index.html:767 tablet7in.html:43 tablet7in.html:830
 msgid "Actions"
 msgstr "الإجراءات"
 
-#: index.html:760 tablet7in.html:824
+#: index.html:771 tablet7in.html:834
 msgid "Run/toggle action"
 msgstr "شغّل/إبدأ أو أوقف الإجراء"
 
-#: index.html:771 tablet7in.html:859
+#: index.html:782 tablet7in.html:869
 msgid "Planet map"
 msgstr "خريطة الكوكب"
 
-#: index.html:772 tablet7in.html:860
+#: index.html:783 tablet7in.html:870
 msgid "Planet map pointer"
 msgstr "مؤشر خريطة الكوكب"
 
-#: index.html:776 tablet7in.html:864
+#: index.html:787 tablet7in.html:874
 msgid "Type to search location"
 msgstr "اكتب للبحث عن موقع"
 
-#: index.html:810 tablet7in.html:893
+#: index.html:821 tablet7in.html:903
 msgid "Interaction"
 msgstr "تفاعل"
 
-#: index.html:811 tablet7in.html:894
+#: index.html:822 tablet7in.html:904
 msgid "Current scene:"
 msgstr "المنظر الحالي:"
 
-#: index.html:814 tablet7in.html:897
+#: index.html:825 tablet7in.html:907
 msgid "View controls"
 msgstr "أدوات التحكم بالمنظر"
 
-#: index.html:820 tablet7in.html:903
+#: index.html:831 tablet7in.html:913
 msgid "Movement controls"
 msgstr "أدوات التحكم بالحركة"
 
-#: index.html:832 tablet7in.html:915
+#: index.html:843 tablet7in.html:925
 msgid "Torchlight"
 msgstr "نور الكشاف"
 
-#: index.html:839 tablet7in.html:922
+#: index.html:850 tablet7in.html:932
 msgid "Scene selection"
 msgstr "إختيار المنظر"
 
-#: index.html:843 tablet7in.html:926
+#: index.html:854 tablet7in.html:936
 msgid "Load selected scene"
 msgstr "حمّل المنظر المختار"
 
-#: index.html:869 tablet7in.html:953
+#: index.html:880 tablet7in.html:963
 msgid "No response from server"
 msgstr "لايوجد استجابة من الخادم"
 
-#: index.html:870 tablet7in.html:954
+#: index.html:881 tablet7in.html:964
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "لايوجد استجابة من الخادم منذ %1 ثانية. هل ستيللاريوم شغال؟"
 
@@ -761,18 +773,18 @@ msgstr "الدلو"
 msgid "Pisces"
 msgstr "الحوت"
 
-#: tablet7in.html:844
+#: tablet7in.html:854
 msgid "Favorites"
 msgstr "المفضلات"
 
-#: tablet7in.html:846
+#: tablet7in.html:856
 msgid "Show 1"
 msgstr "العرض 1"
 
-#: tablet7in.html:847
+#: tablet7in.html:857
 msgid "Remove Labels and Images"
 msgstr "أزل الأسماء والصور"
 
-#: tablet7in.html:847
+#: tablet7in.html:857
 msgid "Cleanup Screen"
 msgstr "امسح الشاشة"
