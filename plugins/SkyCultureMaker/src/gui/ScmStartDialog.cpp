@@ -82,7 +82,7 @@ void ScmStartDialog::createDialogContent()
 /* =============================================== SkyCultureConverter ============================================== */
 #ifdef SCM_CONVERTER_ENABLED_CPP
 	ui->scmStartConvertpushButton->setToolTip(
-		tr("Convert SkyCultures from the old (fib) format to the new (json) format"));
+		tr("Convert SkyCultures from the legacy (fab) format to the new (json) format"));
 	connect(ui->scmStartConvertpushButton, &QPushButton::clicked, this,
 	        [this]()
 	        {
@@ -97,7 +97,7 @@ void ScmStartDialog::createDialogContent()
 	// Converter is disabled, so disable the button
 	ui->scmStartConvertpushButton->setEnabled(false);
 	ui->scmStartConvertpushButton->setToolTip(
-		tr("Converter is only available from Qt6.5 onwards, currently build with version %1")
+		tr("Converter is only available from Qt6.5 onwards, but the current build uses %1")
 			.arg(QT_VERSION_STR));
 #endif  // SCM_CONVERTER_ENABLED_CPP
 /* ================================================================================================================== */

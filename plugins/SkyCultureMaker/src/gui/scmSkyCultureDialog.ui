@@ -392,7 +392,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                  </font>
                 </property>
                 <property name="text">
-                 <string>All fields are mandatory. If you have no information to provide, please write "N/A".</string>
+                 <string>All fields are mandatory. If you have no information to provide, please write: N/A</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -419,7 +419,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                   <widget class="QComboBox" name="classificationCB">
                    <property name="font">
                     <font>
-                     <pointsize>11</pointsize>
+                     <pointsize>12</pointsize>
                     </font>
                    </property>
                   </widget>
@@ -427,7 +427,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                  <item>
                   <widget class="QLabel" name="authorsLbl">
                    <property name="text">
-                    <string>Authors:*</string>
+                    <string>Authors:</string>
                    </property>
                   </widget>
                  </item>
