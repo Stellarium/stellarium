@@ -322,6 +322,21 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <string>Description</string>
          </attribute>
          <layout class="QVBoxLayout" name="descriptionTabLayout">
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <property name="leftMargin">
+           <number>6</number>
+          </property>
+          <property name="topMargin">
+           <number>6</number>
+          </property>
+          <property name="rightMargin">
+           <number>6</number>
+          </property>
+          <property name="bottomMargin">
+           <number>6</number>
+          </property>
           <item>
            <widget class="QScrollArea" name="descriptionScrollArea">
             <property name="widgetResizable">
@@ -332,13 +347,13 @@ li.checked::marker { content: &quot;\2612&quot;; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>187</width>
-               <height>1465</height>
+               <width>395</width>
+               <height>1200</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="descriptionLayout">
               <property name="spacing">
-               <number>10</number>
+               <number>12</number>
               </property>
               <property name="leftMargin">
                <number>10</number>
@@ -353,260 +368,387 @@ li.checked::marker { content: &quot;\2612&quot;; }
                <number>10</number>
               </property>
               <item>
-               <widget class="QLabel" name="authorsLbl">
+               <widget class="QLabel" name="descriptionTabLbl">
+                <property name="font">
+                 <font>
+                  <pointsize>16</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
                 <property name="text">
-                 <string>Authors:</string>
+                 <string>Please describe your Sky Culture</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QTextEdit" name="authorsTE">
-                <property name="acceptRichText">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="cultureDescriptionLbl">
-                <property name="text">
-                 <string>Culture Description:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTextEdit" name="cultureDescriptionTE">
-                <property name="acceptRichText">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="aboutLbl">
-                <property name="text">
-                 <string>About:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTextEdit" name="aboutTE">
-                <property name="acceptRichText">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="geoRegionLbl">
-                <property name="text">
-                 <string>Geo-Region:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTextEdit" name="geoRegionTE">
-                <property name="acceptRichText">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <layout class="QHBoxLayout">
-                <item>
-                 <widget class="QLabel" name="skyLbl">
-                  <property name="text">
-                   <string>Sky</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="pushButton">
-                  <property name="enabled">
-                   <bool>false</bool>
-                  </property>
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="cursor">
-                   <cursorShape>WhatsThisCursor</cursorShape>
-                  </property>
-                  <property name="contextMenuPolicy">
-                   <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
-                  </property>
-                  <property name="toolTip">
-                   <string>what can the User see here</string>
-                  </property>
-                  <property name="autoFillBackground">
-                   <bool>false</bool>
-                  </property>
-                  <property name="icon">
-                   <iconset theme="QIcon::ThemeIcon::HelpAbout"/>
-                  </property>
-                  <property name="autoDefault">
-                   <bool>false</bool>
-                  </property>
-                  <property name="default">
-                   <bool>false</bool>
-                  </property>
-                  <property name="flat">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <widget class="QTextEdit" name="skyTE"/>
-              </item>
-              <item>
-               <widget class="QLabel" name="moonSunLbl">
-                <property name="text">
-                 <string>Moon &amp; Sun:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTextEdit" name="moonSunTE">
-                <property name="acceptRichText">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="planetsLbl">
-                <property name="text">
-                 <string>Planets:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTextEdit" name="planetsTE">
-                <property name="acceptRichText">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="zodiacLbl">
-                <property name="text">
-                 <string>Zodiac/ Lunar System:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTextEdit" name="zodiacTE">
-                <property name="acceptRichText">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="milkyWayLbl">
-                <property name="text">
-                 <string>Milky Way:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTextEdit" name="milkyWayTE">
-                <property name="acceptRichText">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="otherObjectsLbl">
-                <property name="text">
-                 <string>Other Celestial Objects:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTextEdit" name="otherObjectsTE">
-                <property name="acceptRichText">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="constellationsDescLbl">
-                <property name="text">
-                 <string>Constellations:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTextEdit" name="constellationsDescTE">
-                <property name="acceptRichText">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="referencesLbl">
-                <property name="text">
-                 <string>References:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTextEdit" name="referencesTE">
-                <property name="acceptRichText">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="acknowledgementsLbl">
-                <property name="text">
-                 <string>Acknowledgements:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTextEdit" name="acknowledgementsTE">
-                <property name="acceptRichText">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="classificationLbl">
-                <property name="text">
-                 <string>Classification of the Sky Culture</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="classificationCB">
+               <widget class="QLabel" name="descriptionTabExplanationLbl">
                 <property name="font">
                  <font>
                   <pointsize>13</pointsize>
                  </font>
                 </property>
+                <property name="text">
+                 <string>All fields are mandatory. If you have no information to provide, please write "N/A".</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
                </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="generalInfoGroup">
+                <property name="title">
+                 <string>General Information</string>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+                <layout class="QVBoxLayout" name="generalInfoLayout">
+                 <item>
+                  <widget class="QLabel" name="classificationLbl">
+                   <property name="text">
+                    <string>Classification of the Sky Culture</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="classificationCB">
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="authorsLbl">
+                   <property name="text">
+                    <string>Authors:*</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="authorsTE">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>80</height>
+                    </size>
+                   </property>
+                   <property name="acceptRichText">
+                    <bool>false</bool>
+                   </property>
+                   <property name="placeholderText">
+                    <string>Who are you and what is your background (native person, researcher, ...)? Ideally, please provide an email-address as well.</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="cultureDescriptionLbl">
+                   <property name="text">
+                    <string>Culture Description:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="cultureDescriptionTE">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>120</height>
+                    </size>
+                   </property>
+                   <property name="acceptRichText">
+                    <bool>false</bool>
+                   </property>
+                    <property name="placeholderText">^
+                     <string>Please describe specifics of the source (book/clay tablet/parchment/...) or of the culture: e.g. sun-focussed, moon-focussed, climate of the region, geographic specifics. Did they build pyramids or any other well-known thing? What did they do with astronomy (e.g. time keeping, calendar making, weather preditions...)? Are there connections to other cultures? Is this version a didactic reduction or is it derived from a specific other source?</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="aboutLbl">
+                   <property name="text">
+                    <string>About:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="aboutTE">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>120</height>
+                    </size>
+                   </property>
+                   <property name="acceptRichText">
+                    <bool>false</bool>
+                   </property>
+                   <property name="placeholderText">
+                     <string>How do you know about this Sky Culture? Is this contribution based on your own or other people's research? Is it based on interviews with Elders or reading ancient text, etc.?</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="celestialObjectsGroup">
+                <property name="title">
+                 <string>Sky (What can the user see here?)</string>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+                <layout class="QVBoxLayout" name="celestialObjectsLayout">
+                 <item>
+                  <layout class="QHBoxLayout">
+                   <item>
+                    <widget class="QLabel" name="skyLbl">
+                     <property name="text">
+                      <string>Sky Description</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="skyTE">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>100</height>
+                    </size>
+                   </property>
+                   <property name="acceptRichText">
+                    <bool>false</bool>
+                   </property>
+                   <property name="placeholderText">
+                     <string>What special features did this culture use, what shall the user watch out for? Is it worthwhile to click a specific button rather than others - e.g. divisions of the ecliptic, super-constellations, dark constellations, all-sky-constellations, zoom into the Pleiades, etc.? Do the constellations change with the months or remain the same throughout the year?</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="moonSunLbl">
+                   <property name="text">
+                    <string>Moon &amp; Sun:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="moonSunTE">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>100</height>
+                    </size>
+                   </property>
+                   <property name="acceptRichText">
+                    <bool>false</bool>
+                   </property>
+                    <property name="placeholderText">
+                     <string>How did they determine their calendar? Did they observe phases?</string>
+                    </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="planetsLbl">
+                   <property name="text">
+                    <string>Planets:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="planetsTE">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>100</height>
+                    </size>
+                   </property>
+                   <property name="acceptRichText">
+                    <bool>false</bool>
+                   </property>
+                    <property name="placeholderText">
+                     <string>Were the planets deified? What deities connect, what meaning do they have?</string>
+                    </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="zodiacLbl">
+                   <property name="text">
+                    <string>Zodiac/ Lunar System:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="zodiacTE">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>100</height>
+                    </size>
+                   </property>
+                   <property name="acceptRichText">
+                    <bool>false</bool>
+                   </property>
+                    <property name="placeholderText">
+                     <string>Did they have the (Bab.) zodiac system or any other division of the "path of the Moon"? If so, was it a (equal or unequal) division of the ecliptic or of any other type?</string>
+                    </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="milkyWayLbl">
+                   <property name="text">
+                    <string>Milky Way:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="milkyWayTE">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>100</height>
+                    </size>
+                   </property>
+                   <property name="acceptRichText">
+                    <bool>false</bool>
+                   </property>
+                    <property name="placeholderText">
+                     <string>Was the Milky Way deified? What meaning did it have?</string>
+                    </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="otherObjectsLbl">
+                   <property name="text">
+                    <string>Other Celestial Objects:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="otherObjectsTE">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>100</height>
+                    </size>
+                   </property>
+                   <property name="acceptRichText">
+                    <bool>false</bool>
+                   </property>
+                   <property name="placeholderText">
+                    <string>What other celestial objects were significant? E.g what about shooting stars, aurorae? Did they observe stellar transients, e.g. supernovae, that were visible only in a specific year?</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="constellationsDescLbl">
+                   <property name="text">
+                    <string>Constellations:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="constellationsDescTE">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>100</height>
+                    </size>
+                   </property>
+                   <property name="acceptRichText">
+                    <bool>false</bool>
+                   </property>
+                   <property name="placeholderText">
+                    <string>What is 'real' about your presentation? Did they really use stick figures? Did they paint images (or just use names of stars)? Did they use stars at all or prefer dark/bright clouds of the Milky Way?</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="creditsGroup">
+                <property name="title">
+                 <string>Credits and References</string>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+                <layout class="QVBoxLayout" name="creditsLayout">
+                 <item>
+                  <widget class="QLabel" name="referencesLbl">
+                   <property name="text">
+                    <string>References:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="referencesTE">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>120</height>
+                    </size>
+                   </property>
+                   <property name="acceptRichText">
+                    <bool>false</bool>
+                   </property>
+                   <property name="placeholderText">
+                    <string>What references did you use? E.g. specific texts, images, or other media?</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="acknowledgementsLbl">
+                   <property name="text">
+                    <string>Acknowledgements:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="acknowledgementsTE">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>120</height>
+                    </size>
+                   </property>
+                   <property name="acceptRichText">
+                    <bool>false</bool>
+                   </property>
+                   <property name="placeholderText">
+                    <string>What acknowledgements would you like to make? E.g. to interviewed people, organizations, or resources that helped you?</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
              </layout>
             </widget>
            </widget>
           </item>
          </layout>
-        </widget>
-        <widget class="QWidget" name="boundariesTab">
-         <attribute name="title">
-          <string>Boundaries</string>
-         </attribute>
-        </widget>
-        <widget class="QWidget" name="commonNamesTab">
-         <attribute name="title">
-          <string>Common Names</string>
-         </attribute>
-        </widget>
-        <widget class="QWidget" name="geoLocationTab">
-         <attribute name="title">
-          <string>Geolocation</string>
-         </attribute>
         </widget>
        </widget>
       </item>

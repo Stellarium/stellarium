@@ -45,7 +45,6 @@ struct Description
 	QString cultureDescription;
 	QString about;
 
-	QString geoRegion;
 	QString sky;
 	QString moonAndSun;
 	QString planets;
@@ -64,13 +63,21 @@ struct Description
 	 */
 	bool isComplete() const
 	{
-		return !name.trimmed().isEmpty() && !geoRegion.trimmed().isEmpty() && !sky.trimmed().isEmpty() &&
-		       !moonAndSun.trimmed().isEmpty() && !zodiac.trimmed().isEmpty() && !planets.trimmed().isEmpty() &&
-		       !constellations.trimmed().isEmpty() && !milkyWay.trimmed().isEmpty() &&
-		       !otherObjects.trimmed().isEmpty() && !about.trimmed().isEmpty() &&
-		       !authors.trimmed().isEmpty() && !acknowledgements.trimmed().isEmpty() &&
-		       !references.trimmed().isEmpty() && classification != scm::ClassificationType::NONE &&
-				license != scm::LicenseType::NONE;
+		return !name.trimmed().isEmpty() &&
+			   !authors.trimmed().isEmpty() &&
+			   license != scm::LicenseType::NONE &&
+			   !cultureDescription.trimmed().isEmpty() &&
+			   !about.trimmed().isEmpty() &&
+			   !sky.trimmed().isEmpty() &&
+			   !moonAndSun.trimmed().isEmpty() &&
+			   !planets.trimmed().isEmpty() &&
+			   !zodiac.trimmed().isEmpty() &&
+			   !milkyWay.trimmed().isEmpty() &&
+			   !otherObjects.trimmed().isEmpty() &&
+			   !constellations.trimmed().isEmpty() &&
+			   !references.trimmed().isEmpty() &&
+			   !acknowledgements.trimmed().isEmpty() &&
+			   classification != scm::ClassificationType::NONE;
 	}
 };
 } // namespace scm

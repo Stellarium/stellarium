@@ -279,7 +279,6 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 	desc.cultureDescription = ui->cultureDescriptionTE->toPlainText();
 	desc.about              = ui->aboutTE->toPlainText();
 
-	desc.geoRegion    = ui->geoRegionTE->toPlainText();
 	desc.sky          = ui->skyTE->toPlainText();
 	desc.moonAndSun   = ui->moonSunTE->toPlainText();
 	desc.planets      = ui->planetsTE->toPlainText();
@@ -315,7 +314,6 @@ void ScmSkyCultureDialog::resetDialog()
 		ui->authorsTE->clear();
 		ui->cultureDescriptionTE->clear();
 		ui->aboutTE->clear();
-		ui->geoRegionTE->clear();
 		ui->skyTE->clear();
 		ui->moonSunTE->clear();
 		ui->planetsTE->clear();
