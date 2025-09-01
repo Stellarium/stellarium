@@ -32,7 +32,7 @@ environment:
     QT_VERSION_MAJOR: 6
     QT_BASEDIR: C:\Qt\6.8\msvc2022_64
     CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A x64
+    CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=On
     exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
     exiv2baseName: exiv2-0.28.0-2019msvc64
     scConverterEnabled: 1
@@ -98,6 +98,7 @@ before_build:
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:BUILD_NAME.contains('Win')) { $env:USE_MESA = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable" -and $env:QT_VERSION_MAJOR -eq "6") { $env:SIGNING = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable" -and $env:QT_VERSION_MAJOR -eq "5") { $env:SIGNING = 'true' }
+  - ps: if($env:CMAKE_ARGS.contains('SCM_SHOULD_ENABLE_CONVERTER=On') -or $env:CMAKE_ARGS.contains('SCM_SHOULD_ENABLE_CONVERTER=ON') -or $env:scConverterEnabled -eq '1') { $env:INSTALL_CONVERTER_DEPS = 'true' } else { $env:INSTALL_CONVERTER_DEPS = 'false' }
 
   - ps: if($env:exiv2url -ne $null) { appveyor DownloadFile $env:exiv2url -FileName c:\$env:exiv2baseName.zip }
   - ps: if($env:exiv2url -ne $null) { 7z e c:\$env:exiv2baseName.zip -spf -oc:\ }
@@ -106,20 +107,20 @@ before_build:
   - if [%USE_EXT_WEBENGINE%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/6.8.1-0-202411221529qtwebengine-Windows-Windows_11_23H2-MSVC2022-Windows-Windows_11_23H2-X86_64.7z -FileName c:\qtwebengine.7z 
   - if [%USE_EXT_WEBENGINE%]==[true] 7z e c:\qtwebengine.7z -spf -o%QT_BASEDIR%
 
-  - ps: appveyor DownloadFile $env:gettextURL -FileName c:\$env:gettextBaseName.zip
-  - ps: 7z e c:\$env:gettextBaseName.zip -spf -oc:\$env:gettextBaseName
-  - ps: mkdir c:\$env:gettextBaseName\include
-  - ps: appveyor DownloadFile $env:gettextSrcURL -FileName c:\$env:gettextSrcBaseName.tar.xz
-  - ps: 7z e c:\$env:gettextSrcBaseName.tar.xz -spf -oc:\
-  - ps: 7z e c:\$env:gettextSrcBaseName.tar -spf -oc:\
-  - ps: (cat c:\$env:gettextSrcBaseName\gettext-tools\libgettextpo\gettext-po.in.h) -replace "extern ([^()]*);","extern __declspec (dllimport) `$1;" > c:\$env:gettextBaseName\include\gettext-po.h
-  - ps: echo EXPORTS > libgettextpo.def
-  - ps: cp c:\$env:gettextBaseName\bin\libgettextpo-0.dll c:\$env:gettextBaseName\bin\libgettextpo.dll
-  - ps: (dumpbin /EXPORTS c:\$env:gettextBaseName\bin\libgettextpo.dll) -match "^.*\b(po_.*)$" -replace "^.*\b(po_.*)$","`$1" >> libgettextpo.def
-  - ps: lib /def:libgettextpo.def /out:c:\$env:gettextBaseName\lib\libgettextpo.lib
+  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: appveyor DownloadFile $env:gettextURL -FileName c:\$env:gettextBaseName.zip
+  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: 7z e c:\$env:gettextBaseName.zip -spf -oc:\$env:gettextBaseName
+  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: mkdir c:\$env:gettextBaseName\include
+  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: appveyor DownloadFile $env:gettextSrcURL -FileName c:\$env:gettextSrcBaseName.tar.xz
+  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: 7z e c:\$env:gettextSrcBaseName.tar.xz -spf -oc:\
+  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: 7z e c:\$env:gettextSrcBaseName.tar -spf -oc:\
+  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: (cat c:\$env:gettextSrcBaseName\gettext-tools\libgettextpo\gettext-po.in.h) -replace "extern ([^()]*);","extern __declspec (dllimport) `$1;" > c:\$env:gettextBaseName\include\gettext-po.h
+  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: echo EXPORTS > libgettextpo.def
+  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: cp c:\$env:gettextBaseName\bin\libgettextpo-0.dll c:\$env:gettextBaseName\bin\libgettextpo.dll
+  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: (dumpbin /EXPORTS c:\$env:gettextBaseName\bin\libgettextpo.dll) -match "^.*\b(po_.*)$" -replace "^.*\b(po_.*)$","`$1" >> libgettextpo.def
+  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: lib /def:libgettextpo.def /out:c:\$env:gettextBaseName\lib\libgettextpo.lib
 
-  - ps: appveyor DownloadFile $env:tidyURL -FileName c:\$env:tidyBaseName.zip
-  - ps: 7z e c:\$env:tidyBaseName.zip -spf -oc:\
+  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: appveyor DownloadFile $env:tidyURL -FileName c:\$env:tidyBaseName.zip
+  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: 7z e c:\$env:tidyBaseName.zip -spf -oc:\
 
   - if [1]==[%scConverterEnabled%] git clone -q --depth=2 https://github.com/Stellarium/stellarium-skyculture-converter c:\skyculture-converter
   - if [1]==[%scConverterEnabled%] mkdir c:\skyculture-converter\build

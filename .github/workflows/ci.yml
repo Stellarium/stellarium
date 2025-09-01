@@ -81,7 +81,11 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On "${{ github.workspace }}"
+        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+              -DSTELLARIUM_RELEASE_BUILD=Off \
+              -DENABLE_TESTING=On \
+              -DSCM_SHOULD_ENABLE_CONVERTER=On \
+              "${{ github.workspace }}"
 
     - name: Compile
       working-directory: build
@@ -211,6 +215,7 @@ jobs:
         cmake -DCMAKE_PREFIX_PATH="/usr/local" \
               -DCMAKE_BUILD_TYPE=RelWithDebInfo \
               -DSTELLARIUM_RELEASE_BUILD=Off \
+              -DSCM_SHOULD_ENABLE_CONVERTER=On \
               -DENABLE_TESTING=On ${{ github.workspace }}
 
     - name: Compile
@@ -257,6 +262,7 @@ jobs:
               -DCMAKE_BUILD_TYPE=RelWithDebInfo \
               -DSTELLARIUM_RELEASE_BUILD=Off \
               -DENABLE_TESTING=On \
+              -DSCM_SHOULD_ENABLE_CONVERTER=On \
               ${{ github.workspace }}
 
     - name: Compile
@@ -340,6 +346,7 @@ jobs:
                 -DSTELLARIUM_RELEASE_BUILD=Off \
                 -DENABLE_TESTING=On \
                 -DLIBTIDY_LIBRARY="/usr/local/lib/libtidy5.so" \
+                -DSCM_SHOULD_ENABLE_CONVERTER=On \
                 "${{ github.workspace }}"
           make -j3
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
