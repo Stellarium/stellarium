@@ -97,7 +97,7 @@ void ScmStartDialog::createDialogContent()
 	// Converter is disabled, so disable the button
 	ui->scmStartConvertpushButton->setEnabled(false);
 	ui->scmStartConvertpushButton->setToolTip(
-		tr("The Sky Culture Converter is not available in this build."));
+		tr("The Sky Culture Converter has been turned off for this build."));
 #endif  // SCM_CONVERTER_ENABLED_CPP
 /* ================================================================================================================== */
 }
