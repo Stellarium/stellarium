@@ -26,7 +26,7 @@ IF(SCM_SHOULD_ENABLE_CONVERTER AND NOT IS_QT_5 AND NOT IS_WIN_ARM64)
   MESSAGE(STATUS "Sky Culture Converter will be enabled.")
 
   # download https://github.com/Stellarium/stellarium-skyculture-converter
-  CPMAddPackage(
+  CPMFindPackage(
     NAME              StellariumSkyCultureConverter
     GITHUB_REPOSITORY Stellarium/stellarium-skyculture-converter
     GIT_TAG           master
@@ -35,7 +35,7 @@ IF(SCM_SHOULD_ENABLE_CONVERTER AND NOT IS_QT_5 AND NOT IS_WIN_ARM64)
   )
 
   # download https://github.com/selmf/unarr for archives
-  CPMAddPackage(
+  CPMFindPackage(
     NAME              unarr
     GITHUB_REPOSITORY selmf/unarr
     GIT_TAG           v1.1.1
