@@ -32,7 +32,7 @@ environment:
     QT_VERSION_MAJOR: 6
     QT_BASEDIR: C:\Qt\6.8\msvc2022_64
     CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A x64
+    CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=On
     exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
     exiv2baseName: exiv2-0.28.0-2019msvc64
     scConverterEnabled: 1
@@ -130,8 +130,8 @@ before_build:
 
   - cd c:\stellarium
   - mkdir build && cd build
-  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName% -DENABLE_MEDIA=On -DENABLE_PODIR=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -DSCM_SHOULD_ENABLE_CONVERTER=On -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
-  - if [%PUBLISH_BINARY%]==[false] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName% -DENABLE_MEDIA=On -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -DSCM_SHOULD_ENABLE_CONVERTER=On -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
+  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName% -DENABLE_MEDIA=On -DENABLE_PODIR=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
+  - if [%PUBLISH_BINARY%]==[false] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName% -DENABLE_MEDIA=On -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
 
 build:
   project: c:\stellarium\build\Stellarium.sln
