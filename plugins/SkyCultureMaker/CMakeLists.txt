@@ -1,8 +1,8 @@
 # This is the cmake config file for the Sky Culture Maker plugin
 SET(SCM_VERSION "1.0.0")
 
-# Option to manually control converter, defaults to TRUE, but overridden by Qt version
-OPTION(SCM_SHOULD_ENABLE_CONVERTER "Attempt to enable Sky Culture Converter" TRUE)
+# Option to manually control converter, defaults to FALSE
+OPTION(SCM_SHOULD_ENABLE_CONVERTER "Attempt to enable Sky Culture Converter" FALSE)
 SET(SCM_CONVERTER_ENABLED FALSE) # Default to disabled
 
 # Detect Qt5

@@ -97,8 +97,7 @@ void ScmStartDialog::createDialogContent()
 	// Converter is disabled, so disable the button
 	ui->scmStartConvertpushButton->setEnabled(false);
 	ui->scmStartConvertpushButton->setToolTip(
-		tr("Converter is only available from Qt6.5 onwards, but the current build uses %1")
-			.arg(QT_VERSION_STR));
+		tr("The Sky Culture Converter is not available in this build."));
 #endif  // SCM_CONVERTER_ENABLED_CPP
 /* ================================================================================================================== */
 }
