@@ -80,6 +80,7 @@ before_build:
   - set USE_EXT_LIBSSL=false
   - set USE_EXT_LIBGLES=false
   - set SIGNING=false
+  - set INSTALL_CONVERTER_DEPS=false
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\Inno Setup 6
   - set PATH=%VSPATH%;%QT_BASEDIR%\bin;c:\%exiv2baseName%\bin;%INNSPATH%;c:\%gettextBaseName%\bin;c:\%tidyBaseName%\bin;c:\skyculture-converter;%PATH%
 
@@ -98,7 +99,7 @@ before_build:
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:BUILD_NAME.contains('Win')) { $env:USE_MESA = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable" -and $env:QT_VERSION_MAJOR -eq "6") { $env:SIGNING = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable" -and $env:QT_VERSION_MAJOR -eq "5") { $env:SIGNING = 'true' }
-  - ps: if($env:CMAKE_ARGS.contains('SCM_SHOULD_ENABLE_CONVERTER=On') -or $env:CMAKE_ARGS.contains('SCM_SHOULD_ENABLE_CONVERTER=ON') -or $env:scConverterEnabled -eq '1') { $env:INSTALL_CONVERTER_DEPS = 'true' } else { $env:INSTALL_CONVERTER_DEPS = 'false' }
+  - ps: if($env:CMAKE_ARGS -imatch 'SCM_SHOULD_ENABLE_CONVERTER=ON' -or $env:scConverterEnabled -eq '1') { $env:INSTALL_CONVERTER_DEPS = 'true' }
 
   - ps: if($env:exiv2url -ne $null) { appveyor DownloadFile $env:exiv2url -FileName c:\$env:exiv2baseName.zip }
   - ps: if($env:exiv2url -ne $null) { 7z e c:\$env:exiv2baseName.zip -spf -oc:\ }
