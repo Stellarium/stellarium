@@ -29,7 +29,7 @@ IF(SCM_SHOULD_ENABLE_CONVERTER AND NOT IS_QT_5 AND NOT IS_WIN_ARM64)
   CPMFindPackage(
     NAME StellariumSkyCultureConverter
     URL https://github.com/Stellarium/stellarium-skyculture-converter/archive/refs/tags/v0.0.1.zip
-    URL_HASH SHA256:07c4f5b7f4cbf3d1d62b2eed30237d04b979f72415476c2f401a3c6198eee2ea
+    URL_HASH SHA256=07c4f5b7f4cbf3d1d62b2eed30237d04b979f72415476c2f401a3c6198eee2ea
     EXCLUDE_FROM_ALL yes
     OPTIONS
       "SKYCULTURE_CONVERTER_BUILD_TESTS OFF"
@@ -39,7 +39,7 @@ IF(SCM_SHOULD_ENABLE_CONVERTER AND NOT IS_QT_5 AND NOT IS_WIN_ARM64)
   CPMFindPackage(
     NAME unarr
     URL https://github.com/selmf/unarr/releases/download/v1.1.1/unarr-1.1.1.tar.xz
-    URL_HASH SHA256:328efa04ea996dd38916b1247a8cf176ac29b85caf92174e34d31998de4174d2
+    URL_HASH SHA256=328efa04ea996dd38916b1247a8cf176ac29b85caf92174e34d31998de4174d2
     EXCLUDE_FROM_ALL yes
     OPTIONS
       "USE_SYSTEM_BZ2 OFF"
