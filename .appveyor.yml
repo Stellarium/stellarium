@@ -110,20 +110,20 @@ before_build:
   - if [%USE_EXT_WEBENGINE%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/6.8.1-0-202411221529qtwebengine-Windows-Windows_11_23H2-MSVC2022-Windows-Windows_11_23H2-X86_64.7z -FileName c:\qtwebengine.7z 
   - if [%USE_EXT_WEBENGINE%]==[true] 7z e c:\qtwebengine.7z -spf -o%QT_BASEDIR%
 
-  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") appveyor DownloadFile $env:gettextURL -FileName c:\$env:gettextBaseName.zip
-  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") 7z e c:\$env:gettextBaseName.zip -spf -oc:\$env:gettextBaseName
-  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") mkdir c:\$env:gettextBaseName\include
-  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") appveyor DownloadFile $env:gettextSrcURL -FileName c:\$env:gettextSrcBaseName.tar.xz
-  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") 7z e c:\$env:gettextSrcBaseName.tar.xz -spf -oc:\
-  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") 7z e c:\$env:gettextSrcBaseName.tar -spf -oc:\
-  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") (cat c:\$env:gettextSrcBaseName\gettext-tools\libgettextpo\gettext-po.in.h) -replace "extern ([^()]*);","extern __declspec (dllimport) `$1;" > c:\$env:gettextBaseName\include\gettext-po.h
-  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") echo EXPORTS > libgettextpo.def
-  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") cp c:\$env:gettextBaseName\bin\libgettextpo-0.dll c:\$env:gettextBaseName\bin\libgettextpo.dll
-  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") (dumpbin /EXPORTS c:\$env:gettextBaseName\bin\libgettextpo.dll) -match "^.*\b(po_.*)$" -replace "^.*\b(po_.*)$","`$1" >> libgettextpo.def
-  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") lib /def:libgettextpo.def /out:c:\$env:gettextBaseName\lib\libgettextpo.lib
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { appveyor DownloadFile $env:gettextURL -FileName c:\$env:gettextBaseName.zip }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { 7z e c:\$env:gettextBaseName.zip -spf -oc:\$env:gettextBaseName }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { mkdir c:\$env:gettextBaseName\include }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { appveyor DownloadFile $env:gettextSrcURL -FileName c:\$env:gettextSrcBaseName.tar.xz }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { 7z e c:\$env:gettextSrcBaseName.tar.xz -spf -oc:\ }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { 7z e c:\$env:gettextSrcBaseName.tar -spf -oc:\ }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { (cat c:\$env:gettextSrcBaseName\gettext-tools\libgettextpo\gettext-po.in.h) -replace "extern ([^()]*);","extern __declspec (dllimport) `$1;" > c:\$env:gettextBaseName\include\gettext-po.h }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { echo EXPORTS > libgettextpo.def }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { cp c:\$env:gettextBaseName\bin\libgettextpo-0.dll c:\$env:gettextBaseName\bin\libgettextpo.dll }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { (dumpbin /EXPORTS c:\$env:gettextBaseName\bin\libgettextpo.dll) -match "^.*\b(po_.*)$" -replace "^.*\b(po_.*)$","`$1" >> libgettextpo.def }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { lib /def:libgettextpo.def /out:c:\$env:gettextBaseName\lib\libgettextpo.lib }
 
-  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") appveyor DownloadFile $env:tidyURL -FileName c:\$env:tidyBaseName.zip
-  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") 7z e c:\$env:tidyBaseName.zip -spf -oc:\
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { appveyor DownloadFile $env:tidyURL -FileName c:\$env:tidyBaseName.zip }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { 7z e c:\$env:tidyBaseName.zip -spf -oc:\ }
 
   - if [%INSTALL_CONVERTER%]==[true] git clone -q --depth=2 https://github.com/Stellarium/stellarium-skyculture-converter c:\skyculture-converter
   - if [%INSTALL_CONVERTER%]==[true] mkdir c:\skyculture-converter\build
