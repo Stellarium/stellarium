@@ -1818,7 +1818,9 @@ QList<Constellation*> ConstellationMgr::isObjectIn(const StelObject *s, bool use
 	{
 		for (auto* constellation : constellations)
 		{
-			if (constellation->convexHull->contains(s->getJ2000EquatorialPos(core)))
+			Vec3d pos=s->getJ2000EquatorialPos(core);
+			pos.normalize();
+			if (constellation->convexHull->contains(pos))
 				result.append(constellation);
 			else foreach(auto &obj, constellation->constellation)
 			{
