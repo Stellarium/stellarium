@@ -110,20 +110,20 @@ before_build:
   - if [%USE_EXT_WEBENGINE%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/6.8.1-0-202411221529qtwebengine-Windows-Windows_11_23H2-MSVC2022-Windows-Windows_11_23H2-X86_64.7z -FileName c:\qtwebengine.7z 
   - if [%USE_EXT_WEBENGINE%]==[true] 7z e c:\qtwebengine.7z -spf -o%QT_BASEDIR%
 
-  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: appveyor DownloadFile $env:gettextURL -FileName c:\$env:gettextBaseName.zip
-  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: 7z e c:\$env:gettextBaseName.zip -spf -oc:\$env:gettextBaseName
-  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: mkdir c:\$env:gettextBaseName\include
-  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: appveyor DownloadFile $env:gettextSrcURL -FileName c:\$env:gettextSrcBaseName.tar.xz
-  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: 7z e c:\$env:gettextSrcBaseName.tar.xz -spf -oc:\
-  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: 7z e c:\$env:gettextSrcBaseName.tar -spf -oc:\
-  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: (cat c:\$env:gettextSrcBaseName\gettext-tools\libgettextpo\gettext-po.in.h) -replace "extern ([^()]*);","extern __declspec (dllimport) `$1;" > c:\$env:gettextBaseName\include\gettext-po.h
-  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: echo EXPORTS > libgettextpo.def
-  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: cp c:\$env:gettextBaseName\bin\libgettextpo-0.dll c:\$env:gettextBaseName\bin\libgettextpo.dll
-  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: (dumpbin /EXPORTS c:\$env:gettextBaseName\bin\libgettextpo.dll) -match "^.*\b(po_.*)$" -replace "^.*\b(po_.*)$","`$1" >> libgettextpo.def
-  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: lib /def:libgettextpo.def /out:c:\$env:gettextBaseName\lib\libgettextpo.lib
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") appveyor DownloadFile $env:gettextURL -FileName c:\$env:gettextBaseName.zip
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") 7z e c:\$env:gettextBaseName.zip -spf -oc:\$env:gettextBaseName
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") mkdir c:\$env:gettextBaseName\include
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") appveyor DownloadFile $env:gettextSrcURL -FileName c:\$env:gettextSrcBaseName.tar.xz
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") 7z e c:\$env:gettextSrcBaseName.tar.xz -spf -oc:\
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") 7z e c:\$env:gettextSrcBaseName.tar -spf -oc:\
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") (cat c:\$env:gettextSrcBaseName\gettext-tools\libgettextpo\gettext-po.in.h) -replace "extern ([^()]*);","extern __declspec (dllimport) `$1;" > c:\$env:gettextBaseName\include\gettext-po.h
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") echo EXPORTS > libgettextpo.def
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") cp c:\$env:gettextBaseName\bin\libgettextpo-0.dll c:\$env:gettextBaseName\bin\libgettextpo.dll
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") (dumpbin /EXPORTS c:\$env:gettextBaseName\bin\libgettextpo.dll) -match "^.*\b(po_.*)$" -replace "^.*\b(po_.*)$","`$1" >> libgettextpo.def
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") lib /def:libgettextpo.def /out:c:\$env:gettextBaseName\lib\libgettextpo.lib
 
-  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: appveyor DownloadFile $env:tidyURL -FileName c:\$env:tidyBaseName.zip
-  - if [%INSTALL_CONVERTER_DEPS%]==[true] ps: 7z e c:\$env:tidyBaseName.zip -spf -oc:\
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") appveyor DownloadFile $env:tidyURL -FileName c:\$env:tidyBaseName.zip
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") 7z e c:\$env:tidyBaseName.zip -spf -oc:\
 
   - if [%INSTALL_CONVERTER%]==[true] git clone -q --depth=2 https://github.com/Stellarium/stellarium-skyculture-converter c:\skyculture-converter
   - if [%INSTALL_CONVERTER%]==[true] mkdir c:\skyculture-converter\build
@@ -149,12 +149,12 @@ after_test:
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target install
   - if [%DEBUG_WINDEPLOYQT%]==[true] cd c:\stellarium\build\
   - if [%DEBUG_WINDEPLOYQT%]==[true] for %%i in (windeployqt.*) do appveyor PushArtifact %%i
-  - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\%gettextBaseName%\bin\libgettextpo-0.dll c:\stellarium-package\bin\libgettextpo.dll
-  - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\%gettextBaseName%\bin\libintl-8.dll c:\stellarium-package\bin\
-  - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\%gettextBaseName%\bin\libiconv-2.dll c:\stellarium-package\bin\
-  - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\%tidyBaseName%\bin\tidy.dll c:\stellarium-package\bin\
-  - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\sc-converter\skyculture-converter.exe c:\stellarium-package\bin\
-  - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\sc-converter\Qt6Xml.dll c:\stellarium-package\qtstuff\
+  - if [%INSTALL_CONVERTER%]==[true] copy c:\%gettextBaseName%\bin\libgettextpo-0.dll c:\stellarium-package\bin\libgettextpo.dll
+  - if [%INSTALL_CONVERTER%]==[true] copy c:\%gettextBaseName%\bin\libintl-8.dll c:\stellarium-package\bin\
+  - if [%INSTALL_CONVERTER%]==[true] copy c:\%gettextBaseName%\bin\libiconv-2.dll c:\stellarium-package\bin\
+  - if [%INSTALL_CONVERTER%]==[true] copy c:\%tidyBaseName%\bin\tidy.dll c:\stellarium-package\bin\
+  - if [%INSTALL_CONVERTER%]==[true] copy c:\sc-converter\skyculture-converter.exe c:\stellarium-package\bin\
+  - if [%INSTALL_CONVERTER%]==[true] copy c:\sc-converter\Qt6Xml.dll c:\stellarium-package\qtstuff\
   - if [%USE_EXT_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win%BITS%.zip -FileName c:\stellarium\build\libGLES.zip
   - if [%USE_EXT_LIBGLES%]==[true] 7z e c:\stellarium\build\libGLES.zip -aoa -oc:\stellarium-package\qtstuff
   - if [%USE_MESA%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-%PKGARCH%.dll -FileName c:\stellarium-package\qtstuff\opengl32sw.dll
