@@ -32,7 +32,7 @@ environment:
     QT_VERSION_MAJOR: 6
     QT_BASEDIR: C:\Qt\6.8\msvc2022_64
     CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=On
+    CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=ON
     exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
     exiv2baseName: exiv2-0.28.0-2019msvc64
     scConverterEnabled: 1
@@ -99,7 +99,10 @@ before_build:
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:BUILD_NAME.contains('Win')) { $env:USE_MESA = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable" -and $env:QT_VERSION_MAJOR -eq "6") { $env:SIGNING = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable" -and $env:QT_VERSION_MAJOR -eq "5") { $env:SIGNING = 'true' }
-  - ps: if($env:CMAKE_ARGS -imatch 'SCM_SHOULD_ENABLE_CONVERTER=ON' -or $env:scConverterEnabled -eq '1') { $env:INSTALL_CONVERTER_DEPS = 'true' }
+  - ps: if($env:CMAKE_ARGS -imatch 'SCM_SHOULD_ENABLE_CONVERTER=ON' -or $env:scConverterEnabled -eq "1") { $env:INSTALL_CONVERTER_DEPS = 'true' }
+  - ps: Write-Host "INSTALL_CONVERTER_DEPS is set to: $env:INSTALL_CONVERTER_DEPS"
+  - ps: Write-Host "CMAKE_ARGS contains: $env:CMAKE_ARGS"
+  - ps: Write-Host "scConverterEnabled is: $env:scConverterEnabled"
 
   - ps: if($env:exiv2url -ne $null) { appveyor DownloadFile $env:exiv2url -FileName c:\$env:exiv2baseName.zip }
   - ps: if($env:exiv2url -ne $null) { 7z e c:\$env:exiv2baseName.zip -spf -oc:\ }
