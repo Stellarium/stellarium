@@ -155,7 +155,7 @@ void ScmSkyCultureDialog::createDialogContent()
 }
 
 void ScmSkyCultureDialog::saveSkyCulture()
-{	
+{
 	scm::Description desc = getDescriptionFromTextEdit();
 
 	// check if license is set
