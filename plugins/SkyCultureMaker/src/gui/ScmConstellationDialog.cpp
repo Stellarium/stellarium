@@ -141,6 +141,10 @@ void ScmConstellationDialog::createDialogContent()
 	connect(ui->saveBtn, &QPushButton::clicked, this, &ScmConstellationDialog::saveConstellation);
 	connect(ui->cancelBtn, &QPushButton::clicked, this, &ScmConstellationDialog::cancel);
 
+	QFont infoLblFont = QFont(maker->getFont());
+	infoLblFont.setBold(true);
+	ui->infoLbl->setFont(infoLblFont);
+
 	// LABELS TAB
 	connect(ui->enNameTE, &QTextEdit::textChanged, this,
 	        [this]()
@@ -314,6 +318,7 @@ void ScmConstellationDialog::bindSelectedStar()
 
 void ScmConstellationDialog::tabChanged(int index)
 {
+	Q_UNUSED(index);
 	ui->penBtn->setChecked(false);
 	ui->eraserBtn->setChecked(false);
 	maker->setDrawTool(scm::DrawTools::None);

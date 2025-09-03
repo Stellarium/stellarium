@@ -96,13 +96,7 @@
          <item row="0" column="0">
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
-            <widget class="QLabel" name="label">
-             <property name="font">
-              <font>
-               <pointsize>16</pointsize>
-               <strikeout>false</strikeout>
-              </font>
-             </property>
+            <widget class="QLabel" name="questionLbl">
              <property name="text">
               <string>Hide the plugin to resume later or abort the process?</string>
              </property>

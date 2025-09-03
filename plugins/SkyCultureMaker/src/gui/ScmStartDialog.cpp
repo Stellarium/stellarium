@@ -79,6 +79,12 @@ void ScmStartDialog::createDialogContent()
 	connect(ui->scmStartEditpushButton, &QPushButton::clicked, this,
 	        &ScmStartDialog::closeDialog); // Edit - TODO: add logic (currently closing the window)
 
+	// Set welcome label font size
+	QFont welcomeLabelFont = QFont(maker->getFont());
+	welcomeLabelFont.setPointSize(welcomeLabelFont.pixelSize() + 4);
+	welcomeLabelFont.setBold(true);
+	ui->welcomeLabel->setFont(welcomeLabelFont);
+
 /* =============================================== SkyCultureConverter ============================================== */
 #ifdef SCM_CONVERTER_ENABLED_CPP
 	ui->scmStartConvertpushButton->setToolTip(

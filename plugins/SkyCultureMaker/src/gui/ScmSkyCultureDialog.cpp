@@ -116,7 +116,12 @@ void ScmSkyCultureDialog::createDialogContent()
 	connect(ui->constellationsList, &QListWidget::itemSelectionChanged, this,
 	        &ScmSkyCultureDialog::updateRemoveConstellationButton);
 
-	// License Tab
+	// Description Tab
+	
+	QFont descriptionTabLblFont = QFont(maker->getFont());
+	descriptionTabLblFont.setPointSize(descriptionTabLblFont.pixelSize() + 2);
+	descriptionTabLblFont.setBold(true);
+	ui->descriptionTabLbl->setFont(descriptionTabLblFont);
 
 	// add all licenses to the combo box
 	for (const auto &license : scm::LICENSES)
@@ -150,7 +155,7 @@ void ScmSkyCultureDialog::createDialogContent()
 }
 
 void ScmSkyCultureDialog::saveSkyCulture()
-{
+{	
 	scm::Description desc = getDescriptionFromTextEdit();
 
 	// check if license is set
