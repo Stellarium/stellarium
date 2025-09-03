@@ -81,14 +81,14 @@ void ScmStartDialog::createDialogContent()
 
 	// Set welcome label font size
 	QFont welcomeLabelFont = QFont(maker->getFont());
-	welcomeLabelFont.setPointSize(welcomeLabelFont.pixelSize() + 4);
+	welcomeLabelFont.setPixelSize(welcomeLabelFont.pixelSize() + 4);
 	welcomeLabelFont.setBold(true);
 	ui->welcomeLabel->setFont(welcomeLabelFont);
 
 /* =============================================== SkyCultureConverter ============================================== */
 #ifdef SCM_CONVERTER_ENABLED_CPP
 	ui->scmStartConvertpushButton->setToolTip(
-		tr("Convert SkyCultures from the legacy (fab) format to the new (json) format"));
+		tr("Convert sky cultures from the legacy (fab) format to the new (json) format"));
 	connect(ui->scmStartConvertpushButton, &QPushButton::clicked, this,
 	        [this]()
 	        {

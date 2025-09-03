@@ -146,6 +146,12 @@ void ScmConstellationDialog::createDialogContent()
 	ui->infoLbl->setFont(infoLblFont);
 
 	// LABELS TAB
+
+	QFont labelsTitleFont = QFont(maker->getFont());
+	labelsTitleFont.setPixelSize(labelsTitleFont.pixelSize() + 2);
+	labelsTitleFont.setBold(true);
+	ui->labelsTitle->setFont(labelsTitleFont);
+
 	connect(ui->enNameTE, &QTextEdit::textChanged, this,
 	        [this]()
 	        {

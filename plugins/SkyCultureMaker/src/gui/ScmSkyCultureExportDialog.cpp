@@ -62,6 +62,11 @@ void ScmSkyCultureExportDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 
+	QFont titleLblFont = QFont(maker->getFont());
+	titleLblFont.setPixelSize(titleLblFont.pixelSize() + 2);
+	titleLblFont.setBold(true);
+	ui->titleLbl->setFont(titleLblFont);
+
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmSkyCultureExportDialog::close);

@@ -116,10 +116,16 @@ void ScmSkyCultureDialog::createDialogContent()
 	connect(ui->constellationsList, &QListWidget::itemSelectionChanged, this,
 	        &ScmSkyCultureDialog::updateRemoveConstellationButton);
 
+	QFont headlineFont = QFont(maker->getFont());
+	headlineFont.setPixelSize(headlineFont.pixelSize() + 2);
+	ui->currentSCNameLbl->setFont(headlineFont);
+	ui->constellationsLbl->setFont(headlineFont);
+	ui->selectLicenseLbl->setFont(headlineFont);
+
 	// Description Tab
 	
 	QFont descriptionTabLblFont = QFont(maker->getFont());
-	descriptionTabLblFont.setPointSize(descriptionTabLblFont.pixelSize() + 2);
+	descriptionTabLblFont.setPixelSize(descriptionTabLblFont.pixelSize() + 2);
 	descriptionTabLblFont.setBold(true);
 	ui->descriptionTabLbl->setFont(descriptionTabLblFont);
 

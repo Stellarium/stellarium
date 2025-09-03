@@ -61,7 +61,7 @@ void ScmHideOrAbortMakerDialog::createDialogContent()
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	QFont questionFont = QFont(maker->getFont());
-	questionFont.setPointSize(questionFont.pixelSize() + 4);
+	questionFont.setPixelSize(questionFont.pixelSize() + 4);
 	ui->questionLbl->setFont(questionFont);
 
 	// Buttons
