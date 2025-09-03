@@ -52,7 +52,6 @@ struct Classification
 enum class ClassificationType
 {
 	NONE = 0,
-	INCOMPLETE,
 	PERSONAL,
 	TRADITIONAL,
 	ETHNOGRAPHIC,
@@ -66,7 +65,6 @@ inline QString classificationTypeToString(ClassificationType type)
 	switch (type)
 	{
 	case ClassificationType::NONE: return "None";
-	case ClassificationType::INCOMPLETE: return "Incomplete";
 	case ClassificationType::PERSONAL: return "Personal";
 	case ClassificationType::TRADITIONAL: return "Traditional";
 	case ClassificationType::ETHNOGRAPHIC: return "Ethnographic";
@@ -79,12 +77,6 @@ inline QString classificationTypeToString(ClassificationType type)
 
 const std::map<ClassificationType, Classification> CLASSIFICATIONS = {
 	{ClassificationType::NONE, Classification("None", "Please select a valid classification.")},
-	{
-         ClassificationType::INCOMPLETE,
-         Classification("Incomplete", "This is a personally developed sky culture which is not founded in "
-                                             "published historical or ethnological research. Stellarium may include it "
-                                             "when it is “pretty enough” without really approving its contents."),
-	 },
 	{
          ClassificationType::PERSONAL,
          Classification("Personal",
