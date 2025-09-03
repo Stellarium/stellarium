@@ -32,6 +32,7 @@
 namespace scm
 {
 
+//! Struct to represent a license
 struct License
 {
 	QString name;
@@ -44,7 +45,7 @@ struct License
 	}
 };
 
-// Enum class to represent different types of licenses
+//! Enum class to represent different types of licenses
 enum class LicenseType
 {
 	NONE = 0,
@@ -52,6 +53,7 @@ enum class LicenseType
 	CC_BY
 };
 
+//! Map of license types to their corresponding name and description
 const std::map<LicenseType, License> LICENSES = {
 	{LicenseType::NONE, License("None", "Please select a valid license.")},
 	{LicenseType::CC0, License("CC0",

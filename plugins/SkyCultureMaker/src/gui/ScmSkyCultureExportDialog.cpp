@@ -62,12 +62,25 @@ void ScmSkyCultureExportDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 
+	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &ScmSkyCultureExportDialog::handleFontChanged);
+	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this,
+	        &ScmSkyCultureExportDialog::handleFontChanged);
+	handleFontChanged();
+
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmSkyCultureExportDialog::close);
 	connect(ui->saveBtn, &QPushButton::clicked, this, &ScmSkyCultureExportDialog::saveSkyCulture);
 	connect(ui->saveAndExitBtn, &QPushButton::clicked, this, &ScmSkyCultureExportDialog::saveAndExitSkyCulture);
 	connect(ui->cancelBtn, &QPushButton::clicked, this, &ScmSkyCultureExportDialog::close);
+}
+
+void ScmSkyCultureExportDialog::handleFontChanged()
+{
+	QFont titleLblFont = QApplication::font();
+	titleLblFont.setPixelSize(titleLblFont.pixelSize() + 2);
+	titleLblFont.setBold(true);
+	ui->titleLbl->setFont(titleLblFont);
 }
 
 void ScmSkyCultureExportDialog::saveSkyCulture()
@@ -88,22 +101,23 @@ void ScmSkyCultureExportDialog::saveSkyCulture()
 		return;
 	}
 
-	QString skyCultureId     = currentSkyCulture->getId();
-	
+	QString skyCultureId = currentSkyCulture->getId();
+
 	// Let the user choose the export directory with skyCulturesPath as default
 	QDir skyCultureDirectory;
 	bool exportDirectoryChosen = chooseExportDirectory(skyCultureId, skyCultureDirectory);
 	if (!exportDirectoryChosen)
 	{
-		qWarning() << "SkyCultureMaker: Could not export sky culture. User cancelled or failed to choose directory.";
+		qWarning() << "SkyCultureMaker: Could not export sky culture. User cancelled or failed to choose "
+			      "directory.";
 		maker->setSkyCultureDialogInfoLabel("ERROR: Failed to choose export directory.");
 		return; // User cancelled or failed to choose directory
 	}
-	
+
 	if (skyCultureDirectory.exists())
 	{
 		qWarning() << "SkyCultureMaker: Sky culture with ID" << skyCultureId
-			<< "already exists. Cannot export.";
+			   << "already exists. Cannot export.";
 		maker->setSkyCultureDialogInfoLabel("ERROR: Sky culture with this ID already exists.");
 		// dont close the dialog here, so the user can delete the folder first
 		return;
@@ -114,7 +128,8 @@ void ScmSkyCultureExportDialog::saveSkyCulture()
 	if (!createdDirectorySuccessfully)
 	{
 		maker->setSkyCultureDialogInfoLabel("ERROR: Failed to create sky culture directory.");
-		qWarning() << "SkyCultureMaker: Failed to create sky culture directory at" << skyCultureDirectory.absolutePath();
+		qWarning() << "SkyCultureMaker: Failed to create sky culture directory at"
+			   << skyCultureDirectory.absolutePath();
 		return;
 	}
 
@@ -177,27 +192,29 @@ void ScmSkyCultureExportDialog::saveSkyCulture()
 		return;
 	}
 
-	maker->setSkyCultureDialogInfoLabel("Sky culture exported successfully to " + skyCultureDirectory.absolutePath());
+	maker->setSkyCultureDialogInfoLabel("Sky culture exported successfully to " +
+	                                    skyCultureDirectory.absolutePath());
 	qInfo() << "SkyCultureMaker: Sky culture exported successfully to" << skyCultureDirectory.absolutePath();
 	ScmSkyCultureExportDialog::close();
 }
 
 bool ScmSkyCultureExportDialog::chooseExportDirectory(const QString& skyCultureId, QDir& skyCultureDirectory)
 {
-	QString selectedDirectory = QFileDialog::getExistingDirectory(nullptr, tr("Choose Export Directory"), skyCulturesPath);
+	QString selectedDirectory = QFileDialog::getExistingDirectory(nullptr, tr("Choose Export Directory"),
+	                                                              skyCulturesPath);
 	if (selectedDirectory.isEmpty())
 	{
 		// User cancelled the dialog
 		return false;
 	}
-	
+
 	if (!QDir(selectedDirectory).exists())
 	{
 		maker->setSkyCultureDialogInfoLabel("ERROR: The selected directory is not valid");
 		qDebug() << "SkyCultureMaker: Selected non-existing export directory";
 		return false;
 	}
-	
+
 	skyCultureDirectory = QDir(selectedDirectory + QDir::separator() + skyCultureId);
 	return true;
 }
@@ -210,7 +227,7 @@ void ScmSkyCultureExportDialog::saveAndExitSkyCulture()
 	maker->setIsScmEnabled(false);
 }
 
-bool ScmSkyCultureExportDialog::saveSkyCultureCMakeListsFile(const QDir &directory)
+bool ScmSkyCultureExportDialog::saveSkyCultureCMakeListsFile(const QDir& directory)
 {
 	QFile cmakeListsFile(directory.absoluteFilePath("CMakeLists.txt"));
 	if (!cmakeListsFile.open(QIODevice::WriteOnly | QIODevice::Text))

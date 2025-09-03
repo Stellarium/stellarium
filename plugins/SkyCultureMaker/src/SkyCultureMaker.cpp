@@ -79,10 +79,9 @@ SkyCultureMaker::SkyCultureMaker()
 	: isScmEnabled(false)
 	, isLineDrawEnabled(false)
 {
-	qDebug() << "SkyCulture Maker constructed";
+	qDebug() << "SkyCultureMaker constructed";
 
 	setObjectName("SkyCultureMaker");
-	font.setPixelSize(25);
 
 	drawObj                   = new scm::ScmDraw();
 	scmStartDialog            = new ScmStartDialog(this);

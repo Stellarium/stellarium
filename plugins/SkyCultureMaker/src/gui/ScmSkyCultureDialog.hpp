@@ -75,6 +75,9 @@ public slots:
 	void retranslate() override;
 	void close() override;
 
+protected slots:
+	void handleFontChanged();
+
 private slots:
 	void saveSkyCulture();
 	void constellationDialog();

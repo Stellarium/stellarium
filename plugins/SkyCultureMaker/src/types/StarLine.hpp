@@ -64,9 +64,9 @@ struct StarLine
 	}
 
 	/**
-     * @brief Converts the StartLine to a JSON array.
+     * @brief Converts the StarLine to a JSON array.
      *
-     * @return QJsonArray The JSON representation of the start line.
+     * @return QJsonArray The JSON representation of the star line.
      */
 	QJsonArray toJson() const
 	{

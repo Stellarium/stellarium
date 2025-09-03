@@ -29,6 +29,7 @@
 
 namespace scm
 {
+//! An anchor for a point in an artwork to the HIP id of a star
 struct Anchor
 {
 	Vec2i position;

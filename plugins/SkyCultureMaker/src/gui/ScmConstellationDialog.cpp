@@ -141,7 +141,13 @@ void ScmConstellationDialog::createDialogContent()
 	connect(ui->saveBtn, &QPushButton::clicked, this, &ScmConstellationDialog::saveConstellation);
 	connect(ui->cancelBtn, &QPushButton::clicked, this, &ScmConstellationDialog::cancel);
 
+	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &ScmConstellationDialog::handleFontChanged);
+	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &ScmConstellationDialog::handleFontChanged);
+
+	handleFontChanged();
+
 	// LABELS TAB
+
 	connect(ui->enNameTE, &QTextEdit::textChanged, this,
 	        [this]()
 	        {
@@ -179,6 +185,18 @@ void ScmConstellationDialog::createDialogContent()
 				constellationIPA = std::nullopt;
 			}
 		});
+}
+
+void ScmConstellationDialog::handleFontChanged()
+{
+	QFont infoLblFont = QApplication::font();
+	infoLblFont.setBold(true);
+	ui->infoLbl->setFont(infoLblFont);
+
+	QFont labelsTitleFont = QApplication::font();
+	labelsTitleFont.setPixelSize(labelsTitleFont.pixelSize() + 2);
+	labelsTitleFont.setBold(true);
+	ui->labelsTitle->setFont(labelsTitleFont);
 }
 
 void ScmConstellationDialog::togglePen(bool checked)
@@ -314,6 +332,7 @@ void ScmConstellationDialog::bindSelectedStar()
 
 void ScmConstellationDialog::tabChanged(int index)
 {
+	Q_UNUSED(index);
 	ui->penBtn->setChecked(false);
 	ui->eraserBtn->setChecked(false);
 	maker->setDrawTool(scm::DrawTools::None);

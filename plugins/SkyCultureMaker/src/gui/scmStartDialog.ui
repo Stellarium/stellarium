@@ -96,15 +96,7 @@
          <item row="0" column="0">
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
-            <widget class="QLabel" name="label">
-             <property name="font">
-              <font>
-               <pointsize>16</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-               <strikeout>false</strikeout>
-              </font>
-             </property>
+            <widget class="QLabel" name="welcomeLabel">
              <property name="text">
               <string>Welcome to the Sky Culture Maker!</string>
              </property>

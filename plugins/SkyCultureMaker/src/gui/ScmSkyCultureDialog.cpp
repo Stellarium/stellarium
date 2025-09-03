@@ -116,7 +116,11 @@ void ScmSkyCultureDialog::createDialogContent()
 	connect(ui->constellationsList, &QListWidget::itemSelectionChanged, this,
 	        &ScmSkyCultureDialog::updateRemoveConstellationButton);
 
-	// License Tab
+	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &ScmSkyCultureDialog::handleFontChanged);
+	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &ScmSkyCultureDialog::handleFontChanged);
+	handleFontChanged();
+
+	// Description Tab
 
 	// add all licenses to the combo box
 	for (const auto &license : scm::LICENSES)
@@ -147,6 +151,20 @@ void ScmSkyCultureDialog::createDialogContent()
 			ui->classificationCB->setCurrentIndex(index);
 		}
 	}
+}
+
+void ScmSkyCultureDialog::handleFontChanged()
+{
+	QFont headlineFont = QApplication::font();
+	headlineFont.setPixelSize(headlineFont.pixelSize() + 2);
+	ui->currentSCNameLbl->setFont(headlineFont);
+	ui->constellationsLbl->setFont(headlineFont);
+	ui->selectLicenseLbl->setFont(headlineFont);
+
+	QFont descriptionTabLblFont = QApplication::font();
+	descriptionTabLblFont.setPixelSize(descriptionTabLblFont.pixelSize() + 2);
+	descriptionTabLblFont.setBold(true);
+	ui->descriptionTabLbl->setFont(descriptionTabLblFont);
 }
 
 void ScmSkyCultureDialog::saveSkyCulture()
