@@ -101,7 +101,7 @@ before_build:
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:BUILD_NAME.contains('Win')) { $env:USE_MESA = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable" -and $env:QT_VERSION_MAJOR -eq "6") { $env:SIGNING = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable" -and $env:QT_VERSION_MAJOR -eq "5") { $env:SIGNING = 'true' }
-  - ps: if($env:CMAKE_ARGS.contains('SCM_SHOULD_ENABLE_CONVERTER') -or $env:scConverterEnabled -eq 'true') { $env:INSTALL_CONVERTER_DEPS = 'true' }
+  - ps: if($env:CMAKE_ARGS.contains('SCM_SHOULD_ENABLE_CONVERTER')) { $env:INSTALL_CONVERTER_DEPS = 'true' }
   - ps: if($env:PUBLISH_BINARY -eq 'true' -and $env:scConverterEnabled -eq 'true') { $env:INSTALL_CONVERTER = 'true' }
 
   - ps: if($env:exiv2url -ne $null) { appveyor DownloadFile $env:exiv2url -FileName c:\$env:exiv2baseName.zip }
@@ -156,11 +156,11 @@ after_test:
   - if [%INSTALL_CONVERTER%]==[true] copy c:\sc-converter\tidy.dll c:\stellarium-package\bin\
   - if [%INSTALL_CONVERTER%]==[true] copy c:\sc-converter\skyculture-converter.exe c:\stellarium-package\bin\
   - if [%INSTALL_CONVERTER%]==[true] copy c:\sc-converter\Qt6Xml.dll c:\stellarium-package\qtstuff\
-  - if [%INSTALL_CONVERTER%]==[true] copy c:\%gettextBaseName%\bin\libgettextpo-0.dll c:\stellarium-package\bin\libgettextpo.dll
-  - if [%INSTALL_CONVERTER%]==[true] copy c:\%gettextBaseName%\bin\libintl-8.dll c:\stellarium-package\bin\
-  - if [%INSTALL_CONVERTER%]==[true] copy c:\%gettextBaseName%\bin\libiconv-2.dll c:\stellarium-package\bin\
-  - if [%INSTALL_CONVERTER%]==[true] copy c:\%tidyBaseName%\bin\tidy.dll c:\stellarium-package\bin\
-  - if [%INSTALL_CONVERTER%]==[true] copy c:\sc-converter\Qt6Xml.dll c:\stellarium-package\qtstuff\
+#  - if [%INSTALL_CONVERTER%]==[true] copy c:\%gettextBaseName%\bin\libgettextpo-0.dll c:\stellarium-package\bin\libgettextpo.dll
+#  - if [%INSTALL_CONVERTER%]==[true] copy c:\%gettextBaseName%\bin\libintl-8.dll c:\stellarium-package\bin\
+#  - if [%INSTALL_CONVERTER%]==[true] copy c:\%gettextBaseName%\bin\libiconv-2.dll c:\stellarium-package\bin\
+#  - if [%INSTALL_CONVERTER%]==[true] copy c:\%tidyBaseName%\bin\tidy.dll c:\stellarium-package\bin\
+#  - if [%INSTALL_CONVERTER%]==[true] copy c:\sc-converter\Qt6Xml.dll c:\stellarium-package\qtstuff\
   - if [%USE_EXT_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win%BITS%.zip -FileName c:\stellarium\build\libGLES.zip
   - if [%USE_EXT_LIBGLES%]==[true] 7z e c:\stellarium\build\libGLES.zip -aoa -oc:\stellarium-package\qtstuff
   - if [%USE_MESA%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-%PKGARCH%.dll -FileName c:\stellarium-package\qtstuff\opengl32sw.dll
