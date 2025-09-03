@@ -26,7 +26,6 @@
 
 #include "SkyCultureMaker.hpp"
 #include "StelDialog.hpp"
-#include <qtmetamacros.h>
 #include <QObject>
 
 #ifdef SCM_CONVERTER_ENABLED_CPP
