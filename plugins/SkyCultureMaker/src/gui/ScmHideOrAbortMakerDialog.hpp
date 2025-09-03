@@ -42,6 +42,9 @@ public:
 public slots:
 	void retranslate() override;
 
+protected slots:
+	void handleFontChanged();
+
 private slots:
 	void hideScmCreationProcess();
 	void abortScmCreationProcess();

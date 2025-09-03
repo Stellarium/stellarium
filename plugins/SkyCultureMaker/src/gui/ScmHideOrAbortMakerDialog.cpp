@@ -60,9 +60,10 @@ void ScmHideOrAbortMakerDialog::createDialogContent()
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmHideOrAbortMakerDialog::cancelDialog);
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-	QFont questionFont = QFont(maker->getFont());
-	questionFont.setPixelSize(questionFont.pixelSize() + 4);
-	ui->questionLbl->setFont(questionFont);
+	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &ScmHideOrAbortMakerDialog::handleFontChanged);
+	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this,
+	        &ScmHideOrAbortMakerDialog::handleFontChanged);
+	handleFontChanged();
 
 	// Buttons
 	connect(ui->scmMakerAbortButton, &QPushButton::clicked, this,
@@ -71,6 +72,13 @@ void ScmHideOrAbortMakerDialog::createDialogContent()
 	        &ScmHideOrAbortMakerDialog::hideScmCreationProcess); // Hide
 	connect(ui->scmMakerCancelButton, &QPushButton::clicked, this,
 	        &ScmHideOrAbortMakerDialog::cancelDialog); // Cancel
+}
+
+void ScmHideOrAbortMakerDialog::handleFontChanged()
+{
+	QFont questionFont = QApplication::font();
+	questionFont.setPixelSize(questionFont.pixelSize() + 4);
+	ui->questionLbl->setFont(questionFont);
 }
 
 // TODO: save state of the current sky culture

@@ -141,16 +141,12 @@ void ScmConstellationDialog::createDialogContent()
 	connect(ui->saveBtn, &QPushButton::clicked, this, &ScmConstellationDialog::saveConstellation);
 	connect(ui->cancelBtn, &QPushButton::clicked, this, &ScmConstellationDialog::cancel);
 
-	QFont infoLblFont = QFont(maker->getFont());
-	infoLblFont.setBold(true);
-	ui->infoLbl->setFont(infoLblFont);
+	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &ScmConstellationDialog::handleFontChanged);
+	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &ScmConstellationDialog::handleFontChanged);
+
+	handleFontChanged();
 
 	// LABELS TAB
-
-	QFont labelsTitleFont = QFont(maker->getFont());
-	labelsTitleFont.setPixelSize(labelsTitleFont.pixelSize() + 2);
-	labelsTitleFont.setBold(true);
-	ui->labelsTitle->setFont(labelsTitleFont);
 
 	connect(ui->enNameTE, &QTextEdit::textChanged, this,
 	        [this]()
@@ -189,6 +185,18 @@ void ScmConstellationDialog::createDialogContent()
 				constellationIPA = std::nullopt;
 			}
 		});
+}
+
+void ScmConstellationDialog::handleFontChanged()
+{
+	QFont infoLblFont = QApplication::font();
+	infoLblFont.setBold(true);
+	ui->infoLbl->setFont(infoLblFont);
+
+	QFont labelsTitleFont = QApplication::font();
+	labelsTitleFont.setPixelSize(labelsTitleFont.pixelSize() + 2);
+	labelsTitleFont.setBold(true);
+	ui->labelsTitle->setFont(labelsTitleFont);
 }
 
 void ScmConstellationDialog::togglePen(bool checked)

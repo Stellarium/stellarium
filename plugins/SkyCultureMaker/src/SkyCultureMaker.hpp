@@ -231,12 +231,6 @@ public:
 	 */
 	void openConstellationDialog(const QString &constellationId);
 
-	/**
-	 * @brief Gets the font used for displaying text.
-	 * @return The font used for displaying text.
-	 */
-	QFont getFont() const { return font; }
-
 signals:
 	void eventIsScmEnabled(bool b);
 

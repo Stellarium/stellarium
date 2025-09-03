@@ -82,7 +82,6 @@ SkyCultureMaker::SkyCultureMaker()
 	qDebug() << "SkyCultureMaker constructed";
 
 	setObjectName("SkyCultureMaker");
-	font.setPixelSize(StelApp::getInstance().getGuiFontSize());
 
 	drawObj                   = new scm::ScmDraw();
 	scmStartDialog            = new ScmStartDialog(this);

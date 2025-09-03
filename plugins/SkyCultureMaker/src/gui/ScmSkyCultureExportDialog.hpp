@@ -42,6 +42,9 @@ public:
 public slots:
 	void retranslate() override;
 
+protected slots:
+	void handleFontChanged();
+
 private:
 	Ui_scmSkyCultureExportDialog *ui = nullptr;
 	SkyCultureMaker *maker           = nullptr;

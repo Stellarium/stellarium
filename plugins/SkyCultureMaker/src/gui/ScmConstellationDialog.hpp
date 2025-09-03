@@ -56,6 +56,9 @@ public slots:
 	 */
 	void resetDialog();
 
+protected slots:
+	void handleFontChanged();
+
 private slots:
 	void togglePen(bool checked);
 	void toggleEraser(bool checked);

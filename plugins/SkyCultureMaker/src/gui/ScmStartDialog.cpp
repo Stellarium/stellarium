@@ -69,8 +69,8 @@ void ScmStartDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	// connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmStartDialog::closeDialog);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &ScmStartDialog::handleFontChanged);
+	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &ScmStartDialog::handleFontChanged);
 
 	// Buttons
 	connect(ui->scmStartCancelpushButton, &QPushButton::clicked, this, &ScmStartDialog::closeDialog); // Cancel
@@ -79,11 +79,10 @@ void ScmStartDialog::createDialogContent()
 	connect(ui->scmStartEditpushButton, &QPushButton::clicked, this,
 	        &ScmStartDialog::closeDialog); // Edit - TODO: add logic (currently closing the window)
 
-	// Set welcome label font size
-	QFont welcomeLabelFont = QFont(maker->getFont());
-	welcomeLabelFont.setPixelSize(welcomeLabelFont.pixelSize() + 4);
-	welcomeLabelFont.setBold(true);
-	ui->welcomeLabel->setFont(welcomeLabelFont);
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmStartDialog::closeDialog);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	// Init the correct font
+	handleFontChanged();
 
 /* =============================================== SkyCultureConverter ============================================== */
 #ifdef SCM_CONVERTER_ENABLED_CPP
@@ -102,10 +101,18 @@ void ScmStartDialog::createDialogContent()
 #else   // SCM_CONVERTER_ENABLED_CPP is not defined
 	// Converter is disabled, so disable the button
 	ui->scmStartConvertpushButton->setEnabled(false);
-	ui->scmStartConvertpushButton->setToolTip(
-		tr("The Sky Culture Converter has been turned off for this build."));
+	ui->scmStartConvertpushButton->setToolTip(tr("The Sky Culture Converter has been turned off for this build."));
 #endif  // SCM_CONVERTER_ENABLED_CPP
-/* ================================================================================================================== */
+	/* ================================================================================================================== */
+}
+
+void ScmStartDialog::handleFontChanged()
+{
+	// Set welcome label font size
+	QFont welcomeLabelFont = QApplication::font();
+	welcomeLabelFont.setPixelSize(welcomeLabelFont.pixelSize() + 4);
+	welcomeLabelFont.setBold(true);
+	ui->welcomeLabel->setFont(welcomeLabelFont);
 }
 
 void ScmStartDialog::startScmCreationProcess()
