@@ -130,6 +130,16 @@
         </property>
        </spacer>
       </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>On export, you will be prompted to select your personal skycultures directory. A new directory for the sky culture will be created inside.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -151,16 +161,16 @@
       <number>10</number>
      </property>
      <item>
-      <widget class="QPushButton" name="saveBtn">
+      <widget class="QPushButton" name="exportBtn">
        <property name="text">
-        <string>Save</string>
+        <string>Export</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="saveAndExitBtn">
+      <widget class="QPushButton" name="exportAndExitBtn">
        <property name="text">
-        <string>Save and Exit</string>
+        <string>Export and Exit</string>
        </property>
       </widget>
      </item>

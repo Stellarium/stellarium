@@ -92,19 +92,19 @@ void ScmSkyCultureDialog::createDialogContent()
 			name = ui->skyCultureNameTE->toPlainText();
 			if (name.isEmpty())
 			{
-				ui->SaveSkyCultureBtn->setEnabled(false);
+				ui->ExportSkyCultureBtn->setEnabled(false);
 			}
 			else
 			{
-				ui->SaveSkyCultureBtn->setEnabled(true);
+				ui->ExportSkyCultureBtn->setEnabled(true);
 			}
 			setIdFromName(name);
 		});
 
-	ui->SaveSkyCultureBtn->setEnabled(false);
+	ui->ExportSkyCultureBtn->setEnabled(false);
 	ui->RemoveConstellationBtn->setEnabled(false);
 	ui->EditConstellationBtn->setEnabled(false);
-	connect(ui->SaveSkyCultureBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::saveSkyCulture);
+	connect(ui->ExportSkyCultureBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::saveSkyCulture);
 	connect(ui->AddConstellationBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::constellationDialog);
 
 	connect(ui->EditConstellationBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::editSelectedConstellation);

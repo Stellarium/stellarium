@@ -70,8 +70,8 @@ void ScmSkyCultureExportDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmSkyCultureExportDialog::close);
-	connect(ui->saveBtn, &QPushButton::clicked, this, &ScmSkyCultureExportDialog::saveSkyCulture);
-	connect(ui->saveAndExitBtn, &QPushButton::clicked, this, &ScmSkyCultureExportDialog::saveAndExitSkyCulture);
+	connect(ui->exportBtn, &QPushButton::clicked, this, &ScmSkyCultureExportDialog::exportSkyCulture);
+	connect(ui->exportAndExitBtn, &QPushButton::clicked, this, &ScmSkyCultureExportDialog::exportAndExitSkyCulture);
 	connect(ui->cancelBtn, &QPushButton::clicked, this, &ScmSkyCultureExportDialog::close);
 }
 
@@ -83,7 +83,7 @@ void ScmSkyCultureExportDialog::handleFontChanged()
 	ui->titleLbl->setFont(titleLblFont);
 }
 
-void ScmSkyCultureExportDialog::saveSkyCulture()
+void ScmSkyCultureExportDialog::exportSkyCulture()
 {
 	if (maker == nullptr)
 	{
@@ -196,11 +196,14 @@ void ScmSkyCultureExportDialog::saveSkyCulture()
 	                                    skyCultureDirectory.absolutePath());
 	qInfo() << "SkyCultureMaker: Sky culture exported successfully to" << skyCultureDirectory.absolutePath();
 	ScmSkyCultureExportDialog::close();
+
+	// Reload the sky cultures in Stellarium to make the new one available immediately
+	StelApp::getInstance().getSkyCultureMgr().reloadSkyCulture();
 }
 
 bool ScmSkyCultureExportDialog::chooseExportDirectory(const QString& skyCultureId, QDir& skyCultureDirectory)
 {
-	QString selectedDirectory = QFileDialog::getExistingDirectory(nullptr, tr("Choose Export Directory"),
+	QString selectedDirectory = QFileDialog::getExistingDirectory(nullptr, q_("Choose Export Directory"),
 	                                                              skyCulturesPath);
 	if (selectedDirectory.isEmpty())
 	{
@@ -219,9 +222,9 @@ bool ScmSkyCultureExportDialog::chooseExportDirectory(const QString& skyCultureI
 	return true;
 }
 
-void ScmSkyCultureExportDialog::saveAndExitSkyCulture()
+void ScmSkyCultureExportDialog::exportAndExitSkyCulture()
 {
-	saveSkyCulture();
+	exportSkyCulture();
 	maker->resetScmDialogs();
 	maker->hideAllDialogs();
 	maker->setIsScmEnabled(false);

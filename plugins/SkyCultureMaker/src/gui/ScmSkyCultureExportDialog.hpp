@@ -50,9 +50,9 @@ private:
 	SkyCultureMaker *maker           = nullptr;
 	QString skyCulturesPath;
 
-	void saveSkyCulture();
+	void exportSkyCulture();
 	bool chooseExportDirectory(const QString &skyCultureId, QDir &skyCultureDirectory);
-	void saveAndExitSkyCulture();
+	void exportAndExitSkyCulture();
 	bool saveSkyCultureCMakeListsFile(const QDir &directory);
 };
 
