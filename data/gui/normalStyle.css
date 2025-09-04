@@ -55,15 +55,21 @@ QSizeGrip {
 QTextEdit,
 QPlainTextEdit,
 QListWidget,
-QTreeWidget#surveysTreeWidget,
+QTreeWidget,
 QLineEdit {
-	border: 1px solid rgb(0, 0, 0);
-	border-radius: 0;
-	padding: 0 8px;
 	background: rgb(30, 30, 31);
 	selection-background-color: rgb(253, 216, 134);
 	color: rgb(170, 173, 164);
         font-size: 100%;
+}
+
+QTextEdit,
+QPlainTextEdit,
+QListWidget,
+QLineEdit {
+        border: 1px solid rgb(0, 0, 0);
+        border-radius: 0;
+        padding: 0 8px;
 }
 
 QTextEdit:disabled,
