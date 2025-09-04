@@ -492,6 +492,7 @@ void ScmConstellationDialog::resetDialog()
 	ui->penBtn->setChecked(false);
 	ui->eraserBtn->setChecked(false);
 	maker->setDrawTool(scm::DrawTools::None);
+	setIsDarkConstellation(false);
 
 	constellationId.clear();
 	ui->idTE->clear();

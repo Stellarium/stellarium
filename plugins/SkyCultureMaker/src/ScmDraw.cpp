@@ -491,6 +491,7 @@ void scm::ScmDraw::resetDrawing()
 	drawState     = Drawing::None;
 	lastEraserPos = defaultLastEraserPos;
 	activeTool    = DrawTools::None;
+	drawingMode   = DrawingMode::StarsAndDSO;
 	std::get<CoordinateLine>(currentLine).start.set(0, 0, 0);
 	std::get<CoordinateLine>(currentLine).end.set(0, 0, 0);
 	std::get<StarLine>(currentLine).start.reset();
