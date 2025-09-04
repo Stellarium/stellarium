@@ -106,6 +106,13 @@ public:
 	void setConstellationDialogVisibility(bool b);
 
 	/**
+	 * @brief Sets whether the constellation dialog is for a dark constellation.
+	 *
+	 * @param isDarkConstellation The boolean value to be set.
+	 */
+	void setConstellationDialogIsDarkConstellation(bool isDarkConstellation);
+
+	/**
 	 * @brief Shows the sky culture export dialog.
 	 *
 	 * @param b The boolean value to be set.

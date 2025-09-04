@@ -333,7 +333,17 @@ void SkyCultureMaker::setConstellationDialogVisibility(bool b)
 		scmConstellationDialog->setVisible(b);
 	}
 
+	// Disable the add constellation buttons when the dialog is opened
+	scmSkyCultureDialog->updateAddConstellationButtons(!b);
 	setIsLineDrawEnabled(b);
+}
+
+void SkyCultureMaker::setConstellationDialogIsDarkConstellation(bool isDarkConstellation)
+{
+	if (scmConstellationDialog != nullptr)
+	{
+		scmConstellationDialog->setIsDarkConstellation(isDarkConstellation);
+	}
 }
 
 void SkyCultureMaker::setSkyCultureExportDialogVisibility(bool b)

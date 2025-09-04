@@ -46,6 +46,7 @@ public:
 	ScmConstellationDialog(SkyCultureMaker *maker);
 	~ScmConstellationDialog() override;
 	void loadFromConstellation(scm::ScmConstellation *constellation);
+	void setIsDarkConstellation(bool isDarkConstellation);
 
 public slots:
 	void retranslate() override;

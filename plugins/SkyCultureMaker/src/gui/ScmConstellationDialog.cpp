@@ -33,6 +33,7 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QFileInfo>
+#include "types/DrawingMode.hpp"
 
 ScmConstellationDialog::ScmConstellationDialog(SkyCultureMaker *maker)
 	: StelDialogSeparate("ScmConstellationDialog")
@@ -69,6 +70,7 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 
 	// Save the constellation that is currently being edited
 	constellationBeingEdited = constellation;
+	setIsDarkConstellation(constellation->getIsDarkConstellation());
 
 	constellationId            = constellation->getId();
 	constellationEnglishName   = constellation->getEnglishName();
@@ -97,6 +99,26 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 	updateArtwork();
 }
 
+void ScmConstellationDialog::setIsDarkConstellation(bool isDark)
+{
+	if (!isDialogInitialized)
+	{
+		createDialogContent();
+	}
+	
+	scm::ScmDraw *draw = maker->getScmDraw();
+	if(draw != nullptr)
+	{
+		draw->setDrawingMode(isDark ? scm::DrawingMode::Coordinates : scm::DrawingMode::StarsAndDSO);
+	}
+	
+	if (ui != nullptr)
+	{
+		ui->titleBar->setTitle(isDark ? q_("SCM: Dark Constellation Editor") : q_("SCM: Constellation Editor"));
+		ui->labelsTitle->setText(isDark ? q_("Please name your Dark Constellation") : q_("Please name your Constellation"));
+	}
+}
+
 void ScmConstellationDialog::retranslate()
 {
 	if (dialog)
@@ -117,6 +139,8 @@ void ScmConstellationDialog::createDialogContent()
 	imageItem->hide();
 	ui->artwork_image->setScene(imageItem->scene());
 	ui->bind_star->setEnabled(false);
+
+	setIsDarkConstellation(false);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));

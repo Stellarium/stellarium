@@ -195,6 +195,13 @@ public:
 	void setTool(DrawTools tool);
 
 	/**
+	 * @brief Sets the drawing mode.
+	 * 
+	 * @param mode The drawing mode to use.
+	 */
+	void setDrawingMode(DrawingMode mode) { drawingMode = mode; }
+
+	/**
 	 * @brief Resets the currently drawn lines.
 	 */
 	void resetDrawing();

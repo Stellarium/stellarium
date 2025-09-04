@@ -213,6 +213,13 @@ public:
 	 */
 	void show();
 
+	/** 
+	 * @brief Returns whether the constellation is a dark constellation.
+	 * 
+	 * @return true If the constellation is a dark constellation, false otherwise.
+	 */
+	bool getIsDarkConstellation() const { return isDarkConstellation; }
+
 private:
 	/// Identifier of the constellation
 	QString id;
