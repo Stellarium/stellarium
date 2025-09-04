@@ -200,7 +200,6 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 				if (objectMgr.getWasSelected())
 				{
 					StelObjectP stelObj = objectMgr.getLastSelectedObject();
-					Vec3d stelPos       = stelObj->getJ2000EquatorialPos(core);
 					if (stelObj->getType() == "Star" || stelObj->getType() == "Nebula")
 					{
 						QString stelObjID = stelObj->getID();
@@ -210,7 +209,7 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 						}
 						else
 						{
-							appendDrawPoint(stelPos, stelObjID);
+							appendDrawPoint(stelObj->getJ2000EquatorialPos(core), stelObjID);
 							qDebug() << "SkyCultureMaker: Added sky object to "
 								    "constellation with ID "
 								 << stelObjID;
@@ -230,8 +229,8 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 				if (nearest.has_value())
 				{
 					point = nearest.value().coordinate;
-					appendDrawPoint(point, std::nullopt);
 				}
+				appendDrawPoint(point, std::nullopt);
 			}
 
 			event->accept();
@@ -283,7 +282,6 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 			{
 				StelObjectP stelObj = objectMgr.getLastSelectedObject();
 				// only keep the selection if a star or nebula was selected
-				// and it has a valid id
 				if (stelObj->getType() != "Star" && stelObj->getType() != "Nebula")
 				{
 					objectMgr.unSelect();
@@ -296,6 +294,7 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 			}
 		}
 
+		// draw a floating line in any mode
 		if (hasFlag(drawState, (Drawing::hasStart | Drawing::hasFloatingEnd)))
 		{
 			StelProjectorP prj = core->getProjection(drawFrame);
