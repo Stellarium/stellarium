@@ -670,6 +670,7 @@ private:
 	bool plotAltVsTimePositive = false;
 	bool plotMonthlyElevation = false;
 	bool plotMonthlyElevationPositive = false;
+	bool plotXYVsTimeGraph = false;
 	bool plotDistanceGraph = false;
 	bool plotLunarElongationGraph = false;
 	bool plotAziVsTime = false;
