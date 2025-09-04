@@ -327,7 +327,7 @@ private slots:
 	//! Calculating the rises, transits and sets for selected celestial body and fill the list.
 	void generateRTS();
 	void cleanupRTS();
-	void selectCurrentRTS(const QModelIndex &modelIndex);
+	void selectCurrentRTS(QTreeWidgetItem* item, int idx);
 	void saveRTS();
 	void setRTSCelestialBodyName();
 

@@ -329,13 +329,13 @@ void AstroCalcDialog::createDialogContent()
 	ui->jupiterMarkerColor->setup("SolarSystem.ephemerisJupiterMarkerColor", "color/ephemeris_jupiter_marker_color");
 	ui->saturnMarkerColor->setup("SolarSystem.ephemerisSaturnMarkerColor", "color/ephemeris_saturn_marker_color");
 
-	// Tab: Transits
+	// Tab: Rises/Transits/Sets
 	initListRTS();
 	enableRTSButtons(buttonState);
 	connect(ui->rtsCalculateButton, SIGNAL(clicked()), this, SLOT(generateRTS()));
 	connect(ui->rtsCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupRTS()));
 	connect(ui->rtsSaveButton, SIGNAL(clicked()), this, SLOT(saveRTS()));
-	connect(ui->rtsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentRTS(QModelIndex)));
+	connect(ui->rtsTreeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), this, SLOT(selectCurrentRTS(QTreeWidgetItem*,int)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(setRTSCelestialBodyName()));
 
 	// Tab: Eclipses
@@ -2358,11 +2358,12 @@ void AstroCalcDialog::cleanupRTS()
 	enableRTSButtons(false);
 }
 
-void AstroCalcDialog::selectCurrentRTS(const QModelIndex& modelIndex)
+void AstroCalcDialog::selectCurrentRTS(QTreeWidgetItem* item, int idx)
 {
-	// Find the object
-	const QString name = modelIndex.sibling(modelIndex.row(), RTSCOName).data(Qt::UserRole).toString();
-	const double JD = modelIndex.sibling(modelIndex.row(), RTSTransitDate).data(Qt::UserRole).toDouble();	
+	const QString name = item->data(RTSCOName, Qt::UserRole).toString();
+	double JD = item->data(RTSTransitDate, Qt::UserRole).toDouble();
+	if (idx == RTSRiseDate || idx == RTSSetDate)
+		JD = item->data(idx, Qt::UserRole).toDouble();
 	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
 	{
 		core->setJD(JD);
