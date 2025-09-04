@@ -38,9 +38,10 @@ void scm::ScmSkyCulture::setFallbackToInternationalNames(bool fallback)
 
 scm::ScmConstellation &scm::ScmSkyCulture::addConstellation(const QString &id,
                                                             const std::vector<CoordinateLine> &coordinates,
-                                                            const std::vector<StarLine> &stars)
+                                                            const std::vector<StarLine> &stars,
+                                                            const bool isDarkConstellation)
 {
-	scm::ScmConstellation constellationObj(coordinates, stars);
+	scm::ScmConstellation constellationObj(coordinates, stars, isDarkConstellation);
 	constellationObj.setId(id);
 	constellations.push_back(std::move(constellationObj));
 	return constellations.back();
@@ -70,7 +71,7 @@ std::vector<scm::ScmConstellation> *scm::ScmSkyCulture::getConstellations()
 QJsonObject scm::ScmSkyCulture::toJson() const
 {
 	QJsonObject scJsonObj;
-	scJsonObj["id"]     = id;
+	scJsonObj["id"] = id;
 	// for some reason, the classification is inside an array, eg. ["historical"]
 	QJsonArray classificationArray = QJsonArray::fromStringList(
 		QStringList() << classificationTypeToString(description.classification));
@@ -108,7 +109,7 @@ bool scm::ScmSkyCulture::saveDescriptionAsMarkdown(QFile &file)
 
 		QTextStream out(&file);
 		out << "# " << desc.name << "\n\n";
-		
+
 		out << "## Culture Description\n" << desc.cultureDescription << "\n\n";
 
 		out << "## Sky\n" << desc.sky << "\n\n";

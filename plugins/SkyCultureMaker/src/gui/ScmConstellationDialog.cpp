@@ -25,6 +25,7 @@
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelObjectMgr.hpp"
+#include "types/DrawingMode.hpp"
 #include "ui_scmConstellationDialog.h"
 #include <algorithm>
 #include <cassert>
@@ -33,7 +34,6 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QFileInfo>
-#include "types/DrawingMode.hpp"
 
 ScmConstellationDialog::ScmConstellationDialog(SkyCultureMaker *maker)
 	: StelDialogSeparate("ScmConstellationDialog")
@@ -101,21 +101,24 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 
 void ScmConstellationDialog::setIsDarkConstellation(bool isDark)
 {
+	isDarkConstellation = isDark;
+
 	if (!isDialogInitialized)
 	{
 		createDialogContent();
 	}
-	
+
 	scm::ScmDraw *draw = maker->getScmDraw();
-	if(draw != nullptr)
+	if (draw != nullptr)
 	{
 		draw->setDrawingMode(isDark ? scm::DrawingMode::Coordinates : scm::DrawingMode::StarsAndDSO);
 	}
-	
+
 	if (ui != nullptr)
 	{
 		ui->titleBar->setTitle(isDark ? q_("SCM: Dark Constellation Editor") : q_("SCM: Constellation Editor"));
-		ui->labelsTitle->setText(isDark ? q_("Please name your Dark Constellation") : q_("Please name your Constellation"));
+		ui->labelsTitle->setText(isDark ? q_("Please name your Dark Constellation")
+		                                : q_("Please name your Constellation"));
 	}
 }
 
@@ -422,7 +425,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 		if (!imageItem->isImageAnchored())
 		{
 			ui->infoLbl->setText(q_("WARNING: Could not save: An artwork is attached, but not all "
-			                     "anchors have a star bound."));
+			                        "anchors have a star bound."));
 			qDebug() << "SkyCultureMaker: Could not save: An artwork is attached, but not all "
 				    "anchors have a star bound.";
 			return false;
@@ -460,7 +463,8 @@ void ScmConstellationDialog::saveConstellation()
 			culture->removeConstellation(constellationBeingEdited->getId());
 		}
 
-		scm::ScmConstellation &constellation = culture->addConstellation(id, coordinates, stars);
+		scm::ScmConstellation &constellation = culture->addConstellation(id, coordinates, stars,
+		                                                                 isDarkConstellation);
 
 		constellation.setEnglishName(constellationEnglishName);
 		constellation.setNativeName(constellationNativeName);

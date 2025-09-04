@@ -43,7 +43,7 @@ class ScmConstellation
 {
 public:
 	ScmConstellation(const std::vector<CoordinateLine> &coordinates, const std::vector<StarLine> &stars,
-	                 const bool isDarkConstellation = false);
+	                 const bool isDarkConstellation);
 
 	/// The frame that is used for calculation and is drawn on.
 	static const StelCore::FrameType drawFrame = StelCore::FrameJ2000;
