@@ -45,7 +45,7 @@ struct StarLine
 	 * 
 	 * @param starId The ID of the star, which may contain identifiers like "HIP" or "Gaia DR3".
 	 */
-	static QString getStarIdNumber(QString starId)
+	static QString getStarId(QString starId)
 	{
 		QRegularExpression hipExpression(R"(HIP\s+(\d+))");
 		QRegularExpression gaiaExpression(R"(Gaia DR3\s+(\d+))");
@@ -60,7 +60,8 @@ struct StarLine
 		{
 			return gaiaMatch.captured(1);
 		}
-		return "-1";
+		// Neither HIP nor Gaia, return as DSO
+		return "DSO:" + starId.remove(' ');
 	}
 
 	/**
@@ -74,7 +75,7 @@ struct StarLine
 
 		if (start.has_value())
 		{
-			QString number = getStarIdNumber(start.value());
+			QString number = getStarId(start.value());
 
 			if (start.value().contains("HIP"))
 			{
@@ -83,7 +84,7 @@ struct StarLine
 			}
 			else
 			{
-				// Gaia is required as string
+				// Other ids are required as string
 				json.append(number);
 			}
 		}
@@ -94,7 +95,7 @@ struct StarLine
 
 		if (end.has_value())
 		{
-			QString number = getStarIdNumber(end.value());
+			QString number = getStarId(end.value());
 
 			if (end.value().contains("HIP"))
 			{
@@ -103,7 +104,7 @@ struct StarLine
 			}
 			else
 			{
-				// Gaia is required as string
+				// Other ids are required as string
 				json.append(number);
 			}
 		}

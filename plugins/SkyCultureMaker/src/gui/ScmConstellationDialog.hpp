@@ -94,7 +94,6 @@ private:
 		/// Help text on how to use the pen for Mac users.
 		const QString helpDrawInfoPen = "Use RightClick or Control + Click to draw a connected line.\n"
 						"Use Double-RightClick or Control + Double-Click to stop drawing the line.\n"
-						"Use Command to disable snap to stars.\n"
 						"Use Command + F to search and connect stars.";
 		/// Help text on how to use the eraser for Mac users.
 		const QString helpDrawInfoEraser = "Hold RightClick or Control + Click to delete the line under the cursor.\n";
@@ -102,7 +101,6 @@ private:
 		/// Help text on how to use the pen for non-Mac users.
 		const QString helpDrawInfoPen = "Use RightClick to draw a connected line.\n"
 						"Use Double-RightClick to stop drawing the line.\n"
-						"Use CTRL to disable snap to stars.\n"
 						"Use CTRL + F to search and connect stars.";
 		/// Help text on how to use the eraser for non-Mac users.
 		const QString helpDrawInfoEraser = "Hold RightClick to delete the line under the cursor.\n";

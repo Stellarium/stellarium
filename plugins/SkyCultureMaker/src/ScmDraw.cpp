@@ -123,7 +123,7 @@ bool scm::ScmDraw::segmentIntersect(const Vec2d &startA, const Vec2d &directionA
 
 scm::ScmDraw::ScmDraw()
 	: drawState(Drawing::None)
-	, snapToStar(true)
+	, drawingMode(DrawingMode::StarsAndDSO)
 {
 	std::get<CoordinateLine>(currentLine).start.set(0, 0, 0);
 	std::get<CoordinateLine>(currentLine).end.set(0, 0, 0);
@@ -191,46 +191,48 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 		// Draw line
 		if (event->button() == Qt::RightButton && event->type() == QEvent::MouseButtonPress)
 		{
-			StelApp &app       = StelApp::getInstance();
-			StelCore *core     = app.getCore();
-			StelProjectorP prj = core->getProjection(drawFrame);
-			Vec3d point;
-			std::optional<QString> starID;
-			prj->unProject(x, y, point);
+			StelApp &app   = StelApp::getInstance();
+			StelCore *core = app.getCore();
 
-			// We want to combine any near start point to an existing point so that we don't create
-			// duplicates.
-			std::optional<StarPoint> nearest = findNearestPoint(x, y, prj);
-			if (nearest.has_value())
+			if (drawingMode == DrawingMode::StarsAndDSO)
 			{
-				point  = nearest.value().coordinate;
-				starID = nearest.value().star;
-			}
-			else if (snapToStar)
-			{
-				if (hasFlag(drawState, Drawing::hasEndExistingPoint))
+				StelObjectMgr &objectMgr = app.getStelObjectMgr();
+				if (objectMgr.getWasSelected())
 				{
-					point  = std::get<CoordinateLine>(currentLine).end;
-					starID = std::get<StarLine>(currentLine).end;
-				}
-				else
-				{
-					StelObjectMgr &objectMgr = app.getStelObjectMgr();
-
-					if (objectMgr.getWasSelected())
+					StelObjectP stelObj = objectMgr.getLastSelectedObject();
+					Vec3d stelPos       = stelObj->getJ2000EquatorialPos(core);
+					if (stelObj->getType() == "Star" || stelObj->getType() == "Nebula")
 					{
-						StelObjectP stelObj = objectMgr.getLastSelectedObject();
-						Vec3d stelPos       = stelObj->getJ2000EquatorialPos(core);
-						point               = stelPos;
-						if (stelObj->getType() == "Star")
+						QString stelObjID = stelObj->getID();
+						if (stelObjID.trimmed().isEmpty())
 						{
-							starID = stelObj->getID();
+							qDebug() << "SkyCultureMaker: Ignored sky object with empty ID";
+						}
+						else
+						{
+							appendDrawPoint(stelPos, stelObjID);
+							qDebug() << "SkyCultureMaker: Added sky object to "
+								    "constellation with ID "
+								 << stelObjID;
 						}
 					}
 				}
 			}
+			else if (drawingMode == DrawingMode::Coordinates)
+			{
+				StelProjectorP prj = core->getProjection(drawFrame);
+				Vec3d point;
+				prj->unProject(x, y, point);
 
-			appendDrawPoint(point, starID);
+				// We want to combine any near start point to an existing point so that we don't create
+				// duplicates.
+				std::optional<StarPoint> nearest = findNearestPoint(x, y, prj);
+				if (nearest.has_value())
+				{
+					point = nearest.value().coordinate;
+					appendDrawPoint(point, std::nullopt);
+				}
+			}
 
 			event->accept();
 			return;
@@ -272,16 +274,22 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 
 	if (activeTool == DrawTools::Pen)
 	{
-		if (snapToStar)
+		if (drawingMode == DrawingMode::StarsAndDSO)
 		{
 			// this wouldve been easier with cleverFind but that is private
 			StelObjectMgr &objectMgr = app.getStelObjectMgr();
 			bool found               = objectMgr.findAndSelect(core, x, y);
-			// only keep the selection if a star was selected
 			if (found && objectMgr.getWasSelected())
 			{
 				StelObjectP stelObj = objectMgr.getLastSelectedObject();
-				if (stelObj->getType() != "Star")
+				// only keep the selection if a star or nebula was selected
+				// and it has a valid id
+				if (stelObj->getType() != "Star" && stelObj->getType() != "Nebula")
+				{
+					objectMgr.unSelect();
+				}
+				// also unselect if the id is empty or only whitespace
+				else if (stelObj->getID().trimmed().isEmpty())
 				{
 					objectMgr.unSelect();
 				}
@@ -293,26 +301,8 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 			StelProjectorP prj = core->getProjection(drawFrame);
 			Vec3d position;
 			prj->unProject(x, y, position);
-			if (snapToStar)
-			{
-				StelObjectMgr &objectMgr = app.getStelObjectMgr();
-				if (objectMgr.getWasSelected())
-				{
-					StelObjectP stelObj = objectMgr.getLastSelectedObject();
-					Vec3d stelPos       = stelObj->getJ2000EquatorialPos(core);
-					std::get<CoordinateLine>(currentLine).end = stelPos;
-				}
-				else
-				{
-					std::get<CoordinateLine>(currentLine).end = position;
-				}
-			}
-			else
-			{
-				std::get<CoordinateLine>(currentLine).end = position;
-			}
-
-			drawState = Drawing::hasFloatingEnd;
+			std::get<CoordinateLine>(currentLine).end = position;
+			drawState                                 = Drawing::hasFloatingEnd;
 		}
 	}
 	else if (activeTool == DrawTools::Eraser)
@@ -368,13 +358,6 @@ void scm::ScmDraw::handleKeys(QKeyEvent *e)
 {
 	if (activeTool == DrawTools::Pen)
 	{
-		if (e->key() == Qt::Key::Key_Control)
-		{
-			snapToStar = e->type() != QEvent::KeyPress;
-
-			e->accept();
-		}
-
 		if (e->key() == Qt::Key::Key_Z && e->modifiers() == Qt::Modifier::CTRL)
 		{
 			undoLastLine();

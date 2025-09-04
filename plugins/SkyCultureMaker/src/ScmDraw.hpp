@@ -30,6 +30,7 @@
 #include "enumBitops.hpp"
 #include "types/CoordinateLine.hpp"
 #include "types/DrawTools.hpp"
+#include "types/DrawingMode.hpp"
 #include "types/Drawing.hpp"
 #include "types/Lines.hpp"
 #include "types/StarLine.hpp"
@@ -57,8 +58,8 @@ private:
 	/// Indicates that the startPoint has been set.
 	Drawing drawState = Drawing::None;
 
-	/// Indicates if a line start or end will snap to the nearest star.
-	bool snapToStar = false;
+	/// The current drawing mode.
+	DrawingMode drawingMode = DrawingMode::StarsAndDSO;
 
 	/// The current pending point.
 	std::tuple<CoordinateLine, StarLine> currentLine;

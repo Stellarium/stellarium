@@ -26,9 +26,10 @@
 #include <QFileInfo>
 
 scm::ScmConstellation::ScmConstellation(const std::vector<scm::CoordinateLine> &coordinates,
-                                        const std::vector<scm::StarLine> &stars)
+                                        const std::vector<scm::StarLine> &stars, const bool isDarkConstellation)
 	: coordinates(coordinates)
 	, stars(stars)
+	, isDarkConstellation(isDarkConstellation)
 {
 	QSettings *conf = StelApp::getInstance().getSettings();
 	constellationNameFont.setPixelSize(conf->value("viewing/constellation_font_size", 15).toInt());
@@ -109,12 +110,12 @@ void scm::ScmConstellation::setConstellation(const std::vector<CoordinateLine> &
 	updateTextPosition();
 }
 
-const std::vector<scm::CoordinateLine>& scm::ScmConstellation::getCoordinates() const
+const std::vector<scm::CoordinateLine> &scm::ScmConstellation::getCoordinates() const
 {
 	return coordinates;
 }
 
-const std::vector<scm::StarLine>& scm::ScmConstellation::getStars() const
+const std::vector<scm::StarLine> &scm::ScmConstellation::getStars() const
 {
 	return stars;
 }
@@ -198,9 +199,9 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId) const
 	// Assemble lines object
 	QJsonArray linesArray;
 
-	if (stars.size() != 0)
+	if (!isDarkConstellation)
 	{
-		// Stars are NOT empty
+		// not a dark constellation, so we can add stars
 		for (const auto &star : stars)
 		{
 			linesArray.append(star.toJson());
@@ -208,7 +209,7 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId) const
 	}
 	else
 	{
-		// Stars are empty, use the coordinates
+		// dark constellation, so only add coordinates
 		for (const auto &coord : coordinates)
 		{
 			linesArray.append(coord.toJson());
@@ -220,7 +221,7 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId) const
 	if (artwork.getHasArt() && !artworkPath.isEmpty())
 	{
 		QFileInfo fileInfo(artworkPath);
-		// the '/' separator is default in all skycultures
+		// the '/' separator is default in all sky cultures
 		json["image"] = artwork.toJson("illustrations/" + fileInfo.fileName());
 	}
 

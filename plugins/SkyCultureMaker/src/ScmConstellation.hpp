@@ -42,7 +42,11 @@ namespace scm
 class ScmConstellation
 {
 public:
-	ScmConstellation(const std::vector<CoordinateLine> &coordinates, const std::vector<StarLine> &stars);
+	ScmConstellation(const std::vector<CoordinateLine> &coordinates, const std::vector<StarLine> &stars,
+	                 bool isDarkConstellation = false)
+		: coordinates(coordinates)
+		, stars(stars)
+		, isDarkConstellation(isDarkConstellation) {};
 
 	/// The frame that is used for calculation and is drawn on.
 	static const StelCore::FrameType drawFrame = StelCore::FrameJ2000;
@@ -257,6 +261,9 @@ private:
 
 	/// Whether the constellation should be drawn or not.
 	bool isHidden = false;
+
+	/// Indicates if the constellation is a dark constellation.
+	bool isDarkConstellation = false;
 
 	/**
 	 * @brief Updates the XYZname that is used for the text position.
