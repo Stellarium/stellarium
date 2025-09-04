@@ -273,6 +273,8 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 
 	if (activeTool == DrawTools::Pen)
 	{
+		Vec3d position = Vec3d(0, 0, 0);
+
 		if (drawingMode == DrawingMode::StarsAndDSO)
 		{
 			// this wouldve been easier with cleverFind but that is private
@@ -291,15 +293,23 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 				{
 					objectMgr.unSelect();
 				}
+				// snap to the star and update the line position
+				else
+				{
+					position = stelObj->getJ2000EquatorialPos(core);
+				}
 			}
 		}
 
-		// draw a floating line in any mode
 		if (hasFlag(drawState, (Drawing::hasStart | Drawing::hasFloatingEnd)))
 		{
-			StelProjectorP prj = core->getProjection(drawFrame);
-			Vec3d position;
-			prj->unProject(x, y, position);
+			// no selection, compute the position from the mouse cursor
+			if (position == Vec3d(0, 0, 0))
+			{
+				std::get<CoordinateLine>(currentLine).end = position;
+				StelProjectorP prj                        = core->getProjection(drawFrame);
+				prj->unProject(x, y, position);
+			}
 			std::get<CoordinateLine>(currentLine).end = position;
 			drawState                                 = Drawing::hasFloatingEnd;
 		}
