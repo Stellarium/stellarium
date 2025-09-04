@@ -25,8 +25,8 @@
 #include <QDir>
 #include <QFileInfo>
 
-scm::ScmConstellation::ScmConstellation(const std::vector<scm::CoordinateLine> &coordinates,
-                                        const std::vector<scm::StarLine> &stars, const bool isDarkConstellation)
+scm::ScmConstellation::ScmConstellation(const std::vector<CoordinateLine> &coordinates,
+                                        const std::vector<StarLine> &stars, const bool isDarkConstellation)
 	: coordinates(coordinates)
 	, stars(stars)
 	, isDarkConstellation(isDarkConstellation)
