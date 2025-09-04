@@ -57,7 +57,7 @@
       </sizepolicy>
      </property>
      <property name="frameShape">
-      <enum>QFrame::Shape::StyledPanel</enum>
+      <enum>QFrame::NoFrame</enum>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <property name="spacing">
@@ -125,7 +125,7 @@ p, li { white-space: pre-wrap; }
 hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="acceptRichText">
@@ -240,9 +240,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
               <property name="text">
                <string>License of the Sky Culture</string>
               </property>
-              <property name="alignment">
-               <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
-              </property>
              </widget>
             </item>
             <item>
@@ -351,6 +348,18 @@ li.checked::marker { content: &quot;\2612&quot;; }
                  <bool>true</bool>
                 </property>
                 <layout class="QVBoxLayout" name="generalInfoLayout">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
                  <item>
                   <widget class="QLabel" name="classificationLbl">
                    <property name="text">
@@ -359,8 +368,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="classificationCB">
-                  </widget>
+                  <widget class="QComboBox" name="classificationCB"/>
                  </item>
                  <item>
                   <widget class="QLabel" name="authorsLbl">
@@ -403,8 +411,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
-                    <property name="placeholderText">^
-                     <string>Please describe specifics of the source (book/clay tablet/parchment/...) or of the culture: e.g. sun-focussed, moon-focussed, climate of the region, geographic specifics. Did members of the culture build pyramids or any other well-known thing? What did they do with astronomy (e.g. time keeping, calendar making, weather predictions...)? Are there connections to other cultures? Is this version a didactic reduction or is it derived from a specific other source?</string>
+                   <property name="placeholderText">
+                    <string>Please describe specifics of the source (book/clay tablet/parchment/...) or of the culture: e.g. sun-focussed, moon-focussed, climate of the region, geographic specifics. Did members of the culture build pyramids or any other well-known thing? What did they do with astronomy (e.g. time keeping, calendar making, weather predictions...)? Are there connections to other cultures? Is this version a didactic reduction or is it derived from a specific other source?</string>
                    </property>
                   </widget>
                  </item>
@@ -427,7 +435,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                     <bool>false</bool>
                    </property>
                    <property name="placeholderText">
-                     <string>How do you know about this Sky Culture? Is this contribution based on your own or other people's research? Is it based on interviews with Elders or reading ancient text, etc.?</string>
+                    <string>How do you know about this Sky Culture? Is this contribution based on your own or other people's research? Is it based on interviews with Elders or reading ancient text, etc.?</string>
                    </property>
                   </widget>
                  </item>
@@ -443,6 +451,18 @@ li.checked::marker { content: &quot;\2612&quot;; }
                  <bool>true</bool>
                 </property>
                 <layout class="QVBoxLayout" name="celestialObjectsLayout">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
                  <item>
                   <layout class="QHBoxLayout">
                    <item>
@@ -466,7 +486,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                     <bool>false</bool>
                    </property>
                    <property name="placeholderText">
-                     <string>What special features did this culture use, what shall the user watch out for? Is it worthwhile to click a specific button rather than others - e.g. divisions of the ecliptic, super-constellations, dark constellations, all-sky-constellations, zoom into the Pleiades, etc.? Do the constellations change with the months or remain the same throughout the year?</string>
+                    <string>What special features did this culture use, what shall the user watch out for? Is it worthwhile to click a specific button rather than others - e.g. divisions of the ecliptic, super-constellations, dark constellations, all-sky-constellations, zoom into the Pleiades, etc.? Do the constellations change with the months or remain the same throughout the year?</string>
                    </property>
                   </widget>
                  </item>
@@ -488,9 +508,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
-                    <property name="placeholderText">
-                     <string>How did they determine their calendar? Did they observe phases?</string>
-                    </property>
+                   <property name="placeholderText">
+                    <string>How did they determine their calendar? Did they observe phases?</string>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -511,9 +531,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
-                    <property name="placeholderText">
-                     <string>Were the planets deified? What deities connect, what meaning do they have?</string>
-                    </property>
+                   <property name="placeholderText">
+                    <string>Were the planets deified? What deities connect, what meaning do they have?</string>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -534,9 +554,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
-                    <property name="placeholderText">
-                     <string>Did they have the (Bab.) zodiac system or any other division of the "path of the Moon"? If so, was it a (equal or unequal) division of the ecliptic or of any other type?</string>
-                    </property>
+                   <property name="placeholderText">
+                    <string>Did they have the (Bab.) zodiac system or any other division of the &quot;path of the Moon&quot;? If so, was it a (equal or unequal) division of the ecliptic or of any other type?</string>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -557,9 +577,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
-                    <property name="placeholderText">
-                     <string>Was the Milky Way deified? What meaning did it have?</string>
-                    </property>
+                   <property name="placeholderText">
+                    <string>Was the Milky Way deified? What meaning did it have?</string>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -620,6 +640,18 @@ li.checked::marker { content: &quot;\2612&quot;; }
                  <bool>true</bool>
                 </property>
                 <layout class="QVBoxLayout" name="creditsLayout">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
                  <item>
                   <widget class="QLabel" name="referencesLbl">
                    <property name="text">
@@ -694,9 +726,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <layout class="QHBoxLayout">
         <item>
          <spacer name="horizontalSpacerLeft">
-          <property name="orientation">
-           <enum>Qt::Orientation::Horizontal</enum>
-          </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>40</width>
@@ -710,9 +739,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <property name="text">
            <string/>
           </property>
-          <property name="alignment">
-           <set>Qt::AlignmentFlag::AlignCenter</set>
-          </property>
           <property name="wordWrap">
            <bool>true</bool>
           </property>
@@ -720,9 +746,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </item>
         <item>
          <spacer name="horizontalSpacerRight">
-          <property name="orientation">
-           <enum>Qt::Orientation::Horizontal</enum>
-          </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>40</width>
