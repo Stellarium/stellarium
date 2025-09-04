@@ -274,8 +274,18 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 	{
 		if (snapToStar)
 		{
+			// this wouldve been easier with cleverFind but that is private
 			StelObjectMgr &objectMgr = app.getStelObjectMgr();
-			objectMgr.findAndSelect(core, x, y);
+			bool found               = objectMgr.findAndSelect(core, x, y);
+			// only keep the selection if a star was selected
+			if (found && objectMgr.getWasSelected())
+			{
+				StelObjectP stelObj = objectMgr.getLastSelectedObject();
+				if (stelObj->getType() != "Star")
+				{
+					objectMgr.unSelect();
+				}
+			}
 		}
 
 		if (hasFlag(drawState, (Drawing::hasStart | Drawing::hasFloatingEnd)))
@@ -406,7 +416,7 @@ std::vector<scm::CoordinateLine> scm::ScmDraw::getCoordinates() const
 	return drawnLines.coordinates;
 }
 
-void scm::ScmDraw::loadLines(const std::vector<CoordinateLine>& coordinates, const std::vector<StarLine>& stars)
+void scm::ScmDraw::loadLines(const std::vector<CoordinateLine> &coordinates, const std::vector<StarLine> &stars)
 {
 	// copy the coordinates and stars to drawnLines
 	drawnLines.coordinates = coordinates;
