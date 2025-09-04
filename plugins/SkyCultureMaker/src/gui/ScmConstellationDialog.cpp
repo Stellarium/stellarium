@@ -241,14 +241,14 @@ void ScmConstellationDialog::triggerUndo()
 
 void ScmConstellationDialog::triggerUploadImage()
 {
-	QString filePath = QFileDialog::getOpenFileName(ui->artworkTab, "Open Artwork", lastUsedImageDirectory,
-	                                                "Images (*.png *.jpg *.jpeg)");
+	QString filePath = QFileDialog::getOpenFileName(ui->artworkTab, q_("Open Artwork"), lastUsedImageDirectory,
+	                                                q_("Images (*.png *.jpg *.jpeg)"));
 	QFileInfo fileInfo(filePath);
 	lastUsedImageDirectory = fileInfo.absolutePath();
 
 	if (!fileInfo.isFile())
 	{
-		ui->infoLbl->setText("Choosen path is not a valid file:\n" + filePath);
+		ui->infoLbl->setText(q_("Choosen path is not a valid file:\n") + filePath);
 		return;
 	}
 
@@ -256,7 +256,7 @@ void ScmConstellationDialog::triggerUploadImage()
 	      fileInfo.suffix().compare("JPG", Qt::CaseInsensitive) == 0 ||
 	      fileInfo.suffix().compare("JPEG", Qt::CaseInsensitive) == 0))
 	{
-		ui->infoLbl->setText("Chosen file is not a PNG, JPG or JPEG image:\n" + filePath);
+		ui->infoLbl->setText(q_("Chosen file is not a PNG, JPG or JPEG image:\n") + filePath);
 		return;
 	}
 
@@ -285,7 +285,7 @@ void ScmConstellationDialog::bindSelectedStar()
 {
 	if (!imageItem->hasAnchorSelection())
 	{
-		ui->infoLbl->setText("WARNING: Select an anchor to bind to.");
+		ui->infoLbl->setText(q_("WARNING: Select an anchor to bind to."));
 		qDebug() << "SkyCultureMaker: No anchor was selected.";
 		return;
 	}
@@ -295,7 +295,7 @@ void ScmConstellationDialog::bindSelectedStar()
 
 	if (!objectMgr.getWasSelected())
 	{
-		ui->infoLbl->setText("WARNING: Select a star to bind to the current selected anchor.");
+		ui->infoLbl->setText(q_("WARNING: Select a star to bind to the current selected anchor."));
 		qDebug() << "SkyCultureMaker: No star was selected to bind to.";
 		return;
 	}
@@ -304,7 +304,7 @@ void ScmConstellationDialog::bindSelectedStar()
 	assert(stelObj != nullptr); // Checked through getWasSelected
 	if (stelObj->getType().compare("star", Qt::CaseInsensitive) != 0)
 	{
-		ui->infoLbl->setText("WARNING: The selected object must be of type star.");
+		ui->infoLbl->setText(q_("WARNING: The selected object must be of type star."));
 		qDebug() << "SkyCultureMaker: The selected object is not of type start, got " << stelObj->getType();
 		return;
 	}
@@ -312,7 +312,7 @@ void ScmConstellationDialog::bindSelectedStar()
 	ScmConstellationImageAnchor *anchor = imageItem->getSelectedAnchor();
 	if (anchor == nullptr)
 	{
-		ui->infoLbl->setText("WARNING: No anchor is selected.");
+		ui->infoLbl->setText(q_("WARNING: No anchor is selected."));
 		qDebug() << "SkyCultureMaker: No anchor is selected";
 		return;
 	}
@@ -320,7 +320,7 @@ void ScmConstellationDialog::bindSelectedStar()
 	bool success = anchor->trySetStarHip(stelObj->getID());
 	if (success == false)
 	{
-		ui->infoLbl->setText("WARNING: The selected object must contain a HIP number.");
+		ui->infoLbl->setText(q_("WARNING: The selected object must contain a HIP number."));
 		qDebug() << "SkyCultureMaker: The object does not contain a HIP, id = " << stelObj->getID();
 		return;
 	}
@@ -344,14 +344,14 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	scm::ScmSkyCulture *currentSkyCulture = maker->getCurrentSkyCulture();
 	if (currentSkyCulture == nullptr)
 	{
-		ui->infoLbl->setText("WARNING: Could not save: Sky Culture is not set");
+		ui->infoLbl->setText(q_("WARNING: Could not save: Sky Culture is not set"));
 		qDebug() << "SkyCultureMaker: Could not save: Sky Culture is not set";
 		return false;
 	}
 
 	if (constellationEnglishName.isEmpty())
 	{
-		ui->infoLbl->setText("WARNING: Could not save: English name is empty");
+		ui->infoLbl->setText(q_("WARNING: Could not save: English name is empty"));
 		qDebug() << "SkyCultureMaker: Could not save: English name is empty";
 		return false;
 	}
@@ -360,7 +360,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	QString finalId = constellationId.isEmpty() ? constellationPlaceholderId : constellationId;
 	if (finalId.isEmpty())
 	{
-		ui->infoLbl->setText("WARNING: Could not save: Constellation ID is empty");
+		ui->infoLbl->setText(q_("WARNING: Could not save: Constellation ID is empty"));
 		qDebug() << "SkyCultureMaker: Could not save: Constellation ID is empty";
 		return false;
 	}
@@ -368,7 +368,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	// Not editing a constellation, but the ID already exists
 	if (constellationBeingEdited == nullptr && currentSkyCulture->getConstellation(finalId) != nullptr)
 	{
-		ui->infoLbl->setText("WARNING: Could not save: Constellation with this ID already exists");
+		ui->infoLbl->setText(q_("WARNING: Could not save: Constellation with this ID already exists"));
 		qDebug() << "SkyCultureMaker: Could not save: Constellation with this ID already exists, id = "
 			 << finalId;
 		return false;
@@ -377,7 +377,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	else if (constellationBeingEdited != nullptr && constellationBeingEdited->getId() != finalId &&
 	         currentSkyCulture->getConstellation(finalId) != nullptr)
 	{
-		ui->infoLbl->setText("WARNING: Could not save: Constellation with this ID already exists");
+		ui->infoLbl->setText(q_("WARNING: Could not save: Constellation with this ID already exists"));
 		qDebug() << "SkyCultureMaker: Could not save: Constellation with this ID already exists, id = "
 			 << finalId;
 		return false;
@@ -387,7 +387,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	auto drawnConstellation = maker->getScmDraw()->getCoordinates();
 	if (drawnConstellation.empty())
 	{
-		ui->infoLbl->setText("WARNING: Could not save: The constellation does not contain any drawings");
+		ui->infoLbl->setText(q_("WARNING: Could not save: The constellation does not contain any drawings"));
 		qDebug() << "SkyCultureMaker: Could not save: The constellation does not contain any drawings";
 		return false;
 	}
@@ -397,8 +397,8 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	{
 		if (!imageItem->isImageAnchored())
 		{
-			ui->infoLbl->setText("WARNING: Could not save: An artwork is attached, but not all "
-			                     "anchors have a star bound.");
+			ui->infoLbl->setText(q_("WARNING: Could not save: An artwork is attached, but not all "
+			                     "anchors have a star bound."));
 			qDebug() << "SkyCultureMaker: Could not save: An artwork is attached, but not all "
 				    "anchors have a star bound.";
 			return false;

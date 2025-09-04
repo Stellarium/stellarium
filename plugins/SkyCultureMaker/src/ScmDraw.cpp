@@ -49,7 +49,7 @@ void scm::ScmDraw::setSearchMode(bool active)
 		}
 		else
 		{
-			qDebug() << "SkyCultureMaker: Failed to release ctrl key";
+			qDebug() << "SkyCultureMaker: Failed to release Ctrl key";
 		}
 	}
 
