@@ -155,16 +155,18 @@ public:
 
 private:
 	void drawCap(StelPainter &sPainter, const SphericalCap& viewPortSphericalCap, double latDeg) const;
+	void drawMansionCap(StelPainter &sPainter, const SphericalCap& viewPortSphericalCap, double latDeg, double lon1, double lon2) const;
 	//void drawLabels(StelPainter &sPainter) const;
 	//! Update i18n names from English names according to current locale.
 	void updateI18n();
 
 	StelCore::FrameType frameType;         //!< Useful seem only: FrameObservercentricEclipticOfDate (e.g. Zodiac), FrameEquinoxEqu (e.g. Chin. Lunar Mansions)
-	QVector<double> partitions;            //!< A partition into [0] large parts of [1] smaller parts of [2] smaller parts... Currently only 2-part zodiacs [12, 30] or nakshatras [27, 4] are in use.
+	QList<int> partitions;                 //!< A partition into [0] large parts of [1] smaller parts of [2] smaller parts... Currently only 2-part zodiacs [12, 30] or nakshatras [27, 4] are in use.
 	StelObject::CulturalName name;         //!< Full culture-sensitive naming support: name of the system.
 	QList<StelObject::CulturalName> names; //!< Full culture-sensitive naming support: names of the first-grade partition.
 	QStringList symbols;                   //!< A list of very short or optimally 1-char Unicode strings with representative symbols usable as abbreviations.	
-	double extent;                         //!< (degrees) the displayed partition zone runs so far north and south of the center line.
+	QList<double> extent;                  //!< (degrees) If only one element (usual case), the displayed partition zone runs so far north and south of the center line.
+					       //!<           Else, the list MUST contain 2x number of partitions[0], and contains north and south latitudes of each lunar station.
 public:
 	SkyLine *centerLine;                   //!< See GridlineMgr: a CUSTOM_ECLIPTIC or CUSTOM_EQUATORIAL SkyLine
 private:
