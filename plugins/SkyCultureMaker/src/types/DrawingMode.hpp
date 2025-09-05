@@ -26,7 +26,10 @@
 
 namespace scm
 {
-
+/**
+ * @brief Enum representing the drawing modes available in the Sky Culture Maker plugin.
+ * The modes determine how lines can be drawn in the constellation editor.
+ */
 enum class DrawingMode
 {
 	StarsAndDSO,
