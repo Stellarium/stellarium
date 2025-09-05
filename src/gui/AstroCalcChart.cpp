@@ -118,7 +118,7 @@ void AstroCalcChart::retranslate(){
 const QMap<AstroCalcChart::Series, QPen> AstroCalcChart::penMap=
 {
 	{AstroCalcChart::AltVsTime,         QPen(Qt::red,                             2, Qt::SolidLine)},
-	{AstroCalcChart::CurrentTime,       QPen(Qt::yellow,                          2, Qt::SolidLine)},
+        {AstroCalcChart::CurrentTime,       QPen(Qt::magenta,                         2, Qt::SolidLine)},
 	{AstroCalcChart::TransitTime,       QPen(Qt::cyan,                            2, Qt::SolidLine)},
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 	{AstroCalcChart::SunElevation,      QPen(QColorConstants::Svg::orange,        2, Qt::SolidLine)},

@@ -220,6 +220,7 @@ public:
 	//! A default potentially very slow implementation is provided for each case.
 	bool contains(const SphericalRegion* r) const;
 	bool contains(const SphericalRegionP r) const {return contains(r.data());}
+	//! Returns whether p is included. @note p should be normalized.
 	virtual bool contains(const Vec3d& p) const {return getOctahedronPolygon().contains(p);}
 	virtual bool contains(const SphericalPolygon& r) const;
 	virtual bool contains(const SphericalConvexPolygon& r) const;
@@ -601,6 +602,7 @@ public:
 
 	SphericalCap getBoundingCap() const override;
 
+	//! Returns whether p is included. @note p should be normalized.
 	bool contains(const Vec3d& p) const override {return octahedronPolygon.contains(p);}
 	bool contains(const SphericalPolygon& r) const override {return octahedronPolygon.contains(r.octahedronPolygon);}
 	bool contains(const SphericalConvexPolygon& r) const override;
@@ -698,6 +700,7 @@ public:
 	void serialize(QDataStream& out) const override {out << contour;}
 
 	// Contain and intersect
+	//! Returns whether p is included. @note p should be normalized.
 	bool contains(const Vec3d& p) const override;
 	bool contains(const SphericalPolygon& r) const override;
 	bool contains(const SphericalConvexPolygon& r) const override;
