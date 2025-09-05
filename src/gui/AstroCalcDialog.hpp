@@ -327,7 +327,7 @@ private slots:
 	//! Calculating the rises, transits and sets for selected celestial body and fill the list.
 	void generateRTS();
 	void cleanupRTS();
-	void selectCurrentRTS(const QModelIndex &modelIndex);
+	void selectCurrentRTS(QTreeWidgetItem* item, int idx);
 	void saveRTS();
 	void setRTSCelestialBodyName();
 
@@ -670,6 +670,7 @@ private:
 	bool plotAltVsTimePositive = false;
 	bool plotMonthlyElevation = false;
 	bool plotMonthlyElevationPositive = false;
+	bool plotXYVsTimeGraph = false;
 	bool plotDistanceGraph = false;
 	bool plotLunarElongationGraph = false;
 	bool plotAziVsTime = false;

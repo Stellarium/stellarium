@@ -329,13 +329,13 @@ void AstroCalcDialog::createDialogContent()
 	ui->jupiterMarkerColor->setup("SolarSystem.ephemerisJupiterMarkerColor", "color/ephemeris_jupiter_marker_color");
 	ui->saturnMarkerColor->setup("SolarSystem.ephemerisSaturnMarkerColor", "color/ephemeris_saturn_marker_color");
 
-	// Tab: Transits
+	// Tab: Rises/Transits/Sets
 	initListRTS();
 	enableRTSButtons(buttonState);
 	connect(ui->rtsCalculateButton, SIGNAL(clicked()), this, SLOT(generateRTS()));
 	connect(ui->rtsCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupRTS()));
 	connect(ui->rtsSaveButton, SIGNAL(clicked()), this, SLOT(saveRTS()));
-	connect(ui->rtsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentRTS(QModelIndex)));
+	connect(ui->rtsTreeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), this, SLOT(selectCurrentRTS(QTreeWidgetItem*,int)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(setRTSCelestialBodyName()));
 
 	// Tab: Eclipses
@@ -2358,11 +2358,12 @@ void AstroCalcDialog::cleanupRTS()
 	enableRTSButtons(false);
 }
 
-void AstroCalcDialog::selectCurrentRTS(const QModelIndex& modelIndex)
+void AstroCalcDialog::selectCurrentRTS(QTreeWidgetItem* item, int idx)
 {
-	// Find the object
-	const QString name = modelIndex.sibling(modelIndex.row(), RTSCOName).data(Qt::UserRole).toString();
-	const double JD = modelIndex.sibling(modelIndex.row(), RTSTransitDate).data(Qt::UserRole).toDouble();	
+	const QString name = item->data(RTSCOName, Qt::UserRole).toString();
+	double JD = item->data(RTSTransitDate, Qt::UserRole).toDouble();
+	if (idx == RTSRiseDate || idx == RTSSetDate)
+		JD = item->data(idx, Qt::UserRole).toDouble();
 	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
 	{
 		core->setJD(JD);
@@ -5378,27 +5379,31 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 {
 	// special case - plot the graph when tab is visible
 	// and only if dialog is visible at all
-	if (!dialog->isVisible() || (!plotAltVsTime && !plotAziVsTime)) return;
+	if (!dialog->isVisible() || (!plotAltVsTime && !plotAziVsTime && !plotXYVsTimeGraph)) return;
 
 	const double currentJD = core->getJD();
 	const double UTCOffset = core->getUTCOffset(currentJD)/24.;
 
 	if (plotAltVsTime)
 	{
-		if (altVsTimeChart){
+		if (altVsTimeChart)
 			altVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD, Qt::UTC).toMSecsSinceEpoch()));
-		}
 		else
 			qWarning() << "no alt chart to add CT line!";
 	}
 	if (plotAziVsTime)
 	{
 		if (azVsTimeChart)
-		{
 			azVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD, Qt::UTC).toMSecsSinceEpoch()));
-		}
 		else
 			qWarning() << "no azi chart to add CT line!";
+	}
+	if (plotXYVsTimeGraph)
+	{
+		if (curvesChart)
+			curvesChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD, Qt::UTC).toMSecsSinceEpoch()));
+		else
+			qWarning() << "no XYVsTime chart to add CT line!";
 	}
 
 	// detect roll over graph day limits.
@@ -5434,7 +5439,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		// It may be that we come from 0.22.1 for the first time. Apply some useful default graphs
 		if (firstGraph==AstroCalcChart::AltVsTime) firstGraph=AstroCalcChart::AngularSize1;
 		if (secondGraph==AstroCalcChart::AltVsTime) secondGraph=AstroCalcChart::Magnitude2;
-		curvesChart = new AstroCalcChart({firstGraph, secondGraph});
+		curvesChart = new AstroCalcChart({firstGraph, secondGraph, AstroCalcChart::CurrentTime});
 
 		// Our principal counter is now hours.
 		//qDebug() << "X time range" << StelUtils::julianDayToISO8601String(startJD) << "to" << StelUtils::julianDayToISO8601String(startJD+(30*24)*graphsDuration/24.);
@@ -5471,7 +5476,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 	}
 	else
 	{
-		curvesChart = new AstroCalcChart({AstroCalcChart::AngularSize1, AstroCalcChart::Distance2}); // May be wrong as it does not protect display from other planets...
+		curvesChart = new AstroCalcChart({AstroCalcChart::AngularSize1, AstroCalcChart::Distance2, AstroCalcChart::CurrentTime}); // May be wrong as it does not protect display from other planets...
 		curvesChart->setYrange(AstroCalcChart::AngularSize1, 0., 10.);
 		curvesChart->setYrangeR(AstroCalcChart::Magnitude2, 0., 10.);
 		curvesChart->setupAxes(core->getJD(), graphsDuration, "");
@@ -7222,6 +7227,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 	// reset all flags to make sure only one is set
 	plotAltVsTime = false;
 	plotAziVsTime = false;
+	plotXYVsTimeGraph = false;
 	plotMonthlyElevation = false;
 	plotLunarElongationGraph = false;
 	plotDistanceGraph = false;
@@ -7234,7 +7240,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 		currentCelestialPositions();
 
 	// special case - ephemeris
-	if (ui->stackListWidget->row(current) == 1)
+	if (ui->stackListWidget->row(current) == 1 && !computeEphemeris)
 		setDateTimeNow();
 
 	// special case - RTS
@@ -7263,6 +7269,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 				drawMonthlyElevationGraph(); // Is object already selected?
 				break;
 			case 3: // 'Graphs' is visible
+				plotXYVsTimeGraph = true;
 				updateXVsTimeGraphs();
 				break;
 			case 4: // 'Angular distance' is visible
@@ -7308,6 +7315,7 @@ void AstroCalcDialog::changeGraphsTab(int index)
 	// reset all flags to make sure only one is set
 	plotAltVsTime = false;
 	plotAziVsTime = false;
+	plotXYVsTimeGraph = false;
 	plotMonthlyElevation = false;
 	plotLunarElongationGraph = false;
 
@@ -7325,6 +7333,7 @@ void AstroCalcDialog::changeGraphsTab(int index)
 			drawMonthlyElevationGraph(); // Is object already selected?
 			break;
 		case 3: // Graphs
+			plotXYVsTimeGraph = true;
 			updateXVsTimeGraphs();
 			break;
 		case 4: // Angular Distance

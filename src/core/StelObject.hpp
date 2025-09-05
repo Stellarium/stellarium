@@ -400,6 +400,7 @@ public:
 	virtual QString getInfoLabel() const {return QString();}
 
 	//! Get observer-centered equatorial coordinates at equinox J2000, including aberration
+	//! @note: The vector may not be normalized!
 	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const = 0;
 
 	//! Get observer-centered equatorial coordinate at the current equinox
