@@ -282,11 +282,10 @@ jobs:
 
         run: |
           set -e -x
-          export PATH=/usr/local/lib/qt5/bin:$PATH
           export DISPLAY=:0
           mkdir builds
           cd builds
-          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On "${{ github.workspace }}"
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On -DENABLE_QT6=Off "${{ github.workspace }}"
           make -j3
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
           sleep 3
