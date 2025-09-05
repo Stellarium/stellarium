@@ -342,7 +342,7 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 	{
 		for (int i=0; i<partitions[0]; ++i)
 		{
-			QString label=scMgr->createCulturalLabel(names.at(i), scMgr->getScreenLabelStyle(), QString());
+			QString label=scMgr->createCulturalLabel(names.at(i), partitions[0]==12 ? scMgr->getZodiacLabelStyle() : scMgr->getLunarSystemLabelStyle(), QString());
 			// To have tilted labels, we project a point 0.1deg from the actual label point and derive screen-based angle.
 			double lng  = (360./partitions[0]*(double(i)+0.5) + 2.+offsetFromAries)*M_PI_180;
 			double lng1 = (360./partitions[0]*(double(i)+0.5) + 2.+offsetFromAries+txtOffset)*M_PI_180;
@@ -363,7 +363,7 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 	{
 		for (int i=0; i<linkStars.length(); ++i)
 		{
-			QString label=scMgr->createCulturalLabel(names.at(i), scMgr->getScreenLabelStyle(),names.at(i).pronounceI18n);
+			QString label=scMgr->createCulturalLabel(names.at(i), partitions[0]==12 ? scMgr->getZodiacLabelStyle() : scMgr->getLunarSystemLabelStyle(),names.at(i).pronounceI18n);
 			StelObjectP starBegin = starMgr->searchHP(linkStars.at(i));
 			StelObjectP starEnd   = starMgr->searchHP(linkStars.at((i==linkStars.length()-1? 0 : i+1)));
 

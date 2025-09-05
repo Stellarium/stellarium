@@ -664,6 +664,8 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->zodiacFadeDurationDoubleSpinBox,      "ConstellationMgr.zodiacFadeDuration");
 	connectDoubleProperty(ui->lunarSystemFadeDurationDoubleSpinBox, "ConstellationMgr.lunarSystemFadeDuration");
 
+	connect(ui->zodiacLabelComboBox,      SIGNAL(currentIndexChanged(int)), this, SLOT(setZodiacLabelStyle(int)));
+	connect(ui->lunarSystemLabelComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setLunarSystemLabelStyle(int)));
 
 	// Font selection
 	connectIntProperty(ui->constellationsFontSizeSpinBox, "ConstellationMgr.fontSize");
@@ -1425,6 +1427,8 @@ void ViewDialog::configureSkyCultureCheckboxes()
 	static StelSkyCultureMgr *scMgr     = GETSTELMODULE(StelSkyCultureMgr);
 	StelObject::CulturalDisplayStyle infoStyle   = scMgr->getInfoLabelStyle();
 	StelObject::CulturalDisplayStyle screenStyle = scMgr->getScreenLabelStyle();
+	StelObject::CulturalDisplayStyle zodiacStyle = scMgr->getZodiacLabelStyle();
+	StelObject::CulturalDisplayStyle lunarStyle  = scMgr->getLunarSystemLabelStyle();
 	static ConstellationMgr *cMgr       = GETSTELMODULE(ConstellationMgr);
 	const bool hasZodiac=cMgr->hasZodiac();
 	const bool hasLunarSystem=cMgr->hasLunarSystem();
@@ -1444,11 +1448,16 @@ void ViewDialog::configureSkyCultureCheckboxes()
 	ui->screenLabelBynameCheckBox         ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Byname));
 	ui->screenLabelModernCheckBox         ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Modern));
 
+	populateCulturalCombo(ui->zodiacLabelComboBox, zodiacStyle);
+	populateCulturalCombo(ui->lunarSystemLabelComboBox, lunarStyle);
+
 	ui->zodiacCheckBox->setEnabled(hasZodiac);
+	ui->zodiacLabelComboBox->setEnabled(hasZodiac);
 	ui->zodiacColorButton->setEnabled(hasZodiac);
 	ui->zodiacFadeDurationDoubleSpinBox->setEnabled(hasZodiac);
 	ui->zodiacThicknessSpinBox->setEnabled(hasZodiac);
 	ui->lunarSystemCheckBox->setEnabled(hasLunarSystem);
+	ui->lunarSystemLabelComboBox->setEnabled(hasLunarSystem);
 	ui->lunarSystemColorButton->setEnabled(hasLunarSystem);
 	ui->lunarSystemFadeDurationDoubleSpinBox->setEnabled(hasLunarSystem);
 	ui->lunarSystemThicknessSpinBox->setEnabled(hasLunarSystem);
@@ -1482,6 +1491,45 @@ void ViewDialog::updateSkyCultureScreenStyleFromCheckboxes()
 				int(ui->screenLabelIPACheckBox            ->isChecked()) << 1 |
 				int(ui->screenLabelModernCheckBox         ->isChecked())
 				));
+}
+
+void ViewDialog::populateCulturalCombo(QComboBox *combo, StelObject::CulturalDisplayStyle style)
+{
+//Save the current selection to be restored later
+combo->blockSignals(true);
+//int index = combo->currentIndex();
+//QVariant selectedStyle = combo->itemData(index);
+combo->clear();
+//Allow only single-style for space reasons, and store the key as user data.
+combo->addItem(qc_("native",          "cultural style"), QVariant::fromValue(StelObject::CulturalDisplayStyle::Native));
+combo->addItem(qc_("transliteration", "cultural style"), QVariant::fromValue(StelObject::CulturalDisplayStyle::Pronounce));
+combo->addItem(qc_("sci. translit.",  "cultural style"), QVariant::fromValue(StelObject::CulturalDisplayStyle::Translit));
+combo->addItem(qc_("translated",      "cultural style"), QVariant::fromValue(StelObject::CulturalDisplayStyle::Translated));
+//Restore the selection
+int index = combo->findData(QVariant::fromValue(style), Qt::UserRole, Qt::MatchCaseSensitive);
+combo->setCurrentIndex(index);
+combo->blockSignals(false);
+}
+
+// called from the ZodiacDisplayStyle combo. int is the newly selected index.
+void ViewDialog::setZodiacLabelStyle(int index)
+{
+	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
+
+	QComboBox *combo=static_cast<QComboBox *>(sender());
+	QVariant selectedStyle = combo->itemData(index);
+	StelObject::CulturalDisplayStyle style=selectedStyle.value<StelObject::CulturalDisplayStyle>();
+	scMgr->setZodiacLabelStyle(style);
+}
+
+void ViewDialog::setLunarSystemLabelStyle(int index)
+{
+	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
+
+	QComboBox *combo=static_cast<QComboBox *>(sender());
+	QVariant selectedStyle = combo->itemData(index);
+	StelObject::CulturalDisplayStyle style=selectedStyle.value<StelObject::CulturalDisplayStyle>();
+	scMgr->setLunarSystemLabelStyle(style);
 }
 
 void ViewDialog::skyCultureChanged()
