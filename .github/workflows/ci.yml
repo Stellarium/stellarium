@@ -282,6 +282,7 @@ jobs:
 
         run: |
           set -e -x
+          export PATH=/usr/local/lib/qt5/bin:$PATH
           export DISPLAY=:0
           mkdir builds
           cd builds
