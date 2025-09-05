@@ -891,6 +891,84 @@ void StelSkyCultureMgr::setInfoLabelStyle(const QString &style)
 	setInfoLabelStyle(convertCulturalDisplayStyleFromCSVstring(style));
 }
 
+// Returns the screen labeling setting for the currently active skyculture
+StelObject::CulturalDisplayStyle StelSkyCultureMgr::getZodiacLabelStyle() const
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return StelObject::CulturalDisplayStyle::Translated;
+
+	static QSettings *conf=StelApp::getInstance().getSettings();
+	QVariant val= conf->value(QString("SCZodiacLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
+	//qDebug() << "StelSkyCultureMgr::getZodiacLabelStyle(): found " << val << "(" << val.toString() << ")";
+	return convertCulturalDisplayStyleFromCSVstring(val.toString());
+}
+// Scripting version
+QString StelSkyCultureMgr::getZodiacLabelStyleString() const
+{
+	return convertCulturalDisplayStyleToCSVstring(getZodiacLabelStyle());
+}
+
+
+// Sets the screen labeling setting for the currently active skyculture
+void StelSkyCultureMgr::setZodiacLabelStyle(const StelObject::CulturalDisplayStyle style)
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return;
+
+	static QSettings *conf=StelApp::getInstance().getSettings();
+	conf->setValue(QString("SCZodiacLabelStyle/%1").arg(getCurrentSkyCultureID()), convertCulturalDisplayStyleToCSVstring(style));
+	//qInfo() << QString("SCZodiacLabelStyle/%1=%2").arg(getCurrentSkyCultureID(), convertCulturalDisplayStyleToCSVstring(style));
+	emit zodiacLabelStyleChanged(style);
+}
+
+// style can be the enum string like Native_IPA_Translated, or a comma-separated string like "Translated, native, IPA"
+void StelSkyCultureMgr::setZodiacLabelStyle(const QString &style)
+{
+	setZodiacLabelStyle(convertCulturalDisplayStyleFromCSVstring(style));
+}
+
+// Returns the lunar_system labeling setting for the currently active skyculture
+StelObject::CulturalDisplayStyle StelSkyCultureMgr::getLunarSystemLabelStyle() const
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return StelObject::CulturalDisplayStyle::Translated;
+
+	static QSettings *conf=StelApp::getInstance().getSettings();
+	QVariant val= conf->value(QString("SCLunarSystemLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
+	qInfo() << "StelSkyCultureMgr::getLunarSystemLabelStyle(): found " << val << "(" << val.toString() << ")";
+	return convertCulturalDisplayStyleFromCSVstring(val.toString());
+}
+// Scripting version
+QString StelSkyCultureMgr::getLunarSystemLabelStyleString() const
+{
+	return convertCulturalDisplayStyleToCSVstring(getLunarSystemLabelStyle());
+}
+
+
+// Sets the lunar_system labeling setting for the currently active skyculture
+void StelSkyCultureMgr::setLunarSystemLabelStyle(const StelObject::CulturalDisplayStyle style)
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return;
+
+	static QSettings *conf=StelApp::getInstance().getSettings();
+	conf->setValue(QString("SCLunarSystemLabelStyle/%1").arg(getCurrentSkyCultureID()), convertCulturalDisplayStyleToCSVstring(style));
+	qInfo() << QString("SCLunarSystemLabelStyle/%1=%2").arg(getCurrentSkyCultureID(), convertCulturalDisplayStyleToCSVstring(style));
+	emit lunarSystemLabelStyleChanged(style);
+}
+
+// style can be the enum string like Native or Translated
+void StelSkyCultureMgr::setLunarSystemLabelStyle(const QString &style)
+{
+	setLunarSystemLabelStyle(convertCulturalDisplayStyleFromCSVstring(style));
+}
+
+
+
 QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &cName,
 					       const StelObject::CulturalDisplayStyle style,
 					       const QString &commonNameI18n,

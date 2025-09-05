@@ -25,6 +25,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QHash>
+#include "StelObject.hpp"
 
 class Ui_viewDialogForm;
 class QListWidgetItem;
@@ -61,6 +62,9 @@ private slots:
 	void configureSkyCultureCheckboxes();
 	void updateSkyCultureInfoStyleFromCheckboxes();
 	void updateSkyCultureScreenStyleFromCheckboxes();
+	void populateCulturalCombo(QComboBox *combo, StelObject::CulturalDisplayStyle style);
+	void setZodiacLabelStyle(int index);
+	void setLunarSystemLabelStyle(int index);
 	void populateToolTips();
 	void skyCultureChanged();
 	void changeProjection(const QString& projectionNameI18n);
