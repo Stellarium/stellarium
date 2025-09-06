@@ -522,15 +522,10 @@ void SkyCultureMaker::resetScmDialogsVisibilityState()
 
 bool SkyCultureMaker::isAnyDialogVisible() const
 {
-	const StelDialog* dialogs[] = {
-		scmSkyCultureDialog,
-		scmConstellationDialog,
-		scmSkyCultureExportDialog,
-		scmHideOrAbortMakerDialog,
-		scmStartDialog
-	};
+	const StelDialog *dialogs[] = {scmSkyCultureDialog, scmConstellationDialog, scmSkyCultureExportDialog,
+	                               scmHideOrAbortMakerDialog, scmStartDialog};
 
-	for (const StelDialog* dialog : dialogs)
+	for (const StelDialog *dialog : dialogs)
 	{
 		if (dialog != nullptr && dialog->visible())
 		{
