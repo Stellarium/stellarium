@@ -125,6 +125,14 @@ scm::ScmDraw::ScmDraw()
 	: drawState(Drawing::None)
 	, drawingMode(DrawingMode::StarsAndDSO)
 {
+	QSettings *conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("SkyCultureMaker");
+	fixedLineColor    = Vec3f(conf->value("fixedLineColor", "1.0,0.5,0.5").toString());
+	fixedLineAlpha    = conf->value("fixedLineAlpha", 1.0).toFloat();
+	floatingLineColor = Vec3f(conf->value("floatingLineColor", "1.0,0.7,0.7").toString());
+	floatingLineAlpha = conf->value("floatingLineAlpha", 0.5).toFloat();
+	conf->endGroup();
+
 	std::get<CoordinateLine>(currentLine).start.set(0, 0, 0);
 	std::get<CoordinateLine>(currentLine).end.set(0, 0, 0);
 	lastEraserPos.set(std::nan("1"), std::nan("1"));
@@ -146,9 +154,7 @@ void scm::ScmDraw::drawLine(StelCore *core) const
 	StelPainter painter(core->getProjection(drawFrame));
 	painter.setBlending(true);
 	painter.setLineSmooth(true);
-	Vec3f color = {1.f, 0.5f, 0.5f};
-	bool alpha  = 1.0f;
-	painter.setColor(color, alpha);
+	painter.setColor(fixedLineColor, fixedLineAlpha);
 
 	for (CoordinateLine p : drawnLines.coordinates)
 	{
@@ -157,8 +163,7 @@ void scm::ScmDraw::drawLine(StelCore *core) const
 
 	if (hasFlag(drawState, Drawing::hasFloatingEnd))
 	{
-		color = {1.f, 0.7f, 0.7f};
-		painter.setColor(color, 0.5f);
+		painter.setColor(floatingLineColor, floatingLineAlpha);
 		painter.drawGreatCircleArc(std::get<CoordinateLine>(currentLine).start,
 		                           std::get<CoordinateLine>(currentLine).end);
 	}
@@ -200,20 +205,16 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 				if (objectMgr.getWasSelected())
 				{
 					StelObjectP stelObj = objectMgr.getLastSelectedObject();
-					if (stelObj->getType() == "Star" || stelObj->getType() == "Nebula")
+					if ((stelObj->getType() == "Star" || stelObj->getType() == "Nebula") &&
+					    !stelObj->getID().trimmed().isEmpty())
 					{
-						QString stelObjID = stelObj->getID();
-						if (stelObjID.trimmed().isEmpty())
-						{
-							qDebug() << "SkyCultureMaker: Ignored sky object with empty ID";
-						}
-						else
-						{
-							appendDrawPoint(stelObj->getJ2000EquatorialPos(core), stelObjID);
-							qDebug() << "SkyCultureMaker: Added sky object to "
-								    "constellation with ID "
-								 << stelObjID;
-						}
+						appendDrawPoint(stelObj->getJ2000EquatorialPos(core), stelObj->getID());
+						qDebug() << "SkyCultureMaker: Added sky object to constellation with ID"
+							 << stelObj->getID();
+					}
+					else if (stelObj->getID().trimmed().isEmpty())
+					{
+						qDebug() << "SkyCultureMaker: Ignored sky object with empty ID";
 					}
 				}
 			}
@@ -223,12 +224,10 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 				Vec3d point;
 				prj->unProject(x, y, point);
 
-				// We want to combine any near start point to an existing point so that we don't create
-				// duplicates.
-				std::optional<StarPoint> nearest = findNearestPoint(x, y, prj);
-				if (nearest.has_value())
+				// Snap to nearest point if close enough
+				if (auto nearest = findNearestPoint(x, y, prj); nearest.has_value())
 				{
-					point = nearest.value().coordinate;
+					point = nearest->coordinate;
 				}
 				appendDrawPoint(point, std::nullopt);
 			}
@@ -253,15 +252,16 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 	}
 	else if (activeTool == DrawTools::Eraser)
 	{
-		if (event->button() == Qt::RightButton && event->type() == QEvent::MouseButtonPress)
+		if (event->button() == Qt::RightButton)
 		{
-			Vec2d currentPos(x, y);
-			lastEraserPos = currentPos;
-		}
-		else if (event->button() == Qt::RightButton && event->type() == QEvent::MouseButtonRelease)
-		{
-			// Reset
-			lastEraserPos = defaultLastEraserPos;
+			if (event->type() == QEvent::MouseButtonPress)
+			{
+				lastEraserPos = Vec2d(x, y);
+			}
+			else if (event->type() == QEvent::MouseButtonRelease)
+			{
+				lastEraserPos = defaultLastEraserPos;
+			}
 		}
 	}
 }

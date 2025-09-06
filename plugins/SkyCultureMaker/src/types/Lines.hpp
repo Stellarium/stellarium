@@ -36,7 +36,7 @@ struct Lines
 	//! The coordinate pairs of a line.
 	std::vector<CoordinateLine> coordinates;
 
-	//! The optional available stars too the coordinates.
+	//! The optional available stars to the coordinates.
 	std::vector<StarLine> stars;
 };
 } // namespace scm

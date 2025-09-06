@@ -30,8 +30,8 @@
 #include "enumBitops.hpp"
 #include "types/CoordinateLine.hpp"
 #include "types/DrawTools.hpp"
-#include "types/DrawingMode.hpp"
 #include "types/Drawing.hpp"
+#include "types/DrawingMode.hpp"
 #include "types/Lines.hpp"
 #include "types/StarLine.hpp"
 #include "types/StarPoint.hpp"
@@ -51,6 +51,15 @@ class ScmDraw : public QObject
 private:
 	static constexpr const char id_search_window[] = "actionShow_Search_Window_Global";
 	static const Vec2d defaultLastEraserPos;
+
+	/// Color of fixed drawn lines.
+	Vec3f fixedLineColor = Vec3f(1.0f, 0.5f, 0.5f);
+	/// Alpha of fixed drawn lines.
+	float fixedLineAlpha = 1.0f;
+	/// Color of floating drawn lines.
+	Vec3f floatingLineColor = Vec3f(1.0f, 0.7f, 0.7f);
+	/// Alpha of floating drawn lines.
+	float floatingLineAlpha = 0.5f;
 
 	/// The search radius to attach to a point on a existing line.
 	uint32_t maxSnapRadiusInPixels = 25;
@@ -185,7 +194,7 @@ public:
 	 * @brief Loads lines into the buffer from a tuple of coordinates and stars.
 	 *
 	 */
-	void loadLines(const std::vector<CoordinateLine>& coordinates, const std::vector<StarLine>& stars);
+	void loadLines(const std::vector<CoordinateLine> &coordinates, const std::vector<StarLine> &stars);
 
 	/**
 	 * @brief Set the active draw tool

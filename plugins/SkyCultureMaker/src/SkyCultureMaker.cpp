@@ -65,7 +65,7 @@ StelPluginInfo SkyCultureMakerStelPluginInterface::getPluginInfo() const
 	info.authors = "Vincent Gerlach (RivinHD), Luca-Philipp Grumbach (xLPMG), Fabian Hofer (Integer-Ctrl), Richard "
 		       "Hofmann (ZeyxRew), Mher Mnatsakanyan (MherMnatsakanyan03)";
 	info.contact = N_("Contact us using our GitHub usernames, via an Issue or the Discussion tab in the Stellarium "
-	               "repository.");
+	                  "repository.");
 	info.description = N_("Plugin to draw and export sky cultures in Stellarium.");
 	info.version     = SKYCULTUREMAKER_PLUGIN_VERSION;
 	info.license     = SKYCULTUREMAKER_PLUGIN_LICENSE;
@@ -89,6 +89,17 @@ SkyCultureMaker::SkyCultureMaker()
 	scmConstellationDialog    = new ScmConstellationDialog(this);
 	scmSkyCultureExportDialog = new ScmSkyCultureExportDialog(this);
 	scmHideOrAbortMakerDialog = new ScmHideOrAbortMakerDialog(this);
+
+	// Settings
+	QSettings *conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("SkyCultureMaker");
+
+	initSetting(conf, "fixedLineColor", "1.0,0.5,0.5");
+	initSetting(conf, "fixedLineAlpha", 1.0);
+	initSetting(conf, "floatingLineColor", "1.0,0.7,0.7");
+	initSetting(conf, "floatingLineAlpha", 0.5);
+
+	conf->endGroup();
 }
 
 /*************************************************************************
@@ -567,5 +578,19 @@ void SkyCultureMaker::openConstellationDialog(const QString &constellationId)
 	else
 	{
 		qWarning() << "SkyCultureMaker: Constellation dialog is not initialized.";
+	}
+}
+
+void SkyCultureMaker::initSetting(QSettings *conf, const QString key, const QVariant &defaultValue)
+{
+	if (conf == nullptr)
+	{
+		qWarning() << "SkyCultureMaker: QSettings pointer is null.";
+		return;
+	}
+
+	if (!conf->contains(key))
+	{
+		conf->setValue(key, defaultValue);
 	}
 }
