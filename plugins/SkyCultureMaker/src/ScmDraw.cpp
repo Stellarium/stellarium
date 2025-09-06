@@ -209,12 +209,13 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 					    !stelObj->getID().trimmed().isEmpty())
 					{
 						appendDrawPoint(stelObj->getJ2000EquatorialPos(core), stelObj->getID());
-						qDebug() << "SkyCultureMaker: Added sky object to constellation with ID"
-							 << stelObj->getID();
+						qDebug()
+							<< "SkyCultureMaker: Added star/nebula to constellation with ID"
+							<< stelObj->getID();
 					}
 					else if (stelObj->getID().trimmed().isEmpty())
 					{
-						qDebug() << "SkyCultureMaker: Ignored sky object with empty ID";
+						qDebug() << "SkyCultureMaker: Ignored star/nebula with empty ID";
 					}
 				}
 			}
@@ -229,6 +230,9 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 				{
 					point = nearest->coordinate;
 				}
+				qDebug() << "SkyCultureMaker: Added point to constellation at"
+					 << QString::number(point.v[0]) + "," + QString::number(point.v[1]) + "," +
+						    QString::number(point.v[2]);
 				appendDrawPoint(point, std::nullopt);
 			}
 
@@ -273,7 +277,7 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 
 	if (activeTool == DrawTools::Pen)
 	{
-		Vec3d position = Vec3d(0, 0, 0);
+		Vec3d position(0, 0, 0);
 
 		if (drawingMode == DrawingMode::StarsAndDSO)
 		{
