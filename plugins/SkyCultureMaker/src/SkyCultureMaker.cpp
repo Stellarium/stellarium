@@ -522,25 +522,20 @@ void SkyCultureMaker::resetScmDialogsVisibilityState()
 
 bool SkyCultureMaker::isAnyDialogVisible() const
 {
-	if (scmSkyCultureDialog != nullptr && scmSkyCultureDialog->visible())
+	const StelDialog* dialogs[] = {
+		scmSkyCultureDialog,
+		scmConstellationDialog,
+		scmSkyCultureExportDialog,
+		scmHideOrAbortMakerDialog,
+		scmStartDialog
+	};
+
+	for (const StelDialog* dialog : dialogs)
 	{
-		return true;
-	}
-	if (scmConstellationDialog != nullptr && scmConstellationDialog->visible())
-	{
-		return true;
-	}
-	if (scmSkyCultureExportDialog != nullptr && scmSkyCultureExportDialog->visible())
-	{
-		return true;
-	}
-	if (scmHideOrAbortMakerDialog != nullptr && scmHideOrAbortMakerDialog->visible())
-	{
-		return true;
-	}
-	if (scmStartDialog != nullptr && scmStartDialog->visible())
-	{
-		return true;
+		if (dialog != nullptr && dialog->visible())
+		{
+			return true;
+		}
 	}
 	return false;
 }
