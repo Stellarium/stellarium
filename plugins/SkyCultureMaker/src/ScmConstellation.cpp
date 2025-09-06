@@ -25,9 +25,10 @@
 #include <QDir>
 #include <QFileInfo>
 
-scm::ScmConstellation::ScmConstellation(const std::vector<CoordinateLine> &coordinates,
+scm::ScmConstellation::ScmConstellation(const QString &id, const std::vector<CoordinateLine> &coordinates,
                                         const std::vector<StarLine> &stars, const bool isDarkConstellation)
-	: coordinates(coordinates)
+	: id(id)
+	, coordinates(coordinates)
 	, stars(stars)
 	, isDarkConstellation(isDarkConstellation)
 {
@@ -39,11 +40,6 @@ scm::ScmConstellation::ScmConstellation(const std::vector<CoordinateLine> &coord
 	defaultConstellationNameColor = Vec3f(conf->value("color/const_names_color", defaultColor).toString());
 
 	updateTextPosition();
-}
-
-void scm::ScmConstellation::setId(const QString &id)
-{
-	ScmConstellation::id = id;
 }
 
 QString scm::ScmConstellation::getId() const

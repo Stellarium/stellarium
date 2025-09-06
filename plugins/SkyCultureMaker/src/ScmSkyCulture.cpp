@@ -41,8 +41,7 @@ scm::ScmConstellation &scm::ScmSkyCulture::addConstellation(const QString &id,
                                                             const std::vector<StarLine> &stars,
                                                             const bool isDarkConstellation)
 {
-	scm::ScmConstellation constellationObj(coordinates, stars, isDarkConstellation);
-	constellationObj.setId(id);
+	scm::ScmConstellation constellationObj(id, coordinates, stars, isDarkConstellation);
 	constellations.push_back(std::move(constellationObj));
 	return constellations.back();
 }

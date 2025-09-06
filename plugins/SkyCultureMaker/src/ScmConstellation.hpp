@@ -42,18 +42,11 @@ namespace scm
 class ScmConstellation
 {
 public:
-	ScmConstellation(const std::vector<CoordinateLine> &coordinates, const std::vector<StarLine> &stars,
-	                 const bool isDarkConstellation);
+	ScmConstellation(const QString &id, const std::vector<CoordinateLine> &coordinates,
+	                 const std::vector<StarLine> &stars, const bool isDarkConstellation);
 
 	/// The frame that is used for calculation and is drawn on.
 	static const StelCore::FrameType drawFrame = StelCore::FrameJ2000;
-
-	/**
-    * @brief Sets the id of the constellation
-    * 
-    * @param id id
-    */
-	void setId(const QString &id);
 
 	/**
     * @brief Gets the id of the constellation
