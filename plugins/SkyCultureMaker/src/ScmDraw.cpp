@@ -37,7 +37,11 @@ void scm::ScmDraw::setSearchMode(bool active)
 	// search mode deactivates before the star is set by the search
 	if (inSearchMode == true && active == false)
 	{
-		selectedStarIsSearched = true;
+		// only allow search and find for normal constellations
+		if(drawingMode == DrawingMode::StarsAndDSO)
+		{
+			selectedStarIsSearched = true;
+		}
 
 		// HACK an Ctrl + Release is not triggered if Ctrl + F is trigger it manually
 		QKeyEvent release = QKeyEvent(QEvent::KeyRelease, Qt::Key_Control, Qt::NoModifier);
