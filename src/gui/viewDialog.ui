@@ -5851,6 +5851,12 @@
                  </property>
                 </widget>
                </item>
+               <item row="6" column="3">
+                <widget class="QComboBox" name="zodiacLabelComboBox"/>
+               </item>
+               <item row="6" column="9">
+                <widget class="QComboBox" name="lunarSystemLabelComboBox"/>
+               </item>
               </layout>
              </item>
              <item row="4" column="0">
@@ -6071,12 +6077,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>

@@ -153,6 +153,14 @@ class StelSkyCultureMgr : public StelModule
 		   READ getInfoLabelStyle
 		   WRITE setInfoLabelStyle
 		   NOTIFY infoLabelStyleChanged)
+	Q_PROPERTY(StelObject::CulturalDisplayStyle zodiacLabelStyle
+		   READ getZodiacLabelStyle
+		   WRITE setZodiacLabelStyle
+		   NOTIFY zodiacLabelStyleChanged)
+	Q_PROPERTY(StelObject::CulturalDisplayStyle lunarSystemLabelStyle
+		   READ getLunarSystemLabelStyle
+		   WRITE setLunarSystemLabelStyle
+		   NOTIFY lunarSystemLabelStyleChanged)
 	Q_PROPERTY(bool flagUseAbbreviatedNames
 		   READ getFlagUseAbbreviatedNames
 		   WRITE setFlagUseAbbreviatedNames
@@ -262,6 +270,24 @@ public slots:
 	//! scripting version
 	void setInfoLabelStyle(const QString &style);
 
+	//! Returns the Zodiac labeling setting for the currently active skyculture
+	StelObject::CulturalDisplayStyle getZodiacLabelStyle() const;
+	//! Scripting version
+	QString getZodiacLabelStyleString() const;
+	//! sets the Zodiac labeling setting for the currently active skyculture
+	void setZodiacLabelStyle(const StelObject::CulturalDisplayStyle style);
+	//! scripting version
+	void setZodiacLabelStyle(const QString &style);
+
+	//! Returns the Lunar_System labeling setting for the currently active skyculture
+	StelObject::CulturalDisplayStyle getLunarSystemLabelStyle() const;
+	//! Scripting version
+	QString getLunarSystemLabelStyleString() const;
+	//! sets the Lunar_System labeling setting for the currently active skyculture
+	void setLunarSystemLabelStyle(const StelObject::CulturalDisplayStyle style);
+	//! scripting version
+	void setLunarSystemLabelStyle(const QString &style);
+
 	//! Returns whether we ignore SC authors' settings "fallback_to_international_names"
 	bool getFlagOverrideUseCommonNames() const {return flagOverrideUseCommonNames; }
 	//! Set whether we ignore SC authors' settings "fallback_to_international_names"
@@ -290,6 +316,10 @@ signals:
 	void infoLabelStyleChanged(const StelObject::CulturalDisplayStyle style);
 	//! Emitted when ScreenLabelStyle has changed
 	void screenLabelStyleChanged(const StelObject::CulturalDisplayStyle style);
+	//! Emitted when ZodiacLabelStyle has changed
+	void zodiacLabelStyleChanged(const StelObject::CulturalDisplayStyle style);
+	//! Emitted when Lunar_System LabelStyle has changed
+	void lunarSystemLabelStyleChanged(const StelObject::CulturalDisplayStyle style);
 
 	//! Emitted on flag change.
 	void flagOverrideUseCommonNamesChanged(bool override);
