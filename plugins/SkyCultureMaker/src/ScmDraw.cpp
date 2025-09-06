@@ -127,10 +127,11 @@ scm::ScmDraw::ScmDraw()
 {
 	QSettings *conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("SkyCultureMaker");
-	fixedLineColor    = Vec3f(conf->value("fixedLineColor", "1.0,0.5,0.5").toString());
-	fixedLineAlpha    = conf->value("fixedLineAlpha", 1.0).toFloat();
-	floatingLineColor = Vec3f(conf->value("floatingLineColor", "1.0,0.7,0.7").toString());
-	floatingLineAlpha = conf->value("floatingLineAlpha", 0.5).toFloat();
+	fixedLineColor        = Vec3f(conf->value("fixedLineColor", "1.0,0.5,0.5").toString());
+	fixedLineAlpha        = conf->value("fixedLineAlpha", 1.0).toFloat();
+	floatingLineColor     = Vec3f(conf->value("floatingLineColor", "1.0,0.7,0.7").toString());
+	floatingLineAlpha     = conf->value("floatingLineAlpha", 0.5).toFloat();
+	maxSnapRadiusInPixels = conf->value("maxSnapRadiusInPixels", 25).toUInt();
 	conf->endGroup();
 
 	std::get<CoordinateLine>(currentLine).start.set(0, 0, 0);
@@ -437,7 +438,7 @@ void scm::ScmDraw::setTool(scm::DrawTools tool)
 	drawState     = Drawing::None;
 }
 
-std::optional<scm::StarPoint> scm::ScmDraw::findNearestPoint(int x, int y, StelProjectorP prj) const
+std::optional<scm::SkyPoint> scm::ScmDraw::findNearestPoint(int x, int y, StelProjectorP prj) const
 {
 	if (drawnLines.coordinates.empty())
 	{
@@ -483,14 +484,14 @@ std::optional<scm::StarPoint> scm::ScmDraw::findNearestPoint(int x, int y, StelP
 	{
 		if (isStartPoint)
 		{
-			StarPoint point = {min->start,
-			                   drawnLines.stars.at(std::distance(drawnLines.coordinates.begin(), min)).start};
+			SkyPoint point = {min->start,
+			                  drawnLines.stars.at(std::distance(drawnLines.coordinates.begin(), min)).start};
 			return point;
 		}
 		else
 		{
-			StarPoint point = {min->end,
-			                   drawnLines.stars.at(std::distance(drawnLines.coordinates.begin(), min)).end};
+			SkyPoint point = {min->end,
+			                  drawnLines.stars.at(std::distance(drawnLines.coordinates.begin(), min)).end};
 			return point;
 		}
 	}

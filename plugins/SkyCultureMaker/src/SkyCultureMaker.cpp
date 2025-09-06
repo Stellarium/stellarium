@@ -98,6 +98,7 @@ SkyCultureMaker::SkyCultureMaker()
 	initSetting(conf, "fixedLineAlpha", 1.0);
 	initSetting(conf, "floatingLineColor", "1.0,0.7,0.7");
 	initSetting(conf, "floatingLineAlpha", 0.5);
+	initSetting(conf, "maxSnapRadiusInPixels", 25);
 
 	conf->endGroup();
 }

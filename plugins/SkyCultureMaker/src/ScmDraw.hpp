@@ -34,7 +34,7 @@
 #include "types/DrawingMode.hpp"
 #include "types/Lines.hpp"
 #include "types/StarLine.hpp"
-#include "types/StarPoint.hpp"
+#include "types/SkyPoint.hpp"
 #include <cmath>
 #include <optional>
 #include <tuple>
@@ -164,14 +164,14 @@ public:
 	void handleKeys(QKeyEvent *e);
 
 	/**
-	 * @brief Finds the nearest star point to the given position.
+	 * @brief Finds the nearest sky point to the given position.
 	 *
 	 * @param x The x viewport coordinate of the mouse.
 	 * @param y The y viewport coordinate of the mouse.
 	 * @param prj The projector to use for the calculation.
-	 * @return std::optional<StarPoint> The found star point if available.
+	 * @return std::optional<SkyPoint> A point in the sky or std::nullopt if no point was found.
 	 */
-	std::optional<StarPoint> findNearestPoint(int x, int y, StelProjectorP prj) const;
+	std::optional<SkyPoint> findNearestPoint(int x, int y, StelProjectorP prj) const;
 
 	/// Undo the last drawn line.
 	void undoLastLine();

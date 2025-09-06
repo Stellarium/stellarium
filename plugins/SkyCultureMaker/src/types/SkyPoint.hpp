@@ -21,8 +21,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCM_TYPES_STAR_POINT_HPP
-#define SCM_TYPES_STAR_POINT_HPP
+#ifndef SCM_TYPES_SKY_POINT_HPP
+#define SCM_TYPES_SKY_POINT_HPP
 
 #include "VecMath.hpp"
 #include <optional>
@@ -30,10 +30,10 @@
 
 namespace scm
 {
-//! The point of a single star with coordinates.
-struct StarPoint
+//! A point in the sky with coordinates, optionally associated with a star ID.
+struct SkyPoint
 {
-	//! The coordinate of a single point.
+	//! The coordinate of the point.
 	Vec3d coordinate;
 
 	//! The optional star at that coordinate.
