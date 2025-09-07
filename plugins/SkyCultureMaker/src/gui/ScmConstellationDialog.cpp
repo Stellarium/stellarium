@@ -67,10 +67,10 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 	{
 		resetDialog();
 	}
+	setIsDarkConstellation(constellation->getIsDarkConstellation());
 
 	// Save the constellation that is currently being edited
 	constellationBeingEdited = constellation;
-	setIsDarkConstellation(constellation->getIsDarkConstellation());
 
 	constellationId            = constellation->getId();
 	constellationEnglishName   = constellation->getEnglishName();
@@ -101,14 +101,32 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 
 void ScmConstellationDialog::setIsDarkConstellation(bool isDark)
 {
-	isDarkConstellation = isDark;
-
+	// make sure the dialog is initialized to avoid any ui null pointers
 	if (!isDialogInitialized)
 	{
 		createDialogContent();
 	}
 
 	scm::ScmDraw *draw = maker->getScmDraw();
+	if (draw == nullptr)
+	{
+		qWarning() << "SkyCultureMaker: ScmConstellationDialog::setIsDarkConstellation: ScmDraw is null";
+		return;
+	}
+
+	// the value changed, so we should reset any drawing first
+	if(isDarkConstellation != isDark)
+	{
+		draw->resetDrawing();
+		// reset artwork as well
+		ui->bind_star->setEnabled(false);
+		imageItem->hide();
+		imageItem->resetAnchors();
+		maker->setTempArtwork(nullptr);
+
+		isDarkConstellation = isDark;
+	}
+
 	if (draw != nullptr)
 	{
 		draw->setDrawingMode(isDark ? scm::DrawingMode::Coordinates : scm::DrawingMode::StarsAndDSO);
