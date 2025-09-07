@@ -25,6 +25,7 @@
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelObjectMgr.hpp"
+#include "types/DrawingMode.hpp"
 #include "ui_scmConstellationDialog.h"
 #include <algorithm>
 #include <cassert>
@@ -66,6 +67,7 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 	{
 		resetDialog();
 	}
+	setIsDarkConstellation(constellation->getIsDarkConstellation());
 
 	// Save the constellation that is currently being edited
 	constellationBeingEdited = constellation;
@@ -97,6 +99,54 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 	updateArtwork();
 }
 
+void ScmConstellationDialog::setIsDarkConstellation(bool isDark)
+{
+	// make sure the dialog is initialized to avoid any ui null pointers
+	if (!isDialogInitialized)
+	{
+		createDialogContent();
+	}
+
+	scm::ScmDraw *draw = maker->getScmDraw();
+	if (draw == nullptr)
+	{
+		qWarning() << "SkyCultureMaker: ScmConstellationDialog::setIsDarkConstellation: ScmDraw is null";
+		return;
+	}
+
+	// the value changed, so we should reset some data from the previous mode
+	if(isDarkConstellation != isDark)
+	{
+		// reset drawn lines as they are not compatible between modes
+		draw->resetDrawing();
+
+		// reset artwork as well
+		ui->bind_star->setEnabled(false);
+		imageItem->hide();
+		imageItem->resetAnchors();
+		maker->setTempArtwork(nullptr);
+
+		activeTool = scm::DrawTools::None;
+		ui->penBtn->setChecked(false);
+		ui->eraserBtn->setChecked(false);
+		maker->setDrawTool(scm::DrawTools::None);
+
+		isDarkConstellation = isDark;
+	}
+
+	if (draw != nullptr)
+	{
+		draw->setDrawingMode(isDark ? scm::DrawingMode::Coordinates : scm::DrawingMode::StarsAndDSO);
+	}
+
+	if (ui != nullptr)
+	{
+		ui->titleBar->setTitle(isDark ? q_("SCM: Dark Constellation Editor") : q_("SCM: Constellation Editor"));
+		ui->labelsTitle->setText(isDark ? q_("Please name your Dark Constellation")
+		                                : q_("Please name your Constellation"));
+	}
+}
+
 void ScmConstellationDialog::retranslate()
 {
 	if (dialog)
@@ -117,6 +167,8 @@ void ScmConstellationDialog::createDialogContent()
 	imageItem->hide();
 	ui->artwork_image->setScene(imageItem->scene());
 	ui->bind_star->setEnabled(false);
+
+	setIsDarkConstellation(false);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
@@ -398,7 +450,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 		if (!imageItem->isImageAnchored())
 		{
 			ui->infoLbl->setText(q_("WARNING: Could not save: An artwork is attached, but not all "
-			                     "anchors have a star bound."));
+			                        "anchors have a star bound."));
 			qDebug() << "SkyCultureMaker: Could not save: An artwork is attached, but not all "
 				    "anchors have a star bound.";
 			return false;
@@ -436,7 +488,8 @@ void ScmConstellationDialog::saveConstellation()
 			culture->removeConstellation(constellationBeingEdited->getId());
 		}
 
-		scm::ScmConstellation &constellation = culture->addConstellation(id, coordinates, stars);
+		scm::ScmConstellation &constellation = culture->addConstellation(id, coordinates, stars,
+		                                                                 isDarkConstellation);
 
 		constellation.setEnglishName(constellationEnglishName);
 		constellation.setNativeName(constellationNativeName);
@@ -468,6 +521,7 @@ void ScmConstellationDialog::resetDialog()
 	ui->penBtn->setChecked(false);
 	ui->eraserBtn->setChecked(false);
 	maker->setDrawTool(scm::DrawTools::None);
+	setIsDarkConstellation(false);
 
 	constellationId.clear();
 	ui->idTE->clear();

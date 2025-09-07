@@ -56,7 +56,7 @@ public:
 
 	/// Adds a constellation to the sky culture
 	ScmConstellation &addConstellation(const QString &id, const std::vector<CoordinateLine> &coordinates,
-	                                   const std::vector<StarLine> &stars);
+	                                   const std::vector<StarLine> &stars, const bool isDarkConstellation);
 
 	/// Removes a constellation from the sky culture by its ID
 	void removeConstellation(const QString &id);

@@ -106,6 +106,13 @@ public:
 	void setConstellationDialogVisibility(bool b);
 
 	/**
+	 * @brief Sets whether the constellation dialog is for a dark constellation.
+	 *
+	 * @param isDarkConstellation The boolean value to be set.
+	 */
+	void setConstellationDialogIsDarkConstellation(bool isDarkConstellation);
+
+	/**
 	 * @brief Shows the sky culture export dialog.
 	 *
 	 * @param b The boolean value to be set.
@@ -296,6 +303,14 @@ private:
 
 	/// The artwork to temporary draw on the sky.
 	const scm::ScmConstellationArtwork *tempArtwork = nullptr;
+
+	/**
+	 * @brief Initializes a setting with a default value if it does not exist.
+	 * This does not open or close the settings group.
+	 * @param key The key of the setting.
+	 * @param defaultValue The default value to set if the setting does not exist.
+	 */
+	void initSetting(QSettings *conf, const QString key, const QVariant &defaultValue);
 };
 
 #include "StelPluginInterface.hpp"

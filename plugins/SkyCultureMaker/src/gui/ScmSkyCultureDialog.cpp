@@ -104,8 +104,10 @@ void ScmSkyCultureDialog::createDialogContent()
 	ui->ExportSkyCultureBtn->setEnabled(false);
 	ui->RemoveConstellationBtn->setEnabled(false);
 	ui->EditConstellationBtn->setEnabled(false);
+
 	connect(ui->ExportSkyCultureBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::saveSkyCulture);
-	connect(ui->AddConstellationBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::constellationDialog);
+	connect(ui->AddConstellationBtn, &QPushButton::clicked, this, [this]() { openConstellationDialog(false); });
+	connect(ui->AddDarkConstellationBtn, &QPushButton::clicked, this, [this]() { openConstellationDialog(true); });
 
 	connect(ui->EditConstellationBtn, &QPushButton::clicked, this, &ScmSkyCultureDialog::editSelectedConstellation);
 	connect(ui->constellationsList, &QListWidget::itemSelectionChanged, this,
@@ -247,15 +249,22 @@ void ScmSkyCultureDialog::removeSelectedConstellation()
 	}
 }
 
-void ScmSkyCultureDialog::constellationDialog()
+void ScmSkyCultureDialog::openConstellationDialog(bool isDarkConstellation)
 {
 	maker->setConstellationDialogVisibility(true);
+	maker->setConstellationDialogIsDarkConstellation(isDarkConstellation);
 }
 
 void ScmSkyCultureDialog::setIdFromName(QString &name)
 {
 	QString id = name.toLower().replace(" ", "_");
 	maker->getCurrentSkyCulture()->setId(id);
+}
+
+void ScmSkyCultureDialog::updateAddConstellationButtons(bool enabled)
+{
+	ui->AddConstellationBtn->setEnabled(enabled);
+	ui->AddDarkConstellationBtn->setEnabled(enabled);
 }
 
 void ScmSkyCultureDialog::updateEditConstellationButton()

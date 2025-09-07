@@ -21,23 +21,20 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCM_TYPES_LINE_HPP
-#define SCM_TYPES_LINE_HPP
-
-#include "CoordinateLine.hpp"
-#include "StarLine.hpp"
-#include <vector>
+#ifndef SCM_TYPES_DRAWINGMODE_HPP
+#define SCM_TYPES_DRAWINGMODE_HPP
 
 namespace scm
 {
-//! The lines of the current drawn constellation
-struct Lines
+/**
+ * @brief Enum representing the drawing modes available in the Sky Culture Maker plugin.
+ * The modes determine how lines can be drawn in the constellation editor.
+ */
+enum class DrawingMode
 {
-	//! The coordinate pairs of a line.
-	std::vector<CoordinateLine> coordinates;
-
-	//! The optional available stars to the coordinates.
-	std::vector<StarLine> stars;
+	StarsAndDSO,
+    
+    Coordinates
 };
 } // namespace scm
 

@@ -41,7 +41,7 @@ SET( SkyCultureMaker_SRCS
      types/DrawTools.hpp
      types/Lines.hpp
      types/StarLine.hpp
-     types/StarPoint.hpp
+     types/SkyPoint.hpp
      types/Anchor.hpp
 )
 

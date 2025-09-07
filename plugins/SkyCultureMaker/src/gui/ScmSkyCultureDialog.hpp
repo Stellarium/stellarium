@@ -71,6 +71,13 @@ public:
 	 */
 	void resetDialog();
 
+	/**
+	 * @brief Updates the add constellation button state.
+	 *
+	 * @param enabled Whether the button should be enabled or disabled.
+	 */
+	void updateAddConstellationButtons(bool enabled);
+
 public slots:
 	void retranslate() override;
 	void close() override;
@@ -80,7 +87,7 @@ protected slots:
 
 private slots:
 	void saveSkyCulture();
-	void constellationDialog();
+	void openConstellationDialog(bool isDarkConstellation);
 	void editSelectedConstellation();
 	void removeSelectedConstellation();
 	void updateEditConstellationButton();

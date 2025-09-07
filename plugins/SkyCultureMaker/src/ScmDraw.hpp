@@ -31,9 +31,10 @@
 #include "types/CoordinateLine.hpp"
 #include "types/DrawTools.hpp"
 #include "types/Drawing.hpp"
+#include "types/DrawingMode.hpp"
 #include "types/Lines.hpp"
 #include "types/StarLine.hpp"
-#include "types/StarPoint.hpp"
+#include "types/SkyPoint.hpp"
 #include <cmath>
 #include <optional>
 #include <tuple>
@@ -51,14 +52,23 @@ private:
 	static constexpr const char id_search_window[] = "actionShow_Search_Window_Global";
 	static const Vec2d defaultLastEraserPos;
 
+	/// Color of fixed drawn lines.
+	Vec3f fixedLineColor = Vec3f(1.0f, 0.5f, 0.5f);
+	/// Alpha of fixed drawn lines.
+	float fixedLineAlpha = 1.0f;
+	/// Color of floating drawn lines.
+	Vec3f floatingLineColor = Vec3f(1.0f, 0.7f, 0.7f);
+	/// Alpha of floating drawn lines.
+	float floatingLineAlpha = 0.5f;
+
 	/// The search radius to attach to a point on a existing line.
 	uint32_t maxSnapRadiusInPixels = 25;
 
 	/// Indicates that the startPoint has been set.
 	Drawing drawState = Drawing::None;
 
-	/// Indicates if a line start or end will snap to the nearest star.
-	bool snapToStar = false;
+	/// The current drawing mode.
+	DrawingMode drawingMode = DrawingMode::StarsAndDSO;
 
 	/// The current pending point.
 	std::tuple<CoordinateLine, StarLine> currentLine;
@@ -154,14 +164,14 @@ public:
 	void handleKeys(QKeyEvent *e);
 
 	/**
-	 * @brief Finds the nearest star point to the given position.
+	 * @brief Finds the nearest sky point to the given position.
 	 *
 	 * @param x The x viewport coordinate of the mouse.
 	 * @param y The y viewport coordinate of the mouse.
 	 * @param prj The projector to use for the calculation.
-	 * @return std::optional<StarPoint> The found star point if available.
+	 * @return std::optional<SkyPoint> A point in the sky or std::nullopt if no point was found.
 	 */
-	std::optional<StarPoint> findNearestPoint(int x, int y, StelProjectorP prj) const;
+	std::optional<SkyPoint> findNearestPoint(int x, int y, StelProjectorP prj) const;
 
 	/// Undo the last drawn line.
 	void undoLastLine();
@@ -184,7 +194,7 @@ public:
 	 * @brief Loads lines into the buffer from a tuple of coordinates and stars.
 	 *
 	 */
-	void loadLines(const std::vector<CoordinateLine>& coordinates, const std::vector<StarLine>& stars);
+	void loadLines(const std::vector<CoordinateLine> &coordinates, const std::vector<StarLine> &stars);
 
 	/**
 	 * @brief Set the active draw tool
@@ -192,6 +202,13 @@ public:
 	 * @param tool The tool to be used.
 	 */
 	void setTool(DrawTools tool);
+
+	/**
+	 * @brief Sets the drawing mode.
+	 * 
+	 * @param mode The drawing mode to use.
+	 */
+	void setDrawingMode(DrawingMode mode) { drawingMode = mode; }
 
 	/**
 	 * @brief Resets the currently drawn lines.
