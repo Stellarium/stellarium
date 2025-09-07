@@ -41,11 +41,13 @@ struct StarLine
 	std::optional<QString> end;
 
 	/**
-	 * @brief Gets the star ID from the name.
+	 * @brief Gets the formatted star Id from the name.
 	 * 
-	 * @param starId The ID of the star, which may contain identifiers like "HIP" or "Gaia DR3".
+	 * @param starId The Id of the star or DSO, which may contain identifiers like "HIP" or "Gaia DR3".
+	 * @return QString The formatted star Id, either as plain number for HIP or Gaia, or as "DSO:<name>" for others.
+	 * 
 	 */
-	static QString getStarId(QString starId)
+	static QString getFormattedStarId(QString starId)
 	{
 		QRegularExpression hipExpression(R"(HIP\s+(\d+))");
 		QRegularExpression gaiaExpression(R"(Gaia DR3\s+(\d+))");
@@ -75,17 +77,17 @@ struct StarLine
 
 		if (start.has_value())
 		{
-			QString number = getStarId(start.value());
+			QString formattedStarId = getFormattedStarId(start.value());
 
 			if (start.value().contains("HIP"))
 			{
-				// HIP are required as int
-				json.append(number.toInt());
+				// HIP are required as number
+				json.append(formattedStarId.toLongLong());
 			}
 			else
 			{
 				// Other ids are required as string
-				json.append(number);
+				json.append(formattedStarId);
 			}
 		}
 		else
@@ -95,17 +97,17 @@ struct StarLine
 
 		if (end.has_value())
 		{
-			QString number = getStarId(end.value());
+			QString formattedStarId = getFormattedStarId(end.value());
 
 			if (end.value().contains("HIP"))
 			{
-				// HIP are required as int
-				json.append(number.toInt());
+				// HIP are required as number
+				json.append(formattedStarId.toLongLong());
 			}
 			else
 			{
 				// Other ids are required as string
-				json.append(number);
+				json.append(formattedStarId);
 			}
 		}
 		else
