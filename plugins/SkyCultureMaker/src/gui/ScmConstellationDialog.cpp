@@ -114,15 +114,22 @@ void ScmConstellationDialog::setIsDarkConstellation(bool isDark)
 		return;
 	}
 
-	// the value changed, so we should reset any drawing first
+	// the value changed, so we should reset some data from the previous mode
 	if(isDarkConstellation != isDark)
 	{
+		// reset drawn lines as they are not compatible between modes
 		draw->resetDrawing();
+
 		// reset artwork as well
 		ui->bind_star->setEnabled(false);
 		imageItem->hide();
 		imageItem->resetAnchors();
 		maker->setTempArtwork(nullptr);
+
+		activeTool = scm::DrawTools::None;
+		ui->penBtn->setChecked(false);
+		ui->eraserBtn->setChecked(false);
+		maker->setDrawTool(scm::DrawTools::None);
 
 		isDarkConstellation = isDark;
 	}
