@@ -87,7 +87,7 @@ void ScmStartDialog::createDialogContent()
 /* =============================================== SkyCultureConverter ============================================== */
 #ifdef SCM_CONVERTER_ENABLED_CPP
 	ui->scmStartConvertpushButton->setToolTip(
-		tr("Convert sky cultures from the legacy (fab) format to the new (json) format"));
+	        q_("Convert sky cultures from the legacy (fab) format to the new (json) format"));
 	connect(ui->scmStartConvertpushButton, &QPushButton::clicked, this,
 	        [this]()
 	        {
@@ -99,9 +99,8 @@ void ScmStartDialog::createDialogContent()
 			converterDialog->setVisible(true);
 		});
 #else   // SCM_CONVERTER_ENABLED_CPP is not defined
-	// Converter is disabled, so disable the button
-	ui->scmStartConvertpushButton->setEnabled(false);
-	ui->scmStartConvertpushButton->setToolTip(q_("The Sky Culture Converter has been turned off for this build."));
+	// Converter is disabled, so hide the button
+	ui->scmStartConvertpushButton->setVisible(false);
 #endif  // SCM_CONVERTER_ENABLED_CPP
 	/* ================================================================================================================== */
 }

@@ -93,18 +93,18 @@ private:
 	QString lastUsedImageDirectory;
 #if defined(Q_OS_MAC)
 	/// Help text on how to use the pen for Mac users.
-	const QString helpDrawInfoPen = "Use RightClick or Control + Click to draw a connected line.\n"
+	const QString helpDrawInfoPen = q_("Use RightClick or Control + Click to draw a connected line.\n"
 					"Use Double-RightClick or Control + Double-Click to stop drawing the line.\n"
-					"Use Command + F to search and connect stars.";
+	                                "Use Command + F to search and connect stars.");
 	/// Help text on how to use the eraser for Mac users.
-	const QString helpDrawInfoEraser = "Hold RightClick or Control + Click to delete the line under the cursor.\n";
+	const QString helpDrawInfoEraser = q_("Hold RightClick or Control + Click to delete the line under the cursor.\n");
 #else
 	/// Help text on how to use the pen for non-Mac users.
-	const QString helpDrawInfoPen = "Use RightClick to draw a connected line.\n"
+	const QString helpDrawInfoPen = q_("Use RightClick to draw a connected line.\n"
 					"Use Double-RightClick to stop drawing the line.\n"
-					"Use CTRL + F to search and connect stars.";
+	                                "Use CTRL + F to search and connect stars.");
 	/// Help text on how to use the eraser for non-Mac users.
-	const QString helpDrawInfoEraser = "Hold RightClick to delete the line under the cursor.\n";
+	const QString helpDrawInfoEraser = q_("Hold RightClick to delete the line under the cursor.\n");
 #endif
 
 	/// The constellation that is currently being edited
