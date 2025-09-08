@@ -2239,9 +2239,9 @@ void StelCore::updateTime(double deltaTime)
 		JD.first = jdOfLastJDUpdate + (QDateTime::currentMSecsSinceEpoch() - milliSecondsOfLastJDUpdate) / 1000.0 * timeSpeed;
 	}
 
-	// Fix time limits to -100000 to +100000 to prevent bugs
-	if (JD.first>38245309.499988) JD.first = 38245309.499988;
-	if (JD.first<-34803211.500012) JD.first = -34803211.500012;
+	// Fix time limits to -200000 to +200000 to prevent bugs
+	if (JD.first>74769924.499988) JD.first = 74769924.499988;
+	if (JD.first<-71328212.500012) JD.first = -71328212.500012;
 	JD.second=computeDeltaT(JD.first);
 
 	if (position->isObserverLifeOver())
