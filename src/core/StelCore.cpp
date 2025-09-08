@@ -92,6 +92,7 @@ StelCore::StelCore()
 	, parallaxFactor(1.0)
 	, flagUseTopocentricCoordinates(true)
 	, timeSpeed(JD_SECOND)
+        , savedTimeSpeed(JD_SECOND)
 	, JD(0.,0.)
 	, presetSkyTime(0.)
 	, milliSecondsOfLastJDUpdate(0)
@@ -314,6 +315,7 @@ void StelCore::init()
 	actionsMgr->addAction("actionDecrease_Time_Speed_Less", timeGroup, N_("Decrease time speed (a little)"), this, "decreaseTimeSpeedLess()", "Shift+J");
 	actionsMgr->addAction("actionSet_Real_Time_Speed", timeGroup, N_("Set normal time rate"), this, "toggleRealTimeSpeed()", "K");
 	actionsMgr->addAction("actionSet_Time_Rate_Zero", timeGroup, N_("Set time rate to zero"), this, "setZeroTimeSpeed()", "7");
+	actionsMgr->addAction("actionToggle_Time_Rate_Zero", timeGroup, N_("Toggle time rate to zero and back"), this, "toggleTimeSpeed()", "9");
 	actionsMgr->addAction("actionSet_Time_Reverse", timeGroup, N_("Set reverse time direction"), this, "revertTimeDirection()", "0");
 	actionsMgr->addAction("actionReturn_To_Current_Time", timeGroup, N_("Set time to now"), this, "setTimeNow()", "8");
 	actionsMgr->addAction("actionAdd_Solar_Minute", timeGroup, N_("Add 1 solar minute"), this, "addMinute()");
@@ -1360,6 +1362,18 @@ void StelCore::setTimeRate(double ts)
 double StelCore::getTimeRate() const
 {
 	return timeSpeed;
+}
+
+void StelCore::toggleTimeSpeed()
+{
+	double ts = getTimeRate();
+	if (ts != 0.)
+	{
+		savedTimeSpeed = ts;
+		setTimeRate(0.);
+	}
+	else
+		setTimeRate(savedTimeSpeed);
 }
 
 void StelCore::revertTimeDirection(void)
