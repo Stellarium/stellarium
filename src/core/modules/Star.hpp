@@ -503,7 +503,7 @@ public:
       // Combine the 3 bytes into a 24-bit integer (little-endian)
       quint32 combined_value = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
       // Extract the 17-bit ID (shift right by 5 bits)
-      quint64  hip_id = qFromLittleEndian<quint64>(combined_value >> 5);
+      quint64  hip_id = combined_value >> 5;
       return hip_id;
    }
 
