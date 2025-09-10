@@ -62,6 +62,8 @@
 #include <QStorageInfo>
 #ifdef Q_OS_WIN
 	#include <QPinchGesture>
+	#include <Windows.h>
+	#include <WinUser.h>
 #endif
 #include <QOpenGLShader>
 #include <QOpenGLShaderProgram>
@@ -1475,10 +1477,31 @@ void StelMainView::initTitleI18n()
 void StelMainView::setFullScreen(bool b)
 {
 	if (b)
+	{
 		showFullScreen();
+#ifdef Q_OS_WIN
+		if (qApp->property("onetime_inhibit_screensaver").toBool())
+		{
+			qDebug() << "Disabling screensaver while in fullscreen";
+			SystemParametersInfo(SPI_SETSCREENSAVEACTIVE, FALSE , NULL, SPIF_SENDWININICHANGE);
+		}
+		else
+			qDebug() << "Not touching screensaver business";
+#endif
+	}
 	else
 	{
 		showNormal();
+#ifdef Q_OS_WIN
+		if (qApp->property("onetime_inhibit_screensaver").toBool())
+		{
+			qDebug() << "Re-enabling screensaver when leaving fullscreen";
+			SystemParametersInfo(SPI_SETSCREENSAVEACTIVE, TRUE , NULL, SPIF_SENDWININICHANGE);
+		}
+		else
+			qDebug() << "Not touching screensaver business";
+#endif
+
 		// Not enough. If we had started in fullscreen, the inner part of the window is at 0/0, with the frame extending to top/left off screen.
 		// Therefore moving is not possible. We must move to the stored position or at least defaults.
 		if ( (x()<0)  && (y()<0))

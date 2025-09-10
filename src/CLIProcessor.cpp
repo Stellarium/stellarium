@@ -118,6 +118,9 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "                          and want to send a bug report\n"
 			  << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
 			  << "                          the full screen setting in the config file\n"
+	     #ifdef Q_OS_WIN
+			  << "--no-screensaver (or -F): Inhibits screen saver when in fullscreen mode\n"
+	     #endif
 			  << "--screenshot-dir        : Specify directory to save screenshots\n"
 			  << "--startup-script        : Specify name of startup script\n"
 			  << "--home-planet           : Specify observer planet (English name)\n"
@@ -154,6 +157,10 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 	if (argsGetOption(argList, "", "--verbose"))
 		qApp->setProperty("verbose", true);
 
+#ifdef Q_OS_WIN
+	if (argsGetOption(argList, "-F", "--no-screensaver"))
+		qApp->setProperty("onetime_inhibit_screensaver", true);
+#endif
 	if (argsGetOption(argList, "-C", "--opengl-compat"))
 		qApp->setProperty("onetime_opengl_compat", true);
 
