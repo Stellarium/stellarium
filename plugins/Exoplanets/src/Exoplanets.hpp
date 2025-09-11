@@ -23,7 +23,6 @@
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "Exoplanet.hpp"
-#include <QFont>
 #include <QVariantMap>
 #include <QDateTime>
 #include <QList>
@@ -359,11 +358,11 @@ public slots:
 	void setCurrentTemperatureScaleKey(const QString &key);
 
 	//! Connect this to StelApp font size.
-	void setFontSize(int s){font.setPixelSize(s);}
+	void setFontSize(int s){fontSize = s;}
 
 private:
 	// Font used for displaying our text
-	QFont font;
+	int fontSize;
 
 	// if existing, delete Satellites section in main config.ini, then create with default values
 	void resetConfiguration(void);

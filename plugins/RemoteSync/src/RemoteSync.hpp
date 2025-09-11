@@ -24,7 +24,6 @@
 #include "SyncClient.hpp"
 #include "SyncServer.hpp"
 
-#include <QFont>
 #include <QKeyEvent>
 #include <QLoggingCategory>
 #include <QTimer>

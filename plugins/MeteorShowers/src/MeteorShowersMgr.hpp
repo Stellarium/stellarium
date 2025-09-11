@@ -103,9 +103,6 @@ public:
 	void setEnablePlugin(const bool& b);
 	bool getEnablePlugin() { return m_enablePlugin; }
 
-	//! Get the font.
-	QFont getFont() { return m_font; }
-
 	//! Set the URL for downloading the meteor showers catalog.
 	void setUrl(const QString& url);
 	QString getUrl() { return m_url; }
@@ -225,7 +222,7 @@ public slots:
 	//! // example of usage in scripts
 	//! var size = MeteorShowers.getFontSize();
 	//! @endcode
-	int getFontSize() { return m_font.pixelSize(); }
+	int getFontSize() { return m_fontSize; }
 
 	//! Set the update frequency in hours.
 	//! @param hours update frequency in hours
@@ -305,7 +302,7 @@ private:
 	MSConfigDialog* m_configDialog;
 	MSSearchDialog* m_searchDialog;
 
-	QFont m_font;
+	int m_fontSize;
 	QSettings* m_conf;
 	QString m_catalogPath;
 
