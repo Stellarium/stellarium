@@ -20,6 +20,7 @@
 #include <QDebug>
 #include <QStyleOptionGraphicsItem>
 #include <QPainter>
+#include <QFont>
 #include "StelGuiItems.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -142,13 +143,25 @@ Calendars::Calendars():
 	flagShowTibetan(false)
 {
 	setObjectName("Calendars");
-	font.setPixelSize(StelApp::getInstance().getScreenFontSize());
+	int fontSize = StelApp::getInstance().getScreenFontSize();
 
 	configDialog = new CalendarsDialog();
 	conf = StelApp::getInstance().getSettings();
 
 	infoPanel=new CalendarsInfoPanel(this, static_cast<StelGui*>(StelApp::getInstance().getGui())->getSkyGui());
-	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, [=](int size){font.setPixelSize(size); infoPanel->setFont(font); infoPanel->updatePosition(true);});
+	QFont pFont=QGuiApplication::font();
+	pFont.setPixelSize(fontSize);
+	infoPanel->setFont(pFont);
+	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, [=](const QFont &font){
+		QFont pFont=font;
+		pFont.setPixelSize(fontSize);
+		infoPanel->setFont(pFont);
+		infoPanel->updatePosition(true);});
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, [=](int size){
+		QFont f=infoPanel->font();
+		f.setPixelSize(size);
+		infoPanel->setFont(f);
+		infoPanel->updatePosition(true);});
 }
 
 /*************************************************************************
@@ -217,7 +230,6 @@ void Calendars::init()
 		qWarning() << "Unable to create toolbar button for Calendars plugin: " << e.what();
 	}
 
-	infoPanel->setFont(font);
 	infoPanel->setPos(600, 300);
 
 	const double jd=StelApp::getInstance().getCore()->getJD();
