@@ -21,7 +21,6 @@
 #define SATELLITE_HPP
 
 #include <QDateTime>
-#include <QFont>
 #include <QList>
 #include <QSharedPointer>
 #include <QString>

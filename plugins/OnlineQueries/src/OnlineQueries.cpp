@@ -33,7 +33,6 @@
 #include "OnlineQueries.hpp"
 #include "OnlineQueriesDialog.hpp"
 
-#include <QFontMetrics>
 #include <QSettings>
 #include <QMetaEnum>
 #include <QLoggingCategory>
