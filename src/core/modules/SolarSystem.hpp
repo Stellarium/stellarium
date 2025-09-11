@@ -30,8 +30,6 @@
 #include "Planet.hpp"
 #include "StelHips.hpp"
 
-#include <QFont>
-
 class Orbit;
 class StelSkyCulture;
 class StelTranslator;
@@ -1134,7 +1132,7 @@ private:
 	bool flagSunScale;
 	double sunScale;
 
-	QFont planetNameFont;
+	int fontSize;
 
 	//! The amount of planet labels (between 0 and 10).
 	double labelsAmount;

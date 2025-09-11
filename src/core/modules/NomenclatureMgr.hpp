@@ -25,7 +25,6 @@
 #include "StelTextureTypes.hpp"
 #include "NomenclatureItem.hpp"
 
-#include <QFont>
 #include <QMultiHash>
 
 class StelPainter;
@@ -155,7 +154,7 @@ signals:
 
 private slots:
 	//! Connect from StelApp to reflect font size change.
-	void setFontSize(int size){font.setPixelSize(size);}
+	void setFontSize(int size){fontSize = size;}
 
 private:
 	SolarSystem* ssystem;
@@ -167,7 +166,7 @@ private:
 	void loadSpecialNomenclature();
 
 	// Font used for displaying our text
-	QFont font;
+	int fontSize;
 	StelTextureSP texPointer;	
 	QMultiHash<PlanetP, NomenclatureItemP> nomenclatureItems;
 };
