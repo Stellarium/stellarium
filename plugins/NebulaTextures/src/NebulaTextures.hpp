@@ -22,7 +22,6 @@
 
 
 #include "StelModule.hpp"
-#include <QFont>
 
 class NebulaTexturesDialog;
 
@@ -56,9 +55,6 @@ signals:
 	void showChanged(bool b);
 
 private:
-	// Font used for displaying our text
-	QFont font;
-
 	NebulaTexturesDialog* configDialog;
 };
 
