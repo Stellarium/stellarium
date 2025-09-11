@@ -46,6 +46,7 @@
 #include <QString>
 #include <QStringList>
 #include <QDir>
+#include <QFont>
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
@@ -68,6 +69,7 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	  zodiacFadeDuration(1.),
 	  lunarSystemFadeDuration(1.),
 	  checkLoadingData(false),
+	  fontSize(15),
 	  constellationLineThickness(1),
 	  boundariesThickness(1),
 	  hullsThickness(1),
@@ -465,17 +467,14 @@ Vec3f ConstellationMgr::getLabelsColor() const
 
 void ConstellationMgr::setFontSize(const int newFontSize)
 {
-	if (asterFont.pixelSize() - newFontSize != 0)
-	{
-		asterFont.setPixelSize(newFontSize);
-		StelApp::immediateSave("viewing/constellation_font_size", newFontSize);
-		emit fontSizeChanged(newFontSize);
-	}
+	fontSize=newFontSize;
+	StelApp::immediateSave("viewing/constellation_font_size", newFontSize);
+	emit fontSizeChanged(newFontSize);
 }
 
 int ConstellationMgr::getFontSize() const
 {
-	return asterFont.pixelSize();
+	return fontSize;
 }
 
 void ConstellationMgr::setConstellationLineThickness(const int thickness)
@@ -692,7 +691,10 @@ void ConstellationMgr::draw(StelCore* core)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
-	sPainter.setFont(asterFont);
+	//sPainter.setFont(asterFont);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
+	sPainter.setFont(font);
 	drawLines(sPainter, core);
 	Vec3d vel(0.);
 	if (core->getUseAberration())
