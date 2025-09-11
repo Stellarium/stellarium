@@ -19,7 +19,6 @@
 #ifndef ARCHAEOLINES_HPP
 #define ARCHAEOLINES_HPP
 
-#include <QFont>
 #include <QColor>
 #include <QKeyEvent>
 #include "VecMath.hpp"
@@ -133,9 +132,9 @@ public slots:
 	void update(const double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
 	void setFadeDuration(const float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
-	void setFontSize(const int newSize){font.setPixelSize(newSize);}
+	void setFontSize(const int newSize){fontSize = newSize;}
 	//! To be connected to StelApp font size. newSize will be enlarged by 1.
-	void setFontSizeFromApp(const int newSize){font.setPixelSize(newSize+1);}
+	void setFontSizeFromApp(const int newSize){fontSize = newSize+1;}
 	//! reset declination/azimuth angle (degrees) of this arc. Any azimuth angles MUST be given counted from north.
 	void setDefiningAngle(const double angle);
 	double getDefiningAngle(void) const {return definingAngle;} // returns declination for most, or azimuth.
@@ -156,7 +155,7 @@ private:
 	bool flagLabel; //! show the label. (some should be permanently silent)
 	QString label;
 	LinearFader fader;
-	QFont font;
+	int fontSize;
 };
 
 //! Main class of the ArchaeoLines plug-in.
@@ -483,7 +482,6 @@ private slots:
 	void updateObserverLocation(const StelLocation &loc);
 
 private:
-	QFont font;
 	bool flagShowArchaeoLines;
 	LinearFader lineFader;
 	int lineWidth;

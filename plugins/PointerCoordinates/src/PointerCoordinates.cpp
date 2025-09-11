@@ -33,12 +33,12 @@
 #include "PointerCoordinatesWindow.hpp"
 #include "planetsephems/precession.h"
 
+#include <QFont>
 #include <QFontMetrics>
 #include <QSettings>
 #include <QPixmap>
 #include <QPair>
 #include <QMetaEnum>
-#include <cmath>
 
 StelModule* PointerCoordinatesStelPluginInterface::getStelModule() const
 {
@@ -118,6 +118,7 @@ void PointerCoordinates::draw(StelCore *core)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
 	StelPainter sPainter(prj);
 	sPainter.setColor(textColor, 1.f);
+	QFont font=QGuiApplication::font();
 	font.setPixelSize(getFontSize());
 	sPainter.setFont(font);
 
@@ -477,6 +478,8 @@ QPair<int, int> PointerCoordinates::getCoordinatesPlace(const QString &text, int
 {
 	int height, x = 0, y = 0, shift = 0;
 	static const float coeff = 1.5;
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	QFontMetrics fm(font);
 	const QSize fs = fm.size(Qt::TextSingleLine, text);
 	height = (line>1) ? static_cast<int>((line-1)*fs.height() + fs.height()*coeff) : static_cast<int>(fs.height()*coeff);

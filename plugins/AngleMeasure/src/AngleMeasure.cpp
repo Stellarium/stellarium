@@ -32,6 +32,7 @@
 
 #include <QApplication>
 #include <QDebug>
+#include <QFont>
 #include <QTimer>
 #include <QPixmap>
 #include <QSettings>
@@ -64,7 +65,8 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 }
 
 AngleMeasure::AngleMeasure()
-	: flagShowAngleMeasure(false)
+	: fontSize(16)
+	, flagShowAngleMeasure(false)
 	, withDecimalDegree(false)
 	, dragging(false)
 	, angleEquatorial(0.)
@@ -95,7 +97,6 @@ AngleMeasure::AngleMeasure()
 	perp2EndPointHor.set(0.,0.,0.);
 
 	setObjectName("AngleMeasure");
-	font.setPixelSize(16);
 
 	configDialog = new AngleMeasureDialog();
 	conf = StelApp::getInstance().getSettings();
@@ -195,6 +196,8 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 {
 	const StelProjectorP prj = core->getProjection(frameType, refractionMode);
 	StelPainter painter(prj);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	painter.setFont(font);
 	painter.setBlending(true);
 
