@@ -21,7 +21,6 @@
 #ifndef GRIDLINESMGR_HPP
 #define GRIDLINESMGR_HPP
 
-#include <QFont>
 #include "VecMath.hpp"
 #include "StelModule.hpp"
 #include "Planet.hpp"
@@ -106,7 +105,7 @@ private:
 	Vec3f color;
 	StelCore::FrameType frameType;
 	LinearFader fader;
-	QFont font;
+	int fontSize;
 	QString label;
 	float lineThickness;
 	float partThickness;

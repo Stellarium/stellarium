@@ -42,6 +42,7 @@
 #include <vector>
 #include <QDebug>
 #include <QFile>
+#include <QFont>
 #include <QSettings>
 #include <QString>
 #include <QStringList>
@@ -200,6 +201,7 @@ NebulaMgr::NebulaMgr(void) : StelObjectModule()
 	, labelsAmount(0)
 	, hintsBrightness(1.0)
 	, labelsBrightness(1.0)
+	, fontSize(12)
 	, flagConverter(false)
 	, flagDecimalCoordinates(true)
 {
@@ -229,9 +231,9 @@ void NebulaMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	nebulaFont.setPixelSize(StelApp::getInstance().getScreenFontSize());
-	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), SLOT(setFontSizeFromApp(int)));
-    auto& texMan = StelApp::getInstance().getTextureManager();
+	fontSize = StelApp::getInstance().getScreenFontSize();
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
+	auto& texMan = StelApp::getInstance().getTextureManager();
 	// Load dashed shape texture
 	Nebula::texRegion		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_reg.png");
 	// Load open cluster marker texture
@@ -845,7 +847,9 @@ void NebulaMgr::draw(StelCore* core)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
-	sPainter.setFont(nebulaFont);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
+	sPainter.setFont(font);
 
 	if(hintsFader.getInterstate()>0.f)
 	{

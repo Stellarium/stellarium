@@ -430,7 +430,7 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	const float ppx = static_cast<float>(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
 	painter->setProjector(prj);
-	QFont font;
+	QFont font=QGuiApplication::font();
 	font.setPixelSize(fontSize);
 	painter->setFont(font);
 	QFontMetrics fm(font);

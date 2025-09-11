@@ -670,6 +670,7 @@ void LandscapeMgr::draw(StelCore* core)
 		return;
 
 	StelSkyDrawer* drawer=core->getSkyDrawer();
+	QFont font=QGuiApplication::font();
 
 	// Draw the atmosphere
 	if (!getFlagAtmosphereNoScatter())
@@ -682,7 +683,6 @@ void LandscapeMgr::draw(StelCore* core)
 	{
 		static SolarSystem* ssys = GETSTELMODULE(SolarSystem);
 		PlanetP sun=ssys->getSun();
-		QFont font;
 		font.setPixelSize(StelApp::getInstance().getScreenFontSize());
 		sun->draw(core, 0, font, 1.0);
 	}
@@ -703,7 +703,6 @@ void LandscapeMgr::draw(StelCore* core)
 	{
 		const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 		StelPainter painter(prj);
-		QFont font;
 		font.setPixelSize(16);
 		painter.setFont(font);
 		painter.setColor(1, 0, 0, messageFader.getInterstate());

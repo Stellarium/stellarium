@@ -33,7 +33,6 @@
 #include <QMap>
 #include <QImage>
 #include <QList>
-#include <QFont>
 #include <QVariant>
 
 class LandscapeMgr;

@@ -20,6 +20,8 @@
 
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QFont>
+#include <QFontMetrics>
 
 #include "StarMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -169,7 +171,7 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 	}
 
 	// Font size is 14
-	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
+	fontSize = StelApp::getInstance().getScreenFontSize()+1;
 	updateLabels();
 
 	// Recapitulate what we have loaded:
@@ -191,10 +193,12 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 	eclObl = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
 	StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	sPainter.setProjector(prj);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	const bool lrFlipped=core->getFlipHorz();
 	const bool vertFlipped=core->getFlipVert();
 	const double txtOffset=lrFlipped ? 0.1 : -0.1; // coordinate offset for projecting text
-	const float yShift = vertFlipped ? -font.pixelSize() : 0.f;
+	const float yShift = vertFlipped ? -fontSize : 0.f;
 
 	// If defined, find the necessary shift from single linkStar and offset
 	if (linkStars.length()==1)
@@ -447,7 +451,7 @@ void StelSkyCultureSkyPartition::drawMansionCap(StelPainter &sPainter, const Sph
 
 void StelSkyCultureSkyPartition::setFontSize(int newFontSize)
 {
-	font.setPixelSize(newFontSize);
+	fontSize = newFontSize;
 }
 
 void StelSkyCultureSkyPartition::updateLabels()
