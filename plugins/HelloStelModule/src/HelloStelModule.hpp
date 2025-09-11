@@ -20,7 +20,6 @@
 #define HELLOSTELMODULE_HPP
 
 #include "StelModule.hpp"
-#include <QFont>
 
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
 class HelloStelModule : public StelModule
@@ -37,8 +36,8 @@ public:
 	void draw(StelCore* core) override;
 	double getCallOrder(StelModuleActionName actionName) const override;
 private:
-	// Font used for displaying our text
-	QFont font;
+	// Fontsize used for displaying our text
+	int fontSize;
 };
 
 
