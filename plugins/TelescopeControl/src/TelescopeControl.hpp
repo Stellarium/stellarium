@@ -36,7 +36,6 @@
 #include "VecMath.hpp"
 
 #include <QFile>
-#include <QFont>
 #include <QHash>
 #include <QMap>
 #include <QProcess>
@@ -427,8 +426,8 @@ private:
 	//! Colour currently used to draw field of view circles
 	Vec3f circleColor;
 
-	//! Font used to draw telescope text labels
-	QFont labelFont;
+	//! Fontsize used to draw telescope text labels
+	int labelFontSize;
 
 	// Toolbar button to toggle the Slew window
 	StelButton* toolbarButton;
