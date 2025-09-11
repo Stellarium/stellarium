@@ -938,7 +938,7 @@ StelObject::CulturalDisplayStyle StelSkyCultureMgr::getLunarSystemLabelStyle() c
 
 	static QSettings *conf=StelApp::getInstance().getSettings();
 	QVariant val= conf->value(QString("SCLunarSystemLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
-	qInfo() << "StelSkyCultureMgr::getLunarSystemLabelStyle(): found " << val << "(" << val.toString() << ")";
+	//qInfo() << "StelSkyCultureMgr::getLunarSystemLabelStyle(): found " << val << "(" << val.toString() << ")";
 	return convertCulturalDisplayStyleFromCSVstring(val.toString());
 }
 // Scripting version
@@ -957,7 +957,7 @@ void StelSkyCultureMgr::setLunarSystemLabelStyle(const StelObject::CulturalDispl
 
 	static QSettings *conf=StelApp::getInstance().getSettings();
 	conf->setValue(QString("SCLunarSystemLabelStyle/%1").arg(getCurrentSkyCultureID()), convertCulturalDisplayStyleToCSVstring(style));
-	qInfo() << QString("SCLunarSystemLabelStyle/%1=%2").arg(getCurrentSkyCultureID(), convertCulturalDisplayStyleToCSVstring(style));
+	//qInfo() << QString("SCLunarSystemLabelStyle/%1=%2").arg(getCurrentSkyCultureID(), convertCulturalDisplayStyleToCSVstring(style));
 	emit lunarSystemLabelStyleChanged(style);
 }
 
