@@ -32,6 +32,7 @@
 #include <QSettings>
 #include <QKeyEvent>
 #include <QFileInfo>
+#include <QFont>
 
 CustomObjectMgr::CustomObjectMgr()
 	: countMarkers(0)
@@ -328,6 +329,8 @@ void CustomObjectMgr::draw(StelCore* core)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	painter.setFont(font);
 
 	for (const auto& cObj : std::as_const(customObjects))

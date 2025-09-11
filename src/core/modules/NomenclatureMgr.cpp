@@ -32,6 +32,7 @@
 
 #include <QSettings>
 #include <QFile>
+#include <QFont>
 #include <QDir>
 #include <QBuffer>
 #include <QRegularExpression>
@@ -39,7 +40,7 @@
 NomenclatureMgr::NomenclatureMgr() : StelObjectModule()
 {
 	setObjectName("NomenclatureMgr");
-	font.setPixelSize(StelApp::getInstance().getScreenFontSize());
+	fontSize = StelApp::getInstance().getScreenFontSize();
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 	ssystem = GETSTELMODULE(SolarSystem);
 	setForceItems(true);
@@ -290,6 +291,8 @@ void NomenclatureMgr::draw(StelCore* core)
 	if (NomenclatureItem::labelsFader.getInterstate()<=0.f)
 	    return;
 
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	painter.setFont(font);
 	const SphericalCap& viewportRegion = painter.getProjector()->getBoundingCap();
 	const float fov=core->getProjection(StelCore::FrameJ2000)->getFov();

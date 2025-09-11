@@ -38,6 +38,7 @@
 #include <vector>
 #include <QSettings>
 #include <QDebug>
+#include <QFont>
 #include <QFontMetrics>
 
 //! @class SkyGrid
@@ -61,7 +62,7 @@ public:
 private:
 	Vec3f color;
 	StelCore::FrameType frameType;
-	QFont font;
+	int fontSize;
 	LinearFader fader;
 	float lineThickness;
 };
@@ -113,7 +114,7 @@ private:
 	Vec3f color;
 	StelCore::FrameType frameType;
 	LinearFader fader;
-	QFont font;
+	int fontSize;
 	QString northernLabel, southernLabel;
 	float pointSize;
 	StelTextureSP texPoint;
@@ -125,7 +126,7 @@ private:
 SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2f,0.2f,0.2f), frameType(frame), lineThickness(1)
 {
 	// Font size is 12
-	font.setPixelSize(StelApp::getInstance().getScreenFontSize()-1);
+	fontSize = StelApp::getInstance().getScreenFontSize()-1;
 }
 
 SkyGrid::~SkyGrid()
@@ -134,7 +135,7 @@ SkyGrid::~SkyGrid()
 
 void SkyGrid::setFontSize(int newFontSize)
 {
-	font.setPixelSize(newFontSize);
+	fontSize = newFontSize;
 }
 
 // Step sizes in arcsec
@@ -357,6 +358,8 @@ void SkyGrid::draw(const StelCore* core) const
 		sPainter.setLineWidth(lineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
 	sPainter.setColor(color, fader.getInterstate());
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	sPainter.setFont(font);
 
 	ViewportEdgeIntersectCallbackData userData(&sPainter);
@@ -560,7 +563,7 @@ void SkyGrid::draw(const StelCore* core) const
 SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0.f, 1.f), lineThickness(1), partThickness(1), showPartitions(true), showLabel(true), culturalOffset(0.0)
 {
 	// Font size is 14
-	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
+	fontSize = StelApp::getInstance().getScreenFontSize()+1;
 	updateLabel();
 }
 
@@ -659,7 +662,7 @@ SkyLine::~SkyLine()
 
 void SkyLine::setFontSize(int newFontSize)
 {
-	font.setPixelSize(newFontSize);
+	fontSize = newFontSize;
 }
 
 void SkyLine::updateLabel()
@@ -779,6 +782,8 @@ void SkyLine::draw(StelCore *core) const
 	const float oldLineWidth=sPainter.getLineWidth();
 	sPainter.setLineWidth(lineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	sPainter.setFont(font);
 
 	draw(sPainter, oldLineWidth);
@@ -1425,8 +1430,11 @@ QSharedPointer<Planet> SkyPoint::earth, SkyPoint::sun, SkyPoint::moon;
 SkyPoint::SkyPoint(SKY_POINT_TYPE _point_type) : point_type(_point_type), color(0.f, 0.f, 1.f)
 {
 	// Font size is 14
-	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
+	fontSize = StelApp::getInstance().getScreenFontSize()+1;
 	texPoint = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
+
+	earth = GETSTELMODULE(SolarSystem)->getEarth();
+	sun = GETSTELMODULE(SolarSystem)->getSun();
 
 	updateLabel();
 }
@@ -1457,7 +1465,7 @@ SkyPoint::~SkyPoint()
 
 void SkyPoint::setFontSize(int newFontSize)
 {
-	font.setPixelSize(newFontSize);
+	fontSize = newFontSize;
 }
 
 void SkyPoint::updateLabel()
@@ -1619,7 +1627,10 @@ void SkyPoint::draw(StelCore *core) const
 	sPainter.setColor(color, fader.getInterstate());
 	//Vec4f textColor(color, fader.getInterstate());
 
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	sPainter.setFont(font);
+
 	/////////////////////////////////////////////////
 	// Draw the point
 
