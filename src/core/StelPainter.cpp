@@ -653,7 +653,7 @@ struct StringTexture
 
 StringTexture* StelPainter::getTextTexture(const QString& str, int pixelSize) const
 {
-	QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
+	QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize) + currentFont.key().toUtf8();
 	StringTexture* cachedTex = texCache.object(hash);
 	if (cachedTex)
 		return cachedTex;
