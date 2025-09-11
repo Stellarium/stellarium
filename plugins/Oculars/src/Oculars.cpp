@@ -44,6 +44,7 @@
 #include <QAction>
 #include <QDebug>
 #include <QDir>
+#include <QFont>
 #include <QGraphicsWidget>
 #include <QKeyEvent>
 #include <QMenu>
@@ -336,7 +337,7 @@ void Oculars::deinit()
 
 void Oculars::setFontSize(const int fontSize, const int guiPanelFontSize)
 {
-	font.setPixelSize(fontSize);
+	this->fontSize = fontSize;
 
 	this->guiPanelFontSize = guiPanelFontSize;
 	if (guiPanel)
@@ -1000,6 +1001,8 @@ void Oculars::enableOcular(bool enableOcularMode)
 	{
 		if (usageMessageLabelID == -1)
 		{
+			QFont font=QGuiApplication::font();
+			font.setPixelSize(fontSize);
 			QFontMetrics metrics(font);
 			QString labelText = q_("Please select an object before switching to ocular view.");
 			StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
@@ -1898,6 +1901,8 @@ void Oculars::paintCCDBounds()
 	StelPainter painter(projector);
 	painter.setLineSmooth(true);
 	painter.setColor(lineColor);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	painter.setFont(font);
 
 	if(ccd->hasOAG())
@@ -2267,6 +2272,8 @@ void Oculars::paintText(const StelCore* core)
 	painter.setBlending(true);
 
 	// Get the X & Y positions, and the line height
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	painter.setFont(font);
 	QString widthString = "MMMMMMMMMMMMMMMMMMMMMM";
 	const double insetFromRHS = painter.getFontMetrics().boundingRect(widthString).width();
