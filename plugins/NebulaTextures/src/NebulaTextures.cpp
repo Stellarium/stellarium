@@ -58,7 +58,6 @@ StelPluginInfo NebulaTexturesStelPluginInterface::getPluginInfo() const
 NebulaTextures::NebulaTextures()
 {
 	setObjectName("NebulaTextures");
-	font.setPixelSize(25);
 	configDialog = new NebulaTexturesDialog();
 	connect(StelApp::getInstance().getModule("StelSkyLayerMgr"),
 			SIGNAL(collectionLoaded()),configDialog,SLOT(initializeRefreshIfNeeded()));
