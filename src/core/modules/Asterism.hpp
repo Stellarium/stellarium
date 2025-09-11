@@ -28,7 +28,6 @@
 
 #include <vector>
 #include <QString>
-#include <QFont>
 
 class StarMgr;
 class StelPainter;

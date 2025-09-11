@@ -33,7 +33,6 @@
 #include <vector>
 #include <QJsonObject>
 #include <QString>
-#include <QFont>
 
 class StarMgr;
 class StelPainter;

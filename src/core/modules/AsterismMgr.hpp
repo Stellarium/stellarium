@@ -26,7 +26,6 @@
 #include <vector>
 #include <QString>
 #include <QStringList>
-#include <QFont>
 
 class StelToneReproducer;
 class StarMgr;
@@ -265,7 +264,6 @@ private:
 
 	std::vector<Asterism*> asterisms;
 	std::vector<Asterism*> selected; // More than one can be selected at a time
-	QFont asterFont;
 	StarMgr* hipStarMgr;
 
 	QString currentSkyCultureID;
@@ -280,6 +278,7 @@ private:
 	float namesFadeDuration;
 	float rayHelpersFadeDuration;
 
+	int fontSize;
 	// Store the thickness of lines of the asterisms
 	int asterismLineThickness;
 	int rayHelperThickness;
