@@ -68,15 +68,7 @@ struct Description
 			   license != scm::LicenseType::NONE &&
 			   !cultureDescription.trimmed().isEmpty() &&
 			   !about.trimmed().isEmpty() &&
-			   !sky.trimmed().isEmpty() &&
-			   !moonAndSun.trimmed().isEmpty() &&
-			   !planets.trimmed().isEmpty() &&
-			   !zodiac.trimmed().isEmpty() &&
-			   !milkyWay.trimmed().isEmpty() &&
-			   !otherObjects.trimmed().isEmpty() &&
-			   !constellations.trimmed().isEmpty() &&
 			   !references.trimmed().isEmpty() &&
-			   !acknowledgements.trimmed().isEmpty() &&
 			   classification != scm::ClassificationType::NONE;
 	}
 };

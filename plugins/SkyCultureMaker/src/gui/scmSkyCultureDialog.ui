@@ -341,7 +341,7 @@
               <item>
                <widget class="QLabel" name="descriptionTabExplanationLbl">
                 <property name="text">
-                 <string>All fields are mandatory. If you have no information to provide, please write: N/A</string>
+                 <string>Mandatory fields are marked with an asterisk (*).</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -372,7 +372,7 @@
                  <item>
                   <widget class="QLabel" name="classificationLbl">
                    <property name="text">
-                    <string>Classification of the Sky Culture</string>
+                    <string>Classification of the Sky Culture*</string>
                    </property>
                   </widget>
                  </item>
@@ -382,7 +382,7 @@
                  <item>
                   <widget class="QLabel" name="authorsLbl">
                    <property name="text">
-                    <string>Authors:</string>
+                    <string>Authors:*</string>
                    </property>
                   </widget>
                  </item>
@@ -405,7 +405,7 @@
                  <item>
                   <widget class="QLabel" name="cultureDescriptionLbl">
                    <property name="text">
-                    <string>Culture Description:</string>
+                    <string>Culture Description:*</string>
                    </property>
                   </widget>
                  </item>
@@ -428,7 +428,7 @@
                  <item>
                   <widget class="QLabel" name="aboutLbl">
                    <property name="text">
-                    <string>About:</string>
+                    <string>About:*</string>
                    </property>
                   </widget>
                  </item>
@@ -664,7 +664,7 @@
                  <item>
                   <widget class="QLabel" name="referencesLbl">
                    <property name="text">
-                    <string>References:</string>
+                    <string>References:*</string>
                    </property>
                   </widget>
                  </item>
