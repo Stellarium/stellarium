@@ -29,7 +29,6 @@
 #include <vector>
 #include <QString>
 #include <QStringList>
-#include <QFont>
 
 class StelToneReproducer;
 class StarMgr;
@@ -523,7 +522,6 @@ public:
 private:
 	Constellation* findFromAbbreviation(const QString& abbreviation) const;
 	QList<Constellation*> constellations; //!< Constellations in the current SkyCulture
-	QFont asterFont;
 	StarMgr* hipStarMgr;
 
 	bool isolateSelected; //!< true to pick individual constellations.
@@ -549,6 +547,7 @@ private:
 
 	bool checkLoadingData;
 
+	int fontSize;
 	int constellationLineThickness;   //!< line width of the constellation lines
 	int boundariesThickness;          //!< line width of the constellation boundaries
 	int hullsThickness;               //!< line width of the constellation boundaries

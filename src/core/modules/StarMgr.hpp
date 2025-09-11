@@ -20,7 +20,6 @@
 #ifndef STARMGR_HPP
 #define STARMGR_HPP
 
-#include <QFont>
 #include <QVariantMap>
 #include <QVector>
 #include "StelFader.hpp"
@@ -638,7 +637,7 @@ private:
 
 	static QHash<StarId, binaryorbitstar> binaryOrbitStarMap;
 
-	QFont starFont;
+	int fontSize;
 	static bool flagSciNames;
 	static bool flagAdditionalStarNames;
 	static bool flagDesignations;
