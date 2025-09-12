@@ -40,21 +40,27 @@ There are more specialized programs for these topics, please use them.
 Therefore, when using Stellarium for scientific work like eclipse
 simulation to illustrate records found in Cuneiform tablets, always
 also use some other reference to compare, and of course specify the
-program version you used for your work. (Use at least version 0.21.2
-of Stellarium!)  You can of course contact us if you bring a solid background
+program version you used for your work. (Use at least version 25.1
+of Stellarium, which introduced the much improved star catalog!)  
+You can of course contact us if you bring a solid background
 in fundamental astronomy and are willing and able to help improving
 Stellarium's accuracy even further!
 
 \section{Date Range}
 \label{sec:Accuracy:DateRange}
 
-The calendar dates are limited to a very wide interval of years, $-100,000\ldots100,000$. 
-This is mostly useful to visualize the effect of stellar proper motions or the wobbling 
-motion of Earth's axis known as precession. 
-If you observe the other planets, this is way beyond what current models are able to show! 
+The calendar dates are limited to a very wide interval of years, 
+\newFeature{25.3}$-200,000\ldots+200,000$\footnote{Before version 25.3, the date range was $-100,000\ldots+100,000$.}. 
+If you want to observe the other planets, this is way beyond what current ephemeris models are able to show, 
+as explained in section~\ref{sec:Accuracy:Planets}! 
 Observe for example the Moon: you will find that it seems to run 
 on a polar orbit around +78.000 and even retrograde on a highly elongated orbit a few millennia after that. 
-This is obvious nonsense, caused by extrapolating mathematical models in inappropriate ways. 
+A quick check in -180.000 places it in a highly elongated orbit beyond Jupiter 
+that takes it through the solar system at up to more than 10\% the speed of light.
+This is obvious nonsense, caused by excessively extrapolating mathematical models in inappropriate ways. 
+
+The extended date range is only useful to visualize the effect of stellar proper motions and the wobbling 
+motion of Earth's axis known as precession. All other components of Stellarium have not made for this extended date range.
 
 \section{Stellar Astrometry}
 \label{sec:Accuracy:Astrometry}
@@ -72,7 +78,12 @@ constant proper motion. For stars fainter than magnitude 16.75, no astrometry pr
 The study of \citet{deLorenzis:2018} emphasized sky position errors with bright high proper motion stars like Arcturus, 
 Dubhe, Sirius, Toliman and Vega which deviate noticeably from their correct locations even at around 2500BC with Stellarium 
 0.17.0 released on 21 Dec 2017. The star catalogs and astrometry propagation algorithms have been significantly improved since Stellarium 25.1, which has 
-solved the problem outlined in the study.
+solved the problem outlined in the study. 
+
+% From Github PR#4500:
+A quick estimate: For Barnard's Star which is nearby and moving fast, the sky position uncertainty on the sky 
+would be $\approx0.05^\circ$ (200000~mas) at year 200,000 using Gaia DR3 astrometries and associated uncertainies. 
+The 2015 DR3 sky position uncertainty is $\approx 0.04$~mas.
 
 \section{Planetary Positions}
 \label{sec:Accuracy:Planets}

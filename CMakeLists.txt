@@ -648,7 +648,7 @@ IF(APPLE)
 	       # Qt6: by default - universal binary + minimal operating system is macOS Big Sur
 	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum macOS deployment version" FORCE)
 	  ELSE()
-               SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.13" CACHE STRING "Minimum macOS deployment version" FORCE)
+               SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum macOS deployment version" FORCE)
 	  ENDIF()
      ENDIF()
 ENDIF()

@@ -678,24 +678,27 @@ void AstroCalcChart::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	// N.B. pos() and scenePos() give the same coords. Y counting top-down, X left-right, pixel positions.
 	//qDebug() << "mousePressEvent by" << event->buttons() << "at Pos" << event->pos() << "scenePos" << event->scenePos() << "screenPos" << event->screenPos();
 
-	const QPointF pt=mapToValue(event->pos());
-	const QDateTime dt=QDateTime::fromMSecsSinceEpoch(qint64(pt.x()), Qt::UTC);
+	if (event)
+	{
+		const QPointF pt=mapToValue(event->pos());
+		const QDateTime dt=QDateTime::fromMSecsSinceEpoch(qint64(pt.x()), Qt::UTC);
 
-	//qDebug() << "This represents " << dt << "/" << pt.y() << "or" << mapToValue(event->scenePos());
+		//qDebug() << "This represents " << dt << "/" << pt.y() << "or" << mapToValue(event->scenePos());
 
-	static StelCore *core=StelApp::getInstance().getCore();
-	double jd=StelUtils::qDateTimeToJd(dt);
-	const double offset=core->getUTCOffset(jd)/24.;
+		static StelCore *core=StelApp::getInstance().getCore();
+		double jd=StelUtils::qDateTimeToJd(dt);
+		const double offset=core->getUTCOffset(jd)/24.;
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-	QSet<Series> currentSeries(map.keyBegin(), map.keyEnd());
-#else
-	QSet<Series> currentSeries=map.keys().toSet();
-#endif
-	if (QSet({AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
-		  AngularSize2, Declination2, Distance2, Elongation2, HeliocentricDistance2, Magnitude2, PhaseAngle2, Phase2, RightAscension2, TransitAltitude2,
-		  LunarElongation, pcDistanceAU, pcDistanceDeg}).intersects(currentSeries))
-		core->setJD(jd-offset);
-	else
-		core->setJD(jd);
+        #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+		QSet<Series> currentSeries(map.keyBegin(), map.keyEnd());
+        #else
+		QSet<Series> currentSeries=map.keys().toSet();
+        #endif
+		if (QSet({AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
+		          AngularSize2, Declination2, Distance2, Elongation2, HeliocentricDistance2, Magnitude2, PhaseAngle2, Phase2, RightAscension2, TransitAltitude2,
+		          LunarElongation, pcDistanceAU, pcDistanceDeg}).intersects(currentSeries))
+			core->setJD(jd-offset);
+		else
+			core->setJD(jd);
+	}
 }

@@ -2,7 +2,6 @@ ADD_SUBDIRECTORY( anutan )
 ADD_SUBDIRECTORY( arabic_al-sufi )
 ADD_SUBDIRECTORY( arabic_arabian_peninsula )
 ADD_SUBDIRECTORY( arabic_indigenous )
-ADD_SUBDIRECTORY( arabic_lunar_mansions )
 # Exclude from standard package
 # ADD_SUBDIRECTORY( armintxe )
 ADD_SUBDIRECTORY( aztec )
