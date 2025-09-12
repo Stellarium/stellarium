@@ -32,7 +32,7 @@
 StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 	frameType(StelCore::FrameObservercentricEclipticOfDate),
 	partitions(),
-	extent(90.),
+	extent(QList<double>{90.}),
 	centerLine(nullptr),
 	linkStars(),
 	offset(0.0),
@@ -60,10 +60,18 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 	if (json.contains("context"))
 		context = json["context"].toString();
 
-	// Parse extent, create polar caps where needed.
+	// Parse extent: either one value defining north/south caps, or per-station limits.
 	if (json.contains("extent") && json["extent"].isDouble())
 	{
-		extent=json["extent"].toDouble();
+		extent.clear();
+		extent.append(json["extent"].toDouble());
+	}
+	else if (json.contains("extent") && json["extent"].isArray())
+	{
+		extent.clear();
+		QJsonArray ext=json["extent"].toArray();
+		for (unsigned int i=0; i<ext.size(); ++i)
+			extent.append(ext.at(i).toDouble());
 	}
 	else
 		qWarning() << "Bad \"extent\" given in JSON file.";
@@ -209,7 +217,7 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 
 	if (linkStars.length()>1)
 	{
-		// Chinese systems: Unequal partitions defined by stars.
+		// Chinese systems: Unequal partitions defined by stars. We can also safely assume extent has only one value.
 		foreach(const int starId, linkStars)
 		{
 			//qDebug() << "drawing line for HIP"  << starId;
@@ -220,8 +228,8 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 			StelUtils::rectToSphe(&ra, &dec, posDate);
 			Vec3d eqPt, nPt, sPt;
 			StelUtils::spheToRect(ra, 0., eqPt);
-			StelUtils::spheToRect(ra, extent*M_PI_180, nPt);
-			StelUtils::spheToRect(ra, -extent*M_PI_180, sPt);
+			StelUtils::spheToRect(ra, extent.at(0)*M_PI_180, nPt);
+			StelUtils::spheToRect(ra, -extent.at(0)*M_PI_180, sPt);
 			sPainter.drawGreatCircleArc(eqPt, nPt);
 			sPainter.drawGreatCircleArc(eqPt, sPt);
 			//qDebug() << "done line for HIP"  << starId;
@@ -239,20 +247,44 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 			const double lng=(360./partitions[0]*p +offsetFromAries)*M_PI_180;
 			Vec3d eqPt, nPt, sPt;
 			StelUtils::spheToRect(lng, 0., eqPt);
-			StelUtils::spheToRect(lng, extent*M_PI_180, nPt);
-			StelUtils::spheToRect(lng, -extent*M_PI_180, sPt);
+			double nExt, sExt;
+			if (extent.length()==1)
+			{
+				nExt=extent.at(0);
+				sExt=-extent.at(0);
+			}
+			else
+			{
+				Q_ASSERT(extent.length() == 2*partitions.length());
+				nExt=qMax(extent.at(2*p),   extent.at(2*((p-1+partitions[0]) % partitions[0])));
+				sExt=qMin(extent.at(2*p+1), extent.at(2*((p-1+partitions[0]) % partitions[0])+1));
+			}
+			StelUtils::spheToRect(lng, nExt*M_PI_180, nPt);
+			StelUtils::spheToRect(lng, sExt*M_PI_180, sPt);
 			sPainter.drawGreatCircleArc(eqPt, nPt);
 			sPainter.drawGreatCircleArc(eqPt, sPt);
 		}
 	}
 
 	// Draw top/bottom lines where applicable
-	if (extent<90.)
+	if ((extent.length()==1) && (extent.at(0)<90.))
 	{
 		// Get the bounding halfspace
 		const SphericalCap& viewPortSphericalCap = sPainter.getProjector()->getBoundingCap();
-		drawCap(sPainter, viewPortSphericalCap, extent);
-		drawCap(sPainter, viewPortSphericalCap, -extent);
+		drawCap(sPainter, viewPortSphericalCap, extent.at(0));
+		drawCap(sPainter, viewPortSphericalCap, -extent.at(0));
+	}
+	else if (extent.length()>1)
+	{
+		// TODO: Arab LM may show sectioned boxes.
+		for (int p=0; p<partitions[0]; ++p)
+		{
+			// Get the bounding halfspace
+			const SphericalCap& viewPortSphericalCap = sPainter.getProjector()->getBoundingCap();
+			// TODO: draw 2 small arcs per LM in the given extent latitudes
+			drawMansionCap(sPainter, viewPortSphericalCap, extent.at(2*p), p*360.0/partitions[0]+offsetFromAries, (p+1)*360.0/partitions[0]+offsetFromAries);
+			drawMansionCap(sPainter, viewPortSphericalCap, extent.at(2*p+1), p*360.0/partitions[0]+offsetFromAries, (p+1)*360.0/partitions[0]+offsetFromAries);
+		}
 	}
 
 	centerLine->setCulturalOffset(offsetFromAries);
@@ -266,7 +298,8 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 			// To have tilted labels, we project a point 0.1deg from the actual label point and derive screen-based angle.
 			double lng  = (360./partitions[0]*i + 2.+offsetFromAries)*M_PI_180;
 			double lng1 = (360./partitions[0]*i + 2.+offsetFromAries + txtOffset)*M_PI_180;
-			double lat  = (extent<50. ? -extent+0.2 : -10.) *M_PI_180;
+			// the displayed latitude is defined in the first LM.
+			double lat = (extent.at(0)<50. ? -extent.at(0)+0.2 : -10.) *M_PI_180;
 			Vec3d pos, pos1, scr, scr1;
 			StelUtils::spheToRect(lng, lat, pos);
 			StelUtils::spheToRect(lng1, lat, pos1);
@@ -290,7 +323,7 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 
 			ra += 2.*M_PI_180; // push a bit into the mansion area. Problem: the narrow mansions...
 			double ra1 = ra+txtOffset*M_PI_180;
-			double dec1  = (extent<50. ? -extent+0.2 : -10.) *M_PI_180;
+			double dec1  = (extent.at(0)<50. ? -extent.at(0)+0.2 : -10.) *M_PI_180;
 			Vec3d pos, pos1, scr, scr1;
 			StelUtils::spheToRect(ra, dec1, pos);
 			StelUtils::spheToRect(ra1, dec1, pos1);
@@ -309,11 +342,11 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 	{
 		for (int i=0; i<partitions[0]; ++i)
 		{
-			QString label=scMgr->createCulturalLabel(names.at(i), scMgr->getScreenLabelStyle(), QString());
+			QString label=scMgr->createCulturalLabel(names.at(i), partitions[0]==12 ? scMgr->getZodiacLabelStyle() : scMgr->getLunarSystemLabelStyle(), QString());
 			// To have tilted labels, we project a point 0.1deg from the actual label point and derive screen-based angle.
 			double lng  = (360./partitions[0]*(double(i)+0.5) + 2.+offsetFromAries)*M_PI_180;
 			double lng1 = (360./partitions[0]*(double(i)+0.5) + 2.+offsetFromAries+txtOffset)*M_PI_180;
-			double lat  = (extent<50. ? -extent+0.2 : -10.) *M_PI_180;
+			double lat  = (extent.at(0)<50. ? -extent.at(0)+0.2 : -10.) *M_PI_180;
 			Vec3d pos, pos1, scr, scr1;
 			StelUtils::spheToRect(lng, lat, pos);
 			StelUtils::spheToRect(lng1, lat, pos1);
@@ -330,7 +363,7 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 	{
 		for (int i=0; i<linkStars.length(); ++i)
 		{
-			QString label=scMgr->createCulturalLabel(names.at(i), scMgr->getScreenLabelStyle(),names.at(i).pronounceI18n);
+			QString label=scMgr->createCulturalLabel(names.at(i), partitions[0]==12 ? scMgr->getZodiacLabelStyle() : scMgr->getLunarSystemLabelStyle(),names.at(i).pronounceI18n);
 			StelObjectP starBegin = starMgr->searchHP(linkStars.at(i));
 			StelObjectP starEnd   = starMgr->searchHP(linkStars.at((i==linkStars.length()-1? 0 : i+1)));
 
@@ -339,7 +372,7 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 			StelUtils::rectToSphe(&ra, &dec, mid);
 
 			double ra1 = ra+txtOffset*M_PI_180;
-			double dec1  = (extent<50. ? -extent+0.2 : -10.) *M_PI_180;
+			double dec1  = (extent.at(0)<50. ? -extent.at(0)+0.2 : -10.) *M_PI_180;
 			Vec3d pos, pos1, scr, scr1;
 			StelUtils::spheToRect(ra, dec1, pos);
 			StelUtils::spheToRect(ra1, dec1, pos1);
@@ -357,7 +390,7 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 // shamelessly copied from SkyLine::draw (small circles part)
 void StelSkyCultureSkyPartition::drawCap(StelPainter &sPainter, const SphericalCap& viewPortSphericalCap, double latDeg) const
 {
-	double lat=latDeg*M_PI_180;
+	const double lat=latDeg*M_PI_180;
 	SphericalCap declinationCap(Vec3d(0.,0.,1.), std::sin(lat));
 	const Vec3d rotCenter(0,0,declinationCap.d);
 
@@ -399,6 +432,18 @@ void StelSkyCultureSkyPartition::drawCap(StelPainter &sPainter, const SphericalC
 		sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, nullptr, nullptr);
 	}
 }
+
+void StelSkyCultureSkyPartition::drawMansionCap(StelPainter &sPainter, const SphericalCap& viewPortSphericalCap, double latDeg, double lon1, double lon2) const
+{
+	const double lat=latDeg*M_PI_180;
+	SphericalCap declinationCap(Vec3d(0.,0.,1.), std::sin(lat));
+	const Vec3d rotCenter(0,0,declinationCap.d);
+	Vec3d pt1, pt2;
+	StelUtils::spheToRect(lon1*M_PI_180, lat, pt1); //pt1.normalize();
+	StelUtils::spheToRect(lon2*M_PI_180, lat, pt2); //pt2.normalize();
+	sPainter.drawSmallCircleArc(pt1, pt2, rotCenter, nullptr, nullptr);
+}
+
 
 void StelSkyCultureSkyPartition::setFontSize(int newFontSize)
 {

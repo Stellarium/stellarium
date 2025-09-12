@@ -367,10 +367,11 @@ The tag ``classification'' allows describing the origin and intended use of this
 In the late 18th century, when variable stars started to be catalogued by a code that included the star's constellation, 
 a necessity arose to define which sky region belonged to which constellation. 
 Atlases of this period showed curved boundaries between the constellations. 
-Such boundaries are hard to describe by coordinates, though. The Uranographia Argentina proposed a different approach.
-The boundaries were described by straight segments along great circles of equal right ascension and small circles of equal declination. 
+Such boundaries are hard to describe by coordinates, though. The Uranographia Argentina \citep{1879RNAO....1....1G} proposed a different approach.
+The boundaries were described by mostly straight segments along great circles of equal right ascension and small circles of equal declination. 
 The atlas used coordinates for epoch B1875.0. 
-In 1930 the International Astronomical Union (IAU) ratified  this partition of the sky into the 88 constellations used by scientists and amateurs ever since.
+Based on this work, in 1930 the International Astronomical Union (IAU) ratified a partition of the sky into the 88 constellations 
+(now only using lines along constant right ascension/declination of B1875.0) used by scientists and amateurs ever since.
 When looking at these boundaries in J2000.0 coordinates, we can see they are no longer parallel to the J2000.0 coordinate grid, the deviation caused by precession. 
 
 Partitions of the full sky into contiguous regions defined by edges between coordinate vertices defined in  
@@ -468,7 +469,7 @@ where
                     each pair being right ascension $\alpha$ (decimal hours) and declination $\delta$ (decimal degrees) in equinox J2000.0. 
                     See below how Stellarium can help you write these arrays.
 
-                    \indexterm[constellations!single-star]{Single-star constellations}\newFeature{25.1}  or particular highlights can be described with just one star repeated in a two-element segment.
+                    \indexterm[constellation!single-star]{Single-star constellations}\newFeature{25.1}  or particular highlights can be described with just one star repeated in a two-element segment.
                     The respective star will be encircled with a radius of 
 \item[\jtag{single\_star\_radius}] (float, default 0.5)\newFeature{25.1}.
 \item[\jtag{hull\_extension}] (optional)\newFeature{25.2} A vector of star IDs (HIP number as integer, Gaia DR3 long integer number as string, 
@@ -525,7 +526,7 @@ that would be visible from April to May, would be specified as:
 \end{description}
 
 
-\paragraph{Drawing dark constellations}\index{constellations!dark}\label{SC:constellations:dark:markers}
+\paragraph{Drawing dark constellations}\index{constellation!dark}\label{SC:constellations:dark:markers}
 The outlines \newFeature{25.2}of figures like the ``Emu in the Sky'' cannot be described with connect-the-dot star patterns, 
 as they are formed from the absence of luminous patterns. We need to describe them using coordinate lists. 
 To make the process less tedious, we can extend setting Markers (see \ref{sec:tour:markers}). 
@@ -762,6 +763,29 @@ If missing, the count starts from \Aries.
 \item[\jtag{names}] Sequence of names. In addition to the elements listed in \ref{SC:common_names}, \jtag{symbol} provides a Unicode symbol 
 or 1-2 letter string (for practical reasons, a sequential number seems generally useful). 
 The number of entries must be equal to (or larger than) the first element of \jtag{partitions}. Excessive entries are ignored. 
+\end{description}
+
+\noindent In the Arabian peninsula, a similar system of 28 \indexterm{lunar stations} is in use until today, 
+but the actual asterism appears to be more important than the regularity of the ecliptic partition. 
+The first station is centered around \emph{al-Thurayya} (the Pleiades star cluster). In some skycultures the ``band'' of 
+stations around the ecliptic is shown irregular, with boxes trying to frame the associated asterisms:
+
+\begin{jsonfile}[\scriptsize]
+"lunar_system":  { 
+  "name": {"english": "Lunar Stations", "native": "...", "pronounce": "Manazil alQamar", "IPA": "manazilulqamar"},
+  "partitions": [ 28, 3, 2],
+  "extent": [10.0, -10.0, 10.0, -10.0, 10.0, -15.0, 10.0, -15.0, 15.0, ... ],
+    "context": "arabian lunar stations",
+    "link": { "star": 17702, "offset": 6.428571428571429, "comment": "center of first station is Lucida Pleiadum"},
+    "names": [{ "symbol":  "1", "english": "Al-Thurayya", "native": "...", ... },
+              { "symbol":  "2", "english": "Al-Dabaran",  "native": "...", ... },
+                ...
+\end{jsonfile}  
+where
+\begin{description}
+\item[\jtag{partitions}] regular division of the centerline. 28 stations which are further divided into 3 equal parts that are further halved.
+\item[\jtag{extent}] As array of latitude coordinates\newFeature{25.3}, they provide alternating north and south latitudes for all stations. 
+                     The number of entries must be twice the number of partitions.
 \end{description}
 
 \noindent In China, the 28 \indexterm{lunar mansions} are defined in a different way. 28 \indexterm{defining stars} mark the begin (western edge) of each mansion,
