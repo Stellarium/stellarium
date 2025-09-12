@@ -36,10 +36,11 @@ IF(SCM_SHOULD_ENABLE_CONVERTER AND NOT IS_QT_5 AND NOT IS_WIN_ARM64)
   )
 
   # download https://github.com/selmf/unarr for archives
+  # Using commit 1df8ab3 to allow CMake support up to 4.0
   CPMFindPackage(
     NAME unarr
-    URL https://github.com/selmf/unarr/releases/download/v1.1.1/unarr-1.1.1.tar.xz
-    URL_HASH SHA256=328efa04ea996dd38916b1247a8cf176ac29b85caf92174e34d31998de4174d2
+    URL https://github.com/selmf/unarr/archive/1df8ab3d281409e9fe6bed8bf485976bb47f5bef.zip
+    URL_HASH SHA256=f89f602184c90b01b47eb76f1f6334801c3d22eb6f5deddcff92c9ea79992903
     EXCLUDE_FROM_ALL yes
     OPTIONS
       "USE_SYSTEM_BZ2 OFF"
