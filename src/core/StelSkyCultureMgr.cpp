@@ -1048,6 +1048,30 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	braced.removeOne(QString(""));
 	braced.removeOne(QString());
 	braced.removeOne(label); // avoid repeating the main thing if it was used as fallback!
+
+	// label may be LTR (e.g. Arab) - append a switchover in this case.
+	static const QString lrm{"\u200e"};
+	static const QString rlm{"\u200f"};
+	static const QString alm{"\u061c"};
+	static const QString lri{"\u2066"}; // left-to-right isolate
+	static const QString rli{"\u2067"}; // right-to-left isolate
+	static const QString pdf{"\u202c"}; // pop directional formatting (terminate)
+	if (label.back().direction() == QChar::DirAL)
+	{
+		//qDebug() << "Found Arab label...";
+		label.prepend(rli);
+		label.append(pdf);
+		label.append("ABCDabcd");
+//		if (!braced.isEmpty()) label.prepend(QString(" %1%3%2").arg(QChar(0x2997), QChar(0x2998), braced.join(", ")));
+	}
+	else if (label.back().direction() == QChar::DirR)
+	{
+		//qDebug() << "Found other RTL label...";
+		label.prepend(rli);
+		label.append(pdf);
+		label.append("XYZxyz");
+//		if (!braced.isEmpty()) label.prepend(QString(" %1%3%2").arg(QChar(0x2997), QChar(0x2998), braced.join(", ")));
+	}
 	if (!braced.isEmpty()) label.append(QString(" %1%3%2").arg(QChar(0x2997), QChar(0x2998), braced.join(", ")));
 
 	// Add IPA (where possible)
