@@ -89,6 +89,10 @@ void AstroCalcAlmanacWidget::setup()
 	connect(ui->buttonJuneSolsticeCurrent, &QPushButton::clicked, this, [=](){setTodayTimes();});
 	connect(ui->buttonDecemberSolsticeCurrent, &QPushButton::clicked, this, [=](){setTodayTimes();});
 
+	// handling yesterday/tomorrow
+	connect(ui->buttonYesterday, &QPushButton::clicked, this, [=](){core->addSolarDays(-1.0);});
+	connect(ui->buttonTomorrow, &QPushButton::clicked, this, [=](){core->addSolarDays(1.0);});
+
 	// handling special times
 	connect(ui->buttonSunrise, &QPushButton::clicked, this, [=](){core->setJD(sunriseJD);});
 	connect(ui->buttonSunset, &QPushButton::clicked, this, [=](){core->setJD(sunsetJD);});
@@ -124,6 +128,8 @@ void AstroCalcAlmanacWidget::setup()
 	ui->buttonSunset->setFixedSize(button);
 	ui->buttonMoonrise->setFixedSize(button);
 	ui->buttonMoonset->setFixedSize(button);
+	ui->buttonYesterday->setFixedSize(button);
+	ui->buttonTomorrow->setFixedSize(button);
 }
 
 void AstroCalcAlmanacWidget::retranslate()
