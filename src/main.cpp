@@ -435,6 +435,13 @@ int main(int argc, char **argv)
 	tmpFont.setPixelSize(confSettings->value("gui/gui_font_size", DEFAULT_FONT_SIZE).toInt());
 	QGuiApplication::setFont(tmpFont);
 
+	if (qApp->property("onetime_fontinfo").toBool())
+	{
+		qInfo() << "=======================================================================";
+		StelApp::getInstance().dumpFontInfo();
+		qInfo() << "=======================================================================";
+	}
+
 	// Initialize translator feature
 	StelTranslator::init(StelFileMgr::getInstallationDir() + "/data/languages.tab");
 	
@@ -484,6 +491,7 @@ int main(int argc, char **argv)
 	qDebug() << "Max thread count (Global Pool): " << QThreadPool::globalInstance()->maxThreadCount();
 	// Share available cores with the TextureLoader and other jobs
 	//QThreadPool::globalInstance()->setMaxThreadCount(qMax(1,QThread::idealThreadCount()/2-1));
+	app.dumpObjectInfo();
 	app.exec();
 	mainWin.deinit();
 
