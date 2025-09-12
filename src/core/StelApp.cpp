@@ -100,6 +100,7 @@
 #include <QDateTime>
 #include <QRegularExpression>
 #include <QRandomGenerator>
+#include <QFontDatabase>
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QImageReader>
 #endif
@@ -1537,4 +1538,18 @@ void StelApp::enableBottomStelBarUpdates(bool enable)
 {
 	StelGui *gui=dynamic_cast<StelGui*>(getGui());
 	gui->getButtonBar()->enableTopoCentricUpdate(enable);
+}
+
+void StelApp::dumpFontInfo() const
+{
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	qInfo() << "StelApp::dumpFontInfo() not available for Qt5 builds.";
+#else
+	const QList<QFontDatabase::WritingSystem> writingSystems=QFontDatabase::writingSystems();
+	qInfo() << "WritingSystems and Font Families:";
+	for (const auto &ws: writingSystems)
+	{
+		qInfo() << ws << ":" << QFontDatabase::families(ws);
+	}
+#endif
 }
