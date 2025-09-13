@@ -45,7 +45,7 @@ endif()
 if(DEFINED EXTRACTED_CPM_VERSION)
   set(CURRENT_CPM_VERSION "${EXTRACTED_CPM_VERSION}${CPM_DEVELOPMENT}")
 else()
-  set(CURRENT_CPM_VERSION 0.40.8)
+  set(CURRENT_CPM_VERSION 0.42.0)
 endif()
 
 get_filename_component(CPM_CURRENT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}" REALPATH)
@@ -200,6 +200,60 @@ function(cpm_package_name_from_git_uri URI RESULT)
   else()
     unset(${RESULT} PARENT_SCOPE)
   endif()
+endfunction()
+
+# Find the shortest hash that can be used eg, if origin_hash is
+# cccb77ae9609d2768ed80dd42cec54f77b1f1455 the following files will be checked, until one is found
+# that is either empty (allowing us to assign origin_hash), or whose contents matches ${origin_hash}
+#
+# * .../cccb.hash
+# * .../cccb77ae.hash
+# * .../cccb77ae9609.hash
+# * .../cccb77ae9609d276.hash
+# * etc
+#
+# We will be able to use a shorter path with very high probability, but in the (rare) event that the
+# first couple characters collide, we will check longer and longer substrings.
+function(cpm_get_shortest_hash source_cache_dir origin_hash short_hash_output_var)
+  # for compatibility with caches populated by a previous version of CPM, check if a directory using
+  # the full hash already exists
+  if(EXISTS "${source_cache_dir}/${origin_hash}")
+    set(${short_hash_output_var}
+        "${origin_hash}"
+        PARENT_SCOPE
+    )
+    return()
+  endif()
+
+  foreach(len RANGE 4 40 4)
+    string(SUBSTRING "${origin_hash}" 0 ${len} short_hash)
+    set(hash_lock ${source_cache_dir}/${short_hash}.lock)
+    set(hash_fp ${source_cache_dir}/${short_hash}.hash)
+    # Take a lock, so we don't have a race condition with another instance of cmake. We will release
+    # this lock when we can, however, if there is an error, we want to ensure it gets released on
+    # it's own on exit from the function.
+    file(LOCK ${hash_lock} GUARD FUNCTION)
+
+    # Load the contents of .../${short_hash}.hash
+    file(TOUCH ${hash_fp})
+    file(READ ${hash_fp} hash_fp_contents)
+
+    if(hash_fp_contents STREQUAL "")
+      # Write the origin hash
+      file(WRITE ${hash_fp} ${origin_hash})
+      file(LOCK ${hash_lock} RELEASE)
+      break()
+    elseif(hash_fp_contents STREQUAL origin_hash)
+      file(LOCK ${hash_lock} RELEASE)
+      break()
+    else()
+      file(LOCK ${hash_lock} RELEASE)
+    endif()
+  endforeach()
+  set(${short_hash_output_var}
+      "${short_hash}"
+      PARENT_SCOPE
+  )
 endfunction()
 
 # Try to infer package name and version from a url
@@ -594,14 +648,6 @@ endfunction()
 function(CPMAddPackage)
   cpm_set_policies()
 
-  list(LENGTH ARGN argnLength)
-  if(argnLength EQUAL 1)
-    cpm_parse_add_package_single_arg("${ARGN}" ARGN)
-
-    # The shorthand syntax implies EXCLUDE_FROM_ALL and SYSTEM
-    set(ARGN "${ARGN};EXCLUDE_FROM_ALL;YES;SYSTEM;YES;")
-  endif()
-
   set(oneValueArgs
       NAME
       FORCE
@@ -624,10 +670,26 @@ function(CPMAddPackage)
 
   set(multiValueArgs URL OPTIONS DOWNLOAD_COMMAND PATCHES)
 
+  list(LENGTH ARGN argnLength)
+
+  # Parse single shorthand argument
+  if(argnLength EQUAL 1)
+    cpm_parse_add_package_single_arg("${ARGN}" ARGN)
+
+    # The shorthand syntax implies EXCLUDE_FROM_ALL and SYSTEM
+    set(ARGN "${ARGN};EXCLUDE_FROM_ALL;YES;SYSTEM;YES;")
+
+    # Parse URI shorthand argument
+  elseif(argnLength GREATER 1 AND "${ARGV0}" STREQUAL "URI")
+    list(REMOVE_AT ARGN 0 1) # remove "URI gh:<...>@version#tag"
+    cpm_parse_add_package_single_arg("${ARGV1}" ARGV0)
+
+    set(ARGN "${ARGV0};EXCLUDE_FROM_ALL;YES;SYSTEM;YES;${ARGN}")
+  endif()
+
   cmake_parse_arguments(CPM_ARGS "" "${oneValueArgs}" "${multiValueArgs}" "${ARGN}")
 
   # Set default values for arguments
-
   if(NOT DEFINED CPM_ARGS_VERSION)
     if(DEFINED CPM_ARGS_GIT_TAG)
       cpm_get_version_from_git_tag("${CPM_ARGS_GIT_TAG}" CPM_ARGS_VERSION)
@@ -798,9 +860,19 @@ function(CPMAddPackage)
       set(download_directory ${CPM_SOURCE_CACHE}/${lower_case_name}/${CPM_ARGS_CUSTOM_CACHE_KEY})
     elseif(CPM_USE_NAMED_CACHE_DIRECTORIES)
       string(SHA1 origin_hash "${origin_parameters};NEW_CACHE_STRUCTURE_TAG")
+      cpm_get_shortest_hash(
+        "${CPM_SOURCE_CACHE}/${lower_case_name}" # source cache directory
+        "${origin_hash}" # Input hash
+        origin_hash # Computed hash
+      )
       set(download_directory ${CPM_SOURCE_CACHE}/${lower_case_name}/${origin_hash}/${CPM_ARGS_NAME})
     else()
       string(SHA1 origin_hash "${origin_parameters}")
+      cpm_get_shortest_hash(
+        "${CPM_SOURCE_CACHE}/${lower_case_name}" # source cache directory
+        "${origin_hash}" # Input hash
+        origin_hash # Computed hash
+      )
       set(download_directory ${CPM_SOURCE_CACHE}/${lower_case_name}/${origin_hash})
     endif()
     # Expand `download_directory` relative path. This is important because EXISTS doesn't work for
