@@ -556,7 +556,7 @@ public slots:
 	
 	//! get the label font size.
 	//! @return the pixel size of the font
-	int getLabelFontSize() {return labelFont.pixelSize();}
+	int getLabelFontSize() {return labelFontSize;}
 	//! set the label font size.
 	//! @param size the pixel size of the font
 	//! Emits settingsChanged() if the value changes.
@@ -885,7 +885,7 @@ private:
 	//@}	
 	QSharedPointer<Planet> earth, sun;
 	Vec3f defaultHintColor;
-	QFont labelFont;
+	int labelFontSize;
 	
 	//! @name Updater module
 	//@{

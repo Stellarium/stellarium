@@ -23,7 +23,6 @@
 #include "StelGui.hpp"
 #include "StelModule.hpp"
 
-#include <QFont>
 #include <QString>
 
 class QPixmap;
@@ -154,7 +153,6 @@ private:
 	QSettings* conf;
 	StelGui* gui;
 
-	QFont font;
 	bool flagShowSolutionEquationOfTime;
 	bool flagUseInvertedValue;
 	bool flagUseMsFormat;

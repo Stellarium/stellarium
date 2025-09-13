@@ -25,7 +25,6 @@
 
 #include <QObject>
 #include <QString>
-#include <QFont>
 
 class TuiNode;
 
@@ -86,7 +85,7 @@ signals:
 
 private:
 	DummyDialog dummyDialog;
-	QFont font;
+	int fontSize;
 	bool tuiActive;
 	bool tuiDateTime; // property
 	bool tuiObjInfo;  // property

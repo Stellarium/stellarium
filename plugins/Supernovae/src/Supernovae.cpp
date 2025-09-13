@@ -41,6 +41,7 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
+#include <QFont>
 #include <QTimer>
 #include <QVariantMap>
 #include <QVariant>
@@ -198,6 +199,8 @@ void Supernovae::draw(StelCore* core)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	painter.setFont(font);
 	
 	for (const auto& sn : std::as_const(snstar))

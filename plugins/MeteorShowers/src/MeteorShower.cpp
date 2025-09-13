@@ -18,6 +18,7 @@
  */
 
 #include <QtMath>
+#include <QFont>
 
 #include "LandscapeMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -377,7 +378,9 @@ void MeteorShower::drawRadiant(StelCore *core)
 		if (m_mgr->getEnableLabels())
 		{
 			painter.setColor(rgb);
-			painter.setFont(m_mgr->getFont());
+			QFont font=QGuiApplication::font();
+			font.setPixelSize(m_mgr->getFontSize());
+			painter.setFont(font);
 			const float shift = 8.f;
 			if ((mag+1.f)<mlimit)
 				painter.drawText(static_cast<float>(XY[0])+shift, static_cast<float>(XY[1])+shift, getNameI18n(), 0, 0, 0, false);

@@ -435,6 +435,13 @@ int main(int argc, char **argv)
 	tmpFont.setPixelSize(confSettings->value("gui/gui_font_size", DEFAULT_FONT_SIZE).toInt());
 	QGuiApplication::setFont(tmpFont);
 
+	if (qApp->property("onetime_fontinfo").toBool())
+	{
+		qInfo() << "=======================================================================";
+		StelApp::getInstance().dumpFontInfo();
+		qInfo() << "=======================================================================";
+	}
+
 	// Initialize translator feature
 	StelTranslator::init(StelFileMgr::getInstallationDir() + "/data/languages.tab");
 	

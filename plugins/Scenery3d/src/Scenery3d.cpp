@@ -60,7 +60,10 @@ Scenery3d::Scenery3d() :
 	cleanedUp(false),
 	movementKeyInput(0.0,0.0,0.0),
 	oldProjectionType(StelCore::ProjectionPerspective),
+	fontSize(16),
+	currentMessage(),
 	forceHorizonPolyline(false),
+	ignoreInitialViewSettings(false),
 	loadCancel(false),
 	progressBar(nullptr),
 	currentLoadScene(),
@@ -71,7 +74,6 @@ Scenery3d::Scenery3d() :
 	scenery3dDialog = new Scenery3dDialog();
 	storedViewDialog = new StoredViewDialog();
 
-	font.setPixelSize(16);
 	messageFader.setDuration(500);
 	messageTimer = new QTimer(this);
 	messageTimer->setInterval(2000);
@@ -234,6 +236,8 @@ void Scenery3d::draw(StelCore* core)
 	{
 		const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 		StelPainter painter(prj);
+		QFont font=QGuiApplication::font();
+		font.setPixelSize(fontSize);
 		painter.setFont(font);
 		painter.setColor(textColor, messageFader.getInterstate());
 		painter.drawText(83, 120, currentMessage);

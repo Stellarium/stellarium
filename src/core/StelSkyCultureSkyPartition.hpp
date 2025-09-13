@@ -170,7 +170,7 @@ private:
 public:
 	SkyLine *centerLine;                   //!< See GridlineMgr: a CUSTOM_ECLIPTIC or CUSTOM_EQUATORIAL SkyLine
 private:
-	QFont font;                            //!< font for labels
+	int fontSize;                          //!< fontsize for labels
 	QList<int> linkStars;                  //!< HIP numbers defining start of mansions (Chinese style), or with just one entry, of star that defines a given offset longitude.
 	double offset;                         //!< the longitude (degrees) in the respective culturalpartition which is defined by linkStar
 	double eclObl;                         //!< Ecliptical obliquity (computed in draw(), also consumed in getLongitudeCoordinate())

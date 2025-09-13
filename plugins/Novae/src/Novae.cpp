@@ -41,6 +41,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
+#include <QFont>
 #include <QTimer>
 #include <QList>
 #include <QSettings>
@@ -192,6 +193,8 @@ void Novae::draw(StelCore* core)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	painter.setFont(font);
 	
 	for (const auto& n : std::as_const(nova))

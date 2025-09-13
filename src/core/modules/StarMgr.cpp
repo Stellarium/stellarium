@@ -57,6 +57,7 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QDir>
+#include <QFont>
 #include <QCryptographicHash>
 
 #include <cstdlib>
@@ -164,6 +165,7 @@ StarMgr::StarMgr(void)
 	, maxGeodesicGridLevel(-1)
 	, lastMaxSearchLevel(-1)
 	, hipIndex(new HipIndexStruct[NR_OF_HIP+1])
+	, fontSize(12)
 {
 	setObjectName("StarMgr");
 	objectMgr = GETSTELMODULE(StelObjectMgr);
@@ -1282,7 +1284,10 @@ void StarMgr::draw(StelCore* core)
 
 	// Prepare openGL for drawing many stars
 	StelPainter sPainter(prj);
-	sPainter.setFont(starFont);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
+	sPainter.setFont(font);
+
 	skyDrawer->preDrawPointSource(&sPainter);
 
 	// Prepare a table for storing precomputed RCMag for all ZoneArrays
@@ -2108,7 +2113,7 @@ void StarMgr::setLabelsAmount(double a)
 // Define font file name and size to use for star names display
 void StarMgr::setFontSize(int newFontSize)
 {
-	starFont.setPixelSize(newFontSize);
+	fontSize=newFontSize;
 }
 
 // Set flag for usage designations of stars for their labels instead common names.

@@ -61,7 +61,7 @@
 #include <QProcess>
 #include <QDir>
 #include <QSettings>
-
+#include <QFont>
 
 /*************************************************************************
  Utility functions
@@ -581,7 +581,7 @@ void TextUserInterface::loadConfiguration(void)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	font.setPixelSize(conf->value("tui/tui_font_size", 15).toInt());
+	fontSize = conf->value("tui/tui_font_size", 15).toInt();
 	setTuiDateTime(conf->value("tui/flag_show_tui_datetime", false).toBool());
 	setTuiObjInfo(conf->value("tui/flag_show_tui_short_obj_info", false).toBool());
 	setTuiGravityUi(conf->value("tui/flag_show_gravity_ui", false).toBool());
@@ -603,6 +603,8 @@ void TextUserInterface::draw(StelCore* core)
 	int pixOffset = 15;
 	int fovOffsetX = 0, fovOffsetY=0;
 	bool fovMaskDisk = false;
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui!=Q_NULLPTR)

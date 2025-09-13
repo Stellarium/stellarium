@@ -39,6 +39,7 @@
 #include <QString>
 #include <QStringList>
 #include <QDir>
+#include <QFont>
 
 // constructor which loads all data from appropriate files
 AsterismMgr::AsterismMgr(StarMgr *_hip_stars)
@@ -51,6 +52,7 @@ AsterismMgr::AsterismMgr(StarMgr *_hip_stars)
         , linesFadeDuration(1.f)
         , namesFadeDuration(1.f)
         , rayHelpersFadeDuration(1.f)
+	, fontSize(14)
         , asterismLineThickness(1)
         , rayHelperThickness(1)
 {
@@ -244,17 +246,14 @@ Vec3f AsterismMgr::getLabelsColor() const
 
 void AsterismMgr::setFontSize(const int newFontSize)
 {
-	if ((asterFont.pixelSize() - newFontSize) != 0)
-	{
-		asterFont.setPixelSize(newFontSize);
-		StelApp::immediateSave("viewing/asterism_font_size", newFontSize);
-		emit fontSizeChanged(newFontSize);
-	}
+	fontSize=newFontSize;
+	StelApp::immediateSave("viewing/asterism_font_size", newFontSize);
+	emit fontSizeChanged(newFontSize);
 }
 
 int AsterismMgr::getFontSize() const
 {
-	return asterFont.pixelSize();
+	return fontSize;
 }
 
 void AsterismMgr::setAsterismLineThickness(const int thickness)
@@ -287,7 +286,9 @@ void AsterismMgr::draw(StelCore* core)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
-	sPainter.setFont(asterFont);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
+	sPainter.setFont(font);
 	drawLines(sPainter, core);
 	drawRayHelpers(sPainter, core);
 	Vec3d vel(0.);

@@ -112,6 +112,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--single-buffer         : Use single buffer swap (avoid screen blanking on Intel UHD)\n"
 			  << "--scale-gui  <scale factor>  : Scaling the GUI according to scale factor\n"
 			  << "--gui-css (or -G) <styleName> : Use customized <styleName>.css file for GUI colors\n"
+			  << "--dump-fontinfo         : Output lots of data from the QFontInfo database (debugging aid)\n"
 			  << "--dump-opengl-details (or -d) : dump information about OpenGL support to logfile.\n"
 			  << "                          Use this is you have graphics problems\n"
 			  << "                          and want to send a bug report\n"
@@ -161,6 +162,9 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 
 	if (argsGetOption(argList, "", "--single-buffer"))
 		qApp->setProperty("onetime_single_buffer", true);
+
+	if (argsGetOption(argList, "", "--dump-fontinfo"))
+		qApp->setProperty("onetime_fontinfo", true);
 
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{

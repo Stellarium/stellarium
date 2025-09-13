@@ -34,6 +34,7 @@
 #include <QTimer>
 #include <QPixmap>
 #include <QColor>
+#include <QFont>
 #include <QSettings>
 #include <QMouseEvent>
 #include <cmath>
@@ -97,7 +98,6 @@ ArchaeoLines::ArchaeoLines()
 	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("ArchaeoLines");
-	font.setPixelSize(16);
 	core=StelApp::getInstance().getCore();
 	Q_ASSERT(core);
 	objMgr=GETSTELMODULE(StelObjectMgr);
@@ -1515,6 +1515,8 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 	//Vec4f textColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 
 	ALViewportEdgeIntersectCallbackData userData(&sPainter);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	sPainter.setFont(font);
 	//userData.textColor = textColor;
 	userData.text = (isLabelVisible() ? label : "");

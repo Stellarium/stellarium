@@ -24,7 +24,6 @@
 #include "StelTextureTypes.hpp"
 #include "CustomObject.hpp"
 
-#include <QFont>
 #include <QList>
 
 class StelPainter;
@@ -169,10 +168,10 @@ private slots:
 	void removeCustomObject(CustomObjectP);
 
 	//! Connect this to StelApp font size.
-	void setFontSize(int s){font.setPixelSize(s);}
+	void setFontSize(int s){fontSize=s;}
 private:
 	// Font used for displaying our text
-	QFont font;
+	int fontSize;
 	QSettings* conf;
 	StelTextureSP texPointer;
 	QList<CustomObjectP> customObjects, persistentObjects;

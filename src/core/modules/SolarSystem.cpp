@@ -63,6 +63,7 @@
 #include <QMapIterator>
 #include <QDebug>
 #include <QDir>
+#include <QFont>
 #include <QHash>
 #include <QtConcurrent>
 #include <QOpenGLBuffer>
@@ -130,7 +131,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, markerMagThreshold(15.)
 	, computePositionsAlgorithm(conf->value("devel/compute_positions_algorithm", 2).toInt())
 {
-	planetNameFont.setPixelSize(StelApp::getInstance().getScreenFontSize());
+	fontSize = StelApp::getInstance().getScreenFontSize();
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 	setObjectName("SolarSystem");
 	connect(this, SIGNAL(flagOrbitsChanged(bool)),            this, SLOT(reconfigureOrbits()));
@@ -151,7 +152,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 
 void SolarSystem::setFontSize(int newFontSize)
 {
-	planetNameFont.setPixelSize(newFontSize);
+	fontSize = newFontSize;
 }
 
 SolarSystem::~SolarSystem()
@@ -1894,6 +1895,8 @@ void SolarSystem::draw(StelCore* core)
 	if (!flagShow)
 		return;
 	static StelObjectMgr *sObjMgr=GETSTELMODULE(StelObjectMgr);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 
 	// Compute each Planet distance to the observer
 	const Vec3d obsHelioPos = core->getObserverHeliocentricEclipticPos();
@@ -1929,7 +1932,7 @@ void SolarSystem::draw(StelCore* core)
 	for (const auto& p : std::as_const(systemPlanets))
 	{
 		if ( (p != sun) || (/* (p == sun) && */ !(core->getSkyDrawer()->getFlagDrawSunAfterAtmosphere())))
-			p->draw(core, maxMagLabel, planetNameFont, eclipseFactor);
+			p->draw(core, maxMagLabel, font, eclipseFactor);
 	}
 	if (nbMarkers>0)
 	{
