@@ -57,11 +57,16 @@
 #include <QTimer>
 #include <QWidget>
 #include <QWindow>
+#include <QSpinBox>
+#include <QLineEdit>
 #include <QMessageBox>
+#include <QDoubleSpinBox>
 #include <QStandardPaths>
 #include <QStorageInfo>
 #ifdef Q_OS_WIN
 	#include <QPinchGesture>
+	#include <windows.h>
+	#include <shellapi.h>
 #endif
 #include <QOpenGLShader>
 #include <QOpenGLShaderProgram>
@@ -79,6 +84,32 @@ Q_LOGGING_CATEGORY(mainview, "stel.MainView")
 #ifndef GL_MAX_TEXTURE_MAX_ANISOTROPY
 # define GL_MAX_TEXTURE_MAX_ANISOTROPY 0x84FF
 #endif
+
+namespace
+{
+#ifdef Q_OS_WIN
+void showTouchKeyboard(const bool show)
+{
+	const auto& cfg = *StelApp::getInstance().getSettings();
+	if (cfg.value("gui/flag_enable_touch_keyboard", false).toBool() == false)
+		return;
+	const auto cmd = cfg.value("gui/touch_keyboard_cmd",
+	                           "osk.exe").toString().toStdString();
+	const auto windowClass = cfg.value("gui/touch_keyboard_window_class",
+	                                   "OSKMainClass").toString().toStdWString();
+	if (show)
+	{
+		ShellExecuteA(nullptr, "open", cmd.c_str(), nullptr, nullptr, SW_SHOWNORMAL);
+	}
+	else
+	{
+		const auto hWnd = FindWindowW(windowClass.c_str(), nullptr);
+		if (hWnd && IsWindowVisible(hWnd))
+			PostMessageW(hWnd, WM_SYSCOMMAND, SC_CLOSE, 0);
+	}
+}
+#endif
+}
 
 // Initialize static variables
 StelMainView* StelMainView::singleton = Q_NULLPTR;
@@ -727,11 +758,27 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 
 bool StelMainView::eventFilter(QObject *obj, QEvent *event)
 {
-	if(event->type() == QEvent::FileOpen)
+	switch (event->type())
+	{
+	case QEvent::FileOpen:
 	{
 		QFileOpenEvent *openEvent = static_cast<QFileOpenEvent *>(event);
 		//qDebug() << "load script:" << openEvent->file();
 		qApp->setProperty("onetime_startup_script", openEvent->file());
+		break;
+	}
+#ifdef Q_OS_WIN
+	case QEvent::FocusIn:
+		if (qobject_cast<QLineEdit*>(obj) || qobject_cast<QSpinBox*>(obj) || qobject_cast<QDoubleSpinBox*>(obj))
+			showTouchKeyboard(true);
+		return false;
+	case QEvent::FocusOut:
+		if (qobject_cast<QLineEdit*>(obj) || qobject_cast<QSpinBox*>(obj) || qobject_cast<QDoubleSpinBox*>(obj))
+			showTouchKeyboard(false);
+		return false;
+#endif
+	default:
+		break;
 	}
 	return QGraphicsView::eventFilter(obj, event);
 }
