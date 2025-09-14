@@ -22,6 +22,7 @@
 
 #include <memory>
 #include <QWidget>
+#include "StelDialog.hpp"
 #include "ui_astroCalcAlmanacWidget.h"
 
 class AstroCalcAlmanacWidget : public QWidget
@@ -36,13 +37,15 @@ private slots:
     void setSeasonLabels();
     void setSeasonTimes();
     void setTodayTimes();
+    void saveMinutes(int minutes);
 
 private:
     class StelCore* core;
     class SpecificTimeMgr* specMgr;
     class StelLocaleMgr* localeMgr;
+    QSettings* conf;
 
-    double sunriseJD, sunsetJD, moonriseJD, moonsetJD, civilDawnJD, civilDuskJD, nauticalDawnJD, nauticalDuskJD, astronomicalDawnJD, astronomicalDuskJD;
+    double sunriseJD, sunsetJD, moonriseJD, moonsetJD, civilDawnJD, civilDuskJD, nauticalDawnJD, nauticalDuskJD, astronomicalDawnJD, astronomicalDuskJD, beforeSunriseJD, afterSunsetJD, minutesJD;
 
     void populateData();
     // method to get a formatted string for date and time of equinox/solstice
