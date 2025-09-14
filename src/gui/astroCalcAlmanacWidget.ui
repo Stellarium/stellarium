@@ -61,6 +61,16 @@
          </property>
         </widget>
        </item>
+       <item row="14" column="8" colspan="2">
+        <widget class="QLabel" name="labelCustomMoonrise">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
        <item row="3" column="11" colspan="2">
         <widget class="QLabel" name="labelAstronomicalTwilightEnd">
          <property name="text">
@@ -167,6 +177,58 @@
          </property>
         </widget>
        </item>
+       <item row="13" column="13">
+        <widget class="QPushButton" name="buttonCustomSunset">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Today's Sun at custom altitude (set)</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../data/gui/guiRes.qrc">
+           <normaloff>:/graphicGui/bbtTime-off.png</normaloff>
+           <disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="10">
+        <widget class="QPushButton" name="buttonCustomMoonrise">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Today's Moon at custom altitude (rise)</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../data/gui/guiRes.qrc">
+           <normaloff>:/graphicGui/bbtTime-off.png</normaloff>
+           <disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="11" colspan="2">
+        <widget class="QLabel" name="labelCustomMoonset">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
        <item row="3" column="14">
         <widget class="QLabel" name="labelAstronomicalTwilightDuration">
          <property name="text">
@@ -181,7 +243,7 @@
         </widget>
        </item>
        <item row="1" column="2" rowspan="10">
-        <widget class="Line" name="line_4">
+        <widget class="Line" name="lineDelimiterLeftBlock">
          <property name="minimumSize">
           <size>
            <width>1</width>
@@ -287,6 +349,25 @@
          </property>
         </widget>
        </item>
+       <item row="11" column="7" colspan="8">
+        <widget class="Line" name="lineDelimiterCustomData">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>1</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>1</height>
+          </size>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
        <item row="9" column="13">
         <widget class="QPushButton" name="buttonMoonset">
          <property name="toolTip">
@@ -339,6 +420,27 @@
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="10">
+        <widget class="QPushButton" name="buttonCustomSunrise">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Today's Sun at custom altitude (rise)</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../data/gui/guiRes.qrc">
+           <normaloff>:/graphicGui/bbtTime-off.png</normaloff>
+           <disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset>
          </property>
         </widget>
        </item>
@@ -423,6 +525,32 @@
          </property>
         </widget>
        </item>
+       <item row="12" column="11" colspan="2">
+        <widget class="QLabel" name="labelAfterSunset">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="12">
+        <widget class="QLabel" name="labelCustomSunset">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="8" colspan="3">
         <widget class="QLabel" name="labelDawn">
          <property name="text">
@@ -442,19 +570,6 @@
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
-       </item>
-       <item row="11" column="1">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
        </item>
        <item row="10" column="14">
         <widget class="QLabel" name="labelNightDuration">
@@ -517,7 +632,7 @@
         </layout>
        </item>
        <item row="1" column="4" rowspan="5">
-        <widget class="Line" name="line_2">
+        <widget class="Line" name="lineDelimiterSeasonsTop">
          <property name="minimumSize">
           <size>
            <width>1</width>
@@ -550,6 +665,56 @@
          </property>
         </widget>
        </item>
+       <item row="13" column="7">
+        <widget class="QLabel" name="labelCustomSun">
+         <property name="text">
+          <string>Sun</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="14">
+        <widget class="QDoubleSpinBox" name="spinBoxCustomSunAltitude">
+         <property name="toolTip">
+          <string>Custom altitude of the Sun</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="minimum">
+          <double>-90.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>90.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>-7.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="13">
+        <widget class="QPushButton" name="buttonCustomMoonset">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Today's Moon at custom altitude (set)</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../data/gui/guiRes.qrc">
+           <normaloff>:/graphicGui/bbtTime-off.png</normaloff>
+           <disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset>
+         </property>
+        </widget>
+       </item>
        <item row="10" column="3">
         <widget class="QLabel" name="labelSeptemberEquinoxDuration">
          <property name="textInteractionFlags">
@@ -557,7 +722,7 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="6" rowspan="11">
+       <item row="0" column="6" rowspan="15">
         <widget class="Line" name="lineDelimiterSections">
          <property name="minimumSize">
           <size>
@@ -586,6 +751,44 @@
          </property>
          <property name="textInteractionFlags">
           <set>Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="14">
+        <widget class="QSpinBox" name="spinBoxMinutes">
+         <property name="toolTip">
+          <string>Minutes before sunrise/after sunset</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>120</number>
+         </property>
+         <property name="value">
+          <number>60</number>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="14">
+        <widget class="QDoubleSpinBox" name="spinBoxCustomMoonAltitude">
+         <property name="toolTip">
+          <string>Custom altitude of the Moon</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="minimum">
+          <double>-90.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>90.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>18.000000000000000</double>
          </property>
         </widget>
        </item>
@@ -757,7 +960,7 @@
         </widget>
        </item>
        <item row="6" column="7" colspan="8">
-        <widget class="Line" name="line_5">
+        <widget class="Line" name="lineDelimiterToday">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -881,6 +1084,27 @@
          </property>
         </widget>
        </item>
+       <item row="12" column="13">
+        <widget class="QPushButton" name="buttonAfterSunset">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Defined minutes after today's sunset</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../data/gui/guiRes.qrc">
+           <normaloff>:/graphicGui/bbtTime-off.png</normaloff>
+           <disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset>
+         </property>
+        </widget>
+       </item>
        <item row="8" column="3">
         <widget class="QLabel" name="labelSeptemberEquinoxLT">
          <property name="textInteractionFlags">
@@ -959,8 +1183,28 @@
          </item>
         </layout>
        </item>
+       <item row="13" column="8" colspan="2">
+        <widget class="QLabel" name="labelCustomSunrise">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="7">
+        <widget class="QLabel" name="labelCustomMoon">
+         <property name="text">
+          <string>Moon</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
        <item row="7" column="4" rowspan="4">
-        <widget class="Line" name="line_3">
+        <widget class="Line" name="lineDelimiterSeasonsBottom">
          <property name="minimumSize">
           <size>
            <width>1</width>
@@ -1024,7 +1268,7 @@
         </widget>
        </item>
        <item row="6" column="3" colspan="3">
-        <widget class="Line" name="line">
+        <widget class="Line" name="lineDelimiterSeasonsMiddle">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -1054,6 +1298,37 @@
           <iconset resource="../../data/gui/guiRes.qrc">
            <normaloff>:/graphicGui/bbtTime-off.png</normaloff>
            <disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="10">
+        <widget class="QPushButton" name="buttonBeforeSunrise">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Defined minutes before today's sunrise</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../data/gui/guiRes.qrc">
+           <normaloff>:/graphicGui/bbtTime-off.png</normaloff>
+           <disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="8" colspan="2">
+        <widget class="QLabel" name="labelBeforeSunrise">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -1206,102 +1481,31 @@
          </property>
         </widget>
        </item>
-       <item row="11" column="7">
-        <widget class="QLabel" name="labelSun2">
-         <property name="text">
-          <string>Sun</string>
+       <item row="15" column="7">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
          </property>
-        </widget>
+        </spacer>
        </item>
-       <item row="11" column="8">
-        <widget class="QLabel" name="labelBeforeSunrise">
-         <property name="text">
-          <string/>
+       <item row="11" column="1" rowspan="4">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
          </property>
-         <property name="textInteractionFlags">
-          <set>Qt::TextSelectableByMouse</set>
-         </property>
-        </widget>
-       </item>
-       <item row="11" column="10">
-        <widget class="QPushButton" name="buttonBeforeSunrise">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Defined minutes before today's sunrise</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../../data/gui/guiRes.qrc">
-           <normaloff>:/graphicGui/bbtTime-off.png</normaloff>
-           <disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="11" column="11">
-        <widget class="QLabel" name="labelAfterSunset">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::TextSelectableByMouse</set>
-         </property>
-        </widget>
-       </item>
-       <item row="11" column="13">
-        <widget class="QPushButton" name="buttonAfterSunset">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Defined minutes after today's sunset</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../../data/gui/guiRes.qrc">
-           <normaloff>:/graphicGui/bbtTime-off.png</normaloff>
-           <disabledoff>:/graphicGui/bbtTime-off.png</disabledoff>:/graphicGui/bbtTime-off.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="11" column="14">
-        <widget class="QSpinBox" name="spinBoxMinutes">
-         <property name="toolTip">
-          <string>Minutes before sunrise/after sunset</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="minimum">
-          <number>1</number>
-         </property>
-         <property name="maximum">
-          <number>120</number>
-         </property>
-         <property name="value">
-          <number>60</number>
-         </property>
-        </widget>
+        </spacer>
        </item>
       </layout>
      </widget>
