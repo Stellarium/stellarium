@@ -833,6 +833,7 @@ Names for stars, constellations, \newFeature{25.2}asterisms, planets and DSOs ca
     e.g. Pinyin for Chinese. This may also be translated to user language to adopt different customs.
     \item[\jtag{transliteration}] (optional) a scientific transliteration where applicable. For example, Wylie for Tibetan.
     \item[\jtag{IPA}] (optional) International Phonetic Alphabet, a standardardized phonetic spelling.
+    \item[\jtag{byname}] an optional explanatory addition to the name. \newFeature{25.3} May be helpful to explain mythological figures. This is translated to users' language, but is not included in search functions.
     \item[\jtag{translator\_comments}] (optional):  comments to be shown to translators on Transifex.    
     \item[\jtag{references}] (optional): array of integers, referring to the references list in \file{description.md}. 
 \end{description}
@@ -859,6 +860,15 @@ As example, we show a part of the Samoan skyculture:
     "NAME Venus": [{"english": "Morning Star / Forbidden Radiance", "native": "Tapu'itea"}]
   }
 \end{jsonfile}
+
+\subsubsection{No translation in Modern Skyculture?}
+
+The star names that have been collected over the years in our default \emph{Modern} skyculture come from an extensive collection of sources.
+Some names from Latin and Arab sources have a well-known meaning.  
+In contrast to what we recommend for non-modern skycultures, we still keep the original name as translation in the \jtag{english} string, 
+as such names are used internationally, without thinking about the translated meaning. 
+Translated names may show slight, language dependent, spelling variations, or transliterations to other glyph systems, though.
+At best, the \jtag{byname} can transport a translation of the meaning to user language. 
 
 \subsubsection{Star names}
 

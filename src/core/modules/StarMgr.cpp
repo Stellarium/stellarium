@@ -842,6 +842,12 @@ void StarMgr::loadCultureSpecificNameForStar(const QJsonArray& data, const StarI
 
 		StelObject::CulturalName cName{entry["native"].toString(), entry["pronounce"].toString(), trans.qTranslateStar(entry["pronounce"].toString()),
 					entry["transliteration"].toString(), entry["english"].toString(), trans.qTranslateStar(entry["english"].toString()), entry["IPA"].toString()};
+		QString byname=entry["byname"].toString();
+		if (!byname.isEmpty())
+		{
+			cName.byname=byname;
+			cName.bynameI18n=trans.qTranslateStar(byname);
+		}
 		//if (culturalNamesMap.contains(HIP))
 		//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated << "/" << cName.translatedI18n;
 		culturalNamesMap.insert(HIP, cName); // add as possibly multiple entry to HIP.
@@ -1536,6 +1542,7 @@ void StarMgr::updateI18n()
 		StelObject::CulturalName &cName=it.value();
 		cName.pronounceI18n=trans.qTranslateStar(cName.pronounce);
 		cName.translatedI18n=trans.qTranslateStar(cName.translated);
+		cName.bynameI18n=trans.qTranslateStar(cName.byname);
 		it.value() = cName;
 
 		// rebuild index
