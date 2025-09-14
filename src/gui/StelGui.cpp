@@ -251,10 +251,10 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
         actionsMgr->addAction("actionDecrease_Script_Speed", scriptsGroup, N_("Slow down the script execution rate"), this, "decreaseScriptSpeed()");
         actionsMgr->addAction("actionSet_Real_Script_Speed", scriptsGroup, N_("Set the normal script execution rate"), this, "setRealScriptSpeed()");
         actionsMgr->addAction("actionStop_Script", scriptsGroup, N_("Stop script execution"), this, "stopScript()", "Ctrl+D, S");
-	#ifndef ENABLE_SCRIPT_QML
+#ifndef ENABLE_SCRIPT_QML
         actionsMgr->addAction("actionPause_Script", scriptsGroup, N_("Pause script execution"), this, "pauseScript()", "Ctrl+D, P");
         actionsMgr->addAction("actionResume_Script", scriptsGroup, N_("Resume script execution"), this, "resumeScript()", "Ctrl+D, R");
-	#endif
+#endif
 #endif
 
         QString windowsGroup = N_("Windows");
