@@ -428,6 +428,13 @@ int main(int argc, char **argv)
 			qWarning().noquote() << "ERROR while loading custom font:" << QDir::toNativeSeparators(fileFont);
 	}
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+	// Set OS-dependent fallback fonts to retrieve missing glyphs if the main font does not provide them
+#ifdef Q_OS_WIN
+	QFontDatabase::addApplicationFallbackFontFamily(QChar::Script_Cuneiform, "Segoe UI Historic");
+#endif
+#endif
+
 	// Set the default application font and font size.
 	// Note that style sheet will possibly override this setting.
 	QString baseFont = confSettings->value("gui/base_font_name", "Noto Sans").toString();
