@@ -45,6 +45,9 @@ AstroCalcAlmanacWidget::AstroCalcAlmanacWidget(QWidget* parent)
 	, nauticalDuskJD(0.)
 	, astronomicalDawnJD(0.)
 	, astronomicalDuskJD(0.)
+        , beforeSunriseJD(0.)
+        , afterSunsetJD(0.)
+        , minutesJD(0.)
 	, ui(new Ui_astroCalcAlmanacWidget)
 {
 }
@@ -57,6 +60,12 @@ void AstroCalcAlmanacWidget::setup()
 	core = StelApp::getInstance().getCore();
 	specMgr = GETSTELMODULE(SpecificTimeMgr);
 	localeMgr = &StelApp::getInstance().getLocaleMgr();
+	conf = StelApp::getInstance().getSettings();
+
+	int customMinutes = conf->value("astro/custom_minutes", 60).toInt();
+	minutesJD = customMinutes / (24.*60.);
+	ui->spinBoxMinutes->setValue(customMinutes);
+	connect(ui->spinBoxMinutes, SIGNAL(valueChanged(int)), this, SLOT(saveMinutes(int)));
 
 	populateData();
 
@@ -96,6 +105,8 @@ void AstroCalcAlmanacWidget::setup()
 	// handling special times
 	connect(ui->buttonSunrise, &QPushButton::clicked, this, [=](){core->setJD(sunriseJD);});
 	connect(ui->buttonSunset, &QPushButton::clicked, this, [=](){core->setJD(sunsetJD);});
+	connect(ui->buttonBeforeSunrise, &QPushButton::clicked, this, [=](){core->setJD(beforeSunriseJD);});
+	connect(ui->buttonAfterSunset, &QPushButton::clicked, this, [=](){core->setJD(afterSunsetJD);});
 	connect(ui->buttonMoonrise, &QPushButton::clicked, this, [=](){core->setJD(moonriseJD);});
 	connect(ui->buttonMoonset, &QPushButton::clicked, this, [=](){core->setJD(moonsetJD);});
 	connect(ui->buttonCivilDawn, &QPushButton::clicked, this, [=](){core->setJD(civilDawnJD);});
@@ -130,12 +141,21 @@ void AstroCalcAlmanacWidget::setup()
 	ui->buttonMoonset->setFixedSize(button);
 	ui->buttonYesterday->setFixedSize(button);
 	ui->buttonTomorrow->setFixedSize(button);
+	ui->buttonBeforeSunrise->setFixedSize(button);
+	ui->buttonAfterSunset->setFixedSize(button);
 }
 
 void AstroCalcAlmanacWidget::retranslate()
 {
 	ui->retranslateUi(this);
 	populateData();
+}
+
+void AstroCalcAlmanacWidget::saveMinutes(int minutes)
+{
+	minutesJD = minutes / (24.*60.);
+	conf->setValue("astro/custom_minutes", minutes);
+	setTodayTimes();
 }
 
 void AstroCalcAlmanacWidget::populateData()
@@ -235,7 +255,8 @@ void AstroCalcAlmanacWidget::setTodayTimes()
 	bool astronomicalTwilightBtn, nauticalTwilightBtn, civilTwilightBtn, sunBtn;
 	QString moonrise, moonset, sunrise, sunset, civilTwilightBegin, civilTwilightEnd, nauticalTwilightBegin,
 		nauticalTwilightEnd, astronomicalTwilightBegin, astronomicalTwilightEnd, dayDuration, nightDuration,
-		civilTwilightDuration, nauticalTwilightDuration, astronomicalTwilightDuration, dash = QChar(0x2014);
+	        civilTwilightDuration, nauticalTwilightDuration, astronomicalTwilightDuration, beforeSunrise,
+	        afterSunset, dash = QChar(0x2014);
 
 	// Moon
 	Vec4d moon = GETSTELMODULE(SolarSystem)->getMoon()->getRTSTime(core, 0.);
@@ -268,15 +289,19 @@ void AstroCalcAlmanacWidget::setTodayTimes()
 	if (day[3]==0.)
 	{
 		sunriseJD = day[0];
+		beforeSunriseJD = sunriseJD - minutesJD;
 		sunsetJD = day[2];
+		afterSunsetJD = sunsetJD + minutesJD;
 		sunrise = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(sunriseJD+utcShift), true);
+		beforeSunrise = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(beforeSunriseJD+utcShift), true);
 		sunset = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(sunsetJD+utcShift), true);
+		afterSunset = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(afterSunsetJD+utcShift), true);
 		duration = qAbs(day[2]-day[0])*24.;
 		sunBtn = true;
 	}
 	else
 	{
-		sunrise = sunset = dash;
+		sunrise = sunset = beforeSunrise = afterSunset = dash;
 		// polar day/night
 		duration = (day[3]>99.) ? 24. : 0.;
 		sunBtn = false;
@@ -299,6 +324,10 @@ void AstroCalcAlmanacWidget::setTodayTimes()
 	ui->labelCivilTwilightDuration->setToolTip(twilights);
 	ui->labelNauticalTwilightDuration->setToolTip(twilights);
 	ui->labelAstronomicalTwilightDuration->setToolTip(twilights);
+	// suffixes
+	// TRANSLATORS: duration in minutes
+	QString minutes = qc_("m", "duration, suffix");
+	ui->spinBoxMinutes->setSuffix(minutes);
 
 	if (astronomicalTwilight[3]==0.)
 	{
@@ -394,16 +423,23 @@ void AstroCalcAlmanacWidget::setTodayTimes()
 
 	ui->labelSunrise->setText(sunrise);
 	ui->labelSunset->setText(sunset);
+	ui->labelBeforeSunrise->setText(beforeSunrise);
+	ui->labelAfterSunset->setText(afterSunset);
 	ui->labelMoonRise->setText(moonrise);
 	ui->labelMoonSet->setText(moonset);
 
 	// buttons
 	ui->buttonSunrise->setEnabled(sunBtn);
 	ui->buttonSunset->setEnabled(sunBtn);
+	ui->buttonBeforeSunrise->setEnabled(sunBtn);
+	ui->buttonAfterSunset->setEnabled(sunBtn);
 	ui->buttonAstronomicalDawn->setEnabled(astronomicalTwilightBtn);
 	ui->buttonAstronomicalDusk->setEnabled(astronomicalTwilightBtn);
 	ui->buttonNauticalDawn->setEnabled(nauticalTwilightBtn);
 	ui->buttonNauticalDusk->setEnabled(nauticalTwilightBtn);
 	ui->buttonCivilDawn->setEnabled(civilTwilightBtn);
 	ui->buttonCivilDusk->setEnabled(civilTwilightBtn);
+
+	// spinboxes
+	ui->spinBoxMinutes->setEnabled(sunBtn);
 }
