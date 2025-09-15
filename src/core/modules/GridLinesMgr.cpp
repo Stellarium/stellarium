@@ -2010,9 +2010,12 @@ void GridLinesMgr::init()
 	setColorApexPoints(              Vec3f(conf->value("color/apex_points_color", defaultColor).toString()));
 
 	StelApp& app = StelApp::getInstance();
-	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLabels()));
-	connect(&app, SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
-	
+	connect(&app, &StelApp::languageChanged,       this, &GridLinesMgr::updateLabels);
+	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
+	connect(&app, &StelApp::screenFontSizeChanged, this, &GridLinesMgr::setFontSizeFromApp);
+	setPointSize(StelApp::getInstance().getScreenFontSize()-10);
+	connect(&app, &StelApp::screenFontSizeChanged, this, [=](int size){setPointSize(size-10);});
+
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Gridlines",                  displayGroup, N_("Grids and lines"), "gridlinesDisplayed");
 	addAction("actionShow_Equatorial_Grid",            displayGroup, N_("Equatorial grid"), "equatorGridDisplayed", "E");
@@ -4073,7 +4076,7 @@ void GridLinesMgr::setPointSize(const float size)
 	float pointSize = celestialJ2000Poles->getPointSize();
 	if (!qFuzzyCompare(pointSize, size))
 	{
-		pointSize=qBound(5.f, size, 15.f);
+		pointSize=qBound(5.f, size, 25.f);
 		celestialJ2000Poles->setPointSize(pointSize);
 		celestialPoles->setPointSize(pointSize);
 		zenithNadir->setPointSize(pointSize);
