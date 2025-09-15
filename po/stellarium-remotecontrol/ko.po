@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-06-02 10:04+0700\n"
+"POT-Creation-Date: 2025-07-14 13:19+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: ysjbserver <ysjbserver@naver.com>, 2025\n"
 "Language-Team: Korean (https://app.transifex.com/stellarium/teams/80998/ko/)\n"
@@ -111,8 +111,8 @@ msgid "Could not retrieve landscape list"
 msgstr "풍경 목록을 불러오는 데 실패하였습니다"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:750
-#: index.html:812 tablet7in.html:835 tablet7in.html:895
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:761
+#: index.html:823 tablet7in.html:845 tablet7in.html:905
 msgid "-none-"
 msgstr "-없음-"
 
@@ -541,83 +541,95 @@ msgstr "별자리 그림의 밝기"
 msgid "Show boundaries with thickness"
 msgstr "테두리와 함께 경계 표시"
 
-#: index.html:732 tablet7in.html:805
-msgid "Use native names for planets"
-msgstr "원어 행성 이름을 사용"
+#: index.html:733 tablet7in.html:805
+msgid "Show zodiac with thickness"
+msgstr ""
 
-#: index.html:733 tablet7in.html:806
+#: index.html:737 tablet7in.html:809
+msgid "Show lunar stations/mansions with thickness"
+msgstr ""
+
+#: index.html:741 tablet7in.html:813
+msgid "Short labels"
+msgstr ""
+
+#: index.html:742 tablet7in.html:814
 msgid "Constellation selection isolated"
 msgstr "단 하나의 별자리만을 선택"
 
-#: index.html:737 tablet7in.html:810
+#: index.html:743 tablet7in.html:815
+msgid "Only last selected"
+msgstr ""
+
+#: index.html:748 tablet7in.html:820
 msgid "Current sky culture"
 msgstr "현재 하늘 문화"
 
-#: index.html:750 tablet7in.html:835
+#: index.html:761 tablet7in.html:845
 msgid "Active script:"
 msgstr "활성화된 스크립트:"
 
-#: index.html:751 tablet7in.html:836
+#: index.html:762 tablet7in.html:846
 msgid "Run selected script"
 msgstr "선택한 스크립트 실행"
 
-#: index.html:751 tablet7in.html:836
+#: index.html:762 tablet7in.html:846
 msgid "Stop current script"
 msgstr "현재 스크립트 중지"
 
-#: index.html:756 tablet7in.html:43 tablet7in.html:820
+#: index.html:767 tablet7in.html:43 tablet7in.html:830
 msgid "Actions"
 msgstr "동작"
 
-#: index.html:760 tablet7in.html:824
+#: index.html:771 tablet7in.html:834
 msgid "Run/toggle action"
 msgstr "동작 실행/ 켜고 끄기"
 
-#: index.html:771 tablet7in.html:859
+#: index.html:782 tablet7in.html:869
 msgid "Planet map"
 msgstr "행성 지도"
 
-#: index.html:772 tablet7in.html:860
+#: index.html:783 tablet7in.html:870
 msgid "Planet map pointer"
 msgstr "행성 지도 포인터"
 
-#: index.html:776 tablet7in.html:864
+#: index.html:787 tablet7in.html:874
 msgid "Type to search location"
 msgstr "위치 검색을 위해 입력"
 
-#: index.html:810 tablet7in.html:893
+#: index.html:821 tablet7in.html:903
 msgid "Interaction"
 msgstr "상호작용"
 
-#: index.html:811 tablet7in.html:894
+#: index.html:822 tablet7in.html:904
 msgid "Current scene:"
 msgstr "현재 장면:"
 
-#: index.html:814 tablet7in.html:897
+#: index.html:825 tablet7in.html:907
 msgid "View controls"
 msgstr "관점 조절"
 
-#: index.html:820 tablet7in.html:903
+#: index.html:831 tablet7in.html:913
 msgid "Movement controls"
 msgstr "움직임 조절"
 
-#: index.html:832 tablet7in.html:915
+#: index.html:843 tablet7in.html:925
 msgid "Torchlight"
 msgstr "불빛"
 
-#: index.html:839 tablet7in.html:922
+#: index.html:850 tablet7in.html:932
 msgid "Scene selection"
 msgstr "장면 선택"
 
-#: index.html:843 tablet7in.html:926
+#: index.html:854 tablet7in.html:936
 msgid "Load selected scene"
 msgstr "선택한 장면 불러오기"
 
-#: index.html:869 tablet7in.html:953
+#: index.html:880 tablet7in.html:963
 msgid "No response from server"
 msgstr "서버로부터 응답이 없습니다."
 
-#: index.html:870 tablet7in.html:954
+#: index.html:881 tablet7in.html:964
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "서버로부터 %1초 간 응답이 없습니다. 아직도 스텔라리움이 작동 중인가요?"
 
@@ -761,18 +773,18 @@ msgstr "물병자리"
 msgid "Pisces"
 msgstr "물고기자리"
 
-#: tablet7in.html:844
+#: tablet7in.html:854
 msgid "Favorites"
 msgstr "즐겨찾기"
 
-#: tablet7in.html:846
+#: tablet7in.html:856
 msgid "Show 1"
 msgstr "1 보기"
 
-#: tablet7in.html:847
+#: tablet7in.html:857
 msgid "Remove Labels and Images"
 msgstr "이름표와 사진 제거"
 
-#: tablet7in.html:847
+#: tablet7in.html:857
 msgid "Cleanup Screen"
 msgstr "화면 정리"
