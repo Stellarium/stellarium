@@ -452,7 +452,8 @@ Constellations are coded as array of dictionaries:
 where
 
 \begin{description}
-\item[\jtag{id}] A unique figure identifier, consisting of \texttt{CON} (for \indexterm[constellation]{constellations}), skyculture id, and a short label still unique within the skyculture.
+\item[\jtag{id}] A unique figure identifier, consisting of \texttt{CON} (for \indexterm[constellation]{constellations}), skyculture id, 
+                 and a short Latin-character based label still unique within the skyculture.
                  For IAU-based skycultures, these short labels must be the IAU standard labels. For others, you can invent your own. It is not necessary to have exactly
                  3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended:  
                  the short label is displayed when enabling abbreviated screen labels (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
@@ -464,7 +465,7 @@ where
 		    Even Deep-Sky objects \newFeature{25.2}(like a naked-eye open cluster) can be added to a constellation line when written as 
 		    string starting with \texttt{"DSO:"}, like \jtag{DSO:M7}.
 
-                    To describe \indexterm[constellations!dark]{dark constellations}\newFeature{25.2} formed from dust clouds in the Milky Way or other non-stellar items, 
+                    To describe \indexterm[constellation!dark]{dark constellations}\newFeature{25.2} formed from dust clouds in the Milky Way or other non-stellar items, 
                     another variant can use coordinate lists and is technically an array of arrays of 2-part arrays of float numbers, 
                     each pair being right ascension $\alpha$ (decimal hours) and declination $\delta$ (decimal degrees) in equinox J2000.0. 
                     See below how Stellarium can help you write these arrays.
@@ -483,9 +484,13 @@ where
 	\begin{description}
 	    \item[\jtag{native}] name in the original language of the skyculture. 
 	    \item[\jtag{english}] translation of the name's meaning. This is translated to users' language.
-	    \item[\jtag{byname}] an optional explanatory addition to the name. \newFeature{25.3}  May be helpful to explain mythological figures. This is translated to users' language, but is not included in search functions.
-	    \item[\jtag{pronounce}] (optional, but recommended) a Latin-character based transliteration/pronunciation aid, e.g. Pinyin for Chinese. This may also be translated to user language.
-	    \item[\jtag{transliteration}] (optional) a scientific transliteration where applicable. 
+	    \item[\jtag{byname}] an optional explanatory addition to the name. \newFeature{25.3}  May be helpful to explain mythological figures. 
+		This is translated to users' language, but is not included in search functions.
+	    \item[\jtag{pronounce}] (optional, but recommended) a Latin-character based transliteration/pronunciation aid, e.g.\ Pinyin for Chinese. 
+		This may also be translated to user language.
+	    \item[\jtag{transliteration}] (optional) a scientific Latin-character based transliteration where applicable. 
+		This is not translatable or adaptable to user language conventions, but may include extended diacritics. 
+		An example is Wylie for Tibetan, which is not meant to help in pronunciation.  
 	    \item[\jtag{IPA}] (optional) International Phonetic Alphabet, a standardardized phonetic spelling.
 	\end{description}
 
@@ -658,12 +663,12 @@ Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help ra
 \end{jsonfile}
 
 \begin{description}
-\item[\jtag{id}] A unique asterism identifier, consisting of \texttt{AST} (for asterism), skyculture id, and a short label still unique within the skyculture.
+\item[\jtag{id}] A unique asterism identifier, consisting of \texttt{AST} (for asterism), skyculture id, and a short Latin-character based label still unique within the skyculture.
                  It is not necessary to have exactly 3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended:  
 				 the short label is displayed when activating abbbreviated labels (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
 				 certain abbreviations from being displayed at all, let them start with a dot. 				 
 \item[\jtag{common\_name}] Another dict with entries \jtag{native} (as used in the source), \jtag{english} (the translatable english name), 
-                \jtag{pronounce}, \jtag{transliteration} and \jtag{IPA} as defined for constellations,
+                \jtag{pronounce}, \jtag{transliteration}, \jtag{IPA} and \jtag{byname} as defined for constellations,
 				and an optional array \jtag{references} which lists from which sources (from \ref{SC:references}) this asterism was taken. 
 
 				Collecting sources and giving such references is always a good idea. If you feel ther are more in the collection than you like, 
@@ -830,10 +835,12 @@ Names for stars, constellations, \newFeature{25.2}asterisms, planets and DSOs ca
     \item[\jtag{english}] translation of the name's meaning. This is translated to users' language.
     \item[\jtag{pronounce}] (optional, but recommended) a Latin-character based transliteration/pronunciation aid, 
     required when \jtag{native} is written in non-Latin-based glyphs (e.g., Chinese, Arab, Hindu, Tibetan, \ldots), 
-    e.g. Pinyin for Chinese. This may also be translated to user language to adopt different customs.
-    \item[\jtag{transliteration}] (optional) a scientific transliteration where applicable. For example, Wylie for Tibetan.
+    e.g. Pinyin for Chinese. This is usually written with simple characters found on typewriters and may also be translated to user language to adopt different customs.
+    \item[\jtag{transliteration}] (optional) a scientific Latin-character based transliteration where applicable. Not translatable to user language, but may use extended diacritics.
+	The scheme may not be helpful as pronunciation aid. For example, Wylie for Tibetan.
     \item[\jtag{IPA}] (optional) International Phonetic Alphabet, a standardardized phonetic spelling.
-    \item[\jtag{byname}] an optional explanatory addition to the name. \newFeature{25.3} May be helpful to explain mythological figures. This is translated to users' language, but is not included in search functions.
+    \item[\jtag{byname}] an optional explanatory addition to the name. \newFeature{25.3} May be helpful to explain mythological figures. 
+	This is translated to users' language, but is not included in search functions.
     \item[\jtag{translator\_comments}] (optional):  comments to be shown to translators on Transifex.    
     \item[\jtag{references}] (optional): array of integers, referring to the references list in \file{description.md}. 
 \end{description}
