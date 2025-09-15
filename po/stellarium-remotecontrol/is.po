@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-06-02 10:04+0700\n"
+"POT-Creation-Date: 2025-07-14 13:19+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: cardinot <mcardinot@gmail.com>, 2025\n"
 "Language-Team: Icelandic (https://app.transifex.com/stellarium/teams/80998/is/)\n"
@@ -109,8 +109,8 @@ msgid "Could not retrieve landscape list"
 msgstr "Gat ekki náð í lista yfir landslög"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:750
-#: index.html:812 tablet7in.html:835 tablet7in.html:895
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:761
+#: index.html:823 tablet7in.html:845 tablet7in.html:905
 msgid "-none-"
 msgstr "-ekkert-"
 
@@ -544,83 +544,95 @@ msgstr "Sýna myndskreytingar í birtustigi"
 msgid "Show boundaries with thickness"
 msgstr "Sýna mörk með breidd"
 
-#: index.html:732 tablet7in.html:805
-msgid "Use native names for planets"
-msgstr "Nota upprunaleg nöfn pláneta"
+#: index.html:733 tablet7in.html:805
+msgid "Show zodiac with thickness"
+msgstr ""
 
-#: index.html:733 tablet7in.html:806
+#: index.html:737 tablet7in.html:809
+msgid "Show lunar stations/mansions with thickness"
+msgstr ""
+
+#: index.html:741 tablet7in.html:813
+msgid "Short labels"
+msgstr ""
+
+#: index.html:742 tablet7in.html:814
 msgid "Constellation selection isolated"
 msgstr "Einangrað val stjörnumerkja"
 
-#: index.html:737 tablet7in.html:810
+#: index.html:743 tablet7in.html:815
+msgid "Only last selected"
+msgstr ""
+
+#: index.html:748 tablet7in.html:820
 msgid "Current sky culture"
 msgstr "Núverandi stjörnumerkjakerfi"
 
-#: index.html:750 tablet7in.html:835
+#: index.html:761 tablet7in.html:845
 msgid "Active script:"
 msgstr "Virk skrifta:"
 
-#: index.html:751 tablet7in.html:836
+#: index.html:762 tablet7in.html:846
 msgid "Run selected script"
 msgstr "Keyra valda skriftu"
 
-#: index.html:751 tablet7in.html:836
+#: index.html:762 tablet7in.html:846
 msgid "Stop current script"
 msgstr "Stöðva núverandi skriftu"
 
-#: index.html:756 tablet7in.html:43 tablet7in.html:820
+#: index.html:767 tablet7in.html:43 tablet7in.html:830
 msgid "Actions"
 msgstr "Aðgerðir"
 
-#: index.html:760 tablet7in.html:824
+#: index.html:771 tablet7in.html:834
 msgid "Run/toggle action"
 msgstr "Keyra/víxla aðgerð"
 
-#: index.html:771 tablet7in.html:859
+#: index.html:782 tablet7in.html:869
 msgid "Planet map"
 msgstr "Plánetukort"
 
-#: index.html:772 tablet7in.html:860
+#: index.html:783 tablet7in.html:870
 msgid "Planet map pointer"
 msgstr "Bendill á plánetukorti"
 
-#: index.html:776 tablet7in.html:864
+#: index.html:787 tablet7in.html:874
 msgid "Type to search location"
 msgstr "Skrifaðu hér til að leita að staðsetningu"
 
-#: index.html:810 tablet7in.html:893
+#: index.html:821 tablet7in.html:903
 msgid "Interaction"
 msgstr "Gagnvikni"
 
-#: index.html:811 tablet7in.html:894
+#: index.html:822 tablet7in.html:904
 msgid "Current scene:"
 msgstr "Núverandi sena:"
 
-#: index.html:814 tablet7in.html:897
+#: index.html:825 tablet7in.html:907
 msgid "View controls"
 msgstr "Stýringar fyrir sýn"
 
-#: index.html:820 tablet7in.html:903
+#: index.html:831 tablet7in.html:913
 msgid "Movement controls"
 msgstr "Stýringar fyrir hreyfingar"
 
-#: index.html:832 tablet7in.html:915
+#: index.html:843 tablet7in.html:925
 msgid "Torchlight"
 msgstr "Ljóskastari"
 
-#: index.html:839 tablet7in.html:922
+#: index.html:850 tablet7in.html:932
 msgid "Scene selection"
 msgstr "Val á senu"
 
-#: index.html:843 tablet7in.html:926
+#: index.html:854 tablet7in.html:936
 msgid "Load selected scene"
 msgstr "Hlaða inn valinni senu"
 
-#: index.html:869 tablet7in.html:953
+#: index.html:880 tablet7in.html:963
 msgid "No response from server"
 msgstr "Ekkert svar frá vefþjóni"
 
-#: index.html:870 tablet7in.html:954
+#: index.html:881 tablet7in.html:964
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "Ekkert svar frá miðlara í %1 sekúndur. Er Stellarium ennþá í gangi?"
 
@@ -764,18 +776,18 @@ msgstr "Vatnsberinn"
 msgid "Pisces"
 msgstr "Fiskarnir"
 
-#: tablet7in.html:844
+#: tablet7in.html:854
 msgid "Favorites"
 msgstr "Eftirlæti"
 
-#: tablet7in.html:846
+#: tablet7in.html:856
 msgid "Show 1"
 msgstr "Sýna 1"
 
-#: tablet7in.html:847
+#: tablet7in.html:857
 msgid "Remove Labels and Images"
 msgstr "Fjarlægja merki og myndir"
 
-#: tablet7in.html:847
+#: tablet7in.html:857
 msgid "Cleanup Screen"
 msgstr "Hreinsun á skjá"
