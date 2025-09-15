@@ -1002,6 +1002,7 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	if (!cName.IPA            .isEmpty()) lName.IPA             = FSI+cName.IPA+PDI;
 	if (!cName.byname         .isEmpty()) lName.byname          = FSI+cName.byname+PDI;
 	if (!cName.bynameI18n     .isEmpty()) lName.bynameI18n      = FSI+cName.bynameI18n+PDI;
+	const QString lCommonNameI18n=FSI+commonNameI18n+PDI;
 
 	// At least while many fields have not been filled, we should create a few fallbacks
 	// If native contains non-Latin glyphs, pronounce or transliteration is mandatory.
@@ -1030,7 +1031,7 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 			return lName.IPA;
 		case StelObject::CulturalDisplayStyle::NONE: // fully non-cultural!
 		case StelObject::CulturalDisplayStyle::Modern:
-			return commonNameI18n;
+			return lCommonNameI18n;
 		case StelObject::CulturalDisplayStyle::Byname:
 			return (lName.bynameI18n.isEmpty() ? (pronounceStr.isEmpty() ? lName.native : pronounceStr) : lName.bynameI18n);
 		default:
@@ -1045,7 +1046,7 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	// Styles with Translit_* start with Transliteration or fallback to Pronounce
 	// Styles with ...IPA... must add IPA (when exists) in square brackets, conditionally after the comma-separated turtle brackets with Pronounce and Transliteration
 	// Styles with ...Translated have translation in brackets appended
-	// Styles with ...Modern have the modern name (commonNameI18n) in slightly decorative curved angle brackets appended
+	// Styles with ...Modern have the modern name (lCommonNameI18n) in slightly decorative curved angle brackets appended
 
 	QStringList braced; // the contents of the secondary term, i.e. pronunciation and transliteration
 	if (styleInt & int(StelObject::CulturalDisplayStyle::Native))
@@ -1104,10 +1105,10 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 
 
 	// Add an explanatory modern name in decorative angle brackets
-	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && (!commonNameI18n.isEmpty()) && (!label.startsWith(commonNameI18n)) && (commonNameI18n!=lName.translatedI18n))
-		label.append(QString(" %1%3%2").arg(QChar(0x29FC), QChar(0x29FD), commonNameI18n));
+	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && (!commonNameI18n.isEmpty()) && (!label.startsWith(lCommonNameI18n)) && (lCommonNameI18n!=lName.translatedI18n))
+		label.append(QString(" %1%3%2").arg(QChar(0x29FC), QChar(0x29FD), lCommonNameI18n));
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && label.isEmpty()) // if something went wrong?
-		label=commonNameI18n;
+		label=lCommonNameI18n;
 
 	return label;
 }
