@@ -2013,8 +2013,6 @@ void GridLinesMgr::init()
 	connect(&app, &StelApp::languageChanged,       this, &GridLinesMgr::updateLabels);
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
 	connect(&app, &StelApp::screenFontSizeChanged, this, &GridLinesMgr::setFontSizeFromApp);
-	setPointSize(StelApp::getInstance().getScreenFontSize()-10);
-	connect(&app, &StelApp::screenFontSizeChanged, this, [=](int size){setPointSize(size-10);});
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Gridlines",                  displayGroup, N_("Grids and lines"), "gridlinesDisplayed");
