@@ -311,6 +311,15 @@ QString StelLocaleMgr::sDateFormatToString(SDateFormat df)
 	return dfmt[df];
 }
 
+QString StelLocaleMgr::getQtTimeFormatStr() const
+{
+	QStringList tfmt = {
+	        "HH:mm",
+	        "HH:mm",
+	        "hh:mm AP"};
+	return tfmt[timeFormat];
+}
+
 QString StelLocaleMgr::getQtDateFormatStr() const
 {
 	QStringList dfmt = {
