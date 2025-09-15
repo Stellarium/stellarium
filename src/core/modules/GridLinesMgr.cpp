@@ -92,6 +92,8 @@ public:
 	// Create and precompute positions of a SkyGrid
 	SkyPoint(SKY_POINT_TYPE _point_type = CELESTIALPOLES_J2000);
 	virtual ~SkyPoint();
+	static void init(); //! call once before creating the first line.
+	static void deinit(); //! call once after deleting all lines.
 	void draw(StelCore* core) const;
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() const {return color;}
@@ -104,8 +106,9 @@ public:
 	float getPointSize() { return pointSize; }
 	//! Re-translates the label.
 	void updateLabel();
+	static void setSolarSystem(SolarSystem* ss);
 private:
-	QSharedPointer<Planet> earth, sun;
+	static QSharedPointer<Planet> earth, sun, moon;
 	SKY_POINT_TYPE point_type;
 	Vec3f color;
 	StelCore::FrameType frameType;
@@ -1417,16 +1420,34 @@ void SkyLine::draw(StelPainter &sPainter, const float oldLineWidth) const
 	sPainter.setBlending(false);
 }
 
+QSharedPointer<Planet> SkyPoint::earth, SkyPoint::sun, SkyPoint::moon;
+
 SkyPoint::SkyPoint(SKY_POINT_TYPE _point_type) : point_type(_point_type), color(0.f, 0.f, 1.f)
 {
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
 	texPoint = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
 
-	earth = GETSTELMODULE(SolarSystem)->getEarth();
-	sun = GETSTELMODULE(SolarSystem)->getSun();
-
 	updateLabel();
+}
+
+void SkyPoint::init()
+{
+	setSolarSystem(GETSTELMODULE(SolarSystem));
+}
+
+void SkyPoint::deinit()
+{
+	earth = nullptr;
+	sun   = nullptr;
+	moon  = nullptr;
+}
+
+void SkyPoint::setSolarSystem(SolarSystem* ss)
+{
+	earth = ss->getEarth();
+	sun   = ss->getSun();
+	moon  = ss->getMoon();
 }
 
 SkyPoint::~SkyPoint()
@@ -1673,7 +1694,6 @@ void SkyPoint::draw(StelCore *core) const
 		case EARTH_UMBRA_CENTER:
 		{
 			// We compute the shadow center attached to the geocenter, but must point it in the opposite direction of the sun's aberrated position.
-			static PlanetP moon=GETSTELMODULE(SolarSystem)->getMoon();
 			const Vec3d pos=earth->getEclipticPos();
 			const Vec3d dir= - sun->getAberrationPush() + pos;
 			double lambda, beta;
@@ -1715,6 +1735,7 @@ GridLinesMgr::GridLinesMgr()
 {
 	setObjectName("GridLinesMgr");
 	SkyLine::init();
+	SkyPoint::init();
 
 	equGrid = new SkyGrid(StelCore::FrameEquinoxEqu);
 	fixedEquatorialGrid = new SkyGrid(StelCore::FrameFixedEquatorial);
@@ -1825,6 +1846,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete umbraCenterPoint;
 	delete apexPoints;	
 	SkyLine::deinit();
+	SkyPoint::deinit();
 }
 
 /*************************************************************************
@@ -2032,6 +2054,7 @@ void GridLinesMgr::connectSolarSystem()
 	SolarSystem *ss=GETSTELMODULE(SolarSystem);
 	earth = ss->getEarth();
 	SkyLine::setSolarSystem(ss);
+	SkyPoint::setSolarSystem(ss);
 }
 
 void GridLinesMgr::update(double deltaTime)
