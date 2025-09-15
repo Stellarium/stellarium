@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-06-02 10:04+0700\n"
+"POT-Creation-Date: 2025-07-14 13:19+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: cardinot <mcardinot@gmail.com>, 2025\n"
 "Language-Team: Bengali (https://app.transifex.com/stellarium/teams/80998/bn/)\n"
@@ -109,8 +109,8 @@ msgid "Could not retrieve landscape list"
 msgstr "ভূমিরূপ সংক্রান্ত তালিকাটি পাওয়া যায় নি"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:750
-#: index.html:812 tablet7in.html:835 tablet7in.html:895
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:761
+#: index.html:823 tablet7in.html:845 tablet7in.html:905
 msgid "-none-"
 msgstr "-কিছু না-"
 
@@ -542,83 +542,95 @@ msgstr "কল্পচিত্রের উজ্জ্বল্যতা :"
 msgid "Show boundaries with thickness"
 msgstr "সীমারেখার বেধ"
 
-#: index.html:732 tablet7in.html:805
-msgid "Use native names for planets"
-msgstr "গ্রহদের আঞ্চলিক নাম ব্যবহার"
+#: index.html:733 tablet7in.html:805
+msgid "Show zodiac with thickness"
+msgstr ""
 
-#: index.html:733 tablet7in.html:806
+#: index.html:737 tablet7in.html:809
+msgid "Show lunar stations/mansions with thickness"
+msgstr ""
+
+#: index.html:741 tablet7in.html:813
+msgid "Short labels"
+msgstr ""
+
+#: index.html:742 tablet7in.html:814
 msgid "Constellation selection isolated"
 msgstr "একটি করে তারামন্ডল নির্বাচন"
 
-#: index.html:737 tablet7in.html:810
+#: index.html:743 tablet7in.html:815
+msgid "Only last selected"
+msgstr ""
+
+#: index.html:748 tablet7in.html:820
 msgid "Current sky culture"
 msgstr "ব্যবহৃত সংস্কৃতি"
 
-#: index.html:750 tablet7in.html:835
+#: index.html:761 tablet7in.html:845
 msgid "Active script:"
 msgstr "সক্রিয় কার্যলিপি"
 
-#: index.html:751 tablet7in.html:836
+#: index.html:762 tablet7in.html:846
 msgid "Run selected script"
 msgstr "কার্যলিপি চালান"
 
-#: index.html:751 tablet7in.html:836
+#: index.html:762 tablet7in.html:846
 msgid "Stop current script"
 msgstr "কার্যলিপি বন্ধ করুন"
 
-#: index.html:756 tablet7in.html:43 tablet7in.html:820
+#: index.html:767 tablet7in.html:43 tablet7in.html:830
 msgid "Actions"
 msgstr "কার্য তালিকা"
 
-#: index.html:760 tablet7in.html:824
+#: index.html:771 tablet7in.html:834
 msgid "Run/toggle action"
 msgstr "কার্য সম্পাদনা করুন"
 
-#: index.html:771 tablet7in.html:859
+#: index.html:782 tablet7in.html:869
 msgid "Planet map"
 msgstr "মানচিত্র"
 
-#: index.html:772 tablet7in.html:860
+#: index.html:783 tablet7in.html:870
 msgid "Planet map pointer"
 msgstr "মানচিত্রে স্থান নির্দেশক"
 
-#: index.html:776 tablet7in.html:864
+#: index.html:787 tablet7in.html:874
 msgid "Type to search location"
 msgstr "স্থানের নাম লিখুন"
 
-#: index.html:810 tablet7in.html:893
+#: index.html:821 tablet7in.html:903
 msgid "Interaction"
 msgstr "ব্যবহার"
 
-#: index.html:811 tablet7in.html:894
+#: index.html:822 tablet7in.html:904
 msgid "Current scene:"
 msgstr "ব্যবহৃত ভূমিরূপ"
 
-#: index.html:814 tablet7in.html:897
+#: index.html:825 tablet7in.html:907
 msgid "View controls"
 msgstr "অভিমুখ পরিবর্তন"
 
-#: index.html:820 tablet7in.html:903
+#: index.html:831 tablet7in.html:913
 msgid "Movement controls"
 msgstr "চলন নিয়ন্ত্রন"
 
-#: index.html:832 tablet7in.html:915
+#: index.html:843 tablet7in.html:925
 msgid "Torchlight"
 msgstr "টর্চ লাইট"
 
-#: index.html:839 tablet7in.html:922
+#: index.html:850 tablet7in.html:932
 msgid "Scene selection"
 msgstr "ভূমিরূপ তালিকা"
 
-#: index.html:843 tablet7in.html:926
+#: index.html:854 tablet7in.html:936
 msgid "Load selected scene"
 msgstr "নির্বাচিত ভূমিরূপটি ব্যবহার করুন"
 
-#: index.html:869 tablet7in.html:953
+#: index.html:880 tablet7in.html:963
 msgid "No response from server"
 msgstr "সার্ভার থেকে কোনো প্রতিক্রিয়া পাওয়া যাচ্ছে না"
 
-#: index.html:870 tablet7in.html:954
+#: index.html:881 tablet7in.html:964
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "%1 সেকেন্ড ধরে সার্ভারের সাথে যোগাযোগ নেই । স্টেলারিয়াম কি চালু করা আছে ?"
@@ -763,18 +775,18 @@ msgstr "জল বাহক (কুম্ভ)"
 msgid "Pisces"
 msgstr "মাছ (মীন)"
 
-#: tablet7in.html:844
+#: tablet7in.html:854
 msgid "Favorites"
 msgstr "প্রিয়"
 
-#: tablet7in.html:846
+#: tablet7in.html:856
 msgid "Show 1"
 msgstr "১ নং টি দেখুন"
 
-#: tablet7in.html:847
+#: tablet7in.html:857
 msgid "Remove Labels and Images"
 msgstr "নাম ও চিত্রগুলি মুছুন"
 
-#: tablet7in.html:847
+#: tablet7in.html:857
 msgid "Cleanup Screen"
 msgstr "পরিষ্কার করুন"
