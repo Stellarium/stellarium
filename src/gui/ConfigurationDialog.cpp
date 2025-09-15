@@ -1009,6 +1009,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/rot_fov_rectangular_marker",		QString::number(propMgr->getStelPropertyValue("SpecialMarkersMgr.fovRectangularMarkerRotationAngle").toDouble(), 'f', 2));
 	conf->setValue("viewing/line_thickness",			propMgr->getStelPropertyValue("GridLinesMgr.lineThickness").toInt());
 	conf->setValue("viewing/part_thickness",			propMgr->getStelPropertyValue("GridLinesMgr.partThickness").toInt());
+	conf->setValue("viewing/point_size",				propMgr->getStelPropertyValue("GridLinesMgr.pointSize").toInt());
 
 	conf->setValue("viewing/constellation_font_size",		propMgr->getStelPropertyValue("ConstellationMgr.fontSize").toInt());
 	conf->setValue("viewing/flag_constellation_drawing",		propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool());

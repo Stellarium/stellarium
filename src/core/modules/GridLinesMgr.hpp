@@ -289,6 +289,7 @@ class GridLinesMgr : public StelModule
 
 	Q_PROPERTY(float lineThickness			READ getLineThickness		WRITE setLineThickness			NOTIFY lineThicknessChanged)
 	Q_PROPERTY(float partThickness			READ getPartThickness		WRITE setPartThickness			NOTIFY partThicknessChanged)
+	Q_PROPERTY(float pointSize			READ getPointSize		WRITE setPointSize			NOTIFY pointSizeChanged)
 public:
 	GridLinesMgr();
 	~GridLinesMgr() override;
@@ -1104,10 +1105,17 @@ public slots:
 	//! Get the thickness of lines
 	float getPartThickness() const;
 
+	//! Set the size of celestial points
+	//! @param size of celestial point in pixels
+	void setPointSize(const float size);
+	//! Get the size of celestial points
+	float getPointSize() const;
+
 signals:
 	void gridlinesDisplayedChanged(const bool);
 	void lineThicknessChanged(const float);
 	void partThicknessChanged(const float);
+	void pointSizeChanged(const float);
 	void azimuthalGridDisplayedChanged(const bool);
 	void azimuthalGridColorChanged(const Vec3f & newColor);
 	void equatorGridDisplayedChanged(const bool displayed);

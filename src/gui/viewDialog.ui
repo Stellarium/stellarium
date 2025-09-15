@@ -3216,6 +3216,29 @@
                    </property>
                   </widget>
                  </item>
+                 <item>
+                  <widget class="QLabel" name="pointSizeLabel">
+                   <property name="text">
+                    <string>points</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="pointSizeSpinBox">
+                   <property name="toolTip">
+                    <string>Size of celestial points in pixels</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="minimum">
+                    <number>5</number>
+                   </property>
+                   <property name="maximum">
+                    <number>15</number>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
                </item>
                <item row="6" column="7">

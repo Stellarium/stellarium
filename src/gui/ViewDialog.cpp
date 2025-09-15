@@ -477,6 +477,7 @@ void ViewDialog::createDialogContent()
 	// The thickness of lines
 	connectIntProperty(ui->lineThicknessSpinBox,                "GridLinesMgr.lineThickness");
 	connectIntProperty(ui->partThicknessSpinBox,                "GridLinesMgr.partThickness");
+	connectIntProperty(ui->pointSizeSpinBox,	            "GridLinesMgr.pointSize");
 	connectBoolProperty(ui->equatorPartsCheckBox,               "GridLinesMgr.equatorPartsDisplayed");
 	connectBoolProperty(ui->equatorJ2000PartsCheckBox,          "GridLinesMgr.equatorJ2000PartsDisplayed");
 	connectBoolProperty(ui->fixedEquatorPartsCheckBox,          "GridLinesMgr.fixedEquatorPartsDisplayed");
