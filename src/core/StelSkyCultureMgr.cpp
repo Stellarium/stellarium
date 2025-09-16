@@ -19,6 +19,8 @@
 
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelApp.hpp"
@@ -36,6 +38,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QRegularExpression>
+#include <QMetaEnum>
 
 namespace
 {
@@ -1118,3 +1121,35 @@ bool StelSkyCultureMgr::currentSkycultureUsesCommonNames() const
 {
 	return currentSkyCulture.fallbackToInternationalNames;
 }
+
+#if QT_VERSION_MAJOR >= 6
+// Call this as scripting function. This shall provide information about unicode and QString properties
+void StelSkyCultureMgr::analyzeScreenLabel() const
+{
+	static StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	if (omgr->getSelectedObject().isEmpty())
+		return;
+
+	StelObjectP obj = omgr->getSelectedObject()[0];
+	QString label=obj->getScreenLabel();
+
+	qDebug() << "Analyze label: " << label;
+	std::u32string label32=label.toStdU32String();
+	QList<uint> label32l=label.toUcs4();
+	//QMetaEnum metaCharCat=QMetaEnum::fromType<QChar::Category>();
+	//QMetaEnum metaCharScript=QMetaEnum::fromType<QChar::Script>();
+	//QMetaEnum metaCharDir=QMetaEnum::fromType<QChar::Direction>();
+	foreach(const uint letter, label32l )
+	{
+		qDebug() << QChar::digitValue(letter) << "(u" << QString::number(letter, 16) << "/" << QChar::fromUcs4(letter) << ")"
+			    "cat." << QChar::category(letter) << // metaCharCat.valueToKey(QChar::category(letter)) <<
+			    "scr." << QChar::script(letter) << // metaCharScript.valueToKey(QChar::script(letter));
+			    "dir." << QChar::direction(letter); // metaCharScript.valueToKey(QChar::script(letter));
+		if (QChar::script(letter) == QChar::Script_Cuneiform)
+		{
+			qDebug() << "Cuneiform detected. " << letter  << "since Unicode V" << QChar::unicodeVersion(letter) << "is a " << QChar::category(letter);
+			qDebug() << "Decomposition:" << QChar::decomposition(letter);
+		}
+	}
+}
+#endif

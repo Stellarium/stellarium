@@ -301,6 +301,10 @@ public slots:
 	//! Returns whether current skyculture uses (incorporates) common names.
 	bool currentSkycultureUsesCommonNames() const;
 
+#if QT_VERSION_MAJOR >= 6
+	//! Debugging/developing function. Call via scripting.
+	void analyzeScreenLabel() const;
+#endif
 signals:
 	//! Emitted whenever the default sky culture changed.
 	//! @see setDefaultSkyCultureID
