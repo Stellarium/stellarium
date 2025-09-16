@@ -2,7 +2,6 @@
 #define SKYCULTUREPOLYGONITEM_HPP
 
 #include <QGraphicsPolygonItem>
-#include <QGraphicsView>
 
 class SkyculturePolygonItem : public QGraphicsPolygonItem
 {
@@ -11,6 +10,7 @@ public:
 	SkyculturePolygonItem(QString skycultureId, int startTime, int endTime);
 
 	// public functions
+	void setSelectionState(bool newSelectionState);
 	const QString& getSkycultureId() const {return skycultureId;}
 	int getStartTime() const {return startTime;}
 	int getEndTime() const {return endTime;}
@@ -28,6 +28,7 @@ protected:
 	// protected functions
 	void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
 	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+	QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;
 
 private:
 	// important culture data
@@ -36,7 +37,9 @@ private:
 	int endTime;
 
 	// utility for change of appearance at runtime
+	bool lastSelectedState;
 	bool isHovered;
+
 };
 
 #endif // SKYCULTUREPOLYGONITEM_HPP
