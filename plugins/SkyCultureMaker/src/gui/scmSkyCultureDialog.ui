@@ -2,26 +2,6 @@
 <ui version="4.0">
  <class>scmSkyCultureDialog</class>
  <widget class="QWidget" name="scmSkyCultureDialog">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>355</width>
-    <height>426</height>
-   </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>355</width>
-    <height>0</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>1000000</width>
-    <height>999999</height>
-   </size>
-  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
@@ -77,12 +57,6 @@
       </property>
       <item>
        <widget class="QTabWidget" name="tabs">
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>800</height>
-         </size>
-        </property>
         <property name="currentIndex">
          <number>0</number>
         </property>
@@ -105,23 +79,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="skyCultureNameTE">
-            <property name="minimumSize">
-             <size>
-              <width>100</width>
-              <height>32</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>32</height>
-             </size>
-            </property>
-            <property name="acceptRichText">
-             <bool>false</bool>
-            </property>
-           </widget>
+           <widget class="QLineEdit" name="skyCultureNameLE"/>
           </item>
           <item>
            <widget class="QLabel" name="constellationsLbl">
@@ -132,12 +90,6 @@
           </item>
           <item>
            <widget class="QListWidget" name="constellationsList">
-            <property name="minimumSize">
-             <size>
-              <width>100</width>
-              <height>64</height>
-             </size>
-            </property>
             <property name="styleSheet">
              <string notr="true">
               QListWidget, QListWidget::viewport {
@@ -166,12 +118,6 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="minimumSize">
-               <size>
-                <width>140</width>
-                <height>0</height>
-               </size>
-              </property>
               <property name="text">
                <string>Add Constellation</string>
               </property>
@@ -184,12 +130,6 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>140</width>
-                <height>0</height>
-               </size>
               </property>
               <property name="text">
                <string>Add Dark Constellation</string>
@@ -204,12 +144,6 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="minimumSize">
-               <size>
-                <width>140</width>
-                <height>0</height>
-               </size>
-              </property>
               <property name="text">
                <string>Edit</string>
               </property>
@@ -222,12 +156,6 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>140</width>
-                <height>0</height>
-               </size>
               </property>
               <property name="text">
                <string>Remove</string>
@@ -263,12 +191,6 @@
             </item>
             <item>
              <widget class="QPushButton" name="ExportSkyCultureBtn">
-              <property name="minimumSize">
-               <size>
-                <width>130</width>
-                <height>0</height>
-               </size>
-              </property>
               <property name="text">
                <string>Export Sky Culture</string>
               </property>
@@ -304,14 +226,6 @@
              <bool>true</bool>
             </property>
             <widget class="QWidget" name="descriptionScrollContent">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>320</width>
-               <height>1886</height>
-              </rect>
-             </property>
              <layout class="QVBoxLayout" name="descriptionLayout">
               <property name="spacing">
                <number>12</number>
@@ -388,12 +302,6 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="authorsTE">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>80</height>
-                    </size>
-                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -411,12 +319,6 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="cultureDescriptionTE">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>120</height>
-                    </size>
-                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -434,12 +336,6 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="aboutTE">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>120</height>
-                    </size>
-                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -485,12 +381,6 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="skyTE">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>100</height>
-                    </size>
-                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -508,12 +398,6 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="moonSunTE">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>100</height>
-                    </size>
-                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -531,12 +415,6 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="planetsTE">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>100</height>
-                    </size>
-                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -554,12 +432,6 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="zodiacTE">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>100</height>
-                    </size>
-                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -577,12 +449,6 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="milkyWayTE">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>100</height>
-                    </size>
-                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -600,12 +466,6 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="otherObjectsTE">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>100</height>
-                    </size>
-                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -623,12 +483,6 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="constellationsDescTE">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>100</height>
-                    </size>
-                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -670,12 +524,6 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="referencesTE">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>120</height>
-                    </size>
-                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -693,12 +541,6 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="acknowledgementsTE">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>120</height>
-                    </size>
-                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -734,7 +576,10 @@
       <item>
        <layout class="QHBoxLayout">
         <item>
-         <spacer name="horizontalSpacerLeft">
+         <spacer name="bottomVerticalSpacerLeft">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>40</width>
@@ -754,7 +599,10 @@
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacerRight">
+         <spacer name="bottomVerticalSpacerRight">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>40</width>

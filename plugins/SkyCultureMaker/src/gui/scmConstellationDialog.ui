@@ -2,26 +2,6 @@
 <ui version="4.0">
  <class>scmConstellationDialog</class>
  <widget class="QWidget" name="scmConstellationDialog">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>360</width>
-    <height>454</height>
-   </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>360</width>
-    <height>454</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>1000000</width>
-    <height>999999</height>
-   </size>
-  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
@@ -84,12 +64,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="undoBtn">
+           <property name="toolTip">
+            <string>Revert the last drawn line.</string>
+           </property>
            <property name="text">
             <string>Undo</string>
            </property>
-           <property name="toolTip">
-            <string>Revert the last drawn line.</string>
-            </property>
           </widget>
          </item>
          <item>
@@ -127,8 +107,7 @@
         <number>10</number>
        </property>
        <item>
-        <widget class="QLabel" name="labelsTitle">
-        </widget>
+        <widget class="QLabel" name="labelsTitle"/>
        </item>
        <item>
         <widget class="QLabel" name="enNameLbl">
@@ -138,12 +117,13 @@
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="enNameTE">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>32</height>
-          </size>
+        <widget class="QLineEdit" name="enNameLE">
+         <property name="html" stdset="0">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
@@ -155,14 +135,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="idTE">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>32</height>
-          </size>
-         </property>
-        </widget>
+        <widget class="QLineEdit" name="idLE"/>
        </item>
        <item>
         <widget class="QLabel" name="natNameLbl">
@@ -172,14 +145,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="natNameTE">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>32</height>
-          </size>
-         </property>
-        </widget>
+        <widget class="QLineEdit" name="natNameLE"/>
        </item>
        <item>
         <widget class="QLabel" name="pronounceLbl">
@@ -189,14 +155,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="pronounceTE">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>32</height>
-          </size>
-         </property>
-        </widget>
+        <widget class="QLineEdit" name="pronounceLE"/>
        </item>
        <item>
         <widget class="QLabel" name="ipaLbl">
@@ -206,27 +165,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="ipaTE">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>32</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
+        <widget class="QLineEdit" name="ipaLE"/>
        </item>
       </layout>
      </widget>
@@ -259,26 +198,23 @@
           <bool>true</bool>
          </property>
          <property name="frameShape">
-          <enum>QFrame::Shape::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Shadow::Plain</enum>
+          <enum>QFrame::NoFrame</enum>
          </property>
          <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+          <enum>Qt::ScrollBarAsNeeded</enum>
          </property>
          <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+          <enum>Qt::ScrollBarAsNeeded</enum>
          </property>
          <property name="sizeAdjustPolicy">
-          <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustIgnored</enum>
+          <enum>QAbstractScrollArea::AdjustIgnored</enum>
          </property>
         </widget>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0">
          <property name="sizeConstraint">
-          <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+          <enum>QLayout::SetDefaultConstraint</enum>
          </property>
          <property name="leftMargin">
           <number>0</number>
@@ -346,7 +282,7 @@
             <cursorShape>WhatsThisCursor</cursorShape>
            </property>
            <property name="contextMenuPolicy">
-            <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
+            <enum>Qt::NoContextMenu</enum>
            </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span&gt;Usage:&lt;br/&gt;1. Upload an image&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;2. Three anchor points appear in the center of the image&lt;br/&gt;- An anchor is green when selected&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;3. Select a star of your choice&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;4. Click the 'Bind Star' button &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;5. The anchor is represented in a brighter color to indicate that it is bound to a star&lt;br/&gt;-  The corresponding bound star gets automatically selected when an anchor is selected &lt;br/&gt;- 'Bind Star' does overwrite the current binding with the selected star if a binding already exists&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -374,7 +310,7 @@
      </widget>
     </widget>
    </item>
-   <item alignment="Qt::AlignmentFlag::AlignBottom">
+   <item>
     <widget class="QFrame" name="Content">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -383,7 +319,7 @@
       </sizepolicy>
      </property>
      <property name="frameShape">
-      <enum>QFrame::Shape::NoFrame</enum>
+      <enum>QFrame::NoFrame</enum>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <property name="spacing">
@@ -429,7 +365,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="infoLayout">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
         <property name="leftMargin">
          <number>20</number>
         </property>
@@ -440,9 +376,36 @@
          <number>20</number>
         </property>
         <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <widget class="QLabel" name="infoLbl">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <kerning>true</kerning>
+           </font>
+          </property>
           <property name="text">
            <string/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
           </property>
           <property name="wordWrap">
            <bool>true</bool>
@@ -450,19 +413,6 @@
          </widget>
         </item>
        </layout>
-      </item>
-      <item>
-       <spacer name="ConstEditorSpacer">
-        <property name="orientation">
-         <enum>Qt::Orientation::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>10</height>
-         </size>
-        </property>
-       </spacer>
       </item>
      </layout>
     </widget>

@@ -86,10 +86,10 @@ void ScmSkyCultureDialog::createDialogContent()
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmSkyCultureDialog::close);
 
 	// Overview Tab
-	connect(ui->skyCultureNameTE, &QTextEdit::textChanged, this,
+	connect(ui->skyCultureNameLE, &QLineEdit::textChanged, this,
 	        [this]()
 	        {
-			name = ui->skyCultureNameTE->toPlainText();
+			name = ui->skyCultureNameLE->text();
 			if (name.isEmpty())
 			{
 				ui->ExportSkyCultureBtn->setEnabled(false);
@@ -300,7 +300,7 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 {
 	scm::Description desc;
 
-	desc.name               = ui->skyCultureNameTE->toPlainText();
+	desc.name               = ui->skyCultureNameLE->text();
 	desc.authors            = ui->authorsTE->toPlainText();
 	desc.license            = ui->licenseCB->currentData().value<scm::LicenseType>();
 	desc.cultureDescription = ui->cultureDescriptionTE->toPlainText();
@@ -337,7 +337,7 @@ void ScmSkyCultureDialog::resetDialog()
 {
 	if (ui && dialog)
 	{
-		ui->skyCultureNameTE->clear();
+		ui->skyCultureNameLE->clear();
 		ui->authorsTE->clear();
 		ui->cultureDescriptionTE->clear();
 		ui->aboutTE->clear();

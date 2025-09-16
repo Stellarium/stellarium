@@ -79,11 +79,11 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 	constellationPronounce     = constellation->getPronounce();
 	constellationIPA           = constellation->getIPA();
 
-	ui->enNameTE->setPlainText(constellationEnglishName);
-	ui->idTE->setPlainText(constellationId);
-	ui->natNameTE->setPlainText(constellationNativeName.value_or(""));
-	ui->pronounceTE->setPlainText(constellationPronounce.value_or(""));
-	ui->ipaTE->setPlainText(constellationIPA.value_or(""));
+	ui->enNameLE->setText(constellationEnglishName);
+	ui->idLE->setText(constellationId);
+	ui->natNameLE->setText(constellationNativeName.value_or(""));
+	ui->pronounceLE->setText(constellationPronounce.value_or(""));
+	ui->ipaLE->setText(constellationIPA.value_or(""));
 
 	// Hide the original constellation while editing
 	constellation->hide();
@@ -200,38 +200,38 @@ void ScmConstellationDialog::createDialogContent()
 
 	// LABELS TAB
 
-	connect(ui->enNameTE, &QTextEdit::textChanged, this,
+	connect(ui->enNameLE, &QLineEdit::textChanged, this,
 	        [this]()
 	        {
-			constellationEnglishName = ui->enNameTE->toPlainText();
+			constellationEnglishName = ui->enNameLE->text();
 
 			QString newConstId         = constellationEnglishName.toLower().replace(" ", "_");
 			constellationPlaceholderId = newConstId;
-			ui->idTE->setPlaceholderText(newConstId);
+			ui->idLE->setPlaceholderText(newConstId);
 		});
-	connect(ui->idTE, &QTextEdit::textChanged, this, [this]() { constellationId = ui->idTE->toPlainText(); });
-	connect(ui->natNameTE, &QTextEdit::textChanged, this,
+	connect(ui->idLE, &QLineEdit::textChanged, this, [this]() { constellationId = ui->idLE->text(); });
+	connect(ui->natNameLE, &QLineEdit::textChanged, this,
 	        [this]()
 	        {
-			constellationNativeName = ui->natNameTE->toPlainText();
+			constellationNativeName = ui->natNameLE->text();
 			if (constellationNativeName->isEmpty())
 			{
 				constellationNativeName = std::nullopt;
 			}
 		});
-	connect(ui->pronounceTE, &QTextEdit::textChanged, this,
+	connect(ui->pronounceLE, &QLineEdit::textChanged, this,
 	        [this]()
 	        {
-			constellationPronounce = ui->pronounceTE->toPlainText();
+			constellationPronounce = ui->pronounceLE->text();
 			if (constellationPronounce->isEmpty())
 			{
 				constellationPronounce = std::nullopt;
 			}
 		});
-	connect(ui->ipaTE, &QTextEdit::textChanged, this,
+	connect(ui->ipaLE, &QLineEdit::textChanged, this,
 	        [this]()
 	        {
-			constellationIPA = ui->ipaTE->toPlainText();
+			constellationIPA = ui->ipaLE->text();
 			if (constellationIPA->isEmpty())
 			{
 				constellationIPA = std::nullopt;
@@ -524,22 +524,22 @@ void ScmConstellationDialog::resetDialog()
 	setIsDarkConstellation(false);
 
 	constellationId.clear();
-	ui->idTE->clear();
+	ui->idLE->clear();
 
 	constellationPlaceholderId.clear();
-	ui->idTE->setPlaceholderText("");
+	ui->idLE->setPlaceholderText("");
 
 	constellationEnglishName.clear();
-	ui->enNameTE->clear();
+	ui->enNameLE->clear();
 
 	constellationNativeName = std::nullopt;
-	ui->natNameTE->clear();
+	ui->natNameLE->clear();
 
 	constellationPronounce = std::nullopt;
-	ui->pronounceTE->clear();
+	ui->pronounceLE->clear();
 
 	constellationIPA = std::nullopt;
-	ui->ipaTE->clear();
+	ui->ipaLE->clear();
 
 	ui->bind_star->setEnabled(false);
 	imageItem->hide();

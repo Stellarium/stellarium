@@ -34,7 +34,6 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QLabel>
-#include <QMessageBox>
 #include <QVBoxLayout>
 
 ScmStartDialog::ScmStartDialog(SkyCultureMaker *maker)
