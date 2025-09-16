@@ -52,6 +52,7 @@ private:
 	QList<QPointF> convertMeterToView(const QList<QPointF> &irl, qreal mapWidth, qreal mapHeight);
 	void updateCultureVisibility();
 	void smoothFitInView(QRectF targetRect);
+	void selectAllCulturePolygon(const QString &skycultureId);
 	qreal calculateScaleRatio(qreal width, qreal height);
 
 

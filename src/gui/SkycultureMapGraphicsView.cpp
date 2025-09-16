@@ -10,6 +10,7 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	: QGraphicsView(parent)
 	, minYear(-2000)
 	, maxYear(2000)
+	, firstShow(true)
 	, currentYear(0)
 	, oldSkyCulture("")
 {
@@ -193,8 +194,9 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	scene->addItem(aztec);
 
 	// workaround needed to preserve the correct component sizes (without the 'scale' operation the culturesListWidget is being squished and the culture names are not readable)
-	scale(0.18, 0.18); // empirically determined value at which the list reaches its preferred width
-	smoothFitInView(baseMap->boundingRect()); // reusing the smooth zoom feature from culture selection, in theory only the first part (zoom to default) is needed
+	//scale(0.2, 0.2); // empirically determined value
+	//smoothFitInView(baseMap->boundingRect()); // reusing the smooth zoom feature from culture selection, in theory only the first part (zoom to default) is needed
+	targetRect = baseMap->boundingRect();
 }
 
 void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *event)
@@ -379,6 +381,35 @@ QList<QPointF> SkycultureMapGraphicsView::convertMeterToView(const QList<QPointF
 	return view_coords;
 }
 
+void SkycultureMapGraphicsView::selectAllCulturePolygon(const QString &skycultureId)
+{
+	for (const auto &item : scene()->items())
+	{
+		SkyculturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyculturePolygonItem *>(item);
+		if (!scPolyItem)
+		{
+			continue;
+		}
+
+		scPolyItem->setSelectionState(false);
+
+		if (skycultureId == scPolyItem->getSkycultureId())
+		{
+			// items can't be selected when hidden
+			if (!scPolyItem->isVisible())
+			{
+				scPolyItem->setVisible(true);
+				scPolyItem->setSelectionState(true);
+				scPolyItem->setVisible(false);
+			}
+			else
+			{
+				scPolyItem->setSelectionState(true);
+			}
+		}
+	}
+}
+
 void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId)
 {
 	qInfo() << "beginning of selectCulture!";
@@ -433,8 +464,9 @@ void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId)
 	}
 
 	// select the new culture
-	scene()->clearSelection();
-	skyCulturePolygon->setSelected(true);
+	//scene()->clearSelection();
+	//skyCulturePolygon->setSelected(true);
+	selectAllCulturePolygon(skycultureId);
 
 	// start zoom (async?) to polygon and set TimeSlider to correct time (startTime of selected polygon?)
 	//fitInView(skyCulturePolygon->boundingRect(), Qt::KeepAspectRatio); --> funktioniert aber sehr passgenau
@@ -503,6 +535,9 @@ void SkycultureMapGraphicsView::updateCultureVisibility()
 
 void SkycultureMapGraphicsView::smoothFitInView(QRectF targetRect)
 {
+	// zoomOnTargetTimer needs to be stopped when the user selects another culture (starts a new zoom operation) while the old one hasnt finished
+	zoomOnTargetTimer.stop();
+
 	// update global variables so that they can be accessed by the slots 'zoomToDefault' and 'zoomOnTarget'
 	this->targetRect = targetRect;
 	this->startingRect = mapToScene(viewport()->rect()).boundingRect();
