@@ -176,13 +176,13 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	// check if license is set
 	if (desc.license == scm::LicenseType::NONE)
 	{
-		ui->infoLbl->setText(q_("WARNING: Please select a license for the sky culture."));
+		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("Please select a license for the sky culture."));
 		return;
 	}
 	// check if description is complete
 	if (!desc.isComplete())
 	{
-		ui->infoLbl->setText(q_("WARNING: The sky culture description is not complete."));
+		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("The sky culture description is not complete. Please fill in all required fields."));
 		return;
 	}
 
@@ -321,18 +321,6 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 	return desc;
 }
 
-void ScmSkyCultureDialog::setInfoLabel(const QString &text)
-{
-	if (ui && dialog)
-	{
-		ui->infoLbl->setText(text);
-	}
-	else
-	{
-		qDebug() << "ScmSkyCultureDialog: UI or dialog is not initialized.";
-	}
-}
-
 void ScmSkyCultureDialog::resetDialog()
 {
 	if (ui && dialog)
@@ -357,7 +345,6 @@ void ScmSkyCultureDialog::resetDialog()
 		name.clear();
 		setIdFromName(name);
 		resetConstellations();
-		maker->setSkyCultureDialogInfoLabel("");
 		maker->setSkyCultureDescription(getDescriptionFromTextEdit());
 		updateRemoveConstellationButton();
 	}

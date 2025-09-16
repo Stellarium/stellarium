@@ -115,7 +115,7 @@ void ScmConstellationDialog::setIsDarkConstellation(bool isDark)
 	}
 
 	// the value changed, so we should reset some data from the previous mode
-	if(isDarkConstellation != isDark)
+	if (isDarkConstellation != isDark)
 	{
 		// reset drawn lines as they are not compatible between modes
 		draw->resetDrawing();
@@ -241,10 +241,6 @@ void ScmConstellationDialog::createDialogContent()
 
 void ScmConstellationDialog::handleFontChanged()
 {
-	QFont infoLblFont = QApplication::font();
-	infoLblFont.setBold(true);
-	ui->infoLbl->setFont(infoLblFont);
-
 	QFont labelsTitleFont = QApplication::font();
 	labelsTitleFont.setPixelSize(labelsTitleFont.pixelSize() + 2);
 	labelsTitleFont.setBold(true);
@@ -300,7 +296,8 @@ void ScmConstellationDialog::triggerUploadImage()
 
 	if (!fileInfo.isFile())
 	{
-		ui->infoLbl->setText(q_("Choosen path is not a valid file:\n") + filePath);
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		                            q_("Chosen path is not a valid file:\n") + filePath);
 		return;
 	}
 
@@ -308,12 +305,10 @@ void ScmConstellationDialog::triggerUploadImage()
 	      fileInfo.suffix().compare("JPG", Qt::CaseInsensitive) == 0 ||
 	      fileInfo.suffix().compare("JPEG", Qt::CaseInsensitive) == 0))
 	{
-		ui->infoLbl->setText(q_("Chosen file is not a PNG, JPG or JPEG image:\n") + filePath);
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		                            q_("Chosen file is not a PNG, JPG or JPEG image:\n") + filePath);
 		return;
 	}
-
-	// Reset text
-	ui->infoLbl->setText("");
 
 	QPixmap image = QPixmap(fileInfo.absoluteFilePath());
 	imageItem->setImage(image);
@@ -337,7 +332,8 @@ void ScmConstellationDialog::bindSelectedStar()
 {
 	if (!imageItem->hasAnchorSelection())
 	{
-		ui->infoLbl->setText(q_("WARNING: Select an anchor to bind to."));
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		                            q_("No anchor was selected. Please select an anchor to bind to."));
 		qDebug() << "SkyCultureMaker: No anchor was selected.";
 		return;
 	}
@@ -347,37 +343,40 @@ void ScmConstellationDialog::bindSelectedStar()
 
 	if (!objectMgr.getWasSelected())
 	{
-		ui->infoLbl->setText(q_("WARNING: Select a star to bind to the current selected anchor."));
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		                            q_("No star was selected to bind to the current selected anchor."));
 		qDebug() << "SkyCultureMaker: No star was selected to bind to.";
 		return;
 	}
 
 	StelObjectP stelObj = objectMgr.getLastSelectedObject();
 	assert(stelObj != nullptr); // Checked through getWasSelected
-	if (stelObj->getType().compare("star", Qt::CaseInsensitive) != 0)
+	if (stelObj->getType().compare("star", Qt::CaseInsensitive) != 0 &&
+	    stelObj->getType().compare("nebula", Qt::CaseInsensitive) != 0)
 	{
-		ui->infoLbl->setText(q_("WARNING: The selected object must be of type star."));
-		qDebug() << "SkyCultureMaker: The selected object is not of type start, got " << stelObj->getType();
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		                            q_("The selected object must be of type Star or Nebula."));
+		qDebug() << "SkyCultureMaker: The selected object is not of type Star, got " << stelObj->getType();
 		return;
 	}
 
 	ScmConstellationImageAnchor *anchor = imageItem->getSelectedAnchor();
 	if (anchor == nullptr)
 	{
-		ui->infoLbl->setText(q_("WARNING: No anchor is selected."));
-		qDebug() << "SkyCultureMaker: No anchor is selected";
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		                            q_("No anchor was selected. Please select an anchor to bind to."));
+		qDebug() << "SkyCultureMaker: No anchor was selected";
 		return;
 	}
 
 	bool success = anchor->trySetStarHip(stelObj->getID());
 	if (success == false)
 	{
-		ui->infoLbl->setText(q_("WARNING: The selected object must contain a HIP number."));
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		                            q_("The selected object must contain a HIP number."));
 		qDebug() << "SkyCultureMaker: The object does not contain a HIP, id = " << stelObj->getID();
 		return;
 	}
-
-	ui->infoLbl->setText(""); // Reset
 
 	updateArtwork();
 }
@@ -396,14 +395,16 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	scm::ScmSkyCulture *currentSkyCulture = maker->getCurrentSkyCulture();
 	if (currentSkyCulture == nullptr)
 	{
-		ui->infoLbl->setText(q_("WARNING: Could not save: Sky Culture is not set"));
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		                            q_("Could not save: Sky Culture is not set"));
 		qDebug() << "SkyCultureMaker: Could not save: Sky Culture is not set";
 		return false;
 	}
 
 	if (constellationEnglishName.isEmpty())
 	{
-		ui->infoLbl->setText(q_("WARNING: Could not save: English name is empty"));
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		                            q_("Could not save: English name is empty"));
 		qDebug() << "SkyCultureMaker: Could not save: English name is empty";
 		return false;
 	}
@@ -412,7 +413,8 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	QString finalId = constellationId.isEmpty() ? constellationPlaceholderId : constellationId;
 	if (finalId.isEmpty())
 	{
-		ui->infoLbl->setText(q_("WARNING: Could not save: Constellation ID is empty"));
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		                            q_("Could not save: Constellation ID is empty"));
 		qDebug() << "SkyCultureMaker: Could not save: Constellation ID is empty";
 		return false;
 	}
@@ -420,7 +422,8 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	// Not editing a constellation, but the ID already exists
 	if (constellationBeingEdited == nullptr && currentSkyCulture->getConstellation(finalId) != nullptr)
 	{
-		ui->infoLbl->setText(q_("WARNING: Could not save: Constellation with this ID already exists"));
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		                            q_("Could not save: Constellation with this ID already exists"));
 		qDebug() << "SkyCultureMaker: Could not save: Constellation with this ID already exists, id = "
 			 << finalId;
 		return false;
@@ -429,7 +432,8 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	else if (constellationBeingEdited != nullptr && constellationBeingEdited->getId() != finalId &&
 	         currentSkyCulture->getConstellation(finalId) != nullptr)
 	{
-		ui->infoLbl->setText(q_("WARNING: Could not save: Constellation with this ID already exists"));
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		                            q_("Could not save: Constellation with this ID already exists"));
 		qDebug() << "SkyCultureMaker: Could not save: Constellation with this ID already exists, id = "
 			 << finalId;
 		return false;
@@ -439,7 +443,8 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	auto drawnConstellation = maker->getScmDraw()->getCoordinates();
 	if (drawnConstellation.empty())
 	{
-		ui->infoLbl->setText(q_("WARNING: Could not save: The constellation does not contain any drawings"));
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+		                            q_("Could not save: The constellation does not contain any drawings"));
 		qDebug() << "SkyCultureMaker: Could not save: The constellation does not contain any drawings";
 		return false;
 	}
@@ -449,8 +454,9 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	{
 		if (!imageItem->isImageAnchored())
 		{
-			ui->infoLbl->setText(q_("WARNING: Could not save: An artwork is attached, but not all "
-			                        "anchors have a star bound."));
+			maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
+			                            q_("Could not save: An artwork is attached, but not all "
+			                               "anchors have a star bound."));
 			qDebug() << "SkyCultureMaker: Could not save: An artwork is attached, but not all "
 				    "anchors have a star bound.";
 			return false;

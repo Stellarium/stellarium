@@ -428,14 +428,6 @@ void SkyCultureMaker::updateSkyCultureDialog()
 	scmSkyCultureDialog->setConstellations(currentSkyCulture->getConstellations());
 }
 
-void SkyCultureMaker::setSkyCultureDialogInfoLabel(const QString &text)
-{
-	if (scmSkyCultureDialog != nullptr)
-	{
-		scmSkyCultureDialog->setInfoLabel(text);
-	}
-}
-
 void SkyCultureMaker::setSkyCultureDescription(const scm::Description &description)
 {
 	if (currentSkyCulture != nullptr)
@@ -584,4 +576,25 @@ void SkyCultureMaker::initSetting(QSettings *conf, const QString key, const QVar
 	{
 		conf->setValue(key, defaultValue);
 	}
+}
+
+void SkyCultureMaker::showUserInfoMessage(QWidget *parent, const QString &dialogName, const QString &message)
+{
+	const QString level = q_("INFO");
+	const QString title = dialogName.isEmpty() ? level : dialogName + ": " + level;
+	QMessageBox::information(parent, title, message);
+}
+
+void SkyCultureMaker::showUserWarningMessage(QWidget *parent, const QString &dialogName, const QString &message)
+{
+	const QString level = q_("WARNING");
+	const QString title = dialogName.isEmpty() ? level : dialogName + ": " + level;
+	QMessageBox::warning(parent, title, message);
+}
+
+void SkyCultureMaker::showUserErrorMessage(QWidget *parent, const QString &dialogName, const QString &message)
+{
+	const QString level = q_("ERROR");
+	const QString title = dialogName.isEmpty() ? level : dialogName + ": " + level;
+	QMessageBox::critical(parent, title, message);
 }

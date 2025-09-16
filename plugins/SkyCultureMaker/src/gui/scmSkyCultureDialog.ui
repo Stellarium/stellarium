@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>scmSkyCultureDialog</class>
  <widget class="QWidget" name="scmSkyCultureDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>372</width>
+    <height>543</height>
+   </rect>
+  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
@@ -226,6 +234,14 @@
              <bool>true</bool>
             </property>
             <widget class="QWidget" name="descriptionScrollContent">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>229</width>
+               <height>2930</height>
+              </rect>
+             </property>
              <layout class="QVBoxLayout" name="descriptionLayout">
               <property name="spacing">
                <number>12</number>
@@ -574,44 +590,7 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout">
-        <item>
-         <spacer name="bottomVerticalSpacerLeft">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="infoLbl">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="bottomVerticalSpacerRight">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
+       <layout class="QHBoxLayout"/>
       </item>
      </layout>
     </widget>
