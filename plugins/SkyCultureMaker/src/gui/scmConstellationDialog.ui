@@ -175,6 +175,19 @@ p, li { white-space: pre-wrap; }
        <item>
         <widget class="QLineEdit" name="ipaLE"/>
        </item>
+       <item>
+        <spacer name="constTabVertSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="artworkTab">
@@ -321,7 +334,7 @@ p, li { white-space: pre-wrap; }
    <item>
     <widget class="QFrame" name="Content">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -353,8 +366,14 @@ p, li { white-space: pre-wrap; }
         <property name="leftMargin">
          <number>20</number>
         </property>
+        <property name="topMargin">
+         <number>10</number>
+        </property>
         <property name="rightMargin">
          <number>20</number>
+        </property>
+        <property name="bottomMargin">
+         <number>10</number>
         </property>
         <item>
          <widget class="QPushButton" name="saveBtn">
