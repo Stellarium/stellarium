@@ -163,9 +163,7 @@ bool scm::ScmSkyCulture::saveDescriptionAsMarkdown(QFile &file)
 
 		out << "## References\n" << desc.references << "\n\n";
 
-		out << "## Classification\n " << classificationTypeToString(desc.classification) << "\n\n";
-
-		out << "## License\n### " << license.name << "\n" << license.description << "\n\n";
+		out << "## License\n\n" << license.name << "\n\n";
 
 		try
 		{

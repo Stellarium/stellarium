@@ -50,21 +50,29 @@ enum class LicenseType
 {
 	NONE = 0,
 	CC0,
-	CC_BY
+	CC_BY,
+	CC_BY_NC,
+	CC_BY_ND,
+	CC_BY_NC_ND
 };
 
 //! Map of license types to their corresponding name and description
 const std::map<LicenseType, License> LICENSES = {
 	{LicenseType::NONE, License("None", "Please select a valid license.")},
-	{LicenseType::CC0, License("CC0",
+	{LicenseType::CC0, License("CC0 1.0",
         "This file is made available under the Creative Commons CC0 1.0 Universal Public Domain Dedication. "
         "The person who associated a work with this deed has dedicated the work to the public domain by "
         "waiving all of his or her rights to the work worldwide under copyright law, including all related "
         "and neighboring rights, to the extent allowed by law. You can copy, modify, distribute and perform "
         "the work, even for commercial purposes, all without asking permission.")},
-	{LicenseType::CC_BY, License("CC BY", 
-        "This work is licensed under the Creative Commons Attribution 4.0 License; Reusage allowed" 
-        " - please mention author(s).")}
+	{LicenseType::CC_BY, License("CC BY 4.0", 
+        "This work is licensed under the Creative Commons Attribution 4.0 License.")},
+	{LicenseType::CC_BY_NC, License("CC BY-NC 4.0", 
+		"This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 License.")},
+	{LicenseType::CC_BY_ND, License("CC BY-ND 4.0", 
+		"This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 License.")},
+	{LicenseType::CC_BY_NC_ND, License("CC BY-NC-ND 4.0", 
+		"This work is licensed under the Creative Commons Attribution-NoDerivatives 4.0 License.")}
 };
 
 } // namespace scm
