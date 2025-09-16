@@ -5,7 +5,7 @@
 #include <QGraphicsView>
 
 //! @class SkyCultureMapGraphicsView
-//! Special GraphicsView that shows a world map and several polygons (cultures)
+//! Special GraphicsView that shows a world map and several (culture) polygons
 class SkycultureMapGraphicsView : public QGraphicsView
 {
 	Q_OBJECT
@@ -31,12 +31,14 @@ protected:
 	void mouseMoveEvent(QMouseEvent *event) override;
 	void mousePressEvent(QMouseEvent *event) override;
 	void mouseReleaseEvent(QMouseEvent *event) override;
+	void showEvent(QShowEvent *event) override;
 	void scaleView(double scaleFactor);
 
 private:
 	// variables
 	int minYear;
 	int maxYear;
+	bool firstShow;
 	int currentYear;
 	QString oldSkyCulture;
 	QTimeLine zoomToDefaultTimer;

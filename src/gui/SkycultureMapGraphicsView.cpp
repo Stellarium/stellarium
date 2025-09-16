@@ -278,10 +278,21 @@ void SkycultureMapGraphicsView::mousePressEvent(QMouseEvent *event)
 }
 
 void SkycultureMapGraphicsView::mouseReleaseEvent(QMouseEvent *event)
+void SkycultureMapGraphicsView::showEvent(QShowEvent *event)
 {
-	QGraphicsView::mouseReleaseEvent(event);
+	// fit the base map to the current view when the widget is first shown
+	// (This cannot be done beforehand because the calculation is based on the current size of the viewPort.
+	// The viewPort is smaller than it should be until the first show because the widget is located on the stackedWidget in ViewDialog.
+	// The boolean firstShow is used so the map doesn't reset itself every time the user changes pages or closes the ViewDialog.)
+	if (firstShow)
+	{
+		qreal ratio = calculateScaleRatio(defaultRect.width(), defaultRect.height());
+		scale(ratio, ratio);
+		centerOn(defaultRect.center());
+		firstShow = false;
+	}
 
-	QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
+	QGraphicsView::showEvent(event);
 }
 
 void SkycultureMapGraphicsView::scaleView(double factor)
