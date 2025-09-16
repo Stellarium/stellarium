@@ -190,6 +190,8 @@ void ScmConstellationDialog::createDialogContent()
 		});
 	imageItem->setAnchorPositionChangedCallback([this]() { this->updateArtwork(); });
 
+	ui->tooltipBtn->setToolTip(artworkToolTip);
+
 	connect(ui->saveBtn, &QPushButton::clicked, this, &ScmConstellationDialog::saveConstellation);
 	connect(ui->cancelBtn, &QPushButton::clicked, this, &ScmConstellationDialog::cancel);
 
