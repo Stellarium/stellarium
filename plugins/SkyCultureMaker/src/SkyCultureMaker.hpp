@@ -260,8 +260,6 @@ public:
 	 */
 	void showUserErrorMessage(QWidget *parent, const QString &dialogName, const QString &message);
 
-	
-
 signals:
 	void eventIsScmEnabled(bool b);
 
