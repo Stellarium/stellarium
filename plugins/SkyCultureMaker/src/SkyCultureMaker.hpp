@@ -37,6 +37,7 @@
 #include <QDir>
 #include <QFile>
 #include <QFont>
+#include <QMessageBox>
 
 class QPixmap;
 class StelButton;
@@ -178,12 +179,6 @@ public:
 	void updateSkyCultureDialog();
 
 	/**
-	 * @brief Sets the info label text in the sky culture dialog.
-	 * @param text The text to set in the info label.
-	 */
-	void setSkyCultureDialogInfoLabel(const QString &text);
-
-	/**
 	 * @brief Sets the current sky culture description.
 	 * @param description The description to set.
 	 */
@@ -237,6 +232,33 @@ public:
 	 * @param constellationId The ID of the constellation to open the dialog for.
 	 */
 	void openConstellationDialog(const QString &constellationId);
+
+	/**
+	 * @brief Displays an information message to the user.
+	 * 
+	 * @param parent The parent widget of the message box.
+	 * @param dialogName The name of the dialog to be shown in the title bar.
+	 * @param message The message to be displayed.
+	 */
+	void showUserInfoMessage(QWidget *parent, const QString &dialogName, const QString &message);
+
+	/**
+	 * @brief Displays a warning message to the user.
+	 * 
+	 * @param parent The parent widget of the message box.
+	 * @param dialogName The name of the dialog to be shown in the title bar.
+	 * @param message The message to be displayed.
+	 */
+	void showUserWarningMessage(QWidget *parent, const QString &dialogName, const QString &message);
+
+	/**
+	 * @brief Displays an error message to the user.
+	 * 
+	 * @param parent The parent widget of the message box.
+	 * @param dialogName The name of the dialog to be shown in the title bar.
+	 * @param message The message to be displayed.
+	 */
+	void showUserErrorMessage(QWidget *parent, const QString &dialogName, const QString &message);
 
 signals:
 	void eventIsScmEnabled(bool b);

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>200</height>
+    <width>304</width>
+    <height>93</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -102,6 +102,9 @@
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
+             </property>
+             <property name="margin">
+              <number>20</number>
              </property>
             </widget>
            </item>

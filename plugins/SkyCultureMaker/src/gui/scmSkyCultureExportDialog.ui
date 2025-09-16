@@ -2,31 +2,11 @@
 <ui version="4.0">
  <class>scmSkyCultureExportDialog</class>
  <widget class="QWidget" name="scmSkyCultureExportDialog">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>656</width>
-    <height>300</height>
-   </rect>
-  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>400</width>
-    <height>250</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>1000000</width>
-    <height>999999</height>
-   </size>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
