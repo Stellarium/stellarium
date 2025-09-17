@@ -90,9 +90,14 @@ public:
 	//! @param xshift shift in pixel in the rotated x direction.
 	//! @param yshift shift in pixel in the rotated y direction.
 	//! @param noGravity don't take into account the fact that the text should be written with gravity.
-	//! @param v direction vector of object to draw. GZ20120826: Will draw only if this is in the visible hemisphere.
 	void drawText(float x, float y, const QString& str, float angleDeg=0.f,
               float xshift=0.f, float yshift=0.f, bool noGravity=true);
+	//! @param v direction vector of object to draw. Will draw only if this is in the visible hemisphere.
+	//! @param str the text to print.
+	//! @param angleDeg rotation angle in degree. Rotation is around x,y. Only used if noGravity=true
+	//! @param xshift shift in pixel in the rotated x direction.
+	//! @param yshift shift in pixel in the rotated y direction.
+	//! @param noGravity don't take into account the fact that the text should be written with gravity.
 	void drawText(const Vec3d& v, const QString& str, float angleDeg=0.f,
               float xshift=0.f, float yshift=0.f, bool noGravity=true);
 
@@ -396,6 +401,12 @@ private:
             double maxSqDistortion=5., int nbI=0,
             bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
 
+	//! Draw the string starting at the given position x/y with the current font. The string is split into single characters and rotated against the view center for planetarium dome use.
+	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.
+	//! @param y vertical position of the lower left corner of the first character of the text in pixel.
+	//! @param str the text to print.
+	//! @param xshift shift in pixel in the rotated x direction.
+	//! @param yshift shift in pixel in the rotated y direction.
 	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0);
 
 	// Used by the method below.
