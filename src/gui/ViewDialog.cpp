@@ -189,13 +189,13 @@ void ViewDialog::createDialogContent()
 
 	// TODOs after properties merge:
 	// Jupiter's GRS should become property, and recheck the other "from trunk" entries.
-	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), ui->skyCultureMapGraphicsView, SLOT(selectCulture(QString)));
+	connect(ui->culturesListWidget, &QListWidget::currentTextChanged, ui->skyCultureMapGraphicsView, &SkycultureMapGraphicsView::selectCulture);
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureNameI18(QString)));
-	connect(ui->skyCultureMapGraphicsView, SIGNAL(cultureSelected(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureNameI18(QString)));
+	connect(ui->skyCultureMapGraphicsView, &SkycultureMapGraphicsView::cultureSelected, &StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::setCurrentSkyCultureNameI18);
 	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &ViewDialog::skyCultureChanged);
 
 	// skyculture list search bar
-	connect(ui->culturesListSearchLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(filterSkyCultures()));
+	connect(ui->culturesListSearchLineEdit, &QLineEdit::textChanged, this, &ViewDialog::filterSkyCultures);
 
 	// Connect and initialize checkboxes and other widgets
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
@@ -565,14 +565,14 @@ void ViewDialog::createDialogContent()
 
 	initSkycultureTime();
 
-	connect(ui->skyCultureTimeSlider, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTimeValue(int)));
-	connect(ui->skyCultureCurrentTimeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateSkyCultureTimeValue(int)));
-	connect(ui->skyCultureMapGraphicsView, SIGNAL(timeValueChanged(int)), this, SLOT(updateSkyCultureTimeValue(int)));
+	connect(ui->skyCultureTimeSlider, &QSlider::valueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
+	connect(ui->skyCultureCurrentTimeSpinBox, &QSpinBox::valueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
+	connect(ui->skyCultureMapGraphicsView, &SkycultureMapGraphicsView::timeValueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
 
-	connect(ui->skyCultureMinTimeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(changeMinTime(int)));
-	connect(ui->skyCultureMaxTimeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(changeMaxTime(int)));
+	connect(ui->skyCultureMinTimeSpinBox, &QSpinBox::valueChanged, this, &ViewDialog::changeMinTime);
+	connect(ui->skyCultureMaxTimeSpinBox, &QSpinBox::valueChanged, this, &ViewDialog::changeMaxTime);
 
-	connect(ui->applyTimeOnListCheckBox, SIGNAL(toggled(bool)), this, SLOT(filterSkyCultures()));
+	connect(ui->applyTimeOnListCheckBox, &QCheckBox::toggled, this, &ViewDialog::filterSkyCultures);
 
 
 	configureSkyCultureCheckboxes();
@@ -1171,7 +1171,7 @@ void ViewDialog::populateLists()
 	}
 
 	// add regions to list as custom QListWidgetItem
-	for (const auto region : sortedOccuringRegions)
+	for (const auto &region : sortedOccuringRegions)
 	{
 		l->addItem(new SeparatorListWidgetItem(region));
 	}
@@ -1184,7 +1184,7 @@ void ViewDialog::populateLists()
 		cultureRegionIterator.previous();
 		QListWidgetItem* item = new QListWidgetItem(cultureRegionIterator.key());
 		item->setData(Qt::UserRole, - 100); // startTime
-		item->setData(Qt::UserRole + 1, 100);
+		item->setData(Qt::UserRole + 1, 100); // endTime
 
 		l->insertItem(l->row(l->findItems(cultureRegionIterator.value(), Qt::MatchContains).at(0)) + 1, item);
 	}

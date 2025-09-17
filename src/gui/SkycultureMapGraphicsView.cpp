@@ -39,9 +39,9 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	zoomToDefaultTimer.setUpdateInterval(20);
 	zoomOnTargetTimer.setUpdateInterval(20);
 
-	connect(&zoomToDefaultTimer, SIGNAL(valueChanged(qreal)), SLOT(zoomToDefault(qreal)));
-	connect(&zoomToDefaultTimer, SIGNAL(finished()), &zoomOnTargetTimer, SLOT(start()));
-	connect(&zoomOnTargetTimer, SIGNAL(valueChanged(qreal)), SLOT(zoomOnTarget(qreal)));
+	connect(&zoomToDefaultTimer, &QTimeLine::valueChanged, this, &SkycultureMapGraphicsView::zoomToDefault);
+	connect(&zoomToDefaultTimer, &QTimeLine::finished, &zoomOnTargetTimer, &QTimeLine::start);
+	connect(&zoomOnTargetTimer, &QTimeLine::valueChanged, this, &SkycultureMapGraphicsView::zoomOnTarget);
 
 	// add items (transfer to dedicated function later)
 
