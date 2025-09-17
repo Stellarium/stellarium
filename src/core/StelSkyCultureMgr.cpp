@@ -985,8 +985,8 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	//static const QString LRO{"\u202d"}; // Left-to-right override: Force following characters to be treated as strong left-to-right chars.
 	//static const QString RLO{"\u202e"}; // Right-to-left override: Force following characters to be treated as strong right-to-left chars.
 	//static const QString PDF{"\u202c"}; // Pop directional formatting: terminate scope of last LRE/RLE/LRO/RLO
-	static const QString LRI{"\u2066"}; // left-to-right isolate: Treat following text as isolated and left-to-right
-	static const QString RLI{"\u2067"}; // right-to-left isolate: Treat following text as isolated and right-to-left
+	//static const QString LRI{"\u2066"}; // left-to-right isolate: Treat following text as isolated and left-to-right
+	//static const QString RLI{"\u2067"}; // right-to-left isolate: Treat following text as isolated and right-to-left
 	static const QString FSI{"\u2068"}; // First strong isolate: Treat following text as isolated and in the direction of its first strong directional character.
 					    // ASSUMPTION: Can be used as autodetect feature? Mark all parts inside embeddings?
 	static const QString PDI{"\u2069"}; // Pop directional isolate: terminate scope of last LRI/RLI/FSI
