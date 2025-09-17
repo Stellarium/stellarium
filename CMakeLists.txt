@@ -636,8 +636,11 @@ IF(APPLE)
      # macOS deployment targets
      IF(NOT CMAKE_OSX_DEPLOYMENT_TARGET)
 	  IF(${QT_VERSION_MAJOR} EQUAL 6)
-	       # Qt6: by default - universal binary + minimal operating system is macOS Big Sur
-	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum macOS deployment version" FORCE)
+	       # Qt6 is allows building universal binary (x86_64 + arm64)
+	       # Qt 6.5: minimal operating system is macOS Big Sur (macOS 11)
+	       # Qt 6.8: minimal operating system is macOS Monterey (macOS 12)
+	       # AGL framework is deprecated in macOS Tahoe (macOS 26) and Qt 6.9 (target platform is macOS 12 or higher) is required to building here
+	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "12.0" CACHE STRING "Minimum macOS deployment version" FORCE)
 	  ELSE()
                SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum macOS deployment version" FORCE)
 	  ENDIF()
