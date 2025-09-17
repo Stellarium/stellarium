@@ -99,7 +99,7 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
                  libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libqt5positioning5 \
                  libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev \
                  libexiv2-dev libnlopt-cxx-dev libtbb-dev libtbb2 libqt5concurrent5 \
-                 libmd4c-dev libmd4c-html0-dev
+                 libmd4c-dev libmd4c-html0-dev qt5-image-formats-plugins
 ```
 
 ##### Qt6
@@ -110,7 +110,7 @@ Ubuntu 22.04 comes with Qt5.15 and Qt6.2. To build with Qt6:
 sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev \
                  gcc g++ graphviz doxygen gettext git libxkbcommon-x11-dev libgps-dev \
                  gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio \
-                 gstreamer1.0-libav gstreamer1.0-vaapi \
+                 gstreamer1.0-libav gstreamer1.0-vaapi qt6-image-formats-plugins \
                  qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev \
                  qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins \
                  qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev \
