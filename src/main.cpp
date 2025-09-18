@@ -190,6 +190,10 @@ int main(int argc, char **argv)
 	}
 #endif
 
+	// Fix for ugly display some glyphs in Qt 6.9+
+	// See https://github.com/Stellarium/stellarium/issues/4284
+	qputenv("QT_DISABLE_EMOJI_SEGMENTER", "1");
+
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationPublicVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
