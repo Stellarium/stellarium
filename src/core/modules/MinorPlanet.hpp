@@ -74,6 +74,8 @@ public:
 	QString getNameI18n(void) const override;
 	//! gets an IAU provisional designation.
 	QString getIAUDesignation() const override { return iauDesignationText; }
+	//! get english name without the minor planet's number
+	QString getCommonEnglishName(void) const { return englishName; }
 
 	//! set the minor planet's number, if any.
 	//! The number should be specified as an additional parameter, as
