@@ -241,9 +241,6 @@ int main(int argc, char **argv)
 	// otherwise configuration/INI file parsing will be erroneous.
 	setlocale(LC_NUMERIC, "C");
 
-	// Solution for bug: https://bugs.launchpad.net/stellarium/+bug/1498616
-	qputenv("QT_HARFBUZZ", "old");
-
 	// Init the file manager
 	StelFileMgr::init();
 
