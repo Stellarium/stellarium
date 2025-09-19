@@ -66,7 +66,7 @@
     },
     {
       "id": "CON chinese 013",
-      "lines": [[42402, 42799, 43234, 43109], [42313, 43109], [43234, 43813, 44659, 45336]],
+      "lines": [[43234, 42799, 42402, 42313, 43109, 43813, 44659, 45336]],
       "common_name": {"english": "Willow", "native": "柳宿", "pronounce": "Liu Xiu"}
     },
     {
@@ -81,7 +81,7 @@
     },
     {
       "id": "CON chinese 016",
-      "lines": [[100345, 100064, 99572], [100345, 100881, 101123, 101027], [100881, 101027]],
+      "lines": [[100064, 100345, 99572], [100345, 100881, 101123, 101027], [100345, 101027]],
       "common_name": {"english": "Ox", "native": "牛宿", "pronounce": "Niu Xiu"}
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "id": "CON chinese 024",
-      "lines": [[82396, 82514, 82671, 84143, 86228, 87073, 86670, 85927, 85696], [82514, 82545]],
+      "lines": [[82396, 82514, 82671, 84143, 86228, 87073, 86670, 85927], [86670, 85696]],
       "common_name": {"english": "Tail", "native": "尾宿", "pronounce": "Wei Xiu"}
     },
     {
@@ -361,7 +361,7 @@
     },
     {
       "id": "CON chinese 072",
-      "lines": [[110960, 110395], [110960, 111497], [110960, 110672], [110960, 109074]],
+      "lines": [[110960, 110395], [110960, 111497], [110960, 110672, 109427]],
       "common_name": {"english": "Tomb (Vassal of Rooftop)", "native": "坟墓(附官)", "pronounce": "Fen Mu"}
     },
     {
@@ -451,7 +451,7 @@
     },
     {
       "id": "CON chinese 090",
-      "lines": [[51232, 52558, 56606, 56561, 57363]],
+      "lines": [[51232, "5350358584482202880", 56606, 56561, 57363]],
       "common_name": {"english": "Sea and Mountain", "native": "海山", "pronounce": "Hai Shan"}
     },
     {
@@ -521,7 +521,7 @@
     },
     {
       "id": "CON chinese 104",
-      "lines": [[42673, 42673]],
+      "lines": [["DSO:NGC2632", "DSO:NGC2632"]],
       "common_name": {"english": "Cumulative Corpses", "native": "积尸(鬼宿)", "pronounce": "Ji Shi(Gui Xiu)"}
     },
     {
@@ -926,7 +926,7 @@
     },
     {
       "id": "CON chinese 185",
-      "lines": [[82676, 82676]],
+      "lines": [["DSO:NGC6231", "DSO:NGC6231"]],
       "common_name": {"english": "Changing Room (Vassal of Tail)", "native": "神宫(附官)", "pronounce": "Shen Gong"}
     },
     {
@@ -1231,7 +1231,7 @@
     },
     {
       "id": "CON chinese 246",
-      "lines": [[104750, 102978], [104750, 104234, 102485], [102978, 102485]],
+      "lines": [[104750, 102978], [104750, 104234], [102978, 102485]],
       "common_name": {"english": "Celestial Farmland (In Ox Mansion)", "native": "天田(牛宿)", "pronounce": "Tian Tian(Niu Xiu)"}
     },
     {
@@ -1446,7 +1446,7 @@
     },
     {
       "id": "CON chinese 289",
-      "lines": [[87616, 87616]],
+      "lines": [["DSO:NGC6475", "DSO:NGC6475"]],
       "common_name": {"english": "Fish", "native": "鱼", "pronounce": "Yu"}
     },
     {
@@ -4864,9 +4864,15 @@
     "HIP 118243": [{"english": "Flying Serpent XI", "native": "螣蛇十一", "pronounce": "Téngshé XI", "references": [1], "translators_comments": "Pinyin transliteration"}],
     "HIP 118268": [{"english": "Thunderbolt V", "native": "霹雳五", "pronounce": "Pīlì V", "references": [1], "translators_comments": "Pinyin transliteration"}],
     "HIP 118322": [{"english": "Bird's Beak VII", "native": "鸟喙七", "pronounce": "Niǎohuì VII", "references": [1], "translators_comments": "Pinyin transliteration"}],
+    "Gaia DR3 66715105696289024": [{"english": "Hairy Head Added X", "native": "昴宿增十", "pronounce": "Mǎoxiù zēng X", "references": [1], "translators_comments": "Pinyin transliteration"}],
+    "Gaia DR3 211805079552264832": [{"english": "Five Chariots Added XVIII", "native": "五车增十八", "pronounce": "Wǔchē zēng XVIII", "references": [1], "translators_comments": "Pinyin transliteration"}],
+    "Gaia DR3 1233902704963092608": [{"english": "Great Horn Added II", "native": "大角增二", "pronounce": "Dàjiǎo zēng II", "references": [1], "translators_comments": "Pinyin transliteration"}],
+    "Gaia DR3 3138519829402291328": [{"english": "South River Added XI", "native": "南河增十一", "pronounce": "Nánhé zēng XI", "references": [1], "translators_comments": "Pinyin transliteration"}],
+    "Gaia DR3 3626803636103730048": [{"english": "Recommending Virtuous Men Added VI", "native": "进贤增六", "pronounce": "Jìnxián zēng VI", "references": [1], "translators_comments": "Pinyin transliteration"}],
+    "Gaia DR3 5350358584482202880": [{"english": "Sea and Mountain II", "native": "海山二", "pronounce": "Hǎishān II", "references": [1], "translators_comments": "Pinyin transliteration"}],
+    "Gaia DR3 6046821272776093184": [{"english": "Heart Added VII", "native": "心宿增七", "pronounce": "Xīnxiù zēng VII", "references": [1], "translators_comments": "Pinyin transliteration"}],
     "NGC 224": [{"english": "Legs Added XXI", "native": "奎宿增廿一", "pronounce": "Kuíxiù zēng XXI"}],
     "NGC 2632": [{"english": "Cumulative Corpses", "native": "积尸", "pronounce": "JīShī", "translators_comments": "Pinyin transliteration"}],
-    "NGC 3372": [{"english": "Sea and Mountain II", "native": "海山二", "pronounce": "Hǎishān II", "translators_comments": "Pinyin transliteration"}],
     "NGC 5139": [{"english": "Arsenal Added I", "native": "库楼增一", "pronounce": "Kùlóu zēng I", "translators_comments": "Pinyin transliteration"}],
     "NGC 6231": [{"english": "Changing Room", "native": "神宫", "pronounce": "Shéngōng", "translators_comments": "Pinyin transliteration"}],
     "NGC 6475": [{"english": "Fish", "native": "鱼", "pronounce": "Yú", "translators_comments": "Pinyin transliteration"}],

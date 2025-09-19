@@ -499,7 +499,6 @@ Include the following:
 |<notr>NGC 2632/M 44</notr>|<notr>积尸</notr>|<notr>JīShī</notr>|Cumulative Corpses|Beehive Cluster|
 |<notr>NGC 5139</notr>|<notr>库楼增一</notr>|<notr>Kùlóu Zēng I</notr>|Arsenal Added I|Omega Centauri|
 |<notr>NGC 224/M 31</notr>|<notr>奎宿增廿一</notr>|<notr>Kuíxiù Zēng XXI</notr>|Legs Mansion XXI|Andromeda Galaxy|
-|<notr>NGC 3372 </notr>|<notr>海山二</notr>|<notr>Hǎishān II</notr>|Sea and Mountain II|Homunculus Nebula, Eta Carinae|
 
 ### Notes
 
@@ -510,8 +509,6 @@ Thanks to Liu Chunbin for the collation of the *Chinese and Western Contrast Sta
 Some stars have been added according to *The History of Stellar Observation in China* (Chinese: 中国恒星观测史).
 
 For the translation of constellations, we use the *English-Chinese Glossary of Chinese Star Regions, Asterisms and Star Names* (Chinese: 中国星区、星官及星名英译表) by Hong Kong Space Museum. Only a small portion of the translation is changed, for example, when the translations of the two different Xingguans are the same.
-
-There are seven stars with Chinese star names without corresponding HIP numbers, so they cannot be displayed in Stellarium. They are Sea and Mountain II (η Car), Five Chariots Added XVIII (12 Aur), Recommending Virtuous Man Added VI (39 Vir) , Great Horn Added II (CN Boo), Hairy Head Added X (24 Tau), Heart Added VII (18 Oph), South River Added XI (GC 10303).
 
 The cultural connotations of the name cannot be explained perfectly, because thousands of years passed, the connotations behind some names are controversial. these are only possible translations. Chinese characters are ideographic characters, which leads to some completely different names having the same pronunciation. Therefore, the pinyin transliteration is provided only to make star names readable.
 
