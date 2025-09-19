@@ -506,7 +506,7 @@ void StelSkyCultureSkyPartition::updateI18n()
 QString StelSkyCultureSkyPartition::getCulturalName() const
 {
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
-	return scMgr->createCulturalLabel(name, scMgr->getScreenLabelStyle(), QString());
+	return scMgr->createCulturalLabel(name, scMgr->getScreenLabelStyle(), names.length()==12 ? q_("Zodiac") : q_("Lunar Station"));
 }
 
 QString StelSkyCultureSkyPartition::getLongitudeCoordinate(Vec3d &eqPos) const
