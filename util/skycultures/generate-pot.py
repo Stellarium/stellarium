@@ -198,8 +198,7 @@ def update_cultures_pot(sclist, pot):
                 if 'context' in name:
                     context = name['context']
 
-
-                # Extract 'english' string for translation (with context for uniqueness) 
+                # Extract 'english' string for translation (with context for uniqueness)
                 if english:
                     # Don't extract items that are already translated in other places
                     if not english in common_names:
@@ -216,11 +215,10 @@ def update_cultures_pot(sclist, pot):
                 else:
                     print(f'{sky_culture}: warning: common_name property in {obj_type} "{obj_id}" has no English name', file=sys.stderr)
 
-                # Extract 'pronounce' string for translation (with context for uniqueness)                     
+                # Extract 'pronounce' string for translation (with context for uniqueness)
                 if pronounce:
                     # Don't extract items that are already translated in other places
                     if not pronounce in common_names:
-                        
                         cons_ast_names.add(pronounce)
 
                         entry = polib.POEntry(comment = "Pronounce entry for " + comment,
@@ -233,8 +231,8 @@ def update_cultures_pot(sclist, pot):
                             pot.append(entry)
                 #else:
                 #    print(f'{sky_culture}: info: common_name property in {obj_type} "{obj_id}" has no pronounce element', file=sys.stderr)
-                    
-                # Extract 'byname' string for translation (with context for uniqueness)                     
+
+                # Extract 'byname' string for translation (with context for uniqueness)
                 if byname:
                     # Don't extract items that are already translated in other places
                     if not byname in common_names:
@@ -251,8 +249,6 @@ def update_cultures_pot(sclist, pot):
                             pot.append(entry)
                 #else:
                 #    print(f'{sky_culture}: info: common_name property in {obj_type} "{obj_id}" has no byname element', file=sys.stderr)
-                    
-                    
             else:
                 print(f'{sky_culture}: warning: no common_name key in {obj_type} "{obj_id}"', file=sys.stderr)
 
@@ -360,8 +356,6 @@ def update_cultures_pot(sclist, pot):
                         prev_entry.comment += '\n' + comment
                 else:
                     pot.append(entry)
-                    
-                # TODO: Add translation of pronounce tag!
 
     def process_extra_names(objects, pot, sc_name):
         if 'context' in objects:
@@ -398,7 +392,7 @@ def update_cultures_pot(sclist, pot):
             else:
                 pot.append(entry)
 
-            # pronounce is language dependent! The element is optional. 
+            # pronounce is language dependent! The element is optional.
             if 'pronounce' in name:
                 pronounce = name['pronounce']
                 if len(pronounce) == 0:
