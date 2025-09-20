@@ -310,9 +310,19 @@ def update_cultures_pot(sclist, pot):
                 chinese_name_cleaned = False
                 if "chinese" in sc_name.lower():
                     cleaned = english
-                    cleaned = re.sub(' Added', '', cleaned)
+
+                    # Handle the names like "Royal Guards Added III" and "Celestial Hook Added IX*"
+                    # TODO: also handle cases like "Celestial Farmland Added IV (In Horn Mansion)".
+                    # Currently we don't handle the parenthesized part in the end. This change will
+                    # also need a supporting change in the C++ code.
+                    cleaned = re.sub(' Added [MDCLXVI]+[*?]*$', '', cleaned)
                     has_added = cleaned != english
+
+                    # Handle the names like "Celestial Ramparts I" and "Persia VII*"
+                    # TODO: similarly to the above, we also need to handle cases like
+                    # "Pestle III (In Rooftop Mansion)" with a corresponding change in the C++ code.
                     cleaned = re.sub(' [MDCLXVI]+[*?]*$', '', cleaned)
+
                     chinese_name_cleaned = cleaned != english
                     english = cleaned
 
