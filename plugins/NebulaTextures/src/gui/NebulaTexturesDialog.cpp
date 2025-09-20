@@ -365,7 +365,7 @@ void NebulaTexturesDialog::initializeRefreshIfNeeded()
  */
 void NebulaTexturesDialog::openImageFile()
 {
-	QString fileName = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Open Image"), lastOpenedDirectoryPath, tr("Images (*.png *.jpg *.gif *.tif *.tiff *.jpeg)"));
+	QString fileName = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Open Image"), lastOpenedDirectoryPath, q_("Images (*.png *.jpg *.gif *.tif *.tiff *.jpeg)"));
 	if (!fileName.isEmpty())
 	{
 		ui->lineEditImagePath->setText(fileName);
