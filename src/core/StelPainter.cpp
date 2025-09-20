@@ -644,24 +644,6 @@ void StelPainter::drawTextGravity180(const float x, const float y, const QString
 	else
 	{
 		// We manage our RTL by ourselves.
-		//qDebug() << "Advanced label:" << str;
-		//qDebug() << "FSI32 found at pos " << label32.find(FSI32);
-		// multi-part cultural label. Each segment consists of brackets (optional) enclosing FSI...PDI strings
-		// which have to be handled according to their respective first strong (direction-governing) character.
-		//int pos=0;
-		//while (pos<slen)
-		//{
-		//	const QString c = QString::fromUcs4(&label32[pos], 1);
-		//}
-		// DEBUG ONLY: DUMP ANALYTICS
-		//foreach(const uint letter, label32 )
-		//{
-		//	qDebug() << QChar::digitValue(letter) << "(u" << QString::number(letter, 16) << "/" << QChar::fromUcs4(letter) << ")"
-		//		    "cat." << QChar::category(letter) << // metaCharCat.valueToKey(QChar::category(letter)) <<
-		//		    "scr." << QChar::script(letter) << // metaCharScript.valueToKey(QChar::script(letter));
-		//		    "dir." << QChar::direction(letter); // metaCharScript.valueToKey(QChar::script(letter));
-		//}
-
 		for (int i = 0; i < label32.length(); ++i)
 		{
 			uint32_t chr32=label32[i];
@@ -683,13 +665,11 @@ void StelPainter::drawTextGravity180(const float x, const float y, const QString
 
 				// For now, we just use QString::isRightToLeft() on the back-converted inner string.
 				// TODO: If that is not enough, we will have to manually analyze the string until the first strong character tells us its direction.
-				//const QString isolatedString=QString::fromStdU32String(cleanedIsolated);
 				const QString isolatedString=QString::fromUcs4(cleanedIsolated.data(), cleanedIsolated.length());
 				const bool isoRtl=isolatedString.isRightToLeft();
-				//const int isoLength=isolatedString.length();
 				const int isoLength=cleanedIsolated.length();
 
-				//qDebug() << "From" << posBegin << "to" << posEnd << ", length" << isolatedLength;
+				//qDebug() << "From" << posBegin << "to" << posEnd << ", length" << isoLength;
 				//qDebug() << ( subrtl ?  "RTL: " : "NOT RTL: " ) << isolatedString;
 
 				const int startI = isoRtl ? isoLength - 1 : 0;
