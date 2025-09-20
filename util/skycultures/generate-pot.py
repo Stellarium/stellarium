@@ -178,21 +178,23 @@ def update_cultures_pot(sclist, pot):
                 else:
                     byname = None
 
-                comment = f'{sc_name} {obj_type}'
-                if native:
-                    comment += f', native: {native}'
+                def get_comment(what_to_skip):
+                    comment = f'{sc_name} {obj_type}'
+                    if native and what_to_skip != 'native':
+                        comment += f', native: {native}'
 
-                if pronounce:
-                    comment += ', pronounce: ' + name['pronounce']
+                    if pronounce and what_to_skip != 'pronounce':
+                        comment += ', pronounce: ' + name['pronounce']
 
-                if english:
-                    comment += ', english: ' + name['english']
+                    if english and what_to_skip != 'english':
+                        comment += ', English: ' + name['english']
 
-                if byname:
-                    comment += ', byname: ' + name['byname']
+                    if byname and what_to_skip != 'byname':
+                        comment += ', byname: ' + name['byname']
 
-                if 'translators_comments' in name:
-                    comment += '\n' + name['translators_comments']
+                    if 'translators_comments' in name:
+                        comment += '\n' + name['translators_comments']
+                    return comment
 
                 context = None
                 if 'context' in name:
@@ -205,11 +207,11 @@ def update_cultures_pot(sclist, pot):
 
                         cons_ast_names.add(english)
 
-                        entry = polib.POEntry(comment = comment, msgid = english, msgstr = "", msgctxt = context)
+                        entry = polib.POEntry(comment = get_comment('english'), msgid = english, msgstr = "", msgctxt = context)
                         if entry in pot:
                             prev_entry = pot.find(entry.msgid, msgctxt = context)
                             assert prev_entry
-                            prev_entry.comment += '\n' + comment
+                            prev_entry.comment += '\n' + get_comment('english')
                         else:
                             pot.append(entry)
                 else:
@@ -221,12 +223,12 @@ def update_cultures_pot(sclist, pot):
                     if not pronounce in common_names:
                         cons_ast_names.add(pronounce)
 
-                        entry = polib.POEntry(comment = "Pronounce entry for " + comment,
+                        entry = polib.POEntry(comment = "Pronounce entry for " + get_comment('pronounce'),
                                               msgid = pronounce, msgstr = "", msgctxt = context)
                         if entry in pot:
                             prev_entry = pot.find(entry.msgid, msgctxt = context)
                             assert prev_entry
-                            prev_entry.comment += '\n' + comment
+                            prev_entry.comment += '\n' + get_comment('pronounce')
                         else:
                             pot.append(entry)
                 #else:
@@ -239,12 +241,12 @@ def update_cultures_pot(sclist, pot):
 
                         cons_ast_names.add(byname)
 
-                        entry = polib.POEntry(comment = "Byname for " + comment, msgid = byname,
+                        entry = polib.POEntry(comment = "Byname for " + get_comment('byname'), msgid = byname,
                                               msgstr = "", msgctxt = context)
                         if entry in pot:
                             prev_entry = pot.find(entry.msgid, msgctxt = context)
                             assert prev_entry
-                            prev_entry.comment += '\n' + comment
+                            prev_entry.comment += '\n' + get_comment('byname')
                         else:
                             pot.append(entry)
                 #else:
