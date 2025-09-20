@@ -223,7 +223,8 @@ def update_cultures_pot(sclist, pot):
                         
                         cons_ast_names.add(pronounce)
 
-                        entry = polib.POEntry(comment = comment, msgid = pronounce, msgstr = "", msgctxt = context)
+                        entry = polib.POEntry(comment = "Pronounce entry for " + comment,
+                                              msgid = pronounce, msgstr = "", msgctxt = context)
                         if entry in pot:
                             prev_entry = pot.find(entry.msgid, msgctxt = context)
                             assert prev_entry
@@ -240,7 +241,8 @@ def update_cultures_pot(sclist, pot):
 
                         cons_ast_names.add(byname)
 
-                        entry = polib.POEntry(comment = comment, msgid = byname, msgstr = "", msgctxt = context)
+                        entry = polib.POEntry(comment = "Byname for " + comment, msgid = byname,
+                                              msgstr = "", msgctxt = context)
                         if entry in pot:
                             prev_entry = pot.find(entry.msgid, msgctxt = context)
                             assert prev_entry
