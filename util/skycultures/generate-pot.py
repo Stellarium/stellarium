@@ -203,8 +203,7 @@ def update_cultures_pot(sclist, pot):
                 # Extract 'english' string for translation (with context for uniqueness)
                 if english:
                     # Don't extract items that are already translated in other places
-                    if not english in common_names:
-
+                    if context or not english in common_names:
                         cons_ast_names.add(english)
 
                         entry = polib.POEntry(comment = get_comment('english'), msgid = english, msgstr = "", msgctxt = context)
