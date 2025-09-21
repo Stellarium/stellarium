@@ -26,7 +26,6 @@
 #include "ScmSkyCulture.hpp"
 #include "StelFileMgr.hpp"
 #include "ui_scmSkyCultureExportDialog.h"
-#include <filesystem>
 #include <QFileDialog>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -119,7 +118,7 @@ void ScmSkyCultureExportDialog::exportSkyCulture()
 		qWarning() << "SkyCultureMaker: Sky culture with ID" << skyCultureId
 			   << "already exists. Cannot export.";
 		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("Sky culture with this ID already exists."));
-		// dont close the dialog here, so the user can delete the folder first
+		// don't close the dialog here, so the user can delete the folder first
 		return;
 	}
 

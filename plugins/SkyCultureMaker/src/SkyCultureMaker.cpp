@@ -27,9 +27,7 @@
 #include "StelCore.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelPainter.hpp"
 #include "StelProjector.hpp"
 #include "gui/ScmConstellationDialog.hpp"
 #include "gui/ScmHideOrAbortMakerDialog.hpp"
@@ -38,7 +36,6 @@
 #include "gui/ScmStartDialog.hpp"
 
 #include "ScmDraw.hpp"
-#include <vector>
 #include <QApplication>
 #include <QDebug>
 #include <QKeyEvent>
@@ -494,7 +491,7 @@ void SkyCultureMaker::restoreScmDialogVisibilityState()
 
 bool SkyCultureMaker::isAnyDialogHidden() const
 {
-	for (bool visible : scmDialogVisibilityMap.values())
+	for (const auto &visible : scmDialogVisibilityMap)
 	{
 		if (visible)
 		{
@@ -506,9 +503,9 @@ bool SkyCultureMaker::isAnyDialogHidden() const
 
 void SkyCultureMaker::resetScmDialogsVisibilityState()
 {
-	for (auto key : scmDialogVisibilityMap.keys())
+	for (auto &vis : scmDialogVisibilityMap)
 	{
-		scmDialogVisibilityMap[key] = false;
+		vis = false;
 	}
 }
 

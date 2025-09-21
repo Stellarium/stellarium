@@ -122,8 +122,9 @@ void ScmStartDialog::startScmCreationProcess()
 	maker->setSkyCultureDialogVisibility(true); // Start the editor dialog for creating a new Sky Culture
 	maker->setNewSkyCulture();
 
-	SkyCultureMaker::setActionToggle("actionShow_DateTime_Window_Global", true);
-	SkyCultureMaker::setActionToggle("actionShow_Location_Window_Global", true);
+	// GZ: Unclear why those dialogs are called at plugin start.
+	//SkyCultureMaker::setActionToggle("actionShow_DateTime_Window_Global", true);
+	//SkyCultureMaker::setActionToggle("actionShow_Location_Window_Global", true);
 	SkyCultureMaker::setActionToggle("actionShow_Ground", false);
 	SkyCultureMaker::setActionToggle("actionShow_Atmosphere", false);
 	SkyCultureMaker::setActionToggle("actionShow_MeteorShowers", false);

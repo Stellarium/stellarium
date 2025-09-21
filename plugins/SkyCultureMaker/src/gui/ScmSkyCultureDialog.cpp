@@ -301,11 +301,8 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 	scm::Description desc;
 
 	desc.name               = ui->skyCultureNameLE->text();
-	desc.authors            = ui->authorsTE->toPlainText();
-	desc.license            = ui->licenseCB->currentData().value<scm::LicenseType>();
+	desc.introduction       = ui->introTE->toPlainText();
 	desc.cultureDescription = ui->cultureDescriptionTE->toPlainText();
-	desc.about              = ui->aboutTE->toPlainText();
-
 	desc.sky          = ui->skyTE->toPlainText();
 	desc.moonAndSun   = ui->moonSunTE->toPlainText();
 	desc.planets      = ui->planetsTE->toPlainText();
@@ -314,8 +311,14 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 	desc.otherObjects = ui->otherObjectsTE->toPlainText();
 
 	desc.constellations   = ui->constellationsDescTE->toPlainText();
+
 	desc.references       = ui->referencesTE->toPlainText();
+
+	desc.authors            = ui->authorsTE->toPlainText();
+	desc.about              = ui->aboutTE->toPlainText();
 	desc.acknowledgements = ui->acknowledgementsTE->toPlainText();
+
+	desc.license            = ui->licenseCB->currentData().value<scm::LicenseType>();
 	desc.classification   = ui->classificationCB->currentData().value<scm::ClassificationType>();
 
 	return desc;

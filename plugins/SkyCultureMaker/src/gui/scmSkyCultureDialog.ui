@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>372</width>
-    <height>543</height>
+    <width>846</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -66,7 +66,7 @@
       <item>
        <widget class="QTabWidget" name="tabs">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="iconSize">
          <size>
@@ -237,9 +237,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
-               <width>229</width>
-               <height>2930</height>
+               <y>-444</y>
+               <width>809</width>
+               <height>1505</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="descriptionLayout">
@@ -310,53 +310,19 @@
                   <widget class="QComboBox" name="classificationCB"/>
                  </item>
                  <item>
-                  <widget class="QLabel" name="authorsLbl">
+                  <widget class="QLabel" name="introLbl">
                    <property name="text">
-                    <string>Authors:*</string>
+                    <string>Introduction:*</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QTextEdit" name="authorsTE">
-                   <property name="acceptRichText">
-                    <bool>false</bool>
+                  <widget class="QTextEdit" name="introTE">
+                   <property name="sizeAdjustPolicy">
+                    <enum>QAbstractScrollArea::AdjustToContents</enum>
                    </property>
                    <property name="placeholderText">
-                    <string>Who are you and what is your background (native person, researcher, ...)? Ideally, please provide an email-address as well.</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="cultureDescriptionLbl">
-                   <property name="text">
-                    <string>Culture Description:*</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QTextEdit" name="cultureDescriptionTE">
-                   <property name="acceptRichText">
-                    <bool>false</bool>
-                   </property>
-                   <property name="placeholderText">
-                    <string>Please describe specifics of the source (book/clay tablet/parchment/...) or of the culture: e.g. sun-focussed, moon-focussed, climate of the region, geographic specifics. Did members of the culture build pyramids or any other well-known thing? What did they do with astronomy (e.g. time keeping, calendar making, weather predictions...)? Are there connections to other cultures? Is this version a didactic reduction or is it derived from a specific other source?</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="aboutLbl">
-                   <property name="text">
-                    <string>About:*</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QTextEdit" name="aboutTE">
-                   <property name="acceptRichText">
-                    <bool>false</bool>
-                   </property>
-                   <property name="placeholderText">
-                    <string>How do you know about this Sky Culture? Is this contribution based on your own or other people's research? Is it based on interviews with Elders or reading ancient text, etc.?</string>
+                    <string> A summary that could ideally be shown on a small screen entirely.</string>
                    </property>
                   </widget>
                  </item>
@@ -366,7 +332,7 @@
               <item>
                <widget class="QGroupBox" name="celestialObjectsGroup">
                 <property name="title">
-                 <string>Sky (What can the user see here?)</string>
+                 <string>Description (What can the user see here?)</string>
                 </property>
                 <property name="flat">
                  <bool>true</bool>
@@ -385,11 +351,31 @@
                   <number>0</number>
                  </property>
                  <item>
+                  <widget class="QLabel" name="cultureDescriptionLbl">
+                   <property name="text">
+                    <string>Culture Description:*</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="cultureDescriptionTE">
+                   <property name="sizeAdjustPolicy">
+                    <enum>QAbstractScrollArea::AdjustToContents</enum>
+                   </property>
+                   <property name="acceptRichText">
+                    <bool>false</bool>
+                   </property>
+                   <property name="placeholderText">
+                    <string>Give a short introduction about the culture: time, location, circumstances of life. Please describe specifics of the source (book/clay tablet/parchment/...) or of the culture: e.g. sun-focussed, moon-focussed, climate of the region, geographic specifics. Did members of the culture build pyramids or any other well-known thing? What did they do with astronomy (e.g. time keeping, calendar making, weather predictions...)? Are there connections to other cultures? Is this version a didactic reduction or is it derived from a specific other source?</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <layout class="QHBoxLayout">
                    <item>
                     <widget class="QLabel" name="skyLbl">
                      <property name="text">
-                      <string>Sky Description</string>
+                      <string>Sky</string>
                      </property>
                     </widget>
                    </item>
@@ -397,11 +383,14 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="skyTE">
+                   <property name="sizeAdjustPolicy">
+                    <enum>QAbstractScrollArea::AdjustToContents</enum>
+                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
                    <property name="placeholderText">
-                    <string>What special features did this culture use, what shall the user watch out for? Is it worthwhile to click a specific button rather than others - e.g. divisions of the ecliptic, super-constellations, dark constellations, all-sky-constellations, zoom into the Pleiades, etc.? Do the constellations change with the months or remain the same throughout the year?</string>
+                    <string>What special features did/does this culture use, what shall the user watch out for? Is it worthwhile to click a specific button rather than others - e.g. divisions of the ecliptic, super-constellations, dark constellations, all-sky-constellations, zoom into the Pleiades, etc.? Do the constellations change with the months or remain the same throughout the year? What is actually 'correct' about your presentation? Did they really use stick figures? Did they paint images (or just use names of stars)? Did they use stars at all or prefer dark/bright clouds of the Milky Way?</string>
                    </property>
                   </widget>
                  </item>
@@ -414,6 +403,9 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="moonSunTE">
+                   <property name="sizeAdjustPolicy">
+                    <enum>QAbstractScrollArea::AdjustToContents</enum>
+                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -431,6 +423,9 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="planetsTE">
+                   <property name="sizeAdjustPolicy">
+                    <enum>QAbstractScrollArea::AdjustToContents</enum>
+                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -448,6 +443,9 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="zodiacTE">
+                   <property name="sizeAdjustPolicy">
+                    <enum>QAbstractScrollArea::AdjustToContents</enum>
+                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -465,6 +463,9 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="milkyWayTE">
+                   <property name="sizeAdjustPolicy">
+                    <enum>QAbstractScrollArea::AdjustToContents</enum>
+                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -482,6 +483,9 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="otherObjectsTE">
+                   <property name="sizeAdjustPolicy">
+                    <enum>QAbstractScrollArea::AdjustToContents</enum>
+                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -493,17 +497,20 @@
                  <item>
                   <widget class="QLabel" name="constellationsDescLbl">
                    <property name="text">
-                    <string>Constellations:</string>
+                    <string>Constellations*:</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QTextEdit" name="constellationsDescTE">
+                   <property name="sizeAdjustPolicy">
+                    <enum>QAbstractScrollArea::AdjustToContents</enum>
+                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
                    <property name="placeholderText">
-                    <string>What is 'real' about your presentation? Did they really use stick figures? Did they paint images (or just use names of stars)? Did they use stars at all or prefer dark/bright clouds of the Milky Way?</string>
+                    <string>Sequence of Level 5 Markdown sections:\n  ##### name\n\nDescription of constellation...</string>
                    </property>
                   </widget>
                  </item>
@@ -540,11 +547,54 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="referencesTE">
+                   <property name="sizeAdjustPolicy">
+                    <enum>QAbstractScrollArea::AdjustToContents</enum>
+                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
                    <property name="placeholderText">
-                    <string>What references did you use? E.g. specific texts, images, or other media?</string>
+                    <string notr="true"> - [#1]: Author: Title, (Journal, ...), Publisher, Location, Year</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="authorsLbl">
+                   <property name="text">
+                    <string>Authors:*</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="authorsTE">
+                   <property name="sizeAdjustPolicy">
+                    <enum>QAbstractScrollArea::AdjustToContents</enum>
+                   </property>
+                   <property name="acceptRichText">
+                    <bool>false</bool>
+                   </property>
+                   <property name="placeholderText">
+                    <string>Who are you and what is your background (native person, researcher, ...)? Ideally, please provide an email-address as well.</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="aboutLbl">
+                   <property name="text">
+                    <string>About:*</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="aboutTE">
+                   <property name="sizeAdjustPolicy">
+                    <enum>QAbstractScrollArea::AdjustToContents</enum>
+                   </property>
+                   <property name="acceptRichText">
+                    <bool>false</bool>
+                   </property>
+                   <property name="placeholderText">
+                    <string>How do you know about this Sky Culture? Is this contribution based on your own or other people's research? Is it based on interviews with Elders or reading ancient text, etc.?</string>
                    </property>
                   </widget>
                  </item>
@@ -557,6 +607,9 @@
                  </item>
                  <item>
                   <widget class="QTextEdit" name="acknowledgementsTE">
+                   <property name="sizeAdjustPolicy">
+                    <enum>QAbstractScrollArea::AdjustToContents</enum>
+                   </property>
                    <property name="acceptRichText">
                     <bool>false</bool>
                    </property>
@@ -602,8 +655,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../../resources/SkyCultureMaker.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

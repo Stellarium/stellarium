@@ -36,6 +36,7 @@ SET( SkyCultureMaker_SRCS
      gui/ScmHideOrAbortMakerDialog.cpp
 
      types/CoordinateLine.hpp
+     types/Description.hpp
      types/Drawing.hpp
      types/DialogID.hpp
      types/DrawTools.hpp

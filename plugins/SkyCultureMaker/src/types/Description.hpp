@@ -26,8 +26,6 @@
 
 #include "Classification.hpp"
 #include "License.hpp"
-#include <map>
-#include <vector>
 #include <QMetaType>
 #include <QString>
 
@@ -38,24 +36,25 @@ namespace scm
  * @brief The Description struct represents a sky culture description.
  */
 struct Description
-{
-	QString name;
-	QString authors;
-	scm::LicenseType license;
-	QString cultureDescription;
-	QString about;
+{                                                // MD equivalent:
+	QString name;                            // name (will become L1 title)
+	QString introduction;                    // content of Introduction section (L2)
 
-	QString sky;
-	QString moonAndSun;
-	QString planets;
-	QString zodiac;
-	QString milkyWay;
-	QString otherObjects;
+	QString cultureDescription;              // content of Description section (L2)
+	QString sky;                             // content of optional subsection (L3) in Description section
+	QString moonAndSun;                      // content of optional subsection (L3) in Description section
+	QString planets;                         // content of optional subsection (L3) in Description section
+	QString zodiac;                          // content of optional subsection (L3) in Description section
+	QString milkyWay;                        // content of optional subsection (L3) in Description section
+	QString otherObjects;                    // content of optional subsection (L3) in Description section
 
-	QString constellations;
-	QString references;
-	QString acknowledgements;
-	scm::ClassificationType classification;
+	QString constellations;                  // Content of main section Constellations (L2): sequence of L5 markdown descriptions
+	QString references;                      // Content of L2 section: List of references in format documented in the SUG. We trust our SCM users that they enter proper format!
+	QString authors;                         // content of author section (L2)
+	QString about;                           // content of subsection (L3) in author section
+	QString acknowledgements;                // content of subsection (L3) in author section
+	scm::LicenseType license;                // license code
+	scm::ClassificationType classification;  // classification code
 
 	/**
 	 * @brief Check if the description is complete.
