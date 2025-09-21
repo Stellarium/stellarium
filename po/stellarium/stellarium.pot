@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-09-21 20:55+0700\n"
+"POT-Creation-Date: 2025-09-21 21:45+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3521,8 +3521,8 @@ msgstr ""
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
-"article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
-"A.D. 1980</em> (%1)."
+"article <em>Long-term changes in the rotation of the earth - 700 B.C. to A."
+"D. 1980</em> (%1)."
 msgstr ""
 
 #: src/core/StelCore.cpp:2726
@@ -4031,7 +4031,7 @@ msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/StelObject.cpp:989 src/translations.h:59
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:463
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:489
 msgid "Constellations"
 msgstr ""
 
@@ -11597,6 +11597,7 @@ msgid "View"
 msgstr ""
 
 #: src/ui_viewDialog.h:3864 src/ui_viewDialog.h:3885
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:506
 msgid "Sky"
 msgstr ""
 
@@ -11835,6 +11836,7 @@ msgid "Trails thickness in pixels"
 msgstr ""
 
 #: src/ui_viewDialog.h:3981
+#, c-format
 msgid ""
 "Astronomical Almanac (default) has 2% enlargement, Danjon (1951) uses a "
 "slightly different model"
@@ -13993,7 +13995,7 @@ msgstr ""
 
 #: src/ui_addRemoveLandscapesDialog.h:234
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:236
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:467
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:493
 msgid "Remove"
 msgstr ""
 
@@ -16575,7 +16577,7 @@ msgid "Pixel grid feature"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:639
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:470
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:496
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid "Overview"
 msgstr ""
@@ -18734,7 +18736,7 @@ msgid "Add communication data"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:126
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:501
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:528
 msgid "Description"
 msgstr ""
 
@@ -21649,8 +21651,8 @@ msgstr ""
 #: plugins/Quasars/src/Quasars.cpp:76
 msgid ""
 "A plugin that shows some quasars brighter than visual magnitude 18. The "
-"catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' "
-"(13th Ed.) (Veron+ 2010)"
+"catalogue of quasars was compiled from 'Quasars and Active Galactic "
+"Nuclei' (13th Ed.) (Veron+ 2010)"
 msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:173
@@ -26605,8 +26607,8 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:292
 msgid ""
-"This will speed up rendering, but the appearance will look "
-"&quot;broken&quot; until you stop moving."
+"This will speed up rendering, but the appearance will look &quot;"
+"broken&quot; until you stop moving."
 msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:293
@@ -26616,8 +26618,8 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:295
 msgid ""
-"This updates a second face, so that the visual appearance seems less "
-"&quot;broken&quot;."
+"This updates a second face, so that the visual appearance seems less &quot;"
+"broken&quot;."
 msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:304
@@ -26826,34 +26828,34 @@ msgstr ""
 msgid "Title:"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:64
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:161
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:61
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:158
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:272
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:136
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:461
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:487
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:127
 msgid "Sky Culture Maker"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:67
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:64
 msgid ""
 "Contact us using our GitHub usernames, via an Issue or the Discussion tab in "
 "the Stellarium repository."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:69
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:66
 msgid "Plugin to draw and export sky cultures in Stellarium."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:583
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:580
 msgid "INFO"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:590
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:587
 msgid "WARNING"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:597
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:594
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:349
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:359
 msgid "ERROR"
@@ -26885,51 +26887,51 @@ msgid ""
 "fields."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:99
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:98
 msgid "No sky culture is set."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:113
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:112
 msgid "Failed to choose export directory."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:121
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:120
 msgid "Sky culture with this ID already exists."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:132
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:131
 msgid "Failed to create sky culture directory."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:142
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:141
 msgid "Failed to save the illustrations."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:156
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:155
 msgid "Failed to create JSON document for sky culture."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:165
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:164
 msgid "Failed to open index.json for writing."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:177
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:176
 msgid "Failed to export sky culture description."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:188
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:187
 msgid "Failed to export CMakeLists.txt."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:196
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:195
 msgid "Sky culture exported successfully to "
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:207
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:206
 msgid "Choose Export Directory"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:217
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:216
 msgid "ERROR: The selected directory is not valid"
 msgstr ""
 
@@ -27060,7 +27062,7 @@ msgid "Not implemented yet."
 msgstr ""
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:145
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:466
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:492
 msgid "Edit"
 msgstr ""
 
@@ -27128,171 +27130,173 @@ msgstr ""
 msgid "Artwork"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:462
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:488
 msgid "Name of the Sky Culture"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:464
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:490
 msgid "Add Constellation"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:465
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:491
 msgid "Add Dark Constellation"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:468
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:494
 msgid "License of the Sky Culture"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:469
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:495
 msgid "Export Sky Culture"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:471
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:497
 msgid "Please describe the Sky Culture"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:472
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:498
 msgid "Mandatory fields are marked with an asterisk (*)."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:473
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:499
 msgid "General Information"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:474
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:500
 msgid "Classification of the Sky Culture*"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:475
-msgid "Authors:*"
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:501
+msgid "Introduction:*"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:476
-msgid ""
-"Who are you and what is your background (native person, researcher, ...)? "
-"Ideally, please provide an email-address as well."
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:502
+msgid " A summary that could ideally be shown on a small screen entirely."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:477
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:503
+msgid "Description (What can the user see here?)"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:504
 msgid "Culture Description:*"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:478
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:505
 msgid ""
-"Please describe specifics of the source (book/clay tablet/parchment/...) or "
-"of the culture: e.g. sun-focussed, moon-focussed, climate of the region, "
-"geographic specifics. Did members of the culture build pyramids or any other "
-"well-known thing? What did they do with astronomy (e.g. time keeping, "
-"calendar making, weather predictions...)? Are there connections to other "
-"cultures? Is this version a didactic reduction or is it derived from a "
-"specific other source?"
+"Give a short introduction about the culture: time, location, circumstances "
+"of life. Please describe specifics of the source (book/clay tablet/"
+"parchment/...) or of the culture: e.g. sun-focussed, moon-focussed, climate "
+"of the region, geographic specifics. Did members of the culture build "
+"pyramids or any other well-known thing? What did they do with astronomy (e."
+"g. time keeping, calendar making, weather predictions...)? Are there "
+"connections to other cultures? Is this version a didactic reduction or is it "
+"derived from a specific other source?"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:479
-msgid "About:*"
-msgstr ""
-
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:480
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:507
 msgid ""
-"How do you know about this Sky Culture? Is this contribution based on your "
-"own or other people's research? Is it based on interviews with Elders or "
-"reading ancient text, etc.?"
-msgstr ""
-
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:481
-msgid "Sky (What can the user see here?)"
-msgstr ""
-
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:482
-msgid "Sky Description"
-msgstr ""
-
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:483
-msgid ""
-"What special features did this culture use, what shall the user watch out "
-"for? Is it worthwhile to click a specific button rather than others - e.g. "
-"divisions of the ecliptic, super-constellations, dark constellations, all-"
+"What special features did/does this culture use, what shall the user watch "
+"out for? Is it worthwhile to click a specific button rather than others - e."
+"g. divisions of the ecliptic, super-constellations, dark constellations, all-"
 "sky-constellations, zoom into the Pleiades, etc.? Do the constellations "
-"change with the months or remain the same throughout the year?"
+"change with the months or remain the same throughout the year? What is "
+"actually 'correct' about your presentation? Did they really use stick "
+"figures? Did they paint images (or just use names of stars)? Did they use "
+"stars at all or prefer dark/bright clouds of the Milky Way?"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:484
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:508
 msgid "Moon & Sun:"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:485
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:509
 msgid "How did they determine their calendar? Did they observe phases?"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:486
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:510
 msgid "Planets:"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:487
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:511
 msgid ""
 "Were the planets deified? What deities connect, what meaning do they have?"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:488
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:512
 msgid "Zodiac/ Lunar System:"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:489
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:513
 msgid ""
 "Did they have the (Bab.) zodiac system or any other division of the \"path "
 "of the Moon\"? If so, was it a (equal or unequal) division of the ecliptic "
 "or of any other type?"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:490
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:514
 msgid "Milky Way:"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:491
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:515
 msgid "Was the Milky Way deified? What meaning did it have?"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:492
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:516
 msgid "Other Celestial Objects:"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:493
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:517
 msgid ""
 "What other celestial objects were significant? E.g what about shooting "
 "stars, aurorae? Did they observe stellar transients, e.g. supernovae, that "
 "were visible only in a specific year?"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:494
-msgid "Constellations:"
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:518
+msgid "Constellations*:"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:495
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:519
 msgid ""
-"What is 'real' about your presentation? Did they really use stick figures? "
-"Did they paint images (or just use names of stars)? Did they use stars at "
-"all or prefer dark/bright clouds of the Milky Way?"
+"Sequence of Level 5 Markdown sections:\\n  ##### name\\n\\nDescription of "
+"constellation..."
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:496
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:520
 msgid "Credits and References"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:497
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:521
 msgid "References:*"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:498
-msgid ""
-"What references did you use? E.g. specific texts, images, or other media?"
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:522
+msgid "Authors:*"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:499
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:523
+msgid ""
+"Who are you and what is your background (native person, researcher, ...)? "
+"Ideally, please provide an email-address as well."
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:524
+msgid "About:*"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:525
+msgid ""
+"How do you know about this Sky Culture? Is this contribution based on your "
+"own or other people's research? Is it based on interviews with Elders or "
+"reading ancient text, etc.?"
+msgstr ""
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:526
 msgid "Acknowledgements:"
 msgstr ""
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:500
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:527
 msgid ""
 "What acknowledgements would you like to make? E.g. to interviewed people, "
 "organizations, or resources that helped you?"
@@ -27311,8 +27315,8 @@ msgid ""
 "1. You fully agree that the Sky Culture will be subject to the license you "
 "have selected.\n"
 "2. You have described the Sky Culture as elaborately as possible.\n"
-"3. You have the necessary rights to use and share all included content "
-"(e.g., artwork, descriptions).\n"
+"3. You have the necessary rights to use and share all included content (e."
+"g., artwork, descriptions).\n"
 "4. All information provided is accurate to the best of your knowledge.\n"
 "5. The content is shared in good faith, with respect for cultural "
 "significance and sensitivities.\n"
