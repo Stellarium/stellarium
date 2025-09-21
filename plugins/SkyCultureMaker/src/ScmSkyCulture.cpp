@@ -156,7 +156,7 @@ bool scm::ScmSkyCulture::saveDescriptionAsMarkdown(QFile &file)
 			out << "## Constellations\n\n" << desc.constellations << "\n\n";
 		}
 
-		out << "## References\n" << desc.references << "\n\n";
+		out << "## References\n\n" << desc.references << "\n\n";
 		out << "## Authors\n\n" << desc.authors << "\n\n";
 		out << "### About\n\n" << desc.about << "\n\n";
 		if (!desc.acknowledgements.trimmed().isEmpty())
