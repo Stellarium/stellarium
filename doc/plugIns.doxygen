@@ -39,7 +39,7 @@ As Stellarium's plugin interface has changed over time, plugins for different ve
 
 Static plugins require changes in the core code of Stellarium (the addition of %Qt macros in several classes). This is why adding a new static plugin requires either asking the developers to add it to the main distribution, or creating and distributing a custom build.
 
-Dynamic plugin libriaries need to be installed in a proper place in Stellarium's \ref fileStructure "file tree" to function. Stellarium is looking for plugins in the <tt>/modules</tt> subdirectory of the user data directory or the installation data directory. Each plugin library must be in its own subdiretory of the <tt>/modules</tt> directory. If the plugin is called "MyPlugin", then its subdirectory should be also called <tt>/MyPlugin</tt> and the main name (without the extension) of the plugin binary file should be <tt>libMyPlugin</tt>. So, for example, the file tree should look like this on Windows XP:
+Dynamic plugin libraries need to be installed in a proper place in Stellarium's \ref fileStructure "file tree" to function. Stellarium is looking for plugins in the <tt>/modules</tt> subdirectory of the user data directory or the installation data directory. Each plugin library must be in its own subdirectory of the <tt>/modules</tt> directory. If the plugin is called "MyPlugin", then its subdirectory should be also called <tt>/MyPlugin</tt> and the main name (without the extension) of the plugin binary file should be <tt>libMyPlugin</tt>. So, for example, the file tree should look like this on Windows XP:
  - <tt>C:/Documents and Settings/User/Application Data/Stellarium/</tt> (user data directory)
   - <tt>modules/</tt>
    - <tt>MyPlugin/</tt>
