@@ -77,7 +77,6 @@ before_build:
   - set DEBUG_WINDEPLOYQT=false
   - set PUBLISH_BINARY=false
   - set USE_MESA=false
-  - set USE_EXT_WEBENGINE=false
   - set USE_EXT_LIBSSL=false
   - set USE_EXT_LIBGLES=false
   - set SIGNING=false
@@ -90,7 +89,6 @@ before_build:
   - ps: if($env:QT_BASEDIR.contains('_64')) { $env:PKGARCH="x64" } else { $env:PKGARCH="x86" }
   - ps: if($env:QT_BASEDIR.contains('arm64')) { $env:PKGARCH="arm64" }
   - ps: if($env:QT_VERSION_MAJOR -eq "6") { $env:SSL="OpenSSL-" } else { $env:SSL="OpenSSL-1-" }
-  - ps: if($env:QT_VERSION_MAJOR -eq "6" -and $env:QT_BASEDIR.contains('_64')) { $env:USE_EXT_WEBENGINE = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable") { $env:PUBLISH_BINARY = 'true' }
@@ -107,9 +105,6 @@ before_build:
   - ps: if($env:exiv2url -ne $null) { appveyor DownloadFile $env:exiv2url -FileName c:\$env:exiv2baseName.zip }
   - ps: if($env:exiv2url -ne $null) { 7z e c:\$env:exiv2baseName.zip -spf -oc:\ }
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
-
-  - if [%USE_EXT_WEBENGINE%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/6.8.1-0-202411221529qtwebengine-Windows-Windows_11_23H2-MSVC2022-Windows-Windows_11_23H2-X86_64.7z -FileName c:\qtwebengine.7z 
-  - if [%USE_EXT_WEBENGINE%]==[true] 7z e c:\qtwebengine.7z -spf -o%QT_BASEDIR%
 
   - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { appveyor DownloadFile $env:gettextURL -FileName c:\$env:gettextBaseName.zip }
   - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { 7z e c:\$env:gettextBaseName.zip -spf -oc:\$env:gettextBaseName }
