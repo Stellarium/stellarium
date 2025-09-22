@@ -29634,7 +29634,7 @@ msgstr "No se pudo exportar CMakeLists.txt."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:195
 msgid "Sky culture exported successfully to "
-msgstr "Cultura celeste exportada exitosamente a "
+msgstr "Cultura estelar exportada exitosamente a "
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:206
 msgid "Choose Export Directory"
@@ -29646,12 +29646,12 @@ msgstr "ERROR: El directorio seleccionado no es válido"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:144
 msgid "SCM: Dark Constellation Editor"
-msgstr "SCM: Editor de Constelaciones Oscuras"
+msgstr "CCE: Editor de Constelaciones Oscuras"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:144
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:302
 msgid "SCM: Constellation Editor"
-msgstr "SCM: Editor de Constelaciones"
+msgstr "CCE: Editor de Constelaciones"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:145
 msgid "Please name your Dark Constellation"
@@ -29682,7 +29682,7 @@ msgstr "El archivo elegido no es una imagen PNG, JPG o JPEG:\n"
 msgid "No anchor was selected. Please select an anchor to bind to."
 msgstr ""
 "No se seleccionó ningún ancla. Por favor, seleccione un ancla para "
-"enlazarlo."
+"enlazarla."
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:349
 msgid "No star was selected to bind to the current selected anchor."
@@ -29700,33 +29700,35 @@ msgstr "El objeto seleccionado debe contener un número HIP."
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:401
 msgid "Could not save: Sky Culture is not set"
-msgstr "No se pudo guardar: No se ha establecido la cultura estelar"
+msgstr "No se pudo guardar: no se ha establecido la cultura estelar"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:409
 msgid "Could not save: English name is empty"
-msgstr "No se pudo guardar: El nombre en inglés está vacío"
+msgstr "No se pudo guardar: el nombre en inglés está vacío"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:419
 msgid "Could not save: Constellation ID is empty"
-msgstr "No se pudo guardar: El ID de la constelación está vacío"
+msgstr "No se pudo guardar: el ID de la constelación está vacío"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:428
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:438
 msgid "Could not save: Constellation with this ID already exists"
 msgstr ""
-"No se pudo guardar: Ya existe una constelación con este ID. Por favor, elija"
+"No se pudo guardar: ya existe una constelación con este ID. Por favor, elija"
 " otro ID."
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:449
 msgid "Could not save: The constellation does not contain any drawings"
-msgstr "No se pudo guardar: La constelación no contiene ningún dibujo"
+msgstr ""
+"No se pudo guardar: ya existe una constelación con este ID. Por favor, elija"
+" otro ID."
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:460
 msgid ""
 "Could not save: An artwork is attached, but not all anchors have a star "
 "bound."
 msgstr ""
-"No se pudo guardar: Se adjuntó una ilustración, pero no todos los anclajes "
+"No se pudo guardar: se adjuntó una ilustración, pero no todos los anclajes "
 "tienen una estrella enlazada."
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:96
