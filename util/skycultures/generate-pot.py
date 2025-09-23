@@ -217,7 +217,7 @@ def update_cultures_pot(sclist, pot):
                     print(f'{sky_culture}: warning: common_name property in {obj_type} "{obj_id}" has no English name', file=sys.stderr)
 
                 # Extract 'pronounce' string for translation (with context for uniqueness)
-                if pronounce:
+                if pronounce and not args.skip_pronounce:
                     # Don't extract items that are already translated in other places
                     if not pronounce in common_names:
                         cons_ast_names.add(pronounce)
@@ -372,7 +372,7 @@ def update_cultures_pot(sclist, pot):
                     pot.append(entry)
 
                 # Extract 'pronounce' string for translation (with context for uniqueness)
-                if pronounce:
+                if pronounce and not args.skip_pronounce:
                     pcomment = f'Pronounce entry for {sc_name} name for {obj_id}'
                     if len(comment) > 0:
                         pcomment += '\n' + comment
@@ -429,7 +429,7 @@ def update_cultures_pot(sclist, pot):
             else:
                 pronounce = None
 
-            if not pronounce:
+            if not pronounce or args.skip_pronounce:
                 continue
 
             comment = f'Pronunciation of zodiac sign or name of lunar mansion in {sc_name} sky culture'
@@ -472,6 +472,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--sky-culture", help="Process only the specified sky culture")
     parser.add_argument("--skip-abbrev", action="store_true", help="Don't emit translations for abbreviations")
+    parser.add_argument("--skip-pronounce", action="store_true", help="Don't emit translations for 'pronounce' entries")
     args = parser.parse_args()
     metadata_template = {
         'Project-Id-Version': 'PACKAGE VERSION',
