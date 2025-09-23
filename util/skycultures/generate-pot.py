@@ -350,7 +350,10 @@ def update_cultures_pot(sclist, pot):
                         comment = f'{sc_name} name for {obj_id}'
 
                 if 'translators_comments' in name:
-                    comment += '\n' + name['translators_comments']
+                    if len(comment) == 0:
+                        comment += name['translators_comments']
+                    else:
+                        comment += '\n' + name['translators_comments']
 
                 context = None
                 if 'context' in name:
@@ -365,10 +368,12 @@ def update_cultures_pot(sclist, pot):
                 else:
                     pot.append(entry)
 
-
                 # Extract 'pronounce' string for translation (with context for uniqueness)
                 if pronounce:
-                    pcomment = "Pronounce entry for " + comment
+                    pcomment = f'Pronounce entry for {sc_name} name for {obj_id}'
+                    if len(comment) > 0:
+                        pcomment += '\n' + comment
+
                     entry = polib.POEntry(comment = pcomment, msgid = pronounce, msgstr = "", msgctxt = context)
                     if entry in pot:
                         prev_entry = pot.find(entry.msgid, msgctxt = context)
