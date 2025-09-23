@@ -256,6 +256,8 @@ def update_cultures_pot(sclist, pot):
             # process abbreviations of constellations and asterisms
             parts = obj_id.split(' ')
             abbr_comment = f'Abbreviation of {obj_type} in {sc_name} sky culture'
+            if obj_name:
+                abbr_comment += f", name: {obj_name}"
             abbr_context = 'abbreviation'
             entry = polib.POEntry(comment = abbr_comment, msgid = parts[2], msgstr = "", msgctxt = abbr_context)
             if entry in pot:
