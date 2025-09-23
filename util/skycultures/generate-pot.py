@@ -253,19 +253,20 @@ def update_cultures_pot(sclist, pot):
             else:
                 print(f'{sky_culture}: warning: no common_name key in {obj_type} "{obj_id}"', file=sys.stderr)
 
-            # process abbreviations of constellations and asterisms
-            parts = obj_id.split(' ')
-            abbr_comment = f'Abbreviation of {obj_type} in {sc_name} sky culture'
-            if obj_name:
-                abbr_comment += f", name: {obj_name}"
-            abbr_context = 'abbreviation'
-            entry = polib.POEntry(comment = abbr_comment, msgid = parts[2], msgstr = "", msgctxt = abbr_context)
-            if entry in pot:
-                prev_entry = pot.find(entry.msgid, msgctxt = abbr_context)
-                assert prev_entry
-                prev_entry.comment += '\n' + abbr_comment
-            else:
-                pot.append(entry)
+            if not args.skip_abbrev:
+                # process abbreviations of constellations and asterisms
+                parts = obj_id.split(' ')
+                abbr_comment = f'Abbreviation of {obj_type} in {sc_name} sky culture'
+                if obj_name:
+                    abbr_comment += f", name: {obj_name}"
+                abbr_context = 'abbreviation'
+                entry = polib.POEntry(comment = abbr_comment, msgid = parts[2], msgstr = "", msgctxt = abbr_context)
+                if entry in pot:
+                    prev_entry = pot.find(entry.msgid, msgctxt = abbr_context)
+                    assert prev_entry
+                    prev_entry.comment += '\n' + abbr_comment
+                else:
+                    pot.append(entry)
 
             if obj_name == '':
                 obj_name = obj_id
@@ -470,6 +471,7 @@ def update_cultures_pot(sclist, pot):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--sky-culture", help="Process only the specified sky culture")
+    parser.add_argument("--skip-abbrev", action="store_true", help="Don't emit translations for abbreviations")
     args = parser.parse_args()
     metadata_template = {
         'Project-Id-Version': 'PACKAGE VERSION',
