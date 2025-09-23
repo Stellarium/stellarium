@@ -19574,8 +19574,6 @@ msgstr ""
 #. Pinyin transliteration
 #. 
 #. Pinyin transliteration
-#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 营室, pronounce:
-#. Ying Shi
 #. Chinese Song Dynasty Sky constellation, native: 室宿, pronounce: Shi Xiu
 #. Modern (Chinese) asterism
 msgid "Encampment"
@@ -20930,6 +20928,7 @@ msgstr ""
 #. Chinese Chenzhuo Sky (3rd Century) constellation, native: 大理, pronounce: Da
 #. Li
 #. Chinese Song Dynasty Sky constellation, native: 大理, pronounce: Da Li
+#. Chinese Song Dynasty Sky name for HIP 44504, native: 大理
 #. Modern (Chinese) asterism
 msgid "Chief Judge"
 msgstr ""
@@ -21275,7 +21274,7 @@ msgstr ""
 #. Pronounce entry for Chinese constellation, native: 坟墓(附官), English: Tomb
 #. (Vassal of Rooftop)
 #. Chinese Chenzhuo Sky (3rd Century) constellation, native: 坟墓(附危), English:
-#. Tomb (Adjunct to Wei)
+#. Tomb (Adjunct to Rooftop)
 #. Chinese Song Dynasty Sky constellation, native: 坟墓(附危宿), English: Tomb
 #. (Vassal of Rooftop)
 msgid "Fen Mu"
@@ -23587,12 +23586,12 @@ msgstr ""
 
 #. Pronounce entry for Chinese constellation, native: 离宫(附官), English: Resting
 #. Palace (Vassal of Encampment)
-#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 离宫(附室), English:
-#. Resting Palace (Adjunct to Ying Shi)
-#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 离宫(附室), English:
-#. Resting Palace (Adjunct to Ying Shi)
-#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 离宫(附室), English:
-#. Resting Palace (Adjunct to Ying Shi)
+#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 离宫(附营室), English:
+#. Resting Palace (Adjunct to Military Encampment)
+#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 离宫(附营室), English:
+#. Resting Palace (Adjunct to Military Encampment)
+#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 离宫(附营室), English:
+#. Resting Palace (Adjunct to Military Encampment)
 #. Chinese Song Dynasty Sky constellation, native: 离宫(附室宿), English: Resting
 #. Palace (Vassal of Encampment)
 #. Chinese Song Dynasty Sky constellation, native: 离宫(附室宿), English: Resting
@@ -32365,6 +32364,7 @@ msgstr ""
 
 #. Chinese name for HIP 80763, native: 大火
 #. Pinyin transliteration
+#. Chinese Chenzhuo Sky (3rd Century) name for HIP 80763, native: 大火
 #. Chinese Song Dynasty Sky name for HIP 80763, native: 大火
 #. Modern (Chinese) name for HIP 80763
 msgid "Great Fire"
@@ -34576,7 +34576,7 @@ msgstr ""
 
 #. Chinese Chenzhuo Sky (3rd Century) constellation, native: 坟墓(附危),
 #. pronounce: Fen Mu
-msgid "Tomb (Adjunct to Wei)"
+msgid "Tomb (Adjunct to Rooftop)"
 msgstr ""
 
 #. Abbreviation of constellation in Chinese Chenzhuo Sky (3rd Century) sky
@@ -34655,8 +34655,13 @@ msgctxt "abbreviation"
 msgid "12K"
 msgstr ""
 
+#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 营室, pronounce:
+#. Ying Shi
+msgid "Military Encampment"
+msgstr ""
+
 #. Pronounce entry for Chinese Chenzhuo Sky (3rd Century) constellation,
-#. native: 营室, English: Encampment
+#. native: 营室, English: Military Encampment
 msgid "Ying Shi"
 msgstr ""
 
@@ -34667,13 +34672,13 @@ msgctxt "abbreviation"
 msgid "13A"
 msgstr ""
 
-#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 离宫(附室),
+#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 离宫(附营室),
 #. pronounce: Li Gong
-#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 离宫(附室),
+#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 离宫(附营室),
 #. pronounce: Li Gong
-#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 离宫(附室),
+#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 离宫(附营室),
 #. pronounce: Li Gong
-msgid "Resting Palace (Adjunct to Ying Shi)"
+msgid "Resting Palace (Adjunct to Military Encampment)"
 msgstr ""
 
 #. Abbreviation of constellation in Chinese Chenzhuo Sky (3rd Century) sky
@@ -35816,12 +35821,10 @@ msgstr ""
 #. Chinese Chenzhuo Sky (3rd Century) name for HIP 41704, native: 上将
 #. Chinese Song Dynasty Sky name for HIP 46733, native: 上将
 #. Chinese Song Dynasty Sky name for HIP 49583, native: 上将
-#. Chinese Song Dynasty Sky name for HIP 97649, native: 大将军
 msgid "Great General"
 msgstr ""
 
 #. Chinese Chenzhuo Sky (3rd Century) name for HIP 44901, native: 大理
-#. Chinese Song Dynasty Sky name for HIP 44504, native: 大理
 #. Chinese Song Dynasty Sky name for HIP 48402, native: 太常
 msgid "Minister of Justice"
 msgstr ""
@@ -35990,10 +35993,13 @@ msgid "The Great General"
 msgstr ""
 
 #. Chinese Chenzhuo Sky (3rd Century) name for HIP 78265, native: 次将
-#. Chinese Chenzhuo Sky (3rd Century) name for HIP 78401, native: 次相
 #. Chinese Song Dynasty Sky name for HIP 78265, native: 次将
-#. Chinese Song Dynasty Sky name for HIP 78401, native: 次相
 msgid "The Second General"
+msgstr ""
+
+#. Chinese Chenzhuo Sky (3rd Century) name for HIP 78401, native: 次相
+#. Chinese Song Dynasty Sky name for HIP 78401, native: 次相
+msgid "The Second Premier"
 msgstr ""
 
 #. Chinese Chenzhuo Sky (3rd Century) name for HIP 78527, native: 泮星
@@ -36009,13 +36015,8 @@ msgstr ""
 msgid "Prosperous Frontier"
 msgstr ""
 
-#. Chinese Chenzhuo Sky (3rd Century) name for HIP 80763, native: 大火
-msgid "Great Star"
-msgstr ""
-
 #. Chinese Chenzhuo Sky (3rd Century) name for HIP 80763, native: 大辰
-#. Chinese Song Dynasty Sky name for HIP 80763, native: 天王
-msgid "Celestial King"
+msgid "Great Star"
 msgstr ""
 
 #. Chinese Chenzhuo Sky (3rd Century) name for HIP 83895, native: 龙登
@@ -36593,6 +36594,10 @@ msgstr ""
 msgid "Minor Concubine"
 msgstr ""
 
+#. Chinese Song Dynasty Sky name for HIP 80763, native: 天王
+msgid "Celestial King"
+msgstr ""
+
 #. Chinese Song Dynasty Sky name for HIP 80763, native: 明堂
 msgid "Cosmological Temple"
 msgstr ""
@@ -36609,6 +36614,10 @@ msgstr ""
 
 #. Chinese Song Dynasty Sky name for HIP 97278, native: 右将军
 msgid "Right General"
+msgstr ""
+
+#. Chinese Song Dynasty Sky name for HIP 97649, native: 大将军
+msgid "Supreme General"
 msgstr ""
 
 #. Chinese Song Dynasty Sky name for HIP 98036, native: 左将军
