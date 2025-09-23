@@ -74,7 +74,7 @@ environment:
     CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.8\msvc2022_64 -DQt6LinguistTools_DIR=C:\Qt\6.8\msvc2022_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
     scConverterEnabled: false
 before_build:
-  - set DEBUG_WINDEPLOYQT=false
+  - set DEBUG_WINDEPLOYQT=true
   - set PUBLISH_BINARY=false
   - set USE_MESA=false
   - set USE_EXT_LIBSSL=false
