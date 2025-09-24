@@ -138,7 +138,7 @@ msgstr "黄道带（如果在星空文化中已定义）"
 
 #: src/core/modules/ConstellationMgr.cpp:153
 msgid "Lunar stations/mansions (if defined in skyculture)"
-msgstr "月宿（如果在星空文化中已定义）"
+msgstr "月宿/月站（如果在星空文化中已定义）"
 
 #: src/core/modules/ConstellationMgr.cpp:156
 msgid "Constellation areas (hulls)"
@@ -27824,11 +27824,11 @@ msgstr "所选文件不是PNG、JPG或JPEG图像:\n"
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:338
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:369
 msgid "No anchor was selected. Please select an anchor to bind to."
-msgstr "未选择锚点。请选择一个锚点以进行绑定。"
+msgstr "未选择锚点。请选择一个锚点以进行锚定。"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:349
 msgid "No star was selected to bind to the current selected anchor."
-msgstr "未选择可绑定至当前锚点的恒星。"
+msgstr "未选择可锚定至当前锚点的恒星。"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:360
 msgid "The selected object must be of type Star or Nebula."
@@ -27863,7 +27863,7 @@ msgstr "无法保存：该星座未包含任何绘制内容"
 msgid ""
 "Could not save: An artwork is attached, but not all anchors have a star "
 "bound."
-msgstr "无法保存：已关联一个图绘，但存在未绑定恒星的锚点。"
+msgstr "无法保存：已关联一个图绘，但存在未锚定恒星的锚点。"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:96
 msgid ""
@@ -27911,10 +27911,10 @@ msgstr ""
 "2. 图片中央将出现三个锚点\n"
 "  - 锚点被选中时显示为绿色\n"
 "3. 选择任意恒星\n"
-"4. 点击「绑定恒星」按钮\n"
-"5. 锚点与恒星绑定后会以高亮颜色显示\n"
-"  - 选择锚点时将自动选中其绑定的对应恒星\n"
-"  - 若锚点已存在绑定关系，点击「绑定恒星」将覆盖现有绑定"
+"4. 点击「锚定恒星」按钮\n"
+"5. 锚点与恒星锚定后会以高亮颜色显示\n"
+"  - 选择锚点时将自动选中其锚定的对应恒星\n"
+"  - 若锚点已存在锚定关系，点击「锚定恒星」将覆盖现有锚定"
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:139
 msgid "Create a new sky culture"
@@ -27983,7 +27983,7 @@ msgstr "星座名称"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:316
 msgid "Bind Star"
-msgstr "绑定星"
+msgstr "锚定恒星"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:317
 msgid "Upload Image"
