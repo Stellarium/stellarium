@@ -534,7 +534,7 @@ QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& f
 	Q_UNUSED(core) Q_UNUSED(flags)
 	QString str;
 	QTextStream oss(&str);
-	oss << "<h2>";
+	oss << "<h2 dir=\"ltr\">";
 
 	// NOTE: currently only moons have an IAU designation
 	if (!iauMoonNumber.isEmpty())

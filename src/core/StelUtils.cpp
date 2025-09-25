@@ -1377,13 +1377,21 @@ QString hoursToHmsStr(const float hours, const bool minutesOnly, const bool colo
 //! The method to splitting the text by substrings by some limit of string length
 QString wrapText(const QString& s, const int limit)
 {
+	static const uint32_t RLM32=U'\U0000200f'; // Right-Left-marker (starting Arab/Hebrew)
+	static const uint32_t LRM32=U'\U0000200e'; // Left-right-marker
+	static const uint32_t ZWS32=U'\U0000200b'; // Zero-width space
+	//static const QString LRM{"\u200e"}; // left-to-right mark: zero-width char
+	//static const QString RLM{"\u200f"}; // right-to-left mark: right to left zero-width non-Arabic char
+	static const QString ZWS{"\u200b"}; // zero-width space (we use them to combine cultural label groups)
+
+
 	QString result = "";
 	if (s.length()<=limit)
 		result = s;
 	else
 	{
 		QString prepare = "";
-		QStringList data = s.split(" ");
+		const QStringList data = s.contains(ZWS) ? s.split(ZWS) : s.split(" ");
 		for (int i = 0; i<data.size(); i++)
 		{
 			prepare.append(QString(" %1").arg(data.at(i)));

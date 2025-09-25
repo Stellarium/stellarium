@@ -1009,6 +1009,16 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 // Apply post processing on the info string
 void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flags) const
 {
+	static const QString FSI{"\u2068"}; // First strong isolate: Treat following text as isolated and in the direction of its first strong directional character.
+					    // ASSUMPTION: Can be used as autodetect feature? Mark all parts inside embeddings?
+	static const QString PDI{"\u2069"}; // Pop directional isolate: terminate scope of last LRI/RLI/FSI
+	static const QString LRM{"\u200e"}; // left-right-mark which may be present in Arab strings from translations.
+
+	str.replace(LRM, "");
+	str.replace(FSI, "<span dir=\"auto\">");
+	//str.replace(FSI, "<span dir=\"ltr\">");
+	str.replace(PDI, "</span>");
+
 	StelObjectMgr* omgr;
 	omgr=GETSTELMODULE(StelObjectMgr);
 	str.append(getExtraInfoStrings(Script).join(' '));

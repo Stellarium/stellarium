@@ -997,6 +997,7 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	//static const QString LRM{"\u200e"}; // left-to-right mark: zero-width char
 	//static const QString RLM{"\u200f"}; // right-to-left mark: right to left zero-width non-Arabic char
 	//static const QString ALM{"\u061c"}; // right-to-left mark: right to left zero-width Arabic char
+	static const QString ZWS{"\u200b"}; // zero-width space (we use them to combine cultural label groups)
 
 	StelObject::CulturalName lName;
 	// copy over filled elements from cName, but enclose each with Unicode isolation markers.
@@ -1058,7 +1059,7 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	QStringList braced; // the contents of the secondary term, i.e. pronunciation and transliteration
 	if (styleInt & int(StelObject::CulturalDisplayStyle::Native))
 	{
-		label=nativeOrPronounce;
+		label=nativeOrPronounce+ZWS;
 		// Add pronounciation and Translit in braces
 		if (styleInt & int(StelObject::CulturalDisplayStyle::Pronounce))
 			braced.append(pronounceStr);
@@ -1070,14 +1071,14 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 		// Use the first valid of pronunciation or transliteration as main name (fallback to native), add the others in braces if applicable
 		if (styleInt & int(StelObject::CulturalDisplayStyle::Pronounce))
 		{
-			label=pronounceOrNative;
+			label=pronounceOrNative+ZWS;
 			if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
 				braced.append(lName.transliteration);
 		}
 
 		else if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
 		{
-			label=translitOrPronounce;
+			label=translitOrPronounce+ZWS;
 		}
 	}
 
@@ -1088,11 +1089,11 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 
 	if (!braced.isEmpty())
 	{
-		QString pronTrans=QString(" %1%3%2").arg(QChar(0x2997), QChar(0x2998), braced.join(", "));
+		QString pronTrans=QString(" %1%3%2").arg(QChar(0x2997), QChar(0x2998), braced.join(", "+ZWS));
 		if (rtl)
-			label.prepend(pronTrans);
+			label.prepend(pronTrans+ZWS);
 		else
-			label.append(pronTrans);
+			label.append(pronTrans+ZWS);
 	}
 
 	// Add IPA (where possible)
@@ -1100,9 +1101,9 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	{
 		QString ipa=QString(" [%1]").arg(lName.IPA);
 		if (rtl)
-			label.prepend(ipa);
+			label.prepend(ipa+ZWS);
 		else
-			label.append(ipa);
+			label.append(ipa+ZWS);
 	}
 
 	// Add translation and optional byname in brackets
@@ -1115,18 +1116,18 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 		else if (!label.startsWith(lName.translatedI18n, Qt::CaseInsensitive)) // seems useless to add translation into same string
 
 			//label.append(QString(" (%1)").arg(lName.translatedI18n));
-			bracketed.append(lName.translatedI18n);
+			bracketed.append(lName.translatedI18n+ZWS);
 	}
 
 	if ( (styleInt & int(StelObject::CulturalDisplayStyle::Byname)) && (!lName.bynameI18n.isEmpty()))
-		bracketed.append(lName.bynameI18n);
+		bracketed.append(lName.bynameI18n+ZWS);
 	if (!bracketed.isEmpty())
 	{
-		QString transBy=QString(" (%1)").arg(bracketed.join(", "));
+		QString transBy=QString(" (%1)").arg(bracketed.join(", "+ZWS));
 		if (rtl)
-			label.prepend(transBy);
+			label.prepend(transBy+ZWS);
 		else
-			label.append(transBy);
+			label.append(transBy+ZWS);
 	}
 
 
@@ -1135,9 +1136,9 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	{
 		QString modern=QString(" %1%3%2").arg(QChar(0x29FC), QChar(0x29FD), lCommonNameI18n);
 		if (rtl)
-			label.prepend(modern);
+			label.prepend(modern+ZWS);
 		else
-			label.append(modern);
+			label.append(modern+ZWS);
 	}
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && label.isEmpty()) // if something went wrong?
 		label=lCommonNameI18n;

@@ -172,7 +172,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	const int vMm = StarMgr::getGcvsMM(star_id);
 
 	if ((flags&Name) || (flags&CatalogNumber))
-		oss << "<h2>";
+		oss << "<h2 dir=\"ltr\">";
 
 	const QString commonNameI18 = StarMgr::getCommonNameI18n(star_id);
 	const QString culturalInfoName=StarMgr::getCulturalInfoLabel(star_id);
