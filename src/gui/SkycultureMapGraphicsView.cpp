@@ -213,6 +213,8 @@ void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *event)
 	// }
 
 
+void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *e)
+{
 	auto itemList = scene()->selectedItems();
 	qInfo() << itemList.length();
 	for(auto *i : scene()->selectedItems()) {
@@ -222,7 +224,17 @@ void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *event)
 		qInfo() << "obj: " << pol << " und name: " << pol->getSkycultureId() << " und startZeit: " << pol->getStartTime() << " und endZeit: " << pol->getEndTime();
 	}
 
-	scaleView(pow(2.0, event->angleDelta().y() / 240.0)); // faster scrolling = faster zoom
+	qreal zoomFactor = pow(2.0, e->angleDelta().y() / 240.0);
+	qreal ctrZoomFactor = 0.0;
+	if (e->modifiers() & Qt::ControlModifier)
+	{
+		//holding ctrl while wheel zooming results in a finer zoom
+		ctrZoomFactor = 1.0 + ( zoomFactor - 1.0 ) / 15.0;
+		scaleView(ctrZoomFactor);
+		return;
+	}
+
+	scaleView(zoomFactor); // faster scrolling = faster zoom
 }
 
 void SkycultureMapGraphicsView::mouseMoveEvent(QMouseEvent *e)
@@ -322,7 +334,7 @@ void SkycultureMapGraphicsView::mouseReleaseEvent( QMouseEvent *e )
 	}
 }
 
-void SkycultureMapGraphicsView::showEvent(QShowEvent *event)
+void SkycultureMapGraphicsView::showEvent(QShowEvent *e)
 {
 	// fit the base map to the current view when the widget is first shown
 	// (This cannot be done beforehand because the calculation is based on the current size of the viewPort.
@@ -336,7 +348,7 @@ void SkycultureMapGraphicsView::showEvent(QShowEvent *event)
 		firstShow = false;
 	}
 
-	QGraphicsView::showEvent(event);
+	QGraphicsView::showEvent(e);
 }
 
 void SkycultureMapGraphicsView::scaleView(double factor)
@@ -344,7 +356,7 @@ void SkycultureMapGraphicsView::scaleView(double factor)
 	// calculate requested zoom before executing the zoom operation to limit the min / max zoom level
 	const double scaling = transform().scale(factor, factor).mapRect(QRectF(0, 0, 1, 1)).width();
 
-	if (scaling < 0.2 || scaling > 40.0) // min / max zoom level
+	if (scaling < 0.1 || scaling > 500.0) // scaling < min or scaling > max zoom level
 		return;
 
 	scale(factor, factor);
@@ -427,12 +439,14 @@ void SkycultureMapGraphicsView::selectAllCulturePolygon(const QString &skycultur
 {
 	for (const auto &item : scene()->items())
 	{
+		// make sure the current item is a SkyculturePolygonItem
 		SkyculturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyculturePolygonItem *>(item);
 		if (!scPolyItem)
 		{
 			continue;
 		}
 
+		// by default set selection to false
 		scPolyItem->setSelectionState(false);
 
 		if (skycultureId == scPolyItem->getSkycultureId())
@@ -498,7 +512,7 @@ void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId)
 		return;
 	}
 
-	// if needed change the current year and update the polygon visibility
+	// if needed, change the current year and update the polygon visibility
 	if(!skyCulturePolygon->existsAtPointInTime(currentYear))
 	{
 		// signal connects to updateSkyCultureTime in ViewDialog which invokes updateTime (in this class)
@@ -510,9 +524,6 @@ void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId)
 	//skyCulturePolygon->setSelected(true);
 	selectAllCulturePolygon(skycultureId);
 
-	// start zoom (async?) to polygon and set TimeSlider to correct time (startTime of selected polygon?)
-	//fitInView(skyCulturePolygon->boundingRect(), Qt::KeepAspectRatio); --> funktioniert aber sehr passgenau
-	// x = x - 1/4 width, y = y - 1/4 height, width = width * 1.5, height = height * 1.5 --> entweder dynamisch oder min (z.B. 100 oder so)
 	const QRectF polyBbox = skyCulturePolygon->boundingRect();
 	int minViewValue = 25;
 

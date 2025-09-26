@@ -27,7 +27,7 @@ signals:
 	void timeRangeChanged(int minYear, int maxYear);
 
 protected:
-	void wheelEvent(QWheelEvent *event) override;
+	void wheelEvent(QWheelEvent *e) override;
 	void mouseMoveEvent(QMouseEvent *e) override;
 	void mousePressEvent(QMouseEvent *e) override;
 	void mouseReleaseEvent(QMouseEvent *e) override;
