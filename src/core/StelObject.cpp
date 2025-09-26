@@ -1039,6 +1039,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 
 	if (flags&PlainText)
 	{
+		static const QRegularExpression h2Re("<h2[^>]*>");
 		static const QRegularExpression brRe2("<br(\\s*/)?>\\s*");
 		static const QRegularExpression tdRe1("<td\\s*>");
 		static const QRegularExpression tdRe2("<td \\w+='[^']*'>"); // Seen: style, align, colspan, rowspan. Always only one expression.
@@ -1048,7 +1049,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		static const QRegularExpression tableRe4("<table style=\"[^\"]*\">");
 		str.replace("<b>", "");
 		str.replace("</b>", "");
-		str.replace("<h2>", "");
+		str.replace(h2Re, "");
 		str.replace("</h2>", "\n");
 		str.replace(brRe2, "\n");
 		str.replace("<tr>", "");

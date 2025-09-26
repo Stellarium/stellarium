@@ -977,8 +977,6 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 					       const QString &commonNameI18n,
 					       const QString &abbrevI18n) const
 {
-	// rtl tracks the right-to-left status of the text in the current position.
-	const bool rtl = StelApp::getInstance().getLocaleMgr().isSkyRTL();
 	// Each element may be in an RTL language (e.g. Arab). However,
 	// - for most (left-to-right) languages we want a canonical order of left to right elements.
 	// - for Arab and other right-to-left user languages, we set a canonical order of right-to-left elements.
@@ -1016,7 +1014,7 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	// If native contains non-Latin glyphs, pronounce or transliteration is mandatory.
 	QString pronounceStr=(lName.pronounceI18n.isEmpty() ? lName.pronounce : lName.pronounceI18n);
 	QString nativeOrPronounce = (lName.native.isEmpty() ? lName.pronounceI18n : lName.native);
-	QString pronounceOrNative = (lName.pronounceI18n.isEmpty() ? lName.native : lName.pronounceI18n);
+	QString pronounceOrNative = (pronounceStr.isEmpty() ? lName.native : pronounceStr);
 	QString translitOrPronounce = (lName.transliteration.isEmpty() ? pronounceStr : lName.transliteration);
 
 	// If you call this with an actual argument abbrevI18n, you really only want a short label.
@@ -1090,9 +1088,6 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	if (!braced.isEmpty())
 	{
 		QString pronTrans=QString(" %1%3%2").arg(QChar(0x2997), QChar(0x2998), braced.join(", "+ZWS));
-		if (rtl)
-			label.prepend(pronTrans+ZWS);
-		else
 			label.append(pronTrans+ZWS);
 	}
 
@@ -1100,9 +1095,6 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::IPA)) && (!lName.IPA.isEmpty()) && (label != lName.IPA))
 	{
 		QString ipa=QString(" [%1]").arg(lName.IPA);
-		if (rtl)
-			label.prepend(ipa+ZWS);
-		else
 			label.append(ipa+ZWS);
 	}
 
@@ -1124,9 +1116,6 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	if (!bracketed.isEmpty())
 	{
 		QString transBy=QString(" (%1)").arg(bracketed.join(", "+ZWS));
-		if (rtl)
-			label.prepend(transBy+ZWS);
-		else
 			label.append(transBy+ZWS);
 	}
 
@@ -1135,9 +1124,6 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && (!commonNameI18n.isEmpty()) && (!label.startsWith(lCommonNameI18n)) && (lCommonNameI18n!=lName.translatedI18n))
 	{
 		QString modern=QString(" %1%3%2").arg(QChar(0x29FC), QChar(0x29FD), lCommonNameI18n);
-		if (rtl)
-			label.prepend(modern+ZWS);
-		else
 			label.append(modern+ZWS);
 	}
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && label.isEmpty()) // if something went wrong?

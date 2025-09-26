@@ -22,6 +22,7 @@
 #include "MinorPlanet.hpp"
 #include "Orbit.hpp"
 #include "StelCore.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
 
 #include <QRegularExpression>
@@ -169,10 +170,12 @@ QString MinorPlanet::getNameI18n() const
 QString MinorPlanet::getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const
 {
 	Q_UNUSED(core) Q_UNUSED(flags)
+	// rtl tracks the right-to-left status of the text in the current position.
+	const bool rtl = StelApp::getInstance().getLocaleMgr().isSkyRTL();
 	QString str;
 	QTextStream oss(&str);
 
-	oss << "<h2>";
+	oss << (rtl ? "<h2 dir=\"rtl\">" : "<h2 dir=\"ltr\">");
 	if (nameIsIAUDesignation)
 	{
 		if (minorPlanetNumber)
