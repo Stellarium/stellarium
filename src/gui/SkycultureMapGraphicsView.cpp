@@ -2,16 +2,18 @@
 #include "SkyculturePolygonItem.hpp"
 #include <qjsonarray.h>
 #include <qgraphicssvgitem.h>
+#include <qscrollbar.h>
 
 #include <QJsonObject>
 #include <QJsonDocument>
 
 SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	: QGraphicsView(parent)
-	, minYear(-2000)
-	, maxYear(2000)
+	, viewScrolling(false)
+	, mapMoved(false)
 	, firstShow(true)
 	, currentYear(0)
+	, mouseLastXY(0, 0)
 	, oldSkyCulture("")
 {
 	QGraphicsScene *scene = new QGraphicsScene(this);
@@ -21,13 +23,10 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	setRenderHint(QPainter::Antialiasing); // maybe unnecessary for this project
 	setTransformationAnchor(AnchorUnderMouse);
 
-	// when drawing the basemap picture it's important to zoom out far enough (otherwise the cultureListWidget Layout will be compressed)
-	//scale(qreal(0.3), qreal(0.3)); // default transformation (zoom)
-
-	QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
+	setCursor(Qt::ArrowCursor);
 	setMouseTracking(true);
 
-	setDragMode(QGraphicsView::ScrollHandDrag);
+	//setDragMode(QGraphicsView::NoDrag);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	show();
@@ -226,60 +225,103 @@ void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *event)
 	scaleView(pow(2.0, event->angleDelta().y() / 240.0)); // faster scrolling = faster zoom
 }
 
-void SkycultureMapGraphicsView::mouseMoveEvent(QMouseEvent *event)
+void SkycultureMapGraphicsView::mouseMoveEvent(QMouseEvent *e)
 {
-
-	// if(event->buttons() == Qt::LeftButton)
-	// {
-	//    //viewport()->setCursor(Qt::ClosedHandCursor); // QGuiApplication::overrideCursor()
-	//    QGuiApplication::setOverrideCursor(Qt::ClosedHandCursor);
-	// }
-	// else
-	// {
-	//    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
-	//    //viewport()->setCursor(Qt::ArrowCursor);
-	// }
-
-	QGraphicsView::mouseMoveEvent(event);
-}
-
-void SkycultureMapGraphicsView::mousePressEvent(QMouseEvent *event)
-{
-	qInfo() << "current mouse pos --> raw: " << event->pos() << " mapToScene: " << mapToScene(event->pos());
-	qInfo() << "current transformation" << transform();
-
-	// safe the currently selected skyculture before de-selecting
-	if(scene()->selectedItems().length() > 0)
-	{
-		const QString previousCulture = qgraphicsitem_cast<SkyculturePolygonItem *>(scene()->selectedItems()[0])->getSkycultureId();
+	// reimplementation of default ScrollHandDrag in QGraphicsView
+	if (viewScrolling) {
+		if (!mapMoved)
+		{
+			QGuiApplication::setOverrideCursor(Qt::ClosedHandCursor);
+		}
+		QScrollBar *hBar = horizontalScrollBar();
+		QScrollBar *vBar = verticalScrollBar();
+		QPoint delta = e->pos() - mouseLastXY;
+		hBar->setValue(hBar->value() + (isRightToLeft() ? delta.x() : -delta.x()));
+		vBar->setValue(vBar->value() - delta.y());
+		mapMoved = true;
 	}
 
-	// de-select all graphic items present in the scene so the cursor can be set for dragging
-	scene()->clearSelection();
+	mouseLastXY = e->pos();
 
-	QGraphicsView::mousePressEvent(event);
+	QGraphicsView::mouseMoveEvent(e);
+}
 
-	// if no item is selected (no polygon is clicked) set the right cursor for drag-mode
-	if(scene()->selectedItems().length() == 0)
+void SkycultureMapGraphicsView::mousePressEvent(QMouseEvent *e)
+{
+	//qInfo() << "src: " << e->source() << " type: " << e->type() << " Button code:" << e->button();
+
+	if ( e->button() == Qt::LeftButton )
 	{
-		QGuiApplication::setOverrideCursor(Qt::ClosedHandCursor);
+		if( e->modifiers() & Qt::ControlModifier )
+		{
+			qInfo() << "sky ---> ctrl Press";
+		}
+		else if( e->modifiers() & Qt::ShiftModifier )
+		{
+			qInfo() << "sky ---> shift Press";
+
+		}
+		else {
+			qInfo() << "sky ---> normal Press";
+
+			qInfo() << "press Event is NOT poly ---> init viewScrolling";
+			viewScrolling = true;
+		}
+	}
+	else if ( e->button() == Qt::RightButton )
+	{
+		qInfo() << "right press";
 	}
 	else
 	{
-		// get the skyculture identifier (QString) of the current selected SkyculturePolygonItem
-		const QString currentSkyCulture = qgraphicsitem_cast<SkyculturePolygonItem *>(scene()->selectedItems()[0])->getSkycultureId();
+		qInfo() << "else press";
+	}
 
-		// if the current culture is the same as before --> do not emit the signal so that the skyCulture isn't updated unnecessarily
-		if(currentSkyCulture != oldSkyCulture)
+	// if event is not accepted (mouse not over item) mouseReleaseEvent is not triggered
+	e->setAccepted(true);
+
+}
+
+void SkycultureMapGraphicsView::mouseReleaseEvent( QMouseEvent *e )
+{
+	setFocus();
+
+	QGraphicsView::mouseReleaseEvent(e);
+
+	if (!mapMoved)
+	{
+		//
+		QGraphicsItem *currentTopmostMouseGrabberItem = itemAt(e->pos());
+
+		// the item is either SkyculturePolygonItem or QGraphicsSvgItem (background) ---> try to cast it to SkyculturePolygonItem
+		SkyculturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyculturePolygonItem *>(currentTopmostMouseGrabberItem);
+		if (scPolyItem)
 		{
-			// emit the current skyCulture, so viewDialog can handle the change
-			emit cultureSelected(currentSkyCulture);
-			oldSkyCulture = currentSkyCulture;
+			qInfo() << "press Event is PolyItem";
+			const QString currentSkyCulture = scPolyItem->getSkycultureId();
+
+			// determine if a new culture is being selected
+			if (oldSkyCulture != currentSkyCulture)
+			{
+				// if so, select all polygons of the respective culture, emit the cultureSelected Signal and set the oldSkyCulture to currentSkyCulture
+				selectAllCulturePolygon(currentSkyCulture);
+				emit cultureSelected(currentSkyCulture);
+				oldSkyCulture = currentSkyCulture;
+			}
+		}
+	}
+
+	if(viewScrolling)
+	{
+		viewScrolling = false;
+		if (mapMoved)
+		{
+			mapMoved = false;
+			QGuiApplication::restoreOverrideCursor();
 		}
 	}
 }
 
-void SkycultureMapGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 void SkycultureMapGraphicsView::showEvent(QShowEvent *event)
 {
 	// fit the base map to the current view when the widget is first shown

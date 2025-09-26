@@ -28,18 +28,19 @@ signals:
 
 protected:
 	void wheelEvent(QWheelEvent *event) override;
-	void mouseMoveEvent(QMouseEvent *event) override;
-	void mousePressEvent(QMouseEvent *event) override;
-	void mouseReleaseEvent(QMouseEvent *event) override;
-	void showEvent(QShowEvent *event) override;
+	void mouseMoveEvent(QMouseEvent *e) override;
+	void mousePressEvent(QMouseEvent *e) override;
+	void mouseReleaseEvent(QMouseEvent *e) override;
+	void showEvent(QShowEvent *e) override;
 	void scaleView(double scaleFactor);
 
 private:
 	// variables
-	int minYear;
-	int maxYear;
+	bool viewScrolling;
+	bool mapMoved;
 	bool firstShow;
 	int currentYear;
+	QPoint mouseLastXY;
 	QString oldSkyCulture;
 	QTimeLine zoomToDefaultTimer;
 	QTimeLine zoomOnTargetTimer;
