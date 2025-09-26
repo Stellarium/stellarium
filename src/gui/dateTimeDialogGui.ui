@@ -31,7 +31,7 @@
    </property>
    <item row="0" column="0">
     <widget class="TitleBar" name="titleBar">
-     <property name="title">
+     <property name="title" stdset="0">
       <string>Date and Time</string>
      </property>
     </widget>
@@ -103,10 +103,10 @@
              <set>Qt::AlignCenter</set>
             </property>
             <property name="minimum">
-             <number>-100000</number>
+             <number>-200000</number>
             </property>
             <property name="maximum">
-             <number>100000</number>
+             <number>200000</number>
             </property>
            </widget>
           </item>

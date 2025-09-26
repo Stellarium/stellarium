@@ -245,7 +245,6 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->todayTimeSpinBox, SIGNAL(timeChanged(QTime)), core, SLOT(setInitTodayTime(QTime)));
 	ui->fixedDateTimeEdit->setMinimumDate(QDate(100,1,1));
 	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(core->getPresetSkyTime(), Qt::LocalTime));
-	ui->fixedDateTimeEdit->setDisplayFormat("dd.MM.yyyy HH:mm");
 	connect(ui->fixedDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), core, SLOT(setPresetSkyTime(QDateTime)));
 
 	bool state = (mvmgr->getFlagEnableMoveKeys() || mvmgr->getFlagEnableZoomKeys());
@@ -287,6 +286,9 @@ void ConfigurationDialog::createDialogContent()
 		ui->dtRadioButton->setChecked(true);
 	connect(ui->jdRadioButton, SIGNAL(clicked(bool)), this, SLOT(setButtonBarDTFormat()));
 	connect(ui->dtRadioButton, SIGNAL(clicked(bool)), this, SLOT(setButtonBarDTFormat()));
+
+	// Important: updating display format for date and time after settings these formats
+	updateDateTimeDisplayFormat();
 
 	// Delta-T
 	populateDeltaTAlgorithmsList();	
@@ -458,6 +460,15 @@ void ConfigurationDialog::createDialogContent()
 		ui->scriptInfoBrowser->document()->setDefaultStyleSheet(style);
 		ui->deltaTAlgorithmDescription->document()->setDefaultStyleSheet(style);
 	});
+}
+
+void ConfigurationDialog::updateDateTimeDisplayFormat()
+{
+	StelLocaleMgr& localeManager = StelApp::getInstance().getLocaleMgr();
+	QString timeFormat = localeManager.getQtTimeFormatStr();
+	QString dateFormat = localeManager.getQtDateFormatStr();
+	ui->todayTimeSpinBox->setDisplayFormat(timeFormat);
+	ui->fixedDateTimeEdit->setDisplayFormat(QString("%1 %2").arg(dateFormat, timeFormat));
 }
 
 void ConfigurationDialog::setKeyNavigationState(bool state)
@@ -1009,6 +1020,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/rot_fov_rectangular_marker",		QString::number(propMgr->getStelPropertyValue("SpecialMarkersMgr.fovRectangularMarkerRotationAngle").toDouble(), 'f', 2));
 	conf->setValue("viewing/line_thickness",			propMgr->getStelPropertyValue("GridLinesMgr.lineThickness").toInt());
 	conf->setValue("viewing/part_thickness",			propMgr->getStelPropertyValue("GridLinesMgr.partThickness").toInt());
+	conf->setValue("viewing/point_size",				propMgr->getStelPropertyValue("GridLinesMgr.pointSize").toInt());
 
 	conf->setValue("viewing/constellation_font_size",		propMgr->getStelPropertyValue("ConstellationMgr.fontSize").toInt());
 	conf->setValue("viewing/flag_constellation_drawing",		propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool());
@@ -2043,7 +2055,8 @@ void ConfigurationDialog::setDateFormat()
 		return;
 
 	StelApp::immediateSave("localization/date_display_format", selectedFormat);
-	localeManager.setDateFormatStr(selectedFormat);	
+	localeManager.setDateFormatStr(selectedFormat);
+	updateDateTimeDisplayFormat();
 }
 
 void ConfigurationDialog::populateTimeFormatsList()
@@ -2079,6 +2092,7 @@ void ConfigurationDialog::setTimeFormat()
 
 	StelApp::immediateSave("localization/time_display_format", selectedFormat);
 	localeManager.setTimeFormatStr(selectedFormat);
+	updateDateTimeDisplayFormat();
 }
 
 void ConfigurationDialog::populateDitherList()

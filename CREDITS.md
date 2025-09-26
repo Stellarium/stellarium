@@ -277,7 +277,7 @@
 	4.3a Jupiter map created by James Hastings-Trew from Cassini data. "The 
 	     maps are free to download and use as source material or resource
 	     in artwork or rendering (CGI or real time)."
-	4.3b The Sun and Iapetus maps and rings of Uranus 
+	4.3b The Iapetus map and the rings of Uranus
 	     are from Celestia (http://shatters.net/celestia/)
 	     under the GNU General Purpose License, version 2 or any later
 	     version:
@@ -310,6 +310,9 @@
 	     http://maps.jpl.nasa.gov/   see license in section 10.2
 	4.3n Bennu map is created by NASA from OSIRIS-REx spacecraft data. Public domain.
 	     Full size mosaic: https://www.asteroidmission.org/bennu_global_mosaic/
+	4.3o The Sun map was created by Ruslan Kabatsayev from the images taken by SDO HMI.
+	     The map is under the GNU General Public License, version 2 or any later
+	     version.
 	4.4 The fullsky milky way panorama is created by Axel Mellinger,
 	    University of Potsdam, Germany. Further information and more
 	    pictures available from

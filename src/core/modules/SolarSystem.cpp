@@ -19,7 +19,9 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <execution> // must be included before Qt because some versions of libtbb use "emit" identifier for their needs
+#ifdef STD_EXECUTION_KNOWN
+# include <execution> // must be included before Qt because some versions of libtbb use "emit" identifier for their needs
+#endif
 
 #include "SolarSystem.hpp"
 #include "StelTexture.hpp"
@@ -61,6 +63,7 @@
 #include <QMapIterator>
 #include <QDebug>
 #include <QDir>
+#include <QFont>
 #include <QHash>
 #include <QtConcurrent>
 #include <QOpenGLBuffer>
@@ -128,7 +131,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, markerMagThreshold(15.)
 	, computePositionsAlgorithm(conf->value("devel/compute_positions_algorithm", 2).toInt())
 {
-	planetNameFont.setPixelSize(StelApp::getInstance().getScreenFontSize());
+	fontSize = StelApp::getInstance().getScreenFontSize();
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 	setObjectName("SolarSystem");
 	connect(this, SIGNAL(flagOrbitsChanged(bool)),            this, SLOT(reconfigureOrbits()));
@@ -149,7 +152,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 
 void SolarSystem::setFontSize(int newFontSize)
 {
-	planetNameFont.setPixelSize(newFontSize);
+	fontSize = newFontSize;
 }
 
 SolarSystem::~SolarSystem()
@@ -356,9 +359,6 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_EnlargePlanets", displayGroup, N_("Enlarge Planets"), "flagPlanetScale");
 	addAction("actionShow_Planets_EnlargeSun", displayGroup, N_("Enlarge Sun"), "flagSunScale");
 	addAction("actionShow_Planets_ShowMinorBodyMarkers", displayGroup, N_("Mark minor bodies"), "flagMarkers");
-
-	connect(StelApp::getInstance().getModule("HipsMgr"), SIGNAL(gotNewSurvey(HipsSurveyP)),
-			this, SLOT(onNewSurvey(HipsSurveyP)));
 
 	// Fill ephemeris dates
 	connect(this, SIGNAL(requestEphemerisVisualization()), this, SLOT(fillEphemerisDates()));
@@ -1895,6 +1895,8 @@ void SolarSystem::draw(StelCore* core)
 	if (!flagShow)
 		return;
 	static StelObjectMgr *sObjMgr=GETSTELMODULE(StelObjectMgr);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 
 	// Compute each Planet distance to the observer
 	const Vec3d obsHelioPos = core->getObserverHeliocentricEclipticPos();
@@ -1930,7 +1932,7 @@ void SolarSystem::draw(StelCore* core)
 	for (const auto& p : std::as_const(systemPlanets))
 	{
 		if ( (p != sun) || (/* (p == sun) && */ !(core->getSkyDrawer()->getFlagDrawSunAfterAtmosphere())))
-			p->draw(core, maxMagLabel, planetNameFont, eclipseFactor);
+			p->draw(core, maxMagLabel, font, eclipseFactor);
 	}
 	if (nbMarkers>0)
 	{
@@ -4174,40 +4176,6 @@ bool SolarSystem::removeMinorPlanet(const QString &name)
 	return true;
 }
 
-void SolarSystem::onNewSurvey(HipsSurveyP survey)
-{
-	if (!survey->isPlanetarySurvey()) return;
-
-	const auto type = survey->getType();
-	const bool isPlanetColor = type == "planet";
-	const bool isPlanetNormal = type == "planet-normal";
-	const bool isPlanetHorizon = type == "planet-horizon";
-	if (!isPlanetColor && !isPlanetNormal && !isPlanetHorizon)
-		return;
-
-	QString planetName = survey->getFrame();
-	PlanetP pl = searchByEnglishName(planetName);
-	if (!pl) return;
-	if (isPlanetColor)
-	{
-		if (pl->survey) return;
-		pl->survey = survey;
-	}
-	else if (isPlanetNormal)
-	{
-		if (pl->surveyForNormals) return;
-		pl->surveyForNormals = survey;
-	}
-	else if (isPlanetHorizon)
-	{
-		if (pl->surveyForHorizons) return;
-		pl->surveyForHorizons = survey;
-	}
-	survey->setProperty("planet", pl->getEnglishName());
-	// Not visible by default for the moment.
-	survey->setProperty("visible", false);
-}
-
 void SolarSystem::setExtraThreads(int n)
 {
 	extraThreads=qBound(0,n,QThreadPool::globalInstance()->maxThreadCount()-1);
@@ -4232,3 +4200,13 @@ const QMap<Planet::ApparentMagnitudeAlgorithm, QString> SolarSystem::vMagAlgorit
 	{Planet::Generic,			"Generic"},
 	{Planet::UndefinedAlgorithm,		""}
 };
+
+void SolarSystem::enableSurvey(const HipsSurveyP& colors, const HipsSurveyP& normals, const HipsSurveyP& horizons)
+{
+	Q_ASSERT(colors);
+	QString planetName = HipsSurvey::frameToPlanetName(colors->getFrame());
+	PlanetP pl = searchByEnglishName(planetName);
+	if (!pl) return;
+
+	pl->setSurvey(colors, normals, horizons);
+}

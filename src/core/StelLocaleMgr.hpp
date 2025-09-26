@@ -103,6 +103,9 @@ public:
 	QString getDateFormatStr(void) const {return sDateFormatToString(dateFormat);}	
 	void setDateFormatStr(const QString& df) {dateFormat=stringToSDateFormat(df);}
 
+	//! Get the format string which describes the current time format (Qt style).
+	QString getQtTimeFormatStr(void) const;
+
 	//! Get the format string which describes the current date format (Qt style).
 	QString getQtDateFormatStr(void) const;
 	

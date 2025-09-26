@@ -52,10 +52,9 @@ StelPluginInfo SimpleDrawLineStelPluginInterface::getPluginInfo() const
 /*************************************************************************
  Constructor
 *************************************************************************/
-SimpleDrawLine::SimpleDrawLine()
+SimpleDrawLine::SimpleDrawLine(): fontSize(25)
 {
 	setObjectName("SimpleDrawLine");
-	font.setPixelSize(25);
 }
 
 /*************************************************************************

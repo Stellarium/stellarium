@@ -143,6 +143,8 @@ private slots:
 
 	void showConfigureScreenshotsDialog();
 
+	void updateDateTimeDisplayFormat();
+
 	void populateDateFormatsList();
 	void setDateFormat();
 

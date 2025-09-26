@@ -3227,6 +3227,29 @@
                    </property>
                   </widget>
                  </item>
+                 <item>
+                  <widget class="QLabel" name="pointSizeLabel">
+                   <property name="text">
+                    <string>points</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="pointSizeSpinBox">
+                   <property name="toolTip">
+                    <string>Size of celestial points in pixels</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="minimum">
+                    <number>5</number>
+                   </property>
+                   <property name="maximum">
+                    <number>25</number>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
                </item>
                <item row="6" column="7">
@@ -6312,6 +6335,12 @@
                  </property>
                 </widget>
                </item>
+               <item row="6" column="3">
+                <widget class="QComboBox" name="zodiacLabelComboBox"/>
+               </item>
+               <item row="6" column="9">
+                <widget class="QComboBox" name="lunarSystemLabelComboBox"/>
+               </item>
               </layout>
              </item>
              <item row="4" column="0">
@@ -6365,13 +6394,6 @@
           <item row="0" column="0">
            <widget class="QComboBox" name="surveyTypeComboBox"/>
           </item>
-          <item row="2" column="0">
-           <widget class="QListWidget" name="surveysListWidget">
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QLineEdit" name="surveysFilter">
             <property name="placeholderText">
@@ -6380,6 +6402,24 @@
             <property name="clearButtonEnabled">
              <bool>true</bool>
             </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QTreeWidget" name="surveysTreeWidget">
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <property name="rootIsDecorated">
+             <bool>false</bool>
+            </property>
+            <property name="headerHidden">
+             <bool>true</bool>
+            </property>
+            <column>
+             <property name="text">
+              <string/>
+             </property>
+            </column>
            </widget>
           </item>
          </layout>
@@ -6524,12 +6564,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>

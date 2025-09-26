@@ -30,8 +30,6 @@
 #include "Planet.hpp"
 #include "StelHips.hpp"
 
-#include <QFont>
-
 class Orbit;
 class StelSkyCulture;
 class StelTranslator;
@@ -787,6 +785,9 @@ public slots:
 	//! Configure the limiting absolute magnitude for plotting minor bodies. Configured value is clamped to -2..37 (practical limit)
 	void setMarkerMagThreshold(double m);
 
+	//! Enable the survey for use on the planet it describes
+	void enableSurvey(const HipsSurveyP& colors, const HipsSurveyP& normals, const HipsSurveyP& horizons);
+
 signals:
 	void labelsDisplayedChanged(bool b);
 	void flagOrbitsChanged(bool b);
@@ -1057,9 +1058,6 @@ private slots:
 	void setEphemerisSaturnMarkerColor(const Vec3f& c);
 	Vec3f getEphemerisSaturnMarkerColor(void) const;
 
-	//! Called when a new Hips survey has been loaded by the hips mgr.
-	void onNewSurvey(HipsSurveyP survey);
-
 	//! Taking the JD dates for each ephemeride and preparation the human readable dates according to the settings for dates
 	void fillEphemerisDates();
 
@@ -1134,7 +1132,7 @@ private:
 	bool flagSunScale;
 	double sunScale;
 
-	QFont planetNameFont;
+	int fontSize;
 
 	//! The amount of planet labels (between 0 and 10).
 	double labelsAmount;

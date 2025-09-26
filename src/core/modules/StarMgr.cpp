@@ -57,6 +57,7 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QDir>
+#include <QFont>
 #include <QCryptographicHash>
 
 #include <cstdlib>
@@ -68,7 +69,7 @@ Q_GLOBAL_STATIC(QStringList, objtype_array);
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always match the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 24;
+static const int StarCatalogFormatVersion = 25;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -164,6 +165,7 @@ StarMgr::StarMgr(void)
 	, maxGeodesicGridLevel(-1)
 	, lastMaxSearchLevel(-1)
 	, hipIndex(new HipIndexStruct[NR_OF_HIP+1])
+	, fontSize(12)
 {
 	setObjectName("StarMgr");
 	objectMgr = GETSTELMODULE(StelObjectMgr);
@@ -842,6 +844,12 @@ void StarMgr::loadCultureSpecificNameForStar(const QJsonArray& data, const StarI
 
 		StelObject::CulturalName cName{entry["native"].toString(), entry["pronounce"].toString(), trans.qTranslateStar(entry["pronounce"].toString()),
 					entry["transliteration"].toString(), entry["english"].toString(), trans.qTranslateStar(entry["english"].toString()), entry["IPA"].toString()};
+		QString byname=entry["byname"].toString();
+		if (!byname.isEmpty())
+		{
+			cName.byname=byname;
+			cName.bynameI18n=trans.qTranslateStar(byname);
+		}
 		//if (culturalNamesMap.contains(HIP))
 		//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated << "/" << cName.translatedI18n;
 		culturalNamesMap.insert(HIP, cName); // add as possibly multiple entry to HIP.
@@ -1282,7 +1290,10 @@ void StarMgr::draw(StelCore* core)
 
 	// Prepare openGL for drawing many stars
 	StelPainter sPainter(prj);
-	sPainter.setFont(starFont);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
+	sPainter.setFont(font);
+
 	skyDrawer->preDrawPointSource(&sPainter);
 
 	// Prepare a table for storing precomputed RCMag for all ZoneArrays
@@ -1536,6 +1547,7 @@ void StarMgr::updateI18n()
 		StelObject::CulturalName &cName=it.value();
 		cName.pronounceI18n=trans.qTranslateStar(cName.pronounce);
 		cName.translatedI18n=trans.qTranslateStar(cName.translated);
+		cName.bynameI18n=trans.qTranslateStar(cName.byname);
 		it.value() = cName;
 
 		// rebuild index
@@ -1576,7 +1588,7 @@ StelObjectP StarMgr::searchGaia(StarId source_id) const
 	int lv12_pix = source_id / 34359738368;
 	Vec3d v;
 	StelObjectP so;
-	healpix_pix2vec(pow(2, 12), lv12_pix, v.v);  // search which pixel the source is in and turn to coordinates
+	healpix_pix2vec(int(pow(2., 12.)), lv12_pix, v.v);  // search which pixel the source is in and turn to coordinates
 	Vec3f vf = v.toVec3f();
 
 	for (const auto* z : gridLevels)
@@ -2108,7 +2120,7 @@ void StarMgr::setLabelsAmount(double a)
 // Define font file name and size to use for star names display
 void StarMgr::setFontSize(int newFontSize)
 {
-	starFont.setPixelSize(newFontSize);
+	fontSize=newFontSize;
 }
 
 // Set flag for usage designations of stars for their labels instead common names.

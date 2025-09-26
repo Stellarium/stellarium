@@ -811,19 +811,18 @@ SphericalRegionP Constellation::makeConvexHull(const std::vector<StelObjectP> &s
 
 void Constellation::makeConvexHull()
 {
-	// For 2-star automatic hulls, we must recreate XYZname, the hull circle center.
+	// For 2-star automatic hulls, we must recreate the default XYZname (balance point) as hull circle center.
 	if (constellation.size()==2 && XYZname.length()==1)
 	{
-		StelCore *core=StelApp::getInstance().getCore();
+		static StelCore *core=StelApp::getInstance().getCore();
 		Vec3d XYZname1(0.);
-		XYZname.clear();
 		for(unsigned int i=0;i<constellation.size();++i)
 		{
 			XYZname1 += constellation.at(i)->getJ2000EquatorialPos(core);
 		}
 		XYZname1.normalize();
-		XYZname.append(XYZname1);
+		convexHull=makeConvexHull(constellation, hullExtension, dark_constellation, XYZname1, hullRadius);
 	}
-
-	convexHull=makeConvexHull(constellation, hullExtension, dark_constellation, XYZname.constFirst(), hullRadius);
+	else
+		convexHull=makeConvexHull(constellation, hullExtension, dark_constellation, XYZname.constFirst(), hullRadius);
 }

@@ -114,7 +114,7 @@ void HipsMgr::loadSources()
 		QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		connect(networkReply, &QNetworkReply::finished, this, [=] {
 			QByteArray data = networkReply->readAll();
-			QList<HipsSurveyP> newSurveys = HipsSurvey::parseHipslist(data);
+			QList<HipsSurveyP> newSurveys = HipsSurvey::parseHipslist(source.toString(), data);
 			for (HipsSurveyP &survey: newSurveys)
 			{
 				connect(survey.data(), SIGNAL(propertiesChanged()), this, SIGNAL(surveysChanged()));

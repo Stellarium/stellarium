@@ -29,7 +29,7 @@
 
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
-#include "StelActionMgr.hpp"
+//#include "StelActionMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
@@ -1456,7 +1456,6 @@ void Observability::loadConfiguration()
 
 	// Load settings from main config file
 	fontSize = conf->value("font_size",15).toInt();
-	font.setPixelSize(fontSize);
 	fontColor = Vec3f(conf->value("font_color", "0,0.5,1").toString());
 	show_AcroCos = conf->value("show_AcroCos", true).toBool();
 	show_Good_Nights = conf->value("show_Good_Nights", true).toBool();
@@ -1824,6 +1823,7 @@ void Observability::renderResults() {
 	// Set the painter:
 	StelPainter painter(core->getProjection2d());
 	painter.setColor(fontColor, 1.f);
+	QFont font=QGuiApplication::font();
 	font.setPixelSize(fontSize);
 	painter.setFont(font);
 

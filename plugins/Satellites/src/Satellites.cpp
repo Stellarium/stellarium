@@ -53,6 +53,7 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
+#include <QFont>
 #include <QTimer>
 #include <QVariantMap>
 #include <QVariant>
@@ -874,7 +875,7 @@ void Satellites::loadSettings()
 #endif
 
 	// Get a font for labels
-	labelFont.setPixelSize(conf->value("hint_font_size", 10).toInt());
+	labelFontSize = conf->value("hint_font_size", 10).toInt();
 
 	// orbit drawing params
 	Satellite::orbitLinesFlag = conf->value("orbit_line_flag", false).toBool();
@@ -971,7 +972,7 @@ void Satellites::saveSettingsToConfig()
 #endif
 
 	// Get a font for labels
-	conf->setValue("hint_font_size", labelFont.pixelSize());
+	conf->setValue("hint_font_size", labelFontSize);
 
 	// orbit drawing params
 	conf->setValue("orbit_line_flag", Satellite::orbitLinesFlag);
@@ -2226,9 +2227,9 @@ void Satellites::setMaxCFRCS(double v)
 
 void Satellites::setLabelFontSize(int size)
 {
-	if (labelFont.pixelSize() != size)
+	if (labelFontSize != size)
 	{
-		labelFont.setPixelSize(size);
+		labelFontSize = size;
 		emit labelFontSizeChanged(size);
 		emit settingsChanged();
 	}
@@ -2909,7 +2910,9 @@ void Satellites::draw(StelCore* core)
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
-	painter.setFont(labelFont);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(labelFontSize);
+	painter.setFont(font);
 	Satellite::hintBrightness = hintFader.getInterstate();
 
 	painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
@@ -2964,7 +2967,9 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 	painter.setProjector(core->getProjection(StelCore::FrameHeliocentricEclipticJ2000, StelCore::RefractionAuto));
 	painter.setBlending(true, GL_ONE, GL_ONE);
 	painter.setLineSmooth(true);
-	painter.setFont(labelFont);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(labelFontSize);
+	painter.setFont(font);
 
 	double lambda, beta;
 	const Vec3d pos = earth->getEclipticPos();

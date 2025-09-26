@@ -32,7 +32,6 @@
 #include "Telescope.hpp"
 #include "VecMath.hpp"
 
-#include <QFont>
 #include <QSettings>
 
 #define MIN_OCULARS_INI_VERSION 3.1f
@@ -467,7 +466,7 @@ private:
 	double selectedCCDPrismPositionAngle;//!< allows rotating via property/remotecontrol API
 	int arrowButtonScale;           //!< allows scaling of the GUI "previous/next" Ocular/CCD/Telescope etc. buttons
 
-	QFont font;			//!< The font used for drawing labels.
+	int fontSize;			//!< The font size used for drawing labels.
 	bool flagShowCCD;		//!< flag used to track if we are in CCD mode.
 	bool flagShowOculars;		//!< flag used to track if we are in ocular mode.
 	bool flagShowCrosshairs;	//!< flag used to track in crosshairs should be rendered in the ocular view.

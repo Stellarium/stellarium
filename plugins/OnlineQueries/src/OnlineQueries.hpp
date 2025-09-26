@@ -23,7 +23,6 @@
 #include "StelModule.hpp"
 #include "HipOnlineQuery.hpp"
 
-#include <QFont>
 #include <QString>
 
 class QPixmap;

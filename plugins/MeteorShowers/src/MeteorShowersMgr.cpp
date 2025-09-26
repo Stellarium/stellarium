@@ -560,7 +560,7 @@ void MeteorShowersMgr::setEnableAtStartup(const bool& b)
 void MeteorShowersMgr::setFontSize(int pixelSize)
 {
 	pixelSize = pixelSize < 1 ? 13 : pixelSize;
-	m_font.setPixelSize(pixelSize);
+	m_fontSize = pixelSize;
 	m_conf->setValue(MS_CONFIG_PREFIX + "/font_size", pixelSize);
 }
 

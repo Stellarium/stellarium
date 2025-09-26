@@ -60,12 +60,16 @@ public:
 	                           const QVector<uint16_t>& indices)> DrawCallback;
 	//! Create a new HipsSurvey from its url.
 	//! @param url The location of the survey.
+	//! @param group A string that identifies a group of color/normals/horizons
+	//!              surveys that this survey belongs to.
 	//! @param frame The reference frame from the survey's \c hips_frame property.
 	//! @param type Survey type from the survey's \c type property.
 	//! @param releaseDate If known the UTC JD release date of the survey.  Used for cache busting.
-	HipsSurvey(const QString& url, const QString& frame, const QString& type,
+	HipsSurvey(const QString& url, const QString& group, const QString& frame, const QString& type,
 	           const QMap<QString, QString>& hipslistProps, double releaseDate=0.0);
 	~HipsSurvey() override;
+
+	static QString frameToPlanetName(const QString& frame);
 
 	//! Get whether the survey is visible.
 	bool isVisible() const;
@@ -91,6 +95,9 @@ public:
 	//! Return the type of the survey (its \c type property).
 	QString getType() const { return type; }
 
+	//! Return the group of of color/normals/horizons surveys that this survey belongs to.
+	QString getGroup() const { return group; }
+
 	//! Get whether the survey is still loading.
 	bool isLoading(void) const;
 
@@ -100,7 +107,7 @@ public:
 	void setHorizonsSurvey(const HipsSurveyP& horizons);
 
 	//! Parse a hipslist file into a list of surveys.
-	static QList<HipsSurveyP> parseHipslist(const QString& data);
+	static QList<HipsSurveyP> parseHipslist(const QString& hipslistURL, const QString& data);
 
 signals:
 	void propertiesChanged(void);
@@ -113,6 +120,7 @@ private:
 private:
 	LinearFader fader;
 	QString url;
+	QString group;
 	QString type;
 	QString hipsFrame;
 	QString planet;

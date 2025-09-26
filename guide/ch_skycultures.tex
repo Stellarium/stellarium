@@ -367,10 +367,11 @@ The tag ``classification'' allows describing the origin and intended use of this
 In the late 18th century, when variable stars started to be catalogued by a code that included the star's constellation, 
 a necessity arose to define which sky region belonged to which constellation. 
 Atlases of this period showed curved boundaries between the constellations. 
-Such boundaries are hard to describe by coordinates, though. The Uranographia Argentina proposed a different approach.
-The boundaries were described by straight segments along great circles of equal right ascension and small circles of equal declination. 
+Such boundaries are hard to describe by coordinates, though. The Uranographia Argentina \citep{1879RNAO....1....1G} proposed a different approach.
+The boundaries were described by mostly straight segments along great circles of equal right ascension and small circles of equal declination. 
 The atlas used coordinates for epoch B1875.0. 
-In 1930 the International Astronomical Union (IAU) ratified  this partition of the sky into the 88 constellations used by scientists and amateurs ever since.
+Based on this work, in 1930 the International Astronomical Union (IAU) ratified a partition of the sky into the 88 constellations 
+(now only using lines along constant right ascension/declination of B1875.0) used by scientists and amateurs ever since.
 When looking at these boundaries in J2000.0 coordinates, we can see they are no longer parallel to the J2000.0 coordinate grid, the deviation caused by precession. 
 
 Partitions of the full sky into contiguous regions defined by edges between coordinate vertices defined in  
@@ -451,7 +452,8 @@ Constellations are coded as array of dictionaries:
 where
 
 \begin{description}
-\item[\jtag{id}] A unique figure identifier, consisting of \texttt{CON} (for \indexterm[constellation]{constellations}), skyculture id, and a short label still unique within the skyculture.
+\item[\jtag{id}] A unique figure identifier, consisting of \texttt{CON} (for \indexterm[constellation]{constellations}), skyculture id, 
+                 and a short Latin-character based label still unique within the skyculture.
                  For IAU-based skycultures, these short labels must be the IAU standard labels. For others, you can invent your own. It is not necessary to have exactly
                  3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended:  
                  the short label is displayed when enabling abbreviated screen labels (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
@@ -463,12 +465,12 @@ where
 		    Even Deep-Sky objects \newFeature{25.2}(like a naked-eye open cluster) can be added to a constellation line when written as 
 		    string starting with \texttt{"DSO:"}, like \jtag{DSO:M7}.
 
-                    To describe \indexterm[constellations!dark]{dark constellations}\newFeature{25.2} formed from dust clouds in the Milky Way or other non-stellar items, 
+                    To describe \indexterm[constellation!dark]{dark constellations}\newFeature{25.2} formed from dust clouds in the Milky Way or other non-stellar items, 
                     another variant can use coordinate lists and is technically an array of arrays of 2-part arrays of float numbers, 
                     each pair being right ascension $\alpha$ (decimal hours) and declination $\delta$ (decimal degrees) in equinox J2000.0. 
                     See below how Stellarium can help you write these arrays.
 
-                    \indexterm[constellations!single-star]{Single-star constellations}\newFeature{25.1}  or particular highlights can be described with just one star repeated in a two-element segment.
+                    \indexterm[constellation!single-star]{Single-star constellations}\newFeature{25.1}  or particular highlights can be described with just one star repeated in a two-element segment.
                     The respective star will be encircled with a radius of 
 \item[\jtag{single\_star\_radius}] (float, default 0.5)\newFeature{25.1}.
 \item[\jtag{hull\_extension}] (optional)\newFeature{25.2} A vector of star IDs (HIP number as integer, Gaia DR3 long integer number as string, 
@@ -482,9 +484,13 @@ where
 	\begin{description}
 	    \item[\jtag{native}] name in the original language of the skyculture. 
 	    \item[\jtag{english}] translation of the name's meaning. This is translated to users' language.
-	    \item[\jtag{byname}] an optional explanatory addition to the name. \newFeature{25.3}  May be helpful to explain mythological figures. This is translated to users' language, but is not included in search functions.
-	    \item[\jtag{pronounce}] (optional, but recommended) a Latin-character based transliteration/pronunciation aid, e.g. Pinyin for Chinese. This may also be translated to user language.
-	    \item[\jtag{transliteration}] (optional) a scientific transliteration where applicable. 
+	    \item[\jtag{byname}] an optional explanatory addition to the name. \newFeature{25.3}  May be helpful to explain mythological figures. 
+		This is translated to users' language, but is not included in search functions.
+	    \item[\jtag{pronounce}] (optional, but recommended) a Latin-character based transliteration/pronunciation aid, e.g.\ Pinyin for Chinese. 
+		This may also be translated to user language.
+	    \item[\jtag{transliteration}] (optional) a scientific Latin-character based transliteration where applicable. 
+		This is not translatable or adaptable to user language conventions, but may include extended diacritics. 
+		An example is Wylie for Tibetan, which is not meant to help in pronunciation.  
 	    \item[\jtag{IPA}] (optional) International Phonetic Alphabet, a standardardized phonetic spelling.
 	\end{description}
 
@@ -525,7 +531,7 @@ that would be visible from April to May, would be specified as:
 \end{description}
 
 
-\paragraph{Drawing dark constellations}\index{constellations!dark}
+\paragraph{Drawing dark constellations}\index{constellation!dark}\label{SC:constellations:dark:markers}
 The outlines \newFeature{25.2}of figures like the ``Emu in the Sky'' cannot be described with connect-the-dot star patterns, 
 as they are formed from the absence of luminous patterns. We need to describe them using coordinate lists. 
 To make the process less tedious, we can extend setting Markers (see \ref{sec:tour:markers}). 
@@ -546,6 +552,14 @@ is an area of the sky described by a convex polygon which surrounds all stars th
 plus those objects which are listed in \jtag{hull\_extension}. 
 While the IAU has defined 88 constellation areas in 1930, constellations of other cultures are not as clearly defined. These areas can help analyzing historical records.
 Note that a point may lie in zero, one or more than one constellation area(s) when it overlaps two or even more adjacent figures. 
+
+Technically, the stars are projected perspectively onto a tangential plane to the celestial sphere 
+at the balance point of all involved stars. 
+Then a simple \emph{package wrapping} algorithm \citep[ch.25]{Sedgewick:AlgorithmsInC} can be applied to find the convex hull. 
+Straight lines in the projection are great circle arcs. 
+Note that this limits constellation size to less than 180 degrees in the sky, 
+outlying stars will currently be discarded. 
+(Please report an error if this affects you, so we might find a better solution.)
 
 This functionality is an advanced topic mostly used by sky culture researchers \citep[e.g.][94-98]{Hoffmann2017a} who are also not afraid of calling scripting functions (see ch.~\ref{ch:scripting}), 
 and is therefore hidden from beginning users. To make use of it, edit your \file{config.ini} and add a key:
@@ -649,12 +663,12 @@ Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help ra
 \end{jsonfile}
 
 \begin{description}
-\item[\jtag{id}] A unique asterism identifier, consisting of \texttt{AST} (for asterism), skyculture id, and a short label still unique within the skyculture.
+\item[\jtag{id}] A unique asterism identifier, consisting of \texttt{AST} (for asterism), skyculture id, and a short Latin-character based label still unique within the skyculture.
                  It is not necessary to have exactly 3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended:  
 				 the short label is displayed when activating abbbreviated labels (s.~\ref{sec:gui:view:skyculture}). If you want to prevent
 				 certain abbreviations from being displayed at all, let them start with a dot. 				 
 \item[\jtag{common\_name}] Another dict with entries \jtag{native} (as used in the source), \jtag{english} (the translatable english name), 
-                \jtag{pronounce}, \jtag{transliteration} and \jtag{IPA} as defined for constellations,
+                \jtag{pronounce}, \jtag{transliteration}, \jtag{IPA} and \jtag{byname} as defined for constellations,
 				and an optional array \jtag{references} which lists from which sources (from \ref{SC:references}) this asterism was taken. 
 
 				Collecting sources and giving such references is always a good idea. If you feel ther are more in the collection than you like, 
@@ -756,6 +770,29 @@ or 1-2 letter string (for practical reasons, a sequential number seems generally
 The number of entries must be equal to (or larger than) the first element of \jtag{partitions}. Excessive entries are ignored. 
 \end{description}
 
+\noindent In the Arabian peninsula, a similar system of 28 \indexterm{lunar stations} is in use until today, 
+but the actual asterism appears to be more important than the regularity of the ecliptic partition. 
+The first station is centered around \emph{al-Thurayya} (the Pleiades star cluster). In some skycultures the ``band'' of 
+stations around the ecliptic is shown irregular, with boxes trying to frame the associated asterisms:
+
+\begin{jsonfile}[\scriptsize]
+"lunar_system":  { 
+  "name": {"english": "Lunar Stations", "native": "...", "pronounce": "Manazil alQamar", "IPA": "manazilulqamar"},
+  "partitions": [ 28, 3, 2],
+  "extent": [10.0, -10.0, 10.0, -10.0, 10.0, -15.0, 10.0, -15.0, 15.0, ... ],
+    "context": "arabian lunar stations",
+    "link": { "star": 17702, "offset": 6.428571428571429, "comment": "center of first station is Lucida Pleiadum"},
+    "names": [{ "symbol":  "1", "english": "Al-Thurayya", "native": "...", ... },
+              { "symbol":  "2", "english": "Al-Dabaran",  "native": "...", ... },
+                ...
+\end{jsonfile}  
+where
+\begin{description}
+\item[\jtag{partitions}] regular division of the centerline. 28 stations which are further divided into 3 equal parts that are further halved.
+\item[\jtag{extent}] As array of latitude coordinates\newFeature{25.3}, they provide alternating north and south latitudes for all stations. 
+                     The number of entries must be twice the number of partitions.
+\end{description}
+
 \noindent In China, the 28 \indexterm{lunar mansions} are defined in a different way. 28 \indexterm{defining stars} mark the begin (western edge) of each mansion,
 and great circles are drawn from the celestial poles through these stars. In Stellarium, the defining stars are marked with a little circle. 
 The mansions are quite different in width. 
@@ -798,9 +835,12 @@ Names for stars, constellations, \newFeature{25.2}asterisms, planets and DSOs ca
     \item[\jtag{english}] translation of the name's meaning. This is translated to users' language.
     \item[\jtag{pronounce}] (optional, but recommended) a Latin-character based transliteration/pronunciation aid, 
     required when \jtag{native} is written in non-Latin-based glyphs (e.g., Chinese, Arab, Hindu, Tibetan, \ldots), 
-    e.g. Pinyin for Chinese. This may also be translated to user language to adopt different customs.
-    \item[\jtag{transliteration}] (optional) a scientific transliteration where applicable. For example, Wylie for Tibetan.
+    e.g. Pinyin for Chinese. This is usually written with simple characters found on typewriters and may also be translated to user language to adopt different customs.
+    \item[\jtag{transliteration}] (optional) a scientific Latin-character based transliteration where applicable. Not translatable to user language, but may use extended diacritics.
+	The scheme may not be helpful as pronunciation aid. For example, Wylie for Tibetan.
     \item[\jtag{IPA}] (optional) International Phonetic Alphabet, a standardardized phonetic spelling.
+    \item[\jtag{byname}] an optional explanatory addition to the name. \newFeature{25.3} May be helpful to explain mythological figures. 
+	This is translated to users' language, but is not included in search functions.
     \item[\jtag{translator\_comments}] (optional):  comments to be shown to translators on Transifex.    
     \item[\jtag{references}] (optional): array of integers, referring to the references list in \file{description.md}. 
 \end{description}
@@ -827,6 +867,15 @@ As example, we show a part of the Samoan skyculture:
     "NAME Venus": [{"english": "Morning Star / Forbidden Radiance", "native": "Tapu'itea"}]
   }
 \end{jsonfile}
+
+\subsubsection{No translation in Modern Skyculture?}
+
+The star names that have been collected over the years in our default \emph{Modern} skyculture come from an extensive collection of sources.
+Some names from Latin and Arab sources have a well-known meaning.  
+In contrast to what we recommend for non-modern skycultures, we still keep the original name as translation in the \jtag{english} string, 
+as such names are used internationally, without thinking about the translated meaning. 
+Translated names may show slight, language dependent, spelling variations, or transliterations to other glyph systems, though.
+At best, the \jtag{byname} can transport a translation of the meaning to user language. 
 
 \subsubsection{Star names}
 

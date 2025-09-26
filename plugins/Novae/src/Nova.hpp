@@ -22,7 +22,6 @@
 #include <QVariant>
 #include <QString>
 #include <QStringList>
-#include <QFont>
 #include <QList>
 #include <QDateTime>
 

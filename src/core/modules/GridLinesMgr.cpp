@@ -38,6 +38,7 @@
 #include <vector>
 #include <QSettings>
 #include <QDebug>
+#include <QFont>
 #include <QFontMetrics>
 
 //! @class SkyGrid
@@ -61,7 +62,7 @@ public:
 private:
 	Vec3f color;
 	StelCore::FrameType frameType;
-	QFont font;
+	int fontSize;
 	LinearFader fader;
 	float lineThickness;
 };
@@ -92,6 +93,8 @@ public:
 	// Create and precompute positions of a SkyGrid
 	SkyPoint(SKY_POINT_TYPE _point_type = CELESTIALPOLES_J2000);
 	virtual ~SkyPoint();
+	static void init(); //! call once before creating the first line.
+	static void deinit(); //! call once after deleting all lines.
 	void draw(StelCore* core) const;
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() const {return color;}
@@ -100,17 +103,21 @@ public:
 	void setDisplayed(const bool displayed){fader = displayed;}
 	bool isDisplayed() const {return fader;}
 	void setFontSize(int newSize);
+	void setPointSize(float size) { pointSize = size; }
+	float getPointSize() { return pointSize; }
 	//! Re-translates the label.
 	void updateLabel();
+	static void setSolarSystem(SolarSystem* ss);
 private:
-	QSharedPointer<Planet> earth, sun;
+	static QSharedPointer<Planet> earth, sun, moon;
 	SKY_POINT_TYPE point_type;
 	Vec3f color;
 	StelCore::FrameType frameType;
 	LinearFader fader;
-	QFont font;
+	int fontSize;
 	QString northernLabel, southernLabel;
-	StelTextureSP texCross;
+	float pointSize;
+	StelTextureSP texPoint;
 };
 
 
@@ -119,7 +126,7 @@ private:
 SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2f,0.2f,0.2f), frameType(frame), lineThickness(1)
 {
 	// Font size is 12
-	font.setPixelSize(StelApp::getInstance().getScreenFontSize()-1);
+	fontSize = StelApp::getInstance().getScreenFontSize()-1;
 }
 
 SkyGrid::~SkyGrid()
@@ -128,7 +135,7 @@ SkyGrid::~SkyGrid()
 
 void SkyGrid::setFontSize(int newFontSize)
 {
-	font.setPixelSize(newFontSize);
+	fontSize = newFontSize;
 }
 
 // Step sizes in arcsec
@@ -351,6 +358,8 @@ void SkyGrid::draw(const StelCore* core) const
 		sPainter.setLineWidth(lineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
 	sPainter.setColor(color, fader.getInterstate());
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	sPainter.setFont(font);
 
 	ViewportEdgeIntersectCallbackData userData(&sPainter);
@@ -554,7 +563,7 @@ void SkyGrid::draw(const StelCore* core) const
 SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0.f, 1.f), lineThickness(1), partThickness(1), showPartitions(true), showLabel(true), culturalOffset(0.0)
 {
 	// Font size is 14
-	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
+	fontSize = StelApp::getInstance().getScreenFontSize()+1;
 	updateLabel();
 }
 
@@ -653,7 +662,7 @@ SkyLine::~SkyLine()
 
 void SkyLine::setFontSize(int newFontSize)
 {
-	font.setPixelSize(newFontSize);
+	fontSize = newFontSize;
 }
 
 void SkyLine::updateLabel()
@@ -773,6 +782,8 @@ void SkyLine::draw(StelCore *core) const
 	const float oldLineWidth=sPainter.getLineWidth();
 	sPainter.setLineWidth(lineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	sPainter.setFont(font);
 
 	draw(sPainter, oldLineWidth);
@@ -1414,11 +1425,13 @@ void SkyLine::draw(StelPainter &sPainter, const float oldLineWidth) const
 	sPainter.setBlending(false);
 }
 
+QSharedPointer<Planet> SkyPoint::earth, SkyPoint::sun, SkyPoint::moon;
+
 SkyPoint::SkyPoint(SKY_POINT_TYPE _point_type) : point_type(_point_type), color(0.f, 0.f, 1.f)
 {
 	// Font size is 14
-	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
-	texCross = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
+	fontSize = StelApp::getInstance().getScreenFontSize()+1;
+	texPoint = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
 	sun = GETSTELMODULE(SolarSystem)->getSun();
@@ -1426,14 +1439,33 @@ SkyPoint::SkyPoint(SKY_POINT_TYPE _point_type) : point_type(_point_type), color(
 	updateLabel();
 }
 
+void SkyPoint::init()
+{
+	setSolarSystem(GETSTELMODULE(SolarSystem));
+}
+
+void SkyPoint::deinit()
+{
+	earth = nullptr;
+	sun   = nullptr;
+	moon  = nullptr;
+}
+
+void SkyPoint::setSolarSystem(SolarSystem* ss)
+{
+	earth = ss->getEarth();
+	sun   = ss->getSun();
+	moon  = ss->getMoon();
+}
+
 SkyPoint::~SkyPoint()
 {
-	texCross.clear();
+	texPoint.clear();
 }
 
 void SkyPoint::setFontSize(int newFontSize)
 {
-	font.setPixelSize(newFontSize);
+	fontSize = newFontSize;
 }
 
 void SkyPoint::updateLabel()
@@ -1593,15 +1625,18 @@ void SkyPoint::draw(StelCore *core) const
 	// Initialize a painter and set openGL state
 	StelPainter sPainter(prj);
 	sPainter.setColor(color, fader.getInterstate());
-	Vec4f textColor(color, fader.getInterstate());
+	//Vec4f textColor(color, fader.getInterstate());
 
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	sPainter.setFont(font);
+
 	/////////////////////////////////////////////////
 	// Draw the point
 
-	texCross->bind();
+	texPoint->bind();
 	const float size = 0.00001f*M_PI_180f*sPainter.getProjector()->getPixelPerRadAtCenter();
-	const float shift = 4.f + size/1.8f;
+	const float shift = pointSize + size/1.8f;
 
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
@@ -1616,11 +1651,11 @@ void SkyPoint::draw(StelCore *core) const
 		case SUPERGALACTICPOLES:
 		{
 			// North Pole
-			sPainter.drawSprite2dMode(Vec3d(0,0,1), 5.f);
+			sPainter.drawSprite2dMode(Vec3d(0,0,1), pointSize);
 			sPainter.drawText(Vec3d(0,0,1), northernLabel, 0, shift, shift, false);
 
 			// South Pole
-			sPainter.drawSprite2dMode(Vec3d(0,0,-1), 5.f);
+			sPainter.drawSprite2dMode(Vec3d(0,0,-1), pointSize);
 			sPainter.drawText(Vec3d(0,0,-1), southernLabel, 0, shift, shift, false);
 			break;
 		}
@@ -1628,11 +1663,11 @@ void SkyPoint::draw(StelCore *core) const
 		case EQUINOXES_OF_DATE:
 		{
 			// Vernal equinox
-			sPainter.drawSprite2dMode(Vec3d(1,0,0), 5.f);
+			sPainter.drawSprite2dMode(Vec3d(1,0,0), pointSize);
 			sPainter.drawText(Vec3d(1,0,0), northernLabel, 0, shift, shift, false);
 
 			// Autumnal equinox
-			sPainter.drawSprite2dMode(Vec3d(-1,0,0), 5.f);
+			sPainter.drawSprite2dMode(Vec3d(-1,0,0), pointSize);
 			sPainter.drawText(Vec3d(-1,0,0), southernLabel, 0, shift, shift, false);
 			break;
 		}
@@ -1640,22 +1675,22 @@ void SkyPoint::draw(StelCore *core) const
 		case SOLSTICES_OF_DATE:
 		{
 			// Summer solstice
-			sPainter.drawSprite2dMode(Vec3d(0,1,0), 5.f);
+			sPainter.drawSprite2dMode(Vec3d(0,1,0), pointSize);
 			sPainter.drawText(Vec3d(0,1,0), northernLabel, 0, shift, shift, false);
 
 			// Winter solstice
-			sPainter.drawSprite2dMode(Vec3d(0,-1,0), 5.f);
+			sPainter.drawSprite2dMode(Vec3d(0,-1,0), pointSize);
 			sPainter.drawText(Vec3d(0,-1,0), southernLabel, 0, shift, shift, false);
 			break;
 		}
 		case GALACTICCENTER:
 		{
 			// Galactic Center point
-			sPainter.drawSprite2dMode(Vec3d(1,0,0), 5.f);
+			sPainter.drawSprite2dMode(Vec3d(1,0,0), pointSize);
 			sPainter.drawText(Vec3d(1,0,0), northernLabel, 0, shift, shift, false);
 
 			// Galactic Anticenter point
-			sPainter.drawSprite2dMode(Vec3d(-1,0,0), 5.f);
+			sPainter.drawSprite2dMode(Vec3d(-1,0,0), pointSize);
 			sPainter.drawText(Vec3d(-1,0,0), southernLabel, 0, shift, shift, false);
 			break;
 		}
@@ -1663,14 +1698,13 @@ void SkyPoint::draw(StelCore *core) const
 		{
 			// Antisolar Point
 			Vec3d coord=core->getCurrentObserver()->getHomePlanet()->getHeliocentricEclipticPos();
-			sPainter.drawSprite2dMode(coord, 5.f);
+			sPainter.drawSprite2dMode(coord, pointSize);
 			sPainter.drawText(coord, northernLabel, 0, shift, shift, false);
 			break;
 		}
 		case EARTH_UMBRA_CENTER:
 		{
 			// We compute the shadow center attached to the geocenter, but must point it in the opposite direction of the sun's aberrated position.
-			static PlanetP moon=GETSTELMODULE(SolarSystem)->getMoon();
 			const Vec3d pos=earth->getEclipticPos();
 			const Vec3d dir= - sun->getAberrationPush() + pos;
 			double lambda, beta;
@@ -1681,7 +1715,7 @@ void SkyPoint::draw(StelCore *core) const
 			Vec3d point(dist, 0.0, 0.0);
 			rot.transfo(point);
 			Vec3d coord = pos+point;
-			sPainter.drawSprite2dMode(coord, 5.f);
+			sPainter.drawSprite2dMode(coord, pointSize);
 			sPainter.drawText(coord, northernLabel, 0, shift, shift, false);
 			break;
 		}
@@ -1694,9 +1728,9 @@ void SkyPoint::draw(StelCore *core) const
 			// In some cases we don't have a valid speed vector
 			if (dir.normSquared()>0.)
 			{
-				sPainter.drawSprite2dMode(dir, 5.f);
+				sPainter.drawSprite2dMode(dir, pointSize);
 				sPainter.drawText(dir, northernLabel, 0, shift, shift, false);
-				sPainter.drawSprite2dMode(-dir, 5.f);
+				sPainter.drawSprite2dMode(-dir, pointSize);
 				sPainter.drawText(-dir, southernLabel, 0, shift, shift, false);
 			}
 			break;
@@ -1712,6 +1746,7 @@ GridLinesMgr::GridLinesMgr()
 {
 	setObjectName("GridLinesMgr");
 	SkyLine::init();
+	SkyPoint::init();
 
 	equGrid = new SkyGrid(StelCore::FrameEquinoxEqu);
 	fixedEquatorialGrid = new SkyGrid(StelCore::FrameFixedEquatorial);
@@ -1822,6 +1857,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete umbraCenterPoint;
 	delete apexPoints;	
 	SkyLine::deinit();
+	SkyPoint::deinit();
 }
 
 /*************************************************************************
@@ -1925,6 +1961,8 @@ void GridLinesMgr::init()
 	// Set the line thickness for grids and lines
 	setLineThickness(conf->value("viewing/line_thickness", 1.f).toFloat());
 	setPartThickness(conf->value("viewing/part_thickness", 1.f).toFloat());
+	// Set the point size
+	setPointSize(conf->value("viewing/point_size", 5.f).toFloat());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color", "0.5,0.5,0.7").toString();
@@ -1972,9 +2010,10 @@ void GridLinesMgr::init()
 	setColorApexPoints(              Vec3f(conf->value("color/apex_points_color", defaultColor).toString()));
 
 	StelApp& app = StelApp::getInstance();
-	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLabels()));
-	connect(&app, SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
-	
+	connect(&app, &StelApp::languageChanged,       this, &GridLinesMgr::updateLabels);
+	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
+	connect(&app, &StelApp::screenFontSizeChanged, this, &GridLinesMgr::setFontSizeFromApp);
+
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Gridlines",                  displayGroup, N_("Grids and lines"), "gridlinesDisplayed");
 	addAction("actionShow_Equatorial_Grid",            displayGroup, N_("Equatorial grid"), "equatorGridDisplayed", "E");
@@ -2027,6 +2066,7 @@ void GridLinesMgr::connectSolarSystem()
 	SolarSystem *ss=GETSTELMODULE(SolarSystem);
 	earth = ss->getEarth();
 	SkyLine::setSolarSystem(ss);
+	SkyPoint::setSolarSystem(ss);
 }
 
 void GridLinesMgr::update(double deltaTime)
@@ -4027,6 +4067,38 @@ void GridLinesMgr::setPartThickness(const float thickness)
 float GridLinesMgr::getPartThickness() const
 {
 	return equatorLine->getPartThickness();
+}
+
+void GridLinesMgr::setPointSize(const float size)
+{
+	float pointSize = celestialJ2000Poles->getPointSize();
+	if (!qFuzzyCompare(pointSize, size))
+	{
+		pointSize=qBound(5.f, size, 25.f);
+		celestialJ2000Poles->setPointSize(pointSize);
+		celestialPoles->setPointSize(pointSize);
+		zenithNadir->setPointSize(pointSize);
+		eclipticJ2000Poles->setPointSize(pointSize);
+		eclipticPoles->setPointSize(pointSize);
+		galacticPoles->setPointSize(pointSize);
+		galacticCenter->setPointSize(pointSize);
+		supergalacticPoles->setPointSize(pointSize);
+		equinoxJ2000Points->setPointSize(pointSize);
+		equinoxPoints->setPointSize(pointSize);
+		solsticeJ2000Points->setPointSize(pointSize);
+		solsticePoints->setPointSize(pointSize);
+		antisolarPoint->setPointSize(pointSize);
+		umbraCenterPoint->setPointSize(pointSize);
+		apexPoints->setPointSize(pointSize);
+
+		StelApp::immediateSave("viewing/point_size", pointSize);
+		emit pointSizeChanged(pointSize);
+	}
+}
+
+float GridLinesMgr::getPointSize() const
+{
+	return celestialJ2000Poles->getPointSize();
 }
 
 void GridLinesMgr::setFontSizeFromApp(int size)

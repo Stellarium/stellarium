@@ -277,6 +277,10 @@ public:
 	//! Dump diagnostics about action call priorities
 	void dumpModuleActionPriorities(StelModule::StelModuleActionName actionName) const;
 
+	//! Dump font info from QFontDatabase
+	//! You can trigger it once after program start by setting CLI option --dump-fontinfo
+	void dumpFontInfo() const;
+
 	static constexpr int getDefaultGuiFontSize() { return DEFAULT_FONT_SIZE; }
 
 	static bool isInitialized() {if (singleton) return singleton->initialized; else return false;}
