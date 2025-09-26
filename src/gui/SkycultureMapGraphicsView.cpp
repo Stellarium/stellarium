@@ -12,6 +12,7 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	, viewScrolling(false)
 	, mapMoved(false)
 	, firstShow(true)
+	, isRotated(false)
 	, currentYear(0)
 	, mouseLastXY(0, 0)
 	, oldSkyCulture("")
@@ -19,6 +20,7 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	QGraphicsScene *scene = new QGraphicsScene(this);
 	// scene->setItemIndexMethod(QGraphicsScene::NoIndex); // noIndex better when adding / removing many items
 	setScene(scene);
+	setInteractive(true);
 
 	setRenderHint(QPainter::Antialiasing); // maybe unnecessary for this project
 	setTransformationAnchor(AnchorUnderMouse);
@@ -29,6 +31,7 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	//setDragMode(QGraphicsView::NoDrag);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
 	show();
 
 	// set up QTimelines for smooth zoom on culture selection through public 'selectCulture' slot
@@ -44,56 +47,9 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 
 	// add items (transfer to dedicated function later)
 
-
 	// !!!  test basemap drawing  !!!
 
-
-	// QFile file(":/graphicGui/test_coords.csv");
-	// if(!file.exists()) {
-	//    qInfo() << "file does not exist";
-	// }
-	// if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-	// {
-	//    qInfo() << "couldnt open file!";
-	// }
-	// else
-	// {
-	//    QTextStream inFileStream(&file);
-	//    while (!inFileStream.atEnd()) {
-	//       QString line = inFileStream.readLine();
-
-	//       qInfo() << line;
-	//       qInfo() << "0: " << line[0] << " 1: " << line[1] << " 2: " << line[2];
-	//    }
-	// }
-
-	// QFile file(":/graphicGui/csv_welt_changedProjection_richtig.csv");
-	// if(!file.exists()) {
-	//    qInfo() << "file does not exist";
-	// }
-	// if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-	// {
-	//    qInfo() << "couldnt open file!";
-	// }
-	// else
-	// {
-	//    QTextStream inFileStream(&file);
-	//    int counter = 0;
-	//    while (!inFileStream.atEnd()) {
-	//       QString line = inFileStream.readLine();
-	//       counter++;
-	//    }
-	//    qInfo() << "number of lines: " << counter;
-	// }
-
-
-	// !!!  test basemap drawing  !!!
-
-
-	// QGraphicsPixmapItem *baseMap = scene->addPixmap(QPixmap(":/graphicGui/miscWorldMap.jpg"));
-	// baseMap->setTransformationMode(Qt::SmoothTransformation);
-
-	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/baseMap_compressed.svgz");
+	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/gen01_capPop500k_wAntarctica_02.svg");
 	scene->addItem(baseMap);
 	scene->setSceneRect(- baseMap->boundingRect().width() * 0.75, - baseMap->boundingRect().height() * 0.5, baseMap->boundingRect().width() * 2.5, baseMap->boundingRect().height() * 2);
 	qInfo() << "basemap width = " << baseMap->boundingRect().width() << " and height = " << baseMap->boundingRect().height();
@@ -192,26 +148,24 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	scene->addItem(lokono_late);
 	scene->addItem(aztec);
 
-	// workaround needed to preserve the correct component sizes (without the 'scale' operation the culturesListWidget is being squished and the culture names are not readable)
-	//scale(0.2, 0.2); // empirically determined value
-	//smoothFitInView(baseMap->boundingRect()); // reusing the smooth zoom feature from culture selection, in theory only the first part (zoom to default) is needed
-	targetRect = baseMap->boundingRect();
+	qInfo() << "ende Map Constructor!";
 }
 
-void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *event)
+void SkycultureMapGraphicsView::drawMapContent(const QString &baseMap)
 {
-	// qreal akt_width;
-	// for(auto *items : scene()->items()) {
-	//    SkyculturePolygonItem *pol = qgraphicsitem_cast<SkyculturePolygonItem *>(items);
-	//    if(!pol)
-	//       continue;
-	//    if(pol->getSkycultureId() == "Lokono")
-	//    {
-	//       akt_width = pol->boundingRect().width();
-	//       qInfo() << "festgelegt: " << test_width << " und aktuelle: " << akt_width;
-	//    }
-	// }
+	// delete all items
+	// evaluate projection
+	// load polygon, reproject polygon, add polyogn to map
+	// extra klasse ---> object mit function QPolygonF wgsToMap(const QPolygonF poly)
+	if (baseMap == "WGS84_3857")
+	{
 
+	}
+	else if (baseMap == "WGS84_3857")
+	{
+
+	}
+}
 
 void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *e)
 {
@@ -563,10 +517,56 @@ void SkycultureMapGraphicsView::updateTime(int year)
 	updateCultureVisibility();
 }
 
+void SkycultureMapGraphicsView::rotateMap(bool applyRotation)
+{
+	if (applyRotation)
+	{
+		StelCore *core = StelApp::getInstance().getCore();
+		qInfo() << "location ---> lat: " << core->getCurrentLocation().getLatitude() << " lon: " << core->getCurrentLocation().getLongitude();
+
+		if (core->getCurrentLocation().getLatitude() < 0)
+		{
+			if (!isRotated)
+			{
+				rotate(180.0);
+				isRotated = true;
+			}
+		}
+		else
+		{
+			if (isRotated)
+			{
+				rotate(-180.0);
+				isRotated = false;
+			}
+		}
+	}
+	else
+	{
+		if (isRotated)
+		{
+			rotate(-180.0);
+			isRotated = false;
+		}
+	}
+}
+
+void SkycultureMapGraphicsView::changeProjection(bool isChanged)
+{
+	if (isChanged)
+	{
+		rotate(180.0);
+	}
+	else
+	{
+		rotate(-180.0);
+	}
+}
+
 void SkycultureMapGraphicsView::updateCultureVisibility()
 {
 	// iterate over all polygons --> if currentTime is between startTime and endTime show, else hide
-	for(auto *item : scene()->items()) {
+	for(const auto &item : scene()->items()) {
 		// cast generic QGraphicsItem to subclass SkyculturePolygonItem
 		SkyculturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyculturePolygonItem *>(item);
 
@@ -677,12 +677,4 @@ qreal SkycultureMapGraphicsView::calculateScaleRatio(qreal width, qreal height)
 	return qMin(xratio, yratio);
 }
 
-void SkycultureMapGraphicsView::initializeTime()
-{
-	minYear = -2000;
-	maxYear = QDateTime::currentDateTime().date().year();
-	currentYear = maxYear;
 
-	emit(timeRangeChanged(minYear, maxYear));
-	emit(timeValueChanged(currentYear));
-}

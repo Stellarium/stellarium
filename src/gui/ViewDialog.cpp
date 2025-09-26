@@ -573,6 +573,8 @@ void ViewDialog::createDialogContent()
 	connect(ui->skyCultureMaxTimeSpinBox, &QSpinBox::valueChanged, this, &ViewDialog::changeMaxTime);
 
 	connect(ui->applyTimeOnListCheckBox, &QCheckBox::toggled, this, &ViewDialog::filterSkyCultures);
+	connect(ui->useLocationForRotationCheckBox, &QCheckBox::toggled, this, &ViewDialog::initiateSkycultureMapRotation);
+	connect(StelApp::getInstance().getCore(), &StelCore::locationChanged, this, &ViewDialog::initiateSkycultureMapRotation);
 
 
 	configureSkyCultureCheckboxes();
@@ -1642,6 +1644,11 @@ void ViewDialog::filterSkyCultures()
 			}
 		}
 	}
+}
+
+void ViewDialog::initiateSkycultureMapRotation()
+{
+	ui->skyCultureMapGraphicsView->rotateMap(ui->useLocationForRotationCheckBox->isChecked());
 }
 
 void ViewDialog::populatePlanetMagnitudeAlgorithmsList()

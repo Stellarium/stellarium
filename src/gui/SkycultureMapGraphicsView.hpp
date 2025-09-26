@@ -14,11 +14,14 @@ public:
 	SkycultureMapGraphicsView(QWidget *parent = nullptr);
 
 	// public functions
-	void initializeTime();
+	//void initializeTime();
+	//void initializeGraphicsView();
 
 public slots:
 	void selectCulture(const QString &skycultureId);
 	void updateTime(int year);
+	void rotateMap(bool isRotated);
+	void changeProjection(bool isChanged);
 
 
 signals:
@@ -39,6 +42,7 @@ private:
 	bool viewScrolling;
 	bool mapMoved;
 	bool firstShow;
+	bool isRotated;
 	int currentYear;
 	QPoint mouseLastXY;
 	QString oldSkyCulture;
@@ -54,8 +58,8 @@ private:
 	void updateCultureVisibility();
 	void smoothFitInView(QRectF targetRect);
 	void selectAllCulturePolygon(const QString &skycultureId);
+	void drawMapContent(const QString &baseMap);
 	qreal calculateScaleRatio(qreal width, qreal height);
-
 
 private slots:
 	void zoomToDefault(qreal factor);
