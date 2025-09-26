@@ -408,10 +408,35 @@ def update_cultures_pot(sclist, pot):
             if not english:
                 continue
 
-            comment = f'Name of zodiac sign or name of lunar mansion in {sc_name} sky culture'
-            if ecomment:
-                comment += '\n' + ecomment
+            # pronounce is language dependent! The element is optional.
+            if 'pronounce' in name:
+                pronounce = name['pronounce']
+                if len(pronounce) == 0:
+                    pronounce = None
+            else:
+                pronounce = None
 
+            def get_comment(for_what):
+                comment = ''
+                if for_what == 'english':
+                    comment = 'Name of '
+                elif for_what == 'pronounce':
+                    comment = 'Pronounce entry for '
+                comment += f'a zodiac sign or a lunar mansion in {sc_name} sky culture'
+
+                if for_what != 'native' and 'native' in name:
+                    comment += ', native: ' + name['native']
+                if for_what != 'pronounce' and pronounce:
+                    comment += ', pronounce: ' + pronounce
+                if for_what != 'english' and 'english' in name:
+                    comment += ', English: ' + name['english']
+                if for_what != 'byname' and 'byname' in name:
+                    comment += ', byname: ' + name['byname']
+                if ecomment:
+                    comment += '\n' + ecomment
+                return comment
+
+            comment = get_comment('english')
             entry = polib.POEntry(comment = comment, msgid = english, msgstr = "", msgctxt = context)
             if entry in pot:
                 prev_entry = pot.find(entry.msgid, msgctxt = context)
@@ -421,21 +446,10 @@ def update_cultures_pot(sclist, pot):
             else:
                 pot.append(entry)
 
-            # pronounce is language dependent! The element is optional.
-            if 'pronounce' in name:
-                pronounce = name['pronounce']
-                if len(pronounce) == 0:
-                    pronounce = None
-            else:
-                pronounce = None
-
             if not pronounce or args.skip_pronounce:
                 continue
 
-            comment = f'Pronunciation of zodiac sign or name of lunar mansion in {sc_name} sky culture'
-            if ecomment:
-                comment += '\n' + ecomment
-
+            comment = get_comment('pronounce')
             entry = polib.POEntry(comment = comment, msgid = pronounce, msgstr = "", msgctxt = context)
             if entry in pot:
                 prev_entry = pot.find(entry.msgid, msgctxt = context)
