@@ -800,8 +800,18 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 				continue;
 		}
 
-		StelObject::CulturalName cName{entry["native"].toString(), entry["pronounce"].toString(), trans.qTranslateStar(entry["pronounce"].toString()),
-					entry["transliteration"].toString(), entry["english"].toString(), trans.qTranslateStar(entry["english"].toString()), entry["IPA"].toString(), QString(), QString(), StelObject::CulturalNameSpecial::None};
+		const StelObject::CulturalName cName {
+			entry["native"].toString(),
+			entry["pronounce"].toString(),
+			trans.qTranslateStarPronounce(entry["pronounce"].toString()),
+			entry["transliteration"].toString(),
+			entry["english"].toString(),
+			trans.qTranslateStar(entry["english"].toString()),
+			entry["IPA"].toString(),
+			QString(),
+			QString(),
+			StelObject::CulturalNameSpecial::None
+		};
 
 		//if (culturalNamesMap.contains(HIP))
 		//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated;
