@@ -902,10 +902,11 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 			screenRd*=1.2f;
 		screenRd += (20.f + 10.f*std::sin(3.f * static_cast<float>(StelApp::getInstance().getAnimationTime()))) * scale;
 		const float radius = 10 * scale;
-		sPainter.drawSprite2dMode(static_cast<float>(pos[0])-screenRd*0.5f, static_cast<float>(pos[1])-screenRd*0.5f, radius, 90);
-		sPainter.drawSprite2dMode(static_cast<float>(pos[0])-screenRd*0.5f, static_cast<float>(pos[1])+screenRd*0.5f, radius, 0);
-		sPainter.drawSprite2dMode(static_cast<float>(pos[0])+screenRd*0.5f, static_cast<float>(pos[1])+screenRd*0.5f, radius, -90);
-		sPainter.drawSprite2dMode(static_cast<float>(pos[0])+screenRd*0.5f, static_cast<float>(pos[1])-screenRd*0.5f, radius, -180);
+		const float x = pos[0], y = pos[1];
+		sPainter.drawSprite2dMode(x-screenRd*0.5f, y-screenRd*0.5f, radius, 90);
+		sPainter.drawSprite2dMode(x-screenRd*0.5f, y+screenRd*0.5f, radius, 0);
+		sPainter.drawSprite2dMode(x+screenRd*0.5f, y+screenRd*0.5f, radius, -90);
+		sPainter.drawSprite2dMode(x+screenRd*0.5f, y-screenRd*0.5f, radius, -180);
 	}
 }
 

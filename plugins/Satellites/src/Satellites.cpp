@@ -2951,14 +2951,15 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		painter.setBlending(true);
 
 		// Size on screen
-		double size = obj->getAngularRadius(core)*(2.*M_PI_180)*static_cast<double>(prj->getPixelPerRadAtCenter());
-		const double scale = StelApp::getInstance().getScreenScale();
+		float size = obj->getAngularRadius(core)*(2.*M_PI_180)*static_cast<double>(prj->getPixelPerRadAtCenter());
+		const float scale = StelApp::getInstance().getScreenScale();
 		size += (12. + 3.*std::sin(2. * StelApp::getInstance().getTotalRunTime())) * scale;
 		const float radius = 20 * scale;
-		painter.drawSprite2dMode(static_cast<float>(screenpos[0]-size/2), static_cast<float>(screenpos[1]-size/2), radius, 90);
-		painter.drawSprite2dMode(static_cast<float>(screenpos[0]-size/2), static_cast<float>(screenpos[1]+size/2), radius, 0);
-		painter.drawSprite2dMode(static_cast<float>(screenpos[0]+size/2), static_cast<float>(screenpos[1]+size/2), radius, -90);
-		painter.drawSprite2dMode(static_cast<float>(screenpos[0]+size/2), static_cast<float>(screenpos[1]-size/2), radius, -180);
+		const float x = screenpos[0], y = screenpos[1];
+		painter.drawSprite2dMode(x-size/2, y-size/2, radius, 90);
+		painter.drawSprite2dMode(x-size/2, y+size/2, radius, 0);
+		painter.drawSprite2dMode(x+size/2, y+size/2, radius, -90);
+		painter.drawSprite2dMode(x+size/2, y-size/2, radius, -180);
 	}
 }
 
