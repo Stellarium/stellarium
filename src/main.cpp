@@ -190,6 +190,10 @@ int main(int argc, char **argv)
 	}
 #endif
 
+	// Fix for ugly display some glyphs in Qt 6.9+
+	// See https://github.com/Stellarium/stellarium/issues/4284
+	qputenv("QT_DISABLE_EMOJI_SEGMENTER", "1");
+
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationPublicVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
@@ -236,9 +240,6 @@ int main(int argc, char **argv)
 	// we need scanf()/printf() and friends to always work in the C locale,
 	// otherwise configuration/INI file parsing will be erroneous.
 	setlocale(LC_NUMERIC, "C");
-
-	// Solution for bug: https://bugs.launchpad.net/stellarium/+bug/1498616
-	qputenv("QT_HARFBUZZ", "old");
 
 	// Init the file manager
 	StelFileMgr::init();

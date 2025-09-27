@@ -19,6 +19,8 @@
 
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelApp.hpp"
@@ -36,6 +38,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QRegularExpression>
+#include <QMetaEnum>
 
 namespace
 {
@@ -999,7 +1002,11 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 					       const QString &commonNameI18n,
 					       const QString &abbrevI18n) const
 {
-	// Each element may be in an RTL language (e.g. Arab). However, we want a canonical order of left to right elements.
+	// rtl tracks the right-to-left status of the text in the current position.
+	const bool rtl = StelApp::getInstance().getLocaleMgr().isSkyRTL();
+	// Each element may be in an RTL language (e.g. Arab). However,
+	// - for most (left-to-right) languages we want a canonical order of left to right elements.
+	// - for Arab and other right-to-left user languages, we set a canonical order of right-to-left elements.
 	// This requires building Unicode isolation cells.
 	// Unicode constants from Unicode Standard Annex #9, section 2.
 	//static const QString LRE{"\u202a"}; // Left-to-right embedding: Treat following text as embedded left-to-right
@@ -1007,8 +1014,8 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	//static const QString LRO{"\u202d"}; // Left-to-right override: Force following characters to be treated as strong left-to-right chars.
 	//static const QString RLO{"\u202e"}; // Right-to-left override: Force following characters to be treated as strong right-to-left chars.
 	//static const QString PDF{"\u202c"}; // Pop directional formatting: terminate scope of last LRE/RLE/LRO/RLO
-	static const QString LRI{"\u2066"}; // left-to-right isolate: Treat following text as isolated and left-to-right
-	static const QString RLI{"\u2067"}; // right-to-left isolate: Treat following text as isolated and right-to-left
+	//static const QString LRI{"\u2066"}; // left-to-right isolate: Treat following text as isolated and left-to-right
+	//static const QString RLI{"\u2067"}; // right-to-left isolate: Treat following text as isolated and right-to-left
 	static const QString FSI{"\u2068"}; // First strong isolate: Treat following text as isolated and in the direction of its first strong directional character.
 					    // ASSUMPTION: Can be used as autodetect feature? Mark all parts inside embeddings?
 	static const QString PDI{"\u2069"}; // Pop directional isolate: terminate scope of last LRI/RLI/FSI
@@ -1104,11 +1111,24 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	braced.removeOne(QString());
 	braced.removeOne(label); // avoid repeating the main thing if it was used as fallback!
 
-	if (!braced.isEmpty()) label.append(QString(" %1%3%2").arg(QChar(0x2997), QChar(0x2998), braced.join(", ")));
+	if (!braced.isEmpty())
+	{
+		QString pronTrans=QString(" %1%3%2").arg(QChar(0x2997), QChar(0x2998), braced.join(", "));
+		if (rtl)
+			label.prepend(pronTrans);
+		else
+			label.append(pronTrans);
+	}
 
 	// Add IPA (where possible)
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::IPA)) && (!lName.IPA.isEmpty()) && (label != lName.IPA))
-		label.append(QString(" [%1]").arg(lName.IPA));
+	{
+		QString ipa=QString(" [%1]").arg(lName.IPA);
+		if (rtl)
+			label.prepend(ipa);
+		else
+			label.append(ipa);
+	}
 
 	// Add translation and optional byname in brackets
 
@@ -1126,12 +1146,24 @@ QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &c
 	if ( (styleInt & int(StelObject::CulturalDisplayStyle::Byname)) && (!lName.bynameI18n.isEmpty()))
 		bracketed.append(lName.bynameI18n);
 	if (!bracketed.isEmpty())
-		label.append(QString(" (%1)").arg(bracketed.join(", ")));
+	{
+		QString transBy=QString(" (%1)").arg(bracketed.join(", "));
+		if (rtl)
+			label.prepend(transBy);
+		else
+			label.append(transBy);
+	}
 
 
 	// Add an explanatory modern name in decorative angle brackets
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && (!commonNameI18n.isEmpty()) && (!label.startsWith(lCommonNameI18n)) && (lCommonNameI18n!=lName.translatedI18n))
-		label.append(QString(" %1%3%2").arg(QChar(0x29FC), QChar(0x29FD), lCommonNameI18n));
+	{
+		QString modern=QString(" %1%3%2").arg(QChar(0x29FC), QChar(0x29FD), lCommonNameI18n);
+		if (rtl)
+			label.prepend(modern);
+		else
+			label.append(modern);
+	}
 	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && label.isEmpty()) // if something went wrong?
 		label=lCommonNameI18n;
 
@@ -1143,3 +1175,35 @@ bool StelSkyCultureMgr::currentSkycultureUsesCommonNames() const
 {
 	return currentSkyCulture.fallbackToInternationalNames;
 }
+
+#if QT_VERSION_MAJOR >= 6
+// Call this as scripting function. This shall provide information about unicode and QString properties
+void StelSkyCultureMgr::analyzeScreenLabel() const
+{
+	static StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	if (omgr->getSelectedObject().isEmpty())
+		return;
+
+	StelObjectP obj = omgr->getSelectedObject()[0];
+	QString label=obj->getScreenLabel();
+
+	qDebug() << "Analyze label: " << label;
+	std::u32string label32=label.toStdU32String();
+	QList<uint> label32l=label.toUcs4();
+	//QMetaEnum metaCharCat=QMetaEnum::fromType<QChar::Category>();
+	//QMetaEnum metaCharScript=QMetaEnum::fromType<QChar::Script>();
+	//QMetaEnum metaCharDir=QMetaEnum::fromType<QChar::Direction>();
+	foreach(const uint letter, label32l )
+	{
+		qDebug() << QChar::digitValue(letter) << "(u" << QString::number(letter, 16) << "/" << QChar::fromUcs4(letter) << ")"
+			    "cat." << QChar::category(letter) << // metaCharCat.valueToKey(QChar::category(letter)) <<
+			    "scr." << QChar::script(letter) << // metaCharScript.valueToKey(QChar::script(letter));
+			    "dir." << QChar::direction(letter); // metaCharScript.valueToKey(QChar::script(letter));
+		if (QChar::script(letter) == QChar::Script_Cuneiform)
+		{
+			qDebug() << "Cuneiform detected. " << letter  << "since Unicode V" << QChar::unicodeVersion(letter) << "is a " << QChar::category(letter);
+			qDebug() << "Decomposition:" << QChar::decomposition(letter);
+		}
+	}
+}
+#endif

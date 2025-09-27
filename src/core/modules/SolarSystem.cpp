@@ -2329,6 +2329,7 @@ PlanetP SolarSystem::searchMinorPlanetByEnglishName(const QString &planetEnglish
 		{
 			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
 			c = mp->getExtraDesignations();
+			c << mp->getCommonEnglishName(); // check the name without the minor planet's number also
 		}
 		for (const auto& d : std::as_const(c))
 		{

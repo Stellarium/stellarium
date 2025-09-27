@@ -4,7 +4,8 @@ configuration: Release
 # clone directory
 clone_folder: c:\stellarium
 # set clone depth
-clone_depth: 5
+clone_depth: 10
+shallow_clone: true
 # Do not build feature branch with open Pull Requests
 skip_branch_with_pr: true
 # Do not build on tags
@@ -32,20 +33,20 @@ environment:
     QT_VERSION_MAJOR: 6
     QT_BASEDIR: C:\Qt\6.8\msvc2022_64
     CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A x64
+    CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=ON
     exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
     exiv2baseName: exiv2-0.28.0-2019msvc64
-    scConverterEnabled: 1
+    scConverterEnabled: true
   - BUILD_NAME: Win64 Qt5.12
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     VSPATH: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\SDK\ScopeCppSDK\VC\bin
     QT_VERSION_MAJOR: 5
     QT_BASEDIR: C:\Qt\5.12\msvc2017_64
     CMAKE_GENERATOR: Visual Studio 15 2017 Win64
-    CMAKE_ARGS:
+    CMAKE_ARGS: --
     exiv2url: https://github.com/10110111/exiv2/releases/download/ver0.28.0-final/exiv2-0.28.0-2017msvc64.zip
     exiv2baseName: exiv2-0.28.0-2017msvc64
-    scConverterEnabled: 0
+    scConverterEnabled: false
 #  - BUILD_NAME: Win64 Qt5.15
 #    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
 #    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
@@ -55,15 +56,15 @@ environment:
 #    CMAKE_ARGS: -A x64
 #    exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
 #    exiv2baseName: exiv2-0.28.0-2019msvc64
-#    scConverterEnabled: 0
-  - BUILD_NAME: Arm64 Qt6.5
-    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
-    QT_VERSION_MAJOR: 6
-    QT_BASEDIR: C:\Qt\6.5\msvc2019_arm64
-    CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.5\msvc2019_64 -DQt6LinguistTools_DIR=C:\Qt\6.5\msvc2019_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
-    scConverterEnabled: 0
+#    scConverterEnabled: false
+#  - BUILD_NAME: Arm64 Qt6.5
+#    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+#    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
+#    QT_VERSION_MAJOR: 6
+#    QT_BASEDIR: C:\Qt\6.5\msvc2019_arm64
+#    CMAKE_GENERATOR: Visual Studio 17 2022
+#    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.5\msvc2019_64 -DQt6LinguistTools_DIR=C:\Qt\6.5\msvc2019_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
+#    scConverterEnabled: false
 #  - BUILD_NAME: Arm64 Qt6.8
 #    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
 #    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
@@ -71,23 +72,23 @@ environment:
 #    QT_BASEDIR: C:\Qt\6.8\msvc2022_arm64
 #    CMAKE_GENERATOR: Visual Studio 17 2022
 #    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.8\msvc2022_64 -DQt6LinguistTools_DIR=C:\Qt\6.8\msvc2022_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
-#    scConverterEnabled: 0
+#    scConverterEnabled: false
 before_build:
   - set DEBUG_WINDEPLOYQT=false
   - set PUBLISH_BINARY=false
   - set USE_MESA=false
-  - set USE_EXT_WEBENGINE=false
   - set USE_EXT_LIBSSL=false
   - set USE_EXT_LIBGLES=false
   - set SIGNING=false
+  - set INSTALL_CONVERTER=false
+  - set INSTALL_CONVERTER_DEPS=false
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\Inno Setup 6
-  - set PATH=%VSPATH%;%QT_BASEDIR%\bin;c:\%exiv2baseName%\bin;%INNSPATH%;%PATH%
+  - set PATH=%VSPATH%;%QT_BASEDIR%\bin;c:\%exiv2baseName%\bin;%INNSPATH%;c:\%gettextBaseName%\bin;c:\%tidyBaseName%\bin;c:\skyculture-converter;%PATH%
 
   - ps: if($env:QT_BASEDIR.contains('_64') -or $env:QT_BASEDIR.contains('arm64')) { $env:BITS=64 } else { $env:BITS=32 }
   - ps: if($env:QT_BASEDIR.contains('_64')) { $env:PKGARCH="x64" } else { $env:PKGARCH="x86" }
   - ps: if($env:QT_BASEDIR.contains('arm64')) { $env:PKGARCH="arm64" }
   - ps: if($env:QT_VERSION_MAJOR -eq "6") { $env:SSL="OpenSSL-" } else { $env:SSL="OpenSSL-1-" }
-  - ps: if($env:QT_VERSION_MAJOR -eq "6" -and $env:QT_BASEDIR.contains('_64')) { $env:USE_EXT_WEBENGINE = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable") { $env:PUBLISH_BINARY = 'true' }
@@ -98,40 +99,39 @@ before_build:
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:BUILD_NAME.contains('Win')) { $env:USE_MESA = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable" -and $env:QT_VERSION_MAJOR -eq "6") { $env:SIGNING = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable" -and $env:QT_VERSION_MAJOR -eq "5") { $env:SIGNING = 'true' }
+  - ps: if($env:CMAKE_ARGS.contains('SCM_SHOULD_ENABLE_CONVERTER')) { $env:INSTALL_CONVERTER_DEPS = 'true' }
+  - ps: if($env:PUBLISH_BINARY -eq 'true' -and $env:scConverterEnabled -eq 'true') { $env:INSTALL_CONVERTER = 'true' }
 
   - ps: if($env:exiv2url -ne $null) { appveyor DownloadFile $env:exiv2url -FileName c:\$env:exiv2baseName.zip }
   - ps: if($env:exiv2url -ne $null) { 7z e c:\$env:exiv2baseName.zip -spf -oc:\ }
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
 
-  - if [%USE_EXT_WEBENGINE%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/6.8.1-0-202411221529qtwebengine-Windows-Windows_11_23H2-MSVC2022-Windows-Windows_11_23H2-X86_64.7z -FileName c:\qtwebengine.7z 
-  - if [%USE_EXT_WEBENGINE%]==[true] 7z e c:\qtwebengine.7z -spf -o%QT_BASEDIR%
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { appveyor DownloadFile $env:gettextURL -FileName c:\$env:gettextBaseName.zip }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { 7z e c:\$env:gettextBaseName.zip -spf -oc:\$env:gettextBaseName }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { mkdir c:\$env:gettextBaseName\include }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { appveyor DownloadFile $env:gettextSrcURL -FileName c:\$env:gettextSrcBaseName.tar.xz }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { 7z e c:\$env:gettextSrcBaseName.tar.xz -spf -oc:\ }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { 7z e c:\$env:gettextSrcBaseName.tar -spf -oc:\ }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { (cat c:\$env:gettextSrcBaseName\gettext-tools\libgettextpo\gettext-po.in.h) -replace "extern ([^()]*);","extern __declspec (dllimport) `$1;" > c:\$env:gettextBaseName\include\gettext-po.h }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { echo EXPORTS > libgettextpo.def }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { cp c:\$env:gettextBaseName\bin\libgettextpo-0.dll c:\$env:gettextBaseName\bin\libgettextpo.dll }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { (dumpbin /EXPORTS c:\$env:gettextBaseName\bin\libgettextpo.dll) -match "^.*\b(po_.*)$" -replace "^.*\b(po_.*)$","`$1" >> libgettextpo.def }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { lib /def:libgettextpo.def /out:c:\$env:gettextBaseName\lib\libgettextpo.lib }
 
-  - ps: if ($env:scConverterEnabled) { appveyor DownloadFile $env:gettextURL -FileName c:\$env:gettextBaseName.zip }
-  - ps: if ($env:scConverterEnabled) { 7z e c:\$env:gettextBaseName.zip -spf -oc:\$env:gettextBaseName }
-  - ps: if ($env:scConverterEnabled) { mkdir c:\$env:gettextBaseName\include }
-  - ps: if ($env:scConverterEnabled) { appveyor DownloadFile $env:gettextSrcURL -FileName c:\$env:gettextSrcBaseName.tar.xz }
-  - ps: if ($env:scConverterEnabled) { 7z e c:\$env:gettextSrcBaseName.tar.xz -spf -oc:\ }
-  - ps: if ($env:scConverterEnabled) { 7z e c:\$env:gettextSrcBaseName.tar -spf -oc:\ }
-  - ps: if ($env:scConverterEnabled) { (cat c:\$env:gettextSrcBaseName\gettext-tools\libgettextpo\gettext-po.in.h) -replace "extern ([^()]*);","extern __declspec (dllimport) `$1;" > c:\$env:gettextBaseName\include\gettext-po.h }
-  - ps: if ($env:scConverterEnabled) { echo EXPORTS > libgettextpo.def }
-  - ps: if ($env:scConverterEnabled) { cp c:\$env:gettextBaseName\bin\libgettextpo-0.dll c:\$env:gettextBaseName\bin\libgettextpo.dll }
-  - ps: if ($env:scConverterEnabled) { (dumpbin /EXPORTS c:\$env:gettextBaseName\bin\libgettextpo.dll) -match "^.*\b(po_.*)$" -replace "^.*\b(po_.*)$","`$1" >> libgettextpo.def }
-  - ps: if ($env:scConverterEnabled) { lib /def:libgettextpo.def /out:c:\$env:gettextBaseName\lib\libgettextpo.lib }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { appveyor DownloadFile $env:tidyURL -FileName c:\$env:tidyBaseName.zip }
+  - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { 7z e c:\$env:tidyBaseName.zip -spf -oc:\ }
 
-  - ps: appveyor DownloadFile $env:tidyURL -FileName c:\$env:tidyBaseName.zip
-  - ps: 7z e c:\$env:tidyBaseName.zip -spf -oc:\
-
-  - if [1]==[%scConverterEnabled%] git clone -q --depth=2 https://github.com/Stellarium/stellarium-skyculture-converter c:\skyculture-converter
-  - if [1]==[%scConverterEnabled%] mkdir c:\skyculture-converter\build
-  - if [1]==[%scConverterEnabled%] cd c:\skyculture-converter\build
-  - if [1]==[%scConverterEnabled%] git show --summary
-  - if [1]==[%scConverterEnabled%] cmake -DCMAKE_PREFIX_PATH=c:\%gettextBaseName%;c:\%tidyBaseName% -DCMAKE_INSTALL_PREFIX=c:\sc-converter -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
-  - if [1]==[%scConverterEnabled%] if [%PUBLISH_BINARY%]==[true] cmake --build . --config %configuration% --target install -- /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+#  - if [%INSTALL_CONVERTER%]==[true] git clone -q --depth=2 https://github.com/Stellarium/stellarium-skyculture-converter c:\skyculture-converter
+#  - if [%INSTALL_CONVERTER%]==[true] mkdir c:\skyculture-converter\build
+#  - if [%INSTALL_CONVERTER%]==[true] cd c:\skyculture-converter\build
+#  - if [%INSTALL_CONVERTER%]==[true] git show --summary
+#  - if [%INSTALL_CONVERTER%]==[true] cmake -DCMAKE_PREFIX_PATH=c:\%gettextBaseName%;c:\%tidyBaseName% -DCMAKE_INSTALL_PREFIX=c:\sc-converter -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
+#  - if [%INSTALL_CONVERTER%]==[true] cmake --build . --config %configuration% --target install -- /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   - cd c:\stellarium
   - mkdir build && cd build
-  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName% -DENABLE_MEDIA=On -DENABLE_PODIR=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
-  - if [%PUBLISH_BINARY%]==[false] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName% -DENABLE_MEDIA=On -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
+  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName% -DENABLE_MEDIA=On -DENABLE_PODIR=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
+  - if [%PUBLISH_BINARY%]==[false] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName% -DENABLE_MEDIA=On -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
 
 build:
   project: c:\stellarium\build\Stellarium.sln
@@ -145,12 +145,17 @@ after_test:
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target install
   - if [%DEBUG_WINDEPLOYQT%]==[true] cd c:\stellarium\build\
   - if [%DEBUG_WINDEPLOYQT%]==[true] for %%i in (windeployqt.*) do appveyor PushArtifact %%i
-  - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\%gettextBaseName%\bin\libgettextpo-0.dll c:\stellarium-package\bin\libgettextpo.dll
-  - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\%gettextBaseName%\bin\libintl-8.dll c:\stellarium-package\bin\
-  - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\%gettextBaseName%\bin\libiconv-2.dll c:\stellarium-package\bin\
-  - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\%tidyBaseName%\bin\tidy.dll c:\stellarium-package\bin\
-  - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\sc-converter\skyculture-converter.exe c:\stellarium-package\bin\
-  - if [%PUBLISH_BINARY%]==[true] if [%scConverterEnabled%]==[1] copy c:\sc-converter\Qt6Xml.dll c:\stellarium-package\qtstuff\
+  - if [%INSTALL_CONVERTER%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-skyculture-converter/releases/download/v0.0.1/stellarium-skyculture-converter-0.0.1-win64.zip -FileName c:\sc-converter.zip
+  - if [%INSTALL_CONVERTER%]==[true] 7z e c:\sc-converter.zip -aoa -oc:\sc-converter
+  - if [%INSTALL_CONVERTER%]==[true] copy c:\sc-converter\lib*.dll c:\stellarium-package\bin\
+  - if [%INSTALL_CONVERTER%]==[true] copy c:\sc-converter\tidy.dll c:\stellarium-package\bin\
+  - if [%INSTALL_CONVERTER%]==[true] copy c:\sc-converter\skyculture-converter.exe c:\stellarium-package\bin\
+  - if [%INSTALL_CONVERTER%]==[true] copy c:\sc-converter\Qt6Xml.dll c:\stellarium-package\qtstuff\
+#  - if [%INSTALL_CONVERTER%]==[true] copy c:\%gettextBaseName%\bin\libgettextpo-0.dll c:\stellarium-package\bin\libgettextpo.dll
+#  - if [%INSTALL_CONVERTER%]==[true] copy c:\%gettextBaseName%\bin\libintl-8.dll c:\stellarium-package\bin\
+#  - if [%INSTALL_CONVERTER%]==[true] copy c:\%gettextBaseName%\bin\libiconv-2.dll c:\stellarium-package\bin\
+#  - if [%INSTALL_CONVERTER%]==[true] copy c:\%tidyBaseName%\bin\tidy.dll c:\stellarium-package\bin\
+#  - if [%INSTALL_CONVERTER%]==[true] copy c:\sc-converter\Qt6Xml.dll c:\stellarium-package\qtstuff\
   - if [%USE_EXT_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win%BITS%.zip -FileName c:\stellarium\build\libGLES.zip
   - if [%USE_EXT_LIBGLES%]==[true] 7z e c:\stellarium\build\libGLES.zip -aoa -oc:\stellarium-package\qtstuff
   - if [%USE_MESA%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-%PKGARCH%.dll -FileName c:\stellarium-package\qtstuff\opengl32sw.dll

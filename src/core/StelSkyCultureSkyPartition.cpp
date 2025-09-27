@@ -199,6 +199,7 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 	const bool vertFlipped=core->getFlipVert();
 	const double txtOffset=lrFlipped ? 0.1 : -0.1; // coordinate offset for projecting text
 	const float yShift = vertFlipped ? -fontSize : 0.f;
+	const float screenScale = prj->getDevicePixelsPerPixel();
 
 	// If defined, find the necessary shift from single linkStar and offset
 	if (linkStars.length()==1)
@@ -299,9 +300,10 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 	{
 		for (int i=0; i<partitions[0]; ++i)
 		{
+			const QString symbol=symbols.at(i).trimmed();
 			// To have tilted labels, we project a point 0.1deg from the actual label point and derive screen-based angle.
-			double lng  = (360./partitions[0]*i + 2.+offsetFromAries)*M_PI_180;
-			double lng1 = (360./partitions[0]*i + 2.+offsetFromAries + txtOffset)*M_PI_180;
+			double lng  = (360./partitions[0]*i + offsetFromAries)*M_PI_180;
+			double lng1 = (360./partitions[0]*i + offsetFromAries + txtOffset)*M_PI_180;
 			// the displayed latitude is defined in the first LM.
 			double lat = (extent.at(0)<50. ? -extent.at(0)+0.2 : -10.) *M_PI_180;
 			Vec3d pos, pos1, scr, scr1;
@@ -310,7 +312,9 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 			prj->project(pos, scr);
 			prj->project(pos1, scr1);
 			double angle=atan2(scr1[1]-scr[1], scr1[0]-scr[0])*M_180_PI;
-			sPainter.drawText(pos, symbols.at(i), angle, 0.f, yShift);
+			QFontMetrics metrics(font);
+			float xShift= -1.5 * metrics.boundingRect(symbol).width();
+			sPainter.drawText(pos, symbol, angle, xShift*screenScale, yShift*screenScale);
 		}
 	}
 	else if (symbols.length()==linkStars.length()  && linkStars.length()>1)
@@ -318,14 +322,14 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 		// Chinese Symbols
 		for (int i=0; i<linkStars.length(); ++i)
 		{
-			QString label=symbols.at(i);
+			const QString symbol=symbols.at(i).trimmed();
 			StelObjectP starBegin = starMgr->searchHP(linkStars.at(i));
 
 			Vec3d eq=starBegin->getEquinoxEquatorialPos(core);
 			double ra, dec;
 			StelUtils::rectToSphe(&ra, &dec, eq);
 
-			ra += 2.*M_PI_180; // push a bit into the mansion area. Problem: the narrow mansions...
+			//ra += 2.*M_PI_180; // push a bit into the mansion area. Problem: the narrow mansions...
 			double ra1 = ra+txtOffset*M_PI_180;
 			double dec1  = (extent.at(0)<50. ? -extent.at(0)+0.2 : -10.) *M_PI_180;
 			Vec3d pos, pos1, scr, scr1;
@@ -335,9 +339,9 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 			prj->project(pos1, scr1);
 			float angle=atan2(scr1[1]-scr[1], scr1[0]-scr[0])*M_180_PIf;
 			QFontMetrics metrics(font);
-			float xShift= -0.5 * metrics.boundingRect(label).width();
+			float xShift= -1.5 * metrics.boundingRect(symbol).width();
 
-			sPainter.drawText(pos, label, angle, xShift, yShift);
+			sPainter.drawText(pos, symbol, angle, xShift*screenScale, yShift*screenScale);
 		}
 	}
 
@@ -346,28 +350,28 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 	{
 		for (int i=0; i<partitions[0]; ++i)
 		{
-			QString label=scMgr->createCulturalLabel(names.at(i), partitions[0]==12 ? scMgr->getZodiacLabelStyle() : scMgr->getLunarSystemLabelStyle(), QString());
+			const QString label=scMgr->createCulturalLabel(names.at(i), partitions[0]==12 ? scMgr->getZodiacLabelStyle() : scMgr->getLunarSystemLabelStyle(), QString()).trimmed();
 			// To have tilted labels, we project a point 0.1deg from the actual label point and derive screen-based angle.
-			double lng  = (360./partitions[0]*(double(i)+0.5) + 2.+offsetFromAries)*M_PI_180;
-			double lng1 = (360./partitions[0]*(double(i)+0.5) + 2.+offsetFromAries+txtOffset)*M_PI_180;
-			double lat  = (extent.at(0)<50. ? -extent.at(0)+0.2 : -10.) *M_PI_180;
+			const double lng  = (360./partitions[0]*(double(i)+0.5) + offsetFromAries)*M_PI_180;
+			const double lng1 = (360./partitions[0]*(double(i)+0.5) + offsetFromAries+txtOffset)*M_PI_180;
+			const double lat  = (extent.at(0)<50. ? -extent.at(0)+0.2 : -10.) *M_PI_180;
 			Vec3d pos, pos1, scr, scr1;
 			StelUtils::spheToRect(lng, lat, pos);
 			StelUtils::spheToRect(lng1, lat, pos1);
 			prj->project(pos, scr);
 			prj->project(pos1, scr1);
-			float angle=atan2(scr1[1]-scr[1], scr1[0]-scr[0])*M_180_PIf;
+			const float angle=atan2(scr1[1]-scr[1], scr1[0]-scr[0])*M_180_PIf;
 			QFontMetrics metrics(font);
 			float xShift= -0.5 * metrics.boundingRect(label).width();
 
-			sPainter.drawText(pos, label, angle, xShift, yShift);
+			sPainter.drawText(pos, label, angle, xShift*screenScale, yShift*screenScale);
 		}
 	}
 	else if (names.length()==linkStars.length()  && linkStars.length()>1)
 	{
 		for (int i=0; i<linkStars.length(); ++i)
 		{
-			QString label=scMgr->createCulturalLabel(names.at(i), scMgr->getLunarSystemLabelStyle(),names.at(i).pronounceI18n);
+			QString label=scMgr->createCulturalLabel(names.at(i), scMgr->getLunarSystemLabelStyle(),names.at(i).pronounceI18n).trimmed();
 			StelObjectP starBegin = starMgr->searchHP(linkStars.at(i));
 			StelObjectP starEnd   = starMgr->searchHP(linkStars.at((i==linkStars.length()-1? 0 : i+1)));
 
@@ -375,18 +379,18 @@ void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVel
 			double ra, dec;
 			StelUtils::rectToSphe(&ra, &dec, mid);
 
-			double ra1 = ra+txtOffset*M_PI_180;
-			double dec1  = (extent.at(0)<50. ? -extent.at(0)+0.2 : -10.) *M_PI_180;
+			const double ra1 = ra+txtOffset*M_PI_180;
+			const double dec1  = (extent.at(0)<50. ? -extent.at(0)+0.2 : -10.) *M_PI_180;
 			Vec3d pos, pos1, scr, scr1;
 			StelUtils::spheToRect(ra, dec1, pos);
 			StelUtils::spheToRect(ra1, dec1, pos1);
 			prj->project(pos, scr);
 			prj->project(pos1, scr1);
-			float angle=atan2(scr1[1]-scr[1], scr1[0]-scr[0])*M_180_PIf;
+			const float angle=atan2(scr1[1]-scr[1], scr1[0]-scr[0])*M_180_PIf;
 			QFontMetrics metrics(font);
 			float xShift= -0.5 * metrics.boundingRect(label).width();
 
-			sPainter.drawText(pos, label, angle, xShift, yShift);
+			sPainter.drawText(pos, label, angle, xShift*screenScale, yShift*screenScale);
 		}
 	}
 }
@@ -506,7 +510,7 @@ void StelSkyCultureSkyPartition::updateI18n()
 QString StelSkyCultureSkyPartition::getCulturalName() const
 {
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
-	return scMgr->createCulturalLabel(name, scMgr->getScreenLabelStyle(), QString());
+	return scMgr->createCulturalLabel(name, scMgr->getScreenLabelStyle(), names.length()==12 ? q_("Zodiac") : q_("Lunar Station"));
 }
 
 QString StelSkyCultureSkyPartition::getLongitudeCoordinate(Vec3d &eqPos) const

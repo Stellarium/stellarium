@@ -463,7 +463,7 @@ QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(const QStri
 	for (const auto &group : std::as_const(groups))
 	{
 		QString name = solarSystemIni.value(group + "/name").toString();
-		if (minorBodies.contains(name))
+		if (!minorBodies.filter(name).isEmpty())
 		{
 			loadedObjects.insert(name, group);
 		}

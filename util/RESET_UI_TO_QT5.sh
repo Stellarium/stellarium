@@ -39,11 +39,13 @@ sed -e 's/Qt::FocusPolicy::NoFocus/Qt::NoFocus/g' \
 	-e 's/Qt::AlignmentFlag::AlignTrailing/Qt::AlignTrailing/g' \
 	-e 's/Qt::AlignmentFlag::AlignVCenter/Qt::AlignVCenter/g' \
 	-e 's/QAbstractItemView::SelectionMode::SingleSelection/QAbstractItemView::SingleSelection/g' \
+	-e 's/QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents/QAbstractScrollArea::AdjustToContents/g' \
 	-e 's/QAbstractSpinBox::ButtonSymbols::UpDownArrows/QAbstractSpinBox::UpDownArrows/g' \
 	-e 's/QComboBox::InsertPolicy::NoInsert/QComboBox::NoInsert/g' \
 	-e 's/QComboBox::SizeAdjustPolicy::AdjustToContentsOnFirstShow/QComboBox::AdjustToContentsOnFirstShow/g' \
 	-e 's/QFrame::Shadow::Raised/QFrame::Raised/g' \
-    -e 's/QFrame::Shape::StyledPanel/QFrame::StyledPanel/g' \
+	-e 's/QFrame::Shape::NoFrame/QFrame::NoFrame/g' \
+	-e 's/QFrame::Shape::StyledPanel/QFrame::StyledPanel/g' \
 	-e 's/QListView::Movement::Static/QListView::Static/g' \
 	-e 's/QListView::Flow::LeftToRight/QListView::LeftToRight/g' \
 	-e 's/QListView::ResizeMode::Adjust/QListView::Adjust/g' \
