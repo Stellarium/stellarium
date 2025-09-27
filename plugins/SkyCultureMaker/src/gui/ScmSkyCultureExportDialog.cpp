@@ -213,7 +213,7 @@ bool ScmSkyCultureExportDialog::chooseExportDirectory(const QString& skyCultureI
 
 	if (!QDir(selectedDirectory).exists())
 	{
-		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("ERROR: The selected directory is not valid"));
+		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(), q_("The selected directory is not valid"));
 		qDebug() << "SkyCultureMaker: Selected non-existing export directory";
 		return false;
 	}
