@@ -2501,9 +2501,10 @@ QString StarMgr::getCulturalScreenLabel(StarId hip)
 //! When dealing with foreign skycultures, many users will want this to be longer, with more name components.
 QString StarMgr::getCulturalInfoLabel(StarId hip)
 {
+	static const QString ZWS{"\u200b"}; // zero-width space (we use them to combine cultural label groups)
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
 	QStringList list=getCultureLabels(hip, scMgr->getInfoLabelStyle());
-	return list.isEmpty() ? "" : list.join(" - ");
+	return list.isEmpty() ? "" : list.join(ZWS + " - " + ZWS);
 }
 
 QStringList StarMgr::getCultureLabels(StarId hip, StelObject::CulturalDisplayStyle style)

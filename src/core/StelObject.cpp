@@ -1009,6 +1009,16 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 // Apply post processing on the info string
 void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flags) const
 {
+	static const QString FSI{"\u2068"}; // First strong isolate: Treat following text as isolated and in the direction of its first strong directional character.
+					    // ASSUMPTION: Can be used as autodetect feature? Mark all parts inside embeddings?
+	static const QString PDI{"\u2069"}; // Pop directional isolate: terminate scope of last LRI/RLI/FSI
+	static const QString LRM{"\u200e"}; // left-right-mark which may be present in Arab strings from translations.
+
+	str.replace(LRM, "");
+	str.replace(FSI, "<span dir=\"auto\">");
+	//str.replace(FSI, "<span dir=\"ltr\">");
+	str.replace(PDI, "</span>");
+
 	StelObjectMgr* omgr;
 	omgr=GETSTELMODULE(StelObjectMgr);
 	str.append(getExtraInfoStrings(Script).join(' '));
@@ -1029,6 +1039,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 
 	if (flags&PlainText)
 	{
+		static const QRegularExpression h2Re("<h2[^>]*>");
 		static const QRegularExpression brRe2("<br(\\s*/)?>\\s*");
 		static const QRegularExpression tdRe1("<td\\s*>");
 		static const QRegularExpression tdRe2("<td \\w+='[^']*'>"); // Seen: style, align, colspan, rowspan. Always only one expression.
@@ -1038,7 +1049,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		static const QRegularExpression tableRe4("<table style=\"[^\"]*\">");
 		str.replace("<b>", "");
 		str.replace("</b>", "");
-		str.replace("<h2>", "");
+		str.replace(h2Re, "");
 		str.replace("</h2>", "\n");
 		str.replace(brRe2, "\n");
 		str.replace("<tr>", "");
