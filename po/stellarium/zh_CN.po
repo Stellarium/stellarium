@@ -3480,7 +3480,7 @@ msgstr "视场垂直翻转"
 
 #: src/core/StelCore.cpp:2690
 msgid "Correction is disabled. Use only if you know what you are doing!"
-msgstr "目前禁用校正。如果您不了解您正在做什么，请不要使用此功能！"
+msgstr "校正功能已禁用。除非您清楚操作后果，否则请勿使用！"
 
 #: src/core/StelCore.cpp:2693
 #, qt-format
@@ -15445,7 +15445,7 @@ msgstr "下一年秋分"
 
 #: src/ui_astroCalcAlmanacWidget.h:1083
 msgid "Defined minutes after today's sunset"
-msgstr "今日日落后第 [X] 分钟"
+msgstr "今日日落后设定分钟数"
 
 #: src/ui_astroCalcAlmanacWidget.h:1088
 msgid "Previous March Equinox"
@@ -15473,7 +15473,7 @@ msgstr "航海暮光"
 
 #: src/ui_astroCalcAlmanacWidget.h:1107
 msgid "Defined minutes before today's sunrise"
-msgstr "今日日出前第 [X] 分钟"
+msgstr "今日日出前设定分钟数"
 
 #: src/ui_astroCalcAlmanacWidget.h:1112
 msgid "Yesterday"
@@ -18817,7 +18817,7 @@ msgid ""
 "periods in the 96–100-minute range, and inclinations of around 98 degrees."
 msgstr ""
 "极太阳同步轨道(PSSO):一种近极轨道，每次经过赤道时都在同一当地时间。这对卫星成像很有用，因为每次经过的阴影都是一样的。典型的绕地球的太阳同步轨道高度约为600"
-" - 800公里，周期在96 - 100分钟之间，倾角约为98度。"
+" - 800千米，周期在96 - 100分钟之间，倾角约为98度。"
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:818
@@ -19595,7 +19595,7 @@ msgstr "标准星等："
 #: plugins/Satellites/src/ui_satellitesDialog.h:1312
 #: plugins/Satellites/src/ui_satellitesDialog.h:1316
 msgid "Perigee altitude in kilometers"
-msgstr "近地点高度，以公里为单位"
+msgstr "近地点高度，以千米为单位"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1314
 msgid "Perigee:"
@@ -19604,7 +19604,7 @@ msgstr "近地点："
 #: plugins/Satellites/src/ui_satellitesDialog.h:1319
 #: plugins/Satellites/src/ui_satellitesDialog.h:1323
 msgid "Apogee altitude in kilometers"
-msgstr "远地点高度，以公里为单位"
+msgstr "远地点高度，以千米为单位"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1321
 msgid "Apogee:"
@@ -20048,7 +20048,7 @@ msgstr "ASCOM版本过旧！"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:117
 msgid "Your ASCOM is below version 7. Upgrade to avoid problems!"
-msgstr "您的ASCOM版本低于7.0，请升级以避免故障！"
+msgstr "您的ASCOM版本低于7。请升级以避免问题！"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:273
 msgid "Telescope Control plug-in"
@@ -26525,7 +26525,7 @@ msgid ""
 " are taken into account. Moonlight can also reduce the hourly rate, but it "
 "doesn't take into account."
 msgstr ""
-"本插件使用两种模型来计算天顶每小时出现率ZHR，并假定流星雨的活动规律呈现双指数形状。为预测当地的每小时出现率，也考虑了辐射点高度和天空星等限制的影响。月光也会降低每小时出现率，但其影响并未考虑在内。"
+"该插件采用两种模型计算天顶每时出现率（ZHR），其假设前提是流星雨的活动曲线遵循双指数形状。在预测本地每小时可见流星数时，已纳入辐射点高度与天空极限星等的考量。月光虽会降低每小时可见流星数，但当前模型未将月光影响纳入计算。"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:240
 msgid "Terms"
@@ -26590,13 +26590,13 @@ msgid ""
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
 "在天文学上，流星雨的天顶每时出现率 (ZHR) 指观测者在最清晰、黑暗的天空下 (极限视星等6.5), "
-"且流星雨的辐射点位于天顶时，每一时中可看到的流星数量。但此值会随辐射点偏离天顶而受到影响。在辐射点越接近地平面时所能见到的有效流星数量会越少。"
+"且流星雨的辐射点位于天顶时，每一时中可看到的流星数量。实际可观测到的流星数量通常低于此理论值，且随着辐射点越接近地平线而递减。"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:273
 msgid ""
 "The maximum ZHR of a meteor shower at peak date and time when Earth passes "
 "through the densest region of meteoroid stream."
-msgstr "流星雨的最大天顶流量。其在地球穿过流星体最密集的区域时达到峰值。"
+msgstr "流星雨在峰值日期和时间，即地球穿过流星群最密集区域时的最大天顶每时出现率。"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:277
 msgid ""
@@ -26613,7 +26613,7 @@ msgid ""
 "Moonlight can also reduce the hourly rate, but it doesn't take into "
 "account.."
 msgstr ""
-"当前地理位置每小时流星数，此为实际期望值，计算时考虑了辐射点高度(每小时出现率随辐射点靠近地平线而降低)和天空星等限制的影响。这一数值几乎总是低于<i>当前ZHR</i>。月光也会降低每小时出现率，但其影响并未考虑在内。"
+"当前位置每小时可见流星数量，这是通过综合考虑辐射点高度（辐射点越接近地平线，每小时可见数量越低）和天空极限星等因素计算得出的实际预期值。该数值几乎始终低于<i>当前的ZHR</i>。月光也可能降低每小时可见数量，但此计算未将月光影响纳入考量。"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:285
 msgid "Population index"
@@ -26686,7 +26686,7 @@ msgstr "代码"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:184
 msgid "ZHR"
-msgstr "天顶每时出现率 (ZHR)"
+msgstr "ZHR"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:185
 msgid "Data Type"
