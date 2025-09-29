@@ -493,12 +493,12 @@ void HelpDialog::updateAboutText(void) const
 	typedef QPair<QString, int> donator;
 	QVector<donator> financialContributors = {
 	        // Individuals
-	        { "Daniel", 2200 }, { "Bryan", 1000 }, { "Laurence Holt", 1000 }, { "John Bellora", 670 }, { "Marla Pinaire", 590 }, { "Jeff Moe", 512 },
-	        { "Peter Reigber", 400 }, { "Vernon Hermsen", 324 }, { "Michel Payette", 320 },  { "James Lattis", 300 }, { "Walter Dörfler", 300 },
-	        { "Incognito", 300 }, { "Salvatore Ficicchia", 291 }, { "Satish Mallesh", 260 }, { "Raul Prisacariu", 260 }, { "Philippe Renoux", 250 },
-	        { "Fito Martin", 250 }, { "SuEllen Shepard", 250 },  { "Vlad Magdalin", 250  },
+	        { "Daniel", 2400 }, { "Bryan", 1000 }, { "Laurence Holt", 1000 }, { "John Bellora", 670 }, { "Marla Pinaire", 620 }, { "Jeff Moe", 512 },
+	        { "Peter Reigber", 400 }, { "Incognito", 345 }, { "Vernon Hermsen", 324 }, { "Michel Payette", 320 },  { "Incognito", 300 },
+	        { "James Lattis", 300 }, { "Walter Dörfler", 300 },  { "Raul Prisacariu", 310 }, { "Salvatore Ficicchia", 306 }, { "Satish Mallesh", 260 },
+	        { "Philippe Renoux", 250 },  { "Fito Martin", 250 }, { "SuEllen Shepard", 250 },  { "Vlad Magdalin", 250  },
 	        // Organizations
-	        { "BairesDev", 12500 }, { "Dotcom-Monitor", 1000 }, { "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 850 },
+	        { "BairesDev", 14000 }, { "Dotcom-Monitor", 1000 }, { "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 880 },
 	        { "SSSTwitter", 500 }, { "Triplebyte", 280 }
 	};
 	std::sort(financialContributors.begin(), financialContributors.end(), [](donator i, donator j){ return i.second > j.second; });
