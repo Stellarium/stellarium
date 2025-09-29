@@ -40,6 +40,7 @@ SCPOTFILE = os.path.join(DIR, '..', '..', 'po', 'stellarium-skycultures', 'stell
 sc_names = {}
 common_names = set()
 cons_ast_names = set()
+cons_names_for_describing = dict()
 
 def ensure_dir(file_path):
     '''Create a directory for a path if it doesn't exist yet'''
@@ -71,6 +72,42 @@ def load_common_names():
                     continue
                 common_names.add(match.group(1))
     print(f"Loaded {len(common_names)} common names", file=sys.stderr)
+
+def handle_constellations_section(sky_culture, sc_name, body, pot):
+    body = body.strip()
+    if len(re.findall('^#####[^#]', body)) != 1:
+        print(f'{sky_culture}: warning: badly formatted Constellations section', file=sys.stderr)
+        return False
+
+    subsections = re.split(r'(?:\n|^)[ \t]*#####[ \t]*([^#\n][^\n]*)\n', body)
+    if subsections[0] != '':
+        printf(f'{sky_culture}: warning: unexpected beginning of Constellations section, splitting failed', file=sys.stderr)
+        return False
+    subsections = subsections[1:]
+    if len(subsections) % 2 != 0:
+        print(f'{sky_culture}: warning: odd number ({len(subsections)}) of Constellations section title/body items, splitting failed', file=sys.stderr)
+        return False
+
+    constellations_added = 0
+    for s in range(int(len(subsections) / 2)):
+        title = subsections[s * 2]
+        descr = subsections[s * 2 + 1].strip()
+        if title not in cons_names_for_describing[sky_culture]:
+            print(f'{sky_culture}: warning: no constellation named "{title}" in index', file=sys.stderr)
+            continue
+
+        comment = f'Description of {sc_name} constellation {title}'
+        entry = polib.POEntry(comment = comment, msgid = descr, msgstr = "")
+        if entry in pot:
+            prev_entry = pot.find(entry.msgid)
+            assert prev_entry
+            prev_entry.comment += '\n' + comment
+        else:
+            pot.append(entry)
+
+        constellations_added += 1
+
+    return constellations_added > 0
 
 def update_descriptions_pot(sclist, pot):
     for sky_culture in sclist:
@@ -124,6 +161,13 @@ def update_descriptions_pot(sclist, pot):
                 if len(sec_body) == 0:
                     print(f'{sky_culture}: warning: empty section "{sec_title}"', file=sys.stderr)
                     continue
+
+                if sec_title == 'Constellations':
+                    if handle_constellations_section(sky_culture, sc_name, sec_body, pot):
+                        continue
+                    else:
+                        print(f'{sky_culture}: warning: no constellations could be extracted from Constellations '
+                               'section, generating a legacy translation entry for the whole section', file=sys.stderr)
 
                 comment = sc_name + ' sky culture ' + sec_title.lower() + ' section in markdown format'
                 entry = polib.POEntry(comment = comment, msgid = sec_body, msgstr = "")
@@ -202,6 +246,9 @@ def update_cultures_pot(sclist, pot):
 
                 # Extract 'english' string for translation (with context for uniqueness)
                 if english:
+                    if obj_type == 'constellation':
+                        cons_names_for_describing[sky_culture].add(english)
+
                     # Don't extract items that are already translated in other places
                     if context or not english in common_names:
                         cons_ast_names.add(english)
@@ -523,6 +570,25 @@ if __name__ == '__main__':
         sc_pot_file_path = SCPOTFILE
         common_pot_file_path = None
 
+    # Enumerate all constellation names in all SCs, they will be needed for sanity checks in description parser
+    print("Enumerating constellation names...", file=sys.stderr)
+    for sky_culture in sclist:
+        data_path = os.path.join(SCDIR, sky_culture)
+        index_file = os.path.join(data_path, 'index.json')
+        assert os.path.exists(index_file)
+        cons_names_for_describing[sky_culture] = set()
+        with open(index_file) as file:
+            data = json.load(file)
+            file.close()
+            if 'constellations' in data:
+                for cons in data['constellations']:
+                    if 'common_name' in cons:
+                        name = cons['common_name']
+                        if 'english' in name:
+                            english = name['english']
+                            if len(english) == 0:
+                                continue
+                            cons_names_for_describing[sky_culture].add(english)
 
     print("Loading common names...", file=sys.stderr)
     load_common_names()
