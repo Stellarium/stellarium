@@ -1428,7 +1428,11 @@ void StelSkyCultureMgr::analyzeScreenLabel() const
 
 	foreach(const uint letter, label32l )
 	{
-		qDebug().noquote() << QChar::digitValue(letter) << "(u" << QString::number(letter, 16) << "/" << QChar::fromUcs4(letter) << ")"
+		qDebug().noquote() << QChar::digitValue(letter) << "(u" << QString::number(letter, 16)
+		      #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+				   << "/" << QChar::fromUcs4(letter)
+		      #endif
+				   << ")"
 			    "\tcat." << charCatMap.value(QChar::category(letter), "UNK") <<
 			    "scr." << charScriptMap.value(QChar::script(letter), "UNK") <<
 			    "\tdir." << charDirMap.value(QChar::direction(letter), "UNK") <<
