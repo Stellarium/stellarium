@@ -22,12 +22,9 @@
 #include "StelObjectMgr.hpp"
 #include "StelObjectModule.hpp"
 #include "StelCore.hpp"
-#include "StelUtils.hpp"
 #include "StelProjector.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelSkyDrawer.hpp"
-#include "Planet.hpp"
-#include "StelActionMgr.hpp"
 
 #include <QMouseEvent>
 #include <QString>
