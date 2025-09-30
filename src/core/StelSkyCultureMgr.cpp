@@ -1364,13 +1364,13 @@ void StelSkyCultureMgr::analyzeScreenLabel() const
 	#endif
 	#if (QT_VERSION>=QT_VERSION_CHECK(6,3,0))
 		{ QChar::Script_CyproMinoan             , "157 CyproMinoan" },
-		{ QChar::Script_NagMundari              , "163 NagMundari" },
 		{ QChar::Script_OldUyghur               , "158 OldUyghur" },
 		{ QChar::Script_Tangsa                  , "159 Tangsa" },
 		{ QChar::Script_Toto                    , "160 Toto" },
 		{ QChar::Script_Vithkuqi                , "161 Vithkuqi" },
 	#endif
 	#if (QT_VERSION>=QT_VERSION_CHECK(6,5,0))
+		{ QChar::Script_NagMundari              , "163 NagMundari" }, // Qt>=6.3, but CI fails.
 		{ QChar::Script_Kawi                    , "162 Kawi" }
 	#endif
 	};
