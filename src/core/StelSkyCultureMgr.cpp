@@ -18,6 +18,8 @@
  */
 
 #include "StelSkyCultureMgr.hpp"
+#include "Star.hpp"
+#include "StarMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -1138,7 +1140,6 @@ bool StelSkyCultureMgr::currentSkycultureUsesCommonNames() const
 	return currentSkyCulture.fallbackToInternationalNames;
 }
 
-#if QT_VERSION_MAJOR >= 6
 // Call this as scripting function. This shall provide information about unicode and QString properties
 void StelSkyCultureMgr::analyzeScreenLabel() const
 {
@@ -1146,26 +1147,286 @@ void StelSkyCultureMgr::analyzeScreenLabel() const
 	if (omgr->getSelectedObject().isEmpty())
 		return;
 
-	StelObjectP obj = omgr->getSelectedObject()[0];
-	QString label=obj->getScreenLabel();
+	//StelObjectP obj = omgr->getSelectedObject()[0];
+	StelObjectP obj = omgr->getLastSelectedObject();
+	qDebug() << "Obj:" << obj->getObjectType() << obj->getEnglishName();
+	QString label;
+	// obj may be a star, then we need a StarWrapper...
+	if (obj->getObjectType().contains("star"))
+	{
+		qDebug() << "star. searching deeper...";
+		obj=GETSTELMODULE(StarMgr)->searchByName(obj->getEnglishName());
+		static const QRegularExpression hpRx("^(HIP|HP)\\s*(\\d+)\\s*.*$", QRegularExpression::CaseInsensitiveOption);
+		QRegularExpressionMatch match=hpRx.match(obj->getEnglishName());
+		if (match.hasMatch())
+		{
+			bool ok;
+			int hpNum = match.captured(2).toInt(&ok);
+			if (ok)
+			{
+				label=GETSTELMODULE(StarMgr)->getCulturalScreenLabel(hpNum);
+			}
+		}
+	}
+	else
+		label=obj->getScreenLabel();
 
 	qDebug() << "Analyze label: " << label;
 	std::u32string label32=label.toStdU32String();
 	QList<uint> label32l=label.toUcs4();
-	//QMetaEnum metaCharCat=QMetaEnum::fromType<QChar::Category>();
-	//QMetaEnum metaCharScript=QMetaEnum::fromType<QChar::Script>();
-	//QMetaEnum metaCharDir=QMetaEnum::fromType<QChar::Direction>();
+	// Unfortunately, QChar enums are not Q_ENUMs. The names are not available from the MetaObject.
+	static const QMap <QChar::Category, QString> charCatMap = {
+		{ QChar::Mark_NonSpacing         , " 0 Mn Mark_NonSpacing         " },
+		{ QChar::Mark_SpacingCombining   , " 1 Mc Mark_SpacingCombining   " },
+		{ QChar::Mark_Enclosing          , " 2 Me Mark_Enclosing          " },
+		{ QChar::Number_DecimalDigit     , " 3 Nd Number_DecimalDigit     " },
+		{ QChar::Number_Letter           , " 4 Nl Number_Letter           " },
+		{ QChar::Number_Other            , " 5 No Number_Other            " },
+		{ QChar::Separator_Space         , " 6 Zs Separator_Space         " },
+		{ QChar::Separator_Line          , " 7 Zl Separator_Line          " },
+		{ QChar::Separator_Paragraph     , " 8 Zp Separator_Paragraph     " },
+		{ QChar::Other_Control           , " 9 Cc Other_Control           " },
+		{ QChar::Other_Format            , "10 Cf Other_Format            " },
+		{ QChar::Other_Surrogate         , "11 Cs Other_Surrogate         " },
+		{ QChar::Other_PrivateUse        , "12 Co Other_PrivateUse        " },
+		{ QChar::Other_NotAssigned       , "13 Cn Other_NotAssigned       " },
+		{ QChar::Letter_Uppercase        , "14 Lu Letter_Uppercase        " },
+		{ QChar::Letter_Lowercase        , "15 Ll Letter_Lowercase        " },
+		{ QChar::Letter_Titlecase        , "16 Lt Letter_Titlecase        " },
+		{ QChar::Letter_Modifier         , "17 Lm Letter_Modifier         " },
+		{ QChar::Letter_Other            , "18 Lo Letter_Other            " },
+		{ QChar::Punctuation_Connector   , "19 Pc Punctuation_Connector   " },
+		{ QChar::Punctuation_Dash        , "20 Pd Punctuation_Dash        " },
+		{ QChar::Punctuation_Open        , "21 Ps Punctuation_Open        " },
+		{ QChar::Punctuation_Close       , "22 Pe Punctuation_Close       " },
+		{ QChar::Punctuation_InitialQuote, "23 Pi Punctuation_InitialQuote" },
+		{ QChar::Punctuation_FinalQuote  , "24 Pf Punctuation_FinalQuote  " },
+		{ QChar::Punctuation_Other       , "25 Po Punctuation_Other       " },
+		{ QChar::Symbol_Math             , "26 Sm Symbol_Math             " },
+		{ QChar::Symbol_Currency         , "27 Sc Symbol_Currency         " },
+		{ QChar::Symbol_Modifier         , "28 Sk Symbol_Modifier         " },
+		{ QChar::Symbol_Other            , "29 So Symbol_Other            " }
+	};
+	static const QMap <QChar::Script, QString> charScriptMap = {
+		{ QChar::Script_Unknown                 , "  0 Unknown" },   // For unassigned, private-use, noncharacter, and surrogate code points.
+		{ QChar::Script_Inherited               , "  1 Inherited" }, // For characters that may be used with multiple scripts and that inherit their script from the preceding characters. These include nonspacing marks, enclosing marks, and zero width joiner/non-joiner characters.
+		{ QChar::Script_Common                  , "  2 Common" },    // For characters that may be used with multiple scripts and that do not inherit their script from the preceding characters.
+		{ QChar::Script_Adlam                   , "132 Adlam" },
+		{ QChar::Script_Ahom                    , "126 Ahom" },
+		{ QChar::Script_AnatolianHieroglyphs    , "127 AnatolianHieroglyphs" },
+		{ QChar::Script_Arabic                  , "  8 Arabic" },
+		{ QChar::Script_Armenian                , "  6 Armenian" },
+		{ QChar::Script_Avestan                 , " 80 Avestan" },
+		{ QChar::Script_Balinese                , " 62 Balinese" },
+		{ QChar::Script_Bamum                   , " 84 Bamum" },
+		{ QChar::Script_BassaVah                , "104 BassaVah" },
+		{ QChar::Script_Batak                   , " 93 Batak" },
+		{ QChar::Script_Bengali                 , " 12 Bengali" },
+		{ QChar::Script_Bhaiksuki               , "133 Bhaiksuki" },
+		{ QChar::Script_Bopomofo                , " 36 Bopomofo" },
+		{ QChar::Script_Brahmi                  , " 94 Brahmi" },
+		{ QChar::Script_Braille                 , " 54 Braille" },
+		{ QChar::Script_Buginese                , " 55 Buginese" },
+		{ QChar::Script_Buhid                   , " 44 Buhid" },
+		{ QChar::Script_CanadianAboriginal      , " 29 CanadianAboriginal" },
+		{ QChar::Script_Carian                  , " 75 Carian" },
+		{ QChar::Script_CaucasianAlbanian       , "103 CaucasianAlbanian" },
+		{ QChar::Script_Chakma                  , " 96 Chakma" },
+		{ QChar::Script_Cham                    , " 77 Cham" },
+		{ QChar::Script_Cherokee                , " 28 Cherokee" },
+		{ QChar::Script_Coptic                  , " 46 Coptic" },
+		{ QChar::Script_Cuneiform               , " 63 Cuneiform" },
+		{ QChar::Script_Cypriot                 , " 53 Cypriot" },
+		{ QChar::Script_Cyrillic                , "  5 Cyrillic" },
+		{ QChar::Script_Deseret                 , " 41 Deseret" },
+		{ QChar::Script_Devanagari              , " 11 Devanagari" },
+		{ QChar::Script_Duployan                , "105 Duployan" },
+		{ QChar::Script_EgyptianHieroglyphs     , " 81 EgyptianHieroglyphs" },
+		{ QChar::Script_Elbasan                 , "106 Elbasan" },
+		{ QChar::Script_Ethiopic                , " 27 Ethiopic" },
+		{ QChar::Script_Georgian                , " 25 Georgian" },
+		{ QChar::Script_Glagolitic              , " 57 Glagolitic" },
+		{ QChar::Script_Gothic                  , " 40 Gothic" },
+		{ QChar::Script_Grantha                 , "107 Grantha" },
+		{ QChar::Script_Greek                   , "  4 Greek" },
+		{ QChar::Script_Gujarati                , " 14 Gujarati" },
+		{ QChar::Script_Gurmukhi                , " 13 Gurmukhi" },
+		{ QChar::Script_Han                     , " 37 Han" },
+		{ QChar::Script_Hangul                  , " 26 Hangul" },
+		{ QChar::Script_Hanunoo                 , " 43 Hanunoo" },
+		{ QChar::Script_Hatran                  , "128 Hatran" },
+		{ QChar::Script_Hebrew                  , "  7 Hebrew" },
+		{ QChar::Script_Hiragana                , " 34 Hiragana" },
+		{ QChar::Script_ImperialAramaic         , " 87 ImperialAramaic" },
+		{ QChar::Script_InscriptionalPahlavi    , " 90 InscriptionalPahlavi" },
+		{ QChar::Script_InscriptionalParthian   , " 89 InscriptionalParthian" },
+		{ QChar::Script_Javanese                , " 85 Javanese" },
+		{ QChar::Script_Kaithi                  , " 92 Kaithi" },
+		{ QChar::Script_Kannada                 , " 18 Kannada" },
+		{ QChar::Script_Katakana                , " 35 Katakana" },
+		{ QChar::Script_KayahLi                 , " 72 KayahLi" },
+		{ QChar::Script_Kharoshthi              , " 61 Kharoshthi" },
+		{ QChar::Script_Khmer                   , " 32 Khmer" },
+		{ QChar::Script_Khojki                  , "109 Khojki" },
+		{ QChar::Script_Khudawadi               , "123 Khudawadi" },
+		{ QChar::Script_Lao                     , " 22 Lao" },
+		{ QChar::Script_Latin                   , "  3 Latin" },
+		{ QChar::Script_Lepcha                  , " 68 Lepcha" },
+		{ QChar::Script_Limbu                   , " 47 Limbu" },
+		{ QChar::Script_LinearA                 , "110 LinearA" },
+		{ QChar::Script_LinearB                 , " 49 LinearB" },
+		{ QChar::Script_Lisu                    , " 83 Lisu" },
+		{ QChar::Script_Lycian                  , " 74 Lycian" },
+		{ QChar::Script_Lydian                  , " 76 Lydian" },
+		{ QChar::Script_Mahajani                , "111 Mahajani" },
+		{ QChar::Script_Malayalam               , " 19 Malayalam" },
+		{ QChar::Script_Mandaic                 , " 95 Mandaic" },
+		{ QChar::Script_Manichaean              , "112 Manichaean" },
+		{ QChar::Script_Marchen                 , "134 Marchen" },
+		{ QChar::Script_MasaramGondi            , "138 MasaramGondi" },
+		{ QChar::Script_MeeteiMayek             , " 86 MeeteiMayek" },
+		{ QChar::Script_MendeKikakui            , "113 MendeKikakui" },
+		{ QChar::Script_MeroiticCursive         , " 97 MeroiticCursive" },
+		{ QChar::Script_MeroiticHieroglyphs     , " 98 MeroiticHieroglyphs" },
+		{ QChar::Script_Miao                    , " 99 Miao" },
+		{ QChar::Script_Modi                    , "114 Modi" },
+		{ QChar::Script_Mongolian               , " 33 Mongolian" },
+		{ QChar::Script_Mro                     , "115 Mro" },
+		{ QChar::Script_Multani                 , "129 Multani" },
+		{ QChar::Script_Myanmar                 , " 24 Myanmar" },
+		{ QChar::Script_Nabataean               , "117 Nabataean" },
+		{ QChar::Script_Newa                    , "135 Newa" },
+		{ QChar::Script_NewTaiLue               , " 56 NewTaiLue" },
+		{ QChar::Script_Nko                     , " 66 Nko" },
+		{ QChar::Script_Nushu                   , "139 Nushu" },
+		{ QChar::Script_Ogham                   , " 30 Ogham" },
+		{ QChar::Script_OlChiki                 , " 69 OlChiki" },
+		{ QChar::Script_OldHungarian            , "130 OldHungarian" },
+		{ QChar::Script_OldItalic               , " 39 OldItalic" },
+		{ QChar::Script_OldNorthArabian         , "116 OldNorthArabian" },
+		{ QChar::Script_OldPermic               , "120 OldPermic" },
+		{ QChar::Script_OldPersian              , " 60 OldPersian" },
+		{ QChar::Script_OldSouthArabian         , " 88 OldSouthArabian" },
+		{ QChar::Script_OldTurkic               , " 91 OldTurkic" },
+		{ QChar::Script_Oriya                   , " 15 Oriya" },
+		{ QChar::Script_Osage                   , "136 Osage" },
+		{ QChar::Script_Osmanya                 , " 52 Osmanya" },
+		{ QChar::Script_PahawhHmong             , "108 PahawhHmong" },
+		{ QChar::Script_Palmyrene               , "118 Palmyrene" },
+		{ QChar::Script_PauCinHau               , "119 PauCinHau" },
+		{ QChar::Script_PhagsPa                 , " 65 PhagsPa" },
+		{ QChar::Script_Phoenician              , " 64 Phoenician" },
+		{ QChar::Script_PsalterPahlavi          , "121 PsalterPahlavi" },
+		{ QChar::Script_Rejang                  , " 73 Rejang" },
+		{ QChar::Script_Runic                   , " 31 Runic" },
+		{ QChar::Script_Samaritan               , " 82 Samaritan" },
+		{ QChar::Script_Saurashtra              , " 71 Saurashtra" },
+		{ QChar::Script_Sharada                 , "100 Sharada" },
+		{ QChar::Script_Shavian                 , " 51 Shavian" },
+		{ QChar::Script_Siddham                 , "122 Siddham" },
+		{ QChar::Script_SignWriting             , "131 SignWriting" },
+		{ QChar::Script_Sinhala                 , " 20 Sinhala" },
+		{ QChar::Script_SoraSompeng             , "101 SoraSompeng" },
+		{ QChar::Script_Soyombo                 , "140 Soyombo" },
+		{ QChar::Script_Sundanese               , " 67 Sundanese" },
+		{ QChar::Script_SylotiNagri             , " 59 SylotiNagri" },
+		{ QChar::Script_Syriac                  , "  9 Syriac" },
+		{ QChar::Script_Tagalog                 , " 42 Tagalog" },
+		{ QChar::Script_Tagbanwa                , " 45 Tagbanwa" },
+		{ QChar::Script_TaiLe                   , " 48 TaiLe" },
+		{ QChar::Script_TaiTham                 , " 78 TaiTham" },
+		{ QChar::Script_TaiViet                 , " 79 TaiViet" },
+		{ QChar::Script_Takri                   , "102 Takri" },
+		{ QChar::Script_Tamil                   , " 16 Tamil" },
+		{ QChar::Script_Tangut                  , "137 Tangut" },
+		{ QChar::Script_Telugu                  , " 17 Telugu" },
+		{ QChar::Script_Thaana                  , " 10 Thaana" },
+		{ QChar::Script_Thai                    , " 21 Thai" },
+		{ QChar::Script_Tibetan                 , " 23 Tibetan" },
+		{ QChar::Script_Tifinagh                , " 58 Tifinagh" },
+		{ QChar::Script_Tirhuta                 , "124 Tirhuta " },
+		{ QChar::Script_Ugaritic                , " 50 Ugaritic" },
+		{ QChar::Script_Vai                     , " 70 Vai" },
+		{ QChar::Script_WarangCiti              , "125 WarangCiti" },
+		{ QChar::Script_Yi                      , " 38 Yi" },
+		{ QChar::Script_ZanabazarSquare         , "141 ZanabazarSquare" },
+
+	#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+		{ QChar::Script_KhitanSmallScript       , "155 KhitanSmallScript" },
+		{ QChar::Script_Makasar                 , "145 Makasar" },
+		{ QChar::Script_Medefaidrin             , "146 Medefaidrin" },
+		{ QChar::Script_Nandinagari             , "150 Nandinagari" },
+		{ QChar::Script_NyiakengPuachueHmong    , "151 NyiakengPuachueHmong" },
+		{ QChar::Script_OldSogdian              , "147 OldSogdian" },
+		{ QChar::Script_Sogdian                 , "148 Sogdian" },
+		{ QChar::Script_Wancho                  , "152 Wancho" },
+		{ QChar::Script_Yezidi                  , "156 Yezidi" },
+	#endif
+	#if (QT_VERSION>=QT_VERSION_CHECK(6,3,0))
+		{ QChar::Script_CyproMinoan             , "157 CyproMinoan" },
+		{ QChar::Script_NagMundari              , "163 NagMundari" },
+		{ QChar::Script_OldUyghur               , "158 OldUyghur" },
+		{ QChar::Script_Tangsa                  , "159 Tangsa" },
+		{ QChar::Script_Toto                    , "160 Toto" },
+		{ QChar::Script_Vithkuqi                , "161 Vithkuqi" },
+	#endif
+	#if (QT_VERSION>=QT_VERSION_CHECK(6,5,0))
+		{ QChar::Script_Kawi                    , "162 Kawi" }
+	#endif
+	};
+	static const QMap <QChar::Direction, QString> charDirMap = {
+		{ QChar::DirL    , " 0 DirL  " },
+		{ QChar::DirR    , " 1 DirR  " },
+		{ QChar::DirEN   , " 2 DirEN " },
+		{ QChar::DirES   , " 3 DirES " },
+		{ QChar::DirET   , " 4 DirET " },
+		{ QChar::DirAN   , " 5 DirAN " },
+		{ QChar::DirCS   , " 6 DirCS " },
+		{ QChar::DirB    , " 7 DirB  " },
+		{ QChar::DirS    , " 8 DirS  " },
+		{ QChar::DirWS   , " 9 DirWS " },
+		{ QChar::DirON   , "10 DirON " },
+		{ QChar::DirLRE  , "11 DirLRE" },
+		{ QChar::DirLRO  , "12 DirLRO" },
+		{ QChar::DirAL   , "13 DirAL " },
+		{ QChar::DirRLE  , "14 DirRLE" },
+		{ QChar::DirRLO  , "15 DirRLO" },
+		{ QChar::DirPDF  , "16 DirPDF" },
+		{ QChar::DirNSM  , "17 DirNSM" },
+		{ QChar::DirBN   , "18 DirBN " },
+		{ QChar::DirLRI  , "19 DirLRI" },
+		{ QChar::DirRLI  , "20 DirRLI" },
+		{ QChar::DirFSI  , "21 DirFSI" },
+		{ QChar::DirPDI  , "22 DirPDI" }
+	};
+	static const QMap <QChar::Decomposition, QString> charDecompositionMap = {
+
+		{ QChar::NoDecomposition, " 0 NoDecomposition" },
+		{ QChar::Canonical      , " 1 Canonical      " },
+		{ QChar::Circle         , " 8 Circle         " },
+		{ QChar::Compat         , "16 Compat         " },
+		{ QChar::Final          , " 6 Final          " },
+		{ QChar::Font           , " 2 Font           " },
+		{ QChar::Fraction       , "17 Fraction       " },
+		{ QChar::Initial        , " 4 Initial        " },
+		{ QChar::Isolated       , " 7 Isolated       " },
+		{ QChar::Medial         , " 5 Medial         " },
+		{ QChar::Narrow         , "13 Narrow         " },
+		{ QChar::NoBreak        , " 3 NoBreak        " },
+		{ QChar::Small          , "14 Small          " },
+		{ QChar::Square         , "15 Square         " },
+		{ QChar::Sub            , "10 Sub            " },
+		{ QChar::Super          , " 9 Super          " },
+		{ QChar::Vertical       , "11 Vertical       " },
+		{ QChar::Wide           , "12 QChar::Wide    " }
+	};
+
 	foreach(const uint letter, label32l )
 	{
-		qDebug() << QChar::digitValue(letter) << "(u" << QString::number(letter, 16) << "/" << QChar::fromUcs4(letter) << ")"
-			    "cat." << QChar::category(letter) << // metaCharCat.valueToKey(QChar::category(letter)) <<
-			    "scr." << QChar::script(letter) << // metaCharScript.valueToKey(QChar::script(letter));
-			    "dir." << QChar::direction(letter); // metaCharScript.valueToKey(QChar::script(letter));
-		if (QChar::script(letter) == QChar::Script_Cuneiform)
-		{
-			qDebug() << "Cuneiform detected. " << letter  << "since Unicode V" << QChar::unicodeVersion(letter) << "is a " << QChar::category(letter);
-			qDebug() << "Decomposition:" << QChar::decomposition(letter);
-		}
+		qDebug().noquote() << QChar::digitValue(letter) << "(u" << QString::number(letter, 16) << "/" << QChar::fromUcs4(letter) << ")"
+			    "\tcat." << charCatMap.value(QChar::category(letter), "UNK") <<
+			    "scr." << charScriptMap.value(QChar::script(letter), "UNK") <<
+			    "\tdir." << charDirMap.value(QChar::direction(letter), "UNK") <<
+			    "decomp." <<  charDecompositionMap.value(QChar::decompositionTag(letter), "UNK");
 	}
 }
-#endif
