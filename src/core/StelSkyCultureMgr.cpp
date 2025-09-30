@@ -1173,7 +1173,12 @@ void StelSkyCultureMgr::analyzeScreenLabel() const
 
 	qDebug() << "Analyze label: " << label;
 	std::u32string label32=label.toStdU32String();
+
+#if Q_VERSION<QT_VERSION_CHECK(6,0,0)
+	QList<uint> label32l=label.toUcs4().toList();
+#else
 	QList<uint> label32l=label.toUcs4();
+#endif
 	// Unfortunately, QChar enums are not Q_ENUMs. The names are not available from the MetaObject.
 	static const QMap <QChar::Category, QString> charCatMap = {
 		{ QChar::Mark_NonSpacing         , " 0 Mn Mark_NonSpacing         " },
