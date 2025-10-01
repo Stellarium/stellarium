@@ -338,7 +338,9 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg install -y cmake git eigen glm exiv2 nlopt fast_float md4c qxlsx-qt6 perl5 xorg-vfbserver gettext qt6 tidy-html5
+          pkg install -y cmake git eigen glm exiv2 nlopt fast_float md4c qxlsx-qt6 perl5 xorg-vfbserver gettext tidy-html5 \
+                         qt6-charts qt6-concurrent qt6-core qt6-gui qt6-network qt6-opengl qt6-widgets qt6-multimedia \
+                         qt6-webengine qt6-buildtools qt6-qmake qt6-script qt6-testlib qt6-linguisttools
 
         run: |
           set -e -x
