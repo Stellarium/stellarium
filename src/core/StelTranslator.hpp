@@ -77,6 +77,9 @@ public:
 	//! Same as #qtranslate, but with additional code to handle Chinese names of stars
 	QString qTranslateStar(const QString& s, const QString& c = QString()) const;
 
+	//! Same as #qTranslateStar, but specifically for the \p pronounce entries
+	QString qTranslateStarPronounce(const QString& s, const QString& c = QString()) const;
+
 	//! Try to translate input message and return it as a QString. If no translation
 	//! exist for the current StelTranslator language, a null string is returned.
 	//! @param s input string in english.
@@ -86,7 +89,10 @@ public:
 
 	//! Same as #tryQtranslate, but with additional code to handle Chinese names of stars
 	QString tryQtranslateStar(const QString& s, const QString& c = QString()) const;
-	
+
+	//! Same as #tryQtranslateStar, but specifically for the \p pronounce entries
+	QString tryQtranslateStarPronounce(const QString& s, const QString& c = QString()) const;
+
 	//! Get true translator locale name. Actual locale, never "system".
 	//! @return Locale name e.g "fr_FR"
 	const QString& getTrueLocaleName() const
@@ -131,6 +137,7 @@ private:
 	const StelTranslator& operator=(const StelTranslator&);
 
 	QString tryTranslateChineseStar(const QString& s, const QString& c) const;
+	QString tryTranslateChineseStarPronounce(const QString& s, const QString& c) const;
 	
 	//! Initialize the languages code list from the passed file
 	//! @param fileName file containing the list of language codes
