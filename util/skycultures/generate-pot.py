@@ -479,9 +479,9 @@ def update_cultures_pot(sclist, pot):
                 process_cons_or_asterism(data['constellations'], "constellation", pot, sc_name)
             if 'asterisms' in data:
                 process_cons_or_asterism(data['asterisms'], "asterism", pot, sc_name)
-            if 'zodiac' in data:
+            if 'zodiac' in data and not args.skip_zodiac:
                 process_extra_names(data['zodiac'], pot, sc_name)
-            if 'lunar_system' in data:
+            if 'lunar_system' in data and not args.skip_zodiac:
                 process_extra_names(data['lunar_system'], pot, sc_name)
             if 'common_names' in data:
                 process_names(data['common_names'], pot, sc_name)
@@ -490,6 +490,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--sky-culture", help="Process only the specified sky culture")
     parser.add_argument("--skip-abbrev", action="store_true", help="Don't emit translations for abbreviations")
+    parser.add_argument("--skip-zodiac", action="store_true", help="Don't emit translations for Zodiac or Lunar System entries")
     parser.add_argument("--skip-pronounce", action="store_true", help="Don't emit translations for 'pronounce' entries")
     args = parser.parse_args()
     metadata_template = {
