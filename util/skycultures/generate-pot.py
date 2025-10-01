@@ -347,7 +347,7 @@ def update_cultures_pot(sclist, pot):
 
                     # Now the pronounce entries also need a lite version of the above cleaning
                     if pronounce:
-                        pronounce = re.sub(' [MDCLXVI]+$', '', pronounce)
+                        pronounce = re.sub(' [MDCLXVI]+[*?]$', '', pronounce)
 
                 comment = ''
                 if not chinese_name_cleaned or not english in cons_ast_names:
