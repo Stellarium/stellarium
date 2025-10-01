@@ -249,6 +249,7 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 		if (event->button() == Qt::RightButton && event->type() == QEvent::MouseButtonDblClick)
 		{
 			// this allows the double click to cancel drawing even if hovering over a star
+			// or when in coordinate mode
 			if (hasFlag(drawState, Drawing::hasEnd))
 			{
 				if (!drawnLines.coordinates.empty())
