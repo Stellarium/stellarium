@@ -173,7 +173,7 @@ QString StelTranslator::tryTranslateChineseStar(const QString& s, const QString&
 
 QString StelTranslator::tryTranslateChineseStarPronounce(const QString& s, const QString& c) const
 {
-	static const auto re = []{ QRegularExpression re("(.+)( [IXVLCDM]+)$"); re.optimize(); return re; }();
+        static const auto re = []{ QRegularExpression re("(.+)( [IXVLCDM*?]+)$"); re.optimize(); return re; }();
 	const auto match = re.match(s);
 	if (!match.hasMatch()) return {};
 
