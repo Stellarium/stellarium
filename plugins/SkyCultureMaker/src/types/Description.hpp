@@ -58,16 +58,19 @@ struct Description
 
 	/**
 	 * @brief Check if the description is complete.
-	 * @return true if all required fields are filled, false otherwise.
+	 * @return true if all required fields are correctly filled, false otherwise.
 	 */
 	bool isComplete() const
 	{
 		return !name.trimmed().isEmpty() &&
-			   !authors.trimmed().isEmpty() &&
-			   license != scm::LicenseType::NONE &&
+			   !introduction.trimmed().isEmpty() &&
 			   !cultureDescription.trimmed().isEmpty() &&
-			   !about.trimmed().isEmpty() &&
+			   !constellations.trimmed().isEmpty() &&
+			   constellations.contains("##### ") && // at least one constellation description
 			   !references.trimmed().isEmpty() &&
+			   !authors.trimmed().isEmpty() &&
+			   !about.trimmed().isEmpty() &&
+			   license != scm::LicenseType::NONE &&
 			   classification != scm::ClassificationType::NONE;
 	}
 };

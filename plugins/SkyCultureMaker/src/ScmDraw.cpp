@@ -38,7 +38,7 @@ void scm::ScmDraw::setSearchMode(bool active)
 	if (inSearchMode == true && active == false)
 	{
 		// only allow search and find for normal constellations
-		if(drawingMode == DrawingMode::StarsAndDSO)
+		if (drawingMode == DrawingMode::StarsAndDSO)
 		{
 			selectedStarIsSearched = true;
 		}
@@ -246,15 +246,27 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 		}
 
 		// Reset line drawing
-		if (event->button() == Qt::RightButton && event->type() == QEvent::MouseButtonDblClick &&
-		    hasFlag(drawState, Drawing::hasEnd))
+		if (event->button() == Qt::RightButton && event->type() == QEvent::MouseButtonDblClick)
 		{
-			if (!drawnLines.coordinates.empty())
+			// this allows the double click to cancel drawing even if hovering over a star
+			if (hasFlag(drawState, Drawing::hasEnd))
 			{
-				drawnLines.coordinates.pop_back();
-				drawnLines.stars.pop_back();
+				if (!drawnLines.coordinates.empty())
+				{
+					drawnLines.coordinates.pop_back();
+					drawnLines.stars.pop_back();
+				}
+				drawState = Drawing::None;
 			}
-			drawState = Drawing::None;
+			else if (hasFlag(drawState, Drawing::hasFloatingEnd))
+			{
+				std::get<CoordinateLine>(currentLine).start.set(0, 0, 0);
+				std::get<CoordinateLine>(currentLine).end.set(0, 0, 0);
+				std::get<StarLine>(currentLine).start.reset();
+				std::get<StarLine>(currentLine).end.reset();
+				drawState = Drawing::None;
+			}
+
 			event->accept();
 			return;
 		}

@@ -228,6 +228,7 @@ void ScmSkyCultureExportDialog::exportAndExitSkyCulture()
 	maker->resetScmDialogs();
 	maker->hideAllDialogs();
 	maker->setIsScmEnabled(false);
+	maker->setNewSkyCulture();
 }
 
 bool ScmSkyCultureExportDialog::saveSkyCultureCMakeListsFile(const QDir& directory)
