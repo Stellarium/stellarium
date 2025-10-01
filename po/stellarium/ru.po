@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-09-21 23:05+0700\n"
+"POT-Creation-Date: 2025-10-01 11:51+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -27,12 +27,12 @@ msgstr ""
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:444
 #: src/core/modules/Constellation.cpp:570
-#: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:289
-#: src/core/modules/Nebula.cpp:291 src/core/modules/Planet.cpp:614
-#: src/core/modules/Planet.cpp:617 src/core/modules/StarWrapper.cpp:50
-#: src/core/modules/StarWrapper.cpp:285 src/core/modules/StarWrapper.cpp:287
-#: src/core/modules/StarWrapper.cpp:656 src/core/modules/StarWrapper.cpp:658
-#: src/core/modules/StarWrapper.cpp:882 src/core/modules/StarWrapper.cpp:884
+#: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:292
+#: src/core/modules/Nebula.cpp:294 src/core/modules/Planet.cpp:617
+#: src/core/modules/Planet.cpp:620 src/core/modules/StarWrapper.cpp:51
+#: src/core/modules/StarWrapper.cpp:288 src/core/modules/StarWrapper.cpp:290
+#: src/core/modules/StarWrapper.cpp:659 src/core/modules/StarWrapper.cpp:661
+#: src/core/modules/StarWrapper.cpp:885 src/core/modules/StarWrapper.cpp:887
 #: src/gui/AstroCalcDialog.cpp:934 src/gui/AstroCalcDialog.cpp:2427
 #: src/gui/AstroCalcDialog.cpp:3019 src/gui/AstroCalcDialog.cpp:3051
 #: src/gui/AstroCalcDialog.cpp:3375 src/gui/AstroCalcDialog.cpp:7659
@@ -348,8 +348,8 @@ msgid "Antapex"
 msgstr "Антиапекс"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1605 src/core/modules/Planet.cpp:755
-#: src/core/modules/Planet.cpp:1040 src/core/modules/StarWrapper.cpp:377
+#: src/core/modules/GridLinesMgr.cpp:1605 src/core/modules/Planet.cpp:758
+#: src/core/modules/Planet.cpp:1043 src/core/modules/StarWrapper.cpp:380
 #: src/gui/AstroCalcDialog.cpp:8542 plugins/Satellites/src/Satellite.cpp:363
 #: plugins/Satellites/src/Satellite.cpp:406
 #: plugins/MeteorShowers/src/MeteorShower.cpp:583
@@ -557,97 +557,97 @@ msgid "Compass marks"
 msgstr "Компас"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1164
+#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1167
 msgctxt "compass direction"
 msgid "N"
 msgstr "С"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:286 src/core/modules/Planet.cpp:1156
+#: src/core/modules/LandscapeMgr.cpp:286 src/core/modules/Planet.cpp:1159
 msgctxt "compass direction"
 msgid "S"
 msgstr "Ю"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:288 src/core/modules/Planet.cpp:1168
+#: src/core/modules/LandscapeMgr.cpp:288 src/core/modules/Planet.cpp:1171
 msgctxt "compass direction"
 msgid "E"
 msgstr "В"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:290 src/core/modules/Planet.cpp:1160
+#: src/core/modules/LandscapeMgr.cpp:290 src/core/modules/Planet.cpp:1163
 msgctxt "compass direction"
 msgid "W"
 msgstr "З"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:292 src/core/modules/Planet.cpp:1166
+#: src/core/modules/LandscapeMgr.cpp:292 src/core/modules/Planet.cpp:1169
 msgctxt "compass direction"
 msgid "NE"
 msgstr "СВ"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:294 src/core/modules/Planet.cpp:1170
+#: src/core/modules/LandscapeMgr.cpp:294 src/core/modules/Planet.cpp:1173
 msgctxt "compass direction"
 msgid "SE"
 msgstr "ЮВ"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:296 src/core/modules/Planet.cpp:1158
+#: src/core/modules/LandscapeMgr.cpp:296 src/core/modules/Planet.cpp:1161
 msgctxt "compass direction"
 msgid "SW"
 msgstr "ЮЗ"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:298 src/core/modules/Planet.cpp:1162
+#: src/core/modules/LandscapeMgr.cpp:298 src/core/modules/Planet.cpp:1165
 msgctxt "compass direction"
 msgid "NW"
 msgstr "СЗ"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:300 src/core/modules/Planet.cpp:1165
+#: src/core/modules/LandscapeMgr.cpp:300 src/core/modules/Planet.cpp:1168
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "ССВ"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:302 src/core/modules/Planet.cpp:1167
+#: src/core/modules/LandscapeMgr.cpp:302 src/core/modules/Planet.cpp:1170
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "ВСВ"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:304 src/core/modules/Planet.cpp:1169
+#: src/core/modules/LandscapeMgr.cpp:304 src/core/modules/Planet.cpp:1172
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "ВЮВ"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:306 src/core/modules/Planet.cpp:1171
+#: src/core/modules/LandscapeMgr.cpp:306 src/core/modules/Planet.cpp:1174
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "ЮЮВ"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:308 src/core/modules/Planet.cpp:1157
+#: src/core/modules/LandscapeMgr.cpp:308 src/core/modules/Planet.cpp:1160
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "ЮЮЗ"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:310 src/core/modules/Planet.cpp:1159
+#: src/core/modules/LandscapeMgr.cpp:310 src/core/modules/Planet.cpp:1162
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "ЗЮЗ"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:312 src/core/modules/Planet.cpp:1161
+#: src/core/modules/LandscapeMgr.cpp:312 src/core/modules/Planet.cpp:1164
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "ЗСЗ"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:314 src/core/modules/Planet.cpp:1163
+#: src/core/modules/LandscapeMgr.cpp:314 src/core/modules/Planet.cpp:1166
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "ССЗ"
@@ -827,7 +827,7 @@ msgstr "Уменьшить засветку"
 msgid "Cyclic change in light pollution"
 msgstr "Циклическое изменение засветки"
 
-#: src/core/modules/LandscapeMgr.cpp:1527 src/scripting/StelScriptMgr.cpp:647
+#: src/core/modules/LandscapeMgr.cpp:1527 src/scripting/StelScriptMgr.cpp:646
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:628
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:257
@@ -941,14 +941,14 @@ msgstr "геологический термин"
 msgid "Linear size"
 msgstr "Линейный размер"
 
-#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:850
+#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:853
 msgid "Diameter"
 msgstr "Диаметр"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:706
-#: src/core/modules/Planet.cpp:727 src/core/modules/Planet.cpp:851
-#: src/core/modules/Planet.cpp:1367 src/core/modules/Comet.cpp:191
+#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:709
+#: src/core/modules/Planet.cpp:730 src/core/modules/Planet.cpp:854
+#: src/core/modules/Planet.cpp:1370 src/core/modules/Comet.cpp:191
 #: src/core/modules/Comet.cpp:201 src/gui/StelGuiItems.cpp:981
 #: src/gui/AstroCalcDialog.cpp:3170 src/gui/AstroCalcDialog.cpp:3718
 #: src/gui/AstroCalcDialog.cpp:8477 plugins/Satellites/src/Satellites.cpp:3018
@@ -1676,244 +1676,244 @@ msgstr "Центр"
 msgid "Subsolar"
 msgstr "Подсолнечная"
 
-#: src/core/modules/Nebula.cpp:69
+#: src/core/modules/Nebula.cpp:70
 msgid "galaxy"
 msgstr "галактика"
 
-#: src/core/modules/Nebula.cpp:70
+#: src/core/modules/Nebula.cpp:71
 msgid "active galaxy"
 msgstr "активная галактика"
 
-#: src/core/modules/Nebula.cpp:71
+#: src/core/modules/Nebula.cpp:72
 msgid "radio galaxy"
 msgstr "радиогалактика"
 
-#: src/core/modules/Nebula.cpp:72
+#: src/core/modules/Nebula.cpp:73
 msgid "interacting galaxy"
 msgstr "взаимодействующая галактика"
 
-#: src/core/modules/Nebula.cpp:73 plugins/Quasars/src/Quasar.hpp:70
+#: src/core/modules/Nebula.cpp:74 plugins/Quasars/src/Quasar.hpp:70
 msgid "quasar"
 msgstr "квазар"
 
-#: src/core/modules/Nebula.cpp:74
+#: src/core/modules/Nebula.cpp:75
 msgid "star cluster"
 msgstr "звёздное скопление"
 
-#: src/core/modules/Nebula.cpp:75
+#: src/core/modules/Nebula.cpp:76
 msgid "open star cluster"
 msgstr "рассеянное звёздное скопление"
 
-#: src/core/modules/Nebula.cpp:76
+#: src/core/modules/Nebula.cpp:77
 msgid "globular star cluster"
 msgstr "шаровое звёздное скопление"
 
-#: src/core/modules/Nebula.cpp:77
+#: src/core/modules/Nebula.cpp:78
 msgid "stellar association"
 msgstr "звёздная ассоциация"
 
-#: src/core/modules/Nebula.cpp:78
+#: src/core/modules/Nebula.cpp:79
 msgid "star cloud"
 msgstr "звёздное облако"
 
-#: src/core/modules/Nebula.cpp:79
+#: src/core/modules/Nebula.cpp:80
 msgid "nebula"
 msgstr "туманность"
 
-#: src/core/modules/Nebula.cpp:80
+#: src/core/modules/Nebula.cpp:81
 msgid "planetary nebula"
 msgstr "планетарная туманность"
 
-#: src/core/modules/Nebula.cpp:81
+#: src/core/modules/Nebula.cpp:82
 msgid "dark nebula"
 msgstr "тёмная туманность"
 
-#: src/core/modules/Nebula.cpp:82
+#: src/core/modules/Nebula.cpp:83
 msgid "reflection nebula"
 msgstr "отражательная туманность"
 
-#: src/core/modules/Nebula.cpp:83
+#: src/core/modules/Nebula.cpp:84
 msgid "bipolar nebula"
 msgstr "биполярная туманность"
 
-#: src/core/modules/Nebula.cpp:84
+#: src/core/modules/Nebula.cpp:85
 msgid "emission nebula"
 msgstr "эмиссионная туманность"
 
-#: src/core/modules/Nebula.cpp:85
+#: src/core/modules/Nebula.cpp:86
 msgid "cluster associated with nebulosity"
 msgstr "звёздное скопление с туманностью"
 
-#: src/core/modules/Nebula.cpp:86
+#: src/core/modules/Nebula.cpp:87
 msgid "HII region"
 msgstr "область ионизированного водорода"
 
-#: src/core/modules/Nebula.cpp:87
+#: src/core/modules/Nebula.cpp:88
 msgid "supernova remnant"
 msgstr "остаток сверхновой"
 
-#: src/core/modules/Nebula.cpp:88
+#: src/core/modules/Nebula.cpp:89
 msgid "interstellar matter"
 msgstr "межзвёздное вещество"
 
-#: src/core/modules/Nebula.cpp:89
+#: src/core/modules/Nebula.cpp:90
 msgid "emission object"
 msgstr "излучающий объект"
 
-#: src/core/modules/Nebula.cpp:90
+#: src/core/modules/Nebula.cpp:91
 msgid "BL Lac object"
 msgstr "лацертида"
 
-#: src/core/modules/Nebula.cpp:91
+#: src/core/modules/Nebula.cpp:92
 msgid "blazar"
 msgstr "блазар"
 
-#: src/core/modules/Nebula.cpp:92
+#: src/core/modules/Nebula.cpp:93
 msgid "molecular cloud"
 msgstr "молекулярное облако"
 
-#: src/core/modules/Nebula.cpp:93
+#: src/core/modules/Nebula.cpp:94
 msgid "young stellar object"
 msgstr "молодой звёздный объект"
 
-#: src/core/modules/Nebula.cpp:94
+#: src/core/modules/Nebula.cpp:95
 msgid "possible quasar"
 msgstr "возможно квазар"
 
-#: src/core/modules/Nebula.cpp:95
+#: src/core/modules/Nebula.cpp:96
 msgid "possible planetary nebula"
 msgstr "возможно планетарная туманность"
 
-#: src/core/modules/Nebula.cpp:96
+#: src/core/modules/Nebula.cpp:97
 msgid "protoplanetary nebula"
 msgstr "протопланетарная туманность"
 
-#: src/core/modules/Nebula.cpp:97 src/core/modules/Planet.cpp:131
-#: src/core/modules/StarWrapper.cpp:97 src/core/modules/StarWrapper.cpp:523
-#: src/core/modules/StarWrapper.cpp:804
+#: src/core/modules/Nebula.cpp:98 src/core/modules/Planet.cpp:131
+#: src/core/modules/StarWrapper.cpp:98 src/core/modules/StarWrapper.cpp:526
+#: src/core/modules/StarWrapper.cpp:807
 msgid "star"
 msgstr "звезда"
 
-#: src/core/modules/Nebula.cpp:98
+#: src/core/modules/Nebula.cpp:99
 msgid "symbiotic star"
 msgstr "симбиотическая звёзда"
 
-#: src/core/modules/Nebula.cpp:99
+#: src/core/modules/Nebula.cpp:100
 msgid "emission-line star"
 msgstr "звезда с эмиссионной линией"
 
-#: src/core/modules/Nebula.cpp:100
+#: src/core/modules/Nebula.cpp:101
 msgid "supernova candidate"
 msgstr "кандидат в сверхновые"
 
-#: src/core/modules/Nebula.cpp:101
+#: src/core/modules/Nebula.cpp:102
 msgid "supernova remnant candidate"
 msgstr "кандидат в остаток сверхновой"
 
-#: src/core/modules/Nebula.cpp:102
+#: src/core/modules/Nebula.cpp:103
 msgid "cluster of galaxies"
 msgstr "скопление галактик"
 
-#: src/core/modules/Nebula.cpp:103
+#: src/core/modules/Nebula.cpp:104
 msgid "part of a galaxy"
 msgstr "часть галактики"
 
-#: src/core/modules/Nebula.cpp:104
+#: src/core/modules/Nebula.cpp:105
 msgid "region of the sky"
 msgstr "область неба"
 
-#: src/core/modules/Nebula.cpp:105
+#: src/core/modules/Nebula.cpp:106
 msgid "object of unknown nature"
 msgstr "объект неизвестной природы"
 
-#: src/core/modules/Nebula.cpp:178 src/core/StelObject.cpp:351
+#: src/core/modules/Nebula.cpp:179 src/core/StelObject.cpp:351
 #: src/gui/AstroCalcChart.cpp:97 src/gui/AstroCalcChart.cpp:107
 #: src/gui/AstroCalcChart.cpp:437 src/gui/AstroCalcChart.cpp:463
 #: src/gui/ObsListDialog.cpp:294 plugins/Supernovae/src/Supernova.cpp:128
 msgid "Magnitude"
 msgstr "Звёздная величина"
 
-#: src/core/modules/Nebula.cpp:180
+#: src/core/modules/Nebula.cpp:181
 msgid "Opacity"
 msgstr "Непрозрачность"
 
-#: src/core/modules/Nebula.cpp:184
+#: src/core/modules/Nebula.cpp:185
 msgid "photometric passband"
 msgstr "фотометрическая полоса пропускания"
 
-#: src/core/modules/Nebula.cpp:197 src/core/StelObject.cpp:354
+#: src/core/modules/Nebula.cpp:198 src/core/StelObject.cpp:354
 #: plugins/Satellites/src/Satellite.cpp:350
 msgid "reduced to"
 msgstr "ослаблена до"
 
-#: src/core/modules/Nebula.cpp:197 src/core/StelObject.cpp:354
+#: src/core/modules/Nebula.cpp:198 src/core/StelObject.cpp:354
 #: plugins/Satellites/src/Satellite.cpp:350
 msgid "by"
 msgstr " "
 
-#: src/core/modules/Nebula.cpp:197 src/core/StelObject.cpp:354
+#: src/core/modules/Nebula.cpp:198 src/core/StelObject.cpp:354
 #: plugins/Satellites/src/Satellite.cpp:350
 msgid "Airmasses"
 msgstr "атмосф. масс."
 
-#: src/core/modules/Nebula.cpp:276 src/core/modules/Planet.cpp:591
-#: src/core/modules/StarWrapper.cpp:265
+#: src/core/modules/Nebula.cpp:279 src/core/modules/Planet.cpp:594
+#: src/core/modules/StarWrapper.cpp:268
 msgid "Additional names: "
 msgstr "Дополнительные названия:"
 
-#: src/core/modules/Nebula.cpp:282 src/core/modules/Planet.cpp:598
-#: src/core/modules/StarWrapper.cpp:271
+#: src/core/modules/Nebula.cpp:285 src/core/modules/Planet.cpp:601
+#: src/core/modules/StarWrapper.cpp:274
 msgid "Additional catalog numbers: "
 msgstr "Дополнительные каталожные номера:"
 
-#: src/core/modules/Nebula.cpp:300 src/core/modules/Planet.cpp:861
-#: src/core/modules/StarWrapper.cpp:55 src/core/modules/StarWrapper.cpp:316
-#: src/core/modules/StarWrapper.cpp:675 src/core/modules/StarWrapper.cpp:891
+#: src/core/modules/Nebula.cpp:303 src/core/modules/Planet.cpp:864
+#: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:319
+#: src/core/modules/StarWrapper.cpp:678 src/core/modules/StarWrapper.cpp:894
 #: plugins/Quasars/src/Quasar.cpp:134
 msgid "Color Index (B-V)"
 msgstr "Показатель цвета (B-V)"
 
-#: src/core/modules/Nebula.cpp:305
+#: src/core/modules/Nebula.cpp:308
 msgid "Surface brightness"
 msgstr "Поверхностная яркость"
 
-#: src/core/modules/Nebula.cpp:306
+#: src/core/modules/Nebula.cpp:309
 msgid "after extinction"
 msgstr "после ослабления"
 
-#: src/core/modules/Nebula.cpp:316 src/core/modules/Nebula.cpp:318
+#: src/core/modules/Nebula.cpp:319 src/core/modules/Nebula.cpp:321
 #: src/gui/AstroCalcDialog.cpp:1148 src/gui/AstroCalcDialog.cpp:1150
 msgctxt "magnitude"
 msgid "mag"
 msgstr "звёзд. вел."
 
-#: src/core/modules/Nebula.cpp:316 src/gui/AstroCalcDialog.cpp:1148
+#: src/core/modules/Nebula.cpp:319 src/gui/AstroCalcDialog.cpp:1148
 #: src/gui/AstroCalcDialog.cpp:1155
 msgid "arc-min"
 msgstr "угл. мин."
 
-#: src/core/modules/Nebula.cpp:318 src/gui/AstroCalcDialog.cpp:1150
+#: src/core/modules/Nebula.cpp:321 src/gui/AstroCalcDialog.cpp:1150
 #: src/gui/AstroCalcDialog.cpp:1230
 msgid "arc-sec"
 msgstr "угл. сек."
 
-#: src/core/modules/Nebula.cpp:332
+#: src/core/modules/Nebula.cpp:335
 msgid "Contrast index"
 msgstr "Контрастный индекс"
 
-#: src/core/modules/Nebula.cpp:340 src/ui_configurationDialog.h:2020
+#: src/core/modules/Nebula.cpp:343 src/ui_configurationDialog.h:2020
 msgid "Size"
 msgstr "Размер"
 
-#: src/core/modules/Nebula.cpp:358
+#: src/core/modules/Nebula.cpp:361
 msgid "Orientation angle"
 msgstr "Угол ориентации"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:384 src/core/modules/Nebula.cpp:397
-#: src/core/modules/StarWrapper.cpp:348 src/core/modules/StarWrapper.cpp:730
+#: src/core/modules/Nebula.cpp:387 src/core/modules/Nebula.cpp:400
+#: src/core/modules/StarWrapper.cpp:351 src/core/modules/StarWrapper.cpp:733
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:164
 #: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:334
 msgctxt "distance"
@@ -1921,9 +1921,9 @@ msgid "ly"
 msgstr "св. лет"
 
 #. TRANSLATORS: distance
-#: src/core/modules/Nebula.cpp:385 src/core/modules/Nebula.cpp:431
-#: src/core/modules/Planet.cpp:739 src/core/modules/Planet.cpp:745
-#: src/core/modules/StarWrapper.cpp:350 src/core/modules/StarWrapper.cpp:732
+#: src/core/modules/Nebula.cpp:388 src/core/modules/Nebula.cpp:434
+#: src/core/modules/Planet.cpp:742 src/core/modules/Planet.cpp:748
+#: src/core/modules/StarWrapper.cpp:353 src/core/modules/StarWrapper.cpp:735
 #: src/gui/AstroCalcDialog.cpp:969 src/gui/AstroCalcChart.cpp:94
 #: src/gui/AstroCalcChart.cpp:104 src/gui/AstroCalcChart.cpp:430
 #: src/gui/AstroCalcChart.cpp:456 src/ui_configurationDialog.h:1992
@@ -1933,314 +1933,314 @@ msgid "Distance"
 msgstr "Расстояние"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:395 plugins/Pulsars/src/Pulsar.cpp:265
+#: src/core/modules/Nebula.cpp:398 plugins/Pulsars/src/Pulsar.cpp:265
 msgctxt "distance"
 msgid "kpc"
 msgstr "кпк"
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
-#: src/core/modules/Nebula.cpp:408
+#: src/core/modules/Nebula.cpp:411
 msgctxt "distance"
 msgid "Mpc"
 msgstr "Мпк"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
-#: src/core/modules/Nebula.cpp:417
+#: src/core/modules/Nebula.cpp:420
 msgctxt "distance"
 msgid "M ly"
 msgstr "млн. св. лет"
 
-#: src/core/modules/Nebula.cpp:446 plugins/Quasars/src/Quasar.cpp:146
+#: src/core/modules/Nebula.cpp:449 plugins/Quasars/src/Quasar.cpp:146
 msgid "Redshift"
 msgstr "Красное смещение"
 
-#: src/core/modules/Nebula.cpp:456 src/core/modules/StarWrapper.cpp:386
-#: src/core/modules/StarWrapper.cpp:736 src/ui_configurationDialog.h:2187
+#: src/core/modules/Nebula.cpp:459 src/core/modules/StarWrapper.cpp:389
+#: src/core/modules/StarWrapper.cpp:739 src/ui_configurationDialog.h:2187
 msgid "Parallax"
 msgstr "Параллакс"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:456 src/core/modules/StarWrapper.cpp:391
-#: src/core/modules/StarWrapper.cpp:741 plugins/Pulsars/src/Pulsar.cpp:257
+#: src/core/modules/Nebula.cpp:459 src/core/modules/StarWrapper.cpp:394
+#: src/core/modules/StarWrapper.cpp:744 plugins/Pulsars/src/Pulsar.cpp:257
 msgctxt "parallax"
 msgid "mas"
 msgstr "мсд"
 
-#: src/core/modules/Nebula.cpp:459
+#: src/core/modules/Nebula.cpp:462
 msgid "Discoverer"
 msgstr "Первооткрыватель"
 
-#: src/core/modules/Nebula.cpp:461 src/ui_searchDialogGui.h:849
+#: src/core/modules/Nebula.cpp:464 src/ui_searchDialogGui.h:849
 msgid "Morphological description"
 msgstr "Морфологическое описание"
 
-#: src/core/modules/Nebula.cpp:1433
+#: src/core/modules/Nebula.cpp:1436
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "высокая концентрация звёзд к центру"
 
-#: src/core/modules/Nebula.cpp:1436
+#: src/core/modules/Nebula.cpp:1439
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "плотная центральная концентрации звёзд"
 
-#: src/core/modules/Nebula.cpp:1439
+#: src/core/modules/Nebula.cpp:1442
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "сильно выращенное внутреннее ядро звёзд"
 
-#: src/core/modules/Nebula.cpp:1442
+#: src/core/modules/Nebula.cpp:1445
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "промежуточное богатое скопление звёзд"
 
-#: src/core/modules/Nebula.cpp:1447
+#: src/core/modules/Nebula.cpp:1450
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "промежуточная концентрация звёзд"
 
-#: src/core/modules/Nebula.cpp:1450
+#: src/core/modules/Nebula.cpp:1453
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "rather loose concentration of stars towards the center"
 msgstr "довольно рыхлая концентрации звёзд к центру"
 
-#: src/core/modules/Nebula.cpp:1453
+#: src/core/modules/Nebula.cpp:1456
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "рыхлая концентрация звёзд к центру"
 
-#: src/core/modules/Nebula.cpp:1456
+#: src/core/modules/Nebula.cpp:1459
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "рыхлая концентрация звёзд"
 
-#: src/core/modules/Nebula.cpp:1459
+#: src/core/modules/Nebula.cpp:1462
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "очень рыхлая концентрация звёзд к центру"
 
-#: src/core/modules/Nebula.cpp:1462
+#: src/core/modules/Nebula.cpp:1465
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "почти нет концентрации к центру"
 
-#: src/core/modules/Nebula.cpp:1465
+#: src/core/modules/Nebula.cpp:1468
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "не задокументированный класс концентрации"
 
-#: src/core/modules/Nebula.cpp:1514
+#: src/core/modules/Nebula.cpp:1517
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "сильная центральная концентрация звёзд"
 
-#: src/core/modules/Nebula.cpp:1515
+#: src/core/modules/Nebula.cpp:1518
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "небольшая центральная концентрация звезд"
 
-#: src/core/modules/Nebula.cpp:1516
+#: src/core/modules/Nebula.cpp:1519
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "нет заметной концентрации звёзд"
 
-#: src/core/modules/Nebula.cpp:1517
+#: src/core/modules/Nebula.cpp:1520
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "конденсация звёздного поля"
 
-#: src/core/modules/Nebula.cpp:1520
+#: src/core/modules/Nebula.cpp:1523
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "не задокументированный класс концентрации"
 
-#: src/core/modules/Nebula.cpp:1523
+#: src/core/modules/Nebula.cpp:1526
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "малый диапазон яркости членов скопления"
 
-#: src/core/modules/Nebula.cpp:1524
+#: src/core/modules/Nebula.cpp:1527
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "средний диапазон яркости членов скопления"
 
-#: src/core/modules/Nebula.cpp:1525
+#: src/core/modules/Nebula.cpp:1528
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "большой диапазон яркости членов скопления"
 
-#: src/core/modules/Nebula.cpp:1528
+#: src/core/modules/Nebula.cpp:1531
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "не задокументированный диапазон яркости членов скопления"
 
-#: src/core/modules/Nebula.cpp:1531
+#: src/core/modules/Nebula.cpp:1534
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "бедное скопление с менее чем 50 звёздами"
 
-#: src/core/modules/Nebula.cpp:1532
+#: src/core/modules/Nebula.cpp:1535
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "умеренно богатое скопление в диапазоне 50-100 звёзд"
 
-#: src/core/modules/Nebula.cpp:1533
+#: src/core/modules/Nebula.cpp:1536
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "богатое скопление, в котором более 100 звёзд"
 
-#: src/core/modules/Nebula.cpp:1536
+#: src/core/modules/Nebula.cpp:1539
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "не задокументированный класс числа членов"
 
-#: src/core/modules/Nebula.cpp:1539
+#: src/core/modules/Nebula.cpp:1542
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "скопление находится в туманности"
 
-#: src/core/modules/Nebula.cpp:1561
+#: src/core/modules/Nebula.cpp:1564
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "очень яркая"
 
-#: src/core/modules/Nebula.cpp:1564
+#: src/core/modules/Nebula.cpp:1567
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "яркая"
 
-#: src/core/modules/Nebula.cpp:1567
+#: src/core/modules/Nebula.cpp:1570
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "средней яркости"
 
-#: src/core/modules/Nebula.cpp:1570
+#: src/core/modules/Nebula.cpp:1573
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "тусклая"
 
-#: src/core/modules/Nebula.cpp:1573
+#: src/core/modules/Nebula.cpp:1576
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "очень тусклая"
 
-#: src/core/modules/Nebula.cpp:1576
+#: src/core/modules/Nebula.cpp:1579
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "неопределенной яркости"
 
-#: src/core/modules/Nebula.cpp:1579
+#: src/core/modules/Nebula.cpp:1582
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "не задокументированная яркость отражательных туманностей"
 
-#: src/core/modules/Nebula.cpp:1585
+#: src/core/modules/Nebula.cpp:1588
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "освещающая звезда находится в туманности"
 
-#: src/core/modules/Nebula.cpp:1588
+#: src/core/modules/Nebula.cpp:1591
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "звезда находится за пределами освещенной туманности"
 
-#: src/core/modules/Nebula.cpp:1591
+#: src/core/modules/Nebula.cpp:1594
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "звезда находится на краю освещенной туманности"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1596
+#: src/core/modules/Nebula.cpp:1599
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "звезда находится за пределами освещенной пекулярной туманности"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1602
+#: src/core/modules/Nebula.cpp:1605
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "освещенная пекулярная туманность"
 
-#: src/core/modules/Nebula.cpp:1606
+#: src/core/modules/Nebula.cpp:1609
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "не задокументированная отражательная туманность"
 
-#: src/core/modules/Nebula.cpp:1627
+#: src/core/modules/Nebula.cpp:1630
 msgid "circular form"
 msgstr "округлой формы"
 
-#: src/core/modules/Nebula.cpp:1628
+#: src/core/modules/Nebula.cpp:1631
 msgid "elliptical form"
 msgstr "эллиптической формы"
 
-#: src/core/modules/Nebula.cpp:1629
+#: src/core/modules/Nebula.cpp:1632
 msgid "irregular form"
 msgstr "неправильной формы"
 
-#: src/core/modules/Nebula.cpp:1631
+#: src/core/modules/Nebula.cpp:1634
 msgid "amorphous structure"
 msgstr "с аморфной структурой"
 
-#: src/core/modules/Nebula.cpp:1632
+#: src/core/modules/Nebula.cpp:1635
 msgid "conventional structure"
 msgstr "с обычной структурой"
 
-#: src/core/modules/Nebula.cpp:1633
+#: src/core/modules/Nebula.cpp:1636
 msgid "filamentary structure"
 msgstr "с волокнистой структурой"
 
-#: src/core/modules/Nebula.cpp:1635
+#: src/core/modules/Nebula.cpp:1638
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "тусклая"
 
-#: src/core/modules/Nebula.cpp:1636
+#: src/core/modules/Nebula.cpp:1639
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "средней яркости"
 
-#: src/core/modules/Nebula.cpp:1637
+#: src/core/modules/Nebula.cpp:1640
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "яркая"
 
-#: src/core/modules/Nebula.cpp:1640
+#: src/core/modules/Nebula.cpp:1643
 msgid "undocumented form"
 msgstr "незадукоментированная форма"
 
-#: src/core/modules/Nebula.cpp:1641
+#: src/core/modules/Nebula.cpp:1644
 msgid "undocumented structure"
 msgstr "незадокументированная структура"
 
-#: src/core/modules/Nebula.cpp:1642
+#: src/core/modules/Nebula.cpp:1645
 msgid "undocumented brightness"
 msgstr "незадокументированная яркость"
 
-#: src/core/modules/Nebula.cpp:1652
+#: src/core/modules/Nebula.cpp:1655
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
 msgstr "остаток демонстрирует радиоструктуру с оболочкой"
 
-#: src/core/modules/Nebula.cpp:1655
+#: src/core/modules/Nebula.cpp:1658
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
 msgstr ""
 "остаток демонстрирует заполненную центральную («плерион») радиоструктуру"
 
-#: src/core/modules/Nebula.cpp:1658
+#: src/core/modules/Nebula.cpp:1661
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
 msgstr "остаток демонстрирует составную (или комбинированную) радиоструктуру"
 
-#: src/core/modules/Nebula.cpp:1661
+#: src/core/modules/Nebula.cpp:1664
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
 msgstr ""
 "остаток демонстрирует радиоструктуру с оболочкой с некоторой "
 "неопределенностью"
 
-#: src/core/modules/Nebula.cpp:1664
+#: src/core/modules/Nebula.cpp:1667
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
@@ -2249,7 +2249,7 @@ msgstr ""
 "остаток демонстрирует заполненную центральную («плерион») радиоструктуру с "
 "некоторой неопределенностью"
 
-#: src/core/modules/Nebula.cpp:1667
+#: src/core/modules/Nebula.cpp:1670
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a composite (or combination) radio structure with some "
@@ -2258,7 +2258,7 @@ msgstr ""
 "остаток демонстрирует составную (или комбинированную) радиоструктуру с "
 "некоторой неопределенностью"
 
-#: src/core/modules/Nebula.cpp:1675
+#: src/core/modules/Nebula.cpp:1678
 msgid "undocumented type"
 msgstr "не задокументированный тип"
 
@@ -2364,50 +2364,50 @@ msgstr "седноид"
 msgid "interstellar object"
 msgstr "межзвёздный объект"
 
-#: src/core/modules/Planet.cpp:566 src/core/modules/Comet.cpp:182
-#: src/core/modules/StarWrapper.cpp:310 src/core/modules/StarWrapper.cpp:671
+#: src/core/modules/Planet.cpp:569 src/core/modules/Comet.cpp:182
+#: src/core/modules/StarWrapper.cpp:313 src/core/modules/StarWrapper.cpp:674
 #: plugins/Quasars/src/Quasar.cpp:131
 msgid "Absolute Magnitude"
 msgstr "Абсолютная звёздная величина"
 
-#: src/core/modules/Planet.cpp:569
+#: src/core/modules/Planet.cpp:572
 msgid "Mean Opposition Magnitude"
 msgstr "Звёздная величина среднего противостояния"
 
-#: src/core/modules/Planet.cpp:605
+#: src/core/modules/Planet.cpp:608
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "непериодическая"
 
-#: src/core/modules/Planet.cpp:610
+#: src/core/modules/Planet.cpp:613
 msgctxt "type of comet"
 msgid "short-period"
 msgstr "короткопериодическая"
 
-#: src/core/modules/Planet.cpp:612
+#: src/core/modules/Planet.cpp:615
 msgctxt "type of comet"
 msgid "periodic"
 msgstr "периодическая"
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:669 src/core/modules/Planet.cpp:671
+#: src/core/modules/Planet.cpp:672 src/core/modules/Planet.cpp:674
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr "Эклиптические"
 
-#: src/core/modules/Planet.cpp:680 src/core/modules/Planet.cpp:681
+#: src/core/modules/Planet.cpp:683 src/core/modules/Planet.cpp:684
 msgid "Hourly motion"
 msgstr "Часовое движение"
 
-#: src/core/modules/Planet.cpp:680 src/core/modules/Planet.cpp:1217
-#: src/core/modules/Planet.cpp:1226 src/core/modules/StarWrapper.cpp:364
-#: src/core/modules/StarWrapper.cpp:715 plugins/Pulsars/src/Pulsar.cpp:204
+#: src/core/modules/Planet.cpp:683 src/core/modules/Planet.cpp:1220
+#: src/core/modules/Planet.cpp:1229 src/core/modules/StarWrapper.cpp:367
+#: src/core/modules/StarWrapper.cpp:718 plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "в направлении"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:695 src/gui/AstroCalcDialog.cpp:915
+#: src/core/modules/Planet.cpp:698 src/gui/AstroCalcDialog.cpp:915
 #: src/gui/AstroCalcDialog.cpp:1228 src/gui/AstroCalcDialog.cpp:1524
 #: src/gui/AstroCalcDialog.cpp:1792 src/gui/AstroCalcDialog.cpp:1954
 #: src/gui/AstroCalcDialog.cpp:8502 src/gui/AstroCalcChart.cpp:430
@@ -2420,281 +2420,281 @@ msgid "AU"
 msgstr "а.е."
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:697
+#: src/core/modules/Planet.cpp:700
 msgid "Light time"
 msgstr "Световой промежуток"
 
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:713 src/core/modules/Planet.cpp:734
+#: src/core/modules/Planet.cpp:716 src/core/modules/Planet.cpp:737
 #: src/core/modules/Comet.cpp:193 src/gui/AstroCalcDialog.cpp:8479
 msgctxt "distance"
 msgid "M km"
 msgstr "млн. км"
 
-#: src/core/modules/Planet.cpp:717 src/core/modules/Planet.cpp:719
+#: src/core/modules/Planet.cpp:720 src/core/modules/Planet.cpp:722
 msgid "Distance from Sun"
 msgstr "Расстояние от Солнца"
 
-#: src/core/modules/Planet.cpp:762
+#: src/core/modules/Planet.cpp:765
 msgid "Orbital velocity"
 msgstr "Орбитальная скорость"
 
-#: src/core/modules/Planet.cpp:765
+#: src/core/modules/Planet.cpp:768
 msgid "Heliocentric velocity"
 msgstr "Гелиоцентрическая скорость"
 
-#: src/core/modules/Planet.cpp:780
+#: src/core/modules/Planet.cpp:783
 #, qt-format
 msgid "NOTE: elements for epoch %1 probably outdated. Consider updating data!"
 msgstr ""
 "ПРИМЕЧАНИЕ: вероятно элементы для эпохи %1 устарели. Рассмотрите возможность"
 " обновления данных!"
 
-#: src/core/modules/Planet.cpp:818
+#: src/core/modules/Planet.cpp:821
 msgid "with rings"
 msgstr "с кольцами"
 
-#: src/core/modules/Planet.cpp:835
+#: src/core/modules/Planet.cpp:838
 msgid "scaled up to"
 msgstr "масштабирован до"
 
-#: src/core/modules/Planet.cpp:845
+#: src/core/modules/Planet.cpp:848
 msgid "Apparent diameter"
 msgstr "Видимый диаметр"
 
-#: src/core/modules/Planet.cpp:850
+#: src/core/modules/Planet.cpp:853
 msgid "Equatorial diameter"
 msgstr "Экваториальный диаметр"
 
-#: src/core/modules/Planet.cpp:899 src/core/modules/Planet.cpp:900
-#: src/core/modules/Planet.cpp:908 src/gui/AstroCalcChart.cpp:95
+#: src/core/modules/Planet.cpp:902 src/core/modules/Planet.cpp:903
+#: src/core/modules/Planet.cpp:911 src/gui/AstroCalcChart.cpp:95
 #: src/gui/AstroCalcChart.cpp:105 src/gui/AstroCalcChart.cpp:432
 #: src/gui/AstroCalcChart.cpp:458 src/ui_configurationDialog.h:2031
 msgid "Elongation"
 msgstr "Элонгация"
 
-#: src/core/modules/Planet.cpp:901 src/core/modules/Planet.cpp:910
+#: src/core/modules/Planet.cpp:904 src/core/modules/Planet.cpp:913
 #: src/gui/AstroCalcChart.cpp:98 src/gui/AstroCalcChart.cpp:108
 #: src/gui/AstroCalcChart.cpp:441 src/gui/AstroCalcChart.cpp:467
 #: plugins/Satellites/src/Satellite.cpp:411
 msgid "Phase angle"
 msgstr "Фазовый угол"
 
-#: src/core/modules/Planet.cpp:903 src/core/modules/Planet.cpp:912
+#: src/core/modules/Planet.cpp:906 src/core/modules/Planet.cpp:915
 msgid "Illuminated"
 msgstr "Освещено"
 
-#: src/core/modules/Planet.cpp:909
+#: src/core/modules/Planet.cpp:912
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:324
 msgid "Elong. in Ecl.Long."
 msgstr "Элонг. по эклип. долг."
 
-#: src/core/modules/Planet.cpp:924 src/gui/AstroCalcDialog.cpp:8712
+#: src/core/modules/Planet.cpp:927 src/gui/AstroCalcDialog.cpp:8712
 #: src/gui/AstroCalcChart.cpp:475
 msgid "Angular distance"
 msgstr "Угловое расстояние"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:942 src/core/modules/StarWrapper.cpp:398
-#: src/core/modules/StarWrapper.cpp:760 src/core/modules/StarWrapper.cpp:936
+#: src/core/modules/Planet.cpp:945 src/core/modules/StarWrapper.cpp:401
+#: src/core/modules/StarWrapper.cpp:763 src/core/modules/StarWrapper.cpp:939
 #: src/gui/AstroCalcDialog.cpp:8513 src/gui/AstroCalcAlmanacWidget.cpp:254
 msgctxt "duration"
 msgid "days"
 msgstr "дней"
 
-#: src/core/modules/Planet.cpp:951
+#: src/core/modules/Planet.cpp:954
 msgid "Sidereal period"
 msgstr "Звёздный период обращения"
 
-#: src/core/modules/Planet.cpp:960
+#: src/core/modules/Planet.cpp:963
 msgid "Synodic period"
 msgstr "Синодический период обращения"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1042
+#: src/core/modules/Planet.cpp:1045
 msgctxt "speed"
 msgid "m/s"
 msgstr "м/с"
 
-#: src/core/modules/Planet.cpp:1057
+#: src/core/modules/Planet.cpp:1060
 msgid "Sidereal day"
 msgstr "Звёздные сутки"
 
-#: src/core/modules/Planet.cpp:1059
+#: src/core/modules/Planet.cpp:1062
 msgid "Mean solar day"
 msgstr "Средние солнечные сутки"
 
-#: src/core/modules/Planet.cpp:1065
+#: src/core/modules/Planet.cpp:1068
 msgid "The period of rotation is chaotic"
 msgstr "Период вращения хаотичен"
 
-#: src/core/modules/Planet.cpp:1071 src/core/modules/Planet.cpp:1073
-#: src/core/modules/Planet.cpp:1079 src/core/modules/Planet.cpp:1081
+#: src/core/modules/Planet.cpp:1074 src/core/modules/Planet.cpp:1076
+#: src/core/modules/Planet.cpp:1082 src/core/modules/Planet.cpp:1084
 msgid "Equatorial rotation velocity"
 msgstr "Экваториальная скорость вращения"
 
-#: src/core/modules/Planet.cpp:1107 src/core/modules/Planet.cpp:1519
+#: src/core/modules/Planet.cpp:1110 src/core/modules/Planet.cpp:1522
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Новолуние"
 
-#: src/core/modules/Planet.cpp:1109 src/core/modules/Planet.cpp:1521
+#: src/core/modules/Planet.cpp:1112 src/core/modules/Planet.cpp:1524
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Молодой месяц"
 
-#: src/core/modules/Planet.cpp:1111 src/core/modules/Planet.cpp:1523
+#: src/core/modules/Planet.cpp:1114 src/core/modules/Planet.cpp:1526
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Первая четверть"
 
-#: src/core/modules/Planet.cpp:1113 src/core/modules/Planet.cpp:1525
+#: src/core/modules/Planet.cpp:1116 src/core/modules/Planet.cpp:1528
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Нарастающая Луна"
 
-#: src/core/modules/Planet.cpp:1115 src/core/modules/Planet.cpp:1527
+#: src/core/modules/Planet.cpp:1118 src/core/modules/Planet.cpp:1530
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Полнолуние"
 
-#: src/core/modules/Planet.cpp:1117 src/core/modules/Planet.cpp:1529
+#: src/core/modules/Planet.cpp:1120 src/core/modules/Planet.cpp:1532
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Убывающая Луна"
 
-#: src/core/modules/Planet.cpp:1119 src/core/modules/Planet.cpp:1531
+#: src/core/modules/Planet.cpp:1122 src/core/modules/Planet.cpp:1534
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Третья четверть"
 
-#: src/core/modules/Planet.cpp:1121 src/core/modules/Planet.cpp:1533
+#: src/core/modules/Planet.cpp:1124 src/core/modules/Planet.cpp:1536
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Старый месяц"
 
-#: src/core/modules/Planet.cpp:1129
+#: src/core/modules/Planet.cpp:1132
 msgid "Moon age"
 msgstr "Возраст Луны"
 
-#: src/core/modules/Planet.cpp:1129
+#: src/core/modules/Planet.cpp:1132
 msgid "days old"
 msgstr "дней"
 
-#: src/core/modules/Planet.cpp:1149 src/core/modules/Planet.cpp:1152
+#: src/core/modules/Planet.cpp:1152 src/core/modules/Planet.cpp:1155
 msgid "Position angle of bright limb"
 msgstr "Позиционный угол яркого лимба"
 
-#: src/core/modules/Planet.cpp:1216 src/core/modules/Planet.cpp:1225
-#: src/core/modules/Planet.cpp:1261 src/core/modules/Planet.cpp:1268
+#: src/core/modules/Planet.cpp:1219 src/core/modules/Planet.cpp:1228
+#: src/core/modules/Planet.cpp:1264 src/core/modules/Planet.cpp:1271
 msgid "Position Angle of axis"
 msgstr "Позиционный угол оси"
 
-#: src/core/modules/Planet.cpp:1217 src/core/modules/Planet.cpp:1218
-#: src/core/modules/Planet.cpp:1226 src/core/modules/Planet.cpp:1227
+#: src/core/modules/Planet.cpp:1220 src/core/modules/Planet.cpp:1221
+#: src/core/modules/Planet.cpp:1229 src/core/modules/Planet.cpp:1230
 msgid "Libration"
 msgstr "Либрация"
 
-#: src/core/modules/Planet.cpp:1219 src/core/modules/Planet.cpp:1228
-#: src/core/modules/Planet.cpp:1263 src/core/modules/Planet.cpp:1270
+#: src/core/modules/Planet.cpp:1222 src/core/modules/Planet.cpp:1231
+#: src/core/modules/Planet.cpp:1266 src/core/modules/Planet.cpp:1273
 msgid "Subsolar point"
 msgstr "Подсолнечная точка"
 
-#: src/core/modules/Planet.cpp:1220 src/core/modules/Planet.cpp:1229
+#: src/core/modules/Planet.cpp:1223 src/core/modules/Planet.cpp:1232
 msgid "Colongitude"
 msgstr "Ко-долгота"
 
-#: src/core/modules/Planet.cpp:1262 src/core/modules/Planet.cpp:1269
+#: src/core/modules/Planet.cpp:1265 src/core/modules/Planet.cpp:1272
 msgid "Center point"
 msgstr "Центральная точка"
 
-#: src/core/modules/Planet.cpp:1293
+#: src/core/modules/Planet.cpp:1296
 msgid "Eclipse magnitude"
 msgstr "Линейная фаза затмения"
 
-#: src/core/modules/Planet.cpp:1296
+#: src/core/modules/Planet.cpp:1299
 msgid "Eclipse obscuration"
 msgstr "Поверхностная фаза затмения"
 
-#: src/core/modules/Planet.cpp:1298
+#: src/core/modules/Planet.cpp:1301
 msgid "Crescent angle"
 msgstr "Угол наклона полумесяца"
 
-#: src/core/modules/Planet.cpp:1326
+#: src/core/modules/Planet.cpp:1329
 msgid "Moon/Sun diameter ratio"
 msgstr "Отношение диаметров Луны/Солнца"
 
-#: src/core/modules/Planet.cpp:1329
+#: src/core/modules/Planet.cpp:1332
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(кольцеобразное)"
 
-#: src/core/modules/Planet.cpp:1331
+#: src/core/modules/Planet.cpp:1334
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(полное)"
 
-#: src/core/modules/Planet.cpp:1342
+#: src/core/modules/Planet.cpp:1345
 msgid "Central eclipse duration"
 msgstr "Длительность максимальной фазы"
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1344
+#: src/core/modules/Planet.cpp:1347
 #: plugins/Observability/src/Observability.cpp:153
 msgid "m"
 msgstr "м"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1346
+#: src/core/modules/Planet.cpp:1349
 #: plugins/Observability/src/Observability.cpp:155
 msgid "s"
 msgstr "с"
 
-#: src/core/modules/Planet.cpp:1347
+#: src/core/modules/Planet.cpp:1350
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "Центр солнечного затмения (Шир./Долг.)"
 
-#: src/core/modules/Planet.cpp:1357
+#: src/core/modules/Planet.cpp:1360
 msgid "Shadow center point is"
 msgstr "Центр тени"
 
-#: src/core/modules/Planet.cpp:1359
+#: src/core/modules/Planet.cpp:1362
 msgid "km towards azimuth"
 msgstr "км в направлении азимута"
 
-#: src/core/modules/Planet.cpp:1362
+#: src/core/modules/Planet.cpp:1365
 msgid "Width of antumbra"
 msgstr "Ширина тени (antumbra)"
 
-#: src/core/modules/Planet.cpp:1364
+#: src/core/modules/Planet.cpp:1367
 msgid "Width of umbra"
 msgstr "Ширина тени (umbra)"
 
-#: src/core/modules/Planet.cpp:1382
+#: src/core/modules/Planet.cpp:1385
 msgid "Penumbral eclipse magnitude"
 msgstr "Полутеневая линейная фаза затмения"
 
-#: src/core/modules/Planet.cpp:1385
+#: src/core/modules/Planet.cpp:1388
 msgid "Umbral eclipse magnitude"
 msgstr "Теневая линейная фаза затмения"
 
-#: src/core/modules/Planet.cpp:1392 src/gui/ViewDialog.cpp:889
+#: src/core/modules/Planet.cpp:1395 src/gui/ViewDialog.cpp:889
 msgid "Albedo"
 msgstr "Альбедо"
 
-#: src/core/modules/Planet.cpp:1395 src/core/modules/Comet.cpp:241
+#: src/core/modules/Planet.cpp:1398 src/core/modules/Comet.cpp:241
 msgid "Discovered"
 msgstr "Небесное тело открыто"
 
 #. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:214
+#: src/core/modules/MinorPlanet.cpp:217
 msgid "Tholen spectral type"
 msgstr "Спектральный класс Толена"
 
 #. TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:220
+#: src/core/modules/MinorPlanet.cpp:223
 msgid "SMASSII spectral type"
 msgstr "Спектральный класс SMASSII"
 
@@ -2767,117 +2767,117 @@ msgstr "Увеличить Солнце"
 msgid "Mark minor bodies"
 msgstr "Отмечать малые тела"
 
-#: src/core/modules/StarWrapper.cpp:97
+#: src/core/modules/StarWrapper.cpp:98
 msgid "double star"
 msgstr "двойная звезда"
 
-#: src/core/modules/StarWrapper.cpp:103 src/core/modules/StarWrapper.cpp:529
-#: src/core/modules/StarWrapper.cpp:810
+#: src/core/modules/StarWrapper.cpp:104 src/core/modules/StarWrapper.cpp:532
+#: src/core/modules/StarWrapper.cpp:813
 msgid "eruptive variable star"
 msgstr "эруптивная переменная звезда"
 
-#: src/core/modules/StarWrapper.cpp:105 src/core/modules/StarWrapper.cpp:531
-#: src/core/modules/StarWrapper.cpp:812
+#: src/core/modules/StarWrapper.cpp:106 src/core/modules/StarWrapper.cpp:534
+#: src/core/modules/StarWrapper.cpp:815
 msgid "pulsating variable star"
 msgstr "пульсирущая переменная звезда"
 
-#: src/core/modules/StarWrapper.cpp:107 src/core/modules/StarWrapper.cpp:533
-#: src/core/modules/StarWrapper.cpp:814
+#: src/core/modules/StarWrapper.cpp:108 src/core/modules/StarWrapper.cpp:536
+#: src/core/modules/StarWrapper.cpp:817
 msgid "rotating variable star"
 msgstr "вращающаяся переменная звезда"
 
-#: src/core/modules/StarWrapper.cpp:109 src/core/modules/StarWrapper.cpp:535
-#: src/core/modules/StarWrapper.cpp:816
+#: src/core/modules/StarWrapper.cpp:110 src/core/modules/StarWrapper.cpp:538
+#: src/core/modules/StarWrapper.cpp:819
 msgid "cataclysmic variable star"
 msgstr "катаклизмическая переменная звезда"
 
-#: src/core/modules/StarWrapper.cpp:111 src/core/modules/StarWrapper.cpp:537
-#: src/core/modules/StarWrapper.cpp:818
+#: src/core/modules/StarWrapper.cpp:112 src/core/modules/StarWrapper.cpp:540
+#: src/core/modules/StarWrapper.cpp:821
 msgid "eclipsing binary system"
 msgstr "затменно-переменная звезда"
 
-#: src/core/modules/StarWrapper.cpp:115 src/core/modules/StarWrapper.cpp:541
-#: src/core/modules/StarWrapper.cpp:822
+#: src/core/modules/StarWrapper.cpp:116 src/core/modules/StarWrapper.cpp:544
+#: src/core/modules/StarWrapper.cpp:825
 msgid "variable star"
 msgstr "переменная звезда"
 
-#: src/core/modules/StarWrapper.cpp:334 src/core/modules/StarWrapper.cpp:699
-#: src/core/modules/StarWrapper.cpp:915
+#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:702
+#: src/core/modules/StarWrapper.cpp:918
 #: plugins/Satellites/src/ui_satellitesDialog.h:1233
 msgid "Magnitude range"
 msgstr "Диапазон звёздных величин"
 
-#: src/core/modules/StarWrapper.cpp:334 src/core/modules/StarWrapper.cpp:699
-#: src/core/modules/StarWrapper.cpp:915
+#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:702
+#: src/core/modules/StarWrapper.cpp:918
 msgid "Photometric system"
 msgstr "Фотометрическая система"
 
-#: src/core/modules/StarWrapper.cpp:361 src/core/modules/StarWrapper.cpp:712
+#: src/core/modules/StarWrapper.cpp:364 src/core/modules/StarWrapper.cpp:715
 #: plugins/Pulsars/src/Pulsar.cpp:202
 msgid "Proper motion"
 msgstr "Собственное движение"
 
-#: src/core/modules/StarWrapper.cpp:363 src/core/modules/StarWrapper.cpp:369
-#: src/core/modules/StarWrapper.cpp:714 src/core/modules/StarWrapper.cpp:720
+#: src/core/modules/StarWrapper.cpp:366 src/core/modules/StarWrapper.cpp:372
+#: src/core/modules/StarWrapper.cpp:717 src/core/modules/StarWrapper.cpp:723
 #: plugins/Pulsars/src/Pulsar.cpp:203 plugins/Pulsars/src/Pulsar.cpp:205
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "мсд/год"
 
-#: src/core/modules/StarWrapper.cpp:366 src/core/modules/StarWrapper.cpp:717
+#: src/core/modules/StarWrapper.cpp:369 src/core/modules/StarWrapper.cpp:720
 #: plugins/Pulsars/src/Pulsar.cpp:205
 msgid "Proper motions by axes"
 msgstr "Собственные движения по осям"
 
-#: src/core/modules/StarWrapper.cpp:378
+#: src/core/modules/StarWrapper.cpp:381
 msgid "Radial velocity"
 msgstr "Лучевая скорость"
 
-#: src/core/modules/StarWrapper.cpp:395 src/core/modules/StarWrapper.cpp:757
-#: src/core/modules/StarWrapper.cpp:933 plugins/Quasars/src/Quasar.cpp:142
+#: src/core/modules/StarWrapper.cpp:398 src/core/modules/StarWrapper.cpp:760
+#: src/core/modules/StarWrapper.cpp:936 plugins/Quasars/src/Quasar.cpp:142
 #: plugins/Exoplanets/src/Exoplanet.cpp:329
 msgid "Spectral Type"
 msgstr "Спектральный класс"
 
-#: src/core/modules/StarWrapper.cpp:398 src/core/modules/StarWrapper.cpp:760
-#: src/core/modules/StarWrapper.cpp:936
+#: src/core/modules/StarWrapper.cpp:401 src/core/modules/StarWrapper.cpp:763
+#: src/core/modules/StarWrapper.cpp:939
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:262
 #: plugins/Exoplanets/src/Exoplanet.cpp:361
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Period"
 msgstr "Период"
 
-#: src/core/modules/StarWrapper.cpp:406 src/core/modules/StarWrapper.cpp:768
-#: src/core/modules/StarWrapper.cpp:944
+#: src/core/modules/StarWrapper.cpp:409 src/core/modules/StarWrapper.cpp:771
+#: src/core/modules/StarWrapper.cpp:947
 msgid "Next maximum light"
 msgstr "Следующий максимум блеска"
 
-#: src/core/modules/StarWrapper.cpp:408 src/core/modules/StarWrapper.cpp:770
-#: src/core/modules/StarWrapper.cpp:946
+#: src/core/modules/StarWrapper.cpp:411 src/core/modules/StarWrapper.cpp:773
+#: src/core/modules/StarWrapper.cpp:949
 msgid "Next minimum light"
 msgstr "Следующий минимум блеска"
 
-#: src/core/modules/StarWrapper.cpp:415 src/core/modules/StarWrapper.cpp:777
-#: src/core/modules/StarWrapper.cpp:953
+#: src/core/modules/StarWrapper.cpp:418 src/core/modules/StarWrapper.cpp:780
+#: src/core/modules/StarWrapper.cpp:956
 msgid "Rising time"
 msgstr "Время нарастания"
 
-#: src/core/modules/StarWrapper.cpp:417 src/core/modules/StarWrapper.cpp:779
-#: src/core/modules/StarWrapper.cpp:955
+#: src/core/modules/StarWrapper.cpp:420 src/core/modules/StarWrapper.cpp:782
+#: src/core/modules/StarWrapper.cpp:958
 msgid "Duration of eclipse"
 msgstr "Продолжительность затмения"
 
-#: src/core/modules/StarWrapper.cpp:427
+#: src/core/modules/StarWrapper.cpp:430
 msgid "Position angle"
 msgstr "Позиционный угол"
 
-#: src/core/modules/StarWrapper.cpp:429 src/core/modules/StarWrapper.cpp:437
+#: src/core/modules/StarWrapper.cpp:432 src/core/modules/StarWrapper.cpp:440
 #: src/core/StelObject.cpp:376
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "на дату"
 
-#: src/core/modules/StarWrapper.cpp:434 src/core/modules/StarWrapper.cpp:439
+#: src/core/modules/StarWrapper.cpp:437 src/core/modules/StarWrapper.cpp:442
 #: src/gui/AstroCalcDialog.cpp:5804
 msgid "Separation"
 msgstr "Разделение"
@@ -4231,33 +4231,33 @@ msgid "Constellations"
 msgstr "Созвездия"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1369
+#: src/core/StelObject.cpp:1380
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
 msgstr "Солнечные A/a"
 
-#: src/core/StelObject.cpp:1369
+#: src/core/StelObject.cpp:1380
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr "Солнечный аз./выс."
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1387
+#: src/core/StelObject.cpp:1398
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
 msgstr "Лунные A/a"
 
-#: src/core/StelObject.cpp:1387
+#: src/core/StelObject.cpp:1398
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr "Лунный аз./выс."
 
-#: src/core/StelObjectMgr.cpp:53 src/core/StelMovementMgr.cpp:194
+#: src/core/StelObjectMgr.cpp:50 src/core/StelMovementMgr.cpp:194
 #: src/gui/StelGui.cpp:274 src/StelMainView.cpp:964 src/StelMainView.cpp:965
 msgid "Miscellaneous"
 msgstr "Разное"
 
-#: src/core/StelObjectMgr.cpp:53
+#: src/core/StelObjectMgr.cpp:50
 msgid "Toggle visibility of pointers for selected objects"
 msgstr "Переключить видимость указателей выделенных объектов"
 
@@ -4283,21 +4283,21 @@ msgid "Loading '%1' from %2"
 msgstr "Загрузка '%1' из %2"
 
 #. TRANSLATORS: Name of script
-#: src/core/StelSkyCultureSkyPartition.cpp:512 src/translations.h:488
+#: src/core/StelSkyCultureSkyPartition.cpp:513 src/translations.h:488
 #: src/ui_viewDialog.h:4863
 msgid "Zodiac"
 msgstr "Зодиак"
 
-#: src/core/StelSkyCultureSkyPartition.cpp:512
+#: src/core/StelSkyCultureSkyPartition.cpp:513
 msgid "Lunar Station"
 msgstr "Лунная стоянка"
 
-#: src/core/StelSkyCultureMgr.cpp:382
+#: src/core/StelSkyCultureMgr.cpp:384
 msgctxt "sky culture classification"
 msgid "ethnographic"
 msgstr "этнографическая"
 
-#: src/core/StelSkyCultureMgr.cpp:383
+#: src/core/StelSkyCultureMgr.cpp:385
 msgid ""
 "Provided by ethnographic researchers based on interviews of indigenous "
 "people."
@@ -4305,12 +4305,12 @@ msgstr ""
 "Предоставлена исследователями-этнографами на основе опросов коренных "
 "народов."
 
-#: src/core/StelSkyCultureMgr.cpp:387
+#: src/core/StelSkyCultureMgr.cpp:389
 msgctxt "sky culture classification"
 msgid "historical"
 msgstr "историческая"
 
-#: src/core/StelSkyCultureMgr.cpp:388
+#: src/core/StelSkyCultureMgr.cpp:390
 msgid ""
 "Provided by historians based on historical written sources from a (usually "
 "short) period of the past."
@@ -4318,12 +4318,12 @@ msgstr ""
 "Предоставлена историками на основе исторических письменных источников из "
 "(обычно короткого) периода прошлого."
 
-#: src/core/StelSkyCultureMgr.cpp:392
+#: src/core/StelSkyCultureMgr.cpp:394
 msgctxt "sky culture classification"
 msgid "single"
 msgstr "одиночная"
 
-#: src/core/StelSkyCultureMgr.cpp:393
+#: src/core/StelSkyCultureMgr.cpp:395
 msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
@@ -4331,12 +4331,12 @@ msgstr ""
 "Представляет один источник, такой как исторический атлас или публикации "
 "одного автора."
 
-#: src/core/StelSkyCultureMgr.cpp:397
+#: src/core/StelSkyCultureMgr.cpp:399
 msgctxt "sky culture classification"
 msgid "comparative"
 msgstr "сравнительная"
 
-#: src/core/StelSkyCultureMgr.cpp:398
+#: src/core/StelSkyCultureMgr.cpp:400
 msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
@@ -4344,12 +4344,12 @@ msgstr ""
 "Сравнивает и сопоставляет элементы, по крайней мере, из двух небесных "
 "культур друг с другом. "
 
-#: src/core/StelSkyCultureMgr.cpp:402
+#: src/core/StelSkyCultureMgr.cpp:404
 msgctxt "sky culture classification"
 msgid "traditional"
 msgstr "традиционная"
 
-#: src/core/StelSkyCultureMgr.cpp:403
+#: src/core/StelSkyCultureMgr.cpp:405
 msgid ""
 "Content represents 'common' knowledge by several members of an ethnic "
 "community, and the sky culture has been developed by members of such "
@@ -4358,12 +4358,12 @@ msgstr ""
 "Контент представляет собой «общие» знания нескольких членов этнического "
 "сообщества и члены этого сообщества разработали культуру неба."
 
-#: src/core/StelSkyCultureMgr.cpp:407
+#: src/core/StelSkyCultureMgr.cpp:409
 msgctxt "sky culture classification"
 msgid "personal"
 msgstr "персональная"
 
-#: src/core/StelSkyCultureMgr.cpp:408
+#: src/core/StelSkyCultureMgr.cpp:410
 msgid ""
 "This is a personally developed sky culture which is not founded in published"
 " historical or ethnological research. Stellarium may include it when it is "
@@ -4373,12 +4373,12 @@ msgstr ""
 " исторических или этнологических исследованиях. Stellarium может включать "
 "их, когда они 'достаточно симпатичны', фактически не одобряя её содержание."
 
-#: src/core/StelSkyCultureMgr.cpp:412
+#: src/core/StelSkyCultureMgr.cpp:414
 msgctxt "sky culture classification"
 msgid "incomplete"
 msgstr "неполная"
 
-#: src/core/StelSkyCultureMgr.cpp:413
+#: src/core/StelSkyCultureMgr.cpp:415
 msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
@@ -4386,16 +4386,16 @@ msgstr ""
 "Точность описания культуры неба не может быть дана, хотя похоже, что она "
 "построена на хорошем фундаменте. Потребуется больше работы."
 
-#: src/core/StelSkyCultureMgr.cpp:417
+#: src/core/StelSkyCultureMgr.cpp:419
 msgctxt "sky culture classification"
 msgid "undefined"
 msgstr "неопределенная"
 
-#: src/core/StelSkyCultureMgr.cpp:424
+#: src/core/StelSkyCultureMgr.cpp:426
 msgid "Classification"
 msgstr "Классификация"
 
-#: src/core/StelSkyCultureMgr.cpp:437
+#: src/core/StelSkyCultureMgr.cpp:439
 msgid ""
 "This sky culture is provided under unknown license. Please ask authors for "
 "details about license for this sky culture."
@@ -4403,7 +4403,7 @@ msgstr ""
 "Эта культура неба предоставляется по неизвестной лицензии. Пожалуйста, "
 "обратитесь к авторам за подробностями о лицензии на эту культуру неба."
 
-#: src/core/StelSkyCultureMgr.cpp:443
+#: src/core/StelSkyCultureMgr.cpp:445
 msgid ""
 "This sky culture is provided under GNU General Public License. You can use "
 "it for commercial and non-commercial purposes, freely adapt it and share "
@@ -4413,7 +4413,7 @@ msgstr ""
 "GNU. Вы можете использовать её в коммерческих и некоммерческих целях, "
 "свободно её адаптировать и делиться адаптированной работой."
 
-#: src/core/StelSkyCultureMgr.cpp:446 src/core/StelSkyCultureMgr.cpp:455
+#: src/core/StelSkyCultureMgr.cpp:448 src/core/StelSkyCultureMgr.cpp:457
 msgid ""
 "You can use it for commercial and non-commercial purposes, freely adapt it "
 "and share adapted work."
@@ -4421,7 +4421,7 @@ msgstr ""
 "Вы можете использовать её в коммерческих и некоммерческих целях, свободно "
 "адаптировать её и делиться адаптированными работами."
 
-#: src/core/StelSkyCultureMgr.cpp:452
+#: src/core/StelSkyCultureMgr.cpp:454
 msgid ""
 "This sky culture is provided under MIT License. You can use it for "
 "commercial and non-commercial purposes, freely adapt it and share adapted "
@@ -4431,19 +4431,19 @@ msgstr ""
 "её в коммерческих и некоммерческих целях, свободно её адаптировать и "
 "делиться адаптированной работой."
 
-#: src/core/StelSkyCultureMgr.cpp:461 src/core/StelSkyCultureMgr.cpp:498
+#: src/core/StelSkyCultureMgr.cpp:463 src/core/StelSkyCultureMgr.cpp:500
 msgid "This sky culture is distributed as public domain."
 msgstr "Эта культура неба распространяется как общественное достояние."
 
-#: src/core/StelSkyCultureMgr.cpp:463
+#: src/core/StelSkyCultureMgr.cpp:465
 msgid "This is distributed as public domain."
 msgstr "Распространяется как общественное достояние."
 
-#: src/core/StelSkyCultureMgr.cpp:468
+#: src/core/StelSkyCultureMgr.cpp:470
 msgid "This sky culture is provided under Creative Commons License."
 msgstr "Эта культура неба предоставляется по лицензии Creative Commons."
 
-#: src/core/StelSkyCultureMgr.cpp:473
+#: src/core/StelSkyCultureMgr.cpp:475
 msgid ""
 "You may distribute, remix, adapt, and build upon this sky culture, even "
 "commercially, as long as you credit authors for the original creation."
@@ -4452,7 +4452,7 @@ msgstr ""
 "культуру неба, даже в коммерческих целях, если вы указываете авторов "
 "оригинального творения."
 
-#: src/core/StelSkyCultureMgr.cpp:475
+#: src/core/StelSkyCultureMgr.cpp:477
 msgid ""
 "You may remix, adapt, and build upon this sky culture even for commercial "
 "purposes, as long as you credit authors and license the new creations under "
@@ -4464,7 +4464,7 @@ msgstr ""
 " на тех же условиях. Эту лицензию часто сравнивают с лицензиями на свободное"
 " и открытое программное обеспечение с авторским левом."
 
-#: src/core/StelSkyCultureMgr.cpp:478
+#: src/core/StelSkyCultureMgr.cpp:480
 msgid ""
 "You may reuse this sky culture for any purpose, including commercially; "
 "however, adapted work cannot be shared with others, and credit must be "
@@ -4475,7 +4475,7 @@ msgstr ""
 "другими, и вы должны предоставить признательность авторам изначальной "
 "работы."
 
-#: src/core/StelSkyCultureMgr.cpp:480
+#: src/core/StelSkyCultureMgr.cpp:482
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, and "
 "although your new works must also acknowledge authors and be non-commercial,"
@@ -4486,7 +4486,7 @@ msgstr ""
 "авторов и быть некоммерческими, вам не нужно лицензировать свои производные "
 "работы на тех же условиях."
 
-#: src/core/StelSkyCultureMgr.cpp:483
+#: src/core/StelSkyCultureMgr.cpp:485
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, as "
 "long as you credit authors and license your new creations under the "
@@ -4496,7 +4496,7 @@ msgstr ""
 "некоммерческих целях, если вы указываете авторов и лицензируете свои новые "
 "творения на тех же условиях."
 
-#: src/core/StelSkyCultureMgr.cpp:485
+#: src/core/StelSkyCultureMgr.cpp:487
 msgid ""
 "You may use this sky culture and share them with others as long as you "
 "credit authors, but you can’t change it in any way or use it commercially."
@@ -4505,16 +4505,16 @@ msgstr ""
 "указываете авторов, но вы не можете каким-либо образом изменить ее или "
 "использовать в коммерческих целях."
 
-#: src/core/StelSkyCultureMgr.cpp:503
+#: src/core/StelSkyCultureMgr.cpp:505
 msgid ""
 "Free Art License grants the right to freely copy, distribute, and transform."
 msgstr ""
 "Лицензия Free Art License дает право на их свободное копирование, "
 "распространение и преобразование."
 
-#: src/core/StelSkyCultureMgr.cpp:523 src/core/StelSkyCultureMgr.cpp:530
-#: src/core/StelSkyCultureMgr.cpp:537 src/gui/ConfigurationDialog.cpp:1369
-#: src/scripting/StelScriptMgr.cpp:652
+#: src/core/StelSkyCultureMgr.cpp:525 src/core/StelSkyCultureMgr.cpp:532
+#: src/core/StelSkyCultureMgr.cpp:539 src/gui/ConfigurationDialog.cpp:1369
+#: src/scripting/StelScriptMgr.cpp:651
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:777
@@ -4541,21 +4541,21 @@ msgstr ""
 msgid "License"
 msgstr "Лицензия"
 
-#: src/core/StelSkyCultureMgr.cpp:524 src/core/StelSkyCultureMgr.cpp:531
+#: src/core/StelSkyCultureMgr.cpp:526 src/core/StelSkyCultureMgr.cpp:533
 msgid "unknown"
 msgstr "неизвестно"
 
-#: src/core/StelSkyCultureMgr.cpp:567
+#: src/core/StelSkyCultureMgr.cpp:569
 msgid ""
 "The region indicates the geographical area of origin of a given sky culture."
 msgstr ""
 "Регион указывает географическую область происхождения данной культуры неба."
 
-#: src/core/StelSkyCultureMgr.cpp:573
+#: src/core/StelSkyCultureMgr.cpp:575
 msgid "World"
 msgstr "Мир"
 
-#: src/core/StelSkyCultureMgr.cpp:574
+#: src/core/StelSkyCultureMgr.cpp:576
 msgid ""
 "All 'modern' sky cultures are based on the IAU-approved 88 constellations "
 "with standardized boundaries and are used worldwide. The origins of these "
@@ -4565,26 +4565,26 @@ msgstr ""
 "со стандартными границами и используются во всем мире. Происхождение этих "
 "созвездий общеевропейское."
 
-#: src/core/StelSkyCultureMgr.cpp:578 src/ui_locationDialogGui.h:450
+#: src/core/StelSkyCultureMgr.cpp:580 src/ui_locationDialogGui.h:450
 msgid "Region:"
 msgstr "Регион:"
 
-#: src/core/StelSkyCultureMgr.cpp:654
+#: src/core/StelSkyCultureMgr.cpp:656
 msgctxt "Name of a section in sky culture description"
 msgid "Extras"
 msgstr "Дополнительно"
 
-#: src/core/StelSkyCultureMgr.cpp:655
+#: src/core/StelSkyCultureMgr.cpp:657
 msgctxt "Name of a section in sky culture description"
 msgid "References"
 msgstr "Ссылки"
 
-#: src/core/StelSkyCultureMgr.cpp:656
+#: src/core/StelSkyCultureMgr.cpp:658
 msgctxt "Name of a section in sky culture description"
 msgid "Authors"
 msgstr "Авторы"
 
-#: src/core/StelSkyCultureMgr.cpp:728
+#: src/core/StelSkyCultureMgr.cpp:730
 msgid "No description"
 msgstr "Без описания"
 
@@ -5023,7 +5023,7 @@ msgid "Contact"
 msgstr "Обратная связь"
 
 #: src/gui/ConfigurationDialog.cpp:1368 src/gui/HelpDialog.cpp:516
-#: src/scripting/StelScriptMgr.cpp:657
+#: src/scripting/StelScriptMgr.cpp:656
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
@@ -5749,7 +5749,7 @@ msgstr ""
 "Или можно {скачать файл BibTeX этой статьи} для создания другого формата "
 "цитирования."
 
-#: src/gui/StelGui.cpp:249 src/scripting/StelScriptMgr.cpp:521
+#: src/gui/StelGui.cpp:249 src/scripting/StelScriptMgr.cpp:520
 #: src/ui_configurationDialog.h:1895
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:526
 msgid "Scripts"
@@ -8600,7 +8600,7 @@ msgstr ""
 "Класс Бортля %1: %2\n"
 "Предельная звёздная величина для невооруженного глаза: %3"
 
-#: src/scripting/StelScriptMgr.cpp:662
+#: src/scripting/StelScriptMgr.cpp:661
 msgid "Shortcut"
 msgstr "Сочетание клавиш"
 
@@ -10315,7 +10315,7 @@ msgstr "&Выбрать"
 #: src/translations.h:678 src/ui_configurationDialog.h:2052
 #: src/ui_obsListDialog.h:365
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
-#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:147
+#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:321
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:143
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:131
@@ -29364,15 +29364,15 @@ msgid "Title:"
 msgstr "Название:"
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:61
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:158
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:156
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:272
-#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:136
+#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:137
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:487
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:127
 msgid "Sky Culture Maker"
 msgstr "Создатель культуры неба"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:64
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:63
 msgid ""
 "Contact us using our GitHub usernames, via an Issue or the Discussion tab in"
 " the Stellarium repository."
@@ -29380,26 +29380,26 @@ msgstr ""
 "Свяжитесь с нами, используя наши имена пользователей GitHub, через вкладку "
 "«Проблема» или «Обсуждение» в репозитории Stellarium."
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:66
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:64
 msgid "Plugin to draw and export sky cultures in Stellarium."
 msgstr "Плагин для рисования и экспорта культур неба в Stellarium."
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:580
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:574
 msgid "INFO"
 msgstr "ИНФОРМАЦИЯ"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:587
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:581
 msgid "WARNING"
 msgstr "ПРЕДУПРЕЖДЕНИЕ"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:594
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:588
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:349
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:359
 msgid "ERROR"
 msgstr "ОШИБКА"
 
 #: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:71
-#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:137
+#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:138
 msgid "Welcome to the Sky Culture Maker!"
 msgstr "Добро пожаловать в «Создатель культуры неба»!"
 
@@ -29475,8 +29475,8 @@ msgid "Choose Export Directory"
 msgstr "Выберите каталог экспорта"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:216
-msgid "ERROR: The selected directory is not valid"
-msgstr "ОШИБКА: выбранный каталог недействителен"
+msgid "The selected directory is not valid"
+msgstr "Выбранный каталог недействителен"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:144
 msgid "SCM: Dark Constellation Editor"
@@ -29611,24 +29611,24 @@ msgstr ""
 "- Соответствующая привязанная звёздочка автоматически выбирается при выборе опорной точки. \n"
 "- При выборе опорной точки текущая привязка перезапишется."
 
-#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:139
+#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:140
 msgid "Create a new sky culture"
 msgstr "Создать новую культуру неба"
 
-#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:141
+#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:142
 msgid "Create"
 msgstr "Создать"
 
-#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:143
+#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:144
 msgid "Not implemented yet."
 msgstr "Пока не реализовано."
 
-#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:145
+#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:146
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:492
 msgid "Edit"
 msgstr "Править"
 
-#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:146
+#: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:147
 msgid "Convert"
 msgstr "Конвертировать"
 
