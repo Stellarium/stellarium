@@ -143,7 +143,7 @@ void ScmSkyCultureDialog::createDialogContent()
 	for (const auto &classification : scm::CLASSIFICATIONS)
 	{
 		// add name, classification type
-		ui->classificationCB->addItem(classification.second.name, QVariant::fromValue(classification.first));
+                ui->classificationCB->addItem(qc_(classification.second.name, "sky culture classification"), QVariant::fromValue(classification.first));
 		// set the classification description as tooltip
 		int index = ui->classificationCB->count() - 1;
 		ui->classificationCB->setItemData(index, classification.second.description, Qt::ToolTipRole);
