@@ -182,7 +182,7 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	// check if description is complete
 	if (!desc.isComplete())
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("The sky culture description is not complete. Please fill in all required fields."));
+		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("The sky culture description is not complete. Please fill in all required fields correctly."));
 		return;
 	}
 

@@ -58,16 +58,20 @@ struct Description
 
 	/**
 	 * @brief Check if the description is complete.
-	 * @return true if all required fields are filled, false otherwise.
+	 * @return true if all required fields are correctly filled, false otherwise.
 	 */
 	bool isComplete() const
 	{
 		return !name.trimmed().isEmpty() &&
-			   !authors.trimmed().isEmpty() &&
-			   license != scm::LicenseType::NONE &&
+			   !introduction.trimmed().isEmpty() &&
 			   !cultureDescription.trimmed().isEmpty() &&
-			   !about.trimmed().isEmpty() &&
+			   !constellations.trimmed().isEmpty() &&
+			   // at least one constellation name. this is a very basic check but at least makes the user aware of the markdown sections
+			   constellations.contains("##### ") &&
 			   !references.trimmed().isEmpty() &&
+			   !authors.trimmed().isEmpty() &&
+			   !about.trimmed().isEmpty() &&
+			   license != scm::LicenseType::NONE &&
 			   classification != scm::ClassificationType::NONE;
 	}
 };
