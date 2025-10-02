@@ -25,6 +25,7 @@
 #include "StelObjectMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
+#include "ConstellationMgr.hpp"
 #include "StelApp.hpp"
 
 #include <md4c-html.h>
@@ -622,32 +623,91 @@ QStringList StelSkyCultureMgr::getSkyCultureListIDs(void) const
 	return dirToNameEnglish.keys();
 }
 
+std::vector<std::pair<QString, QString>> StelSkyCultureMgr::getConstellationsDescriptions(QString consSection) const
+{
+	static const QRegularExpression startWithL5Section("^#####[^#]");
+	consSection = consSection.trimmed();
+	if (!consSection.contains(startWithL5Section))
+	{
+		// Invalid formatting of the Constellations section
+		return {};
+	}
+
+	const QRegularExpression l5SectionNamePat("^[ \t]*#####[ \t]*([^#\n][^\n]*)$",
+	                                          QRegularExpression::MultilineOption);
+	std::vector<std::pair<QString/*constellation*/, QString/*description*/>> descrMap;
+	QString prevSectionName;
+	qsizetype prevBodyStartPos = -1;
+	for (auto it = l5SectionNamePat.globalMatch(consSection); it.hasNext(); )
+	{
+		const auto match = it.next();
+		const auto sectionName = match.captured(1);
+		const auto nameStartPos = match.capturedStart(0);
+		const auto bodyStartPos = match.capturedEnd(0);
+		if (!prevSectionName.isEmpty())
+		{
+			const auto sectionText = consSection.mid(prevBodyStartPos, nameStartPos - prevBodyStartPos);
+			if (!sectionText.isEmpty())
+				descrMap.push_back({prevSectionName, sectionText});
+		}
+		prevBodyStartPos = bodyStartPos;
+		prevSectionName = sectionName;
+	}
+	if (prevBodyStartPos >= 0)
+	{
+		const auto sectionText = consSection.mid(prevBodyStartPos);
+		if (!sectionText.isEmpty())
+			descrMap.push_back({prevSectionName, sectionText});
+	}
+	return descrMap;
+}
+
 QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown, const QString& sectionName,
                                                         const qsizetype bodyStartPos, const qsizetype bodyEndPos,
                                                         const StelTranslator& trans)
 {
-	auto text = markdown.mid(bodyStartPos, bodyEndPos - bodyStartPos);
+	auto textEng = markdown.mid(bodyStartPos, bodyEndPos - bodyStartPos);
 	static const QRegularExpression re("^\n*|\n*$");
-	text.replace(re, "");
-	text = trans.qtranslate(text);
+	textEng.replace(re, "");
+	auto textTr = trans.tryQtranslate(textEng);
+	if (textTr.isEmpty() && sectionName == "Constellations")
+	{
+		// Legacy way of translating the whole Constellations section didn't work.
+		// Now try the correct way: split the section into descriptions of individual
+		// constellations and translate each of them.
+		const auto map = getConstellationsDescriptions(textEng);
+		if (map.empty()) return textEng;
+		const auto cMgr = GETSTELMODULE(ConstellationMgr);
+		for (const auto& entry : map)
+		{
+			const auto consEngName = entry.first;
+			const auto cons = cMgr->searchByName(consEngName);
+			const auto consName = cons ? cons->getNameI18n() : consEngName;
+			textTr += "<h5>" + consName + "</h5>\n";
+			textTr += markdownToHTML(trans.qtranslate(entry.second.trimmed()));
+		}
+		return textTr;
+	}
+
+	if (textTr.isEmpty()) textTr = textEng;
 
 	if (sectionName.trimmed() == "References")
 	{
 		static const QRegularExpression refRe("^ *- \\[#([0-9]+)\\]: (.*)$", QRegularExpression::MultilineOption);
-		text.replace(refRe, "\\1. <span id=\"cite_\\1\">\\2</span>");
+		textTr.replace(refRe, "\\1. <span id=\"cite_\\1\">\\2</span>");
 	}
 	else
 	{
-		text = convertReferenceLinks(text);
+		textTr = convertReferenceLinks(textTr);
 	}
 
 	if (sectionName.trimmed() == "License")
 	{
-		currentSkyCulture.license = text;
+		currentSkyCulture.license = textTr;
 		return "";
 	}
 
-	return markdownToHTML(text);
+	return markdownToHTML(textTr);
 }
 
 QString StelSkyCultureMgr::descriptionMarkdownToHTML(const QString& markdownInput, const QString& descrPath)
