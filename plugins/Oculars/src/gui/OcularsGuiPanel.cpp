@@ -28,6 +28,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include <QGraphicsLinearLayout>
 #include <QGraphicsPathItem>
 #include <QGraphicsProxyWidget>
+#include <QGraphicsDropShadowEffect>
 #include <QLabel>
 #include <QPainter>
 #include <QPen>
@@ -42,16 +43,22 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	parentWidget(parent),
 	borderPath(Q_NULLPTR)
 {
+	StelApp& stelApp = StelApp::getInstance();
+	QSettings* conf = stelApp.getSettings();
+	Q_ASSERT(conf);
+	//qDebug() <<  "Oculars: effectiveOpacity:" << effectiveOpacity() << "Setting opacity 0.75";
+	//setOpacity(0.75);
+	//qDebug() <<  "Oculars: now effectiveOpacity:" << effectiveOpacity();
+
 	setContentsMargins(0, 0, 0, 0);
 
 	//First create the layout and populate it, then set it?
 	mainLayout = new QGraphicsLinearLayout(Qt::Vertical);
 
 	//Button bar
-	buttonBar = new QGraphicsWidget();
+	buttonBar = new QGraphicsWidget(this); // TODO: Clarify why this was unparented before, maybe I miss something.
 	mainLayout->addItem(buttonBar);
 
-	StelApp& stelApp = StelApp::getInstance();
 	Q_ASSERT(ocularsPlugin->actionShowOcular);
 	buttonOcular = new StelButton(buttonBar,
 				      QPixmap(":/ocular/bt_ocular_on.png"),
@@ -101,14 +108,54 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	setLayout(mainLayout);
 
 	//Widgets with control and information fields
+	// TENTATIVE FIX:
+	// We can use a DropShadowEffect for enhanced visibility. Note that we cannot re-use it, so each panel needs to get its own copy.
+	// The blur radius is different to test varying radii.
+	// Currently this seems to work, but the arrow buttons become bright on mouse-over, and won't revert to become darker again.
 	ocularControls = new QGraphicsWidget(this);
 	ocularControls->setVisible(false);
+	if (conf->value("gui/flag_info_shadow", false).toBool())
+	{
+		qDebug() <<  "Oculars: Add a drop shadow for better visibility";
+		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(ocularControls);
+		effect->setBlurRadius(6);
+		effect->setColor(QColor(0, 0, 0));
+		effect->setOffset(0,0);
+		ocularControls->setGraphicsEffect(effect);
+	}
+
 	lensControls = new QGraphicsWidget(this);
 	lensControls->setVisible(false);
+	if (conf->value("gui/flag_info_shadow", false).toBool())
+	{
+		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(lensControls);
+		effect->setBlurRadius(8);
+		effect->setColor(QColor(0, 0, 0));
+		effect->setOffset(0,0);
+		lensControls->setGraphicsEffect(effect);
+	}
+
 	ccdControls = new QGraphicsWidget(this);
 	ccdControls->setVisible(false);
+	if (conf->value("gui/flag_info_shadow", false).toBool())
+	{
+		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(ccdControls);
+		effect->setBlurRadius(10);
+		effect->setColor(QColor(0, 0, 0));
+		effect->setOffset(0,0);
+		ccdControls->setGraphicsEffect(effect);
+	}
+
 	telescopeControls = new QGraphicsWidget(this);
 	telescopeControls->setVisible(false);
+	if (conf->value("gui/flag_info_shadow", false).toBool())
+	{
+		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(telescopeControls);
+		effect->setBlurRadius(12);
+		effect->setColor(QColor(0, 0, 0));
+		effect->setOffset(0,0);
+		telescopeControls->setGraphicsEffect(effect);
+	}
 
 	fieldOcularName = new QGraphicsTextItem(ocularControls);
 	fieldOcularFl = new QGraphicsTextItem(ocularControls);
