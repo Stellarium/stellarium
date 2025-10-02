@@ -39,7 +39,7 @@ jobs:
     if: "!contains(github.actor, 'transifex')"
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Check CRLF line endings
         uses: erclu/check-crlf@master
@@ -56,7 +56,7 @@ jobs:
           sudo apt install -y jsonlint python3-demjson
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Linting JSON
         run: find ${{github.workspace}}/{src,plugins,nebulae,skycultures} -iname '*.json' -exec jsonlint -S {} +

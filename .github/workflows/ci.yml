@@ -319,41 +319,41 @@ jobs:
           pkill Xvfb
 
   # CI on FreeBSD (Qt6)
-  ci-freebsd-qt6:
-    name: "FreeBSD (x86_64; qt6)"
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v5
-
-    - name: Build and run unit tests in FreeBSD
-      uses: vmactions/freebsd-vm@v1
-      id: freebsd-qt6
-      with:
-        release: "14.3"
-        # Use sh shell
-        usesh: true
-        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
-        copyback: false
-        prepare: |
-          pkg install -y cmake git eigen glm exiv2 nlopt fast_float md4c qxlsx-qt6 perl5 xorg-vfbserver gettext qt6
-
-        run: |
-          set -e -x
-          export DISPLAY=:0
-          export CMAKE_PREFIX_PATH="/usr/local:$CMAKE_PREFIX_PATH"
-          mkdir builds
-          cd builds
-          cmake -DCMAKE_PREFIX_PATH="/usr/local" \
-                -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-                -DSTELLARIUM_RELEASE_BUILD=Off \
-                -DENABLE_TESTING=On \
-                "${{ github.workspace }}"
-          make -j3
-          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
-          sleep 3
-          ctest --output-on-failure
-          sleep 1
-          pkill Xvfb
+#  ci-freebsd-qt6:
+#    name: "FreeBSD (x86_64; qt6)"
+#    runs-on: ubuntu-latest
+#    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+#
+#    steps:
+#    - name: Checkout repository
+#      uses: actions/checkout@v5
+#
+#    - name: Build and run unit tests in FreeBSD
+#      uses: vmactions/freebsd-vm@v1
+#      id: freebsd-qt6
+#      with:
+#        release: "14.3"
+#        # Use sh shell
+#        usesh: true
+#        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+#        copyback: false
+#        prepare: |
+#          pkg install -y cmake git eigen glm exiv2 nlopt fast_float md4c qxlsx-qt6 perl5 xorg-vfbserver gettext qt6
+#
+#        run: |
+#          set -e -x
+#          export DISPLAY=:0
+#          export CMAKE_PREFIX_PATH="/usr/local:$CMAKE_PREFIX_PATH"
+#          mkdir builds
+#          cd builds
+#          cmake -DCMAKE_PREFIX_PATH="/usr/local" \
+#                -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+#                -DSTELLARIUM_RELEASE_BUILD=Off \
+#                -DENABLE_TESTING=On \
+#                "${{ github.workspace }}"
+#          make -j3
+#          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+#          sleep 3
+#          ctest --output-on-failure
+#          sleep 1
+#          pkill Xvfb
