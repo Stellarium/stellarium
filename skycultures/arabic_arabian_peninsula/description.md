@@ -18,349 +18,177 @@ The sources indicate that star names and asterisms are fewer compared to those o
 
 ## Constellations
 
-#### The Two Guards
-
-Arabic: (الحويجزين)  
-Transliteration: (al-Ḥuwaiǧzain)  
-IPA: (al.ħuwej.dʒzeɪn)
+##### The Two Guards
 
 The Two Guards are the stars β Ursae Minoris and γ Ursae Minoris, traditionally used in desert navigation. Their name comes from an old legend in which al-Jady (Polaris) kills the father of the Seven Sisters—represented by the stars of the Big Dipper—who then carry their father’s bier and circle al-Jady, vowing revenge. Seeking protection from their wrath, al-Jady turned to these two nearby stars, which became known as the “Two Guards.” [#1].
 
-#### The Two Refugees
-
-Arabic: (الدخيلين)  
-Transliteration: (al-Diḫīlain)  
-IPA: (ad.dɪ:x.ɪːleɪn)
+##### The Two Refugees
 
 Another name for the two stars β Ursae Minoris and γ Ursae Minoris. According to a different version of the legend, these stars are the killers who fled to al-Jady for protection [#1].
 
-#### The Family Of Aba Bzay
-
-Arabic: (آل أبا بزي)  
-Transliteration: (Āl Aba Bzay)  
-IPA: (aːl a.baː bz.aj)
+##### The Family Of Aba Bzay
 
 Yet another name for the two-star asterism β UMi and γ UMi [#1].
 
-#### Al-Nayem
-
-Arabic: (النعايم)  
-Transliteration: (al-Naʿāyem)  
-IPA: (an.na.ˈʕaː.jim)
+##### Al-Nayem
 
 The meaning is uncertain; it could refer to camels. Composed of the seven stars of the Big Dipper [#1].
 
-#### The Seven
-
-Arabic: (السبَّع)  
-Transliteration: (al-Sibbaʿ)  
-IPA: (as.ˈsib.baʕ)
+##### The Seven
 
 The seven stars of the Big Dipper [#1].
 
-#### Daughters Of Na'sh
-
-Arabic: (بنات نعش)  
-Transliteration: (Banāt Naʿš)  
-IPA: (ba.ˈnaːt naʕʃ)
+##### Daughters Of Na'sh
 
 The seven stars of the Big Dipper, known as the seven sisters carrying their father's bier, the father killed by al-Ǧady (Polaris) [#1].
 
-#### The Saddle Of The Camel
-
-Arabic: (الشداد)  
-Transliteration: (al-Šdād)  
-IPA: (aʃ.ʃd.ˈdaːd)
+##### The Saddle Of The Camel
 
 The five bright stars of Cassiopeia, a name used in western areas along the Red Sea in Saudi Arabia [#1].
 
-#### The Wool Spindle
-
-Arabic: (المغزل)  
-Transliteration: (al-Miġzal)  
-IPA: (al.ˈmiɣ.zal)
+##### The Wool Spindle
 
 The cross-shaped arrangement of α Cyg (Deneb), ε Cyg (Gienah), γ Cyg (Sadr), δ Cyg, and β1+β2 Cyg (Albireo). This comes from oral tradition in Zulfi, central Saudi Arabia [#1].
 
-#### The Front
-
-Arabic: (المقدم)  
-Transliteration: (al-Mqaddam)  
-IPA: (al.mqa.ddam)
+##### The Front
 
 The front mouth of the bucket (24th mansion of the Moon) [#2].
 
-#### The Rear
-
-Arabic: (المؤخر)  
-Transliteration: (al-Muwaḫḫar)  
-IPA: (al.muwax.xar)
+##### The Rear
 
 The rear mouth of the bucket (25th mansion of the Moon) [#2].
 
-#### The Bucket Rope
-
-Arabic: (الرشا)  
-Transliteration: (al-Rša)  
-IPA: (ar.ˈre.ʃaː)
+##### The Bucket Rope
 
 The rope used to pull the bucket from the well (26th mansion of the Moon) [#2].
 
-#### The Two Marks
-
-Arabic: (الشرطين)  
-Transliteration: (al-Šarṭain)  
-IPA: (aʃ.ʃar.ˈtˤein)
+##### The Two Marks
 
 Stars α Ari and β Ari (27th mansion of the Moon) [#2].
 
-#### The Little Abdomen
-
-Arabic: (البطين)  
-Transliteration: (al-Bṭain)  
-IPA: (al.b.ˈtˤajn)
+##### The Little Abdomen
 
 The little abdomen of al-Ḥamal (28th mansion of the Moon) [#2].
 
-#### Al-Thurayya
-
-Arabic: (الثريا)  
-Transliteration: (al-Thrayyā)  
-IPA: (aθ.θ.ˈraj.jaː)
+##### Al-Thurayya
 
 Proper name of the Pleiades (1st mansion of the Moon) [#3].
 
-#### The Little Follower
-
-Arabic: (التويبع)  
-Transliteration: (al-Twaibiʿ)  
-IPA: (at.tˤwiː.biʕ)
+##### The Little Follower
 
 Star Aldebran (2nd mansion of the Moon) [#2].
 
-#### The Arm
-
-Arabic: (الذراع)  
-Transliteration: (al-Dhraʿ)  
-IPA: (að.ð.ˈraːʕ)
+##### The Arm
 
 The two stars of Canis Minor, considered the arm of the lion (5th mansion of the Moon) [#2].
 
-#### The Two Little Dogs
+##### The Two Little Dogs
 
-Arabic: (الكليبين)  
-Transliteration: (al-Klaibain)  
-IPA: (al.k.lei.bej.n)
+An asterism of stars δ CMa and ε CMa. Their heliacal rising marks timing (coinciding with the 6th mansion of the Moon). The name is common in central Arabia [#2] [#3].
 
-An asterism of stars δ CMa and ε CMa. Their heliacal rising marks timing (coinciding with the 6th mansion of the Moon). The name is common in central Arabia [#2,#3].
-
-#### The Nostrils
-
-Arabic: (النثرة)  
-Transliteration: (al-Nathrah)  
-IPA: (an.naθ.ˈra)
+##### The Nostrils
 
 M 44 and two adjacent stars represent the nose tip of the Arab lion (6th mansion of the Moon) [#2].
 
-#### The Eyes
-
-Arabic: (الطرف)  
-Transliteration: (al-Ṭarf)  
-IPA: (atˤ.ˈtˤarf)
+##### The Eyes
 
 The eyes of the lion (7th mansion of the Moon) [#2].
 
-#### The Forehead
-
-Arabic: (الجبهة)  
-Transliteration: (al-Ǧabhah)  
-IPA: (al.dʒab.ha)
+##### The Forehead
 
 The forehead of the lion (8th mansion of the Moon) [#2].
 
-#### The Mane
-
-Arabic: (الزبرة)  
-Transliteration: (al-Zubrah)  
-IPA: (az.ˈzub.ra)
+##### The Mane
 
 The mane of the lion (9th mansion of the Moon) [#2].
 
-#### Star Of Weather Change
-
-Arabic: (الصرفة)  
-Transliteration: (al-Ṣarfah)  
-IPA: (as.sˤar.fa)
+##### Star Of Weather Change
 
 (10th mansion of the Moon) [#2].
 
-#### The Bend
-
-Arabic: (العوا)  
-Transliteration: (al-ʿAwwā)  
-IPA: (al.ˈʕa.wwaː)
+##### The Bend
 
 An arc of five stars. The Arabic "al-ʿAwwā" may also mean “the Howlers,” dogs barking at the lion (11th mansion of the Moon) [#2].
 
-#### The High Unarmed One
-
-Arabic: (السماك الأعزل)  
-Transliteration: (al-Smak al-ʿazal)  
-IPA: (as.smaːt͡s al-aʕ.zal)
+##### The High Unarmed One
 
 (12th mansion of the Moon) [#2].
 
-#### The Cover
-
-Arabic: (الغفر)  
-Transliteration: (al-Ġafr)  
-IPA: (al.ˈɣafr)
+##### The Cover
 
 A three-star asterism (13th mansion of the Moon) [#2].
 
-#### Claws Of The Scorpion
-
-Arabic: (الزبانى)  
-Transliteration: (al-Zubānā)  
-IPA: (az.zu.ˈbaː.naː)
+##### Claws Of The Scorpion
 
 The two bright stars of Libra (14th mansion of the Moon) [#2].
 
-#### The Diadem
-
-Arabic: (الإكليل)  
-Transliteration: (al-Iklīl)  
-IPA: (al.ik.ˈliːl)
+##### The Diadem
 
 An arc of three stars on the forehead of Scorpius (15th mansion of the Moon) [#2].
 
-#### The Heart
-
-Arabic: (القلب)  
-Transliteration: ()  
-IPA: (al.qalb)
+##### The Heart
 
 (16th mansion of the Moon) [#1].
 
-#### Raised Tail Of The Scorpion
-
-Arabic: (الشولة)  
-Transliteration: (al-Šawlah)  
-IPA: (aʃ.ˈʃow.la)
+##### Raised Tail Of The Scorpion
 
 The sting of Scorpius (17th mansion of the Moon) [#2].
 
-#### The Scorpion
-
-Arabic: (العقرب)  
-Transliteration: (al-ʿAqrab)  
-IPA: (al.ˈʕaq.rab)
+##### The Scorpion
 
 Represents the scorpion figure [#2].
 
-#### The Empty Place
-
-Arabic: (البلدة)  
-Transliteration: (al-Baldah)  
-IPA: (al.ˈbal.da)
+##### The Empty Place
 
 An area with no bright stars in Sagittarius (19th mansion of the Moon) [#2].
 
-#### The Ostriches
-
-Arabic: (النعايم)  
-Transliteration: (al-Naʿāyem)  
-IPA: (an.na.ˈʕaː.ajim)
+##### The Ostriches
 
 Four stars in the Milky Way representing ostriches drinking at a river and another four away from the Milky Way representing ostriches returning. A ninth star between and above the two groups is included. All are located in Sagittarius (18th mansion of the Moon) [#2].
 
-#### The Lucky Star Of The Slaughterer
-
-Arabic: (سعد الذابح)  
-Transliteration: (Saʿd al-Dhabiḥ)  
-IPA: (saʕd að.ˈðaː.biħ)
+##### The Lucky Star Of The Slaughterer
 
 An ancient Arab asterism depicting a man slaughtering a sheep (20th mansion of the Moon) [#2].
 
-#### The Lucky Star Of The Swallower
-
-Arabic: (سعد بلع)  
-Transliteration: (Saʿd bulaʿ)  
-IPA: (saʕd ˈbu.laʕ)
+##### The Lucky Star Of The Swallower
 
 An ancient Arab asterism representing a man swallowing a bite (21st mansion of the Moon) [#2].
 
-#### The Luckiest Of The Lucky Stars
-
-Arabic: (سعد السعود)  
-Transliteration: (Saʿd al-suʿūd)  
-IPA: (saʕd as.su.ˈʕuːd)
+##### The Luckiest Of The Lucky Stars
 
 An ancient Arab asterism of three stars that rise in the morning in spring (22nd mansion of the Moon) [#2].
 
-#### The Lucky Star Of The Tents
-
-Arabic: (سعد الأخبية)  
-Transliteration: (Saʿd al-aḫbiyah)  
-IPA: (saʕd al.ˈax.bi.ja)
+##### The Lucky Star Of The Tents
 
 An ancient Arab asterism consisting of a triangle of three stars with a fourth star inside, symbolizing a man inside a tent (23rd mansion of the Moon) [#2].
 
-#### The Circular Mark
-
-Arabic: (الهقعة)  
-Transliteration: (al-Haqʿah)  
-IPA: (al.ˈhaq.ʕa)
+##### The Circular Mark
 
 An ancient Arab asterism of a small triangle of stars (head of Orion) representing a mark on the side of a horse (3rd mansion of the Moon) [#2].
 
-#### Stoopness
-
-Arabic: (الهنعة)  
-Transliteration: (al-Hanʿah)  
-IPA: (al.ˈhan.ʕa)
+##### Stoopness
 
 An ancient Arab asterism (4th mansion of the Moon) [#2].
 
-#### Back Of Al-Jawza
-
-Arabic: (ظهر الجوزا)  
-Transliteration: (Ẓahr al-Ǧawzā)  
-IPA: (za.waː.bin al.ˈdʒaw.zaːʔ)
+##### Back Of Al-Jawza
 
 The three stars at Orion’s belt. This name, along with Northern Horn of al-Jawza and Southern Horn of al-Jawza star names, originates from western Saudi Arabia and is used by Red Sea fishers. The source is oral tradition from the seaport Umluj, Saudi Arabia [#1].
 
-#### Claws Of Al-Jawza
-
-Arabic: (زوابن الجوزا)  
-Transliteration: (Zawābin al-Ǧawzā)  
-IPA: (az.ˈzib.ban)
+##### Claws Of Al-Jawza
 
 Refers to stars α, γ, β, and κ Ori, transmitted orally from the Qasseem region of Saudi Arabia [#1].
 
-#### Claws Of Al-Jawza (Alternate)
-
-Arabic: (الزبَّن)  
-Transliteration: (al-Zibban)  
-IPA: (ðahr al.dʒowzaː)
+##### Claws Of Al-Jawza (Alternate)
 
 Another name for the α, γ, β, and κ Ori stars, also from Qasseem, Saudi Arabia [#1].
 
-#### Mosque Of Al-Thurayya
-
-Arabic: (مسجد الثريا)  
-Transliteration: (Masǧid al-Thrayyā)  
-IPA: (mas.dʒid aθ.θ.ˈraj.jaː)
+##### Mosque Of Al-Thurayya
 
 A triangle of stars that rise before al-Thurayya (the Pleiades). It includes α Ari, α Tri, and β Tri. The name comes from oral tradition in Wadi al-Dawasir, southwestern Saudi Arabia [#1].
 
-#### Al-Jawza
+##### Al-Jawza
 
-Arabic: (الجوزا)  
-Transliteration: (al-Ǧawā)  
-IPA: (al.dʒowzaː)
-
-A proper name for a woman; this constellation represents a female figure formed by the Orion stars, identical to the ancient Arab tradition. Some oral traditions limit the name to the three stars of Orion’s belt [#2,#3].
+A proper name for a woman; this constellation represents a female figure formed by the Orion stars, identical to the ancient Arab tradition. Some oral traditions limit the name to the three stars of Orion’s belt [#2] [#3].
 
 ## References
 
