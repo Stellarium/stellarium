@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-10-01 11:51+0700\n"
+"POT-Creation-Date: 2025-10-02 13:47+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -9962,82 +9962,87 @@ msgctxt "addressing mode"
 msgid "32-bit"
 msgstr "32-bit"
 
+#: src/translations.h:644
+msgctxt "sky culture classification"
+msgid "none"
+msgstr "无"
+
 #. TRANSLATORS: Same text as in the Configuration window!
-#: src/translations.h:647 src/ui_helpDialogGui.h:249
+#: src/translations.h:648 src/ui_helpDialogGui.h:249
 #: src/ui_configurationDialog.h:2221
 msgid "Edit keyboard shortcuts..."
 msgstr "编辑键盘快捷键..."
 
 #. TRANSLATORS: See http://en.wikipedia.org/wiki/Bayer_designation
-#: src/translations.h:651 src/ui_searchDialogGui.h:842
+#: src/translations.h:652 src/ui_searchDialogGui.h:842
 msgid "Greek letters for Bayer designations"
 msgstr "拜耳命名法的希腊字母"
 
 #. TRANSLATORS: The title of the window will be set during runtime
-#: src/translations.h:655
+#: src/translations.h:656
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:167
 msgid "More Satellites"
 msgstr "更多卫星"
 
 #. TRANSLATORS: The title of the window will be set during runtime
-#: src/translations.h:659
+#: src/translations.h:660
 msgid "Define an object"
 msgstr "定义天体"
 
 #. TRANSLATORS: The title of the window will be set during runtime
-#: src/translations.h:663
+#: src/translations.h:664
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:478
 msgid "Import data"
 msgstr "导入数据"
 
-#: src/translations.h:667
+#: src/translations.h:668
 msgid "&Undo"
 msgstr "撤销(&U)"
 
-#: src/translations.h:668
+#: src/translations.h:669
 msgid "&Redo"
 msgstr "重做(&R)"
 
-#: src/translations.h:669
+#: src/translations.h:670
 msgid "Cu&t"
 msgstr "剪切(&T)"
 
-#: src/translations.h:670
+#: src/translations.h:671
 msgid "&Copy"
 msgstr "复制(&C)"
 
-#: src/translations.h:671
+#: src/translations.h:672
 msgid "&Paste"
 msgstr "粘贴(&P)"
 
-#: src/translations.h:672 plugins/Oculars/src/ui_ocularDialog.h:1530
+#: src/translations.h:673 plugins/Oculars/src/ui_ocularDialog.h:1530
 #: plugins/Oculars/src/ui_ocularDialog.h:1539
 #: plugins/Oculars/src/ui_ocularDialog.h:1545
 #: plugins/Oculars/src/ui_ocularDialog.h:1564
 msgid "Delete"
 msgstr "删除"
 
-#: src/translations.h:673
+#: src/translations.h:674
 msgid "Select All"
 msgstr "全选"
 
-#: src/translations.h:674
+#: src/translations.h:675
 msgid "Look in:"
 msgstr "浏览:"
 
-#: src/translations.h:675
+#: src/translations.h:676
 msgid "Directory:"
 msgstr "目录："
 
-#: src/translations.h:676
+#: src/translations.h:677
 msgid "Folder"
 msgstr "文件夹"
 
-#: src/translations.h:677
+#: src/translations.h:678
 msgid "&Choose"
 msgstr "选择(&C)"
 
-#: src/translations.h:678 src/ui_configurationDialog.h:2052
+#: src/translations.h:679 src/ui_configurationDialog.h:2052
 #: src/ui_obsListDialog.h:365
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
@@ -10048,145 +10053,145 @@ msgstr "选择(&C)"
 msgid "Cancel"
 msgstr "取消"
 
-#: src/translations.h:679
+#: src/translations.h:680
 msgid "&Cancel"
 msgstr "取消(&C)"
 
-#: src/translations.h:680
+#: src/translations.h:681
 msgid "Files of type:"
 msgstr "文件类型："
 
-#: src/translations.h:681
+#: src/translations.h:682
 msgid "Date Modified"
 msgstr "修改日期"
 
-#: src/translations.h:682
+#: src/translations.h:683
 msgid "Directories"
 msgstr "目录"
 
-#: src/translations.h:683
+#: src/translations.h:684
 msgid "Computer"
 msgstr "计算机"
 
-#: src/translations.h:684
+#: src/translations.h:685
 msgid "&Open"
 msgstr "打开(&O)"
 
-#: src/translations.h:685
+#: src/translations.h:686
 msgid "&Save"
 msgstr "保存(&S)"
 
-#: src/translations.h:686 src/ui_configurationDialog.h:1905
+#: src/translations.h:687 src/ui_configurationDialog.h:1905
 #: src/ui_configurationDialog.h:2279
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:320
 msgid "Save"
 msgstr "保存"
 
-#: src/translations.h:687
+#: src/translations.h:688
 msgid "Save As:"
 msgstr "保存于："
 
-#: src/translations.h:688
+#: src/translations.h:689
 msgid "Tags:"
 msgstr "标记："
 
-#: src/translations.h:689
+#: src/translations.h:690
 msgid "File &name:"
 msgstr "文件名(&F):"
 
-#: src/translations.h:690
+#: src/translations.h:691
 msgid "Copy &Link Location"
 msgstr "复制链接地址(&L)"
 
-#: src/translations.h:691
+#: src/translations.h:692
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:130
 msgid "Abort"
 msgstr "中止"
 
-#: src/translations.h:692
+#: src/translations.h:693
 msgid "Ignore"
 msgstr "忽略"
 
-#: src/translations.h:693
+#: src/translations.h:694
 msgid "&Basic colors"
 msgstr "简单颜色(&B)"
 
-#: src/translations.h:694
+#: src/translations.h:695
 msgid "&Pick Screen Color"
 msgstr "选择颜色(&P)"
 
-#: src/translations.h:695
+#: src/translations.h:696
 msgid "&Custom colors"
 msgstr "自定义颜色(&C)"
 
-#: src/translations.h:696
+#: src/translations.h:697
 msgid "&Add to Custom Colors"
 msgstr "添加到自定义颜色(&A)"
 
-#: src/translations.h:697
+#: src/translations.h:698
 msgid "Hu&e:"
 msgstr "色调(&E):"
 
-#: src/translations.h:698
+#: src/translations.h:699
 msgid "&Sat:"
 msgstr "饱和度(&S):"
 
-#: src/translations.h:699
+#: src/translations.h:700
 msgid "&Val:"
 msgstr "明度(&V):"
 
-#: src/translations.h:700
+#: src/translations.h:701
 msgid "&Red:"
 msgstr "红(&R):"
 
-#: src/translations.h:701
+#: src/translations.h:702
 msgid "&Green:"
 msgstr "绿(&G):"
 
-#: src/translations.h:702
+#: src/translations.h:703
 msgid "Bl&ue:"
 msgstr "蓝(&U):"
 
-#: src/translations.h:703
+#: src/translations.h:704
 msgid "Select Color"
 msgstr "选择颜色"
 
-#: src/translations.h:704
+#: src/translations.h:705
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "光标在%1, %2 按ESC取消"
 
-#: src/translations.h:705
+#: src/translations.h:706
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:194
 msgid "Back"
 msgstr "后退"
 
-#: src/translations.h:706
+#: src/translations.h:707
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:196
 msgid "Forward"
 msgstr "前进"
 
-#: src/translations.h:707
+#: src/translations.h:708
 msgid "Parent Directory"
 msgstr "上级目录"
 
-#: src/translations.h:708
+#: src/translations.h:709
 msgid "Create New Folder"
 msgstr "创建新文件夹"
 
-#: src/translations.h:709
+#: src/translations.h:710
 msgid "List View"
 msgstr "列表视图"
 
-#: src/translations.h:710
+#: src/translations.h:711
 msgid "Detail View"
 msgstr "详细视图"
 
-#: src/translations.h:711
+#: src/translations.h:712
 msgid "Recent Places"
 msgstr "最近的位置"
 
-#: src/translations.h:712
+#: src/translations.h:713
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -10195,47 +10200,47 @@ msgstr ""
 "%1 已经存在。\n"
 "想替换它吗?"
 
-#: src/translations.h:713
+#: src/translations.h:714
 msgid "&Yes"
 msgstr "是(&Y)"
 
-#: src/translations.h:714
+#: src/translations.h:715
 msgid "&No"
 msgstr "否(&N)"
 
-#: src/translations.h:715
+#: src/translations.h:716
 msgid "&Select All"
 msgstr "全选(&S)"
 
-#: src/translations.h:716
+#: src/translations.h:717
 msgid "&Step up"
 msgstr "增加(&S)"
 
-#: src/translations.h:717
+#: src/translations.h:718
 msgid "Step &down"
 msgstr "减少(&D)"
 
-#: src/translations.h:718
+#: src/translations.h:719
 msgid "&Rename"
 msgstr "重命名(&R)"
 
-#: src/translations.h:719
+#: src/translations.h:720
 msgid "&Delete"
 msgstr "删除(&D)"
 
-#: src/translations.h:720
+#: src/translations.h:721
 msgid "&New Folder"
 msgstr "新文件夹(&N)"
 
-#: src/translations.h:721
+#: src/translations.h:722
 msgid "New Folder"
 msgstr "新文件夹"
 
-#: src/translations.h:722
+#: src/translations.h:723
 msgid "Show &hidden files"
 msgstr "显示隐藏文件(&h)"
 
-#: src/translations.h:723 plugins/MeteorShowers/src/ui_MSSearchDialog.h:139
+#: src/translations.h:724 plugins/MeteorShowers/src/ui_MSSearchDialog.h:139
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:141
 msgid "Search"
 msgstr "搜索"
@@ -27737,8 +27742,8 @@ msgstr "请为星空文化选择许可证。"
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:185
 msgid ""
 "The sky culture description is not complete. Please fill in all required "
-"fields."
-msgstr "星空文化描述不完整，请填写所有必填项。"
+"fields correctly."
+msgstr "星空文化描述不完整。请正确填写所有必填项。"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:98
 msgid "No sky culture is set."
