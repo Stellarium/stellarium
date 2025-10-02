@@ -432,7 +432,10 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 		sPainter.setColor(obj->getInfoColor());
 		texPointer->bind();
 		sPainter.setBlending(true);
-		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, static_cast<float>(StelApp::getInstance().getAnimationTime())*40.f);
+		const float angle = static_cast<float>(StelApp::getInstance().getAnimationTime()) * 40;
+		const float scale = StelApp::getInstance().getScreenScale();
+		const float radius = 13.f * scale;
+		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], radius, angle);
 	}
 }
 
