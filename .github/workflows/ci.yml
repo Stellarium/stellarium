@@ -31,7 +31,7 @@ jobs:
                             libnlopt-cxx-dev libmd4c-dev libmd4c-html0-dev
 
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Configure CMake
       shell: bash
@@ -74,7 +74,7 @@ jobs:
                             libgps-dev libmd4c-dev libmd4c-html0-dev cmake gettext libgettextpo-dev libtidy-dev libunarr-dev
 
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Configure CMake
       shell: bash
@@ -117,7 +117,7 @@ jobs:
                             zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev libgps-dev libmd4c-dev libmd4c-html0-dev
 
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Configure CMake
       shell: bash
@@ -162,7 +162,7 @@ jobs:
         brew install qt@5 nlopt exiv2
 
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Configure CMake
       shell: bash
@@ -205,7 +205,7 @@ jobs:
         brew install qt@6 nlopt exiv2 tidy-html5
 
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Configure CMake
       shell: bash
@@ -252,7 +252,7 @@ jobs:
         brew install qt@6 nlopt exiv2 tidy-html5
 
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Configure CMake
       shell: bash
@@ -285,7 +285,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Build and run unit tests in FreeBSD
       uses: vmactions/freebsd-vm@v1
@@ -326,7 +326,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Build and run unit tests in FreeBSD
       uses: vmactions/freebsd-vm@v1
@@ -338,7 +338,7 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg install -y cmake git eigen glm exiv2 nlopt fast_float md4c qxlsx-qt6 perl5 xorg-vfbserver gettext tidy-html5 qt6
+          pkg install -y cmake git eigen glm exiv2 nlopt fast_float md4c qxlsx-qt6 perl5 xorg-vfbserver gettext qt6
 
         run: |
           set -e -x
@@ -350,8 +350,6 @@ jobs:
                 -DCMAKE_BUILD_TYPE=RelWithDebInfo \
                 -DSTELLARIUM_RELEASE_BUILD=Off \
                 -DENABLE_TESTING=On \
-                -DLIBTIDY_LIBRARY="/usr/local/lib/libtidy5.so" \
-                -DSCM_SHOULD_ENABLE_CONVERTER=On \
                 "${{ github.workspace }}"
           make -j3
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
