@@ -623,7 +623,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 		float screenSize = static_cast<float>(obj->getAngularRadius(core))*prj->getPixelPerRadAtCenter()*M_PI_180f*2.f;
 		
-		const float scale = static_cast<float>(prj->getDevicePixelsPerPixel());
+		const float scale = StelApp::getInstance().getScreenScale();
 		screenSize+= scale * (45.f + 10.f*std::sin(2.f * static_cast<float>(StelApp::getInstance().getAnimationTime())));
 
 		texPointer->bind();
@@ -632,13 +632,14 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 		screenSize*=0.5f;
 		const float angleBase = static_cast<float>(StelApp::getInstance().getAnimationTime()) * 10;
+		const float radius = 10 * scale;
 		// We draw 4 instances of the sprite at the corners of the pointer
 		for (int i = 0; i < 4; ++i)
 		{
 			const float angle = angleBase + i * 90;
 			const float x = screenpos[0] + screenSize * cos(angle * M_PI_180f);
 			const float y = screenpos[1] + screenSize * sin(angle * M_PI_180f);
-			sPainter.drawSprite2dMode(x, y, 10, angle);
+			sPainter.drawSprite2dMode(x, y, radius, angle);
 		}
 	}
 }
