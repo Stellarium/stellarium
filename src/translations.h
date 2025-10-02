@@ -641,6 +641,7 @@ class Translations
 
 		NC_("64-bit", "addressing mode");
 		NC_("32-bit", "addressing mode");
+		NC_("none", "sky culture classification");
 
 		// src/gui/helpDialogGui.ui:
 		// TRANSLATORS: Same text as in the Configuration window!
