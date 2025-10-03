@@ -187,50 +187,6 @@ jobs:
         run: ctest --output-on-failure
 
   # CI on macOS (Qt6)
-  ci-macos-intel-qt6:
-    name: "macOS (x86_64; qt6)"
-    runs-on: macos-15-intel
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
-
-    # @TODO Enable gpsd on macOS instance for CI testing
-    # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
-    steps:
-    - name: Install dependencies
-      env:
-        HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
-        HOMEBREW_NO_AUTO_UPDATE: 1
-      run: |
-        # brew update
-        # brew upgrade
-        brew install qt@6 nlopt exiv2 tidy-html5
-
-    - name: Checkout repository
-      uses: actions/checkout@v5
-
-    - name: Configure CMake
-      shell: bash
-      run: |
-        export PATH="/usr/local/opt/qt@6/bin:$PATH"
-        mkdir -p build
-        cd build
-        cmake -DCMAKE_PREFIX_PATH="/usr/local" \
-              -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-              -DSTELLARIUM_RELEASE_BUILD=Off \
-              -DSCM_SHOULD_ENABLE_CONVERTER=On \
-              -DENABLE_TESTING=On \
-              "${{ github.workspace }}"
-
-    - name: Compile
-      working-directory: build
-      run: make -j3
-
-    - name: Run unit tests
-      uses: coactions/setup-xvfb@v1
-      with:
-        working-directory: build
-        run: ctest --output-on-failure
-
-  # CI on macOS (Qt6)
   ci-macos-silicon-qt6:
     name: "macOS (arm64; qt6)"
     runs-on: macos-15
