@@ -2,6 +2,7 @@
 
 ## Version 1.0.1
 
+* New Feature: Option to automatically merge lines into polylines on export
 * Fix: Drawn constellations are not reset after "Export and Exit"
 * Fix: Stop drawing line key (Double Right Click) only works when Star/DSO is selected
 * Fix: Not all SC description input fields that are marked required are actually checked
