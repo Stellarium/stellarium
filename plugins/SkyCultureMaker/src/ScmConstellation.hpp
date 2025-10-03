@@ -183,9 +183,10 @@ public:
 	  * @brief Returns the constellation data as a JSON object.
 	  * 
 	  * @param skyCultureId The ID of the sky culture to which this constellation belongs.
+	  * @param mergeLines Whether to merge lines into polylines where possible.
 	  * @return QJsonObject 
 	  */
-	QJsonObject toJson(const QString &skyCultureId) const;
+	QJsonObject toJson(const QString &skyCultureId, const bool mergeLines) const;
 
 	/**
 	 * @brief Saves the artwork of this constellation, if art is attached, to the give filepath.
@@ -266,6 +267,29 @@ private:
 	 * @brief Updates the XYZname that is used for the text position.
 	 */
 	void updateTextPosition();
+
+	/**
+	 * @brief Merges individual star lines into polylines where possible.
+	 *
+	 * Merging is done in a two step process, where first the ends of lines are merged
+	 * with the starts of other lines if they match, and secondly the starts of lines are
+	 * merged with the ends of other lines if they match. The lines are processed in the order
+	 * they have been drawn. However, lines which point to opposite directions are not merged.
+	 * 
+	 * Example:
+	 * 
+	 * Input 1: [[1,2], [2,3], [0,1]]
+	 * 
+	 * Output 1: [[0,1,2,3]]
+	 * 
+	 * Input 2: [[1,2], [2,3], [1,0]]
+	 * 
+	 * Output 2: [[1,2,3], [1,0]]
+	 *
+	 * @param individualLines The individual star lines to merge.
+	 * @return QJsonArray The merged polylines as a JSON array.
+	 */
+	QJsonArray mergeLinesIntoPolylines(const QJsonArray &individualLines) const;
 };
 
 } // namespace scm

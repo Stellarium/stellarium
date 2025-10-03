@@ -188,19 +188,19 @@ void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter) con
 	drawNames(core, sPainter, defaultConstellationNameColor);
 }
 
-QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId) const
+QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId, const bool mergeLines) const
 {
 	QJsonObject json;
 
 	// Assemble lines object
-	QJsonArray linesArray;
+	QJsonArray individualLines;
 
 	if (!isDarkConstellation)
 	{
 		// not a dark constellation, so we can add stars
 		for (const auto &star : stars)
 		{
-			linesArray.append(star.toJson());
+			individualLines.append(star.toJson());
 		}
 	}
 	else
@@ -208,12 +208,12 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId) const
 		// dark constellation, so only add coordinates
 		for (const auto &coord : coordinates)
 		{
-			linesArray.append(coord.toJson());
+			individualLines.append(coord.toJson());
 		}
 	}
 
 	json["id"]    = "CON " + skyCultureId + " " + id;
-	json["lines"] = linesArray;
+	json["lines"] = mergeLines ? mergeLinesIntoPolylines(individualLines) : individualLines;
 	if (artwork.getHasArt() && !artworkPath.isEmpty())
 	{
 		QFileInfo fileInfo(artworkPath);
@@ -283,4 +283,86 @@ void scm::ScmConstellation::hide()
 void scm::ScmConstellation::show()
 {
 	isHidden = false;
+}
+
+QJsonArray scm::ScmConstellation::mergeLinesIntoPolylines(const QJsonArray &individualLines) const
+{
+	if (individualLines.size() < 2)
+	{
+		// Nothing to merge
+		return individualLines;
+	}
+
+	// Working array
+	QJsonArray mergedLines = individualLines;
+
+	// Step 1: merge line ends with other line starts
+	for (int i = 0; i < mergedLines.size(); ++i)
+	{
+		QJsonArray currentLine = mergedLines.at(i).toArray();
+		QJsonValue currentEnd  = currentLine.last();
+
+		// Look for a line that starts where the current line ends
+		for (int j = i + 1; j < mergedLines.size(); ++j)
+		{
+			QJsonArray nextLine  = mergedLines.at(j).toArray();
+			QJsonValue nextStart = nextLine.first();
+
+			// Merge nextLine into currentLine
+			if (currentEnd == nextStart)
+			{
+				// Append all points from nextLine except the first (which is duplicate)
+				for (int k = 1; k < nextLine.size(); ++k)
+				{
+					currentLine.append(nextLine.at(k));
+				}
+				currentEnd = currentLine.last();
+
+				// Update the merged lines array
+				mergedLines.replace(i, currentLine);
+				mergedLines.removeAt(j);
+				--i;       // Recheck the merged line
+				j = i + 1; // Reset j to i + 1 to continue merging
+				break;
+			}
+		}
+	}
+
+	// Step 2: merge line starts with other line ends
+	for (int i = 0; i < mergedLines.size(); ++i)
+	{
+		QJsonArray currentLine  = mergedLines.at(i).toArray();
+		QJsonValue currentStart = currentLine.first();
+
+		// Look for a line that ends where the current line starts
+		for (int j = i + 1; j < mergedLines.size(); ++j)
+		{
+			QJsonArray nextLine = mergedLines.at(j).toArray();
+			QJsonValue nextEnd  = nextLine.last();
+
+			if (currentStart == nextEnd)
+			{
+				// Prepend all points from nextLine except the last (which is duplicate)
+				QJsonArray newCurrentLine;
+				for (int k = 0; k < nextLine.size() - 1; ++k)
+				{
+					newCurrentLine.append(nextLine.at(k));
+				}
+				for (int k = 0; k < currentLine.size(); ++k)
+				{
+					newCurrentLine.append(currentLine.at(k));
+				}
+				currentLine  = newCurrentLine;
+				currentStart = currentLine.first();
+
+				mergedLines.replace(i, currentLine);
+				mergedLines.removeAt(j);
+				--i;       // Recheck the merged line
+				j = i + 1; // Reset j to i + 1 to continue merging
+				break;
+			}
+		}
+	}
+
+	return mergedLines;
 }
