@@ -193,14 +193,14 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId, const boo
 	QJsonObject json;
 
 	// Assemble lines object
-	QJsonArray individualLines;
+	QJsonArray linesArray;
 
 	if (!isDarkConstellation)
 	{
 		// not a dark constellation, so we can add stars
 		for (const auto &star : stars)
 		{
-			individualLines.append(star.toJson());
+			linesArray.append(star.toJson());
 		}
 	}
 	else
@@ -208,12 +208,17 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId, const boo
 		// dark constellation, so only add coordinates
 		for (const auto &coord : coordinates)
 		{
-			individualLines.append(coord.toJson());
+			linesArray.append(coord.toJson());
 		}
 	}
 
+	if (mergeLines)
+	{
+		mergeLinesIntoPolylines(linesArray);
+	}
+
 	json["id"]    = "CON " + skyCultureId + " " + id;
-	json["lines"] = mergeLines ? mergeLinesIntoPolylines(individualLines) : individualLines;
+	json["lines"] = linesArray;
 	if (artwork.getHasArt() && !artworkPath.isEmpty())
 	{
 		QFileInfo fileInfo(artworkPath);
@@ -285,27 +290,24 @@ void scm::ScmConstellation::show()
 	isHidden = false;
 }
 
-QJsonArray scm::ScmConstellation::mergeLinesIntoPolylines(const QJsonArray &individualLines) const
+void scm::ScmConstellation::mergeLinesIntoPolylines(QJsonArray &lines) const
 {
-	if (individualLines.size() < 2)
+	if (lines.size() < 2)
 	{
 		// Nothing to merge
-		return individualLines;
+		return;
 	}
 
-	// Working array
-	QJsonArray mergedLines = individualLines;
-
 	// Step 1: merge line ends with other line starts
-	for (int i = 0; i < mergedLines.size(); ++i)
+	for (int i = 0; i < lines.size(); ++i)
 	{
-		QJsonArray currentLine = mergedLines.at(i).toArray();
+		QJsonArray currentLine = lines.at(i).toArray();
 		QJsonValue currentEnd  = currentLine.last();
 
 		// Look for a line that starts where the current line ends
-		for (int j = i + 1; j < mergedLines.size(); ++j)
+		for (int j = i + 1; j < lines.size(); ++j)
 		{
-			QJsonArray nextLine  = mergedLines.at(j).toArray();
+			QJsonArray nextLine  = lines.at(j).toArray();
 			QJsonValue nextStart = nextLine.first();
 
 			// Merge nextLine into currentLine
@@ -319,8 +321,8 @@ QJsonArray scm::ScmConstellation::mergeLinesIntoPolylines(const QJsonArray &indi
 				currentEnd = currentLine.last();
 
 				// Update the merged lines array
-				mergedLines.replace(i, currentLine);
-				mergedLines.removeAt(j);
+				lines.replace(i, currentLine);
+				lines.removeAt(j);
 				--i;       // Recheck the merged line
 				j = i + 1; // Reset j to i + 1 to continue merging
 				break;
@@ -329,15 +331,15 @@ QJsonArray scm::ScmConstellation::mergeLinesIntoPolylines(const QJsonArray &indi
 	}
 
 	// Step 2: merge line starts with other line ends
-	for (int i = 0; i < mergedLines.size(); ++i)
+	for (int i = 0; i < lines.size(); ++i)
 	{
-		QJsonArray currentLine  = mergedLines.at(i).toArray();
+		QJsonArray currentLine  = lines.at(i).toArray();
 		QJsonValue currentStart = currentLine.first();
 
 		// Look for a line that ends where the current line starts
-		for (int j = i + 1; j < mergedLines.size(); ++j)
+		for (int j = i + 1; j < lines.size(); ++j)
 		{
-			QJsonArray nextLine = mergedLines.at(j).toArray();
+			QJsonArray nextLine = lines.at(j).toArray();
 			QJsonValue nextEnd  = nextLine.last();
 
 			if (currentStart == nextEnd)
@@ -355,14 +357,12 @@ QJsonArray scm::ScmConstellation::mergeLinesIntoPolylines(const QJsonArray &indi
 				currentLine  = newCurrentLine;
 				currentStart = currentLine.first();
 
-				mergedLines.replace(i, currentLine);
-				mergedLines.removeAt(j);
+				lines.replace(i, currentLine);
+				lines.removeAt(j);
 				--i;       // Recheck the merged line
 				j = i + 1; // Reset j to i + 1 to continue merging
 				break;
 			}
 		}
 	}
-
-	return mergedLines;
 }

@@ -286,10 +286,9 @@ private:
 	 * 
 	 * Output 2: [[1,2,3], [1,0]]
 	 *
-	 * @param individualLines The individual star lines to merge.
-	 * @return QJsonArray The merged polylines as a JSON array.
+	 * @param lines The individual star lines to merge.
 	 */
-	QJsonArray mergeLinesIntoPolylines(const QJsonArray &individualLines) const;
+	void mergeLinesIntoPolylines(QJsonArray &lines) const;
 };
 
 } // namespace scm
