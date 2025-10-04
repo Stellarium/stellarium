@@ -69,8 +69,10 @@ public:
 
 	/**
 	* @brief Returns the sky culture as a JSON object
+	*
+	* @param mergeLines Whether to merge the lines of the constellations into polylines where possible.
 	*/
-	QJsonObject toJson() const;
+	QJsonObject toJson(const bool mergeLines) const;
 
 	/**
 	* @brief Draws the sky culture.
