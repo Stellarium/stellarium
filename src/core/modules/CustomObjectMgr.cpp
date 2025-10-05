@@ -369,7 +369,10 @@ void CustomObjectMgr::drawPointer(StelCore* core, StelPainter& painter)
 		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
 		painter.setBlending(true);
-		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime()*40.));
+		const float angle = static_cast<float>(StelApp::getInstance().getAnimationTime()) * 40;
+		const float scale = StelApp::getInstance().getScreenScale();
+		const float radius = 13.f * scale;
+		painter.drawSprite2dMode(screenpos[0], screenpos[1], radius, angle);
 	}
 }
 
