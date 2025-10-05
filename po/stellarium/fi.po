@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-10-01 11:51+0700\n"
+"POT-Creation-Date: 2025-10-02 13:47+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Ilpo Kantonen, 2025\n"
 "Language-Team: Finnish (https://app.transifex.com/stellarium/teams/80998/fi/)\n"
@@ -10249,82 +10249,87 @@ msgctxt "addressing mode"
 msgid "32-bit"
 msgstr "32-bittinen"
 
+#: src/translations.h:644
+msgctxt "sky culture classification"
+msgid "none"
+msgstr ""
+
 #. TRANSLATORS: Same text as in the Configuration window!
-#: src/translations.h:647 src/ui_helpDialogGui.h:249
+#: src/translations.h:648 src/ui_helpDialogGui.h:249
 #: src/ui_configurationDialog.h:2221
 msgid "Edit keyboard shortcuts..."
 msgstr "Muokkaa pikanäppäimiä..."
 
 #. TRANSLATORS: See http://en.wikipedia.org/wiki/Bayer_designation
-#: src/translations.h:651 src/ui_searchDialogGui.h:842
+#: src/translations.h:652 src/ui_searchDialogGui.h:842
 msgid "Greek letters for Bayer designations"
 msgstr "Kreikkalaiset kirjaimet Bayerin tunnuksiin"
 
 #. TRANSLATORS: The title of the window will be set during runtime
-#: src/translations.h:655
+#: src/translations.h:656
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:167
 msgid "More Satellites"
 msgstr "Lisää satelliitteja"
 
 #. TRANSLATORS: The title of the window will be set during runtime
-#: src/translations.h:659
+#: src/translations.h:660
 msgid "Define an object"
 msgstr "Määrittele kohde"
 
 #. TRANSLATORS: The title of the window will be set during runtime
-#: src/translations.h:663
+#: src/translations.h:664
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:478
 msgid "Import data"
 msgstr "Tuo tietoja"
 
-#: src/translations.h:667
+#: src/translations.h:668
 msgid "&Undo"
 msgstr "K&umoa"
 
-#: src/translations.h:668
+#: src/translations.h:669
 msgid "&Redo"
 msgstr "Tee uudelleen (&R)"
 
-#: src/translations.h:669
+#: src/translations.h:670
 msgid "Cu&t"
 msgstr "Leikkaa (&T)"
 
-#: src/translations.h:670
+#: src/translations.h:671
 msgid "&Copy"
 msgstr "Kopioi (&C)"
 
-#: src/translations.h:671
+#: src/translations.h:672
 msgid "&Paste"
 msgstr "Liitä (&P)"
 
-#: src/translations.h:672 plugins/Oculars/src/ui_ocularDialog.h:1530
+#: src/translations.h:673 plugins/Oculars/src/ui_ocularDialog.h:1530
 #: plugins/Oculars/src/ui_ocularDialog.h:1539
 #: plugins/Oculars/src/ui_ocularDialog.h:1545
 #: plugins/Oculars/src/ui_ocularDialog.h:1564
 msgid "Delete"
 msgstr "Poista"
 
-#: src/translations.h:673
+#: src/translations.h:674
 msgid "Select All"
 msgstr "Valitse kaikki"
 
-#: src/translations.h:674
+#: src/translations.h:675
 msgid "Look in:"
 msgstr "Etsi kohteesta:"
 
-#: src/translations.h:675
+#: src/translations.h:676
 msgid "Directory:"
 msgstr "Hakemisto:"
 
-#: src/translations.h:676
+#: src/translations.h:677
 msgid "Folder"
 msgstr "Kansio"
 
-#: src/translations.h:677
+#: src/translations.h:678
 msgid "&Choose"
 msgstr "Valitse (&C)"
 
-#: src/translations.h:678 src/ui_configurationDialog.h:2052
+#: src/translations.h:679 src/ui_configurationDialog.h:2052
 #: src/ui_obsListDialog.h:365
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
@@ -10335,145 +10340,145 @@ msgstr "Valitse (&C)"
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: src/translations.h:679
+#: src/translations.h:680
 msgid "&Cancel"
 msgstr "Peruuta (&C)"
 
-#: src/translations.h:680
+#: src/translations.h:681
 msgid "Files of type:"
 msgstr "Tiedostot tyyppiä:"
 
-#: src/translations.h:681
+#: src/translations.h:682
 msgid "Date Modified"
 msgstr "Muokkauspäivämäärä"
 
-#: src/translations.h:682
+#: src/translations.h:683
 msgid "Directories"
 msgstr "Hakemistot"
 
-#: src/translations.h:683
+#: src/translations.h:684
 msgid "Computer"
 msgstr "Tietokone"
 
-#: src/translations.h:684
+#: src/translations.h:685
 msgid "&Open"
 msgstr "Avaa (&O)"
 
-#: src/translations.h:685
+#: src/translations.h:686
 msgid "&Save"
 msgstr "Tallenna (&S)"
 
-#: src/translations.h:686 src/ui_configurationDialog.h:1905
+#: src/translations.h:687 src/ui_configurationDialog.h:1905
 #: src/ui_configurationDialog.h:2279
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:320
 msgid "Save"
 msgstr "Tallenna"
 
-#: src/translations.h:687
+#: src/translations.h:688
 msgid "Save As:"
 msgstr "Tallenna nimellä:"
 
-#: src/translations.h:688
+#: src/translations.h:689
 msgid "Tags:"
 msgstr "Tunnisteet:"
 
-#: src/translations.h:689
+#: src/translations.h:690
 msgid "File &name:"
 msgstr "Tiedoston &nimi:"
 
-#: src/translations.h:690
+#: src/translations.h:691
 msgid "Copy &Link Location"
 msgstr "Kopioi &linkin osoite"
 
-#: src/translations.h:691
+#: src/translations.h:692
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:130
 msgid "Abort"
 msgstr "Keskeytä"
 
-#: src/translations.h:692
+#: src/translations.h:693
 msgid "Ignore"
 msgstr "Ohita"
 
-#: src/translations.h:693
+#: src/translations.h:694
 msgid "&Basic colors"
 msgstr "Perusvärit (&B)"
 
-#: src/translations.h:694
+#: src/translations.h:695
 msgid "&Pick Screen Color"
 msgstr "Valitse näyttöväri (&P)"
 
-#: src/translations.h:695
+#: src/translations.h:696
 msgid "&Custom colors"
 msgstr "Omat värit (&C)"
 
-#: src/translations.h:696
+#: src/translations.h:697
 msgid "&Add to Custom Colors"
 msgstr "Lisää omiin väreihin (&A)"
 
-#: src/translations.h:697
+#: src/translations.h:698
 msgid "Hu&e:"
 msgstr "Sävy (&e)"
 
-#: src/translations.h:698
+#: src/translations.h:699
 msgid "&Sat:"
 msgstr "Kyll. (&S):"
 
-#: src/translations.h:699
+#: src/translations.h:700
 msgid "&Val:"
 msgstr "Ar&vo:"
 
-#: src/translations.h:700
+#: src/translations.h:701
 msgid "&Red:"
 msgstr "Pun.  (&R):"
 
-#: src/translations.h:701
+#: src/translations.h:702
 msgid "&Green:"
 msgstr "Vihr (&G).:"
 
-#: src/translations.h:702
+#: src/translations.h:703
 msgid "Bl&ue:"
 msgstr "Sin (&u):"
 
-#: src/translations.h:703
+#: src/translations.h:704
 msgid "Select Color"
 msgstr "Valitse väri"
 
-#: src/translations.h:704
+#: src/translations.h:705
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Osoittimen koordinaatit %1, %2 Paina ESC lopettaaksesi"
 
-#: src/translations.h:705
+#: src/translations.h:706
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:194
 msgid "Back"
 msgstr "Taakse"
 
-#: src/translations.h:706
+#: src/translations.h:707
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:196
 msgid "Forward"
 msgstr "Eteen"
 
-#: src/translations.h:707
+#: src/translations.h:708
 msgid "Parent Directory"
 msgstr "Päähakemisto"
 
-#: src/translations.h:708
+#: src/translations.h:709
 msgid "Create New Folder"
 msgstr "Luo uusi kansio"
 
-#: src/translations.h:709
+#: src/translations.h:710
 msgid "List View"
 msgstr "Listanäkymä"
 
-#: src/translations.h:710
+#: src/translations.h:711
 msgid "Detail View"
 msgstr "Yksityiskohtainen näkymä"
 
-#: src/translations.h:711
+#: src/translations.h:712
 msgid "Recent Places"
 msgstr "Viimeisimmät paikat"
 
-#: src/translations.h:712
+#: src/translations.h:713
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -10482,47 +10487,47 @@ msgstr ""
 "%1 on jo olemassa.\n"
 "Haluatko korvata sen?"
 
-#: src/translations.h:713
+#: src/translations.h:714
 msgid "&Yes"
 msgstr "Kyllä (&Y)"
 
-#: src/translations.h:714
+#: src/translations.h:715
 msgid "&No"
 msgstr "Ei (&N)"
 
-#: src/translations.h:715
+#: src/translations.h:716
 msgid "&Select All"
 msgstr "Valitse kaikki (&S)"
 
-#: src/translations.h:716
+#: src/translations.h:717
 msgid "&Step up"
 msgstr "Askel ylö&s"
 
-#: src/translations.h:717
+#: src/translations.h:718
 msgid "Step &down"
 msgstr "Askel alas (&d)"
 
-#: src/translations.h:718
+#: src/translations.h:719
 msgid "&Rename"
 msgstr "Nimeä uudelleen (&R)"
 
-#: src/translations.h:719
+#: src/translations.h:720
 msgid "&Delete"
 msgstr "Poista (&D)"
 
-#: src/translations.h:720
+#: src/translations.h:721
 msgid "&New Folder"
 msgstr "Uusi kansio (&N)"
 
-#: src/translations.h:721
+#: src/translations.h:722
 msgid "New Folder"
 msgstr "Uusi kansio"
 
-#: src/translations.h:722
+#: src/translations.h:723
 msgid "Show &hidden files"
 msgstr "Näytä piilotetut tiedostot (&h)"
 
-#: src/translations.h:723 plugins/MeteorShowers/src/ui_MSSearchDialog.h:139
+#: src/translations.h:724 plugins/MeteorShowers/src/ui_MSSearchDialog.h:139
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:141
 msgid "Search"
 msgstr "Etsi"
@@ -29374,9 +29379,8 @@ msgstr "Valitse Sky Culture -lisenssi."
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:185
 msgid ""
 "The sky culture description is not complete. Please fill in all required "
-"fields."
+"fields correctly."
 msgstr ""
-"Taivaskulttuurin kuvaus ei ole täydellinen. Täytä kaikki pakolliset kentät."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:98
 msgid "No sky culture is set."
