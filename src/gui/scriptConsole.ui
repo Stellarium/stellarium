@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>680</width>
-    <height>394</height>
+    <width>733</width>
+    <height>432</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -28,7 +28,7 @@
    </property>
    <item>
     <widget class="TitleBar" name="titleBar">
-     <property name="title">
+     <property name="title" stdset="0">
       <string>Script console</string>
      </property>
     </widget>
@@ -66,18 +66,12 @@
          <number>3</number>
         </property>
         <item>
-         <widget class="QPushButton" name="loadButton">
+         <widget class="QToolButton" name="loadButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>28</width>
-            <height>28</height>
-           </size>
           </property>
           <property name="toolTip">
            <string>Load script from file</string>
@@ -95,18 +89,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="saveButton">
+         <widget class="QToolButton" name="saveButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>28</width>
-            <height>28</height>
-           </size>
           </property>
           <property name="toolTip">
            <string>Save script to file</string>
@@ -124,18 +112,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="clearButton">
+         <widget class="QToolButton" name="clearButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>28</width>
-            <height>28</height>
-           </size>
           </property>
           <property name="toolTip">
            <string>Clear</string>
@@ -151,12 +133,6 @@
         </item>
         <item>
          <widget class="QPushButton" name="preprocessSSCButton">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>28</height>
-           </size>
-          </property>
           <property name="toolTip">
            <string>Pre-process script using SSC preprocessor</string>
           </property>
@@ -213,18 +189,12 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="runButton">
+         <widget class="QToolButton" name="runButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>28</width>
-            <height>28</height>
-           </size>
           </property>
           <property name="toolTip">
            <string>Run script</string>
@@ -243,7 +213,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="stopButton">
+         <widget class="QToolButton" name="stopButton">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -252,12 +222,6 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>28</width>
-            <height>28</height>
-           </size>
           </property>
           <property name="toolTip">
            <string>Stop script</string>
@@ -463,18 +427,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="includeBrowseButton">
+         <widget class="QToolButton" name="includeBrowseButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>24</width>
-            <height>24</height>
-           </size>
           </property>
           <property name="text">
            <string>...</string>
@@ -535,11 +493,6 @@
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources>
