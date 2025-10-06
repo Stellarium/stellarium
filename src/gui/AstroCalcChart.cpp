@@ -133,7 +133,7 @@ const QMap<AstroCalcChart::Series, QPen> AstroCalcChart::penMap=
 #endif
 	{AstroCalcChart::AstroTwilight,          QPen(Qt::darkBlue,                   1, Qt::DashDotDotLine)},
 	{AstroCalcChart::AzVsTime,               QPen(Qt::red,                        2, Qt::SolidLine)},
-	{AstroCalcChart::MonthlyElevation,       QPen(Qt::red,                        2, Qt::SolidLine)},
+        {AstroCalcChart::MonthlyElevation,       QPen(Qt::red,                        2, Qt::DotLine)},
 	{AstroCalcChart::AngularSize1,           QPen(Qt::green,                      2, Qt::SolidLine)},
 	{AstroCalcChart::Declination1,           QPen(Qt::green,                      2, Qt::SolidLine)},
 	{AstroCalcChart::Distance1,              QPen(Qt::green,                      2, Qt::SolidLine)},
