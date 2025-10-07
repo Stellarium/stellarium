@@ -36,11 +36,11 @@
 #include <zlib.h>
 
 #ifdef CYGWIN
-  #include <malloc.h>
+#include <malloc.h>
 #endif
 
 #if defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HAIKU || defined Q_OS_SOLARIS
-  #include <sys/utsname.h>
+#include <sys/utsname.h>
 #endif
 
 namespace StelUtils
@@ -83,20 +83,20 @@ QString getOperatingSystemInfo()
 {
 	QString OS = QSysInfo::prettyProductName();
 
-        #if defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_SOLARIS
+#if defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_SOLARIS
 	struct utsname buff;
 	if (uname(&buff) != -1)
 		OS = QString("%1 %2").arg(buff.sysname, buff.release);
-	#endif
+#endif
 
-        #ifdef Q_OS_HAIKU
-        struct utsname buff;
-        if (uname(&buff) != -1)
-        {
-                QString revision = QString("%1").arg(buff.version).split(" ").first();
-                OS = QString("%1 R%2 (%3)").arg(buff.sysname, buff.release, revision);
-        }
-        #endif
+#ifdef Q_OS_HAIKU
+	struct utsname buff;
+	if (uname(&buff) != -1)
+	{
+		QString revision = QString("%1").arg(buff.version).split(" ").first();
+		OS = QString("%1 R%2 (%3)").arg(buff.sysname, buff.release, revision);
+	}
+#endif
 
 	if (OS.isEmpty() || OS==QStringLiteral("unknown"))
 		OS = "Unknown operating system";
@@ -106,11 +106,11 @@ QString getOperatingSystemInfo()
 
 QString getAddressingMode()
 {
-        QString mode("32-bit");
+	QString mode("32-bit");
         #if defined(__LP64__) || defined(_WIN64)
-        mode = "64-bit";
+	mode = "64-bit";
         #endif
-        return mode;
+	return mode;
 }
 
 double hmsStrToHours(const QString& s)
@@ -137,14 +137,14 @@ QString daysFloatToDHMS(float days)
 	remain *= 24.0f;
 	int h = static_cast<int> (remain); remain -= h;
 	remain *= 60.0f;
-	int m = static_cast<int> (remain); remain -= m; 
+	int m = static_cast<int> (remain); remain -= m;
 	remain *= 60.0f;
 
 	auto r = QString("%1%2 %3%4 %5%6 %7%8")
-	.arg(d)		.arg(qc_("d", "duration"))
-	.arg(h)		.arg(qc_("h", "duration"))
-	.arg(m)		.arg(qc_("m", "duration"))
-	.arg(remain)	.arg(qc_("s", "duration"));
+	                .arg(d)		.arg(qc_("d", "duration"))
+	                .arg(h)		.arg(qc_("h", "duration"))
+	                .arg(m)		.arg(qc_("m", "duration"))
+	                .arg(remain)	.arg(qc_("s", "duration"));
 
 	return r;
 }
@@ -182,7 +182,7 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	d = static_cast<unsigned int>(angle);
 	m = static_cast<unsigned int>((angle - d)*60);
 	s = (angle-d)*3600-60*m;
-	// workaround for rounding numbers	
+	// workaround for rounding numbers
 	if (s>59.9)
 	{
 		s = 0.;
@@ -192,7 +192,7 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	{
 		m = 0;
 		d += 1;
-	}	
+	}
 }
 
 QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool positive)
