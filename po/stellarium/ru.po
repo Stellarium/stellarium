@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-10-02 13:47+0700\n"
+"POT-Creation-Date: 2025-10-08 01:13+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -43,7 +43,7 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
 #: plugins/Quasars/src/Quasar.cpp:125 plugins/Pulsars/src/Pulsar.cpp:189
 #: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Exoplanets/src/Exoplanet.cpp:320
-#: plugins/MeteorShowers/src/MeteorShower.cpp:552
+#: plugins/MeteorShowers/src/MeteorShower.cpp:553
 msgid "Type"
 msgstr "Тип"
 
@@ -333,7 +333,7 @@ msgstr "ПСТ"
 
 #. TRANSLATORS: Center of the umbra
 #: src/core/modules/GridLinesMgr.cpp:1586
-#: plugins/Satellites/src/Satellites.cpp:3018
+#: plugins/Satellites/src/Satellites.cpp:3020
 msgid "C.U."
 msgstr "Ц.Т."
 
@@ -352,7 +352,7 @@ msgstr "Антиапекс"
 #: src/core/modules/Planet.cpp:1043 src/core/modules/StarWrapper.cpp:380
 #: src/gui/AstroCalcDialog.cpp:8542 plugins/Satellites/src/Satellite.cpp:363
 #: plugins/Satellites/src/Satellite.cpp:406
-#: plugins/MeteorShowers/src/MeteorShower.cpp:583
+#: plugins/MeteorShowers/src/MeteorShower.cpp:584
 msgctxt "speed"
 msgid "km/s"
 msgstr "км/с"
@@ -951,7 +951,7 @@ msgstr "Диаметр"
 #: src/core/modules/Planet.cpp:1370 src/core/modules/Comet.cpp:191
 #: src/core/modules/Comet.cpp:201 src/gui/StelGuiItems.cpp:981
 #: src/gui/AstroCalcDialog.cpp:3170 src/gui/AstroCalcDialog.cpp:3718
-#: src/gui/AstroCalcDialog.cpp:8477 plugins/Satellites/src/Satellites.cpp:3018
+#: src/gui/AstroCalcDialog.cpp:8477 plugins/Satellites/src/Satellites.cpp:3020
 #: plugins/Satellites/src/Satellite.cpp:359
 #: plugins/Satellites/src/Satellite.cpp:402
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1198
@@ -2271,36 +2271,36 @@ msgstr "Объекты глубокого космоса"
 msgid "Toggle DSO type filter"
 msgstr "Переключить фильтр типа ОГК"
 
-#: src/core/modules/NebulaMgr.cpp:1569 src/gui/StelDialog.cpp:336
+#: src/core/modules/NebulaMgr.cpp:1572 src/gui/StelDialog.cpp:336
 #: src/gui/ObsListDialog.cpp:588 src/StelMainView.cpp:1063
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:777
 msgid "Attention!"
 msgstr "Внимание!"
 
-#: src/core/modules/NebulaMgr.cpp:1570
+#: src/core/modules/NebulaMgr.cpp:1573
 msgid "DSO catalog version mismatch"
 msgstr "Несоответствие версии каталога ОГК"
 
-#: src/core/modules/NebulaMgr.cpp:1571 src/core/SimbadSearcher.cpp:180
+#: src/core/modules/NebulaMgr.cpp:1574 src/core/SimbadSearcher.cpp:180
 #: src/core/SimbadSearcher.cpp:182
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:93
 msgid "Found"
 msgstr "Найдено совпадение"
 
-#: src/core/modules/NebulaMgr.cpp:1573
+#: src/core/modules/NebulaMgr.cpp:1576
 msgid "Expected"
 msgstr "Ожидается"
 
-#: src/core/modules/NebulaMgr.cpp:1575
+#: src/core/modules/NebulaMgr.cpp:1578
 msgid "See Logfile for instructions."
 msgstr "Смотри инструкции в журнале запуска."
 
-#: src/core/modules/NebulaMgr.cpp:2039
+#: src/core/modules/NebulaMgr.cpp:2042
 msgctxt "context"
 msgid "pronounce"
 msgstr "произношение"
 
-#: src/core/modules/NebulaMgr.cpp:2042
+#: src/core/modules/NebulaMgr.cpp:2045
 msgctxt "context"
 msgid "english"
 msgstr "английское"
@@ -2312,7 +2312,7 @@ msgstr "английское"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=planet&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [Planet TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/planet.txt
-#: src/core/modules/Planet.cpp:132 plugins/Satellites/src/Satellites.cpp:3447
+#: src/core/modules/Planet.cpp:132 plugins/Satellites/src/Satellites.cpp:3449
 msgid "planet"
 msgstr "планета"
 
@@ -4292,12 +4292,12 @@ msgstr "Зодиак"
 msgid "Lunar Station"
 msgstr "Лунная стоянка"
 
-#: src/core/StelSkyCultureMgr.cpp:384
+#: src/core/StelSkyCultureMgr.cpp:385
 msgctxt "sky culture classification"
 msgid "ethnographic"
 msgstr "этнографическая"
 
-#: src/core/StelSkyCultureMgr.cpp:385
+#: src/core/StelSkyCultureMgr.cpp:386
 msgid ""
 "Provided by ethnographic researchers based on interviews of indigenous "
 "people."
@@ -4305,12 +4305,12 @@ msgstr ""
 "Предоставлена исследователями-этнографами на основе опросов коренных "
 "народов."
 
-#: src/core/StelSkyCultureMgr.cpp:389
+#: src/core/StelSkyCultureMgr.cpp:390
 msgctxt "sky culture classification"
 msgid "historical"
 msgstr "историческая"
 
-#: src/core/StelSkyCultureMgr.cpp:390
+#: src/core/StelSkyCultureMgr.cpp:391
 msgid ""
 "Provided by historians based on historical written sources from a (usually "
 "short) period of the past."
@@ -4318,12 +4318,12 @@ msgstr ""
 "Предоставлена историками на основе исторических письменных источников из "
 "(обычно короткого) периода прошлого."
 
-#: src/core/StelSkyCultureMgr.cpp:394
+#: src/core/StelSkyCultureMgr.cpp:395
 msgctxt "sky culture classification"
 msgid "single"
 msgstr "одиночная"
 
-#: src/core/StelSkyCultureMgr.cpp:395
+#: src/core/StelSkyCultureMgr.cpp:396
 msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
@@ -4331,12 +4331,12 @@ msgstr ""
 "Представляет один источник, такой как исторический атлас или публикации "
 "одного автора."
 
-#: src/core/StelSkyCultureMgr.cpp:399
+#: src/core/StelSkyCultureMgr.cpp:400
 msgctxt "sky culture classification"
 msgid "comparative"
 msgstr "сравнительная"
 
-#: src/core/StelSkyCultureMgr.cpp:400
+#: src/core/StelSkyCultureMgr.cpp:401
 msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
@@ -4344,12 +4344,12 @@ msgstr ""
 "Сравнивает и сопоставляет элементы, по крайней мере, из двух небесных "
 "культур друг с другом. "
 
-#: src/core/StelSkyCultureMgr.cpp:404
+#: src/core/StelSkyCultureMgr.cpp:405
 msgctxt "sky culture classification"
 msgid "traditional"
 msgstr "традиционная"
 
-#: src/core/StelSkyCultureMgr.cpp:405
+#: src/core/StelSkyCultureMgr.cpp:406
 msgid ""
 "Content represents 'common' knowledge by several members of an ethnic "
 "community, and the sky culture has been developed by members of such "
@@ -4358,12 +4358,12 @@ msgstr ""
 "Контент представляет собой «общие» знания нескольких членов этнического "
 "сообщества и члены этого сообщества разработали культуру неба."
 
-#: src/core/StelSkyCultureMgr.cpp:409
+#: src/core/StelSkyCultureMgr.cpp:410
 msgctxt "sky culture classification"
 msgid "personal"
 msgstr "персональная"
 
-#: src/core/StelSkyCultureMgr.cpp:410
+#: src/core/StelSkyCultureMgr.cpp:411
 msgid ""
 "This is a personally developed sky culture which is not founded in published"
 " historical or ethnological research. Stellarium may include it when it is "
@@ -4373,12 +4373,12 @@ msgstr ""
 " исторических или этнологических исследованиях. Stellarium может включать "
 "их, когда они 'достаточно симпатичны', фактически не одобряя её содержание."
 
-#: src/core/StelSkyCultureMgr.cpp:414
+#: src/core/StelSkyCultureMgr.cpp:415
 msgctxt "sky culture classification"
 msgid "incomplete"
 msgstr "неполная"
 
-#: src/core/StelSkyCultureMgr.cpp:415
+#: src/core/StelSkyCultureMgr.cpp:416
 msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
@@ -4386,16 +4386,16 @@ msgstr ""
 "Точность описания культуры неба не может быть дана, хотя похоже, что она "
 "построена на хорошем фундаменте. Потребуется больше работы."
 
-#: src/core/StelSkyCultureMgr.cpp:419
+#: src/core/StelSkyCultureMgr.cpp:420
 msgctxt "sky culture classification"
 msgid "undefined"
 msgstr "неопределенная"
 
-#: src/core/StelSkyCultureMgr.cpp:426
+#: src/core/StelSkyCultureMgr.cpp:427
 msgid "Classification"
 msgstr "Классификация"
 
-#: src/core/StelSkyCultureMgr.cpp:439
+#: src/core/StelSkyCultureMgr.cpp:440
 msgid ""
 "This sky culture is provided under unknown license. Please ask authors for "
 "details about license for this sky culture."
@@ -4403,7 +4403,7 @@ msgstr ""
 "Эта культура неба предоставляется по неизвестной лицензии. Пожалуйста, "
 "обратитесь к авторам за подробностями о лицензии на эту культуру неба."
 
-#: src/core/StelSkyCultureMgr.cpp:445
+#: src/core/StelSkyCultureMgr.cpp:446
 msgid ""
 "This sky culture is provided under GNU General Public License. You can use "
 "it for commercial and non-commercial purposes, freely adapt it and share "
@@ -4413,7 +4413,7 @@ msgstr ""
 "GNU. Вы можете использовать её в коммерческих и некоммерческих целях, "
 "свободно её адаптировать и делиться адаптированной работой."
 
-#: src/core/StelSkyCultureMgr.cpp:448 src/core/StelSkyCultureMgr.cpp:457
+#: src/core/StelSkyCultureMgr.cpp:449 src/core/StelSkyCultureMgr.cpp:458
 msgid ""
 "You can use it for commercial and non-commercial purposes, freely adapt it "
 "and share adapted work."
@@ -4421,7 +4421,7 @@ msgstr ""
 "Вы можете использовать её в коммерческих и некоммерческих целях, свободно "
 "адаптировать её и делиться адаптированными работами."
 
-#: src/core/StelSkyCultureMgr.cpp:454
+#: src/core/StelSkyCultureMgr.cpp:455
 msgid ""
 "This sky culture is provided under MIT License. You can use it for "
 "commercial and non-commercial purposes, freely adapt it and share adapted "
@@ -4431,19 +4431,19 @@ msgstr ""
 "её в коммерческих и некоммерческих целях, свободно её адаптировать и "
 "делиться адаптированной работой."
 
-#: src/core/StelSkyCultureMgr.cpp:463 src/core/StelSkyCultureMgr.cpp:500
+#: src/core/StelSkyCultureMgr.cpp:464 src/core/StelSkyCultureMgr.cpp:501
 msgid "This sky culture is distributed as public domain."
 msgstr "Эта культура неба распространяется как общественное достояние."
 
-#: src/core/StelSkyCultureMgr.cpp:465
+#: src/core/StelSkyCultureMgr.cpp:466
 msgid "This is distributed as public domain."
 msgstr "Распространяется как общественное достояние."
 
-#: src/core/StelSkyCultureMgr.cpp:470
+#: src/core/StelSkyCultureMgr.cpp:471
 msgid "This sky culture is provided under Creative Commons License."
 msgstr "Эта культура неба предоставляется по лицензии Creative Commons."
 
-#: src/core/StelSkyCultureMgr.cpp:475
+#: src/core/StelSkyCultureMgr.cpp:476
 msgid ""
 "You may distribute, remix, adapt, and build upon this sky culture, even "
 "commercially, as long as you credit authors for the original creation."
@@ -4452,7 +4452,7 @@ msgstr ""
 "культуру неба, даже в коммерческих целях, если вы указываете авторов "
 "оригинального творения."
 
-#: src/core/StelSkyCultureMgr.cpp:477
+#: src/core/StelSkyCultureMgr.cpp:478
 msgid ""
 "You may remix, adapt, and build upon this sky culture even for commercial "
 "purposes, as long as you credit authors and license the new creations under "
@@ -4464,7 +4464,7 @@ msgstr ""
 " на тех же условиях. Эту лицензию часто сравнивают с лицензиями на свободное"
 " и открытое программное обеспечение с авторским левом."
 
-#: src/core/StelSkyCultureMgr.cpp:480
+#: src/core/StelSkyCultureMgr.cpp:481
 msgid ""
 "You may reuse this sky culture for any purpose, including commercially; "
 "however, adapted work cannot be shared with others, and credit must be "
@@ -4475,7 +4475,7 @@ msgstr ""
 "другими, и вы должны предоставить признательность авторам изначальной "
 "работы."
 
-#: src/core/StelSkyCultureMgr.cpp:482
+#: src/core/StelSkyCultureMgr.cpp:483
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, and "
 "although your new works must also acknowledge authors and be non-commercial,"
@@ -4486,7 +4486,7 @@ msgstr ""
 "авторов и быть некоммерческими, вам не нужно лицензировать свои производные "
 "работы на тех же условиях."
 
-#: src/core/StelSkyCultureMgr.cpp:485
+#: src/core/StelSkyCultureMgr.cpp:486
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, as "
 "long as you credit authors and license your new creations under the "
@@ -4496,7 +4496,7 @@ msgstr ""
 "некоммерческих целях, если вы указываете авторов и лицензируете свои новые "
 "творения на тех же условиях."
 
-#: src/core/StelSkyCultureMgr.cpp:487
+#: src/core/StelSkyCultureMgr.cpp:488
 msgid ""
 "You may use this sky culture and share them with others as long as you "
 "credit authors, but you can’t change it in any way or use it commercially."
@@ -4505,15 +4505,15 @@ msgstr ""
 "указываете авторов, но вы не можете каким-либо образом изменить ее или "
 "использовать в коммерческих целях."
 
-#: src/core/StelSkyCultureMgr.cpp:505
+#: src/core/StelSkyCultureMgr.cpp:506
 msgid ""
 "Free Art License grants the right to freely copy, distribute, and transform."
 msgstr ""
 "Лицензия Free Art License дает право на их свободное копирование, "
 "распространение и преобразование."
 
-#: src/core/StelSkyCultureMgr.cpp:525 src/core/StelSkyCultureMgr.cpp:532
-#: src/core/StelSkyCultureMgr.cpp:539 src/gui/ConfigurationDialog.cpp:1369
+#: src/core/StelSkyCultureMgr.cpp:526 src/core/StelSkyCultureMgr.cpp:533
+#: src/core/StelSkyCultureMgr.cpp:540 src/gui/ConfigurationDialog.cpp:1369
 #: src/scripting/StelScriptMgr.cpp:651
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
@@ -4541,21 +4541,21 @@ msgstr ""
 msgid "License"
 msgstr "Лицензия"
 
-#: src/core/StelSkyCultureMgr.cpp:526 src/core/StelSkyCultureMgr.cpp:533
+#: src/core/StelSkyCultureMgr.cpp:527 src/core/StelSkyCultureMgr.cpp:534
 msgid "unknown"
 msgstr "неизвестно"
 
-#: src/core/StelSkyCultureMgr.cpp:569
+#: src/core/StelSkyCultureMgr.cpp:570
 msgid ""
 "The region indicates the geographical area of origin of a given sky culture."
 msgstr ""
 "Регион указывает географическую область происхождения данной культуры неба."
 
-#: src/core/StelSkyCultureMgr.cpp:575
+#: src/core/StelSkyCultureMgr.cpp:576
 msgid "World"
 msgstr "Мир"
 
-#: src/core/StelSkyCultureMgr.cpp:576
+#: src/core/StelSkyCultureMgr.cpp:577
 msgid ""
 "All 'modern' sky cultures are based on the IAU-approved 88 constellations "
 "with standardized boundaries and are used worldwide. The origins of these "
@@ -4565,26 +4565,26 @@ msgstr ""
 "со стандартными границами и используются во всем мире. Происхождение этих "
 "созвездий общеевропейское."
 
-#: src/core/StelSkyCultureMgr.cpp:580 src/ui_locationDialogGui.h:450
+#: src/core/StelSkyCultureMgr.cpp:581 src/ui_locationDialogGui.h:450
 msgid "Region:"
 msgstr "Регион:"
 
-#: src/core/StelSkyCultureMgr.cpp:656
+#: src/core/StelSkyCultureMgr.cpp:716
 msgctxt "Name of a section in sky culture description"
 msgid "Extras"
 msgstr "Дополнительно"
 
-#: src/core/StelSkyCultureMgr.cpp:657
+#: src/core/StelSkyCultureMgr.cpp:717
 msgctxt "Name of a section in sky culture description"
 msgid "References"
 msgstr "Ссылки"
 
-#: src/core/StelSkyCultureMgr.cpp:658
+#: src/core/StelSkyCultureMgr.cpp:718
 msgctxt "Name of a section in sky culture description"
 msgid "Authors"
 msgstr "Авторы"
 
-#: src/core/StelSkyCultureMgr.cpp:730
+#: src/core/StelSkyCultureMgr.cpp:790
 msgid "No description"
 msgstr "Без описания"
 
@@ -5508,19 +5508,19 @@ msgstr ""
 "Все эти горячие клавиши локально доступны для запуска при открытии "
 "определенного окна или вкладки."
 
-#: src/gui/HelpDialog.cpp:403 src/ui_scriptConsole.h:352
+#: src/gui/HelpDialog.cpp:403 src/ui_scriptConsole.h:345
 msgid "Script console"
 msgstr "Консоль сценариев"
 
-#: src/gui/HelpDialog.cpp:404 src/ui_scriptConsole.h:354
+#: src/gui/HelpDialog.cpp:404 src/ui_scriptConsole.h:347
 msgid "Load script from file"
 msgstr "Загрузить сценарий из файла"
 
-#: src/gui/HelpDialog.cpp:406 src/ui_scriptConsole.h:358
+#: src/gui/HelpDialog.cpp:406 src/ui_scriptConsole.h:351
 msgid "Save script to file"
 msgstr "Сохранить сценарий в файл"
 
-#: src/gui/HelpDialog.cpp:408 src/ui_scriptConsole.h:376
+#: src/gui/HelpDialog.cpp:408 src/ui_scriptConsole.h:369
 msgid "Run script"
 msgstr "Выполнить сценарий"
 
@@ -9857,8 +9857,17 @@ msgstr "Посмотрите вокруг каждого установленн�
 
 #. TRANSLATORS: Description of the sky culture tour script.
 #: src/translations.h:578
-msgid "Look at each installed sky culture."
-msgstr "Посмотрите каждую установленную культуру неба."
+msgid ""
+"Look at each installed sky culture. Label style is forced to be "
+"'Native,Translated,Modern' regardless of user setting, unless environment "
+"variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. (Style is "
+"restored at end.)"
+msgstr ""
+"Обзор всех установленных культур неба. Стиль названий принудительно "
+"устанавливается как «Родной,Переведенный,Современный» независимо от настроек"
+" пользователя, если только переменная окружения "
+"STEL_SCRIPT_OBEY_SKYCULTURE_STYLE не имеет значение «истина». (Стиль "
+"восстанавливается в конце.)"
 
 #: src/translations.h:579
 msgid "Script to demonstrate a partial lunar eclipse."
@@ -9889,10 +9898,19 @@ msgstr "Сценарий, который запускается автомати
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
-"celestial sphere over the course of a year."
+"celestial sphere over the course of a year. Label style is forced to be "
+"'Native,Translated,Modern' regardless of user setting, unless environment "
+"variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. It ends with "
+"changes in skyculture (if not disabled by env. var.), labeling style, and "
+"shows constellation figures, boundaries and ecliptic."
 msgstr ""
-"Этот сценарий демонстрирует Зодиак - линию созвездий, через которые Солнце "
-"проходит по небесной сфере в течении года."
+"Этот сценарий демонстрирует зодиакальные созвездия - линию созвездий, через "
+"которые Солнце проходит по небесной сфере в течении года. Стиль названий "
+"принудительно устанавливается как «Родной,Переведенный,Современный» "
+"независимо от настроек пользователя, если только переменная окружения "
+"STEL_SCRIPT_OBEY_SKYCULTURE_STYLE не имеет значения «истина». Он завершается"
+" изменением культуры неба (если это не отключено переменной окружения), "
+"стиля меток и отображением фигур созвездий, границ и эклиптики."
 
 #: src/translations.h:585
 msgid ""
@@ -9959,12 +9977,30 @@ msgstr ""
 "событие!"
 
 #: src/translations.h:592
-msgid "A tour of the modern constellations."
-msgstr "Экскурсия по современным созвездиям."
+msgid ""
+"A tour of the modern constellations. Label style is forced to be "
+"'Native,Translated,Modern' regardless of user setting, unless environment "
+"variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. (Style is "
+"restored at end.)"
+msgstr ""
+"Экскурсия по современным созвездиям. Стиль названий принудительно "
+"устанавливается как «Родной,Переведенный,Современный» независимо от настроек"
+" пользователя, если только переменная окружения "
+"STEL_SCRIPT_OBEY_SKYCULTURE_STYLE не имеет значение «истина». (Стиль "
+"восстанавливается в конце.)"
 
 #: src/translations.h:593
-msgid "A tour of the constellations of the selected sky culture."
-msgstr "Экскурсия по созвездиям выбранной культуры неба."
+msgid ""
+"A tour of the constellations of the selected sky culture. Label style is "
+"forced to be 'Native,Translated,Modern' regardless of user setting, unless "
+"environment variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. "
+"(Style is restored at end.)"
+msgstr ""
+"Обзор созвездий текущей культуры неба. Стиль названий принудительно "
+"устанавливается как «Родной,Переведенный,Современный» независимо от настроек"
+" пользователя, если только переменная окружения "
+"STEL_SCRIPT_OBEY_SKYCULTURE_STYLE не имеет значение «истина». (Стиль "
+"восстанавливается в конце.)"
 
 #: src/translations.h:594
 msgid "Look at the Sun from big planets of Solar System and Pluto."
@@ -11960,7 +11996,7 @@ msgstr "Справка"
 msgid "About"
 msgstr "О программе"
 
-#: src/ui_helpDialogGui.h:244 src/ui_scriptConsole.h:384
+#: src/ui_helpDialogGui.h:244 src/ui_scriptConsole.h:377
 msgid "Log"
 msgstr "Журнал"
 
@@ -12780,7 +12816,7 @@ msgstr "Только для солнечной высоты"
 msgid "Minimum Solar altitude"
 msgstr "Минимальная высота Солнца"
 
-#: src/ui_viewDialog.h:4077 src/ui_scriptConsole.h:403
+#: src/ui_viewDialog.h:4077 src/ui_scriptConsole.h:396
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:331
 msgid "..."
 msgstr "..."
@@ -14812,7 +14848,7 @@ msgstr ""
 "Точек на дюйм (для вычисления размера печати в метаданных изображения). "
 "Собственный размер печати в дюймах равен pixelSize/dpi. "
 
-#: src/ui_configurationDialog.h:2296 src/ui_scriptConsole.h:387
+#: src/ui_configurationDialog.h:2296 src/ui_scriptConsole.h:380
 msgid "Close window when script runs"
 msgstr "Закрыть окно во время работы сценария"
 
@@ -15030,39 +15066,39 @@ msgstr "Открыть вебсайт JUPOS"
 msgid "View recent GRS measurements"
 msgstr "Посмотреть последние измерения БКП"
 
-#: src/ui_scriptConsole.h:362
+#: src/ui_scriptConsole.h:355
 msgid "Clear"
 msgstr "Очистить"
 
-#: src/ui_scriptConsole.h:366
+#: src/ui_scriptConsole.h:359
 msgid "Pre-process script using SSC preprocessor"
 msgstr "Предварительная обработка сценария с помощью препроцессора SSC"
 
-#: src/ui_scriptConsole.h:371
+#: src/ui_scriptConsole.h:364
 msgid "Execute:"
 msgstr "Выполнить:"
 
-#: src/ui_scriptConsole.h:380
+#: src/ui_scriptConsole.h:373
 msgid "Stop script"
 msgstr "Остановить сценарий"
 
-#: src/ui_scriptConsole.h:383
+#: src/ui_scriptConsole.h:376
 msgid "Script"
 msgstr "Сценарий"
 
-#: src/ui_scriptConsole.h:385
+#: src/ui_scriptConsole.h:378
 msgid "Output"
 msgstr "Вывод"
 
-#: src/ui_scriptConsole.h:386
+#: src/ui_scriptConsole.h:379
 msgid "Load scripts from the User Directory by default"
 msgstr "Загружать скрипты из каталога пользователя по умолчанию"
 
-#: src/ui_scriptConsole.h:388
+#: src/ui_scriptConsole.h:381
 msgid "Clear output before script runs"
 msgstr "Очистить вывод перед запуском сценария"
 
-#: src/ui_scriptConsole.h:390
+#: src/ui_scriptConsole.h:383
 msgid ""
 "If disabled, all screenshots go to the directory set in the Configuration "
 "dialog."
@@ -15070,11 +15106,11 @@ msgstr ""
 "Если этот параметр отключен, все снимки экрана помещаются в каталог, "
 "указанный в диалоговом окне «Конфигурация»."
 
-#: src/ui_scriptConsole.h:392
+#: src/ui_scriptConsole.h:385
 msgid "Allow scripts to store screenshots to other directories"
 msgstr "Разрешить сценариям сохранять снимки экрана в другие каталоги"
 
-#: src/ui_scriptConsole.h:394
+#: src/ui_scriptConsole.h:387
 msgid ""
 "If disabled, all output goes to the user data directory. Enabling this bears"
 " some risks!"
@@ -15082,11 +15118,11 @@ msgstr ""
 "Если этот параметр отключен, весь вывод идет в каталог пользовательских "
 "данных. Включение этого сопряжено с некоторыми рисками!"
 
-#: src/ui_scriptConsole.h:396
+#: src/ui_scriptConsole.h:389
 msgid "Allow scripts to store output to arbitrary directories"
 msgstr "Разрешить сценариям сохранять вывод в произвольные каталоги"
 
-#: src/ui_scriptConsole.h:397
+#: src/ui_scriptConsole.h:390
 #: plugins/Satellites/src/ui_satellitesDialog.h:1266
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:207
 #: plugins/NavStars/src/ui_navStarsWindow.h:495
@@ -15099,15 +15135,15 @@ msgstr "Разрешить сценариям сохранять вывод в �
 msgid "Settings"
 msgstr "Настройки"
 
-#: src/ui_scriptConsole.h:399
+#: src/ui_scriptConsole.h:392
 msgid "Cursor position"
 msgstr "Позиция курсора"
 
-#: src/ui_scriptConsole.h:401
+#: src/ui_scriptConsole.h:394
 msgid "R:0 C:0"
 msgstr "Стр.:0 Кол.:0"
 
-#: src/ui_scriptConsole.h:402
+#: src/ui_scriptConsole.h:395
 msgid "Include dir:"
 msgstr "Включая каталог:"
 
@@ -18254,38 +18290,38 @@ msgid "Loading TLE"
 msgstr "Загрузка TLE"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:3354
+#: plugins/Satellites/src/Satellites.cpp:3356
 msgid "communications"
 msgstr "коммуникационные"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:3356
+#: plugins/Satellites/src/Satellites.cpp:3358
 msgid "navigation"
 msgstr "навигационные"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:3358
+#: plugins/Satellites/src/Satellites.cpp:3360
 msgid "scientific"
 msgstr "научные"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:3360
+#: plugins/Satellites/src/Satellites.cpp:3362
 msgid "earth resources"
 msgstr "земные ресурсы"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:3362
+#: plugins/Satellites/src/Satellites.cpp:3364
 msgid "geostationary"
 msgstr "геостационарные"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:3364
+#: plugins/Satellites/src/Satellites.cpp:3366
 msgid "non-operational"
 msgstr "нерабочие"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:3366
+#: plugins/Satellites/src/Satellites.cpp:3368
 msgid "observatory"
 msgstr "обсерватории"
 
@@ -18293,7 +18329,7 @@ msgstr "обсерватории"
 #. System (IRNSS) is an autonomous regional satellite navigation system being
 #. developed by the Indian Space Research Organisation (ISRO) which would be
 #. under complete control of the Indian government.
-#: plugins/Satellites/src/Satellites.cpp:3368
+#: plugins/Satellites/src/Satellites.cpp:3370
 msgid "irnss"
 msgstr "IRNSS"
 
@@ -18301,51 +18337,51 @@ msgstr "IRNSS"
 #. a proposed three-satellite regional time transfer system and Satellite
 #. Based Augmentation System for the Global Positioning System, that would be
 #. receivable within Japan.
-#: plugins/Satellites/src/Satellites.cpp:3370
+#: plugins/Satellites/src/Satellites.cpp:3372
 msgid "qzss"
 msgstr "QZSS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:3372
+#: plugins/Satellites/src/Satellites.cpp:3374
 msgid "cosmos"
 msgstr "Космос"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:3374
+#: plugins/Satellites/src/Satellites.cpp:3376
 msgid "debris"
 msgstr "мусор"
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:3376
+#: plugins/Satellites/src/Satellites.cpp:3378
 msgid "crewed"
 msgstr "пилотируемые"
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:3378
+#: plugins/Satellites/src/Satellites.cpp:3380
 msgid "resupply"
 msgstr "грузовые"
 
 #. TRANSLATORS: Satellite group: are known to broadcast TV signals
-#: plugins/Satellites/src/Satellites.cpp:3380
+#: plugins/Satellites/src/Satellites.cpp:3382
 msgid "tv"
 msgstr "ТВ"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GONETS satellites
-#: plugins/Satellites/src/Satellites.cpp:3382
+#: plugins/Satellites/src/Satellites.cpp:3384
 msgid "gonets"
 msgstr "Гонец"
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
 #. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
 #. https://celestrak.org/NORAD/elements/tle-new.txt
-#: plugins/Satellites/src/Satellites.cpp:3388
+#: plugins/Satellites/src/Satellites.cpp:3390
 msgid "tle-new"
 msgstr "новые"
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
 #. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3391
+#: plugins/Satellites/src/Satellites.cpp:3393
 msgid "last-30-days"
 msgstr "за последний месяц"
 
@@ -18354,7 +18390,7 @@ msgstr "за последний месяц"
 #. https://celestrak.org/NORAD/elements/stations.txt
 #. TRANSLATORS: CelesTrak source [Space Stations]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3395
+#: plugins/Satellites/src/Satellites.cpp:3397
 msgid "stations"
 msgstr "станции"
 
@@ -18363,7 +18399,7 @@ msgstr "станции"
 #. https://celestrak.org/NORAD/elements/visual.txt
 #. TRANSLATORS: CelesTrak source [100 (or so) Brightest]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=visual&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3399
+#: plugins/Satellites/src/Satellites.cpp:3401
 msgid "visual"
 msgstr "визуальные"
 
@@ -18372,7 +18408,7 @@ msgstr "визуальные"
 #. https://celestrak.org/NORAD/elements/active.txt
 #. TRANSLATORS: CelesTrak source [Active Satellites]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3403
+#: plugins/Satellites/src/Satellites.cpp:3405
 msgid "active"
 msgstr "активные"
 
@@ -18381,7 +18417,7 @@ msgstr "активные"
 #. https://celestrak.org/NORAD/elements/analyst.txt
 #. TRANSLATORS: CelesTrak source [Analyst Satellites]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=analyst&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3407
+#: plugins/Satellites/src/Satellites.cpp:3409
 msgid "analyst"
 msgstr "анатилич."
 
@@ -18390,7 +18426,7 @@ msgstr "анатилич."
 #. https://celestrak.org/NORAD/elements/weather.txt
 #. TRANSLATORS: CelesTrak source [Weather]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=weather&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3414
+#: plugins/Satellites/src/Satellites.cpp:3416
 msgid "weather"
 msgstr "метеоспутники"
 
@@ -18399,7 +18435,7 @@ msgstr "метеоспутники"
 #. https://celestrak.org/NORAD/elements/noaa.txt
 #. TRANSLATORS: CelesTrak source [NOAA]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3418
+#: plugins/Satellites/src/Satellites.cpp:3420
 msgid "noaa"
 msgstr "NOAA"
 
@@ -18408,7 +18444,7 @@ msgstr "NOAA"
 #. https://celestrak.org/NORAD/elements/goes.txt
 #. TRANSLATORS: CelesTrak source [GOES]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=goes&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3422
+#: plugins/Satellites/src/Satellites.cpp:3424
 msgid "goes"
 msgstr "GOES"
 
@@ -18417,7 +18453,7 @@ msgstr "GOES"
 #. https://celestrak.org/NORAD/elements/resource.txt
 #. TRANSLATORS: CelesTrak source [Earth Resources]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=resource&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3426
+#: plugins/Satellites/src/Satellites.cpp:3428
 msgid "resource"
 msgstr "ресурсы"
 
@@ -18426,7 +18462,7 @@ msgstr "ресурсы"
 #. https://celestrak.org/NORAD/elements/sarsat.txt
 #. TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3430
+#: plugins/Satellites/src/Satellites.cpp:3432
 msgid "sarsat"
 msgstr "поиск.-спас."
 
@@ -18435,7 +18471,7 @@ msgstr "поиск.-спас."
 #. https://celestrak.org/NORAD/elements/dmc.txt
 #. TRANSLATORS: CelesTrak source [Disaster Monitoring]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=dmc&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3434
+#: plugins/Satellites/src/Satellites.cpp:3436
 msgid "dmc"
 msgstr "монит. катастроф"
 
@@ -18447,7 +18483,7 @@ msgstr "монит. катастроф"
 #. TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System
 #. (TDRSS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3438
+#: plugins/Satellites/src/Satellites.cpp:3440
 msgid "tdrss"
 msgstr "TDRSS"
 
@@ -18456,7 +18492,7 @@ msgstr "TDRSS"
 #. https://celestrak.org/NORAD/elements/argos.txt
 #. TRANSLATORS: CelesTrak source [ARGOS Data Collection System]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=argos&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3442
+#: plugins/Satellites/src/Satellites.cpp:3444
 msgid "argos"
 msgstr "ARGOS"
 
@@ -18466,7 +18502,7 @@ msgstr "ARGOS"
 #. https://celestrak.org/NORAD/elements/spire.txt
 #. TRANSLATORS: CelesTrak source [Spire]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=spire&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3451
+#: plugins/Satellites/src/Satellites.cpp:3453
 msgid "spire"
 msgstr "спайр"
 
@@ -18475,7 +18511,7 @@ msgstr "спайр"
 #. https://celestrak.org/NORAD/elements/geo.txt
 #. TRANSLATORS: CelesTrak source [Active Geosynchronous]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=geo&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3458
+#: plugins/Satellites/src/Satellites.cpp:3460
 msgid "geo"
 msgstr "геосинхронные"
 
@@ -18484,7 +18520,7 @@ msgstr "геосинхронные"
 #. https://celestrak.org/satcat/gpz.php
 #. TRANSLATORS: CelesTrak source [GEO Protected Zone]:
 #. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3462
+#: plugins/Satellites/src/Satellites.cpp:3464
 msgid "gpz"
 msgstr "защищ. геосинхронные"
 
@@ -18493,7 +18529,7 @@ msgstr "защищ. геосинхронные"
 #. https://celestrak.org/satcat/gpz-plus.php
 #. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]:
 #. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3466
+#: plugins/Satellites/src/Satellites.cpp:3468
 msgid "gpz-plus"
 msgstr "защищ. геосинхронные+"
 
@@ -18505,7 +18541,7 @@ msgstr "защищ. геосинхронные+"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [INTELSAT TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/intelsat.txt
-#: plugins/Satellites/src/Satellites.cpp:3471
+#: plugins/Satellites/src/Satellites.cpp:3473
 msgid "intelsat"
 msgstr "Интелсат"
 
@@ -18516,7 +18552,7 @@ msgstr "Интелсат"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=ses&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [SES TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/ses.txt
-#: plugins/Satellites/src/Satellites.cpp:3476
+#: plugins/Satellites/src/Satellites.cpp:3478
 msgid "ses"
 msgstr "SES"
 
@@ -18526,7 +18562,7 @@ msgstr "SES"
 #. https://celestrak.org/NORAD/elements/iridium.txt
 #. TRANSLATORS: CelesTrak source [Iridium]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3480
+#: plugins/Satellites/src/Satellites.cpp:3482
 msgid "iridium"
 msgstr "Иридиум"
 
@@ -18536,7 +18572,7 @@ msgstr "Иридиум"
 #. https://celestrak.org/NORAD/elements/iridium-NEXT.txt
 #. TRANSLATORS: CelesTrak source [Iridium NEXT]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3484
+#: plugins/Satellites/src/Satellites.cpp:3486
 msgid "iridium-NEXT"
 msgstr "Иридиум (NEXT)"
 
@@ -18548,7 +18584,7 @@ msgstr "Иридиум (NEXT)"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [Starlink TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/starlink.txt
-#: plugins/Satellites/src/Satellites.cpp:3489
+#: plugins/Satellites/src/Satellites.cpp:3491
 msgid "starlink"
 msgstr "Старлинк"
 
@@ -18560,7 +18596,7 @@ msgstr "Старлинк"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [OneWeb TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/oneweb.txt
-#: plugins/Satellites/src/Satellites.cpp:3494
+#: plugins/Satellites/src/Satellites.cpp:3496
 msgid "oneweb"
 msgstr "oneweb"
 
@@ -18572,7 +18608,7 @@ msgstr "oneweb"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=orbcomm&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [ORBCOMM TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/orbcomm.txt
-#: plugins/Satellites/src/Satellites.cpp:3499
+#: plugins/Satellites/src/Satellites.cpp:3501
 msgid "orbcomm"
 msgstr "Орбкомм"
 
@@ -18582,7 +18618,7 @@ msgstr "Орбкомм"
 #. https://celestrak.org/NORAD/elements/globalstar.txt
 #. TRANSLATORS: CelesTrak source [Globalstar]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3503
+#: plugins/Satellites/src/Satellites.cpp:3505
 msgid "globalstar"
 msgstr "Глобалстар"
 
@@ -18591,7 +18627,7 @@ msgstr "Глобалстар"
 #. https://celestrak.org/NORAD/elements/swarm.txt
 #. TRANSLATORS: CelesTrak source [Swarm]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=swarm&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3507
+#: plugins/Satellites/src/Satellites.cpp:3509
 msgid "swarm"
 msgstr "SWARM"
 
@@ -18600,7 +18636,7 @@ msgstr "SWARM"
 #. https://celestrak.org/NORAD/elements/amateur.txt
 #. TRANSLATORS: CelesTrak source [Amateur Radio]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3511
+#: plugins/Satellites/src/Satellites.cpp:3513
 msgid "amateur"
 msgstr "любительские"
 
@@ -18609,7 +18645,7 @@ msgstr "любительские"
 #. https://celestrak.org/NORAD/elements/x-comm.txt
 #. TRANSLATORS: CelesTrak source [Experimental]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3515
+#: plugins/Satellites/src/Satellites.cpp:3517
 msgid "x-comm"
 msgstr "эксп. комм."
 
@@ -18618,7 +18654,7 @@ msgstr "эксп. комм."
 #. https://celestrak.org/NORAD/elements/other-comm.txt
 #. TRANSLATORS: CelesTrak source [Other Comm]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3519
+#: plugins/Satellites/src/Satellites.cpp:3521
 msgid "other-comm"
 msgstr "проч. комм."
 
@@ -18628,7 +18664,7 @@ msgstr "проч. комм."
 #. https://celestrak.org/NORAD/elements/satnogs.txt
 #. TRANSLATORS: CelesTrak source [SatNOGS]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3523
+#: plugins/Satellites/src/Satellites.cpp:3525
 msgid "satnogs"
 msgstr "SatNOGS"
 
@@ -18638,7 +18674,7 @@ msgstr "SatNOGS"
 #. https://celestrak.org/NORAD/elements/gorizont.txt
 #. TRANSLATORS: CelesTrak source [Gorizont]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gorizont&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3527
+#: plugins/Satellites/src/Satellites.cpp:3529
 msgid "gorizont"
 msgstr "Горизонт"
 
@@ -18647,7 +18683,7 @@ msgstr "Горизонт"
 #. https://celestrak.org/NORAD/elements/raduga.txt
 #. TRANSLATORS: CelesTrak source [Raduga]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=raduga&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3531
+#: plugins/Satellites/src/Satellites.cpp:3533
 msgid "raduga"
 msgstr "Радуга"
 
@@ -18657,7 +18693,7 @@ msgstr "Радуга"
 #. https://celestrak.org/NORAD/elements/molniya.txt
 #. TRANSLATORS: CelesTrak source [Molniya]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=molniya&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3535
+#: plugins/Satellites/src/Satellites.cpp:3537
 msgid "molniya"
 msgstr "Молния"
 
@@ -18665,7 +18701,7 @@ msgstr "Молния"
 #. constellation (Qianfan is a proper name)
 #. TRANSLATORS: CelesTrak source [Qianfan]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=qianfan&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3538
+#: plugins/Satellites/src/Satellites.cpp:3540
 msgid "qianfan"
 msgstr "Цяньфань"
 
@@ -18673,17 +18709,17 @@ msgstr "Цяньфань"
 #. constellation (Hulianwang is a proper name)
 #. TRANSLATORS: CelesTrak source [Hulianwang Digui]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=hulianwang&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3541
+#: plugins/Satellites/src/Satellites.cpp:3543
 msgid "hulianwang"
 msgstr "Гуовань"
 
 #. TRANSLATORS: CelesTrak source [Kuiper]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=kuiper&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3543
+#: plugins/Satellites/src/Satellites.cpp:3545
 msgid "kuiper"
 msgstr "Койпер"
 
-#: plugins/Satellites/src/Satellites.cpp:3544
+#: plugins/Satellites/src/Satellites.cpp:3546
 msgid "yamal"
 msgstr "Ямал"
 
@@ -18692,7 +18728,7 @@ msgstr "Ямал"
 #. https://celestrak.org/NORAD/elements/gnss.txt
 #. TRANSLATORS: CelesTrak source [GNSS]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gnss&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3551
+#: plugins/Satellites/src/Satellites.cpp:3553
 msgid "gnss"
 msgstr "GNSS"
 
@@ -18700,7 +18736,7 @@ msgstr "GNSS"
 #. (the Global Positioning System)
 #. TRANSLATORS: CelesTrak supplemental source [GPS TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/gps.txt
-#: plugins/Satellites/src/Satellites.cpp:3554
+#: plugins/Satellites/src/Satellites.cpp:3556
 msgid "gps"
 msgstr "GPS"
 
@@ -18710,7 +18746,7 @@ msgstr "GPS"
 #. https://celestrak.org/NORAD/elements/gps-ops.txt
 #. TRANSLATORS: CelesTrak source [GPS Operational]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3558
+#: plugins/Satellites/src/Satellites.cpp:3560
 msgid "gps-ops"
 msgstr "GPS (Раб.)"
 
@@ -18718,7 +18754,7 @@ msgstr "GPS (Раб.)"
 #. constellation (GLObal NAvigation Satellite System)
 #. TRANSLATORS: CelesTrak supplemental source [GLONASS TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/glonass.txt
-#: plugins/Satellites/src/Satellites.cpp:3561
+#: plugins/Satellites/src/Satellites.cpp:3563
 msgid "glonass"
 msgstr "ГЛОНАСС"
 
@@ -18728,7 +18764,7 @@ msgstr "ГЛОНАСС"
 #. https://celestrak.org/NORAD/elements/glo-ops.txt
 #. TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3565
+#: plugins/Satellites/src/Satellites.cpp:3567
 msgid "glo-ops"
 msgstr "ГЛОНАСС (Раб.)"
 
@@ -18738,7 +18774,7 @@ msgstr "ГЛОНАСС (Раб.)"
 #. https://celestrak.org/NORAD/elements/galileo.txt
 #. TRANSLATORS: CelesTrak source [Galileo]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=galileo&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3569
+#: plugins/Satellites/src/Satellites.cpp:3571
 msgid "galileo"
 msgstr "Галилео"
 
@@ -18748,7 +18784,7 @@ msgstr "Галилео"
 #. https://celestrak.org/NORAD/elements/beidou.txt
 #. TRANSLATORS: CelesTrak source [Beidou]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=beidou&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3573
+#: plugins/Satellites/src/Satellites.cpp:3575
 msgid "beidou"
 msgstr "Бэйдоу"
 
@@ -18759,7 +18795,7 @@ msgstr "Бэйдоу"
 #. TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System
 #. (WAAS/EGNOS/MSAS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sbas&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3577
+#: plugins/Satellites/src/Satellites.cpp:3579
 msgid "sbas"
 msgstr "SBAS"
 
@@ -18768,7 +18804,7 @@ msgstr "SBAS"
 #. https://celestrak.org/NORAD/elements/nnss.txt
 #. TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=nnss&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3581
+#: plugins/Satellites/src/Satellites.cpp:3583
 msgid "nnss"
 msgstr "NNSS"
 
@@ -18777,7 +18813,7 @@ msgstr "NNSS"
 #. https://celestrak.org/NORAD/elements/musson.txt
 #. TRANSLATORS: CelesTrak source [Russian LEO Navigation]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=musson&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3585
+#: plugins/Satellites/src/Satellites.cpp:3587
 msgid "musson"
 msgstr "навиг. LEO"
 
@@ -18786,7 +18822,7 @@ msgstr "навиг. LEO"
 #. https://celestrak.org/NORAD/elements/science.txt
 #. TRANSLATORS: CelesTrak source [Space & Earth Science]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=science&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3592
+#: plugins/Satellites/src/Satellites.cpp:3594
 msgid "science"
 msgstr "наука"
 
@@ -18795,7 +18831,7 @@ msgstr "наука"
 #. https://celestrak.org/NORAD/elements/geodetic.txt
 #. TRANSLATORS: CelesTrak source [Geodetic]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=geodetic&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3596
+#: plugins/Satellites/src/Satellites.cpp:3598
 msgid "geodetic"
 msgstr "геодезические"
 
@@ -18804,7 +18840,7 @@ msgstr "геодезические"
 #. https://celestrak.org/NORAD/elements/engineering.txt
 #. TRANSLATORS: CelesTrak source [Engineering]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=engineering&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3600
+#: plugins/Satellites/src/Satellites.cpp:3602
 msgid "engineering"
 msgstr "инженер."
 
@@ -18813,7 +18849,7 @@ msgstr "инженер."
 #. https://celestrak.org/NORAD/elements/education.txt
 #. TRANSLATORS: CelesTrak source [Education]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=education&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3604
+#: plugins/Satellites/src/Satellites.cpp:3606
 msgid "education"
 msgstr "учебные"
 
@@ -18822,7 +18858,7 @@ msgstr "учебные"
 #. https://celestrak.org/NORAD/elements/military.txt
 #. TRANSLATORS: CelesTrak source [Miscellaneous Military]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=military&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3611
+#: plugins/Satellites/src/Satellites.cpp:3613
 msgid "military"
 msgstr "военные"
 
@@ -18831,7 +18867,7 @@ msgstr "военные"
 #. https://celestrak.org/NORAD/elements/radar.txt
 #. TRANSLATORS: CelesTrak source [Radar Calibration]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=radar&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3615
+#: plugins/Satellites/src/Satellites.cpp:3617
 msgid "radar"
 msgstr "калиб. радар."
 
@@ -18840,7 +18876,7 @@ msgstr "калиб. радар."
 #. https://celestrak.org/NORAD/elements/cubesat.txt
 #. TRANSLATORS: CelesTrak source [CubeSats]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3619
+#: plugins/Satellites/src/Satellites.cpp:3621
 msgid "cubesat"
 msgstr "CubeSats"
 
@@ -18849,100 +18885,100 @@ msgstr "CubeSats"
 #. https://celestrak.org/NORAD/elements/other.txt
 #. TRANSLATORS: CelesTrak source [Other]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=other&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3623
+#: plugins/Satellites/src/Satellites.cpp:3625
 msgid "other"
 msgstr "прочие"
 
 #. TRANSLATORS: Satellite group: Meteosat
 #. TRANSLATORS: CelesTrak supplemental source [METEOSAT TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/meteosat.txt
-#: plugins/Satellites/src/Satellites.cpp:3630
+#: plugins/Satellites/src/Satellites.cpp:3632
 msgid "meteosat"
 msgstr "Meteosat"
 
 #. TRANSLATORS: Satellite group: Telesat
 #. TRANSLATORS: CelesTrak supplemental source [Telesat TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/telesat.txt
-#: plugins/Satellites/src/Satellites.cpp:3634
+#: plugins/Satellites/src/Satellites.cpp:3636
 msgid "telesat"
 msgstr "Telesat"
 
 #. TRANSLATORS: Satellite group: ISS Segments
 #. TRANSLATORS: CelesTrak supplemental source [ISS TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/iss.txt
-#: plugins/Satellites/src/Satellites.cpp:3637
+#: plugins/Satellites/src/Satellites.cpp:3639
 msgid "iss"
 msgstr "МКС"
 
 #. TRANSLATORS: Satellite group: CPF
 #. TRANSLATORS: CelesTrak supplemental source [CPF TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/cpf.txt
-#: plugins/Satellites/src/Satellites.cpp:3640
+#: plugins/Satellites/src/Satellites.cpp:3642
 msgid "cpf"
 msgstr "CPF"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3644
+#: plugins/Satellites/src/Satellites.cpp:3646
 msgid "ISS (ZARYA)"
 msgstr "МКС (Заря)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3646
+#: plugins/Satellites/src/Satellites.cpp:3648
 msgid "ISS (NAUKA)"
 msgstr "МКС (НАУКА)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3648
+#: plugins/Satellites/src/Satellites.cpp:3650
 msgid "ISS"
 msgstr "МКС"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:3650
+#: plugins/Satellites/src/Satellites.cpp:3652
 msgid "HST"
 msgstr "КТХ"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:3652
+#: plugins/Satellites/src/Satellites.cpp:3654
 msgid "SPEKTR-R"
 msgstr "Спектр-Р"
 
 #. TRANSLATORS: Satellite name: Spektr-RG Space Observatory
-#: plugins/Satellites/src/Satellites.cpp:3654
+#: plugins/Satellites/src/Satellites.cpp:3656
 msgid "SPEKTR-RG"
 msgstr "Спектр-РГ"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:3656
+#: plugins/Satellites/src/Satellites.cpp:3658
 msgid "INTEGRAL"
 msgstr "ИНТЕГРАЛ"
 
 #. TRANSLATORS: Satellite name: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:3658
+#: plugins/Satellites/src/Satellites.cpp:3660
 msgid "TIANGONG 1"
 msgstr "Тяньгун 1"
 
 #. TRANSLATORS: Satellite name: name of China's space station module
-#: plugins/Satellites/src/Satellites.cpp:3660
+#: plugins/Satellites/src/Satellites.cpp:3662
 msgid "TIANHE"
 msgstr "Тяньхэ"
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base
 #. module)
-#: plugins/Satellites/src/Satellites.cpp:3662
+#: plugins/Satellites/src/Satellites.cpp:3664
 msgid "TIANGONG (TIANHE)"
 msgstr "Тяньгун (Тяньхэ)"
 
 #. TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a
 #. satellite
-#: plugins/Satellites/src/Satellites.cpp:3667
+#: plugins/Satellites/src/Satellites.cpp:3669
 msgctxt "comms"
 msgid "uplink"
 msgstr "восходящая линия связи"
 
 #. TRANSLATORS: A downlink (DL) is the link from a satellite to a ground
 #. station
-#: plugins/Satellites/src/Satellites.cpp:3669
+#: plugins/Satellites/src/Satellites.cpp:3671
 msgctxt "comms"
 msgid "downlink"
 msgstr "нисходящая линия связи"
@@ -18951,7 +18987,7 @@ msgstr "нисходящая линия связи"
 #. which emit one or more signals (normally on a fixed frequency) whose
 #. purpose is twofold: station-keeping information (telemetry) and locates the
 #. satellite (determines its azimuth and elevation) in the sky
-#: plugins/Satellites/src/Satellites.cpp:3671
+#: plugins/Satellites/src/Satellites.cpp:3673
 msgctxt "comms"
 msgid "beacon"
 msgstr "маяк"
@@ -18959,65 +18995,65 @@ msgstr "маяк"
 #. TRANSLATORS: Telemetry is the collection of measurements or other data at
 #. satellites and their automatic transmission to receiving equipment
 #. (telecommunication) for monitoring
-#: plugins/Satellites/src/Satellites.cpp:3673
+#: plugins/Satellites/src/Satellites.cpp:3675
 msgctxt "comms"
 msgid "telemetry"
 msgstr "телеметрия"
 
 #. TRANSLATORS: The channel for transmission of video data
-#: plugins/Satellites/src/Satellites.cpp:3675
+#: plugins/Satellites/src/Satellites.cpp:3677
 msgctxt "comms"
 msgid "video"
 msgstr "видео"
 
 #. TRANSLATORS: The broadband is wide bandwidth data transmission which
 #. transports multiple signals at a wide range of frequencies
-#: plugins/Satellites/src/Satellites.cpp:3677
+#: plugins/Satellites/src/Satellites.cpp:3679
 msgctxt "comms"
 msgid "broadband"
 msgstr "широкополосная передача"
 
 #. TRANSLATORS: The channel for transmission of commands
-#: plugins/Satellites/src/Satellites.cpp:3679
+#: plugins/Satellites/src/Satellites.cpp:3681
 msgctxt "comms"
 msgid "command"
 msgstr "управление"
 
 #. TRANSLATORS: Meteorological is a service on the satellite for transmitting
 #. meteorological data to a ground station
-#: plugins/Satellites/src/Satellites.cpp:3681
+#: plugins/Satellites/src/Satellites.cpp:3683
 msgctxt "comms"
 msgid "meteorological"
 msgstr "метеорологич."
 
 #. TRANSLATORS: Maritime is a service on the satellite
-#: plugins/Satellites/src/Satellites.cpp:3683
+#: plugins/Satellites/src/Satellites.cpp:3685
 msgctxt "comms"
 msgid "maritime"
 msgstr "морская"
 
 #. TRANSLATORS: Mobile is a service on the satellite
-#: plugins/Satellites/src/Satellites.cpp:3685
+#: plugins/Satellites/src/Satellites.cpp:3687
 msgctxt "comms"
 msgid "mobile"
 msgstr "мобильная"
 
 #. TRANSLATORS: Mobile telephony is a service on the satellite
-#: plugins/Satellites/src/Satellites.cpp:3687
+#: plugins/Satellites/src/Satellites.cpp:3689
 msgctxt "comms"
 msgid "mobile telephony"
 msgstr "мобильная телефония"
 
 #. TRANSLATORS: A repeater is an electronic device that receives a signal and
 #. retransmits it.
-#: plugins/Satellites/src/Satellites.cpp:3689
+#: plugins/Satellites/src/Satellites.cpp:3691
 msgctxt "comms"
 msgid "repeater"
 msgstr "повторитель"
 
 #. TRANSLATORS: The digital repeater (or digipiter) is used in channels that
 #. transmit data by binary digital signals
-#: plugins/Satellites/src/Satellites.cpp:3691
+#: plugins/Satellites/src/Satellites.cpp:3693
 msgctxt "comms"
 msgid "digipeater"
 msgstr "диджипитер"
@@ -19025,23 +19061,23 @@ msgstr "диджипитер"
 #. TRANSLATORS: A radio band is a small frequency band (a contiguous section
 #. of the range of the radio spectrum) in which channels are usually used or
 #. set aside for the same purpose. S-band for example.
-#: plugins/Satellites/src/Satellites.cpp:3693
+#: plugins/Satellites/src/Satellites.cpp:3695
 msgctxt "comms"
 msgid "-band"
 msgstr "-диапазон"
 
-#: plugins/Satellites/src/Satellites.cpp:3694
+#: plugins/Satellites/src/Satellites.cpp:3696
 msgctxt "comms"
 msgid "crew voice"
 msgstr "голос экипажа"
 
-#: plugins/Satellites/src/Satellites.cpp:3695
+#: plugins/Satellites/src/Satellites.cpp:3697
 msgctxt "comms"
 msgid "imaging"
 msgstr "визуализация"
 
 #. TRANSLATORS: Some mode of communication via radio channel
-#: plugins/Satellites/src/Satellites.cpp:3697
+#: plugins/Satellites/src/Satellites.cpp:3699
 msgctxt "comms"
 msgid "mode"
 msgstr "режим"
@@ -27454,80 +27490,80 @@ msgstr ""
 "организации</a> и <a href=\"https://www.ta3.sk/IAUC22DB/MDC2007/\">Центра "
 "метеорных данных МАС</a>.</p>"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:139
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:142
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:422
 msgid "Confirmed"
 msgstr "Подтвержденый"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:143
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:146
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:412
 msgid "Generic"
 msgstr "Общий"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:538
+#: plugins/MeteorShowers/src/MeteorShower.cpp:539
 msgid "generic data"
 msgstr "общие данные"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:539
+#: plugins/MeteorShowers/src/MeteorShower.cpp:540
 msgid "confirmed data"
 msgstr "подтвержденные данные"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:540
+#: plugins/MeteorShowers/src/MeteorShower.cpp:541
 msgid "inactive"
 msgstr "неактивный"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:573
+#: plugins/MeteorShowers/src/MeteorShower.cpp:574
 msgid "IAU shower number"
 msgstr "Номер МАС потока"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:574
+#: plugins/MeteorShowers/src/MeteorShower.cpp:575
 msgid "Radiant drift (per solar longitude)"
 msgstr "Дрейф радианта (по солнечной долготе)"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:580
+#: plugins/MeteorShowers/src/MeteorShower.cpp:581
 msgid "Geocentric meteoric velocity"
 msgstr "Геоцентрическая скорость метеоров"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:588
+#: plugins/MeteorShowers/src/MeteorShower.cpp:589
 msgid "The population index"
 msgstr "Популяционный индекс"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:591
+#: plugins/MeteorShowers/src/MeteorShower.cpp:592
 msgid "Parent body"
 msgstr "Родоначальник"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:593
+#: plugins/MeteorShowers/src/MeteorShower.cpp:594
 msgid "Activity"
 msgstr "Активность"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:641
-#: plugins/MeteorShowers/src/MeteorShower.cpp:666
+#: plugins/MeteorShowers/src/MeteorShower.cpp:642
+#: plugins/MeteorShowers/src/MeteorShower.cpp:667
 msgid "Solar longitude "
 msgstr "Солнечная долгота"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:649
+#: plugins/MeteorShowers/src/MeteorShower.cpp:650
 msgctxt "meteor shower activity"
 msgid "Maximum"
 msgstr "Максимум"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:726
-#: plugins/MeteorShowers/src/MeteorShower.cpp:749
+#: plugins/MeteorShowers/src/MeteorShower.cpp:727
+#: plugins/MeteorShowers/src/MeteorShower.cpp:750
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:276
 msgid "Current ZHR"
 msgstr "Текущее ЗЧЧ (ZHR)"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:729
-#: plugins/MeteorShowers/src/MeteorShower.cpp:759
+#: plugins/MeteorShowers/src/MeteorShower.cpp:730
+#: plugins/MeteorShowers/src/MeteorShower.cpp:760
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:279
 msgid "Local Hourly Rate"
 msgstr "Местное часовое число"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:731
-#: plugins/MeteorShowers/src/MeteorShower.cpp:762
+#: plugins/MeteorShowers/src/MeteorShower.cpp:732
+#: plugins/MeteorShowers/src/MeteorShower.cpp:763
 msgid "Limiting magnitude"
 msgstr "Огран. звёзд. велич."
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:737
+#: plugins/MeteorShowers/src/MeteorShower.cpp:738
 msgid "variable"
 msgstr "переменная"
 
