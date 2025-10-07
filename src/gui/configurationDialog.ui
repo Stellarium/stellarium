@@ -1082,10 +1082,27 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBoxUseFormattingOutput">
+               <property name="text">
+                <string>Tabular output for coordinates and time</string>
+               </property>
+              </widget>
+             </item>
              <item row="1" column="0">
               <widget class="QCheckBox" name="checkBoxUMShortNotationSurfaceBrightness">
                <property name="text">
                 <string>Short notation for units of surface brightness</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="checkBoxDecimalDegrees">
+               <property name="toolTip">
+                <string>Use decimal degrees for coordinates</string>
+               </property>
+               <property name="text">
+                <string>Use decimal degrees</string>
                </property>
               </widget>
              </item>
@@ -1096,25 +1113,8 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="checkBoxUseFormattingOutput">
-               <property name="text">
-                <string>Tabular output for coordinates and time</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="decimalDegreeCheckBox">
-               <property name="toolTip">
-                <string>Use decimal degrees for coordinates</string>
-               </property>
-               <property name="text">
-                <string>Use decimal degrees</string>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="1">
-              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
+              <widget class="QCheckBox" name="checkBoxAzimuthFromSouth">
                <property name="toolTip">
                 <string>Activate this option to calculate azimuth from south towards west.</string>
                </property>
@@ -1123,10 +1123,20 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
+             <item row="4" column="1">
               <widget class="QCheckBox" name="checkBoxUseCCSDesignations">
                <property name="text">
                 <string>Designations for celestial coordinate systems</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="checkBoxPolarDistance">
+               <property name="toolTip">
+                <string>Use polar distance instead of declination in equatorial coordinates</string>
+               </property>
+               <property name="text">
+                <string>Polar distance, not declination</string>
                </property>
               </widget>
              </item>
@@ -2745,7 +2755,7 @@
   <customwidget>
    <class>TitleBar</class>
    <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
+   <header location="global">Dialog.hpp</header>
    <container>1</container>
   </customwidget>
   <customwidget>
@@ -2797,9 +2807,8 @@
   <tabstop>checkBoxUMSurfaceBrightness</tabstop>
   <tabstop>checkBoxUMShortNotationSurfaceBrightness</tabstop>
   <tabstop>checkBoxUseFormattingOutput</tabstop>
-  <tabstop>decimalDegreeCheckBox</tabstop>
-  <tabstop>azimuthFromSouthcheckBox</tabstop>
-  <tabstop>checkBoxUseCCSDesignations</tabstop>
+  <tabstop>checkBoxDecimalDegrees</tabstop>
+  <tabstop>checkBoxAzimuthFromSouth</tabstop>
   <tabstop>showConstellationBoundariesButtonCheckBox</tabstop>
   <tabstop>showConstellationArtsButtonCheckBox</tabstop>
   <tabstop>showAsterismLinesButtonCheckBox</tabstop>
