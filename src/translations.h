@@ -575,13 +575,13 @@ class Translations
 		// TRANSLATORS: Description of the landscape tour script.
 		N_("Look around each installed landscape.");
 		// TRANSLATORS: Description of the sky culture tour script.
-		N_("Look at each installed sky culture.");
+		N_("Look at each installed sky culture. Label style is forced to be 'Native,Translated,Modern' regardless of user setting, unless environment variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. (Style is restored at end.)");
 		N_("Script to demonstrate a partial lunar eclipse.");
 		N_("Script to demonstrate a total lunar eclipse.");
 		N_("A slow, infinite tour of the sky, looking at random objects.");
 		N_("Script to demonstrate a total solar eclipse which has happened in 2009 (location=Rangpur, Bangladesh).");
 		N_("Script which runs automatically at startup");
-		N_("This script displays the constellations of the Zodiac. That means the constellations which lie along the line which the Sun traces across the celestial sphere over the course of a year.");
+		N_("This script displays the constellations of the Zodiac. That means the constellations which lie along the line which the Sun traces across the celestial sphere over the course of a year. Label style is forced to be 'Native,Translated,Modern' regardless of user setting, unless environment variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. It ends with changes in skyculture (if not disabled by env. var.), labeling style, and shows constellation figures, boundaries and ecliptic.");
 		N_("Due to the quirks in Mercury's orbit and rotation at certain spots the sun will rise & set 3 different times in one Mercury day.");
 		N_("Just before Mars eclipses the sun, Phobos pops out from behind and eclipses it first. Takes place between Scorpio and Sagittarius on April 26, 2017.");
 		N_("Just before Mars eclipses the sun, Phobos pops out from behind and eclipses it first. Takes place between Taurus and Gemini on July 23, 2031.");
@@ -589,8 +589,8 @@ class Translations
 		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");
 		N_("Phobos races ahead of Mars and transits the sun, passes through it and then retrogrades back towards the sun and just partially transits it again (only seen in the southern hemisphere of Deimos), then Mars totally eclipses the sun while Phobos transits in darkness between Mars and Deimos. When Phobos emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to light up later.");
 		N_("Screensaver of various happenings in the Solar System. 321 events in all!");
-		N_("A tour of the modern constellations.");
-		N_("A tour of the constellations of the selected sky culture.");
+		N_("A tour of the modern constellations. Label style is forced to be 'Native,Translated,Modern' regardless of user setting, unless environment variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. (Style is restored at end.)");
+		N_("A tour of the constellations of the selected sky culture. Label style is forced to be 'Native,Translated,Modern' regardless of user setting, unless environment variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. (Style is restored at end.)");
 		N_("Look at the Sun from big planets of Solar System and Pluto.");
 		N_("Best views of Earth from other Solar System bodies in the 21st Century.");
 		N_("Transit of Venus as seen from Sydney Australia, 6th June 2012.");
