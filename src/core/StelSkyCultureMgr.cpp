@@ -683,7 +683,7 @@ QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown,
 			const auto consEngName = entry.first;
 			const auto cons = cMgr->searchByName(consEngName);
 			const auto consName = cons ? cons->getNameI18n() : consEngName;
-			textTr += "<h5>" + consName + "</h5>\n";
+                        textTr += "<h4>" + consName + "</h4>\n";
 			textTr += markdownToHTML(trans.qtranslate(entry.second.trimmed()));
 		}
 		return textTr;
