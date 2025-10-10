@@ -676,7 +676,7 @@ QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown,
 		// Now try the correct way: split the section into descriptions of individual
 		// constellations and translate each of them.
 		const auto map = getConstellationsDescriptions(textEng);
-		if (map.empty()) return textEng;
+		if (map.empty()) return markdownToHTML(textEng);
 		const auto cMgr = GETSTELMODULE(ConstellationMgr);
 		for (const auto& entry : map)
 		{
