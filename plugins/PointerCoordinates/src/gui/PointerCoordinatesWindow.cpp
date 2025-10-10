@@ -56,8 +56,11 @@ void PointerCoordinatesWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), SIGNAL(flagUsePolarDistanceChanged(bool)), this, SLOT(populateCoordinates(bool)));
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+
+	usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
 
 	connectBoolProperty(ui->checkBoxEnableAtStartup, "PointerCoordinates.enableAtStartup");
 	connectBoolProperty(ui->checkBoxShowButton,      "PointerCoordinates.showCoordinatesButton");
@@ -179,6 +182,12 @@ void PointerCoordinatesWindow::populateCoordinatesPlacesList()
 	places->blockSignals(false);	
 }
 
+void PointerCoordinatesWindow::populateCoordinates(bool polarDistance)
+{
+	usePolarDistance = polarDistance;
+	populateCoordinateSystemsList();
+}
+
 void PointerCoordinatesWindow::populateCoordinateSystemsList()
 {
 	Q_ASSERT(ui->coordinateSystemComboBox);
@@ -192,8 +201,16 @@ void PointerCoordinatesWindow::populateCoordinateSystemsList()
 	csys->clear();
 	//For each algorithm, display the localized name and store the key as user
 	//data. Unfortunately, there's no other way to do this than with a cycle.
-	csys->addItem(q_("Right ascension/Declination (J2000.0)"), "RaDecJ2000");
-	csys->addItem(q_("Right ascension/Declination"), "RaDec");
+	if (usePolarDistance)
+	{
+		csys->addItem(q_("Right ascension/Polar distance (J2000.0)"), "RaDecJ2000");
+		csys->addItem(q_("Right ascension/Polar distance"), "RaDec");
+	}
+	else
+	{
+		csys->addItem(q_("Right ascension/Declination (J2000.0)"), "RaDecJ2000");
+		csys->addItem(q_("Right ascension/Declination"), "RaDec");
+	}
 	csys->addItem(q_("Hour angle/Declination"), "HourAngle");
 	csys->addItem(q_("Ecliptic Longitude/Latitude"), "Ecliptic");
 	csys->addItem(q_("Ecliptic Longitude/Latitude (J2000.0)"), "EclipticJ2000");
