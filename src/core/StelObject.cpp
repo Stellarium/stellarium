@@ -405,7 +405,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	QString RADec;
 	if (usePolarDistance)
 	{
-		// TRANSLATORS: Right ascension/Polar Distance
+		// TRANSLATORS: Right ascension/Polar distance
 		RADec = withDesignations ? QString("&alpha;/p") : qc_("RA/PD", "celestial coordinate system");
 	}
 	else
@@ -509,7 +509,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		QString HADec;
 		if (usePolarDistance)
 		{
-			// TRANSLATORS: Hour angle/Polar Distance
+			// TRANSLATORS: Hour angle/Polar distance
 			HADec = withDesignations ? QString("h/p") : qc_("HA/PD", "celestial coordinate system");
 		}
 		else
