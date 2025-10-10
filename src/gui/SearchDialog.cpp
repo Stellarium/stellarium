@@ -278,16 +278,16 @@ void SearchDialog::populateCoordinateSystemsList()
 
 void SearchDialog::populateCoordinateData()
 {
-        setCenterOfScreenCoordinates();
-        populateCoordinateAxis();
+	setCenterOfScreenCoordinates();
+	populateCoordinateAxis();
 }
 
 void SearchDialog::populateCoordinateAxis()
 {
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-        bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
+	bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
 	bool xnormal = true;
-        QPair<double, double> minMaxLimits = usePolarDistance ? qMakePair(0., 180.) : qMakePair(-90., 90.);
+	QPair<double, double> minMaxLimits = usePolarDistance ? qMakePair(0., 180.) : qMakePair(-90., 90.);
 
 	ui->AxisXSpinBox->setDecimals(2);
 	ui->AxisYSpinBox->setDecimals(2);
@@ -296,8 +296,8 @@ void SearchDialog::populateCoordinateAxis()
 	ui->AxisXSpinBox->setMinimum(  0., true);
 	ui->AxisXSpinBox->setMaximum(360., true);
 	ui->AxisXSpinBox->setWrapping(true);
-        ui->AxisYSpinBox->setMinimum(minMaxLimits.first, true);
-        ui->AxisYSpinBox->setMaximum(minMaxLimits.second, true);
+	ui->AxisYSpinBox->setMinimum(minMaxLimits.first, true);
+	ui->AxisYSpinBox->setMaximum(minMaxLimits.second, true);
 	ui->AxisYSpinBox->setWrapping(false);
 
 	switch (getCurrentCoordinateSystem()) {		
@@ -307,7 +307,7 @@ void SearchDialog::populateCoordinateAxis()
 			ui->AxisXLabel->setText(q_("Right ascension"));
 			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
 			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::Normal);
-                        ui->AxisYLabel->setText(usePolarDistance ? q_("Polar distance") : q_("Declination"));
+			ui->AxisYLabel->setText(usePolarDistance ? q_("Polar distance") : q_("Declination"));
 			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 			xnormal = true;
@@ -372,7 +372,7 @@ void SearchDialog::createDialogContent()
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(populateCoordinateAxis()));
-        connect(&StelApp::getInstance(), SIGNAL(flagUsePolarDistanceChanged(bool)), this, SLOT(populateCoordinateData()));
+	connect(&StelApp::getInstance(), SIGNAL(flagUsePolarDistanceChanged(bool)), this, SLOT(populateCoordinateData()));
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onSearchTextChanged(const QString&)));
@@ -699,7 +699,7 @@ void SearchDialog::setSimpleStyle()
 void SearchDialog::setCenterOfScreenCoordinates()
 {
 	StelCore *core = StelApp::getInstance().getCore();
-        bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
+	bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
         const auto projector = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionMode::RefractionOff);
 	Vector2<qreal> cpos = projector->getViewportCenter();
 	Vec3d centerPos;
@@ -710,15 +710,19 @@ void SearchDialog::setCenterOfScreenCoordinates()
 	switch (getCurrentCoordinateSystem())
 	{
                 case equatorialJ2000:
-                        StelUtils::rectToSphe(&spinLong, &spinLat, centerPos);
-                        if (usePolarDistance)
-                                spinLat = M_PI_2 - spinLat;
-                        break;
+		{
+			StelUtils::rectToSphe(&spinLong, &spinLat, centerPos);
+			if (usePolarDistance)
+				spinLat = M_PI_2 - spinLat;
+			break;
+		}
                 case equatorial:
-                        StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToEquinoxEqu(centerPos, StelCore::RefractionOff));
-                        if (usePolarDistance)
-                                spinLat = M_PI_2 - spinLat;
-                        break;
+		{
+			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToEquinoxEqu(centerPos, StelCore::RefractionOff));
+			if (usePolarDistance)
+				spinLat = M_PI_2 - spinLat;
+			break;
+		}
                 case galactic:
 			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToGalactic(centerPos));
 			break;
@@ -769,7 +773,7 @@ void SearchDialog::manualPositionChanged()
 {
 	searchListModel->clearValues();
 	StelCore* core = StelApp::getInstance().getCore();
-        bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
+	bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);	
 	Vec3d pos;	
 	double spinLong=ui->AxisXSpinBox->valueRadians();
@@ -786,29 +790,29 @@ void SearchDialog::manualPositionChanged()
 	{
 		case equatorialJ2000:
 		{
-                        if (usePolarDistance)
-                                spinLat = M_PI_2 - spinLat;
+			if (usePolarDistance)
+				spinLat = M_PI_2 - spinLat;
 			StelUtils::spheToRect(spinLong, spinLat, pos);
 			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{
 				// make up vector more stable.
                                 // Strictly mount should be in a new J2000 mode, but this here also stabilizes searching J2000 coordinates.
-                                mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
+				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
 				aimUp=mvmgr->getViewUpVectorJ2000();
 			}
 			break;
 		}
 		case equatorial:
 		{
-                        if (usePolarDistance)
-                                spinLat = M_PI_2 - spinLat;
+			if (usePolarDistance)
+				spinLat = M_PI_2 - spinLat;
 			StelUtils::spheToRect(spinLong, spinLat, pos);
 			pos = core->equinoxEquToJ2000(pos, StelCore::RefractionOff);
 
 			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{
                                 // make up vector more stable.
-                                mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
+				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
 				aimUp=mvmgr->getViewUpVectorJ2000();
 			}
 			break;
