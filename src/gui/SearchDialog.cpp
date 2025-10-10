@@ -709,21 +709,21 @@ void SearchDialog::setCenterOfScreenCoordinates()
 	// Getting coordinates (in radians) of position of the center of the screen
 	switch (getCurrentCoordinateSystem())
 	{
-                case equatorialJ2000:
+		case equatorialJ2000:
 		{
 			StelUtils::rectToSphe(&spinLong, &spinLat, centerPos);
 			if (usePolarDistance)
 				spinLat = M_PI_2 - spinLat;
 			break;
 		}
-                case equatorial:
+		case equatorial:
 		{
 			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToEquinoxEqu(centerPos, StelCore::RefractionOff));
 			if (usePolarDistance)
 				spinLat = M_PI_2 - spinLat;
 			break;
 		}
-                case galactic:
+		case galactic:
 			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToGalactic(centerPos));
 			break;
 		case supergalactic:
@@ -796,7 +796,7 @@ void SearchDialog::manualPositionChanged()
 			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{
 				// make up vector more stable.
-                                // Strictly mount should be in a new J2000 mode, but this here also stabilizes searching J2000 coordinates.
+				// Strictly mount should be in a new J2000 mode, but this here also stabilizes searching J2000 coordinates.
 				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
 				aimUp=mvmgr->getViewUpVectorJ2000();
 			}
@@ -811,7 +811,7 @@ void SearchDialog::manualPositionChanged()
 
 			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{
-                                // make up vector more stable.
+				// make up vector more stable.
 				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
 				aimUp=mvmgr->getViewUpVectorJ2000();
 			}
