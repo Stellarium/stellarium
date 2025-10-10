@@ -160,7 +160,8 @@ public slots:
 
 	void setCoordinateSystem(int csID);
 	void populateCoordinateSystemsList();
-	void populateCoordinateAxis();
+        void populateCoordinateAxis(); // Called when axises data is changed
+        void populateCoordinateData(); // Called when axises data and values are changed
 	void populateRecentSearch();
 
 public:
