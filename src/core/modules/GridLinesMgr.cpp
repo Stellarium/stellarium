@@ -314,6 +314,7 @@ void SkyGrid::draw(const StelCore* core) const
 
 	const StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
 
 	// Look for all meridians and parallels intersecting with the disk bounding the viewport
 	// Check whether the pole are in the viewport
@@ -451,6 +452,10 @@ void SkyGrid::draw(const StelCore* core) const
 	for (i=0; i<maxNbIter; ++i)
 	{
 		StelUtils::rectToSphe(&lon2, &lat2, fpt);
+
+		if (usePolarDistance && (frameType==StelCore::FrameJ2000 || frameType==StelCore::FrameEquinoxEqu || frameType==StelCore::FrameFixedEquatorial))
+			lat2 = M_PI_2 - lat2;
+
 		if (withDecimalDegree)
 			userData.text = StelUtils::radToDecDegStr(lat2);
 		else
@@ -508,6 +513,10 @@ void SkyGrid::draw(const StelCore* core) const
 		for (int j=0; j<maxNbIter-i; ++j)
 		{
 			StelUtils::rectToSphe(&lon2, &lat2, fpt);
+
+			if (usePolarDistance && (frameType==StelCore::FrameJ2000 || frameType==StelCore::FrameEquinoxEqu || frameType==StelCore::FrameFixedEquatorial))
+				lat2 = M_PI_2 - lat2;
+
 			if (withDecimalDegree)
 				userData.text = StelUtils::radToDecDegStr(lat2);
 			else

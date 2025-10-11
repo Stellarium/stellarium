@@ -47,6 +47,7 @@ protected:
 private:
 	Ui_pointerCoordinatesWindowForm* ui;
 	PointerCoordinates* coord;
+	bool usePolarDistance;
 
 	void setAboutHtml();
 	void populateValues();
@@ -55,6 +56,7 @@ private:
 private slots:
 	void saveCoordinatesSettings();
 	void resetCoordinatesSettings();
+	void populateCoordinates(bool polarDistance);
 
 	void populateCoordinatesPlacesList();
 	void populateCoordinateSystemsList();

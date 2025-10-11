@@ -371,6 +371,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	const bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
 	const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
 	const bool useSouthAzimuth = app.getFlagSouthAzimuthUsage();
+	const bool usePolarDistance = app.getFlagPolarDistanceUsage();
 	const bool withTables = app.getFlagUseFormattingOutput();
 	const bool withDesignations = app.getFlagUseCCSDesignation();
 	const QString cepoch = qc_("on date", "coordinates for current epoch");
@@ -401,13 +402,24 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	if (withTables)
 		res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 
-	// TRANSLATORS: Right ascension/Declination
-	const QString RADec = withDesignations ? QString("&alpha;/&delta;") : qc_("RA/Dec", "celestial coordinate system");
+	QString RADec;
+	if (usePolarDistance)
+	{
+		// TRANSLATORS: Right ascension/Polar distance
+		RADec = withDesignations ? QString("&alpha;/p") : qc_("RA/PD", "celestial coordinate system");
+	}
+	else
+	{
+		// TRANSLATORS: Right ascension/Declination
+		RADec = withDesignations ? QString("&alpha;/&delta;") : qc_("RA/Dec", "celestial coordinate system");
+	}
 
 	if (flags&RaDecJ2000)
 	{
 		double dec_j2000, ra_j2000;
 		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getJ2000EquatorialPos(core));
+		if (usePolarDistance)
+			dec_j2000 = M_PI_2 - dec_j2000;
 		if (withDecimalDegree)
 		{
 			firstCoordinate  = StelUtils::radToDecDegStr(ra_j2000,5,false,true);
@@ -431,6 +443,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	{
 		double dec_equ, ra_equ;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,eqNow);
+		if (usePolarDistance)
+			dec_equ = M_PI_2 - dec_equ;
 		if (withDecimalDegree)
 		{
 			firstCoordinate  = StelUtils::radToDecDegStr(ra_equ,5,false,true);
@@ -455,6 +469,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		double dec_sidereal, ra_sidereal, ha_sidereal;
 		StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSiderealPosGeometric(core));
 		ra_sidereal = 2.*M_PI-ra_sidereal;
+		if (usePolarDistance)
+			dec_sidereal = M_PI_2 - dec_sidereal;
 		if (withAtmosphere && (alt_app>-2.0*M_PI/180.0)) // Don't show refracted values much below horizon where model is meaningless.
 		{
 			StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSiderealPosApparent(core));
@@ -490,8 +506,17 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			}
 		}
 
-		// TRANSLATORS: Hour angle/Declination
-		const QString HADec = withDesignations ? QString("h/&delta;") : qc_("HA/Dec", "celestial coordinate system");
+		QString HADec;
+		if (usePolarDistance)
+		{
+			// TRANSLATORS: Hour angle/Polar distance
+			HADec = withDesignations ? QString("h/p") : qc_("HA/PD", "celestial coordinate system");
+		}
+		else
+		{
+			// TRANSLATORS: Hour angle/Declination
+			HADec = withDesignations ? QString("h/&delta;") : qc_("HA/Dec", "celestial coordinate system");
+		}
 
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td>%4</td></tr>").arg(HADec, firstCoordinate, secondCoordinate, apparent);

@@ -447,6 +447,7 @@ private slots:
 	void populateWutGroups();
 
 	void updateAstroCalcData();
+	void updateEquatorialData();
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 	void changePCTab(int index);
@@ -614,8 +615,9 @@ private:
 	//! @arg horizontal coord are horizontal (alt-azimuthal). Use degrees/degrees. Else use Hours/degrees.
 	//! @arg southAzimuth (relevant only for horizontal=true) count azimuth from south.
 	//! @arg decimalDegrees use decimal format, not DMS/HMS
+	//! @arg polarDistance use polar distance, not declination
 	//! @return QPair(lngStr, latStr) formatted output strings
-	static QPair<QString, QString> getStringCoordinates(const Vec3d &coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees);
+	static QPair<QString, QString> getStringCoordinates(const Vec3d &coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees, const bool polarDistance);
 	void fillWUTTable(const QString &objectName, const QString &designation, float magnitude, const Vec4d &RTSTime, double maxElevation,
 			  double angularSize, const QString &constellation, const QString &otype, bool decimalDegrees = false);
 	void fillCelestialPositionTable(const QString &objectName, const QString &RA, const QString &Dec, double magnitude,
@@ -662,6 +664,8 @@ private:
 	bool findPreciseOrbitalPoint(QPair<double, double>* out, PlanetP object1, double JD, double stopJD, double step, bool minimal);
 	inline double findHeliocentricDistance(double JD, PlanetP object1) const {return object1->getHeliocentricEclipticPos(JD+core->computeDeltaT(JD)/86400.).norm();}
 	bool isSecondObjectRight(double JD, PlanetP object1, StelObjectP object2);
+
+	bool flagPolarDistance = false;
 
 	// Signal that a plot has to be redone
 	bool plotAltVsTime = false;

@@ -199,8 +199,11 @@ void AstroCalcDialog::createDialogContent()
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
 
+	flagPolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
+
 	// Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), SIGNAL(flagUsePolarDistanceChanged(bool)), this, SLOT(updateEquatorialData()));
 	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &AstroCalcDialog::populateCelestialNames);
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->stackListWidget->setCurrentRow(0);
@@ -693,6 +696,14 @@ void AstroCalcDialog::searchWutClear()
 	ui->wutMatchingObjectsLineEdit->clear();	
 }
 
+void AstroCalcDialog::updateEquatorialData()
+{
+	flagPolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
+
+	currentCelestialPositions();
+	updateGeneratedEphemeris();
+}
+
 void AstroCalcDialog::updateAstroCalcData()
 {
 	drawAltVsTimeDiagram();
@@ -875,8 +886,16 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 	{
 		// TRANSLATORS: right ascension
 		positionsHeader << q_("RA (J2000)");
-		// TRANSLATORS: declination
-		positionsHeader << q_("Dec (J2000)");
+		if (flagPolarDistance)
+		{
+			// TRANSLATORS: polar distance
+			positionsHeader << q_("PD (J2000)");
+		}
+		else
+		{
+			// TRANSLATORS: declination
+			positionsHeader << q_("Dec (J2000)");
+		}
 	}
 	if (celType == 12 || celType == 102 || celType == 111) // check for dark nebulae
 	{
@@ -1176,7 +1195,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 			if (obj->objectInDisplayedCatalog() && obj->objectInAllowedSizeRangeLimits() && passByBrightness && obj->isAboveRealHorizon(core))
 			{
-				coordStrings = getStringCoordinates(horizon ? obj->getAltAzPosAuto(core) : obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegree);
+				coordStrings = getStringCoordinates(horizon ? obj->getAltAzPosAuto(core) : obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
 
 				QString celObjName = obj->getNameI18n();
 				QString celObjId = obj->getDSODesignation();
@@ -1286,9 +1305,9 @@ void AstroCalcDialog::currentCelestialPositions()
 				Vec3d pos = planet->getJ2000EquatorialPos(core);
 
 				if (horizon)
-					coordStrings = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
+					coordStrings = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
 				else
-					coordStrings = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegree);
+					coordStrings = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
 
 				QString extra = QString::number(pos.norm(), 'f', 5); // A.U.
 
@@ -1365,9 +1384,9 @@ void AstroCalcDialog::currentCelestialPositions()
 			if (static_cast<double>(obj->getVMagnitudeWithExtinction(core)) <= mag && obj->isAboveRealHorizon(core))
 			{
 				if (horizon)
-					coordStrings = getStringCoordinates(obj->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
+					coordStrings = getStringCoordinates(obj->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
 				else
-					coordStrings = getStringCoordinates(obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegree);
+					coordStrings = getStringCoordinates(obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
 
 				if (celTypeId == 170) // double stars
 				{
@@ -1418,7 +1437,7 @@ void AstroCalcDialog::currentCelestialPositions()
 	ui->celestialPositionsTreeWidget->sortItems(ui->celestialPositionsTreeWidget->sortColumn(), Qt::AscendingOrder);
 }
 
-QPair<QString, QString> AstroCalcDialog::getStringCoordinates(const Vec3d &coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees)
+QPair<QString, QString> AstroCalcDialog::getStringCoordinates(const Vec3d &coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees, const bool polarDistance)
 {
 	double lng, lat;
 	QString lngStr, latStr;
@@ -1442,6 +1461,8 @@ QPair<QString, QString> AstroCalcDialog::getStringCoordinates(const Vec3d &coord
 	}
 	else
 	{
+		if (polarDistance)
+			lat = M_PI_2 - lat;
 		if (decimalDegrees)
 		{
 			lngStr = StelUtils::radToDecDegStr(lng, 5, false, true);
@@ -1781,8 +1802,16 @@ void AstroCalcDialog::setEphemerisHeaderNames()
 	{
 		// TRANSLATORS: right ascension
 		ephemerisHeader << q_("RA (J2000)");
-		// TRANSLATORS: declination
-		ephemerisHeader << q_("Dec (J2000)");
+		if (flagPolarDistance)
+		{
+			// TRANSLATORS: polar distance
+			ephemerisHeader << q_("PD (J2000)");
+		}
+		else
+		{
+			// TRANSLATORS: declination
+			ephemerisHeader << q_("Dec (J2000)");
+		}
 	}
 	// TRANSLATORS: magnitude
 	ephemerisHeader << q_("Mag.");
@@ -2052,7 +2081,7 @@ void AstroCalcDialog::generateEphemeris()
 				pos = obj->getJ2000EquatorialPos(core);
 				sunPos = sun->getJ2000EquatorialPos(core);
 			}
-			QPair<QString, QString> coordStrings = getStringCoordinates(pos, useHorizontalCoords, useSouthAzimuth, withDecimalDegree);
+			QPair<QString, QString> coordStrings = getStringCoordinates(pos, useHorizontalCoords, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
 
 			Ephemeris item;
 			item.coord = pos;
@@ -2927,7 +2956,7 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 			core->update(0);
 			double az, alt;
 			StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
-			QPair<QString, QString> coordStrings = getStringCoordinates(moon->getAltAzPosAuto(core), true, useSouthAzimuth, withDecimalDegree);
+			QPair<QString, QString> coordStrings = getStringCoordinates(moon->getAltAzPosAuto(core), true, useSouthAzimuth, withDecimalDegree, flagPolarDistance);
 			QString azimuthStr = coordStrings.first;
 			QString altitudeStr = coordStrings.second;
 			treeItem->setText(LunarEclipseContactAltitude, altitudeStr);

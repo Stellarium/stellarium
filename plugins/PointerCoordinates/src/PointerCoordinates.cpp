@@ -126,6 +126,7 @@ void PointerCoordinates::draw(StelCore *core)
 
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 
 	QString coordsSystem, cxt, cyt;
@@ -137,7 +138,13 @@ void PointerCoordinates::draw(StelCore *core)
 		case RaDecJ2000:
 		{
 			StelUtils::rectToSphe(&cx,&cy,mousePosition); // Calculate RA/DE (J2000.0) and show it...
-			coordsSystem = qc_("RA/Dec (J2000.0)", "abbreviated in the plugin");
+			if (usePolarDistance)
+			{
+				coordsSystem = qc_("RA/PD (J2000.0)", "abbreviated in the plugin");
+				cy = M_PI_2 - cy;
+			}
+			else
+				coordsSystem = qc_("RA/Dec (J2000.0)", "abbreviated in the plugin");
 			if (withDecimalDegree)
 			{
 				cxt = StelUtils::radToDecDegStr(cx, 5, false, true);
@@ -153,7 +160,13 @@ void PointerCoordinates::draw(StelCore *core)
 		case RaDec:
 		{
 			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition, StelCore::RefractionOff)); // Calculate RA/DE and show it...
-			coordsSystem = qc_("RA/Dec", "abbreviated in the plugin");
+			if (usePolarDistance)
+			{
+				coordsSystem = qc_("RA/PD", "abbreviated in the plugin");
+				cy = M_PI_2 - cy;
+			}
+			else
+				coordsSystem = qc_("RA/Dec", "abbreviated in the plugin");
 			if (withDecimalDegree)
 			{
 				cxt = StelUtils::radToDecDegStr(cx, 5, false, true);

@@ -699,6 +699,7 @@ void StelApp::init(QSettings* conf)
 
 	setFlagShowDecimalDegrees(confSettings->value("gui/flag_show_decimal_degrees", false).toBool());
 	setFlagSouthAzimuthUsage(confSettings->value("gui/flag_use_azimuth_from_south", false).toBool());
+	setFlagPolarDistanceUsage(confSettings->value("gui/flag_use_polar_distance", false).toBool());
 	setFlagUseFormattingOutput(confSettings->value("gui/flag_use_formatting_output", false).toBool());
 	setFlagUseCCSDesignation(confSettings->value("gui/flag_use_ccs_designations", false).toBool());
 	setFlagOverwriteInfoColor(confSettings->value("gui/flag_overwrite_info_color", false).toBool());	
@@ -1280,6 +1281,16 @@ void StelApp::setFlagSouthAzimuthUsage(bool use)
 		flagUseAzimuthFromSouth=use;
 		StelApp::immediateSave("gui/flag_use_azimuth_from_south", use);
 		emit flagUseAzimuthFromSouthChanged(use);
+	}
+}
+
+void StelApp::setFlagPolarDistanceUsage(bool use)
+{
+	if (flagUsePolarDistance!=use)
+	{
+		flagUsePolarDistance=use;
+		StelApp::immediateSave("gui/flag_use_polar_distance", use);
+		emit flagUsePolarDistanceChanged(use);
 	}
 }
 
