@@ -188,7 +188,7 @@ void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter) con
 	drawNames(core, sPainter, defaultConstellationNameColor);
 }
 
-QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId) const
+QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId, const bool mergeLines) const
 {
 	QJsonObject json;
 
@@ -210,6 +210,11 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId) const
 		{
 			linesArray.append(coord.toJson());
 		}
+	}
+
+	if (mergeLines)
+	{
+		mergeLinesIntoPolylines(linesArray);
 	}
 
 	json["id"]    = "CON " + skyCultureId + " " + id;
@@ -283,4 +288,81 @@ void scm::ScmConstellation::hide()
 void scm::ScmConstellation::show()
 {
 	isHidden = false;
+}
+
+void scm::ScmConstellation::mergeLinesIntoPolylines(QJsonArray &lines) const
+{
+	if (lines.size() < 2)
+	{
+		// Nothing to merge
+		return;
+	}
+
+	// Step 1: merge line ends with other line starts
+	for (int i = 0; i < lines.size(); ++i)
+	{
+		QJsonArray currentLine = lines.at(i).toArray();
+		QJsonValue currentEnd  = currentLine.last();
+
+		// Look for a line that starts where the current line ends
+		for (int j = i + 1; j < lines.size(); ++j)
+		{
+			QJsonArray nextLine  = lines.at(j).toArray();
+			QJsonValue nextStart = nextLine.first();
+
+			// Merge nextLine into currentLine
+			if (currentEnd == nextStart)
+			{
+				// Append all points from nextLine except the first (which is duplicate)
+				for (int k = 1; k < nextLine.size(); ++k)
+				{
+					currentLine.append(nextLine.at(k));
+				}
+				currentEnd = currentLine.last();
+
+				// Update the merged lines array
+				lines.replace(i, currentLine);
+				lines.removeAt(j);
+				--i;       // Recheck the merged line
+				j = i + 1; // Reset j to i + 1 to continue merging
+				break;
+			}
+		}
+	}
+
+	// Step 2: merge line starts with other line ends
+	for (int i = 0; i < lines.size(); ++i)
+	{
+		QJsonArray currentLine  = lines.at(i).toArray();
+		QJsonValue currentStart = currentLine.first();
+
+		// Look for a line that ends where the current line starts
+		for (int j = i + 1; j < lines.size(); ++j)
+		{
+			QJsonArray nextLine = lines.at(j).toArray();
+			QJsonValue nextEnd  = nextLine.last();
+
+			if (currentStart == nextEnd)
+			{
+				// Prepend all points from nextLine except the last (which is duplicate)
+				QJsonArray newCurrentLine;
+				for (int k = 0; k < nextLine.size() - 1; ++k)
+				{
+					newCurrentLine.append(nextLine.at(k));
+				}
+				for (int k = 0; k < currentLine.size(); ++k)
+				{
+					newCurrentLine.append(currentLine.at(k));
+				}
+				currentLine  = newCurrentLine;
+				currentStart = currentLine.first();
+
+				lines.replace(i, currentLine);
+				lines.removeAt(j);
+				--i;       // Recheck the merged line
+				j = i + 1; // Reset j to i + 1 to continue merging
+				break;
+			}
+		}
+	}
 }
