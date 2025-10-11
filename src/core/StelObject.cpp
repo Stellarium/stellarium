@@ -419,7 +419,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		double dec_j2000, ra_j2000;
 		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getJ2000EquatorialPos(core));
 		if (usePolarDistance)
-			dec_j2000 = M_PI_2f - dec_j2000;
+			dec_j2000 = M_PI_2 - dec_j2000;
 		if (withDecimalDegree)
 		{
 			firstCoordinate  = StelUtils::radToDecDegStr(ra_j2000,5,false,true);
@@ -444,7 +444,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		double dec_equ, ra_equ;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,eqNow);
 		if (usePolarDistance)
-			dec_equ = M_PI_2f - dec_equ;
+			dec_equ = M_PI_2 - dec_equ;
 		if (withDecimalDegree)
 		{
 			firstCoordinate  = StelUtils::radToDecDegStr(ra_equ,5,false,true);
@@ -470,7 +470,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSiderealPosGeometric(core));
 		ra_sidereal = 2.*M_PI-ra_sidereal;
 		if (usePolarDistance)
-			dec_sidereal = M_PI_2f - dec_sidereal;
+			dec_sidereal = M_PI_2 - dec_sidereal;
 		if (withAtmosphere && (alt_app>-2.0*M_PI/180.0)) // Don't show refracted values much below horizon where model is meaningless.
 		{
 			StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSiderealPosApparent(core));
