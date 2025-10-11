@@ -14,11 +14,6 @@ A central concept within this system is the *determinative star*. Before the 17t
 
 **The determinative stars of the Twenty-eight Lunar Mansions were of particular importance, forming—together with the North Celestial Pole—the fundamental reference framework for the ancient Chinese equatorial coordinate system.** 
 
-In ancient China, astronomers employed two key measurements to locate stars:
-
-- **Mansion Entry Degree** , defined as the difference in right ascension between the target object and the determinative star of its host lunar mansion, and  
-- **Polar Distance Degree** , defined as the angular distance between the object and the North Celestial Pole.
-
 Below is *Xinyixiangfayao Star Map* from Su Song(苏颂, 1020-1101 AD).
 
 ![](illustrations/xyxfy.png)
@@ -35,7 +30,7 @@ In their work *Roving China Heavens*, Qi Rui (齐锐) and Wan Haoyi (万昊宜) 
 
 Due to the limitations of observational technology and potential errors in transmission, different scholarly reconstructions may vary slightly. Based on the aforementioned works, Stellarium faithfully reconstructs the Chinese night sky of 1052 AD.
 
-### Planets
+### Sun, Moon and Planets
 
 Great Yang (太阳, Tàiyáng): The Sun. In Chinese philosophy, it represents the pinnacle of Yang energy.
 
