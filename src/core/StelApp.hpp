@@ -78,10 +78,10 @@ class SpoutSender;
 class StelApp : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(bool nightMode READ getVisionModeNight WRITE setVisionModeNight NOTIFY visionNightModeChanged)
+	Q_PROPERTY(bool nightMode               READ getVisionModeNight         WRITE setVisionModeNight         NOTIFY visionNightModeChanged)
 	Q_PROPERTY(bool flagShowDecimalDegrees  READ getFlagShowDecimalDegrees  WRITE setFlagShowDecimalDegrees  NOTIFY flagShowDecimalDegreesChanged)
 	Q_PROPERTY(bool flagUseAzimuthFromSouth READ getFlagSouthAzimuthUsage   WRITE setFlagSouthAzimuthUsage   NOTIFY flagUseAzimuthFromSouthChanged)
-	Q_PROPERTY(bool flagUsePolarDistance READ getFlagPolarDistanceUsage   WRITE setFlagPolarDistanceUsage   NOTIFY flagUsePolarDistanceChanged)
+	Q_PROPERTY(bool flagUsePolarDistance    READ getFlagPolarDistanceUsage  WRITE setFlagPolarDistanceUsage  NOTIFY flagUsePolarDistanceChanged)
 	Q_PROPERTY(bool flagUseCCSDesignation   READ getFlagUseCCSDesignation   WRITE setFlagUseCCSDesignation   NOTIFY flagUseCCSDesignationChanged)
 	Q_PROPERTY(bool flagUseFormattingOutput READ getFlagUseFormattingOutput WRITE setFlagUseFormattingOutput NOTIFY flagUseFormattingOutputChanged)
 	Q_PROPERTY(bool flagOverwriteInfoColor  READ getFlagOverwriteInfoColor  WRITE setFlagOverwriteInfoColor  NOTIFY flagOverwriteInfoColorChanged)
