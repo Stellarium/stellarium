@@ -198,11 +198,11 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->de441checkBox, SIGNAL(clicked()), this, SLOT(de441ButtonClicked()));
 	resetEphemControls();
 
-	connectBoolProperty(ui->nutationCheckBox, "StelCore.flagUseNutation");
-	connectBoolProperty(ui->aberrationCheckBox, "StelCore.flagUseAberration");
+	connectBoolProperty(ui->nutationCheckBox,    "StelCore.flagUseNutation");
+	connectBoolProperty(ui->aberrationCheckBox,  "StelCore.flagUseAberration");
 	connectDoubleProperty(ui->aberrationSpinBox, "StelCore.aberrationFactor");
-	connectBoolProperty(ui->parallaxCheckBox, "StelCore.flagUseParallax");
-	connectDoubleProperty(ui->parallaxSpinBox, "StelCore.parallaxFactor");
+	connectBoolProperty(ui->parallaxCheckBox,    "StelCore.flagUseParallax");
+	connectDoubleProperty(ui->parallaxSpinBox,   "StelCore.parallaxFactor");
 	connectBoolProperty(ui->topocentricCheckBox, "StelCore.flagUseTopocentricCoordinates");
 	// We cannot link flag setting to immediate storing. (GH #4112)
 	// The immediate-store is now triggered by this click
@@ -311,50 +311,51 @@ void ConfigurationDialog::createDialogContent()
 
 	ui->diskViewportCheckbox->setChecked(proj->getMaskType() == StelProjector::MaskDisk);
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
-	connectBoolProperty(ui->autoZoomResetsDirectionCheckbox, "StelMovementMgr.flagAutoZoomOutResetsDirection");
+	connectBoolProperty(ui->autoZoomResetsDirectionCheckbox,    "StelMovementMgr.flagAutoZoomOutResetsDirection");
 
-	connectBoolProperty(ui->showQuitButtonCheckBox,				"StelGui.flagShowQuitButton");
-	connectBoolProperty(ui->showFlipButtonsCheckbox,				"StelGui.flagShowFlipButtons");
-	connectBoolProperty(ui->showNebulaBgButtonCheckbox,			"StelGui.flagShowNebulaBackgroundButton");
+	connectBoolProperty(ui->showQuitButtonCheckBox,             "StelGui.flagShowQuitButton");
+	connectBoolProperty(ui->showFlipButtonsCheckbox,            "StelGui.flagShowFlipButtons");
+	connectBoolProperty(ui->showNebulaBgButtonCheckbox,         "StelGui.flagShowNebulaBackgroundButton");
 	
-	connectBoolProperty(ui->showObsListButtonCheckBox,	"StelGui.flagShowObsListButton");
+	connectBoolProperty(ui->showObsListButtonCheckBox,          "StelGui.flagShowObsListButton");
 	
-	connectBoolProperty(ui->showICRSGridButtonCheckBox,			"StelGui.flagShowICRSGridButton");
-	connectBoolProperty(ui->showGalacticGridButtonCheckBox,		"StelGui.flagShowGalacticGridButton");
-	connectBoolProperty(ui->showEclipticGridButtonCheckBox,		"StelGui.flagShowEclipticGridButton");
-	connectBoolProperty(ui->showHipsButtonCheckBox,				"StelGui.flagShowHiPSButton");
-	connectBoolProperty(ui->showDSSButtonCheckbox,				"StelGui.flagShowDSSButton");
-	connectBoolProperty(ui->showGotoSelectedButtonCheckBox,		"StelGui.flagShowGotoSelectedObjectButton");
-	connectBoolProperty(ui->showNightmodeButtonCheckBox,		"StelGui.flagShowNightmodeButton");
-	connectBoolProperty(ui->showFullscreenButtonCheckBox,			"StelGui.flagShowFullscreenButton");
-	connectBoolProperty(ui->showCardinalButtonCheckBox,			"StelGui.flagShowCardinalButton");
-	connectBoolProperty(ui->showCompassButtonCheckBox,			"StelGui.flagShowCompassButton");
+	connectBoolProperty(ui->showICRSGridButtonCheckBox,         "StelGui.flagShowICRSGridButton");
+	connectBoolProperty(ui->showGalacticGridButtonCheckBox,     "StelGui.flagShowGalacticGridButton");
+	connectBoolProperty(ui->showEclipticGridButtonCheckBox,     "StelGui.flagShowEclipticGridButton");
+	connectBoolProperty(ui->showHipsButtonCheckBox,             "StelGui.flagShowHiPSButton");
+	connectBoolProperty(ui->showDSSButtonCheckbox,              "StelGui.flagShowDSSButton");
+	connectBoolProperty(ui->showGotoSelectedButtonCheckBox,     "StelGui.flagShowGotoSelectedObjectButton");
+	connectBoolProperty(ui->showNightmodeButtonCheckBox,        "StelGui.flagShowNightmodeButton");
+	connectBoolProperty(ui->showFullscreenButtonCheckBox,       "StelGui.flagShowFullscreenButton");
+	connectBoolProperty(ui->showCardinalButtonCheckBox,         "StelGui.flagShowCardinalButton");
+	connectBoolProperty(ui->showCompassButtonCheckBox,          "StelGui.flagShowCompassButton");
 
 	connectBoolProperty(ui->showConstellationBoundariesButtonCheckBox, "StelGui.flagShowConstellationBoundariesButton");
 	connectBoolProperty(ui->showConstellationArtsButtonCheckBox, "StelGui.flagShowConstellationArtsButton");
-	connectBoolProperty(ui->showAsterismLinesButtonCheckBox,		"StelGui.flagShowAsterismLinesButton");
-	connectBoolProperty(ui->showAsterismLabelsButtonCheckBox,	"StelGui.flagShowAsterismLabelsButton");
+	connectBoolProperty(ui->showAsterismLinesButtonCheckBox,     "StelGui.flagShowAsterismLinesButton");
+	connectBoolProperty(ui->showAsterismLabelsButtonCheckBox,    "StelGui.flagShowAsterismLabelsButton");
 
-	connectBoolProperty(ui->decimalDegreeCheckBox,				"StelApp.flagShowDecimalDegrees");
-	connectBoolProperty(ui->azimuthFromSouthcheckBox,			"StelApp.flagUseAzimuthFromSouth");
+	connectBoolProperty(ui->checkBoxDecimalDegrees,              "StelApp.flagShowDecimalDegrees");
+	connectBoolProperty(ui->checkBoxAzimuthFromSouth,            "StelApp.flagUseAzimuthFromSouth");
+	connectBoolProperty(ui->checkBoxPolarDistance,               "StelApp.flagUsePolarDistance");
 
-	connectBoolProperty(ui->mouseTimeoutCheckbox,				"MainView.flagCursorTimeout");
-	connectDoubleProperty(ui->mouseTimeoutSpinBox,				"MainView.cursorTimeout");
-	connectIntProperty(ui->minFpsSpinBox,                                   "MainView.minFps");
-	connectIntProperty(ui->maxFpsSpinBox,                                   "MainView.maxFps");
-	connectBoolProperty(ui->useButtonsBackgroundCheckBox,		"StelGui.flagUseButtonsBackground");
-	connectBoolProperty(ui->indicationMountModeCheckBox,			"StelMovementMgr.flagIndicationMountMode");
-	connectBoolProperty(ui->kineticScrollingCheckBox,				"StelGui.flagUseKineticScrolling");
-	connectBoolProperty(ui->focusOnDaySpinnerCheckBox,			"StelGui.flagEnableFocusOnDaySpinner");
+	connectBoolProperty(ui->mouseTimeoutCheckbox,                "MainView.flagCursorTimeout");
+	connectDoubleProperty(ui->mouseTimeoutSpinBox,               "MainView.cursorTimeout");
+	connectIntProperty(ui->minFpsSpinBox,                        "MainView.minFps");
+	connectIntProperty(ui->maxFpsSpinBox,                        "MainView.maxFps");
+	connectBoolProperty(ui->useButtonsBackgroundCheckBox,        "StelGui.flagUseButtonsBackground");
+	connectBoolProperty(ui->indicationMountModeCheckBox,         "StelMovementMgr.flagIndicationMountMode");
+	connectBoolProperty(ui->kineticScrollingCheckBox,            "StelGui.flagUseKineticScrolling");
+	connectBoolProperty(ui->focusOnDaySpinnerCheckBox,           "StelGui.flagEnableFocusOnDaySpinner");
 	ui->overwriteTextColorButton->setup("StelApp.overwriteInfoColor", "color/info_text_color");
 	ui->daylightTextColorButton ->setup("StelApp.daylightInfoColor",  "color/daylight_text_color");
-	connectIntProperty(ui->solarSystemThreadNumberSpinBox, "SolarSystem.extraThreads");
+	connectIntProperty(ui->solarSystemThreadNumberSpinBox,       "SolarSystem.extraThreads");
 	ui->solarSystemThreadNumberSpinBox->setMaximum(QThreadPool::globalInstance()->maxThreadCount()-1);
 
 	// Font selection. We use a hidden, but documented entry in config.ini to optionally show a font selection option.
-	connectIntProperty(ui->screenFontSizeSpinBox, "StelApp.screenFontSize");
-	connectIntProperty(ui->guiFontSizeSpinBox, "StelApp.guiFontSize");
-	connectDoubleProperty(ui->screenButtonScaleSpinBox, "StelApp.screenButtonScale");
+	connectIntProperty(ui->screenFontSizeSpinBox,                "StelApp.screenFontSize");
+	connectIntProperty(ui->guiFontSizeSpinBox,                   "StelApp.guiFontSize");
+	connectDoubleProperty(ui->screenButtonScaleSpinBox,          "StelApp.screenButtonScale");
 	if (StelApp::getInstance().getSettings()->value("gui/flag_font_selection", true).toBool())
 	{
 		populateFontWritingSystemCombo();
@@ -398,17 +399,17 @@ void ConfigurationDialog::createDialogContent()
 	// Screenshots
 	populateScreenshotFileformatsCombo();
 	connect(ui->pushButtonConfigureScreenshotsDialog, SIGNAL(clicked()), this, SLOT(showConfigureScreenshotsDialog()));
-	connectStringProperty(ui->screenshotFileFormatComboBox, "MainView.screenShotFormat");
+	connectStringProperty(ui->screenshotFileFormatComboBox,  "MainView.screenShotFormat");
 	ui->screenshotDirEdit->setText(StelFileMgr::getScreenshotDir());
 	connect(ui->screenshotDirEdit, SIGNAL(editingFinished()), this, SLOT(selectScreenshotDir()));
 	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
-	connectBoolProperty(ui->invertScreenShotColorsCheckBox, "MainView.flagInvertScreenShotColors");
+	connectBoolProperty(ui->invertScreenShotColorsCheckBox,  "MainView.flagInvertScreenShotColors");
 	connectBoolProperty(ui->useCustomScreenshotSizeCheckBox, "MainView.flagUseCustomScreenshotSize");
 	ui->customScreenshotWidthLineEdit->setValidator(new MinMaxIntValidator(128, 16384, this));
 	ui->customScreenshotHeightLineEdit->setValidator(new MinMaxIntValidator(128, 16384, this));
-	connectIntProperty(ui->customScreenshotWidthLineEdit, "MainView.customScreenshotWidth");
-	connectIntProperty(ui->customScreenshotHeightLineEdit, "MainView.customScreenshotHeight");
-	connectIntProperty(ui->dpiSpinBox, "MainView.screenshotDpi");
+	connectIntProperty(ui->customScreenshotWidthLineEdit,    "MainView.customScreenshotWidth");
+	connectIntProperty(ui->customScreenshotHeightLineEdit,   "MainView.customScreenshotHeight");
+	connectIntProperty(ui->dpiSpinBox,                       "MainView.screenshotDpi");
 	StelMainView *mainView=static_cast<StelMainView *>(StelApp::getInstance().parent());
 	connect(mainView, SIGNAL(screenshotDpiChanged(int)), this, SLOT(updateDpiTooltip()));
 	connect(mainView, SIGNAL(flagUseCustomScreenshotSizeChanged(bool)), this, SLOT(updateDpiTooltip()));
@@ -1181,7 +1182,7 @@ void ConfigurationDialog::saveAllSettings()
 
 	conf->setValue("gui/flag_show_obslist_button",			propMgr->getStelPropertyValue("StelGui.flagShowObsListButton").toBool());
 
-	conf->setValue("gui/flag_show_icrs_grid_button",		propMgr->getStelPropertyValue("StelGui.flagShowICRSGridButton").toBool());
+	conf->setValue("gui/flag_show_icrs_grid_button",			propMgr->getStelPropertyValue("StelGui.flagShowICRSGridButton").toBool());
 	conf->setValue("gui/flag_show_galactic_grid_button",		propMgr->getStelPropertyValue("StelGui.flagShowGalacticGridButton").toBool());
 	conf->setValue("gui/flag_show_ecliptic_grid_button",		propMgr->getStelPropertyValue("StelGui.flagShowEclipticGridButton").toBool());
 	conf->setValue("gui/flag_show_boundaries_button",		propMgr->getStelPropertyValue("StelGui.flagShowConstellationBoundariesButton").toBool());
@@ -1190,12 +1191,13 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/flag_show_asterism_labels_button",		propMgr->getStelPropertyValue("StelGui.flagShowAsterismLabelsButton").toBool());
 	conf->setValue("gui/flag_show_decimal_degrees",			propMgr->getStelPropertyValue("StelApp.flagShowDecimalDegrees").toBool());
 	conf->setValue("gui/flag_use_azimuth_from_south",		propMgr->getStelPropertyValue("StelApp.flagUseAzimuthFromSouth").toBool());
-	conf->setValue("gui/flag_use_formatting_output",		propMgr->getStelPropertyValue("StelApp.flagUseFormattingOutput").toBool());
+	conf->setValue("gui/flag_use_polar_distance",				propMgr->getStelPropertyValue("StelApp.flagUsePolarDistance").toBool());
+	conf->setValue("gui/flag_use_formatting_output",			propMgr->getStelPropertyValue("StelApp.flagUseFormattingOutput").toBool());
 	conf->setValue("gui/flag_use_ccs_designations",			propMgr->getStelPropertyValue("StelApp.flagUseCCSDesignation").toBool());
 	conf->setValue("gui/flag_overwrite_info_color",			propMgr->getStelPropertyValue("StelApp.flagOverwriteInfoColor").toBool());
-	conf->setValue("gui/flag_time_jd",				gui->getButtonBar()->getFlagTimeJd());
+	conf->setValue("gui/flag_time_jd",						gui->getButtonBar()->getFlagTimeJd());
 	conf->setValue("gui/flag_show_buttons_background",		propMgr->getStelPropertyValue("StelGui.flagUseButtonsBackground").toBool());
-	conf->setValue("gui/flag_indication_mount_mode",		mvmgr->getFlagIndicationMountMode());
+	conf->setValue("gui/flag_indication_mount_mode",			mvmgr->getFlagIndicationMountMode());
 
 	// configuration dialog / navigation tab
 	conf->setValue("navigation/flag_enable_zoom_keys",		mvmgr->getFlagEnableZoomKeys());

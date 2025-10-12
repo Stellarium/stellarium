@@ -78,9 +78,10 @@ class SpoutSender;
 class StelApp : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(bool nightMode READ getVisionModeNight WRITE setVisionModeNight NOTIFY visionNightModeChanged)
+	Q_PROPERTY(bool nightMode               READ getVisionModeNight         WRITE setVisionModeNight         NOTIFY visionNightModeChanged)
 	Q_PROPERTY(bool flagShowDecimalDegrees  READ getFlagShowDecimalDegrees  WRITE setFlagShowDecimalDegrees  NOTIFY flagShowDecimalDegreesChanged)
 	Q_PROPERTY(bool flagUseAzimuthFromSouth READ getFlagSouthAzimuthUsage   WRITE setFlagSouthAzimuthUsage   NOTIFY flagUseAzimuthFromSouthChanged)
+	Q_PROPERTY(bool flagUsePolarDistance    READ getFlagPolarDistanceUsage  WRITE setFlagPolarDistanceUsage  NOTIFY flagUsePolarDistanceChanged)
 	Q_PROPERTY(bool flagUseCCSDesignation   READ getFlagUseCCSDesignation   WRITE setFlagUseCCSDesignation   NOTIFY flagUseCCSDesignationChanged)
 	Q_PROPERTY(bool flagUseFormattingOutput READ getFlagUseFormattingOutput WRITE setFlagUseFormattingOutput NOTIFY flagUseFormattingOutputChanged)
 	Q_PROPERTY(bool flagOverwriteInfoColor  READ getFlagOverwriteInfoColor  WRITE setFlagOverwriteInfoColor  NOTIFY flagOverwriteInfoColorChanged)
@@ -313,6 +314,11 @@ public slots:
 	bool getFlagSouthAzimuthUsage() const { return flagUseAzimuthFromSouth; }
 	//! Get flag for using calculation of azimuth from south towards west (instead north towards east)
 	void setFlagSouthAzimuthUsage(bool use);
+
+	//! Set flag for using calculation of polar distance for equatorial coordinates
+	bool getFlagPolarDistanceUsage() const { return flagUsePolarDistance; }
+	//! Get flag for using calculation of polar distance for equatorial coordinates
+	void setFlagPolarDistanceUsage(bool use);
 	
 	//! Set flag for using of formatting output for coordinates
 	void setFlagUseFormattingOutput(bool b);
@@ -377,6 +383,7 @@ signals:
 	void visionNightModeChanged(bool);
 	void flagShowDecimalDegreesChanged(bool);
 	void flagUseAzimuthFromSouthChanged(bool);
+	void flagUsePolarDistanceChanged(bool);
 	void flagUseCCSDesignationChanged(bool);
 	void flagUseFormattingOutputChanged(bool);
 	void flagOverwriteInfoColorChanged(bool);
@@ -549,6 +556,7 @@ private:
 	
 	bool flagShowDecimalDegrees;  // Format infotext with decimal degrees, not minutes/seconds
 	bool flagUseAzimuthFromSouth; // Display calculate azimuth from south towards west (as in some astronomical literature)
+	bool flagUsePolarDistance; // Display calculate polar distance for equatorial coordinates
 	bool flagUseFormattingOutput; // Use tabular coordinate format for infotext
 	bool flagUseCCSDesignation;   // Use symbols like alpha (RA), delta (declination) for coordinate system labels
 	bool flagOverwriteInfoColor; // Overwrite and use color for text in info panel
