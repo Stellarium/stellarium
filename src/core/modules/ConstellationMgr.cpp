@@ -861,9 +861,9 @@ void ConstellationMgr::update(double deltaTime)
 	zodiacFader.update(delta);
 	lunarSystemFader.update(delta);
 	if (zodiac)
-		zodiac->centerLine->update(deltaTime);
+		zodiac->update(deltaTime);
 	if (lunarSystem)
-		lunarSystem->centerLine->update(deltaTime);
+		lunarSystem->update(deltaTime);
 }
 
 void ConstellationMgr::setArtIntensity(const float intensity)
