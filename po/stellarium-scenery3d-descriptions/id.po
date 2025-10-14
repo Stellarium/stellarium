@@ -7,6 +7,7 @@
 # Azhe Kun <azhe403@gmail.com>, 2022
 # Andika Triwidada <andika@gmail.com>, 2022
 # Mukhammad Reza, 2025
+# Hariyadi Putraga <hariyadiputraga@gmail.com>, 2025
 # 
 #, fuzzy
 msgid ""
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2023-11-28 13:04+0700\n"
 "PO-Revision-Date: 2022-10-05 17:03+0000\n"
-"Last-Translator: Mukhammad Reza, 2025\n"
+"Last-Translator: Hariyadi Putraga <hariyadiputraga@gmail.com>, 2025\n"
 "Language-Team: Indonesian (https://app.transifex.com/stellarium/teams/80998/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,6 +37,11 @@ msgid ""
 "or some other details to find out how this plugin behaves. Then build and "
 "present your own work!"
 msgstr ""
+"Adegan ini terutama berguna sebagai uji coba untuk pengembangan Anda "
+"sendiri. Anda dapat membuat salinan folder adegan dan memodifikasinya sesuka"
+" hati, mencoba pengaturan material atau detail lainnya untuk mengetahui "
+"bagaimana plugin ini bekerja. Kemudian, buat dan presentasikan karya Anda "
+"sendiri!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:8
@@ -54,6 +60,14 @@ msgid ""
 "absolutely and always point west-east, the grid lines hit the northern "
 "horizon slightly (4.2 deg) left of north!"
 msgstr ""
+"Pilar-pilar yang ditunjukkan di sini, dilihat dari pusat struktur, "
+"memberikan gambaran perkiraan (bukan presisi tinggi!) posisi matahari "
+"terbit/terbenam titik balik matahari/ekuinoks di lintang Eropa tengah. "
+"Pilar-pilar pusat memberikan garis timur-barat. Kisi koordinat survei yang "
+"terlihat di lantai tidak sejajar dengan utara geografis. Rotasi -4,2 derajat"
+" (uji konvergensi meridian) harus dikompensasi, yaitu, meskipun pilar-pilar "
+"pusat harus mutlak dan selalu mengarah ke barat-timur, garis kisi-kisi "
+"tersebut sedikit (4,2 derajat) ke kiri dari utara!"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:19
@@ -61,6 +75,8 @@ msgid ""
 "Walkaround ground coordinates (Ctrl-R, T) should display the coordinates "
 "visible along the south and west border of the ground."
 msgstr ""
+"Koordinat tanah keliling (Ctrl-R, T) harus menampilkan koordinat yang "
+"terlihat di sepanjang batas selatan dan barat tanah."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:23
@@ -74,6 +90,9 @@ msgid ""
 " can play with material parameters to create funny effects like "
 "semitransparent or glow-in-the-dark brick spheres."
 msgstr ""
+"Model ini juga digunakan untuk menguji kemampuan grafis plugin. Anda dapat "
+"bereksperimen dengan parameter material untuk menciptakan efek-efek unik "
+"seperti bola bata semitransparan atau yang menyala dalam gelap."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:29
@@ -81,6 +100,8 @@ msgid ""
 "To test temporal features, the pillars and spheres are visible only from the"
 " years 2000 until 2020.  Edit the material file to change that!"
 msgstr ""
+"Untuk menguji fitur temporal, pilar dan bola hanya terlihat dari tahun 2000 "
+"hingga 2020. Edit berkas material untuk mengubahnya!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:32
@@ -94,6 +115,8 @@ msgid ""
 "Testscene for Stellarium/scenery3d development. Export from SU8-Kerkythea-"
 "KT2OBJ."
 msgstr ""
+"Testscene untuk pengembangan Stellarium/scenery3d. Ekspor dari "
+"SU8-Kerkythea-KT2OBJ."
 
 #. type: Content of: <h2>
 #: ../../scenery3d/Sterngarten/description.en.utf8:1
@@ -106,6 +129,8 @@ msgid ""
 "Sterngarten (\"Star Garden\") is an open-air planetarium in the south-west "
 "of Vienna, demonstrating the solar year."
 msgstr ""
+"Sterngarten (\"Taman Bintang\") adalah planetarium terbuka di barat daya "
+"Wina, yang menunjukkan tahun matahari."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:7
@@ -119,6 +144,9 @@ msgid ""
 "Astronomical Bureau (1907) and Austrian Astronomical Society (1924). "
 "Director of first Vienna Planetarium (1927) and Urania observatory."
 msgstr ""
+"Prof. Dr. Oswald Thomas dari Univ. (1882 Kronstadt - 1963 Wina). Pendiri "
+"Biro Astronomi (1907) dan Perhimpunan Astronomi Austria (1924). Direktur "
+"Planetarium Wina pertama (1927) dan Observatorium Urania."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:14
@@ -137,6 +165,13 @@ msgid ""
 "Calendar)  and the monthly journal \"Der Sternenbote\" (The Starry "
 "Messenger)."
 msgstr ""
+"Sterngarten dikembangkan oleh murid Thomas dan penerusnya di Biro Astronomi,"
+" Prof. Hermann Mucke (1935-2019), bersama para kolaboratornya. Mucke juga "
+"menjabat sebagai sekretaris Perhimpunan Astronomi Austria 1963-2018, "
+"direktur planetarium Wina 1963-2001, dan observatorium publik Urania Wina "
+"1971-2001. Selama lebih dari 60 tahun, Mucke dan Perhimpunan tersebut "
+"menerbitkan \"Österreichischer Himmelskalender\" (Kalender Langit Austria) "
+"dan jurnal bulanan \"Der Sternenbote\" (Utusan Berbintang)."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:22
@@ -144,6 +179,8 @@ msgid ""
 "It was built 1997-2001 by the Austrian Astronomical Society, supported by "
 "public and private sponsors."
 msgstr ""
+"Dibangun tahun 1997-2001 oleh Masyarakat Astronomi Austria, didukung oleh "
+"sponsor publik dan swasta."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:24
@@ -159,6 +196,11 @@ msgid ""
 "southwest of Vienna; always open privately for everybody free of charge. "
 "Frequently guided tours."
 msgstr ""
+"Peningkatan pengetahuan astronomi dasar bagi masyarakat umum. Menyaksikan "
+"fakta dan perubahan langit dengan mata telanjang, atau dengan teropong, "
+"ditawarkan oleh instalasi kami yang terletak di ujung barat daya Wina; "
+"selalu terbuka untuk umum secara gratis. Tur berpemandu juga sering "
+"diadakan."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:32
@@ -171,17 +213,21 @@ msgid ""
 "Pyramid with platform 7x7m. Seen from 1.5m above Center Plate all angles "
 "fit."
 msgstr ""
+"Piramida dengan platform 7x7m. Dilihat dari ketinggian 1,5m di atas Pelat "
+"Tengah, semua sudutnya pas."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:36
 msgid "Horizon Railing, representing the mathematical horizon."
-msgstr ""
+msgstr "Horizon Railing, melambangkan horizon matematika."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:37
 msgid ""
 "Surrounding Steps; 200 seats. Entrance by staircase and wheelchair ramp."
 msgstr ""
+"Tangga di sekitarnya; 200 kursi. Pintu masuk melalui tangga dan jalur landai"
+" untuk kursi roda."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:38
@@ -192,6 +238,11 @@ msgid ""
 "rising/setting on the mathematical horizon is not possible in the field due "
 "to vegetation and landscape)."
 msgstr ""
+"Pilar untuk matahari terbit dan terbenam di awal musim. Posisi pilar berada "
+"tepat di azimut ekuinoks dan solstis. Lengan menunjukkan horizon dan efek "
+"pergeseran akibat refraksi. (Pengamatan terbit/terbenamnya matahari pada "
+"horizon matematis tidak memungkinkan di lapangan karena vegetasi dan "
+"lanskap)."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:42
@@ -199,6 +250,8 @@ msgid ""
 "South Pillar, marked (10&deg;/10&deg; altitude); Transit marks for sun at "
 "seasons' beginning."
 msgstr ""
+"Pilar Selatan, ditandai (ketinggian 10°/10°); Tanda transit matahari di awal"
+" musim."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:43
@@ -206,6 +259,8 @@ msgid ""
 "North Pillar, marked (10&deg;/10&deg; altitude); on top Shadow Disc with "
 "central hole: North celestial Pole."
 msgstr ""
+"Pilar Utara, ditandai (ketinggian 10°/10°); di atas Cakram Bayangan dengan "
+"lubang di tengah: Kutub langit Utara."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:44
@@ -215,11 +270,15 @@ msgid ""
 " longitude, with zodiacal signs. Ascending part serves as polar gnomon for "
 "the"
 msgstr ""
+"Analemma bengkok, terbagi. Tanggal musim semi dan musim panas pada bagian "
+"horizontal, tanggal musim gugur dan musim dingin pada bagian menaik, "
+"ditandai dengan bujur matahari (10°/10°), dengan lambang zodiak. Bagian "
+"menaik berfungsi sebagai gnomon kutub untuk"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:45
 msgid "Sundial, full hours Vh to VIIh marked."
-msgstr ""
+msgstr "Jam matahari, jam penuh Vh sampai VIIh ditandai."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:46
@@ -262,6 +321,10 @@ msgid ""
 "by Mucke in his primary school days. Mucke's spirit will remain alive in the"
 " Sterngarten."
 msgstr ""
+"Diciptakan oleh Georg Zotti mengikuti rencana H. Mucke; Seperti banyak "
+"astronom amatir dan profesional di Austria, Zotti diperkenalkan dengan "
+"astronomi oleh Mucke sejak masa sekolah dasar. Semangat Mucke akan tetap "
+"hidup di Sterngarten."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:60
