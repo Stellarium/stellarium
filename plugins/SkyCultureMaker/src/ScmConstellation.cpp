@@ -299,68 +299,70 @@ void scm::ScmConstellation::mergeLinesIntoPolylines(QJsonArray &lines) const
 	}
 
 	// Step 1: merge line ends with other line starts
-	for (int i = 0; i < lines.size(); ++i)
+	for (int growableLineIdx = 0; growableLineIdx < lines.size(); ++growableLineIdx)
 	{
-		QJsonArray currentLine = lines.at(i).toArray();
-		QJsonValue currentEnd  = currentLine.last();
+		QJsonArray growableLine = lines.at(growableLineIdx).toArray();
 
-		// Look for a line that starts where the current line ends
-		for (int j = i + 1; j < lines.size(); ++j)
+		// Look for a line that starts where the growableLine ends
+		for (int attachableLineIdx = growableLineIdx + 1; attachableLineIdx < lines.size(); ++attachableLineIdx)
 		{
-			QJsonArray nextLine  = lines.at(j).toArray();
-			QJsonValue nextStart = nextLine.first();
+			QJsonArray attachableLine = lines.at(attachableLineIdx).toArray();
 
-			// Merge nextLine into currentLine
-			if (currentEnd == nextStart)
+			// Merge attachableLine into growableLine
+			if (growableLine.last() == attachableLine.first())
 			{
-				// Append all points from nextLine except the first (which is duplicate)
-				for (int k = 1; k < nextLine.size(); ++k)
+				// Append all points from attachableLine except the first (which is duplicate)
+				attachableLine.removeFirst();
+				for (QJsonValue attachableLinePoint : attachableLine)
 				{
-					currentLine.append(nextLine.at(k));
+					growableLine.append(attachableLinePoint);
 				}
-				currentEnd = currentLine.last();
-
+				
 				// Update the merged lines array
-				lines.replace(i, currentLine);
-				lines.removeAt(j);
-				--i;       // Recheck the merged line
-				j = i + 1; // Reset j to i + 1 to continue merging
+				lines[growableLineIdx] = growableLine;
+				lines.removeAt(attachableLineIdx);
+
+				// Recheck the merged line
+				--growableLineIdx;
+				// Reset j to growableLineIdx + 1 to continue merging
+				attachableLineIdx = growableLineIdx + 1;
 				break;
 			}
 		}
 	}
 
 	// Step 2: merge line starts with other line ends
-	for (int i = 0; i < lines.size(); ++i)
+	for (int growableLineIdx = 0; growableLineIdx < lines.size(); ++growableLineIdx)
 	{
-		QJsonArray currentLine  = lines.at(i).toArray();
-		QJsonValue currentStart = currentLine.first();
+		QJsonArray growableLine = lines.at(growableLineIdx).toArray();
 
-		// Look for a line that ends where the current line starts
-		for (int j = i + 1; j < lines.size(); ++j)
+		// Look for a line that ends where the growableLine starts
+		for (int attachableLineIdx = growableLineIdx + 1; attachableLineIdx < lines.size(); ++attachableLineIdx)
 		{
-			QJsonArray nextLine = lines.at(j).toArray();
-			QJsonValue nextEnd  = nextLine.last();
+			QJsonArray attachableLine = lines.at(attachableLineIdx).toArray();
 
-			if (currentStart == nextEnd)
+			if (growableLine.first() == attachableLine.last())
 			{
-				// Prepend all points from nextLine except the last (which is duplicate)
-				QJsonArray newCurrentLine;
-				for (int k = 0; k < nextLine.size() - 1; ++k)
+				QJsonArray newGrowableLine;
+				// Prepend all points from attachableLine except the last (which is duplicate)
+				attachableLine.removeLast();
+				for (QJsonValue attachableLinePoint : attachableLine)
 				{
-					newCurrentLine.append(nextLine.at(k));
+					newGrowableLine.append(attachableLinePoint);
 				}
-				for (int k = 0; k < currentLine.size(); ++k)
+				for (QJsonValue growableLinePoint : growableLine)
 				{
-					newCurrentLine.append(currentLine.at(k));
+					newGrowableLine.append(growableLinePoint);
 				}
-				currentLine  = newCurrentLine;
-				currentStart = currentLine.first();
+				growableLine = newGrowableLine;
 
-				lines.replace(i, currentLine);
-				lines.removeAt(j);
-				--i;       // Recheck the merged line
-				j = i + 1; // Reset j to i + 1 to continue merging
+				lines[growableLineIdx] = growableLine;
+				lines.removeAt(attachableLineIdx);
+
+				// Recheck the merged line
+				--growableLineIdx;
+				// Reset j to growableLineIdx + 1 to continue merging
+				attachableLineIdx = growableLineIdx + 1;
 				break;
 			}
 		}
