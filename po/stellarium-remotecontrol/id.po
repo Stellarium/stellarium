@@ -8,8 +8,8 @@
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
 # Ian Sebastian <iansebastian.tan@gmail.com>, 2022
 # cardinot <mcardinot@gmail.com>, 2022
-# Hariyadi Putraga <hariyadiputraga@gmail.com>, 2022
 # Andika Triwidada <andika@gmail.com>, 2022
+# Hariyadi Putraga <hariyadiputraga@gmail.com>, 2025
 # 
 #, fuzzy
 msgid ""
@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2025-10-01 11:51+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Andika Triwidada <andika@gmail.com>, 2022\n"
+"Last-Translator: Hariyadi Putraga <hariyadiputraga@gmail.com>, 2025\n"
 "Language-Team: Indonesian (https://app.transifex.com/stellarium/teams/80998/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -197,15 +197,15 @@ msgstr "minggu berdasarkan matahari (solar week)"
 
 #: index.html:92 tablet7in.html:193
 msgid "Calendar year"
-msgstr ""
+msgstr "Tahun takwim"
 
 #: index.html:93 tablet7in.html:194
 msgid "10 Calendar years"
-msgstr ""
+msgstr "10 Tahun Kalender"
 
 #: index.html:94 tablet7in.html:195
 msgid "100 Calendar years"
-msgstr ""
+msgstr "100 tahun Kalender"
 
 #: index.html:97 tablet7in.html:198
 msgid "Sidereal year"
@@ -285,7 +285,7 @@ msgstr "pilih dan fokus"
 
 #: index.html:245 tablet7in.html:265
 msgid "Select current item"
-msgstr ""
+msgstr "Pilih item saat ini"
 
 #: index.html:249 tablet7in.html:269
 msgid "Selection mode"
@@ -325,15 +325,15 @@ msgstr "Kecerahan Bima Sakti"
 
 #: index.html:289 tablet7in.html:351
 msgid "Dbl. stars"
-msgstr ""
+msgstr "Bintang ganda"
 
 #: index.html:290 tablet7in.html:352
 msgid "Var. stars"
-msgstr ""
+msgstr "Bintang Var."
 
 #: index.html:291 tablet7in.html:353
 msgid "HIP"
-msgstr ""
+msgstr "HIP"
 
 #: index.html:294 tablet7in.html:357
 msgid "Digitized Sky Survey"
@@ -345,15 +345,15 @@ msgstr "Survey HiPS"
 
 #: index.html:304 tablet7in.html:369
 msgid "Include nutation"
-msgstr ""
+msgstr "Sertakan nutasi"
 
 #: index.html:306 tablet7in.html:371
 msgid "Include parallax"
-msgstr ""
+msgstr "Sertakan paralaks"
 
 #: index.html:311 tablet7in.html:376
 msgid "Include aberration"
-msgstr ""
+msgstr "Sertakan aberasi"
 
 #: index.html:319 tablet7in.html:390
 msgid "Show planet markers"
@@ -397,11 +397,11 @@ msgstr "Skalakan obyek minor:"
 
 #: index.html:337
 msgid "Mark minor bodies:"
-msgstr ""
+msgstr "Tandai badan minor:"
 
 #: index.html:365 tablet7in.html:443
 msgid "Bortle class:"
-msgstr ""
+msgstr "Kelas Bortle:"
 
 #: index.html:382 tablet7in.html:460
 msgid "Extinction Coefficient:"
@@ -409,11 +409,11 @@ msgstr "Koefisien ekstingsi:"
 
 #: index.html:383 tablet7in.html:461
 msgid "Only extinction/refraction, no blue skylight"
-msgstr ""
+msgstr "Hanya kepunahan/refraksi, tidak ada cahaya langit biru"
 
 #: index.html:383 tablet7in.html:462
 msgid "Suppress scattering"
-msgstr ""
+msgstr "Menekan hamburan"
 
 #: index.html:387 tablet7in.html:467
 msgid "Shooting Stars"
@@ -453,7 +453,7 @@ msgstr "perhentian kecil"
 
 #: index.html:475 tablet7in.html:563
 msgid "Line width:"
-msgstr ""
+msgstr "Lebar garis:"
 
 #: index.html:485 tablet7in.html:573
 msgid "Current Planet:"
@@ -500,7 +500,7 @@ msgstr "label dan penanda"
 
 #: index.html:665 tablet7in.html:736
 msgid "Limit angular size (arcmin):"
-msgstr ""
+msgstr "Batasi ukuran sudut (arcmin):"
 
 #: index.html:677 tablet7in.html:750
 msgid "Use associated planet and position"
@@ -508,7 +508,7 @@ msgstr "Gunakan posisi dan planet yang terkait"
 
 #: index.html:687 tablet7in.html:758
 msgid "Show landscape labels"
-msgstr ""
+msgstr "Tampilkan label lanskap"
 
 #: index.html:688 tablet7in.html:759
 msgid "Show illumination"
@@ -520,7 +520,7 @@ msgstr "Lanskap saat ini"
 
 #: index.html:704 tablet7in.html:777
 msgid "Label constellations with font size"
-msgstr ""
+msgstr "Beri label konstelasi dengan ukuran font"
 
 #: index.html:708 tablet7in.html:781
 msgid "Show lines with thickness"
@@ -528,7 +528,7 @@ msgstr "Menampilkan garis-garis dengan ketebalan"
 
 #: index.html:712 tablet7in.html:785
 msgid "Label asterisms with font size"
-msgstr ""
+msgstr "Beri label asterisme dengan ukuran font"
 
 #: index.html:716 tablet7in.html:789
 msgid "Show asterisms with thickness"
@@ -540,7 +540,7 @@ msgstr "Menampilkan sinar bantuan dengan ketebalan"
 
 #: index.html:724 tablet7in.html:797
 msgid "Show art in brightness"
-msgstr ""
+msgstr "Tampilkan seni dalam kecerahan"
 
 #: index.html:728 tablet7in.html:801
 msgid "Show boundaries with thickness"
@@ -548,15 +548,15 @@ msgstr "Tampilkan Garis Batas dengan Ketebalan"
 
 #: index.html:733 tablet7in.html:805
 msgid "Show zodiac with thickness"
-msgstr ""
+msgstr "Tampilkan zodiak dengan ketebalan"
 
 #: index.html:737 tablet7in.html:809
 msgid "Show lunar stations/mansions with thickness"
-msgstr ""
+msgstr "Tampilkan stasiun/rumah bulan dengan ketebalan"
 
 #: index.html:741 tablet7in.html:813
 msgid "Short labels"
-msgstr ""
+msgstr "Label pendek"
 
 #: index.html:742 tablet7in.html:814
 msgid "Constellation selection isolated"
@@ -564,7 +564,7 @@ msgstr "Plihan Konstelasi Terasing"
 
 #: index.html:743 tablet7in.html:815
 msgid "Only last selected"
-msgstr ""
+msgstr "Hanya yang terakhir dipilih"
 
 #: index.html:748 tablet7in.html:820
 msgid "Current sky culture"
