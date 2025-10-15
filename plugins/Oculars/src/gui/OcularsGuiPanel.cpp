@@ -111,10 +111,13 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	// TENTATIVE FIX:
 	// We can use a DropShadowEffect for enhanced visibility. Note that we cannot re-use it, so each panel needs to get its own copy.
 	// The blur radius is different to test varying radii.
-	// Currently this seems to work, but the arrow buttons become bright on mouse-over, and won't revert to become darker again.
+	// It would be fine to blur the background, but Qt has no way for this. Even an underlying QGraphicsWidget with QGraphicsBlurEffect does not blur the background.
+	// Currently this seems to work, but the arrow buttons still become bright on mouse-over, and won't revert to become darker again.
+	static const bool shadowBackground = conf->value("gui/flag_info_shadow", false).toBool();
+
 	ocularControls = new QGraphicsWidget(this);
 	ocularControls->setVisible(false);
-	if (conf->value("gui/flag_info_shadow", false).toBool())
+	if (shadowBackground)
 	{
 		qDebug() <<  "Oculars: Add a drop shadow for better visibility";
 		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(ocularControls);
@@ -126,7 +129,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 
 	lensControls = new QGraphicsWidget(this);
 	lensControls->setVisible(false);
-	if (conf->value("gui/flag_info_shadow", false).toBool())
+	if (shadowBackground)
 	{
 		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(lensControls);
 		effect->setBlurRadius(8);
@@ -137,7 +140,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 
 	ccdControls = new QGraphicsWidget(this);
 	ccdControls->setVisible(false);
-	if (conf->value("gui/flag_info_shadow", false).toBool())
+	if (shadowBackground)
 	{
 		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(ccdControls);
 		effect->setBlurRadius(10);
@@ -148,7 +151,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 
 	telescopeControls = new QGraphicsWidget(this);
 	telescopeControls->setVisible(false);
-	if (conf->value("gui/flag_info_shadow", false).toBool())
+	if (shadowBackground)
 	{
 		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(telescopeControls);
 		effect->setBlurRadius(12);

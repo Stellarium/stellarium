@@ -68,6 +68,7 @@ private slots:
 	void updateTelescopeControls();
 
 	//! Sets the color scheme (day/night mode)
+	//! @note: This is old code. @param schemeName is ignored.
 	void setColorScheme(const QString& schemeName);
 
 	void updateLayout();
