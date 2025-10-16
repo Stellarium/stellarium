@@ -22,8 +22,11 @@
  */
 
 #include "ScmSkyCultureDialog.hpp"
+#include "PolygonInfoTreeItem.hpp"
+#include "types/Region.hpp"
 #include "ui_scmSkyCultureDialog.h"
 #include <cassert>
+#include <qtooltip.h>
 #include <QDebug>
 
 ScmSkyCultureDialog::ScmSkyCultureDialog(SkyCultureMaker *maker)
@@ -153,6 +156,59 @@ void ScmSkyCultureDialog::createDialogContent()
 			ui->classificationCB->setCurrentIndex(index);
 		}
 	}
+
+	// add all regions to the combo box
+	for (const auto &region : scm::REGIONS)
+	{
+		ui->regionComboBox->addItem(region.second.name, QVariant::fromValue(region.first), region.second.description);
+	}
+	ui->regionComboBox->setDefaultText("None");
+	connect(ui->regionComboBox, &MultiselectionComboBox::checkedItemsChanged, this, &ScmSkyCultureDialog::checkMutExRegions);
+
+	// Geographical Location Tab
+
+	initSkycultureTime();
+
+	connect(ui->skyCultureTimeSlider, &QSlider::valueChanged, this, &ScmSkyCultureDialog::updateSkyCultureTimeValue);
+	connect(ui->skyCultureCurrentTimeSpinBox, &QSpinBox::valueChanged, this, &ScmSkyCultureDialog::updateSkyCultureTimeValue);
+	connect(ui->scmGeoLocGraphicsView, &ScmGeoLocGraphicsView::timeValueChanged, this, &ScmSkyCultureDialog::updateSkyCultureTimeValue);
+
+	connect(ui->scmGeoLocGraphicsView, &ScmGeoLocGraphicsView::showAddPolyDialog, this, &ScmSkyCultureDialog::showAddPolygon);
+	connect(ui->scmGeoLocGraphicsView, &ScmGeoLocGraphicsView::addPolygonToCulture, this, &ScmSkyCultureDialog::addLocation);
+
+	// polygon info options
+
+	connect(ui->polygonInfoTreeWidget, &QTreeWidget::itemClicked, this, &ScmSkyCultureDialog::selectLocation);
+	connect(ui->removePolygonButton, &QPushButton::clicked, this, &ScmSkyCultureDialog::removeLocation);
+	connect(ui->polygonInfoTreeWidget, &QTreeWidget::itemSelectionChanged, this, &ScmSkyCultureDialog::updateRemovePolygonButton);
+	ui->removePolygonButton->setEnabled(false);
+
+	ui->polygonInfoTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
+	ui->polygonInfoTreeWidget->header()->setSectionsMovable(false);
+	ui->polygonInfoTreeWidget->header()->setSectionResizeMode(QHeaderView::Stretch);
+
+	QString helpButtonToolTip = q_("Controls") + ":\n" +
+								"LMB: Set a new vertex for the active polygon\n" +
+								"SHIFT + LMB : Navigate the Map\n" +
+								"ALT + LMB : Save the active polygon\n" +
+								"DELETE : Remove the last point of the active polygon\n" +
+								"ESC: Remove all points of the active polygon\n" +
+								"Scroll UP / DOWN : Zoom in / out of the map\n" +
+								"CTRL + Scroll : Fine grained zoom";
+	// the positioning of the tooltip is eyeballes to sit in the bottom right corner of the map (works for now but is not practical)
+	connect(ui->helpToolButton, &QToolButton::clicked, this, [this, helpButtonToolTip]()
+			{ QToolTip::showText(ui->skyCultureTimeOptionsGroupBox->mapToGlobal(QPoint(ui->skyCultureTimeOptionsGroupBox->width() - 330, -179)), helpButtonToolTip, ui->helpToolButton); });
+
+	// dialog popup for time limits
+
+	// prevent startTimeSpinBox value to be greater than endTimeSpinBox and vice versa
+	connect(ui->startTimeSpinBox, &QSpinBox::editingFinished, this, &ScmSkyCultureDialog::changeStartTime);
+	connect(ui->endTimeSpinBox, &QSpinBox::editingFinished, this, &ScmSkyCultureDialog::changeEndTime);
+
+	connect(ui->addPolygonDialogButtonBox, &QDialogButtonBox::accepted, this, &ScmSkyCultureDialog::confirmAddPolygon);
+	connect(ui->addPolygonDialogButtonBox, &QDialogButtonBox::rejected, this, &ScmSkyCultureDialog::cancelAddPolygon);
+
+	hideAddPolygon();
 }
 
 void ScmSkyCultureDialog::handleFontChanged()
@@ -188,6 +244,13 @@ void ScmSkyCultureDialog::saveSkyCulture()
 
 	// If valid, set the sky culture description
 	maker->setSkyCultureDescription(desc);
+
+	// check wether at least 1 polygon was digitized
+	if (ui->polygonInfoTreeWidget->topLevelItemCount() < 1)
+	{
+		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("The sky culture territory is not complete. Please digitize at least one polygon in geographical location tab."));
+		return;
+	}
 
 	// open export dialog
 	maker->setSkyCultureExportDialogVisibility(true);
@@ -291,6 +354,18 @@ void ScmSkyCultureDialog::updateRemoveConstellationButton()
 	}
 }
 
+void ScmSkyCultureDialog::updateRemovePolygonButton()
+{
+	if (!ui->polygonInfoTreeWidget->selectedItems().isEmpty())
+	{
+		ui->removePolygonButton->setEnabled(true);
+	}
+	else
+	{
+		ui->removePolygonButton->setEnabled(false);
+	}
+}
+
 QString ScmSkyCultureDialog::getDisplayNameFromConstellation(const scm::ScmConstellation &constellation) const
 {
 	return constellation.getEnglishName() + " (" + constellation.getId() + ")";
@@ -321,6 +396,17 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 	desc.license            = ui->licenseCB->currentData().value<scm::LicenseType>();
 	desc.classification   = ui->classificationCB->currentData().value<scm::ClassificationType>();
 
+	desc.region.clear();
+	for (const auto &itemData : ui->regionComboBox->checkedItemsData())
+	{
+		desc.region.push_back(itemData.value<scm::RegionType>());
+	}
+
+	for (auto i : desc.region)
+	{
+		qInfo() << scm::REGIONS.at(i).name;
+	}
+
 	return desc;
 }
 
@@ -330,6 +416,7 @@ void ScmSkyCultureDialog::resetDialog()
 	{
 		ui->skyCultureNameLE->clear();
 		ui->authorsTE->clear();
+		ui->introTE->clear();
 		ui->cultureDescriptionTE->clear();
 		ui->aboutTE->clear();
 		ui->skyTE->clear();
@@ -344,11 +431,258 @@ void ScmSkyCultureDialog::resetDialog()
 
 		ui->licenseCB->setCurrentIndex(0);
 		ui->classificationCB->setCurrentIndex(0);
+		ui->regionComboBox->reset();
 
 		name.clear();
 		setIdFromName(name);
 		resetConstellations();
 		maker->setSkyCultureDescription(getDescriptionFromTextEdit());
 		updateRemoveConstellationButton();
+
+		ui->polygonCountValueLabel->setText(QString::number(0));
+		ui->cultureStartTimeValueLabel->setText("");
+		ui->cultureEndTimeValueLabel->setText("");
+		initSkycultureTime(); // reuse init function to set skyCultureTimeSlider / skyCultureCurrentTimeSpinBox
+		ui->polygonInfoTreeWidget->clear(); // reset the location list
+		ui->scmGeoLocGraphicsView->reset(); // reset the map used for digitizing
+		updateRemovePolygonButton();
 	}
+}
+
+void ScmSkyCultureDialog::showAddPolygon()
+{
+	ui->mapForegroundWidget->setVisible(true);
+	ui->addPolygonFrame->setVisible(true);
+
+	addPolygonSetTimeLimits(ui->skyCultureCurrentTimeSpinBox->minimum(), ui->skyCultureCurrentTimeSpinBox->maximum());
+	addPolygonSetStartTime(ui->skyCultureCurrentTimeSpinBox->value());
+}
+
+void ScmSkyCultureDialog::hideAddPolygon()
+{
+	ui->addPolygonFrame->setVisible(false);
+	ui->mapForegroundWidget->setVisible(false);
+
+	ui->scmGeoLocGraphicsView->setFocus();
+}
+
+void ScmSkyCultureDialog::initSkycultureTime()
+{
+	int minYear = -6500; // should be small enough so that new cultures can always be added (who knows what will be discovered in the future)
+	int maxYear = QDateTime::currentDateTime().date().year();
+	int currentYear = maxYear;
+
+	// set properties of involved components
+	ui->skyCultureTimeSlider->setMinimum(minYear);
+	ui->skyCultureTimeSlider->setMaximum(maxYear);
+
+	ui->skyCultureCurrentTimeSpinBox->setMinimum(minYear);
+	ui->skyCultureCurrentTimeSpinBox->setMaximum(maxYear);
+
+	// reuse function to set Value of timeSlider, currentTimeSpinBox and MapGraphicsView
+	updateSkyCultureTimeValue(currentYear);
+}
+
+void ScmSkyCultureDialog::updateSkyCultureTimeValue(int year)
+{
+	// set timeSlider, currentTimeSpinBox and GeoLocGraphicsView Value to year (block Signals to prevent unwanted functions calls through previous connection)
+	ui->skyCultureTimeSlider->blockSignals(true);
+	ui->skyCultureCurrentTimeSpinBox->blockSignals(true);
+
+	ui->skyCultureTimeSlider->setValue(year);
+	ui->skyCultureCurrentTimeSpinBox->setValue(year);
+
+	ui->skyCultureTimeSlider->blockSignals(false);
+	ui->skyCultureCurrentTimeSpinBox->blockSignals(false);
+
+	ui->scmGeoLocGraphicsView->updateTime(year);
+}
+
+void ScmSkyCultureDialog::addLocation(const scm::CulturePolygon culturePoly)
+{
+	// add polygon to list (polygonInfoTreeWidget)
+	ui->polygonInfoTreeWidget->addTopLevelItem(new PolygonInfoTreeItem(culturePoly.id, culturePoly.startTime, culturePoly.endTime, culturePoly.polygon.size()));
+
+	// send poly to maker
+	maker->addSkyCultureLocation(culturePoly);
+}
+
+void ScmSkyCultureDialog::removeLocation()
+{
+	// in theory, there should always only be 1 selected item at a time in polygonInfoTreeWidget
+	// (maybe this changes in the future, therefore the for-loop usage is reasonable)
+	for (const auto &item : ui->polygonInfoTreeWidget->selectedItems())
+	{
+		PolygonInfoTreeItem *polygonInfoItem = static_cast<PolygonInfoTreeItem *>(item);
+
+		// remove polygon from map (scmGeoLocGraphicsView)
+		ui->scmGeoLocGraphicsView->removePolygon(polygonInfoItem->getId());
+
+		// remove polygon from skyculture in maker
+		maker->removeSkyCultureLocation(polygonInfoItem->getId());
+
+		// remove polygon from list (polygonInfoTreeWidget)
+		delete item;
+
+		// update the polygon count info label
+		ui->polygonCountValueLabel->setText(QString::number(ui->polygonCountValueLabel->text().toInt() - 1));
+	}
+
+	if (ui->polygonInfoTreeWidget->topLevelItemCount() > 0)
+	{
+		// update the start / end time info labels
+		int startTime = ui->polygonInfoTreeWidget->topLevelItem(0)->text(0).toInt();
+		int endTime = ui->polygonInfoTreeWidget->topLevelItem(0)->text(1).toInt();
+
+		for (int index = 1; index < ui->polygonInfoTreeWidget->topLevelItemCount(); index++)
+		{
+			if (ui->polygonInfoTreeWidget->topLevelItem(index)->text(0).toInt() < startTime)
+			{
+				startTime = ui->polygonInfoTreeWidget->topLevelItem(index)->text(0).toInt();
+			}
+
+			if (ui->polygonInfoTreeWidget->topLevelItem(index)->text(1).toInt() > endTime)
+			{
+				endTime = ui->polygonInfoTreeWidget->topLevelItem(index)->text(1).toInt();
+			}
+		}
+
+		ui->cultureStartTimeValueLabel->setText(QString::number(startTime));
+		ui->cultureEndTimeValueLabel->setText(QString::number(endTime));
+
+		// update the start/ end time of the skyculture
+		maker->setSkyCultureStartTime(ui->cultureStartTimeValueLabel->text().toInt());
+		maker->setSkyCultureEndTime(ui->cultureEndTimeValueLabel->text().toInt());
+	}
+	else
+	{
+		ui->cultureStartTimeValueLabel->setText("");
+		ui->cultureEndTimeValueLabel->setText("");
+	}
+}
+
+void ScmSkyCultureDialog::selectLocation(QTreeWidgetItem *item, int column)
+{
+	PolygonInfoTreeItem *polygonInfoItem = static_cast<PolygonInfoTreeItem *>(item);
+	ui->scmGeoLocGraphicsView->selectPolygon(polygonInfoItem->getId());
+}
+
+void ScmSkyCultureDialog::changeStartTime()
+{
+	int startYear = ui->startTimeSpinBox->value();
+	int endYear = ui->endTimeSpinBox->value();
+
+	if (startYear > endYear)
+	{
+		ui->startTimeSpinBox->blockSignals(true);
+		ui->startTimeSpinBox->setValue(endYear);
+		ui->startTimeSpinBox->blockSignals(false);
+	}
+}
+
+void ScmSkyCultureDialog::changeEndTime()
+{
+	int startYear = ui->startTimeSpinBox->value();
+	int endYear = ui->endTimeSpinBox->value();
+
+	if (endYear < startYear)
+	{
+		ui->endTimeSpinBox->blockSignals(true);
+		ui->endTimeSpinBox->setValue(startYear);
+		ui->endTimeSpinBox->blockSignals(false);
+	}
+}
+
+void ScmSkyCultureDialog::checkMutExRegions(const QStringList checkedItems)
+{
+	// global should not be selectable when any other region is selected and vice versa
+	if (checkedItems.empty())
+	{
+		// enable all regions
+		ui->regionComboBox->setItemEnabledState("", true, true);
+	}
+	else if (checkedItems.contains("Global"))
+	{
+		// enable "Global"
+		ui->regionComboBox->setItemEnabledState("Global", true);
+		// disable all other regions
+		ui->regionComboBox->setItemEnabledState("Global", false, true);
+	}
+	else
+	{
+		// disable "Global"
+		ui->regionComboBox->setItemEnabledState("Global", false);
+		// enable all other regions
+		ui->regionComboBox->setItemEnabledState("Global", true, true);
+	}
+}
+
+void ScmSkyCultureDialog::addPolygonSetStartTime(int Year)
+{
+	ui->startTimeSpinBox->blockSignals(true);
+	ui->endTimeSpinBox->blockSignals(true);
+
+	ui->startTimeSpinBox->setValue(Year);
+	ui->endTimeSpinBox->setValue(Year);
+
+	ui->startTimeSpinBox->blockSignals(false);
+	ui->endTimeSpinBox->blockSignals(false);
+}
+
+void ScmSkyCultureDialog::addPolygonSetTimeLimits(int minYear, int maxYear)
+{
+	ui->startTimeSpinBox->setMinimum(minYear);
+	ui->startTimeSpinBox->setMaximum(maxYear);
+
+	ui->endTimeSpinBox->setMinimum(minYear);
+	ui->endTimeSpinBox->setMaximum(maxYear);
+}
+
+void ScmSkyCultureDialog::confirmAddPolygon()
+{
+	int startTime = ui->startTimeSpinBox->value();
+	int endTime = ui->endTimeSpinBox->value();
+
+	// increase the polygonCountValueLabel by 1
+	ui->polygonCountValueLabel->setText(QString::number(ui->polygonCountValueLabel->text().toInt() + 1));
+
+	// update the cultureStartTimeValueLabel and cultureEndTimeValueLabel accordingly
+	if (ui->cultureStartTimeValueLabel->text().isEmpty())
+	{
+		ui->cultureStartTimeValueLabel->setText(QString::number(startTime));
+	}
+	else
+	{
+		if (startTime < ui->cultureStartTimeValueLabel->text().toInt())
+		{
+			ui->cultureStartTimeValueLabel->setText(QString::number(startTime));
+		}
+	}
+
+	if (ui->cultureEndTimeValueLabel->text().isEmpty())
+	{
+		ui->cultureEndTimeValueLabel->setText(QString::number(endTime));
+	}
+	else
+	{
+		if (endTime > ui->cultureEndTimeValueLabel->text().toInt())
+		{
+			ui->cultureEndTimeValueLabel->setText(QString::number(endTime));
+		}
+	}
+
+	// update the startTime / endTime of the skyculture
+	maker->setSkyCultureStartTime(ui->cultureStartTimeValueLabel->text().toInt());
+	maker->setSkyCultureEndTime(ui->cultureEndTimeValueLabel->text().toInt());
+
+	// add the current polygon to the map with startTime and endTime as time limits
+	ui->scmGeoLocGraphicsView->addCurrentPoly(startTime, endTime);
+
+	// the the popup dialog
+	hideAddPolygon();
+}
+
+void ScmSkyCultureDialog::cancelAddPolygon()
+{
+	hideAddPolygon();
 }

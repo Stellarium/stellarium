@@ -31,12 +31,14 @@
 #include "types/Description.hpp"
 #include "types/License.hpp"
 #include <optional>
+#include <qtreewidget.h>
 #include <QFile>
 #include <QObject>
 #include <QString>
 #include <QVariant>
 
 class Ui_scmSkyCultureDialog;
+class ScmAddPolygonDialog;
 
 class ScmSkyCultureDialog : public StelDialogSeparate
 {
@@ -85,7 +87,19 @@ private slots:
 	void removeSelectedConstellation();
 	void updateEditConstellationButton();
 	void updateRemoveConstellationButton();
+	void updateRemovePolygonButton();
 	void saveLicense();
+	void updateSkyCultureTimeValue(int year);
+	void addLocation(const scm::CulturePolygon polygon);
+	void removeLocation();
+	void selectLocation(QTreeWidgetItem *item, int column);
+	void showAddPolygon();
+	void hideAddPolygon();
+	void confirmAddPolygon();
+	void cancelAddPolygon();
+	void changeStartTime();
+	void changeEndTime();
+	void checkMutExRegions(const QStringList checkedItems);
 
 private:
 	Ui_scmSkyCultureDialog *ui = nullptr;
@@ -118,6 +132,24 @@ private:
 	 * @return The description from the text edit.
 	 */
 	scm::Description getDescriptionFromTextEdit() const;
+
+	/**
+	 * @brief Initialize the time of the map, slider and spinboxes.
+	 *
+	 */
+	void initSkycultureTime();
+
+	/**
+	 * @brief Set the value of the startTimeSpinbox.
+	 *
+	 */
+	void addPolygonSetStartTime(int Year);
+
+	/**
+	 * @brief Set the limits of the startTimeSpinBox and endTimeSpinBox.
+	 *
+	 */
+	void addPolygonSetTimeLimits(int minYear, int maxYear);
 };
 
 #endif // SCM_SKY_CULTURE_DIALOG_HPP

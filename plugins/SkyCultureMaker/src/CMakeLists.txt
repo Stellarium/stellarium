@@ -34,6 +34,8 @@ SET( SkyCultureMaker_SRCS
      gui/ScmSkyCultureExportDialog.cpp
      gui/ScmHideOrAbortMakerDialog.hpp
      gui/ScmHideOrAbortMakerDialog.cpp
+     gui/ScmGeoLocGraphicsView.hpp
+     gui/ScmGeoLocGraphicsView.cpp
      gui/PreviewPathItem.hpp
      gui/PreviewPathItem.cpp
      gui/PreviewPolygonItem.hpp
@@ -85,7 +87,7 @@ ENDIF()
 ADD_LIBRARY(SkyCultureMaker-static STATIC ${SkyCultureMaker_SRCS} ${SkyCultureMaker_RES_CXX} ${SCM_UIS})
 SET_TARGET_PROPERTIES(SkyCultureMaker-static PROPERTIES OUTPUT_NAME "SkyCultureMaker")
 
-list(APPEND SKY_CULTURE_MAKER_PLUGIN_LINK_LIBS Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
+list(APPEND SKY_CULTURE_MAKER_PLUGIN_LINK_LIBS Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::SvgWidgets)
 # SCM_CONVERTER_ENABLED is inherited from the parent CMakeLists.txt scope
 if(SCM_CONVERTER_ENABLED)
   list(APPEND SKY_CULTURE_MAKER_PLUGIN_LINK_LIBS libskycultureconverter unarr)

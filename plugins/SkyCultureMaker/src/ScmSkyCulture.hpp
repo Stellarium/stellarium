@@ -25,7 +25,6 @@
 #define SCM_SKYCULTURE_HPP
 
 #include <QString>
-// #include <vector>
 #include <optional>
 
 #include "ScmConstellation.hpp"
@@ -33,6 +32,7 @@
 #include "StelSkyCultureMgr.hpp"
 #include "types/Classification.hpp"
 #include "types/CoordinateLine.hpp"
+#include "types/CulturePolygon.hpp"
 #include "types/Description.hpp"
 #include "types/License.hpp"
 #include "types/StarLine.hpp"
@@ -51,6 +51,12 @@ public:
 	 */
 	const QString &getId() const;
 
+	/// Sets the start time of the sky culture
+	void setStartTime(int startTime);
+
+	/// Sets the end time of the sky culture
+	void setEndTime(int endTime);
+
 	/// Sets whether to show common names in addition to the culture-specific ones
 	void setFallbackToInternationalNames(bool fallback);
 
@@ -58,8 +64,14 @@ public:
 	ScmConstellation &addConstellation(const QString &id, const std::vector<CoordinateLine> &coordinates,
 	                                   const std::vector<StarLine> &stars, const bool isDarkConstellation);
 
+	/// Adds a constellation to the sky culture
+	void addLocation(const scm::CulturePolygon &polygon);
+
 	/// Removes a constellation from the sky culture by its ID
 	void removeConstellation(const QString &id);
+
+	/// Removes a location from the sky culture by its ID
+	void removeLocation(int id);
 
 	/// Gets a constellation from the sky culture by its ID
 	ScmConstellation *getConstellation(const QString &id);
@@ -70,7 +82,12 @@ public:
 	/**
 	* @brief Returns the sky culture as a JSON object
 	*/
-	QJsonObject toJson() const;
+	QJsonObject getIndexJson() const;
+
+	/**
+	* @brief Returns the territory of the sky culture as a JSON object
+	*/
+	QJsonObject getTerritoryJson() const;
 
 	/**
 	* @brief Draws the sky culture.
@@ -111,6 +128,15 @@ private:
 
 	/// The description of the sky culture
 	scm::Description description;
+
+	/// The geographical location (as polygons) of the sky culture
+	QList<CulturePolygon> locations;
+
+	/// The earliest year associated with a territory of the sky culture
+	int startTime;
+
+	/// The latest year associated with a territory of the sky culture
+	int endTime;
 };
 
 } // namespace scm
