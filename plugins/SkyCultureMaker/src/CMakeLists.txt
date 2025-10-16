@@ -38,6 +38,8 @@ SET( SkyCultureMaker_SRCS
      gui/PreviewPathItem.cpp
      gui/PreviewPolygonItem.hpp
      gui/PreviewPolygonItem.cpp
+     gui/PolygonInfoTreeItem.hpp
+     gui/PolygonInfoTreeItem.cpp
      gui/MultiselectionComboBox.hpp
      gui/MultiselectionComboBox.cpp
 
