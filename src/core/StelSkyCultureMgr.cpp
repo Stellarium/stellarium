@@ -158,12 +158,7 @@ QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& idFromJSON) c
 
 StelSkyCultureMgr::StelSkyCultureMgr(): flagOverrideUseCommonNames(false), flagUseAbbreviatedNames(false)
 {
-	setObjectName("StelSkyCultureMgr");
-	if (StelApp::isInitialized()) // allow unit test...
-	{
-		QSettings *conf=StelApp::getInstance().getSettings();
-		setFlagUseAbbreviatedNames(conf->value("viewing/flag_constellation_abbreviations", false).toBool());
-	}
+	setObjectName("StelSkyCultureMgr");        
 	makeCulturesList(); // First load needed for testing only.
 }
 
@@ -297,6 +292,7 @@ void StelSkyCultureMgr::init()
 	QSettings* settings = StelApp::getInstance().getSettings();
 	Q_ASSERT(settings);
 	setFlagOverrideUseCommonNames(settings->value("viewing/flag_skyculture_always_fallback_to_international_names", false).toBool());
+	setFlagUseAbbreviatedNames(settings->value("viewing/flag_constellation_abbreviations", false).toBool());
 
 	makeCulturesList(); // Reload after setting this flag!
 	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "modern").toString();
