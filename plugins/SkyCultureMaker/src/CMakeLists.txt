@@ -34,6 +34,10 @@ SET( SkyCultureMaker_SRCS
      gui/ScmSkyCultureExportDialog.cpp
      gui/ScmHideOrAbortMakerDialog.hpp
      gui/ScmHideOrAbortMakerDialog.cpp
+     gui/PreviewPathItem.hpp
+     gui/PreviewPathItem.cpp
+     gui/PreviewPolygonItem.hpp
+     gui/PreviewPolygonItem.cpp
      gui/MultiselectionComboBox.hpp
      gui/MultiselectionComboBox.cpp
 
