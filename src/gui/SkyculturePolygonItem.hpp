@@ -10,10 +10,15 @@ public:
 	SkyculturePolygonItem(QString skycultureId, int startTime, int endTime);
 
 	// public functions
-	void setSelectionState(bool newSelectionState);
 	const QString& getSkycultureId() const {return skycultureId;}
 	int getStartTime() const {return startTime;}
 	int getEndTime() const {return endTime;}
+	void setDefaultBrushColor(const QColor color) {defaultBrushColor = color;}
+	void setSelectedBrushColor(const QColor color) {selectedBrushColor = color;}
+	void setDefaultPenColor(const QColor color) {defaultPenColor = color;}
+	void setSelectedPenColor(const QColor color) {selectedPenColor = color;}
+
+	void setSelectionState(bool newSelectionState);
 	bool existsAtPointInTime(int year) const;
 
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
@@ -39,6 +44,10 @@ private:
 	// utility for change of appearance at runtime
 	bool lastSelectedState;
 	bool isHovered;
+	QColor defaultBrushColor;
+	QColor selectedBrushColor;
+	QColor defaultPenColor;
+	QColor selectedPenColor;
 
 };
 

@@ -17,11 +17,11 @@ SkyculturePolygonItem::SkyculturePolygonItem(QString scId, int startTime, int en
 	setToolTip(skycultureId);
 	setAcceptHoverEvents(true);
 
-	// default ruby shape for testing
-	setPolygon(QPolygonF(QList<QPoint>{QPoint(600.0, 600.0), QPoint(620.0, 620.0), QPoint(620.0, 640.0), QPoint(600.0, 660.0), QPoint(580.0, 640.0), QPoint(580.0, 620.0), QPoint(600.0, 600.0)}));
+	defaultBrushColor = QColor(255, 0, 0, 100);
+	selectedBrushColor = QColor(255, 206, 27, 100);
 
-	setPen(QPen(QColor(200, 0, 0, 50)));
-	setBrush(QBrush(QColor(255, 0, 0, 100)));
+	defaultPenColor = QColor(200, 0, 0, 50);
+	selectedPenColor = QColor(255, 206, 27, 50);
 }
 
 void SkyculturePolygonItem::setSelectionState(bool newSelectionState)
@@ -68,21 +68,25 @@ void SkyculturePolygonItem::paint(QPainter *painter, const QStyleOptionGraphicsI
 {
 	QStyleOptionGraphicsItem opt = *option;
 
+	// set brush / pen to default colors and overwrite it later if necessary
+	setBrush(QBrush(defaultBrushColor));
+	setPen(QPen(defaultPenColor, 0));
+
 	if (isSelected()) {
-		setPen(QPen(QColor(0, 0, 200, 200), 0));
-		setBrush(QBrush(QColor(0, 0, 255, 100)));
+		setBrush(QBrush(selectedBrushColor));
+		setPen(QPen(selectedPenColor, 0));
 		opt.state = QStyle::State_None; // prevent dashed bounding rect
-	} else {
-		setPen(QPen(QColor(200, 0, 0, 200), 0));
 	}
 
 	if (isHovered)
 	{
-		setBrush(QBrush(QColor(255, 0, 0, 150)));
-	}
-	else
-	{
-		setBrush(QBrush(QColor(255, 0, 0, 100)));
+		QColor hoverBrushColor = brush().color();
+		QColor hoverPenColor = pen().color();
+		hoverBrushColor.setAlpha(hoverBrushColor.alpha() + 50);
+		hoverPenColor.setAlpha(hoverPenColor.alpha() + 50);
+
+		setBrush(QBrush(hoverBrushColor));
+		setPen(QPen(hoverPenColor, 0));
 	}
 
 	QGraphicsPolygonItem::paint(painter, &opt, widget);
