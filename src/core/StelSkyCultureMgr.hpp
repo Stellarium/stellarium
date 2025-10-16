@@ -102,7 +102,7 @@ public:
 	QString license;
 	//! The name of region following the United Nations geoscheme UN~M49 https://unstats.un.org/unsd/methodology/m49/
 	//! For skycultures of worldwide applicability (mostly those adhering to IAU constellation borders), use "Global".
-	QString region;
+	QJsonArray region;
 	//! Earliest available year
 	int startTime;
 	//! Latest available year
@@ -249,7 +249,11 @@ public slots:
 
 	//! Get a map of sky culture names in the current language and the corresponding region.
 	//! @return A map of translated sky culture names and corresponding regions.
-	QMap<QString, QString> getSkyCultureRegionMapI18(void) const;
+	QMultiMap<QString, QString> getSkyCultureRegionMapI18(void) const;
+
+	//! Get a map of sky culture names in the current language and the corresponding time limits.
+	//! @return A map of translated sky culture names and the corresponding time limits.
+	QMap<QString, QPair<int, int>> getSkyCultureTimeLimitMapI18(void) const;
 
 	//! Get a list of sky culture IDs
 	QStringList getSkyCultureListIDs(void) const;

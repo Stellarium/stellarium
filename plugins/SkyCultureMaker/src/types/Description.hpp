@@ -26,6 +26,7 @@
 
 #include "Classification.hpp"
 #include "License.hpp"
+#include "Region.hpp"
 #include <QMetaType>
 #include <QString>
 
@@ -55,6 +56,8 @@ struct Description
 	QString acknowledgements;                // content of subsection (L3) in author section
 	scm::LicenseType license;                // license code
 	scm::ClassificationType classification;  // classification code
+	std::vector<scm::RegionType> region;	 // region code
+
 
 	/**
 	 * @brief Check if the description is complete.
@@ -68,7 +71,8 @@ struct Description
 			   !cultureDescription.trimmed().isEmpty() &&
 			   !about.trimmed().isEmpty() &&
 			   !references.trimmed().isEmpty() &&
-			   classification != scm::ClassificationType::NONE;
+			   classification != scm::ClassificationType::NONE &&
+			   !region.empty();
 	}
 };
 } // namespace scm

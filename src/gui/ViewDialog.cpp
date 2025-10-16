@@ -1392,7 +1392,8 @@ void ViewDialog::populateLists()
 		 "Central Asia", "Eastern Asia", "South-eastern Asia", "Southern Asia", "Western Asia",
 		 "Australasia", "Melanesia", "Micronesia", "Polynesia"};
 
-	const QMap<QString, QString> &cultureRegionMap = app.getSkyCultureMgr().getSkyCultureRegionMapI18();
+	const QMultiMap<QString, QString> &cultureRegionMap = app.getSkyCultureMgr().getSkyCultureRegionMapI18();
+	const QMap<QString, QPair<int, int>> &cultureTimeLimitMap = app.getSkyCultureMgr().getSkyCultureTimeLimitMapI18();
 
 	// remove duplicates in list of occuring regions (optional)
 	QList<QString> occuringRegions = cultureRegionMap.values();
@@ -1404,7 +1405,7 @@ void ViewDialog::populateLists()
 	{
 		if (occuringRegions.contains(region))
 		{
-			sortedOccuringRegions.append("------ " + region + " ------");
+			sortedOccuringRegions.append(region);
 		}
 	}
 
@@ -1414,7 +1415,7 @@ void ViewDialog::populateLists()
 		l->addItem(new SeparatorListWidgetItem(region));
 	}
 
-	QMapIterator<QString, QString> cultureRegionIterator(cultureRegionMap);
+	QMultiMapIterator<QString, QString> cultureRegionIterator(cultureRegionMap);
 
 	cultureRegionIterator.toBack(); // reverse iteration to preserve alphabetical order
 	while (cultureRegionIterator.hasPrevious())
