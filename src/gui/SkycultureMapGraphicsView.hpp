@@ -53,12 +53,14 @@ private:
 	QRectF targetRect;
 
 	// functions
-	QList<QPointF> convertLatLonToMeter(const QList<QPointF> &irl, qreal mapWidth, qreal mapHeight);
-	QList<QPointF> convertMeterToView(const QList<QPointF> &irl, qreal mapWidth, qreal mapHeight);
+	QList<QPointF> convertLatLonToMeter(const QList<QPointF> &latLonCoordinates);
+	QList<QPointF> convertMeterToView(const QList<QPointF> &meterCoordinates);
+	QList<QPointF> convertLatLonToView(const QList<QPointF> &latLonCoordinates);
 	void updateCultureVisibility();
 	void smoothFitInView(QRectF targetRect);
 	void selectAllCulturePolygon(const QString &skycultureId);
-	void drawMapContent(const QString &baseMap);
+	void drawMapContent();
+	void loadCulturePolygons();
 	qreal calculateScaleRatio(qreal width, qreal height);
 
 private slots:

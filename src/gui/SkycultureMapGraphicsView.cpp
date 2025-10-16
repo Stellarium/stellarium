@@ -28,7 +28,6 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	setCursor(Qt::ArrowCursor);
 	setMouseTracking(true);
 
-	//setDragMode(QGraphicsView::NoDrag);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
@@ -45,19 +44,8 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	connect(&zoomToDefaultTimer, &QTimeLine::finished, &zoomOnTargetTimer, &QTimeLine::start);
 	connect(&zoomOnTargetTimer, &QTimeLine::valueChanged, this, &SkycultureMapGraphicsView::zoomOnTarget);
 
-	// add items (transfer to dedicated function later)
-
-	// !!!  test basemap drawing  !!!
-
-	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/gen01_capPop500k_wAntarctica_02.svg");
-	scene->addItem(baseMap);
-	scene->setSceneRect(- baseMap->boundingRect().width() * 0.75, - baseMap->boundingRect().height() * 0.5, baseMap->boundingRect().width() * 2.5, baseMap->boundingRect().height() * 2);
-	qInfo() << "basemap width = " << baseMap->boundingRect().width() << " and height = " << baseMap->boundingRect().height();
-	this->defaultRect = baseMap->boundingRect();
-
-	//scene->addRect(- 500.0, - 500.0, 200.0, 200.0, QPen(Qt::black), QBrush(Qt::yellow));
-	//scene->addRect(0.0, 0.0, 500.0, 500.0, QPen(Qt::yellow), QBrush(Qt::blue));
-	//scene->addRect(250.0, 250.0, 500.0, 500.0, QPen(Qt::yellow), QBrush(QColor(255, 0, 0, 100)));
+	// draw basemap and culture polygons
+	drawMapContent();
 
 	SkyculturePolygonItem *lokono_early = new SkyculturePolygonItem("Lokono", 550, 1560);
 	lokono_early->setPolygon(QPolygonF(QList<QPoint>{QPoint(800.0, 800.0), QPoint(840.0, 800.0), QPoint(880.0, 840.0), QPoint(880.0, 880.0),
@@ -69,80 +57,8 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 
 	SkyculturePolygonItem *aztec = new SkyculturePolygonItem("Aztekisch", 1000, 1200);
 
-	SkyculturePolygonItem *tupi_test = new SkyculturePolygonItem("Tupi-Guarani", -100, 100);
-	auto tupiPolyList = QList<QPointF>();
-
-	// load culture Polygon from (geo)JSON
-
-	const QString filePath = StelFileMgr::findFile("skycultures/tupi/tupi_coords.geojson");
-	if (filePath.isEmpty())
-	{
-		qCritical() << "Failed to * find *" << " [tupi polygon coordinate] " << "file in sky culture directory";
-	}
-	else
-	{
-		QFile file(filePath);
-		if (!file.open(QFile::ReadOnly))
-		{
-			qCritical() << "Failed to * open *" << " [tupi polygon coordinate] " << "file in sky culture directory";
-		}
-		else
-		{
-			const auto jsonText = file.readAll();
-			if (jsonText.isEmpty())
-			{
-				qCritical() << "Failed to read data from" << " [tupi polygon coordinate] " << "file in sky culture directory";
-			}
-			else
-			{
-				QJsonParseError error;
-				const auto jsonDoc = QJsonDocument::fromJson(jsonText, &error);
-
-				if (error.error != QJsonParseError::NoError)
-				{
-					qCritical().nospace() << "Failed to parse " << " [tupi polygon coordinate] " << " from sky culture directory " << ": " << error.errorString();
-				}
-				else
-				{
-					if (!jsonDoc.isObject())
-					{
-						qCritical() << "Failed to find the expected JSON structure in" << " [tupi polygon coordinate] " << " from sky culture directory";
-					}
-					else
-					{
-						const auto data = jsonDoc.object();
-						qInfo() << "json object keys: " << data.keys();
-						qInfo() << "data[features].toString(): " << data["features"].toString();
-						qInfo() << "data[features][type].toString(): " << data["features"]["type"].toString();
-						const auto feattures = data["features"];
-						if (data["features"].isArray())
-						{
-							auto featureArray = data["features"].toArray(); // auto = QJasonArray --> header inlcude
-							auto geoArray = featureArray[0].toObject().value("geometry").toArray();
-							qInfo() << "geoArray size: " << geoArray.size();
-							qInfo() << "geoArray[0]: " << geoArray[0];
-
-							//tupi_test->setPolygon(QPolygonF(QList<QPoint>{QPoint(800.0, 800.0), QPoint(840.0, 800.0), QPoint(880.0, 840.0), QPoint(880.0, 880.0),
-							//												 QPoint(840.0, 920.0), QPoint(800.0, 920.0), QPoint(760.0, 880.0), QPoint(760.0, 840.0)}));
-							for(auto i : geoArray)
-							{
-								auto pointArray = i.toArray();
-								//qInfo() << "values: x = " << pointArray[0].toDouble() << " and y = " << pointArray[1].toDouble();
-								tupiPolyList.append(QPointF(pointArray[0].toDouble(), pointArray[1].toDouble()));
-							}
-							//qInfo() << "featureArray size: " << featureArray;
-							//qInfo() << "featureArray coordinates: " << featureArray[0].toObject().value("geometry").toArray().size();
-						}
-						//qInfo() << "features len: " << data["features"]["type"].toString().length();
-						//qInfo() << "features[id].toString: " << data["features"].toString();
-					}
-				}
-			}
-		}
-	}
-
-	tupi_test->setPolygon(QPolygonF(convertLatLonToMeter(tupiPolyList, baseMap->boundingRect().width(), baseMap->boundingRect().height())));
-	scene->addItem(tupi_test);
+	// load culture Polygons from JSON
+	loadCulturePolygons();
 
 	scene->addItem(lokono_early);
 	scene->addItem(lokono_late);
@@ -151,19 +67,89 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	qInfo() << "ende Map Constructor!";
 }
 
-void SkycultureMapGraphicsView::drawMapContent(const QString &baseMap)
+void SkycultureMapGraphicsView::drawMapContent()
 {
 	// delete all items
+	scene()->clear();
+
 	// evaluate projection
-	// load polygon, reproject polygon, add polyogn to map
-	// extra klasse ---> object mit function QPolygonF wgsToMap(const QPolygonF poly)
-	if (baseMap == "WGS84_3857")
-	{
+	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/gen01_capPop500k_wAntarctica_02.svg");
 
-	}
-	else if (baseMap == "WGS84_3857")
-	{
+	scene()->addItem(baseMap);
+	scene()->setSceneRect(- baseMap->boundingRect().width() * 0.75, - baseMap->boundingRect().height() * 0.5, baseMap->boundingRect().width() * 2.5, baseMap->boundingRect().height() * 2);
+	qInfo() << "basemap width = " << baseMap->boundingRect().width() << " and height = " << baseMap->boundingRect().height();
+	this->defaultRect = baseMap->boundingRect();
 
+	loadCulturePolygons();
+}
+
+void SkycultureMapGraphicsView::loadCulturePolygons()
+{
+	// loop over all skycultures
+	StelApp& app = StelApp::getInstance();
+	QMap<QString, QString> cultureIdToTranslationMap = app.getSkyCultureMgr().getDirToI18Map();
+
+	for (const auto &currentCulture : cultureIdToTranslationMap.keys())
+	{
+		// find path of file
+		const QString filePath = StelFileMgr::findFile("skycultures/" + currentCulture + "/territory.json");
+		if (filePath.isEmpty())
+		{
+			qCritical() << "Failed to * find * [ " << currentCulture << " ] territory file in sky culture directory";
+			continue;
+		}
+		// try to open file
+		QFile file(filePath);
+		if (!file.open(QFile::ReadOnly))
+		{
+			qCritical() << "Failed to * open * [ " << currentCulture << " ] territory file in sky culture directory";
+			continue;
+		}
+		// try to read file
+		const auto jsonText = file.readAll();
+		if (jsonText.isEmpty())
+		{
+			qCritical() << "Failed to read data from [ " << currentCulture << " ] territory file in sky culture directory";
+			continue;
+		}
+		// try to parse file as JsonDocument
+		QJsonParseError error;
+		const auto jsonDoc = QJsonDocument::fromJson(jsonText, &error);
+		if (error.error != QJsonParseError::NoError)
+		{
+			qCritical().nospace() << "Failed to parse  [ " << currentCulture << " ] territory file in sky culture directory: " << error.errorString();
+			continue;
+		}
+		if (!jsonDoc.isObject())
+		{
+			qCritical() << "Failed to find the expected JSON structure in [ " << currentCulture << " ] territory file in sky culture directory";
+			continue;
+		}
+		// try to access important information ---> create a new PolygonItem and add it to the scene
+		const auto data = jsonDoc.object();
+		if (data["polygons"].isArray())
+		{
+			const auto polygonArray = data["polygons"].toArray();
+			for (const auto &currentPoly : polygonArray)
+			{
+				auto polygonObject = currentPoly.toObject();
+
+				int startTime = polygonObject.value("startTime").toInt();
+				int endTime = polygonObject.value("endTime").toInt();
+				QList<QPointF> geometry;
+
+				const auto geometryArray = polygonObject.value("geometry").toArray();
+				for (const auto &point : geometryArray)
+				{
+					auto pointArray = point.toArray();
+					geometry.append(QPointF(pointArray[0].toDouble(), pointArray[1].toDouble()));
+				}
+
+				SkyculturePolygonItem *item = new SkyculturePolygonItem(cultureIdToTranslationMap.value(currentCulture), startTime, endTime);
+				item->setPolygon(convertLatLonToMeter(geometry));
+				scene()->addItem(item);
+			}
+		}
 	}
 }
 
@@ -316,15 +302,15 @@ void SkycultureMapGraphicsView::scaleView(double factor)
 	scale(factor, factor);
 }
 
-QList<QPointF> SkycultureMapGraphicsView::convertLatLonToMeter(const QList<QPointF> &irl, qreal mapWidth, qreal mapHeight)
+QList<QPointF> SkycultureMapGraphicsView::convertLatLonToMeter(const QList<QPointF> &latLonCoordinates)
 {
 	QList<QPointF> meter_coords;
 
 	qInfo() << "=== convert latlon to meter ===";
 
-	qInfo() << "width: " << mapWidth << " height: " << mapHeight;
+	qInfo() << "width: " << defaultRect.width() << " height: " << defaultRect.height();
 
-	for(auto point : irl)
+	for(auto point : latLonCoordinates)
 	{
 		// default extent:
 		// x (lon) --> -180.0 | 180.0 --> 360.0
@@ -348,18 +334,18 @@ QList<QPointF> SkycultureMapGraphicsView::convertLatLonToMeter(const QList<QPoin
 		meter_coords.append(QPointF(xMeter, yMeter));
 	}
 
-	return convertMeterToView(meter_coords, mapWidth, mapHeight);
+	return convertMeterToView(meter_coords);
 }
 
-QList<QPointF> SkycultureMapGraphicsView::convertMeterToView(const QList<QPointF> &irl, qreal mapWidth, qreal mapHeight)
+QList<QPointF> SkycultureMapGraphicsView::convertMeterToView(const QList<QPointF> &meterCoordinates)
 {
 	QList<QPointF> view_coords;
 
 	qInfo() << "=== convert meter to view ===";
 
-	qInfo() << "width: " << mapWidth << " height: " << mapHeight;
+	qInfo() << "width: " << defaultRect.width() << " height: " << defaultRect.height();
 
-	for(auto point : irl)
+	for(auto point : meterCoordinates)
 	{
 		// EPSG 3857 WGS 84 extent:
 		// x: - 20037508.34 | 20037508.34 (corresponds to -180.0 to 180.0 in WGS84 bounds) --> 40,075,016.68
@@ -379,12 +365,40 @@ QList<QPointF> SkycultureMapGraphicsView::convertMeterToView(const QList<QPointF
 
 
 		//qInfo() << "Punkt x: " << point.x() << " y: " << point.y();
-		qreal xView = ((point.x() + 20037507.0671618431806564) / 40075014.1343236863613128) * mapWidth;
-		qreal yView = ((point.y() - 18418386.3090785145759583) / -39034031.3094234876334668) * mapHeight;
+		qreal xView = ((point.x() + 20037507.0671618431806564) / 40075014.1343236863613128) * defaultRect.width();
+		qreal yView = ((point.y() - 18418386.3090785145759583) / -39034031.3094234876334668) * defaultRect.height();
 		//qInfo() << "berechnete x: " << xView << " y: " << yView;
 		view_coords.append(QPointF(xView, yView));
 	}
-	qInfo() << "pre return --> liste: " << view_coords;
+	qInfo() << "pre return --> liste (meter to view): " << view_coords;
+
+	return view_coords;
+}
+
+QList<QPointF> SkycultureMapGraphicsView::convertLatLonToView(const QList<QPointF> &latLonCoordinates)
+{
+	QList<QPointF> view_coords;
+
+	qInfo() << "=== convert latlon to view ===";
+
+	qInfo() << "width: " << defaultRect.width() << " height: " << defaultRect.height();
+
+	for(auto point : latLonCoordinates)
+	{
+		// lon: -180.0				  | 180.0				 ---> 360.0
+		// lat: - 89.9989257812500227 |  83.5996093750000000 ---> 173.5985351562500227
+
+		// proj
+		// lon: -180.0	 | 180.0				 ---> 360.0
+		// lat: - 84.930 |  83.62359999999999616 ---> 168.55359999999999616
+		//											  xxx.x31xxx
+
+		qreal xView = ((point.x() + 179.904) / 360) * defaultRect.width();
+		qreal yView = ((point.y() - 83.62359999999999616) / -168.53159999999999616) * defaultRect.height();
+
+		view_coords.append(QPointF(xView, yView));
+	}
+	qInfo() << "pre return --> liste (latLon to view): " << view_coords;
 
 	return view_coords;
 }
@@ -473,9 +487,6 @@ void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId)
 		emit(timeValueChanged(skyCulturePolygon->getStartTime()));
 	}
 
-	// select the new culture
-	//scene()->clearSelection();
-	//skyCulturePolygon->setSelected(true);
 	selectAllCulturePolygon(skycultureId);
 
 	const QRectF polyBbox = skyCulturePolygon->boundingRect();
