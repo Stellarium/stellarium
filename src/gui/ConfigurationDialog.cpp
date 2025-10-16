@@ -1024,6 +1024,7 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("viewing/point_size",                            propMgr->getStelPropertyValue("GridLinesMgr.pointSize").toInt());
 
         conf->setValue("viewing/constellation_font_size",               propMgr->getStelPropertyValue("ConstellationMgr.fontSize").toInt());
+        conf->setValue("viewing/flag_constellation_abbreviations",      propMgr->getStelPropertyValue("StelSkyCultureMgr.flagUseAbbreviatedNames").toBool());
         conf->setValue("viewing/flag_constellation_drawing",            propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool());
         conf->setValue("viewing/flag_constellation_name",               propMgr->getStelPropertyValue("ConstellationMgr.namesDisplayed").toBool());
         conf->setValue("viewing/flag_constellation_boundaries",         propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool());
