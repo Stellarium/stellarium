@@ -261,6 +261,10 @@ public slots:
 	//! Returns a map from sky culture IDs/folders to sky culture names.
 	QMap<QString, StelSkyCulture> getDirToNameMap() const { return dirToNameEnglish; }
 
+	//! Get a map of sky culture IDs / folders and the corresponding (translated) names in the current language.
+	//! @return A map of sky culture IDs and the corresponding translated names in the current language.
+	QMap<QString, QString> getDirToI18Map(void) const;
+
 	static StelObject::CulturalDisplayStyle convertCulturalDisplayStyleFromCSVstring(const QString &csv);
 	static QString convertCulturalDisplayStyleToCSVstring(const StelObject::CulturalDisplayStyle style);
 

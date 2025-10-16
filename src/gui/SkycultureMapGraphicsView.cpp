@@ -1,5 +1,7 @@
 #include "SkycultureMapGraphicsView.hpp"
 #include "SkyculturePolygonItem.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
 #include <qjsonarray.h>
 #include <qgraphicssvgitem.h>
 #include <qscrollbar.h>
