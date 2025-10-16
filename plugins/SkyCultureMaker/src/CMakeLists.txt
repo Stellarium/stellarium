@@ -34,6 +34,8 @@ SET( SkyCultureMaker_SRCS
      gui/ScmSkyCultureExportDialog.cpp
      gui/ScmHideOrAbortMakerDialog.hpp
      gui/ScmHideOrAbortMakerDialog.cpp
+     gui/MultiselectionComboBox.hpp
+     gui/MultiselectionComboBox.cpp
 
      types/CoordinateLine.hpp
      types/Description.hpp
