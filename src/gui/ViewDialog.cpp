@@ -1422,8 +1422,9 @@ void ViewDialog::populateLists()
 	{
 		cultureRegionIterator.previous();
 		QListWidgetItem* item = new QListWidgetItem(cultureRegionIterator.key());
-		item->setData(Qt::UserRole, - 100); // startTime
-		item->setData(Qt::UserRole + 1, 100); // endTime
+		cultureTimeLimitMap.value(cultureRegionIterator.key());
+		item->setData(Qt::UserRole, cultureTimeLimitMap.value(cultureRegionIterator.key()).first); // startTime
+		item->setData(Qt::UserRole + 1, cultureTimeLimitMap.value(cultureRegionIterator.key()).second); // endTime
 
 		l->insertItem(l->row(l->findItems(cultureRegionIterator.value(), Qt::MatchContains).at(0)) + 1, item);
 	}
