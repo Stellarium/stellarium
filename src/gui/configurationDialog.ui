@@ -1082,13 +1082,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="checkBoxUseFormattingOutput">
-               <property name="text">
-                <string>Tabular output for coordinates and time</string>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0">
               <widget class="QCheckBox" name="checkBoxUMShortNotationSurfaceBrightness">
                <property name="text">
@@ -1123,20 +1116,40 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="checkBoxUseFormattingOutput">
+               <property name="text">
+                <string>Tabular output for coordinates and time</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
               <widget class="QCheckBox" name="checkBoxUseCCSDesignations">
+               <property name="toolTip">
+                <string>Use common symbols for coordinate systems</string>
+               </property>
                <property name="text">
                 <string>Designations for celestial coordinate systems</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
+             <item row="4" column="1">
               <widget class="QCheckBox" name="checkBoxPolarDistance">
                <property name="toolTip">
                 <string>Use distance from North Celestial Pole, not declination from equator in equatorial coordinates</string>
                </property>
                <property name="text">
                 <string>Polar distance, not declination</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="checkBoxNegativeHourAngles">
+               <property name="toolTip">
+                <string>Hour angles usually run 0...24h. This counts -12h...12h.</string>
+               </property>
+               <property name="text">
+                <string>Allow negative hour angles </string>
                </property>
               </widget>
              </item>
@@ -2806,9 +2819,12 @@
   <tabstop>checkBoxExtra</tabstop>
   <tabstop>checkBoxUMSurfaceBrightness</tabstop>
   <tabstop>checkBoxUMShortNotationSurfaceBrightness</tabstop>
+  <tabstop>checkBoxUseCCSDesignations</tabstop>
   <tabstop>checkBoxUseFormattingOutput</tabstop>
   <tabstop>checkBoxDecimalDegrees</tabstop>
   <tabstop>checkBoxAzimuthFromSouth</tabstop>
+  <tabstop>checkBoxNegativeHourAngles</tabstop>
+  <tabstop>checkBoxPolarDistance</tabstop>
   <tabstop>showConstellationBoundariesButtonCheckBox</tabstop>
   <tabstop>showConstellationArtsButtonCheckBox</tabstop>
   <tabstop>showAsterismLinesButtonCheckBox</tabstop>

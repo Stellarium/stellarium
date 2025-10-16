@@ -337,6 +337,7 @@ void ConfigurationDialog::createDialogContent()
 
 	connectBoolProperty(ui->checkBoxDecimalDegrees,              "StelApp.flagShowDecimalDegrees");
 	connectBoolProperty(ui->checkBoxAzimuthFromSouth,            "StelApp.flagUseAzimuthFromSouth");
+	connectBoolProperty(ui->checkBoxNegativeHourAngles,          "StelApp.flagUseNegativeHourAngles");
 	connectBoolProperty(ui->checkBoxPolarDistance,               "StelApp.flagUsePolarDistance");
 
 	connectBoolProperty(ui->mouseTimeoutCheckbox,                "MainView.flagCursorTimeout");
