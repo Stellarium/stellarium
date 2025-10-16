@@ -657,8 +657,8 @@ void ViewDialog::createDialogContent()
 
 	connectBoolProperty(ui->zodiacCheckBox, "ConstellationMgr.zodiacDisplayed");
 	connectBoolProperty(ui->lunarSystemCheckBox, "ConstellationMgr.lunarSystemDisplayed");
-	ui->zodiacColorButton->setup("ConstellationMgr.zodiacColor", "color/sc_zodiac_color");
-	ui->lunarSystemColorButton->setup("ConstellationMgr.lunarSystemColor", "color/sc_lunarsystem_color");
+	ui->zodiacColorButton->setup("ConstellationMgr.zodiacColor", "color/skyculture_zodiac_color");
+	ui->lunarSystemColorButton->setup("ConstellationMgr.lunarSystemColor", "color/skyculture_lunarsystem_color");
 
 	connectIntProperty(ui->zodiacThicknessSpinBox,	                "ConstellationMgr.zodiacThickness");
 	connectIntProperty(ui->lunarSystemThicknessSpinBox,	        "ConstellationMgr.lunarSystemThickness");
