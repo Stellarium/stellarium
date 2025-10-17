@@ -255,15 +255,25 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 
 
 				textAngle=StelUtils::fmodpos(textAngle, 2.*M_PI);
+				if ((d->frameType==StelCore::FrameFixedEquatorial) && StelApp::getInstance().getFlagUseNegativeHourAngles() && (textAngle>M_PI))
+					textAngle -= 2.*M_PI;
 				if (withDecimalDegree)
-					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
+				{
+					bool positive= !(d->frameType==StelCore::FrameFixedEquatorial) || !(StelApp::getInstance().getFlagUseNegativeHourAngles());
+					text = StelUtils::radToDecDegStr(textAngle, 4, false, positive);
+				}
 				else
 				{
 					if (QList<StelCore::FrameType>{StelCore::FrameObservercentricEclipticJ2000, StelCore::FrameObservercentricEclipticOfDate,
 						StelCore::FrameGalactic, StelCore::FrameSupergalactic}.contains(d->frameType))
 						text = StelUtils::radToDmsStrAdapt(textAngle);
 					else
-						text = StelUtils::radToHmsStrAdapt(textAngle);
+					{
+						const bool neg = (d->frameType==StelCore::FrameFixedEquatorial) && (StelApp::getInstance().getFlagUseNegativeHourAngles()) && (textAngle<0.);
+						text = StelUtils::radToHmsStrAdapt(fabs(textAngle));
+						if (neg)
+							text = text.trimmed().prepend('-');
+					}
 				}
 			}
 		}
@@ -1255,7 +1265,12 @@ void SkyLine::draw(StelPainter &sPainter, const float oldLineWidth) const
 							case EQUATOR_J2000:
 							case EQUATOR_OF_DATE:
 							case FIXED_EQUATOR:
-								if (line_type==FIXED_EQUATOR) value=(360-i) % 360;
+								if (line_type==FIXED_EQUATOR)
+								{
+									value=(360-i) % 360;
+									if (StelApp::getInstance().getFlagUseNegativeHourAngles() && (value > 180.) )
+										value -= 360.;
+								}
 								if (!StelApp::getInstance().getFlagShowDecimalDegrees())
 								{
 									value /= 15;

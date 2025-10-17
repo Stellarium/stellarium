@@ -272,21 +272,26 @@ void PointerCoordinates::draw(StelCore *core)
 		}
 		case HourAngle:
 		{
+			const bool negHA=StelApp::getInstance().getFlagUseNegativeHourAngles();
 			Vec3d v = core->j2000ToAltAz(mousePosition, StelCore::RefractionAuto);
 			StelUtils::rectToSphe(&cx,&cy,Mat4d::zrotation(-core->getLocalSiderealTime())*core->altAzToEquinoxEqu(v, StelCore::RefractionOff));
-			cx = 2.*M_PI-cx;
+			cx = StelUtils::fmodpos(2.*M_PI-cx, 2.*M_PI);
 			coordsSystem = qc_("HA/Dec", "abbreviated in the plugin");
 			if (withDecimalDegree)
 			{
-				double ha_sidereal = cx*12/M_PI;
-				if (ha_sidereal>24.)
-					ha_sidereal -= 24.;
-				cxt = QString("%1h").arg(ha_sidereal, 0, 'f', 5);
+				double ha_sidereal = StelUtils::fmodpos(cx*180./M_PI, 360.);
+				if (negHA && (ha_sidereal>180.))
+					ha_sidereal -= 360.;
+				cxt = QString("%1°").arg(ha_sidereal, 0, 'f', 5);
 				cyt = StelUtils::radToDecDegStr(cy);
 			}
 			else
 			{
-				cxt = StelUtils::radToHmsStr(cx);
+				if (negHA && (cx>M_PI))
+					cx -= 2.*M_PI;
+				cxt = StelUtils::radToHmsStr(fabs(cx));
+				if (cx<0.)
+					cxt=cxt.trimmed().prepend('-');
 				cyt = StelUtils::radToDmsStr(cy);
 			}
 			break;		

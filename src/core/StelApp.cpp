@@ -288,6 +288,7 @@ StelApp::StelApp(StelMainView *parent)
 	, gl(Q_NULLPTR)
 	, flagShowDecimalDegrees(false)
 	, flagUseAzimuthFromSouth(false)
+	, flagUseNegativeHourAngles(false)
 	, flagUseFormattingOutput(false)
 	, flagUseCCSDesignation(false)
 	, flagOverwriteInfoColor(false)
@@ -699,6 +700,7 @@ void StelApp::init(QSettings* conf)
 
 	setFlagShowDecimalDegrees(confSettings->value("gui/flag_show_decimal_degrees", false).toBool());
 	setFlagSouthAzimuthUsage(confSettings->value("gui/flag_use_azimuth_from_south", false).toBool());
+	setFlagUseNegativeHourAngles(confSettings->value("gui/flag_use_negative_hour_angles", false).toBool());
 	setFlagPolarDistanceUsage(confSettings->value("gui/flag_use_polar_distance", false).toBool());
 	setFlagUseFormattingOutput(confSettings->value("gui/flag_use_formatting_output", false).toBool());
 	setFlagUseCCSDesignation(confSettings->value("gui/flag_use_ccs_designations", false).toBool());
@@ -1281,6 +1283,16 @@ void StelApp::setFlagSouthAzimuthUsage(bool use)
 		flagUseAzimuthFromSouth=use;
 		StelApp::immediateSave("gui/flag_use_azimuth_from_south", use);
 		emit flagUseAzimuthFromSouthChanged(use);
+	}
+}
+
+void StelApp::setFlagUseNegativeHourAngles(bool use)
+{
+	if (flagUseNegativeHourAngles!=use)
+	{
+		flagUseNegativeHourAngles=use;
+		StelApp::immediateSave("gui/flag_use_negative_hour_angles", use);
+		emit flagUseNegativeHourAnglesChanged(use);
 	}
 }
 
