@@ -1119,6 +1119,8 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("ra", ra*M_180_PI);
 	map.insert("dec", dec*M_180_PI);
+	// polar distance
+	map.insert("pd", (M_PI_2 - dec)*M_180_PI);
 	map.insert("iauConstellation", core->getIAUConstellation(pos));
 
 	QString currentObjStr = getEnglishName();
@@ -1161,6 +1163,8 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("raJ2000", ra*M_180_PI);
 	map.insert("decJ2000", dec*M_180_PI);
+	// polar distance
+	map.insert("pdJ2000", (M_PI_2 - dec)*M_180_PI);
 
 	// apparent altitude/azimuth
 	pos = getAltAzPosApparent(core);
