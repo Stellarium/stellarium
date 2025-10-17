@@ -138,6 +138,10 @@ public:
 
 	static double getInputPixmapsDevicePixelRatio() { return GUI_INPUT_PIXMAPS_SCALE; }
 
+	//! brighten image @param img by @param factor (Useful: [0.0...1.8])
+	//! The image is processed in HSV color space, V is modified.
+	static void brightenImage(QImage &img, float factor);
+
 
 signals:
 	//! Triggered when the button state changes
