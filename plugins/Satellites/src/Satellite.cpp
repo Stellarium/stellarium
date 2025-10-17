@@ -1126,7 +1126,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			return;
 	}
 
-	const float magSat = getVMagnitude(core);
+	const float magSat = getVMagnitudeWithExtinction(core);
 	if (flagVFMagnitude)
 	{
 		// visual filter is activated and he is applicable!
