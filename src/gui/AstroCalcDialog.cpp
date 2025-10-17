@@ -6398,7 +6398,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		QString elevationStr = dash;
 		StelUtils::rectToSphe(&az, &alt, object1->getAltAzPosAuto(core));
 		if (withDecimalDegree)
-			elevationStr = StelUtils::radToDecDegStr(alt, 5, false, true);
+			elevationStr = StelUtils::radToDecDegStr(alt, 5);
 		else
 			elevationStr = StelUtils::radToDmsPStr(alt, 2);
 
@@ -6473,7 +6473,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		QString elevationStr = dash;
 		StelUtils::rectToSphe(&az, &alt, object1->getAltAzPosAuto(core));
 		if (withDecimalDegree)
-			elevationStr = StelUtils::radToDecDegStr(alt, 5, false, true);
+			elevationStr = StelUtils::radToDecDegStr(alt, 5);
 		else
 			elevationStr = StelUtils::radToDmsPStr(alt, 2);
 
@@ -6590,7 +6590,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		QString elevationStr = dash;
 		StelUtils::rectToSphe(&az, &alt, object1->getAltAzPosAuto(core));
 		if (withDecimalDegree)
-			elevationStr = StelUtils::radToDecDegStr(alt, 5, false, true);
+			elevationStr = StelUtils::radToDecDegStr(alt, 5);
 		else
 			elevationStr = StelUtils::radToDmsPStr(alt, 2);
 
