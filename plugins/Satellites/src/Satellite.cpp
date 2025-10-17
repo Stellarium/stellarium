@@ -1183,7 +1183,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 					painter.setColor(invisibleSatelliteColor, hintBrightness);
 				}
 				else
-					painter.setColor(color, hintBrightness);
+					painter.setColor(hintColor, hintBrightness);
 
 				// Draw the label of the satellite when it enabled
 				if (txtMag <= sd->getLimitMagnitude() && showLabels)
@@ -1193,7 +1193,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		else if (!(hideInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE))
 		{
 			const Vec3f drawColor = (coloredInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE) ? invisibleSatelliteColor : hintColor; // Use hintColor for visible satellites only when coloredInvisibleSatellitesFlag is true
-			painter.setColor(drawColor*hintBrightness, hintBrightness);
+			painter.setColor(drawColor, hintBrightness);
 			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularRadius(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularRadius(core))
 				painter.setColor(transitSatelliteColor, 1.f);
 
