@@ -121,6 +121,13 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QCheckBox" name="mergeLinesCB">
+        <property name="text">
+         <string>Merge constellation lines into polylines on export</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>

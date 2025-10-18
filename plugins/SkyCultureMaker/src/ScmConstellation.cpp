@@ -188,7 +188,7 @@ void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter) con
 	drawNames(core, sPainter, defaultConstellationNameColor);
 }
 
-QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId) const
+QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId, const bool mergeLines) const
 {
 	QJsonObject json;
 
@@ -210,6 +210,11 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId) const
 		{
 			linesArray.append(coord.toJson());
 		}
+	}
+
+	if (mergeLines)
+	{
+		mergeLinesIntoPolylines(linesArray);
 	}
 
 	json["id"]    = "CON " + skyCultureId + " " + id;
@@ -283,4 +288,83 @@ void scm::ScmConstellation::hide()
 void scm::ScmConstellation::show()
 {
 	isHidden = false;
+}
+
+void scm::ScmConstellation::mergeLinesIntoPolylines(QJsonArray &lines) const
+{
+	if (lines.size() < 2)
+	{
+		// Nothing to merge
+		return;
+	}
+
+	// Step 1: merge line ends with other line starts
+	for (int growableLineIdx = 0; growableLineIdx < lines.size(); ++growableLineIdx)
+	{
+		QJsonArray growableLine = lines.at(growableLineIdx).toArray();
+
+		// Look for a line that starts where the growableLine ends
+		for (int attachableLineIdx = growableLineIdx + 1; attachableLineIdx < lines.size(); ++attachableLineIdx)
+		{
+			QJsonArray attachableLine = lines.at(attachableLineIdx).toArray();
+
+			// Merge attachableLine into growableLine
+			if (growableLine.last() == attachableLine.first())
+			{
+				// Append all points from attachableLine except the first (which is duplicate)
+				attachableLine.removeFirst();
+				for (QJsonValue attachableLinePoint : attachableLine)
+				{
+					growableLine.append(attachableLinePoint);
+				}
+				
+				// Update the merged lines array
+				lines[growableLineIdx] = growableLine;
+				lines.removeAt(attachableLineIdx);
+
+				// Recheck the merged line
+				--growableLineIdx;
+				// Reset j to growableLineIdx + 1 to continue merging
+				attachableLineIdx = growableLineIdx + 1;
+				break;
+			}
+		}
+	}
+
+	// Step 2: merge line starts with other line ends
+	for (int growableLineIdx = 0; growableLineIdx < lines.size(); ++growableLineIdx)
+	{
+		QJsonArray growableLine = lines.at(growableLineIdx).toArray();
+
+		// Look for a line that ends where the growableLine starts
+		for (int attachableLineIdx = growableLineIdx + 1; attachableLineIdx < lines.size(); ++attachableLineIdx)
+		{
+			QJsonArray attachableLine = lines.at(attachableLineIdx).toArray();
+
+			if (growableLine.first() == attachableLine.last())
+			{
+				QJsonArray newGrowableLine;
+				// Prepend all points from attachableLine except the last (which is duplicate)
+				attachableLine.removeLast();
+				for (QJsonValue attachableLinePoint : attachableLine)
+				{
+					newGrowableLine.append(attachableLinePoint);
+				}
+				for (QJsonValue growableLinePoint : growableLine)
+				{
+					newGrowableLine.append(growableLinePoint);
+				}
+				growableLine = newGrowableLine;
+
+				lines[growableLineIdx] = growableLine;
+				lines.removeAt(attachableLineIdx);
+
+				// Recheck the merged line
+				--growableLineIdx;
+				// Reset j to growableLineIdx + 1 to continue merging
+				attachableLineIdx = growableLineIdx + 1;
+				break;
+			}
+		}
+	}
 }
