@@ -111,6 +111,10 @@ public:
 	 */
 	std::optional<QString> getIPA() const;
 
+	void setDescription(const QString& description) { this->description = description; }
+
+	QString getDescription() const { return description; }
+
 	/**
 	 * @brief Sets the artwork.
 	 * 
@@ -237,6 +241,9 @@ private:
 
 	/// List of stars forming the segments. Might be empty.
 	std::vector<StarLine> stars;
+
+	/// A short description of the constellation that could be shown in e.g. an info block.
+	QString description;
 
 	/// Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;

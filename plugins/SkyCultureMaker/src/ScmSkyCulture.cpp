@@ -108,7 +108,6 @@ bool scm::ScmSkyCulture::saveDescriptionAsMarkdown(QFile &file)
 		// the sky heading is not only needed for the sky description, but also for the subsections
 		const bool hasSkyHeading = !desc.sky.trimmed().isEmpty() || !desc.moonAndSun.trimmed().isEmpty() || !desc.planets.trimmed().isEmpty() ||
 		                           !desc.zodiac.trimmed().isEmpty() ||
-		                           !desc.constellations.trimmed().isEmpty() ||
 		                           !desc.milkyWay.trimmed().isEmpty() || !desc.otherObjects.trimmed().isEmpty();
 
 		QTextStream out(&file);

@@ -296,6 +296,25 @@ QString ScmSkyCultureDialog::getDisplayNameFromConstellation(const scm::ScmConst
 	return constellation.getEnglishName() + " (" + constellation.getId() + ")";
 }
 
+QString ScmSkyCultureDialog::makeConstellationsSection() const
+{
+	if (!constellations) return {};
+
+	QString text;
+	for (const auto& constellation : *constellations)
+	{
+		const auto descr = constellation.getDescription().trimmed();
+		if (descr.isEmpty()) continue;
+		if (!text.isEmpty())
+			text += "\n\n";
+		text += "##### ";
+		text += constellation.getEnglishName();
+		text += "\n\n";
+		text += descr;
+	}
+	return text.trimmed();
+}
+
 scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 {
 	scm::Description desc;
@@ -310,7 +329,7 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 	desc.milkyWay     = ui->milkyWayTE->toPlainText();
 	desc.otherObjects = ui->otherObjectsTE->toPlainText();
 
-	desc.constellations   = ui->constellationsDescTE->toPlainText();
+	desc.constellations = makeConstellationsSection();
 
 	desc.references       = ui->referencesTE->toPlainText();
 
@@ -338,7 +357,6 @@ void ScmSkyCultureDialog::resetDialog()
 		ui->zodiacTE->clear();
 		ui->milkyWayTE->clear();
 		ui->otherObjectsTE->clear();
-		ui->constellationsDescTE->clear();
 		ui->referencesTE->clear();
 		ui->acknowledgementsTE->clear();
 

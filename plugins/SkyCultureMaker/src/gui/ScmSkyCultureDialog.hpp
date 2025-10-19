@@ -113,6 +113,11 @@ private:
 	void setIdFromName(QString &name);
 
 	/**
+	 * @brief Compiles the Constellations section from descriptions of all constellations.
+	 */
+	QString makeConstellationsSection() const;
+
+	/**
 	 * @brief Gets the description from the text edit.
 	 *
 	 * @return The description from the text edit.
