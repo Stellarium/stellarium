@@ -94,6 +94,7 @@ SkyCultureMaker::SkyCultureMaker()
 	initSetting(conf, "floatingLineColor", "1.0,0.7,0.7");
 	initSetting(conf, "floatingLineAlpha", 0.5);
 	initSetting(conf, "maxSnapRadiusInPixels", 25);
+	initSetting(conf, "mergeLinesOnExport", true);
 
 	conf->endGroup();
 }

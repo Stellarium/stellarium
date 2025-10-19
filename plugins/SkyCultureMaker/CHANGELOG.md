@@ -2,6 +2,7 @@
 
 ## Version 1.0.1
 
+* New Feature: Option to automatically merge lines into polylines on export
 * Fix: Erased lines are still exported (#4593)
 * Fix: Drawn constellations are not reset after "Export and Exit"
 * Fix: "Export and Exit" exits even when export failed, deleting all unsaved progress

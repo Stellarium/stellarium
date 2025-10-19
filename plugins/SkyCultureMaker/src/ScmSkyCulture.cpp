@@ -66,7 +66,7 @@ std::vector<scm::ScmConstellation> *scm::ScmSkyCulture::getConstellations()
 	return &constellations;
 }
 
-QJsonObject scm::ScmSkyCulture::toJson() const
+QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 {
 	QJsonObject scJsonObj;
 	scJsonObj["id"] = id;
@@ -78,7 +78,7 @@ QJsonObject scm::ScmSkyCulture::toJson() const
 	QJsonArray constellationsArray;
 	for (const auto &constellation : constellations)
 	{
-		constellationsArray.append(constellation.toJson(id));
+		constellationsArray.append(constellation.toJson(id, mergeLines));
 	}
 	scJsonObj["constellations"] = constellationsArray;
 

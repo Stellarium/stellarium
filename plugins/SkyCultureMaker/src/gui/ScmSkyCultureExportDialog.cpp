@@ -69,6 +69,12 @@ void ScmSkyCultureExportDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmSkyCultureExportDialog::close);
+
+	ui->mergeLinesCB->setChecked(
+		StelApp::getInstance().getSettings()->value("SkyCultureMaker/mergeLinesOnExport", true).toBool());
+	connect(ui->mergeLinesCB, &QCheckBox::toggled, this, [](bool checked)
+	        { StelApp::getInstance().getSettings()->setValue("SkyCultureMaker/mergeLinesOnExport", checked); });
+
 	connect(ui->exportBtn, &QPushButton::clicked, this, &ScmSkyCultureExportDialog::exportSkyCulture);
 	connect(ui->exportAndExitBtn, &QPushButton::clicked, this, &ScmSkyCultureExportDialog::exportAndExitSkyCulture);
 	connect(ui->cancelBtn, &QPushButton::clicked, this, &ScmSkyCultureExportDialog::close);
@@ -146,8 +152,10 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	}
 
 	// Export the sky culture to the index.json file
-	qDebug() << "SkyCultureMaker: Exporting sky culture...";
-	QJsonObject scJsonObject = currentSkyCulture->toJson();
+	bool mergeLinesOnExport =
+		StelApp::getInstance().getSettings()->value("SkyCultureMaker/mergeLinesOnExport", true).toBool();
+	qDebug() << "SkyCultureMaker: Exporting sky culture. Merge lines on export:" << mergeLinesOnExport;
+	QJsonObject scJsonObject = currentSkyCulture->toJson(mergeLinesOnExport);
 	QJsonDocument scJsonDoc(scJsonObject);
 	if (scJsonDoc.isNull() || scJsonDoc.isEmpty())
 	{
