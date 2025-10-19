@@ -30,7 +30,7 @@ Another name for the two stars β Ursae Minoris and γ Ursae Minoris. According 
 
 Yet another name for the two-star asterism β UMi and γ UMi [#1].
 
-##### Al-Nayem
+##### Al-Naayem
 
 The meaning is uncertain; it could refer to camels. Composed of the seven stars of the Big Dipper [#1].
 
@@ -42,7 +42,7 @@ The seven stars of the Big Dipper [#1].
 
 The seven stars of the Big Dipper, known as the seven sisters carrying their father's bier, the father killed by al-Ǧady (Polaris) [#1].
 
-##### The Saddle Of The Camel
+##### Saddle Of The Camel
 
 The five bright stars of Cassiopeia, a name used in western areas along the Red Sea in Saudi Arabia [#1].
 
@@ -58,7 +58,7 @@ The front mouth of the bucket (24th mansion of the Moon) [#2].
 
 The rear mouth of the bucket (25th mansion of the Moon) [#2].
 
-##### The Bucket Rope
+##### The Bucket Cord
 
 The rope used to pull the bucket from the well (26th mansion of the Moon) [#2].
 
@@ -166,21 +166,21 @@ An ancient Arab asterism consisting of a triangle of three stars with a fourth s
 
 An ancient Arab asterism of a small triangle of stars (head of Orion) representing a mark on the side of a horse (3rd mansion of the Moon) [#2].
 
-##### Stoopness
+##### The Downward Bend
 
 An ancient Arab asterism (4th mansion of the Moon) [#2].
-
-##### Back Of Al-Jawza
-
-The three stars at Orion’s belt. This name, along with Northern Horn of al-Jawza and Southern Horn of al-Jawza star names, originates from western Saudi Arabia and is used by Red Sea fishers. The source is oral tradition from the seaport Umluj, Saudi Arabia [#1].
 
 ##### Claws Of Al-Jawza
 
 Refers to stars α, γ, β, and κ Ori, transmitted orally from the Qasseem region of Saudi Arabia [#1].
 
-##### Claws Of Al-Jawza (Alternate)
+##### The Claws
 
 Another name for the α, γ, β, and κ Ori stars, also from Qasseem, Saudi Arabia [#1].
+
+##### Back Of Al-Jawza
+
+The three stars at Orion’s belt. This name, along with Northern Horn of al-Jawza and Southern Horn of al-Jawza star names, originates from western Saudi Arabia and is used by Red Sea fishers. The source is oral tradition from the seaport Umluj, Saudi Arabia [#1].
 
 ##### Mosque Of Al-Thurayya
 
@@ -188,7 +188,7 @@ A triangle of stars that rise before al-Thurayya (the Pleiades). It includes α 
 
 ##### Al-Jawza
 
-A proper name for a woman; this constellation represents a female figure formed by the Orion stars, identical to the ancient Arab tradition. Some oral traditions limit the name to the three stars of Orion’s belt [#2] [#3].
+A proper name for a woman; this constellation represents a female figure formed by the Orion stars, identical to the ancient Arab tradition. Some oral traditions limit the name to the three stars of Orion’s belt [#2][#3].
 
 ## References
 
