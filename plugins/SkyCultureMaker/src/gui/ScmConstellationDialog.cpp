@@ -87,8 +87,8 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 
 	// Hide the original constellation while editing
 	constellation->hide();
-	// Load the coordinates and stars to ScmDraw
-	maker->getScmDraw()->loadLines(constellation->getCoordinates(), constellation->getStars());
+	// Load the lines to ScmDraw
+	maker->getScmDraw()->loadLines(constellation->getLines());
 
 	// Loads the artwork
 	imageItem->setArtwork(constellation->getArtwork());
@@ -442,7 +442,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	}
 
 	// Check if drawnStars is empty
-	auto drawnConstellation = maker->getScmDraw()->getCoordinates();
+	auto drawnConstellation = maker->getScmDraw()->getConstellationLines();
 	if (drawnConstellation.empty())
 	{
 		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
@@ -483,9 +483,8 @@ void ScmConstellationDialog::saveConstellation()
 {
 	if (canConstellationBeSaved())
 	{
-		auto coordinates = maker->getScmDraw()->getCoordinates();
-		auto stars       = maker->getScmDraw()->getStars();
-		QString id       = constellationId.isEmpty() ? constellationPlaceholderId : constellationId;
+		auto lines = maker->getScmDraw()->getConstellationLines();
+		QString id = constellationId.isEmpty() ? constellationPlaceholderId : constellationId;
 
 		scm::ScmSkyCulture *culture = maker->getCurrentSkyCulture();
 		assert(culture != nullptr); // already checked by canConstellationBeSaved
@@ -496,7 +495,7 @@ void ScmConstellationDialog::saveConstellation()
 			culture->removeConstellation(constellationBeingEdited->getId());
 		}
 
-		scm::ScmConstellation &constellation = culture->addConstellation(id, coordinates, stars,
+		scm::ScmConstellation &constellation = culture->addConstellation(id, lines,
 		                                                                 isDarkConstellation);
 
 		constellation.setEnglishName(constellationEnglishName);

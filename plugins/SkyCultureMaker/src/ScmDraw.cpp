@@ -64,21 +64,20 @@ void scm::ScmDraw::appendDrawPoint(const Vec3d &point, const std::optional<QStri
 {
 	if (hasFlag(drawState, (Drawing::hasStart | Drawing::hasFloatingEnd)))
 	{
-		std::get<CoordinateLine>(currentLine).end = point;
-		std::get<StarLine>(currentLine).end       = starID;
-		drawState                                 = Drawing::hasEnd;
+		currentLine.end.coordinate = point;
+		currentLine.end.star       = starID;
+		drawState                  = Drawing::hasEnd;
 
-		drawnLines.coordinates.push_back(std::get<CoordinateLine>(currentLine));
-		drawnLines.stars.push_back(std::get<StarLine>(currentLine));
-		std::get<CoordinateLine>(currentLine).start = point;
-		std::get<StarLine>(currentLine).start       = starID;
-		drawState                                   = drawState | Drawing::hasStart;
+		drawnLines.push_back(currentLine);
+		currentLine.start.coordinate = point;
+		currentLine.start.star       = starID;
+		drawState                    = drawState | Drawing::hasStart;
 	}
 	else
 	{
-		std::get<CoordinateLine>(currentLine).start = point;
-		std::get<StarLine>(currentLine).start       = starID;
-		drawState                                   = Drawing::hasStart;
+		currentLine.start.coordinate = point;
+		currentLine.start.star       = starID;
+		drawState                    = Drawing::hasStart;
 	}
 }
 
@@ -138,8 +137,8 @@ scm::ScmDraw::ScmDraw()
 	maxSnapRadiusInPixels = conf->value("maxSnapRadiusInPixels", 25).toUInt();
 	conf->endGroup();
 
-	std::get<CoordinateLine>(currentLine).start.set(0, 0, 0);
-	std::get<CoordinateLine>(currentLine).end.set(0, 0, 0);
+	currentLine.start.reset();
+	currentLine.end.reset();
 	lastEraserPos.set(std::nan("1"), std::nan("1"));
 
 	StelApp &app   = StelApp::getInstance();
@@ -161,16 +160,15 @@ void scm::ScmDraw::drawLine(StelCore *core) const
 	painter.setLineSmooth(true);
 	painter.setColor(fixedLineColor, fixedLineAlpha);
 
-	for (CoordinateLine p : drawnLines.coordinates)
+	for (ConstellationLine line : drawnLines)
 	{
-		painter.drawGreatCircleArc(p.start, p.end);
+		painter.drawGreatCircleArc(line.start.coordinate, line.end.coordinate);
 	}
 
 	if (hasFlag(drawState, Drawing::hasFloatingEnd))
 	{
 		painter.setColor(floatingLineColor, floatingLineAlpha);
-		painter.drawGreatCircleArc(std::get<CoordinateLine>(currentLine).start,
-		                           std::get<CoordinateLine>(currentLine).end);
+		painter.drawGreatCircleArc(currentLine.start.coordinate, currentLine.end.coordinate);
 	}
 }
 
@@ -252,19 +250,16 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 			// or when in coordinate mode
 			if (hasFlag(drawState, Drawing::hasEnd))
 			{
-				if (!drawnLines.coordinates.empty())
+				if (!drawnLines.empty())
 				{
-					drawnLines.coordinates.pop_back();
-					drawnLines.stars.pop_back();
+					drawnLines.pop_back();
 				}
 				drawState = Drawing::None;
 			}
 			else if (hasFlag(drawState, Drawing::hasFloatingEnd))
 			{
-				std::get<CoordinateLine>(currentLine).start.set(0, 0, 0);
-				std::get<CoordinateLine>(currentLine).end.set(0, 0, 0);
-				std::get<StarLine>(currentLine).start.reset();
-				std::get<StarLine>(currentLine).end.reset();
+				currentLine.start.reset();
+				currentLine.end.reset();
 				drawState = Drawing::None;
 			}
 
@@ -328,12 +323,11 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 			// no selection, compute the position from the mouse cursor
 			if (position == Vec3d(0, 0, 0))
 			{
-				std::get<CoordinateLine>(currentLine).end = position;
-				StelProjectorP prj                        = core->getProjection(drawFrame);
+				StelProjectorP prj = core->getProjection(drawFrame);
 				prj->unProject(x, y, position);
 			}
-			std::get<CoordinateLine>(currentLine).end = position;
-			drawState                                 = Drawing::hasFloatingEnd;
+			currentLine.end.coordinate = position;
+			drawState                  = Drawing::hasFloatingEnd;
 		}
 	}
 	else if (activeTool == DrawTools::Eraser)
@@ -351,12 +345,11 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 
 				std::vector<int> erasedIndices;
 
-				for (auto line = drawnLines.coordinates.begin(); line != drawnLines.coordinates.end();
-				     ++line)
+				for (auto line = drawnLines.begin(); line != drawnLines.end(); ++line)
 				{
 					Vec3d lineEnd, lineStart;
-					prj->project(line->start, lineStart);
-					prj->project(line->end, lineEnd);
+					prj->project(line->start.coordinate, lineStart);
+					prj->project(line->end.coordinate, lineEnd);
 					Vec2d lineStart2d(lineStart.v[0], lineStart.v[1]);
 					Vec2d lineEnd2d(lineEnd.v[0], lineEnd.v[1]);
 					auto lineDirection = lineEnd2d - lineStart2d;
@@ -365,15 +358,14 @@ bool scm::ScmDraw::handleMouseMoves(int x, int y, Qt::MouseButtons b)
 					                                  lineDirection);
 					if (intersect)
 					{
-						erasedIndices.push_back(
-							std::distance(drawnLines.coordinates.begin(), line));
+						erasedIndices.push_back(std::distance(drawnLines.begin(), line));
 					}
 				}
 
 				for (auto index : erasedIndices)
 				{
-					drawnLines.coordinates[index] = drawnLines.coordinates.back();
-					drawnLines.coordinates.pop_back();
+					drawnLines[index] = drawnLines.back();
+					drawnLines.pop_back();
 				}
 			}
 
@@ -399,11 +391,10 @@ void scm::ScmDraw::handleKeys(QKeyEvent *e)
 
 void scm::ScmDraw::undoLastLine()
 {
-	if (!drawnLines.coordinates.empty())
+	if (!drawnLines.empty())
 	{
-		currentLine = std::make_tuple(drawnLines.coordinates.back(), drawnLines.stars.back());
-		drawnLines.coordinates.pop_back();
-		drawnLines.stars.pop_back();
+		currentLine = drawnLines.back();
+		drawnLines.pop_back();
 		drawState = Drawing::hasFloatingEnd;
 	}
 	else
@@ -412,38 +403,23 @@ void scm::ScmDraw::undoLastLine()
 	}
 }
 
-std::vector<scm::StarLine> scm::ScmDraw::getStars() const
+std::vector<scm::ConstellationLine> scm::ScmDraw::getConstellationLines() const
 {
-	bool all_stars = std::all_of(drawnLines.stars.begin(), drawnLines.stars.end(), [](const StarLine &star)
-	                             { return star.start.has_value() && star.end.has_value(); });
-
-	if (all_stars)
-	{
-		return drawnLines.stars;
-	}
-
-	return std::vector<StarLine>();
+	return drawnLines;
 }
 
-std::vector<scm::CoordinateLine> scm::ScmDraw::getCoordinates() const
+void scm::ScmDraw::loadLines(const std::vector<ConstellationLine> &lines)
 {
-	return drawnLines.coordinates;
-}
+	drawnLines = lines;
 
-void scm::ScmDraw::loadLines(const std::vector<CoordinateLine> &coordinates, const std::vector<StarLine> &stars)
-{
-	// copy the coordinates and stars to drawnLines
-	drawnLines.coordinates = coordinates;
-	drawnLines.stars       = stars;
-
-	if (!drawnLines.coordinates.empty())
+	if (!drawnLines.empty())
 	{
-		currentLine = std::make_tuple(drawnLines.coordinates.back(), drawnLines.stars.back());
+		currentLine = drawnLines.back();
 		drawState   = Drawing::hasFloatingEnd;
 	}
 	else
 	{
-		currentLine = std::make_tuple(CoordinateLine(), StarLine());
+		currentLine = ConstellationLine();
 		drawState   = Drawing::None;
 	}
 }
@@ -457,22 +433,22 @@ void scm::ScmDraw::setTool(scm::DrawTools tool)
 
 std::optional<scm::SkyPoint> scm::ScmDraw::findNearestPoint(int x, int y, StelProjectorP prj) const
 {
-	if (drawnLines.coordinates.empty())
+	if (drawnLines.empty())
 	{
 		return {};
 	}
 
-	auto min = drawnLines.coordinates.begin();
+	auto min = drawnLines.begin();
 	Vec3d position(x, y, 0);
 	Vec3d minPosition;
-	prj->project(min->start, minPosition);
+	prj->project(min->start.coordinate, minPosition);
 	double minDistance = (minPosition - position).dot(minPosition - position);
 	bool isStartPoint  = true;
 
-	for (auto line = drawnLines.coordinates.begin(); line != drawnLines.coordinates.end(); ++line)
+	for (auto line = drawnLines.begin(); line != drawnLines.end(); ++line)
 	{
 		Vec3d iPosition;
-		if (prj->project(line->start, iPosition))
+		if (prj->project(line->start.coordinate, iPosition))
 		{
 			double distance = (iPosition - position).dot(iPosition - position);
 			if (distance < minDistance)
@@ -484,7 +460,7 @@ std::optional<scm::SkyPoint> scm::ScmDraw::findNearestPoint(int x, int y, StelPr
 			}
 		}
 
-		if (prj->project(line->end, iPosition))
+		if (prj->project(line->end.coordinate, iPosition))
 		{
 			double distance = (iPosition - position).dot(iPosition - position);
 			if (distance < minDistance)
@@ -501,14 +477,14 @@ std::optional<scm::SkyPoint> scm::ScmDraw::findNearestPoint(int x, int y, StelPr
 	{
 		if (isStartPoint)
 		{
-			SkyPoint point = {min->start,
-			                  drawnLines.stars.at(std::distance(drawnLines.coordinates.begin(), min)).start};
+			SkyPoint point = {min->start.coordinate,
+			                  drawnLines.at(std::distance(drawnLines.begin(), min)).start.star};
 			return point;
 		}
 		else
 		{
-			SkyPoint point = {min->end,
-			                  drawnLines.stars.at(std::distance(drawnLines.coordinates.begin(), min)).end};
+			SkyPoint point = {min->end.coordinate,
+			                  drawnLines.at(std::distance(drawnLines.begin(), min)).end.star};
 			return point;
 		}
 	}
@@ -518,14 +494,11 @@ std::optional<scm::SkyPoint> scm::ScmDraw::findNearestPoint(int x, int y, StelPr
 
 void scm::ScmDraw::resetDrawing()
 {
-	drawnLines.coordinates.clear();
-	drawnLines.stars.clear();
+	drawnLines.clear();
 	drawState     = Drawing::None;
 	lastEraserPos = defaultLastEraserPos;
 	activeTool    = DrawTools::None;
 	drawingMode   = DrawingMode::StarsAndDSO;
-	std::get<CoordinateLine>(currentLine).start.set(0, 0, 0);
-	std::get<CoordinateLine>(currentLine).end.set(0, 0, 0);
-	std::get<StarLine>(currentLine).start.reset();
-	std::get<StarLine>(currentLine).end.reset();
+	currentLine.start.reset();
+	currentLine.end.reset();
 }

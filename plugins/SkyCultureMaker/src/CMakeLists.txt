@@ -38,16 +38,14 @@ SET( SkyCultureMaker_SRCS
 
      types/Anchor.hpp
      types/Classification.hpp
-     types/CoordinateLine.hpp
+     types/ConstellationLine.hpp
      types/Description.hpp
      types/DialogID.hpp
      types/Drawing.hpp
      types/DrawingMode.hpp
      types/DrawTools.hpp
      types/License.hpp
-     types/Lines.hpp
      types/SkyPoint.hpp
-     types/StarLine.hpp
 )
 
 SET( SCM_UIS

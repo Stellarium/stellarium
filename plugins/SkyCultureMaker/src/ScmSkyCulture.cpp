@@ -37,11 +37,10 @@ void scm::ScmSkyCulture::setFallbackToInternationalNames(bool fallback)
 }
 
 scm::ScmConstellation &scm::ScmSkyCulture::addConstellation(const QString &id,
-                                                            const std::vector<CoordinateLine> &coordinates,
-                                                            const std::vector<StarLine> &stars,
+                                                            const std::vector<ConstellationLine> &lines,
                                                             const bool isDarkConstellation)
 {
-	scm::ScmConstellation constellationObj(id, coordinates, stars, isDarkConstellation);
+	scm::ScmConstellation constellationObj(id, lines, isDarkConstellation);
 	constellations.push_back(std::move(constellationObj));
 	return constellations.back();
 }
