@@ -24,7 +24,7 @@ Below is *Xinyixiangfayao Star Map* from Su Song(苏颂, 1020-1101 AD).
 
 ### Restore Sky Map
 
-The Imperial Observatory of the Song Dynasty conducted several large-scale stellar observations with remarkable accuracy, surpassing all previous eras in precision. The data from 1052 AD is the most complete set that survives today. Based on these records, two significant star charts were produced: the Xinyixiangfayao Star Map (1088 AD) and the Suzhou Stone Star Map (1247 AD).
+The Imperial Observatory of the Song Dynasty conducted several large-scale stellar observations with remarkable accuracy, surpassing all previous eras in precision. The data from 1052 AD is the most complete set that survives today. Based on these records, two significant star charts were produced: the *Xinyixiangfayao Star Map* (1088 AD) and the *Suzhou Stone Star Map* (1247 AD).
 
 The historian of astronomy Pan Nai (潘鼐) systematically compiled this observational data into the *Huangyou Star Catalog*. By cross-referencing it with the *Xinyixiangfayao Star Map* in his work *The History of Stellar Observation in China*, he reconstructed most of the Song Dynasty constellations, serving as the primary reference for this project.
 
