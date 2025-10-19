@@ -237,9 +237,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-444</y>
-               <width>809</width>
-               <height>1505</height>
+               <y>-1317</y>
+               <width>800</width>
+               <height>2235</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="descriptionLayout">
@@ -491,29 +491,6 @@
                    </property>
                    <property name="placeholderText">
                     <string>What other celestial objects were significant? E.g what about shooting stars, aurorae? Did they observe stellar transients, e.g. supernovae, that were visible only in a specific year?</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="constellationsDescLbl">
-                   <property name="text">
-                    <string>Constellations*:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QTextEdit" name="constellationsDescTE">
-                   <property name="sizeAdjustPolicy">
-                    <enum>QAbstractScrollArea::AdjustToContents</enum>
-                   </property>
-                   <property name="acceptRichText">
-                    <bool>false</bool>
-                   </property>
-                   <property name="placeholderText">
-                    <string>Sequence of Level 5 Markdown sections:
-##### name
-
-Description of constellation...</string>
                    </property>
                   </widget>
                  </item>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>458</width>
-    <height>408</height>
+    <width>554</width>
+    <height>627</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -99,7 +99,7 @@
      </widget>
      <widget class="QWidget" name="constellationNameTab">
       <attribute name="title">
-       <string>Constellation Name</string>
+       <string>Information</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <property name="leftMargin">
@@ -125,8 +125,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="enNameLE">
-        </widget>
+        <widget class="QLineEdit" name="enNameLE"/>
        </item>
        <item>
         <widget class="QLabel" name="idLbl">
@@ -167,6 +166,20 @@
        </item>
        <item>
         <widget class="QLineEdit" name="ipaLE"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Description (optional)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="description">
+         <property name="acceptRichText">
+          <bool>false</bool>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer name="constTabVertSpacer">
@@ -302,7 +315,8 @@
             <bool>false</bool>
            </property>
            <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::HelpAbout"/>
+            <iconset theme="QIcon::ThemeIcon::HelpAbout">
+             <normaloff>.</normaloff>.</iconset>
            </property>
            <property name="autoDefault">
             <bool>false</bool>

@@ -91,6 +91,8 @@ private:
 	ScmConstellationImage *imageItem;
 	/// Holds the last used directory
 	QString lastUsedImageDirectory;
+	/// A short description of the constellation that could be shown in e.g. an info block.
+	QString constellationDescription;
 #if defined(Q_OS_MAC)
 	/// Help text on how to use the pen for Mac users.
 	const QString helpDrawInfoPen = q_("Use RightClick or Control + Click to draw a connected line.\n"

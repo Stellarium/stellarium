@@ -78,12 +78,14 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 	constellationNativeName    = constellation->getNativeName();
 	constellationPronounce     = constellation->getPronounce();
 	constellationIPA           = constellation->getIPA();
+	constellationDescription   = constellation->getDescription();
 
 	ui->enNameLE->setText(constellationEnglishName);
 	ui->idLE->setText(constellationId);
 	ui->natNameLE->setText(constellationNativeName.value_or(""));
 	ui->pronounceLE->setText(constellationPronounce.value_or(""));
 	ui->ipaLE->setText(constellationIPA.value_or(""));
+	ui->description->setText(constellationDescription);
 
 	// Hide the original constellation while editing
 	constellation->hide();
@@ -239,6 +241,8 @@ void ScmConstellationDialog::createDialogContent()
 				constellationIPA = std::nullopt;
 			}
 		});
+	connect(ui->description, &QTextEdit::textChanged, this,
+	        [this]() { constellationDescription = ui->description->toPlainText(); });
 }
 
 void ScmConstellationDialog::handleFontChanged()
@@ -503,6 +507,7 @@ void ScmConstellationDialog::saveConstellation()
 		constellation.setNativeName(constellationNativeName);
 		constellation.setPronounce(constellationPronounce);
 		constellation.setIPA(constellationIPA);
+		constellation.setDescription(constellationDescription);
 		if (imageItem->isVisible() && imageItem->getArtwork().getHasArt())
 		{
 			constellation.setArtwork(imageItem->getArtwork());
@@ -548,6 +553,9 @@ void ScmConstellationDialog::resetDialog()
 
 	constellationIPA = std::nullopt;
 	ui->ipaLE->clear();
+
+	constellationDescription.clear();
+	ui->description->clear();
 
 	ui->bind_star->setEnabled(false);
 	imageItem->hide();

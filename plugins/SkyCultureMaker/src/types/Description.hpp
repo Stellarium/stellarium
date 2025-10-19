@@ -65,9 +65,6 @@ struct Description
 		return !name.trimmed().isEmpty() &&
 			   !introduction.trimmed().isEmpty() &&
 			   !cultureDescription.trimmed().isEmpty() &&
-			   !constellations.trimmed().isEmpty() &&
-			   // at least one constellation name. this is a very basic check but at least makes the user aware of the markdown sections
-			   constellations.contains("##### ") &&
 			   !references.trimmed().isEmpty() &&
 			   !authors.trimmed().isEmpty() &&
 			   !about.trimmed().isEmpty() &&
