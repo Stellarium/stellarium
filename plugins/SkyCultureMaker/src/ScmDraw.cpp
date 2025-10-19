@@ -64,20 +64,17 @@ void scm::ScmDraw::appendDrawPoint(const Vec3d &point, const std::optional<QStri
 {
 	if (hasFlag(drawState, (Drawing::hasStart | Drawing::hasFloatingEnd)))
 	{
-		currentLine.end.coordinate = point;
-		currentLine.end.star       = starID;
-		drawState                  = Drawing::hasEnd;
+		currentLine.end = {point, starID};
+		drawState       = Drawing::hasEnd;
 
 		drawnLines.push_back(currentLine);
-		currentLine.start.coordinate = point;
-		currentLine.start.star       = starID;
-		drawState                    = drawState | Drawing::hasStart;
+		currentLine.start = {point, starID};
+		drawState         = drawState | Drawing::hasStart;
 	}
 	else
 	{
-		currentLine.start.coordinate = point;
-		currentLine.start.star       = starID;
-		drawState                    = Drawing::hasStart;
+		currentLine.start = {point, starID};
+		drawState         = Drawing::hasStart;
 	}
 }
 
