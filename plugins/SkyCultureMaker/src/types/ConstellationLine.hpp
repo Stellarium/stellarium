@@ -64,7 +64,7 @@ struct ConstellationLine
 		{
 			return gaiaMatch.captured(1);
 		}
-		// Neither HIP nor Gaia, return as DSO	
+		// Neither HIP nor Gaia, return as DSO
 		return "DSO:" + starId.remove(' ');
 	}
 
@@ -128,8 +128,6 @@ struct ConstellationLine
 	QJsonArray coordinatesToJson() const
     {
 		QJsonArray json;
-
-        // Only if both start and end points do not have names, we save the coordinates
         QJsonArray startCoordinateArray;
         double RA, DE;
         convertToSphereCoords(RA, DE, start.coordinate);

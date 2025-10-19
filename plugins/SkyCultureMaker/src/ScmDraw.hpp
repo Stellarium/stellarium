@@ -71,7 +71,7 @@ private:
 	/// The current pending point.
 	ConstellationLine currentLine;
 
-	/// The fixed points.
+	/// The constellations lines drawn by the user.
 	std::vector<ConstellationLine> drawnLines;
 
 	/// The current active tool.

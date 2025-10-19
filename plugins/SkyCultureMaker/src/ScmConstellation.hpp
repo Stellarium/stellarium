@@ -221,7 +221,7 @@ private:
 	/// References to the sources of the name spellings
 	std::optional<QVector<int>> references;
 
-	/// List of lines forming the segments.
+	/// The lines forming the constellation
 	std::vector<ConstellationLine> lines;
 
 	/// Direction vector pointing on constellation name drawing position
