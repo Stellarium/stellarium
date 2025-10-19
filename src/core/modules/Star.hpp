@@ -445,6 +445,7 @@ struct Star
       pmra = sky_orbit_vel.dot(p2) * 1000.;
       pmdec = sky_orbit_vel.dot(q2) * 1000.;
       StelUtils::rectToSphe(&ra, &dec, v);
+      v.normalize();
    }
 };
 
