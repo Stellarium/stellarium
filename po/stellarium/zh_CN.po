@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-10-18 02:05+0700\n"
+"POT-Creation-Date: 2025-10-20 13:03+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -10091,7 +10091,7 @@ msgstr "选择(&C)"
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:321
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:143
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:131
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
 msgid "Cancel"
@@ -27771,7 +27771,7 @@ msgid "Title:"
 msgstr "标题："
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:61
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:156
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:157
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:272
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:137
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:487
@@ -27789,15 +27789,15 @@ msgstr "请通过 GitHub 用户名联系我们，方式是在 Stellarium 仓库�
 msgid "Plugin to draw and export sky cultures in Stellarium."
 msgstr "用于在Stellarium中绘制并导出星空文化的插件。"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:574
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:575
 msgid "INFO"
 msgstr "信息"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:581
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:582
 msgid "WARNING"
 msgstr "错误"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:588
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:589
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:349
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:359
 msgid "ERROR"
@@ -27829,51 +27829,51 @@ msgid ""
 "fields correctly."
 msgstr "星空文化描述不完整。请正确填写所有必填项。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:98
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:104
 msgid "No sky culture is set."
 msgstr "没有星空文化被设置。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:112
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:118
 msgid "Failed to choose export directory."
 msgstr "选择导出目录失败。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:120
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:126
 msgid "Sky culture with this ID already exists."
 msgstr "该ID的星空文化已经存在。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:131
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:137
 msgid "Failed to create sky culture directory."
 msgstr "创建星空文化目录失败。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:141
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:147
 msgid "Failed to save the illustrations."
 msgstr "保存插图失败"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:155
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:163
 msgid "Failed to create JSON document for sky culture."
 msgstr "为星空文化创建JSON文档失败。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:164
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:172
 msgid "Failed to open index.json for writing."
 msgstr "无法打开 index.json 文件进行写入。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:176
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:184
 msgid "Failed to export sky culture description."
 msgstr "导出星空文化描述失败。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:187
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:195
 msgid "Failed to export CMakeLists.txt."
 msgstr "导出 CMakeLists.txt 失败。"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:195
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:203
 msgid "Sky culture exported successfully to "
 msgstr "星空文化已成功导出至"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:206
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:216
 msgid "Choose Export Directory"
 msgstr "选择导出目录"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:216
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:226
 msgid "The selected directory is not valid"
 msgstr "所选目录无效"
 
@@ -28266,15 +28266,15 @@ msgid ""
 "organizations, or resources that helped you?"
 msgstr "您希望向哪些个人或机构致谢？例如，给曾经帮助过你的人、组织或资源。"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:132
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:139
 msgid "SCM: Export"
 msgstr "导出"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:133
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:140
 msgid "Before exporting the Sky Culture, please make sure that:"
 msgstr "在导出星空文化之前，请确保"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:134
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:141
 msgid ""
 "1. You fully agree that the Sky Culture will be subject to the license you have selected.\n"
 "2. You have described the Sky Culture as elaborately as possible.\n"
@@ -28290,17 +28290,21 @@ msgstr ""
 "5. 内容的分享出于善意，并充分尊重文化意义与敏感性。 \n"
 "6. 您已按需提供恰当署名（如图像、文本或名称的来源说明）。 "
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:140
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:147
 msgid ""
 "On export, you will be prompted to select your personal skycultures "
 "directory. A new directory for the sky culture will be created inside."
 msgstr "导出时，系统将提示您选择个人星空文化目录，随后将在其中自动创建该星空文化的新目录。"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:141
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:148
+msgid "Merge constellation lines into polylines on export"
+msgstr "在导出时将星座线合并为折线"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:149
 msgid "Export"
 msgstr "导出"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:142
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:150
 msgid "Export and Exit"
 msgstr "导出并退出"
 
