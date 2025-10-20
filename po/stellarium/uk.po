@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-10-20 13:03+0700\n"
+"POT-Creation-Date: 2025-10-21 01:23+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2025\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -4257,7 +4257,7 @@ msgstr "Сузір’я МАО"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/StelObject.cpp:995 src/translations.h:59
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:489
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:475
 msgid "Constellations"
 msgstr "Сузір'я"
 
@@ -8570,6 +8570,7 @@ msgstr ""
 "виконано."
 
 #: src/gui/ObsListDialog.cpp:1185 src/ui_configurationDialog.h:1895
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
 msgid "Information"
 msgstr "Інформація"
 
@@ -10421,7 +10422,7 @@ msgstr "Ви&брати"
 #: src/ui_obsListDialog.h:365
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:321
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:342
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:131
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
@@ -10458,7 +10459,7 @@ msgstr "З&берегти"
 
 #: src/translations.h:687 src/ui_configurationDialog.h:1919
 #: src/ui_configurationDialog.h:2304
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:320
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:341
 msgid "Save"
 msgstr "Зберегти"
 
@@ -12429,7 +12430,7 @@ msgid "View"
 msgstr "Перегляд"
 
 #: src/ui_viewDialog.h:3864 src/ui_viewDialog.h:3885
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:506
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:492
 msgid "Sky"
 msgstr "Небо"
 
@@ -14976,7 +14977,7 @@ msgstr "Перемкнутися на новий ландшафт після в�
 
 #: src/ui_addRemoveLandscapesDialog.h:234
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:236
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:493
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:479
 msgid "Remove"
 msgstr "Вилучити"
 
@@ -17670,7 +17671,7 @@ msgid "Pixel grid feature"
 msgstr "Можливість піксельної ґратки"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:639
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:496
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:482
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid "Overview"
 msgstr "Перегляд"
@@ -20158,7 +20159,7 @@ msgid "Add communication data"
 msgstr "Додати дані обміну даними"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:126
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:531
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:512
 msgid "Description"
 msgstr "Опис"
 
@@ -29532,7 +29533,7 @@ msgstr "Назва:"
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:157
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:272
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:137
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:487
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:473
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:127
 msgid "Sky Culture Maker"
 msgstr "Засіб створення картини зоряного неба"
@@ -29644,80 +29645,80 @@ msgstr "Виберіть каталог для експортування"
 msgid "The selected directory is not valid"
 msgstr "Вибрано некоректний каталог"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:144
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:146
 msgid "SCM: Dark Constellation Editor"
 msgstr "ЗКЗМ: редактор темних сузір'їв"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:144
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:302
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:146
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
 msgid "SCM: Constellation Editor"
 msgstr "ЗКЗМ: редактор сузір'їв"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:145
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:147
 msgid "Please name your Dark Constellation"
 msgstr "Будь ласка, вкажіть назву темного сузір'я"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:146
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:148
 msgid "Please name your Constellation"
 msgstr "Будь ласка, вкажіть назву сузір'я"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:294
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:298
 msgid "Open Artwork"
 msgstr "Відкрити графіку"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:295
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:299
 msgid "Images (*.png *.jpg *.jpeg)"
 msgstr "зображення (*.png *.jpg *.jpeg)"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:302
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:306
 msgid "Chosen path is not a valid file:\n"
 msgstr "Вибраний шлях не є шляхом до коректного файла:\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:311
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:315
 msgid "Chosen file is not a PNG, JPG or JPEG image:\n"
 msgstr "Вибраний файл не є файлом зображення PNG, JPG або JPEG:\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:338
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:369
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:342
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:373
 msgid "No anchor was selected. Please select an anchor to bind to."
 msgstr ""
 "Не було вибрано жодної прив'язки. Будь ласка, виберіть прив'язку для "
 "пов'язування."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:349
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:353
 msgid "No star was selected to bind to the current selected anchor."
 msgstr "Не вибрано жодної зірки для прив'язки до поточної вибраної точки."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:360
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:364
 msgid "The selected object must be of type Star or Nebula."
 msgstr "Вибраний об'єкт має належати до типу зірок або туманностей."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:378
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:382
 msgid "The selected object must contain a HIP number."
 msgstr "Вибраний об'єкт повинен мати номер HIP."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:401
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:405
 msgid "Could not save: Sky Culture is not set"
 msgstr "Не вдалося зберегти: не встановлено картину зоряного неба"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:409
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:413
 msgid "Could not save: English name is empty"
 msgstr "Не вдалося зберегти: назва англійською порожня"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:419
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:423
 msgid "Could not save: Constellation ID is empty"
 msgstr "Не вдалося зберегти: ідентифікатор сузір'я порожній"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:428
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:438
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:432
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:442
 msgid "Could not save: Constellation with this ID already exists"
 msgstr "Не вдалося зберегти: вже існує сузір'я із цим ідентифікатором"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:449
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:453
 msgid "Could not save: The constellation does not contain any drawings"
 msgstr "Не вдалося зберегти: сузір'я не містить жодних малюнків"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:460
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:464
 msgid ""
 "Could not save: An artwork is attached, but not all anchors have a star "
 "bound."
@@ -29725,7 +29726,7 @@ msgstr ""
 "Не вдалося зберегти: долучено графіку, але не усі прив'язки пов'язано із "
 "зірками."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:96
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:98
 msgid ""
 "Use RightClick or Control + Click to draw a connected line.\n"
 "Use Double-RightClick or Control + Double-Click to stop drawing the line.\n"
@@ -29735,14 +29736,14 @@ msgstr ""
 "Скористайтеся подвійним клацанням правою кнопкою миші або Control + подвійним клацанням, щоб припинити малювання лінії.\n"
 "Скористайтеся Command + F для пошуку і з'єднання зірок."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:101
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:103
 msgid ""
 "Hold RightClick or Control + Click to delete the line under the cursor.\n"
 msgstr ""
 "Утримуйте натиснутою праву кнопку миші або клацніть з натисканням Ctrl, щоб "
 "вилучити лінію під вказівником.\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:104
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:106
 msgid ""
 "Use RightClick to draw a connected line.\n"
 "Use Double-RightClick to stop drawing the line.\n"
@@ -29751,13 +29752,13 @@ msgstr ""
 "Скористайтеся клацанням правою кнопкою миші, щоб намалювати з'єднану лінію.\\inСкористайтеся подвійним клацанням правою кнопкою миші, щоб припинити малювання лінії.\n"
 "Скористайтеся CTRL + F для пошуку і з'єднання зірок."
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:108
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:110
 msgid "Hold RightClick to delete the line under the cursor.\n"
 msgstr ""
 "Утримуйте натиснутою праву кнопку миші, щоб вилучити лінію під "
 "вказівником.\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:113
+#: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:115
 msgid ""
 "Usage:\n"
 "1. Upload an image\n"
@@ -29792,7 +29793,7 @@ msgid "Not implemented yet."
 msgstr "Ще не реалізовано."
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:146
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:492
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:478
 msgid "Edit"
 msgstr "Змінити"
 
@@ -29800,119 +29801,119 @@ msgstr "Змінити"
 msgid "Convert"
 msgstr "Перетворити"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:303
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:323
 msgid "Pen"
 msgstr "Перо"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:305
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:325
 msgid "Revert the last drawn line."
 msgstr "Повернутися до останньої намальованої лінії."
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:307
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:327
 msgid "Undo"
 msgstr "Скасувати"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:308
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:328
 msgid "Eraser"
 msgstr "Гумка"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:309
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:329
 msgid "Drawing"
 msgstr "Рисунок"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:310
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:330
 msgid "English name"
 msgstr "Назва англійською"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:311
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:331
 msgid "ID (Do not include 'CON' or the sky culture name)"
 msgstr "Ід. (без «CON» або назви картини зоряного неба)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:312
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:332
 msgid "Native name (optional)"
 msgstr "Рідна назва (необов’язкова)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:313
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:333
 msgid "Pronounciation (optional, European glyphs or Pinyin)"
 msgstr "Вимова (необов'язкова, європейський запис або піньїн)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:314
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:334
 msgid "IPA (optional)"
 msgstr "IPA (необов'язкове)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:315
-msgid "Constellation Name"
-msgstr "Назва сузір'я"
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:335
+msgid "Description (optional)"
+msgstr "Опис (необов'язковий)"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:316
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:337
 msgid "Bind Star"
 msgstr "Прив'язати зірку"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:317
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:338
 msgid "Upload Image"
 msgstr "Вивантаження зображення"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:318
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:339
 msgid "Remove Image"
 msgstr "Вилучити зображення"
 
-#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:319
+#: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:340
 msgid "Artwork"
 msgstr "Графіка"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:488
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:474
 msgid "Name of the Sky Culture"
 msgstr "Назва картини зоряного неба"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:490
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:476
 msgid "Add Constellation"
 msgstr "Додати сузір'я"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:491
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:477
 msgid "Add Dark Constellation"
 msgstr "Додати темне сузір'я"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:494
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:480
 msgid "License of the Sky Culture"
 msgstr "Умови ліцензування картини зоряного неба"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:495
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:481
 msgid "Export Sky Culture"
 msgstr "Експортувати картину зоряного неба"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:497
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:483
 msgid "Please describe the Sky Culture"
 msgstr "Будь ласка, опишіть картину зоряного неба"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:498
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:484
 msgid "Mandatory fields are marked with an asterisk (*)."
 msgstr "Обов'язкові поля позначено зірочкою (*)."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:499
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:485
 msgid "General Information"
 msgstr "Загальні відомості"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:500
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:486
 msgid "Classification of the Sky Culture*"
 msgstr "Класифікація картини зоряного неба*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:501
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:487
 msgid "Introduction:*"
 msgstr "Вступ:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:502
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:488
 msgid " A summary that could ideally be shown on a small screen entirely."
 msgstr " Резюме, яке можна було б показати на малому екрані."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:503
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:489
 msgid "Description (What can the user see here?)"
 msgstr "Опис (що тут побачить користувач?)"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:504
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:490
 msgid "Culture Description:*"
 msgstr "Опис картини:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:505
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:491
 msgid ""
 "Give a short introduction about the culture: time, location, circumstances "
 "of life. Please describe specifics of the source (book/clay "
@@ -29932,7 +29933,7 @@ msgstr ""
 "прогнозуванням погоди...)? Чи є зв'язки з іншими культурами? Чи є ця версія "
 "дидактичною редукцією, чи вона походить з конкретного іншого джерела?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:507
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:493
 msgid ""
 "What special features did/does this culture use, what shall the user watch "
 "out for? Is it worthwhile to click a specific button rather than others - "
@@ -29952,30 +29953,30 @@ msgstr ""
 " (чи просто використовували назви зірок)? Чи використовували вони зірки "
 "взагалі, чи надавали перевагу темним/яскравим хмарам Чумацького Шляху?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:508
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:494
 msgid "Moon & Sun:"
 msgstr "Місяць і сонце:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:509
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:495
 msgid "How did they determine their calendar? Did they observe phases?"
 msgstr "Як визначався календар? Чи велося спостереження за фазами?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:510
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:496
 msgid "Planets:"
 msgstr "Планети:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:511
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:497
 msgid ""
 "Were the planets deified? What deities connect, what meaning do they have?"
 msgstr ""
 "Чи обожествлялися планети? З якими богами їх було пов'язано, яким було їхнє "
 "значення?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:512
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:498
 msgid "Zodiac/ Lunar System:"
 msgstr "Зодіакальна/Місячна система:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:513
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:499
 msgid ""
 "Did they have the (Bab.) zodiac system or any other division of the \"path "
 "of the Moon\"? If so, was it a (equal or unequal) division of the ecliptic "
@@ -29985,19 +29986,19 @@ msgstr ""
 "Місяця»? Якщо так, то чи був це (рівномірний чи нерівномірний) поділ "
 "екліптики чи якогось іншого типу?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:514
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:500
 msgid "Milky Way:"
 msgstr "Чумацький Шлях:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:515
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:501
 msgid "Was the Milky Way deified? What meaning did it have?"
 msgstr "Чи обожествлявся Чумацький Шлях? Яким було його значення?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:516
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:502
 msgid "Other Celestial Objects:"
 msgstr "Інші небесні об'єкти:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:517
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:503
 msgid ""
 "What other celestial objects were significant? E.g what about shooting "
 "stars, aurorae? Did they observe stellar transients, e.g. supernovae, that "
@@ -30007,35 +30008,19 @@ msgstr ""
 "полярних сяйв? Чи спостерігали вони перехідні зоряні явища, наприклад, "
 "наднові, які були видимі лише в певний рік?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:518
-msgid "Constellations*:"
-msgstr "Сузір'я*:"
-
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:519
-msgid ""
-"Sequence of Level 5 Markdown sections:\n"
-"##### name\n"
-"\n"
-"Description of constellation..."
-msgstr ""
-"Послідовність розділів рівня 5 Markdown:\n"
-"##### назва\n"
-"\n"
-"Опис сузір'я..."
-
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:523
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:504
 msgid "Credits and References"
 msgstr "Подяки і посилання"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:524
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:505
 msgid "References:*"
 msgstr "Посилання:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:525
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:506
 msgid "Authors:*"
 msgstr "Автори:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:526
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:507
 msgid ""
 "Who are you and what is your background (native person, researcher, ...)? "
 "Ideally, please provide an email-address as well."
@@ -30043,11 +30028,11 @@ msgstr ""
 "Хто ви і який у вас досвід (носій мови, дослідник тощо)? В ідеалі, будь "
 "ласка, також надайте адресу електронної пошти."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:527
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:508
 msgid "About:*"
 msgstr "Відомості:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:528
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:509
 msgid ""
 "How do you know about this Sky Culture? Is this contribution based on your "
 "own or other people's research? Is it based on interviews with Elders or "
@@ -30057,11 +30042,11 @@ msgstr ""
 " власних дослідженнях чи дослідженнях інших людей? Його засновано на "
 "інтерв'ю зі старійшинами, читанні стародавніх текстів тощо?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:529
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:510
 msgid "Acknowledgements:"
 msgstr "Подяки:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:530
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:511
 msgid ""
 "What acknowledgements would you like to make? E.g. to interviewed people, "
 "organizations, or resources that helped you?"
