@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-10-18 02:05+0700\n"
+"POT-Creation-Date: 2025-10-20 13:03+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alejandro Moctezuma <moctezumaalejandro25@gmail.com>, 2025\n"
 "Language-Team: Spanish (https://app.transifex.com/stellarium/teams/80998/es/)\n"
@@ -10426,7 +10426,7 @@ msgstr "E&legir"
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:321
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:143
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:131
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
 msgid "Cancel"
@@ -29635,7 +29635,7 @@ msgid "Title:"
 msgstr "Título"
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:61
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:156
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:157
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:272
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:137
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:487
@@ -29656,15 +29656,15 @@ msgstr ""
 msgid "Plugin to draw and export sky cultures in Stellarium."
 msgstr "Plugin para dibujar y exportar culturas del cielo en Stellarium."
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:574
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:575
 msgid "INFO"
 msgstr "INFORMACIÓN"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:581
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:582
 msgid "WARNING"
 msgstr "ADVERTENCIA"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:588
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:589
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:349
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:359
 msgid "ERROR"
@@ -29702,51 +29702,51 @@ msgstr ""
 "La descripción de la cultura estelar no está completa. Por favor, complete "
 "todos los campos requeridos correctamente."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:98
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:104
 msgid "No sky culture is set."
 msgstr "No se ha establecido ninguna cultura estelar."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:112
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:118
 msgid "Failed to choose export directory."
 msgstr "No se pudo elegir el directorio de exportación."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:120
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:126
 msgid "Sky culture with this ID already exists."
 msgstr "Ya existe una cultura estelar con este ID."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:131
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:137
 msgid "Failed to create sky culture directory."
 msgstr "No se pudo crear el directorio de la cultura estelar."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:141
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:147
 msgid "Failed to save the illustrations."
 msgstr "No se pudieron guardar las ilustraciones."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:155
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:163
 msgid "Failed to create JSON document for sky culture."
 msgstr "No se pudo crear el documento JSON para la cultura estelar."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:164
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:172
 msgid "Failed to open index.json for writing."
 msgstr "No se pudo abrir index.json para escribir."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:176
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:184
 msgid "Failed to export sky culture description."
 msgstr "No se pudo exportar la descripción de la cultura estelar."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:187
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:195
 msgid "Failed to export CMakeLists.txt."
 msgstr "No se pudo exportar CMakeLists.txt."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:195
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:203
 msgid "Sky culture exported successfully to "
 msgstr "Cultura estelar exportada exitosamente a "
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:206
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:216
 msgid "Choose Export Directory"
 msgstr "Elegir directorio de exportación"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:216
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:226
 msgid "The selected directory is not valid"
 msgstr "El directorio seleccionado no es válido"
 
@@ -30186,15 +30186,15 @@ msgstr ""
 "¿Qué agradecimientos le gustaría hacer? Por ejemplo, a personas "
 "entrevistadas, organizaciones o recursos que le ayudaron?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:132
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:139
 msgid "SCM: Export"
 msgstr "CCE: Exportar"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:133
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:140
 msgid "Before exporting the Sky Culture, please make sure that:"
 msgstr "Antes de exportar la cultura estelar, asegúrese de que:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:134
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:141
 msgid ""
 "1. You fully agree that the Sky Culture will be subject to the license you have selected.\n"
 "2. You have described the Sky Culture as elaborately as possible.\n"
@@ -30210,7 +30210,7 @@ msgstr ""
 "5. El contenido se comparte de buena fe, con respeto por la importancia cultural y las sensibilidades.\n"
 "6. Ha proporcionado las atribuciones adecuadas cuando sea necesario (por ejemplo, fuentes de imágenes, textos o nombres)."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:140
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:147
 msgid ""
 "On export, you will be prompted to select your personal skycultures "
 "directory. A new directory for the sky culture will be created inside."
@@ -30219,11 +30219,15 @@ msgstr ""
 "estelares. Se creará un nuevo directorio para la cultura estelar en su "
 "interior."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:141
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:148
+msgid "Merge constellation lines into polylines on export"
+msgstr "Fusionar líneas de constelación en polilíneas en la exportación"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:149
 msgid "Export"
 msgstr "Exportar"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:142
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:150
 msgid "Export and Exit"
 msgstr "Exportar y salir"
 
