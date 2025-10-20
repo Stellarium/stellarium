@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-10-18 02:05+0700\n"
+"POT-Creation-Date: 2025-10-20 13:03+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Karl Birgersson <birgerssonkarl@outlook.com>, 2025\n"
 "Language-Team: Swedish (https://app.transifex.com/stellarium/teams/80998/sv/)\n"
@@ -10366,7 +10366,7 @@ msgstr "&Välj"
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:321
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:143
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:151
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:131
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:484
 msgid "Cancel"
@@ -29352,7 +29352,7 @@ msgid "Title:"
 msgstr "Titel:"
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:61
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:156
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:157
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:272
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:137
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:487
@@ -29373,15 +29373,15 @@ msgid "Plugin to draw and export sky cultures in Stellarium."
 msgstr ""
 "Insticksprogram för att rita och exportera himmelskulturer i Stellarium"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:574
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:575
 msgid "INFO"
 msgstr "INFO"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:581
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:582
 msgid "WARNING"
 msgstr "VARNING"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:588
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:589
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:349
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:359
 msgid "ERROR"
@@ -29419,51 +29419,51 @@ msgstr ""
 "Himmelskulturens beskrivning är inte färdigställd. Vänligen fyll i alla "
 "obligatoriska fält korrekt."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:98
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:104
 msgid "No sky culture is set."
 msgstr "Ingen himmelskultur är inställd."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:112
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:118
 msgid "Failed to choose export directory."
 msgstr "Misslyckades att välja exportmapp."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:120
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:126
 msgid "Sky culture with this ID already exists."
 msgstr "En himmelskultur med detta ID finns redan."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:131
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:137
 msgid "Failed to create sky culture directory."
 msgstr "Misslyckades att skapa himmelskulturens mapp."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:141
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:147
 msgid "Failed to save the illustrations."
 msgstr "Misslyckades att spara illustrationer."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:155
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:163
 msgid "Failed to create JSON document for sky culture."
 msgstr "Misslyckades att skapa JSON-dokument för himmelskultur."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:164
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:172
 msgid "Failed to open index.json for writing."
 msgstr "Misslyckades att öppna index.json för skrivning."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:176
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:184
 msgid "Failed to export sky culture description."
 msgstr "Misslyckades att exportera himmelskulturens beskrivning."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:187
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:195
 msgid "Failed to export CMakeLists.txt."
 msgstr "Misslyckades att exportera CMakeLists.txt."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:195
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:203
 msgid "Sky culture exported successfully to "
 msgstr "Himmelskulturen lyckades exporteras till"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:206
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:216
 msgid "Choose Export Directory"
 msgstr "Välj exportmapp"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:216
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:226
 msgid "The selected directory is not valid"
 msgstr "Den valda mappen är inte giltig"
 
@@ -29890,15 +29890,15 @@ msgstr ""
 "Vilka vill du rikta ett tack till? T.ex. intervjuade personer, föreningar "
 "eller källor som hjälpt dig?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:132
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:139
 msgid "SCM: Export"
 msgstr "SCM: exportera"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:133
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:140
 msgid "Before exporting the Sky Culture, please make sure that:"
 msgstr "Innan du exporterar din himmelskultur, vänligen kontrollera att:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:134
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:141
 msgid ""
 "1. You fully agree that the Sky Culture will be subject to the license you have selected.\n"
 "2. You have described the Sky Culture as elaborately as possible.\n"
@@ -29914,7 +29914,7 @@ msgstr ""
 "5. Innehållet delas med gott syfte, med respekt för kulturell mening och känslighet.\n"
 "6. Du har givit tillräckliga källhänvisningar där så är nödvändigt (t.ex. bilder, texter och namn)."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:140
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:147
 msgid ""
 "On export, you will be prompted to select your personal skycultures "
 "directory. A new directory for the sky culture will be created inside."
@@ -29922,11 +29922,15 @@ msgstr ""
 "Vid exportering kommer du uppmanas att skapa din personliga "
 "himmelskultursmapp. En ny mapp för din himmelskultur skapas inuti denna."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:141
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:148
+msgid "Merge constellation lines into polylines on export"
+msgstr "Slå samman stjärnbildslinjer till polylinjer vid export"
+
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:149
 msgid "Export"
 msgstr "Exportera"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:142
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:150
 msgid "Export and Exit"
 msgstr "Exportera och avsluta"
 
