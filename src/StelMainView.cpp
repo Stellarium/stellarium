@@ -633,7 +633,9 @@ StelMainView::StelMainView(QSettings* settings)
 	  lastEventTimeSec(0.0),
 	  minfps(1.f),
 	  maxfps(10000.f),
-	  minTimeBetweenFrames(5)
+	  minTimeBetweenFrames(5),
+	  fpsTimer(nullptr),
+	  screensaverInhibitorTimer(nullptr)
 {
 	setAttribute(Qt::WA_OpaquePaintEvent);
 	setAttribute(Qt::WA_AcceptTouchEvents);
@@ -1066,6 +1068,8 @@ void StelMainView::init()
 			qCritical() << "Conflicting keyboard shortcut assignments found. Please resolve:" << conflicts.join("; "); // Repeat in logfile for later retrieval.
 		}
 	}
+	if (qApp->property("onetime_inhibit_screensaver").toBool())
+		connect (this, SIGNAL(fullScreenChanged(bool)), this, SLOT(disableScreensaver(bool)));
 }
 
 void StelMainView::updateNightModeProperty(bool b)
@@ -1477,30 +1481,10 @@ void StelMainView::initTitleI18n()
 void StelMainView::setFullScreen(bool b)
 {
 	if (b)
-	{
 		showFullScreen();
-#ifdef Q_OS_WIN
-		if (qApp->property("onetime_inhibit_screensaver").toBool())
-		{
-			qDebug() << "Disabling screensaver while in fullscreen";
-			SystemParametersInfo(SPI_SETSCREENSAVEACTIVE, FALSE , NULL, SPIF_SENDWININICHANGE);
-		}
-		else
-			qDebug() << "Not touching screensaver business";
-#endif
-	}
 	else
 	{
 		showNormal();
-#ifdef Q_OS_WIN
-		if (qApp->property("onetime_inhibit_screensaver").toBool())
-		{
-			qDebug() << "Re-enabling screensaver when leaving fullscreen";
-			SystemParametersInfo(SPI_SETSCREENSAVEACTIVE, TRUE , NULL, SPIF_SENDWININICHANGE);
-		}
-		else
-			qDebug() << "Not touching screensaver business";
-#endif
 
 		// Not enough. If we had started in fullscreen, the inner part of the window is at 0/0, with the frame extending to top/left off screen.
 		// Therefore moving is not possible. We must move to the stored position or at least defaults.
@@ -2019,3 +2003,49 @@ QRectF StelMainView::setWindowSize(int width, int height)
 
 	return stelScene->sceneRect(); // retrieve what was finally available.
 }
+
+void StelMainView::bumpScreensaver()
+{
+#ifdef Q_OS_WIN
+	EXECUTION_STATE state = SetThreadExecutionState(ES_CONTINUOUS | ES_DISPLAY_REQUIRED);
+	if (state==NULL)
+		qWarning() << "Cannot trigger screensaver inhibition";
+#else
+	qInfo() << "Screensaver deactivation not implemented on this operating system.";
+#endif
+}
+
+// take action to inhibit screensaver when display is running in fullscreen mode
+// private slot. Connect to fullScreenChanged(b)
+void StelMainView::disableScreensaver(bool fullscreen)
+{
+	if (fullscreen)
+	{
+		qDebug() << "Disabling screensaver while in fullscreen";
+		//SystemParametersInfo(SPI_SETSCREENSAVEACTIVE, FALSE , NULL, SPIF_SENDWININICHANGE);
+		screensaverInhibitorTimer = new QTimer(this);
+		screensaverInhibitorTimer->setTimerType(Qt::VeryCoarseTimer);
+		//screensaverInhibitorTimer->setInterval(5000);
+		connect(screensaverInhibitorTimer, SIGNAL(timeout()), this, SLOT(bumpScreensaver()));
+		screensaverInhibitorTimer->start(5000);
+	}
+	else
+	{
+		qDebug() << "Re-enabling screensaver when leaving fullscreen";
+		//SystemParametersInfo(SPI_SETSCREENSAVEACTIVE, TRUE , NULL, SPIF_SENDWININICHANGE);
+		if (screensaverInhibitorTimer)
+		{
+			screensaverInhibitorTimer->stop();
+			delete screensaverInhibitorTimer;
+			screensaverInhibitorTimer=nullptr;
+#ifdef Q_OS_WIN
+			EXECUTION_STATE state = SetThreadExecutionState(ES_CONTINUOUS);
+			if (state==NULL)
+					qWarning() << "Cannot disable screensaver inhibition";
+#else
+			qWarning() << "Screensaver reactivation not yet implemented on this platform.";
+#endif
+		}
+	}
+}
+
