@@ -90,7 +90,7 @@ before_build:
   - ps: if($env:QT_BASEDIR.contains('arm64')) { $env:PKGARCH="arm64" }
   - ps: if($env:QT_VERSION_MAJOR -eq "6") { $env:SSL="OpenSSL-" } else { $env:SSL="OpenSSL-1-" }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next") { $env:PUBLISH_BINARY = 'true' }
-  - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable") { $env:PUBLISH_BINARY = 'true' }
+  - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable-arm64") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next" -or $env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { $env:USE_EXTRA_EXE = 'true' } else { $env:USE_EXTRA_EXE = 'false' }
