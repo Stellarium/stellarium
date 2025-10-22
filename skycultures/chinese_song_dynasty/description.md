@@ -26,9 +26,9 @@ Below is *Xinyixiangfayao Star Map* from Su Song (苏颂, 1020-1101 AD).
 
 The Imperial Observatory of the Song Dynasty conducted several large-scale stellar observations with remarkable accuracy, surpassing all previous eras in precision. The data from the 4th year of the Huangyou era (1052 AD) is the most complete set that survives today. Based on these records, two significant star charts were produced: the *Xinyixiangfayao Star Map* (based on observational data from 1052 AD, created in 1088 AD) and the *Suzhou Star Map* (based on observational data from 1078 to 1085 AD, carved in 1247 AD).
 
-The historian of astronomy Pan Nai (潘鼐) systematically compiled the observational data from the Huangyou era into the *Huangyou Star Catalog*. By cross-referencing it with the *Xinyixiangfayao Star Map* in his work *The History of Stellar Observation in China*, he reconstructed most of the Song Dynasty Xingguans, serving as the primary reference for this project.
+The historian of astronomy Pan Nai (潘鼐) systematically compiled the observational data from the Huangyou era into the *Huangyou Star Catalog*. By cross-referencing it with the *Xinyixiangfayao Star Map* in his work *The History of Stellar Observation in China*[#1], he reconstructed most of the Song Dynasty Xingguans, serving as the primary reference for this project.
 
-In their work *Roving China Heavens*, Qi Rui (齐锐) and Wan Haoyi (万昊宜) also reconstructed the Song Dynasty Xingguans. Their research primarily referenced the *Suzhou Star Map* . Since the observational data used for this star map dates from slightly later than 1052 AD, *Roving China Heavens* serves as supplementary reference material for this study.
+In their work *Roving China Heavens*[#2], Qi Rui (齐锐) and Wan Haoyi (万昊宜) also reconstructed the Song Dynasty Xingguans. Their research primarily referenced the *Suzhou Star Map* . Since the observational data used for this star map dates from slightly later than 1052 AD, *Roving China Heavens* serves as supplementary reference material for this study.
 
 Due to the limitations of observational technology and potential errors in transmission, different scholarly reconstructions may vary slightly. Based on the aforementioned works, Stellarium faithfully reconstructs the Chinese night sky of 1052 AD.
 
