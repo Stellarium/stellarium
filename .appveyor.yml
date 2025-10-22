@@ -29,7 +29,7 @@ environment:
   matrix:
   - BUILD_NAME: Win64 Qt6.8
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    VSPATH: C:\Program Files\Microsoft Visual Studio\2019\Community\SDK\ScopeCppSDK\VC\bin
+    VSPATH: C:\Program Files\Microsoft Visual Studio\2019\Community\SDK\ScopeCppSDK\vc15\VC\bin
     QT_VERSION_MAJOR: 6
     QT_BASEDIR: C:\Qt\6.8\msvc2022_64
     CMAKE_GENERATOR: Visual Studio 16 2019
@@ -59,7 +59,7 @@ environment:
 #    scConverterEnabled: false
   - BUILD_NAME: Arm64 Qt6.5
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    VSPATH: C:\Program Files\Microsoft Visual Studio\2019\Community\SDK\ScopeCppSDK\VC\bin
+    VSPATH: C:\Program Files\Microsoft Visual Studio\2019\Community\SDK\ScopeCppSDK\vc15\VC\bin
     QT_VERSION_MAJOR: 6
     QT_BASEDIR: C:\Qt\6.5\msvc2019_arm64
     CMAKE_GENERATOR: Visual Studio 16 2019
