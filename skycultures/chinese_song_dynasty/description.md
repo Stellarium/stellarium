@@ -20,7 +20,7 @@ Below is *Xinyixiangfayao Star Map* from Su Song (苏颂, 1020-1101 AD).
 
 ![](illustrations/xyxfy.png)
 
-*Xinyixiangfayao Star Map(1088 AD)*
+*Xinyixiangfayao Star Map (1088 AD)*
 
 ### Restore Sky Map
 
