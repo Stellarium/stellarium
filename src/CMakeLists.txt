@@ -647,6 +647,7 @@ IF(WIN32)
      ELSE()
           SET(_qt_paths "")
      ENDIF()
+     MESSAGE(STATUS "qtpath: ${_qt_paths}")
 
      INSTALL(CODE
 	  "
