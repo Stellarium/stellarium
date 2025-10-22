@@ -52,7 +52,7 @@ Stabilizer Star (填星, Zhènxīng): Saturn. In traditional theory, Saturn was 
 
  - [#1]: Pan Nai. *Zhongguo Hengxing Guance Shi [The History of Stellar Observation in China]*. Shanghai: Xuelin Publishing House, 2009.
  - [#2]: Qi Rui, Wan Haoyi. *Manbu Zhongguo Xingkong [Roving China Heavens]*. Beijing: Science Popularization Press, 2014.
- - [#3]: Su Song (Song Dynasty). *Xinyixiangfayao Yizhu [Annotated Translation of the Essentials of Xinyixiangfayao]*. Translated and annotated by Lu Jingyan and Qian Xueying. Shanghai: Shanghai Ancient Books Publishing House, 2008.
+ - [#3]: Su Song (Song Dynasty). *Xinyixiangfayao Yizhu [Annotated Translation of Xinyixiangfayao]*. Translated and annotated by Lu Jingyan and Qian Xueying. Shanghai: Shanghai Ancient Books Publishing House, 2008.
  - [#4]: Sima Qian (Han Dynasty). *Shiji [Records of the Grand Historian]*. Beijing: Zhonghua Book Company, 2014.
  - [#5]: Wei Zheng, et al. (Tang Dynasty). *Suishu [Book of Sui]* Beijing: Zhonghua Book Company, 1997.
  - [#6]: Tuotuo, et al. (Yuan Dynasty). *Songshi [History of Song]*. Beijing: Zhonghua Book Company, 1985.
