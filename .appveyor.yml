@@ -37,6 +37,16 @@ environment:
     exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
     exiv2baseName: exiv2-0.28.0-2019msvc64
     scConverterEnabled: true
+  - BUILD_NAME: Win64 Qt6.8
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    VSPATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\SDK\ScopeCppSDK\vc15\VC\bin
+    QT_VERSION_MAJOR: 6
+    QT_BASEDIR: C:\Qt\6.8\msvc2022_64
+    CMAKE_GENERATOR: Visual Studio 16 2019
+    CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=ON
+    exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
+    exiv2baseName: exiv2-0.28.0-2019msvc64
+    scConverterEnabled: true
   - BUILD_NAME: Win64 Qt5.12
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     VSPATH: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\SDK\ScopeCppSDK\VC\bin
