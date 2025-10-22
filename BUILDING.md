@@ -395,6 +395,132 @@ a directory name is proposed, but you have to create it manually.
 You can keep your copy up-to-date by typing `git pull --rebase` in ~/stellarium. 
 Feel free to send patches to our mailing list stellarium@googlegroups.com
 
+#### For Visual Studio 2022 (multi-configuration):
+
+Select a working directory <work_dir> close to the drive root, e.g <work_dir> = "E:\Dev"
+**Note** : VS 2022 will generate very long path for some sub-directory, so keep <work_dir> short to avoid 
+exceeding the limit of 260 characters.
+
+Download Stellarium from GitHub into : <stel_dir> = <work_dir> + "\stellarium"
+
+Create a CMakePresets.json file and save the file in <stel_dir>. This file must be in the same directory 
+as the top level CMakeLists.txt of Stellarium. The CMakePresets.json file defines all required build 
+configurations (e.g. Debug, Release, RelWithDebInfo). It shall be structured for a multi-configuration
+build process (see example below). However, it must be customized to your rig and software setup. 
+
+Here is an example that was created to build Stellarium using Qt 6.7.3 framework. CMake parameters (-D flags) 
+are defined within the "cacheVariables" section. Modify/Add your own as required. Some parameters were added 
+to indicate to VS 2022 where to find some libraries (.lib) or include files (.hpp), those are specific to this
+example and may not apply to your setup.
+
+<CMakePreset.json file example>
+
+{
+  "version": 3,
+  "cmakeMinimumRequired": { "major": 3, "minor": 21, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "vs2022-multi-config",
+      "displayName": "Stellarium (VS2022 Multi-Config)",
+      "description": "Unified build tree for Debug, Release, and RelWithDebInfo using Visual Studio 2022",
+      "generator": "Visual Studio 17 2022",
+      "architecture": {
+        "value": "x64"
+      },
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_CONFIGURATION_TYPES": "Debug;Release;RelWithDebInfo",
+	      "CMAKE_BUILD_TYPE": "Debug",
+	      "CMAKE_SUPPRESS_DEVELOPER_WARNINGS": "1",
+	      "CMAKE_PREFIX_PATH": "C:/Qt/6.7.3/msvc2022_64;C:/Dev/Libs/exiv2-0.28.7/lib/cmake/exiv2",
+        "QT_QMAKE_EXECUTABLE": "C:/Qt/6.7.3/msvc2022_64/bin/qmake.exe",
+        "ENABLE_SCRIPTING": "ON",
+        "ENABLE_GPS": "ON",
+        "ENABLE_TESTING": "ON",
+        "ENABLE_NLS": "ON",
+        "SCM_SHOULD_ENABLE_CONVERTER": "TRUE",
+        "GETTEXTPO_LIBRARY": "C:/Dev/Libs/gettextpo/lib/libgettextpo.lib",
+        "GETTEXTPO_INCLUDE_DIR": "C:/Dev/Libs/gettextpo/include",
+        "LIBTIDY_LIBRARY": "C:/Dev/Libs/libtidy/lib/libtidy.lib",
+        "LIBTIDY_INCLUDE_DIR": "C:/Dev/Libs/libtidy/include",
+        "EXIV2_LIBRARY": "C:/Dev/Libs/exiv2-0.28.7/lib/exiv2.lib",
+        "EXIV2_INCLUDE_DIR": "C:/Dev/Libs/exiv2-0.28.7/include",
+        "exiv2_DIR": "C:/Dev/Libs/exiv2-0.28.7/lib/cmake/exiv2",
+        "Qt6LinguistTools_DIR": "C:/Qt/6.7.3/msvc2022_64/lib/cmake/Qt6LinguistTools"
+      }
+    }
+  ],
+  "buildPresets": [
+  {
+    "name": "Debug",
+    "configurePreset": "vs2022-multi-config",
+    "configuration": "Debug"
+  },
+  {
+    "name": "Release",
+    "configurePreset": "vs2022-multi-config",
+    "configuration": "Release"
+  },
+  {
+    "name": "RelWithDebInfo",
+    "configurePreset": "vs2022-multi-config",
+    "configuration": "RelWithDebInfo"
+  }
+  ]
+}
+
+**Note** Dynamic libraries (.dll) needed to resolve runtime functionalities shall be placed in a common location 
+on your main system drive. Add the path to your user/system environment variables PATH to allow Stellarium to 
+discover them during runtime.
+
+Open Visual Studio 2022 (run as admin). Continue wihtout code.
+
+If you want to use a specific cmake.exe go to Tools -> Options, navigate to Cmake -> General and fill the appropriate
+checkbox and path. Otherwise VS 2022 will use it own cmake.exe tool. The path of an external cmake should be included
+in your system environment variables PATH as well.
+
+At this point you are ready to start the building process. Go to File -> Open -> Folder... and select <stel_dir>
+
+VS 2022 will automatically detect the CMakePresets.json file and start to configure the first Preset Configuration which
+is 'Debug'. You can follow the configuration process in the CMake Output Window. If successful (or with acceptable minor 
+errors) you can build this configuration by opening a Developer Command Prompt in VS 2022. Navigate to the <stel_dir> 
+and type:
+
+cmake --build --preset Debug
+
+**Note** : Do not use the top menu of VS 2022 (i.e. Build -> Build All). While this may work for this first build, eventually
+this sub-menu will disappear... a bug in VS 2022. Rely on the Developer Command Prompt for all builds and re-build.
+
+If the Debug build was successful, select from the Configuration dropdown menu of VS 2022, the next configuration specified in
+the CMakePresets.json file, i.e Release in this case.
+
+As soon as you will change this setting in the Configuration dropdown list, VS 2022 will start cmake to configure the build. 
+Then build by typing this command in the Developer Command Prompt:
+
+cmake --build --preset Release
+
+Redo the same process for the last build, ie. RelWithDebInfo.
+
+cmake --build --preset RelWithDebInfo
+
+**Note** : Once all three builds are completed, YOU MUST REMAIN in the Folder View of VS 2022 for all subsequent actions. 
+Do not open any of the Stellarium.sln files generated by VS 2022. This may disrupt the multi-config links between Visual 
+Studio and Qt.
+
+At this point you can run any executables (Start Debugging F5 or Start without Debugging Ctrl-F5). Just ensure you specify 
+which executable by setting it as 'Set as Startup Item' prior 
+
+To run test suites (if ENABLE_TESTING = ON), use again the Developer Command Prompt. Navigate to <stel_dir>+"\build. 
+Then type one of these three commands:
+
+ctest -C Debug
+ctest -C Release
+ctest -C RelWithDebInfo
+
+If you edit the code of your source files, select from the Configuration dropdown list the configuration you want to rebuilt 
+and use again the Developer Command Prompt with the appropriate command : cmake --build --preset <build-type> 
+
+
 ### Supported CMake parameters
 
 List of supported parameters (passed as `-DPARAMETER=VALUE`):
