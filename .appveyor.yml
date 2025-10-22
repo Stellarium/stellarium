@@ -28,11 +28,11 @@ environment:
   tidyBaseName: tidy-5.8.0-win64
   matrix:
   - BUILD_NAME: Win64 Qt6.8
-    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    VSPATH: C:\Program Files\Microsoft Visual Studio\2019\Community\SDK\ScopeCppSDK\VC\bin
     QT_VERSION_MAJOR: 6
     QT_BASEDIR: C:\Qt\6.8\msvc2022_64
-    CMAKE_GENERATOR: Visual Studio 17 2022
+    CMAKE_GENERATOR: Visual Studio 16 2019
     CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=ON
     exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
     exiv2baseName: exiv2-0.28.0-2019msvc64
@@ -59,7 +59,7 @@ environment:
 #    scConverterEnabled: false
   - BUILD_NAME: Arm64 Qt6.5
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    VSPATH: C:\Program Files\Microsoft Visual Studio\2019\Community\SDK\ScopeCppSDK\vc15\VC\bin
+    VSPATH: C:\Program Files\Microsoft Visual Studio\2019\Community\SDK\ScopeCppSDK\VC\bin
     QT_VERSION_MAJOR: 6
     QT_BASEDIR: C:\Qt\6.5\msvc2019_arm64
     CMAKE_GENERATOR: Visual Studio 16 2019
@@ -166,6 +166,7 @@ after_test:
   - if [%PUBLISH_BINARY%]==[true] if NOT [%exiv2url%] == [] copy c:\%exiv2baseName%\bin\exiv2.dll c:\stellarium-package\bin\
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-installer
   - if [%USE_EXTRA_EXE%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-patch-installer
+  cd %QT_BASEDIR%\bin && dir
   - if [%PUBLISH_BINARY%]==[true] cd c:\stellarium\installers
   - if [%PUBLISH_BINARY%]==[true] for %%i in (*.exe) do appveyor PushArtifact %%i
 
