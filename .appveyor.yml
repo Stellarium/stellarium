@@ -58,12 +58,12 @@ environment:
 #    exiv2baseName: exiv2-0.28.0-2019msvc64
 #    scConverterEnabled: false
   - BUILD_NAME: Arm64 Qt6.5
-    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    VSPATH: C:\Program Files\Microsoft Visual Studio\2019\Community\SDK\ScopeCppSDK\vc15\VC\bin
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
     QT_VERSION_MAJOR: 6
     QT_BASEDIR: C:\Qt\6.5\msvc2019_arm64
-    CMAKE_GENERATOR: Visual Studio 16 2019
-    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.5\msvc2019_64 -DQt6LinguistTools_DIR=C:\Qt\6.5\msvc2019_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF -DUSE_PLUGIN_SKYCULTUREMAKER=Off
+    CMAKE_GENERATOR: Visual Studio 17 2022
+    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.5\msvc2019_64 -DQt6LinguistTools_DIR=C:\Qt\6.5\msvc2019_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
     scConverterEnabled: false
 #  - BUILD_NAME: Arm64 Qt6.8
 #    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
@@ -97,7 +97,7 @@ before_build:
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:QT_VERSION_MAJOR -eq "5" -and $env:BUILD_NAME.contains('Win')) { $env:USE_EXT_LIBGLES = 'true' }
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:BUILD_NAME.contains('Win')) { $env:USE_EXT_LIBSSL = 'true' }
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:BUILD_NAME.contains('Win')) { $env:USE_MESA = 'true' }
-  - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable" -and $env:QT_VERSION_MAJOR -eq "6") { $env:SIGNING = 'true' }
+  - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable-arm64" -and $env:QT_VERSION_MAJOR -eq "6") { $env:SIGNING = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable" -and $env:QT_VERSION_MAJOR -eq "5") { $env:SIGNING = 'true' }
   - ps: if($env:CMAKE_ARGS.contains('SCM_SHOULD_ENABLE_CONVERTER')) { $env:INSTALL_CONVERTER_DEPS = 'true' }
   - ps: if($env:PUBLISH_BINARY -eq 'true' -and $env:scConverterEnabled -eq 'true') { $env:INSTALL_CONVERTER = 'true' }
