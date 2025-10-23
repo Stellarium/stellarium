@@ -34,6 +34,8 @@ Due to the limitations of observational technology and potential errors in trans
 
 ### Sun, Moon and Planets
 
+The sun and moon are named after *yin and yang*, while the pictographic characters "日" (sun) and "月" (moon) are also used. The five major planets represent the *five elements*, but the following names were the most orthodox designations at the time. Similar to other civilizations around the world, Venus also had additional names depending on whether it appeared in the morning or the evening.
+
 Great Yang (太阳, Tàiyáng): The Sun. In Chinese philosophy, it represents the pinnacle of Yang energy.
 
 Great Yin (太阴, Tàiyīn): The Moon. It represents the pinnacle of Yin energy.
