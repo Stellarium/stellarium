@@ -63,7 +63,7 @@ environment:
     QT_VERSION_MAJOR: 6
     QT_BASEDIR: C:\Qt\6.5\msvc2019_arm64
     CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.5\msvc2019_64 -DQt6LinguistTools_DIR=C:\Qt\6.5\msvc2019_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF -DENABLE_SHOWMYSKY=Off -DUSE_PLUGIN_SKYCULTUREMAKER=Off -DQT_PATHS=C:\stellarium\util\qtpaths_qt65_appveyor.bat
+    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.5\msvc2019_64 -DQt6LinguistTools_DIR=C:\Qt\6.5\msvc2019_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF -DENABLE_SHOWMYSKY=Off -DUSE_PLUGIN_SKYCULTUREMAKER=Off -DQT_PATHS=C:\stellarium\util\qtpaths_workaround.bat
     scConverterEnabled: false
 before_build:
   - set DEBUG_WINDEPLOYQT=false
