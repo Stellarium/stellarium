@@ -37,16 +37,6 @@ environment:
     exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
     exiv2baseName: exiv2-0.28.0-2019msvc64
     scConverterEnabled: true
-  - BUILD_NAME: Win64 Qt6.8
-    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    VSPATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\SDK\ScopeCppSDK\vc15\VC\bin
-    QT_VERSION_MAJOR: 6
-    QT_BASEDIR: C:\Qt\6.8\msvc2022_64
-    CMAKE_GENERATOR: Visual Studio 16 2019
-    CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=ON
-    exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
-    exiv2baseName: exiv2-0.28.0-2019msvc64
-    scConverterEnabled: true
   - BUILD_NAME: Win64 Qt5.12
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     VSPATH: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\SDK\ScopeCppSDK\VC\bin
@@ -68,23 +58,15 @@ environment:
 #    exiv2baseName: exiv2-0.28.0-2019msvc64
 #    scConverterEnabled: false
   - BUILD_NAME: Arm64 Qt6.5
-    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    VSPATH: C:\Program Files\Microsoft Visual Studio\2019\Community\SDK\ScopeCppSDK\vc15\VC\bin
-    QT_VERSION_MAJOR: 6
-    QT_BASEDIR: C:\Qt\6.5\msvc2019_arm64
-    CMAKE_GENERATOR: Visual Studio 16 2019
-    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.5\msvc2019_64 -DQt6LinguistTools_DIR=C:\Qt\6.5\msvc2019_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF -DUSE_PLUGIN_SKYCULTUREMAKER=Off
-    scConverterEnabled: false
-  - BUILD_NAME: Arm64 Qt6.8
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
     VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
     QT_VERSION_MAJOR: 6
-    QT_BASEDIR: C:\Qt\6.8\msvc2022_arm64
+    QT_BASEDIR: C:\Qt\6.5\msvc2019_arm64
     CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.8\msvc2022_64 -DQt6LinguistTools_DIR=C:\Qt\6.8\msvc2022_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF -DUSE_PLUGIN_SKYCULTUREMAKER=Off
+    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.5\msvc2019_64 -DQt6LinguistTools_DIR=C:\Qt\6.5\msvc2019_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF -DENABLE_SHOWMYSKY=Off -DUSE_PLUGIN_SKYCULTUREMAKER=Off
     scConverterEnabled: false
 before_build:
-  - set DEBUG_WINDEPLOYQT=true
+  - set DEBUG_WINDEPLOYQT=false
   - set PUBLISH_BINARY=false
   - set USE_MESA=false
   - set USE_EXT_LIBSSL=false
@@ -114,7 +96,7 @@ before_build:
 
   - ps: if($env:exiv2url -ne $null) { appveyor DownloadFile $env:exiv2url -FileName c:\$env:exiv2baseName.zip }
   - ps: if($env:exiv2url -ne $null) { 7z e c:\$env:exiv2baseName.zip -spf -oc:\ }
-  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
+  - ps: if($env:PUBLISH_BINARY -eq 'true') { appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf }
 
   - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { appveyor DownloadFile $env:gettextURL -FileName c:\$env:gettextBaseName.zip }
   - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { 7z e c:\$env:gettextBaseName.zip -spf -oc:\$env:gettextBaseName }
@@ -174,7 +156,6 @@ after_test:
 #  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/translations/translations.zip -FileName c:\translations.zip
 #  - if [%PUBLISH_BINARY%]==[true] 7z e c:\translations.zip -spf -oc:\stellarium-package\share\stellarium\
   - if [%PUBLISH_BINARY%]==[true] if NOT [%exiv2url%] == [] copy c:\%exiv2baseName%\bin\exiv2.dll c:\stellarium-package\bin\
-  - cd %QT_BASEDIR%\bin && dir
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-installer
   - if [%USE_EXTRA_EXE%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-patch-installer 
   - if [%PUBLISH_BINARY%]==[true] cd c:\stellarium\installers
