@@ -174,9 +174,9 @@ after_test:
 #  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/translations/translations.zip -FileName c:\translations.zip
 #  - if [%PUBLISH_BINARY%]==[true] 7z e c:\translations.zip -spf -oc:\stellarium-package\share\stellarium\
   - if [%PUBLISH_BINARY%]==[true] if NOT [%exiv2url%] == [] copy c:\%exiv2baseName%\bin\exiv2.dll c:\stellarium-package\bin\
-  - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-installer
-  - if [%USE_EXTRA_EXE%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-patch-installer
   - cd %QT_BASEDIR%\bin && dir
+  - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-installer
+  - if [%USE_EXTRA_EXE%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-patch-installer 
   - if [%PUBLISH_BINARY%]==[true] cd c:\stellarium\installers
   - if [%PUBLISH_BINARY%]==[true] for %%i in (*.exe) do appveyor PushArtifact %%i
 
