@@ -2747,8 +2747,15 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 		for (const auto& p : systemPlanets)
 		{
 			result << p->getNameI18n();
-			if (!p->getNameNativeI18n().isEmpty())
-				result << p->getNameNativeI18n() << p->getNameNative();
+			if (!p->culturalNames.isEmpty())
+			{
+				// Objects can have more than 1 name, e.g. Venus as Morning/Evening star.
+				for (const StelObject::CulturalName &cName : qAsConst(p->culturalNames))
+				{
+					result << cName.translatedI18n << cName.native << cName.pronounceI18n;
+				}
+			}
+
 			if (!p->getIAUDesignation().isEmpty())
 				result << p->getIAUDesignation();
 		}
@@ -2768,6 +2775,8 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 		if (c.count()>0)
 			result << c;
 	}
+	result.removeAll("");
+	result.removeDuplicates();
 	return result;
 }
 
