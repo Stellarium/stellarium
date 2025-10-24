@@ -27,16 +27,16 @@ environment:
   tidyURL: https://github.com/htacg/tidy-html5/releases/download/5.8.0/tidy-5.8.0-win64.zip
   tidyBaseName: tidy-5.8.0-win64
   matrix:
-#  - BUILD_NAME: Win64 Qt6.8
-#    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-#    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
-#    QT_VERSION_MAJOR: 6
-#    QT_BASEDIR: C:\Qt\6.8\msvc2022_64
-#    CMAKE_GENERATOR: Visual Studio 17 2022
-#    CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=ON
-#    exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
-#    exiv2baseName: exiv2-0.28.0-2019msvc64
-#    scConverterEnabled: true
+  - BUILD_NAME: Win64 Qt6.8
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
+    QT_VERSION_MAJOR: 6
+    QT_BASEDIR: C:\Qt\6.8\msvc2022_64
+    CMAKE_GENERATOR: Visual Studio 17 2022
+    CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=ON
+    exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
+    exiv2baseName: exiv2-0.28.0-2019msvc64
+    scConverterEnabled: true
 #  - BUILD_NAME: Win64 Qt5.12
 #    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
 #    VSPATH: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\SDK\ScopeCppSDK\VC\bin
@@ -61,9 +61,9 @@ environment:
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
     VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
     QT_VERSION_MAJOR: 6
-    QT_BASEDIR: C:\Qt\6.8.3\msvc2022_arm64
+    QT_BASEDIR: C:\Qt\6.8\msvc2022_arm64
     CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.8.3/msvc2022_64 -DQt6LinguistTools_DIR=C:/Qt/6.8.3/msvc2022_64/lib/cmake/Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF -DENABLE_SHOWMYSKY=Off -DUSE_PLUGIN_SKYCULTUREMAKER=Off -DUSE_PLUGIN_LENSDISTORTIONESTIMATOR=Off
+    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.8/msvc2022_64 -DQt6LinguistTools_DIR=C:/Qt/6.8/msvc2022_64/lib/cmake/Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF -DENABLE_SHOWMYSKY=Off -DUSE_PLUGIN_SKYCULTUREMAKER=Off -DUSE_PLUGIN_LENSDISTORTIONESTIMATOR=Off
     scConverterEnabled: false
 before_build:
   - set DEBUG_WINDEPLOYQT=true
@@ -76,10 +76,12 @@ before_build:
   - set INSTALL_CONVERTER_DEPS=false
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\Inno Setup 6
   - set PATH=%VSPATH%;%QT_BASEDIR%\bin;c:\%exiv2baseName%\bin;%INNSPATH%;c:\%gettextBaseName%\bin;c:\%tidyBaseName%\bin;c:\skyculture-converter;%PATH%
+  - set cmakeprefixpath="-DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName%"
 
   - ps: if($env:QT_BASEDIR.contains('_64') -or $env:QT_BASEDIR.contains('arm64')) { $env:BITS=64 } else { $env:BITS=32 }
   - ps: if($env:QT_BASEDIR.contains('_64')) { $env:PKGARCH="x64" } else { $env:PKGARCH="x86" }
   - ps: if($env:QT_BASEDIR.contains('arm64')) { $env:PKGARCH="arm64" }
+  - ps: if($env:QT_BASEDIR.contains('arm64')) { $env:cmakeprefixpath="" }
   - ps: if($env:QT_VERSION_MAJOR -eq "6") { $env:SSL="OpenSSL-" } else { $env:SSL="OpenSSL-1-" }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable-arm64") { $env:PUBLISH_BINARY = 'true' }
@@ -122,9 +124,8 @@ before_build:
 
   - cd c:\stellarium
   - mkdir build && cd build
-  - cmake -DENABLE_MEDIA=On -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
-#  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName% -DENABLE_MEDIA=On -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
-  - if [%PUBLISH_BINARY%]==[false] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName% -DENABLE_MEDIA=On -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
+  - if [%PUBLISH_BINARY%]==[true] cmake %cmakeprefixpath% -DENABLE_MEDIA=On -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
+  - if [%PUBLISH_BINARY%]==[false] cmake %cmakeprefixpath% -DENABLE_MEDIA=On -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
 
 build:
   project: c:\stellarium\build\Stellarium.sln
