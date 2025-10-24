@@ -2350,6 +2350,14 @@ StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18n) const
 		QString nativeNameI18nUpper = p->getNameNativeI18n().toUpper();
 		if (p->getNameI18n().toUpper() == planetNameI18Upper || (!nativeNameI18nUpper.isEmpty() && nativeNameI18nUpper == planetNameI18Upper))
 			return qSharedPointerCast<StelObject>(p);
+		if (!p->culturalNames.isEmpty())
+		{
+			for (const StelObject::CulturalName &cName : qAsConst(p->culturalNames))
+			{
+				if ( QStringList({cName.native.toUpper(), cName.pronounceI18n.toUpper(), cName.translatedI18n.toUpper()}).contains(planetNameI18Upper))
+					return qSharedPointerCast<StelObject>(p);
+			}
+		}
 	}
 	return StelObjectP();
 }
@@ -2755,6 +2763,8 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 					result << cName.translatedI18n << cName.native << cName.pronounceI18n;
 				}
 			}
+			result.removeAll("");
+			result.removeDuplicates();
 
 			if (!p->getIAUDesignation().isEmpty())
 				result << p->getIAUDesignation();
@@ -2804,6 +2814,15 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 				result << p->getNameI18n();
 				if (!p->getIAUDesignation().isEmpty())
 					result << p->getIAUDesignation();
+				if (!p->culturalNames.isEmpty())
+				{
+					for (const StelObject::CulturalName &cName : qAsConst(p->culturalNames))
+					{
+						result << cName.native << cName.pronounceI18n << cName.translatedI18n;
+					}
+				}
+				result.removeAll("");
+				result.removeDuplicates();
 			}
 		}
 	}
