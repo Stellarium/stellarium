@@ -1645,13 +1645,13 @@ void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDisc
 		return;
 	}
 
+	QVector<Vec3d> aberredVertex(arr.vertex.size());
 	if (aberration==Vec3d(0.))
 	{
 		setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
 	}
 	else
 	{
-		QVector<Vec3d> aberredVertex(arr.vertex.size());
 		for (int i=0; i<arr.vertex.size(); i++)
 		{
 			Q_ASSERT(qFuzzyCompare(arr.vertex.at(i).normSquared(), 1.0));
