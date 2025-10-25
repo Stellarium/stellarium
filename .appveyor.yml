@@ -27,11 +27,11 @@ environment:
   tidyURL: https://github.com/htacg/tidy-html5/releases/download/5.8.0/tidy-5.8.0-win64.zip
   tidyBaseName: tidy-5.8.0-win64
   matrix:
-  - BUILD_NAME: Win64 Qt6.9
+  - BUILD_NAME: Win64 Qt6.8
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
     VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
     QT_VERSION_MAJOR: 6
-    QT_BASEDIR: C:\Qt\6.9\msvc2022_64
+    QT_BASEDIR: C:\Qt\6.8\msvc2022_64
     CMAKE_GENERATOR: Visual Studio 17 2022
     CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=ON
     exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
@@ -57,13 +57,13 @@ environment:
 #    exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
 #    exiv2baseName: exiv2-0.28.0-2019msvc64
 #    scConverterEnabled: false
-  - BUILD_NAME: Arm64 Qt6.9
+  - BUILD_NAME: Arm64 Qt6.8
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
     VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
     QT_VERSION_MAJOR: 6
-    QT_BASEDIR: C:\Qt\6.9\msvc2022_arm64
+    QT_BASEDIR: C:\Qt\6.8\msvc2022_arm64
     CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.9/msvc2022_64 -DQt6LinguistTools_DIR=C:/Qt/6.9/msvc2022_64/lib/cmake/Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF -DENABLE_SHOWMYSKY=Off -DUSE_PLUGIN_SKYCULTUREMAKER=Off -DUSE_PLUGIN_LENSDISTORTIONESTIMATOR=Off
+    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.8/msvc2022_64 -DQt6LinguistTools_DIR=C:/Qt/6.8/msvc2022_64/lib/cmake/Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF -DENABLE_SHOWMYSKY=Off -DUSE_PLUGIN_SKYCULTUREMAKER=Off -DUSE_PLUGIN_LENSDISTORTIONESTIMATOR=Off
     scConverterEnabled: false
 before_build:
   - set DEBUG_WINDEPLOYQT=true
@@ -98,6 +98,8 @@ before_build:
 
   - ps: if($env:exiv2url -ne $null) { appveyor DownloadFile $env:exiv2url -FileName c:\$env:exiv2baseName.zip }
   - ps: if($env:exiv2url -ne $null) { 7z e c:\$env:exiv2baseName.zip -spf -oc:\ }
+
+  - ps: if($env:PUBLISH_BINARY -eq 'true') { $env:cmakeparams = "" } else { $env:cmakeparams = "-DENABLE_TESTING=On -DENABLE_NLS=Off" }
   - ps: if($env:PUBLISH_BINARY -eq 'true') { appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf }
 
   - ps: if($env:INSTALL_CONVERTER_DEPS -eq "true") { appveyor DownloadFile $env:gettextURL -FileName c:\$env:gettextBaseName.zip }
@@ -124,8 +126,7 @@ before_build:
 
   - cd c:\stellarium
   - mkdir build && cd build
-  - if [%PUBLISH_BINARY%]==[true] cmake %cmakeprefixpath% -DENABLE_MEDIA=On -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
-  - if [%PUBLISH_BINARY%]==[false] cmake %cmakeprefixpath% -DENABLE_MEDIA=On -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
+  - cmake %cmakeprefixpath% %cmakeparams% -DENABLE_MEDIA=On -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
 
 build:
   project: c:\stellarium\build\Stellarium.sln
