@@ -660,6 +660,7 @@ IF(WIN32)
 		    ${VIRTUAL_KBD_SETTING}
 		    ${_qt_paths}
 		    --compiler-runtime
+			--force-openssl
 		    \"\${CMAKE_INSTALL_PREFIX}/bin/stellarium.exe\"
 	       WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
 	       OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.log\"
@@ -677,6 +678,7 @@ IF(WIN32)
 			 --no-translations
 			 ${VIRTUAL_KBD_SETTING}
 			 --compiler-runtime
+			 --force-openssl
 			 \"\${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"
 		    WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
 		    OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.log\"
