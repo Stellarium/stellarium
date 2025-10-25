@@ -2352,7 +2352,7 @@ StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18n) const
 			return qSharedPointerCast<StelObject>(p);
 		if (!p->culturalNames.isEmpty())
 		{
-			for (const StelObject::CulturalName &cName : qAsConst(p->culturalNames))
+			for (const StelObject::CulturalName &cName : std::as_const(p->culturalNames))
 			{
 				if ( QStringList({cName.native.toUpper(), cName.pronounceI18n.toUpper(), cName.translatedI18n.toUpper()}).contains(planetNameI18Upper))
 					return qSharedPointerCast<StelObject>(p);
@@ -2371,6 +2371,16 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 		QString nativeName = p->getNameNative().toUpper();
 		if (p->getEnglishName().toUpper() == nameUpper || (!nativeName.isEmpty() && nativeName == nameUpper))
 			return qSharedPointerCast<StelObject>(p);
+
+		// check the other cultural native names
+		if (!p->culturalNames.isEmpty())
+		{
+			for (const StelObject::CulturalName &cName : std::as_const(p->culturalNames))
+			{
+				if ( cName.native.toUpper() == nameUpper)
+					return qSharedPointerCast<StelObject>(p);
+			}
+		}
 
 		// IAU designation?
 		QString iau = p->getIAUDesignation();
