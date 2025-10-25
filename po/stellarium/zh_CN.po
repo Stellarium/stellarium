@@ -18,8 +18,8 @@
 # Zezhong Liang, 2024
 # Allen Zhong <zbl3041992@gmail.com>, 2024
 # Silas Wong <wsl98501@163.com>, 2025
-# 殳玮 孙 <itun@qq.com>, 2025
 # hongming chu <hongming@gmail.com>, 2025
+# 殳玮 孙 <itun@qq.com>, 2025
 # 
 #, fuzzy
 msgid ""
@@ -28,7 +28,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2025-10-21 01:23+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: hongming chu <hongming@gmail.com>, 2025\n"
+"Last-Translator: 殳玮 孙 <itun@qq.com>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/stellarium/teams/80998/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -147,7 +147,7 @@ msgstr "星座区域（轮廓）"
 
 #: src/core/modules/ConstellationMgr.cpp:157 src/ui_viewDialog.h:4960
 msgid "Select single constellation"
-msgstr "选择单一星座"
+msgstr "选择单个星座"
 
 #: src/core/modules/ConstellationMgr.cpp:158
 msgid "Remove selection of constellations"
@@ -13515,11 +13515,11 @@ msgstr "星座区域边界线（凸包）的颜色"
 
 #: src/ui_viewDialog.h:4886
 msgid "Only one at a time"
-msgstr "一次一个"
+msgstr "一次仅显示一个星座"
 
 #: src/ui_viewDialog.h:4888
 msgid "Isolated"
-msgstr "孤立"
+msgstr "仅显示所选星座"
 
 #: src/ui_viewDialog.h:4894
 msgid "Color of ray helpers"
