@@ -11,9 +11,9 @@ From its location, Balinese sky culture is one of the unique sky cultures in Ind
 
 ## Description
 
-In written form, Balinese sky culture is preserved in lontar or leaves of Borassus flabellifer or palmyra which is dried and used as a material for manuscript and antique crafts. This sky culture is related to Balinese calendar, and this system is Palelintangan. Palelintangan is a set of 35 asterisms that has a deep connection between cosmic movement and human life. Basically, they rely their daily activities based on which palelintangan is appear in that time. They believe each lintang of palelintangan has their own cosmos power to handle their work.
+In written form, Balinese sky culture is preserved in lontar or leaves of Borassus flabellifer or palmyra which is dried and used as a material for manuscript and antique crafts. This sky culture is related to Balinese calendar called Palelintangan. It is a set of 35 asterisms that presupposes a deep connection between cosmic movement and human life. Basically, the Balinese rely their daily activities on the lintang (constellation) that appears in that time. They believe each lintang of palelintangan has its own cosmic power to handle their work.
 
-Palelintangan is formed by combining seven-day cycle (from Redite/Sunday to Saniscara/Saturday) and five-day cycle (from Umanis to Kliwon). Palelintangan adopted Nakṣatra system and combining with the earlier existing concept in Bali. 
+Palelintangan (calendar) is formed by combining a seven-day cycle (from Redite/Sunday to Saniscara/Saturday) and a five-day cycle (from Umanis to Kliwon). it adopted Vedic Nakṣatra system and combines it with earlier Polynesian concepts that had existed on Bali already when Indian sailors arrived in the middle of the first millennium CE. 
 
 
 ### How this Sky Culture was made
