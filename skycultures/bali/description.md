@@ -38,7 +38,7 @@ For anchoring the artwork, we chose to use re-paint images. The paintings are dr
     <tr valign="top">
         <td><notr>Kala Sungsang</notr></td>
         <td><notr>ᬓᬮᬲᬸᬗ᭄ᬲᬂ"</notr></td>
-        <td>Inverted demon <br/>Sungsang itself is inverted. Kala also means time. So the duty of this demon to remind people who forget even neglect the time </td>
+        <td>Inverted demon <br/>Sungsang itself is inverted. Kala also means time. So the duty of this demon is to remind people who forget or even neglect the time </td>
         <td><img width="255" src="illustrations/descr_pics/Ra_U.jpg"/></td>
     </tr>
     <tr valign="top">
@@ -56,7 +56,7 @@ For anchoring the artwork, we chose to use re-paint images. The paintings are dr
     <tr valign="top">
         <td><notr>Těnggala</notr></td>
         <td><notr>ᬢᭂᬗ᭄ᬕᬮ</notr></td>
-        <td>Plough<br/>Betelgeuse is the red pain of the farmer. Bellatrix is the farmer's eye. Orion belt is the plough. Rigel and the other star are the animals (cow)</td>
+        <td>Plough<br/>Betelgeuse is the red pain of the farmer. Bellatrix is the farmer's eye. Orion's belt is the plough. Rigel and other stars to the west are the animals (cow)</td>
         <td><img width="255" src="illustrations/descr_pics/Ra_Wa.jpg"/></td>
     </tr>
     <tr valign="top">
@@ -68,7 +68,7 @@ For anchoring the artwork, we chose to use re-paint images. The paintings are dr
     <tr valign="top">
         <td><notr>Klapa Sunda</notr></td>
         <td><notr>ᬓ᭄ᬮᬧᬲᬸᬦ᭄ᬤ</notr></td>
-        <td>Leaning coconut tree<br/>There is a man in the coconut tree. He can't climb because there are two ants fighting on his foot</td>
+        <td>Leaning coconut tree<br/>There is a man in the coconut tree. He can't climb because there are two ants fighting on his foot.</td>
         <td><img width="255" src="illustrations/descr_pics/Ca_U.png"/></td>
     </tr>
     <tr valign="top">
@@ -110,13 +110,13 @@ For anchoring the artwork, we chose to use re-paint images. The paintings are dr
     <tr valign="top">
         <td><notr>Asu</notr></td>
         <td><notr>ᬳᬲᬸ</notr></td>
-        <td>Dog<br/>It is not a usual dog, but Balinese dog. Balinese dogs are Proto-dogs or street dogs  </td>
+        <td>Dog<br/>It is not a usual dog, but Balinese dog. Balinese dogs are Proto-dogs or street dogs.  </td>
         <td><img width="255" src="illustrations/descr_pics/A_Po.png"/></td>
     </tr>
     <tr valign="top">
         <td><notr>Prahu Sarat</notr></td>
         <td><notr></notr>ᬧ᭄ᬭᬳᬸᬲᬭᬢ᭄</td>
-        <td>Overloaded ship<br/>Overloaded and almost to sink </td>
+        <td>Overloaded ship<br/>Overloaded and about to sink </td>
         <td><img width="255" src="illustrations/descr_pics/A_Wa.png"/></td>
     </tr>
     <tr valign="top">
@@ -134,7 +134,7 @@ For anchoring the artwork, we chose to use re-paint images. The paintings are dr
     <tr valign="top">
         <td><notr>Gajahmina</notr></td>
         <td><notr>ᬕᬚᬳ᭄ᬫᬶᬦ</notr></td>
-        <td>Elephantfish<br/>A sea-creature that have elephant head and fish body. Being a supranatural creature and helps the inhabitants </td>
+        <td>Elephantfish<br/>A sea-creature that have elephant head and fish body. It is a supranatural creature and helps the inhabitants. </td>
         <td><img width="255" src="illustrations/descr_pics/Bu_Pa.png"/></td>
     </tr>
     <tr valign="top">
@@ -146,7 +146,7 @@ For anchoring the artwork, we chose to use re-paint images. The paintings are dr
     <tr valign="top">
         <td><notr>Kartika</notr></td>
         <td><notr>ᬓᬃᬢᬶᬓ</notr></td>
-        <td>Star<br/>Also refering to Nakṣatra India </td>
+        <td>Star<br/>also refering to Vedic Nakṣatra Kṛttika (Krittika) </td>
         <td><img width="255" src="illustrations/descr_pics/Bu_Wa.png"/></td>
     </tr>
     <tr valign="top">
@@ -170,7 +170,7 @@ For anchoring the artwork, we chose to use re-paint images. The paintings are dr
     <tr valign="top">
         <td><notr>Bade</notr></td>
         <td><notr>ᬩᬤᬾ</notr></td>
-        <td>Bade<br/>Name for corpse tower in Hindu Bali rituals. Bade has different levels depending on the caste and size of the event  </td>
+        <td>Bade<br/>Name for corpse tower in Hindu Bali rituals. Bade has different levels depending on the caste and size of the event.  </td>
         <td><img width="255" src="illustrations/descr_pics/Wra_Po.png"/></td>
     </tr>
     <tr valign="top">
@@ -182,7 +182,7 @@ For anchoring the artwork, we chose to use re-paint images. The paintings are dr
     <tr valign="top">
         <td><notr>Naga</notr></td>
         <td><notr>ᬦᬕ</notr></td>
-        <td>Dragon<br/>Mystical creature has a power, one of them is famous named Basuki. Naga Basuki is the one that connected to the Bali Strait </td>
+        <td>Dragon<br/>Naga are mystical creatures with special powers. The famous Naga Basuki, in particular, is the one that connected to the Bali Strait. </td>
         <td><img width="255" src="illustrations/descr_pics/Wra_Kli.png"/></td>
     </tr>
     <tr valign="top">
@@ -242,7 +242,7 @@ For anchoring the artwork, we chose to use re-paint images. The paintings are dr
     <tr valign="top">
         <td><notr>Larung Paglangan</notr></td>
         <td><notr>ᬮᬭᬸᬂᬧᬕ᭄ᬮᬗᬦ᭄</notr></td>
-        <td>Throwing ashes<br/>Cremation will produce the ashes. Here the family needs to throw the ashes to the sea </td>
+        <td>Throwing ashes<br/>Cremation will produce the ashes. Here the family needs to throw the ashes to the sea. </td>
         <td><img width="255" src="illustrations/descr_pics/Sa_Kli.png"/></td>
     </tr>
 </table>
@@ -252,7 +252,7 @@ For anchoring the artwork, we chose to use re-paint images. The paintings are dr
 
 ### Source(s)
 
-The stick figures are interpretations by Youla A Azkarrula based on her pre-doctoral research under Dr. Dr. Susanne M Hoffmann supervision.
+The stick figures are interpretations by Youla A Azkarrula based on her pre-doctoral research under supervision of Dr. Dr. Susanne M Hoffmann.
 
 
 ## References
