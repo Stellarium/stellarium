@@ -279,7 +279,7 @@ As an astronomer she thanks for the help of several scholar and her professor.
 ## Authors
 
 <p>The Balinese star names and constellation lines were compiled and added to Stellarium by <em> Youla A Azkarrula: youlaafifahrvvl@gmail.com </em></p>
-<p>Paintings by: <em>Jessica Gullberg </em> (consulted by Susanne M Hoffmann and Steven Gullberg)</p>
+<p>Paintings by: <em>Jessica Gullberg </em> (consulted by Youla Azkarrula)</p>
 <p>Text in English: <em>Youla A Azkarrula</em></p>
 
 ## License
