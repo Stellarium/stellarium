@@ -1265,7 +1265,7 @@ msgstr "stup"
 #: src/core/modules/NomenclatureItem.cpp:691
 msgctxt "landform"
 msgid "satellite feature"
-msgstr "satellityta"
+msgstr "satellitegenskap"
 
 #. TRANSLATORS: Boulder or rock
 #: src/core/modules/NomenclatureItem.cpp:693
@@ -19077,15 +19077,15 @@ msgstr "Satelliten och observatören befinner sig i solljus"
 
 #: plugins/Satellites/src/Satellite.cpp:219
 msgid "The satellite is sunlit and the observer is in the dark"
-msgstr "Satelliten är upplyst av solen och observatören är i mörker"
+msgstr "Satelliten är solbelyst och observatören är i mörker"
 
 #: plugins/Satellites/src/Satellite.cpp:220
 msgid "The satellite isn't sunlit"
-msgstr "Satelliten är inte upplyst av solen"
+msgstr "Satelliten är inte solbelyst"
 
 #: plugins/Satellites/src/Satellite.cpp:221
 msgid "The satellite is in penumbra"
-msgstr "Satelliten är i penumbra"
+msgstr "Satelliten är i halvskugga"
 
 #: plugins/Satellites/src/Satellite.cpp:222
 msgid "The satellite is eclipsed"
@@ -19431,8 +19431,8 @@ msgstr ""
 "Polar solsynkron omloppsbana (PSSO): En nästan polär omloppsbana som "
 "passerar ekvatorn vid samma lokala tid vid varje passage. Användbar för "
 "satelliter som tar bilder eftersom skuggorna blir desamma vid varje passage."
-" Typiska solsynkrona omloppsbanor runt jorden är cirka 600-800 km höga, med "
-"perioder på 96-100 minuter och inklinationer på cirka 98 grader."
+" Typiska solsynkrona omloppsbanor runt jorden är på cirka 600-800 km höjd, "
+"med omloppstider på 96-100 minuter och inklinationer på cirka 98 grader."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:818
@@ -19445,9 +19445,9 @@ msgid ""
 "many modes for telemetry and data packets. You should to know which "
 "demodulator you need to decode telemetry and packets:"
 msgstr ""
-"Många satelliter har sändare (transceivers och transponders) med många lägen"
-" för telemetri och datapaket. Du bör veta vilken demodulator du behöver för "
-"att avkoda telemetri och paket:"
+"Många satelliter har sändare (sändtagare och mottagare) med många lägen för "
+"telemetri och datapaket. Du bör veta vilken demodulator du behöver för att "
+"avkoda telemetri och paket:"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
 msgid "Automatic Picture Transmission"
@@ -19544,9 +19544,9 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more"
 " than 72 hours old. "
 msgstr ""
-"Insticksprogrammet för satelliter kan hämta ner TLE-data från internet "
-"automatiskt, och har som standard att göra det om existerande data är mer än"
-" 72 timmar gammal. "
+"Insticksprogrammet för satelliter kan ladda ner TLE-data från internet "
+"automatiskt, och har som standard att göra det om befintliga data är mer än "
+"72 timmar gammal. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:847
 #, qt-format
@@ -19577,7 +19577,7 @@ msgid ""
 "listed in the Sources tab of the satellites configuration dialog."
 msgstr ""
 "Kontrollera att den eller de satelliter som du vill lägga till finns med i "
-"någon av de URL:er som anges på fliken Sources i konfigurationsdialogen för "
+"någon av de URL:er som anges på fliken Källor i konfigurationsdialogen för "
 "satelliter."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:853
@@ -19585,7 +19585,7 @@ msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
 msgstr ""
-"Gå till fliken Satellites och klicka på knappen \"+\".  Välj den eller de "
+"Gå till fliken Satelliter och klicka på knappen \"+\".  Välj den eller de "
 "satelliter som du vill lägga till och klicka på knappen \"Lägg till\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:855
@@ -19714,12 +19714,12 @@ msgstr "Fel vid uppdatering"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:924
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
-msgstr "Uppdaterade %1/%2 satellit(er); %3 tillagda; %4 borttagna"
+msgstr "Uppdaterade %1/%2 satellit(er); %3 tillagd(a); %4 raderad(e)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:926
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
-msgstr "Uppdaterade %1/%2 satellit(er); %3 tillagda; %4 saknas"
+msgstr "Uppdaterade %1/%2 satellit(er); %3 tillagd(a); %4 saknas"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:941
 msgid "Empty string - not saving"
@@ -19802,7 +19802,7 @@ msgstr "[LEO-satelliter]"
 #. TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1143
 msgid "[GEO/GSO satellites]"
-msgstr "[GEO/GSO-satelliter]"
+msgstr "[GEO-/GSO-satelliter]"
 
 #. TRANSLATORS: MEO = Medium Earth orbit
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1145
@@ -19878,7 +19878,7 @@ msgstr "[delvis operativa satelliter]"
 #. operational satellite put into reserve status
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1169
 msgid "[backup / standby satellites]"
-msgstr "[backup / standby-satelliter]"
+msgstr "[backup- / standby-satelliter]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: New satellite
 #. awaiting full activation
@@ -19896,7 +19896,7 @@ msgstr "[utökat uppdrag]"
 #. are decayed
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1175
 msgid "[decayed satellites]"
-msgstr "[sönderfallna satelliter]"
+msgstr "[obrukbara satelliter]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1177
 msgid "[all]"
@@ -19931,7 +19931,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1206
 msgid "Altitude of imagined satellite"
-msgstr "Altitud för föreställd satellit"
+msgstr "Höjd på föreställd satellit"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1207
 msgid "Number of segments: number of segments used to draw the line"
@@ -19981,7 +19981,8 @@ msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
-"Stellarium hämtar ner satellitdata från uppdateringskällorna. Vänta..."
+"Stellarium laddar ner satellitdata från uppdateringskällorna. Vänligen "
+"vänta..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:174
 msgid "Select TLE source file(s)..."
@@ -20332,7 +20333,8 @@ msgid ""
 msgstr ""
 "Satelliter i de markerade källistorna kommer automatiskt att läggas till vid"
 " nästa uppdatering om de inte redan finns i samlingen. Omärkta poster kommer"
-" också att hämtas för att uppdatera endast tidigare inkluderade satelliter."
+" också att laddas ner för att uppdatera endast tidigare inkluderade "
+"satelliter."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1362
 msgid "Add new source"
