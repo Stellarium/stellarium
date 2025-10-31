@@ -1040,26 +1040,26 @@ void MpcImportWindow::loadBookmarks()
 	//Initialize with hard-coded values
 	// NOTE: this list is reordered anyway when loaded
 
-	bookmarks[MpcMinorPlanets].insert("MPC's list of observable critical-list numbered minor planets",	"https://www.minorplanetcenter.net/iau/Ephemerides/CritList/Soft00CritList.txt");
-	bookmarks[MpcMinorPlanets].insert("MPC's list of observable distant minor planets",					"https://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt");
-	bookmarks[MpcMinorPlanets].insert("MPC's list of observable unusual minor planets",				"https://www.minorplanetcenter.net/iau/Ephemerides/Unusual/Soft00Unusual.txt");
-	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2025",			"https://www.minorplanetcenter.net/iau/Ephemerides/Bright/2025/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of observable critical-list numbered minor planets", "https://www.minorplanetcenter.net/iau/Ephemerides/CritList/Soft00CritList.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of observable distant minor planets",                "https://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of observable unusual minor planets",                "https://www.minorplanetcenter.net/iau/Ephemerides/Unusual/Soft00Unusual.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2025",      "https://www.minorplanetcenter.net/iau/Ephemerides/Bright/2025/Soft00Bright.txt");
 
-	bookmarks[MpcMinorPlanets].insert("MPCORB: near-Earth asteroids (NEAs)",						"https://www.minorplanetcenter.net/iau/MPCORB/NEA.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCORB: potentially hazardous asteroids (PHAs)",				"https://www.minorplanetcenter.net/iau/MPCORB/PHA.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCORB: TNOs, Centaurs and SDOs",							"https://www.minorplanetcenter.net/iau/MPCORB/Distant.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCORB: other unusual objects",								"https://www.minorplanetcenter.net/iau/MPCORB/Unusual.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCORB: elements of NEAs for current epochs (today)",			"https://www.minorplanetcenter.net/iau/MPCORB/NEAm00.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCORB: orbits from the latest DOU MPEC",					"https://www.minorplanetcenter.net/iau/MPCORB/DAILY.DAT");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: near-Earth asteroids (NEAs)",                           "https://www.minorplanetcenter.net/iau/MPCORB/NEA.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: potentially hazardous asteroids (PHAs)",                "https://www.minorplanetcenter.net/iau/MPCORB/PHA.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: TNOs, Centaurs and SDOs",                               "https://www.minorplanetcenter.net/iau/MPCORB/Distant.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: other unusual objects",                                 "https://www.minorplanetcenter.net/iau/MPCORB/Unusual.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: elements of NEAs for current epochs (today)",           "https://www.minorplanetcenter.net/iau/MPCORB/NEAm00.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: orbits from the latest DOU MPEC",                       "https://www.minorplanetcenter.net/iau/MPCORB/DAILY.DAT");
 
-	bookmarks[MpcMinorPlanets].insert("MPCAT: Unusual minor planets (including NEOs)",				"https://www.minorplanetcenter.net/iau/ECS/MPCAT/unusual.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCAT: Distant minor planets (Centaurs and transneptunians)", 	"https://www.minorplanetcenter.net/iau/ECS/MPCAT/distant.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCAT: One-opposition objects (perturbed solutions)",			"https://www.minorplanetcenter.net/iau/ECS/MPCAT/mpo.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCAT: One-opposition objects (unperturbed solutions)",			"https://www.minorplanetcenter.net/iau/ECS/MPCAT/mp1.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCAT: Unusual minor planets (including NEOs)",                 "https://www.minorplanetcenter.net/iau/ECS/MPCAT/unusual.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCAT: Distant minor planets (Centaurs and transneptunians)",   "https://www.minorplanetcenter.net/iau/ECS/MPCAT/distant.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCAT: One-opposition objects (perturbed solutions)",           "https://www.minorplanetcenter.net/iau/ECS/MPCAT/mpo.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCAT: One-opposition objects (unperturbed solutions)",         "https://www.minorplanetcenter.net/iau/ECS/MPCAT/mp1.txt");
 
 	const int start = 0;
-	const int mpn = 76; // number of files for numbered minor planets
-	const int mpu = 65; // number of files for unnumbered minor planets
+	const int mpn = 88; // number of files for numbered minor planets
+	const int mpu = 59; // number of files for unnumbered minor planets
 	const int nsize = 6;
 	const QChar dash = QChar(0x2014);
 
@@ -1086,11 +1086,11 @@ void MpcImportWindow::loadBookmarks()
 			);
 	}
 
-	bookmarks[MpcComets].insert("MPC's list of observable comets",	"https://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt");
-	bookmarks[MpcComets].insert("MPCORB: comets",			"https://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt");
-	bookmarks[MpcComets].insert("MPCORB: all comets and A/-objects","https://www.minorplanetcenter.net/iau/MPCORB/AllCometEls.txt");
+	bookmarks[MpcComets].insert("MPC's list of observable comets",   "https://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt");
+	bookmarks[MpcComets].insert("MPCORB: comets",                    "https://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt");
+	bookmarks[MpcComets].insert("MPCORB: all comets and A/-objects", "https://www.minorplanetcenter.net/iau/MPCORB/AllCometEls.txt");
 
-	bookmarks[MpcComets].insert("Gideon van Buitenen: comets",	"http://astro.vanbuitenen.nl/cometelements?format=mpc&mag=obs");
+	bookmarks[MpcComets].insert("Gideon van Buitenen: comets",       "http://astro.vanbuitenen.nl/cometelements?format=mpc&mag=obs");
 
 	//Try to save them to a file
 	saveBookmarks();
