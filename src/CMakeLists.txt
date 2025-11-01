@@ -20,6 +20,8 @@ SET(stellarium_lib_SRCS
      core/StelAudioMgr.cpp
      core/StelVideoMgr.hpp
      core/StelVideoMgr.cpp
+     core/StelSpeechMgr.hpp
+     core/StelSpeechMgr.cpp
      core/StelGeodesicGrid.cpp
      core/StelGeodesicGrid.hpp
      core/StelMovementMgr.cpp
