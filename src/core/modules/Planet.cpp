@@ -18,6 +18,7 @@
  */
 
 #include <QOpenGLFunctions_1_0>
+#include "ConstellationMgr.hpp"
 #include "StelApp.hpp"
 #include "StelSRGB.hpp"
 #include "StelCore.hpp"
@@ -1550,6 +1551,174 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 	map.insert("cultural-names", getCultureLabels(StelObject::CulturalDisplayStyle::Native_Pronounce_Translit_Translated_IPA));
 
 	return map;
+}
+
+QString Planet::getNarration(const StelCore *core) const
+{
+	const Vec3d pos = getEquinoxEquatorialPos(core);
+
+	QString res=getNameI18n();
+
+	// added names. TODO: Fix morning/evening stars!
+	QStringList cNames;
+	if (culturalNames.length()>0)
+	{
+		for (const StelObject::CulturalName &cName: culturalNames)
+			cNames.append(cName.translatedI18n);
+	}
+	cNames.removeDuplicates();
+	cNames.removeAll("");
+	cNames.removeAll(res);
+
+	if (!cNames.isEmpty())
+		res.append(", " +  qc_("called", "object narration") + " " + cNames.first() + ","); // TBD: Provide more than 1 name?
+
+	// Type
+	QMap<Planet::PlanetType, QString>typeStringMap=
+	{
+		{ isStar,         qc_("a star",                      "object narration") },
+		{ isPlanet,       qc_("a major planet",              "object narration") },
+		{ isMoon,         qc_("a planet moon",               "object narration") },
+		{ isObserver,     qc_("an observer",                 "object narration") },
+		{ isArtificial,   qc_("an artificial object",        "object narration") },
+		{ isAsteroid,     qc_("an asteroid",                 "object narration") },
+		{ isPlutino,      qc_("a plutino",                   "object narration") },
+		{ isComet,        qc_("a comet",                     "object narration") },
+		{ isDwarfPlanet,  qc_("a dwarf planet",              "object narration") },
+		{ isCubewano,     qc_("a cubewano",                  "object narration") },
+		{ isSDO,          qc_("a scattered disc object",     "object narration") },
+		{ isOCO,          qc_("an Oort Cloud Object",        "object narration") },
+		{ isSednoid,      qc_("a sednoid",                   "object narration") },
+		{ isInterstellar, qc_("an interstellar object",      "object narration") },
+		{ isUNDEFINED,    qc_("an object of undefined type", "object narration") }
+	};
+	res.append(" " + q_("is") + " " + typeStringMap.value(pType, qc_("an object of undefined type", "object narration")) );
+
+	// IAU Constellation
+	const QString iauConstellation = ConstellationMgr::getIAUconstellationName(core->getIAUConstellation(pos));
+	res.append(" " + qc_("in the constellation of", "object narration") + " " + iauConstellation + ". ");
+
+	// Discovery
+	if (!discoverer.isEmpty())
+	{
+		res.append(qc_("It was discovered by", "object narration") + " " + discoverer);
+		if (!discoveryDate.isEmpty())
+			res.append(" " + qc_("in the year", "object narration") + " " + discoveryDate); // TBD: Fix if more than just a year...
+		res.append(". ");
+	}
+
+	// Distance from sun and earth
+	const double hdistanceAu = getHeliocentricEclipticPos().norm();
+	const double hdistanceKm = AU * hdistanceAu;
+	// TRANSLATORS: Unit of measure for distance - astronomical unit
+	QString auStr = qc_("Astronomical Units", "distance, astronomical unit");
+	// TRANSLATORS: Distance measured in terms of the speed of light
+	QString lightTime(qc_("or, in light time,", "object narration"));
+	QString km, distAU, distKM;
+	if (englishName!=L1S("Sun") && englishName!=L1S("Moon"))
+	{
+		if (hdistanceAu < 0.1)
+		{
+			distAU = QString::number(hdistanceAu, 'f', 6);
+			distKM = QString::number(hdistanceKm, 'f', 3);
+			// TRANSLATORS: Unit of measure for distance - kilometers
+			km = qc_("kilometers", "distance");
+		}
+		else
+		{
+			distAU = QString::number(hdistanceAu, 'f', 3);
+			distKM = QString::number(hdistanceKm / 1.0e6, 'f', 3);
+			// TRANSLATORS: Unit of measure for distance - millions of kilometers
+			km = qc_("Million kilometers", "distance");
+		}
+
+		res.append(QString("%1 %2 %3 %4 %5 %6, ").arg(qc_("The current distance from the Sun amounts to", "object narration"),
+							      hdistanceAu > 0.5 ? distAU : "",
+							      hdistanceAu > 0.5 ? auStr : "",
+							      hdistanceAu > 0.5 ? qc_("or", "object narration") : "",
+							      distKM, km));
+	}
+	const double distanceAu = getJ2000EquatorialPos(core).norm();
+	const double distanceKm = AU * distanceAu;
+	if (distanceAu < 0.1)
+	{
+		distAU = QString::number(distanceAu, 'f', 6);
+		distKM = QString::number(distanceKm, 'f', 3);
+		// TRANSLATORS: Unit of measure for distance - kilometers
+		km = qc_("kilometers", "distance");
+	}
+	else
+	{
+		distAU = QString::number(distanceAu, 'f', 3);
+		distKM = QString::number(distanceKm / 1.0e6, 'f', 3);
+		// TRANSLATORS: Unit of measure for distance - millions of kilometers
+		km = qc_("Million kilometers", "distance");
+	}
+
+	res.append(QString("%1 %2 %3 %4 %5 %6 ").arg(qc_("The current distance amounts to", "object narration"),
+						     distanceAu > 0.5 ? distAU : "",
+						     distanceAu > 0.5 ? auStr : "",
+						     distanceAu > 0.5 ? qc_("or", "object narration") : "",
+						     distKM, km));
+	res.append(QString("%1 %2.").arg(lightTime, StelUtils::hoursToNarration(distanceKm/SPEED_OF_LIGHT/3600.) ));
+
+	// Diameter
+	StelApp& app = StelApp::getInstance();
+	const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
+
+
+	const double angularSize = getAngularRadius(core)*(2.*M_PI_180);
+	if (angularSize>=4.8e-8)
+	{
+		QString s1, s2, sizeStr = "";
+		if (rings)
+		{
+			const double withoutRings = 2.*getSpheroidAngularRadius(core)*M_PI/180.;
+			if (withDecimalDegree)
+			{
+				s1 = StelUtils::radToDecDegStr(withoutRings, 5, false, true);
+				s2 = StelUtils::radToDecDegStr(angularSize, 5, false, true);
+			}
+			else
+			{
+				s1 = StelUtils::radToDmsPStr(withoutRings, 2);
+				s2 = StelUtils::radToDmsPStr(angularSize, 2);
+			}
+
+			sizeStr = QString("%1, %2: %3").arg(s1, q_("with rings"), s2);
+		}
+		else
+		{
+			if (sphereScale!=1.) // We must give correct diameters even if upscaling (e.g. Moon)
+			{
+				if (withDecimalDegree)
+				{
+					s1 = StelUtils::radToDecDegStr(angularSize / sphereScale, 5, false, true);
+					//s2 = StelUtils::radToDecDegStr(angularSize, 5, false, true);
+				}
+				else
+				{
+					s1 = StelUtils::radToDmsPStr(angularSize / sphereScale, 2);
+					//s2 = StelUtils::radToDmsPStr(angularSize, 2);
+				}
+
+				sizeStr = QString("%1, ").arg(s1);
+			}
+			else
+			{
+				if (withDecimalDegree)
+					sizeStr = StelUtils::radToDecDegStr(angularSize, 5, false, true);
+				else
+					sizeStr = StelUtils::radToDmsPStr(angularSize, 2);
+			}
+		}
+		res.append(QString("%1 %2.").arg(qc_("The apparent diameter is", "object narration"), sizeStr));
+	}
+
+	QString diam = (getPlanetType()==isPlanet ? qc_("The equatorial diameter is", "object narration") : qc_("Its diameter is", "object narration")); // Many asteroids have irregular shape (Currently unhandled)
+	res.append(QString("%1 %2 %3").arg(diam, QString::number(AU * getEquatorialRadius() * 2.0, 'f', 1) , qc_("kilometers", "distance")));
+
+	return res;
 }
 
 QPair<double,double> Planet::getLunarEclipseMagnitudes() const
