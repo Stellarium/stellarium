@@ -1695,8 +1695,7 @@ void StelMainView::doScreenshot(void)
 	// HiDPI screens interfere, and the viewing angle has to be maintained.
 	// First, image size:
 	glWidget->makeCurrent();
-	const auto screen = QOpenGLContext::currentContext()->screen();
-	const auto pixelRatio = screen->devicePixelRatio();
+	const auto pixelRatio = StelApp::getInstance().getDevicePixelsPerPixel();
 	int physImgWidth  = std::lround(stelScene->width() * pixelRatio);
 	int physImgHeight = std::lround(stelScene->height() * pixelRatio);
 	bool nightModeWasEnabled=nightModeEffect->isEnabled();
