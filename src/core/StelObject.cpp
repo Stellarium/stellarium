@@ -1093,10 +1093,9 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	QVariantMap map;
 
-	Vec3d pos;
 	double ra, dec, alt, az, glong, glat;
 	// ra/dec
-	pos = getEquinoxEquatorialPos(core);
+	Vec3d pos = getEquinoxEquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("ra", ra*M_180_PI);
 	map.insert("dec", dec*M_180_PI);
@@ -1421,4 +1420,9 @@ QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStri
 			oss << "</table>";
 	}
 	return str;
+}
+
+QString StelObject::getNarration(const StelCore *core) const
+{
+	return getEnglishName();
 }
