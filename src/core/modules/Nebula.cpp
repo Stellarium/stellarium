@@ -1697,12 +1697,13 @@ Vec3d Nebula::getJ2000EquatorialPos(const StelCore* core) const
 	}
 }
 
-QString Nebula::getNarration(StelCore *core) const
+QString Nebula::getNarration(const StelCore *core) const
 {
 	const Vec3d pos = getEquinoxEquatorialPos(core);
 
 	QString res;
 
+	// Name
 	const QString designation = getDSODesignationWIC();
 	QStringList names = {getNameI18n()};
 	if (culturalNames.length()>0)
@@ -1715,13 +1716,84 @@ QString Nebula::getNarration(StelCore *core) const
 
 	res=designation;
 	if (!names.isEmpty())
-		res.append(", " +  q_("called") + " " + names.first() + ",");
+		res.append(", " +  q_("called") + " " + names.first() + ","); // TBD: Provide more than 1 name?
 
+	// Type
 	res.append(" " + q_("is") + " " + typeI18nNebulaStringMap.value(nType, qc_("an object of unknown type", "Nebula narration")) );
 
+	// Distance. Taken from getInfoString. Maybe move that to a private method...
+	if (qAbs(parallax)>0.f)
+	{
+		QString dx;
+		// distance in light years from parallax
+		float distance = 3.162e-5f/(qAbs(parallax)*4.848e-9f);
+		float distanceErr = 0.f;
+
+		if (parallaxErr>0.f)
+			distanceErr = qAbs(3.162e-5f/(qAbs(parallaxErr + parallax)*4.848e-9f) - distance);
+
+		if (distanceErr>0.f)
+			dx = QString("%1%2%3").arg(QString::number(distance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 3));
+		else
+			dx = QString("%1").arg(QString::number(distance, 'f', 3));
+
+		if (oDistance==0.f)
+		{
+			// TRANSLATORS: Unit of measure for distance - Light Years
+			QString ly = qc_("light years", "distance");
+			res.append(QString("%1 %2 %3").arg(qc_("in a distance of", "object narration"), dx, ly));
+		}
+	}
+	if (oDistance>0.f)
+	{
+		QString dx, dy;
+		float dc = 3262.f;
+		int ms = 1;
+		//TRANSLATORS: Unit of measure for distance - kiloparsecs
+		QString dupc = qc_("kiloparsec", "object narration");
+		//TRANSLATORS: Unit of measure for distance - Light Years
+		QString duly = qc_("light years", "object narration");
+
+		float distance = oDistance;
+		float distanceErr = oDistanceErr;
+		float distanceLY = oDistance*dc;
+		float distanceErrLY= oDistanceErr*dc;
+		if (oDistance>=1000.f)
+		{
+			distance = oDistance/1000.f;
+			distanceErr = oDistanceErr/1000.f;
+			//TRANSLATORS: Unit of measure for distance - Megaparsecs
+			dupc = qc_("Megaparsec", "object narration");
+		}
+
+		if (distanceLY>=1e6f)
+		{
+			distanceLY /= 1e6f;
+			distanceErrLY /= 1e6f;
+			ms = 3;
+			//TRANSLATORS: Unit of measure for distance - Millions of Light Years
+			duly = qc_("Million light years", "object narration");
+		}
+
+		if (oDistanceErr>0.f)
+		{
+			dx = QString("%1%2%3").arg(QString::number(distance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 3));
+			dy = QString("%1%2%3").arg(QString::number(distanceLY, 'f', ms)).arg(QChar(0x00B1)).arg(QString::number(distanceErrLY, 'f', ms));
+		}
+		else
+		{
+			dx = QString("%1").arg(QString::number(distance, 'f', 3));
+			dy = QString("%1").arg(QString::number(distanceLY, 'f', ms));
+		}
+
+		res.append(QString("%1 %2 %3 (%4 %5)").arg(qc_("in a distance of", "object narration"), dx, dupc, dy, duly));
+	}
+
+	// IAU Constellation
 	const QString iauConstellation = ConstellationMgr::getIAUconstellationName(core->getIAUConstellation(pos));
 	res.append(" " + qc_("in the constellation of", "object narration") + " " + iauConstellation + ". ");
 
+	// Discovery
 	if (!discoverer.isEmpty())
 	{
 		res.append(qc_("It was discovered by", "object narration") + " " + discoverer);
@@ -1730,6 +1802,7 @@ QString Nebula::getNarration(StelCore *core) const
 		res.append(". ");
 	}
 
+	// Shape
 	QString morph=getMorphologicalTypeDescription();
 	if (!morph.isEmpty())
 	{

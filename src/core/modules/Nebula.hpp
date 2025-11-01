@@ -269,7 +269,7 @@ public:
 	bool objectInAllowedSizeRangeLimits() const;
 
 	//! Return a narration text ready for synthesized speech output
-	virtual QString getNarration(StelCore *core) const override;
+	virtual QString getNarration(const StelCore *core) const override;
 
 protected:
 	//! Format the magnitude info string for the object
