@@ -25,6 +25,7 @@
 #include "StelProjector.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StelSpeechMgr.hpp"
 
 #include <QMouseEvent>
 #include <QString>
@@ -734,12 +735,14 @@ void StelObjectMgr::removeExtraInfoStrings(const StelObject::InfoStringGroup& fl
 void StelObjectMgr::narrate()
 {
 	qDebug() << "Narration...";
-
+	static const StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
 	StelCore*core=StelApp::getInstance().getCore();
 	if (lastSelectedObject)
 	{
 		QString narration=lastSelectedObject->getNarration(core);
 		qDebug() << "Narration:" << narration;
-		// TODO: call StelAudioMgr with synth.
+		// TODO: call StelSpeechMgr with synth.
+		if (speechMgr->enabled())
+			speechMgr->say(narration);
 	}
 }
