@@ -136,7 +136,7 @@ In anchoring the artwork, we chose to use the re-paint image from the existing s
     </tr>
     <tr valign="top">
         <td><notr>Sangkatikěl</notr></td>
-]        <td>a broken hoe</td>
+        <td>a broken hoe</td>
         <td><img width="255" src="illustrations/descr_pics/Wra_U.jpg"/></td>
     </tr>
     <tr valign="top">
