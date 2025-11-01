@@ -2,60 +2,62 @@
 
 ## Introduction
 
-This sky culture is based on the observation data of Huangyou four years (1052 AD), and presents the medieval Chinese sky map as faithfully as possible. This sky culture includes 283 Xingguans (星官, Chinese Constellations) and 1464 stars (including clusters M7, M44) of the *Xinyixiangfayao Star Map*. And the determinative star is marked for each Xingguan that can determine the determinative star. The boundaries of Twenty-eight Lunar Mansions are based on 1052 AD.
+This sky culture is based on the observation data from the 4th year of the Huangyou era (1052 AD), and aims to faithfully reconstruct the star map of China during the Song Dynasty. This sky culture comprises 283 Xingguans (星官, Chinese Constellations) and 1464 stars (including clusters M7, M44) from the *Xinyixiangfayao Star Map*. 
 
 ## Description
 
-### Medieval Xingguans
+###  Xingguan System
 
-From the Three Kingdoms Period to the Ming Dynasty, covering the whole of the Middle Ages, China's star map is similar.
+The Chinese system of Xingguans originated in antiquity. During the Warring States period (475–221 BC), astronomers Gan De (甘德) and Shi Shen (石申) established independent systems. Another system was attributed to the legendary figure Wuxian (巫咸) of the Shang Dynasty  (16th century BC–1046 BC), though modern scholarship suggests it was likely compiled by later generations in his name. In the Three Kingdoms period (220–280 AD), astronomer Chen Zhuo (陈卓) synthesized these three systems into a unified one, defining 283 Xingguans and 1464 stars. This framework became the standard and was later immortalized in the *Song of the Sky Pacers (步天歌)*, a Tang Dynasty astronomical text written in verse. It remained largely stable until the introduction of Western astronomy in the 17th century.
 
-The Xingguans originated in ancient times. Wuxian (巫咸) of Shang Dynasty(16th century BC-1046 BC), Gan De (甘德) and Shi Shen (石申) of The Warring States Period (475–221 BC), created their own Xingguan system respectively. During the Three Kingdoms period (220–280 AD), Chen Zhuo (陈卓) summarized the Xingguans system of Gan De, Shi Shen and Wuxian, including 283 Xingguans and 1464 stars. Since then, Xingguan system has been basically defined, and after a thousand years, there has not been much change. Since the 17th century, Western astronomy has had an impact on Chinese astronomy, and the shape and number of Xingguans have changed significantly. Only about half of the constellations maintained the medieval style.
+An important concept within this system is the *determinative star*. Before the 17th century, Chinese astronomers generally did not assign names to individual stars; instead, they designated a primary star—though not necessarily the brightest—within each Xingguan as its determinative star. Astronomical observations primarily documented the coordinates of these determinative stars, though in particularly important or special Xingguans, additional stars could also be selected for observation and recording, or even assigned names. For each Xingguan from which a determinative star can be identified, we have marked its determinative star.
 
-Determinative star is an important concept. In the Middle Ages, Chinese astronomers did not name all stars, and each Xingguans was chosen as a major star called determinative star. In ancient China, astronomical measurements measured its coordinate position, and other stars in the Xingguan were rarely mentioned. However, some important constellations will be selected more stars for observation and recording. In ancient China, astronomers used mansion distance degrees (determinative star distance) and polar distance degrees to record the position of stars. **In ancient China, the determinative stars of Twenty-eight Lunar Mansions was the benchmark for determining the longitude of the equatorial coordinate system**.
+**The determinative stars of the Twenty-eight Lunar Mansions were of particular importance, forming—together with the North Celestial Pole—the fundamental reference framework for the ancient Chinese equatorial coordinate system.** 
 
-The *Song of the Sky Pacers* (步天歌) is an early Chinese star catalogue in the form of poem in heptasyllabic verse, enumerating the names of stars.
+Due to precession, the determinative stars of the Twenty-Eight Lunar Mansions have varied across different historical periods. A notable example involves the mansions of Turtle Beak and Three Stars. During the Song Dynasty and earlier periods, the determinative star for Turtle Beak was φ¹ Ori, while for Three Stars it was δ Ori. By the 13th century, however, precession had caused φ¹ Ori to shift to a position east of δ Ori, resulting in the phenomenon known as "Turtle Beak lying within Three Stars," which contradicted the traditional sequence of the Twenty-Eight Mansions. This discrepancy became increasingly pronounced by the Qing Dynasty, leading the Imperial Observatory to redefine the determinative stars: for Three Stars, it was changed from δ Ori to ζ Ori, and for Turtle Beak, from φ¹ Ori to λ Ori.
 
-Below is *Xinyixiangfayao Star Map* from Su Song(苏颂, 1020-1101 AD).
+Below is *Xinyixiangfayao Star Map* from Su Song (苏颂, 1020-1101 AD).
 
 ![](illustrations/xyxfy.png)
 
-*Xinyixiangfayao Star Map(1088 AD)*
+*Xinyixiangfayao Star Map (1088 AD)*
 
 ### Restore Sky Map
 
-The sky map of the Song dynasty is typical of the Chinese medieval sky map. In 1052 AD, the Song Dynasty official conducted accurate stellar measurements, leaving a lot of data.
+The Imperial Observatory of the Song Dynasty conducted several large-scale stellar observations with remarkable accuracy, surpassing all previous eras in precision. The data from the 4th year of the Huangyou era (1052 AD) is the most complete set that survives today. Based on these records, two significant star charts were produced: the *Xinyixiangfayao Star Map* (based on observational data from 1052 AD, created in 1088 AD) and the *Suzhou Star Map* (based on observational data from 1078 to 1085 AD, carved in 1247 AD).
 
-Pan Nai(潘鼐) collated these astronomical observations data and based on the *Xinyixiangfayao Star Map*, he restored most of the Song Dynasty's Xingguan in his masterpiece *The History of Stellar Observation in China*, which is the most important reference book. Qi Rui (齐锐) and Wan Haoyi (万昊宜) also restored the Xingguans of the Song Dynasty in the book *Roving China Heavens*, which is also an important reference book.
+The historian of astronomy Pan Nai (潘鼐) systematically compiled the observational data from the Huangyou era into the *Huangyou Star Catalog*. By cross-referencing it with the *Xinyixiangfayao Star Map* in his work *The History of Stellar Observation in China*[#1], he reconstructed most of the Song Dynasty Xingguans, serving as the primary reference for this project.
 
-Due to the limitation of observation conditions in Song Dynasty, combined with instruments, circulated errors and other reasons, different scholars restored the sky map is somewhat different.
+In their work *Roving China Heavens*[#2], Qi Rui (齐锐) and Wan Haoyi (万昊宜) also reconstructed the Song Dynasty Xingguans. Their research primarily referenced the *Suzhou Star Map* . Since the observational data used for this star map dates from slightly later than 1052 AD, *Roving China Heavens* serves as supplementary reference material for this study.
 
-Based on these books, Stellarium can almost truly present the Chinese medieval sky map of Huangyou four years (1052 AD).
+Due to the limitations of observational technology and potential errors in transmission, different scholarly reconstructions may vary slightly. Based on the aforementioned works, Stellarium faithfully reconstructs the Chinese night sky of 1052 AD.
 
-### Planets
+### Sun, Moon and Planets
 
-Taiyang (太阳), Sun. The name comes from yin and yang, meaning a lot of yang,
+The Sun, the Moon, and the five major planets are collectively referred to as the *Seven Luminaries*. The sun and moon are named after *yin and yang*, while the pictographic characters "日" (sun) and "月" (moon) are also used. The five major planets represent the *five elements*, but the following names were the most orthodox designations at the time. Similar to other civilizations around the world, Venus also had additional names depending on whether it appeared in the morning or the evening.
 
-Taiyin (太阴), Moon. The name comes from yin and yang, meaning a lot of Yin,
+Great Yang (太阳, Tàiyáng): The Sun. In Chinese philosophy, it represents the pinnacle of Yang energy.
 
-Chen Star (辰星), Mercury. Chen is an angle unit, which refers to about 30 degrees. Mercury is always within 30 degrees of the sun.
+Great Yin (太阴, Tàiyīn): The Moon. It represents the pinnacle of Yin energy.
 
-Taibai (太白), Venus. Taibai means big and white.
+Division Star (辰星, Chénxīng): Mercury. Since Mercury always moves within 30 degrees on either side of the Sun, the angular unit *Chen* was defined accordingly, representing 30 degrees. The celestial circle is divided into twelve *Chen*. Hence, Mercury came to be called the *Division Star*.
 
-Yinghuo (荧惑), Mars. The colors of Mars are like fire, and movement is confusing.
+Grand White (太白, Tàibái): Venus. It is named for its extremely high brightness and pure white color.
 
-Sui Star (岁星), Jupiter. It means the old star. Jupiter travels around the celestial sphere for a week every 12 years. The ancients took Jupiter's position as the standard of the chronology.
+Spark-Weaver (荧惑, Yínghuò): Mars. It is named for its fiery red color and its erratic, unpredictable orbit.
 
-Zhen Star (填星), Saturn. Zhen, means passing Lunar Mansions. Saturn travels around the celestial sphere about every 28 years. Saturn will pass through a Lunar Mansion every year.
+Year Star (岁星, Suìxīng): Jupiter. Jupiter's orbital period of approximately 12 years was used by the ancients to mark the cycle of years, hence its name.
+
+Stabilizer Star (填星, Zhènxīng): Saturn. In traditional theory, Saturn was believed to take about 28 years to orbit the heavens, *guarding* or *filling* one lunar mansion each year.
 
 ## References
 
- - [#1]: Pan Nai. The History of Stellar Observation in China
- - [#2]: Qi Rui and Wan Haoyi. Roving China Heavens
- - [#3]: Su Song. *Xinyixiangfayao Star Map*
- - [#4]: *Records of the Grand Historian*
- - [#5]: *Book of Sui*
- - [#6]: *History of Song*
+ - [#1]: Pan Nai. *Zhongguo Hengxing Guance Shi [The History of Stellar Observation in China]*. Shanghai: Xuelin Publishing House, 2009.
+ - [#2]: Qi Rui, Wan Haoyi. *Manbu Zhongguo Xingkong [Roving China Heavens]*. Beijing: Science Popularization Press, 2014.
+ - [#3]: Su Song (Song Dynasty). *Xinyixiangfayao Yizhu [Annotated Translation of Xinyixiangfayao]*. Translated and annotated by Lu Jingyan and Qian Xueying. Shanghai: Shanghai Ancient Books Publishing House, 2008.
+ - [#4]: Sima Qian (Han Dynasty). *Shiji [Records of the Grand Historian]*. Compiled with commentary by Pei Yin (Liu Song Dynasty), indexed by Sima Zhen (Tang  Dynasty), and annotated by Zhang Shoujie (Tang  Dynasty). Beijing: Zhonghua Book Company, 2014.
+ - [#5]: Wei Zheng, et al. (Tang Dynasty). *Suishu [Book of Sui]* Beijing: Zhonghua Book Company, 1997.
+ - [#6]: Tuotuo, et al. (Yuan Dynasty). *Songshi [History of Song]*. Beijing: Zhonghua Book Company, 1985.
 
 ### External links
 
