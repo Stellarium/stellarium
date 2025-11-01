@@ -1374,6 +1374,57 @@ QString hoursToHmsStr(const float hours, const bool minutesOnly, const bool colo
 	return hoursToHmsStr(static_cast<double>(hours), minutesOnly, colonFormat);
 }
 
+QString hoursToNarration(const double hours, const bool minutesOnly)
+{
+	QString format;
+	int h = static_cast<int>(hours);
+	double minutes = (qAbs(hours)-qAbs(double(h)))*60.;
+	if (minutesOnly)
+	{
+		int m = qRound(minutes);
+		if (m==60)
+		{
+			h += 1;
+			m = 0;
+		}
+		if (h>0)
+			format=qc_("%1 hours and %2 minutes", "object narration");
+		else
+			format=qc_("%2 minutes", "object narration");
+
+		return QString(format).arg(QString::number(h), QString::number(m, 'f', 0));
+	}
+	else
+	{
+		int m = static_cast<int>(minutes);
+		float s = static_cast<float>((((qAbs(hours)-qAbs(double(h)))*60.)-m)*60.);
+		if (s>59.9f)
+		{
+			m += 1;
+			s = 0.f;
+		}
+		if (m==60)
+		{
+			h += 1;
+			m = 0;
+		}
+		if (h>0)
+			format=qc_("%1 hours, %2 minutes and %3 seconds", "object narration");
+		else if (m>0)
+			format=qc_("%2 minutes and %3 seconds", "object narration");
+		else
+			format=qc_("%3 seconds", "object narration");
+
+		return QString(format).arg(QString::number(h), QString::number(int(m)), QString::number(s,'f', 1));
+	}
+}
+
+QString hoursToNarration(const float hours, const bool minutesOnly)
+{
+	return hoursToHmsStr(static_cast<double>(hours), minutesOnly);
+}
+
+
 //! The method to splitting the text by substrings by some limit of string length
 QString wrapText(const QString& s, const int limit)
 {

@@ -617,12 +617,20 @@ namespace StelUtils
 
 	//! Convert decimal hours to hours, minutes, seconds
 	//! Format for:
-	//! @p colonFormat        |      false     |   true
+	//! @p minutesOnly        |      false     |   true
 	//! ----------------------|----------------|----------
-	//! @p minutesOnly=false  |  "HhMMmSS.Ss"  | "HHhMMm"
-	//! @p minutesOnly=true   |  "H:MM:SS.S"   | "HH:MM"
+	//! @p colonFormat=false  |  "HhMMmSS.Ss"  | "HHhMMm"
+	//! @p colonFormat=true   |  "H:MM:SS.S"   | "HH:MM"
 	QString hoursToHmsStr(const double hours, const bool minutesOnly = false, const bool colonFormat=false);
 	QString hoursToHmsStr(const float hours, const bool minutesOnly = false, const bool colonFormat=false);
+	//! Convert decimal hours to hours, minutes, seconds in a narrate-ready long format
+	//! Format for:
+	//! @p minutesOnly        |      false                               |   true
+	//! ----------------------|------------------------------------------|----------
+	//!                       |  "H hours, MM minutes and SS.S seconds"  | "HH hours and MM minutes"
+	QString hoursToNarration(const double hours, const bool minutesOnly = false);
+	QString hoursToNarration(const float hours, const bool minutesOnly = false);
+
 
 	//! Convert JD to hours and minutes
 	QString getHoursMinutesFromJulianDay(const double julianDay);
