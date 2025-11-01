@@ -604,8 +604,8 @@ void StelApp::init(QSettings* conf)
 	videoMgr->init();
 	getModuleMgr().registerModule(videoMgr);
 
-	// Init speech manager
-#ifdef ENABLE_MEDIA
+	// Init speech manager. If no media or Qt too low, this installs a dummy object, the initialisation of which need not be announced.
+#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 	SplashScreen::showMessage(q_("Initializing speech output..."));
 #endif
 	speechMgr = new StelSpeechMgr();
