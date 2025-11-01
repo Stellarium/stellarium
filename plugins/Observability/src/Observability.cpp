@@ -1874,7 +1874,7 @@ void Observability::onLanguageChanged() {
     qDebug() << "[Observability] Language was changed. Updating rendered text.";
     updateMessageText();
     getObjectObservability();
-    renderResults();
+    //renderResults();
 }
 
 bool Observability::shouldShowYear() {
