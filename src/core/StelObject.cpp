@@ -1422,7 +1422,7 @@ QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStri
 	return str;
 }
 
-QString StelObject::getNarration(StelCore *core) const
+QString StelObject::getNarration(const StelCore *core) const
 {
 	return getEnglishName();
 }
