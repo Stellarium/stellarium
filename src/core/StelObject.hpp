@@ -506,6 +506,9 @@ public:
 	//! @return airmass value or -1.f if calculations are not applicable or meaningless
 	virtual float getAirmass(const StelCore *core) const;
 
+	//! Return a narration text ready for synthesized speech output
+	virtual QString getNarration(StelCore *core) const;
+
 public slots:
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
 	//! Hard-set this string group to a single str, or delete all messages when str==""
