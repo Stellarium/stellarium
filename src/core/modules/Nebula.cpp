@@ -32,6 +32,7 @@
 #include "StelPainter.hpp"
 #include "RefractionExtinction.hpp"
 #include "StelSkyCultureMgr.hpp"
+#include "ConstellationMgr.hpp"
 
 #include <QTextStream>
 #include <QFile>
@@ -1694,4 +1695,93 @@ Vec3d Nebula::getJ2000EquatorialPos(const StelCore* core) const
 	{
 		return XYZ;
 	}
+}
+
+QString Nebula::getNarration(StelCore *core) const
+{
+	const Vec3d pos = getEquinoxEquatorialPos(core);
+
+	QString res;
+
+	const QString designation = getDSODesignationWIC();
+	QStringList names = {getNameI18n()};
+	if (culturalNames.length()>0)
+	{
+		for (const StelObject::CulturalName &cName: culturalNames)
+			names.append(cName.translatedI18n);
+	}
+	names.removeDuplicates();
+	names.removeAll("");
+
+	res=designation;
+	if (!names.isEmpty())
+		res.append(", " +  q_("called") + " " + names.first() + ",");
+
+	res.append(" " + q_("is") + " " + typeI18nNebulaStringMap.value(nType, qc_("an object of unknown type", "Nebula narration")) );
+
+	const QString iauConstellation = ConstellationMgr::getIAUconstellationName(core->getIAUConstellation(pos));
+	res.append(" " + qc_("in the constellation of", "object narration") + " " + iauConstellation + ". ");
+
+	if (!discoverer.isEmpty())
+	{
+		res.append(qc_("It was discovered by", "object narration") + " " + discoverer);
+		if (!discoveryYear.isEmpty())
+			res.append(" " + qc_("in the year", "object narration") + " " + discoveryYear);
+		res.append(". ");
+	}
+
+	QString morph=getMorphologicalTypeDescription();
+	if (!morph.isEmpty())
+	{
+		res.append(qc_("Morphologically:", "object narration") + " " + morph + ".");
+	}
+
+	return res;
+}
+
+QMap<Nebula::NebulaType, QString>Nebula::typeI18nNebulaStringMap;
+
+void Nebula::updateI18n()
+{
+	// The word forms should be with article if needed by the language
+	typeI18nNebulaStringMap=
+	{
+		{ Nebula::NebGx			,  qc_("a Galaxy", "Nebula narration")},
+		{ Nebula::NebAGx		,  qc_("an Active galaxy", "Nebula narration")},
+		{ Nebula::NebRGx		,  qc_("a Radio galaxy", "Nebula narration")},
+		{ Nebula::NebIGx		,  qc_("an Interacting galaxy", "Nebula narration")},
+		{ Nebula::NebQSO		,  qc_("a Quasar", "Nebula narration")},
+		{ Nebula::NebCl			,  qc_("a Star cluster", "Nebula narration")},
+		{ Nebula::NebOc			,  qc_("an Open star cluster", "Nebula narration")},
+		{ Nebula::NebGc			,  qc_("a Globular star cluster", "Nebula narration")},
+		{ Nebula::NebSA			,  qc_("a Stellar association", "Nebula narration")},
+		{ Nebula::NebSC			,  qc_("a Star cloud", "Nebula narration")},
+		{ Nebula::NebN			,  qc_("A nebula", "Nebula narration")},
+		{ Nebula::NebPn			,  qc_("a Planetary nebula", "Nebula narration")},
+		{ Nebula::NebDn			,  qc_("a Dark Nebula", "Nebula narration")},
+		{ Nebula::NebRn			,  qc_("a Reflection nebula", "Nebula narration")},
+		{ Nebula::NebBn			,  qc_("a Bipolar nebula", "Nebula narration")},
+		{ Nebula::NebEn			,  qc_("an emission nebula", "Nebula narration")},
+		{ Nebula::NebCn			,  qc_("a cluster associated with nebulosity", "Nebula narration")},
+		{ Nebula::NebHII		,  qc_("H two region", "Nebula narration")},
+		{ Nebula::NebSNR		,  qc_("a Supernova remnant", "Nebula narration")},
+		{ Nebula::NebISM		,  qc_("Interstellar matter", "Nebula narration")},
+		{ Nebula::NebEMO		,  qc_("an Emission object", "Nebula narration")},
+		{ Nebula::NebBLL		,  qc_("a BL Lacertae object", "Nebula narration")},
+		{ Nebula::NebBLA		,  qc_("a Blazar", "Nebula narration")},
+		{ Nebula::NebMolCld		,  qc_("a Molecular Cloud", "Nebula narration")},
+		{ Nebula::NebYSO		,  qc_("a Young Stellar Object", "Nebula narration")},
+		{ Nebula::NebPossQSO		,  qc_("a Possible Quasar", "Nebula narration")},
+		{ Nebula::NebPossPN		,  qc_("a Possible Planetary Nebula", "Nebula narration")},
+		{ Nebula::NebPPN		,  qc_("a Protoplanetary Nebula", "Nebula narration")},
+		{ Nebula::NebStar		,  qc_("a Star", "Nebula narration")},
+		{ Nebula::NebSymbioticStar	,  qc_("a Symbiotic Star", "Nebula narration")},
+		{ Nebula::NebEmissionLineStar	,  qc_("an Emission-line Star", "Nebula narration")},
+		{ Nebula::NebSNC		,  qc_("a Supernova Candidate", "Nebula narration")},
+		{ Nebula::NebSNRC		,  qc_("a supernova Remnant Candidate", "Nebula narration")},
+		{ Nebula::NebGxCl		,  qc_("a cluster of Galaxies", "Nebula narration")},
+		{ Nebula::NebPartOfGx		,  qc_("a part of a Galaxy", "Nebula narration")},
+		{ Nebula::NebRegion		,  qc_("a region of the sky", "Nebula narration")},
+		{ Nebula::NebUnknown		,  qc_("an object of unknown type", "Nebula narration")}
+	};
 }
