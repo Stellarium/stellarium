@@ -142,7 +142,9 @@ void ConstellationMgr::init()
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	// Loading is a ping-pong. First we set the new skyculture, this triggers loading of constellation descriptions, but then we feed the constellation narration texts.
 	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &ConstellationMgr::updateSkyCulture);
+	connect(this, &ConstellationMgr::hasUpdatedSkyCulture, &app->getSkyCultureMgr(), &StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription);
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Constellation_Lines", displayGroup, N_("Constellation lines"), "linesDisplayed", "C");
@@ -211,6 +213,7 @@ void ConstellationMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 			i++;
 		}
 	}
+	emit hasUpdatedSkyCulture();
 }
 
 void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction action)
