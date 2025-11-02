@@ -643,13 +643,13 @@ QString StarWrapper1::getNarration(const StelCore *core) const
 
 	// should use Plx from getPlx because Plx can change with time, but not absolute magnitude
 	if (s->getPlx())
-		oss << QString("%1  %2.").arg(qc_("with absolute Magnitude of", "object narration")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.001*s->getPlx())), 0, 'f', 2);
+		oss << QString(" %1  %2. ").arg(qc_("with absolute Magnitude of", "object narration")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.001*s->getPlx())), 0, 'f', 2);
 	else
 		oss << ". ";
 
 	//if (flags&Extra)
 	//{
-	//	oss << QString("%1: %2.").arg(q_("Color Index (B-V)"), QString::number(s->getBV(), 'f', 2));
+	//	oss << QString("%1: %2. ").arg(q_("Color Index (B-V)"), QString::number(s->getBV(), 'f', 2));
 
 	//	if (!varType.isEmpty())
 	//	{
@@ -721,10 +721,10 @@ QString StarWrapper1::getNarration(const StelCore *core) const
 		{
 			QString plx = qc_("Its parallax is", "object narration");
 			if (PlxErr>0.f)
-				oss <<  QString("%1: %2 %3 %4. ").arg(plx, QString::number(Plx, 'f', 3), QChar(0x00B1), QString::number(PlxErr, 'f', 3));
+				oss <<  QString("%1: %2 %3 %4 ").arg(plx, QString::number(Plx, 'f', 3), QChar(0x00B1), QString::number(PlxErr, 'f', 3));
 			else
-				oss << QString("%1: %2. ").arg(plx, QString::number(Plx, 'f', 3));
-			oss  << qc_("milliarcseconds", "parallax") << ". ";
+				oss << QString("%1: %2 ").arg(plx, QString::number(Plx, 'f', 3));
+			oss  << qc_("milliarc-seconds", "parallax") << ". ";
 		}
 
 		if (s->getSpInt())
@@ -767,14 +767,14 @@ QString StarWrapper1::getNarration(const StelCore *core) const
 			if (wdsSep>0.f && wdsSep<999.f) // A spectroscopic binary or not?
 			{
 				if (wdsSep>60.f) // A wide binary star?
-					oss << QString("%1 (%4): %2 %5 (%3)").arg(
+					oss << QString("%1 %4: %2 %5 (%3)").arg(
 									    qc_("Its Separation for", "object narration"),
 									    QString::number((binary_sep>0.f) ? binary_sep: wdsSep, 'f', 3),
 									    StelUtils::decDegToDmsStr(((binary_sep>0.f) ? binary_sep: wdsSep)/3600.f),
 									    (binary_sep>0.f) ? qc_("current date", "coordinates for current epoch"): QString::number(wdsObs),
-									    qc_("arcseconds", "object narration"));
+									    qc_("arc-seconds", "object narration"));
 				else
-					oss << QString("%1 (%3): %2 %4").arg(qc_("Its Separation for", "object narration"), QString::number(wdsSep, 'f', 3), QString::number(wdsObs), qc_("arcseconds", "object narration"));
+					oss << QString("%1 %3: %2 %4").arg(qc_("Its Separation for", "object narration"), QString::number(wdsSep, 'f', 3), QString::number(wdsObs), qc_("arc-seconds", "object narration"));
 			}
 		}
 	}
@@ -1186,7 +1186,7 @@ QString StarWrapper2::getNarration(const StelCore *core) const
 				oss <<  QString("%1 %2%3%4 ").arg(plx, QString::number(Plx, 'f', 3), QChar(0x00B1), QString::number(PlxErr, 'f', 3));
 			else
 				oss << QString("%1 %2 ").arg(plx, QString::number(Plx, 'f', 3));
-			oss  << qc_("milliarcseconds", "parallax") << ". ";
+			oss  << qc_("milliarc-seconds", "parallax") << ". ";
 		}
 		//oss << getExtraInfoStrings(Distance).join("");
 	}
