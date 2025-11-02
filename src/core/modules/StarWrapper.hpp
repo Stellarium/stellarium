@@ -157,6 +157,7 @@ public:
 	//! - wds-position-angle
 	//! - wds-separation (arcseconds; 0 for spectroscopic binaries)
 	QVariantMap getInfoMap(const StelCore *core) const override;
+	QString getNarration(const StelCore *core) const override;
 	QString getEnglishName(void) const override;
 	QString getID(void) const override;
 	QString getObjectType() const override;
@@ -171,6 +172,7 @@ public:
 			   const Star2 *star) : StarWrapper<Star2>(array,zone,star) {}
 	QString getID(void) const override;
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
+	QString getNarration(const StelCore *core) const override;
 	QString getObjectType() const override;
 	QString getObjectTypeI18n() const override;
 };
