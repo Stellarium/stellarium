@@ -518,6 +518,270 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 	return map;
 }
 
+QString StarWrapper1::getNarration(const StelCore *core) const
+{
+	// rtl tracks the right-to-left status of the text in the current position.
+	const bool rtl = StelApp::getInstance().getLocaleMgr().isSkyRTL();
+	QString str;
+	QTextStream oss(&str);
+
+	StarId star_id = s->getHip() ?  s->getHip() : s->getGaia();
+
+	const QString varType = StarMgr::getGcvsVariabilityType(star_id);
+	const QString objType = StarMgr::convertToOjectTypes(s->getObjType());
+	const int wdsObs = StarMgr::getWdsLastObservation(star_id);
+	const float wdsPA = StarMgr::getWdsLastPositionAngle(star_id);
+	const float wdsSep = StarMgr::getWdsLastSeparation(star_id);
+	const float maxVMag = StarMgr::getGcvsMaxMagnitude(star_id);
+	const float magFlag = StarMgr::getGcvsMagnitudeFlag(star_id);
+	const float minVMag = StarMgr::getGcvsMinMagnitude(star_id);
+	const float min2VMag = StarMgr::getGcvsMinMagnitude(star_id, false);
+	const QString photoVSys = StarMgr::getGcvsPhotometricSystem(star_id);
+	const double vEpoch = StarMgr::getGcvsEpoch(star_id);
+	const double vPeriod = StarMgr::getGcvsPeriod(star_id);
+	const int vMm = StarMgr::getGcvsMM(star_id);
+
+
+	const QString commonNameI18 = StarMgr::getCommonNameI18n(star_id);
+	const QString culturalInfoName=StarMgr::getCulturalScreenLabel(star_id);
+	const QString sciName = StarMgr::getSciDesignation(star_id);
+	const QString sciExtraName = StarMgr::getSciExtraDesignation(star_id);
+	const QString varSciName = StarMgr::getGcvsDesignation(star_id);
+	const QString wdsSciName = StarMgr::getWdsDesignation(star_id);
+	QStringList designations;
+	if (!sciName.isEmpty())
+		designations.append(sciName);
+	if (!sciExtraName.isEmpty())
+		designations.append(sciExtraName);
+	if (!varSciName.isEmpty() && !sciName.contains(varSciName, Qt::CaseInsensitive))
+		designations.append(varSciName);
+
+	QString hip, hipq;
+	if (s->getHip())
+	{
+		if (s->hasComponentID())
+		{
+			hip = QString("HIP %1 %2").arg(s->getHip()).arg(StarMgr::convertToComponentIds(s->getComponentIds()));
+			hipq = QString("%1%2").arg(s->getHip()).arg(StarMgr::convertToComponentIds(s->getComponentIds()));
+		}
+		else
+		{
+			hip = QString("HIP %1").arg(s->getHip());
+			hipq = QString::number(s->getHip());
+		}
+		designations.append(hip);
+	}
+	else
+		hipq = QString::number(s->getGaia());  // need to look up with Gaia number
+
+	const QString crossIndexData = StarMgr::getCrossIdentificationDesignations(hipq);
+	if (!crossIndexData.isEmpty())
+		designations.append(crossIndexData);
+
+	if (s->getGaia())
+		designations.append(QString("Gaia DR3 %1").arg(s->getGaia()));
+
+	if (!wdsSciName.isEmpty() && !sciName.contains(wdsSciName, Qt::CaseInsensitive))
+		designations.append(wdsSciName);
+
+	designations.removeDuplicates();
+
+	// NAME
+	QString allNames = culturalInfoName;
+
+	// TODO: Finalize appearance of cultural Names
+	if (culturalInfoName.isEmpty())
+		allNames = commonNameI18;
+
+	oss << allNames << ". ";
+
+
+	// Designations. TBD: KEEP HOW MANY? For now, two:
+	oss << designations.sliced(0, qMin(2, designations.length())) .join(", ") << ". ";
+
+	QStringList extraCat=getExtraInfoStrings(CatalogNumber);
+	if (!extraCat.isEmpty())
+		oss << q_("Additional catalog numbers: ") << extraCat.join(", ");
+
+	QString stype = getObjectType();
+	QString objectTypeI18nStr = getObjectTypeI18n();
+	const bool ebsFlag = stype.contains("eclipsing binary system");
+	//if (flags&ObjectType)
+	//{
+	//	QStringList stypes;
+	//	if (!objType.isEmpty())
+	//		stypes.append(objType);
+	//	if (!varType.isEmpty())
+	//		stypes.append(varType);
+	//	if (stypes.size()>0)
+	//		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), objectTypeI18nStr, stypes.join(", "));
+	//	else
+	//		oss << QString("%1: <b>%2</b>").arg(q_("Type"), objectTypeI18nStr);
+
+	//	oss << getExtraInfoStrings(flags&ObjectType).join("");
+	//}
+
+	oss << qc_("This star is described as ", "object narration") << " " << objectTypeI18nStr << ". ";
+
+	double RA, DEC, pmra, pmdec, Plx, RadialVel;
+	double PlxErr = s->getPlxErr();
+	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
+	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+	Vec3d v;
+	double binary_sep = 0.0, binary_pa = 0.0;  // binary star separation and position angle
+	s->getBinaryOrbit(core->getJDE(), v, RA, DEC, Plx, pmra, pmdec, RadialVel, binary_sep, binary_pa);
+	binary_pa *= M_180_PIf;
+
+	float magOffset = 0.f;
+	if (Plx && s->getPlx())
+	{
+		magOffset = 5.f * log10(s->getPlx()/Plx);
+	}
+	static const QRegularExpression htmlTag("<[a-zA-Z/ ]*>");
+	oss << getMagnitudeInfoString(core, InfoStringGroupFlags::Magnitude, 2, magOffset).replace(htmlTag, "").replace(":", " " + qc_("is", "object narration") + " ");
+
+	// should use Plx from getPlx because Plx can change with time, but not absolute magnitude
+	if (s->getPlx())
+		oss << QString("%1  %2.").arg(qc_("with absolute Magnitude of", "object narration")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.001*s->getPlx())), 0, 'f', 2);
+	else
+		oss << ". ";
+
+	//if (flags&Extra)
+	//{
+	//	oss << QString("%1: %2.").arg(q_("Color Index (B-V)"), QString::number(s->getBV(), 'f', 2));
+
+	//	if (!varType.isEmpty())
+	//	{
+	//		float minimumM1 = minVMag;
+	//		float minimumM2 = min2VMag;
+	//		if (magFlag==1.f) // Amplitude
+	//		{
+	//			minimumM1 += maxVMag;
+	//			minimumM2 += maxVMag;
+	//		}
+
+	//		if (maxVMag!=99.f) // seems it is not eruptive variable star
+	//		{
+	//			QString minStr = QString::number(minimumM1, 'f', 2);
+	//			if (min2VMag<99.f)
+	//				minStr = QString("%1/%2").arg(QString::number(minimumM1, 'f', 2), QString::number(minimumM2, 'f', 2));
+
+	//			oss << QString("%1: <b>%2</b>%3<b>%4</b> (%5: %6)").arg(q_("Magnitude range"), QString::number(maxVMag, 'f', 2), QChar(0x00F7), minStr, q_("Photometric system"), photoVSys);
+	//		}
+	//	}
+	//}
+
+	//oss << getCommonInfoString(core, flags);
+
+	// kinda impossible for both parallax and parallax_err to be exactly 0, so they must just be missing
+	//if (flags&Distance)
+	{
+		// do parallax SNR cut because we are calculating distance, inverse parallax is bad for >20% uncertainty
+		if ((Plx!=0) && (PlxErr!=0) && (Plx/PlxErr>5))
+		{
+			//TRANSLATORS: Unit of measure for distance - Light Years
+			QString ly = qc_("light years", "distance");
+			double distance = PARSEC_LY * 1000. / Plx;
+			oss << QString("%1  %2%3%4 %5. ").arg(qc_("Its distance is", "object narration"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(distance * PlxErr / Plx, 'f', 2), ly);
+		}
+		//oss << getExtraInfoStrings(Distance).join("");
+	}
+
+	//// kinda impossible for both pm to be exactly 0, so they must just be missing
+	//if ((flags&ProperMotion) && (pmra || pmdec))
+	//{
+	//	float pa = std::atan2(pmra, pmdec)*M_180_PIf;
+	//	if (pa<0)
+	//		pa += 360.f;
+	//	oss << QString("%1: %2 %3 %4 %5°. ").arg(q_("Proper motion"),
+	//						QString::number(std::sqrt(pmra * pmra + pmdec * pmdec), 'f', 2),
+	//						qc_("mas/yr", "milliarc second per year"),
+	//						qc_("towards", "into the direction of"),
+	//						QString::number(pa, 'f', 1));
+	//	oss << QString("%1: %2 %3 (%4). ").arg(q_("Proper motions by axes"),
+	//						QString::number(pmra, 'f', 2),
+	//						QString::number(pmdec, 'f', 2),
+	//						qc_("mas/yr", "milliarc second per year"));
+	//}
+
+	//if (flags&Velocity)
+	//{
+	//	if (RadialVel)
+	//	{
+	//		// TRANSLATORS: Unit of measure for speed - kilometers per second
+	//		QString kms = qc_("km/s", "speed");
+	//		oss << QString("%1: %2 %3. ").arg(q_("Radial velocity"), QString::number(RadialVel, 'f', 1), kms);
+	//	}
+	//}
+
+	//if (flags&Extra)
+	{
+		if (Plx!=0)
+		{
+			QString plx = qc_("Its parallax is", "object narration");
+			if (PlxErr>0.f)
+				oss <<  QString("%1: %2 %3 %4. ").arg(plx, QString::number(Plx, 'f', 3), QChar(0x00B1), QString::number(PlxErr, 'f', 3));
+			else
+				oss << QString("%1: %2. ").arg(plx, QString::number(Plx, 'f', 3));
+			oss  << qc_("milliarcseconds", "parallax") << ". ";
+		}
+
+		if (s->getSpInt())
+			oss << QString("%1  %2. ").arg(qc_("Its Spectral Type is", "object narration"), StarMgr::convertToSpectralType(s->getSpInt()));
+
+		if (vPeriod>0.)
+			oss << QString("%1 %2 %3. ").arg(qc_("It has a period of", "object narration")).arg(vPeriod).arg(qc_("days", "duration"));
+
+		if (vEpoch>0. && vPeriod>0.)
+		{
+			// Calculate next minimum or maximum light
+			double vsEpoch = 2400000+vEpoch;
+			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
+			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
+			QString dateStr = qc_("Next maximum light will be", "object narration");
+			if (ebsFlag)
+				dateStr = qc_("Next minimum light will be", "object narration");
+
+			oss << QString("%1 %2 UTC").arg(dateStr, nextDate);
+		}
+
+		if (vMm>0)
+		{
+			QString mmStr = q_("Rising time");
+			if (ebsFlag)
+				mmStr = q_("Duration of eclipse");
+
+			float daysFraction = vPeriod * vMm / 100.f;
+			auto dms = StelUtils::daysFloatToDHMS(daysFraction);
+			oss << QString("%1: %2% (%3)").arg(mmStr).arg(vMm).arg(dms);
+		}
+
+		if ((wdsObs>0) || (binary_sep>0.f))  // either have a WDS observation or a separation modelled by the binary orbit
+		{
+			// use separation and position angle from the binary orbit if available
+			oss << QString("%1 %3: %2 %4. ").arg(qc_("Its position angle as given for", "object narration"),
+							QString::number((binary_sep>0.f) ? binary_pa : wdsPA, 'f', 2),
+							(binary_sep>0.f) ? qc_("current date", "coordinates for current epoch"): QString::number(wdsObs),
+							     qc_("degrees", "object narration"));
+			if (wdsSep>0.f && wdsSep<999.f) // A spectroscopic binary or not?
+			{
+				if (wdsSep>60.f) // A wide binary star?
+					oss << QString("%1 (%4): %2 %5 (%3)").arg(
+									    qc_("Its Separation for", "object narration"),
+									    QString::number((binary_sep>0.f) ? binary_sep: wdsSep, 'f', 3),
+									    StelUtils::decDegToDmsStr(((binary_sep>0.f) ? binary_sep: wdsSep)/3600.f),
+									    (binary_sep>0.f) ? qc_("current date", "coordinates for current epoch"): QString::number(wdsObs),
+									    qc_("arcseconds", "object narration"));
+				else
+					oss << QString("%1 (%3): %2 %4").arg(qc_("Its Separation for", "object narration"), QString::number(wdsSep, 'f', 3), QString::number(wdsObs), qc_("arcseconds", "object narration"));
+			}
+		}
+	}
+	return str;
+}
+
+
+
 QString StarWrapper2::getObjectType() const
 {
 	StarId star_id =  s->getGaia();
@@ -790,6 +1054,181 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 	oss << getSolarLunarInfoString(core, flags);
 
 	StelObject::postProcessInfoString(str, flags);
+
+	return str;
+}
+
+QString StarWrapper2::getNarration(const StelCore *core) const
+{
+	QString str;
+	QTextStream oss(&str);
+
+	StarId star_id = s->getGaia();
+	const QString commonNameI18 = StarMgr::getCommonNameI18n(star_id);
+	const QString culturalInfoName=StarMgr::getCulturalInfoLabel(star_id);
+	const QString sciName = StarMgr::getSciDesignation(star_id);
+	const QString sciExtraName = StarMgr::getSciExtraDesignation(star_id);
+	const QString varSciName = StarMgr::getGcvsDesignation(star_id);
+	const QString varType = StarMgr::getGcvsVariabilityType(star_id);
+
+	QStringList designations;
+	if (!sciName.isEmpty())
+		designations.append(sciName);
+	if (!sciExtraName.isEmpty())
+		designations.append(sciExtraName);
+	if (!varSciName.isEmpty() && !sciName.contains(varSciName, Qt::CaseInsensitive))
+		designations.append(varSciName);
+
+	const QString crossIndexData = StarMgr::getCrossIdentificationDesignations(QString::number(s->getGaia()));
+	if (!crossIndexData.isEmpty())
+		designations.append(crossIndexData);
+
+	designations.append(QString("Gaia DR3 %1").arg(s->getGaia()));
+
+	designations.removeDuplicates();
+
+	QString commonNames;
+	if (!commonNameI18.isEmpty())
+		commonNames = commonNameI18;
+
+	// TODO: Finalize appearance of cultural Names
+	if (!culturalInfoName.isEmpty() && StarMgr::getFlagAdditionalNames())
+		oss << culturalInfoName << ". ";
+
+	if (!commonNames.isEmpty())
+		oss << commonNames << ". ";
+
+	oss << designations.sliced(0, qMin(2, designations.length())) .join(", ");;
+
+	const QString objectTypeI18nStr = getObjectTypeI18n();
+	if (!varType.isEmpty())
+		oss << QString("%1 %2 %3 %4. ").arg(qc_("Its type is", "object narration"), objectTypeI18nStr, qc_("with variable type", "object narration"), varType);
+	else
+		oss << QString("%1 %2. ").arg(qc_("Its type is", "object narration"), objectTypeI18nStr);
+
+	static const QRegularExpression htmlTag("<[a-zA-Z/ ]*>");
+	oss << getMagnitudeInfoString(core, InfoStringGroupFlags::Magnitude, 2).replace(htmlTag, "").replace(":", "");
+
+	double RA, DEC, pmra, pmdec, Plx, RadialVel;
+	double PlxErr = s->getPlxErr();
+	float dyrs = static_cast<float>(core->getJDE()-STAR_CATALOG_JDEPOCH)/365.25;
+	s->getFull6DSolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyrs);
+	//const bool computeAstrometryFlag = (pmra || pmdec);
+
+	if (s->getPlx())
+		// should use Plx from getPlx because Plx can change with time, but not absolute magnitude
+		oss << QString("%1: %2. ").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.001*s->getPlx())), 0, 'f', 2);
+
+	{
+		oss << QString("%1: <b>%2</b>. ").arg(q_("Color Index (B-V)"), QString::number(getBV(), 'f', 2));
+
+	//	if (!varType.isEmpty())
+	//	{
+	//		const float maxVMag = StarMgr::getGcvsMaxMagnitude(star_id);
+	//		const float magFlag = StarMgr::getGcvsMagnitudeFlag(star_id);
+	//		const float minVMag = StarMgr::getGcvsMinMagnitude(star_id);
+	//		const float min2VMag = StarMgr::getGcvsMinMagnitude(star_id, false);
+	//		const QString photoVSys = StarMgr::getGcvsPhotometricSystem(star_id);
+
+	//		float minimumM1 = minVMag;
+	//		float minimumM2 = min2VMag;
+	//		if (magFlag==1.f) // Amplitude
+	//		{
+	//			minimumM1 += maxVMag;
+	//			minimumM2 += maxVMag;
+	//		}
+
+	//		if (maxVMag!=99.f) // seems it is not eruptive variable star
+	//		{
+	//			QString minStr = QString::number(minimumM1, 'f', 2);
+	//			if (min2VMag<99.f)
+	//				minStr = QString("%1/%2").arg(QString::number(minimumM1, 'f', 2), QString::number(minimumM2, 'f', 2));
+
+	//			oss << QString("%1: <b>%2</b>%3<b>%4</b> (%5: %6)").arg(q_("Magnitude range"), QString::number(maxVMag, 'f', 2), QChar(0x00F7), minStr, q_("Photometric system"), photoVSys);
+	//		}
+	//	}
+	}
+
+	//// kinda impossible for both pm to be exactly 0, so they must just be missing
+	//if (computeAstrometryFlag)
+	//{
+	//	float pa = std::atan2(pmra, pmdec)*M_180_PIf;
+	//	if (pa<0)
+	//		pa += 360.f;
+	//	oss << QString("%1: %2 %3 %4 %5°").arg(q_("Proper motion"),
+	//						QString::number(std::sqrt(pmra * pmra + pmdec * pmdec), 'f', 2),
+	//						qc_("mas/yr", "milliarc second per year"),
+	//						qc_("towards", "into the direction of"),
+	//						QString::number(pa, 'f', 1));
+	//	oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes"),
+	//						QString::number(pmra, 'f', 2),
+	//						QString::number(pmdec, 'f', 2),
+	//						qc_("mas/yr", "milliarc second per year"));
+	//}
+
+	// kinda impossible for both parallax and parallax_err to be exactly 0, so they must just be missing
+	//if (flags&Distance)
+	{
+		// do parallax SNR cut because we are calculating distance, inverse parallax is bad for >20% uncertainty
+		if ((Plx!=0) && (PlxErr!=0) & (Plx/PlxErr > 5.))
+		{
+			//TRANSLATORS: Unit of measure for distance - Light Years
+			QString ly = qc_("light year", "distance");
+			const double distance = PARSEC_LY * 1000. / Plx;
+			oss << QString("%1: %2%3%4 %5").arg(qc_("Its distance is", "object narration"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(distance * PlxErr / Plx, 'f', 2), ly) << ". ";
+		}
+		if ((Plx!=0) && (PlxErr!=0))  // as long as having parallax, display it (but not necessarily displaying inverse parallax)
+		{
+			QString plx = qc_("Its Parallax is", "object narration");
+			if (PlxErr>0.f)
+				oss <<  QString("%1 %2%3%4 ").arg(plx, QString::number(Plx, 'f', 3), QChar(0x00B1), QString::number(PlxErr, 'f', 3));
+			else
+				oss << QString("%1 %2 ").arg(plx, QString::number(Plx, 'f', 3));
+			oss  << qc_("milliarcseconds", "parallax") << ". ";
+		}
+		//oss << getExtraInfoStrings(Distance).join("");
+	}
+
+//	if (flags&Extra)
+//	{
+//		const double vEpoch = StarMgr::getGcvsEpoch(star_id);
+//		const double vPeriod = StarMgr::getGcvsPeriod(star_id);
+//		const int vMm = StarMgr::getGcvsMM(star_id);
+//		const QString sType = StarMgr::getGcvsSpectralType(star_id);
+//
+//		QString stype = getObjectType();
+//		bool ebsFlag = stype.contains("eclipsing binary system");
+//
+//		if (!sType.isEmpty())
+//			oss << QString("%1: %2").arg(q_("Spectral Type"), sType);
+//
+//		if (vPeriod>0.)
+//			oss << QString("%1: %2 %3").arg(q_("Period")).arg(vPeriod).arg(qc_("days", "duration"));
+//
+//		if (vEpoch>0. && vPeriod>0.)
+//		{
+//			// Calculate next minimum or maximum light
+//			double vsEpoch = 2400000+vEpoch;
+//			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJD() - vsEpoch)/vPeriod);
+//			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
+//			QString dateStr = q_("Next maximum light");
+//			if (ebsFlag)
+//				dateStr = q_("Next minimum light");
+//
+//			oss << QString("%1: %2 UTC").arg(dateStr, nextDate);
+//		}
+//
+//		if (vMm>0)
+//		{
+//			QString mmStr = q_("Rising time");
+//			if (ebsFlag)
+//				mmStr = q_("Duration of eclipse");
+//
+//			float daysFraction = vPeriod * vMm / 100.f;
+//			auto dms = StelUtils::daysFloatToDHMS(daysFraction);
+//			oss << QString("%1: %2% (%3)").arg(mmStr).arg(vMm).arg(dms);
+//		}
+//	}
 
 	return str;
 }
