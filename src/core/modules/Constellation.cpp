@@ -345,6 +345,17 @@ QString Constellation::getInfoLabel() const
 	return getCultureLabel(scMgr->getInfoLabelStyle());
 }
 
+void Constellation::setNarration(const QString &narration)
+{
+	this->narration=narration;
+}
+
+QString Constellation::getNarration(const StelCore *core) const
+{
+	qDebug() << "Constellation name " << getEnglishName() << "narration:" << narration;
+	return narration;
+}
+
 QString Constellation::getCultureLabel(StelObject::CulturalDisplayStyle style) const
 {
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
