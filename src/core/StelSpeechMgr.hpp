@@ -93,6 +93,14 @@ public slots:
 #if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
 	//! return the state of the Speech engine, or QTextToSpeech::State::Error
 	QTextToSpeech::State getState();
+
+	//! set the engine to be used. Some OS like Windows have more than one.
+	//! @arg engine must be one of those returned by QTextToSpeech::availableEngines.
+	//! @return True on success, setting one working engine (the one reported by the engineChanged() signal).
+	//!         False means something is broken and no engine is available.
+	//! emits engineChanged().
+	bool setEngine(QString &engine){return m_speech->setEngine(engine);}
+
 #endif
 
 	//void stateChanged(QTextToSpeech::State state);
@@ -109,8 +117,8 @@ private:
 #if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
 
 	QTextToSpeech *m_speech = nullptr;
-	QVoice *m_voice;
 	QList<QVoice> m_voices;
+	QList<QLocale> m_locales;
 #endif
 
 	double m_rate;   // -1...1
