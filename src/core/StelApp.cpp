@@ -335,7 +335,7 @@ StelApp::~StelApp()
 	delete localeMgr; localeMgr=nullptr;
 	delete audioMgr; audioMgr=nullptr;
 	delete videoMgr; videoMgr=nullptr;
-	delete speechMgr; speechMgr=nullptr;
+	//delete speechMgr; speechMgr=nullptr;
 	delete stelObjectMgr; stelObjectMgr=nullptr; // Delete the module by hand afterward
 	delete textureMgr; textureMgr=nullptr;
 	delete planetLocationMgr; planetLocationMgr=nullptr;
