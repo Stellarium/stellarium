@@ -25,12 +25,18 @@
 
 #include <QTextToSpeech>
 #include <QVoice>
+#include "StelLocaleMgr.hpp"
 #endif
 
 StelSpeechMgr::StelSpeechMgr()
 {
 #if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 	m_speech=new QTextToSpeech(static_cast<QObject*>(this));
+#ifdef ENABLE_NLS
+	m_speech->setLocale(QLocale(StelApp::getInstance().getLocaleMgr().getAppLanguage()));
+#else
+	m_speech->setLocale(QLocale::English);
+#endif
 #else
 	qWarning() << "Text to Speech requires Qt6.6 or higher";
 #endif
@@ -62,18 +68,62 @@ void StelSpeechMgr::init()
 		m_speech->setPitch(m_pitch);
 		m_speech->setVolume(m_volume);
 
-		qDebug() << "StelSpeechMgr: engine name" << m_speech->engine();
-		qDebug() << "StelSpeechMgr: locale name" << m_speech->locale().name();
-		qDebug() << "StelSpeechMgr: voice name"  << m_speech->voice().name();
+		qDebug() << "StelSpeechMgr: App Language is"     << StelApp::getInstance().getLocaleMgr().getAppLanguage();
+		qDebug() << "StelSpeechMgr: default engine name" << m_speech->engine();
+		qDebug() << "StelSpeechMgr: default locale name" << m_speech->locale().name();
+		qDebug() << "StelSpeechMgr: default voice name"  << m_speech->voice().name();
 
-		m_speech->setLocale(QLocale::English);
+		connect(m_speech, &QTextToSpeech::engineChanged, this, [=](){
+			qDebug() << "StelSpeechMgr:engineChanged() lambda";
+			m_locales=m_speech->availableLocales();
+			QString appLanguage=StelApp::getInstance().getLocaleMgr().getAppLanguage();
+			qDebug() << "   StelSpeechMgr: App Language is" << appLanguage;
+			if (m_locales.contains(QLocale(appLanguage)))
+				m_speech->setLocale(QLocale(appLanguage));
+			else
+				m_speech->setLocale(QLocale::English);
+			m_voices=m_speech->availableVoices();
+		});
 
-		QList<QVoice> voices = m_speech->availableVoices();
-		qDebug() << "StelSpeechMgr: available voices:";
-		for (const QVoice &v: std::as_const(voices))
+		QStringList availableEngines=m_speech->availableEngines();
+		availableEngines.removeOne("mock"); // unhelpful dummy
+		// we are only running when enabled(), i.e. at least the default engine is available.
+		Q_ASSERT(!availableEngines.isEmpty());
+		qDebug() << "StelSpeechMgr: available engine names:" << availableEngines.join(", ");
+		// Problem: The sequence of engines is arbitrary and changes from call to call.
+		// On Windows, there are winrt and sapi. Make sure winrt (usually better) is first.
+#ifdef Q_OS_WIN
+		availableEngines.sort();
+		std::reverse(availableEngines.begin(), availableEngines.end());
+#endif
+		// TODO decide what to do on various Linux flavours (any preferrable engine?)
+
+		m_speech->setEngine(conf->value("speech/engine", availableEngines.constFirst()).toString());
+		// This does not immediately trigger the connected lambda above. (Only processed in outer event loop...)
+		QString appLanguage=StelApp::getInstance().getLocaleMgr().getAppLanguage();
+		qDebug() << "StelSpeechMgr: App Language is" << appLanguage;
+		m_locales=m_speech->availableLocales();
+		if (m_locales.contains(QLocale(appLanguage)))
+			m_speech->setLocale(QLocale(appLanguage));
+		else
+			m_speech->setLocale(QLocale::English);
+		m_voices=m_speech->availableVoices();
+
+		qDebug() << "StelSpeechMgr: current engine name" << m_speech->engine();
+		qDebug() << "StelSpeechMgr: current locale name" << m_speech->locale().name();
+
+		qDebug() << "StelSpeechMgr: available voices after these changes:";
+		for (const QVoice &v: std::as_const(m_voices))
 		{
-			qDebug() << v.name() << "age:" << v.age() << "gender:" << v.gender() << "language:" <<  v.language() << "locale:" << v.locale();
+			qDebug() << "    " << v.name() << "age:" << v.age() << "gender:" << v.gender() << "language:" <<  v.language() << "locale:" << v.locale();
 		}
+
+		QList<QVoice> voices=m_speech->findVoices(conf->value("speech/voice", m_voices.first().name()).toString());
+		m_speech->setVoice(voices.constFirst());
+		qDebug() << "StelSpeechMgr: current voice name"  << m_speech->voice().name();
+
+
+
 #endif
 
 	}
