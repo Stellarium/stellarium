@@ -60,6 +60,54 @@ However, there are also a few original Greek words like the red star "Antares", 
 
 The IAU is the only scientifically accepted authority to assign new names to stars. Commercial exploits like "star name registries", who sell stars for commemorative purposes or as gifts, only sell printed pieces of paper. These names are not approved and never used by scientists.
 
+## Constellations
+
+##### Andromeda 
+Princess Andromeda, daughter of Queen Cassiopeia and King Kepheus, was chained to a rock on the coast or Ethiopia to prepare her as sacrifice to Cetus, the Sea Monster. She was rescued by Perseus.  In this constellation you find the nearest large galaxy, the Great Andromeda Galaxy. It is barely visible with the unaided eye in a dark rural sky. 
+
+##### Cassiopeia
+Shown as the Seated Queen, Cassiopeia had boasted about her beauty, so much as to enrage Poseidon (or Nereus?). The latter sent the sea monster Cetus which ravaged the coast of Ethiopia. An oracle promised Cetus would go away when Princess Andromeda would be sacrificed to Cetus.  
+
+##### Cepheus
+King of Ethiopia, husband of Cassiopeia and father of Andromeda.
+
+##### Cetus
+The sea monster was sent by Poseidon to punish Ethiopia for the heresy of Cassiopeia. It was finally killed by Perseus.
+
+##### Pegasus
+The Winged Horse carried Perseus on his way to rescue Princess Andromeda from being sacrificed to Cetus. 
+
+##### Perseus
+The hero Perseus came in flying on Pegasus to rescue Andromeda from being sacrificed. In his hand he carries Medusa's head with the variable star Algol, which he presented to the sea monster Cetus just as it was about to devour Andromeda. Its magic caused Cetus to immediately turn to a rock. Before freeing Andromeda from her chains, he dropped the sack with Medusa's head to the beach. When the surf opened the sack, nearby algae were petrified into corals.
+
+##### Orion
+The famous hunter Orion was killed by a Scorpion, but was transferred into one of the most prominent constellations, notably just opposite of Scorpius. He is accompanied by the Greater and Lesser Dogs.  Orion is host of one of the most spectacular star-forming regions, the Great Orion Nebula.
+
+##### Greater Dog
+The Greater Dog is one of Orion's hunting companions. Its main star, Sirius, is the brightest of the fixed stars.
+
+##### Lesser Dog
+The Lesser Dog is one of Orion's hunting companions. 
+
+##### Lepus
+The hare is hiding just below the hunter Orion.
+
+##### Lynx
+The constellation of Lynx was introduced by Polish astronomer Jan Hevelius. You need the eyes of a Lynx to see it.
+
+##### Scutum
+The constellation of the shield was introduced by Polish astronomer Jan Hevelius in the late 17th century to pay homage to his king, Jan Sobieski. 
+
+##### Vulpecula
+Originally introduced as the constellation of the Fox with the Goose by Polish astronomer Jan Hevelius in the 17th century, nowadays we only see the little fox here. It is host to the famous Dumbbell planetary nebula, M27, and the Coathanger asterism, both visible in binoculars. 
+
+##### Auriga
+The charioteer was born without legs. He invented the wheel and built his wagon to overcome his handicap. In this constellation you can find a nice selection of open star clusters.
+
+##### Hercules
+Hercules, or the Kneeler, was a Greek hero, a son of Zeus with Alkmene. When his half-sister Athena tried to put him on Hera's breast, his biting caused Hera to push him away, and Hera's milk spilled all over the sky, visible unti this day as the Milky Way. Hercules had to fulfill 12 major labours and countless other fights and adventures.  
+
+
 ## References
 
  - [#1]: Kunitzsch, P.; Smart T. (2006). "A Dictionary of Modern star Names: A Short Guide to 254 Star Names and Their Derivations" (2nd rev. ed.). Cambridge, MA: Sky Pub. ISBN 978-1-931559-44-7.
