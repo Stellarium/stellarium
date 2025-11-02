@@ -2054,6 +2054,7 @@ void NebulaMgr::updateI18n()
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	for (const auto& n : std::as_const(dsoArray))
 		n->translateName(trans);
+	Nebula::updateI18n();
 }
 
 

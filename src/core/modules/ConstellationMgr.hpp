@@ -144,6 +144,9 @@ public:
 	//! @return lunar station in the culture's Lunar system
 	QString getLunarSystemCoordinate(Vec3d eqNow) const;
 
+	//! @return the translated name of IAU constellation cst
+	static QString getIAUconstellationName(const QString &cst);
+
 	// Properties setters and getters
 public slots:	
 	//! Set whether constellation art will be displayed
@@ -527,6 +530,7 @@ private:
 	bool isolateSelected; //!< true to pick individual constellations.
 	bool flagConstellationPick; // TODO: CLEAR DESCRIPTION
 	std::vector<std::vector<Vec3d> *> allBoundarySegments;
+	static QMap<QString, QString>iauConstellationNames; //!< maps abbreviation to full (translated) name
 
 	// These are THE master settings - individual constellation settings can vary based on selection status
 	float artFadeDuration;
