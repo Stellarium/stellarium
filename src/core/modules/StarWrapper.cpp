@@ -518,6 +518,7 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 	return map;
 }
 
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 QString StarWrapper1::getNarration(const StelCore *core) const
 {
 	// rtl tracks the right-to-left status of the text in the current position.
@@ -779,7 +780,7 @@ QString StarWrapper1::getNarration(const StelCore *core) const
 	}
 	return str;
 }
-
+#endif
 
 
 QString StarWrapper2::getObjectType() const
@@ -1058,6 +1059,7 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 	return str;
 }
 
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 QString StarWrapper2::getNarration(const StelCore *core) const
 {
 	QString str;
@@ -1232,6 +1234,7 @@ QString StarWrapper2::getNarration(const StelCore *core) const
 
 	return str;
 }
+#endif
 
 QString StarWrapper3::getID(void) const
 {
