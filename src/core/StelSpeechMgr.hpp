@@ -65,7 +65,9 @@ signals:
 	void rateChanged(double);
 	void pitchChanged(double);
 	void volumeChanged(double);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
 	void stateChanged(QTextToSpeech::State state);
+#endif
 
 public slots:
 	//! Emit an audible synthesized narration
@@ -88,8 +90,10 @@ public slots:
 	void setVolume(double newVolume);
 	double getVolume(){return m_volume;}
 
+#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
 	//! return the state of the Speech engine, or QTextToSpeech::State::Error
 	QTextToSpeech::State getState();
+#endif
 
 	//void stateChanged(QTextToSpeech::State state);
 	//void engineSelected(int index);
@@ -102,17 +106,16 @@ public slots:
 private:
 	//void onEngineReady();
 
-
-
 #if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
 
 	QTextToSpeech *m_speech = nullptr;
 	QVoice *m_voice;
 	QList<QVoice> m_voices;
-	double m_rate;   // -1...1
-	double  m_pitch; // -1...1
-	double m_volume; // 0...1
 #endif
+
+	double m_rate;   // -1...1
+	double m_pitch;  // -1...1
+	double m_volume; // 0...1
 };
 
 #endif // STELSPEECHMGR_HPP
