@@ -20,17 +20,16 @@
 #include "StelTranslator.hpp"
 #include "StelApp.hpp"
 #include <QDebug>
-//#include <QDir>
 
 #if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 
 #include <QTextToSpeech>
 #include <QVoice>
-#include <QMediaPlayer>
+#endif
 
 StelSpeechMgr::StelSpeechMgr()
 {
-#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
+#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 	m_speech=new QTextToSpeech(static_cast<QObject*>(this));
 #else
 	qWarning() << "Text to Speech requires Qt6.6 or higher";
@@ -39,7 +38,7 @@ StelSpeechMgr::StelSpeechMgr()
 
 StelSpeechMgr::~StelSpeechMgr()
 {
-#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
+#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 	m_voices.clear();
 	if (m_speech)
 	{
@@ -61,6 +60,21 @@ void StelSpeechMgr::init()
 		m_speech->setRate(m_rate);
 		m_speech->setPitch(m_pitch);
 		m_speech->setVolume(m_volume);
+
+		qDebug() << "StelSpeechMgr: engine name" << m_speech->engine();
+		qDebug() << "StelSpeechMgr: locale name" << m_speech->locale().name();
+		qDebug() << "StelSpeechMgr: voice name" << m_speech->voice().name();
+
+		m_speech->setLocale(QLocale::English);
+
+		QList<QVoice> voices = m_speech->availableVoices();
+		qDebug() << "StelSpeechMgr: available voices:";
+		for (const QVoice &v: voices)
+		{
+			qDebug() << v.name() << "age:" << v.age() << "gender:" << v.gender() << "language:" <<  v.language() << "locale:" << v.locale();
+		}
+
+
 	}
 	else
 		qWarning() << "Cannot Initialize Text to Speech";
@@ -172,12 +186,3 @@ void StelSpeechMgr::localeChanged(const QLocale &locale)
 }
 #endif
 
-
-#else 
-void StelSpeechMgr::loadSound(const QString& filename, const QString& id)
-{
-	qWarning() << "This build of Stellarium does not support sound - cannot load audio" << QDir::toNativeSeparators(filename) << id;
-}
-StelSpeechMgr::StelSpeechMgr(bool){}
-StelSpeechMgr::~StelSpeechMgr() {;}
-#endif
