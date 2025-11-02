@@ -441,6 +441,7 @@ signals:
 	void namesFadeDurationChanged(const float duration);
 	void constellationsDisplayStyleChanged(const StelObject::CulturalDisplayStyle style);
 	void constellationLineThicknessChanged(int thickness);
+	void hasUpdatedSkyCulture(); //!< emitted at end of updateSkyCulture()
 
 private slots:
 	//! Limit the number of constellations to draw based on selected stars.

@@ -124,6 +124,10 @@ public:
 	QString getScreenLabel() const override;
 	//! Combine InfoString label from various components, depending on settings in SkyCultureMgr
 	QString getInfoLabel() const override;
+	//! set narration text. narration may contain Markdown syntax.
+	void setNarration(const QString &narration);
+	//! retrieve narration text
+	QString getNarration(const StelCore *core) const override;
 private:
 	//! Underlying worker
 	QString getCultureLabel(StelObject::CulturalDisplayStyle style) const;
@@ -204,6 +208,8 @@ private:
 	QString abbreviationI18n;
 	//! The context for English name of constellation (used for correct translation via gettext)
 	QString context;
+	//! narration text from the respective section in description.md
+	QString narration;
 	//! Direction vectors pointing on constellation name drawing position (J2000.0 coordinates)
 	//! Usually a single position is computed from averaging star positions forming the constellation, but we can override with an entry in index.json,
 	//! and even give more positions (e.g. for long or split-up constellations like Serpens.
