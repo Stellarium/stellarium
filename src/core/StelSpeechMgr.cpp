@@ -57,23 +57,24 @@ void StelSpeechMgr::init()
 	m_volume=qBound( 0.0, conf->value("speech/volume", 50.0).toDouble(), 1.0);
 	if (enabled())
 	{
+#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 		m_speech->setRate(m_rate);
 		m_speech->setPitch(m_pitch);
 		m_speech->setVolume(m_volume);
 
 		qDebug() << "StelSpeechMgr: engine name" << m_speech->engine();
 		qDebug() << "StelSpeechMgr: locale name" << m_speech->locale().name();
-		qDebug() << "StelSpeechMgr: voice name" << m_speech->voice().name();
+		qDebug() << "StelSpeechMgr: voice name"  << m_speech->voice().name();
 
 		m_speech->setLocale(QLocale::English);
 
 		QList<QVoice> voices = m_speech->availableVoices();
 		qDebug() << "StelSpeechMgr: available voices:";
-		for (const QVoice &v: voices)
+		for (const QVoice &v: std::as_const(voices))
 		{
 			qDebug() << v.name() << "age:" << v.age() << "gender:" << v.gender() << "language:" <<  v.language() << "locale:" << v.locale();
 		}
-
+#endif
 
 	}
 	else
@@ -82,40 +83,51 @@ void StelSpeechMgr::init()
 
 bool StelSpeechMgr::enabled() const
 {
+#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 	return (m_speech && m_speech->state()!=QTextToSpeech::State::Error);
+#else
+	return false;
+#endif
 }
 
+#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 QTextToSpeech::State StelSpeechMgr::getState()
 {
 	if (m_speech)
 		return m_speech->state();
 	return QTextToSpeech::State::Error;
 }
-
+#endif
 
 void StelSpeechMgr::say(const QString &narration) const
 {
 	qDebug() << "StelSpeechMgr: reading: " << narration;
+#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 	if (enabled())
 		m_speech->say(narration);
+#endif
 }
 
 void StelSpeechMgr::stop()
 {
 	qDebug() << "StelSpeechMgr: stop() ";
+#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 	if (enabled())
 	{
 		m_speech->stop(QTextToSpeech::BoundaryHint::Word);
 		m_speech->say(qc_("Why? You asked for it!", "Object narration")); // Just testing ... ;-)
 	}
+#endif
 }
 
 void StelSpeechMgr::setRate(double rate)
 {
 	m_rate=rate;
 	StelApp::immediateSave("speech/rate", rate);
+#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 	if (m_speech)
 		m_speech->setRate(rate);
+#endif
 	emit rateChanged(rate);
 }
 
@@ -123,8 +135,10 @@ void StelSpeechMgr::setPitch(double pitch)
 {
 	m_pitch=pitch;
 	StelApp::immediateSave("speech/pitch", pitch);
+#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 	if (m_speech)
 		m_speech->setPitch(pitch);
+#endif
 	emit pitchChanged(pitch);
 }
 
@@ -132,8 +146,10 @@ void StelSpeechMgr::setVolume(double volume)
 {
 	m_volume=volume;
 	StelApp::immediateSave("speech/volume", volume);
+#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 	if (m_speech)
 		m_speech->setVolume(volume);
+#endif
 	emit volumeChanged(volume);
 }
 
