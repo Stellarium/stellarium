@@ -224,11 +224,6 @@ The stick figures are interpretations by Youla A Azkarrula based on her pre-doct
  - [#3]: Museum Bali, https://museumbali.org/
  - [#4]: Kerta Gosa Museum , https://e-museum.klungkungkab.go.id/kerta-gosa/
 
-### Fair Use
-
-We provide this for free, but the authors of contributions certainly deserve to be cited according to the common rules. Thank you!
-Youla A Azkarrula, Jessica Gullberg (2025)
-
 ## Authors
 
 The Balinese star names and constellation lines were compiled and added to Stellarium by <em> Youla A Azkarrula: youlaafifahrvvl@gmail.com </em>
@@ -247,3 +242,5 @@ As an astronomer she thanks for the help of several scholar and her professor.
 ## License
 
 CC BY-ND 4.0
+
+Youla A Azkarrula, Jessica Gullberg (2025)
