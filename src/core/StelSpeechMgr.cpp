@@ -98,7 +98,10 @@ void StelSpeechMgr::init()
 #endif
 		// TODO decide what to do on various Linux flavours (any preferrable engine?)
 
-		m_speech->setEngine(conf->value("speech/engine", availableEngines.constFirst()).toString());
+		// Only change from default engine if the configured is available.
+		QString candEngine=conf->value("speech/engine", availableEngines.constFirst()).toString();
+		if (availableEngines.contains(candEngine))
+			m_speech->setEngine(candEngine);
 		// This does not immediately trigger the connected lambda above. (Only processed in outer event loop...)
 		QString appLanguage=StelApp::getInstance().getLocaleMgr().getAppLanguage();
 		qDebug() << "StelSpeechMgr: App Language is" << appLanguage;
