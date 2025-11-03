@@ -63,7 +63,9 @@ The IAU is the only scientifically accepted authority to assign new names to sta
 ## Constellations
 
 ##### Andromeda 
-Princess Andromeda, daughter of Queen Cassiopeia and King Kepheus, was chained to a rock on the coast or Ethiopia to prepare her as sacrifice to Cetus, the Sea Monster. She was rescued by Perseus.  In this constellation you find the nearest large galaxy, the Great Andromeda Galaxy. It is barely visible with the unaided eye in a dark rural sky. 
+Princess Andromeda, daughter of Queen Cassiopeia and King Kepheus, was chained to a rock on the coast or Ethiopia to prepare her as sacrifice to Cetus, the Sea Monster. She was rescued by Perseus.  
+
+In this constellation you find the nearest large galaxy, the Great Andromeda Galaxy. It is barely visible with the unaided eye in a dark rural sky. 
 
 ##### Cassiopeia
 Shown as the Seated Queen, Cassiopeia had boasted about her beauty, so much as to enrage Poseidon (or Nereus?). The latter sent the sea monster Cetus which ravaged the coast of Ethiopia. An oracle promised Cetus would go away when Princess Andromeda would be sacrificed to Cetus.  
@@ -72,7 +74,7 @@ Shown as the Seated Queen, Cassiopeia had boasted about her beauty, so much as t
 King of Ethiopia, husband of Cassiopeia and father of Andromeda.
 
 ##### Cetus
-The sea monster was sent by Poseidon to punish Ethiopia for the heresy of Cassiopeia. It was finally killed by Perseus.
+The Sea Monster, also called Whale, was sent by Poseidon to punish Ethiopia for the heresy of Cassiopeia. It was finally killed by Perseus.
 
 ##### Pegasus
 The Winged Horse carried Perseus on his way to rescue Princess Andromeda from being sacrificed to Cetus. 
@@ -81,7 +83,9 @@ The Winged Horse carried Perseus on his way to rescue Princess Andromeda from be
 The hero Perseus came in flying on Pegasus to rescue Andromeda from being sacrificed. In his hand he carries Medusa's head with the variable star Algol, which he presented to the sea monster Cetus just as it was about to devour Andromeda. Its magic caused Cetus to immediately turn to a rock. Before freeing Andromeda from her chains, he dropped the sack with Medusa's head to the beach. When the surf opened the sack, nearby algae were petrified into corals.
 
 ##### Orion
-The famous hunter Orion was killed by a Scorpion, but was transferred into one of the most prominent constellations, notably just opposite of Scorpius. He is accompanied by the Greater and Lesser Dogs.  Orion is host of one of the most spectacular star-forming regions, the Great Orion Nebula.
+The famous hunter Orion was killed by a Scorpion, but was transferred into one of the most prominent constellations, notably just opposite of Scorpius. He is accompanied by the Greater and Lesser Dogs.  
+
+Orion is host of one of the most spectacular star-forming regions, the Great Orion Nebula, Messier 42.
 
 ##### Greater Dog
 The Greater Dog is one of Orion's hunting companions. Its main star, Sirius, is the brightest of the fixed stars.
@@ -99,14 +103,60 @@ The constellation of Lynx was introduced by Polish astronomer Jan Hevelius. You 
 The constellation of the shield was introduced by Polish astronomer Jan Hevelius in the late 17th century to pay homage to his king, Jan Sobieski. 
 
 ##### Vulpecula
-Originally introduced as the constellation of the Fox with the Goose by Polish astronomer Jan Hevelius in the 17th century, nowadays we only see the little fox here. It is host to the famous Dumbbell planetary nebula, M27, and the Coathanger asterism, both visible in binoculars. 
+Originally introduced as the constellation of the Fox with the Goose by Polish astronomer Jan Hevelius in the 17th century, nowadays we only see the little fox here. 
+
+It is host to the famous Dumbbell planetary nebula, M27, and the Coathanger asterism, both visible in binoculars. 
 
 ##### Auriga
-The charioteer was born without legs. He invented the wheel and built his wagon to overcome his handicap. In this constellation you can find a nice selection of open star clusters.
+The charioteer was born without legs. He invented the wheel and built his wagon to overcome his handicap. Its main star, *Capella*, represents a goat which accompanies him. 
+
+In this constellation you can find a nice selection of open star clusters.
 
 ##### Hercules
-Hercules, or the Kneeler, was a Greek hero, a son of Zeus with Alkmene. When his half-sister Athena tried to put him on Hera's breast, his biting caused Hera to push him away, and Hera's milk spilled all over the sky, visible unti this day as the Milky Way. Hercules had to fulfill 12 major labours and countless other fights and adventures.  
+Hercules, or the Kneeler, was a Greek hero, a son of Zeus with Alkmene. When his half-sister Athena tried to put him on Hera's breast, his biting caused Hera to push him away, and Hera's milk spilled all over the sky, creating the Milky Way. Hercules had to fulfill 12 major labours and countless other fights and adventures.  In the northern sky, he is actually upside-down, with his head, *Ras Algethi* next to the head of Ophiuchus, *Rasalhague*, and he is seen to trample on the head of Draco, the dragon. 
 
+Hercules hosts the magnificent globular cluster Messier 13, and a smaller one, Messier 92.
+
+##### Ophiuchus
+The Snake Bearer, also called Serpentarius, resembles a man holding Serpens, the snake, in his hands. He is standing on Scorpius, and with his legs he is in fact crossing the ecliptic. Some people therefore call it the 13th zodiacal constellation, but the Zodiac still only has 12 signs, for practical purposes of it being just a coordinate system. His head, *Rasalhague*, is adjacent to the head of Hercules, *Ras Algethi*. 
+
+##### Serpens
+The Snake is the only constellation which comes in two parts, the snake's head and tail. Its central part is held by Ophiuchus, the Snake Bearer, and therefore those stars nowadays are counted belonging to that constellation. 
+
+##### Ursa major
+The Greater Bear represents Callisto. Once a beautiful nymph, she was seduced by Zeus. His wife Hera was enraged and converted her into a bear. Zeus could not change that, but he could raise her to the stars. But again, Hera interfered so that the Bear could not take a bath in the Okeanos. This means, from ancient Greece the constellation was circumpolar, always above the horizon. Meanwhile, precession allows the Bear to at least submerge her feet in the sea. The seven brightest stars are called the Plough or Big Dipper in English but have other names in other cultures. 
+
+Ursa Major contains a few nice galaxies for small telescopes. 
+
+##### Ursa Minor
+The Lesser Bear may be Arkas, son of Callisto, who is commemorated as Greater Bear and who was likewise placed into the sky by Zeus. Another myth commemorates two bears who saved the infant Zeus from his father Kronos. When he later placed them in the sky, he flung them up by their tails, explaining these unnaturally long bear tails.
+
+Its most prominent object is Polaris, the Pole Star. In our era, it is less than a degree from the pole which makes it a very important navigational aid, but, due to precession, in antiquity there was no bright star right on the celestial pole. 
+
+##### Camelopardalis
+Early 17th century Dutch cartographer Petrus Plancius created this large but inconspicuous constellation between Ursa Major and Cassiopeia.
+
+##### Boötes
+This figure is described either as cow shepherd moving behind the seven oxen (*septemtriones*) according to the Romans, or in Greek tradition of *Arktophylax*, as figure related to the Greater Bear. Ptolemy described its brightest star, *Arcturus*, as not belonging to the actual shape but as bright star lying between his knees. Starting with the atlas of Polish astronomer Jan Hevelius in the 17th century, Boötes leads the Hunting Dogs on leashes. 
+ 
+##### Canes Venatici 
+The Hunting Dogs were introduced by Polish astronomer Jan Hevelius in the 17th century. His atlas shows the dogs on a leash in the hands of Boötes, the Herdsman, maybe to chase the Greater Bear. 
+
+The dim constellation hosts the magnificent Whirlpool Galaxy, Messier 51 and several other galaxies for small telescopes, and the bright globular cluster M3.
+ 
+##### Leo Minor
+17th-century Polish astronomer Jan Hevelius filled several almost empty regions between classical constellations with new figures in his atlas. The Little Lion was one of them, residing between Leo and Ursa Major.
+ 
+##### Coma Berenices
+Over the tuft of the Lion's tail we can see a loose cluster of dim stars. Ptolemy has described this as one of two asterisms added to his traditional 48 constellations. Coma represents the Hair of Berenike II, consort of Ptolemy III Euergetes, which she had sacrificed for a safe return of her husband from war. It is the only constellation commemorating a historical person. 
+
+The stars of Coma are indeed a loose open star cluster, and far behind, in the border region to Virgo, lies a region very rich in galaxies.  
+
+##### Monoceros
+Early 17th century Dutch cartographer Petrus Plancius created this large but inconspicuous constellation between Orion and Canis Minor. 
+
+While it does not have bright stars, telescope owners will like to visit a few fine open star clusters, and especially the Rosette Nebula.
+ 
 
 ## References
 
