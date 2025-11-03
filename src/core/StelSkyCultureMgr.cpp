@@ -671,8 +671,7 @@ QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown,
 	static const QRegularExpression re("^\n*|\n*$");
 	textEng.replace(re, "");
 	auto textTr = trans.tryQtranslate(textEng);
-	//if (textTr.isEmpty() && sectionName == "Constellations")
-	if (sectionName.startsWith("Constellations"))
+	if (textTr.isEmpty() && sectionName == "Constellations")
 	{
 		// Legacy way of translating the whole Constellations section didn't work.
 		// Now try the correct way: split the section into descriptions of individual
@@ -801,7 +800,8 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription()
 		QFile f(descPath);
 		if(f.open(QIODevice::ReadOnly))
 		{
-			const auto markdown = QString::fromUtf8(f.readAll());
+			auto markdown = QString::fromUtf8(f.readAll());
+			markdown.replace("\r", ""); // avoid regexp trouble on Windows
 			description = descriptionMarkdownToHTML(markdown, descPath);
 		}
 		else
