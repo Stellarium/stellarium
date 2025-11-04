@@ -22,7 +22,7 @@ Below is *Xinyixiangfayao Star Map* from Su Song (苏颂, 1020-1101 AD).
 
 *Xinyixiangfayao Star Map (1088 AD)*
 
-### Restore Sky Map
+### Reconstruction of the Sky Map
 
 The Imperial Observatory of the Song Dynasty conducted several large-scale stellar observations with remarkable accuracy, surpassing all previous eras in precision. The data from the 4th year of the Huangyou era (1052 AD) is the most complete set that survives today. Based on these records, two significant star charts were produced: the *Xinyixiangfayao Star Map* (based on observational data from 1052 AD, created in 1088 AD) and the *Suzhou Star Map* (based on observational data from 1078 to 1085 AD, carved in 1247 AD).
 
@@ -34,21 +34,21 @@ Due to the limitations of observational technology and potential errors in trans
 
 ### Sun, Moon and Planets
 
-The Sun, the Moon, and the five major planets are collectively referred to as the *Seven Luminaries*. The sun and moon are named after *yin and yang*, while the pictographic characters "日" (sun) and "月" (moon) are also used. The five major planets represent the *five elements*, but the following names were the most orthodox designations at the time. Similar to other civilizations around the world, Venus also had additional names depending on whether it appeared in the morning or the evening.
+The Sun, the Moon, and the five major planets are collectively referred to as the *Seven Luminaries*. The sun and moon are named after *yin and yang*, while the pictographic characters "日" (sun, pinyin: Rì) and "月" (moon, pinyin: Yuè) are also used. The five major planets represent the *five elements*, but the following names were the most orthodox designations at the time. Similar to other civilizations around the world, Venus also had additional names depending on whether it appeared in the morning or the evening.
 
-Great Yang (太阳, Tàiyáng): The Sun. In Chinese philosophy, it represents the pinnacle of Yang energy.
+Great Yang (太阳, pinyin: Tàiyáng): The Sun. In Chinese philosophy, it represents the pinnacle of Yang energy.
 
-Great Yin (太阴, Tàiyīn): The Moon. It represents the pinnacle of Yin energy.
+Great Yin (太阴, pinyin: Tàiyīn): The Moon. It represents the pinnacle of Yin energy.
 
-Division Star (辰星, Chénxīng): Mercury. Since Mercury always moves within 30 degrees on either side of the Sun, the angular unit *Chen* was defined accordingly, representing 30 degrees. The celestial circle is divided into twelve *Chen*. Hence, Mercury came to be called the *Division Star*.
+Division Star (辰星, pinyin: Chénxīng): Mercury. Since Mercury always moves within 30 degrees on either side of the Sun, the angular unit *Chen* was defined accordingly, representing 30 degrees. The celestial circle is divided into twelve *Chen*. Hence, Mercury came to be called the *Division Star*.
 
-Grand White (太白, Tàibái): Venus. It is named for its extremely high brightness and pure white color.
+Grand White (太白, pinyin: Tàibái): Venus. It is named for its extremely high brightness and pure white color.
 
-Spark-Weaver (荧惑, Yínghuò): Mars. It is named for its fiery red color and its erratic, unpredictable orbit.
+Spark-Weaver (荧惑, pinyin: Yínghuò): Mars. It is named for its fiery red color and its erratic, unpredictable orbit.
 
-Year Star (岁星, Suìxīng): Jupiter. Jupiter's orbital period of approximately 12 years was used by the ancients to mark the cycle of years, hence its name.
+Year Star (岁星, pinyin: Suìxīng): Jupiter. Jupiter's orbital period of approximately 12 years was used by the ancients to mark the cycle of years, hence its name.
 
-Stabilizer Star (填星, Zhènxīng): Saturn. In traditional theory, Saturn was believed to take about 28 years to orbit the heavens, *guarding* or *filling* one lunar mansion each year.
+Stabilizer Star (填星, pinyin: Zhènxīng): Saturn. In traditional theory, Saturn was believed to take about 28 years to orbit the heavens, *guarding* or *filling* one lunar mansion each year.
 
 ## References
 
