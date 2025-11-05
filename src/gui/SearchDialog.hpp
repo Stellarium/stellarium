@@ -64,16 +64,19 @@ public:
 
 	QString getSelected(void) const;
 	void setValues(const QStringList&, const QStringList&);
+	void setValuesWithModules(const QStringList&, const QStringList&, const QMap<QString, QString>&);
 	bool isEmpty() const {return values.isEmpty();}
 	void appendValues(const QStringList&);
+	void appendValuesWithModules(const QStringList&, const QMap<QString, QString>&);
 	void appendRecentValues(const QStringList&);
 	void clearValues();
+	void setObjectMgr(class StelObjectMgr* mgr) { objectMgr = mgr; }
 
 	QStringList getValues(void) { return values; }
 	QStringList getRecentValues(void) { return recentValues; }
 	int getSelectedIdx() { return selectedIdx; }
 
-	// Bold recent objects
+	// Bold recent objects and display module info as object type
 	QVariant data(const QModelIndex &index, int role) const override;
 
 public slots:
@@ -86,6 +89,8 @@ private:
 	int selectedIdx;
 	QStringList values;
 	QStringList recentValues;
+	mutable QMap<QString, QString> objectModules; // Maps object name to module type (mutable for lazy caching)
+	class StelObjectMgr* objectMgr = nullptr; // For lazy module lookups
 };
 
 QT_FORWARD_DECLARE_CLASS(QListWidgetItem)
@@ -310,6 +315,7 @@ private:
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
 	QMap<QString, Vec3d> simbadResults; //! Simbad object name and J2000.0 coordinates
+	QMap<QString, QString> simbadObjectTypes; //! Simbad object name and object type
 	class StelObjectMgr* objectMgr;
 	class QSettings* conf;
 	QStringListModel* listModel;
@@ -380,4 +386,3 @@ public:
 };
 
 #endif // _SEARCHDIALOG_HPP
-
