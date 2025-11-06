@@ -233,7 +233,7 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 				qDebug() << "SkyCultureMaker: Added point to constellation at"
 					 << QString::number(point.v[0]) + "," + QString::number(point.v[1]) + "," +
 						    QString::number(point.v[2]);
-				appendDrawPoint(point, QString(""));
+				appendDrawPoint(point, QString());
 			}
 
 			event->accept();
@@ -435,10 +435,10 @@ std::optional<scm::SkyPoint> scm::ScmDraw::findNearestPoint(int x, int y, StelPr
 		return {};
 	}
 
-	auto min = drawnLines.begin();
+	auto minLine = drawnLines.begin();
 	Vec3d position(x, y, 0);
 	Vec3d minPosition;
-	prj->project(min->start.coordinate, minPosition);
+	prj->project(minLine->start.coordinate, minPosition);
 	double minDistance = (minPosition - position).dot(minPosition - position);
 	bool isStartPoint  = true;
 
@@ -450,7 +450,7 @@ std::optional<scm::SkyPoint> scm::ScmDraw::findNearestPoint(int x, int y, StelPr
 			double distance = (iPosition - position).dot(iPosition - position);
 			if (distance < minDistance)
 			{
-				min          = line;
+				minLine      = line;
 				minPosition  = iPosition;
 				minDistance  = distance;
 				isStartPoint = true;
@@ -462,7 +462,7 @@ std::optional<scm::SkyPoint> scm::ScmDraw::findNearestPoint(int x, int y, StelPr
 			double distance = (iPosition - position).dot(iPosition - position);
 			if (distance < minDistance)
 			{
-				min          = line;
+				minLine      = line;
 				minPosition  = iPosition;
 				minDistance  = distance;
 				isStartPoint = false;
@@ -472,18 +472,7 @@ std::optional<scm::SkyPoint> scm::ScmDraw::findNearestPoint(int x, int y, StelPr
 
 	if (minDistance < maxSnapRadiusInPixels * maxSnapRadiusInPixels)
 	{
-		if (isStartPoint)
-		{
-			SkyPoint point = {min->start.coordinate,
-			                  drawnLines.at(std::distance(drawnLines.begin(), min)).start.star};
-			return point;
-		}
-		else
-		{
-			SkyPoint point = {min->end.coordinate,
-			                  drawnLines.at(std::distance(drawnLines.begin(), min)).end.star};
-			return point;
-		}
+		return isStartPoint ? minLine->start : minLine->end;
 	}
 
 	return {};

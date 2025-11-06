@@ -37,13 +37,13 @@ struct SkyPoint
 	Vec3d coordinate = Vec3d(0, 0, 0);
 
 	//! The optional star at that coordinate.
-	QString star = QString("");
+	QString star = QString();
 
 	//! Resets the SkyPoint to default values.
 	void reset()
 	{
 		coordinate.set(0, 0, 0);
-		star = QString("");
+		star.clear();
 	}
 };
 } // namespace scm
