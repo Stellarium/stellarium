@@ -60,7 +60,7 @@ void scm::ScmDraw::setSearchMode(bool active)
 	inSearchMode = active;
 }
 
-void scm::ScmDraw::appendDrawPoint(const Vec3d &point, const std::optional<QString> &starID)
+void scm::ScmDraw::appendDrawPoint(const Vec3d &point, const QString &starID)
 {
 	if (hasFlag(drawState, (Drawing::hasStart | Drawing::hasFloatingEnd)))
 	{
@@ -233,7 +233,7 @@ void scm::ScmDraw::handleMouseClicks(class QMouseEvent *event)
 				qDebug() << "SkyCultureMaker: Added point to constellation at"
 					 << QString::number(point.v[0]) + "," + QString::number(point.v[1]) + "," +
 						    QString::number(point.v[2]);
-				appendDrawPoint(point, std::nullopt);
+				appendDrawPoint(point, QString(""));
 			}
 
 			event->accept();

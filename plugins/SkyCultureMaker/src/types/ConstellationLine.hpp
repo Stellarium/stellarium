@@ -77,11 +77,11 @@ struct ConstellationLine
 	{
 		QJsonArray json;
 
-		if (start.star.has_value())
+		if (!start.star.isEmpty())
 		{
-			QString formattedStarId = getFormattedStarId(start.star.value());
+			QString formattedStarId = getFormattedStarId(start.star);
 
-			if (start.star.value().contains("HIP"))
+			if (start.star.contains("HIP"))
 			{
 				// HIP are required as number
 				json.append(formattedStarId.toLongLong());
@@ -97,11 +97,11 @@ struct ConstellationLine
 			json.append("null");
 		}
 
-		if (end.star.has_value())
+		if (!end.star.isEmpty())
 		{
-			QString formattedStarId = getFormattedStarId(end.star.value());
+			QString formattedStarId = getFormattedStarId(end.star);
 
-			if (end.star.value().contains("HIP"))
+			if (end.star.contains("HIP"))
 			{
 				// HIP are required as number
 				json.append(formattedStarId.toLongLong());

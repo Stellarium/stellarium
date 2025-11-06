@@ -95,7 +95,7 @@ private:
 	 * @param point The coordinate in J2000 frame.
 	 * @param starID The id of the star to use.
 	 */
-	void appendDrawPoint(const Vec3d &point, const std::optional<QString> &starID);
+	void appendDrawPoint(const Vec3d &point, const QString &starID);
 
 	/**
 	 * @brief Indicates if two segments intersect.
