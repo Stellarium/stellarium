@@ -20,6 +20,7 @@
 #define STELSPEECHMGR_HPP
 
 #include "StelModule.hpp"
+#include "StelObject.hpp"
 #include <QObject>
 #include <QSettings>
 #include <QMap>
@@ -37,7 +38,11 @@ class QVoice;
 //!
 //! Sometimes, in the dark you may want voice output over reading small text on the screen.
 //! Calling a "narrate" action (default: Shift+R) for the selected object will provide some information.
-//! This functionality requires Qt6.6 and higher or else just emits the narration to logfile.
+//!
+//! Parallel to the InfoString settings which decide what information items to show,
+//! we use a similar structure to decide what data elements are being narrated.
+//!
+//! @note: This functionality requires Qt6.6 and higher or else just emits the narration to logfile.
 
 
 class StelSpeechMgr : public StelModule
@@ -60,6 +65,12 @@ public:
 	StelSpeechMgr();
 	~StelSpeechMgr() override;
 	void init() override;
+
+	//! Retrieve the currently active flags which information bits to narrate
+	const StelObject::InfoStringGroup& getNarrationTextFilters() const;
+
+	//! Set the currently active flags which information bits to narrate
+	void setNarrationTextFilters(const StelObject::InfoStringGroup &flags);
 
 signals:
 	void rateChanged(double);
@@ -124,6 +135,7 @@ private:
 	double m_rate;   // -1...1
 	double m_pitch;  // -1...1
 	double m_volume; // 0...1
+	StelObject::InfoStringGroup flags; //! Selection of info bits to be narrated
 };
 
 #endif // STELSPEECHMGR_HPP
