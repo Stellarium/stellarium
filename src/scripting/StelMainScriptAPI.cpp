@@ -36,6 +36,7 @@
 #include "StelApp.hpp"
 #include "StelAudioMgr.hpp"
 #include "StelVideoMgr.hpp"
+#include "StelSpeechMgr.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocation.hpp"
@@ -1621,4 +1622,13 @@ Vec2d StelMainScriptAPI::setWindowSize(int width, int height)
 	StelMainView &mainView=StelMainView::getInstance();
 	QRectF rect=mainView.setWindowSize(width, height);
 	return Vec2d(rect.width(), rect.height());
+}
+
+void StelMainScriptAPI::say(const QString &text)
+{
+	static StelSpeechMgr *speech=StelApp::getInstance().getStelSpeechMgr();
+	if (speech)
+		speech->say(text);
+	else
+		qWarning() << "Speech output problem in say()";
 }
