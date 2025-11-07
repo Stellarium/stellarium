@@ -746,6 +746,9 @@ public slots:
 	//! - y : y coordinate on the screen
 	static QVariantMap getScreenXYFromAltAzi(const QString& alt, const QString& azi);
 
+	//! Narrate a text with speech engine. (Requires Qt6.6 or later.)
+	void say(const QString &text);
+
 	//! Load a sound from a file.
 	//! @param filename the name of the file to load.
 	//! @param id the identifier which will be used to refer to the sound
