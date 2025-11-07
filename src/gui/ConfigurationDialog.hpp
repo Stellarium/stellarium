@@ -79,10 +79,16 @@ private slots:
 	void setDefaultSelectedInfo();
 	void setCustomSelectedInfo();
 	//! Set the selected object info fields from the "Displayed Fields" boxes.
-	//! Called when any of the boxes has been clicked. Sets the
-	//! "selected info" mode to "Custom".
+	//! Called when any of the boxes has been clicked.
+	//! Sets the "selected info" mode to "Custom".
 	void setSelectedInfoFromCheckBoxes();
 	void saveCustomSelectedInfo();
+
+	void setCustomSelectedNarration();
+	//! Set the selected object narration fields from the "Displayed Fields" boxes.
+	//! Called when any of the boxes has been clicked.
+	void setSelectedNarrationFromCheckBoxes();
+	void saveCustomSelectedNarration();
 
 	void updateCurrentLanguage();
 	void selectLanguage(const int id);    // id is index of name in QComboBox (must be called in a signal/slot connection!)
