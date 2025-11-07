@@ -255,3 +255,14 @@ void StelSpeechMgr::localeChanged(const QLocale &locale)
 }
 #endif
 
+//! Retrieve the currently active flags which information bits to narrate
+const StelObject::InfoStringGroup& StelSpeechMgr::getNarrationTextFilters() const
+{
+	return flags;
+}
+
+//! Set the currently active flags which information bits to narrate
+void StelSpeechMgr::setNarrationTextFilters(const StelObject::InfoStringGroup &flags)
+{
+	this->flags=flags;
+}
