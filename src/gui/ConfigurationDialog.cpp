@@ -439,8 +439,30 @@ void ConfigurationDialog::createDialogContent()
 	ui->configurationStackedWidget->removeWidget(ui->page_Scripts); // only hide, no delete!
 	QListWidgetItem *item = ui->stackListWidget->takeItem(5); // take out from its place.
 	ui->stackListWidget->addItem(item); // We must add it back to the end of the tabs, as...
-	ui->stackListWidget->item(6)->setHidden(true); // deleting would cause a crash during retranslation. (GH#2544)
+	ui->stackListWidget->item(ui->stackListWidget->count()-1)->setHidden(true); // deleting would cause a crash during retranslation. (GH#2544)
 	#endif
+
+#if not ((QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA))
+	ui->groupBoxDisplayedFields->setTitle(q_("Displayed fields"));
+
+	const QList<QCheckBox *> narrationCheckboxes({ui->checkBoxName_Narrate, ui->checkBoxCatalogNumbers_Narrate, ui->checkBoxRaDecJ2000_Narrate,
+				ui->checkBoxRaDecOfDate_Narrate, ui->checkBoxHourAngle_Narrate, ui->checkBoxAltAz_Narrate,
+				ui->checkBoxEclipticCoordsJ2000_Narrate, ui->checkBoxEclipticCoordsOfDate_Narrate, ui->checkBoxGalacticCoordinates_Narrate,
+				ui->checkBoxSupergalacticCoordinates_Narrate, ui->checkBoxOtherCoords_Narrate, ui->checkBoxElongation_Narrate,
+				ui->checkBoxVisualMag_Narrate, ui->checkBoxAbsoluteMag_Narrate, ui->checkBoxType_Narrate,
+				ui->checkBoxSize_Narrate, ui->checkBoxVelocity_Narrate, ui->checkBoxProperMotion_Narrate,
+				ui->checkBoxDistance_Narrate, ui->checkBoxSiderealTime_Narrate, ui->checkBoxConstellation_Narrate,
+				ui->checkBoxRTSTime_Narrate, ui->checkBoxSolarLunarPosition_Narrate, ui->checkBoxExtra_Narrate});
+	for (QCheckBox *cb: narrationCheckboxes)
+		cb->hide();
+
+	ui->configurationStackedWidget->removeWidget(ui->page_Speech); // only hide, no delete!
+	QList<QListWidgetItem *> lwItemList=ui->stackListWidget->findItems("Speech", Qt::MatchExactly);
+	int pos = ui->stackListWidget->indexFromItem(lwItemList.first()).row();
+	QListWidgetItem *speechItem = ui->stackListWidget->takeItem(pos); // take out from its place.
+	ui->stackListWidget->addItem(speechItem); // We must add it back to the end of the tabs, as...
+	ui->stackListWidget->item(ui->stackListWidget->count()-1)->setHidden(true); // deleting would cause a crash during retranslation. (GH#2544)
+#endif
 
 	// plugins control
 	connect(ui->pluginsListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(pluginsSelectionChanged(QListWidgetItem*, QListWidgetItem*)));
