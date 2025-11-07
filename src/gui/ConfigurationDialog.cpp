@@ -24,6 +24,7 @@
 #include "CustomDeltaTEquationDialog.hpp"
 #include "ConfigureScreenshotsDialog.hpp"
 #include "StelMainView.hpp"
+#include "StelSpeechMgr.hpp"
 #include "ui_configurationDialog.h"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
@@ -225,7 +226,8 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->defaultSelectedInfoRadio, SIGNAL(released()), this, SLOT(setDefaultSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
 	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
-	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(setSelectedInfoFromCheckBoxes()));
+	connect(ui->buttonGroupDisplayedFields, &QButtonGroup::buttonClicked, this, &ConfigurationDialog::setSelectedInfoFromCheckBoxes);
+	connect(ui->buttonGroupNarrateFields,   &QButtonGroup::buttonClicked, this, &ConfigurationDialog::setSelectedNarrationFromCheckBoxes);
 	if (appGui)
 		connect(appGui, SIGNAL(infoStringChanged()), this, SLOT(updateSelectedInfoGui()));
 	
@@ -800,6 +802,159 @@ void ConfigurationDialog::saveCustomSelectedInfo()
 	conf->setValue("flag_show_solar_lunar",			static_cast<bool>(flags & StelObject::SolarLunarPosition));
 	conf->endGroup();
 }
+
+void ConfigurationDialog::setSelectedNarrationFromCheckBoxes()
+{
+	StelObject::InfoStringGroup flags(StelObject::None);
+
+	if (ui->checkBoxName_Narrate->isChecked())
+		flags |= StelObject::Name;
+	if (ui->checkBoxCatalogNumbers_Narrate->isChecked())
+		flags |= StelObject::CatalogNumber;
+	if (ui->checkBoxVisualMag_Narrate->isChecked())
+		flags |= StelObject::Magnitude;
+	if (ui->checkBoxAbsoluteMag_Narrate->isChecked())
+		flags |= StelObject::AbsoluteMagnitude;
+	if (ui->checkBoxRaDecJ2000_Narrate->isChecked())
+		flags |= StelObject::RaDecJ2000;
+	if (ui->checkBoxRaDecOfDate_Narrate->isChecked())
+		flags |= StelObject::RaDecOfDate;
+	if (ui->checkBoxHourAngle_Narrate->isChecked())
+		flags |= StelObject::HourAngle;
+	if (ui->checkBoxAltAz_Narrate->isChecked())
+		flags |= StelObject::AltAzi;
+	if (ui->checkBoxDistance_Narrate->isChecked())
+		flags |= StelObject::Distance;
+	if (ui->checkBoxVelocity_Narrate->isChecked())
+		flags |= StelObject::Velocity;
+	if (ui->checkBoxProperMotion_Narrate->isChecked())
+		flags |= StelObject::ProperMotion;
+	if (ui->checkBoxSize_Narrate->isChecked())
+		flags |= StelObject::Size;
+	if (ui->checkBoxExtra_Narrate->isChecked())
+		flags |= StelObject::Extra;
+	if (ui->checkBoxGalacticCoordinates_Narrate->isChecked())
+		flags |= StelObject::GalacticCoord;
+	if (ui->checkBoxSupergalacticCoordinates_Narrate->isChecked())
+		flags |= StelObject::SupergalacticCoord;
+	if (ui->checkBoxOtherCoords_Narrate->isChecked())
+		flags |= StelObject::OtherCoord;
+	if (ui->checkBoxElongation_Narrate->isChecked())
+		flags |= StelObject::Elongation;
+	if (ui->checkBoxType_Narrate->isChecked())
+		flags |= StelObject::ObjectType;
+	if (ui->checkBoxEclipticCoordsJ2000_Narrate->isChecked())
+		flags |= StelObject::EclipticCoordJ2000;
+	if (ui->checkBoxEclipticCoordsOfDate_Narrate->isChecked())
+		flags |= StelObject::EclipticCoordOfDate;
+	if (ui->checkBoxConstellation_Narrate->isChecked())
+		flags |= StelObject::IAUConstellation;
+	if (ui->checkBoxSiderealTime_Narrate->isChecked())
+		flags |= StelObject::SiderealTime;
+	if (ui->checkBoxRTSTime_Narrate->isChecked())
+		flags |= StelObject::RTSTime;
+	if (ui->checkBoxSolarLunarPosition_Narrate->isChecked())
+		flags |= StelObject::SolarLunarPosition;
+
+	StelApp::getInstance().getStelSpeechMgr()->setNarrationTextFilters(flags);
+	// overwrite custom selected info settings
+	saveCustomSelectedNarration();
+}
+
+void ConfigurationDialog::setCustomSelectedNarration()
+{
+	StelObject::InfoStringGroup flags(StelObject::None);
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	if (conf->value("custom_selected_info/flag_narration_name", false).toBool())
+		flags |= StelObject::Name;
+	if (conf->value("custom_selected_info/flag_narration_catalognumber", false).toBool())
+		flags |= StelObject::CatalogNumber;
+	if (conf->value("custom_selected_info/flag_narration_magnitude", false).toBool())
+		flags |= StelObject::Magnitude;
+	if (conf->value("custom_selected_info/flag_narration_absolutemagnitude", false).toBool())
+		flags |= StelObject::AbsoluteMagnitude;
+	if (conf->value("custom_selected_info/flag_narration_radecj2000", false).toBool())
+		flags |= StelObject::RaDecJ2000;
+	if (conf->value("custom_selected_info/flag_narration_radecofdate", false).toBool())
+		flags |= StelObject::RaDecOfDate;
+	if (conf->value("custom_selected_info/flag_narration_hourangle", false).toBool())
+		flags |= StelObject::HourAngle;
+	if (conf->value("custom_selected_info/flag_narration_altaz", false).toBool())
+		flags |= StelObject::AltAzi;
+	if (conf->value("custom_selected_info/flag_narration_elongation", false).toBool())
+		flags |= StelObject::Elongation;
+	if (conf->value("custom_selected_info/flag_narration_distance", false).toBool())
+		flags |= StelObject::Distance;
+	if (conf->value("custom_selected_info/flag_narration_velocity", false).toBool())
+		flags |= StelObject::Velocity;
+	if (conf->value("custom_selected_info/flag_narration_propermotion", false).toBool())
+		flags |= StelObject::ProperMotion;
+	if (conf->value("custom_selected_info/flag_narration_size", false).toBool())
+		flags |= StelObject::Size;
+	if (conf->value("custom_selected_info/flag_narration_extra", false).toBool())
+		flags |= StelObject::Extra;
+	if (conf->value("custom_selected_info/flag_narration_galcoord", false).toBool())
+		flags |= StelObject::GalacticCoord;
+	if (conf->value("custom_selected_info/flag_narration_supergalcoord", false).toBool())
+		flags |= StelObject::SupergalacticCoord;
+	if (conf->value("custom_selected_info/flag_narration_othercoord", false).toBool())
+		flags |= StelObject::OtherCoord;
+	if (conf->value("custom_selected_info/flag_narration_type", false).toBool())
+		flags |= StelObject::ObjectType;
+	if (conf->value("custom_selected_info/flag_narration_eclcoordofdate", false).toBool())
+		flags |= StelObject::EclipticCoordOfDate;
+	if (conf->value("custom_selected_info/flag_narration_eclcoordj2000", false).toBool())
+		flags |= StelObject::EclipticCoordJ2000;
+	if (conf->value("custom_selected_info/flag_narration_constellation", false).toBool())
+		flags |= StelObject::IAUConstellation;
+	if (conf->value("custom_selected_info/flag_narration_sidereal_time", false).toBool())
+		flags |= StelObject::SiderealTime;
+	if (conf->value("custom_selected_info/flag_narration_rts_time", false).toBool())
+		flags |= StelObject::RTSTime;
+	if (conf->value("custom_selected_info/flag_narration_solar_lunar", false).toBool())
+		flags |= StelObject::SolarLunarPosition;
+
+	StelApp::getInstance().getStelSpeechMgr()->setNarrationTextFilters(flags);
+	updateSelectedInfoCheckBoxes();
+}
+
+void ConfigurationDialog::saveCustomSelectedNarration()
+{
+	// configuration dialog / selected object info tab
+	const StelObject::InfoStringGroup& flags = StelApp::getInstance().getStelSpeechMgr()->getNarrationTextFilters();
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	conf->beginGroup("custom_selected_info");
+	conf->setValue("flag_narration_name",			static_cast<bool>(flags & StelObject::Name));
+	conf->setValue("flag_narration_catalognumber",		static_cast<bool>(flags & StelObject::CatalogNumber));
+	conf->setValue("flag_narration_magnitude",		static_cast<bool>(flags & StelObject::Magnitude));
+	conf->setValue("flag_narration_absolutemagnitude",	static_cast<bool>(flags & StelObject::AbsoluteMagnitude));
+	conf->setValue("flag_narration_radecj2000",		static_cast<bool>(flags & StelObject::RaDecJ2000));
+	conf->setValue("flag_narration_radecofdate",		static_cast<bool>(flags & StelObject::RaDecOfDate));
+	conf->setValue("flag_narration_hourangle",		static_cast<bool>(flags & StelObject::HourAngle));
+	conf->setValue("flag_narration_altaz",			static_cast<bool>(flags & StelObject::AltAzi));
+	conf->setValue("flag_narration_elongation",		static_cast<bool>(flags & StelObject::Elongation));
+	conf->setValue("flag_narration_distance",		static_cast<bool>(flags & StelObject::Distance));
+	conf->setValue("flag_narration_velocity",		static_cast<bool>(flags & StelObject::Velocity));
+	conf->setValue("flag_narration_propermotion",		static_cast<bool>(flags & StelObject::ProperMotion));
+	conf->setValue("flag_narration_size",			static_cast<bool>(flags & StelObject::Size));
+	conf->setValue("flag_narration_extra",			static_cast<bool>(flags & StelObject::Extra));
+	conf->setValue("flag_narration_galcoord",		static_cast<bool>(flags & StelObject::GalacticCoord));
+	conf->setValue("flag_narration_supergalcoord",		static_cast<bool>(flags & StelObject::SupergalacticCoord));
+	conf->setValue("flag_narration_othercoord",		static_cast<bool>(flags & StelObject::OtherCoord));
+	conf->setValue("flag_narration_type",			static_cast<bool>(flags & StelObject::ObjectType));
+	conf->setValue("flag_narration_eclcoordofdate",		static_cast<bool>(flags & StelObject::EclipticCoordOfDate));
+	conf->setValue("flag_narration_eclcoordj2000",		static_cast<bool>(flags & StelObject::EclipticCoordJ2000));
+	conf->setValue("flag_narration_constellation",		static_cast<bool>(flags & StelObject::IAUConstellation));
+	conf->setValue("flag_narration_sidereal_time",		static_cast<bool>(flags & StelObject::SiderealTime));
+	conf->setValue("flag_narration_rts_time",		static_cast<bool>(flags & StelObject::RTSTime));
+	conf->setValue("flag_narration_solar_lunar",		static_cast<bool>(flags & StelObject::SolarLunarPosition));
+	conf->endGroup();
+}
+
 
 void ConfigurationDialog::browseForScreenshotDir()
 {
@@ -1903,6 +2058,36 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxSiderealTime->setChecked(flags & StelObject::SiderealTime);
 	ui->checkBoxRTSTime->setChecked(flags & StelObject::RTSTime);
 	ui->checkBoxSolarLunarPosition->setChecked(flags & StelObject::SolarLunarPosition);
+
+#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
+	static StelSpeechMgr *speech=StelApp::getInstance().getStelSpeechMgr();
+	const StelObject::InfoStringGroup& nFlags = speech->getNarrationTextFilters();
+
+	ui->checkBoxName_Narrate->setChecked(nFlags & StelObject::Name);
+	ui->checkBoxCatalogNumbers_Narrate->setChecked(nFlags & StelObject::CatalogNumber);
+	ui->checkBoxVisualMag_Narrate->setChecked(nFlags & StelObject::Magnitude);
+	ui->checkBoxAbsoluteMag_Narrate->setChecked(nFlags & StelObject::AbsoluteMagnitude);
+	ui->checkBoxRaDecJ2000_Narrate->setChecked(nFlags & StelObject::RaDecJ2000);
+	ui->checkBoxRaDecOfDate_Narrate->setChecked(nFlags & StelObject::RaDecOfDate);
+	ui->checkBoxHourAngle_Narrate->setChecked(nFlags & StelObject::HourAngle);
+	ui->checkBoxAltAz_Narrate->setChecked(nFlags & StelObject::AltAzi);
+	ui->checkBoxDistance_Narrate->setChecked(nFlags & StelObject::Distance);
+	ui->checkBoxVelocity_Narrate->setChecked(nFlags & StelObject::Velocity);
+	ui->checkBoxProperMotion_Narrate->setChecked(nFlags & StelObject::ProperMotion);
+	ui->checkBoxSize_Narrate->setChecked(nFlags & StelObject::Size);
+	ui->checkBoxExtra_Narrate->setChecked(nFlags & StelObject::Extra);
+	ui->checkBoxGalacticCoordinates_Narrate->setChecked(nFlags & StelObject::GalacticCoord);
+	ui->checkBoxSupergalacticCoordinates_Narrate->setChecked(nFlags & StelObject::SupergalacticCoord);
+	ui->checkBoxOtherCoords_Narrate->setChecked(nFlags & StelObject::OtherCoord);
+	ui->checkBoxElongation_Narrate->setChecked(nFlags & StelObject::Elongation);
+	ui->checkBoxType_Narrate->setChecked(nFlags & StelObject::ObjectType);
+	ui->checkBoxEclipticCoordsJ2000_Narrate->setChecked(nFlags & StelObject::EclipticCoordJ2000);
+	ui->checkBoxEclipticCoordsOfDate_Narrate->setChecked(nFlags & StelObject::EclipticCoordOfDate);
+	ui->checkBoxConstellation_Narrate->setChecked(nFlags & StelObject::IAUConstellation);
+	ui->checkBoxSiderealTime_Narrate->setChecked(nFlags & StelObject::SiderealTime);
+	ui->checkBoxRTSTime_Narrate->setChecked(nFlags & StelObject::RTSTime);
+	ui->checkBoxSolarLunarPosition_Narrate->setChecked(nFlags & StelObject::SolarLunarPosition);
+#endif
 
 	if (StelApp::getInstance().getFlagImmediateSave())
 	{
