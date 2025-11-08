@@ -672,7 +672,11 @@
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QCheckBox" name="checkBoxName_Narrate"/>
+              <widget class="QCheckBox" name="checkBoxName_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="0" column="2">
               <widget class="QLabel" name="label_infoName">
@@ -692,7 +696,11 @@
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QCheckBox" name="checkBoxCatalogNumbers_Narrate"/>
+              <widget class="QCheckBox" name="checkBoxCatalogNumbers_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="1" column="2">
               <widget class="QLabel" name="label_infoCat">
@@ -719,7 +727,10 @@
                <property name="toolTip">
                 <string>Equatorial coordinates, equinox of J2000.0</string>
                </property>
-              </widget>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="2" column="2">
               <widget class="QLabel" name="label_infoRaDec2000">
@@ -747,7 +758,7 @@
                 <string comment="right ascension">Equatorial coordinates, equinox of date</string>
                </property>
                <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedFields</string>
+                <string notr="true">buttonGroupNarrateFields</string>
                </attribute>
               </widget>
              </item>
@@ -776,7 +787,10 @@
                <property name="toolTip">
                 <string comment="hour angle">Equatorial coordinates, equinox of date</string>
                </property>
-              </widget>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="4" column="2">
               <widget class="QLabel" name="label_infoHADec">
@@ -803,7 +817,10 @@
                <property name="toolTip">
                 <string>Horizontal coordinates</string>
                </property>
-              </widget>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="5" column="2">
               <widget class="QLabel" name="label_infoAltAz">
@@ -830,7 +847,10 @@
                <property name="toolTip">
                 <string>Ecliptic coordinates, equinox J2000.0</string>
                </property>
-              </widget>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="6" column="2">
               <widget class="QLabel" name="label_infoEcl2000">
@@ -857,7 +877,10 @@
                <property name="toolTip">
                 <string>Ecliptic coordinates, equinox of date (only for Earth)</string>
                </property>
-              </widget>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="7" column="2">
               <widget class="QLabel" name="label_infoEcl">
@@ -877,7 +900,11 @@
               </widget>
              </item>
              <item row="8" column="1">
-              <widget class="QCheckBox" name="checkBoxGalacticCoordinates_Narrate"/>
+              <widget class="QCheckBox" name="checkBoxGalacticCoordinates_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="8" column="2">
               <widget class="QLabel" name="label_infoGalCoords">
@@ -897,7 +924,11 @@
               </widget>
              </item>
              <item row="9" column="1">
-              <widget class="QCheckBox" name="checkBoxSupergalacticCoordinates_Narrate"/>
+              <widget class="QCheckBox" name="checkBoxSupergalacticCoordinates_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="9" column="2">
               <widget class="QLabel" name="label_infoSGalCoords">
@@ -917,7 +948,11 @@
               </widget>
              </item>
              <item row="10" column="1">
-              <widget class="QCheckBox" name="checkBoxOtherCoords_Narrate"/>
+              <widget class="QCheckBox" name="checkBoxOtherCoords_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="10" column="2">
               <widget class="QLabel" name="label_infoOtherCoords">
@@ -944,7 +979,10 @@
                <property name="toolTip">
                 <string>Elongation and phase angle</string>
                </property>
-              </widget>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="11" column="2">
               <widget class="QLabel" name="label_infoElongation">
@@ -960,7 +998,7 @@
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
-                 <width>60</width>
+                 <width>15</width>
                  <height>0</height>
                 </size>
                </property>
@@ -977,7 +1015,11 @@
               </widget>
              </item>
              <item row="0" column="5">
-              <widget class="QCheckBox" name="checkBoxVisualMag_Narrate"/>
+              <widget class="QCheckBox" name="checkBoxVisualMag_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="0" column="6">
               <widget class="QLabel" name="label_infoVisualMag">
@@ -997,7 +1039,11 @@
               </widget>
              </item>
              <item row="1" column="5">
-              <widget class="QCheckBox" name="checkBoxAbsoluteMag_Narrate"/>
+              <widget class="QCheckBox" name="checkBoxAbsoluteMag_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="1" column="6">
               <widget class="QLabel" name="label_infoAbsoluteMag">
@@ -1024,7 +1070,10 @@
                <property name="toolTip">
                 <string>The type of the object (star, planet, etc.)</string>
                </property>
-              </widget>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="2" column="6">
               <widget class="QLabel" name="label_infoType">
@@ -1051,7 +1100,10 @@
                <property name="toolTip">
                 <string>Angular or physical size</string>
                </property>
-              </widget>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="3" column="6">
               <widget class="QLabel" name="label_infoSize">
@@ -1071,7 +1123,11 @@
               </widget>
              </item>
              <item row="4" column="5">
-              <widget class="QCheckBox" name="checkBoxVelocity_Narrate"/>
+              <widget class="QCheckBox" name="checkBoxVelocity_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="4" column="6">
               <widget class="QLabel" name="label_infoVelocity">
@@ -1098,7 +1154,10 @@
                <property name="toolTip">
                 <string/>
                </property>
-              </widget>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="5" column="6">
               <widget class="QLabel" name="label_infoProperMotion">
@@ -1118,7 +1177,11 @@
               </widget>
              </item>
              <item row="6" column="5">
-              <widget class="QCheckBox" name="checkBoxDistance_Narrate"/>
+              <widget class="QCheckBox" name="checkBoxDistance_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="6" column="6">
               <widget class="QLabel" name="label_infoDistance">
@@ -1138,7 +1201,11 @@
               </widget>
              </item>
              <item row="7" column="5">
-              <widget class="QCheckBox" name="checkBoxSiderealTime_Narrate"/>
+              <widget class="QCheckBox" name="checkBoxSiderealTime_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="7" column="6">
               <widget class="QLabel" name="label_infoSiderealTime">
@@ -1165,7 +1232,10 @@
                <property name="toolTip">
                 <string>Voice output of constellation</string>
                </property>
-              </widget>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="8" column="6">
               <widget class="QLabel" name="label_infoConstellation">
@@ -1188,7 +1258,11 @@
               </widget>
              </item>
              <item row="9" column="5">
-              <widget class="QCheckBox" name="checkBoxRTSTime_Narrate"/>
+              <widget class="QCheckBox" name="checkBoxRTSTime_Narrate">
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="9" column="6">
               <widget class="QLabel" name="label_infoRTS">
@@ -1215,7 +1289,10 @@
                <property name="toolTip">
                 <string>Voice output of Solar and Lunar positions if observed from Earth</string>
                </property>
-              </widget>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="10" column="6">
               <widget class="QLabel" name="label_infoSolarLunarPosition">
@@ -1242,7 +1319,10 @@
                <property name="toolTip">
                 <string>Spectral class, nebula type, etc.</string>
                </property>
-              </widget>
+                <attribute name="buttonGroup">
+                <string notr="true">buttonGroupNarrateFields</string>
+               </attribute>
+	      </widget>
              </item>
              <item row="11" column="6">
               <widget class="QLabel" name="label_infoExtra">
@@ -3411,6 +3491,11 @@
  </connections>
  <buttongroups>
   <buttongroup name="buttonGroupDisplayedFields">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="buttonGroupNarrateFields">
    <property name="exclusive">
     <bool>false</bool>
    </property>
