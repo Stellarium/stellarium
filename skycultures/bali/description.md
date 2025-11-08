@@ -30,7 +30,6 @@ In anchoring the artwork, we chose to use the re-paint image from the existing s
 <table>
     <tr valign="top">
         <td><b>Name</b></td>
-        <td><b>Original Balinese </b></td>
         <td><b>Translation</b> (literally)</td>
         <td><b>Picture</b></td>
     </tr>
