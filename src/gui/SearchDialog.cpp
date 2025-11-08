@@ -1303,7 +1303,7 @@ void SearchDialog::onSimbadStatusChanged()
 			filteredSimbadNames.append(objName);
 			QString objType = simbadObjectTypes.value(objName, "");
 			if (!objType.isEmpty())
-				moduleInfo[objName] = QString("SIMBAD; %1").arg(objType);
+				moduleInfo[objName] = QString("SIMBAD; %1").arg(qc_(objType, "SIMBAD object type"));
 			else
 				moduleInfo[objName] = "SIMBAD";
 		}
