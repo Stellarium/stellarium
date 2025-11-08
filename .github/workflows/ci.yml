@@ -10,6 +10,9 @@ on:
     # The branches below must be a subset of the branches above
     branches: [master]
 
+env:
+  parallel_processes: 4 # A good default counts is: available Threads
+
 jobs:
   # CI on Linux (Qt5)
   ci-linux-qt5:
@@ -45,7 +48,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j3
+      run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -89,7 +92,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j3
+      run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -135,7 +138,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j3
+      run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -178,7 +181,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j3
+      run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -225,7 +228,7 @@ jobs:
 
     - name: Compile
       working-directory: build
-      run: make -j3
+      run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
       uses: coactions/setup-xvfb@v1
@@ -233,83 +236,84 @@ jobs:
         working-directory: build
         run: ctest --output-on-failure
 
-  # CI on FreeBSD (Qt5)
-  ci-freebsd-qt5:
-    name: "FreeBSD (x86_64; qt5)"
-    runs-on: ubuntu-latest
+  # CI on Windows (Qt5)
+  ci-windows-qt5:
+    name: "Windows (x86_64; qt5)"
+    runs-on: windows-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v5
 
-    - name: Build and run unit tests in FreeBSD
-      uses: vmactions/freebsd-vm@v1
-      id: freebsd-qt5
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v4
       with:
-        release: "14.3"
-        # Use sh shell
-        usesh: true
-        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
-        copyback: false
-        prepare: |
-          pkg install -y cmake git eigen glm exiv2 nlopt fast_float md4c qxlsx perl5 xorg-vfbserver gettext qt5-charts qt5-concurrent qt5-core \
-                         qt5-gui qt5-network qt5-opengl qt5-widgets qt5-multimedia qt5-webengine qt5-buildtools qt5-qmake qt5-script qt5-testlib \
-                         qt5-linguisttools
+        aqtversion: '==3.3.*'
+        version: '5.12.12'
+        host: 'windows'
+        target: 'desktop'
+        cache: true
+        arch: 'win64_msvc2017_64'
+        modules: 'debug_info qtcharts qtscript qtvirtualkeyboard qtwebengine'
 
-        run: |
-          set -e -x
-          export DISPLAY=:0
-          mkdir builds
-          cd builds
-          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-                -DSTELLARIUM_RELEASE_BUILD=Off \
-                -DENABLE_TESTING=On \
-                -DENABLE_QT6=Off \
-                "${{ github.workspace }}"
-          make -j3
-          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
-          sleep 3
-          ctest --output-on-failure
-          sleep 1
-          pkill Xvfb
+    # Packages should be automatically downloaded using vcpkg through the toolchain
+    - name: Configure CMake
+      env:
+        CMAKE_PREFIX_PATH: ${{env.QT_ROOT_DIR}}
+      # Choose CMakeLists.text from a specific source directory with -S.
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: |
+        cmake -B build -S "${{ github.workspace }}" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On -DCMAKE_INSTALL_PREFIX=stellarium-bin -G "Visual Studio 17 2022" -A x64
 
-  # CI on FreeBSD (Qt6)
-#  ci-freebsd-qt6:
-#    name: "FreeBSD (x86_64; qt6)"
-#    runs-on: ubuntu-latest
-#    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
-#
-#    steps:
-#    - name: Checkout repository
-#      uses: actions/checkout@v5
-#
-#    - name: Build and run unit tests in FreeBSD
-#      uses: vmactions/freebsd-vm@v1
-#      id: freebsd-qt6
-#      with:
-#        release: "14.3"
-#        # Use sh shell
-#        usesh: true
-#        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
-#        copyback: false
-#        prepare: |
-#          pkg install -y cmake git eigen glm exiv2 nlopt fast_float md4c qxlsx-qt6 perl5 xorg-vfbserver gettext qt6
-#
-#        run: |
-#          set -e -x
-#          export DISPLAY=:0
-#          export CMAKE_PREFIX_PATH="/usr/local:$CMAKE_PREFIX_PATH"
-#          mkdir builds
-#          cd builds
-#          cmake -DCMAKE_PREFIX_PATH="/usr/local" \
-#                -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-#                -DSTELLARIUM_RELEASE_BUILD=Off \
-#                -DENABLE_TESTING=On \
-#                "${{ github.workspace }}"
-#          make -j3
-#          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
-#          sleep 3
-#          ctest --output-on-failure
-#          sleep 1
-#          pkill Xvfb
+    - name: Build
+      # Build your program with the given configuration
+      run: |
+        cmake --build build --config RelWithDebInfo -j ${{env.parallel_processes}} --target install
+
+#    - name: Run unit tests
+#      run: |
+#        cd ${{ github.workspace }}\build
+#        ctest --output-on-failure -C RelWithDebInfo
+
+ # CI on Windows (Qt6)
+  ci-windows-qt6:
+    name: "Windows (x86_64; qt6)"
+    runs-on: windows-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v5
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v4
+      with:
+        aqtversion: '==3.3.*'
+        version: '6.8.3'
+        host: 'windows'
+        target: 'desktop'
+        cache: true
+        arch: 'win64_msvc2022_64'
+        modules: 'qtcharts qtimageformats qtlocation qtmultimedia qtpositioning qtscxml qtsensors qtserialbus qtserialport qtvirtualkeyboard qtwebchannel qtwebengine qtwebsockets qtwebview debug_info qt5compat qtquicktimeline qtshadertools'
+
+    # Packages should be automatically downloaded using vcpkg through the toolchain
+    - name: Configure CMake
+      env:
+        CMAKE_PREFIX_PATH: ${{env.QT_ROOT_DIR}}
+      # Choose CMakeLists.text from a specific source directory with -S.
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: |
+        cmake -B build -S "${{ github.workspace }}" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On -DCMAKE_INSTALL_PREFIX=stellarium-bin -DSCM_SHOULD_ENABLE_CONVERTER=OFF -G "Visual Studio 17 2022" -A x64
+
+    - name: Build
+      # Build your program with the given configuration
+      run: |
+        cmake --build build --config RelWithDebInfo -j ${{env.parallel_processes}} --target install
+
+#    - name: Run unit tests
+#      run: |
+#        cd ${{ github.workspace }}\build
+#        ctest --output-on-failure -C RelWithDebInfo
