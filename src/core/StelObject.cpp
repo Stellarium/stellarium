@@ -320,7 +320,7 @@ float StelObject::getVMagnitudeWithExtinction(const StelCore* core, const float 
 {
 	Vec3d altAzPos = getAltAzPosGeometric(core);
 	altAzPos.normalize();
-	float vMag = (knownVMag>-1000.f ? knownVMag : getVMagnitude(core) + magoffset);
+	float vMag = (knownVMag>-1000.f ? knownVMag + magoffset : getVMagnitude(core) + magoffset);
 	// without the test, planets flicker stupidly in fullsky atmosphere-less view.
 	if (core->getSkyDrawer()->getFlagHasAtmosphere())
 		core->getSkyDrawer()->getExtinction().forward(altAzPos, &vMag);
@@ -347,7 +347,7 @@ QString StelObject::getMagnitudeInfoString(const StelCore *core, const InfoStrin
 	if (flags&Magnitude)
 	{
 		float mag = getVMagnitude(core);
-		QString str = QString("%1: <b>%2</b>").arg(q_("Magnitude"), QString::number(getVMagnitude(core) + magoffset, 'f', decimals));
+		QString str = QString("%1: <b>%2</b>").arg(q_("Magnitude"), QString::number(mag + magoffset, 'f', decimals));
 		const float airmass = getAirmass(core);
 		if (airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
 			str += QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core, mag, magoffset), 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
