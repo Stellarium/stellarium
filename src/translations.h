@@ -621,6 +621,73 @@ class Translations
 		N_("Jupiter's Moons Orbital Simulation");
 
 		// =====================================================================
+		// Translatable SIMBAD object types (SIMBAD: Object types - https://simbad.cds.unistra.fr/guide/otypes.htx)
+
+		NC_("Star", "SIMBAD object type");
+		NC_("Massive Star", "SIMBAD object type");
+		NC_("beta Cep Variable", "SIMBAD object type");
+		NC_("Evolved Supergiant", "SIMBAD object type");
+		NC_("Red Supergiant", "SIMBAD object type");
+		NC_("Yellow Supergiant", "SIMBAD object type");
+		NC_("Blue Supergiant", "SIMBAD object type");
+		NC_("Wolf-Rayet", "SIMBAD object type");
+		NC_("LBV=Luminous Blue Variable", "SIMBAD object type");
+		NC_("Neutron Star", "SIMBAD object type");
+		NC_("Pulsar", "SIMBAD object type");
+		NC_("Cluster of Stars", "SIMBAD object type");
+		NC_("Globular Cluster", "SIMBAD object type");
+		NC_("Open Cluster", "SIMBAD object type");
+		NC_("Association of Stars", "SIMBAD object type");
+		NC_("Stellar Stream", "SIMBAD object type");
+		NC_("Moving Group", "SIMBAD object type");
+		NC_("Interstellar Medium Object", "SIMBAD object type");
+		NC_("Star Forming Region", "SIMBAD object type");
+		NC_("HII Region", "SIMBAD object type");
+		NC_("Cloud", "SIMBAD object type");
+		NC_("Nebula", "SIMBAD object type");
+		NC_("Reflection Nebula", "SIMBAD object type");
+		NC_("Molecular Cloud", "SIMBAD object type");
+		NC_("Dark Cloud (nebula)", "SIMBAD object type");
+		NC_("Globule (low-mass dark cloud)", "SIMBAD object type");
+		NC_("Cometary Globule / Pillar", "SIMBAD object type");
+		NC_("High-velocity Cloud", "SIMBAD object type");
+		NC_("Dense Core", "SIMBAD object type");
+		NC_("Bubble", "SIMBAD object type");
+		NC_("SuperNova Remnant", "SIMBAD object type");
+		NC_("Interstellar Shell", "SIMBAD object type");
+		NC_("Interstellar Filament", "SIMBAD object type");
+		NC_("Galaxy", "SIMBAD object type");
+		NC_("Low Surface Brightness Galaxy", "SIMBAD object type");
+		NC_("Blue Compact Galaxy", "SIMBAD object type");
+		NC_("Starburst Galaxy", "SIMBAD object type");
+		NC_("HII Galaxy", "SIMBAD object type");
+		NC_("Emission-line galaxy", "SIMBAD object type");
+		NC_("Active Galaxy Nucleus", "SIMBAD object type");
+		NC_("Seyfert Galaxy", "SIMBAD object type");
+		NC_("Seyfert 1 Galaxy", "SIMBAD object type");
+		NC_("Seyfert 2 Galaxy", "SIMBAD object type");
+		NC_("Radio Galaxy", "SIMBAD object type");
+		NC_("LINER-type Active Galaxy Nucleus", "SIMBAD object type");
+		NC_("Quasar", "SIMBAD object type");
+		NC_("Blazar", "SIMBAD object type");
+		NC_("BL Lac", "SIMBAD object type");
+		NC_("Interacting Galaxies", "SIMBAD object type");
+		NC_("Pair of Galaxies", "SIMBAD object type");
+		NC_("Group of Galaxies", "SIMBAD object type");
+		NC_("Compact Group of Galaxies", "SIMBAD object type");
+		NC_("Cluster of Galaxies", "SIMBAD object type");
+		NC_("Proto Cluster of Galaxies", "SIMBAD object type");
+		NC_("Supercluster of Galaxies", "SIMBAD object type");
+		NC_("Underdense Region of the Universe", "SIMBAD object type");
+		NC_("Gravitational Source", "SIMBAD object type");
+		NC_("Gravitational Lens", "SIMBAD object type");
+		NC_("Black Hole", "SIMBAD object type");
+		NC_("Gamma-ray Source", "SIMBAD object type");
+		NC_("X-ray Source ", "SIMBAD object type");
+		NC_("UV-emission Source", "SIMBAD object type");
+		NC_("Maser", "SIMBAD object type");
+
+		// =====================================================================
 		// Translatable UI elements with comments for translators (extracomments)
 
 		// src/gui/astroCalcDialog.ui:
