@@ -47,6 +47,7 @@ struct recentObjectSearches
 {
 	int maxSize = 20;
 	QStringList recentList;
+	QMap<QString, QString> objectTypes;  //! Maps object name to object type
 };
 Q_DECLARE_METATYPE(recentObjectSearches)
 

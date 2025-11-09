@@ -55,7 +55,7 @@ public:
 	//! Get the type of object
 	QString getObjectType(void) const override
 	{
-		return (isMarker ? N_("custom marker") : N_("custom object"));
+		return objectType;
 	}
 	QString getObjectTypeI18n(void) const override
 	{
@@ -100,7 +100,8 @@ private:
 	void draw(StelCore* core, StelPainter *painter);
 
 	QString designation;
-	bool isMarker;	
+	bool isMarker;
+	QString objectType;
 
 	LinearFader labelsFader;
 };

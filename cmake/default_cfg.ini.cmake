@@ -59,7 +59,7 @@ date_display_format                 = yyyymmdd
 
 [search]
 flag_search_online                  = true
-simbad_server_url                   = http://simbad.u-strasbg.fr/
+simbad_server_url                   = https://simbad.u-strasbg.fr/
 
 [stars]
 relative_scale                      = 1.0
