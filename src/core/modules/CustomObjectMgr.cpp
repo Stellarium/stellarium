@@ -191,13 +191,15 @@ void CustomObjectMgr::savePersistentObjects()
 	dataFile.setFileName(persistentCOFile);
 	if (dataFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
 	{
-		StelCore* core = StelApp::getInstance().getCore();
 		QVariantMap map, pcObjects;
 		for (const auto& cObj : std::as_const(persistentObjects))
 		{
 			if (cObj && cObj->initialized)
 			{
-				pcObjects[cObj->getID()] = cObj->getJ2000EquatorialPos(core).toStr();
+				QVariantMap objData;
+				objData["coordinates"] = cObj->XYZ.toStr();  // save using J2000 coordinates without aberration
+				objData["type"] = cObj->objectType;
+				pcObjects[cObj->getID()] = objData;
 			}
 		}
 		map["customObjects"] = pcObjects;
