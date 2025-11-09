@@ -1424,13 +1424,17 @@ void StelApp::quit()
 void StelApp::setDevicePixelsPerPixel(qreal dppp)
 {
 	// Check that the device-independent pixel size didn't change
-	if (!viewportEffect && !fuzzyEquals(devicePixelsPerPixel, dppp))
+	if (!fuzzyEquals(devicePixelsPerPixel, dppp))
 	{
 		qDebug() << "Changing high-DPI scaling factor from" << devicePixelsPerPixel << "to" << dppp;
+		const auto effect = getViewportEffect();
+		setViewportEffect("none");
 		devicePixelsPerPixel = dppp;
 		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 		params.devicePixelsPerPixel = devicePixelsPerPixel;
 		core->setCurrentStelProjectorParams(params);
+		// Force to recreate the viewport effect if any.
+		setViewportEffect(effect);
 	}
 }
 
