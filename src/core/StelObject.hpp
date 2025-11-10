@@ -507,7 +507,8 @@ public:
 	virtual float getAirmass(const StelCore *core) const;
 
 	//! Return a narration text ready for synthesized speech output
-	virtual QString getNarration(const StelCore *core) const;
+	//! @param flags selection of required bits of information
+	virtual QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const;
 
 public slots:
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
@@ -550,9 +551,15 @@ protected:
 	//! @param magOffset magnitude offset to apply to display final apparent magnitude, are used if a star distance has changed in the past/future
 	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1, const float& magOffset=0.f) const;
 
+	//! Narration version of getMagnitudeInfoString().
+	virtual QString getMagnitudeNarration(const StelCore *core, const InfoStringGroup& flags, const int decimals=1, const float& magOffset=0.f) const;
+
 	//! Add a section to the InfoString with just horizontal data for the Sun and Moon, when observed from Earth.
 	//! The application of this is to have quick info while observing other objects.
 	QString getSolarLunarInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+
+	//! Narration version of getSolarLunarInfoString()
+	QString getSolarLunarNarration(const StelCore *core, const InfoStringGroup& flags) const;
 
 	//! Apply post processing on the info string.
 	//! This also removes all extraInfoStrings possibly injected by modules (plugins) etc., except for Script and DebugAid types.
