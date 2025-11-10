@@ -2007,11 +2007,11 @@ QRectF StelMainView::setWindowSize(int width, int height)
 void StelMainView::bumpScreensaver()
 {
 #ifdef Q_OS_WIN
-    EXECUTION_STATE state = SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_DISPLAY_REQUIRED);
-    if (state==NULL)
-        qWarning() << "Cannot trigger screensaver inhibition";
+	EXECUTION_STATE state = SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_DISPLAY_REQUIRED);
+	if (state==NULL)
+		qWarning() << "Cannot trigger screensaver inhibition";
 #else
-    qInfo() << "Screensaver deactivation not implemented on this operating system.";
+	qInfo() << "Screensaver deactivation not implemented on this operating system.";
 #endif
 }
 
@@ -2019,30 +2019,30 @@ void StelMainView::bumpScreensaver()
 // private slot. Connect to fullScreenChanged(b)
 void StelMainView::disableScreensaver(bool fullscreen)
 {
-    if (fullscreen)
-    {
-        qInfo() << "Disabling screensaver while in fullscreen";
-        screensaverInhibitorTimer = new QTimer(this);
-        screensaverInhibitorTimer->setTimerType(Qt::VeryCoarseTimer);
-        connect(screensaverInhibitorTimer, SIGNAL(timeout()), this, SLOT(bumpScreensaver()));
-        screensaverInhibitorTimer->start(30000); // Bump system every 30 seconds
-    }
-    else
-    {
-        qInfo() << "Re-enabling screensaver while leaving fullscreen";
-        if (screensaverInhibitorTimer)
-        {
-            screensaverInhibitorTimer->stop();
-            delete screensaverInhibitorTimer;
-            screensaverInhibitorTimer=nullptr;
+	if (fullscreen)
+	{
+		//qInfo() << "Disabling screensaver while in fullscreen";
+		screensaverInhibitorTimer = new QTimer(this);
+		screensaverInhibitorTimer->setTimerType(Qt::VeryCoarseTimer);
+		connect(screensaverInhibitorTimer, &QTimer::timeout, this, &StelMainView::bumpScreensaver);
+		screensaverInhibitorTimer->start(30000); // Bump system every 30 seconds
+	}
+	else
+	{
+		//qInfo() << "Re-enabling screensaver while leaving fullscreen";
+		if (screensaverInhibitorTimer)
+		{
+			screensaverInhibitorTimer->stop();
+			delete screensaverInhibitorTimer;
+			screensaverInhibitorTimer=nullptr;
 #ifdef Q_OS_WIN
-            EXECUTION_STATE state = SetThreadExecutionState(ES_CONTINUOUS);
-            if (state==NULL)
-                qWarning() << "Cannot disable screensaver inhibition";
+			EXECUTION_STATE state = SetThreadExecutionState(ES_CONTINUOUS);
+			if (state==NULL)
+				qWarning() << "Cannot disable screensaver inhibition";
 #else
-            qWarning() << "Screensaver reactivation not yet implemented on this platform.";
+			qInfo() << "Screensaver reactivation not yet implemented on this platform.";
 #endif
-        }
-    }
+		}
+	}
 }
 
