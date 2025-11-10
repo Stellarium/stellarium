@@ -291,8 +291,10 @@ private slots:
 	//! Set inhibiting triggering screensaver/power save on entering fullscreen mode.
 	//! Connected via QTimer.
 	//! Activate via CLI flag --no-screensaver (or -F)
+	//! @note This is currently available on Windows only.
 	void disableScreensaver(bool fullscreen);
 	//! send OS signal to inhibit triggering screensaver/power save. (Connected via QTimer.)
+	//! @note This is currently working on Windows only.
 	void bumpScreensaver();
 
 #ifdef OPENGL_DEBUG_LOGGING
