@@ -519,7 +519,7 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 }
 
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-QString StarWrapper1::getNarration(const StelCore *core) const
+QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& flags) const
 {
 	// rtl tracks the right-to-left status of the text in the current position.
 	const bool rtl = StelApp::getInstance().getLocaleMgr().isSkyRTL();
@@ -1060,7 +1060,7 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 }
 
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-QString StarWrapper2::getNarration(const StelCore *core) const
+QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& flags) const
 {
 	QString str;
 	QTextStream oss(&str);

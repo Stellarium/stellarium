@@ -228,7 +228,7 @@ public:
 	//! - distance-km (distance to object; for Solar system objects only; kilometers)
 	QVariantMap getInfoMap(const StelCore *core) const  override;
 	//! Return a textual description ready for speech output
-	QString getNarration(const StelCore *core) const override;
+	QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override;
 	double getCloseViewFov(const StelCore* core) const override;
 	double getSatellitesFov(const StelCore* core) const override;
 	double getParentSatellitesFov(const StelCore* core) const override;
