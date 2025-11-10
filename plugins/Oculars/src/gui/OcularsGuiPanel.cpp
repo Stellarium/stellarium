@@ -132,7 +132,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	if (shadowBackground)
 	{
 		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(lensControls);
-		effect->setBlurRadius(8);
+		effect->setBlurRadius(6);
 		effect->setColor(QColor(0, 0, 0));
 		effect->setOffset(0,0);
 		lensControls->setGraphicsEffect(effect);
@@ -143,7 +143,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	if (shadowBackground)
 	{
 		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(ccdControls);
-		effect->setBlurRadius(10);
+		effect->setBlurRadius(6);
 		effect->setColor(QColor(0, 0, 0));
 		effect->setOffset(0,0);
 		ccdControls->setGraphicsEffect(effect);
@@ -154,7 +154,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	if (shadowBackground)
 	{
 		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(telescopeControls);
-		effect->setBlurRadius(12);
+		effect->setBlurRadius(6);
 		effect->setColor(QColor(0, 0, 0));
 		effect->setOffset(0,0);
 		telescopeControls->setGraphicsEffect(effect);
