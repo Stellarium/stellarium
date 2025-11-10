@@ -1697,7 +1697,7 @@ Vec3d Nebula::getJ2000EquatorialPos(const StelCore* core) const
 	}
 }
 
-QString Nebula::getNarration(const StelCore *core) const
+QString Nebula::getNarration(const StelCore *core, const InfoStringGroup &flags) const
 {
 	const Vec3d pos = getEquinoxEquatorialPos(core);
 

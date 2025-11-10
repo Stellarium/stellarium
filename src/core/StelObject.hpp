@@ -46,35 +46,36 @@ public:
 	//! Use InfoStringGroup instead.
 	enum InfoStringGroupFlags
 	{
-		None			= 0x00000000, //!< Show Nothing
-		Name			= 0x00000001, //!< An object's name as further defined by CulturalDisplayStyle found in SkyCultureMgr.
-		CatalogNumber		= 0x00000002, //!< Catalog numbers
-		Magnitude		= 0x00000004, //!< Magnitude related data
-		RaDecJ2000		= 0x00000008, //!< The equatorial position (J2000 ref)
-		RaDecOfDate		= 0x00000010, //!< The equatorial position (of date)
-		AltAzi			= 0x00000020, //!< The position (Altitude/Azimuth)
-		Distance		= 0x00000040, //!< Info about an object's distance
-		Elongation		= 0x00000080, //!< Info about elongation, phase angle etc. Most useful for Planets, but possible for all objects.
-		Size			= 0x00000100, //!< Info about an object's size
-		Velocity		= 0x00000200, //!< Info about object's velocity
-		ProperMotion		= 0x00000400, //!< Annual proper motion (for stars) or hourly motion (for Planets)
-		Extra			= 0x00000800, //!< Derived class-specific extra fields
-		HourAngle		= 0x00001000, //!< The hour angle + DE (of date)
-		AbsoluteMagnitude	= 0x00002000, //!< The absolute magnitude
-		GalacticCoord		= 0x00004000, //!< The galactic position
-		SupergalacticCoord	= 0x00008000, //!< The supergalactic position
-		OtherCoord		= 0x00010000, //!< Unspecified additional coordinates. These can be "injected" into the extraInfoStrings by plugins.
-		ObjectType		= 0x00020000, //!< The type of the object (star, planet, etc.)
-		EclipticCoordJ2000	= 0x00040000, //!< The ecliptic position (J2000.0 ref) [+ XYZ of VSOP87A (used mainly for debugging, not public)]
-		EclipticCoordOfDate	= 0x00080000, //!< The ecliptic position (of date)
-		IAUConstellation        = 0x00100000, //!< Three-letter constellation code (And, Boo, Cas, ...), and Zodiacal sign and Lunar station/mansion where defined
-		SiderealTime		= 0x00200000, //!< Mean and Apparent Sidereal Time
-		RTSTime			= 0x00400000, //!< Time of rise, transit and set of celestial object
-		SolarLunarPosition      = 0x00800000, //!< Show Solar and Lunar horizontal position (on Earth location only)
-		Script                  = 0x01000000, //!< Should be used by Scripts only which can inject extraInfoStrings.
-		DebugAid                = 0x02000000, //!< Can be used for development only, place messages into extraInfoStrings. Comment them away or delete for releases.
-		NoFont			= 0x04000000,
-		PlainText		= 0x08000000  //!< Strip HTML tags from output
+		None                  = 0x00000000, //!< Show Nothing
+		Name                  = 0x00000001, //!< An object's name as further defined by CulturalDisplayStyle found in SkyCultureMgr.
+		CatalogNumber         = 0x00000002, //!< Catalog numbers
+		Magnitude             = 0x00000004, //!< Magnitude related data
+		RaDecJ2000            = 0x00000008, //!< The equatorial position (J2000 ref)
+		RaDecOfDate           = 0x00000010, //!< The equatorial position (of date)
+		AltAzi                = 0x00000020, //!< The position (Altitude/Azimuth)
+		Distance              = 0x00000040, //!< Info about an object's distance
+		Elongation            = 0x00000080, //!< Info about elongation, phase angle etc. Most useful for Planets, but possible for all objects.
+		Size                  = 0x00000100, //!< Info about an object's size
+		Velocity              = 0x00000200, //!< Info about object's velocity
+		ProperMotion          = 0x00000400, //!< Annual proper motion (for stars) or hourly motion (for Planets)
+		Extra                 = 0x00000800, //!< Derived class-specific extra fields
+		HourAngle             = 0x00001000, //!< The hour angle + DE (of date)
+		AbsoluteMagnitude     = 0x00002000, //!< The absolute magnitude
+		GalacticCoord         = 0x00004000, //!< The galactic position
+		SupergalacticCoord    = 0x00008000, //!< The supergalactic position
+		OtherCoord            = 0x00010000, //!< Unspecified additional coordinates. These can be "injected" into the extraInfoStrings by plugins.
+		ObjectType            = 0x00020000, //!< The type of the object (star, planet, etc.)
+		EclipticCoordJ2000    = 0x00040000, //!< The ecliptic position (J2000.0 ref) [+ XYZ of VSOP87A (used mainly for debugging, not public)]
+		EclipticCoordOfDate   = 0x00080000, //!< The ecliptic position (of date)
+		IAUConstellation      = 0x00100000, //!< Three-letter constellation code (And, Boo, Cas, ...), and Zodiacal sign and Lunar station/mansion where defined
+		CulturalConstellation = 0x00200000, //!< Culture-relevant constellation info (within boundaries of..., Zodiac, Lunar Mansion where applicable)
+		SiderealTime          = 0x00400000, //!< Mean and Apparent Sidereal Time
+		RTSTime               = 0x00800000, //!< Time of rise, transit and set of celestial object
+		SolarLunarPosition    = 0x01000000, //!< Show Solar and Lunar horizontal position (on Earth location only)
+		Script                = 0x02000000, //!< Should be used by Scripts only which can inject extraInfoStrings.
+		DebugAid              = 0x04000000, //!< Can be used for development only, place messages into extraInfoStrings. Comment them away or delete for releases.
+		NoFont                = 0x08000000,
+		PlainText             = 0x10000000  //!< Strip HTML tags from output
 	};
 	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
 	Q_FLAG(InfoStringGroup)
@@ -507,7 +508,8 @@ public:
 	virtual float getAirmass(const StelCore *core) const;
 
 	//! Return a narration text ready for synthesized speech output
-	virtual QString getNarration(const StelCore *core) const;
+	//! @param flags selection of required bits of information
+	virtual QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const;
 
 public slots:
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
@@ -550,9 +552,15 @@ protected:
 	//! @param magOffset magnitude offset to apply to display final apparent magnitude, are used if a star distance has changed in the past/future
 	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1, const float& magOffset=0.f) const;
 
+	//! Narration version of getMagnitudeInfoString().
+	virtual QString getMagnitudeNarration(const StelCore *core, const InfoStringGroup& flags, const int decimals=1, const float& magOffset=0.f) const;
+
 	//! Add a section to the InfoString with just horizontal data for the Sun and Moon, when observed from Earth.
 	//! The application of this is to have quick info while observing other objects.
 	QString getSolarLunarInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+
+	//! Narration version of getSolarLunarInfoString()
+	QString getSolarLunarNarration(const StelCore *core, const InfoStringGroup& flags) const;
 
 	//! Apply post processing on the info string.
 	//! This also removes all extraInfoStrings possibly injected by modules (plugins) etc., except for Script and DebugAid types.
