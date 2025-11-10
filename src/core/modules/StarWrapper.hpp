@@ -158,7 +158,7 @@ public:
 	//! - wds-separation (arcseconds; 0 for spectroscopic binaries)
 	QVariantMap getInfoMap(const StelCore *core) const override;
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-	QString getNarration(const StelCore *core) const override;
+	QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override;
 #endif
 	QString getEnglishName(void) const override;
 	QString getID(void) const override;
@@ -175,7 +175,7 @@ public:
 	QString getID(void) const override;
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-	QString getNarration(const StelCore *core) const override;
+	QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override;
 #endif
 	QString getObjectType() const override;
 	QString getObjectTypeI18n() const override;
