@@ -358,6 +358,23 @@ QString StelObject::getMagnitudeInfoString(const StelCore *core, const InfoStrin
 		return QString();
 }
 
+// Format the magnitude info string for the object, allow offset from changing distance
+QString StelObject::getMagnitudeNarration(const StelCore *core, const InfoStringGroup& flags, const int decimals, const float& magoffset) const
+{
+	if (flags&Magnitude)
+	{
+		float mag = getVMagnitude(core);
+		QString str = QString("%1 %2").arg(q_("The object's visual magnitude is"), QString::number(getVMagnitude(core) + magoffset, 'f', decimals));
+		const float airmass = getAirmass(core);
+		if (airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
+			str += QString(", %1 %2 %3 %4 %5. ").arg(qc_("reduced to", "object narration: reduced magnitude by extinction"), QString::number(getVMagnitudeWithExtinction(core, mag, magoffset), 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), qc_("Airmasses of atmospheric extinction", "object narration"));
+		str += getExtraInfoStrings(Magnitude).join("");
+		return str;
+	}
+	else
+		return QString();
+}
+
 // Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
 // computing positional info sometimes also compute others like proper motion too, so store them in the object
 QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const
@@ -1422,7 +1439,54 @@ QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStri
 	return str;
 }
 
-QString StelObject::getNarration(const StelCore *core) const
+// Add horizontal coordinates of Sun and Moon where useful
+QString StelObject::getSolarLunarNarration(const StelCore *core, const InfoStringGroup& flags) const
 {
-	return getEnglishName();
+	QString str;
+	QTextStream oss(&str);
+	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+	PlanetP earth = ssystem->getEarth();
+	if ((core->getCurrentPlanet()==earth) && (flags&SolarLunarPosition))
+	{
+		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+
+		const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+		double az, alt;
+		QString azStr, altStr;
+
+		if (getEnglishName()!="Sun")
+		{
+			StelUtils::rectToSphe(&az,&alt,ssystem->getSun()->getAltAzPosAuto(core));
+			az = (useSouthAzimuth? 2. : 3.)*M_PI - az;
+			if (az > M_PI*2)
+				az -= M_PI*2;
+			azStr  = (withDecimalDegree ? StelUtils::radToDecDegStr(az, 2)  : StelUtils::radToDmsStr(az,false));
+			altStr = (withDecimalDegree ? StelUtils::radToDecDegStr(alt, 2) : StelUtils::radToDmsStr(alt,false));
+
+			// TRANSLATORS: Azimuth/Altitude
+			const QString SolarAz  = (qc_("The sun's azimuth is ", "object narration"));
+			const QString SolarAlt = (qc_("and its altitude is ", "object narration"));
+			oss << QString("%1 %2, %3 %4. ").arg(SolarAz, azStr, SolarAlt, altStr);
+		}
+		if (getEnglishName()!="Moon")
+		{
+			StelUtils::rectToSphe(&az,&alt,ssystem->getMoon()->getAltAzPosAuto(core));
+			az = (useSouthAzimuth? 2. : 3.)*M_PI - az;
+			if (az > M_PI*2)
+				az -= M_PI*2;
+			azStr  = (withDecimalDegree ? StelUtils::radToDecDegStr(az, 2)  : StelUtils::radToDmsStr(az,false));
+			altStr = (withDecimalDegree ? StelUtils::radToDecDegStr(alt, 2) : StelUtils::radToDmsStr(alt,false));
+
+			// TRANSLATORS: Azimuth/Altitude
+			const QString LunarAz  = (qc_("The Moon's azimuth is ", "object narration"));
+			const QString LunarAlt = (qc_("and its altitude is ", "object narration"));
+			oss << QString("%1 %2, %3 %4. ").arg(LunarAz, azStr, LunarAlt, altStr);
+		}
+	}
+	return str;
+}
+
+QString StelObject::getNarration(const StelCore *core, const InfoStringGroup &flags) const
+{
+	return getNameI18n();
 }

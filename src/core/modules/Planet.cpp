@@ -1553,7 +1553,7 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 	return map;
 }
 
-QString Planet::getNarration(const StelCore *core) const
+QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags) const
 {
 	const Vec3d pos = getEquinoxEquatorialPos(core);
 
@@ -3265,10 +3265,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		// by putting here, only draw orbit if Planet is visible for clarity
 		drawOrbit(core);  // TODO - fade in here also...
 
-		if (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitudeWithExtinction(core, vMagnitude))
-			labelsFader=true;
-		else
-			labelsFader=false;
+		labelsFader = (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitudeWithExtinction(core, vMagnitude));
 
 		{ // scope the StelPainter here!
 			const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);

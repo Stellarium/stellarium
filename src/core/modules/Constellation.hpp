@@ -127,7 +127,7 @@ public:
 	//! set narration text. narration may contain Markdown syntax.
 	void setNarration(const QString &narration);
 	//! retrieve narration text
-	QString getNarration(const StelCore *core) const override;
+	QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override;
 private:
 	//! Underlying worker
 	QString getCultureLabel(StelObject::CulturalDisplayStyle style) const;

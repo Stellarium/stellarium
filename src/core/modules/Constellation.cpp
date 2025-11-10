@@ -350,7 +350,7 @@ void Constellation::setNarration(const QString &narration)
 	this->narration=narration;
 }
 
-QString Constellation::getNarration(const StelCore *core) const
+QString Constellation::getNarration(const StelCore *core, const InfoStringGroup &flags) const
 {
 	qDebug() << "Constellation name " << getEnglishName() << "narration:" << narration;
 	return narration;
