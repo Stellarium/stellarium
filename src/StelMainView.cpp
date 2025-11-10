@@ -1069,7 +1069,7 @@ void StelMainView::init()
 		}
 	}
 	if (qApp->property("onetime_inhibit_screensaver").toBool())
-		connect (this, SIGNAL(fullScreenChanged(bool)), this, SLOT(disableScreensaver(bool)));
+		connect (this, &StelMainView::fullScreenChanged, this, &StelMainView::disableScreensaver);
 }
 
 void StelMainView::updateNightModeProperty(bool b)
