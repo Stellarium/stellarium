@@ -59,7 +59,11 @@ public:
 	}
 	QString getObjectTypeI18n(void) const override
 	{
-		return q_(getObjectType());
+		QString ot = getObjectType();
+		if (ot.contains("SIMBAD", Qt::CaseSensitive))
+			return qc_(ot.replace("SIMBAD; ", ""), "SIMBAD object type"); // a special case for "outer objects"
+		else
+			return q_(ot); // for backward compatibility
 	}
 
 	QString getID(void) const override
