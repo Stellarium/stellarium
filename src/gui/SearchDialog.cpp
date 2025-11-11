@@ -1061,7 +1061,7 @@ void SearchDialog::updateRecentSearchList(const QString &nameI18n)
 		if (!objType.isEmpty())
 		recentObjectSearchesData.objectTypes[nameI18n] = QString("SIMBAD; %1").arg(qc_(objType, "SIMBAD object type"));
 		else
-		recentObjectSearchesData.objectTypes[nameI18n] = q_("SIMBAD");
+		recentObjectSearchesData.objectTypes[nameI18n] = QString("SIMBAD");
 	}
 
 	// Prepend & remove duplicates
