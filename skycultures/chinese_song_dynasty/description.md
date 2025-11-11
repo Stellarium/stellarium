@@ -16,6 +16,11 @@ An important concept within this system is the *determinative star*. Before the 
 
 Due to precession, the determinative stars of the Twenty-Eight Lunar Mansions have varied across different historical periods. A notable example involves the mansions of Turtle Beak and Three Stars. During the Song Dynasty and earlier periods, the determinative star for Turtle Beak was φ¹ Ori, while for Three Stars it was δ Ori. By the 13th century, however, precession had caused φ¹ Ori to shift to a position east of δ Ori, resulting in the phenomenon known as "Turtle Beak lying within Three Stars," which contradicted the traditional sequence of the Twenty-Eight Mansions. This discrepancy became increasingly pronounced by the Qing Dynasty, leading the Imperial Observatory to redefine the determinative stars: for Three Stars, it was changed from δ Ori to ζ Ori, and for Turtle Beak, from φ¹ Ori to λ Ori.
 
+
+In ancient China, the *Du* (度, Chinese degree) served as the fundamental angular unit for measuring celestial coordinates. It was defined as the mean daily distance traveled by the Sun along the ecliptic. Accordingly, the full celestial circumference was divided into 365.25 *Du*. Historical records note that the radius of the celestial equator measured “slightly more than 91 *Du*” from the North Celestial Pole. Evidently, the *Du* is slightly smaller than the modern degree, equivalent to approximately 0.9856°. Unlike modern angular units, there were no precise subdivisions below the Du (such as arcminutes or arcseconds). Instead, a set of descriptive terms was used to roughly approximate divisions of one Du, either into quarters or tenths.
+
+Another angular unit used in traditional Chinese astronomy was the *Chen* (辰). One *Chen* corresponds to a 30-degree segment, and the celestial circle was divided into twelve such units. Thus, one *Chen* equals 30 modern degrees—or slightly less than 30 *Du*, though *Chen* was generally not converted into *Du* in practice. Due to its relatively large scale, the *Chen* was seldom used for precise angular measurement. In later periods, it became more common as a unit of time, dividing one full day into twelve *Chen*, each equivalent to two modern hours.
+
 Below is *Xinyixiangfayao Star Map* from Su Song (苏颂, 1020-1101 AD).
 
 ![](illustrations/xyxfy.png)
@@ -40,7 +45,7 @@ Great Yang (太阳, pinyin: Tàiyáng): The Sun. In Chinese philosophy, it repre
 
 Great Yin (太阴, pinyin: Tàiyīn): The Moon. It represents the pinnacle of Yin energy.
 
-Division Star (辰星, pinyin: Chénxīng): Mercury. Since Mercury always moves within 30 degrees on either side of the Sun, the angular unit *Chen* was defined accordingly, representing 30 degrees. The celestial circle is divided into twelve *Chen*. Hence, Mercury came to be called the *Division Star*.
+Division Star (辰星, pinyin: Chénxīng): Mercury. From Earth, Mercury's angular distance from the Sun never exceeds 28 degrees, remaining within one *Chen* (a 30-degree unit, see discussion of *Chen* above), and thus it is historically known as *Division Star*.
 
 Grand White (太白, pinyin: Tàibái): Venus. It is named for its extremely high brightness and pure white color.
 
