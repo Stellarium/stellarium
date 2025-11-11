@@ -179,6 +179,7 @@ void CustomObjectMgr::loadPersistentObjects()
 			Vec3d coordinates;
 			QString objectType = N_("custom object");  // default type
 			// Handle both old format (string) and new format (map with coordinates and type)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 			if (it.value().typeId() == QMetaType::QString)
 			{
 				// Old format: just coordinates as string
@@ -192,10 +193,25 @@ void CustomObjectMgr::loadPersistentObjects()
 				if (objData.contains("type"))
 					objectType = objData.value("type").toString();
 			}
+#else
+			if (it.value().type() == QVariant::String)
+			{
+				// Old format: just coordinates as string
+				coordinates = Vec3d(it.value().toString());
+			}
+			else if (it.value().type() == QVariant::Map)
+			{
+				// New format: map with coordinates and type
+				QVariantMap objData = it.value().toMap();
+				coordinates = Vec3d(objData.value("coordinates").toString());
+				if (objData.contains("type"))
+					objectType = objData.value("type").toString();
+			}
+#endif
 			else
 			{
 				continue;  // Skip invalid entries
-			}			
+			}		
 			CustomObjectP custObj(new CustomObject(it.key(), coordinates, false));
 			if (custObj->initialized)
 			{
