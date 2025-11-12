@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-10-21 01:23+0700\n"
+"POT-Creation-Date: 2025-11-11 11:07+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2025\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -23,9 +23,18 @@ msgstr ""
 "Language: uk\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
+#: src/core/modules/CustomObject.cpp:42
+msgid "custom marker"
+msgstr "нетипова позначка"
+
+#: src/core/modules/CustomObject.cpp:42
+#: src/core/modules/CustomObjectMgr.cpp:180
+msgid "custom object"
+msgstr "нетиповий об’єкт"
+
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:444
-#: src/core/modules/Constellation.cpp:570
+#: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:444
+#: src/core/modules/Constellation.cpp:564
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:292
 #: src/core/modules/Nebula.cpp:294 src/core/modules/Planet.cpp:617
 #: src/core/modules/Planet.cpp:620 src/core/modules/StarWrapper.cpp:51
@@ -46,15 +55,7 @@ msgstr ""
 msgid "Type"
 msgstr "Тип"
 
-#: src/core/modules/CustomObject.hpp:58
-msgid "custom marker"
-msgstr "нетипова позначка"
-
-#: src/core/modules/CustomObject.hpp:58
-msgid "custom object"
-msgstr "нетиповий об’єкт"
-
-#: src/core/modules/CustomObjectMgr.cpp:73
+#: src/core/modules/CustomObjectMgr.cpp:74
 msgid "Marker"
 msgstr "Позначка"
 
@@ -222,7 +223,7 @@ msgstr "Головна вертикаль"
 
 #. TRANSLATORS: altitude
 #. TRANSLATORS: Satellite altitude
-#: src/core/modules/GridLinesMgr.cpp:756 src/gui/SearchDialog.cpp:321
+#: src/core/modules/GridLinesMgr.cpp:756 src/gui/SearchDialog.cpp:383
 #: src/gui/AstroCalcDialog.cpp:883 src/gui/AstroCalcDialog.cpp:1799
 #: src/gui/AstroCalcDialog.cpp:2207 src/gui/AstroCalcDialog.cpp:2479
 #: src/gui/AstroCalcChart.cpp:82 src/gui/AstroCalcChart.cpp:420
@@ -850,7 +851,7 @@ msgid "Author"
 msgstr "Автор"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1533 src/gui/StelGuiItems.cpp:953
+#: src/core/modules/LandscapeMgr.cpp:1533 src/gui/StelGuiItems.cpp:954
 #: plugins/Satellites/src/Satellite.cpp:436
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1189
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
@@ -948,7 +949,7 @@ msgstr "Діаметр"
 #: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:709
 #: src/core/modules/Planet.cpp:730 src/core/modules/Planet.cpp:854
 #: src/core/modules/Planet.cpp:1370 src/core/modules/Comet.cpp:191
-#: src/core/modules/Comet.cpp:201 src/gui/StelGuiItems.cpp:981
+#: src/core/modules/Comet.cpp:201 src/gui/StelGuiItems.cpp:982
 #: src/gui/AstroCalcDialog.cpp:3199 src/gui/AstroCalcDialog.cpp:3747
 #: src/gui/AstroCalcDialog.cpp:8506 plugins/Satellites/src/Satellites.cpp:3020
 #: plugins/Satellites/src/Satellite.cpp:359
@@ -2281,8 +2282,8 @@ msgstr "Увага!"
 msgid "DSO catalog version mismatch"
 msgstr "Невідповідність версій каталогу віддалених об'єктів"
 
-#: src/core/modules/NebulaMgr.cpp:1574 src/core/SimbadSearcher.cpp:180
-#: src/core/SimbadSearcher.cpp:182
+#: src/core/modules/NebulaMgr.cpp:1574 src/core/SimbadSearcher.cpp:189
+#: src/core/SimbadSearcher.cpp:191
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:93
 msgid "Found"
 msgstr "Знайдено"
@@ -3887,7 +3888,7 @@ msgstr ""
 "Це квадратична формула для обчислення %1T з коефіцієнтами, визначеними "
 "користувачем."
 
-#: src/core/StelCore.cpp:2795 src/core/SimbadSearcher.cpp:178
+#: src/core/StelCore.cpp:2795 src/core/SimbadSearcher.cpp:187
 #: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:972
 #: src/gui/ObsListDialog.cpp:996 src/gui/ObsListDialog.cpp:1045
 #: src/gui/ObsListDialog.cpp:1061 src/gui/ObsListDialog.cpp:1102
@@ -4706,12 +4707,12 @@ msgstr "Помилка, пов’язана з мережею"
 msgid "Error parsing position"
 msgstr "Помилка під час обробки даних позиції"
 
-#: src/core/SimbadSearcher.cpp:176
+#: src/core/SimbadSearcher.cpp:185
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:89
 msgid "Querying"
 msgstr "Виконання запиту"
 
-#: src/core/SimbadSearcher.cpp:180 src/core/SimbadSearcher.cpp:182
+#: src/core/SimbadSearcher.cpp:189 src/core/SimbadSearcher.cpp:191
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:93
 msgid "Not found"
 msgstr "Не знайдено"
@@ -5325,7 +5326,7 @@ msgid "Custom equation of %1T"
 msgstr "Нетипове рівняння для %1T"
 
 #: src/gui/ConfigurationDialog.cpp:2040 src/gui/ConfigurationDialog.cpp:2079
-#: src/gui/StelGuiItems.cpp:875 src/gui/LocationDialog.cpp:557
+#: src/gui/StelGuiItems.cpp:876 src/gui/LocationDialog.cpp:557
 msgid "System default"
 msgstr "Типовий системний"
 
@@ -5909,91 +5910,91 @@ msgstr "Без даних"
 msgid "Custom info"
 msgstr "Нетипові дані"
 
-#: src/gui/StelGuiItems.cpp:493 src/gui/StelGuiItems.cpp:1120
+#: src/gui/StelGuiItems.cpp:493 src/gui/StelGuiItems.cpp:1121
 msgid "Space"
 msgstr "Пробіл"
 
-#: src/gui/StelGuiItems.cpp:877
+#: src/gui/StelGuiItems.cpp:878
 msgid "Time zone"
 msgstr "Часовий пояс"
 
-#: src/gui/StelGuiItems.cpp:880 src/gui/LocationDialog.cpp:555
+#: src/gui/StelGuiItems.cpp:881 src/gui/LocationDialog.cpp:555
 msgid "Local Mean Solar Time"
 msgstr "Місцевий середній сонячний час"
 
-#: src/gui/StelGuiItems.cpp:883 src/gui/LocationDialog.cpp:556
+#: src/gui/StelGuiItems.cpp:884 src/gui/LocationDialog.cpp:556
 msgid "Local True Solar Time"
 msgstr "Місцевий справжній сонячний час"
 
 #. TRANSLATORS: unit of measurement: minutes per second
-#: src/gui/StelGuiItems.cpp:886
+#: src/gui/StelGuiItems.cpp:887
 msgctxt "unit of measurement"
 msgid "min/s"
 msgstr "хв/с"
 
 #. TRANSLATORS: unit of measurement: hours per second
-#: src/gui/StelGuiItems.cpp:894
+#: src/gui/StelGuiItems.cpp:895
 msgctxt "unit of measurement"
 msgid "hr/s"
 msgstr "год/с"
 
 #. TRANSLATORS: unit of measurement: days per second
-#: src/gui/StelGuiItems.cpp:900
+#: src/gui/StelGuiItems.cpp:901
 msgctxt "unit of measurement"
 msgid "d/s"
 msgstr "д/с"
 
 #. TRANSLATORS: unit of measurement: years per second
-#: src/gui/StelGuiItems.cpp:906
+#: src/gui/StelGuiItems.cpp:907
 msgctxt "unit of measurement"
 msgid "yr/s"
 msgstr "р/с"
 
-#: src/gui/StelGuiItems.cpp:908 src/gui/StelGuiItems.cpp:910
+#: src/gui/StelGuiItems.cpp:909 src/gui/StelGuiItems.cpp:911
 msgid "Simulation speed"
 msgstr "Швидкість імітації"
 
-#: src/gui/StelGuiItems.cpp:950
+#: src/gui/StelGuiItems.cpp:951
 msgid "flight"
 msgstr "політ"
 
-#: src/gui/StelGuiItems.cpp:981
+#: src/gui/StelGuiItems.cpp:982
 msgid "planetocentric distance"
 msgstr "планетоцентрична відстань"
 
-#: src/gui/StelGuiItems.cpp:983
+#: src/gui/StelGuiItems.cpp:984
 msgid "planetocentric observer"
 msgstr "планетоцентричний спостерігач"
 
-#: src/gui/StelGuiItems.cpp:992
+#: src/gui/StelGuiItems.cpp:993
 msgid "Atmospheric pressure"
 msgstr "Атмосферний тиск"
 
-#: src/gui/StelGuiItems.cpp:992
+#: src/gui/StelGuiItems.cpp:993
 msgctxt "pressure unit"
 msgid "mbar"
 msgstr "мБар"
 
-#: src/gui/StelGuiItems.cpp:992
+#: src/gui/StelGuiItems.cpp:993
 msgid "temperature"
 msgstr "температура"
 
-#: src/gui/StelGuiItems.cpp:1007 src/gui/StelGuiItems.cpp:1009
+#: src/gui/StelGuiItems.cpp:1008 src/gui/StelGuiItems.cpp:1010
 msgctxt "abbreviation"
 msgid "FOV"
 msgstr "ПЗ"
 
-#: src/gui/StelGuiItems.cpp:1017
+#: src/gui/StelGuiItems.cpp:1018
 msgid "Field of view"
 msgstr "Поле зору"
 
 #. TRANSLATORS: Frames per second. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:1028 src/gui/StelGuiItems.cpp:1049
+#: src/gui/StelGuiItems.cpp:1029 src/gui/StelGuiItems.cpp:1050
 msgctxt "abbreviation"
 msgid "FPS"
 msgstr "кд/c"
 
-#: src/gui/StelGuiItems.cpp:1035
+#: src/gui/StelGuiItems.cpp:1036
 msgid "Frames per second"
 msgstr "Кадрів в секунду"
 
@@ -6429,58 +6430,58 @@ msgstr "С"
 msgid "Include File"
 msgstr "Включити файл"
 
-#: src/gui/SearchDialog.cpp:265
+#: src/gui/SearchDialog.cpp:327
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr "Екваторіальні (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:266
+#: src/gui/SearchDialog.cpp:328
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr "Екваторіальні"
 
-#: src/gui/SearchDialog.cpp:267
+#: src/gui/SearchDialog.cpp:329
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr "Горизонтальні"
 
-#: src/gui/SearchDialog.cpp:268
+#: src/gui/SearchDialog.cpp:330
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr "Галактичні"
 
-#: src/gui/SearchDialog.cpp:269
+#: src/gui/SearchDialog.cpp:331
 msgctxt "coordinate system"
 msgid "Supergalactic"
 msgstr "Супергалактична"
 
-#: src/gui/SearchDialog.cpp:270
+#: src/gui/SearchDialog.cpp:332
 msgctxt "coordinate system"
 msgid "Ecliptic"
 msgstr "Екліптична"
 
-#: src/gui/SearchDialog.cpp:271
+#: src/gui/SearchDialog.cpp:333
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
 msgstr "Екліптична (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:307 src/gui/AstroCalcChart.cpp:445
+#: src/gui/SearchDialog.cpp:369 src/gui/AstroCalcChart.cpp:445
 #: src/gui/AstroCalcChart.cpp:471 src/gui/ObsListDialog.cpp:292
 msgid "Right ascension"
 msgstr "Пряме сходження"
 
-#: src/gui/SearchDialog.cpp:310
+#: src/gui/SearchDialog.cpp:372
 msgid "Polar distance"
 msgstr "Полярна відстань"
 
-#: src/gui/SearchDialog.cpp:310 src/gui/AstroCalcChart.cpp:93
+#: src/gui/SearchDialog.cpp:372 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:428
 #: src/gui/AstroCalcChart.cpp:454 src/gui/ObsListDialog.cpp:293
 msgid "Declination"
 msgstr "Схилення"
 
 #. TRANSLATORS: azimuth
-#: src/gui/SearchDialog.cpp:318 src/gui/AstroCalcDialog.cpp:881
+#: src/gui/SearchDialog.cpp:380 src/gui/AstroCalcDialog.cpp:881
 #: src/gui/AstroCalcDialog.cpp:1797 src/gui/AstroCalcDialog.cpp:2480
 #: src/gui/AstroCalcChart.cpp:90 src/gui/AstroCalcChart.cpp:422
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1544
@@ -6488,7 +6489,7 @@ msgid "Azimuth"
 msgstr "Азимут"
 
 #. TRANSLATORS: ecliptic longitude
-#: src/gui/SearchDialog.cpp:332 src/gui/AstroCalcDialog.cpp:986
+#: src/gui/SearchDialog.cpp:394 src/gui/AstroCalcDialog.cpp:986
 #: src/gui/AstroCalcDialog.cpp:2482 src/gui/AstroCalcDialog.cpp:3077
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:711
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:757
@@ -6496,57 +6497,57 @@ msgid "Longitude"
 msgstr "Довгота"
 
 #. TRANSLATORS: ecliptic latitude
-#: src/gui/SearchDialog.cpp:335 src/gui/AstroCalcDialog.cpp:984
+#: src/gui/SearchDialog.cpp:397 src/gui/AstroCalcDialog.cpp:984
 #: src/gui/AstroCalcDialog.cpp:2481 src/gui/AstroCalcDialog.cpp:3076
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:731
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:756
 msgid "Latitude"
 msgstr "Широта"
 
-#: src/gui/SearchDialog.cpp:511
+#: src/gui/SearchDialog.cpp:573
 msgctxt "search tool"
 msgid "Default"
 msgstr "Типовий"
 
-#: src/gui/SearchDialog.cpp:513
+#: src/gui/SearchDialog.cpp:575
 msgctxt "search tool"
 msgid "Range"
 msgstr "Діапазон"
 
-#: src/gui/SearchDialog.cpp:516
+#: src/gui/SearchDialog.cpp:578
 msgctxt "search tool"
 msgid "searches"
 msgstr "пошуки"
 
-#: src/gui/SearchDialog.cpp:646
+#: src/gui/SearchDialog.cpp:708
 msgid "Clear search history: delete all search objects data"
 msgstr "Спорожнити журнал пошуків: вилучити усі дані пошуку об'єктів"
 
-#: src/gui/SearchDialog.cpp:646
+#: src/gui/SearchDialog.cpp:708
 msgid "Clear search history: no data to delete"
 msgstr "Спорожнити журнал пошуку: немає даних для вилучення"
 
-#: src/gui/SearchDialog.cpp:1213
+#: src/gui/SearchDialog.cpp:1323
 msgid "Simbad Lookup Error"
 msgstr "Помилка під час пошуку у Simbad"
 
-#: src/gui/SearchDialog.cpp:1220
+#: src/gui/SearchDialog.cpp:1330
 msgid "Simbad Lookup"
 msgstr "Пошук у Simbad"
 
-#: src/gui/SearchDialog.cpp:1517
+#: src/gui/SearchDialog.cpp:1650
 msgid "University of Strasbourg (France)"
 msgstr "Стразбурзький університет (Франція)"
 
-#: src/gui/SearchDialog.cpp:1518
+#: src/gui/SearchDialog.cpp:1651
 msgid "Harvard-Smithsonian Center for Astrophysics (USA)"
 msgstr "Гарвард-Смітсонівський астрофізичний центр (США)"
 
-#: src/gui/SearchDialog.cpp:1519
+#: src/gui/SearchDialog.cpp:1652
 msgid "Strasbourg astronomical Data Center (France)"
 msgstr "Страсбурзький центр астрономічних даних (Франція)"
 
-#: src/gui/SearchDialog.cpp:1601
+#: src/gui/SearchDialog.cpp:1734
 msgid "Paste and Search"
 msgstr "Вставити і шукати"
 
@@ -10285,140 +10286,960 @@ msgstr ""
 msgid "Jupiter's Moons Orbital Simulation"
 msgstr "Імітація обертання супутників навколо Юпітера"
 
+#: src/translations.h:626
+msgctxt "SIMBAD object type"
+msgid "Star"
+msgstr "Зірка"
+
+#: src/translations.h:627
+msgctxt "SIMBAD object type"
+msgid "Massive Star"
+msgstr "Масивна зірка"
+
+#: src/translations.h:628
+msgctxt "SIMBAD object type"
+msgid "beta Cep Variable"
+msgstr "Змінна типу β Цефея"
+
+#: src/translations.h:629
+msgctxt "SIMBAD object type"
+msgid "Evolved Supergiant"
+msgstr "Еволюційний надгігант"
+
+#: src/translations.h:630
+msgctxt "SIMBAD object type"
+msgid "Red Supergiant"
+msgstr "Червоний надгігант"
+
+#: src/translations.h:631
+msgctxt "SIMBAD object type"
+msgid "Yellow Supergiant"
+msgstr "Жовтий надгігант"
+
+#: src/translations.h:632
+msgctxt "SIMBAD object type"
+msgid "Blue Supergiant"
+msgstr "Блакитний надгігант"
+
+#: src/translations.h:633
+msgctxt "SIMBAD object type"
+msgid "Wolf-Rayet"
+msgstr "Вольфа-Рає"
+
+#: src/translations.h:634
+msgctxt "SIMBAD object type"
+msgid "LBV=Luminous Blue Variable"
+msgstr "Яскрава блакитна змінна"
+
+#: src/translations.h:635
+msgctxt "SIMBAD object type"
+msgid "Neutron Star"
+msgstr "Нейтронна зірка"
+
+#: src/translations.h:636
+msgctxt "SIMBAD object type"
+msgid "Pulsar"
+msgstr "Пульсар"
+
+#: src/translations.h:637
+msgctxt "SIMBAD object type"
+msgid "Young Stellar Object"
+msgstr "Молодий зоряний об'єкт"
+
+#: src/translations.h:638
+msgctxt "SIMBAD object type"
+msgid "Orion Variable"
+msgstr "Оріонові змінні"
+
+#: src/translations.h:639
+msgctxt "SIMBAD object type"
+msgid "T Tauri Star"
+msgstr "Зірка типу T Тельця"
+
+#: src/translations.h:640
+msgctxt "SIMBAD object type"
+msgid "Herbig Ae/Be Star"
+msgstr "Зірка Гербіґа (Ae/Be)"
+
+#: src/translations.h:641
+msgctxt "SIMBAD object type"
+msgid "Outflow"
+msgstr "Потік"
+
+#: src/translations.h:642
+msgctxt "SIMBAD object type"
+msgid "Herbig-Haro Object"
+msgstr "Об'єкт Гербіґа-Харо"
+
+#: src/translations.h:643
+msgctxt "SIMBAD object type"
+msgid "Main Sequence Star"
+msgstr "Зірка головної послідовності"
+
+#: src/translations.h:644
+msgctxt "SIMBAD object type"
+msgid "Be Star"
+msgstr "Зірка"
+
+#: src/translations.h:645
+msgctxt "SIMBAD object type"
+msgid "Blue Straggler"
+msgstr "Синій бродяга"
+
+#: src/translations.h:646
+msgctxt "SIMBAD object type"
+msgid "SX Phe Variable"
+msgstr "Змінна типу SX Фенікса"
+
+#: src/translations.h:647
+msgctxt "SIMBAD object type"
+msgid "gamma Dor Variable"
+msgstr "Змінна типу γ Золотої Риби"
+
+#: src/translations.h:648
+msgctxt "SIMBAD object type"
+msgid "delta Sct Variable"
+msgstr "Змінна типу δ Щита"
+
+#: src/translations.h:649
+msgctxt "SIMBAD object type"
+msgid "Evolved Star"
+msgstr "Еволюційна зірка"
+
+#: src/translations.h:650
+msgctxt "SIMBAD object type"
+msgid "Red Giant Branch star"
+msgstr "Зірка гілки червоних гігантів"
+
+#: src/translations.h:651
+msgctxt "SIMBAD object type"
+msgid "Hot Subdwarf"
+msgstr "Гарячий підкарлик"
+
+#: src/translations.h:652
+msgctxt "SIMBAD object type"
+msgid "Horizontal Branch Star"
+msgstr "Зірка горизонтальної гілки"
+
+#: src/translations.h:653
+msgctxt "SIMBAD object type"
+msgid "RR Lyrae Variable"
+msgstr "Змінна типу RR Ліри"
+
+#: src/translations.h:654
+msgctxt "SIMBAD object type"
+msgid "Red Clump Star"
+msgstr "Зірка червоного згущення"
+
+#: src/translations.h:655
+msgctxt "SIMBAD object type"
+msgid "Type II Cepheid Variable"
+msgstr "Змінна цефеїда типу II"
+
+#: src/translations.h:656
+msgctxt "SIMBAD object type"
+msgid "Cepheid Variable"
+msgstr "Змінна типу цефеїд"
+
+#: src/translations.h:657
+msgctxt "SIMBAD object type"
+msgid "Classical Cepheid Variable"
+msgstr "Класична змінна цефеїда"
+
+#: src/translations.h:658
+msgctxt "SIMBAD object type"
+msgid "Carbon Star"
+msgstr "Карбонова зірка"
+
+#: src/translations.h:659
+msgctxt "SIMBAD object type"
+msgid "S Star"
+msgstr "S-зірка"
+
+#: src/translations.h:660
+msgctxt "SIMBAD object type"
+msgid "Long-Period Variable"
+msgstr "Довгоперіодична змінна"
+
+#: src/translations.h:661
+msgctxt "SIMBAD object type"
+msgid "Asymptotic Giant Branch Star"
+msgstr "Зірка асимптоти гілки гігантів"
+
+#: src/translations.h:662
+msgctxt "SIMBAD object type"
+msgid "Mira Variable"
+msgstr "Змінна типу Міри"
+
+#: src/translations.h:663
+msgctxt "SIMBAD object type"
+msgid "O-rich AGB Star"
+msgstr "О-збагачена зірка АВГ"
+
+#: src/translations.h:664
+msgctxt "SIMBAD object type"
+msgid "OH/IR Star"
+msgstr "OH/IR-зірка"
+
+#: src/translations.h:665
+msgctxt "SIMBAD object type"
+msgid "Post-AGB Star"
+msgstr "Пост-АВГ-зірка"
+
+#: src/translations.h:666
+msgctxt "SIMBAD object type"
+msgid "RV Tauri Variable"
+msgstr "Змінна типу RV Тільця"
+
+#: src/translations.h:667
+msgctxt "SIMBAD object type"
+msgid "Planetary Nebula"
+msgstr "Планетарна туманність"
+
+#: src/translations.h:668
+msgctxt "SIMBAD object type"
+msgid "White Dwarf"
+msgstr "Білий карлик"
+
+#: src/translations.h:669
+msgctxt "SIMBAD object type"
+msgid "ELMWD=Extremely Low Mass White Dwarf"
+msgstr "Білий карлик надмалої маси"
+
+#: src/translations.h:670
+msgctxt "SIMBAD object type"
+msgid "Chemically Peculiar Star"
+msgstr "Хімічно пекулярна зірка"
+
+#: src/translations.h:671
+msgctxt "SIMBAD object type"
+msgid "alpha2 CVn Variable"
+msgstr "Зірка типу α2 Гончих Псів"
+
+#: src/translations.h:672
+msgctxt "SIMBAD object type"
+msgid "R CrB Variable"
+msgstr "Змінна типу R Північної Корони"
+
+#: src/translations.h:673
+msgctxt "SIMBAD object type"
+msgid "CH Star"
+msgstr "CH-зірка"
+
+#: src/translations.h:674
+msgctxt "SIMBAD object type"
+msgid "Barium Star"
+msgstr "Барійна зірка"
+
+#: src/translations.h:675
+msgctxt "SIMBAD object type"
+msgid "Dwarf Carbon Star"
+msgstr "Карликова карбонова зірка"
+
+#: src/translations.h:676
+msgctxt "SIMBAD object type"
+msgid "Carbon-Enhanced Metal Poor Star"
+msgstr "Насичена карбоном бідна на метали зірка"
+
+#: src/translations.h:677
+msgctxt "SIMBAD object type"
+msgid "Double or Multiple Star"
+msgstr "Подвійна або кратна зірка"
+
+#: src/translations.h:678
+msgctxt "SIMBAD object type"
+msgid "Eclipsing Binary"
+msgstr "Затемнювана подвійна зірка"
+
+#: src/translations.h:679
+msgctxt "SIMBAD object type"
+msgid "Ellipsoidal Variable"
+msgstr "Еліпсоїдна змінна"
+
+#: src/translations.h:680
+msgctxt "SIMBAD object type"
+msgid "Spectroscopic Binary"
+msgstr "Спектроскопічна подвійна зірка"
+
+#: src/translations.h:681
+msgctxt "SIMBAD object type"
+msgid "RS CVn Variable"
+msgstr "Зірка типу RS Гончих Псів"
+
+#: src/translations.h:682
+msgctxt "SIMBAD object type"
+msgid "BY Dra Variable"
+msgstr "Зірка типу BY Дракона"
+
+#: src/translations.h:683
+msgctxt "SIMBAD object type"
+msgid "Symbiotic Star"
+msgstr "Симбіотична зірка"
+
+#: src/translations.h:684
+msgctxt "SIMBAD object type"
+msgid "X-ray Binary"
+msgstr "Рентґенівська подвійна зірка"
+
+#: src/translations.h:685
+msgctxt "SIMBAD object type"
+msgid "Low Mass X-ray Binary"
+msgstr "Рентґенівська подвійна зірка низької маси"
+
+#: src/translations.h:686
+msgctxt "SIMBAD object type"
+msgid "High Mass X-ray Binary"
+msgstr "Рентґенівська подвійна зірка високої маси"
+
+#: src/translations.h:687
+msgctxt "SIMBAD object type"
+msgid "Cataclysmic Binary"
+msgstr "Катаклізмічна подвійна зірка"
+
+#: src/translations.h:688
+msgctxt "SIMBAD object type"
+msgid "Classical Nova"
+msgstr "Класична нова"
+
+#: src/translations.h:689
+msgctxt "SIMBAD object type"
+msgid "SuperNova"
+msgstr "Наднова"
+
+#: src/translations.h:690
+msgctxt "SIMBAD object type"
+msgid "Low-mass Star"
+msgstr "Зірка низької маси"
+
+#: src/translations.h:691
+msgctxt "SIMBAD object type"
+msgid "Brown Dwarf"
+msgstr "Коричневий карлик"
+
+#: src/translations.h:692
+msgctxt "SIMBAD object type"
+msgid "Extra-solar Planet"
+msgstr "Екзопланета"
+
+#: src/translations.h:693
+msgctxt "SIMBAD object type"
+msgid "Variable Star"
+msgstr "Змінна зірка"
+
+#: src/translations.h:694
+msgctxt "SIMBAD object type"
+msgid "Irregular Variable"
+msgstr "Неправильна змінна"
+
+#: src/translations.h:695
+msgctxt "SIMBAD object type"
+msgid "Irregular Variable with rapid variations"
+msgstr "Неправильна змінна із швидкими варіаціями"
+
+#: src/translations.h:696
+msgctxt "SIMBAD object type"
+msgid "Eruptive Variable"
+msgstr "Еруптивна змінна"
+
+#: src/translations.h:697
+msgctxt "SIMBAD object type"
+msgid "Rotating Variable"
+msgstr "Затемнена змінна"
+
+#: src/translations.h:698
+msgctxt "SIMBAD object type"
+msgid "Pulsating Variable"
+msgstr "Пульсаційна змінна"
+
+#: src/translations.h:699
+msgctxt "SIMBAD object type"
+msgid "Star showing Eclipses by its Planet"
+msgstr "Зірка зі затемненням власною планетою"
+
+#: src/translations.h:700
+msgctxt "SIMBAD object type"
+msgid "Emission-line Star"
+msgstr "Зірка із емісійними смугами"
+
+#: src/translations.h:701
+msgctxt "SIMBAD object type"
+msgid "High Proper Motion Star"
+msgstr "Зірка із високим власним рухом"
+
+#: src/translations.h:702
+msgctxt "SIMBAD object type"
+msgid "High Velocity Star"
+msgstr "Зірка із високою швидкістю"
+
+#: src/translations.h:703
+msgctxt "SIMBAD object type"
+msgid "Cluster of Stars"
+msgstr "Скупчення зірок"
+
+#: src/translations.h:704
+msgctxt "SIMBAD object type"
+msgid "Globular Cluster"
+msgstr "Кулясте скупчення"
+
+#: src/translations.h:705
+msgctxt "SIMBAD object type"
+msgid "Open Cluster"
+msgstr "Розсіяне скупчення"
+
+#: src/translations.h:706
+msgctxt "SIMBAD object type"
+msgid "Association of Stars"
+msgstr "Асоціація зірок"
+
+#: src/translations.h:707
+msgctxt "SIMBAD object type"
+msgid "Stellar Stream"
+msgstr "Зірковий потік"
+
+#: src/translations.h:708
+msgctxt "SIMBAD object type"
+msgid "Moving Group"
+msgstr "Рухома група"
+
+#: src/translations.h:709
+msgctxt "SIMBAD object type"
+msgid "Interstellar Medium Object"
+msgstr "Міжзоряний об'єкт"
+
+#: src/translations.h:710
+msgctxt "SIMBAD object type"
+msgid "Star Forming Region"
+msgstr "Регіон утворення зірок"
+
+#: src/translations.h:711
+msgctxt "SIMBAD object type"
+msgid "HII Region"
+msgstr "Область HII"
+
+#: src/translations.h:712
+msgctxt "SIMBAD object type"
+msgid "Cloud"
+msgstr "Хмара"
+
+#: src/translations.h:713
+msgctxt "SIMBAD object type"
+msgid "Nebula"
+msgstr "Туманність"
+
+#: src/translations.h:714
+msgctxt "SIMBAD object type"
+msgid "Reflection Nebula"
+msgstr "Відбивна туманність"
+
+#: src/translations.h:715
+msgctxt "SIMBAD object type"
+msgid "Molecular Cloud"
+msgstr "Молекулярна хмара"
+
+#: src/translations.h:716
+msgctxt "SIMBAD object type"
+msgid "Dark Cloud (nebula)"
+msgstr "Темна хмара (туманність)"
+
+#: src/translations.h:717
+msgctxt "SIMBAD object type"
+msgid "Globule (low-mass dark cloud)"
+msgstr "Глобула (темна хмара низької маси)"
+
+#: src/translations.h:718
+msgctxt "SIMBAD object type"
+msgid "Cometary Globule / Pillar"
+msgstr "Кометна глобула / Стовп"
+
+#: src/translations.h:719
+msgctxt "SIMBAD object type"
+msgid "High-velocity Cloud"
+msgstr "Високошвидкісна хмара"
+
+#: src/translations.h:720
+msgctxt "SIMBAD object type"
+msgid "Dense Core"
+msgstr "Щільне ядро"
+
+#: src/translations.h:721
+msgctxt "SIMBAD object type"
+msgid "Bubble"
+msgstr "Бульбашка"
+
+#: src/translations.h:722
+msgctxt "SIMBAD object type"
+msgid "SuperNova Remnant"
+msgstr "Залишок наднової"
+
+#: src/translations.h:723
+msgctxt "SIMBAD object type"
+msgid "Interstellar Shell"
+msgstr "Міжзоряна оболонка"
+
+#: src/translations.h:724
+msgctxt "SIMBAD object type"
+msgid "Interstellar Filament"
+msgstr "Міжзоряне волокно"
+
+#: src/translations.h:725
+msgctxt "SIMBAD object type"
+msgid "Galaxy"
+msgstr "Галактика"
+
+#: src/translations.h:726
+msgctxt "SIMBAD object type"
+msgid "Low Surface Brightness Galaxy"
+msgstr "Галактика із низькою яскравістю поверхні"
+
+#: src/translations.h:727
+msgctxt "SIMBAD object type"
+msgid "Blue Compact Galaxy"
+msgstr "Блакитна компактна галактика"
+
+#: src/translations.h:728
+msgctxt "SIMBAD object type"
+msgid "Starburst Galaxy"
+msgstr "Галактика зі спалахом зореутворення"
+
+#: src/translations.h:729
+msgctxt "SIMBAD object type"
+msgid "HII Galaxy"
+msgstr "HII-галактика"
+
+#: src/translations.h:730
+msgctxt "SIMBAD object type"
+msgid "Emission-line galaxy"
+msgstr "Галактика із емісійними смугами"
+
+#: src/translations.h:731
+msgctxt "SIMBAD object type"
+msgid "Active Galaxy Nucleus"
+msgstr "Активне ядро галактики"
+
+#: src/translations.h:732
+msgctxt "SIMBAD object type"
+msgid "Seyfert Galaxy"
+msgstr "Сейфертівська галактика"
+
+#: src/translations.h:733
+msgctxt "SIMBAD object type"
+msgid "Seyfert 1 Galaxy"
+msgstr "Галактика Сейферта 1"
+
+#: src/translations.h:734
+msgctxt "SIMBAD object type"
+msgid "Seyfert 2 Galaxy"
+msgstr "Галактика Сейферта 2"
+
+#: src/translations.h:735
+msgctxt "SIMBAD object type"
+msgid "Radio Galaxy"
+msgstr "Радіогалактика"
+
+#: src/translations.h:736
+msgctxt "SIMBAD object type"
+msgid "LINER-type Active Galaxy Nucleus"
+msgstr "Активне ядро галактики типу LINER"
+
+#: src/translations.h:737
+msgctxt "SIMBAD object type"
+msgid "Quasar"
+msgstr "Квазар"
+
+#: src/translations.h:738
+msgctxt "SIMBAD object type"
+msgid "Blazar"
+msgstr "Блазар"
+
+#: src/translations.h:739
+msgctxt "SIMBAD object type"
+msgid "BL Lac"
+msgstr "BL Ящірки"
+
+#: src/translations.h:740
+msgctxt "SIMBAD object type"
+msgid "ULIRG, Ultra Luminous Infrared Galaxy"
+msgstr "ULIRG, ультраяскрава інфрачервона галактика"
+
+#: src/translations.h:741
+msgctxt "SIMBAD object type"
+msgid "Galaxy in Pair of Galaxies"
+msgstr "Галактика у парі галактик"
+
+#: src/translations.h:742
+msgctxt "SIMBAD object type"
+msgid "Galaxy towards a Group of Galaxies"
+msgstr "Галактика, що рухається до групи галактик"
+
+#: src/translations.h:743
+msgctxt "SIMBAD object type"
+msgid "Galaxy towards a Cluster of Galaxies"
+msgstr "Галактика, що рухається до скупчення галактик"
+
+#: src/translations.h:744
+msgctxt "SIMBAD object type"
+msgid "Brightest Galaxy in a Cluster (BCG)"
+msgstr "Найяскравіша галактика у скупченні (BCG)"
+
+#: src/translations.h:745
+msgctxt "SIMBAD object type"
+msgid "Interacting Galaxies"
+msgstr "Галактики, що взаємодіють"
+
+#: src/translations.h:746
+msgctxt "SIMBAD object type"
+msgid "Pair of Galaxies"
+msgstr "Пара галактик"
+
+#: src/translations.h:747
+msgctxt "SIMBAD object type"
+msgid "Group of Galaxies"
+msgstr "Група галактик"
+
+#: src/translations.h:748
+msgctxt "SIMBAD object type"
+msgid "Compact Group of Galaxies"
+msgstr "Компактна група галактик"
+
+#: src/translations.h:749
+msgctxt "SIMBAD object type"
+msgid "Cluster of Galaxies"
+msgstr "Скупчення галактик"
+
+#: src/translations.h:750
+msgctxt "SIMBAD object type"
+msgid "Proto Cluster of Galaxies"
+msgstr "Протоскупчення галактик"
+
+#: src/translations.h:751
+msgctxt "SIMBAD object type"
+msgid "Supercluster of Galaxies"
+msgstr "Надскупчення галактик"
+
+#: src/translations.h:752
+msgctxt "SIMBAD object type"
+msgid "Underdense Region of the Universe"
+msgstr "Нещільний регіон Всесвіту"
+
+#: src/translations.h:753
+msgctxt "SIMBAD object type"
+msgid "Gravitational Source"
+msgstr "Гравітаційне джерело"
+
+#: src/translations.h:754
+msgctxt "SIMBAD object type"
+msgid "(Micro)Lensing Event"
+msgstr "Подія (мікро)лінзування"
+
+#: src/translations.h:755
+msgctxt "SIMBAD object type"
+msgid "Gravitational Lens System (lens+images)"
+msgstr "Система гравітаційної лінзи (лінза+зображення)"
+
+#: src/translations.h:756
+msgctxt "SIMBAD object type"
+msgid "Gravitational Lens"
+msgstr "Гравітаційна лінза"
+
+#: src/translations.h:757
+msgctxt "SIMBAD object type"
+msgid "Gravitationally Lensed Image"
+msgstr "Зображення із гравітаційним лінзуванням"
+
+#: src/translations.h:758
+msgctxt "SIMBAD object type"
+msgid "Gravitationally Lensed Image of a Galaxy"
+msgstr "Зображення галактики із гравітаційним лінзуванням"
+
+#: src/translations.h:759
+msgctxt "SIMBAD object type"
+msgid "Gravitationally Lensed Image of a Quasar"
+msgstr "Зображення квазара із гравітаційним лінзуванням"
+
+#: src/translations.h:760
+msgctxt "SIMBAD object type"
+msgid "Black Hole"
+msgstr "Чорна дірка"
+
+#: src/translations.h:761
+msgctxt "SIMBAD object type"
+msgid "Gravitational Wave Event"
+msgstr "Подія гравітаційної хвилі"
+
+#: src/translations.h:762
+msgctxt "SIMBAD object type"
+msgid "Transient Event"
+msgstr "Перехідна подія"
+
+#: src/translations.h:763
+msgctxt "SIMBAD object type"
+msgid "Variable source"
+msgstr "Змінне джерело"
+
+#: src/translations.h:764
+msgctxt "SIMBAD object type"
+msgid "Radio Source"
+msgstr "Радіоджерело"
+
+#: src/translations.h:765
+msgctxt "SIMBAD object type"
+msgid "Metric Radio Source"
+msgstr "Метрове радіоджерело"
+
+#: src/translations.h:766
+msgctxt "SIMBAD object type"
+msgid "Centimetric Radio Source"
+msgstr "Сантиметрове радіоджерело"
+
+#: src/translations.h:767
+msgctxt "SIMBAD object type"
+msgid "Millimetric Radio Source"
+msgstr "Міліметрове радіоджерело"
+
+#: src/translations.h:768
+msgctxt "SIMBAD object type"
+msgid "Sub-Millimetric Source"
+msgstr "Субміліметрове джерело"
+
+#: src/translations.h:769
+msgctxt "SIMBAD object type"
+msgid "HI (21cm) Source"
+msgstr "Джерело HI (21 см)"
+
+#: src/translations.h:770
+msgctxt "SIMBAD object type"
+msgid "Radio Burst"
+msgstr "Радіовикид"
+
+#: src/translations.h:771
+msgctxt "SIMBAD object type"
+msgid "Maser"
+msgstr "Мазер"
+
+#: src/translations.h:772
+msgctxt "SIMBAD object type"
+msgid "Infra-Red Source"
+msgstr "Інфрачервоне джерело"
+
+#: src/translations.h:773
+msgctxt "SIMBAD object type"
+msgid "Far-IR source (λ >= 30 µm)"
+msgstr "Джерело в далекому інфрачервоному спектрі (λ >= 30 мкм)"
+
+#: src/translations.h:774
+msgctxt "SIMBAD object type"
+msgid "Mid-IR Source (3 to 30 µm)"
+msgstr "Джерело у середньому інфрачервоному спектрі (від 3 до 30 мкм)"
+
+#: src/translations.h:775
+msgctxt "SIMBAD object type"
+msgid "Near-IR Source (λ < 3 µm)"
+msgstr "Джерело у близькому інфрачервоному спектрі (λ < 3 мкм)"
+
+#: src/translations.h:776
+msgctxt "SIMBAD object type"
+msgid "Optical Source"
+msgstr "Оптичне джерело"
+
+#: src/translations.h:777
+msgctxt "SIMBAD object type"
+msgid "Emission Object"
+msgstr "Об'єкт випромінювання"
+
+#: src/translations.h:778
+msgctxt "SIMBAD object type"
+msgid "Blue Object"
+msgstr "Блакитний об'єкт"
+
+#: src/translations.h:779
+msgctxt "SIMBAD object type"
+msgid "UV-emission Source"
+msgstr "Джерело ультрафіолетового випромінювання"
+
+#: src/translations.h:780
+msgctxt "SIMBAD object type"
+msgid "X-ray Source"
+msgstr "Джерело рентґенівського випромінювання"
+
+#: src/translations.h:781
+msgctxt "SIMBAD object type"
+msgid "Ultra-luminous X-ray Source"
+msgstr "Надяскраве джерело рентґенівського випромінювання"
+
+#: src/translations.h:782
+msgctxt "SIMBAD object type"
+msgid "Gamma-ray Source"
+msgstr "Джерело гамма-променів"
+
+#: src/translations.h:783
+msgctxt "SIMBAD object type"
+msgid "Gamma-ray Burst"
+msgstr "Викид гамма-променів"
+
+#: src/translations.h:784
+msgctxt "SIMBAD object type"
+msgid "Composite Object, Blend"
+msgstr "Складений об'єкт, злиття"
+
+#: src/translations.h:785
+msgctxt "SIMBAD object type"
+msgid "Not an Object (Error, Artefact, ...)"
+msgstr "Не об'єкт (помилка, дефект…)"
+
+#: src/translations.h:786
+msgctxt "SIMBAD object type"
+msgid "Part of Cloud"
+msgstr "Частина хмари"
+
+#: src/translations.h:787
+msgctxt "SIMBAD object type"
+msgid "Part of a Galaxy"
+msgstr "Частина галактики"
+
+#: src/translations.h:788
+msgctxt "SIMBAD object type"
+msgid "Object of Unknown Nature"
+msgstr "Об'єкт невідомої природи"
+
+#: src/translations.h:789
+msgctxt "SIMBAD object type"
+msgid "Region defined in the Sky"
+msgstr "Визначений небесний регіон"
+
 #. TRANSLATORS: This is a filter checkbox meaning "include penumbral lunar
 #. eclipses", so the adjective should be in plural (if applicable)
-#: src/translations.h:628 src/ui_astroCalcDialog.h:2605
+#: src/translations.h:796 src/ui_astroCalcDialog.h:2605
 msgid "Penumbral"
 msgstr "Напівтіньове"
 
 #. TRANSLATORS: This is a filter checkbox meaning "include hybrid solar
 #. eclipses", so the adjective should be in plural (if applicable)
-#: src/translations.h:630 src/ui_astroCalcDialog.h:2609
+#: src/translations.h:798 src/ui_astroCalcDialog.h:2609
 msgid "Hybrid"
 msgstr "Гібридне"
 
 #. TRANSLATORS: This is a filter checkbox meaning "include annular solar
 #. eclipses", so the adjective should be in plural (if applicable)
-#: src/translations.h:632 src/ui_astroCalcDialog.h:2613
+#: src/translations.h:800 src/ui_astroCalcDialog.h:2613
 msgid "Annular"
 msgstr "Кільцеподібне"
 
 #. TRANSLATORS: This is a filter checkbox meaning "include partial solar/lunar
 #. eclipses", so the adjective should be in plural (if applicable)
-#: src/translations.h:634 src/ui_astroCalcDialog.h:2617
+#: src/translations.h:802 src/ui_astroCalcDialog.h:2617
 msgid "Partial"
 msgstr "Часткове"
 
 #. TRANSLATORS: This is a filter checkbox meaning "include total solar/lunar
 #. eclipses", so the adjective should be in plural (if applicable)
-#: src/translations.h:636 src/ui_astroCalcDialog.h:2621
+#: src/translations.h:804 src/ui_astroCalcDialog.h:2621
 msgid "Total"
 msgstr "Повне"
 
 #. TRANSLATORS: full phrase is 'show line'
-#: src/translations.h:638 src/ui_astroCalcDialog.h:2365
+#: src/translations.h:806 src/ui_astroCalcDialog.h:2365
 msgctxt "show line"
 msgid "line"
 msgstr "лінія"
 
 #. TRANSLATORS: hours
 #. TRANSLATORS: Short for "hours".
-#: src/translations.h:640 src/ui_astroCalcDialog.h:2519
+#: src/translations.h:808 src/ui_astroCalcDialog.h:2519
 #: plugins/Observability/src/Observability.cpp:151
 msgid "h"
 msgstr "г"
 
-#: src/translations.h:642
+#: src/translations.h:810
 msgctxt "addressing mode"
 msgid "64-bit"
 msgstr "64-бітовий"
 
-#: src/translations.h:643
+#: src/translations.h:811
 msgctxt "addressing mode"
 msgid "32-bit"
 msgstr "32-бітовий"
 
-#: src/translations.h:644
+#: src/translations.h:812
 msgctxt "sky culture classification"
 msgid "none"
 msgstr "немає"
 
 #. TRANSLATORS: Same text as in the Configuration window!
-#: src/translations.h:648 src/ui_helpDialogGui.h:249
+#: src/translations.h:816 src/ui_helpDialogGui.h:249
 #: src/ui_configurationDialog.h:2246
 msgid "Edit keyboard shortcuts..."
 msgstr "Змінити клавіатурні скорочення…"
 
 #. TRANSLATORS: See http://en.wikipedia.org/wiki/Bayer_designation
-#: src/translations.h:652 src/ui_searchDialogGui.h:842
+#: src/translations.h:820 src/ui_searchDialogGui.h:842
 msgid "Greek letters for Bayer designations"
 msgstr "Грецькі літери для позначень Баєра"
 
 #. TRANSLATORS: The title of the window will be set during runtime
-#: src/translations.h:656
+#: src/translations.h:824
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:167
 msgid "More Satellites"
 msgstr "Інші супутники"
 
 #. TRANSLATORS: The title of the window will be set during runtime
-#: src/translations.h:660
+#: src/translations.h:828
 msgid "Define an object"
 msgstr "Визначте об'єкт"
 
 #. TRANSLATORS: The title of the window will be set during runtime
-#: src/translations.h:664
+#: src/translations.h:832
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:478
 msgid "Import data"
 msgstr "Імпортувати дані"
 
-#: src/translations.h:668
+#: src/translations.h:836
 msgid "&Undo"
 msgstr "&Вернути"
 
-#: src/translations.h:669
+#: src/translations.h:837
 msgid "&Redo"
 msgstr "&Повторити"
 
-#: src/translations.h:670
+#: src/translations.h:838
 msgid "Cu&t"
 msgstr "Ви&різати"
 
-#: src/translations.h:671
+#: src/translations.h:839
 msgid "&Copy"
 msgstr "&Копіювати"
 
-#: src/translations.h:672
+#: src/translations.h:840
 msgid "&Paste"
 msgstr "&Вставити"
 
-#: src/translations.h:673 plugins/Oculars/src/ui_ocularDialog.h:1530
+#: src/translations.h:841 plugins/Oculars/src/ui_ocularDialog.h:1530
 #: plugins/Oculars/src/ui_ocularDialog.h:1539
 #: plugins/Oculars/src/ui_ocularDialog.h:1545
 #: plugins/Oculars/src/ui_ocularDialog.h:1564
 msgid "Delete"
 msgstr "Стерти"
 
-#: src/translations.h:674
+#: src/translations.h:842
 msgid "Select All"
 msgstr "Позначити все"
 
-#: src/translations.h:675
+#: src/translations.h:843
 msgid "Look in:"
 msgstr "Місце пошуку:"
 
-#: src/translations.h:676
+#: src/translations.h:844
 msgid "Directory:"
 msgstr "Каталог:"
 
-#: src/translations.h:677
+#: src/translations.h:845
 msgid "Folder"
 msgstr "Тека"
 
-#: src/translations.h:678
+#: src/translations.h:846
 msgid "&Choose"
 msgstr "Ви&брати"
 
-#: src/translations.h:679 src/ui_configurationDialog.h:2066
+#: src/translations.h:847 src/ui_configurationDialog.h:2066
 #: src/ui_obsListDialog.h:365
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:148
@@ -10429,145 +11250,145 @@ msgstr "Ви&брати"
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: src/translations.h:680
+#: src/translations.h:848
 msgid "&Cancel"
 msgstr "&Скасувати"
 
-#: src/translations.h:681
+#: src/translations.h:849
 msgid "Files of type:"
 msgstr "Файли типу:"
 
-#: src/translations.h:682
+#: src/translations.h:850
 msgid "Date Modified"
 msgstr "Остання зміна"
 
-#: src/translations.h:683
+#: src/translations.h:851
 msgid "Directories"
 msgstr "Каталоги"
 
-#: src/translations.h:684
+#: src/translations.h:852
 msgid "Computer"
 msgstr "Комп’ютер"
 
-#: src/translations.h:685
+#: src/translations.h:853
 msgid "&Open"
 msgstr "Від&крити"
 
-#: src/translations.h:686
+#: src/translations.h:854
 msgid "&Save"
 msgstr "З&берегти"
 
-#: src/translations.h:687 src/ui_configurationDialog.h:1919
+#: src/translations.h:855 src/ui_configurationDialog.h:1919
 #: src/ui_configurationDialog.h:2304
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:341
 msgid "Save"
 msgstr "Зберегти"
 
-#: src/translations.h:688
+#: src/translations.h:856
 msgid "Save As:"
 msgstr "Зберегти як:"
 
-#: src/translations.h:689
+#: src/translations.h:857
 msgid "Tags:"
 msgstr "Мітки:"
 
-#: src/translations.h:690
+#: src/translations.h:858
 msgid "File &name:"
 msgstr "Н&азва файла:"
 
-#: src/translations.h:691
+#: src/translations.h:859
 msgid "Copy &Link Location"
 msgstr "Скопіювати &адресу посилання"
 
-#: src/translations.h:692
+#: src/translations.h:860
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:130
 msgid "Abort"
 msgstr "Перервати"
 
-#: src/translations.h:693
+#: src/translations.h:861
 msgid "Ignore"
 msgstr "Ігнорувати"
 
-#: src/translations.h:694
+#: src/translations.h:862
 msgid "&Basic colors"
 msgstr "&Базові кольори"
 
-#: src/translations.h:695
+#: src/translations.h:863
 msgid "&Pick Screen Color"
 msgstr "Вз&яти колір з екрана"
 
-#: src/translations.h:696
+#: src/translations.h:864
 msgid "&Custom colors"
 msgstr "&Нетипові кольори"
 
-#: src/translations.h:697
+#: src/translations.h:865
 msgid "&Add to Custom Colors"
 msgstr "&Додати до нетипових кольорів"
 
-#: src/translations.h:698
+#: src/translations.h:866
 msgid "Hu&e:"
 msgstr "Від&тінок:"
 
-#: src/translations.h:699
+#: src/translations.h:867
 msgid "&Sat:"
 msgstr "На&сиченість:"
 
-#: src/translations.h:700
+#: src/translations.h:868
 msgid "&Val:"
 msgstr "З&начення:"
 
-#: src/translations.h:701
+#: src/translations.h:869
 msgid "&Red:"
 msgstr "&Червоний:"
 
-#: src/translations.h:702
+#: src/translations.h:870
 msgid "&Green:"
 msgstr "&Зелений:"
 
-#: src/translations.h:703
+#: src/translations.h:871
 msgid "Bl&ue:"
 msgstr "&Синій:"
 
-#: src/translations.h:704
+#: src/translations.h:872
 msgid "Select Color"
 msgstr "Виберіть колір"
 
-#: src/translations.h:705
+#: src/translations.h:873
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Вказівник у позиції %1, %2. Натисніть Esc, щоб скасувати."
 
-#: src/translations.h:706
+#: src/translations.h:874
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:194
 msgid "Back"
 msgstr "Назад"
 
-#: src/translations.h:707
+#: src/translations.h:875
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:196
 msgid "Forward"
 msgstr "Далі"
 
-#: src/translations.h:708
+#: src/translations.h:876
 msgid "Parent Directory"
 msgstr "Батьківський каталог"
 
-#: src/translations.h:709
+#: src/translations.h:877
 msgid "Create New Folder"
 msgstr "Створити теку"
 
-#: src/translations.h:710
+#: src/translations.h:878
 msgid "List View"
 msgstr "Перегляд списком"
 
-#: src/translations.h:711
+#: src/translations.h:879
 msgid "Detail View"
 msgstr "Докладний перегляд"
 
-#: src/translations.h:712
+#: src/translations.h:880
 msgid "Recent Places"
 msgstr "Нещодавні місця"
 
-#: src/translations.h:713
+#: src/translations.h:881
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -10576,47 +11397,47 @@ msgstr ""
 "%1 вже існує.\n"
 "Хочете замінити його?"
 
-#: src/translations.h:714
+#: src/translations.h:882
 msgid "&Yes"
 msgstr "&Так"
 
-#: src/translations.h:715
+#: src/translations.h:883
 msgid "&No"
 msgstr "&Ні"
 
-#: src/translations.h:716
+#: src/translations.h:884
 msgid "&Select All"
 msgstr "Позначити &все"
 
-#: src/translations.h:717
+#: src/translations.h:885
 msgid "&Step up"
 msgstr "На крок в&гору"
 
-#: src/translations.h:718
+#: src/translations.h:886
 msgid "Step &down"
 msgstr "На крок в&низ"
 
-#: src/translations.h:719
+#: src/translations.h:887
 msgid "&Rename"
 msgstr "П&ерейменувати"
 
-#: src/translations.h:720
+#: src/translations.h:888
 msgid "&Delete"
 msgstr "Ви&лучити"
 
-#: src/translations.h:721
+#: src/translations.h:889
 msgid "&New Folder"
 msgstr "С&творити теку"
 
-#: src/translations.h:722
+#: src/translations.h:890
 msgid "New Folder"
 msgstr "Нова тека"
 
-#: src/translations.h:723
+#: src/translations.h:891
 msgid "Show &hidden files"
 msgstr "Показати при&ховані файли"
 
-#: src/translations.h:724 plugins/MeteorShowers/src/ui_MSSearchDialog.h:139
+#: src/translations.h:892 plugins/MeteorShowers/src/ui_MSSearchDialog.h:139
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:141
 msgid "Search"
 msgstr "Пошук"
