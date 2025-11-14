@@ -1,4 +1,4 @@
-# Bali
+# Balinese
 
 ## Introduction
 
