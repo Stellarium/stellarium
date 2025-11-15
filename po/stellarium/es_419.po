@@ -1549,7 +1549,7 @@ msgstr "Meseta o llanura alta."
 #. TRANSLATORS: Description for landform 'plume'
 #: src/core/modules/NomenclatureItem.cpp:795
 msgid "Cryo-volcanic feature."
-msgstr "Característica criovolcánica"
+msgstr "Característica criovolcánica."
 
 #. TRANSLATORS: Description for landform 'promontorium'
 #: src/core/modules/NomenclatureItem.cpp:797
@@ -1806,7 +1806,7 @@ msgstr "estrella simbiótica"
 
 #: src/core/modules/Nebula.cpp:100
 msgid "emission-line star"
-msgstr "Estrella línea emisión"
+msgstr "estrella de línea de emisión"
 
 #: src/core/modules/Nebula.cpp:101
 msgid "supernova candidate"
@@ -1814,7 +1814,7 @@ msgstr "candidata supernova"
 
 #: src/core/modules/Nebula.cpp:102
 msgid "supernova remnant candidate"
-msgstr "Candidato remanente supernova"
+msgstr "candidata remanente supernova"
 
 #: src/core/modules/Nebula.cpp:103
 msgid "cluster of galaxies"
@@ -1865,12 +1865,12 @@ msgstr "Masas de aire"
 #: src/core/modules/Nebula.cpp:279 src/core/modules/Planet.cpp:594
 #: src/core/modules/StarWrapper.cpp:268
 msgid "Additional names: "
-msgstr "Nombres adicionales:"
+msgstr "Nombres adicionales: "
 
 #: src/core/modules/Nebula.cpp:285 src/core/modules/Planet.cpp:601
 #: src/core/modules/StarWrapper.cpp:274
 msgid "Additional catalog numbers: "
-msgstr "Números de catálogo adicionales:"
+msgstr "Números de catálogo adicionales: "
 
 #: src/core/modules/Nebula.cpp:303 src/core/modules/Planet.cpp:864
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:319
@@ -1885,7 +1885,7 @@ msgstr "Brillo superficial"
 
 #: src/core/modules/Nebula.cpp:309
 msgid "after extinction"
-msgstr "Después de la extinción"
+msgstr "después de la extinción"
 
 #: src/core/modules/Nebula.cpp:319 src/core/modules/Nebula.cpp:321
 #: src/gui/AstroCalcDialog.cpp:1167 src/gui/AstroCalcDialog.cpp:1169
@@ -2078,22 +2078,22 @@ msgstr "rango de brillo grande de los miembros del cúmulo"
 #: src/core/modules/Nebula.cpp:1531
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
-msgstr "Rango del brillo indocumentado de los miembros del cúmulo"
+msgstr "rango de brillo no documentado de los miembros del clúster"
 
 #: src/core/modules/Nebula.cpp:1534
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
-msgstr "Cúmulo pobre con menos de 50 estrellas"
+msgstr "cúmulo pobre con menos de 50 estrellas"
 
 #: src/core/modules/Nebula.cpp:1535
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
-msgstr "Cúmulo moderadamente rico con 50-100 estrellas"
+msgstr "cúmulo moderadamente rico con 50-100 estrellas"
 
 #: src/core/modules/Nebula.cpp:1536
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
-msgstr "Cúmulo rico con más de 100 estrellas"
+msgstr "cúmulo rico con más de 100 estrellas"
 
 #: src/core/modules/Nebula.cpp:1539
 msgctxt "Trumpler's Number of Members Class"
@@ -2154,7 +2154,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:1594
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
-msgstr "Estrella se encuentra en la esquina de la nebulosidad iluminada"
+msgstr "la estrella se encuentra en la esquina de la nebulosidad iluminada"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
 #: src/core/modules/Nebula.cpp:1599
@@ -2227,23 +2227,25 @@ msgstr "brillo no documentado"
 #: src/core/modules/Nebula.cpp:1655
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
-msgstr "Remanente muestra una estructura de radio de capa"
+msgstr "el remanente muestra una estructura de radio de capa"
 
 #: src/core/modules/Nebula.cpp:1658
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
-msgstr "Remanente muestra un centro lleno ('plerion') estructura radio"
+msgstr "el remanente muestra un centro lleno ('plerion') estructura radio"
 
 #: src/core/modules/Nebula.cpp:1661
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
-msgstr "Remanente muestra una estructura de radio compuesta (o combinación)"
+msgstr ""
+"el remanente muestra una estructura de radio compuesta (o combinación)"
 
 #: src/core/modules/Nebula.cpp:1664
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
 msgstr ""
-"Remanente muestra una estructura de radio de capa con cierta incertidumbre"
+"el remanente muestra una estructura de radio de capa con cierta "
+"incertidumbre"
 
 #: src/core/modules/Nebula.cpp:1667
 msgctxt "supernova remnant structure classification"
@@ -2251,8 +2253,8 @@ msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
 "uncertainty"
 msgstr ""
-"Remanente muestra un centro lleno ('plerion') estructura de radio con cierta"
-" incertidumbre"
+"el remanente muestra una estructura de radio con un centro relleno "
+"(\"plerión\") con cierta incertidumbre"
 
 #: src/core/modules/Nebula.cpp:1670
 msgctxt "supernova remnant structure classification"
@@ -2359,7 +2361,7 @@ msgstr "objetos del disco disperso"
 
 #: src/core/modules/Planet.cpp:142
 msgid "Oort cloud object"
-msgstr "objetos de la nube de Oort"
+msgstr "Objeto de la nube de Oort"
 
 #: src/core/modules/Planet.cpp:143
 msgid "sednoid"
@@ -2367,7 +2369,7 @@ msgstr "sednoide"
 
 #: src/core/modules/Planet.cpp:144
 msgid "interstellar object"
-msgstr "Objeto interestelar"
+msgstr "objeto interestelar"
 
 #: src/core/modules/Planet.cpp:569 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:313 src/core/modules/StarWrapper.cpp:674
@@ -2463,7 +2465,7 @@ msgstr "con anillos"
 
 #: src/core/modules/Planet.cpp:838
 msgid "scaled up to"
-msgstr "Escalado a"
+msgstr "escalado a"
 
 #: src/core/modules/Planet.cpp:848
 msgid "Apparent diameter"
@@ -3186,7 +3188,7 @@ msgstr "Inicializando  destacados..."
 
 #: src/core/StelApp.cpp:674
 msgid "Initializing specific time..."
-msgstr "Inicializando tiempo específico"
+msgstr "Inicializando tiempo específico..."
 
 #: src/core/StelApp.cpp:682
 msgid "Initializing scripting..."
@@ -3284,15 +3286,15 @@ msgstr "Substraer 1 minuto solar"
 
 #: src/core/StelCore.cpp:326
 msgid "Subtract 1 solar hour"
-msgstr "restar 1 hora solar"
+msgstr "Restar 1 hora solar"
 
 #: src/core/StelCore.cpp:327
 msgid "Subtract 1 solar day"
-msgstr "restar 1 día solar"
+msgstr "Restar 1 día solar"
 
 #: src/core/StelCore.cpp:328
 msgid "Subtract 7 solar days"
-msgstr "restar 7 días solares"
+msgstr "Restar 7 días solares"
 
 #: src/core/StelCore.cpp:329
 msgid "Add 1 sidereal day"
@@ -3797,7 +3799,7 @@ msgstr "Usar por defecto."
 
 #: src/core/StelCore.cpp:2774
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
-msgstr "VERSION PARCHADA SIN ACELERACIÓN LUNAR ADICIONAL"
+msgstr "VERSION PARCHADA SIN ACELERACIÓN LUNAR ADICIONAL."
 
 #: src/core/StelCore.cpp:2774
 msgid ""
@@ -3913,12 +3915,12 @@ msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
-"Con un error medio de menos de un segundo, máx. Error 1.9s y valores para "
-"los años límites fuera de este rango"
+"con un error medio inferior a un segundo, un error máximo de 1.9 s y valores"
+" para los años límite fuera de este rango"
 
 #: src/core/StelCore.cpp:2860
 msgid "with values for the limit years outside this range"
-msgstr "Con valores para los años límites fuera de este rango"
+msgstr "con valores para los años límites fuera de este rango"
 
 #: src/core/StelCore.cpp:2870
 #, qt-format
@@ -4364,8 +4366,7 @@ msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
 msgstr ""
-"‎Compara y confronta elementos de al menos dos culturas estelares‎‎ entre "
-"sí.‎"
+"Compara y confronta elementos de al menos dos culturas estelares‎‎ entre sí."
 
 #: src/core/StelSkyCultureMgr.cpp:401
 msgctxt "sky culture classification"
@@ -10289,822 +10290,822 @@ msgstr "Simulación orbital de los satélites de Júpiter"
 #: src/translations.h:626
 msgctxt "SIMBAD object type"
 msgid "Star"
-msgstr ""
+msgstr "Estrella"
 
 #: src/translations.h:627
 msgctxt "SIMBAD object type"
 msgid "Massive Star"
-msgstr ""
+msgstr "Estrella masiva"
 
 #: src/translations.h:628
 msgctxt "SIMBAD object type"
 msgid "beta Cep Variable"
-msgstr ""
+msgstr "Variable Beta Cephei"
 
 #: src/translations.h:629
 msgctxt "SIMBAD object type"
 msgid "Evolved Supergiant"
-msgstr ""
+msgstr "Supergigante evolucionada"
 
 #: src/translations.h:630
 msgctxt "SIMBAD object type"
 msgid "Red Supergiant"
-msgstr ""
+msgstr "Supergigante roja"
 
 #: src/translations.h:631
 msgctxt "SIMBAD object type"
 msgid "Yellow Supergiant"
-msgstr ""
+msgstr "Supergigante amarilla"
 
 #: src/translations.h:632
 msgctxt "SIMBAD object type"
 msgid "Blue Supergiant"
-msgstr ""
+msgstr "Supergigante azul"
 
 #: src/translations.h:633
 msgctxt "SIMBAD object type"
 msgid "Wolf-Rayet"
-msgstr ""
+msgstr "Estrella de Wolf-Rayet"
 
 #: src/translations.h:634
 msgctxt "SIMBAD object type"
 msgid "LBV=Luminous Blue Variable"
-msgstr ""
+msgstr "LBV=Variable azul luminosa"
 
 #: src/translations.h:635
 msgctxt "SIMBAD object type"
 msgid "Neutron Star"
-msgstr ""
+msgstr "Estrella de neutrones"
 
 #: src/translations.h:636
 msgctxt "SIMBAD object type"
 msgid "Pulsar"
-msgstr ""
+msgstr "Púlsar"
 
 #: src/translations.h:637
 msgctxt "SIMBAD object type"
 msgid "Young Stellar Object"
-msgstr ""
+msgstr "Objeto estelar joven"
 
 #: src/translations.h:638
 msgctxt "SIMBAD object type"
 msgid "Orion Variable"
-msgstr ""
+msgstr "Variable de Orión"
 
 #: src/translations.h:639
 msgctxt "SIMBAD object type"
 msgid "T Tauri Star"
-msgstr ""
+msgstr "Estrella T Tauri"
 
 #: src/translations.h:640
 msgctxt "SIMBAD object type"
 msgid "Herbig Ae/Be Star"
-msgstr ""
+msgstr "Estrella Herbig Ae/Be"
 
 #: src/translations.h:641
 msgctxt "SIMBAD object type"
 msgid "Outflow"
-msgstr ""
+msgstr "Flujo"
 
 #: src/translations.h:642
 msgctxt "SIMBAD object type"
 msgid "Herbig-Haro Object"
-msgstr ""
+msgstr "Objeto de Herbig-Haro"
 
 #: src/translations.h:643
 msgctxt "SIMBAD object type"
 msgid "Main Sequence Star"
-msgstr ""
+msgstr "Estrella de secuencia principal"
 
 #: src/translations.h:644
 msgctxt "SIMBAD object type"
 msgid "Be Star"
-msgstr ""
+msgstr "Estrella Be"
 
 #: src/translations.h:645
 msgctxt "SIMBAD object type"
 msgid "Blue Straggler"
-msgstr ""
+msgstr "Rezagada azul"
 
 #: src/translations.h:646
 msgctxt "SIMBAD object type"
 msgid "SX Phe Variable"
-msgstr ""
+msgstr "Variable SX Phe"
 
 #: src/translations.h:647
 msgctxt "SIMBAD object type"
 msgid "gamma Dor Variable"
-msgstr ""
+msgstr "Variable gamma Dor"
 
 #: src/translations.h:648
 msgctxt "SIMBAD object type"
 msgid "delta Sct Variable"
-msgstr ""
+msgstr "Variable delta Sct"
 
 #: src/translations.h:649
 msgctxt "SIMBAD object type"
 msgid "Evolved Star"
-msgstr ""
+msgstr "Estrella evolucionada"
 
 #: src/translations.h:650
 msgctxt "SIMBAD object type"
 msgid "Red Giant Branch star"
-msgstr ""
+msgstr "Estrella de la rama gigante roja"
 
 #: src/translations.h:651
 msgctxt "SIMBAD object type"
 msgid "Hot Subdwarf"
-msgstr ""
+msgstr "Subenana caliente"
 
 #: src/translations.h:652
 msgctxt "SIMBAD object type"
 msgid "Horizontal Branch Star"
-msgstr ""
+msgstr "Estrella de la rama horizontal"
 
 #: src/translations.h:653
 msgctxt "SIMBAD object type"
 msgid "RR Lyrae Variable"
-msgstr ""
+msgstr "Variable RR Lyrae"
 
 #: src/translations.h:654
 msgctxt "SIMBAD object type"
 msgid "Red Clump Star"
-msgstr ""
+msgstr "Estrella de apelotonamiento rojo"
 
 #: src/translations.h:655
 msgctxt "SIMBAD object type"
 msgid "Type II Cepheid Variable"
-msgstr ""
+msgstr "Variable cefeida de tipo II"
 
 #: src/translations.h:656
 msgctxt "SIMBAD object type"
 msgid "Cepheid Variable"
-msgstr ""
+msgstr "Variable cefeida"
 
 #: src/translations.h:657
 msgctxt "SIMBAD object type"
 msgid "Classical Cepheid Variable"
-msgstr ""
+msgstr "Variable cefeida clásica"
 
 #: src/translations.h:658
 msgctxt "SIMBAD object type"
 msgid "Carbon Star"
-msgstr ""
+msgstr "Estrella de carbono"
 
 #: src/translations.h:659
 msgctxt "SIMBAD object type"
 msgid "S Star"
-msgstr ""
+msgstr "Estrella de tipo S"
 
 #: src/translations.h:660
 msgctxt "SIMBAD object type"
 msgid "Long-Period Variable"
-msgstr ""
+msgstr "Variable de largo periodo"
 
 #: src/translations.h:661
 msgctxt "SIMBAD object type"
 msgid "Asymptotic Giant Branch Star"
-msgstr ""
+msgstr "Estrella de la rama asintótica gigante"
 
 #: src/translations.h:662
 msgctxt "SIMBAD object type"
 msgid "Mira Variable"
-msgstr ""
+msgstr "Variable Mira"
 
 #: src/translations.h:663
 msgctxt "SIMBAD object type"
 msgid "O-rich AGB Star"
-msgstr ""
+msgstr "Estrella AGB rica en oxígeno"
 
 #: src/translations.h:664
 msgctxt "SIMBAD object type"
 msgid "OH/IR Star"
-msgstr ""
+msgstr "Estrella OH/IR"
 
 #: src/translations.h:665
 msgctxt "SIMBAD object type"
 msgid "Post-AGB Star"
-msgstr ""
+msgstr "Estrella post-AGB"
 
 #: src/translations.h:666
 msgctxt "SIMBAD object type"
 msgid "RV Tauri Variable"
-msgstr ""
+msgstr "Variable RV Tauri"
 
 #: src/translations.h:667
 msgctxt "SIMBAD object type"
 msgid "Planetary Nebula"
-msgstr ""
+msgstr "Nebulosa planetaria"
 
 #: src/translations.h:668
 msgctxt "SIMBAD object type"
 msgid "White Dwarf"
-msgstr ""
+msgstr "Enana blanca"
 
 #: src/translations.h:669
 msgctxt "SIMBAD object type"
 msgid "ELMWD=Extremely Low Mass White Dwarf"
-msgstr ""
+msgstr "ELMWD=Enana blanca de masa extremadamente baja"
 
 #: src/translations.h:670
 msgctxt "SIMBAD object type"
 msgid "Chemically Peculiar Star"
-msgstr ""
+msgstr "Estrella químicamente peculiar"
 
 #: src/translations.h:671
 msgctxt "SIMBAD object type"
 msgid "alpha2 CVn Variable"
-msgstr ""
+msgstr "Variable alpha2 CVn"
 
 #: src/translations.h:672
 msgctxt "SIMBAD object type"
 msgid "R CrB Variable"
-msgstr ""
+msgstr "Variable R CrB"
 
 #: src/translations.h:673
 msgctxt "SIMBAD object type"
 msgid "CH Star"
-msgstr ""
+msgstr "Estrella CH"
 
 #: src/translations.h:674
 msgctxt "SIMBAD object type"
 msgid "Barium Star"
-msgstr ""
+msgstr "Estrella de bario"
 
 #: src/translations.h:675
 msgctxt "SIMBAD object type"
 msgid "Dwarf Carbon Star"
-msgstr ""
+msgstr "Estrella enana de carbono"
 
 #: src/translations.h:676
 msgctxt "SIMBAD object type"
 msgid "Carbon-Enhanced Metal Poor Star"
-msgstr ""
+msgstr "Estrella pobre en metales y enriquecida en carbono"
 
 #: src/translations.h:677
 msgctxt "SIMBAD object type"
 msgid "Double or Multiple Star"
-msgstr ""
+msgstr "Estrella doble o múltiple"
 
 #: src/translations.h:678
 msgctxt "SIMBAD object type"
 msgid "Eclipsing Binary"
-msgstr ""
+msgstr "Binaria eclipsante"
 
 #: src/translations.h:679
 msgctxt "SIMBAD object type"
 msgid "Ellipsoidal Variable"
-msgstr ""
+msgstr "Variable elipsoidal"
 
 #: src/translations.h:680
 msgctxt "SIMBAD object type"
 msgid "Spectroscopic Binary"
-msgstr ""
+msgstr "Binaria espectroscópica"
 
 #: src/translations.h:681
 msgctxt "SIMBAD object type"
 msgid "RS CVn Variable"
-msgstr ""
+msgstr "Variable RS CVn"
 
 #: src/translations.h:682
 msgctxt "SIMBAD object type"
 msgid "BY Dra Variable"
-msgstr ""
+msgstr "Variable BY Dra"
 
 #: src/translations.h:683
 msgctxt "SIMBAD object type"
 msgid "Symbiotic Star"
-msgstr ""
+msgstr "Estrella simbiótica"
 
 #: src/translations.h:684
 msgctxt "SIMBAD object type"
 msgid "X-ray Binary"
-msgstr ""
+msgstr "Binaria de rayos X"
 
 #: src/translations.h:685
 msgctxt "SIMBAD object type"
 msgid "Low Mass X-ray Binary"
-msgstr ""
+msgstr "Binaria de rayos X de baja masa"
 
 #: src/translations.h:686
 msgctxt "SIMBAD object type"
 msgid "High Mass X-ray Binary"
-msgstr ""
+msgstr "Binaria de rayos X de alta masa"
 
 #: src/translations.h:687
 msgctxt "SIMBAD object type"
 msgid "Cataclysmic Binary"
-msgstr ""
+msgstr "Binaria cataclísmica"
 
 #: src/translations.h:688
 msgctxt "SIMBAD object type"
 msgid "Classical Nova"
-msgstr ""
+msgstr "Nova clásica"
 
 #: src/translations.h:689
 msgctxt "SIMBAD object type"
 msgid "SuperNova"
-msgstr ""
+msgstr "Supernova"
 
 #: src/translations.h:690
 msgctxt "SIMBAD object type"
 msgid "Low-mass Star"
-msgstr ""
+msgstr "Estrella de baja masa"
 
 #: src/translations.h:691
 msgctxt "SIMBAD object type"
 msgid "Brown Dwarf"
-msgstr ""
+msgstr "Enana marrón"
 
 #: src/translations.h:692
 msgctxt "SIMBAD object type"
 msgid "Extra-solar Planet"
-msgstr ""
+msgstr "Planeta extrasolar"
 
 #: src/translations.h:693
 msgctxt "SIMBAD object type"
 msgid "Variable Star"
-msgstr ""
+msgstr "Estrella variable"
 
 #: src/translations.h:694
 msgctxt "SIMBAD object type"
 msgid "Irregular Variable"
-msgstr ""
+msgstr "Variable irregular"
 
 #: src/translations.h:695
 msgctxt "SIMBAD object type"
 msgid "Irregular Variable with rapid variations"
-msgstr ""
+msgstr "Variable irregular con variaciones rápidas"
 
 #: src/translations.h:696
 msgctxt "SIMBAD object type"
 msgid "Eruptive Variable"
-msgstr ""
+msgstr "Variable eruptiva"
 
 #: src/translations.h:697
 msgctxt "SIMBAD object type"
 msgid "Rotating Variable"
-msgstr ""
+msgstr "Variable rotatoria"
 
 #: src/translations.h:698
 msgctxt "SIMBAD object type"
 msgid "Pulsating Variable"
-msgstr ""
+msgstr "Variable pulsante"
 
 #: src/translations.h:699
 msgctxt "SIMBAD object type"
 msgid "Star showing Eclipses by its Planet"
-msgstr ""
+msgstr "Estrella que muestra eclipses por su planeta"
 
 #: src/translations.h:700
 msgctxt "SIMBAD object type"
 msgid "Emission-line Star"
-msgstr ""
+msgstr "Estrella de línea de emisión"
 
 #: src/translations.h:701
 msgctxt "SIMBAD object type"
 msgid "High Proper Motion Star"
-msgstr ""
+msgstr "Estrella de movimiento propio alto"
 
 #: src/translations.h:702
 msgctxt "SIMBAD object type"
 msgid "High Velocity Star"
-msgstr ""
+msgstr "Estrella de alta velocidad"
 
 #: src/translations.h:703
 msgctxt "SIMBAD object type"
 msgid "Cluster of Stars"
-msgstr ""
+msgstr "Cúmulo de estrellas"
 
 #: src/translations.h:704
 msgctxt "SIMBAD object type"
 msgid "Globular Cluster"
-msgstr ""
+msgstr "Cúmulo globular"
 
 #: src/translations.h:705
 msgctxt "SIMBAD object type"
 msgid "Open Cluster"
-msgstr ""
+msgstr "Cúmulo abierto"
 
 #: src/translations.h:706
 msgctxt "SIMBAD object type"
 msgid "Association of Stars"
-msgstr ""
+msgstr "Asociación de estrellas"
 
 #: src/translations.h:707
 msgctxt "SIMBAD object type"
 msgid "Stellar Stream"
-msgstr ""
+msgstr "Corriente estelar"
 
 #: src/translations.h:708
 msgctxt "SIMBAD object type"
 msgid "Moving Group"
-msgstr ""
+msgstr "Grupo móvil"
 
 #: src/translations.h:709
 msgctxt "SIMBAD object type"
 msgid "Interstellar Medium Object"
-msgstr ""
+msgstr "Objeto interestelar mediano"
 
 #: src/translations.h:710
 msgctxt "SIMBAD object type"
 msgid "Star Forming Region"
-msgstr ""
+msgstr "Región de formación estelar"
 
 #: src/translations.h:711
 msgctxt "SIMBAD object type"
 msgid "HII Region"
-msgstr ""
+msgstr "Región HII"
 
 #: src/translations.h:712
 msgctxt "SIMBAD object type"
 msgid "Cloud"
-msgstr ""
+msgstr "Nube"
 
 #: src/translations.h:713
 msgctxt "SIMBAD object type"
 msgid "Nebula"
-msgstr ""
+msgstr "Nebulosa"
 
 #: src/translations.h:714
 msgctxt "SIMBAD object type"
 msgid "Reflection Nebula"
-msgstr ""
+msgstr "Nebulosa de reflexión"
 
 #: src/translations.h:715
 msgctxt "SIMBAD object type"
 msgid "Molecular Cloud"
-msgstr ""
+msgstr "Nube molecular"
 
 #: src/translations.h:716
 msgctxt "SIMBAD object type"
 msgid "Dark Cloud (nebula)"
-msgstr ""
+msgstr "Nube oscura (nebulosa)"
 
 #: src/translations.h:717
 msgctxt "SIMBAD object type"
 msgid "Globule (low-mass dark cloud)"
-msgstr ""
+msgstr "Glóbulo (nube oscura de baja masa)"
 
 #: src/translations.h:718
 msgctxt "SIMBAD object type"
 msgid "Cometary Globule / Pillar"
-msgstr ""
+msgstr "Glóbulo/pilar cometario"
 
 #: src/translations.h:719
 msgctxt "SIMBAD object type"
 msgid "High-velocity Cloud"
-msgstr ""
+msgstr "Nube de alta velocidad"
 
 #: src/translations.h:720
 msgctxt "SIMBAD object type"
 msgid "Dense Core"
-msgstr ""
+msgstr "Núcleo denso"
 
 #: src/translations.h:721
 msgctxt "SIMBAD object type"
 msgid "Bubble"
-msgstr ""
+msgstr "Burbuja"
 
 #: src/translations.h:722
 msgctxt "SIMBAD object type"
 msgid "SuperNova Remnant"
-msgstr ""
+msgstr "Remanente de Supernova"
 
 #: src/translations.h:723
 msgctxt "SIMBAD object type"
 msgid "Interstellar Shell"
-msgstr ""
+msgstr "Envoltura interestelar"
 
 #: src/translations.h:724
 msgctxt "SIMBAD object type"
 msgid "Interstellar Filament"
-msgstr ""
+msgstr "Filamento interestelar"
 
 #: src/translations.h:725
 msgctxt "SIMBAD object type"
 msgid "Galaxy"
-msgstr ""
+msgstr "Galaxia"
 
 #: src/translations.h:726
 msgctxt "SIMBAD object type"
 msgid "Low Surface Brightness Galaxy"
-msgstr ""
+msgstr "Galaxia de bajo brillo superficial"
 
 #: src/translations.h:727
 msgctxt "SIMBAD object type"
 msgid "Blue Compact Galaxy"
-msgstr ""
+msgstr "Galaxia compacta azul"
 
 #: src/translations.h:728
 msgctxt "SIMBAD object type"
 msgid "Starburst Galaxy"
-msgstr ""
+msgstr "Galaxia con brote estelar"
 
 #: src/translations.h:729
 msgctxt "SIMBAD object type"
 msgid "HII Galaxy"
-msgstr ""
+msgstr "Galaxia HII"
 
 #: src/translations.h:730
 msgctxt "SIMBAD object type"
 msgid "Emission-line galaxy"
-msgstr ""
+msgstr "Galaxia de línea de emisión"
 
 #: src/translations.h:731
 msgctxt "SIMBAD object type"
 msgid "Active Galaxy Nucleus"
-msgstr ""
+msgstr "Núcleo galáctico activo"
 
 #: src/translations.h:732
 msgctxt "SIMBAD object type"
 msgid "Seyfert Galaxy"
-msgstr ""
+msgstr "Galaxia Seyfert"
 
 #: src/translations.h:733
 msgctxt "SIMBAD object type"
 msgid "Seyfert 1 Galaxy"
-msgstr ""
+msgstr "Galaxia Seyfert 1"
 
 #: src/translations.h:734
 msgctxt "SIMBAD object type"
 msgid "Seyfert 2 Galaxy"
-msgstr ""
+msgstr "Galaxia Seyfert 2"
 
 #: src/translations.h:735
 msgctxt "SIMBAD object type"
 msgid "Radio Galaxy"
-msgstr ""
+msgstr "Radiogalaxia"
 
 #: src/translations.h:736
 msgctxt "SIMBAD object type"
 msgid "LINER-type Active Galaxy Nucleus"
-msgstr ""
+msgstr "Núcleo de galaxia activa de tipo LINER"
 
 #: src/translations.h:737
 msgctxt "SIMBAD object type"
 msgid "Quasar"
-msgstr ""
+msgstr "Cuásar"
 
 #: src/translations.h:738
 msgctxt "SIMBAD object type"
 msgid "Blazar"
-msgstr ""
+msgstr "Blazar"
 
 #: src/translations.h:739
 msgctxt "SIMBAD object type"
 msgid "BL Lac"
-msgstr ""
+msgstr "Objeto BL Lac"
 
 #: src/translations.h:740
 msgctxt "SIMBAD object type"
 msgid "ULIRG, Ultra Luminous Infrared Galaxy"
-msgstr ""
+msgstr "ULIRG, galaxia infrarroja ultraluminosa"
 
 #: src/translations.h:741
 msgctxt "SIMBAD object type"
 msgid "Galaxy in Pair of Galaxies"
-msgstr ""
+msgstr "Galaxia en par de galaxias"
 
 #: src/translations.h:742
 msgctxt "SIMBAD object type"
 msgid "Galaxy towards a Group of Galaxies"
-msgstr ""
+msgstr "Galaxia hacia un grupo de galaxias"
 
 #: src/translations.h:743
 msgctxt "SIMBAD object type"
 msgid "Galaxy towards a Cluster of Galaxies"
-msgstr ""
+msgstr "Galaxia hacia un cúmulo de galaxias"
 
 #: src/translations.h:744
 msgctxt "SIMBAD object type"
 msgid "Brightest Galaxy in a Cluster (BCG)"
-msgstr ""
+msgstr "Galaxia más brillante en un cúmulo (BCG)"
 
 #: src/translations.h:745
 msgctxt "SIMBAD object type"
 msgid "Interacting Galaxies"
-msgstr ""
+msgstr "Galaxias en interacción"
 
 #: src/translations.h:746
 msgctxt "SIMBAD object type"
 msgid "Pair of Galaxies"
-msgstr ""
+msgstr "Par de galaxias"
 
 #: src/translations.h:747
 msgctxt "SIMBAD object type"
 msgid "Group of Galaxies"
-msgstr ""
+msgstr "Grupo de galaxias"
 
 #: src/translations.h:748
 msgctxt "SIMBAD object type"
 msgid "Compact Group of Galaxies"
-msgstr ""
+msgstr "Grupo compacto de galaxias"
 
 #: src/translations.h:749
 msgctxt "SIMBAD object type"
 msgid "Cluster of Galaxies"
-msgstr ""
+msgstr "Cúmulo de galaxias"
 
 #: src/translations.h:750
 msgctxt "SIMBAD object type"
 msgid "Proto Cluster of Galaxies"
-msgstr ""
+msgstr "Protocúmulo de galaxias"
 
 #: src/translations.h:751
 msgctxt "SIMBAD object type"
 msgid "Supercluster of Galaxies"
-msgstr ""
+msgstr "Supercúmulo de galaxias"
 
 #: src/translations.h:752
 msgctxt "SIMBAD object type"
 msgid "Underdense Region of the Universe"
-msgstr ""
+msgstr "Región infradensa del universo"
 
 #: src/translations.h:753
 msgctxt "SIMBAD object type"
 msgid "Gravitational Source"
-msgstr ""
+msgstr "Fuente gravitacional"
 
 #: src/translations.h:754
 msgctxt "SIMBAD object type"
 msgid "(Micro)Lensing Event"
-msgstr ""
+msgstr "Evento de (micro)lente gravitacional"
 
 #: src/translations.h:755
 msgctxt "SIMBAD object type"
 msgid "Gravitational Lens System (lens+images)"
-msgstr ""
+msgstr "Sistema de lente gravitacional (lente+imágenes)"
 
 #: src/translations.h:756
 msgctxt "SIMBAD object type"
 msgid "Gravitational Lens"
-msgstr ""
+msgstr "Lente gravitacional"
 
 #: src/translations.h:757
 msgctxt "SIMBAD object type"
 msgid "Gravitationally Lensed Image"
-msgstr ""
+msgstr "Imagen con lente gravitacional"
 
 #: src/translations.h:758
 msgctxt "SIMBAD object type"
 msgid "Gravitationally Lensed Image of a Galaxy"
-msgstr ""
+msgstr "Imagen de una galaxia con lente gravitacional"
 
 #: src/translations.h:759
 msgctxt "SIMBAD object type"
 msgid "Gravitationally Lensed Image of a Quasar"
-msgstr ""
+msgstr "Imagen de un cuásar con lente gravitacional"
 
 #: src/translations.h:760
 msgctxt "SIMBAD object type"
 msgid "Black Hole"
-msgstr ""
+msgstr "Agujero negro"
 
 #: src/translations.h:761
 msgctxt "SIMBAD object type"
 msgid "Gravitational Wave Event"
-msgstr ""
+msgstr "Evento de onda gravitacional"
 
 #: src/translations.h:762
 msgctxt "SIMBAD object type"
 msgid "Transient Event"
-msgstr ""
+msgstr "Evento transitorio"
 
 #: src/translations.h:763
 msgctxt "SIMBAD object type"
 msgid "Variable source"
-msgstr ""
+msgstr "Fuente variable"
 
 #: src/translations.h:764
 msgctxt "SIMBAD object type"
 msgid "Radio Source"
-msgstr ""
+msgstr "Radiofuente"
 
 #: src/translations.h:765
 msgctxt "SIMBAD object type"
 msgid "Metric Radio Source"
-msgstr ""
+msgstr "Radiofuente métrica"
 
 #: src/translations.h:766
 msgctxt "SIMBAD object type"
 msgid "Centimetric Radio Source"
-msgstr ""
+msgstr "Radiofuente centimétrica"
 
 #: src/translations.h:767
 msgctxt "SIMBAD object type"
 msgid "Millimetric Radio Source"
-msgstr ""
+msgstr "Radiofuente milimétrica"
 
 #: src/translations.h:768
 msgctxt "SIMBAD object type"
 msgid "Sub-Millimetric Source"
-msgstr ""
+msgstr "Fuente submilimétrica"
 
 #: src/translations.h:769
 msgctxt "SIMBAD object type"
 msgid "HI (21cm) Source"
-msgstr ""
+msgstr "Fuente de HI (21cm)"
 
 #: src/translations.h:770
 msgctxt "SIMBAD object type"
 msgid "Radio Burst"
-msgstr ""
+msgstr "Estallido de radio"
 
 #: src/translations.h:771
 msgctxt "SIMBAD object type"
 msgid "Maser"
-msgstr ""
+msgstr "Maser"
 
 #: src/translations.h:772
 msgctxt "SIMBAD object type"
 msgid "Infra-Red Source"
-msgstr ""
+msgstr "Fuente infrarroja"
 
 #: src/translations.h:773
 msgctxt "SIMBAD object type"
 msgid "Far-IR source (λ >= 30 µm)"
-msgstr ""
+msgstr "Fuente de infrarroja lejana (λ >= 30 µm)"
 
 #: src/translations.h:774
 msgctxt "SIMBAD object type"
 msgid "Mid-IR Source (3 to 30 µm)"
-msgstr ""
+msgstr "Fuente de infrarroja media (3 a 30 µm)"
 
 #: src/translations.h:775
 msgctxt "SIMBAD object type"
 msgid "Near-IR Source (λ < 3 µm)"
-msgstr ""
+msgstr "Fuente de infrarroja cercana (λ < 3 µm)"
 
 #: src/translations.h:776
 msgctxt "SIMBAD object type"
 msgid "Optical Source"
-msgstr ""
+msgstr "Fuente óptica"
 
 #: src/translations.h:777
 msgctxt "SIMBAD object type"
 msgid "Emission Object"
-msgstr ""
+msgstr "Objeto de emisión"
 
 #: src/translations.h:778
 msgctxt "SIMBAD object type"
 msgid "Blue Object"
-msgstr ""
+msgstr "Objeto azul"
 
 #: src/translations.h:779
 msgctxt "SIMBAD object type"
 msgid "UV-emission Source"
-msgstr ""
+msgstr "Fuente de emisión UV"
 
 #: src/translations.h:780
 msgctxt "SIMBAD object type"
 msgid "X-ray Source"
-msgstr ""
+msgstr "Fuente de rayos X"
 
 #: src/translations.h:781
 msgctxt "SIMBAD object type"
 msgid "Ultra-luminous X-ray Source"
-msgstr ""
+msgstr "Fuente de rayos X ultraluminosa"
 
 #: src/translations.h:782
 msgctxt "SIMBAD object type"
 msgid "Gamma-ray Source"
-msgstr ""
+msgstr "Fuente de rayos gamma"
 
 #: src/translations.h:783
 msgctxt "SIMBAD object type"
 msgid "Gamma-ray Burst"
-msgstr ""
+msgstr "Estallido de rayos gamma"
 
 #: src/translations.h:784
 msgctxt "SIMBAD object type"
 msgid "Composite Object, Blend"
-msgstr ""
+msgstr "Objeto compuesto, mezcla"
 
 #: src/translations.h:785
 msgctxt "SIMBAD object type"
 msgid "Not an Object (Error, Artefact, ...)"
-msgstr ""
+msgstr "No es un objeto (error, artefacto, ...)"
 
 #: src/translations.h:786
 msgctxt "SIMBAD object type"
 msgid "Part of Cloud"
-msgstr ""
+msgstr "Parte de una nube"
 
 #: src/translations.h:787
 msgctxt "SIMBAD object type"
 msgid "Part of a Galaxy"
-msgstr ""
+msgstr "Parte de una galaxia"
 
 #: src/translations.h:788
 msgctxt "SIMBAD object type"
 msgid "Object of Unknown Nature"
-msgstr ""
+msgstr "Objeto de naturaleza desconocida"
 
 #: src/translations.h:789
 msgctxt "SIMBAD object type"
 msgid "Region defined in the Sky"
-msgstr ""
+msgstr "Región definida en el cielo"
 
 #. TRANSLATORS: This is a filter checkbox meaning "include penumbral lunar
 #. eclipses", so the adjective should be in plural (if applicable)
@@ -11294,7 +11295,7 @@ msgstr "Etiquetas:"
 
 #: src/translations.h:858
 msgid "File &name:"
-msgstr "&Nombre de archivo"
+msgstr "&Nombre de archivo:"
 
 #: src/translations.h:859
 msgid "Copy &Link Location"
@@ -11327,7 +11328,7 @@ msgstr "&Añadir a los colores personalizados"
 
 #: src/translations.h:866
 msgid "Hu&e:"
-msgstr "&Matiz"
+msgstr "&Matiz:"
 
 #: src/translations.h:867
 msgid "&Sat:"
@@ -13151,7 +13152,7 @@ msgstr "seg. de arco"
 
 #: src/ui_searchDialogGui.h:855
 msgid "Max. results "
-msgstr "Max, resultados"
+msgstr "Resultados máximos "
 
 #: src/ui_searchDialogGui.h:857
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:564
@@ -14120,7 +14121,7 @@ msgstr "El grosor de línea para cuadrículas y líneas"
 
 #: src/ui_viewDialog.h:4358
 msgid "Thickness: "
-msgstr "Grosor:"
+msgstr "Grosor: "
 
 #: src/ui_viewDialog.h:4359
 msgid "lines"
@@ -15132,7 +15133,7 @@ msgstr "Coordenadas eclípticas (de fecha)"
 
 #: src/ui_configurationDialog.h:1997
 msgid "Equatorial coordinates, equinox of J2000.0"
-msgstr "Coordenadas ecuatoriales, equinoccio de J2000."
+msgstr "Coordenadas ecuatoriales, equinoccio de J2000"
 
 #: src/ui_configurationDialog.h:1999
 msgid "Right ascension/Declination (J2000)"
@@ -15319,7 +15320,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:2090
 msgid "Allow negative hour angles "
-msgstr "Permitir ángulos horarios negativos"
+msgstr "Permitir ángulos horarios negativos "
 
 #: src/ui_configurationDialog.h:2091
 msgid "Show additional buttons"
@@ -15560,7 +15561,7 @@ msgstr "Exajerar aberración (para explicaciones académicas)"
 
 #: src/ui_configurationDialog.h:2223
 msgid "Include "
-msgstr "Incluir"
+msgstr "Incluir "
 
 #: src/ui_configurationDialog.h:2225
 msgid ""
@@ -15609,7 +15610,7 @@ msgstr "max:"
 msgid "Maximum allowed FPS. 1000 just means \"as fast as possible\". "
 msgstr ""
 "FPS máximos permitidos. 1000 simplemente significa \"lo más rápido "
-"posible\"."
+"posible\". "
 
 #: src/ui_configurationDialog.h:2242
 msgid "Allow keyboard to pan and zoom"
@@ -15800,7 +15801,7 @@ msgstr "Cargar al inicio"
 
 #: src/ui_configurationDialog.h:2332
 msgid "configure"
-msgstr "Configurar"
+msgstr "configurar"
 
 #: src/ui_addRemoveLandscapesDialog.h:226
 msgid "Add/Remove Landscapes"
@@ -16562,7 +16563,7 @@ msgstr "Velocidad orbital del segundo cuerpo celeste:"
 
 #: src/ui_astroCalcDialog.h:2559
 msgid "Orbital periods ratio:"
-msgstr "‎Relación de periodos orbitales:‎"
+msgstr "Relación de periodos orbitales:"
 
 #: src/ui_astroCalcDialog.h:2560
 msgid "Equatorial diameters ratio:"
@@ -17029,7 +17030,7 @@ msgstr "También cargar:"
 
 #: src/ui_obsListDialog.h:404
 msgid "Also store:"
-msgstr "También guardar..."
+msgstr "También guardar:"
 
 #: src/ui_obsListDialog.h:406
 msgid "Store/load equatorial coordinates (J2000.0)"
@@ -18349,7 +18350,7 @@ msgstr "Criterio de resolución de Rayleigh"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:837
 msgid "Dawes' limit"
-msgstr "limite Dawes'"
+msgstr "Límite de Dawes'"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:839
 msgid "Dawes' resolution criterion"
@@ -19657,7 +19658,7 @@ msgstr "molniya"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=qianfan&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3540
 msgid "qianfan"
-msgstr "Qianfan"
+msgstr "qianfan"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Hulianwang
 #. constellation (Hulianwang is a proper name)
@@ -19665,17 +19666,17 @@ msgstr "Qianfan"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=hulianwang&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3543
 msgid "hulianwang"
-msgstr "Hulianwang"
+msgstr "hulianwang"
 
 #. TRANSLATORS: CelesTrak source [Kuiper]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=kuiper&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3545
 msgid "kuiper"
-msgstr "Kuiper"
+msgstr "kuiper"
 
 #: plugins/Satellites/src/Satellites.cpp:3546
 msgid "yamal"
-msgstr "Yamal"
+msgstr "yamal"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GNSS satellites
 #. TRANSLATORS: CelesTrak source [GNSS]:
@@ -20185,7 +20186,7 @@ msgstr "kHz"
 #: plugins/Satellites/src/Satellite.cpp:762
 msgctxt "operational status"
 msgid "operational"
-msgstr "Operacional"
+msgstr "operacional"
 
 #: plugins/Satellites/src/Satellite.cpp:763
 msgctxt "operational status"
@@ -22248,7 +22249,7 @@ msgstr "Hay un cuadro emergente que sugiere algunos valores por defecto:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
 msgid "On Windows, serial ports COM1 to COM10;"
-msgstr "En Windows, puertos serie COM1 a COM10"
+msgstr "En Windows, puertos serie COM1 a COM10;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:408
 msgid ""
@@ -22256,7 +22257,7 @@ msgid ""
 "to /dev/ttyUSB3;"
 msgstr ""
 "En Linux, puertos serie/dev/ttyS0 a /dev/ttyS3 y Puertos USB /dev/ttyUSB0 a "
-"/dev/ttyUSB3."
+"/dev/ttyUSB3;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:409
 msgid ""
@@ -22784,7 +22785,7 @@ msgstr "Rotar telescopio a"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:313
 msgid "There are no active devices."
-msgstr "No hay dispositivos activos"
+msgstr "No hay dispositivos activos."
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:314
 msgid "Slew telescope to coordinates"
@@ -23177,7 +23178,7 @@ msgstr "Colores"
 #. TRANSLATORS: Refers to constellation art
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Art brightness:"
-msgstr "Brillo de las constelaciones"
+msgstr "Brillo de las constelaciones:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:384
 msgid "Ecliptic line (J2000)"
@@ -23229,7 +23230,7 @@ msgstr "Duración zoom:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:496
 msgid "Milky Way intensity:"
-msgstr "Intensidad de la vía lactea"
+msgstr "Intensidad de la vía lactea:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:502
 msgid "Milky Way saturation:"
@@ -23237,7 +23238,7 @@ msgstr "Saturación de Vía Láctea:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:508
 msgid "Zodiacal light intensity:"
-msgstr "Intensidad del luz zodiacal"
+msgstr "Intensidad del luz zodiacal:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:530
 msgid "Run local script"
@@ -23379,7 +23380,7 @@ msgstr "Buscando..."
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:107
 msgid "website"
-msgstr "Sitio web"
+msgstr "sitio web"
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:111
@@ -23975,7 +23976,7 @@ msgid ""
 "twilights"
 msgstr ""
 "La suma de la duración del día y la duración de los crepúsculos matutinos y "
-"vespertinos."
+"vespertinos"
 
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:244
@@ -23985,7 +23986,7 @@ msgstr "angloamericano"
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:246
 msgid "French"
-msgstr "francés"
+msgstr "Francés"
 
 #. TRANSLATORS: Part of full phrase: British (XVIII century) set of
 #. navigational stars
@@ -23996,7 +23997,7 @@ msgstr "británico (siglo XVIII)"
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:250
 msgid "Russian"
-msgstr "ruso"
+msgstr "Ruso"
 
 #. TRANSLATORS: Part of full phrase: Soviet aviation set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:252
@@ -24156,7 +24157,7 @@ msgstr ""
 #: plugins/NavStars/src/ui_navStarsWindow.h:490
 #: plugins/NavStars/src/ui_navStarsWindow.h:505
 msgid "Navigational stars"
-msgstr "estrellas de navegación"
+msgstr "Estrellas de navegación"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:491
 msgid "Set of navigational stars"
@@ -24696,7 +24697,7 @@ msgstr ""
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:155
 msgid "This allows triggering automatic show setups for museums etc."
 msgstr ""
-"esto permite la activación automática para mostrar las configuraciones de "
+"Esto permite la activación automática para mostrar las configuraciones de "
 "museos etc.."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:156
@@ -24750,7 +24751,7 @@ msgstr "El acceso requiere autenticación"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:236
 msgid "Password"
-msgstr "contraseña"
+msgstr "Contraseña"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:237
 msgid ""
@@ -25327,7 +25328,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:315
 msgctxt "time unit"
 msgid " h"
-msgstr "h"
+msgstr " h"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:317
 msgid "Potential habitable exoplanets"
@@ -27736,7 +27737,7 @@ msgstr "Resultados finales de la votación pública NameExoWorlds lanzada"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:630
 msgid "NameExoWorlds website"
-msgstr "página web NameExoWorlds"
+msgstr "Sitio web de NameExoWorlds"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:645
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -27982,7 +27983,7 @@ msgstr "eje X"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:580
 msgctxt "tab in plugin windows"
 msgid "Diagram"
-msgstr "diagrama"
+msgstr "Diagrama"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:581
 msgid "Table"
@@ -28571,7 +28572,7 @@ msgstr "Actividad"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:642
 #: plugins/MeteorShowers/src/MeteorShower.cpp:667
 msgid "Solar longitude "
-msgstr "Longitud solar"
+msgstr "Longitud solar "
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:650
 msgctxt "meteor shower activity"
@@ -29515,7 +29516,7 @@ msgstr "Cámara anterior"
 
 #: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:98
 msgid "See more at"
-msgstr "Más información en:"
+msgstr "Más información en"
 
 #: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:230
 msgid "Mosaic Camera Plug-in"
@@ -29928,8 +29929,8 @@ msgstr "Escena cargada exitosamente"
 #: plugins/Scenery3d/src/Scenery3d.cpp:596
 msgid "Could not load scene info, please check log for error messages!"
 msgstr ""
-"No se pudo cargar información de la escena, por favor, verifique el registro"
-" de los mensajes de error."
+"No se pudo cargar información de la escena, por favor, ¡verifique el "
+"registro de los mensajes de error!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:620
 #, qt-format
@@ -29962,7 +29963,7 @@ msgstr "desactivado"
 #: plugins/Scenery3d/src/Scenery3d.cpp:721
 #, qt-format
 msgid "Shadows %1."
-msgstr "Sombras %1"
+msgstr "Sombras %1."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:726
 msgid "Shadows deactivated or not possible."
@@ -30047,7 +30048,7 @@ msgstr ""
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
 "Error en Scenery3d shader, no se puede dibujar. Revise la salida de "
-"depuración para detalles"
+"depuración para detalles."
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:1784
 msgid ""
@@ -30108,7 +30109,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:272
 msgid "PCSS requires the quality set to LOW or HIGH."
-msgstr "PCSS requiere que se establezca la calidad a BAJA o ALTA"
+msgstr "PCSS requiere que se establezca la calidad a BAJA o ALTA."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:274
 msgid ""
@@ -30406,7 +30407,7 @@ msgstr "PCSS"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:507
 msgid "Cubemapping mode:"
-msgstr "Modo de Mapeo de Cubo"
+msgstr "Modo de mapeo de cubo:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
 msgid "Full cubemap shadows"
@@ -30414,7 +30415,7 @@ msgstr "Sombras cubemap completas"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:509
 msgid "Lazy cubemap re-rendering"
-msgstr "vaga re-visualisacion cubemap"
+msgstr "Revisualización de mapeo de cubo vaga"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:510
 msgid "Interval:"
@@ -30422,7 +30423,7 @@ msgstr "Intervalo:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:511
 msgid "Only update dominant face when moving"
-msgstr "Actualizar cara dominante solo cuando se mueve."
+msgstr "Ac cara dominante solo cuando se mueve"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:512
 msgid "Also update second-most dominant face"
@@ -30454,7 +30455,7 @@ msgstr "Cargar/guardar con fecha"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:155
 msgid "Title:"
-msgstr "Título"
+msgstr "Título:"
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:61
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:157
@@ -30643,7 +30644,7 @@ msgstr "No se pudo guardar: el ID de la constelación está vacío"
 msgid "Could not save: Constellation with this ID already exists"
 msgstr ""
 "No se pudo guardar: ya existe una constelación con este ID. Por favor, elija"
-" otro ID."
+" otro ID"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:453
 msgid "Could not save: The constellation does not contain any drawings"
@@ -31157,7 +31158,7 @@ msgstr "Importante reposo Lunar"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1442
 msgid "Minor Lunar Standstill"
-msgstr "menor parada lunar"
+msgstr "Parada lunar menor"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1445
 msgid "Polar Circle"
@@ -31246,7 +31247,7 @@ msgstr "Declinación actual de la luna"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:232
 msgid "Current declination of a naked-eye planet"
-msgstr "la declinación actual de un planeta a simple vista"
+msgstr "La declinación actual de un planeta a simple vista"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:233
 msgid ""
@@ -31283,8 +31284,8 @@ msgid ""
 "In addition, up to two lines each with arbitrary azimuth, altitude and "
 "declination lines with custom label can be shown."
 msgstr ""
-"‎Además, se pueden mostrar hasta dos líneas cada una con líneas arbitrarias "
-"de ‎‎acimut,‎‎ ‎‎altitud‎‎ y ‎‎declinación‎‎ con etiqueta personalizada.‎"
+"Además, se pueden mostrar hasta dos líneas cada una con líneas arbitrarias "
+"de ‎‎acimut,‎‎ ‎‎altitud‎‎ y ‎‎declinación‎‎ con etiqueta personalizada."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:681
 msgid "ArchaeoLines Configuration"
@@ -31296,7 +31297,7 @@ msgstr "Configuración del plugin ArchaeoLines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:683
 msgid "Crossquarter Lines"
-msgstr "líneas de Cuarto creciente"
+msgstr "Líneas de cuarto creciente"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:684
 msgid "Current Planet: None"
@@ -36711,7 +36712,7 @@ msgstr "Modelo de distorsión:"
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:727
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:728
 msgid " px"
-msgstr "px"
+msgstr " px"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:729
 msgid "Field of view in smaller direction:"
@@ -36820,7 +36821,7 @@ msgstr "Adaptación"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:764
 msgid " mm"
-msgstr "mm"
+msgstr " mm"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:765
 msgid "Make:"
@@ -36850,7 +36851,7 @@ msgstr "Mostrar imagen"
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:776
 msgctxt "As in \"normal\" points, the opposite being \"selected\""
 msgid "normal"
-msgstr "Normal"
+msgstr "normal"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:777
 msgid "Mark picked points"
