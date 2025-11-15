@@ -24,8 +24,8 @@ Another angular unit used in traditional Chinese astronomy was the *Chen* (辰).
 Below is *Xinyixiangfayao Star Map* from Su Song (苏颂, 1020-1101 AD).
 
 ![](illustrations/xyxfy.png)
-
-*Xinyixiangfayao Star Map (1088 AD)*
+Xinyixiangfayao Star Map (1088 AD)
+{: .img_and_caption }
 
 ### Reconstruction of the Sky Map
 
