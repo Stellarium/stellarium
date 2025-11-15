@@ -109,6 +109,21 @@ def handle_constellations_section(sky_culture, sc_name, body, pot):
 
     return constellations_added > 0
 
+def checkReferences(sky_culture, sc_name, sec_body):
+    ref_re = re.compile(r'^\s*- \[#([0-9]+)\]: \s*\S+')
+    refNum = 1
+    for line in sec_body.splitlines():
+        if line.strip() == '':
+            continue
+        match = ref_re.search(line)
+        if not match:
+            print(f"{sky_culture}: warning: invalid reference line:\n{line}", file=sys.stderr)
+            continue
+        newRefNum = match.group(1)
+        if int(newRefNum) != refNum:
+            print(f"{sky_culture}: warning: reference number isn't equal to previous+1:\n{line}", file=sys.stderr)
+        refNum += 1
+
 def update_descriptions_pot(sclist, pot):
     for sky_culture in sclist:
         data_path = os.path.join(SCDIR, sky_culture)
@@ -161,6 +176,9 @@ def update_descriptions_pot(sclist, pot):
                 if len(sec_body) == 0:
                     print(f'{sky_culture}: warning: empty section "{sec_title}"', file=sys.stderr)
                     continue
+
+                if sec_title == 'References':
+                    checkReferences(sky_culture, sc_name, sec_body)
 
                 if sec_title == 'Constellations':
                     if handle_constellations_section(sky_culture, sc_name, sec_body, pot):
