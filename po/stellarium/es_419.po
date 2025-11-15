@@ -2262,8 +2262,8 @@ msgid ""
 "remnant shows a composite (or combination) radio structure with some "
 "uncertainty"
 msgstr ""
-"Remanente muestra una estructura de radio compuesta (o de combinación) con "
-"cierta incertidumbre"
+"el remanente muestra una estructura de radio compuesta (o de combinación) "
+"con cierta incertidumbre"
 
 #: src/core/modules/Nebula.cpp:1678
 msgid "undocumented type"
@@ -4993,7 +4993,8 @@ msgstr "Si tiene una pregunta, puede {obtener una respuesta aquí}."
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/core/StelModuleMgr.cpp:318
 msgid "Bug reports and feature requests can be made {here}."
-msgstr "Reporte de errores y solicitud de funciones pueden realizarse {aquí}."
+msgstr ""
+"Los reportes de errores y solicitudes de funciones pueden realizarse {aquí}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/core/StelModuleMgr.cpp:324
@@ -5487,7 +5488,7 @@ msgstr "Click derecho"
 
 #: src/gui/HelpDialog.cpp:338
 msgid "Add custom marker"
-msgstr "añadir marca personalizada"
+msgstr "Añadir marca personalizada"
 
 #: src/gui/HelpDialog.cpp:339
 msgid "left click"
@@ -5525,7 +5526,7 @@ msgstr "Interface de usuario (TUI)"
 
 #: src/gui/HelpDialog.cpp:395
 msgid "Activate TUI"
-msgstr "activar la TUI"
+msgstr "Activar la TUI"
 
 #: src/gui/HelpDialog.cpp:401
 msgid "Special local keys"
@@ -5766,8 +5767,8 @@ msgid ""
 "If the Stellarium planetarium was helpful for your research work, the "
 "following acknowledgment would be appreciated:"
 msgstr ""
-"‎Si el ‎‎planetario‎‎ Stellarium fuera útil para su trabajo de "
-"investigación, se apreciaría el siguiente reconocimiento:‎"
+"Si el ‎‎planetario‎‎ Stellarium fuera útil para su trabajo de investigación,"
+" se apreciaría el siguiente reconocimiento:"
 
 #: src/gui/HelpDialog.cpp:575
 msgid "This research has made use of the Stellarium planetarium"
@@ -5779,8 +5780,8 @@ msgid ""
 "Or you may {download the BibTeX file of the paper} to create another "
 "citation format."
 msgstr ""
-"‎O puede {descargar el archivo BibTeX del documento} para crear otro formato"
-" de cita.‎"
+"O puede {descargar el archivo BibTeX del documento} para crear otro formato "
+"de cita."
 
 #: src/gui/StelGui.cpp:249 src/scripting/StelScriptMgr.cpp:520
 #: src/ui_configurationDialog.h:1909
@@ -6984,7 +6985,7 @@ msgid ""
 "penumbra"
 msgstr ""
 "La magnitud penumbral es la fracción del diámetro de la Luna inmersa en la "
-"penumbra."
+"penumbra"
 
 #: src/gui/AstroCalcDialog.cpp:2796
 msgid ""
@@ -6992,7 +6993,7 @@ msgid ""
 "umbra"
 msgstr ""
 "La magnitud umbral es la fracción del diámetro de la Luna inmersa en la "
-"umbra."
+"umbra"
 
 #: src/gui/AstroCalcDialog.cpp:2943
 msgid "Moon enters penumbra"
@@ -7144,7 +7145,7 @@ msgstr "Duración de la fase total o anular en el máximo del eclipse"
 #: src/gui/AstroCalcDialog.cpp:3403 src/gui/AstroCalcChart.cpp:380
 #: src/gui/ObsListDialog.cpp:296 src/ui_obsListDialog.h:412
 msgid "Date"
-msgstr "Fecha:"
+msgstr "Fecha"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 #: src/gui/AstroCalcDialog.cpp:3406
@@ -8026,7 +8027,7 @@ msgstr "Estrellas brillantes"
 
 #: src/gui/AstroCalcDialog.cpp:7509 src/ui_viewDialog.h:4200
 msgid "Bright nebulae"
-msgstr "nebulosas brillantes"
+msgstr "Nebulosas brillantes"
 
 #: src/gui/AstroCalcDialog.cpp:7511 src/ui_viewDialog.h:4204
 #: src/ui_dsoColorsDialog.h:543
@@ -8351,7 +8352,7 @@ msgstr "día sidéreo"
 #: src/gui/AstroCalcCustomStepsDialog.cpp:80
 msgctxt "unit of measurement"
 msgid "Julian day"
-msgstr "día juliano"
+msgstr "Día juliano"
 
 #: src/gui/AstroCalcCustomStepsDialog.cpp:81
 msgctxt "unit of measurement"
@@ -8381,12 +8382,12 @@ msgstr "año sidéreo"
 #: src/gui/AstroCalcCustomStepsDialog.cpp:86
 msgctxt "unit of measurement"
 msgid "Julian year"
-msgstr "año juliano"
+msgstr "Año juliano"
 
 #: src/gui/AstroCalcCustomStepsDialog.cpp:87
 msgctxt "unit of measurement"
 msgid "Gaussian year"
-msgstr "año gaussiano"
+msgstr "Año gaussiano"
 
 #: src/gui/AstroCalcCustomStepsDialog.cpp:88
 msgctxt "unit of measurement"
@@ -8538,7 +8539,7 @@ msgstr "No se puede abrir el archivo seleccionado para importar"
 
 #: src/gui/ObsListDialog.cpp:1061
 msgid "Empty list."
-msgstr "Lista vacía"
+msgstr "Lista vacía."
 
 #: src/gui/ObsListDialog.cpp:1083
 #, qt-format
@@ -9442,7 +9443,7 @@ msgstr "Catálogo Sharpless"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:358
 msgid "van den Bergh Catalogue"
-msgstr "Catálogo van den Bergh"
+msgstr "Catálogo de van den Bergh"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:360
@@ -9572,7 +9573,7 @@ msgstr "Catálogo Ruprecht"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:410
 msgid "van den Bergh-Hagen Catalogue"
-msgstr "Catálogo van den Bergh-Hagen"
+msgstr "Catálogo de van den Bergh-Hagen"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:415
@@ -9933,7 +9934,7 @@ msgstr "Script para demostrar un eclipse lunar parcial."
 
 #: src/translations.h:580
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr "Script para demostrar un eclipse total de luna"
+msgstr "Script para demostrar un eclipse total de luna."
 
 #: src/translations.h:581
 msgid "A slow, infinite tour of the sky, looking at random objects."
@@ -10068,7 +10069,7 @@ msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Las mejores vistas de la Tierra desde otros cuerpos del Sistema solar en el "
-"siglo XXI"
+"siglo XXI."
 
 #: src/translations.h:596
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
@@ -13220,7 +13221,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:878
 msgid "Use on-line astronomical database SIMBAD"
-msgstr "utilizar la base de datos en línea astronómica SIMBAD"
+msgstr "Utilizar la base de datos en línea astronómica SIMBAD"
 
 #: src/ui_searchDialogGui.h:880
 msgid "Use SIMBAD"
@@ -13495,7 +13496,7 @@ msgstr "Algoritmo de magnitud de planetas"
 
 #: src/ui_viewDialog.h:3972
 msgid "Planets magnitude algorithm:"
-msgstr "Algoritmo de magnitud de planetas"
+msgstr "Algoritmo de magnitud de planetas:"
 
 #: src/ui_viewDialog.h:3974
 msgid "Color of trails"
@@ -13656,7 +13657,7 @@ msgstr "Simular velocidad de la luz"
 
 #: src/ui_viewDialog.h:4057
 msgid "Jupiter's Great Red Spot..."
-msgstr "Gran Mancha Roja de Júpiter"
+msgstr "Gran Mancha Roja de Júpiter..."
 
 #: src/ui_viewDialog.h:4059
 msgid "GRS details..."
@@ -13899,8 +13900,8 @@ msgid ""
 "van den Bergh-Hagen Catalogue (Uniform survey of clusters in the Southern "
 "Milky Way; van den Bergh and Hagen, 1975)"
 msgstr ""
-"Catálogo van den Bergh-Hagen (Encuesta uniforme de grupos en la Vía Láctea "
-"del Sur; van den Bergh y Hagen, 1975)"
+"Catálogo de van den Bergh-Hagen (Encuesta uniforme de grupos en la Vía "
+"Láctea del Sur; van den Bergh y Hagen, 1975)"
 
 #: src/ui_viewDialog.h:4197
 msgid "Filter by type"
@@ -14466,7 +14467,7 @@ msgstr "Círculo de cuadratura"
 
 #: src/ui_viewDialog.h:4687
 msgid "Equatorial coordinates of J2000.0."
-msgstr "Coordenadas ecuatoriales de J2000.0"
+msgstr "Coordenadas ecuatoriales de J2000.0."
 
 #: src/ui_viewDialog.h:4689
 msgid "Equatorial grid (J2000)"
@@ -14824,11 +14825,11 @@ msgstr "Duración del desvanecimiento de las líneas de estaciones lunares"
 #: src/ui_viewDialog.h:4933
 msgid "Fading duration for screen labels of asterisms "
 msgstr ""
-"Duración del desvanecimiento de las etiquetas de pantalla de los asterismos"
+"Duración del desvanecimiento de las etiquetas de pantalla de los asterismos "
 
 #: src/ui_viewDialog.h:4940
 msgid "Fading duration for artwork of constellations "
-msgstr "Duración del desvanecimiento de las ilustraciones de constelaciones"
+msgstr "Duración del desvanecimiento de las ilustraciones de constelaciones "
 
 #: src/ui_viewDialog.h:4943
 msgid "Color of constellation names"
@@ -15116,7 +15117,7 @@ msgstr "Campos mostrados"
 #: src/ui_configurationDialog.h:1989
 msgctxt "hour angle"
 msgid "Equatorial coordinates, equinox of date"
-msgstr "Coordenadas ecuatoriales, equinoccio de fecha."
+msgstr "Coordenadas ecuatoriales, equinoccio de fecha"
 
 #: src/ui_configurationDialog.h:1991
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:214
@@ -16346,8 +16347,8 @@ msgid ""
 msgstr ""
 "Nota: Las posiciones dependen de sus ajustes para corrección topocéntrica, "
 "aberración, etc. Las magnitudes se ven afectadas por la configuración "
-"atmosférica actual. Para obtener datos tipo almanaque, desactive las "
-"correcciones atmosféricas y topocéntricas."
+"atmosférica actual. Para obtener datos tipo almanaque, ¡desactive las "
+"correcciones atmosféricas y topocéntricas!"
 
 #: src/ui_astroCalcDialog.h:2437
 msgid "Cleanup data"
@@ -16551,11 +16552,11 @@ msgstr "Distancia angular:"
 
 #: src/ui_astroCalcDialog.h:2556
 msgid "Mean motion of second celestial body:"
-msgstr "‎Movimiento medio‎‎ del segundo ‎‎cuerpo celeste:‎"
+msgstr "Movimiento medio‎‎ del segundo ‎‎cuerpo celeste:"
 
 #: src/ui_astroCalcDialog.h:2557
 msgid "Mean motion of first celestial body:"
-msgstr "‎Movimiento medio‎‎ del primer ‎‎cuerpo celeste:‎"
+msgstr "Movimiento medio‎‎ del primer ‎‎cuerpo celeste:"
 
 #: src/ui_astroCalcDialog.h:2558
 msgid "Orbital velocity of second celestial body:"
@@ -17094,7 +17095,7 @@ msgstr "Posibles nebulosas planetarias"
 
 #: src/ui_dsoColorsDialog.h:506
 msgid "Possible pl. nebulae"
-msgstr "Posibles Nebulosas Pl."
+msgstr "Posibles nebulosas Pl."
 
 #: src/ui_dsoColorsDialog.h:509
 msgid "Color of markers of emission-line stars"
@@ -20196,7 +20197,7 @@ msgstr "no operacional"
 #: plugins/Satellites/src/Satellite.cpp:764
 msgctxt "operational status"
 msgid "partially operational"
-msgstr "Parcialmente operativo"
+msgstr "parcialmente operativo"
 
 #: plugins/Satellites/src/Satellite.cpp:765
 msgctxt "operational status"
@@ -20334,7 +20335,7 @@ msgstr ""
 "con una inclinación de órbitas por debajo de los 25 grados, excentricidad "
 "por debajo de 0.25 y un período en el rango de 1100-2000 minutos (órbitas "
 "alrededor de la Tierra que coinciden con el período de rotación sideral de "
-"la Tierra)."
+"la Tierra). "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:805
 msgid ""
@@ -20604,7 +20605,7 @@ msgid ""
 msgstr ""
 "La fórmula para calcular una magnitud visual aproximada de satélites a "
 "partir de la magnitud estándar se puede encontrar en el sitio web de Mike "
-"McCants."
+"McCants"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:860
 msgid ""
@@ -20966,7 +20967,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:174
 msgid "Select TLE source file(s)..."
-msgstr "Seleccione archivo(s) fuente TLE"
+msgstr "Seleccione archivo(s) fuente TLE..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:189
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:190
@@ -21085,7 +21086,7 @@ msgid ""
 "sources"
 msgstr ""
 "Al actualizar, eliminar los satélites que ya no estén enlistados en las "
-"fuentes de actualización."
+"fuentes de actualización"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1217
 msgid "On update, mark all newly added satellites as displayed"
@@ -21487,8 +21488,8 @@ msgid ""
 "The existing version of the configuration data for telescopes in the "
 "Telescope Control plugin is obsolete."
 msgstr ""
-"‎La versión existente de los datos de configuración de los telescopios en el"
-" plugin ‎‎Control de telescopios‎‎ está obsoleta.‎"
+"La versión existente de los datos de configuración de los telescopios en el "
+"plugin ‎‎Control de telescopios‎‎ está obsoleta."
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1821
@@ -21562,7 +21563,7 @@ msgstr "telescopio"
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:288
 msgid "Read-only telescope"
-msgstr "Telescopio de sólo lectura."
+msgstr "Telescopio de sólo lectura"
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:291
 msgid "Telescope position: "
@@ -21754,7 +21755,7 @@ msgid ""
 "Stellarium's code (the client side of Stellarium's original telescope "
 "control feature);"
 msgstr ""
-"El Telescopio, Telescopio Maniquí, Telescopio Tcp y Telescopio Mgr clases en"
+"el Telescopio, Telescopio Maniquí, Telescopio Tcp y Telescopio Mgr clases en"
 " Stellarium código (el lado del cliente de Stellarium del telescopio "
 "original función de control);"
 
@@ -22051,9 +22052,9 @@ msgid ""
 "Telescope set-up (setting geographical coordinates, performing alignment, "
 "etc.) should be done before connecting the telescope to Stellarium."
 msgstr ""
-"instalación de telescopio (configuración de coordenadas geográficas, "
+"La instalación de telescopio (configuración de coordenadas geográficas, "
 "realizar la alineación, etc.) debe hacerse antes de conectar el telescopio "
-"con Stellarium."
+"con Stellarium"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:353
 msgid "The plug-in's main window can be opened:"
@@ -22087,7 +22088,7 @@ msgid ""
 "have been set up:"
 msgstr ""
 "La pestaña <b>telescopios</b> muestra una lista de las conexiones del "
-"telescopio que se han establecido"
+"telescopio que se han establecido:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
 #, qt-format
@@ -22124,7 +22125,7 @@ msgid ""
 "{above});"
 msgstr ""
 "<b>local, Stellarium</b> significa una conexión DIRECTA al telescopio (ver "
-"{arriba});"
+"{above});"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
 msgid ""
@@ -22580,7 +22581,8 @@ msgstr ""
 msgid ""
 "The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes."
 msgstr ""
-"La montura Sky-Watcher SynScan AZ GoTo se utiliza en un número de telescopio"
+"La montura Sky-Watcher SynScan AZ GoTo se utiliza en un número de "
+"telescopios."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:493
 msgid ""
@@ -22605,7 +22607,7 @@ msgid ""
 "(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses"
 " a computer to find targets and human power to move the telescope itself)."
 msgstr ""
-"es un círculo de configuración digital avanzada que convierte un telescopio "
+"Es un círculo de configuración digital avanzada que convierte un telescopio "
 "ordinario (por ejemplo, un dobsonian) en un 'Push To' telescopio (un "
 "telescopio que utiliza una computadora para encontrar objetivos y poder "
 "humano para mover el telescopio sí mismo)."
@@ -22692,7 +22694,8 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:561
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
-msgstr "Presione el botón \"%1\" para establecer una nueva conexión al telescopio"
+msgstr ""
+"Presione el botón \"%1\" para establecer una nueva conexión al telescopio."
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:572
@@ -23981,7 +23984,7 @@ msgstr ""
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:244
 msgid "Anglo-American"
-msgstr "angloamericano"
+msgstr "Angloestadounidense"
 
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:246
@@ -23992,7 +23995,7 @@ msgstr "Francés"
 #. navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:248
 msgid "British (XVIII century)"
-msgstr "británico (siglo XVIII)"
+msgstr "Británico (siglo XVIII)"
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:250
@@ -25834,7 +25837,7 @@ msgid ""
 msgstr ""
 "Majriti lleva el nombre de Abu al-Qasim al-Qurtubi al-Majriti, un notable "
 "matemático, astrónomo, erudito y maestro en Andalucía (España moderna) del "
-"siglo X y principios del XI"
+"siglo X y principios del XI."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:389
 msgid ""
@@ -28083,7 +28086,7 @@ msgstr "Ninguno"
 #: plugins/Observability/src/Observability.cpp:169
 #, qt-format
 msgid "Acronychal rise/set: %1/%2. "
-msgstr "Salida/puesta acrónica: %1/%2."
+msgstr "Salida/puesta acrónica: %1/%2. "
 
 #: plugins/Observability/src/Observability.cpp:170
 #, qt-format
@@ -28098,7 +28101,7 @@ msgstr "Sin salida/puesta helíaca. "
 #. follow.
 #: plugins/Observability/src/Observability.cpp:173
 msgid "No Acronychal rise/set. "
-msgstr "Sin salida/puesta acrónica."
+msgstr "Sin salida/puesta acrónica. "
 
 #: plugins/Observability/src/Observability.cpp:174
 #, qt-format
@@ -29284,7 +29287,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:285
 msgid "Population index"
-msgstr "índice poblacional"
+msgstr "Índice poblacional"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:286
 msgid ""
@@ -29796,7 +29799,7 @@ msgstr "Longitud/Latitud galáctica"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:219
 msgid "Supergalactic Longitude/Latitude"
-msgstr "longitud/latitud supergalacticas"
+msgstr "Longitud/latitud supergaláctica"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:249
 msgid "Coordinates of custom position:"
@@ -29924,7 +29927,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:536
 msgid "Scene successfully loaded."
-msgstr "Escena cargada exitosamente"
+msgstr "Escena cargada exitosamente."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:596
 msgid "Could not load scene info, please check log for error messages!"
@@ -30125,7 +30128,7 @@ msgid ""
 "Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
 "<b>Hardware</b>)."
 msgstr ""
-"Requiere filtro de sombras <b>BAJO</b> o <b>ALTO</b> (sin <b>Hardware</b>"
+"Requiere filtro de sombras <b>BAJO</b> o <b>ALTO</b> (sin <b>Hardware</b>)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:276
 msgid "Causes a performance hit."
@@ -30836,7 +30839,7 @@ msgstr "Introducción:*"
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:488
 msgid " A summary that could ideally be shown on a small screen entirely."
 msgstr ""
-"Un resumen que idealmente podría mostrarse en una pantalla pequeña por "
+" Un resumen que idealmente podría mostrarse en una pantalla pequeña por "
 "completo."
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:489
@@ -31271,13 +31274,13 @@ msgid ""
 "arbitrary locations. The directions are computed based on spherical "
 "trigonometry on a spherical Earth."
 msgstr ""
-"‎Algunas religiones, sobre todo el Islam, se adhieren a una práctica de "
+"Algunas religiones, sobre todo el Islam, se adhieren a una práctica de "
 "observar una ‎‎dirección‎‎ de oración hacia un ‎‎lugar‎‎ en particular. Se "
 "pueden mostrar las líneas ‎‎de acimut‎‎ para dos ubicaciones. Las "
 "ubicaciones predeterminadas son La Meca (Kaaba) y Jerusalén, pero puede "
 "seleccionar ubicaciones de la lista de ubicaciones de Stellarium o ingresar "
 "ubicaciones arbitrarias. Las direcciones se calculan en función de la "
-"trigonometría esférica en una ‎‎Tierra‎‎ esférica.‎"
+"trigonometría esférica en una ‎‎Tierra‎‎ esférica."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:241
 msgid ""
@@ -37025,7 +37028,7 @@ msgstr ""
 "También admite la resolución de placas en línea a través de Astrometry.net "
 "para un posicionamiento preciso de imágenes astronómicas. Simplemente suba "
 "su imagen (asegúrese de que no esté invertida horizontal ni verticalmente), "
-"resuelva sus coordenadas y disfrute de una vista celeste personalizada."
+"¡resuelva sus coordenadas y disfrute de una vista celeste personalizada!"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:312
 msgid "See User Guide for details. Plugin data is located in:"
