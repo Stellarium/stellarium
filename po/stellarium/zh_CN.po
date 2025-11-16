@@ -20,6 +20,7 @@
 # Silas Wong <wsl98501@163.com>, 2025
 # hongming chu <hongming@gmail.com>, 2025
 # 殳玮 孙 <itun@qq.com>, 2025
+# Ruslan Kabatsaev, 2025
 # 
 #, fuzzy
 msgid ""
@@ -28,7 +29,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2025-11-11 11:07+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: 殳玮 孙 <itun@qq.com>, 2025\n"
+"Last-Translator: Ruslan Kabatsaev, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/stellarium/teams/80998/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5580,7 +5581,7 @@ msgid ""
 "Many individuals and organizations are supporting the development of "
 "Stellarium by donations, and the most generous financial contributors (with "
 "donations of $250 or more) are %1."
-msgstr "许多个人和组织正通过捐款来支持Stellarium的发展，其中最慷慨的资助者（捐款总额250美元及以上）占1%。"
+msgstr "许多个人和组织正通过捐款来支持Stellarium的发展，其中最慷慨的资助者（捐款总额250美元及以上）占%1。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:572
@@ -5608,7 +5609,7 @@ msgstr "这项研究利用了Stellarium天文馆"
 msgid ""
 "Or you may {download the BibTeX file of the paper} to create another "
 "citation format."
-msgstr "或者您可以<a href='/files/stellarium.bib'>下载论文的BibTeX文件</a>来创建另一种引用格式。"
+msgstr "或者您可以{下载论文的BibTeX文件}来创建另一种引用格式。"
 
 #: src/gui/StelGui.cpp:249 src/scripting/StelScriptMgr.cpp:520
 #: src/ui_configurationDialog.h:1909
