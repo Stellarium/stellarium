@@ -39,7 +39,7 @@ Due to the limitations of observational technology and potential errors in trans
 
 ### Sun, Moon and Planets
 
-The Sun, the Moon, and the five major planets are collectively referred to as the *Seven Luminaries*. The sun and moon are named after *yin and yang*, while the pictographic characters "日" (sun, pinyin: Rì) and "月" (moon, pinyin: Yuè) are also used. The five major planets represent the *five elements*, but the following names were the most orthodox designations at the time. Similar to other civilizations around the world, Venus also had additional names depending on whether it appeared in the morning or the evening.
+The Sun, the Moon, and the five major planets are collectively referred to as the *Seven Luminaries*. The sun and moon are named after *yin and yang*, while the pictographic characters "日" (the Sun, pinyin: Rì) and "月" (the Moon, pinyin: Yuè) are also used. The five major planets represent the *five elements*, but the following names were the most orthodox designations at the time. Similar to other civilizations around the world, Venus also had additional names depending on whether it appeared in the morning or the evening.
 
 Great Yang (太阳, pinyin: Tàiyáng): The Sun. In Chinese philosophy, it represents the pinnacle of Yang energy.
 
