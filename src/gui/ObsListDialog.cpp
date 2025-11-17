@@ -46,6 +46,8 @@
 
 #include "ui_obsListDialog.h"
 
+Q_LOGGING_CATEGORY(ObsLists, "stel.ObsLists", QtInfoMsg)
+
 ObsListDialog::ObsListDialog(QObject *parent) :
 	StelDialog("ObservingList", parent),
 	ui(new Ui_obsListDialogForm()),
@@ -69,6 +71,8 @@ ObsListDialog::ObsListDialog(QObject *parent) :
 	flagUseLandscape = conf->value("bookmarks/useLandscape", false).toBool();
 	flagUseLocation  = conf->value("bookmarks/useLocation", false).toBool();
 	flagUseFov       = conf->value("bookmarks/useFOV", false).toBool();
+
+	observingListJsonPath = StelFileMgr::findFile(conf->value("main/observinglists_dir", "data").toString(), static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) + "/" + JSON_FILE_NAME;
 }
 
 ObsListDialog::~ObsListDialog() {
@@ -78,7 +82,7 @@ ObsListDialog::~ObsListDialog() {
 		// At this point we have added our lists to the observingLists map. Now update the jsonMap and store to file.
 		QFile jsonFile(observingListJsonPath);
 		if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text)) {
-			qWarning() << "[ObservingList] bookmarks list can not be saved. A file can not be open for reading and writing:"
+			qCWarning(ObsLists) << "[ObservingList] bookmarks list can not be saved. A file can not be open for reading and writing:"
 				   << QDir::toNativeSeparators(observingListJsonPath);
 			messageBox(q_("Error"), q_("Cannot open observingLists.json to write"));
 			return;
@@ -157,7 +161,7 @@ void ObsListDialog::createDialogContent()
 	// We need to load the global list only once!
 	QFile jsonFile(observingListJsonPath);
 	if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text)) {
-		qWarning() << "[ObservingList] JSON list file can not be opened for reading and writing:"
+		qCWarning(ObsLists) << "[ObservingList] JSON list file can not be opened for reading and writing:"
 			   << QDir::toNativeSeparators(observingListJsonPath);
 		return;
 	}
@@ -183,8 +187,10 @@ void ObsListDialog::createDialogContent()
 			{KEY_DESCRIPTION,   QString()},
 			{KEY_SORTING,       QString()},
 			{KEY_CREATION_DATE, listCreationDate },
-			{KEY_LAST_EDIT,     listCreationDate }};
+			{KEY_LAST_EDIT,     listCreationDate },
+			{KEY_OBJECTS,       QVariantList() }};
 
+		qCInfo(ObsLists) << "Starting with empty ObsList";
 		observingLists.insert(olud, emptyList);
 		jsonMap.insert(KEY_OBSERVING_LISTS, observingLists);
 	}
@@ -193,16 +199,16 @@ void ObsListDialog::createDialogContent()
 	QFile jsonBookmarksFile(bookmarksJsonPath);
 	if (jsonBookmarksFile.exists())
 	{
-		//qDebug() << "Old Bookmarks found: Try if we need to process/import them";
+		//qCDebug(ObsLists) << "Old Bookmarks found: Try if we need to process/import them";
 		if (!checkIfBookmarksListExists())
 		{
-			//qDebug() << "No bookmark list so far. Importing...";
+			//qCDebug(ObsLists) << "No bookmark list so far. Importing...";
 			QHash<QString, observingListItem> bookmarksForImport=loadBookmarksFile(jsonBookmarksFile);
 			saveBookmarksHashInObservingLists(bookmarksForImport);
 			jsonMap.insert(KEY_OBSERVING_LISTS, observingLists); // Update the global map
 		}
 		//else
-		//	qDebug() << "Bookmark list exists. We can skip the import.";
+		//	qCDebug(ObsLists) << "Bookmark list exists. We can skip the import.";
 
 		jsonFile.resize(0);
 		StelJsonParser::write(jsonMap, &jsonFile);
@@ -396,7 +402,7 @@ void ObsListDialog::loadListNames(const QString& listID)
 	// If defaultOlud list not found, set first list as default.
 	if (!observingLists.contains(defaultOlud))
 	{
-		qDebug() << "populateListNameInComboBox: Cannot find defaultListOlud" << defaultOlud << ". Setting to first list.";
+		qCDebug(ObsLists) << "populateListNameInComboBox: Cannot find defaultListOlud" << defaultOlud << ". Setting to first list.";
 		defaultOlud = observingLists.firstKey();
 		jsonMap.insert(KEY_DEFAULT_LIST_OLUD, defaultOlud);
 		tainted=true;
@@ -455,7 +461,9 @@ void ObsListDialog::loadSelectedList()
 	// Check or not default list checkbox information
 	ui->defaultListCheckBox->setChecked(selectedOlud == defaultOlud);
 
+	qCDebug(ObsLists) << "defaultOlud: " << defaultOlud;
 	QVariantMap observingListMap = observingLists.value(selectedOlud).toMap();
+	qCDebug(ObsLists) << "map: " << observingListMap;
 
 	QVariantList listOfObjects;
 
@@ -466,15 +474,16 @@ void ObsListDialog::loadSelectedList()
 	ui->creationDateLineEdit->setText(observingListMap.value(KEY_CREATION_DATE).toString());
 	ui->lastEditLineEdit->setText(observingListMap.value(KEY_LAST_EDIT, observingListMap.value(KEY_CREATION_DATE)).toString());
 
-	if (observingListMap.value(KEY_OBJECTS).canConvert<QVariantList>())
+	if (observingListMap.contains(KEY_OBJECTS) && observingListMap.value(KEY_OBJECTS).canConvert<QVariantList>())
 	{
 		QVariant data = observingListMap.value(KEY_OBJECTS);
 		listOfObjects = data.value<QVariantList>();
+		qCDebug(ObsLists) << "listOfObjects" << listOfObjects;
 	}
 	else
 	{
-		qCritical() << "[ObservingList] conversion error in list " << currentListName << "from" << observingListMap.value(KEY_CREATION_DATE).toString();
-		qCritical() << "Cannot convert this objects entry:" << observingListMap.value(KEY_OBJECTS);
+		qCCritical(ObsLists) << "[ObservingList] conversion error in list " << currentListName << "from" << observingListMap.value(KEY_CREATION_DATE).toString();
+		qCCritical(ObsLists) << "Cannot convert this objects entry:" << observingListMap.value(KEY_OBJECTS);
 		conversionError=true;
 	}
 
@@ -484,7 +493,7 @@ void ObsListDialog::loadSelectedList()
 
 	if (!listOfObjects.isEmpty())
 	{
-		for (const QVariant &object: listOfObjects)
+		for (const QVariant &object: std::as_const(listOfObjects))
 		{
 			if (object.canConvert<QVariantMap>())
 			{
@@ -503,14 +512,14 @@ void ObsListDialog::loadSelectedList()
 
 				if (objectMgr->findAndSelect(item.designation, item.objClass) && !objectMgr->getSelectedObject().isEmpty())
 				{
-					//qDebug() << "ObsList: found an object of objClass" << item.objClass << "for" << item.designation;
+					//qCDebug(ObsLists) << "ObsList: found an object of objClass" << item.objClass << "for" << item.designation;
 					selectedObject = objectMgr->getSelectedObject();
 				}
 				else // try findAndSelect with any type. Note that this may lead to confusion!
 					if (objectMgr->findAndSelect(item.designation) && !objectMgr->getSelectedObject().isEmpty())
 				{
 					selectedObject = objectMgr->getSelectedObject();
-					//qDebug() << "Changing item.objClass " << item.objClass << "to" << selectedObject[0]->getType();
+					//qCDebug(ObsLists) << "Changing item.objClass " << item.objClass << "to" << selectedObject[0]->getType();
 					item.objClass = selectedObject[0]->getType();
 				}
 
@@ -529,9 +538,9 @@ void ObsListDialog::loadSelectedList()
 				}
 				else
 				{
-					qWarning() << "[ObservingList] object: " << item.designation << " not found or empty.";
-					qWarning() << "item.objType given as:" << item.objTypeI18n;
-					qWarning() << "item.objClass given as:" << item.objClass;
+					qCWarning(ObsLists) << "[ObservingList] object: " << item.designation << " not found or empty.";
+					qCWarning(ObsLists) << "item.objType given as:" << item.objTypeI18n;
+					qCWarning(ObsLists) << "item.objClass given as:" << item.objClass;
 				}
 
 				item.magnitude = objectMap.value(KEY_MAGNITUDE).toString();
@@ -577,7 +586,7 @@ void ObsListDialog::loadSelectedList()
 			}
 			else
 			{
-				qCritical() << "[ObservingList] conversion error for object: "  << object;
+				qCCritical(ObsLists) << "[ObservingList] conversion error for object: "  << object;
 				conversionError=true;
 			}
 		}
@@ -606,15 +615,15 @@ void ObsListDialog::loadSelectedList()
 */
 QHash<QString, ObsListDialog::observingListItem> ObsListDialog::loadBookmarksFile(QFile &file)
 {
-	qWarning() << "DEPRECATION WARNING";
-	qWarning() << "  Loading old-style Bookmarks file. This file format is deprecated.";
-	qWarning() << "  If you are loading this as a separate file, ";
-	qWarning() << "  Please update the file (re-export the list into *.sol format).";
+	qCWarning(ObsLists) << "DEPRECATION WARNING";
+	qCWarning(ObsLists) << "  Loading old-style Bookmarks file. This file format is deprecated.";
+	qCWarning(ObsLists) << "  If you are loading this as a separate file, ";
+	qCWarning(ObsLists) << "  Please update the file (re-export the list into *.sol format).";
 
 	QHash<QString, observingListItem> bookmarksItemHash;
 
 	if (!file.open(QIODevice::ReadOnly)) {
-		qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators(bookmarksJsonPath);
+		qCWarning(ObsLists) << "[ObservingList] cannot open" << QDir::toNativeSeparators(bookmarksJsonPath);
 	}
 	else
 	{
@@ -688,21 +697,21 @@ QHash<QString, ObsListDialog::observingListItem> ObsListDialog::loadBookmarksFil
 				}
 				else
 				{
-					qWarning() << "Bookmark import: Cannot find Object " << item.designation << "(" << nameI18n << ")";
+					qCWarning(ObsLists) << "Bookmark import: Cannot find Object " << item.designation << "(" << nameI18n << ")";
 					importWarning=true;
 				}
 			}
 			if (importWarning)
 			{
-				qWarning() << "Some bookmarked objects in file" << file.fileName() << "were not found.";
-				qWarning() << "If these are Solar System objects, make sure you have imported the respective orbital elements, "
+				qCWarning(ObsLists) << "Some bookmarked objects in file" << file.fileName() << "were not found.";
+				qCWarning(ObsLists) << "If these are Solar System objects, make sure you have imported the respective orbital elements, "
 					      "and the file loads without warnings in the current version.";
 				messageBox(q_("Note"), q_("Some bookmarked objects were not found. See logfile for details."));
 			}
 		}
 		catch (std::runtime_error &e)
 		{
-			qWarning() << "[ObservingList] Load bookmarks in observing list: File format is wrong! Error: " << e.what();
+			qCWarning(ObsLists) << "[ObservingList] Load bookmarks in observing list: File format is wrong! Error: " << e.what();
 		}
 		// Restore selection that was active before calling this
 		if (existingSelectionToRestore.length()>0)
@@ -781,7 +790,7 @@ void ObsListDialog::selectAndGoToObject(QModelIndex index)
 		if (loc.isValid())
 			core->moveObserverTo(loc);
 		else
-			qWarning() << "ObservingLists: Cannot retrieve valid location for" << item.location;
+			qCWarning(ObsLists) << "ObservingLists: Cannot retrieve valid location for" << item.location;
 	}
 	// We also use stored jd only if the checkbox JD is checked.
 	if (getFlagUseJD() && item.jd != 0.0)
@@ -968,7 +977,7 @@ void ObsListDialog::editListButtonPressed()
 	}
 	else
 	{
-		qCritical() << "ObsListDialog::editListButtonPressed(): selectedOlud is empty";
+		qCCritical(ObsLists) << "ObsListDialog::editListButtonPressed(): selectedOlud is empty";
 		messageBox(q_("Error"), q_("selectedOlud empty. This is a bug"));
 	}
 }
@@ -990,7 +999,7 @@ void ObsListDialog::exportListButtonPressed()
 	QFile jsonFile(exportListJsonPath);
 	if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text))
 	{
-		qWarning() << "[ObservingList Creation/Edition] Error exporting observing list. "
+		qCWarning(ObsLists) << "[ObservingList Creation/Edition] Error exporting observing list. "
 			   << "File cannot be opened for reading and writing:"
 			   << QDir::toNativeSeparators(exportListJsonPath);
 		messageBox(q_("Error"), q_("Cannot export. See logfile for details."));
@@ -1040,7 +1049,7 @@ void ObsListDialog::importListButtonPressed()
 	QFile jsonFile(fileToImportJsonPath);
 	if (!jsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "[ObservingList Import] cannot open"
+		qCWarning(ObsLists) << "[ObservingList Import] cannot open"
 			   << QDir::toNativeSeparators(jsonFile.fileName());
 		messageBox(q_("Error"), q_("Cannot open selected file for import"));
 		return;
@@ -1057,7 +1066,7 @@ void ObsListDialog::importListButtonPressed()
 				const QVariantMap observingListMapToImport = map.value(KEY_OBSERVING_LISTS).toMap();
 				if (observingListMapToImport.isEmpty())
 				{
-					qWarning() << "[ObservingList Creation/Edition import] empty list:" << fileToImportJsonPath;
+					qCWarning(ObsLists) << "[ObservingList Creation/Edition import] empty list:" << fileToImportJsonPath;
 					messageBox(q_("Error"), q_("Empty list."));
 					return;
 				}
@@ -1075,7 +1084,7 @@ void ObsListDialog::importListButtonPressed()
 								QString importedName=importedMap.value(KEY_NAME).toString();
 								QString importedDate=importedMap.value(KEY_CREATION_DATE).toString();
 								QString importedLastEditDate=importedMap.value(KEY_LAST_EDIT, importedMap.value(KEY_CREATION_DATE)).toString();
-								qDebug() << "Imported Map named:" << importedName << "created" << importedDate << "changed" << importedLastEditDate << ":" << importedMap;
+								qCDebug(ObsLists) << "Imported Map named:" << importedName << "created" << importedDate << "changed" << importedLastEditDate << ":" << importedMap;
 								QVariantMap existingMap=observingLists.value(it.key()).toMap();
 								QString existingName=existingMap.value(KEY_NAME).toString();
 								QString existingDate=existingMap.value(KEY_CREATION_DATE).toString();
@@ -1098,7 +1107,7 @@ void ObsListDialog::importListButtonPressed()
 				QVariantMap bookmarksListMap = map.value(KEY_BOOKMARKS).toMap();
 				if (bookmarksListMap.isEmpty())
 				{
-					qWarning() << "[ObservingList Creation/Edition import] the file is empty or doesn't contain legacy bookmarks.";
+					qCWarning(ObsLists) << "[ObservingList Creation/Edition import] the file is empty or doesn't contain legacy bookmarks.";
 					messageBox(q_("Error"), q_("The file is empty or doesn't contain legacy bookmarks."));
 					return;
 				}
@@ -1118,7 +1127,7 @@ void ObsListDialog::importListButtonPressed()
 			// At this point we have added our lists to the observingLists map. Now update the jsonMap and store to file.
 			QFile jsonFile(observingListJsonPath);
 			if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text)) {
-				qWarning() << "[ObservingList] bookmarks list can not be saved. A file can not be open for reading and writing:"
+				qCWarning(ObsLists) << "[ObservingList] bookmarks list can not be saved. A file can not be open for reading and writing:"
 					   << QDir::toNativeSeparators(observingListJsonPath);
 				messageBox(q_("Error"), q_("Cannot open observingLists.json to write"));
 				return;
@@ -1137,7 +1146,7 @@ void ObsListDialog::importListButtonPressed()
 
 			loadSelectedList();
 		} catch (std::runtime_error &e) {
-			qWarning() << "[ObservingList Creation/Edition] File format is wrong! Error: " << e.what();
+			qCWarning(ObsLists) << "[ObservingList Creation/Edition] File format is wrong! Error: " << e.what();
 			messageBox(q_("Error"), q_("File format is wrong!"));
 			return;
 		}
@@ -1156,7 +1165,7 @@ void ObsListDialog::deleteListButtonPressed()
 
 		QFile jsonFile(observingListJsonPath);
 		if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text)) {
-			qWarning() << "[ObservingList] bookmarks list can not be saved. A file can not be open for reading and writing:"
+			qCWarning(ObsLists) << "[ObservingList] bookmarks list can not be saved. A file can not be open for reading and writing:"
 				   << QDir::toNativeSeparators(observingListJsonPath);
 			messageBox(q_("Error"), q_("Cannot open JSON output file. Will not delete."));
 			return;
@@ -1181,7 +1190,7 @@ void ObsListDialog::deleteListButtonPressed()
 	}
 	else
 	{
-		qDebug() << "deleteButtonPressed: You cannot delete the default or the last list.";
+		qCDebug(ObsLists) << "deleteButtonPressed: You cannot delete the default or the last list.";
 		messageBox(q_("Information"), q_("You cannot delete the default or the last list."));
 	}
 }
@@ -1288,7 +1297,7 @@ void ObsListDialog::addObjectButtonPressed()
 //		}
 	}
 	else
-		qWarning() << "Selected object is empty!";
+		qCWarning(ObsLists) << "Selected object is empty!";
 }
 
 /*
@@ -1313,7 +1322,7 @@ void ObsListDialog::saveButtonPressed()
 	Q_ASSERT(isEditMode);
 	if (!isEditMode)
 	{
-		qCritical() << "CALLING ERROR: saveButtonPressed() while not in edit mode.";
+		qCCritical(ObsLists) << "CALLING ERROR: saveButtonPressed() while not in edit mode.";
 		return;
 	}
 
@@ -1343,7 +1352,7 @@ void ObsListDialog::saveButtonPressed()
 	QFile jsonFile(observingListJsonPath);
 	if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text))
 	{
-		qWarning() << "[ObservingList Save] Error saving observing list. "
+		qCWarning(ObsLists) << "[ObservingList Save] Error saving observing list. "
 			   << "File cannot be opened for reading and writing:"
 			   << QDir::toNativeSeparators(observingListJsonPath);
 		return;
@@ -1372,7 +1381,7 @@ void ObsListDialog::cancelButtonPressed()
 	Q_ASSERT(isEditMode);
 	if (!isEditMode)
 	{
-		qCritical() << "CALLING ERROR: cancelButtonPressed() while not in edit mode.";
+		qCCritical(ObsLists) << "CALLING ERROR: cancelButtonPressed() while not in edit mode.";
 		return;
 	}
 	// Depending on creation or regular edit mode, delete current list and load default, or reload current list,
@@ -1400,7 +1409,7 @@ void ObsListDialog::switchEditMode(bool enableEditMode, bool newList)
 		//ui->horizontalLayout_Name->setEnabled(isEditMode);  // enable list name editing
 		ui->listNameLabel->setVisible(isEditMode);
 		//ui->horizontalSpacer_listName->sizePolicy().setHeightForWidth(isEditMode);// ->setVisible(isEditMode);
-		//qDebug() << "Spacer geometry, policy:" << ui->horizontalSpacer_listName->geometry() << ui->horizontalSpacer_listName->sizePolicy();
+		//qCDebug(ObsLists) << "Spacer geometry, policy:" << ui->horizontalSpacer_listName->geometry() << ui->horizontalSpacer_listName->sizePolicy();
 		ui->listNameLineEdit->setVisible(isEditMode);
 		ui->listNameLineEdit->setText(currentListName);
 
@@ -1533,7 +1542,7 @@ void ObsListDialog::headerClicked(int index)
 		{ColumnLocation,      SORTING_BY_LOCATION},
 		{ColumnLandscapeID,   SORTING_BY_LANDSCAPE_ID}};
 	sorting=map.value(index, "");
-	//qDebug() << "Sorting = " << sorting;
+	//qCDebug(ObsLists) << "Sorting = " << sorting;
 	sortObsListTreeViewByColumnName(sorting);
 }
 
