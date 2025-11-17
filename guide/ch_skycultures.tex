@@ -72,22 +72,21 @@ a space and then the \emph{name} of the skyculture.
 This name is used in the selection list in the Sky Culture GUI (see \ref{sec:gui:view:skyculture}). 
  
 The other sections typically start with Level 2 or 3 headers (with two or three hash characters) which are displayed as smaller section and 
-subsection titles (HTML: \texttt{h2} or \texttt{h3}, respectively).  
+subsection titles (HTML: \texttt{h2} or \texttt{h3}, respectively).  All header lines (except the first) should be enclosed by empty lines. 
 
 The continuous text should be formatted like that, please do not add newlines where they do not signal the end of a paragraph with an empty line. 
 Use an editor which just auto-wraps long lines to the window width. 
 These long lines/paragraphs are automatically fed into the translation system. References (see \ref{SC:references}) should be given like \texttt{[\#42]}.
  
-You can also have embedded images in the file (your book cover?
-Views of sacred landscapes/buildings/artwork/\ldots?), just provide them in 
-PNG or JPG format please. 
-
 You should provide a good description in the interest of future users:
 some cultural/ethnographical background of the users of this sky culture,
-history of sky culture research that provided this work, tables of names/translations,
-links to external resources, whatever seems suitable.  The length of the description texts is not limited.
+the history or background of sky culture research that provided this work, tables of names/translations,
+links to external resources, whatever seems suitable.  The length of the description texts is not limited, 
+but of course if this is your PhD thesis work, there is no need to repeat all 500 pages, you can add a link to the references.
 
-The skyculture description should include the following Level 2 sections. Any other section must be a subsection (i.e. Level 3 or deeper) of one of these sections. Each of these sections except \texttt{Constellations} will have its own entry in the translations files. The \texttt{Constellations} section will be split, so that each constellation's description will be translated separately.
+The skyculture description should include the following Level 2 sections. Any other section must be a subsection (i.e. Level 3 or deeper) of one of these sections. 
+Each of these sections except \texttt{Constellations} will have its own entry in the translations files. 
+The \texttt{Constellations} section will be split, so that each constellation's description will be translated separately.
 
 \begin{description}
 \item \texttt{Introduction} -- a summary that could ideally be shown on a small screen entirely.
@@ -98,10 +97,50 @@ The skyculture description should include the following Level 2 sections. Any ot
 \item \texttt{License} -- either a license id (see \ref{SC:license}), or a sequence of lines separated by empty lines (i.e. Markdown paragraphs) describing which part of the culture has which license, in the format "Sky culture item: License-ID".
 \end{description}
 
-Note that the \texttt{Constellations} section has the strict format described above. In particular, there's no place for an introduction for all the constellations or a similar deviation from the format of this section. If this kind of text is desired, it can be placed in a subsection of the \texttt{Description} section.
+Note that the \texttt{Constellations} section has the strict format described above. 
+In particular, there's no place for an introduction for all the constellations or a similar deviation from the format of this section. 
+If this kind of text is desired, it can be placed in a subsection of the \texttt{Description} section.
 
 To allow the correct display of special characters like ÄÖÜßáé you must provide the file in UTF-8 encoding. 
 If you write only English/ASCII, this may not be relevant.
+
+
+\subsection{Images}
+\label{sec:skycultures:images}
+\label{SC:images}
+
+You can also have embedded images in the file (your book cover?
+Views of sacred landscapes/buildings/artwork/\ldots?), just provide them in 
+PNG or JPG format please. Use the following syntax, where the last line is fixed 
+and is required for proper formatting. 
+
+
+\begin{configfile}[\scriptsize]
+![](illustrations/my_image.png)
+My image caption 
+{: .img_and_caption }
+\end{configfile}
+
+Alternatively, you can format an image in HTML if you need specialized extras like right-alignment or size specifications:
+
+\begin{configfile}[\scriptsize]
+<p>
+<img src="illustrations/my_image.png" width="150" align="right"/>
+My image caption
+{: .img_and_caption }
+</p>
+\end{configfile}
+
+or (note the manual \texttt{<br/>})
+
+\begin{configfile}[\scriptsize]
+<p class="img_and_caption">
+<img src="illustrations/my_image.png" width="150" align="right"/><br/>
+My image caption
+{: .img_and_caption }
+</p>
+\end{configfile}
+
 
 
 \subsection{References}
@@ -186,6 +225,21 @@ holders and check the CC licence version in the description before
 you use sky cultures in public events like TV documentaries, YouTube
 videos, lectures, planetarium shows or printed matter. If in doubt,
 contact the respective authors.
+
+
+\subsection{Technical Test}
+\label{sec:skycultures:Testing}
+
+Using correct syntax is required for making display and translation work. 
+If you have checked out Stellarium's sources, you can run
+
+\begin{commands}
+util/skycultures/generate-pot.py -s my_culture
+\end{commands}
+This may emit some warnings about issues that should be fixed (if any remain). 
+It will also generate a \file{.po} directory in the skycultures directory, 
+but these files aren't supposed to be committed, you can remove it.
+
 
 
 
