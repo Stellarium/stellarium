@@ -246,12 +246,12 @@ void AtmosphereShowMySky::loadShaders()
 	{
 		if(!success)
 		{
-			qCritical("Error while compiling %s: %s", what, shader.log().toLatin1().constData());
+			qCCritical(Atmo, "Error while compiling %s: %s", what, shader.log().toLatin1().constData());
 			throw InitFailure("Shader compilation failed");
 		}
 		if(!shader.log().isEmpty())
 		{
-			qWarning("Warnings while compiling %s: %s", what, shader.log().toLatin1().constData());
+			qCWarning(Atmo, "Warnings while compiling %s: %s", what, shader.log().toLatin1().constData());
 		}
 	};
 
@@ -413,7 +413,7 @@ AtmosphereShowMySky::AtmosphereShowMySky(const double initialAltitude)
 	{
 		atmoRes = reducedResolution;
 		if (reducedResolution>1)
-			qDebug() << "Atmosphere runs with statically reduced resolution:" << reducedResolution;
+			qCDebug(Atmo) << "Atmosphere runs with statically reduced resolution:" << reducedResolution;
 	}
 
 	resolveFunctions();
@@ -425,7 +425,7 @@ AtmosphereShowMySky::AtmosphereShowMySky(const double initialAltitude)
 		if(!gl)
 			throw InitFailure(q_("Failed to get OpenGL 3.3 support functions"));
 
-		qDebug() << "Will load CalcMySky atmosphere model from" << pathToData;
+		qCDebug(Atmo) << "Will load CalcMySky atmosphere model from" << pathToData;
 		skySettings_.reset(new SkySettings);
 		auto& settings = *static_cast<SkySettings*>(skySettings_.get());
 		settings.altitude_ = initialAltitude;
@@ -657,9 +657,7 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 	if (prevRes!=atmoRes)
 	{
 		resizeRenderTarget(width, height);
-		bool verbose=qApp->property("verbose").toBool();
-		if (verbose)
-			qDebug() << "dynResTimer" << dynResTimer << "atmoRes" << atmoRes << "changeOfView" << changeOfView.norm() << changeOfView;
+		qCDebug(Atmo) << "dynResTimer" << dynResTimer << "atmoRes" << atmoRes << "changeOfView" << changeOfView.norm() << changeOfView;
 	}
 	// At reduced resolution, we hurry to redraw - at full resolution, we have time.
 	dynResTimer=timeout?17:5;
