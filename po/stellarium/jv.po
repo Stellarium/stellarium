@@ -2338,7 +2338,7 @@ msgstr "planet."
 
 #: src/core/modules/Planet.cpp:133
 msgid "moon"
-msgstr "candra"
+msgstr "candhra"
 
 #: src/core/modules/Planet.cpp:134
 msgid "observer"
@@ -2558,7 +2558,7 @@ msgstr "Kacepetan puteran ékuator"
 #: src/core/modules/Planet.cpp:1110 src/core/modules/Planet.cpp:1522
 msgctxt "Moon phase"
 msgid "New Moon"
-msgstr "Candra Anyar"
+msgstr "Candhra Anyar"
 
 #: src/core/modules/Planet.cpp:1112 src/core/modules/Planet.cpp:1524
 msgctxt "Moon phase"
@@ -2578,7 +2578,7 @@ msgstr "Rembulan Cembung Wiwitan"
 #: src/core/modules/Planet.cpp:1118 src/core/modules/Planet.cpp:1530
 msgctxt "Moon phase"
 msgid "Full Moon"
-msgstr "Candra Purnama"
+msgstr "Candhra Purnama"
 
 #: src/core/modules/Planet.cpp:1120 src/core/modules/Planet.cpp:1532
 msgctxt "Moon phase"
@@ -2597,7 +2597,7 @@ msgstr "Rembulan Sabit Pungkasan"
 
 #: src/core/modules/Planet.cpp:1132
 msgid "Moon age"
-msgstr "Yuswa candra"
+msgstr "Yuswa candhra"
 
 #: src/core/modules/Planet.cpp:1132
 msgid "days old"
@@ -2644,7 +2644,7 @@ msgstr "Sudhut Sabit"
 
 #: src/core/modules/Planet.cpp:1329
 msgid "Moon/Sun diameter ratio"
-msgstr "Rasio agengipun Candra/Srengenge"
+msgstr "Rasio agengipun Candhra/Srengenge"
 
 #: src/core/modules/Planet.cpp:1332
 msgctxt "type of solar eclipse"
@@ -2769,7 +2769,7 @@ msgstr "Panandha pamilihan planet"
 
 #: src/core/modules/SolarSystem.cpp:357
 msgid "Enlarge Moon"
-msgstr "Agengaken Candra"
+msgstr "Agengaken Candhra"
 
 #: src/core/modules/SolarSystem.cpp:358
 msgid "Enlarge minor bodies"
@@ -3161,7 +3161,7 @@ msgstr "Nyiapaken audio..."
 
 #: src/core/StelApp.cpp:598
 msgid "Initializing video..."
-msgstr "Nyiapaken video..."
+msgstr "Nyiapaken vidhéo..."
 
 #: src/core/StelApp.cpp:605
 msgid "Initializing constellations..."
@@ -3555,7 +3555,7 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
-"Formula punika adhedhasar panaliten pengamatanipun Srengéngé, Candra, saha "
+"Formula punika adhedhasar panaliten pengamatanipun Srengéngé, Candhra, saha "
 "planèt-planèt sasampunipun-1650 déning Spencer Jones (%1) saha "
 "dipunginakaken déning Jean Meeus ing seratipun <em>Astronomical Formulae for"
 " Calculators</em>. Punika ugi dipuntampi ing program PC SunTracker Pro."
@@ -3577,10 +3577,10 @@ msgid ""
 "same relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
-"Tabel-tabelipun Tuckerman (1962, 1964) nyerat posisi Srengéngé, Candra, saha"
-" planèt-planèt nalika interval 5 saha 10 dinten wiwit warsa 601 SM dumugi "
-"1649 M. Gegayutan ingkang sami punika ugi kanthi sinamar katampi wonten ing "
-"tabel-tabel syzygy kagunganipun Goldstine (1973)."
+"Tabel-tabelipun Tuckerman (1962, 1964) nyerat posisi Srengéngé, Candhra, "
+"saha planèt-planèt nalika interval 5 saha 10 dinten wiwit warsa 601 SM "
+"dumugi 1649 M. Gegayutan ingkang sami punika ugi kanthi sinamar katampi "
+"wonten ing tabel-tabel syzygy kagunganipun Goldstine (1973)."
 
 #: src/core/StelCore.cpp:2711
 #, qt-format
@@ -3728,7 +3728,7 @@ msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
-"Kelompok Obah Osiking Tata Surya JPL saking Laboratorium Propulsi Jet NASA "
+"The JPL Solar System Dynamics Group saking NASA Jet Propulsion Laboratory "
 "ngginakaken formula punika wonten ing situs wèb interaktifipun %1JPL "
 "Horizons%2."
 
@@ -3928,8 +3928,8 @@ msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
-"Nilai %1 saking solusi kanggé %2 (akselerasi sekuleripun Candra) mbetahaken "
-"adaptasi, sumangga dipunpirsani Panduan kanggé katranganipun."
+"Nilai %1 saking solusi kanggé %2 (akselerasi sekuleripun Candhra) mbetahaken"
+" adaptasi, sumangga dipunpirsani Panduan kanggé katranganipun."
 
 #: src/core/StelCore.cpp:2847
 msgid "with zero values outside this range"
@@ -4660,7 +4660,7 @@ msgstr "Nengahi objèk ingkang kapilih"
 
 #: src/core/StelMovementMgr.cpp:196
 msgid "Deselect the selected object"
-msgstr "Mbathal pilihan objèk ingkang kapilih"
+msgstr "Mbathalaken pilihan objèk ingkang kapilih"
 
 #: src/core/StelMovementMgr.cpp:197
 msgid "Re-select last selected object"
@@ -5321,7 +5321,7 @@ msgstr "Espenak & Meeus (2006, 2014)"
 
 #: src/gui/ConfigurationDialog.cpp:1974
 msgid "Espenak & Meeus (2006, 2014) no extra moon acceleration"
-msgstr "Espenak & Meeus (2006, 2014) tanpa percepatan candra ekstra"
+msgstr "Espenak & Meeus (2006, 2014) tanpa percepatan candhra ekstra"
 
 #: src/gui/ConfigurationDialog.cpp:1977
 msgid "Modified Espenak & Meeus (2006, 2014, 2023)"
@@ -5460,7 +5460,7 @@ msgstr "Paningal pan ngubengi akasa"
 
 #: src/gui/HelpDialog.cpp:296
 msgid "Arrow keys & left mouse drag"
-msgstr "Tombol panah saha lèrèg mawi tetikus kiwa"
+msgstr "Tombol panah saha lèrèg mawi mòus kiwa"
 
 #: src/gui/HelpDialog.cpp:298
 msgid "Zoom in/out"
@@ -5477,7 +5477,7 @@ msgstr "Nglèrèg wekdal"
 
 #: src/gui/HelpDialog.cpp:308
 msgid "left mouse drag"
-msgstr "lèrèg mawi tetikus kiwa"
+msgstr "lèrèg mawi mòus kiwa"
 
 #: src/gui/HelpDialog.cpp:309
 msgid "Time scrolling: minutes"
@@ -5488,7 +5488,7 @@ msgstr "Nggulung wekdal: menit"
 #: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:321
 #: src/gui/HelpDialog.cpp:323
 msgid "mouse wheel"
-msgstr "cakra tetikus,"
+msgstr "cakra mòus,"
 
 #: src/gui/HelpDialog.cpp:311
 msgid "Time scrolling: hours"
@@ -5532,7 +5532,7 @@ msgstr "ngklik kiwa"
 
 #: src/gui/HelpDialog.cpp:341
 msgid "Delete marker closest to mouse cursor"
-msgstr "Ngicalaken panandha paling caket kaliyan kursor tetikus"
+msgstr "Ngicalaken panandha paling caket kaliyan kursor mòus"
 
 #: src/gui/HelpDialog.cpp:342 src/gui/HelpDialog.cpp:346
 #: src/gui/HelpDialog.cpp:348
@@ -5566,14 +5566,14 @@ msgstr "Ngaktifaken TUI"
 
 #: src/gui/HelpDialog.cpp:401
 msgid "Special local keys"
-msgstr "Tombol lokal mirunggan"
+msgstr "Tombol lòkal mirunggan"
 
 #: src/gui/HelpDialog.cpp:402
 msgid ""
 "All these hotkeys are locally available to run when specific window or tab "
 "is opened."
 msgstr ""
-"Sedaya tombol panas punika sumadya lokal kanggé kalampahaken menawi jendhela"
+"Sedaya tombol panas punika sumadya lòkal kanggé kalampahaken menawi jendhela"
 " utawi tab tartamtu kabikak."
 
 #: src/gui/HelpDialog.cpp:403 src/ui_scriptConsole.h:345
@@ -5682,7 +5682,7 @@ msgstr "Adhedhasar Qt"
 
 #: src/gui/HelpDialog.cpp:518
 msgid "Running on Operating System"
-msgstr ""
+msgstr "Lelampahan wonten ing Sistèm Opérasi"
 
 #: src/gui/HelpDialog.cpp:539
 msgid "Developers"
@@ -5949,11 +5949,11 @@ msgstr "Zona wekdal"
 
 #: src/gui/StelGuiItems.cpp:881 src/gui/LocationDialog.cpp:555
 msgid "Local Mean Solar Time"
-msgstr "Wekdal Srengéngé Rata-rata Lokal"
+msgstr "Wekdal Srengéngé Rata-rata Lòkal"
 
 #: src/gui/StelGuiItems.cpp:884 src/gui/LocationDialog.cpp:556
 msgid "Local True Solar Time"
-msgstr "Wekdal Srengéngé Sejati Lokal"
+msgstr "Wekdal Srengéngé Sejati Lòkal"
 
 #. TRANSLATORS: unit of measurement: minutes per second
 #: src/gui/StelGuiItems.cpp:887
@@ -6069,7 +6069,7 @@ msgid ""
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr ""
 "Nginakaken modèl 3D poligonal kanggé sawetawis objèk sub-planèt kapilih "
-"(candra alit, astéroid, komèt) nggentosi aproksimasi bola."
+"(candhra alit, astéroid, komèt) nggentosi aproksimasi bola."
 
 #: src/gui/ViewDialog.cpp:1335
 msgid ""
@@ -6621,7 +6621,7 @@ msgstr "warsa"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:130
 msgid "Secular acceleration of the Moon"
-msgstr "Nggancangipun Candra ingkang Sèkular"
+msgstr "Nggancangipun Candhra ingkang Sèkular"
 
 #: src/gui/AstroCalcDialog.cpp:628 src/gui/AstroCalcDialog.cpp:629
 #: src/gui/AstroCalcDialog.cpp:630 src/gui/AstroCalcDialog.cpp:631
@@ -6771,7 +6771,7 @@ msgstr "Obyek tata surya: planèt"
 
 #: src/gui/AstroCalcDialog.cpp:1060
 msgid "Almanac: Sun, Moon and naked-eye planets"
-msgstr "Almanak: Surya, Candra, saha planèt paningal wuda."
+msgstr "Almanak: Surya, Candhra, saha planèt paningal wuda."
 
 #: src/gui/AstroCalcDialog.cpp:1123
 msgid "Elevation of object at moment of upper culmination"
@@ -6893,7 +6893,7 @@ msgstr "Tebih sudut obyek langit saking Surya kala transit"
 
 #: src/gui/AstroCalcDialog.cpp:2363
 msgid "Celestial object's angular distance from the Moon at transit"
-msgstr "Tebih sudut obyek langit saking Candra kala transit"
+msgstr "Tebih sudut obyek langit saking Candhra kala transit"
 
 #: src/gui/AstroCalcDialog.cpp:2444
 msgid "Save calculated data as..."
@@ -7027,7 +7027,7 @@ msgid ""
 "Penumbral magnitude is the fraction of the Moon's diameter immersed in the "
 "penumbra"
 msgstr ""
-"Magnitudo pènumbra punika pérangan diamèter Candra ingkang kacemplungaken "
+"Magnitudo pènumbra punika pérangan diamèter Candhra ingkang kacemplungaken "
 "wonten ing pènumbra"
 
 #: src/gui/AstroCalcDialog.cpp:2796
@@ -7035,16 +7035,16 @@ msgid ""
 "Umbral magnitude is the fraction of the Moon's diameter immersed in the "
 "umbra"
 msgstr ""
-"Magnitudo umbra punika pérangan diamèter Candra ingkang kacemplungaken "
+"Magnitudo umbra punika pérangan diamèter Candhra ingkang kacemplungaken "
 "wonten ing umbra"
 
 #: src/gui/AstroCalcDialog.cpp:2943
 msgid "Moon enters penumbra"
-msgstr "Candra mlebet pènumbra"
+msgstr "Candhra mlebet pènumbra"
 
 #: src/gui/AstroCalcDialog.cpp:2944
 msgid "Moon enters umbra"
-msgstr "Candra mlebet umbra"
+msgstr "Candhra mlebet umbra"
 
 #: src/gui/AstroCalcDialog.cpp:2945
 msgid "Total eclipse begins"
@@ -7060,34 +7060,34 @@ msgstr "Gerhana jangkep paripurna"
 
 #: src/gui/AstroCalcDialog.cpp:2948
 msgid "Moon leaves umbra"
-msgstr "Candra nilar umbra"
+msgstr "Candhra nilar umbra"
 
 #: src/gui/AstroCalcDialog.cpp:2949
 msgid "Moon leaves penumbra"
-msgstr "Candra nilar pènumbra"
+msgstr "Candhra nilar pènumbra"
 
 #: src/gui/AstroCalcDialog.cpp:2970
 msgid "Geographic latitude where the Moon appears in the zenith"
-msgstr "Lintang géografis wonten pundi Candra katingal wonten ing zènit"
+msgstr "Lintang géografis wonten pundi Candhra katingal wonten ing zènit"
 
 #: src/gui/AstroCalcDialog.cpp:2973
 msgid "Geographic longitude where the Moon appears in the zenith"
-msgstr "Bujur géografis wonten pundi Candra katingal wonten ing zènit"
+msgstr "Bujur géografis wonten pundi Candhra katingal wonten ing zènit"
 
 #: src/gui/AstroCalcDialog.cpp:2987
 msgid ""
 "Position angle of contact point with respect to center of the Moon measured "
 "counter-clockwise from celestial north"
 msgstr ""
-"Sudut posisi titik kontak ngéngingi pusat Candra dipunukur mawi arah walikan"
-" jam saking lèr akasa"
+"Sudut posisi titik kontak ngéngingi pusat Candhra dipunukur mawi arah "
+"walikan jam saking lèr akasa"
 
 #: src/gui/AstroCalcDialog.cpp:2990
 msgid ""
 "Geocentric angular distance of center of the Moon from the axis or center of"
 " the Earth's shadow"
 msgstr ""
-"Tebih sudut geosèntris pusat Candra saking sumbu utawi pusat wewayangan "
+"Tebih sudut geosèntris pusat Candhra saking sumbu utawi pusat wewayangan "
 "Jagad"
 
 #: src/gui/AstroCalcDialog.cpp:3027
@@ -7105,7 +7105,7 @@ msgid ""
 " and future are not reliable due to uncertainty in ΔT which is caused by "
 "fluctuations in Earth's rotation."
 msgstr ""
-"Catetan: Kawontenan lokal kangge gerhana dangunipun èwonan taun ing wingking"
+"Catetan: Kawontenan lòkal kangge gerhana dangunipun èwonan taun ing wingking"
 " saha mangajeng boten saged dipunendelaken amargi boten cethanipun ΔT "
 "ingkang kajalari déning mobah-mosiking rotasi Jagad."
 
@@ -7170,7 +7170,7 @@ msgid ""
 "Eclipse magnitude is the fraction of the Sun's diameter obscured by the Moon"
 msgstr ""
 "Magnitudo gerhana punika pérangan diamèter Surya ingkang katutup déning "
-"Candra"
+"Candhra"
 
 #: src/gui/AstroCalcDialog.cpp:3366
 msgid "Sun's altitude at greatest eclipse"
@@ -7790,7 +7790,7 @@ msgstr "Planèt saha Surya"
 
 #: src/gui/AstroCalcDialog.cpp:5168
 msgid "Sun, planets and moons of observer's planet"
-msgstr "Surya, planèt, saha candra saking planèt panggènès"
+msgstr "Surya, planèt, saha candhra saking planèt panggènès"
 
 #: src/gui/AstroCalcDialog.cpp:5169
 #, qt-format
@@ -7799,7 +7799,7 @@ msgstr "Obyek tata surya cemlorot (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:5170
 msgid "Moons of first body"
-msgstr "Candra saking badan sepisan"
+msgstr "Candhra saking badan sepisan"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5171 src/gui/AstroCalcDialog.cpp:7543
@@ -7815,13 +7815,13 @@ msgstr "Lintang barium cemlorot"
 
 #: src/gui/AstroCalcDialog.cpp:5172
 msgid "Sun, planets and moons of first body and observer's planet"
-msgstr "Surya, planèt, saha candra saking badan sepisan saha planèt panggènès"
+msgstr ""
+"Surya, planèt, saha candhra saking badan sepisan saha planèt panggènès"
 
 #: src/gui/AstroCalcDialog.cpp:5391
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr ""
-"Kasinggihanipun milih obyek kangge nggambar grafisipun 'Kainggilan lawan "
-"Wekdal'."
+"Mangga milih obyek kangge nggambar grafisipun 'Kainggilan lawan Wekdal'."
 
 #: src/gui/AstroCalcDialog.cpp:5622 src/gui/AstroCalcDialog.cpp:5636
 msgid "Magnitude vs. Time"
@@ -7890,8 +7890,8 @@ msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
 msgstr ""
-"Kasinggihanipun milih obyek kangge nggambar grafis 'Kainggilan Saben Wulan' "
-"kangge warsa sapunika wonten ing wekdal ingkang kapilih."
+"Mangga milih obyek kangge nggambar grafis 'Kainggilan Saben Wulan' kangge "
+"warsa sapunika wonten ing wekdal ingkang kapilih."
 
 #: src/gui/AstroCalcDialog.cpp:5825
 msgid "Phenomenon"
@@ -7945,7 +7945,7 @@ msgstr "Tebih sudut saking SuryaTebih sudut saking Surya"
 
 #: src/gui/AstroCalcDialog.cpp:6226 src/gui/AstroCalcDialog.cpp:6371
 msgid "Angular distance from the Moon"
-msgstr "Tebih sudut saking Candra"
+msgstr "Tebih sudut saking Candhra"
 
 #: src/gui/AstroCalcDialog.cpp:6244 src/gui/AstroCalcDialog.cpp:6423
 #: src/gui/AstroCalcDialog.cpp:6498
@@ -8027,7 +8027,7 @@ msgstr "Tebih sudut saking Surya kangge obyek kaping kalih"
 
 #: src/gui/AstroCalcDialog.cpp:6375
 msgid "Angular distance from the Moon for second object"
-msgstr "Tebih sudut saking Candra kangge obyek kaping kalih"
+msgstr "Tebih sudut saking Candhra kangge obyek kaping kalih"
 
 #: src/gui/AstroCalcDialog.cpp:7386 src/gui/AstroCalcDialog.cpp:7391
 #: src/ui_astroCalcDialog.h:2600
@@ -8257,15 +8257,15 @@ msgstr "dinten"
 
 #: src/gui/AstroCalcDialog.cpp:8604
 msgid "Linear and angular distances between selected objects"
-msgstr "Tebih linèar saha sudut antawis obyek ingkang kapilih"
+msgstr "Jarak linèar saha sudut antawisipun obyek ingkang kapilih"
 
 #: src/gui/AstroCalcDialog.cpp:8674
 msgid "Angular distance between the Moon and selected object"
-msgstr "Tebih sudut antawis Candra saha obyek ingkang kapilih"
+msgstr "Tebih sudut antawis Candhra saha obyek ingkang kapilih"
 
 #: src/gui/AstroCalcDialog.cpp:8740
 msgid "Angular distance between the Moon and celestial object"
-msgstr "Tebih sudut antawis Candra saha obyek langit"
+msgstr "Tebih sudut antawis Candhra saha obyek langit"
 
 #: src/gui/AstroCalcDialog.cpp:8891
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1619
@@ -8310,7 +8310,7 @@ msgstr "Surup Astronomis"
 #: plugins/NavStars/src/ui_navStarsWindow.h:541
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1462
 msgid "Moon"
-msgstr "Candra"
+msgstr "Candhra"
 
 #: src/gui/AstroCalcChart.cpp:91 src/ui_astroCalcDialog.h:2506
 msgid "Monthly Elevation"
@@ -8347,7 +8347,7 @@ msgstr "Tebih, °"
 #: src/gui/AstroCalcChart.cpp:384 src/ui_astroCalcAlmanacWidget.h:958
 #: src/ui_astroCalcAlmanacWidget.h:1122
 msgid "Local Time"
-msgstr "Wekdal Lokal"
+msgstr "Wekdal Lòkal"
 
 #: src/gui/AstroCalcChart.cpp:424
 msgid "Lunar elongation"
@@ -8536,8 +8536,7 @@ msgstr "Lanskap"
 
 #: src/gui/ObsListDialog.cpp:588
 msgid "Error during conversion. Please see logfile for details."
-msgstr ""
-"Kawonon nalika konvèrsi. Kasinggihanipun mirsani logfile kangge pratelan."
+msgstr "Kawonon nalika konvèrsi. Mangga mirsani logfile kangge pratelan."
 
 #: src/gui/ObsListDialog.cpp:700
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:225
@@ -8723,31 +8722,31 @@ msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
 msgstr ""
-"Jalur pethèk gadhah sengketa! Kasinggihanipun mèncèt F7 sasampunipun program"
-" kawiwitan saha dipunpriksa pacanthelan ganda ngandhap punika"
+"Jalur pethèk gadhah sengketa! Mangga mèncèt F7 sasampunipun program "
+"kawiwitan saha dipunpriksa pacanthelan ganda ngandhap punika"
 
 #: src/StelMainView.cpp:1146
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
-"Vèrsi OpenGL kirang cekap. Kasinggihanipun nganyari dhriver, piranti atos "
-"grafis, utawi ngginakaken opsi --angle-mode (utawi --mesa-mode)."
+"Vèrsi OpenGL kirang cekap. Mangga nganyari dhriver, piranti atos grafis, "
+"utawi ngginakaken opsi --angle-mode (utawi --mesa-mode)."
 
 #: src/StelMainView.cpp:1148
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
 msgstr ""
-"Vèrsi OpenGL kirang cekap. Kasinggihanipun nganyari dhriver, piranti atos "
-"grafis, utawi ngginakaken opsi --mesa-mode."
+"Vèrsi OpenGL kirang cekap. Mangga nganyari dhriver, piranti atos grafis, "
+"utawi ngginakaken opsi --mesa-mode."
 
 #: src/StelMainView.cpp:1152
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
-"Vèrsi OpenGL kirang cekap. Kasinggihanipun nganyari dhriver utawi piranti "
-"atos grafis."
+"Vèrsi OpenGL kirang cekap. Mangga nganyari dhriver utawi piranti atos "
+"grafis."
 
 #: src/StelMainView.cpp:1195
 msgid ""
@@ -8790,7 +8789,7 @@ msgstr "Nèbula"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:43
 msgid "Moons"
-msgstr "Candra"
+msgstr "Candhra"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:61
@@ -9256,7 +9255,7 @@ msgstr "Fitur géologis ingkang gadhah nama saking Miranda"
 #. the search tool)
 #: src/translations.h:243
 msgid "Named geological features of the Moon"
-msgstr "Fitur géologis ingkang gadhah nama saking Candra"
+msgstr "Fitur géologis ingkang gadhah nama saking Candhra"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
@@ -9563,7 +9562,7 @@ msgstr "A Catalog of Rich Clusters of Galaxies"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:388
 msgid "Hickson Compact Group"
-msgstr "Grup Kompak Hickson"
+msgstr "Hickson Compact Group"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:390
@@ -9951,7 +9950,7 @@ msgstr "Panggèn acak"
 #. TRANSLATORS: Name of script
 #: src/translations.h:570
 msgid "Jupiter Moons"
-msgstr "Candra Jupiter"
+msgstr "Candhra Jupiter"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:576
@@ -10144,9 +10143,9 @@ msgid ""
 "moons, Callisto will be the one."
 msgstr ""
 "Èlongasi Ageng saha Transit Bumi saking Callisto 2000-3000. Kenging punapa "
-"Callisto? Saking 4 Candra Galilèan, Callisto satunggal-satunggalipun ingkang"
-" wonten ing njawinipun sabuk radhiasi Jupiter. Awit saking punika, menawi "
-"manungsa badhe manggen wonten ing candra-candraJupiter, Callisto ingkang "
+"Callisto? Saking 4 Candhra Galilèan, Callisto satunggal-satunggalipun "
+"ingkang wonten ing njawinipun sabuk radhiasi Jupiter. Awit saking punika, "
+"menawi manungsa badhe manggen wonten ing candhra Jupiter, Callisto ingkang "
 "badhe kapilih."
 
 #: src/translations.h:600
@@ -10240,7 +10239,7 @@ msgid ""
 "are in its shadow (eclipse). This script demonstrates these rare phenomena "
 "from 1900 to 2100 in Dynamical Time."
 msgstr ""
-"Planèt Jupiter kala-kala katingal tanpa candra, menawi sekawan satelit "
+"Planèt Jupiter kala-kala katingal tanpa candhra, menawi sekawan satelit "
 "Galilèan sesarengan boten katingal amargi nglangkungi cakram planèt "
 "(transit), wonten ing wingking planèt (olkultasi), utawi wonten ing "
 "wewayanganipun (gerhana). Skrip punika ngetingaken fénoména langka punika "
@@ -10320,8 +10319,8 @@ msgstr ""
 "3D sanèsipun. Dirèktori asil saha nami berkas saged dipunatur mawi variabel "
 "lingkungan STEL_SKYBOX_DIR saha STEL_SKYBOX_BASENAME. Satunggal berkas dhata"
 " ugi kaserat, panjenengan saged ngatur namanipun mawi variabel lingkungan "
-"OUTPUT_DATA. Kasinggihanipun maos skrip supados saged mangertos kados pundi "
-"nerapaken dhateng proyek panjenengan."
+"OUTPUT_DATA. Mangga maos skrip supados saged mangertos kados pundi nerapaken"
+" dhateng proyek panjenengan."
 
 #: src/translations.h:620
 msgid ""
@@ -10333,7 +10332,7 @@ msgstr ""
 
 #: src/translations.h:621
 msgid "Jupiter's Moons Orbital Simulation"
-msgstr "Simulasi Orbit Candra-candra Jupiter"
+msgstr "Simulasi Orbit Candhra Jupiter"
 
 #: src/translations.h:626
 msgctxt "SIMBAD object type"
@@ -10748,7 +10747,7 @@ msgstr ""
 #: src/translations.h:708
 msgctxt "SIMBAD object type"
 msgid "Moving Group"
-msgstr ""
+msgstr "Moving Group"
 
 #: src/translations.h:709
 msgctxt "SIMBAD object type"
@@ -10918,7 +10917,7 @@ msgstr ""
 #: src/translations.h:742
 msgctxt "SIMBAD object type"
 msgid "Galaxy towards a Group of Galaxies"
-msgstr ""
+msgstr "Galaksi tumuju dhateng Klompok Galaksi"
 
 #: src/translations.h:743
 msgctxt "SIMBAD object type"
@@ -10943,12 +10942,12 @@ msgstr ""
 #: src/translations.h:747
 msgctxt "SIMBAD object type"
 msgid "Group of Galaxies"
-msgstr ""
+msgstr "Group of Galaxies"
 
 #: src/translations.h:748
 msgctxt "SIMBAD object type"
 msgid "Compact Group of Galaxies"
-msgstr ""
+msgstr "Compact Group of Galaxies"
 
 #: src/translations.h:749
 msgctxt "SIMBAD object type"
@@ -13639,11 +13638,11 @@ msgstr "Namung orbit kangge obyek ingkang kapilih..."
 
 #: src/ui_viewDialog.h:4024
 msgid "Also show moons of selected object or planets."
-msgstr "Ugi ngetingaken candra saking obyek utawi planèt ingkang kapilih."
+msgstr "Ugi ngetingaken candhra saking obyek utawi planèt ingkang kapilih."
 
 #: src/ui_viewDialog.h:4026
 msgid "... and moons"
-msgstr "... saha candra-candra"
+msgstr "... saha candhra"
 
 #: src/ui_viewDialog.h:4029
 msgid "Toggle permanent drawing of Sun's corona when atmosphere is disabled"
@@ -13656,11 +13655,11 @@ msgstr "Korona Surya"
 
 #: src/ui_viewDialog.h:4033
 msgid "Toggle drawing halo around the Moon"
-msgstr "Ngalihaken gambar halo wonten ing sakubengipun Candra"
+msgstr "Ngalihaken gambar halo wonten ing sakubengipun Candhra"
 
 #: src/ui_viewDialog.h:4035
 msgid "Moon's halo"
-msgstr "Halo Candra"
+msgstr "Halo Candhra"
 
 #: src/ui_viewDialog.h:4036 src/ui_astroCalcDialog.h:2361
 msgid "Show:"
@@ -13740,7 +13739,7 @@ msgstr "Skala:"
 #: src/ui_viewDialog.h:4068
 msgctxt "scale"
 msgid "Moon"
-msgstr "Candra"
+msgstr "Candhra"
 
 #: src/ui_viewDialog.h:4069
 msgid "Hide nomenclature on the celestial body of observer"
@@ -13821,7 +13820,7 @@ msgstr "nyimpen préferènsi"
 
 #: src/ui_viewDialog.h:4106
 msgid "Deselect all catalogs"
-msgstr "Mboten milih sedaya katalog"
+msgstr "Mbatalaken pilihan sedaya katalog"
 
 #: src/ui_viewDialog.h:4108
 msgid "select none"
@@ -14288,7 +14287,7 @@ msgid ""
 "distance of the Moon. Will not show when Moon scaling is enabled!"
 msgstr ""
 "Bunderan punika nggambaraken agengipun wewayangan punjer, peteng Bumi wonten"
-" ing jarak Candra. Boten badhe katingal nalika panskalaan Candra "
+" ing jarak Candhra. Boten badhe katingal nalika panskalaan Candhra "
 "dipunaktifaken!"
 
 #: src/ui_viewDialog.h:4479
@@ -14297,7 +14296,7 @@ msgstr "Umbra Bumi"
 
 #: src/ui_viewDialog.h:4481
 msgid "Show center point of Earth's shadow in the distance of the Moon."
-msgstr "Ngetingaken titik punjer wewayangan Bumi wonten ing jarak Candra."
+msgstr "Ngetingaken titik punjer wewayangan Bumi wonten ing jarak Candhra."
 
 #: src/ui_viewDialog.h:4485
 msgid "Color of fixed equator"
@@ -14439,7 +14438,7 @@ msgid ""
 "of the Moon. Will not show when Moon scaling is enabled!"
 msgstr ""
 "Bunderan punika nggambaraken pinggiran njawi piyambak wewayangan Bumi wonten"
-" ing jarak Candra. Boten badhe katingal nalika panskalaan Candra "
+" ing jarak Candhra. Boten badhe katingal nalika panskalaan Candhra "
 "dipunaktifaken!"
 
 #: src/ui_viewDialog.h:4622
@@ -15489,7 +15488,7 @@ msgstr "Titimangsa sistèm ing:"
 
 #: src/ui_configurationDialog.h:2167
 msgid "Use current local date and time"
-msgstr "Ngginakaken titimangsa saha wekdal lokal samangke"
+msgstr "Ngginakaken titimangsa saha wekdal lòkal samangke"
 
 #: src/ui_configurationDialog.h:2169
 msgid "use current"
@@ -15538,11 +15537,11 @@ msgstr "Opsi Planètarium"
 
 #: src/ui_configurationDialog.h:2187
 msgid "Hides the mouse cursor when inactive"
-msgstr "Ndedhel kursor mouse nalika boten aktif"
+msgstr "Ndedhel kursor mòus nalika boten aktif"
 
 #: src/ui_configurationDialog.h:2189
 msgid "Mouse cursor timeout:"
-msgstr "Wates wekdal kursor mouse:"
+msgstr "Wates wekdal kursor mòus:"
 
 #: src/ui_configurationDialog.h:2191
 msgid "seconds"
@@ -15575,11 +15574,11 @@ msgstr "Warni tèks pratelan nalika rina"
 
 #: src/ui_configurationDialog.h:2206
 msgid "Allow mouse to pan (drag)"
-msgstr "Ngidinaken mouse kangge nggèsèr (nyèrèt)"
+msgstr "Ngidinaken mòus kangge nggèsèr (nyèrèt)"
 
 #: src/ui_configurationDialog.h:2208
 msgid "Enable mouse navigation"
-msgstr "Ngapikaken navigasi mouse"
+msgstr "Ngapikaken navigasi mòus"
 
 #: src/ui_configurationDialog.h:2210
 msgid ""
@@ -15721,11 +15720,11 @@ msgstr "Nata mujèran keyboard dhateng unèn-unèn dinten"
 
 #: src/ui_configurationDialog.h:2266
 msgid "Allow mouse to zoom (mousewheel)"
-msgstr "Ngidinaken mouse kangge nggedhèkaken/ngècèkaken (gulungan mouse)"
+msgstr "Ngidinaken mòus kangge nggedhèkaken/ngècèkaken (gulungan mòus)"
 
 #: src/ui_configurationDialog.h:2268
 msgid "Enable mouse zooming"
-msgstr "Ngapikaken zoom mouse"
+msgstr "Ngapikaken zoom mòus"
 
 #: src/ui_configurationDialog.h:2270
 msgid "Flash a short message when toggling mount mode."
@@ -16236,7 +16235,7 @@ msgstr "Èkspor èfèmeris..."
 #: src/ui_astroCalcDialog.h:2344 src/ui_astroCalcDialog.h:2474
 #: plugins/Satellites/src/ui_satellitesDialog.h:1379
 msgid "Calculations require time, please be patient"
-msgstr "Pèngètangan mbetahaken wekdal, mugi kersa sabar"
+msgstr "Pèngètangan mbetahaken wekdal, mangga ngatos-atos!"
 
 #: src/ui_astroCalcDialog.h:2347
 msgid "Celestial body:"
@@ -16472,7 +16471,7 @@ msgstr "Ugi grafik kangge Surya"
 
 #: src/ui_astroCalcDialog.h:2482
 msgid "Also the graph for the Moon"
-msgstr "Ugi grafik kangge Candra"
+msgstr "Ugi grafik kangge Candhra"
 
 #: src/ui_astroCalcDialog.h:2484 src/ui_astroCalcDialog.h:2495
 msgid ""
@@ -16501,7 +16500,7 @@ msgstr "Azimut vs. Wekdal"
 
 #: src/ui_astroCalcDialog.h:2502
 msgid "Local Time in hours"
-msgstr "Wekdal Lokal wonten ing tabuh"
+msgstr "Wekdal Lòkal wonten ing tabuh"
 
 #: src/ui_astroCalcDialog.h:2508 src/ui_astroCalcDialog.h:2512
 msgid "How many months to display"
@@ -16673,7 +16672,7 @@ msgstr "Sedaya Gerhana Surya"
 
 #: src/ui_astroCalcDialog.h:2583
 msgid "Local Solar Eclipses"
-msgstr "Gerhana Surya Lokal"
+msgstr "Gerhana Surya Lòkal"
 
 #: src/ui_astroCalcDialog.h:2584
 msgid ""
@@ -16685,11 +16684,11 @@ msgid ""
 "are not reliable due to uncertainty in ΔT which is caused by fluctuations in"
 " Earth's rotation."
 msgstr ""
-"Cathetan: Kuantitas gamma inggih punika jarak minimal saking punjer Candra "
+"Cathetan: Kuantitas gamma inggih punika jarak minimal saking punjer Candhra "
 "dhateng sumbu kerucut ayang-ayangan umbra Bumi, wonten ing édhosan radhius "
 "èkuatorial Bumi. Jarak punika gadhah aji positip utawi négatip, gumantung "
-"menawi Candra langkung lèr utawi kidul sumbu kerucut ayang-ayangan. Kahanan "
-"lokal kangge gerhana salami éwonan taun ing wekdal kapengker saha badhé "
+"menawi Candhra langkung lèr utawi kidul sumbu kerucut ayang-ayangan. Kahanan"
+" lòkal kangge gerhana salami éwonan taun ing wekdal kapengker saha badhé "
 "tebih boten saged dipunandelaken amargi boten cetha wonten ing ΔT ingkang "
 "kadadosan saking fluktuasi rotasi Bumi."
 
@@ -16794,7 +16793,7 @@ msgstr "Sipil"
 
 #: src/ui_astroCalcAlmanacWidget.h:968
 msgid "Today's moonrise"
-msgstr "Candra metunipun dinten punika"
+msgstr "Candhra metunipun dinten punika"
 
 #: src/ui_astroCalcAlmanacWidget.h:974
 msgid "Today's Sun at custom altitude (set)"
@@ -16802,7 +16801,7 @@ msgstr "Surya dinten punika wonten ing inggil manut kabetahan (surup)"
 
 #: src/ui_astroCalcAlmanacWidget.h:978
 msgid "Today's Moon at custom altitude (rise)"
-msgstr "Candra dinten punika wonten ing inggil manut kabetahan (metu)"
+msgstr "Candhra dinten punika wonten ing inggil manut kabetahan (metu)"
 
 #: src/ui_astroCalcAlmanacWidget.h:986
 msgid "Rise"
@@ -16814,7 +16813,7 @@ msgstr "Surya surup dinten punika"
 
 #: src/ui_astroCalcAlmanacWidget.h:993
 msgid "Today's moonset"
-msgstr "Candra surup dinten punika"
+msgstr "Candhra surup dinten punika"
 
 #: src/ui_astroCalcAlmanacWidget.h:997
 msgid "Evening civil twilight"
@@ -16865,7 +16864,7 @@ msgstr "Inggil Surya manut kabetahan"
 
 #: src/ui_astroCalcAlmanacWidget.h:1040
 msgid "Today's Moon at custom altitude (set)"
-msgstr "Candra dinten punika wonten ing inggil manut kabetahan (surup)"
+msgstr "Candhra dinten punika wonten ing inggil manut kabetahan (surup)"
 
 #: src/ui_astroCalcAlmanacWidget.h:1045
 msgid "Minutes before sunrise/after sunset"
@@ -16873,7 +16872,7 @@ msgstr "Menit sadèrèngipun Surya metu/sasampunipun Surya surup"
 
 #: src/ui_astroCalcAlmanacWidget.h:1048
 msgid "Custom altitude of the Moon"
-msgstr "Inggil Candra manut kabetahan"
+msgstr "Inggil Candhra manut kabetahan"
 
 #: src/ui_astroCalcAlmanacWidget.h:1050
 msgctxt "twilight"
@@ -17353,7 +17352,7 @@ msgstr "Orbit planèt minor"
 
 #: src/ui_orbitColorsDialog.h:371
 msgid "Orbits of moons of planets"
-msgstr "Orbit candra planèt"
+msgstr "Orbit candhra planèt"
 
 #: src/ui_orbitColorsDialog.h:375
 msgid "Orbit of Neptune"
@@ -17449,7 +17448,7 @@ msgstr "Warni orbit obyek antawis lintangWarni orbit obyek antawis lintang"
 
 #: src/ui_orbitColorsDialog.h:419
 msgid "Color of planet moon orbits"
-msgstr "Warni orbit candra planèt"
+msgstr "Warni orbit candhra planèt"
 
 #: src/ui_orbitColorsDialog.h:422
 msgid "Color of comet orbits"
@@ -17856,7 +17855,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:308
 msgid "Show measurements near mouse"
-msgstr "Ngetingaken pèngètangan caket mouse"
+msgstr "Ngetingaken pèngètangan caket mòus"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:309
 msgid "Use dms format for angles"
@@ -17867,9 +17866,8 @@ msgid ""
 "When set, only the right mouse button is used to measure angles, the left "
 "mouse button pans and selects as usual"
 msgstr ""
-"Menawi katata, namung tombol tengen tètikus ingkang dipunginakaken kangge "
-"ngètang sudhut, tombol kiwa tètikus kangge ngingser saha milih kados "
-"limrahipun"
+"Menawi katata, namung tombol tengen mòus ingkang dipunginakaken kangge "
+"ngètang sudhut, tombol kiwa mòus kangge ngingser saha milih kados limrahipun"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:313
 msgid "Allow snap to selected object"
@@ -17918,7 +17916,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1007
 msgid "Please select an object before switching to ocular view."
-msgstr "Mugi kersa milih obyek sadèrèngipun ngalih dhateng tampilan okulèr."
+msgstr "Mangga milih obyek sadèrèngipun ngalih dhateng tampilan okulèr."
 
 #: plugins/Oculars/src/Oculars.cpp:1113
 msgid "&Previous ocular"
@@ -18654,8 +18652,8 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularDialog.cpp:650
 msgid "If you find any issues, please let me know. Enjoy!"
 msgstr ""
-"Menawi panjenengan manggihaken prakawis, mugi kersa ngabari kula. Mugi kersa"
-" ngréncangi!"
+"Menawi panjenengan manggihaken prakawis, Mangga ngabari kula. Mugi kersa "
+"ngréncangi!"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:653
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1820
@@ -19384,14 +19382,14 @@ msgstr "gonets"
 #. https://celestrak.org/NORAD/elements/tle-new.txt
 #: plugins/Satellites/src/Satellites.cpp:3390
 msgid "tle-new"
-msgstr "tle-new"
+msgstr "tle-énggal"
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
 #. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3393
 msgid "last-30-days"
-msgstr "last-30-days"
+msgstr "pungkasan-30-dinten"
 
 #. TRANSLATORS: Satellite group: Space stations
 #. TRANSLATORS: CelesTrak source [Space Stations]:
@@ -19551,7 +19549,7 @@ msgstr "gpz-plus"
 #. https://celestrak.org/NORAD/elements/supplemental/intelsat.txt
 #: plugins/Satellites/src/Satellites.cpp:3473
 msgid "intelsat"
-msgstr ""
+msgstr "intelsat"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the SES satellites
 #. TRANSLATORS: CelesTrak source [SES]:
@@ -19562,7 +19560,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/supplemental/ses.txt
 #: plugins/Satellites/src/Satellites.cpp:3478
 msgid "ses"
-msgstr ""
+msgstr "ses"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
@@ -19572,7 +19570,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3482
 msgid "iridium"
-msgstr ""
+msgstr "iridium"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT
 #. constellation (Iridium is a proper name)
@@ -19582,7 +19580,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3486
 msgid "iridium-NEXT"
-msgstr ""
+msgstr "iridium-NEXT"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Starlink
 #. constellation (Starlink is a proper name)
@@ -19594,7 +19592,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/supplemental/starlink.txt
 #: plugins/Satellites/src/Satellites.cpp:3491
 msgid "starlink"
-msgstr ""
+msgstr "starlink"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the OneWeb
 #. constellation (OneWeb is a proper name)
@@ -19606,7 +19604,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/supplemental/oneweb.txt
 #: plugins/Satellites/src/Satellites.cpp:3496
 msgid "oneweb"
-msgstr ""
+msgstr "onewèb"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM
 #. satellites
@@ -19618,7 +19616,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/supplemental/orbcomm.txt
 #: plugins/Satellites/src/Satellites.cpp:3501
 msgid "orbcomm"
-msgstr ""
+msgstr "òrbcomm"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR
 #. satellites
@@ -19628,7 +19626,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3505
 msgid "globalstar"
-msgstr ""
+msgstr "glòbalstar"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the SWARM satellites
 #. TRANSLATORS: CelesTrak source [Swarm]:
@@ -19637,7 +19635,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=swarm&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3509
 msgid "swarm"
-msgstr ""
+msgstr "swarm"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #. TRANSLATORS: CelesTrak source [Amateur Radio]:
@@ -19646,7 +19644,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3513
 msgid "amateur"
-msgstr ""
+msgstr "amatir"
 
 #. TRANSLATORS: Satellite group: Experimental communication satellites
 #. TRANSLATORS: CelesTrak source [Experimental]:
@@ -19655,7 +19653,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3517
 msgid "x-comm"
-msgstr ""
+msgstr "x-komunikasi"
 
 #. TRANSLATORS: Satellite group: Other communication satellites
 #. TRANSLATORS: CelesTrak source [Other Comm]:
@@ -19664,7 +19662,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3521
 msgid "other-comm"
-msgstr ""
+msgstr "komunikasi sanèsipun"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the SatNOGS
 #. satellites
@@ -19674,7 +19672,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3525
 msgid "satnogs"
-msgstr ""
+msgstr "satnògs"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT
 #. satellites
@@ -19684,7 +19682,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gorizont&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3529
 msgid "gorizont"
-msgstr ""
+msgstr "gòrizont"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
 #. TRANSLATORS: CelesTrak source [Raduga]:
@@ -19693,7 +19691,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=raduga&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3533
 msgid "raduga"
-msgstr ""
+msgstr "radhuga"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA
 #. satellites
@@ -19703,7 +19701,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=molniya&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3537
 msgid "molniya"
-msgstr ""
+msgstr "mòlniya"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Qianfan
 #. constellation (Qianfan is a proper name)
@@ -19711,7 +19709,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=qianfan&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3540
 msgid "qianfan"
-msgstr ""
+msgstr "qianfan"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Hulianwang
 #. constellation (Hulianwang is a proper name)
@@ -19719,17 +19717,17 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=hulianwang&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3543
 msgid "hulianwang"
-msgstr ""
+msgstr "hulianwang"
 
 #. TRANSLATORS: CelesTrak source [Kuiper]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=kuiper&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3545
 msgid "kuiper"
-msgstr ""
+msgstr "kuiper"
 
 #: plugins/Satellites/src/Satellites.cpp:3546
 msgid "yamal"
-msgstr ""
+msgstr "yamal"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GNSS satellites
 #. TRANSLATORS: CelesTrak source [GNSS]:
@@ -19738,7 +19736,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gnss&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3553
 msgid "gnss"
-msgstr ""
+msgstr "gnss"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
@@ -19746,7 +19744,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/supplemental/gps.txt
 #: plugins/Satellites/src/Satellites.cpp:3556
 msgid "gps"
-msgstr ""
+msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
@@ -19756,7 +19754,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3560
 msgid "gps-ops"
-msgstr ""
+msgstr "gps-ops"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
@@ -19764,7 +19762,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/supplemental/glonass.txt
 #: plugins/Satellites/src/Satellites.cpp:3563
 msgid "glonass"
-msgstr ""
+msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
@@ -19774,7 +19772,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3567
 msgid "glo-ops"
-msgstr ""
+msgstr "glò-ops"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
@@ -19784,7 +19782,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=galileo&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3571
 msgid "galileo"
-msgstr ""
+msgstr "galilèo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the BeiDou
 #. constellation (BeiDou Navigation Satellite System)
@@ -19794,7 +19792,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=beidou&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3575
 msgid "beidou"
-msgstr ""
+msgstr "beidou"
 
 #. TRANSLATORS: Satellite group: Satellite-Based Augmentation System
 #. (WAAS/EGNOS/MSAS)
@@ -19805,7 +19803,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sbas&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3579
 msgid "sbas"
-msgstr ""
+msgstr "sbas"
 
 #. TRANSLATORS: Satellite group: Navy Navigation Satellite System (NNSS)
 #. TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]:
@@ -19814,7 +19812,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=nnss&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3583
 msgid "nnss"
-msgstr ""
+msgstr "nnss"
 
 #. TRANSLATORS: Satellite group: Russian LEO Navigation Satellites
 #. TRANSLATORS: CelesTrak source [Russian LEO Navigation]:
@@ -19823,7 +19821,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=musson&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3587
 msgid "musson"
-msgstr ""
+msgstr "musson"
 
 #. TRANSLATORS: Satellite group: Space & Earth Science satellites
 #. TRANSLATORS: CelesTrak source [Space & Earth Science]:
@@ -19832,7 +19830,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=science&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3594
 msgid "science"
-msgstr ""
+msgstr "sains"
 
 #. TRANSLATORS: Satellite group: Geodetic satellites
 #. TRANSLATORS: CelesTrak source [Geodetic]:
@@ -19841,7 +19839,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=geodetic&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3598
 msgid "geodetic"
-msgstr ""
+msgstr "gèodhètis"
 
 #. TRANSLATORS: Satellite group: Engineering satellites
 #. TRANSLATORS: CelesTrak source [Engineering]:
@@ -19850,7 +19848,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=engineering&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3602
 msgid "engineering"
-msgstr ""
+msgstr "tèknik"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #. TRANSLATORS: CelesTrak source [Education]:
@@ -19859,7 +19857,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=education&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3606
 msgid "education"
-msgstr ""
+msgstr "pendhidhikan"
 
 #. TRANSLATORS: Satellite group: Military satellites
 #. TRANSLATORS: CelesTrak source [Miscellaneous Military]:
@@ -19868,7 +19866,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=military&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3613
 msgid "military"
-msgstr ""
+msgstr "militèr"
 
 #. TRANSLATORS: Satellite group: Radar Calibration satellites
 #. TRANSLATORS: CelesTrak source [Radar Calibration]:
@@ -19877,7 +19875,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=radar&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3617
 msgid "radar"
-msgstr ""
+msgstr "radar"
 
 #. TRANSLATORS: Satellite group: CubeSats (Cube Satellites)
 #. TRANSLATORS: CelesTrak source [CubeSats]:
@@ -19886,7 +19884,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3621
 msgid "cubesat"
-msgstr ""
+msgstr "cubesat"
 
 #. TRANSLATORS: Satellite group: Other satellites
 #. TRANSLATORS: CelesTrak source [Other]:
@@ -19895,101 +19893,101 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=other&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3625
 msgid "other"
-msgstr ""
+msgstr "sanèsipun"
 
 #. TRANSLATORS: Satellite group: Meteosat
 #. TRANSLATORS: CelesTrak supplemental source [METEOSAT TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/meteosat.txt
 #: plugins/Satellites/src/Satellites.cpp:3632
 msgid "meteosat"
-msgstr ""
+msgstr "mètèosat"
 
 #. TRANSLATORS: Satellite group: Telesat
 #. TRANSLATORS: CelesTrak supplemental source [Telesat TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/telesat.txt
 #: plugins/Satellites/src/Satellites.cpp:3636
 msgid "telesat"
-msgstr ""
+msgstr "tèlèsat"
 
 #. TRANSLATORS: Satellite group: ISS Segments
 #. TRANSLATORS: CelesTrak supplemental source [ISS TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/iss.txt
 #: plugins/Satellites/src/Satellites.cpp:3639
 msgid "iss"
-msgstr ""
+msgstr "iss"
 
 #. TRANSLATORS: Satellite group: CPF
 #. TRANSLATORS: CelesTrak supplemental source [CPF TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/cpf.txt
 #: plugins/Satellites/src/Satellites.cpp:3642
 msgid "cpf"
-msgstr ""
+msgstr "cpf"
 
 #. TRANSLATORS: Satellite name: International Space Station
 #: plugins/Satellites/src/Satellites.cpp:3646
 msgid "ISS (ZARYA)"
-msgstr ""
+msgstr "ISS (ZARYA)"
 
 #. TRANSLATORS: Satellite name: International Space Station
 #: plugins/Satellites/src/Satellites.cpp:3648
 msgid "ISS (NAUKA)"
-msgstr ""
+msgstr "ISS (NAUKA)"
 
 #. TRANSLATORS: Satellite name: International Space Station
 #: plugins/Satellites/src/Satellites.cpp:3650
 msgid "ISS"
-msgstr ""
+msgstr "ISS"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
 #: plugins/Satellites/src/Satellites.cpp:3652
 msgid "HST"
-msgstr ""
+msgstr "HST"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
 #: plugins/Satellites/src/Satellites.cpp:3654
 msgid "SPEKTR-R"
-msgstr ""
+msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: Spektr-RG Space Observatory
 #: plugins/Satellites/src/Satellites.cpp:3656
 msgid "SPEKTR-RG"
-msgstr ""
+msgstr "SPEKTR-RG"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
 #: plugins/Satellites/src/Satellites.cpp:3658
 msgid "INTEGRAL"
-msgstr ""
+msgstr "INTÈGRAL"
 
 #. TRANSLATORS: Satellite name: China's first space station name
 #: plugins/Satellites/src/Satellites.cpp:3660
 msgid "TIANGONG 1"
-msgstr ""
+msgstr "TIANGONG 1"
 
 #. TRANSLATORS: Satellite name: name of China's space station module
 #: plugins/Satellites/src/Satellites.cpp:3662
 msgid "TIANHE"
-msgstr ""
+msgstr "TIANHE"
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base
 #. module)
 #: plugins/Satellites/src/Satellites.cpp:3664
 msgid "TIANGONG (TIANHE)"
-msgstr ""
+msgstr "TIANGONG (TIANHE)"
 
 #. TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a
 #. satellite
 #: plugins/Satellites/src/Satellites.cpp:3669
 msgctxt "comms"
 msgid "uplink"
-msgstr ""
+msgstr "tautan minggah"
 
 #. TRANSLATORS: A downlink (DL) is the link from a satellite to a ground
 #. station
 #: plugins/Satellites/src/Satellites.cpp:3671
 msgctxt "comms"
 msgid "downlink"
-msgstr ""
+msgstr "tautan mandhap"
 
 #. TRANSLATORS: The beacon (or radio beacon) is a device in the satellite,
 #. which emit one or more signals (normally on a fixed frequency) whose
@@ -19998,7 +19996,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:3673
 msgctxt "comms"
 msgid "beacon"
-msgstr ""
+msgstr "suar"
 
 #. TRANSLATORS: Telemetry is the collection of measurements or other data at
 #. satellites and their automatic transmission to receiving equipment
@@ -20006,65 +20004,65 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:3675
 msgctxt "comms"
 msgid "telemetry"
-msgstr ""
+msgstr "tèlèmètri"
 
 #. TRANSLATORS: The channel for transmission of video data
 #: plugins/Satellites/src/Satellites.cpp:3677
 msgctxt "comms"
 msgid "video"
-msgstr ""
+msgstr "vidhéo"
 
 #. TRANSLATORS: The broadband is wide bandwidth data transmission which
 #. transports multiple signals at a wide range of frequencies
 #: plugins/Satellites/src/Satellites.cpp:3679
 msgctxt "comms"
 msgid "broadband"
-msgstr ""
+msgstr "pita wiyar"
 
 #. TRANSLATORS: The channel for transmission of commands
 #: plugins/Satellites/src/Satellites.cpp:3681
 msgctxt "comms"
 msgid "command"
-msgstr ""
+msgstr "dhawuh"
 
 #. TRANSLATORS: Meteorological is a service on the satellite for transmitting
 #. meteorological data to a ground station
 #: plugins/Satellites/src/Satellites.cpp:3683
 msgctxt "comms"
 msgid "meteorological"
-msgstr ""
+msgstr "mètèorologis"
 
 #. TRANSLATORS: Maritime is a service on the satellite
 #: plugins/Satellites/src/Satellites.cpp:3685
 msgctxt "comms"
 msgid "maritime"
-msgstr ""
+msgstr "maritim"
 
 #. TRANSLATORS: Mobile is a service on the satellite
 #: plugins/Satellites/src/Satellites.cpp:3687
 msgctxt "comms"
 msgid "mobile"
-msgstr ""
+msgstr "sèlulèr"
 
 #. TRANSLATORS: Mobile telephony is a service on the satellite
 #: plugins/Satellites/src/Satellites.cpp:3689
 msgctxt "comms"
 msgid "mobile telephony"
-msgstr ""
+msgstr "tèlèpon sèlulèr"
 
 #. TRANSLATORS: A repeater is an electronic device that receives a signal and
 #. retransmits it.
 #: plugins/Satellites/src/Satellites.cpp:3691
 msgctxt "comms"
 msgid "repeater"
-msgstr ""
+msgstr "pangulang"
 
 #. TRANSLATORS: The digital repeater (or digipiter) is used in channels that
 #. transmit data by binary digital signals
 #: plugins/Satellites/src/Satellites.cpp:3693
 msgctxt "comms"
 msgid "digipeater"
-msgstr ""
+msgstr "dighipitèr"
 
 #. TRANSLATORS: A radio band is a small frequency band (a contiguous section
 #. of the range of the radio spectrum) in which channels are usually used or
@@ -20072,155 +20070,155 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:3695
 msgctxt "comms"
 msgid "-band"
-msgstr ""
+msgstr "-pita"
 
 #: plugins/Satellites/src/Satellites.cpp:3696
 msgctxt "comms"
 msgid "crew voice"
-msgstr ""
+msgstr "suwanten awak"
 
 #: plugins/Satellites/src/Satellites.cpp:3697
 msgctxt "comms"
 msgid "imaging"
-msgstr ""
+msgstr "pencitraan"
 
 #. TRANSLATORS: Some mode of communication via radio channel
 #: plugins/Satellites/src/Satellites.cpp:3699
 msgctxt "comms"
 msgid "mode"
-msgstr ""
+msgstr "modhe"
 
 #: plugins/Satellites/src/Satellite.cpp:218
 msgid "The satellite and the observer are in sunlight"
-msgstr ""
+msgstr "Satelit saha paningal wonten ing ngandhap cahya surya"
 
 #: plugins/Satellites/src/Satellite.cpp:219
 msgid "The satellite is sunlit and the observer is in the dark"
-msgstr ""
+msgstr "Satelit kasinaran surya saha paningal wonten ing peteng"
 
 #: plugins/Satellites/src/Satellite.cpp:220
 msgid "The satellite isn't sunlit"
-msgstr ""
+msgstr "Satelit boten kasinaran surya"
 
 #: plugins/Satellites/src/Satellite.cpp:221
 msgid "The satellite is in penumbra"
-msgstr ""
+msgstr "Satelit wonten ing pènumbra"
 
 #: plugins/Satellites/src/Satellite.cpp:222
 msgid "The satellite is eclipsed"
-msgstr ""
+msgstr "Satelit ngalami gerhana"
 
 #: plugins/Satellites/src/Satellite.cpp:223
 msgid "The satellite is below the horizon"
-msgstr ""
+msgstr "Satelit wonten ing ngandhap cakrawala"
 
 #: plugins/Satellites/src/Satellite.cpp:336
 msgid "International Designator"
-msgstr ""
+msgstr "Pènèntu Internasional"
 
 #: plugins/Satellites/src/Satellite.cpp:348
 msgid "Approx. magnitude"
-msgstr ""
+msgstr "Kinten-kinten magnitudo"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:361
 msgid "Range"
-msgstr ""
+msgstr "Jangkauan"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:363
 msgid "Range rate"
-msgstr ""
+msgstr "Laju jangkauan"
 
 #: plugins/Satellites/src/Satellite.cpp:366
 msgid "Perigee/apogee altitudes"
-msgstr ""
+msgstr "Inggiling pèrigé/apogé"
 
 #: plugins/Satellites/src/Satellite.cpp:377
 msgid "Approx. angular size"
-msgstr ""
+msgstr "Kinten-kinten ageng sudhut"
 
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a
 #. rotation
 #: plugins/Satellites/src/Satellite.cpp:386
 msgctxt "frequency"
 msgid "rpd"
-msgstr ""
+msgstr "rpd"
 
 #. TRANSLATORS: minutes - orbital period for artificial satellites
 #: plugins/Satellites/src/Satellite.cpp:388
 msgctxt "period"
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: plugins/Satellites/src/Satellite.cpp:390
 msgid "Orbital period"
-msgstr ""
+msgstr "Pèriodhe orbit"
 
 #: plugins/Satellites/src/Satellite.cpp:395
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:257
 #: plugins/Exoplanets/src/Exoplanet.cpp:366
 msgid "Inclination"
-msgstr ""
+msgstr "Inklinasi"
 
 #: plugins/Satellites/src/Satellite.cpp:396
 msgid "SubPoint (Lat./Long.)"
-msgstr ""
+msgstr "SubPoint (Lat./Long.)"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:402
 msgid "TEME coordinates"
-msgstr ""
+msgstr "Koordinat TEME"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:406
 msgid "TEME velocity"
-msgstr ""
+msgstr "Kacepetan TEME"
 
 #: plugins/Satellites/src/Satellite.cpp:416
 msgid "Sun reflection angle"
-msgstr ""
+msgstr "Sudhut pantulan surya"
 
 #: plugins/Satellites/src/Satellite.cpp:424
 #: plugins/Satellites/src/Satellite.cpp:534
 msgctxt "unknown date"
 msgid "unknown"
-msgstr ""
+msgstr "boten dipunmangertosi"
 
 #: plugins/Satellites/src/Satellite.cpp:431
 msgctxt "at time"
 msgid "at"
-msgstr ""
+msgstr "wonten ing"
 
 #: plugins/Satellites/src/Satellite.cpp:433
 msgid "Last updated TLE"
-msgstr ""
+msgstr "TLE pungkasan dipunanyari"
 
 #: plugins/Satellites/src/Satellite.cpp:434
 msgid "Epoch of the TLE"
-msgstr ""
+msgstr "Épòch TLE"
 
 #: plugins/Satellites/src/Satellite.cpp:436
 msgid "Radar cross-section (RCS)"
-msgstr ""
+msgstr "Penampang silang radar (RCS)"
 
 #: plugins/Satellites/src/Satellite.cpp:445
 msgid "Group"
-msgstr ""
+msgstr "Klompok"
 
 #: plugins/Satellites/src/Satellite.cpp:445
 msgid "Groups"
-msgstr ""
+msgstr "Klompok-klompok"
 
 #: plugins/Satellites/src/Satellite.cpp:450
 msgid "Operational status"
-msgstr ""
+msgstr "Status opèrasional"
 
 #: plugins/Satellites/src/Satellite.cpp:456
 msgid "Radio communication"
-msgstr ""
+msgstr "Komunikasi radhio"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Satellites/src/Satellite.cpp:504
@@ -20228,75 +20226,78 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:283
 msgctxt "frequency"
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #: plugins/Satellites/src/Satellite.cpp:504
 msgctxt "frequency"
 msgid "kHz"
-msgstr ""
+msgstr "kHz"
 
 #: plugins/Satellites/src/Satellite.cpp:762
 msgctxt "operational status"
 msgid "operational"
-msgstr ""
+msgstr "opèrasional"
 
 #: plugins/Satellites/src/Satellite.cpp:763
 msgctxt "operational status"
 msgid "non-operational"
-msgstr ""
+msgstr "boten opèrasional"
 
 #: plugins/Satellites/src/Satellite.cpp:764
 msgctxt "operational status"
 msgid "partially operational"
-msgstr ""
+msgstr "opèrasional sapérangan"
 
 #: plugins/Satellites/src/Satellite.cpp:765
 msgctxt "operational status"
 msgid "standby"
-msgstr ""
+msgstr "siaga"
 
 #: plugins/Satellites/src/Satellite.cpp:766
 msgctxt "operational status"
 msgid "spare"
-msgstr ""
+msgstr "cadangan"
 
 #: plugins/Satellites/src/Satellite.cpp:767
 msgctxt "operational status"
 msgid "extended mission"
-msgstr ""
+msgstr "misi dipunlajengaken"
 
 #: plugins/Satellites/src/Satellite.cpp:768
 msgctxt "operational status"
 msgid "decayed"
-msgstr ""
+msgstr "ngrempal"
 
 #: plugins/Satellites/src/Satellite.cpp:770
 msgctxt "operational status"
 msgid "unknown"
-msgstr ""
+msgstr "boten dipunmangertosi"
 
 #: plugins/Satellites/src/Satellite.hpp:162
 msgid "artificial satellite"
-msgstr ""
+msgstr "satelit damelan"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:775
 msgid "Stellarium Satellites Plugin"
-msgstr ""
+msgstr "Pilugin Satelit Stellarium"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:786
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
+"Pilugin Satelit mredhiksi posisi satelit damelan wonten ing orbit Bumi."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:788
 msgid "Notes for users"
-msgstr ""
+msgstr "Cathetan kangge panggina"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:789
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
+"Satelit saha orbitipun namung dipunpratèlakaken menawi paningal wonten ing "
+"Bumi."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:790
 msgid ""
@@ -20304,12 +20305,19 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
+"Posisi ingkang dipunprèdhiksi namung saé kangge wekdal ingkang radi cekak "
+"(kirang langkung dinten, minggu, utawi kinten-kinten sasi dhateng wingking "
+"saha ngajeng). Mugi ngajengaken kalainan inggil menawi mirsani tanggal jawi "
+"rèntang punika."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:791
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
+"Èlèmèn orbit énggal dados boten leres (namung sawetawis minggu, kadhang kala"
+" dinten). Kangge pikantuk dhata ingkang migunani, panjenengan kedah nganyari"
+" dhata TLE kanthi rutin."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in
 #. automatically. You can check the original names in Stellarium. File names
@@ -20321,21 +20329,28 @@ msgid ""
 "the default %3 file.  The old file will be backed up as %4.  This can be "
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
+"Ngeklik tombol \"%1\" wonten ing tab \"%2\" dhialog punika badhé wangsul "
+"dhateng bèrkas baku %3. Bèrkas lami badhé dipuncadhangaken minangka %4. "
+"Punika saged kapanggihaken wonten ing dirèktori dhata panggina, ing ngandhap"
+" \"mòdhul/Satelit/\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:796
 msgid ""
 "The value of perigee and apogee altitudes compute for mean Earth radius."
 msgstr ""
+"Aji inggiling pèrigé saha apogé dipunétang kangge jari-jari rata-rata Bumi."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:797
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
+"Pilugin Satelit taksih wonten ing pambangunan. Sawetawis fitur dèrèng "
+"jangkep, ical, utawi wonten bug."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:801
 msgid "Altitude classifications for geocentric orbits"
-msgstr ""
+msgstr "Klasifikasi inggiling kangge orbit gèosèntris"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:802
 msgid ""
@@ -20343,6 +20358,9 @@ msgid ""
 " km, inclination of orbits in range 0-180 degrees and eccentricity below "
 "0.25."
 msgstr ""
+"Orbit Bumi Andhap (LEO): orbit gèosèntris mawi inggiling apogé ing ngandhap "
+"4400 km, inklinasi orbit wonten ing rèntang 0-180 drajat saha èksèntrisitas "
+"ing ngandhap 0,25."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:803
 msgid ""
@@ -20350,6 +20368,9 @@ msgid ""
 " 4400 km, inclination of orbits in range 0-180 degrees, eccentricity below "
 "0.25 and period at least 1100 minutes."
 msgstr ""
+"Orbit Bumi Tengan (MEO): orbit gèosèntris mawi inggiling apogé paling boten "
+"4400 km, inklinasi orbit wonten ing rèntang 0-180 drajat, èksèntrisitas ing "
+"ngandhap 0,25 saha pèriodhe paling boten 1100 menit."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:804
 msgid ""
@@ -20358,6 +20379,10 @@ msgid ""
 "in range 1100-2000 minutes (orbits around Earth matching Earth's sidereal "
 "rotation period). "
 msgstr ""
+"Orbit Gèosinkron (GSO) saha Orbit Gèostasionèr (GEO) inggih punika orbit "
+"mawi inklinasi orbit ing ngandhap 25 drajat, èksèntrisitas ing ngandhap 0,25"
+" saha pèriodhe wonten ing rèntang 1100-2000 menit (orbit ngubengi Bumi "
+"ingkang cocog kaliyan pèriodhe puteran sidèrís Bumi)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:805
 msgid ""
@@ -20365,6 +20390,9 @@ msgid ""
 "below 70000 km, inclination of orbits in range 0-180 degrees, eccentricity "
 "at least 0.25 and period below 14000 minutes."
 msgstr ""
+"Orbit Sanget Èlips (HEO): orbit gèosèntris mawi inggiling pèrigé ing "
+"ngandhap 70000 km, inklinasi orbit wonten ing rèntang 0-180 drajat, "
+"èksèntrisitas paling boten 0,25 saha pèriodhe ing ngandhap 14000 menit."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
 msgid ""
@@ -20372,6 +20400,10 @@ msgid ""
 "geosynchronous orbit: inclination of orbits in range 25-180 degrees, "
 "eccentricity below 0.25 and period in range 1100-2000 minutes."
 msgstr ""
+"Orbit Gèosinkron Inggil (HGSO): orbit gèosèntris ing nginggil inggiling "
+"orbit gèosinkron: inklinasi orbit wonten ing rèntang 25-180 drajat, "
+"èksèntrisitas ing ngandhap 0,25 saha pèriodhe wonten ing rèntang 1100-2000 "
+"menit."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:808
 msgid ""
@@ -20380,16 +20412,22 @@ msgid ""
 "orbital periods of such orbits are greater than 24 hours, therefore "
 "satellites in such orbits have an apparent retrograde motion."
 msgstr ""
+"Orbit Bumi Inggil (HEO utawi HEO/E): orbit gèosèntris mawi inggil sadaya ing"
+" nginggil orbit gèosinkron (35786 kilomèter). Pèriodhe orbit kados makaten "
+"langkung ageng saking 24 jam, pramila satelit wonten ing orbit kados makaten"
+" kagungan obahan mundur ingkang katingal."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:811
 msgid "Inclination classifications for geocentric orbits"
-msgstr ""
+msgstr "Klasifikasi inklinasi kangge orbit gèosèntris"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:812
 msgid ""
 "Equatorial orbit: an orbit whose inclination in reference to the equatorial "
 "plane is (or very close to) 0 degrees."
 msgstr ""
+"Orbit Èkuatorial: orbit ingkang inklinasinipun magepokan kaliyan babagan "
+"èkuatorial inggih punika (utawi caket sanget kaliyan) 0 drajat."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
 msgid ""
@@ -20397,6 +20435,9 @@ msgid ""
 " planet on each revolution. Therefore it has an inclination of (or very "
 "close to) 90 degrees."
 msgstr ""
+"Orbit Pòlar: satelit ingkang nglangkungi ing nginggil utawi caket sanget ing"
+" nginggil kalih kutub planèt wonten ing saben rèvòlusi. Pramila, satelit "
+"kagungan inklinasi (utawi caket sanget kaliyan) 90 drajat."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:814
 msgid ""
@@ -20406,11 +20447,17 @@ msgid ""
 "synchronous orbits around Earth are about 600–800 km in altitude, with "
 "periods in the 96–100-minute range, and inclinations of around 98 degrees."
 msgstr ""
+"Orbit Pòlar Sinkron-Surya (PSSO): Orbit ingkang mèh pòlar ingkang "
+"nglangkungi èkuator wonten ing wekdal lòkal ingkang sami wonten ing saben "
+"liwatan. Migunani kangge satelit mundhut citra amargi ayang-ayangan badhé "
+"sami wonten ing saben liwatan. Orbit sinkron-Surya ingkang limrah ngubengi "
+"Bumi kirang langkung 600–800 km inggilipun, mawi pèriodhe wonten ing rèntang"
+" 96–100 menit, saha inklinasi kirang langkung 98 drajat."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:818
 msgid "Communication links"
-msgstr ""
+msgstr "Tautan komunikasi"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:819
 msgid ""
@@ -20418,95 +20465,99 @@ msgid ""
 "many modes for telemetry and data packets. You should to know which "
 "demodulator you need to decode telemetry and packets:"
 msgstr ""
+"Kathah satelit ingkang kagungan pamancar (transceiver saha transponder) mawi"
+" kathah modhe kangge tèlèmètri saha pakèt dhata. Panjenengan kedah mangertos"
+" dhèmodhulator pundi ingkang panjenengan betahaken kangge ngurai tèlèmètri "
+"saha pakèt:"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
 msgid "Automatic Picture Transmission"
-msgstr ""
+msgstr "Transmisi Citra Otomatis"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:822
 msgid "Low Resolution Picture Transmission"
-msgstr ""
+msgstr "Transmisi Citra Rèsolusi Andhap"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
 msgid "High Resolution Picture Transmission"
-msgstr ""
+msgstr "Transmisi Citra Rèsolusi Inggil"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:824
 msgid "Advanced High Resolution Picture Transmission"
-msgstr ""
+msgstr "Transmisi Citra Rèsolusi Inggil Majeng"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
 msgid "Amateur Radio adaptation of X.25 packet protocol"
-msgstr ""
+msgstr "Adhaptasi Radhio Amatir saking pròtòkòl pakèt X.25"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:826
 msgid "Continuous Wave, Morse Code"
-msgstr ""
+msgstr "Gelombang Lumampah, Kòdhe Mòrs"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:827
 msgid "Amplitude Modulation"
-msgstr ""
+msgstr "Mòdhulasi Amplitudo"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:828
 msgid "Frequency Modulation"
-msgstr ""
+msgstr "Mòdhulasi Frèkuènsi"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:829
 msgid "Data Under Voice"
-msgstr ""
+msgstr "Dhata ing Ngandhap Suwanten"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
 msgid "Frequency Shift Keying"
-msgstr ""
+msgstr "Panguncèn Gèsèran Frèkuènsi"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
 msgid "Gaussian Frequency Shift Keying"
-msgstr ""
+msgstr "Panguncèn Gèsèran Frèkuènsi Gaussian"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:832
 msgid "Gaussian Minimum Shift Keying"
-msgstr ""
+msgstr "Panguncèn Gèsèran Minimum Gaussian"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:833
 msgid "Audio Frequency Shift Keying"
-msgstr ""
+msgstr "Panguncèn Gèsèran Frèkuènsi Audhio"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:834
 msgid "Amplitude-shift Keying"
-msgstr ""
+msgstr "Panguncèn Gèsèran Amplitudo"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:835
 msgid "Phase-shift Keying"
-msgstr ""
+msgstr "Panguncèn Gèsèran Fasa"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:836
 msgid "Binary Phase-shift Keying"
-msgstr ""
+msgstr "Panguncèn Gèsèran Fasa Binèr"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:837
 msgid "Quadrature Phase-shift Keying"
-msgstr ""
+msgstr "Panguncèn Gèsèran Fasa Kuadratur"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:838
 msgid "Offset Quadrature Phase-shift Keying"
-msgstr ""
+msgstr "Panguncèn Gèsèran Fasa Kuadratur Offset"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:839
 msgid "Differential Phase-shift Keying"
-msgstr ""
+msgstr "Panguncèn Gèsèran Fasa Dhipèrènsial"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:840
 msgid "Binary Offset Carrier"
-msgstr ""
+msgstr "Pambekta Offset Binèr"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:841
 msgid "Multiplexed Binary Offset Carrier"
-msgstr ""
+msgstr "Pambekta Offset Binèr Multyplèks"
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:845
 msgid "TLE data updates"
-msgstr ""
+msgstr "Nganyari dhata TLE"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:846
 msgid ""
@@ -20514,6 +20565,9 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more"
 " than 72 hours old. "
 msgstr ""
+"Pilugin Satelit saged kanthi otomatis ngundhuh dhata TLE saking sumbèr "
+"Internèt, saha minangka baku pilugin badhé nindakaken punika menawi dhata "
+"ingkang wonten langkung saking 72 jam lami."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:847
 #, qt-format
@@ -20522,44 +20576,61 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
+"Menawi panjenengan matèni nganyari Internèt, panjenengan saged nganyari "
+"saking bèrkas wonten ing komputer panjenengan. Bèrkas punika kedah wonten "
+"ing format ingkang sami kaliyan nganyari Cèlèstrak (mugi mirsani %1 kangge "
+"conto)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:848
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
+"<b>Cathetan:</b> menawi asma satelit wonten ing dhata nganyari kagungan "
+"menapa kémawon wonten ing jero kurung pesagi ing pungkasan, punika badhé "
+"dipunbuwang sadèrèngipun dhata dipunginakaken."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:851
 msgid "Adding new satellites"
-msgstr ""
+msgstr "Nambahi satelit énggal"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:852
 msgid ""
 "Make sure the satellite(s) you wish to add are included in one of the URLs "
 "listed in the Sources tab of the satellites configuration dialog."
 msgstr ""
+"Damèkaken manawa satelit (utawi sateli-satelit) ingkang panjenengan kersa "
+"tambahi kasertakaken wonten ing salah satunggaling URL ingkang kacumawis "
+"wonten ing tab Sumbèr dhialog kònfigurasi satelit."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:853
 msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
 msgstr ""
+"Pindhah dhateng tab Satelit, saha klik tombol '+'. Milih satelit (utawi "
+"satelit-satelit) ingkang panjenengan kersa tambahi saha milih tombol "
+"'tambah'."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:855
 msgid "Technical notes"
-msgstr ""
+msgstr "Cathetan tèknis"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:856
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
 " as the input."
 msgstr ""
+"Posisi dipunétang ngginakaken métodhe SGP4 saha SDP4, ngginakaken dhata "
+"NORAD TLE minangka lebetan."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:857
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6)"
 msgstr ""
+"Kòdhe pétangan orbit dipunserat déning Jòse Luis Canales miturut Spacètrack "
+"Rèpòrt #3 ingkang sampun dipunrèvisi (kalebet Spacètrack Rèpòrt #6)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:858
 msgid ""
@@ -20569,22 +20640,33 @@ msgid ""
 "the standard magnitudes from the database of the MMT-9 observatory (Kazan "
 "Federal University)"
 msgstr ""
+"Kangge ngétang kinten-kinten magnitudo paningal satelit, kula ngginakaken "
+"panampang silang radar (RCS) saha magnitudo baku saking dhata bàs Mìkè "
+"McCants (kanthi idin); panampang silang radar (RCS) saking dhata bàs "
+"CèlèsTrack; magnitudo baku saking dhata bàs obsèrvatorium MMT-9 (Kazan "
+"Fèdhèral Univèrsity)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:859
 msgid ""
 "Formula to calculate an approximate visual magnitude of satellites from the "
 "standard magnitude may be found at Mike McCants website"
 msgstr ""
+"Fòrmula kangge ngétang kinten-kinten magnitudo paningal satelit saking "
+"magnitudo baku saged kapanggihaken wonten ing wèbsit Mìkè McCants"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:860
 msgid ""
 "We use a spherical shape of satellite to calculate an approximate visual "
 "magnitude from RCS values."
 msgstr ""
+"Kula ngginakaken wujud satelit bundher kangge ngétang kinten-kinten "
+"magnitudo paningal saking aji RCS."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:861
 msgid "For modelling Starlink magnitudes we use Anthony Mallama's formula"
 msgstr ""
+"Kangge mòdhèling magnitudo Starlínk, kula ngginakaken fòrmula Anthòny "
+"Mallama"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:880
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:152
@@ -20594,7 +20676,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:678
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:152
 msgid "Next update"
-msgstr ""
+msgstr "Nganyari salajengipun"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:885
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:158
@@ -20604,7 +20686,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:684
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:154
 msgid "Internet updates disabled"
-msgstr ""
+msgstr "Nganyari Internèt dipunpatèni"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:887
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:911
@@ -20620,7 +20702,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:737
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:166
 msgid "Updating now..."
-msgstr ""
+msgstr "Nganyari sakmenika..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:892
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:162
@@ -20629,7 +20711,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:180
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:688
 msgid "< 1 minute"
-msgstr ""
+msgstr "< 1 menit"
 
 #. TRANSLATORS: minutes.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:897
@@ -20642,7 +20724,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:222
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:914
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
@@ -20652,29 +20734,32 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:740
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:169
 msgid "Update error"
-msgstr ""
+msgstr "Kalèpatan nganyari"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:924
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr ""
+"Nganyari %1/%2 satelit (utawi satelit-satelit); %3 katambahan; %4 "
+"dipunbuwang"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:926
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr ""
+"Nganyari %1/%2 satelit (utawi satelit-satelit); %3 katambahan; %4 ical"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:941
 msgid "Empty string - not saving"
-msgstr ""
+msgstr "String suwung - boten nyimpen"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:948
 msgid "Invalid URL - not saving"
-msgstr ""
+msgstr "URL boten leres - boten nyimpen"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1015
 msgid "[new source]"
-msgstr ""
+msgstr "[sumbèr énggal]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1101
 #: plugins/Satellites/src/ui_satellitesDialog.h:1215
@@ -20690,7 +20775,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:534
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "Update now"
-msgstr ""
+msgstr "Nganyari sakmenika"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1103
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
@@ -20699,329 +20784,347 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:215
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:729
 msgid "Update from files"
-msgstr ""
+msgstr "Nganyari saking bèrkas"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1131
 msgid "[orbit calculation error]"
-msgstr ""
+msgstr "[kalèpatan pétangan orbit]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1132
 msgid "[atmospheric entry]"
-msgstr ""
+msgstr "[lebet atmosfèr]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1133
 msgid "[all newly added]"
-msgstr ""
+msgstr "[sadaya énggal katambahan]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1134
 msgid "[all not displayed]"
-msgstr ""
+msgstr "[sadaya boten dipunpratèlakaken]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1135
 msgid "[all displayed]"
-msgstr ""
+msgstr "[sadaya dipunpratèlakaken]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1136
 msgid "[all communications]"
-msgstr ""
+msgstr "[sadaya komunikasi]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1137
 msgid "[small satellites]"
-msgstr ""
+msgstr "[satelit alit]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1138
 msgid "[medium satellites]"
-msgstr ""
+msgstr "[satelit tengah]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1139
 msgid "[large satellites]"
-msgstr ""
+msgstr "[satelit ageng]"
 
 #. TRANSLATORS: LEO = Low Earth orbit
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1141
 msgid "[LEO satellites]"
-msgstr ""
+msgstr "[satelit LEO]"
 
 #. TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1143
 msgid "[GEO/GSO satellites]"
-msgstr ""
+msgstr "[satelit GEO/GSO]"
 
 #. TRANSLATORS: MEO = Medium Earth orbit
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1145
 msgid "[MEO satellites]"
-msgstr ""
+msgstr "[satelit MEO]"
 
 #. TRANSLATORS: HEO = Highly elliptical orbit
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1147
 msgid "[HEO satellites]"
-msgstr ""
+msgstr "[satelit HEO]"
 
 #. TRANSLATORS: HGEO = High geosynchronous orbit
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1149
 msgid "[HGSO satellites]"
-msgstr ""
+msgstr "[satelit HGSO]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1150
 msgid "[polar orbit satellites]"
-msgstr ""
+msgstr "[satelit orbit pòlar]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1151
 msgid "[equatorial orbit satellites]"
-msgstr ""
+msgstr "[satelit orbit èkuatorial]"
 
 #. TRANSLATORS: PSSO = Polar sun synchronous orbit
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1153
 msgid "[PSSO satellites]"
-msgstr ""
+msgstr "[satelit PSSO]"
 
 #. TRANSLATORS: HEO/E = High Earth orbit
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1155
 msgid "[HEO/E satellites]"
-msgstr ""
+msgstr "[satelit HEO/E]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1156
 msgid "[outdated TLE]"
-msgstr ""
+msgstr "[TLE kadaluwarsa]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1157
 msgid "[custom filter]"
-msgstr ""
+msgstr "[filter kusus]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1158
 msgid "[all user defined]"
-msgstr ""
+msgstr "[sadaya katamtuaken panggina]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Active status
 #. does not require power or communications (e.g., geodetic satellites);
 #. Active is any satellite with an operational status of +, P, B, S, or X.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1161
 msgid "[active satellites]"
-msgstr ""
+msgstr "[satelit aktif]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are fully functioning
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1163
 msgid "[operational satellites]"
-msgstr ""
+msgstr "[satelit opèrasional]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are no longer functioning
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1165
 msgid "[non-operational satellites]"
-msgstr ""
+msgstr "[satelit boten opèrasional]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are partially fulfilling primary mission or secondary mission(s)
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1167
 msgid "[partially operational satellites]"
-msgstr ""
+msgstr "[satelit opèrasional sapérangan]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Previously
 #. operational satellite put into reserve status
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1169
 msgid "[backup / standby satellites]"
-msgstr ""
+msgstr "[satelit cadangan / siaga]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: New satellite
 #. awaiting full activation
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1171
 msgid "[spare satellites]"
-msgstr ""
+msgstr "[satelit cadangan]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites with
 #. extended mission(s)
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1173
 msgid "[extended mission]"
-msgstr ""
+msgstr "[misi dipunlajengaken]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are decayed
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1175
 msgid "[decayed satellites]"
-msgstr ""
+msgstr "[satelit ngrempal]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1177
 msgid "[all]"
-msgstr ""
+msgstr "[sadaya]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1189
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:263
 msgid "RCS"
-msgstr ""
+msgstr "RCS"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1190
 msgid ""
 "Radar cross-section (RCS) is a measure of how detectable an object is with a"
 " radar. A larger RCS indicates that an object is more easily detected."
 msgstr ""
+"Panampang silang radar (RCS) inggih punika ukuran sapinten gampil obyek "
+"saged dipundetèksi mawi radar. RCS ingkang langkung ageng nedahaken bilih "
+"obyek langkung gampil dipundetèksi."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1191
 msgid ""
 "The standard magnitude of a satellite is defined as its apparent magnitude "
 "when at half-phase and at a distance 1000 km from the observer."
 msgstr ""
+"Magnitudo baku satelit dipundhèfinisikaken minangka magnitudo katingalipun "
+"nalika wonten ing fase sětěngah saha wonten ing jarak 1000 km saking "
+"paningal."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1204
 msgid ""
 "Display satellites and their orbits within selected range of altitudes only."
 msgstr ""
+"Ngetingaken satelit saha orbitipun namung wonten ing rèntang inggiling "
+"ingkang kapilih."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1206
 msgid "Altitude of imagined satellite"
-msgstr ""
+msgstr "Inggiling satelit bayangan"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1207
 msgid "Number of segments: number of segments used to draw the line"
 msgstr ""
+"Gunggung sègmèn: gunggung sègmèn ingkang dipunginakaken kangge nggambar "
+"garis"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1208
 msgid "Segment length: duration of a single segment in seconds"
-msgstr ""
+msgstr "Dawanipun sègmèn: durasi satunggaling sègmèn wonten ing dhetik"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1209
 msgid "Fade length: number of segments used to draw each end of the line"
 msgstr ""
+"Dawanipun pudar: gunggung sègmèn ingkang dipunginakaken kangge nggambar "
+"saben pucuk garis"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1210
 msgid "Orbit line thickness"
-msgstr ""
+msgstr "Kandhelipun garis orbit"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1244
 msgid "New group..."
-msgstr ""
+msgstr "Klompok énggal..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1520
 msgid "Select TLE Update File"
-msgstr ""
+msgstr "Milih Bèrkas Nganyari TLE"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1545
 msgid "Satellite"
-msgstr ""
+msgstr "Satelit"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1633
 msgid "Save predicted Iridium flares as..."
-msgstr "Nyimpen semburan Iridium ingkang dipunpredhiksi minangka..."
+msgstr "Simpen prèdhiksi kilatan Iridhium minangka..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1679
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1681
 msgid "Predicted Iridium flares"
-msgstr ""
+msgstr "Prèdhiksi kilatan Iridhium"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:156
 msgid "Downloading data..."
-msgstr ""
+msgstr "Ngundhuh dhata..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:157
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
+"Stellarium saweg ngundhuh dhata satelit saking sumbèr nganyari. Mangga "
+"ngentosi..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:174
 msgid "Select TLE source file(s)..."
-msgstr ""
+msgstr "Milih bèrkas (utawi berkas-berkas) sumbèr TLE..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:189
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:190
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:249
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:250
 msgid "Processing data..."
-msgstr ""
+msgstr "Mpròsès dhata..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:244
 msgid "No data could be downloaded. Try again later."
 msgstr ""
+"Boten wonten dhata ingkang saged dipunundhuh. Mugi kersa nyobi malih "
+"bénjing."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:266
 msgid "Download aborted."
-msgstr ""
+msgstr "Pangundhuhan dipunbatalaken"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:311
 msgid "Get data"
-msgstr ""
+msgstr "Mundhut dhata"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:377
 #, qt-format
 msgid "Catalog Number: %1"
-msgstr ""
+msgstr "Nomer Katalog: %1"
 
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:151
 msgid "Radar cross-section"
-msgstr ""
+msgstr "Panampang silang radar"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:82
 msgid "Callsign with channel description"
-msgstr ""
+msgstr "Tandha timbalan mawi dhèskripsi saluran"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:84
 msgid "Channel frequency"
-msgstr ""
+msgstr "Frèkuènsi saluran"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:85
 msgid "Signal modulation mode"
-msgstr ""
+msgstr "Modhe mòdhulasi sinyal"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:86
 msgid "Remove selected communication data"
-msgstr ""
+msgstr "Busak dhata komunikasi ingkang kapilih"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:87
 msgid "Add communication data"
-msgstr ""
+msgstr "Nambahi dhata komunikasi"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:126
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:512
 msgid "Description"
-msgstr ""
+msgstr "Dhèskripsi"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:127
 msgid "Frequency, MHz"
-msgstr ""
+msgstr "Frèkuènsi, MHz"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:128
 msgid "Modulation"
-msgstr ""
+msgstr "Mòdhulasi"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:194
 msgid "Nothing added"
-msgstr ""
+msgstr "Boten wonten ingkang katambahan"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:194
 msgid "Please fill in description and add frequency before adding!"
-msgstr ""
+msgstr "Mangga ngisi dhèskripsi saha nambahi frèkuènsi sadèrèngipun nambahi!"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:225
 msgid "Nothing deleted"
-msgstr ""
+msgstr "Boten wonten ingkang dipunbusak"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:225
 msgid "Please select a line first!"
-msgstr ""
+msgstr "Mangga milih baris rumiyin!"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1208
 #: plugins/Satellites/src/ui_satellitesDialog.h:1209
 msgid "Satellites Configuration"
-msgstr ""
+msgstr "Kònfigurasi Satelit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1210
 msgid "Updates"
-msgstr ""
+msgstr "Nganyari"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1211
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr ""
+"Nalika nganyari, tambahi sadaya satelit énggal saking sumbèr (utawi sumbèr-"
+"sumbèr) ingkang kapilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1212
 msgid "Update satellite data from Internet sources"
-msgstr ""
+msgstr "Nganyari dhata satelit saking sumbèr Internèt"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1213
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:532
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:426
 msgid "Update frequency:"
-msgstr ""
+msgstr "Frèkuènsi nganyari:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1214
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:201
@@ -21030,45 +21133,49 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:294
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:531
 msgid "Last update:"
-msgstr ""
+msgstr "Nganyari pungkasan:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1216
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr ""
+"Nalika nganyari, busak satelit ingkang boten kacumawis malih wonten ing "
+"sumbèr nganyari"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1217
 msgid "On update, mark all newly added satellites as displayed"
 msgstr ""
+"Nalika nganyari, tandhani sadaya satelit ingkang énggal katambahan minangka "
+"dipunpratèlakaken"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1218
 msgid "Visualisation settings"
-msgstr ""
+msgstr "Setèlan Visualisasi"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1219
 msgid "Orbit lines"
-msgstr ""
+msgstr "Garis orbit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1229
 msgid "Show Earth's umbra"
-msgstr ""
+msgstr "Ngetingaken umbra Bumi"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1231
 msgid "The color of Earth's umbra circle"
-msgstr ""
+msgstr "Warni bunderan umbra Bumi"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1234
 msgid "Altitude range"
-msgstr ""
+msgstr "Rèntang inggil"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1235
 msgid "Show Earth's penumbra"
-msgstr ""
+msgstr "Ngetingaken pènumbra Bumi"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1237
 msgid "The color of Earth's penumbra circle"
-msgstr ""
+msgstr "Warni bunderan pènumbra Bumi"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1240
 #: plugins/Satellites/src/ui_satellitesDialog.h:1244
@@ -21076,79 +21183,81 @@ msgid ""
 "Distance to the center of umbra from Earth's surface (height of imagined "
 "satellite above a spherical Earth)"
 msgstr ""
+"Jarak dhateng punjer umbra saking lumah Bumi (inggiling satelit bayangan ing"
+" nginggil Bumi bundher)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1242
 msgid "Show umbra/penumbra at altitude:"
-msgstr ""
+msgstr "Ngetingaken umbra/pènumbra wonten ing inggil:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1246
 msgid "Show satellites as markers"
-msgstr ""
+msgstr "Ngetingaken satelit minangka panandha"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1248
 msgid "Color of satellite markers in transit through the Sun or the Moon"
-msgstr ""
+msgstr "Warni panandha satelit nalika transit nglangkungi Surya utawi Candhra"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1250
 msgid "Hide invisible satellites"
-msgstr ""
+msgstr "Dèlikaken satelit boten katingal"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1253
 msgid "Font size for labels"
-msgstr ""
+msgstr "Agenging aksara kangge label"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1257
 msgid "Use special color for all invisible satellites"
-msgstr ""
+msgstr "Ngginakaken warni kusus kangge sadaya satelit boten katingal"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1259
 msgid "Set color for invisible satellites"
-msgstr ""
+msgstr "Nyetèl warni kangge satelit boten katingal"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1261
 msgid "Color of markers, labels and orbits for invisible satellites"
-msgstr ""
+msgstr "Warni panandha, label, saha orbit kangge satelit boten katingal"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1268
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:256
 msgid "Settings of custom filter"
-msgstr ""
+msgstr "Setèlan filter kusus"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1270
 msgid "Search ..."
-msgstr ""
+msgstr "Golèk ..."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1272
 msgid "Double-click a satellite to start tracking it."
-msgstr ""
+msgstr "Klik kaping kalih satelit kangge miwiti nglacak."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1275
 msgid "Add more satellites"
-msgstr ""
+msgstr "Nambahi langkung kathah satelit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1278
 msgid "Remove the selected satellites"
-msgstr ""
+msgstr "Busak satelit ingkang kapilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1281
 msgid "Edit communication data for the selected satellite"
-msgstr ""
+msgstr "Nyunting dhata komunikasi kangge satelit ingkang kapilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1284
 msgid "Select all satellites in list"
-msgstr ""
+msgstr "Milih sadaya satelit wonten ing dhaptar"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1287
 msgid "Change markers color for selected satellites"
-msgstr ""
+msgstr "Nggantos warni panandha kangge satelit ingkang kapilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1290
 msgid "Change orbits color for selected satellites"
-msgstr ""
+msgstr "Nggantos warni orbit kangge satelit ingkang kapilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1293
 msgid "Change info color for selected satellites"
-msgstr ""
+msgstr "Nggantos warni pawartos kangge satelit ingkang kapilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1297
 #: plugins/Satellites/src/ui_satellitesDialog.h:1301
@@ -21156,90 +21265,94 @@ msgid ""
 "The Satellite Catalog Number (also known as NORAD (North American Aerospace "
 "Defense) Catalog Number, NORAD ID)"
 msgstr ""
+"Nomer Katalog Satelit (ugi kawentar minangka Nomer Katalog NORAD (North "
+"American Aerospacè Dèfèns), ID NORAD)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1299
 msgid "Catalog number:"
-msgstr ""
+msgstr "Nomer katalog:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1304
 #: plugins/Satellites/src/ui_satellitesDialog.h:1308
 msgid "The International Designator, also known as COSPAR ID"
-msgstr ""
+msgstr "Pènèntu Internasional, ugi kawentar minangka ID COSPAR"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1306
 msgid "I.D.:"
-msgstr ""
+msgstr "I.D.:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1310
 msgid "Standard magnitude:"
-msgstr ""
+msgstr "Magnitudo baku:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1312
 #: plugins/Satellites/src/ui_satellitesDialog.h:1316
 msgid "Perigee altitude in kilometers"
-msgstr ""
+msgstr "Inggiling pèrigé wonten ing kilomèter"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1314
 msgid "Perigee:"
-msgstr ""
+msgstr "Pèrigé:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1319
 #: plugins/Satellites/src/ui_satellitesDialog.h:1323
 msgid "Apogee altitude in kilometers"
-msgstr ""
+msgstr "Inggiling apogé wonten ing kilomèter"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1321
 msgid "Apogee:"
-msgstr ""
+msgstr "Apogé:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1326
 #: plugins/Satellites/src/ui_satellitesDialog.h:1330
 msgid "Orbital period in minutes"
-msgstr ""
+msgstr "Pèriodhe orbit wonten ing menit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1328
 msgid "Period:"
-msgstr ""
+msgstr "Pèriodhe:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1333
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr ""
+"Ngetingaken garis (utawi garis-garis) orbit kangge satelit (utawi satelit-"
+"satelit) ingkang kapilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1335
 msgid "Orbit"
-msgstr ""
+msgstr "Orbit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1337
 msgid "Display the selected satellite(s)"
-msgstr ""
+msgstr "Ngetingaken satelit (utawi satelit-satelit) ingkang kapilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1339
 msgid "Displayed"
-msgstr ""
+msgstr "Dipunpratèlakaken"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1341
 msgid "Do not update TLE of selected satellite(s)"
-msgstr ""
+msgstr "Boten nganyari TLE satelit (utawi satelit-satelit) ingkang kapilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1343
 msgid "Do not update"
-msgstr ""
+msgstr "Boten nganyari"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1345
 msgid "(add personal notes here)"
-msgstr ""
+msgstr "(nambahi cathetan pribadi wonten ing ngriki)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1346
 msgid "Groups:"
-msgstr ""
+msgstr "Klompok:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1347
 msgid "TLE set:"
-msgstr ""
+msgstr "Set TLE:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1348
 msgid "Epoch of the TLE:"
-msgstr ""
+msgstr "Épòch TLE:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1350
 #: plugins/Satellites/src/ui_satellitesDialog.h:1354
@@ -21247,10 +21360,12 @@ msgid ""
 "The valid time range for epoch of TLE in days, used in filtering of "
 "satellites"
 msgstr ""
+"Rèntang wekdal ingkang sah kangge épòch TLE wonten ing dinten, "
+"dipunginakaken wonten ing panyaring satelit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1352
 msgid "Age:"
-msgstr ""
+msgstr "Yuswa:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1357
 msgid ""
@@ -21258,172 +21373,187 @@ msgid ""
 "next update if they are not already in the collection. Unmarked entries will"
 " also be fetched to update only previously included satellites."
 msgstr ""
+"Satelit wonten ing dhaptar sumbèr ingkang dipuntandhani badhé kanthi "
+"otomatis katambahan wonten ing nganyari salajengipun menawi dèrèng wonten "
+"ing kumpulipun. Èntri ingkang boten dipuntandhani ugi badhé dipunpendhet "
+"kangge nganyari satelit ingkang sampun kalebet sadèrèngipun."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1362
 msgid "Add new source"
-msgstr ""
+msgstr "Nambahi sumbèr énggal"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1365
 msgid "Edit selected source"
-msgstr ""
+msgstr "Nyunting sumbèr ingkang kapilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1368
 msgid "Save source"
-msgstr ""
+msgstr "Nyimpen sumbèr"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1371
 msgid "Remove selected source"
-msgstr ""
+msgstr "Busak sumbèr ingkang kapilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1374
 msgid "Reset sources list to it defaults"
-msgstr ""
+msgstr "Nyetèl malih dhaptar sumbèr dhateng bakunipun"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1376
 msgid "Sources"
-msgstr ""
+msgstr "Sumbèr"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1377
 msgid "Flare prediction (days):"
-msgstr ""
+msgstr "Prèdhiksi kilatan (dinten):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1381
 msgid "Predict Iridium flares"
-msgstr ""
+msgstr "Mredhiksi kilatan Iridhium"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1382
 msgid "Save predictions..."
-msgstr ""
+msgstr "Nyimpen prèdhiksi..."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1383
 msgid "Iridium flares"
-msgstr ""
+msgstr "Kilatan Iridhium"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:168
 msgid "Get data from update sources"
-msgstr ""
+msgstr "Mundhut dhata saking sumbèr nganyari"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:169
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:490
 msgid "Abort download"
-msgstr ""
+msgstr "Mbatalken ngundhuh"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:170
 msgid "New satellites"
-msgstr ""
+msgstr "Satelit énggal"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:171
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:508
 msgid "Mark all"
-msgstr ""
+msgstr "Tandhani sadaya"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:172
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:509
 msgid "Mark none"
-msgstr ""
+msgstr "Boten nandhani setunggal-setunggalipun"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:173
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:510
 msgid "Discard"
-msgstr ""
+msgstr "Nglirwakaken"
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:255
 msgid "Satellites filter"
-msgstr ""
+msgstr "Filter Satelit"
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:258
 msgid "Max."
-msgstr ""
+msgstr "Maks."
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:259
 msgid "Known standard magnitude"
-msgstr ""
+msgstr "Magnitudo baku ingkang dipunmangertosi"
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:260
 msgid "Min."
-msgstr ""
+msgstr "Min."
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:261
 #: plugins/Pulsars/src/Pulsar.cpp:249 plugins/Exoplanets/src/Exoplanet.cpp:365
 msgid "Eccentricity"
-msgstr ""
+msgstr "Èksèntrisitas"
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:264
 msgid "Perigee"
-msgstr ""
+msgstr "Pèrigé"
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:265
 msgid "Apogee"
-msgstr ""
+msgstr "Apogé"
 
 #: plugins/Satellites/src/ui_satellitesCommDialog.h:174
 msgid "Frequencies"
-msgstr ""
+msgstr "Frèkuènsi"
 
 #: plugins/Satellites/src/ui_satellitesCommDialog.h:175
 msgid "Communication data of selected satellite"
 msgstr ""
+"Dhata komunikasi satelit ingkang kapilih\n"
+" "
 
 #: plugins/Satellites/src/ui_satellitesCommDialog.h:176
 msgid "Channel description:"
-msgstr ""
+msgstr "Dhèskripsi saluran:"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:80
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:167
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:206
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:207
 msgid "Telescope Control"
-msgstr ""
+msgstr "Kòntrol Tèlèskop"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:83
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a"
 " computerized mount (a \"GoTo telescope\")."
 msgstr ""
+"Pilugin punika ngidinaken Stèllarium ngirim dhawuh \"ngobahaken\" dhateng "
+"tèlèskop wonten ing pènata ingkang sampun kakòmputèrisasi (\"Tèlèskop "
+"GoTo\")."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:174
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:242
 #, qt-format
 msgid "Move telescope #%1 to selected object"
-msgstr ""
+msgstr "Ngobahaken tèlèskop #%1 dhateng obyek ingkang kapilih"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:180
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:250
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr ""
+"Ngobahaken tèlèskop #%1 dhateng titik ingkang sapunika wonten ing punjer "
+"layar"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:186
 #, qt-format
 msgid "Sync telescope #%1 position to selected object"
-msgstr ""
+msgstr "Nyinkronaken posisi tèlèskop #%1 dhateng obyek ingkang kapilih"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:192
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:246
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:254
 #, qt-format
 msgid "Abort last slew command of telescope #%1"
-msgstr ""
+msgstr "Mbatalaken dhawuh ngobahaken pungkasan tèlèskop #%1"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:197
 #, qt-format
 msgid "Centering screen by telescope coordinates #%1"
-msgstr ""
+msgstr "Mamusataken layar mawi kòòrdinat tèlèskop #%1"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:206
 msgid "Move a telescope to a given set of coordinates"
 msgstr ""
+"Ngobahaken tèlèskop dhateng satunggaling kumpenan kòòrdinat ingkang "
+"dipunparingaken"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:258
 #, qt-format
 msgid "Center the screen on telescope #%1 coordinates"
-msgstr ""
+msgstr "Pusataken layar wonten ing kòòrdinat tèlèskop #%1"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:777
 msgid ""
 "The existing version of the configuration data for telescopes in the "
 "Telescope Control plugin is obsolete."
 msgstr ""
+"Vèrsi ingkang wonten saking dhata kònfigurasi kangge tèlèskop wonten ing "
+"Tandha Tambahan Kòntrol Tèlèskop sampun boten dipunginakaken."
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1821
@@ -21431,11 +21561,15 @@ msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar "
 "controller."
 msgstr ""
+"Tèlèskop utawi pènata tèlèskop menapa kémawon ingkang kòmpatibèl kaliyan "
+"controller Autòstar Mèadhè."
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1823
 msgid "Any telescope or telescope mount compatible with Meade LX200."
 msgstr ""
+"Tèlèskop utawi pènata tèlèskop menapa kémawon ingkang kòmpatibèl kaliyan "
+"Mèadhè LX200."
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1825
@@ -21443,22 +21577,26 @@ msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable"
 " Set."
 msgstr ""
+"ETX70 Mèadhè mawi controller Autòstar #494 saha Set Kabel Kònéktòr #506."
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1827
 msgid "Losmandy's G-11 telescope mount."
-msgstr ""
+msgstr "Pènata tèlèskop G-11 Lòsmandy."
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode)
 #. mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1829
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
 msgstr ""
+"Argò Navis DTC Wildcard Innòvatiòns wonten ing mòdhe èmulasi Mèadhè LX200."
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1831
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
 msgstr ""
+"Tèlèskop utawi pènata tèlèskop menapa kémawon ingkang kòmpatibèl kaliyan "
+"Cèlèstròn NèxStar."
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later)
 #. mounts
@@ -21467,198 +21605,216 @@ msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
 msgstr ""
+"Pènata Sky-Watchèr menapa kémawon ingkang ngginakaken hand còntròllèr "
+"SynScan vèrsi 3 utawi langkung énggal."
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1835
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
+"Pènata Sky-Watchèr SynScan AZ GOTO ingkang dipunginakaken wonten ing "
+"sawetawis mòdèl tèlèskop."
 
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:157
 msgid "QUICK!"
-msgstr ""
+msgstr "ENGGAL!"
 
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:157
 msgid "This Telescope does not support Abort command!"
-msgstr ""
+msgstr "Tèlèskop punika boten nyengkuyung dhawuh Mbatalaken!"
 
 #: plugins/TelescopeControl/src/TelescopeClient.hpp:81
 msgid "telescope"
-msgstr ""
+msgstr "tèlèskop"
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:288
 msgid "Read-only telescope"
-msgstr ""
+msgstr "Tèlèskop namung-maos"
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:291
 msgid "Telescope position: "
-msgstr ""
+msgstr "Posisi tèlèskop:"
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:293
 msgid "Distance to target position: "
-msgstr ""
+msgstr "Jarak dhateng posisi target:"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:126
 msgid "INDI Settings"
-msgstr ""
+msgstr "Setèlan INDI"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:127
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:579
 msgid "TCP port:"
-msgstr ""
+msgstr "Pòrt TCP:"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:129
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:577
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
+"Asma hòs utawi alamat IPv4 saking mèsin ingkang ng-hòs sèrvèr tèlèskop"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:131
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:575
 msgid "Host:"
-msgstr ""
+msgstr "Hòs:"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:132
 msgid "Refresh devices"
-msgstr ""
+msgstr "Nyegaraken piranti"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:133
 msgid "Devices:"
-msgstr ""
+msgstr "Piranti:"
 
 #: plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h:176
 msgid "Min"
-msgstr ""
+msgstr "Min"
 
 #: plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h:177
 msgid "Max"
-msgstr ""
+msgstr "Maks"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOM.cpp:144
 msgid ""
 "Can't slew a telescope which is parked. Unpark before performing any goto "
 "command."
 msgstr ""
+"Boten saged ngobahaken tèlèskop ingkang dipunparkir. Mugi batalaken parkir "
+"sadèrèngipun nindakaken dhawuh gòtò menapa kémawon."
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:40
 msgid "ASCOM Settings"
-msgstr ""
+msgstr "Setèlan ASCOM"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:41
 msgid "Choose ASCOM Telescope"
-msgstr ""
+msgstr "Pilih Tèlèskop ASCOM"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:42
 msgid "Selected Device:"
-msgstr ""
+msgstr "Piranti ingkang Dipunpilih:"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:43
 msgid "No device selected"
-msgstr ""
+msgstr "Boten wonten piranti ingkang kapilih"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:44
 msgid "Source for coordinate system:"
-msgstr ""
+msgstr "Sumbèr kangge sistèm kòòrdinat:"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:45
 msgid ""
 "Let the ASCOM device tell Stellarium what coordinate system to use. Most "
 "mounts will handle this correctly, but some might not."
 msgstr ""
+"Mugi kersa ngidinaken piranti ASCOM martòsaken Stèllarium sistèm kòòrdinat "
+"menapa ingkang badhé dipunginakaken. Kathah-kathahipun pènata badhé "
+"ngrampungaken punika kanthi leres, nanging sawetawis saged ugi boten."
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:46
 msgid "Let ASCOM device decide"
-msgstr ""
+msgstr "Mugi kersa ngidinaken piranti ASCOM mutusaken"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:47
 msgid ""
 "Use the coordinate system that is configured in the general telescope "
 "properties for this telescope."
 msgstr ""
+"Ngginakaken sistèm kòòrdinat ingkang kakònfigurasi wonten ing propèrti "
+"tèlèskop umum kangge tèlèskop punika."
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:48
 msgid "Use Stellarium settings"
-msgstr ""
+msgstr "Ngginakaken setèlan Stèllarium"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:190
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium. Increase this value if the reticle is skipping."
 msgstr ""
+"Kinten-kinten wekdal ingkang dipunbetahaken sinyal saking tèlèskop dumugi "
+"Stèllarium. Mugi kersa nambahi aji punika menawi rètikèl nglumpat-nglumpat."
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:194
 msgid ""
 "Refresh rate of the RTS2 telescope. Delay before sending next telescope "
 "status request. The default value of 0.5 second works fine with most setups."
 msgstr ""
+"Tingkat nyegaraken tèlèskop RTS2. Jeda sadèrèngipun ngirim panuwunan status "
+"tèlèskop salajengipun. Aji baku 0,5 dhetik saged saé kangge kathah setèlan."
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:268
 msgid "Add New Telescope"
-msgstr ""
+msgstr "Nambahi Tèlèskop Enggal"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:278
 msgid "Configure Telescope"
-msgstr ""
+msgstr "Kònfigurasi Tèlèskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:66
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:67
 msgid "Starting"
-msgstr ""
+msgstr "Miwiti"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:68
 msgid "Connecting"
-msgstr ""
+msgstr "Nyambungaken"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:69
 msgid "Connected"
-msgstr ""
+msgstr "Kasambung"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:70
 msgid "Disconnected"
-msgstr ""
+msgstr "Pedhot"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:71
 msgid "Stopped"
-msgstr ""
+msgstr "Kasarèkaken"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:117
 msgid "Outdated ASCOM!"
-msgstr ""
+msgstr "ASCOM Kadaluwarsa!"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:117
 msgid "Your ASCOM is below version 7. Upgrade to avoid problems!"
 msgstr ""
+"ASCOM panjenengan wonten ing ngandhap vèrsi 7. Mugi kersa ningkataken kangge"
+" ngéndhani masalah!"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:273
 msgid "Telescope Control plug-in"
-msgstr ""
+msgstr "Pilugin Kòntrol Tèlèskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
 msgid "Plug-in and GUI programming"
-msgstr ""
+msgstr "Paprògraman Pilugin saha GUI"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
 msgid "ASCOM Telescope Client"
-msgstr ""
+msgstr "Klien Tèlèskop ASCOM"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
 msgid "RTS2 support"
-msgstr ""
+msgstr "Panyengkuyung RTS2"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid "INDI Telescope Client"
-msgstr ""
+msgstr "Klien Tèlèskop INDI"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
 msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
 "Public License:"
 msgstr ""
-"Plug-in punika adhedhasar saha ngginakaken malih kathah kodhe ing "
-"sangandhapipun GNU General Public License:"
+"Pilugin punika adhedhasar saha ngginakaken malih kathah kòdhe wonten ing "
+"ngandhap GNU General Public License:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 msgid ""
@@ -21666,18 +21822,21 @@ msgid ""
 "Stellarium's code (the client side of Stellarium's original telescope "
 "control feature);"
 msgstr ""
+"klas Tèlèskop, TèlèskopDhummy, TèlèskopTcp, saha TèlèskopMgr wonten ing "
+"kòdhe Stèllarium (sisih klien saking fitur kòntrol tèlèskop asli "
+"Stèllarium);"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 msgid "the telescope server core code (licensed under the LGPL)"
-msgstr "kodhe inti sèrver tèlèskop (kalindhungi lisènsi LGPL)"
+msgstr "kòdhe inti sèrvèr tèlèskop (kalisènsi ing ngandhap LGPL)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:289
 msgid ""
 "the TelescopeServerLx200 telescope server core code (originally licensed "
 "under the LGPL)"
 msgstr ""
-"kodhe inti sèrver tèlèskop TelescopeServerLx200 (wiwitanipun kalindhungi "
-"lisènsi LGPL)"
+"kòdhe inti sèrvèr tèlèskop TèlèskopSèrvèrLx200 (wiwitanipun kalisènsi ing "
+"ngandhap LGPL)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 msgid ""
@@ -21685,19 +21844,21 @@ msgid ""
 "server, along with the Stellarium telescope control network protocol (over "
 "TCP/IP), is <b>Johannes Gajdosik</b>."
 msgstr ""
+"Panyerat sadaya ing nginggil - klien, inti sèrvèr, saha sèrvèr LX200, "
+"kaliyan pròtòkòl jaringan kòntrol tèlèskop Stèllarium (nglangkungi TCP/IP), "
+"inggih punika <b>Jòhannès Gajdòsik</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
 msgid ""
 "the TelescopeServerNexStar telescope server core code (originally licensed "
 "under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>."
 msgstr ""
-"kodhe inti sèrver tèlèskop TelescopeServerNexStar (wiwitanipun kalindhungi lisènsi LGPL, adhedhasar TelescopeServerLx200) déning <b>Michael Heinz</b>.\n"
-"\n"
-" "
+"kòdhe inti sèrvèr tèlèskop TèlèskopSèrvèrNèxStar (wiwitanipun kalisènsi ing "
+"ngandhap LGPL, adhedhasar TèlèskopSèrvèrLx200) déning <b>Michaèl Hèinz</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 msgid "INDI by <b>Alessandro Siniscalchi</b>."
-msgstr ""
+msgstr "INDI déning <b>Alèssandrò Siniscalchi</b>."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
@@ -21705,82 +21866,84 @@ msgid ""
 "A more complete and up-to-date documentation for this plug-in can be found "
 "in the Stellarium User Guide."
 msgstr ""
+"Dhokumèntasi ingkang langkung jangkep saha énggal kangge tandha tambahan "
+"punika saged kapanggihaken wonten ing Pandhuan Panggina Stèllarium."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
 msgid "Contents"
-msgstr ""
+msgstr "Isining Dhaptar"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
 msgid "Abilities and limitations"
-msgstr ""
+msgstr "Kaprigelan saha watesan"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:324
 msgid "The original telescope control feature"
-msgstr ""
+msgstr "Fitur kòntrol tèlèskop asli"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
 msgid "Using this plug-in"
-msgstr ""
+msgstr "Ngginakaken plugin punika"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:352
 msgid "Main window ('Telescopes')"
-msgstr ""
+msgstr "Jendela utami ('Tèlèskop')"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:376
 msgid "Telescope configuration window"
-msgstr ""
+msgstr "Jendela kònfigurasi tèlèskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:378
 msgid "Connection type"
-msgstr ""
+msgstr "Jinis sambungan"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:392
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:558
 msgid "Telescope properties"
-msgstr ""
+msgstr "Pròpèrti tèlèskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:400
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:571
 msgid "Device settings"
-msgstr ""
+msgstr "Setèlan piranti"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:419
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:574
 msgid "Connection settings"
-msgstr ""
+msgstr "Setèlan sambungan"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:436
 msgid "Field of view indicators"
-msgstr ""
+msgstr "Indikator lapang pandang"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:447
 msgid "'Slew telescope to' window"
-msgstr ""
+msgstr "Jendela 'Ngobahaken tèlèskop dhateng'"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
 msgid "Telescope commands"
-msgstr ""
+msgstr "Dhawuh tèlèskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:478
 msgid "Supported devices"
-msgstr ""
+msgstr "Piranti ingkang dipunsengkuyung"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:500
 msgid "Virtual telescope"
-msgstr ""
+msgstr "Tèlèskop virtual"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 msgid ""
@@ -21790,18 +21953,28 @@ msgid ""
 "collisions and similar situations. (To abort a slew, you can start another "
 "one to a safe position.)"
 msgstr ""
+"Pilugin punika ngidinaken Stèllarium namung ngirim dhawuh "
+"'<b>ngobahaken</b>' ('gò tò') dhateng piranti saha nampi posisi sapunika. "
+"Boten saged medalaken dhawuh sanèsipun, pramila panggina kedah nggatosaken "
+"kamungkinan tabrakan pènata saha kawontenan ingkang sami. (Kangge mbatalaken"
+" ngobahaken, panjenengan saged miwiti sanèsipun dhateng posisi ingkang "
+"aman.)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
 msgstr ""
+"Wonten ing vèrsi sapunika, pilugin punika boten ngidinaken nglacak satelit, "
+"saha boten cocog sanget kangge pangamatan candhra utawi planèt."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
 msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
 msgstr ""
+"PÈRINGATAN: Stèllarium BOTEN SAGED nyegah tèlèskop panjenengan dipunarahaken"
+" dhateng Surya."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:320
 msgid ""
@@ -21809,6 +21982,10 @@ msgid ""
 "installed. The powerful light amplified by the telescope WILL cause "
 "irreversible damage to your eyes and/or your equipment."
 msgstr ""
+"Sampun ngantos nate ngarahaken tèlèskop panjenengan dhateng Surya tanpa "
+"filter surya ingkang leres dipunpasang. Cahya kiyat ingkang dipunagengaken "
+"déning tèlèskop BADHÉ nyebabaken karisakan permanèn dhateng soca saha/utawi "
+"piranti panjenengan."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
 msgid ""
@@ -21817,6 +21994,11 @@ msgid ""
 "it is strongly recommended to avoid using the telescope control feature "
 "before sunset without appropriate protection."
 msgstr ""
+"Sanadyan panjenengan boten nindakaken kanthi sengaja, obahan nalika wekdal "
+"siyang saged nyebabaken tèlèskop panjenengan ngarah dhateng surya "
+"salebetipun nglangkungi dhateng papan ingkang dipunparingaken, pramila "
+"dipunsaranaken sanget ngéndhani ngginakaken fitur kòntrol tèlèskop "
+"sadèrèngipun surya ambles tanpa pangreksa ingkang trep."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
@@ -21832,7 +22014,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:498
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:510
 msgid "Back to top"
-msgstr ""
+msgstr "Wangsul dhateng nginggil"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:325
 msgid ""
@@ -21840,16 +22022,21 @@ msgid ""
 "removed. There is no longer a way to control a telescope with Stellarium "
 "without this plug-in."
 msgstr ""
+"Wiwit Stèllarium 0.10.5, fitur kòntrol tèlèskop asli sampun dipunbusak. "
+"Boten wonten malih cara kangge ngòntrol tèlèskop kaliyan Stèllarium tanpa "
+"pilugin punika."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:329
 msgid ""
 "Here are two general ways to control a device with this plug-in, depending "
 "on the situation:"
 msgstr ""
+"Punika kalih cara umum kangge ngòntrol piranti kaliyan pilugin punika, "
+"gumantung wonten ing kawontenan:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:330
 msgid "DIRECT CONNECTION"
-msgstr ""
+msgstr "SAMBUNGAN LANGSUNG"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
@@ -21857,10 +22044,13 @@ msgid ""
 "A {device supported by the plug-in} is connected with a cable to the "
 "computer running Stellarium;"
 msgstr ""
+"Satunggaling {piranti ingkang dipunsengkuyung déning pilugin} "
+"dipunsambungaken mawi kabel dhateng komputer ingkang nglampahaken "
+"Stèllarium;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:335
 msgid "INDIRECT CONNECTION"
-msgstr ""
+msgstr "SAMBUNGAN BOTEN LANGSUNG"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
@@ -21868,11 +22058,14 @@ msgid ""
 "A device is connected to the same computer but it is driven by a stand-alone"
 " telescope server program"
 msgstr ""
+"Satunggaling piranti kasambung dhateng komputer ingkang sami nanging "
+"dipunlampahaken déning prògram sèrvèr tèlèskop mandiri"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
 msgid "or a third-party application <b>that can 'talk' to Stellarium</b>;"
 msgstr ""
+"utawi aplikasi pihak katiga <b>ingkang saged 'ginem' kaliyan Stèllarium</b>;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:342
 msgid ""
@@ -21881,6 +22074,10 @@ msgid ""
 "either one of Stellarium's stand-alone telescope servers, or a third party "
 "application."
 msgstr ""
+"Satunggaling piranti kasambung dhateng komputer tebih saha piranti lunak "
+"ingkang nglampahaken saged 'ginem' kaliyan Stèllarium <i>nglangkungi "
+"jaringan</i>; piranti lunak punika saged salah satunggaling sèrvèr tèlèskop "
+"mandiri Stèllarium, utawi aplikasi pihak katiga."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
@@ -21888,6 +22085,9 @@ msgid ""
 "Most older telescopes use cables that connect to a {serial port} (RS-232), "
 "the newer ones use USB (Universal Serial Bus)."
 msgstr ""
+"Kathah-kathahipun tèlèskop lami ngginakaken kabel ingkang nyambung dhateng "
+"{pòrt sèrial} (RS-232), ingkang langkung énggal ngginakaken USB (Univèrsal "
+"Sèrial Bus)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
 msgid ""
@@ -21895,12 +22095,18 @@ msgid ""
 "Windows, a USB connection may require a 'virtual serial port' software, if "
 "it is not supplied with the cable or the telescope."
 msgstr ""
+"Wonten ing Linux saha Mac OS X kalih kasus punika dipunrampungaken kanthi "
+"idhèntik déning pilugin. Wonten ing Windows, sambungan USB saged mbetahaken "
+"piranti lunak 'pòrt sèrial virtual', menawi boten kacumawis kaliyan kabel "
+"utawi tèlèskop."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
 msgid ""
 "Such a software creates a virtual ('fake') COM port that corresponds to the "
 "real USB port so it can be used by the plug-in."
 msgstr ""
+"Piranti lunak kados makaten damel pòrt COM virtual ('palsu') ingkang cocog "
+"kaliyan pòrt USB nyata saéngga saged dipunginakaken déning pilugin."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
 msgid ""
@@ -21908,16 +22114,22 @@ msgid ""
 "the telescope can connect only to a serial port, a serial-to-USB (RS-232-to-"
 "USB) adapter may be necessary."
 msgstr ""
+"Wonten ing sadaya tiganing plafòrm, menawi komputer boten kagungan pòrt "
+"sèrial 'klasik' saha tèlèskop saged namung nyambung dhateng pòrt sèrial, "
+"adhaptòr sèrial-dhateng-USB (RS-232-dhateng-USB) saged dipunbetahaken."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
 msgid ""
 "Telescope set-up (setting geographical coordinates, performing alignment, "
 "etc.) should be done before connecting the telescope to Stellarium."
 msgstr ""
+"Nyetèl tèlèskop (nyetèl kòòrdinat gèogràfis, nindakaken panyelarasans, lsp.)"
+" kedah dipunlampahaken sadèrèngipun nyambungaken tèlèskop dhateng "
+"Stèllarium."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:353
 msgid "The plug-in's main window can be opened:"
-msgstr ""
+msgstr "Jendela utami pilugin saged dipunbikak:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:354
 msgid ""
@@ -21925,6 +22137,9 @@ msgid ""
 "Stellarium's Configuration window (opened by pressing <b>F2</b> or the "
 "respective button in the left toolbar)."
 msgstr ""
+"Kanthi mencèt tombol 'kònfigurasi' kangge plugin wonten ing tab 'Pilugins' "
+"Jendela Kònfigurasi Stèllarium (dipunbikak kanthi mencèt <b>F2</b> utawi "
+"tombol ingkang cocog wonten ing tòòlbàr kiwa)."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
@@ -21934,12 +22149,17 @@ msgid ""
 "(opened by pressing <b>%1+0</b> or the respective button on the bottom "
 "toolbar)."
 msgstr ""
+"Kanthi mencèt tombol 'Kònfigurasi tèlèskop...' wonten ing {Jendela "
+"'Ngobahaken dhateng'} (dipunbikak kanthi mencèt <b>%1+0</b> utawi tombol "
+"ingkang cocog wonten ing tòòlbàr ngandhap)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
 msgid ""
 "The <b>Telescopes</b> tab displays a list of the telescope connections that "
 "have been set up:"
 msgstr ""
+"Tab <b>Tèlèskop</b> ngetingaken dhaptar sambungan tèlèskop ingkang sampun "
+"dipunsetèl:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
 #, qt-format
@@ -21947,6 +22167,9 @@ msgid ""
 "The number (<b>#</b>) column shows the number used to control this "
 "telescope. For example, for telescope #2, the shortcut is %1+2."
 msgstr ""
+"Kolom nomer (<b>#</b>) nedahaken nomer ingkang dipunginakaken kangge "
+"ngòntrol tèlèskop punika. Upaminipun, kangge tèlèskop #2, trabasan inggih "
+"punika %1+2."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:361
 msgid ""
@@ -21954,15 +22177,18 @@ msgid ""
 " not. Unfortunately, there are some cases in which 'Connected' is displayed "
 "when no working connection exists."
 msgstr ""
+"Kolom <b>Status</b> nedahaken menawi sambungan punika saweg aktif utawi "
+"boten. Sayektosipun, wonten sawetawis kasus ingkang 'Kasambung' "
+"dipunpratèlakaken nalika boten wonten sambungan ingkang mlampah."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
 msgid "The <b>Type</b> field indicates what kind of connection is this:"
-msgstr ""
+msgstr "Bidang <b>Tipe</b> nedahaken jinis sambungan punika:"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:365
 msgid "<b>virtual</b> means a {virtual telescope};"
-msgstr ""
+msgstr "<b>virtual</b> tegesipun {tèlèskop virtual};"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
@@ -21970,18 +22196,24 @@ msgid ""
 "<b>local, Stellarium</b> means a DIRECT connection to the telescope (see "
 "{above});"
 msgstr ""
+"<b>lòkal, Stèllarium</b> tegesipun sambungan LANGSUNG dhateng tèlèskop (mugi"
+" mirsani {ing nginggil});"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
 msgid ""
 "<b>local, external</b> means an INDIRECT connection to a program running on "
 "the same computer;"
 msgstr ""
+"<b>lòkal, èkstèrnal</b> tegesipun sambungan BOTEN LANGSUNG dhateng prògram "
+"ingkang mlampah wonten ing komputer ingkang sami;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
 msgid ""
 "<b>remote, unknown</b> means an INDIRECT connection over a network to a "
 "remote machine."
 msgstr ""
+"<b>tebih, boten dipunmangertosi</b> tegesipun sambungan BOTEN LANGSUNG "
+"nglangkungi jaringan dhateng mèsin tebih."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:373
 msgid ""
@@ -21990,6 +22222,10 @@ msgid ""
 "press the <b>Configure</b> button. In both cases, a telescope connection "
 "configuration window will open."
 msgstr ""
+"Kangge nyetèl sambungan tèlèskop énggal, mencèt tombol <b>Nambahi</b>. "
+"Kangge ngòdhifikasi kònfigurasi sambungan ingkang sampun wonten, milih "
+"wonten ing dhaptar saha mencèt tombol <b>Kònfigurasi</b>. Wonten ing kalih "
+"kasus, jendela kònfigurasi sambungan tèlèskop badhé mbikak."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
@@ -21997,19 +22233,25 @@ msgid ""
 "The topmost field represents the choice between the two types of connections"
 " (see {above}):"
 msgstr ""
+"Bidang paling nginggil makili pilihan antawisipun kalih jinis sambungan "
+"(mugi mirsani {ing nginggil}):"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:383
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:544
 msgid "Telescope controlled by:"
-msgstr ""
+msgstr "Tèlèskop dipunkòntrol déning:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:384
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
 msgstr ""
+"<b>Stèllarium, langsung nglangkungi pòrt sèrial</b> inggih punika kasus "
+"LANGSUNG"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
 msgid "<b>External software or a remote computer</b> is the INDIRECT case"
 msgstr ""
+"<b>Piranti lunak èkstèrnal utawi komputer tebih</b> inggih punika kasus "
+"BOTEN LANGSUNG"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
@@ -22017,18 +22259,25 @@ msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a {virtual "
 "telescope} (no connection)"
 msgstr ""
+"<b>Boten wonten, namung simulasi satunggaling (rètikèl obah)</b> inggih "
+"punika {tèlèskop virtual} (boten wonten sambungan)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
 msgid ""
 "<b>Name</b> is the label that will be displayed on the screen next to the "
 "telescope reticle."
 msgstr ""
+"<b>Asma</b> inggih punika labèl ingkang badhé dipunpratèlakaken wonten ing "
+"layar ing sandhing rètikèl tèlèskop. Rètikèl inggih punika panandha wonten "
+"ing layar."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
 msgid ""
 "<b>Connection delay</b>: If the movement of the telescope reticle on the "
 "screen is uneven, you can try increasing or decreasing this value."
 msgstr ""
+"<b>Jeda sambungan</b>: Menawi obahan rètikèl tèlèskop wonten ing layar boten"
+" rata, panjenengan saged nyobi nambahi utawi ngirangi aji punika."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:395
 msgid ""
@@ -22037,73 +22286,101 @@ msgid ""
 "use the equinox of the date (EOD, also known as JNow), making necessary this"
 " override."
 msgstr ""
+"<b>Sistèm kòòrdinat</b>: Sawetawis tèlèskop Cèlèstròn sampun nganyari "
+"firmware saha sapunika napsiraken kòòrdinat ingkang katampi minangka "
+"kòòrdinat ingkang ngginakaken èkuinòks tanggal (EOD, ugi kawentar minangka "
+"JNow), damel òvèrrìdhè punika dipunbetahaken."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:396
 msgid ""
 "<b>Start/connect at startup</b>: Check this option if you want Stellarium to"
 " attempt to connect to the telescope immediately after it starts."
 msgstr ""
+"<b>Miwiti/nyambung nalika start-up</b>: Cènthang opsi punika menawi "
+"panjenengan kersa Stèllarium nyobi nyambung dhateng tèlèskop énggal "
+"sasampunipun dipunwiwiti."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
 msgid ""
 "Otherwise, to start the telescope, you need to open the main window, select "
 "that telescope and press the 'Start/Connect' button."
 msgstr ""
+"Menawi boten, kangge miwiti tèlèskop, panjenengan kedah mbikak jendela "
+"utami, milih tèlèskop punika saha mencèt tombol 'Miwiti/Nyambung'."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
 msgid "This section is active only for DIRECT connections (see {above})."
 msgstr ""
+"Bagean punika namung aktif kangge sambungan LANGSUNG (mugi mirsani {ing "
+"nginggil})."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
 msgstr ""
+"<b>Pòrt sèrial</b> nyetèl pòrt sèrial ingkang dipunginakaken déning "
+"tèlèskop."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
 msgid "There is a pop-up box that suggests some default values:"
-msgstr ""
+msgstr "Wonten kothak pòp-up ingkang ngusulaken sawetawis aji baku:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
 msgid "On Windows, serial ports COM1 to COM10;"
-msgstr ""
+msgstr "Wonten ing Windows, pòrt sèrial COM1 dumugi COM10;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:408
 msgid ""
 "On Linux, serial ports /dev/ttyS0 to /dev/ttyS3 and USB ports /dev/ttyUSB0 "
 "to /dev/ttyUSB3;"
 msgstr ""
+"Wonten ing Linux, pòrt sèrial /dev/ttyS0 dumugi /dev/ttyS3 saha pòrt USB "
+"/dev/ttyUSB0 dumugi /dev/ttyUSB3;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:409
 msgid ""
 "On Mac OS X, the list is empty as it names its ports in a peculiar way."
 msgstr ""
+"Wonten ing Mac OS X, dhaptar suwung amargi namung pòrtipun kanthi cara "
+"ingkang khas."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
 msgid ""
 "If you are using an USB cable, the default serial port of your telescope "
 "most probably is not in the list of suggestions."
 msgstr ""
+"Menawi panjenengan ngginakaken kabel USB, pòrt sèrial baku tèlèskop "
+"panjenengan kinten-kinten boten wonten ing dhaptar usulan."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:411
 msgid ""
 "To list all valid serial port names in Mac OS X, open a terminal and type:"
 msgstr ""
+"Kangge nyerat sadaya asma pòrt sèrial ingkang sah wonten ing Mac OS X, bikak"
+" tèrminal saha kethik:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:412
 msgid ""
 "This will list all devices, the full name of your serial port should be "
 "somewhere in the list (for example, '/dev/cu.usbserial-FTDFZVMK')."
 msgstr ""
+"Punika badhé nyerat sadaya piranti, asma jangkep pòrt sèrial panjenengan "
+"kedah wonten ing sawetawis papan wonten ing dhaptar (upaminipun, "
+"'/dev/cu.usbserial-FTDFZVMK')."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:415
 msgid "<b>Device model</b>: see {Supported devices} below."
 msgstr ""
+"<b>Mòdèl piranti</b>: mugi mirsani {Piranti ingkang dipunsengkuyung} ing "
+"ngandhap."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
 msgid "Both fields here refer to communication over a network ({TCP/IP})."
 msgstr ""
+"Kalih bidang wonten ing ngriki ngrujuk dhateng komunikasi nglangkungi "
+"jaringan ({TCP/IP})."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:424
@@ -22111,6 +22388,8 @@ msgid ""
 "Doing something with them is necessary only for INDIRECT connections (see "
 "{above})."
 msgstr ""
+"Nindakaken menapa kémawon kaliyan punika namung dipunbetahaken kangge "
+"sambungan BOTEN LANGSUNG (mugi mirsani {ing nginggil})."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
@@ -22118,28 +22397,37 @@ msgid ""
 "<b>Host</b> can be either a host name or an {IPv4} address such as "
 "'127.0.0.1'. The default value of 'localhost' means 'this computer'."
 msgstr ""
+"<b>Hòs</b> saged asma hòs utawi alamat {IPv4} kados '127.0.0.1'. Aji baku "
+"'lòcalhòst' tegesipun 'komputer punika'."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
 msgid ""
 "<b>Port</b> refers to the TCP port used for communication. The default value"
 " depends on the telescope number and ranges between 10001 and 10009."
 msgstr ""
+"<b>Pòrt</b> ngrujuk dhateng pòrt TCP ingkang dipunginakaken kangge "
+"komunikasi. Aji baku gumantung wonten ing nomer tèlèskop saha rèntang "
+"antawisipun 10001 saha 10009."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:431
 msgid "Both values are ignored for DIRECT connections."
-msgstr ""
+msgstr "Kalih aji dipunlirwakaken kangge sambungan LANGSUNG."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:432
 msgid ""
 "For INDIRECT connections, modifying the default host name value makes sense "
 "only if you are attempting a remote connection over a network."
 msgstr ""
+"Kangge sambungan BOTEN LANGSUNG, ngòdhifikasi aji asma hòs baku namung leres"
+" menawi panjenengan nyobi sambungan tebih nglangkungi jaringan."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:433
 msgid ""
 "In this case, it should be the name or IP address of the computer that runs "
 "a program that runs the telescope."
 msgstr ""
+"Wonten ing ksus punika, punika kedah asma utawi alamat IP saking komputer "
+"ingkang nglampahaken prògram ingkang nglampahaken tèlèskop."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:437
 msgid ""
@@ -22147,21 +22435,27 @@ msgid ""
 "around the telescope marker. This is a relic from the times before the "
 "<strong>Oculars</strong> plug-in existed."
 msgstr ""
+"Satunggaling sèri bunderan ingkang makili lapang pandang ingkang bènten-"
+"bènten saged katambahan ngubengi panandha tèlèskop. Punika tilaran saking "
+"wekdal sadèrèngipun pilugin <strong>Okular</strong> wonten."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:438
 msgid ""
 "In the telescope configuration window, click on 'User Interface Settings'."
 msgstr ""
+"Wonten ing jendela kònfigurasi tèlèskop, klik 'Setèlan Antarmuka Panggina'."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:439
 msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with commas in the field below."
 msgstr ""
+"Tandhani opsi 'Ngginakaken indikator lapang pandang', lajeng lebetaken "
+"dhaptar aji ingkang dipunpisah mawi kòma wonten ing bidang ngandhap."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:440
 msgid "The values are interpreted as degrees of arc."
-msgstr ""
+msgstr "Aji-aji dipuntafsiraken minangka drajat busur."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:443
@@ -22169,6 +22463,8 @@ msgid ""
 "This can be used in combination with a {virtual telescope} to display a "
 "moving reticle with the Telrad circles."
 msgstr ""
+"Punika saged dipunginakaken ing kòmbìnasi kaliyan {tèlèskop virtual} kangge "
+"ngetingaken rètikèl obah kaliyan bunderan Tèlrad."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:448
 #, qt-format
@@ -22176,6 +22472,8 @@ msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>%1+0</b> or the "
 "respective button in the bottom toolbar."
 msgstr ""
+"Jendela 'Ngobahaken tèlèskop dhateng' saged dipunbikak kanthi mencèt "
+"<b>%1+0</b> utawi tombol ingkang cocog wonten ing tòòlbàr ngandhap."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid ""
@@ -22183,23 +22481,31 @@ msgid ""
 " preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or "
 "Decimal degrees), a drop-down list and two buttons."
 msgstr ""
+"Punika ngemot kalih bidang kangge nglebetaken kòòrdinat langit, pamilih "
+"kangge format ingkang dipunkersani (Jam-Menit-Dhetik, Drajat-Menit-Dhetik, "
+"utawi Drajat Dhèsimal), dhaptar dròp-dòwn saha kalih tombol."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 msgid ""
 "The drop-down list contains the names of the currently connected devices."
 msgstr ""
+"Dhaptar dròp-dòwn ngemot asma-asma piranti ingkang sapunika kasambung."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:451
 msgid ""
 "If no devices are connected, it will remain empty, and the 'Slew' button "
 "will be disabled."
 msgstr ""
+"Menawi boten wonten piranti ingkang kasambung, punika badhé tetep suwung, "
+"saha tombol 'Ngobahaken' badhé dipunpatèni."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:452
 msgid ""
 "Pressing the <b>Slew</b> button slews the selected device to the selected "
 "set of coordinates."
 msgstr ""
+"Mencèt tombol <b>Ngobahaken</b> ngobahaken piranti ingkang kapilih dhateng "
+"satunggaling kumpenan kòòrdinat ingkang kapilih."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:454
@@ -22207,6 +22513,8 @@ msgid ""
 "See the section about {keyboard commands} below for other ways of "
 "controlling the device."
 msgstr ""
+"Mugi mirsani bagean babagan {dhawuh kèybòrd} ing ngandhap kangge cara sanès "
+"ngòntrol piranti."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
@@ -22214,10 +22522,11 @@ msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the {main window} "
 "of the plug-in."
 msgstr ""
+"Mencèt tombol <b>Kònfigurasi tèlèskop...</b> mbikak {jendela utami} pilugin."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:462
 msgid "Sending commands"
-msgstr ""
+msgstr "Ngirim dhawuh"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:463
 msgid ""
@@ -22225,6 +22534,9 @@ msgid ""
 "telescope reticle labelled with the telescope's name on its current position"
 " in the sky."
 msgstr ""
+"Sasampunipun tèlèskop kasil dipunwiwiti/kasambung, Stèllarium ngetingaken "
+"rètikèl tèlèskop ingkang dipunlabèli mawi asma tèlèskop wonten ing posisi "
+"sapunika wonten ing akasa."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:464
 msgid ""
@@ -22232,6 +22544,9 @@ msgid ""
 " with the mouse, it can be tracked and it appears as an object in the "
 "'Search' window."
 msgstr ""
+"Rètikèl inggih punika obyek kados saben obyek sanès wonten ing Stèllarium - "
+"saged dipunpilih kaliyan mòus, saged dipunlacak, saha medal minangka obyek "
+"wonten ing jendela 'Golèk'."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:465
 #, qt-format
@@ -22239,16 +22554,19 @@ msgid ""
 "<b>To point a device to an object:</b> Select an object (e.g. a star) and "
 "press the number of the device while holding down the <b>%1</b> key."
 msgstr ""
+"<b>Kangge ngarahaken piranti dhateng satunggaling obyek:</b> Milih obyek "
+"(upaminipun, lintang) saha mencèt nomer piranti sinambi nahan tombol "
+"<b>%1</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:466
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:469
 #, qt-format
 msgid "For example, %1+1 for telescope #1."
-msgstr ""
+msgstr "Upaminipun, %1+1 kangge tèlèskop #1."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:467
 msgid "This will move the telescope to the selected object."
-msgstr ""
+msgstr "Punika badhé mindhahaken tèlèskop dhateng obyek ingkang kapilih."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:468
 #, qt-format
@@ -22256,17 +22574,23 @@ msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
 "device while holding down the <b>%1</b> key."
 msgstr ""
+"<b>Kangge ngarahaken piranti dhateng punjer tampilan:</b> Mencèt nomer "
+"piranti sinambi nahan tombol <b>%1</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:470
 msgid ""
 "This will slew the device to the point in the center of the current view."
 msgstr ""
+"Punika badhé ngobahaken piranti dhateng titik wonten ing punjer tampilan "
+"sapunika."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:471
 msgid ""
 "If you move the view after issuing the command, the target won't change "
 "unless you issue another command."
 msgstr ""
+"Menawi panjenengan mindhahaken tampilan sasampunipun medalaken dhawuh, "
+"target boten badhé éwah kejawi panjenengan medalaken dhawuh sanès."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:474
@@ -22275,6 +22599,9 @@ msgid ""
 "<b>To point a device to a given set of coordinates:</b> Use the {'Slew to' "
 "window} (press <b>%1+0</b>)."
 msgstr ""
+"<b>Kangge ngarahaken piranti dhateng satunggaling kumpenan kòòrdinat ingkang"
+" dipunparingaken:</b> Ngginakaken {Jendela 'Ngobahaken dhateng'} (mencèt "
+"<b>%1+0</b>)."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:481
@@ -22283,31 +22610,39 @@ msgid ""
 "using one of the two built-in interfaces: the Meade LX200 (the Meade "
 "Autostar controller) interface and the Celestron NexStar interface."
 msgstr ""
+"Sadaya piranti ingkang kacumawis wonten ing {dhaptar Mòdèl piranti} inggih "
+"punika dhèfinisi kapénakan ingkang ngginakaken salah satunggaling kalih "
+"antarmuka bawaan: antarmuka Mèadhè LX200 (còntròllèr Autòstar Mèadhè) saha "
+"antarmuka Cèlèstròn NèxStar."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:483
 msgid "The device list contains the following:"
-msgstr ""
+msgstr "Dhaptar piranti ngemot ing ngandhap punika:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:484
 msgid "Any device using the NexStar interface."
-msgstr ""
+msgstr "Piranti menapa kémawon ingkang ngginakaken antarmuka NèxStar."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:485
 msgid ""
 "A computerized telescope mount made by Losmandy (Meade LX-200/Autostar "
 "interface)."
 msgstr ""
+"Pènata tèlèskop kakòmputèrisasi ingkang dipundamel déning Lòsmandy "
+"(antarmuka Mèadhè LX-200/Autòstar)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:486
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:491
 msgid "Any device using the LX-200/Autostar interface."
-msgstr ""
+msgstr "Piranti menapa kémawon ingkang ngginakaken antarmuka LX-200/Autòstar."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:487
 msgid ""
 "The Meade ETX-70 telescope with the #494 Autostar controller and the #506 "
 "Connector Cable Set."
 msgstr ""
+"Tèlèskop Mèadhè ETX-70 mawi còntròllèr Autòstar #494 saha Set Kabel Kònéktòr"
+" #506."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:489
@@ -22316,11 +22651,15 @@ msgid ""
 "According to the tester, it is a bit slow, so its default setting of "
 "%1'Connection delay'%2 is 1.5 seconds instead of 0.5 seconds."
 msgstr ""
+"Miturut panguji, punika radi alon, pramila setèlan baku %1'Jeda Sambungan'%2"
+" inggih punika 1,5 dhetik tinimbang 0,5 dhetik."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:492
 msgid ""
 "The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes."
 msgstr ""
+"Pènata Sky-Watchèr SynScan AZ GòTò dipunginakaken wonten ing sawetawis "
+"tèlèskop."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:493
 msgid ""
@@ -22329,10 +22668,16 @@ msgid ""
 "controller version 3.0 or greater is supported by the plug-in, as it uses "
 "the NexStar protocol."
 msgstr ""
+"<b>SynScan</b> ugi asma hand còntròllèr ingkang dipunginakaken wonten ing "
+"pènata GòTò Sky-Watchèr sanèsipun, saha katingalipun pènata menapa kémawon "
+"ingkang ngginakaken còntròllèr SynScan vèrsi 3.0 utawi langkung ageng "
+"dipunsengkuyung déning tandha tambahan, amargi ngginakaken pròtòkòl NèxStar."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:494
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
 msgstr ""
+"Argò Navis inggih punika 'Komputer Tèlèskop Dhigital' déning Wildcard "
+"Innòvatiòns."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:495
 msgid ""
@@ -22340,12 +22685,18 @@ msgid ""
 "(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses"
 " a computer to find targets and human power to move the telescope itself)."
 msgstr ""
+"Punika bunderan setèlan dhigital canggih ingkang ngéwahi tèlèskop limrah "
+"(upaminipun, dòbsònian) dados tèlèskop 'Push To' (tèlèskop ingkang "
+"ngginakaken komputer kangge manggihaken target saha tenaga manungsa kangge "
+"mindhahaken tèlèskop piyambak)."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:496
 msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B"
 msgstr ""
+"Sampun ngantos kesupèn nyetèl dhateng mòdhe kòmpatibilitas Mèadhè saha "
+"nyetèl baud rate dhateng 9600B"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:501
 msgid ""
@@ -22355,6 +22706,12 @@ msgid ""
 "that will react in the same way as the reticle of a real telescope "
 "controlled by the plug-in."
 msgstr ""
+"Menawi panjenengan kersa nguji tandha tambahan punika tanpa piranti aktual "
+"ingkang kasambung dhateng komputer, pilih <b>Boten wonten, namung simulasi "
+"satunggaling (rètikèl obah)</b> wonten ing bidang <b>Tèlèskop dipunkòntrol "
+"déning:</b>. Punika badhé nedahaken rètikèl tèlèskop ingkang badhé rèaksi "
+"kanthi cara ingkang sami kados rètikèl tèlèskop nyata ingkang dipunkòntrol "
+"déning pilugin."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:504
@@ -22362,6 +22719,8 @@ msgid ""
 "See the section above about {field of view indicators} for a possible "
 "practical application (emulating 'Telrad' circles)."
 msgstr ""
+"Mugi mirsani bagean ing nginggil babagan {indikator lapang pandang} kangge "
+"kamungkinan aplikasi praktis (ngèmulasi bunderan 'Tèlrad')."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:508
@@ -22369,17 +22728,19 @@ msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
 "Stellarium's original telescope control feature (~2006)."
 msgstr ""
+"Fitur punika sami kaliyan jinis tèlèskop 'Dhummy' ingkang dipunsengkuyung "
+"déning fitur kòntrol tèlèskop asli Stèllarium (~2006)."
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:528
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:102
 msgctxt "numero sign"
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:530
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:549
 #, qt-format
@@ -22389,6 +22750,11 @@ msgid ""
 "telescope's number. To slew it to the center of the current view, hold down "
 "the %2 key and press the key with that telescope's number."
 msgstr ""
+"Kangge ngobahaken tèlèskop ingkang kasambung dhateng satunggaling obyek "
+"(upaminipun, lintang), milih obyek punika, lajeng tahan tombol %1 saha "
+"mencèt tombol mawi nomer tèlèskop punika. Kangge ngobahaken dhateng punjer "
+"tampilan sapunika, tahan tombol %2 saha mencèt tombol mawi nomer tèlèskop "
+"punika."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually
 #. see this text. :)
@@ -22398,234 +22764,243 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an"
 " external application or to connect to a remote host."
 msgstr ""
+"Boten wonten dhèskripsi mòdèl piranti ingkang kacumawis. Stèllarium boten "
+"badhé saged ngòntrol tèlèskop piyambak, nanging taksih saged nindakaken "
+"punika nglangkungi aplikasi èkstèrnal utawi nyambung dhateng hòs tebih."
 
 #. TRANSLATORS: The translated name of the Add button is automatically
 #. inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:561
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
-msgstr ""
+msgstr "Mencèt tombol \"%1\" kangge nyetèl sambungan tèlèskop énggal."
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:572
 msgid "local, Stellarium"
-msgstr ""
+msgstr "lòkal, Stèllarium"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:574
 msgid "local, external"
-msgstr ""
+msgstr "lòkal, èkstèrnal"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:576
 msgid "remote, unknown"
-msgstr ""
+msgstr "tebih, boten dipunmangertosi"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:578
 msgid "virtual"
-msgstr ""
+msgstr "virtual"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:580
 msgid "remote, RTS2"
-msgstr ""
+msgstr "tebih, RTS2"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:582
 msgid "remote, INDI/INDIGO"
-msgstr ""
+msgstr "tebih, INDI/INDIGO"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:584
 msgid "local, ASCOM"
-msgstr ""
+msgstr "lòkal, ASCOM"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1004
 msgid "Start"
-msgstr ""
+msgstr "Miwiti"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1006
 msgid "Start the selected local telescope"
-msgstr ""
+msgstr "Miwiti tèlèskop lòkal ingkang kapilih"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1011
 msgid "Stop"
-msgstr ""
+msgstr "Ngasoaken"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1013
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "Ngasoaken tèlèskop lòkal ingkang kapilih"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1018
 msgid "Connect"
-msgstr ""
+msgstr "Nyambung"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1020
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "Nyambung dhateng tèlèskop ingkang kapilih"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1025
 msgid "Disconnect"
-msgstr ""
+msgstr "Pedhot"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1027
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "Medhot sambungan saking tèlèskop ingkang kapilih"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1042
 msgid "Select a directory"
-msgstr ""
+msgstr "Milih dirèktori"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:104
 msgid "Right Ascension (J2000)"
-msgstr ""
+msgstr "Asènsiòrèkta (J2000)"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:105
 msgid "Declination (J2000)"
-msgstr ""
+msgstr "Dhèklinasi (J2000)"
 
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:305
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:334
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:484
 msgid "Select one"
-msgstr ""
+msgstr "Milih setunggal"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:312
 msgid "Slew telescope to"
-msgstr ""
+msgstr "Ngobahaken tèlèskop dhateng"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:313
 msgid "There are no active devices."
-msgstr ""
+msgstr "Boten wonten piranti ingkang aktif."
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:314
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "Ngobahaken tèlèskop dhateng kòòrdinat"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:315
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:204
 msgid "&Right Ascension (J2000):"
-msgstr ""
+msgstr "&Asènsiòrèkta (J2000):"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:316
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:205
 msgid "De&clination (J2000):"
-msgstr ""
+msgstr "Dhè&klinasi (J2000):"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:318
 msgid "Take coordinates from current object"
-msgstr ""
+msgstr "Mundhut kòòrdinat saking obyek sapunika"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:320
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:201
 msgid "&Current object"
-msgstr ""
+msgstr "&Obyek sapunika"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:322
 msgid "Take coordinates of screen center"
-msgstr ""
+msgstr "Mundhut kòòrdinat punjer layar"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:324
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:202
 msgid "Center of the screen"
-msgstr ""
+msgstr "Punjer layar"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:326
 msgid "Select preconfigured point"
-msgstr ""
+msgstr "Pilih titik ingkang sampun kakònfigurasi"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:329
 msgid "Configure point list"
-msgstr ""
+msgstr "Kònfigurasi dhaptar titik"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:333
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "Fòrmat jam-menit-dhetik"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:335
 msgid "&HMS"
-msgstr ""
+msgstr "&JMD"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:337
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "Fòrmat drajat-menit-dhetik"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:339
 msgid "&DMS"
-msgstr ""
+msgstr "&DMD"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:341
 msgid "Decimal degrees"
-msgstr ""
+msgstr "Drajat dhèsimal"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:343
 msgid "D&ecimal"
-msgstr ""
+msgstr "Dh&èsimal"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:345
 msgid "Slew to above coordinates"
-msgstr ""
+msgstr "Ngobahaken dhateng kòòrdinat ing nginggil"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:347
 msgid "&Slew"
-msgstr ""
+msgstr "&Obah"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:349
 msgid "Sync telescope to above coordinates (if supported by instrument)"
 msgstr ""
+"Nyinkronaken tèlèskop dhateng kòòrdinat ing nginggil (menawi dipunsengkuyung"
+" déning piranti)"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:351
 msgid "Sync"
-msgstr ""
+msgstr "Sinkròn"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:353
 msgid "Stop all telescope motions (if supported)"
-msgstr ""
+msgstr "Ngasoaken sadaya obahan tèlèskop (menawi dipunsengkuyung)"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:355
 msgid "Abort slew"
-msgstr ""
+msgstr "Mbatalaken obahan"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:356
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "Kònfigurasi &tèlèskop..."
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:543
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "Kònfigurasi Tèlèskop"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:546
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
+"Tèlèskop ingkang kasambung dhateng komputer punika nglangkungi pòrt sèrial "
+"saha dipunkòntrol langsung déning Stèllarium."
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:548
 msgid "Stellarium, directly through a serial port"
-msgstr ""
+msgstr "Stèllarium, langsung nglangkungi pòrt sèrial"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:550
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
+"Tèlèskop ingkang dipunkòntrol déning aplikasi èkstèrnal, wonten ing komputer"
+" punika utawi wonten ing mèsin tebih."
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:552
 msgid "External software or a remote computer"
-msgstr ""
+msgstr "Piranti lunak èkstèrnal utawi komputer tebih"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:554
 msgid "Telescope which is accessible through RTS2(.org) JSON API"
-msgstr ""
+msgstr "Tèlèskop ingkang saged dipunakses nglangkungi API JSÒN RTS2(.òrg)"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:556
 msgid "RTS2 telescope"
-msgstr ""
+msgstr "Tèlèskop RTS2"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:557
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr ""
+msgstr "Boten wonten, namung simulasi satunggaling (rètikèl obah)"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:560
 msgid "Connection delay:"
