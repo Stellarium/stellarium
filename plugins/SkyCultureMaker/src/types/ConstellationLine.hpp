@@ -21,24 +21,26 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCM_TYPES_STAR_LINE_HPP
-#define SCM_TYPES_STAR_LINE_HPP
+#ifndef SCM_TYPES_CONSTELLATION_LINE_HPP
+#define SCM_TYPES_CONSTELLATION_LINE_HPP
 
+#include "StelUtils.hpp"
+#include "VecMath.hpp"
 #include <optional>
 #include <QJsonArray>
 #include <QRegularExpression>
 #include <QString>
+#include "SkyPoint.hpp"
 
 namespace scm
 {
-//! The pair of optional start and end stars
-struct StarLine
+struct ConstellationLine
 {
-	//! The start star of the line.
-	std::optional<QString> start;
+	//! The start point of the line.
+	SkyPoint start;
 
-	//! The end star of the line.
-	std::optional<QString> end;
+	//! The end point of the line.
+	SkyPoint end;
 
 	/**
 	 * @brief Gets the formatted star Id from the name.
@@ -67,19 +69,19 @@ struct StarLine
 	}
 
 	/**
-     * @brief Converts the StarLine to a JSON array.
+     * @brief Converts the stars of the line to a JSON array.
      *
-     * @return QJsonArray The JSON representation of the star line.
+     * @return QJsonArray The JSON representation of the stars of the line.
      */
-	QJsonArray toJson() const
+	QJsonArray starsToJson() const
 	{
 		QJsonArray json;
 
-		if (start.has_value())
+		if (!start.star.isEmpty())
 		{
-			QString formattedStarId = getFormattedStarId(start.value());
+			QString formattedStarId = getFormattedStarId(start.star);
 
-			if (start.value().contains("HIP"))
+			if (start.star.contains("HIP"))
 			{
 				// HIP are required as number
 				json.append(formattedStarId.toLongLong());
@@ -92,14 +94,14 @@ struct StarLine
 		}
 		else
 		{
-			json.append("-1");
+			json.append("null");
 		}
 
-		if (end.has_value())
+		if (!end.star.isEmpty())
 		{
-			QString formattedStarId = getFormattedStarId(end.value());
+			QString formattedStarId = getFormattedStarId(end.star);
 
-			if (end.value().contains("HIP"))
+			if (end.star.contains("HIP"))
 			{
 				// HIP are required as number
 				json.append(formattedStarId.toLongLong());
@@ -112,11 +114,45 @@ struct StarLine
 		}
 		else
 		{
-			json.append("-1");
+			json.append("null");
 		}
 
 		return json;
 	}
+
+	/**
+    * @brief Converts the coordinates of the line to a JSON array.
+    * 
+    * @return QJsonArray The JSON representation of the coordinates of the line.
+    */
+	QJsonArray coordinatesToJson() const
+    {
+		QJsonArray json;
+        QJsonArray startCoordinateArray;
+        double RA, DE;
+        convertToSphereCoords(RA, DE, start.coordinate);
+        startCoordinateArray.append(RA);
+        startCoordinateArray.append(DE);
+        json.append(startCoordinateArray);
+
+        QJsonArray endCoordinateArray;
+        convertToSphereCoords(RA, DE, end.coordinate);
+        endCoordinateArray.append(RA);
+        endCoordinateArray.append(DE);
+        json.append(endCoordinateArray);
+
+		return json;
+	}
+
+private:
+    static void convertToSphereCoords(double &RA, double &DE, const Vec3d &vec)
+    {
+        double longitude;
+        double latitude;
+        StelUtils::rectToSphe(&longitude, &latitude, vec);
+        RA = longitude * M_180_PI / 15.0;
+        DE = latitude * M_180_PI;
+    }
 };
 } // namespace scm
 

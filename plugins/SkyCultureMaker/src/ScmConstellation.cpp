@@ -25,11 +25,9 @@
 #include <QDir>
 #include <QFileInfo>
 
-scm::ScmConstellation::ScmConstellation(const QString &id, const std::vector<CoordinateLine> &coordinates,
-                                        const std::vector<StarLine> &stars, const bool isDarkConstellation)
+scm::ScmConstellation::ScmConstellation(const QString &id, const std::vector<ConstellationLine> &lines, const bool isDarkConstellation)
 	: id(id)
-	, coordinates(coordinates)
-	, stars(stars)
+	, lines(lines)
 	, isDarkConstellation(isDarkConstellation)
 {
 	QSettings *conf = StelApp::getInstance().getSettings();
@@ -97,23 +95,15 @@ const scm::ScmConstellationArtwork &scm::ScmConstellation::getArtwork() const
 	return artwork;
 }
 
-void scm::ScmConstellation::setConstellation(const std::vector<CoordinateLine> &coordinates,
-                                             const std::vector<StarLine> &stars)
+void scm::ScmConstellation::setLines(const std::vector<ConstellationLine> &lines)
 {
-	scm::ScmConstellation::coordinates = coordinates;
-	scm::ScmConstellation::stars       = stars;
-
+	scm::ScmConstellation::lines = lines;
 	updateTextPosition();
 }
 
-const std::vector<scm::CoordinateLine> &scm::ScmConstellation::getCoordinates() const
+const std::vector<scm::ConstellationLine> &scm::ScmConstellation::getLines() const
 {
-	return coordinates;
-}
-
-const std::vector<scm::StarLine> &scm::ScmConstellation::getStars() const
-{
-	return stars;
+	return lines;
 }
 
 void scm::ScmConstellation::drawConstellation(StelCore *core, const Vec3f &lineColor, const Vec3f &nameColor) const
@@ -129,9 +119,9 @@ void scm::ScmConstellation::drawConstellation(StelCore *core, const Vec3f &lineC
 
 	painter.setColor(lineColor, 1.0f);
 
-	for (CoordinateLine p : coordinates)
+	for (const ConstellationLine &line : lines)
 	{
-		painter.drawGreatCircleArc(p.start, p.end);
+		painter.drawGreatCircleArc(line.start.coordinate, line.end.coordinate);
 	}
 
 	drawNames(core, painter, nameColor);
@@ -198,17 +188,17 @@ QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId, const boo
 	if (!isDarkConstellation)
 	{
 		// not a dark constellation, so we can add stars
-		for (const auto &star : stars)
+		for (const auto &line : lines)
 		{
-			linesArray.append(star.toJson());
+			linesArray.append(line.starsToJson());
 		}
 	}
 	else
 	{
 		// dark constellation, so only add coordinates
-		for (const auto &coord : coordinates)
+		for (const auto &line : lines)
 		{
-			linesArray.append(coord.toJson());
+			linesArray.append(line.coordinatesToJson());
 		}
 	}
 
@@ -272,10 +262,10 @@ bool scm::ScmConstellation::saveArtwork(const QString &directory)
 void scm::ScmConstellation::updateTextPosition()
 {
 	XYZname.set(0., 0., 0.);
-	for (CoordinateLine p : coordinates)
+	for (const ConstellationLine &line : lines)
 	{
-		XYZname += p.end;
-		XYZname += p.start;
+		XYZname += line.end.coordinate;
+		XYZname += line.start.coordinate;
 	}
 	XYZname.normalize();
 }

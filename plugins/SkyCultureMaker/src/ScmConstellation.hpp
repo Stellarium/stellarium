@@ -26,8 +26,7 @@
 
 #include "ScmConstellationArtwork.hpp"
 #include "VecMath.hpp"
-#include "types/CoordinateLine.hpp"
-#include "types/StarLine.hpp"
+#include "types/ConstellationLine.hpp"
 #include <StelCore.hpp>
 #include <optional>
 #include <variant>
@@ -42,8 +41,7 @@ namespace scm
 class ScmConstellation
 {
 public:
-	ScmConstellation(const QString &id, const std::vector<CoordinateLine> &coordinates,
-	                 const std::vector<StarLine> &stars, const bool isDarkConstellation);
+	ScmConstellation(const QString &id, const std::vector<ConstellationLine> &lines, const bool isDarkConstellation);
 
 	/// The frame that is used for calculation and is drawn on.
 	static const StelCore::FrameType drawFrame = StelCore::FrameJ2000;
@@ -130,27 +128,18 @@ public:
 	const ScmConstellationArtwork &getArtwork() const;
 
 	/**
-    * @brief Sets the coordinate lines and star lines of the constellation.
+    * @brief Sets the lines of the constellation.
     * 
-    * @param coordinates The coordinates of the constellation. 
-	* @param stars The equivalent stars to the coordinates.
+    * @param lines The lines of the constellation.
     */
-	void setConstellation(const std::vector<CoordinateLine> &coordinates, const std::vector<StarLine> &stars);
+	void setLines(const std::vector<ConstellationLine> &lines);
 
 	/**
-	 * @brief Gets the coordinates of the constellation.
+	 * @brief Gets the lines of the constellation.
 	 * 
-	 * @return The coordinates of the constellation.
+	 * @return The lines of the constellation.
 	 */
-	const std::vector<CoordinateLine> &getCoordinates() const;
-
-	/**
-	 * @brief Gets the stars of the constellation.
-	 * 
-	 * @return The stars of the constellation.
-	 */
-	const std::vector<StarLine> &getStars() const;
-
+	const std::vector<ConstellationLine> &getLines() const;
 	/**
 	 * @brief Draws the constellation based on the coordinates.
 	 *
@@ -237,11 +226,8 @@ private:
 	/// References to the sources of the name spellings
 	std::optional<QVector<int>> references;
 
-	/// List of coordinates forming the segments.
-	std::vector<CoordinateLine> coordinates;
-
-	/// List of stars forming the segments. Might be empty.
-	std::vector<StarLine> stars;
+	/// The lines forming the constellation
+	std::vector<ConstellationLine> lines;
 
 	/// A short description of the constellation that could be shown in e.g. an info block.
 	QString description;
