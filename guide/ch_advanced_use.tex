@@ -468,8 +468,7 @@ and telescope.\footnote{Again, for Linux the port number is defined in
   group (or whichever group owns your serial port).  Better yet, use
   \program{gpsd} (see above).}
 
-If GPS lookup fails, run Stellarium with the \texttt{--verbose} option and
-see the logfile for diagnostic messages.
+If GPS lookup fails, see section~\ref{sec:Environment:Logfile} to enable more diagnostic messages in the logfile.
 
 \paragraph{Bluetooth GPS} Most smartphones provide GPS and Bluetooth
 hardware. You can install a virtual COM port in your Windows Bluetooth
@@ -571,7 +570,6 @@ program when it is called via the command line. See table for a full list:
 -\/-spout  or -S     & all or sky & Act as Spout sender (See section \ref{sec:CommandLineOptions:Special:Spout}).%
                                     \footnote{\label{FN:WinOnly}On Windows only}\textsuperscript{,}\footnote{This function requires running in OpenGL mode.}\\
 -\/-spout-name       & name       & Use \texttt{name} as name of the Spout sender. Default name: \texttt{Stellarium}.\footref{FN:WinOnly}\\\midrule									
--\/-verbose          &            & Even more diagnostic output in logfile (esp.\ location handling)\\
 -\/-dump-opengl-details or -d     & {[}none{]} & Dump information about OpenGL support to logfile. 
                                                  Use this is you have graphics problems and want to send a bug report. \\\midrule
 -\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footref{FN:WinOnly}\textsuperscript{,}\footnote{\label{FN:Qt5only}Qt5-based Stellarium versions only}\\
@@ -653,9 +651,23 @@ problems.
 \label{sec:Environment:Logfile}
 
 The amount of logging messages in Qt-based programs can be tuned by setting an environment variable \texttt{QT\_LOGGING\_RULES}. 
-For example, to remove all ``Debug'' messages, set it to \texttt{*.debug=false}. To remove even the ``Info'' messages, add \texttt{;*.info=false}. (Combine several rules with semicola.)
+For example, to remove all ``Debug'' messages, set it to \texttt{*.debug=false;}. To remove even the ``Info'' messages, add \texttt{*.info=false;}. (Close each rule, also the last, with semicolon!)
 If you experience operating trouble, make sure you allow all messages, i.e., set these entries shown here to \texttt{true} (or delete the variable).
 
+Some modules can be finetuned with respect to the amount of logging. 
+Most users won't ever want to see the ugly details, so debug is deactivated by default for: 
+\begin{description}
+\item[\texttt{stel.GPS}] GPS related issues.
+\item[\texttt{stel.LocIP}] IP-based location queries.
+\item[\texttt{stel.Texture}] Texture handling.
+\item[\texttt{stel.Atmosphere}] Atmosphere related messages.
+\item[\texttt{stel.Scripting}] scripting related messages.
+\item[\texttt{stel.Media}] Multimedia related messages.
+\item[\texttt{stel.HiPS}] HiPS related messages.
+\item[\texttt{stel.Properties}] StelProperty related messages.
+\end{description}
+
+If you suspect issues with your computer, add those entries as shown above, e.g., add \texttt{stel.GPS.debug=true;}.
 More information can be found online\footnote{\scriptsize{\url{https://doc.qt.io/qt-6/qloggingcategory.html}, \url{https://doc.qt.io/qt-6/debug.html}}}.
 
 
