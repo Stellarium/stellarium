@@ -1010,9 +1010,10 @@ void StelMainView::init()
 
 	// I doubt this will have any effect on framerate, but may cause problems elsewhere?
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
+
 #ifndef NDEBUG
 	// Get an overview of module callOrders
-	if (qApp->property("verbose")==true)
+	if (mainview().isDebugEnabled())
 	{
 		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionDraw);
 		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionUpdate);
