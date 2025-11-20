@@ -57,7 +57,7 @@ ScmGeoLocGraphicsView::ScmGeoLocGraphicsView(QWidget *parent)
 	// add items (transfer to dedicated function later) 1278.57,1899.83 1276.74,1900.03
 
 
-	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/gen01_capPop500k_wAntarctica_02.svg");
+	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/gen01_capPop500k_wAntarctica_015_op70.svg");
 	scene->addItem(baseMap);
 	scene->setSceneRect(- baseMap->boundingRect().width() * 0.75, - baseMap->boundingRect().height() * 0.5, baseMap->boundingRect().width() * 2.5, baseMap->boundingRect().height() * 2);
 	qInfo() << "basemap width = " << baseMap->boundingRect().width() << " and height = " << baseMap->boundingRect().height();
@@ -110,7 +110,7 @@ void ScmGeoLocGraphicsView::scaleView(double factor)
 	const double scaling = transform().scale(factor, factor).mapRect(QRectF(0, 0, 1, 1)).width();
 	qInfo() << "scale: " << scaling;
 
-	if (scaling < 0.1 || scaling > 1500.0) // scaling < min or scaling > max zoom level
+	if (scaling < 0.1 || scaling > 5000.0) // scaling < min or scaling > max zoom level
 		return;
 
 	scale(factor, factor);
@@ -232,6 +232,7 @@ void ScmGeoLocGraphicsView::keyPressEvent( QKeyEvent *e )
 
 void ScmGeoLocGraphicsView::mousePressEvent( QMouseEvent *e )
 {
+	qInfo() << "press Event: " << e->button();
 	if (e->button() == Qt::LeftButton)
 	{
 		if(e->modifiers() & Qt::ShiftModifier)
@@ -248,7 +249,7 @@ void ScmGeoLocGraphicsView::mousePressEvent( QMouseEvent *e )
 void ScmGeoLocGraphicsView::mouseReleaseEvent( QMouseEvent *e )
 {
 	setFocus();
-
+	qInfo() << "release Event: " << e->button() << "\n";
 	if (e->button() == Qt::LeftButton)
 	{
 		// open dialog (range of time) + save and reset the current capture polygon

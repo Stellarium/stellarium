@@ -195,10 +195,13 @@ void ScmSkyCultureDialog::createDialogContent()
 								"ESC: Remove all points of the active polygon\n" +
 								"Scroll UP / DOWN : Zoom in / out of the map\n" +
 								"CTRL + Scroll : Fine grained zoom";
-	// the positioning of the tooltip is eyeballes to sit in the bottom right corner of the map (works for now but is not practical)
+	// the positioning of the tooltip is eyeballed to sit in the bottom right corner of the map (works for now but is not practical)
 	connect(ui->helpToolButton, &QToolButton::clicked, this, [this, helpButtonToolTip]()
-			{ QToolTip::showText(ui->skyCultureTimeOptionsGroupBox->mapToGlobal(QPoint(ui->skyCultureTimeOptionsGroupBox->width() - 330, -179)), helpButtonToolTip, ui->helpToolButton); });
+			{ QToolTip::showText(ui->skyCultureTimeOptionsGroupBox->mapToGlobal(QPoint(ui->skyCultureTimeOptionsGroupBox->width() - 330, -179)), helpButtonToolTip, ui->scmGeoLocGraphicsView, QRect(QPoint(-100, -100), QPoint(2000, 2000)), 99999); });
 
+	//ui->testLabel->setText(helpButtonToolTip);
+	ui->testLabel->raise();
+	ui->testLabel->show();
 	// dialog popup for time limits
 
 	// prevent startTimeSpinBox value to be greater than endTimeSpinBox and vice versa

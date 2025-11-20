@@ -655,12 +655,19 @@ Description of constellation...</string>
         </widget>
         <widget class="QWidget" name="geoLocTab">
          <attribute name="title">
-          <string>Geographical Location</string>
+          <string>Location</string>
          </attribute>
          <layout class="QVBoxLayout" name="geoLocVerticalLayout">
           <item>
            <widget class="QWidget" name="mapPage">
             <layout class="QGridLayout" name="mapGridLayout">
+             <item row="2" column="2" alignment="Qt::AlignRight|Qt::AlignBottom">
+              <widget class="QLabel" name="testLabel">
+               <property name="margin">
+                <number>10</number>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0" rowspan="3" colspan="3">
               <widget class="ScmGeoLocGraphicsView" name="scmGeoLocGraphicsView"/>
              </item>

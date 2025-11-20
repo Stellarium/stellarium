@@ -35,7 +35,7 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 
 	show();
 
-	// set up QTimelines for smooth zoom on culture selection through public 'selectCulture' slot
+	// set up QTimelines for smooth zoom on culture selection (through public 'selectCulture' slot)
 	zoomToDefaultTimer.setDuration(2000);
 	zoomOnTargetTimer.setDuration(3000);
 
@@ -57,14 +57,11 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	lokono_late->setPolygon(QPolygonF(QList<QPoint>{QPoint(900.0, 500.0), QPoint(940.0, 500.0), QPoint(980.0, 540.0), QPoint(980.0, 580.0),
 													 QPoint(940.0, 620.0), QPoint(900.0, 620.0), QPoint(860.0, 580.0), QPoint(860.0, 540.0)}));
 
-	SkyculturePolygonItem *aztec = new SkyculturePolygonItem("Aztekisch", 1000, 1200);
-
 	// load culture Polygons from JSON
 	loadCulturePolygons();
 
 	scene->addItem(lokono_early);
 	scene->addItem(lokono_late);
-	scene->addItem(aztec);
 
 	qInfo() << "ende Map Constructor!";
 }
@@ -75,7 +72,9 @@ void SkycultureMapGraphicsView::drawMapContent()
 	scene()->clear();
 
 	// evaluate projection
-	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/gen01_capPop500k_wAntarctica_02.svg");
+	//QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/gen01_capPop500k_wAntarctica_02.svg");
+	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/gen01_capPop500k_wAntarctica_015_op70.svg");
+	//QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/projWGS_gen01_capPop500k_wAntarctica_015_op70.svg");
 
 	scene()->addItem(baseMap);
 	scene()->setSceneRect(- baseMap->boundingRect().width() * 0.75, - baseMap->boundingRect().height() * 0.5, baseMap->boundingRect().width() * 2.5, baseMap->boundingRect().height() * 2);
@@ -90,8 +89,9 @@ void SkycultureMapGraphicsView::loadCulturePolygons()
 	// loop over all skycultures
 	StelApp& app = StelApp::getInstance();
 	QMap<QString, QString> cultureIdToTranslationMap = app.getSkyCultureMgr().getDirToI18Map();
+	const QStringList cultureIds = cultureIdToTranslationMap.keys();
 
-	for (const auto &currentCulture : cultureIdToTranslationMap.keys())
+	for (const auto &currentCulture : cultureIds)
 	{
 		// find path of file
 		const QString filePath = StelFileMgr::findFile("skycultures/" + currentCulture + "/territory.json");
@@ -153,6 +153,7 @@ void SkycultureMapGraphicsView::loadCulturePolygons()
 			}
 		}
 	}
+	qInfo() << "loadPolygons done!";
 }
 
 void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *e)
@@ -202,8 +203,6 @@ void SkycultureMapGraphicsView::mouseMoveEvent(QMouseEvent *e)
 
 void SkycultureMapGraphicsView::mousePressEvent(QMouseEvent *e)
 {
-	//qInfo() << "src: " << e->source() << " type: " << e->type() << " Button code:" << e->button();
-
 	if ( e->button() == Qt::LeftButton )
 	{
 		if( e->modifiers() & Qt::ControlModifier )
@@ -335,6 +334,7 @@ QList<QPointF> SkycultureMapGraphicsView::convertLatLonToMeter(const QList<QPoin
 
 		meter_coords.append(QPointF(xMeter, yMeter));
 	}
+	qInfo() << "pre return --> liste (latLon to meter): " << meter_coords;
 
 	return convertMeterToView(meter_coords);
 }
@@ -395,7 +395,7 @@ QList<QPointF> SkycultureMapGraphicsView::convertLatLonToView(const QList<QPoint
 		// lat: - 84.930 |  83.62359999999999616 ---> 168.55359999999999616
 		//											  xxx.x31xxx
 
-		qreal xView = ((point.x() + 179.904) / 360) * defaultRect.width();
+		qreal xView = ((point.x() + 179.904) / 360.0) * defaultRect.width();
 		qreal yView = ((point.y() - 83.62359999999999616) / -168.53159999999999616) * defaultRect.height();
 
 		view_coords.append(QPointF(xView, yView));
@@ -438,7 +438,6 @@ void SkycultureMapGraphicsView::selectAllCulturePolygon(const QString &skycultur
 
 void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId)
 {
-	qInfo() << "beginning of selectCulture!";
 	// variable to the best fitting polygon (either one that exists at the current year or the one with the earliest startTime)
 	SkyculturePolygonItem *skyCulturePolygon = nullptr;
 
@@ -453,7 +452,7 @@ void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId)
 		}
 		if(skycultureId == scPolyItem->getSkycultureId())
 		{
-			// if there is an polygon in the current time --> safe it and continue
+			// if there is an polygon in the current time --> save it and continue
 			if(scPolyItem->existsAtPointInTime(currentYear))
 			{
 				skyCulturePolygon = scPolyItem;

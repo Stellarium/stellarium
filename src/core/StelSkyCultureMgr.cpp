@@ -220,7 +220,7 @@ void StelSkyCultureMgr::makeCulturesList()
 		{
 			culture.region = data["region"].toArray();
 		}
-		// this is needed for legacy reasons, in the future all skyculture will be stored as JsonArray (at least if the SkycultureMaker Plugin is used)
+		// this is needed for legacy reasons, in the future all skyculture will be stored as JsonArray (at least if the SkyCultureMaker Plugin is used)
 		else
 		{
 			culture.region = QJsonArray();
