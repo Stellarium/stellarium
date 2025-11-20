@@ -33,7 +33,7 @@
 //! Stellarium supports only image-based surveys.
 //!
 //! @note You can finetune the amount of HiPS-related messages in the logfile by configuring the logging category stel.HiPS.
-//! For this, e.g. set environment variable QT_LOGGING_RULES=*.debug=false;stel.HiPS.debug=true.
+//! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.HiPS.debug=true;".
 //! By default, only Info and more severe messages are displayed.
 
 Q_DECLARE_LOGGING_CATEGORY(HiPS)

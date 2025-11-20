@@ -109,7 +109,7 @@ class QGraphicsVideoItem;
 //! This occurred on an Intel NUC5i3 with SSD, so loading the file should not be much of an issue.
 //!
 //! @note You can finetune the amount of media-related messages in the logfile by configuring the logging category stel.Media.
-//! For this, e.g. set environment variable QT_LOGGING_RULES=*.debug=false;stel.Media.debug=true.
+//! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.Media.debug=true;".
 //! By default, only Info and more severe messages are displayed.
 
 

@@ -51,7 +51,7 @@ class ScriptConsole;
 //! - There is no script.pause() function. We can only stop a running script.
 //!
 //! @note You can finetune the amount of scripting-related messages in the logfile by configuring the logging category stel.Scripting.
-//! For this, e.g. set environment variable QT_LOGGING_RULES=*.debug=false;stel.Scripting.debug=true.
+//! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.Scripting.debug=true;".
 //! By default, only Info and more severe messages are displayed.
 
 class StelScriptMgr : public QObject

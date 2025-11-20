@@ -36,7 +36,7 @@ class StelProperty;
 //! re-emitting the "changed" event with a type-converted value.
 //!
 //! @note You can finetune the amount of Property-related messages in the logfile by configuring the logging category stel.Properties.
-//! For this, e.g. set environment variable QT_LOGGING_RULES=*.debug=false;stel.Properties.debug=true.
+//! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.Properties.debug=true;".
 //! By default, only Info and more severe messages are displayed.
 
 class StelPropertyProxy : public QObject
@@ -226,8 +226,9 @@ signals:
 //! configurable through the GUI. Bad examples are properties which potentially change very often (e.g. each frame), such as the
 //! current view vector, field of view etc. They may cause considerable overhead if used, and therefore should be avoided.
 //!
-//! @note For debugging, you can finetune the amount of messages written to the logfile.
-//! In environment variable QT_LOGGING_RULES, set stel.Properties.debug=true to see property changes.
+//! @note You can finetune the amount of Property-related messages in the logfile by configuring the logging category stel.Properties.
+//! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.Properties.debug=true;".
+//! By default, only Info and more severe messages are displayed.
 //!
 //! @sa StelPropertyMgr, StelDialog, StelAction
 class StelProperty : public QObject

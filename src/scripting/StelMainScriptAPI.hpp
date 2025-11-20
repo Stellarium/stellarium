@@ -43,7 +43,7 @@ Q_DECLARE_LOGGING_CATEGORY(Scripting)
 //!  LandscapeMgr.setFlagAtmosphere(true);
 //!
 //! @note You can finetune the amount of scripting-related messages in the logfile by configuring the logging category stel.Scripting.
-//! For this, e.g. set environment variable QT_LOGGING_RULES=*.debug=false;stel.Scripting.debug=true.
+//! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.Scripting.debug=true;".
 //! By default, only Info and more severe messages are displayed.
 
 class StelMainScriptAPI : public QObject
