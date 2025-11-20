@@ -2143,11 +2143,12 @@ bool LandscapeMgr::removeLandscape(const QString landscapeID)
 	landscapeDir.cdUp();
 	if(!landscapeDir.rmdir(landscapeID))
 	{
-		qWarning() << "LandscapeMgr: Error! Landscape" << landscapeID
-				   << "could not be removed. "
-				   << "Some files were deleted, but not all."
-				   << StelUtils::getEndLineChar()
-				   << "LandscapeMgr: You can delete manually" << QDir::cleanPath(landscapeDir.filePath(landscapeID));
+		qWarning() << "LandscapeMgr: Error! Landscape"
+		           << landscapeID
+		           << "could not be removed. Some files were deleted, but not all."
+		           << StelUtils::getEndLineChar()
+		           << "LandscapeMgr: You can manually delete"
+		           << QDir::cleanPath(landscapeDir.filePath(landscapeID));
 		emit errorRemoveManually(QDir::cleanPath(landscapeDir.filePath(landscapeID)));
 		return false;
 	}
