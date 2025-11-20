@@ -104,8 +104,6 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--config-file (or -c)   : Use an alternative name for the config file\n"
 			  << "--log-file (or -l)      : Use an alternative name for the log file\n"
 			  << "--user-dir (or -u)      : Use an alternative user data directory\n"
-			  << "--verbose               : Even more diagnostic output in logfile \n"
-			  << "                          (esp. multimedia handling)\n"
 			  << "--opengl-compat (or -C) : Request OpenGL Compatibility profile\n"
 			  << "                          May help for certain driver configurations.\n"
 			  << "--low-graphics (or -L)  : Force low-graphics mode\n"
@@ -153,9 +151,6 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << " \n";
 		exit(0);
 	}
-
-	if (argsGetOption(argList, "", "--verbose"))
-		qApp->setProperty("verbose", true);
 
 #ifdef Q_OS_WIN
 	if (argsGetOption(argList, "-F", "--no-screensaver"))

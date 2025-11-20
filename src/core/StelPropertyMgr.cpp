@@ -2,6 +2,8 @@
 #include <QtDebug>
 #include <QApplication>
 
+Q_LOGGING_CATEGORY(Property,"stel.Properties", QtInfoMsg)
+
 StelProperty::StelProperty(const QString &id, QObject *target, const QMetaProperty& prop)
 	: id(id), target(target), prop(prop)
 {
@@ -120,10 +122,7 @@ StelProperty* StelPropertyMgr::getProperty(const QString &id, const bool noWarni
 void StelPropertyMgr::onStelPropChanged(const QVariant &val)
 {
 	StelProperty* prop = qobject_cast<StelProperty*>(sender());
-#ifndef NDEBUG
-	if (qApp->property("verbose") == true)
-		qDebug()<<"StelProperty"<<prop->getId()<<"changed, value"<<val;
-#endif
+	qCDebug(Property)<<"StelProperty"<<prop->getId()<<"changed, value"<<val;
 	emit stelPropertyChanged(prop, val);
 }
 
@@ -145,7 +144,7 @@ void StelPropertyMgr::registerObject(QObject *obj)
 		Q_ASSERT(registeredObjects.key(obj).isEmpty());
 
 #ifndef NDEBUG
-		qDebug()<<"[StelPropertyMgr] Registering object"<<name;
+		qCDebug(Property)<<"[StelPropertyMgr] Registering object"<<name;
 #endif
 
 		//iterate and store the static properties, dynamic ones are skipped

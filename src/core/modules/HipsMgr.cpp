@@ -29,6 +29,8 @@
 #include <QSettings>
 #include <QTimer>
 
+Q_LOGGING_CATEGORY(HiPS,"stel.HiPS", QtInfoMsg)
+
 HipsMgr::HipsMgr()
 {
 	setObjectName("HipsMgr");
@@ -167,7 +169,7 @@ void HipsMgr::init()
 
 void HipsMgr::restoreVisibleSurveys()
 {
-	//qDebug() << "HipsMgr::restoreVisibleSurveys()";
+	qCDebug(HiPS) << "HipsMgr::restoreVisibleSurveys()";
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("hips");
 
@@ -179,7 +181,7 @@ void HipsMgr::restoreVisibleSurveys()
 		QString url = conf->value("url").toString();
 		if (!url.isEmpty())
 		{
-			// qDebug() << "HiPS: Restore visible survey:" << url;
+			qCDebug(HiPS) << "HiPS: Restore visible survey:" << url;
 			HipsSurveyP survey=getSurveyByUrl(url);
 			if (survey)
 				survey->setVisible(true);

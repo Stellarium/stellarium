@@ -49,6 +49,11 @@ class ScriptConsole;
 //! Notes on migration from QtScript to QJSEngine
 //! - The old engine had isEvaluating(). We must use a mutex for the same idea.
 //! - There is no script.pause() function. We can only stop a running script.
+//!
+//! @note You can finetune the amount of scripting-related messages in the logfile by configuring the logging category stel.Scripting.
+//! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.Scripting.debug=true;".
+//! By default, only Info and more severe messages are displayed.
+
 class StelScriptMgr : public QObject
 {
 	Q_OBJECT
@@ -82,7 +87,7 @@ public:
 
 	// Pre-processor functions
 	//! Preprocess script, esp. process include instructions.
-	//! if the command line option --verbose has been given,
+	//! If logging level is set to stel.Scripting.debug,
 	//! this dumps the preprocessed script with line numbers attached to log.
 	//! This helps to understand the line number given by the usual error message.
 	bool preprocessScript(const QString fileName, const QString& input, QString& output, const QString& scriptDir, int &errLoc);
