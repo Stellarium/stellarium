@@ -238,14 +238,16 @@ antisolar\_point\_color 				& \ccbox{0.9,0.3,0.5} &  antisolar point. \\%\midrul
 apex\_points\_color 			 		& \ccbox{0.8,0.2,0.3} &  apex points. \\%\midrule
 oc\_longitude\_color	     				& \ccbox{0.6,0.2,0.4} &  opposition/conjunction longitude. \\
 quadrature\_color	     				& \ccbox{0.6,0.2,0.4} &  quadrature circle. \\\midrule
-%% Asterisms and ray helpers
-asterism\_lines\_color      	 	 	& \ccbox{0.4,0.4,0.8} &  asterism lines. \\%\midrule
-asterism\_names\_color      			& \ccbox{0.4,0.4,0.8} &  asterism names. \\%\midrule
-rayhelper\_lines\_color      	 	 	& \ccbox{1.0,1.0,0.0} &  the ray helper lines. \\\midrule
-%% Constellations
-const\_lines\_color      				& \ccbox{0.2,0.2,0.6} &  constellation lines. \\%\midrule
-const\_names\_color      				& \ccbox{0.4,0.6,0.9} &  constellation names. \\%\midrule
-const\_boundary\_color   				& \ccbox{0.3,0.1,0.1} &  constellation boundaries. \\\midrule
+%% Skycultures
+const\_lines\_color                     & \ccbox{0.2,0.2,0.6} & constellation lines. \\
+const\_names\_color                     & \ccbox{0.4,0.6,0.9} & constellation names. \\
+const\_boundary\_color                  & \ccbox{0.8,0.3,0.3} & constellation boundaries.\\
+const\_hulls\_color                     & \ccbox{0.6,0.2,0.2} & constellation areas (convex hulls).\\
+asterism\_lines\_color                  & \ccbox{0.4,0.4,0.8} & asterism lines. \\
+asterism\_names\_color                  & \ccbox{0.4,0.4,0.8} & asterism names. \\
+rayhelper\_lines\_color                 & \ccbox{1.0,1.0,0.0} & the ray helper lines. \\
+skyculture\_zodiac\_color               & \ccbox{1.0,1.0,0.0} & Zodiac band.\\
+skyculture\_lunarsystem\_color          & \ccbox{0.0,1.0,0.5} & Band/boundaries of Lunar stations\,/\,mansions.\\\midrule
 %% DSO
 dso\_label\_color                       & \ccbox{0.2,0.6,0.7} & deep-sky objects labels. \\%\midrule
 dso\_circle\_color                      & \ccbox{1.0,0.7,0.2} & deep-sky objects symbols, if not of the types below. \\%\midrule
@@ -542,7 +544,9 @@ flag\_fov\_dms                  & bool   & false & use DMS format for FOV in the
 %
 flag\_show\_decimal\_degrees    & bool   & false & If \emph{true}, use decimal degrees for coordinates\\\midrule
 flag\_use\_azimuth\_from\_south & bool   & false & If \emph{true}, calculate azimuth from south towards west 
-                                                   (as in some astronomical literature)\\\midrule
+                                                   (as in some astronomical literature)\\
+flag\_use\_negative\_hour\_angles & bool & false & If \emph{true}, use hour angles -12h\ldots12h\\ 
+flag\_use\_polar\_distance      & bool   & false & Use distance from North Celestial Pole, not declination from equator \\\midrule
 flag\_surface\_brightness\_arcsec  & bool  & false & Toggle usage the measure unit $^{mag}/_\square{'}$ ($^{mag}/arcmin^2$) or 
                                                      $^{mag}/_\square{''}$ ($^{mag}/arcsec^2$) for the surface brightness of deep-sky objects.\\%\midrule
 flag\_surface\_brightness\_short  & bool   & false & Toggle usage the short notation for the surface brightness of deep-sky objects.\\\midrule

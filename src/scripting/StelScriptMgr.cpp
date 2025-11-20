@@ -37,7 +37,6 @@
 
 #include "StelSkyDrawer.hpp"
 #include "StelSkyLayerMgr.hpp"
-#include "StelUtils.hpp"
 
 #include <QCoreApplication>
 #include <QDateTime>
@@ -50,8 +49,6 @@
 #include <QStringList>
 #include <QTemporaryFile>
 #include <QVariant>
-
-#include <cmath>
 
 
 #ifdef ENABLE_SCRIPT_QML
@@ -82,6 +79,8 @@ void StelScriptMgr::defVecClasses(QJSEngine *engine)
 }
 
 #else
+#include <cmath>
+#include "StelUtils.hpp"
 #include <QtScript>
 // 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f
 
@@ -563,7 +562,7 @@ QStringList StelScriptMgr::getScriptList() const
 {
 	QStringList scriptFiles;
 
-	QSet<QString> files = StelFileMgr::listContents("scripts", StelFileMgr::File, true);
+	const QSet<QString> files = StelFileMgr::listContents("scripts", StelFileMgr::File, true);
 	static const QRegularExpression fileRE("^.*\\.ssc$");
 	for (const auto& f : files)
 	{
@@ -1064,7 +1063,7 @@ bool StelScriptMgr::preprocessScript(const QString fileName, const QString &inpu
 }
 	
 void StelScriptMgr::expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir, int &errLoc){
-	QStringList lines = input.split("\n");
+	const QStringList lines = input.split("\n");
 	static const QRegularExpression includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
 	int curline = 0;
 	for (const auto& line : lines)
@@ -1145,7 +1144,7 @@ void StelScriptMgr::expand(const QString fileName, const QString &input, QString
 	if (qApp->property("verbose")==true)
 	{
 		// Debug to find stupid errors. The line usually reported may be off due to the preprocess stage.
-		QStringList outputList=output.split('\n');
+		const QStringList outputList=output.split('\n');
 		qDebug() << "Script after preprocessing:";
 		int lineIdx=0;
 		for (const auto& line : outputList)

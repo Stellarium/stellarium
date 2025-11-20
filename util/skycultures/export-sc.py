@@ -38,6 +38,7 @@ OUT_DIR_I18N_GUI = os.path.join(DIR, '..', '..', 'po', 'stellarium-skycultures-d
 parser = argparse.ArgumentParser()
 parser.add_argument('-s', '--sky-culture', help='Export the sky culture specified')
 parser.add_argument("--skip-abbrev", action="store_true", help="Don't emit translations for abbreviations")
+parser.add_argument("--skip-zodiac", action="store_true", help="Don't emit translations for Zodiac or Lunar System entries")
 parser.add_argument("--skip-pronounce", action="store_true", help="Don't emit translations for 'pronounce' entries")
 args = parser.parse_args()
 
@@ -63,6 +64,7 @@ langs.sort()
 
 if os.system(os.path.join(DIR, 'generate-pot.py') + f" -s {sky_culture}" +
              (" --skip-abbrev" if args.skip_abbrev else "") +
+             (" --skip-zodiac" if args.skip_zodiac else "") +
              (" --skip-pronounce" if args.skip_pronounce else "")) != 0:
     sys.exit(1)
 # Output file of the pot generator

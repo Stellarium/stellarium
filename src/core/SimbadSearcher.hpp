@@ -50,6 +50,8 @@ public:
 
 	//! Get the result list of matching objectName/position.
 	QMap<QString, Vec3d> getResults() const {return resultPositions;}
+	//! Get the result list of matching object name & type.
+	QMap<QString, QString> getObjectTypes() const {return objectTypes;}
 	//! Get the raw result string from position-based search
 	QString getResult() const {return cooResult;}
 
@@ -85,6 +87,8 @@ private:
 
 	//! The list of resulting objectNames/Position in ICRS.
 	QMap<QString, Vec3d> resultPositions;
+	//! The list of resulting object names & types from SIMBAD.
+	QMap<QString, QString> objectTypes;
 	//! The text result of a coordinate query.
 	QString cooResult;
 

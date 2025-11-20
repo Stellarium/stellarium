@@ -103,6 +103,9 @@
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
              <property name="margin">
               <number>20</number>
              </property>

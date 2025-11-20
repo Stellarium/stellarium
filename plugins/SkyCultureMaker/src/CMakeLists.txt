@@ -8,32 +8,33 @@ INCLUDE_DIRECTORIES(
 LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 
 SET( SkyCultureMaker_SRCS
-     SkyCultureMaker.hpp
-     SkyCultureMaker.cpp
 
-     ScmDraw.hpp
-     ScmDraw.cpp
+     enumBitops.hpp
      ScmConstellation.hpp
      ScmConstellation.cpp
      ScmConstellationArtwork.hpp
      ScmConstellationArtwork.cpp
+     ScmDraw.hpp
+     ScmDraw.cpp
      ScmSkyCulture.hpp
      ScmSkyCulture.cpp
+     SkyCultureMaker.hpp
+     SkyCultureMaker.cpp
 
-     gui/ScmStartDialog.hpp
-     gui/ScmStartDialog.cpp
      gui/ScmConstellationDialog.hpp
      gui/ScmConstellationDialog.cpp
-     gui/ScmSkyCultureDialog.hpp
-     gui/ScmSkyCultureDialog.cpp
-     gui/ScmConstellationImageAnchor.hpp
-     gui/ScmConstellationImageAnchor.cpp
      gui/ScmConstellationImage.hpp
      gui/ScmConstellationImage.cpp
-     gui/ScmSkyCultureExportDialog.hpp
-     gui/ScmSkyCultureExportDialog.cpp
+     gui/ScmConstellationImageAnchor.hpp
+     gui/ScmConstellationImageAnchor.cpp
      gui/ScmHideOrAbortMakerDialog.hpp
      gui/ScmHideOrAbortMakerDialog.cpp
+     gui/ScmSkyCultureDialog.hpp
+     gui/ScmSkyCultureDialog.cpp
+     gui/ScmSkyCultureExportDialog.hpp
+     gui/ScmSkyCultureExportDialog.cpp
+     gui/ScmStartDialog.hpp
+     gui/ScmStartDialog.cpp
      gui/ScmGeoLocGraphicsView.hpp
      gui/ScmGeoLocGraphicsView.cpp
      gui/PreviewPathItem.hpp
@@ -45,22 +46,23 @@ SET( SkyCultureMaker_SRCS
      gui/MultiselectionComboBox.hpp
      gui/MultiselectionComboBox.cpp
 
-     types/CoordinateLine.hpp
-     types/Description.hpp
-     types/Drawing.hpp
-     types/DialogID.hpp
-     types/DrawTools.hpp
-     types/Lines.hpp
-     types/StarLine.hpp
-     types/SkyPoint.hpp
      types/Anchor.hpp
+     types/Classification.hpp
+     types/ConstellationLine.hpp
+     types/Description.hpp
+     types/DialogID.hpp
+     types/Drawing.hpp
+     types/DrawingMode.hpp
+     types/DrawTools.hpp
+     types/License.hpp
+     types/SkyPoint.hpp
 )
 
 SET( SCM_UIS
      gui/scmConstellationDialog.ui
+     gui/scmHideOrAbortMakerDialog.ui
      gui/scmSkyCultureDialog.ui
      gui/scmSkyCultureExportDialog.ui
-     gui/scmHideOrAbortMakerDialog.ui
      gui/scmStartDialog.ui
 )
 

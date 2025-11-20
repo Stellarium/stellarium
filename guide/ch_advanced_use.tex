@@ -277,12 +277,12 @@ program download (the \emph{standard edition} of Stellarium DSO catalog\footnote
 number in the version of Stellarium DSO catalog means version of catalog structure, 
 and the second number means version of data.}, see section \ref{sec:dso:catalog}), 
 but an \emph{extended edition} of DSO catalog with over one million objects (up to $20.0^m$ for galaxies) may be downloaded
-from Stellarium's Github website\footnote{\url{https://github.com/Stellarium/stellarium-data/releases/tag/dso-3.20}}:
+from Stellarium's Github website\footnote{\url{https://github.com/Stellarium/stellarium-data/releases/tag/dso-3.21}}:
 
 \noindent\begin{tabular}{lllr}
 \toprule
 \emph{Version; Edition} & \emph{Filename} & \emph{MD5 hash} & \emph{Size}\\\midrule
-3.20; extended & \file{catalog-3.20.dat} & \texttt{8b25343a5983ef5841cbc0b60e96f4dc} & 28MB\\\bottomrule
+3.21; extended & \file{catalog-3.21.dat} & \texttt{1186b53c578dd14dcdb45edc556b95d1} & 28MB\\\bottomrule
 \end{tabular}
 
 The file can be placed in a folder named \file{nebulae/default} inside the \emph{user directory}
@@ -582,7 +582,8 @@ program when it is called via the command line. See table for a full list:
 -\/-single-buffer    & {[}none{]} & Use single-buffering. This reportedly avoids screen blanking problems with some Intel GPUs. \\
 -\/-opengl-compat or -C & {[}none{]} & Request OpenGL 3.3 Compatibility Profile. Might fix graphics problems in some driver configurations.\\
 -\/-low-graphics or -L & {[}none{]} & Force low-graphics mode. May be useful on old GPUs that do support OpenGL 3.3 but perform too slowly.\\\midrule
--\/-no-audio          & {[}none{]} & Disable sound output (avoids initialisation problems on Virtual Machines or special builds).\\
+-\/-no-audio         & {[}none{]} & Disable sound output (avoids initialisation problems on Virtual Machines or special builds).\\\midrule
+-\/-no-screensaver   & {[}none{]} & Disable screensaver and auto-sleep when in fullscreen mode (Windows only).\\\midrule
 \bottomrule
 \end{longtable}
 

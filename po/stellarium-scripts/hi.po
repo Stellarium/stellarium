@@ -3,14 +3,18 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# राजಐயர், 2023
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-09-30 13:16+0700\n"
-"PO-Revision-Date: 2019-01-19 14:25+0000\n"
-"Language-Team: Hindi (https://www.transifex.com/stellarium/teams/80998/hi/)\n"
+"POT-Creation-Date: 2025-10-01 11:51+0700\n"
+"PO-Revision-Date: 2022-10-05 14:25+0000\n"
+"Last-Translator: राजಐயர், 2023\n"
+"Language-Team: Hindi (https://app.transifex.com/stellarium/teams/80998/hi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,11 +23,11 @@ msgstr ""
 
 #: scripts/analemma.ssc:17
 msgid "Analemma"
-msgstr ""
+msgstr "सूर्य समघडी वार्षिक पदचिह्न"
 
 #: scripts/analemma.ssc:41
 msgid "Week"
-msgstr ""
+msgstr "वार"
 
 #: scripts/analemma.ssc:47
 msgid "Near winter solstice"
@@ -48,7 +52,7 @@ msgstr ""
 
 #: scripts/best_ngc.ssc:26
 msgid "Best objects in the New General Catalog"
-msgstr ""
+msgstr "उत्तम वस्तुएँ नया सामान्य सूचीपत्र में"
 
 #: scripts/best_ngc.ssc:42
 msgid "Object #"
@@ -590,7 +594,7 @@ msgstr ""
 
 #: scripts/binocular_highlights.ssc:125
 msgid "Binocular Highlights"
-msgstr ""
+msgstr "द्विनेत्री विशेषताएँ"
 
 #: scripts/binocular_highlights.ssc:126
 msgid "Look through the Meade 10x50 TravelView Binocular"
@@ -598,7 +602,7 @@ msgstr ""
 
 #: scripts/binosky.ssc:19
 msgid "Binosky: Deep Sky Objects for Binoculars"
-msgstr ""
+msgstr "द्विनाकाश : गहनाकाश वस्तुएँ दूरदर्शक के लिए "
 
 #: scripts/double_stars.ssc:28
 msgid "Asterope (21 Tauri and 22 Tauri)"
@@ -819,7 +823,7 @@ msgstr ""
 
 #: scripts/martian_analemma.ssc:17
 msgid "Martian analemma"
-msgstr ""
+msgstr "मंगल समघडी वार्षिक पदचिह्न"
 
 #: scripts/martian_analemma.ssc:42
 msgid "Sol"
@@ -862,7 +866,7 @@ msgstr ""
 #: scripts/morsels_1.ssc:78 scripts/morsels_2.ssc:99 scripts/morsels_3.ssc:63
 #: scripts/morsels_4.ssc:82
 msgid "Date:"
-msgstr ""
+msgstr "दिनांक : "
 
 #: scripts/morsels_1.ssc:79
 msgid "Time:"
@@ -870,7 +874,7 @@ msgstr ""
 
 #: scripts/morsels_2.ssc:76
 msgid "Jupiter without Galilean satellites"
-msgstr ""
+msgstr "बृहस्पति बिना गलिलेयो के उपग्रह"
 
 #: scripts/morsels_2.ssc:100
 msgid "Limits of the disappearance:"
@@ -878,11 +882,11 @@ msgstr ""
 
 #: scripts/morsels_3.ssc:50
 msgid "Occultations of bright stars by planets"
-msgstr ""
+msgstr "उज्ज्वल तारों का प्रच्छादन ग्रहों से"
 
 #: scripts/morsels_4.ssc:68
 msgid "Mutual occultations of planets"
-msgstr ""
+msgstr "ग्रहों का परस्पर प्रच्छादन"
 
 #: scripts/supernova.ssc:23
 msgid "Europe, Uraniborg."
@@ -1226,8 +1230,8 @@ msgstr ""
 msgid "Solar radii"
 msgstr ""
 
-#: scripts/constellations_tour.ssc:19
-#: scripts/western_constellations_tour.ssc:22
+#: scripts/constellations_tour.ssc:32
+#: scripts/modern_constellations_tour.ssc:32
 msgid "Press Ctrl+T to un-hide the toolbar"
 msgstr ""
 
@@ -1245,7 +1249,7 @@ msgstr ""
 
 #: scripts/triple_sunrise_and_sunsets.ssc:57
 msgid "Day"
-msgstr ""
+msgstr "दिन"
 
 #: scripts/triple_sunrise_and_sunsets.ssc:92
 msgid "Sunrise #1"
@@ -1281,7 +1285,7 @@ msgstr ""
 
 #: scripts/saturnian_analemma.ssc:17
 msgid "Saturnian analemma"
-msgstr ""
+msgstr "शनि समघडी वार्षिक पदचिह्न"
 
 #: scripts/saturnian_analemma.ssc:42 scripts/uranian_analemma.ssc:42
 msgid "Solar day"
@@ -1289,11 +1293,11 @@ msgstr ""
 
 #: scripts/uranian_analemma.ssc:17
 msgid "Uranian analemma"
-msgstr ""
+msgstr "अरुण समघडी वार्षिक पदचिह्न"
 
 #: scripts/messier_marathon.ssc:18
 msgid "Messier Marathon"
-msgstr ""
+msgstr "मेस्सियेर दौड"
 
 #: scripts/messier_marathon.ssc:85
 msgid "Difficulty is 0"

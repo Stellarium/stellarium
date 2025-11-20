@@ -33,6 +33,7 @@
 #include <QKeyEvent>
 #include <QFileInfo>
 #include <QFont>
+#include <QMetaType>
 
 CustomObjectMgr::CustomObjectMgr()
 	: countMarkers(0)
@@ -175,10 +176,48 @@ void CustomObjectMgr::loadPersistentObjects()
 		QVariantMap pcoMap = map.value("customObjects").toMap();
 		for (auto it=pcoMap.cbegin(), end=pcoMap.cend(); it!=end; ++it)
 		{
-			Vec3d coordinates(it.value().toString());
+			Vec3d coordinates;
+			QString objectType = N_("custom object");  // default type
+			// Handle both old format (string) and new format (map with coordinates and type)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+			if (it.value().typeId() == QMetaType::QString)
+			{
+				// Old format: just coordinates as string
+				coordinates = Vec3d(it.value().toString());
+			}
+			else if (it.value().typeId() == QMetaType::QVariantMap)
+			{
+				// New format: map with coordinates and type
+				QVariantMap objData = it.value().toMap();
+				coordinates = Vec3d(objData.value("coordinates").toString());
+				if (objData.contains("type"))
+					objectType = objData.value("type").toString();
+			}
+#else
+			if (it.value().type() == QVariant::String)
+			{
+				// Old format: just coordinates as string
+				coordinates = Vec3d(it.value().toString());
+			}
+			else if (it.value().type() == QVariant::Map)
+			{
+				// New format: map with coordinates and type
+				QVariantMap objData = it.value().toMap();
+				coordinates = Vec3d(objData.value("coordinates").toString());
+				if (objData.contains("type"))
+					objectType = objData.value("type").toString();
+			}
+#endif
+			else
+			{
+				continue;  // Skip invalid entries
+			}		
 			CustomObjectP custObj(new CustomObject(it.key(), coordinates, false));
 			if (custObj->initialized)
+			{
+				custObj->objectType = objectType;
 				persistentObjects.append(custObj);
+			}
 		}
 	}
 	else
@@ -191,13 +230,15 @@ void CustomObjectMgr::savePersistentObjects()
 	dataFile.setFileName(persistentCOFile);
 	if (dataFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
 	{
-		StelCore* core = StelApp::getInstance().getCore();
 		QVariantMap map, pcObjects;
 		for (const auto& cObj : std::as_const(persistentObjects))
 		{
 			if (cObj && cObj->initialized)
 			{
-				pcObjects[cObj->getID()] = cObj->getJ2000EquatorialPos(core).toStr();
+				QVariantMap objData;
+				objData["coordinates"] = cObj->XYZ.toStr();  // save using J2000 coordinates without aberration
+				objData["type"] = cObj->objectType;
+				pcObjects[cObj->getID()] = objData;
 			}
 		}
 		map["customObjects"] = pcObjects;
@@ -235,13 +276,19 @@ void CustomObjectMgr::removePersistentObjects()
 	emit StelApp::getInstance().getCore()->updateSearchLists();
 }
 
-void CustomObjectMgr::addPersistentObject(const QString& designation, Vec3d coordinates)
+void CustomObjectMgr::addPersistentObject(const QString& designation, Vec3d coordinates, const QString& objectType)
 {
 	if (!designation.isEmpty())
 	{
 		CustomObjectP custObj(new CustomObject(designation, coordinates, false));
 		if (custObj->initialized)
+		{
+			// Set custom object type if provided, otherwise use default
+			if (!objectType.isEmpty())
+				custObj->objectType = objectType;
+			
 			persistentObjects.append(custObj);
+		}
 
 		savePersistentObjects();
 		emit StelApp::getInstance().getCore()->updateSearchLists();
@@ -369,7 +416,10 @@ void CustomObjectMgr::drawPointer(StelCore* core, StelPainter& painter)
 		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
 		painter.setBlending(true);
-		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime()*40.));
+		const float angle = static_cast<float>(StelApp::getInstance().getAnimationTime()) * 40;
+		const float scale = StelApp::getInstance().getScreenScale();
+		const float radius = 13.f * scale;
+		painter.drawSprite2dMode(screenpos[0], screenpos[1], radius, angle);
 	}
 }
 

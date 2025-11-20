@@ -184,13 +184,20 @@ StelSkyCultureSkyPartition::~StelSkyCultureSkyPartition()
 //	if (centerLine) delete centerLine;
 }
 
+void StelSkyCultureSkyPartition::update(double deltaTime)
+{
+	static StelCore *core=StelApp::getInstance().getCore();
+	static SolarSystem *solSys=GETSTELMODULE(SolarSystem);
+	eclObl = solSys->getEarth()->getRotObliquity(core->getJDE());
+	centerLine->update(deltaTime);
+}
+
 
 void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVelocity)
 {
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
 	static StarMgr *starMgr=GETSTELMODULE(StarMgr);
 	static StelCore *core=StelApp::getInstance().getCore();
-	eclObl = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
 	StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	sPainter.setProjector(prj);
 	QFont font=QGuiApplication::font();

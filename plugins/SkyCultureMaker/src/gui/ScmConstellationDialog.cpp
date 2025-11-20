@@ -78,17 +78,19 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 	constellationNativeName    = constellation->getNativeName();
 	constellationPronounce     = constellation->getPronounce();
 	constellationIPA           = constellation->getIPA();
+	constellationDescription   = constellation->getDescription();
 
 	ui->enNameLE->setText(constellationEnglishName);
 	ui->idLE->setText(constellationId);
 	ui->natNameLE->setText(constellationNativeName.value_or(""));
 	ui->pronounceLE->setText(constellationPronounce.value_or(""));
 	ui->ipaLE->setText(constellationIPA.value_or(""));
+	ui->description->setText(constellationDescription);
 
 	// Hide the original constellation while editing
 	constellation->hide();
-	// Load the coordinates and stars to ScmDraw
-	maker->getScmDraw()->loadLines(constellation->getCoordinates(), constellation->getStars());
+	// Load the lines to ScmDraw
+	maker->getScmDraw()->loadLines(constellation->getLines());
 
 	// Loads the artwork
 	imageItem->setArtwork(constellation->getArtwork());
@@ -239,6 +241,8 @@ void ScmConstellationDialog::createDialogContent()
 				constellationIPA = std::nullopt;
 			}
 		});
+	connect(ui->description, &QTextEdit::textChanged, this,
+	        [this]() { constellationDescription = ui->description->toPlainText(); });
 }
 
 void ScmConstellationDialog::handleFontChanged()
@@ -442,7 +446,7 @@ bool ScmConstellationDialog::canConstellationBeSaved() const
 	}
 
 	// Check if drawnStars is empty
-	auto drawnConstellation = maker->getScmDraw()->getCoordinates();
+	auto drawnConstellation = maker->getScmDraw()->getConstellationLines();
 	if (drawnConstellation.empty())
 	{
 		maker->showUserErrorMessage(this->dialog, ui->titleBar->title(),
@@ -483,9 +487,8 @@ void ScmConstellationDialog::saveConstellation()
 {
 	if (canConstellationBeSaved())
 	{
-		auto coordinates = maker->getScmDraw()->getCoordinates();
-		auto stars       = maker->getScmDraw()->getStars();
-		QString id       = constellationId.isEmpty() ? constellationPlaceholderId : constellationId;
+		auto lines = maker->getScmDraw()->getConstellationLines();
+		QString id = constellationId.isEmpty() ? constellationPlaceholderId : constellationId;
 
 		scm::ScmSkyCulture *culture = maker->getCurrentSkyCulture();
 		assert(culture != nullptr); // already checked by canConstellationBeSaved
@@ -496,13 +499,14 @@ void ScmConstellationDialog::saveConstellation()
 			culture->removeConstellation(constellationBeingEdited->getId());
 		}
 
-		scm::ScmConstellation &constellation = culture->addConstellation(id, coordinates, stars,
+		scm::ScmConstellation &constellation = culture->addConstellation(id, lines,
 		                                                                 isDarkConstellation);
 
 		constellation.setEnglishName(constellationEnglishName);
 		constellation.setNativeName(constellationNativeName);
 		constellation.setPronounce(constellationPronounce);
 		constellation.setIPA(constellationIPA);
+		constellation.setDescription(constellationDescription);
 		if (imageItem->isVisible() && imageItem->getArtwork().getHasArt())
 		{
 			constellation.setArtwork(imageItem->getArtwork());
@@ -548,6 +552,9 @@ void ScmConstellationDialog::resetDialog()
 
 	constellationIPA = std::nullopt;
 	ui->ipaLE->clear();
+
+	constellationDescription.clear();
+	ui->description->clear();
 
 	ui->bind_star->setEnabled(false);
 	imageItem->hide();

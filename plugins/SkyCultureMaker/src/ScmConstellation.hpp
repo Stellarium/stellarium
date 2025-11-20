@@ -26,8 +26,7 @@
 
 #include "ScmConstellationArtwork.hpp"
 #include "VecMath.hpp"
-#include "types/CoordinateLine.hpp"
-#include "types/StarLine.hpp"
+#include "types/ConstellationLine.hpp"
 #include <StelCore.hpp>
 #include <optional>
 #include <variant>
@@ -42,8 +41,7 @@ namespace scm
 class ScmConstellation
 {
 public:
-	ScmConstellation(const QString &id, const std::vector<CoordinateLine> &coordinates,
-	                 const std::vector<StarLine> &stars, const bool isDarkConstellation);
+	ScmConstellation(const QString &id, const std::vector<ConstellationLine> &lines, const bool isDarkConstellation);
 
 	/// The frame that is used for calculation and is drawn on.
 	static const StelCore::FrameType drawFrame = StelCore::FrameJ2000;
@@ -111,6 +109,10 @@ public:
 	 */
 	std::optional<QString> getIPA() const;
 
+	void setDescription(const QString& description) { this->description = description; }
+
+	QString getDescription() const { return description; }
+
 	/**
 	 * @brief Sets the artwork.
 	 * 
@@ -126,27 +128,18 @@ public:
 	const ScmConstellationArtwork &getArtwork() const;
 
 	/**
-    * @brief Sets the coordinate lines and star lines of the constellation.
+    * @brief Sets the lines of the constellation.
     * 
-    * @param coordinates The coordinates of the constellation. 
-	* @param stars The equivalent stars to the coordinates.
+    * @param lines The lines of the constellation.
     */
-	void setConstellation(const std::vector<CoordinateLine> &coordinates, const std::vector<StarLine> &stars);
+	void setLines(const std::vector<ConstellationLine> &lines);
 
 	/**
-	 * @brief Gets the coordinates of the constellation.
+	 * @brief Gets the lines of the constellation.
 	 * 
-	 * @return The coordinates of the constellation.
+	 * @return The lines of the constellation.
 	 */
-	const std::vector<CoordinateLine> &getCoordinates() const;
-
-	/**
-	 * @brief Gets the stars of the constellation.
-	 * 
-	 * @return The stars of the constellation.
-	 */
-	const std::vector<StarLine> &getStars() const;
-
+	const std::vector<ConstellationLine> &getLines() const;
 	/**
 	 * @brief Draws the constellation based on the coordinates.
 	 *
@@ -183,9 +176,10 @@ public:
 	  * @brief Returns the constellation data as a JSON object.
 	  * 
 	  * @param skyCultureId The ID of the sky culture to which this constellation belongs.
+	  * @param mergeLines Whether to merge lines into polylines where possible.
 	  * @return QJsonObject 
 	  */
-	QJsonObject toJson(const QString &skyCultureId) const;
+	QJsonObject toJson(const QString &skyCultureId, const bool mergeLines) const;
 
 	/**
 	 * @brief Saves the artwork of this constellation, if art is attached, to the give filepath.
@@ -232,11 +226,11 @@ private:
 	/// References to the sources of the name spellings
 	std::optional<QVector<int>> references;
 
-	/// List of coordinates forming the segments.
-	std::vector<CoordinateLine> coordinates;
+	/// The lines forming the constellation
+	std::vector<ConstellationLine> lines;
 
-	/// List of stars forming the segments. Might be empty.
-	std::vector<StarLine> stars;
+	/// A short description of the constellation that could be shown in e.g. an info block.
+	QString description;
 
 	/// Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;
@@ -266,6 +260,28 @@ private:
 	 * @brief Updates the XYZname that is used for the text position.
 	 */
 	void updateTextPosition();
+
+	/**
+	 * @brief Merges individual star lines into polylines where possible.
+	 *
+	 * Merging is done in a two step process, where first the ends of lines are merged
+	 * with the starts of other lines if they match, and secondly the starts of lines are
+	 * merged with the ends of other lines if they match. The lines are processed in the order
+	 * they have been drawn. However, lines which point to opposite directions are not merged.
+	 * 
+	 * Example:
+	 * 
+	 * Input 1: [[1,2], [2,3], [0,1]]
+	 * 
+	 * Output 1: [[0,1,2,3]]
+	 * 
+	 * Input 2: [[1,2], [2,3], [1,0]]
+	 * 
+	 * Output 2: [[1,2,3], [1,0]]
+	 *
+	 * @param lines The individual star lines to merge.
+	 */
+	void mergeLinesIntoPolylines(QJsonArray &lines) const;
 };
 
 } // namespace scm

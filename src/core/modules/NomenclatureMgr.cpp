@@ -345,7 +345,12 @@ void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
 
 		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
-		painter.drawSprite2dMode(static_cast<float>(screenpos[0]), static_cast<float>(screenpos[1]), 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime()*40.));
+		const float x = screenpos[0];
+		const float y = screenpos[1];
+		const float angle = static_cast<float>(StelApp::getInstance().getAnimationTime()) * 40;
+		const float scale = StelApp::getInstance().getScreenScale();
+		const float radius = 13.f * scale;
+		painter.drawSprite2dMode(x, y, radius, angle);
 	}
 }
 

@@ -501,9 +501,10 @@ QString Planet::getScreenLabel() const
 }
 QString Planet::getInfoLabel() const
 {
+	static const QString ZWS{"\u200b"}; // zero-width space (we use them to combine cultural label groups)
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
 	QStringList list=getCultureLabels(scMgr->getInfoLabelStyle());
-	return list.isEmpty() ? getNameI18n() : list.join(" - ");
+	return list.isEmpty() ? getNameI18n() : list.join(ZWS + " - " + ZWS);
 }
 
 QStringList Planet::getCultureLabels(StelObject::CulturalDisplayStyle style) const
@@ -532,9 +533,11 @@ QStringList Planet::getCultureLabels(StelObject::CulturalDisplayStyle style) con
 QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const
 {
 	Q_UNUSED(core) Q_UNUSED(flags)
+	// rtl tracks the right-to-left status of the text in the current position.
+	const bool rtl = StelApp::getInstance().getLocaleMgr().isSkyRTL();
 	QString str;
 	QTextStream oss(&str);
-	oss << "<h2>";
+	oss << (rtl ? "<h2 dir=\"rtl\">" : "<h2 dir=\"ltr\">");
 
 	// NOTE: currently only moons have an IAU designation
 	if (!iauMoonNumber.isEmpty())

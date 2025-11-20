@@ -28,12 +28,10 @@
 #include "StelObjectMgr.hpp"
 #include "StelObjectType.hpp"
 #include "enumBitops.hpp"
-#include "types/CoordinateLine.hpp"
 #include "types/DrawTools.hpp"
 #include "types/Drawing.hpp"
 #include "types/DrawingMode.hpp"
-#include "types/Lines.hpp"
-#include "types/StarLine.hpp"
+#include "types/ConstellationLine.hpp"
 #include "types/SkyPoint.hpp"
 #include <cmath>
 #include <optional>
@@ -71,10 +69,10 @@ private:
 	DrawingMode drawingMode = DrawingMode::StarsAndDSO;
 
 	/// The current pending point.
-	std::tuple<CoordinateLine, StarLine> currentLine;
+	ConstellationLine currentLine;
 
-	/// The fixed points.
-	Lines drawnLines;
+	/// The constellations lines drawn by the user.
+	std::vector<ConstellationLine> drawnLines;
 
 	/// The current active tool.
 	DrawTools activeTool = DrawTools::None;
@@ -97,7 +95,7 @@ private:
 	 * @param point The coordinate in J2000 frame.
 	 * @param starID The id of the star to use.
 	 */
-	void appendDrawPoint(const Vec3d &point, const std::optional<QString> &starID);
+	void appendDrawPoint(const Vec3d &point, const QString &starID);
 
 	/**
 	 * @brief Indicates if two segments intersect.
@@ -177,24 +175,18 @@ public:
 	void undoLastLine();
 
 	/**
-	 * @brief Get the drawn stick figures as stars if available.
+	 * @brief Gets the lines of the constellation.
 	 *
-	 * @return std::vector<StarLine> The optional filled vector of stars matching the coordinates.
+	 * @return std::vector<ConstellationLine> The drawn constellation lines.
 	 */
-	std::vector<StarLine> getStars() const;
+	std::vector<ConstellationLine> getConstellationLines() const;
 
 	/**
-	 * @brief Get the drawn stick figures as coordinates.
+	 * @brief Loads constellation lines into the buffer.
 	 *
-	 * @return std::vector<CoordinateLine> The drawn coordinates.
+	 * @param lines The lines to load.
 	 */
-	std::vector<CoordinateLine> getCoordinates() const;
-
-	/**
-	 * @brief Loads lines into the buffer from a tuple of coordinates and stars.
-	 *
-	 */
-	void loadLines(const std::vector<CoordinateLine> &coordinates, const std::vector<StarLine> &stars);
+	void loadLines(const std::vector<ConstellationLine> &lines);
 
 	/**
 	 * @brief Set the active draw tool

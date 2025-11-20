@@ -288,6 +288,15 @@ private slots:
 	void fpsTimerUpdate();
 	void hideCursor();
 
+	//! Set inhibiting triggering screensaver/power save on entering fullscreen mode.
+	//! Connected via QTimer.
+	//! Activate via CLI flag --no-screensaver (or -F)
+	//! @note This is currently available on Windows only.
+	void disableScreensaver(bool fullscreen);
+	//! send OS signal to inhibit triggering screensaver/power save. (Connected via QTimer.)
+	//! @note This is currently working on Windows only.
+	void bumpScreensaver();
+
 #ifdef OPENGL_DEBUG_LOGGING
 	void logGLMessage(const QOpenGLDebugMessage& debugMessage);
 	void contextDestroyed();
@@ -305,7 +314,7 @@ private:
 	//! to provide feedback to the user about bad OpenGL drivers.
 	void processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLContext* context) const;
 	//! Get physical dimensions given the virtual dimensions for the screen where this window is located.
-	QRectF getPhysicalSize(const QRectF& virtualRect) const;
+	QRectF getPhysicalSize(const QRectF& virtualRect) const;	
 
 	//! The StelMainView singleton
 	static StelMainView* singleton;
@@ -353,6 +362,9 @@ private:
 	//! The minimum desired time between frames, in milliseconds.
 	int minTimeBetweenFrames;
 	QTimer* fpsTimer;
+
+	//! A timer that resets the screensaver when CLI option --no-screensaver (or -F) is given.
+	QTimer* screensaverInhibitorTimer;
 
 #ifdef OPENGL_DEBUG_LOGGING
 	QOpenGLDebugLogger* glLogger;

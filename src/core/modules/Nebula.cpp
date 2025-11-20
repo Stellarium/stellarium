@@ -22,6 +22,7 @@
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
 #include "Planet.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelTexture.hpp"
 
 #include "StelUtils.hpp"
@@ -240,12 +241,14 @@ QStringList Nebula::getCultureLabels(StelObject::CulturalDisplayStyle style) con
 
 QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
+	// rtl tracks the right-to-left status of the text in the current position.
+	const bool rtl = StelApp::getInstance().getLocaleMgr().isSkyRTL();
 	QString str;
 	QTextStream oss(&str);
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	if ((flags&Name) || (flags&CatalogNumber))
-		oss << "<h2>";
+		oss << (rtl ? "<h2 dir=\"rtl\">" : "<h2 dir=\"ltr\">");
 
 	if (!culturalNames.isEmpty() && flags&Name)
 		oss << getInfoLabel() << "<br/>";

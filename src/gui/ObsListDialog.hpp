@@ -27,6 +27,7 @@
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
 #include "StelObjectType.hpp"
+#include <QLoggingCategory>
 
 //! @class ObsListDialog
 //! Since V0.21.2, this class manages the ObservingLists, successor of the Bookmarks feature available since 0.15.
@@ -128,6 +129,9 @@
 
 class Ui_obsListDialogForm;
 
+Q_DECLARE_LOGGING_CATEGORY(ObsLists)
+
+
 class ObsListDialog : public StelDialog
 {
 	Q_OBJECT
@@ -224,7 +228,7 @@ private:
 	class LabelMgr *labelMgr;
 
 	QStandardItemModel *itemModel;       //!< Data for the table display.
-	const QString observingListJsonPath; //!< Path to observingList.json file, set once in constructor.
+	QString observingListJsonPath;       //!< Path to observingList.json file, set once in constructor, but can be changed later.
 	const QString bookmarksJsonPath;     //!< Path to bookmarks.json, set once in constructor.
 
 	//! This QVariantMap represents the contents of the observingList.json file. Read ONCE at start. Contains 4 key/value pairs:

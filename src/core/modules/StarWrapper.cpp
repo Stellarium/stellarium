@@ -22,6 +22,7 @@
  */
 
 #include "StarWrapper.hpp"
+#include "StelLocaleMgr.hpp"
 #include "ZoneArray.hpp"
 
 #include "StelUtils.hpp"
@@ -149,6 +150,8 @@ QString StarWrapper1::getObjectTypeI18n() const
 
 QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
+	// rtl tracks the right-to-left status of the text in the current position.
+	const bool rtl = StelApp::getInstance().getLocaleMgr().isSkyRTL();
 	QString str;
 	QTextStream oss(&str);
 	double az_app, alt_app;
@@ -172,7 +175,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	const int vMm = StarMgr::getGcvsMM(star_id);
 
 	if ((flags&Name) || (flags&CatalogNumber))
-		oss << "<h2>";
+		oss << (rtl ? "<h2 dir=\"rtl\">" : "<h2 dir=\"ltr\">");
 
 	const QString commonNameI18 = StarMgr::getCommonNameI18n(star_id);
 	const QString culturalInfoName=StarMgr::getCulturalInfoLabel(star_id);

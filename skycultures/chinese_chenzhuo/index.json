@@ -651,7 +651,7 @@
     },
     {
       "id": "CON chinese_chenzhuo 06F",
-      "lines": [[87616, 87616]],
+      "lines": [["DSO:M7", "DSO:M7"]],
       "common_name": {"english": "Fish", "native": "鱼", "pronounce": "Yu"}
     },
     {
@@ -672,7 +672,7 @@
     {
       "id": "CON chinese_chenzhuo 08A",
       "lines": [[89341, 90496, 92041, 92855, 93864, 93506]],
-      "common_name": {"english": "South Dipper", "native": "南斗", "pronounce": "Nan Dou"}
+      "common_name": {"english": "Southern Dipper", "native": "南斗", "pronounce": "Nan Dou"}
     },
     {
       "id": "CON chinese_chenzhuo 08B",
@@ -777,7 +777,7 @@
     {
       "id": "CON chinese_chenzhuo 10A",
       "lines": [[102618, 103045, 103005, 102624]],
-      "common_name": {"english": "Labor Women", "native": "须女", "pronounce": "Xu Nü"}
+      "common_name": {"english": "Working Woman", "native": "须女", "pronounce": "Xu Nü"}
     },
     {
       "id": "CON chinese_chenzhuo 10B",
@@ -922,7 +922,7 @@
     {
       "id": "CON chinese_chenzhuo 12A",
       "lines": [[109074, 109427, 107315], [109427, 110672]],
-      "common_name": {"english": "Rooftop", "native": "危宿", "pronounce": "Wei"}
+      "common_name": {"english": "Rooftop", "native": "危", "pronounce": "Wei"}
     },
     {
       "id": "CON chinese_chenzhuo 12B",
@@ -1071,7 +1071,7 @@
     },
     {
       "id": "CON chinese_chenzhuo 15A",
-      "lines": [[3693, 3031, 3092, 2912, 2942, 3231, 3333, 3881, 4436, 5447, 5544, 5586, 6193, 5742, 5131, 4463, 3693]],
+      "lines": [[3693, 3031, 3092, 2912, 2942, 3231, "DSO:M31", 3881, 4436, 5447, 5544, 5586, 6193, 5742, 5131, 4463, 3693]],
       "common_name": {"english": "Legs", "native": "奎", "pronounce": "Kui Xiu"}
     },
     {
@@ -1147,7 +1147,7 @@
     {
       "id": "CON chinese_chenzhuo 17A",
       "lines": [[12719, 13061, 13209]],
-      "common_name": {"english": "Stomach", "native": "胃宿", "pronounce": "Wei"}
+      "common_name": {"english": "Stomach", "native": "胃", "pronounce": "Wei"}
     },
     {
       "id": "CON chinese_chenzhuo 17B",
@@ -1362,7 +1362,7 @@
     {
       "id": "CON chinese_chenzhuo 22A",
       "lines": [[35350, 34088, 32921, 32246], [32921, 30883, 30343], [30883, 31681, 34088], [31681, 32362], [30343, 29655]],
-      "common_name": {"english": "East Well", "native": "东井", "pronounce": "Dong Jing"}
+      "common_name": {"english": "Eastern Well", "native": "东井", "pronounce": "Dong Jing"}
     },
     {
       "id": "CON chinese_chenzhuo 22B",
@@ -1466,7 +1466,7 @@
     },
     {
       "id": "CON chinese_chenzhuo 23B",
-      "lines": [[42578, 42578]],
+      "lines": [["DSO:M44", "DSO:M44"]],
       "common_name": {"english": "Cumulative Corpse (In Cabin Ghosts)", "native": "积尸（舆鬼）", "pronounce": "Ji Shi"}
     },
     {
@@ -1596,7 +1596,7 @@
     "context": "chinese lunar mansion",
     "name": { "native": "二十八宿", "pronounce": "Xiù", "english": "Lunar Mansion"},
     "defining_stars": [65474, 69427, 72622, 78265, 80112, 82514, 88635, 92041, 100345, 102618, 106278, 109074, 113963, 1067,
-                       4463, 8903, 12719, 17499, 20889, 26207, 26727, 30343, 41822, 42313, 46390, 48356, 53740, 59803],
+                       3693, 8903, 12719, 17499, 20889, 26176, 25930, 30343, 41822, 42313, 46390, 48356, 53740, 59803],
     "coordsys": "equatorial",
     "extent": 90,
     "names":    [ { "symbol":  "1", "native": "角", "pronounce": "Jiǎo", "english": "Horn"},
@@ -1606,24 +1606,24 @@
                   { "symbol":  "5", "native": "心", "pronounce": "Xīn", "english": "Heart"},
                   { "symbol":  "6", "native": "尾", "pronounce": "Wěi", "english": "Tail"},
                   { "symbol":  "7", "native": "箕", "pronounce": "Jī", "english": "Winnowing Basket"},
-                  { "symbol":  "8", "native": "斗", "pronounce": "Dǒu", "english": "Dipper"},
-                  { "symbol":  "9", "native": "牛", "pronounce": "Niú", "english": "Ox"},
-                  { "symbol": "10", "native": "女", "pronounce": "Nǚ", "english": "Girl"},
+                  { "symbol":  "8", "native": "南斗", "pronounce": "Nándǒu", "english": "Southern Dipper"},
+                  { "symbol":  "9", "native": "牽牛", "pronounce": "Qiānniú", "english": "Leading Ox"},
+                  { "symbol": "10", "native": "須女", "pronounce": "Xūnǚ", "english": "Working Woman"},
                   { "symbol": "11", "native": "虛", "pronounce": "Xū", "english": "Emptiness"},
                   { "symbol": "12", "native": "危", "pronounce": "Wēi", "english": "Rooftop"},
-                  { "symbol": "13", "native": "室", "pronounce": "Shì", "english": "Encampment"},
-                  { "symbol": "14", "native": "壁", "pronounce": "Bì", "english": "Wall"},
+                  { "symbol": "13", "native": "營室", "pronounce": "Yíngshì", "english": "Military Encampment"},
+                  { "symbol": "14", "native": "東壁", "pronounce": "Dōngbì", "english": "Eastern Wall"},
                   { "symbol": "15", "native": "奎", "pronounce": "Kuí", "english": "Legs"},
                   { "symbol": "16", "native": "婁", "pronounce": "Lóu", "english": "Bond"},
                   { "symbol": "17", "native": "胃", "pronounce": "Wèi", "english": "Stomach"},
                   { "symbol": "18", "native": "昴", "pronounce": "Mǎo", "english": "Hairy Head"},
                   { "symbol": "19", "native": "畢", "pronounce": "Bì", "english": "Net"},
-                  { "symbol": "20", "native": "觜", "pronounce": "Zī", "english": "Turtle Beak"},
+                  { "symbol": "20", "native": "觜觿", "pronounce": "Zīxī", "english": "Beak"},
                   { "symbol": "21", "native": "参", "pronounce": "Shēn", "english": "Three Stars"},
-                  { "symbol": "22", "native": "井", "pronounce": "Jǐng", "english": "Well"},
-                  { "symbol": "23", "native": "鬼", "pronounce": "Guǐ", "english": "Ghost"},
+                  { "symbol": "22", "native": "東井", "pronounce": "Dōngjǐng", "english": "Eastern Well"},
+                  { "symbol": "23", "native": "舆鬼", "pronounce": "Yúguǐ", "english": "Cabin Ghosts"},
                   { "symbol": "24", "native": "柳", "pronounce": "Liǔ", "english": "Willow"},
-                  { "symbol": "25", "native": "星", "pronounce": "Xīng", "english": "Star"},
+                  { "symbol": "25", "native": "七星", "pronounce": "Qīxīng", "english": "Seven Stars"},
                   { "symbol": "26", "native": "張", "pronounce": "Zhāng", "english": "Extended Net"},
                   { "symbol": "27", "native": "翼", "pronounce": "Yì", "english": "Wings"},
                   { "symbol": "28", "native": "軫", "pronounce": "Zhěn", "english": "Chariot"}]},
@@ -1631,9 +1631,9 @@
     "HIP 746": [{"english": "Wang Liang", "native": "王良", "pronounce": "Wangliang"}],
     "HIP 2599": [{"english": "Whip", "native": "策", "pronounce": "Ce"}],
     "HIP 3419": [{"english": "Master of Constructions", "native": "土司空[奎宿]", "pronounce": "Tusikong"}],
+    "HIP 5361": [{"english": "Auxiliary Road", "native": "附路", "pronounce": "Fulu"}],
     "HIP 5372": [{"english": "Great Emperor of Heaven", "native": "天皇大帝", "pronounce": "Tianhuangdadi"}],
     "HIP 5434": [{"english": "Southern Military Gate", "native": "军南门", "pronounce": "Junnanmen"}],
-    "HIP 6686": [{"english": "Auxiliary Road", "native": "附路", "pronounce": "Fulu"}],
     "HIP 13879": [{"english": "Heap of Corpses", "native": "积尸[胃宿]", "pronounce": "Jishi"}],
     "HIP 17886": [{"english": "Celestial Slander", "native": "天谗", "pronounce": "Tianchan"}],
     "HIP 19167": [{"english": "Stored Water", "native": "积水[胃宿]", "pronounce": "Jishui"}],
@@ -1823,12 +1823,12 @@
     "M 44": [{"english": "Cumulative Corpse Gas", "native": "积尸气", "pronounce": "Ji Shi Qi"}],
     "M 45": [{"english": "Hairy Head", "native": "旄头", "pronounce": "Mao Tou"}],
     "M 7": [{"english": "Fish", "native": "鱼", "pronounce": "Yu"}],
-    "NAME Jupiter": [{"english": "Jupiter", "pronounce": "Sui Star", "native": "岁星"}],
-    "NAME Mars": [{"english": "Mars", "pronounce": "Yinghuo", "native": "荧惑"}],
-    "NAME Mercury": [{"english": "Mercury", "pronounce":"Chen Star", "native": "辰星"}],
-    "NAME Moon": [{"english": "Moon", "pronounce": "Taiyin", "native": "太阴"}],
-    "NAME Saturn": [{"english": "Saturn", "pronounce": "Zhen Star", "native": "填星"}],
-    "NAME Sun": [{"english": "Sun", "pronounce": "Taiyang", "native": "太阳"}],
-    "NAME Venus": [{"english": "Venus", "pronounce": "Taibai", "native": "太白"}]
+    "NAME Jupiter": [{"english": "Year Star", "pronounce": "Suixing", "native": "岁星"}],
+    "NAME Mars": [{"english": "Spark-Weaver", "pronounce": "Yinghuo", "native": "荧惑"}],
+    "NAME Mercury": [{"english": "Division Star", "pronounce": "Chenxing", "native": "辰星"}],
+    "NAME Moon": [{"english": "Great Yin", "pronounce": "Taiyin", "native": "太阴"}],
+    "NAME Saturn": [{"english": "Stabilizer Star", "pronounce": "Zhenxing", "native": "填星"}],
+    "NAME Sun": [{"english": "Great Yang", "pronounce": "Taiyang", "native": "太阳"}],
+    "NAME Venus": [{"english": "Grand White", "pronounce": "Taibai", "native": "太白"}]
   }
 }

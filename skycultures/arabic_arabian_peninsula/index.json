@@ -2,7 +2,9 @@
   "id": "arabic_arabian_peninsula",
   "region": "Western Asia",
   "classification": ["traditional"],
-  "fallback_to_international_names": false,
+  "langs_use_native_names": ["ar"],
+  "native_lang": "ar",
+  "highlight": "CON arabic_arabian_peninsula Jwza",
   "constellations": [
     {
       "id": "CON arabic_arabian_peninsula Hjzn",
@@ -41,7 +43,7 @@
     {
       "id": "CON arabic_arabian_peninsula Shda",
       "lines": [[746, 3179, 4427, 6686, 8886]],
-      "common_name": {"english": "The Saddle Of The Camel", "native": "الشداد", "pronounce": "al-Shdād", "transliteration": "al-Šdād", "IPA": "aʃ.ʃdaːd", "references": [1]}
+      "common_name": {"english": "Saddle Of The Camel", "native": "الشداد", "pronounce": "al-Shdād", "transliteration": "al-Šdād", "IPA": "aʃ.ʃdaːd", "references": [1]}
     },
     {
       "id": "CON arabic_arabian_peninsula Migz",
@@ -188,7 +190,7 @@
     {
       "id": "CON arabic_arabian_peninsula SDab",
       "lines": [[100064, 100310, 100345]],
-	  "label_positions": [[20.25,-14.0]],
+      "label_positions": [[20.25,-14.0]],
       "common_name": {"english": "The Lucky Star Of The Slaughterer", "native": "سعد الذابح", "pronounce": "Sa'd al-Dhābih", "transliteration": "Saʿd al-Ḏābiḥ", "IPA": "saʕd.að.ðaː.biħ", "references": [2]}
     },
     {
@@ -228,7 +230,7 @@
       "id": "CON arabic_arabian_peninsula Zbn1",
       "lines": [[25336, 27989]],
       "label_offset": [2.0,2.0],
-      "common_name": {"english": "Claws Of Al-Jawza", "native": "الزبَّن", "pronounce": "al-Zibban", "transliteration": "al-Zibban", "IPA": "az.zib.ban", "references": [1], "translators_comments": "Al-Jawza is a proper name"}
+      "common_name": {"english": "The Claws", "native": "الزبَّن", "pronounce": "al-Zibban", "transliteration": "al-Zibban", "IPA": "az.zib.ban", "references": [1]}
     },
     {
       "id": "CON arabic_arabian_peninsula ZwJ2",
@@ -239,7 +241,7 @@
       "id": "CON arabic_arabian_peninsula Zbn1",
       "lines": [[24436, 27366]],
       "label_offset": [2.0,2.0],
-      "common_name": {"english": "Claws Of Al-Jawza", "native": "الزبَّن", "pronounce": "al-Zibban", "transliteration": "al-Zibban", "IPA": "az.zib.ban", "references": [1], "translators_comments": "Al-Jawza is a proper name"}
+      "common_name": {"english": "The Claws", "native": "الزبَّن", "pronounce": "al-Zibban", "transliteration": "al-Zibban", "IPA": "az.zib.ban", "references": [1]}
     },
     {
       "id": "CON arabic_arabian_peninsula ZaJa",
@@ -291,7 +293,7 @@
               { "symbol": "26", "english": "The Bucket Cord", "native": "الرشا", "pronounce": "al-Rshā", "transliteration": "al-Ršā", "IPA": "ar.rʃaː", "references": [2]},
               { "symbol": "27", "english": "The Two Marks", "native": "الشرطين", "pronounce": "al-Shartain", "transliteration": "al-Šarṭain", "IPA": "aʃ.ʃar.tˤeːn", "references": [2]},
               { "symbol": "28", "english": "The Little Abdomen", "native": "البطين", "pronounce": "al-Btain", "transliteration": "al-Bṭain", "IPA": "al.btˤeːn", "references": [2]}
-			 ]},
+             ]},
   "common_names": {
     "HIP 677": [{"english": "The Rear 2", "native": "الموخر 2", "pronounce": "al-Mwakhkhar", "transliteration": "al-Mwaḫḫar", "IPA": "al.mwax.xar", "references": [2]}],
     "HIP 1067": [{"english": "The Rear 1", "native": "الموخر 1", "pronounce": "al-Mwakhkhar", "transliteration": "al-Mwaḫḫar", "IPA": "al.mwax.xar", "references": [2]}],

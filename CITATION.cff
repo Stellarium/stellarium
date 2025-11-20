@@ -17,9 +17,7 @@ authors:
     orcid: 'https://orcid.org/0000-0002-2047-089X'
   - family-names: Zotti
     given-names: Georg
-    affiliation: >-
-      Ludwig Boltzmann Institute for Archaeological
-      Prospection and Virtual Archaeology
+    affiliation: Vienna Research Center for Visual Computing
     orcid: 'https://orcid.org/0000-0002-8152-0408'
   - given-names: Susanne
     family-names: Hoffmann
@@ -29,8 +27,11 @@ authors:
     orcid: 'https://orcid.org/0000-0001-5384-7545'
   - given-names: Ruslan
     family-names: Kabatsayev
+    affiliation: Stellarium Labs
   - given-names: Worachate
     family-names: Boonplod
+  - family-names: Leung
+    given-names: Henry
   - family-names: Chéreau
     given-names: Guillaume
     affiliation: Noctua Software
@@ -42,7 +43,7 @@ identifiers:
 repository-code: 'https://github.com/Stellarium/stellarium'
 url: 'https://stellarium.org/'
 repository-artifact: >-
-  https://github.com/Stellarium/stellarium/releases/tag/v25.2
+  https://github.com/Stellarium/stellarium/releases/tag/v25.3
 abstract: >-
   Stellarium is a free open source planetarium for your
   computer. It shows a realistic sky in 3D, just like what
@@ -54,6 +55,6 @@ keywords:
   - universe
   - sky
 license: GPL-2.0-or-later
-commit: 43ada02db1e2c0a1fba4c254fba54c4bbfa71ac6
-version: '25.2'
-date-released: '2025-06-22'
+commit: f9d9c26ac3aaea4e7d5fa9c76d9b8b87489f4bb0
+version: '25.3'
+date-released: '2025-09-29'

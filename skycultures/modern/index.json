@@ -1540,7 +1540,7 @@
     {
       "id": "CON modern Ser",
       "lines": [[79593, 77516, 77622, 77070, 76276, 77233, 78072, 77450, 77233], [92946, 90441, 89962, 88670, 88048, 86565, 86263, 84880]],
-      "common_name": {"english": "Serpent", "native": "Serpens"},
+      "common_name": {"english": "Serpent", "native": "Serpens", "context": "IAU constellation name"},
       "label_positions": [[15.8, 10.5], [18.333, -2.0]]
     },
     {
@@ -1672,7 +1672,7 @@
     {
       "id": "CON modern Vel",
       "lines": [[39953, 42536, 42913, 45941, 48774, 52727, 51986, 50191, 46651, 44816, 39953]],
-      "common_name": {"english": "Sails", "native": "Vela"}
+      "common_name": {"english": "Sails", "native": "Vela", "context": "IAU constellation name"}
     }
   ],
   "zodiac": { "name": { "native": "Zodiacus", "english": "Zodiac"},
@@ -3113,7 +3113,7 @@
     "HIP 73473": [{"native": "Zuben Elakribi", "english": "Zuben Elakribi", "references": [10,37]},
                   {"native": "Mulu-Lizi", "english": "Mulu-Lizi", "references": [37]}],
     "HIP 73555": [{"native": "Nekkar", "english": "Nekkar", "references": [1,2,6,11,12,23]}],
-    "HIP 73714": [{"native": "Brachium", "english": "Arm", "references": [3,11,12,13]},
+    "HIP 73714": [{"native": "Brachium", "english": "Brachium", "byname": "Arm", "references": [3,11,12,13]},
                   {"native": "Zuben Acrabi", "english": "Zuben Acrabi", "references": [11]},
                   {"native": "Cornu", "english": "Cornu"}],
     "HIP 73745": [{"native": "Aulad Alnathlat", "english": "Aulad Alnathlat", "references": [11]}],
@@ -3163,11 +3163,14 @@
     "HIP 78322": [{"native": "Blaze Star", "english": "Blaze Star", "references": [11,18]}],
     "HIP 78401": [{"native": "Dschubba", "english": "Dschubba", "references": [1,2,6,11,12,13,18,23,37]},
                   {"native": "Iclarkrau", "english": "Iclarkrau", "references": [37]}],
-    "HIP 78727": [{"native": "Grafias", "english": "Grafias", "references": [10,11,37]},
-                  {"native": "Grassias", "english": "Grassias"}],
+    "HIP 78727": [{"native": "Grafias", "english": "Grafias", "references": [10,37]},
+                  {"native": "Grassias", "english": "Grassias", "references": [11]}],
     "HIP 78820": [{"native": "Acrab", "english": "Acrab", "references": [1,2,5,6,10,11,12,23]},
-                  {"native": "Graffias", "english": "Graffias", "references": [18]},
-                  {"native": "Akrab", "english": "Akrab", "references": [18]}],
+                  {"native": "Graffias", "english": "Graffias", "references": [10,18]},
+                  {"native": "Grafias", "english": "Grafias", "references": [10]},
+                  {"native": "Grassias", "english": "Grassias", "references": [10]},
+                  {"native": "Elacrab", "english": "Elacrab", "references": [10]},
+                  {"native": "Akrab", "english": "Akrab", "references": [10,18]}],
     "HIP 78933": [{"native": "Jabhat Acrabi I", "english": "Jabhat Acrabi I", "references": [11]}],
     "HIP 78990": [{"native": "Jabhat Acrabi II", "english": "Jabhat Acrabi II", "references": [11]}],
     "HIP 79043": [{"native": "Marsic", "english": "Marsic", "references": [1,2,5,11,12]},

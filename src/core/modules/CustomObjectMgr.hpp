@@ -77,7 +77,8 @@ public:
 	//! Add persistent object on the sky
 	//! @param designation - designation of custom object
 	//! @param coordinates - coordinates of custom object
-	void addPersistentObject(const QString& designation, Vec3d coordinates);
+	//! @param objectType - type of custom object (default: "custom object")
+	void addPersistentObject(const QString& designation, Vec3d coordinates, const QString& objectType = "");
 
 	//! Remove all persistent objects
 	void removePersistentObjects();

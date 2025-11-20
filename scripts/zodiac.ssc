@@ -4,12 +4,12 @@
 // Version: 1.3
 // Description: This script displays the constellations of the Zodiac.
 //              That means the constellations which lie along the line which
-//              the Sun traces across the celestial sphere over the course 
+//              the Sun traces across the celestial sphere over the course
 //              of a year.
-//              Label style is forced to be "Native,Translated,Modern" regardless of user setting,
+//              Label style is forced to be 'Native,Translated,Modern' regardless of user setting,
 //              unless environment variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true.
-//              It ends with changes in skyculture (if not disabled by env. var.), labeling style, 
-//              and shows constellation figures, boundaries and ecliptic. 
+//              It ends with changes in skyculture (if not disabled by env. var.), labeling style,
+//              and shows constellation figures, boundaries and ecliptic.
 
 var obey_skyculture_preference = (core.getEnv("STEL_SCRIPT_OBEY_SKYCULTURE_STYLE") == "1");
 

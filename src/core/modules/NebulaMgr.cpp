@@ -894,16 +894,19 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 
 		// Size on screen
 		float screenRd = static_cast<float>(obj->getAngularRadius(core))*M_PI_180f*prj->getPixelPerRadAtCenter();
-		if (screenRd>120.f) // avoid oversized marker
-			screenRd = 120.f;
+		const float scale = StelApp::getInstance().getScreenScale();
+		if (screenRd > 120 * scale) // avoid oversized marker
+			screenRd = 120 * scale;
 
 		if (Nebula::drawHintProportional)
 			screenRd*=1.2f;
-		screenRd+=20.f + 10.f*std::sin(3.f * static_cast<float>(StelApp::getInstance().getAnimationTime()));
-		sPainter.drawSprite2dMode(static_cast<float>(pos[0])-screenRd*0.5f, static_cast<float>(pos[1])-screenRd*0.5f, 10, 90);
-		sPainter.drawSprite2dMode(static_cast<float>(pos[0])-screenRd*0.5f, static_cast<float>(pos[1])+screenRd*0.5f, 10, 0);
-		sPainter.drawSprite2dMode(static_cast<float>(pos[0])+screenRd*0.5f, static_cast<float>(pos[1])+screenRd*0.5f, 10, -90);
-		sPainter.drawSprite2dMode(static_cast<float>(pos[0])+screenRd*0.5f, static_cast<float>(pos[1])-screenRd*0.5f, 10, -180);
+		screenRd += (20.f + 10.f*std::sin(3.f * static_cast<float>(StelApp::getInstance().getAnimationTime()))) * scale;
+		const float radius = 10 * scale;
+		const float x = pos[0], y = pos[1];
+		sPainter.drawSprite2dMode(x-screenRd*0.5f, y-screenRd*0.5f, radius, 90);
+		sPainter.drawSprite2dMode(x-screenRd*0.5f, y+screenRd*0.5f, radius, 0);
+		sPainter.drawSprite2dMode(x+screenRd*0.5f, y+screenRd*0.5f, radius, -90);
+		sPainter.drawSprite2dMode(x+screenRd*0.5f, y-screenRd*0.5f, radius, -180);
 	}
 }
 

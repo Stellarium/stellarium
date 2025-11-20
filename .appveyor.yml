@@ -57,22 +57,14 @@ environment:
 #    exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
 #    exiv2baseName: exiv2-0.28.0-2019msvc64
 #    scConverterEnabled: false
-#  - BUILD_NAME: Arm64 Qt6.5
-#    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-#    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
-#    QT_VERSION_MAJOR: 6
-#    QT_BASEDIR: C:\Qt\6.5\msvc2019_arm64
-#    CMAKE_GENERATOR: Visual Studio 17 2022
-#    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.5\msvc2019_64 -DQt6LinguistTools_DIR=C:\Qt\6.5\msvc2019_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
-#    scConverterEnabled: false
-#  - BUILD_NAME: Arm64 Qt6.8
-#    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-#    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
-#    QT_VERSION_MAJOR: 6
-#    QT_BASEDIR: C:\Qt\6.8\msvc2022_arm64
-#    CMAKE_GENERATOR: Visual Studio 17 2022
-#    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.8\msvc2022_64 -DQt6LinguistTools_DIR=C:\Qt\6.8\msvc2022_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
-#    scConverterEnabled: false
+  - BUILD_NAME: Arm64 Qt6.8
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+    VSPATH: C:\Program Files\Microsoft Visual Studio\2022\Community\SDK\ScopeCppSDK\vc15\VC\bin
+    QT_VERSION_MAJOR: 6
+    QT_BASEDIR: C:\Qt\6.8\msvc2022_arm64
+    CMAKE_GENERATOR: Visual Studio 17 2022
+    CMAKE_ARGS: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:\Qt\6.8\msvc2022_64 -DQt6LinguistTools_DIR=C:\Qt\6.8\msvc2022_64\lib\cmake\Qt6LinguistTools -DENABLE_QTWEBENGINE=OFF
+    scConverterEnabled: false
 before_build:
   - set DEBUG_WINDEPLOYQT=false
   - set PUBLISH_BINARY=false
@@ -130,7 +122,7 @@ before_build:
 
   - cd c:\stellarium
   - mkdir build && cd build
-  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName% -DENABLE_MEDIA=On -DENABLE_PODIR=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
+  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName% -DENABLE_MEDIA=On -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
   - if [%PUBLISH_BINARY%]==[false] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName% -DENABLE_MEDIA=On -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
 
 build:
@@ -161,8 +153,8 @@ after_test:
   - if [%USE_MESA%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-%PKGARCH%.dll -FileName c:\stellarium-package\qtstuff\opengl32sw.dll
   - if [%USE_EXT_LIBSSL%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/%SSL%Win%BITS%.zip -FileName c:\stellarium-OpenSSL.zip
   - if [%USE_EXT_LIBSSL%]==[true] 7z e c:\stellarium-OpenSSL.zip -aoa -oc:\stellarium-package\qtstuff\
-  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/translations/translations.zip -FileName c:\translations.zip
-  - if [%PUBLISH_BINARY%]==[true] 7z e c:\translations.zip -spf -oc:\stellarium-package\share\stellarium\
+#  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/translations/translations.zip -FileName c:\translations.zip
+#  - if [%PUBLISH_BINARY%]==[true] 7z e c:\translations.zip -spf -oc:\stellarium-package\share\stellarium\
   - if [%PUBLISH_BINARY%]==[true] if NOT [%exiv2url%] == [] copy c:\%exiv2baseName%\bin\exiv2.dll c:\stellarium-package\bin\
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-installer
   - if [%USE_EXTRA_EXE%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target stellarium-patch-installer

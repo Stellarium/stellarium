@@ -69,7 +69,7 @@ Q_GLOBAL_STATIC(QStringList, objtype_array);
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always match the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 25;
+static const int StarCatalogFormatVersion = 26;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -432,7 +432,10 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 		sPainter.setColor(obj->getInfoColor());
 		texPointer->bind();
 		sPainter.setBlending(true);
-		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, static_cast<float>(StelApp::getInstance().getAnimationTime())*40.f);
+		const float angle = static_cast<float>(StelApp::getInstance().getAnimationTime()) * 40;
+		const float scale = StelApp::getInstance().getScreenScale();
+		const float radius = 13.f * scale;
+		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], radius, angle);
 	}
 }
 
@@ -800,8 +803,18 @@ void StarMgr::loadCultureSpecificNameForNamedObject(const QJsonArray& data, cons
 				continue;
 		}
 
-		StelObject::CulturalName cName{entry["native"].toString(), entry["pronounce"].toString(), trans.qTranslateStar(entry["pronounce"].toString()),
-					entry["transliteration"].toString(), entry["english"].toString(), trans.qTranslateStar(entry["english"].toString()), entry["IPA"].toString(), QString(), QString(), StelObject::CulturalNameSpecial::None};
+		const StelObject::CulturalName cName {
+			entry["native"].toString(),
+			entry["pronounce"].toString(),
+			trans.qTranslateStarPronounce(entry["pronounce"].toString()),
+			entry["transliteration"].toString(),
+			entry["english"].toString(),
+			trans.qTranslateStar(entry["english"].toString()),
+			entry["IPA"].toString(),
+			QString(),
+			QString(),
+			StelObject::CulturalNameSpecial::None
+		};
 
 		//if (culturalNamesMap.contains(HIP))
 		//	qInfo() << "Adding additional cultural name for HIP" << HIP << ":" <<  cName.native << "/" << cName.pronounceI18n << "/" << cName.translated;
@@ -2501,9 +2514,10 @@ QString StarMgr::getCulturalScreenLabel(StarId hip)
 //! When dealing with foreign skycultures, many users will want this to be longer, with more name components.
 QString StarMgr::getCulturalInfoLabel(StarId hip)
 {
+	static const QString ZWS{"\u200b"}; // zero-width space (we use them to combine cultural label groups)
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
 	QStringList list=getCultureLabels(hip, scMgr->getInfoLabelStyle());
-	return list.isEmpty() ? "" : list.join(" - ");
+	return list.isEmpty() ? "" : list.join(ZWS + " - " + ZWS);
 }
 
 QStringList StarMgr::getCultureLabels(StarId hip, StelObject::CulturalDisplayStyle style)

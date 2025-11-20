@@ -35,7 +35,6 @@
 #include "LandscapeMgr.hpp"
 #include "SpecificTimeMgr.hpp"
 #include "planetsephems/sidereal_time.h"
-#include "planetsephems/precession.h"
 
 #include <QRegularExpression>
 #include <QDebug>
@@ -59,13 +58,13 @@ Vec3d StelObject::getEquinoxEquatorialPosAuto(const StelCore* core) const
 }
 
 
-// Get observer local sidereal coordinate
+// Get observer-centered hour angle + declination (at current equinox)
 Vec3d StelObject::getSiderealPosGeometric(const StelCore* core) const
 {
 	return Mat4d::zrotation(-core->getLocalSiderealTime())* getEquinoxEquatorialPos(core);
 }
 
-// Get observer local sidereal coordinates, deflected by refraction
+// Get observer-centered hour angle + declination (at current equinox), deflected by refraction
 Vec3d StelObject::getSiderealPosApparent(const StelCore* core) const
 {
 	Vec3d v=getAltAzPosApparent(core); // These already come with refraction!
@@ -321,7 +320,7 @@ float StelObject::getVMagnitudeWithExtinction(const StelCore* core, const float 
 {
 	Vec3d altAzPos = getAltAzPosGeometric(core);
 	altAzPos.normalize();
-	float vMag = (knownVMag>-1000.f ? knownVMag : getVMagnitude(core) + magoffset);
+	float vMag = (knownVMag>-1000.f ? knownVMag + magoffset : getVMagnitude(core) + magoffset);
 	// without the test, planets flicker stupidly in fullsky atmosphere-less view.
 	if (core->getSkyDrawer()->getFlagHasAtmosphere())
 		core->getSkyDrawer()->getExtinction().forward(altAzPos, &vMag);
@@ -348,7 +347,7 @@ QString StelObject::getMagnitudeInfoString(const StelCore *core, const InfoStrin
 	if (flags&Magnitude)
 	{
 		float mag = getVMagnitude(core);
-		QString str = QString("%1: <b>%2</b>").arg(q_("Magnitude"), QString::number(getVMagnitude(core) + magoffset, 'f', decimals));
+		QString str = QString("%1: <b>%2</b>").arg(q_("Magnitude"), QString::number(mag + magoffset, 'f', decimals));
 		const float airmass = getAirmass(core);
 		if (airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
 			str += QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core, mag, magoffset), 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
@@ -371,6 +370,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	const bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
 	const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
 	const bool useSouthAzimuth = app.getFlagSouthAzimuthUsage();
+	const bool usePolarDistance = app.getFlagPolarDistanceUsage();
 	const bool withTables = app.getFlagUseFormattingOutput();
 	const bool withDesignations = app.getFlagUseCCSDesignation();
 	const QString cepoch = qc_("on date", "coordinates for current epoch");
@@ -401,13 +401,24 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	if (withTables)
 		res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 
-	// TRANSLATORS: Right ascension/Declination
-	const QString RADec = withDesignations ? QString("&alpha;/&delta;") : qc_("RA/Dec", "celestial coordinate system");
+	QString RADec;
+	if (usePolarDistance)
+	{
+		// TRANSLATORS: Right ascension/Polar distance
+		RADec = withDesignations ? QString("&alpha;/p") : qc_("RA/PD", "celestial coordinate system");
+	}
+	else
+	{
+		// TRANSLATORS: Right ascension/Declination
+		RADec = withDesignations ? QString("&alpha;/&delta;") : qc_("RA/Dec", "celestial coordinate system");
+	}
 
 	if (flags&RaDecJ2000)
 	{
 		double dec_j2000, ra_j2000;
 		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getJ2000EquatorialPos(core));
+		if (usePolarDistance)
+			dec_j2000 = M_PI_2 - dec_j2000;
 		if (withDecimalDegree)
 		{
 			firstCoordinate  = StelUtils::radToDecDegStr(ra_j2000,5,false,true);
@@ -431,6 +442,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	{
 		double dec_equ, ra_equ;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,eqNow);
+		if (usePolarDistance)
+			dec_equ = M_PI_2 - dec_equ;
 		if (withDecimalDegree)
 		{
 			firstCoordinate  = StelUtils::radToDecDegStr(ra_equ,5,false,true);
@@ -452,46 +465,39 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 	if (flags&HourAngle)
 	{
-		double dec_sidereal, ra_sidereal, ha_sidereal;
-		StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSiderealPosGeometric(core));
-		ra_sidereal = 2.*M_PI-ra_sidereal;
+		const bool useNegHA=StelApp::getInstance().getFlagUseNegativeHourAngles();
+		double dec_sidereal, ra_sidereal;
 		if (withAtmosphere && (alt_app>-2.0*M_PI/180.0)) // Don't show refracted values much below horizon where model is meaningless.
-		{
 			StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSiderealPosApparent(core));
-			ra_sidereal = 2.*M_PI-ra_sidereal;
-			if (withDecimalDegree)
-			{
-				ha_sidereal = ra_sidereal*12/M_PI;
-				if (ha_sidereal>24.)
-					ha_sidereal -= 24.;
-				firstCoordinate  = QString("%1h").arg(ha_sidereal, 0, 'f', 5);
-				secondCoordinate = StelUtils::radToDecDegStr(dec_sidereal);
-			}
-			else
-			{
-				firstCoordinate  = StelUtils::radToHmsStr(ra_sidereal,true);
-				secondCoordinate = StelUtils::radToDmsStr(dec_sidereal,true);
-			}
+		else
+			StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSiderealPosGeometric(core));
+
+		ra_sidereal = StelUtils::fmodpos(2.*M_PI-ra_sidereal, 2.*M_PI); // reverse counting sense.
+		if (useNegHA && ra_sidereal>M_PI)
+			ra_sidereal -= 2.*M_PI;
+		if (usePolarDistance)
+			dec_sidereal = M_PI_2 - dec_sidereal;
+
+		if (withDecimalDegree)
+		{
+			//firstCoordinate  = QString("%1h").arg(ra_sidereal*12/M_PI, 0, 'f', 5); // Decimal hours
+			firstCoordinate  = QString("%1°").arg(ra_sidereal*M_180_PI, 0, 'f', 5); // Decimal degrees
+			secondCoordinate = StelUtils::radToDecDegStr(dec_sidereal);
 		}
 		else
 		{
-			if (withDecimalDegree)
-			{
-				ha_sidereal = ra_sidereal*12/M_PI;
-				if (ha_sidereal>24.)
-					ha_sidereal -= 24.;
-				firstCoordinate  = QString("%1h").arg(ha_sidereal, 0, 'f', 5);
-				secondCoordinate = StelUtils::radToDecDegStr(dec_sidereal);
-			}
-			else
-			{
-				firstCoordinate  = StelUtils::radToHmsStr(ra_sidereal,true);
-				secondCoordinate = StelUtils::radToDmsStr(dec_sidereal,true);
-			}
+			const bool negHA= (ra_sidereal<0);
+			firstCoordinate  = StelUtils::radToHmsStr(fabs(ra_sidereal),true);
+			if (negHA)
+				firstCoordinate = firstCoordinate.trimmed().prepend('-');
+			secondCoordinate = StelUtils::radToDmsStr(dec_sidereal,true);
 		}
 
-		// TRANSLATORS: Hour angle/Declination
-		const QString HADec = withDesignations ? QString("h/&delta;") : qc_("HA/Dec", "celestial coordinate system");
+		const QString HADec = usePolarDistance ?
+			// TRANSLATORS: Hour angle/Polar distance
+			( withDesignations ? QString("h/p")       : qc_("HA/PD",  "celestial coordinate system")) :
+			// TRANSLATORS: Hour angle/Declination
+			( withDesignations ? QString("h/&delta;") : qc_("HA/Dec", "celestial coordinate system"));
 
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td>%4</td></tr>").arg(HADec, firstCoordinate, secondCoordinate, apparent);
@@ -1009,6 +1015,16 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 // Apply post processing on the info string
 void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flags) const
 {
+	static const QString FSI{"\u2068"}; // First strong isolate: Treat following text as isolated and in the direction of its first strong directional character.
+					    // ASSUMPTION: Can be used as autodetect feature? Mark all parts inside embeddings?
+	static const QString PDI{"\u2069"}; // Pop directional isolate: terminate scope of last LRI/RLI/FSI
+	static const QString LRM{"\u200e"}; // left-right-mark which may be present in Arab strings from translations.
+
+	str.replace(LRM, "");
+	str.replace(FSI, "<span dir=\"auto\">");
+	//str.replace(FSI, "<span dir=\"ltr\">");
+	str.replace(PDI, "</span>");
+
 	StelObjectMgr* omgr;
 	omgr=GETSTELMODULE(StelObjectMgr);
 	str.append(getExtraInfoStrings(Script).join(' '));
@@ -1029,6 +1045,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 
 	if (flags&PlainText)
 	{
+		static const QRegularExpression h2Re("<h2[^>]*>");
 		static const QRegularExpression brRe2("<br(\\s*/)?>\\s*");
 		static const QRegularExpression tdRe1("<td\\s*>");
 		static const QRegularExpression tdRe2("<td \\w+='[^']*'>"); // Seen: style, align, colspan, rowspan. Always only one expression.
@@ -1038,7 +1055,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		static const QRegularExpression tableRe4("<table style=\"[^\"]*\">");
 		str.replace("<b>", "");
 		str.replace("</b>", "");
-		str.replace("<h2>", "");
+		str.replace(h2Re, "");
 		str.replace("</h2>", "\n");
 		str.replace(brRe2, "\n");
 		str.replace("<tr>", "");
@@ -1083,6 +1100,8 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("ra", ra*M_180_PI);
 	map.insert("dec", dec*M_180_PI);
+	// polar distance
+	map.insert("pd", (M_PI_2 - dec)*M_180_PI);
 	map.insert("iauConstellation", core->getIAUConstellation(pos));
 
 	QString currentObjStr = getEnglishName();
@@ -1102,22 +1121,26 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	{
 		const double longitude=static_cast<double>(core->getCurrentLocation().getLongitude());
 		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
-		sidereal=fmod(sidereal, 24.);
-		if (sidereal < 0.) sidereal+=24.;
+		sidereal=StelUtils::fmodpos(sidereal, 24.);
 		map.insert("meanSidTm", StelUtils::hoursToHmsStr(sidereal));
 		map.insert("meanSidTm-dd", sidereal * 15.);
 
 		sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
-		sidereal=fmod(sidereal, 24.);
-		if (sidereal < 0.) sidereal+=24.;
+		sidereal=StelUtils::fmodpos(sidereal, 24.);
 		map.insert("appSidTm", StelUtils::hoursToHmsStr(sidereal));
 		map.insert("appSidTm-dd", sidereal * 15.);
 
 		double ha = sidereal * 15.0 - ra * M_180_PI;
-		ha=fmod(ha, 360.0);
-		if (ha < 0.) ha+=360.0;
+		ha=StelUtils::fmodpos(ha, 360.0);
+		if (StelApp::getInstance().getFlagUseNegativeHourAngles() && ha>180.)
+			ha-=360.;
+
 		map.insert("hourAngle-dd", ha);
-		map.insert("hourAngle-hms", StelUtils::hoursToHmsStr(ha/15.0));
+		// This must show negative times if users want negative HA....
+		QString haStr=StelUtils::hoursToHmsStr(fabs(ha)/15.0);
+		if (ha<0)
+			haStr=haStr.trimmed().prepend('-');
+		map.insert("hourAngle-hms", haStr);
 	}
 
 	// ra/dec in J2000
@@ -1125,6 +1148,8 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("raJ2000", ra*M_180_PI);
 	map.insert("decJ2000", dec*M_180_PI);
+	// polar distance
+	map.insert("pdJ2000", (M_PI_2 - dec)*M_180_PI);
 
 	// apparent altitude/azimuth
 	pos = getAltAzPosApparent(core);

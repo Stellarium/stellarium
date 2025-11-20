@@ -146,7 +146,7 @@ void ScmSkyCultureDialog::createDialogContent()
 	for (const auto &classification : scm::CLASSIFICATIONS)
 	{
 		// add name, classification type
-		ui->classificationCB->addItem(classification.second.name, QVariant::fromValue(classification.first));
+                ui->classificationCB->addItem(qc_(classification.second.name, "sky culture classification"), QVariant::fromValue(classification.first));
 		// set the classification description as tooltip
 		int index = ui->classificationCB->count() - 1;
 		ui->classificationCB->setItemData(index, classification.second.description, Qt::ToolTipRole);
@@ -241,7 +241,7 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	// check if description is complete
 	if (!desc.isComplete())
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("The sky culture description is not complete. Please fill in all required fields."));
+		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("The sky culture description is not complete. Please fill in all required fields correctly."));
 		return;
 	}
 
@@ -374,6 +374,25 @@ QString ScmSkyCultureDialog::getDisplayNameFromConstellation(const scm::ScmConst
 	return constellation.getEnglishName() + " (" + constellation.getId() + ")";
 }
 
+QString ScmSkyCultureDialog::makeConstellationsSection() const
+{
+	if (!constellations) return {};
+
+	QString text;
+	for (const auto& constellation : *constellations)
+	{
+		const auto descr = constellation.getDescription().trimmed();
+		if (descr.isEmpty()) continue;
+		if (!text.isEmpty())
+			text += "\n\n";
+		text += "##### ";
+		text += constellation.getEnglishName();
+		text += "\n\n";
+		text += descr;
+	}
+	return text.trimmed();
+}
+
 scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 {
 	scm::Description desc;
@@ -388,7 +407,7 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 	desc.milkyWay     = ui->milkyWayTE->toPlainText();
 	desc.otherObjects = ui->otherObjectsTE->toPlainText();
 
-	desc.constellations   = ui->constellationsDescTE->toPlainText();
+	desc.constellations = makeConstellationsSection();
 
 	desc.references       = ui->referencesTE->toPlainText();
 
@@ -428,7 +447,6 @@ void ScmSkyCultureDialog::resetDialog()
 		ui->zodiacTE->clear();
 		ui->milkyWayTE->clear();
 		ui->otherObjectsTE->clear();
-		ui->constellationsDescTE->clear();
 		ui->referencesTE->clear();
 		ui->acknowledgementsTE->clear();
 

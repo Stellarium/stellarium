@@ -1,5 +1,5 @@
 # This is the cmake config file for the Sky Culture Maker plugin
-SET(SCM_VERSION "1.0.0")
+SET(SCM_VERSION "1.0.1")
 
 # Option to manually control converter, defaults to FALSE
 OPTION(SCM_SHOULD_ENABLE_CONVERTER "Attempt to enable Sky Culture Converter" FALSE)

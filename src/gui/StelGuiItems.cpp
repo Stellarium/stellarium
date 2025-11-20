@@ -627,6 +627,7 @@ void BottomStelBar::setFont(const QFont &cfont)
 	location->setFont(font);
 	fov->setFont(font);
 	fps->setFont(font);
+	helpLabel->setFont(font);
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{

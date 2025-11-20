@@ -623,7 +623,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 		float screenSize = static_cast<float>(obj->getAngularRadius(core))*prj->getPixelPerRadAtCenter()*M_PI_180f*2.f;
 		
-		const float scale = static_cast<float>(prj->getDevicePixelsPerPixel());
+		const float scale = StelApp::getInstance().getScreenScale();
 		screenSize+= scale * (45.f + 10.f*std::sin(2.f * static_cast<float>(StelApp::getInstance().getAnimationTime())));
 
 		texPointer->bind();
@@ -632,13 +632,14 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 		screenSize*=0.5f;
 		const float angleBase = static_cast<float>(StelApp::getInstance().getAnimationTime()) * 10;
+		const float radius = 10 * scale;
 		// We draw 4 instances of the sprite at the corners of the pointer
 		for (int i = 0; i < 4; ++i)
 		{
 			const float angle = angleBase + i * 90;
 			const float x = screenpos[0] + screenSize * cos(angle * M_PI_180f);
 			const float y = screenpos[1] + screenSize * sin(angle * M_PI_180f);
-			sPainter.drawSprite2dMode(x, y, 10, angle);
+			sPainter.drawSprite2dMode(x, y, radius, angle);
 		}
 	}
 }
@@ -2349,6 +2350,14 @@ StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18n) const
 		QString nativeNameI18nUpper = p->getNameNativeI18n().toUpper();
 		if (p->getNameI18n().toUpper() == planetNameI18Upper || (!nativeNameI18nUpper.isEmpty() && nativeNameI18nUpper == planetNameI18Upper))
 			return qSharedPointerCast<StelObject>(p);
+		if (!p->culturalNames.isEmpty())
+		{
+			for (const StelObject::CulturalName &cName : std::as_const(p->culturalNames))
+			{
+				if ( QStringList({cName.native.toUpper(), cName.pronounceI18n.toUpper(), cName.translatedI18n.toUpper()}).contains(planetNameI18Upper))
+					return qSharedPointerCast<StelObject>(p);
+			}
+		}
 	}
 	return StelObjectP();
 }
@@ -2362,6 +2371,16 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 		QString nativeName = p->getNameNative().toUpper();
 		if (p->getEnglishName().toUpper() == nameUpper || (!nativeName.isEmpty() && nativeName == nameUpper))
 			return qSharedPointerCast<StelObject>(p);
+
+		// check the other cultural native names
+		if (!p->culturalNames.isEmpty())
+		{
+			for (const StelObject::CulturalName &cName : std::as_const(p->culturalNames))
+			{
+				if ( cName.native.toUpper() == nameUpper)
+					return qSharedPointerCast<StelObject>(p);
+			}
+		}
 
 		// IAU designation?
 		QString iau = p->getIAUDesignation();
@@ -2746,8 +2765,17 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 		for (const auto& p : systemPlanets)
 		{
 			result << p->getNameI18n();
-			if (!p->getNameNativeI18n().isEmpty())
-				result << p->getNameNativeI18n() << p->getNameNative();
+			if (!p->culturalNames.isEmpty())
+			{
+				// Objects can have more than 1 name, e.g. Venus as Morning/Evening star.
+				for (const StelObject::CulturalName &cName : qAsConst(p->culturalNames))
+				{
+					result << cName.translatedI18n << cName.native << cName.pronounceI18n;
+				}
+			}
+			result.removeAll("");
+			result.removeDuplicates();
+
 			if (!p->getIAUDesignation().isEmpty())
 				result << p->getIAUDesignation();
 		}
@@ -2767,6 +2795,8 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 		if (c.count()>0)
 			result << c;
 	}
+	result.removeAll("");
+	result.removeDuplicates();
 	return result;
 }
 
@@ -2794,6 +2824,15 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 				result << p->getNameI18n();
 				if (!p->getIAUDesignation().isEmpty())
 					result << p->getIAUDesignation();
+				if (!p->culturalNames.isEmpty())
+				{
+					for (const StelObject::CulturalName &cName : qAsConst(p->culturalNames))
+					{
+						result << cName.native << cName.pronounceI18n << cName.translatedI18n;
+					}
+				}
+				result.removeAll("");
+				result.removeDuplicates();
 			}
 		}
 	}

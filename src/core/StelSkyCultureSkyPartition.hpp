@@ -138,14 +138,16 @@ class QJsonObject;
 class StelSkyCultureSkyPartition
 {
 	Q_GADGET
-friend ConstellationMgr;
 public:
         StelSkyCultureSkyPartition(const QJsonObject &description);
 	~StelSkyCultureSkyPartition();
 	void draw(StelPainter& sPainter, const Vec3d &obsVelocity);
 	void setFontSize(int newFontSize);
-	void update(double deltaTime) {centerLine->update(static_cast<int>(deltaTime*1000));}
+	//! Update ecliptic obliquity and center line. deltaTime since last frame in seconds.
+	void update(double deltaTime);
 	void updateLabels();
+	//! Update i18n names from English names according to current locale.
+	void updateI18n();
 	//! Return name of this system in screenLabel style.
 	QString getCulturalName() const;
 	//! Return longitudinal coordinate of point eqPos as written in the respective system
@@ -157,8 +159,6 @@ private:
 	void drawCap(StelPainter &sPainter, const SphericalCap& viewPortSphericalCap, double latDeg) const;
 	void drawMansionCap(StelPainter &sPainter, const SphericalCap& viewPortSphericalCap, double latDeg, double lon1, double lon2) const;
 	//void drawLabels(StelPainter &sPainter) const;
-	//! Update i18n names from English names according to current locale.
-	void updateI18n();
 
 	StelCore::FrameType frameType;         //!< Useful seem only: FrameObservercentricEclipticOfDate (e.g. Zodiac), FrameEquinoxEqu (e.g. Chin. Lunar Mansions)
 	QList<int> partitions;                 //!< A partition into [0] large parts of [1] smaller parts of [2] smaller parts... Currently only 2-part zodiacs [12, 30] or nakshatras [27, 4] are in use.
@@ -173,7 +173,7 @@ private:
 	int fontSize;                          //!< fontsize for labels
 	QList<int> linkStars;                  //!< HIP numbers defining start of mansions (Chinese style), or with just one entry, of star that defines a given offset longitude.
 	double offset;                         //!< the longitude (degrees) in the respective culturalpartition which is defined by linkStar
-	double eclObl;                         //!< Ecliptical obliquity (computed in draw(), also consumed in getLongitudeCoordinate())
+	double eclObl;                         //!< Ecliptical obliquity (computed in update(), also consumed in getLongitudeCoordinate())
 	double offsetFromAries;                //!< (degrees) resulting deviation between ecliptical longitude (or RA) of date and "cultural longitude" (or RA) of date.
 	QString context;				//!< A context data for localization support
 };

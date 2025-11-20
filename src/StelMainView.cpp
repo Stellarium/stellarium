@@ -33,7 +33,6 @@
 #include "StelOpenGL.hpp"
 #include "StelOpenGLArray.hpp"
 #include "StelProjector.hpp"
-#include "TextureAverageComputer.hpp"
 
 #include <QDebug>
 #include <QDir>
@@ -62,6 +61,8 @@
 #include <QStorageInfo>
 #ifdef Q_OS_WIN
 	#include <QPinchGesture>
+	#include <Windows.h>
+	#include <WinUser.h>
 #endif
 #include <QOpenGLShader>
 #include <QOpenGLShaderProgram>
@@ -631,7 +632,9 @@ StelMainView::StelMainView(QSettings* settings)
 	  lastEventTimeSec(0.0),
 	  minfps(1.f),
 	  maxfps(10000.f),
-	  minTimeBetweenFrames(5)
+	  minTimeBetweenFrames(5),
+	  fpsTimer(nullptr),
+	  screensaverInhibitorTimer(nullptr)
 {
 	setAttribute(Qt::WA_OpaquePaintEvent);
 	setAttribute(Qt::WA_AcceptTouchEvents);
@@ -1064,6 +1067,8 @@ void StelMainView::init()
 			qCritical() << "Conflicting keyboard shortcut assignments found. Please resolve:" << conflicts.join("; "); // Repeat in logfile for later retrieval.
 		}
 	}
+	if (qApp->property("onetime_inhibit_screensaver").toBool())
+		connect (this, &StelMainView::fullScreenChanged, this, &StelMainView::disableScreensaver);
 }
 
 void StelMainView::updateNightModeProperty(bool b)
@@ -1479,6 +1484,7 @@ void StelMainView::setFullScreen(bool b)
 	else
 	{
 		showNormal();
+
 		// Not enough. If we had started in fullscreen, the inner part of the window is at 0/0, with the frame extending to top/left off screen.
 		// Therefore moving is not possible. We must move to the stored position or at least defaults.
 		if ( (x()<0)  && (y()<0))
@@ -1695,8 +1701,7 @@ void StelMainView::doScreenshot(void)
 	// HiDPI screens interfere, and the viewing angle has to be maintained.
 	// First, image size:
 	glWidget->makeCurrent();
-	const auto screen = QOpenGLContext::currentContext()->screen();
-	const auto pixelRatio = screen->devicePixelRatio();
+	const auto pixelRatio = StelApp::getInstance().getDevicePixelsPerPixel();
 	int physImgWidth  = std::lround(stelScene->width() * pixelRatio);
 	int physImgHeight = std::lround(stelScene->height() * pixelRatio);
 	bool nightModeWasEnabled=nightModeEffect->isEnabled();
@@ -1996,3 +2001,46 @@ QRectF StelMainView::setWindowSize(int width, int height)
 
 	return stelScene->sceneRect(); // retrieve what was finally available.
 }
+
+void StelMainView::bumpScreensaver()
+{
+#ifdef Q_OS_WIN
+	EXECUTION_STATE state = SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_DISPLAY_REQUIRED);
+	if (state==NULL)
+		qWarning() << "Cannot trigger screensaver inhibition";
+#else
+	qInfo() << "Screensaver deactivation not implemented on this operating system.";
+#endif
+}
+
+// take action to inhibit screensaver when display is running in fullscreen mode
+// private slot. Connect to fullScreenChanged(b)
+void StelMainView::disableScreensaver(bool fullscreen)
+{
+	if (fullscreen)
+	{
+		//qInfo() << "Disabling screensaver while in fullscreen";
+		screensaverInhibitorTimer = new QTimer(this);
+		screensaverInhibitorTimer->setTimerType(Qt::VeryCoarseTimer);
+		connect(screensaverInhibitorTimer, &QTimer::timeout, this, &StelMainView::bumpScreensaver);
+		screensaverInhibitorTimer->start(30000); // Bump system every 30 seconds
+	}
+	else
+	{
+		//qInfo() << "Re-enabling screensaver while leaving fullscreen";
+		if (screensaverInhibitorTimer)
+		{
+			screensaverInhibitorTimer->stop();
+			delete screensaverInhibitorTimer;
+			screensaverInhibitorTimer=nullptr;
+#ifdef Q_OS_WIN
+			EXECUTION_STATE state = SetThreadExecutionState(ES_CONTINUOUS);
+			if (state==NULL)
+				qWarning() << "Cannot disable screensaver inhibition";
+#else
+			qInfo() << "Screensaver reactivation not yet implemented on this platform.";
+#endif
+		}
+	}
+}
+

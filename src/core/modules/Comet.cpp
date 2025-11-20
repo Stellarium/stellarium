@@ -454,7 +454,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	const float vMagnitude=getVMagnitude(core);
 
 	// Exclude drawing if user set a hard limit magnitude.
-	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (vMagnitude > core->getSkyDrawer()->getCustomPlanetMagnitudeLimit()))
+	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (vMagnitude > static_cast<float>(core->getSkyDrawer()->getCustomPlanetMagnitudeLimit())))
 		return;
 
 	if (getEnglishName() == core->getCurrentLocation().planetName)

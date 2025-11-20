@@ -617,7 +617,7 @@ void StelPainter::drawTextGravity180(const float x, const float y, const QString
 
 	std::u32string label32=str.toStdU32String();
 
-	// TODO: Move these and the same from St4elSkyCultureMgr to a common place.
+	// TODO: Move these and the same from StelSkyCultureMgr to a common place.
 	static const uint32_t FSI32=U'\U00002068'; // First strong isolate: Treat following text as isolated and in the direction of its first strong directional character.
 						   // ASSUMPTION: Can be used as autodetect feature? Mark all parts inside embeddings?
 	static const uint32_t PDI32=U'\U00002069'; // Pop directional isolate: terminate scope of last LRI/RLI/FSI
@@ -1645,13 +1645,13 @@ void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDisc
 		return;
 	}
 
+	QVector<Vec3d> aberredVertex(arr.vertex.size());
 	if (aberration==Vec3d(0.))
 	{
 		setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
 	}
 	else
 	{
-		QVector<Vec3d> aberredVertex(arr.vertex.size());
 		for (int i=0; i<arr.vertex.size(); i++)
 		{
 			Q_ASSERT(qFuzzyCompare(arr.vertex.at(i).normSquared(), 1.0));

@@ -288,6 +288,7 @@ StelApp::StelApp(StelMainView *parent)
 	, gl(Q_NULLPTR)
 	, flagShowDecimalDegrees(false)
 	, flagUseAzimuthFromSouth(false)
+	, flagUseNegativeHourAngles(false)
 	, flagUseFormattingOutput(false)
 	, flagUseCCSDesignation(false)
 	, flagOverwriteInfoColor(false)
@@ -699,6 +700,8 @@ void StelApp::init(QSettings* conf)
 
 	setFlagShowDecimalDegrees(confSettings->value("gui/flag_show_decimal_degrees", false).toBool());
 	setFlagSouthAzimuthUsage(confSettings->value("gui/flag_use_azimuth_from_south", false).toBool());
+	setFlagUseNegativeHourAngles(confSettings->value("gui/flag_use_negative_hour_angles", false).toBool());
+	setFlagPolarDistanceUsage(confSettings->value("gui/flag_use_polar_distance", false).toBool());
 	setFlagUseFormattingOutput(confSettings->value("gui/flag_use_formatting_output", false).toBool());
 	setFlagUseCCSDesignation(confSettings->value("gui/flag_use_ccs_designations", false).toBool());
 	setFlagOverwriteInfoColor(confSettings->value("gui/flag_overwrite_info_color", false).toBool());	
@@ -1283,6 +1286,26 @@ void StelApp::setFlagSouthAzimuthUsage(bool use)
 	}
 }
 
+void StelApp::setFlagUseNegativeHourAngles(bool use)
+{
+	if (flagUseNegativeHourAngles!=use)
+	{
+		flagUseNegativeHourAngles=use;
+		StelApp::immediateSave("gui/flag_use_negative_hour_angles", use);
+		emit flagUseNegativeHourAnglesChanged(use);
+	}
+}
+
+void StelApp::setFlagPolarDistanceUsage(bool use)
+{
+	if (flagUsePolarDistance!=use)
+	{
+		flagUsePolarDistance=use;
+		StelApp::immediateSave("gui/flag_use_polar_distance", use);
+		emit flagUsePolarDistanceChanged(use);
+	}
+}
+
 
 void StelApp::setFlagUseFormattingOutput(bool b)
 {
@@ -1401,13 +1424,17 @@ void StelApp::quit()
 void StelApp::setDevicePixelsPerPixel(qreal dppp)
 {
 	// Check that the device-independent pixel size didn't change
-	if (!viewportEffect && !fuzzyEquals(devicePixelsPerPixel, dppp))
+	if (!fuzzyEquals(devicePixelsPerPixel, dppp))
 	{
 		qDebug() << "Changing high-DPI scaling factor from" << devicePixelsPerPixel << "to" << dppp;
+		const auto effect = getViewportEffect();
+		setViewportEffect("none");
 		devicePixelsPerPixel = dppp;
 		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 		params.devicePixelsPerPixel = devicePixelsPerPixel;
 		core->setCurrentStelProjectorParams(params);
+		// Force to recreate the viewport effect if any.
+		setViewportEffect(effect);
 	}
 }
 

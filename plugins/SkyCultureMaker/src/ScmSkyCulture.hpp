@@ -31,11 +31,10 @@
 #include "StelCore.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "types/Classification.hpp"
-#include "types/CoordinateLine.hpp"
 #include "types/CulturePolygon.hpp"
+#include "types/ConstellationLine.hpp"
 #include "types/Description.hpp"
 #include "types/License.hpp"
-#include "types/StarLine.hpp"
 
 namespace scm
 {
@@ -61,8 +60,9 @@ public:
 	void setFallbackToInternationalNames(bool fallback);
 
 	/// Adds a constellation to the sky culture
-	ScmConstellation &addConstellation(const QString &id, const std::vector<CoordinateLine> &coordinates,
-	                                   const std::vector<StarLine> &stars, const bool isDarkConstellation);
+	ScmConstellation &addConstellation(const QString &id, 
+									   const std::vector<ConstellationLine> &lines, 
+									   const bool isDarkConstellation);
 
 	/// Adds a constellation to the sky culture
 	void addLocation(const scm::CulturePolygon &polygon);
@@ -81,8 +81,10 @@ public:
 
 	/**
 	* @brief Returns the sky culture as a JSON object
+	*
+	* @param mergeLines Whether to merge the lines of the constellations into polylines where possible.
 	*/
-	QJsonObject getIndexJson() const;
+	QJsonObject toJson(const bool mergeLines) const;
 
 	/**
 	* @brief Returns the territory of the sky culture as a JSON object

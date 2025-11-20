@@ -317,10 +317,8 @@ public slots:
 	//! Returns whether current skyculture uses (incorporates) common names.
 	bool currentSkycultureUsesCommonNames() const;
 
-#if QT_VERSION_MAJOR >= 6
 	//! Debugging/developing function. Call via scripting.
 	void analyzeScreenLabel() const;
-#endif
 signals:
 	//! Emitted whenever the default sky culture changed.
 	//! @see setDefaultSkyCultureID
@@ -371,6 +369,8 @@ private:
 	QString skyCultureI18ToDirectory(const QString& cultureName) const;
 
 	QString descriptionMarkdownToHTML(const QString& markdown, const QString& descrPath);
+	// We don't use QHash/QMap because we want to preserve order of constellations as listed in the description file
+	std::vector<std::pair<QString/*constellation*/, QString/*description*/>> getConstellationsDescriptions(QString consSection) const;
 	QString convertMarkdownLevel2Section(const QString& markdown, const QString& sectionName,
 	                                     qsizetype bodyStartPos, qsizetype bodyEndPos, const StelTranslator& trans);
 	std::pair<QString/*color*/,QString/*info*/> getLicenseDescription(const QString& license, const bool singleLicenseForAll) const;

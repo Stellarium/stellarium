@@ -34,10 +34,17 @@ namespace scm
 struct SkyPoint
 {
 	//! The coordinate of the point.
-	Vec3d coordinate;
+	Vec3d coordinate = Vec3d(0, 0, 0);
 
 	//! The optional star at that coordinate.
-	std::optional<QString> star;
+	QString star;
+
+	//! Resets the SkyPoint to default values.
+	void reset()
+	{
+		coordinate.set(0, 0, 0);
+		star.clear();
+	}
 };
 } // namespace scm
 

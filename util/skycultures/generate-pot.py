@@ -40,6 +40,7 @@ SCPOTFILE = os.path.join(DIR, '..', '..', 'po', 'stellarium-skycultures', 'stell
 sc_names = {}
 common_names = set()
 cons_ast_names = set()
+cons_names_for_describing = dict()
 
 def ensure_dir(file_path):
     '''Create a directory for a path if it doesn't exist yet'''
@@ -72,6 +73,82 @@ def load_common_names():
                 common_names.add(match.group(1))
     print(f"Loaded {len(common_names)} common names", file=sys.stderr)
 
+def handle_constellations_section(sky_culture, sc_name, body, pot):
+    body = body.strip()
+    if len(re.findall('^#####[^#]', body)) != 1:
+        print(f'{sky_culture}: warning: badly formatted Constellations section', file=sys.stderr)
+        return False
+
+    subsections = re.split(r'(?:\n|^)[ \t]*#####[ \t]*([^#\n][^\n]*)\n', body)
+    if subsections[0] != '':
+        printf(f'{sky_culture}: warning: unexpected beginning of Constellations section, splitting failed', file=sys.stderr)
+        return False
+    subsections = subsections[1:]
+    if len(subsections) % 2 != 0:
+        print(f'{sky_culture}: warning: odd number ({len(subsections)}) of Constellations section title/body items, splitting failed', file=sys.stderr)
+        return False
+
+    constellations_added = 0
+    for s in range(int(len(subsections) / 2)):
+        title = subsections[s * 2]
+        descr = subsections[s * 2 + 1].strip()
+        if title not in cons_names_for_describing[sky_culture]:
+            print(f'{sky_culture}: warning: no constellation named "{title}" in index', file=sys.stderr)
+            continue
+
+        comment = f'Description of {sc_name} constellation {title}'
+        entry = polib.POEntry(comment = comment, msgid = descr, msgstr = "")
+        if entry in pot:
+            prev_entry = pot.find(entry.msgid)
+            assert prev_entry
+            prev_entry.comment += '\n' + comment
+        else:
+            pot.append(entry)
+
+        constellations_added += 1
+
+    return constellations_added > 0
+
+def checkReferences(sky_culture, sec_body):
+    ref_re = re.compile(r'^\s*- \[#([0-9]+)\]: \s*\S+')
+    refNum = 1
+    for line in sec_body.splitlines():
+        if line.strip() == '':
+            continue
+        match = ref_re.search(line)
+        if not match:
+            print(f"{sky_culture}: warning: invalid reference line:\n{line}", file=sys.stderr)
+            continue
+        newRefNum = match.group(1)
+        if int(newRefNum) != refNum:
+            print(f"{sky_culture}: warning: reference number isn't equal to previous+1:\n{line}", file=sys.stderr)
+        refNum += 1
+
+def checkDescriptionSectionHeaders(sky_culture, text):
+    # Reference: https://www.markdownguide.org/basic-syntax/#heading-best-practices
+
+    extraSpaceBeforeHashRE = re.compile(r'(?:^|\n)[ 	]+#{1,6}[^\n]*')
+    noSpaceAfterHashRE = re.compile(r'(?:^|\n)[ 	]*#{1,6}[^# ][^\n]*')
+    for match in extraSpaceBeforeHashRE.finditer(text):
+        print((f'{sky_culture}: warning: extra space before hash in section header (see '
+               f'https://www.markdownguide.org/basic-syntax/#heading-best-practices):\n'
+               f'{match.group(0)}'), file=sys.stderr)
+    for match in noSpaceAfterHashRE.finditer(text):
+        print((f'{sky_culture}: warning: no space after hash in section header (see '
+               f'https://www.markdownguide.org/basic-syntax/#heading-best-practices):\n'
+               f'{match.group(0)}'), file=sys.stderr)
+
+    noBlankLineBeforeHeader = re.compile(r'[^\n]\n(##[^\n]*)')
+    noBlankLineAfterHeader = re.compile(r'(?:^|\n)(##[^\n]*)\n[^\n]')
+    for match in noBlankLineBeforeHeader.finditer(text):
+        print((f'{sky_culture}: warning: no empty line before section header (see '
+               f'https://www.markdownguide.org/basic-syntax/#heading-best-practices):\n'
+               f'{match.group(1)}'), file=sys.stderr)
+    for match in noBlankLineAfterHeader.finditer(text):
+        print((f'{sky_culture}: warning: no empty line after section header (see '
+               f'https://www.markdownguide.org/basic-syntax/#heading-best-practices):\n'
+               f'{match.group(1)}'), file=sys.stderr)
+
 def update_descriptions_pot(sclist, pot):
     for sky_culture in sclist:
         data_path = os.path.join(SCDIR, sky_culture)
@@ -83,6 +160,8 @@ def update_descriptions_pot(sclist, pot):
             file.close()
             # First strip all the comments
             markdown = re.sub(r'<!--.*?-->', "", markdown)
+
+            checkDescriptionSectionHeaders(sky_culture, markdown)
 
             titleRE = r'(?:^|\n)\s*# ([^\n]+)(?:\n|$)'
             titleL1 = re.findall(titleRE, markdown)
@@ -124,6 +203,16 @@ def update_descriptions_pot(sclist, pot):
                 if len(sec_body) == 0:
                     print(f'{sky_culture}: warning: empty section "{sec_title}"', file=sys.stderr)
                     continue
+
+                if sec_title == 'References':
+                    checkReferences(sky_culture, sec_body)
+
+                if sec_title == 'Constellations':
+                    if handle_constellations_section(sky_culture, sc_name, sec_body, pot):
+                        continue
+                    else:
+                        print(f'{sky_culture}: warning: no constellations could be extracted from Constellations '
+                               'section, generating a legacy translation entry for the whole section', file=sys.stderr)
 
                 comment = sc_name + ' sky culture ' + sec_title.lower() + ' section in markdown format'
                 entry = polib.POEntry(comment = comment, msgid = sec_body, msgstr = "")
@@ -202,6 +291,9 @@ def update_cultures_pot(sclist, pot):
 
                 # Extract 'english' string for translation (with context for uniqueness)
                 if english:
+                    if obj_type == 'constellation':
+                        cons_names_for_describing[sky_culture].add(english)
+
                     # Don't extract items that are already translated in other places
                     if context or not english in common_names:
                         cons_ast_names.add(english)
@@ -345,6 +437,10 @@ def update_cultures_pot(sclist, pot):
                         if entry not in pot:
                             pot.append(entry)
 
+                    # Now the pronounce entries also need a lite version of the above cleaning
+                    if pronounce:
+                        pronounce = re.sub(' [MDCLXVI*?]+$', '', pronounce)
+
                 comment = ''
                 if not chinese_name_cleaned or not english in cons_ast_names:
                     if native:
@@ -475,9 +571,9 @@ def update_cultures_pot(sclist, pot):
                 process_cons_or_asterism(data['constellations'], "constellation", pot, sc_name)
             if 'asterisms' in data:
                 process_cons_or_asterism(data['asterisms'], "asterism", pot, sc_name)
-            if 'zodiac' in data:
+            if 'zodiac' in data and not args.skip_zodiac:
                 process_extra_names(data['zodiac'], pot, sc_name)
-            if 'lunar_system' in data:
+            if 'lunar_system' in data and not args.skip_zodiac:
                 process_extra_names(data['lunar_system'], pot, sc_name)
             if 'common_names' in data:
                 process_names(data['common_names'], pot, sc_name)
@@ -486,6 +582,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--sky-culture", help="Process only the specified sky culture")
     parser.add_argument("--skip-abbrev", action="store_true", help="Don't emit translations for abbreviations")
+    parser.add_argument("--skip-zodiac", action="store_true", help="Don't emit translations for Zodiac or Lunar System entries")
     parser.add_argument("--skip-pronounce", action="store_true", help="Don't emit translations for 'pronounce' entries")
     args = parser.parse_args()
     metadata_template = {
@@ -518,6 +615,25 @@ if __name__ == '__main__':
         sc_pot_file_path = SCPOTFILE
         common_pot_file_path = None
 
+    # Enumerate all constellation names in all SCs, they will be needed for sanity checks in description parser
+    print("Enumerating constellation names...", file=sys.stderr)
+    for sky_culture in sclist:
+        data_path = os.path.join(SCDIR, sky_culture)
+        index_file = os.path.join(data_path, 'index.json')
+        assert os.path.exists(index_file)
+        cons_names_for_describing[sky_culture] = set()
+        with open(index_file) as file:
+            data = json.load(file)
+            file.close()
+            if 'constellations' in data:
+                for cons in data['constellations']:
+                    if 'common_name' in cons:
+                        name = cons['common_name']
+                        if 'english' in name:
+                            english = name['english']
+                            if len(english) == 0:
+                                continue
+                            cons_names_for_describing[sky_culture].add(english)
 
     print("Loading common names...", file=sys.stderr)
     load_common_names()
