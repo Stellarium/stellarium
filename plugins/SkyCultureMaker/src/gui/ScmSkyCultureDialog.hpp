@@ -124,6 +124,12 @@ private:
 	 * @return The description from the text edit.
 	 */
 	scm::Description getDescriptionFromTextEdit() const;
+
+	/**
+	 * @brief Opens the constellation dialog with data for a given constellation.
+	 * @param constellationId The ID of the constellation to open the dialog for.
+	 */
+	void openConstellationDialog(const QString &constellationId);
 };
 
 #endif // SCM_SKY_CULTURE_DIALOG_HPP

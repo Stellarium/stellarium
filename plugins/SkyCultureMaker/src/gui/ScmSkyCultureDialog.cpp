@@ -230,7 +230,7 @@ void ScmSkyCultureDialog::editSelectedConstellation()
 			}
 		}
 
-		maker->openConstellationDialog(selectedConstellationId);
+		openConstellationDialog(selectedConstellationId);
 	}
 }
 
@@ -269,6 +269,31 @@ void ScmSkyCultureDialog::openConstellationDialog(bool isDarkConstellation)
 {
 	maker->setDialogVisibility(scm::DialogID::ConstellationDialog, true);
 	maker->setConstellationDialogIsDarkConstellation(isDarkConstellation);
+	maker->setIsLineDrawEnabled(true);
+	updateAddConstellationButtons(false);
+}
+
+void ScmSkyCultureDialog::openConstellationDialog(const QString &constellationId)
+{
+	scm::ScmSkyCulture *skyCulture = maker->getCurrentSkyCulture();
+	if (skyCulture == nullptr)
+	{
+		qDebug() << "SkyCultureMaker: Current Sky Culture is not initialized.";
+		return;
+	}
+
+	scm::ScmConstellation *constellation = skyCulture->getConstellation(constellationId);
+	if (constellation != nullptr)
+	{
+		maker->loadDialogFromConstellation(constellation);
+		maker->setDialogVisibility(scm::DialogID::ConstellationDialog, true);
+		maker->setIsLineDrawEnabled(true);
+		updateAddConstellationButtons(false);
+	}
+	else
+	{
+		qWarning() << "SkyCultureMaker: Constellation with ID" << constellationId << "not found.";
+	}
 }
 
 void ScmSkyCultureDialog::setIdFromName(QString &name)

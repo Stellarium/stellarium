@@ -57,11 +57,6 @@ void ScmSkyCultureExportDialog::retranslate()
 	}
 }
 
-void ScmSkyCultureExportDialog::close()
-{
-	maker->setDialogVisibility(scm::DialogID::SkyCultureExportDialog, false);
-}
-
 void ScmSkyCultureExportDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
