@@ -56,7 +56,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	mainLayout = new QGraphicsLinearLayout(Qt::Vertical);
 
 	//Button bar
-	buttonBar = new QGraphicsWidget(this); // TODO: Clarify why this was unparented before, maybe I miss something.
+	buttonBar = new QGraphicsWidget(this);
 	mainLayout->addItem(buttonBar);
 
 	Q_ASSERT(ocularsPlugin->actionShowOcular);
