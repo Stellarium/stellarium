@@ -199,11 +199,6 @@ void SkyCultureMaker::setToolbarButtonState(bool b)
 	toolbarButton->setChecked(b);
 }
 
-void SkyCultureMaker::setIsScmEnabled(bool b)
-{
-	b ? startScm() : stopScm();
-}
-
 void SkyCultureMaker::startScm()
 {
 	if (isScmEnabled)
@@ -328,6 +323,11 @@ void SkyCultureMaker::handleKeys(QKeyEvent *e)
 			return;
 		}
 	}
+}
+
+void SkyCultureMaker::setIsScmEnabled(bool b)
+{
+	b ? startScm() : stopScm();
 }
 
 void SkyCultureMaker::setDialogVisibility(scm::DialogID dialogId, bool b)
