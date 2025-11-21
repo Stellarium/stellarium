@@ -1695,9 +1695,9 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const 
 	{
 		for(int p = 0; p < numPointsPerLine; ++p)
 		{
-			const auto x = 1;
-			const auto y = cropTanFovX * (1 - 2 * line / numOverlayPixelsX);
-			const auto z = cropTanFovY * (2.f / (numPointsPerLine - 1) * p - 1);
+			const float x = 1.f;
+			const float y = cropTanFovX * (1.f - 2.f * float(line) / numOverlayPixelsX);
+			const float z = cropTanFovY * (2.f / (numPointsPerLine - 1) * p - 1.f);
 			Vec3f win;
 			projector->project(derotate * Vec3f(x,y,z), win);
 			lineStripPoints.emplace_back(Vec2f(win[0], win[1]));
@@ -1712,9 +1712,9 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const 
 	{
 		for(int p = 0; p < numPointsPerLine; ++p)
 		{
-			const auto x = 1;
-			const auto y = -cropTanFovX * (2.f / (numPointsPerLine - 1) * p - 1);
-			const auto z = cropTanFovY * (1 - 2 * line / numOverlayPixelsX);
+			const float x = 1.f;
+			const float y = -cropTanFovX * (2.f / (numPointsPerLine - 1) * p - 1.f);
+			const float z = cropTanFovY * (1.f - 2.f * float(line) / numOverlayPixelsX);
 			Vec3f win;
 			projector->project(derotate * Vec3f(x,y,z), win);
 			lineStripPoints.emplace_back(Vec2f(win[0], win[1]));
