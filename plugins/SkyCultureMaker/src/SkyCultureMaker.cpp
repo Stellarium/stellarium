@@ -189,6 +189,10 @@ void SkyCultureMaker::init()
 	}
 }
 
+/***********************
+ Manage creation process
+***********************/
+
 void SkyCultureMaker::setToolbarButtonState(bool b)
 {
 	setActionToggle(actionIdLine, b);
