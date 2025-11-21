@@ -46,9 +46,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	StelApp& stelApp = StelApp::getInstance();
 	QSettings* conf = stelApp.getSettings();
 	Q_ASSERT(conf);
-	//qDebug() <<  "Oculars: effectiveOpacity:" << effectiveOpacity() << "Setting opacity 0.75";
-	//setOpacity(0.75);
-	//qDebug() <<  "Oculars: now effectiveOpacity:" << effectiveOpacity();
 
 	setContentsMargins(0, 0, 0, 0);
 
@@ -108,7 +105,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	setLayout(mainLayout);
 
 	//Widgets with control and information fields
-	// TENTATIVE FIX:
+
 	// We can use a DropShadowEffect for enhanced visibility. Note that we cannot re-use it, so each panel needs to get its own copy.
 	// The blur radius is different to test varying radii.
 	// It would be fine to blur the background, but Qt has no way for this. Even an underlying QGraphicsWidget with QGraphicsBlurEffect does not blur the background.
