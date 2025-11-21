@@ -152,7 +152,6 @@ double SkyCultureMaker::getCallOrder(StelModuleActionName actionName) const
 	if (actionName == StelModule::ActionDraw)
 		return StelApp::getInstance().getModuleMgr().getModule("NebulaMgr")->getCallOrder(actionName) + 10.;
 	if (actionName == StelModule::ActionHandleMouseClicks) return -11;
-	if (actionName == StelModule::ActionHandleKeys) return -1;
 	return 0;
 }
 
@@ -322,7 +321,6 @@ void SkyCultureMaker::handleMouseClicks(QMouseEvent *event)
 }
 void SkyCultureMaker::handleKeys(QKeyEvent *e)
 {
-	qDebug() << "SkyCultureMaker: handleKeys called with key:" << e->key();
 	if (isLineDrawEnabled)
 	{
 		drawObj->handleKeys(e);
@@ -330,21 +328,6 @@ void SkyCultureMaker::handleKeys(QKeyEvent *e)
 		{
 			return;
 		}
-	}
-
-	if (isScmEnabled && e->key() == Qt::Key_Escape && isAnyDialogVisible(currentDialogVisibilityMap))
-	{
-		bool isHideOrAbortDialogVisible = currentDialogVisibilityMap[scm::DialogID::HideOrAbortMakerDialog];
-		if (!isHideOrAbortDialogVisible)
-		{
-			setDialogVisibility(scm::DialogID::HideOrAbortMakerDialog, true);
-		}
-		else
-		{
-			stopScm();
-		}
-		e->ignore();
-		return;
 	}
 }
 

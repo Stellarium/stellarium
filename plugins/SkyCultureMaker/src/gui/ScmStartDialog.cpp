@@ -58,8 +58,7 @@ void ScmStartDialog::retranslate()
 {
 	if (dialog)
 	{
-		// Issue #117
-		// ui->retranslateUi(dialog);
+		ui->retranslateUi(dialog);
 	}
 }
 
@@ -75,13 +74,13 @@ void ScmStartDialog::createDialogContent()
 	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &ScmStartDialog::handleFontChanged);
 
 	// Buttons
-	connect(ui->scmStartCancelpushButton, &QPushButton::clicked, this, &ScmStartDialog::closeDialog); // Cancel
+	connect(ui->scmStartCancelpushButton, &QPushButton::clicked, this, &ScmStartDialog::close); // Cancel
 	connect(ui->scmStartCreatepushButton, &QPushButton::clicked, this,
 	        &ScmStartDialog::startScmCreationProcess); // Create
 	connect(ui->scmStartEditpushButton, &QPushButton::clicked, this,
-	        &ScmStartDialog::closeDialog); // Edit - TODO: add logic (currently closing the window)
+	        &ScmStartDialog::close); // Edit - TODO: add logic (currently closing the window)
 
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmStartDialog::closeDialog);
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmStartDialog::close);
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	// Init the correct font
 	handleFontChanged();
@@ -133,7 +132,7 @@ void ScmStartDialog::startScmCreationProcess()
 	SkyCultureMaker::setActionToggle("actionShow_Satellite_Hints", false);
 }
 
-void ScmStartDialog::closeDialog()
+void ScmStartDialog::close()
 {
 	maker->stopScm();
 }

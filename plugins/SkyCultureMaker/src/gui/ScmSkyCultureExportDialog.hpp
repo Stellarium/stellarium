@@ -41,6 +41,7 @@ public:
 
 public slots:
 	void retranslate() override;
+	void close() override;
 
 protected slots:
 	void handleFontChanged();

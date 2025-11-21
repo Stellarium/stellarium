@@ -77,9 +77,25 @@ void ScmSkyCultureDialog::close()
 	maker->setDialogVisibility(scm::DialogID::HideOrAbortMakerDialog, true);
 }
 
+bool ScmSkyCultureDialog::eventFilter(QObject *obj, QEvent *event)
+{
+	if (obj == dialog && event->type() == QEvent::KeyPress)
+	{
+		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+		if (keyEvent->key() == Qt::Key_Escape)
+		{
+			// escape should not close the dialog directly
+			maker->setDialogVisibility(scm::DialogID::HideOrAbortMakerDialog, true);
+			return true;
+		}
+	}
+	return StelDialogSeparate::eventFilter(obj, event);
+}
+
 void ScmSkyCultureDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+	dialog->installEventFilter(this);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));

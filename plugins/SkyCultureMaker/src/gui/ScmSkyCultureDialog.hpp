@@ -42,6 +42,7 @@ class ScmSkyCultureDialog : public StelDialogSeparate
 {
 protected:
 	void createDialogContent() override;
+	bool eventFilter(QObject *obj, QEvent *event) override;
 
 public:
 	ScmSkyCultureDialog(SkyCultureMaker *maker);
