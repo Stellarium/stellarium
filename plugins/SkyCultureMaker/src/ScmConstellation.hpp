@@ -33,15 +33,18 @@
 #include <vector>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QObject>
 #include <QString>
 
 namespace scm
 {
 
-class ScmConstellation
+class ScmConstellation : public QObject
 {
+	Q_OBJECT
 public:
-	ScmConstellation(const QString &id, const std::vector<ConstellationLine> &lines, const bool isDarkConstellation);
+	ScmConstellation(QObject *parent, const QString &id, const std::vector<ConstellationLine> &lines,
+	                 const bool isDarkConstellation);
 
 	/// The frame that is used for calculation and is drawn on.
 	static const StelCore::FrameType drawFrame = StelCore::FrameJ2000;

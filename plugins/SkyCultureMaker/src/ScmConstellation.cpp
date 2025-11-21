@@ -22,22 +22,39 @@
  */
 
 #include "ScmConstellation.hpp"
+#include "ConstellationMgr.hpp"
 #include <QDir>
 #include <QFileInfo>
+#include <QObject>
+#include <StelModuleMgr.hpp>
 
-scm::ScmConstellation::ScmConstellation(const QString &id, const std::vector<ConstellationLine> &lines, const bool isDarkConstellation)
-	: id(id)
+scm::ScmConstellation::ScmConstellation(QObject *parent, const QString &id, const std::vector<ConstellationLine> &lines,
+                                        const bool isDarkConstellation)
+	: QObject(parent)
+	, id(id)
 	, lines(lines)
 	, isDarkConstellation(isDarkConstellation)
 {
-	QSettings *conf = StelApp::getInstance().getSettings();
-	constellationNameFont.setPixelSize(conf->value("viewing/constellation_font_size", 15).toInt());
+	ConstellationMgr *constMgr = GETSTELMODULE(ConstellationMgr);
 
-	QString defaultColor          = conf->value("color/default_color", "0.5,0.5,0.7").toString();
-	defaultConstellationLineColor = Vec3f(conf->value("color/const_lines_color", defaultColor).toString());
-	defaultConstellationNameColor = Vec3f(conf->value("color/const_names_color", defaultColor).toString());
+	// Initial values
+	constellationLineThickness = constMgr->getConstellationLineThickness();
+	constellationNameFont.setPixelSize(constMgr->getFontSize());
+	defaultConstellationLineColor = constMgr->getLinesColor();
+	defaultConstellationNameColor = constMgr->getLabelsColor();
 
-	constellationLineThickness = conf->value("viewing/constellation_line_thickness", 1).toInt();
+	// Connections
+	connect(constMgr, &ConstellationMgr::constellationLineThicknessChanged, this,
+	        [this](int v) { constellationLineThickness = v; });
+
+	connect(constMgr, &ConstellationMgr::fontSizeChanged, this,
+	        [this](int v) { constellationNameFont.setPixelSize(v); });
+
+	connect(constMgr, &ConstellationMgr::linesColorChanged, this,
+	        [this](const Vec3f &c) { defaultConstellationLineColor = c; });
+
+	connect(constMgr, &ConstellationMgr::namesColorChanged, this,
+	        [this](const Vec3f &c) { defaultConstellationNameColor = c; });
 
 	updateTextPosition();
 }

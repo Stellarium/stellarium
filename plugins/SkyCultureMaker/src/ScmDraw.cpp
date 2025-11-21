@@ -22,10 +22,12 @@
  */
 
 #include "ScmDraw.hpp"
+#include "ConstellationMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelModule.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelProjector.hpp"
+#include <StelModuleMgr.hpp>
 #include <QApplication>
 #include <QDebug>
 #include <QKeyEvent>
@@ -134,7 +136,7 @@ scm::ScmDraw::ScmDraw()
 	maxSnapRadiusInPixels = conf->value("maxSnapRadiusInPixels", 25).toUInt();
 	conf->endGroup();
 
-	constellationLineThickness = conf->value("viewing/constellation_line_thickness", 1).toInt();
+	constellationLineThickness = GETSTELMODULE(ConstellationMgr)->getConstellationLineThickness();
 
 	currentLine.start.reset();
 	currentLine.end.reset();
