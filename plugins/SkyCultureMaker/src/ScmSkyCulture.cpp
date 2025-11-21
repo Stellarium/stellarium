@@ -89,7 +89,10 @@ void scm::ScmSkyCulture::draw(StelCore *core) const
 {
 	for (auto &constellation : constellations)
 	{
-		constellation.drawConstellation(core);
+		if(!constellation.isHidden)
+		{
+			constellation.draw(core);
+		}
 	}
 }
 
