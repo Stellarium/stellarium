@@ -96,7 +96,7 @@ void ScmStartDialog::createDialogContent()
 			{
 				converterDialog = new ScmConvertDialog(maker);
 			}
-			maker->setStartDialogVisibility(false); // Hide the start dialog
+			maker->stopScm(); // Stop SCM if running
 			converterDialog->setVisible(true);
 		});
 #else   // SCM_CONVERTER_ENABLED_CPP is not defined
