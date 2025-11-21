@@ -66,10 +66,10 @@ void ScmHideOrAbortMakerDialog::createDialogContent()
 	handleFontChanged();
 
 	// Buttons
-	connect(ui->scmMakerAbortButton, &QPushButton::clicked, this,
-	        &ScmHideOrAbortMakerDialog::abortScmCreationProcess); // Abort
-	connect(ui->scmMakerHideButton, &QPushButton::clicked, this,
-	        &ScmHideOrAbortMakerDialog::hideScmCreationProcess); // Hide
+	connect(ui->scmMakerAbortButton, &QPushButton::clicked, maker,
+			&SkyCultureMaker::stopScm); // Abort
+	connect(ui->scmMakerHideButton, &QPushButton::clicked, maker,
+			&SkyCultureMaker::hideScm); // Hide
 	connect(ui->scmMakerCancelButton, &QPushButton::clicked, this,
 	        &ScmHideOrAbortMakerDialog::cancelDialog); // Cancel
 }
@@ -81,23 +81,7 @@ void ScmHideOrAbortMakerDialog::handleFontChanged()
 	ui->questionLbl->setFont(questionFont);
 }
 
-// TODO: save state of the current sky culture
-void ScmHideOrAbortMakerDialog::hideScmCreationProcess()
-{
-	maker->saveScmDialogVisibilityState();
-	maker->hideAllDialogs();
-	maker->setToolbarButtonState(false); // Turn OFF the toolbar button (image OFF)
-}
-
-// TODO: clear the current sky culture
-void ScmHideOrAbortMakerDialog::abortScmCreationProcess()
-{
-	maker->resetScmDialogs();
-	maker->hideAllDialogs();
-	maker->setToolbarButtonState(false); // Turn OFF the toolbar button (image OFF)
-}
-
 void ScmHideOrAbortMakerDialog::cancelDialog()
 {
-	maker->setHideOrAbortMakerDialogVisibility(false);
+	maker->setDialogVisibility(scm::DialogID::HideOrAbortMakerDialog, false);
 }

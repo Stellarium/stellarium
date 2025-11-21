@@ -118,8 +118,10 @@ void ScmStartDialog::handleFontChanged()
 
 void ScmStartDialog::startScmCreationProcess()
 {
-	dialog->setVisible(false);                  // Close the dialog before starting the editor
-	maker->setSkyCultureDialogVisibility(true); // Start the editor dialog for creating a new Sky Culture
+	// Close the dialog before starting the editor
+	maker->setDialogVisibility(scm::DialogID::StartDialog, false);
+	// Start the editor dialog for creating a new Sky Culture
+	maker->setDialogVisibility(scm::DialogID::SkyCultureDialog, true);
 	maker->setNewSkyCulture();
 
 	// GZ: Unclear why those dialogs are called at plugin start.
@@ -133,7 +135,7 @@ void ScmStartDialog::startScmCreationProcess()
 
 void ScmStartDialog::closeDialog()
 {
-	maker->setIsScmEnabled(false); // Disable the Sky Culture Maker
+	maker->stopScm();
 }
 
 bool ScmStartDialog::isConverterDialogVisible()

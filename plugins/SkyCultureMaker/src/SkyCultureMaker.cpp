@@ -57,13 +57,15 @@ StelPluginInfo SkyCultureMakerStelPluginInterface::getPluginInfo() const
 	Q_INIT_RESOURCE(SkyCultureMaker);
 
 	StelPluginInfo info;
-	info.id = "SkyCultureMaker";
+	info.id            = "SkyCultureMaker";
 	info.displayedName = N_("Sky Culture Maker");
-	info.authors = "Vincent Gerlach (RivinHD), Luca-Philipp Grumbach (xLPMG), Fabian Hofer (Integer-Ctrl), Richard Hofmann (ZeyxRew), Mher Mnatsakanyan (MherMnatsakanyan03)";
-	info.contact = N_("Contact us using our GitHub usernames, via an Issue or the Discussion tab in the Stellarium repository.");
+	info.authors = "Vincent Gerlach (RivinHD), Luca-Philipp Grumbach (xLPMG), Fabian Hofer (Integer-Ctrl), Richard "
+		       "Hofmann (ZeyxRew), Mher Mnatsakanyan (MherMnatsakanyan03)";
+	info.contact = N_("Contact us using our GitHub usernames, via an Issue or the Discussion tab in the Stellarium "
+	                  "repository.");
 	info.description = N_("Plugin to draw and export sky cultures in Stellarium.");
-	info.version = SKYCULTUREMAKER_PLUGIN_VERSION;
-	info.license = SKYCULTUREMAKER_PLUGIN_LICENSE;
+	info.version     = SKYCULTUREMAKER_PLUGIN_VERSION;
+	info.license     = SKYCULTUREMAKER_PLUGIN_LICENSE;
 	return info;
 }
 
@@ -73,17 +75,26 @@ StelPluginInfo SkyCultureMakerStelPluginInterface::getPluginInfo() const
 SkyCultureMaker::SkyCultureMaker()
 	: isScmEnabled(false)
 	, isLineDrawEnabled(false)
+	, dialogMap({
+		  {scm::DialogID::StartDialog,            new ScmStartDialog(this)           },
+		  {scm::DialogID::SkyCultureDialog,       new ScmSkyCultureDialog(this)      },
+		  {scm::DialogID::ConstellationDialog,    new ScmConstellationDialog(this)   },
+		  {scm::DialogID::SkyCultureExportDialog, new ScmSkyCultureExportDialog(this)},
+		  {scm::DialogID::HideOrAbortMakerDialog, new ScmHideOrAbortMakerDialog(this)}
+})
 {
 	qDebug() << "SkyCultureMaker constructed";
 
 	setObjectName("SkyCultureMaker");
 
-	drawObj                   = new scm::ScmDraw();
-	scmStartDialog            = new ScmStartDialog(this);
-	scmSkyCultureDialog       = new ScmSkyCultureDialog(this);
-	scmConstellationDialog    = new ScmConstellationDialog(this);
-	scmSkyCultureExportDialog = new ScmSkyCultureExportDialog(this);
-	scmHideOrAbortMakerDialog = new ScmHideOrAbortMakerDialog(this);
+	drawObj = new scm::ScmDraw();
+
+	// Initialize dialog visibility maps
+	for (const auto &dialogId : dialogMap.keys())
+	{
+		currentDialogVisibilityMap[dialogId]  = false;
+		previousDialogVisibilityMap[dialogId] = false;
+	}
 
 	// Settings
 	QSettings *conf = StelApp::getInstance().getSettings();
@@ -104,13 +115,12 @@ SkyCultureMaker::SkyCultureMaker()
 *************************************************************************/
 SkyCultureMaker::~SkyCultureMaker()
 {
-	// Initalized on start
 	delete drawObj;
-	delete scmStartDialog;
-	delete scmSkyCultureDialog;
-	delete scmConstellationDialog;
-	delete scmSkyCultureExportDialog;
-	delete scmHideOrAbortMakerDialog;
+	// Delete all dialogs
+	for (auto dialog : dialogMap)
+	{
+		delete dialog;
+	}
 
 	if (currentSkyCulture != nullptr)
 	{
@@ -142,6 +152,7 @@ double SkyCultureMaker::getCallOrder(StelModuleActionName actionName) const
 	if (actionName == StelModule::ActionDraw)
 		return StelApp::getInstance().getModuleMgr().getModule("NebulaMgr")->getCallOrder(actionName) + 10.;
 	if (actionName == StelModule::ActionHandleMouseClicks) return -11;
+	if (actionName == StelModule::ActionHandleKeys) return -1;
 	return 0;
 }
 
@@ -161,8 +172,12 @@ void SkyCultureMaker::init()
 	{
 		QPixmap iconScmDisabled(":/SkyCultureMaker/bt_SCM_Off.png");
 		QPixmap iconScmEnabled(":/SkyCultureMaker/bt_SCM_On.png");
-		qDebug() << "SkyCultureMaker: " << (iconScmDisabled.isNull() ? "Failed to load image: bt_SCM_Off.png" : "Loaded image: bt_SCM_Off.png");
-		qDebug() << "SkyCultureMaker: " << (iconScmEnabled.isNull() ? "Failed to load image: bt_SCM_On.png" : "Loaded image: bt_SCM_On.png");
+		qDebug() << "SkyCultureMaker: "
+			 << (iconScmDisabled.isNull() ? "Failed to load image: bt_SCM_Off.png"
+		                                      : "Loaded image: bt_SCM_Off.png");
+		qDebug() << "SkyCultureMaker: "
+			 << (iconScmEnabled.isNull() ? "Failed to load image: bt_SCM_On.png"
+		                                     : "Loaded image: bt_SCM_On.png");
 
 		StelGui *gui = dynamic_cast<StelGui *>(app.getGui());
 		if (gui != Q_NULLPTR)
@@ -178,72 +193,89 @@ void SkyCultureMaker::init()
 	}
 }
 
-/***********************
- Manage creation process
-***********************/
-
 void SkyCultureMaker::setToolbarButtonState(bool b)
 {
 	setActionToggle(actionIdLine, b);
 	toolbarButton->setChecked(b);
 }
 
-void SkyCultureMaker::startScmProcess()
+void SkyCultureMaker::setIsScmEnabled(bool b)
 {
-	if (!isScmEnabled)
-	{
-		isScmEnabled = true;
-		emit eventIsScmEnabled(true);
-		setToolbarButtonState(true); // Toggle the toolbar button to enabled
-	}
-
-	if (isAnyDialogHidden())
-	{
-		restoreScmDialogVisibilityState();
-	}
-	else
-	{
-		setStartDialogVisibility(true);
-	}
+	b ? startScm() : stopScm();
 }
 
-void SkyCultureMaker::stopScmProcess()
+void SkyCultureMaker::startScm()
 {
-	// If the start dialog is visible, hide it
-	if (scmStartDialog->visible())
-	{
-		setStartDialogVisibility(false);
-		setToolbarButtonState(false); // Turn OFF the toolbar button (image OFF)
-		return;
-	}
-
-	// If the converter dialog is visible, hide it
-	if (scmStartDialog->isConverterDialogVisible())
-	{
-		scmStartDialog->setConverterDialogVisibility(false);
-		if (isScmEnabled)
-		{
-			isScmEnabled = false;
-			emit eventIsScmEnabled(false);
-			setToolbarButtonState(false); // Toggle the toolbar button to disabled
-		}
-	}
-
-	// If any other dialog is visible, don't stop the process — just keep UI state ON
-	if (isAnyDialogVisible())
-	{
-		setHideOrAbortMakerDialogVisibility(true);
-		setToolbarButtonState(true); // Keep the toolbar button ON
-		return;
-	}
-
-	// Otherwise, actually stop the process
 	if (isScmEnabled)
 	{
-		isScmEnabled = false;
-		emit eventIsScmEnabled(false);
-		setToolbarButtonState(false); // Toggle the toolbar button to disabled
+		qWarning() << "SkyCultureMaker: SCM is already running.";
+		return;
 	}
+
+	// Check wether in the previous state any dialog was visible
+	// If this is the case, restore the previous visibility state
+	// because the user has only hidden the dialogs temporarily
+	if (isAnyDialogVisible(previousDialogVisibilityMap))
+	{
+		for (const auto &dialogId : dialogMap.keys())
+		{
+			if (previousDialogVisibilityMap[dialogId])
+			{
+				setDialogVisibility(dialogId, true);
+			}
+		}
+	}
+	else // Otherwise, only show the start dialog
+	{
+		setDialogVisibility(scm::DialogID::StartDialog, true);
+	}
+
+	isScmEnabled = true;
+	emit eventIsScmEnabled(true);
+	setToolbarButtonState(true);
+}
+
+void SkyCultureMaker::hideScm()
+{
+	// save which dialogs were open
+	previousDialogVisibilityMap = currentDialogVisibilityMap;
+	// the HideOrAbortMakerDialog should not be opened next time
+	previousDialogVisibilityMap[scm::DialogID::HideOrAbortMakerDialog] = false;
+	// hide all dialogs
+	for (const auto &dialogId : dialogMap.keys())
+	{
+		setDialogVisibility(dialogId, false);
+	}
+
+	isScmEnabled = false;
+	emit eventIsScmEnabled(false);
+	setToolbarButtonState(false);
+}
+
+void SkyCultureMaker::stopScm()
+{
+	// hide all SCM dialogs
+	for (const auto &dialogId : dialogMap.keys())
+	{
+		setDialogVisibility(dialogId, false);
+	}
+	// If the converter dialog is visible, hide it
+	if (isValidDialog(scm::DialogID::StartDialog))
+	{
+		ScmStartDialog *scmStartDialog = static_cast<ScmStartDialog *>(dialogMap[scm::DialogID::StartDialog]);
+		scmStartDialog->setConverterDialogVisibility(false);
+	}
+	// override previous visibility state
+	// now all entries of the map are false
+	previousDialogVisibilityMap = currentDialogVisibilityMap;
+	// reset dialog content
+	resetScmDialogs();
+	// Create a new empty sky culture
+	setNewSkyCulture();
+
+	isScmEnabled = false;
+	emit eventIsScmEnabled(false);
+	setToolbarButtonState(false);
 }
 
 void SkyCultureMaker::draw(StelCore *core)
@@ -287,11 +319,10 @@ void SkyCultureMaker::handleMouseClicks(QMouseEvent *event)
 			return;
 		}
 	}
-
-	// Continue any other events to be handled...
 }
 void SkyCultureMaker::handleKeys(QKeyEvent *e)
 {
+	qDebug() << "SkyCultureMaker: handleKeys called with key:" << e->key();
 	if (isLineDrawEnabled)
 	{
 		drawObj->handleKeys(e);
@@ -300,69 +331,59 @@ void SkyCultureMaker::handleKeys(QKeyEvent *e)
 			return;
 		}
 	}
-}
 
-void SkyCultureMaker::setIsScmEnabled(bool b)
-{
-	if (b == true)
+	if (isScmEnabled && e->key() == Qt::Key_Escape && isAnyDialogVisible(currentDialogVisibilityMap))
 	{
-		startScmProcess();
-	}
-	else
-	{
-		stopScmProcess();
-	}
-}
-
-void SkyCultureMaker::setStartDialogVisibility(bool b)
-{
-	if (b != scmStartDialog->visible())
-	{
-		scmStartDialog->setVisible(b);
+		bool isHideOrAbortDialogVisible = currentDialogVisibilityMap[scm::DialogID::HideOrAbortMakerDialog];
+		if (!isHideOrAbortDialogVisible)
+		{
+			setDialogVisibility(scm::DialogID::HideOrAbortMakerDialog, true);
+		}
+		else
+		{
+			stopScm();
+		}
+		e->ignore();
+		return;
 	}
 }
 
-void SkyCultureMaker::setSkyCultureDialogVisibility(bool b)
+void SkyCultureMaker::setDialogVisibility(scm::DialogID dialogId, bool b)
 {
-	if (b != scmSkyCultureDialog->visible())
+	if (!isValidDialog(dialogId))
 	{
-		scmSkyCultureDialog->setVisible(b);
-	}
-}
-
-void SkyCultureMaker::setConstellationDialogVisibility(bool b)
-{
-	if (b != scmConstellationDialog->visible())
-	{
-		scmConstellationDialog->setVisible(b);
+		qDebug() << "SkyCultureMaker: setDialogVisibility called with invalid dialogId:"
+			 << static_cast<int>(dialogId);
+		return;
 	}
 
-	// Disable the add constellation buttons when the dialog is opened
-	scmSkyCultureDialog->updateAddConstellationButtons(!b);
-	setIsLineDrawEnabled(b);
+	// Set visibility for all dialog types
+	if (b != dialogMap[dialogId]->visible())
+	{
+		dialogMap[dialogId]->setVisible(b);
+	}
+	currentDialogVisibilityMap[dialogId] = b;
+
+	// Use this for dialog specific actions
+	switch (dialogId)
+	{
+	case scm::DialogID::ConstellationDialog:
+		// Disable buttons for adding new constellations when the dialog is open
+		static_cast<ScmSkyCultureDialog *>(dialogMap[scm::DialogID::SkyCultureDialog])
+			->updateAddConstellationButtons(!b);
+		// Enable/disable line drawing based on dialog visibility
+		setIsLineDrawEnabled(b);
+		break;
+	default: break;
+	}
 }
 
 void SkyCultureMaker::setConstellationDialogIsDarkConstellation(bool isDarkConstellation)
 {
-	if (scmConstellationDialog != nullptr)
+	if (dialogMap.contains(scm::DialogID::ConstellationDialog))
 	{
-		scmConstellationDialog->setIsDarkConstellation(isDarkConstellation);
-	}
-}
-
-void SkyCultureMaker::setSkyCultureExportDialogVisibility(bool b)
-{
-	if (b != scmSkyCultureExportDialog->visible())
-	{
-		scmSkyCultureExportDialog->setVisible(b);
-	}
-}
-
-void SkyCultureMaker::setHideOrAbortMakerDialogVisibility(bool b)
-{
-	if (b != scmHideOrAbortMakerDialog->visible())
-	{
-		scmHideOrAbortMakerDialog->setVisible(b);
+		static_cast<ScmConstellationDialog *>(dialogMap[scm::DialogID::ConstellationDialog])
+			->setIsDarkConstellation(isDarkConstellation);
 	}
 }
 
@@ -413,11 +434,12 @@ void SkyCultureMaker::resetScmDraw()
 
 void SkyCultureMaker::updateSkyCultureDialog()
 {
-	if (scmSkyCultureDialog == nullptr || currentSkyCulture == nullptr)
+	if (!isValidDialog(scm::DialogID::SkyCultureDialog) || currentSkyCulture == nullptr)
 	{
 		return;
 	}
-	scmSkyCultureDialog->setConstellations(currentSkyCulture->getConstellations());
+	static_cast<ScmSkyCultureDialog *>(dialogMap[scm::DialogID::SkyCultureDialog])
+		->setConstellations(currentSkyCulture->getConstellations());
 }
 
 void SkyCultureMaker::setSkyCultureDescription(const scm::Description &description)
@@ -444,91 +466,28 @@ bool SkyCultureMaker::saveSkyCultureDescription(const QDir &directory)
 	return false;
 }
 
-void SkyCultureMaker::hideAllDialogs()
+bool SkyCultureMaker::isAnyDialogVisible(const QMap<scm::DialogID, bool> &visibilityMap) const
 {
-	setHideOrAbortMakerDialogVisibility(false);
-	setSkyCultureDialogVisibility(false);
-	setConstellationDialogVisibility(false);
-	setSkyCultureExportDialogVisibility(false);
-}
-
-void SkyCultureMaker::saveScmDialogVisibilityState()
-{
-	if (scmSkyCultureDialog != nullptr)
-	{
-		scmDialogVisibilityMap[scm::DialogID::SkyCultureDialog] = scmSkyCultureDialog->visible();
-	}
-	if (scmConstellationDialog != nullptr)
-	{
-		scmDialogVisibilityMap[scm::DialogID::ConstellationDialog] = scmConstellationDialog->visible();
-	}
-	if (scmSkyCultureExportDialog != nullptr)
-	{
-		scmDialogVisibilityMap[scm::DialogID::SkyCultureExportDialog] = scmSkyCultureExportDialog->visible();
-	}
-}
-
-void SkyCultureMaker::restoreScmDialogVisibilityState()
-{
-	if (scmSkyCultureDialog != nullptr)
-	{
-		setSkyCultureDialogVisibility(scmDialogVisibilityMap[scm::DialogID::SkyCultureDialog]);
-	}
-	if (scmConstellationDialog != nullptr)
-	{
-		setConstellationDialogVisibility(scmDialogVisibilityMap[scm::DialogID::ConstellationDialog]);
-	}
-	if (scmSkyCultureExportDialog != nullptr)
-	{
-		setSkyCultureExportDialogVisibility(scmDialogVisibilityMap[scm::DialogID::SkyCultureExportDialog]);
-	}
-}
-
-bool SkyCultureMaker::isAnyDialogHidden() const
-{
-	for (const auto &visible : scmDialogVisibilityMap)
-	{
-		if (visible)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-void SkyCultureMaker::resetScmDialogsVisibilityState()
-{
-	for (auto &vis : scmDialogVisibilityMap)
-	{
-		vis = false;
-	}
-}
-
-bool SkyCultureMaker::isAnyDialogVisible() const
-{
-	const StelDialog *dialogs[] = {scmSkyCultureDialog, scmConstellationDialog, scmSkyCultureExportDialog,
-	                               scmHideOrAbortMakerDialog, scmStartDialog};
-
-	for (const StelDialog *dialog : dialogs)
-	{
-		if (dialog != nullptr && dialog->visible())
-		{
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(visibilityMap.cbegin(), visibilityMap.cend(), [](bool visible) { return visible; });
 }
 
 void SkyCultureMaker::resetScmDialogs()
 {
-	resetScmDialogsVisibilityState(); // Reset the visibility state of all dialogs
-	scmSkyCultureDialog->resetDialog();
-	scmConstellationDialog->resetDialog();
+	// not every dialog has data that needs to be reset
+	// therefore, this is done manually here
+	if (isValidDialog(scm::DialogID::SkyCultureDialog))
+	{
+		static_cast<ScmSkyCultureDialog *>(dialogMap[scm::DialogID::SkyCultureDialog])->resetDialog();
+	}
+	if (isValidDialog(scm::DialogID::ConstellationDialog))
+	{
+		static_cast<ScmConstellationDialog *>(dialogMap[scm::DialogID::ConstellationDialog])->resetDialog();
+	}
 }
 
 void SkyCultureMaker::openConstellationDialog(const QString &constellationId)
 {
-	if (scmConstellationDialog != nullptr)
+	if (isValidDialog(scm::DialogID::ConstellationDialog))
 	{
 		// Load the necessary data
 		scm::ScmSkyCulture *skyCulture = getCurrentSkyCulture();
@@ -541,8 +500,9 @@ void SkyCultureMaker::openConstellationDialog(const QString &constellationId)
 		scm::ScmConstellation *constellation = skyCulture->getConstellation(constellationId);
 		if (constellation != nullptr)
 		{
-			scmConstellationDialog->loadFromConstellation(constellation);
-			setConstellationDialogVisibility(true);
+			static_cast<ScmConstellationDialog *>(dialogMap[scm::DialogID::ConstellationDialog])
+				->loadFromConstellation(constellation);
+			setDialogVisibility(scm::DialogID::ConstellationDialog, true);
 			qDebug() << "SkyCultureMaker: Opened constellation dialog for ID:" << constellationId;
 		}
 		else
@@ -589,4 +549,9 @@ void SkyCultureMaker::showUserErrorMessage(QWidget *parent, const QString &dialo
 	const QString level = q_("ERROR");
 	const QString title = dialogName.isEmpty() ? level : dialogName + ": " + level;
 	QMessageBox::critical(parent, title, message);
+}
+
+bool SkyCultureMaker::isValidDialog(scm::DialogID dialogId) const
+{
+	return dialogMap.contains(dialogId) && dialogMap[dialogId] != nullptr;
 }

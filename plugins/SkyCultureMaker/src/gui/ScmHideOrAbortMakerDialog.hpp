@@ -46,8 +46,6 @@ protected slots:
 	void handleFontChanged();
 
 private slots:
-	void hideScmCreationProcess();
-	void abortScmCreationProcess();
 	void cancelDialog();
 
 private:

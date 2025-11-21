@@ -74,7 +74,7 @@ void ScmSkyCultureDialog::retranslate()
 
 void ScmSkyCultureDialog::close()
 {
-	maker->setHideOrAbortMakerDialogVisibility(true);
+	maker->setDialogVisibility(scm::DialogID::HideOrAbortMakerDialog, true);
 }
 
 void ScmSkyCultureDialog::createDialogContent()
@@ -190,7 +190,7 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	maker->setSkyCultureDescription(desc);
 
 	// open export dialog
-	maker->setSkyCultureExportDialogVisibility(true);
+	maker->setDialogVisibility(scm::DialogID::SkyCultureExportDialog, true);
 }
 
 void ScmSkyCultureDialog::editSelectedConstellation()
@@ -251,7 +251,7 @@ void ScmSkyCultureDialog::removeSelectedConstellation()
 
 void ScmSkyCultureDialog::openConstellationDialog(bool isDarkConstellation)
 {
-	maker->setConstellationDialogVisibility(true);
+	maker->setDialogVisibility(scm::DialogID::ConstellationDialog, true);
 	maker->setConstellationDialogIsDarkConstellation(isDarkConstellation);
 }
 
@@ -263,8 +263,11 @@ void ScmSkyCultureDialog::setIdFromName(QString &name)
 
 void ScmSkyCultureDialog::updateAddConstellationButtons(bool enabled)
 {
-	ui->AddConstellationBtn->setEnabled(enabled);
-	ui->AddDarkConstellationBtn->setEnabled(enabled);
+	if(ui && dialog)
+	{
+		ui->AddConstellationBtn->setEnabled(enabled);
+		ui->AddDarkConstellationBtn->setEnabled(enabled);
+	}
 }
 
 void ScmSkyCultureDialog::updateEditConstellationButton()
