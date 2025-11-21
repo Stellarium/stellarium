@@ -86,8 +86,6 @@ SkyCultureMaker::SkyCultureMaker()
 	setObjectName("SkyCultureMaker");
 
 	drawObj = new scm::ScmDraw();
-
-	// Initialize dialog visibility maps
 	for (const auto &dialogId : dialogMap.keys())
 	{
 		dialogVisibilityMap[dialogId] = false;
@@ -347,16 +345,11 @@ void SkyCultureMaker::setDialogVisibility(scm::DialogID dialogId, bool b)
 
 void SkyCultureMaker::setConstellationDialogIsDarkConstellation(bool isDarkConstellation)
 {
-	if (dialogMap.contains(scm::DialogID::ConstellationDialog))
+	if (isValidDialog(scm::DialogID::ConstellationDialog))
 	{
 		static_cast<ScmConstellationDialog *>(dialogMap[scm::DialogID::ConstellationDialog])
 			->setIsDarkConstellation(isDarkConstellation);
 	}
-}
-
-void SkyCultureMaker::setIsLineDrawEnabled(bool b)
-{
-	isLineDrawEnabled = b;
 }
 
 void SkyCultureMaker::setCanCreateConstellations(bool b)
@@ -366,6 +359,11 @@ void SkyCultureMaker::setCanCreateConstellations(bool b)
 		static_cast<ScmSkyCultureDialog *>(dialogMap[scm::DialogID::SkyCultureDialog])
 			->updateAddConstellationButtons(b);
 	}
+}
+
+void SkyCultureMaker::setIsLineDrawEnabled(bool b)
+{
+	isLineDrawEnabled = b;
 }
 
 void SkyCultureMaker::triggerDrawUndo()

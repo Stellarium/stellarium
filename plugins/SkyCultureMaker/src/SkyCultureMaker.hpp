@@ -264,7 +264,7 @@ private:
 	// The current sky culture
 	scm::ScmSkyCulture *currentSkyCulture = nullptr;
 
-	// The dialog visibility states
+	// The dialog visibility states. This is used to restore the visibility states after hiding all dialogs.
 	QMap<scm::DialogID, bool> dialogVisibilityMap;
 
 	// The artwork to temporary draw on the sky.
