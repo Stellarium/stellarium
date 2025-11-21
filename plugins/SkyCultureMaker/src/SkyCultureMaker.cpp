@@ -211,8 +211,8 @@ void SkyCultureMaker::startScm()
 		return;
 	}
 
-	// Check wether in the previous state any dialog was visible
-	// If this is the case, restore the previous visibility state
+	// Check whether in the previous state any dialog was visible.
+	// If this is the case, restore the previous visibility state,
 	// because the user has only hidden the dialogs temporarily
 	if (isAnyDialogVisible(previousDialogVisibilityMap))
 	{
