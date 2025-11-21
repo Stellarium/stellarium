@@ -51,7 +51,6 @@ class ScmHideOrAbortMakerDialog;
 class SkyCultureMaker : public StelModule
 {
 	Q_OBJECT
-	// TODO: var - getter - setter - trigger
 	Q_PROPERTY(bool enabledScm READ getIsScmEnabled WRITE setIsScmEnabled NOTIFY eventIsScmEnabled)
 public:
 	SkyCultureMaker();
@@ -241,10 +240,11 @@ public slots:
 	void setIsScmEnabled(bool b);
 
 private:
-	bool isScmEnabled = false;
-
 	const QString groupId      = N_("Sky Culture Maker");
 	const QString actionIdLine = "actionShow_SkyCultureMaker_Line";
+
+	// Indicates that SCM is enabled
+	bool isScmEnabled = false;
 
 	// Indicates that line drawing can be done (QT Signal)
 	bool isLineDrawEnabled = false;

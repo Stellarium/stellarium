@@ -57,15 +57,13 @@ StelPluginInfo SkyCultureMakerStelPluginInterface::getPluginInfo() const
 	Q_INIT_RESOURCE(SkyCultureMaker);
 
 	StelPluginInfo info;
-	info.id            = "SkyCultureMaker";
+	info.id = "SkyCultureMaker";
 	info.displayedName = N_("Sky Culture Maker");
-	info.authors = "Vincent Gerlach (RivinHD), Luca-Philipp Grumbach (xLPMG), Fabian Hofer (Integer-Ctrl), Richard "
-		       "Hofmann (ZeyxRew), Mher Mnatsakanyan (MherMnatsakanyan03)";
-	info.contact = N_("Contact us using our GitHub usernames, via an Issue or the Discussion tab in the Stellarium "
-	                  "repository.");
+	info.authors = "Vincent Gerlach (RivinHD), Luca-Philipp Grumbach (xLPMG), Fabian Hofer (Integer-Ctrl), Richard Hofmann (ZeyxRew), Mher Mnatsakanyan (MherMnatsakanyan03)";
+	info.contact = N_("Contact us using our GitHub usernames, via an Issue or the Discussion tab in the Stellarium repository.");
 	info.description = N_("Plugin to draw and export sky cultures in Stellarium.");
-	info.version     = SKYCULTUREMAKER_PLUGIN_VERSION;
-	info.license     = SKYCULTUREMAKER_PLUGIN_LICENSE;
+	info.version = SKYCULTUREMAKER_PLUGIN_VERSION;
+	info.license = SKYCULTUREMAKER_PLUGIN_LICENSE;
 	return info;
 }
 
@@ -362,7 +360,7 @@ void SkyCultureMaker::setCanCreateConstellations(bool b)
 	if (isValidDialog(scm::DialogID::SkyCultureDialog))
 	{
 		static_cast<ScmSkyCultureDialog *>(dialogMap[scm::DialogID::SkyCultureDialog])
-			->updateAddConstellationButtons(!b);
+			->updateAddConstellationButtons(b);
 	}
 }
 
