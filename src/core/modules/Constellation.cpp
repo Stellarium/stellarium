@@ -352,6 +352,7 @@ void Constellation::setNarration(const QString &narration)
 
 QString Constellation::getNarration(const StelCore *core, const InfoStringGroup &flags) const
 {
+	Q_UNUSED(flags)
 	qDebug() << "Constellation name " << getEnglishName() << "narration:" << narration;
 	return narration;
 }
