@@ -1697,6 +1697,32 @@ Vec3d Nebula::getJ2000EquatorialPos(const StelCore* core) const
 	}
 }
 
+// Implemented:
+// * Name
+// * CatalogNumber
+// * Magnitude
+// RaDecJ2000
+// RaDecOfDate
+// AltAzi
+// * Distance
+// Elongation
+// Size
+// Velocity
+// ProperMotion
+// Extra
+// HourAngle
+// * AbsoluteMagnitude
+// GalacticCoord
+// SupergalacticCoord
+// OtherCoord
+// * ObjectType
+// EclipticCoordJ2000
+// EclipticCoordOfDate
+// * IAUConstellation
+// - CulturalConstellation
+// SiderealTime
+// RTSTime
+// SolarLunarPosition
 QString Nebula::getNarration(const StelCore *core, const InfoStringGroup &flags) const
 {
 	const Vec3d pos = getEquinoxEquatorialPos(core);
@@ -1714,101 +1740,130 @@ QString Nebula::getNarration(const StelCore *core, const InfoStringGroup &flags)
 	names.removeDuplicates();
 	names.removeAll("");
 
-	res=designation;
-	if (!names.isEmpty())
-		res.append(", " +  q_("called") + " " + names.first() + ","); // TBD: Provide more than 1 name?
-
-	// Type
-	res.append(" " + q_("is") + " " + typeI18nNebulaStringMap.value(nType, qc_("an object of unknown type", "Nebula narration")) );
-
-	// Distance. Taken from getInfoString. Maybe move that to a private method...
-	if (qAbs(parallax)>0.f)
+	if (flags&Name)
 	{
-		QString dx;
-		// distance in light years from parallax
-		float distance = 3.162e-5f/(qAbs(parallax)*4.848e-9f);
-		float distanceErr = 0.f;
+		res=designation;
+		if (!names.isEmpty())
+			res.append(", " +  q_("called") + " " + names.first() + ","); // TBD: Provide more than 1 name?
+	}
+	if (flags&ObjectType)// Type
+		res.append(" " + q_("is") + " " + typeI18nNebulaStringMap.value(nType, qc_("an object of unknown type", "Nebula narration")) );
 
-		if (parallaxErr>0.f)
-			distanceErr = qAbs(3.162e-5f/(qAbs(parallaxErr + parallax)*4.848e-9f) - distance);
-
-		if (distanceErr>0.f)
-			dx = QString("%1%2%3").arg(QString::number(distance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 3));
-		else
-			dx = QString("%1").arg(QString::number(distance, 'f', 3));
-
-		if (oDistance==0.f)
+	if (flags&Distance)// Distance. Taken from getInfoString. Maybe move that to a private method...
+	{
+		if (qAbs(parallax)>0.f)
 		{
-			// TRANSLATORS: Unit of measure for distance - Light Years
-			QString ly = qc_("light years", "distance");
-			res.append(QString("%1 %2 %3").arg(qc_("in a distance of", "object narration"), dx, ly));
+			QString dx;
+			// distance in light years from parallax
+			float distance = 3.162e-5f/(qAbs(parallax)*4.848e-9f);
+			float distanceErr = 0.f;
+
+			if (parallaxErr>0.f)
+				distanceErr = qAbs(3.162e-5f/(qAbs(parallaxErr + parallax)*4.848e-9f) - distance);
+
+			if (distanceErr>0.f)
+				dx = QString("%1%2%3").arg(QString::number(distance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 3));
+			else
+				dx = QString("%1").arg(QString::number(distance, 'f', 3));
+
+			if (oDistance==0.f)
+			{
+				// TRANSLATORS: Unit of measure for distance - Light Years
+				QString ly = qc_("light years", "distance");
+				res.append(QString("%1 %2 %3").arg(qc_("in a distance of", "object narration"), dx, ly));
+			}
+		}
+		if (oDistance>0.f)
+		{
+			QString dx, dy;
+			float dc = 3262.f;
+			int ms = 1;
+			//TRANSLATORS: Unit of measure for distance - kiloparsecs
+			QString dupc = qc_("kiloparsec", "object narration");
+			//TRANSLATORS: Unit of measure for distance - Light Years
+			QString duly = qc_("light years", "object narration");
+
+			float distance = oDistance;
+			float distanceErr = oDistanceErr;
+			float distanceLY = oDistance*dc;
+			float distanceErrLY= oDistanceErr*dc;
+			if (oDistance>=1000.f)
+			{
+				distance = oDistance/1000.f;
+				distanceErr = oDistanceErr/1000.f;
+				//TRANSLATORS: Unit of measure for distance - Megaparsecs
+				dupc = qc_("Megaparsec", "object narration");
+			}
+
+			if (distanceLY>=1e6f)
+			{
+				distanceLY /= 1e6f;
+				distanceErrLY /= 1e6f;
+				ms = 3;
+				//TRANSLATORS: Unit of measure for distance - Millions of Light Years
+				duly = qc_("Million light years", "object narration");
+			}
+
+			if (oDistanceErr>0.f)
+			{
+				dx = QString("%1%2%3").arg(QString::number(distance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 3));
+				dy = QString("%1%2%3").arg(QString::number(distanceLY, 'f', ms)).arg(QChar(0x00B1)).arg(QString::number(distanceErrLY, 'f', ms));
+			}
+			else
+			{
+				dx = QString("%1").arg(QString::number(distance, 'f', 3));
+				dy = QString("%1").arg(QString::number(distanceLY, 'f', ms));
+			}
+
+			res.append(QString("%1 %2 %3 (%4 %5)").arg(qc_("in a distance of", "object narration"), dx, dupc, dy, duly));
 		}
 	}
-	if (oDistance>0.f)
+
+	if (flags&IAUConstellation) // IAU Constellation
 	{
-		QString dx, dy;
-		float dc = 3262.f;
-		int ms = 1;
-		//TRANSLATORS: Unit of measure for distance - kiloparsecs
-		QString dupc = qc_("kiloparsec", "object narration");
-		//TRANSLATORS: Unit of measure for distance - Light Years
-		QString duly = qc_("light years", "object narration");
-
-		float distance = oDistance;
-		float distanceErr = oDistanceErr;
-		float distanceLY = oDistance*dc;
-		float distanceErrLY= oDistanceErr*dc;
-		if (oDistance>=1000.f)
-		{
-			distance = oDistance/1000.f;
-			distanceErr = oDistanceErr/1000.f;
-			//TRANSLATORS: Unit of measure for distance - Megaparsecs
-			dupc = qc_("Megaparsec", "object narration");
-		}
-
-		if (distanceLY>=1e6f)
-		{
-			distanceLY /= 1e6f;
-			distanceErrLY /= 1e6f;
-			ms = 3;
-			//TRANSLATORS: Unit of measure for distance - Millions of Light Years
-			duly = qc_("Million light years", "object narration");
-		}
-
-		if (oDistanceErr>0.f)
-		{
-			dx = QString("%1%2%3").arg(QString::number(distance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 3));
-			dy = QString("%1%2%3").arg(QString::number(distanceLY, 'f', ms)).arg(QChar(0x00B1)).arg(QString::number(distanceErrLY, 'f', ms));
-		}
-		else
-		{
-			dx = QString("%1").arg(QString::number(distance, 'f', 3));
-			dy = QString("%1").arg(QString::number(distanceLY, 'f', ms));
-		}
-
-		res.append(QString("%1 %2 %3 (%4 %5)").arg(qc_("in a distance of", "object narration"), dx, dupc, dy, duly));
+		const QString iauConstellation = ConstellationMgr::getIAUconstellationName(core->getIAUConstellation(pos));
+		res.append(" " + qc_("in the constellation of", "object narration") + " " + iauConstellation + ". ");
 	}
 
-	// IAU Constellation
-	const QString iauConstellation = ConstellationMgr::getIAUconstellationName(core->getIAUConstellation(pos));
-	res.append(" " + qc_("in the constellation of", "object narration") + " " + iauConstellation + ". ");
-
-	// Discovery
-	if (!discoverer.isEmpty())
+	if (flags&Extra) // redshift, parallax, Discovery
 	{
-		res.append(qc_("It was discovered by", "object narration") + " " + discoverer);
-		if (!discoveryYear.isEmpty())
-			res.append(" " + qc_("in the year", "object narration") + " " + discoveryYear);
-		res.append(". ");
-	}
+		if (redshift<99.f && nType<=NebQSO) // useful for galaxy types only.
+		{
+			QString z;
+			if (redshiftErr>0.f)
+				z = QString("%1 %2 %3").arg(QString::number(redshift, 'f', 6), qc_("plus minus", "object narration"), QString::number(redshiftErr, 'f', 6));
+			else
+				z = QString("%1").arg(QString::number(redshift, 'f', 6));
 
-	// Shape
-	QString morph=getMorphologicalTypeDescription();
-	if (!morph.isEmpty())
-	{
-		res.append(qc_("Morphologically:", "object narration") + " " + morph + ".");
-	}
+			res += QString("%1 %2").arg(qc_("Its redshift is", "object narration"), z);
+		}
+		if (qAbs(parallax)>0.5f)
+		{
+			QString px;
+			if (parallaxErr>0.f)
+				px = QString("%1 %2 %3").arg(QString::number(qAbs(parallax), 'f', 3), qc_("plus minus", "object narration"), QString::number(parallaxErr, 'f', 3));
+			else
+				px = QString("%1").arg(QString::number(qAbs(parallax), 'f', 3));
 
+			res += QString("%1 %2 %3").arg(qc_("Its Parallax", "object narration"), px, qc_("milli-arcseconds", "parallax"));
+		}
+
+
+		if (!discoverer.isEmpty())
+		{
+			res.append(qc_("It was discovered by", "object narration") + " " + discoverer);
+			if (!discoveryYear.isEmpty())
+				res.append(" " + qc_("in the year", "object narration") + " " + discoveryYear);
+			res.append(". ");
+		}
+
+		// Shape
+		QString morph=getMorphologicalTypeDescription();
+		if (!morph.isEmpty())
+		{
+			res.append(qc_("Morphologically:", "object narration") + " " + morph + ".");
+		}
+	}
 	return res;
 }
 
