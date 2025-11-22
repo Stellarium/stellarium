@@ -127,7 +127,7 @@ public:
 	QString getInfoLabel() const override;
 	//! set narration text. narration may contain Markdown syntax.
 	void setNarration(const QString &narration);
-	//! retrieve narration text
+	//! retrieve narration text, i.e. the text from description.md. @param flags is ignored.
 	QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override;
 private:
 	//! Underlying worker
