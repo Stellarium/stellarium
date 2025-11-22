@@ -203,6 +203,15 @@ QString radToDecDegStr(const double angle, const int precision, const bool useD,
 	return QString("%1%2").arg(QString::number(deg, 'f', precision), degsign);
 }
 
+QString radToDecDegNarration(const double angle, const int precision, const bool useD, const bool positive)
+{
+	Q_UNUSED(useD)
+	const QString degsign = qc_("degrees", "object narration");
+	double deg = (positive ? fmodpos(angle, 2.0*M_PI) : std::fmod(angle, 2.0*M_PI)) * M_180_PI;
+
+	return QString("%1%2").arg(QString::number(deg, 'f', precision), degsign);
+}
+
 /*************************************************************************
  Convert an angle in radian to a hms formatted string
  If the minute and second part are null are too small, don't print them
@@ -351,6 +360,27 @@ QString radToDmsPStr(const double angle, const int precision, const bool useD)
 	return str;
 }
 
+QString radToDmsPNarration(const double angle, const int precision, const bool useD)
+{
+	Q_UNUSED(useD)
+	const QString degsign = qc_("degrees", "object narration");
+	bool sign;
+	unsigned int d,m;
+	double s;
+	StelUtils::radToDms(angle, sign, d, m, s);
+	QString str;
+	QTextStream os(&str);
+	os << (sign?' ':'-');
+	if (d>0)
+		os << d << degsign;
+	if (m>0)
+		os << m << " " << qc_("arc minutes", "object narration") << " " << qc_("and", "object narration") << " ";
+
+	int width = (precision>0) ? 3 + precision : 2;
+	os << QString::number(s, 'f', width) << " " << qc_("arc seconds", "object narration") ;
+	return str;
+}
+
 void decDegToDms(double angle, bool &sign, unsigned int &d, unsigned int &m, double &s)
 {
 	sign = true;
@@ -402,6 +432,23 @@ QString decDegToLatitudeStr(const double latitude, bool dms)
 	else
 		return QString("%1%2%3").arg(sign ? 'N' : 'S').arg(QString::number(fabs(latitude), 'f', 4), QChar(0x00B0));
 }
+// Convert latitude in decimal degrees to a narration-formatted (verbose) string.
+QString decDegToLatitudeNarration(const double latitude, bool dms)
+{
+	const QString degreesStr=qc_("degrees", "object narration");
+	const QString minutesStr=qc_("minutes", "object narration");
+	const QString secondsStr=qc_("seconds", "object narration");
+	const QString andStr    =qc_("and"    , "object narration");
+	bool sign;
+	double s;
+	unsigned int d, m;
+	decDegToDms(latitude, sign, d, m, s);
+	if (dms)
+		return QString("%1: %2 %3, %4 %5, %6 %7 %8").arg((sign ? qc_("North", "object narration") : qc_("South", "object narration")), QString::number(d), degreesStr, QString::number(m), minutesStr, andStr, QString::number(round(s), 'f', 0), secondsStr);
+	else
+		return QString("%1: %2 %3").arg((sign ? qc_("North", "object narration") : qc_("South", "object narration")), QString::number(fabs(latitude), 'f', 2), qc_("degrees", "object narration"));
+}
+
 
 // default values as for Earth
 QString decDegToLongitudeStr(const double longitude, bool eastPositive, bool semiSphere, bool dms)
@@ -433,6 +480,41 @@ QString decDegToLongitudeStr(const double longitude, bool eastPositive, bool sem
 	else
 		return QString("%1%2%3").arg(sign ? positive : negative).arg(QString::number(fabs(longMod), 'f', 4), QChar(0x00B0));
 }
+
+QString decDegToLongitudeNarration(const double longitude, bool eastPositive, bool semiSphere, bool dms)
+{
+	double longMod = longitude;
+	const QString degreesStr=qc_("degrees", "object narration");
+	const QString minutesStr=qc_("minutes", "object narration");
+	const QString secondsStr=qc_("seconds", "object narration");
+	const QString andStr    =qc_("and"    , "object narration");
+	QString positive, negative;
+
+	if (eastPositive)
+	{
+		positive = qc_("East", "object narration");
+		negative = qc_("West", "object narration");
+	}
+	else
+	{
+		longMod = fmodpos(360.-longitude, 360.); // avoid 360.0 for the poles!
+		negative = qc_("East", "object narration");
+		positive = qc_("West", "object narration");
+	}
+	if (semiSphere)
+		longMod = longitude > 180. ? longitude-360. : longitude;
+
+	bool sign;
+	double s;
+	unsigned int d, m;
+	decDegToDms(longMod, sign, d, m, s);
+	if (dms)
+		return QString("%1: %2 %3, %4 %5, %6 %7 %8").arg((sign ? positive : negative), QString::number(d), degreesStr, QString::number(m), minutesStr, andStr, QString::number(round(s)), secondsStr);
+	else
+		return QString("%1: %2 %3").arg((sign ? positive : negative), QString::number(fabs(longMod), 'f', 2), degreesStr);
+}
+
+
 
 // Convert a dms formatted string to an angle in radian
 double dmsStrToRad(const QString& s)
@@ -1392,7 +1474,7 @@ QString hoursToNarration(const double hours, const bool minutesOnly)
 		else
 			format=qc_("%2 minutes", "object narration");
 
-		return QString(format).arg(QString::number(h), QString::number(m, 'f', 0));
+		return QString(format).arg(QString::number(h), QString::number(m));
 	}
 	else
 	{
@@ -1409,13 +1491,20 @@ QString hoursToNarration(const double hours, const bool minutesOnly)
 			m = 0;
 		}
 		if (h>0)
+		{
 			format=qc_("%1 hours, %2 minutes and %3 seconds", "object narration");
+			return QString(format).arg(QString::number(h), QString::number(int(m)), QString::number(s,'f', 1));
+		}
 		else if (m>0)
-			format=qc_("%2 minutes and %3 seconds", "object narration");
+		{
+			format=qc_("%1 minutes and %2 seconds", "object narration");
+			return QString(format).arg(QString::number(int(m)), QString::number(s,'f', 1));
+		}
 		else
-			format=qc_("%3 seconds", "object narration");
-
-		return QString(format).arg(QString::number(h), QString::number(int(m)), QString::number(s,'f', 1));
+		{
+			format=qc_("%1 seconds", "object narration");
+			return QString(format).arg(QString::number(s,'f', 1));
+		}
 	}
 }
 
