@@ -609,6 +609,14 @@ ELSE()
 ENDIF()
 FIND_PACKAGE(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS
      Concurrent Gui Network Widgets Charts Positioning)
+SET(USE_BUNDLED_QTCOMPRESS 1 CACHE BOOL "Use bundled version of qtcompress")
+# Qt 6.10 split off FooPrivate from Foo.
+# https://code.qt.io/cgit/qt/qtreleasenotes.git/about/qt/6.10.0/release-note.md
+# > ad7b94e163a: User projects must now call find_package(Qt6 COMPONENTS FooPrivate) to make use of the Qt6::FooPrivate target.
+# For the case of Qt5 this condition evaluates to false.
+IF(Qt6_VERSION VERSION_GREATER_EQUAL 6.10 AND NOT USE_BUNDLED_QTCOMPRESS)
+     FIND_PACKAGE(Qt6 REQUIRED COMPONENTS GuiPrivate)
+ENDIF()
 IF(USE_PLUGIN_TELESCOPECONTROL OR ENABLE_GPS)
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS SerialPort REQUIRED)
 ENDIF()
@@ -809,7 +817,6 @@ ELSE()
      MESSAGE(STATUS "Using system-provided zlib at ${ZLIB_LIBRARIES}")
 ENDIF()
 
-SET(USE_BUNDLED_QTCOMPRESS 1 CACHE BOOL "Use bundled version of qtcompress")
 IF(USE_BUNDLED_QTCOMPRESS)
      ADD_DEFINITIONS(-DUSE_BUNDLED_QTCOMPRESS)
      MESSAGE(STATUS "Using bundled qtcompress at ${CMAKE_SOURCE_DIR}/src/external/qtcompress")
