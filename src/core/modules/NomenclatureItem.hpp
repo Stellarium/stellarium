@@ -157,6 +157,10 @@ public:
 	//! @param core A pointer to the core
 	//! @param flags a set of flags with information types to include.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
+	//! Get a textual narration to describe the object, ready for text to speech output
+	//! @param core A pointer to the core
+	//! @param flags a set of flags with information types to include.
+	QString getNarration(const StelCore* core, const InfoStringGroup& flags) const override;
 	Vec3f getInfoColor(void) const override;
 	Vec3d getJ2000EquatorialPos(const StelCore*) const override;
 	//! Return the angular radius of a circle containing the feature as seen from the observer
@@ -221,8 +225,11 @@ private:
 	// ratio of angular size of feature to the FOV
 	float getAngularDiameterRatio(const StelCore *core, const float fov) const;
 
+	//! geological scientific term for nType, like crater, dorsum, ... but english "landing site" or "Point".
 	static QString getNomenclatureTypeLatinString(NomenclatureItemType nType);
+	//! User-language term for nType.
 	static QString getNomenclatureTypeString(NomenclatureItemType nType);
+	//! Retrieve clear-language description of an item type based on @param englishName of the planet/moon
 	static QString getNomenclatureTypeDescription(NomenclatureItemType nType, const QString &englishName);
 	//! Returns the description of the feature coordinates where available, or pcoPlanetographicWest360.
 	//! The default value ensures valid central meridian data for the gas giants.
@@ -247,7 +254,8 @@ private:
 
 	PlanetP planet;
 	int identificator;
-	QString englishName, context, nameI18n, origin, originI18n;
+	QString englishName, context, nameI18n; // Name for display
+	QString origin, originI18n; // explanation about name patron or other name origin
 	NomenclatureItemType nType; // Type of nomenclature item
 	mutable double latitude;    // degrees
 	mutable double longitude;   // degrees. Declared mutable to allow change in otherwise const methods (for special points)
