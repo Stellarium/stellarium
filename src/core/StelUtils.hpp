@@ -195,6 +195,12 @@ namespace StelUtils
 	//! @param useD Define if letter "d" must be used instead of deg sign
 	//! @param positive Define if function should use 0-360 degrees
 	QString radToDecDegStr(const double angle, const int precision = 4, const bool useD=false, const bool positive=false);
+	//! Convert an angle in radian to a decimal degree string for narration.
+	//! @param angle input angle in radian
+	//! @param precision
+	//! @param useD (ignored)
+	//! @param positive Define if function should use 0-360 degrees
+	QString radToDecDegNarration(const double angle, const int precision = 4, const bool useD=false, const bool positive=false);
 
 	//! Convert an angle in radian to a hms formatted string.
 	//! If the second, minute part is == 0, it is not output
@@ -205,6 +211,10 @@ namespace StelUtils
 	//! @param angle input angle in radian
 	//! @param decimal output decimal second value
 	QString radToHmsStr(const double angle, const bool decimal=false);
+	//! Convert an angle in radian to a hms formatted string for narration.
+	//! @param angle input angle in radian
+	//! @param decimal output decimal second value
+	QString radToHmsNarration(const double angle, const bool decimal=false);
 
 	//! Convert an angle in radian to a dms formatted string.
 	//! If the second, minute part is == 0, it is not output
@@ -217,12 +227,22 @@ namespace StelUtils
 	//! @param decimal output second value with decimal fraction
 	//! @param useD Define if letter "d" must be used instead of deg sign
 	QString radToDmsStr(const double angle, const bool decimal=false, const bool useD=false);
+	//! Convert an angle in radian to a dms formatted string for narration.
+	//! @param angle input angle in radian
+	//! @param decimal output second value with decimal fraction
+	//! @param useD (ignored)
+	QString radToDmsNarration(const double angle, const bool decimal=false, const bool useD=false);
 
 	//! Convert an angle in radian to a dms formatted string.
 	//! @param angle input angle in radian
 	//! @param precision
 	//! @param useD Define if letter "d" must be used instead of deg sign
 	QString radToDmsPStr(const double angle, const int precision = 0, const bool useD=false);
+	//! Convert an angle in radian to a dms formatted string for narration.
+	//! @param angle input angle in radian
+	//! @param precision
+	//! @param useD (ignored)
+	QString radToDmsPNarration(const double angle, const int precision = 0, const bool useD=false);
 
 	//! Convert an angle in decimal degree to +-dms format.
 	//! @param angle input angle in decimal degree
@@ -240,6 +260,11 @@ namespace StelUtils
 	//! @param latitude in decimal degrees
 	//! @param dms set true to use DMS formatted string
 	QString decDegToLatitudeStr(const double latitude, bool dms = true);
+	//! Convert latitude in decimal degrees to a dms formatted string or use decimal values. Interface equals decDegToLatitudeStr().
+	//! @param latitude in decimal degrees
+	//! @param dms set true to use DMS formatted string
+	QString decDegToLatitudeNarration(const double latitude, bool dms = true);
+
 
 	//! Convert longitude in decimal degrees to a dms formatted string.
 	//! @param longitude in decimal degrees
@@ -247,6 +272,12 @@ namespace StelUtils
 	//! @param semiSphere set true to use -180..180 degrees range (0..360 degrees otherwise)
 	//! @param dms set true to use DMS formatted string
 	QString decDegToLongitudeStr(const double longitude, bool eastPositive = true, bool semiSphere = true, bool dms = true);
+	//! Convert longitude in decimal degrees to a narration-ready string. Interface equals decDegToLongitudeStr().
+	//! @param longitude in decimal degrees
+	//! @param eastPositive set true to counting East direction positive
+	//! @param semiSphere set true to use -180..180 degrees range (0..360 degrees otherwise)
+	//! @param dms set true to use DMS formatted string
+	QString decDegToLongitudeNarration(const double longitude, bool eastPositive = true, bool semiSphere = true, bool dms = true);
 
 	//! Convert a dms formatted string to an angle in radian
 	//! @param s The input string
@@ -623,13 +654,18 @@ namespace StelUtils
 	//! @p colonFormat=true   |  "H:MM:SS.S"   | "HH:MM"
 	QString hoursToHmsStr(const double hours, const bool minutesOnly = false, const bool colonFormat=false);
 	QString hoursToHmsStr(const float hours, const bool minutesOnly = false, const bool colonFormat=false);
+
 	//! Convert decimal hours to hours, minutes, seconds in a narrate-ready long format
 	//! Format for:
 	//! @p minutesOnly        |      false                               |   true
 	//! ----------------------|------------------------------------------|----------
 	//!                       |  "H hours, MM minutes and SS.S seconds"  | "HH hours and MM minutes"
-	QString hoursToNarration(const double hours, const bool minutesOnly = false);
-	QString hoursToNarration(const float hours, const bool minutesOnly = false);
+	//! @p colonFormat is ignored (only kept for signature compatibility)
+	QString hoursToHmsNarration(const double hours, const bool minutesOnly = false, const bool colonFormat=false);
+	QString hoursToHmsNarration(const float hours, const bool minutesOnly = false, const bool colonFormat=false);
+
+	//QString hoursToNarration(const double hours, const bool minutesOnly = false); // OBSOLETE? TOO CONFUSE NAME.
+	//QString hoursToNarration(const float hours, const bool minutesOnly = false);
 
 
 	//! Convert JD to hours and minutes
