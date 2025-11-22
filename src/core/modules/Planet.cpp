@@ -1587,7 +1587,7 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 	const Vec3d pos = getEquinoxEquatorialPos(core);
 
 	// We cannot seriously omit at least the standard name.
-	QString res=getNameI18n();
+	QString res=getNameI18n() + " ";
 
 	if (flags&Name)
 	{
@@ -1603,10 +1603,10 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 		cNames.removeAll(res);
 
 		if (!cNames.isEmpty())
-			res.append(", " +  qc_("called", "object narration") + " " + cNames.first() + ","); // TBD: Provide more than 1 name?
+			res.append(", " +  qc_("called", "object narration") + " " + cNames.first() + ", "); // TBD: Provide more than 1 name?
 	}
 
-	if (flags&ObjectType)// Type
+	if (flags&ObjectType && englishName!="Moon") // Type
 	{
 		QMap<Planet::PlanetType, QString>typeStringMap=
 	{
@@ -1626,7 +1626,7 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 		{ isInterstellar, qc_("an interstellar object",      "object narration") },
 		{ isUNDEFINED,    qc_("an object of undefined type", "object narration") }
 	};
-		res.append(" " + q_("is") + " " + typeStringMap.value(pType, qc_("an object of undefined type", "object narration")) );
+		res.append(" " + q_("is") + " " + typeStringMap.value(pType, qc_("an object of undefined type", "object narration")) + " ");
 	}
 
 	if (flags&Magnitude)
@@ -1743,7 +1743,7 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 							     distanceAu > 0.5 ? auStr : "",
 							     distanceAu > 0.5 ? qc_("or", "object narration") : "",
 							     distKM, km));
-		res.append(QString("%1 %2.").arg(lightTime, StelUtils::hoursToNarration(distanceKm/SPEED_OF_LIGHT/3600.) ));
+		res.append(QString("%1 %2. ").arg(lightTime, StelUtils::hoursToNarration(distanceKm/SPEED_OF_LIGHT/3600.) ));
 	}
 
 	if (flags&Size) // Diameter
@@ -1761,13 +1761,13 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 				const double withoutRings = 2.*getSpheroidAngularRadius(core)*M_PI/180.;
 				if (withDecimalDegree)
 				{
-					s1 = StelUtils::radToDecDegStr(withoutRings, 5, false, true);
-					s2 = StelUtils::radToDecDegStr(angularSize, 5, false, true);
+					s1 = StelUtils::radToDecDegNarration(withoutRings, 1, false, true);
+					s2 = StelUtils::radToDecDegNarration(angularSize, 1, false, true);
 				}
 				else
 				{
-					s1 = StelUtils::radToDmsPStr(withoutRings, 2);
-					s2 = StelUtils::radToDmsPStr(angularSize, 2);
+					s1 = StelUtils::radToDmsPNarration(withoutRings, 2);
+					s2 = StelUtils::radToDmsPNarration(angularSize, 2);
 				}
 
 				sizeStr = QString("%1, %2: %3").arg(s1, q_("with rings"), s2);
@@ -1778,12 +1778,12 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 				{
 					if (withDecimalDegree)
 					{
-						s1 = StelUtils::radToDecDegStr(angularSize / sphereScale, 5, false, true);
+						s1 = StelUtils::radToDecDegNarration(angularSize / sphereScale, 1, false, true);
 						//s2 = StelUtils::radToDecDegStr(angularSize, 5, false, true);
 					}
 					else
 					{
-						s1 = StelUtils::radToDmsPStr(angularSize / sphereScale, 2);
+						s1 = StelUtils::radToDmsPNarration(angularSize / sphereScale, 2);
 						//s2 = StelUtils::radToDmsPStr(angularSize, 2);
 					}
 
@@ -1792,16 +1792,16 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 				else
 				{
 					if (withDecimalDegree)
-						sizeStr = StelUtils::radToDecDegStr(angularSize, 5, false, true);
+						sizeStr = StelUtils::radToDecDegNarration(angularSize, 1, false, true);
 					else
-						sizeStr = StelUtils::radToDmsPStr(angularSize, 2);
+						sizeStr = StelUtils::radToDmsPNarration(angularSize, 2);
 				}
 			}
-			res.append(QString("%1 %2.").arg(qc_("The apparent diameter is", "object narration"), sizeStr));
+			res.append(QString("%1 %2. ").arg(qc_("The apparent diameter is", "object narration"), sizeStr));
 		}
 
 		QString diam = (getPlanetType()==isPlanet ? qc_("The equatorial diameter is", "object narration") : qc_("Its diameter is", "object narration")); // Many asteroids have irregular shape (Currently unhandled)
-		res.append(QString("%1 %2 %3").arg(diam, QString::number(AU * getEquatorialRadius() * 2.0, 'f', 1) , qc_("kilometers", "distance")));
+		res.append(QString("%1 %2 %3. ").arg(diam, QString::number(AU * getEquatorialRadius() * 2.0, 'f', 1) , qc_("kilometers", "distance")));
 	}
 
 	return res;
