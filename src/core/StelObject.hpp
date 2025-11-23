@@ -258,6 +258,15 @@ public:
 			native(nat), pronounce(pr), pronounceI18n(prI18n), transliteration(trl),
 			translated(tra), translatedI18n(traI18n), IPA(ipa), byname(by), bynameI18n(byI18n),
 			special(sp){};
+		//! Return just one identifier to keep things short
+		QString getOneIdentifier(bool narrate)const {
+			QStringList list;
+			if (narrate)
+				list = {pronounceI18n, translatedI18n, pronounce, translated, native};
+			else
+				list = {translatedI18n, pronounceI18n, translated, pronounce, native};
+			list.removeAll("");
+			return list.first();}
 	};
 
 	//! A pre-defined "all available" set of specifiers for the getInfoString flags argument to getInfoString
@@ -544,6 +553,10 @@ protected:
 	//! FIXME: We should split this and provide shorter virtual methods for various parts of the InfoString.
 	//! The ExtraInfoStrings should be placed per flag, where they best fit.
 	QString getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+	//! Format the positional narration containing J2000/of date/altaz/hour angle positions and constellation, sidereal time, etc. for the object
+	//! FIXME: We should split this and provide shorter virtual methods for various parts of the NarrationString.
+	//! The ExtraInfoStrings should be placed per flag, where they best fit.
+	QString getCommonNarration(const StelCore *core, const InfoStringGroup& flags) const;
 
 	//! Format the magnitude info string for the object
 	//! @param core
