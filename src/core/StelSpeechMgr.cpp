@@ -58,6 +58,7 @@ StelSpeechMgr::~StelSpeechMgr()
 void StelSpeechMgr::init()
 {
 	QSettings *conf=StelApp::getInstance().getSettings();
+	initNarrationFlagsFromConfig(conf);
 	m_rate  =qBound(-1.0, conf->value("speech/rate",   0.0).toDouble(), 1.0);
 	m_pitch =qBound(-1.0, conf->value("speech/pitch",  0.0).toDouble(), 1.0);
 	m_volume=qBound( 0.0, conf->value("speech/volume", 50.0).toDouble(), 1.0);
@@ -265,4 +266,65 @@ const StelObject::InfoStringGroup& StelSpeechMgr::getNarrationTextFilters() cons
 void StelSpeechMgr::setNarrationTextFilters(const StelObject::InfoStringGroup &flags)
 {
 	this->flags=flags;
+}
+
+
+void StelSpeechMgr::initNarrationFlagsFromConfig(QSettings *conf)
+{
+	StelObject::InfoStringGroup flags = StelObject::InfoStringGroup(StelObject::None);
+
+	conf->beginGroup("custom_selected_info");
+	if (conf->value("flag_narration_name", false).toBool())
+		flags |= StelObject::Name;
+	if (conf->value("flag_narration_catalognumber", false).toBool())
+		flags |= StelObject::CatalogNumber;
+	if (conf->value("flag_narration_magnitude", false).toBool())
+		flags |= StelObject::Magnitude;
+	if (conf->value("flag_narration_absolutemagnitude", false).toBool())
+		flags |= StelObject::AbsoluteMagnitude;
+	if (conf->value("flag_narration_radecj2000", false).toBool())
+		flags |= StelObject::RaDecJ2000;
+	if (conf->value("flag_narration_radecofdate", false).toBool())
+		flags |= StelObject::RaDecOfDate;
+	if (conf->value("flag_narration_hourangle", false).toBool())
+		flags |= StelObject::HourAngle;
+	if (conf->value("flag_narration_altaz", false).toBool())
+		flags |= StelObject::AltAzi;
+	if (conf->value("flag_narration_elongation", false).toBool())
+		flags |= StelObject::Elongation;
+	if (conf->value("flag_narration_distance", false).toBool())
+		flags |= StelObject::Distance;
+	if (conf->value("flag_narration_velocity", false).toBool())
+		flags |= StelObject::Velocity;
+	if (conf->value("flag_narration_propermotion", false).toBool())
+		flags |= StelObject::ProperMotion;
+	if (conf->value("flag_narration_size", false).toBool())
+		flags |= StelObject::Size;
+	if (conf->value("flag_narration_extra", false).toBool())
+		flags |= StelObject::Extra;
+	if (conf->value("flag_narration_type", false).toBool())
+		flags |= StelObject::ObjectType;
+	if (conf->value("flag_narration_galcoord", false).toBool())
+		flags |= StelObject::GalacticCoord;
+	if (conf->value("flag_narration_supergalcoord", false).toBool())
+		flags |= StelObject::SupergalacticCoord;
+	if (conf->value("flag_narration_othercoord", false).toBool())
+		flags |= StelObject::OtherCoord;
+	if (conf->value("flag_narration_eclcoordofdate", false).toBool())
+		flags |= StelObject::EclipticCoordOfDate;
+	if (conf->value("flag_narration_eclcoordj2000", false).toBool())
+		flags |= StelObject::EclipticCoordJ2000;
+	if (conf->value("flag_narration_constellation", false).toBool())
+		flags |= StelObject::IAUConstellation;
+	if (conf->value("flag_narration_cultural_constellation", false).toBool())
+		flags |= StelObject::CulturalConstellation;
+	if (conf->value("flag_narration_sidereal_time", false).toBool())
+		flags |= StelObject::SiderealTime;
+	if (conf->value("flag_narration_rts_time", false).toBool())
+		flags |= StelObject::RTSTime;
+	if (conf->value("flag_narration_solar_lunar", false).toBool())
+	    flags |= StelObject::SolarLunarPosition;
+	conf->endGroup();
+
+	setNarrationTextFilters(flags);
 }
