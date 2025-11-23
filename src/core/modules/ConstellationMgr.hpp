@@ -140,9 +140,9 @@ public:
 	//! @return the translated name of the Lunar system
 	QString getLunarSystemName() const;
 	//!@return longitude in the culture's zodiacal longitudes (usually sign, degrees, minutes)
-	QString getZodiacCoordinate(Vec3d eqNow) const;
+	QString getZodiacCoordinate(Vec3d eqNow, bool narration=false) const;
 	//! @return lunar station in the culture's Lunar system
-	QString getLunarSystemCoordinate(Vec3d eqNow) const;
+	QString getLunarSystemCoordinate(Vec3d eqNow, bool narration=false) const;
 
 	//! @return the translated name of IAU constellation cst
 	static QString getIAUconstellationName(const QString &cst);
