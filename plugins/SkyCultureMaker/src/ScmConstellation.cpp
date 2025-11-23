@@ -22,20 +22,39 @@
  */
 
 #include "ScmConstellation.hpp"
+#include "ConstellationMgr.hpp"
 #include <QDir>
 #include <QFileInfo>
+#include <QObject>
+#include <StelModuleMgr.hpp>
 
-scm::ScmConstellation::ScmConstellation(const QString &id, const std::vector<ConstellationLine> &lines, const bool isDarkConstellation)
-	: id(id)
+scm::ScmConstellation::ScmConstellation(QObject *parent, const QString &id, const std::vector<ConstellationLine> &lines,
+                                        const bool isDarkConstellation)
+	: QObject(parent)
+	, id(id)
 	, lines(lines)
 	, isDarkConstellation(isDarkConstellation)
 {
-	QSettings *conf = StelApp::getInstance().getSettings();
-	constellationNameFont.setPixelSize(conf->value("viewing/constellation_font_size", 15).toInt());
+	ConstellationMgr *constMgr = GETSTELMODULE(ConstellationMgr);
 
-	QString defaultColor          = conf->value("color/default_color", "0.5,0.5,0.7").toString();
-	defaultConstellationLineColor = Vec3f(conf->value("color/const_lines_color", defaultColor).toString());
-	defaultConstellationNameColor = Vec3f(conf->value("color/const_names_color", defaultColor).toString());
+	// Initial values
+	constellationLineThickness = constMgr->getConstellationLineThickness();
+	constellationNameFont.setPixelSize(constMgr->getFontSize());
+	defaultConstellationLineColor = constMgr->getLinesColor();
+	defaultConstellationNameColor = constMgr->getLabelsColor();
+
+	// Connections
+	connect(constMgr, &ConstellationMgr::constellationLineThicknessChanged, this,
+	        [this](int v) { constellationLineThickness = v; });
+
+	connect(constMgr, &ConstellationMgr::fontSizeChanged, this,
+	        [this](int v) { constellationNameFont.setPixelSize(v); });
+
+	connect(constMgr, &ConstellationMgr::linesColorChanged, this,
+	        [this](const Vec3f &c) { defaultConstellationLineColor = c; });
+
+	connect(constMgr, &ConstellationMgr::namesColorChanged, this,
+	        [this](const Vec3f &c) { defaultConstellationNameColor = c; });
 
 	updateTextPosition();
 }
@@ -106,45 +125,43 @@ const std::vector<scm::ConstellationLine> &scm::ScmConstellation::getLines() con
 	return lines;
 }
 
-void scm::ScmConstellation::drawConstellation(StelCore *core, const Vec3f &lineColor, const Vec3f &nameColor) const
+void scm::ScmConstellation::draw(StelCore *core) const
 {
-	if (isHidden)
-	{
-		return;
-	}
 	StelPainter painter(core->getProjection(drawFrame));
-	painter.setBlending(true);
-	painter.setLineSmooth(true);
-	painter.setFont(constellationNameFont);
+	drawLines(painter, defaultConstellationLineColor);
+	drawName(core, painter, defaultConstellationNameColor);
+	drawArtwork(core, painter);
+}
 
-	painter.setColor(lineColor, 1.0f);
+void scm::ScmConstellation::drawLines(StelPainter &sPainter, const Vec3f &lineColor) const
+{
+	// set up painter
+	sPainter.setBlending(true);
+	sPainter.setLineSmooth(true);
+	sPainter.setFont(constellationNameFont);
+	sPainter.setColor(lineColor, 1.0f);
+	const float scale = sPainter.getProjector()->getScreenScale();
+	if (constellationLineThickness > 1 || scale > 1.f)
+	{
+		sPainter.setLineWidth(constellationLineThickness * scale);
+	}
 
+	// draw lines
 	for (const ConstellationLine &line : lines)
 	{
-		painter.drawGreatCircleArc(line.start.coordinate, line.end.coordinate);
+		sPainter.drawGreatCircleArc(line.start.coordinate, line.end.coordinate);
 	}
 
-	drawNames(core, painter, nameColor);
-
-	artwork.draw(core, painter);
+	// restore line properties
+	if (constellationLineThickness > 1 || scale > 1.f)
+	{
+		sPainter.setLineWidth(1); // restore thickness
+	}
+	sPainter.setLineSmooth(false);
 }
 
-void scm::ScmConstellation::drawConstellation(StelCore *core) const
+void scm::ScmConstellation::drawName(StelCore *core, StelPainter &sPainter, const Vec3f &nameColor) const
 {
-	if (isHidden)
-	{
-		return;
-	}
-	drawConstellation(core, defaultConstellationLineColor, defaultConstellationNameColor);
-}
-
-void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter, const Vec3f &nameColor) const
-{
-	if (isHidden)
-	{
-		return;
-	}
-
 	sPainter.setBlending(true);
 
 	Vec3d velocityObserver(0.);
@@ -168,14 +185,9 @@ void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter, con
 	                  -sPainter.getFontMetrics().boundingRect(englishName).width() / 2, 0, false);
 }
 
-void scm::ScmConstellation::drawNames(StelCore *core, StelPainter &sPainter) const
+void scm::ScmConstellation::drawArtwork(StelCore *core, StelPainter &sPainter) const
 {
-	if (isHidden)
-	{
-		return;
-	}
-
-	drawNames(core, sPainter, defaultConstellationNameColor);
+	artwork.draw(core, sPainter);
 }
 
 QJsonObject scm::ScmConstellation::toJson(const QString &skyCultureId, const bool mergeLines) const
@@ -268,16 +280,6 @@ void scm::ScmConstellation::updateTextPosition()
 		XYZname += line.start.coordinate;
 	}
 	XYZname.normalize();
-}
-
-void scm::ScmConstellation::hide()
-{
-	isHidden = true;
-}
-
-void scm::ScmConstellation::show()
-{
-	isHidden = false;
 }
 
 void scm::ScmConstellation::mergeLinesIntoPolylines(QJsonArray &lines) const

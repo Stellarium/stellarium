@@ -88,7 +88,7 @@ void ScmConstellationDialog::loadFromConstellation(scm::ScmConstellation *conste
 	ui->description->setText(constellationDescription);
 
 	// Hide the original constellation while editing
-	constellation->hide();
+	constellation->isHidden = true;
 	// Load the lines to ScmDraw
 	maker->getScmDraw()->loadLines(constellation->getLines());
 
@@ -477,7 +477,7 @@ void ScmConstellationDialog::cancel()
 	if (constellationBeingEdited != nullptr)
 	{
 		// If we are editing a constellation, we need to show the original one again
-		constellationBeingEdited->show();
+		constellationBeingEdited->isHidden = false;
 	}
 	resetDialog();
 	ScmConstellationDialog::close();

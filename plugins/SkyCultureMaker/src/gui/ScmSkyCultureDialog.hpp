@@ -52,7 +52,7 @@ public:
 	 *
 	 * @param constellations The vector of constellations to be set.
 	 */
-	void setConstellations(std::vector<scm::ScmConstellation> *constellations);
+	void setConstellations(std::vector<std::unique_ptr<scm::ScmConstellation>> *constellations);
 
 	/**
 	 * @brief Resets the constellations to an empty vector.
@@ -95,7 +95,7 @@ private:
 	QString name = "";
 
 	/// The vector of constellations to be displayed in the dialog.
-	std::vector<scm::ScmConstellation> *constellations = nullptr;
+	std::vector<std::unique_ptr<scm::ScmConstellation>> *constellations = nullptr;
 
 	/**
 	 * @brief Gets the display name from a constellation.

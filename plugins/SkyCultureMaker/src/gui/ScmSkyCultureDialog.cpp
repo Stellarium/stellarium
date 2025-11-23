@@ -41,7 +41,7 @@ ScmSkyCultureDialog::~ScmSkyCultureDialog()
 	qDebug() << "SkyCultureMaker: Unloaded the ScmSkyCultureDialog";
 }
 
-void ScmSkyCultureDialog::setConstellations(std::vector<scm::ScmConstellation> *constellations)
+void ScmSkyCultureDialog::setConstellations(std::vector<std::unique_ptr<scm::ScmConstellation>> *constellations)
 {
 	ScmSkyCultureDialog::constellations = constellations;
 	if (ui && dialog && constellations != nullptr)
@@ -50,7 +50,7 @@ void ScmSkyCultureDialog::setConstellations(std::vector<scm::ScmConstellation> *
 		for (const auto &constellation : *constellations)
 		{
 			// Add the constellation to the list widget
-			ui->constellationsList->addItem(getDisplayNameFromConstellation(constellation));
+			ui->constellationsList->addItem(getDisplayNameFromConstellation(*constellation));
 		}
 	}
 }
@@ -207,9 +207,9 @@ void ScmSkyCultureDialog::editSelectedConstellation()
 		QString selectedConstellationId = "";
 		for (const auto &constellation : *constellations)
 		{
-			if (constellationName == (getDisplayNameFromConstellation(constellation)))
+			if (constellationName == (getDisplayNameFromConstellation(*constellation)))
 			{
-				selectedConstellationId = constellation.getId();
+				selectedConstellationId = constellation->getId();
 				break;
 			}
 		}
@@ -232,9 +232,9 @@ void ScmSkyCultureDialog::removeSelectedConstellation()
 		QString selectedConstellationId = "";
 		for (const auto &constellation : *constellations)
 		{
-			if (constellationName == (getDisplayNameFromConstellation(constellation)))
+			if (constellationName == (getDisplayNameFromConstellation(*constellation)))
 			{
-				selectedConstellationId = constellation.getId();
+				selectedConstellationId = constellation->getId();
 				break;
 			}
 		}
@@ -303,12 +303,12 @@ QString ScmSkyCultureDialog::makeConstellationsSection() const
 	QString text;
 	for (const auto& constellation : *constellations)
 	{
-		const auto descr = constellation.getDescription().trimmed();
+		const auto descr = constellation->getDescription().trimmed();
 		if (descr.isEmpty()) continue;
 		if (!text.isEmpty())
 			text += "\n\n";
 		text += "##### ";
-		text += constellation.getEnglishName();
+		text += constellation->getEnglishName();
 		text += "\n\n";
 		text += descr;
 	}

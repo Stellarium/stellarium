@@ -89,6 +89,9 @@ private:
 	/// Holds the position of the eraser on the last frame.
 	Vec2d lastEraserPos = ScmDraw::defaultLastEraserPos;
 
+	/// The thickness of the constellation lines.
+	int constellationLineThickness = 1;
+
 	/**
 	 * @brief Appends a draw point to the list of drawn points.
 	 * 
@@ -142,11 +145,11 @@ public:
 	ScmDraw();
 
 	/**
-	 * @brief Draws the line between the start and the current end point.
+	 * @brief Draws the constellation lines that are currently being edited.
 	 *
 	 * @param core The core used for drawing the line.
 	 */
-	void drawLine(StelCore *core) const;
+	void drawLines(StelCore *core) const;
 
 	/// Handle mouse clicks. Please note that most of the interactions will be done through the GUI module.
 	/// @return set the event as accepted if it was intercepted
