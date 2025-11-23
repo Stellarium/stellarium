@@ -638,19 +638,18 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 	const bool ebsFlag = stype.contains("eclipsing binary system");
 	if (flags&ObjectType)
 	{
-	//	QStringList stypes;
-	//	if (!objType.isEmpty())
-	//		stypes.append(objType);
-	//	if (!varType.isEmpty())
-	//		stypes.append(varType);
-	//	if (stypes.size()>0)
-	//		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), objectTypeI18nStr, stypes.join(", "));
-	//	else
-	//		oss << QString("%1: <b>%2</b>").arg(q_("Type"), objectTypeI18nStr);
+		QString descType=qc_("This star is described as ", "object narration");
+		QStringList stypes;
+		if (!objType.isEmpty())
+			stypes.append(objType);
+		if (!varType.isEmpty())
+			stypes.append(varType);
+		if (stypes.size()>0)
+			oss << QString("%1: %2 (%3). ").arg(descType, objectTypeI18nStr, stypes.join(", "));
+		else
+			oss << QString("%1: %2. ").arg(descType, objectTypeI18nStr);
 
-	//	oss << getExtraInfoStrings(flags&ObjectType).join("");
-
-	oss << qc_("This star is described as ", "object narration") << " " << objectTypeI18nStr << ". ";
+		//	oss << getExtraInfoStrings(flags&ObjectType).join("");
 	}
 
 	double RA, DEC, pmra, pmdec, Plx, RadialVel;
@@ -703,10 +702,12 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 	//	}
 	//}
 
-	//oss << getCommonInfoString(core, flags);
+
+	//InfoStringGroup alreadyProcessed=StelObject::IAUConstellation | StelObject::CulturalConstellation;
+	oss << getCommonNarration(core, flags); // & (~alreadyProcessed));
 
 	// kinda impossible for both parallax and parallax_err to be exactly 0, so they must just be missing
-	//if (flags&Distance)
+	if (flags&Distance)
 	{
 		// do parallax SNR cut because we are calculating distance, inverse parallax is bad for >20% uncertainty
 		if ((Plx!=0) && (PlxErr!=0) && (Plx/PlxErr>5))
@@ -736,25 +737,25 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 	//						qc_("mas/yr", "milliarc second per year"));
 	//}
 
-	//if (flags&Velocity)
-	//{
-	//	if (RadialVel)
-	//	{
-	//		// TRANSLATORS: Unit of measure for speed - kilometers per second
-	//		QString kms = qc_("km/s", "speed");
-	//		oss << QString("%1: %2 %3. ").arg(q_("Radial velocity"), QString::number(RadialVel, 'f', 1), kms);
-	//	}
-	//}
+	if (flags&Velocity)
+	{
+		if (RadialVel)
+		{
+			// TRANSLATORS: Unit of measure for speed - kilometers per second
+			const QString kms = qc_("kilometers per second", "speed");
+			oss << QString("%1: %2 %3. ").arg(qc_("Its radial velocity is", "object narration"), QString::number(RadialVel, 'f', 1), kms);
+		}
+	}
 
-	//if (flags&Extra)
+	if (flags&Extra)
 	{
 		if (Plx!=0)
 		{
 			QString plx = qc_("Its parallax is", "object narration");
 			if (PlxErr>0.f)
-				oss <<  QString("%1: %2 %3 %4 ").arg(plx, QString::number(Plx, 'f', 3), QChar(0x00B1), QString::number(PlxErr, 'f', 3));
+				oss <<  QString("%1: %2 %3 %4 ").arg(plx, QString::number(Plx, 'f', 1), QChar(0x00B1), QString::number(PlxErr, 'f', 2));
 			else
-				oss << QString("%1: %2 ").arg(plx, QString::number(Plx, 'f', 3));
+				oss << QString("%1: %2 ").arg(plx, QString::number(Plx, 'f', 1));
 			oss  << qc_("milliarc-seconds", "parallax") << ". ";
 		}
 
@@ -1095,26 +1096,26 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 // Implemented:
 // * Name
 // * CatalogNumber
-// Magnitude
-// RaDecJ2000
-// RaDecOfDate
-// AltAzi
+// * Magnitude
+// * RaDecJ2000
+// * RaDecOfDate
+// * AltAzi
 // * Distance
 // Elongation
 // Size
 // Velocity
 // ProperMotion
 // * Extra
-// HourAngle
-// AbsoluteMagnitude
-// GalacticCoord
-// SupergalacticCoord
+// * HourAngle
+// * AbsoluteMagnitude
+// * GalacticCoord
+// * SupergalacticCoord
 // OtherCoord
 // * ObjectType
-// EclipticCoordJ2000
-// EclipticCoordOfDate
-// IAUConstellation
-// CulturalConstellation
+// * EclipticCoordJ2000
+// * EclipticCoordOfDate
+// * IAUConstellation
+// * CulturalConstellation
 // SiderealTime
 // RTSTime
 // SolarLunarPosition
@@ -1218,6 +1219,9 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 		}
 	}
 
+	//InfoStringGroup alreadyProcessed=StelObject::IAUConstellation | StelObject::CulturalConstellation;
+	oss << getCommonNarration(core, flags); // & (~alreadyProcessed));
+
 	//// kinda impossible for both pm to be exactly 0, so they must just be missing
 	//if (computeAstrometryFlag)
 	//{
@@ -1250,9 +1254,9 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 		{
 			QString plx = qc_("Its Parallax is", "object narration");
 			if (PlxErr>0.f)
-				oss <<  QString("%1 %2%3%4 ").arg(plx, QString::number(Plx, 'f', 3), QChar(0x00B1), QString::number(PlxErr, 'f', 3));
+				oss <<  QString("%1 %2%3%4 ").arg(plx, QString::number(Plx, 'f', 1), QChar(0x00B1), QString::number(PlxErr, 'f', 2));
 			else
-				oss << QString("%1 %2 ").arg(plx, QString::number(Plx, 'f', 3));
+				oss << QString("%1 %2 ").arg(plx, QString::number(Plx, 'f', 1));
 			oss  << qc_("milliarc-seconds", "parallax") << ". ";
 		}
 		//oss << getExtraInfoStrings(Distance).join("");
