@@ -1761,13 +1761,13 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 				const double withoutRings = 2.*getSpheroidAngularRadius(core)*M_PI/180.;
 				if (withDecimalDegree)
 				{
-					s1 = StelUtils::radToDecDegStr(withoutRings, 5, false, true);
-					s2 = StelUtils::radToDecDegStr(angularSize, 5, false, true);
+					s1 = StelUtils::radToDecDegNarration(withoutRings, 1, false, true);
+					s2 = StelUtils::radToDecDegNarration(angularSize, 1, false, true);
 				}
 				else
 				{
-					s1 = StelUtils::radToDmsPStr(withoutRings, 2);
-					s2 = StelUtils::radToDmsPStr(angularSize, 2);
+					s1 = StelUtils::radToDmsPNarration(withoutRings, 2);
+					s2 = StelUtils::radToDmsPNarration(angularSize, 2);
 				}
 
 				sizeStr = QString("%1, %2: %3").arg(s1, q_("with rings"), s2);
