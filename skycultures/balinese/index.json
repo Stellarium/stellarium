@@ -1,0 +1,446 @@
+{
+  "id": "balinese",
+  "region": "South-eastern Asia",
+  "classification": ["Ethnographic"],
+  "fallback_to_international_names": false,
+  "constellations": [
+      {
+      "id": "CON balinese KaSu",
+      "lines": [[71795, 69673, 67927], [69673, 72105, 73555], [74666, 71075]],
+      "image": {
+        "file": "illustrations/Kala_Sungsang.png",
+        "size": [900, 925],
+        "anchors": [
+          {"pos": [413, 137], "hip": 69673},
+          {"pos": [291, 53], "hip": 67927},
+          {"pos": [258, 661], "hip": 71075}
+        ]
+      },
+      "common_name": {"english": "Upside-down Demon", "native": "ᬓᬮᬲᬸᬗ᭄ᬲᬂ", "pronounce": "Kala Sungsang", "IPA": "[ˈka.lə ˈsuŋ.saŋ]"}
+    },
+    {
+      "id": "CON balinese Gaj",
+      "lines": [[15900, 18724, 20205, 21421, 20889, 20455, 17851], [20889, 21881, 25428, 26451]],
+      "image": {
+        "file": "illustrations/Gajah.png",
+        "size": [963, 1200],
+        "anchors": [
+          {"pos": [738, 80], "hip": 26451},
+          {"pos": [870, 240], "hip": 25428},
+          {"pos": [470, 470], "hip": 21421}
+        ]
+      },
+      "common_name": {"english": "An Elephant", "native": "ᬕᬚᬄ", "pronounce": "Gajah", "IPA": "[ˈɡa.dʒah]"}
+    },
+    {
+      "id": "CON balinese Teng",
+      "lines": [[27989, 25336, 25930, 26311, 26727, 27366], [25930, 24436]],
+      "image": {
+        "file": "illustrations/Tenggala.png",
+        "size": [1600, 1200],
+        "anchors": [
+          {"pos": [402, 474], "hip": 25336},
+          {"pos": [1243, 205], "hip": 24436},
+          {"pos": [354, 953], "hip": 27989}
+        ]
+      },
+      "common_name": {"english": "A Plough", "native": "ᬢᭂᬗ᭄ᬕᬮ", "pronounce": "Těnggala", "IPA": "[təŋˈɡa.lə]"}
+    },
+    {
+      "id": "CON balinese KlSu",
+      "lines": [[82396, 81266, 80763, 80112, 78401], [80763, 78265], [80763, 78104], [80763, 78820]],
+      "image": {
+        "file": "illustrations/Klapa_Sunda.png",
+        "size": [1200, 1232],
+        "anchors": [
+          {"pos": [1045, 80], "hip": 78820},
+          {"pos": [1047, 836], "hip": 78104},
+          {"pos": [236, 1020], "hip": 82396}
+        ]
+      },
+      "common_name": {"english": "A Leaning Coconut Tree", "native": "ᬓ᭄ᬮᬧᬲᬸᬦ᭄ᬤ", "pronounce": "Klapa Sunda", "IPA": "[ˈkla.pa ˈsun.də]"}
+    },
+    {
+      "id": "CON balinese Hul",
+      "lines": [[71683, 68702]],
+      "image": {
+        "file": "illustrations/Hulanjar.png",
+        "size": [411, 1478],
+        "anchors": [
+          {"pos": [166, 1340], "hip": 71683},
+          {"pos": [350, 856], "hip": 70035},
+          {"pos": [264, 516], "hip": 68702}
+        ]
+      },
+      "common_name": {"english": "A Widow", "native": "ᬳᬸᬮᬜ᭄ᬚᬃ", "pronounce": "Hulanjar", "IPA": "[uˈlan.dʒar]"}
+    },
+    {
+      "id": "CON balinese Lem",
+      "lines": [[26451, 21421, 20205, 20889, 21881, 25428], [20205, 18724], [18907, 18724, 17702, 16083, 15900]],
+      "image": {
+        "file": "illustrations/Lembu.png",
+        "size": [1495, 1075],
+        "anchors": [
+          {"pos": [1231, 40], "hip": 26451},
+          {"pos": [1410, 262], "hip": 25428},
+          {"pos": [871, 890], "hip": 17702}
+        ]
+      },
+      "common_name": {"english": "A White Ox", "native": "ᬍᬫ᭄ᬩᬸ", "pronounce": "Lěmbu", "IPA": "[ˈlɛm.bu]"}
+    },
+    {
+      "id": "CON balinese PeSu",
+      "lines": [[54539, 57399, 58001, 59774, 54061, 46733, 41704, 44127, 44471, 46853, 53910, 58001]],
+      "image": {
+        "file": "illustrations/Pedati_Suung.png",
+        "size": [1500, 1176],
+        "anchors": [
+          {"pos": [391, 723], "hip": 41704},
+          {"pos": [1211, 196], "hip": 54539},
+          {"pos": [1354, 697], "hip": 59774}
+        ]
+      },
+      "common_name": {"english": "An Empty Horse Cart", "native": "ᬧᭂᬤᬢᬶᬲᬸᬳᬸᬂ", "pronounce": "Pědati Suung", "IPA": "[pəˈda.ti ˈsu.ʔuŋ]"}
+    },
+    {
+      "id": "CON balinese Asu",
+      "lines": [[30122, 33579, 34444, 35037, 35904], [34444, 33977, 32349, 31592], [30324, 32349, 33347, 34045, 33160]],
+      "image": {
+        "file": "illustrations/Asu.png",
+        "size": [1538, 1298],
+        "anchors": [
+          {"pos": [238, 210], "hip": 35904},
+          {"pos": [1055, 638], "hip": 32349},
+          {"pos": [1098, 412], "hip": 34045}
+        ]
+      },
+      "common_name": {"english": "A Dog", "native": "ᬳᬲᬸ", "pronounce": "Asu", "IPA": "[ˈa.su]"}
+    },
+    {
+      "id": "CON balinese Sida",
+      "lines": [[26207, 26176, 26366]],
+      "image": {
+        "file": "illustrations/Sidamalung.png",
+        "size": [1144, 667],
+        "anchors": [
+          {"pos": [169, 285], "hip": 26207},
+          {"pos": [144, 252], "hip": 26176},
+          {"pos": [178, 212], "hip": 26366}
+        ]
+      },
+      "common_name": {"english": "A Pig", "native": "ᬲᬶᬤᬫᬮᬸᬂ", "pronounce": "Sidamalung", "IPA": "[si.dəˈma.luŋ]"}
+    },
+    {
+      "id": "CON balinese GaMi",
+      "lines": [[1562, 3419, 9347, 12770, 12387, 14135, 12828, 10324, 6537, 5364, 3419]],
+      "image": {
+        "file": "illustrations/Gajahmina.png",
+        "size": [1378, 898],
+        "anchors": [
+          {"pos": [197, 304], "hip": 1562},
+          {"pos": [300, 175], "hip": 3419},
+          {"pos": [1058, 597], "hip": 14135}
+        ]
+      },
+      "common_name": {"english": "Elephantfish", "native": "ᬕᬚᬳ᭄ᬫᬶᬦ", "pronounce": "Gajahmina", "IPA": "[ɡa.dʒahˈmi.nə]"}
+    },
+    {
+      "id": "CON balinese Lum",
+      "lines": [[60718, 61084], [62434, 59747]],
+      "image": {
+        "file": "illustrations/Lumbung.png",
+        "size": [2048, 1683],
+        "anchors": [
+          {"pos": [908, 326], "hip": 61084},
+          {"pos": [608, 770], "hip": 62434},
+          {"pos": [1193, 1221], "hip": 60718}
+        ]
+      },
+      "common_name": {"english": "Granary (Paddy Storage)", "native": "ᬮᬸᬫ᭄ᬩᬸᬂ", "pronounce": "Lumbung", "IPA": "[ˈlum.buŋ]"}
+    },
+    {
+      "id": "CON balinese Kar",
+      "lines": [[17851, 17847, 17702, 17608, 17499, 17531, 17573, 17579]],
+      "image": {
+        "file": "illustrations/Kartika.png",
+        "size": [2048, 1989],
+        "anchors": [
+          {"pos": [395, 354], "hip": 17847},
+          {"pos": [661, 799], "hip": 17702},
+          {"pos": [1189, 1128], "hip": 17573}
+        ]
+      },
+      "common_name": {"english": "Star", "native": "ᬓᬃᬢᬶᬓ", "pronounce": "Kartika", "IPA": "[karˈti.kə]"}
+    },
+    {
+      "id": "CON balinese SaTi",
+      "lines": [[79374, 82396, 82514, 84143, 87073, 86670, 85927, 85696]],
+      "image": {
+        "file": "illustrations/Sangkatikel.png",
+        "size": [1500, 1233],
+        "anchors": [
+          {"pos": [1326, 1199], "hip": 79374},
+          {"pos": [431, 736], "hip": 82514},
+          {"pos": [327, 173], "hip": 87073}
+        ]
+      },
+      "common_name": {"english": "A Broken Hoe", "native": "ᬲᬗ᭄ᬓᬢᬶᬓᭂᬮ᭄", "pronounce": "Sangkatikěl", "IPA": "[saŋ.kəˈti.kəl]"}
+    },
+    {
+      "id": "CON balinese SalU",
+      "lines": [[77853, 76333, 74785, 72622, 73714, 76470]],
+      "image": {
+        "file": "illustrations/Salah_Ukur.png",
+        "size": [1500, 1010],
+        "anchors": [
+          {"pos": [951, 134], "hip": 72622},
+          {"pos": [1337, 611], "hip": 76470},
+          {"pos": [869, 750], "hip": 77853}
+        ]
+       },
+       "common_name": {"english": "Error Measurement", "native": "ᬲᬮᬄᬳᬸᬓᬸᬃ", "pronounce": "Salah Ukur", "IPA": "[ˈsa.lah ˈu.kur]"}
+    },
+    {
+      "id": "CON balinese Kum",
+      "lines": [[113136, 112716, 112961, 111497, 110960, 110395, 109074, 106278, 102618, 104459, 109139, 110003]],
+      "image": {
+        "file": "illustrations/Kumba.png",
+        "size": [1790, 1829],
+        "anchors": [
+          {"pos": [1026, 102], "hip": 102618},
+          {"pos": [507, 916], "hip": 109074},
+          {"pos": [1231, 1575], "hip": 113136}
+        ]
+      },
+      "common_name": {"english": "An Earthen Vessel", "native": "ᬓᬸᬫ᭄ᬩ", "pronounce": "Kumba", "IPA": "[ˈkum.bə]"}
+    },
+    {
+      "id": "CON balinese Naga",
+      "lines": [[64962, 56343, 52943, 51069, 49841, 48356, 46390, 43813, 43109]],
+      "image": {
+        "file": "illustrations/Naga.png",
+        "size": [1408, 809],
+        "anchors": [
+          {"pos": [147, 294], "hip": 64962},
+          {"pos": [466, 567], "hip": 56343},
+          {"pos": [1152, 274], "hip": 43813}
+        ]
+      },
+      "common_name": {"english": "A Dragon", "native": "ᬦᬕ", "pronounce": "Naga", "IPA": "[ˈna.ɡə]"}
+    },
+    {
+      "id": "CON balinese PrPe",
+      "lines": [[92855, 93506]],
+      "image": {
+        "file": "illustrations/Prahu_Pegat.png",
+        "size": [1227, 600],
+        "anchors": [
+          {"pos": [498, 333], "hip": 92855},
+          {"pos": [679, 328], "hip": 93506},
+          {"pos": [603, 413], "hip": 93864}
+        ]
+      },
+      "common_name": {"english": "A Broken Ship", "native": "ᬧ᭄ᬭᬳᬸᬧᭂᬕᬢ᭄", "pronounce": "Prahu Pěgat", "IPA": "[ˈpra.u ˈpə.ɡat]"}
+    },
+    {
+      "id": "CON balinese Uda",
+      "lines": [[107556, 106985, 100064, 100345, 102485, 102978, 105881, 107556]],
+      "image": {
+        "file": "illustrations/Udang.png",
+        "size": [1200, 714],
+        "anchors": [
+          {"pos": [627, 632], "hip": 102978},
+          {"pos": [958, 300], "hip": 100064},
+          {"pos": [259, 204], "hip": 107556}
+        ]
+      },
+      "common_name": {"english": "A Prawn", "native": "ᬳᬸᬤᬂ", "pronounce": "Udang", "IPA": "[ˈu.daŋ]"}
+    },
+    {
+      "id": "CON balinese PuAt",
+      "lines": [[6193, 5742, 5571, 7097, 8198, 9487, 8833, 7884, 7007, 4906, 3786, 116771, 115830, 114971, 115738, 116928]],
+      "image": {
+        "file": "illustrations/Puwuh_Atarung.png",
+        "size": [1200, 1077],
+        "anchors": [
+          {"pos": [690, 313], "hip": 9487},
+          {"pos": [113, 692], "hip": 114971},
+          {"pos": [841, 729], "hip": 5571}
+        ]
+      },
+      "common_name": {"english": "Battling Quails", "native": "ᬧᬸᬯᬸᬄᬳᬢᬭᬸᬂ", "pronounce": "Puwuh Atarung", "IPA": "[ˈpu.wuh aˈta.ruŋ]"}
+    },
+    {
+      "id": "CON balinese LaPa",
+      "lines": [[67301, 65378, 62956, 59774, 58001]],
+      "image": {
+         "file": "illustrations/Larung_Paglangan.png",
+          "size": [1500, 1150],
+           "anchors": [
+            {"pos": [195, 811], "hip": 58001},
+            {"pos": [1213, 802], "hip": 67301},
+            {"pos": [659, 1001], "hip": 62956}
+          ]
+        },
+        "common_name": {"english": "Throwing Ashes", "native": "ᬮᬭᬸᬂᬧᬕ᭄ᬮᬗᬦ᭄", "pronounce": "Larung Paglangan", "IPA": "[laˈruŋ paˈɡəla.ŋan]"}
+    },
+    {
+      "id": "CON balinese Pat",
+      "lines": [[108085, 110997, 112122, 112623],[109268, 114421]],
+      "image": {
+        "file": "illustrations/Patrem.png",
+        "size": [731, 1100],
+        "anchors": [
+          {"pos": [543, 57], "hip": 108085},
+          {"pos": [50, 830], "hip": 114421},
+          {"pos": [634, 576], "hip": 109268}
+        ]
+      },
+      "common_name": {"english": "Keris (Indigenous Dagger)", "native": "ᬧᬢᬺᬫ᭄", "pronounce": "Patrem", "IPA": "[ˈpa.trəm]"}
+    },
+    {
+      "id": "CON balinese Kuda",
+      "lines": [[114971, 109074, 107315, 109427, 112029, 113963, 1067, 667],[1067, 3092],[113963, 112748, 112158],[112748, 113881]],
+      "image": {
+        "file": "illustrations/Kuda.png",
+        "size": [1387, 1175],
+        "anchors": [
+          {"pos": [154, 436], "hip": 107315},
+          {"pos": [298, 167], "hip": 109074},
+          {"pos": [1134, 1098], "hip": 3092}
+        ]
+      },
+      "common_name": {"english": "Horse", "native": "ᬓᬸᬤ", "pronounce": "Kuda", "IPA": "[ˈku.də]"}
+    },
+    {
+      "id": "CON balinese Yuyu",
+      "lines": [[44066, 42911, 40526],[42911, 42806, 43103]],
+      "image": {
+        "file": "illustrations/Yuyu.png",
+        "size": [2048, 1828],
+        "anchors": [
+          {"pos": [1756, 285], "hip": 40526},
+          {"pos": [1742, 1492], "hip": 44066},
+          {"pos": [242, 1259], "hip": 43103}
+        ]
+      },
+      "common_name": {"english": "Freshwater Crab", "native": "ᬬᬸᬬᬸ", "pronounce": "Yuyu", "IPA": "[ˈju.ju]"}
+    },
+    {
+      "id": "CON balinese PrSa",
+      "lines": [[68002, 71352, 71860, 66657, 61084, 59196, 61932, 68002, 65109, 68933]],
+      "image": {
+        "file": "illustrations/Prahu_Sarat.png",
+        "size": [1433, 1075],
+        "anchors": [
+          {"pos": [512, 307], "hip": 65109},
+          {"pos": [121, 807], "hip": 71352},
+          {"pos": [1239, 663], "hip": 59196}
+        ]
+      },
+      "common_name": {"english": "Overloaded Ship", "native": "ᬧ᭄ᬭᬳᬸᬲᬭᬢ᭄", "pronounce": "Prahu Sarat", "IPA": "[ˈpra.u ˈsa.rat]"}
+    },
+    {
+      "id": "CON balinese Tang",
+      "lines": [[66249, 63090, 63608, 57632, 57757, 61941, 65474]],
+      "image": {
+        "file": "illustrations/Tangis.png",
+        "size": [949, 1123],
+        "anchors": [
+          {"pos": [190, 529], "hip": 63608},
+          {"pos": [370, 109], "hip": 57632},
+          {"pos": [556, 966], "hip": 65474}
+        ]
+      },
+      "common_name": {"english": "Tears (Mourning the Dead)","native": "ᬢᬗᬶᬲ᭄", "pronounce": "Tangis", "IPA": "[ˈta.ŋəs]"}
+    },
+    {
+      "id": "CON balinese Ati",
+      "lines": [[79593, 77516, 77070, 76267]],
+      "image": {
+        "file": "illustrations/Atiwa-tiwa.png",
+        "size": [1600, 855],
+        "anchors": [
+          {"pos": [23, 198], "hip": 76267},
+          {"pos": [1367, 338], "hip": 77516},
+          {"pos": [1327, 672], "hip": 79593}
+        ]
+      },
+      "common_name": {"english": "Bringing Corpse to Cremation", "native": "ᬳᬢᬶᬯ​ᬢᬶᬯ", "pronounce": "Atiwa-tiwa", "IPA": "[a.tiˈwə.ti.wə]"}
+    },
+    {
+      "id": "CON balinese Bade",
+      "lines": [[24305, 23685, 27072, 27654, 25985, 24305]],
+      "image": {
+        "file": "illustrations/Bade.png",
+        "size": [1500, 1120],
+        "anchors": [
+          {"pos": [495, 1010], "hip": 23685},
+          {"pos": [790, 271], "hip": 27654},
+          {"pos": [953, 1010], "hip": 24305}
+        ]
+      },
+      "common_name": {"english": "Funeral Bier", "native": "ᬩᬤᬾ", "pronounce": "Bade", "IPA": "[ˈba.də]"}
+    },
+    {
+      "id": "CON balinese Ru",
+      "lines": [[93747, 95501, 99473, 97278, 93747],[97649, 93805]],
+      "image": {
+        "file": "illustrations/Ru.png",
+        "size": [1335, 1575],
+        "anchors": [
+          {"pos": [247, 582], "hip": 93747},
+          {"pos": [602, 818], "hip": 97278},
+          {"pos": [1124, 729], "hip": 99473}
+        ]
+      },
+      "common_name": {"english": "Arrow", "native": "ᬭᬸ", "pronounce": "Ru", "IPA": "[ˈrhu]"}
+    },
+    {
+      "id": "CON balinese Mag",
+      "lines": [[100453, 91262, 87833, 100453]],
+      "image": {
+        "file": "illustrations/Magelut.png",
+        "size": [1200, 766],
+        "anchors": [
+          {"pos": [520, 156], "hip": 91262},
+          {"pos": [1008, 613], "hip": 100453},
+          {"pos": [165, 478], "hip": 87833}
+        ]
+      },
+      "common_name": {"english": "Quarrel over Debt", "native": "ᬫᬕᭂᬮᬸᬢ᭄", "pronounce": "Magělut", "IPA": "[maˈɡə.lut]"}
+    },
+    {
+      "id": "CON balinese BAng",
+      "lines": [[85258, 74395, 78384]],
+      "image": {
+        "file": "illustrations/Banyak_Angrem.png",
+        "size": [1361, 1471],
+        "anchors": [
+          {"pos": [818, 242], "hip": 85258},
+          {"pos": [366, 970], "hip": 74395},
+          {"pos": [1002, 1138], "hip": 78384}
+        ]
+      },
+      "common_name": {"english": "The Brooding Goose", "native": "ᬩᬜᬓ᭄ᬳᬗᬺᬫ᭄", "pronounce": "Banyak Angrěm", "IPA": "[ˈba.ɲak aŋˈrɛm]"}
+    },
+    {
+      "id": "CON balinese BuBo",
+      "lines": [[62894, 61585, 68191]],
+      "image": {
+        "file": "illustrations/Bubu_Bolong.png",
+        "size": [2048, 1981],
+        "anchors": [
+          {"pos": [1485, 1206], "hip": 62894},
+          {"pos": [525, 1107], "hip": 61585},
+          {"pos": [1260, 372], "hip": 68191}
+        ]
+      },
+      "common_name": {"english": "Leaky Fish Trap", "native": "ᬩᬸᬩᬸᬩᭀᬮᭀᬂ", "pronounce": "Bubu Bolong", "IPA": "[ˈbu.bu ˈbo.loŋ]"}
+    }
+  ],
+  "common_names": {
+    "NAME Sun": [{"english": "The Sun", "native": "ᬲᬸᬗᬾᬗᬾ", "pronounce": "Sungenge", "IPA": "[suˈŋə.ŋə]", "references": "[1,2]"}],
+    "coalsack nebula": [{"english": "Leaky Fish Trap", "native": "ᬩᬸᬩᬸᬩᭀᬮᭀᬂ", "pronounce": "Bubu bolong", "IPA": "[ˈbu.bu ˈbo.loŋ]", "references": "[1]"}]
+  }
+}
