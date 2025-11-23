@@ -58,8 +58,7 @@ void ScmStartDialog::retranslate()
 {
 	if (dialog)
 	{
-		// Issue #117
-		// ui->retranslateUi(dialog);
+		ui->retranslateUi(dialog);
 	}
 }
 
@@ -75,13 +74,13 @@ void ScmStartDialog::createDialogContent()
 	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &ScmStartDialog::handleFontChanged);
 
 	// Buttons
-	connect(ui->scmStartCancelpushButton, &QPushButton::clicked, this, &ScmStartDialog::closeDialog); // Cancel
+	connect(ui->scmStartCancelpushButton, &QPushButton::clicked, this, &ScmStartDialog::close); // Cancel
 	connect(ui->scmStartCreatepushButton, &QPushButton::clicked, this,
 	        &ScmStartDialog::startScmCreationProcess); // Create
 	connect(ui->scmStartEditpushButton, &QPushButton::clicked, this,
-	        &ScmStartDialog::closeDialog); // Edit - TODO: add logic (currently closing the window)
+	        &ScmStartDialog::close); // Edit - TODO: add logic (currently closing the window)
 
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmStartDialog::closeDialog);
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmStartDialog::close);
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	// Init the correct font
 	handleFontChanged();
@@ -97,7 +96,7 @@ void ScmStartDialog::createDialogContent()
 			{
 				converterDialog = new ScmConvertDialog(maker);
 			}
-			maker->setStartDialogVisibility(false); // Hide the start dialog
+			maker->stopScm(); // Stop SCM if running
 			converterDialog->setVisible(true);
 		});
 #else   // SCM_CONVERTER_ENABLED_CPP is not defined
@@ -118,8 +117,10 @@ void ScmStartDialog::handleFontChanged()
 
 void ScmStartDialog::startScmCreationProcess()
 {
-	dialog->setVisible(false);                  // Close the dialog before starting the editor
-	maker->setSkyCultureDialogVisibility(true); // Start the editor dialog for creating a new Sky Culture
+	// Close the dialog before starting the editor
+	maker->setDialogVisibility(scm::DialogID::StartDialog, false);
+	// Start the editor dialog for creating a new Sky Culture
+	maker->setDialogVisibility(scm::DialogID::SkyCultureDialog, true);
 	maker->setNewSkyCulture();
 
 	// GZ: Unclear why those dialogs are called at plugin start.
@@ -131,9 +132,9 @@ void ScmStartDialog::startScmCreationProcess()
 	SkyCultureMaker::setActionToggle("actionShow_Satellite_Hints", false);
 }
 
-void ScmStartDialog::closeDialog()
+void ScmStartDialog::close()
 {
-	maker->setIsScmEnabled(false); // Disable the Sky Culture Maker
+	maker->stopScm();
 }
 
 bool ScmStartDialog::isConverterDialogVisible()

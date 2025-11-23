@@ -26,7 +26,7 @@
 
 namespace scm
 {
-//! The possibles tools used for drawing.
+//! Dialog identifiers for the SCM plugin
 enum class DialogID
 {
 	StartDialog,

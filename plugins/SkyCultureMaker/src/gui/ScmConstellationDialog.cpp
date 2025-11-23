@@ -159,7 +159,9 @@ void ScmConstellationDialog::retranslate()
 
 void ScmConstellationDialog::close()
 {
-	maker->setConstellationDialogVisibility(false);
+	setVisible(false);
+	maker->setIsLineDrawEnabled(false);
+	maker->setCanCreateConstellations(true);
 }
 
 void ScmConstellationDialog::createDialogContent()
