@@ -153,7 +153,8 @@ public:
 	//! Return longitudinal coordinate of point eqPos as written in the respective system
 	//! For zodiac, this is SYMBOL:deg°min'
 	//! For Lunar systems, it is usually only STATION or, with partitions, STATION:part
-	QString getLongitudeCoordinate(Vec3d &eqPos) const;
+	//! with @param narration true, create a speech-friendly longer string.
+	QString getLongitudeCoordinate(Vec3d &eqPos, bool narration=false) const;
 
 private:
 	void drawCap(StelPainter &sPainter, const SphericalCap& viewPortSphericalCap, double latDeg) const;
