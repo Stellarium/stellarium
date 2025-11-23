@@ -288,6 +288,47 @@ QString radToHmsStr(const double angle, const bool decimal)
 
 	return QString("%1h%2m%3s").arg(h, width).arg(m, 2, 10, QChar('0')).arg(s, 3+precision, 'f', precision, QChar('0'));
 }
+QString radToHmsNarration(const double angle, const bool decimal)
+{
+	unsigned int h,m;
+	double s;
+	StelUtils::radToHms(angle, h, m, s);
+	int width, precision;
+	QString carry;
+	if (decimal)
+	{
+		width=5;
+		precision=2;
+		carry="60.00";
+	}
+	else
+	{
+		width=4;
+		precision=1;
+		carry="60.0";
+	}
+
+	// handle carry case (when seconds are rounded up)
+	if (QString("%1").arg(s, 0, 'f', precision) == carry)
+	{
+		s=0.;
+		m+=1;
+	}
+	if (m==60)
+	{
+		m=0;
+		h+=1;
+	}
+	if (h==24 && m==0 && s==0.)
+		h=0;
+
+	const QString hours=qc_("hours", "object narration");
+	const QString minutes=qc_("minutes", "object narration");
+	const QString andStr=qc_("and", "object narration");
+	const QString seconds=qc_("seconds", "object narration");
+
+	return QString("%1 %2, %3 %4, %5 %6 %7").arg(QString::number(h), hours, QString::number(m), minutes, andStr, QString::number(s, 'f', 1), seconds);
+}
 
 /*************************************************************************
  Convert an angle in radian to a dms formatted string
@@ -333,6 +374,11 @@ QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 	const int precision = decimal ? 1 : 0;
 	return StelUtils::radToDmsPStr(angle, precision, useD);
 }
+QString radToDmsNarration(const double angle, const bool decimal, const bool useD)
+{
+	const int precision = decimal ? 1 : 0;
+	return StelUtils::radToDmsPNarration(angle, precision, useD);
+}
 
 /*************************************************************************
  Convert an angle in radian to a dms formatted string
@@ -370,9 +416,9 @@ QString radToDmsPNarration(const double angle, const int precision, const bool u
 	StelUtils::radToDms(angle, sign, d, m, s);
 	QString str;
 	QTextStream os(&str);
-	os << (sign?' ':'-');
+	os << (sign ? "" : qc_("minus", "object narration")) << " ";
 	if (d>0)
-		os << d << degsign;
+		os << d << " " << degsign << " ";
 	if (m>0)
 		os << m << " " << qc_("arc minutes", "object narration") << " " << qc_("and", "object narration") << " ";
 
@@ -1450,12 +1496,55 @@ QString hoursToHmsStr(const double hours, const bool minutesOnly, const bool col
 		return QString(format).arg(h).arg(m, 2, 10, QChar('0')).arg(s, 4, 'f', 1, QChar('0'));
 	}
 }
+QString hoursToHmsNarration(const double hours, const bool minutesOnly, const bool colonFormat)
+{
+	const QString sHours=qc_("hours", "object narration");
+	const QString sMinutes=qc_("minutes", "object narration");
+	const QString sAndStr=qc_("and", "object narration");
+	const QString sSeconds=qc_("seconds", "object narration");
+
+
+
+	int h = static_cast<int>(hours);
+	double minutes = (qAbs(hours)-qAbs(double(h)))*60.;
+	if (minutesOnly)
+	{
+		int m = qRound(minutes);
+		if (m==60)
+		{
+			h += 1;
+			m = 0;
+		}
+		return QString("%1 %2, %3 %4 %5").arg(QString::number(h), sHours, sAndStr, QString::number(m), sMinutes);
+	}
+	else
+	{
+		int m = static_cast<int>(minutes);
+		float s = static_cast<float>((((qAbs(hours)-qAbs(double(h)))*60.)-m)*60.);
+		if (s>59.9f)
+		{
+			m += 1;
+			s = 0.f;
+		}
+		if (m==60)
+		{
+			h += 1;
+			m = 0;
+		}
+		return QString("%1 %2, %3 %4, %5 %6 %7").arg(QString::number(h), sHours, QString::number(m), sMinutes, sAndStr, QString::number(s, 'f', 1), sSeconds);
+	}
+}
 
 QString hoursToHmsStr(const float hours, const bool minutesOnly, const bool colonFormat)
 {
 	return hoursToHmsStr(static_cast<double>(hours), minutesOnly, colonFormat);
 }
+QString hoursToHmsNarration(const float hours, const bool minutesOnly, const bool colonFormat)
+{
+	return hoursToHmsNarration(static_cast<double>(hours), minutesOnly, colonFormat);
+}
 
+/*
 QString hoursToNarration(const double hours, const bool minutesOnly)
 {
 	QString format;
@@ -1512,7 +1601,7 @@ QString hoursToNarration(const float hours, const bool minutesOnly)
 {
 	return hoursToHmsStr(static_cast<double>(hours), minutesOnly);
 }
-
+*/
 
 //! The method to splitting the text by substrings by some limit of string length
 QString wrapText(const QString& s, const int limit)

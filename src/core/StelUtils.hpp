@@ -211,6 +211,10 @@ namespace StelUtils
 	//! @param angle input angle in radian
 	//! @param decimal output decimal second value
 	QString radToHmsStr(const double angle, const bool decimal=false);
+	//! Convert an angle in radian to a hms formatted string for narration.
+	//! @param angle input angle in radian
+	//! @param decimal output decimal second value
+	QString radToHmsNarration(const double angle, const bool decimal=false);
 
 	//! Convert an angle in radian to a dms formatted string.
 	//! If the second, minute part is == 0, it is not output
@@ -223,6 +227,11 @@ namespace StelUtils
 	//! @param decimal output second value with decimal fraction
 	//! @param useD Define if letter "d" must be used instead of deg sign
 	QString radToDmsStr(const double angle, const bool decimal=false, const bool useD=false);
+	//! Convert an angle in radian to a dms formatted string for narration.
+	//! @param angle input angle in radian
+	//! @param decimal output second value with decimal fraction
+	//! @param useD (ignored)
+	QString radToDmsNarration(const double angle, const bool decimal=false, const bool useD=false);
 
 	//! Convert an angle in radian to a dms formatted string.
 	//! @param angle input angle in radian
@@ -645,13 +654,18 @@ namespace StelUtils
 	//! @p colonFormat=true   |  "H:MM:SS.S"   | "HH:MM"
 	QString hoursToHmsStr(const double hours, const bool minutesOnly = false, const bool colonFormat=false);
 	QString hoursToHmsStr(const float hours, const bool minutesOnly = false, const bool colonFormat=false);
+
 	//! Convert decimal hours to hours, minutes, seconds in a narrate-ready long format
 	//! Format for:
 	//! @p minutesOnly        |      false                               |   true
 	//! ----------------------|------------------------------------------|----------
 	//!                       |  "H hours, MM minutes and SS.S seconds"  | "HH hours and MM minutes"
-	QString hoursToNarration(const double hours, const bool minutesOnly = false);
-	QString hoursToNarration(const float hours, const bool minutesOnly = false);
+	//! @p colonFormat is ignored (only kept for signature compatibility)
+	QString hoursToHmsNarration(const double hours, const bool minutesOnly = false, const bool colonFormat=false);
+	QString hoursToHmsNarration(const float hours, const bool minutesOnly = false, const bool colonFormat=false);
+
+	//QString hoursToNarration(const double hours, const bool minutesOnly = false); // OBSOLETE? TOO CONFUSE NAME.
+	//QString hoursToNarration(const float hours, const bool minutesOnly = false);
 
 
 	//! Convert JD to hours and minutes
