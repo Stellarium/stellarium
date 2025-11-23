@@ -124,6 +124,7 @@ public slots:
 
 private:
 	//void onEngineReady();
+	void initNarrationFlagsFromConfig(QSettings *conf);
 
 #if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
 

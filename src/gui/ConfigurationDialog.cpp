@@ -696,7 +696,11 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 	if (ui->checkBoxEclipticCoordsOfDate->isChecked())
 		flags |= StelObject::EclipticCoordOfDate;
 	if (ui->checkBoxConstellation->isChecked())
+	{
 		flags |= StelObject::IAUConstellation;
+		//if (ui->checkBoxCulturalConstellation->isChecked()) // TODO: Add checkbox!
+		flags |= StelObject::CulturalConstellation;
+	}
 	if (ui->checkBoxSiderealTime->isChecked())
 		flags |= StelObject::SiderealTime;
 	if (ui->checkBoxRTSTime->isChecked())
@@ -757,6 +761,8 @@ void ConfigurationDialog::setCustomSelectedInfo()
 		flags |= StelObject::EclipticCoordJ2000;
 	if (conf->value("custom_selected_info/flag_show_constellation", false).toBool())
 		flags |= StelObject::IAUConstellation;
+	if (conf->value("custom_selected_info/flag_show_cultural_constellation", false).toBool())
+		flags |= StelObject::CulturalConstellation;
 	if (conf->value("custom_selected_info/flag_show_sidereal_time", false).toBool())
 		flags |= StelObject::SiderealTime;
 	if (conf->value("custom_selected_info/flag_show_rts_time", false).toBool())
@@ -797,6 +803,7 @@ void ConfigurationDialog::saveCustomSelectedInfo()
 	conf->setValue("flag_show_eclcoordofdate",		static_cast<bool>(flags & StelObject::EclipticCoordOfDate));
 	conf->setValue("flag_show_eclcoordj2000",		static_cast<bool>(flags & StelObject::EclipticCoordJ2000));
 	conf->setValue("flag_show_constellation",		static_cast<bool>(flags & StelObject::IAUConstellation));
+	conf->setValue("flag_show_cultural_constellation",	static_cast<bool>(flags & StelObject::CulturalConstellation));
 	conf->setValue("flag_show_sidereal_time",		static_cast<bool>(flags & StelObject::SiderealTime));
 	conf->setValue("flag_show_rts_time",			static_cast<bool>(flags & StelObject::RTSTime));
 	conf->setValue("flag_show_solar_lunar",			static_cast<bool>(flags & StelObject::SolarLunarPosition));
@@ -848,7 +855,10 @@ void ConfigurationDialog::setSelectedNarrationFromCheckBoxes()
 	if (ui->checkBoxEclipticCoordsOfDate_Narrate->isChecked())
 		flags |= StelObject::EclipticCoordOfDate;
 	if (ui->checkBoxConstellation_Narrate->isChecked())
+	{
 		flags |= StelObject::IAUConstellation;
+		flags |= StelObject::CulturalConstellation; // TODO: Add checkbox
+	}
 	if (ui->checkBoxSiderealTime_Narrate->isChecked())
 		flags |= StelObject::SiderealTime;
 	if (ui->checkBoxRTSTime_Narrate->isChecked())
@@ -909,6 +919,8 @@ void ConfigurationDialog::setCustomSelectedNarration()
 		flags |= StelObject::EclipticCoordJ2000;
 	if (conf->value("custom_selected_info/flag_narration_constellation", false).toBool())
 		flags |= StelObject::IAUConstellation;
+	if (conf->value("custom_selected_info/flag_narration_cultural_constellation", false).toBool())
+		flags |= StelObject::CulturalConstellation;
 	if (conf->value("custom_selected_info/flag_narration_sidereal_time", false).toBool())
 		flags |= StelObject::SiderealTime;
 	if (conf->value("custom_selected_info/flag_narration_rts_time", false).toBool())
@@ -949,6 +961,7 @@ void ConfigurationDialog::saveCustomSelectedNarration()
 	conf->setValue("flag_narration_eclcoordofdate",		static_cast<bool>(flags & StelObject::EclipticCoordOfDate));
 	conf->setValue("flag_narration_eclcoordj2000",		static_cast<bool>(flags & StelObject::EclipticCoordJ2000));
 	conf->setValue("flag_narration_constellation",		static_cast<bool>(flags & StelObject::IAUConstellation));
+	conf->setValue("flag_narration_cultural_constellation",	static_cast<bool>(flags & StelObject::CulturalConstellation));
 	conf->setValue("flag_narration_sidereal_time",		static_cast<bool>(flags & StelObject::SiderealTime));
 	conf->setValue("flag_narration_rts_time",		static_cast<bool>(flags & StelObject::RTSTime));
 	conf->setValue("flag_narration_solar_lunar",		static_cast<bool>(flags & StelObject::SolarLunarPosition));
@@ -2055,6 +2068,7 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxEclipticCoordsJ2000->setChecked(flags & StelObject::EclipticCoordJ2000);
 	ui->checkBoxEclipticCoordsOfDate->setChecked(flags & StelObject::EclipticCoordOfDate);
 	ui->checkBoxConstellation->setChecked(flags & StelObject::IAUConstellation);
+	//ui->checkBoxCulturalConstellation->setChecked(flags & StelObject::CulturalConstellation); // TODO: add checkbox
 	ui->checkBoxSiderealTime->setChecked(flags & StelObject::SiderealTime);
 	ui->checkBoxRTSTime->setChecked(flags & StelObject::RTSTime);
 	ui->checkBoxSolarLunarPosition->setChecked(flags & StelObject::SolarLunarPosition);
@@ -2084,6 +2098,7 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxEclipticCoordsJ2000_Narrate->setChecked(nFlags & StelObject::EclipticCoordJ2000);
 	ui->checkBoxEclipticCoordsOfDate_Narrate->setChecked(nFlags & StelObject::EclipticCoordOfDate);
 	ui->checkBoxConstellation_Narrate->setChecked(nFlags & StelObject::IAUConstellation);
+	//ui->checkBoxCulturalConstellation_Narrate->setChecked(nFlags & StelObject::CulturalConstellation); // TODO
 	ui->checkBoxSiderealTime_Narrate->setChecked(nFlags & StelObject::SiderealTime);
 	ui->checkBoxRTSTime_Narrate->setChecked(nFlags & StelObject::RTSTime);
 	ui->checkBoxSolarLunarPosition_Narrate->setChecked(nFlags & StelObject::SolarLunarPosition);

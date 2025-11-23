@@ -100,6 +100,8 @@ StelObject::InfoStringGroup StelObjectMgr::getCustomInfoStrings()
 		infoTextFilters |= StelObject::EclipticCoordJ2000;
 	if (conf->value("flag_show_constellation", false).toBool())
 		infoTextFilters |= StelObject::IAUConstellation;
+	if (conf->value("flag_show_cultural_constellation", false).toBool())
+		infoTextFilters |= StelObject::CulturalConstellation;
 	if (conf->value("flag_show_sidereal_time", false).toBool())
 		infoTextFilters |= StelObject::SiderealTime;
 	if (conf->value("flag_show_rts_time", false).toBool())
@@ -737,12 +739,10 @@ void StelObjectMgr::narrate()
 	qDebug() << "Narration...";
 	static const StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
 	StelCore*core=StelApp::getInstance().getCore();
-	if (lastSelectedObject)
+	if (lastSelectedObject && speechMgr->enabled())
 	{
-		QString narration=lastSelectedObject->getNarration(core);
-		qDebug() << "Narration:" << narration;
-		// TODO: call StelSpeechMgr with synth.
-		if (speechMgr->enabled())
-			speechMgr->say(narration);
+		QString narration=lastSelectedObject->getNarration(core, speechMgr->getNarrationTextFilters());
+		//qDebug() << "Narration:" << narration;
+		speechMgr->say(narration);
 	}
 }
