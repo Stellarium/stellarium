@@ -1773,18 +1773,18 @@ QString ConstellationMgr::getLunarSystemName() const
 		return QString();
 }
 //! Return longitude in the culture's zodiacal longitudes
-QString ConstellationMgr::getZodiacCoordinate(Vec3d eqNow) const
+QString ConstellationMgr::getZodiacCoordinate(Vec3d eqNow, bool narration) const
 {
 	if (zodiac)
-		return zodiac->getLongitudeCoordinate(eqNow);
+		return zodiac->getLongitudeCoordinate(eqNow, narration);
 	else
 		return QString();
 }
 //! Return lunar station in the culture's Lunar system
-QString ConstellationMgr::getLunarSystemCoordinate(Vec3d eqNow) const
+QString ConstellationMgr::getLunarSystemCoordinate(Vec3d eqNow, bool narration) const
 {
 	if (lunarSystem)
-		return lunarSystem->getLongitudeCoordinate(eqNow);
+		return lunarSystem->getLongitudeCoordinate(eqNow, narration);
 	else
 		return QString();
 }
