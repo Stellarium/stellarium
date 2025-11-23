@@ -1650,7 +1650,7 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 	if (flags&CulturalConstellation)
 	{
 		// Culture info
-		StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+		//StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
 		ConstellationMgr   *cMgr=GETSTELMODULE(ConstellationMgr);
 		const QList<Constellation*> cList=cMgr->isObjectIn(this, true);
 		QStringList cNames;
@@ -1662,12 +1662,12 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 		if (cMgr->hasZodiac())
 		{
 			res.append(" " + qc_("Its position in the", "object narration") + " " + cMgr->getZodiacSystemName() + " " + qc_("system is", "object narration") + " " );
-			res.append(cMgr->getZodiacCoordinate(pos) + ". ");
+			res.append(cMgr->getZodiacCoordinate(pos, true) + ". ");
 		}
 		if (cMgr->hasLunarSystem())
 		{
 			res.append(" " + qc_("Its position in the", "object narration") + " " + cMgr->getLunarSystemName() + " " + qc_("system is", "object narration") + " " );
-			res.append(cMgr->getLunarSystemCoordinate(pos) + ". ");
+			res.append(cMgr->getLunarSystemCoordinate(pos, true) + ". ");
 		}
 	}
 
@@ -1688,6 +1688,9 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 			res.append(". ");
 		}
 	}
+
+	InfoStringGroup alreadyProcessed=StelObject::IAUConstellation | StelObject::CulturalConstellation;
+	res += getCommonNarration(core, flags & (~alreadyProcessed));
 
 	if (flags&Distance) // Distance from sun and earth
 	{
@@ -1743,7 +1746,7 @@ QString Planet::getNarration(const StelCore *core, const InfoStringGroup &flags)
 							     distanceAu > 0.5 ? auStr : "",
 							     distanceAu > 0.5 ? qc_("or", "object narration") : "",
 							     distKM, km));
-		res.append(QString("%1 %2. ").arg(lightTime, StelUtils::hoursToNarration(distanceKm/SPEED_OF_LIGHT/3600.) ));
+		res.append(QString("%1 %2. ").arg(lightTime, StelUtils::hoursToHmsNarration(distanceKm/SPEED_OF_LIGHT/3600.) ));
 	}
 
 	if (flags&Size) // Diameter
