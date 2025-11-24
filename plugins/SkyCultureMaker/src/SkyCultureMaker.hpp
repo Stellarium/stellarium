@@ -68,23 +68,17 @@ public:
 	void draw(StelCore *core) override;
 	double getCallOrder(StelModuleActionName actionName) const override;
 
-	/**
-	 * @brief Handle mouse clicks. Please note that most of the interactions will be done through the GUI module.
-	 * @return set the event as accepted if it was intercepted
-	 */
+	/// Handle mouse clicks. Please note that most of the interactions will be done through the GUI module.
+ 	/// @return set the event as accepted if it was intercepted
 	void handleMouseClicks(QMouseEvent *) override;
 
-	/**
-	 * @brief Handle mouse moves. Please note that most of the interactions will be done through the GUI module.
-	 * @return true if the event was intercepted
-	 */
+	/// Handle mouse moves. Please note that most of the interactions will be done through the GUI module.
+	/// @return true if the event was intercepted
 	bool handleMouseMoves(int x, int y, Qt::MouseButtons b) override;
 
-	/**
-	 * @brief Handle key events. Please note that most of the interactions will be done through the GUI module.
-	 * @param e the Key event
-	 * @return set the event as accepted if it was intercepted
-	 */
+	/// Handle key events. Please note that most of the interactions will be done through the GUI module.
+	/// @param e the Key event
+	/// @return set the event as accepted if it was intercepted
 	void handleKeys(QKeyEvent *e) override;
 
 	/**
