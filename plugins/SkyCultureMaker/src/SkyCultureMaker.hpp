@@ -56,10 +56,8 @@ public:
 	SkyCultureMaker();
 	~SkyCultureMaker() override;
 
-	/**
-	 * @brief Set the toggle value for a given action.
-	 * @param toggle The toggled value to be set.
-	 */
+	/// @brief Set the toggle value for a given action.
+	/// @param toggle The toggled value to be set.
 	static void setActionToggle(const QString &id, bool toggle);
 
 	void init() override;
@@ -69,7 +67,7 @@ public:
 	double getCallOrder(StelModuleActionName actionName) const override;
 
 	/// Handle mouse clicks. Please note that most of the interactions will be done through the GUI module.
- 	/// @return set the event as accepted if it was intercepted
+	/// @return set the event as accepted if it was intercepted
 	void handleMouseClicks(QMouseEvent *) override;
 
 	/// Handle mouse moves. Please note that most of the interactions will be done through the GUI module.
