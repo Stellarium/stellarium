@@ -45,9 +45,6 @@ public slots:
 protected slots:
 	void handleFontChanged();
 
-private slots:
-	void cancelDialog();
-
 private:
 	Ui_scmHideOrAbortMakerDialog *ui = nullptr;
 	SkyCultureMaker *maker           = nullptr;

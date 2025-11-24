@@ -56,8 +56,8 @@ void ScmHideOrAbortMakerDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 
-	// connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmHideOrAbortMakerDialog::cancelDialog);
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmHideOrAbortMakerDialog::close);
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &ScmHideOrAbortMakerDialog::handleFontChanged);
@@ -71,7 +71,7 @@ void ScmHideOrAbortMakerDialog::createDialogContent()
 	connect(ui->scmMakerHideButton, &QPushButton::clicked, maker,
 			&SkyCultureMaker::hideScm); // Hide
 	connect(ui->scmMakerCancelButton, &QPushButton::clicked, this,
-	        &ScmHideOrAbortMakerDialog::cancelDialog); // Cancel
+	        &ScmHideOrAbortMakerDialog::close); // Cancel
 }
 
 void ScmHideOrAbortMakerDialog::handleFontChanged()
@@ -79,9 +79,4 @@ void ScmHideOrAbortMakerDialog::handleFontChanged()
 	QFont questionFont = QApplication::font();
 	questionFont.setPixelSize(questionFont.pixelSize() + 4);
 	ui->questionLbl->setFont(questionFont);
-}
-
-void ScmHideOrAbortMakerDialog::cancelDialog()
-{
-	maker->setDialogVisibility(scm::DialogID::HideOrAbortMakerDialog, false);
 }
