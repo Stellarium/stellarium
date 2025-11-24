@@ -191,6 +191,13 @@ public:
 	void setTempArtwork(const scm::ScmConstellationArtwork *artwork);
 
 	/**
+	 * @brief Opens the constellation dialog with data for a given constellation.
+	 * 
+	 * @param constellation The constellation to open the dialog for.
+	 */
+	void loadDialogFromConstellation(scm::ScmConstellation *constellation);
+
+	/**
 	 * @brief Displays an information message to the user.
 	 * 
 	 * @param parent The parent widget of the message box.
@@ -217,18 +224,12 @@ public:
 	 */
 	void showUserErrorMessage(QWidget *parent, const QString &dialogName, const QString &message);
 
-	/**
-	 * @brief Loads the constellation dialog with the given constellation.
-	 * 
-	 * @param constellation The constellation to be loaded.
-	 */
-	void loadDialogFromConstellation(scm::ScmConstellation *constellation);
-
 signals:
 	void eventIsScmEnabled(bool b);
 
 public slots:
 	bool getIsScmEnabled() const { return isScmEnabled; }
+
 	void setIsScmEnabled(bool b);
 
 private:
