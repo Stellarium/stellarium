@@ -26,6 +26,9 @@
 #include <QStringList>
 #include <QJsonObject>
 #include <QJsonArray>
+#include "StelObject.hpp"
+#include "StelModule.hpp"
+#include "StelSkyCultureSkyPartition.hpp"
 
 class StelTranslator;
 
@@ -57,35 +60,35 @@ public:
 	//! INCOMPLETE requires improvements, and PERSONAL usually means "nice, but not even Stellarium developers believe in it".
 	enum CLASSIFICATION
 	{
-		INCOMPLETE=0,	//! Looks like there is something interesting to it, but lacks references. Should evolve into one of the other kinds.
-				//! There are some examples in our repositories from previous times that should be improved,
-				//! else no new ones should be accepted.
-		PERSONAL,	//! Privately developed after ca. 1950, not based on published ethnographic or historical research, not supported by a noteworthy community.
-		TRADITIONAL,	//! Most "living" skycultures. May have evolved over centuries, with mixed influences from other cultures.
-				//! Also for self-presentations by members of respective cultures, indigenous peoples or tribes.
-				//! Description should provide a short description of the people and traditions, and the "cosmovision" of the people,
-				//! some celestial myths, background information about the constellations (e.g. what does a "rabbit ghost" or "yellow man" mean for you?)
-				//! Star names with meaning should be translated to English.
-				//! Please provide "further reading" links for more information.
-		ETHNOGRAPHIC,	//! Created by foreigners doing ethnographic fieldwork in modern times.
-				//! This usually is an "outside view", e.g. from ethnographic fieldwork, missionary reports, travelers, "adventurers" of the 19th century etc.
-				//! Description should provide a short description of the way this skyculture has been recorded, about the
-				//! people and traditions, and the "cosmovision" of the people, some celestial myths,
-				//! background information about the constellations (e.g. what does a "rabbit ghost" or "yellow man" mean for them?)
-				//! Star names with meaning should be translated to English.
-				//! This is often published in singular rare to find books, or found in university collections or museum archives.
-				//! These should come with links for published books, or how to find this information elsewhere.
-		HISTORICAL,	//! Skyculture from past time, recreated from textual transmission by historians.
-				//! Typically nobody alive today shares the world view of these past cultures.
-				//! The description should provide some insight over sources and how data were retrieved and interpreted,
-				//! and should provide references to (optimally: peer-reviewed) published work.
-		SINGLE,		//! Implementation of a single book or atlas usually providing a "snapshot" of a traditional skyculture.
-				//! e.g. Bayer, Schiller, Hevelius, Bode, Rey, ...
-				//! Content (star names, artwork, spelling, ...) should not deviate from what the atlas contains.
-				//! The description should provide information about the presented work, and if possible a link to a digital online version.
-		COMPARATIVE	//! Special-purpose compositions of artwork from one and stick figures from another skyculture. These figures
-				//! sometimes will appear not to fit together well. This may be intended, to explain and highlight just those differences!
-				//! The description text must clearly explain and identify both sources and how these differences should be interpreted.
+		INCOMPLETE=0,	//!< Looks like there is something interesting to it, but lacks references. Should evolve into one of the other kinds.
+				//!< There are some examples in our repositories from previous times that should be improved,
+				//!< else no new ones should be accepted.
+		PERSONAL,	//!< Privately developed after ca. 1950, not based on published ethnographic or historical research, not supported by a noteworthy community.
+		TRADITIONAL,	//!< Most "living" skycultures. May have evolved over centuries, with mixed influences from other cultures.
+				//!< Also for self-presentations by members of respective cultures, indigenous peoples or tribes.
+				//!< Description should provide a short description of the people and traditions, and the "cosmovision" of the people,
+				//!< some celestial myths, background information about the constellations (e.g. what does a "rabbit ghost" or "yellow man" mean for you?)
+				//!< Star names with meaning should be translated to English.
+				//!< Please provide "further reading" links for more information.
+		ETHNOGRAPHIC,	//!< Created by foreigners doing ethnographic fieldwork in modern times.
+				//!< This usually is an "outside view", e.g. from ethnographic fieldwork, missionary reports, travelers, "adventurers" of the 19th century etc.
+				//!< Description should provide a short description of the way this skyculture has been recorded, about the
+				//!< people and traditions, and the "cosmovision" of the people, some celestial myths,
+				//!< background information about the constellations (e.g. what does a "rabbit ghost" or "yellow man" mean for them?)
+				//!< Star names with meaning should be translated to English.
+				//!< This is often published in singular rare to find books, or found in university collections or museum archives.
+				//!< These should come with links for published books, or how to find this information elsewhere.
+		HISTORICAL,	//!< Skyculture from past time, recreated from textual transmission by historians.
+				//!< Typically nobody alive today shares the world view of these past cultures.
+				//!< The description should provide some insight over sources and how data were retrieved and interpreted,
+				//!< and should provide references to (optimally: peer-reviewed) published work.
+		SINGLE,		//!< Implementation of a single book or atlas usually providing a "snapshot" of a traditional skyculture.
+				//!< e.g. Bayer, Schiller, Hevelius, Bode, Rey, ...
+				//!< Content (star names, artwork, spelling, ...) should not deviate from what the atlas contains.
+				//!< The description should provide information about the presented work, and if possible a link to a digital online version.
+		COMPARATIVE	//!< Special-purpose compositions of artwork from one and stick figures from another skyculture. These figures
+				//!< sometimes will appear not to fit together well. This may be intended, to explain and highlight just those differences!
+				//!< The description text must clearly explain and identify both sources and how these differences should be interpreted.
 	};
 	Q_ENUM(CLASSIFICATION)
 
@@ -119,6 +122,10 @@ public:
 	QJsonArray langsUseNativeNames;
 	//! Whether to show common names in addition to the culture-specific ones
 	bool fallbackToInternationalNames = false;
+	//! optional element: Zodiac. Classical SCs usually have 12 signs of 30 degrees with 60 minutes.
+	QJsonObject zodiac;
+	//! optional element. This is more elaborate, with variants in India (ecliptical) and China (equatorial!)
+	QJsonObject lunarSystem;
 };
 
 //! @class StelSkyCultureMgr
@@ -127,7 +134,7 @@ public:
 //! sub-directories containing one sub-directory per sky culture.
 //! This sub-directory name is that we refer to as sky culture ID here.
 //! @author Fabien Chereau
-class StelSkyCultureMgr : public QObject
+class StelSkyCultureMgr : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(QString currentSkyCultureID
@@ -138,6 +145,30 @@ class StelSkyCultureMgr : public QObject
 		   READ getDefaultSkyCultureID
 		   WRITE setDefaultSkyCultureID
 		   NOTIFY defaultSkyCultureIDChanged)
+	Q_PROPERTY(StelObject::CulturalDisplayStyle screenLabelStyle
+		   READ getScreenLabelStyle
+		   WRITE setScreenLabelStyle
+		   NOTIFY screenLabelStyleChanged)
+	Q_PROPERTY(StelObject::CulturalDisplayStyle infoLabelStyle
+		   READ getInfoLabelStyle
+		   WRITE setInfoLabelStyle
+		   NOTIFY infoLabelStyleChanged)
+	Q_PROPERTY(StelObject::CulturalDisplayStyle zodiacLabelStyle
+		   READ getZodiacLabelStyle
+		   WRITE setZodiacLabelStyle
+		   NOTIFY zodiacLabelStyleChanged)
+	Q_PROPERTY(StelObject::CulturalDisplayStyle lunarSystemLabelStyle
+		   READ getLunarSystemLabelStyle
+		   WRITE setLunarSystemLabelStyle
+		   NOTIFY lunarSystemLabelStyleChanged)
+	Q_PROPERTY(bool flagUseAbbreviatedNames
+		   READ getFlagUseAbbreviatedNames
+		   WRITE setFlagUseAbbreviatedNames
+		   NOTIFY flagUseAbbreviatedNamesChanged)
+	Q_PROPERTY(bool flagOverrideUseCommonNames
+		   READ getFlagOverrideUseCommonNames
+		   WRITE setFlagOverrideUseCommonNames
+		   NOTIFY flagOverrideUseCommonNamesChanged)
 
 public:
 	StelSkyCultureMgr();
@@ -147,6 +178,17 @@ public:
 	//! Gets the default sky culture name from the application's settings,
 	//! sets that sky culture by calling setCurrentSkyCultureID().
 	void init();
+
+	//! Creates one label from cName
+	//! @param commonNameI18n object common name in user language.
+	//! @param abbrevI18n string to use as shortest possible label.
+	//! If you call this with an actual non-default argument abbrevI18n,
+	//! you really only want this short label, and style is not evaluated.
+	//! If abbrevI18n starts with a dot, an empty string is returned.
+	QString createCulturalLabel(const StelObject::CulturalName &cName,
+					   const StelObject::CulturalDisplayStyle style,
+					   const QString &commonNameI18n,
+					   const QString &abbrevI18n=QString()) const;
 	
 public slots:
 	//! Get the current sky culture English name.
@@ -171,13 +213,7 @@ public slots:
 	StelSkyCulture::BoundariesType getCurrentSkyCultureBoundariesType() const;
 
 	//! Get the classification index for the current sky culture
-	//! Config option: info/classification
-	//! Possible values:
-	//! - scientific (1)
-	//! - traditional (2; using by default)
-	//! - personal (3)
-	//! - single (4)
-	int getCurrentSkyCultureClassificationIdx() const;
+	StelSkyCulture::CLASSIFICATION getCurrentSkyCultureClassificationIdx() const;
 
 	//! @return a localized HTML description of the classification for the current sky culture
 	QString getCurrentSkyCultureHtmlClassification() const;
@@ -200,8 +236,8 @@ public slots:
 	bool setDefaultSkyCultureID(const QString& id);
 	
 	//! Get a list of sky culture names in English.
-	//! @return A new-line delimited list of English sky culture names.
-	QString getSkyCultureListEnglish(void) const;
+	//! @return A list of English sky culture names.
+	QStringList getSkyCultureListEnglish(void) const;
 	
 	//! Get a list of sky culture names in the current language.
 	//! @return A list of translated sky culture names.
@@ -213,6 +249,60 @@ public slots:
 	//! Returns a map from sky culture IDs/folders to sky culture names.
 	QMap<QString, StelSkyCulture> getDirToNameMap() const { return dirToNameEnglish; }
 
+	static StelObject::CulturalDisplayStyle convertCulturalDisplayStyleFromCSVstring(const QString &csv);
+	static QString convertCulturalDisplayStyleToCSVstring(const StelObject::CulturalDisplayStyle style);
+
+	//! Returns the screen labeling setting for the currently active skyculture
+	StelObject::CulturalDisplayStyle getScreenLabelStyle() const;
+	//! Scripting version
+	QString getScreenLabelStyleString() const;
+	//! Sets the screen labeling setting for the currently active skyculture
+	void setScreenLabelStyle(const StelObject::CulturalDisplayStyle style);
+	//! scripting version
+	void setScreenLabelStyle(const QString &style);
+
+	//! Returns the InfoString labeling setting for the currently active skyculture
+	StelObject::CulturalDisplayStyle getInfoLabelStyle() const;
+	//! Scripting version
+	QString getInfoLabelStyleString() const;
+	//! sets the InfoString labeling setting for the currently active skyculture
+	void setInfoLabelStyle(const StelObject::CulturalDisplayStyle style);
+	//! scripting version
+	void setInfoLabelStyle(const QString &style);
+
+	//! Returns the Zodiac labeling setting for the currently active skyculture
+	StelObject::CulturalDisplayStyle getZodiacLabelStyle() const;
+	//! Scripting version
+	QString getZodiacLabelStyleString() const;
+	//! sets the Zodiac labeling setting for the currently active skyculture
+	void setZodiacLabelStyle(const StelObject::CulturalDisplayStyle style);
+	//! scripting version
+	void setZodiacLabelStyle(const QString &style);
+
+	//! Returns the Lunar_System labeling setting for the currently active skyculture
+	StelObject::CulturalDisplayStyle getLunarSystemLabelStyle() const;
+	//! Scripting version
+	QString getLunarSystemLabelStyleString() const;
+	//! sets the Lunar_System labeling setting for the currently active skyculture
+	void setLunarSystemLabelStyle(const StelObject::CulturalDisplayStyle style);
+	//! scripting version
+	void setLunarSystemLabelStyle(const QString &style);
+
+	//! Returns whether we ignore SC authors' settings "fallback_to_international_names"
+	bool getFlagOverrideUseCommonNames() const {return flagOverrideUseCommonNames; }
+	//! Set whether we ignore SC authors' settings "fallback_to_international_names"
+	void setFlagOverrideUseCommonNames(bool override);
+
+	//! Returns whether we show shortest name as screen label
+	bool getFlagUseAbbreviatedNames() const {return flagUseAbbreviatedNames; }
+	//! Set whether we ignore SC authors' settings "fallback_to_international_names"
+	void setFlagUseAbbreviatedNames(bool b);
+
+	//! Returns whether current skyculture uses (incorporates) common names.
+	bool currentSkycultureUsesCommonNames() const;
+
+	//! Debugging/developing function. Call via scripting.
+	void analyzeScreenLabel() const;
 signals:
 	//! Emitted whenever the default sky culture changed.
 	//! @see setDefaultSkyCultureID
@@ -223,7 +313,22 @@ signals:
 
 	//! Emitted when the current sky culture changes
 	void currentSkyCultureChanged(const StelSkyCulture& culture);
-	
+
+	//! Emitted when InfoLabelStyle has changed
+	void infoLabelStyleChanged(const StelObject::CulturalDisplayStyle style);
+	//! Emitted when ScreenLabelStyle has changed
+	void screenLabelStyleChanged(const StelObject::CulturalDisplayStyle style);
+	//! Emitted when ZodiacLabelStyle has changed
+	void zodiacLabelStyleChanged(const StelObject::CulturalDisplayStyle style);
+	//! Emitted when Lunar_System LabelStyle has changed
+	void lunarSystemLabelStyleChanged(const StelObject::CulturalDisplayStyle style);
+
+	//! Emitted on flag change.
+	void flagOverrideUseCommonNamesChanged(bool override);
+
+	//! Emitted on flag change.
+	void flagUseAbbreviatedNamesChanged(bool b);
+
 private:
 	//! Scan all sky cultures to get their names and other properties.
 	void makeCulturesList();
@@ -248,6 +353,8 @@ private:
 	QString skyCultureI18ToDirectory(const QString& cultureName) const;
 
 	QString descriptionMarkdownToHTML(const QString& markdown, const QString& descrPath);
+	// We don't use QHash/QMap because we want to preserve order of constellations as listed in the description file
+	std::vector<std::pair<QString/*constellation*/, QString/*description*/>> getConstellationsDescriptions(QString consSection) const;
 	QString convertMarkdownLevel2Section(const QString& markdown, const QString& sectionName,
 	                                     qsizetype bodyStartPos, qsizetype bodyEndPos, const StelTranslator& trans);
 	std::pair<QString/*color*/,QString/*info*/> getLicenseDescription(const QString& license, const bool singleLicenseForAll) const;
@@ -257,6 +364,13 @@ private:
 	StelSkyCulture currentSkyCulture;
 	
 	QString defaultSkyCultureID;
+
+	//! Ignore skyculture dict setting "fallback_to_international_names"
+	bool flagOverrideUseCommonNames;
+
+	//! Replace any detailed cultural label by the short label (from constellation ID)
+	//! This should be a short string, some skycultures still have numerical IDs here.
+	bool flagUseAbbreviatedNames;
 };
 
 #endif // STELSKYCULTUREMGR_HPP

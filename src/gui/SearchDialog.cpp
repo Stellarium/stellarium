@@ -88,6 +88,14 @@ void CompletionListModel::setValues(const QStringList& v, const QStringList& rv)
 	updateText();
 }
 
+void CompletionListModel::setValuesWithModules(const QStringList& v, const QStringList& rv, const QMap<QString, QString>& modules)
+{
+	values=v;
+	recentValues=rv;
+	objectModules=modules;
+	updateText();
+}
+
 void CompletionListModel::appendRecentValues(const QStringList& v)
 {
 	recentValues+=v;
@@ -99,11 +107,23 @@ void CompletionListModel::appendValues(const QStringList& v)
 	updateText();
 }
 
+void CompletionListModel::appendValuesWithModules(const QStringList& v, const QMap<QString, QString>& modules)
+{
+	// Append the module information as object types to object names
+	values+=v;
+	for (auto it = modules.constBegin(); it != modules.constEnd(); ++it)
+	{
+		objectModules[it.key()] = it.value();
+	}
+	updateText();
+}
+
 void CompletionListModel::clearValues()
 {
 	// Default: Show recent values
 	values.clear();
 	values = recentValues;
+	objectModules.clear();
 	selectedIdx=0;
 	updateText();
 }
@@ -147,17 +167,58 @@ QVariant CompletionListModel::data(const QModelIndex &index, int role) const
 	if (!index.isValid())
 	    return QVariant();
 
+	QString objectName = values.value(index.row());
+
+	// Return the original object name for UserRole (used by gotoObject)
+	if(role == Qt::UserRole)
+	{
+		return objectName;
+	}
+
 	// Bold recent objects
 	if(role == Qt::FontRole)
 	{
 	    QFont font;
-	    bool toBold = recentValues.contains(index.data(Qt::DisplayRole).toString()) ?
-				    true : false;
+	    bool toBold = recentValues.contains(objectName);
 	    font.setBold(toBold);
 	    return font;
 	}
 
-	return QStringListModel::data(index, role);
+	// Display object name with module type (lazy-loaded for non-SIMBAD objects)
+	if(role == Qt::DisplayRole)
+	{
+		// Check if we already have module info cached
+		if (objectModules.contains(objectName))
+		{
+			QString moduleType = objectModules[objectName];
+			return QString("%1 (%2)").arg(objectName, moduleType);
+		}
+		
+		// For non-cached, non-recent objects, do a lazy lookup and cache it
+		if (objectMgr && !recentValues.contains(objectName))
+		{
+			StelObjectP obj = objectMgr->searchByNameI18n(objectName);
+			if (!obj)
+				obj = objectMgr->searchByName(objectName);
+			if (obj)
+			{
+				QString moduleType = obj->getObjectTypeI18n();
+				objectModules[objectName] = moduleType;
+				return QString("%1 (%2)").arg(objectName, moduleType);
+			}
+		}
+		
+		// Fallback: just return the name
+		return objectName;
+	}
+
+	// For EditRole, return the original name too
+	if(role == Qt::EditRole)
+	{
+		return objectName;
+	}
+
+	return QVariant();
 }
 
 // Start of members for class SearchDialog
@@ -189,6 +250,7 @@ SearchDialog::SearchDialog(QObject* parent)
 	useFOVCenterMarker = conf->value("search/flag_fov_center_marker", true).toBool();
 	fovCenterMarkerState = GETSTELMODULE(SpecialMarkersMgr)->getFlagFOVCenterMarker();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
+        useAutoClosing = conf->value("search/flag_auto_closing", true).toBool();
 	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "equatorialJ2000").toString());	
 
 	setSimbadQueryDist( conf->value("search/simbad_query_dist",  30).toInt());
@@ -201,6 +263,7 @@ SearchDialog::SearchDialog(QObject* parent)
 
 	// Init CompletionListModel
 	searchListModel = new CompletionListModel();
+	searchListModel->setObjectMgr(objectMgr);
 
 	// Find recent object search data file
 	recentObjectSearchesJsonPath = StelFileMgr::findFile("data", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) + "/recentObjectSearches.json";
@@ -275,10 +338,18 @@ void SearchDialog::populateCoordinateSystemsList()
 	csys->blockSignals(false);
 }
 
+void SearchDialog::populateCoordinateData()
+{
+	setCenterOfScreenCoordinates();
+	populateCoordinateAxis();
+}
+
 void SearchDialog::populateCoordinateAxis()
 {
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
 	bool xnormal = true;
+	QPair<double, double> minMaxLimits = usePolarDistance ? qMakePair(0., 180.) : qMakePair(-90., 90.);
 
 	ui->AxisXSpinBox->setDecimals(2);
 	ui->AxisYSpinBox->setDecimals(2);
@@ -287,8 +358,8 @@ void SearchDialog::populateCoordinateAxis()
 	ui->AxisXSpinBox->setMinimum(  0., true);
 	ui->AxisXSpinBox->setMaximum(360., true);
 	ui->AxisXSpinBox->setWrapping(true);
-	ui->AxisYSpinBox->setMinimum(-90., true);
-	ui->AxisYSpinBox->setMaximum( 90., true);
+	ui->AxisYSpinBox->setMinimum(minMaxLimits.first, true);
+	ui->AxisYSpinBox->setMaximum(minMaxLimits.second, true);
 	ui->AxisYSpinBox->setWrapping(false);
 
 	switch (getCurrentCoordinateSystem()) {		
@@ -298,7 +369,7 @@ void SearchDialog::populateCoordinateAxis()
 			ui->AxisXLabel->setText(q_("Right ascension"));
 			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
 			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::Normal);
-			ui->AxisYLabel->setText(q_("Declination"));
+			ui->AxisYLabel->setText(usePolarDistance ? q_("Polar distance") : q_("Declination"));
 			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 			xnormal = true;
@@ -363,6 +434,7 @@ void SearchDialog::createDialogContent()
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(populateCoordinateAxis()));
+	connect(&StelApp::getInstance(), SIGNAL(flagUsePolarDistanceChanged(bool)), this, SLOT(populateCoordinateData()));
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onSearchTextChanged(const QString&)));
@@ -424,7 +496,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 	connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 
-	connectBoolProperty(ui->simbadGroupBox, "SearchDialog.useSimbad");	
+        connectBoolProperty(ui->simbadGroupBox,        "SearchDialog.useSimbad");
 	connectIntProperty(ui->searchRadiusSpinBox,    "SearchDialog.simbadDist");
 	connectIntProperty(ui->resultsSpinBox,         "SearchDialog.simbadCount");
 	connectBoolProperty(ui->allIDsCheckBox,        "SearchDialog.simbadGetIds");
@@ -450,6 +522,9 @@ void SearchDialog::createDialogContent()
 
 	connect(ui->checkBoxLockPosition, SIGNAL(clicked(bool)), this, SLOT(enableLockPosition(bool)));
 	ui->checkBoxLockPosition->setChecked(useLockPosition);
+
+        connect(ui->checkBoxAutoClosing, SIGNAL(clicked(bool)), this, SLOT(enableAutoClosing(bool)));
+        ui->checkBoxAutoClosing->setChecked(useAutoClosing);
 
 	// list views initialization
 	listModel = new QStringListModel(this);
@@ -658,6 +733,12 @@ void SearchDialog::enableLockPosition(bool enable)
 	conf->setValue("search/flag_lock_position", useLockPosition);
 }
 
+void SearchDialog::enableAutoClosing(bool enable)
+{
+        useAutoClosing = enable;
+        conf->setValue("search/flag_auto_closing", useAutoClosing);
+}
+
 void SearchDialog::enableFOVCenterMarker(bool enable)
 {
 	useFOVCenterMarker = enable;
@@ -680,7 +761,8 @@ void SearchDialog::setSimpleStyle()
 void SearchDialog::setCenterOfScreenCoordinates()
 {
 	StelCore *core = StelApp::getInstance().getCore();
-	const auto projector = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionMode::RefractionOff);	
+	bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
+        const auto projector = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionMode::RefractionOff);
 	Vector2<qreal> cpos = projector->getViewportCenter();
 	Vec3d centerPos;
 	projector->unProject(cpos[0], cpos[1], centerPos);
@@ -690,11 +772,19 @@ void SearchDialog::setCenterOfScreenCoordinates()
 	switch (getCurrentCoordinateSystem())
 	{
 		case equatorialJ2000:
+		{
 			StelUtils::rectToSphe(&spinLong, &spinLat, centerPos);
+			if (usePolarDistance)
+				spinLat = M_PI_2 - spinLat;
 			break;
+		}
 		case equatorial:
+		{
 			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToEquinoxEqu(centerPos, StelCore::RefractionOff));
+			if (usePolarDistance)
+				spinLat = M_PI_2 - spinLat;
 			break;
+		}
 		case galactic:
 			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToGalactic(centerPos));
 			break;
@@ -745,6 +835,7 @@ void SearchDialog::manualPositionChanged()
 {
 	searchListModel->clearValues();
 	StelCore* core = StelApp::getInstance().getCore();
+	bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);	
 	Vec3d pos;	
 	double spinLong=ui->AxisXSpinBox->valueRadians();
@@ -761,6 +852,8 @@ void SearchDialog::manualPositionChanged()
 	{
 		case equatorialJ2000:
 		{
+			if (usePolarDistance)
+				spinLat = M_PI_2 - spinLat;
 			StelUtils::spheToRect(spinLong, spinLat, pos);
 			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{
@@ -773,6 +866,8 @@ void SearchDialog::manualPositionChanged()
 		}
 		case equatorial:
 		{
+			if (usePolarDistance)
+				spinLat = M_PI_2 - spinLat;
 			StelUtils::spheToRect(spinLong, spinLat, pos);
 			pos = core->equinoxEquToJ2000(pos, StelCore::RefractionOff);
 
@@ -932,7 +1027,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		// Clean up matches
 		adjustMatchesResult(allMatches, recentMatches, matches, maxNbItem);
 
-		// Updates values
+		// Updates values - module info will be fetched on-demand
 		resetSearchResultDisplay(allMatches, recentMatches);
 
 		// Update push button enabled state
@@ -948,6 +1043,26 @@ void SearchDialog::updateRecentSearchList(const QString &nameI18n)
 {
 	if(nameI18n.isEmpty())
 		return;
+
+	// Capture object type for this search
+	StelObjectP obj = objectMgr->searchByNameI18n(nameI18n);
+	if (!obj)
+		obj = objectMgr->searchByName(nameI18n);
+
+	if (obj)
+	{
+		QString objectType = obj->getObjectTypeI18n();
+		recentObjectSearchesData.objectTypes[nameI18n] = objectType;
+	}
+	else if (simbadObjectTypes.contains(nameI18n))
+	{
+		// For SIMBAD objects, use the type from SIMBAD
+		QString objType = simbadObjectTypes.value(nameI18n, "");
+		if (!objType.isEmpty())
+		recentObjectSearchesData.objectTypes[nameI18n] = QString("SIMBAD; %1").arg(qc_(objType, "SIMBAD object type"));
+		else
+		recentObjectSearchesData.objectTypes[nameI18n] = QString("SIMBAD");
+	}
 
 	// Prepend & remove duplicates
 	recentObjectSearchesData.recentList.prepend(nameI18n);
@@ -994,10 +1109,12 @@ void SearchDialog::adjustMatchesResult(QStringList &allMatches, QStringList& rec
 	// Adjust recent matches to preferred max size
 	recentMatches = recentMatches.mid(0, recentObjectSearchesData.maxSize);
 
-	// Find total size of both matches
-	tempMatches << recentMatches << matches; // unsorted
-	tempMatches.removeDuplicates();
-	tempSize = tempMatches.size();
+	// Remove duplicates within recent matches only
+	recentMatches.removeDuplicates();
+
+	// Find total size - but DON'T remove duplicates between recent and matches
+	// This allows objects to appear in both local and SIMBAD results
+	tempSize = recentMatches.size() + matches.size();
 
 	// Adjust match size to be within range
 	if(tempSize>maxNbItem)
@@ -1008,9 +1125,6 @@ void SearchDialog::adjustMatchesResult(QStringList &allMatches, QStringList& rec
 
 	// Combine list: ordered by recent searches then relevance
 	allMatches << recentMatches << matches;
-
-	// Remove possible duplicates from both listQSt
-	allMatches.removeDuplicates();
 }
 
 
@@ -1020,6 +1134,18 @@ void SearchDialog::resetSearchResultDisplay(QStringList allMatches,
 	// Updates values
 	searchListModel->appendValues(allMatches);
 	searchListModel->appendRecentValues(recentMatches);
+
+	// Pass saved object types for recent objects to the model
+	QMap<QString, QString> recentObjectTypes; 
+	for (const QString& objName: recentMatches)
+	{
+		if (recentObjectSearchesData.objectTypes.contains(objName))
+		{
+			recentObjectTypes[objName] = recentObjectSearchesData.objectTypes[objName];
+		}
+	}
+	// Update display with object types
+	searchListModel->setValuesWithModules(allMatches, recentMatches, recentObjectTypes);
 
 	// Update display
 	searchListModel->setValues(allMatches, recentMatches);
@@ -1076,6 +1202,14 @@ void SearchDialog::loadRecentSearches()
 
 			// Get user's recentList data (if possible)
 			recentObjectSearchesData.recentList = recentSearchData.value("recentList").toStringList();
+		
+			// Load object types if available
+			QVariantMap objectTypesMap = recentSearchData.value("objectTypes").toMap();
+			recentObjectSearchesData.objectTypes.clear();
+			for (auto it = objectTypesMap.constBegin(); it != objectTypesMap.constEnd(); ++it)
+			{
+				recentObjectSearchesData.objectTypes[it.key()] = it.value().toString();
+			}
 		}
 		catch (std::runtime_error &e)
 		{
@@ -1106,6 +1240,15 @@ void SearchDialog::saveRecentSearches()
 	rslDataList.insert("maxSize", recentObjectSearchesData.maxSize);
 	rslDataList.insert("recentList", recentObjectSearchesData.recentList);
 	
+	// Save object types as a QVariantMap
+	QVariantMap objectTypesMap;
+	for (auto it = recentObjectSearchesData.objectTypes.constBegin();
+		it != recentObjectSearchesData.objectTypes.constEnd(); ++it)
+	{
+		objectTypesMap.insert(it.key(), it.value());
+	}
+	rslDataList.insert("objectTypes", objectTypesMap);
+
 	QVariantMap rsList;
 	rsList.insert("recentObjectSearches", rslDataList);
 
@@ -1193,7 +1336,22 @@ void SearchDialog::onSimbadStatusChanged()
 	if (simbadReply->getCurrentStatus()==SimbadLookupReply::SimbadLookupFinished)
 	{
 		simbadResults = simbadReply->getResults();
-		searchListModel->appendValues(simbadResults.keys());
+		simbadObjectTypes = simbadReply->getObjectTypes();
+		
+		QStringList SimbadNames;
+		QMap<QString, QString> moduleInfo;
+		
+		for (const QString& objName : simbadResults.keys())
+		{
+			SimbadNames.append(objName);
+			QString objType = simbadObjectTypes.value(objName, "");
+			if (!objType.isEmpty())
+				moduleInfo[objName] = QString("SIMBAD; %1").arg(qc_(objType, "SIMBAD object type"));
+			else
+				moduleInfo[objName] = "SIMBAD";
+		}
+		
+		searchListModel->appendValuesWithModules(SimbadNames, moduleInfo);
 		// Update push button enabled state
 		setPushButtonGotoSearch();
 	}
@@ -1256,7 +1414,8 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 			if (!newSelected.empty())
 			{
-				close();
+                                if (useAutoClosing)
+                                        close();
 				ui->lineEditSearchSkyObject->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 
 				// Can't point to home planet
@@ -1271,8 +1430,10 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 		}
 		else
 		{
-			close();
-			GETSTELMODULE(CustomObjectMgr)->addPersistentObject(nameI18n, simbadResults[nameI18n]);
+                        if (useAutoClosing)
+                                close();
+			QString objType = simbadObjectTypes.value(nameI18n, "");
+			GETSTELMODULE(CustomObjectMgr)->addPersistentObject(nameI18n, simbadResults[nameI18n], QString("SIMBAD; %1").arg(qc_(objType, "SIMBAD object type")));
 			ui->lineEditSearchSkyObject->clear();
 			searchListModel->clearValues();
 			if (objectMgr->findAndSelect(nameI18n))
@@ -1294,7 +1455,8 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
 		{
-			close();
+                        if (useAutoClosing)
+                                close();
 			ui->lineEditSearchSkyObject->clear();
 
 			// Can't point to home planet
@@ -1321,7 +1483,8 @@ void SearchDialog::gotoObject(const QString &nameI18n, const QString &objType)
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
 		{
-			close();
+                        if (useAutoClosing)
+                                close();
 			ui->lineEditSearchSkyObject->clear();
 			
 			// Can't point to home planet
@@ -1338,7 +1501,14 @@ void SearchDialog::gotoObject(const QString &nameI18n, const QString &objType)
 
 void SearchDialog::gotoObject(const QModelIndex &modelIndex)
 {
-	gotoObject(modelIndex.model()->data(modelIndex, Qt::DisplayRole).toString());
+	// Use UserRole to get the original object name (without module type suffix)
+	QString objectName = modelIndex.model()->data(modelIndex, Qt::UserRole).toString();
+	if (objectName.isEmpty())
+	{
+		// Fallback to DisplayRole if UserRole is not available
+		objectName = modelIndex.model()->data(modelIndex, Qt::DisplayRole).toString();
+	}
+	gotoObject(objectName);
 }
 
 void SearchDialog::gotoObjectWithType(const QModelIndex &modelIndex)

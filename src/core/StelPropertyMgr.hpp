@@ -23,6 +23,9 @@
 #include <QSet>
 #include <QMetaProperty>
 #include "StelApp.hpp"
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(Property)
 
 class StelProperty;
 
@@ -31,6 +34,11 @@ class StelProperty;
 //! This is required for some connections such as in the UI.
 //! The intended use is to subclass this class and implement the onPropertyChanged() slot,
 //! re-emitting the "changed" event with a type-converted value.
+//!
+//! @note You can finetune the amount of Property-related messages in the logfile by configuring the logging category stel.Properties.
+//! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.Properties.debug=true;".
+//! By default, only Info and more severe messages are displayed.
+
 class StelPropertyProxy : public QObject
 {
 	Q_OBJECT
@@ -217,6 +225,11 @@ signals:
 //! @note Good candidates for a StelProperty are properties that do not change too often. This includes most settings
 //! configurable through the GUI. Bad examples are properties which potentially change very often (e.g. each frame), such as the
 //! current view vector, field of view etc. They may cause considerable overhead if used, and therefore should be avoided.
+//!
+//! @note You can finetune the amount of Property-related messages in the logfile by configuring the logging category stel.Properties.
+//! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.Properties.debug=true;".
+//! By default, only Info and more severe messages are displayed.
+//!
 //! @sa StelPropertyMgr, StelDialog, StelAction
 class StelProperty : public QObject
 {
@@ -323,7 +336,10 @@ public:
 	//! @returns \c true when the value of the StelProperty with the ID \p id
 	//! has been successfully changed, and \c false if the value change failed
 	//! or when no property with the given ID is found.
-	bool setStelPropertyValue(const QString& id, const QVariant &value) const;
+	//! If not found, a warning is written to logfile unless noWarning is true.
+	//! This may be useful to suppress warnings about plugin module properties
+	//! when these are not loaded, but should else be left true.
+	bool setStelPropertyValue(const QString& id, const QVariant &value, const bool noWarning=false) const;
 	//! Returns the QMetaProperty information for the given \p id.
 	QMetaProperty getMetaProperty(const QString& id) const;
 signals:

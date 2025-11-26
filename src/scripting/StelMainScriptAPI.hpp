@@ -32,12 +32,20 @@
 
 class QScriptEngine;
 
+Q_DECLARE_LOGGING_CATEGORY(Scripting)
+
+
 //! Provide script API for Stellarium global functions.  Public slots in this class
 //! may be used in Stellarium scripts, and are accessed as member function to the
 //! "core" scripting object.  Module-specific functions, such as setting and clearing
 //! of display flags (e.g. LandscapeMgr::setFlagAtmosphere) can be accessed directly
 //! via the scripting object with the class name, e.g.  by using the scripting command:
 //!  LandscapeMgr.setFlagAtmosphere(true);
+//!
+//! @note You can finetune the amount of scripting-related messages in the logfile by configuring the logging category stel.Scripting.
+//! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.Scripting.debug=true;".
+//! By default, only Info and more severe messages are displayed.
+
 class StelMainScriptAPI : public QObject
 {
 	Q_OBJECT
@@ -579,6 +587,7 @@ public slots:
 	//! - ProjectionStereographic
 	//! - ProjectionFisheye
 	//! - ProjectionHammer
+	//! - ProjectionMollweide
 	//! - ProjectionCylinder
 	//! - ProjectionMercator
 	//! - ProjectionOrthographic
@@ -922,14 +931,6 @@ public slots:
 	//! Set the current application language.
 	//! @param langCode two letter language code, e.g. "en", or "de".
 	static void setAppLanguage(QString langCode);
-
-	//! Get the current sky language.
-	//! @return two letter language code, e.g. "en", or "de" and so on.
-	static QString getSkyLanguage();
-
-	//! Set the current sky language.
-	//! @param langCode two letter language code, e.g. "en", or "de".
-	static void setSkyLanguage(QString langCode);
 
 	//! Translate the string.
 	static QString translate(QString englishText);

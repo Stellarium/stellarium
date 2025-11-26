@@ -36,11 +36,11 @@
 #include <zlib.h>
 
 #ifdef CYGWIN
-  #include <malloc.h>
+#include <malloc.h>
 #endif
 
 #if defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HAIKU || defined Q_OS_SOLARIS
-  #include <sys/utsname.h>
+#include <sys/utsname.h>
 #endif
 
 namespace StelUtils
@@ -83,16 +83,34 @@ QString getOperatingSystemInfo()
 {
 	QString OS = QSysInfo::prettyProductName();
 
-	#if defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HAIKU || defined Q_OS_SOLARIS
+#if defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_SOLARIS
 	struct utsname buff;
 	if (uname(&buff) != -1)
 		OS = QString("%1 %2").arg(buff.sysname, buff.release);
-	#endif
+#endif
+
+#ifdef Q_OS_HAIKU
+	struct utsname buff;
+	if (uname(&buff) != -1)
+	{
+		QString revision = QString("%1").arg(buff.version).split(" ").first();
+		OS = QString("%1 R%2 (%3)").arg(buff.sysname, buff.release, revision);
+	}
+#endif
 
 	if (OS.isEmpty() || OS==QStringLiteral("unknown"))
 		OS = "Unknown operating system";
 
 	return OS;
+}
+
+QString getAddressingMode()
+{
+	QString mode("32-bit");
+        #if defined(__LP64__) || defined(_WIN64)
+	mode = "64-bit";
+        #endif
+	return mode;
 }
 
 double hmsStrToHours(const QString& s)
@@ -119,14 +137,14 @@ QString daysFloatToDHMS(float days)
 	remain *= 24.0f;
 	int h = static_cast<int> (remain); remain -= h;
 	remain *= 60.0f;
-	int m = static_cast<int> (remain); remain -= m; 
+	int m = static_cast<int> (remain); remain -= m;
 	remain *= 60.0f;
 
 	auto r = QString("%1%2 %3%4 %5%6 %7%8")
-	.arg(d)		.arg(qc_("d", "duration"))
-	.arg(h)		.arg(qc_("h", "duration"))
-	.arg(m)		.arg(qc_("m", "duration"))
-	.arg(remain)	.arg(qc_("s", "duration"));
+	                .arg(d)		.arg(qc_("d", "duration"))
+	                .arg(h)		.arg(qc_("h", "duration"))
+	                .arg(m)		.arg(qc_("m", "duration"))
+	                .arg(remain)	.arg(qc_("s", "duration"));
 
 	return r;
 }
@@ -164,7 +182,7 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	d = static_cast<unsigned int>(angle);
 	m = static_cast<unsigned int>((angle - d)*60);
 	s = (angle-d)*3600-60*m;
-	// workaround for rounding numbers	
+	// workaround for rounding numbers
 	if (s>59.9)
 	{
 		s = 0.;
@@ -174,7 +192,7 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	{
 		m = 0;
 		d += 1;
-	}	
+	}
 }
 
 QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool positive)
@@ -634,11 +652,11 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	static const int JB_MAX_WITHOUT_OVERFLOW = 107374182;
 	const long julian = static_cast<long>(std::floor(jd + 0.5));
 
-	long ta, jalpha, tb, tc, td, te;
+	long ta, tc;
 
 	if (julian >= JD_GREG_CAL)
 	{
-		jalpha = (4*(julian - 1867216) - 1) / 146097;
+		long jalpha = (4*(julian - 1867216) - 1) / 146097;
 		ta = julian + 1 + jalpha - jalpha / 4;
 	}
 	else if (julian < 0)
@@ -650,7 +668,7 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 		ta = julian;
 	}
 
-	tb = ta + 1524;
+	long tb = ta + 1524;
 	if (tb <= JB_MAX_WITHOUT_OVERFLOW)
 	{
 		tc = (tb*20 - 2442) / 7305;
@@ -659,8 +677,8 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	{
 		tc = static_cast<long>((static_cast<unsigned long long>(tb)*20 - 2442) / 7305);
 	}
-	td = 365 * tc + tc/4;
-	te = ((tb - td) * 10000)/306001;
+	long td = 365 * tc + tc/4;
+	long te = ((tb - td) * 10000)/306001;
 
 	*dd = tb - td - (306001 * te) / 10000;
 
@@ -984,9 +1002,7 @@ bool getJDFromDate(double* newjd, const int y, const int m, const int d, const i
 		/*
 		 * Algorithm taken from "Numerical Recipes in C, 2nd Ed." (1992), pp. 11-12
 		 */
-		long ljul;
 		long jy, jm;
-		long laa, lbb, lcc, lee;
 
 		jy = y;
 		if (m > 2)
@@ -999,22 +1015,22 @@ bool getJDFromDate(double* newjd, const int y, const int m, const int d, const i
 			jm = m + 13;
 		}
 
-		laa = 1461 * jy / 4;
+		long laa = 1461 * jy / 4;
 		if (jy < 0 && jy % 4)
 		{
 			--laa;
 		}
-		lbb = 306001 * jm / 10000;
-		ljul = laa + lbb + d + 1720995L;
+		long lbb = 306001 * jm / 10000;
+		long ljul = laa + lbb + d + 1720995L;
 
 		if (d + 31L*(m + 12L * y) >= IGREG2)
 		{
-			lcc = jy/100;
+			long lcc = jy/100;
 			if (jy < 0 && jy % 100)
 			{
 				--lcc;
 			}
-			lee = lcc/4;
+			long lee = lcc/4;
 			if (lcc < 0 && lcc % 4)
 			{
 				--lee;
@@ -1361,13 +1377,21 @@ QString hoursToHmsStr(const float hours, const bool minutesOnly, const bool colo
 //! The method to splitting the text by substrings by some limit of string length
 QString wrapText(const QString& s, const int limit)
 {
+	static const uint32_t RLM32=U'\U0000200f'; // Right-Left-marker (starting Arab/Hebrew)
+	static const uint32_t LRM32=U'\U0000200e'; // Left-right-marker
+	static const uint32_t ZWS32=U'\U0000200b'; // Zero-width space
+	//static const QString LRM{"\u200e"}; // left-to-right mark: zero-width char
+	//static const QString RLM{"\u200f"}; // right-to-left mark: right to left zero-width non-Arabic char
+	static const QString ZWS{"\u200b"}; // zero-width space (we use them to combine cultural label groups)
+
+
 	QString result = "";
 	if (s.length()<=limit)
 		result = s;
 	else
 	{
 		QString prepare = "";
-		QStringList data = s.split(" ");
+		const QStringList data = s.contains(ZWS) ? s.split(ZWS) : s.split(" ");
 		for (int i = 0; i<data.size(); i++)
 		{
 			prepare.append(QString(" %1").arg(data.at(i)));
@@ -1814,7 +1838,7 @@ double getDeltaTByChaprontTouze(const double jDay)
 
 	if (-391 < year && year <= 948)
 		deltaT = (42.4*u +495.0)*u + 2177.0;
-	if (948 < year && year <= 1600)
+	if (948 < year) // && year <= 1600)
 		deltaT = (23.6*u +100.0)*u + 102.0;
 
 	return deltaT;
@@ -2520,12 +2544,12 @@ static const double MoonFluctuationTable[2555] = {
 double getMoonFluctuation(const double jDay)
 {
 	double f = 0.;
-	int year, month, day, index;
+	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	double t = yearFraction(year, month, day);
 	if (t>=1681.0 && t<=1936.5) {
-		index = qRound(std::floor((t - 1681.0)*10));
+		int index = qRound(std::floor((t - 1681.0)*10));
 		f = MoonFluctuationTable[index]*0.07; // Get interpolated data and convert to seconds of time
 	}
 

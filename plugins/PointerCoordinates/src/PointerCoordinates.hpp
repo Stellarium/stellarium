@@ -23,7 +23,6 @@
 #include "StelGui.hpp"
 #include "StelModule.hpp"
 
-#include <QFont>
 #include <QString>
 #include <QPair>
 
@@ -191,7 +190,6 @@ private:
 	// The current coordinate system
 	CoordinateSystem currentCoordinateSystem;
 
-	QFont font;
 	bool flagShowCoordinates;
 	bool flagEnableAtStartup;
 	bool flagShowCoordinatesButton;

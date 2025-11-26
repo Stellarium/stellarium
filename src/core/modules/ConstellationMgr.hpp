@@ -23,11 +23,12 @@
 
 #include "StelObjectType.hpp"
 #include "StelObjectModule.hpp"
+#include "StelObject.hpp"
+#include "StelSkyCultureSkyPartition.hpp"
 
 #include <vector>
 #include <QString>
 #include <QStringList>
-#include <QFont>
 
 class StelToneReproducer;
 class StarMgr;
@@ -40,27 +41,43 @@ class StelSkyCulture;
 //! Display and manage the constellations.
 //! It can display constellations lines, names, art textures and boundaries.
 //! It also supports several different sky cultures.
+//! Some sky cultures have up to 2 optional @ref StelSkycultureSkyPartition elements related to concepts of a Zodiac (the known cases are all similar, 12x30 degrees along the ecliptic),
+//! or of sections along ecliptic or equator related to the Moon, called LunarSystems. These are more diverse, but still only at most one per skyculture.
+//! Both of these systems bear concepts of coordinates and are important for timekeeping, but esp. the Chinese systems also for actual use as celestial coordinates.
 class ConstellationMgr : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool artDisplayed					READ getFlagArt							WRITE setFlagArt							NOTIFY artDisplayedChanged)
-	Q_PROPERTY(float artFadeDuration				READ getArtFadeDuration					WRITE setArtFadeDuration					NOTIFY artFadeDurationChanged)
-	Q_PROPERTY(float artIntensity					READ getArtIntensity						WRITE setArtIntensity						NOTIFY artIntensityChanged)
-	Q_PROPERTY(Vec3f boundariesColor				READ getBoundariesColor					WRITE setBoundariesColor					NOTIFY boundariesColorChanged)
-	Q_PROPERTY(bool boundariesDisplayed			READ getFlagBoundaries					WRITE setFlagBoundaries					NOTIFY boundariesDisplayedChanged)
-	Q_PROPERTY(float boundariesFadeDuration		READ getBoundariesFadeDuration			WRITE setBoundariesFadeDuration			NOTIFY boundariesFadeDurationChanged)
-	Q_PROPERTY(int fontSize						READ getFontSize							WRITE setFontSize							NOTIFY fontSizeChanged)
-	Q_PROPERTY(bool isolateSelected				READ getFlagIsolateSelected				WRITE setFlagIsolateSelected				NOTIFY isolateSelectedChanged)
-	Q_PROPERTY(bool flagConstellationPick			READ getFlagConstellationPick				WRITE setFlagConstellationPick				NOTIFY flagConstellationPickChanged)
-	Q_PROPERTY(Vec3f linesColor					READ getLinesColor						WRITE setLinesColor						NOTIFY linesColorChanged)
-	Q_PROPERTY(bool linesDisplayed				READ getFlagLines						WRITE setFlagLines						NOTIFY linesDisplayedChanged)
-	Q_PROPERTY(float linesFadeDuration				READ getLinesFadeDuration					WRITE setLinesFadeDuration				NOTIFY linesFadeDurationChanged)
-	Q_PROPERTY(Vec3f namesColor					READ getLabelsColor						WRITE setLabelsColor						NOTIFY namesColorChanged)
-	Q_PROPERTY(bool namesDisplayed				READ getFlagLabels						WRITE setFlagLabels						NOTIFY namesDisplayedChanged)
-	Q_PROPERTY(float namesFadeDuration			READ getLabelsFadeDuration				WRITE setLabelsFadeDuration				NOTIFY namesFadeDurationChanged)
-	Q_PROPERTY(ConstellationDisplayStyle constellationDisplayStyle	READ getConstellationDisplayStyle	WRITE setConstellationDisplayStyle		NOTIFY constellationsDisplayStyleChanged)
-	Q_PROPERTY(int constellationLineThickness		READ getConstellationLineThickness			WRITE setConstellationLineThickness			NOTIFY constellationLineThicknessChanged)
-	Q_PROPERTY(int constellationBoundariesThickness	READ getConstellationBoundariesThickness	WRITE setConstellationBoundariesThickness	NOTIFY constellationBoundariesThicknessChanged)
+	Q_PROPERTY(bool artDisplayed              READ getFlagArt                        WRITE setFlagArt                       NOTIFY artDisplayedChanged)
+	Q_PROPERTY(float artFadeDuration          READ getArtFadeDuration                WRITE setArtFadeDuration               NOTIFY artFadeDurationChanged)
+	Q_PROPERTY(float artIntensity             READ getArtIntensity                   WRITE setArtIntensity                  NOTIFY artIntensityChanged)
+	Q_PROPERTY(Vec3f boundariesColor          READ getBoundariesColor                WRITE setBoundariesColor               NOTIFY boundariesColorChanged)
+	Q_PROPERTY(bool boundariesDisplayed       READ getFlagBoundaries                 WRITE setFlagBoundaries                NOTIFY boundariesDisplayedChanged)
+	Q_PROPERTY(float boundariesFadeDuration	  READ getBoundariesFadeDuration         WRITE setBoundariesFadeDuration        NOTIFY boundariesFadeDurationChanged)
+	Q_PROPERTY(int fontSize	                  READ getFontSize                       WRITE setFontSize                      NOTIFY fontSizeChanged)
+	Q_PROPERTY(bool isolateSelected	          READ getFlagIsolateSelected            WRITE setFlagIsolateSelected           NOTIFY isolateSelectedChanged)
+	Q_PROPERTY(bool flagConstellationPick     READ getFlagConstellationPick          WRITE setFlagConstellationPick	        NOTIFY flagConstellationPickChanged)
+	Q_PROPERTY(Vec3f linesColor               READ getLinesColor                     WRITE setLinesColor                    NOTIFY linesColorChanged)
+	Q_PROPERTY(bool linesDisplayed            READ getFlagLines                      WRITE setFlagLines                     NOTIFY linesDisplayedChanged)
+	Q_PROPERTY(float linesFadeDuration        READ getLinesFadeDuration              WRITE setLinesFadeDuration             NOTIFY linesFadeDurationChanged)
+	Q_PROPERTY(Vec3f namesColor               READ getLabelsColor                    WRITE setLabelsColor                   NOTIFY namesColorChanged)
+	Q_PROPERTY(bool namesDisplayed            READ getFlagLabels                     WRITE setFlagLabels                    NOTIFY namesDisplayedChanged)
+	Q_PROPERTY(float namesFadeDuration        READ getLabelsFadeDuration             WRITE setLabelsFadeDuration            NOTIFY namesFadeDurationChanged)
+	Q_PROPERTY(int constellationLineThickness READ getConstellationLineThickness     WRITE setConstellationLineThickness    NOTIFY constellationLineThicknessChanged)
+	Q_PROPERTY(int boundariesThickness	  READ getBoundariesThickness            WRITE setBoundariesThickness           NOTIFY boundariesThicknessChanged)
+	Q_PROPERTY(bool  hullsDisplayed           READ getFlagHulls                      WRITE setFlagHulls                     NOTIFY hullsDisplayedChanged)
+	Q_PROPERTY(Vec3f hullsColor               READ getHullsColor                     WRITE setHullsColor                    NOTIFY hullsColorChanged)
+	Q_PROPERTY(int   hullsThickness	          READ getHullsThickness                 WRITE setHullsThickness                NOTIFY hullsThicknessChanged)
+	Q_PROPERTY(float hullsFadeDuration	  READ getHullsFadeDuration              WRITE setHullsFadeDuration             NOTIFY hullsFadeDurationChanged)
+
+	Q_PROPERTY(bool  zodiacDisplayed          READ getFlagZodiac                     WRITE setFlagZodiac                    NOTIFY zodiacDisplayedChanged)
+	Q_PROPERTY(Vec3f zodiacColor              READ getZodiacColor                    WRITE setZodiacColor                   NOTIFY zodiacColorChanged)
+	Q_PROPERTY(int   zodiacThickness	  READ getZodiacThickness                WRITE setZodiacThickness               NOTIFY zodiacThicknessChanged)
+	Q_PROPERTY(float zodiacFadeDuration	  READ getZodiacFadeDuration             WRITE setZodiacFadeDuration            NOTIFY zodiacFadeDurationChanged)
+	Q_PROPERTY(bool  lunarSystemDisplayed     READ getFlagLunarSystem                WRITE setFlagLunarSystem               NOTIFY lunarSystemDisplayedChanged)
+	Q_PROPERTY(Vec3f lunarSystemColor         READ getLunarSystemColor               WRITE setLunarSystemColor              NOTIFY lunarSystemColorChanged)
+	Q_PROPERTY(int   lunarSystemThickness     READ getLunarSystemThickness           WRITE setLunarSystemThickness          NOTIFY lunarSystemThicknessChanged)
+	Q_PROPERTY(float lunarSystemFadeDuration  READ getLunarSystemFadeDuration        WRITE setLunarSystemFadeDuration       NOTIFY lunarSystemFadeDurationChanged)
+
 
 public:
 	//! Constructor
@@ -88,6 +105,15 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
+
+	//! Search for StelObject in an area around a specified point.
+	//! The function searches in a disk of diameter limitFov centered on v.
+	//! Only visible objects (i.e. currently displayed on screen) should be returned.
+	//! @param v equatorial position at epoch J2000 (without aberration).
+	//! @param limitFov angular diameter of the searching zone in degree. (ignored here. Only v is queried.)
+	//! @param core the StelCore instance to use.
+	//! @return a list of constellations identified from their hulls when clicked inside.
+	//! This can probably be used for selection when IAU borders don't exist and click does not identify a star in a constellation line.
 	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! @return the matching constellation object's pointer if exists or Q_NULLPTR
@@ -103,17 +129,21 @@ public:
 	QStringList listAllObjects(bool inEnglish) const override;
 	QString getName() const override { return "Constellations"; }
 	QString getStelObjectType() const override;
-	//! Describes how to display constellation labels. The viewDialog GUI has a combobox which corresponds to these values.
-	enum ConstellationDisplayStyle
-	{
-		constellationsAbbreviated	= 0,
-		constellationsNative		= 1,
-		constellationsTranslated	= 2,
-		constellationsEnglish		= 3 // Maybe this is not useful?
-	};	
-	Q_ENUM(ConstellationDisplayStyle)
 
 	///////////////////////////////////////////////////////////////////////////
+	//! Returns whether the current skyculture defines a zodiac-type cultural coordinate system
+	bool hasZodiac() const {return !zodiac.isNull();}
+	//! Returns whether the current skyculture defines a lunar-related cultural coordinate system (lunar stations or mansions)
+	bool hasLunarSystem() const {return !lunarSystem.isNull();}
+	//! @return the translated name of the Zodiac system
+	QString getZodiacSystemName() const;
+	//! @return the translated name of the Lunar system
+	QString getLunarSystemName() const;
+	//!@return longitude in the culture's zodiacal longitudes (usually sign, degrees, minutes)
+	QString getZodiacCoordinate(Vec3d eqNow) const;
+	//! @return lunar station in the culture's Lunar system
+	QString getLunarSystemCoordinate(Vec3d eqNow) const;
+
 	// Properties setters and getters
 public slots:	
 	//! Set whether constellation art will be displayed
@@ -219,24 +249,36 @@ public slots:
 	//! Set whether constellation names are displayed
 	bool getFlagLabels(void) const;
 
-	//! Set constellation labels fade duration in second
+	//! Set constellation labels fade duration in seconds
 	void setLabelsFadeDuration(const float duration);
-	//! Get constellation labels fade duration in second
+	//! Get constellation labels fade duration in seconds
 	float getLabelsFadeDuration() const;
+
+	//! Define hull line color
+	//! @param color The color of hull lines
+	//! @code
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! ConstellationMgr.setHullsColor(c.toVec3f());
+	//! @endcode
+	void setHullsColor(const Vec3f& color);
+	//! Get current hulls color
+	Vec3f getHullsColor() const;
+
+	//! Set whether constellation hull lines will be displayed
+	void setFlagHulls(const bool displayed);
+	//! Get whether constellation boundaries lines are displayed
+	bool getFlagHulls(void) const;
+
+	//! Set constellation hulls fade duration in second
+	void setHullsFadeDuration(const float duration);
+	//! Get constellation hulls fade duration in second
+	float getHullsFadeDuration() const;
 
 	//! Set the font size used for constellation names display
 	void setFontSize(const int newFontSize);
 	//! Get the font size used for constellation names display
 	int getFontSize() const;
-
-	//! Set the way how constellation names are displayed: abbreviated/as-given/translated
-	//! @param style the new display style
-	void setConstellationDisplayStyle(ConstellationMgr::ConstellationDisplayStyle style);
-	//! get the way how constellation names are displayed: abbreviated/as-given/translated
-	ConstellationMgr::ConstellationDisplayStyle getConstellationDisplayStyle();
-	//! Returns the currently set constellation display style as string, instead of enum
-	//! @see getConstellationDisplayStyle()
-	static QString getConstellationDisplayStyleString(ConstellationMgr::ConstellationDisplayStyle style);
 
 	//! Set the thickness of lines of the constellations
 	//! @param thickness of line in pixels
@@ -246,9 +288,70 @@ public slots:
 
 	//! Set the thickness of boundaries of the constellations
 	//! @param thickness of line in pixels
-	void setConstellationBoundariesThickness(const int thickness);
+	void setBoundariesThickness(const int thickness);
 	//! Get the thickness of boundaries of the constellations
-	int getConstellationBoundariesThickness() const { return constellationBoundariesThickness; }
+	int getBoundariesThickness() const { return boundariesThickness; }
+
+	//! Set the thickness of constellation hulls
+	//! @param thickness of line in pixels
+	void setHullsThickness(const int thickness);
+	//! Get the thickness of constellations hulls
+	int getHullsThickness() const { return hullsThickness; }
+
+
+	//! Define zodiac line color
+	//! @param color The color of zodiac related lines
+	//! @code
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! ConstellationMgr.setZodiacColor(c.toVec3f());
+	//! @endcode
+	void setZodiacColor(const Vec3f& color);
+	//! Get current zodiac color
+	Vec3f getZodiacColor() const;
+
+	//! Set whether zodiac will be displayed, if defined
+	void setFlagZodiac(const bool displayed);
+	//! Get whether zodiac-related lines are displayed (if defined in the skyculture)
+	bool getFlagZodiac(void) const;
+
+	//! Set zodiac fade duration in second
+	void setZodiacFadeDuration(const float duration);
+	//! Get zodiac fade duration in second
+	float getZodiacFadeDuration() const;
+
+	//! Define lunarSystem line color
+	//! @param color The color of lunarSystem lines
+	//! @code
+	//! // example of usage in scripts (Qt6-based Stellarium)
+	//! var c = new Color(1.0, 0.0, 0.0);
+	//! ConstellationMgr.setLunarSystemColor(c.toVec3f());
+	//! @endcode
+	void setLunarSystemColor(const Vec3f& color);
+	//! Get current lunarSystem color
+	Vec3f getLunarSystemColor() const;
+
+	//! Set whether lunarSystem lines will be displayed, if defined
+	void setFlagLunarSystem(const bool displayed);
+	//! Get whether lunarSystem lines are displayed
+	bool getFlagLunarSystem(void) const;
+
+	//! Set lunarSystem fade duration in second
+	void setLunarSystemFadeDuration(const float duration);
+	//! Get lunarSystem fade duration in second
+	float getLunarSystemFadeDuration() const;
+
+	//! Set the thickness of zodiac-related lines
+	//! @param thickness of line in pixels
+	void setZodiacThickness(const int thickness);
+	//! Get the thickness of zodiac-related lines
+	int getZodiacThickness() const { return zodiacThickness; }
+	//! Set the thickness of lunarSystem-related lines
+	//! @param thickness of line in pixels
+	void setLunarSystemThickness(const int thickness);
+	//! Get the thickness of lunarSystem-related lines
+	int getLunarSystemThickness() const { return lunarSystemThickness; }
+
 
 	//! Remove constellations from selected objects
 	void deselectConstellations(void);
@@ -256,7 +359,7 @@ public slots:
 	//! Select all constellations
 	void selectAllConstellations(void);
 
-	//! Select the constellation by his English name. Calling this method will enable
+	//! Select the constellation by its English name. Calling this method will enable
 	//! isolated selection for the constellations if it is not enabled yet.
 	//! @param englishName the English name of the constellation
 	//! @code
@@ -272,22 +375,37 @@ public slots:
 	//! // example of usage in scripts: select constellation where Venus is located
 	//! ConstellationMgr.selectConstellationByObjectName("Venus");
 	//! @endcode
-	//! @note the method will be correct work for sky cultures with boundaries
+	//! @note the method will correctly work for sky cultures with boundaries
 	//! otherwise you may use star names from constellation lines as celestial body
 	void selectConstellationByObjectName(const QString& englishName);
-	//! Remove the constellation from list of selected constellations by his English
+	//! Remove the constellation from list of selected constellations by its English
 	//! name. Calling this method will enable isolated selection for the constellations
 	//! if it is not enabled yet.
 	//! @param englishName the English name of the constellation
 	//! @code
-	//! // example of usage in scripts: remove selection from the Orion constellation
+	//! // example of usage in scripts: remove Orion from the selection of constellations
 	//! ConstellationMgr.deselectConstellation("Orion");
 	//! @endcode
-	//! @note all constellations will be hidden when list of selected constellations will be empty
+	//! @note all constellations will be hidden when list of selected constellations is empty
 	void deselectConstellation(const QString& englishName);
 
 	//! Get the list of English names of all constellations for loaded sky culture
 	QStringList getConstellationsEnglishNames();
+
+	//! Create a list of entries: Constellation: Hull_area to logfile
+	//! @todo: Extend with GUI etc?
+	void outputHullAreas(const QString &fileNamePrefix="hullAreas") const;
+
+	//! Create a list of stars (CSV file) within the convex hull of constellation.
+	//! This command is perfect to be used as scripting command to extract a data list.
+	//! @param englishName name of the constellation. Either englishName or abbreviation.
+	//! @param hipOnly (default: true) list only Hipparcos stars
+	//! @param maxMag (default: 25) list stars down to this magnitude.
+	//! @param fileNamePrefix prefix (name start) name of CSV file to be written.
+	//! The file will be written into the Stellarium User Data directory,
+	//! the full filename will be fileNamePrefix_englishName_maxMag.csv.
+	void starsInHullOf(const QString &englishName, const bool hipOnly=true, const float maxMag=25.0f, const QString &fileNamePrefix="hullStars") const;
+
 
 signals:
 	void artDisplayedChanged(const bool displayed);
@@ -296,6 +414,19 @@ signals:
 	void boundariesColorChanged(const Vec3f & color);
 	void boundariesDisplayedChanged(const bool displayed);
 	void boundariesFadeDurationChanged(const float duration);
+	void boundariesThicknessChanged(int thickness);
+	void hullsColorChanged(const Vec3f & color);
+	void hullsDisplayedChanged(const bool displayed);
+	void hullsFadeDurationChanged(const float duration);
+	void hullsThicknessChanged(int thickness);
+	void zodiacColorChanged(const Vec3f & color);
+	void zodiacDisplayedChanged(const bool displayed);
+	void zodiacFadeDurationChanged(const float duration);
+	void zodiacThicknessChanged(int thickness);
+	void lunarSystemColorChanged(const Vec3f & color);
+	void lunarSystemDisplayedChanged(const bool displayed);
+	void lunarSystemFadeDurationChanged(const float duration);
+	void lunarSystemThicknessChanged(int thickness);
 	void fontSizeChanged(const int newSize);
 	void isolateSelectedChanged(const bool isolate);
 	void flagConstellationPickChanged(const bool mode);
@@ -305,9 +436,8 @@ signals:
 	void namesColorChanged(const Vec3f & color);
 	void namesDisplayedChanged(const bool displayed);
 	void namesFadeDurationChanged(const float duration);
-	void constellationsDisplayStyleChanged(const ConstellationMgr::ConstellationDisplayStyle style);
+	void constellationsDisplayStyleChanged(const StelObject::CulturalDisplayStyle style);
 	void constellationLineThicknessChanged(int thickness);
-	void constellationBoundariesThicknessChanged(int thickness);
 
 private slots:
 	//! Limit the number of constellations to draw based on selected stars.
@@ -334,7 +464,11 @@ private:
 
 	//! Load constellation line shapes, art textures and boundaries shapes from data files.
 	//! @param constellationsData The structure describing all the constellations
-	void loadLinesNamesAndArt(const QJsonArray& constellationsData, const StelSkyCulture& culture, bool preferNativeNames);
+	void loadLinesNamesAndArt(const StelSkyCulture& culture);
+
+	//! Recreate convex hulls. This needs to be done when stars have shifted due to proper motion.
+	//! Should be ocasionally triggered in update().
+	void recreateHulls();
 
 	//! Load the constellation boundary file.
 	//! This function deletes any currently loaded constellation boundaries
@@ -353,8 +487,18 @@ private:
 	//! Draw the constellation boundaries.
 	//! @param obsVelocity is the speed vector of the observer planet to distort boundaries by aberration.
 	void drawBoundaries(StelPainter& sPainter, const Vec3d &obsVelocity) const;
+	//! Draw the constellation hulls.
+	//! @param obsVelocity is the speed vector of the observer planet to distort hulls by aberration.
+	void drawHulls(StelPainter& sPainter, const Vec3d &obsVelocity) const;
+	//! Draw the zodiac, if any is defined in the current skyculture.
+	//! @param obsVelocity is the speed vector of the observer planet to distort zodiac lines by aberration.
+	void drawZodiac(StelPainter& sPainter, const Vec3d &obsVelocity) const;
+	//! Draw the lunar system lines, if any is defined in the current skyculture.
+	//! @param obsVelocity is the speed vector of the observer planet to distort lunarSystem lines by aberration.
+	void drawLunarSystem(StelPainter& sPainter, const Vec3d &obsVelocity) const;
+
 	//! Handle single and multi-constellation selections.
-	void setSelectedConst(Constellation* c);
+	void setSelectedConst(QList <Constellation*> cList);
 	//! Handle unselecting a single constellation.
 	void unsetSelectedConst(Constellation* c);
 	//! Define which constellation is selected from its abbreviation.
@@ -366,28 +510,23 @@ private:
 	//! Remove all selected constellations.
 	void deselect() { setSelected(Q_NULLPTR); }
 	//! Get the first selected constellation.
-	//! NOTE: this function should return a list of all, or may be deleted. Please
-	//! do not use until it exhibits the proper behavior.
-	StelObject* getSelected(void) const;
+	QList<Constellation*> getSelected(void) const;
 
-	std::vector<Constellation*> selected; // More than one can be selected at a time
+	QList<Constellation*> selected; // More than one can be selected at a time
 
-	Constellation* isStarIn(const StelObject *s) const;
-	Constellation* isObjectIn(const StelObject *s) const;
+public:
+	//! Return list of constellations the object is member of.
+	//! In case of IAU constellations, the list is guaranteed to be of length 1.
+	//! @param useHull Prefer to use constellation hull, not IAU borders
+	QList<Constellation*> isObjectIn(const StelObject *s, bool useHull) const;
+private:
 	Constellation* findFromAbbreviation(const QString& abbreviation) const;
-	std::vector<Constellation*> constellations;
-	QFont asterFont;
+	QList<Constellation*> constellations; //!< Constellations in the current SkyCulture
 	StarMgr* hipStarMgr;
 
-	bool isolateSelected; // true to pick individual constellations.
+	bool isolateSelected; //!< true to pick individual constellations.
 	bool flagConstellationPick; // TODO: CLEAR DESCRIPTION
 	std::vector<std::vector<Vec3d> *> allBoundarySegments;
-
-	QStringList constellationsEnglishNames;
-
-	//! this controls how constellations (and also star names) are printed: Abbreviated/as-given/translated
-	ConstellationDisplayStyle constellationDisplayStyle;
-	static const QMap<QString, ConstellationDisplayStyle>ConstellationDisplayStyleMap;
 
 	// These are THE master settings - individual constellation settings can vary based on selection status
 	float artFadeDuration;
@@ -401,13 +540,28 @@ private:
 	float linesFadeDuration;
 	bool namesDisplayed;
 	float namesFadeDuration;
+	bool hullsDisplayed;
+	float hullsFadeDuration;
+	float zodiacFadeDuration;
+	float lunarSystemFadeDuration;
+
 	bool checkLoadingData;
 
-	// Store the thickness of lines of the constellations
-	int constellationLineThickness;
+	int fontSize;
+	int constellationLineThickness;   //!< line width of the constellation lines
+	int boundariesThickness;          //!< line width of the constellation boundaries
+	int hullsThickness;               //!< line width of the constellation boundaries
+	int zodiacThickness;              //!< line width of the zodiac lines, if any
+	int lunarSystemThickness;         //!< line width of the lunarSystem lines, if any
+	Vec3f zodiacColor;
+	Vec3f lunarSystemColor;
+	LinearFader zodiacFader;
+	LinearFader lunarSystemFader;
 
-	// Store the thickness of boundaries of the constellations
-	int constellationBoundariesThickness;
+	//! optional zodiac description from index.json
+	StelSkyCultureSkyPartitionP zodiac;
+	//! optional lunarSystem description from index.json
+	StelSkyCultureSkyPartitionP lunarSystem;
 };
 
 #endif // CONSTELLATIONMGR_HPP

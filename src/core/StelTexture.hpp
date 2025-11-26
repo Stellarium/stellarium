@@ -25,6 +25,7 @@
 #include <QPointer>
 #include <QObject>
 #include <QImage>
+#include <QLoggingCategory>
 
 class QFile;
 class StelTextureMgr;
@@ -34,6 +35,8 @@ template <class T> class QFuture;
 #ifndef GL_CLAMP_TO_EDGE
 #define GL_CLAMP_TO_EDGE 0x812F
 #endif
+
+Q_DECLARE_LOGGING_CATEGORY(Tex)
 
 //! @class StelTexture
 //! Base texture class. For creating an instance, use StelTextureMgr::createTexture() and StelTextureMgr::createTextureThread()

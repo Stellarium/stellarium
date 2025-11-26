@@ -55,10 +55,8 @@
 #include <QSettings>
 #include <QGuiApplication>
 
-namespace
-{
 
-void brightenImage(QImage &img, float factor)
+void StelButton::brightenImage(QImage &img, float factor)
 {
 	for (int y=0; y<img.height(); y++)
 		for (int x=0; x<img.width(); x++)
@@ -79,8 +77,6 @@ void brightenImage(QImage &img, float factor)
 			col.setHsvF(h, s, v, a);
 			img.setPixelColor(x, y, col);
 		}
-}
-
 }
 
 void StelButton::initCtor(const QPixmap& apixOn,
@@ -627,6 +623,7 @@ void BottomStelBar::setFont(const QFont &cfont)
 	location->setFont(font);
 	fov->setFont(font);
 	fps->setFont(font);
+	helpLabel->setFont(font);
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{

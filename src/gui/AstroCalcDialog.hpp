@@ -327,7 +327,7 @@ private slots:
 	//! Calculating the rises, transits and sets for selected celestial body and fill the list.
 	void generateRTS();
 	void cleanupRTS();
-	void selectCurrentRTS(const QModelIndex &modelIndex);
+	void selectCurrentRTS(QTreeWidgetItem* item, int idx);
 	void saveRTS();
 	void setRTSCelestialBodyName();
 
@@ -447,6 +447,7 @@ private slots:
 	void populateWutGroups();
 
 	void updateAstroCalcData();
+	void updateEquatorialData();
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 	void changePCTab(int index);
@@ -614,8 +615,9 @@ private:
 	//! @arg horizontal coord are horizontal (alt-azimuthal). Use degrees/degrees. Else use Hours/degrees.
 	//! @arg southAzimuth (relevant only for horizontal=true) count azimuth from south.
 	//! @arg decimalDegrees use decimal format, not DMS/HMS
+	//! @arg polarDistance use polar distance, not declination
 	//! @return QPair(lngStr, latStr) formatted output strings
-	static QPair<QString, QString> getStringCoordinates(const Vec3d &coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees);
+	static QPair<QString, QString> getStringCoordinates(const Vec3d &coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees, const bool polarDistance);
 	void fillWUTTable(const QString &objectName, const QString &designation, float magnitude, const Vec4d &RTSTime, double maxElevation,
 			  double angularSize, const QString &constellation, const QString &otype, bool decimalDegrees = false);
 	void fillCelestialPositionTable(const QString &objectName, const QString &RA, const QString &Dec, double magnitude,
@@ -663,6 +665,8 @@ private:
 	inline double findHeliocentricDistance(double JD, PlanetP object1) const {return object1->getHeliocentricEclipticPos(JD+core->computeDeltaT(JD)/86400.).norm();}
 	bool isSecondObjectRight(double JD, PlanetP object1, StelObjectP object2);
 
+	bool flagPolarDistance = false;
+
 	// Signal that a plot has to be redone
 	bool plotAltVsTime = false;
 	bool plotAltVsTimeSun = false;
@@ -670,6 +674,7 @@ private:
 	bool plotAltVsTimePositive = false;
 	bool plotMonthlyElevation = false;
 	bool plotMonthlyElevationPositive = false;
+	bool plotXYVsTimeGraph = false;
 	bool plotDistanceGraph = false;
 	bool plotLunarElongationGraph = false;
 	bool plotAziVsTime = false;
@@ -961,20 +966,6 @@ private:
 	}
 };
 
-//! Besselian elements for lunar eclipse
-class LunarEclipseBessel
-{
-public:
-	LunarEclipseBessel(double &besX, double &besY, double &besL1, double &besL2, double &besL3, double &latDeg, double &lngDeg);
-};
-
-//! Iteration to compute contact times of lunar eclipse
-class LunarEclipseIteration
-{
-public:
-	LunarEclipseIteration(double &JD, double &positionAngle, double &axisDistance, bool beforeMaximum, int eclipseType);
-};
-
 //! Derived from QTreeWidgetItem class, but currently nothing else.
 class ACLunarEclipseContactsTreeWidgetItem : public QTreeWidgetItem
 {
@@ -1089,11 +1080,20 @@ private:
 	}
 };
 
+//! Besselian elements for lunar eclipse
+class LunarEclipseBessel
+{
+public:
+	static void computeElements(double &besX, double &besY, double &besL1, double &besL2, double &besL3, double &latDeg, double &lngDeg);
+	//! Iteration to compute contact times of lunar eclipse
+	static void iteration(double &JD, double &positionAngle, double &axisDistance, const bool beforeMaximum, const int eclipseType);
+};
+
 //! Besselian elements for transit of Mercury and Venus across the Sun
 class TransitBessel
 {
 public:
-	TransitBessel(PlanetP object, double &besX, double &besY,
+	static void computeElements(PlanetP object, double &besX, double &besY,
 	double &besDec, double &besTf1, double &besTf2, double &besL1, double &besL2, double &besMu);
 };
 

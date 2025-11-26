@@ -404,7 +404,7 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(const QString &fileP
 
 		// add and overwrite existing data in the user's ssystem_minor.ini by the data in the new file.
 		qDebug() << "ADD OBJECTS: Data for " << newData.childGroups().count() << "objects to minor file with " << minorBodies.childGroups().count() << "entries";
-		for (auto group : newData.childGroups())
+		for (QString &group : newData.childGroups())
 		{
 			QString fixedGroupName = fixGroupName(group);
 			newData.beginGroup(group);
@@ -458,12 +458,12 @@ QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(const QStri
 		return QHash<QString,QString>();
 
 	QStringList groups = solarSystemIni.childGroups();
-	QStringList minorBodies = solarSystem->getAllMinorPlanetCommonEnglishNames();
+	QStringList minorBodies = solarSystem->getAllMinorPlanetEnglishNames();
 	QHash<QString,QString> loadedObjects;
 	for (const auto &group : std::as_const(groups))
 	{
 		QString name = solarSystemIni.value(group + "/name").toString();
-		if (minorBodies.contains(name))
+		if (!minorBodies.filter(name).isEmpty())
 		{
 			loadedObjects.insert(name, group);
 		}
@@ -621,7 +621,7 @@ bool SolarSystemEditor::removeSsoWithName(const QString &name)
 	}
 
 	//Remove the section
-	for (const auto &group : settings.childGroups())
+	for (const QString &group : settings.childGroups())
 	{
 		if (settings.value(group + "/name").toString() == name)
 		{
@@ -988,7 +988,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(const QString &
 			qCritical() << "Error in MPC large number decoding of " << column;
 			return result;
 		}
-		minorPlanetNumber=((q4*62 + q3)*62 + q2)*62 + q1;
+		minorPlanetNumber=((q4*62 + q3)*62 + q2)*62 + q1 + 620000;
 	}
 	else
 	{

@@ -485,25 +485,21 @@ void StelFileMgr::setObsListDir(const QString& newDir)
 QString StelFileMgr::getLocaleDir()
 {
 #ifdef ENABLE_NLS
+	// (SS) 2025-10-19: allow Vsual Studio builds to find the translations path directory
+	// while keeping the original logic for other platforms/build systems.
 	QFileInfo localePath = QFileInfo(getInstallationDir() + "/translations");
-	if (localePath.exists())
-	{
-		return localePath.filePath();
-	}
-	else
-	{
-		// If not found, try to look in the standard build directory (useful for developer)
-		localePath = QFileInfo(QCoreApplication::applicationDirPath() + QString("/../translations"));
-		if (localePath.exists())
-		{
-			return localePath.filePath();
-		}
-		else
-		{
-			qWarning() << "Could not determine locale directory";
-			return "";
-		}
-	}
+	if (localePath.exists()) return localePath.filePath();
+
+	// Try ../translations (Qt Creator layout)
+	localePath = QFileInfo(QCoreApplication::applicationDirPath() + QString("/../translations"));
+	if (localePath.exists()) return localePath.filePath();
+
+	// Try ../../translations (Visual Studio layout)
+	localePath = QFileInfo(QCoreApplication::applicationDirPath() + QString("/../../translations"));
+	if (localePath.exists()) return localePath.filePath();
+
+	qWarning() << "Could not determine locale directory";
+	return "";
 #else
 	return QString();
 #endif

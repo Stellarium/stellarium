@@ -28,7 +28,6 @@
 
 #include <vector>
 #include <QString>
-#include <QFont>
 
 class StarMgr;
 class StelPainter;
@@ -43,8 +42,9 @@ class QJsonObject;
 class Asterism : public StelObject
 {
 	friend class AsterismMgr;
-private:
+public:
 	static const QString ASTERISM_TYPE;
+private:
 	Asterism();
 	~Asterism() override;
 
@@ -65,7 +65,9 @@ private:
 	QString getID() const override { return abbreviation; }
 
 	//! observer centered J2000 coordinates.
-	Vec3d getJ2000EquatorialPos(const StelCore*) const override {return XYZname;}
+	//! These are either automatically computed from all stars forming the lines,
+	//! or from the manually defined label point(s).
+	Vec3d getJ2000EquatorialPos(const StelCore*) const override;
 
 	//! @param record string containing the following whitespace
 	//! separated fields: abbreviation - a three character abbreviation
@@ -73,16 +75,29 @@ private:
 	//! catalogue numbers which, when connected pairwise, form the lines of the
 	//! asterism.
 	//! @param starMgr a pointer to the StarManager object.
+	//! @param excludeRefs a QSet of reference exclusions (user-defined preference in config.ini)
 	//! @return false if can't parse record, else true.
-	bool read(const QJsonObject& data, StarMgr *starMgr);
+	bool read(const QJsonObject& data, StarMgr *starMgr, const QSet<int> &excludeRefs);
 
 	//! Draw the asterism name
-	void drawName(StelPainter& sPainter) const;
+	void drawName(const Vec3d &xyName, StelPainter& sPainter) const;
 
 	//! Get the translated name for the Asterism.
-	QString getNameI18n() const override {return nameI18;}
+	QString getNameI18n() const override {return culturalName.translatedI18n;}
 	//! Get the English name for the Asterism.
-	QString getEnglishName() const override {return englishName;}
+	QString getEnglishName() const override {return culturalName.translated;}
+	//! Get the native name for the Asterism
+	QString getNameNative() const override {return culturalName.native;}
+	//! Get (translated) pronouncement of the native name for the Asterism
+	QString getNamePronounce() const override {return (culturalName.pronounceI18n.isEmpty() ? culturalName.native : culturalName.pronounceI18n);}
+	//! Get the short name for the Asterism (returns the translated version of abbreviation).
+	QString getShortName() const {return abbreviationI18n;}
+	//! Combine screen label from various components, depending on settings in SkyCultureMgr
+	QString getScreenLabel() const override;
+	//! Combine InfoString label from various components, depending on settings in SkyCultureMgr
+	QString getInfoLabel() const override;
+	//! Underlying worker
+	QString getCultureLabel(StelObject::CulturalDisplayStyle style) const;
 	//! Draw the lines for the Asterism.
 	//! This method uses the coords of the stars (optimized for use through
 	//! the class AsterismMgr only).
@@ -111,19 +126,23 @@ private:
 	//! @return true if a (real) named asterism, false for a ray helper
 	bool isAsterism() const { return flagAsterism; }
 
-	//! International name (translated using gettext)
-	QString nameI18;
-	//! Name in english (second column in asterism_names.eng.fab)
-	QString englishName;
+	//! Asterism name. This is a culture-dependent thing, and in each skyculture an asterism has one name entry only.
+	//! Given multiple aspects of naming, we need all the components and more.
+	CulturalName culturalName;
 	//! Abbreviation
 	//! A skyculture designer must invent it. (usually 2-5 letters)
 	//! This MUST be filled and be unique within a sky culture.
-	QString abbreviation;	
+	//! @note Given their possible screen use, using numerical labels as abbreviation is not recommended.
+	QString abbreviation;
+	//! Translated version of abbreviation (the short name or designation of asterism)
+	//! Latin-based languages should not translate it, but it may be useful to translate for other glyph systems.
+	QString abbreviationI18n;
 	//! Context for name
 	QString context;
-	//! Direction vector pointing on constellation name drawing position
-	Vec3d XYZname;
-	Vec3d XYname;
+	//! Direction vectors pointing on constellation name drawing position (J2000.0 coordinates)
+	//! Usually a single position is computed from averaging star positions forming the constellation, but we can override with an entry in index.json,
+	//! and even give more positions (e.g. for long or split-up constellations like Serpens.
+	QList<Vec3d> XYZname;
 	enum class Type
 	{
 		RayHelper,          //!< Ray helper

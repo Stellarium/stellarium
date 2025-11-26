@@ -216,6 +216,9 @@ void SpecialSkyMarker::draw(StelCore *core) const
 			const int f = (StelApp::getInstance().getFlagSouthAzimuthUsage() ? 180 : 0);
 			const float ppx = static_cast<float>(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
 			sPainter.setLineSmooth(true);
+			QFont font = QGuiApplication::font();
+			font.setPixelSize(StelApp::getInstance().getScreenFontSize());
+			sPainter.setFont(font);
 
 			for(int i=0; i<360; i++)
 			{

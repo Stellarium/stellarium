@@ -61,7 +61,7 @@
 #include <QProcess>
 #include <QDir>
 #include <QSettings>
-
+#include <QFont>
 
 /*************************************************************************
  Utility functions
@@ -233,21 +233,14 @@ void TextUserInterface::init()
 	                                skyCultureMgr.getSkyCultureListI18(),
 	                                skyCultureMgr.getCurrentSkyCultureNameI18(),
 	                                m3);
-	TuiNode* m3_2 = new TuiNodeEnum(N_("Sky Language"),
-	                                this, 
-					SLOT(setSkyLanguage(QString)),
-					StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()),
-					StelTranslator::iso639_1CodeToNativeName(localeMgr.getSkyLanguage()),
-	                                m3, m3_1);
-	TuiNode* m3_3 = new TuiNodeEnum(N_("App Language"),
+	TuiNode* m3_2 = new TuiNodeEnum(N_("App Language"),
 					this,
 					SLOT(setAppLanguage(QString)),
 					StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()),
 					StelTranslator::iso639_1CodeToNativeName(localeMgr.getAppLanguage()),
-					m3, m3_2);
+	                                m3, m3_1);
 	m3_1->setNextNode(m3_2);
-	m3_2->setNextNode(m3_3);
-	m3_3->setNextNode(m3_1);
+	m3_2->setNextNode(m3_1);
 	m3_1->loopToTheLast();
 	m3->setChildNode(m3_1);
 
@@ -269,7 +262,7 @@ void TextUserInterface::init()
 	                                  skyDrawer,
 	                                  SLOT(setAbsoluteStarScale(double)),
 	                                  skyDrawer->getAbsoluteStarScale(),
-	                                  0.0, 9., 0.15,
+	                                  0.0, 10., 0.15,
 	                                  m4, m4_2);
 	TuiNode* m4_4 = new TuiNodeDouble(N_("Twinkle:"),
 	                                  skyDrawer, SLOT(setTwinkleAmount(double)),
@@ -588,7 +581,7 @@ void TextUserInterface::loadConfiguration(void)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	font.setPixelSize(conf->value("tui/tui_font_size", 15).toInt());
+	fontSize = conf->value("tui/tui_font_size", 15).toInt();
 	setTuiDateTime(conf->value("tui/flag_show_tui_datetime", false).toBool());
 	setTuiObjInfo(conf->value("tui/flag_show_tui_short_obj_info", false).toBool());
 	setTuiGravityUi(conf->value("tui/flag_show_gravity_ui", false).toBool());
@@ -610,6 +603,8 @@ void TextUserInterface::draw(StelCore* core)
 	int pixOffset = 15;
 	int fovOffsetX = 0, fovOffsetY=0;
 	bool fovMaskDisk = false;
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui!=Q_NULLPTR)
@@ -823,12 +818,6 @@ void TextUserInterface::setAppLanguage(const QString &lang)
 {
 	QString code = StelTranslator::nativeNameToIso639_1Code(lang);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
-}
-
-void TextUserInterface::setSkyLanguage(const QString &lang)
-{
-	QString code = StelTranslator::nativeNameToIso639_1Code(lang);
-	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
 }
 
 void TextUserInterface::setLightPollutionLevel(const int level)

@@ -78,9 +78,11 @@ class SpoutSender;
 class StelApp : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(bool nightMode READ getVisionModeNight WRITE setVisionModeNight NOTIFY visionNightModeChanged)
+	Q_PROPERTY(bool nightMode               READ getVisionModeNight         WRITE setVisionModeNight         NOTIFY visionNightModeChanged)
 	Q_PROPERTY(bool flagShowDecimalDegrees  READ getFlagShowDecimalDegrees  WRITE setFlagShowDecimalDegrees  NOTIFY flagShowDecimalDegreesChanged)
 	Q_PROPERTY(bool flagUseAzimuthFromSouth READ getFlagSouthAzimuthUsage   WRITE setFlagSouthAzimuthUsage   NOTIFY flagUseAzimuthFromSouthChanged)
+	Q_PROPERTY(bool flagUseNegativeHourAngles READ getFlagUseNegativeHourAngles WRITE setFlagUseNegativeHourAngles NOTIFY flagUseNegativeHourAnglesChanged)
+	Q_PROPERTY(bool flagUsePolarDistance    READ getFlagPolarDistanceUsage  WRITE setFlagPolarDistanceUsage  NOTIFY flagUsePolarDistanceChanged)
 	Q_PROPERTY(bool flagUseCCSDesignation   READ getFlagUseCCSDesignation   WRITE setFlagUseCCSDesignation   NOTIFY flagUseCCSDesignationChanged)
 	Q_PROPERTY(bool flagUseFormattingOutput READ getFlagUseFormattingOutput WRITE setFlagUseFormattingOutput NOTIFY flagUseFormattingOutputChanged)
 	Q_PROPERTY(bool flagOverwriteInfoColor  READ getFlagOverwriteInfoColor  WRITE setFlagOverwriteInfoColor  NOTIFY flagOverwriteInfoColorChanged)
@@ -277,6 +279,10 @@ public:
 	//! Dump diagnostics about action call priorities
 	void dumpModuleActionPriorities(StelModule::StelModuleActionName actionName) const;
 
+	//! Dump font info from QFontDatabase
+	//! You can trigger it once after program start by setting CLI option --dump-fontinfo
+	void dumpFontInfo() const;
+
 	static constexpr int getDefaultGuiFontSize() { return DEFAULT_FONT_SIZE; }
 
 	static bool isInitialized() {if (singleton) return singleton->initialized; else return false;}
@@ -306,9 +312,19 @@ public slots:
 	bool getFlagShowDecimalDegrees() const {return flagShowDecimalDegrees;}
 
 	//! Set flag for using calculation of azimuth from south towards west (instead north towards east)
-	bool getFlagSouthAzimuthUsage() const { return flagUseAzimuthFromSouth; }
-	//! Get flag for using calculation of azimuth from south towards west (instead north towards east)
 	void setFlagSouthAzimuthUsage(bool use);
+	//! Get flag for using calculation of azimuth from south towards west (instead north towards east)
+	bool getFlagSouthAzimuthUsage() const { return flagUseAzimuthFromSouth; }
+
+	//! Set flag for using negative hour angles (i.e., counting -12h...12h, not 0...24h)
+	void setFlagUseNegativeHourAngles(bool use);
+	//! Get flag for using negative hour angles (i.e., counting -12h...12h, not 0...24h)
+	bool getFlagUseNegativeHourAngles() const { return flagUseNegativeHourAngles; }
+
+	//! Set flag for using calculation of polar distance for equatorial coordinates
+	bool getFlagPolarDistanceUsage() const { return flagUsePolarDistance; }
+	//! Get flag for using calculation of polar distance for equatorial coordinates
+	void setFlagPolarDistanceUsage(bool use);
 	
 	//! Set flag for using of formatting output for coordinates
 	void setFlagUseFormattingOutput(bool b);
@@ -373,6 +389,8 @@ signals:
 	void visionNightModeChanged(bool);
 	void flagShowDecimalDegreesChanged(bool);
 	void flagUseAzimuthFromSouthChanged(bool);
+	void flagUseNegativeHourAnglesChanged(bool);
+	void flagUsePolarDistanceChanged(bool);
 	void flagUseCCSDesignationChanged(bool);
 	void flagUseFormattingOutputChanged(bool);
 	void flagOverwriteInfoColorChanged(bool);
@@ -543,14 +561,16 @@ private:
 	StelViewportEffect* viewportEffect;
 	QOpenGLFunctions* gl;
 	
-	bool flagShowDecimalDegrees;  // Format infotext with decimal degrees, not minutes/seconds
-	bool flagUseAzimuthFromSouth; // Display calculate azimuth from south towards west (as in some astronomical literature)
-	bool flagUseFormattingOutput; // Use tabular coordinate format for infotext
-	bool flagUseCCSDesignation;   // Use symbols like alpha (RA), delta (declination) for coordinate system labels
-	bool flagOverwriteInfoColor; // Overwrite and use color for text in info panel
+	bool flagShowDecimalDegrees;    //!< Format infotext with decimal degrees, not minutes/seconds
+	bool flagUseAzimuthFromSouth;   //!< Display calculate azimuth from south towards west (as in some astronomical literature)
+	bool flagUseNegativeHourAngles; //!< Count hour angles -12h...12h, not 0h...24h
+	bool flagUsePolarDistance;      //!< Display calculate polar distance for equatorial coordinates
+	bool flagUseFormattingOutput;   //!< Use tabular coordinate format for infotext
+	bool flagUseCCSDesignation;     //!< Use symbols like alpha (RA), delta (declination) for coordinate system labels
+	bool flagOverwriteInfoColor;    //!< Overwrite and use color for text in info panel
 	Vec3f overwriteInfoColor;
 	Vec3f daylightInfoColor;
-	bool flagImmediateSave;       // set true to allow more immediate-mode settings. For now this is limited to detail settings, e.g. orbit or nomenclature details, DSO filter types, ...
+	bool flagImmediateSave;         //!< set true to allow more immediate-mode settings. By default this is limited to detail settings, e.g. orbit or nomenclature details, DSO filter types, ...
 #ifdef 	ENABLE_SPOUT
 	SpoutSender* spoutSender;
 #endif

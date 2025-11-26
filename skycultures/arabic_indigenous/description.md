@@ -8,17 +8,13 @@ The Arabic sky culture displays the indigenous star knowledge of the ancient Ara
 
 The star knowledge of the ancient Arabs had been recorded and preserved in old poetry and in the old works of Arab philologists and lexicographers of the Islamic civilization. Many books were written on the subject of star knowledge and anwāʾ [Arabic الأنواء], the Arabic knowledge of meteorology. The editors of Ibn Qutaybah's *Kitāb al-Anwāʾ* (9th century) listed twenty-four books on this subject written mostly between early eighth and tenth century[#2]. The only completely preserved text is that of Ibn Qutaybah, but later scholars had quoted many of the earlier texts. One of the most significant works that recorded the indigenous Arab star names is the *Book of the stars* written in ~ 964 AD by the prominent astronomer: al-Ṣūfī, where he identified the indigenous Arab star names with the respective Ptolemaic stars of the Greek constellations[#5].
 
-### Sources of the Arabic sky culture
-
-The source of this sky culture is a study and compilation of star knowledge of ancient Arabs from the following books: [#2], [#3], [#4], [#5], [#6], [#8], [#9].
-
 ## Constellations
 
 The ancient Arabs gave names to single stars, star couples, an area in the sky, and particular shape of a group of stars. Single stars were named after a human figure or a desert animal, Arcturus is al-Simāk al-Rāmiḥ, meaning: The High one with the spear. Canopus is Suhayl, a proper name of a man. We have also stars named: The Caracal and the Kid (the young goat). If two stars of comparable brightness are close to each other, they are given a common name like: The two Calves, the Two Wolves, The Two doves. Sometimes an area is named after a group of animals. The brighter stars are adult animals, and the faint ones are the young animals like: The Hyenas and their youngsters, The horses and the foals. Particular shapes of stars were given names like the Scorpion, The lion, al-Ǧawzā’ which is a proper name of a woman for Orion stars. Other asterisms are given names according to legends and stories.
 
 ## References
 
- - [#1]: Manuscripts of the Book of Planets
+ - [#1]: Manuscripts of the Book of Stars
  - [#2]: Ibn Qutaybah, Al-Dinawarī, Abū Muḥammad ʿAbd Allah b. Muslim (died ~ 889), Kitab al-Anwāʾ (Book of meteorolgy), (Arabic print of the original book, Daʾirat al-Maʿarif al-Osmania, Hydarabad, India, 1956), أبو محمد عبد الله بن مسلم ابن قتيبة الدينوري (توفي 276 هـ)، كتاب الأنواء في مواسم العرب، دائرة المعارف العثمانية، حيدر أباد، الهند، 1375 هـ
  - [#3]: Al-Marzūqī, Abū ʿAli Aḥmad b. Muḥammad b. al-Ḥassan (died 1030), Al-Azminah wa al-amkinah (Times and Places), (Arabic print of the original book in 2002, World of Books, Beirut, Lebanon)., الإمام أبو علي أحمد بن محمد بن الحسن المرزوقي (توفي سنة 421 هـ)، الأزمنة والأمكنة، تحقيق د. محمد نايف الدليمي، عالم الكتب، بيروت، لبنان، 1422 هـ.
  - [#4]: Al-Ṯaqafī, ʿAbd Allah b. Ḥussayn b. ʿĀṣim (died ~ 1012), Al-Anwāʾ wa al-azminah (Meteorology and times), (Arabic print of the original book in 1996, Dar al-jeel, Beirut, Lebanon), عبد الله بن حسين بن عاصم الثقفي (توفي 403 هـ)، الأنواء والأزمنة، تحقيق: د. نوري حمودي القيسي، د. محمد نايف الدليمي، دار الجيل، بيروت، لبنان، 1416 هـ.

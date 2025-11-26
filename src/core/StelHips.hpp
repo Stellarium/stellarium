@@ -60,11 +60,16 @@ public:
 	                           const QVector<uint16_t>& indices)> DrawCallback;
 	//! Create a new HipsSurvey from its url.
 	//! @param url The location of the survey.
+	//! @param group A string that identifies a group of color/normals/horizons
+	//!              surveys that this survey belongs to.
 	//! @param frame The reference frame from the survey's \c hips_frame property.
 	//! @param type Survey type from the survey's \c type property.
 	//! @param releaseDate If known the UTC JD release date of the survey.  Used for cache busting.
-	HipsSurvey(const QString& url, const QString& frame, const QString& type, double releaseDate=0.0);
+	HipsSurvey(const QString& url, const QString& group, const QString& frame, const QString& type,
+	           const QMap<QString, QString>& hipslistProps, double releaseDate=0.0);
 	~HipsSurvey() override;
+
+	static QString frameToPlanetName(const QString& frame);
 
 	//! Get whether the survey is visible.
 	bool isVisible() const;
@@ -90,6 +95,9 @@ public:
 	//! Return the type of the survey (its \c type property).
 	QString getType() const { return type; }
 
+	//! Return the group of of color/normals/horizons surveys that this survey belongs to.
+	QString getGroup() const { return group; }
+
 	//! Get whether the survey is still loading.
 	bool isLoading(void) const;
 
@@ -99,7 +107,7 @@ public:
 	void setHorizonsSurvey(const HipsSurveyP& horizons);
 
 	//! Parse a hipslist file into a list of surveys.
-	static QList<HipsSurveyP> parseHipslist(const QString& data);
+	static QList<HipsSurveyP> parseHipslist(const QString& hipslistURL, const QString& data);
 
 signals:
 	void propertiesChanged(void);
@@ -107,8 +115,12 @@ signals:
 	void visibleChanged(bool);
 
 private:
+	void checkForPlanetarySurvey();
+
+private:
 	LinearFader fader;
 	QString url;
+	QString group;
 	QString type;
 	QString hipsFrame;
 	QString planet;
@@ -139,6 +151,27 @@ private:
 	int getPropertyInt(const QString& key, int fallback = 0);
 	bool getAllsky();
 	HipsTile* getTile(int order, int pix);
+	/*! @brief Bind textures for drawing
+
+	    If @p tile is not ready for drawing (e.g. not fully loaded), alter
+	    @p texCoordShift and @p texCoordScale so that they let us address
+	    the corresponding part of a parent texture that will be bound.
+
+	    @param tile The tile to draw
+	    @param orderMin Smallest available HiPS order of the current survey
+	    @param texCoordShift The UV coordinates shift to be applied to the
+	     texture coordinates to address a subtexture in the parent. Must be
+	     set to 0 before the initial call to this function.
+	    @param texCoordScale The UV coordinates scale to be applied to the
+	     texture coordinates to address a subtexture in the parent. Must be
+	     set to 1 before the initial call to this function.
+	    @param tileIsLoaded Gets set to \c false if it was the requested
+	     HiPS level isn't fully loaded. Must be set to \c true before the
+	     initial call to this function.
+
+	    @return Whether a tile has been successfully bound.
+	 */
+	bool bindTextures(HipsTile& tile, int orderMin, Vec2f& texCoordShift, float& texCoordScale, bool& tileIsLoaded);
 	// draw a single tile. observerVelocity (in the correct hipsFrame) is necessary for aberration correction. Set to 0 for no aberration correction.
 	void drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
 	              const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback);
@@ -146,6 +179,7 @@ private:
 	// Fill the array for a given tile.
 	int fillArrays(int order, int pix, int drawOrder, int splitOrder,
 	               bool outside, StelPainter* sPainter, Vec3d observerVelocity,
+	               const Vec2f& texCoordShift, const float texCoordScale,
 	               QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices);
 
 	void updateProgressBar(int nb, int total);

@@ -39,7 +39,7 @@ As Stellarium's plugin interface has changed over time, plugins for different ve
 
 Static plugins require changes in the core code of Stellarium (the addition of %Qt macros in several classes). This is why adding a new static plugin requires either asking the developers to add it to the main distribution, or creating and distributing a custom build.
 
-Dynamic plugin libriaries need to be installed in a proper place in Stellarium's \ref fileStructure "file tree" to function. Stellarium is looking for plugins in the <tt>/modules</tt> subdirectory of the user data directory or the installation data directory. Each plugin library must be in its own subdiretory of the <tt>/modules</tt> directory. If the plugin is called "MyPlugin", then its subdirectory should be also called <tt>/MyPlugin</tt> and the main name (without the extension) of the plugin binary file should be <tt>libMyPlugin</tt>. So, for example, the file tree should look like this on Windows XP:
+Dynamic plugin libraries need to be installed in a proper place in Stellarium's \ref fileStructure "file tree" to function. Stellarium is looking for plugins in the <tt>/modules</tt> subdirectory of the user data directory or the installation data directory. Each plugin library must be in its own subdirectory of the <tt>/modules</tt> directory. If the plugin is called "MyPlugin", then its subdirectory should be also called <tt>/MyPlugin</tt> and the main name (without the extension) of the plugin binary file should be <tt>libMyPlugin</tt>. So, for example, the file tree should look like this on Windows XP:
  - <tt>C:/Documents and Settings/User/Application Data/Stellarium/</tt> (user data directory)
   - <tt>modules/</tt>
    - <tt>MyPlugin/</tt>
@@ -111,7 +111,7 @@ There are also an example of simple \b dynamic plugin:
 The following instructions can be used to build the Angle Measure plugin and the Compass Marks plugin.
 
 <ul>
- <li>First, you will need to download the Stellarium source code from SVN, according to the instructions in the Stellarium build pages (see <a href="http://www.stellarium.org/wiki/index.php/Compilation_on_Linux">this page</a> for *nix systems, and <a href="http://www.stellarium.org/wiki/index.php/Windows_Build_Instructions">this page</a> for Windows builds).  For the rest of this discussion, I will assume you downloaded the source code in the directory @c /home/me/builds/stellarium. If you put the source code somewhere else, you will need to modify the following instructions accordingly.</li>
+ <li>First, you will need to download the Stellarium source code from GIT, according to the instructions in the Stellarium build pages (see <a href="https://github.com/Stellarium/stellarium/blob/master/BUILDING.md">this page</a>). For the rest of this discussion, I will assume you downloaded the source code in the directory @c /home/me/builds/stellarium. If you put the source code somewhere else, you will need to modify the following instructions accordingly.</li>
  
  <li>After downloading the stellarium source such that it is in @c /home/me/builds/stellarium, change into the @c /home/me/builds directory and fetch the @c extmodules files from SVN. On Linux, you can use these commands to accomplish this:
 @verbatim

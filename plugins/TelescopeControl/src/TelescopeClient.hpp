@@ -75,7 +75,7 @@ public:
 	//! - PlainText
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
-	//! @return a QString containing an HMTL encoded description of the Telescope.
+	//! @return a QString containing an HTML encoded description of the Telescope.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
 	QString getType(void) const override {return TELESCOPECLIENT_TYPE;}
 	QString getObjectType(void) const override {return N_("telescope");}
@@ -88,7 +88,11 @@ public:
 	//! The base client does nothing.
 	//! Derived classes may override this command
 	//! @todo: Properly document method and the arguments
-	virtual void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject){};
+	virtual void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject)
+	{
+		Q_UNUSED(j2000Pos)
+		Q_UNUSED(selectObject)
+	};
 	//! report whether this client can respond to sync commands.
 	//! Can be used for GUI tweaks
 	virtual bool isTelescopeSyncSupported() const {return false;}

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>569</width>
-    <height>519</height>
+    <width>660</width>
+    <height>575</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -225,39 +225,10 @@
              </property>
              <item row="0" column="0">
               <layout class="QGridLayout" name="languageGridLayout">
-               <item row="0" column="7">
-                <spacer name="horizontalSpacer_11">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="6">
-                <widget class="QComboBox" name="skycultureLanguageComboBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="editable">
-                  <bool>true</bool>
-                 </property>
-                 <property name="insertPolicy">
-                  <enum>QComboBox::NoInsert</enum>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="5">
-                <widget class="QLabel" name="skycultureLanguageLabel">
+               <item row="0" column="1">
+                <widget class="QLabel" name="programLanguageLabel">
                  <property name="text">
-                  <string>Sky Culture Language</string>
+                  <string>Program Language</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -277,28 +248,20 @@
                  </property>
                 </spacer>
                </item>
-               <item row="0" column="1">
-                <widget class="QLabel" name="programLanguageLabel">
-                 <property name="text">
-                  <string>Program Language</string>
+               <item row="0" column="5">
+                <widget class="QToolButton" name="languageSaveToolButton">
+                 <property name="toolTip">
+                  <string>Store language settings</string>
                  </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <property name="text">
+                  <string>Save</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtSave.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtSave-disabled.png</disabledoff>:/graphicGui/uibtSave.png</iconset>
                  </property>
                 </widget>
-               </item>
-               <item row="0" column="0">
-                <spacer name="horizontalSpacer_8">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
                <item row="0" column="3">
                 <widget class="QComboBox" name="programLanguageComboBox">
@@ -322,20 +285,18 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="8">
-                <widget class="QToolButton" name="languageSaveToolButton">
-                 <property name="toolTip">
-                  <string>Store language settings</string>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_8">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="text">
-                  <string>Save</string>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
                  </property>
-                 <property name="icon">
-                  <iconset resource="../../data/gui/guiRes.qrc">
-                   <normaloff>:/graphicGui/uibtSave.png</normaloff>
-                   <disabledoff>:/graphicGui/uibtSave-disabled.png</disabledoff>:/graphicGui/uibtSave.png</iconset>
-                 </property>
-                </widget>
+                </spacer>
                </item>
               </layout>
              </item>
@@ -1128,22 +1089,8 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="checkBoxUMSurfaceBrightness">
-               <property name="text">
-                <string>Use mag/arcsec^2 for surface brightness</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="checkBoxUseFormattingOutput">
-               <property name="text">
-                <string>Tabular output for coordinates and time</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="1">
-              <widget class="QCheckBox" name="decimalDegreeCheckBox">
+              <widget class="QCheckBox" name="checkBoxDecimalDegrees">
                <property name="toolTip">
                 <string>Use decimal degrees for coordinates</string>
                </property>
@@ -1152,8 +1099,15 @@
                </property>
               </widget>
              </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxUMSurfaceBrightness">
+               <property name="text">
+                <string>Use mag/arcsec^2 for surface brightness</string>
+               </property>
+              </widget>
+             </item>
              <item row="1" column="1">
-              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
+              <widget class="QCheckBox" name="checkBoxAzimuthFromSouth">
                <property name="toolTip">
                 <string>Activate this option to calculate azimuth from south towards west.</string>
                </property>
@@ -1162,10 +1116,40 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="checkBoxUseFormattingOutput">
+               <property name="text">
+                <string>Tabular output for coordinates and time</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
               <widget class="QCheckBox" name="checkBoxUseCCSDesignations">
+               <property name="toolTip">
+                <string>Use common symbols for coordinate systems</string>
+               </property>
                <property name="text">
                 <string>Designations for celestial coordinate systems</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="checkBoxPolarDistance">
+               <property name="toolTip">
+                <string>Use distance from North Celestial Pole, not declination from equator in equatorial coordinates</string>
+               </property>
+               <property name="text">
+                <string>Polar distance, not declination</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="checkBoxNegativeHourAngles">
+               <property name="toolTip">
+                <string>Hour angles usually run 0...24h. This counts -12h...12h.</string>
+               </property>
+               <property name="text">
+                <string>Allow negative hour angles </string>
                </property>
               </widget>
              </item>
@@ -1881,10 +1865,10 @@
                     <double>1.000000000000000</double>
                    </property>
                    <property name="maximum">
-                    <double>10000.000000000000000</double>
+                    <double>100000.000000000000000</double>
                    </property>
                    <property name="singleStep">
-                    <double>1.000000000000000</double>
+                    <double>100.000000000000000</double>
                    </property>
                    <property name="value">
                     <double>1.000000000000000</double>
@@ -2784,7 +2768,7 @@
   <customwidget>
    <class>TitleBar</class>
    <extends>QFrame</extends>
-   <header>Dialog.hpp</header>
+   <header location="global">Dialog.hpp</header>
    <container>1</container>
   </customwidget>
   <customwidget>
@@ -2795,7 +2779,6 @@
  </customwidgets>
  <tabstops>
   <tabstop>programLanguageComboBox</tabstop>
-  <tabstop>skycultureLanguageComboBox</tabstop>
   <tabstop>languageSaveToolButton</tabstop>
   <tabstop>de440checkBox</tabstop>
   <tabstop>de441checkBox</tabstop>
@@ -2836,10 +2819,12 @@
   <tabstop>checkBoxExtra</tabstop>
   <tabstop>checkBoxUMSurfaceBrightness</tabstop>
   <tabstop>checkBoxUMShortNotationSurfaceBrightness</tabstop>
-  <tabstop>checkBoxUseFormattingOutput</tabstop>
-  <tabstop>decimalDegreeCheckBox</tabstop>
-  <tabstop>azimuthFromSouthcheckBox</tabstop>
   <tabstop>checkBoxUseCCSDesignations</tabstop>
+  <tabstop>checkBoxUseFormattingOutput</tabstop>
+  <tabstop>checkBoxDecimalDegrees</tabstop>
+  <tabstop>checkBoxAzimuthFromSouth</tabstop>
+  <tabstop>checkBoxNegativeHourAngles</tabstop>
+  <tabstop>checkBoxPolarDistance</tabstop>
   <tabstop>showConstellationBoundariesButtonCheckBox</tabstop>
   <tabstop>showConstellationArtsButtonCheckBox</tabstop>
   <tabstop>showAsterismLinesButtonCheckBox</tabstop>

@@ -23,7 +23,7 @@
 #include "StelCore.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelLocaleMgr.hpp"
+//#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelTextureMgr.hpp"
@@ -36,7 +36,7 @@
 #include "Exoplanets.hpp"
 #include "Exoplanet.hpp"
 #include "ExoplanetsDialog.hpp"
-#include "StelActionMgr.hpp"
+//#include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
 
 #include <QNetworkAccessManager>
@@ -45,6 +45,7 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
+#include <QFont>
 #include <QTimer>
 #include <QVariantMap>
 #include <QVariant>
@@ -232,6 +233,8 @@ void Exoplanets::draw(StelCore* core)
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	painter.setFont(font);
 	
 	for (const auto& eps : std::as_const(ep))

@@ -449,7 +449,7 @@ private:
 class StelGui : public StelGuiBase
 {
 public:
-	StelGui() {;}
+	StelGui(): dummyInfoTextFilter(StelObject::InfoStringGroup::None), visible(false) {;}
 	~StelGui() {;}
 	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget) {;}
 	virtual void updateI18n() {;}

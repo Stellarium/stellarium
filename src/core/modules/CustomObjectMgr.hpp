@@ -24,7 +24,6 @@
 #include "StelTextureTypes.hpp"
 #include "CustomObject.hpp"
 
-#include <QFont>
 #include <QList>
 
 class StelPainter;
@@ -78,7 +77,8 @@ public:
 	//! Add persistent object on the sky
 	//! @param designation - designation of custom object
 	//! @param coordinates - coordinates of custom object
-	void addPersistentObject(const QString& designation, Vec3d coordinates);
+	//! @param objectType - type of custom object (default: "custom object")
+	void addPersistentObject(const QString& designation, Vec3d coordinates, const QString& objectType = "");
 
 	//! Remove all persistent objects
 	void removePersistentObjects();
@@ -169,10 +169,10 @@ private slots:
 	void removeCustomObject(CustomObjectP);
 
 	//! Connect this to StelApp font size.
-	void setFontSize(int s){font.setPixelSize(s);}
+	void setFontSize(int s){fontSize=s;}
 private:
 	// Font used for displaying our text
-	QFont font;
+	int fontSize;
 	QSettings* conf;
 	StelTextureSP texPointer;
 	QList<CustomObjectP> customObjects, persistentObjects;
@@ -180,6 +180,7 @@ private:
 	Vec3f hightlightColor;
 	int countMarkers;
 	int radiusLimit;
+	bool echoToLogfile;
 
 	QString persistentCOFile;
 	//! Loading list of saved custom objects (all of them are available in history of Search Tool)

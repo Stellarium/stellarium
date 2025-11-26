@@ -27,7 +27,7 @@ The temple in (today's) Egypt probably dates to the Roman (or Late Greek) time o
 <tr valign="middle">
 	<td><img width="255" src="illustrations/gem.png" /></td>
 	<td>zodiac</td>
-	<td><b>Gemini</b><br />a couple (Shu & Tefnut), i.e. a woman and a man (neither the Babylonian warriors nor the Greek heros)</td>
+	<td><b>Gemini</b><br />a couple (Shu & Tefnut), i.e. a woman and a man (neither the Babylonian warriors nor the Greek heroes)</td>
 </tr>
 <tr valign="middle">
 	<td><img width="255" src="illustrations/cnc.png" /></td>

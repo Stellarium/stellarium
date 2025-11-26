@@ -26,12 +26,13 @@
 class TestStelProjector : public QObject
 {
 	Q_OBJECT
-private slots:	
+private slots:
 	void testStelProjectorPerspective();
 	void testStelProjectorEqualArea();
 	void testStelProjectorStereographic();
 	void testStelProjectorFisheye();
 	void testStelProjectorHammer();
+	void testStelProjectorMollweide();
 	void testStelProjectorCylinder();
 	void testStelProjectorMercator();
 	void testStelProjectorOrthographic();
@@ -40,4 +41,3 @@ private slots:
 };
 
 #endif // _TESTSTELPROJECTOR_HPP
-

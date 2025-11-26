@@ -985,6 +985,69 @@
             }
             ]
         },
+        "38098": {
+            "name": "INTELSAT 22",
+            "source": "https://en.kingofsat.net/sat-is22.php",
+            "comms": [
+            {
+                "description": "DVB-S downlink",
+                "frequency": 3928.00,
+                "modulation": "QPSK"
+            }
+            ]
+        },
+        "39022": {
+            "name": "YAMAL 402",
+            "source": "https://en.kingofsat.net/sat-yamal402.php",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 4168.00,
+                "modulation": "QPSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 11059.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 11265.00,
+                "modulation": "QPSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 11385.00,
+                "modulation": "8PSK"
+            }
+            ]
+        },
+        "39020": {
+            "name": "EUTELSAT 70B",
+            "source": "https://en.kingofsat.net/sat-eutelsat70b.php",
+            "comms": [
+            {
+                "description": "DVB-S2 downlink",
+                "frequency": 12682.00,
+                "modulation": "QPSK"
+            },
+            {
+                "description": "DVB-S2 downlink",
+                "frequency": 12516.00,
+                "modulation": "QPSK"
+            },
+            {
+                "description": "DVB-S2 downlink",
+                "frequency": 12561.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "DVB-S2 downlink",
+                "frequency": 12564.00,
+                "modulation": "8PSK"
+            }
+            ]
+        },
         "39090": {
             "name": "STRAND 1",
             "source": "https://www.n2yo.com/satellite/?s=39090",
@@ -1202,6 +1265,58 @@
             }
             ]
         },
+        "39508": {
+            "name": "ABS-2",
+            "source": "https://en.kingofsat.net/sat-abs2.php",
+            "comms": [
+            {
+                "description": "DVB-S2 downlink",
+                "frequency": 11471.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "DVB-S2 downlink",
+                "frequency": 11559.00,
+                "modulation": "QPSK"
+            }
+            ]
+        },
+        "39612": {
+            "name": "Express AT1",
+            "source": "https://en.kingofsat.net/sat-express_at1.php",
+            "comms": [
+            {
+                "description": "DVB-S2 downlink",
+                "frequency": 11727.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "DVB-S2 downlink",
+                "frequency": 11765.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "DVB-S2 downlink",
+                "frequency": 11804.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "DVB-S2 downlink",
+                "frequency": 11843.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "DVB-S2 downlink",
+                "frequency": 11881.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "DVB-S2 downlink",
+                "frequency": 11919.00,
+                "modulation": "8PSK"
+            }
+            ]
+        },
         "39767": {
             "name": "UNIFORM 1",
             "source": "https://www.n2yo.com/satellite/?s=39767",
@@ -1336,6 +1451,27 @@
             }
             ]
         },
+        "40277": {
+            "name": "Express AM6",
+            "source": "https://en.kingofsat.net/sat-eam6.php",
+            "comms": [
+            {
+                "description": "DVB-S downlink",
+                "frequency": 10974.18,
+                "modulation": "QPSK"
+            },
+            {
+                "description": "DVB-S2 downlink",
+                "frequency": 11457.00,
+                "modulation": "QPSK"
+            },
+            {
+                "description": "DVB-S downlink",
+                "frequency": 12594.00,
+                "modulation": "QPSK"
+            }
+            ]
+        },
         "40299": {
             "name": "HODOYOSHI-1",
             "source": "https://www.n2yo.com/satellite/?s=40299",
@@ -1387,6 +1523,42 @@
                 "description": "K7MSU downlink",
                 "frequency": 437.230,
                 "modulation": "19k2 FSK"
+            }
+            ]
+        },
+        "40505": {
+            "name": "Express AM7",
+            "source": "https://en.kingofsat.net/sat-eam7.php",
+            "comms": [
+            {
+                "description": "DVB-S2 T2-MI, PLP 1 downlink",
+                "frequency": 3608.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "DVB-S2 T2-MI, PLP 1 downlink",
+                "frequency": 3615.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "DVB-S2 T2-MI, PLP 1 downlink",
+                "frequency": 3635.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "DVB-S2 T2-MI, PLP 1 downlink",
+                "frequency": 3642.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "DVB-S2 T2-MI, PLP 1 downlink",
+                "frequency": 3665.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "DVB-S2 downlink",
+                "frequency": 3685.00,
+                "modulation": "8PSK"
             }
             ]
         },
@@ -2526,6 +2698,32 @@
                 "description": "downlink",
                 "frequency": 436.730,
                 "modulation": "4k8/9k6 GFSK"
+            }
+            ]
+        },
+        "44307": {
+            "name": "YAMAL 601",
+            "source": "https://en.kingofsat.net/sat-yamal601.php",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 3550.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 3586.00,
+                "modulation": "QPSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 3595.00,
+                "modulation": "8PSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 3655.00,
+                "modulation": "8PSK"
             }
             ]
         },
@@ -4585,6 +4783,36 @@
                 "modulation": "LoRa"
             }
             ]
+        },
+        "kuiper": {
+            "source": "https://cdn.geekwire.com/wp-content/uploads/2019/07/Kuiper-Technical.pdf",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 18.0,
+                "modulation": "RHCP/LHCP"
+            },
+            {
+                "description": "downlink",
+                "frequency": 19.0,
+                "modulation": "RHCP/LHCP"
+            },
+            {
+                "description": "downlink",
+                "frequency": 20.0,
+                "modulation": "RHCP/LHCP"
+            },
+            {
+                "description": "uplink",
+                "frequency": 28.9,
+                "modulation": "RHCP/LHCP"
+            },
+            {
+                "description": "uplink",
+                "frequency": 29.7,
+                "modulation": "RHCP/LHCP"
+            }            
+	    ]
         },
         "vr3x": {
             "source": "https://db.satnogs.org/transmitters",

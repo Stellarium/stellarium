@@ -19,7 +19,6 @@
 #ifndef CALENDARS_HPP
 #define CALENDARS_HPP
 
-#include <QFont>
 #include <QMap>
 
 #include "StelModule.hpp"
@@ -293,8 +292,6 @@ public slots:
 	void showTibetan(bool b);	        //!< activate display of Tibetan
 
 private:
-	// Font used for displaying text
-	QFont font;
 	CalendarsInfoPanel *infoPanel;
 	CalendarsDialog* configDialog;
 	StelButton* toolbarButton;

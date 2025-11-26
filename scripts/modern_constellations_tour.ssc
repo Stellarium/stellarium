@@ -3,17 +3,27 @@
 // License: Public Domain
 // Author: Alexander Wolf
 // Shortcut: Ctrl+D,1
-// Version: 1.4
+// Version: 1.5
 // Description: A tour of the modern constellations.
+//              Label style is forced to be 'Native,Translated,Modern' regardless of user setting,
+//              unless environment variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true.
+//              (Style is restored at end.)
+//
+
+var obey_skyculture_preference = (core.getEnv("STEL_SCRIPT_OBEY_SKYCULTURE_STYLE") == "1");
 
 include("common_objects.inc");
 include("i18n.inc");
 
 core.clear("starchart");
-var skyculture = core.getSkyCulture();
-core.setSkyCulture("modern");
 GridLinesMgr.setFlagEquatorGrid(false);
 NebulaMgr.setFlagHints(false);
+var skyculture = core.getSkyCulture();
+core.setSkyCulture("modern");
+var oldScreenLabelStyle=StelSkyCultureMgr.getScreenLabelStyle();
+if (!obey_skyculture_preference)
+	StelSkyCultureMgr.setScreenLabelStyle("Native,Translated,Modern");
+ConstellationMgr.deselectConstellations();
 ConstellationMgr.setFlagArt(false);
 ConstellationMgr.setFlagBoundaries(false);
 ConstellationMgr.setFlagLines(false);
@@ -41,6 +51,8 @@ for (i=0; i<constellations.length; i++)
 	core.wait(10);
 	ConstellationMgr.setFlagArt(false);
 }
+if (!obey_skyculture_preference)
+	StelSkyCultureMgr.setScreenLabelStyle(oldScreenLabelStyle);
 core.setSkyCulture(skyculture);
 core.setGuiVisible(true);
 core.clear("natural");

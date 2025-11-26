@@ -59,7 +59,7 @@ void CLIProcessor::parseCLIArgsPreQApp(const QStringList argList)
 	if (argsGetOption(argList, "-m", "--mesa-mode"))
 	{
 		qputenv("QT_OPENGL", "software");
-		qputenv("MESA_GL_VERSION_OVERRIDE", "3.3"); // The Mesa 20.1.8 library reports providing 3.1 only. This does the trick for us.
+                qputenv("MESA_GL_VERSION_OVERRIDE", "3.3"); // The Mesa 20.1.8 library reports providing 3.1 only. This does the trick for us.
 		// These prepare using current Mesa3D libraries, should the user install them. Else the vars are harmless.
 		qputenv("QT_OPENGL_DLL", "opengl32sw.dll");
 		qputenv("GALLIUM_DRIVER", "llvmpipe");
@@ -104,19 +104,21 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--config-file (or -c)   : Use an alternative name for the config file\n"
 			  << "--log-file (or -l)      : Use an alternative name for the log file\n"
 			  << "--user-dir (or -u)      : Use an alternative user data directory\n"
-			  << "--verbose               : Even more diagnostic output in logfile \n"
-			  << "                          (esp. multimedia handling)\n"
 			  << "--opengl-compat (or -C) : Request OpenGL Compatibility profile\n"
 			  << "                          May help for certain driver configurations.\n"
 			  << "--low-graphics (or -L)  : Force low-graphics mode\n"
 			  << "--single-buffer         : Use single buffer swap (avoid screen blanking on Intel UHD)\n"
 			  << "--scale-gui  <scale factor>  : Scaling the GUI according to scale factor\n"
 			  << "--gui-css (or -G) <styleName> : Use customized <styleName>.css file for GUI colors\n"
+			  << "--dump-fontinfo         : Output lots of data from the QFontInfo database (debugging aid)\n"
 			  << "--dump-opengl-details (or -d) : dump information about OpenGL support to logfile.\n"
 			  << "                          Use this is you have graphics problems\n"
 			  << "                          and want to send a bug report\n"
 			  << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
 			  << "                          the full screen setting in the config file\n"
+	     #ifdef Q_OS_WIN
+			  << "--no-screensaver (or -F): Inhibits screen saver when in fullscreen mode\n"
+	     #endif
 			  << "--screenshot-dir        : Specify directory to save screenshots\n"
 			  << "--startup-script        : Specify name of startup script\n"
 			  << "--home-planet           : Specify observer planet (English name)\n"
@@ -140,7 +142,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--angle-d3d11           : Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine\n"
 			  << "--angle-warp            : Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine\n"
 			  #endif
-			  << "--mesa-mode (or -m)     : Use MESA as software OpenGL rendering engine\n"
+                          << "--mesa-mode (or -m)     : Use Mesa as software OpenGL rendering engine\n"
 			  #ifdef ENABLE_SPOUT
 			  << "--spout (or -S) <sky|all> : Act as SPOUT sender (Sky only/including GUI)\n"
 			  << "--spout-name <name>     : Set particular name for SPOUT sender.\n"
@@ -150,9 +152,10 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		exit(0);
 	}
 
-	if (argsGetOption(argList, "", "--verbose"))
-		qApp->setProperty("verbose", true);
-
+#ifdef Q_OS_WIN
+	if (argsGetOption(argList, "-F", "--no-screensaver"))
+		qApp->setProperty("onetime_inhibit_screensaver", true);
+#endif
 	if (argsGetOption(argList, "-C", "--opengl-compat"))
 		qApp->setProperty("onetime_opengl_compat", true);
 
@@ -161,6 +164,9 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 
 	if (argsGetOption(argList, "", "--single-buffer"))
 		qApp->setProperty("onetime_single_buffer", true);
+
+	if (argsGetOption(argList, "", "--dump-fontinfo"))
+		qApp->setProperty("onetime_fontinfo", true);
 
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{

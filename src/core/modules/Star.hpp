@@ -445,6 +445,7 @@ struct Star
       pmra = sky_orbit_vel.dot(p2) * 1000.;
       pmdec = sky_orbit_vel.dot(q2) * 1000.;
       StelUtils::rectToSphe(&ra, &dec, v);
+      v.normalize();
    }
 };
 
@@ -472,16 +473,16 @@ private:
 
 public:
    StelObjectP   createStelObject(const SpecialZoneArray<Star1> * a, const SpecialZoneData<Star1> * z) const;
-   inline int    getMag() const { return d.vmag; } // in milli-mag
-   inline int    getSpInt() const { return d.spInt; }
-   inline double getX0() const { return d.x0 / 2.e9; }
-   inline double getX1() const { return d.x1 / 2.e9; }
-   inline double getX2() const { return d.x2 / 2.e9; }
-   inline double getDx0() const { return d.dx0 / 1000.; }
-   inline double getDx1() const { return d.dx1 / 1000.; }
-   inline double getDx2() const { return d.dx2 / 1000.; }
-   inline double getPlx() const { return d.plx * 0.02; }
-   inline double getPlxErr() const { return d.plx_err / 100.; }
+   inline int    getMag() const { return qFromLittleEndian(d.vmag); } // in milli-mag
+   inline int    getSpInt() const { return qFromLittleEndian(d.spInt); }
+   inline double getX0() const { return qFromLittleEndian(d.x0) / 2.e9; }
+   inline double getX1() const { return qFromLittleEndian(d.x1) / 2.e9; }
+   inline double getX2() const { return qFromLittleEndian(d.x2) / 2.e9; }
+   inline double getDx0() const { return qFromLittleEndian(d.dx0) / 1000.; }
+   inline double getDx1() const { return qFromLittleEndian(d.dx1) / 1000.; }
+   inline double getDx2() const { return qFromLittleEndian(d.dx2) / 1000.; }
+   inline double getPlx() const { return qFromLittleEndian(d.plx) * 0.02; }
+   inline double getPlxErr() const { return qFromLittleEndian(d.plx_err) / 100.; }
    inline double getPMTotal() const
    {
       // need to go through the calculation to get pmra and pmdec, use dyr = 0
@@ -489,7 +490,7 @@ public:
       getFull6DSolution(RA, DE, Plx, pmra, pmdec, RV, 0.);
       return sqrt(pmra * pmra + pmdec * pmdec);
    }
-   inline double getRV() const { return d.rv / 10.; }
+   inline double getRV() const { return qFromLittleEndian(d.rv) / 10.; }
    inline bool   getPreciseAstrometricFlag() const
    {
       // Flag if the star should have time dependent astrometry computed
@@ -503,11 +504,11 @@ public:
       // Combine the 3 bytes into a 24-bit integer (little-endian)
       quint32 combined_value = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
       // Extract the 17-bit ID (shift right by 5 bits)
-      quint64  hip_id         = combined_value >> 5;
+      quint64  hip_id = combined_value >> 5;
       return hip_id;
    }
 
-   inline StarId  getGaia() const { return d.gaia_id; }
+   inline StarId  getGaia() const { return qFromLittleEndian(d.gaia_id); }
    inline int     getComponentIds() const
    {
       // Combine the 3 bytes into a 24-bit integer (little-endian)
@@ -516,12 +517,13 @@ public:
       quint8  letter_value   = combined_value & 0x1F; // 0x1F = 00011111 in binary mask
       return letter_value;
    }
-   inline int getObjType() const { return d.objtype; }
-   float      getBV(void) const { return static_cast<float>(d.b_v) / 1000.f; }
+   inline int getObjType() const { return qFromLittleEndian(d.objtype); }
+   float      getBV(void) const { return static_cast<float>(qFromLittleEndian(d.b_v)) / 1000.f; }
    bool       isVIP() const { return true; }
    bool       hasName() const { return getHip(); } // OR gaia??
    QString    getNameI18n(void) const;
-   QString    getScreenNameI18n(void) const;
+   //! Retrieve the cultural screen label, translated version of the commonName (if withCommonNameI18n), or a designation.
+   QString    getScreenNameI18n(const bool withCommonNameI18n) const;
    QString    getDesignation(void) const;
    int        hasComponentID(void) const;
 };
@@ -544,29 +546,29 @@ private:
    } d;
 
 public:
-   inline double getX0() const { return d.x0 * MAS2RAD; }
-   inline double getX1() const { return d.x1 * MAS2RAD; }
+   inline double getX0() const { return qFromLittleEndian(d.x0) * MAS2RAD; }
+   inline double getX1() const { return qFromLittleEndian(d.x1) * MAS2RAD; }
    inline double getX2() const { return 0; }
-   inline double getDx0() const { return d.dx0 / 1000.; }
-   inline double getDx1() const { return d.dx1 / 1000.; }
+   inline double getDx0() const { return qFromLittleEndian(d.dx0) / 1000.; }
+   inline double getDx1() const { return qFromLittleEndian(d.dx1) / 1000.; }
    inline double getDx2() const { return 0.; }
-   inline int    getMag() const { return d.vmag; } // in milli-mag
+   inline int    getMag() const { return qFromLittleEndian(d.vmag); } // in milli-mag
    inline double getPMTotal() const
    {
       return sqrt((getDx0() * cos(getX1()) * getDx0() * cos(getX1())) + (getDx1() * getDx1()));
    }
    StelObjectP    createStelObject(const SpecialZoneArray<Star2> * a, const SpecialZoneData<Star2> * z) const;
    StarId         getHip() const { return 0; }
-   StarId         getGaia() const { return d.gaia_id; }
-   float          getBV(void) const { return static_cast<float>(d.b_v) / 1000.f; }
+   StarId         getGaia() const { return qFromLittleEndian(d.gaia_id); }
+   float          getBV(void) const { return static_cast<float>(qFromLittleEndian(d.b_v)) / 1000.f; }
    QString        getNameI18n(void) const { return QString(); }
-   QString        getScreenNameI18n(void) const { return QString(); }
+   QString        getScreenNameI18n(const bool) const { return QString(); }
    QString        getDesignation(void) const { return QString(); }
    int            hasComponentID(void) const { return 0; }
    bool           isVIP() const { return false; }
    bool           hasName() const { return getGaia() != 0; }
-   double         getPlx() const { return d.plx / 100.; }
-   double         getPlxErr() const { return d.plx_err / 100.; }
+   double         getPlx() const { return qFromLittleEndian(d.plx) / 100.; }
+   double         getPlxErr() const { return qFromLittleEndian(d.plx_err) / 100.; }
    double         getRV() const { return 0.; }
    bool           getPreciseAstrometricFlag() const
    { // Flag if the star should have time dependent astrometry computed
@@ -593,12 +595,12 @@ public:
    inline double getX0() const
    {
       quint32 x0 = d.x0[0] | (d.x0[1] << 8) | (d.x0[2] << 16);
-      return static_cast<double>(x0) * 100. * MAS2RAD;
+      return static_cast<double>(qFromLittleEndian(x0)) * 100. * MAS2RAD;
    }
    inline double getX1() const
    {
       quint32 x1 = d.x1[0] | (d.x1[1] << 8) | (d.x1[2] << 16);
-      return (static_cast<double>(x1) - (90. * 36000.)) * 100. * MAS2RAD;
+      return (static_cast<double>(qFromLittleEndian(x1)) - (90. * 36000.)) * 100. * MAS2RAD;
    }
    inline double  getX2() const { return 0.; }
    inline double  getDx0() const { return 0.; }
@@ -608,16 +610,16 @@ public:
    double         getPlx() const { return 0.; }
    double         getPlxErr() const { return 0.; }
    double         getRV() const { return 0.; }
-   double         getBV() const { return (0.025 * d.b_v) - 1.; } // in mag
-   double         getMag() const { return d.vmag * 20 + 16000; } // in milli-mag
+   double         getBV() const { return (0.025 * qFromLittleEndian(d.b_v)) - 1.; } // in mag
+   double         getMag() const { return qFromLittleEndian(d.vmag) * 20 + 16000; } // in milli-mag
    StarId         getHip() const { return 0; }
-   StarId         getGaia() const { return d.gaia_id; }
+   StarId         getGaia() const { return qFromLittleEndian(d.gaia_id); }
    QString        getNameI18n() const { return QString(); }
-   QString        getScreenNameI18n() const { return QString(); }
+   QString        getScreenNameI18n(const bool) const { return QString(); }
    QString        getDesignation() const { return QString(); }
    bool           isVIP() const { return false; }
    int            hasComponentID() const { return 0; }
-   bool           hasName() const { return d.gaia_id != 0; }
+   bool           hasName() const { return getGaia() != 0; }
    bool           getPreciseAstrometricFlag() const
    { // Flag if the star should have time dependent astrometry computed
       return false;

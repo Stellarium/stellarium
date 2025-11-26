@@ -24,10 +24,99 @@
 #include "VecMath.hpp"
 #include "StelModule.hpp"
 #include "Planet.hpp"
+#include "StelCore.hpp"
 
 class SkyGrid;
-class SkyLine;
 class SkyPoint;
+
+//! @class SkyLine
+//! Class which manages a line to display around the sky like the ecliptic line.
+class SkyLine
+{
+public:
+	enum SKY_LINE_TYPE
+	{
+		EQUATOR_J2000,
+		EQUATOR_OF_DATE,
+		FIXED_EQUATOR,
+		ECLIPTIC_J2000,
+		ECLIPTIC_OF_DATE,
+		ECLIPTIC_WITH_DATE,
+		PRECESSIONCIRCLE_N,
+		PRECESSIONCIRCLE_S,
+		MERIDIAN,
+		HORIZON,
+		GALACTICEQUATOR,
+		SUPERGALACTICEQUATOR,
+		LONGITUDE,
+		QUADRATURE,
+		PRIME_VERTICAL,
+		CURRENT_VERTICAL,
+		COLURE_1,
+		COLURE_2,
+		CIRCUMPOLARCIRCLE_N,
+		CIRCUMPOLARCIRCLE_S,
+		INVARIABLEPLANE,
+		SOLAR_EQUATOR,
+		EARTH_UMBRA,
+		EARTH_PENUMBRA,
+		ECLIPTIC_CULTURAL,
+		EQUATORIAL_CULTURAL
+	};
+	// Create and precompute positions of a SkyGrid
+	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR_J2000);
+	virtual ~SkyLine();
+	static void init(); //! call once before creating the first line.
+	static void deinit(); //! call once after deleting all lines.
+	void draw(StelCore* core) const;       // set up a painter and draw
+	void draw(StelPainter &painter, const float oldLineWidth) const; // draw with given painter
+	void setColor(const Vec3f& c) {color = c;}
+	void setPartitions(bool visible) {showPartitions = visible;}
+	bool showsPartitions() const {return showPartitions;}
+	const Vec3f& getColor() const {return color;}
+	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
+	void setFadeDuration(float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
+	void setDisplayed(const bool displayed){fader = displayed;}
+	bool isDisplayed() const {return fader;}
+	void setLabeled(const bool displayed){showLabel = displayed;}
+	bool isLabeled() const {return showLabel;}
+	void setFontSize(int newSize);
+	void setLineThickness(const float thickness) {lineThickness = thickness;}
+	float getLineThickness() const {return lineThickness;}
+	void setPartThickness(const float thickness) {partThickness = thickness;}
+	float getPartThickness() const {return partThickness;}
+	//! Re-translates the label and sets the frameType. Must be called in the constructor!
+	void updateLabel();
+	//! setup the small partitions in a ECLIPTIC_CULTURAL or EQUATORIAL_CULTURAL line, in degrees.
+	//! Element nr.0 is a vector of the major divisions. It is not used directly, just here for completion.
+	//! Element nr.1 is a vector of all main divisions of all major divisions. This may be 10-degrees in a 12x30 degree zodiac, or the quarter-lines in the Indian 27-part nakshatras.
+	//! Element nr.2 is a vector of all minor divisions, like the 5-degrees in a 12x30 degrees zodiac defined as [12 3 2 5].
+	//! Element nr.3 is a vector of all sub-minor divisions, like the 1-degrees in a 12x30 degrees zodiac  defined as [12 3 2 5].
+	//! Up to these 4 lists is supported with drawing ever-smaller sub-ticks
+	//! @todo: Currently the partitions are falsely plotted extending the wrong axis.
+	void setCulturalPartitions(QList<QList<double>>cParts){culturalPartitions=cParts;}
+	void setCulturalOffset(const double offset){culturalOffset=offset;}
+	static void setSolarSystem(SolarSystem* ss);
+	//! Compute eclipticOnDatePartitions for @param year. Trigger a call to this from a signal StelCore::dateChangedByYear()
+	static void computeEclipticDatePartitions(int year = std::numeric_limits<int>::min());
+private:
+	static QSharedPointer<Planet> earth, sun, moon;
+	SKY_LINE_TYPE line_type;
+	Vec3f color;
+	StelCore::FrameType frameType;
+	LinearFader fader;
+	int fontSize;
+	QString label;
+	float lineThickness;
+	float partThickness;
+	bool showPartitions;
+	bool showLabel;
+	QList<QList<double>>culturalPartitions; //!< only in ECLIPTIC_CULTURAL and EQUATORIAL_CULTURAL lines.
+	double culturalOffset;  //!< the origin of cultural partitions can be rotated from the first point of Aries.
+	static QMap<int, double> precessionPartitions;
+	static std::vector<QPair<Vec3d, QString>> eclipticOnDatePartitions; //!< Collection of up to 366 entries Vec3d={eclLongitude, aberration, nutation}, QString label
+};
+
 
 //! @class GridLinesMgr
 //! The GridLinesMgr controls the drawing of the Azimuthal, Equatorial, Ecliptical and Galactic Grids,
@@ -199,6 +288,7 @@ class GridLinesMgr : public StelModule
 
 	Q_PROPERTY(float lineThickness			READ getLineThickness		WRITE setLineThickness			NOTIFY lineThicknessChanged)
 	Q_PROPERTY(float partThickness			READ getPartThickness		WRITE setPartThickness			NOTIFY partThicknessChanged)
+	Q_PROPERTY(float pointSize			READ getPointSize		WRITE setPointSize			NOTIFY pointSizeChanged)
 public:
 	GridLinesMgr();
 	~GridLinesMgr() override;
@@ -1014,10 +1104,17 @@ public slots:
 	//! Get the thickness of lines
 	float getPartThickness() const;
 
+	//! Set the size of celestial points
+	//! @param size of celestial point in pixels
+	void setPointSize(const float size);
+	//! Get the size of celestial points
+	float getPointSize() const;
+
 signals:
 	void gridlinesDisplayedChanged(const bool);
 	void lineThicknessChanged(const float);
 	void partThicknessChanged(const float);
+	void pointSizeChanged(const float);
 	void azimuthalGridDisplayedChanged(const bool);
 	void azimuthalGridColorChanged(const Vec3f & newColor);
 	void equatorGridDisplayedChanged(const bool displayed);

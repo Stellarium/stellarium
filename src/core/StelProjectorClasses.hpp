@@ -21,6 +21,7 @@
 #define STELPROJECTIONS_HPP
 
 #include "StelProjector.hpp"
+#include "StelUtils.hpp"
 
 class StelProjectorPerspective : public StelProjector
 {
@@ -108,6 +109,36 @@ protected:
 		static const SphericalCap cap1(1,0,0);
 		static const SphericalCap cap2(-1,0,0);
 		static const SphericalCap cap3(0,0,-1);
+		SphericalCap cap(capN, capD);
+		return cap.intersects(cap1) && cap.intersects(cap2) && cap.intersects(cap3);
+	}
+};
+
+class StelProjectorMollweide : public StelProjector
+{
+public:
+	StelProjectorMollweide(ModelViewTranformP func) : StelProjector(func) {}
+	QString getNameI18() const override;
+	QString getDescriptionI18() const override;
+	float getMaxFov() const override { return 185.f; }
+	bool forward(Vec3f &v) const override;
+	bool backward(Vec3d &v) const override;
+	// float fovToViewScalingFactor(float fov) const override;
+	// float viewScalingFactorToFov(float vsf) const override;
+	// float deltaZoom(float fov) const override;
+	QByteArray getForwardTransformShader() const override;
+	QByteArray getBackwardTransformShader() const override;
+protected:
+	bool hasDiscontinuity() const override { return true; }
+	bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const override
+	{
+		return p1[0] * p2[0] < 0 && !(p1[2] < 0 && p2[2] < 0);
+	}
+	bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const override
+	{
+		static const SphericalCap cap1(1, 0, 0);
+		static const SphericalCap cap2(-1, 0, 0);
+		static const SphericalCap cap3(0, 0, -1);
 		SphericalCap cap(capN, capD);
 		return cap.intersects(cap1) && cap.intersects(cap2) && cap.intersects(cap3);
 	}
@@ -247,4 +278,3 @@ protected:
 };
 
 #endif // STELPROJECTIONS_HPP
-

@@ -25,7 +25,6 @@
 
 #include <QObject>
 #include <QString>
-#include <QFont>
 
 class TuiNode;
 
@@ -77,7 +76,6 @@ private slots:
 	void setTimeFormat(const QString &format);
 	void setSkyCulture(const QString &i18);
 	void setAppLanguage(const QString &lang);
-	void setSkyLanguage(const QString &lang);
 	void saveDefaultSettings(void);
 	void shutDown(void);
 
@@ -87,7 +85,7 @@ signals:
 
 private:
 	DummyDialog dummyDialog;
-	QFont font;
+	int fontSize;
 	bool tuiActive;
 	bool tuiDateTime; // property
 	bool tuiObjInfo;  // property

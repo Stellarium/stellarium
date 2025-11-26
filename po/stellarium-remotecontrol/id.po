@@ -8,17 +8,17 @@
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
 # Ian Sebastian <iansebastian.tan@gmail.com>, 2022
 # cardinot <mcardinot@gmail.com>, 2022
-# Hariyadi Putraga <hariyadiputraga@gmail.com>, 2022
 # Andika Triwidada <andika@gmail.com>, 2022
+# Hariyadi Putraga <hariyadiputraga@gmail.com>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-01-03 20:26+0700\n"
+"POT-Creation-Date: 2025-10-01 11:51+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Andika Triwidada <andika@gmail.com>, 2022\n"
+"Last-Translator: Hariyadi Putraga <hariyadiputraga@gmail.com>, 2025\n"
 "Language-Team: Indonesian (https://app.transifex.com/stellarium/teams/80998/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -112,8 +112,8 @@ msgid "Could not retrieve landscape list"
 msgstr "Tidak bisa mengambil daftar lanskap"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:745
-#: index.html:807 tablet7in.html:830 tablet7in.html:890
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:761
+#: index.html:823 tablet7in.html:845 tablet7in.html:905
 msgid "-none-"
 msgstr "-tidak ada-"
 
@@ -197,15 +197,15 @@ msgstr "minggu berdasarkan matahari (solar week)"
 
 #: index.html:92 tablet7in.html:193
 msgid "Calendar year"
-msgstr ""
+msgstr "Tahun takwim"
 
 #: index.html:93 tablet7in.html:194
 msgid "10 Calendar years"
-msgstr ""
+msgstr "10 Tahun Kalender"
 
 #: index.html:94 tablet7in.html:195
 msgid "100 Calendar years"
-msgstr ""
+msgstr "100 tahun Kalender"
 
 #: index.html:97 tablet7in.html:198
 msgid "Sidereal year"
@@ -285,7 +285,7 @@ msgstr "pilih dan fokus"
 
 #: index.html:245 tablet7in.html:265
 msgid "Select current item"
-msgstr ""
+msgstr "Pilih item saat ini"
 
 #: index.html:249 tablet7in.html:269
 msgid "Selection mode"
@@ -325,15 +325,15 @@ msgstr "Kecerahan Bima Sakti"
 
 #: index.html:289 tablet7in.html:351
 msgid "Dbl. stars"
-msgstr ""
+msgstr "Bintang ganda"
 
 #: index.html:290 tablet7in.html:352
 msgid "Var. stars"
-msgstr ""
+msgstr "Bintang Var."
 
 #: index.html:291 tablet7in.html:353
 msgid "HIP"
-msgstr ""
+msgstr "HIP"
 
 #: index.html:294 tablet7in.html:357
 msgid "Digitized Sky Survey"
@@ -345,81 +345,85 @@ msgstr "Survey HiPS"
 
 #: index.html:304 tablet7in.html:369
 msgid "Include nutation"
-msgstr ""
+msgstr "Sertakan nutasi"
 
 #: index.html:306 tablet7in.html:371
-msgid "Include aberration"
-msgstr ""
+msgid "Include parallax"
+msgstr "Sertakan paralaks"
 
-#: index.html:314 tablet7in.html:385
+#: index.html:311 tablet7in.html:376
+msgid "Include aberration"
+msgstr "Sertakan aberasi"
+
+#: index.html:319 tablet7in.html:390
 msgid "Show planet markers"
 msgstr "Tampilkan penanda planet"
 
-#: index.html:315 tablet7in.html:386
+#: index.html:320 tablet7in.html:391
 msgid "Show planet orbits"
 msgstr "Menampilkan Orbit - orbit planet"
 
-#: index.html:316 tablet7in.html:387
+#: index.html:321 tablet7in.html:392
 msgid "Show planet orbits only"
 msgstr "Menampilkan hanya orbit - orbit planet"
 
-#: index.html:317 tablet7in.html:388
+#: index.html:322 tablet7in.html:393
 msgid "Show orbit for selected planet"
 msgstr "Menampilkan orbit dari planet yang dipilih"
 
-#: index.html:318 tablet7in.html:389
+#: index.html:323 tablet7in.html:394
 msgid "Show planet trails"
 msgstr "Menampilkan jejak - jejak planet"
 
-#: index.html:319 tablet7in.html:390
+#: index.html:324 tablet7in.html:395
 msgid "Show trail only for selected planet"
 msgstr "Menampilkan jejak hanya planet yang dipilih"
 
-#: index.html:324 tablet7in.html:394
+#: index.html:329 tablet7in.html:399
 msgid "Scale Moon:"
 msgstr "Skalakan Bulan:"
 
-#: index.html:325 tablet7in.html:398
+#: index.html:330 tablet7in.html:403
 msgid "Scale Sun:"
 msgstr "Skalakan Matahari:"
 
-#: index.html:326 tablet7in.html:402
+#: index.html:331 tablet7in.html:407
 msgid "Scale Planets:"
 msgstr "Skalakan Planet:"
 
-#: index.html:327 tablet7in.html:406
+#: index.html:332 tablet7in.html:411
 msgid "Scale minor bodies:"
 msgstr "Skalakan obyek minor:"
 
-#: index.html:332
+#: index.html:337
 msgid "Mark minor bodies:"
-msgstr ""
+msgstr "Tandai badan minor:"
 
-#: index.html:360 tablet7in.html:438
+#: index.html:365 tablet7in.html:443
 msgid "Bortle class:"
-msgstr ""
+msgstr "Kelas Bortle:"
 
-#: index.html:377 tablet7in.html:455
+#: index.html:382 tablet7in.html:460
 msgid "Extinction Coefficient:"
 msgstr "Koefisien ekstingsi:"
 
-#: index.html:378 tablet7in.html:456
+#: index.html:383 tablet7in.html:461
 msgid "Only extinction/refraction, no blue skylight"
-msgstr ""
+msgstr "Hanya kepunahan/refraksi, tidak ada cahaya langit biru"
 
-#: index.html:378 tablet7in.html:457
+#: index.html:383 tablet7in.html:462
 msgid "Suppress scattering"
-msgstr ""
+msgstr "Menekan hamburan"
 
-#: index.html:382 tablet7in.html:462
+#: index.html:387 tablet7in.html:467
 msgid "Shooting Stars"
 msgstr "Bintang Jatuh"
 
-#: index.html:383 tablet7in.html:463
+#: index.html:388 tablet7in.html:468
 msgid "ZHR:"
 msgstr "ZHR (Zenital per jam)"
 
-#: index.html:430 tablet7in.html:515
+#: index.html:435 tablet7in.html:520
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
@@ -427,194 +431,210 @@ msgstr ""
 "lingkaran seketika oleh sumbu bumi pada pergerakannya di sekitar kutub "
 "ekliptika. Diperlihatkan hanya pada Bumi"
 
-#: index.html:447 tablet7in.html:532
+#: index.html:452 tablet7in.html:537
 msgid "Center"
 msgstr "Pusat"
 
-#: index.html:463 tablet7in.html:550
+#: index.html:468 tablet7in.html:555
 msgid "Solstices"
 msgstr "titik balik matahari ( Solstices)"
 
-#: index.html:464 tablet7in.html:551
+#: index.html:469 tablet7in.html:556
 msgid "Crossquarters"
 msgstr "Cross-Quarter"
 
-#: index.html:465 tablet7in.html:552
+#: index.html:470 tablet7in.html:557
 msgid "Major Standstill"
 msgstr "perhentian utama"
 
-#: index.html:466 tablet7in.html:553
+#: index.html:471 tablet7in.html:558
 msgid "Minor Standstill"
 msgstr "perhentian kecil"
 
-#: index.html:470 tablet7in.html:558
+#: index.html:475 tablet7in.html:563
 msgid "Line width:"
-msgstr ""
+msgstr "Lebar garis:"
 
-#: index.html:480 tablet7in.html:568
+#: index.html:485 tablet7in.html:573
 msgid "Current Planet:"
 msgstr "Planet saat ini"
 
-#: index.html:520 tablet7in.html:608
+#: index.html:525 tablet7in.html:613
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "Katalog Nevula Refleksi (Van den Bergh, 1966)"
 
-#: index.html:567 tablet7in.html:626
+#: index.html:572 tablet7in.html:631
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
 msgstr ""
 "Katalog Bintang selatan yang disematkan dalam nebulositas (van den Bergh+, "
 "1975)"
 
-#: index.html:605
+#: index.html:610
 msgid "Objects without identifier"
 msgstr "Objek-objek tanpa pengidentifikasi"
 
-#: index.html:623
+#: index.html:628
 msgid "Open Star clusters"
 msgstr "Gugus Bintang Terbuka"
 
-#: index.html:624 tablet7in.html:694
+#: index.html:629 tablet7in.html:699
 msgid "Globular Star clusters"
 msgstr "Gugus Bintang Bola"
 
-#: index.html:630 tablet7in.html:700
+#: index.html:635 tablet7in.html:705
 msgid "Bright Nebulae"
 msgstr "Nebula Terang"
 
-#: index.html:631 tablet7in.html:701
+#: index.html:636 tablet7in.html:706
 msgid "Dark Nebulae"
 msgstr "Nebula Gelap"
 
-#: index.html:632 tablet7in.html:702
+#: index.html:637 tablet7in.html:707
 msgid "Planetary Nebulae"
 msgstr "Nebula Planet"
 
-#: index.html:642 tablet7in.html:712
+#: index.html:647 tablet7in.html:717
 msgid "Labels and markers"
 msgstr "label dan penanda"
 
-#: index.html:660 tablet7in.html:731
+#: index.html:665 tablet7in.html:736
 msgid "Limit angular size (arcmin):"
-msgstr ""
+msgstr "Batasi ukuran sudut (arcmin):"
 
-#: index.html:672 tablet7in.html:745
+#: index.html:677 tablet7in.html:750
 msgid "Use associated planet and position"
 msgstr "Gunakan posisi dan planet yang terkait"
 
-#: index.html:682 tablet7in.html:753
+#: index.html:687 tablet7in.html:758
 msgid "Show landscape labels"
-msgstr ""
+msgstr "Tampilkan label lanskap"
 
-#: index.html:683 tablet7in.html:754
+#: index.html:688 tablet7in.html:759
 msgid "Show illumination"
 msgstr "Perlihatkan iluminasi (penerangan)"
 
-#: index.html:688 tablet7in.html:760
+#: index.html:693 tablet7in.html:765
 msgid "Current landscape"
 msgstr "Lanskap saat ini"
 
-#: index.html:699 tablet7in.html:772
+#: index.html:704 tablet7in.html:777
 msgid "Label constellations with font size"
-msgstr ""
+msgstr "Beri label konstelasi dengan ukuran font"
 
-#: index.html:703 tablet7in.html:776
+#: index.html:708 tablet7in.html:781
 msgid "Show lines with thickness"
 msgstr "Menampilkan garis-garis dengan ketebalan"
 
-#: index.html:707 tablet7in.html:780
+#: index.html:712 tablet7in.html:785
 msgid "Label asterisms with font size"
-msgstr ""
+msgstr "Beri label asterisme dengan ukuran font"
 
-#: index.html:711 tablet7in.html:784
+#: index.html:716 tablet7in.html:789
 msgid "Show asterisms with thickness"
 msgstr "Perlihatkan Asterisme dengan ketebalan"
 
-#: index.html:715 tablet7in.html:788
+#: index.html:720 tablet7in.html:793
 msgid "Show ray helpers with thickness"
 msgstr "Menampilkan sinar bantuan dengan ketebalan"
 
-#: index.html:719 tablet7in.html:792
+#: index.html:724 tablet7in.html:797
 msgid "Show art in brightness"
-msgstr ""
+msgstr "Tampilkan seni dalam kecerahan"
 
-#: index.html:723 tablet7in.html:796
+#: index.html:728 tablet7in.html:801
 msgid "Show boundaries with thickness"
 msgstr "Tampilkan Garis Batas dengan Ketebalan"
 
-#: index.html:728 tablet7in.html:801
+#: index.html:733 tablet7in.html:805
+msgid "Show zodiac with thickness"
+msgstr "Tampilkan zodiak dengan ketebalan"
+
+#: index.html:737 tablet7in.html:809
+msgid "Show lunar stations/mansions with thickness"
+msgstr "Tampilkan stasiun/rumah bulan dengan ketebalan"
+
+#: index.html:741 tablet7in.html:813
+msgid "Short labels"
+msgstr "Label pendek"
+
+#: index.html:742 tablet7in.html:814
 msgid "Constellation selection isolated"
 msgstr "Plihan Konstelasi Terasing"
 
-#: index.html:732 tablet7in.html:805
+#: index.html:743 tablet7in.html:815
+msgid "Only last selected"
+msgstr "Hanya yang terakhir dipilih"
+
+#: index.html:748 tablet7in.html:820
 msgid "Current sky culture"
 msgstr "Budaya langit saat ini"
 
-#: index.html:745 tablet7in.html:830
+#: index.html:761 tablet7in.html:845
 msgid "Active script:"
 msgstr "Skrip aktif:"
 
-#: index.html:746 tablet7in.html:831
+#: index.html:762 tablet7in.html:846
 msgid "Run selected script"
 msgstr "Jalankan skrip terpilih"
 
-#: index.html:746 tablet7in.html:831
+#: index.html:762 tablet7in.html:846
 msgid "Stop current script"
 msgstr "Hentikan skrip terpilih"
 
-#: index.html:751 tablet7in.html:43 tablet7in.html:815
+#: index.html:767 tablet7in.html:43 tablet7in.html:830
 msgid "Actions"
 msgstr "Tindakan"
 
-#: index.html:755 tablet7in.html:819
+#: index.html:771 tablet7in.html:834
 msgid "Run/toggle action"
 msgstr "jalankan/alihkan tindakan"
 
-#: index.html:766 tablet7in.html:854
+#: index.html:782 tablet7in.html:869
 msgid "Planet map"
 msgstr "peta planet"
 
-#: index.html:767 tablet7in.html:855
+#: index.html:783 tablet7in.html:870
 msgid "Planet map pointer"
 msgstr "penunjuk peta planet"
 
-#: index.html:771 tablet7in.html:859
+#: index.html:787 tablet7in.html:874
 msgid "Type to search location"
 msgstr "ketikkan untuk mencari lokasi"
 
-#: index.html:805 tablet7in.html:888
+#: index.html:821 tablet7in.html:903
 msgid "Interaction"
 msgstr "Pengaruh"
 
-#: index.html:806 tablet7in.html:889
+#: index.html:822 tablet7in.html:904
 msgid "Current scene:"
 msgstr "Tampilan Saat ini"
 
-#: index.html:809 tablet7in.html:892
+#: index.html:825 tablet7in.html:907
 msgid "View controls"
 msgstr "Perlihatkan Pengaturan"
 
-#: index.html:815 tablet7in.html:898
+#: index.html:831 tablet7in.html:913
 msgid "Movement controls"
 msgstr "Pengaturan Pergerakan"
 
-#: index.html:827 tablet7in.html:910
+#: index.html:843 tablet7in.html:925
 msgid "Torchlight"
 msgstr "cahaya obor"
 
-#: index.html:834 tablet7in.html:917
+#: index.html:850 tablet7in.html:932
 msgid "Scene selection"
 msgstr "Pemilihan Tampilan"
 
-#: index.html:838 tablet7in.html:921
+#: index.html:854 tablet7in.html:936
 msgid "Load selected scene"
 msgstr "Memuat Tampilan Terpilih"
 
-#: index.html:864 tablet7in.html:948
+#: index.html:880 tablet7in.html:963
 msgid "No response from server"
 msgstr "tidak ada respon dari server"
 
-#: index.html:865 tablet7in.html:949
+#: index.html:881 tablet7in.html:964
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "tidak ada respon dari server selama %1 detik. apakah stellarium masih "
@@ -760,18 +780,18 @@ msgstr "Aquarius"
 msgid "Pisces"
 msgstr "Pisces"
 
-#: tablet7in.html:839
+#: tablet7in.html:854
 msgid "Favorites"
 msgstr "Favorit"
 
-#: tablet7in.html:841
+#: tablet7in.html:856
 msgid "Show 1"
 msgstr "Perlihatkan 1"
 
-#: tablet7in.html:842
+#: tablet7in.html:857
 msgid "Remove Labels and Images"
 msgstr "Hilangkan Label dan Gambar"
 
-#: tablet7in.html:842
+#: tablet7in.html:857
 msgid "Cleanup Screen"
 msgstr "Bersihkan Layar"

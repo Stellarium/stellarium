@@ -99,6 +99,8 @@ constexpr double DEFAULT_FONT_SIZE = 13;
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
 {
+	static inline constexpr double J2000 = 2451545.0;
+
 	//! Return the full name of stellarium, i.e. "Stellarium 23.1"
 	QString getApplicationName();
 
@@ -116,6 +118,9 @@ namespace StelUtils
 
 	//! Return the user agent name, i.e. "Stellarium/0.15.0 (Linux)"
 	QString getUserAgentString();
+
+        //! Return the addressing mode string, i.e. "64-bit"
+        QString getAddressingMode();
 
 	/*! \brief Get a long integer from a JSON value
 	 *

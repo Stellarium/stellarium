@@ -1,7 +1,7 @@
 version: 1
 
 script:
-    - cmake ../.. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DENABLE_QTWEBENGINE=Off -DENABLE_MEDIA=Off
+    - cmake ../.. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DENABLE_MEDIA=Off
     - make -j3
     - make install DESTDIR=AppDir
 
@@ -37,12 +37,13 @@ AppDir:
       - libqt5script5
       - libqt5serialport5
       - libqt5widgets5
-#      - libqt5webengine5
-#      - libqt5webenginecore5
-#      - libqt5webenginewidgets5
-#      - libqt5webengine-data
+      - libqt5webengine5
+      - libqt5webenginecore5
+      - libqt5webenginewidgets5
+      - libqt5webengine-data
       - libqt5charts5
       - libqt5opengl5
+      - qt5-image-formats-plugins
       - libgps28
       - libexiv2-27
       - libnlopt-cxx0
@@ -62,7 +63,9 @@ AppDir:
   runtime:
     env:
       APPDIR_LIBRARY_PATH: $APPDIR/lib/x86_64-linux-gnu:$APPDIR/usr/lib/x86_64-linux-gnu:$APPDIR/usr/lib/x86_64-linux-gnu/pulseaudio
-
+      QTWEBENGINEPROCESS_PATH: $APPDIR/usr/lib/qt5/libexec/QtWebEngineProcess:$APPDIR/usr/lib/x86_64-linux-gnu/qt5/libexec/QtWebEngineProcess
+      QTWEBENGINE_DISABLE_SANDBOX: 1
+      
 #  test:
 #    debian:
 #      image: appimagecrafters/tests-env:debian-stable

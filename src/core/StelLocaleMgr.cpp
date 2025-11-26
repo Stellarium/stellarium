@@ -49,7 +49,6 @@ void StelLocaleMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	setSkyLanguage(conf->value("localization/sky_locale", "system").toString(), false);
 	setAppLanguage(conf->value("localization/app_locale", "system").toString(), false);
 
 	timeFormat = stringToSTimeFormat(conf->value("localization/time_display_format", "system_default").toString());
@@ -68,6 +67,14 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refre
 	qInfo().noquote() << "Application language:" << StelTranslator::globalTranslator->getTrueLocaleName();
 
 	// Update the translator with new locale name
+	skyTranslator.reset(new StelSkyTranslator(newAppLanguageName));
+	qInfo().noquote() << "Sky language:" << skyTranslator->getTrueLocaleName();
+
+	// Update the translator with new locale name
+	planetaryFeaturesTranslator.reset(new StelTranslator("stellarium-planetary-features", newAppLanguageName));
+	qInfo().noquote() << "Planetary features language:" << planetaryFeaturesTranslator->getTrueLocaleName();
+
+	// Update the translator with new locale name
 	scriptsTranslator.reset(new StelTranslator("stellarium-scripts", newAppLanguageName));
 	qInfo().noquote() << "Scripts language:" << scriptsTranslator->getTrueLocaleName();
 
@@ -83,23 +90,6 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refre
 bool StelLocaleMgr::isAppRTL() const
 {
 	return QString("ar fa ckb ug ur he yi").contains(getAppLanguage());
-}
-
-/*************************************************************************
- Set the sky language.
-*************************************************************************/
-void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName, bool refreshAll)
-{
-	// Update the translator with new locale name
-	skyTranslator.reset(new StelSkyTranslator(newSkyLanguageName));
-	qInfo().noquote() << "Sky language:" << skyTranslator->getTrueLocaleName();
-
-	// Update the translator with new locale name
-	planetaryFeaturesTranslator.reset(new StelTranslator("stellarium-planetary-features", newSkyLanguageName));
-	qInfo().noquote() << "Planetary features language:" << planetaryFeaturesTranslator->getTrueLocaleName();
-
-	if (refreshAll)
-		StelApp::getInstance().updateI18n();
 }
 
 /*************************************************************************
@@ -319,6 +309,15 @@ QString StelLocaleMgr::sDateFormatToString(SDateFormat df)
 		"wwddmmyyyy",
 		"wwyyyymmdd"};
 	return dfmt[df];
+}
+
+QString StelLocaleMgr::getQtTimeFormatStr() const
+{
+	QStringList tfmt = {
+	        "HH:mm",
+	        "HH:mm",
+	        "hh:mm AP"};
+	return tfmt[timeFormat];
 }
 
 QString StelLocaleMgr::getQtDateFormatStr() const

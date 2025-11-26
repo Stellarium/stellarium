@@ -23,7 +23,6 @@
 #include "StelModule.hpp"
 #include "HipOnlineQuery.hpp"
 
-#include <QFont>
 #include <QString>
 
 class QPixmap;
@@ -78,8 +77,8 @@ public slots:
 	void queryWikipedia();    //!< Connect from a button that triggers information query
 	void queryAAVSO();        //!< Connect from a button that triggers information query
 	void queryGCVS();         //!< Connect from a button that triggers information query
-	// The Ancient-Skies.org website did not resurrect as planned in 2022. Leave it here, maybe in a few years.
-	//void queryAncientSkies(); //!< Connect from a button that triggers information query
+	// The Ancient-Skies.org website did not resurrect as planned in 2022. In 2025, ASE is coming.
+	void queryASE();          //!< Connect from a button that triggers information query
 	void queryCustomSite1();  //!< Connect from a button that triggers information query
 	void queryCustomSite2();  //!< Connect from a button that triggers information query
 	void queryCustomSite3();  //!< Connect from a button that triggers information query
@@ -115,7 +114,7 @@ private:
 
 	// URLs are settable via config.ini.
 	// TODO: Maybe add a config panel for the custom sites?
-	QString ancientSkiesUrl;
+	QString aseUrl;
 	QString aavsoHipUrl;
 	QString aavsoOidUrl;
 	QString gcvsUrl;

@@ -16,8 +16,7 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        sudo apt remove php7.* -y
-        sudo apt remove php8.* -y
+        sudo apt remove php* -y
         sudo apt update
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
@@ -26,7 +25,7 @@ jobs:
         sudo apt install -y qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data libexiv2-dev libnlopt-cxx-dev zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev libgps-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake lcov libexiv2-dev libnlopt-cxx-dev python3-demjson libmd4c-dev libmd4c-html0-dev
 
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Configure CMake
       shell: bash
@@ -66,7 +65,7 @@ jobs:
       run: lcov --gcov-tool "/usr/bin/gcov" --ignore-errors unused --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/build/*' '*/qt5/*' '*/qt6/*' '/usr/*' '*gmock*' --output-file coverage.info
 
     - name: Coveralls
-      uses: coverallsapp/github-action@v2
+      uses: coverallsapp/github-action@v2.3.6
       with:
         format: lcov
         file: ${{ github.workspace }}/build/coverage.info

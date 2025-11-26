@@ -47,7 +47,7 @@ public:
 	enum InfoStringGroupFlags
 	{
 		None			= 0x00000000, //!< Show Nothing
-		Name			= 0x00000001, //!< An object's name
+		Name			= 0x00000001, //!< An object's name as further defined by CulturalDisplayStyle found in SkyCultureMgr.
 		CatalogNumber		= 0x00000002, //!< Catalog numbers
 		Magnitude		= 0x00000004, //!< Magnitude related data
 		RaDecJ2000		= 0x00000008, //!< The equatorial position (J2000 ref)
@@ -67,7 +67,7 @@ public:
 		ObjectType		= 0x00020000, //!< The type of the object (star, planet, etc.)
 		EclipticCoordJ2000	= 0x00040000, //!< The ecliptic position (J2000.0 ref) [+ XYZ of VSOP87A (used mainly for debugging, not public)]
 		EclipticCoordOfDate	= 0x00080000, //!< The ecliptic position (of date)
-		IAUConstellation        = 0x00100000, //!< Three-letter constellation code (And, Boo, Cas, ...)
+		IAUConstellation        = 0x00100000, //!< Three-letter constellation code (And, Boo, Cas, ...), and Zodiacal sign and Lunar station/mansion where defined
 		SiderealTime		= 0x00200000, //!< Mean and Apparent Sidereal Time
 		RTSTime			= 0x00400000, //!< Time of rise, transit and set of celestial object
 		SolarLunarPosition      = 0x00800000, //!< Show Solar and Lunar horizontal position (on Earth location only)
@@ -78,6 +78,186 @@ public:
 	};
 	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
 	Q_FLAG(InfoStringGroup)
+
+
+	//! A 7-bit code with all options for displaying relevant CulturalName parts.
+	//! Describes how to display culture aware labels for constellation, planets, star names, ....
+	//! The viewDialog GUI has checkboxes which corresponds to these values.
+	//! It is necessary to have different settings for screen labels (usually shorter) and InfoString labels (may be set to more complete)
+
+	//! This setting is handled by methods getScreenLabel() and getInfoLabel() in StelObject and descendants.
+
+	//! The names are explicitly long and descriptive, usable in config.ini.
+	//! Example: Native_Pronounce_Translit_Translated_IPA_Byname_Modern shows everything:
+	//! - native name,
+	//! - simple translatable pronunciation
+	//! - non-translatable scientific transliteration (in rare cases only)
+	//! - translated meaning
+	//! - IPA reading/pronunciation aid in International Phonetic Alphabet
+	//! - byname, an explanatory description. Note that this came in late and is encoded in bit 0x40, while the name particle is always in front of "Modern"
+	//! - Modern name (useful for stars and planets only). Helpful to see the modern name in context.
+	enum class CulturalDisplayStyle
+	{
+		NONE                                                   = 0x00,
+		Modern                                                 = 0x01,
+		IPA                                                    = 0x02,
+		IPA_Modern                                             = 0x03,
+		Translated                                             = 0x04,
+		Translated_Modern                                      = 0x05,
+		Translated_IPA                                         = 0x06,
+		Translated_IPA_Modern                                  = 0x07,
+		Translit                                               = 0x08,
+		Translit_Modern                                        = 0x09,
+		Translit_IPA                                           = 0x0A,
+		Translit_IPA_Modern                                    = 0x0B,
+		Translit_Translated                                    = 0x0C,
+		Translit_Translated_Modern                             = 0x0D,
+		Translit_Translated_IPA                                = 0x0E,
+		Translit_Translated_IPA_Modern                         = 0x0F,
+		Pronounce                                              = 0x10,
+		Pronounce_Modern                                       = 0x11,
+		Pronounce_IPA                                          = 0x12,
+		Pronounce_IPA_Modern                                   = 0x13,
+		Pronounce_Translated                                   = 0x14,
+		Pronounce_Translated_Modern                            = 0x15,
+		Pronounce_Translated_IPA                               = 0x16,
+		Pronounce_Translated_IPA_Modern                        = 0x17,
+		Pronounce_Translit                                     = 0x18,
+		Pronounce_Translit_Modern                              = 0x19,
+		Pronounce_Translit_IPA                                 = 0x1A,
+		Pronounce_Translit_IPA_Modern                          = 0x1B,
+		Pronounce_Translit_Translated                          = 0x1C,
+		Pronounce_Translit_Translated_Modern                   = 0x1D,
+		Pronounce_Translit_Translated_IPA                      = 0x1E,
+		Pronounce_Translit_Translated_IPA_Modern               = 0x1F,
+		Native                                                 = 0x20,
+		Native_Modern                                          = 0x21,
+		Native_IPA                                             = 0x22,
+		Native_IPA_Modern                                      = 0x23,
+		Native_Translated                                      = 0x24,
+		Native_Translated_Modern                               = 0x25,
+		Native_Translated_IPA                                  = 0x26,
+		Native_Translated_IPA_Modern                           = 0x27,
+		Native_Translit                                        = 0x28,
+		Native_Translit_Modern                                 = 0x29,
+		Native_Translit_IPA                                    = 0x2A,
+		Native_Translit_IPA_Modern                             = 0x2B,
+		Native_Translit_Translated                             = 0x2C,
+		Native_Translit_Translated_Modern                      = 0x2D,
+		Native_Translit_Translated_IPA                         = 0x2E,
+		Native_Translit_Translated_IPA_Modern                  = 0x2F,
+		Native_Pronounce                                       = 0x30,
+		Native_Pronounce_Modern                                = 0x31,
+		Native_Pronounce_IPA                                   = 0x32,
+		Native_Pronounce_IPA_Modern                            = 0x33,
+		Native_Pronounce_Translated                            = 0x34,
+		Native_Pronounce_Translated_Modern                     = 0x35,
+		Native_Pronounce_Translated_IPA                        = 0x36,
+		Native_Pronounce_Translated_IPA_Modern                 = 0x37,
+		Native_Pronounce_Translit                              = 0x38,
+		Native_Pronounce_Translit_Modern                       = 0x39,
+		Native_Pronounce_Translit_IPA                          = 0x3A,
+		Native_Pronounce_Translit_IPA_Modern                   = 0x3B,
+		Native_Pronounce_Translit_Translated                   = 0x3C,
+		Native_Pronounce_Translit_Translated_Modern            = 0x3D,
+		Native_Pronounce_Translit_Translated_IPA               = 0x3E,
+		Native_Pronounce_Translit_Translated_IPA_Modern        = 0x3F,
+		Byname                                                 = 0x40,
+		Byname_Modern                                          = 0x41,
+		IPA_Byname                                             = 0x42,
+		IPA_Byname_Modern                                      = 0x43,
+		Translated_Byname                                      = 0x44,
+		Translated_Byname_Modern                               = 0x45,
+		Translated_IPA_Byname                                  = 0x46,
+		Translated_IPA_Byname_Modern                           = 0x47,
+		Translit_Byname                                        = 0x48,
+		Translit_Byname_Modern                                 = 0x49,
+		Translit_IPA_Byname                                    = 0x4A,
+		Translit_IPA_Byname_Modern                             = 0x4B,
+		Translit_Translated_Byname                             = 0x4C,
+		Translit_Translated_Byname_Modern                      = 0x4D,
+		Translit_Translated_IPA_Byname                         = 0x4E,
+		Translit_Translated_IPA_Byname_Modern                  = 0x4F,
+		Pronounce_Byname                                       = 0x50,
+		Pronounce_Byname_Modern                                = 0x51,
+		Pronounce_IPA_Byname                                   = 0x52,
+		Pronounce_IPA_Byname_Modern                            = 0x53,
+		Pronounce_Translated_Byname                            = 0x54,
+		Pronounce_Translated_Byname_Modern                     = 0x55,
+		Pronounce_Translated_IPA_Byname                        = 0x56,
+		Pronounce_Translated_IPA_Byname_Modern                 = 0x57,
+		Pronounce_Translit_Byname                              = 0x58,
+		Pronounce_Translit_Byname_Modern                       = 0x59,
+		Pronounce_Translit_IPA_Byname                          = 0x5A,
+		Pronounce_Translit_IPA_Byname_Modern                   = 0x5B,
+		Pronounce_Translit_Translated_Byname                   = 0x5C,
+		Pronounce_Translit_Translated_Byname_Modern            = 0x5D,
+		Pronounce_Translit_Translated_IPA_Byname               = 0x5E,
+		Pronounce_Translit_Translated_IPA_Byname_Modern        = 0x5F,
+		Native_Byname                                          = 0x60,
+		Native_Byname_Modern                                   = 0x61,
+		Native_IPA_Byname                                      = 0x62,
+		Native_IPA_Byname_Modern                               = 0x63,
+		Native_Translated_Byname                               = 0x64,
+		Native_Translated_Byname_Modern                        = 0x65,
+		Native_Translated_IPA_Byname                           = 0x66,
+		Native_Translated_IPA_Byname_Modern                    = 0x67,
+		Native_Translit_Byname                                 = 0x68,
+		Native_Translit_Byname_Modern                          = 0x69,
+		Native_Translit_IPA_Byname                             = 0x6A,
+		Native_Translit_IPA_Byname_Modern                      = 0x6B,
+		Native_Translit_Translated_Byname                      = 0x6C,
+		Native_Translit_Translated_Byname_Modern               = 0x6D,
+		Native_Translit_Translated_IPA_Byname                  = 0x6E,
+		Native_Translit_Translated_IPA_Byname_Modern           = 0x6F,
+		Native_Pronounce_Byname                                = 0x70,
+		Native_Pronounce_Byname_Modern                         = 0x71,
+		Native_Pronounce_IPA_Byname                            = 0x72,
+		Native_Pronounce_IPA_Byname_Modern                     = 0x73,
+		Native_Pronounce_Translated_Byname                     = 0x74,
+		Native_Pronounce_Translated_Byname_Modern              = 0x75,
+		Native_Pronounce_Translated_IPA_Byname                 = 0x76,
+		Native_Pronounce_Translated_IPA_Byname_Modern          = 0x77,
+		Native_Pronounce_Translit_Byname                       = 0x78,
+		Native_Pronounce_Translit_Byname_Modern                = 0x79,
+		Native_Pronounce_Translit_IPA_Byname                   = 0x7A,
+		Native_Pronounce_Translit_IPA_Byname_Modern            = 0x7B,
+		Native_Pronounce_Translit_Translated_Byname            = 0x7C,
+		Native_Pronounce_Translit_Translated_Byname_Modern     = 0x7D,
+		Native_Pronounce_Translit_Translated_IPA_Byname        = 0x7E,
+		Native_Pronounce_Translit_Translated_IPA_Byname_Modern = 0x7F
+	};
+	Q_ENUM(CulturalDisplayStyle)
+
+	//! @struct CulturalName
+	//! Contains name components belonging to an object.
+	//!
+	enum class CulturalNameSpecial
+	{
+		None = 0,        //!< Nothing special
+		Morning = 1,     //!< This name is used for Mercury or Venus in Western elongation, i.e., "morning star"
+		Evening = 2      //!< This name is used for Mercury or Venus in Eastern elongation, i.e., "evening star"
+	};
+	Q_ENUM(CulturalNameSpecial)
+	struct CulturalName
+	{
+		QString native;           //!< native name in native glyphs
+		QString pronounce;        //!< native name in a Latin-based transliteration usable as pronunciation aid for English
+		QString pronounceI18n;    //!< native name in a transliteration scheme in user-language usable as pronunciation aid
+		QString transliteration;  //!< native name in a science-based transliteration scheme not geared at pronunciation (e.g. Tibetan Wylie; rarely used).
+		QString translated;       //!< Native name translated to English. NOT the same as the usual object's englishName!
+		QString translatedI18n;   //!< Translated name (user language)
+		QString IPA;              //!< native name expressed in International Phonetic Alphabet
+		QString byname;           //!< explanatory byname. In tradition of al-Sufi (Andromeda=Chained Woman), but useful for other SCs as well. Currently only ever used for constellations.
+		QString bynameI18n;       //!< explanatory byname translated to user language.
+		StelObject::CulturalNameSpecial special;          //!< any particular extra application?
+		CulturalName(): special(StelObject::CulturalNameSpecial::None){};
+		CulturalName(const QString &nat, const QString &pr, const QString &prI18n, const QString &trl,
+			     const QString &tra, const QString &traI18n, const QString &ipa, const QString &by = "", const QString &byI18n = "", StelObject::CulturalNameSpecial sp = StelObject::CulturalNameSpecial::None):
+			native(nat), pronounce(pr), pronounceI18n(prI18n), transliteration(trl),
+			translated(tra), translatedI18n(traI18n), IPA(ipa), byname(by), bynameI18n(byI18n),
+			special(sp){};
+	};
 
 	//! A pre-defined "all available" set of specifiers for the getInfoString flags argument to getInfoString
 	static constexpr InfoStringGroup AllInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
@@ -121,8 +301,10 @@ public:
 	//! - airmass : number of airmasses the object's light had to pass through the atmosphere. For negative altitudes this number may be meaningless.
 	//! - ra : right ascension angle (current date frame) in decimal degrees
 	//! - dec : declination angle (current date frame) in decimal degrees
+	//! - pd : polar distance angle (current date frame) in decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
 	//! - decJ2000 : declination angle (J2000 frame) in decimal degrees
+	//! - pdJ2000 : polar distance angle (J2000 frame) in decimal degrees
 	//! - parallacticAngle : parallactic angle in decimal degrees (for non-star objects only)
 	//! - hourAngle-dd : hour angle in decimal degrees
 	//! - hourAngle-hms : hour angle in HMS format (formatted string)
@@ -184,13 +366,43 @@ public:
 	//! should search through all ID variants, but this method only returns one of them.
 	virtual QString getID() const = 0;
 
-	//! Return object's name in english
+	//! Return object's name in english.
+	//! For non-default skycultures, this is the english translation of the native name.
 	virtual QString getEnglishName() const = 0;
 
 	//! Return translated object's name
+	//! For non-default skycultures, this is the user language translation of the english name (which should be native translated to english).
 	virtual QString getNameI18n() const = 0;
 
+	//! Return object's native name in the glyphs as written in skyculture descriptions (index.json).
+	//! For non-default skycultures, this is as close to the original as possible.
+	virtual QString getNameNative() const {return QString();}
+
+	//! Return a Latin-letter based transliteration geared at english pronounciation of the native name.
+	//! This is optional but essential for all skycultures in languages which use non-Latin glyphs.
+	//! When user language is English, this is the string from index.json.
+	//! TBD: When user language is different, this may appear adapted to user language.
+	virtual QString getNamePronounce() const {return QString();}
+
+	//! Return a secondary scientific transliteration of the native name.
+	//! This is optional and in fact rarely used. An example would be Wylie-transliteration of Tibetan.
+	virtual QString getNameTransliteration() const {return QString();}
+
+	//! Return native name in International Phonetic Alphabet. Optional.
+	virtual QString getNameIPA() const {return QString();}
+
+	//! Return byname. Optional.
+	virtual QString getByname() const {return QString();}
+
+	//! Return screen label (to be used in the sky display. Most users will use some short label)
+	virtual QString getScreenLabel() const {return QString();}
+
+	//! Return InfoString label (to be used in the InfoString).
+	//! When dealing with foreign skycultures, many users will want this to be longer, with more name components.
+	virtual QString getInfoLabel() const {return QString();}
+
 	//! Get observer-centered equatorial coordinates at equinox J2000, including aberration
+	//! @note: The vector may not be normalized!
 	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const = 0;
 
 	//! Get observer-centered equatorial coordinate at the current equinox

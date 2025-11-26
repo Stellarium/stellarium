@@ -22,6 +22,7 @@
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
 #include "Planet.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelTexture.hpp"
 
 #include "StelUtils.hpp"
@@ -30,6 +31,7 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "RefractionExtinction.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 #include <QTextStream>
 #include <QFile>
@@ -65,43 +67,43 @@ double Nebula::maxSizeLimit = 600.0;
 
 const QMap<Nebula::NebulaType, QString> Nebula::typeEnglishStringMap = // Maps type to english name.
 {
-	{ NebGx     , N_("galaxy") },
-	{ NebAGx    , N_("active galaxy") },
-	{ NebRGx    , N_("radio galaxy") },
-	{ NebIGx    , N_("interacting galaxy") },
-	{ NebQSO    , N_("quasar") },
-	{ NebCl     , N_("star cluster") },
-	{ NebOc     , N_("open star cluster") },
-	{ NebGc     , N_("globular star cluster") },
-	{ NebSA     , N_("stellar association") },
-	{ NebSC     , N_("star cloud") },
-	{ NebN      , N_("nebula") },
-	{ NebPn     , N_("planetary nebula") },
-	{ NebDn     , N_("dark nebula") },
-	{ NebRn     , N_("reflection nebula") },
-	{ NebBn     , N_("bipolar nebula") },
-	{ NebEn     , N_("emission nebula") },
-	{ NebCn     , N_("cluster associated with nebulosity") },
-	{ NebHII    , N_("HII region") },
-	{ NebSNR    , N_("supernova remnant") },
-	{ NebISM    , N_("interstellar matter") },
-	{ NebEMO    , N_("emission object") },
-	{ NebBLL    , N_("BL Lac object") },
-	{ NebBLA    , N_("blazar") },
-	{ NebMolCld , N_("molecular cloud") },
-	{ NebYSO    , N_("young stellar object") },
-	{ NebPossQSO, N_("possible quasar") },
-	{ NebPossPN , N_("possible planetary nebula") },
-	{ NebPPN    , N_("protoplanetary nebula") },
-	{ NebStar   , N_("star") },
-	{ NebSymbioticStar   , N_("symbiotic star") },
-	{ NebEmissionLineStar, N_("emission-line star") },
-	{ NebSNC    , N_("supernova candidate") },
-	{ NebSNRC   , N_("supernova remnant candidate") },
-	{ NebGxCl   , N_("cluster of galaxies") },
-	{ NebPartOfGx, N_("part of a galaxy") },
-	{ NebRegion , N_("region of the sky") },
-	{ NebUnknown, N_("object of unknown nature") }
+	{ NebGx     , L1S(N_("galaxy")) },
+	{ NebAGx    , L1S(N_("active galaxy")) },
+	{ NebRGx    , L1S(N_("radio galaxy")) },
+	{ NebIGx    , L1S(N_("interacting galaxy")) },
+	{ NebQSO    , L1S(N_("quasar")) },
+	{ NebCl     , L1S(N_("star cluster")) },
+	{ NebOc     , L1S(N_("open star cluster")) },
+	{ NebGc     , L1S(N_("globular star cluster")) },
+	{ NebSA     , L1S(N_("stellar association")) },
+	{ NebSC     , L1S(N_("star cloud")) },
+	{ NebN      , L1S(N_("nebula")) },
+	{ NebPn     , L1S(N_("planetary nebula")) },
+	{ NebDn     , L1S(N_("dark nebula")) },
+	{ NebRn     , L1S(N_("reflection nebula")) },
+	{ NebBn     , L1S(N_("bipolar nebula")) },
+	{ NebEn     , L1S(N_("emission nebula")) },
+	{ NebCn     , L1S(N_("cluster associated with nebulosity")) },
+	{ NebHII    , L1S(N_("HII region")) },
+	{ NebSNR    , L1S(N_("supernova remnant")) },
+	{ NebISM    , L1S(N_("interstellar matter")) },
+	{ NebEMO    , L1S(N_("emission object")) },
+	{ NebBLL    , L1S(N_("BL Lac object")) },
+	{ NebBLA    , L1S(N_("blazar")) },
+	{ NebMolCld , L1S(N_("molecular cloud")) },
+	{ NebYSO    , L1S(N_("young stellar object")) },
+	{ NebPossQSO, L1S(N_("possible quasar")) },
+	{ NebPossPN , L1S(N_("possible planetary nebula")) },
+	{ NebPPN    , L1S(N_("protoplanetary nebula")) },
+	{ NebStar   , L1S(N_("star")) },
+	{ NebSymbioticStar   , L1S(N_("symbiotic star")) },
+	{ NebEmissionLineStar, L1S(N_("emission-line star")) },
+	{ NebSNC     , L1S(N_("supernova candidate")) },
+	{ NebSNRC    , L1S(N_("supernova remnant candidate")) },
+	{ NebGxCl    , L1S(N_("cluster of galaxies")) },
+	{ NebPartOfGx, L1S(N_("part of a galaxy")) },
+	{ NebRegion  , L1S(N_("region of the sky")) },
+	{ NebUnknown , L1S(N_("object of unknown nature")) }
 };
 
 Nebula::Nebula()
@@ -128,18 +130,18 @@ Nebula::Nebula()
 	, St_nb(0)
 	, Ru_nb(0)
 	, VdBHa_nb(0)
-	, Ced_nb("")
-	, PK_nb("")
-	, PNG_nb("")
-	, SNRG_nb("")
-	, ACO_nb("")
-	, HCG_nb("")
-	, ESO_nb("")
-	, VdBH_nb("")
+	, Ced_nb()
+	, PK_nb()
+	, PNG_nb()
+	, SNRG_nb()
+	, ACO_nb()
+	, HCG_nb()
+	, ESO_nb()
+	, VdBH_nb()
 	, withoutID(false)
-	, nameI18("")
-	, discoverer("")
-	, discoveryYear("")
+	, nameI18()
+	, discoverer()
+	, discoveryYear()
 	, mTypeString()
 	, bMag(99.)
 	, vMag(99.)
@@ -203,14 +205,53 @@ QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGro
 	return res;
 }
 
+QString Nebula::getScreenLabel() const
+{
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	QStringList cLabels = getCultureLabels(scMgr->getScreenLabelStyle());
+
+	// TODO: Decide whether SCs with DSO names should only show common names of these objects, or use common names for all objects.
+
+	QString nameI18n = scMgr->currentSkycultureUsesCommonNames() ? getNameI18n() : QString();
+	return (cLabels.isEmpty() ? nameI18n : cLabels.constFirst());
+}
+
+QString Nebula::getInfoLabel() const
+{
+	return getCultureLabels(GETSTELMODULE(StelSkyCultureMgr)->getInfoLabelStyle()).join(" - ");
+}
+
+QStringList Nebula::getCultureLabels(StelObject::CulturalDisplayStyle style) const
+{
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	QStringList labels;
+	if (culturalNames.isEmpty())
+		return labels;
+	for (auto &cName: culturalNames)
+		{
+			const QString modernName= nameI18.isEmpty() ? getDSODesignation() : nameI18;
+			labels << scMgr->createCulturalLabel(cName, style, modernName);
+		}
+	labels.removeDuplicates();
+	labels.removeAll(QString(""));
+	labels.removeAll(QString());
+	return labels;
+}
+
+
 QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
+	// rtl tracks the right-to-left status of the text in the current position.
+	const bool rtl = StelApp::getInstance().getLocaleMgr().isSkyRTL();
 	QString str;
 	QTextStream oss(&str);
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	if ((flags&Name) || (flags&CatalogNumber))
-		oss << "<h2>";
+		oss << (rtl ? "<h2 dir=\"rtl\">" : "<h2 dir=\"ltr\">");
+
+	if (!culturalNames.isEmpty() && flags&Name)
+		oss << getInfoLabel() << "<br/>";
 
 	if (!nameI18.isEmpty() && flags&Name)
 	{
@@ -325,13 +366,12 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (flags&Distance)
 	{
-		float distance, distanceErr, distanceLY, distanceErrLY;
 		if (qAbs(parallax)>0.f)
 		{
 			QString dx;
 			// distance in light years from parallax
-			distance = 3.162e-5f/(qAbs(parallax)*4.848e-9f);
-			distanceErr = 0.f;
+			float distance = 3.162e-5f/(qAbs(parallax)*4.848e-9f);
+			float distanceErr = 0.f;
 
 			if (parallaxErr>0.f)
 				distanceErr = qAbs(3.162e-5f/(qAbs(parallaxErr + parallax)*4.848e-9f) - distance);
@@ -359,10 +399,10 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			//TRANSLATORS: Unit of measure for distance - Light Years
 			QString duly = qc_("ly", "distance");
 
-			distance = oDistance;
-			distanceErr = oDistanceErr;
-			distanceLY = oDistance*dc;
-			distanceErrLY= oDistanceErr*dc;
+			float distance = oDistance;
+			float distanceErr = oDistanceErr;
+			float distanceLY = oDistance*dc;
+			float distanceErrLY= oDistanceErr*dc;
 			if (oDistance>=1000.f)
 			{
 				distance = oDistance/1000.f;
@@ -463,6 +503,7 @@ QVariantMap Nebula::getInfoMap(const StelCore *core) const
 	map.insert("axis-minor-deg", StelUtils::radToDecDegStr(axisMinor, 5));
 	map.insert("axis-minor-dms", StelUtils::radToDmsPStr(axisMinor, 2));
 	map.insert("orientation-angle", axisPA);
+	map.insert("cultural-names", getCultureLabels(StelObject::CulturalDisplayStyle::Native_Pronounce_Translit_Translated_IPA));
 
 	// TODO: more? Names? Data?
 	return map;
@@ -470,7 +511,7 @@ QVariantMap Nebula::getInfoMap(const StelCore *core) const
 
 QString Nebula::getEnglishAliases() const
 {
-	QString aliases = "";	
+	QString aliases;
 	int asize = englishAliases.size();
 	if (asize!=0)
 	{
@@ -500,7 +541,7 @@ QString Nebula::getEnglishAliases() const
 
 QString Nebula::getI18nAliases() const
 {
-	QString aliases = "";
+	QString aliases;
 	int asize = nameI18Aliases.size();
 	if (asize!=0)
 	{
@@ -1110,7 +1151,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 
 	const float shift = 15.f + (drawHintProportional ? getHintSize(sPainter) : 0.f);
 
-	QString str = getNameI18n();
+	QString str = getScreenLabel();
 	if (str.isEmpty() || designationUsage)
 		str = getDSODesignation();
 
@@ -1471,54 +1512,32 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		QStringList rtxt;
 		static const QStringList occlass = { "I", "II", "III", "IV"};
 		static const QStringList ocrich = { "p", "m", "r"};
-		switch(occlass.indexOf(OClMatch.captured(1).trimmed()))
-		{
-			case 0:
-				rtxt << qc_("strong central concentration of stars", "Trumpler's Concentration Class");
-				break;
-			case 1:
-				rtxt << qc_("little central concentration of stars", "Trumpler's Concentration Class");
-				break;
-			case 2:
-				rtxt << qc_("no noticeable concentration of stars", "Trumpler's Concentration Class");
-				break;
-			case 3:
-				rtxt << qc_("a star field condensation", "Trumpler's Concentration Class");
-				break;
-			default:
-				rtxt << qc_("undocumented concentration class", "Trumpler's Concentration Class");
-				break;
-		}
-		switch(OClMatch.captured(2).toInt())
-		{
-			case 1:
-				rtxt << qc_("small brightness range of cluster members", "Trumpler's Brightness Class");
-				break;
-			case 2:
-				rtxt << qc_("medium brightness range of cluster members", "Trumpler's Brightness Class");
-				break;
-			case 3:
-				rtxt << qc_("large brightness range of cluster members", "Trumpler's Brightness Class");
-				break;
-			default:
-				rtxt << qc_("undocumented brightness range of cluster members", "Trumpler's Brightness Class");
-				break;
-		}
-		switch(ocrich.indexOf(OClMatch.captured(3).trimmed()))
-		{
-			case 0:
-				rtxt << qc_("poor cluster with less than 50 stars", "Trumpler's Number of Members Class");
-				break;
-			case 1:
-				rtxt << qc_("moderately rich cluster with 50-100 stars", "Trumpler's Number of Members Class");
-				break;
-			case 2:
-				rtxt << qc_("rich cluster with more than 100 stars", "Trumpler's Number of Members Class");
-				break;
-			default:
-				rtxt << qc_("undocumented number of members class", "Trumpler's Number of Members Class");
-				break;
-		}
+
+		QStringList occlassStrings = {
+			qc_("strong central concentration of stars", "Trumpler's Concentration Class"),
+			qc_("little central concentration of stars", "Trumpler's Concentration Class"),
+			qc_("no noticeable concentration of stars", "Trumpler's Concentration Class"),
+			qc_("a star field condensation", "Trumpler's Concentration Class")};
+
+		rtxt << occlassStrings.value(occlass.indexOf(OClMatch.captured(1).trimmed()),
+			 qc_("undocumented concentration class", "Trumpler's Concentration Class"));
+
+		QStringList oclBRangeStrings = {
+			qc_("small brightness range of cluster members", "Trumpler's Brightness Class"),
+			qc_("medium brightness range of cluster members", "Trumpler's Brightness Class"),
+			qc_("large brightness range of cluster members", "Trumpler's Brightness Class")};
+
+		rtxt << oclBRangeStrings.value(OClMatch.captured(2).toInt()-1,
+			qc_("undocumented brightness range of cluster members", "Trumpler's Brightness Class"));
+
+		QStringList ocrichStrings = {
+			qc_("poor cluster with less than 50 stars", "Trumpler's Number of Members Class"),
+			qc_("moderately rich cluster with 50-100 stars", "Trumpler's Number of Members Class"),
+			qc_("rich cluster with more than 100 stars", "Trumpler's Number of Members Class")};
+
+		rtxt << ocrichStrings.value(ocrich.indexOf(OClMatch.captured(3).trimmed()),
+			qc_("undocumented number of members class", "Trumpler's Number of Members Class"));
+
 		if (!OClMatch.captured(4).trimmed().isEmpty())
 			rtxt << qc_("the cluster lies within nebulosity", "nebulosity factor of open clusters");
 
@@ -1630,9 +1649,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 	if (nType==NebSNR)
 	{
-		QString delim = "";
-		if (!r.isEmpty())
-			delim = "; ";
+		const QString delim =r.isEmpty() ? "" : "; ";
 
 		if (mTypeString.contains("S") && !mTypeString.contains("S?"))
 			r = qc_("remnant shows a shell radio structure", "supernova remnant structure classification") + delim + r;

@@ -34,6 +34,7 @@
 #include <QTimer>
 #include <QPixmap>
 #include <QColor>
+#include <QFont>
 #include <QSettings>
 #include <QMouseEvent>
 #include <cmath>
@@ -97,7 +98,6 @@ ArchaeoLines::ArchaeoLines()
 	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("ArchaeoLines");
-	font.setPixelSize(16);
 	core=StelApp::getInstance().getCore();
 	Q_ASSERT(core);
 	objMgr=GETSTELMODULE(StelObjectMgr);
@@ -1364,6 +1364,8 @@ void alViewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direct
 	direc.normalize();
 	//const Vec4f tmpColor = d->sPainter->getColor();
 	//d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
+	const float ppx = static_cast<float>(d->sPainter->getProjector()->getDevicePixelsPerPixel());
+
 	const int viewportWidth  = d->sPainter->getProjector()->getViewportWidth();
 	const int viewportHeight = d->sPainter->getProjector()->getViewportHeight();
 
@@ -1376,7 +1378,7 @@ void alViewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direct
 	if (angleDeg>90.f || angleDeg<-90.f)
 	{
 		angleDeg+=180.f;
-		xshift=-d->sPainter->getFontMetrics().boundingRect(text).width()-6.f;
+		xshift=-d->sPainter->getFontMetrics().boundingRect(text).width()-6.f*ppx;
 	}
 
 	// Copy tweak from GridlineMgr
@@ -1396,7 +1398,7 @@ void alViewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direct
 	// It seems bottom edge is always OK!
 
 
-	d->sPainter->drawText(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), text, angleDeg, xshift, 3);
+	d->sPainter->drawText(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), text, angleDeg, xshift*ppx, 3*ppx);
 	//d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]); // RESTORE
 	d->sPainter->setBlending(true);
 }
@@ -1513,6 +1515,8 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 	//Vec4f textColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 
 	ALViewportEdgeIntersectCallbackData userData(&sPainter);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	sPainter.setFont(font);
 	//userData.textColor = textColor;
 	userData.text = (isLabelVisible() ? label : "");

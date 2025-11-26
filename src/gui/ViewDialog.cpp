@@ -21,6 +21,7 @@
 
 #include "ViewDialog.hpp"
 #include "ui_viewDialog.h"
+#include <QMessageBox>
 #include "AddRemoveLandscapesDialog.hpp"
 #include "AtmosphereDialog.hpp"
 #include "SkylightDialog.hpp"
@@ -31,8 +32,10 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModule.hpp"
+#include "StelMainView.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
+#include "ConstellationMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelModuleMgr.hpp"
@@ -72,6 +75,27 @@ struct Page
 		Surveys,
 
 		COUNT
+	};
+};
+
+struct HipsRole
+{
+	enum
+	{
+		URL = Qt::UserRole,
+		PlanetEnglishName,
+		ItemType,
+		SurveyType,
+	};
+};
+
+struct HipsItemType
+{
+	enum
+	{
+		Survey, // The HiPS itself
+		Planet, // The item representing a planet and containing groups of surveys
+		Group,  // Group of planetary surveys: albedo+normals+horizons
 	};
 };
 
@@ -122,8 +146,11 @@ void ViewDialog::retranslate()
 		populatePlanetMagnitudeAlgorithmsList();
 		populatePlanetMagnitudeAlgorithmDescription();
 		ui->lightPollutionWidget->retranslate();
+
 		populateHipsGroups();
+		clearHips();
 		updateHips();
+
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
 		updateTabBarListWidgetWidth();
@@ -166,7 +193,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 	// Kinetic scrolling
 	kineticScrollingList << ui->projectionListWidget << ui->culturesListWidget << ui->skyCultureTextBrowser << ui->landscapesListWidget
-			     << ui->landscapeTextBrowser << ui->surveysListWidget << ui->surveysTextBrowser;
+			     << ui->landscapeTextBrowser << ui->surveysTreeWidget << ui->surveysTextBrowser;
 	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{
@@ -450,6 +477,7 @@ void ViewDialog::createDialogContent()
 	// The thickness of lines
 	connectIntProperty(ui->lineThicknessSpinBox,                "GridLinesMgr.lineThickness");
 	connectIntProperty(ui->partThicknessSpinBox,                "GridLinesMgr.partThickness");
+	connectIntProperty(ui->pointSizeSpinBox,	            "GridLinesMgr.pointSize");
 	connectBoolProperty(ui->equatorPartsCheckBox,               "GridLinesMgr.equatorPartsDisplayed");
 	connectBoolProperty(ui->equatorJ2000PartsCheckBox,          "GridLinesMgr.equatorJ2000PartsDisplayed");
 	connectBoolProperty(ui->fixedEquatorPartsCheckBox,          "GridLinesMgr.fixedEquatorPartsDisplayed");
@@ -530,9 +558,15 @@ void ViewDialog::createDialogContent()
 	ui->colorCardinalPoints          ->setup("LandscapeMgr.cardinalPointsColor",            "color/cardinal_color");
 	ui->colorCompassMarks            ->setup("SpecialMarkersMgr.compassMarksColor",         "color/compass_marks_color");
 
+#if (QT_VERSION<QT_VERSION_CHECK(6,7,0))
 	connect(ui->showCardinalPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
 	connect(ui->showOrdinal8WRPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
 	connect(ui->showOrdinal16WRPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
+#else
+	connect(ui->showCardinalPointsCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)), this, SLOT(setSelectedCardinalCheckBoxes()));
+	connect(ui->showOrdinal8WRPointsCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)), this, SLOT(setSelectedCardinalCheckBoxes()));
+	connect(ui->showOrdinal16WRPointsCheckBox, SIGNAL(checkStateChanged(Qt::CheckState)), this, SLOT(setSelectedCardinalCheckBoxes()));
+#endif
 	setSelectedCardinalCheckBoxes();
 
 	// Projection
@@ -549,42 +583,90 @@ void ViewDialog::createDialogContent()
 	        this, &ViewDialog::updateDefaultSkyCulture);
 	updateDefaultSkyCulture();
 
-	// allow to display short names and inhibit translation.
-	connectIntProperty(ui->skyCultureNamesStyleComboBox,		"ConstellationMgr.constellationDisplayStyle");
-	connectCheckBox(ui->nativePlanetNamesCheckBox,			"actionShow_Skyculture_NativePlanetNames");
-	connectCheckBox(ui->showConstellationLinesCheckBox,			"actionShow_Constellation_Lines");
-	connectIntProperty(ui->constellationLineThicknessSpinBox,		"ConstellationMgr.constellationLineThickness");
-	connectCheckBox(ui->showConstellationLabelsCheckBox,		"actionShow_Constellation_Labels");
-	connectCheckBox(ui->showConstellationBoundariesCheckBox,		"actionShow_Constellation_Boundaries");
-	connectIntProperty(ui->constellationBoundariesThicknessSpinBox,	"ConstellationMgr.constellationBoundariesThickness");
-	connectCheckBox(ui->showConstellationArtCheckBox,			"actionShow_Constellation_Art");
-	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,		"ConstellationMgr.artIntensity");
+	configureSkyCultureCheckboxes();
+	StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	connect(scMgr, &StelSkyCultureMgr::screenLabelStyleChanged, this, &ViewDialog::configureSkyCultureCheckboxes);
+	connect(scMgr, &StelSkyCultureMgr::infoLabelStyleChanged, this, &ViewDialog::configureSkyCultureCheckboxes);
+
+	connect(ui->infoLabelNativeCheckBox           , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelPronounceCheckBox        , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelTransliterationCheckBox  , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelTranslationCheckBox      , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelIPACheckBox              , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelBynameCheckBox           , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+	connect(ui->infoLabelModernCheckBox           , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureInfoStyleFromCheckboxes);
+
+	connect(ui->screenLabelNativeCheckBox         , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelPronounceCheckBox      , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelTransliterationCheckBox, &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelTranslationCheckBox    , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelIPACheckBox            , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelBynameCheckBox         , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+	connect(ui->screenLabelModernCheckBox         , &QCheckBox::clicked, this, &ViewDialog::updateSkyCultureScreenStyleFromCheckboxes);
+
+	connectBoolProperty(ui->abbreviatedNamesCheckBox,               "StelSkyCultureMgr.flagUseAbbreviatedNames");
+	connectCheckBox(ui->showConstellationLinesCheckBox,             "actionShow_Constellation_Lines");
+	connectIntProperty(ui->constellationLineThicknessSpinBox,       "ConstellationMgr.constellationLineThickness");
+	connectCheckBox(ui->showConstellationLabelsCheckBox,            "actionShow_Constellation_Labels");
+	connectCheckBox(ui->showConstellationBoundariesCheckBox,        "actionShow_Constellation_Boundaries");
+	connectIntProperty(ui->constellationBoundariesThicknessSpinBox,	"ConstellationMgr.boundariesThickness");
+	connectCheckBox(ui->showConstellationArtCheckBox,               "actionShow_Constellation_Art");
+	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,    "ConstellationMgr.artIntensity");
 
 	// fade duration
-	connectDoubleProperty(ui->artFadeDurationDoubleSpinBox,		"ConstellationMgr.artFadeDuration");
-	connectDoubleProperty(ui->boundariesFadeDurationDoubleSpinBox,	"ConstellationMgr.boundariesFadeDuration");
-	connectDoubleProperty(ui->linesFadeDurationDoubleSpinBox,		"ConstellationMgr.linesFadeDuration");
-	connectDoubleProperty(ui->namesFadeDurationDoubleSpinBox,		"ConstellationMgr.namesFadeDuration");
-	connectDoubleProperty(ui->asterismNamesFadeDurationDoubleSpinBox,	"AsterismMgr.namesFadeDuration");
-	connectDoubleProperty(ui->asterismLinesFadeDurationDoubleSpinBox,	"AsterismMgr.linesFadeDuration");
-	connectDoubleProperty(ui->rayHelpersFadeDurationDoubleSpinBox,	"AsterismMgr.rayHelpersFadeDuration");
+	connectDoubleProperty(ui->artFadeDurationDoubleSpinBox,           "ConstellationMgr.artFadeDuration");
+	connectDoubleProperty(ui->boundariesFadeDurationDoubleSpinBox,    "ConstellationMgr.boundariesFadeDuration");
+	connectDoubleProperty(ui->linesFadeDurationDoubleSpinBox,         "ConstellationMgr.linesFadeDuration");
+	connectDoubleProperty(ui->namesFadeDurationDoubleSpinBox,         "ConstellationMgr.namesFadeDuration");
+	connectDoubleProperty(ui->asterismNamesFadeDurationDoubleSpinBox, "AsterismMgr.namesFadeDuration");
+	connectDoubleProperty(ui->asterismLinesFadeDurationDoubleSpinBox, "AsterismMgr.linesFadeDuration");
+	connectDoubleProperty(ui->rayHelpersFadeDurationDoubleSpinBox,    "AsterismMgr.rayHelpersFadeDuration");
 
 	ui->colorConstellationBoundaries->setup("ConstellationMgr.boundariesColor", "color/const_boundary_color");
 	ui->colorConstellationLabels    ->setup("ConstellationMgr.namesColor",      "color/const_names_color");
 	ui->colorConstellationLines     ->setup("ConstellationMgr.linesColor",      "color/const_lines_color");
 
-	connectCheckBox(ui->showAsterismLinesCheckBox,		"actionShow_Asterism_Lines");
-	connectIntProperty(ui->asterismLineThicknessSpinBox,		"AsterismMgr.asterismLineThickness");
-	connectCheckBox(ui->showAsterismLabelsCheckBox,		"actionShow_Asterism_Labels");
-	connectCheckBox(ui->showRayHelpersCheckBox,		"actionShow_Ray_Helpers");
-	connectIntProperty(ui->rayHelperThicknessSpinBox,		"AsterismMgr.rayHelperThickness");
+	connectCheckBox(ui->showAsterismLinesCheckBox,          "actionShow_Asterism_Lines");
+	connectIntProperty(ui->asterismLineThicknessSpinBox,    "AsterismMgr.asterismLineThickness");
+	connectCheckBox(ui->showAsterismLabelsCheckBox,         "actionShow_Asterism_Labels");
+	connectCheckBox(ui->showRayHelpersCheckBox,             "actionShow_Ray_Helpers");
+	connectIntProperty(ui->rayHelperThicknessSpinBox,       "AsterismMgr.rayHelperThickness");
 
 	connectBoolProperty(ui->selectSingleConstellationCheckBox, "ConstellationMgr.isolateSelected");
-	connectBoolProperty(ui->constellationPickCheckBox, "ConstellationMgr.flagConstellationPick");
+	connectBoolProperty(ui->constellationPickCheckBox,         "ConstellationMgr.flagConstellationPick");
 
 	ui->colorAsterismLabels->setup("AsterismMgr.namesColor",      "color/asterism_names_color");
 	ui->colorAsterismLines ->setup("AsterismMgr.linesColor",      "color/asterism_lines_color");
 	ui->colorRayHelpers    ->setup("AsterismMgr.rayHelpersColor", "color/rayhelper_lines_color");
+
+	QSettings *conf=StelApp::getInstance().getSettings();
+	if (conf->value("gui/skyculture_enable_hulls", "false").toBool())
+	{
+		connectCheckBox(ui->constellationHullsCheckBox,                          "actionShow_Constellation_Hulls");
+		ui->constellationHullsColorButton                               ->setup("ConstellationMgr.hullsColor",  "color/const_hulls_color");
+		connectIntProperty(ui->constellationHullsThicknessSpinBox,              "ConstellationMgr.hullsThickness");
+		connectDoubleProperty(ui->constellationHullsFadeDurationDoubleSpinBox,  "ConstellationMgr.hullsFadeDuration");
+	}
+	else
+	{
+		ui->constellationHullsCheckBox->hide();
+		ui->constellationHullsColorButton->hide();
+		ui->constellationHullsThicknessSpinBox->hide();
+		ui->constellationHullsFadeDurationDoubleSpinBox->hide();
+	}
+
+	connectBoolProperty(ui->zodiacCheckBox, "ConstellationMgr.zodiacDisplayed");
+	connectBoolProperty(ui->lunarSystemCheckBox, "ConstellationMgr.lunarSystemDisplayed");
+	ui->zodiacColorButton->setup("ConstellationMgr.zodiacColor", "color/skyculture_zodiac_color");
+	ui->lunarSystemColorButton->setup("ConstellationMgr.lunarSystemColor", "color/skyculture_lunarsystem_color");
+
+	connectIntProperty(ui->zodiacThicknessSpinBox,	                "ConstellationMgr.zodiacThickness");
+	connectIntProperty(ui->lunarSystemThicknessSpinBox,	        "ConstellationMgr.lunarSystemThickness");
+	connectDoubleProperty(ui->zodiacFadeDurationDoubleSpinBox,      "ConstellationMgr.zodiacFadeDuration");
+	connectDoubleProperty(ui->lunarSystemFadeDurationDoubleSpinBox, "ConstellationMgr.lunarSystemFadeDuration");
+
+	connect(ui->zodiacLabelComboBox,      SIGNAL(currentIndexChanged(int)), this, SLOT(setZodiacLabelStyle(int)));
+	connect(ui->lunarSystemLabelComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setLunarSystemLabelStyle(int)));
 
 	// Font selection
 	connectIntProperty(ui->constellationsFontSizeSpinBox, "ConstellationMgr.fontSize");
@@ -604,8 +686,8 @@ void ViewDialog::createDialogContent()
 
 	connect(ui->surveyTypeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateHips()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(updateHips()));
-	connect(ui->surveysListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(updateHips()), Qt::QueuedConnection);
-	connect(ui->surveysListWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(hipsListItemChanged(QListWidgetItem*)));
+	connect(ui->surveysTreeWidget, &QTreeWidget::currentItemChanged, this, &ViewDialog::updateHipsText, Qt::QueuedConnection);
+	connect(ui->surveysTreeWidget, &QTreeWidget::itemChanged, this, &ViewDialog::hipsListItemChanged);
 	connect(ui->surveysFilter, &QLineEdit::textChanged, this, &ViewDialog::filterSurveys);
 	updateHips();
 
@@ -674,45 +756,92 @@ void ViewDialog::populateNomenclatureControls(bool flag)
 // Heuristic function to decide in which group to put a survey.
 static QString getHipsType(const HipsSurveyP hips)
 {
-	QJsonObject properties = hips->property("properties").toJsonObject();
 	if (!hips->isPlanetarySurvey())
 		return "dss";
-	if (properties["type"].toString() == "planet") // TODO: switch to use hips->isPlanetarySurvey() and multiple surveys for Solar system bodies
+	const auto type = hips->getType();
+	if (type == "planet" || type == "planet-normal" || type == "planet-horizon")
 		return "sol";
 	return "other";
+}
+
+void ViewDialog::updateHipsText()
+{
+	const auto currentItem = ui->surveysTreeWidget->currentItem();
+	if (!currentItem)
+	{
+		ui->surveysTextBrowser->setText("");
+		return;
+	}
+
+	const auto hipsmgr = qobject_cast<HipsMgr*>(StelApp::getInstance().getModule("HipsMgr"));
+	const auto url = currentItem->data(0, HipsRole::URL).toString();
+	const auto hips = hipsmgr->getSurveyByUrl(url);
+	if (!hips)
+	{
+		ui->surveysTextBrowser->setText("");
+		return;
+	}
+	QJsonObject props = hips->property("properties").toJsonObject();
+	QString html = QString("<h1>%1</h1>\n").arg(props["obs_title"].toString());
+	if (props.contains("obs_copyright") && props.contains("obs_copyright_url"))
+	{
+		html += QString("<p>Copyright <a href='%2'>%1</a></p>\n")
+				.arg(props["obs_copyright"].toString(), props["obs_copyright_url"].toString());
+	}
+	html += QString("<p>%1</p>\n").arg(props["obs_description"].toString());
+	html += "<h2>" + q_("properties") + "</h2>\n<ul>\n";
+	for (auto iter = props.constBegin(); iter != props.constEnd(); iter++)
+	{
+		html += QString("<li><b>%1</b> %2</li>\n").arg(iter.key(), iter.value().toString());
+	}
+	html += "</ul>\n";
+	const auto gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+		ui->surveysTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	ui->surveysTextBrowser->setHtml(html);
+}
+
+void ViewDialog::clearHips()
+{
+	ui->surveysTreeWidget->clear();
+	planetarySurveys.clear();
+	surveysInTheList.clear();
+	selectedSurveyType.clear();
 }
 
 void ViewDialog::updateHips()
 {
 	if (!ui->page_surveys->isVisible()) return;
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
+	const auto hipsmgr = qobject_cast<HipsMgr*>(StelApp::getInstance().getModule("HipsMgr"));
 	QMetaObject::invokeMethod(hipsmgr, "loadSources");
 
 	QComboBox* typeComboBox = ui->surveyTypeComboBox;
-	QVariant selectedType = typeComboBox->itemData(typeComboBox->currentIndex());
+	auto selectedType = typeComboBox->itemData(typeComboBox->currentIndex()).toString();
 	if (selectedType.isNull())
 		selectedType = "dss";
 
 	// Update survey list.
-	QListWidget* l = ui->surveysListWidget;
+	auto*const l = ui->surveysTreeWidget;
 
 	if (!hipsmgr->property("loaded").toBool())
 	{
-		l->clear();
-		new QListWidgetItem(q_("Loading..."), l);
+		clearHips();
+		new QTreeWidgetItem(l, {q_("Loading...")});
 		return;
 	}
 
-	QJsonObject currentInfo;
-	QString currentSurvey = l->currentItem() ? l->currentItem()->data(Qt::UserRole).toString() : "";
-	QListWidgetItem* currentItem = nullptr;
-	HipsSurveyP currentHips;
-
 	l->blockSignals(true);
-	l->clear();
+	if (selectedSurveyType != selectedType)
+	{
+		clearHips();
+		selectedSurveyType = selectedType;
+	}
 	const QList<HipsSurveyP> hipslist = hipsmgr->property("surveys").value<QList<HipsSurveyP>>();
 
+	const bool selectedIsPlanetary = selectedType == "sol";
+	l->setRootIsDecorated(selectedIsPlanetary);
+
+	const auto& solarSys = GETSTELMODULE(SolarSystem);
 	for (auto &hips: hipslist)
 	{
 		if (getHipsType(hips) != selectedType)
@@ -720,49 +849,112 @@ void ViewDialog::updateHips()
 		QString url = hips->property("url").toString();
 		QJsonObject properties = hips->property("properties").toJsonObject();
 		QString title = properties["obs_title"].toString();
-		if (title.isEmpty())
+		if (title.isEmpty() || url.isEmpty())
 			continue;
-		QListWidgetItem* item = new QListWidgetItem(title, l);
-		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
-		item->setCheckState(hips->property("visible").toBool() ? Qt::Checked : Qt::Unchecked);
-		item->setData(Qt::UserRole, url);
-		if (url == currentSurvey)
-		{
-			currentItem = item;
-			currentHips = hips;
-		}
-		disconnect(hips.data(), nullptr, this, nullptr);
-		connect(hips.data(), SIGNAL(statusChanged()), this, SLOT(updateHips()));
-	}
-	l->sortItems(Qt::AscendingOrder);
-	l->setCurrentItem(currentItem);
-	l->scrollToItem(currentItem);
-	l->blockSignals(false);
 
-	if (!currentHips)
-	{
-		ui->surveysTextBrowser->setText("");
-	}
-	else
-	{
-		QJsonObject props = currentHips->property("properties").toJsonObject();
-		QString html = QString("<h1>%1</h1>\n").arg(props["obs_title"].toString());
-		if (props.contains("obs_copyright") && props.contains("obs_copyright_url"))
+		// Don't add the survey if it's already present
+		const auto surveyItemIt = surveysInTheList.find(url);
+		if (surveyItemIt != surveysInTheList.end())
+			continue;
+
+		QTreeWidgetItem* surveyItem = nullptr;
+		if (selectedIsPlanetary)
 		{
-			html += QString("<p>Copyright <a href='%2'>%1</a></p>\n")
-					.arg(props["obs_copyright"].toString(), props["obs_copyright_url"].toString());
+			const auto& frame = hips->getFrame();
+			const auto& englishName = hips->frameToPlanetName(frame);
+			const auto& group = hips->getGroup();
+			auto& planetData = planetarySurveys[englishName];
+			if(!planetData.planetItem)
+			{
+				const auto& planet = solarSys->searchByEnglishName(englishName);
+				if (!planet)
+				{
+					qWarning().nospace() << "Found a planetary survey with unknown frame: "
+					                     << frame << ". Skipping it.";
+					continue;
+				}
+				planetData.planetItem = new QTreeWidgetItem(l, {planet->getNameI18n()});
+				planetData.planetItem->setData(0, HipsRole::ItemType, HipsItemType::Planet);
+				planetData.planetItem->setData(0, HipsRole::PlanetEnglishName, englishName);
+			}
+			QTreeWidgetItem*& groupItem = planetData.groupsMap[group];
+			if (!groupItem)
+			{
+				groupItem = new QTreeWidgetItem(planetData.planetItem, {group});
+				groupItem->setData(0, HipsRole::ItemType, HipsItemType::Group);
+				groupItem->setFlags(groupItem->flags() | Qt::ItemIsUserCheckable);
+				groupItem->setCheckState(0, hips->property("visible").toBool() ? Qt::Checked : Qt::Unchecked);
+			}
+			static const QHash<QString, QString> typeNames = {
+				{L1S("planet"),         q_("Albedo")},
+				{L1S("planet-normal"),  q_("Normal map")},
+				{L1S("planet-horizon"), q_("Horizon map")},
+			};
+			const auto type = hips->getType();
+			QString typeName = type;
+			if (const auto it = typeNames.find(type); it != typeNames.end())
+				typeName = it.value();
+
+			// Set the first survey of each type as checked by default
+			auto checkState = Qt::Checked;
+			const bool newHipsVisible = hips->property("visible").toBool();
+			if (newHipsVisible)
+			{
+				// The group is also enabled if the survey being added is visible
+				groupItem->setCheckState(0, Qt::Checked);
+			}
+			for (int n = 0; n < groupItem->childCount(); ++n)
+			{
+				const auto oldHipsItem = groupItem->child(n);
+				Q_ASSERT(oldHipsItem->data(0, HipsRole::ItemType).toInt() == HipsItemType::Survey);
+
+				if (oldHipsItem->data(0, HipsRole::SurveyType).toString() != type)
+					continue;
+				bool oldHipsItemChecked = oldHipsItem->checkState(0) == Qt::Checked;
+				if (newHipsVisible && oldHipsItemChecked)
+				{
+					const auto url = oldHipsItem->data(0, HipsRole::URL).toString();
+					const auto oldHips = hipsmgr->getSurveyByUrl(url);
+					Q_ASSERT(oldHips);
+					if (oldHips && !oldHips->property("visible").toBool())
+					{
+						checkState = Qt::Checked;
+						oldHipsItem->setCheckState(0, Qt::Unchecked);
+						oldHipsItemChecked = false;
+					}
+				}
+				if (!newHipsVisible && oldHipsItemChecked)
+				{
+					// A checked survey already exists, don't check the new one
+					checkState = Qt::Unchecked;
+					break;
+				}
+			}
+
+			surveyItem = new QTreeWidgetItem(groupItem, {title, typeName});
+			surveyItem->setFlags(surveyItem->flags() | Qt::ItemIsUserCheckable);
+			surveyItem->setCheckState(0, checkState);
 		}
-		html += QString("<p>%1</p>\n").arg(props["obs_description"].toString());
-		html += "<h2>" + q_("properties") + "</h2>\n<ul>\n";
-		for (auto iter = props.constBegin(); iter != props.constEnd(); iter++)
+		else
 		{
-			html += QString("<li><b>%1</b> %2</li>\n").arg(iter.key(), iter.value().toString());
+			surveyItem = new QTreeWidgetItem(l, {title});
+			surveyItem->setFlags(surveyItem->flags() | Qt::ItemIsUserCheckable);
+			surveyItem->setCheckState(0, hips->property("visible").toBool() ? Qt::Checked
+			                                                                : Qt::Unchecked);
 		}
-		html += "</ul>\n";
-		if (gui)
-			ui->surveysTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-		ui->surveysTextBrowser->setHtml(html);
+
+		surveysInTheList[url] = surveyItem;
+		surveyItem->setData(0, HipsRole::ItemType, HipsItemType::Survey);
+		surveyItem->setData(0, HipsRole::URL, url);
+		surveyItem->setData(0, HipsRole::SurveyType, hips->getType());
+		disconnect(hips.data(), nullptr, this, nullptr);
+		connect(hips.data(), &HipsSurvey::statusChanged, this, &ViewDialog::updateHipsText);
 	}
+	l->sortItems(0, Qt::AscendingOrder);
+	if (const auto currentItem = l->currentItem())
+		l->scrollToItem(currentItem);
+
+	l->blockSignals(false);
 	filterSurveys();
 }
 
@@ -807,35 +999,131 @@ void ViewDialog::toggleHipsDialog()
 void ViewDialog::filterSurveys()
 {
 	const QString pattern = ui->surveysFilter->text().simplified();
-	const auto& list = *ui->surveysListWidget;
-	for (int row = 0; row < list.count(); ++row)
+	const auto& list = *ui->surveysTreeWidget;
+	for (int row = 0; row < list.topLevelItemCount(); ++row)
 	{
-		auto& item = *list.item(row);
-		const QString text = item.text().simplified();
+		auto& item = *list.topLevelItem(row);
+		const QString text = item.text(0).simplified();
 		const bool show = pattern.isEmpty() || text.contains(pattern, Qt::CaseInsensitive);
 		item.setHidden(!show);
 	}
 }
 
-void ViewDialog::hipsListItemChanged(QListWidgetItem* item)
+void ViewDialog::hipsListItemChanged(QTreeWidgetItem* item)
 {
-	QListWidget* l = item->listWidget();
+	auto*const l = item->treeWidget();
 	l->blockSignals(true);
-	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
-	QString url = item->data(Qt::UserRole).toString();
-	HipsSurveyP hips;
-	QMetaObject::invokeMethod(hipsmgr, "getSurveyByUrl", Qt::DirectConnection,
-			Q_RETURN_ARG(HipsSurveyP, hips), Q_ARG(QString, url));
-	Q_ASSERT(hips);
-	if (item->checkState() == Qt::Checked)
+	const auto hipsmgr = qobject_cast<HipsMgr*>(StelApp::getInstance().getModule("HipsMgr"));
+
+	switch (item->data(0, HipsRole::ItemType).toInt())
 	{
-		l->setCurrentItem(item);
-		hips->setProperty("visible", true);
-	}
-	else
+	case HipsItemType::Survey:
 	{
-		hips->setProperty("visible", false);
+		const auto url = item->data(0, HipsRole::URL).toString();
+		if (const auto group = item->parent())
+		{
+			Q_ASSERT(group->data(0, HipsRole::ItemType).toInt() == HipsItemType::Group);
+			for (int n = 0; n < group->childCount(); ++n)
+			{
+				const auto surveyItem = group->child(n);
+				Q_ASSERT(surveyItem->data(0, HipsRole::ItemType).toInt() == HipsItemType::Survey);
+				if (surveyItem == item) continue;
+				// Only consider surveys of the same type
+				if (surveyItem->data(0, HipsRole::SurveyType) != item->data(0, HipsRole::SurveyType))
+					continue;
+				if (surveyItem->checkState(0) == Qt::Checked)
+				{
+					surveyItem->setCheckState(0, Qt::Unchecked);
+				}
+			}
+			hipsListItemChanged(group);
+		}
+		else
+		{
+			const auto hips = hipsmgr->getSurveyByUrl(url);
+			Q_ASSERT(hips);
+			if (item->checkState(0) == Qt::Checked)
+			{
+				l->setCurrentItem(item);
+				hips->setProperty("visible", true);
+			}
+			else
+			{
+				hips->setProperty("visible", false);
+			}
+		}
+		break;
 	}
+	case HipsItemType::Group:
+	{
+		// First, uncheck all the sibling groups except the one we're enabling
+		if (item->checkState(0) == Qt::Checked)
+		{
+			const auto planetItem = item->parent();
+			Q_ASSERT(planetItem);
+			Q_ASSERT(planetItem->data(0, HipsRole::ItemType).toInt() == HipsItemType::Planet);
+			for (int n = 0; n < planetItem->childCount(); ++n)
+			{
+				const auto groupItem = planetItem->child(n);
+				Q_ASSERT(groupItem->data(0, HipsRole::ItemType).toInt() == HipsItemType::Group);
+				if (groupItem == item) continue;
+				if (groupItem->checkState(0) == Qt::Checked)
+				{
+					groupItem->setCheckState(0, Qt::Unchecked);
+					hipsListItemChanged(groupItem);
+				}
+			}
+		}
+
+		// Now configure the survey chosen
+		HipsSurveyP colors;
+		HipsSurveyP normals;
+		HipsSurveyP horizons;
+		for (int n = 0; n < item->childCount(); ++n)
+		{
+			const auto child = item->child(n);
+			const auto url = child->data(0, HipsRole::URL).toString();
+			const auto hips = hipsmgr->getSurveyByUrl(url);
+			Q_ASSERT(hips);
+			const auto type = hips->getType();
+			if (child->checkState(0) != Qt::Checked)
+			{
+				if (type == L1S("planet"))
+					hips->setProperty("visible", false);
+				continue;
+			}
+			if (type == L1S("planet"))
+				colors = hips;
+			else if (type == L1S("planet-normal"))
+				normals = hips;
+			else if (type == L1S("planet-horizon"))
+				horizons = hips;
+		}
+		if (item->checkState(0) == Qt::Checked)
+		{
+			if (!colors)
+			{
+				QMessageBox::critical(&StelMainView::getInstance(), q_("No albedo map"),
+				                      q_("This group of surveys doesn't have an albedo "
+				                         "map. Can't display it."));
+				return;
+			}
+			colors->setProperty("visible", true);
+			const auto solarSys = qobject_cast<SolarSystem*>(StelApp::getInstance().getModule("SolarSystem"));
+			solarSys->enableSurvey(colors, normals, horizons);
+		}
+		else
+		{
+			if (colors) colors->setProperty("visible", false);
+		}
+		break;
+	}
+	case HipsItemType::Planet:
+	{
+		break;
+	}
+	}
+
 	l->blockSignals(false);
 }
 
@@ -1058,9 +1346,12 @@ void ViewDialog::populateToolTips()
 	ui->linesFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->namesFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->boundariesFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->constellationHullsFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->asterismLinesFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->asterismNamesFadeDurationDoubleSpinBox->setSuffix(seconds);
 	ui->rayHelpersFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->zodiacFadeDurationDoubleSpinBox->setSuffix(seconds);
+	ui->lunarSystemFadeDurationDoubleSpinBox->setSuffix(seconds);
 }
 
 void ViewDialog::populateLists()
@@ -1070,8 +1361,8 @@ void ViewDialog::populateLists()
 	QListWidget* l = ui->culturesListWidget;
 	l->blockSignals(true);
 	l->clear();
-	QStringList skyculture = app.getSkyCultureMgr().getSkyCultureListI18();
-	for ( const auto& s : skyculture  )
+	const QStringList &skycultures = app.getSkyCultureMgr().getSkyCultureListI18();
+	for ( const auto& s : skycultures  )
 	{
 		l->addItem(s);
 		l->findItems(s, Qt::MatchExactly).at(0)->setToolTip(s);
@@ -1079,25 +1370,6 @@ void ViewDialog::populateLists()
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	updateSkyCultureText();
-
-	// populate language printing combo. (taken from DeltaT combo)
-	StelModule* cmgr = app.getModule("ConstellationMgr");
-	Q_ASSERT(cmgr);
-	Q_ASSERT(ui->skyCultureNamesStyleComboBox);
-	QComboBox* cultureNamesStyleComboBox = ui->skyCultureNamesStyleComboBox;
-
-	cultureNamesStyleComboBox->blockSignals(true);
-	cultureNamesStyleComboBox->clear();
-	QMetaEnum enumerator = cmgr->metaObject()->property(cmgr->metaObject()->indexOfProperty("constellationDisplayStyle")).enumerator();
-	cultureNamesStyleComboBox->addItem(q_("Abbreviated"), enumerator.keyToValue("constellationsAbbreviated"));
-	cultureNamesStyleComboBox->addItem(q_("Native"), enumerator.keyToValue("constellationsNative"));  // Please make this always a transcript into European letters!
-	cultureNamesStyleComboBox->addItem(q_("Translated"), enumerator.keyToValue("constellationsTranslated"));
-	//cultureNamesStyleComboBox->addItem(q_("English"),    ConstellationMgr::constellationsEnglish); // This is not useful.
-	//Restore the selection
-	int index = cultureNamesStyleComboBox->findData(cmgr->property("constellationDisplayStyle").toInt(), Qt::UserRole, Qt::MatchCaseSensitive);
-	if (index==-1) index=2; // Default: Translated
-	cultureNamesStyleComboBox->setCurrentIndex(index);
-	cultureNamesStyleComboBox->blockSignals(false);
 
 	const StelCore* core = app.getCore();
 	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
@@ -1151,12 +1423,123 @@ void ViewDialog::populateLists()
 	updateDefaultLandscape();
 }
 
+void ViewDialog::configureSkyCultureCheckboxes()
+{
+	static StelSkyCultureMgr *scMgr     = GETSTELMODULE(StelSkyCultureMgr);
+	StelObject::CulturalDisplayStyle infoStyle   = scMgr->getInfoLabelStyle();
+	StelObject::CulturalDisplayStyle screenStyle = scMgr->getScreenLabelStyle();
+	StelObject::CulturalDisplayStyle zodiacStyle = scMgr->getZodiacLabelStyle();
+	StelObject::CulturalDisplayStyle lunarStyle  = scMgr->getLunarSystemLabelStyle();
+	static ConstellationMgr *cMgr       = GETSTELMODULE(ConstellationMgr);
+	const bool hasZodiac=cMgr->hasZodiac();
+	const bool hasLunarSystem=cMgr->hasLunarSystem();
+
+	ui->infoLabelNativeCheckBox           ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Native));
+	ui->infoLabelPronounceCheckBox        ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Pronounce));
+	ui->infoLabelTransliterationCheckBox  ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Translit));
+	ui->infoLabelTranslationCheckBox      ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Translated));
+	ui->infoLabelIPACheckBox              ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::IPA));
+	ui->infoLabelBynameCheckBox           ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Byname));
+	ui->infoLabelModernCheckBox           ->setChecked(int(infoStyle)   & int(StelObject::CulturalDisplayStyle::Modern));
+	ui->screenLabelNativeCheckBox         ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Native));
+	ui->screenLabelPronounceCheckBox      ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Pronounce));
+	ui->screenLabelTransliterationCheckBox->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Translit));
+	ui->screenLabelTranslationCheckBox    ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Translated));
+	ui->screenLabelIPACheckBox            ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::IPA));
+	ui->screenLabelBynameCheckBox         ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Byname));
+	ui->screenLabelModernCheckBox         ->setChecked(int(screenStyle) & int(StelObject::CulturalDisplayStyle::Modern));
+
+	populateCulturalCombo(ui->zodiacLabelComboBox, zodiacStyle);
+	populateCulturalCombo(ui->lunarSystemLabelComboBox, lunarStyle);
+
+	ui->zodiacCheckBox->setEnabled(hasZodiac);
+	ui->zodiacLabelComboBox->setEnabled(hasZodiac);
+	ui->zodiacColorButton->setEnabled(hasZodiac);
+	ui->zodiacFadeDurationDoubleSpinBox->setEnabled(hasZodiac);
+	ui->zodiacThicknessSpinBox->setEnabled(hasZodiac);
+	ui->lunarSystemCheckBox->setEnabled(hasLunarSystem);
+	ui->lunarSystemLabelComboBox->setEnabled(hasLunarSystem);
+	ui->lunarSystemColorButton->setEnabled(hasLunarSystem);
+	ui->lunarSystemFadeDurationDoubleSpinBox->setEnabled(hasLunarSystem);
+	ui->lunarSystemThicknessSpinBox->setEnabled(hasLunarSystem);
+}
+
+void ViewDialog::updateSkyCultureInfoStyleFromCheckboxes()
+{
+	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
+
+	scMgr->setInfoLabelStyle(static_cast<StelObject::CulturalDisplayStyle>(
+				int(ui->infoLabelBynameCheckBox         ->isChecked()) << 6 |
+				int(ui->infoLabelNativeCheckBox         ->isChecked()) << 5 |
+				int(ui->infoLabelPronounceCheckBox      ->isChecked()) << 4 |
+				int(ui->infoLabelTransliterationCheckBox->isChecked()) << 3 |
+				int(ui->infoLabelTranslationCheckBox    ->isChecked()) << 2 |
+				int(ui->infoLabelIPACheckBox            ->isChecked()) << 1 |
+				int(ui->infoLabelModernCheckBox         ->isChecked())
+				));
+}
+
+void ViewDialog::updateSkyCultureScreenStyleFromCheckboxes()
+{
+	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
+
+	scMgr->setScreenLabelStyle(static_cast<StelObject::CulturalDisplayStyle>(
+				int(ui->screenLabelBynameCheckBox         ->isChecked()) << 6 |
+				int(ui->screenLabelNativeCheckBox         ->isChecked()) << 5 |
+				int(ui->screenLabelPronounceCheckBox      ->isChecked()) << 4 |
+				int(ui->screenLabelTransliterationCheckBox->isChecked()) << 3 |
+				int(ui->screenLabelTranslationCheckBox    ->isChecked()) << 2 |
+				int(ui->screenLabelIPACheckBox            ->isChecked()) << 1 |
+				int(ui->screenLabelModernCheckBox         ->isChecked())
+				));
+}
+
+void ViewDialog::populateCulturalCombo(QComboBox *combo, StelObject::CulturalDisplayStyle style)
+{
+//Save the current selection to be restored later
+combo->blockSignals(true);
+//int index = combo->currentIndex();
+//QVariant selectedStyle = combo->itemData(index);
+combo->clear();
+//Allow only single-style for space reasons, and store the key as user data.
+combo->addItem(qc_("native",          "cultural style"), QVariant::fromValue(StelObject::CulturalDisplayStyle::Native));
+combo->addItem(qc_("transliteration", "cultural style"), QVariant::fromValue(StelObject::CulturalDisplayStyle::Pronounce));
+combo->addItem(qc_("sci. translit.",  "cultural style"), QVariant::fromValue(StelObject::CulturalDisplayStyle::Translit));
+combo->addItem(qc_("translated",      "cultural style"), QVariant::fromValue(StelObject::CulturalDisplayStyle::Translated));
+//Restore the selection
+int index = combo->findData(QVariant::fromValue(style), Qt::UserRole, Qt::MatchCaseSensitive);
+combo->setCurrentIndex(index);
+combo->blockSignals(false);
+}
+
+// called from the ZodiacDisplayStyle combo. int is the newly selected index.
+void ViewDialog::setZodiacLabelStyle(int index)
+{
+	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
+
+	QComboBox *combo=static_cast<QComboBox *>(sender());
+	QVariant selectedStyle = combo->itemData(index);
+	StelObject::CulturalDisplayStyle style=selectedStyle.value<StelObject::CulturalDisplayStyle>();
+	scMgr->setZodiacLabelStyle(style);
+}
+
+void ViewDialog::setLunarSystemLabelStyle(int index)
+{
+	static StelSkyCultureMgr *scMgr       = GETSTELMODULE(StelSkyCultureMgr);
+
+	QComboBox *combo=static_cast<QComboBox *>(sender());
+	QVariant selectedStyle = combo->itemData(index);
+	StelObject::CulturalDisplayStyle style=selectedStyle.value<StelObject::CulturalDisplayStyle>();
+	scMgr->setLunarSystemLabelStyle(style);
+}
+
 void ViewDialog::skyCultureChanged()
 {
 	QListWidget* l = ui->culturesListWidget;
 	l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	updateSkyCultureText();
 	updateDefaultSkyCulture();
+	configureSkyCultureCheckboxes();
 }
 
 // fill the description text window, not the names in the sky.
@@ -1327,7 +1710,6 @@ void ViewDialog::updateDefaultSkyCulture()
 	ui->rayHelperThicknessSpinBox->setEnabled(b);
 	ui->colorRayHelpers->setEnabled(b);
 	ui->asterismsFontSizeSpinBox->setEnabled(b);
-	ui->constellationPickCheckBox->setEnabled(b);
 }
 
 void ViewDialog::updateDefaultLandscape()

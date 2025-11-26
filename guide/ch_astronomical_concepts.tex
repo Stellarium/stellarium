@@ -169,6 +169,9 @@ longitude and latitude are to terrestrial map makers.
 The Northern Celestial Pole has a declination of $\delta=90\degree$, the celestial
 equator has a declination of $\delta=0\degree$, and the Southern Celestial Pole has a declination of $\delta=-90\degree$.
 
+Occasionally, instrument makers of the past may have engraved polar distance $p$ instead: $p=90^\circ-\delta$. 
+Stellarium \newFeature{25.4} can be configured to use this convention, see section~\ref{sec:gui:configuration:extras}.
+
 %% TODO include Aries in figures
 Right ascension is measured as an angle round from the \indexterm{vernal equinox}, a point in the sky
 also known as the \indexterm{First Point of Aries} \Aries, in the same way that
@@ -255,10 +258,14 @@ the field of view. We can describe the \indexterm[Coordinate
     System!Fixed Equatorial]{Fixed Equatorial Coordinate System} as an
   intermediate coordinate system which uses the same equator and
   declination as the equatorial system, but does not rotate as time
-  goes by. The longitudinal coordinate is counted in hours from the
-  meridian towards the west and is aptly named \indexterm{Hour
+  goes by. The longitudinal coordinate is conventionally counted in 0\ldots24 hours 
+  from the meridian (0h) along the celestial equator 
+  towards the west (6h) and is aptly named \indexterm{Hour
     Angle}. A star which has passed the meridian will reach hour angle
-  of 1~hour one sidereal hour later.
+  of 1~hour one sidereal hour later. 
+  In some traditions, decimal degrees may be preferred, 
+  and negative hour angles are used instead on the eastern half of the sky. 
+  (See section~\ref{sec:gui:configuration:extras} for settings.)
 
 Stellarium can display \newFeature{0.22.2} the fixed equatorial
 coordinates in the Markings dialog (\ref{sec:gui:view:markings}).

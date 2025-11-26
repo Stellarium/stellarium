@@ -335,10 +335,9 @@ float StelSkyDrawer::computeLimitLuminance() const
 	float b=500000.f;
 	float lim=40.f;
 	int safety=0;
-	float adaptL;
 	while (std::fabs(lim-a)>0.05f)
 	{
-		adaptL = eye->adaptLuminanceScaled(lim);
+		float adaptL = eye->adaptLuminanceScaled(lim);
 		if (adaptL<=0.05f) // Object considered not visible if its adapted scaled luminance<0.05
 		{
 			float tmp = lim;

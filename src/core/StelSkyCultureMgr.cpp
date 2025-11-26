@@ -18,9 +18,14 @@
  */
 
 #include "StelSkyCultureMgr.hpp"
+#include "Star.hpp"
+#include "StarMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
+#include "ConstellationMgr.hpp"
 #include "StelApp.hpp"
 
 #include <md4c-html.h>
@@ -36,6 +41,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QRegularExpression>
+#include <QMetaEnum>
 
 namespace
 {
@@ -150,10 +156,10 @@ QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& idFromJSON) c
 	return idFromJSON;
 }
 
-StelSkyCultureMgr::StelSkyCultureMgr()
+StelSkyCultureMgr::StelSkyCultureMgr(): flagOverrideUseCommonNames(false), flagUseAbbreviatedNames(false)
 {
-	setObjectName("StelSkyCultureMgr");
-	makeCulturesList();
+	setObjectName("StelSkyCultureMgr");        
+	makeCulturesList(); // First load needed for testing only.
 }
 
 StelSkyCultureMgr::~StelSkyCultureMgr()
@@ -182,7 +188,7 @@ void StelSkyCultureMgr::makeCulturesList()
 		if (jsonText.isEmpty())
 		{
 			qCritical() << "Failed to read data from" << indexFileName << "file in sky culture directory"
-			           << QDir::toNativeSeparators(dir);
+			            << QDir::toNativeSeparators(dir);
 			continue;
 		}
 		QJsonParseError error;
@@ -190,13 +196,13 @@ void StelSkyCultureMgr::makeCulturesList()
 		if (error.error != QJsonParseError::NoError)
 		{
 			qCritical().nospace() << "Failed to parse " << indexFileName << " from sky culture directory "
-			                     << QDir::toNativeSeparators(dir) << ": " << error.errorString();
+			                      << QDir::toNativeSeparators(dir) << ": " << error.errorString();
 			continue;
 		}
 		if (!jsonDoc.isObject())
 		{
 			qCritical() << "Failed to find the expected JSON structure in" << indexFileName << " from sky culture directory"
-			           << QDir::toNativeSeparators(dir);
+			            << QDir::toNativeSeparators(dir);
 			continue;
 		}
 		const auto data = jsonDoc.object();
@@ -244,8 +250,13 @@ void StelSkyCultureMgr::makeCulturesList()
 		}
 		culture.boundaries = data["edges"].toArray();
 		culture.boundariesEpoch = data["edges_epoch"].toString("J2000");
-		culture.fallbackToInternationalNames = data["fallback_to_international_names"].toBool();
+		culture.fallbackToInternationalNames = (flagOverrideUseCommonNames || data["fallback_to_international_names"].toBool());
 		culture.names = data["common_names"].toObject();
+
+		if (data.contains("zodiac"))
+			culture.zodiac = data["zodiac"].toObject();
+		if (data.contains("lunar_system"))
+			culture.lunarSystem = data["lunar_system"].toObject();
 
 		const auto classifications = data["classification"].toArray();
 		if (classifications.isEmpty())
@@ -278,10 +289,16 @@ void StelSkyCultureMgr::makeCulturesList()
 //! Init itself from a config file.
 void StelSkyCultureMgr::init()
 {
+	QSettings* settings = StelApp::getInstance().getSettings();
+	Q_ASSERT(settings);
+	setFlagOverrideUseCommonNames(settings->value("viewing/flag_skyculture_always_fallback_to_international_names", false).toBool());
+	setFlagUseAbbreviatedNames(settings->value("viewing/flag_constellation_abbreviations", false).toBool());
+
+	makeCulturesList(); // Reload after setting this flag!
 	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "modern").toString();
 	if (defaultSkyCultureID=="western") // switch to new Sky Culture ID
 		defaultSkyCultureID = "modern";
-	setCurrentSkyCultureID(defaultSkyCultureID);	
+	setCurrentSkyCultureID(defaultSkyCultureID);
 }
 
 void StelSkyCultureMgr::reloadSkyCulture()
@@ -306,6 +323,10 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 
 	currentSkyCulture = dirToNameEnglish[scID];
 
+	// Lookup culture Style!
+	setScreenLabelStyle(getScreenLabelStyle());
+	setInfoLabelStyle(getInfoLabelStyle());
+
 	emit currentSkyCultureChanged(currentSkyCulture);
 	emit currentSkyCultureIDChanged(currentSkyCulture.id);
 	return result;
@@ -328,7 +349,7 @@ bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
 	emit defaultSkyCultureIDChanged(id);
 	return true;
 }
-	
+
 QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
@@ -345,7 +366,7 @@ StelSkyCulture::BoundariesType StelSkyCultureMgr::getCurrentSkyCultureBoundaries
 	return currentSkyCulture.boundariesType;
 }
 
-int StelSkyCultureMgr::getCurrentSkyCultureClassificationIdx() const
+StelSkyCulture::CLASSIFICATION StelSkyCultureMgr::getCurrentSkyCultureClassificationIdx() const
 {
 	return currentSkyCulture.classification;
 }
@@ -563,15 +584,15 @@ bool StelSkyCultureMgr::setCurrentSkyCultureNameI18(const QString& cultureName)
 	return setCurrentSkyCultureID(skyCultureI18ToDirectory(cultureName));
 }
 
-//! returns newline delimited list of human readable culture names in english
-QString StelSkyCultureMgr::getSkyCultureListEnglish(void) const
+// returns list of human readable culture names in english
+QStringList StelSkyCultureMgr::getSkyCultureListEnglish(void) const
 {
-	QString cultures;
+	QStringList cultures;
 	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
 	while(i.hasNext())
 	{
 		i.next();
-		cultures += QString("%1\n").arg(i.value().englishName);
+		cultures << i.value().englishName;
 	}
 	return cultures;
 }
@@ -598,32 +619,91 @@ QStringList StelSkyCultureMgr::getSkyCultureListIDs(void) const
 	return dirToNameEnglish.keys();
 }
 
+std::vector<std::pair<QString, QString>> StelSkyCultureMgr::getConstellationsDescriptions(QString consSection) const
+{
+	static const QRegularExpression startWithL5Section("^#####[^#]");
+	consSection = consSection.trimmed();
+	if (!consSection.contains(startWithL5Section))
+	{
+		// Invalid formatting of the Constellations section
+		return {};
+	}
+
+	const QRegularExpression l5SectionNamePat("^[ \t]*#####[ \t]*([^#\n][^\n]*)$",
+	                                          QRegularExpression::MultilineOption);
+	std::vector<std::pair<QString/*constellation*/, QString/*description*/>> descrMap;
+	QString prevSectionName;
+	qsizetype prevBodyStartPos = -1;
+	for (auto it = l5SectionNamePat.globalMatch(consSection); it.hasNext(); )
+	{
+		const auto match = it.next();
+		const auto sectionName = match.captured(1);
+		const auto nameStartPos = match.capturedStart(0);
+		const auto bodyStartPos = match.capturedEnd(0);
+		if (!prevSectionName.isEmpty())
+		{
+			const auto sectionText = consSection.mid(prevBodyStartPos, nameStartPos - prevBodyStartPos);
+			if (!sectionText.isEmpty())
+				descrMap.push_back({prevSectionName, sectionText});
+		}
+		prevBodyStartPos = bodyStartPos;
+		prevSectionName = sectionName;
+	}
+	if (prevBodyStartPos >= 0)
+	{
+		const auto sectionText = consSection.mid(prevBodyStartPos);
+		if (!sectionText.isEmpty())
+			descrMap.push_back({prevSectionName, sectionText});
+	}
+	return descrMap;
+}
+
 QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown, const QString& sectionName,
                                                         const qsizetype bodyStartPos, const qsizetype bodyEndPos,
                                                         const StelTranslator& trans)
 {
-	auto text = markdown.mid(bodyStartPos, bodyEndPos - bodyStartPos);
+	auto textEng = markdown.mid(bodyStartPos, bodyEndPos - bodyStartPos);
 	static const QRegularExpression re("^\n*|\n*$");
-	text.replace(re, "");
-	text = trans.qtranslate(text);
+	textEng.replace(re, "");
+	auto textTr = trans.tryQtranslate(textEng);
+	if (textTr.isEmpty() && sectionName == "Constellations")
+	{
+		// Legacy way of translating the whole Constellations section didn't work.
+		// Now try the correct way: split the section into descriptions of individual
+		// constellations and translate each of them.
+		const auto map = getConstellationsDescriptions(textEng);
+		if (map.empty()) return markdownToHTML(textEng);
+		const auto cMgr = GETSTELMODULE(ConstellationMgr);
+		for (const auto& entry : map)
+		{
+			const auto consEngName = entry.first;
+			const auto cons = cMgr->searchByName(consEngName);
+			const auto consName = cons ? cons->getNameI18n() : consEngName;
+                        textTr += "<h4>" + consName + "</h4>\n";
+			textTr += markdownToHTML(trans.qtranslate(entry.second.trimmed()));
+		}
+		return textTr;
+	}
+
+	if (textTr.isEmpty()) textTr = textEng;
 
 	if (sectionName.trimmed() == "References")
 	{
 		static const QRegularExpression refRe("^ *- \\[#([0-9]+)\\]: (.*)$", QRegularExpression::MultilineOption);
-		text.replace(refRe, "\\1. <span id=\"cite_\\1\">\\2</span>");
+		textTr.replace(refRe, "\\1. <span id=\"cite_\\1\">\\2</span>");
 	}
 	else
 	{
-		text = convertReferenceLinks(text);
+		textTr = convertReferenceLinks(textTr);
 	}
 
 	if (sectionName.trimmed() == "License")
 	{
-		currentSkyCulture.license = text;
+		currentSkyCulture.license = textTr;
 		return "";
 	}
 
-	return markdownToHTML(text);
+	return markdownToHTML(textTr);
 }
 
 QString StelSkyCultureMgr::descriptionMarkdownToHTML(const QString& markdownInput, const QString& descrPath)
@@ -738,7 +818,7 @@ QString StelSkyCultureMgr::directoryToSkyCultureI18(const QString& directory) co
 	if (culture=="")
 	{
 		qWarning().nospace() << "StelSkyCultureMgr::directoryToSkyCultureI18("
-			<< QDir::toNativeSeparators(directory) << "): could not find directory";
+		                     << QDir::toNativeSeparators(directory) << "): could not find directory";
 		return "";
 	}
 	return q_(culture);
@@ -755,4 +835,663 @@ QString StelSkyCultureMgr::skyCultureI18ToDirectory(const QString& cultureName) 
 			return i.key();
 	}
 	return "";
+}
+
+void StelSkyCultureMgr::setFlagOverrideUseCommonNames(bool override)
+{
+	flagOverrideUseCommonNames=override;
+	emit flagOverrideUseCommonNamesChanged(override);
+}
+
+void StelSkyCultureMgr::setFlagUseAbbreviatedNames(bool b)
+{
+	flagUseAbbreviatedNames=b;
+	StelApp::immediateSave("viewing/flag_constellation_abbreviations", b);
+	emit flagUseAbbreviatedNamesChanged(b);
+}
+
+StelObject::CulturalDisplayStyle StelSkyCultureMgr::convertCulturalDisplayStyleFromCSVstring(const QString &csv)
+{
+	static const QMap<QString, StelObject::CulturalDisplayStyle> cdsEnumParts=
+	{ {"none", StelObject::CulturalDisplayStyle::NONE},
+	  {"modern", StelObject::CulturalDisplayStyle::Modern},
+	  {"byname", StelObject::CulturalDisplayStyle::Byname},
+	  {"ipa", StelObject::CulturalDisplayStyle::IPA},
+	  {"translated", StelObject::CulturalDisplayStyle::Translated},
+	  {"translit", StelObject::CulturalDisplayStyle::Translit},
+	  {"pronounce", StelObject::CulturalDisplayStyle::Pronounce},
+	  {"native", StelObject::CulturalDisplayStyle::Native}};
+
+	StelObject::CulturalDisplayStyle styleEnum = StelObject::CulturalDisplayStyle::NONE;
+	const QStringList styleParts=csv.split(",", SkipEmptyParts);
+
+	for (const QString &part: styleParts)
+	{
+		styleEnum = static_cast<StelObject::CulturalDisplayStyle>( int(styleEnum) |  int(cdsEnumParts.value(part.trimmed().toLower(), StelObject::CulturalDisplayStyle::NONE)));
+	}
+	return styleEnum;
+}
+
+QString StelSkyCultureMgr::convertCulturalDisplayStyleToCSVstring(const StelObject::CulturalDisplayStyle style)
+{
+	return QVariant::fromValue(style).toString().replace('_', ',');
+}
+
+
+// Returns the screen labeling setting for the currently active skyculture
+StelObject::CulturalDisplayStyle StelSkyCultureMgr::getScreenLabelStyle() const
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return StelObject::CulturalDisplayStyle::Translated;
+
+	static QSettings *conf=StelApp::getInstance().getSettings();
+	QVariant val= conf->value(QString("SCScreenLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
+	//qDebug() << "StelSkyCultureMgr::getScreenLabelStyle(): found " << val << "(" << val.toString() << ")";
+	return convertCulturalDisplayStyleFromCSVstring(val.toString());
+}
+// Scripting version
+QString StelSkyCultureMgr::getScreenLabelStyleString() const
+{
+	return convertCulturalDisplayStyleToCSVstring(getScreenLabelStyle());
+}
+
+
+// Sets the screen labeling setting for the currently active skyculture
+void StelSkyCultureMgr::setScreenLabelStyle(const StelObject::CulturalDisplayStyle style)
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return;
+
+	static QSettings *conf=StelApp::getInstance().getSettings();
+	conf->setValue(QString("SCScreenLabelStyle/%1").arg(getCurrentSkyCultureID()), convertCulturalDisplayStyleToCSVstring(style));
+	//qInfo() << QString("SCScreenLabelStyle/%1=%2").arg(getCurrentSkyCultureID(), convertCulturalDisplayStyleToCSVstring(style));
+	emit screenLabelStyleChanged(style);
+}
+
+// style can be the enum string like Native_IPA_Translated, or a comma-separated string like "Translated, native, IPA"
+void StelSkyCultureMgr::setScreenLabelStyle(const QString &style)
+{
+	setScreenLabelStyle(convertCulturalDisplayStyleFromCSVstring(style));
+}
+
+// Returns the InfoString Labeling setting for the currently active skyculture
+StelObject::CulturalDisplayStyle StelSkyCultureMgr::getInfoLabelStyle() const
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return StelObject::CulturalDisplayStyle::Translated;
+
+	static QSettings *conf=StelApp::getInstance().getSettings();
+	QVariant val= conf->value(QString("SCInfoLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
+	//qDebug() << "StelSkyCultureMgr::getInfoLabelStyle(): found " << val << "(" << val.toString() << ")";
+	return convertCulturalDisplayStyleFromCSVstring(val.toString());
+}
+// Scripting version
+QString StelSkyCultureMgr::getInfoLabelStyleString() const
+{
+	return convertCulturalDisplayStyleToCSVstring(getInfoLabelStyle());
+}
+
+// Sets the InfoString Labeling setting for the currently active skyculture
+void StelSkyCultureMgr::setInfoLabelStyle(const StelObject::CulturalDisplayStyle style)
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return;
+
+	static QSettings *conf=StelApp::getInstance().getSettings();
+	conf->setValue(QString("SCInfoLabelStyle/%1").arg(getCurrentSkyCultureID()), convertCulturalDisplayStyleToCSVstring(style));
+	//qInfo() << QString("SCInfoLabelStyle/%1=%2").arg(getCurrentSkyCultureID(), convertCulturalDisplayStyleToCSVstring(style));
+	emit infoLabelStyleChanged(style);
+}
+
+void StelSkyCultureMgr::setInfoLabelStyle(const QString &style)
+{
+	setInfoLabelStyle(convertCulturalDisplayStyleFromCSVstring(style));
+}
+
+// Returns the screen labeling setting for the currently active skyculture
+StelObject::CulturalDisplayStyle StelSkyCultureMgr::getZodiacLabelStyle() const
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return StelObject::CulturalDisplayStyle::Translated;
+
+	static QSettings *conf=StelApp::getInstance().getSettings();
+	QVariant val= conf->value(QString("SCZodiacLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
+	//qDebug() << "StelSkyCultureMgr::getZodiacLabelStyle(): found " << val << "(" << val.toString() << ")";
+	return convertCulturalDisplayStyleFromCSVstring(val.toString());
+}
+// Scripting version
+QString StelSkyCultureMgr::getZodiacLabelStyleString() const
+{
+	return convertCulturalDisplayStyleToCSVstring(getZodiacLabelStyle());
+}
+
+
+// Sets the screen labeling setting for the currently active skyculture
+void StelSkyCultureMgr::setZodiacLabelStyle(const StelObject::CulturalDisplayStyle style)
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return;
+
+	static QSettings *conf=StelApp::getInstance().getSettings();
+	conf->setValue(QString("SCZodiacLabelStyle/%1").arg(getCurrentSkyCultureID()), convertCulturalDisplayStyleToCSVstring(style));
+	//qInfo() << QString("SCZodiacLabelStyle/%1=%2").arg(getCurrentSkyCultureID(), convertCulturalDisplayStyleToCSVstring(style));
+	emit zodiacLabelStyleChanged(style);
+}
+
+// style can be the enum string like Native_IPA_Translated, or a comma-separated string like "Translated, native, IPA"
+void StelSkyCultureMgr::setZodiacLabelStyle(const QString &style)
+{
+	setZodiacLabelStyle(convertCulturalDisplayStyleFromCSVstring(style));
+}
+
+// Returns the lunar_system labeling setting for the currently active skyculture
+StelObject::CulturalDisplayStyle StelSkyCultureMgr::getLunarSystemLabelStyle() const
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return StelObject::CulturalDisplayStyle::Translated;
+
+	static QSettings *conf=StelApp::getInstance().getSettings();
+	QVariant val= conf->value(QString("SCLunarSystemLabelStyle/%1").arg(getCurrentSkyCultureID()), "Translated");
+	//qInfo() << "StelSkyCultureMgr::getLunarSystemLabelStyle(): found " << val << "(" << val.toString() << ")";
+	return convertCulturalDisplayStyleFromCSVstring(val.toString());
+}
+// Scripting version
+QString StelSkyCultureMgr::getLunarSystemLabelStyleString() const
+{
+	return convertCulturalDisplayStyleToCSVstring(getLunarSystemLabelStyle());
+}
+
+
+// Sets the lunar_system labeling setting for the currently active skyculture
+void StelSkyCultureMgr::setLunarSystemLabelStyle(const StelObject::CulturalDisplayStyle style)
+{
+	// This is needed for testing mode
+	if (defaultSkyCultureID.isEmpty())
+		return;
+
+	static QSettings *conf=StelApp::getInstance().getSettings();
+	conf->setValue(QString("SCLunarSystemLabelStyle/%1").arg(getCurrentSkyCultureID()), convertCulturalDisplayStyleToCSVstring(style));
+	//qInfo() << QString("SCLunarSystemLabelStyle/%1=%2").arg(getCurrentSkyCultureID(), convertCulturalDisplayStyleToCSVstring(style));
+	emit lunarSystemLabelStyleChanged(style);
+}
+
+// style can be the enum string like Native or Translated
+void StelSkyCultureMgr::setLunarSystemLabelStyle(const QString &style)
+{
+	setLunarSystemLabelStyle(convertCulturalDisplayStyleFromCSVstring(style));
+}
+
+
+
+QString StelSkyCultureMgr::createCulturalLabel(const StelObject::CulturalName &cName,
+					       const StelObject::CulturalDisplayStyle style,
+					       const QString &commonNameI18n,
+					       const QString &abbrevI18n) const
+{
+	// Each element may be in an RTL language (e.g. Arab). However,
+	// - for most (left-to-right) languages we want a canonical order of left to right elements.
+	// - for Arab and other right-to-left user languages, we set a canonical order of right-to-left elements.
+	// This requires building Unicode isolation cells.
+	// Unicode constants from Unicode Standard Annex #9, section 2.
+	//static const QString LRE{"\u202a"}; // Left-to-right embedding: Treat following text as embedded left-to-right
+	//static const QString RLE{"\u202b"}; // Right-to-left embedding: Treat following text as embedded right-to-left
+	//static const QString LRO{"\u202d"}; // Left-to-right override: Force following characters to be treated as strong left-to-right chars.
+	//static const QString RLO{"\u202e"}; // Right-to-left override: Force following characters to be treated as strong right-to-left chars.
+	//static const QString PDF{"\u202c"}; // Pop directional formatting: terminate scope of last LRE/RLE/LRO/RLO
+	//static const QString LRI{"\u2066"}; // left-to-right isolate: Treat following text as isolated and left-to-right
+	//static const QString RLI{"\u2067"}; // right-to-left isolate: Treat following text as isolated and right-to-left
+	static const QString FSI{"\u2068"}; // First strong isolate: Treat following text as isolated and in the direction of its first strong directional character.
+					    // ASSUMPTION: Can be used as autodetect feature? Mark all parts inside embeddings?
+	static const QString PDI{"\u2069"}; // Pop directional isolate: terminate scope of last LRI/RLI/FSI
+	//static const QString LRM{"\u200e"}; // left-to-right mark: zero-width char
+	//static const QString RLM{"\u200f"}; // right-to-left mark: right to left zero-width non-Arabic char
+	//static const QString ALM{"\u061c"}; // right-to-left mark: right to left zero-width Arabic char
+	static const QString ZWS{"\u200b"}; // zero-width space (we use them to combine cultural label groups)
+
+	StelObject::CulturalName lName;
+	// copy over filled elements from cName, but enclose each with Unicode isolation markers.
+	if (!cName.native         .isEmpty()) lName.native          = FSI+cName.native+PDI;
+	if (!cName.pronounce      .isEmpty()) lName.pronounce       = FSI+cName.pronounce+PDI;
+	if (!cName.pronounceI18n  .isEmpty()) lName.pronounceI18n   = FSI+cName.pronounceI18n+PDI;
+	if (!cName.transliteration.isEmpty()) lName.transliteration = FSI+cName.transliteration+PDI;
+	if (!cName.translated     .isEmpty()) lName.translated      = FSI+cName.translated+PDI;
+	if (!cName.translatedI18n .isEmpty()) lName.translatedI18n  = FSI+cName.translatedI18n+PDI;
+	if (!cName.IPA            .isEmpty()) lName.IPA             = FSI+cName.IPA+PDI;
+	if (!cName.byname         .isEmpty()) lName.byname          = FSI+cName.byname+PDI;
+	if (!cName.bynameI18n     .isEmpty()) lName.bynameI18n      = FSI+cName.bynameI18n+PDI;
+	const QString lCommonNameI18n=FSI+commonNameI18n+PDI;
+
+	// At least while many fields have not been filled, we should create a few fallbacks
+	// If native contains non-Latin glyphs, pronounce or transliteration is mandatory.
+	QString pronounceStr=(lName.pronounceI18n.isEmpty() ? lName.pronounce : lName.pronounceI18n);
+	QString nativeOrPronounce = (lName.native.isEmpty() ? lName.pronounceI18n : lName.native);
+	QString pronounceOrNative = (pronounceStr.isEmpty() ? lName.native : pronounceStr);
+	QString translitOrPronounce = (lName.transliteration.isEmpty() ? pronounceStr : lName.transliteration);
+
+	// If you call this with an actual argument abbrevI18n, you really only want a short label.
+	if (flagUseAbbreviatedNames && !abbrevI18n.isNull())
+		return (abbrevI18n.startsWith('.') ? QString() : abbrevI18n);
+
+	const int styleInt=int(style);
+	QString label;
+	switch (style)
+	{
+		case StelObject::CulturalDisplayStyle::Native: // native if available. fallback to pronounce and english entries
+			return lName.native.isEmpty() ? (lName.pronounceI18n.isEmpty() ? lName.translatedI18n : lName.pronounceI18n) : lName.native;
+		case StelObject::CulturalDisplayStyle::Pronounce: // pronounce if available. fallback to native
+			return pronounceOrNative;
+		case StelObject::CulturalDisplayStyle::Translit:
+			return translitOrPronounce;
+		case StelObject::CulturalDisplayStyle::Translated:
+			return (lName.translatedI18n.isEmpty() ? (pronounceStr.isEmpty() ? lName.native : pronounceStr) : lName.translatedI18n);
+		case StelObject::CulturalDisplayStyle::IPA: // really only IPA?
+			return lName.IPA;
+		case StelObject::CulturalDisplayStyle::NONE: // fully non-cultural!
+		case StelObject::CulturalDisplayStyle::Modern:
+			return lCommonNameI18n;
+		case StelObject::CulturalDisplayStyle::Byname:
+			return (lName.bynameI18n.isEmpty() ? (pronounceStr.isEmpty() ? lName.native : pronounceStr) : lName.bynameI18n);
+		default:
+			break;
+	}
+	// simple cases done. Now build-up label of form "primary [common transliteration aka pronounce, scientific transliteration] [IPA] (translation) <modern>"
+	// (The first of the square brackets is formatted with "turtle brackets" so that only IPA is in regular square brackets.)
+	// "primary" is usually either native or one of the reading aids, or translation or even modern when other options are switched off.
+	// Rules:
+	// Styles with Native_* start with just native, but we must fallback to other strings if native is empty.
+	// Styles with Pronounce_* start with Pronounce or transliteration, but Pronounce_Translit_... must show Translit in turtle brackets when both exist.
+	// Styles with Translit_* start with Transliteration or fallback to Pronounce
+	// Styles with ...IPA... must add IPA (when exists) in square brackets, conditionally after the comma-separated turtle brackets with Pronounce and Transliteration
+	// Styles with ...Translated have translation in brackets appended
+	// Styles with ...Modern have the modern name (lCommonNameI18n) in slightly decorative curved angle brackets appended
+
+	QStringList braced; // the contents of the secondary term, i.e. pronunciation and transliteration
+	if (styleInt & int(StelObject::CulturalDisplayStyle::Native))
+	{
+		label=nativeOrPronounce+ZWS;
+		// Add pronounciation and Translit in braces
+		if (styleInt & int(StelObject::CulturalDisplayStyle::Pronounce))
+			braced.append(pronounceStr);
+		if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
+			braced.append(lName.transliteration);
+	}
+	else // not including native
+	{
+		// Use the first valid of pronunciation or transliteration as main name (fallback to native), add the others in braces if applicable
+		if (styleInt & int(StelObject::CulturalDisplayStyle::Pronounce))
+		{
+			label=pronounceOrNative+ZWS;
+			if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
+				braced.append(lName.transliteration);
+		}
+
+		else if (styleInt & int(StelObject::CulturalDisplayStyle::Translit))
+		{
+			label=translitOrPronounce+ZWS;
+		}
+	}
+
+	braced.removeDuplicates();
+	braced.removeOne(QString(""));
+	braced.removeOne(QString());
+	braced.removeOne(label); // avoid repeating the main thing if it was used as fallback!
+
+	if (!braced.isEmpty())
+	{
+		QString pronTrans=QString(" %1%3%2").arg(QChar(0x2997), QChar(0x2998), braced.join(", "+ZWS));
+			label.append(pronTrans+ZWS);
+	}
+
+	// Add IPA (where possible)
+	if ((styleInt & int(StelObject::CulturalDisplayStyle::IPA)) && (!lName.IPA.isEmpty()) && (label != lName.IPA))
+	{
+		QString ipa=QString(" [%1]").arg(lName.IPA);
+			label.append(ipa+ZWS);
+	}
+
+	// Add translation and optional byname in brackets
+
+	QStringList bracketed;
+	if ((styleInt & int(StelObject::CulturalDisplayStyle::Translated)) && (!lName.translatedI18n.isEmpty()))
+	{
+		if (label.isEmpty())
+			label=lName.translatedI18n;
+		else if (!label.startsWith(lName.translatedI18n, Qt::CaseInsensitive)) // seems useless to add translation into same string
+
+			//label.append(QString(" (%1)").arg(lName.translatedI18n));
+			bracketed.append(lName.translatedI18n+ZWS);
+	}
+
+	if ( (styleInt & int(StelObject::CulturalDisplayStyle::Byname)) && (!lName.bynameI18n.isEmpty()))
+		bracketed.append(lName.bynameI18n+ZWS);
+	if (!bracketed.isEmpty())
+	{
+		QString transBy=QString(" (%1)").arg(bracketed.join(", "+ZWS));
+			label.append(transBy+ZWS);
+	}
+
+
+	// Add an explanatory modern name in decorative angle brackets
+	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && (!commonNameI18n.isEmpty()) && (!label.startsWith(lCommonNameI18n)) && (lCommonNameI18n!=lName.translatedI18n))
+	{
+		QString modern=QString(" %1%3%2").arg(QChar(0x29FC), QChar(0x29FD), lCommonNameI18n);
+			label.append(modern+ZWS);
+	}
+	if ((styleInt & int(StelObject::CulturalDisplayStyle::Modern)) && label.isEmpty()) // if something went wrong?
+		label=lCommonNameI18n;
+
+	return label;
+}
+
+//! Returns whether current skyculture uses (incorporates) common names.
+bool StelSkyCultureMgr::currentSkycultureUsesCommonNames() const
+{
+	return currentSkyCulture.fallbackToInternationalNames;
+}
+
+// Call this as scripting function. This shall provide information about unicode and QString properties
+void StelSkyCultureMgr::analyzeScreenLabel() const
+{
+	static StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	if (omgr->getSelectedObject().isEmpty())
+		return;
+
+	//StelObjectP obj = omgr->getSelectedObject()[0];
+	StelObjectP obj = omgr->getLastSelectedObject();
+	qDebug() << "Obj:" << obj->getObjectType() << obj->getEnglishName();
+	QString label;
+	// obj may be a star, then we need a StarWrapper...
+	if (obj->getObjectType().contains("star"))
+	{
+		qDebug() << "star. searching deeper...";
+		obj=GETSTELMODULE(StarMgr)->searchByName(obj->getEnglishName());
+		static const QRegularExpression hpRx("^(HIP|HP)\\s*(\\d+)\\s*.*$", QRegularExpression::CaseInsensitiveOption);
+		QRegularExpressionMatch match=hpRx.match(obj->getEnglishName());
+		if (match.hasMatch())
+		{
+			bool ok;
+			int hpNum = match.captured(2).toInt(&ok);
+			if (ok)
+			{
+				label=GETSTELMODULE(StarMgr)->getCulturalScreenLabel(hpNum);
+			}
+		}
+	}
+	else
+		label=obj->getScreenLabel();
+
+	qDebug() << "Analyze label: " << label;
+	std::u32string label32=label.toStdU32String();
+
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+	QList<uint> label32l=label.toUcs4().toList();
+#else
+	QList<uint> label32l=label.toUcs4();
+#endif
+	// Unfortunately, QChar enums are not Q_ENUMs. The names are not available from the MetaObject.
+	static const QMap <QChar::Category, QString> charCatMap = {
+		{ QChar::Mark_NonSpacing         , " 0 Mn Mark_NonSpacing         " },
+		{ QChar::Mark_SpacingCombining   , " 1 Mc Mark_SpacingCombining   " },
+		{ QChar::Mark_Enclosing          , " 2 Me Mark_Enclosing          " },
+		{ QChar::Number_DecimalDigit     , " 3 Nd Number_DecimalDigit     " },
+		{ QChar::Number_Letter           , " 4 Nl Number_Letter           " },
+		{ QChar::Number_Other            , " 5 No Number_Other            " },
+		{ QChar::Separator_Space         , " 6 Zs Separator_Space         " },
+		{ QChar::Separator_Line          , " 7 Zl Separator_Line          " },
+		{ QChar::Separator_Paragraph     , " 8 Zp Separator_Paragraph     " },
+		{ QChar::Other_Control           , " 9 Cc Other_Control           " },
+		{ QChar::Other_Format            , "10 Cf Other_Format            " },
+		{ QChar::Other_Surrogate         , "11 Cs Other_Surrogate         " },
+		{ QChar::Other_PrivateUse        , "12 Co Other_PrivateUse        " },
+		{ QChar::Other_NotAssigned       , "13 Cn Other_NotAssigned       " },
+		{ QChar::Letter_Uppercase        , "14 Lu Letter_Uppercase        " },
+		{ QChar::Letter_Lowercase        , "15 Ll Letter_Lowercase        " },
+		{ QChar::Letter_Titlecase        , "16 Lt Letter_Titlecase        " },
+		{ QChar::Letter_Modifier         , "17 Lm Letter_Modifier         " },
+		{ QChar::Letter_Other            , "18 Lo Letter_Other            " },
+		{ QChar::Punctuation_Connector   , "19 Pc Punctuation_Connector   " },
+		{ QChar::Punctuation_Dash        , "20 Pd Punctuation_Dash        " },
+		{ QChar::Punctuation_Open        , "21 Ps Punctuation_Open        " },
+		{ QChar::Punctuation_Close       , "22 Pe Punctuation_Close       " },
+		{ QChar::Punctuation_InitialQuote, "23 Pi Punctuation_InitialQuote" },
+		{ QChar::Punctuation_FinalQuote  , "24 Pf Punctuation_FinalQuote  " },
+		{ QChar::Punctuation_Other       , "25 Po Punctuation_Other       " },
+		{ QChar::Symbol_Math             , "26 Sm Symbol_Math             " },
+		{ QChar::Symbol_Currency         , "27 Sc Symbol_Currency         " },
+		{ QChar::Symbol_Modifier         , "28 Sk Symbol_Modifier         " },
+		{ QChar::Symbol_Other            , "29 So Symbol_Other            " }
+	};
+	static const QMap <QChar::Script, QString> charScriptMap = {
+		{ QChar::Script_Unknown                 , "  0 Unknown" },   // For unassigned, private-use, noncharacter, and surrogate code points.
+		{ QChar::Script_Inherited               , "  1 Inherited" }, // For characters that may be used with multiple scripts and that inherit their script from the preceding characters. These include nonspacing marks, enclosing marks, and zero width joiner/non-joiner characters.
+		{ QChar::Script_Common                  , "  2 Common" },    // For characters that may be used with multiple scripts and that do not inherit their script from the preceding characters.
+		{ QChar::Script_Adlam                   , "132 Adlam" },
+		{ QChar::Script_Ahom                    , "126 Ahom" },
+		{ QChar::Script_AnatolianHieroglyphs    , "127 AnatolianHieroglyphs" },
+		{ QChar::Script_Arabic                  , "  8 Arabic" },
+		{ QChar::Script_Armenian                , "  6 Armenian" },
+		{ QChar::Script_Avestan                 , " 80 Avestan" },
+		{ QChar::Script_Balinese                , " 62 Balinese" },
+		{ QChar::Script_Bamum                   , " 84 Bamum" },
+		{ QChar::Script_BassaVah                , "104 BassaVah" },
+		{ QChar::Script_Batak                   , " 93 Batak" },
+		{ QChar::Script_Bengali                 , " 12 Bengali" },
+		{ QChar::Script_Bhaiksuki               , "133 Bhaiksuki" },
+		{ QChar::Script_Bopomofo                , " 36 Bopomofo" },
+		{ QChar::Script_Brahmi                  , " 94 Brahmi" },
+		{ QChar::Script_Braille                 , " 54 Braille" },
+		{ QChar::Script_Buginese                , " 55 Buginese" },
+		{ QChar::Script_Buhid                   , " 44 Buhid" },
+		{ QChar::Script_CanadianAboriginal      , " 29 CanadianAboriginal" },
+		{ QChar::Script_Carian                  , " 75 Carian" },
+		{ QChar::Script_CaucasianAlbanian       , "103 CaucasianAlbanian" },
+		{ QChar::Script_Chakma                  , " 96 Chakma" },
+		{ QChar::Script_Cham                    , " 77 Cham" },
+		{ QChar::Script_Cherokee                , " 28 Cherokee" },
+		{ QChar::Script_Coptic                  , " 46 Coptic" },
+		{ QChar::Script_Cuneiform               , " 63 Cuneiform" },
+		{ QChar::Script_Cypriot                 , " 53 Cypriot" },
+		{ QChar::Script_Cyrillic                , "  5 Cyrillic" },
+		{ QChar::Script_Deseret                 , " 41 Deseret" },
+		{ QChar::Script_Devanagari              , " 11 Devanagari" },
+		{ QChar::Script_Duployan                , "105 Duployan" },
+		{ QChar::Script_EgyptianHieroglyphs     , " 81 EgyptianHieroglyphs" },
+		{ QChar::Script_Elbasan                 , "106 Elbasan" },
+		{ QChar::Script_Ethiopic                , " 27 Ethiopic" },
+		{ QChar::Script_Georgian                , " 25 Georgian" },
+		{ QChar::Script_Glagolitic              , " 57 Glagolitic" },
+		{ QChar::Script_Gothic                  , " 40 Gothic" },
+		{ QChar::Script_Grantha                 , "107 Grantha" },
+		{ QChar::Script_Greek                   , "  4 Greek" },
+		{ QChar::Script_Gujarati                , " 14 Gujarati" },
+		{ QChar::Script_Gurmukhi                , " 13 Gurmukhi" },
+		{ QChar::Script_Han                     , " 37 Han" },
+		{ QChar::Script_Hangul                  , " 26 Hangul" },
+		{ QChar::Script_Hanunoo                 , " 43 Hanunoo" },
+		{ QChar::Script_Hatran                  , "128 Hatran" },
+		{ QChar::Script_Hebrew                  , "  7 Hebrew" },
+		{ QChar::Script_Hiragana                , " 34 Hiragana" },
+		{ QChar::Script_ImperialAramaic         , " 87 ImperialAramaic" },
+		{ QChar::Script_InscriptionalPahlavi    , " 90 InscriptionalPahlavi" },
+		{ QChar::Script_InscriptionalParthian   , " 89 InscriptionalParthian" },
+		{ QChar::Script_Javanese                , " 85 Javanese" },
+		{ QChar::Script_Kaithi                  , " 92 Kaithi" },
+		{ QChar::Script_Kannada                 , " 18 Kannada" },
+		{ QChar::Script_Katakana                , " 35 Katakana" },
+		{ QChar::Script_KayahLi                 , " 72 KayahLi" },
+		{ QChar::Script_Kharoshthi              , " 61 Kharoshthi" },
+		{ QChar::Script_Khmer                   , " 32 Khmer" },
+		{ QChar::Script_Khojki                  , "109 Khojki" },
+		{ QChar::Script_Khudawadi               , "123 Khudawadi" },
+		{ QChar::Script_Lao                     , " 22 Lao" },
+		{ QChar::Script_Latin                   , "  3 Latin" },
+		{ QChar::Script_Lepcha                  , " 68 Lepcha" },
+		{ QChar::Script_Limbu                   , " 47 Limbu" },
+		{ QChar::Script_LinearA                 , "110 LinearA" },
+		{ QChar::Script_LinearB                 , " 49 LinearB" },
+		{ QChar::Script_Lisu                    , " 83 Lisu" },
+		{ QChar::Script_Lycian                  , " 74 Lycian" },
+		{ QChar::Script_Lydian                  , " 76 Lydian" },
+		{ QChar::Script_Mahajani                , "111 Mahajani" },
+		{ QChar::Script_Malayalam               , " 19 Malayalam" },
+		{ QChar::Script_Mandaic                 , " 95 Mandaic" },
+		{ QChar::Script_Manichaean              , "112 Manichaean" },
+		{ QChar::Script_Marchen                 , "134 Marchen" },
+		{ QChar::Script_MasaramGondi            , "138 MasaramGondi" },
+		{ QChar::Script_MeeteiMayek             , " 86 MeeteiMayek" },
+		{ QChar::Script_MendeKikakui            , "113 MendeKikakui" },
+		{ QChar::Script_MeroiticCursive         , " 97 MeroiticCursive" },
+		{ QChar::Script_MeroiticHieroglyphs     , " 98 MeroiticHieroglyphs" },
+		{ QChar::Script_Miao                    , " 99 Miao" },
+		{ QChar::Script_Modi                    , "114 Modi" },
+		{ QChar::Script_Mongolian               , " 33 Mongolian" },
+		{ QChar::Script_Mro                     , "115 Mro" },
+		{ QChar::Script_Multani                 , "129 Multani" },
+		{ QChar::Script_Myanmar                 , " 24 Myanmar" },
+		{ QChar::Script_Nabataean               , "117 Nabataean" },
+		{ QChar::Script_Newa                    , "135 Newa" },
+		{ QChar::Script_NewTaiLue               , " 56 NewTaiLue" },
+		{ QChar::Script_Nko                     , " 66 Nko" },
+		{ QChar::Script_Nushu                   , "139 Nushu" },
+		{ QChar::Script_Ogham                   , " 30 Ogham" },
+		{ QChar::Script_OlChiki                 , " 69 OlChiki" },
+		{ QChar::Script_OldHungarian            , "130 OldHungarian" },
+		{ QChar::Script_OldItalic               , " 39 OldItalic" },
+		{ QChar::Script_OldNorthArabian         , "116 OldNorthArabian" },
+		{ QChar::Script_OldPermic               , "120 OldPermic" },
+		{ QChar::Script_OldPersian              , " 60 OldPersian" },
+		{ QChar::Script_OldSouthArabian         , " 88 OldSouthArabian" },
+		{ QChar::Script_OldTurkic               , " 91 OldTurkic" },
+		{ QChar::Script_Oriya                   , " 15 Oriya" },
+		{ QChar::Script_Osage                   , "136 Osage" },
+		{ QChar::Script_Osmanya                 , " 52 Osmanya" },
+		{ QChar::Script_PahawhHmong             , "108 PahawhHmong" },
+		{ QChar::Script_Palmyrene               , "118 Palmyrene" },
+		{ QChar::Script_PauCinHau               , "119 PauCinHau" },
+		{ QChar::Script_PhagsPa                 , " 65 PhagsPa" },
+		{ QChar::Script_Phoenician              , " 64 Phoenician" },
+		{ QChar::Script_PsalterPahlavi          , "121 PsalterPahlavi" },
+		{ QChar::Script_Rejang                  , " 73 Rejang" },
+		{ QChar::Script_Runic                   , " 31 Runic" },
+		{ QChar::Script_Samaritan               , " 82 Samaritan" },
+		{ QChar::Script_Saurashtra              , " 71 Saurashtra" },
+		{ QChar::Script_Sharada                 , "100 Sharada" },
+		{ QChar::Script_Shavian                 , " 51 Shavian" },
+		{ QChar::Script_Siddham                 , "122 Siddham" },
+		{ QChar::Script_SignWriting             , "131 SignWriting" },
+		{ QChar::Script_Sinhala                 , " 20 Sinhala" },
+		{ QChar::Script_SoraSompeng             , "101 SoraSompeng" },
+		{ QChar::Script_Soyombo                 , "140 Soyombo" },
+		{ QChar::Script_Sundanese               , " 67 Sundanese" },
+		{ QChar::Script_SylotiNagri             , " 59 SylotiNagri" },
+		{ QChar::Script_Syriac                  , "  9 Syriac" },
+		{ QChar::Script_Tagalog                 , " 42 Tagalog" },
+		{ QChar::Script_Tagbanwa                , " 45 Tagbanwa" },
+		{ QChar::Script_TaiLe                   , " 48 TaiLe" },
+		{ QChar::Script_TaiTham                 , " 78 TaiTham" },
+		{ QChar::Script_TaiViet                 , " 79 TaiViet" },
+		{ QChar::Script_Takri                   , "102 Takri" },
+		{ QChar::Script_Tamil                   , " 16 Tamil" },
+		{ QChar::Script_Tangut                  , "137 Tangut" },
+		{ QChar::Script_Telugu                  , " 17 Telugu" },
+		{ QChar::Script_Thaana                  , " 10 Thaana" },
+		{ QChar::Script_Thai                    , " 21 Thai" },
+		{ QChar::Script_Tibetan                 , " 23 Tibetan" },
+		{ QChar::Script_Tifinagh                , " 58 Tifinagh" },
+		{ QChar::Script_Tirhuta                 , "124 Tirhuta " },
+		{ QChar::Script_Ugaritic                , " 50 Ugaritic" },
+		{ QChar::Script_Vai                     , " 70 Vai" },
+		{ QChar::Script_WarangCiti              , "125 WarangCiti" },
+		{ QChar::Script_Yi                      , " 38 Yi" },
+		{ QChar::Script_ZanabazarSquare         , "141 ZanabazarSquare" },
+
+	#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+		{ QChar::Script_KhitanSmallScript       , "155 KhitanSmallScript" },
+		{ QChar::Script_Makasar                 , "145 Makasar" },
+		{ QChar::Script_Medefaidrin             , "146 Medefaidrin" },
+		{ QChar::Script_Nandinagari             , "150 Nandinagari" },
+		{ QChar::Script_NyiakengPuachueHmong    , "151 NyiakengPuachueHmong" },
+		{ QChar::Script_OldSogdian              , "147 OldSogdian" },
+		{ QChar::Script_Sogdian                 , "148 Sogdian" },
+		{ QChar::Script_Wancho                  , "152 Wancho" },
+		{ QChar::Script_Yezidi                  , "156 Yezidi" },
+	#endif
+	#if (QT_VERSION>=QT_VERSION_CHECK(6,3,0))
+		{ QChar::Script_CyproMinoan             , "157 CyproMinoan" },
+		{ QChar::Script_OldUyghur               , "158 OldUyghur" },
+		{ QChar::Script_Tangsa                  , "159 Tangsa" },
+		{ QChar::Script_Toto                    , "160 Toto" },
+		{ QChar::Script_Vithkuqi                , "161 Vithkuqi" },
+	#endif
+	#if (QT_VERSION>=QT_VERSION_CHECK(6,5,0))
+		{ QChar::Script_NagMundari              , "163 NagMundari" }, // Qt>=6.3, but CI fails.
+		{ QChar::Script_Kawi                    , "162 Kawi" }
+	#endif
+	};
+	static const QMap <QChar::Direction, QString> charDirMap = {
+		{ QChar::DirL    , " 0 DirL  " },
+		{ QChar::DirR    , " 1 DirR  " },
+		{ QChar::DirEN   , " 2 DirEN " },
+		{ QChar::DirES   , " 3 DirES " },
+		{ QChar::DirET   , " 4 DirET " },
+		{ QChar::DirAN   , " 5 DirAN " },
+		{ QChar::DirCS   , " 6 DirCS " },
+		{ QChar::DirB    , " 7 DirB  " },
+		{ QChar::DirS    , " 8 DirS  " },
+		{ QChar::DirWS   , " 9 DirWS " },
+		{ QChar::DirON   , "10 DirON " },
+		{ QChar::DirLRE  , "11 DirLRE" },
+		{ QChar::DirLRO  , "12 DirLRO" },
+		{ QChar::DirAL   , "13 DirAL " },
+		{ QChar::DirRLE  , "14 DirRLE" },
+		{ QChar::DirRLO  , "15 DirRLO" },
+		{ QChar::DirPDF  , "16 DirPDF" },
+		{ QChar::DirNSM  , "17 DirNSM" },
+		{ QChar::DirBN   , "18 DirBN " },
+		{ QChar::DirLRI  , "19 DirLRI" },
+		{ QChar::DirRLI  , "20 DirRLI" },
+		{ QChar::DirFSI  , "21 DirFSI" },
+		{ QChar::DirPDI  , "22 DirPDI" }
+	};
+	static const QMap <QChar::Decomposition, QString> charDecompositionMap = {
+
+		{ QChar::NoDecomposition, " 0 NoDecomposition" },
+		{ QChar::Canonical      , " 1 Canonical      " },
+		{ QChar::Circle         , " 8 Circle         " },
+		{ QChar::Compat         , "16 Compat         " },
+		{ QChar::Final          , " 6 Final          " },
+		{ QChar::Font           , " 2 Font           " },
+		{ QChar::Fraction       , "17 Fraction       " },
+		{ QChar::Initial        , " 4 Initial        " },
+		{ QChar::Isolated       , " 7 Isolated       " },
+		{ QChar::Medial         , " 5 Medial         " },
+		{ QChar::Narrow         , "13 Narrow         " },
+		{ QChar::NoBreak        , " 3 NoBreak        " },
+		{ QChar::Small          , "14 Small          " },
+		{ QChar::Square         , "15 Square         " },
+		{ QChar::Sub            , "10 Sub            " },
+		{ QChar::Super          , " 9 Super          " },
+		{ QChar::Vertical       , "11 Vertical       " },
+		{ QChar::Wide           , "12 QChar::Wide    " }
+	};
+
+	foreach(const uint letter, label32l )
+	{
+		qDebug().noquote() << QChar::digitValue(letter) << "(u" << QString::number(letter, 16)
+		      #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+				   << "/" << QChar::fromUcs4(letter)
+		      #endif
+				   << ")"
+			    "\tcat." << charCatMap.value(QChar::category(letter), "UNK") <<
+			    "scr." << charScriptMap.value(QChar::script(letter), "UNK") <<
+			    "\tdir." << charDirMap.value(QChar::direction(letter), "UNK") <<
+			    "decomp." <<  charDecompositionMap.value(QChar::decompositionTag(letter), "UNK");
+	}
 }

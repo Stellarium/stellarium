@@ -97,6 +97,9 @@ public:
 	//! Pure virtual method. See subclass implementation.
 	virtual void searchAround(const StelCore* core, int index, const Vec3d &v, const double withParallax, const Vec3d diffPos,
 							  double cosLimFov, QList<StelObjectP > &result) = 0;
+	virtual void searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly, const float maxMag,
+							  QList<StelObjectP > &result) const = 0;
+
     virtual StelObjectP searchGaiaID(int index, const StarId source_id, int& matched) const = 0;
 	virtual void searchGaiaIDepochPos(const StarId source_id, float dyrs,
                                                   double & RA,
@@ -111,7 +114,7 @@ public:
 					  const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
 					  int maxMagStarName, float names_brightness,
 					  const QVector<SphericalCap>& boundingCaps,
-					  const bool withAberration, const Vec3d vel, const double withParallax, const Vec3d diffPos) const = 0;
+					  const bool withAberration, const Vec3d vel, const double withParallax, const Vec3d diffPos, const bool withCommonNameI18n) const = 0;
 
 	//! Get whether or not the catalog was successfully loaded.
 	//! @return @c true if at least one zone was loaded, otherwise @c false
@@ -179,14 +182,17 @@ protected:
 	//! @param boundingCaps
 	//! @param withAberration true if aberration to be applied
 	//! @param vel velocity vector of observer planet
+	//! @param withCommonNameI18n Use commonNameI18n when there is no cultural name
 	void draw(StelPainter* sPainter, int index, bool isInsideViewport,
-	          const RCMag *rcmag_table, int limitMagIndex, StelCore* core,
-	          int maxMagStarName, float names_brightness,
-	          const QVector<SphericalCap>& boundingCaps,
-	          const bool withAberration, const Vec3d vel, const double withParallax, const Vec3d diffPos) const override;
+		  const RCMag *rcmag_table, int limitMagIndex, StelCore* core,
+		  int maxMagStarName, float names_brightness,
+		  const QVector<SphericalCap>& boundingCaps,
+		  const bool withAberration, const Vec3d vel, const double withParallax, const Vec3d diffPos, const bool withCommonNameI18n) const override;
 
 	void searchAround(const StelCore* core, int index, const Vec3d &v, const double withParallax, 
 					  const Vec3d diffPos, double cosLimFov, QList<StelObjectP > &result) override;
+	void searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly, const float maxMag,
+			  QList<StelObjectP > &result) const override;
 	StelObjectP searchGaiaID(int index, const StarId source_id, int& matched) const override;
  	void searchGaiaIDepochPos(const StarId source_id, float dyrs,
                                                   double & RA,

@@ -36,6 +36,7 @@ src/core/StelProjectorClasses.cpp
 src/core/StelObject.cpp
 src/core/StelObjectMgr.cpp
 src/core/StelSkyLayerMgr.cpp
+src/core/StelSkyCultureSkyPartition.cpp
 src/core/StelSkyCultureMgr.cpp
 src/core/StelMovementMgr.cpp
 src/core/SimbadSearcher.cpp
@@ -197,6 +198,7 @@ plugins/MeteorShowers/src/ui_MSSearchDialog.h
 plugins/MosaicCamera/src/MosaicCamera.cpp
 plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp
 plugins/MosaicCamera/src/ui_mosaicCameraDialog.h
+plugins/MosaicCamera/src/translations.fab
 plugins/PointerCoordinates/src/PointerCoordinates.cpp
 plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp
 plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h
@@ -207,6 +209,18 @@ plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp
 plugins/Scenery3d/src/gui/StoredViewDialog.cpp
 plugins/Scenery3d/src/ui_scenery3dDialog.h
 plugins/Scenery3d/src/ui_storedViewDialog.h
+plugins/SkyCultureMaker/src/SkyCultureMaker.cpp
+plugins/SkyCultureMaker/src/SkyCultureMaker.hpp
+plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp
+plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp
+plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp
+plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp
+plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp
+plugins/SkyCultureMaker/src/ui_scmStartDialog.h
+plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h
+plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h
+plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h
+plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h
 plugins/ArchaeoLines/src/ArchaeoLines.cpp
 plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp
 plugins/ArchaeoLines/src/gui/ArchaeoLinesDialogLocations.cpp
@@ -252,3 +266,8 @@ plugins/OnlineQueries/src/ui_onlineQueriesDialog.h
 plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp
 plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp
 plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h
+plugins/NebulaTextures/src/TileManager.cpp
+plugins/NebulaTextures/src/PlateSolver.cpp
+plugins/NebulaTextures/src/NebulaTextures.cpp
+plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp
+plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h

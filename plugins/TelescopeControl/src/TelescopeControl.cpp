@@ -51,6 +51,7 @@
 #include <QDateTime>
 #include <QDir>
 #include <QFileInfo>
+#include <QFont>
 #include <QMapIterator>
 #include <QSettings>
 #include <QString>
@@ -295,7 +296,9 @@ void TelescopeControl::draw(StelCore* core)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
-	sPainter.setFont(labelFont);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(labelFontSize);
+	sPainter.setFont(font);
 	reticleTexture->bind();
 	for (const auto& telescope : std::as_const(telescopeClients))
 	{
@@ -407,7 +410,7 @@ bool TelescopeControl::configureGui(bool show)
 // Misc methods (from TelescopeMgr; TODO: Better categorization)
 void TelescopeControl::setFontSize(int fontSize)
 {
-	labelFont.setPixelSize(fontSize);
+	labelFontSize = fontSize;
 }
 
 void TelescopeControl::slewTelescopeToSelectedObject(const int idx)

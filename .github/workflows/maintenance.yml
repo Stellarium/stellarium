@@ -39,10 +39,10 @@ jobs:
     if: "!contains(github.actor, 'transifex')"
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Check CRLF line endings
-        uses: erclu/check-crlf@v1
+        uses: erclu/check-crlf@master
 
   check-json:
     name: "Linting JSON"
@@ -51,13 +51,12 @@ jobs:
     steps:
       - name: Install JSON linter
         run: |
-          sudo apt remove php7.* -y
-          sudo apt remove php8.* -y
+          sudo apt remove php* -y
           sudo apt update
           sudo apt install -y jsonlint python3-demjson
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Linting JSON
         run: find ${{github.workspace}}/{src,plugins,nebulae,skycultures} -iname '*.json' -exec jsonlint -S {} +

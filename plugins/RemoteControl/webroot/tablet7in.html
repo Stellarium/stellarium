@@ -368,6 +368,11 @@
 			<label><input class="stelproperty" name="StelCore.flagUseTopocentricCoordinates" type="checkbox"/><?= tr("Topocentric coordinates")?></label>
 			<label><input class="stelproperty" name="StelCore.flagUseNutation" type="checkbox"/><?= tr("Include nutation")?></label>
 			<div class="flex flex-baseline">
+			   <label><input class="stelproperty" name="StelCore.flagUseParallax" type="checkbox"/><?= tr("Include parallax")?></label>&nbsp;
+			   <span class="stelproperty" data-prop="StelCore.parallaxFactor" data-numberformat="n0"></span>
+			   <div class="slider stelproperty flex-expand" data-prop="StelCore.parallaxFactor" data-min="1" data-max="100000" data-step="1"></div>
+			</div>
+			<div class="flex flex-baseline">
 			   <label><input class="stelproperty" name="StelCore.flagUseAberration" type="checkbox"/><?= tr("Include aberration")?></label>&nbsp;
 			   <span class="stelproperty" data-prop="StelCore.aberrationFactor" data-numberformat="n1"></span>
 			   <div class="slider stelproperty flex-expand" data-prop="StelCore.aberrationFactor" data-min="0" data-max="5" data-step="0.1"></div>
@@ -797,8 +802,18 @@
                   <td><span class="stelproperty" data-prop="ConstellationMgr.constellationBoundariesThickness" data-numberformat="n0"></span></td>
                   <td><div id="skyculture_cstBoundariesThickness" class="slider stelproperty flex-expand" data-prop="ConstellationMgr.constellationBoundariesThickness" data-min="1" data-max="5" data-step="1" data-numberformat="n0"></div></td>
               </tr>
-              <tr><td colspan="3"><label><input type="checkbox" class="stelproperty" name="SolarSystem.flagNativePlanetNames" /><?= tr("Use native names for planets")?></label></td></tr>
-              <tr><td colspan="3"><label><input type="checkbox" class="stelproperty" name="ConstellationMgr.isolateSelected" /><?= tr("Constellation selection isolated")?></label></td></tr>
+	      <tr><td><label><input type="checkbox" class="stelproperty" name="ConstellationMgr.zodiacDisplayed" /><?= tr("Show zodiac with thickness")?></label></td>
+                  <td><span class="stelproperty" data-prop="ConstellationMgr.zodiacThickness" data-numberformat="n0"></span></td>
+                  <td><div id="skyculture_zodiacThickness" class="slider stelproperty flex-expand" data-prop="ConstellationMgr.zodiacThickness" data-min="1" data-max="5" data-step="1" data-numberformat="n0"></div></td>
+              </tr>
+	      <tr><td><label><input type="checkbox" class="stelproperty" name="ConstellationMgr.lunarSystemDisplayed" /><?= tr("Show lunar stations/mansions with thickness")?></label></td>
+                  <td><span class="stelproperty" data-prop="ConstellationMgr.lunarSystemThickness" data-numberformat="n0"></span></td>
+                  <td><div id="skyculture_lunarSystemThickness" class="slider stelproperty flex-expand" data-prop="ConstellationMgr.lunarSystemThickness" data-min="1" data-max="5" data-step="1" data-numberformat="n0"></div></td>
+              </tr>
+	      <tr><td colspan="2"><label><input type="checkbox" class="stelproperty" name="StelSkyCultureMgr.flagUseAbbreviatedNames" /><?= tr("Short labels")?></label></td>
+	          <td colspan="1"><label><input type="checkbox" class="stelproperty" name="ConstellationMgr.isolateSelected" /><?= tr("Constellation selection isolated")?></label></td>
+	          <td colspan="1"><label><input type="checkbox" class="stelproperty" name="ConstellationMgr.flagConstellationPick" /><?= tr("Only last selected")?></label></td>
+	      </tr>
           </table>
         </div>
         <div class="smallblock flex landscapeblock">

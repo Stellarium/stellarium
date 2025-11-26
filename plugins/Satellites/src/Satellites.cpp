@@ -53,6 +53,7 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
+#include <QFont>
 #include <QTimer>
 #include <QVariantMap>
 #include <QVariant>
@@ -658,7 +659,8 @@ void Satellites::restoreDefaultTleSources()
 		{ "other-comm", false }, { "glo-ops", true },       { "beidou", true },        { "sbas", false },
 		{ "nnss", false },       { "engineering", false },  { "education", false },    { "geodetic", false },
 		{ "radar", false },      { "cubesat", false },      { "other", false },        { "oneweb", true },
-		{ "starlink", true },    { "planet", false },       { "spire", false },        { "swarm", false }
+	        { "starlink", true },    { "planet", false },       { "spire", false },        { "swarm", false },
+	        { "qianfan", false },    { "hulianwang", false },   { "kuiper", false }
 	};
 	// Details: https://celestrak.org/NORAD/documentation/gp-data-formats.php
 	QString celestrackBaseURL = "https://celestrak.org/NORAD/elements/gp.php?GROUP=%1&FORMAT=TLE";
@@ -873,7 +875,7 @@ void Satellites::loadSettings()
 #endif
 
 	// Get a font for labels
-	labelFont.setPixelSize(conf->value("hint_font_size", 10).toInt());
+	labelFontSize = conf->value("hint_font_size", 10).toInt();
 
 	// orbit drawing params
 	Satellite::orbitLinesFlag = conf->value("orbit_line_flag", false).toBool();
@@ -970,7 +972,7 @@ void Satellites::saveSettingsToConfig()
 #endif
 
 	// Get a font for labels
-	conf->setValue("hint_font_size", labelFont.pixelSize());
+	conf->setValue("hint_font_size", labelFontSize);
 
 	// orbit drawing params
 	conf->setValue("orbit_line_flag", Satellite::orbitLinesFlag);
@@ -1579,7 +1581,11 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 		{ "PICO-1A",	"pico-1a" },
 		{ "GLOBALSTAR",	"globalstar" },
 		{ "STRATOSAT",	"stratosat" },
-		{ "COSMO-SKYMED", "cosmo-skymed" }
+	        { "COSMO-SKYMED", "cosmo-skymed" },
+	        { "QIANFAN",	"qianfan" },
+	        { "HULIANWANG",	"hulianwang" },
+	        { "KUIPER",	"kuiper" },
+	        { "YAMAL",	"yamal" }
 	};
 
 	QStringList groups;
@@ -1718,6 +1724,22 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 		satGroups.append("crewed");
 	if (tleData.name.startsWith("PROGRESS-MS") || tleData.name.startsWith("CYGNUS NG"))
 		satGroups.append("resupply");
+	if (tleData.name.startsWith("QIANFAN"))
+	{
+		satGroups.append("qianfan");
+		satGroups.append("communications");
+		satGroups.append("scientific");
+	}
+	if (tleData.name.startsWith("HULIANWANG"))
+	{
+		satGroups.append("hulianwang");
+		satGroups.append("communications");
+	}
+	if (tleData.name.startsWith("KUIPER"))
+	{
+		satGroups.append("kuiper");
+		satGroups.append("communications");
+	}
 
 	// Guessing the groups from CelesTrak's groups (a "supergroups")
 	if (tleData.sourceURL.contains("celestrak.org", Qt::CaseInsensitive))
@@ -2205,9 +2227,9 @@ void Satellites::setMaxCFRCS(double v)
 
 void Satellites::setLabelFontSize(int size)
 {
-	if (labelFont.pixelSize() != size)
+	if (labelFontSize != size)
 	{
-		labelFont.setPixelSize(size);
+		labelFontSize = size;
 		emit labelFontSizeChanged(size);
 		emit settingsChanged();
 	}
@@ -2888,7 +2910,9 @@ void Satellites::draw(StelCore* core)
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
-	painter.setFont(labelFont);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(labelFontSize);
+	painter.setFont(font);
 	Satellite::hintBrightness = hintFader.getInterstate();
 
 	painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
@@ -2927,13 +2951,15 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		painter.setBlending(true);
 
 		// Size on screen
-		double size = obj->getAngularRadius(core)*(2.*M_PI_180)*static_cast<double>(prj->getPixelPerRadAtCenter());
-		size += 12. + 3.*std::sin(2. * StelApp::getInstance().getTotalRunTime());
-		// size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
-		painter.drawSprite2dMode(static_cast<float>(screenpos[0]-size/2), static_cast<float>(screenpos[1]-size/2), 20, 90);
-		painter.drawSprite2dMode(static_cast<float>(screenpos[0]-size/2), static_cast<float>(screenpos[1]+size/2), 20, 0);
-		painter.drawSprite2dMode(static_cast<float>(screenpos[0]+size/2), static_cast<float>(screenpos[1]+size/2), 20, -90);
-		painter.drawSprite2dMode(static_cast<float>(screenpos[0]+size/2), static_cast<float>(screenpos[1]-size/2), 20, -180);
+		float size = obj->getAngularRadius(core)*(2.*M_PI_180)*static_cast<double>(prj->getPixelPerRadAtCenter());
+		const float scale = StelApp::getInstance().getScreenScale();
+		size += (12. + 3.*std::sin(2. * StelApp::getInstance().getTotalRunTime())) * scale;
+		const float radius = 20 * scale;
+		const float x = screenpos[0], y = screenpos[1];
+		painter.drawSprite2dMode(x-size/2, y-size/2, radius, 90);
+		painter.drawSprite2dMode(x-size/2, y+size/2, radius, 0);
+		painter.drawSprite2dMode(x+size/2, y+size/2, radius, -90);
+		painter.drawSprite2dMode(x+size/2, y-size/2, radius, -180);
 	}
 }
 
@@ -2943,7 +2969,9 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 	painter.setProjector(core->getProjection(StelCore::FrameHeliocentricEclipticJ2000, StelCore::RefractionAuto));
 	painter.setBlending(true, GL_ONE, GL_ONE);
 	painter.setLineSmooth(true);
-	painter.setFont(labelFont);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(labelFontSize);
+	painter.setFont(font);
 
 	double lambda, beta;
 	const Vec3d pos = earth->getEclipticPos();
@@ -3273,6 +3301,10 @@ void Satellites::createSuperGroupsList()
 		{ "iridium", communications },
 		{ "iridium-NEXT", communications },
 		{ "starlink", communications },
+	        { "qianfan", communications },
+	        { "hulianwang", communications },
+	        { "kuiper", communications },
+	        { "yamal", communications },
 		{ "oneweb", communications },
 		{ "orbcomm", communications },
 		{ "globalstar", communications },
@@ -3502,7 +3534,16 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA satellites
 	// TRANSLATORS: CelesTrak source [Molniya]: https://celestrak.org/NORAD/elements/molniya.txt
 	// TRANSLATORS: CelesTrak source [Molniya]: https://celestrak.org/NORAD/elements/gp.php?GROUP=molniya&FORMAT=tle
-	N_("molniya");	
+	N_("molniya");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Qianfan constellation (Qianfan is a proper name)
+	// TRANSLATORS: CelesTrak source [Qianfan]: https://celestrak.org/NORAD/elements/gp.php?GROUP=qianfan&FORMAT=tle
+	N_("qianfan");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Hulianwang constellation (Hulianwang is a proper name)
+	// TRANSLATORS: CelesTrak source [Hulianwang Digui]: https://celestrak.org/NORAD/elements/gp.php?GROUP=hulianwang&FORMAT=tle
+	N_("hulianwang");
+	// TRANSLATORS: CelesTrak source [Kuiper]: https://celestrak.org/NORAD/elements/gp.php?GROUP=kuiper&FORMAT=tle
+	N_("kuiper");
+	N_("yamal");
 	//
 	// *** Navigation Satellites [CelesTrak groups]
 	//

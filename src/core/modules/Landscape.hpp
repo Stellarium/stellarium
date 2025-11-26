@@ -33,7 +33,6 @@
 #include <QMap>
 #include <QImage>
 #include <QList>
-#include <QFont>
 #include <QVariant>
 
 class LandscapeMgr;
@@ -139,10 +138,10 @@ public:
 	//! Get landscape id. This is the landscape directory name, used for cache handling.
 	QString getId() const {return id;}
 
-	//! Return the associated location (may be empty!)
+	//! Return the associated location (may be empty/invalid!)
 	const StelLocation& getLocation() const {return location;}
-	//! Return if the location is valid (a valid location has a valid planetName!)
-	bool hasLocation() const {return (!(location.planetName.isEmpty()));}
+	//! Return if the location is valid
+	bool hasLocation() const {return (location.isValid());}
 	//! Return default light pollution luminance in cd/m², if present
 	QVariant getDefaultLightPollutionLuminance() const {return defaultLightPollutionLuminance;}
 	//! Return default fog setting (0/1) or -1 (no change)
@@ -181,12 +180,12 @@ public:
 	//! The list of azimuths (counted from True North towards East) and altitudes can come in various formats. We read the first two elements, which can be of formats:
 	enum horizonListMode {
 		invalid        =-1,
-		azDeg_altDeg   = 0, //! azimuth[degrees] altitude[degrees]
-		azDeg_zdDeg    = 1, //! azimuth[degrees] zenithDistance[degrees]
-		azRad_altRad   = 2, //! azimuth[radians] altitude[radians]
-		azRad_zdRad    = 3, //! azimuth[radians] zenithDistance[radians]
-		azGrad_altGrad = 4, //! azimuth[new_degrees] altitude[new_degrees] (may be found on theodolites)
-		azGrad_zdGrad  = 5  //! azimuth[new_degrees] zenithDistance[new_degrees] (may be found on theodolites)
+		azDeg_altDeg   = 0, //!< azimuth[degrees] altitude[degrees]
+		azDeg_zdDeg    = 1, //!< azimuth[degrees] zenithDistance[degrees]
+		azRad_altRad   = 2, //!< azimuth[radians] altitude[radians]
+		azRad_zdRad    = 3, //!< azimuth[radians] zenithDistance[radians]
+		azGrad_altGrad = 4, //!< azimuth[new_degrees] altitude[new_degrees] (may be found on theodolites)
+		azGrad_zdGrad  = 5  //!< azimuth[new_degrees] zenithDistance[new_degrees] (may be found on theodolites)
 	};
 
 	//! Load descriptive labels from optional file gazetteer.LANG.utf8.
@@ -226,51 +225,51 @@ protected:
 	std::unique_ptr<QOpenGLShaderProgram> renderProgram;
 
 	double radius;
-	QString name;          //! Read from landscape.ini:[landscape]name
-	QString author;        //! Read from landscape.ini:[landscape]author
-	QString description;   //! Read from landscape.ini:[landscape]description
-	QString id;            //! Set during load. Required for consistent caching.
+	QString name;          //!< Read from landscape.ini:[landscape]name
+	QString author;        //!< Read from landscape.ini:[landscape]author
+	QString description;   //!< Read from landscape.ini:[landscape]description
+	QString id;            //!< Set during load. Required for consistent caching.
 
-	float minBrightness;   //! Read from landscape.ini:[landscape]minimal_brightness. Allows minimum visibility that cannot be underpowered.
-	float landscapeBrightness;  //! brightness [0..1] to draw the landscape. Computed by the LandscapeMgr.
-        Vec3f landscapeTint;   //! color tint to draw the landscape (daylight texture only). Nice for sunrise/sunset.
-	float lightScapeBrightness; //! can be used to draw nightscape texture (e.g. city light pollution), if available. Computed by the LandscapeMgr.
-	bool validLandscape;   //! was a landscape loaded properly?
-	LinearFader landFader; //! Used to slowly fade in/out landscape painting.
-	LinearFader fogFader;  //! Used to slowly fade in/out fog painting.
-	static LinearFader illumFader;//! Used to slowly fade in/out illumination painting.
-	static LinearFader labelFader;//! Used to slowly fade in/out landscape feature labels.
-	unsigned int rows;     //! horizontal rows.  May be given in landscape.ini:[landscape]tesselate_rows. More indicates higher accuracy, but is slower.
-	unsigned int cols;     //! vertical columns. May be given in landscape.ini:[landscape]tesselate_cols. More indicates higher accuracy, but is slower.
-	float angleRotateZ;    //! [radians] if pano does not have its left border in the east, rotate in azimuth. Configured in landscape.ini[landscape]angle_rotatez (or decor_angle_rotatez for old_style landscapes)
-	float angleRotateZOffset; //! [radians] This is a rotation changeable at runtime via setZRotation (called by LandscapeMgr::setZRotation).
-				  //! Not in landscape.ini: Used in special cases where the horizon may rotate, e.g. on a ship.
+	float minBrightness;   //!< Read from landscape.ini:[landscape]minimal_brightness. Allows minimum visibility that cannot be underpowered.
+	float landscapeBrightness;  //!< brightness [0..1] to draw the landscape. Computed by the LandscapeMgr.
+	Vec3f landscapeTint;   //!< color tint to draw the landscape (daylight texture only). Nice for sunrise/sunset.
+	float lightScapeBrightness; //!< can be used to draw nightscape texture (e.g. city light pollution), if available. Computed by the LandscapeMgr.
+	bool validLandscape;   //!< was a landscape loaded properly?
+	LinearFader landFader; //!< Used to slowly fade in/out landscape painting.
+	LinearFader fogFader;  //!< Used to slowly fade in/out fog painting.
+	static LinearFader illumFader;//!< Used to slowly fade in/out illumination painting.
+	static LinearFader labelFader;//!< Used to slowly fade in/out landscape feature labels.
+	unsigned int rows;     //!< horizontal rows.  May be given in landscape.ini:[landscape]tesselate_rows. More indicates higher accuracy, but is slower.
+	unsigned int cols;     //!< vertical columns. May be given in landscape.ini:[landscape]tesselate_cols. More indicates higher accuracy, but is slower.
+	float angleRotateZ;    //!< [radians] if pano does not have its left border in the east, rotate in azimuth. Configured in landscape.ini[landscape]angle_rotatez (or decor_angle_rotatez for old_style landscapes)
+	float angleRotateZOffset; //!< [radians] This is a rotation changeable at runtime via setZRotation (called by LandscapeMgr::setZRotation).
+				  //!< Not in landscape.ini: Used in special cases where the horizon may rotate, e.g. on a ship.
 
 	double sinMinAltitudeLimit; //! Minimal altitude of landscape cover. Can be used to construct bounding caps, so that e.g. no stars are drawn below this altitude. Default -0.035, i.e. sin(-2 degrees).
 	static double landscapeTransparency;
 
-	StelLocation location; //! OPTIONAL. If present, can be used to set location.
+	StelLocation location; //!< OPTIONAL. If present, can be used to set location.
 	/** May be given in landscape.ini:light_pollution_luminance in cd/m². Default: no change.
 	 * Another way (deprecated) is to use landscape.ini:[location]light_pollution to set Bortle scale index. Default: -1 (no change). */
 	QVariant defaultLightPollutionLuminance;
-	int defaultFogSetting;  //! May be given in landscape.ini:[location]display_fog: -1(no change), 0(off), 1(on). Default: -1.
-	double defaultExtinctionCoefficient; //! May be given in landscape.ini:[location]atmospheric_extinction_coefficient. Default -1 (no change).
-	double defaultTemperature; //! [Celsius] May be given in landscape.ini:[location]atmospheric_temperature. default: -1000.0 (no change)
-	double defaultPressure;    //! [mbar]    May be given in landscape.ini:[location]atmospheric_pressure. Default -1.0 (compute from [location]/altitude), use -2 to indicate "no change".
+	int defaultFogSetting;  //!< May be given in landscape.ini:[location]display_fog: -1(no change), 0(off), 1(on). Default: -1.
+	double defaultExtinctionCoefficient; //!< May be given in landscape.ini:[location]atmospheric_extinction_coefficient. Default -1 (no change).
+	double defaultTemperature; //!< [Celsius] May be given in landscape.ini:[location]atmospheric_temperature. default: -1000.0 (no change)
+	double defaultPressure;    //!< [mbar]    May be given in landscape.ini:[location]atmospheric_pressure. Default -2 to indicate "no change"; use -1.0 to compute from [location]/altitude).
 
 	// Optional elements which, if present, describe a horizon polygon. They can be used to render a line or a filled region, esp. in LandscapePolygonal
-	SphericalRegionP horizonPolygon;   //! Optional element describing the horizon line.
-					   //! Data shall be read from the file given as landscape.ini[landscape]polygonal_horizon_list
-					   //! For LandscapePolygonal, this is the only horizon data item.
-	static Vec3f horizonPolygonLineColor;     //! for all horizon types, the horizonPolygon line, if specified, will be drawn in this color
-					   //! DEPRECATED PER-LANDSCAPE: if still specified in landscape.ini[landscape]horizon_line_color, it will be ignored. Negative red (default) indicated "don't draw".
-	static int horizonPolygonLineThickness; //! [0...5] used to draw the horizon polygon, if defined. Set 0 to switch off.
+	SphericalRegionP horizonPolygon;   //!< Optional element describing the horizon line.
+					   //!< Data shall be read from the file given as landscape.ini[landscape]polygonal_horizon_list
+					   //!< For LandscapePolygonal, this is the only horizon data item.
+	static Vec3f horizonPolygonLineColor;     //!< for all horizon types, the horizonPolygon line, if specified, will be drawn in this color
+					   //!< DEPRECATED PER-LANDSCAPE: if still specified in landscape.ini[landscape]horizon_line_color, it will be ignored. Negative red (default) indicated "don't draw".
+	static int horizonPolygonLineThickness; //!< [0...5] used to draw the horizon polygon, if defined. Set 0 to switch off.
 	// Optional element: labels for landscape features.
 	QList<LandscapeLabel> landscapeLabels;
-	static int fontSize;     //! Used for landscape labels (optionally indicating landscape features)
-	static Vec3f labelColor; //! Color for the landscape labels.
-	static int labelAngle; //! Rotation angle for landscape labels, degrees. Useful for landscapes with many labels.
-	unsigned int memorySize;   //!< holds an approximate value of memory consumption (for cache cost estimate)
+	static int fontSize;     //!< Used for landscape labels (optionally indicating landscape features)
+	static Vec3f labelColor; //!< Color for the landscape labels.
+	static int labelAngle;   //!< Rotation angle for landscape labels, degrees. Useful for landscapes with many labels.
+	unsigned int memorySize; //!< holds an approximate value of memory consumption (for cache cost estimate)
 	bool multisamplingEnabled_;
 	bool initialized = false;
 };

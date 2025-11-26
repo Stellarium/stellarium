@@ -18,11 +18,11 @@
  */
 
 #include "V3d.hpp"
+#include "StelMainScriptAPI.hpp"
 
 #include <QDebug>
 #include <QVariant>
 
-#include <cmath>
 
 V3d::V3d(const V3d &other) : QObject() // copy constructor
 {
@@ -100,7 +100,7 @@ Color::Color(QString hexColor) : QObject()
 	}
 	else
 	{
-		qWarning() << "Bad color string: " << hexColor;
+		qCWarning(Scripting) << "Bad color string: " << hexColor;
 		m_r=m_g=m_b=0.;
 	}
 }

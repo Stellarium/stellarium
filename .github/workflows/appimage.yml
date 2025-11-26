@@ -15,15 +15,14 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Build AppImage
       working-directory: ${{ github.workspace }}
       shell: bash
       run: |
         # Update installed packages
-        sudo apt remove php7.* -y
-        sudo apt remove php8.* -y
+        sudo apt remove php* -y
         sudo apt update
         sudo apt install libfuse2
         # using force-overwrite due to
@@ -60,14 +59,14 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Build AppImage
       working-directory: ${{ github.workspace }}
       shell: bash
       run: |
         # Update installed packages
-        sudo apt remove php8.* -y
+        sudo apt remove php* -y
         sudo apt update
         sudo apt install libfuse2
         # using force-overwrite due to

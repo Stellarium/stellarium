@@ -118,7 +118,7 @@ void AstroCalcChart::retranslate(){
 const QMap<AstroCalcChart::Series, QPen> AstroCalcChart::penMap=
 {
 	{AstroCalcChart::AltVsTime,         QPen(Qt::red,                             2, Qt::SolidLine)},
-	{AstroCalcChart::CurrentTime,       QPen(Qt::yellow,                          2, Qt::SolidLine)},
+        {AstroCalcChart::CurrentTime,       QPen(Qt::magenta,                         2, Qt::SolidLine)},
 	{AstroCalcChart::TransitTime,       QPen(Qt::cyan,                            2, Qt::SolidLine)},
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 	{AstroCalcChart::SunElevation,      QPen(QColorConstants::Svg::orange,        2, Qt::SolidLine)},
@@ -133,7 +133,7 @@ const QMap<AstroCalcChart::Series, QPen> AstroCalcChart::penMap=
 #endif
 	{AstroCalcChart::AstroTwilight,          QPen(Qt::darkBlue,                   1, Qt::DashDotDotLine)},
 	{AstroCalcChart::AzVsTime,               QPen(Qt::red,                        2, Qt::SolidLine)},
-	{AstroCalcChart::MonthlyElevation,       QPen(Qt::red,                        2, Qt::SolidLine)},
+        {AstroCalcChart::MonthlyElevation,       QPen(Qt::red,                        2, Qt::DotLine)},
 	{AstroCalcChart::AngularSize1,           QPen(Qt::green,                      2, Qt::SolidLine)},
 	{AstroCalcChart::Declination1,           QPen(Qt::green,                      2, Qt::SolidLine)},
 	{AstroCalcChart::Distance1,              QPen(Qt::green,                      2, Qt::SolidLine)},
@@ -423,11 +423,11 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	else if (map.contains(AstroCalcChart::LunarElongation))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Lunar elongation"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::AngularSize1))
-		yAxis->setTitleText(QString("%1, %2").arg(q_("Angular size"), (englishName=="Moon" || englishName=="Sun") ? QString("'") : QString("\"")));
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Angular size"), (englishName==L1S("Moon") || englishName==L1S("Sun")) ? QString("'") : QString("\"")));
 	else if (map.contains(AstroCalcChart::Declination1))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Declination"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::Distance1))
-		yAxis->setTitleText(QString("%1, %2").arg(q_("Distance"), englishName=="Moon" ? qc_("Mm", "distance, Megameters") : qc_("AU", "distance, astronomical unit")));
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Distance"), englishName==L1S("Moon") ? qc_("Mm", "distance, Megameters") : qc_("AU", "distance, astronomical unit")));
 	else if (map.contains(AstroCalcChart::Elongation1))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Elongation"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::HeliocentricDistance1))
@@ -449,11 +449,11 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Linear Distance"), qc_("AU", "distance, astronomical unit")));
 
 	if (map.contains(AstroCalcChart::AngularSize2))
-		yAxisR->setTitleText(QString("%1, %2").arg(q_("Angular size"), (englishName=="Moon" || englishName=="Sun") ? QString("'") : QString("\"")));
+		yAxisR->setTitleText(QString("%1, %2").arg(q_("Angular size"), (englishName==L1S("Moon") || englishName==L1S("Sun")) ? QString("'") : QString("\"")));
 	else if (map.contains(AstroCalcChart::Declination2))
 		yAxisR->setTitleText(QString("%1, %2").arg(q_("Declination"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::Distance2))
-		yAxisR->setTitleText(QString("%1, %2").arg(q_("Distance"), englishName=="Moon" ? qc_("Mm", "distance, Megameters") : qc_("AU", "distance, astronomical unit")));
+		yAxisR->setTitleText(QString("%1, %2").arg(q_("Distance"), englishName==L1S("Moon") ? qc_("Mm", "distance, Megameters") : qc_("AU", "distance, astronomical unit")));
 	else if (map.contains(AstroCalcChart::Elongation2))
 		yAxisR->setTitleText(QString("%1, %2").arg(q_("Elongation"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::HeliocentricDistance2))
@@ -678,24 +678,27 @@ void AstroCalcChart::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	// N.B. pos() and scenePos() give the same coords. Y counting top-down, X left-right, pixel positions.
 	//qDebug() << "mousePressEvent by" << event->buttons() << "at Pos" << event->pos() << "scenePos" << event->scenePos() << "screenPos" << event->screenPos();
 
-	const QPointF pt=mapToValue(event->pos());
-	const QDateTime dt=QDateTime::fromMSecsSinceEpoch(qint64(pt.x()), Qt::UTC);
+	if (event)
+	{
+		const QPointF pt=mapToValue(event->pos());
+		const QDateTime dt=QDateTime::fromMSecsSinceEpoch(qint64(pt.x()), Qt::UTC);
 
-	//qDebug() << "This represents " << dt << "/" << pt.y() << "or" << mapToValue(event->scenePos());
+		//qDebug() << "This represents " << dt << "/" << pt.y() << "or" << mapToValue(event->scenePos());
 
-	static StelCore *core=StelApp::getInstance().getCore();
-	double jd=StelUtils::qDateTimeToJd(dt);
-	const double offset=core->getUTCOffset(jd)/24.;
+		static StelCore *core=StelApp::getInstance().getCore();
+		double jd=StelUtils::qDateTimeToJd(dt);
+		const double offset=core->getUTCOffset(jd)/24.;
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-	QSet<Series> currentSeries(map.keyBegin(), map.keyEnd());
-#else
-	QSet<Series> currentSeries=map.keys().toSet();
-#endif
-	if (QSet({AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
-		  AngularSize2, Declination2, Distance2, Elongation2, HeliocentricDistance2, Magnitude2, PhaseAngle2, Phase2, RightAscension2, TransitAltitude2,
-		  LunarElongation, pcDistanceAU, pcDistanceDeg}).intersects(currentSeries))
-		core->setJD(jd-offset);
-	else
-		core->setJD(jd);
+        #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+		QSet<Series> currentSeries(map.keyBegin(), map.keyEnd());
+        #else
+		QSet<Series> currentSeries=map.keys().toSet();
+        #endif
+		if (QSet({AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
+		          AngularSize2, Declination2, Distance2, Elongation2, HeliocentricDistance2, Magnitude2, PhaseAngle2, Phase2, RightAscension2, TransitAltitude2,
+		          LunarElongation, pcDistanceAU, pcDistanceDeg}).intersects(currentSeries))
+			core->setJD(jd-offset);
+		else
+			core->setJD(jd);
+	}
 }

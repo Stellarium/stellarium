@@ -18,6 +18,7 @@
  */
 
 #include <QtMath>
+#include <QFont>
 
 #include "LandscapeMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -372,13 +373,16 @@ void MeteorShower::drawRadiant(StelCore *core)
 	if (m_mgr->getEnableMarker() && painter.getProjector()->projectCheck(m_position, win) && mag<=mlimit)
 	{
 		m_mgr->getRadiantTexture()->bind();
-		painter.drawSprite2dMode(static_cast<float>(XY[0]), static_cast<float>(XY[1]), 45);
+		const float scale = StelApp::getInstance().getScreenScale();
+		painter.drawSprite2dMode(static_cast<float>(XY[0]), static_cast<float>(XY[1]), 45 * scale);
 
 		if (m_mgr->getEnableLabels())
 		{
 			painter.setColor(rgb);
-			painter.setFont(m_mgr->getFont());
-			const float shift = 8.f;
+			QFont font=QGuiApplication::font();
+			font.setPixelSize(m_mgr->getFontSize());
+			painter.setFont(font);
+			const float shift = 8.f * scale;
 			if ((mag+1.f)<mlimit)
 				painter.drawText(static_cast<float>(XY[0])+shift, static_cast<float>(XY[1])+shift, getNameI18n(), 0, 0, 0, false);
 		}

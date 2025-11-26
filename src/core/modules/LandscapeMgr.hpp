@@ -31,6 +31,7 @@
 #include <QMap>
 #include <QStringList>
 #include <QCache>
+#include <QFont>
 
 class Atmosphere;
 class QSettings;

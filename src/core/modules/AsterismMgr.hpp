@@ -26,7 +26,6 @@
 #include <vector>
 #include <QString>
 #include <QStringList>
-#include <QFont>
 
 class StelToneReproducer;
 class StarMgr;
@@ -82,7 +81,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
-	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
+	//QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! Return the matching asterism object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensitive asterism name
@@ -255,7 +254,7 @@ private:
 	//! Draw the ray helpers at the epoch given by the StelCore.
 	void drawRayHelpers(StelPainter& sPainter, const StelCore* core) const;
 	//! Draw the asterism name labels.
-	void drawNames(StelPainter& sPainter) const;
+	void drawNames(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 	//! Handle single and multi-asterism selections.
 	void setSelectedAsterism(Asterism* a);
 	//! Handle unselecting a single asterism.
@@ -265,7 +264,6 @@ private:
 
 	std::vector<Asterism*> asterisms;
 	std::vector<Asterism*> selected; // More than one can be selected at a time
-	QFont asterFont;
 	StarMgr* hipStarMgr;
 
 	QString currentSkyCultureID;
@@ -280,6 +278,7 @@ private:
 	float namesFadeDuration;
 	float rayHelpersFadeDuration;
 
+	int fontSize;
 	// Store the thickness of lines of the asterisms
 	int asterismLineThickness;
 	int rayHelperThickness;

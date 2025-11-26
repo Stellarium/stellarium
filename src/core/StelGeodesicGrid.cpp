@@ -491,6 +491,16 @@ GeodesicSearchResult::~GeodesicSearchResult(void)
 	delete[] zones;
 }
 
+void GeodesicSearchResult::print() const
+{
+	qDebug() << "GeodesicSearchResult: Grid max level:" << grid.getMaxLevel() << "Grid nr of zones:" << grid.getNrOfZones() <<
+		    "zones have " << grid.getMaxLevel()+1 << "entries";
+	for (int i=0;i<=grid.getMaxLevel();i++)
+	{
+		qDebug() << "     Zone " << i << ": " << static_cast<size_t>(StelGeodesicGrid::nrOfZones(i)) << "entries";
+	}
+}
+
 void GeodesicSearchResult::search(const QVector<SphericalCap>& convex, int maxSearchLevel)
 {
 	for (int i=grid.getMaxLevel();i>=0;i--)

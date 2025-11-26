@@ -6,7 +6,6 @@
   "constellations": [
     {
       "id": "CON kamilaroi Emu1",
-      "lines": [[83163, 83163]],
       "image": {
         "file": "illustrations/Gawaargaynl.png",
         "size": [1024, 1024],
@@ -16,12 +15,12 @@
           {"pos": [907, 418], "hip": 62027}
         ]
       },
+      "lines": [[[-5.50882, -12.41289],[-5.593302, -17.50052],[-5.70859, -22.64103],[-5.914634, -29.39651],[-6.219623, -36.2911],[-6.66395,-43.91716],[-7.136401, -49.45355],[-7.844108, -54.34944],[-8.518719, -58.61221],[-9.377692,  -61.4579],[-10.3954,  -63.11061],[-10.87714, -63.72848],[-11.51128, -66.20397],[-11.46236, -64.12586],[-11.45954, -62.47984],[-10.98202, -59.92449],[-10.21921, -60.42577],[-9.320251, -58.11606],[-8.382928, -52.41912],[-8.099084, -45.74809],[-7.901405, -38.18463],[-7.343154, -29.81219],[-7.148623, -27.7604],[-6.8716, -22.74237],[-6.716642, -18.83887],[-6.570875, -16.9396],[-6.230378, -14.13574],[-5.990241, -13.25596],[-5.798369, -10.78444],[-5.64924, -10.72988],[-5.50882, -12.41289]]],
       "visibility": {"months": [6, 3]},
-      "common_name": {"english": "Gawaargay", "native": "Gawaargay"}
+      "common_name": {"english": "Emu", "native": "Gawaargay"}
     },
     {
       "id": "CON kamilaroi Emu2",
-      "lines": [[83163, 83163]],
       "image": {
         "file": "illustrations/Gawaargay.png",
         "size": [1024, 1024],
@@ -31,12 +30,16 @@
           {"pos": [907, 418], "hip": 62027}
         ]
       },
+      "lines": [[[-5.50882, -12.41289],[-5.593302, -17.50052],[-5.70859, -22.64103],[-5.914634, -29.39651],[-6.219623, -36.2911],[-6.66395,-43.91716],[-7.136401, -49.45355],[-7.844108, -54.34944],[-8.518719, -58.61221],[-9.377692,  -61.4579],[-10.3954,  -63.11061],[-10.87714, -63.72848],[-11.51128, -66.20397],[-11.46236, -64.12586],[-11.45954, -62.47984],[-10.98202, -59.92449],[-10.21921, -60.42577],[-9.320251, -58.11606],[-8.382928, -52.41912],[-8.099084, -45.74809],[-7.901405, -38.18463],[-7.343154, -29.81219],[-7.148623, -27.7604],[-6.8716, -22.74237],[-6.716642, -18.83887],[-6.570875, -16.9396],[-6.230378, -14.13574],[-5.990241, -13.25596],[-5.798369, -10.78444],[-5.64924, -10.72988],[-5.50882, -12.41289]],
+      [[-5.759612, -24.3746],[-5.452309, -23.56013],[-5.196642, -22.11277],[-4.93807, -22.00443],[-4.879879, -23.40523],[-4.850083, -25.72895],[-4.886844, -27.73238],[-4.910493, -28.32812],[-5.023941, -25.67003],[-5.105652, -24.02109],[-5.423646, -25.76787],[-5.863387, -27.87431]],
+      [[-5.88297, -28.35586],[-5.695731, -28.37234],[-5.603802, -29.03372],[-5.58127, -30.87452],[-5.659119, -37.3987],[-5.692096, -42.0824],[-5.626074, -44.81096],[-5.503367, -46.74586],[-5.519886, -48.98092],[-5.7307, -49.10871],[-5.920992, -46.91865],[-5.971606, -44.31793],[-5.855415, -39.17754],[-5.75331, -34.70933],[-5.753058, -33.08696],[-6.05824, -32.62705]]],
       "visibility": {"months": [4, 5]},
-      "common_name": {"english": "Gawaargay", "native": "Gawaargay"}
+      "common_name": {"english": "Emu", "native": "Gawaargay"}
     },
     {
       "id": "CON kamilaroi Bir",
-      "lines": [[29711, 29711]],
+      "lines": [[26311, 26311]],
+      "single_star_radius": 8,
       "image": {
         "file": "illustrations/Birraybirray.png",
         "size": [512, 512],
@@ -46,7 +49,7 @@
           {"pos": [368, 219], "hip": 27980}
         ]
       },
-      "common_name": {"english": "Birraybirray", "native": "Birraybirray"}
+      "common_name": {"english": "Uninitiated boys", "native": "Birray Birray"}
     },
     {
       "id": "CON kamilaroi Loo",
@@ -60,11 +63,10 @@
           {"pos": [484, 245], "hip": 54006}
         ]
       },
-      "common_name": {"english": "Birringoloo", "native": "Birringoloo"}
+      "common_name": {"english": "Byaame's 2nd wife", "native": "Birringoloo"}
     },
     {
       "id": "CON kamilaroi Yar",
-      "lines": [[58307, 58307]],
       "image": {
         "file": "illustrations/Yarran.png",
         "size": [512, 512],
@@ -74,7 +76,8 @@
           {"pos": [488, 130], "hip": 60059}
         ]
       },
-      "common_name": {"english": "Yarran", "native": "Yarran"}
+      "lines": [[60718, 62434], [60718, 61084], [60718, 59747]],
+      "common_name": {"english": "Roots", "native": "Yarran"}
     },
     {
       "id": "CON kamilaroi SMC",
@@ -88,11 +91,11 @@
           {"pos": [469, 223], "hip": 7271}
         ]
       },
-      "common_name": {"english": "Old Wiringin", "native": "Old Wiringin"}
+      "common_name": {"english": "Clever Man", "native": "Old Wiringin"}
     },
     {
       "id": "CON kamilaroi Ald",
-      "lines": [[22834, 22834]],
+      "lines": [[21421, 21421]],
       "image": {
         "file": "illustrations/OldDthillarandgunya.png",
         "size": [512, 512],
@@ -102,11 +105,11 @@
           {"pos": [492, 234], "hip": 22221}
         ]
       },
-      "common_name": {"english": "Old Dthillar and gunya", "native": "Old Dthillar and gunya"}
+      "common_name": {"english": "Old Dthillar with hut", "native": "Old Dthillar and gunya"}
     },
     {
       "id": "CON kamilaroi Wam",
-      "lines": [[32883, 32883]],
+      "lines": [[30438, 30438]],
       "image": {
         "file": "illustrations/WambaWamba.png",
         "size": [512, 512],
@@ -116,11 +119,12 @@
           {"pos": [330, 279], "hip": 31630}
         ]
       },
-      "common_name": {"english": "Wamba Wamba", "native": "Wamba Wamba"}
+      "common_name": {"english": "Madness", "native": "Wamba Wamba"}
     },
     {
       "id": "CON kamilaroi Miy",
-      "lines": [[12189, 12189]],
+      "lines": [[17608, 17608]],
+      "single_star_radius": 1,
       "image": {
         "file": "illustrations/Miyaymiyay.png",
         "size": [512, 512],
@@ -130,7 +134,7 @@
           {"pos": [504, 183], "hip": 18063}
         ]
       },
-      "common_name": {"english": "Miyaymiyay", "native": "Miyaymiyay"}
+      "common_name": {"english": "Seven sisters", "native": "Miyay Miyay"}
     },
     {
       "id": "CON kamilaroi Wad",
@@ -144,7 +148,7 @@
           {"pos": [403, 144], "hip": 36943}
         ]
       },
-      "common_name": {"english": "Wadhaagudjaaylwan", "native": "Wadhaagudjaaylwan"}
+      "common_name": {"english": "Byaame's 3rd wife", "native": "Wadhaagudjaaylwan"}
     },
     {
       "id": "CON kamilaroi Ban",
@@ -158,7 +162,7 @@
           {"pos": [417, 219], "hip": 90797}
         ]
       },
-      "common_name": {"english": "Bandaarr", "native": "Bandaarr"}
+      "common_name": {"english": "Kangaroo", "native": "Bandaarr"}
     },
     {
       "id": "CON kamilaroi Mur",
@@ -172,7 +176,7 @@
           {"pos": [496, 96], "hip": 63972}
         ]
       },
-      "common_name": {"english": "MuraayMuyaay", "native": "MuraayMuyaay"}
+      "common_name": {"english": "Sulfur-crested cockatoo", "native": "Muraay/Muyaay"}
     },
     {
       "id": "CON kamilaroi War",
@@ -186,7 +190,7 @@
           {"pos": [435, 321], "hip": 82091}
         ]
       },
-      "common_name": {"english": "Warrawilbaarru", "native": "Warrawilbaarru"}
+      "common_name": {"english": "whirlwind spirit", "native": "Warrawilbaarru"}
     }
   ]
 }

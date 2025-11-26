@@ -33,12 +33,12 @@
 #include "PointerCoordinatesWindow.hpp"
 #include "planetsephems/precession.h"
 
+#include <QFont>
 #include <QFontMetrics>
 #include <QSettings>
 #include <QPixmap>
 #include <QPair>
 #include <QMetaEnum>
-#include <cmath>
 
 StelModule* PointerCoordinatesStelPluginInterface::getStelModule() const
 {
@@ -118,6 +118,7 @@ void PointerCoordinates::draw(StelCore *core)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
 	StelPainter sPainter(prj);
 	sPainter.setColor(textColor, 1.f);
+	QFont font=QGuiApplication::font();
 	font.setPixelSize(getFontSize());
 	sPainter.setFont(font);
 
@@ -125,6 +126,7 @@ void PointerCoordinates::draw(StelCore *core)
 
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 
 	QString coordsSystem, cxt, cyt;
@@ -136,7 +138,13 @@ void PointerCoordinates::draw(StelCore *core)
 		case RaDecJ2000:
 		{
 			StelUtils::rectToSphe(&cx,&cy,mousePosition); // Calculate RA/DE (J2000.0) and show it...
-			coordsSystem = qc_("RA/Dec (J2000.0)", "abbreviated in the plugin");
+			if (usePolarDistance)
+			{
+				coordsSystem = qc_("RA/PD (J2000.0)", "abbreviated in the plugin");
+				cy = M_PI_2 - cy;
+			}
+			else
+				coordsSystem = qc_("RA/Dec (J2000.0)", "abbreviated in the plugin");
 			if (withDecimalDegree)
 			{
 				cxt = StelUtils::radToDecDegStr(cx, 5, false, true);
@@ -152,7 +160,13 @@ void PointerCoordinates::draw(StelCore *core)
 		case RaDec:
 		{
 			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition, StelCore::RefractionOff)); // Calculate RA/DE and show it...
-			coordsSystem = qc_("RA/Dec", "abbreviated in the plugin");
+			if (usePolarDistance)
+			{
+				coordsSystem = qc_("RA/PD", "abbreviated in the plugin");
+				cy = M_PI_2 - cy;
+			}
+			else
+				coordsSystem = qc_("RA/Dec", "abbreviated in the plugin");
 			if (withDecimalDegree)
 			{
 				cxt = StelUtils::radToDecDegStr(cx, 5, false, true);
@@ -258,21 +272,26 @@ void PointerCoordinates::draw(StelCore *core)
 		}
 		case HourAngle:
 		{
+			const bool negHA=StelApp::getInstance().getFlagUseNegativeHourAngles();
 			Vec3d v = core->j2000ToAltAz(mousePosition, StelCore::RefractionAuto);
 			StelUtils::rectToSphe(&cx,&cy,Mat4d::zrotation(-core->getLocalSiderealTime())*core->altAzToEquinoxEqu(v, StelCore::RefractionOff));
-			cx = 2.*M_PI-cx;
+			cx = StelUtils::fmodpos(2.*M_PI-cx, 2.*M_PI);
 			coordsSystem = qc_("HA/Dec", "abbreviated in the plugin");
 			if (withDecimalDegree)
 			{
-				double ha_sidereal = cx*12/M_PI;
-				if (ha_sidereal>24.)
-					ha_sidereal -= 24.;
-				cxt = QString("%1h").arg(ha_sidereal, 0, 'f', 5);
+				double ha_sidereal = StelUtils::fmodpos(cx*180./M_PI, 360.);
+				if (negHA && (ha_sidereal>180.))
+					ha_sidereal -= 360.;
+				cxt = QString("%1°").arg(ha_sidereal, 0, 'f', 5);
 				cyt = StelUtils::radToDecDegStr(cy);
 			}
 			else
 			{
-				cxt = StelUtils::radToHmsStr(cx);
+				if (negHA && (cx>M_PI))
+					cx -= 2.*M_PI;
+				cxt = StelUtils::radToHmsStr(fabs(cx));
+				if (cx<0.)
+					cxt=cxt.trimmed().prepend('-');
 				cyt = StelUtils::radToDmsStr(cy);
 			}
 			break;		
@@ -477,6 +496,8 @@ QPair<int, int> PointerCoordinates::getCoordinatesPlace(const QString &text, int
 {
 	int height, x = 0, y = 0, shift = 0;
 	static const float coeff = 1.5;
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	QFontMetrics fm(font);
 	const QSize fs = fm.size(Qt::TextSingleLine, text);
 	height = (line>1) ? static_cast<int>((line-1)*fs.height() + fs.height()*coeff) : static_cast<int>(fs.height()*coeff);

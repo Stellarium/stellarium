@@ -157,7 +157,7 @@ public:
 	//! - PlainText
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
-	//! @return a QString containing an HMTL encoded description of the Nebula.
+	//! @return a QString containing an HTML encoded description of the Nebula.
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 	//! In addition to the entries from StelObject::getInfoMap(), Nebula objects provide
 	//! - bmag (photometric B magnitude. 99 if unknown)
@@ -196,6 +196,16 @@ public:
 	QString getEnglishName() const override {return englishName;}
 	QString getEnglishAliases() const;
 	QString getI18nAliases() const;
+
+	//! retrieve pronunciation from the first of the cultural names
+	QString getNamePronounce() const override {return (culturalNames.empty() ? "" : culturalNames.constFirst().pronounceI18n);}
+	//! Combine screen label from various components, depending on settings in SkyCultureMgr
+	QString getScreenLabel() const override;
+	//! Combine InfoString label from various components, depending on settings in SkyCultureMgr
+	QString getInfoLabel() const override;
+	//! Underlying worker that processes the culturalNames
+	QStringList getCultureLabels(StelObject::CulturalDisplayStyle style) const;
+
 	//! Return the angular radius of a circle containing the object as seen from the observer
 	//! with the circle center assumed to be at getJ2000EquatorialPos().
 	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
@@ -233,10 +243,17 @@ public:
 	//! @return surface area in square degrees.
 	float getSurfaceArea(void) const;
 
-	void setProperName(QString name) { englishName = name; }
-	void setDiscoveryData(QString name, QString year) { discoverer = name; discoveryYear = year; }
-	void addNameAlias(QString name) { englishAliases.append(name); englishAliases.removeDuplicates(); }
-	void removeAllNames() { englishName=""; englishAliases.clear(); }
+	//! Sets englishName
+	void setEnglishName(const QString &name) { englishName = name; }
+	//! adds a name to the list of common alias names
+	void addNameAlias(const QString &name) { if (!englishAliases.contains(name)) englishAliases.append(name);}
+	//! Removes englishName, any aliases and cultural names
+	void removeAllNames() { englishName.clear(); englishAliases.clear(); culturalNames.clear();}
+	//! Add a name for the currently set skyculture
+	void addCulturalName(const StelObject::CulturalName &culturalName){culturalNames.append(culturalName);}
+
+	//! Set additional information pieces
+	void setDiscoveryData(const QString &discovererName, const QString &year) { discoverer = discovererName; discoveryYear = year; }
 
 	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, vdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO, vdBH, DWB, Tr, St, Ru, vdB-Ha)
 	//! from the first catalog that is activated.
@@ -265,6 +282,12 @@ private:
 		nameI18Aliases.clear();
 		for (auto &alias : englishAliases)
 			nameI18Aliases.append(trans.qtranslate(alias));
+
+		for (StelObject::CulturalName cName : std::as_const(culturalNames))
+		{
+			cName.pronounceI18n = trans.qtranslate(cName.pronounce);
+			cName.translatedI18n = trans.qtranslate(cName.translated);
+		}
 	}	
 
 	void readDSO(QDataStream& in);
@@ -292,56 +315,57 @@ private:
 	QString getConcentrationClass(QString cc) const;
 
 	unsigned int DSO_nb;
-	unsigned int M_nb;          // Messier Catalog number
-	unsigned int NGC_nb;        // New General Catalog number
-	unsigned int IC_nb;         // Index Catalog number
-	unsigned int C_nb;          // Caldwell Catalog number
-	unsigned int B_nb;          // Barnard Catalog number (Dark Nebulae)
-	unsigned int Sh2_nb;        // Sharpless Catalog number (Catalogue of HII Regions (Sharpless, 1959))
-	unsigned int VdB_nb;        // van den Bergh Catalog number (Catalogue of Reflection Nebulae (van den Bergh, 1966))
-	unsigned int RCW_nb;        // RCW Catalog number (H-α emission regions in Southern Milky Way (Rodgers+, 1960))
-	unsigned int LDN_nb;        // LDN Catalog number (Lynds' Catalogue of Dark Nebulae (Lynds, 1962))
-	unsigned int LBN_nb;        // LBN Catalog number (Lynds' Catalogue of Bright Nebulae (Lynds, 1965))
-	unsigned int Cr_nb;         // Collinder Catalog number
-	unsigned int Mel_nb;        // Melotte Catalog number
-	unsigned int PGC_nb;        // PGC number (Catalog of galaxies)
-	unsigned int UGC_nb;        // UGC number (The Uppsala General Catalogue of Galaxies)
-	unsigned int Arp_nb;        // Arp number (Atlas of Peculiar Galaxies (Arp, 1966))
-	unsigned int VV_nb;         // VV number (The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001))
-	unsigned int DWB_nb;        // DWB number (Catalogue and distances of optically visible H II regions (Dickel+, 1969))
-	unsigned int Tr_nb;         // Tr number (Trumpler Catalogue)
-	unsigned int St_nb;         // St number (Stock Catalogue)
-	unsigned int Ru_nb;         // Ru number (Ruprecht Catalogue)
-	unsigned int VdBHa_nb;      // vdB-Ha number (van den Bergh-Hagen Catalogue)
-	QString Ced_nb;             // Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)
-	QString PK_nb;              // PK number (Catalogue of Galactic Planetary Nebulae)
-	QString PNG_nb;             // PN G number (Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992))
-	QString SNRG_nb;            // SNR G number (A catalogue of Galactic supernova remnants (Green, 2014))
-	QString ACO_nb;             // ACO number (Rich Clusters of Galaxies (Abell+, 1989))
-	QString HCG_nb;             // HCG number (Hickson Compact Group (Hickson, 1989))
-	QString ESO_nb;             // ESO number (ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982))
-	QString VdBH_nb;            // VdBH number (Southern Stars embedded in nebulosity (van den Bergh+, 1975))
+	unsigned int M_nb;          //!< Messier Catalog number
+	unsigned int NGC_nb;        //!< New General Catalog number
+	unsigned int IC_nb;         //!< Index Catalog number
+	unsigned int C_nb;          //!< Caldwell Catalog number
+	unsigned int B_nb;          //!< Barnard Catalog number (Dark Nebulae)
+	unsigned int Sh2_nb;        //!< Sharpless Catalog number (Catalogue of HII Regions (Sharpless, 1959))
+	unsigned int VdB_nb;        //!< van den Bergh Catalog number (Catalogue of Reflection Nebulae (van den Bergh, 1966))
+	unsigned int RCW_nb;        //!< RCW Catalog number (H-α emission regions in Southern Milky Way (Rodgers+, 1960))
+	unsigned int LDN_nb;        //!< LDN Catalog number (Lynds' Catalogue of Dark Nebulae (Lynds, 1962))
+	unsigned int LBN_nb;        //!< LBN Catalog number (Lynds' Catalogue of Bright Nebulae (Lynds, 1965))
+	unsigned int Cr_nb;         //!< Collinder Catalog number
+	unsigned int Mel_nb;        //!< Melotte Catalog number
+	unsigned int PGC_nb;        //!< PGC number (Catalog of galaxies)
+	unsigned int UGC_nb;        //!< UGC number (The Uppsala General Catalogue of Galaxies)
+	unsigned int Arp_nb;        //!< Arp number (Atlas of Peculiar Galaxies (Arp, 1966))
+	unsigned int VV_nb;         //!< VV number (The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001))
+	unsigned int DWB_nb;        //!< DWB number (Catalogue and distances of optically visible H II regions (Dickel+, 1969))
+	unsigned int Tr_nb;         //!< Tr number (Trumpler Catalogue)
+	unsigned int St_nb;         //!< St number (Stock Catalogue)
+	unsigned int Ru_nb;         //!< Ru number (Ruprecht Catalogue)
+	unsigned int VdBHa_nb;      //!< vdB-Ha number (van den Bergh-Hagen Catalogue)
+	QString Ced_nb;             //!< Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)
+	QString PK_nb;              //!< PK number (Catalogue of Galactic Planetary Nebulae)
+	QString PNG_nb;             //!< PN G number (Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992))
+	QString SNRG_nb;            //!< SNR G number (A catalogue of Galactic supernova remnants (Green, 2014))
+	QString ACO_nb;             //!< ACO number (Rich Clusters of Galaxies (Abell+, 1989))
+	QString HCG_nb;             //!< HCG number (Hickson Compact Group (Hickson, 1989))
+	QString ESO_nb;             //!< ESO number (ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982))
+	QString VdBH_nb;            //!< VdBH number (Southern Stars embedded in nebulosity (van den Bergh+, 1975))
 	bool withoutID;
-	QString englishName;        // English name
-	QStringList englishAliases; // English aliases
-	QString nameI18;            // Nebula name
-	QStringList nameI18Aliases; // Nebula aliases
-	QString discoverer;         // The name of discoverer
-	QString discoveryYear;      // Year(s) of discovery
-	QString mTypeString;        // Morphological type of object (as string)
-	float bMag;                 // B magnitude
-	float vMag;                 // V magnitude. For Dark Nebulae, opacity is stored here.
-	float majorAxisSize;        // Major axis size in degrees
-	float minorAxisSize;        // Minor axis size in degrees
-	int orientationAngle;       // Orientation angle in degrees
-	float oDistance;            // distance (kpc)
-	float oDistanceErr;         // Error of distance (kpc)
+	QString englishName;        //!< English (preferred) name
+	QStringList englishAliases; //!< English aliases
+	QString nameI18;            //!< Nebula (preferred) name in user language
+	QStringList nameI18Aliases; //!< Nebula aliases in user language
+	QList<StelObject::CulturalName> culturalNames; //!< describes native names used in non-modern Skycultures. Usually just one, but there may be more!
+	QString discoverer;         //!< The name of discoverer
+	QString discoveryYear;      //!< Year(s) of discovery
+	QString mTypeString;        //!< Morphological type of object (as string)
+	float bMag;                 //!< B magnitude
+	float vMag;                 //!< V magnitude. For Dark Nebulae, opacity is stored here.
+	float majorAxisSize;        //!< Major axis size in degrees
+	float minorAxisSize;        //!< Minor axis size in degrees
+	int orientationAngle;       //!< Orientation angle in degrees
+	float oDistance;            //!< distance (kpc)
+	float oDistanceErr;         //!< Error of distance (kpc)
 	float redshift;
 	float redshiftErr;
 	float parallax;
 	float parallaxErr;
-	Vec3d XYZ;                  // Cartesian equatorial position (J2000.0)
-	Vec3d XY;                   // Store temporary 2D position
+	Vec3d XYZ;                  //!< Cartesian equatorial position (J2000.0)
+	Vec3d XY;                   //!< to store temporary 2D screen position
 	NebulaType nType;
 
 	SphericalRegionP pointRegion;

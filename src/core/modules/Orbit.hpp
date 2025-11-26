@@ -23,7 +23,7 @@
 class Orbit
 {
 public:
-    Orbit(void) {}
+    Orbit(void): rotateToVsop87{0., 0., 0., 0., 0., 0., 0., 0., 0.}{}
     virtual ~Orbit(void) {}
     //! Return a position (XYZ in AU).
     //! @param JDE Julian Ephemeris Date

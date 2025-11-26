@@ -30,7 +30,7 @@ Traditional Chinese astronomy has a system of dividing the celestial sphere into
 
 The name and layout of the Xingguans are very social, the kingdom, the mountains, the goods, the industry all move to the sky, according to the Earth's way in the sky to copy a world.
 
-The Xingguans are generally smaller than the constellations of Hellenistic tradition. A Xingguan contain more than dozens of stars, and fewer are only one. Medieval Chinese Astronomical Maps generally show a total of 283 Xingguans, comprising a total of 1,464 individual stars. The Xingguans are divided into 31 regions, the Twenty-Eight Mansions (Chinese: 二十八宿；pinyin: Èrshíbā Xiù) along the ecliptic, and the Three Enclosures (Chinese: 三垣; pinyin: Sānyuán) of the northern sky. Due to the influence of precession, six Xingguans near the southern horizon are getting more and more south. They were no longer easy to be observed by astronomers in the Ming and Qing Dynasties, so they were no longer recorded in *Complete Studies of Astronomical*.
+The Xingguans are generally smaller than the constellations of Hellenistic tradition. A Xingguan contains more than dozens of stars, and fewer are only one. Medieval Chinese Astronomical Maps generally show a total of 283 Xingguans, comprising a total of 1,464 individual stars. The Xingguans are divided into 31 regions, the Twenty-Eight Mansions (Chinese: 二十八宿；pinyin: Èrshíbā Xiù) along the ecliptic, and the Three Enclosures (Chinese: 三垣; pinyin: Sānyuán) of the northern sky. Due to the influence of precession, six Xingguans near the southern horizon are getting more and more south. They were no longer easy to be observed by astronomers in the Ming and Qing Dynasties, so they were no longer recorded in *Complete Studies of Astronomical*.
 
 Before the late Ming Dynasty (17th century), there were no Xingguans around the southern celestial pole. The Southern Sky (Chinese: 近南极星区; pinyin: JìnnánJí Xīngqū) was added as a 32th region in the late Ming Dynasty based on European star charts, comprising an additional 23 Xingguans. The Southern Sky are now also treated as part of the traditional Chinese system.
 
@@ -499,11 +499,10 @@ Include the following:
 |<notr>NGC 2632/M 44</notr>|<notr>积尸</notr>|<notr>JīShī</notr>|Cumulative Corpses|Beehive Cluster|
 |<notr>NGC 5139</notr>|<notr>库楼增一</notr>|<notr>Kùlóu Zēng I</notr>|Arsenal Added I|Omega Centauri|
 |<notr>NGC 224/M 31</notr>|<notr>奎宿增廿一</notr>|<notr>Kuíxiù Zēng XXI</notr>|Legs Mansion XXI|Andromeda Galaxy|
-|<notr>NGC 3372 </notr>|<notr>海山二</notr>|<notr>Hǎishān II</notr>|Sea and Mountain II|Homunculus Nebula, Eta Carinae|
 
 ### Notes
 
-This Sky Culture is Based on the information inside *Chinese and Western Contrast Star Chart and Catalogue 1950.0 (Star Catalogue)* (Chinese: 中西对照恒星图表1950.0(星表分册)) and *Complete Studies of Astronomical* (Chinese: 仪象考成).
+This Sky Culture is based on the information inside *Chinese and Western Contrast Star Chart and Catalogue 1950.0 (Star Catalogue)* (Chinese: 中西对照恒星图表1950.0(星表分册)) and *Complete Studies of Astronomical* (Chinese: 仪象考成).
 
 Thanks to Liu Chunbin for the collation of the *Chinese and Western Contrast Star Chart and Catalogue 1950.0 (Star Catalogue)*. He produced *Chinese Star Catalogue for Stellarium* (Chinese: Stellarium 中国星官体系下中文星名扩展包) which is a very important reference.
 
@@ -511,9 +510,7 @@ Some stars have been added according to *The History of Stellar Observation in C
 
 For the translation of constellations, we use the *English-Chinese Glossary of Chinese Star Regions, Asterisms and Star Names* (Chinese: 中国星区、星官及星名英译表) by Hong Kong Space Museum. Only a small portion of the translation is changed, for example, when the translations of the two different Xingguans are the same.
 
-There are seven stars with Chinese star names without corresponding HIP numbers, so they cannot be displayed in Stellarium. They are Sea and Mountain II (η Car), Five Chariots Added XVIII (12 Aur), Recommending Virtuous Man Added VI (39 Vir) , Great Horn Added II (CN Boo), Hairy Head Added X (24 Tau), Heart Added VII (18 Oph), South River Added XI (GC 10303).
-
-The cultural connotations of the name cannot be explained perfectly, because thousands of years passed, the connotations behind some names are controversial. these are only possible translations. Chinese characters are ideographic characters, which leads to some completely different names having the same pronunciation. Therefore, the pinyin transliteration is provided only to make star names readable.
+The cultural connotations of the name cannot be explained perfectly, because thousands of years passed, the connotations behind some names are controversial. These are only possible translations. Chinese characters are ideographic characters, which leads to some completely different names having the same pronunciation. Therefore, the pinyin transliteration is provided only to make star names readable.
 
 ## References
 

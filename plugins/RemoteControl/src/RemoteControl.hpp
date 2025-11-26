@@ -20,7 +20,6 @@
 #ifndef REMOTECONTROL_HPP
 #define REMOTECONTROL_HPP
 
-#include <QFont>
 #include <QKeyEvent>
 
 #include "StelModule.hpp"

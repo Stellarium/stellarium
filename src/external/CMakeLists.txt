@@ -106,12 +106,19 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND ENABLE_INDI)
         # Included CMakeLists.txt contains unrelated targets and dependencies of
         # them, therefore DOWNLOAD_ONLY and all the code below
         CPMAddPackage(NAME indiclient
-		URL https://github.com/indilib/indi/archive/v2.1.2.1.zip
-		URL_HASH SHA256=6341e5186c0f9afd97768f590372e0dbdbb6746214d35d8ede2ddf0e4c9525db
-		VERSION 2.1.2.1
+		URL https://github.com/indilib/indi/archive/v2.1.3.zip
+		URL_HASH SHA256=c3941d803ce94228cef0e74da1b72e2135ba2ea80c97f72f7e5056cdbb595536
+		VERSION 2.1.3
 		DOWNLOAD_ONLY YES)
 
-        # First, fix a missing include
+	# remove missing definitions
+	file(READ ${indiclient_SOURCE_DIR}/libs/indicore/indicom.c INDICOM_C)
+	string(REPLACE "case 576000: bps = B576000; break;" "" INDICOM_C "${INDICOM_C}")
+	string(REPLACE "case 921600: bps = B921600; break;" "" INDICOM_C "${INDICOM_C}")
+	file(WRITE ${indiclient_SOURCE_DIR}/libs/indicore/indicom.c.new "${INDICOM_C}")
+	configure_file(${indiclient_SOURCE_DIR}/libs/indicore/indicom.c.new ${indiclient_SOURCE_DIR}/libs/indicore/indicom.c COPYONLY)
+
+        # Fix missing include
 	file(READ ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h INDIDEVAPI_H)
 	string(REGEX REPLACE "#include .lilxml.h." "#include \"lilxml.h\"\n#include <stdarg.h>" INDIDEVAPI_H "${INDIDEVAPI_H}")
 	file(WRITE ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h.new "${INDIDEVAPI_H}")
@@ -119,7 +126,7 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND ENABLE_INDI)
 	
 	# Fix missing include
 	file(READ ${indiclient_SOURCE_DIR}/libs/sockets/select.h INDISOCKETSELECT_H)
-	string(REGEX REPLACE "#include .sys/socket.h." "#include <sys/socket.h>\n#include <sys/select.h>" INDISOCKETSELECT_H "${INDISOCKETSELECT_H}")
+	string(REGEX REPLACE "#include .sys/socket.h." "#include <cstring>\n#include <sys/socket.h>\n#include <sys/select.h>" INDISOCKETSELECT_H "${INDISOCKETSELECT_H}")
 	file(WRITE ${indiclient_SOURCE_DIR}/libs/sockets/select.h.new "${INDISOCKETSELECT_H}")
 	configure_file(${indiclient_SOURCE_DIR}/libs/sockets/select.h.new ${indiclient_SOURCE_DIR}/libs/sockets/select.h COPYONLY)
 
@@ -145,7 +152,7 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND ENABLE_INDI)
         set(INDI_SOVERSION "2")
         set(CMAKE_INDI_VERSION_MAJOR 2)
 	set(CMAKE_INDI_VERSION_MINOR 1)
-	set(CMAKE_INDI_VERSION_RELEASE 2)
+	set(CMAKE_INDI_VERSION_RELEASE 3)
         set(CMAKE_INDI_VERSION_STRING "${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE}")
         set(INDI_VERSION ${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE})
         set(DATA_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/indi/")

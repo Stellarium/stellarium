@@ -25,9 +25,8 @@
 #include <QMetaType>
 #include <QMap>
 #include <QImage>
-#ifdef Q_OS_WIN
 #include <QtPositioning/QGeoPositionInfoSource>
-#endif
+#include <QLoggingCategory>
 #include "VecMath.hpp"
 
 typedef QList<StelLocation> LocationList;
@@ -44,8 +43,20 @@ typedef struct
 
 class GPSLookupHelper;
 
+
 //! @class StelLocationMgr
 //! Manage the list of available location.
+//!
+//! @note You can finetune the amount of GPS-related messages in the logfile by configuring the logging category stel.GPS.
+//! Likewise, for IP-based location lookup, we use the logging category stel.LocIP.
+//! If your GPS device seems not to work, try to get more log otput by setting environment variable
+//! QT_LOGGING_RULES="*.debug=false;stel.GPS.debug=true;stel.LocIP.info=false;".
+//! This will also silence most output of IP-related location queries.
+//! By default, only Info and more severe messages are displayed.
+
+Q_DECLARE_LOGGING_CATEGORY(GPS)
+Q_DECLARE_LOGGING_CATEGORY(LocIP)
+
 class StelLocationMgr : public QObject
 {
 	Q_OBJECT
@@ -71,7 +82,7 @@ public:
 	const StelLocation locationFromCLI() const;
 
 	//! Return a valid location when no valid one was found.
-	const StelLocation& getLastResortLocation() const {return lastResortLocation;}
+	const StelLocation& getLastResortLocation();
 	
 	//! Get whether a location can be permanently added to the list of user locations
 	//! The main constraint is that the small string must be unique
@@ -180,10 +191,16 @@ private slots:
 #ifdef ENABLE_GPS
 	void changeLocationFromGPSQuery(const StelLocation& loc);
 	void gpsQueryError(const QString& err);
-	#ifdef Q_OS_WIN
+	//#ifdef Q_OS_WIN
+	//! uwes-ufo's so-far Windows-only extension of the button
 	void positionUpdated(QGeoPositionInfo gpsPos);
-	#endif
+	//#endif
 #endif
+	/// MAYBE NOT NEEDED AFTER ALL:
+	//! Use QLocation services to get location from OS (via IP, Wifi, ...)
+	//! Needs permissions.
+	void positionUpdatedFromOS(const QGeoPositionInfo &info);
+
 private:
 	void loadRegions();
 	void loadCountries();
@@ -219,9 +236,9 @@ private:
 	QString planetName;
 
 	GPSLookupHelper *nmeaHelper,*libGpsHelper;
-#ifdef Q_OS_WIN
-	QGeoPositionInfoSource *positionSource=Q_NULLPTR;
-#endif
+	QGeoPositionInfoSource *positionSource; // Used in the "Location from GPS or OS" query button action that may update.
+	// Used in the Location from Network query. Not sure if we really need two.
+	QGeoPositionInfoSource *qGeoPositionInfoSource;
 };
 
 #endif // STELLOCATIONMGR_HPP

@@ -42,6 +42,7 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
+#include <QFont>
 #include <QTimer>
 #include <QVariantMap>
 #include <QVariant>
@@ -232,6 +233,8 @@ void Quasars::draw(StelCore* core)
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	painter.setFont(font);
 
 	for (const auto& quasar : std::as_const(QSO))

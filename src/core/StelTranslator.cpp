@@ -110,6 +110,16 @@ QString StelTranslator::qTranslateStar(const QString& s, const QString& c) const
 	return res;
 }
 
+QString StelTranslator::qTranslateStarPronounce(const QString& s, const QString& c) const
+{
+	if (s.isEmpty())
+		return "";
+	const auto res = tryQtranslateStarPronounce(s, c);
+	if (res.isEmpty())
+		return s;
+	return res;
+}
+
 QString StelTranslator::tryTranslateChineseStar(const QString& s, const QString& c) const
 {
 	static const auto re = []{ QRegularExpression re("(.+)( [IXVLCDM]+)([*?]*)$"); re.optimize(); return re; }();
@@ -128,7 +138,7 @@ QString StelTranslator::tryTranslateChineseStar(const QString& s, const QString&
 	const auto translatedConstellation = tryQtranslate(constellation, c);
 	if (translatedConstellation.isEmpty()) return {};
 
-	auto number = match.captured(2);
+	QString number = match.captured(2);
 	if (getTrueLocaleName().startsWith("zh"))
 	{
 		const auto num = parseRomanNumeral(QStringView(number).mid(1));
@@ -146,18 +156,33 @@ QString StelTranslator::tryTranslateChineseStar(const QString& s, const QString&
 		}
 		if (tens == 1)
 		{
-			number += chars[0];
+			number += QChar(chars[0]);
 		}
 		if (units)
 		{
 			number += chars[units];
 		}
 	}
-	const auto extra = match.captured(3);
+	const QString extra = match.captured(3);
 	if (!addedPresent) return translatedConstellation + number + extra;
 
-	const auto& translatedAdded = qtranslate(" Added", "chinese skycultures");
-	return QString("%1%2%3%4").arg(translatedConstellation, translatedAdded, number, extra);
+	// TRANSLATORS: The string " Added" stars with a space. Carefully keep the space if needed with your language.
+	const QString& translatedAdded = qtranslate(" Added", "chinese skycultures");
+	return translatedConstellation + translatedAdded + number + extra;
+}
+
+QString StelTranslator::tryTranslateChineseStarPronounce(const QString& s, const QString& c) const
+{
+        static const auto re = []{ QRegularExpression re("(.+)( [IXVLCDM*?]+)$"); re.optimize(); return re; }();
+	const auto match = re.match(s);
+	if (!match.hasMatch()) return {};
+
+	const auto constellation = match.captured(1);
+	const auto translatedConstellation = tryQtranslate(constellation, c);
+	if (translatedConstellation.isEmpty()) return {};
+
+	QString number = match.captured(2);
+	return translatedConstellation + number;
 }
 
 QString StelTranslator::tryQtranslate(const QString &s, const QString &c) const
@@ -168,6 +193,13 @@ QString StelTranslator::tryQtranslate(const QString &s, const QString &c) const
 QString StelTranslator::tryQtranslateStar(const QString &s, const QString &c) const
 {
 	const auto translated = tryTranslateChineseStar(s, c);
+	if (!translated.isEmpty()) return translated;
+	return tryQtranslate(s, c);
+}
+
+QString StelTranslator::tryQtranslateStarPronounce(const QString &s, const QString &c) const
+{
+	const auto translated = tryTranslateChineseStarPronounce(s, c);
 	if (!translated.isEmpty()) return translated;
 	return tryQtranslate(s, c);
 }

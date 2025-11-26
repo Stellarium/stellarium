@@ -388,7 +388,8 @@ Vec2d KeplerOrbit::objectDateValidRange(const bool strict) const
 GimbalOrbit::GimbalOrbit(double distance, double longitude, double latitude):
 	distance(distance),
 	longitude(longitude),
-	latitude(latitude)
+	latitude(latitude),
+	minDistance(0.)
 {
 	setParentOrientation(0., 0., 0.);
 };

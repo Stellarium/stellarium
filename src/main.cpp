@@ -190,6 +190,10 @@ int main(int argc, char **argv)
 	}
 #endif
 
+	// Fix for ugly display some glyphs in Qt 6.9+
+	// See https://github.com/Stellarium/stellarium/issues/4284
+	qputenv("QT_DISABLE_EMOJI_SEGMENTER", "1");
+
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationPublicVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
@@ -236,9 +240,6 @@ int main(int argc, char **argv)
 	// we need scanf()/printf() and friends to always work in the C locale,
 	// otherwise configuration/INI file parsing will be erroneous.
 	setlocale(LC_NUMERIC, "C");
-
-	// Solution for bug: https://bugs.launchpad.net/stellarium/+bug/1498616
-	qputenv("QT_HARFBUZZ", "old");
 
 	// Init the file manager
 	StelFileMgr::init();
@@ -428,12 +429,26 @@ int main(int argc, char **argv)
 			qWarning().noquote() << "ERROR while loading custom font:" << QDir::toNativeSeparators(fileFont);
 	}
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+	// Set OS-dependent fallback fonts to retrieve missing glyphs if the main font does not provide them
+#ifdef Q_OS_WIN
+	QFontDatabase::addApplicationFallbackFontFamily(QChar::Script_Cuneiform, "Segoe UI Historic");
+#endif
+#endif
+
 	// Set the default application font and font size.
 	// Note that style sheet will possibly override this setting.
 	QString baseFont = confSettings->value("gui/base_font_name", "Noto Sans").toString();
 	QFont tmpFont(baseFont);
 	tmpFont.setPixelSize(confSettings->value("gui/gui_font_size", DEFAULT_FONT_SIZE).toInt());
 	QGuiApplication::setFont(tmpFont);
+
+	if (qApp->property("onetime_fontinfo").toBool())
+	{
+		qInfo() << "=======================================================================";
+		StelApp::getInstance().dumpFontInfo();
+		qInfo() << "=======================================================================";
+	}
 
 	// Initialize translator feature
 	StelTranslator::init(StelFileMgr::getInstallationDir() + "/data/languages.tab");

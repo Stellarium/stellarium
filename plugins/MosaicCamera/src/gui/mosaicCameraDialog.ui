@@ -94,6 +94,13 @@
           </spacer>
          </item>
          <item>
+          <widget class="QPushButton" name="pushButtonRestoreDefaults">
+           <property name="text">
+            <string>Restore Defaults</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="pushButtonSaveSettings">
            <property name="text">
             <string>Save settings</string>
@@ -111,16 +118,10 @@
       <layout class="QHBoxLayout" name="horizontalLayout1">
        <item>
         <widget class="QListWidget" name="cameraListWidget">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>1</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
         </widget>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
+        <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,1,0,0,0,0">
          <item>
           <layout class="QFormLayout" name="formLayout">
            <item row="0" column="0">
@@ -193,20 +194,14 @@
            <item row="3" column="1">
             <widget class="QCheckBox" name="visibleCheckBox"/>
            </item>
-          </layout>
+         <item row="4" column="0" colspan="2">
+         <widget class="QTextBrowser" name="cameraTextBrowser">
+         <property name="openExternalLinks">
+             <bool>true</bool>
+         </property>
+         </widget>
          </item>
-         <item>
-          <spacer name="verticalSpacer1">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
+          </layout>
          </item>
          <item>
           <widget class="QPushButton" name="setViewToCameraButton">

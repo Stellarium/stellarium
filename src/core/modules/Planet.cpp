@@ -47,9 +47,11 @@
 #include "StelOpenGLArray.hpp"
 #include "StelHips.hpp"
 #include "RefractionExtinction.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 #include <limits>
 #include <QByteArray>
+#include <QFile>
 #include <QTextStream>
 #include <QString>
 #include <QDebug>
@@ -64,7 +66,7 @@
 #include <QOpenGLVersionFunctionsFactory>
 #endif
 #include <QOpenGLShader>
-#include <QtConcurrent>
+#include <QtConcurrent/QtConcurrentRun>
 #include <QElapsedTimer>
 
 const QString Planet::PLANET_TYPE = QStringLiteral("Planet");
@@ -213,19 +215,17 @@ Planet::Planet(const QString& englishName,
                const QString& aobjModelName,
                posFuncType coordFunc,
                Orbit* anOrbitPtr,
-               OsculatingFunctType *osculatingFunc,
+	       OsculatingFunctType *osculFunc,
                bool acloseOrbit,
                bool hidden,
                bool hasAtmosphere,
                bool hasHalo,
                const QString& pTypeStr)
-	: flagNativeName(true),
-	  deltaJDE(StelCore::JD_SECOND),
+	: deltaJDE(StelCore::JD_SECOND),
 	  deltaOrbitJDE(0.0),
 	  closeOrbit(acloseOrbit),
 	  englishName(englishName),
 	  nameI18(englishName),
-	  nativeName(""),
 	  texMapName(atexMapName),
 	  normalMapName(anormalMapName),
 	  horizonMapName(ahorizonMapName),
@@ -246,14 +246,13 @@ Planet::Planet(const QString& englishName,
 	  axisRotation(0.f),
 	  objModel(Q_NULLPTR),
 	  objModelLoader(Q_NULLPTR),
-	  survey(Q_NULLPTR),
 	  rings(Q_NULLPTR),
 	  distance(0.0),
 	  sphereScale(1.),
 	  lastJDE(J2000),
 	  coordFunc(coordFunc),
 	  orbitPtr(anOrbitPtr),
-	  osculatingFunc(osculatingFunc),
+	  osculatingFunc(osculFunc),
 	  parent(Q_NULLPTR),
 	  flagLabels(true),
 	  hidden(hidden),
@@ -262,10 +261,10 @@ Planet::Planet(const QString& englishName,
 	  multisamplingEnabled_(StelApp::getInstance().getSettings()->value("video/multisampling", 0).toUInt() != 0),
 	  planetShadowsSupersampEnabled_(StelApp::getInstance().getSettings()->value("video/planet_shadows_supersampling",false).toBool()),
 	  gl(Q_NULLPTR),
-	  iauMoonNumber(""),
+	  discoverer(QString()),
+	  discoveryDate(QString()),
+	  iauMoonNumber(QString()),
 	  b_v(99.f),
-	  discoverer(""),
-	  discoveryDate(""),
 	  orbitPositionsCache(ORBIT_SEGMENTS * 2)
 {
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
@@ -397,20 +396,44 @@ void Planet::replaceTexture(const QString &texName)
 	}
 }
 
+void Planet::setSurvey(const HipsSurveyP& colors, const HipsSurveyP& normals, const HipsSurveyP& horizons)
+{
+	Q_ASSERT(colors);
+	Q_ASSERT(colors->getType() == "planet");
+	Q_ASSERT(!normals || normals->getType() == "planet-normal");
+	Q_ASSERT(!horizons || horizons->getType() == "planet-horizon");
+	Q_ASSERT(!normals || normals->getFrame() == colors->getFrame());
+	Q_ASSERT(!horizons || horizons->getFrame() == colors->getFrame());
+
+	survey.colors = colors;
+	survey.normals = normals;
+	survey.horizons = horizons;
+
+	if (survey.normals)
+		survey.colors->setNormalsSurvey(survey.normals);
+	if (survey.horizons)
+		survey.colors->setHorizonsSurvey(survey.horizons);
+
+	survey.colors->setProperty("planet", getEnglishName());
+}
+
 void Planet::translateName(const StelTranslator& trans)
 {
 	nameI18 = trans.tryQtranslate(englishName, getContextString());
 	if (nameI18.isEmpty())
 		nameI18 = qc_(englishName, getContextString());
-	if (!nativeNameMeaning.isEmpty())
+
+	if (!culturalNames.isEmpty())
 	{
-		nativeNameMeaningI18n = trans.tryQtranslate(nativeNameMeaning);
-		if (nativeNameMeaningI18n.isEmpty())
-			nativeNameMeaningI18n = q_(nativeNameMeaning);
-	}
-	else
-	{
-		nativeNameMeaningI18n = "";
+		for (CulturalName &cname: culturalNames )
+		{
+			cname.translatedI18n = trans.tryQtranslate(cname.translated);
+			if (cname.translatedI18n.isEmpty())
+				cname.translatedI18n = q_(cname.translated);
+			cname.pronounceI18n = trans.tryQtranslate(cname.pronounce);
+			if (cname.pronounceI18n.isEmpty())
+				cname.pronounceI18n = q_(cname.pronounce);
+		}
 	}
 }
 
@@ -420,11 +443,6 @@ void Planet::setIAUMoonNumber(const QString &designation)
 		return;
 
 	iauMoonNumber = designation;
-}
-
-QString Planet::getEnglishName() const
-{
-	return englishName;
 }
 
 QString Planet::getIAUDesignation() const
@@ -438,11 +456,6 @@ QString Planet::getIAUDesignation() const
 		else
 			return QString();
 	}
-}
-
-QString Planet::getNameI18n() const
-{
-	return nameI18;
 }
 
 QString Planet::getDiscoveryCircumstances() const
@@ -475,54 +488,62 @@ QString Planet::getPlanetLabel() const
 	if (englishName==L1S("Pluto")) // We must prepend minor planet number here. Actually Dwarf Planet Pluto is still a "Planet" object in Stellarium...
 		oss << QString("(134340) ");
 
-	if (getFlagNativeName())
-	{
-		switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
-		{
-			case 1: // constellationsNative
-				oss << (nativeName.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNativeName(), getNameI18n()));
-				break;
-			case 2: // constellationsTranslated
-				oss << (nativeNameMeaningI18n.isEmpty() ? getNameI18n() : QString("%1 [%2]").arg(getNativeNameI18n(), getNameI18n()));
-				break;
-			case 3: // constellationsEnglish
-				oss << (nativeNameMeaning.isEmpty() ? getEnglishName() : QString("%1 [%2]").arg(nativeNameMeaning, getEnglishName()));
-				break;
-			default:
-				oss << getNameI18n();
-				break;
-		}
-	}
-	else
-	{
-		switch (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())
-		{
-			case 3: // constellationsEnglish
-				oss << getEnglishName();
-				break;
-			case 1: // constellationsNative
-			case 2: // constellationsTranslated
-			default:
-				oss << getNameI18n();
-				break;
-		}
-	}
-
+	QString culturalScreenLabel=getScreenLabel();
+	oss << (culturalScreenLabel.isEmpty() ? getNameI18n() : culturalScreenLabel);
 	return str;
+}
+
+QString Planet::getScreenLabel() const
+{
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	QStringList list=getCultureLabels(scMgr->getScreenLabelStyle());
+	return list.isEmpty() ? getNameI18n() : list.constFirst();
+}
+QString Planet::getInfoLabel() const
+{
+	static const QString ZWS{"\u200b"}; // zero-width space (we use them to combine cultural label groups)
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	QStringList list=getCultureLabels(scMgr->getInfoLabelStyle());
+	return list.isEmpty() ? getNameI18n() : list.join(ZWS + " - " + ZWS);
+}
+
+QStringList Planet::getCultureLabels(StelObject::CulturalDisplayStyle style) const
+{
+	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
+	static StelCore *core=StelApp::getInstance().getCore();
+	const bool isOnEarth=core->getCurrentPlanet()->getEnglishName()==L1S("Earth");
+	const double elongAlongEcliptic=getElongationDLambda();
+	QStringList labels;
+	for (auto &cName: culturalNames)
+	{
+		if ( (isOnEarth && cName.special==StelObject::CulturalNameSpecial::Morning && elongAlongEcliptic>M_PI) ||
+		     (isOnEarth && cName.special==StelObject::CulturalNameSpecial::Evening && elongAlongEcliptic<M_PI) ||
+		     (cName.special==StelObject::CulturalNameSpecial::None))
+		{
+			QString label=scMgr->createCulturalLabel(cName, style, getNameI18n());
+			labels << label;
+		}
+	}
+	labels.removeDuplicates();
+	labels.removeAll(QString(""));
+	labels.removeAll(QString());
+	return labels;
 }
 
 QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const
 {
 	Q_UNUSED(core) Q_UNUSED(flags)
+	// rtl tracks the right-to-left status of the text in the current position.
+	const bool rtl = StelApp::getInstance().getLocaleMgr().isSkyRTL();
 	QString str;
 	QTextStream oss(&str);
-	oss << "<h2>";
+	oss << (rtl ? "<h2 dir=\"rtl\">" : "<h2 dir=\"ltr\">");
 
 	// NOTE: currently only moons have an IAU designation
 	if (!iauMoonNumber.isEmpty())
 		oss << QString("(%1) ").arg(iauMoonNumber);
 
-	oss << getPlanetLabel();
+	oss << getInfoLabel();
 
 	// NOTE: currently only moons have an IAU designation
 	QString iau = getIAUDesignation();
@@ -696,7 +717,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			}
 
 			if (withTables)
-				oss << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td><td style='text-align:left;'>%3</td><td style='text-align:right;'> (%4</td><td style='text-align:left;'>%5)</td></tr>").arg(q_("Distance from Sun"), distAU, au, distKM, km);
+				oss << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td><td style='text-align:left;'>%3</td><td style='text-align:right;'>(%4</td><td style='text-align:right;'>%5)</td></tr>").arg(q_("Distance from Sun"), distAU, au, distKM, km);
 			else
 				oss << QString("%1: %2 %3 (%4 %5)<br/>").arg(q_("Distance from Sun"), distAU, au, distKM, km);
 		}
@@ -718,7 +739,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 		if (withTables)
 		{
-			oss << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td><td style='text-align:left;'>%3</td><td style='text-align:right;'> (%4</td><td style='text-align:left;'>%5)</td></tr>").arg(q_("Distance"), distAU, au, distKM, km);
+			oss << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td><td style='text-align:left;'>%3</td><td style='text-align:right;'>(%4</td><td style='text-align:right;'>%5)</td></tr>").arg(q_("Distance"), distAU, au, distKM, km);
 			oss << QString("<tr><td>%1:</td><td colspan='4'>%2</td></tr>").arg(lightTime, StelUtils::hoursToHmsStr(distanceKm/SPEED_OF_LIGHT/3600.));
 			oss << "</table>";
 		}
@@ -769,9 +790,15 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 // Print apparent and equatorial diameters
 QString Planet::getInfoStringSize(const StelCore *core, const InfoStringGroup& flags) const
 {
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	StelApp& app = StelApp::getInstance();
+	const bool withTables = app.getFlagUseFormattingOutput();
+	const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
+
 	QString str;
 	QTextStream oss(&str);
+
+	if (withTables)
+		oss << "<br/>";
 
 	const double angularSize = getAngularRadius(core)*(2.*M_PI_180);
 	if (flags&Size && angularSize>=4.8e-8)
@@ -836,7 +863,7 @@ QString Planet::getInfoStringExtraMag(const StelCore *core, const InfoStringGrou
 	if (flags&Extra && b_v<99.f)
 		return QString("%1: <b>%2</b><br/>").arg(q_("Color Index (B-V)"), QString::number(b_v, 'f', 2));
 	else
-		return "";
+		return QString();
 }
 
 QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGroup& flags, const bool withIllum) const
@@ -849,22 +876,7 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 		const double elongation = getElongation(observerHelioPos);
-
-		// some users require not "modern elongation" but just the DeltaLambda (GH:#1786)
-		static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-		double raSun, deSun, ra, de, lSun, ecLong, bSun, ecLat;
-		double obl=ssystem->getEarth()->getRotObliquity(core->getJDE());
-		if (core->getUseNutation())
-		{
-			double dEps, dPsi;
-			getNutationAngles(core->getJDE(), &dPsi, &dEps);
-			obl+=dEps;
-		}
-		StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
-		StelUtils::rectToSphe(&ra, &de, getEquinoxEquatorialPos(core));
-		StelUtils::equToEcl(raSun, deSun, obl, &lSun, &bSun);
-		StelUtils::equToEcl(ra, de, obl, &ecLong, &ecLat);
-		double elongAlongEcliptic = StelUtils::fmodpos(ecLong-lSun, M_PI*2.);
+		double elongAlongEcliptic = getElongationDLambda();
 		if (elongAlongEcliptic > M_PI) elongAlongEcliptic-=2.*M_PI;
 		double elongationDecDeg=elongAlongEcliptic*M_180_PI;
 
@@ -1007,22 +1019,22 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 
 #ifndef NDEBUG
 		oss << QString("DEBUG: AberrationPush: %1/%2/%3 km<br/>")
-			.arg(QString::number(AU * aberrationPush[0], 'f', 6))
-			.arg(QString::number(AU * aberrationPush[1], 'f', 6))
-			.arg(QString::number(AU * aberrationPush[2], 'f', 6));
+			.arg(QString::number(AU * aberrationPush[0], 'f', 6),
+			     QString::number(AU * aberrationPush[1], 'f', 6),
+			     QString::number(AU * aberrationPush[2], 'f', 6));
 
 		Vec3d earthAberrationPush=earth->getAberrationPush();
 		oss << QString("DEBUG: Earth's AberrationPush: %1/%2/%3 km<br/>")
-			.arg(QString::number(AU * earthAberrationPush[0], 'f', 6))
-			.arg(QString::number(AU * earthAberrationPush[1], 'f', 6))
-			.arg(QString::number(AU * earthAberrationPush[2], 'f', 6));
+			.arg(QString::number(AU * earthAberrationPush[0], 'f', 6),
+			     QString::number(AU * earthAberrationPush[1], 'f', 6),
+			     QString::number(AU * earthAberrationPush[2], 'f', 6));
 
 		PlanetP sun = ssystem->getSun();
 		Vec3d sunAberrationPush=sun->getAberrationPush();
 		oss << QString("DEBUG: Sun's AberrationPush: %1/%2/%3 km<br/>")
-			.arg(QString::number(AU * sunAberrationPush[0], 'f', 6))
-			.arg(QString::number(AU * sunAberrationPush[1], 'f', 6))
-			.arg(QString::number(AU * sunAberrationPush[2], 'f', 6));
+			.arg(QString::number(AU * sunAberrationPush[0], 'f', 6),
+			     QString::number(AU * sunAberrationPush[1], 'f', 6),
+			     QString::number(AU * sunAberrationPush[2], 'f', 6));
 #endif
 
 		//PlanetP currentPlanet = core->getCurrentPlanet();
@@ -1535,6 +1547,8 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		}
 	}
 
+	map.insert("cultural-names", getCultureLabels(StelObject::CulturalDisplayStyle::Native_Pronounce_Translit_Translated_IPA));
+
 	return map;
 }
 
@@ -1914,16 +1928,16 @@ Vec4d Planet::getRectangularCoordinates(const double longDeg, const double latDe
 	// See some previous issues at https://github.com/Stellarium/stellarium/issues/391
 	// For unclear reasons latDeg can be nan. Safety measure:
 	const double latRad = std::isnan(latDeg) ? 0. : latDeg*M_PI_180;
-	Q_ASSERT_X(!std::isnan(latRad), "Planet.cpp", QString("NaN result for latRad. Object %1 latitude %2").arg(englishName).arg(QString::number(latDeg, 'f', 5)).toLatin1());
+	Q_ASSERT_X(!std::isnan(latRad), "Planet.cpp", QString("NaN result for latRad. Object %1 latitude %2").arg(englishName, QString::number(latDeg, 'f', 5)).toLatin1());
 	const double u = (M_PI_2 - (abs(latRad)) < 1e-10 ? latRad : atan( bByA * tan(latRad)) );
 	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
 	// There seem to be numerical issues around tan/atan. Relieve the test a bit.
 	Q_ASSERT_X( fabs(u)-fabs(latRad) <= 1e-10, "Planet.cpp", QString("u: %1 latRad: %2 bByA: %3 latRad-u: %4 (%5)")
-	                                                              .arg(QString::number(u))
-	                                                              .arg(QString::number(latRad))
-	                                                              .arg(QString::number(bByA, 'f', 10))
-	                                                              .arg(QString::number(latRad-u))
-	                                                              .arg(englishName).toLatin1() );
+								      .arg(QString::number(u),
+									   QString::number(latRad),
+									   QString::number(bByA, 'f', 10),
+									   QString::number(latRad-u),
+									   englishName).toLatin1() );
 	const double altFix = altMetres/(1000.0*AU*a);
 
 	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
@@ -2391,6 +2405,33 @@ double Planet::getElongation(const Vec3d& obsPos) const
 	const double planetRq = planetHelioPos.normSquared();
 	const double observerPlanetRq = (obsPos - planetHelioPos).normSquared();
 	return std::acos((observerPlanetRq  + observerRq - planetRq)/(2.0*std::sqrt(observerPlanetRq*observerRq)));
+}
+
+// Get the elongation angle from the Sun in terms of difference in ecliptical longitude (radians) from the Sun.
+// Result e is within [0...2pi[ :
+// - A result <pi implies eastern elongation, evening visibility.
+// - A result pi<e<2pi implies western elongation, morning visibility.
+// Calling this for the Sun returns 0.
+double Planet::getElongationDLambda() const
+{
+	if (englishName==L1S("Sun"))
+		return 0.0;
+
+	static StelCore *core=StelApp::getInstance().getCore();
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	double raSun, deSun, ra, de, lSun, ecLong, bSun, ecLat;
+	double obl=ssystem->getEarth()->getRotObliquity(core->getJDE());
+	if (core->getUseNutation())
+	{
+		double dEps, dPsi;
+		getNutationAngles(core->getJDE(), &dPsi, &dEps);
+		obl+=dEps;
+	}
+	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+	StelUtils::rectToSphe(&ra, &de, getEquinoxEquatorialPos(core));
+	StelUtils::equToEcl(raSun, deSun, obl, &lSun, &bSun);
+	StelUtils::equToEcl(ra, de, obl, &ecLong, &ecLat);
+	return StelUtils::fmodpos(ecLong-lSun, M_PI*2.);
 }
 
 // Source: Explanatory Supplement 2013, Table 10.6 and formula (10.5) with semimajorAxis a from Table 8.7.
@@ -3730,12 +3771,12 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 				drawSphere(&sPainter, screenRd, drawOnlyRing);
 			}
 		}
-		else if (!survey || survey->getInterstate() < 1.0f)
+		else if (!survey || survey.colors->getInterstate() < 1.0f)
 		{
 			drawSphere(&sPainter, screenRd, drawOnlyRing);
 		}
 
-		if (survey && survey->getInterstate() > 0.0f)
+		if (survey && survey.colors->getInterstate() > 0.0f)
 		{
 			drawSurvey(core, &sPainter);
 			drawSphere(&sPainter, screenRd, true);
@@ -4356,11 +4397,6 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	if (!Planet::initShader()) return;
 	static SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
-	if (surveyForNormals && survey)
-		survey->setNormalsSurvey(surveyForNormals);
-	if (surveyForHorizons && survey)
-		survey->setHorizonsSurvey(surveyForHorizons);
-
 	painter->setDepthMask(true);
 	painter->setDepthTest(true);
 
@@ -4384,7 +4420,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	}
 
 	GL(shader->bind());
-	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars, surveyForNormals != nullptr, surveyForHorizons != nullptr);
+	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars, !!survey.normals, !!survey.horizons);
 	QVector<Vec3f> projectedVertsArray;
 	QVector<Vec3f> vertsArray;
 	const double angle = 2 * getSpheroidAngularRadius(core) * M_PI_180;
@@ -4414,7 +4450,8 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	painter->getProjector()->getModelViewTransform()->combine(Mat4d::zrotation(M_PI * 0.5));
 	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(Vec3d(1, 1, oneMinusOblateness)));
 
-	survey->draw(painter, angle, [&](const QVector<Vec3d>& verts, const QVector<Vec2f>& tex, const QVector<uint16_t>& indices) {
+	survey.colors->draw(painter, angle, [&](const QVector<Vec3d>& verts, const QVector<Vec2f>& tex,
+	                                        const QVector<uint16_t>& indices) {
 		projectedVertsArray.resize(verts.size());
 		vertsArray.resize(verts.size());
 		for (int i = 0; i < verts.size(); i++)
@@ -4515,7 +4552,7 @@ bool Planet::ensureObjLoaded()
 {
 	if(!objModel && !objModelLoader)
 	{
-		qDebug()<<"Queueing aysnc load of OBJ model for"<<englishName;
+		qDebug()<<"Queueing async load of OBJ model for"<<englishName;
 		//create the async OBJ model loader
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 		objModelLoader = new QFuture<PlanetOBJModel*>(QtConcurrent::run(&Planet::loadObjModel,this));
@@ -4934,7 +4971,6 @@ void Planet::computeOrbit()
 	KeplerOrbit *keplerOrbit=static_cast<KeplerOrbit*>(orbitPtr);
 	if (keplerOrbit && !closeOrbit)
 		dateJDE = keplerOrbit->getEpochJDE();
-	double calc_date;
 	Vec3d parentPos;
 	if (parent)
 		parentPos = parent->getHeliocentricEclipticPos(dateJDE)+ parent->getAberrationPush(); // aberrationPush is not strictly correct, but helps a lot...
@@ -4963,7 +4999,7 @@ void Planet::computeOrbit()
 	else
 		for(int d = 0; d < ORBIT_SEGMENTS; d++)
 		{
-			calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
+			double calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
 			// Round to a number of deltaOrbitJDE to improve caching.
 			if (d != ORBIT_SEGMENTS / 2)
 			{
@@ -5004,7 +5040,6 @@ void Planet::drawOrbit(const StelCore* core)
 
 	if (fromMoonPerspective) {
 		double dateJDE = lastJDE;
-		double calc_date;
 
 		Vec3d myPos = core->getCurrentPlanet()->getHeliocentricEclipticPos(dateJDE);
 		Vec3d myparentPos = getHeliocentricEclipticPos(dateJDE);
@@ -5022,7 +5057,7 @@ void Planet::drawOrbit(const StelCore* core)
 			const double f = (d - ORBIT_SEGMENTS/2.) / (ORBIT_SEGMENTS/2.);
 			// make sure only sample half of the orbit forward and half backward
 			// the sampling spacing is trial and error, but power of 13 seems to be good (i.e., densely sample around the current date)
-			calc_date = dateJDE + pow(f, 13)*deltaOrbitJDE*ORBIT_SEGMENTS/2. + theta*deltaOrbitJDE*ORBIT_SEGMENTS/2;
+			double calc_date = dateJDE + pow(f, 13)*deltaOrbitJDE*ORBIT_SEGMENTS/2. + theta*deltaOrbitJDE*ORBIT_SEGMENTS/2;
 			orbit[d] = getEclipticPos(calc_date);
 		}
 	}

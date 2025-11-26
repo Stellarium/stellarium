@@ -903,6 +903,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="checkBoxAutoClosing">
+            <property name="text">
+             <string>Automatic closing dialog</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="checkBoxFOVCenterMarker">
             <property name="text">
              <string>Show FOV center marker when position is search</string>

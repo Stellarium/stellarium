@@ -33,7 +33,6 @@
 #include "StelOpenGL.hpp"
 #include "StelOpenGLArray.hpp"
 #include "StelProjector.hpp"
-#include "TextureAverageComputer.hpp"
 
 #include <QDebug>
 #include <QDir>
@@ -62,6 +61,8 @@
 #include <QStorageInfo>
 #ifdef Q_OS_WIN
 	#include <QPinchGesture>
+	#include <Windows.h>
+	#include <WinUser.h>
 #endif
 #include <QOpenGLShader>
 #include <QOpenGLShaderProgram>
@@ -631,7 +632,9 @@ StelMainView::StelMainView(QSettings* settings)
 	  lastEventTimeSec(0.0),
 	  minfps(1.f),
 	  maxfps(10000.f),
-	  minTimeBetweenFrames(5)
+	  minTimeBetweenFrames(5),
+	  fpsTimer(nullptr),
+	  screensaverInhibitorTimer(nullptr)
 {
 	setAttribute(Qt::WA_OpaquePaintEvent);
 	setAttribute(Qt::WA_AcceptTouchEvents);
@@ -884,8 +887,12 @@ void StelMainView::init()
 	glInfo.isGLES = format.renderableType()==QSurfaceFormat::OpenGLES;
 	qInfo().nospace() << "Luminance textures are " << (glInfo.supportsLuminanceTextures ? "" : "not ") << "supported";
 	glInfo.isCoreProfile = format.profile() == QSurfaceFormat::CoreProfile;
-	glInfo.isHighGraphicsMode = !qApp->property("onetime_force_low_graphics").toBool() &&
-	                            !!StelOpenGL::highGraphicsFunctions();
+        #if defined Q_OS_HAIKU || defined Q_OS_NETBSD || defined Q_OS_OPENBSD || defined Q_OS_SOLARIS
+        // Haiku OS/NetBSD/OpenBSD/Solaris hasn't hardware acceleration and we shouldn't use High Graphics Mode here
+        glInfo.isHighGraphicsMode = false;
+        #else
+	glInfo.isHighGraphicsMode = !qApp->property("onetime_force_low_graphics").toBool() && !!StelOpenGL::highGraphicsFunctions();
+        #endif
 	qInfo() << "Running in" << (glInfo.isHighGraphicsMode ? "High" : "Low") << "Graphics Mode";
 
 	auto& gl = *QOpenGLContext::currentContext()->functions();
@@ -1002,9 +1009,10 @@ void StelMainView::init()
 
 	// I doubt this will have any effect on framerate, but may cause problems elsewhere?
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
+
 #ifndef NDEBUG
 	// Get an overview of module callOrders
-	if (qApp->property("verbose")==true)
+	if (mainview().isDebugEnabled())
 	{
 		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionDraw);
 		StelApp::getInstance().dumpModuleActionPriorities(StelModule::ActionUpdate);
@@ -1060,6 +1068,8 @@ void StelMainView::init()
 			qCritical() << "Conflicting keyboard shortcut assignments found. Please resolve:" << conflicts.join("; "); // Repeat in logfile for later retrieval.
 		}
 	}
+	if (qApp->property("onetime_inhibit_screensaver").toBool())
+		connect (this, &StelMainView::fullScreenChanged, this, &StelMainView::disableScreensaver);
 }
 
 void StelMainView::updateNightModeProperty(bool b)
@@ -1136,7 +1146,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 		if (!isMesa)
 			qCritical() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use --mesa-mode option.";
 		else
-			qCritical() << "Oops... Insufficient OpenGL version. Mesa failed! Please send a bug report.";
+                        qCritical() << "Oops... Insufficient OpenGL version. Mesa failed! Please send a bug report.";
 
 		#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 		QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use --angle-mode (or --mesa-mode) option."), QMessageBox::Abort, QMessageBox::Abort);
@@ -1213,20 +1223,20 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	}
 #endif
 #ifndef Q_OS_MACOS
-	// Do a similar test for MESA: Ensure we have at least Mesa 10, Mesa 9 on FreeBSD (used for hardware-acceleration of AMD IGP) was reported to lose the stars.
+        // Do a similar test for Mesa: Ensure we have at least Mesa 10, Mesa 9 on FreeBSD (used for hardware-acceleration of AMD IGP) was reported to lose the stars.
 	if (isMesa)
 	{
-		static const QRegularExpression mesaRegExp("Mesa (\\d+\\.\\d+)"); // we need only major version. Minor should always be here. Test?
+                static const QRegularExpression mesaRegExp("Mesa (\\d+\\.\\d+)"); // we need only major version. Minor should always be here. Test?
 		int mesaPos=glDriver.indexOf(mesaRegExp);
 
 		if (mesaPos >-1)
 		{
 			float mesaVersion=mesaRegExp.match(glDriver).captured(1).toFloat();
-			qInfo() << "MESA Version Number detected:" << mesaVersion;
+                        qInfo() << "Mesa version number detected:" << mesaVersion;
 			if ((mesaVersion<10.0f))
 			{
 				openGLerror=true;
-				qCritical() << "This is not enough: we need Mesa 10.0 or later.";
+                                qCritical() << "This is not enough: we need Mesa 10.0 or later.";
 				qCritical() << "You should update graphics drivers or graphics hardware.";
 				qCritical() << "Else, please try to use an older version like 0.12.9, and try there with --safe-mode";
 
@@ -1239,11 +1249,11 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 					qInfo() << "You can try to run in an unsupported degraded mode by ignoring the warning and continuing.";
 					qInfo() << "But more than likely problems will persist.";
 					QMessageBox::StandardButton answerButton=
-					QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Your OpenGL/Mesa subsystem has problems. See log for details.\nIgnore and suppress this notice in the future and try to continue in degraded mode anyway?"),
+                                        QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Your OpenGL/Mesa subsystem has problems. See log for details.\nIgnore and suppress this notice in the future and try to continue in degraded mode anyway?"),
 							      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
 					if (answerButton == QMessageBox::Abort)
 					{
-						qCritical() << "Aborting due to OpenGL/Mesa insufficient version problems.";
+                                                qCritical() << "Aborting due to OpenGL/Mesa insufficient version problems.";
 						exit(1);
 					}
 					else
@@ -1254,11 +1264,11 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 				}
 			}
 			else
-				qInfo() << "Mesa version is fine, we should not see a graphics problem.";
+                                qInfo() << "Mesa version is fine, we should not see a graphics problem.";
 		}
 		else
 		{
-			qCritical() << "Cannot parse Mesa Driver version string. This may indicate future problems.";
+                        qCritical() << "Cannot parse Mesa Driver version string. This may indicate future problems.";
 			qCritical() << "Please send a bug report that includes this log file and states if Stellarium runs or has problems.";
 		}
 	}
@@ -1329,7 +1339,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 #else
 			qCritical() << "You should update graphics drivers or graphics hardware.";
 #endif
-			qCritical() << "Else, please try to use an older version like 0.12.5, and try there with --safe-mode";
+			qCritical() << "Else, please try to use an older version like 0.12.9, and try there with --safe-mode";
 
 			if (conf->value("main/ignore_opengl_warning", false).toBool())
 			{
@@ -1395,21 +1405,21 @@ void StelMainView::dumpOpenGLdiagnostics() const
 		qDebug() << "initializeOpenGLFunctions()...";
 		QOpenGLFunctions::OpenGLFeatures oglFeatures=context->functions()->openGLFeatures();
 		qInfo() << "OpenGL Features:";
-		qInfo() << " - glActiveTexture() function" << (oglFeatures&QOpenGLFunctions::Multitexture ? "is" : "is NOT") << "available.";
-		qInfo() << " - Shader functions" << (oglFeatures&QOpenGLFunctions::Shaders ? "are" : "are NOT ") << "available.";
-		qInfo() << " - Vertex and index buffer functions" << (oglFeatures&QOpenGLFunctions::Buffers ? "are" : "are NOT") << "available.";
-		qInfo() << " - Framebuffer object functions" << (oglFeatures&QOpenGLFunctions::Framebuffers ? "are" : "are NOT") << "available.";
-		qInfo() << " - glBlendColor()" << (oglFeatures&QOpenGLFunctions::BlendColor ? "is" : "is NOT") << "available.";
-		qInfo() << " - glBlendEquation()" << (oglFeatures&QOpenGLFunctions::BlendEquation ? "is" : "is NOT") << "available.";
-		qInfo() << " - glBlendEquationSeparate()" << (oglFeatures&QOpenGLFunctions::BlendEquationSeparate ? "is" : "is NOT") << "available.";
-		qInfo() << " - glBlendFuncSeparate()" << (oglFeatures&QOpenGLFunctions::BlendFuncSeparate ? "is" : "is NOT") << "available.";
-		qInfo() << " - Blend subtract mode" << (oglFeatures&QOpenGLFunctions::BlendSubtract ? "is" : "is NOT") << "available.";
-		qInfo() << " - Compressed texture functions" << (oglFeatures&QOpenGLFunctions::CompressedTextures ? "are" : "are NOT") << "available.";
-		qInfo() << " - glSampleCoverage() function" << (oglFeatures&QOpenGLFunctions::Multisample ? "is" : "is NOT") << "available.";
-		qInfo() << " - Separate stencil functions" << (oglFeatures&QOpenGLFunctions::StencilSeparate ? "are" : "are NOT") << "available.";
-		qInfo() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextures ? "are" : "are NOT") << "available.";
-		qInfo() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextureRepeat ? "can" : "CANNOT") << "use GL_REPEAT as wrap parameter.";
-		qInfo() << " - The fixed function pipeline" << (oglFeatures&QOpenGLFunctions::FixedFunctionPipeline ? "is" : "is NOT") << "available.";
+		qInfo() << " - glActiveTexture() function" << ((oglFeatures&QOpenGLFunctions::Multitexture) ? "is" : "is NOT") << "available.";
+		qInfo() << " - Shader functions" << ((oglFeatures&QOpenGLFunctions::Shaders) ? "are" : "are NOT ") << "available.";
+		qInfo() << " - Vertex and index buffer functions" << ((oglFeatures&QOpenGLFunctions::Buffers) ? "are" : "are NOT") << "available.";
+		qInfo() << " - Framebuffer object functions" << ((oglFeatures&QOpenGLFunctions::Framebuffers) ? "are" : "are NOT") << "available.";
+		qInfo() << " - glBlendColor()" << ((oglFeatures&QOpenGLFunctions::BlendColor) ? "is" : "is NOT") << "available.";
+		qInfo() << " - glBlendEquation()" << ((oglFeatures&QOpenGLFunctions::BlendEquation) ? "is" : "is NOT") << "available.";
+		qInfo() << " - glBlendEquationSeparate()" << ((oglFeatures&QOpenGLFunctions::BlendEquationSeparate) ? "is" : "is NOT") << "available.";
+		qInfo() << " - glBlendFuncSeparate()" << ((oglFeatures&QOpenGLFunctions::BlendFuncSeparate) ? "is" : "is NOT") << "available.";
+		qInfo() << " - Blend subtract mode" << ((oglFeatures&QOpenGLFunctions::BlendSubtract) ? "is" : "is NOT") << "available.";
+		qInfo() << " - Compressed texture functions" << ((oglFeatures&QOpenGLFunctions::CompressedTextures) ? "are" : "are NOT") << "available.";
+		qInfo() << " - glSampleCoverage() function" << ((oglFeatures&QOpenGLFunctions::Multisample) ? "is" : "is NOT") << "available.";
+		qInfo() << " - Separate stencil functions" << ((oglFeatures&QOpenGLFunctions::StencilSeparate) ? "are" : "are NOT") << "available.";
+		qInfo() << " - Non power of two textures" << ((oglFeatures&QOpenGLFunctions::NPOTTextures) ? "are" : "are NOT") << "available.";
+		qInfo() << " - Non power of two textures" << ((oglFeatures&QOpenGLFunctions::NPOTTextureRepeat) ? "can" : "CANNOT") << "use GL_REPEAT as wrap parameter.";
+		qInfo() << " - The fixed function pipeline" << ((oglFeatures&QOpenGLFunctions::FixedFunctionPipeline) ? "is" : "is NOT") << "available.";
 		GLfloat lineWidthRange[2];
 		context->functions()->glGetFloatv(GL_ALIASED_LINE_WIDTH_RANGE, lineWidthRange);
 		qInfo() << "Line widths available from" << lineWidthRange[0] << "to" << lineWidthRange[1];
@@ -1436,7 +1446,7 @@ void StelMainView::dumpOpenGLdiagnostics() const
 		}
 		QMapIterator<QString, QString> iter2(extensionMap);
 		while (iter2.hasNext()) {
-			qInfo() << " -" << iter2.next().key();
+			qInfo().noquote() << " -" << iter2.next().key();
 		}
 
 		QFunctionPointer programParameterPtr =context->getProcAddress("glProgramParameteri");
@@ -1475,6 +1485,7 @@ void StelMainView::setFullScreen(bool b)
 	else
 	{
 		showNormal();
+
 		// Not enough. If we had started in fullscreen, the inner part of the window is at 0/0, with the frame extending to top/left off screen.
 		// Therefore moving is not possible. We must move to the stored position or at least defaults.
 		if ( (x()<0)  && (y()<0))
@@ -1500,8 +1511,8 @@ void StelMainView::drawEnded()
 {
 	updateQueued = false;
 
+	const int requiredFpsInterval = qRound(1000.f / getDesiredFps());
 #ifndef Q_OS_MACOS
-	int requiredFpsInterval = qRound(needsMaxFPS()?1000.f/maxfps:1000.f/minfps);
 	if(fpsTimer->interval() != requiredFpsInterval)
 		fpsTimer->setInterval(requiredFpsInterval);
 #else
@@ -1509,7 +1520,7 @@ void StelMainView::drawEnded()
 	// view manipulation can be very laggy on Macs in circumstances where frame rendering more time than
 	// the trackpad move update rate from the OS. This is perhaps a bug in Qt; see the discussion around
 	// https://github.com/Stellarium/stellarium/issues/2778#issuecomment-1722766935 and below for details.
-	fpsTimer->setInterval(qMax(minTimeBetweenFrames, qRound(needsMaxFPS()?1000.f/maxfps:1000.f/minfps)));
+	fpsTimer->setInterval(qMax(minTimeBetweenFrames, requiredFpsInterval));
 #endif
 
 	if(!fpsTimer->isActive())
@@ -1691,8 +1702,7 @@ void StelMainView::doScreenshot(void)
 	// HiDPI screens interfere, and the viewing angle has to be maintained.
 	// First, image size:
 	glWidget->makeCurrent();
-	const auto screen = QOpenGLContext::currentContext()->screen();
-	const auto pixelRatio = screen->devicePixelRatio();
+	const auto pixelRatio = StelApp::getInstance().getDevicePixelsPerPixel();
 	int physImgWidth  = std::lround(stelScene->width() * pixelRatio);
 	int physImgHeight = std::lround(stelScene->height() * pixelRatio);
 	bool nightModeWasEnabled=nightModeEffect->isEnabled();
@@ -1992,3 +2002,46 @@ QRectF StelMainView::setWindowSize(int width, int height)
 
 	return stelScene->sceneRect(); // retrieve what was finally available.
 }
+
+void StelMainView::bumpScreensaver()
+{
+#ifdef Q_OS_WIN
+	EXECUTION_STATE state = SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_DISPLAY_REQUIRED);
+	if (state==NULL)
+		qWarning() << "Cannot trigger screensaver inhibition";
+#else
+	qInfo() << "Screensaver deactivation not implemented on this operating system.";
+#endif
+}
+
+// take action to inhibit screensaver when display is running in fullscreen mode
+// private slot. Connect to fullScreenChanged(b)
+void StelMainView::disableScreensaver(bool fullscreen)
+{
+	if (fullscreen)
+	{
+		//qInfo() << "Disabling screensaver while in fullscreen";
+		screensaverInhibitorTimer = new QTimer(this);
+		screensaverInhibitorTimer->setTimerType(Qt::VeryCoarseTimer);
+		connect(screensaverInhibitorTimer, &QTimer::timeout, this, &StelMainView::bumpScreensaver);
+		screensaverInhibitorTimer->start(30000); // Bump system every 30 seconds
+	}
+	else
+	{
+		//qInfo() << "Re-enabling screensaver while leaving fullscreen";
+		if (screensaverInhibitorTimer)
+		{
+			screensaverInhibitorTimer->stop();
+			delete screensaverInhibitorTimer;
+			screensaverInhibitorTimer=nullptr;
+#ifdef Q_OS_WIN
+			EXECUTION_STATE state = SetThreadExecutionState(ES_CONTINUOUS);
+			if (state==NULL)
+				qWarning() << "Cannot disable screensaver inhibition";
+#else
+			qInfo() << "Screensaver reactivation not yet implemented on this platform.";
+#endif
+		}
+	}
+}
+

@@ -85,9 +85,7 @@ private slots:
 	void saveCustomSelectedInfo();
 
 	void updateCurrentLanguage();
-	void updateCurrentSkyLanguage();
 	void selectLanguage(const int id);    // id is index of name in QComboBox (must be called in a signal/slot connection!)
-	void selectSkyLanguage(const int id); // id is index of name in QComboBox (must be called in a signal/slot connection!)
 	void storeLanguageSettings(); // Store only currently set language settings (program and skyculture)
 	void storeFontSettings(); // Store only currently set font settings (sizes and program font)
 	void setStartupTimeMode();
@@ -133,14 +131,19 @@ private slots:
 	void populatePluginsList();
 	void pluginsSelectionChanged(QListWidgetItem *item, QListWidgetItem *previousItem);
 	void pluginConfigureCurrentSelection();
-	void loadAtStartupChanged(int);
-
+#if (QT_VERSION<QT_VERSION_CHECK(6,7,0))
+	void loadAtStartupChanged(int state);
+#else
+	void loadAtStartupChanged(Qt::CheckState state);
+#endif
 	void populateDeltaTAlgorithmsList();
 	void setDeltaTAlgorithm(int algorithmID);
 	void setDeltaTAlgorithmDescription();
 	void showCustomDeltaTEquationDialog();
 
 	void showConfigureScreenshotsDialog();
+
+	void updateDateTimeDisplayFormat();
 
 	void populateDateFormatsList();
 	void setDateFormat();

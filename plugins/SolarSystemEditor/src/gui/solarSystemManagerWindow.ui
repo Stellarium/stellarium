@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>394</width>
-    <height>422</height>
+    <height>361</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -28,7 +28,7 @@
    </property>
    <item>
     <widget class="TitleBar" name="titleBar">
-     <property name="title">
+     <property name="title" stdset="0">
       <string>Minor Solar System objects</string>
      </property>
     </widget>
@@ -85,7 +85,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>This plug-in edits a custom Solar System configuration file for the minor bodies. If something goes wrong and Stellarium crashes and/or doesn't start, you can delete manually that file from:</string>
+             <string>This plug-in edits a custom Solar System configuration file for the minor bodies. If something goes wrong and Stellarium crashes and/or doesn't start, you can manually delete that file from:</string>
             </property>
             <property name="wordWrap">
              <bool>true</bool>

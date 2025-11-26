@@ -103,7 +103,7 @@ bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 		if (match.hasMatch())
 			key = match.captured(2);
 		if (key.size() > maxKeyWidth) maxKeyWidth = key.size();
-		it++;
+		++it;
 	}
 
 	// OK, this time actually write to the file - first non-section values
@@ -118,7 +118,7 @@ bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 			outputLine = QString("%1 = %2").arg(it.key(),0-maxKeyWidth).arg(it.value().toString()) + stelEndl;
 			device.write(outputLine.toUtf8());
 		}
-		it++;
+		++it;
 	}
 
 	// Now those values with sections.
@@ -142,7 +142,7 @@ bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 			outputLine = QString("%1 = %2").arg(sectionKey,0-maxKeyWidth).arg(it.value().toString()) + stelEndl;
 			device.write(outputLine.toUtf8());
 		}
-		it++;
+		++it;
 	}
 	return true;
 }

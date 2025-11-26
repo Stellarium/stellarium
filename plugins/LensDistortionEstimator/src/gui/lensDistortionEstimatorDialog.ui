@@ -730,13 +730,6 @@ distortion</string>
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" name="gridLayout_6">
-          <item row="2" column="2">
-           <widget class="ColorButton" name="imageAxesColor">
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="1">
            <spacer name="horizontalSpacer_2">
             <property name="orientation">
@@ -750,6 +743,13 @@ distortion</string>
             </property>
            </spacer>
           </item>
+          <item row="2" column="2">
+           <widget class="ColorButton" name="imageAxesColor">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="3">
            <widget class="QLabel" name="label_10">
             <property name="text">
@@ -757,7 +757,7 @@ distortion</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="4" column="1">
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -770,24 +770,17 @@ distortion</string>
             </property>
            </spacer>
           </item>
-          <item row="2" column="0">
-           <widget class="QCheckBox" name="imageAxesEnabled">
-            <property name="text">
-             <string>Mark image axes</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="5">
-           <widget class="QLabel" name="label_11">
-            <property name="text">
-             <string comment="As in &quot;selected points&quot;">selected</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0">
            <widget class="QCheckBox" name="markPickedPoints">
             <property name="text">
              <string>Mark picked points</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="ColorButton" name="projectionCenterMarkerColor">
+            <property name="text">
+             <string/>
             </property>
            </widget>
           </item>
@@ -805,6 +798,20 @@ distortion</string>
             </property>
            </widget>
           </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="imageAxesEnabled">
+            <property name="text">
+             <string>Mark image axes</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string comment="As in &quot;selected points&quot;">selected</string>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="0">
            <widget class="QCheckBox" name="markProjectionCenter">
             <property name="text">
@@ -812,10 +819,10 @@ distortion</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
-           <widget class="ColorButton" name="projectionCenterMarkerColor">
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="imgPosResetOnLoadingEnabled">
             <property name="text">
-             <string/>
+             <string>Reset image position on loading</string>
             </property>
            </widget>
           </item>

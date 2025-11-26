@@ -41,9 +41,6 @@ public:
 	StelTextureSP allsky; // allsky low res version of the texture.
 	StelTextureSP normalAllsky; // allsky low res version of the texture.
 	StelTextureSP horizonAllsky; // allsky low res version of the texture.
-
-	// Used for smooth fade in
-	QTimeLine texFader;
 };
 
 static QString getExt(const QString& format)
@@ -53,8 +50,21 @@ static QString getExt(const QString& format)
 		if (ext == "jpeg") return "jpg";
 		if (ext == "png") return "png";
 		if (ext == "webp") return "webp";
+		if (ext == "tiff") return "tiff";
+		if (ext == "bmp") return "bmp";
 	}
 	return QString();
+}
+
+static int shiftPix180deg(const int order, const int origPix)
+{
+	const int scale = 1 << (2 * order);
+	const int baseSide = origPix / scale; // 0..11
+	Q_ASSERT(baseSide < 12);
+	const int newBaseSide = baseSide / 4 * 4 + (baseSide + 2) % 4;
+	const int newPix = origPix + (newBaseSide - baseSide) * scale;
+	Q_ASSERT(newPix >= 0);
+	return newPix;
 }
 
 QUrl HipsSurvey::getUrlFor(const QString& path) const
@@ -67,8 +77,10 @@ QUrl HipsSurvey::getUrlFor(const QString& path) const
 	return QString("%1/%2%3").arg(base.url(), path, args);
 }
 
-HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString& type, double releaseDate_):
+HipsSurvey::HipsSurvey(const QString& url_, const QString& group, const QString& frame, const QString& type,
+                       const QMap<QString, QString>& hipslistProps, const double releaseDate_) :
 	url(url_),
+	group(group),
 	type(type),
 	hipsFrame(frame),
 	releaseDate(releaseDate_),
@@ -77,7 +89,12 @@ HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString&
 	nbVisibleTiles(0),
 	nbLoadedTiles(0)
 {
-	// Immediately download the properties.
+	// First save properties from hipslist
+	for (auto it = hipslistProps.begin(); it != hipslistProps.end(); ++it)
+		properties[it.key()] = it.value();
+	checkForPlanetarySurvey();
+
+	// Immediately download the properties and replace the hipslist data with them.
 	QNetworkRequest req = QNetworkRequest(getUrlFor("properties"));
 	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 	req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
@@ -105,10 +122,7 @@ HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString&
 		if (properties.contains("hips_frame"))
 			hipsFrame = properties["hips_frame"].toString().toLower();
 
-		planetarySurvey = !QStringList{"equatorial","galactic","ecliptic"}.contains(hipsFrame, Qt::CaseInsensitive) ||
-		                  std::as_const(properties)["creator_did"].toString().contains("moon", Qt::CaseInsensitive) ||
-		                  std::as_const(properties)["client_category"].toString().contains("solar system", Qt::CaseInsensitive);
-
+		checkForPlanetarySurvey();
 		emit propertiesChanged();
 		emit statusChanged();
 		networkReply->deleteLater();
@@ -117,6 +131,24 @@ HipsSurvey::HipsSurvey(const QString& url_, const QString& frame, const QString&
 
 HipsSurvey::~HipsSurvey()
 {
+}
+
+QString HipsSurvey::frameToPlanetName(const QString& frame)
+{
+	if (frame == "ceres")
+		return "(1) ceres";
+	return frame;
+}
+
+void HipsSurvey::checkForPlanetarySurvey()
+{
+	planetarySurvey = !QStringList{"equatorial","galactic","ecliptic"}.contains(hipsFrame, Qt::CaseInsensitive) ||
+	                  std::as_const(properties)["creator_did"].toString().contains("moon", Qt::CaseInsensitive) ||
+	                  std::as_const(properties)["client_category"].toString().contains("solar system", Qt::CaseInsensitive);
+
+	// Assume that all the planetary HiPS describe color maps by default
+	if (planetarySurvey && type.isEmpty())
+		type = "planet";
 }
 
 bool HipsSurvey::isVisible() const
@@ -177,10 +209,16 @@ bool HipsSurvey::getAllsky()
 	}
 	if (networkReply->isFinished())
 	{
+		updateProgressBar(100, 100);
 		if (networkReply->error() == QNetworkReply::NoError) {
-			qDebug() << "got allsky";
 			QByteArray data = networkReply->readAll();
+			qDebug().nospace() << "Got allsky for " << getTitle() << ", " << data.size() << " bytes";
 			allsky = QImage::fromData(data);
+			if (allsky.isNull())
+			{
+				qWarning() << "Failed to decode allsky image data";
+				noAllsky = true;
+			}
 		} else {
 			noAllsky = true;
 		}
@@ -204,6 +242,9 @@ void HipsSurvey::setNormalsSurvey(const HipsSurveyP& normals)
 		return;
 	}
 	this->normals = normals;
+	// Resetting normals should result in clearing normal maps from all
+	// the tiles. The easiest way to do this is to remove the tiles.
+	if (!normals) tiles.clear();
 }
 
 void HipsSurvey::setHorizonsSurvey(const HipsSurveyP& horizons)
@@ -214,6 +255,9 @@ void HipsSurvey::setHorizonsSurvey(const HipsSurveyP& horizons)
 		return;
 	}
 	this->horizons = horizons;
+	// Resetting horizons should result in clearing horizon maps from all
+	// the tiles. The easiest way to do this is to remove the tiles.
+	if (!horizons) tiles.clear();
 }
 
 void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallback callback)
@@ -353,7 +397,9 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		tile->order = order;
 		tile->pix = pix;
 		QString ext = getExt(properties["hips_tile_format"].toString());
-		QUrl path = getUrlFor(QString("Norder%1/Dir%2/Npix%3.%4").arg(order).arg((pix / 10000) * 10000).arg(pix).arg(ext));
+		const bool isShifted = planetarySurvey && properties["type"].toString().isEmpty();
+		const int texturePix = isShifted ? shiftPix180deg(order, pix) : pix;
+		QUrl path = getUrlFor(QString("Norder%1/Dir%2/Npix%3.%4").arg(order).arg((texturePix / 10000) * 10000).arg(texturePix).arg(ext));
 		const StelTexture::StelTextureParams texParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, true);
 		tile->texture = texMgr.createTextureThread(path.url(), texParams, false);
 
@@ -419,17 +465,62 @@ static bool isClipped(int n, double (*pos)[4])
     return false;
 }
 
-
-void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
-                          const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback)
+bool HipsSurvey::bindTextures(HipsTile& tile, const int orderMin, Vec2f& texCoordShift, float& texCoordScale, bool& tileIsLoaded)
 {
 	constexpr int colorTexUnit = 0;
 	constexpr int normalTexUnit = 2;
 	constexpr int horizonTexUnit = 4;
 
+	if (normals && !tile.normalTexture && !tile.normalAllsky) return false;
+	if (horizons && !tile.horizonTexture && !tile.horizonAllsky) return false;
+
+	bool ok = tile.texture->bind(colorTexUnit);
+	if (!ok) ok = tile.allsky && tile.allsky->bind(colorTexUnit);
+	if (ok && normals)
+	{
+		ok = tile.normalTexture && tile.normalTexture->bind(normalTexUnit);
+		if (!ok) ok = tile.normalAllsky && tile.normalAllsky->bind(normalTexUnit);
+	}
+	if (ok && horizons)
+	{
+		ok = tile.horizonTexture && tile.horizonTexture->bind(horizonTexUnit);
+		if (!ok) ok = tile.horizonAllsky && tile.horizonAllsky->bind(horizonTexUnit);
+	}
+
+	if (!ok) tileIsLoaded = false;
+
+	if (!ok && tile.order > orderMin)
+	{
+		// Current-level textures failed to bind, let's try the previous level
+		const auto parentTile = getTile(tile.order - 1, tile.pix / 4);
+		if (!parentTile) return false;
+		assert(parentTile->order == tile.order - 1);
+		assert(parentTile->order >= orderMin);
+
+		static const Vec2f bottomLeftPartUV[] = {Vec2f(0,0.5), Vec2f(0,0), Vec2f(0.5,0.5), Vec2f(0.5,0)};
+		const int pos = tile.pix % 4;
+		// Like the multiplication of the texture transform by scale and shift matrix on the left:
+		// transform = shift(bottomLeftPartUV[pos]) * scale(0.5) * transform
+		texCoordShift = texCoordShift * 0.5f + bottomLeftPartUV[pos];
+		texCoordScale *= 0.5f;
+
+		ok = bindTextures(*parentTile, orderMin, texCoordShift, texCoordScale, tileIsLoaded);
+		if (!ok) return false;
+	}
+
+	return ok;
+}
+
+void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
+                          const SphericalCap& viewportShape, StelPainter* sPainter,
+                          Vec3d observerVelocity, DrawCallback callback)
+{
 	Vec3d pos;
 	Mat3d mat3;
 	const Vec2d uv[4] = {Vec2d(0, 0), Vec2d(0, 1), Vec2d(1, 0), Vec2d(1, 1)};
+	bool tileLoaded = true;
+	Vec2f texCoordShift(0,0);
+	float texCoordScale = 1;
 	HipsTile *tile;
 	int orderMin = getPropertyInt("hips_order_min", 3);
 	QVector<Vec3d> vertsArray;
@@ -489,34 +580,16 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	tile = getTile(order, pix);
 
 	if (!tile) return;
-	if (normals && !tile->normalTexture && !tile->normalAllsky) return;
-	if (horizons && !tile->horizonTexture && !tile->horizonAllsky) return;
-
-	if (!tile->texture->bind(colorTexUnit) && (!tile->allsky || !tile->allsky->bind(colorTexUnit)))
-		return;
-	if (normals && tile->normalTexture && !tile->normalTexture->bind(normalTexUnit) && (!tile->normalAllsky || !tile->normalAllsky->bind(normalTexUnit)))
-		return;
-	if (horizons && tile->horizonTexture && !tile->horizonTexture->bind(horizonTexUnit) && (!tile->horizonAllsky || !tile->horizonAllsky->bind(horizonTexUnit)))
+	if (!bindTextures(*tile, orderMin, texCoordShift, texCoordScale, tileLoaded))
 		return;
 
-	if (tile->texFader.state() == QTimeLine::NotRunning && tile->texFader.currentValue() == 0.0)
-		tile->texFader.start();
-	nbLoadedTiles++;
+	if (tileLoaded)
+		nbLoadedTiles++;
 
-	if (order < drawOrder)
-	{
-		// If all the children tiles are loaded, we can skip the parent.
-		int i;
-		for (i = 0; i < 4; i++)
-		{
-			HipsTile* child = getTile(order + 1, pix * 4 + i);
-			if (!child || child->texFader.currentValue() < 1.0) break;
-		}
-		if (i == 4) goto skip_render;
-	}
+	if (order < drawOrder) goto skip_render;
 
 	// Actually draw the tile, as a single quad.
-	alpha = color[3] * static_cast<float>(tile->texFader.currentValue());
+	alpha = color[3];
 	if (alpha < 1.0f)
 	{
 		sPainter->setBlending(true);
@@ -529,7 +602,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	}
 	sPainter->setCullFace(true);
 	nb = fillArrays(order, pix, drawOrder, splitOrder, outside, sPainter, observerVelocity,
-	                vertsArray, texArray, indicesArray);
+	                texCoordShift, texCoordScale, vertsArray, texArray, indicesArray);
 	if (!callback) {
 		sPainter->setArrays(vertsArray.constData(), texArray.constData());
 		sPainter->drawFromArray(StelPainter::Triangles, nb, 0, true, indicesArray.constData());
@@ -553,6 +626,7 @@ skip_render:
 
 int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
                            bool outside, StelPainter* sPainter, Vec3d observerVelocity,
+                           const Vec2f& texCoordShift, const float texCoordScale,
                            QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices)
 {
 	Q_UNUSED(sPainter)
@@ -587,7 +661,7 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 			}
 
 			verts << pos;
-			tex << texPos;
+			tex << texPos * texCoordScale + texCoordShift;
 		}
 	}
 	for (uint16_t i = 0; i < gridSize; i++)
@@ -632,7 +706,7 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 }
 
 //! Parse a hipslist file into a list of surveys.
-QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
+QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& hipslistURL, const QString& data)
 {
 	QList<HipsSurveyP> ret;
 	static const QString defaultFrame = "equatorial";
@@ -642,12 +716,17 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 		QString type;
 		QString frame = defaultFrame;
 		QString status;
+		QString group = hipslistURL;
 		double releaseDate = 0;
+		QMap<QString, QString> hipslistProps;
 		for (const auto &line : entry.split('\n'))
 		{
 			if (line.startsWith('#')) continue;
 			QString key = line.section("=", 0, 0).trimmed();
 			QString value = line.section("=", 1, -1).trimmed();
+
+			hipslistProps[key] = value;
+
 			if (key == "hips_service_url")
 			{
 				url = value;
@@ -668,9 +747,11 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 				type = value.toLower();
 			else if (key == "hips_status")
 				status = value.toLower();
+			else if (key == "group")
+				group = value;
 		}
 		if(status.split(' ').contains("public"))
-			ret.append(HipsSurveyP(new HipsSurvey(url, frame, type, releaseDate)));
+			ret.append(HipsSurveyP(new HipsSurvey(url, group, frame, type, hipslistProps, releaseDate)));
 	}
 	return ret;
 }

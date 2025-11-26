@@ -31,7 +31,6 @@
 
 #include <QString>
 #include <QStringList>
-#include <QFont>
 
 class StelTranslator;
 class StelSkyCulture;
@@ -1014,7 +1013,7 @@ private slots:
 	void loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName);
 
 	//! Connect from StelApp to reflect font size change.
-	void setFontSizeFromApp(int size){nebulaFont.setPixelSize(size);}
+	void setFontSizeFromApp(int size){fontSize = size;}
 
 private:
 	//! Search for a nebula object by name, e.g. M83, NGC 1123, IC 1234.
@@ -1095,9 +1094,12 @@ private:
 		NebulaP nebula;
 		QStringList references;
 	};
-	QHash<QString/*name*/,NebulaWithReferences> commonNameMap;
-
-	QHash<NebulaP,QVector<QString>> defaultNameMap;
+	//! A Hash that holds a QStringList of all "accepted" names from nebulae/default/names.dat
+	//! @note "accepted" means that users can exclude DSO listed only in selected (unwanted) references.
+	QHash<NebulaP,QStringList> commonNameMap;
+	//! A Hash that holds NebulaP for each "accepted" uppercased name from nebulae/default/names.dat
+	//! @note "accepted" means that users can exclude DSO listed only in selected (unwanted) references.
+	QHash<QString/*name*/,NebulaWithReferences> commonNameIndex;
 
 	LinearFader hintsFader;
 	LinearFader flagShow;
@@ -1118,7 +1120,7 @@ private:
 	//! The selection pointer texture
 	StelTextureSP texPointer;
 	
-	QFont nebulaFont;      // Font used for names printing
+	int fontSize;
 
 	// For DSO converter
 	bool flagConverter;

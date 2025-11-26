@@ -3,8 +3,14 @@
 // License: Public Domain
 // Author: Matthew Gates
 // Shortcut: Ctrl+D,2
+// Version: 1.1
 // Description: Look at each installed sky culture.
+//              Label style is forced to be 'Native,Translated,Modern' regardless of user setting,
+//              unless environment variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true.
+//              (Style is restored at end.)
 //
+
+var obey_skyculture_preference = (core.getEnv("STEL_SCRIPT_OBEY_SKYCULTURE_STYLE") == "1");
 
 alt = 0;
 LabelMgr.deleteAllLabels();
@@ -12,6 +18,7 @@ core.setDate("2006:03:14T21:21:32");
 core.clear("deepspace");
 core.moveToRaDec("17h 53m 0s", "66d 25m 0s");
 StelMovementMgr.zoomTo(210, 5);
+ConstellationMgr.deselectConstellations();
 ConstellationMgr.setFlagBoundaries(true);
 ConstellationMgr.setFlagLabels(true);
 ConstellationMgr.setFlagLines(true);
@@ -28,12 +35,20 @@ for(i=0; i<allIDs.length; i++)
 	id = allIDs[i];
 	core.debug("setting sky culture: " + id);
 	core.setSkyCulture(id);
+	var oldScreenLabelStyle;
+	if (!obey_skyculture_preference)
+	{
+		oldScreenLabelStyle=StelSkyCultureMgr.getScreenLabelStyle();
+		StelSkyCultureMgr.setScreenLabelStyle("Native,Translated,Modern");
+	}
 	core.wait(2);
 	name = core.getSkyCultureNameI18n();
 	lab = LabelMgr.labelScreen(name, 100, 100, false, 25, "#ff2200");
 	LabelMgr.setLabelShow(lab, true);
 	core.wait(2);
 	LabelMgr.deleteLabel(lab);
+	if (!obey_skyculture_preference)
+		StelSkyCultureMgr.setScreenLabelStyle(oldScreenLabelStyle);
 }
 
 LabelMgr.deleteAllLabels();

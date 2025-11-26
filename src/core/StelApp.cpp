@@ -100,6 +100,7 @@
 #include <QDateTime>
 #include <QRegularExpression>
 #include <QRandomGenerator>
+#include <QFontDatabase>
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QImageReader>
 #endif
@@ -200,6 +201,10 @@ Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
 Q_IMPORT_PLUGIN(Scenery3dStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_SKYCULTUREMAKER
+Q_IMPORT_PLUGIN(SkyCultureMakerStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_REMOTECONTROL
 Q_IMPORT_PLUGIN(RemoteControlStelPluginInterface)
 #endif
@@ -214,6 +219,10 @@ Q_IMPORT_PLUGIN(VtsStelPluginInterface)
 
 #ifdef USE_STATIC_PLUGIN_ONLINEQUERIES
 Q_IMPORT_PLUGIN(OnlineQueriesPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_NEBULATEXTURES
+Q_IMPORT_PLUGIN(NebulaTexturesStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_MOSAICCAMERA
@@ -279,6 +288,7 @@ StelApp::StelApp(StelMainView *parent)
 	, gl(Q_NULLPTR)
 	, flagShowDecimalDegrees(false)
 	, flagUseAzimuthFromSouth(false)
+	, flagUseNegativeHourAngles(false)
 	, flagUseFormattingOutput(false)
 	, flagUseCCSDesignation(false)
 	, flagOverwriteInfoColor(false)
@@ -314,12 +324,12 @@ StelApp::~StelApp()
 	moduleMgr->unloadModule("StelVideoMgr", false);  // We need to delete it afterward
 	moduleMgr->unloadModule("StelSkyLayerMgr", false);  // We need to delete it afterward
 	moduleMgr->unloadModule("StelObjectMgr", false);// We need to delete it afterward
+	moduleMgr->unloadModule("StelSkyCultureMgr", true);// No need to delete only later!
 	StelModuleMgr* tmp = moduleMgr;
 	moduleMgr = new StelModuleMgr(); // Create a secondary instance to avoid crashes at other deinit
 	delete tmp; tmp=Q_NULLPTR;
 	delete skyImageMgr; skyImageMgr=Q_NULLPTR;
 	delete core; core=Q_NULLPTR;
-	delete skyCultureMgr; skyCultureMgr=Q_NULLPTR;
 	delete localeMgr; localeMgr=Q_NULLPTR;
 	delete audioMgr; audioMgr=Q_NULLPTR;
 	delete videoMgr; videoMgr=Q_NULLPTR;
@@ -495,7 +505,9 @@ void StelApp::init(QSettings* conf)
 	//create non-StelModule managers
 	propMgr = new StelPropertyMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
-	propMgr->registerObject(skyCultureMgr);
+	skyCultureMgr->init();
+	getModuleMgr().registerModule(skyCultureMgr);
+
 	planetLocationMgr = new StelLocationMgr();
 	actionMgr = new StelActionMgr();
 
@@ -577,6 +589,9 @@ void StelApp::init(QSettings* conf)
 	if (audioOK)
 		SplashScreen::showMessage(q_("Initializing audio..."));
 	audioMgr = new StelAudioMgr(audioOK);
+	// QtMultimedia can create and destroy intermediate contexts during initialization,
+	// displacing our main context, see GH#4143. So restore our context.
+	ensureGLContextCurrent();
 
 	// Init video manager
 #ifdef ENABLE_MEDIA
@@ -685,6 +700,8 @@ void StelApp::init(QSettings* conf)
 
 	setFlagShowDecimalDegrees(confSettings->value("gui/flag_show_decimal_degrees", false).toBool());
 	setFlagSouthAzimuthUsage(confSettings->value("gui/flag_use_azimuth_from_south", false).toBool());
+	setFlagUseNegativeHourAngles(confSettings->value("gui/flag_use_negative_hour_angles", false).toBool());
+	setFlagPolarDistanceUsage(confSettings->value("gui/flag_use_polar_distance", false).toBool());
 	setFlagUseFormattingOutput(confSettings->value("gui/flag_use_formatting_output", false).toBool());
 	setFlagUseCCSDesignation(confSettings->value("gui/flag_use_ccs_designations", false).toBool());
 	setFlagOverwriteInfoColor(confSettings->value("gui/flag_overwrite_info_color", false).toBool());	
@@ -1269,6 +1286,26 @@ void StelApp::setFlagSouthAzimuthUsage(bool use)
 	}
 }
 
+void StelApp::setFlagUseNegativeHourAngles(bool use)
+{
+	if (flagUseNegativeHourAngles!=use)
+	{
+		flagUseNegativeHourAngles=use;
+		StelApp::immediateSave("gui/flag_use_negative_hour_angles", use);
+		emit flagUseNegativeHourAnglesChanged(use);
+	}
+}
+
+void StelApp::setFlagPolarDistanceUsage(bool use)
+{
+	if (flagUsePolarDistance!=use)
+	{
+		flagUsePolarDistance=use;
+		StelApp::immediateSave("gui/flag_use_polar_distance", use);
+		emit flagUsePolarDistanceChanged(use);
+	}
+}
+
 
 void StelApp::setFlagUseFormattingOutput(bool b)
 {
@@ -1387,13 +1424,17 @@ void StelApp::quit()
 void StelApp::setDevicePixelsPerPixel(qreal dppp)
 {
 	// Check that the device-independent pixel size didn't change
-	if (!viewportEffect && !fuzzyEquals(devicePixelsPerPixel, dppp))
+	if (!fuzzyEquals(devicePixelsPerPixel, dppp))
 	{
 		qDebug() << "Changing high-DPI scaling factor from" << devicePixelsPerPixel << "to" << dppp;
+		const auto effect = getViewportEffect();
+		setViewportEffect("none");
 		devicePixelsPerPixel = dppp;
 		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 		params.devicePixelsPerPixel = devicePixelsPerPixel;
 		core->setCurrentStelProjectorParams(params);
+		// Force to recreate the viewport effect if any.
+		setViewportEffect(effect);
 	}
 }
 
@@ -1528,4 +1569,18 @@ void StelApp::enableBottomStelBarUpdates(bool enable)
 {
 	StelGui *gui=dynamic_cast<StelGui*>(getGui());
 	gui->getButtonBar()->enableTopoCentricUpdate(enable);
+}
+
+void StelApp::dumpFontInfo() const
+{
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	qInfo() << "StelApp::dumpFontInfo() not available for Qt5 builds.";
+#else
+	const QList<QFontDatabase::WritingSystem> writingSystems=QFontDatabase::writingSystems();
+	qInfo() << "WritingSystems and Font Families:";
+	for (const auto &ws: writingSystems)
+	{
+		qInfo() << ws << ":" << QFontDatabase::families(ws);
+	}
+#endif
 }

@@ -30,8 +30,6 @@
 #include "Planet.hpp"
 #include "StelHips.hpp"
 
-#include <QFont>
-
 class Orbit;
 class StelSkyCulture;
 class StelTranslator;
@@ -62,7 +60,6 @@ class SolarSystem : public StelObjectModule, protected QOpenGLFunctions
 	Q_PROPERTY(bool flagHints			READ getFlagHints			WRITE setFlagHints			NOTIFY flagHintsChanged)
 	Q_PROPERTY(bool flagMarkers			READ getFlagMarkers			WRITE setFlagMarkers			NOTIFY markersDisplayedChanged)
 	Q_PROPERTY(bool flagPointer			READ getFlagPointer			WRITE setFlagPointer			NOTIFY flagPointerChanged)
-	Q_PROPERTY(bool flagNativePlanetNames		READ getFlagNativePlanetNames		WRITE setFlagNativePlanetNames		NOTIFY flagNativePlanetNamesChanged)
 	Q_PROPERTY(bool planetsDisplayed		READ getFlagPlanets			WRITE setFlagPlanets			NOTIFY flagPlanetsDisplayedChanged)
 	Q_PROPERTY(bool flagOrbits			READ getFlagOrbits			WRITE setFlagOrbits			NOTIFY flagOrbitsChanged)
 	Q_PROPERTY(bool flagPlanetsOrbits		READ getFlagPlanetsOrbits		WRITE setFlagPlanetsOrbits		NOTIFY flagPlanetsOrbitsChanged)
@@ -188,9 +185,9 @@ public:
 	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! Search for a SolarSystem object based on the localised name.
-	//! @param nameI18n the case in-sensitive translated planet name.
+	//! @param planetNameI18n the case in-sensitive translated planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
-	StelObjectP searchByNameI18n(const QString& nameI18n) const override;
+	StelObjectP searchByNameI18n(const QString& planetNameI18n) const override;
 
 	//! Search for a SolarSystem object based on the English name.
 	//! @param name the case in-sensitive English planet name.
@@ -677,11 +674,6 @@ public slots:
 	//! @see setApparentMagnitudeAlgorithmOnEarth()
 	QString getApparentMagnitudeAlgorithmOnEarth() const;
 
-	//! Set flag which enable use native names for planets or not.
-	void setFlagNativePlanetNames(bool b);
-	//! Get the current value of the flag which enables showing native names for planets or not.
-	bool getFlagNativePlanetNames(void) const;
-
 	//! Set flag which enabled the showing of isolated trails for selected objects only or not
 	void setFlagIsolatedTrails(bool b);
 	//! Get the current value of the flag which enables showing of isolated trails for selected objects only or not.
@@ -793,6 +785,9 @@ public slots:
 	//! Configure the limiting absolute magnitude for plotting minor bodies. Configured value is clamped to -2..37 (practical limit)
 	void setMarkerMagThreshold(double m);
 
+	//! Enable the survey for use on the planet it describes
+	void enableSurvey(const HipsSurveyP& colors, const HipsSurveyP& normals, const HipsSurveyP& horizons);
+
 signals:
 	void labelsDisplayedChanged(bool b);
 	void flagOrbitsChanged(bool b);
@@ -806,7 +801,6 @@ signals:
 	void maxTrailPointsChanged(int max);
 	void maxTrailTimeExtentChanged(int max);
 	void flagPointerChanged(bool b);
-	void flagNativePlanetNamesChanged(bool b);
 	void flagPlanetsDisplayedChanged(bool b);
 	void flagPlanetsOrbitsChanged(bool b);
 	void flagPlanetsOrbitsOnlyChanged(bool b);
@@ -918,9 +912,8 @@ public:
 	//! Get the list of all the planet localized names
 	QStringList getAllPlanetLocalizedNames() const;
 
-	//! Get the list of all the minor planet common english names
-	QStringList getAllMinorPlanetCommonEnglishNames() const;
-
+	//! Get the list of all the minor planet english names
+	QStringList getAllMinorPlanetEnglishNames() const;
 
 	//! New 0.16: delete a planet from the solar system. Writes a warning to log if this is not a minor object.
 	bool removeMinorPlanet(const QString &name);
@@ -1065,9 +1058,6 @@ private slots:
 	void setEphemerisSaturnMarkerColor(const Vec3f& c);
 	Vec3f getEphemerisSaturnMarkerColor(void) const;
 
-	//! Called when a new Hips survey has been loaded by the hips mgr.
-	void onNewSurvey(HipsSurveyP survey);
-
 	//! Taking the JD dates for each ephemeride and preparation the human readable dates according to the settings for dates
 	void fillEphemerisDates();
 
@@ -1142,7 +1132,7 @@ private:
 	bool flagSunScale;
 	double sunScale;
 
-	QFont planetNameFont;
+	int fontSize;
 
 	//! The amount of planet labels (between 0 and 10).
 	double labelsAmount;
@@ -1169,7 +1159,6 @@ private:
 
 	bool flagShow;
 	bool flagPointer;                           // show red cross selection pointer?
-	bool flagNativePlanetNames;                 // show native names for planets?
 	bool flagIsolatedTrails;
 	int numberIsolatedTrails;
 	int maxTrailPoints;                         // limit trails to a manageable size.
@@ -1210,7 +1199,6 @@ private:
 
 	static const QMap<Planet::ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 
-	QHash<QString, QString> planetNativeNamesMap, planetNativeNamesMeaningMap;
 	QStringList minorBodies;
 
 	// 0.16pre observation GZ: this list contains pointers to all orbit objects,

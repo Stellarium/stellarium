@@ -67,7 +67,7 @@
     {
       "id": "AST modern_chinese 013",
       "common_name": {"english": "Willow"},
-      "lines": [[42402, 42799, 43234, 43109], [42313, 43109], [43234, 43813, 44659, 45336]]
+      "lines": [[43234, 42799, 42402, 42313, 43109, 43813, 44659, 45336]]
     },
     {
       "id": "AST modern_chinese 014",
@@ -82,7 +82,7 @@
     {
       "id": "AST modern_chinese 016",
       "common_name": {"english": "Ox"},
-      "lines": [[100345, 100064, 99572], [100345, 100881, 101123, 101027], [100881, 101027]]
+      "lines": [[100064, 100345, 99572], [100345, 100881, 101123, 101027], [100345, 101027]]
     },
     {
       "id": "AST modern_chinese 017",
@@ -122,7 +122,7 @@
     {
       "id": "AST modern_chinese 024",
       "common_name": {"english": "Tail"},
-      "lines": [[82396, 82514, 82671, 84143, 86228, 87073, 86670, 85927, 85696], [82514, 82545]]
+      "lines": [[82396, 82514, 82671, 84143, 86228, 87073, 86670, 85927], [86670, 85696]]
     },
     {
       "id": "AST modern_chinese 025",
@@ -362,7 +362,7 @@
     {
       "id": "AST modern_chinese 072",
       "common_name": {"english": "Tomb (Vassal of Rooftop)"},
-      "lines": [[110960, 110395], [110960, 111497], [110960, 110672], [110960, 109074]]
+      "lines": [[110960, 110395], [110960, 111497], [110960, 110672, 109427]]
     },
     {
       "id": "AST modern_chinese 073",
@@ -452,7 +452,7 @@
     {
       "id": "AST modern_chinese 090",
       "common_name": {"english": "Sea and Mountain"},
-      "lines": [[51232, 52558, 56606, 56561, 57363]]
+      "lines": [[51232, "5350358584482202880", 56606, 56561, 57363]]
     },
     {
       "id": "AST modern_chinese 091",
@@ -522,7 +522,7 @@
     {
       "id": "AST modern_chinese 104",
       "common_name": {"english": "Cumulative Corpses"},
-      "lines": [[42673, 42673]]
+      "lines": [["DSO:NGC2632", "DSO:NGC2632"]]
     },
     {
       "id": "AST modern_chinese 105",
@@ -927,7 +927,7 @@
     {
       "id": "AST modern_chinese 185",
       "common_name": {"english": "Changing Room (Vassal of Tail)"},
-      "lines": [[82676, 82676]]
+      "lines": [["DSO:NGC6231", "DSO:NGC6231"]]
     },
     {
       "id": "AST modern_chinese 186",
@@ -1227,7 +1227,7 @@
     {
       "id": "AST modern_chinese 246",
       "common_name": {"english": "Celestial Farmland (In Ox Mansion)"},
-      "lines": [[104750, 102978], [104750, 104234, 102485], [102978, 102485]]
+      "lines": [[104750, 102978], [104750, 104234], [102978, 102485]]
     },
     {
       "id": "AST modern_chinese 247",
@@ -1442,7 +1442,7 @@
     {
       "id": "AST modern_chinese 289",
       "common_name": {"english": "Fish"},
-      "lines": [[87616, 87616]]
+      "lines": [["DSO:NGC6475", "DSO:NGC6475"]]
     },
     {
       "id": "AST modern_chinese 290",
@@ -6882,6 +6882,13 @@
     "HIP 118209": [{"english": "Line of Ramparts IX", "references": [1]}],
     "HIP 118243": [{"english": "Flying Serpent XI", "references": [1]}],
     "HIP 118268": [{"english": "Thunderbolt V", "references": [1]}],
-    "HIP 118322": [{"english": "Bird's Beak VII", "references": [1]}]
+    "HIP 118322": [{"english": "Bird's Beak VII", "references": [1]}],
+    "Gaia DR3 66715105696289024": [{"english": "Hairy Head Added X", "references": [1]}],
+    "Gaia DR3 211805079552264832": [{"english": "Five Chariots Added XVIII", "references": [1]}],
+    "Gaia DR3 1233902704963092608": [{"english": "Great Horn Added II", "references": [1]}],
+    "Gaia DR3 3138519829402291328": [{"english": "South River Added XI", "references": [1]}],    
+    "Gaia DR3 3626803636103730048": [{"english": "Recommending Virtuous Men Added VI", "references": [1]}],    
+    "Gaia DR3 5350358584482202880": [{"english": "Sea and Mountain II", "references": [1]}],      
+    "Gaia DR3 6046821272776093184": [{"english": "Heart Added VII", "references": [1]}]   
   }
 }

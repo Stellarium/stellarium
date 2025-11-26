@@ -22,33 +22,39 @@
 
 #include <memory>
 #include <QWidget>
+#include <QSettings>
 #include "ui_astroCalcAlmanacWidget.h"
 
 class AstroCalcAlmanacWidget : public QWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    AstroCalcAlmanacWidget(QWidget* parent = nullptr);
-    void setup();
-    void retranslate();
+	AstroCalcAlmanacWidget(QWidget* parent = nullptr);
+	void setup();
+	void retranslate();
 
 private slots:
-    void setSeasonLabels();
-    void setSeasonTimes();
-    void setTodayTimes();
+	void setSeasonLabels();
+	void setSeasonTimes();
+	void setTodayTimes();
+	void saveMinutes(int minutes);
+	void saveCustomSunAltitue(double altitude);
+	void saveCustomMoonAltitue(double altitude);
 
 private:
-    class StelCore* core;
-    class SpecificTimeMgr* specMgr;
-    class StelLocaleMgr* localeMgr;
+	class StelCore* core;
+	class SpecificTimeMgr* specMgr;
+	class StelLocaleMgr* localeMgr;
+	QSettings* conf;
 
-    double sunriseJD, sunsetJD, moonriseJD, moonsetJD, civilDawnJD, civilDuskJD, nauticalDawnJD, nauticalDuskJD, astronomicalDawnJD, astronomicalDuskJD;
+	double sunriseJD, sunsetJD, moonriseJD, moonsetJD, civilDawnJD, civilDuskJD, nauticalDawnJD, nauticalDuskJD, astronomicalDawnJD, astronomicalDuskJD,
+	beforeSunriseJD, afterSunsetJD, minutesJD, customSunriseJD, customSunsetJD, customSunAltitude, customMoonriseJD, customMoonsetJD, customMoonAltitude;
 
-    void populateData();
-    // method to get a formatted string for date and time of equinox/solstice
-    QString getFormattedDateTime(const double JD, const double utcShift);
+	void populateData();
+	// method to get a formatted string for date and time of equinox/solstice
+	QString getFormattedDateTime(const double JD, const double utcShift);
 
-    std::unique_ptr<Ui_astroCalcAlmanacWidget> ui;
+	std::unique_ptr<Ui_astroCalcAlmanacWidget> ui;
 };
 
 #endif

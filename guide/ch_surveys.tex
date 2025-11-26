@@ -44,14 +44,16 @@ Stellarium by default tries to load HiPS from two sources:
 \end{itemize}
 This can be changed with the \texttt{sources} entries in the \texttt{[hips]} section of the configuration
 file (see also section~\ref{sec:config.ini:hips}).  You can add your
-own private HiPS surveys by running a local webserver and adding:
+own private HiPS surveys by either running your own (even machine-local) webserver, 
+or just placing your files into any directory and adding a \texttt{file://} URL:
 
 \begin{configfile}[\scriptsize]
 [hips]
 sources/1/url = http://alasky.u-strasbg.fr/MocServer/query?*/P/*&get=record
 sources/2/url = https://data.stellarium.org/surveys/hipslist
 sources/3/url = http://localhost/Stellarium/hips/hipslist
-sources/size  = 3
+sources/4/url = file:///D:/Stellarium/hips/hipslist
+sources/size  = 4
 \end{configfile}
 
 \section{Solar system HiPS survey}
@@ -113,16 +115,16 @@ Stellarium's \file{config.ini}.  On Windows, if you have a harddisk
 unpacked image subdirectories 0, 1, 2, \ldots, 10, the section may look like
 \begin{configfile}
 [astro]
-toast_survey_directory =StelDSS
-toast_survey_host=T:/
-toast_survey_levels=10
+toast_survey_directory = StelDSS
+toast_survey_host = T:/
+toast_survey_levels = 10
 \end{configfile}
 On Linux, with the files stored in \file{/usr/local/share/Stellarium/StelDSS}, the same section could look like
 \begin{configfile}
 [astro]
-toast_survey_directory =usr/local/share/Stellarium/StelDSS
-toast_survey_host=/
-toast_survey_levels=10
+toast_survey_directory = usr/local/share/Stellarium/StelDSS
+toast_survey_host = /
+toast_survey_levels = 10
 \end{configfile}
 
 \begin{table}[htbp]

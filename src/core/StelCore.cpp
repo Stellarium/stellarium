@@ -45,15 +45,13 @@
 
 #include <QSettings>
 #include <QDebug>
+#include <QGlobalStatic>
 #include <QMetaEnum>
 #include <QTimeZone>
 #include <QFile>
 #include <QDir>
 #include <QRegularExpression>
 #include <QOpenGLShaderProgram>
-
-#include <iostream>
-#include <fstream>
 
 // Init static transfo matrices
 // See vsop87.doc:
@@ -94,6 +92,7 @@ StelCore::StelCore()
 	, parallaxFactor(1.0)
 	, flagUseTopocentricCoordinates(true)
 	, timeSpeed(JD_SECOND)
+        , savedTimeSpeed(JD_SECOND)
 	, JD(0.,0.)
 	, presetSkyTime(0.)
 	, milliSecondsOfLastJDUpdate(0)
@@ -316,6 +315,7 @@ void StelCore::init()
 	actionsMgr->addAction("actionDecrease_Time_Speed_Less", timeGroup, N_("Decrease time speed (a little)"), this, "decreaseTimeSpeedLess()", "Shift+J");
 	actionsMgr->addAction("actionSet_Real_Time_Speed", timeGroup, N_("Set normal time rate"), this, "toggleRealTimeSpeed()", "K");
 	actionsMgr->addAction("actionSet_Time_Rate_Zero", timeGroup, N_("Set time rate to zero"), this, "setZeroTimeSpeed()", "7");
+	actionsMgr->addAction("actionToggle_Time_Rate_Zero", timeGroup, N_("Toggle time rate to zero and back"), this, "toggleTimeSpeed()", "9");
 	actionsMgr->addAction("actionSet_Time_Reverse", timeGroup, N_("Set reverse time direction"), this, "revertTimeDirection()", "0");
 	actionsMgr->addAction("actionReturn_To_Current_Time", timeGroup, N_("Set time to now"), this, "setTimeNow()", "8");
 	actionsMgr->addAction("actionAdd_Solar_Minute", timeGroup, N_("Add 1 solar minute"), this, "addMinute()");
@@ -431,6 +431,9 @@ StelProjectorP StelCore::getProjection(StelProjector::ModelViewTranformP modelVi
 			break;
 		case ProjectionHammer:
 			prj = StelProjectorP(new StelProjectorHammer(modelViewTransform));
+			break;
+		case ProjectionMollweide:
+			prj = StelProjectorP(new StelProjectorMollweide(modelViewTransform));
 			break;
 		case ProjectionCylinder:
 			prj = StelProjectorP(new StelProjectorCylinder(modelViewTransform));
@@ -1149,7 +1152,13 @@ void StelCore::returnToDefaultLocation()
 	if (loc.isValid())
 		moveObserverTo(loc, 1., 2.);
 	else
-		qDebug() << "StelCore::returnToDefaultLocation: Location " << loc.serializeToLine().replace('\t', '|') << "is invalid. Store an entry from the locations list as default location.";
+	{
+		qCritical() << "StelCore::returnToDefaultLocation: " << defaultLocationID << ": returned Location " <<
+			       loc.serializeToLine().replace('\t', '|') <<
+			       "is invalid. Store an entry from the locations list as default location.";
+		// move to lastResortLocation
+		moveObserverTo(locationMgr.getLastResortLocation(), 1., 2.);
+	}
 }
 
 void StelCore::returnToHome()
@@ -1169,6 +1178,8 @@ void StelCore::returnToHome()
 
 	if (loc.isValid())
 		moveObserverTo(loc, conf->value("navigation/return_home_duration", 0.).toDouble()); // ability set a duration of movement (for a demo)
+	else
+		qWarning() << "Invalid location" << loc.serializeToLine();
 
 	PlanetP p = GETSTELMODULE(SolarSystem)->searchByEnglishName(loc.planetName);
 
@@ -1307,7 +1318,7 @@ void StelCore::setParallaxFactor(double factor)
 {
 	if (!fuzzyEquals(parallaxFactor, factor))
 	{
-		parallaxFactor=qBound(0.,factor, 10000.);
+		parallaxFactor=qBound(0.,factor, 100000.);
 		StelApp::immediateSave("astro/parallax_factor", parallaxFactor);
 		emit parallaxFactorChanged(factor);
 	}
@@ -1351,6 +1362,18 @@ void StelCore::setTimeRate(double ts)
 double StelCore::getTimeRate() const
 {
 	return timeSpeed;
+}
+
+void StelCore::toggleTimeSpeed()
+{
+	double ts = getTimeRate();
+	if (ts != 0.)
+	{
+		savedTimeSpeed = ts;
+		setTimeRate(0.);
+	}
+	else
+		setTimeRate(savedTimeSpeed);
 }
 
 void StelCore::revertTimeDirection(void)
@@ -2216,9 +2239,9 @@ void StelCore::updateTime(double deltaTime)
 		JD.first = jdOfLastJDUpdate + (QDateTime::currentMSecsSinceEpoch() - milliSecondsOfLastJDUpdate) / 1000.0 * timeSpeed;
 	}
 
-	// Fix time limits to -100000 to +100000 to prevent bugs
-	if (JD.first>38245309.499988) JD.first = 38245309.499988;
-	if (JD.first<-34803211.500012) JD.first = -34803211.500012;
+	// Fix time limits to -200000 to +200000 to prevent bugs
+	if (JD.first>74769924.499988) JD.first = 74769924.499988;
+	if (JD.first<-71328212.500012) JD.first = -71328212.500012;
 	JD.second=computeDeltaT(JD.first);
 
 	if (position->isObserverLifeOver())
@@ -3030,7 +3053,7 @@ typedef struct iau_constline{
 	QString constellation; // 3-letter code of constellation
 } iau_constelspan;
 
-static QVector<iau_constelspan> iau_constlineVec;
+Q_GLOBAL_STATIC(QVector<iau_constelspan>, iau_constlineVec);
 static bool iau_constlineVecInitialized=false;
 
 // File iau_constellations_spans.dat is converted from file data.dat from ADC catalog VI/42.
@@ -3092,7 +3115,7 @@ QString StelCore::getIAUConstellation(const Vec3d &positionEqJnow) const
 			else
 				span.decLow += atof(numList.at(1).toLatin1())/60.;
 			span.constellation=list.at(3);
-			iau_constlineVec.append(span);
+			iau_constlineVec->append(span);
 		}
 		file.close();
 		iau_constlineVecInitialized=true;
@@ -3100,16 +3123,16 @@ QString StelCore::getIAUConstellation(const Vec3d &positionEqJnow) const
 
 	// iterate through vector, find entry where declination is lower.
 	int entry=0;
-	while (iau_constlineVec.at(entry).decLow > dec1875)
+	while (iau_constlineVec->at(entry).decLow > dec1875)
 		entry++;
-	while (entry<iau_constlineVec.size())
+	while (entry<iau_constlineVec->size())
 	{
-		while (iau_constlineVec.at(entry).RAhigh <= RA1875)
+		while (iau_constlineVec->at(entry).RAhigh <= RA1875)
 			entry++;
-		while (iau_constlineVec.at(entry).RAlow >= RA1875)
+		while (iau_constlineVec->at(entry).RAlow >= RA1875)
 			entry++;
-		if (iau_constlineVec.at(entry).RAhigh > RA1875)
-			return iau_constlineVec.at(entry).constellation;
+		if (iau_constlineVec->at(entry).RAhigh > RA1875)
+			return iau_constlineVec->at(entry).constellation;
 		else
 			entry++;
 	}

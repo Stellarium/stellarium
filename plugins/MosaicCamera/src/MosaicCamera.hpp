@@ -37,7 +37,7 @@ struct PolygonSet
 {
 	QString name;						///< The name of the polygon set.
 	QVector<QVector<QPointF>> corners;	///< Polygons as vectors of corner points.
-	QColor color;							///< Color associated with the polygon set.
+	QColor color;						///< Color associated with the polygon set.
 };
 
 
@@ -45,10 +45,13 @@ struct PolygonSet
 struct Camera
 {
 	QString name;						///< The name of the camera.
+	QString cameraName;					///< The name of the camera in the GUI.
+	QString cameraDescription;			///< The description of the camera.
+	QString cameraURLDetails;			///< URL for more details about the camera.
 	double ra;							///< Right Ascension of camera pointing [deg]
 	double dec;							///< Declination of camera pointing [deg]
-	double rotation;						///< Rotation angle of the camera [deg]
-	bool visible;							///< Visibility status of the camera.
+	double rotation;					///< Rotation angle of the camera [deg]
+	bool visible;						///< Visibility status of the camera.
 	QVector<PolygonSet> polygon_sets;	///< Collection of polygon sets associated with the camera.
 	double fieldDiameter;				///< Estimated field diameter of the camera [deg]
 };
@@ -156,6 +159,7 @@ public slots:
 	void setCurrentVisibility(bool visible);
 
 	void saveSettings() const;
+	void restoreDefaults();
 
 private:
 	QHash<QString, Camera> cameras;

@@ -101,6 +101,7 @@ public:
 		ProjectionOrthographic,		//!< Orthographic projection
 		ProjectionEqualArea,		//!< Equal Area projection
 		ProjectionHammer,		//!< Hammer-Aitoff projection
+		ProjectionMollweide,	//!< Mollweide projection
 		ProjectionSinusoidal,		//!< Sinusoidal projection
 		ProjectionMercator,		//!< Mercator projection
 		ProjectionMiller,		//!< Miller cylindrical projection
@@ -586,6 +587,9 @@ public slots:
 	//! Get time speed in JDay/sec
 	double getTimeRate() const;
 
+	//! Toggle current time speed to zero and back [in JDay/sec]
+	void toggleTimeSpeed();
+
 	void revertTimeDirection(void);
 
 	//! Increase the time speed
@@ -976,6 +980,7 @@ private:
 
 	// Time variables
 	double timeSpeed;           // Positive : forward, Negative : Backward, 1 = 1sec/sec
+	double savedTimeSpeed;	    // Time rate value for toggler
 	//double JDay;              // Current time in Julian day. IN V0.12 TO V0.14, this was JD in TT, and all places where UT was required had to subtract getDeltaT() explicitly.
 	QPair<double,double> JD;    // From 0.14 on: JD.first=JD_UT, JD.second=DeltaT[seconds]=(TT-UT)*86400. To gain JD_TT, compute JDE=JD.first+JD.second/86400 or better just call getJDE()
 				    // Use is best with calls getJD()/setJD() and getJDE()/setJDE() to explicitly state which flavour of JD you need.

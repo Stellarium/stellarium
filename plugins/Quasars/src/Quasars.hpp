@@ -23,7 +23,6 @@
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "Quasar.hpp"
-#include <QFont>
 #include <QVariantMap>
 #include <QDateTime>
 #include <QList>
@@ -236,10 +235,10 @@ public slots:
 	void setMarkerColor(const Vec3f& c);
 
 	//! Connect this to StelApp font size.
-	void setFontSize(int s){font.setPixelSize(s);}
+	void setFontSize(int s){fontSize = s;}
 private:
-	// Font used for displaying our text
-	QFont font;
+	// Fontsize used for displaying our text
+	int fontSize;
 
 	// if existing, delete Satellites section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);

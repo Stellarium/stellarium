@@ -20,7 +20,6 @@
 #ifndef ANGLEMEASURE_HPP
 #define ANGLEMEASURE_HPP
 
-#include <QFont>
 #include "VecMath.hpp"
 #include "StelModule.hpp"
 #include "StelFader.hpp"
@@ -165,7 +164,7 @@ private slots:
 	void clearMessage();
 
 private:
-	QFont font;
+	int fontSize;
 	bool flagShowAngleMeasure;
 	bool withDecimalDegree;
 	LinearFader lineVisible;

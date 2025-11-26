@@ -25,7 +25,6 @@
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
 #include "StelUtils.hpp"
-#include "StelTextureMgr.hpp"
 #include "SaturationShader.hpp"
 
 #include <QDebug>
@@ -575,18 +574,24 @@ void StelPainter::sSphereMap(double radius, unsigned int slices, unsigned int st
 	}
 }
 
-void StelPainter::drawTextGravity180(const float x, const float y, const QString& ws, const float xshift, const float yshift)
+// Draw the string starting at the given position x/y with the current font.
+// The string is split into single characters and rotated against the view center for planetarium dome use.
+// @param x horizontal position of the lower left corner of the first character of the text in pixel.
+// @param y vertical position of the lower left corner of the first character of the text in pixel.
+// @param str the text to print.
+// @param xshift shift in pixel in the rotated x direction.
+// @param yshift shift in pixel in the rotated y direction.
+void StelPainter::drawTextGravity180(const float x, const float y, const QString& str, const float xshift, const float yshift)
 {
 	const float dx = x - static_cast<float>(prj->viewportCenter[0]);
 	const float dy = y - static_cast<float>(prj->viewportCenter[1]);
 	float d = std::sqrt(dx*dx + dy*dy);
 
 	// If the text is too far away to be visible in the screen return
-	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2 || ws.isEmpty())
+	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2 || str.isEmpty())
 		return;
 
 	const auto fm = getFontMetrics();
-	const bool rtl = StelApp::getInstance().getLocaleMgr().isSkyRTL();
 
 	const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
 	float anglePerUnitWidth = ppx / d;
@@ -610,17 +615,87 @@ void StelPainter::drawTextGravity180(const float x, const float y, const QString
 		yVc = y0 - d * std::sin(theta);
 	}
 
-	const int slen = ws.length();
-	const int startI = rtl ? slen - 1 : 0;
-	const int endI = rtl ? -1 : slen;
-	const int inc = rtl ? -1 : 1;
-	for (int i = startI; i != endI; i += inc)
+	std::u32string label32=str.toStdU32String();
+
+	// TODO: Move these and the same from StelSkyCultureMgr to a common place.
+	static const uint32_t FSI32=U'\U00002068'; // First strong isolate: Treat following text as isolated and in the direction of its first strong directional character.
+						   // ASSUMPTION: Can be used as autodetect feature? Mark all parts inside embeddings?
+	static const uint32_t PDI32=U'\U00002069'; // Pop directional isolate: terminate scope of last LRI/RLI/FSI
+	static const uint32_t LRM32=U'\U0000200e';
+
+	// We have two types: regular one-script strings and cultural labels with several segments enclosed in Unicode FSI/PDI isolators.
+	if (label32.find(FSI32) == std::u32string::npos)
 	{
-		const QChar c = ws[i];
-		const float x = d * std::cos(theta) + xVc;
-		const float y = d * std::sin(theta) + yVc;
-		drawText(x, y, c, 90.f + theta*M_180_PIf, 0., 0.);
-		theta += fm.horizontalAdvance(c) * anglePerUnitWidth;
+		// rtl tracks the right-to-left status of the text in the current position.
+		const bool rtl = StelApp::getInstance().getLocaleMgr().isSkyRTL();
+		const int slen = label32.length();
+		const int startI = rtl ? slen - 1 : 0;
+		const int endI = rtl ? -1 : slen;
+		const int inc = rtl ? -1 : 1;
+		for (int i = startI; i != endI; i += inc)
+		{
+			const QString c = QString::fromUcs4(&label32[i], 1);
+			const float x = d * std::cos(theta) + xVc;
+			const float y = d * std::sin(theta) + yVc;
+			drawText(x, y, c, 90.f + theta*M_180_PIf, 0., 0.);
+			theta += fm.horizontalAdvance(c) * anglePerUnitWidth;
+		}
+	}
+	else
+	{
+		// We manage our RTL by ourselves.
+		for (int i = 0; i < label32.length(); ++i)
+		{
+			uint32_t chr32=label32[i];
+			if (chr32==FSI32)
+			{
+				// cut out substring
+				const uint32_t posBegin = label32.find(FSI32, i);
+				const uint32_t posEnd   = label32.find(PDI32, i);
+				const int isolatedLength=posEnd-posBegin-1;
+				std::u32string isolatedGroup=label32.substr(posBegin+1, isolatedLength); // The string between FSI and PDI
+				// find out ltr or rtl?
+				// An Arab user's translated Arab string is bracketed in \u200e (LRM) marks. Build a cleaned string.
+				std::u32string cleanedIsolated;
+				foreach(uint32_t ch, isolatedGroup)
+				{
+					if (ch!=LRM32)
+						cleanedIsolated.append(1, ch);
+				}
+
+				// For now, we just use QString::isRightToLeft() on the back-converted inner string.
+				// TODO: If that is not enough, we will have to manually analyze the string until the first strong character tells us its direction.
+				const QString isolatedString=QString::fromUcs4(cleanedIsolated.data(), cleanedIsolated.length());
+				const bool isoRtl=isolatedString.isRightToLeft();
+				const int isoLength=cleanedIsolated.length();
+
+				//qDebug() << "From" << posBegin << "to" << posEnd << ", length" << isoLength;
+				//qDebug() << ( subrtl ?  "RTL: " : "NOT RTL: " ) << isolatedString;
+
+				const int startI = isoRtl ? isoLength - 1 : 0;
+				const int endI = isoRtl ? -1 : isoLength;
+				const int inc = isoRtl ? -1 : 1;
+				for (int i = startI; i != endI; i += inc)
+				{
+					const QString c = QString::fromUcs4(&cleanedIsolated[i], 1);
+					//qDebug() << "inner char at pos " << i << ":" << c;
+					const float x = d * std::cos(theta) + xVc;
+					const float y = d * std::sin(theta) + yVc;
+					drawText(x, y, c, 90.f + theta*M_180_PIf, 0., 0.);
+					theta += fm.horizontalAdvance(c) * anglePerUnitWidth;
+				}
+				i+=isolatedLength+1;
+			}
+			else
+			{
+				const QString c = QString::fromUcs4(&label32[i], 1);
+				//qDebug() << "continuing at pos " << i << ":" << c;
+				const float x = d * std::cos(theta) + xVc;
+				const float y = d * std::sin(theta) + yVc;
+				drawText(x, y, c, 90.f + theta*M_180_PIf, 0., 0.);
+				theta += fm.horizontalAdvance(c) * anglePerUnitWidth;
+			}
+		}
 	}
 }
 
@@ -654,7 +729,7 @@ struct StringTexture
 
 StringTexture* StelPainter::getTextTexture(const QString& str, int pixelSize) const
 {
-	QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
+	QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize) + currentFont.key().toUtf8();
 	StringTexture* cachedTex = texCache.object(hash);
 	if (cachedTex)
 		return cachedTex;
@@ -1570,13 +1645,13 @@ void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDisc
 		return;
 	}
 
+	QVector<Vec3d> aberredVertex(arr.vertex.size());
 	if (aberration==Vec3d(0.))
 	{
 		setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
 	}
 	else
 	{
-		QVector<Vec3d> aberredVertex(arr.vertex.size());
 		for (int i=0; i<arr.vertex.size(); i++)
 		{
 			Q_ASSERT(qFuzzyCompare(arr.vertex.at(i).normSquared(), 1.0));
@@ -2072,13 +2147,12 @@ void StelPainter::sCylinder(double radius, double height, int slices, int orient
 	texCoordArray.clear();
 	vertexArray.clear();
 	float s = 0.f;
-	double x, y;
 	const float ds = 1.f / static_cast<float>(slices);
 	const double da = 2. * M_PI / slices;
 	for (int i = 0; i <= slices; ++i)
 	{
-		x = std::sin(da*i);
-		y = std::cos(da*i);
+		double x = std::sin(da*i);
+		double y = std::cos(da*i);
 		texCoordArray.append(Vec2f(s, 0.f));
 		vertexArray.append(Vec3d(x*radius, y*radius, 0.));
 		texCoordArray.append(Vec2f(s, 1.f));

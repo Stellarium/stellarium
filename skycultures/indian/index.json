@@ -3,28 +3,250 @@
   "region": "Southern Asia",
   "classification": ["traditional"],
   "fallback_to_international_names": false,
+  "asterisms_comment": "To enhance the appearance of the Nakshatras, G. Zotti repeated entries from constellation list below, reformulated to allow display as asterisms. English translation taken from Wikipedia",
   "asterisms": [
+    {
+      "id": "AST indian Aśv",
+      "lines": [[8832, 8903]],
+      "common_name": {"english": "Ashvins", "native": "अश्विनी", "pronounce": "Aśvinī"}
+    },
+    {
+      "id": "AST indian Bhar",
+      "lines": [[12719, 13061, 13209]],
+      "common_name": {"english": "Bearer", "native": "भरणी", "pronounce": "Bharanī"}
+    },
+    {
+      "id": "AST indian Kṛt",
+      "lines": [[17851, 17847, 17702, 17608, 17499, 17531, 17573, 17579]],
+      "common_name": {"english": "To Cut", "native": "कृत्तिकाः", "pronounce": "Kṛttikā"}
+    },
+    {
+      "id": "AST indian Roh",
+      "lines": [[21421, 21421]],
+      "common_name": {"english": "Red", "native": "रोहिणी", "pronounce": "Rohiṇī"}
+    },
+    {
+      "id": "AST indian Mṛg",
+      "lines": [[26207, 26176, 26366]],
+      "image": {
+        "file": "illustrations/mRgashIrSha.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [344, 213], "hip": 25336},
+          {"pos": [255, 306], "hip": 26311},
+          {"pos": [278, 390], "hip": 24436}
+        ]
+      },
+      "common_name": {"english": "Deer's head", "native": "मृगशिराः", "pronounce": "Mṛgaśiras"}
+    },
+    {
+      "id": "AST indian Ārd",
+      "lines": [[27989, 27989]],
+      "common_name": {"english": "Moist One", "native": "आर्द्रा", "pronounce": "Ārdrā"}
+    },
+    {
+      "id": "AST indian PVas",
+      "lines": [[36850, 37826]],
+      "common_name": {"english": "Return of wealth", "native": "पुनर्वसू", "pronounce": "Punarvasū"}
+    },
+    {
+      "id": "AST indian Puṣ",
+      "lines": [[42911, 41822]],
+      "common_name": {"english": "Nourisher", "native": "पुष्यम्", "pronounce": "Puṣya"}
+    },
+    {
+      "id": "AST indian Aśl",
+      "lines": [[43109, 42313, 42402, 42799, 43234]],
+      "image": {
+        "file": "illustrations/hydra.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [26, 491], "hip": 64962},
+          {"pos": [111, 149], "hip": 55434},
+          {"pos": [401, 33], "hip": 43813}
+        ]
+      },
+      "common_name": {"english": "Embrace", "native": "आश्लोषा", "pronounce": "Aśleṣa"}
+    },
+    {
+      "id": "AST indian Magh",
+      "lines": [[49669, 49669]],
+      "common_name": {"english": "Mighty", "native": "मघा", "pronounce": "Maghā"}
+    },
+    {
+      "id": "AST indian PPhā",
+      "lines": [[54872, 54879]],
+      "common_name": {"english": "Former Reddish One", "native": "पूर्वफाल्गुनी", "pronounce": "Pūrva phālgunī"}
+    },
+    {
+      "id": "AST indian UPhā",
+      "lines": [[57632, 57565]],
+      "common_name": {"english": "Latter Reddish One", "native": "उत्तरफाल्गुनी", "pronounce": "Uttara phālgunī"}
+    },
+    {
+      "id": "AST indian Hasta",
+      "lines": [[60965, 61359], [60965, 59803, 59316, 59199], [59316, 61359]],
+      "image": {
+        "file": "illustrations/hasta.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [306, 430], "hip": 60965},
+          {"pos": [93, 435], "hip": 59803},
+          {"pos": [312, 14], "hip": 61359}
+        ]
+      },
+      "common_name": {"english": "Hand", "native": "हस्तः", "pronounce": "Hasta"}
+    },
+    {
+      "id": "AST indian Chitr",
+      "lines": [[65474, 65474]],
+      "common_name": {"english": "Bright One", "native": "चित्रा", "pronounce": "Chitrā"}
+    },
+    {
+      "id": "AST indian Svā",
+      "lines": [[69673, 69673]],
+      "common_name": {"english": "Independent One", "native": "स्वाती", "pronounce": "Svātī"}
+    },
+    {
+      "id": "AST indian Viś",
+      "lines": [[76333, 74785, 72622], [74785, 74392]],
+      "image": {
+        "file": "illustrations/vishAkhA.png",
+        "size": [232, 218],
+        "anchors": [
+          {"pos": [101, 163], "hip": 72622},
+          {"pos": [14, 63], "hip": 73714},
+          {"pos": [193, 59], "hip": 74785}
+        ]
+      },
+      "common_name": {"english": "Branching Out", "native": "विशाखे", "pronounce": "Viśākhā"}
+    },
+    {
+      "id": "AST indian Anur",
+      "lines": [[78820, 78401, 78265]],
+      "common_name": {"english": "Following Rādhā", "native": "अनुराधाः", "pronounce": "Anurādhā"}
+    },
+    {
+      "id": "AST indian Jyeṣ",
+      "lines": [[80112, 80763, 81266]],
+      "common_name": {"english": "Eldest", "native": "ज्येष्ठा", "pronounce": "Jyeṣṭhā"}
+    },
+    {
+      "id": "AST indian Mūl",
+      "lines": [[82396, 82545, 82729, 84143, 86228, 87073, 86670, 85927, 85696]],
+      "image": {
+        "file": "illustrations/mUlam.png",
+        "size": [271, 243],
+        "anchors": [
+          {"pos": [234, 32], "hip": 82396},
+          {"pos": [50, 94], "hip": 85927},
+          {"pos": [85, 216], "hip": 86228}
+        ]
+      },
+      "common_name": {"english": "Root", "native": "मूलम्", "pronounce": "Mūla"}
+    },
+    {
+      "id": "AST indian PAṣ",
+      "lines": [[90185, 89931]],
+      "common_name": {"english": "Former Invincible", "native": "पूर्वाषाढा", "pronounce": "Pūrvāṣāḍhā"}
+    },
+    {
+      "id": "AST indian UAṣ",
+      "lines": [[92855, 93506]],
+      "common_name": {"english": "Latter Invincible", "native": "उत्तराषाढा", "pronounce": "Uttarāṣāḍhā"}
+    },
+    {
+      "id": "AST indian Abh",
+      "lines": [[91926, 91262, 91971]],
+      "common_name": {"english": "Victorious", "native": "अभिजित्", "pronounce": "Abhijit"}
+    },
+    {
+      "id": "AST indian Śra",
+      "lines": [[98036, 97649, 97278]],
+      "image": {
+        "file": "illustrations/shravaNa.png",
+        "size": [232, 218],
+        "anchors": [
+          {"pos": [130, 100], "hip": 97649},
+          {"pos": [130, 22], "hip": 97278},
+          {"pos": [140, 181], "hip": 98036}
+        ]
+      },
+      "common_name": {"english": "To Hear", "native": "श्रवणः", "pronounce": "Śravaṇa"}
+    },
+    {
+      "id": "AST indian Dhani",
+      "lines": [[102281, 101958]],
+      "image": {
+        "file": "illustrations/dhaniShThA.png",
+        "size": [232, 218],
+        "anchors": [
+          {"pos": [32, 101], "hip": 102532},
+          {"pos": [108, 58], "hip": 101958},
+          {"pos": [153, 115], "hip": 101769}
+        ]
+      },
+      "common_name": {"english": "Wealthiest", "native": "धनिष्ठा", "pronounce": "Dhaniṣṭhā"}
+    },
+    {
+      "id": "AST indian Śata",
+      "lines": [[110395, 110395]],
+      "common_name": {"english": "A Hundred Physicians", "native": "शतभिषक्", "pronounce": "Śatabhiṣa"}
+    },
+    {
+      "id": "AST indian PBhā",
+      "lines": [[113881, 113963]],
+      "image": {
+        "file": "illustrations/proShThapada.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [219, 52], "hip": 113881},
+          {"pos": [233, 379], "hip": 113963},
+          {"pos": [300, 108], "hip": 112748}
+        ]
+      },
+      "common_name": {"english": "Former Blessed Feet", "native": "पूर्वभाद्रपदाः", "pronounce": "Pūrva bhādrapada"}
+    },
+    {
+      "id": "AST indian UBhā",
+      "lines": [[1067, 667]],
+      "image": {
+        "file": "illustrations/proShThapada.png",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [219, 52], "hip": 667},
+          {"pos": [233, 379], "hip": 1067},
+          {"pos": [313, 130], "hip": 118131}
+        ]
+      },
+      "common_name": {"english": "Latter Blessed Feet", "native": "उत्तरभाद्रपदाः", "pronounce": "Uttara bhādrapada"}
+    },
+    {
+      "id": "AST indian Rev",
+      "lines": [[5737, 5737]],
+      "common_name": {"english": "Prosperous", "native": "रेवती", "pronounce": "Revatī"}
+    }
   ],
   "constellations": [
     {
       "id": "CON indian Aśv",
       "lines": [[8832, 8903]],
-      "common_name": {"english": "With Horses", "native": "Aśvinī"}
+      "common_name": {"english": "With Horses", "native": "अश्विनी", "pronounce": "Aśvinī"}
     },
     {
       "id": "CON indian Bhar",
       "lines": [[12719, 13061, 13209]],
-      "common_name": {"english": "Bearer", "native": "Bharanī"}
+      "common_name": {"english": "Bearer", "native": "भरणी", "pronounce": "Bharanī"}
     },
     {
       "id": "CON indian Kṛt",
       "lines": [[17851, 17847, 17702, 17608, 17499, 17531, 17573, 17579]],
-      "common_name": {"english": "Cutter", "native": "Kṛttikā"}
+      "common_name": {"english": "Cutter", "native": "कृत्तिकाः", "pronounce": "Kṛttikā"}
     },
     {
       "id": "CON indian Roh",
       "lines": [[21421, 21421]],
-      "common_name": {"english": "Climber", "native": "Rohiṇī"}
+      "common_name": {"english": "Red", "native": "रोहिणी", "pronounce": "Rohiṇī"}
     },
     {
       "id": "CON indian Mṛg",
@@ -38,7 +260,7 @@
           {"pos": [278, 390], "hip": 24436}
         ]
       },
-      "common_name": {"english": "Deer's head", "native": "Mṛgaśiras"}
+      "common_name": {"english": "Deer's head", "native": "मृगशिराः", "pronounce": "Mṛgaśiras"}
     },
     {
       "id": "CON indian MṛVy",
@@ -52,7 +274,7 @@
           {"pos": [417, 245], "hip": 32349}
         ]
       },
-      "common_name": {"english": "Deer Hunter", "native": "Mṛgavyādha"}
+      "common_name": {"english": "Deer Hunter", "native": "मृगव्याधः", "pronounce": "Mṛgavyādha"}
     },
     {
       "id": "CON indian Inv",
@@ -66,27 +288,27 @@
           {"pos": [264, 205], "hip": 25930}
         ]
       },
-      "common_name": {"english": "Arrow", "native": "Invakā"}
+      "common_name": {"english": "Arrow", "native": "इन्वकाः", "pronounce": "Invakā"}
     },
     {
       "id": "CON indian Śara",
       "lines": [[25044, 33646]],
-      "common_name": {"english": "Reed forest", "native": "Śaravaṇa"}
+      "common_name": {"english": "Reed forest", "native": "शरवणम्", "pronounce": "Śaravaṇa"}
     },
     {
       "id": "CON indian Ārd",
       "lines": [[27989, 27989]],
-      "common_name": {"english": "Moist", "native": "Ārdrā"}
+      "common_name": {"english": "Moist", "native": "आर्द्रा", "pronounce": "Ārdrā"}
     },
     {
       "id": "CON indian PVas",
       "lines": [[36850, 37826]],
-      "common_name": {"english": "Wealth-restorer", "native": "Punarvasū"}
+      "common_name": {"english": "Wealth-restorer", "native": "पुनर्वसू", "pronounce": "Punarvasū"}
     },
     {
       "id": "CON indian Puṣ",
       "lines": [[42911, 41822]],
-      "common_name": {"english": "Nourisher", "native": "Puṣya"}
+      "common_name": {"english": "Nourisher", "native": "पुष्यम्", "pronounce": "Puṣya"}
     },
     {
       "id": "CON indian Aśl",
@@ -100,22 +322,22 @@
           {"pos": [401, 33], "hip": 43813}
         ]
       },
-      "common_name": {"english": "Embrace", "native": "Aśleṣa"}
+      "common_name": {"english": "Embrace", "native": "आश्लोषा", "pronounce": "Aśleṣa"}
     },
     {
       "id": "CON indian Magh",
       "lines": [[49669, 49669]],
-      "common_name": {"english": "Bountiful", "native": "Maghā"}
+      "common_name": {"english": "Bountiful", "native": "मघा", "pronounce": "Maghā"}
     },
     {
       "id": "CON indian PPhā",
       "lines": [[54872, 54879]],
-      "common_name": {"english": "Former Fruitful", "native": "Pūrva phālgunī"}
+      "common_name": {"english": "Former Fruitful", "native": "पूर्वफाल्गुनी", "pronounce": "Pūrva phālgunī"}
     },
     {
       "id": "CON indian UPhā",
       "lines": [[57632, 57565]],
-      "common_name": {"english": "Latter Fruitful", "native": "Uttara phālgunī"}
+      "common_name": {"english": "Latter Fruitful", "native": "उत्तरफाल्गुनी", "pronounce": "Uttara phālgunī"}
     },
     {
       "id": "CON indian Hasta",
@@ -129,17 +351,17 @@
           {"pos": [312, 14], "hip": 61359}
         ]
       },
-      "common_name": {"english": "Hand", "native": "Hasta"}
+      "common_name": {"english": "Hand", "native": "हस्तः", "pronounce": "Hasta"}
     },
     {
       "id": "CON indian Chitr",
       "lines": [[65474, 65474]],
-      "common_name": {"english": "Spectacular", "native": "Chitrā"}
+      "common_name": {"english": "Spectacular", "native": "चित्रा", "pronounce": "Chitrā"}
     },
     {
       "id": "CON indian Svā",
       "lines": [[69673, 69673]],
-      "common_name": {"english": "Self mover", "native": "Svātī"}
+      "common_name": {"english": "Self mover", "native": "स्वाती", "pronounce": "Svātī"}
     },
     {
       "id": "CON indian Viś",
@@ -153,17 +375,17 @@
           {"pos": [193, 59], "hip": 74785}
         ]
       },
-      "common_name": {"english": "Well branched", "native": "Viśākhā"}
+      "common_name": {"english": "Well branched", "native": "विशाखे", "pronounce": "Viśākhā"}
     },
     {
       "id": "CON indian Anur",
       "lines": [[78820, 78401, 78265]],
-      "common_name": {"english": "Following Rādhā", "native": "Anurādhā"}
+      "common_name": {"english": "Following Rādhā", "native": "अनुराधाः", "pronounce": "Anurādhā"}
     },
     {
       "id": "CON indian Jyeṣ",
       "lines": [[80112, 80763, 81266]],
-      "common_name": {"english": "Elder", "native": "Jyeṣṭhā"}
+      "common_name": {"english": "Elder", "native": "ज्येष्ठा", "pronounce": "Jyeṣṭhā"}
     },
     {
       "id": "CON indian Mūl",
@@ -177,17 +399,17 @@
           {"pos": [85, 216], "hip": 86228}
         ]
       },
-      "common_name": {"english": "Root", "native": "Mūla"}
+      "common_name": {"english": "Root", "native": "मूलम्", "pronounce": "Mūla"}
     },
     {
       "id": "CON indian PAṣ",
       "lines": [[90185, 89931]],
-      "common_name": {"english": "Former invincible one", "native": "Pūrvāṣāḍhā"}
+      "common_name": {"english": "Former invincible one", "native": "पूर्वाषाढा", "pronounce": "Pūrvāṣāḍhā"}
     },
     {
       "id": "CON indian UAṣ",
       "lines": [[92855, 93506]],
-      "common_name": {"english": "Latter invincible one", "native": "Uttarāṣāḍhā"}
+      "common_name": {"english": "Latter invincible one", "native": "उत्तराषाढा", "pronounce": "Uttarāṣāḍhā"}
     },
     {
       "id": "CON indian PBhā",
@@ -201,7 +423,7 @@
           {"pos": [300, 108], "hip": 112748}
         ]
       },
-      "common_name": {"english": "The first of the blessed feet", "native": "Pūrva bhādrapada"}
+      "common_name": {"english": "Former blessed feet", "native": "पूर्वप्रोष्ठपदाः", "pronounce": "Pūrva bhādrapada"}
     },
     {
       "id": "CON indian UBhā",
@@ -215,12 +437,12 @@
           {"pos": [313, 130], "hip": 118131}
         ]
       },
-      "common_name": {"english": "The second of the blessed feet", "native": "Uttara bhādrapada"}
+      "common_name": {"english": "Latter blessed feet", "native": "उत्तरप्रोष्ठपदाः", "pronounce": "Uttara bhādrapada"}
     },
     {
       "id": "CON indian Abh",
       "lines": [[91926, 91262, 91971]],
-      "common_name": {"english": "Victorious", "native": "Abhijit"}
+      "common_name": {"english": "Victorious", "native": "अभिजित्", "pronounce": "Abhijit"}
     },
     {
       "id": "CON indian Śra",
@@ -234,7 +456,7 @@
           {"pos": [140, 181], "hip": 98036}
         ]
       },
-      "common_name": {"english": "Ear", "native": "Śravaṇa"}
+      "common_name": {"english": "Ear", "native": "श्रवणः", "pronounce": "Śravaṇa"}
     },
     {
       "id": "CON indian Dhani",
@@ -248,17 +470,17 @@
           {"pos": [153, 115], "hip": 101769}
         ]
       },
-      "common_name": {"english": "Wealthiest", "native": "Dhaniṣṭhā"}
+      "common_name": {"english": "Wealthiest", "native": "धनिष्ठा", "pronounce": "Dhaniṣṭhā"}
     },
     {
       "id": "CON indian Śata",
       "lines": [[110395, 110395]],
-      "common_name": {"english": "Hundred cures", "native": "Śatabhiṣak"}
+      "common_name": {"english": "Hundred cures", "native": "शतभिषक्", "pronounce": "Śatabhiṣak"}
     },
     {
       "id": "CON indian Rev",
       "lines": [[5737, 5737]],
-      "common_name": {"english": "Leaper", "native": "Revatī"}
+      "common_name": {"english": "Leaper", "native": "रेवती", "pronounce": "Revatī"}
     },
     {
       "id": "CON indian Meṣa",
@@ -272,7 +494,7 @@
           {"pos": [210, 47], "hip": 8832}
         ]
       },
-      "common_name": {"english": "Aries", "native": "Meṣa Rāśi"}
+      "common_name": {"english": "Aries", "native": "मेषराशिः", "pronounce": "Meṣa Rāśi"}
     },
     {
       "id": "CON indian Vṛṣa",
@@ -286,7 +508,7 @@
           {"pos": [382, 192], "hip": 17999}
         ]
       },
-      "common_name": {"english": "Taurus", "native": "Vṛṣa Rāśi"}
+      "common_name": {"english": "Taurus", "native": "वृषराशिः", "pronounce": "Vṛṣa Rāśi"}
     },
     {
       "id": "CON indian Mith",
@@ -300,7 +522,7 @@
           {"pos": [249, 165], "hip": 28734}
         ]
       },
-      "common_name": {"english": "Gemini", "native": "Mithuna Rāśi"}
+      "common_name": {"english": "Gemini", "native": "मिथुनराशिः", "pronounce": "Mithuna Rāśi"}
     },
     {
       "id": "CON indian Kark",
@@ -314,7 +536,7 @@
           {"pos": [206, 91], "hip": 40843}
         ]
       },
-      "common_name": {"english": "Cancer", "native": "Karkaṭa Rāśi"}
+      "common_name": {"english": "Cancer", "native": "कर्कटराशिः", "pronounce": "Karkaṭa Rāśi"}
     },
     {
       "id": "CON indian Simh",
@@ -328,7 +550,7 @@
           {"pos": [321, 32], "hip": 47908}
         ]
       },
-      "common_name": {"english": "Leo", "native": "Simha Rāśi"}
+      "common_name": {"english": "Leo", "native": "सिंहराशिः", "pronounce": "Simha Rāśi"}
     },
     {
       "id": "CON indian Kany",
@@ -342,7 +564,7 @@
           {"pos": [338, 382], "hip": 65474}
         ]
       },
-      "common_name": {"english": "Virgo", "native": "Kanyā Rāśi"}
+      "common_name": {"english": "Virgo", "native": "कन्याराशिः", "pronounce": "Kanyā Rāśi"}
     },
     {
       "id": "CON indian Tulā",
@@ -356,7 +578,7 @@
           {"pos": [224, 107], "hip": 73714}
         ]
       },
-      "common_name": {"english": "Libra", "native": "Tulā Rāśi"}
+      "common_name": {"english": "Libra", "native": "तुलाराशिः", "pronounce": "Tulā Rāśi"}
     },
     {
       "id": "CON indian Vṛśc",
@@ -370,7 +592,7 @@
           {"pos": [217, 462], "hip": 82729}
         ]
       },
-      "common_name": {"english": "Scorpius", "native": "Vṛścikā Rāśi"}
+      "common_name": {"english": "Scorpius", "native": "वृश्चिकराशिः", "pronounce": "Vṛścikā Rāśi"}
     },
     {
       "id": "CON indian Dhan",
@@ -384,7 +606,7 @@
           {"pos": [506, 100], "hip": 87072}
         ]
       },
-      "common_name": {"english": "Bow", "native": "Dhanur Rāśi"}
+      "common_name": {"english": "Bow", "native": "धनूराशिः", "pronounce": "Dhanur Rāśi"}
     },
     {
       "id": "CON indian Makr",
@@ -398,7 +620,7 @@
           {"pos": [460, 438], "hip": 102978}
         ]
       },
-      "common_name": {"english": "Crocodile", "native": "Makara Rāśi"}
+      "common_name": {"english": "Crocodile", "native": "मकरराशिः", "pronounce": "Makara Rāśi"}
     },
     {
       "id": "CON indian Kumbh",
@@ -412,7 +634,7 @@
           {"pos": [465, 49], "hip": 102618}
         ]
       },
-      "common_name": {"english": "Aquarius", "native": "Kumbha Rāśi"}
+      "common_name": {"english": "Aquarius", "native": "कुम्भराशिः", "pronounce": "Kumbha Rāśi"}
     },
     {
       "id": "CON indian Mīna",
@@ -426,12 +648,7 @@
           {"pos": [481, 155], "hip": 114971}
         ]
       },
-      "common_name": {"english": "Pisces", "native": "Mīna Rāśi"}
-    },
-    {
-      "id": "CON indian C01",
-      "lines": [[26727, 26311, 25930], [29038, 27913], [28614, 27989, 26727, 27366], [24436, 24674, 25281, 25930, 25336, 26207, 27989], [25336, 22449, 22549, 22730, 23123], [22449, 22509, 22845], [29038, 28614], [30419, 29038], [26727, 26549, 26237, 26241]],
-      "common_name": {"english": ""}
+      "common_name": {"english": "Pisces", "native": "मीनराशिः", "pronounce": "Mīna Rāśi"}
     },
     {
       "id": "CON indian Shim",
@@ -445,7 +662,7 @@
           {"pos": [92, 116], "hip": 78527}
         ]
       },
-      "common_name": {"english": "Dolphin", "native": "Shiṁśumāra"}
+      "common_name": {"english": "Dolphin", "native": "शिंशुमारः", "pronounce": "Shiṁśumāra"}
     },
     {
       "id": "CON indian R̥kṣa",
@@ -459,12 +676,12 @@
           {"pos": [258, 394], "hip": 50372}
         ]
       },
-      "common_name": {"english": "Ursa Major", "native": "R̥kṣa"}
+      "common_name": {"english": "Ursa Major", "native": "ऋक्षः", "pronounce": "R̥kṣa"}
     },
     {
       "id": "CON indian Sapt",
       "lines": [[54061, 53910, 58001, 59774, 62956, 65378, 67301]],
-      "common_name": {"english": "7 Sages", "native": "Saptarṣi"}
+      "common_name": {"english": "7 Sages", "native": "सप्तर्षयः", "pronounce": "Saptarṣi"}
     },
     {
       "id": "CON indian Sāra",
@@ -478,7 +695,7 @@
           {"pos": [290, 423], "hip": 23015}
         ]
       },
-      "common_name": {"english": "Charioteer", "native": "Sārathi"}
+      "common_name": {"english": "Charioteer", "native": "सारथिः", "pronounce": "Sārathi"}
     },
     {
       "id": "CON indian Tri",
@@ -492,7 +709,7 @@
           {"pos": [21, 106], "hip": 60718}
         ]
       },
-      "common_name": {"english": "King Trishanku", "native": "Trishanku"}
+      "common_name": {"english": "Trishanku", "native": "त्रिशङ्कुः", "pronounce": "Trishanku"}
     },
     {
       "id": "CON indian Yam",
@@ -506,49 +723,101 @@
           {"pos": [493, 490], "hip": 7588}
         ]
       },
-      "common_name": {"english": "River Yamunā", "native": "Yamunā"}
+      "common_name": {"english": "River Yamunā", "native": "यमुना", "pronounce": "Yamunā"}
     }
   ],
+  "zodiac": { "name": { "native": "राशि-चक्रम्", "pronounce": "Rāśi", "english": "Indian Zodiac"},
+              "partitions": [ 12, 30],
+              "extent": 9,
+              "context": "indian zodiac sign",
+	      "link": { "star": 65474, "offset": 180},
+	      "comment": "Please replace by Indian names, and remove symbols if not used traditionally!",
+	      "names": [ 
+       { "symbol": "\u2648", "native": "अश्विनी", "pronounce": "Aśvini", "english": "Ram"},
+			 { "symbol": "\u2649", "native": "वृषः", "pronounce": "Vr̥ṣabha", "english": "Bull"},
+			 { "symbol": "\u264A", "native": "मिथुनम्", "pronounce": "Mithuna", "english": "Twins"},
+			 { "symbol": "\u264B", "native": "कर्कटः", "pronounce": "Karkaṭa", "english": "Crab"},
+			 { "symbol": "\u264C", "native": "सिंहः", "pronounce": "Simha", "english": "Lion"},
+			 { "symbol": "\u264D", "native": "कन्या", "pronounce": "Kanyā", "english": "Virgin"},
+			 { "symbol": "\u264E", "native": "तुला", "pronounce": "Tulā", "english": "Scales"},
+			 { "symbol": "\u264F", "native": "वृश्चिका", "pronounce": "Vr̥ścikā", "english": "Scorpion"},
+			 { "symbol": "\u2650", "native": "धनुः", "pronounce": "Dhanuḥ", "english": "Archer"},
+			 { "symbol": "\u2651", "native": "मकरः", "pronounce": "Makara", "english": "Capricorn"},
+			 { "symbol": "\u2652", "native": "कुम्भः", "pronounce": "Kumbha", "english": "Pot"},
+			 { "symbol": "\u2653", "native": "मीनः", "pronounce": "Mīna", "english": "Fish"}]},
+  "lunar_system":  { "name": { "native": "नक्षत्र-चक्रम्", "pronounce": "Naksatra", "english": "Nakshatras"},
+	"partitions": [ 27, 4],
+	"extent": 5,
+	"context": "indian lunar mansion",
+	"link": { "star": 65474, "offset": 180},
+	"names": [ { "symbol":  "१", "native": "अश्विनी", "pronounce": "Aśvinī",    "english": "Physician to the Gods"},
+			 { "symbol":  "२", "native": "भरणी", "pronounce": "Bharaṇī",    "english": "Bearer"},
+			 { "symbol":  "३", "native": "कृत्तिकाः", "pronounce": "Kr̥ttikā",    "english": "Pleiades"},
+			 { "symbol":  "४", "native": "रोहिणी", "pronounce": "Rohiṇī",     "english": "Red"},
+			 { "symbol":  "५", "native": "मृगशिराः", "pronounce": "Mr̥gaśiras", "english": "Deer's Head"},
+			 { "symbol":  "६", "native": "आर्द्रा", "pronounce": "Ārdrā",      "english": "Wet"},
+			 { "symbol":  "७", "native": "पुनर्वसू", "pronounce": "Punarvasū",  "english": "Two Restorers of Goods"},
+			 { "symbol":  "८", "native": "पुष्यम्", "pronounce": "Puśya",    "english": "Nourisher"},
+			 { "symbol":  "९", "native": "आश्लेषा", "pronounce": "Āshleshā",   "english": "Embrace"},
+			 { "symbol": "१०", "native": "मघाः", "pronounce": "Maghā",     "english": "Bountiful"},
+			 { "symbol": "११", "native": "पूर्वफाल्गुनी", "pronounce": "Pūrva phālgunī", "english": "Former Fruitful"},
+			 { "symbol": "१२", "native": "उत्तरफाल्गुनी", "pronounce": "Uttara phālgunī", "english": "Latter Fruitful"},
+			 { "symbol": "१३", "native": "हस्तः", "pronounce": "Hasta",     "english": "Hand"},
+			 { "symbol": "१४", "native": "चित्रा", "pronounce": "Chitrā",    "english": "Bright One"},
+			 { "symbol": "१५", "native": "स्वाती", "pronounce": "Svātī",     "english": "Self mover"},
+			 { "symbol": "१६", "native": "विशाखे", "pronounce": "Viśākhā",   "english": "Forked, having branches"},
+			 { "symbol": "१७", "native": "अनुराधाः", "pronounce": "Anurādhā",    "english": "Following rādhā"},
+			 { "symbol": "१८", "native": "ज्येष्ठा", "pronounce": "Jyeṣṭhā",   "english": "Eldest, most excellent"},
+			 { "symbol": "१९", "native": "मूलम्", "pronounce": "Mūla",       "english": "Root"},
+			 { "symbol": "२०", "native": "पूर्वाषाढा","pronounce": "Purva Ashadha",  "english": "First Invincible"},
+			 { "symbol": "२१", "native": "उत्तराषाढा", "pronounce": "Uttarāṣāḍhā", "english": "Later Invincible"},
+			 { "symbol": "२२", "native": "श्रवणः", "pronounce": "Śravaṇa",       "english": "Ear"},
+			 { "symbol": "२३", "native": "श्रविष्ठाः", "pronounce": "Śraviṣṭhā", "english": "Most Famous"},
+			 { "symbol": "२४", "native": "शतभिषक्", "pronounce": "Śatabhiṣak", "english": "Requiring a hundred Physicians"},
+			 { "symbol": "२५", "native": "पूर्वप्रोष्ठपदाः", "pronounce": "Pūrva-bhādrapadā",  "english": "Prior Blessed Feet"},
+			 { "symbol": "२६", "native": "उत्तरप्रोष्ठपदाः", "pronounce": "Uttara-bhādrapadā", "english": "Latter Blessed Feet"},
+			 { "symbol": "२७", "native": "रेवती", "pronounce": "Revatī", "english": "Wealthy"},
+			 { "symbol": "Abh (Unused)", "native": "अभिजित्", "pronounce": "Abhijit",           "english": "Invincible"}]},
   "common_names": {
-    "HIP 746": [{"english": "Jamadagni", "translators_comments": "A great sage (Caph)"}],
-    "HIP 5737": [{"english": "Revatī"}],
-    "HIP 11767": [{"english": "Dhruva", "translators_comments": "A hero. Literally: Steadfast one; Fixed (Pole star)"}],
-    "HIP 21421": [{"english": "Rohiṇī", "translators_comments": "Red (Aldebaran)"}],
-    "HIP 24436": [{"english": "Vānrājā", "translators_comments": "Monarch (Rigel)"}],
-    "HIP 24608": [{"english": "Bramha-hṛdaya", "translators_comments": "Heart of the Creator (Capella)"}],
-    "HIP 25336": [{"english": "Kārtikeya", "translators_comments": "Son of lord Shiva (Bellatrix)"}],
-    "HIP 25428": [{"english": "Agni", "translators_comments": "Fire (Elnath)"}],
-    "HIP 25930": [{"english": "Chitralekhā", "translators_comments": "As beautiful as a picture (Mintaka)"}],
-    "HIP 26311": [{"english": "Aniruddha", "translators_comments": "Unbounded (Alnilam)"}],
-    "HIP 26727": [{"english": "Uṣā", "translators_comments": "Dawn (Alnitak)"}],
-    "HIP 27366": [{"english": "Kārtavīrya"}],
-    "HIP 27989": [{"english": "Ārdrā", "translators_comments": "Moist (Betelgeuse)"}],
-    "HIP 30438": [{"english": "Agastya", "translators_comments": "A great sage who went south (Canopus)"}],
-    "HIP 31681": [{"english": "Anala", "translators_comments": "Fire (Alhena)"}],
-    "HIP 32349": [{"english": "Lubdhaka", "translators_comments": "Hunter (Sirius)"}],
-    "HIP 36850": [{"english": "Aditi", "translators_comments": "Mother of gods (Castor)"}],
-    "HIP 37826": [{"english": "Diti", "translators_comments": "Mother of demons (Pollux)"}],
-    "HIP 49669": [{"english": "Maghā", "translators_comments": "Bountiful one (Regulus)"}],
-    "HIP 53910": [{"english": "Pulaha", "translators_comments": "One of the seven sages (Merak)"}],
-    "HIP 54061": [{"english": "Kratu", "translators_comments": "One of the seven sages (Dubhe)"}],
-    "HIP 58001": [{"english": "Pulasta", "translators_comments": "One of the seven sages (Phecda)"}],
-    "HIP 59774": [{"english": "Atri", "translators_comments": "One of the seven sages (Megrez)"}],
-    "HIP 62956": [{"english": "Angirā", "translators_comments": "One of the seven sages (Alioth)"}],
-    "HIP 65378": [{"english": "Vaśisṭha", "translators_comments": "One of the seven sages (Mizar)"}],
-    "HIP 65474": [{"english": "Chitrā", "translators_comments": "Spectacular (Spica)"}],
-    "HIP 65477": [{"english": "Arundhati", "translators_comments": "Wife of Vasisṭha, a great sage (Alcor)"}],
-    "HIP 67301": [{"english": "Mārīchi", "translators_comments": "One of the seven sages (Alkaid)"}],
-    "HIP 69673": [{"english": "Svāti", "translators_comments": "Honest one (Arcturus)"}],
-    "HIP 80763": [{"english": "jyeṣṭhā", "translators_comments": "Eldest (Antares)"}],
-    "HIP 91262": [{"english": "Abhijit", "translators_comments": "Invincible (Vega)"}],
-    "HIP 97649": [{"english": "Śravaṇa", "translators_comments": "To hear or Ear (Altair)"}],
-    "HIP 110395": [{"english": "Śatabhiṣak"}],
-    "NAME Jupiter": [{"english": "Mentor", "native": "Guru", "translators_comments": "Native name for Jupiter"}],
-    "NAME Mars": [{"english": "Auspicious one", "native": "Maṇgala", "translators_comments": "Native name for Mars"}],
-    "NAME Mercury": [{"english": "Wise one", "native": "Budha", "translators_comments": "Native name for Mercury"}],
-    "NAME Moon": [{"english": "Delighter", "native": "Candra", "translators_comments": "Native name for the Moon"}],
-    "NAME Saturn": [{"english": "Slow mover", "native": "Śani", "translators_comments": "Native name for Saturn"}],
-    "NAME Sun": [{"english": "Vigorous", "native": "Sūrya", "translators_comments": "Native name for the Sun"}],
-    "NAME Venus": [{"english": "Bright one", "native": "Śukra", "translators_comments": "Native name for Venus"}]
+    "HIP 746": [{"native": "जमदग्निः", "pronounce": "Jamadagni", "english": "Jamadagni"}],
+    "HIP 5737": [{"native": "रेवती", "pronounce": "Revatī", "english": "Wealthy"}],
+    "HIP 11767": [{"native": "ध्रुवः", "pronounce": "Dhruva", "english": "Steadfast"}],
+    "HIP 21421": [{"native": "रोहिणी", "pronounce": "Rohiṇī", "english": "Red"}],
+    "HIP 24436": [{"native": "Vānrājā", "pronounce": "Vānrājā", "english": "Monarch"}],
+    "HIP 24608": [{"native": "ब्रह्महृदयम्", "pronounce": "Bramha-hṛdaya", "english": "Creator's heart"}],
+    "HIP 25336": [{"native": "कार्त्तिकेयः", "pronounce": "Kārtikeya", "english": "Kr̥ttikās' son"}],
+    "HIP 25428": [{"native": "अग्निः", "pronounce": "Agni", "english": "Fire"}],
+    "HIP 25930": [{"native": "चित्रलेखा", "pronounce": "Chitralekhā", "english": "Picturesque"}],
+    "HIP 26311": [{"native": "अनिरुद्धः", "pronounce": "Aniruddha", "english": "Unbounded"}],
+    "HIP 26727": [{"native": "उषाः", "pronounce": "Uṣā", "english": "Dawn"}],
+    "HIP 27366": [{"native": "कार्त्तवीर्यः", "pronounce": "Kārtavīrya"}],
+    "HIP 27989": [{"native": "आर्द्रा", "pronounce": "Ārdrā", "english": "Moist"}],
+    "HIP 30438": [{"native": "अगस्त्यः", "pronounce": "Agastya", "english": "Agastya"}],
+    "HIP 31681": [{"native": "अनलः", "pronounce": "Anala", "english": "Fire"}],
+    "HIP 32349": [{"native": "लुब्धकः", "pronounce": "Lubdhaka", "english": "Hunter"}],
+    "HIP 36850": [{"native": "अदितिः", "pronounce": "Aditi", "english": "Uncut (Kashyapa's wife)"}],
+    "HIP 37826": [{"native": "दितिः", "pronounce": "Diti", "english": "Cut (Kashyapa's wife)"}],
+    "HIP 49669": [{"native": "मघा", "pronounce": "Maghā", "english": "Bountiful one"}],
+    "HIP 53910": [{"native": "पुलहः", "pronounce": "Pulaha", "byname":"Sage", "english": "Pulaha"}],
+    "HIP 54061": [{"native": "क्रतुः", "pronounce": "Kratu", "byname":"Sage", "english": "Kratu"}],
+    "HIP 58001": [{"native": "पुलस्तः", "pronounce": "Pulasta", "byname":"Sage", "english": "Pulasta"}],
+    "HIP 59774": [{"native": "अत्रिः", "pronounce": "Atri", "byname":"Sage", "english": "Atri"}],
+    "HIP 62956": [{"native": "अङ्गिराः", "pronounce": "Angirā", "byname":"Sage", "english": "Angiras"}],
+    "HIP 65378": [{"native": "वसिष्ठः", "pronounce": "Vaśisṭha", "byname":"Sage", "english": "Vaśisṭha"}],
+    "HIP 65474": [{"native": "चित्रा", "pronounce": "Chitrā", "english": "Spectacular"}],
+    "HIP 65477": [{"native": "अरुन्धती", "pronounce": "Arundhatī",  "byname":"Sage Vaśisṭha's wife", "english": "Arundhatī"}],
+    "HIP 67301": [{"native": "मरीचिः", "pronounce": "Mārīchi", "byname":"Sage", "english": "Mārīchi"}],
+    "HIP 69673": [{"native": "स्वातिः", "pronounce": "Svāti", "english": "Honest one"}],
+    "HIP 80763": [{"native": "ज्येष्ठा", "pronounce": "jyeṣṭhā", "english": "Eldest"}],
+    "HIP 91262": [{"native": "अभिजित्", "pronounce": "Abhijit", "english": "Invincible"}],
+    "HIP 97649": [{"native": "श्रवणः", "pronounce": "Śravaṇa", "english": "Ear"}],
+    "HIP 110395": [{"native": "शतभिषक्", "pronounce": "Śatabhiṣak"}],
+    "NAME Jupiter": [{"english": "Mentor", "native": "गुरुः", "pronounce": "Guru", "translators_comments": "Jupiter"}],
+    "NAME Mars": [{"english": "Auspicious one", "native": "मङ्गलः", "pronounce": "Maṇgala", "translators_comments": "Mars"}],
+    "NAME Mercury": [{"english": "Wise one", "native": "बुधः", "pronounce": "Budha", "translators_comments": "Mercury"}],
+    "NAME Moon": [{"english": "Delighter", "native": "चन्द्रः", "pronounce": "Candra", "translators_comments": "the Moon"}],
+    "NAME Saturn": [{"english": "Slow mover", "native": "शनिः", "pronounce": "Śani", "translators_comments": "Saturn"}],
+    "NAME Sun": [{"english": "Vigorous", "native": "सूर्यः", "pronounce": "Sūrya", "translators_comments": "the Sun"}],
+    "NAME Venus": [{"english": "Bright one", "native": "शुक्रः", "pronounce": "Śukra", "translators_comments": "Venus"}]
   }
 }

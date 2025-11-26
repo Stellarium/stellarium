@@ -24,9 +24,12 @@
 
 #include <QObject>
 #include <QTimer>
+#include <QHash>
+#include "StelObject.hpp"
 
 class Ui_viewDialogForm;
 class QListWidgetItem;
+class QTreeWidgetItem;
 class QToolButton;
 
 class AddRemoveLandscapesDialog;
@@ -56,6 +59,12 @@ protected:
 	bool eventFilter(QObject* object, QEvent* event) override;
 private slots:
 	void populateLists();
+	void configureSkyCultureCheckboxes();
+	void updateSkyCultureInfoStyleFromCheckboxes();
+	void updateSkyCultureScreenStyleFromCheckboxes();
+	void populateCulturalCombo(QComboBox *combo, StelObject::CulturalDisplayStyle style);
+	void setZodiacLabelStyle(int index);
+	void setLunarSystemLabelStyle(int index);
 	void populateToolTips();
 	void skyCultureChanged();
 	void changeProjection(const QString& projectionNameI18n);
@@ -92,9 +101,11 @@ private slots:
 	void updateSelectedCatalogsCheckBoxes();
 	void updateSelectedTypesCheckBoxes();
 
+	void clearHips();
 	void updateHips();
+	void updateHipsText();
 	void filterSurveys();
-	void hipsListItemChanged(QListWidgetItem* item);
+	void hipsListItemChanged(QTreeWidgetItem* item);
 	void populateHipsGroups();
 	void toggleHipsDialog();
 
@@ -118,7 +129,16 @@ private:
 	GreatRedSpotDialog * greatRedSpotDialog;
 	ConfigureDSOColorsDialog * configureDSOColorsDialog;
 	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;
+
 	QTimer hipsUpdateTimer;
+	struct PlanetSurveyPack
+	{
+		QTreeWidgetItem* planetItem = nullptr;
+		QHash<QString/*group*/, QTreeWidgetItem* /*groupItem*/> groupsMap;
+	};
+	QHash<QString/*planet English name*/, PlanetSurveyPack> planetarySurveys;
+	QHash<QString/*survey URL*/, QTreeWidgetItem*> surveysInTheList;
+	QString selectedSurveyType;
 };
 
 #endif // _VIEWDIALOG_HPP

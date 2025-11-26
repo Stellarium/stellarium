@@ -33,7 +33,6 @@
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
-#include "StelLocaleMgr.hpp"
 
 #include <QDebug>
 #include <QElapsedTimer>
@@ -89,11 +88,9 @@ Comet::Comet(const QString& englishName,
 		  pTypeStr),
 	  slopeParameter(-10.f), // -10 == uninitialized: used in getVMagnitude()
 	  isCometFragment(false),
-	  iauDesignation(""),
+	  iauDesignation(QString()),
 	  extraDesignations(),
 	  extraDesignationsHtml(),
-	  discoverer(""),
-	  discoveryDate(""),
 	  tailFactors(-1., -1.), // mark "invalid"
 	  tailActive(false),
 	  tailBright(false),
@@ -253,15 +250,6 @@ QVariantMap Comet::getInfoMap(const StelCore *core) const
 	map.insert("coma-diameter-km", tailFactors[0]*AUf);
 
 	return map;
-}
-
-QString Comet::getDiscoveryCircumstances() const
-{
-	QString ddate = StelUtils::localeDiscoveryDateString(discoveryDate);
-	if (discoverer.isEmpty())
-		return ddate;
-	else
-		return QString("%1 (%2)").arg(ddate, discoverer);
 }
 
 double Comet::getSiderealPeriod() const
@@ -466,7 +454,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	const float vMagnitude=getVMagnitude(core);
 
 	// Exclude drawing if user set a hard limit magnitude.
-	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (vMagnitude > core->getSkyDrawer()->getCustomPlanetMagnitudeLimit()))
+	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (vMagnitude > static_cast<float>(core->getSkyDrawer()->getCustomPlanetMagnitudeLimit())))
 		return;
 
 	if (getEnglishName() == core->getCurrentLocation().planetName)
@@ -697,7 +685,7 @@ void Comet::setIAUDesignation(const QString& designation)
 void Comet::setExtraDesignations(QStringList codes)
 {
 	extraDesignations = codes;
-	for (const auto& c : codes)
+	for (const auto& c : std::as_const(codes))
 	{
 		extraDesignationsHtml << renderDiscoveryDesignationHtml(c);
 	}

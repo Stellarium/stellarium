@@ -130,6 +130,27 @@ void MosaicCamera::saveSettings() const
 	conf->endGroup();
 }
 
+void MosaicCamera::restoreDefaults()
+{
+	conf->beginGroup("MosaicCamera");
+	conf->remove("currentCamera");
+	conf->remove("showButton");
+	conf->remove("enabled");
+	conf->remove("cameraVisibility");
+	for (auto it = cameras.constBegin(); it != cameras.constEnd(); ++it)
+	{
+		conf->remove(it.key());
+	}
+	conf->endGroup();
+
+	StelFileMgr::makeSureDirExistsAndIsWritable(userDirectory);
+	copyResourcesToUserDirectory();
+
+	// Reload the cameras
+	loadBuiltInCameras();
+	setCurrentCamera(cameraOrder[0]);
+}
+
 /*************************************************************************
  Reimplementation of the getCallOrder method
 *************************************************************************/
@@ -224,13 +245,20 @@ void MosaicCamera::copyResourcesToUserDirectory()
 	{
 		QString resourcePath = ":/MosaicCamera/" + fileName;
 		QString destPath = userDirectory + fileName;
+		QFile destFile(destPath);
+		QFile resourceFile(resourcePath);
 
-		if (QFile::copy(resourcePath, destPath))
+		if (destFile.exists()) {
+			if (!destFile.remove()) {
+				qWarning() << "[MosaicCamera] Failed to remove existing file:" << destPath;
+			}
+		}
+
+		if (resourceFile.copy(destPath))
 		{
+			// Copy the file to the user directory
 			qDebug() << "[MosaicCamera] Copied" << resourcePath << "to" << destPath;
-
 			// Ensure the copied file is writable
-			QFile destFile(destPath);
 			destFile.setPermissions(destFile.permissions() | QFile::WriteOwner);
 		}
 		else
@@ -290,7 +318,7 @@ void MosaicCamera::readPolygonSetsFromJson(const QString& cameraName, const QStr
 	QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
 	QJsonArray jsonArray = loadDoc.array();
 
-	for (int i = 0; i < jsonArray.size(); ++i)
+	for (int i = 1; i < jsonArray.size(); ++i)
 	{
 		QJsonObject setObject = jsonArray[i].toObject();
 		PolygonSet set;
@@ -329,6 +357,11 @@ void MosaicCamera::readPolygonSetsFromJson(const QString& cameraName, const QStr
 
 	if (cameras.contains(cameraName))
 	{
+		// read the first one which is metadata
+		QJsonObject setObject = jsonArray[0].toObject();
+		cameras[cameraName].cameraName = setObject["camera_name"].toString();
+		cameras[cameraName].cameraDescription = setObject["camera_description"].toString();
+		cameras[cameraName].cameraURLDetails = setObject["camera_url"].toString();
 		cameras[cameraName].polygon_sets = polygonSets;
 	}
 }
@@ -527,7 +560,7 @@ void MosaicCamera::setCurrentCamera(const QString& cameraName)
 		currentCamera = cameraName;
 		emit currentCameraChanged(cameraName);
 		if(configDialog->visible())
-			configDialog->setCurrentCameraName(cameraName);
+			configDialog->setCurrentCameraName(cameraName, cameras[cameraName].cameraName, cameras[cameraName].cameraDescription, cameras[cameraName].cameraURLDetails);
 	}
 }
 

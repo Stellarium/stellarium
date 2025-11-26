@@ -2,244 +2,361 @@
   "id": "arabic_arabian_peninsula",
   "region": "Western Asia",
   "classification": ["traditional"],
-  "fallback_to_international_names": false,
+  "langs_use_native_names": ["ar"],
+  "native_lang": "ar",
+  "highlight": "CON arabic_arabian_peninsula Jwza",
   "constellations": [
     {
-      "id": "CON arabic_arabian_peninsula 100",
+      "id": "CON arabic_arabian_peninsula Hjzn",
       "lines": [[72607, 75097]],
-      "common_name": {"english": "The Two Guards - The Two Refugees - The Family Of Aba Bzay", "native": "الحويجزين - الدخيلين - آل أبا بزي", "references": [1], "translators_comments": "Aba Bzay is a proper name"}
+      "common_name": {"english": "The Two Guards", "native": "الحويجزين", "pronounce": "al-Huwaiǧzain", "transliteration": "al-Ḥuwaiǧzain", "IPA": "al.ħuwejdʒ.zeːn", "references": [1]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 200",
+      "id": "CON arabic_arabian_peninsula Dkhl",
+      "lines": [[72607, 75097]],
+      "label_offset": [-2.0,-2.0],
+      "common_name": {"english": "The Two Refugees", "native": "الدخيلين", "pronounce": "al-Dikhīlain", "transliteration": "al-Diḫīlain", "IPA": "ad.diː.xiː.leːn", "references": [1]}
+    },
+    {
+      "id": "CON arabic_arabian_peninsula Bzay",
+      "lines": [[72607, 75097]],
+      "label_offset": [2.0,2.0],
+      "common_name": {"english": "The Family Of Aba Bzay", "native": "آل أبا بزي", "pronounce": "Āl Aba Bzay", "transliteration": "Āl Aba Bzay", "IPA": "aːl.abaː.bz.aj", "references": [1], "translators_comments": "Aba Bzay is a proper name"}
+    },
+    {
+      "id": "CON arabic_arabian_peninsula Naym",
       "lines": [[54061, 53910, 58001, 59774, 62956, 65378, 67301]],
-      "common_name": {"english": "Al-Naayem - The Seven - Daughters Of Na'sh", "native": "النعايم - السبَّع - بنات نعش", "references": [1]}
+      "common_name": {"english": "Al-Naayem", "native": "النعايم", "pronounce": "al-Na'āyem", "transliteration": "al-Naʿāyem", "IPA": "an.na.ʕaː.jim", "references": [1]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 300",
+      "id": "CON arabic_arabian_peninsula Siba",
+      "lines": [[54061, 53910, 58001, 59774, 62956, 65378, 67301]],
+      "label_offset": [2.0,2.0],
+      "common_name": {"english": "The Seven", "native": "السبَّع", "pronounce": "al-Sibba'", "transliteration": "al-Sibbaʿ", "IPA": "as.sib.baʕ", "references": [1]}
+    },
+    {
+      "id": "CON arabic_arabian_peninsula BNas",
+      "lines": [[54061, 53910, 58001, 59774, 62956, 65378, 67301]],
+      "label_offset": [-2.0,-2.0],
+      "common_name": {"english": "Daughters Of Na'sh", "native": "بنات نعش", "pronounce": "Banāt Na'sh", "transliteration": "Banāt Naʿš", "IPA": "ba.naːt naʕʃ", "references": [1]}
+    },
+    {
+      "id": "CON arabic_arabian_peninsula Shda",
       "lines": [[746, 3179, 4427, 6686, 8886]],
-      "common_name": {"english": "The Saddle Of The Camel", "native": "الشداد", "references": [1]}
+      "common_name": {"english": "Saddle Of The Camel", "native": "الشداد", "pronounce": "al-Shdād", "transliteration": "al-Šdād", "IPA": "aʃ.ʃdaːd", "references": [1]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 400",
+      "id": "CON arabic_arabian_peninsula Migz",
       "lines": [[102098, 100453, 95947], [102488, 100453, 97165]],
-      "common_name": {"english": "The Wool Spindle", "native": "المغزل", "references": [1]}
+      "common_name": {"english": "The Wool Spindle", "native": "المغزل", "pronounce": "al-Mighzal", "transliteration": "al-Miġzal", "IPA": "al.miɣ.zal", "references": [1]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2502",
+      "id": "CON arabic_arabian_peninsula Mqdm",
       "lines": [[113881, 113963]],
-      "common_name": {"english": "The Front", "native": "المقدم", "references": [2]}
+      "common_name": {"english": "The Front", "native": "المقدم", "pronounce": "al-Mqaddam", "transliteration": "al-Mqaddam", "IPA": "al.mqad.dam", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2504",
+      "id": "CON arabic_arabian_peninsula Mkhr",
       "lines": [[677, 1067]],
-      "common_name": {"english": "The Rear", "native": "المؤخر", "references": [2]}
+      "common_name": {"english": "The Rear", "native": "الموخر", "pronounce": "al-Mwakhkhar", "transliteration": "al-Mwaḫḫar", "IPA": "al.mwax.xar", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2550",
+      "id": "CON arabic_arabian_peninsula Rsha",
       "lines": [[3881, 3231, 2912, 3031, 3693, 5454, 5571, 6193, 6315, 5447, 3881]],
-      "common_name": {"english": "The Bucket Cord", "native": "الرشا", "references": [2]}
+      "common_name": {"english": "The Bucket Cord", "native": "الرشا", "pronounce": "al-Rshā", "transliteration": "al-Ršā", "IPA": "ar.rʃaː", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2602",
+      "id": "CON arabic_arabian_peninsula Shrt",
       "lines": [[9884, 8903]],
-      "common_name": {"english": "The Two Marks", "native": "الشرطين", "references": [2]}
+	  "label_offset": [0,-1.5],
+      "common_name": {"english": "The Two Marks", "native": "الشرطين", "pronounce": "al-Shartain", "transliteration": "al-Šarṭain", "IPA": "aʃ.ʃar.tˤeːn", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2603",
+      "id": "CON arabic_arabian_peninsula Btyn",
       "lines": [[12719, 13209, 13061, 12719]],
-      "common_name": {"english": "The Little Abdomen", "native": "البطين", "references": [2]}
+	  "label_positions": [[2.75,26.75]],
+      "common_name": {"english": "The Little Abdomen", "native": "البطين", "pronounce": "al-Btain", "transliteration": "al-Bṭain", "IPA": "al.btˤeːn", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2604",
-      "lines": [[17608, 17608], [18163, 18163]],
-      "common_name": {"english": "Al-Thurayya", "native": "الثريا", "references": [3], "translators_comments": "Al-Thurayya is a proper name"}
+      "id": "CON arabic_arabian_peninsula Thur",
+      "lines": [["DSO:M45", "DSO:M45"]],
+	  "single_star_radius": 1.0,
+	  "label_offset": [0,-1.5],
+      "common_name": {"english": "Al-Thurayya", "native": "الثريا", "pronounce": "al-Thrayyā", "transliteration": "al-Ṯrayyā", "IPA": "aθ.θraj.jaː", "references": [3], "translators_comments": "Al-Thurayya is a proper name"}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2801",
+      "id": "CON arabic_arabian_peninsula Twbi",
+      "lines": [[21421, 21421]],
+	  "single_star_radius": 0.5,
+	  "label_offset": [0,-1.5],
+      "common_name": {"english": "The Little Follower", "native": "التويبع", "pronounce": "al-Twaibi'", "transliteration": "al-Twaibiʿ", "IPA": "at.twaeː.biʕ", "references": [2]}
+    },
+
+    {
+      "id": "CON arabic_arabian_peninsula Thra",
       "lines": [[37279, 36188]],
-      "common_name": {"english": "The Arm", "native": "الذراع", "references": [2]}
+      "common_name": {"english": "The Arm", "native": "الذراع", "pronounce": "al-Dhrā'", "transliteration": "al-Ḏrāʿ", "IPA": "að.ðraːʕ", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 4501",
+      "id": "CON arabic_arabian_peninsula Klib",
       "lines": [[33579, 34444]],
-      "common_name": {"english": "The Two Little Dogs", "native": "الكليبين", "references": [2,3]}
+      "common_name": {"english": "The Two Little Dogs", "native": "الكليبين", "pronounce": "al-Klaybayn", "transliteration": "al-Klaybayn", "IPA": "al.klei.beːn", "references": [2,3]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2803",
-      "lines": [[42806, 42556, 42911], [43004, 43004]],
-      "common_name": {"english": "The Nostrils", "native": "النثرة", "references": [2]}
+      "id": "CON arabic_arabian_peninsula Nath",
+      "lines": [[42806, 42556, 42911]],
+	  "label_positions": [[8.75,20.0]],
+      "common_name": {"english": "The Nostrils", "native": "النثرة", "pronounce": "al-Nathrah", "transliteration": "al-Naṯrah", "IPA": "an.naθ.rah", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2804",
+      "id": "CON arabic_arabian_peninsula Tarf",
       "lines": [[47908, 47508]],
-      "common_name": {"english": "The Eyes", "native": "الطرف", "references": [2]}
+      "common_name": {"english": "The Eyes", "native": "الطرف", "pronounce": "al-Tarf", "transliteration": "al-Ṭarf", "IPA": "atˤ.tˤarf", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2805",
+      "id": "CON arabic_arabian_peninsula Jabh",
       "lines": [[50335, 50583, 49583, 49669]],
-      "common_name": {"english": "The Forehead", "native": "الجبهة", "references": [2]}
+      "common_name": {"english": "The Forehead", "native": "الجبهة", "pronounce": "al-Jabhah", "transliteration": "al-Ǧabhah", "IPA": "al.dʒab.hah", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2806",
+      "id": "CON arabic_arabian_peninsula Zubr",
       "lines": [[54872, 54879]],
-      "common_name": {"english": "The Mane", "native": "الزبرة", "references": [2]}
+      "common_name": {"english": "The Mane", "native": "الزبرة", "pronounce": "al-Zubrah", "transliteration": "al-Zubrah", "IPA": "az.zub.rah", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2808",
+      "id": "CON arabic_arabian_peninsula Sarf",
+      "lines": [[57632, 57632]],
+	  "single_star_radius": 0.5,
+	  "label_offset": [0,-1.5],
+      "common_name": {"english": "Star Of Weather Change", "native": "الصرفة", "pronounce": "al-Sarfah", "transliteration": "al-Ṣarfah", "IPA": "asˤ.sˤar.fah", "references": [2]}
+    },
+    {
+      "id": "CON arabic_arabian_peninsula Awwa",
       "lines": [[63608, 63090, 61941, 60129, 57757]],
-      "common_name": {"english": "The Bend", "native": "العوا", "references": [2]}
+      "common_name": {"english": "The Bend", "native": "العوا", "pronounce": "al-'Awwā", "transliteration": "al-ʿAwwā", "IPA": "al.ʕaw.waː", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2810",
-      "lines": [[69701, 69427, 69974], [70784, 70784]],
-      "common_name": {"english": "The Cover", "native": "الغفر", "references": [2]}
+      "id": "CON arabic_arabian_peninsula Smak",
+      "lines": [[65474, 65474]],
+	  "single_star_radius": 0.8,
+	  "label_offset": [0,-2.5],
+      "common_name": {"english": "The High Unarmed One", "native": "السماك الأعزل", "pronounce": "al-Smak al-'Azal", "transliteration": "al-Smak al-ʿAzal", "IPA": "as.smaːts.alaʕ.zal", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2901",
+      "id": "CON arabic_arabian_peninsula Ghfr",
+      "lines": [[69701, 69427, 69974]],
+	  "label_positions": [[14.4,-9.8]],
+      "common_name": {"english": "The Cover", "native": "الغفر", "pronounce": "al-Ghafr", "transliteration": "al-Ġafr", "IPA": "al.ɣafr", "references": [2]}
+    },
+    {
+      "id": "CON arabic_arabian_peninsula Zban",
       "lines": [[72622, 74785]],
-      "common_name": {"english": "Claws Of The Scorpion", "native": "الزبانى", "references": [2]}
+      "common_name": {"english": "Claws Of The Scorpion", "native": "الزبانى", "pronounce": "al-Zubānā", "transliteration": "al-Zubānā", "IPA": "az.zu.baː.naː", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2902",
+      "id": "CON arabic_arabian_peninsula Ikll",
       "lines": [[78820, 78401, 78265]],
-      "common_name": {"english": "The Diadem", "native": "الإكليل", "references": [2]}
+	  "label_positions": [[16.1,-23.35]],
+      "common_name": {"english": "The Diadem", "native": "الإكليل", "pronounce": "al-Iklīl", "transliteration": "al-Iklīl", "IPA": "al.ik.liːl", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2906",
+      "id": "CON arabic_arabian_peninsula Qalb",
+      "lines": [[80763, 80763]],
+	  "single_star_radius": 0.8,
+	  "label_offset": [0,-1.5],
+      "common_name": {"english": "The Heart", "native": "القلب", "pronounce": "al-Qalb", "transliteration": "al-Qalb", "IPA": "al.qalb", "references": [2]}
+    },
+    {
+      "id": "CON arabic_arabian_peninsula Shwl",
       "lines": [[85927, 85696]],
-      "common_name": {"english": "Raised Tail Of The Scorpion", "native": "الشولة", "references": [2]}
+	  "label_offset": [0,-1.5],
+      "common_name": {"english": "Raised Tail Of The Scorpion", "native": "الشولة", "pronounce": "al-Shawlah", "transliteration": "al-Šawlah", "IPA": "aʃ.ʃuo.lah", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2999",
+      "id": "CON arabic_arabian_peninsula Akrb",
       "lines": [[74785, 78820, 80112], [72622, 78265, 80112], [78401, 80112, 80763, 81266, 82396, 82514, 82729, 84143, 86228, 87073, 86670, 85927]],
-      "common_name": {"english": "The Scorpion", "native": "العقرب", "references": [2]}
+      "common_name": {"english": "The Scorpion", "native": "العقرب", "pronounce": "al-'Aqrab", "transliteration": "al-ʿAqrab", "IPA": "al.ʕaq.rab", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 3005",
-      "lines": [[97290, 96760, 95503, 95564, 96440, 97290]],
-      "common_name": {"english": "The Empty Place", "native": "البلدة", "references": [2]}
+      "id": "CON arabic_arabian_peninsula Blda",
+      "lines": [[[19.43791, -23.807],[19.43433, -23.59489],[19.43263, -23.37382],[19.43334, -23.16867],[19.43351, -22.94889],[19.43748, -22.65845],[19.44288, -22.3649],[19.45248, -22.04152],[19.46357, -21.79566],[19.47438, -21.55829],[19.49031, -21.2628],[19.50306, -20.99976],[19.51302, -20.8545],[19.523, -20.73389],[19.53157, -20.61047],[19.5436, -20.45832],[19.55352, -20.29475],[19.56522, -20.20698],[19.57731, -20.1276],[19.5888, -20.07018],[19.60112, -20.0109],[19.61795, -19.96166],[19.63373, -19.97259],[19.64653, -19.96371],[19.6622, -20.02689],[19.67538, -20.0746],[19.68828, -20.21754],[19.69466, -20.36787],[19.70693, -20.61195],[19.71124, -20.86537],[19.71532, -21.22445],[19.71644, -21.52765],[19.71223, -21.80681],[19.70712, -22.10996],[19.6981, -22.39555],[19.68548, -22.65927],[19.66752, -22.96563],[19.65142, -23.18287],[19.63644, -23.31282],[19.6173, -23.44668],[19.59737, -23.54508],[19.57933, -23.64387],[19.56282, -23.77555],[19.55, -23.88418],[19.53484, -23.97527],[19.52015, -24.04396],[19.50711, -24.10917],[19.49056, -24.17605],[19.47558, -24.23509],[19.46058, -24.19851],[19.45171, -24.12899],[19.44652, -24.04589],[19.44182, -23.92026],[19.43791, -23.807]]],
+      "common_name": {"english": "The Empty Place", "native": "البلدة", "pronounce": "al-Baldah", "transliteration": "al-Baldah", "IPA": "al.bal.dah", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 3099",
+      "id": "CON arabic_arabian_peninsula Naim",
       "lines": [[89931, 90185, 93506, 92041, 89931], [88635, 89642, 90185, 89931, 88635], [92855, 93864, 93506, 92041, 92855], [89931, 90496, 92041]],
-      "common_name": {"english": "The Ostriches", "native": "النعائم", "references": [2]}
+      "common_name": {"english": "The Ostriches", "native": "النعائم", "pronounce": "al-Na'āyim", "transliteration": "al-Naʿāyim", "IPA": "an.na.ʕaː.jiːm", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 3199",
+      "id": "CON arabic_arabian_peninsula SDab",
       "lines": [[100064, 100310, 100345]],
-      "common_name": {"english": "The Lucky Star Of The Slaughterer", "native": "سعد الذابح", "references": [2]}
+      "label_positions": [[20.25,-14.0]],
+      "common_name": {"english": "The Lucky Star Of The Slaughterer", "native": "سعد الذابح", "pronounce": "Sa'd al-Dhābih", "transliteration": "Saʿd al-Ḏābiḥ", "IPA": "saʕd.að.ðaː.biħ", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 3299",
+      "id": "CON arabic_arabian_peninsula SBul",
       "lines": [[102618, 103045, 104459]],
-      "common_name": {"english": "The Lucky Star Of The Swallower", "native": "سعد بلع", "references": [2]}
+	  "label_offset": [0,-2],
+      "common_name": {"english": "The Lucky Star Of The Swallower", "native": "سعد بلع", "pronounce": "Sa'd Bula'", "transliteration": "Saʿd Bulaʿ", "IPA": "saʕd.bu.laʕ", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 3399",
+      "id": "CON arabic_arabian_peninsula SSud",
       "lines": [[106278, 106786, 107382]],
-      "common_name": {"english": "The Luckiest Of The Lucky Stars", "native": "سعد السعود", "references": [2]}
+	  "label_offset": [0.0,-2],
+      "common_name": {"english": "The Luckiest Of The Lucky Stars", "native": "سعد السعود", "pronounce": "Sa'd al-Su'ūd", "transliteration": "Saʿd al-Suʿūd", "IPA": "saʕd.as.su.ʕuːd", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 3499",
+      "id": "CON arabic_arabian_peninsula SAkh",
       "lines": [[110395, 110960, 110672, 110395, 111497, 110960]],
-      "common_name": {"english": "The Lucky Star Of The Tents", "native": "سعد الأخبية", "references": [2]}
+	  "label_positions": [[22.5,0]],
+      "common_name": {"english": "The Lucky Star Of The Tents", "native": "سعد الأخبية", "pronounce": "Sa'd al-Akhbiyah", "transliteration": "Saʿd al-Aḫbiyah", "IPA": "saʕd.alax.bi.jah", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 4201",
-      "lines": [[26207, 26176, 26366, 26207], [26444, 26444]],
-      "common_name": {"english": "The Circular Mark", "native": "الهقعة", "references": [2]}
+      "id": "CON arabic_arabian_peninsula Haqa",
+      "lines": [[26207, 26176, 26366, 26207]],
+      "common_name": {"english": "The Circular Mark", "native": "الهقعة", "pronounce": "al-Haq'ah", "transliteration": "al-Haqʿah", "IPA": "al.haq.ʕah", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 4206",
+      "id": "CON arabic_arabian_peninsula Hana",
       "lines": [[31681, 32362]],
-      "common_name": {"english": "The Downward Bend", "native": "الهنعة", "references": [2]}
+      "common_name": {"english": "The Downward Bend", "native": "الهنعة", "pronounce": "al-Han'ah", "transliteration": "al-Hanʿah", "IPA": "al.han.ʕah", "references": [2]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 4213",
+      "id": "CON arabic_arabian_peninsula ZwJ1",
       "lines": [[25336, 27989]],
-      "common_name": {"english": "Claws Of Al-Jawza", "native": "زوابن الجوزا - الزبَّن", "references": [1], "translators_comments": "Al-Jawza is a proper name"}
+      "common_name": {"english": "Claws Of Al-Jawza", "native": "زوابن الجوزا", "pronounce": "Zawābin al-Jawzā", "transliteration": "Zawābin al-Ǧawzā", "IPA": "za.waː.bin al.dʒaw.zaː", "references": [1], "translators_comments": "Al-Jawza is a proper name"}
     },
     {
-      "id": "CON arabic_arabian_peninsula 4214",
-      "lines": [[24436, 24436], [27366, 27366]],
-      "common_name": {"english": "Claws Of Al-Jawza", "native": "زوابن الجوزا - الزبَّن", "references": [1], "translators_comments": "Al-Jawza is a proper name"}
+      "id": "CON arabic_arabian_peninsula Zbn1",
+      "lines": [[25336, 27989]],
+      "label_offset": [2.0,2.0],
+      "common_name": {"english": "The Claws", "native": "الزبَّن", "pronounce": "al-Zibban", "transliteration": "al-Zibban", "IPA": "az.zib.ban", "references": [1]}
     },
     {
-      "id": "CON arabic_arabian_peninsula 4202",
+      "id": "CON arabic_arabian_peninsula ZwJ2",
+      "lines": [[24436, 27366]],
+      "common_name": {"english": "Claws Of Al-Jawza", "native": "زوابن الجوزا", "pronounce": "Zawābin al-Jawzā", "transliteration": "Zawābin al-Ǧawzā", "IPA": "za.waː.bin al.dʒaw.zaː", "references": [1], "translators_comments": "Al-Jawza is a proper name"}
+    },
+    {
+      "id": "CON arabic_arabian_peninsula Zbn1",
+      "lines": [[24436, 27366]],
+      "label_offset": [2.0,2.0],
+      "common_name": {"english": "The Claws", "native": "الزبَّن", "pronounce": "al-Zibban", "transliteration": "al-Zibban", "IPA": "az.zib.ban", "references": [1]}
+    },
+    {
+      "id": "CON arabic_arabian_peninsula ZaJa",
       "lines": [[25930, 26311, 26727]],
-      "common_name": {"english": "Back Of Al-Jawza", "native": "ظهر الجوزا", "references": [1], "translators_comments": "Al-Jawza is a proper name"}
+      "common_name": {"english": "Back Of Al-Jawza", "native": "ظهر الجوزا", "pronounce": "Zhahr al-Jawzā", "transliteration": "Ẓahr al-Ǧawzā", "IPA": "ðahr al.dʒowzaː", "references": [1], "translators_comments": "Al-Jawza is a proper name"}
     },
     {
-      "id": "CON arabic_arabian_peninsula 2650",
+      "id": "CON arabic_arabian_peninsula MThu",
       "lines": [[9884, 8796, 10064]],
-      "common_name": {"english": "Mosque Of Al-Thurayya", "native": "مسجد الثريا", "references": [1], "translators_comments": "Al-Thurayya is a proper name"}
+	  "label_positions": [[2.2,30.25]],
+      "common_name": {"english": "Mosque Of Al-Thurayya", "native": "مسجد الثريا", "pronounce": "Masjid al-Thrayyā", "transliteration": "Masğid al-Ṯrayyā", "IPA": "mas.dʒid aθ.θraj.jaː", "references": [1], "translators_comments": "Al-Thurayya is a proper name"}
     },
     {
-      "id": "CON arabic_arabian_peninsula 4299",
+      "id": "CON arabic_arabian_peninsula Jwza",
       "lines": [[26207, 26487], [25336, 26487, 27989], [25336, 25930, 26311, 26727, 27366, 24436, 25930], [27989, 26727]],
-      "common_name": {"english": "Al-Jawza", "native": "الجوزا", "references": [2,3], "translators_comments": "Al-Jawza is a proper name"}
+      "common_name": {"english": "Al-Jawza", "native": "الجوزا", "pronounce": "al-Jawzā", "transliteration": "al-Ǧawzā", "IPA": "al.dʒowzaː", "references": [2,3], "translators_comments": "Al-Jawza is a proper name"}
     }
   ],
+  "lunar_system":  { "name": {"english": "Lunar Stations", "native": "منازل القمر", "pronounce": "Manazil alQamar", "transliteration": "Manazil alQamar", "IPA": "manazilalqamar"},
+   "partitions": [ 28, 3, 2],
+   "extent": 6,
+   "context": "arabian lunar stations",
+   "link": { "star": 17702, "offset": 0.0, "comment": "start of first station is Lucida Pleiadum"},
+   "names": [ { "symbol":  "1", "english": "Al-Thurayya", "native": "الثريا", "pronounce": "al-Thrayyā", "transliteration": "al-Ṯrayyā", "IPA": "aθ.θraj.jaː", "references": [2]},
+              { "symbol":  "2", "english": "The Little Follower", "native": "التويبع", "pronounce": "al-Twaibi'", "transliteration": "al-Twaibiʿ", "IPA": "at.twaeː.biʕ", "references": [2]},
+              { "symbol":  "3", "english": "The Circular Mark", "native": "الهقعة", "pronounce": "al-Haq'ah", "transliteration": "al-Haqʿah", "IPA": "al.haq.ʕah", "references": [2]},
+              { "symbol":  "4", "english": "The Downward Bend", "native": "الهنعة", "pronounce": "al-Han'ah", "transliteration": "al-Hanʿah", "IPA": "al.han.ʕah", "references": [2]},
+              { "symbol":  "5", "english": "The Arm", "native": "الذراع", "pronounce": "al-Dhrā'", "transliteration": "al-Ḏrāʿ", "IPA": "að.ðraːʕ", "references": [2]},
+              { "symbol":  "6", "english": "The Nostrils", "native": "النثرة", "pronounce": "al-Nathrah", "transliteration": "al-Naṯrah", "IPA": "an.naθ.rah", "references": [2]},
+              { "symbol":  "7", "english": "The Eyes", "native": "الطرف", "pronounce": "al-Tarf", "transliteration": "al-Ṭarf", "IPA": "atˤ.tˤarf", "references": [2]},
+              { "symbol":  "8", "english": "The Forehead", "native": "الجبهة", "pronounce": "al-Jabhah", "transliteration": "al-Ǧabhah", "IPA": "al.dʒab.hah", "references": [2]},
+              { "symbol":  "9", "english": "The Mane", "native": "الزبرة", "pronounce": "al-Zubrah", "transliteration": "al-Zubrah", "IPA": "az.zub.rah", "references": [2]},
+              { "symbol": "10", "english": "Star Of Weather Change", "native": "الصرفة", "pronounce": "al-Sarfah", "transliteration": "al-Ṣarfah", "IPA": "asˤ.sˤar.fah", "references": [2]},
+              { "symbol": "11", "english": "The Bend", "native": "العوا", "pronounce": "al-'Awwā", "transliteration": "al-ʿAwwā", "IPA": "al.ʕaw.waː", "references": [2]},
+              { "symbol": "12", "english": "The High One", "native": "السماك", "pronounce": "al-Smāk", "transliteration": "al-Smāk", "IPA": "as.smaːts", "references": [2]},
+              { "symbol": "13", "english": "The Cover", "native": "الغفر", "pronounce": "al-Ghafr", "transliteration": "al-Ġafr", "IPA": "al.ɣafr", "references": [2]},
+              { "symbol": "14", "english": "Claws Of The Scorpion", "native": "الزبانى", "pronounce": "al-Zubānā", "transliteration": "al-Zubānā", "IPA": "az.zu.baː.naː", "references": [2]},
+              { "symbol": "15", "english": "The Diadem", "native": "الإكليل", "pronounce": "al-Iklīl", "transliteration": "al-Iklīl", "IPA": "al.ik.liːl", "references": [2]},
+              { "symbol": "16", "english": "The Heart", "native": "القلب", "pronounce": "al-Qalb", "transliteration": "al-Qalb", "IPA": "al.qalb", "references": [2]},
+              { "symbol": "17", "english": "Raised Tail Of The Scorpion", "native": "الشولة", "pronounce": "al-Shawlah", "transliteration": "al-Šawlah", "IPA": "aʃ.ʃuo.lah", "references": [2]},
+              { "symbol": "18", "english": "The Ostriches", "native": "النعائم", "pronounce": "al-Na'āyim", "transliteration": "al-Naʿāyim", "IPA": "an.na.ʕaː.jiːm", "references": [2]},
+              { "symbol": "19", "english": "The Empty Place", "native": "البلدة", "pronounce": "al-Baldah", "transliteration": "al-Baldah", "IPA": "al.bal.dah", "references": [2]},
+              { "symbol": "20", "english": "The Lucky Star Of The Slaughterer", "native": "سعد الذابح", "pronounce": "Sa'd al-Dhābih", "transliteration": "Saʿd al-Ḏābiḥ", "IPA": "saʕd.að.ðaː.biħ", "references": [2]},
+              { "symbol": "21", "english": "The Lucky Star Of The Swallower", "native": "سعد بلع", "pronounce": "Sa'd Bula'", "transliteration": "Saʿd Bulaʿ", "IPA": "saʕd.bu.laʕ", "references": [2]},
+              { "symbol": "22", "english": "The Luckiest Of The Lucky Stars", "native": "سعد السعود", "pronounce": "Sa'd al-Su'ūd", "transliteration": "Saʿd al-Suʿūd", "IPA": "saʕd.as.su.ʕuːd", "references": [2]},
+              { "symbol": "23", "english": "The Lucky Star Of The Tents", "native": "سعد الأخبية", "pronounce": "Sa'd al-Akhbiyah", "transliteration": "Saʿd al-Aḫbiyah", "IPA": "saʕd.alax.bi.jah", "references": [2]},
+              { "symbol": "24", "english": "The Front", "native": "المقدم", "pronounce": "al-Mqaddam", "transliteration": "al-Mqaddam", "IPA": "al.mqad.dam", "references": [2]},
+              { "symbol": "25", "english": "The Rear", "native": "المؤخر", "pronounce": "al-Mwakhkhar", "transliteration": "al-Mwaḫḫar", "IPA": "al.mwax.xar", "references": [2]},
+              { "symbol": "26", "english": "The Bucket Cord", "native": "الرشا", "pronounce": "al-Rshā", "transliteration": "al-Ršā", "IPA": "ar.rʃaː", "references": [2]},
+              { "symbol": "27", "english": "The Two Marks", "native": "الشرطين", "pronounce": "al-Shartain", "transliteration": "al-Šarṭain", "IPA": "aʃ.ʃar.tˤeːn", "references": [2]},
+              { "symbol": "28", "english": "The Little Abdomen", "native": "البطين", "pronounce": "al-Btain", "transliteration": "al-Bṭain", "IPA": "al.btˤeːn", "references": [2]}
+             ]},
   "common_names": {
-    "HIP 677": [{"english": "The Rear 2", "references": [2]}],
-    "HIP 1067": [{"english": "The Rear 1", "references": [2]}],
-    "HIP 7588": [{"english": "The Oath Star", "references": [4]},
-                 {"english": "Aba al-sihil", "references": [1], "translators_comments": "Aba Alsihil is a proper name"},
-                 {"english": "Al-Miss.hil", "references": [1], "translators_comments": "Al-Miss.hil is a proper name"}],
-    "HIP 11767": [{"english": "The Kid", "references": [3]}],
-    "HIP 21421": [{"english": "The Little Follower", "references": [2]},
-                  {"english": "The Latter", "references": [1]},
-                  {"english": "Al-Mjaidih", "references": [1], "translators_comments": "Al-Mjaidih is a proper name"}],
-    "HIP 24436": [{"english": "Southern Horn Of Al-Jawza", "references": [1], "translators_comments": "Al-Jawza is a proper name"},
-                  {"english": "Southern Claw Of Al-Jawza", "references": [5], "translators_comments": "Al-Jawza is a proper name"}],
-    "HIP 24608": [{"english": "The Parallel One", "references": [8]},
-                  {"english": "The Sided One", "references": [1]}],
-    "HIP 26366": [{"english": "The Circular Mark", "references": [2]}],
-    "HIP 27366": [{"english": "Leg Of Al-Jawza", "references": [1]}],
-    "HIP 27989": [{"english": "Northern Horn Of Al-Jawza", "references": [1], "translators_comments": "Al-Jawza is a proper name"},
-                  {"english": "Northern Claw Of Al-Jawza", "references": [5], "translators_comments": "Al-Jawza is a proper name"}],
-    "HIP 30438": [{"english": "Suhayl", "references": [2,3], "translators_comments": "Suhayl is a proper name"}],
-    "HIP 32349": [{"english": "Al-Mirzam", "references": [2,3], "translators_comments": "Al-Mirzam is a proper name"},
-                  {"english": "Al-Shi'la", "references": [1], "translators_comments": "Al-Shi'la is a proper name"}],
-    "HIP 34088": [{"english": "The Claws 5", "references": [1,9]}],
-    "HIP 35350": [{"english": "The Claws 6", "references": [1,9]}],
-    "HIP 35550": [{"english": "The Claws 4", "references": [1,9]}],
-    "HIP 36046": [{"english": "The Claws 1", "references": [1,9]}],
-    "HIP 36962": [{"english": "The Claws 2", "references": [1,9]}],
-    "HIP 37740": [{"english": "The Claws 3", "references": [1,9]}],
-    "HIP 53910": [{"english": "Al-Khilj 2", "references": [1], "translators_comments": "Al-Khilj is a proper name"},
-                  {"english": "The first Khilj 2", "references": [1], "translators_comments": "Al-Khilj is a proper name"},
-                  {"english": "The first two 2", "references": [1]}],
-    "HIP 54061": [{"english": "Al-Khilj 1", "references": [1], "translators_comments": "Al-Khilj is a proper name"},
-                  {"english": "The first Khilj 1", "references": [1], "translators_comments": "Khilj is a proper name"},
-                  {"english": "The first two 1", "references": [1]}],
-    "HIP 57632": [{"english": "Star Of Weather Change", "references": [2]}],
-    "HIP 58001": [{"english": "The Latter Khilj 1", "references": [1], "translators_comments": "Al-Khilj is a proper name"},
-                  {"english": "The fourth ones 1", "references": [1]}],
-    "HIP 59774": [{"english": "The Latter Khilj 2", "references": [1], "translators_comments": "Al-Khilj is a proper name"},
-                  {"english": "The fourth ones 2", "references": [1]}],
-    "HIP 62956": [{"english": "The Fifth", "references": [5]}],
-    "HIP 65378": [{"english": "The Sixth", "references": [5]}],
-    "HIP 65474": [{"english": "The High Unarmed One", "references": [2]}],
-    "HIP 67301": [{"english": "The Seventh", "references": [7]}],
-    "HIP 68702": [{"english": "al-Naayem 1", "references": [1], "translators_comments": "As-S.hali is a proper name"}],
-    "HIP 69673": [{"english": "The Watcher", "references": [6]},
-                  {"english": "The Reddish One", "references": [1]}],
-    "HIP 71683": [{"english": "al-Naayem 2", "references": [1]}],
-    "HIP 72607": [{"english": "The Two Guards 1", "references": [1]},
-                  {"english": "The Two Refugees 1", "references": [1]},
-                  {"english": "Al aba Bzay 1", "references": [1]}],
-    "HIP 75097": [{"english": "The Two Guards 2", "references": [1]},
-                  {"english": "The Two Refugees 2", "references": [1]},
-                  {"english": "Al aba bzay 2", "references": [1]}],
-    "HIP 80763": [{"english": "The Heart", "references": [2]}],
-    "HIP 85927": [{"english": "Raised Tail Of The Scorpion", "references": [2]}],
-    "HIP 91262": [{"english": "The Closed Wings Eagle", "references": [1]}],
-    "HIP 97649": [{"english": "The Spread Wings Eagle", "references": [1]},
-                  {"english": "Al-Kanoon", "references": [4], "translators_comments": "Al-Kanoon is a proper name"}],
-    "HIP 113881": [{"english": "The Front 2", "references": [2]}],
-    "HIP 113963": [{"english": "The Front 1", "references": [2]}],
-    "M 45": [{"english": "Al-Thurayya", "translators_comments": "Al-Thurayya is a proper name"}],
-    "NAME Venus": [{"english": "Morning Star - Evening Star - The Sip - The Star Of Al-Hawdan", "native": "نجمة الصبح - نجمة االعشا - الجغمة - نجمة الهودان", "translators_comments": "Al-Hawdan is a proper name"}]
+    "HIP 677": [{"english": "The Rear 2", "native": "الموخر 2", "pronounce": "al-Mwakhkhar", "transliteration": "al-Mwaḫḫar", "IPA": "al.mwax.xar", "references": [2]}],
+    "HIP 1067": [{"english": "The Rear 1", "native": "الموخر 1", "pronounce": "al-Mwakhkhar", "transliteration": "al-Mwaḫḫar", "IPA": "al.mwax.xar", "references": [2]}],
+    "HIP 7588": [{"english": "The Oath Star", "native": "محلف", "pronounce": "Mihlif", "transliteration": "Miḥlif", "IPA": "miħ.lif", "references": [4]},
+                 {"english": "Aba al-sihil", "native": "أبا السهل", "pronounce": "Aba al-Sihil", "transliteration": "Aba al-Sihil", "IPA": "ʔa.ba.as.sih.il", "references": [1], "translators_comments": "Aba Alsihil is a proper name"},
+                 {"english": "Al-Miss.hil", "native": "المسهل", "pronounce": "al-Mishil", "transliteration": "al-Mishil", "IPA": "al.mis.hil", "references": [1], "translators_comments": "Al-Miss.hil is a proper name"},
+                 {"english": "Al-S.hali", "native": "السهلي", "pronounce": "al-S.hali", "transliteration": "al-S.hali", "IPA": "as.sha.liː", "references": [3], "translators_comments": "Al-S.hali is a proper name"}],
+    "HIP 11767": [{"english": "The Kid", "native": "الجدي", "pronounce": "al-Jady", "transliteration": "al-Ǧady", "IPA": "al.dʒa.di", "references": [3], "translators_comments": "The Kid is the little he-goat"}],
+    "HIP 21421": [{"english": "The Little Follower", "native": "التويبع", "pronounce": "al-Twaibi'", "transliteration": "al-Twaibiʿ", "IPA": "at.twaeː.biʕ", "references": [2]},
+                  {"english": "The Latter", "native": "التويلي", "pronounce": "al-Twailī", "transliteration": "al-Twailī", "IPA": "at.twaeː.liː", "references": [1]},
+                  {"english": "Al-Mjaidih", "native": "المجيدح", "pronounce": "al-Mjaidih", "transliteration": "al-Mǧaidiḥ", "IPA": "al.mʒaeː.diħ", "references": [1], "translators_comments": "Al-Mjaidih is a proper name"}],
+    "HIP 24436": [{"english": "Southern Horn Of Al-Jawza", "native": "قرن الجوزا الجنوبي", "pronounce": "Qarn al-Jawza al-Junūbī", "transliteration": "Qarn al-Ǧawza al-Ǧunūbī", "IPA": "qarn.al.dʒaw.zal.dʒu.nuː.biː", "references": [1], "translators_comments": "Al-Jawza is a proper name"},
+                  {"english": "Southern Claw Of Al-Jawza", "native": "زابن الجوزا الجنوبي", "pronounce": "Zabin al-Jawza al-Junūbī", "transliteration": "Zabin al-Ǧawza al-Ǧunūbī", "IPA": "zaː.bin.al.dʒaw.zal.dʒu.nuː.biː", "references": [10], "translators_comments": "Al-Jawza is a proper name"}],
+    "HIP 24608": [{"english": "The Parallel One", "native": "المباري", "pronounce": "al-Mbarī", "transliteration": "al-Mbarī", "IPA": "al.mbaː.riː", "references": [8]},
+                  {"english": "The Sided One", "native": "الجنيب", "pronounce": "al-Jinīb", "transliteration": "al-Ǧinīb", "IPA": "al.dʒi.niːb", "references": [1]}],
+    "HIP 27366": [{"english": "Leg Of Al-Jawza", "native": "رجل الجوزا", "pronounce": "Rijl al-Jawza", "transliteration": "Riǧl al-Ǧawza", "IPA": "ridʒ.lal.dʒaw.zaː", "references": [1]}],
+    "HIP 27989": [{"english": "Northern Horn Of Al-Jawza", "native": "قرن الجوزا الشمالي", "pronounce": "Qarn al-Jawza al-Shimalī", "transliteration": "Qarn al-Ǧawza al-Šimalī", "IPA": "qarn.al.dʒaw.zaʃ.ʃi.maː.liː", "references": [1], "translators_comments": "Al-Jawza is a proper name"},
+                  {"english": "Northern Claw Of Al-Jawza", "native": "زابن الجوزا الشمالي", "pronounce": "Zabin al-Jawza al-Shimalī", "transliteration": "Zabin al-Ǧawza al-Šimalī", "IPA": "zaː.bin.al.dʒaw.zaʃ.ʃi.maː.liː", "references": [10], "translators_comments": "Al-Jawza is a proper name"}],
+    "HIP 30438": [{"english": "Suhayl", "native": "سهيل", "pronounce": "Shail", "transliteration": "Shail", "IPA": "sheːl", "references": [2,3], "translators_comments": "Suhayl is a proper name"}],
+    "HIP 32349": [{"english": "Al-Mirzam", "native": "المرزم", "pronounce": "al-Mirzam", "transliteration": "al-Mirzam", "IPA": "al.mir.zam", "references": [2,3], "translators_comments": "Al-Mirzam is a proper name"},
+                  {"english": "Al-Shi'la", "native": "الشعلى", "pronounce": "al-Shi'la", "transliteration": "al-Šiʿla", "IPA": "aʃ.ʃiʕ.laː", "references": [1], "translators_comments": "Al-Shi'la is a proper name"}],
+    "HIP 34088": [{"english": "The Claws 5", "native": "الاظفار 5", "pronounce": "al-Azhfār 5", "transliteration": "al-Aẓfār 5", "IPA": "alaðˤ.faːr", "references": [1,9]}],
+    "HIP 35350": [{"english": "The Claws 6", "native": "الاظفار 6", "pronounce": "al-Azhfār 6", "transliteration": "al-Aẓfār 6", "IPA": "alaðˤ.faːr", "references": [1,9]}],
+    "HIP 35550": [{"english": "The Claws 4", "native": "الاظفار 4", "pronounce": "al-Azhfār 4", "transliteration": "al-Aẓfār 4", "IPA": "alaðˤ.faːr", "references": [1,9]}],
+    "HIP 36046": [{"english": "The Claws 1", "native": "الاظفار 1", "pronounce": "al-Azhfār 1", "transliteration": "al-Aẓfār 1", "IPA": "alaðˤ.faːr", "references": [1,9]}],
+    "HIP 36962": [{"english": "The Claws 2", "native": "الاظفار 2", "pronounce": "al-Azhfār 2", "transliteration": "al-Aẓfār 2", "IPA": "alaðˤ.faːr", "references": [1,9]}],
+    "HIP 37740": [{"english": "The Claws 3", "native": "الاظفار 3", "pronounce": "al-Azhfār 3", "transliteration": "al-Aẓfār 3", "IPA": "alaðˤ.faːr", "references": [1,9]}],
+    "HIP 53910": [{"english": "Al-Khilj 2", "native": "الخلج 2", "pronounce": "al-Khilj 2", "transliteration": "al-Ḫilj 2", "IPA": "al.xildʒ", "references": [1], "translators_comments": "Al-Khilj is a proper name"},
+                  {"english": "The first Khilj 2", "native": "الخلج الاولات 2", "pronounce": "al-Khilj al-awwalāt 2", "transliteration": "al-Ḫilj al-awwalāt 2", "IPA": "al.xildʒ.alaw.wa.laːt", "references": [1], "translators_comments": "Al-Khilj is a proper name"},
+                  {"english": "The first two 2", "native": "الاولتين 2", "pronounce": "al-Awwalatain", "transliteration": "al-Awwalatain", "IPA": "alaw.wa.la.teːn", "references": [1]}],
+    "HIP 54061": [{"english": "Al-Khilj 1", "native": "الخلج 1", "pronounce": "al-Khilj 1", "transliteration": "al-Ḫilj 1", "IPA": "al.xildʒ", "references": [1], "translators_comments": "Al-Khilj is a proper name"},
+                  {"english": "The first Khilj 1", "native": "الخلج الاولات 1", "pronounce": "al-Khilj al-awwalāt 1", "transliteration": "al-Ḫilj al-awwalāt 1", "IPA": "al.xildʒ.alaw.wa.laːt", "references": [1], "translators_comments": "Khilj is a proper name"},
+                  {"english": "The first two 1", "native": "الاولتين 1", "pronounce": "al-Awwalatain", "transliteration": "al-Awwalatain", "IPA": "alaw.wa.la.teːn", "references": [1]}],
+    "HIP 57632": [{"english": "Star Of Weather Change", "native": "الصرفة", "pronounce": "al-Sarfah", "transliteration": "al-Ṣarfah", "IPA": "asˤ.sˤar.fah", "references": [2]}],
+    "HIP 58001": [{"english": "The Latter Khilj 1", "native": "الخلج التوالي 1", "pronounce": "al-Khilj al-Tuwalī 1", "transliteration": "al-Ḫilj al-Tuwalī 1", "IPA": "al.xildʒ.at.tuwaː.liː", "references": [1], "translators_comments": "Al-Khilj is a proper name"},
+                  {"english": "The fourth ones 1", "native": "الربّع 1", "pronounce": "al-Ribba' 1", "transliteration": "al-Rubbaʿ 1", "IPA": "ar.ru.bbaʕ", "references": [1]}],
+    "HIP 59774": [{"english": "The Latter Khilj 2", "native": "الخلج التوالي 2", "pronounce": "al-Khilj al-Tuwalī 2", "transliteration": "al-Ḫilj al-Tuwalī 2", "IPA": "al.xildʒ.at.tuwaː.liː", "references": [1], "translators_comments": "Al-Khilj is a proper name"},
+                  {"english": "The fourth ones 2", "native": "الربّع 2", "pronounce": "al-Rubba' 2", "transliteration": "al-Rubbaʿ 2", "IPA": "ar.ru.bbaʕ", "references": [1]}],
+    "HIP 62956": [{"english": "The Fifth", "native": "الخامس", "pronounce": "al-Khamis", "transliteration": "al-Ḫamis", "IPA": "al.xaː.mis", "references": [1]}],
+    "HIP 65378": [{"english": "The Sixth", "native": "السات", "pronounce": "al-Satt", "transliteration": "al-Satt", "IPA": "as.saːtt", "references": [5]}],
+    "HIP 65474": [{"english": "The High Unarmed One", "native": "السماك الأعزل", "pronounce": "al-Smak al-'azal", "transliteration": "al-Smak al-ʿazal", "IPA": "as.smaːts alaʕ.zal", "references": [2]}],
+    "HIP 67301": [{"english": "The Seventh", "native": "السويبع", "pronounce": "al-Swaibi'", "transliteration": "al-Swaibiʿ", "IPA": "as.swaeː.biʕ", "references": [3]}],
+    "HIP 68702": [{"english": "al-Naayem 1", "native": "النعايم 1", "pronounce": "al-Na'āyem 1", "transliteration": "al-Naʿāyem 1", "IPA": "an.na.ʕaː.jim", "references": [1]}],
+    "HIP 69673": [{"english": "The Watcher", "native": "الرقيب", "pronounce": "al-Reqīb", "transliteration": "al-Reqīb", "IPA": "ar.re.qiːb", "references": [6]},
+                  {"english": "The Reddish One", "native": "الاحيمر", "pronounce": "al-Ihaimir", "transliteration": "al-Iḥaimir", "IPA": "al.aħeː.mir", "references": [1]}],
+    "HIP 71683": [{"english": "al-Naayem 2", "native": "النعايم 2", "pronounce": "al-Na'āyem 2", "transliteration": "al-Naʿāyem 2", "IPA": "an.naʕaː.jim", "references": [1]}],
+    "HIP 72607": [{"english": "The Two Guards 1", "native": "الحويجزين 1", "pronounce": "al-Huwaijzain 1", "transliteration": "al-Ḥuwaiǧzain 1", "IPA": "al.ħuwejdʒ.zeːn", "references": [1]},
+                  {"english": "The Two Refugees 1", "native": "الدخيلين 1", "pronounce": "al-Dikhīlain 1", "transliteration": "al-Diḫīlain 1", "IPA": "ad.diː.xiː.leːn", "references": [1]},
+                  {"english": "Al aba Bzay 1", "native": "آل أبا بزي 1", "pronounce": "Āl Aba Bzay 1", "transliteration": "Āl Aba Bzay 1", "IPA": "aːla.baː bzaj", "references": [1]}],
+    "HIP 75097": [{"english": "The Two Guards 2", "native": "الحويجزين 2", "pronounce": "al-Huwaijzain 2", "transliteration": "al-Ḥuwaiǧzain 2", "IPA": "al.ħuwejdʒ.zeːn", "references": [1]},
+                  {"english": "The Two Refugees 2", "native": "الدخيلين 2", "pronounce": "al-Dikhīlain 2", "transliteration": "al-Diḫīlain 2", "IPA": "ad.diː.xiː.leːn", "references": [1]},
+                  {"english": "Al aba bzay 2", "native": "آل أبا بزي 2", "pronounce": "Āl Aba Bzay 2", "transliteration": "Āl Aba Bzay 2", "IPA": "aːla.baː bzaj", "references": [1]}],
+    "HIP 80763": [{"english": "The Heart", "native": "القلب", "pronounce": "al-Qalb", "transliteration": "al-Qalb", "IPA": "al.qalb", "references": [1]}],
+    "HIP 85927": [{"english": "Raised Tail Of The Scorpion", "native": "الشولة", "pronounce": "al-Shawlah", "transliteration": "al-Šawlah", "IPA": "aʃ.ʃaw.la", "references": [2]}],
+    "HIP 91262": [{"english": "The Closed Wings Eagle", "native": "النسر المكتف", "pronounce": "al-Nasr al-Mkattaf", "transliteration": "al-Nasr al-Mkattaf", "IPA": "an.nasr.al.mka.ttaf", "references": [2]}],
+    "HIP 97649": [{"english": "The Spread Wings Eagle", "native": "النسر الباسط", "pronounce": "al-Nasr al-Basit", "transliteration": "al-Nasr al-Basiṭ", "IPA": "an.nasr.al.baː.sitˤ", "references": [1]},
+                  {"english": "Al-Kanoon", "native": "الكانون", "pronounce": "al-Kanūn", "transliteration": "al-Kanūn", "IPA": "al.kaː.nuːn", "references": [1], "translators_comments": "Al-Kanoon is a proper name"}],
+    "HIP 113881": [{"english": "The Front 2", "native": "المقدم 2", "pronounce": "al-Mqaddam", "transliteration": "al-Mqaddam", "IPA": "al.mqad.dam", "references": [4]}],
+    "HIP 113963": [{"english": "The Front 1", "native": "المقدم 1", "pronounce": "al-Mqaddam", "transliteration": "al-Mqaddam", "IPA": "al.mqad.dam", "references": [2]}],
+    "M 45": [{"english": "al-Thurayya", "native": "الثريا", "pronounce": "al-Thrayyā", "transliteration": "al-Ṯrayyā", "IPA": "aθ.θraj.jaː", "references": [1], "translators_comments": "al-Thurayya is a proper name"}],
+    "NAME Venus": [{"english": "Evening Star", "visible": "evening", "native": "نجمة االعشا", "pronounce": "Najmat al-'Shā", "transliteration": "Naǧmat al-ʿŠā", "IPA": "nadʒ.mat.al.ʕʃa", "references": [1]}, 
+                   {"english": "Morning Star", "visible": "morning", "native": "نجمة الصبح", "pronounce": "Najmat al-Subh", "transliteration": "Naǧmat al-Ṣubḥ", "IPA": "nadʒ.mat.asˤ.sˤubħ", "references": [1]}, 
+                   {"english": "The Sip", "native": "الجغمة", "pronounce": "al-Jughmah", "transliteration": "al-Ǧuġmah", "IPA": "al.dʒuɣ.mah", "references": [1]}, 
+                   {"english": "The Star Of Al-Hawdan", "native": "نجمة الهودان", "pronounce": "Najmat al-Hawdān", "transliteration": "Naǧmat al-Hawdān", "IPA": "nadʒ.mat.al.how.daːn", "references": [1], "translators_comments": "Al-Hawdan is a proper name"}]
   }
 }

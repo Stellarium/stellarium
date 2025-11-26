@@ -485,10 +485,17 @@ so we\newFeature{0.21.3} recommend to state \texttt{orbit\_Epoch} explicitly.
 \item[ref] Reference, e.g.\ some MPC Circular (optional). \newFeature{0.21.3} May be used in future versions.
 \end{description}
 
-Comet brightness is evaluated from
+\paragraph{Comet magnitudes}
+Like for minor planets, visual magnitude is modelled from
+\begin{description}
+\item[absolute\_magnitude] $H$
+\item[slope\_parameter] $G$
+\end{description}
+but with a modified expression:
+%
 \begin{equation}
   \label{eq:comet_magnitudes}
-  \mathrm{mag}=\mathtt{absolute\_magnitude}+5\cdot\log{\mathrm{distance}} + 2.5\cdot\mathtt{slope\_parameter}\cdot\log(\mathrm{CometSunDistance})
+  \mathrm{mag}=H+5\cdot\log\Delta + 2.5\cdot G \cdot\log r
 \end{equation}
 
 The term \texttt{slope\_parameter} may be a misnomer in case of
@@ -497,7 +504,13 @@ comets. From the literature \citep{AstronomicalAlgorithms:1998} (equation 33.13)
   \label{eq:comet_magnitudes_Meeus}
   \mathrm{mag}=g+5\log\Delta + \kappa\log r
 \end{equation}
-from which $\kappa=2\cdot\mathtt{slope\_parameter}$. In any case, $\kappa$ is typically [5\ldots15] and specific for each comet.
+from which $\kappa=2.5\cdot G$. In any case, $\kappa$ is typically [5\ldots15] and specific for each comet. The standard value for $G$ is 4 (therefore $\kappa=10$).
+
+Estimating and predicting comet magnitudes is very difficult, and values for $H$ and $G$ often differ between data sources 
+like the Minor Planetary Center\footnote{\url{https://www.minorplanetcenter.net/data}} and NASA/JPL Horizon\footnote{\url{https://ssd.jpl.nasa.gov/horizons/}}. 
+When you think some comet magnitude is off, consider searching for other sources than MPC\footnote{One interesting website is \url{http://www.aerith.net/index.html} 
+which provides magnitude predictions in terms of \ref{eq:comet_magnitudes_Meeus} for current comets, sometimes even in intervals from perihel date as comets evolve. 
+Just extract $\mathtt{absolute\_magnitude}=g$ and $\mathtt{slope\_parameter}=\kappa/2.5$.}.
 
 You can finetune the appearance of the comet, both when zooming in all the way to the core, or how the tails are represented. 
 \begin{description}
@@ -668,14 +681,14 @@ iau_designation                = C/2023 A3
 name                           = C/2023 A3 (Tsuchinshan-ATLAS)
 type                           = comet
 orbit_Epoch                    = 2460584.5
-orbit_ArgOfPericenter          = (W)   308.4955943429219
-orbit_AscendingNode            = (OM)   21.56049287759364
-orbit_Eccentricity             = (EC)    1.000086779013436
-orbit_Inclination              = (IN)  139.1089312570287
-orbit_PericenterDistance       = (QR)    0.3914011809348247
+orbit_ArgOfPericenter          = (W)      308.4955943429219
+orbit_AscendingNode            = (OM)      21.56049287759364
+orbit_Eccentricity             = (EC)       1.000086779013436
+orbit_Inclination              = (IN)     139.1089312570287
+orbit_PericenterDistance       = (QR)       0.3914011809348247
 orbit_TimeAtPericenter         = (Tp) 2460581.248532149941
-absolute_magnitude             = (M1)    6.1
-slope_parameter                = (k1/2)  4.25
+absolute_magnitude             = (M1)       6.1
+slope_parameter                = (k1/2.5)   3.4
 orbit_good                     = 1000
 discovery                      = 2023-01-09 [Not given by JPL Horizons]
 ref                            = JPL Horizons: JPL#25

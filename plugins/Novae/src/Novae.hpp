@@ -23,7 +23,6 @@
 #include "StelObject.hpp"
 #include "Nova.hpp"
 #include "StelTextureTypes.hpp"
-#include <QFont>
 #include <QVariantMap>
 #include <QDateTime>
 #include <QList>
@@ -192,10 +191,10 @@ public slots:
 	void reloadCatalog(void);
 
 	//! Connect this to StelApp font size.
-	void setFontSize(int s){font.setPixelSize(s);}
+	void setFontSize(int s){fontSize = s;}
 private:
-	// Font used for displaying our text
-	QFont font;
+	// Fontsize used for displaying our text
+	int fontSize;
 
 	// if existing, delete Novae section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);

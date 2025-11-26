@@ -137,14 +137,15 @@
     }
   ],
   "common_names": {
-    "HIP 21421": [{"english": "Kapaumeta"}],
-    "M 45": [{"english": "Nowaswas Lapnuman", "translators_comments": "Meaning \"Young boys of Lapnuman\""},
-             {"english": "Neperawen Lapnuman", "translators_comments": "Meaning \"Young girls of Lapnuman\""}],
-    "NGC 292": [{"english": "Nowanuman", "translators_comments": "Meaning \"Earth oven\""}],
-    "PGC 17223": [{"english": "Nowanuman", "translators_comments": "Meaning \"Earth oven\""}],
-    "NAME Jupiter": [{"english": "Karatéi", "native": "Karatéi"}],
-    "NAME Moon": [{"english": "Mawuk", "native": "Mawuk"}],
-    "NAME Sun": [{"english": "Met", "native": "Met"}],
-    "NAME Venus": [{"english": "Fétukai (on morning sky), Kéwita (on evening sky)", "native": "Fétukai, Kéwita"}]
+    "HIP 21421": [{"native": "Kapaumeta"}],
+    "M 45": [{"native": "Nowaswas Lapnuman", "english": "Young boys of Lapnuman"},
+             {"native": "Neperawen Lapnuman", "english": "Young girls of Lapnuman"}],
+    "NGC 292": [{"native": "Nowanuman", "english": "Earth oven"}],
+    "PGC 17223": [{"native": "Nowanuman", "english": "Earth oven"}],
+    "NAME Jupiter": [{"native": "Karatéi", "english": "Karatéi"}],
+    "NAME Moon": [{"native": "Mawuk", "english": "Mawuk"}],
+    "NAME Sun": [{"native": "Met", "english": "Met"}],
+    "NAME Venus": [{"english": "Fétukai", "native": "Fétukai", "visible": "morning"}, 
+                   {"english": "Kéwita", "native": "Kéwita", "visible": "evening"}]
   }
 }

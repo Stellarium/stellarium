@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-08-21 11:28+0700\n"
+"POT-Creation-Date: 2025-10-01 11:51+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: cardinot <mcardinot@gmail.com>, 2022\n"
 "Language-Team: Armenian (https://app.transifex.com/stellarium/teams/80998/hy/)\n"
@@ -109,8 +109,8 @@ msgid "Could not retrieve landscape list"
 msgstr ""
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:731
-#: index.html:793 tablet7in.html:828 tablet7in.html:888
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:761
+#: index.html:823 tablet7in.html:845 tablet7in.html:905
 msgid "-none-"
 msgstr ""
 
@@ -345,253 +345,289 @@ msgid "Include nutation"
 msgstr ""
 
 #: index.html:306 tablet7in.html:371
+msgid "Include parallax"
+msgstr ""
+
+#: index.html:311 tablet7in.html:376
 msgid "Include aberration"
 msgstr ""
 
-#: index.html:314 tablet7in.html:385
+#: index.html:319 tablet7in.html:390
 msgid "Show planet markers"
 msgstr "Ցույց տալ մոլորակների նշիչները"
 
-#: index.html:315 tablet7in.html:386
+#: index.html:320 tablet7in.html:391
 msgid "Show planet orbits"
 msgstr "Ցույց տալ մոլորակների ուղեծիրները"
 
-#: index.html:316 tablet7in.html:387
+#: index.html:321 tablet7in.html:392
 msgid "Show planet orbits only"
 msgstr ""
 
-#: index.html:317 tablet7in.html:388
+#: index.html:322 tablet7in.html:393
 msgid "Show orbit for selected planet"
 msgstr ""
 
-#: index.html:318 tablet7in.html:389
+#: index.html:323 tablet7in.html:394
 msgid "Show planet trails"
 msgstr ""
 
-#: index.html:319 tablet7in.html:390
+#: index.html:324 tablet7in.html:395
 msgid "Show trail only for selected planet"
 msgstr ""
 
-#: index.html:324 tablet7in.html:394
+#: index.html:329 tablet7in.html:399
 msgid "Scale Moon:"
 msgstr ""
 
-#: index.html:325 tablet7in.html:398
+#: index.html:330 tablet7in.html:403
 msgid "Scale Sun:"
 msgstr ""
 
-#: index.html:326 tablet7in.html:402
+#: index.html:331 tablet7in.html:407
 msgid "Scale Planets:"
 msgstr ""
 
-#: index.html:327 tablet7in.html:406
+#: index.html:332 tablet7in.html:411
 msgid "Scale minor bodies:"
 msgstr ""
 
-#: index.html:358 tablet7in.html:453
+#: index.html:337
+msgid "Mark minor bodies:"
+msgstr ""
+
+#: index.html:365 tablet7in.html:443
+msgid "Bortle class:"
+msgstr ""
+
+#: index.html:382 tablet7in.html:460
 msgid "Extinction Coefficient:"
 msgstr ""
 
-#: index.html:359 tablet7in.html:454
+#: index.html:383 tablet7in.html:461
 msgid "Only extinction/refraction, no blue skylight"
 msgstr ""
 
-#: index.html:360 tablet7in.html:455
+#: index.html:383 tablet7in.html:462
 msgid "Suppress scattering"
 msgstr ""
 
-#: index.html:365 tablet7in.html:460
+#: index.html:387 tablet7in.html:467
 msgid "Shooting Stars"
 msgstr ""
 
-#: index.html:366 tablet7in.html:461
+#: index.html:388 tablet7in.html:468
 msgid "ZHR:"
 msgstr ""
 
-#: index.html:413 tablet7in.html:513
+#: index.html:435 tablet7in.html:520
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
 msgstr ""
 
-#: index.html:430 tablet7in.html:530
+#: index.html:452 tablet7in.html:537
 msgid "Center"
 msgstr ""
 
-#: index.html:448 tablet7in.html:548
+#: index.html:468 tablet7in.html:555
 msgid "Solstices"
 msgstr ""
 
-#: index.html:449 tablet7in.html:549
+#: index.html:469 tablet7in.html:556
 msgid "Crossquarters"
 msgstr ""
 
-#: index.html:450 tablet7in.html:550
+#: index.html:470 tablet7in.html:557
 msgid "Major Standstill"
 msgstr ""
 
-#: index.html:451 tablet7in.html:551
+#: index.html:471 tablet7in.html:558
 msgid "Minor Standstill"
 msgstr ""
 
-#: index.html:455 tablet7in.html:556
+#: index.html:475 tablet7in.html:563
 msgid "Line width:"
 msgstr ""
 
-#: index.html:465 tablet7in.html:566
+#: index.html:485 tablet7in.html:573
 msgid "Current Planet:"
 msgstr ""
 
-#: index.html:505 tablet7in.html:606
+#: index.html:525 tablet7in.html:613
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr ""
 
-#: index.html:552 tablet7in.html:624
+#: index.html:572 tablet7in.html:631
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
 msgstr ""
 
-#: index.html:590
+#: index.html:610
 msgid "Objects without identifier"
 msgstr ""
 
-#: index.html:608
+#: index.html:628
 msgid "Open Star clusters"
 msgstr ""
 
-#: index.html:609 tablet7in.html:692
+#: index.html:629 tablet7in.html:699
 msgid "Globular Star clusters"
 msgstr ""
 
-#: index.html:615 tablet7in.html:698
+#: index.html:635 tablet7in.html:705
 msgid "Bright Nebulae"
 msgstr ""
 
-#: index.html:616 tablet7in.html:699
+#: index.html:636 tablet7in.html:706
 msgid "Dark Nebulae"
 msgstr ""
 
-#: index.html:617 tablet7in.html:700
+#: index.html:637 tablet7in.html:707
 msgid "Planetary Nebulae"
 msgstr ""
 
-#: index.html:627 tablet7in.html:710
+#: index.html:647 tablet7in.html:717
 msgid "Labels and markers"
 msgstr ""
 
-#: index.html:646 tablet7in.html:729
+#: index.html:665 tablet7in.html:736
 msgid "Limit angular size (arcmin):"
 msgstr ""
 
-#: index.html:658 tablet7in.html:743
+#: index.html:677 tablet7in.html:750
 msgid "Use associated planet and position"
 msgstr "Օգտագործել համապատասխան մոլորակը և դիրքը"
 
-#: index.html:669 tablet7in.html:752
+#: index.html:687 tablet7in.html:758
+msgid "Show landscape labels"
+msgstr ""
+
+#: index.html:688 tablet7in.html:759
 msgid "Show illumination"
 msgstr ""
 
-#: index.html:674 tablet7in.html:758
+#: index.html:693 tablet7in.html:765
 msgid "Current landscape"
 msgstr ""
 
-#: index.html:685 tablet7in.html:770
+#: index.html:704 tablet7in.html:777
 msgid "Label constellations with font size"
 msgstr ""
 
-#: index.html:689 tablet7in.html:774
+#: index.html:708 tablet7in.html:781
 msgid "Show lines with thickness"
 msgstr ""
 
-#: index.html:693 tablet7in.html:778
+#: index.html:712 tablet7in.html:785
 msgid "Label asterisms with font size"
 msgstr ""
 
-#: index.html:697 tablet7in.html:782
+#: index.html:716 tablet7in.html:789
 msgid "Show asterisms with thickness"
 msgstr ""
 
-#: index.html:701 tablet7in.html:786
+#: index.html:720 tablet7in.html:793
 msgid "Show ray helpers with thickness"
 msgstr ""
 
-#: index.html:709 tablet7in.html:794
+#: index.html:724 tablet7in.html:797
+msgid "Show art in brightness"
+msgstr ""
+
+#: index.html:728 tablet7in.html:801
 msgid "Show boundaries with thickness"
 msgstr ""
 
-#: index.html:714 tablet7in.html:799
+#: index.html:733 tablet7in.html:805
+msgid "Show zodiac with thickness"
+msgstr ""
+
+#: index.html:737 tablet7in.html:809
+msgid "Show lunar stations/mansions with thickness"
+msgstr ""
+
+#: index.html:741 tablet7in.html:813
+msgid "Short labels"
+msgstr ""
+
+#: index.html:742 tablet7in.html:814
 msgid "Constellation selection isolated"
 msgstr ""
 
-#: index.html:718 tablet7in.html:803
+#: index.html:743 tablet7in.html:815
+msgid "Only last selected"
+msgstr ""
+
+#: index.html:748 tablet7in.html:820
 msgid "Current sky culture"
 msgstr ""
 
-#: index.html:731 tablet7in.html:828
+#: index.html:761 tablet7in.html:845
 msgid "Active script:"
 msgstr ""
 
-#: index.html:732 tablet7in.html:829
+#: index.html:762 tablet7in.html:846
 msgid "Run selected script"
 msgstr ""
 
-#: index.html:732 tablet7in.html:829
+#: index.html:762 tablet7in.html:846
 msgid "Stop current script"
 msgstr ""
 
-#: index.html:737 tablet7in.html:43 tablet7in.html:813
+#: index.html:767 tablet7in.html:43 tablet7in.html:830
 msgid "Actions"
 msgstr ""
 
-#: index.html:741 tablet7in.html:817
+#: index.html:771 tablet7in.html:834
 msgid "Run/toggle action"
 msgstr ""
 
-#: index.html:752 tablet7in.html:852
+#: index.html:782 tablet7in.html:869
 msgid "Planet map"
 msgstr ""
 
-#: index.html:753 tablet7in.html:853
+#: index.html:783 tablet7in.html:870
 msgid "Planet map pointer"
 msgstr ""
 
-#: index.html:757 tablet7in.html:857
+#: index.html:787 tablet7in.html:874
 msgid "Type to search location"
 msgstr ""
 
-#: index.html:791 tablet7in.html:886
+#: index.html:821 tablet7in.html:903
 msgid "Interaction"
 msgstr ""
 
-#: index.html:792 tablet7in.html:887
+#: index.html:822 tablet7in.html:904
 msgid "Current scene:"
 msgstr ""
 
-#: index.html:795 tablet7in.html:890
+#: index.html:825 tablet7in.html:907
 msgid "View controls"
 msgstr ""
 
-#: index.html:801 tablet7in.html:896
+#: index.html:831 tablet7in.html:913
 msgid "Movement controls"
 msgstr ""
 
-#: index.html:813 tablet7in.html:908
+#: index.html:843 tablet7in.html:925
 msgid "Torchlight"
 msgstr ""
 
-#: index.html:820 tablet7in.html:915
+#: index.html:850 tablet7in.html:932
 msgid "Scene selection"
 msgstr ""
 
-#: index.html:824 tablet7in.html:919
+#: index.html:854 tablet7in.html:936
 msgid "Load selected scene"
 msgstr ""
 
-#: index.html:849 tablet7in.html:945
+#: index.html:880 tablet7in.html:963
 msgid "No response from server"
 msgstr ""
 
-#: index.html:850 tablet7in.html:946
+#: index.html:881 tablet7in.html:964
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 
@@ -735,18 +771,18 @@ msgstr "Ջրհոս"
 msgid "Pisces"
 msgstr "Ձկներ"
 
-#: tablet7in.html:837
+#: tablet7in.html:854
 msgid "Favorites"
 msgstr ""
 
-#: tablet7in.html:839
+#: tablet7in.html:856
 msgid "Show 1"
 msgstr ""
 
-#: tablet7in.html:840
+#: tablet7in.html:857
 msgid "Remove Labels and Images"
 msgstr ""
 
-#: tablet7in.html:840
+#: tablet7in.html:857
 msgid "Cleanup Screen"
 msgstr ""

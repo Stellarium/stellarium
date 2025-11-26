@@ -70,7 +70,7 @@
 static QString applyScaleToCSS(const QString& css, const double scale)
 {
 	auto out = css;
-	const QRegularExpression pat("\\b([0-9.]+)px\\b");
+	static const QRegularExpression pat("\\b([0-9.]+)px\\b");
 	QRegularExpressionMatch match;
 	int pos = 0;
 	while((pos = out.indexOf(pat, pos, &match)) >= 0)
@@ -245,27 +245,22 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	// Connect all the GUI actions signals with the Core of Stellarium
 	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
 
-	// XXX: this should probably go into the script manager.
-	QString windowsGroup = N_("Windows");
-	QString miscGroup = N_("Miscellaneous");
-	QString infoGroup = N_("Selected object information");
-	actionsMgr->addAction("actionQuit_Global", miscGroup, N_("Quit"), this, "quit()", "Ctrl+Q", "Ctrl+X");
-
 #ifdef ENABLE_SCRIPTING
-	QString datetimeGroup = N_("Date and Time");
-	actionsMgr->addAction("actionIncrease_Script_Speed", datetimeGroup, N_("Speed up the script execution rate"), this, "increaseScriptSpeed()");
-	actionsMgr->addAction("actionDecrease_Script_Speed", datetimeGroup, N_("Slow down the script execution rate"), this, "decreaseScriptSpeed()");
-	actionsMgr->addAction("actionSet_Real_Script_Speed", datetimeGroup, N_("Set the normal script execution rate"), this, "setRealScriptSpeed()");
-	actionsMgr->addAction("actionStop_Script", datetimeGroup, N_("Stop script execution"), this, "stopScript()", "Ctrl+D, S");
-	#ifndef ENABLE_SCRIPT_QML
-	actionsMgr->addAction("actionPause_Script", datetimeGroup, N_("Pause script execution"), this, "pauseScript()", "Ctrl+D, P");
-	actionsMgr->addAction("actionResume_Script", datetimeGroup, N_("Resume script execution"), this, "resumeScript()", "Ctrl+D, R");
-	#endif
+        QString scriptsGroup = N_("Scripts");
+        actionsMgr->addAction("actionIncrease_Script_Speed", scriptsGroup, N_("Speed up the script execution rate"), this, "increaseScriptSpeed()");
+        actionsMgr->addAction("actionDecrease_Script_Speed", scriptsGroup, N_("Slow down the script execution rate"), this, "decreaseScriptSpeed()");
+        actionsMgr->addAction("actionSet_Real_Script_Speed", scriptsGroup, N_("Set the normal script execution rate"), this, "setRealScriptSpeed()");
+        actionsMgr->addAction("actionStop_Script", scriptsGroup, N_("Stop script execution"), this, "stopScript()", "Ctrl+D, S");
+#ifndef ENABLE_SCRIPT_QML
+        actionsMgr->addAction("actionPause_Script", scriptsGroup, N_("Pause script execution"), this, "pauseScript()", "Ctrl+D, P");
+        actionsMgr->addAction("actionResume_Script", scriptsGroup, N_("Resume script execution"), this, "resumeScript()", "Ctrl+D, R");
 #endif
+#endif
+
+        QString windowsGroup = N_("Windows");
 #ifdef ENABLE_SCRIPT_CONSOLE
 	actionsMgr->addAction("actionShow_ScriptConsole_Window_Global", windowsGroup, N_("Script console window"), scriptConsole, "visible", "F12", "", true);
 #endif
-
 	actionsMgr->addAction("actionShow_Help_Window_Global", windowsGroup, N_("Help window"), helpDialog, "visible", "F1", "", true);
 	actionsMgr->addAction("actionShow_Configuration_Window_Global", windowsGroup, N_("Configuration window"), configurationDialog, "visible", "F2", "", true);
 	actionsMgr->addAction("actionShow_Search_Window_Global", windowsGroup, N_("Search window"), searchDialog, "visible", "F3", "Ctrl+F", true);
@@ -275,7 +270,10 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", windowsGroup, N_("Shortcuts window"), shortcutsDialog, "visible", "F7", "", true);
 	actionsMgr->addAction("actionShow_AstroCalc_Window_Global", windowsGroup, N_("Astronomical calculations window"), astroCalcDialog, "visible", "F10", "", true);
 	actionsMgr->addAction("actionShow_ObsList_Window_Global", windowsGroup, N_("Observing list"), obsListDialog, "visible", "Alt+B", "", true);
-	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", miscGroup, N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+Shift+C", "", true);
+
+        QString miscGroup = N_("Miscellaneous");
+        actionsMgr->addAction("actionQuit_Global", miscGroup, N_("Quit"), this, "quit()", "Ctrl+Q", "Ctrl+X");
+        actionsMgr->addAction("actionSave_Copy_Object_Information_Global", miscGroup, N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+Shift+C", "", true);
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -293,6 +291,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	connect(scriptMgr, SIGNAL(scriptStopped()), this, SLOT(scriptStopped()));
 #endif
 
+        QString infoGroup = N_("Selected object information");
 	actionsMgr->addAction("actionDisplayInfo_All",     infoGroup, N_("All available info"), this, "displayAllInfo()");
 	actionsMgr->addAction("actionDisplayInfo_Default", infoGroup, N_("Default info"), this, "displayDefaultInfo()");
 	actionsMgr->addAction("actionDisplayInfo_Short",   infoGroup, N_("Short info"), this, "displayShortInfo()");

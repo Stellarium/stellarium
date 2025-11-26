@@ -22,7 +22,21 @@
 
 #include "StelModule.hpp"
 #include "StelHips.hpp"
+#include <QLoggingCategory>
 #include <QJsonArray>
+
+
+//! @class HiPSMgr
+//! This class controls display of Hierarchical Progressive Surveys (HiPS), all-sky surveys in a particular format
+//! defined by the International Virtual Observatory Alliance. A full description of the format can be found on the
+//! IVOA website. (https://www.ivoa.net/documents/HiPS/20170519/REC-HIPS-1.0-20170519.pdf)
+//! Stellarium supports only image-based surveys.
+//!
+//! @note You can finetune the amount of HiPS-related messages in the logfile by configuring the logging category stel.HiPS.
+//! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.HiPS.debug=true;".
+//! By default, only Info and more severe messages are displayed.
+
+Q_DECLARE_LOGGING_CATEGORY(HiPS)
 
 class HipsMgr : public StelModule
 {

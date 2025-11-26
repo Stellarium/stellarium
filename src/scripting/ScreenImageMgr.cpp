@@ -25,11 +25,8 @@
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
-
-#include "StelProjector.hpp"
 #include "StelModule.hpp"
-#include "StelUtils.hpp"
-#include "VecMath.hpp"
+#include "StelMainScriptAPI.hpp"
 
 #include <QGraphicsPixmapItem>
 #include <QPixmap>
@@ -257,7 +254,7 @@ void ScreenImageMgr::createScreenImage(const QString& id, const QString& filenam
 	}
 	else
 	{
-		qWarning() << "Failed to create ScreenImage" << id << ": file not found: " << filename;
+		qCWarning(Scripting) << "Failed to create ScreenImage" << id << ": file not found: " << filename;
 	}
 }
 

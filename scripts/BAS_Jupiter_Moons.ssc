@@ -2,10 +2,8 @@
 // Name: Jupiter Moons
 // License: Public Domain
 // Author: C. Gaudion FRAS, Bridgend Astronomical Society
-// Version: 20231129.1
+// Version: 20250707
 // Description: Jupiter's Moons Orbital Simulation
-
-
 
 LandscapeMgr.setFlagAtmosphere(false);
 LandscapeMgr.setFlagLandscape(false);
@@ -15,24 +13,64 @@ core.wait(2);
 
 defaultWait = 10;
 
-LabelMgr.labelScreen("BAS - Jupiter's Moons Orbital Simulation",400,50,true,25,"#ff0000");
-LabelMgr.labelScreen("Note: Jupiter may not actually be visible from your location at this time",400,100,true,25,"#ff0000");
+LabelMgr.labelScreen("Bridgend Astronomical Society - Jupiter's Moons Orbital Simulation v20250707",400,50,true,25,"#ffffff");
+LabelMgr.labelScreen("Note: Jupiter may not actually be visible from your location at this time.",400,100,true,25,"#ffffff");
+core.wait(5);
+LabelMgr.labelScreen("There are 95 moons of Jupiter with confirmed orbits as of 5 February 2024.",400,150,true,25,"#ffffff");
+core.wait(5);
+LabelMgr.labelScreen("The most massive of the moons are the four Galilean moons (may not be visible if behind Jupiter in their orbit):",400,200,true,25,"#ffffff");
 core.wait(5);
 
-core.selectObjectByName("Jupiter", true);
-	
+LabelMgr.labelScreen("Io ( Jupiter I ), innermost and second smallest of the four. Has over 400 active volcanoes. ",400,250,true,25,"#ffffff");
+core.selectObjectByName("Io", true);
+StelMovementMgr.autoZoomIn(6,1);
+core.wait(defaultWait);
+StelMovementMgr.autoZoomOut(6);  // Zoom back out
+
+LabelMgr.labelScreen("Europa ( Jupiter II ), smallest of the four and the closest icy moon to Jupiter. ",400,300,true,25,"#ffffff");
+core.selectObjectByName("Europa", true);
 StelMovementMgr.autoZoomIn(6);
-	
-core.setTimeRate(600);
-	
-core.wait(100);
+core.wait(defaultWait);
+StelMovementMgr.autoZoomOut(6);  // Zoom back out
 
-LabelMgr.labelScreen("Simulation complete",800,1500,true,30,"#ff0000");
+LabelMgr.labelScreen("Ganymede ( Jupiter III ), Largest moon in the solar system. ",400,350,true,25,"#ffffff");
+core.selectObjectByName("Ganymede", true);
+StelMovementMgr.autoZoomIn(6);
+core.wait(defaultWait);
+StelMovementMgr.autoZoomOut(6);  // Zoom back out
 
-core.setRealTime();
-
-core.wait(5);
+LabelMgr.labelScreen("and Callisto ( Jupiter IV ), second largest moon of Jupiter and heavily cratered. ",400,400,true,25,"#ffffff");
+core.selectObjectByName("Callisto", true);
+StelMovementMgr.autoZoomIn(6);
+core.wait(defaultWait);
+StelMovementMgr.autoZoomOut(6);  // Zoom back out
 
 LabelMgr.deleteAllLabels();
 
-//End of Sim
+LabelMgr.labelScreen("BAS - Jupiter's Moons Orbital Simulation will now run.  (use the << >> menu options to adjust speed of sim.)",400,50,true,25,"#ffffff");
+
+core.selectObjectByName("Jupiter", true);
+StelMovementMgr.autoZoomIn(6);
+	
+core.setTimeRate(1500);
+	
+core.wait(40);
+
+LabelMgr.deleteAllLabels();
+
+LabelMgr.labelScreen("Simulation now complete",400,50,true,25,"#ffffff");
+
+LabelMgr.labelScreen("Display will restore previous config.",400,100,true,25,"#ffffff");
+core.wait(5);
+
+// clean up and restore config previous to script running
+
+StelMovementMgr.autoZoomOut();
+LabelMgr.deleteAllLabels();
+core.setRealTime();
+LandscapeMgr.setFlagAtmosphere(true);
+LandscapeMgr.setFlagLandscape(true);
+StelMovementMgr.setEquatorialMount(false);
+
+
+//End of Simulation

@@ -1,128 +1,95 @@
 % Status info:
-% 2025-03 Foreword for V25.1
+% 2025-06 Foreword for V25.2
 
-\chapter*{Foreword for Stellarium 25.1}
+\chapter*{Foreword for Stellarium 25.2}
 \label{ch:Foreword}
 
-
-Almost  twenty-five years have elapsed since Fabien Ch\'ereau typed the
-first lines of code of a desktop planetarium which should be based on
-modern algorithms from computer graphics to provide a trustworthy
-simulation of the night sky, utilizing OpenGL real-time graphics technology which best
-runs on dedicated graphics hardware. 
-%
-%What evolved from these first
-%attempts has turned into a beautiful program which has been
-%
-The beautiful program that evolved since then has been 
-downloaded millions of times to run on desktop computers and notebooks
-all around the planet, on various operating systems and in dozens of
-languages. The first team of developers also developed ways to control Goto 
-telescopes which became a popular feature. In the years to come this was occasionally 
-extended by further external contributors to provide support for INDI and RTS2 on Linux and ASCOM on Windows, 
-but keeping the systems working by occasionally upgrading the protocols was left to 
-the maintainers who may be limited in their access to instruments or just have 
-not even enough time to go observing themselves.  
+Only a few months ago, in the previous foreword, we could announce big updates with the 
+new Gaia-based star catalog and the new file format for Skycultures. But there are more surprises!
 
 
-Only in late 2022 we were confident enough in the accuracy of our implementations of planetary 
-algorithms and various coordinate refinements that we have finally dropped the zero version number and 
-released version 1.0, and started using the year number as basis for later versions. 
-On this occasion we also moved forward to upgrading the foundational Qt GUI framework from Qt5 to Qt6 
-to be prepared for upgrades in the next years. To keep compatibility with older PCs, 
-we kept providing  builds based on the aging Qt5 framework. 
-However it turned out that the new Qt6 framework and the widely used telescope 
-control framework ASCOM~6 apparently don't play nicely together. We saw several reports about crashes coming in, 
-but were not able to really solve the issue, requiring us to finally disable support on Qt6-based builds. 
-The builds on the older Qt5 framework seemed to always work nicely. 
+Just as we prepared version 24.4 last December and had first trials with the new star catalog, a new contributor 
+presented his plugin. Josh Meyers has developed a \emph{Stellarium plugin for} his \emph{commissioning work at the new
+Vera C. Rubin observatory's Simonyi Survey Telescope}\footnote{Wording clarified since the 25.2 User Guide.}. 
 
-%What we don't have currently is expertise in Goto telescopes. 
+Some messages have to be read more than once to sink in. 
+\emph{Stellarium is used during commissioning of the survey telescope at the Vera C. Rubin observatory.}
+This is doubtlessly one of the most jaw-dropping astronomical instruments to become 
+operational in this decade, capturing repeated surveys of the whole sky that take only 3 days with its 
+gigantic 3.2 Gigapixel sensor array, and scheduled to producing 20 Terabytes of data. Per night! 
+Josh's plugin just didn't make it into 25.1, but is now integrated in version 25.2 (see \ref{sec:plugins:MosaicCamera}), 
+just in time as first-light images have been announced for the week after our June 2025 solstice release.
+It is great to see that Stellarium is used in the control room of this magnificent telescope!  
+
+You may not run your own survey telescope, but with this plugin you can display several preconfigured sensor areas, 
+and even configure your own dream system. I can imagine it can help in outreach, 
+when the fields of view for professional telescopes can be demonstrated in Stellarium's sky rendition.
 
 
-With only three core developers working part-time at best and otherwise busy in other projects or daytime jobs, 
-we cannot do giant leaps, but the program has 
-evolved nicely in other areas like the AstroCalc dialog that becomes richer in every version. 
+Another new plugin that certainly more of you have been waiting for: Wang Siliang has made 
+integrating your own astrophotos into Stellarium so much easier! In his NebulaTextures plugin (see \ref{sec:plugins:NebulaTextures}), 
+just upload an image to Astrometry.net and receive its accurate location within seconds, then display and finetune, 
+and store in your private collection for running in future Stellarium sessions. You can also manually adjust positions, 
+which might be useful to integrate your sketches and paintings (which Astrometry.net may not like). 
+We would like to see a collection of sketches that more represent what observers can see to use as alternative 
+to the ever more stunning photos.
 
 
 
-While many improvements had involved  refinements for planetary positions and modelling of observing conditions, 
-other users were more interested in star positions over millennia. 
-The star catalog we have used since 2006, which was based on the 
-then best positional measurements made by ESA's Hipparcos satellite,  was discovered to have 
-a systematic error that caused slightly wrong coordinates millennia from the present. 
-Also, binary stars could be observed to fly apart, because their motions around each other were not modelled. 
+While these new plugins will certainly find friends soon, the core team and our tireless translators were busy 
+in continuing what was first visible in version 25.1. 
+Stellarium has become the de-facto most relevant simulation environment for cultural astronomy, 
+be it archaeoastronomical simulation of old standing stone rows under simulated skies of yesteryear, 
+or explaining the constellations and how they can be used in the lives of the many cultures living on our planet. 
 
-Just a few weeks before release 24.4 a new developer, Henry Leung, showed up and offered a new star catalog for Stellarium. 
-We needed a few weeks to test, check for inconsistencies and finding how to best link this to our existing infrastructure, 
-but days after 24.4 was out, we fully embraced this new catalog, now a combination of ESA's latest 
-and best astrometry satellite Gaia's DR3 catalog with -- still -- the Hipparcos data, 
-required for the brightest stars which were too bright for Gaia to measure. 
-Computers have become more powerful since 2006, and so this new catalog comes with new features: While previously 
-we just showed numerical data for parallax, now you can observe the stars' actual parallaxes as you move around the Sun! 
-If needed in demonstrations, you can exaggerate the effect.
-Proper motions are now modelled accurately, and even stars' distances change, so you can observe the brightness change of 
-close stars like Barnard's as they pass our Solar system. And, what some may like best, 
-binary stars with known orbits move around each other while doing all this. 
-So, fasten your seat belts and observe, for example, the fast spatial motion of 61 Cygni, affected by annual parallax and aberration, 
-and observe the two components dancing around each other over centuries! Add a HiPS survey displayed behind the stars, 
-and see when the actual plates were taken so that the fast running stars fall in place. 
-Observe the combination of motions and you will get a higher appreciation for how difficult 
-finding stellar distances from positional measurements actually must have been for the pioneers in the field in the 19th century.
-%That each 
-Each star is now identified by its catalog number in Gaia DR3 as an added benefit. 
-%This new catalog also made the MissingStars plugin obsolete and solved many reports about ``missing stars''. 
+The new skyculture file format has grown far, closing the deficiencies of the old system that we and some of you had identified in the last years. 
+Stellarium can now display multiple linguistic variants of constellation and star labels, can show ``single star constellations'' and ``dark constellations'' 
+formed by dust clouds in the Milky Way, can properly identify Morning and Evening star, and for those cultures where it is relevant, 
+illustrate the zodiac and lunar stations or lunar mansions in various culture-dependent versions, and some more. 
+All details of the new format can be found in chapter~\ref{ch:SkyCultures}.
 
-If you need to run an older version of Stellarium and have downloaded the higher-level star catalogs, 
-these will still be available for running these older versions, but you will want to download the new star catalogs as soon as possible. 
+If something about star names is not found in a skyculture description, chances are such data are 
+or will soon be available in a new online project by Susanne M. Hoffmann, the All Skies Encyclopaedia (ASE). 
+Stellarium's OnlineQueries plugin (\ref{sec:plugins:OnlineQueries}) can now retrieve data for stars and constellations from ASE into its integrated web browser. 
 
 
-We had actually planned for a different large development to begin in early 2025. Fabien's newer projects, Stellarium-web and Stellarium-mobile, 
-are utilizing a more modern data format for their skyculture descriptions: JSON. Also in our core team, 
-we were convinced that the file formats used so far are not flexible enough to model the many aspects of the rich astronomical 
-heritage of cultures found all over the world, and we had already collected ideas for years. 
-In a scientific symposium in Jena in late 2023 that was also supported by Stellarium's donation 
-fund we were able to work out a few definitions and requirements of how Stellarium can help scientists collecting, displaying and communicating 
-all this. Starting with this version 25.1, we are therefore using a completely new file format for the sky 
-cultures which should be compatible with all programs of the Stellarium family. 
-Ruslan, who also optimizes the OpenGL rendering in countless little improvements, did a great job converting all existing data, 
-especially the translation into dozens of existing languages, so that hopefully no vocabulary that was already translated was lost.  
-See chapter \ref{ch:SkyCultures} for details about the new features as we use them now, 
-and expect more features to come in this area as we continue to work during this year. 
-
-Coming back to ASCOM, while testing with version 7 we could not trigger the bad crash that was reported before, 
-therefore we hope that re-enabling ASCOM in this release will work for our users with actual instruments. 
-Your feedback is important to find this out, and if you are familiar with programming, we can need support in this part of the program. 
-
-We want to thank all sponsors and backers of the project as meanwhile we have collected substantial funds to support development 
-also in work hours. We like working on this project, but also must pay the bills, so please keep up your kind support! 
+So, Stellarium is going strong as we approach the  25th anniversary of this project! 
+Twenty-five years ago, in summer of 2000,  Fabien Ch\'ereau typed the
+first lines of code of this desktop planetarium to try something with astronomy and computer graphics. 
+What has grown from these first lines is just awesome.
 
 
-\iffalse
-%% Aargh, these only come in 25.2...
-If that was not enough, yet another contributor, Wang Siliang, has fulfilled a long-standing 
-desire for quite a few astrophotographers.  He created a plugin with which you can place your own 
-photos inside Stellarium, with just a few mouseclicks and connection to astrometry.net.
-
-Have you ever wondered what the actual size of the focal area was for the modern generation of automated survey telescopes?  
-Thanks to yet another external contribution by Josh Meyers, a professional astronomer involved in commissioning 
-the Vera C. Rubin telescope, his plugin that he developed and used during this commissioning can show the sensor grid of 
-this and other telescopes, and you can even configure your own. 
-\fi
+However, developing and maintaining a project of this size needs dedication, especially when done as unpaid side occupation. 
+Large progress needs funding which is sometimes hard to find. 
+We want to thank all sponsors and backers of the project as meanwhile we had collected substantial funds to support this development 
+also in work hours. We like working on this project, but also must pay our bills, so please keep up your kind support! 
 
 
-Work on other things has started, but they are scheduled for completion only in upcoming versions. 
-So, Stellarium is going strong as we approach the  25th anniversary of this project!
 
 
 In the name of all prior and current developers we wish you much enjoyment with
 this and future versions of the Stellarium desktop planetarium!
 
 \begin{flushright}
-Georg Zotti and Alexander Wolf, March 2025
+Georg Zotti and Alexander Wolf, June 2025
 \end{flushright}
 
-%\vspace{2\baselineskip}
+\vspace{2\baselineskip}
 
+\section*{\ldots and on to V25.3}
+Over the summer we have further refined many details around skycultures. 
+Contributors have provided and updated many details especially in Arab, Chinese and even Mesopotamian skycultures. 
+Don't imagine, just see Cuneiform labels in the sky!
+
+We have also updated the DSO catalog and further enhanced the AstroCalc module. 
+And we dare to increase the maximum range of dates to $\pm 200.000$ years to observe stellar proper motion. 
+(Please note that planet positions by far cannot be modelled in that long time range!)
+
+Clear skies!
+
+\begin{flushright}
+Georg Zotti and Alexander Wolf, September 2025
+\end{flushright}
 
 
 

@@ -22,6 +22,7 @@
 #ifndef CONSTELLATION_HPP
 #define CONSTELLATION_HPP
 
+#include "CoordObject.hpp"
 #include "StelObject.hpp"
 #include "StelTranslator.hpp"
 #include "StelFader.hpp"
@@ -32,7 +33,6 @@
 #include <vector>
 #include <QJsonObject>
 #include <QString>
-#include <QFont>
 
 class StarMgr;
 class StelPainter;
@@ -50,8 +50,9 @@ class StelPainter;
 class Constellation : public StelObject
 {
 	friend class ConstellationMgr;
-private:
+public:
 	static const QString CONSTELLATION_TYPE;
+private:
 	Constellation();
 	~Constellation() override;
 
@@ -72,29 +73,34 @@ private:
 	QString getID() const override { return abbreviation; }
 
 	//! observer centered J2000 coordinates.
-	Vec3d getJ2000EquatorialPos(const StelCore*) const override {return XYZname;}
+	//! These are either automatically computed from all stars forming the constellation lines,
+	//! or from the manually defined label point(s).
+	Vec3d getJ2000EquatorialPos(const StelCore*) const override;
 
-	//! @param record string containing the following whitespace
-	//! separated fields: abbreviation - a three character abbreviation
-	//! for the constellation, a number of lines (pairs), and a list of Hipparcos
-	//! catalogue numbers which, when connected pairwise, form the lines of the
-	//! constellation.
+	//! Specialized implementation of the getRegion method.
+	//! Return the convex hull of the object.
+	SphericalRegionP getRegion() const override {return convexHull;}
+
+	//! @param data a JSON formatted constellation record from index.json
 	//! @param starMgr a pointer to the StarManager object.
 	//! @return false if can't parse record (invalid result!), else true.
-	bool read(const QJsonObject& data, StarMgr *starMgr, bool preferNativeNames);
+	bool read(const QJsonObject& data, StarMgr *starMgr);
 
-	//! Draw the constellation name
-	void drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const;
+	//! Draw the constellation name. Depending on completeness of names and data, there may be a rich set of options to display.
+	void drawName(const Vec3d &xyName, StelPainter& sPainter) const;
 	//! Draw the constellation art
 	void drawArt(StelPainter& sPainter) const;
 	//! Draw the constellation boundary. obsVelocity used for aberration
 	void drawBoundaryOptim(StelPainter& sPainter, const Vec3d &obsVelocity) const;
+	//! Draw the constellation hull. obsVelocity used for aberration
+	void drawHullOptim(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 
 	//! Test if a star is part of a Constellation.
 	//! This member tests to see if a star is one of those which make up
 	//! the lines of a Constellation.
 	//! @return a pointer to the constellation which the star is a part of,
-	//! or Q_NULLPTR if the star is not part of a constellation
+	//! or nullptr if the star is not part of a constellation
+	//! @note: Dark constellations by definition cannot be found here.
 	const Constellation* isStarIn(const StelObject*) const;
 
 	//! Get the brightest star in a Constellation.
@@ -104,15 +110,23 @@ private:
 	StelObjectP getBrightestStarInConstellation(void) const;
 
 	//! Get the translated name for the Constellation.
-	QString getNameI18n() const override {return nameI18;}
+	QString getNameI18n() const override {return culturalName.translatedI18n;}
 	//! Get the English name for the Constellation.
-	QString getEnglishName() const override {return englishName;}
-	//! Get the short name for the Constellation (returns the abbreviation).
-	QString getShortName() const {return abbreviation;}
+	QString getEnglishName() const override {return culturalName.translated;}
 	//! Get the native name for the Constellation
-	QString getNativeName() const {return nativeName;}
-	//! Get pronouncement of the native name for the Constellation
-	QString getNativeNamePronounce() const {return nativeNamePronounce;}
+	QString getNameNative() const override {return culturalName.native;}
+	//! Get (translated) pronouncement of the native name for the Constellation
+	QString getNamePronounce() const override {return (culturalName.pronounceI18n.isEmpty() ? culturalName.native : culturalName.pronounceI18n);}
+	//! Get the short name for the Constellation (returns the translated version of abbreviation).
+	QString getShortName() const {return abbreviationI18n;}
+public:
+	//! Combine screen label from various components, depending on settings in SkyCultureMgr
+	QString getScreenLabel() const override;
+	//! Combine InfoString label from various components, depending on settings in SkyCultureMgr
+	QString getInfoLabel() const override;
+private:
+	//! Underlying worker
+	QString getCultureLabel(StelObject::CulturalDisplayStyle style) const;
 	//! Draw the lines for the Constellation.
 	//! This method uses the coords of the stars (optimized for use through
 	//! the class ConstellationMgr only).
@@ -127,6 +141,9 @@ private:
 	//! Turn on and off Constellation boundary rendering.
 	//! @param b new state for boundary drawing.
 	void setFlagBoundaries(const bool b) {boundaryFader=b;}
+	//! Turn on and off Constellation hull rendering.
+	//! @param b new state for hull drawing.
+	void setFlagHull(const bool b) {hullFader=b;}
 	//! Turn on and off Constellation name label rendering.
 	//! @param b new state for name label drawing.
 	void setFlagLabels(const bool b) {nameFader=b;}
@@ -141,6 +158,11 @@ private:
 	bool getFlagBoundaries() const {return boundaryFader;}
 	//! Get the current state of Constellation name label rendering.
 	//! @return true if Constellation name label rendering it turned on, else false.
+	//! Get the current state of Constellation hull rendering.
+	//! @return true if Constellation hull rendering it turned on, else false.
+	bool getFlagHull() const {return hullFader;}
+	//! Get the current state of Constellation name label rendering.
+	//! @return true if Constellation name label rendering it turned on, else false.
 	bool getFlagLabels() const {return nameFader;}
 	//! Get the current state of Constellation art rendering.
 	//! @return true if Constellation art rendering it turned on, else false.
@@ -148,27 +170,44 @@ private:
 
 	//! Check visibility of sky culture elements (using for seasonal rules)
 	//! @return true if sky culture elements rendering it turned on, else false.
-	bool checkVisibility() const;
+	bool isSeasonallyVisible() const;
 
-	//! International name (translated using gettext)
-	QString nameI18;
-	//! Name in English language
-	QString englishName;
-	//! Name in native language (original name of constellation in the source)
-	//! According to practice as of V0.13.1, this may be an empty string.
-	//! If empty, will be filled with englishName.
-	QString nativeName;
-	//! Pronouncement of the native name or the romanized version of native name of constellation
-	QString nativeNamePronounce;
+	//! Compute the convex hull of a constellation (or asterism).
+	//! The convex hull around stars on the sphere is described as problematic.
+	//! For constellations of limited size we follow the recommendation to
+	//! - project the stars (perspectively) around the projectionCenter on a tangential plane on the unit sphere.
+	//! - apply simple Package-Wrapping from Sedgewick 1990, Algorithms in C, chapter 25.
+	//! @note Due to the projection requirement, constellations are not allowed to span more than 90° from projectionCenter. Outliers violating this rule will be silently discarded.
+	//! @param starLines the line array for a single constellation (Constellation::constellation or Asterism::asterism). Every second entry is used.
+	//! @param hullExtension a list of stars (important outliers) that extends the hull without being part of the stick figures.
+	//! @param darkOutline line array of simple Vec3d J2000 equatorial coordinates.
+	//! @param projectionCenter (normalized Vec3d) as computed from these stars when finding the label position (XYZname)
+	//! @param hullRadius For constellations with only 1-2 stars, define hull as circle of this radius (degrees), or a circle of half-distance between the two plus this value (degrees), around projectionCenter.
+	//! @return SphericalRegion in equatorial J2000 coordinates.
+	//! @note the hull should be recreated occasionally as it can change by stellar proper motion.
+	//! @todo Connect some time trigger to recreate automatically, maybe once per year, decade or so.
+	static SphericalRegionP makeConvexHull(const std::vector<StelObjectP> &starLines, const std::vector<StelObjectP> &hullExtension, const std::vector<StelObjectP> &darkLines, const Vec3d projectionCenter, const double hullRadius);
+	//! compute convex hull
+	void makeConvexHull();
+
+
+	//! Constellation name. This is culture-dependent, but in each skyculture a constellation has one name entry only.
+	//! Given multiple aspects of naming, we need all the components and more.
+	CulturalName culturalName;
 	//! Abbreviation (the short name or designation of constellations)
-	//! For non-western, a skyculture designer must invent it. (usually 2-5 letters)
+	//! For non-IAU constellations, a skyculture designer must invent it. (usually 2-5 Latin letters and numerics)
 	//! This MUST be filled and be unique within a sky culture.
+	//! @note Given their possible screen use, using numerical labels as abbreviation is not recommended.
 	QString abbreviation;
-	//! The context for English name of constellation (using for correct translation via gettext)
+	//! Translated version of abbreviation (the short name or designation of constellations)
+	//! Latin-based languages should not translate it, but it may be useful to translate for other glyph systems.
+	QString abbreviationI18n;
+	//! The context for English name of constellation (used for correct translation via gettext)
 	QString context;
-	//! Direction vector pointing on constellation name drawing position
-	Vec3d XYZname;
-	Vec3d XYname;
+	//! Direction vectors pointing on constellation name drawing position (J2000.0 coordinates)
+	//! Usually a single position is computed from averaging star positions forming the constellation, but we can override with an entry in index.json,
+	//! and even give more positions (e.g. for long or split-up constellations like Serpens.
+	QList<Vec3d> XYZname;
 	//! Number of segments in the lines
 	unsigned int numberOfSegments;
 	//! Month [1..12] of start visibility of constellation (seasonal rules)
@@ -177,17 +216,25 @@ private:
 	int endSeason;
 	//! List of stars forming the segments
 	std::vector<StelObjectP> constellation;
+	//! List of coordinates forming the segments of a dark constellation (outlining dark cloud in front of the Milky Way)
+	//! If this is not empty, the constellation is a "dark constellation"
+	std::vector<StelObjectP> dark_constellation;
+	//! List of additional stars (or Nebula objects) defining the hull together with the stars from constellation
+	std::vector<StelObjectP> hullExtension;
 	//! In case this describes a single-star constellation (i.e. just one line segment that starts and ends at the same star),
-	//! or we have a line segment with such single star somewhere within the constellation,
+	//! or we have a line segment with such single star (start==end) somewhere within the constellation,
 	//! we will draw a circle with this opening radius.
 	double singleStarConstellationRadius;
+	//! In case we have a single- or two-star constellation, we will draw a circle with this opening radius.
+	double hullRadius;
 
 	StelTextureSP artTexture;
 	StelVertexArray artPolygon;
 	SphericalCap boundingCap;
+	SphericalRegionP convexHull; //!< The convex hull formed by stars contained in the defined lines (constellation) plus extra stars (hullExtension).
 
 	//! Define whether art, lines, names and boundary must be drawn
-	LinearFader artFader, lineFader, nameFader, boundaryFader;
+	LinearFader artFader, lineFader, nameFader, boundaryFader, hullFader;
 	//! Constellation art opacity
 	float artOpacity;
 	std::vector<std::vector<Vec3d> *> isolatedBoundarySegments;
@@ -197,6 +244,7 @@ private:
 	static Vec3f lineColor;
 	static Vec3f labelColor;
 	static Vec3f boundaryColor;
+	static Vec3f hullColor;
 
 	static bool singleSelected;	
 	static bool seasonalRuleEnabled;

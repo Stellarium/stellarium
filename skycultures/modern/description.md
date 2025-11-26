@@ -71,7 +71,7 @@ The IAU is the only scientifically accepted authority to assign new names to sta
  - [#7]: [Covington, Michael (2002). "Celestial Objects for Modern Telescopes: Practical Amateur Astronomy". Cambridge University Press.](https://books.google.com/books?id=ql7wLq1fP5QC&pg=PA209)
  - [#8]: ["61 Cyg (Piazzi's Flying Star)". Science&Space News. Retrieved June 1, 2015.](http://news.sky-map.org/starview?object_type=1&object_id=2282&object_name=HD+201091&locale=EN)
  - [#9]: [Kruger 60](https://en.wikipedia.org/wiki/Kruger_60)
- - [#10]: [List of Named Stars in Alphabetical Order](http://www.astro.wisc.edu/~dolan/constellations/starname_list.html)
+ - [#10]: [List of Named Stars in Alphabetical Order](https://web.archive.org/web/20220701073320/http://www.astro.wisc.edu/~dolan/constellations/starname_list.html)
  - [#11]: [Jack W. Rhoads (1971). "Reduced Star Catalog Containing 537 Named Stars", Jet Propulsion Laboratory, California Institute of Technology; November 15, 1971](https://ntrs.nasa.gov/citations/19720005197)
  - [#12]: [IAU Naming Stars](https://www.iau.org/public/themes/naming_stars/)
  - [#13]: [Bright Star Catalogue, 5th Revised Ed. (Hoffleit+, 1991)](http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=V/50)
@@ -85,7 +85,7 @@ The IAU is the only scientifically accepted authority to assign new names to sta
  - [#21]: Peters, C. A. F. (1853). "On the Parallax of Argelander's Star". Monthly Notices of the Royal Astronomical Society, Vol. 14, p.49. DOI: 10.1093/mnras/14.2.49
  - [#22]: Maddocks, Hugh C. (1991). "Deep-Sky Name Index 2000.0". Foxon-Maddocks Associates. ISBN 0-9628305-0-X.
  - [#23]: Josef Klepesta, Antonin Rükl (1977). "Constellations: A concise guide in colour". ISBN 0600008932.
- - [#24]: Oswald Thomas (1945). "Atlas der Sternbilder". Salzburg.
+ - [#24]: Oswald Thomas (1945). "Atlas der Sternbilder". Das Bergland-Buch, Salzburg.
  - [#25]: Fred Schaaf (2019). "An Assortment of Asterisms". Sky & Telescope, p.45 (Nov 2019)
  - [#26]: Gary Seronik (2017). "Binocular Highlights Revised & Expanded: 109 Celestial Sights for Binocular Users". F W Publications Inc. ISBN 9781940038445
  - [#27]: Tony Flanders (2019). "Constellation Close-up: Centaurus and Crux". Sky & Telescope, pp.22-27 (Apr 2019).
@@ -117,6 +117,9 @@ The IAU is the only scientifically accepted authority to assign new names to sta
  - [#53]: [Mike Wall (2013). "Strange 'Methuselah' Star Looks Older Than the Universe". Space.com](https://www.space.com/20112-oldest-known-star-universe.html)
  - [#54]: [Space Telescope Science Institute (STScI). "Hubble finds 'birth certificate' of oldest known star." ScienceDaily. ScienceDaily, 7 March 2013](www.sciencedaily.com/releases/2013/03/130307145103.htm)
  - [#55]: [Atlas Coeli Skalnaté Pleso 1950.0](https://en.wikipedia.org/wiki/Skalnate_Pleso_Atlas_of_the_Heavens)
+ - [#56]: [Karlseiche](https://de.wikipedia.org/wiki/Karlseiche)
+ - [#57]: [Mural Quadrant](https://de.wikipedia.org/wiki/Mauerquadrant_(Sternbild))
+ - [#58]: WAA/Alexander Pikhard. Own creation, 2001. https://www.waa.at/bericht/2001/06_sofiexp/20010612/bb20010612.html. 
 
 ## Authors
 

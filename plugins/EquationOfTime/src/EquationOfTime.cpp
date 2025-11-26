@@ -29,10 +29,10 @@
 #include "EquationOfTime.hpp"
 #include "EquationOfTimeWindow.hpp"
 
+#include <QFont>
 #include <QFontMetrics>
 #include <QSettings>
 #include <QPixmap>
-#include <cmath>
 
 StelModule* EquationOfTimeStelPluginInterface::getStelModule() const
 {
@@ -118,6 +118,7 @@ void EquationOfTime::draw(StelCore *core)
 	float ppx = static_cast<float>(params.devicePixelsPerPixel);
 
 	sPainter.setColor(textColor, 1.f);
+	QFont font=QGuiApplication::font();
 	font.setPixelSize(getFontSize());
 	sPainter.setFont(font);
 

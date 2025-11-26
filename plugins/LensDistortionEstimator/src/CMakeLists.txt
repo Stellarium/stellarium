@@ -1,8 +1,9 @@
 FIND_PACKAGE(exiv2)
 
+# NOTE: Old C macros was removed from NLopt library since version 2.9.1 - she cannot be compiled by MSVC2017 without patches anymore.
 CPMFindPackage(NAME NLopt
-               URL https://github.com/stevengj/nlopt/archive/refs/tags/v2.7.1.tar.gz
-               URL_HASH SHA256=db88232fa5cef0ff6e39943fc63ab6074208831dc0031cf1545f6ecd31ae2a1a
+               URL https://github.com/stevengj/nlopt/archive/refs/tags/v2.9.0.tar.gz
+               URL_HASH SHA256=6e899e297485e457ec1bf84844de29921aeef674f9d5caf60277df45dca6ff76
                EXCLUDE_FROM_ALL yes
                OPTIONS "NLOPT_CXX ON" "NLOPT_FORTRAN OFF" "NLOPT_GUILE OFF" "NLOPT_MATLAB OFF" "NLOPT_OCTAVE OFF" "NLOPT_PYTHON OFF" "NLOPT_SWIG OFF" "NLOPT_TESTS OFF"
               )

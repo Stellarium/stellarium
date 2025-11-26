@@ -203,8 +203,7 @@ void LocationDialog::createDialogContent()
 
 	connect(ui->pushButtonReturnToDefault, &QPushButton::clicked, this, [=]{
 		static StelMovementMgr *mMgr=GETSTELMODULE(StelMovementMgr);
-		static LandscapeMgr *lMgr=GETSTELMODULE(LandscapeMgr);
-		mMgr->setFlagTracking(false);      // break orientation lock
+		static LandscapeMgr *lMgr=GETSTELMODULE(LandscapeMgr);		
 		this->setLocationUIvisible(true);  // restore UI
 		core->returnToDefaultLocation();
 		mMgr->resetInitViewPos();
@@ -268,8 +267,6 @@ void LocationDialog::updateFromProgram(const StelLocation& newLocation)
 		ui->pushButtonReturnToDefault->setEnabled(!b);
 	}
 
-	if (newLocation.role!='o')
-		GETSTELMODULE(StelMovementMgr)->setFlagTracking(false);
 	setFieldsFromLocation(newLocation);
 	setLocationUIvisible(newLocation.role!='o'); // hide various detail settings when changing to an "observer"
 }
@@ -604,6 +601,7 @@ StelLocation LocationDialog::locationFromFields() const
 		QString tz=ui->timeZoneNameComboBox->itemData(index).toString();
 		loc.ianaTimeZone = tz;
 	}
+	loc.role='X'; // assert it's valid now
 	return loc;
 }
 
@@ -710,7 +708,6 @@ void LocationDialog::moveToAnotherPlanet()
 		}
 		else
 		{
-			GETSTELMODULE(StelMovementMgr)->setFlagTracking(false);
 			setLocationUIvisible(true);
 			GETSTELMODULE(StelMovementMgr)->resetInitViewPos();
 			// Get rid of selection if we are standing on it...

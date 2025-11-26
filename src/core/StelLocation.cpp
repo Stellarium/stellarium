@@ -39,12 +39,12 @@ int StelLocation::initMetaType()
 	return id;
 }
 
-StelLocation::StelLocation(const QString &lName, const QString &lState, const QString &lRegion, const float lng, const float lat, const int alt,
+StelLocation::StelLocation(const QString &lName, const QString &lState, const QString &lRegion, const QString &plName, const float lng, const float lat, const int alt,
 						   const int populationK, const QString &timeZone, const int bortleIndex, const QChar roleKey, const QString &landscapeID)
 	: name(lName)
 	, region(lRegion)
 	, state(lState)
-	, planetName("Earth")
+	, planetName(plName)
 	, altitude(alt)
 	, lightPollutionLuminance(StelCore::bortleScaleIndexToLuminance(bortleIndex))
 	, landscapeKey(landscapeID)
@@ -57,13 +57,11 @@ StelLocation::StelLocation(const QString &lName, const QString &lState, const QS
 {
 }
 
-StelLocation::StelLocation(const QString &lName, const QString &lState, const QString &lRegion, const QString &plName, const float lng, const float lat, const int alt,
+StelLocation::StelLocation(const QString &lName, const QString &lState, const QString &lRegion, const float lng, const float lat, const int alt,
 						   const int populationK, const QString &timeZone, const int bortleIndex, const QChar roleKey, const QString &landscapeID)
-	: StelLocation(lName, lState, lRegion, lng, lat, alt, populationK, timeZone, bortleIndex, roleKey, landscapeID)
+	: StelLocation(lName, lState, lRegion, "Earth", lng, lat, alt, populationK, timeZone, bortleIndex, roleKey, landscapeID)
 {
-	planetName=plName;
 }
-
 
 // Output the location as a string ready to be stored in the user_location file
 QString StelLocation::serializeToLine() const
@@ -98,6 +96,10 @@ QString StelLocation::getID() const
 
 float StelLocation::getLatitude(bool suppressObserver)  const
 {
+#ifndef NDEBUG
+	if (!isValid())
+		qCritical() << "Invalid Location:" << serializeToLine();
+#endif
 	if (!suppressObserver && role==QChar('o'))
 		return 90.f;
 	else
@@ -106,6 +108,10 @@ float StelLocation::getLatitude(bool suppressObserver)  const
 
 float StelLocation::getLongitude(bool suppressObserver) const
 {
+#ifndef NDEBUG
+	if (!isValid())
+		qCritical() << "Invalid Location:" << serializeToLine();
+#endif
 	if (!suppressObserver && role==QChar('o'))
 		return 0.f;
 	else
@@ -274,3 +280,16 @@ double StelLocation::getAzimuthForLocation(double longTarget, double latTarget) 
 {
 	return getAzimuthForLocation(static_cast<double>(longitude), static_cast<double>(latitude), longTarget, latTarget);
 }
+
+bool StelLocation::isValid() const
+{
+	if (role == '!')
+		return false;
+
+	// Some ill-fated online lookups may have retrieved garbage. Not sure if there is a better heuristic?
+	if (longitude==0. && latitude==0.)
+		return (planetName.length()>0);
+
+	return true;
+}
+

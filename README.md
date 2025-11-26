@@ -17,7 +17,7 @@ If you are new to Stellarium, go to [www.stellarium.org](https://www.stellarium.
 
 ## Installation Instructions & Quick Start
 
-Please refer to the [User Guide, Getting Started section](https://github.com/Stellarium/stellarium/releases/download/v25.1/stellarium_user_guide-25.1-1.pdf).
+Please refer to the [User Guide, Getting Started section](https://github.com/Stellarium/stellarium/releases/download/v25.3/stellarium_user_guide-25.3-1.pdf).
 
 ## Get & build the code
 
@@ -41,3 +41,6 @@ Thank you to all [our backers and sponsors](BACKERS.md)!  Become a [backer](http
 
 ## Code Signing
 Windows packages of this program uses free code signing provided by [SignPath.io](https://signpath.io?utm_source=foundation&utm_medium=github&utm_campaign=stellarium), and a free code signing certificate by the [SignPath Foundation](https://signpath.org?utm_source=foundation&utm_medium=github&utm_campaign=stellarium)
+
+## SAST Tools
+[PVS-Studio](https://pvs-studio.com/pvs-studio/?utm_source=website&utm_medium=github&utm_campaign=open_source) - static analyzer for C, C++, C#, and Java code.

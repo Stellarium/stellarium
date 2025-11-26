@@ -74,8 +74,9 @@ An archive of all available versions is available at our GitHub page --- \url{ht
 \begin{enumerate}
 \item Double click on the installer file you downloaded:
 \begin{itemize}
-\item \file{stellarium-\StelVersion-win64.exe} for 64-bit Windows 7 and later.
-\item \file{stellarium-\StelVersion-win32.exe} for 32-bit Windows 7 and later.
+\item \file{stellarium-\StelVersion-qt6-win64.exe} for 64-bit Windows 10 and later.
+\item \file{stellarium-\StelVersion-qt6-arm64.exe} for Windows 10 and later on ARM64 device.
+\item \file{stellarium-\StelVersion-qt5-win64.exe} for 64-bit Windows 7 and later.
 \end{itemize}
 \item Follow the on-screen instructions.
 \end{enumerate}
@@ -130,7 +131,22 @@ You must build Stellarium from sources. Please follow instructions from the wiki
 For Ubuntu 16.04 LTS, follow instructions\footnote{\url{https://ubuntu-mate.community/t/tutorial-activate-opengl-driver-for-ubuntu-mate-16-04/7094}}. 
 	
 Note that as of December 2019 the 3D planets do not work on Raspberry Pi 2/3, and DSS or HiPS surveys seem to cause issues after a while.
-	
+
+\subsection{*BSD/Solaris/OpenIndiana}
+\label{sec:GettingStarted:Installation:UNIX}
+
+Check if your operating system has a package or port for Stellarium already --- 
+if so you're probably best off using it. If not, you can download and build
+the source.
+
+\subsection{Haiku}
+\label{sec:GettingStarted:Installation:Haiku}
+
+Please use \textbf{HaikuDepot} or open \textbf{Terminal} and type:
+\begin{commands}
+pkgman install stellarium
+\end{commands}
+to install the Stellarium.
 
 \section{Running Stellarium}
 \label{sec:GettingStarted:Running}
@@ -192,8 +208,21 @@ Double click on the \emph{Stellarium} application.  Add it to your
 \label{sec:GettingStarted:Running:Linux}
 
 If your distribution had a package you'll probably already have an
-item in the GNOME or KDE application menus. If not, just open a
+item in the \textbf{GNOME} or \textbf{KDE} application menus. If not, just open a
 terminal and type \texttt{stellarium}.
+
+\subsection{*BSD/Solaris/OpenIndiana}
+\label{sec:GettingStarted:Running:UNIX}
+
+If your operating system had a package or port you'll probably 
+already have an item in the \textbf{GNOME} or \textbf{KDE} application menus. 
+If not, just open a terminal and type \texttt{stellarium}.
+
+\subsection{Haiku}
+\label{sec:GettingStarted:Running:Haiku}
+
+If you had installed a package you'll already have an
+item in the \textbf{Applications} menus.
 
 
 \section{Troubleshooting}

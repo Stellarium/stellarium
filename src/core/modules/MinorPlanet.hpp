@@ -74,6 +74,8 @@ public:
 	QString getNameI18n(void) const override;
 	//! gets an IAU provisional designation.
 	QString getIAUDesignation() const override { return iauDesignationText; }
+	//! get english name without the minor planet's number
+	QString getCommonEnglishName(void) const { return englishName; }
 
 	//! set the minor planet's number, if any.
 	//! The number should be specified as an additional parameter, as
@@ -122,11 +124,8 @@ public:
 protected:
 	// components for Planet::getInfoString() that are overridden here:
 	QString getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const override;
-	QString getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const override;
 	//! Any flag=Extra information to be displayed at the end
 	QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const override;
-
-	QString getDiscoveryCircumstances() const override;
 
 private:
 	int minorPlanetNumber;
@@ -140,9 +139,6 @@ private:
 
 	float b_v;
 	QString specT, specB;
-	// Discovery data
-	QString discoverer;
-	QString discoveryDate;
 };
 
 #endif // MINORPLANET_HPP

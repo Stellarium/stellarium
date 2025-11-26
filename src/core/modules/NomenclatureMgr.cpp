@@ -32,6 +32,7 @@
 
 #include <QSettings>
 #include <QFile>
+#include <QFont>
 #include <QDir>
 #include <QBuffer>
 #include <QRegularExpression>
@@ -39,7 +40,7 @@
 NomenclatureMgr::NomenclatureMgr() : StelObjectModule()
 {
 	setObjectName("NomenclatureMgr");
-	font.setPixelSize(StelApp::getInstance().getScreenFontSize());
+	fontSize = StelApp::getInstance().getScreenFontSize();
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 	ssystem = GETSTELMODULE(SolarSystem);
 	setForceItems(true);
@@ -268,7 +269,7 @@ void NomenclatureMgr::loadNomenclature()
 		missingPlanets.removeDuplicates();
 		if (!missingPlanets.isEmpty())
 			// Nothing to worry about - We still don't include all objects.
-			qInfo().noquote() << "INFO: Cannot find these planetary objects to assign nomenclature items:" << missingPlanets.join(", ");
+			qInfo().noquote() << "Cannot find these planetary objects to assign nomenclature items:" << missingPlanets.join(", ");
 	}
 }
 
@@ -290,6 +291,8 @@ void NomenclatureMgr::draw(StelCore* core)
 	if (NomenclatureItem::labelsFader.getInterstate()<=0.f)
 	    return;
 
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
 	painter.setFont(font);
 	const SphericalCap& viewportRegion = painter.getProjector()->getBoundingCap();
 	const float fov=core->getProjection(StelCore::FrameJ2000)->getFov();
@@ -342,7 +345,12 @@ void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
 
 		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
-		painter.drawSprite2dMode(static_cast<float>(screenpos[0]), static_cast<float>(screenpos[1]), 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime()*40.));
+		const float x = screenpos[0];
+		const float y = screenpos[1];
+		const float angle = static_cast<float>(StelApp::getInstance().getAnimationTime()) * 40;
+		const float scale = StelApp::getInstance().getScreenScale();
+		const float radius = 13.f * scale;
+		painter.drawSprite2dMode(x, y, radius, angle);
 	}
 }
 

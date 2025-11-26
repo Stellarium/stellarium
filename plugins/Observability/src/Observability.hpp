@@ -19,13 +19,11 @@
 #define OBSERVABILITY_HPP
 
 #include "StelModule.hpp"
-#include <QFont>
 #include <QString>
 #include <QPair>
 #include "VecMath.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
-#include "StelFader.hpp"
 #include "StelLocation.hpp"
 
 class QPixmap;
@@ -421,7 +419,6 @@ private:
 	//! @name GUI elements
 	//! @{
 	//! Parameters for the graphics.
-	QFont font;
 	Vec3f fontColor;
 	bool flagShowReport;
 	int fontSize;

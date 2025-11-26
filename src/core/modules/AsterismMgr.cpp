@@ -27,11 +27,9 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "Planet.hpp"
-#include "StelUtils.hpp"
 
 #include <vector>
 #include <QDebug>
@@ -41,6 +39,7 @@
 #include <QString>
 #include <QStringList>
 #include <QDir>
+#include <QFont>
 
 // constructor which loads all data from appropriate files
 AsterismMgr::AsterismMgr(StarMgr *_hip_stars)
@@ -53,6 +52,7 @@ AsterismMgr::AsterismMgr(StarMgr *_hip_stars)
         , linesFadeDuration(1.f)
         , namesFadeDuration(1.f)
         , rayHelpersFadeDuration(1.f)
+	, fontSize(14)
         , asterismLineThickness(1)
         , rayHelperThickness(1)
 {
@@ -118,6 +118,7 @@ double AsterismMgr::getCallOrder(StelModuleActionName actionName) const
 
 void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
+	static QSettings *conf=StelApp::getInstance().getSettings();
 	currentSkyCultureID = skyCulture.id;
 
 	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
@@ -141,11 +142,36 @@ void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 		asterisms.clear();
 		asterisms.resize(skyCulture.asterisms.size());
 		unsigned readOK = 0;
+
+		// Configure exclusion by user preference!
+		QString exclude=conf->value(QString("SCExcludeReferences/%1").arg(currentSkyCultureID), QString()).toString();
+		QSet<int>excludeRefs;
+		if (!exclude.isEmpty())
+		{
+	#if  (QT_VERSION<QT_VERSION_CHECK(5,14,0))
+			QStringList excludeRefStrings=exclude.split(',', QString::SkipEmptyParts);
+	#else
+			QStringList excludeRefStrings=exclude.split(',', Qt::SkipEmptyParts);
+	#endif
+			QMutableListIterator<QString> it(excludeRefStrings);
+			while (it.hasNext())
+			{
+				bool ok;
+				int numRef=it.next().toInt(&ok); // ok=false for strings e.g. from asterisms
+				if (ok)
+				{
+					excludeRefs.insert(numRef);
+					it.remove();
+				}
+			}
+			qInfo() << "Skyculture" << currentSkyCultureID << "configured to exclude asterisms referenced from" << excludeRefs;
+		}
+
 		for (unsigned n = 0, m=0; n < asterisms.size(); ++n, ++m)
 		{
 			auto& aster = asterisms[n];
 			aster = new Asterism;
-			if (aster->read(skyCulture.asterisms[m].toObject(), hipStarMgr))
+			if (aster->read(skyCulture.asterisms[m].toObject(), hipStarMgr, excludeRefs))
 			{
 				aster->lineFader.setDuration(static_cast<int>(linesFadeDuration * 1000.f));
 				aster->rayHelperFader.setDuration(static_cast<int>(rayHelpersFadeDuration * 1000.f));
@@ -220,17 +246,14 @@ Vec3f AsterismMgr::getLabelsColor() const
 
 void AsterismMgr::setFontSize(const int newFontSize)
 {
-	if ((asterFont.pixelSize() - newFontSize) != 0)
-	{
-		asterFont.setPixelSize(newFontSize);
-		StelApp::immediateSave("viewing/asterism_font_size", newFontSize);
-		emit fontSizeChanged(newFontSize);
-	}
+	fontSize=newFontSize;
+	StelApp::immediateSave("viewing/asterism_font_size", newFontSize);
+	emit fontSizeChanged(newFontSize);
 }
 
 int AsterismMgr::getFontSize() const
 {
-	return asterFont.pixelSize();
+	return fontSize;
 }
 
 void AsterismMgr::setAsterismLineThickness(const int thickness)
@@ -263,10 +286,17 @@ void AsterismMgr::draw(StelCore* core)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
-	sPainter.setFont(asterFont);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(fontSize);
+	sPainter.setFont(font);
 	drawLines(sPainter, core);
 	drawRayHelpers(sPainter, core);
-	drawNames(sPainter);
+	Vec3d vel(0.);
+	if (core->getUseAberration())
+	{
+		vel = core->getAberrationVec(core->getJDE());
+	}
+	drawNames(sPainter, vel);
 }
 
 // Draw asterisms lines
@@ -316,29 +346,28 @@ void AsterismMgr::drawRayHelpers(StelPainter& sPainter, const StelCore* core) co
 }
 
 // Draw the names of all the asterisms
-void AsterismMgr::drawNames(StelPainter& sPainter) const
+void AsterismMgr::drawNames(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
 	if (!hasAsterism)
 		return;
-
-	StelCore *core=StelApp::getInstance().getCore();
 
 	sPainter.setBlending(true);
 	for (auto* asterism : asterisms)
 	{
 		if (!asterism->flagAsterism) continue;
-		// Check if in the field of view
-		Vec3d XYZname=asterism->XYZname;
-		if (core->getUseAberration())
-		{
-			const Vec3d vel = core->getAberrationVec(core->getJDE());
-			XYZname.normalize();
-			XYZname+=vel;
-			XYZname.normalize();
-		}
 
-		if (sPainter.getProjector()->projectCheck(XYZname, asterism->XYname))
-			asterism->drawName(sPainter);
+		for (int i=0; i<asterism->XYZname.size(); ++i)
+		{
+			Vec3d XYZname=asterism->XYZname.at(i);
+			XYZname.normalize();
+			XYZname+=obsVelocity;
+			XYZname.normalize();
+
+			Vec3d xyName;
+			// Check if in the field of view
+			if (sPainter.getProjector()->projectCheck(XYZname, xyName))
+				asterism->drawName(xyName, sPainter);
+		}
 	}
 }
 
@@ -352,19 +381,34 @@ Asterism* AsterismMgr::findFromAbbreviation(const QString& abbreviation) const
 	return nullptr;
 }
 
-
-// Can't find asterism from a position because it's not well localized
-QList<StelObjectP> AsterismMgr::searchAround(const Vec3d&, double, const StelCore*) const
-{
-	return QList<StelObjectP>();
-}
-
 void AsterismMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	for (auto* asterism : asterisms)
 	{
-		asterism->nameI18 = trans.qtranslate(asterism->englishName, asterism->context);
+		const QString context = asterism->context;
+		asterism->culturalName.translatedI18n = trans.tryQtranslate(asterism->culturalName.translated, context);
+		if (asterism->culturalName.translatedI18n.isEmpty())
+		{
+			if (context.isEmpty())
+				asterism->culturalName.translatedI18n = q_(asterism->culturalName.translated);
+			else
+				asterism->culturalName.translatedI18n = qc_(asterism->culturalName.translated, context);
+		}
+		asterism->culturalName.pronounceI18n = trans.tryQtranslate(asterism->culturalName.pronounce, context);
+		if (asterism->culturalName.pronounceI18n.isEmpty())
+		{
+			if (context.isEmpty())
+				asterism->culturalName.pronounceI18n = q_(asterism->culturalName.pronounce);
+			else
+				asterism->culturalName.pronounceI18n = qc_(asterism->culturalName.pronounce, context);
+		}
+		const QString abbrContext = "abbreviation"; // fixed context for all abbreviations
+		asterism->abbreviationI18n = trans.tryQtranslate(asterism->abbreviation, abbrContext);
+		if (asterism->abbreviationI18n.isEmpty())
+		{
+			asterism->abbreviationI18n = qc_(asterism->abbreviation, abbrContext);
+		}
 	}
 }
 
@@ -449,26 +493,25 @@ bool AsterismMgr::getFlagLabels(void) const
 
 StelObjectP AsterismMgr::searchByNameI18n(const QString& nameI18n) const
 {
-	QString objw = nameI18n.toUpper();
-
+	QString nameI18nUpper = nameI18n.toUpper();
 	for (auto* asterism : asterisms)
 	{
-		QString objwcap = asterism->nameI18.toUpper();
-		if (objwcap == objw) return asterism;
+		if (asterism->culturalName.translatedI18n.toUpper() == nameI18nUpper) return asterism;
+		if (asterism->culturalName.pronounceI18n.toUpper()  == nameI18nUpper) return asterism;
 	}
 	return nullptr;
 }
 
 StelObjectP AsterismMgr::searchByName(const QString& name) const
 {
-	QString objw = name.toUpper();
+	QString nameUpper = name.toUpper();
 	for (auto* asterism : asterisms)
 	{
-		QString objwcap = asterism->englishName.toUpper();
-		if (objwcap == objw) return asterism;
-
-		objwcap = asterism->abbreviation.toUpper();
-		if (objwcap == objw) return asterism;
+		if (asterism->culturalName.translated.toUpper()      == nameUpper) return asterism;
+		if (asterism->culturalName.native.toUpper()          == nameUpper) return asterism;
+		if (asterism->culturalName.pronounce.toUpper()       == nameUpper) return asterism;
+		if (asterism->culturalName.transliteration.toUpper() == nameUpper) return asterism;
+		if (asterism->abbreviation.toUpper() == nameUpper)                 return asterism;
 	}
 	return nullptr;
 }

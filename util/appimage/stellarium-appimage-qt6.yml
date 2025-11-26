@@ -1,7 +1,7 @@
 version: 1
 
 script:
-    - cmake ../.. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DENABLE_QTWEBENGINE=Off -DENABLE_MEDIA=Off
+    - cmake ../.. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DENABLE_MEDIA=Off
     - make -j3
     - make install DESTDIR=AppDir
 
@@ -33,15 +33,15 @@ AppDir:
       - libqt6positioning6-plugins
       - libqt6printsupport6
       - libqt6concurrent6
-#      - libqt6webchannel6
+      - libqt6webchannel6
       - libqt6serialport6
       - libqt6widgets6
-#      - libqt6webenginecore6
-#      - libqt6webenginecore6-bin
-#      - libqt6webenginewidgets6
-#      - libqt6webenginequick6
-#      - libqt6webenginequickdelegatesqml6
-#      - libqt6webengine6-data
+      - libqt6webenginecore6
+      - libqt6webenginecore6-bin
+      - libqt6webenginewidgets6
+      - libqt6webenginequick6
+      - libqt6webenginequickdelegatesqml6
+      - libqt6webengine6-data
       - libqt6charts6
       - libqt6opengl6
       - libqt6openglwidgets6
@@ -72,6 +72,8 @@ AppDir:
   runtime:
     env:
       APPDIR_LIBRARY_PATH: $APPDIR/lib/x86_64-linux-gnu:$APPDIR/usr/lib/x86_64-linux-gnu:$APPDIR/usr/lib/x86_64-linux-gnu/pulseaudio
+      QTWEBENGINEPROCESS_PATH: $APPDIR/usr/lib/qt6/libexec/QtWebEngineProcess:$APPDIR/usr/lib/x86_64-linux-gnu/qt6/libexec/QtWebEngineProcess
+      QTWEBENGINE_DISABLE_SANDBOX: 1
 
 #  test:
 #    debian:

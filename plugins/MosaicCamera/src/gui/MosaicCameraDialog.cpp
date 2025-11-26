@@ -88,6 +88,15 @@ void MosaicCameraDialog::updateDialogFields()
 	ui->RotationSpinBox->blockSignals(false);
 	ui->visibleCheckBox->blockSignals(false);
 	ui->cameraListWidget->blockSignals(false);
+
+	// don't display anything if the camera name is empty
+	if (currentCameraFullName.isEmpty() || currentCameraDescription.isEmpty() || currentCameraURLDetails.isEmpty())
+	{
+		ui->cameraTextBrowser->setHtml("");
+		return;
+	}
+	QString html = QString("<p><strong>%1</strong></p>\n<p>%2 %3: <a href='%4'>%4</a>.</p>").arg(q_(currentCameraFullName), q_(currentCameraDescription), q_("See more at"), currentCameraURLDetails);
+	ui->cameraTextBrowser->setHtml(html);
 }
 
 void MosaicCameraDialog::setRA(double ra)
@@ -110,9 +119,12 @@ void MosaicCameraDialog::setVisibility(bool visible)
 	ui->visibleCheckBox->setChecked(visible);
 }
 
-void MosaicCameraDialog::setCurrentCameraName(const QString& cameraName)
+void MosaicCameraDialog::setCurrentCameraName(const QString& cameraName, const QString& cameraFullName, const QString& cameraDescription, const QString& cameraURLDetails)
 {
 	currentCameraName = cameraName;
+	currentCameraFullName = cameraFullName;
+	currentCameraDescription = cameraDescription;
+	currentCameraURLDetails = cameraURLDetails;
 	updateDialogFields();
 }
 
@@ -127,9 +139,39 @@ void MosaicCameraDialog::retranslate()
 
 void MosaicCameraDialog::onCameraSelectionChanged(const QString& cameraName)
 {
+	enableUIElements(true);
 	currentCameraName = cameraName;
 	mc->setCurrentCamera(cameraName);
 	updateDialogFields();
+}
+
+void MosaicCameraDialog::enableUIElements(bool state)
+{
+	ui->RASpinBox->setEnabled(state);
+	ui->DecSpinBox->setEnabled(state);
+	ui->RotationSpinBox->setEnabled(state);
+	ui->visibleCheckBox->setEnabled(state);
+	ui->setMosaicToObjectButton->setEnabled(state);
+	ui->setMosaicToViewButton->setEnabled(state);
+	ui->setViewToCameraButton->setEnabled(state);
+}
+
+void MosaicCameraDialog::setCameraNames(const QStringList& cameraNames)
+{
+	ui->cameraListWidget->blockSignals(true);
+	ui->cameraListWidget->clear();
+	ui->cameraListWidget->addItems(cameraNames);
+	if (cameraNames.size() > 0)
+	{
+		currentCameraName = cameraNames[0];
+		mc->setCurrentCamera(currentCameraName);
+	}
+	else
+	{
+		currentCameraName = "";
+	}
+	ui->cameraListWidget->blockSignals(false);
+	enableUIElements(false);
 }
 
 // Initialize the dialog widgets and connect the signals/slots
@@ -139,17 +181,9 @@ void MosaicCameraDialog::createDialogContent()
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(1);
 
-	QStringList cameraNames = mc->getCameraNames();
-	ui->cameraListWidget->addItems(cameraNames);
-	if (!cameraNames.isEmpty())
-	{
-		ui->cameraListWidget->setCurrentRow(0);
-		currentCameraName = cameraNames[0];
-		updateDialogFields();
-	}
+	setCameraNames(mc->getCameraNames());
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-	        this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser;
@@ -187,6 +221,7 @@ void MosaicCameraDialog::createDialogContent()
 	// General tab
 	connectBoolProperty(ui->checkBoxShowButton, "MosaicCamera.showButton");
 	connect(ui->pushButtonSaveSettings, SIGNAL(clicked()), mc, SLOT(saveSettings()));
+	connect(ui->pushButtonRestoreDefaults, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 }
 
 void MosaicCameraDialog::setAboutHtml(void)
@@ -196,19 +231,7 @@ void MosaicCameraDialog::setAboutHtml(void)
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + MOSAICCAMERA_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + MOSAICCAMERA_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Josh Meyers &lt;jmeyers314@gmail.com&gt;</td></tr></table>";
-	html += "<p>" + q_("The Mosaic Camera plugin overlays camera sensor boundaries on the sky.  The position of an overlay is defined by its J2000 RA/Dec coordinates, and a camera rotation angle.") + "</p>";
-	html += "<h3>" + q_("Default Cameras") + "</h3>";
-	html += "<p>" + q_("A number of cameras are available to Stellarium by default.  See the User Guide for information about adding user-defined camera mosaics.") + "</p>";
-	html += "<h4>" + q_("LSSTCam") + "</h4>";
-	html += "<p>" + q_("The largest (as of 2025) digital camera ever assembled at 3.2 gigapixels. Now mounted on the Simonyi Survey Telescope at the Vera C. Rubin Observatory, this camera will be used to execute the Legacy Survey of Space and Time, creating a 10-year multicolor 'movie' of the southern sky. See more at: ") + "<a href=\"https://noirlab.edu/public/programs/vera-c-rubin-observatory/\">https://noirlab.edu/public/programs/vera-c-rubin-observatory/</a>" + "</p>";
-	html += "<h4>" + q_("HSC") + "</h4>";
-	html += "<p>" + q_("Hyper Suprime-Cam. A 900 megapixel camera mounted on the Subaru telescope at the Mauna Kea Observatory.  See more at: ") + "<a href=\"https://www.naoj.org/Projects/HSC/\">https://www.naoj.org/Projects/HSC/</a>" + "</p>";
-	html += "<h4>" + q_("DECam") + "</h4>";
-	html += "<p>" + q_("The Dark Energy Camera. A 570 megapixel camera mounted on the Blanco telescope at the Cerro Tololo Inter-American Observatory.  See more at: ") + "<a href=\"https://www.darkenergysurvey.org/the-des-project/instrument/\">https://www.darkenergysurvey.org/the-des-project/instrument/</a>" + "</p>";
-	html += "<h4>" + q_("MegaPrime") + "</h4>";
-	html += "<p>" + q_("A 378 megapixel camera mounted on the Canada-France-Hawaii Telescope at Mauna Kea Observatory.  See more at: ") + "<a href=\"https://www.cfht.hawaii.edu/Instruments/Imaging/MegaPrime/\">https://www.cfht.hawaii.edu/Instruments/Imaging/MegaPrime/</a>" + "</p>";
-	html += "<h4>" + q_("LATISS") + "</h4>";
-	html += "<p>" + q_("The LSST Atmospheric Transmission Imager and Slitless Spectrograph.  A 16 megapixel camera mounted on the Rubin Observatory Auxiliary telescope.  See more at: ") + "<a href=\"https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/\">https://noirlab.edu/public/programs/vera-c-rubin-observatory/rubin-auxtel/</a>" + "</p>";
+	html += "<p>" + q_("The Mosaic Camera plugin overlays camera sensor boundaries on the sky. The position of an overlay is defined by its J2000 RA/Dec coordinates, and a camera rotation angle.") + "</p>";
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -219,4 +242,15 @@ void MosaicCameraDialog::setAboutHtml(void)
 	}
 
 	ui->aboutTextBrowser->setHtml(html);
+}
+
+void MosaicCameraDialog::restoreDefaults()
+{
+	if (!askConfirmation()) {
+		qDebug() << "[MosaicCamera] Restore defaults cancelled.";
+		return;
+	}
+	qDebug() << "[MosaicCamera] Restoring defaults...";
+	mc->restoreDefaults();
+	setCameraNames(mc->getCameraNames());
 }

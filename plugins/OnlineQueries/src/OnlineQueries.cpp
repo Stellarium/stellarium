@@ -27,11 +27,12 @@
 #include "StarMgr.hpp"
 #include "Planet.hpp"
 #include "NebulaMgr.hpp"
+#include "Constellation.hpp"
+#include "Asterism.hpp"
 #include "StelDialog.hpp"
 #include "OnlineQueries.hpp"
 #include "OnlineQueriesDialog.hpp"
 
-#include <QFontMetrics>
 #include <QSettings>
 #include <QMetaEnum>
 #include <QLoggingCategory>
@@ -103,7 +104,7 @@ void OnlineQueries::init()
 
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveConfiguration()));
 	addAction("actionShow_OnlineQueries",       N_("Online Queries"), N_("Show window for Online Queries"),           this, "enabled", "");
-	//addAction("actionShow_OnlineQueries_AS",    N_("Online Queries"), N_("Call ancient-skies on current selection"),  this, "queryAncientSkies()", "");
+	addAction("actionShow_OnlineQueries_ASE",   N_("Online Queries"), N_("Call All Skies Encyclopaedia on current selection"),  this, "queryASE()", "");
 	addAction("actionShow_OnlineQueries_AAVSO", N_("Online Queries"), N_("Call AAVSO database on current selection"), this, "queryAAVSO()", "");
 	addAction("actionShow_OnlineQueries_GCVS",  N_("Online Queries"), N_("Call GCVS database on current selection"),  this, "queryGCVS()", "");
 	addAction("actionShow_OnlineQueries_WP",    N_("Online Queries"), N_("Call Wikipedia on current selection"),      this, "queryWikipedia()", "");
@@ -145,11 +146,12 @@ void OnlineQueries::loadConfiguration(void)
 	conf->beginGroup("OnlineQueries");
 
 	disableWebView =conf->value("disable_webview", false).toBool();
-	//ancientSkiesUrl=conf->value("ancientskies_url", "https://www.ancient-skies.org/api.php?apikey=fZdn9QsNdCAY4KggkV2T&response=HTML&entity=star&catalog=HIPPARCOS&id=%1").toString();
+	aseUrl         =conf->value("ase_url",          "https://xing.fmi.uni-jena.de/mediawiki/index.php/%1").toString();
 	aavsoHipUrl    =conf->value("aavso_hip_url",    "https://www.aavso.org/vsx/index.php?view=api.object&ident=HIP%1").toString();
 	aavsoOidUrl    =conf->value("aavso_oid_url",    "https://www.aavso.org/vsx/index.php?view=detail.top&oid=%1").toString();
 	gcvsUrl        =conf->value("gcvs_url",         "http://www.sai.msu.su/gcvs/cgi-bin/ident.cgi?cat=Hip+&num=%1").toString();
 	wikipediaUrl   =conf->value("wikipedia_url",    "https://en.wikipedia.org/wiki/%1").toString();
+	customUrl1=conf->value("custom1_url", "").toString();
 	if (!customUrl1.isEmpty() && !customUrl1.contains("%1"))
 	{
 		qWarning() << "OnlineQueries: custom1_url invalid: no '%1' found in " << customUrl1;
@@ -176,7 +178,7 @@ void OnlineQueries::loadConfiguration(void)
 void OnlineQueries::saveConfiguration(void)
 {
 	conf->beginGroup("OnlineQueries");
-	//conf->setValue("ancientskies_url", ancientSkiesUrl);
+	conf->setValue("ase_url", aseUrl);
 	conf->setValue("aavso_hip_url", aavsoHipUrl);
 	conf->setValue("aavso_oid_url", aavsoOidUrl);
 	conf->setValue("gcvs_url", gcvsUrl);
@@ -251,11 +253,11 @@ void OnlineQueries::queryGCVS()
 	query(gcvsUrl, true);
 }
 
-//void OnlineQueries::queryAncientSkies()
-//{
-//	setOutputHtml("<h1>Ancient-Skies</h1><p>querying...</p>");
-//	query(ancientSkiesUrl, true);
-//}
+void OnlineQueries::queryASE()
+{
+	setOutputHtml("<h1>All Skies Encyclopaedia</h1><p>querying...</p>");
+	query(aseUrl, false);
+}
 
 void OnlineQueries::queryCustomSite1()
 {
@@ -348,9 +350,13 @@ void OnlineQueries::query(const QString &url, bool useHip)
 				return;
 			}
 		}
+		else if ((obj->getType()==Constellation::CONSTELLATION_TYPE) || (obj->getType()==Asterism::ASTERISM_TYPE))
+		{
+			objName=obj->getEnglishName();
+		}
 		else
 		{
-			setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(q_("ERROR"), q_("We can request data for stars, planets and deep-sky objects only.")));
+			setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(q_("ERROR"), q_("We can request data for stars, constellations, asterisms, planets and deep-sky objects only.")));
 			return;
 		}
 		setOutputUrl(QUrl(url.arg(objName)));

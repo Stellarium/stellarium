@@ -23,7 +23,6 @@
 
 #include <QMap>
 #include <QStringList>
-#include <QFont>
 #include <QtConcurrent>
 
 #include "StelCore.hpp"
@@ -360,7 +359,7 @@ private:
     LinearFader messageFader;
     QTimer* messageTimer;
     Vec3f textColor;
-    QFont font;
+    int fontSize;
     QString currentMessage;
     bool forceHorizonPolyline; // if true, the LandscapeMgr is called after scene rendering to repeat rendering the landscape polygon, if one has been defined in the current Landscape.
     bool ignoreInitialViewSettings; // if true, don't use start_az_alt_fov from the scenery3d.ini.

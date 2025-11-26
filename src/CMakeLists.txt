@@ -73,6 +73,8 @@ SET(stellarium_lib_SRCS
      core/StelRegionObject.hpp
      core/StelSkyCultureMgr.cpp
      core/StelSkyCultureMgr.hpp
+     core/StelSkyCultureSkyPartition.cpp
+     core/StelSkyCultureSkyPartition.hpp
      core/StelTextureMgr.cpp
      core/StelTextureMgr.hpp
      core/StelTexture.cpp
@@ -187,6 +189,8 @@ SET(stellarium_lib_SRCS
      core/modules/Constellation.hpp
      core/modules/ConstellationMgr.cpp
      core/modules/ConstellationMgr.hpp
+     core/modules/CoordObject.cpp
+     core/modules/CoordObject.hpp
      core/modules/CustomObject.cpp
      core/modules/CustomObject.hpp
      core/modules/CustomObjectMgr.cpp
@@ -497,7 +501,7 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
 ENDIF()
 
 # Setup Qt5/6 dependencies
-SET(STELLARIUM_QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts)
+SET(STELLARIUM_QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts Qt${QT_VERSION_MAJOR}::Positioning)
 IF(NOT USE_BUNDLED_QTCOMPRESS)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::GuiPrivate)
 ELSE()
@@ -537,6 +541,11 @@ ENDIF()
 
 IF(HAIKU)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} network)
+ENDIF()
+
+IF(WIN32 AND NOT MSVC)
+     # explicit link to wbemuuid for mingw setup, otherwise CLSID_WbemLocator and IID_IWbemLocator are undefined.
+     SET(STELMAIN_DEPS ${STELMAIN_DEPS} wbemuuid)
 ENDIF()
 
 # Main executable/library setup

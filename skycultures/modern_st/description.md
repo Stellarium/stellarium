@@ -22,10 +22,11 @@ The method used by Sky & Telescope to determine star names is detailed in the in
  - [#2]: [Constellation](http://en.wikipedia.org/wiki/Constellation) article at Wikipedia
  - [#3]: [Star Catalogue](http://en.wikipedia.org/wiki/Star_catalogue) article at Wikipedia
  - [#4]: [Official IAU constellation information](http://www.iau.org/public/constellations/)
+ - [#5]: [ESO website as name reference](https://iauarchive.eso.org/public/themes/constellations/)
 
 ## Authors
 
-Paul Krizak <paul.krizak@gmail.com> and Jonathan E. Piskor <jonathan.e.piskor@gmail.com>
+Paul Krizak <paul.krizak@gmail.com> and Jonathan E. Piskor <jonathan.e.piskor@gmail.com>, Extended by G. Zotti
 
 ## License
 
