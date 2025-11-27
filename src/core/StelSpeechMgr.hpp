@@ -25,6 +25,7 @@
 #include <QSettings>
 #include <QMap>
 #include <QString>
+#include <QLoggingCategory>
 #if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
 #include <QAudioOutput>
 #include <QTextToSpeech>
@@ -43,7 +44,12 @@ class QVoice;
 //! we use a similar structure to decide what data elements are being narrated.
 //!
 //! @note: This functionality requires Qt6.6 and higher or else just emits the narration to logfile.
+//! @note You can finetune the amount of speech-related messages in the logfile by configuring the logging category stel.Speech.
+//! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.Speech.debug=false;".
+//! By default, for this new module, all messages are displayed. Later we will limit this to the Info category.
 
+
+Q_DECLARE_LOGGING_CATEGORY(Speech)
 
 class StelSpeechMgr : public StelModule
 {
@@ -65,6 +71,9 @@ public:
 	StelSpeechMgr();
 	~StelSpeechMgr() override;
 	void init() override;
+	//! Get the module ID, returns "StelSpeechMgr". BUT FOR WHAT PURPOSE?
+	//virtual QString getModuleID() const {return "StelSpeechMgr";}
+
 
 	//! Retrieve the currently active flags which information bits to narrate
 	const StelObject::InfoStringGroup& getNarrationTextFilters() const;
@@ -78,6 +87,7 @@ signals:
 	void volumeChanged(double);
 #if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
 	void stateChanged(QTextToSpeech::State state);
+	void languageChanged();
 #endif
 
 public slots:
@@ -110,7 +120,24 @@ public slots:
 	//! @return True on success, setting one working engine (the one reported by the engineChanged() signal).
 	//!         False means something is broken and no engine is available.
 	//! emits engineChanged().
-	bool setEngine(QString &engine){return m_speech->setEngine(engine);}
+	bool setEngine(QString &engine); //{return m_speech->setEngine(engine);}
+	//! return engine name
+	QString getEngine(){return m_speech->engine();}
+	//! This returns the currently set speech object. TODO: try to avoid this for better encapsulation!
+	QTextToSpeech* getSpeech(){return m_speech;}
+
+	//! set the voice to be used.
+	//! @arg name must be one of those returned by QTextToSpeech::findVoices().
+	void setVoice(QString &name){QList<QVoice>voices=m_speech->findVoices(name);
+		m_speech->setVoice(voices.first());}
+	//! return the name of the current voice
+	QString getVoice(){return m_speech->voice().name();}
+
+	//! set the voice to be used.
+	//! @arg name must be one of those returned by QTextToSpeech::findVoices().
+	void setLocale(QLocale &locale){m_speech->setLocale(locale);}
+	QLocale getLocale() const {return m_speech->locale();}
+	QString getLanguage(){return m_speech->locale().nativeLanguageName();}
 
 #endif
 
@@ -125,6 +152,10 @@ public slots:
 private:
 	//void onEngineReady();
 	void initNarrationFlagsFromConfig(QSettings *conf);
+	//! Set necessary things after engine change. This is triggered by setEngine()
+	void onEngineReady();
+	//! Set necessary things after language change. This is triggered by StelApp()
+	void onAppLanguageChanged();
 
 #if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
 
