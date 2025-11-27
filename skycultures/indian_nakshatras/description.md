@@ -23,7 +23,7 @@ The planets travel the same path but were not considered.
 
 ### Zodiac
 
-The nakshatra are a lunar system, developed independent of the Babylonian zodiac but later merged with it due to exchange with the Greek culture which had adopted it already. 
+The nakshatra are a lunar frame of reference, developed independent of the Babylonian zodiac but later merged with it due to exchange with the Greek culture which had adopted it already. The term "kṣatra" means "brilliance and "na" is a negation; so "nakṣatra" means "no brilliance"/ "not bright". In most cases, the stars used to define the asterisms that define the lunar stations (nakṣatra) are faint - with the exceptions of Spica, Betelgeuse, Arcturus. The fact that they are not bright and, thus, not easily visible, might have triggered the development of a coordinate system (which is, by definition, invisible). It is unknown when this step of mathematisation happened in the Vedic culture, but its existance in the first millennium BCE is highly likely while the zodiac schema (Rāśi, राशिः) was only adopted in India in the first millennium CE. 
 
 ### Milky Way
 
@@ -78,4 +78,5 @@ Students of the University of Jena, Germany: Vincent Gerlach, Fabian Hofer, Luca
 ## License
 
 CC BY 4.0
+
 
