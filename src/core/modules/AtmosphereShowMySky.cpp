@@ -651,16 +651,15 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 		dynResTimer--;                                              // count down to redraw
 		return true;
 	}
-	// if there is a timeout, we draw with full resolution
-	// if the change is too large, we draw with reduced resolution
-	atmoRes=timeout?1:reducedResolution;
+	// if the change is too big, we draw with reduced resolution, otherwise with full resolution
+	atmoRes=changed?reducedResolution:1;
 	if (prevRes!=atmoRes)
 	{
 		resizeRenderTarget(width, height);
 		qCDebug(Atmo) << "dynResTimer" << dynResTimer << "atmoRes" << atmoRes << "changeOfView" << changeOfView.norm() << changeOfView;
 	}
 	// At reduced resolution, we hurry to redraw - at full resolution, we have time.
-	dynResTimer=timeout?17:5;
+	dynResTimer=changed?5:17;
 	prevRes=atmoRes;
 	prevFov=currFov;
 	prevFad=currFad;
