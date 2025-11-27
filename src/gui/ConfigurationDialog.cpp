@@ -444,7 +444,26 @@ void ConfigurationDialog::createDialogContent()
 	ui->stackListWidget->item(ui->stackListWidget->count()-1)->setHidden(true); // deleting would cause a crash during retranslation. (GH#2544)
 	#endif
 
-#if not ((QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA))
+	// Speech configuration
+#if ((QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA))
+	ui->speechTextEdit->setPlainText(q_("Stellarium is a free open source planetarium for your computer. "
+					 "It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.")
+					 + "\n\n"
+					 + q_("Data can now be delivered with speech output."));
+	populateSpeechEngineCombo();
+	populateVoiceCombo();
+	connect(ui->comboBox_Engine, &QComboBox::currentIndexChanged, this, &ConfigurationDialog::selectSpeechEngine);
+	connect(ui->comboBox_Voice,  &QComboBox::currentIndexChanged, this, &ConfigurationDialog::selectVoice);
+	//ui->comboBox_englishVoice;
+	connectDoubleProperty(ui->spinBox_Pitch        , "StelSpeechMgr.pitch");
+	connectDoubleProperty(ui->spinBox_Volume       , "StelSpeechMgr.volume");
+	connectDoubleProperty(ui->spinBox_Rate         , "StelSpeechMgr.rate");
+	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
+	connect(ui->pushButton_SpeechSay,  &QPushButton::clicked, speechMgr, [this](){QString txt=ui->speechTextEdit->toPlainText(); qDebug() << txt; speechMgr->say(txt);});
+	connect(ui->pushButton_SpeechStop, &QPushButton::clicked, speechMgr, [this]{speechMgr->stop();});
+
+
+#else
 	ui->groupBoxDisplayedFields->setTitle(q_("Displayed fields"));
 
 	const QList<QCheckBox *> narrationCheckboxes({ui->checkBoxName_Narrate, ui->checkBoxCatalogNumbers_Narrate, ui->checkBoxRaDecJ2000_Narrate,
@@ -2426,4 +2445,112 @@ void ConfigurationDialog::storeFontSettings()
 	conf->setValue("gui/base_font_name",	QGuiApplication::font().family());
 	conf->setValue("gui/screen_font_size",	propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
 	conf->setValue("gui/gui_font_size",	propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
+}
+
+
+void ConfigurationDialog::populateSpeechEngineCombo()
+{
+	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
+	const QString currentEngine=speechMgr->getEngine();
+
+	// Populate engine selection list
+	//ui->comboBox_Engine->addItem("Default", "default");
+	QStringList engines = QTextToSpeech::availableEngines();
+	engines.removeOne(QString("mock"));
+	for (const QString &engine : std::as_const(engines))
+	    ui->comboBox_Engine->addItem(engine, engine);
+
+	int idx=ui->comboBox_Engine->findData(currentEngine);
+	ui->comboBox_Engine->setCurrentIndex(qMax(idx, 0));
+	//speechMgr->setEngine(0);
+}
+
+void ConfigurationDialog::selectSpeechEngine(int idx)
+{
+	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
+	QString engineName=ui->comboBox_Engine->itemText(idx);
+	bool success = speechMgr->setEngine(engineName);
+	qDebug() << "ConfigDialog: Speech Engine set to" << engineName << (success ? "OK" : "failed");
+
+	// some engines initialize asynchronously
+	QTextToSpeech *speech=speechMgr->getSpeech();
+	if (speech->state() == QTextToSpeech::Ready) {
+	    onEngineReady();
+	} else {
+	    connect(speech, &QTextToSpeech::stateChanged, this, &ConfigurationDialog::onEngineReady,
+		    Qt::SingleShotConnection);
+	}
+}
+
+// Modelled after the Qt example
+void ConfigurationDialog::onEngineReady()
+{
+	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
+	QTextToSpeech *m_speech=speechMgr->getSpeech();
+
+	if (m_speech->state() != QTextToSpeech::Ready)
+	{
+		//stateChanged(m_speech->state());
+		qCritical() << "Speech engine not ready yet! Not conneting anything.";
+		return;
+	}
+
+    //const bool hasPauseResume = m_speech->engineCapabilities()
+    //                          & QTextToSpeech::Capability::PauseResume;
+    //ui.pauseButton->setVisible(hasPauseResume);
+    //ui.resumeButton->setVisible(hasPauseResume);
+
+    // Block signals of the languages combobox while populating
+    //QSignalBlocker blocker(ui.language);
+
+    //ui.language->clear();
+    //const QList<QLocale> locales = m_speech->availableLocales();
+    //QLocale current = m_speech->locale();
+    //for (const QLocale &locale : locales) {
+    //    QString name(u"%1 (%2)"_s
+    //                 .arg(QLocale::languageToString(locale.language()),
+    //                      QLocale::territoryToString(locale.territory())));
+    //    QVariant localeVariant(locale);
+    //    ui.language->addItem(name, localeVariant);
+    //    if (locale.name() == current.name())
+    //        current = locale;
+    //}
+    //speechMgr->setRate(ui->spinBox_Rate->value());
+    //speechMgr->setPitch(ui->spinBox_Pitch->value());
+    //speechMgr->setVolume(ui->spinBox_Volume->value());
+    // This must reset all other combos...
+	connect(speechMgr, &StelSpeechMgr::languageChanged, this, &ConfigurationDialog::populateVoiceCombo);
+	populateVoiceCombo();
+
+//    connect(m_speech, &QTextToSpeech::stateChanged, this, &MainWindow::stateChanged);
+//    connect(m_speech, &QTextToSpeech::localeChanged, this, &MainWindow::localeChanged);
+
+//    blocker.unblock();
+
+//    localeChanged(current);
+}
+
+void ConfigurationDialog::populateVoiceCombo()
+{
+	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
+	QString currentVoice=speechMgr->getVoice();
+
+	// Populate voice selection list
+	ui->comboBox_Voice->clear();
+	//ui->comboBox_Voice->addItem("Default", "default");
+	const auto voices = speechMgr->getSpeech()->availableVoices();
+	for (const QVoice &voice : voices)
+	    ui->comboBox_Voice->addItem(voice.name(), voice.name());
+
+	int idx=ui->comboBox_Voice->findData(currentVoice);
+	ui->comboBox_Voice->setCurrentIndex(qMax(idx, 0));
+}
+
+void ConfigurationDialog::selectVoice(int idx)
+{
+	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
+	QString voiceName=ui->comboBox_Voice->itemText(idx);
+	speechMgr->setVoice(voiceName);
+	qDebug() << "ConfigDialog: Speech voice set to" << voiceName;
+
 }

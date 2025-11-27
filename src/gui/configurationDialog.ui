@@ -2964,7 +2964,7 @@
           </item>
          </layout>
         </widget>
-		<widget class="QWidget" name="page_Speech">
+	<widget class="QWidget" name="page_Speech">
          <layout class="QVBoxLayout" name="verticalLayout_Narration">
           <property name="spacing">
            <number>0</number>
@@ -3012,8 +3012,8 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="1" colspan="3">
-              <widget class="QTextBrowser" name="textBrowser"/>
+             <item row="0" column="1" colspan="5">
+              <widget class="QPlainTextEdit" name="speechTextEdit"/>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_engine">
@@ -3025,6 +3025,40 @@
              <item row="1" column="1">
               <widget class="QComboBox" name="comboBox_Engine"/>
              </item>
+
+		<item row="1" column="4">
+                  <widget class="QPushButton" name="pushButton_SpeechSay">
+                   <property name="toolTip">
+                    <string>Emit speech synthesis of text from text box</string>
+                   </property>
+                   <property name="text">
+                    <string>Say</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/uibtStart.png</normaloff>
+                     <disabledoff>:/graphicGui/uibtStart-disabled.png</disabledoff>:/graphicGui/uibtStart.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="5">
+                  <widget class="QPushButton" name="pushButton_SpeechStop">
+                   <property name="toolTip">
+                    <string>Stop a running speech</string>
+                   </property>
+                   <property name="text">
+                    <string>Stop</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/uibtStop.png</normaloff>
+                     <disabledoff>:/graphicGui/uibtStop-disabled.png</disabledoff>:/graphicGui/uibtStop.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+
+
+
              <item row="2" column="0">
               <widget class="QLabel" name="label_Voice">
                <property name="text">
@@ -3039,6 +3073,11 @@
                </property>
               </widget>
              </item>
+	     
+
+	     
+	     
+	     
              <item row="3" column="0">
               <widget class="QLabel" name="label_Pitch">
                <property name="text">
@@ -3047,80 +3086,92 @@
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QSpinBox" name="spinBox_Pitch">
+              <widget class="QDoubleSpinBox" name="spinBox_Pitch">
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="decimals">
+                    <number>1</number>
+                   </property>
+
                <property name="minimum">
-                <number>-10</number>
+                <double>-1.0</double>
                </property>
                <property name="maximum">
-                <number>10</number>
+                <double>1.0</double>
+               </property>
+               <property name="singleStep">
+                    <double>0.1</double>
+                   </property>
+                   <property name="value">
+                    <double>0.0</double>
+                   </property>
+              </widget>
+             </item>
+
+             <item row="3" column="2">
+              <widget class="QLabel" name="label_Rate">
+               <property name="text">
+                <string>Rate:</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="2">
+             <item row="3" column="3">
+              <widget class="QDoubleSpinBox" name="spinBox_Rate">
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="decimals">
+                    <number>1</number>
+                   </property>
+
+               <property name="minimum">
+                <double>-1.0</double>
+               </property>
+               <property name="maximum">
+                <double>1.0</double>
+               </property>
+               <property name="singleStep">
+                    <double>0.1</double>
+                   </property>
+                   <property name="value">
+                    <double>0.0</double>
+                   </property>
+              </widget>
+             </item>
+
+
+             <item row="3" column="4">
               <widget class="QLabel" name="label_Volume">
                <property name="text">
                 <string>Volume:</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="3">
-              <widget class="QSpinBox" name="spinBox_Volume">
+             <item row="3" column="5">
+              <widget class="QDoubleSpinBox" name="spinBox_Volume">
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="decimals">
+                    <number>1</number>
+                   </property>
+
                <property name="minimum">
-                <number>0</number>
+                <double>0.0</double>
                </property>
                <property name="maximum">
-                <number>100</number>
+                <double>1.0</double>
                </property>
+               <property name="singleStep">
+                    <double>0.1</double>
+                   </property>
+                   <property name="value">
+                    <double>0.0</double>
+                   </property>
               </widget>
              </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_englishVoice">
-               <property name="text">
-                <string>English voice:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1" colspan="3">
-              <widget class="QComboBox" name="comboBox_englishVoice">
-               <property name="toolTip">
-                <string>Untranslated items will be spoken by this voice.</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_PitchE">
-               <property name="text">
-                <string>Pitch:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QSpinBox" name="spinBox_PitchEnglish">
-               <property name="minimum">
-                <number>-10</number>
-               </property>
-               <property name="maximum">
-                <number>10</number>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="2">
-              <widget class="QLabel" name="label_VolumeE">
-               <property name="text">
-                <string>Volume:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="3">
-              <widget class="QSpinBox" name="spinBox_VolumeEnglish">
-               <property name="minimum">
-                <number>0</number>
-               </property>
-               <property name="maximum">
-                <number>100</number>
-               </property>
-              </widget>
-             </item>
+	     
             </layout>
            </widget>
           </item>
