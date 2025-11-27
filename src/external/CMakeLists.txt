@@ -218,3 +218,7 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND ENABLE_INDI)
         target_link_libraries(indiclient ${ZLIB_LIBRARIES})
     endif()
 ENDIF()
+
+# (SS) 2025-11-27 - Updated to build ERFA C library version 2.0.1
+########## ERFA library (Essential Routines for Fundamental Astronomy, version 2.0.1) ##########
+add_subdirectory(erfa_201)
