@@ -25,6 +25,10 @@
 #include <QDebug>
 #include <QtGlobal>
 
+// (SS) 2025-11-27 Needed to locate ephemeris file for testing JPL Horizons Delta-T
+#include "StelFileMgr.hpp"
+#include "EphemWrapper.hpp"
+
 #include "StelUtils.hpp"
 
 QTEST_GUILESS_MAIN(TestDeltaT)
@@ -211,6 +215,17 @@ void TestDeltaT::initTestCase()
 	genericData <<  2300.0  <<   330.00 <<   30.00;
 	genericData <<  2400.0  <<   610.00 <<   50.00;
 	genericData <<  2500.0  <<  1000.00 <<  100.00;
+
+	// (SS) 2025-11-27 Initialize Stellarium file manager to locate ephemeris files
+	StelFileMgr::init();
+
+	//(SS) 2025-11-27: The linux_p1550p2650.440t file must be in the Stellarium user or installation directory
+	QString de440FilePath = StelFileMgr::findFile("ephem/" + QString(DE440_FILENAME), StelFileMgr::File);
+	if (!de440FilePath.isEmpty())
+	{
+		qInfo() << "Use DE440 ephemeris file" << de440FilePath;
+		EphemWrapper::init_de440(de440FilePath.toLocal8Bit());
+	}
 }
 
 void TestDeltaT::testDeltaTByEspenakMeeus()
@@ -1069,42 +1084,169 @@ void TestDeltaT::testDeltaTByReingoldDershowitzWideDates()
 	}
 }
 
+// (SS) 2025-11-27 Revised test case for JPL Horizons Delta-T validation:
 void TestDeltaT::testDeltaTByJPLHorizons()
 {
-	// NOTE: the test data just an calculated!
-	// http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm with -25.7376 L.A.P. - WTF?!?
-	QVariantList data;
-	data <<   500 << 5401.2;
-	data <<   600 << 4614.0;
-	data <<   700 << 3888.6;
-	data <<   800 << 3225.0;
-	data <<   900 << 2623.8;
-	data << 1000 << 1625.4;
-	data << 1100 << 1265.4;
-	data << 1200 <<   950.4;
-	data << 1300 <<   680.4;
-	data << 1400 <<   455.4;
-	data << 1500 <<   275.4;
+	// NOTE: Test data were obtained from JPL Horizons application which are based on DE441 Ephemerides
+	// source: https://ssd.jpl.nasa.gov/horizons/app.html#/
+	// Settings used with JPL Horizons app:
+	// Ephemeris Type: Observer Table
+	// Target Body: Mercury
+	// Observer Location: Geocentric [code: 500]
+	// Time Specification: Time-Form: JD (Julian Day), Time-Type: (UT)
+	// Table Settings (partial list):
+	//  - checkbox 2, 30
+	//  - Reference frame: ICRF
+	//  - Date/time format: calendar and Julian Day Number
+	//  - Calendar type: Mixed
+	//  - Time digits: HH:MM
+	//  - Rferaction model: no refraction (airless)
+	//  - Range units: astronomical units (au)
+	//  - RTS flag: disabled
+	//  - CSV format: checked
+	//  - Object summary: checked
 
-	while(data.count() >= 2)
+	// Data table structure: JD_UT, deltaT (seconds)
+	QVariantList data;
+	data << -1930633.50000 << 439804.45257; // Random JD values covering time frame: 9999BC-03-20 to 721BC-01-01
+	data << -1688582.04875 << 391890.47426;
+	data << -1446531.73978 << 346739.76079;
+	data << -1204481.28541 << 304352.05489;
+	data << -962439.97134 << 264728.82866;
+	data << -720379.37761 << 227865.60324;
+	data << -478328.56448 << 193766.96684;
+	data << -236278.18537 << 162431.42787;
+	data << 5772.12345 << 133858.93061;
+	data << 247823.42395 << 108049.36547;
+	data << 489874.66318 << 85002.86065;
+	data << 731925.79532 << 64719.41765;
+	data << 973975.36328 << 47199.12994;
+	data << 1216026.92947 << 32441.74710;
+	data << 1458077.49999 << 20447.46882;
+	data << 1523384.48723 << 17628.30720; // Random JD values covering time frame: 721BC-01-01 to 1962-02-20
+	data << 1588691.18456 << 14997.83116;
+	data << 1653998.78296 << 12614.87748;
+	data << 1719305.87213 << 10533.42343;
+	data << 1784612.23865 << 8709.05146;
+	data << 1849919.98126 << 7006.92913;
+	data << 1915226.03956 << 5309.63792;
+	data << 1980533.33681 << 3687.77852;
+	data << 2045840.75298 << 2312.72561;
+	data << 2111147.89432 << 1352.84265;
+	data << 2176454.45721 << 803.99532;
+	data << 2241761.00974 << 436.64238;
+	data << 2307068.25431 << 103.52981;
+	data << 2372375.98746 << 21.69949;
+	data << 2437683.49857 << 33.635380; 
+	data << 2437684.50000 << 34.051667; // Random JD values covering time frame: 1962-02-20 to 2025-01-01
+	data << 2439326.68324 << 37.015633;
+	data << 2440968.12765 << 41.171056;
+	data << 2442610.98457 << 46.183683;
+	data << 2444252.42398 << 51.184311;
+	data << 2445894.00347 << 54.183764;
+	data << 2447536.92384 << 56.184204;
+	data << 2449178.34297 << 60.183836;
+	data << 2450820.76576 << 63.184083;
+	data << 2454104.95603 << 65.184030;
+	data << 2455746.04392 << 66.184080;
+	data << 2457388.52387 << 68.183931;
+	data << 2459030.98735 << 69.184123;
+	data << 2460676.50000 << 69.183919;
+	data << 2460676.54293 << 69.183920; // Random JD values covering time frame: 2025-01-01 to 2650-12-31
+	data << 2486040.37875 << 69.184679;
+	data << 2511404.12977 << 69.182782;
+	data << 2536768.98567 << 69.185498;
+	data << 2562132.53472 << 69.182346;
+	data << 2587496.00345 << 69.185559;
+	data << 2612860.98542 << 69.182768;
+	data << 2638224.27398 << 69.184789;
+	data << 2663588.74930 << 69.183805;
+	data << 2688952.50000 << 69.183588; // Random JD values covering time frame: 2650-01-25 to 9999-12-31
+	data << 2876738.13756 << 69.184765;
+	data << 3084769.85693 << 69.182935;
+	data << 3292800.64289 << 69.185331;
+	data << 3500831.04572 << 69.182564;
+	data << 3708862.59450 << 69.185484;
+	data << 3916893.23856 << 69.182605;
+	data << 4124924.87623 << 69.185213;
+	data << 4332955.99532 << 69.183032;
+	data << 4540986.00234 << 69.184656;
+	data << 4749017.59456 << 69.183699;
+	data << 4957048.05673 << 69.183972;
+	data << 5165079.12845 << 69.184375;
+	data << 5373119.49877 << 69.183192;
+
+	// Moon secular acceleration parameters
+	const double deltaTnDot = -25.82;
+	const bool useDE43x     = false;
+	const bool useDE44x     = true;
+
+	// Pass/Fail criteria +/- 0.1 seconds from 9999BC to 1962-01-20
+	double acceptableError_before_1962 = 0.1;
+	// Pass/Fail criteria +/- 10 microseconds from 1962-02-20 to 2650-01-25
+	double acceptableError_1962_to_2650 = 0.00001;
+	// Pass/Fail criteria +/- 2 millisecond from 2650-01-25 to 9999AD
+	double acceptableError_after_2650 = 0.002;
+
+	while (data.count() >= 2)
 	{
-		int year = data.takeFirst().toInt();
-		int yout, mout, dout;
-		double JD;
-		double expectedResult = data.takeFirst().toDouble();
-		double acceptableError = 1.0; // TODO: Increase accuracy to 0.1 seconds
-		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
-		double result = StelUtils::getDeltaTByJPLHorizons(JD);
-		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
-		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
-		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
-							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
-							.arg(year)
-							.arg(result)
-							.arg(expectedResult)
-							.arg(actualError)
-							.arg(acceptableError)
-							.toUtf8());
+		double JD = data.takeFirst().toDouble();
+
+		if (JD < 2437684.5) // les than 1962-01-20
+		{
+			double expectedResult = data.takeFirst().toDouble();
+			double result         = StelUtils::getDeltaTByJPLHorizons(JD);
+			result += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, useDE43x, useDE44x); // Correction is done only up to 1955.5
+			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+
+			QString dateTime = StelUtils::julianDayToISO8601String(JD, true);
+
+			QVERIFY2(actualError <= acceptableError_before_1962,
+			         QString("date=%1 JD=%2 result=%3 expected=%4 error=%5 acceptable=%6")
+			                 .arg(dateTime)
+			                 .arg(JD, 0, 'f', 5)
+			                 .arg(result, 0, 'f', 5)
+			                 .arg(expectedResult, 0, 'f', 5)
+			                 .arg(actualError, 0, 'f', 5)
+			                 .arg(acceptableError_before_1962, 0, 'f', 5)
+			                 .toUtf8());
+		}
+		else if (JD >= 2437684.5 && JD < 2688976.5) // between 1962-01-20 and 2650-01-25
+		{
+			double expectedResult = data.takeFirst().toDouble();
+			double result         = StelUtils::getDeltaTByJPLHorizons(JD);
+			result += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, useDE43x, useDE44x);
+			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+
+			QString dateTime = StelUtils::julianDayToISO8601String(JD, true);
+
+			QVERIFY2(actualError <= acceptableError_1962_to_2650,
+			         QString("date=%1 JD=%2 result=%3 expected=%4 error=%5 acceptable=%6")
+			                 .arg(dateTime)
+			                 .arg(JD, 0, 'f', 5)
+			                 .arg(result, 0, 'f', 5)
+			                 .arg(expectedResult, 0, 'f', 5)
+			                 .arg(actualError, 0, 'f', 5)
+			                 .arg(acceptableError_1962_to_2650, 0, 'f', 5)
+			                 .toUtf8());
+		}
+		else // after 2650-01-25
+		{
+			double expectedResult = data.takeFirst().toDouble();
+			double result         = StelUtils::getDeltaTByJPLHorizons(JD);
+			result += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, useDE43x, useDE44x);
+			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+			QString dateTime   = StelUtils::julianDayToISO8601String(JD, true);
+			QVERIFY2(actualError <= acceptableError_after_2650,
+			         QString("date=%1 JD=%2 result=%3 expected=%4 error=%5 acceptable=%6")
+			                 .arg(dateTime)
+			                 .arg(JD, 0, 'f', 5)
+			                 .arg(result, 0, 'f', 5)
+			                 .arg(expectedResult, 0, 'f', 5)
+			                 .arg(actualError, 0, 'f', 5)
+			                 .arg(acceptableError_after_2650, 0, 'f', 5)
+			                 .toUtf8());
+		}
 	}
 }
 
