@@ -220,11 +220,15 @@ void TestDeltaT::initTestCase()
 	StelFileMgr::init();
 
 	//(SS) 2025-11-27: The linux_p1550p2650.440t file must be in the Stellarium user or installation directory
-	QString de440FilePath = StelFileMgr::findFile("ephem/" + QString(DE440_FILENAME), StelFileMgr::File);
+	de440FilePath = StelFileMgr::findFile("ephem/" + QString(DE440_FILENAME), StelFileMgr::File);
 	if (!de440FilePath.isEmpty())
 	{
 		qInfo() << "Use DE440 ephemeris file" << de440FilePath;
 		EphemWrapper::init_de440(de440FilePath.toLocal8Bit());
+	}
+	else
+	{
+		qWarning() << "DE440 ephemeris file not found, JPL Horizons test will not be performed";
 	}
 }
 
@@ -882,7 +886,6 @@ void TestDeltaT::testDeltaTByStephensonMorrisonHohenkerk2016SpecialDates()
 	}
 }
 
-
 void TestDeltaT::testDeltaTByMeeusSimons()
 {
 	// test data from Meeus, Jean, "The Effect of Delta T on Astronomical Calculations",
@@ -1203,65 +1206,70 @@ void TestDeltaT::testDeltaTByJPLHorizons()
 	// Pass/Fail criteria +/- 2 millisecond from 2650-01-25 to 9999AD
 	double acceptableError_after_2650 = 0.002;
 
-	while (data.count() >= 2)
-	{
-		double JD = data.takeFirst().toDouble();
-
-		if (JD < 2437684.5) // les than 1962-01-20
+	if (de440FilePath.isEmpty())
+		qWarning() << "JPL Horizons test has been marked as 'passed' (It cannot be passed, because DE440 file has not been found)!";
+	else
+	{	
+		while (data.count() >= 2)
 		{
-			double expectedResult = data.takeFirst().toDouble();
-			double result         = StelUtils::getDeltaTByJPLHorizons(JD);
-			result += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, useDE43x, useDE44x); // Correction is done only up to 1955.5
-			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+			double JD = data.takeFirst().toDouble();
 
-			QString dateTime = StelUtils::julianDayToISO8601String(JD, true);
+			if (JD < 2437684.5) // les than 1962-01-20
+			{
+				double expectedResult = data.takeFirst().toDouble();
+				double result         = StelUtils::getDeltaTByJPLHorizons(JD);
+				result += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, useDE43x, useDE44x); // Correction is done only up to 1955.5
+				double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
 
-			QVERIFY2(actualError <= acceptableError_before_1962,
-			         QString("date=%1 JD=%2 result=%3 expected=%4 error=%5 acceptable=%6")
-			                 .arg(dateTime)
-			                 .arg(JD, 0, 'f', 5)
-			                 .arg(result, 0, 'f', 5)
-			                 .arg(expectedResult, 0, 'f', 5)
-			                 .arg(actualError, 0, 'f', 5)
-			                 .arg(acceptableError_before_1962, 0, 'f', 5)
-			                 .toUtf8());
-		}
-		else if (JD >= 2437684.5 && JD < 2688976.5) // between 1962-01-20 and 2650-01-25
-		{
-			double expectedResult = data.takeFirst().toDouble();
-			double result         = StelUtils::getDeltaTByJPLHorizons(JD);
-			result += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, useDE43x, useDE44x);
-			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+				QString dateTime = StelUtils::julianDayToISO8601String(JD, true);
 
-			QString dateTime = StelUtils::julianDayToISO8601String(JD, true);
+				QVERIFY2(actualError <= acceptableError_before_1962,
+						QString("date=%1 JD=%2 result=%3 expected=%4 error=%5 acceptable=%6")
+								.arg(dateTime)
+								.arg(JD, 0, 'f', 5)
+								.arg(result, 0, 'f', 5)
+								.arg(expectedResult, 0, 'f', 5)
+								.arg(actualError, 0, 'f', 5)
+								.arg(acceptableError_before_1962, 0, 'f', 5)
+								.toUtf8());
+			}
+			else if (JD >= 2437684.5 && JD < 2688976.5) // between 1962-01-20 and 2650-01-25
+			{
+				double expectedResult = data.takeFirst().toDouble();
+				double result         = StelUtils::getDeltaTByJPLHorizons(JD);
+				result += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, useDE43x, useDE44x);
+				double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
 
-			QVERIFY2(actualError <= acceptableError_1962_to_2650,
-			         QString("date=%1 JD=%2 result=%3 expected=%4 error=%5 acceptable=%6")
-			                 .arg(dateTime)
-			                 .arg(JD, 0, 'f', 5)
-			                 .arg(result, 0, 'f', 5)
-			                 .arg(expectedResult, 0, 'f', 5)
-			                 .arg(actualError, 0, 'f', 5)
-			                 .arg(acceptableError_1962_to_2650, 0, 'f', 5)
-			                 .toUtf8());
-		}
-		else // after 2650-01-25
-		{
-			double expectedResult = data.takeFirst().toDouble();
-			double result         = StelUtils::getDeltaTByJPLHorizons(JD);
-			result += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, useDE43x, useDE44x);
-			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
-			QString dateTime   = StelUtils::julianDayToISO8601String(JD, true);
-			QVERIFY2(actualError <= acceptableError_after_2650,
-			         QString("date=%1 JD=%2 result=%3 expected=%4 error=%5 acceptable=%6")
-			                 .arg(dateTime)
-			                 .arg(JD, 0, 'f', 5)
-			                 .arg(result, 0, 'f', 5)
-			                 .arg(expectedResult, 0, 'f', 5)
-			                 .arg(actualError, 0, 'f', 5)
-			                 .arg(acceptableError_after_2650, 0, 'f', 5)
-			                 .toUtf8());
-		}
+				QString dateTime = StelUtils::julianDayToISO8601String(JD, true);
+
+				QVERIFY2(actualError <= acceptableError_1962_to_2650,
+				         QString("date=%1 JD=%2 result=%3 expected=%4 error=%5 acceptable=%6")
+				                 .arg(dateTime)
+				                 .arg(JD, 0, 'f', 5)
+				                 .arg(result, 0, 'f', 5)
+				                 .arg(expectedResult, 0, 'f', 5)
+				                 .arg(actualError, 0, 'f', 5)
+				                 .arg(acceptableError_1962_to_2650, 0, 'f', 5)
+				                 .toUtf8());
+			}
+			else // after 2650-01-25
+			{
+				double expectedResult = data.takeFirst().toDouble();
+				double result         = StelUtils::getDeltaTByJPLHorizons(JD);
+				result += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, useDE43x, useDE44x);
+				double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+				QString dateTime   = StelUtils::julianDayToISO8601String(JD, true);
+				QVERIFY2(actualError <= acceptableError_after_2650,
+				         QString("date=%1 JD=%2 result=%3 expected=%4 error=%5 acceptable=%6")
+				                 .arg(dateTime)
+				                 .arg(JD, 0, 'f', 5)
+				                 .arg(result, 0, 'f', 5)
+				                 .arg(expectedResult, 0, 'f', 5)
+				                 .arg(actualError, 0, 'f', 5)
+				                 .arg(acceptableError_after_2650, 0, 'f', 5)
+				                 .toUtf8());
+			}
+		}				
 	}
 }
 
