@@ -2451,96 +2451,119 @@ void ConfigurationDialog::storeFontSettings()
 void ConfigurationDialog::populateSpeechEngineCombo()
 {
 	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
-	const QString currentEngine=speechMgr->getEngine();
+	if (speechMgr->enabled())
+	{
+		const QString currentEngine=speechMgr->getEngine();
 
-	// Populate engine selection list
-	//ui->comboBox_Engine->addItem("Default", "default");
-	QStringList engines = QTextToSpeech::availableEngines();
-	engines.removeOne(QString("mock"));
-	for (const QString &engine : std::as_const(engines))
-	    ui->comboBox_Engine->addItem(engine, engine);
+		// Populate engine selection list
+		QStringList engines = QTextToSpeech::availableEngines();
+		engines.removeOne(QString("mock"));
+		for (const QString &engine : std::as_const(engines))
+			ui->comboBox_Engine->addItem(engine, engine);
 
-	int idx=ui->comboBox_Engine->findData(currentEngine);
-	ui->comboBox_Engine->setCurrentIndex(qMax(idx, 0));
-	//speechMgr->setEngine(0);
+		if (!currentEngine.isEmpty())
+		{
+			int idx=ui->comboBox_Engine->findData(currentEngine);
+			if (idx>=0)
+				ui->comboBox_Engine->setCurrentIndex(idx);
+			else
+			{
+				// Should not be possible: the previously configured and initialized engine is no longer listed in availableEngines?
+				qCCritical(Speech) << "Initialized speech engine not available?" << currentEngine;
+				selectSpeechEngine(0);
+				Q_ASSERT(0);
+			}
+		}
+	}
+	else
+	{
+		// disable UI elements on this page visually...
+		ui->speechTextEdit->setPlainText(q_("Speech output disabled. No engine found?"));
+		QList<QWidget*> widgets=QList<QWidget*>({
+			ui->comboBox_Engine, ui->comboBox_Voice,
+			ui->pushButton_SpeechSay, ui->pushButton_SpeechStop,
+			ui->spinBox_Pitch, ui->spinBox_Rate, ui->spinBox_Volume,
+			ui->speechTextEdit});
+		for (auto w: widgets)
+			w->setDisabled(true);
+
+		// and hide the now useless selection checkboxes
+		QList<QCheckBox*> checks= QList<QCheckBox*>({
+			ui->checkBoxName_Narrate,
+			ui->checkBoxCatalogNumbers_Narrate,
+			ui->checkBoxVisualMag_Narrate,
+			ui->checkBoxAbsoluteMag_Narrate,
+			ui->checkBoxRaDecJ2000_Narrate,
+			ui->checkBoxRaDecOfDate_Narrate,
+			ui->checkBoxHourAngle_Narrate,
+			ui->checkBoxAltAz_Narrate,
+			ui->checkBoxDistance_Narrate,
+			ui->checkBoxVelocity_Narrate,
+			ui->checkBoxProperMotion_Narrate,
+			ui->checkBoxSize_Narrate,
+			ui->checkBoxExtra_Narrate,
+			ui->checkBoxGalacticCoordinates_Narrate,
+			ui->checkBoxSupergalacticCoordinates_Narrate,
+			ui->checkBoxOtherCoords_Narrate,
+			ui->checkBoxElongation_Narrate,
+			ui->checkBoxType_Narrate,
+			ui->checkBoxEclipticCoordsJ2000_Narrate,
+			ui->checkBoxEclipticCoordsOfDate_Narrate,
+			ui->checkBoxConstellation_Narrate,
+			//ui->checkBoxCulturalConstellation_Narrate, // TODO
+			ui->checkBoxSiderealTime_Narrate,
+			ui->checkBoxRTSTime_Narrate,
+			ui->checkBoxSolarLunarPosition_Narrate
+		});
+		for (auto chk: checks)
+			chk->hide();
+	}
 }
 
 void ConfigurationDialog::selectSpeechEngine(int idx)
 {
 	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
 	QString engineName=ui->comboBox_Engine->itemText(idx);
-	bool success = speechMgr->setEngine(engineName);
-	qDebug() << "ConfigDialog: Speech Engine set to" << engineName << (success ? "OK" : "failed");
+	speechMgr->setEngine(engineName);
+	qCDebug(Speech) << "ConfigDialog: Speech Engine set to" << engineName ;
 
 	// some engines initialize asynchronously
-	QTextToSpeech *speech=speechMgr->getSpeech();
-	if (speech->state() == QTextToSpeech::Ready) {
-	    onEngineReady();
-	} else {
-	    connect(speech, &QTextToSpeech::stateChanged, this, &ConfigurationDialog::onEngineReady,
-		    Qt::SingleShotConnection);
-	}
+	if (speechMgr->getState() == QTextToSpeech::Ready)
+	    onSpeechReady();
+	else
+	    connect(speechMgr, &StelSpeechMgr::speechReady, this, &ConfigurationDialog::onSpeechReady, Qt::SingleShotConnection);
 }
 
 // Modelled after the Qt example
-void ConfigurationDialog::onEngineReady()
+void ConfigurationDialog::onSpeechReady()
 {
-	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
-	QTextToSpeech *m_speech=speechMgr->getSpeech();
+	// After onSpeechReady locale/voices of the speech engine have already been set. Repopulate voice combo:
 
-	if (m_speech->state() != QTextToSpeech::Ready)
+	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
+
+	if (speechMgr->getState() != QTextToSpeech::Ready)
 	{
-		//stateChanged(m_speech->state());
-		qCritical() << "Speech engine not ready yet! Not conneting anything.";
+		qCCritical(Speech) << "Speech engine not ready yet!"
+				   << speechMgr->getState()
+				   << "Not conneting anything.";
 		return;
 	}
 
-    //const bool hasPauseResume = m_speech->engineCapabilities()
-    //                          & QTextToSpeech::Capability::PauseResume;
-    //ui.pauseButton->setVisible(hasPauseResume);
-    //ui.resumeButton->setVisible(hasPauseResume);
-
-    // Block signals of the languages combobox while populating
-    //QSignalBlocker blocker(ui.language);
-
-    //ui.language->clear();
-    //const QList<QLocale> locales = m_speech->availableLocales();
-    //QLocale current = m_speech->locale();
-    //for (const QLocale &locale : locales) {
-    //    QString name(u"%1 (%2)"_s
-    //                 .arg(QLocale::languageToString(locale.language()),
-    //                      QLocale::territoryToString(locale.territory())));
-    //    QVariant localeVariant(locale);
-    //    ui.language->addItem(name, localeVariant);
-    //    if (locale.name() == current.name())
-    //        current = locale;
-    //}
-    //speechMgr->setRate(ui->spinBox_Rate->value());
-    //speechMgr->setPitch(ui->spinBox_Pitch->value());
-    //speechMgr->setVolume(ui->spinBox_Volume->value());
-    // This must reset all other combos...
+	// This must reset all other combos...
 	connect(speechMgr, &StelSpeechMgr::languageChanged, this, &ConfigurationDialog::populateVoiceCombo);
 	populateVoiceCombo();
-
-//    connect(m_speech, &QTextToSpeech::stateChanged, this, &MainWindow::stateChanged);
-//    connect(m_speech, &QTextToSpeech::localeChanged, this, &MainWindow::localeChanged);
-
-//    blocker.unblock();
-
-//    localeChanged(current);
 }
 
 void ConfigurationDialog::populateVoiceCombo()
 {
 	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
-	QString currentVoice=speechMgr->getVoice();
+	QString currentVoice=speechMgr->getVoiceName();
 
 	// Populate voice selection list
 	ui->comboBox_Voice->clear();
-	//ui->comboBox_Voice->addItem("Default", "default");
-	const auto voices = speechMgr->getSpeech()->availableVoices();
-	for (const QVoice &voice : voices)
-	    ui->comboBox_Voice->addItem(voice.name(), voice.name());
+	const QStringList voices = speechMgr->getAvailableVoiceNames();
+	for (const QString &voice : voices)
+	    ui->comboBox_Voice->addItem(voice, voice);
 
 	int idx=ui->comboBox_Voice->findData(currentVoice);
 	ui->comboBox_Voice->setCurrentIndex(qMax(idx, 0));
@@ -2551,6 +2574,5 @@ void ConfigurationDialog::selectVoice(int idx)
 	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
 	QString voiceName=ui->comboBox_Voice->itemText(idx);
 	speechMgr->setVoice(voiceName);
-	qDebug() << "ConfigDialog: Speech voice set to" << voiceName;
-
+	qCDebug(Speech) << "ConfigDialog: Speech voice set to" << voiceName;
 }

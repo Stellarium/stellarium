@@ -23,6 +23,8 @@
 
 #if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 
+#include <random>
+#include <chrono>
 #include <QTextToSpeech>
 #include <QVoice>
 #include "StelLocaleMgr.hpp"
@@ -31,19 +33,14 @@
 Q_LOGGING_CATEGORY(Speech,"stel.Speech", QtDebugMsg) // TODO: Before merge, demote to QtInfoMsg
 
 
-StelSpeechMgr::StelSpeechMgr(): StelModule()
+StelSpeechMgr::StelSpeechMgr(): StelModule(),
+	m_speech(nullptr)
 {
 	setObjectName("StelSpeechMgr");
 
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
-	m_speech=new QTextToSpeech(static_cast<QObject*>(this));
-#ifdef ENABLE_NLS
-	m_speech->setLocale(QLocale(StelApp::getInstance().getLocaleMgr().getAppLanguage()));
-#else
-	m_speech->setLocale(QLocale::English);
-#endif
-#else
-	qWarning() << "Text to Speech requires Qt6.6 or higher";
+	// Start without engine, then set the right one in init()
+#if not defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
+	qCInfo(Speech) << "Text to Speech requires Qt6.6 or higher";
 #endif
 }
 
@@ -67,60 +64,37 @@ void StelSpeechMgr::init()
 	m_rate  =qBound(-1.0, conf->value("speech/rate",   0.0).toDouble(), 1.0);
 	m_pitch =qBound(-1.0, conf->value("speech/pitch",  0.0).toDouble(), 1.0);
 	m_volume=qBound( 0.0, conf->value("speech/volume", 0.5).toDouble(), 1.0);
-	if (enabled())
-	{
+
 #if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
-		m_speech->setRate(m_rate);
-		m_speech->setPitch(m_pitch);
-		m_speech->setVolume(m_volume);
+	QStringList availableEngines = QTextToSpeech::availableEngines();
+	availableEngines.removeOne("mock"); // remove unhelpful dummy
+	// we are only running when enabled(), i.e. at least the default engine is available.
+	// If not, just keep the module disabled.
+	if (availableEngines.isEmpty())
+		return;
+	Q_ASSERT(!availableEngines.isEmpty());
 
-		qCDebug(Speech) << "StelSpeechMgr::init(): App Language is"     << StelApp::getInstance().getLocaleMgr().getAppLanguage();
-		qCDebug(Speech) << "StelSpeechMgr::init(): current engine name" << m_speech->engine();
-		qCDebug(Speech) << "StelSpeechMgr::init(): current locale name" << m_speech->locale().name();
-		qCDebug(Speech) << "StelSpeechMgr::init(): current voice name"  << m_speech->voice().name();
-
-		connect(m_speech, &QTextToSpeech::engineChanged, this, [=](){
-			qCDebug(Speech) << "StelSpeechMgr:engineChanged() lambda";
-			m_locales=m_speech->availableLocales();
-			QString appLanguage=StelApp::getInstance().getLocaleMgr().getAppLanguage();
-			qCDebug(Speech) << "   StelSpeechMgr: App Language is" << appLanguage;
-			if (m_locales.contains(QLocale(appLanguage)))
-				m_speech->setLocale(QLocale(appLanguage));
-			else
-				m_speech->setLocale(QLocale::English);
-			m_voices=m_speech->availableVoices();
-		});
-
-		QStringList availableEngines=m_speech->availableEngines();
-		availableEngines.removeOne("mock"); // remove unhelpful dummy
-		// we are only running when enabled(), i.e. at least the default engine is available.
-		// If not, just disable the module.
-		if (availableEngines.isEmpty())
-		{
-			m_speech=nullptr;
-			return;
-		}
-		Q_ASSERT(!availableEngines.isEmpty());
-
-
-		qCDebug(Speech) << "StelSpeechMgr:::init(): available engine names:" << availableEngines.join(", ");
-		// Problem: The sequence of engines is arbitrary and changes from call to call.
-		// On Windows, there are winrt and sapi. Make sure winrt (usually better) is first.
+	qCDebug(Speech) << "StelSpeechMgr:::init(): available engine names:" << availableEngines.join(", ");
+	// Problem: The sequence of engines is arbitrary and changes from call to call.
+	// On Windows, there are winrt and sapi. Make sure winrt (usually better) is first.
 #ifdef Q_OS_WIN
-		availableEngines.sort();
-		std::reverse(availableEngines.begin(), availableEngines.end());
+	availableEngines.sort();
+	std::reverse(availableEngines.begin(), availableEngines.end());
 #endif
-		// TODO decide what to do on various Linux flavours (any preferrable engine?)
+	// TODO decide what to do on various Linux flavours (any preferrable engine?)
 
-		// Only change from default engine if the configured is available.
-		QString candEngine=conf->value("speech/engine", availableEngines.constFirst()).toString();
-		if (availableEngines.contains(candEngine))
-			setEngine(candEngine);
-		// Continued with onEngineChange()
+	// Only change from default engine if the configured is available.
+	const QString candEngine=conf->value("speech/engine", availableEngines.constFirst()).toString();
+	if (availableEngines.contains(candEngine))
+		setEngine(candEngine);
+	else if (!availableEngines.isEmpty())
+		setEngine(availableEngines.constFirst());
 #endif
-	}
 	else
+	{
 		qCWarning(Speech) << "Cannot Initialize Text to Speech";
+		Q_ASSERT(0); // is there a chance to ever come here?
+	}
 }
 
 bool StelSpeechMgr::enabled() const
@@ -135,7 +109,7 @@ bool StelSpeechMgr::enabled() const
 #if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 
 
-QTextToSpeech::State StelSpeechMgr::getState()
+QTextToSpeech::State StelSpeechMgr::getState() const
 {
 	if (m_speech)
 		return m_speech->state();
@@ -145,21 +119,38 @@ QTextToSpeech::State StelSpeechMgr::getState()
 
 void StelSpeechMgr::say(const QString &narration) const
 {
-	qCDebug(Speech) << "StelSpeechMgr: reading: " << narration;
+	qCDebug(Speech) << "StelSpeechMgr::say(): " << narration;
 #if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 	if (enabled())
 		m_speech->say(narration);
 #endif
 }
 
-void StelSpeechMgr::stop()
+void StelSpeechMgr::stop() const
 {
-	qCDebug(Speech) << "StelSpeechMgr: stop() ";
+	qCDebug(Speech) << "StelSpeechMgr::stop() ";
 #if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
 	if (enabled())
 	{
 		m_speech->stop(QTextToSpeech::BoundaryHint::Word);
-		m_speech->say(qc_("Why? You asked for it!", "Object narration")); // Just testing ... ;-)
+
+		// Easter egg... Allow occasional argument :-)
+		unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+		std::default_random_engine generator(seed);
+		std::uniform_int_distribution<int> distribution(0,15);
+		int mood = distribution(generator);
+
+		const QStringList answers={
+			qc_("Why? You asked for it!",     "Object narration"),
+			qc_("OK, I shut up.",             "Object narration"),
+			qc_("Come on!",                   "Object narration"),
+			qc_("Naaah!",                     "Object narration"),
+			qc_("Sir Yes Sir, Silence, Sir!", "Object narration")
+		};
+		if (mood<answers.length())
+		{
+			m_speech->say(answers.at(mood)); // Just testing ... ;-)
+		}
 	}
 #endif
 }
@@ -200,12 +191,11 @@ void StelSpeechMgr::setVolume(double volume)
 	qCDebug(Speech) << "set Volume" << volume;
 }
 
-bool StelSpeechMgr::setEngine(QString &engineName)
+void StelSpeechMgr::setEngine(const QString &engineName)
 {
-    delete m_speech;
-    m_speech = engineName == u"default"
-	       ? new QTextToSpeech(this)
-	       : new QTextToSpeech(engineName, this);
+    if (m_speech)
+	    delete m_speech;
+    m_speech = new QTextToSpeech(engineName, this);
 
     // some engines initialize asynchronously
     if (m_speech->state() == QTextToSpeech::Ready) {
@@ -214,56 +204,93 @@ bool StelSpeechMgr::setEngine(QString &engineName)
 	connect(m_speech, &QTextToSpeech::stateChanged, this, &StelSpeechMgr::onEngineReady,
 		Qt::SingleShotConnection);
     }
-
-    return m_speech->state() == QTextToSpeech::Ready;
 }
 
-// Modelled after the Qt example, but much simpler.
-// Just re-apply settings and re-configure current/configured language.
+QString StelSpeechMgr::getEngine() const
+{
+	if (m_speech)
+		return m_speech->engine();
+	else
+		return QString();
+}
+
+// Re-apply settings and re-configure current/configured language.
 void StelSpeechMgr::onEngineReady()
 {
 	if (m_speech->state() != QTextToSpeech::Ready) {
-		//stateChanged(m_speech->state());
+		qCWarning(Speech) << "Speech engine not ready but" << m_speech->state();
+		qCWarning(Speech) << "This should actually never happen and leaves Speech output disabled.";
+		Q_ASSERT(0);
 		return;
 	}
 	StelApp::immediateSave("speech/engine", m_speech->engine());
-	qCDebug(Speech) << "StelSpeechMgr: Engine is ready. Current engine name" << m_speech->engine();
 
 	m_speech->setRate(m_rate);
 	m_speech->setPitch(m_pitch);
 	m_speech->setVolume(m_volume);
 
-	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &StelSpeechMgr::onAppLanguageChanged);
+	qCDebug(Speech) << "StelSpeechMgr::onEngineReady(): current engine name" << m_speech->engine();
+
+	// To check available locales, we act as if language was changed.
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &StelSpeechMgr::onAppLanguageChanged, static_cast<Qt::ConnectionType>(Qt::DirectConnection|Qt::UniqueConnection));
 	onAppLanguageChanged();
+	emit speechReady();
 }
 
+void StelSpeechMgr::setVoice(QString &name)
+{
+	if (name.isEmpty())
+		qCWarning(Speech) << "Voice name empty. Falling back to" << m_voices.first().name();
+
+	QList<QVoice>voices=m_speech->findVoices(name);
+	if (!voices.isEmpty())
+		m_speech->setVoice(voices.first());
+	else
+	{
+		// Should not happen with our GUI setup. Just fall back to some voice.
+		qCWarning(Speech) << "Voice" << name << "not found. Falling back to" << m_voices.first().name();
+		m_speech->setVoice(m_voices.first());
+		Q_ASSERT(0);
+	}
+}
+
+QStringList StelSpeechMgr::getAvailableVoiceNames() const
+{
+	QStringList voiceNames;
+	for (const QVoice &v: m_voices)
+		voiceNames.append(v.name());
+	return voiceNames;
+}
+
+
+// Find and configure voices for current app language
+// This should be called when either app language or speech engine changes.
 void StelSpeechMgr::onAppLanguageChanged()
 {
-	// Continue with finding and configuring current app language
-	qCDebug(Speech) << "StelSpeechMgr: Engine ready. Now configuring Speech language";
-	QString appLanguage=StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	qCDebug(Speech) << "StelSpeechMgr: configuring Speech language";
+	const QString appLanguage=StelApp::getInstance().getLocaleMgr().getAppLanguage();
 	qCDebug(Speech) << "StelSpeechMgr: App Language is" << appLanguage;
-	m_locales=m_speech->availableLocales();
-	qCDebug(Speech) << "StelSpeechMgr: Available Locales:" << m_speech->availableLocales();
+	QList<QLocale>locales=m_speech->availableLocales();
+	qCDebug(Speech) << "StelSpeechMgr: Available Locales:" << locales;
 	qCDebug(Speech) << "StelSpeechMgr: current locale name" << m_speech->locale().name();
 	qCDebug(Speech) << "Now checking and potentially re-setting locale";
-	if (m_locales.contains(QLocale(appLanguage)))
+	if (locales.contains(QLocale(appLanguage)))
 		m_speech->setLocale(QLocale(appLanguage));
 	else
 		m_speech->setLocale(QLocale::English);
 
 	qCDebug(Speech) << "StelSpeechMgr: current locale name" << m_speech->locale().name();
 
+	// TODO: AT THIS POINT AVAILABLE VOICES MAY HAVE CHANGED. Emit a signal for GUI changes?
+
 	m_voices=m_speech->availableVoices();
 
-
-
-	qCDebug(Speech) << "StelSpeechMgr: available voices after these changes:";
+	qCDebug(Speech) << "StelSpeechMgr: available voices for app language" << appLanguage;
 	QStringList voiceNames;
 	for (const QVoice &v: std::as_const(m_voices))
 	{
 		voiceNames.append(v.name());
-		qCDebug(Speech) << "    " << v.name() << "age:" << v.age() << "gender:" << v.gender() << "language:" <<  v.language() << "locale:" << v.locale();
+		qCDebug(Speech) << "    " << v.name() << "age:" << v.age() << v.ageName(v.age())  << "gender:" << v.gender() << v.genderName(v.gender()) << "language:" <<  v.language() << "locale:" << v.locale();
 	}
 
 	QSettings *conf=StelApp::getInstance().getSettings();
@@ -282,60 +309,8 @@ void StelSpeechMgr::onAppLanguageChanged()
 	qCDebug(Speech) << "StelSpeechMgr: with params pitch:" << m_speech->pitch()
 			<< "rate:" << m_speech->rate() << "volume:" << m_speech->volume();
 
-
-	// Once more, reset these:
-	m_speech->setRate(m_rate);
-	m_speech->setPitch(m_pitch);
-	m_speech->setVolume(m_volume);
-
-	qCDebug(Speech) << "StelSpeechMgr: and now pitch:" << m_speech->pitch()
-			<< "rate:" << m_speech->rate() << "volume:" << m_speech->volume();
-
-
-//	qCDebug(Speech) << "Speech: App Language changed:";
-//	qCDebug(Speech) << "Speech: available locales" << m_speech->availableLocales();
-//
-//	m_speech->setLocale(QLocale(StelApp::getInstance().getLocaleMgr().getAppLanguage()));
-//	qCDebug(Speech) << "Speech: locale/language" << m_speech->locale();
-//	qCDebug(Speech) << "Speech: Available voices:" << m_speech->availableVoices();
-
 	emit languageChanged();
 }
-
-
-
-#if 0
-void StelSpeechMgr::selectLocale(QLocale locale)
-{
-	if (enabled())
-		m_speech->setLocale(locale);
-}
-
-void StelSpeechMgr::selectVoice(int index)
-{
-	m_speech->setVoice(m_voices.at(index));
-}
-
-void StelSpeechMgr::localeChanged(const QLocale &locale)
-{
-    QVariant localeVariant(locale);
-    ui.language->setCurrentIndex(ui.language->findData(localeVariant));
-
-    QSignalBlocker blocker(ui.voice);
-
-    ui.voice->clear();
-
-    m_voices = m_speech->availableVoices();
-    QVoice currentVoice = m_speech->voice();
-    for (const QVoice &voice : std::as_const(m_voices)) {
-	ui.voice->addItem(u"%1 - %2 - %3"_s
-			  .arg(voice.name(), QVoice::genderName(voice.gender()),
-			       QVoice::ageName(voice.age())));
-	if (voice.name() == currentVoice.name())
-	    ui.voice->setCurrentIndex(ui.voice->count() - 1);
-    }
-}
-#endif
 
 //! Retrieve the currently active flags which information bits to narrate
 const StelObject::InfoStringGroup& StelSpeechMgr::getNarrationTextFilters() const

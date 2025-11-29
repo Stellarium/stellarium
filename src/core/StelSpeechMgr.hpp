@@ -59,7 +59,8 @@ class StelSpeechMgr : public StelModule
 	Q_PROPERTY(double rate                READ getRate     WRITE setRate     NOTIFY rateChanged)
 	Q_PROPERTY(double pitch               READ getPitch    WRITE setPitch    NOTIFY pitchChanged)
 	Q_PROPERTY(double volume              READ getVolume   WRITE setVolume   NOTIFY volumeChanged)
-	Q_PROPERTY(QTextToSpeech::State state READ getState                      NOTIFY stateChanged)   // ???
+	Q_PROPERTY(QTextToSpeech::State state READ getState                      NOTIFY stateChanged)
+	// No properties! These are OS related and should not be synced.
 	//Q_PROPERTY(QString language           READ getLanguage WRITE setLanguage NOTIFY languageChanged) // Given the state of language support, it may be easier to have separate voice languages.
 	//Q_PROPERTY(QLocale locale             READ getLocale   WRITE setLocale   NOTIFY localeChanged)
 	//Q_PROPERTY(QString engine             READ getEngine   WRITE setEngine   NOTIFY engineChanged)
@@ -88,80 +89,65 @@ signals:
 #if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
 	void stateChanged(QTextToSpeech::State state);
 	void languageChanged();
+	void speechReady();
 #endif
 
 public slots:
 	//! Emit an audible synthesized narration
 	void say(const QString &narration) const;
 	//! Stops replay of narration.
-	void stop();
+	void stop() const;
 
 	//! global info, always false if Qt<6.6 and if no engine was initialized
 	bool enabled() const;
 
 	//! set replay rate (-1...+1)
 	void setRate(double newRate);
-	double getRate(){return m_rate;}
+	double getRate() const {return m_rate;}
 
 	//! set pitch (-1...+1)
 	void setPitch(double newPitch);
-	double getPitch(){return m_pitch;}
+	double getPitch() const {return m_pitch;}
 
 	//! set volume (0...+1)
 	void setVolume(double newVolume);
-	double getVolume(){return m_volume;}
+	double getVolume() const {return m_volume;}
 
 #if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
 	//! return the state of the Speech engine, or QTextToSpeech::State::Error
-	QTextToSpeech::State getState();
+	QTextToSpeech::State getState() const;
 
 	//! set the engine to be used. Some OS like Windows have more than one.
 	//! @arg engine must be one of those returned by QTextToSpeech::availableEngines.
-	//! @return True on success, setting one working engine (the one reported by the engineChanged() signal).
-	//!         False means something is broken and no engine is available.
 	//! emits engineChanged().
-	bool setEngine(QString &engine); //{return m_speech->setEngine(engine);}
-	//! return engine name
-	QString getEngine(){return m_speech->engine();}
-	//! This returns the currently set speech object. TODO: try to avoid this for better encapsulation!
-	QTextToSpeech* getSpeech(){return m_speech;}
+	void setEngine(const QString &engine);
+	//! return engine name or an empty string if no engine was configured.
+	QString getEngine() const;
 
 	//! set the voice to be used.
-	//! @arg name must be one of those returned by QTextToSpeech::findVoices().
-	void setVoice(QString &name){QList<QVoice>voices=m_speech->findVoices(name);
-		m_speech->setVoice(voices.first());}
+	//! @arg name must be one of those returned by QTextToSpeech::findVoices(),
+	//! or else any valid voice will be set.
+	void setVoice(QString &name);
 	//! return the name of the current voice
-	QString getVoice(){return m_speech->voice().name();}
+	QString getVoiceName() const {return m_speech->voice().name();}
 
-	//! set the voice to be used.
-	//! @arg name must be one of those returned by QTextToSpeech::findVoices().
-	void setLocale(QLocale &locale){m_speech->setLocale(locale);}
-	QLocale getLocale() const {return m_speech->locale();}
-	QString getLanguage(){return m_speech->locale().nativeLanguageName();}
-
+	//! return the name of available voices
+	QStringList getAvailableVoiceNames() const;
 #endif
 
-	//void stateChanged(QTextToSpeech::State state);
-	//void engineSelected(int index);
-	//void languageSelected(int language);
-	//void voiceSelected(int index);
-
-	//void localeChanged(const QLocale &locale);
-
-
 private:
-	//void onEngineReady();
 	void initNarrationFlagsFromConfig(QSettings *conf);
 	//! Set necessary things after engine change. This is triggered by setEngine()
 	void onEngineReady();
-	//! Set necessary things after language change. This is triggered by StelApp()
+	//! Set necessary things after language change:
+	//! m_voices is reconfigured.
+	//! This is called by onEngineChanged() and triggered by subsequent StelApp::languageChanged()
 	void onAppLanguageChanged();
 
 #if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
 
 	QTextToSpeech *m_speech = nullptr;
 	QList<QVoice> m_voices;
-	QList<QLocale> m_locales;
 #endif
 
 	double m_rate;   // -1...1
