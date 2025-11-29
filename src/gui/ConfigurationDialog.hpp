@@ -216,7 +216,7 @@ private:
 	//! Speech configuration (needs Qt6.6+)
 	void selectVoice(int idx);
 	//! react to changes after setting Speech Engine
-	void onEngineReady();
+	void onSpeechReady();
 
 };
 
