@@ -51,6 +51,7 @@
 #include "StelPropertyMgr.hpp"
 #include "StelHips.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelSpeechMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -139,12 +140,16 @@ void ViewDialog::retranslate()
 {
 	if (dialog)
 	{
+		static StelSkyCultureMgr *scMgr = GETSTELMODULE(StelSkyCultureMgr);
+
 		ui->retranslateUi(dialog);
 		updateZhrDescription(StelApp::getInstance().getModule("SporadicMeteorMgr")->property("zhr").toInt());
 		populateLists();
 		populateToolTips();
 		populatePlanetMagnitudeAlgorithmsList();
 		populatePlanetMagnitudeAlgorithmDescription();
+		populateCulturalCombo(ui->zodiacLabelComboBox, scMgr->getZodiacLabelStyle());
+		populateCulturalCombo(ui->lunarSystemLabelComboBox, scMgr->getLunarSystemLabelStyle());
 		ui->lightPollutionWidget->retranslate();
 
 		populateHipsGroups();
@@ -699,6 +704,26 @@ void ViewDialog::createDialogContent()
 		ui->landscapeTextBrowser->document()->setDefaultStyleSheet(style);
 		ui->skyCultureTextBrowser->document()->setDefaultStyleSheet(style);
 	});
+
+	// Connect narration buttons. We might need to prepare the texts, though.
+	if (GETSTELMODULE(StelSpeechMgr)->enabled())
+	{
+		connect(ui->pushButtonLandscapes_say, &QPushButton::clicked, this, [this](){
+			GETSTELMODULE(StelSpeechMgr)->say(ui->landscapeTextBrowser->toPlainText());});
+		connect(ui->pushButtonLandscapes_stop, &QPushButton::clicked, this, [this](){
+			GETSTELMODULE(StelSpeechMgr)->stop();});
+		connect(ui->pushButtonSkyculture_say, &QPushButton::clicked, this, [this](){
+			GETSTELMODULE(StelSpeechMgr)->say(ui->skyCultureTextBrowser->toPlainText());});
+		connect(ui->pushButtonSkyculture_stop, &QPushButton::clicked, this, [this](){
+			GETSTELMODULE(StelSpeechMgr)->stop();});
+	}
+	else
+	{
+		const auto wList = QList<QWidget*>({ui->pushButtonLandscapes_say, ui->pushButtonLandscapes_stop,
+						    ui->pushButtonSkyculture_say, ui->pushButtonSkyculture_stop});
+		for (auto w: wList)
+			w->hide();
+	}
 }
 
 bool ViewDialog::eventFilter(QObject* object, QEvent* event)
