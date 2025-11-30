@@ -473,7 +473,7 @@ example and may not apply to your setup.
 on your main system drive. Add the path to your user/system environment variables PATH to allow Stellarium to 
 discover them during runtime.
 
-Open Visual Studio 2022 (run as admin). Continue wihtout code.
+Open Visual Studio 2022. Continue wihtout code.
 
 If you want to use a specific cmake.exe go to Tools -> Options, navigate to Cmake -> General and fill the appropriate
 checkbox and path. Otherwise VS 2022 will use it own cmake.exe tool. The path of an external cmake should be included
@@ -587,7 +587,7 @@ Use a slightly different CMakePresets.json file, and adapt it to your developmen
 
 Note: To use 'Visual Studio 18 2026' generator, you need the lastest version of CMake, version 4.2.0
 
-Open Visual Studio 2026 (run as admin). Open the Stellarium folder.
+Open Visual Studio 2026. Open the Stellarium folder.
 
 File -> Open -> Folder... and select <stel_dir>
 
