@@ -72,7 +72,10 @@ void StelSpeechMgr::init()
 	// we are only running when enabled(), i.e. at least the default engine is available.
 	// If not, just keep the module disabled.
 	if (availableEngines.isEmpty())
+	{
+		qCWarning(Speech) << "No Speech engine found. Disabling StelSpeechMgr.";
 		return;
+	}
 	Q_ASSERT(!availableEngines.isEmpty());
 
 	qCDebug(Speech) << "StelSpeechMgr:::init(): available engine names:" << availableEngines.join(", ");
@@ -123,6 +126,8 @@ void StelSpeechMgr::say(const QString &narration) const
 #if defined(ENABLE_SPEECH)
 	if (enabled())
 		m_speech->say(narration);
+	else
+		qCCritical(Speech) << "Available Engines:" << QTextToSpeech::availableEngines();
 #endif
 }
 
