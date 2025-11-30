@@ -75,7 +75,7 @@ Susanne M Hoffmann
 
 ### About
 
-We studied the early history of the nakshatras in our research. 
+With B.S. Shylaja, I studied the early history of the nakshatras in our research. 
 
 ### Acknowledgements
 I thank B. S. Shylaja for consulting me in my studies of the history of Vedic astronomy. 
@@ -85,6 +85,7 @@ Students of the University of Jena, Germany: Vincent Gerlach, Fabian Hofer, Luca
 ## License
 
 CC BY 4.0
+
 
 
 
