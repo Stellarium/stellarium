@@ -2,7 +2,7 @@
 
 ## Introduction
 
-First historical proofs of nakṣatra are given in the Vedic culture which is archaeologically attested in the Indus Valley before 1000 BCE [#1],[#2],[#5],[#6]. It is known from traditional religious texts and rituals that astronomy was used for timekeeping in that time. When the Indus culture started to spread to the Ganges Plateau which has a different climate, flora and fauna, Vedic cultural astronomy was reworked and a new religious text of that time, the Arthavaveda, preserves a complete set of constellations. The first complete non-religious description, the Vedāṅgajyotiṣa, dates to roughly 300 BCE, and the standardized origin (Ashvini as first) was set in the first century BCE or CE. Hinduism took over the nakshatras. In the first centuries CE, astrological ideas from the Graeco-Babylonian world, including the zodiac as a division of the ecliptic into twelve equal sections, was added to the older Vedic nakshatra-division. Since the middle of the first millennium CE, the system is used in its present form. 
+First historical proofs of nakṣatra are given in the Vedic culture which is archaeologically attested in the Indus Valley before 1000 BCE [#1],[#2],[#5],[#6]. It is known from traditional religious texts and rituals that astronomy was used for timekeeping in that time. When the Indus culture started to spread to the Ganges Plateau which has a different climate, flora and fauna, Vedic cultural astronomy was reworked and a new religious text of that time, the Arthavaveda (900 to 600 BCE), preserves a complete set of constellations called ‘nakṣatra’ (नक्षत्र). The first complete non-religious description, the Vedāṅgajyotiṣa, dates to roughly 300 BCE, and the standardized origin (Ashvini as first) was set in the first century BCE or CE. Hinduism took over the nakshatras. In the first centuries CE, astrological ideas from the Graeco-Babylonian world, including the zodiac as a division of the ecliptic into twelve equal sections, was added to the older Vedic nakshatra-division. Since the middle of the first millennium CE, the system is used in its present form. 
 
 The number of stars per nakshatra-constellations may vary in different sources. In this sky culture, we present only one single historical source: the depictions in Tirupperunthurai (Athmanathaswamy temple) near Aranthangi, India, 10th century CE. There, they are drawn at two occasions in exactly the same way: engraved in a doorway of stone, and imprinted in a tiruvasi, a silver arch from the temple's main chamber. 
 
@@ -85,6 +85,7 @@ Students of the University of Jena, Germany: Vincent Gerlach, Fabian Hofer, Luca
 ## License
 
 CC BY 4.0
+
 
 
 
