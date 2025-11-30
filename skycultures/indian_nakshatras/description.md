@@ -2,13 +2,13 @@
 
 ## Introduction
 
-First historical proofs of nakṣatra are given in the Vedic culture which is archaeologically attested in the Indus Valley before 1000 BCE. It is known from traditional religious texts and rituals that astronomy was used for timekeeping in that time. When the Indus culture started to spread to the Ganges Plateau which has a different climate, flora and fauna, Vedic cultural astronomy was reworked and a new religious text of that time, the Arthavaveda, preserves a complete set of constellations. The first complete non-religious description, the Vedāṅgajyotiṣa, dates to roughly 300 BCE, and the standardized origin (Ashvini as first) was set in the first century BCE or CE. Hinduism took over the nakshatras. In the first centuries CE, astrological ideas from the Graeco-Babylonian world, including the zodiac as a division of the ecliptic into twelve equal sections, was added to the older Vedic nakshatra-division. Since the middle of the first millennium CE, the system is used in its present form. 
+First historical proofs of nakṣatra are given in the Vedic culture which is archaeologically attested in the Indus Valley before 1000 BCE [#1],[#2],[#5],[#6]. It is known from traditional religious texts and rituals that astronomy was used for timekeeping in that time. When the Indus culture started to spread to the Ganges Plateau which has a different climate, flora and fauna, Vedic cultural astronomy was reworked and a new religious text of that time, the Arthavaveda, preserves a complete set of constellations. The first complete non-religious description, the Vedāṅgajyotiṣa, dates to roughly 300 BCE, and the standardized origin (Ashvini as first) was set in the first century BCE or CE. Hinduism took over the nakshatras. In the first centuries CE, astrological ideas from the Graeco-Babylonian world, including the zodiac as a division of the ecliptic into twelve equal sections, was added to the older Vedic nakshatra-division. Since the middle of the first millennium CE, the system is used in its present form. 
 
 The number of stars per nakshatra-constellations may vary in different sources. In this sky culture, we present only one single historical source: the depictions in Tirupperunthurai (Athmanathaswamy temple) near Aranthangi, India, 10th century CE. There, they are drawn at two occasions in exactly the same way: engraved in a doorway of stone, and imprinted in a tiruvasi, a silver arch from the temple's main chamber. 
 
 ## Description
 
-In the second millennium BCE, the nakshatras were likely observed as rising constellations were the moon stands. The moon travels roughly 12° per day (360° in 30 days). However, historians proved that in later times, the nakshatras were observed in culmination. The moon then stands in the meridian together with some constellations. It is much easier to observe simultaneous culminations, as the air mass is much thinner there than at the horizon. Additionally, it simplifies the coordinate system and timekeeping, as simultaneously culminating asterisms share the same right ascension (hour) circle. 
+In the second millennium BCE, the nakshatras were likely observed as rising constellations were the moon stands. The moon travels roughly 12° per day (360° in 30 days). However, historians proved that in later times, the nakshatras were observed in culmination [#4]. The moon then stands in the meridian together with some constellations. It is much easier to observe simultaneous culminations, as the air mass is much thinner there than at the horizon. Additionally, it simplifies the coordinate system and timekeeping, as simultaneously culminating asterisms share the same right ascension (hour) circle. 
 
 ### Sky
 
@@ -62,7 +62,12 @@ The Milky Way is not incorporated in this set.
 
 ## References
 
-- [# 1] Hoffmann and Shylaja (forthcoming), Nakshatras in the first millennium BCE
+ - [#1] Débarbat, S; Eddy, J. A.; Eichhorn, H. K. and Upgren, A.R. (ed.) 1988. Mapping the Sky. International Astronomical Union Symposia, Kluwer Academic, Dordrecht (NL).
+ - [#2] Dikshit, S.B. 1981. Bhāratīya Jyotish Śāstra (History of Indian Astronomy), vol. 2, New Delhi (First published in Marathi in 1896.)
+ - [#3] Hoffmann and Shylaja (forthcoming), Nakshatras in the first millennium BCE
+ - [#4] Shylaja B S and Shubha B S (2024). A Unique Application Of The Observation Of Stars In Indian Astronomical Texts , 2024,  Journal for Astronomical History and Heritage, 27(3): 595-604 
+ - [#5] Weber, A. 1860-1862. Die Vedischen Nachrichten von der Naxatra. Königliche Akademie der Wissenschaften, Berlin. 2 Volumes.
+ - [#6] Yano, M. 2017. ‘The Nakṣatra System of the Atharvaveda-Pariśiṣṭa,’ Journal of Indian Studies 28/29: 65–74.
 
 ## Authors
 
@@ -80,6 +85,7 @@ Students of the University of Jena, Germany: Vincent Gerlach, Fabian Hofer, Luca
 ## License
 
 CC BY 4.0
+
 
 
 
