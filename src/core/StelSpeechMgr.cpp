@@ -17,36 +17,37 @@
  */
 
 #include "StelSpeechMgr.hpp"
-#include "StelTranslator.hpp"
 #include "StelApp.hpp"
 #include <QDebug>
 
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
+#ifdef ENABLE_SPEECH
 
 #include <random>
 #include <chrono>
-#include <QTextToSpeech>
 #include <QVoice>
 #include "StelLocaleMgr.hpp"
+#include "StelTranslator.hpp"
 #endif
 
 Q_LOGGING_CATEGORY(Speech,"stel.Speech", QtDebugMsg) // TODO: Before merge, demote to QtInfoMsg
 
 
-StelSpeechMgr::StelSpeechMgr(): StelModule(),
-	m_speech(nullptr)
+StelSpeechMgr::StelSpeechMgr(): StelModule()
+#ifdef ENABLE_SPEECH
+      , m_speech(nullptr)
+#endif
 {
 	setObjectName("StelSpeechMgr");
 
 	// Start without engine, then set the right one in init()
-#if not defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
-	qCInfo(Speech) << "Text to Speech requires Qt6.6 or higher";
+#ifndef ENABLE_SPEECH
+	qCInfo(Speech) << "Text to Speech requires Qt6.4 or higher";
 #endif
 }
 
 StelSpeechMgr::~StelSpeechMgr()
 {
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
+#ifdef ENABLE_SPEECH
 	m_voices.clear();
 	if (m_speech)
 	{
@@ -65,13 +66,16 @@ void StelSpeechMgr::init()
 	m_pitch =qBound(-1.0, conf->value("speech/pitch",  0.0).toDouble(), 1.0);
 	m_volume=qBound( 0.0, conf->value("speech/volume", 0.5).toDouble(), 1.0);
 
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
+#ifdef ENABLE_SPEECH
 	QStringList availableEngines = QTextToSpeech::availableEngines();
 	availableEngines.removeOne("mock"); // remove unhelpful dummy
 	// we are only running when enabled(), i.e. at least the default engine is available.
 	// If not, just keep the module disabled.
 	if (availableEngines.isEmpty())
+	{
+		qCWarning(Speech) << "No Speech engine found. Disabling StelSpeechMgr.";
 		return;
+	}
 	Q_ASSERT(!availableEngines.isEmpty());
 
 	qCDebug(Speech) << "StelSpeechMgr:::init(): available engine names:" << availableEngines.join(", ");
@@ -89,25 +93,24 @@ void StelSpeechMgr::init()
 		setEngine(candEngine);
 	else if (!availableEngines.isEmpty())
 		setEngine(availableEngines.constFirst());
-#endif
 	else
 	{
 		qCWarning(Speech) << "Cannot Initialize Text to Speech";
 		Q_ASSERT(0); // is there a chance to ever come here?
 	}
+#endif
 }
 
 bool StelSpeechMgr::enabled() const
 {
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
+#ifdef ENABLE_SPEECH
 	return (m_speech && m_speech->state()!=QTextToSpeech::State::Error);
 #else
 	return false;
 #endif
 }
 
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
-
+#ifdef ENABLE_SPEECH
 
 QTextToSpeech::State StelSpeechMgr::getState() const
 {
@@ -120,16 +123,18 @@ QTextToSpeech::State StelSpeechMgr::getState() const
 void StelSpeechMgr::say(const QString &narration) const
 {
 	qCDebug(Speech) << "StelSpeechMgr::say(): " << narration;
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
+#ifdef ENABLE_SPEECH
 	if (enabled())
 		m_speech->say(narration);
+	else
+		qCCritical(Speech) << "Available Engines:" << QTextToSpeech::availableEngines();
 #endif
 }
 
 void StelSpeechMgr::stop() const
 {
 	qCDebug(Speech) << "StelSpeechMgr::stop() ";
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
+#ifdef ENABLE_SPEECH
 	if (enabled())
 	{
 		m_speech->stop(QTextToSpeech::BoundaryHint::Word);
@@ -159,7 +164,7 @@ void StelSpeechMgr::setRate(double rate)
 {
 	m_rate=rate;
 	StelApp::immediateSave("speech/rate", rate);
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
+#ifdef ENABLE_SPEECH
 	if (m_speech)
 		m_speech->setRate(rate);
 #endif
@@ -171,7 +176,7 @@ void StelSpeechMgr::setPitch(double pitch)
 {
 	m_pitch=pitch;
 	StelApp::immediateSave("speech/pitch", pitch);
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
+#ifdef ENABLE_SPEECH
 	if (m_speech)
 		m_speech->setPitch(pitch);
 #endif
@@ -183,13 +188,15 @@ void StelSpeechMgr::setVolume(double volume)
 {
 	m_volume=volume;
 	StelApp::immediateSave("speech/volume", volume);
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
+#ifdef ENABLE_SPEECH
 	if (m_speech)
 		m_speech->setVolume(volume);
 #endif
 	emit volumeChanged(volume);
 	qCDebug(Speech) << "set Volume" << volume;
 }
+
+#ifdef ENABLE_SPEECH
 
 void StelSpeechMgr::setEngine(const QString &engineName)
 {
@@ -237,8 +244,25 @@ void StelSpeechMgr::onEngineReady()
 	emit speechReady();
 }
 
+// Allows use on Qt6.4!
+QVoice StelSpeechMgr::findVoice(QString &name) const
+{
+	if (enabled() && !m_voices.isEmpty())
+	{
+		for (const QVoice &v: m_voices)
+			if (v.name() == name)
+				return v;
+		qCWarning(Speech) << "Voice" << name << "not available. Using" << m_voices.constFirst().name();
+		return m_voices.constFirst();
+	}
+	qCWarning(Speech) << "Voice" << name << "not available. Indeed, no voice available. Returning empty.";
+	return QVoice();
+}
+
 void StelSpeechMgr::setVoice(QString &name)
 {
+	// Note: 6.10 is a placeholder. Testing whether 6.4 is enough on e.g. Ubuntu 24.04.
+#if (QT_VERSION>=QT_VERSION_CHECK(6,10,0))
 	if (name.isEmpty())
 		qCWarning(Speech) << "Voice name empty. Falling back to" << m_voices.first().name();
 
@@ -252,6 +276,9 @@ void StelSpeechMgr::setVoice(QString &name)
 		m_speech->setVoice(m_voices.first());
 		Q_ASSERT(0);
 	}
+#else
+	m_speech->setVoice(findVoice(name));
+#endif
 }
 
 QStringList StelSpeechMgr::getAvailableVoiceNames() const
@@ -290,7 +317,7 @@ void StelSpeechMgr::onAppLanguageChanged()
 	for (const QVoice &v: std::as_const(m_voices))
 	{
 		voiceNames.append(v.name());
-		qCDebug(Speech) << "    " << v.name() << "age:" << v.age() << v.ageName(v.age())  << "gender:" << v.gender() << v.genderName(v.gender()) << "language:" <<  v.language() << "locale:" << v.locale();
+		qCDebug(Speech) << "    " << v.name() << "age:" << v.age() << v.ageName(v.age())  << "gender:" << v.gender() << v.genderName(v.gender()) << "locale:" << v.locale();
 	}
 
 	QSettings *conf=StelApp::getInstance().getSettings();
@@ -298,8 +325,12 @@ void StelSpeechMgr::onAppLanguageChanged()
 
 	if (voiceNames.contains(storedVoice))
 	{
+#if (QT_VERSION>=QT_VERSION_CHECK(6,10,0))
 		QList<QVoice> voices=m_speech->findVoices(storedVoice);
 		m_speech->setVoice(voices.first());
+#else
+		m_speech->setVoice(findVoice(storedVoice));
+#endif
 	}
 	else
 		m_speech->setVoice(m_voices.constFirst());
@@ -311,6 +342,7 @@ void StelSpeechMgr::onAppLanguageChanged()
 
 	emit languageChanged();
 }
+#endif
 
 //! Retrieve the currently active flags which information bits to narrate
 const StelObject::InfoStringGroup& StelSpeechMgr::getNarrationTextFilters() const

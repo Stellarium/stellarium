@@ -262,9 +262,9 @@ public:
 		QString getOneIdentifier(bool narrate)const {
 			QStringList list;
 			if (narrate)
-				list = {pronounceI18n, translatedI18n, pronounce, translated, native};
+				list = QStringList({pronounceI18n, translatedI18n, pronounce, translated, native});
 			else
-				list = {translatedI18n, pronounceI18n, translated, pronounce, native};
+				list = QStringList({translatedI18n, pronounceI18n, translated, pronounce, native});
 			list.removeAll("");
 			return list.first();}
 	};

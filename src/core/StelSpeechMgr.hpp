@@ -26,7 +26,7 @@
 #include <QMap>
 #include <QString>
 #include <QLoggingCategory>
-#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
+#if defined(ENABLE_SPEECH)
 #include <QAudioOutput>
 #include <QTextToSpeech>
 #endif
@@ -35,7 +35,7 @@ class QMediaPlayer;
 class QVoice;
 
 //! @class StelSpeechMgr
-//! Provides artificial voice output for a narration on sky objects.
+//! Provides artificial voice output for a narration on sky objects or GUI elements.
 //!
 //! Sometimes, in the dark you may want voice output over reading small text on the screen.
 //! Calling a "narrate" action (default: Shift+R) for the selected object will provide some information.
@@ -43,7 +43,7 @@ class QVoice;
 //! Parallel to the InfoString settings which decide what information items to show,
 //! we use a similar structure to decide what data elements are being narrated.
 //!
-//! @note: This functionality requires Qt6.6 and higher or else just emits the narration to logfile.
+//! @note: This functionality requires Qt6.4 and higher or else just emits the narration to logfile.
 //! @note You can finetune the amount of speech-related messages in the logfile by configuring the logging category stel.Speech.
 //! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.Speech.debug=false;".
 //! By default, for this new module, all messages are displayed. Later we will limit this to the Info category.
@@ -54,17 +54,12 @@ Q_DECLARE_LOGGING_CATEGORY(Speech)
 class StelSpeechMgr : public StelModule
 {
 	Q_OBJECT
-#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
 
 	Q_PROPERTY(double rate                READ getRate     WRITE setRate     NOTIFY rateChanged)
 	Q_PROPERTY(double pitch               READ getPitch    WRITE setPitch    NOTIFY pitchChanged)
 	Q_PROPERTY(double volume              READ getVolume   WRITE setVolume   NOTIFY volumeChanged)
+#if defined(ENABLE_SPEECH)
 	Q_PROPERTY(QTextToSpeech::State state READ getState                      NOTIFY stateChanged)
-	// No properties! These are OS related and should not be synced.
-	//Q_PROPERTY(QString language           READ getLanguage WRITE setLanguage NOTIFY languageChanged) // Given the state of language support, it may be easier to have separate voice languages.
-	//Q_PROPERTY(QLocale locale             READ getLocale   WRITE setLocale   NOTIFY localeChanged)
-	//Q_PROPERTY(QString engine             READ getEngine   WRITE setEngine   NOTIFY engineChanged)
-	//Q_PROPERTY(QString voice              READ getVoice    WRITE setVoice    NOTIFY voiceChanged)
 #endif
 
 
@@ -86,7 +81,7 @@ signals:
 	void rateChanged(double);
 	void pitchChanged(double);
 	void volumeChanged(double);
-#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
+#if defined(ENABLE_SPEECH)
 	void stateChanged(QTextToSpeech::State state);
 	void languageChanged();
 	void speechReady();
@@ -113,10 +108,11 @@ public slots:
 	void setVolume(double newVolume);
 	double getVolume() const {return m_volume;}
 
-#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
+#if defined(ENABLE_SPEECH)
 	//! return the state of the Speech engine, or QTextToSpeech::State::Error
 	QTextToSpeech::State getState() const;
 
+public:
 	//! set the engine to be used. Some OS like Windows have more than one.
 	//! @arg engine must be one of those returned by QTextToSpeech::availableEngines.
 	//! emits engineChanged().
@@ -137,6 +133,8 @@ public slots:
 
 private:
 	void initNarrationFlagsFromConfig(QSettings *conf);
+
+#if defined(ENABLE_SPEECH)
 	//! Set necessary things after engine change. This is triggered by setEngine()
 	void onEngineReady();
 	//! Set necessary things after language change:
@@ -144,7 +142,8 @@ private:
 	//! This is called by onEngineChanged() and triggered by subsequent StelApp::languageChanged()
 	void onAppLanguageChanged();
 
-#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
+	//! Replicates some functionality of Qt6.6's findVoices, but just finds the voive of a particular name.
+	QVoice findVoice(QString &name) const;
 
 	QTextToSpeech *m_speech = nullptr;
 	QList<QVoice> m_voices;

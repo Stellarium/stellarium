@@ -119,6 +119,13 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev lib
                  libexiv2-dev libnlopt-cxx-dev libqt6concurrent6 libmd4c-dev libmd4c-html0-dev
 ```
 
+Ubuntu 24.04 has Qt6.4 and so allows speech output. Add these to the packages above (add more speech-dispatcher components as you wish):
+
+```
+sudo apt install libqt6texttospeech6 qt6-speech-dev qt6-speech-speechd-plugin qt6-speech-flite-plugin \
+                 flite speech-dispatcher speech-dispatcher-flite speech-dispatcher-espeak-ng
+```
+
 
 #### Fedora / CentOS / AlmaLinux / Rocky Linux
 
