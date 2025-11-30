@@ -207,17 +207,18 @@ private:
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
 
-	//! Speech configuration (needs Qt6.6+)
+	//! Speech configuration (needs Qt6.4+)
 	void populateSpeechEngineCombo();
-	//! Speech configuration (needs Qt6.6+)
+#ifdef ENABLE_SPEECH
+	//! Speech configuration (needs Qt6.4+)
 	void populateVoiceCombo();
-	//! Speech configuration (needs Qt6.6+)
+	//! Speech configuration (needs Qt6.4+)
 	void selectSpeechEngine(int idx);
-	//! Speech configuration (needs Qt6.6+)
+	//! Speech configuration (needs Qt6.4+)
 	void selectVoice(int idx);
 	//! react to changes after setting Speech Engine
 	void onSpeechReady();
-
+#endif
 };
 
 #endif // CONFIGURATIONDIALOG_HPP

@@ -415,6 +415,9 @@ SET(ENABLE_PODIR 1 CACHE BOOL "Define whether processing of translation files sh
 # Activate media support
 SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
 
+# Activate media support
+SET(ENABLE_SPEECH 1 CACHE BOOL "Define whether speech output should be activated. Requires Qt6.4+ and ENABLE_MEDIA.")
+
 # Activate QtWebEngine support
 SET(ENABLE_QTWEBENGINE 1 CACHE BOOL "Define whether QtWebEngine module should be supported if it installed.")
 
