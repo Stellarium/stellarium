@@ -17,37 +17,37 @@
  */
 
 #include "StelSpeechMgr.hpp"
-#include "StelTranslator.hpp"
 #include "StelApp.hpp"
 #include <QDebug>
 
-#if defined(ENABLE_SPEECH)
+#ifdef ENABLE_SPEECH
 
 #include <random>
 #include <chrono>
 #include <QVoice>
 #include "StelLocaleMgr.hpp"
+#include "StelTranslator.hpp"
 #endif
 
 Q_LOGGING_CATEGORY(Speech,"stel.Speech", QtDebugMsg) // TODO: Before merge, demote to QtInfoMsg
 
 
 StelSpeechMgr::StelSpeechMgr(): StelModule()
-#if defined(ENABLE_SPEECH)
+#ifdef ENABLE_SPEECH
       , m_speech(nullptr)
 #endif
 {
 	setObjectName("StelSpeechMgr");
 
 	// Start without engine, then set the right one in init()
-#if not defined(ENABLE_SPEECH)
+#ifndef ENABLE_SPEECH
 	qCInfo(Speech) << "Text to Speech requires Qt6.4 or higher";
 #endif
 }
 
 StelSpeechMgr::~StelSpeechMgr()
 {
-#if defined(ENABLE_SPEECH)
+#ifdef ENABLE_SPEECH
 	m_voices.clear();
 	if (m_speech)
 	{
@@ -66,7 +66,7 @@ void StelSpeechMgr::init()
 	m_pitch =qBound(-1.0, conf->value("speech/pitch",  0.0).toDouble(), 1.0);
 	m_volume=qBound( 0.0, conf->value("speech/volume", 0.5).toDouble(), 1.0);
 
-#if defined(ENABLE_SPEECH)
+#ifdef ENABLE_SPEECH
 	QStringList availableEngines = QTextToSpeech::availableEngines();
 	availableEngines.removeOne("mock"); // remove unhelpful dummy
 	// we are only running when enabled(), i.e. at least the default engine is available.
@@ -103,14 +103,14 @@ void StelSpeechMgr::init()
 
 bool StelSpeechMgr::enabled() const
 {
-#if defined(ENABLE_SPEECH)
+#ifdef ENABLE_SPEECH
 	return (m_speech && m_speech->state()!=QTextToSpeech::State::Error);
 #else
 	return false;
 #endif
 }
 
-#if defined(ENABLE_SPEECH)
+#ifdef ENABLE_SPEECH
 
 QTextToSpeech::State StelSpeechMgr::getState() const
 {
@@ -123,7 +123,7 @@ QTextToSpeech::State StelSpeechMgr::getState() const
 void StelSpeechMgr::say(const QString &narration) const
 {
 	qCDebug(Speech) << "StelSpeechMgr::say(): " << narration;
-#if defined(ENABLE_SPEECH)
+#ifdef ENABLE_SPEECH
 	if (enabled())
 		m_speech->say(narration);
 	else
@@ -134,7 +134,7 @@ void StelSpeechMgr::say(const QString &narration) const
 void StelSpeechMgr::stop() const
 {
 	qCDebug(Speech) << "StelSpeechMgr::stop() ";
-#if defined(ENABLE_SPEECH)
+#ifdef ENABLE_SPEECH
 	if (enabled())
 	{
 		m_speech->stop(QTextToSpeech::BoundaryHint::Word);
@@ -164,7 +164,7 @@ void StelSpeechMgr::setRate(double rate)
 {
 	m_rate=rate;
 	StelApp::immediateSave("speech/rate", rate);
-#if defined(ENABLE_SPEECH)
+#ifdef ENABLE_SPEECH
 	if (m_speech)
 		m_speech->setRate(rate);
 #endif
@@ -176,7 +176,7 @@ void StelSpeechMgr::setPitch(double pitch)
 {
 	m_pitch=pitch;
 	StelApp::immediateSave("speech/pitch", pitch);
-#if defined(ENABLE_SPEECH)
+#ifdef ENABLE_SPEECH
 	if (m_speech)
 		m_speech->setPitch(pitch);
 #endif
@@ -188,7 +188,7 @@ void StelSpeechMgr::setVolume(double volume)
 {
 	m_volume=volume;
 	StelApp::immediateSave("speech/volume", volume);
-#if defined(ENABLE_SPEECH)
+#ifdef ENABLE_SPEECH
 	if (m_speech)
 		m_speech->setVolume(volume);
 #endif
@@ -196,7 +196,7 @@ void StelSpeechMgr::setVolume(double volume)
 	qCDebug(Speech) << "set Volume" << volume;
 }
 
-#if defined(ENABLE_SPEECH)
+#ifdef ENABLE_SPEECH
 
 void StelSpeechMgr::setEngine(const QString &engineName)
 {

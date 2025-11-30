@@ -226,8 +226,10 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->defaultSelectedInfoRadio, SIGNAL(released()), this, SLOT(setDefaultSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
 	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
-	connect(ui->buttonGroupDisplayedFields, &QButtonGroup::buttonClicked, this, &ConfigurationDialog::setSelectedInfoFromCheckBoxes);
-	connect(ui->buttonGroupNarrateFields,   &QButtonGroup::buttonClicked, this, &ConfigurationDialog::setSelectedNarrationFromCheckBoxes);
+	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(setSelectedInfoFromCheckBoxes()));
+#ifdef ENABLE_SPEECH
+	connect(ui->buttonGroupNarrateFields,   SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(setSelectedNarrationFromCheckBoxes()));
+#endif
 	if (appGui)
 		connect(appGui, SIGNAL(infoStringChanged()), this, SLOT(updateSelectedInfoGui()));
 	
@@ -439,13 +441,14 @@ void ConfigurationDialog::createDialogContent()
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateScriptsList()));
 	#else
 	ui->configurationStackedWidget->removeWidget(ui->page_Scripts); // only hide, no delete!
-	QListWidgetItem *item = ui->stackListWidget->takeItem(5); // take out from its place.
+	QListWidgetItem *item = ui->stackListWidget->takeItem(6); // take out from its place.
 	ui->stackListWidget->addItem(item); // We must add it back to the end of the tabs, as...
 	ui->stackListWidget->item(ui->stackListWidget->count()-1)->setHidden(true); // deleting would cause a crash during retranslation. (GH#2544)
 	#endif
 
 	// Speech configuration
 	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
+#if defined (ENABLE_SPEECH)
 	if (speechMgr->enabled())
 	{
 		ui->speechTextEdit->setPlainText(q_("Stellarium is a free open source planetarium for your computer. "
@@ -466,6 +469,7 @@ void ConfigurationDialog::createDialogContent()
 		connect(ui->pushButton_SpeechStop, &QPushButton::clicked, speechMgr, [this]{speechMgr->stop();});
 	}
 	else
+#endif
 	{
 		ui->groupBoxDisplayedFields->setTitle(q_("Displayed fields"));
 
@@ -481,8 +485,13 @@ void ConfigurationDialog::createDialogContent()
 			cb->hide();
 
 		ui->configurationStackedWidget->removeWidget(ui->page_Speech); // only hide, no delete!
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+		// Kludge: we should take out the element in front of scripts, but only Qt6 can find it.
+		int pos=5;
+#else
 		QList<QListWidgetItem *> lwItemList=ui->stackListWidget->findItems("Speech", Qt::MatchExactly);
 		int pos = ui->stackListWidget->indexFromItem(lwItemList.first()).row();
+#endif
 		QListWidgetItem *speechItem = ui->stackListWidget->takeItem(pos); // take out from its place.
 		ui->stackListWidget->addItem(speechItem); // We must add it back to the end of the tabs, as...
 		ui->stackListWidget->item(ui->stackListWidget->count()-1)->setHidden(true); // deleting would cause a crash during retranslation. (GH#2544)
@@ -2454,6 +2463,7 @@ void ConfigurationDialog::storeFontSettings()
 void ConfigurationDialog::populateSpeechEngineCombo()
 {
 	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
+#ifdef ENABLE_SPEECH
 	if (speechMgr->enabled())
 	{
 		const QString currentEngine=speechMgr->getEngine();
@@ -2479,6 +2489,7 @@ void ConfigurationDialog::populateSpeechEngineCombo()
 		}
 	}
 	else
+#endif
 	{
 		// disable UI elements on this page visually...
 		ui->speechTextEdit->setPlainText(q_("Speech output disabled. No engine found?"));
@@ -2523,6 +2534,7 @@ void ConfigurationDialog::populateSpeechEngineCombo()
 	}
 }
 
+#ifdef ENABLE_SPEECH
 void ConfigurationDialog::selectSpeechEngine(int idx)
 {
 	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
@@ -2585,3 +2597,4 @@ void ConfigurationDialog::selectVoice(int idx)
 		qCDebug(Speech) << "ConfigDialog: Speech voice set to" << voiceName;
 	}
 }
+#endif

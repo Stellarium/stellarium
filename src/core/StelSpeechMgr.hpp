@@ -54,18 +54,13 @@ Q_DECLARE_LOGGING_CATEGORY(Speech)
 class StelSpeechMgr : public StelModule
 {
 	Q_OBJECT
-//#if defined(ENABLE_SPEECH)
 
 	Q_PROPERTY(double rate                READ getRate     WRITE setRate     NOTIFY rateChanged)
 	Q_PROPERTY(double pitch               READ getPitch    WRITE setPitch    NOTIFY pitchChanged)
 	Q_PROPERTY(double volume              READ getVolume   WRITE setVolume   NOTIFY volumeChanged)
+#if defined(ENABLE_SPEECH)
 	Q_PROPERTY(QTextToSpeech::State state READ getState                      NOTIFY stateChanged)
-	// No properties! These are OS related and should not be synced.
-	//Q_PROPERTY(QString language           READ getLanguage WRITE setLanguage NOTIFY languageChanged) // Given the state of language support, it may be easier to have separate voice languages.
-	//Q_PROPERTY(QLocale locale             READ getLocale   WRITE setLocale   NOTIFY localeChanged)
-	//Q_PROPERTY(QString engine             READ getEngine   WRITE setEngine   NOTIFY engineChanged)
-	//Q_PROPERTY(QString voice              READ getVoice    WRITE setVoice    NOTIFY voiceChanged)
-//#endif
+#endif
 
 
 public:
