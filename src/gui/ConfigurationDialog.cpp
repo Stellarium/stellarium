@@ -226,8 +226,10 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->defaultSelectedInfoRadio, SIGNAL(released()), this, SLOT(setDefaultSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
 	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
-	connect(ui->buttonGroupDisplayedFields, &QButtonGroup::buttonClicked, this, &ConfigurationDialog::setSelectedInfoFromCheckBoxes);
-	connect(ui->buttonGroupNarrateFields,   &QButtonGroup::buttonClicked, this, &ConfigurationDialog::setSelectedNarrationFromCheckBoxes);
+	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(setSelectedInfoFromCheckBoxes()));
+#ifdef ENABLE_SPEECH
+	connect(ui->buttonGroupNarrateFields,   SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(setSelectedNarrationFromCheckBoxes()));
+#endif
 	if (appGui)
 		connect(appGui, SIGNAL(infoStringChanged()), this, SLOT(updateSelectedInfoGui()));
 	
@@ -439,51 +441,61 @@ void ConfigurationDialog::createDialogContent()
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateScriptsList()));
 	#else
 	ui->configurationStackedWidget->removeWidget(ui->page_Scripts); // only hide, no delete!
-	QListWidgetItem *item = ui->stackListWidget->takeItem(5); // take out from its place.
+	QListWidgetItem *item = ui->stackListWidget->takeItem(6); // take out from its place.
 	ui->stackListWidget->addItem(item); // We must add it back to the end of the tabs, as...
 	ui->stackListWidget->item(ui->stackListWidget->count()-1)->setHidden(true); // deleting would cause a crash during retranslation. (GH#2544)
 	#endif
 
 	// Speech configuration
-#if ((QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA))
-	ui->speechTextEdit->setPlainText(q_("Stellarium is a free open source planetarium for your computer. "
-					 "It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.")
-					 + "\n\n"
-					 + q_("Data can now be delivered with speech output."));
-	populateSpeechEngineCombo();
-	populateVoiceCombo();
-	connect(ui->comboBox_Engine, &QComboBox::currentIndexChanged, this, &ConfigurationDialog::selectSpeechEngine);
-	connect(ui->comboBox_Voice,  &QComboBox::currentIndexChanged, this, &ConfigurationDialog::selectVoice);
-	//ui->comboBox_englishVoice;
-	connectDoubleProperty(ui->spinBox_Pitch        , "StelSpeechMgr.pitch");
-	connectDoubleProperty(ui->spinBox_Volume       , "StelSpeechMgr.volume");
-	connectDoubleProperty(ui->spinBox_Rate         , "StelSpeechMgr.rate");
 	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
-	connect(ui->pushButton_SpeechSay,  &QPushButton::clicked, speechMgr, [this](){QString txt=ui->speechTextEdit->toPlainText(); qDebug() << txt; speechMgr->say(txt);});
-	connect(ui->pushButton_SpeechStop, &QPushButton::clicked, speechMgr, [this]{speechMgr->stop();});
+#if defined (ENABLE_SPEECH)
+	if (speechMgr->enabled())
+	{
+		ui->speechTextEdit->setPlainText(q_("Stellarium is a free open source planetarium for your computer. "
+						    "It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.")
+						 + "\n\n"
+						 + q_("Data can now be delivered with speech output."));
 
+		populateSpeechEngineCombo();
+		populateVoiceCombo();
+		connect(ui->comboBox_Engine, &QComboBox::currentIndexChanged, this, &ConfigurationDialog::selectSpeechEngine);
+		connect(ui->comboBox_Voice,  &QComboBox::currentIndexChanged, this, &ConfigurationDialog::selectVoice);
+		//ui->comboBox_englishVoice;
+		connectDoubleProperty(ui->spinBox_Pitch        , "StelSpeechMgr.pitch");
+		connectDoubleProperty(ui->spinBox_Volume       , "StelSpeechMgr.volume");
+		connectDoubleProperty(ui->spinBox_Rate         , "StelSpeechMgr.rate");
 
-#else
-	ui->groupBoxDisplayedFields->setTitle(q_("Displayed fields"));
-
-	const QList<QCheckBox *> narrationCheckboxes({ui->checkBoxName_Narrate, ui->checkBoxCatalogNumbers_Narrate, ui->checkBoxRaDecJ2000_Narrate,
-				ui->checkBoxRaDecOfDate_Narrate, ui->checkBoxHourAngle_Narrate, ui->checkBoxAltAz_Narrate,
-				ui->checkBoxEclipticCoordsJ2000_Narrate, ui->checkBoxEclipticCoordsOfDate_Narrate, ui->checkBoxGalacticCoordinates_Narrate,
-				ui->checkBoxSupergalacticCoordinates_Narrate, ui->checkBoxOtherCoords_Narrate, ui->checkBoxElongation_Narrate,
-				ui->checkBoxVisualMag_Narrate, ui->checkBoxAbsoluteMag_Narrate, ui->checkBoxType_Narrate,
-				ui->checkBoxSize_Narrate, ui->checkBoxVelocity_Narrate, ui->checkBoxProperMotion_Narrate,
-				ui->checkBoxDistance_Narrate, ui->checkBoxSiderealTime_Narrate, ui->checkBoxConstellation_Narrate,
-				ui->checkBoxRTSTime_Narrate, ui->checkBoxSolarLunarPosition_Narrate, ui->checkBoxExtra_Narrate});
-	for (QCheckBox *cb: narrationCheckboxes)
-		cb->hide();
-
-	ui->configurationStackedWidget->removeWidget(ui->page_Speech); // only hide, no delete!
-	QList<QListWidgetItem *> lwItemList=ui->stackListWidget->findItems("Speech", Qt::MatchExactly);
-	int pos = ui->stackListWidget->indexFromItem(lwItemList.first()).row();
-	QListWidgetItem *speechItem = ui->stackListWidget->takeItem(pos); // take out from its place.
-	ui->stackListWidget->addItem(speechItem); // We must add it back to the end of the tabs, as...
-	ui->stackListWidget->item(ui->stackListWidget->count()-1)->setHidden(true); // deleting would cause a crash during retranslation. (GH#2544)
+		connect(ui->pushButton_SpeechSay,  &QPushButton::clicked, speechMgr, [this](){QString txt=ui->speechTextEdit->toPlainText(); qDebug() << txt; speechMgr->say(txt);});
+		connect(ui->pushButton_SpeechStop, &QPushButton::clicked, speechMgr, [this]{speechMgr->stop();});
+	}
+	else
 #endif
+	{
+		ui->groupBoxDisplayedFields->setTitle(q_("Displayed fields"));
+
+		const QList<QCheckBox *> narrationCheckboxes({ui->checkBoxName_Narrate, ui->checkBoxCatalogNumbers_Narrate, ui->checkBoxRaDecJ2000_Narrate,
+							      ui->checkBoxRaDecOfDate_Narrate, ui->checkBoxHourAngle_Narrate, ui->checkBoxAltAz_Narrate,
+							      ui->checkBoxEclipticCoordsJ2000_Narrate, ui->checkBoxEclipticCoordsOfDate_Narrate, ui->checkBoxGalacticCoordinates_Narrate,
+							      ui->checkBoxSupergalacticCoordinates_Narrate, ui->checkBoxOtherCoords_Narrate, ui->checkBoxElongation_Narrate,
+							      ui->checkBoxVisualMag_Narrate, ui->checkBoxAbsoluteMag_Narrate, ui->checkBoxType_Narrate,
+							      ui->checkBoxSize_Narrate, ui->checkBoxVelocity_Narrate, ui->checkBoxProperMotion_Narrate,
+							      ui->checkBoxDistance_Narrate, ui->checkBoxSiderealTime_Narrate, ui->checkBoxConstellation_Narrate,
+							      ui->checkBoxRTSTime_Narrate, ui->checkBoxSolarLunarPosition_Narrate, ui->checkBoxExtra_Narrate});
+		for (QCheckBox *cb: narrationCheckboxes)
+			cb->hide();
+
+		ui->configurationStackedWidget->removeWidget(ui->page_Speech); // only hide, no delete!
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+		// Kludge: we should take out the element in front of scripts, but only Qt6 can find it.
+		int pos=5;
+#else
+		QList<QListWidgetItem *> lwItemList=ui->stackListWidget->findItems("Speech", Qt::MatchExactly);
+		int pos = ui->stackListWidget->indexFromItem(lwItemList.first()).row();
+#endif
+		QListWidgetItem *speechItem = ui->stackListWidget->takeItem(pos); // take out from its place.
+		ui->stackListWidget->addItem(speechItem); // We must add it back to the end of the tabs, as...
+		ui->stackListWidget->item(ui->stackListWidget->count()-1)->setHidden(true); // deleting would cause a crash during retranslation. (GH#2544)
+	}
 
 	// plugins control
 	connect(ui->pluginsListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(pluginsSelectionChanged(QListWidgetItem*, QListWidgetItem*)));
@@ -2451,6 +2463,7 @@ void ConfigurationDialog::storeFontSettings()
 void ConfigurationDialog::populateSpeechEngineCombo()
 {
 	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
+#ifdef ENABLE_SPEECH
 	if (speechMgr->enabled())
 	{
 		const QString currentEngine=speechMgr->getEngine();
@@ -2476,6 +2489,7 @@ void ConfigurationDialog::populateSpeechEngineCombo()
 		}
 	}
 	else
+#endif
 	{
 		// disable UI elements on this page visually...
 		ui->speechTextEdit->setPlainText(q_("Speech output disabled. No engine found?"));
@@ -2520,6 +2534,7 @@ void ConfigurationDialog::populateSpeechEngineCombo()
 	}
 }
 
+#ifdef ENABLE_SPEECH
 void ConfigurationDialog::selectSpeechEngine(int idx)
 {
 	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
@@ -2557,22 +2572,29 @@ void ConfigurationDialog::onSpeechReady()
 void ConfigurationDialog::populateVoiceCombo()
 {
 	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
-	QString currentVoice=speechMgr->getVoiceName();
+	if (speechMgr->enabled())
+	{
+		QString currentVoice=speechMgr->getVoiceName();
 
-	// Populate voice selection list
-	ui->comboBox_Voice->clear();
-	const QStringList voices = speechMgr->getAvailableVoiceNames();
-	for (const QString &voice : voices)
-	    ui->comboBox_Voice->addItem(voice, voice);
+		// Populate voice selection list
+		ui->comboBox_Voice->clear();
+		const QStringList voices = speechMgr->getAvailableVoiceNames();
+		for (const QString &voice : voices)
+			ui->comboBox_Voice->addItem(voice, voice);
 
-	int idx=ui->comboBox_Voice->findData(currentVoice);
-	ui->comboBox_Voice->setCurrentIndex(qMax(idx, 0));
+		int idx=ui->comboBox_Voice->findData(currentVoice);
+		ui->comboBox_Voice->setCurrentIndex(qMax(idx, 0));
+	}
 }
 
 void ConfigurationDialog::selectVoice(int idx)
 {
 	static StelSpeechMgr *speechMgr=StelApp::getInstance().getStelSpeechMgr();
-	QString voiceName=ui->comboBox_Voice->itemText(idx);
-	speechMgr->setVoice(voiceName);
-	qCDebug(Speech) << "ConfigDialog: Speech voice set to" << voiceName;
+	if (speechMgr->enabled())
+	{
+		QString voiceName=ui->comboBox_Voice->itemText(idx);
+		speechMgr->setVoice(voiceName);
+		qCDebug(Speech) << "ConfigDialog: Speech voice set to" << voiceName;
+	}
 }
+#endif
