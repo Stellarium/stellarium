@@ -26,7 +26,7 @@
 #include <QMap>
 #include <QString>
 #include <QLoggingCategory>
-#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
+#if (QT_VERSION>=QT_VERSION_CHECK(6,4,0)) && defined(ENABLE_MEDIA)
 #include <QAudioOutput>
 #include <QTextToSpeech>
 #endif
@@ -54,7 +54,7 @@ Q_DECLARE_LOGGING_CATEGORY(Speech)
 class StelSpeechMgr : public StelModule
 {
 	Q_OBJECT
-#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
+#if (QT_VERSION>=QT_VERSION_CHECK(6,4,0)) && defined(ENABLE_MEDIA)
 
 	Q_PROPERTY(double rate                READ getRate     WRITE setRate     NOTIFY rateChanged)
 	Q_PROPERTY(double pitch               READ getPitch    WRITE setPitch    NOTIFY pitchChanged)
@@ -86,7 +86,7 @@ signals:
 	void rateChanged(double);
 	void pitchChanged(double);
 	void volumeChanged(double);
-#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
+#if (QT_VERSION>=QT_VERSION_CHECK(6,4,0)) && defined(ENABLE_MEDIA)
 	void stateChanged(QTextToSpeech::State state);
 	void languageChanged();
 	void speechReady();
@@ -113,7 +113,7 @@ public slots:
 	void setVolume(double newVolume);
 	double getVolume() const {return m_volume;}
 
-#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
+#if (QT_VERSION>=QT_VERSION_CHECK(6,4,0)) && defined(ENABLE_MEDIA)
 	//! return the state of the Speech engine, or QTextToSpeech::State::Error
 	QTextToSpeech::State getState() const;
 
@@ -144,7 +144,9 @@ private:
 	//! This is called by onEngineChanged() and triggered by subsequent StelApp::languageChanged()
 	void onAppLanguageChanged();
 
-#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA)
+#if (QT_VERSION>=QT_VERSION_CHECK(6,4,0)) && defined(ENABLE_MEDIA)
+	//! Replicates some functionality of Qt6.6's findVoices, but just finds the voive of a particular name.
+	QVoice findVoice(QString &name) const;
 
 	QTextToSpeech *m_speech = nullptr;
 	QList<QVoice> m_voices;
