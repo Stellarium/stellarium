@@ -445,7 +445,7 @@ void ConfigurationDialog::createDialogContent()
 	#endif
 
 	// Speech configuration
-#if ((QT_VERSION>=QT_VERSION_CHECK(6,6,0)) && defined(ENABLE_MEDIA))
+#ifdef ENABLE_SPEECH
 	ui->speechTextEdit->setPlainText(q_("Stellarium is a free open source planetarium for your computer. "
 					 "It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.")
 					 + "\n\n"

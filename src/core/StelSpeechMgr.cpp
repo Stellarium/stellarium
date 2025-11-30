@@ -21,11 +21,10 @@
 #include "StelApp.hpp"
 #include <QDebug>
 
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,4,0))
+#if defined(ENABLE_SPEECH)
 
 #include <random>
 #include <chrono>
-#include <QTextToSpeech>
 #include <QVoice>
 #include "StelLocaleMgr.hpp"
 #endif
@@ -33,20 +32,22 @@
 Q_LOGGING_CATEGORY(Speech,"stel.Speech", QtDebugMsg) // TODO: Before merge, demote to QtInfoMsg
 
 
-StelSpeechMgr::StelSpeechMgr(): StelModule(),
-	m_speech(nullptr)
+StelSpeechMgr::StelSpeechMgr(): StelModule()
+#if defined(ENABLE_SPEECH)
+      , m_speech(nullptr)
+#endif
 {
 	setObjectName("StelSpeechMgr");
 
 	// Start without engine, then set the right one in init()
-#if not defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,4,0))
+#if not defined(ENABLE_SPEECH)
 	qCInfo(Speech) << "Text to Speech requires Qt6.4 or higher";
 #endif
 }
 
 StelSpeechMgr::~StelSpeechMgr()
 {
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,4,0))
+#if defined(ENABLE_SPEECH)
 	m_voices.clear();
 	if (m_speech)
 	{
@@ -65,7 +66,7 @@ void StelSpeechMgr::init()
 	m_pitch =qBound(-1.0, conf->value("speech/pitch",  0.0).toDouble(), 1.0);
 	m_volume=qBound( 0.0, conf->value("speech/volume", 0.5).toDouble(), 1.0);
 
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,4,0))
+#if defined(ENABLE_SPEECH)
 	QStringList availableEngines = QTextToSpeech::availableEngines();
 	availableEngines.removeOne("mock"); // remove unhelpful dummy
 	// we are only running when enabled(), i.e. at least the default engine is available.
@@ -89,25 +90,24 @@ void StelSpeechMgr::init()
 		setEngine(candEngine);
 	else if (!availableEngines.isEmpty())
 		setEngine(availableEngines.constFirst());
-#endif
 	else
 	{
 		qCWarning(Speech) << "Cannot Initialize Text to Speech";
 		Q_ASSERT(0); // is there a chance to ever come here?
 	}
+#endif
 }
 
 bool StelSpeechMgr::enabled() const
 {
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,4,0))
+#if defined(ENABLE_SPEECH)
 	return (m_speech && m_speech->state()!=QTextToSpeech::State::Error);
 #else
 	return false;
 #endif
 }
 
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,4,0))
-
+#if defined(ENABLE_SPEECH)
 
 QTextToSpeech::State StelSpeechMgr::getState() const
 {
@@ -120,7 +120,7 @@ QTextToSpeech::State StelSpeechMgr::getState() const
 void StelSpeechMgr::say(const QString &narration) const
 {
 	qCDebug(Speech) << "StelSpeechMgr::say(): " << narration;
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,4,0))
+#if defined(ENABLE_SPEECH)
 	if (enabled())
 		m_speech->say(narration);
 #endif
@@ -129,7 +129,7 @@ void StelSpeechMgr::say(const QString &narration) const
 void StelSpeechMgr::stop() const
 {
 	qCDebug(Speech) << "StelSpeechMgr::stop() ";
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,4,0))
+#if defined(ENABLE_SPEECH)
 	if (enabled())
 	{
 		m_speech->stop(QTextToSpeech::BoundaryHint::Word);
@@ -159,7 +159,7 @@ void StelSpeechMgr::setRate(double rate)
 {
 	m_rate=rate;
 	StelApp::immediateSave("speech/rate", rate);
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,4,0))
+#if defined(ENABLE_SPEECH)
 	if (m_speech)
 		m_speech->setRate(rate);
 #endif
@@ -171,7 +171,7 @@ void StelSpeechMgr::setPitch(double pitch)
 {
 	m_pitch=pitch;
 	StelApp::immediateSave("speech/pitch", pitch);
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,4,0))
+#if defined(ENABLE_SPEECH)
 	if (m_speech)
 		m_speech->setPitch(pitch);
 #endif
@@ -183,13 +183,15 @@ void StelSpeechMgr::setVolume(double volume)
 {
 	m_volume=volume;
 	StelApp::immediateSave("speech/volume", volume);
-#if defined(ENABLE_MEDIA) && (QT_VERSION>=QT_VERSION_CHECK(6,4,0))
+#if defined(ENABLE_SPEECH)
 	if (m_speech)
 		m_speech->setVolume(volume);
 #endif
 	emit volumeChanged(volume);
 	qCDebug(Speech) << "set Volume" << volume;
 }
+
+#if defined(ENABLE_SPEECH)
 
 void StelSpeechMgr::setEngine(const QString &engineName)
 {
@@ -335,6 +337,7 @@ void StelSpeechMgr::onAppLanguageChanged()
 
 	emit languageChanged();
 }
+#endif
 
 //! Retrieve the currently active flags which information bits to narrate
 const StelObject::InfoStringGroup& StelSpeechMgr::getNarrationTextFilters() const
