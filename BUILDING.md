@@ -473,7 +473,7 @@ example and may not apply to your setup.
 on your main system drive. Add the path to your user/system environment variables PATH to allow Stellarium to 
 discover them during runtime.
 
-Open Visual Studio 2022. Continue wihtout code.
+Open Visual Studio 2022. Continue without code.
 
 If you want to use a specific cmake.exe go to Tools -> Options, navigate to Cmake -> General and fill the appropriate
 checkbox and path. Otherwise VS 2022 will use it own cmake.exe tool. The path of an external cmake should be included
@@ -499,7 +499,7 @@ Then build by typing this command in the Developer Command Prompt:
 
 cmake --build --preset Release
 
-Redo the same process for the last build, ie. RelWithDebInfo.
+Redo the same process for the last build, i.e. RelWithDebInfo.
 
 cmake --build --preset RelWithDebInfo
 
@@ -526,7 +526,7 @@ Note: To work on the Release or RelWithDebInfo configuration first select it fro
 
 You can also used this newly released version of Visual Studio (November 2025) to build and develop Stellarium. This release fixes the bug 
 of VS 2022 for the building steps and in a sense simplify the building process of Stellarium. Here are the changes to the process described
-above for Visual Studio 2022 (multi-configuraiton)
+above for Visual Studio 2022 (multi-configuration)
 
 Use a slightly different CMakePresets.json file, and adapt it to your development environment.
 
@@ -585,7 +585,7 @@ Use a slightly different CMakePresets.json file, and adapt it to your developmen
   ]
 }
 
-Note: To use 'Visual Studio 18 2026' generator, you need the lastest version of CMake, version 4.2.0
+Note: To use 'Visual Studio 18 2026' generator, you need the latest version of CMake, version 4.2.0
 
 Open Visual Studio 2026. Open the Stellarium folder.
 
