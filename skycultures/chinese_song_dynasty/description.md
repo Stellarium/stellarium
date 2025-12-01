@@ -37,7 +37,11 @@ In their work *Roving China Heavens*[#2], Qi Rui (齐锐) and Wan Haoyi (万昊�
 
 Due to the limitations of observational technology and potential errors in transmission, different scholarly reconstructions may vary slightly. Based on the aforementioned works, Stellarium faithfully reconstructs the Chinese night sky of 1052 AD.
 
-### Sun, Moon and Planets
+###The Milky Way
+
+In China's Song Dynasty, the official name for the Milky Way was "天汉" (pinyin: Tiānhàn), meaning "river in the heavens." It was also referred to as "银河" (pinyin: Yínhé)—which remains the modern Chinese official name for the Milky Way—meaning "silver river." In traditional Chinese culture, the Milky Way has also been referred to as "天河" (Tiānhé), similarly meaning "river in the heavens"; "银汉" (Yínhàn), also meaning "silvery river"; "河汉" (Héhàn), meaning "river in the sky"; "星河" (Xīnghé) or "星汉" (Xīnghàn), meaning "river of stars"; and "云汉" (Yúnhàn), meaning "cloud-like river."
+
+### Seven Luminaries
 
 The Sun, the Moon, and the five major planets are collectively referred to as the *Seven Luminaries*. The sun and moon are named after *yin and yang*, while the pictographic characters "日" (the Sun, pinyin: Rì) and "月" (the Moon, pinyin: Yuè) are also used. The five major planets represent the *five elements*, but the following names were the most orthodox designations at the time. Similar to other civilizations around the world, Venus also had additional names depending on whether it appeared in the morning or the evening.
 
