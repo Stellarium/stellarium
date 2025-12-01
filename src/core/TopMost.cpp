@@ -10,5 +10,4 @@ TopMost::TopMost(QWidget *parent) :
 
 TopMost::~TopMost()
 {
-
 }
