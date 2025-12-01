@@ -37,7 +37,7 @@ In their work *Roving China Heavens*[#2], Qi Rui (齐锐) and Wan Haoyi (万昊�
 
 Due to the limitations of observational technology and potential errors in transmission, different scholarly reconstructions may vary slightly. Based on the aforementioned works, Stellarium faithfully reconstructs the Chinese night sky of 1052 AD.
 
-###The Milky Way
+### The Milky Way
 
 In China's Song Dynasty, the official name for the Milky Way was "天汉" (pinyin: Tiānhàn), meaning "river in the heavens." It was also referred to as "银河" (pinyin: Yínhé)—which remains the modern Chinese official name for the Milky Way—meaning "silver river." In traditional Chinese culture, the Milky Way has also been referred to as "天河" (Tiānhé), similarly meaning "river in the heavens"; "银汉" (Yínhàn), also meaning "silvery river"; "河汉" (Héhàn), meaning "river in the sky"; "星河" (Xīnghé) or "星汉" (Xīnghàn), meaning "river of stars"; and "云汉" (Yúnhàn), meaning "cloud-like river."
 
