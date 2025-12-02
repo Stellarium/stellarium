@@ -236,31 +236,31 @@ private:
 	const QString groupId      = N_("Sky Culture Maker");
 	const QString actionIdLine = "actionShow_SkyCultureMaker_Line";
 
-	// Indicates that SCM is enabled
+	/// Indicates that SCM is enabled
 	bool isScmEnabled = false;
 
-	// Indicates that line drawing can be done (QT Signal)
+	/// Indicates that line drawing can be done (QT Signal)
 	bool isLineDrawEnabled = false;
 
-	// The button to activate line drawing.
+	/// The button to activate line drawing.
 	StelButton *toolbarButton = nullptr;
 
-	// Font used for displaying our text
+	/// Font used for displaying our text
 	QFont font;
 
-	// The object used for drawing constellations
+	/// The object used for drawing constellations
 	scm::ScmDraw *drawObj = nullptr;
 
-	// Map of all SCM dialogs
+	/// Map of all SCM dialogs
 	const QMap<scm::DialogID, StelDialog *> dialogMap;
 
-	// The current sky culture
+	/// The current sky culture
 	scm::ScmSkyCulture *currentSkyCulture = nullptr;
 
-	// The dialog visibility states. This is used to restore the visibility states after hiding all dialogs.
+	/// The dialog visibility states. This is used to restore the visibility states after hiding all dialogs.
 	QMap<scm::DialogID, bool> dialogVisibilityMap;
 
-	// The artwork to temporary draw on the sky.
+	/// The artwork to temporary draw on the sky.
 	const scm::ScmConstellationArtwork *tempArtwork = nullptr;
 
 	/**
