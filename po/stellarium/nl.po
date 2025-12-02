@@ -14,21 +14,21 @@
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023
 # Erwin Dondorp, 2024
 # EggBird, 2025
-# Alex Rijckaert, 2025
 # Harry Mensch, 2025
 # Lisa -, 2025
 # Dirk Devlies <dirk.devlies@telenet.be>, 2025
 # alex <alex.a.nder.duy.tschaever@gmail.com>, 2025
 # Filip Questier, 2025
+# Alex Rijckaert, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-11-11 11:07+0700\n"
+"POT-Creation-Date: 2025-11-19 19:27+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Filip Questier, 2025\n"
+"Last-Translator: Alex Rijckaert, 2025\n"
 "Language-Team: Dutch (https://app.transifex.com/stellarium/teams/80998/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,7 +57,7 @@ msgstr "eigen object"
 #: src/gui/AstroCalcDialog.cpp:953 src/gui/AstroCalcDialog.cpp:2456
 #: src/gui/AstroCalcDialog.cpp:3048 src/gui/AstroCalcDialog.cpp:3080
 #: src/gui/AstroCalcDialog.cpp:3404 src/gui/AstroCalcDialog.cpp:7688
-#: src/gui/ObsListDialog.cpp:291 src/ui_configurationDialog.h:2021
+#: src/gui/ObsListDialog.cpp:297 src/ui_configurationDialog.h:2021
 #: plugins/Satellites/src/Satellite.cpp:341
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:145
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
@@ -87,7 +87,7 @@ msgstr "asterisme"
 #: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:156
 #: src/core/modules/HipsMgr.cpp:157 src/core/StelApp.cpp:699
 #: src/core/StelCore.cpp:310 src/core/StelSkyLayerMgr.cpp:83
-#: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:966
+#: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:969
 msgid "Display Options"
 msgstr "Opties weergeven"
 
@@ -136,15 +136,15 @@ msgstr "Sterrenbeeldgrenzen"
 
 #: src/core/modules/ConstellationMgr.cpp:152
 msgid "Zodiac (if defined in skyculture)"
-msgstr ""
+msgstr "Dierenriem (indien gedefinieerd in skycultuur)"
 
 #: src/core/modules/ConstellationMgr.cpp:153
 msgid "Lunar stations/mansions (if defined in skyculture)"
-msgstr ""
+msgstr "Lunar stations/mansions (indien gedefinieerd in skycultuur)"
 
 #: src/core/modules/ConstellationMgr.cpp:156
 msgid "Constellation areas (hulls)"
-msgstr ""
+msgstr "Sterrenbeeldgebieden (rompen)"
 
 #: src/core/modules/ConstellationMgr.cpp:157 src/ui_viewDialog.h:4960
 msgid "Select single constellation"
@@ -871,7 +871,7 @@ msgctxt "distance"
 msgid "m"
 msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:1536 src/gui/ObsListDialog.cpp:297
+#: src/core/modules/LandscapeMgr.cpp:1536 src/gui/ObsListDialog.cpp:303
 #: src/ui_locationDialogGui.h:414 src/ui_obsListDialog.h:416
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
@@ -1848,7 +1848,7 @@ msgstr "object van onbekende aard"
 #: src/core/modules/Nebula.cpp:179 src/core/StelObject.cpp:350
 #: src/gui/AstroCalcChart.cpp:97 src/gui/AstroCalcChart.cpp:107
 #: src/gui/AstroCalcChart.cpp:437 src/gui/AstroCalcChart.cpp:463
-#: src/gui/ObsListDialog.cpp:294 plugins/Supernovae/src/Supernova.cpp:128
+#: src/gui/ObsListDialog.cpp:300 plugins/Supernovae/src/Supernova.cpp:128
 msgid "Magnitude"
 msgstr "Magnitude"
 
@@ -2288,7 +2288,7 @@ msgid "Toggle DSO type filter"
 msgstr "Schakelen tussen DSO-type filter"
 
 #: src/core/modules/NebulaMgr.cpp:1572 src/gui/StelDialog.cpp:336
-#: src/gui/ObsListDialog.cpp:588 src/StelMainView.cpp:1063
+#: src/gui/ObsListDialog.cpp:597 src/StelMainView.cpp:1066
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:777
 msgid "Attention!"
 msgstr "Opgelet!"
@@ -2314,12 +2314,12 @@ msgstr "Zie logbestand voor instructies."
 #: src/core/modules/NebulaMgr.cpp:2042
 msgctxt "context"
 msgid "pronounce"
-msgstr ""
+msgstr "spreek uit"
 
 #: src/core/modules/NebulaMgr.cpp:2045
 msgctxt "context"
 msgid "english"
-msgstr ""
+msgstr "engels"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Planet satellites
 #. TRANSLATORS: CelesTrak source [Planet]:
@@ -3262,7 +3262,7 @@ msgstr "Tijd stoppen"
 
 #: src/core/StelCore.cpp:318
 msgid "Toggle time rate to zero and back"
-msgstr ""
+msgstr "Schakel de tijdfrequentie naar nul en weer terug"
 
 #: src/core/StelCore.cpp:319
 msgid "Set reverse time direction"
@@ -3890,12 +3890,12 @@ msgstr ""
 "coëfficiënten bepaald door de gebruiker."
 
 #: src/core/StelCore.cpp:2795 src/core/SimbadSearcher.cpp:187
-#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:972
-#: src/gui/ObsListDialog.cpp:996 src/gui/ObsListDialog.cpp:1045
-#: src/gui/ObsListDialog.cpp:1061 src/gui/ObsListDialog.cpp:1102
-#: src/gui/ObsListDialog.cpp:1114 src/gui/ObsListDialog.cpp:1123
-#: src/gui/ObsListDialog.cpp:1141 src/gui/ObsListDialog.cpp:1161
-#: src/gui/ObsListDialog.cpp:1324 src/gui/ObsListDialog.cpp:1329
+#: src/gui/ObsListDialog.cpp:87 src/gui/ObsListDialog.cpp:981
+#: src/gui/ObsListDialog.cpp:1005 src/gui/ObsListDialog.cpp:1054
+#: src/gui/ObsListDialog.cpp:1070 src/gui/ObsListDialog.cpp:1111
+#: src/gui/ObsListDialog.cpp:1123 src/gui/ObsListDialog.cpp:1132
+#: src/gui/ObsListDialog.cpp:1150 src/gui/ObsListDialog.cpp:1170
+#: src/gui/ObsListDialog.cpp:1333 src/gui/ObsListDialog.cpp:1338
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "Fout"
@@ -4013,13 +4013,15 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:549
 msgid "Mollweide"
-msgstr ""
+msgstr "Mollweide"
 
 #: src/core/StelProjectorClasses.cpp:554
 msgid ""
 "The Mollweide projection is an equal-area map projection introduced by Karl "
 "Mollweide in 1805."
 msgstr ""
+"De Mollweide-projectie is een gelijkwaardige kaartprojectie die in 1805 door"
+" Karl Mollweide werd geïntroduceerd."
 
 #: src/core/StelProjectorClasses.cpp:695
 msgid "Cylinder"
@@ -4110,7 +4112,7 @@ msgstr "(schijnbaar)"
 #: src/core/StelObject.cpp:408
 msgctxt "celestial coordinate system"
 msgid "RA/PD"
-msgstr ""
+msgstr "RA/PD"
 
 #. TRANSLATORS: Right ascension/Declination
 #: src/core/StelObject.cpp:413
@@ -4122,7 +4124,7 @@ msgstr "RA/Dec"
 #: src/core/StelObject.cpp:498
 msgctxt "celestial coordinate system"
 msgid "HA/PD"
-msgstr ""
+msgstr "HA/PD"
 
 #. TRANSLATORS: Hour angle/Declination
 #: src/core/StelObject.cpp:500
@@ -4284,7 +4286,7 @@ msgid "Lunar Az./Alt."
 msgstr "Maan az./alt."
 
 #: src/core/StelObjectMgr.cpp:50 src/core/StelMovementMgr.cpp:194
-#: src/gui/StelGui.cpp:274 src/StelMainView.cpp:964 src/StelMainView.cpp:965
+#: src/gui/StelGui.cpp:274 src/StelMainView.cpp:967 src/StelMainView.cpp:968
 msgid "Miscellaneous"
 msgstr "Diversen"
 
@@ -4321,7 +4323,7 @@ msgstr "Dierenriem"
 
 #: src/core/StelSkyCultureSkyPartition.cpp:520
 msgid "Lunar Station"
-msgstr ""
+msgstr "Lunar Station"
 
 #: src/core/StelSkyCultureMgr.cpp:381
 msgctxt "sky culture classification"
@@ -4551,7 +4553,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:256
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:296
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:298
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
@@ -5043,7 +5045,7 @@ msgstr "Dankbetuigingen"
 #: src/gui/ConfigurationDialog.cpp:1369
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:297
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 msgid "Authors"
@@ -5061,7 +5063,7 @@ msgstr "Contact"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:255
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:295
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:297
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
@@ -5642,7 +5644,7 @@ msgstr "Gebaseerd op Qt"
 
 #: src/gui/HelpDialog.cpp:518
 msgid "Running on Operating System"
-msgstr ""
+msgstr "Draait op Besturingssysteem"
 
 #: src/gui/HelpDialog.cpp:539
 msgid "Developers"
@@ -5996,11 +5998,11 @@ msgstr "eigenschappen"
 
 #: src/gui/ViewDialog.cpp:890
 msgid "Normal map"
-msgstr ""
+msgstr "Normale kaart"
 
 #: src/gui/ViewDialog.cpp:891
 msgid "Horizon map"
-msgstr ""
+msgstr "Horizonkaart"
 
 #: src/gui/ViewDialog.cpp:970
 msgid "Deep Sky"
@@ -6013,11 +6015,12 @@ msgstr "Zonnestelsel"
 
 #: src/gui/ViewDialog.cpp:1106
 msgid "No albedo map"
-msgstr ""
+msgstr "Geen albedo kaart"
 
 #: src/gui/ViewDialog.cpp:1107
 msgid "This group of surveys doesn't have an albedo map. Can't display it."
 msgstr ""
+"Deze groep onderzoeken heeft geen albedo kaart. Kan deze niet weergeven."
 
 #: src/gui/ViewDialog.cpp:1334
 msgid ""
@@ -6046,22 +6049,22 @@ msgstr "s"
 #: src/gui/ViewDialog.cpp:1505
 msgctxt "cultural style"
 msgid "native"
-msgstr ""
+msgstr "oorspronkelijk"
 
 #: src/gui/ViewDialog.cpp:1506
 msgctxt "cultural style"
 msgid "transliteration"
-msgstr ""
+msgstr "transliteratie"
 
 #: src/gui/ViewDialog.cpp:1507
 msgctxt "cultural style"
 msgid "sci. translit."
-msgstr ""
+msgstr "sci. translit."
 
 #: src/gui/ViewDialog.cpp:1508
 msgctxt "cultural style"
 msgid "translated"
-msgstr ""
+msgstr "vertaald"
 
 #: src/gui/ViewDialog.cpp:1659
 msgid "No shooting stars"
@@ -6456,17 +6459,17 @@ msgid "Ecliptic (J2000.0)"
 msgstr "Ecliptica (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:369 src/gui/AstroCalcChart.cpp:445
-#: src/gui/AstroCalcChart.cpp:471 src/gui/ObsListDialog.cpp:292
+#: src/gui/AstroCalcChart.cpp:471 src/gui/ObsListDialog.cpp:298
 msgid "Right ascension"
 msgstr "Rechte klimming"
 
 #: src/gui/SearchDialog.cpp:372
 msgid "Polar distance"
-msgstr ""
+msgstr "Polaire afstand"
 
 #: src/gui/SearchDialog.cpp:372 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:428
-#: src/gui/AstroCalcChart.cpp:454 src/gui/ObsListDialog.cpp:293
+#: src/gui/AstroCalcChart.cpp:454 src/gui/ObsListDialog.cpp:299
 msgid "Declination"
 msgstr "Declinatie"
 
@@ -6634,7 +6637,7 @@ msgstr "RA (J2000)"
 #. TRANSLATORS: polar distance
 #: src/gui/AstroCalcDialog.cpp:892 src/gui/AstroCalcDialog.cpp:1808
 msgid "PD (J2000)"
-msgstr ""
+msgstr "PD (J2000)"
 
 #. TRANSLATORS: declination
 #: src/gui/AstroCalcDialog.cpp:897 src/gui/AstroCalcDialog.cpp:1813
@@ -7132,7 +7135,7 @@ msgid "Duration of total or annular phase at greatest eclipse"
 msgstr "Duur van de maximale verduistering"
 
 #: src/gui/AstroCalcDialog.cpp:3403 src/gui/AstroCalcChart.cpp:380
-#: src/gui/ObsListDialog.cpp:296 src/ui_obsListDialog.h:412
+#: src/gui/ObsListDialog.cpp:302 src/ui_obsListDialog.h:412
 msgid "Date"
 msgstr "Datum"
 
@@ -8439,98 +8442,98 @@ msgstr "De duur van de ochtend- en avondschemeringen."
 #: src/gui/AstroCalcAlmanacWidget.cpp:406
 msgctxt "duration, suffix"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: src/gui/AstroCalcAlmanacWidget.cpp:489 src/ui_astroCalcAlmanacWidget.h:1115
 #: plugins/NavStars/src/ui_navStarsWindow.h:546
 msgid "Today"
 msgstr "Vandaag"
 
-#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:1123
+#: src/gui/ObsListDialog.cpp:87 src/gui/ObsListDialog.cpp:1132
 msgid "Cannot open observingLists.json to write"
 msgstr "Kan observingLists.json niet openen om te bewerken."
 
-#: src/gui/ObsListDialog.cpp:182
+#: src/gui/ObsListDialog.cpp:186
 msgctxt "default name for observing list if none is available"
 msgid "new list"
 msgstr "nieuwe lijst"
 
-#: src/gui/ObsListDialog.cpp:222
+#: src/gui/ObsListDialog.cpp:228
 msgid "Select observing lists directory"
 msgstr "Selecteer waarnemende lijstenmap"
 
-#: src/gui/ObsListDialog.cpp:289
+#: src/gui/ObsListDialog.cpp:295
 msgid "Object designation"
 msgstr "Object benaming"
 
-#: src/gui/ObsListDialog.cpp:290
+#: src/gui/ObsListDialog.cpp:296
 msgid "Object name"
 msgstr "Objectnaam"
 
-#: src/gui/ObsListDialog.cpp:295 src/ui_configurationDialog.h:2030
+#: src/gui/ObsListDialog.cpp:301 src/ui_configurationDialog.h:2030
 msgid "Constellation"
 msgstr "Sterrenbeeld"
 
-#: src/gui/ObsListDialog.cpp:298 src/ui_viewDialog.h:3878
+#: src/gui/ObsListDialog.cpp:304 src/ui_viewDialog.h:3878
 #: src/ui_obsListDialog.h:420
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:473
 msgid "Landscape"
 msgstr "Landschap"
 
-#: src/gui/ObsListDialog.cpp:588
+#: src/gui/ObsListDialog.cpp:597
 msgid "Error during conversion. Please see logfile for details."
 msgstr ""
 "Fout tijdens conversie. Raadpleeg het logbestand voor meer informatie."
 
-#: src/gui/ObsListDialog.cpp:700
+#: src/gui/ObsListDialog.cpp:709
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:225
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Note"
 msgstr "Notitie"
 
-#: src/gui/ObsListDialog.cpp:700
+#: src/gui/ObsListDialog.cpp:709
 msgid "Some bookmarked objects were not found. See logfile for details."
 msgstr ""
 "Sommige objecten met bladwijzers zijn niet gevonden. Zie logbestand voor "
 "details."
 
-#: src/gui/ObsListDialog.cpp:950
+#: src/gui/ObsListDialog.cpp:959
 msgid "New Observation List"
 msgstr "Nieuwe observatielijst"
 
-#: src/gui/ObsListDialog.cpp:951
+#: src/gui/ObsListDialog.cpp:960
 msgid "Observing list creation mode"
 msgstr "Observatielijst aanmaak modus"
 
-#: src/gui/ObsListDialog.cpp:967
+#: src/gui/ObsListDialog.cpp:976
 msgid "Observing list editor mode"
 msgstr "Observatielijst bewerkingsmodus"
 
-#: src/gui/ObsListDialog.cpp:972
+#: src/gui/ObsListDialog.cpp:981
 msgid "selectedOlud empty. This is a bug"
 msgstr "selectedOlud leeg. Dit is een bug"
 
-#: src/gui/ObsListDialog.cpp:984
+#: src/gui/ObsListDialog.cpp:993
 msgid "Export observing list as..."
 msgstr "Observatielijsten exporteren als..."
 
-#: src/gui/ObsListDialog.cpp:996
+#: src/gui/ObsListDialog.cpp:1005
 msgid "Cannot export. See logfile for details."
 msgstr "Kan niet exporteren. Zie logfile voor details."
 
-#: src/gui/ObsListDialog.cpp:1033
+#: src/gui/ObsListDialog.cpp:1042
 msgid "Import observing list"
 msgstr "Importeer observatielijst"
 
-#: src/gui/ObsListDialog.cpp:1045
+#: src/gui/ObsListDialog.cpp:1054
 msgid "Cannot open selected file for import"
 msgstr "Kan geselecteerde bestand niet openen voor import"
 
-#: src/gui/ObsListDialog.cpp:1061
+#: src/gui/ObsListDialog.cpp:1070
 msgid "Empty list."
 msgstr "Lege lijst."
 
-#: src/gui/ObsListDialog.cpp:1083
+#: src/gui/ObsListDialog.cpp:1092
 #, qt-format
 msgid ""
 "A list named '%1', created %2 and last modified %3 would overwrite your "
@@ -8540,44 +8543,44 @@ msgstr ""
 "uw bestaande lijst '%4', gedateerd %5 en laatst gewijzigd op %6 "
 "overschrijven. Accepteren?"
 
-#: src/gui/ObsListDialog.cpp:1102
+#: src/gui/ObsListDialog.cpp:1111
 msgid "The file is empty or doesn't contain legacy bookmarks."
 msgstr "Het bestand is leeg of bevat geen bestaande bladwijzers."
 
-#: src/gui/ObsListDialog.cpp:1114
+#: src/gui/ObsListDialog.cpp:1123
 msgid "File does not contain observing lists or legacy bookmarks"
 msgstr "Het bestand bevat geen observatielijsten of bestaande bladwijzers"
 
-#: src/gui/ObsListDialog.cpp:1141
+#: src/gui/ObsListDialog.cpp:1150
 msgid "File format is wrong!"
 msgstr "Bestandsformaat is verkeerd!"
 
-#: src/gui/ObsListDialog.cpp:1161
+#: src/gui/ObsListDialog.cpp:1170
 msgid "Cannot open JSON output file. Will not delete."
 msgstr "Kan JSON uitvoerbestand niet openen. Wordt niet verwijderd."
 
-#: src/gui/ObsListDialog.cpp:1185 src/ui_configurationDialog.h:1895
+#: src/gui/ObsListDialog.cpp:1194 src/ui_configurationDialog.h:1895
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
 msgid "Information"
 msgstr "Informatie"
 
-#: src/gui/ObsListDialog.cpp:1185
+#: src/gui/ObsListDialog.cpp:1194
 msgid "You cannot delete the default or the last list."
 msgstr "U kunt de standaard- of de laatste lijst niet wissen."
 
-#: src/gui/ObsListDialog.cpp:1241
+#: src/gui/ObsListDialog.cpp:1250
 msgid "Unnamed object"
 msgstr "Object zonder naam"
 
-#: src/gui/ObsListDialog.cpp:1324
+#: src/gui/ObsListDialog.cpp:1333
 msgid "Empty name"
 msgstr "Naam leegmaken"
 
-#: src/gui/ObsListDialog.cpp:1329
+#: src/gui/ObsListDialog.cpp:1338
 msgid "List name already exists"
 msgstr "Naam van de lijst bestaat reeds"
 
-#: src/gui/ObsListDialog.cpp:1394 src/ui_configurationDialog.h:2095
+#: src/gui/ObsListDialog.cpp:1403 src/ui_configurationDialog.h:2095
 #: src/ui_obsListDialog.h:361
 msgid "Observing lists"
 msgstr "Observatielijsten"
@@ -8649,19 +8652,19 @@ msgstr ""
 msgid "Shortcut"
 msgstr "Sneltoets"
 
-#: src/StelMainView.cpp:964
+#: src/StelMainView.cpp:967
 msgid "Save screenshot"
 msgstr "Schermafbeelding opslaan"
 
-#: src/StelMainView.cpp:965
+#: src/StelMainView.cpp:968
 msgid "Reload shaders (for development)"
 msgstr "Shaders herladen (voor ontwikkeling)"
 
-#: src/StelMainView.cpp:966
+#: src/StelMainView.cpp:969
 msgid "Full-screen mode"
 msgstr "Volledig scherm modus"
 
-#: src/StelMainView.cpp:1063
+#: src/StelMainView.cpp:1066
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
@@ -8669,7 +8672,7 @@ msgstr ""
 "Snelkoppelingen conflicten! Druk na het opstarten van het programma op F7 en"
 " controleer de volgende afstellingen"
 
-#: src/StelMainView.cpp:1146
+#: src/StelMainView.cpp:1151
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -8677,7 +8680,7 @@ msgstr ""
 "Verouderde versie. Update drivers, grafische hardware, of gebruik de --hoek-"
 "modus (of de --mesa-modus) optie."
 
-#: src/StelMainView.cpp:1148
+#: src/StelMainView.cpp:1153
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
@@ -8685,13 +8688,13 @@ msgstr ""
 "OpenGL versie is verouderd; gelieve drivers en/of grafische hardware te "
 "vernieuwen of anders de --mesa-mode te gebruiken."
 
-#: src/StelMainView.cpp:1152
+#: src/StelMainView.cpp:1157
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Verouderde OpenGL versie. Update de drivers van de grafische hardware."
 
-#: src/StelMainView.cpp:1195
+#: src/StelMainView.cpp:1200
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8699,7 +8702,7 @@ msgstr ""
 "Uw DirectX/OpenGL ES subsysteem heeft problemen. Zie de log voor details.\n"
 "Negeer en onderdruk deze waarschuwing in de toekomst en probeer toch door te gaan in een gedegradeerde modus?"
 
-#: src/StelMainView.cpp:1246
+#: src/StelMainView.cpp:1251
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8707,7 +8710,7 @@ msgstr ""
 "Uw OpenGL/Mesa subsysteem heeft problemen. Zie de log voor details.\n"
 "Negeer en onderdruk deze waarschuwing in de toekomst en probeer toch door te gaan in een gedegradeerde modus?"
 
-#: src/StelMainView.cpp:1306
+#: src/StelMainView.cpp:1311
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8715,7 +8718,7 @@ msgstr ""
 "Uw OpenGL subsysteem heeft problemen. Zie de log voor details.\n"
 "Negeer en onderdruk deze waarschuwing in de toekomst en probeer toch door te gaan in een gedegradeerde modus?"
 
-#: src/StelMainView.cpp:1347
+#: src/StelMainView.cpp:1352
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -9909,6 +9912,10 @@ msgid ""
 "variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. (Style is "
 "restored at end.)"
 msgstr ""
+"Bekijk elke geïnstalleerde sky culture. De labelstijl wordt gedwongen om "
+"‘Oorspronkelijk,Vertaald,Modern’ te zijn, ongeacht de gebruikersinstelling, "
+"tenzij de omgevingsvariabele STEL_SCRIPT_OBEY_SKYCULTURE_STYLE waar is. (De "
+"stijl wordt aan het einde hersteld.)"
 
 #: src/translations.h:579
 msgid "Script to demonstrate a partial lunar eclipse."
@@ -9945,6 +9952,14 @@ msgid ""
 "changes in skyculture (if not disabled by env. var.), labeling style, and "
 "shows constellation figures, boundaries and ecliptic."
 msgstr ""
+"Dit script geeft de sterrenbeelden van de dierenriem weer. Dat zijn de "
+"sterrenbeelden die langs de lijn liggen die de zon in de loop van een jaar "
+"aan de hemel aflegt. De labelstijl wordt gedwongen om "
+"‘Oorspronkelijk,Vertaald,Modern’ te zijn, ongeacht de instelling van de "
+"gebruiker, tenzij de omgevingsvariabele STEL_SCRIPT_OBEY_SKYCULTURE_STYLE "
+"waar is. Het eindigt met veranderingen in de hemelcultuur (indien niet "
+"uitgeschakeld door de omgevingsvariabele), de labelstijl, en toont "
+"sterrenbeeldfiguren, grenzen en de ecliptica."
 
 #: src/translations.h:585
 msgid ""
@@ -10015,6 +10030,11 @@ msgid ""
 "variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. (Style is "
 "restored at end.)"
 msgstr ""
+"Een rondleiding langs de moderne sterrenbeelden. De labelstijl wordt "
+"gedwongen om ‘Oorspronkelijk,Vertaald,Modern’ te zijn, ongeacht de "
+"instellingen van de gebruiker, tenzij de omgevingsvariabele "
+"STEL_SCRIPT_OBEY_SKYCULTURE_STYLE waar is. (De stijl wordt aan het einde "
+"hersteld.)"
 
 #: src/translations.h:593
 msgid ""
@@ -10023,6 +10043,11 @@ msgid ""
 "environment variable STEL_SCRIPT_OBEY_SKYCULTURE_STYLE evaluates true. "
 "(Style is restored at end.)"
 msgstr ""
+"Een rondleiding langs de sterrenbeelden van de geselecteerde hemelcultuur. "
+"De labelstijl wordt gedwongen om ‘Oorspronkelijk,Vertaald,Modern’ te zijn, "
+"ongeacht de instellingen van de gebruiker, tenzij de omgevingsvariabele "
+"STEL_SCRIPT_OBEY_SKYCULTURE_STYLE waar is. (De stijl wordt aan het einde "
+"hersteld.)"
 
 #: src/translations.h:594
 msgid "Look at the Sun from big planets of Solar System and Pluto."
@@ -10253,822 +10278,822 @@ msgstr "Simulatie van banen van Jupitermanen"
 #: src/translations.h:626
 msgctxt "SIMBAD object type"
 msgid "Star"
-msgstr ""
+msgstr "Ster"
 
 #: src/translations.h:627
 msgctxt "SIMBAD object type"
 msgid "Massive Star"
-msgstr ""
+msgstr "Massieve ster"
 
 #: src/translations.h:628
 msgctxt "SIMBAD object type"
 msgid "beta Cep Variable"
-msgstr ""
+msgstr "beta Cep Variable"
 
 #: src/translations.h:629
 msgctxt "SIMBAD object type"
 msgid "Evolved Supergiant"
-msgstr ""
+msgstr "Geëvolueerde Superreus"
 
 #: src/translations.h:630
 msgctxt "SIMBAD object type"
 msgid "Red Supergiant"
-msgstr ""
+msgstr "Rode Superreus"
 
 #: src/translations.h:631
 msgctxt "SIMBAD object type"
 msgid "Yellow Supergiant"
-msgstr ""
+msgstr "Gele Superreus"
 
 #: src/translations.h:632
 msgctxt "SIMBAD object type"
 msgid "Blue Supergiant"
-msgstr ""
+msgstr "Blauwe Superreus"
 
 #: src/translations.h:633
 msgctxt "SIMBAD object type"
 msgid "Wolf-Rayet"
-msgstr ""
+msgstr "Wolf-Rayet"
 
 #: src/translations.h:634
 msgctxt "SIMBAD object type"
 msgid "LBV=Luminous Blue Variable"
-msgstr ""
+msgstr "LBV = Lichtsterke Blauwe Variabele"
 
 #: src/translations.h:635
 msgctxt "SIMBAD object type"
 msgid "Neutron Star"
-msgstr ""
+msgstr "Neutronenster"
 
 #: src/translations.h:636
 msgctxt "SIMBAD object type"
 msgid "Pulsar"
-msgstr ""
+msgstr "Pulsar"
 
 #: src/translations.h:637
 msgctxt "SIMBAD object type"
 msgid "Young Stellar Object"
-msgstr ""
+msgstr "Jong Stellair Object"
 
 #: src/translations.h:638
 msgctxt "SIMBAD object type"
 msgid "Orion Variable"
-msgstr ""
+msgstr "Orion Variabele"
 
 #: src/translations.h:639
 msgctxt "SIMBAD object type"
 msgid "T Tauri Star"
-msgstr ""
+msgstr "T Tauri-ster"
 
 #: src/translations.h:640
 msgctxt "SIMBAD object type"
 msgid "Herbig Ae/Be Star"
-msgstr ""
+msgstr "Herbig Ae/Be-ster"
 
 #: src/translations.h:641
 msgctxt "SIMBAD object type"
 msgid "Outflow"
-msgstr ""
+msgstr "Uitstroom"
 
 #: src/translations.h:642
 msgctxt "SIMBAD object type"
 msgid "Herbig-Haro Object"
-msgstr ""
+msgstr "Herbig-Haro Object"
 
 #: src/translations.h:643
 msgctxt "SIMBAD object type"
 msgid "Main Sequence Star"
-msgstr ""
+msgstr "Belangrijkste Sequentie Ster"
 
 #: src/translations.h:644
 msgctxt "SIMBAD object type"
 msgid "Be Star"
-msgstr ""
+msgstr "Be Ster"
 
 #: src/translations.h:645
 msgctxt "SIMBAD object type"
 msgid "Blue Straggler"
-msgstr ""
+msgstr "Blauwe Achterblijver"
 
 #: src/translations.h:646
 msgctxt "SIMBAD object type"
 msgid "SX Phe Variable"
-msgstr ""
+msgstr "SX Phe Variabele"
 
 #: src/translations.h:647
 msgctxt "SIMBAD object type"
 msgid "gamma Dor Variable"
-msgstr ""
+msgstr "gamma Dor Variabele"
 
 #: src/translations.h:648
 msgctxt "SIMBAD object type"
 msgid "delta Sct Variable"
-msgstr ""
+msgstr "delta Sct Variabele"
 
 #: src/translations.h:649
 msgctxt "SIMBAD object type"
 msgid "Evolved Star"
-msgstr ""
+msgstr "Geëvolueerde Ster"
 
 #: src/translations.h:650
 msgctxt "SIMBAD object type"
 msgid "Red Giant Branch star"
-msgstr ""
+msgstr "Rode Reus Tak Ster"
 
 #: src/translations.h:651
 msgctxt "SIMBAD object type"
 msgid "Hot Subdwarf"
-msgstr ""
+msgstr "Hete Subdwerg"
 
 #: src/translations.h:652
 msgctxt "SIMBAD object type"
 msgid "Horizontal Branch Star"
-msgstr ""
+msgstr "Horizontale Tak Ster"
 
 #: src/translations.h:653
 msgctxt "SIMBAD object type"
 msgid "RR Lyrae Variable"
-msgstr ""
+msgstr "RR Lyrae Variabele"
 
 #: src/translations.h:654
 msgctxt "SIMBAD object type"
 msgid "Red Clump Star"
-msgstr ""
+msgstr "Rode Klont Ster"
 
 #: src/translations.h:655
 msgctxt "SIMBAD object type"
 msgid "Type II Cepheid Variable"
-msgstr ""
+msgstr "Type II Cepheïde Variabele"
 
 #: src/translations.h:656
 msgctxt "SIMBAD object type"
 msgid "Cepheid Variable"
-msgstr ""
+msgstr "Cepheïde Variabele"
 
 #: src/translations.h:657
 msgctxt "SIMBAD object type"
 msgid "Classical Cepheid Variable"
-msgstr ""
+msgstr "Klassieke Cepheïde Variabele"
 
 #: src/translations.h:658
 msgctxt "SIMBAD object type"
 msgid "Carbon Star"
-msgstr ""
+msgstr "Koolstof ster"
 
 #: src/translations.h:659
 msgctxt "SIMBAD object type"
 msgid "S Star"
-msgstr ""
+msgstr "S Ster"
 
 #: src/translations.h:660
 msgctxt "SIMBAD object type"
 msgid "Long-Period Variable"
-msgstr ""
+msgstr "Lange Periode Variabele"
 
 #: src/translations.h:661
 msgctxt "SIMBAD object type"
 msgid "Asymptotic Giant Branch Star"
-msgstr ""
+msgstr "Asymptotische Reuzentak Ster"
 
 #: src/translations.h:662
 msgctxt "SIMBAD object type"
 msgid "Mira Variable"
-msgstr ""
+msgstr "Mira-veranderlijke"
 
 #: src/translations.h:663
 msgctxt "SIMBAD object type"
 msgid "O-rich AGB Star"
-msgstr ""
+msgstr "O-rijke AGB-ster"
 
 #: src/translations.h:664
 msgctxt "SIMBAD object type"
 msgid "OH/IR Star"
-msgstr ""
+msgstr "OH/IR Ster"
 
 #: src/translations.h:665
 msgctxt "SIMBAD object type"
 msgid "Post-AGB Star"
-msgstr ""
+msgstr "Post-AGB Ster"
 
 #: src/translations.h:666
 msgctxt "SIMBAD object type"
 msgid "RV Tauri Variable"
-msgstr ""
+msgstr "RV Tauri Variabele"
 
 #: src/translations.h:667
 msgctxt "SIMBAD object type"
 msgid "Planetary Nebula"
-msgstr ""
+msgstr "Planetaire Nevel"
 
 #: src/translations.h:668
 msgctxt "SIMBAD object type"
 msgid "White Dwarf"
-msgstr ""
+msgstr "Witte Dwerg"
 
 #: src/translations.h:669
 msgctxt "SIMBAD object type"
 msgid "ELMWD=Extremely Low Mass White Dwarf"
-msgstr ""
+msgstr "ELMWD = Extreem Lichte Witte Dwerg"
 
 #: src/translations.h:670
 msgctxt "SIMBAD object type"
 msgid "Chemically Peculiar Star"
-msgstr ""
+msgstr "Chemisch Peculiar Ster"
 
 #: src/translations.h:671
 msgctxt "SIMBAD object type"
 msgid "alpha2 CVn Variable"
-msgstr ""
+msgstr "alpha2 CVn Variabele"
 
 #: src/translations.h:672
 msgctxt "SIMBAD object type"
 msgid "R CrB Variable"
-msgstr ""
+msgstr "R CrB Variabele"
 
 #: src/translations.h:673
 msgctxt "SIMBAD object type"
 msgid "CH Star"
-msgstr ""
+msgstr "CH Ster"
 
 #: src/translations.h:674
 msgctxt "SIMBAD object type"
 msgid "Barium Star"
-msgstr ""
+msgstr "Barium Ster"
 
 #: src/translations.h:675
 msgctxt "SIMBAD object type"
 msgid "Dwarf Carbon Star"
-msgstr ""
+msgstr "Dwerg Koolstof Ster"
 
 #: src/translations.h:676
 msgctxt "SIMBAD object type"
 msgid "Carbon-Enhanced Metal Poor Star"
-msgstr ""
+msgstr "Koolstofverrijkte Metaalarme Ster"
 
 #: src/translations.h:677
 msgctxt "SIMBAD object type"
 msgid "Double or Multiple Star"
-msgstr ""
+msgstr "Dubbele of Meervoudige Ster"
 
 #: src/translations.h:678
 msgctxt "SIMBAD object type"
 msgid "Eclipsing Binary"
-msgstr ""
+msgstr "Verduisterende Dubbelster"
 
 #: src/translations.h:679
 msgctxt "SIMBAD object type"
 msgid "Ellipsoidal Variable"
-msgstr ""
+msgstr "Ellipsvormige Variabele"
 
 #: src/translations.h:680
 msgctxt "SIMBAD object type"
 msgid "Spectroscopic Binary"
-msgstr ""
+msgstr "Spectroscopische Dubbelster"
 
 #: src/translations.h:681
 msgctxt "SIMBAD object type"
 msgid "RS CVn Variable"
-msgstr ""
+msgstr "RS CVn Variabele"
 
 #: src/translations.h:682
 msgctxt "SIMBAD object type"
 msgid "BY Dra Variable"
-msgstr ""
+msgstr "BY Dra Variabele"
 
 #: src/translations.h:683
 msgctxt "SIMBAD object type"
 msgid "Symbiotic Star"
-msgstr ""
+msgstr "Symbiotische Ster"
 
 #: src/translations.h:684
 msgctxt "SIMBAD object type"
 msgid "X-ray Binary"
-msgstr ""
+msgstr "X-ray Dubbelster"
 
 #: src/translations.h:685
 msgctxt "SIMBAD object type"
 msgid "Low Mass X-ray Binary"
-msgstr ""
+msgstr "Lage Massa X-ray dubbelster"
 
 #: src/translations.h:686
 msgctxt "SIMBAD object type"
 msgid "High Mass X-ray Binary"
-msgstr ""
+msgstr "Hoge Massa X-ray dubbelster"
 
 #: src/translations.h:687
 msgctxt "SIMBAD object type"
 msgid "Cataclysmic Binary"
-msgstr ""
+msgstr "Explosieve Dubbelster"
 
 #: src/translations.h:688
 msgctxt "SIMBAD object type"
 msgid "Classical Nova"
-msgstr ""
+msgstr "Klassieke Nova"
 
 #: src/translations.h:689
 msgctxt "SIMBAD object type"
 msgid "SuperNova"
-msgstr ""
+msgstr "SuperNova"
 
 #: src/translations.h:690
 msgctxt "SIMBAD object type"
 msgid "Low-mass Star"
-msgstr ""
+msgstr "Lage massa Ster"
 
 #: src/translations.h:691
 msgctxt "SIMBAD object type"
 msgid "Brown Dwarf"
-msgstr ""
+msgstr "Bruine Dwerg"
 
 #: src/translations.h:692
 msgctxt "SIMBAD object type"
 msgid "Extra-solar Planet"
-msgstr ""
+msgstr "Exosolaire Planeet"
 
 #: src/translations.h:693
 msgctxt "SIMBAD object type"
 msgid "Variable Star"
-msgstr ""
+msgstr "Veranderlijke Ster"
 
 #: src/translations.h:694
 msgctxt "SIMBAD object type"
 msgid "Irregular Variable"
-msgstr ""
+msgstr "Onregelmatige Variabele"
 
 #: src/translations.h:695
 msgctxt "SIMBAD object type"
 msgid "Irregular Variable with rapid variations"
-msgstr ""
+msgstr "Onregelmatige Variabele met snelle variaties"
 
 #: src/translations.h:696
 msgctxt "SIMBAD object type"
 msgid "Eruptive Variable"
-msgstr ""
+msgstr "Uitbarstende Variabele"
 
 #: src/translations.h:697
 msgctxt "SIMBAD object type"
 msgid "Rotating Variable"
-msgstr ""
+msgstr "Roterende Variabele"
 
 #: src/translations.h:698
 msgctxt "SIMBAD object type"
 msgid "Pulsating Variable"
-msgstr ""
+msgstr "Pulserende Variabele"
 
 #: src/translations.h:699
 msgctxt "SIMBAD object type"
 msgid "Star showing Eclipses by its Planet"
-msgstr ""
+msgstr "Ster die Verduisteringen door zijn Planeet laat zien"
 
 #: src/translations.h:700
 msgctxt "SIMBAD object type"
 msgid "Emission-line Star"
-msgstr ""
+msgstr "Stralingslijnster"
 
 #: src/translations.h:701
 msgctxt "SIMBAD object type"
 msgid "High Proper Motion Star"
-msgstr ""
+msgstr "Ster Met Hoge Eigenbeweging"
 
 #: src/translations.h:702
 msgctxt "SIMBAD object type"
 msgid "High Velocity Star"
-msgstr ""
+msgstr "Hoge Snelheidsster"
 
 #: src/translations.h:703
 msgctxt "SIMBAD object type"
 msgid "Cluster of Stars"
-msgstr ""
+msgstr "Sterrencluster"
 
 #: src/translations.h:704
 msgctxt "SIMBAD object type"
 msgid "Globular Cluster"
-msgstr ""
+msgstr "Bolvormig sterrencluster"
 
 #: src/translations.h:705
 msgctxt "SIMBAD object type"
 msgid "Open Cluster"
-msgstr ""
+msgstr "Open Cluster"
 
 #: src/translations.h:706
 msgctxt "SIMBAD object type"
 msgid "Association of Stars"
-msgstr ""
+msgstr "Vereniging van Sterren"
 
 #: src/translations.h:707
 msgctxt "SIMBAD object type"
 msgid "Stellar Stream"
-msgstr ""
+msgstr "Sterrenstroom"
 
 #: src/translations.h:708
 msgctxt "SIMBAD object type"
 msgid "Moving Group"
-msgstr ""
+msgstr "Bewegende Groep"
 
 #: src/translations.h:709
 msgctxt "SIMBAD object type"
 msgid "Interstellar Medium Object"
-msgstr ""
+msgstr "Interstellair Middelgroot Object"
 
 #: src/translations.h:710
 msgctxt "SIMBAD object type"
 msgid "Star Forming Region"
-msgstr ""
+msgstr "Stervormingsgebied"
 
 #: src/translations.h:711
 msgctxt "SIMBAD object type"
 msgid "HII Region"
-msgstr ""
+msgstr "HII-regio"
 
 #: src/translations.h:712
 msgctxt "SIMBAD object type"
 msgid "Cloud"
-msgstr ""
+msgstr "Wolk"
 
 #: src/translations.h:713
 msgctxt "SIMBAD object type"
 msgid "Nebula"
-msgstr ""
+msgstr "Nevel"
 
 #: src/translations.h:714
 msgctxt "SIMBAD object type"
 msgid "Reflection Nebula"
-msgstr ""
+msgstr "Reflectienevel"
 
 #: src/translations.h:715
 msgctxt "SIMBAD object type"
 msgid "Molecular Cloud"
-msgstr ""
+msgstr "Moleculaire wolk"
 
 #: src/translations.h:716
 msgctxt "SIMBAD object type"
 msgid "Dark Cloud (nebula)"
-msgstr ""
+msgstr "Donkere Wolk (nevel)"
 
 #: src/translations.h:717
 msgctxt "SIMBAD object type"
 msgid "Globule (low-mass dark cloud)"
-msgstr ""
+msgstr "Globule (donkere wolk met lage massa)"
 
 #: src/translations.h:718
 msgctxt "SIMBAD object type"
 msgid "Cometary Globule / Pillar"
-msgstr ""
+msgstr "Komeetachtige Globule / Pilaar"
 
 #: src/translations.h:719
 msgctxt "SIMBAD object type"
 msgid "High-velocity Cloud"
-msgstr ""
+msgstr "Hoge snelheid Wolk"
 
 #: src/translations.h:720
 msgctxt "SIMBAD object type"
 msgid "Dense Core"
-msgstr ""
+msgstr "Dichte Kern"
 
 #: src/translations.h:721
 msgctxt "SIMBAD object type"
 msgid "Bubble"
-msgstr ""
+msgstr "Bubbel"
 
 #: src/translations.h:722
 msgctxt "SIMBAD object type"
 msgid "SuperNova Remnant"
-msgstr ""
+msgstr "Supernova Restant"
 
 #: src/translations.h:723
 msgctxt "SIMBAD object type"
 msgid "Interstellar Shell"
-msgstr ""
+msgstr "Interstellaire Schelp"
 
 #: src/translations.h:724
 msgctxt "SIMBAD object type"
 msgid "Interstellar Filament"
-msgstr ""
+msgstr "Interstellair Filament"
 
 #: src/translations.h:725
 msgctxt "SIMBAD object type"
 msgid "Galaxy"
-msgstr ""
+msgstr "Sterrenstelsel"
 
 #: src/translations.h:726
 msgctxt "SIMBAD object type"
 msgid "Low Surface Brightness Galaxy"
-msgstr ""
+msgstr "Sterrenstelsel met Lage Oppervlaktehelderheid"
 
 #: src/translations.h:727
 msgctxt "SIMBAD object type"
 msgid "Blue Compact Galaxy"
-msgstr ""
+msgstr "Blauwe Compacte Sterrenstelsel"
 
 #: src/translations.h:728
 msgctxt "SIMBAD object type"
 msgid "Starburst Galaxy"
-msgstr ""
+msgstr "Sterrenwervelstelsell"
 
 #: src/translations.h:729
 msgctxt "SIMBAD object type"
 msgid "HII Galaxy"
-msgstr ""
+msgstr "HII Sterrenstelsel"
 
 #: src/translations.h:730
 msgctxt "SIMBAD object type"
 msgid "Emission-line galaxy"
-msgstr ""
+msgstr "Emissielijn-sterrenstelsel"
 
 #: src/translations.h:731
 msgctxt "SIMBAD object type"
 msgid "Active Galaxy Nucleus"
-msgstr ""
+msgstr "Actieve Kern van een Sterrenstelsel"
 
 #: src/translations.h:732
 msgctxt "SIMBAD object type"
 msgid "Seyfert Galaxy"
-msgstr ""
+msgstr "Seyfert-sterrenstelsel"
 
 #: src/translations.h:733
 msgctxt "SIMBAD object type"
 msgid "Seyfert 1 Galaxy"
-msgstr ""
+msgstr "Seyfert 1 Sterrenstelsel"
 
 #: src/translations.h:734
 msgctxt "SIMBAD object type"
 msgid "Seyfert 2 Galaxy"
-msgstr ""
+msgstr "Seyfert 2 Sterrenstelsel"
 
 #: src/translations.h:735
 msgctxt "SIMBAD object type"
 msgid "Radio Galaxy"
-msgstr ""
+msgstr "Radiosterrenstelsel"
 
 #: src/translations.h:736
 msgctxt "SIMBAD object type"
 msgid "LINER-type Active Galaxy Nucleus"
-msgstr ""
+msgstr "LINER-type Actieve Sterrenstelselkern"
 
 #: src/translations.h:737
 msgctxt "SIMBAD object type"
 msgid "Quasar"
-msgstr ""
+msgstr "Quasar"
 
 #: src/translations.h:738
 msgctxt "SIMBAD object type"
 msgid "Blazar"
-msgstr ""
+msgstr "Blazar"
 
 #: src/translations.h:739
 msgctxt "SIMBAD object type"
 msgid "BL Lac"
-msgstr ""
+msgstr "BL Lac"
 
 #: src/translations.h:740
 msgctxt "SIMBAD object type"
 msgid "ULIRG, Ultra Luminous Infrared Galaxy"
-msgstr ""
+msgstr "ULIRG, Ultra Luminous Infrared Galaxy (ultraheldere infraroodgalaxie)"
 
 #: src/translations.h:741
 msgctxt "SIMBAD object type"
 msgid "Galaxy in Pair of Galaxies"
-msgstr ""
+msgstr "Sterrenstelsel in een Sterrenstelselpaar"
 
 #: src/translations.h:742
 msgctxt "SIMBAD object type"
 msgid "Galaxy towards a Group of Galaxies"
-msgstr ""
+msgstr "Sterrenstelsel op weg naar een Groep Sterrenstelsels"
 
 #: src/translations.h:743
 msgctxt "SIMBAD object type"
 msgid "Galaxy towards a Cluster of Galaxies"
-msgstr ""
+msgstr "Sterrenstelsel op weg naar een Cluster Sterrenstelsels"
 
 #: src/translations.h:744
 msgctxt "SIMBAD object type"
 msgid "Brightest Galaxy in a Cluster (BCG)"
-msgstr ""
+msgstr "Helderste Sterrenstelsel in een Cluster (BCG)"
 
 #: src/translations.h:745
 msgctxt "SIMBAD object type"
 msgid "Interacting Galaxies"
-msgstr ""
+msgstr "Interacterende Sterrenstelsels"
 
 #: src/translations.h:746
 msgctxt "SIMBAD object type"
 msgid "Pair of Galaxies"
-msgstr ""
+msgstr "Paar van Sterrenstelsels"
 
 #: src/translations.h:747
 msgctxt "SIMBAD object type"
 msgid "Group of Galaxies"
-msgstr ""
+msgstr "Groep Sterrenstelsels"
 
 #: src/translations.h:748
 msgctxt "SIMBAD object type"
 msgid "Compact Group of Galaxies"
-msgstr ""
+msgstr "Compacte Groep van Sterrenstelsels"
 
 #: src/translations.h:749
 msgctxt "SIMBAD object type"
 msgid "Cluster of Galaxies"
-msgstr ""
+msgstr "Cluster van Sterrenstelsels"
 
 #: src/translations.h:750
 msgctxt "SIMBAD object type"
 msgid "Proto Cluster of Galaxies"
-msgstr ""
+msgstr "Proto-cluster van Sterrenstelsels"
 
 #: src/translations.h:751
 msgctxt "SIMBAD object type"
 msgid "Supercluster of Galaxies"
-msgstr ""
+msgstr "Supercluster van Sterrenstelsels"
 
 #: src/translations.h:752
 msgctxt "SIMBAD object type"
 msgid "Underdense Region of the Universe"
-msgstr ""
+msgstr "Gebied met lage dichtheid in het Universum"
 
 #: src/translations.h:753
 msgctxt "SIMBAD object type"
 msgid "Gravitational Source"
-msgstr ""
+msgstr "Zwaartekrachtbron"
 
 #: src/translations.h:754
 msgctxt "SIMBAD object type"
 msgid "(Micro)Lensing Event"
-msgstr ""
+msgstr "Micro-zwaartekrachtlens Gebeurtenis"
 
 #: src/translations.h:755
 msgctxt "SIMBAD object type"
 msgid "Gravitational Lens System (lens+images)"
-msgstr ""
+msgstr "Zwaartekrachtlenssysteem (lens+beelden)"
 
 #: src/translations.h:756
 msgctxt "SIMBAD object type"
 msgid "Gravitational Lens"
-msgstr ""
+msgstr "Zwaartekrachtlens"
 
 #: src/translations.h:757
 msgctxt "SIMBAD object type"
 msgid "Gravitationally Lensed Image"
-msgstr ""
+msgstr "Gravitatie Lensbeeld"
 
 #: src/translations.h:758
 msgctxt "SIMBAD object type"
 msgid "Gravitationally Lensed Image of a Galaxy"
-msgstr ""
+msgstr "Gravitationeel Lensbeeld van een Sterrenstelsel"
 
 #: src/translations.h:759
 msgctxt "SIMBAD object type"
 msgid "Gravitationally Lensed Image of a Quasar"
-msgstr ""
+msgstr "Gravitationeel Lensbeeld van een Quasar"
 
 #: src/translations.h:760
 msgctxt "SIMBAD object type"
 msgid "Black Hole"
-msgstr ""
+msgstr "Zwart Gat"
 
 #: src/translations.h:761
 msgctxt "SIMBAD object type"
 msgid "Gravitational Wave Event"
-msgstr ""
+msgstr "Gravitatiegolfgebeurtenis"
 
 #: src/translations.h:762
 msgctxt "SIMBAD object type"
 msgid "Transient Event"
-msgstr ""
+msgstr "Tijdelijke Gebeurtenis"
 
 #: src/translations.h:763
 msgctxt "SIMBAD object type"
 msgid "Variable source"
-msgstr ""
+msgstr "Variabele Bron"
 
 #: src/translations.h:764
 msgctxt "SIMBAD object type"
 msgid "Radio Source"
-msgstr ""
+msgstr "Radiobron"
 
 #: src/translations.h:765
 msgctxt "SIMBAD object type"
 msgid "Metric Radio Source"
-msgstr ""
+msgstr "Metrische Radiobron"
 
 #: src/translations.h:766
 msgctxt "SIMBAD object type"
 msgid "Centimetric Radio Source"
-msgstr ""
+msgstr "Centimeter Radiogolfbron"
 
 #: src/translations.h:767
 msgctxt "SIMBAD object type"
 msgid "Millimetric Radio Source"
-msgstr ""
+msgstr "Milimeter Radiogolfbron"
 
 #: src/translations.h:768
 msgctxt "SIMBAD object type"
 msgid "Sub-Millimetric Source"
-msgstr ""
+msgstr "Submillimeter Radiobron"
 
 #: src/translations.h:769
 msgctxt "SIMBAD object type"
 msgid "HI (21cm) Source"
-msgstr ""
+msgstr "HI (21 cm) Bron"
 
 #: src/translations.h:770
 msgctxt "SIMBAD object type"
 msgid "Radio Burst"
-msgstr ""
+msgstr "Radio-uitbarsting"
 
 #: src/translations.h:771
 msgctxt "SIMBAD object type"
 msgid "Maser"
-msgstr ""
+msgstr "Maser"
 
 #: src/translations.h:772
 msgctxt "SIMBAD object type"
 msgid "Infra-Red Source"
-msgstr ""
+msgstr "Infraroodbron"
 
 #: src/translations.h:773
 msgctxt "SIMBAD object type"
 msgid "Far-IR source (λ >= 30 µm)"
-msgstr ""
+msgstr "Verre-IR-bron (λ >= 30 µm)"
 
 #: src/translations.h:774
 msgctxt "SIMBAD object type"
 msgid "Mid-IR Source (3 to 30 µm)"
-msgstr ""
+msgstr "Midden-IR-bron (3 tot 30 µm)"
 
 #: src/translations.h:775
 msgctxt "SIMBAD object type"
 msgid "Near-IR Source (λ < 3 µm)"
-msgstr ""
+msgstr "Nabij-IR-bron (λ < 3 µm)"
 
 #: src/translations.h:776
 msgctxt "SIMBAD object type"
 msgid "Optical Source"
-msgstr ""
+msgstr "Optische Bron"
 
 #: src/translations.h:777
 msgctxt "SIMBAD object type"
 msgid "Emission Object"
-msgstr ""
+msgstr "Emissie Object"
 
 #: src/translations.h:778
 msgctxt "SIMBAD object type"
 msgid "Blue Object"
-msgstr ""
+msgstr "Blauw Object"
 
 #: src/translations.h:779
 msgctxt "SIMBAD object type"
 msgid "UV-emission Source"
-msgstr ""
+msgstr "UV-emissiebron"
 
 #: src/translations.h:780
 msgctxt "SIMBAD object type"
 msgid "X-ray Source"
-msgstr ""
+msgstr "X-ray Bron"
 
 #: src/translations.h:781
 msgctxt "SIMBAD object type"
 msgid "Ultra-luminous X-ray Source"
-msgstr ""
+msgstr "Ultraheldere X-raybron"
 
 #: src/translations.h:782
 msgctxt "SIMBAD object type"
 msgid "Gamma-ray Source"
-msgstr ""
+msgstr "Gammastraal Bron"
 
 #: src/translations.h:783
 msgctxt "SIMBAD object type"
 msgid "Gamma-ray Burst"
-msgstr ""
+msgstr "Gammastraal Uitbarsting"
 
 #: src/translations.h:784
 msgctxt "SIMBAD object type"
 msgid "Composite Object, Blend"
-msgstr ""
+msgstr "Samengesteld Object, Mengsel"
 
 #: src/translations.h:785
 msgctxt "SIMBAD object type"
 msgid "Not an Object (Error, Artefact, ...)"
-msgstr ""
+msgstr "Geen Object (Fout, Artefact, ...)"
 
 #: src/translations.h:786
 msgctxt "SIMBAD object type"
 msgid "Part of Cloud"
-msgstr ""
+msgstr "Deel van een Wolk"
 
 #: src/translations.h:787
 msgctxt "SIMBAD object type"
 msgid "Part of a Galaxy"
-msgstr ""
+msgstr "Deel van een Sterrenstelsel"
 
 #: src/translations.h:788
 msgctxt "SIMBAD object type"
 msgid "Object of Unknown Nature"
-msgstr ""
+msgstr "Object van Onbekende Aard"
 
 #: src/translations.h:789
 msgctxt "SIMBAD object type"
 msgid "Region defined in the Sky"
-msgstr ""
+msgstr "Regio gedefinieerd in de Ruimte"
 
 #. TRANSLATORS: This is a filter checkbox meaning "include penumbral lunar
 #. eclipses", so the adjective should be in plural (if applicable)
@@ -11126,7 +11151,7 @@ msgstr "32-bit"
 #: src/translations.h:812
 msgctxt "sky culture classification"
 msgid "none"
-msgstr ""
+msgstr "geen"
 
 #. TRANSLATORS: Same text as in the Configuration window!
 #: src/translations.h:816 src/ui_helpDialogGui.h:249
@@ -13174,7 +13199,7 @@ msgstr "Positie vergrendelen wanneer coördinaten worden gebruikt"
 
 #: src/ui_searchDialogGui.h:875
 msgid "Automatic closing dialog"
-msgstr ""
+msgstr "Automatisch afsluitend dialoogvenster"
 
 #: src/ui_searchDialogGui.h:876
 msgid "Show FOV center marker when position is search"
@@ -14100,11 +14125,11 @@ msgstr "Dikte in pixels van de verdelingen"
 
 #: src/ui_viewDialog.h:4370
 msgid "points"
-msgstr ""
+msgstr "punten"
 
 #: src/ui_viewDialog.h:4372
 msgid "Size of celestial points in pixels"
-msgstr ""
+msgstr "Grootte van hemellichamen in pixels"
 
 #: src/ui_viewDialog.h:4375
 msgid "Show Galactic equator line."
@@ -14635,58 +14660,58 @@ msgstr "Deze hemelcultuur als standaard gebruiken"
 
 #: src/ui_viewDialog.h:4832
 msgid "Info label"
-msgstr ""
+msgstr "info-label"
 
 #: src/ui_viewDialog.h:4833
 msgid "Screen label"
-msgstr ""
+msgstr "Schermlabel"
 
 #: src/ui_viewDialog.h:4834 src/ui_viewDialog.h:4835
 msgctxt "menu item"
 msgid "translation"
-msgstr ""
+msgstr "vertaling"
 
 #: src/ui_viewDialog.h:4836 src/ui_viewDialog.h:4852
 msgctxt "menu item"
 msgid "transliteration"
-msgstr ""
+msgstr "transliteratie"
 
 #: src/ui_viewDialog.h:4837 src/ui_viewDialog.h:4857
 msgctxt "menu item"
 msgid "modern"
-msgstr ""
+msgstr "modern"
 
 #: src/ui_viewDialog.h:4839 src/ui_viewDialog.h:4844
 msgid "Scientific transliteration"
-msgstr ""
+msgstr "Wetenschappelijke transliteratie"
 
 #: src/ui_viewDialog.h:4841 src/ui_viewDialog.h:4846
 msgctxt "menu item"
 msgid "sci. translit."
-msgstr ""
+msgstr "sci. translit."
 
 #: src/ui_viewDialog.h:4842 src/ui_viewDialog.h:4851
 msgctxt "menu item"
 msgid "native"
-msgstr ""
+msgstr "oorspronkelijk"
 
 #: src/ui_viewDialog.h:4848 src/ui_viewDialog.h:4854
 msgid "International Phonetic Alphabet"
-msgstr ""
+msgstr "Internationaal Fonetisch Alfabet"
 
 #: src/ui_viewDialog.h:4850 src/ui_viewDialog.h:4856
 msgctxt "menu item"
 msgid "IPA"
-msgstr ""
+msgstr "IPA"
 
 #: src/ui_viewDialog.h:4858 src/ui_viewDialog.h:4859
 msgctxt "menu item"
 msgid "byname"
-msgstr ""
+msgstr "bijnaam"
 
 #: src/ui_viewDialog.h:4861
 msgid "Show zodiac (if defined)"
-msgstr ""
+msgstr "Toon sterrenbeeld (indien gedefinieerd)"
 
 #: src/ui_viewDialog.h:4865
 msgid "Constellations font size"
@@ -14694,7 +14719,7 @@ msgstr "Lettergrootte sterrenbeelden"
 
 #: src/ui_viewDialog.h:4868
 msgid "Color of zodiac lines"
-msgstr ""
+msgstr "Kleur van de dierenriemlijnen"
 
 #: src/ui_viewDialog.h:4875
 msgid "Fading duration for lines of asterisms"
@@ -14706,7 +14731,7 @@ msgstr "Kleur van asterismelijnen"
 
 #: src/ui_viewDialog.h:4882
 msgid "Color of constellation area (convex hull) boundaries"
-msgstr ""
+msgstr "Kleur van de grenzen van het sterrenbeeldgebied (convexe omhulling)"
 
 #: src/ui_viewDialog.h:4886
 msgid "Only one at a time"
@@ -14722,11 +14747,11 @@ msgstr "Kleur van hulplijnen"
 
 #: src/ui_viewDialog.h:4897
 msgid "Show areas (convex hulls) of constellations"
-msgstr ""
+msgstr "Toon gebieden (convexe omhullingen) van sterrenbeelden"
 
 #: src/ui_viewDialog.h:4899
 msgid "Constellation areas"
-msgstr ""
+msgstr "Sterrenbeeldgebieden"
 
 #: src/ui_viewDialog.h:4901
 msgid "Color of constellation boundaries"
@@ -14734,7 +14759,7 @@ msgstr "Kleur van sterrenbeeldengrenzen"
 
 #: src/ui_viewDialog.h:4903
 msgid "Abbreviated names"
-msgstr ""
+msgstr "Afgekorte namen"
 
 #: src/ui_viewDialog.h:4905
 msgid "Color of asterism names"
@@ -14742,11 +14767,11 @@ msgstr "Kleur van asterismenamen"
 
 #: src/ui_viewDialog.h:4909
 msgid "Show lunar stations (if defined)"
-msgstr ""
+msgstr "Maanknooppunten weergeven (indien gedefinieerd)"
 
 #: src/ui_viewDialog.h:4911
 msgid "Lunar Stations"
-msgstr ""
+msgstr "Maan Stations"
 
 #: src/ui_viewDialog.h:4913
 msgid "Brightness for constellation art"
@@ -14766,7 +14791,7 @@ msgstr "Dimmingsduur voor schermtekst van sterrenbeelden"
 
 #: src/ui_viewDialog.h:4930
 msgid "Fading duration for lunar station lines"
-msgstr ""
+msgstr "Vervagingsduur voor maanstationlijnen"
 
 #: src/ui_viewDialog.h:4933
 msgid "Fading duration for screen labels of asterisms "
@@ -14782,7 +14807,7 @@ msgstr "Kleur van sterrenbeeldnamen"
 
 #: src/ui_viewDialog.h:4946
 msgid "Fading duration for area limits of constellations"
-msgstr ""
+msgstr "Vervagingsduur voor gebiedslimieten van sterrenbeelden"
 
 #: src/ui_viewDialog.h:4952
 msgid "Color of constellation lines"
@@ -14794,7 +14819,7 @@ msgstr "Klik op een ster om het sterrenbeeld te tonen"
 
 #: src/ui_viewDialog.h:4963
 msgid "Fading duration for zodiac lines"
-msgstr ""
+msgstr "Vervagingsduur voor sterrenbeeldlijnen"
 
 #: src/ui_viewDialog.h:4966
 msgid "Asterisms font size"
@@ -14802,7 +14827,7 @@ msgstr "Lettergrootte asterismen"
 
 #: src/ui_viewDialog.h:4972
 msgid "Color of Lunar station lines"
-msgstr ""
+msgstr "Kleur van maanstationlijnen"
 
 #: src/ui_viewDialog.h:4976
 msgid "Fading duration for lines of constellations"
@@ -15238,7 +15263,7 @@ msgstr "Uitvoer in tabelvorm voor coördinaten en tijd"
 
 #: src/ui_configurationDialog.h:2080
 msgid "Use common symbols for coordinate systems"
-msgstr ""
+msgstr "Gebruik gangbare symbolen voor coördinatensystemen"
 
 #: src/ui_configurationDialog.h:2082
 msgid "Designations for celestial coordinate systems"
@@ -15249,18 +15274,21 @@ msgid ""
 "Use distance from North Celestial Pole, not declination from equator in "
 "equatorial coordinates"
 msgstr ""
+"Gebruik de afstand tot de noordelijke hemelpool, niet de declinatie vanaf de"
+" evenaar in equatoriale coördinaten."
 
 #: src/ui_configurationDialog.h:2086
 msgid "Polar distance, not declination"
-msgstr ""
+msgstr "Poolafstand, geen declinatie"
 
 #: src/ui_configurationDialog.h:2088
 msgid "Hour angles usually run 0...24h. This counts -12h...12h."
 msgstr ""
+"Uurhoeken lopen meestal van 0 tot 24 uur. Dit telt van -12 uur tot 12 uur."
 
 #: src/ui_configurationDialog.h:2090
 msgid "Allow negative hour angles "
-msgstr ""
+msgstr "Negatieve uurhoeken toestaan "
 
 #: src/ui_configurationDialog.h:2091
 msgid "Show additional buttons"
@@ -16679,11 +16707,11 @@ msgstr "Maanopkomst vandaag"
 
 #: src/ui_astroCalcAlmanacWidget.h:974
 msgid "Today's Sun at custom altitude (set)"
-msgstr ""
+msgstr "De Zon vandaag op aangepaste hoogte (ingesteld)"
 
 #: src/ui_astroCalcAlmanacWidget.h:978
 msgid "Today's Moon at custom altitude (rise)"
-msgstr ""
+msgstr "De Maan vandaag op aangepaste hoogte (opkomst)"
 
 #: src/ui_astroCalcAlmanacWidget.h:986
 msgid "Rise"
@@ -16707,7 +16735,7 @@ msgstr "Zonsopkomst vandaag"
 
 #: src/ui_astroCalcAlmanacWidget.h:1006
 msgid "Today's Sun at custom altitude (rise)"
-msgstr ""
+msgstr "De Zon vandaag op aangepaste hoogte (opkomst)"
 
 #: src/ui_astroCalcAlmanacWidget.h:1011
 msgid "Previous December Solstice"
@@ -16742,19 +16770,19 @@ msgstr "Ochtend astronomische schemering"
 
 #: src/ui_astroCalcAlmanacWidget.h:1037
 msgid "Custom altitude of the Sun"
-msgstr ""
+msgstr "Aangepaste hoogte van de Zon"
 
 #: src/ui_astroCalcAlmanacWidget.h:1040
 msgid "Today's Moon at custom altitude (set)"
-msgstr ""
+msgstr "De Maan vandaag op aangepaste hoogte (ingesteld)"
 
 #: src/ui_astroCalcAlmanacWidget.h:1045
 msgid "Minutes before sunrise/after sunset"
-msgstr ""
+msgstr "Enkele minuten voor zonsopgang/na zonsondergang"
 
 #: src/ui_astroCalcAlmanacWidget.h:1048
 msgid "Custom altitude of the Moon"
-msgstr ""
+msgstr "Aangepaste hoogte van de Maan"
 
 #: src/ui_astroCalcAlmanacWidget.h:1050
 msgctxt "twilight"
@@ -16799,7 +16827,7 @@ msgstr "Volgende september-equinox"
 
 #: src/ui_astroCalcAlmanacWidget.h:1083
 msgid "Defined minutes after today's sunset"
-msgstr ""
+msgstr "Gedefinieerd enkele minuten na zonsondergang vandaag"
 
 #: src/ui_astroCalcAlmanacWidget.h:1088
 msgid "Previous March Equinox"
@@ -16827,15 +16855,15 @@ msgstr "Nautische avondschemering"
 
 #: src/ui_astroCalcAlmanacWidget.h:1107
 msgid "Defined minutes before today's sunrise"
-msgstr ""
+msgstr "Gedefinieerd enkele minuten voor zonsopgang vandaag"
 
 #: src/ui_astroCalcAlmanacWidget.h:1112
 msgid "Yesterday"
-msgstr ""
+msgstr "Gisteren"
 
 #: src/ui_astroCalcAlmanacWidget.h:1117
 msgid "Tomorrow"
-msgstr ""
+msgstr "Morgen"
 
 #: src/ui_astroCalcAlmanacWidget.h:1120
 msgctxt "twilight"
@@ -19563,7 +19591,7 @@ msgstr "Molniya"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=qianfan&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3540
 msgid "qianfan"
-msgstr ""
+msgstr "qianfan"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Hulianwang
 #. constellation (Hulianwang is a proper name)
@@ -19571,17 +19599,17 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=hulianwang&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3543
 msgid "hulianwang"
-msgstr ""
+msgstr "hulianwang"
 
 #. TRANSLATORS: CelesTrak source [Kuiper]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=kuiper&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3545
 msgid "kuiper"
-msgstr ""
+msgstr "kuiper"
 
 #: plugins/Satellites/src/Satellites.cpp:3546
 msgid "yamal"
-msgstr ""
+msgstr "yamal"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GNSS satellites
 #. TRANSLATORS: CelesTrak source [GNSS]:
@@ -23605,7 +23633,7 @@ msgid "Navigational Stars"
 msgstr "Navigatie sterren"
 
 #: plugins/NavStars/src/NavStars.cpp:58
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:301
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:303
 msgid "This plugin marks navigational stars from a selected set."
 msgstr "Deze plug-in markeert navigatie sterren vanuit een geselecteerde set."
 
@@ -23645,7 +23673,16 @@ msgstr ""
 "De 47 navigatiesterren die worden genoemd in Nevil Maskelyne's <em>The "
 "British Mariner's Guide</em> gepubliceerd in 1764."
 
-#: plugins/NavStars/src/NavStars.cpp:395
+#. TRANSLATORS: The emphasis tags mark a title.
+#: plugins/NavStars/src/NavStars.cpp:396
+msgid ""
+"The 47 navigational stars that are listed in the Thornton S. Lecky's "
+"<em>Wrinkles in practical navigation</em> published in 1884."
+msgstr ""
+"De 47 navigatiesterren die worden vermeld in Thornton S. Lecky's "
+"<em>Wrinkles in practical navigation</em> gepubliceerd in 1884."
+
+#: plugins/NavStars/src/NavStars.cpp:397
 msgid ""
 "The 80 stars that are listed in the German Nautical Almanac published by the"
 " Federal Maritime and Hydrographic Agency of Germany."
@@ -23654,12 +23691,12 @@ msgstr ""
 "gepubliceerd door het Federal Maritime and Hydrographic Agency van "
 "Duitsland."
 
-#: plugins/NavStars/src/NavStars.cpp:396
+#: plugins/NavStars/src/NavStars.cpp:398
 msgid "The 160 stars that are listed in the Russian Nautical Almanac."
 msgstr "De 160 sterren die in de Russian Nautical Almanac staan."
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:398
+#: plugins/NavStars/src/NavStars.cpp:400
 msgid ""
 "The typical set of navigational stars which was used by aviation of the "
 "Soviet Union. These stars can be found in books like <em>Aviation "
@@ -23669,7 +23706,7 @@ msgstr ""
 "Sovjet-Unie. Deze sterren zijn te vinden in boeken als <em>Aviation "
 "Astronomy</em> of <em>Aviation handbook</em>."
 
-#: plugins/NavStars/src/NavStars.cpp:399
+#: plugins/NavStars/src/NavStars.cpp:401
 msgid ""
 "These 151 stars were used in the Voskhod (Soviet) and Soyuz (Soviet and "
 "Russian) manned space programs to navigate in space."
@@ -23678,7 +23715,7 @@ msgstr ""
 "Voskhod (Sovjet) en Sojoez (Sovjet en Russisch) om te navigeren in de "
 "ruimte."
 
-#: plugins/NavStars/src/NavStars.cpp:400
+#: plugins/NavStars/src/NavStars.cpp:402
 msgid ""
 "These 37 stars were used by the Apollo space program to navigate to the Moon"
 " from 1969-1972, Apollo 11 through Apollo 17."
@@ -23686,7 +23723,7 @@ msgstr ""
 "Deze 37 sterren werden gebruikt door het Apollo-ruimtevaartprogramma om naar"
 " de maan te navigeren van 1969-1972, Apollo 11 tot en met Apollo 17."
 
-#: plugins/NavStars/src/NavStars.cpp:401
+#: plugins/NavStars/src/NavStars.cpp:403
 msgid ""
 "Alignment stars from the Gemini Astronomical Positioning System, a "
 "professional level computerized device for controlling small to medium "
@@ -23696,7 +23733,7 @@ msgstr ""
 "professioneel computergestuurd apparaat voor het besturen van kleine tot "
 "middelgrote Duitse equatoriale telescoopbevestigingen."
 
-#: plugins/NavStars/src/NavStars.cpp:402
+#: plugins/NavStars/src/NavStars.cpp:404
 msgid ""
 "The Meade LX200 utilizes 33 bright and well known stars to calibrate the "
 "telescope’s Object Library in the ALTAZ and POLAR alignments. These stars "
@@ -23709,7 +23746,7 @@ msgstr ""
 "wereld in staat te stellen op een willekeurige nacht gemakkelijk en snel "
 "precisie-uitlijningen te maken."
 
-#: plugins/NavStars/src/NavStars.cpp:403
+#: plugins/NavStars/src/NavStars.cpp:405
 msgid ""
 "This list from Meade ETX mount will aid the observer to find alignment stars"
 " at various times of the year."
@@ -23717,15 +23754,15 @@ msgstr ""
 "Deze lijst van Meade ETX mount zal de waarnemer helpen om oriëntatiesterren "
 "te vinden in verschillende tijden van het jaar."
 
-#: plugins/NavStars/src/NavStars.cpp:404
+#: plugins/NavStars/src/NavStars.cpp:406
 msgid "Alignment stars for the Meade Autostar #494 handset (ETX60AT)."
 msgstr "Uitlijnsterren voor de Meade Autostar #494 handset (ETX60AT)."
 
-#: plugins/NavStars/src/NavStars.cpp:405
+#: plugins/NavStars/src/NavStars.cpp:407
 msgid "Alignment stars for the Meade Autostar #497 handset."
 msgstr "Uitlijningssterren voor de Meade Autostar #497 handset."
 
-#: plugins/NavStars/src/NavStars.cpp:406
+#: plugins/NavStars/src/NavStars.cpp:408
 msgid ""
 "Even though there are about 250 named stars in the hand control database, "
 "only 82 (stars brighter than or equal to magnitude 2.5) can be used for "
@@ -23735,7 +23772,7 @@ msgstr ""
 "bevat, kunnen er slechts 82 (sterren helderder dan of gelijk aan magnitude "
 "2,5) worden gebruikt voor uitlijning en gerelateerde taken."
 
-#: plugins/NavStars/src/NavStars.cpp:407
+#: plugins/NavStars/src/NavStars.cpp:409
 msgid ""
 "Alignment stars for the Skywatcher SynScan hand controller and SynScan Pro "
 "App."
@@ -23743,111 +23780,111 @@ msgstr ""
 "Uitlijningssterren voor de Skywatcher SynScan handcontroller en SynScan Pro "
 "App."
 
-#: plugins/NavStars/src/NavStars.cpp:408
+#: plugins/NavStars/src/NavStars.cpp:410
 msgid "Alignment stars for Vixen Starbook mounts."
 msgstr "Uitlijningssterren voor Vixen Starbook monteringen."
 
-#: plugins/NavStars/src/NavStars.cpp:409
+#: plugins/NavStars/src/NavStars.cpp:411
 msgid "Alignment stars for Argo Navis digital setting circles."
 msgstr "Uitlijningssterren voor Argo Navis digitale instelcirkels."
 
-#: plugins/NavStars/src/NavStars.cpp:410
+#: plugins/NavStars/src/NavStars.cpp:412
 msgid "Alignment stars for Orion Intelliscope mounts."
 msgstr "Uitlijningssterren voor Orion Intelliscope montering."
 
-#: plugins/NavStars/src/NavStars.cpp:411
+#: plugins/NavStars/src/NavStars.cpp:413
 msgid "Alignment stars for Sky Commander digital setting circles."
 msgstr "Uitlijningssterren voor Sky Commander digitale instelcirkels."
 
 #. TRANSLATORS: The full phrase: The original almanac title is
 #. NAME_OF_THE_ALMANAC
-#: plugins/NavStars/src/NavStars.cpp:430
+#: plugins/NavStars/src/NavStars.cpp:432
 msgid "The original almanac title is"
 msgstr "De oorspronkelijke almanaktitel is"
 
-#: plugins/NavStars/src/NavStars.cpp:850
+#: plugins/NavStars/src/NavStars.cpp:838
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr "bovenste deel"
 
-#: plugins/NavStars/src/NavStars.cpp:851
+#: plugins/NavStars/src/NavStars.cpp:839
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr "onderste deel"
 
-#: plugins/NavStars/src/NavStars.cpp:866 plugins/NavStars/src/NavStars.cpp:894
-#: plugins/NavStars/src/NavStars.cpp:900
+#: plugins/NavStars/src/NavStars.cpp:854 plugins/NavStars/src/NavStars.cpp:882
+#: plugins/NavStars/src/NavStars.cpp:888
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr "GHA"
 
-#: plugins/NavStars/src/NavStars.cpp:868 plugins/NavStars/src/NavStars.cpp:898
+#: plugins/NavStars/src/NavStars.cpp:856 plugins/NavStars/src/NavStars.cpp:886
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr "SHA"
 
-#: plugins/NavStars/src/NavStars.cpp:870 plugins/NavStars/src/NavStars.cpp:904
+#: plugins/NavStars/src/NavStars.cpp:858 plugins/NavStars/src/NavStars.cpp:892
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr "LHA"
 
-#: plugins/NavStars/src/NavStars.cpp:873
+#: plugins/NavStars/src/NavStars.cpp:861
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr "GP: GHA/DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:876
+#: plugins/NavStars/src/NavStars.cpp:864
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr "GP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:879
+#: plugins/NavStars/src/NavStars.cpp:867
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr "AP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:882
+#: plugins/NavStars/src/NavStars.cpp:870
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr "Hc/Zn"
 
-#: plugins/NavStars/src/NavStars.cpp:889
+#: plugins/NavStars/src/NavStars.cpp:877
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr "UTC"
 
-#: plugins/NavStars/src/NavStars.cpp:892
+#: plugins/NavStars/src/NavStars.cpp:880
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr "Ho"
 
-#: plugins/NavStars/src/NavStars.cpp:896
+#: plugins/NavStars/src/NavStars.cpp:884
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr "LMST"
 
-#: plugins/NavStars/src/NavStars.cpp:902
+#: plugins/NavStars/src/NavStars.cpp:890
 msgctxt "Declination"
 msgid "DEC"
 msgstr "DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:906
+#: plugins/NavStars/src/NavStars.cpp:894
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr "LAT"
 
-#: plugins/NavStars/src/NavStars.cpp:908
+#: plugins/NavStars/src/NavStars.cpp:896
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr "LON"
 
-#: plugins/NavStars/src/NavStars.cpp:910
+#: plugins/NavStars/src/NavStars.cpp:898
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr "Hc"
 
-#: plugins/NavStars/src/NavStars.cpp:912
+#: plugins/NavStars/src/NavStars.cpp:900
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr "Zn"
@@ -23879,38 +23916,44 @@ msgstr "Frans"
 msgid "British (XVIII century)"
 msgstr "Brits (XVIIIe eeuw)"
 
-#. TRANSLATORS: Part of full phrase: Russian set of navigational stars
+#. TRANSLATORS: Part of full phrase: British (XIX century) set of navigational
+#. stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:250
+msgid "British (XIX century)"
+msgstr "Brits (XIX eeuw)"
+
+#. TRANSLATORS: Part of full phrase: Russian set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:252
 msgid "Russian"
 msgstr "Russisch"
 
 #. TRANSLATORS: Part of full phrase: Soviet aviation set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:252
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:254
 msgid "Soviet aviation"
 msgstr "Sovjet luchtvaart"
 
 #. TRANSLATORS: Part of full phrase: German set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:254
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:256
 msgid "German"
 msgstr "Duits"
 
 #. TRANSLATORS: Part of full phrase: Voskhod and Soyuz manned space programs
 #. set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:257
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:259
 msgid "Voskhod and Soyuz manned space programs"
 msgstr "Bemande ruimtevaartprogramma's Voskhod en Sojoez"
 
 #. TRANSLATORS: Part of full phrase: Apollo space program set of navigational
 #. stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:259
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:261
 msgid "Apollo space program"
 msgstr "Apollo ruimteprogramma"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:294
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:296
 msgid "Navigational Stars Plug-in"
 msgstr "Navigatie sterren plug-in"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:305
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:307
 msgid ""
 "Additional information fields can be displayed by selecting \"Information "
 "&gt; Additional coordinates (from plugins)\""
@@ -23918,29 +23961,29 @@ msgstr ""
 "Aanvullende informatie velden kunnen worden weergegeven \"Informatie &gt; "
 "Aanvullende coördinaten (uit plug-ins)\" te selecteren"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:309
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:311
 msgid "These fields are:"
 msgstr "Deze velden zijn:"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:311
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:332
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:313
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:334
 #, qt-format
 msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
 msgstr "GHA%1: De Greenwich uurhoek van het lentepunt."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:312
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:314
 msgid "SHA: Sidereal Hour Angle of the navigation star."
 msgstr "SHA: Siderale uurhoek van de navigatie ster."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:313
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:338
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:315
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:340
 msgid "LHA: The observer's Local Hour Angle to the navigation star."
 msgstr "LHA: De waarnemer zijn lokale uurhoek van de navigatie ster."
 
 #. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers
 #. often use "sub-point" which is the geodetic location of a point where the
 #. star is at zenith.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:315
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:317
 msgid ""
 "GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and "
 "Declination."
@@ -23951,7 +23994,7 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a point
 #. close by where the observer knows themselves to be. For example, from dead
 #. reckoning.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:317
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:319
 msgid ""
 "AP: LAT/LON: The observer's Assumed Position as geodetic latitude and "
 "longitude."
@@ -23962,14 +24005,14 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation Hc is "computed height" from the
 #. Nautical Almanac where "height" is altitude. Likewise, Zn is computed
 #. azimuth, as seen from the AP.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:319
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:321
 msgid ""
 "Hc/Zn: The calculated height (altitude) and computed azimuth of navigation "
 "star, seen from AP."
 msgstr ""
 "Hc/Zn: De berekende hoogte (altitude) en azimut van de navigatie ster."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:323
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:325
 msgid ""
 "The user has two different view options selected by \"Show information as a "
 "tabulated list\"."
@@ -23977,7 +24020,7 @@ msgstr ""
 "De gebruiker heeft twee verschillende kijkopties geselecteerd bij "
 "\"Informatie weergeven als een tabel\"."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:327
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:329
 msgid ""
 "When 'tabulated list' is selected the fields more closely follow the <em>The"
 " Nautical Almanac</em> format:"
@@ -23987,52 +24030,52 @@ msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "height" is used where astronomers
 #. would use "altitude", Ho Height Observed
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:331
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:333
 msgid "Ho: Simulated observed altitude of navigation star using a sextant."
 msgstr ""
 "Ho: Gesimuleerde geobserveerde altitude (hoogte) van navigatie ster met "
 "behulp van een sextant."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:333
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:335
 msgid "LMST: Local mean sidereal time."
 msgstr "LMST: Lokaal gemiddelde sterrentijd."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:334
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:336
 msgid "SHA: Sidereal Hour Angle of navigation star."
 msgstr "SHA: Sterren uurhoek van de navigatie ster."
 
 #. TRANSLATORS: celestial coordinate system, declination.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:336
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:338
 msgid "DEC: The navigation star's declination."
 msgstr "DEC: De navigatie sterren declinatie."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:337
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:339
 msgid "GHA: The navigation star's Greenwich Hour Angle."
 msgstr "GHA: De navigatie sterren Greenwich uurhoek."
 
 #. TRANSLATORS: Geodetic coordinate system, latitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:340
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:342
 msgid "LAT: The observer's geodetic latitude."
 msgstr "LAT: De geodetische breedtegraad van de waarnemer."
 
 #. TRANSLATORS: Geodetic coordinate system, longitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:342
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:344
 msgid "LON: The observer's geodetic longitude."
 msgstr "LON: De geodetische lengtegraad van de waarnemer."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Hc
 #. computed height (altitude) for the AP
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:344
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:346
 msgid "Hc: The AP calculated height (altitude) of navigation star."
 msgstr "Hc: De AP berekende hoogte (altitude) van de navigatie ster."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Zn
 #. computed azimuth
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:346
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:348
 msgid "Zn: The AP calculated azimuth of navigation star."
 msgstr "Zn: De AP berekende azimut van de navigatie ster."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:350
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:352
 msgid "For further information please refer to the Stellarium User Guide."
 msgstr "Voor verdere informatie raadpleeg de Stellarium gebruikersgids."
 
@@ -29348,51 +29391,51 @@ msgstr "Resultaten"
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:246
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:250
 msgid "Mosaic Camera"
-msgstr ""
+msgstr "Mozaïekcamera"
 
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:60
 msgid "Mosaic Camera Overlay"
-msgstr ""
+msgstr "Mozaïekcamera-overlay"
 
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:175
 msgid "Show Mosaic Camera"
-msgstr ""
+msgstr "Toon Mosaic Camera"
 
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:177
 msgid "Set RA/Dec to current view"
-msgstr ""
+msgstr "Stel RA/Dec in op huidige weergave"
 
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:178
 msgid "Set RA/Dec to current object"
-msgstr ""
+msgstr "Stel RA/Dec in op huidig object"
 
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:179
 msgid "Set view to current camera"
-msgstr ""
+msgstr "Weergave instellen op huidige camera"
 
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:180
 msgid "Increment rotation"
-msgstr ""
+msgstr "Rotatie verhogen"
 
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:181
 msgid "Decrement rotation"
-msgstr ""
+msgstr "Rotatie verminderen"
 
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:182
 msgid "Next camera"
-msgstr ""
+msgstr "Volgende camera"
 
 #: plugins/MosaicCamera/src/MosaicCamera.cpp:183
 msgid "Previous camera"
-msgstr ""
+msgstr "Vorige camera"
 
 #: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:98
 msgid "See more at"
-msgstr ""
+msgstr "Zie meer op"
 
 #: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:230
 msgid "Mosaic Camera Plug-in"
-msgstr ""
+msgstr "Mosaic Camera-plug-in"
 
 #: plugins/MosaicCamera/src/gui/MosaicCameraDialog.cpp:234
 msgid ""
@@ -29400,10 +29443,13 @@ msgid ""
 "position of an overlay is defined by its J2000 RA/Dec coordinates, and a "
 "camera rotation angle."
 msgstr ""
+"De Mosaic Camera-plug-in legt de grenzen van de camerasensor over de hemel "
+"heen. De positie van een overlay wordt bepaald door de J2000 RA/Dec-"
+"coördinaten en de rotatiehoek van de camera."
 
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:244
 msgid "Mosaic Camera Configuration"
-msgstr ""
+msgstr "Mosaic Camera-configuratie"
 
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:247
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:268
@@ -29412,89 +29458,97 @@ msgstr "Plug-in toets op de werkbalk weergeven"
 
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:251
 msgid "Right Ascension:"
-msgstr ""
+msgstr "Rechte klimming:"
 
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:252
 msgid "Declination:"
-msgstr ""
+msgstr "Declinatie:"
 
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:253
 msgid "Rotation:"
-msgstr ""
+msgstr "Rotatie:"
 
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:254
 msgid "Visible:"
-msgstr ""
+msgstr "Zichtbaar:"
 
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:255
 msgid "Center view on camera"
-msgstr ""
+msgstr "Centrumweergave op camera"
 
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:256
 msgid "Center camera on current view"
-msgstr ""
+msgstr "Camera centreren op huidige weergave"
 
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:257
 msgid "Center camera on current object"
-msgstr ""
+msgstr "Camera centreren op huidig object"
 
 #: plugins/MosaicCamera/src/ui_mosaicCameraDialog.h:258
 msgid "Cameras"
-msgstr ""
+msgstr "Camera's"
 
 #: plugins/MosaicCamera/src/translations.fab:5
 msgid "The Dark Energy Camera"
-msgstr ""
+msgstr "De Donkere Energie Camera"
 
 #: plugins/MosaicCamera/src/translations.fab:7
 msgid ""
 "A 570 megapixel camera mounted on the Blanco telescope at the Cerro Tololo "
 "Inter-American Observatory."
 msgstr ""
+"Een camera van 570 megapixels gemonteerd op de Blanco-telescoop in het Cerro"
+" Tololo Inter-American Observatory."
 
 #: plugins/MosaicCamera/src/translations.fab:10
 msgid "The Euclid Space Telescope"
-msgstr ""
+msgstr "De Euclid-ruimtetelescoop"
 
 #: plugins/MosaicCamera/src/translations.fab:12
 msgid "The Euclid Space Telescope's focal plane."
-msgstr ""
+msgstr "Het brandvlak van de Euclid-ruimtetelescoop."
 
 #: plugins/MosaicCamera/src/translations.fab:15
 msgid "Hyper Suprime-Cam"
-msgstr ""
+msgstr "Hyper Suprime-Cam"
 
 #: plugins/MosaicCamera/src/translations.fab:17
 msgid ""
 "A 900 megapixel camera mounted on the Subaru telescope at the Mauna Kea "
 "Observatory."
 msgstr ""
+"Een camera van 900 megapixels gemonteerd op de Subaru-telescoop in het Mauna"
+" Kea-observatorium."
 
 #: plugins/MosaicCamera/src/translations.fab:20
 msgid "Hubble Space Telescope"
-msgstr ""
+msgstr "Hubble-ruimtetelescoop"
 
 #: plugins/MosaicCamera/src/translations.fab:22
 msgid "The Hubble Space Telescope's focal plane."
-msgstr ""
+msgstr "Het brandvlak van de Hubble-ruimtetelescoop."
 
 #: plugins/MosaicCamera/src/translations.fab:27
 msgid "The James Webb Space Telescope's focal plane."
-msgstr ""
+msgstr "Het brandvlak van de James Webb-ruimtetelescoop."
 
 #: plugins/MosaicCamera/src/translations.fab:30
 msgid ""
 "The LSST Atmospheric Transmission Imager and Slitless Spectrograph (LATISS)"
 msgstr ""
+"De LSST Atmospheric Transmission Imager and Slitless Spectrograph (LATISS) "
+"(Atmosferische Transmissie-Imager en Spleetloze Spectrograaf)"
 
 #: plugins/MosaicCamera/src/translations.fab:32
 msgid ""
 "A 16 megapixel camera mounted on the Rubin Observatory Auxiliary telescope."
 msgstr ""
+"Een 16 megapixelcamera gemonteerd op de Rubin Observatory Auxiliary-"
+"telescoop."
 
 #: plugins/MosaicCamera/src/translations.fab:35
 msgid "LSST Camera"
-msgstr ""
+msgstr "LSST Camera"
 
 #: plugins/MosaicCamera/src/translations.fab:37
 msgid ""
@@ -29503,24 +29557,31 @@ msgid ""
 "Observatory, this camera will be used to execute the Legacy Survey of Space "
 "and Time, creating a 10-year multicolor 'movie' of the southern sky."
 msgstr ""
+"De grootste (vanaf 2025) digitale camera ooit gebouwd, met 3,2 gigapixels. "
+"Deze camera is nu gemonteerd op de Simonyi Survey Telescope in het Vera C. "
+"Rubin Observatory en zal worden gebruikt voor het Legacy Survey of Space and"
+" Time, waarmee een tien jaar durende multicolor ‘film’ van de zuidelijke "
+"hemel wordt gemaakt."
 
 #: plugins/MosaicCamera/src/translations.fab:40
 msgid "CFHT MegaPrime"
-msgstr ""
+msgstr "CFHT MegaPrime"
 
 #: plugins/MosaicCamera/src/translations.fab:42
 msgid ""
 "A 378 megapixel camera mounted on the Canada-France-Hawaii Telescope at "
 "Mauna Kea Observatory."
 msgstr ""
+"Een camera van 378 megapixels gemonteerd op de Canada-Frankrijk-Hawaï "
+"Telescoop in het Mauna Kea Observatorium."
 
 #: plugins/MosaicCamera/src/translations.fab:45
 msgid "Nancy Grace Roman Space Telescope"
-msgstr ""
+msgstr "Nancy Grace Romeinse Ruimtetelescoop"
 
 #: plugins/MosaicCamera/src/translations.fab:47
 msgid "The Nancy Grace Roman Space Telescope's focal plane."
-msgstr ""
+msgstr "Het brandvlak van de Nancy Grace Roman Space Telescope."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:55
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:101
@@ -29542,7 +29603,7 @@ msgstr "Coördinaten van de muisaanwijzer weergeven"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:143
 msgctxt "abbreviated in the plugin"
 msgid "RA/PD (J2000.0)"
-msgstr ""
+msgstr "RA/PD (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:147
 msgctxt "abbreviated in the plugin"
@@ -29552,7 +29613,7 @@ msgstr "RA/Dec (J2000.0)"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:165
 msgctxt "abbreviated in the plugin"
 msgid "RA/PD"
-msgstr ""
+msgstr "RA/PD"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:169
 msgctxt "abbreviated in the plugin"
@@ -29619,11 +29680,11 @@ msgstr "Aangepaste positie"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:206
 msgid "Right ascension/Polar distance (J2000.0)"
-msgstr ""
+msgstr "Rechte klimming/Polaire afstand (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:207
 msgid "Right ascension/Polar distance"
-msgstr ""
+msgstr "Rechte klimming/Polaire afstand"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:211
 msgid "Right ascension/Declination (J2000.0)"
@@ -30313,25 +30374,27 @@ msgstr "Titel:"
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:473
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:127
 msgid "Sky Culture Maker"
-msgstr ""
+msgstr "Sterrenbeelden Maker"
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:63
 msgid ""
 "Contact us using our GitHub usernames, via an Issue or the Discussion tab in"
 " the Stellarium repository."
 msgstr ""
+"Neem contact met ons op via onze GitHub-gebruikersnamen, via een Issue of "
+"het tabblad Discussie in de Stellarium-archieven."
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:64
 msgid "Plugin to draw and export sky cultures in Stellarium."
-msgstr ""
+msgstr "Plug-in om sterrenbeelden te tekenen en te exporteren in Stellarium."
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:575
 msgid "INFO"
-msgstr ""
+msgstr "INFO"
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:582
 msgid "WARNING"
-msgstr ""
+msgstr "WAARSCHUWING"
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:589
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:349
@@ -30342,153 +30405,164 @@ msgstr "FOUT"
 #: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:71
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:138
 msgid "Welcome to the Sky Culture Maker!"
-msgstr ""
+msgstr "Welkom bij Sky Culture Maker!"
 
 #: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:71
 msgid ""
 "Note: Test only. The result does not yet comply to Stellarium's formatting "
 "rules."
 msgstr ""
+"Opmerking: Alleen test. Het resultaat voldoet nog niet aan de opmaakregels "
+"van Stellarium."
 
 #: plugins/SkyCultureMaker/src/gui/ScmStartDialog.cpp:92
 msgid ""
 "Convert sky cultures from the legacy (fab) format to the new (json) format"
 msgstr ""
+"Converteer sterrenbeelden van het oude (fab) formaat naar het nieuwe (json) "
+"formaat"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:179
 msgid "Please select a license for the sky culture."
-msgstr ""
+msgstr "Selecteer een licentie voor het sterrenbeeld."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:185
 msgid ""
 "The sky culture description is not complete. Please fill in all required "
 "fields correctly."
 msgstr ""
+"De beschrijving van het sterrenbeeld is niet volledig. Vul alle verplichte "
+"velden correct in."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:104
 msgid "No sky culture is set."
-msgstr ""
+msgstr "Er is geen sterrenbeeld ingesteld."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:118
 msgid "Failed to choose export directory."
-msgstr ""
+msgstr "Kan geen exportmap kiezen."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:126
 msgid "Sky culture with this ID already exists."
-msgstr ""
+msgstr "Sterrenbeeld met deze ID bestaat al."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:137
 msgid "Failed to create sky culture directory."
-msgstr ""
+msgstr "Kan de map sky culture niet aanmaken."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:147
 msgid "Failed to save the illustrations."
-msgstr ""
+msgstr "Kan de afbeeldingen niet opslaan."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:163
 msgid "Failed to create JSON document for sky culture."
-msgstr ""
+msgstr "Kan geen JSON-document voor sky culture maken."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:172
 msgid "Failed to open index.json for writing."
-msgstr ""
+msgstr "Kan index.json niet openen om te schrijven."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:184
 msgid "Failed to export sky culture description."
-msgstr ""
+msgstr "Het exporteren van de beschrijving van de sky-cultuur is mislukt."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:195
 msgid "Failed to export CMakeLists.txt."
-msgstr ""
+msgstr "Het exporteren van CMakeLists.txt is mislukt."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:203
 msgid "Sky culture exported successfully to "
-msgstr ""
+msgstr "Sky-cultuur met succes geëxporteerd naar "
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:216
 msgid "Choose Export Directory"
-msgstr ""
+msgstr "Kies Exportmap"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:226
 msgid "The selected directory is not valid"
-msgstr ""
+msgstr "De geselecteerde map is ongeldig"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:146
 msgid "SCM: Dark Constellation Editor"
-msgstr ""
+msgstr "SCM: Donkere Sterrenbeeld-editor"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:146
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:322
 msgid "SCM: Constellation Editor"
-msgstr ""
+msgstr "SCM: Sterrenbeeld-editor"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:147
 msgid "Please name your Dark Constellation"
-msgstr ""
+msgstr "Geef je Donker Sterrenbeeld een naam"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:148
 msgid "Please name your Constellation"
-msgstr ""
+msgstr "Geef uw Sterrenbeeld een naam"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:298
 msgid "Open Artwork"
-msgstr ""
+msgstr "Open Kunstwerk"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:299
 msgid "Images (*.png *.jpg *.jpeg)"
-msgstr ""
+msgstr "Afbeeldingen (*.png *.jpg *.jpeg)"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:306
 msgid "Chosen path is not a valid file:\n"
-msgstr ""
+msgstr "Het gekozen pad is geen geldig bestand: \n"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:315
 msgid "Chosen file is not a PNG, JPG or JPEG image:\n"
-msgstr ""
+msgstr "Het geselecteerde bestand is geen PNG-, JPG- of JPEG-afbeelding: \n"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:342
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:373
 msgid "No anchor was selected. Please select an anchor to bind to."
 msgstr ""
+"Er is geen anker geselecteerd. Selecteer een anker om aan te koppelen."
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:353
 msgid "No star was selected to bind to the current selected anchor."
 msgstr ""
+"Er is geen ster geselecteerd om aan het momenteel geselecteerde anker te "
+"koppelen."
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:364
 msgid "The selected object must be of type Star or Nebula."
-msgstr ""
+msgstr "Het geselecteerde object moet van het type Ster of Nevel zijn."
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:382
 msgid "The selected object must contain a HIP number."
-msgstr ""
+msgstr "Het geselecteerde object moet een HIP-nummer bevatten."
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:405
 msgid "Could not save: Sky Culture is not set"
-msgstr ""
+msgstr "Kon niet opslaan: Sky Cultuur is niet ingesteld"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:413
 msgid "Could not save: English name is empty"
-msgstr ""
+msgstr "Kon niet opslaan: Engelse naam is leeg"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:423
 msgid "Could not save: Constellation ID is empty"
-msgstr ""
+msgstr "Kon niet opslaan: Sterrenbeeld-ID is leeg"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:432
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:442
 msgid "Could not save: Constellation with this ID already exists"
-msgstr ""
+msgstr "Kon niet opslaan: Constellation met deze ID bestaat al"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:453
 msgid "Could not save: The constellation does not contain any drawings"
-msgstr ""
+msgstr "Kon niet opslaan: Het sterrenbeeld bevat geen tekeningen."
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.cpp:464
 msgid ""
 "Could not save: An artwork is attached, but not all anchors have a star "
 "bound."
 msgstr ""
+"Kon niet opslaan: er is een afbeelding bijgevoegd, maar niet alle ankers "
+"hebben een ster gekoppeld."
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:98
 msgid ""
@@ -30496,11 +30570,16 @@ msgid ""
 "Use Double-RightClick or Control + Double-Click to stop drawing the line.\n"
 "Use Command + F to search and connect stars."
 msgstr ""
+"Gebruik rechtsklikken of Control + klikken om een verbonden lijn te tekenen.\n"
+"Gebruik dubbel rechtsklikken of Control + dubbelklikken om te stoppen met het tekenen van de lijn.\n"
+"Gebruik Command + F om sterren te zoeken en te verbinden."
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:103
 msgid ""
 "Hold RightClick or Control + Click to delete the line under the cursor.\n"
 msgstr ""
+"Houd de rechtermuisknop of Control + klik ingedrukt om de regel onder de "
+"cursor te verwijderen. \n"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:106
 msgid ""
@@ -30508,10 +30587,15 @@ msgid ""
 "Use Double-RightClick to stop drawing the line.\n"
 "Use CTRL + F to search and connect stars."
 msgstr ""
+"Gebruik de rechtermuisknop om een verbonden lijn te tekenen.\n"
+"Gebruik een dubbele klik met de rechtermuisknop om het tekenen van de lijn te stoppen.\n"
+"Gebruik CTRL + F om sterren te zoeken en te verbinden."
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:110
 msgid "Hold RightClick to delete the line under the cursor.\n"
 msgstr ""
+"Houd de rechtermuisknop ingedrukt om de regel onder de cursor te "
+"verwijderen. \n"
 
 #: plugins/SkyCultureMaker/src/gui/ScmConstellationDialog.hpp:115
 msgid ""
@@ -30525,139 +30609,149 @@ msgid ""
 "   - The corresponding bound star is automatically selected when an anchor is selected\n"
 "   - 'Bind Star' will overwrite the current binding if it already exists"
 msgstr ""
+"Gebruik:\n"
+"1. Upload een afbeelding\n"
+"2. Er verschijnen drie ankerpunten in het midden van de afbeelding\n"
+"- Een anker is groen wanneer het geselecteerd is\n"
+"3. Selecteer een ster naar keuze\n"
+"4. Klik op de knop ‘Ster koppelen’\n"
+"5. Het anker wordt in een fellere kleur weergegeven wanneer het aan een ster is gekoppeld\n"
+"- De bijbehorende gekoppelde ster wordt automatisch geselecteerd wanneer een anker wordt geselecteerd\n"
+"- ‘Ster koppelen’ overschrijft de huidige koppeling als deze al bestaat"
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:140
 msgid "Create a new sky culture"
-msgstr ""
+msgstr "Maak een nieuwe luchtcultuur"
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:142
 msgid "Create"
-msgstr ""
+msgstr "Maken"
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:144
 msgid "Not implemented yet."
-msgstr ""
+msgstr "Nog niet in gebruik genomen."
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:146
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:478
 msgid "Edit"
-msgstr ""
+msgstr "Bewerken"
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:147
 msgid "Convert"
-msgstr ""
+msgstr "Converteer"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:323
 msgid "Pen"
-msgstr ""
+msgstr "Pen"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:325
 msgid "Revert the last drawn line."
-msgstr ""
+msgstr "De laatste getekende lijn ongedaan maken."
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:327
 msgid "Undo"
-msgstr ""
+msgstr "Ongedaan maken"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:328
 msgid "Eraser"
-msgstr ""
+msgstr "Gum"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:329
 msgid "Drawing"
-msgstr ""
+msgstr "Tekening"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:330
 msgid "English name"
-msgstr ""
+msgstr "Engelse naam"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:331
 msgid "ID (Do not include 'CON' or the sky culture name)"
-msgstr ""
+msgstr "ID (Vermeld niet ‘CON’ of de naam van de skykultuur)"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:332
 msgid "Native name (optional)"
-msgstr ""
+msgstr "Oorspronkelijke naam (optioneel)"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:333
 msgid "Pronounciation (optional, European glyphs or Pinyin)"
-msgstr ""
+msgstr "Uitspraak (optioneel, Europese tekens of Pinyin)"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:334
 msgid "IPA (optional)"
-msgstr ""
+msgstr "IPA (optioneel)"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:335
 msgid "Description (optional)"
-msgstr ""
+msgstr "Beschrijving (optioneel)"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:337
 msgid "Bind Star"
-msgstr ""
+msgstr "Bind Ster"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:338
 msgid "Upload Image"
-msgstr ""
+msgstr "Afbeelding Uploaden"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:339
 msgid "Remove Image"
-msgstr ""
+msgstr "Afbeelding Verwijderen"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:340
 msgid "Artwork"
-msgstr ""
+msgstr "Kunstwerk"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:474
 msgid "Name of the Sky Culture"
-msgstr ""
+msgstr "Naam van de Hemelcultuur"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:476
 msgid "Add Constellation"
-msgstr ""
+msgstr "Sterrenbeeld toevoegen"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:477
 msgid "Add Dark Constellation"
-msgstr ""
+msgstr "Donker Sterrenbeeld Toevoegen"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:480
 msgid "License of the Sky Culture"
-msgstr ""
+msgstr "Licentie van de Hemelcultuur"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:481
 msgid "Export Sky Culture"
-msgstr ""
+msgstr "Exporteer Hemelcultuur"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:483
 msgid "Please describe the Sky Culture"
-msgstr ""
+msgstr "Beschrijf de Hemelcultuur"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:484
 msgid "Mandatory fields are marked with an asterisk (*)."
-msgstr ""
+msgstr "Verplichte velden zijn gemarkeerd met een asterisk (*)."
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:485
 msgid "General Information"
-msgstr ""
+msgstr "Algemene Informatie"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:486
 msgid "Classification of the Sky Culture*"
-msgstr ""
+msgstr "Classificatie van de Hemelcultuur*"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:487
 msgid "Introduction:*"
-msgstr ""
+msgstr "Inleiding:*"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:488
 msgid " A summary that could ideally be shown on a small screen entirely."
 msgstr ""
+"Een samenvatting die perfect op een klein scherm kan worden weergegeven."
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:489
 msgid "Description (What can the user see here?)"
-msgstr ""
+msgstr "Beschrijving (Wat kan de gebruiker hier zien?)"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:490
 msgid "Culture Description:*"
-msgstr ""
+msgstr "Cultuur Beschrijving:*"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:491
 msgid ""
@@ -30670,6 +30764,15 @@ msgid ""
 "there connections to other cultures? Is this version a didactic reduction or"
 " is it derived from a specific other source?"
 msgstr ""
+"Geef een korte inleiding over de cultuur: tijd, locatie, "
+"levensomstandigheden. Beschrijf de specifieke kenmerken van de bron "
+"(boek/kleitablet/perkament/...) of van de cultuur: bijvoorbeeld gericht op "
+"de zon, gericht op de maan, het klimaat van de regio, geografische "
+"bijzonderheden. Hebben leden van de cultuur piramides of andere bekende "
+"bouwwerken gebouwd? Wat deden ze met astronomie (bijv. tijd bijhouden, "
+"kalenders maken, weersvoorspellingen...)? Zijn er verbanden met andere "
+"culturen? Is deze versie een didactische vereenvoudiging of is ze afgeleid "
+"van een specifieke andere bron?"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:493
 msgid ""
@@ -30682,27 +30785,39 @@ msgid ""
 "figures? Did they paint images (or just use names of stars)? Did they use "
 "stars at all or prefer dark/bright clouds of the Milky Way?"
 msgstr ""
+"Welke speciale functies gebruikte/gebruikt deze cultuur, waar moet de "
+"gebruiker op letten? Is het de moeite waard om op een bepaalde knop te "
+"klikken in plaats van op andere, bijvoorbeeld de verdelingen van de "
+"ecliptica, superconstellaties, donkere constellaties, constellaties aan de "
+"hele hemel, inzoomen op de Plejaden, enzovoort? Veranderen de constellaties "
+"met de maanden of blijven ze het hele jaar door hetzelfde? Wat is er "
+"eigenlijk ‘correct’ aan uw presentatie? Gebruikten ze echt stokfiguren? "
+"Schilderden ze afbeeldingen (of gebruikten ze alleen namen van sterren)? "
+"Gebruikten ze überhaupt sterren of gaven ze de voorkeur aan donkere/heldere "
+"wolken van de Melkweg?"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:494
 msgid "Moon & Sun:"
-msgstr ""
+msgstr "Maan & Zon:"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:495
 msgid "How did they determine their calendar? Did they observe phases?"
-msgstr ""
+msgstr "Hoe hebben ze hun kalender bepaald? Hebben ze de fasen geobserveerd?"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:496
 msgid "Planets:"
-msgstr ""
+msgstr "Planeten:"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:497
 msgid ""
 "Were the planets deified? What deities connect, what meaning do they have?"
 msgstr ""
+"Werden de planeten vergoddelijkt? Welke goden zijn met elkaar verbonden, "
+"welke betekenis hebben ze?"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:498
 msgid "Zodiac/ Lunar System:"
-msgstr ""
+msgstr "Dierenriem/Maansysteem:"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:499
 msgid ""
@@ -30710,18 +30825,21 @@ msgid ""
 "of the Moon\"? If so, was it a (equal or unequal) division of the ecliptic "
 "or of any other type?"
 msgstr ""
+"Hadden ze het (Bab.) dierenriemsysteem of een andere indeling van de “baan "
+"van de maan”? Zo ja, was het dan een (gelijke of ongelijke) indeling van de "
+"ecliptica of een ander type?"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:500
 msgid "Milky Way:"
-msgstr ""
+msgstr "Melkweg:"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:501
 msgid "Was the Milky Way deified? What meaning did it have?"
-msgstr ""
+msgstr "Werd de Melkweg vergoddelijkt? Welke betekenis had dat?"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:502
 msgid "Other Celestial Objects:"
-msgstr ""
+msgstr "Andere Hemellichamen:"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:503
 msgid ""
@@ -30729,28 +30847,33 @@ msgid ""
 "stars, aurorae? Did they observe stellar transients, e.g. supernovae, that "
 "were visible only in a specific year?"
 msgstr ""
+"Welke andere hemellichamen waren belangrijk? Bijvoorbeeld vallende sterren, "
+"aurora's? Hebben ze sterren waargenomen die slechts in een bepaald jaar "
+"zichtbaar waren, zoals supernova's?"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:504
 msgid "Credits and References"
-msgstr ""
+msgstr "Waarderingen en Referenties"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:505
 msgid "References:*"
-msgstr ""
+msgstr "Verwijzingen:*"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:506
 msgid "Authors:*"
-msgstr ""
+msgstr "Auteurs:*"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:507
 msgid ""
 "Who are you and what is your background (native person, researcher, ...)? "
 "Ideally, please provide an email-address as well."
 msgstr ""
+"Wie bent u en wat is uw achtergrond (inheems persoon, onderzoeker, ...)? "
+"Geef indien mogelijk ook uw e-mailadres op."
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:508
 msgid "About:*"
-msgstr ""
+msgstr "Over:*"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:509
 msgid ""
@@ -30758,24 +30881,29 @@ msgid ""
 "own or other people's research? Is it based on interviews with Elders or "
 "reading ancient text, etc.?"
 msgstr ""
+"Hoe weet u dit over de Hemelcultuur? Is deze bijdrage gebaseerd op uw eigen "
+"onderzoek of dat van anderen? Is het gebaseerd op interviews met ouderen of "
+"het lezen van oude teksten, enz.?"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:510
 msgid "Acknowledgements:"
-msgstr ""
+msgstr "Dankbetuigingen:"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:511
 msgid ""
 "What acknowledgements would you like to make? E.g. to interviewed people, "
 "organizations, or resources that helped you?"
 msgstr ""
+"Welke dankbetuigingen wilt u kwijt? Bijvoorbeeld aan geïnterviewde personen,"
+" organisaties of bronnen die u hebben geholpen?"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:139
 msgid "SCM: Export"
-msgstr ""
+msgstr "SCM: Export"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:140
 msgid "Before exporting the Sky Culture, please make sure that:"
-msgstr ""
+msgstr "Voordat u de Hemelcultuur exporteert, moet u ervoor zorgen dat:"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:141
 msgid ""
@@ -30786,91 +30914,99 @@ msgid ""
 "5. The content is shared in good faith, with respect for cultural significance and sensitivities.\n"
 "6. You have provided proper attributions where required (e.g., sources of images, texts, or names)."
 msgstr ""
+"1. U gaat er volledig mee akkoord dat de hemelcultuur onderworpen is aan de door u geselecteerde licentie.\n"
+"2. U hebt de hemelcultuur zo gedetailleerd mogelijk beschreven.\n"
+"3. U beschikt over de nodige rechten om alle opgenomen inhoud (bijv. illustraties, beschrijvingen) te gebruiken en te delen.\n"
+"4. Alle verstrekte informatie is naar uw beste weten juist.\n"
+"5. De inhoud wordt te goeder trouw gedeeld, met respect voor culturele betekenis en gevoeligheden.\n"
+"6. U hebt waar nodig de juiste bronvermeldingen verstrekt (bijv. bronnen van afbeeldingen, teksten of namen)."
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:147
 msgid ""
 "On export, you will be prompted to select your personal skycultures "
 "directory. A new directory for the sky culture will be created inside."
 msgstr ""
+"Bij het exporteren wordt u gevraagd om uw persoonlijke skycultures-map te "
+"selecteren. Daarin wordt een nieuwe map voor de hemelcultuur aangemaakt."
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:148
 msgid "Merge constellation lines into polylines on export"
-msgstr ""
+msgstr "Voeg constellatielijnen samen tot polylijnen bij export"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:149
 msgid "Export"
-msgstr ""
+msgstr "Exporteren"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureExportDialog.h:150
 msgid "Export and Exit"
-msgstr ""
+msgstr "Exporteren en Afsluiten"
 
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:128
 msgid "Hide the plugin to resume later or abort the process?"
-msgstr ""
+msgstr "De plug-in verbergen om later verder te gaan of het proces afbreken?"
 
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:129
 msgid "Hide"
-msgstr ""
+msgstr "Verbergen"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:57
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:270
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:271
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:710
 msgid "ArchaeoLines"
-msgstr "Archaeo-lijnen"
+msgstr "Archaeo Lijnen"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:60
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
-msgstr "Een hulpmiddel voor archeo-etnnoastronomische afstemmingsstudies"
+msgstr "Een hulpmiddel voor archeo-/etnnoastronomische afstemmingsstudies"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:295
 msgid "Show Line for Equinox"
-msgstr "Equinox lijn weergeven"
+msgstr "Equinox Lijn weergeven"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:296
 msgid "Show Line for Solstices"
-msgstr "Lijn voor zonnewenden weergeven"
+msgstr "Lijn voor Zonnewenden Weergeven"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:297
 msgid "Show Line for Crossquarter"
-msgstr "Crossquarter lijn weergeven"
+msgstr "Crossquarter Lijn Weergeven"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:298
 msgid "Show Line for Major Standstill"
-msgstr "Grote maanstilstand lijn weergeven"
+msgstr "Grote Maanstilstand-lijn Weergeven"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:299
 msgid "Show Line for Minor Standstill"
-msgstr "Kleine maanstilstand lijn weergeven"
+msgstr "Kleine Maanstilstand lijn Weergeven"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:300
 msgid "Show Polar Circles"
-msgstr "Toon poolcirkels"
+msgstr "Toon Poolcirkels"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:301
 msgid "Show Line for Zenith Passage"
-msgstr "Zenit passage lijn weergeven"
+msgstr "Toon Lijn voor Zenith Doorgang"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:302
 msgid "Show Line for Nadir Passage"
-msgstr "Nadir passage lijn weergeven"
+msgstr "Toon Lijn voor Nadir Doorgang"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:303
 msgid "Show Line for Selected Object"
-msgstr "Lijn voor het geselecteerde object weergeven"
+msgstr "Toon Lijn voor Geselecteerd Object"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:304
 msgid "Show Line for Selected Object's Azimuth"
-msgstr "Azimut lijn weergeven voor het geselecteerde object"
+msgstr "Toon Lijn voor Azimut van Geselecteerd Object"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:305
 msgid "Show Line for Selected Object's Hour Angle"
-msgstr "Uurhoeklijn weergeven voor het geselecteerde object"
+msgstr "Toon Lijn voor Geselecteerd Object's Uurhoek"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:306
 msgid "Show Line for Current Sun"
-msgstr "Huidige zon-lijn weergeven"
+msgstr "Toon Lijn voor Huidige Zon"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:307
 msgid "Show Line for Current Moon"
@@ -35906,7 +36042,7 @@ msgstr "Toon venster voor online opvragingen"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:107
 msgid "Call All Skies Encyclopaedia on current selection"
-msgstr ""
+msgstr "Vraag All Skies Encyclopaedia over huidige selectie"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:108
 msgid "Call AAVSO database on current selection"
@@ -35962,6 +36098,8 @@ msgid ""
 "We can request data for stars, constellations, asterisms, planets and deep-"
 "sky objects only."
 msgstr ""
+"We kunnen alleen gegevens opvragen voor sterren, sterrenbeelden, asterismen,"
+" planeten en deep-sky-objecten."
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:107
 msgctxt "GUI label"
@@ -36024,6 +36162,8 @@ msgid ""
 "ASE, the All-Skies Encyclopaedia, a private project which collects "
 "information about star names and their mythologies"
 msgstr ""
+"ASE, de All-Skies Encyclopaedia, een particulier project dat informatie "
+"verzamelt over sterrennamen en hun mythologieën."
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:192
 msgid "3 custom websites of your choice"
@@ -36632,133 +36772,137 @@ msgstr "Markeer het middelpunt van de projectie"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:784
 msgid "Reset image position on loading"
-msgstr ""
+msgstr "Afbeeldingspositie opnieuw instellen bij laden"
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:150
 msgid "Sending login request..."
-msgstr ""
+msgstr "Aanvraag voor aanmelding verzenden..."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:169
 #: plugins/NebulaTextures/src/PlateSolver.cpp:254
 msgid "Network reply error."
-msgstr ""
+msgstr "Antwoordfout van het Netwerk."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:176
 msgid "Invalid API key or login error."
-msgstr ""
+msgstr "Ongeldige API-sleutel of inlogfout."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:194
 msgid "Failed to open image file."
-msgstr ""
+msgstr "Kan afbeeldingsbestand niet openen."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:235
 msgid "Uploading image..."
-msgstr ""
+msgstr "Afbeelding Uploaden..."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:287
 #, qt-format
 msgid "Checking submission status (%1/%2)..."
-msgstr ""
+msgstr "Status van indiening controleren (%1/%2)..."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:310
 msgid "Submission status request failed after retries."
-msgstr ""
+msgstr "Verzoek om status van inzending mislukt na herhaalde pogingen."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:323
 msgid "Job ID received. Processing..."
-msgstr ""
+msgstr "Job-ID ontvangen. Verwerken..."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:326
 #, qt-format
 msgid "Astrometry error. %1"
-msgstr ""
+msgstr "Astrometriefout. %1"
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:352
 #, qt-format
 msgid "Checking job status (%1/%2)..."
-msgstr ""
+msgstr "Controleer de status van de taak (%1/%2)..."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:375
 msgid "Job status request failed after retries."
-msgstr ""
+msgstr "Verzoek om taakstatus mislukt na herhalingen."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:387
 msgid "Job completed. Downloading WCS file..."
-msgstr ""
+msgstr "Taak voltooid. WCS-bestand wordt gedownload..."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:391
 msgid "Job failed during processing."
-msgstr ""
+msgstr "Taak mislukt tijdens verwerking."
 
 #: plugins/NebulaTextures/src/PlateSolver.cpp:425
 msgid "Failed to download WCS file."
-msgstr ""
+msgstr "Downloaden van WCS-bestand mislukt."
 
 #: plugins/NebulaTextures/src/NebulaTextures.cpp:48
 #: plugins/NebulaTextures/src/NebulaTextures.cpp:92
 #: plugins/NebulaTextures/src/NebulaTextures.cpp:93
 msgid "Nebula Textures"
-msgstr ""
+msgstr "Neveltexturen"
 
 #: plugins/NebulaTextures/src/NebulaTextures.cpp:51
 msgid ""
 "This plugin can plate-solve and position astronomical images, adding them as"
 " custom deep-sky object textures for rendering."
 msgstr ""
+"Deze plug-in kan astronomische afbeeldingen plat-oplossen en positioneren, "
+"en ze toevoegen als aangepaste deep-sky-objecttexturen voor weergave."
 
 #: plugins/NebulaTextures/src/NebulaTextures.cpp:92
 msgid "Toggle Custom Nebula Textures"
-msgstr ""
+msgstr "Aangepaste Neveltexturen in- of uitschakelen"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:119
 msgid "Astrometry API key:"
-msgstr ""
+msgstr "Astrometrie API-sleutel:"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:120
 msgctxt "overlay mode"
 msgid "Bright"
-msgstr ""
+msgstr "Helder"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:121
 msgctxt "overlay mode"
 msgid "Normal"
-msgstr ""
+msgstr "Normaal"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:122
 msgctxt "overlay mode"
 msgid "Dark"
-msgstr ""
+msgstr "Donker"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:190
 msgid "Login success..."
-msgstr ""
+msgstr "Inloggen gelukt..."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:194
 #, qt-format
 msgid "Login failed: %1"
-msgstr ""
+msgstr "Inloggen mislukt: %1"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:199
 msgid "Image uploaded. Please wait..."
-msgstr ""
+msgstr "Afbeelding geüpload. Even geduld a.u.b..."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:203
 #, qt-format
 msgid "Upload failed: %1"
-msgstr ""
+msgstr "Uploaden mislukt: %1"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:212
 #, qt-format
 msgid "Solve failed: %1"
-msgstr ""
+msgstr "Oplossen mislukt: %1"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:217
 msgid "World Coordinate System data download complete. Processing..."
 msgstr ""
+"Downloaden van gegevens van het wereldcoördinatensysteem voltooid. "
+"Verwerken..."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:301
 msgid "Nebula Textures Plugin"
-msgstr ""
+msgstr "Neveltexturen-plug-in"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:307
 msgid ""
@@ -36771,256 +36915,275 @@ msgid ""
 "not flipped horizontally or vertically), solve its coordinates, and enjoy a "
 "personalized celestial view!"
 msgstr ""
+"De Neveltexturen-plug-in verbetert uw Stellarium-ervaring door u in staat te"
+" stellen texturen van deep-sky-objecten (DSO's) aan te passen en weer te "
+"geven. Of u nu een astronomieliefhebber bent met astrofotografie of "
+"astronomische schetsen en schilderijen, met deze plug-in kunt u uw eigen "
+"afbeeldingen integreren in Stellarium. Het ondersteunt ook online "
+"plaatoplossing via Astrometry.net voor nauwkeurige positionering van "
+"astronomische afbeeldingen. Upload gewoon uw afbeelding (zorg ervoor dat "
+"deze niet horizontaal of verticaal is gespiegeld), los de coördinaten op en "
+"geniet van een gepersonaliseerd uitzicht op de hemel!"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:312
 msgid "See User Guide for details. Plugin data is located in:"
 msgstr ""
+"Zie de gebruikershandleiding voor meer informatie. De plug-ingegevens "
+"bevinden zich in:"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:368
 msgid "Open Image"
-msgstr ""
+msgstr "Afbeelding openen"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:368
 msgid "Images (*.png *.jpg *.gif *.tif *.tiff *.jpeg)"
-msgstr ""
+msgstr "Afbeeldingen (*.png *.jpg *.gif *.tif *.tiff *.jpeg)"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:373
 #, qt-format
 msgid "File selected: %1"
-msgstr ""
+msgstr "Geselecteerd bestand: %1"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:386
 msgid "Operation cancelled by user."
-msgstr ""
+msgstr "Bewerking geannuleerd door gebruiker."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:402
 msgid "Please provide both API key and image path."
-msgstr ""
+msgstr "Geef zowel de API-sleutel als het pad naar de afbeelding op."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:409
 msgid "The specified image file does not exist or is not readable."
 msgstr ""
+"Het opgegeven afbeeldingsbestand bestaat niet of kan niet worden gelezen."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:417
 msgid "Invalid image format. Supported formats: PNG, JPEG, GIF, TIFF."
 msgstr ""
+"Ongeldig afbeeldingsformaat. Ondersteunde formaten: PNG, JPEG, GIF, TIFF."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:424
 msgid "Sending requests..."
-msgstr ""
+msgstr "Verzoeken verzenden..."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:441
 msgid "Invalid WCS data."
-msgstr ""
+msgstr "Ongeldige WCS-gegevens."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:491
 msgid ""
 "Processing completed! Goto Center Point, Test this texture, and Add to "
 "Custom Storage."
 msgstr ""
+"Verwerking voltooid! Ga naar Center Point, test deze textuur en voeg deze "
+"toe aan Custom Storage."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:534
 msgid "Are you sure to recover the solution?"
-msgstr ""
+msgstr "Weet je zeker dat je de oplossing kunt herstellen?"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:569
 msgid "Stop test"
-msgstr ""
+msgstr "Stop test"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:571
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:533
 msgid "Test this texture"
-msgstr ""
+msgstr "Test deze textuur"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:694
 msgid ""
 "Caution! Are you sure to add this texture? It will only take effect after "
 "restarting Stellarium."
 msgstr ""
+"Let op! Wil je deze textuur echt toevoegen? Het wordt pas van kracht nadat "
+"je Stellarium opnieuw hebt opgestart."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:725
 msgid "Failed to load texture configuration."
-msgstr ""
+msgstr "Kan textuurconfiguratie niet laden."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:735
 msgid "Imported custom textures successfully!"
-msgstr ""
+msgstr "Aangepaste texturen met succes geïmporteerd!"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:751
 msgid "Image path is empty."
-msgstr ""
+msgstr "Het pad naar de afbeelding is leeg."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:763
 msgid "Image file invalid or unreadable."
-msgstr ""
+msgstr "Afbeeldingsbestand ongeldig of onleesbaar."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:771
 msgid "Invalid image format."
-msgstr ""
+msgstr "Ongeldig afbeeldingsformaat."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:783
 msgid "Failed to copy image file."
-msgstr ""
+msgstr "Kan het afbeeldingsbestand niet kopiëren."
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:813
 msgid "Are you sure to remove this texture?"
-msgstr ""
+msgstr "Weet u zeker dat u deze textuur wilt verwijderen?"
 
 #: plugins/NebulaTextures/src/gui/NebulaTexturesDialog.cpp:825
 msgid "Texture removed."
-msgstr ""
+msgstr "Textuur verwijderd."
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:479
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:480
 msgid "Nebula Textures Plug-in Configuration"
-msgstr ""
+msgstr "Configuratie van de Neveltexturen-plugin"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:481
 msgid "Online plate-solving"
-msgstr ""
+msgstr "Online Astrometrische Kalibratie"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:482
 msgid "Open File"
-msgstr ""
+msgstr "Bestand Openen"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:483
 msgid "Image Filepath:"
-msgstr ""
+msgstr "Afbeeldingsbestandspad:"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:485
 msgid "Online Solve"
-msgstr ""
+msgstr "Online Oplossen"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:486
 msgid "Remember me"
-msgstr ""
+msgstr "Onthoud mij"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:487
 msgid ""
 "Select and upload astrophotography image to solve coordinates with "
 "Astrometry.net"
 msgstr ""
+"Selecteer en upload een astrofotografiebeeld om coördinaten op te lossen met"
+" Astrometry.net"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:488
 msgid "Goto celestial center and Adjust corner coordinates"
-msgstr ""
+msgstr "Ga naar het hemelcentrum en pas de hoekcoördinaten aan"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:490
 msgid "Declination of top left corner of image"
-msgstr ""
+msgstr "Declinatie van de linkerbovenhoek van de afbeelding"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:492
 msgid "Dec (↖)"
-msgstr ""
+msgstr "Dec (↖)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:494
 msgid "Right ascension of bottom left corner of image"
-msgstr ""
+msgstr "Rechte klimming van de linkeronderhoek van de afbeelding"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:496
 msgid "RA (↙)"
-msgstr ""
+msgstr "RA (↙)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:498
 msgid "Declination of bottom left corner of image"
-msgstr ""
+msgstr "Declinatie van de linkeronderhoek van de afbeelding"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:500
 msgid "Dec (↙)"
-msgstr ""
+msgstr "Dec (↙)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:502
 msgid "Right ascension of center of image"
-msgstr ""
+msgstr "Rechte klimming van het midden van het beeld"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:504
 msgid "RA (Center)"
-msgstr ""
+msgstr "RA (Centrum)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:506
 msgid "Right ascension of top left corner of image"
-msgstr ""
+msgstr "Rechte klimming van de linkerbovenhoek van de afbeelding"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:508
 msgid "RA (↖)"
-msgstr ""
+msgstr "RA (↖)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:510
 msgid "Declination of center of image"
-msgstr ""
+msgstr "Declinatie van het midden van het beeld"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:512
 msgid "Dec (Center)"
-msgstr ""
+msgstr "Dec (Centrum)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:514
 msgid "Right ascension of top right corner of image"
-msgstr ""
+msgstr "Rechte klimming van de rechterbovenhoek van de afbeelding"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:516
 msgid "RA (↗)"
-msgstr ""
+msgstr "RA (↗)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:518
 msgid "Declination of top right corner of image"
-msgstr ""
+msgstr "Declinatie van de rechterbovenhoek van de afbeelding"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:520
 msgid "Dec (↗)"
-msgstr ""
+msgstr "Dec (↗)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:522
 msgid "Right ascension of bottom right corner of image"
-msgstr ""
+msgstr "Rechte klimming van de rechteronderhoek van de afbeelding"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:524
 msgid "RA (↘)"
-msgstr ""
+msgstr "RA (↘)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:526
 msgid "Declination of bottom right corner of image"
-msgstr ""
+msgstr "Declinatie van de rechteronderhoek van de afbeelding"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:528
 msgid "Dec (↘)"
-msgstr ""
+msgstr "Dec (↘)"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:529
 msgid "Goto Center"
-msgstr ""
+msgstr "Ga naar Centrum"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:531
 msgid "Rendering tester"
-msgstr ""
+msgstr "Render-tester"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:532
 msgid "Disable default textures"
-msgstr ""
+msgstr "Standaardtexturen uitschakelen"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:537
 msgid "Add the Texture to Custom Storage"
-msgstr ""
+msgstr "Voeg de textuur toe aan aangepaste opslag"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:539
 msgid "Import"
-msgstr ""
+msgstr "Importeren"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:540
 msgid "Show Custom Textures"
-msgstr ""
+msgstr "Aangepaste texturen weergeven"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:541
 msgid "Avoid Area Conflict"
-msgstr ""
+msgstr "Vermijd gebiedsconflicten"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:542
 msgid "Reload"
-msgstr ""
+msgstr "Opnieuw laden"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:543
 msgid "Remove select item in Custom Textures"
-msgstr ""
+msgstr "Geselecteerd item verwijderen in aangepaste texturen"
 
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:544
 msgid "Manage"
-msgstr ""
+msgstr "Beheren"

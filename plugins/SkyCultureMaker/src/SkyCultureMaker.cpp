@@ -273,7 +273,7 @@ void SkyCultureMaker::draw(StelCore *core)
 {
 	if (isLineDrawEnabled && drawObj != nullptr)
 	{
-		drawObj->drawLine(core);
+		drawObj->drawLines(core);
 	}
 
 	if (isScmEnabled && currentSkyCulture != nullptr)
