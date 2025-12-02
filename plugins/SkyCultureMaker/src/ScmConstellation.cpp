@@ -128,9 +128,9 @@ const std::vector<scm::ConstellationLine> &scm::ScmConstellation::getLines() con
 void scm::ScmConstellation::draw(StelCore *core) const
 {
 	StelPainter painter(core->getProjection(drawFrame));
+	drawArtwork(core, painter);
 	drawLines(painter, defaultConstellationLineColor);
 	drawName(core, painter, defaultConstellationNameColor);
-	drawArtwork(core, painter);
 }
 
 void scm::ScmConstellation::drawLines(StelPainter &sPainter, const Vec3f &lineColor) const
