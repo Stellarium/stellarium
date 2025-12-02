@@ -27,7 +27,8 @@
 #include "ScmConstellationArtwork.hpp"
 #include "VecMath.hpp"
 #include "types/ConstellationLine.hpp"
-#include <StelCore.hpp>
+#include "StelCore.hpp"
+#include "StelModuleMgr.hpp"
 #include <optional>
 #include <variant>
 #include <vector>

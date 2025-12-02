@@ -136,7 +136,10 @@ scm::ScmDraw::ScmDraw()
 	maxSnapRadiusInPixels = conf->value("maxSnapRadiusInPixels", 25).toUInt();
 	conf->endGroup();
 
-	constellationLineThickness = GETSTELMODULE(ConstellationMgr)->getConstellationLineThickness();
+	ConstellationMgr *constellationMgr = GETSTELMODULE(ConstellationMgr);
+	constellationLineThickness         = constellationMgr->getConstellationLineThickness();
+	connect(constellationMgr, &ConstellationMgr::constellationLineThicknessChanged, this,
+	        [this](int thickness) { constellationLineThickness = thickness; });
 
 	currentLine.start.reset();
 	currentLine.end.reset();

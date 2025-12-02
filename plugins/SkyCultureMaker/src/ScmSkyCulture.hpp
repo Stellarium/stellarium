@@ -70,6 +70,8 @@ public:
 	ScmConstellation *getConstellation(const QString &id);
 
 	/// Returns a pointer to the constellations of the sky culture
+	/// Constellations are held as unique pointers, so the addresses
+	/// of the constellation objects remain valid even if the vector is modified.
 	std::vector<std::unique_ptr<ScmConstellation>> *getConstellations();
 
 	/**

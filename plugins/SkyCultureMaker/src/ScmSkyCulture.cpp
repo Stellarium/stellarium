@@ -43,11 +43,10 @@ void scm::ScmSkyCulture::setFallbackToInternationalNames(bool fallback)
 }
 
 scm::ScmConstellation &scm::ScmSkyCulture::addConstellation(const QString &id,
-                                                            const std::vector<ConstellationLine> &lines,
-                                                            const bool isDarkConstellation)
+															const std::vector<ConstellationLine> &lines,
+															const bool isDarkConstellation)
 {
-	auto constellationObj = std::make_unique<scm::ScmConstellation>(this, id, lines, isDarkConstellation);
-	constellations.push_back(std::move(constellationObj));
+	constellations.push_back(std::make_unique<scm::ScmConstellation>(this, id, lines, isDarkConstellation));
 	return *constellations.back();
 }
 
@@ -60,11 +59,9 @@ void scm::ScmSkyCulture::removeConstellation(const QString &id)
 
 scm::ScmConstellation *scm::ScmSkyCulture::getConstellation(const QString &id)
 {
-	for (auto &constellation : constellations)
-	{
-		if (constellation->getId() == id) return constellation.get();
-	}
-	return nullptr;
+	auto it = std::find_if(constellations.begin(), constellations.end(),
+						   [&id](const std::unique_ptr<ScmConstellation> &c) { return c->getId() == id; });
+	return it != constellations.end() ? it->get() : nullptr;
 }
 
 std::vector<std::unique_ptr<scm::ScmConstellation>> *scm::ScmSkyCulture::getConstellations()

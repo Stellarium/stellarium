@@ -25,8 +25,6 @@
 #include "ConstellationMgr.hpp"
 #include <QDir>
 #include <QFileInfo>
-#include <QObject>
-#include <StelModuleMgr.hpp>
 
 scm::ScmConstellation::ScmConstellation(QObject *parent, const QString &id, const std::vector<ConstellationLine> &lines,
                                         const bool isDarkConstellation)
