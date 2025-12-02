@@ -38,8 +38,8 @@ void scm::ScmSkyCulture::setFallbackToInternationalNames(bool fallback)
 }
 
 scm::ScmConstellation &scm::ScmSkyCulture::addConstellation(const QString &id,
-															const std::vector<ConstellationLine> &lines,
-															const bool isDarkConstellation)
+                                                            const std::vector<ConstellationLine> &lines,
+                                                            const bool isDarkConstellation)
 {
 	constellations.push_back(std::make_unique<scm::ScmConstellation>(id, lines, isDarkConstellation));
 	return *constellations.back();

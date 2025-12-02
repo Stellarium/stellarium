@@ -25,9 +25,9 @@
 #include "ConstellationMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelModule.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelProjector.hpp"
-#include <StelModuleMgr.hpp>
 #include <QApplication>
 #include <QDebug>
 #include <QKeyEvent>
