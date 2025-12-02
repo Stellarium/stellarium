@@ -41,12 +41,9 @@
 namespace scm
 {
 
-class ScmSkyCulture : public QObject
+class ScmSkyCulture
 {
-	Q_OBJECT
 public:
-	explicit ScmSkyCulture(QObject *parent = nullptr);
-
 	/// Sets the id of the sky culture
 	void setId(const QString &id);
 

@@ -27,11 +27,6 @@
 #include <QFile>
 #include <QTextStream>
 
-scm::ScmSkyCulture::ScmSkyCulture(QObject *parent)
-	: QObject(parent)
-{
-}
-
 void scm::ScmSkyCulture::setId(const QString &id)
 {
 	ScmSkyCulture::id = id;
@@ -46,7 +41,7 @@ scm::ScmConstellation &scm::ScmSkyCulture::addConstellation(const QString &id,
 															const std::vector<ConstellationLine> &lines,
 															const bool isDarkConstellation)
 {
-	constellations.push_back(std::make_unique<scm::ScmConstellation>(this, id, lines, isDarkConstellation));
+	constellations.push_back(std::make_unique<scm::ScmConstellation>(id, lines, isDarkConstellation));
 	return *constellations.back();
 }
 

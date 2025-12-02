@@ -26,10 +26,9 @@
 #include <QDir>
 #include <QFileInfo>
 
-scm::ScmConstellation::ScmConstellation(QObject *parent, const QString &id, const std::vector<ConstellationLine> &lines,
+scm::ScmConstellation::ScmConstellation(const QString &id, const std::vector<ConstellationLine> &lines,
                                         const bool isDarkConstellation)
-	: QObject(parent)
-	, id(id)
+	: id(id)
 	, lines(lines)
 	, isDarkConstellation(isDarkConstellation)
 {
@@ -42,17 +41,14 @@ scm::ScmConstellation::ScmConstellation(QObject *parent, const QString &id, cons
 	defaultConstellationNameColor = constMgr->getLabelsColor();
 
 	// Connections
-	connect(constMgr, &ConstellationMgr::constellationLineThicknessChanged, this,
-	        [this](int v) { constellationLineThickness = v; });
-
-	connect(constMgr, &ConstellationMgr::fontSizeChanged, this,
-	        [this](int v) { constellationNameFont.setPixelSize(v); });
-
-	connect(constMgr, &ConstellationMgr::linesColorChanged, this,
-	        [this](const Vec3f &c) { defaultConstellationLineColor = c; });
-
-	connect(constMgr, &ConstellationMgr::namesColorChanged, this,
-	        [this](const Vec3f &c) { defaultConstellationNameColor = c; });
+	QObject::connect(constMgr, &ConstellationMgr::constellationLineThicknessChanged,
+	                 [this](int v) { constellationLineThickness = v; });
+	QObject::connect(constMgr, &ConstellationMgr::fontSizeChanged,
+	                 [this](int v) { constellationNameFont.setPixelSize(v); });
+	QObject::connect(constMgr, &ConstellationMgr::linesColorChanged,
+	                 [this](const Vec3f &c) { defaultConstellationLineColor = c; });
+	QObject::connect(constMgr, &ConstellationMgr::namesColorChanged,
+	                 [this](const Vec3f &c) { defaultConstellationNameColor = c; });
 
 	updateTextPosition();
 }

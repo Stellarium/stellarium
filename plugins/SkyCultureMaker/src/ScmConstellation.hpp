@@ -40,12 +40,10 @@
 namespace scm
 {
 
-class ScmConstellation : public QObject
+class ScmConstellation
 {
-	Q_OBJECT
 public:
-	ScmConstellation(QObject *parent, const QString &id, const std::vector<ConstellationLine> &lines,
-	                 const bool isDarkConstellation);
+	ScmConstellation(const QString &id, const std::vector<ConstellationLine> &lines, const bool isDarkConstellation);
 
 	/// The frame that is used for calculation and is drawn on.
 	static const StelCore::FrameType drawFrame = StelCore::FrameJ2000;
