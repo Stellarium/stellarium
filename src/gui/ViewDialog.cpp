@@ -1924,7 +1924,29 @@ void ViewDialog::filterSkyCultures()
 		else
 		{
 			// hide items if they do not match the filter string
-			item->setHidden(!item->text().contains(filter, Qt::CaseInsensitive));
+			QString target = item->text();
+			// check wether the filter string appears in the target string
+			if (target.contains(filter, Qt::CaseInsensitive))
+			{
+				item->setHidden(false);
+			}
+			// if the filter string in not contained in the target string:
+			// calculate the string similarity (maybe there was a typo)
+			else if (filter.size() > 1)
+			{
+				if (modifiedDamerauLevenshteinDistance(filter.toLower(), target.toLower()) > 1)
+				{
+					item->setHidden(true);
+				}
+				else
+				{
+					item->setHidden(false);
+				}
+			}
+			else
+			{
+				item->setHidden(true);
+			}
 
 			// if checkBox is ticked ---> apply additional filter operation
 			if (applyTimeFilter)
@@ -1952,6 +1974,54 @@ void ViewDialog::filterSkyCultures()
 			}
 		}
 	}
+}
+
+// simple implementation of damerau-levenshtein distance that does not penalize insertions
+int ViewDialog::modifiedDamerauLevenshteinDistance(const QString &source, const QString &target)
+{
+	int sourceLength = source.length();
+	int targetLength = target.length();
+	int cost;
+	// 2 dim matrix ---> flat 1 dim strided vector
+	QVector<int> d((sourceLength + 1) * (targetLength + 1));
+
+	// initialize matrix
+	for (int i = 0; i <= sourceLength; i++)
+	{
+		d[i + (sourceLength + 1) * 0] = i;
+	}
+	for(int j = 0; j <= targetLength; j++)
+	{
+		d[0 + (sourceLength + 1) * j] = j;
+	}
+	// calculate distance
+	for (int i = 1; i <= sourceLength; i++)
+	{
+		for(int j = 1; j<= targetLength; j++)
+		{
+			if(source[i - 1] == target[j - 1])
+			{
+				cost = 0;
+			}
+			else
+			{
+				cost = 1;
+			}
+			d[i + (sourceLength + 1) * j] = std::min(
+				d[i - 1 + (sourceLength + 1) * j] + 1, // delete
+				std::min(d[i + (sourceLength + 1) * (j - 1)] + 0, // insert
+						 d[i - 1 + (sourceLength + 1) * (j - 1)] + cost) // substitution
+				);
+			if((i > 1) && (j > 1) && (source[i - 1] == target[j - 2]) && (source[i - 2] == target[j - 1]))
+			{
+				d[i + (sourceLength + 1) * j] = std::min(
+					d[i + (sourceLength + 1) * j],
+					d[i - 2 + (sourceLength + 1) * (j - 2)] + cost // transposition
+					);
+			}
+		}
+	}
+	return d[sourceLength + (sourceLength + 1) * targetLength];
 }
 
 void ViewDialog::initiateSkycultureMapRotation()

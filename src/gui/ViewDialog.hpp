@@ -125,6 +125,7 @@ private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();
 	void initSkycultureTime();
+	int modifiedDamerauLevenshteinDistance(const QString &source, const QString &target);
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
