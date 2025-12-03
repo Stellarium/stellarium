@@ -20,12 +20,10 @@
 #ifndef SCMGEOLOCGRAPHICSVIEW_HPP
 #define SCMGEOLOCGRAPHICSVIEW_HPP
 
-#include "PreviewPathItem.hpp"
-#include "PreviewPolygonItem.hpp"
+#include "ScmPreviewPathItem.hpp"
+#include "ScmPreviewPolygonItem.hpp"
 #include "types/CulturePolygon.hpp"
 #include <QGraphicsView>
-
-
 
 //! @class ScmGeoLocGraphicsView
 //! Special GraphicsView that allows the User to digitize polygons
@@ -36,7 +34,6 @@ class ScmGeoLocGraphicsView : public QGraphicsView
 public:
 	ScmGeoLocGraphicsView(QWidget *parent = nullptr);
 
-	// public functions
 	void initializeGraphicsView();
 	void addCurrentPoly(int startTime, int endTime);
 	void removePolygon(int id);
@@ -49,44 +46,33 @@ public slots:
 signals:
 	void timeValueChanged(int year);
 	void timeRangeChanged(int minYear, int maxYear);
-	// =============================================
 	void showAddPolyDialog();
 	void addPolygonToCulture(scm::CulturePolygon poly);
 
-
 protected:
 	void wheelEvent(QWheelEvent *event) override;
-	// void mouseMoveEvent(QMouseEvent *event) override;
-	// void mousePressEvent(QMouseEvent *event) override;
-	// void mouseReleaseEvent(QMouseEvent *event) override;
 	void showEvent(QShowEvent *event) override;
-	void scaleView(double scaleFactor);
-	// ===============================
-	void mouseMoveEvent( QMouseEvent *e ) override;
-	void mousePressEvent( QMouseEvent *e ) override;
-	void mouseReleaseEvent( QMouseEvent *e ) override;
-	void keyPressEvent( QKeyEvent *e ) override;
-
+	void mouseMoveEvent(QMouseEvent *event) override;
+	void mousePressEvent(QMouseEvent *event) override;
+	void mouseReleaseEvent(QMouseEvent *event) override;
+	void keyPressEvent(QKeyEvent *event) override;
 
 private:
-	// variables
 	bool viewScrolling;
 	bool firstShow;
 	int currentYear;
 	QPoint mouseLastXY;
 	QRectF defaultRect;
+	QMap<int, ScmPreviewPolygonItem *> polygonIdentifierMap;
+	ScmPreviewPolygonItem *currentCapturePolygon = new ScmPreviewPolygonItem(true);
+	ScmPreviewPathItem *previewCapturePath = new ScmPreviewPathItem();
 
-	QMap<int, PreviewPolygonItem *> polygonIdentifierMap;
-
-	PreviewPolygonItem *currentCapturePolygon = new PreviewPolygonItem(true);
-	PreviewPathItem *previewCapturePath = new PreviewPathItem();
-
-	// functions
-	QPolygonF convertViewToWGS84(const QPolygonF &viewCoordinatePolygon);
 	void updateCultureVisibility();
-	qreal calculateScaleRatio(qreal width, qreal height);
 	void updatePreviewPath();
 	void exportCulturePolygons();
+	void scaleView(double scaleFactor);
+	qreal calculateScaleRatio(qreal width, qreal height);
+	QPolygonF convertViewToWGS84(const QPolygonF &viewCoordinatePolygon);
 };
 
 #endif // SCMGEOLOCGRAPHICSVIEW_HPP

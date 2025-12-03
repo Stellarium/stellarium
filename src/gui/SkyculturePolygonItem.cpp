@@ -1,8 +1,26 @@
+/*
+ * Stellarium
+ *
+ * Copyright (C) 2025 Moritz Rätz
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "SkyculturePolygonItem.hpp"
 #include <qgraphicsscene.h>
 #include <qpen.h>
 #include <qstyleoption.h>
-
 
 SkyculturePolygonItem::SkyculturePolygonItem(QString scId, int startTime, int endTime)
 	: QGraphicsPolygonItem()
@@ -13,7 +31,6 @@ SkyculturePolygonItem::SkyculturePolygonItem(QString scId, int startTime, int en
 	, lastSelectedState(false)
 {
 	setFlag(QGraphicsItem::ItemIsSelectable);
-	//setAcceptHoverEvents(true);
 	setToolTip(skycultureId);
 	setAcceptHoverEvents(true);
 
@@ -38,17 +55,13 @@ bool SkyculturePolygonItem::existsAtPointInTime(int year) const
 void SkyculturePolygonItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
 	isHovered = true;
-	qInfo() << "isHovered: " << isHovered;
-
-	QGraphicsPolygonItem::hoverEnterEvent(event); // calls update()
+	QGraphicsPolygonItem::hoverEnterEvent(event);
 }
 
 void SkyculturePolygonItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
 	isHovered = false;
-	qInfo() << "isHovered: " << isHovered;
-
-	QGraphicsPolygonItem::hoverLeaveEvent(event); // calls update()
+	QGraphicsPolygonItem::hoverLeaveEvent(event);
 }
 
 QVariant SkyculturePolygonItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
@@ -57,7 +70,6 @@ QVariant SkyculturePolygonItem::itemChange(QGraphicsItem::GraphicsItemChange cha
 
 	if (change == QGraphicsItem::ItemSelectedChange)
 	{
-		qInfo() << skycultureId << " SelectionChange triggered: " << value.toBool() << " and lastSelectedState: " << lastSelectedState;
 		return lastSelectedState;
 	}
 

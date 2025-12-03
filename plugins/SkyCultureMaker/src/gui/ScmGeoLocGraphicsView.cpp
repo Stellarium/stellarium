@@ -19,6 +19,7 @@
 
 #include "ScmGeoLocGraphicsView.hpp"
 #include <qevent.h>
+#include <qguiapplication.h>
 #include <qjsonarray.h>
 #include <qgraphicssvgitem.h>
 #include <qscrollbar.h>
@@ -26,9 +27,6 @@
 
 #include <QJsonObject>
 #include <QJsonDocument>
-#include <QtGui>
-
-
 
 ScmGeoLocGraphicsView::ScmGeoLocGraphicsView(QWidget *parent)
 	: QGraphicsView(parent)
@@ -38,7 +36,6 @@ ScmGeoLocGraphicsView::ScmGeoLocGraphicsView(QWidget *parent)
 	, mouseLastXY(0, 0)
 {
 	QGraphicsScene *scene = new QGraphicsScene(this);
-	// scene->setItemIndexMethod(QGraphicsScene::NoIndex); // noIndex better when adding / removing many items
 	setScene(scene);
 	setInteractive(true);
 
@@ -48,42 +45,29 @@ ScmGeoLocGraphicsView::ScmGeoLocGraphicsView(QWidget *parent)
 	setCursor(Qt::CrossCursor);
 	setMouseTracking(true);
 
-	//setDragMode(QGraphicsView::NoDrag);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-	show();
-
-	// add items (transfer to dedicated function later) 1278.57,1899.83 1276.74,1900.03
-
-
-	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/gen01_capPop500k_wAntarctica_015_op70.svg");
+	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/skyCultureWorldMap.svgz");
 	scene->addItem(baseMap);
 	scene->setSceneRect(- baseMap->boundingRect().width() * 0.75, - baseMap->boundingRect().height() * 0.5, baseMap->boundingRect().width() * 2.5, baseMap->boundingRect().height() * 2);
-	qInfo() << "basemap width = " << baseMap->boundingRect().width() << " and height = " << baseMap->boundingRect().height();
 	this->defaultRect = baseMap->boundingRect();
 
 	scene->addItem(currentCapturePolygon);
 	scene->addItem(previewCapturePath);
-
-
-	qInfo() << "ende Map Constructor!";
 }
 
 void ScmGeoLocGraphicsView::wheelEvent(QWheelEvent *event)
 {
 	qreal zoomFactor = pow(2.0, event->angleDelta().y() / 240.0);
-	qreal qgsZoomFactor = 1.0 + ( 1.01 - 1.0 ) / 120.0 * std::fabs( event->angleDelta().y() );
 	qreal ctrZoomFactor = 0.0;
 	if ( event->modifiers() & Qt::ControlModifier )
 	{
 		//holding ctrl while wheel zooming results in a finer zoom
 		ctrZoomFactor = 1.0 + ( zoomFactor - 1.0 ) / 15.0;
 		scaleView(ctrZoomFactor);
-		qInfo() << "factor: " << zoomFactor << " vs. qzoomfactor: " << qgsZoomFactor << " vs. ctrlZoomfactor: " << ctrZoomFactor;
 		return;
 	}
-
 	scaleView(zoomFactor); // faster scrolling = faster zoom
 }
 
@@ -108,10 +92,11 @@ void ScmGeoLocGraphicsView::scaleView(double factor)
 {
 	// calculate requested zoom before executing the zoom operation to limit the min / max zoom level
 	const double scaling = transform().scale(factor, factor).mapRect(QRectF(0, 0, 1, 1)).width();
-	qInfo() << "scale: " << scaling;
 
-	if (scaling < 0.1 || scaling > 5000.0) // scaling < min or scaling > max zoom level
+	if (scaling < 0.1 || scaling > 2300.0) // scaling < min or scaling > max zoom level
+	{
 		return;
+	}
 
 	scale(factor, factor);
 }
@@ -124,7 +109,7 @@ void ScmGeoLocGraphicsView::updateTime(int year)
 
 void ScmGeoLocGraphicsView::selectPolygon(int id)
 {
-	PreviewPolygonItem *poly = polygonIdentifierMap.value(id);
+	ScmPreviewPolygonItem *poly = polygonIdentifierMap.value(id);
 
 	// if no fitting polygon was found --> return to prevent errors
 	if(poly == nullptr)
@@ -135,7 +120,7 @@ void ScmGeoLocGraphicsView::selectPolygon(int id)
 	if(!poly->existsAtPointInTime(currentYear))
 	{
 		// signal connects to updateSkyCultureTimeValue in ScmSkyCultureDialog which invokes updateTime (in this class)
-		emit(timeValueChanged(poly->getStartTime()));
+		emit timeValueChanged(poly->getStartTime());
 	}
 
 	const QRectF polyBbox = poly->boundingRect();
@@ -145,8 +130,9 @@ void ScmGeoLocGraphicsView::selectPolygon(int id)
 void ScmGeoLocGraphicsView::updateCultureVisibility()
 {
 	// iterate over all polygons --> if currentTime is between startTime and endTime show, else hide
-	for(const auto &item : scene()->items()) {
-		PreviewPolygonItem *previewPItem = qgraphicsitem_cast<PreviewPolygonItem *>(item);
+	const auto itemList = scene()->items();
+	for(const auto &item : itemList) {
+		ScmPreviewPolygonItem *previewPItem = qgraphicsitem_cast<ScmPreviewPolygonItem *>(item);
 
 		// if cast was unsuccessful (item is not an SkyculturePolygonItem) --> look at the next item
 		if(!previewPItem)
@@ -193,7 +179,8 @@ qreal ScmGeoLocGraphicsView::calculateScaleRatio(qreal width, qreal height)
 	}
 
 	// Rect of the current transformation in scene coordinates
-	QRectF sceneRect = transform().mapRect(QRectF(2, 2, width, height)); // values of x / y of sceneRect are not important since only the width / height are used for the calculation
+	// values of x / y of sceneRect are not important since only the width / height are used for the calculation
+	QRectF sceneRect = transform().mapRect(QRectF(2, 2, width, height));
 	if (sceneRect.isEmpty())
 	{
 		return 0;
@@ -310,8 +297,8 @@ void ScmGeoLocGraphicsView::mouseMoveEvent( QMouseEvent *e )
 
 void ScmGeoLocGraphicsView::addCurrentPoly(int startTime, int endTime)
 {
-	// add the polygon to the scene so the user can see some progress while digitizing other polygons
-	PreviewPolygonItem *poly = new PreviewPolygonItem(startTime, endTime, currentCapturePolygon->polygon());
+	// add the polygon to the scene so users can see the progress while digitizing other polygons
+	ScmPreviewPolygonItem *poly = new ScmPreviewPolygonItem(startTime, endTime, currentCapturePolygon->polygon());
 	scene()->addItem(poly);
 
 	// save poly
@@ -348,20 +335,15 @@ QPolygonF ScmGeoLocGraphicsView::convertViewToWGS84(const QPolygonF &viewCoordin
 {
 	QList<QPointF> result;
 
-	qInfo() << "pre return --> liste input: "<< qSetRealNumberPrecision(20) << viewCoordinatePolygon;
-
-	// convert view coordinates to native coordinate system of the current map
+	// convert view coordinates to native coordinate system of the current map (EPSG: 3857)
 	for (const auto &point : viewCoordinatePolygon)
 	{
 		qreal xInMeter = ((point.x() / defaultRect.width()) * 40075014.1343236863613128) - 20037507.0671618431806564;
-		qreal yInMeter = ((point.y() / defaultRect.height()) * -39034031.3094234876334668) + 18418386.3090785145759583;
-
+		qreal yInMeter = ((point.y() / defaultRect.height()) * -37620870.87264694646000862) + 18418386.3090785145759583;
 		result.append(QPointF(xInMeter, yInMeter));
 	}
 
-	qInfo() << "pre return --> liste (view to meter): " << qSetRealNumberPrecision(20) << result;
-
-	// convert map coordinates to WGS84 coordinates
+	// convert map coordinates to Lat/Lon coordinates (EPSG: 4326)
 	for (auto &point : result)
 	{
 		qreal xInLon= (point.x() * 180.0) / 20037508.3427892439067363739014;
@@ -371,9 +353,7 @@ QPolygonF ScmGeoLocGraphicsView::convertViewToWGS84(const QPolygonF &viewCoordin
 		point.setY(yInLat);
 	}
 
-	qInfo() << "pre return --> liste (meter to latLon): " << qSetRealNumberPrecision(20) << result;
-	// qreal xInLon= (point.x() * 180.0) / 20037508.3427892439067363739014;
-	// qreal yInLat = (qAtan(qExp(((point.y() * 180.0) / 20037508.3427892439067363739014) * (M_PI / 180.0))) * (360.0 / M_PI)) - 90;
-
 	return result;
 }
+
+
