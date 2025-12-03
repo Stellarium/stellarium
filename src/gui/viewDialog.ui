@@ -5167,6 +5167,9 @@
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Expanding</enum>
+                 </property>
                  <property name="sizeHint" stdset="0">
                   <size>
                    <width>40</width>
@@ -5175,7 +5178,7 @@
                  </property>
                 </spacer>
                </item>
-               <item row="0" column="4">
+               <item row="0" column="6">
                 <widget class="QLabel" name="skyCultureMaxTimeLabel">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -5193,7 +5196,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="5">
+               <item row="0" column="7">
                 <widget class="QSpinBox" name="skyCultureMaxTimeSpinBox">
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
@@ -5214,7 +5217,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0" colspan="6">
+               <item row="2" column="4" colspan="3">
                 <widget class="QCheckBox" name="applyTimeOnListCheckBox">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -5261,7 +5264,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="4" column="0" colspan="6">
+               <item row="3" column="4" colspan="3">
                 <widget class="QCheckBox" name="useLocationForRotationCheckBox">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -5282,7 +5285,7 @@
           <item row="0" column="0" rowspan="2">
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <property name="spacing">
-             <number>3</number>
+             <number>5</number>
             </property>
             <property name="leftMargin">
              <number>0</number>

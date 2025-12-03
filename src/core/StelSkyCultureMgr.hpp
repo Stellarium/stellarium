@@ -106,7 +106,7 @@ public:
 	//! Earliest available year
 	int startTime;
 	//! Latest available year
-	int endTime;
+	QString endTime;
 	//! Type of the boundaries
 	BoundariesType boundariesType;
 	//! JSON data describing the constellations (names, lines, artwork)
@@ -253,7 +253,7 @@ public slots:
 
 	//! Get a map of sky culture names in the current language and the corresponding time limits.
 	//! @return A map of translated sky culture names and the corresponding time limits.
-	QMap<QString, QPair<int, int>> getSkyCultureTimeLimitMapI18(void) const;
+	QMap<QString, QPair<int, QString> > getSkyCultureTimeLimitMapI18(void) const;
 
 	//! Get a list of sky culture IDs
 	QStringList getSkyCultureListIDs(void) const;

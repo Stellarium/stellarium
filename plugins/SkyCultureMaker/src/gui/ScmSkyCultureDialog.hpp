@@ -97,8 +97,6 @@ private slots:
 	void hideAddPolygon();
 	void confirmAddPolygon();
 	void cancelAddPolygon();
-	void changeStartTime();
-	void changeEndTime();
 	void checkMutExRegions(const QStringList checkedItems);
 
 private:
@@ -155,18 +153,6 @@ private:
 	 *
 	 */
 	void initSkycultureTime();
-
-	/**
-	 * @brief Set the value of the startTimeSpinbox.
-	 *
-	 */
-	void addPolygonSetStartTime(int Year);
-
-	/**
-	 * @brief Set the limits of the startTimeSpinBox and endTimeSpinBox.
-	 *
-	 */
-	void addPolygonSetTimeLimits(int minYear, int maxYear);
 };
 
 #endif // SCM_SKY_CULTURE_DIALOG_HPP

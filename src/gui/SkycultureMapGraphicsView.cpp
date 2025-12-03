@@ -137,7 +137,15 @@ void SkycultureMapGraphicsView::loadCulturePolygons()
 				auto polygonObject = currentPoly.toObject();
 
 				int startTime = polygonObject.value("startTime").toInt();
-				int endTime = polygonObject.value("endTime").toInt();
+				int endTime;
+				if (polygonObject.value("endTime").toString() == "∞")
+				{
+					endTime = QDateTime::currentDateTime().date().year();
+				}
+				else
+				{
+					endTime = polygonObject.value("endTime").toString().toInt();
+				}
 				QList<QPointF> geometry;
 
 				const auto geometryArray = polygonObject.value("geometry").toArray();

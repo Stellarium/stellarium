@@ -436,7 +436,7 @@ void SkyCultureMaker::setSkyCultureStartTime(int startTime)
 	}
 }
 
-void SkyCultureMaker::setSkyCultureEndTime(int endTime)
+void SkyCultureMaker::setSkyCultureEndTime(const QString &endTime)
 {
 	if (currentSkyCulture != nullptr)
 	{

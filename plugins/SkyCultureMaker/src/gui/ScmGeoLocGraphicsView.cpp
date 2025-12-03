@@ -314,7 +314,7 @@ void ScmGeoLocGraphicsView::addCurrentPoly(int startTime, int endTime)
 	// convert the view coordinates to real world coordinates
 	QPolygonF transformedPolygon = convertViewToWGS84(currentCapturePolygon->polygon());
 
-	emit(addPolygonToCulture(scm::CulturePolygon(polygonIdentifierMap.lastKey(), startTime, endTime, transformedPolygon)));
+	emit addPolygonToCulture(scm::CulturePolygon(polygonIdentifierMap.lastKey(), startTime, QString::number(endTime), transformedPolygon));
 
 	// reset capture poly and path
 	currentCapturePolygon->setPolygon(QPolygonF());

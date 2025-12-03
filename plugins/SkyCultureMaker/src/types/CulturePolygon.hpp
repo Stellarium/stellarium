@@ -31,7 +31,7 @@ struct CulturePolygon
 {
 	CulturePolygon() = default;
 
-	CulturePolygon(int id, int startTime, int endTime, QPolygonF polygon)
+	CulturePolygon(int id, int startTime, QString endTime, QPolygonF polygon)
 		: id(id), startTime(startTime), endTime(endTime), polygon(polygon)
 	{
 	}
@@ -43,7 +43,7 @@ struct CulturePolygon
 	int startTime = 0;
 
 	//! The end time of the polygon.
-	int endTime = 0;
+	QString endTime = "0";
 
 	//! The settlement area of the culture.
 	QPolygonF polygon;

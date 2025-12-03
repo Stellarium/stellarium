@@ -1393,7 +1393,7 @@ void ViewDialog::populateLists()
 		 "Australasia", "Melanesia", "Micronesia", "Polynesia"};
 
 	const QMultiMap<QString, QString> &cultureRegionMap = app.getSkyCultureMgr().getSkyCultureRegionMapI18();
-	const QMap<QString, QPair<int, int>> &cultureTimeLimitMap = app.getSkyCultureMgr().getSkyCultureTimeLimitMapI18();
+	const QMap<QString, QPair<int, QString>> &cultureTimeLimitMap = app.getSkyCultureMgr().getSkyCultureTimeLimitMapI18();
 
 	// remove duplicates in list of occuring regions (optional)
 	QList<QString> occuringRegions = cultureRegionMap.values();
@@ -1416,18 +1416,25 @@ void ViewDialog::populateLists()
 	}
 
 	QMultiMapIterator<QString, QString> cultureRegionIterator(cultureRegionMap);
+	// find the earliest startTime of all cultures (needed in initSkyCultureTime) ---> evaluate it here so we don't need to iterate over all cultures multiple times
+	int globalStartTime = QDateTime::currentDateTime().date().year();
 
 	cultureRegionIterator.toBack(); // reverse iteration to preserve alphabetical order
 	while (cultureRegionIterator.hasPrevious())
 	{
 		cultureRegionIterator.previous();
 		QListWidgetItem* item = new QListWidgetItem(cultureRegionIterator.key());
-		cultureTimeLimitMap.value(cultureRegionIterator.key());
 		item->setData(Qt::UserRole, cultureTimeLimitMap.value(cultureRegionIterator.key()).first); // startTime
 		item->setData(Qt::UserRole + 1, cultureTimeLimitMap.value(cultureRegionIterator.key()).second); // endTime
 
+		if (cultureTimeLimitMap.value(cultureRegionIterator.key()).first < globalStartTime)
+		{
+			globalStartTime = cultureTimeLimitMap.value(cultureRegionIterator.key()).first;
+		}
+
 		l->insertItem(l->row(l->findItems(cultureRegionIterator.value(), Qt::MatchContains).at(0)) + 1, item);
 	}
+	ui->skyCultureCurrentTimeSpinBox->setMinimum(globalStartTime);
 
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
@@ -1801,7 +1808,7 @@ void ViewDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 
 void ViewDialog::initSkycultureTime()
 {
-	int minYear = -2000;
+	int minYear = ui->skyCultureCurrentTimeSpinBox->minimum();
 	int maxYear = QDateTime::currentDateTime().date().year();
 	int currentYear = maxYear;
 
@@ -1817,7 +1824,6 @@ void ViewDialog::initSkycultureTime()
 	ui->skyCultureTimeSlider->setMinimum(minYear);
 	ui->skyCultureTimeSlider->setMaximum(maxYear);
 
-	ui->skyCultureCurrentTimeSpinBox->setMinimum(minYear);
 	ui->skyCultureCurrentTimeSpinBox->setMaximum(maxYear);
 
 	// reuse function to set Value of timeSlider, currentTimeSpinBox and MapGraphicsView
@@ -1921,7 +1927,17 @@ void ViewDialog::filterSkyCultures()
 			if (applyTimeFilter)
 			{
 				// hide items that are not within the time limits (UserRole = startTime, UserRole + 1 = endTime)
-				if (item->data(Qt::UserRole).toInt() > maxYear || item->data(Qt::UserRole + 1).toInt() < minYear)
+				int endTime;
+				if (item->data(Qt::UserRole + 1).toString() == "∞")
+				{
+					endTime = ui->skyCultureCurrentTimeSpinBox->maximum();
+				}
+				else
+				{
+					endTime = item->data(Qt::UserRole + 1).toInt();
+				}
+
+				if (item->data(Qt::UserRole).toInt() > maxYear || endTime < minYear)
 				{
 					item->setHidden((true));
 				}

@@ -41,7 +41,7 @@ void scm::ScmSkyCulture::setStartTime(int startTime)
 	ScmSkyCulture::startTime = startTime;
 }
 
-void scm::ScmSkyCulture::setEndTime(int endTime)
+void scm::ScmSkyCulture::setEndTime(const QString &endTime)
 {
 	ScmSkyCulture::endTime = endTime;
 }

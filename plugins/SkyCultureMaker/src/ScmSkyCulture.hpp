@@ -54,7 +54,7 @@ public:
 	void setStartTime(int startTime);
 
 	/// Sets the end time of the sky culture
-	void setEndTime(int endTime);
+	void setEndTime(const QString &endTime);
 
 	/// Sets whether to show common names in addition to the culture-specific ones
 	void setFallbackToInternationalNames(bool fallback);
@@ -138,7 +138,8 @@ private:
 	int startTime;
 
 	/// The latest year associated with a territory of the sky culture
-	int endTime;
+	// (represented as QString because culture can still exist)
+	QString endTime;
 };
 
 } // namespace scm
