@@ -88,6 +88,132 @@ void ScmGeoLocGraphicsView::showEvent(QShowEvent *event)
 	QGraphicsView::showEvent(event);
 }
 
+void ScmGeoLocGraphicsView::mouseMoveEvent(QMouseEvent *event)
+{
+	if (!currentCapturePolygon->polygon().empty())
+	{
+		previewCapturePath->setMousePoint(mapToScene(event->pos()));
+	}
+
+	// reimplementation of default ScrollHandDrag in QGraphicsView
+	if (viewScrolling) {
+		QScrollBar *hBar = horizontalScrollBar();
+		QScrollBar *vBar = verticalScrollBar();
+		QPoint delta = event->pos() - mouseLastXY;
+		hBar->setValue(hBar->value() + (isRightToLeft() ? delta.x() : -delta.x()));
+		vBar->setValue(vBar->value() - delta.y());
+	}
+	mouseLastXY = event->pos();
+
+	QGraphicsView::mouseMoveEvent(event);
+}
+
+void ScmGeoLocGraphicsView::mousePressEvent(QMouseEvent *event)
+{
+	if (event->button() == Qt::LeftButton)
+	{
+		if(event->modifiers() & Qt::ShiftModifier)
+		{
+			viewScrolling = true;
+			QGuiApplication::setOverrideCursor(Qt::ClosedHandCursor);
+		}
+	}
+	else if (event->button() == Qt::MiddleButton)
+	{
+		viewScrolling = true;
+		QGuiApplication::setOverrideCursor(Qt::ClosedHandCursor);
+	}
+	// if event is not accepted (mouse not over item) mouseReleaseEvent is not triggered
+	event->setAccepted(true);
+}
+
+void ScmGeoLocGraphicsView::mouseReleaseEvent(QMouseEvent *event)
+{
+	setFocus();
+	if (event->button() == Qt::LeftButton)
+	{
+		// open dialog (range of time) + save and reset the current capture polygon
+		if(event->modifiers() & Qt::AltModifier)
+		{
+			if (currentCapturePolygon->polygon().size() < 3)
+			{
+				return;
+			}
+			// open dialog 'popup'
+			emit showAddPolyDialog();
+		}
+		// do not set a point after a scrolling operation (maybe the user unintentionally released SHIFT)
+		else if (!viewScrolling)
+		{
+			if (currentCapturePolygon->polygon().size() < 1)
+			{
+				previewCapturePath->setFirstPoint(mapToScene(event->pos()));
+			}
+			else
+			{
+				previewCapturePath->setLastPoint(mapToScene(event->pos()));
+			}
+
+			currentCapturePolygon->setPolygon(currentCapturePolygon->polygon() << mapToScene(event->pos()));
+		}
+	}
+	else if (event->button() == Qt::RightButton)
+	{
+		// open dialog (range of time) + save and reset the current capture polygon
+		if(event->modifiers() & Qt::AltModifier)
+		{
+			if (currentCapturePolygon->polygon().size() < 3)
+			{
+				return;
+			}
+			// open dialog 'popup'
+			emit showAddPolyDialog();
+		}
+		// do not set a point after a scrolling operation (maybe the user unintentionally released SHIFT)
+		else
+		{
+			if (currentCapturePolygon->polygon().size() < 1)
+			{
+				previewCapturePath->setFirstPoint(mapToScene(event->pos()));
+			}
+			else
+			{
+				previewCapturePath->setLastPoint(mapToScene(event->pos()));
+			}
+
+			currentCapturePolygon->setPolygon(currentCapturePolygon->polygon() << mapToScene(event->pos()));
+		}
+	}
+
+	if(viewScrolling)
+	{
+		viewScrolling = false;
+		QGuiApplication::restoreOverrideCursor();
+	}
+}
+
+void ScmGeoLocGraphicsView::keyPressEvent(QKeyEvent *event)
+{
+	// delete the last point in the capture poylgon (except the very first one)
+	if (event->key() == Qt::Key_Backspace)
+	{
+		if (currentCapturePolygon->polygon().size() > 1)
+		{
+			QPolygonF newPoly = currentCapturePolygon->polygon();
+			newPoly.removeLast();
+
+			previewCapturePath->setLastPoint(newPoly.last());
+			currentCapturePolygon->setPolygon(newPoly);
+		}
+	}
+	// abort current capture ---> reset all points (including first one)
+	else if (event->key() == Qt::Key_Escape)
+	{
+		currentCapturePolygon->setPolygon(QPolygonF());
+		previewCapturePath->reset();
+	}
+}
+
 void ScmGeoLocGraphicsView::scaleView(double factor)
 {
 	// calculate requested zoom before executing the zoom operation to limit the min / max zoom level
@@ -192,107 +318,6 @@ qreal ScmGeoLocGraphicsView::calculateScaleRatio(qreal width, qreal height)
 
 	// keep original aspect ratio
 	return qMin(xratio, yratio);
-}
-
-void ScmGeoLocGraphicsView::keyPressEvent( QKeyEvent *e )
-{
-	// delete the last point in the capture poylgon (except the very first one)
-	if (e->key() == Qt::Key_Backspace)
-	{
-		if (currentCapturePolygon->polygon().size() > 1)
-		{
-			QPolygonF newPoly = currentCapturePolygon->polygon();
-			newPoly.removeLast();
-
-			previewCapturePath->setLastPoint(newPoly.last());
-			currentCapturePolygon->setPolygon(newPoly);
-		}
-	}
-	// abort current capture ---> reset all points (including first one)
-	else if (e->key() == Qt::Key_Escape)
-	{
-		currentCapturePolygon->setPolygon(QPolygonF());
-
-		previewCapturePath->reset();
-	}
-}
-
-void ScmGeoLocGraphicsView::mousePressEvent( QMouseEvent *e )
-{
-	qInfo() << "press Event: " << e->button();
-	if (e->button() == Qt::LeftButton)
-	{
-		if(e->modifiers() & Qt::ShiftModifier)
-		{
-			viewScrolling = true;
-			QGuiApplication::setOverrideCursor(Qt::ClosedHandCursor);
-		}
-	}
-
-	// if event is not accepted (mouse not over item) mouseReleaseEvent is not triggered
-	e->setAccepted(true);
-}
-
-void ScmGeoLocGraphicsView::mouseReleaseEvent( QMouseEvent *e )
-{
-	setFocus();
-	qInfo() << "release Event: " << e->button() << "\n";
-	if (e->button() == Qt::LeftButton)
-	{
-		// open dialog (range of time) + save and reset the current capture polygon
-		if(e->modifiers() & Qt::AltModifier)
-		{
-			if (currentCapturePolygon->polygon().size() < 3)
-			{
-				return;
-			}
-
-			// open dialog 'popup'
-			emit showAddPolyDialog();
-		}
-		// do not set a point after a scrolling operation (maybe the user unintentionally released SHIFT)
-		else if (!viewScrolling)
-		{
-			if (currentCapturePolygon->polygon().size() < 1)
-			{
-				previewCapturePath->setFirstPoint(mapToScene(e->pos()));
-			}
-			else
-			{
-				previewCapturePath->setLastPoint(mapToScene(e->pos()));
-			}
-
-			currentCapturePolygon->setPolygon(currentCapturePolygon->polygon() << mapToScene(e->pos()));
-		}
-	}
-
-	if(viewScrolling)
-	{
-		viewScrolling = false;
-		QGuiApplication::restoreOverrideCursor();
-	}
-}
-
-void ScmGeoLocGraphicsView::mouseMoveEvent( QMouseEvent *e )
-{
-	if (!currentCapturePolygon->polygon().empty())
-	{
-		previewCapturePath->setMousePoint(mapToScene(e->pos()));
-	}
-
-	// reimplementation of default ScrollHandDrag in QGraphicsView
-	if (viewScrolling) {
-		QScrollBar *hBar = horizontalScrollBar();
-		QScrollBar *vBar = verticalScrollBar();
-		QPoint delta = e->pos() - mouseLastXY;
-		hBar->setValue(hBar->value() + (isRightToLeft() ? delta.x() : -delta.x()));
-		vBar->setValue(vBar->value() - delta.y());
-	}
-
-	mouseLastXY = e->pos();
-
-	QGraphicsView::mouseMoveEvent(e);
-
 }
 
 void ScmGeoLocGraphicsView::addCurrentPoly(int startTime, int endTime)
