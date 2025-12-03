@@ -159,7 +159,7 @@ static QScriptValue vec3fGetB(QScriptContext* context, QScriptEngine *engine)
 static QScriptValue vec3fSetR(QScriptContext* context, QScriptEngine *engine)
 {
 	Q_UNUSED(engine)
-	qDebug() << "setR() does not work. Create a new Color.";
+	qCDebug(Scripting) << "setR() does not work. Create a new Color.";
 	QScriptValue callee = context->callee();
 	if (context->argumentCount() == 1) // writing?
 		callee.setProperty("r", context->argument(0));
@@ -168,8 +168,8 @@ static QScriptValue vec3fSetR(QScriptContext* context, QScriptEngine *engine)
 // This does not work.
 static QScriptValue vec3fSetG(QScriptContext* context, QScriptEngine *engine)
 {
-	qDebug() << "setG() does not work. Create a new Color.";
-	//qDebug() << "setG called. argcount=" << context->argumentCount() << "value=" << context->argument(0).toNumber();
+	qCDebug(Scripting) << "setG() does not work. Create a new Color.";
+	//qCDebug(Scripting) << "setG called. argcount=" << context->argumentCount() << "value=" << context->argument(0).toNumber();
 	//Q_UNUSED(engine)
 	QScriptValue callee = context->callee();
 	if (context->argumentCount() == 1) // writing?
@@ -180,7 +180,7 @@ static QScriptValue vec3fSetG(QScriptContext* context, QScriptEngine *engine)
 static QScriptValue vec3fSetB(QScriptContext* context, QScriptEngine *engine)
 {
 	Q_UNUSED(engine)
-	qDebug() << "setB() does not work. Create a new Color.";
+	qCDebug(Scripting) << "setB() does not work. Create a new Color.";
 	QScriptValue callee = context->callee();
 	if (context->argumentCount() == 1) // writing?
 		callee.setProperty("b", context->argument(0));
@@ -305,21 +305,21 @@ QScriptValue vec3dToString(QScriptContext* context, QScriptEngine *engine)
 
 QScriptValue getX(QScriptContext* context, QScriptEngine *engine)
 {
-	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
+	qCWarning(Scripting) << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	return that.property( "r", QScriptValue::ResolveLocal );
 }
 QScriptValue getY(QScriptContext* context, QScriptEngine *engine)
 {
-	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
+	qCWarning(Scripting) << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	return that.property( "g", QScriptValue::ResolveLocal );
 }
 QScriptValue getZ(QScriptContext* context, QScriptEngine *engine)
 {
-	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
+	qCWarning(Scripting) << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	return that.property( "b", QScriptValue::ResolveLocal );
@@ -327,7 +327,7 @@ QScriptValue getZ(QScriptContext* context, QScriptEngine *engine)
 
 QScriptValue setX(QScriptContext* context, QScriptEngine *engine)
 {
-	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
+	qCWarning(Scripting) << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	that.setProperty("r", context->argument(0).toNumber());
@@ -335,7 +335,7 @@ QScriptValue setX(QScriptContext* context, QScriptEngine *engine)
 }
 QScriptValue setY(QScriptContext* context, QScriptEngine *engine)
 {
-	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
+	qCWarning(Scripting) << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	that.setProperty("g", context->argument(0).toNumber());
@@ -343,7 +343,7 @@ QScriptValue setY(QScriptContext* context, QScriptEngine *engine)
 }
 QScriptValue setZ(QScriptContext* context, QScriptEngine *engine)
 {
-	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
+	qCWarning(Scripting) << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	that.setProperty("b", context->argument(0).toNumber());
@@ -352,7 +352,7 @@ QScriptValue setZ(QScriptContext* context, QScriptEngine *engine)
 
 void vec3dFromScriptValue(const QScriptValue& obj, Vec3d& c)
 {
-	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
+	qCWarning(Scripting) << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	c[0] = obj.property("r").toNumber();
 	c[1] = obj.property("g").toNumber();
 	c[2] = obj.property("b").toNumber();
@@ -360,7 +360,7 @@ void vec3dFromScriptValue(const QScriptValue& obj, Vec3d& c)
 
 QScriptValue vec3dToScriptValue(QScriptEngine *engine, const Vec3d& v)
 {
-	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
+	qCWarning(Scripting) << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	QScriptValue obj = engine->newObject();
 	obj.setProperty("r", QScriptValue(engine, static_cast<qsreal>(v[0])));
 	obj.setProperty("g", QScriptValue(engine, static_cast<qsreal>(v[1])));
@@ -377,7 +377,7 @@ QScriptValue vec3dToScriptValue(QScriptEngine *engine, const Vec3d& v)
 
 QScriptValue createVec3d(QScriptContext* context, QScriptEngine *engine)
 {
-	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use core.vec3d() or a V3d object.";
+	qCWarning(Scripting) << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use core.vec3d() or a V3d object.";
 	Vec3d c;
 	switch( context->argumentCount() )
 	{
@@ -417,8 +417,8 @@ public:
 	explicit StelScriptEngineAgent(QScriptEngine *engine);
 	~StelScriptEngineAgent() override {}
 
-	void setPauseScript(bool pause) { qWarning() << "setPauseScript() is deprecated and will no longer be available in future versions of Stellarium."; isPaused=pause; }
-	bool getPauseScript() { qWarning() << "getPauseScript() is deprecated and will no longer be available in future versions of Stellarium."; return isPaused; }
+	void setPauseScript(bool pause) { qCWarning(Scripting) << "setPauseScript() is deprecated and will no longer be available in future versions of Stellarium."; isPaused=pause; }
+	bool getPauseScript() { qCWarning(Scripting) << "getPauseScript() is deprecated and will no longer be available in future versions of Stellarium."; return isPaused; }
 
 	void positionChange(qint64 scriptId, int lineNumber, int columnNumber) override;
 
@@ -601,7 +601,7 @@ QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QS
 	{
 		QString msg = QString("Script file %1 could not be opened for reading").arg(QDir::toNativeSeparators(s));
 		emit scriptDebug(msg);
-		qWarning() << msg;
+		qCWarning(Scripting) << msg;
 		return QString();
 	}
 
@@ -701,7 +701,7 @@ QString StelScriptMgr::getDescription(const QString& s)
 	{
 		QString msg = QString("Script file %1 could not be opened for reading").arg(QDir::toNativeSeparators(s));
 		emit scriptDebug(msg);
-		qWarning() << msg;
+		qCWarning(Scripting) << msg;
 		return QString();
 	}
 
@@ -760,7 +760,7 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript, con
 	{
 		QString msg = QString("ERROR: there is already a script running, please wait until it's over.");
 		emit scriptDebug(msg);
-		qWarning() << msg;
+		qCWarning(Scripting) << msg;
 		return false;
 	}
 
@@ -834,7 +834,7 @@ bool StelScriptMgr::prepareScript( QString &script, const QString &fileName, con
 	{
 		QString msg = QString("Could not find script file %1").arg(QDir::toNativeSeparators(fileName));
 		emit scriptDebug(msg);
-		qWarning() << msg;
+		qCWarning(Scripting) << msg;
 		return false;
 	}
 
@@ -845,7 +845,7 @@ bool StelScriptMgr::prepareScript( QString &script, const QString &fileName, con
 	{
 		QString msg = QString("Cannot open script: %1").arg(QDir::toNativeSeparators(fileName));
 		emit scriptDebug(msg);
-		qWarning() << msg;
+		qCWarning(Scripting) << msg;
 		return false;
 	}
 
@@ -883,7 +883,7 @@ void StelScriptMgr::stopScript()
 		GETSTELMODULE(ScreenImageMgr)->deleteAllImages();
 		QString msg = QString("INFO: asking running script to exit");
 		emit scriptDebug(msg);
-		//qDebug() << msg;
+		//qCDebug(Scripting) << msg;
 	}
 	else
 		mutex.unlock(); // all was OK, no script was running.
@@ -898,7 +898,7 @@ void StelScriptMgr::stopScript()
 		}
 		QString msg = QString("INFO: asking running script to exit");
 		emit scriptDebug(msg);
-		//qDebug() << msg;
+		//qCDebug(Scripting) << msg;
 		engine->abortEvaluation();
 	}
 	// "Script finished..." is emitted after return from engine->evaluate().
@@ -907,7 +907,7 @@ void StelScriptMgr::stopScript()
 
 void StelScriptMgr::setScriptRate(double r)
 {
-	//qDebug() << "StelScriptMgr::setScriptRate(" << r << ")";
+	qCDebug(Scripting) << "StelScriptMgr::setScriptRate(" << r << ")";
 #ifdef ENABLE_SCRIPT_QML
 	if (mutex.tryLock())
 	{
@@ -938,9 +938,9 @@ void StelScriptMgr::setScriptRate(double r)
 void StelScriptMgr::pauseScript()
 {
 #ifdef ENABLE_SCRIPT_QML
-	qWarning() << "pauseScript() is no longer available and does nothing.";
+	qCWarning(Scripting) << "pauseScript() is no longer available and does nothing.";
 #else
-	qWarning() << "pauseScript() is deprecated and will no longer be available in future versions of Stellarium.";
+	qCWarning(Scripting) << "pauseScript() is deprecated and will no longer be available in future versions of Stellarium.";
 	emit scriptPaused();
 	agent->setPauseScript(true);
 #endif
@@ -949,9 +949,9 @@ void StelScriptMgr::pauseScript()
 void StelScriptMgr::resumeScript()
 {
 #ifdef ENABLE_SCRIPT_QML
-	qWarning() << "resumeScript() is no longer available and does nothing.";
+	qCWarning(Scripting) << "resumeScript() is no longer available and does nothing.";
 #else
-	qWarning() << "resumeScript() is deprecated and will no longer be available in future versions of Stellarium.";
+	qCWarning(Scripting) << "resumeScript() is deprecated and will no longer be available in future versions of Stellarium.";
 	agent->setPauseScript(false);
 #endif
 }
@@ -997,9 +997,9 @@ void StelScriptMgr::scriptEnded()
 			{QJSValue::URIError, "URI"}};
 		QString msg = QString("script error: '%1'  @ line %2: %3").arg(errorMap.value(result.errorType()), result.property("lineNumber").toString(), result.toString());
 		emit scriptDebug(msg);
-		qWarning() << msg;
-		qWarning() << "Error name:" << result.property("name").toString() << "message" << result.property("message").toString()
-			   << "fileName" << result.property("fileName").toString() << "lineNumber" << result.property("lineNumber").toString() << "stack" << result.property("stack").toString();
+		qCWarning(Scripting) << msg;
+		qCWarning(Scripting) << "Error name:" << result.property("name").toString() << "message" << result.property("message").toString()
+				     << "fileName" << result.property("fileName").toString() << "lineNumber" << result.property("lineNumber").toString() << "stack" << result.property("stack").toString();
 	}
 	mutex.unlock();
 #else
@@ -1009,7 +1009,7 @@ void StelScriptMgr::scriptEnded()
 		QString realPos = lookup( outputPos );
 		QString msg = QString("script error: \"%1\" @ line %2").arg(engine->uncaughtException().toString(), realPos);
 		emit scriptDebug(msg);
-		qWarning() << msg;
+		qCWarning(Scripting) << msg;
 	}
 #endif
 	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(1.0);
@@ -1087,7 +1087,7 @@ void StelScriptMgr::expand(const QString fileName, const QString &input, QString
 				if (incPath.isEmpty())
 				{
 					QString fail = scriptDir + "/" + incName;
-					qWarning() << "File not found! Let's check standard scripts directory...";
+					qCWarning(Scripting) << "File not found! Let's check standard scripts directory...";
 
 					// OK, file is not exists in relative path; Let's check standard scripts directory
 					incPath = StelFileMgr::findFile("scripts/" + incName);
@@ -1096,7 +1096,7 @@ void StelScriptMgr::expand(const QString fileName, const QString &input, QString
 					{
 						fail += " or scripts/" + incName;
 						emit scriptDebug(QString("WARNING: could not find script include file: %1").arg(QDir::toNativeSeparators(incName)));
-						qWarning() << "Could not find script include file: " << QDir::toNativeSeparators(incName);
+						qCWarning(Scripting) << "Could not find script include file: " << QDir::toNativeSeparators(incName);
 						if( errLoc == -1 ) errLoc = output.length();
 						output += line + " // <<< " + fail + " not found\n";
 						outline++;
@@ -1116,7 +1116,7 @@ void StelScriptMgr::expand(const QString fileName, const QString &input, QString
 				bool ok = fic.open(QIODevice::ReadOnly);
 				if (ok)
 				{
-					qWarning() << "script include: " << QDir::toNativeSeparators(incPath);
+					qCWarning(Scripting) << "script include: " << QDir::toNativeSeparators(incPath);
 					QString aText = QString::fromUtf8(fic.readAll());
 					expand( incPath, aText, output, scriptDir, errLoc );
 					fic.close();
@@ -1124,7 +1124,7 @@ void StelScriptMgr::expand(const QString fileName, const QString &input, QString
 				else
 				{
 					emit scriptDebug(QString("WARNING: could not open script include file for reading: %1").arg(QDir::toNativeSeparators(incPath)));
-					qWarning() << "Could not open script include file for reading: " << QDir::toNativeSeparators(incPath);
+					qCWarning(Scripting) << "Could not open script include file for reading: " << QDir::toNativeSeparators(incPath);
 				   	if( errLoc == -1 ) errLoc = output.length();
 					output += line + " // <<< " + incPath + ": cannot open\n";
 					outline++;
@@ -1140,18 +1140,14 @@ void StelScriptMgr::expand(const QString fileName, const QString &input, QString
 	}
 	num2loc.insert( outline, QPair<QString,int>(fileName, curline) );
 
-	// Do we need this any more? (WL, 2020-04-10)
-	if (qApp->property("verbose")==true)
+	// Debug to find stupid errors. The line usually reported may be off due to the preprocess stage.
+	const QStringList outputList=output.split('\n');
+	qCDebug(Scripting) << "Script after preprocessing:";
+	int lineIdx=0;
+	for (const auto& line : outputList)
 	{
-		// Debug to find stupid errors. The line usually reported may be off due to the preprocess stage.
-		const QStringList outputList=output.split('\n');
-		qDebug() << "Script after preprocessing:";
-		int lineIdx=0;
-		for (const auto& line : outputList)
-		{
-			qDebug() << lineIdx << ":" << line;
-			lineIdx++;
-		}
+		qCDebug(Scripting) << lineIdx << ":" << line;
+		lineIdx++;
 	}
 	return;
 }
@@ -1167,7 +1163,7 @@ QString StelScriptMgr::lookup( int outputPos )
 	QString path = i.value().first;
 	int inputEnd = i.value().second;
 	int inputPos = outputPos - outputEnd + inputEnd;
-	// qDebug() << outputPos << " maps to " << path << ":" << inputPos;
+	// qCDebug(Scripting) << outputPos << " maps to " << path << ":" << inputPos;
 	QString msg;
 	if (path.isEmpty())
 		msg = QString( "%1" ).arg(inputPos);

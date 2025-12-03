@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2025-11-11 11:07+0700\n"
+"POT-Creation-Date: 2025-11-19 19:27+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Nicolas Martignoni, 2025\n"
 "Language-Team: French (https://app.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -59,7 +59,7 @@ msgstr "objet personnalisé"
 #: src/gui/AstroCalcDialog.cpp:953 src/gui/AstroCalcDialog.cpp:2456
 #: src/gui/AstroCalcDialog.cpp:3048 src/gui/AstroCalcDialog.cpp:3080
 #: src/gui/AstroCalcDialog.cpp:3404 src/gui/AstroCalcDialog.cpp:7688
-#: src/gui/ObsListDialog.cpp:291 src/ui_configurationDialog.h:2021
+#: src/gui/ObsListDialog.cpp:297 src/ui_configurationDialog.h:2021
 #: plugins/Satellites/src/Satellite.cpp:341
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:145
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:531
@@ -89,7 +89,7 @@ msgstr "astérisme"
 #: src/core/modules/ToastMgr.cpp:61 src/core/modules/HipsMgr.cpp:156
 #: src/core/modules/HipsMgr.cpp:157 src/core/StelApp.cpp:699
 #: src/core/StelCore.cpp:310 src/core/StelSkyLayerMgr.cpp:83
-#: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:966
+#: src/core/StelSkyLayerMgr.cpp:84 src/StelMainView.cpp:969
 msgid "Display Options"
 msgstr "Options d'affichage"
 
@@ -874,7 +874,7 @@ msgctxt "distance"
 msgid "m"
 msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:1536 src/gui/ObsListDialog.cpp:297
+#: src/core/modules/LandscapeMgr.cpp:1536 src/gui/ObsListDialog.cpp:303
 #: src/ui_locationDialogGui.h:414 src/ui_obsListDialog.h:416
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
@@ -1846,7 +1846,7 @@ msgstr "objet de nature inconnue"
 #: src/core/modules/Nebula.cpp:179 src/core/StelObject.cpp:350
 #: src/gui/AstroCalcChart.cpp:97 src/gui/AstroCalcChart.cpp:107
 #: src/gui/AstroCalcChart.cpp:437 src/gui/AstroCalcChart.cpp:463
-#: src/gui/ObsListDialog.cpp:294 plugins/Supernovae/src/Supernova.cpp:128
+#: src/gui/ObsListDialog.cpp:300 plugins/Supernovae/src/Supernova.cpp:128
 msgid "Magnitude"
 msgstr "Magnitude"
 
@@ -2282,7 +2282,7 @@ msgid "Toggle DSO type filter"
 msgstr "Activer le filtre DSO"
 
 #: src/core/modules/NebulaMgr.cpp:1572 src/gui/StelDialog.cpp:336
-#: src/gui/ObsListDialog.cpp:588 src/StelMainView.cpp:1063
+#: src/gui/ObsListDialog.cpp:597 src/StelMainView.cpp:1066
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:777
 msgid "Attention!"
 msgstr "Attention !"
@@ -3886,12 +3886,12 @@ msgstr ""
 "définis par l'utilisateur."
 
 #: src/core/StelCore.cpp:2795 src/core/SimbadSearcher.cpp:187
-#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:972
-#: src/gui/ObsListDialog.cpp:996 src/gui/ObsListDialog.cpp:1045
-#: src/gui/ObsListDialog.cpp:1061 src/gui/ObsListDialog.cpp:1102
-#: src/gui/ObsListDialog.cpp:1114 src/gui/ObsListDialog.cpp:1123
-#: src/gui/ObsListDialog.cpp:1141 src/gui/ObsListDialog.cpp:1161
-#: src/gui/ObsListDialog.cpp:1324 src/gui/ObsListDialog.cpp:1329
+#: src/gui/ObsListDialog.cpp:87 src/gui/ObsListDialog.cpp:981
+#: src/gui/ObsListDialog.cpp:1005 src/gui/ObsListDialog.cpp:1054
+#: src/gui/ObsListDialog.cpp:1070 src/gui/ObsListDialog.cpp:1111
+#: src/gui/ObsListDialog.cpp:1123 src/gui/ObsListDialog.cpp:1132
+#: src/gui/ObsListDialog.cpp:1150 src/gui/ObsListDialog.cpp:1170
+#: src/gui/ObsListDialog.cpp:1333 src/gui/ObsListDialog.cpp:1338
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "Erreur"
@@ -4287,7 +4287,7 @@ msgid "Lunar Az./Alt."
 msgstr "Az./Haut. lunaire"
 
 #: src/core/StelObjectMgr.cpp:50 src/core/StelMovementMgr.cpp:194
-#: src/gui/StelGui.cpp:274 src/StelMainView.cpp:964 src/StelMainView.cpp:965
+#: src/gui/StelGui.cpp:274 src/StelMainView.cpp:967 src/StelMainView.cpp:968
 msgid "Miscellaneous"
 msgstr "Divers"
 
@@ -4558,7 +4558,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:256
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:296
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:298
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
@@ -5051,7 +5051,7 @@ msgstr "Remerciements"
 #: src/gui/ConfigurationDialog.cpp:1369
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:297
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 msgid "Authors"
@@ -5069,7 +5069,7 @@ msgstr "Contact"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:255
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:295
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:297
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
@@ -6475,7 +6475,7 @@ msgid "Ecliptic (J2000.0)"
 msgstr "Écliptique (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:369 src/gui/AstroCalcChart.cpp:445
-#: src/gui/AstroCalcChart.cpp:471 src/gui/ObsListDialog.cpp:292
+#: src/gui/AstroCalcChart.cpp:471 src/gui/ObsListDialog.cpp:298
 msgid "Right ascension"
 msgstr "Ascension droite"
 
@@ -6485,7 +6485,7 @@ msgstr "Distance polaire"
 
 #: src/gui/SearchDialog.cpp:372 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:428
-#: src/gui/AstroCalcChart.cpp:454 src/gui/ObsListDialog.cpp:293
+#: src/gui/AstroCalcChart.cpp:454 src/gui/ObsListDialog.cpp:299
 msgid "Declination"
 msgstr "Déclinaison"
 
@@ -7162,7 +7162,7 @@ msgid "Duration of total or annular phase at greatest eclipse"
 msgstr "Durée de la phase totale ou annulaire lors de l'éclipse maximale"
 
 #: src/gui/AstroCalcDialog.cpp:3403 src/gui/AstroCalcChart.cpp:380
-#: src/gui/ObsListDialog.cpp:296 src/ui_obsListDialog.h:412
+#: src/gui/ObsListDialog.cpp:302 src/ui_obsListDialog.h:412
 msgid "Date"
 msgstr "Date"
 
@@ -8479,94 +8479,94 @@ msgstr "min"
 msgid "Today"
 msgstr "Aujourd'hui"
 
-#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:1123
+#: src/gui/ObsListDialog.cpp:87 src/gui/ObsListDialog.cpp:1132
 msgid "Cannot open observingLists.json to write"
 msgstr "Impossible d'écrire observingLists.json"
 
-#: src/gui/ObsListDialog.cpp:182
+#: src/gui/ObsListDialog.cpp:186
 msgctxt "default name for observing list if none is available"
 msgid "new list"
 msgstr "nouvelle liste"
 
-#: src/gui/ObsListDialog.cpp:222
+#: src/gui/ObsListDialog.cpp:228
 msgid "Select observing lists directory"
 msgstr "Sélectionner le dossier des listes d'observation"
 
-#: src/gui/ObsListDialog.cpp:289
+#: src/gui/ObsListDialog.cpp:295
 msgid "Object designation"
 msgstr "Désignation de l'objet"
 
-#: src/gui/ObsListDialog.cpp:290
+#: src/gui/ObsListDialog.cpp:296
 msgid "Object name"
 msgstr "Nom de l'objet"
 
-#: src/gui/ObsListDialog.cpp:295 src/ui_configurationDialog.h:2030
+#: src/gui/ObsListDialog.cpp:301 src/ui_configurationDialog.h:2030
 msgid "Constellation"
 msgstr "Constellation"
 
-#: src/gui/ObsListDialog.cpp:298 src/ui_viewDialog.h:3878
+#: src/gui/ObsListDialog.cpp:304 src/ui_viewDialog.h:3878
 #: src/ui_obsListDialog.h:420
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:473
 msgid "Landscape"
 msgstr "Paysage"
 
-#: src/gui/ObsListDialog.cpp:588
+#: src/gui/ObsListDialog.cpp:597
 msgid "Error during conversion. Please see logfile for details."
 msgstr ""
 "Erreur durant la conversion. Consulter le fichier de journalisation pour "
 "plus de détails."
 
-#: src/gui/ObsListDialog.cpp:700
+#: src/gui/ObsListDialog.cpp:709
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:225
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Note"
 msgstr "Remarque"
 
-#: src/gui/ObsListDialog.cpp:700
+#: src/gui/ObsListDialog.cpp:709
 msgid "Some bookmarked objects were not found. See logfile for details."
 msgstr ""
 "Certains objets marqués n'ont pas été trouvés. Consulter le fichier de "
 "journalisation pour plus de détails."
 
-#: src/gui/ObsListDialog.cpp:950
+#: src/gui/ObsListDialog.cpp:959
 msgid "New Observation List"
 msgstr "Nouvelle liste d'observation"
 
-#: src/gui/ObsListDialog.cpp:951
+#: src/gui/ObsListDialog.cpp:960
 msgid "Observing list creation mode"
 msgstr "Mode de création de liste d'observation"
 
-#: src/gui/ObsListDialog.cpp:967
+#: src/gui/ObsListDialog.cpp:976
 msgid "Observing list editor mode"
 msgstr "Mode éditeur de liste d'observation"
 
-#: src/gui/ObsListDialog.cpp:972
+#: src/gui/ObsListDialog.cpp:981
 msgid "selectedOlud empty. This is a bug"
 msgstr "selectedOlud vide. Il s'agit d'un bogue"
 
-#: src/gui/ObsListDialog.cpp:984
+#: src/gui/ObsListDialog.cpp:993
 msgid "Export observing list as..."
 msgstr "Exporter liste d'observation…"
 
-#: src/gui/ObsListDialog.cpp:996
+#: src/gui/ObsListDialog.cpp:1005
 msgid "Cannot export. See logfile for details."
 msgstr ""
 "Impossible d'exporter. Consulter le fichier de journalisation pour plus de "
 "détails."
 
-#: src/gui/ObsListDialog.cpp:1033
+#: src/gui/ObsListDialog.cpp:1042
 msgid "Import observing list"
 msgstr "Importer liste d'observation"
 
-#: src/gui/ObsListDialog.cpp:1045
+#: src/gui/ObsListDialog.cpp:1054
 msgid "Cannot open selected file for import"
 msgstr "Impossible d'ouvrir le fichier sélectionné pour l'importer"
 
-#: src/gui/ObsListDialog.cpp:1061
+#: src/gui/ObsListDialog.cpp:1070
 msgid "Empty list."
 msgstr "Liste vide."
 
-#: src/gui/ObsListDialog.cpp:1083
+#: src/gui/ObsListDialog.cpp:1092
 #, qt-format
 msgid ""
 "A list named '%1', created %2 and last modified %3 would overwrite your "
@@ -8576,48 +8576,48 @@ msgstr ""
 "liste existante « %4 », datant de %5 et modifiée le %6. Voulez-vous "
 "continuer ?"
 
-#: src/gui/ObsListDialog.cpp:1102
+#: src/gui/ObsListDialog.cpp:1111
 msgid "The file is empty or doesn't contain legacy bookmarks."
 msgstr "Le fichier est vide ou ne contient pas de marquages obsolètes."
 
-#: src/gui/ObsListDialog.cpp:1114
+#: src/gui/ObsListDialog.cpp:1123
 msgid "File does not contain observing lists or legacy bookmarks"
 msgstr ""
 "Le fichier ne contient pas de listes d'observation ou de marquages "
 "obsolètes."
 
-#: src/gui/ObsListDialog.cpp:1141
+#: src/gui/ObsListDialog.cpp:1150
 msgid "File format is wrong!"
 msgstr "Le format de fichier est incorrect !"
 
-#: src/gui/ObsListDialog.cpp:1161
+#: src/gui/ObsListDialog.cpp:1170
 msgid "Cannot open JSON output file. Will not delete."
 msgstr ""
 "Impossible d'ouvrir le fichier JSON de sortie. Il ne sera pas supprimé."
 
-#: src/gui/ObsListDialog.cpp:1185 src/ui_configurationDialog.h:1895
+#: src/gui/ObsListDialog.cpp:1194 src/ui_configurationDialog.h:1895
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:336
 msgid "Information"
 msgstr "Informations"
 
-#: src/gui/ObsListDialog.cpp:1185
+#: src/gui/ObsListDialog.cpp:1194
 msgid "You cannot delete the default or the last list."
 msgstr ""
 "Vous ne pouvez pas supprimer la dernière liste ou la liste par défaut."
 
-#: src/gui/ObsListDialog.cpp:1241
+#: src/gui/ObsListDialog.cpp:1250
 msgid "Unnamed object"
 msgstr "Objet sans nom"
 
-#: src/gui/ObsListDialog.cpp:1324
+#: src/gui/ObsListDialog.cpp:1333
 msgid "Empty name"
 msgstr "Nom vide"
 
-#: src/gui/ObsListDialog.cpp:1329
+#: src/gui/ObsListDialog.cpp:1338
 msgid "List name already exists"
 msgstr "Une liste de ce nom existe déjà"
 
-#: src/gui/ObsListDialog.cpp:1394 src/ui_configurationDialog.h:2095
+#: src/gui/ObsListDialog.cpp:1403 src/ui_configurationDialog.h:2095
 #: src/ui_obsListDialog.h:361
 msgid "Observing lists"
 msgstr "Liste d'observation"
@@ -8689,19 +8689,19 @@ msgstr ""
 msgid "Shortcut"
 msgstr "Raccourci clavier"
 
-#: src/StelMainView.cpp:964
+#: src/StelMainView.cpp:967
 msgid "Save screenshot"
 msgstr "Enregistrer une capture d'écran"
 
-#: src/StelMainView.cpp:965
+#: src/StelMainView.cpp:968
 msgid "Reload shaders (for development)"
 msgstr "Recharger les shaders (développement)"
 
-#: src/StelMainView.cpp:966
+#: src/StelMainView.cpp:969
 msgid "Full-screen mode"
 msgstr "Mode plein écran"
 
-#: src/StelMainView.cpp:1063
+#: src/StelMainView.cpp:1066
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
@@ -8709,7 +8709,7 @@ msgstr ""
 "Il y a des conflits dans les raccourcis ! Presser la touche F7 après le "
 "démarrage du programme et vérifier les définitions multiples suivantes"
 
-#: src/StelMainView.cpp:1146
+#: src/StelMainView.cpp:1151
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -8717,7 +8717,7 @@ msgstr ""
 "Version trop ancienne de OpenGL. Mettre à jour les pilotes, la carte "
 "graphique ou bien utiliser l'option --angle-mode (ou --mesa-mode)."
 
-#: src/StelMainView.cpp:1148
+#: src/StelMainView.cpp:1153
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
@@ -8725,14 +8725,14 @@ msgstr ""
 "Version trop ancienne de OpenGL. Mettre à jour les pilotes, le matériel "
 "graphique, ou utiliser l'option --mesa-mode."
 
-#: src/StelMainView.cpp:1152
+#: src/StelMainView.cpp:1157
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Version trop ancienne de OpenGL. Mettre à jour les pilotes ou la carte "
 "graphique."
 
-#: src/StelMainView.cpp:1195
+#: src/StelMainView.cpp:1200
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8740,7 +8740,7 @@ msgstr ""
 "Votre installation DirectX/OpenGL ES a des problèmes. Consultez les journaux d'événements pour plus d'informations.\n"
 "Voulez-vous ignorer et supprimer cet avertissement et tenter de continuer en mode dégradé ?"
 
-#: src/StelMainView.cpp:1246
+#: src/StelMainView.cpp:1251
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8748,7 +8748,7 @@ msgstr ""
 "Votre installation OpenGL/Mesa a des problèmes. Consultez les journaux d'événements pour plus d'informations.\n"
 "Voulez-vous ignorer et supprimer cet avertissement et tenter de continuer en mode dégradé ?"
 
-#: src/StelMainView.cpp:1306
+#: src/StelMainView.cpp:1311
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8756,7 +8756,7 @@ msgstr ""
 "Votre installation OpenGL a des problèmes. Consultez les journaux d'événements pour plus d'informations.\n"
 "Voulez-vous ignorer et supprimer cet avertissement et tenter de continuer en mode dégradé ?"
 
-#: src/StelMainView.cpp:1347
+#: src/StelMainView.cpp:1352
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -23738,7 +23738,7 @@ msgid "Navigational Stars"
 msgstr "Étoiles pour navigation"
 
 #: plugins/NavStars/src/NavStars.cpp:58
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:301
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:303
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
 "Ce plugin marque les étoiles utilisées en navigation d'après un jeu "
@@ -23780,7 +23780,16 @@ msgstr ""
 "Les 47 étoiles de navigation énumérées dans <em>The British Mariner's "
 "Guide</em> de Nevil Maskelyne, publié en 1764."
 
-#: plugins/NavStars/src/NavStars.cpp:395
+#. TRANSLATORS: The emphasis tags mark a title.
+#: plugins/NavStars/src/NavStars.cpp:396
+msgid ""
+"The 47 navigational stars that are listed in the Thornton S. Lecky's "
+"<em>Wrinkles in practical navigation</em> published in 1884."
+msgstr ""
+"Les 47 étoiles de navigation énumérées dans <em>Wrinkles in practical "
+"navigation</em> de Thornton S. Lecky, publié en 1884."
+
+#: plugins/NavStars/src/NavStars.cpp:397
 msgid ""
 "The 80 stars that are listed in the German Nautical Almanac published by the"
 " Federal Maritime and Hydrographic Agency of Germany."
@@ -23788,12 +23797,12 @@ msgstr ""
 "Les 80 étoiles listées dans l’almanach nautique allemand publié par l'Office"
 " fédéral de la navigation maritime et de l'hydrographie d'Allemagne."
 
-#: plugins/NavStars/src/NavStars.cpp:396
+#: plugins/NavStars/src/NavStars.cpp:398
 msgid "The 160 stars that are listed in the Russian Nautical Almanac."
 msgstr "Les 160 étoiles listées dans l'almanach nautique russe."
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:398
+#: plugins/NavStars/src/NavStars.cpp:400
 msgid ""
 "The typical set of navigational stars which was used by aviation of the "
 "Soviet Union. These stars can be found in books like <em>Aviation "
@@ -23803,7 +23812,7 @@ msgstr ""
 "soviétique. Ces étoiles peuvent être trouvées dans des livres tels que "
 "<em>Aviation Astronomy</em> ou <em>Aviation handbook</em>."
 
-#: plugins/NavStars/src/NavStars.cpp:399
+#: plugins/NavStars/src/NavStars.cpp:401
 msgid ""
 "These 151 stars were used in the Voskhod (Soviet) and Soyuz (Soviet and "
 "Russian) manned space programs to navigate in space."
@@ -23812,7 +23821,7 @@ msgstr ""
 "Voskhod (soviétique) et Soyouz (soviétique et russe) pour la navigation dans"
 " l'espace."
 
-#: plugins/NavStars/src/NavStars.cpp:400
+#: plugins/NavStars/src/NavStars.cpp:402
 msgid ""
 "These 37 stars were used by the Apollo space program to navigate to the Moon"
 " from 1969-1972, Apollo 11 through Apollo 17."
@@ -23820,7 +23829,7 @@ msgstr ""
 "Ces 37 étoiles ont été utilisées durant le programme Apollo pour naviguer "
 "vers la Lune, de 1969 à 1972, sur Apollo 11 à Apollo 17."
 
-#: plugins/NavStars/src/NavStars.cpp:401
+#: plugins/NavStars/src/NavStars.cpp:403
 msgid ""
 "Alignment stars from the Gemini Astronomical Positioning System, a "
 "professional level computerized device for controlling small to medium "
@@ -23830,7 +23839,7 @@ msgstr ""
 "dispositif informatisé de niveau professionnel pour contrôler les montures "
 "de télescopes équatoriaux allemands de petite et moyenne taille."
 
-#: plugins/NavStars/src/NavStars.cpp:402
+#: plugins/NavStars/src/NavStars.cpp:404
 msgid ""
 "The Meade LX200 utilizes 33 bright and well known stars to calibrate the "
 "telescope’s Object Library in the ALTAZ and POLAR alignments. These stars "
@@ -23843,7 +23852,7 @@ msgstr ""
 " dans le monde et à n'importe quelle date d'effectuer facilement et "
 "rapidement des alignements de précision."
 
-#: plugins/NavStars/src/NavStars.cpp:403
+#: plugins/NavStars/src/NavStars.cpp:405
 msgid ""
 "This list from Meade ETX mount will aid the observer to find alignment stars"
 " at various times of the year."
@@ -23851,15 +23860,15 @@ msgstr ""
 "Cette liste de la monture Meade ETX aidera l'observateur à trouver des "
 "étoiles d'alignement à différentes périodes de l'année."
 
-#: plugins/NavStars/src/NavStars.cpp:404
+#: plugins/NavStars/src/NavStars.cpp:406
 msgid "Alignment stars for the Meade Autostar #494 handset (ETX60AT)."
 msgstr "Étoiles d'alignement pour la commande Meade Autostar #494 (ETX60AT)."
 
-#: plugins/NavStars/src/NavStars.cpp:405
+#: plugins/NavStars/src/NavStars.cpp:407
 msgid "Alignment stars for the Meade Autostar #497 handset."
 msgstr "Étoiles d'alignement pour la commande Meade Autostar #497."
 
-#: plugins/NavStars/src/NavStars.cpp:406
+#: plugins/NavStars/src/NavStars.cpp:408
 msgid ""
 "Even though there are about 250 named stars in the hand control database, "
 "only 82 (stars brighter than or equal to magnitude 2.5) can be used for "
@@ -23869,7 +23878,7 @@ msgstr ""
 "contrôle manuel, seules 82 (étoiles plus lumineuses que la magnitude 2.5) "
 "peuvent être utilisées pour l'alignement et autres tâches connexes."
 
-#: plugins/NavStars/src/NavStars.cpp:407
+#: plugins/NavStars/src/NavStars.cpp:409
 msgid ""
 "Alignment stars for the Skywatcher SynScan hand controller and SynScan Pro "
 "App."
@@ -23877,20 +23886,20 @@ msgstr ""
 "Étoiles d'alignement pour la commande Skywatcher SynScan et l'app SynScan "
 "Pro."
 
-#: plugins/NavStars/src/NavStars.cpp:408
+#: plugins/NavStars/src/NavStars.cpp:410
 msgid "Alignment stars for Vixen Starbook mounts."
 msgstr "Étoiles d'alignement pour les montures Vixen Starbook."
 
-#: plugins/NavStars/src/NavStars.cpp:409
+#: plugins/NavStars/src/NavStars.cpp:411
 msgid "Alignment stars for Argo Navis digital setting circles."
 msgstr ""
 "Étoiles d'alignement pour les cercles de coordonnées numériques Argo Navis."
 
-#: plugins/NavStars/src/NavStars.cpp:410
+#: plugins/NavStars/src/NavStars.cpp:412
 msgid "Alignment stars for Orion Intelliscope mounts."
 msgstr "Étoiles d'alignement pour les montures Orion Intelliscope."
 
-#: plugins/NavStars/src/NavStars.cpp:411
+#: plugins/NavStars/src/NavStars.cpp:413
 msgid "Alignment stars for Sky Commander digital setting circles."
 msgstr ""
 "Étoiles d'alignement pour les cercles de coordonnées numériques Sky "
@@ -23898,93 +23907,93 @@ msgstr ""
 
 #. TRANSLATORS: The full phrase: The original almanac title is
 #. NAME_OF_THE_ALMANAC
-#: plugins/NavStars/src/NavStars.cpp:430
+#: plugins/NavStars/src/NavStars.cpp:432
 msgid "The original almanac title is"
 msgstr "Le titre original de l'almanach est"
 
-#: plugins/NavStars/src/NavStars.cpp:850
+#: plugins/NavStars/src/NavStars.cpp:838
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr "limbe supérieur"
 
-#: plugins/NavStars/src/NavStars.cpp:851
+#: plugins/NavStars/src/NavStars.cpp:839
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr "limbe inférieur"
 
-#: plugins/NavStars/src/NavStars.cpp:866 plugins/NavStars/src/NavStars.cpp:894
-#: plugins/NavStars/src/NavStars.cpp:900
+#: plugins/NavStars/src/NavStars.cpp:854 plugins/NavStars/src/NavStars.cpp:882
+#: plugins/NavStars/src/NavStars.cpp:888
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr "GHA"
 
-#: plugins/NavStars/src/NavStars.cpp:868 plugins/NavStars/src/NavStars.cpp:898
+#: plugins/NavStars/src/NavStars.cpp:856 plugins/NavStars/src/NavStars.cpp:886
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr "SHA"
 
-#: plugins/NavStars/src/NavStars.cpp:870 plugins/NavStars/src/NavStars.cpp:904
+#: plugins/NavStars/src/NavStars.cpp:858 plugins/NavStars/src/NavStars.cpp:892
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr "LHA"
 
-#: plugins/NavStars/src/NavStars.cpp:873
+#: plugins/NavStars/src/NavStars.cpp:861
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr "GP : GHA/DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:876
+#: plugins/NavStars/src/NavStars.cpp:864
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr "GP : LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:879
+#: plugins/NavStars/src/NavStars.cpp:867
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr "AP : LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:882
+#: plugins/NavStars/src/NavStars.cpp:870
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr "Hc/Zn"
 
-#: plugins/NavStars/src/NavStars.cpp:889
+#: plugins/NavStars/src/NavStars.cpp:877
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr "UTC"
 
-#: plugins/NavStars/src/NavStars.cpp:892
+#: plugins/NavStars/src/NavStars.cpp:880
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr "Ho"
 
-#: plugins/NavStars/src/NavStars.cpp:896
+#: plugins/NavStars/src/NavStars.cpp:884
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr "LMST"
 
-#: plugins/NavStars/src/NavStars.cpp:902
+#: plugins/NavStars/src/NavStars.cpp:890
 msgctxt "Declination"
 msgid "DEC"
 msgstr "DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:906
+#: plugins/NavStars/src/NavStars.cpp:894
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr "LAT"
 
-#: plugins/NavStars/src/NavStars.cpp:908
+#: plugins/NavStars/src/NavStars.cpp:896
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr "LON"
 
-#: plugins/NavStars/src/NavStars.cpp:910
+#: plugins/NavStars/src/NavStars.cpp:898
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr "Hc"
 
-#: plugins/NavStars/src/NavStars.cpp:912
+#: plugins/NavStars/src/NavStars.cpp:900
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr "Zn"
@@ -24017,38 +24026,44 @@ msgstr "Français"
 msgid "British (XVIII century)"
 msgstr "Anglais  (XVIIIe s.)"
 
-#. TRANSLATORS: Part of full phrase: Russian set of navigational stars
+#. TRANSLATORS: Part of full phrase: British (XIX century) set of navigational
+#. stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:250
+msgid "British (XIX century)"
+msgstr "Anglais (XIXe s.)"
+
+#. TRANSLATORS: Part of full phrase: Russian set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:252
 msgid "Russian"
 msgstr "Russe"
 
 #. TRANSLATORS: Part of full phrase: Soviet aviation set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:252
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:254
 msgid "Soviet aviation"
 msgstr "Aviation soviétique"
 
 #. TRANSLATORS: Part of full phrase: German set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:254
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:256
 msgid "German"
 msgstr "Allemand"
 
 #. TRANSLATORS: Part of full phrase: Voskhod and Soyuz manned space programs
 #. set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:257
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:259
 msgid "Voskhod and Soyuz manned space programs"
 msgstr "Programmes spatiaux habités Voskhod et Soyouz"
 
 #. TRANSLATORS: Part of full phrase: Apollo space program set of navigational
 #. stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:259
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:261
 msgid "Apollo space program"
 msgstr "Programme spatial Apollo"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:294
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:296
 msgid "Navigational Stars Plug-in"
 msgstr "Plugin étoiles pour navigation"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:305
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:307
 msgid ""
 "Additional information fields can be displayed by selecting \"Information "
 "&gt; Additional coordinates (from plugins)\""
@@ -24056,22 +24071,22 @@ msgstr ""
 "Des champs supplémentaires peuvent être affichés en sélectionnant "
 "« Informations > Coordonnées supplémentaires (plugins) »"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:309
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:311
 msgid "These fields are:"
 msgstr "Ces champs désignent :"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:311
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:332
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:313
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:334
 #, qt-format
 msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
 msgstr "GHA%1 : l'angle horaire de Greenwich du premier point de Aries."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:312
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:314
 msgid "SHA: Sidereal Hour Angle of the navigation star."
 msgstr "SHA : l'angle horaire sidérale de l'étoile de navigation."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:313
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:338
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:315
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:340
 msgid "LHA: The observer's Local Hour Angle to the navigation star."
 msgstr ""
 "LHA : l'angle horaire local de l'observateur vers l'étoile de navigation."
@@ -24079,7 +24094,7 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers
 #. often use "sub-point" which is the geodetic location of a point where the
 #. star is at zenith.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:315
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:317
 msgid ""
 "GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and "
 "Declination."
@@ -24090,7 +24105,7 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a point
 #. close by where the observer knows themselves to be. For example, from dead
 #. reckoning.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:317
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:319
 msgid ""
 "AP: LAT/LON: The observer's Assumed Position as geodetic latitude and "
 "longitude."
@@ -24101,7 +24116,7 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation Hc is "computed height" from the
 #. Nautical Almanac where "height" is altitude. Likewise, Zn is computed
 #. azimuth, as seen from the AP.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:319
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:321
 msgid ""
 "Hc/Zn: The calculated height (altitude) and computed azimuth of navigation "
 "star, seen from AP."
@@ -24109,13 +24124,13 @@ msgstr ""
 "Hc/Zn : la hauteur calculée (altitude) et l'azimut calculé de l'étoile de "
 "navigation, depuis l'AP."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:323
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:325
 msgid ""
 "The user has two different view options selected by \"Show information as a "
 "tabulated list\"."
 msgstr "Deux options sont possibles pour l'affichage des informations."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:327
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:329
 msgid ""
 "When 'tabulated list' is selected the fields more closely follow the <em>The"
 " Nautical Almanac</em> format:"
@@ -24125,51 +24140,51 @@ msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "height" is used where astronomers
 #. would use "altitude", Ho Height Observed
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:331
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:333
 msgid "Ho: Simulated observed altitude of navigation star using a sextant."
 msgstr ""
 "Ho : hauteur simulée de l'étoile de navigation observée au moyen du sextant."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:333
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:335
 msgid "LMST: Local mean sidereal time."
 msgstr "LMST : temps sidéral moyen local."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:334
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:336
 msgid "SHA: Sidereal Hour Angle of navigation star."
 msgstr "SHA : angle horaire sidéral de l'étoile de navigation."
 
 #. TRANSLATORS: celestial coordinate system, declination.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:336
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:338
 msgid "DEC: The navigation star's declination."
 msgstr "DEC : déclinaison de l'étoile de navigation."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:337
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:339
 msgid "GHA: The navigation star's Greenwich Hour Angle."
 msgstr "GHA : angle horaire de Greenwich de l'étoile de navigation."
 
 #. TRANSLATORS: Geodetic coordinate system, latitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:340
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:342
 msgid "LAT: The observer's geodetic latitude."
 msgstr "LAT : latitude géodésique de l'observateur."
 
 #. TRANSLATORS: Geodetic coordinate system, longitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:342
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:344
 msgid "LON: The observer's geodetic longitude."
 msgstr "LON : longitude géodésique de l'observateur."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Hc
 #. computed height (altitude) for the AP
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:344
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:346
 msgid "Hc: The AP calculated height (altitude) of navigation star."
 msgstr "Hc : la hauteur calculée de l'AP de l'étoile de navigation."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Zn
 #. computed azimuth
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:346
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:348
 msgid "Zn: The AP calculated azimuth of navigation star."
 msgstr "Zn : l'azimut calculé de l'AP de l'étoile de navigation."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:350
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:352
 msgid "For further information please refer to the Stellarium User Guide."
 msgstr ""
 "Pour plus d'informations, se référer au Manuel de l'utilisateur de "

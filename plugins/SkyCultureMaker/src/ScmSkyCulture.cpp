@@ -25,6 +25,7 @@
 #include "types/Classification.hpp"
 #include <utility>
 #include <QFile>
+#include <QTextStream>
 
 void scm::ScmSkyCulture::setId(const QString &id)
 {
@@ -50,9 +51,8 @@ scm::ScmConstellation &scm::ScmSkyCulture::addConstellation(const QString &id,
                                                             const std::vector<ConstellationLine> &lines,
                                                             const bool isDarkConstellation)
 {
-	scm::ScmConstellation constellationObj(id, lines, isDarkConstellation);
-	constellations.push_back(std::move(constellationObj));
-	return constellations.back();
+	constellations.push_back(std::make_unique<scm::ScmConstellation>(id, lines, isDarkConstellation));
+	return *constellations.back();
 }
 
 void scm::ScmSkyCulture::addLocation(const scm::CulturePolygon &polygon)
@@ -63,7 +63,7 @@ void scm::ScmSkyCulture::addLocation(const scm::CulturePolygon &polygon)
 void scm::ScmSkyCulture::removeConstellation(const QString &id)
 {
 	constellations.erase(remove_if(begin(constellations), end(constellations),
-	                               [id](ScmConstellation const &c) { return c.getId() == id; }),
+	                               [id](const std::unique_ptr<ScmConstellation> &c) { return c->getId() == id; }),
 	                     end(constellations));
 }
 
@@ -80,14 +80,12 @@ void scm::ScmSkyCulture::removeLocation(int id)
 
 scm::ScmConstellation *scm::ScmSkyCulture::getConstellation(const QString &id)
 {
-	for (auto &constellation : constellations)
-	{
-		if (constellation.getId() == id) return &constellation;
-	}
-	return nullptr;
+	auto it = std::find_if(constellations.begin(), constellations.end(),
+						   [&id](const std::unique_ptr<ScmConstellation> &c) { return c->getId() == id; });
+	return it != constellations.end() ? it->get() : nullptr;
 }
 
-std::vector<scm::ScmConstellation> *scm::ScmSkyCulture::getConstellations()
+std::vector<std::unique_ptr<scm::ScmConstellation>> *scm::ScmSkyCulture::getConstellations()
 {
 	return &constellations;
 }
@@ -117,7 +115,7 @@ QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 	QJsonArray constellationsArray;
 	for (const auto &constellation : constellations)
 	{
-		constellationsArray.append(constellation.toJson(id, mergeLines));
+		constellationsArray.append(constellation->toJson(id, mergeLines));
 	}
 	scJsonObj["constellations"] = constellationsArray;
 
@@ -143,7 +141,10 @@ void scm::ScmSkyCulture::draw(StelCore *core) const
 {
 	for (auto &constellation : constellations)
 	{
-		constellation.drawConstellation(core);
+		if(!constellation->isHidden)
+		{
+			constellation->draw(core);
+		}
 	}
 }
 
@@ -241,7 +242,7 @@ bool scm::ScmSkyCulture::saveIllustrations(const QString &directory)
 	bool success = true;
 	for (auto &constellation : constellations)
 	{
-		success &= constellation.saveArtwork(directory);
+		success &= constellation->saveArtwork(directory);
 	}
 
 	return success;

@@ -468,8 +468,7 @@ and telescope.\footnote{Again, for Linux the port number is defined in
   group (or whichever group owns your serial port).  Better yet, use
   \program{gpsd} (see above).}
 
-If GPS lookup fails, run Stellarium with the \texttt{--verbose} option and
-see the logfile for diagnostic messages.
+If GPS lookup fails, see section~\ref{sec:Environment:Logfile} to enable more diagnostic messages in the logfile.
 
 \paragraph{Bluetooth GPS} Most smartphones provide GPS and Bluetooth
 hardware. You can install a virtual COM port in your Windows Bluetooth
@@ -571,7 +570,6 @@ program when it is called via the command line. See table for a full list:
 -\/-spout  or -S     & all or sky & Act as Spout sender (See section \ref{sec:CommandLineOptions:Special:Spout}).%
                                     \footnote{\label{FN:WinOnly}On Windows only}\textsuperscript{,}\footnote{This function requires running in OpenGL mode.}\\
 -\/-spout-name       & name       & Use \texttt{name} as name of the Spout sender. Default name: \texttt{Stellarium}.\footref{FN:WinOnly}\\\midrule									
--\/-verbose          &            & Even more diagnostic output in logfile (esp.\ multimedia handling)\\
 -\/-dump-opengl-details or -d     & {[}none{]} & Dump information about OpenGL support to logfile. 
                                                  Use this is you have graphics problems and want to send a bug report. \\\midrule
 -\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footref{FN:WinOnly}\textsuperscript{,}\footnote{\label{FN:Qt5only}Qt5-based Stellarium versions only}\\
@@ -591,6 +589,8 @@ program when it is called via the command line. See table for a full list:
 switch every time when you start Stellarium from the command line, you
 can also set an environment variable \file{STEL\_OPTS} with your
 default options. 
+
+Calling the respective options on the command line overrides settings from environment variables (apart from \texttt{STEL\_OPTS}).
 
 \subsection{Examples}
 \label{sec:CommandLineOptions:Examples}
@@ -627,11 +627,14 @@ stellarium --landscape=ocean
 \section{Environment Variables}
 \label{sec:Environment}
 
-Some command-line options can be set permanently by storing them into
+Some command-line options or settings can be set permanently by storing them into
 environment variables. How to set them depends on the respective
-operating system. Calling the respective options on the command line
-still overrides an environment variable (apart from
-\texttt{STEL\_OPTS}).
+operating system. 
+
+\begin{description}
+\item[Windows]
+Press the start menu, search for ``environment variable''. Use the command to change user variables. 
+After setting, you can call Stellarium via its menu entry or desktop links. 
 
 This may be especially helpful on Windows systems with older graphics
 cards which may not fully be compatible with OpenGL. Here we recommend
@@ -639,24 +642,70 @@ you either use the program links using the ANGLE-related options, or
 you can set the environment variable once and forget about the
 problems.
 
+\item[Linux, macOS]
+You will usually set such variables at the end of your \file{\textasciitilde{}/.bashrc} file. 
+Open this with a text editor and add, near the end, 
+\begin{configfile}
+export STEL_OPTS="-platform xcb --single-buffer"
+\end{configfile}
+This forces use of the X11 platform plugin which may work better than \texttt{wayland} on older systems.
+\end{description}
+
+
+\noindent These environment variables are important:
+
 \begin{description}
-\item[STEL\_OPTS] may contain a default commandline with options in the syntax of the table above.
-\item[STEL\_USERDIR] may contain the path to a user data directory
+\item[{STEL\_OPTS}] may contain a default commandline with options in the syntax of the table above. Also some Qt settings can only be tweaked with this.
+For example, Windows users of international keyboards with \key{Alt Gr} key may want to use
+\begin{commands}[\scriptsize]
+STEL_OPTS=-platform windows:altgr,fontengine=freetype --single-buffer
+\end{commands}
+The \texttt{-platform} parameter is part of Qt. Its second argument, \texttt{fontengine}, selects a different font engine (i.e., some fonts may look better with it). 
+The other argument, \texttt{-\,-single-buffer}, is a setting that influences Stellarium (see table above).
+\item[{STEL\_USERDIR}] may contain the path to a user data directory
   deviating from the default (see section \ref{sec:Directories}).
-\item[QT\_OPENGL]\footref{FN:WinOnly} May be one of \texttt{desktop} (native OpenGL for your GPU, recommended),
+\item[{QT\_OPENGL}]\footref{FN:WinOnly} May be one of \texttt{desktop} (native OpenGL for your GPU, recommended),
   \texttt{angle}\footref{FN:Qt5only} or \texttt{software}. The last activates pure software rendering using the MESA OpenGL library. Note that command line options take precedence over this environment variable.
-\item[QT\_ANGLE\_PLATFORM]\footref{FN:WinOnly}\textsuperscript{,}\footref{FN:Qt5only} May be one of \texttt{d3d9} (DirectX~9) or \texttt{d3d11} (DirectX~11),
+\item[{QT\_ANGLE\_PLATFORM}]\footref{FN:WinOnly}\textsuperscript{,}\footref{FN:Qt5only} May be one of \texttt{d3d9} (DirectX~9) or \texttt{d3d11} (DirectX~11),
   or \texttt{warp} for another software-only solution. Note that command line options take precedence over this environment variable.
 \end{description}
 
 \subsection{Logfile tweaks}
 \label{sec:Environment:Logfile}
 
-The amount of logging messages in Qt-based programs can be tuned by setting an environment variable \texttt{QT\_LOGGING\_RULES}. 
-For example, to remove all ``Debug'' messages, set it to \texttt{*.debug=false}. To remove even the ``Info'' messages, add \texttt{;*.info=false}. (Combine several rules with semicola.)
+Qt based programs can write log files where status messages of varying severity can be 
+written\footnote{\scriptsize{\url{https://doc.qt.io/qt-6/qloggingcategory.html}, \url{https://doc.qt.io/qt-6/debug.html}}}. There are categories 
+\texttt{debug} (usually only of developer interest), 
+\texttt{info} (informational), 
+\texttt{warning} (something unexpected), 
+\texttt{critical} (usually connected to some real failure) and 
+\texttt{fatal} (program fails (usually exits) here).
+The amount of logging messages can be tuned by setting the environment variable \texttt{QT\_LOGGING\_RULES}. 
+For example, to remove all \texttt{debug} messages, set it to \texttt{*.debug=false;}. 
+To remove even the \texttt{info} messages, add \texttt{*.info=false;}. (Close each rule, also the last, with semicolon!)
 If you experience operating trouble, make sure you allow all messages, i.e., set these entries shown here to \texttt{true} (or delete the variable).
 
-More information can be found online\footnote{\scriptsize{\url{https://doc.qt.io/qt-6/qloggingcategory.html}, \url{https://doc.qt.io/qt-6/debug.html}}}.
+Some modules\newFeature{25.4} can be individually finetuned with respect to the amount of logging.  
+Most users won't ever want to see the ugly details, so \texttt{debug} is deactivated by default for: 
+\begin{description}
+\item[\texttt{stel.GPS}] GPS related issues.
+\item[\texttt{stel.LocIP}] IP-based location queries.
+\item[\texttt{stel.Texture}] Texture handling.
+\item[\texttt{stel.Atmosphere}] Atmosphere related messages.
+\item[\texttt{stel.Scripting}] scripting related messages.
+\item[\texttt{stel.Media}] Multimedia related messages.
+\item[\texttt{stel.HiPS}] HiPS related messages.
+\item[\texttt{stel.Properties}] StelProperty related messages.
+\end{description}
+
+If you suspect issues with some features on your computer, add those entries as shown above, e.g., to hunt down issues with a GPS device:
+\begin{configfile}
+QT_LOGGING_RULES=*.debug=false;stel.GPS.debug=true;
+\end{configfile}
+or if you are developing scripts and videos don't play, try if this helps:
+\begin{configfile}
+QT_LOGGING_RULES=*.debug=false;stel.Media.debug=true;
+\end{configfile}
 
 
 \section{GUI Customizations}

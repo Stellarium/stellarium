@@ -9,6 +9,7 @@ Fixed: "Export and Exit" exits even when export failed, deleting all unsaved pro
 Fixed: Stop drawing line key (Double Right Click) only works when Star/DSO is selected (#4557)
 Fixed: Not all SC description input fields that are marked required are actually checked (#4557)
 Fixed: No formal checks for 'Constellations' input field in SC description (#4557)
+Fixed: Thickness of constellation lines in SCM is not tied to Stellarium's settings (#4659)
 
 1.0.0
 Initial release of the Sky Culture Maker Plugin

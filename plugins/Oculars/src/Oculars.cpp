@@ -1581,7 +1581,7 @@ void Oculars::initializeActivationActions()
 bool Oculars::isBinocularDefined()
 {
 	bool binocularFound = false;
-	for (auto* ocular : oculars)
+	for (const auto *ocular : std::as_const(oculars))
 	{
 		if (ocular->isBinoculars())
 		{
@@ -1691,13 +1691,13 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const 
 	const int numOverlayPixelsY = overlaySize.height() / ccd.binningY();
 
 	// Vertical lines of the pixel grid
-	for(float line = 1; line < numOverlayPixelsX; ++line)
+	for(int line = 1; line < numOverlayPixelsX; ++line)
 	{
-		for(float p = 0; p < numPointsPerLine; ++p)
+		for(int p = 0; p < numPointsPerLine; ++p)
 		{
-			const auto x = 1;
-			const auto y = cropTanFovX * (1 - 2 * line / numOverlayPixelsX);
-			const auto z = cropTanFovY * (2.f / (numPointsPerLine - 1) * p - 1);
+			const float x = 1.f;
+			const float y = cropTanFovX * (1.f - 2.f * float(line) / numOverlayPixelsX);
+			const float z = cropTanFovY * (2.f / (numPointsPerLine - 1) * p - 1.f);
 			Vec3f win;
 			projector->project(derotate * Vec3f(x,y,z), win);
 			lineStripPoints.emplace_back(Vec2f(win[0], win[1]));
@@ -1708,13 +1708,13 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const 
 	}
 
 	// Horizontal lines of the pixel grid
-	for(float line = 1; line < numOverlayPixelsY; ++line)
+	for(int line = 1; line < numOverlayPixelsY; ++line)
 	{
-		for(float p = 0; p < numPointsPerLine; ++p)
+		for(int p = 0; p < numPointsPerLine; ++p)
 		{
-			const auto x = 1;
-			const auto y = -cropTanFovX * (2.f / (numPointsPerLine - 1) * p - 1);
-			const auto z = cropTanFovY * (1 - 2 * line / numOverlayPixelsX);
+			const float x = 1.f;
+			const float y = -cropTanFovX * (2.f / (numPointsPerLine - 1) * p - 1.f);
+			const float z = cropTanFovY * (1.f - 2.f * float(line) / numOverlayPixelsX);
 			Vec3f win;
 			projector->project(derotate * Vec3f(x,y,z), win);
 			lineStripPoints.emplace_back(Vec2f(win[0], win[1]));

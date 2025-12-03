@@ -330,9 +330,6 @@ void improveClickMatch(StelProjectorP prj, double x, double y, Vec3d &v)
 	prj->project(v,win);
 	double dx = x - win.v[0];
 	double dy = y - win.v[1];
-	bool verbose=qApp->property("verbose").toBool();
-	if (verbose)
-		qDebug() << "Nick Fedoseev patch: improve click match" << dx << dy;
 	prj->unProject(x+dx,y+dy,v);
 }
 

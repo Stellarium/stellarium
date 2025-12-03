@@ -22,6 +22,7 @@
 #include <QSettings>
 #include "StelScriptOutput.hpp"
 #include "StelApp.hpp"
+#include "StelMainScriptAPI.hpp"
 
 // Init static variables.
 QFile StelScriptOutput::outputFile;
@@ -31,7 +32,7 @@ void StelScriptOutput::init(const QString& outputFilePath)
 {
 	outputFile.setFileName(outputFilePath);
 	if (!outputFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
-		qDebug() << "ERROR: Cannot open file" << outputFilePath;
+		qCWarning(Scripting) << "ERROR: Cannot open file" << outputFilePath;
 }
 
 void StelScriptOutput::deinit()
@@ -64,15 +65,15 @@ void StelScriptOutput::saveOutputAs(const QString &name)
 
 	if (name.contains("config.ini"))
 	{
-		qWarning() << "SCRIPTING ERROR: You are trying to overwrite config.ini. Ignoring.";
+		qCWarning(Scripting) << "SCRIPTING ERROR: You are trying to overwrite config.ini. Ignoring.";
 		return;
 	}
 
 	if (!okToSaveToAbsolutePath && ((newFileNameInfo.isAbsolute() || (name.contains(".."))))) // The last condition may include dangerous/malicious paths
 	{
-		qWarning() << "SCRIPTING CONFIGURATION ISSUE: You are trying to save to an absolute pathname or move up in directories.";
-		qWarning() << "  To enable this, check the settings in the script console";
-		qWarning() << "  or edit config.ini and set [scripts]/flag_allow_write_absolute_path=true";
+		qCWarning(Scripting) << "SCRIPTING CONFIGURATION ISSUE: You are trying to save to an absolute pathname or move up in directories.";
+		qCWarning(Scripting) << "  To enable this, check the settings in the script console";
+		qCWarning(Scripting) << "  or edit config.ini and set [scripts]/flag_allow_write_absolute_path=true";
 		asFile.setFileName(dir.absolutePath() + "/" + newFileNameInfo.fileName());
 	}
 	else if (okToSaveToAbsolutePath && (newFileNameInfo.isAbsolute()))
@@ -86,10 +87,10 @@ void StelScriptOutput::saveOutputAs(const QString &name)
 
 	if (!asFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
 	{
-		qDebug() << "ERROR: Cannot open file" << asFile.fileName();
+		qCWarning(Scripting) << "ERROR: Cannot open file" << asFile.fileName();
 		return;
 	}
-	qDebug() << "saving copy of output.txt to " << asFile.fileName();
+	qCDebug(Scripting) << "saving copy of output.txt to " << asFile.fileName();
 	asFile.write(outputText.toUtf8());
 	asFile.close();
 }

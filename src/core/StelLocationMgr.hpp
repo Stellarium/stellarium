@@ -26,6 +26,7 @@
 #include <QMap>
 #include <QImage>
 #include <QtPositioning/QGeoPositionInfoSource>
+#include <QLoggingCategory>
 #include "VecMath.hpp"
 
 typedef QList<StelLocation> LocationList;
@@ -42,8 +43,20 @@ typedef struct
 
 class GPSLookupHelper;
 
+
 //! @class StelLocationMgr
 //! Manage the list of available location.
+//!
+//! @note You can finetune the amount of GPS-related messages in the logfile by configuring the logging category stel.GPS.
+//! Likewise, for IP-based location lookup, we use the logging category stel.LocIP.
+//! If your GPS device seems not to work, try to get more log otput by setting environment variable
+//! QT_LOGGING_RULES="*.debug=false;stel.GPS.debug=true;stel.LocIP.info=false;".
+//! This will also silence most output of IP-related location queries.
+//! By default, only Info and more severe messages are displayed.
+
+Q_DECLARE_LOGGING_CATEGORY(GPS)
+Q_DECLARE_LOGGING_CATEGORY(LocIP)
+
 class StelLocationMgr : public QObject
 {
 	Q_OBJECT

@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QMap>
 #include <QString>
+#include <QLoggingCategory>
 #ifdef ENABLE_MEDIA
 #include <QSize>
 #include <QSizeF>
@@ -107,7 +108,12 @@ class QGraphicsVideoItem;
 //! and non-appearing video frame, this seems to be https://bugreports.qt.io/browse/QTBUG-39567.
 //! This occurred on an Intel NUC5i3 with SSD, so loading the file should not be much of an issue.
 //!
-//! To help in debugging scripts, this module can be quite verbose in the logfile if Stellarium is called with the command-line argument "--verbose".
+//! @note You can finetune the amount of media-related messages in the logfile by configuring the logging category stel.Media.
+//! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.Media.debug=true;".
+//! By default, only Info and more severe messages are displayed.
+
+
+Q_DECLARE_LOGGING_CATEGORY(Media)
 
 class StelVideoMgr : public StelModule
 {
@@ -284,7 +290,6 @@ private:
 		int lastPos;               //!< This should not be required: We must track a bug in QtMultimedia where the QMediaPlayer is in playing state but does not progress the video position. In update() we try to let it run again.
 	} VideoPlayer;
 	QMap<QString, VideoPlayer*> videoObjects;
-	bool verbose;                      //!< true to write many more log entries (useful for script debugging) Activate with command-line option "--verbose"
 #endif
 	bool audioEnabled;                 //!< Allow audio output. May be disabled by command line or config arguments.
 };

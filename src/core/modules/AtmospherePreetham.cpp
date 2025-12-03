@@ -23,7 +23,6 @@
 #include "StelApp.hpp"
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "Skylight.hpp"
@@ -33,6 +32,7 @@
 #include <QSettings>
 #include <QOpenGLShaderProgram>
 
+Q_LOGGING_CATEGORY(Atmo,"stel.Atmosphere", QtInfoMsg)
 
 AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 	: viewport(0,0,0,0)
@@ -59,7 +59,7 @@ AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 	}
 	if (!vShader.log().isEmpty())
 	{
-		qWarning() << "Warnings while compiling Preetham atmosphere vertex shader: " << vShader.log();
+		qCWarning(Atmo) << "Warnings while compiling Preetham atmosphere vertex shader: " << vShader.log();
 	}
 	QOpenGLShader fShader(QOpenGLShader::Fragment);
 	if (!fShader.compileSourceCode(
@@ -74,7 +74,7 @@ AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 	}
 	if (!fShader.log().isEmpty())
 	{
-		qWarning() << "Warnings while compiling Preetham atmosphere fragment shader: " << vShader.log();
+		qCWarning(Atmo) << "Warnings while compiling Preetham atmosphere fragment shader: " << vShader.log();
 	}
 	atmoShaderProgram = new QOpenGLShaderProgram();
 	atmoShaderProgram->addShader(&vShader);
@@ -229,7 +229,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 	Vec3d moonPos = sunPos;
 	// Calculate the atmosphere RGB for each point of the grid. We can use abbreviated numbers here.
 
-	// qDebug("touch at %f\tnow at %f (%f)\n", touch_angle, separation_angle, separation_angle/touch_angle);
+	// qCDebug(Atmo, "touch at %f\tnow at %f (%f)\n", touch_angle, separation_angle, separation_angle/touch_angle);
 	// bright stars should be visible at total eclipse
 	// TODO: correct for atmospheric diffusion
 	// TODO: use better coverage function (non-linear)

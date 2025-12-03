@@ -24,9 +24,6 @@
 #ifndef SCM_SKYCULTURE_HPP
 #define SCM_SKYCULTURE_HPP
 
-#include <QString>
-#include <optional>
-
 #include "ScmConstellation.hpp"
 #include "StelCore.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -35,6 +32,12 @@
 #include "types/ConstellationLine.hpp"
 #include "types/Description.hpp"
 #include "types/License.hpp"
+#include <memory>
+#include <vector>
+#include <QFile>
+#include <QJsonObject>
+#include <QObject>
+#include <QString>
 
 namespace scm
 {
@@ -77,7 +80,9 @@ public:
 	ScmConstellation *getConstellation(const QString &id);
 
 	/// Returns a pointer to the constellations of the sky culture
-	std::vector<ScmConstellation> *getConstellations();
+	/// Constellations are held as unique pointers, so the addresses
+	/// of the constellation objects remain valid even if the vector is modified.
+	std::vector<std::unique_ptr<ScmConstellation>> *getConstellations();
 
 	/**
 	* @brief Returns the sky culture as a JSON object
@@ -126,7 +131,7 @@ private:
 	bool fallbackToInternationalNames = false;
 
 	/// The constellations of the sky culture
-	std::vector<ScmConstellation> constellations;
+	std::vector<std::unique_ptr<ScmConstellation>> constellations;
 
 	/// The description of the sky culture
 	scm::Description description;

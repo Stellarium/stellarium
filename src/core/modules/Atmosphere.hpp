@@ -34,6 +34,8 @@ class StelLocation;
 class StelCore;
 class Planet;
 
+Q_DECLARE_LOGGING_CATEGORY(Atmo)
+
 class Atmosphere
 {
 public:
