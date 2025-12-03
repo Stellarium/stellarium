@@ -192,7 +192,14 @@ void ScmConstellationDialog::createDialogContent()
 		});
 	imageItem->setAnchorPositionChangedCallback([this]() { this->updateArtwork(); });
 
-	ui->tooltipBtn->setToolTip(artworkToolTip);
+	// artwork tool tip
+	ui->tooltipLabel->setText(artworkToolTip);
+	ui->tooltipLabel->raise();
+	ui->tooltipLabel->hide();
+	connect(ui->tooltipBtn, &QToolButton::clicked, this, [this]() {
+		ui->tooltipLabel->show();
+	});
+	connect(ui->tooltipLabel, &QPushButton::clicked, this, [this]() { ui->tooltipLabel->hide(); });
 
 	connect(ui->saveBtn, &QPushButton::clicked, this, &ScmConstellationDialog::saveConstellation);
 	connect(ui->cancelBtn, &QPushButton::clicked, this, &ScmConstellationDialog::cancel);

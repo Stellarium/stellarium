@@ -200,7 +200,7 @@
       <attribute name="title">
        <string>Artwork</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
+      <layout class="QGridLayout" name="artwortGridLayout">
        <property name="spacing">
         <number>5</number>
        </property>
@@ -216,7 +216,7 @@
        <property name="bottomMargin">
         <number>5</number>
        </property>
-       <item>
+       <item row="0" column="0" rowspan="3" colspan="3">
         <widget class="QGraphicsView" name="artwork_image">
          <property name="cursor" stdset="0">
           <cursorShape>CrossCursor</cursorShape>
@@ -238,7 +238,50 @@
          </property>
         </widget>
        </item>
-       <item>
+       <item row="0" column="2" alignment="Qt::AlignRight|Qt::AlignTop">
+        <widget class="QToolButton" name="tooltipBtn">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="cursor">
+          <cursorShape>WhatsThisCursor</cursorShape>
+         </property>
+         <property name="contextMenuPolicy">
+          <enum>Qt::NoContextMenu</enum>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="icon">
+          <iconset resource="../../data/gui/guiRes.qrc">
+           <normaloff>:/graphicGui/tabHelp-selected.png</normaloff>
+           <disabledoff>:/graphicGui/tabHelp-selected.png</disabledoff>:/graphicGui/tabHelp-selected.png</iconset>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+            background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(113, 114, 115), stop: 1 rgb(71, 73, 74));
+            margin: 5px;
+          </string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" alignment="Qt::AlignRight|Qt::AlignTop">
+        <widget class="QPushButton" name="tooltipLabel">
+         <property name="styleSheet">
+          <string notr="true">
+            border: 1px solid black;
+            margin: 2px;
+            padding: 10px;
+            background-color: rgb(143, 143, 143);
+            text-align: left;
+          </string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="3">
         <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0">
          <property name="sizeConstraint">
           <enum>QLayout::SetDefaultConstraint</enum>
@@ -291,41 +334,6 @@
           <widget class="QPushButton" name="remove_image">
            <property name="text">
             <string>Remove Image</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="tooltipBtn">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="cursor">
-            <cursorShape>WhatsThisCursor</cursorShape>
-           </property>
-           <property name="contextMenuPolicy">
-            <enum>Qt::NoContextMenu</enum>
-           </property>
-           <property name="autoFillBackground">
-            <bool>false</bool>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::HelpAbout">
-             <normaloff>.</normaloff>.</iconset>
-           </property>
-           <property name="autoDefault">
-            <bool>false</bool>
-           </property>
-           <property name="default">
-            <bool>false</bool>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
            </property>
           </widget>
          </item>

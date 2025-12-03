@@ -115,12 +115,12 @@ private:
 		"Usage:\n"
 		"1. Upload an image\n"
 		"2. Three anchor points appear in the center of the image\n"
-		"   - An anchor is green when selected\n"
+		"	- An anchor is green when selected\n"
 		"3. Select a star of your choice\n"
 		"4. Click the 'Bind Star' button\n"
 		"5. The anchor is shown in a brighter color when bound to a star\n"
-		"   - The corresponding bound star is automatically selected when an anchor is selected\n"
-		"   - 'Bind Star' will overwrite the current binding if it already exists"
+		"	- The corresponding bound star is automatically selected when an anchor is selected\n"
+		"	- 'Bind Star' will overwrite the current binding if it already exists"
 	);
 
 	/// The constellation that is currently being edited
