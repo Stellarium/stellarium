@@ -22,7 +22,7 @@
  */
 
 #include "ScmSkyCultureDialog.hpp"
-#include "PolygonInfoTreeItem.hpp"
+#include "ScmPolygonInfoTreeItem.hpp"
 #include "types/Region.hpp"
 #include "ui_scmSkyCultureDialog.h"
 #include <cassert>
@@ -163,7 +163,7 @@ void ScmSkyCultureDialog::createDialogContent()
 		ui->regionComboBox->addItem(region.second.name, QVariant::fromValue(region.first), region.second.description);
 	}
 	ui->regionComboBox->setDefaultText("None");
-	connect(ui->regionComboBox, &MultiselectionComboBox::checkedItemsChanged, this, &ScmSkyCultureDialog::checkMutExRegions);
+	connect(ui->regionComboBox, &ScmMultiselectionComboBox::checkedItemsChanged, this, &ScmSkyCultureDialog::checkMutExRegions);
 
 	// Geographical Location Tab
 
@@ -187,21 +187,23 @@ void ScmSkyCultureDialog::createDialogContent()
 	ui->polygonInfoTreeWidget->header()->setSectionsMovable(false);
 	ui->polygonInfoTreeWidget->header()->setSectionResizeMode(QHeaderView::Stretch);
 
-	QString helpButtonToolTip = q_("Controls") + ":\n" +
-								"LMB: Set a new vertex for the active polygon\n" +
-								"SHIFT + LMB : Navigate the Map\n" +
-								"ALT + LMB : Save the active polygon\n" +
-								"DELETE : Remove the last point of the active polygon\n" +
-								"ESC: Remove all points of the active polygon\n" +
-								"Scroll UP / DOWN : Zoom in / out of the map\n" +
-								"CTRL + Scroll : Fine grained zoom";
-	// the positioning of the tooltip is eyeballed to sit in the bottom right corner of the map (works for now but is not practical)
-	connect(ui->helpToolButton, &QToolButton::clicked, this, [this, helpButtonToolTip]()
-			{ QToolTip::showText(ui->skyCultureTimeOptionsGroupBox->mapToGlobal(QPoint(ui->skyCultureTimeOptionsGroupBox->width() - 330, -179)), helpButtonToolTip, ui->scmGeoLocGraphicsView, QRect(QPoint(-100, -100), QPoint(2000, 2000)), 99999); });
+	// label / tooltip for controls
+	ui->helpLabel->setText(mapToolTip);
+	ui->helpLabel->raise();
+	ui->helpLabel->hide();
 
-	//ui->testLabel->setText(helpButtonToolTip);
-	ui->testLabel->raise();
-	ui->testLabel->show();
+	connect(ui->mapHelpToolButton, &QToolButton::clicked, this, [this]() {
+		if (ui->helpLabel->isVisible())
+		{
+			ui->helpLabel->hide();
+		}
+		else
+		{
+			ui->helpLabel->show();
+		}
+	});
+	connect(ui->helpLabel, &QPushButton::clicked, this, [this]() { ui->helpLabel->hide(); });
+
 	// dialog popup for time limits
 
 	// prevent startTimeSpinBox value to be greater than endTimeSpinBox and vice versa
@@ -424,11 +426,6 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 		desc.region.push_back(itemData.value<scm::RegionType>());
 	}
 
-	for (auto i : desc.region)
-	{
-		qInfo() << scm::REGIONS.at(i).name;
-	}
-
 	return desc;
 }
 
@@ -519,10 +516,10 @@ void ScmSkyCultureDialog::updateSkyCultureTimeValue(int year)
 	ui->scmGeoLocGraphicsView->updateTime(year);
 }
 
-void ScmSkyCultureDialog::addLocation(const scm::CulturePolygon culturePoly)
+void ScmSkyCultureDialog::addLocation(scm::CulturePolygon culturePoly)
 {
 	// add polygon to list (polygonInfoTreeWidget)
-	ui->polygonInfoTreeWidget->addTopLevelItem(new PolygonInfoTreeItem(culturePoly.id, culturePoly.startTime, culturePoly.endTime, culturePoly.polygon.size()));
+	ui->polygonInfoTreeWidget->addTopLevelItem(new ScmPolygonInfoTreeItem(culturePoly.id, culturePoly.startTime, culturePoly.endTime, culturePoly.polygon.size()));
 
 	// send poly to maker
 	maker->addSkyCultureLocation(culturePoly);
@@ -534,7 +531,7 @@ void ScmSkyCultureDialog::removeLocation()
 	// (maybe this changes in the future, therefore the for-loop usage is reasonable)
 	for (const auto &item : ui->polygonInfoTreeWidget->selectedItems())
 	{
-		PolygonInfoTreeItem *polygonInfoItem = static_cast<PolygonInfoTreeItem *>(item);
+		ScmPolygonInfoTreeItem *polygonInfoItem = static_cast<ScmPolygonInfoTreeItem *>(item);
 
 		// remove polygon from map (scmGeoLocGraphicsView)
 		ui->scmGeoLocGraphicsView->removePolygon(polygonInfoItem->getId());
@@ -584,7 +581,7 @@ void ScmSkyCultureDialog::removeLocation()
 
 void ScmSkyCultureDialog::selectLocation(QTreeWidgetItem *item, int column)
 {
-	PolygonInfoTreeItem *polygonInfoItem = static_cast<PolygonInfoTreeItem *>(item);
+	ScmPolygonInfoTreeItem *polygonInfoItem = static_cast<ScmPolygonInfoTreeItem *>(item);
 	ui->scmGeoLocGraphicsView->selectPolygon(polygonInfoItem->getId());
 }
 
@@ -699,7 +696,7 @@ void ScmSkyCultureDialog::confirmAddPolygon()
 	// add the current polygon to the map with startTime and endTime as time limits
 	ui->scmGeoLocGraphicsView->addCurrentPoly(startTime, endTime);
 
-	// the the popup dialog
+	// hide the popup dialog
 	hideAddPolygon();
 }
 

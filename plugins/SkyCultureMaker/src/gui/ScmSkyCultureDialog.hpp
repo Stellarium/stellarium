@@ -111,6 +111,18 @@ private:
 	/// The vector of constellations to be displayed in the dialog.
 	std::vector<scm::ScmConstellation> *constellations = nullptr;
 
+	/// Help text on how to digitize polygons in the map.
+	const QString mapToolTip = q_(
+		"Controls:\n"
+		"LMB / RMB: Set a new vertex for the active polygon\n"
+		"SHIFT + LMB / MMB: Navigate the Map\n"
+		"ALT + LMB / RMB: Save the active polygon\n"
+		"DELETE: Remove the last point of the active polygon\n"
+		"ESC: Remove all points of the active polygon\n"
+		"Scroll UP / DOWN: Zoom in / out of the map\n"
+		"CTRL + Scroll: Fine grained zoom"
+		);
+
 	/**
 	 * @brief Gets the display name from a constellation.
 	 *
