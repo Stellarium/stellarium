@@ -1,4 +1,3 @@
-
 # Balinese
 
 ## Introduction
@@ -17,7 +16,7 @@ From its location, Balinese sky culture is one of the unique sky cultures in Ind
 
 In written form, Balinese sky culture is preserved in lontar or leaves of Borassus flabellifer or palmyra which is dried and used as a material for manuscript and antique crafts. This sky culture is related to Balinese calendar, and this system is Palelintangan. Palelintangan is a set of 35 asterisms that has a deep connection between cosmic movement and human life. Basically, they rely their daily activities based on which palelintangan is appear in that time. They believe each lintang of palelintangan has their own cosmos power to handle their work.
 
-Palelintangan is formed by combining seven-day cycle (from Redite/Sunday to Saniscara/Saturday) and five-day cycle (from Umanis to Kliwon). Palelintangan adopted Nakṣatra system and combining with the earlier existing concept in Bali. 
+Palelintangan is formed by combining seven-day cycle (from Redite/Sunday to Saniscara/Saturday) and five-day cycle (from Umanis to Kliwon). Palelintangan adopted Nakṣatra system and combining with the earlier existing concept in Bali. From all 35-lintang, four of them could not be considered as constellation. They are lintang Laweyan, lintang Děpat, lintang Dupa and lintang Srengenge. 
 
 ### Sky
 
@@ -36,7 +35,7 @@ For the civil calendar, in Indonesia, all regions are required to follow the nat
 
 ### Other Celestial Objects
 
-The Balinese consider comets to be stars, calling them lintang Dupa. Furthermore, the lunar ascending and descending nodes are also considered stars, lintang Laweyan and lintang Děpat.
+The Balinese consider comets to be stars, calling them lintang Dupa. Dupa is an incense. They think that comets are similar to incense. Furthermore, lintang Laweyan and lintang Děpat are unique. These two lintangs are related to the story of Kalau Rau, a powerful demon who stole the holy water (tirta amerta) that can make anybody immortality. His actions were discovered by the Sun God and Moon God. One of their weapons split the demon's head and body. His head is called lintang Laweyan, which in Vedic concept is associated with Rahu.  Meanwhile, his body is called lintang Děpat, which in Vedic concept is associated with Ketu. In astronomical concept, lintang Laweyan is the lunar ascending node, and the descending node is lintang Děpat.
 
 ## Constellations
 
