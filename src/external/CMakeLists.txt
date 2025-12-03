@@ -220,5 +220,34 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND ENABLE_INDI)
 ENDIF()
 
 # (SS) 2025-11-27 - Updated to build ERFA C library version 2.0.1
+# (SS) 2025-12-03 - Modified to build ERFA only if not installed in system
+#                 - Changed erfa_201 to erfa
+#                 - Merged CMakeLists.txt of erfa_201 in this CMakeLists.txt
 ########## ERFA library (Essential Routines for Fundamental Astronomy, version 2.0.1) ##########
-add_subdirectory(erfa_201)
+find_package(ERFA 2.0 QUIET)
+IF(ERFA_FOUND)
+        message(STATUS "Using system-provided ERFA at ${ERFA_LIBRARIES}")
+        add_library(erfa UNKNOWN IMPORTED GLOBAL)
+        set_target_properties(erfa PROPERTIES
+        IMPORTED_LOCATION "${ERFA_LIBRARIES}"
+        INTERFACE_INCLUDE_DIRECTORIES "${ERFA_INCLUDE_DIRS}")
+ELSE()
+        message(STATUS "System ERFA not found, using bundled version")
+
+        # Collect all ERFA C sources
+        file(GLOB ERFA_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/erfa/src/*.c")
+
+        # Exclude test files
+        list(REMOVE_ITEM ERFA_SOURCES
+        "${CMAKE_CURRENT_SOURCE_DIR}/erfa/src/t_erfa_c.c"
+        "${CMAKE_CURRENT_SOURCE_DIR}/erfa/src/t_erfa_c_extra.c")
+
+        # Build as a static library
+        add_library(erfa STATIC ${ERFA_SOURCES})
+
+        # Expose headers
+        target_include_directories(erfa PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/erfa/src)
+
+        set_target_properties(erfa PROPERTIES AUTOMOC 0)
+        set_target_properties(erfa PROPERTIES FOLDER "src/external")
+ENDIF()
