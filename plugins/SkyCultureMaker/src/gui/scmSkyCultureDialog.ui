@@ -334,7 +334,7 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="MultiselectionComboBox" name="regionComboBox"/>
+                  <widget class="ScmMultiselectionComboBox" name="regionComboBox"/>
                  </item>
                 </layout>
                </widget>
@@ -639,9 +639,15 @@
            <widget class="QWidget" name="mapPage">
             <layout class="QGridLayout" name="mapGridLayout">
              <item row="2" column="2" alignment="Qt::AlignRight|Qt::AlignBottom">
-              <widget class="QLabel" name="testLabel">
-               <property name="margin">
-                <number>10</number>
+              <widget class="QPushButton" name="helpLabel">
+               <property name="styleSheet">
+                <string notr="true">
+                  border: 1px solid black;
+                  margin: 2px;
+                  padding: 10px;
+                  background-color: rgb(143, 143, 143);
+                  text-align: left;
+                </string>
                </property>
               </widget>
              </item>
@@ -718,7 +724,7 @@
                  </widget>
                 </item>
                 <item row="1" column="2">
-                 <widget class="QSpinBox" name="startTimeSpinBox">
+                 <widget class="ScmAdvancedSpinBox" name="startTimeSpinBox">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                   </sizepolicy>
@@ -748,7 +754,7 @@
                  </widget>
                 </item>
                 <item row="2" column="2">
-                 <widget class="QSpinBox" name="endTimeSpinBox">
+                 <widget class="ScmAdvancedSpinBox" name="endTimeSpinBox">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                    </sizepolicy>
@@ -1046,17 +1052,17 @@
                  </property>
                  <column>
                   <property name="text">
-                   <string notr="true">Start time</string>
+                   <string>Start time</string>
                   </property>
                  </column>
                  <column>
                   <property name="text">
-                   <string notr="true">End time</string>
+                   <string>End time</string>
                   </property>
                  </column>
                  <column>
                   <property name="text">
-                   <string notr="true">Vertex count</string>
+                   <string>Vertex count</string>
                   </property>
                  </column>
                 </widget>
@@ -1064,7 +1070,7 @@
               </layout>
              </item>
              <item row="1" column="1" alignment="Qt::AlignBottom">
-              <widget class="QToolButton" name="helpToolButton">
+              <widget class="QToolButton" name="mapHelpToolButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1083,6 +1089,9 @@
                 <string notr="true">
                   background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(113, 114, 115), stop: 1 rgb(71, 73, 74));
                 </string>
+               </property>
+               <property name="cursor">
+                <cursorShape>WhatsThisCursor</cursorShape>
                </property>
                <property name="checkable">
                 <bool>false</bool>
@@ -1114,9 +1123,14 @@
    <header>ScmGeoLocGraphicsView.hpp</header>
   </customwidget>
   <customwidget>
-   <class>MultiselectionComboBox</class>
+   <class>ScmMultiselectionComboBox</class>
    <extends>QComboBox</extends>
-   <header>MultiselectionComboBox.hpp</header>
+   <header>ScmMultiselectionComboBox.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>ScmAdvancedSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>ScmAdvancedSpinBox.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>
