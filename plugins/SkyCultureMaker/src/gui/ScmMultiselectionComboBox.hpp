@@ -1,5 +1,5 @@
-#ifndef MULTISELECTION_HPP
-#define MULTISELECTION_HPP
+#ifndef SCMMULTISELECTIONCOMBOBOX_HPP
+#define SCMMULTISELECTIONCOMBOBOX_HPP
 
 #include <qpainter.h>
 #include <QWidget>
@@ -11,7 +11,7 @@
 #include <QStyledItemDelegate>
 #include <QListView>
 
-//! @class MultiselectionComboBox
+//! @class ScmMultiselectionComboBox
 //! QComboBox of CheckBoxes that allows for selection of multiple elements.
 // amalgamation of: https://gist.github.com/mistic100/c3b7f3eabc65309687153fe3e0a9a720 and https://github.com/qgis/QGIS/blob/master/src/gui/qgscheckablecombobox.h
 
@@ -22,35 +22,21 @@ class CheckBoxItemModel : public QStandardItemModel
 public:
 	CheckBoxItemModel(QObject *parent = nullptr);
 
-	/**
-	 * Returns the data stored under the given role for the item
-	 * referred to by the index.
-	 * \param index item index
-	 * \param role data role
-	 */
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
-
-	/**
-	 * Sets the role data for the item at index to value.
-	 * \param index item index
-	 * \param value data value
-	 * \param role data role
-	 * \returns TRUE on success, FALSE otherwise
-	 */
 	bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
 signals:
 	void itemCheckStateChanged(const QModelIndex &index);
 };
 
-class MultiselectionComboBox : public QComboBox
+class ScmMultiselectionComboBox : public QComboBox
 {
 	Q_OBJECT
 
 public:
 
-	MultiselectionComboBox(QWidget *parent);
-	~MultiselectionComboBox();
+	ScmMultiselectionComboBox(QWidget *parent);
+	~ScmMultiselectionComboBox();
 
 	void hidePopup() override;
 	void setDefaultText(const QString &text);
@@ -90,4 +76,4 @@ public:
 
 
 
-#endif // MULTISELECTION_HPP
+#endif // SCMMULTISELECTIONCOMBOBOX_HPP

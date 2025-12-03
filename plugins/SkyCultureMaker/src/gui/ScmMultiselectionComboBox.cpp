@@ -1,7 +1,7 @@
-#include "MultiselectionComboBox.hpp"
+#include "ScmMultiselectionComboBox.hpp"
 #include <qapplication.h>
 
-MultiselectionComboBox::MultiselectionComboBox(QWidget *parent)
+ScmMultiselectionComboBox::ScmMultiselectionComboBox(QWidget *parent)
 	: QComboBox(parent)
 {
 	model = new CheckBoxItemModel(this);
@@ -25,25 +25,25 @@ MultiselectionComboBox::MultiselectionComboBox(QWidget *parent)
 	connect(model, &QStandardItemModel::dataChanged, this, [this](const QModelIndex &, const QModelIndex &, const QVector<int> &) {updateText();});
 }
 
-MultiselectionComboBox::~MultiselectionComboBox()
+ScmMultiselectionComboBox::~ScmMultiselectionComboBox()
 {
 	delete model;
 }
 
-void MultiselectionComboBox::setDefaultText(const QString &text)
+void ScmMultiselectionComboBox::setDefaultText(const QString &text)
 {
 	defaultText = text;
 	updateText();
 }
 
-void MultiselectionComboBox::addItem(const QString &label, const QVariant &data, const QString &toolTip)
+void ScmMultiselectionComboBox::addItem(const QString &label, const QVariant &data, const QString &toolTip)
 {
 	QComboBox::addItem(label, data);
 	setItemData(count() - 1, Qt::Unchecked, Qt::CheckStateRole);
 	setItemData(count() - 1, toolTip, Qt::ToolTipRole);
 }
 
-void MultiselectionComboBox::reset()
+void ScmMultiselectionComboBox::reset()
 {
 	// set all items to unchecked
 	for (int index = 0; index < count(); index++)
@@ -53,7 +53,7 @@ void MultiselectionComboBox::reset()
 	updateCheckedItems();
 }
 
-bool MultiselectionComboBox::eventFilter(QObject *object, QEvent *event)
+bool ScmMultiselectionComboBox::eventFilter(QObject *object, QEvent *event)
 {
 	if (object == lineEdit())
 	{
@@ -88,7 +88,7 @@ bool MultiselectionComboBox::eventFilter(QObject *object, QEvent *event)
 	return QComboBox::eventFilter(object, event);
 }
 
-void MultiselectionComboBox::hidePopup()
+void ScmMultiselectionComboBox::hidePopup()
 {
 	if (!skipPopupHide)
 	{
@@ -97,7 +97,7 @@ void MultiselectionComboBox::hidePopup()
 	skipPopupHide = false;
 }
 
-void MultiselectionComboBox::updateText()
+void ScmMultiselectionComboBox::updateText()
 {
 	QString text;
 
@@ -117,14 +117,14 @@ void MultiselectionComboBox::updateText()
 	setEditText(text);
 }
 
-void MultiselectionComboBox::updateCheckedItems()
+void ScmMultiselectionComboBox::updateCheckedItems()
 {
 	const QStringList items = checkedItems();
 	updateText();
 	emit checkedItemsChanged(items);
 }
 
-QStringList MultiselectionComboBox::checkedItems() const
+QStringList ScmMultiselectionComboBox::checkedItems() const
 {
 	QStringList items;
 
@@ -141,7 +141,7 @@ QStringList MultiselectionComboBox::checkedItems() const
 	return items;
 }
 
-QVariantList MultiselectionComboBox::checkedItemsData() const
+QVariantList ScmMultiselectionComboBox::checkedItemsData() const
 {
 	QVariantList data;
 
@@ -158,7 +158,7 @@ QVariantList MultiselectionComboBox::checkedItemsData() const
 	return data;
 }
 
-void MultiselectionComboBox::setItemEnabledState(const QString &itemName, bool enabledState, bool invertSelection)
+void ScmMultiselectionComboBox::setItemEnabledState(const QString &itemName, bool enabledState, bool invertSelection)
 {
 	for (int index = 0; index < count(); index++)
 	{
