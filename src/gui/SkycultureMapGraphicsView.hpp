@@ -18,7 +18,7 @@ public:
 	//void initializeGraphicsView();
 
 public slots:
-	void selectCulture(const QString &skycultureId);
+	void selectCulture(const QString &skycultureId, int startTime);
 	void updateTime(int year);
 	void rotateMap(bool isRotated);
 	void changeProjection(bool isChanged);
@@ -55,7 +55,7 @@ private:
 	// functions
 	QList<QPointF> convertLatLonToMeter(const QList<QPointF> &latLonCoordinates);
 	QList<QPointF> convertMeterToView(const QList<QPointF> &meterCoordinates);
-	QList<QPointF> convertLatLonToView(const QList<QPointF> &latLonCoordinates);
+	QRectF calculateBoundingBox(const QList<QGraphicsItem *> graphicsItemList);
 	void updateCultureVisibility();
 	void smoothFitInView(QRectF targetRect);
 	void selectAllCulturePolygon(const QString &skycultureId);

@@ -444,13 +444,13 @@ void SkycultureMapGraphicsView::selectAllCulturePolygon(const QString &skycultur
 	}
 }
 
-void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId)
+void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId, int startTime)
 {
-	// variable to the best fitting polygon (either one that exists at the current year or the one with the earliest startTime)
-	SkyculturePolygonItem *skyCulturePolygon = nullptr;
+	QList<QGraphicsItem *> currentTimeItems = QList<QGraphicsItem *>();
+	QList<QGraphicsItem *> startTimeItems = QList<QGraphicsItem *>();
 
-	// determine the right culture polygon from its name and time
-	for(auto *item : scene()->items())
+	const auto itemList = scene()->items();
+	for(const auto &item : itemList)
 	{
 		// cast QGraphicsItem to SkyculturePolygonItem --> if the item is not a SkyculturePolygonItem: skip it to prevent errors
 		SkyculturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyculturePolygonItem *>(item);
@@ -458,77 +458,36 @@ void SkycultureMapGraphicsView::selectCulture(const QString &skycultureId)
 		{
 			continue;
 		}
+
 		if(skycultureId == scPolyItem->getSkycultureId())
 		{
-			// if there is an polygon in the current time --> save it and continue
-			if(scPolyItem->existsAtPointInTime(currentYear))
+			if (scPolyItem->existsAtPointInTime(currentYear))
 			{
-				skyCulturePolygon = scPolyItem;
-
-				break;
+				currentTimeItems.append(item);
 			}
-			// otherwise safe the polygon with the earliest startTime
-			else
+			else if (scPolyItem->existsAtPointInTime(startTime))
 			{
-				if(skyCulturePolygon != nullptr)
-				{
-					if(skyCulturePolygon->getStartTime() < scPolyItem->getStartTime())
-					{
-						continue;
-					}
-				}
-				skyCulturePolygon = scPolyItem;
+				startTimeItems.append(item);
 			}
 		}
 	}
+	// if no polygon with the specified skycultureId exists, this function simply clears the selection
+	selectAllCulturePolygon(skycultureId);
 
-	// if no fitting polygon was found --> return to prevent errors
-	if(skyCulturePolygon == nullptr)
+	if (!currentTimeItems.empty())
+	{
+		smoothFitInView(calculateBoundingBox(currentTimeItems));
+	}
+	else if (!startTimeItems.empty())
+	{
+		smoothFitInView(calculateBoundingBox(startTimeItems));
+		emit timeValueChanged(startTime);
+	}
+	else
 	{
 		qInfo() << "couldn't find any polygon with name [" << skycultureId << "]!";
 		return;
 	}
-
-	// if needed, change the current year and update the polygon visibility
-	if(!skyCulturePolygon->existsAtPointInTime(currentYear))
-	{
-		// signal connects to updateSkyCultureTime in ViewDialog which invokes updateTime (in this class)
-		emit(timeValueChanged(skyCulturePolygon->getStartTime()));
-	}
-
-	selectAllCulturePolygon(skycultureId);
-
-	const QRectF polyBbox = skyCulturePolygon->boundingRect();
-	int minViewValue = 25;
-
-	qreal width = polyBbox.width();
-	qreal height = polyBbox.height();
-
-
-	if(qMax(polyBbox.width(), polyBbox.height()) / 8 < minViewValue)
-	{
-		qreal factor = 0; // ratio between bigger and smaller dim --> used to scale larger dim accordingly
-
-		if(qMax(polyBbox.width(), polyBbox.height()) == polyBbox.width())
-		{
-			// width is the smaller dim --> set width to minViewValue and scale height accordingly
-			width = minViewValue * 8;
-			factor = polyBbox.height() / polyBbox.width();
-			height = (factor * minViewValue) * 8;
-		}
-		else
-		{
-			// height is the smaller dim --> set height to minViewValue and scale width accordingly
-			height = minViewValue * 8;
-			factor = polyBbox.width() / polyBbox.height();
-			width = (factor * minViewValue) * 8;
-		}
-
-		smoothFitInView(QRectF(polyBbox.center().x() - width / 2, polyBbox.center().y() - height / 2, width, height));
-		return;
-	}
-
-	smoothFitInView(QRectF(polyBbox.x() - width / 8, polyBbox.y() - height / 8, width * 1.25, height * 1.25));
 }
 
 void SkycultureMapGraphicsView::updateTime(int year)
@@ -697,4 +656,39 @@ qreal SkycultureMapGraphicsView::calculateScaleRatio(qreal width, qreal height)
 	return qMin(xratio, yratio);
 }
 
+QRectF SkycultureMapGraphicsView::calculateBoundingBox(const QList<QGraphicsItem *> graphicsItemList)
+{
+	QRectF boundingBox = QRectF();
+
+	// iterate over list of items to build the Bbox
+	for (auto &item : graphicsItemList)
+	{
+		boundingBox = boundingBox.united(item->boundingRect());
+	}
+
+	// slightly enlarge the Bbox so that the items don't take up the entire screen
+	qreal width = boundingBox.width();
+	qreal height = boundingBox.height();
+	// threshold that controls how small the smaller dim of the Bbox is allowed to be (value in view coordinates, not real world)
+	int minViewValue = 80;
+
+	if(qMax(width, height) * 1.25 < minViewValue)
+	{
+		if(qMax(width, height) == width)
+		{
+			// width is the smaller dim --> set width to minViewValue and scale height accordingly
+			width = minViewValue;
+			height = (boundingBox.height() / boundingBox.width()) * minViewValue;
+		}
+		else
+		{
+			// height is the smaller dim --> set height to minViewValue and scale width accordingly
+			height = minViewValue;
+			width = (boundingBox.width() / boundingBox.height()) * minViewValue;
+		}
+		return QRectF(boundingBox.center().x() - width / 2, boundingBox.center().y() - height / 2, width, height);
+	}
+
+	return QRectF(boundingBox.x() - width / 8, boundingBox.y() - height / 8, width * 1.25, height * 1.25);
+}
 
