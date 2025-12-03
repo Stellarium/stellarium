@@ -1,5 +1,6 @@
 # This is the cmake config file for the Sky Culture Maker plugin
-SET(SCM_VERSION "1.0.1")
+# The SCM version matches the Stellarium version
+SET(SCM_VERSION "${VERSION}")
 
 # Option to manually control converter, defaults to FALSE
 OPTION(SCM_SHOULD_ENABLE_CONVERTER "Attempt to enable Sky Culture Converter" FALSE)
