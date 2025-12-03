@@ -83,6 +83,7 @@ void ScmSkyCultureDialog::close()
 void ScmSkyCultureDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+	dialog->installEventFilter(this);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
@@ -215,6 +216,19 @@ void ScmSkyCultureDialog::createDialogContent()
 	connect(ui->addPolygonDialogButtonBox, &QDialogButtonBox::rejected, this, &ScmSkyCultureDialog::cancelAddPolygon);
 
 	hideAddPolygon();
+}
+
+bool ScmSkyCultureDialog::eventFilter(QObject* object, QEvent* event)
+{
+	if (object != dialog || event->type() != QEvent::KeyPress)
+	{
+		return false;
+	}
+	if (static_cast<QKeyEvent*>(event)->key() == Qt::Key_Escape)
+	{
+		return true;
+	}
+	return false;
 }
 
 void ScmSkyCultureDialog::handleFontChanged()
@@ -533,12 +547,10 @@ void ScmSkyCultureDialog::updateSkyCultureTimeValue(int year)
 
 void ScmSkyCultureDialog::addLocation(scm::CulturePolygon culturePoly)
 {
-	qInfo() << "addLocation ---> endTime: " << culturePoly.endTime << " vs currentMax " << ui->skyCultureCurrentTimeSpinBox->maximum();
 	if (culturePoly.endTime.toInt() > ui->skyCultureCurrentTimeSpinBox->maximum())
 	{
 		culturePoly.endTime = "∞";
 	}
-	qInfo() << "addLocation ---> postIf endTime: " << culturePoly.endTime;
 
 	// add polygon to list (polygonInfoTreeWidget)
 	ui->polygonInfoTreeWidget->addTopLevelItem(new ScmPolygonInfoTreeItem(culturePoly.id, culturePoly.startTime, culturePoly.endTime, culturePoly.polygon.size()));
