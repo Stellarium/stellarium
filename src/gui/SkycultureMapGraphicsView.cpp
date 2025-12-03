@@ -1,3 +1,22 @@
+/*
+ * Stellarium
+ *
+ * Copyright (C) 2025 Moritz Rätz
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "SkycultureMapGraphicsView.hpp"
 #include "SkyculturePolygonItem.hpp"
 #include "StelLocaleMgr.hpp"
@@ -33,12 +52,9 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-	show();
-
 	// set up QTimelines for smooth zoom on culture selection (through public 'selectCulture' slot)
 	zoomToDefaultTimer.setDuration(2000);
 	zoomOnTargetTimer.setDuration(3000);
-
 	zoomToDefaultTimer.setUpdateInterval(20);
 	zoomOnTargetTimer.setUpdateInterval(20);
 
@@ -48,22 +64,6 @@ SkycultureMapGraphicsView::SkycultureMapGraphicsView(QWidget *parent)
 
 	// draw basemap and culture polygons
 	drawMapContent();
-
-	SkyculturePolygonItem *lokono_early = new SkyculturePolygonItem("Lokono", 550, 1560);
-	lokono_early->setPolygon(QPolygonF(QList<QPoint>{QPoint(800.0, 800.0), QPoint(840.0, 800.0), QPoint(880.0, 840.0), QPoint(880.0, 880.0),
-												  QPoint(840.0, 920.0), QPoint(800.0, 920.0), QPoint(760.0, 880.0), QPoint(760.0, 840.0)}));
-
-	SkyculturePolygonItem *lokono_late = new SkyculturePolygonItem("Lokono", 1561, 2014);
-	lokono_late->setPolygon(QPolygonF(QList<QPoint>{QPoint(900.0, 500.0), QPoint(940.0, 500.0), QPoint(980.0, 540.0), QPoint(980.0, 580.0),
-													 QPoint(940.0, 620.0), QPoint(900.0, 620.0), QPoint(860.0, 580.0), QPoint(860.0, 540.0)}));
-
-	// load culture Polygons from JSON
-	loadCulturePolygons();
-
-	scene->addItem(lokono_early);
-	scene->addItem(lokono_late);
-
-	qInfo() << "ende Map Constructor!";
 }
 
 void SkycultureMapGraphicsView::drawMapContent()
@@ -72,13 +72,10 @@ void SkycultureMapGraphicsView::drawMapContent()
 	scene()->clear();
 
 	// evaluate projection
-	//QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/gen01_capPop500k_wAntarctica_02.svg");
-	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/gen01_capPop500k_wAntarctica_015_op70.svg");
-	//QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/projWGS_gen01_capPop500k_wAntarctica_015_op70.svg");
+	QGraphicsSvgItem *baseMap = new QGraphicsSvgItem(":/graphicGui/skyCultureWorldMap.svgz");
 
 	scene()->addItem(baseMap);
 	scene()->setSceneRect(- baseMap->boundingRect().width() * 0.75, - baseMap->boundingRect().height() * 0.5, baseMap->boundingRect().width() * 2.5, baseMap->boundingRect().height() * 2);
-	qInfo() << "basemap width = " << baseMap->boundingRect().width() << " and height = " << baseMap->boundingRect().height();
 	this->defaultRect = baseMap->boundingRect();
 
 	loadCulturePolygons();
@@ -161,20 +158,10 @@ void SkycultureMapGraphicsView::loadCulturePolygons()
 			}
 		}
 	}
-	qInfo() << "loadPolygons done!";
 }
 
 void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *e)
 {
-	auto itemList = scene()->selectedItems();
-	qInfo() << itemList.length();
-	for(auto *i : scene()->selectedItems()) {
-		SkyculturePolygonItem *pol = qgraphicsitem_cast<SkyculturePolygonItem *>(i);
-		if(!pol)
-			continue;
-		qInfo() << "obj: " << pol << " und name: " << pol->getSkycultureId() << " und startZeit: " << pol->getStartTime() << " und endZeit: " << pol->getEndTime();
-	}
-
 	qreal zoomFactor = pow(2.0, e->angleDelta().y() / 240.0);
 	qreal ctrZoomFactor = 0.0;
 	if (e->modifiers() & Qt::ControlModifier)
@@ -185,7 +172,7 @@ void SkycultureMapGraphicsView::wheelEvent(QWheelEvent *e)
 		return;
 	}
 
-	scaleView(zoomFactor); // faster scrolling = faster zoom
+	scaleView(zoomFactor);
 }
 
 void SkycultureMapGraphicsView::mouseMoveEvent(QMouseEvent *e)
@@ -203,7 +190,6 @@ void SkycultureMapGraphicsView::mouseMoveEvent(QMouseEvent *e)
 		vBar->setValue(vBar->value() - delta.y());
 		mapMoved = true;
 	}
-
 	mouseLastXY = e->pos();
 
 	QGraphicsView::mouseMoveEvent(e);
@@ -213,54 +199,26 @@ void SkycultureMapGraphicsView::mousePressEvent(QMouseEvent *e)
 {
 	if ( e->button() == Qt::LeftButton )
 	{
-		if( e->modifiers() & Qt::ControlModifier )
-		{
-			qInfo() << "sky ---> ctrl Press";
-		}
-		else if( e->modifiers() & Qt::ShiftModifier )
-		{
-			qInfo() << "sky ---> shift Press";
-
-		}
-		else {
-			qInfo() << "sky ---> normal Press";
-
-			qInfo() << "press Event is NOT poly ---> init viewScrolling";
-			viewScrolling = true;
-		}
-	}
-	else if ( e->button() == Qt::RightButton )
-	{
-		qInfo() << "right press";
-	}
-	else
-	{
-		qInfo() << "else press";
+		viewScrolling = true;
 	}
 
 	// if event is not accepted (mouse not over item) mouseReleaseEvent is not triggered
 	e->setAccepted(true);
-
 }
 
 void SkycultureMapGraphicsView::mouseReleaseEvent( QMouseEvent *e )
 {
 	setFocus();
-
 	QGraphicsView::mouseReleaseEvent(e);
 
 	if (!mapMoved)
 	{
-		//
 		QGraphicsItem *currentTopmostMouseGrabberItem = itemAt(e->pos());
-
 		// the item is either SkyculturePolygonItem or QGraphicsSvgItem (background) ---> try to cast it to SkyculturePolygonItem
 		SkyculturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyculturePolygonItem *>(currentTopmostMouseGrabberItem);
 		if (scPolyItem)
 		{
-			qInfo() << "press Event is PolyItem";
 			const QString currentSkyCulture = scPolyItem->getSkycultureId();
-
 			// determine if a new culture is being selected
 			if (oldSkyCulture != currentSkyCulture)
 			{
@@ -315,34 +273,12 @@ QList<QPointF> SkycultureMapGraphicsView::convertLatLonToMeter(const QList<QPoin
 {
 	QList<QPointF> meter_coords;
 
-	qInfo() << "=== convert latlon to meter ===";
-
-	qInfo() << "width: " << defaultRect.width() << " height: " << defaultRect.height();
-
 	for(auto point : latLonCoordinates)
 	{
-		// default extent:
-		// x (lon) --> -180.0 | 180.0 --> 360.0
-		// y (lat) --> - 90.0 |  90.0 --> 180.0
-
-		// cropped extent:
-		// x (lon) --> -180.0 | 180.0    --> 360.0
-		// y (lat) --> - 90.0 |  83.6236 --> 173.6236
-
-		// y  --> - 7538976.9896 | 18418386.3091
-		// y  --> - 31.98162445  | 78.13393 --> 110.11555445 (wenn max lat = 85.06)
-		// y  --> - 33.8425396  | 82.68031177 --> 116.52285 (wenn max lat = 90.0)
-
-		//start = 83.6236 --> 0 --> ???
-
-		// qInfo() << "Punkt x: " << point.x() << " y: " << point.y();
 		qreal xMeter = (point.x() * 20037508.3427892439067363739014) / 180.0;;
 		qreal yMeter = ((qLn(qTan(((90.0 + point.y())* M_PI) / 360.0)) / (M_PI / 180.0)) * 20037508.3427892439067363739014) / 180.0;
-		// qInfo() << "berechnete x: " << xMeter << " y: " << yMeter;
-
 		meter_coords.append(QPointF(xMeter, yMeter));
 	}
-	qInfo() << "pre return --> liste (latLon to meter): " << meter_coords;
 
 	return convertMeterToView(meter_coords);
 }
@@ -351,71 +287,24 @@ QList<QPointF> SkycultureMapGraphicsView::convertMeterToView(const QList<QPointF
 {
 	QList<QPointF> view_coords;
 
-	qInfo() << "=== convert meter to view ===";
-
-	qInfo() << "width: " << defaultRect.width() << " height: " << defaultRect.height();
-
+	// cropped map (EPSG: 3857) extent:
+	// x / lon: -20037507.0671618431806564 | 20037507.0671618431806564 ---> sum(abs) = 40075014.1343236863613128
+	// y / lat: -19202484.5635684318840504 | 18418386.3090785145759583 ---> sum(abs) = 37620870.87264694646000862
 	for(auto point : meterCoordinates)
 	{
-		// EPSG 3857 WGS 84 extent:
-		// x: - 20037508.34 | 20037508.34 (corresponds to -180.0 to 180.0 in WGS84 bounds) --> 40,075,016.68
-		// y: - 20048966.10 | 20048966.10 (corresponds to -85.05112878 to 85.05112878 in WGS84 bounds) --> 40,097,932.20
-
-		// cropped EPSG 3857 WGS 84 extent:
-		// x: - 20037507.0672 | 20037507.0672 (corresponds to -180.0 to 180.0 in WGS84 bounds) --> 40,075,014.1344
-		// x: - 20037507,0671618431806564 | 20040258.7695968560874462 --> 40,077,765.8367586992681026
-		// x: - 20037507,0671618431806564 | 20037507,0671618431806564 --> 40,075,014.1343236863613128
-		//		20037508,3427892439067363739014 * 2 = 40,075,016.6855784878134727478028
-		// y: -  7538976.9896 | 18418386.3091 (corresponds to - 90.0 to  83.6236 in WGS84 bounds) --> 25,957,363.2987
-
-		// lat extent:
-		// without Antarctica: -7538976.9895804952830076 | 18418386.3090785145759583 --> 25957363.298659009859
-		// with Antarctica:    -20615645,00034497305751  | 18418386,3090785145759583 --> 39034031.30942348763347
-
-
-
-		//qInfo() << "Punkt x: " << point.x() << " y: " << point.y();
+		// used map is cropped ---> project points (in meter) from full extent to smaller / cropped extent
 		qreal xView = ((point.x() + 20037507.0671618431806564) / 40075014.1343236863613128) * defaultRect.width();
-		qreal yView = ((point.y() - 18418386.3090785145759583) / -39034031.3094234876334668) * defaultRect.height();
-		//qInfo() << "berechnete x: " << xView << " y: " << yView;
+		qreal yView = ((point.y() - 18418386.3090785145759583) / -37620870.87264694646000862) * defaultRect.height();
 		view_coords.append(QPointF(xView, yView));
 	}
-	qInfo() << "pre return --> liste (meter to view): " << view_coords;
-
-	return view_coords;
-}
-
-QList<QPointF> SkycultureMapGraphicsView::convertLatLonToView(const QList<QPointF> &latLonCoordinates)
-{
-	QList<QPointF> view_coords;
-
-	qInfo() << "=== convert latlon to view ===";
-
-	qInfo() << "width: " << defaultRect.width() << " height: " << defaultRect.height();
-
-	for(auto point : latLonCoordinates)
-	{
-		// lon: -180.0				  | 180.0				 ---> 360.0
-		// lat: - 89.9989257812500227 |  83.5996093750000000 ---> 173.5985351562500227
-
-		// proj
-		// lon: -180.0	 | 180.0				 ---> 360.0
-		// lat: - 84.930 |  83.62359999999999616 ---> 168.55359999999999616
-		//											  xxx.x31xxx
-
-		qreal xView = ((point.x() + 179.904) / 360.0) * defaultRect.width();
-		qreal yView = ((point.y() - 83.62359999999999616) / -168.53159999999999616) * defaultRect.height();
-
-		view_coords.append(QPointF(xView, yView));
-	}
-	qInfo() << "pre return --> liste (latLon to view): " << view_coords;
 
 	return view_coords;
 }
 
 void SkycultureMapGraphicsView::selectAllCulturePolygon(const QString &skycultureId)
 {
-	for (const auto &item : scene()->items())
+	const auto itemList = scene()->items();
+	for (const auto &item : itemList)
 	{
 		// make sure the current item is a SkyculturePolygonItem
 		SkyculturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyculturePolygonItem *>(item);
@@ -501,8 +390,6 @@ void SkycultureMapGraphicsView::rotateMap(bool applyRotation)
 	if (applyRotation)
 	{
 		StelCore *core = StelApp::getInstance().getCore();
-		qInfo() << "location ---> lat: " << core->getCurrentLocation().getLatitude() << " lon: " << core->getCurrentLocation().getLongitude();
-
 		if (core->getCurrentLocation().getLatitude() < 0)
 		{
 			if (!isRotated)
@@ -530,25 +417,13 @@ void SkycultureMapGraphicsView::rotateMap(bool applyRotation)
 	}
 }
 
-void SkycultureMapGraphicsView::changeProjection(bool isChanged)
-{
-	if (isChanged)
-	{
-		rotate(180.0);
-	}
-	else
-	{
-		rotate(-180.0);
-	}
-}
-
 void SkycultureMapGraphicsView::updateCultureVisibility()
 {
-	// iterate over all polygons --> if currentTime is between startTime and endTime show, else hide
-	for(const auto &item : scene()->items()) {
+	// iterate over all polygons --> if currentTime is between startTime and endTime: show polygon (else hide it)
+	const auto itemList = scene()->items();
+	for(const auto &item : itemList) {
 		// cast generic QGraphicsItem to subclass SkyculturePolygonItem
 		SkyculturePolygonItem *scPolyItem = qgraphicsitem_cast<SkyculturePolygonItem *>(item);
-
 		// if cast was unsuccessful (item is not an SkyculturePolygonItem) --> look at the next item
 		if(!scPolyItem)
 			continue;
@@ -567,38 +442,25 @@ void SkycultureMapGraphicsView::updateCultureVisibility()
 
 void SkycultureMapGraphicsView::smoothFitInView(QRectF targetRect)
 {
-	// zoomOnTargetTimer needs to be stopped when the user selects another culture (starts a new zoom operation) while the old one hasnt finished
+	// zoomOnTargetTimer must be stopped if the user selects a different culture (starts a new zoom operation) while the old one is still in progress
 	zoomOnTargetTimer.stop();
 
 	// update global variables so that they can be accessed by the slots 'zoomToDefault' and 'zoomOnTarget'
 	this->targetRect = targetRect;
 	this->startingRect = mapToScene(viewport()->rect()).boundingRect();
 
-	qInfo() << "startingRect w: " << startingRect.width() << " h: " << startingRect.height() << " defaultRect w: " << defaultRect.width() << " h: " << defaultRect.height() << " diff w: " << qFabs((startingRect.width() - defaultRect.width())) << " h: " << qFabs(startingRect.height() - defaultRect.height());
-
-	qInfo() << "pre: " << zoomToDefaultTimer.currentTime();
-
 	qreal maxDuration = 2000;
 	qreal threshold = 1200;
 	QEasingCurve factor(QEasingCurve::OutQuad);
-	qInfo() << "normal: " << 0.8 << " " << 2000 * 0.8 << " outQuad: " << factor.valueForProgress(1.2) << " " << 2000 * factor.valueForProgress(1.2);
 	//qreal factor = maxDuration / pow(threshold, 2.0);
 
-	// 500 * 4 = 2000 --> 250 * 4 = 1000 ---> 100 * 4 = 400 --> 2000 / 500 = 4 (Faktor)
-	// für 2000 = a * 500² --> 2000 = 250000a --> a = 2000 / 250000 --> a = 0.008
-
 	zoomToDefaultTimer.start();
+	qreal deviation = qMax((qFabs(startingRect.center().x() - defaultRect.center().x()) + qFabs(startingRect.center().y() - defaultRect.center().y())) / 2,
+						   qMin(qFabs(startingRect.width() - defaultRect.width()), qFabs(startingRect.height() - defaultRect.height())));
 
-	qInfo() << "post: " << zoomToDefaultTimer.currentTime();
-
-	qreal deviation = qMax((qFabs(startingRect.center().x() - defaultRect.center().x()) + qFabs(startingRect.center().y() - defaultRect.center().y())) / 2, qMin(qFabs(startingRect.width() - defaultRect.width()), qFabs(startingRect.height() - defaultRect.height())) );
-	//qreal deviation = (qFabs(startingRect.center().x() - defaultRect.center().x()) + qFabs(startingRect.center().y() - defaultRect.center().y())) / 2;
-
-
-	// if value > threshold --> result > 1.0 --> valueForProgress return 1.0 for all values > 1.0 --> maxDuration
+	// if value > threshold --> result > 1.0
+	// valueForProgress returns 1.0 for all values greater than 1.0 (which equals maxDuration)
 	zoomToDefaultTimer.setDuration(2000 * factor.valueForProgress(deviation * (1 / threshold)));
-
-	qInfo() << "value: " << deviation << " eased: " << factor.valueForProgress(deviation * (1 / threshold)) <<  "current duration: " << zoomToDefaultTimer.duration();
 }
 
 void SkycultureMapGraphicsView::zoomToDefault(qreal zoomFactor)
@@ -608,12 +470,10 @@ void SkycultureMapGraphicsView::zoomToDefault(qreal zoomFactor)
 	qreal height = startingRect.height() + (defaultRect.height() - startingRect.height()) * zoomFactor;
 
 	qreal ratio = calculateScaleRatio(width, height);
-
 	scale(ratio, ratio);
 
 	// slowly move the center of the view to the new location
 	QEasingCurve centerEasing(QEasingCurve::Linear);
-	//centerOn(startingRect.center() - (startingRect.center() - defaultRect.center()) * zoomFactor);
 	centerOn(startingRect.center() - (startingRect.center() - defaultRect.center()) * centerEasing.valueForProgress(zoomFactor));
 }
 
@@ -624,7 +484,6 @@ void SkycultureMapGraphicsView::zoomOnTarget(qreal zoomFactor)
 	qreal height = defaultRect.height() - (defaultRect.height() - targetRect.height()) * zoomFactor;
 
 	qreal ratio = calculateScaleRatio(width, height);
-
 	scale(ratio, ratio);
 
 	// slowly move the center of the view to the new location
@@ -642,7 +501,8 @@ qreal SkycultureMapGraphicsView::calculateScaleRatio(qreal width, qreal height)
 	}
 
 	// Rect of the current transformation in scene coordinates
-	QRectF sceneRect = transform().mapRect(QRectF(2, 2, width, height)); // values of x / y of sceneRect are not important since only the width / height are used for the calculation
+	// values of x / y of sceneRect are not important since only the width / height are used for the calculation
+	QRectF sceneRect = transform().mapRect(QRectF(2, 2, width, height));
 	if (sceneRect.isEmpty())
 	{
 		return 0;

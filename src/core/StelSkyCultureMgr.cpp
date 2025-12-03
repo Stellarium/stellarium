@@ -688,13 +688,6 @@ QMap<QString, QString> StelSkyCultureMgr::getDirToI18Map(void) const
 		dirToTranslationMap.insert(i.value().id, trans.qtranslate(i.value().englishName, "sky culture"));
 	}
 
-	QMapIterator<QString, QString> k(dirToTranslationMap);
-	while (k.hasNext())
-	{
-		k.next();
-		qInfo() << "id: " << k.key() << " translation: " << k.value();
-	}
-
 	return dirToTranslationMap;
 }
 
