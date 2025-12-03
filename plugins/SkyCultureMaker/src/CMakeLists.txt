@@ -37,14 +37,16 @@ SET( SkyCultureMaker_SRCS
      gui/ScmStartDialog.cpp
      gui/ScmGeoLocGraphicsView.hpp
      gui/ScmGeoLocGraphicsView.cpp
-     gui/PreviewPathItem.hpp
-     gui/PreviewPathItem.cpp
-     gui/PreviewPolygonItem.hpp
-     gui/PreviewPolygonItem.cpp
-     gui/PolygonInfoTreeItem.hpp
-     gui/PolygonInfoTreeItem.cpp
-     gui/MultiselectionComboBox.hpp
-     gui/MultiselectionComboBox.cpp
+     gui/ScmPreviewPathItem.hpp
+     gui/ScmPreviewPathItem.cpp
+     gui/ScmPreviewPolygonItem.hpp
+     gui/ScmPreviewPolygonItem.cpp
+     gui/ScmPolygonInfoTreeItem.hpp
+     gui/ScmPolygonInfoTreeItem.cpp
+     gui/ScmMultiselectionComboBox.hpp
+     gui/ScmMultiselectionComboBox.cpp
+     gui/ScmAdvancedSpinBox.hpp
+     gui/ScmAdvancedSpinBox.cpp
 
      types/Anchor.hpp
      types/Classification.hpp
