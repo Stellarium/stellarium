@@ -1,5 +1,5 @@
 
-# balinese
+# Balinese
 
 ## Introduction
 
