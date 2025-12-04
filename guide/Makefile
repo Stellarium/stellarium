@@ -97,9 +97,9 @@ else
 endif
 
 # htlatex needs bounding box files.
-PICSpdf=$(wildcard pictures/*.pdf)
-PICSpng=$(wildcard pictures/*.png) $(subst .pdf,.png, ${PICSpdf})
-PICSjpg=$(wildcard pictures/*.jpg)
+PICSpdf=$(wildcard Images/*.pdf)
+PICSpng=$(wildcard Images/*.png) $(subst .pdf,.png, ${PICSpdf})
+PICSjpg=$(wildcard Images/*.jpg)
 PICSbbx=$(subst .png,.xbb, ${PICSpng}) $(subst .jpg,.xbb, ${PICSjpg})
 
 
@@ -213,7 +213,7 @@ SUG SUG.pdf: guide_opt.pdf
 
 pdf2png: $(subst .pdf,.png, ${PICSpdf})
 
-pictures/%.png : pictures/%.pdf
+Images/%.png : Images/%.pdf
 	convert $< $@
 
 %.xbb: %.png
