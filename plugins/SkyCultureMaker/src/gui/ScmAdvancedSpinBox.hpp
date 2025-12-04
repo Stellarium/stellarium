@@ -23,7 +23,7 @@
 #include <qspinbox.h>
 
 //! @class ScmAdvancedSpinBox
-//! Customized SpinBox that allows for 'better' input (not blocking input when its greater than limit) and displays special characters for min / max or arbitrary values.
+//! Customized SpinBox that allows for 'better' input (not blocking input when its greater than limit), displays special characters for min / max / arbitrary values and set additional custom min / max.
 
 class ScmAdvancedSpinBox : public QSpinBox
 {
@@ -35,9 +35,34 @@ public:
 	QValidator::State validate(QString &text, int &pos) const override;
 
 	void setDisplayCustomStringForValue(bool display);
+
+	/**
+	 * @brief Add a custom string that will be displayed where the SpinBox would normally display a specific (int) value.
+	 *
+	 * @param value Value at which the string should be displayed.
+	 * @param text String that should be displayed.
+	 */
 	void addCustomStringForValue(int value, QString text);
+
+	/**
+	 * @brief Remove a string from the given value.
+	 *
+	 * @param value Value at which the custom string should be removed.
+	 */
 	void removeCustomStringForValue(int value);
+
+	/**
+	 * @brief Convenience function to add a custom string to the current minimum.
+	 *
+	 * @param test String that should be displayed at the current min.
+	 */
 	void setCustomStringForMin(QString text);
+
+	/**
+	 * @brief Convenience function to add a custom string to the current maximum.
+	 *
+	 * @param test String that should be displayed at the current max.
+	 */
 	void setCustomStringForMax(QString text);
 
 	void setUseCustomMinimum(bool useCustomMin);
@@ -52,12 +77,15 @@ public slots:
 protected:
 	QString textFromValue(int value) const override;
 
-private:
+private: 
 	bool displayCustomStringForValue;
 	bool useCustomMinimum;
 	bool useCustomMaximum;
+	/// Additional custom minimum value that affects setMinimum() when useCustomMinimum is true.
 	int customMinimum;
+	/// Additional custom maximum value that affects setMaximum() when useCustomMaximum is true.
 	int customMaximum;
+	/// Contains all strings that are displayed when displayCustomStringForValue is true.
 	QHash<int, QString> customStringForValue;
 };
 

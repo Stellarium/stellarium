@@ -214,17 +214,17 @@ void ScmGeoLocGraphicsView::keyPressEvent(QKeyEvent *event)
 	}
 }
 
-void ScmGeoLocGraphicsView::scaleView(double factor)
+void ScmGeoLocGraphicsView::scaleView(double scaleFactor)
 {
 	// calculate requested zoom before executing the zoom operation to limit the min / max zoom level
-	const double scaling = transform().scale(factor, factor).mapRect(QRectF(0, 0, 1, 1)).width();
+	const double scaling = transform().scale(scaleFactor, scaleFactor).mapRect(QRectF(0, 0, 1, 1)).width();
 
 	if (scaling < 0.1 || scaling > 2300.0) // scaling < min or scaling > max zoom level
 	{
 		return;
 	}
 
-	scale(factor, factor);
+	scale(scaleFactor, scaleFactor);
 }
 
 void ScmGeoLocGraphicsView::updateTime(int year)

@@ -30,8 +30,8 @@ class SkyculturePolygonItem : public QGraphicsPolygonItem
 public:
 	SkyculturePolygonItem(QString skycultureId, int startTime, int endTime);
 
-	// public functions
-	const QString& getSkycultureId() const {return skycultureId;}
+	const QString& getSkycultureId() const { return skycultureId; }
+
 	int getStartTime() const {return startTime;}
 	int getEndTime() const {return endTime;}
 	void setDefaultBrushColor(const QColor color) {defaultBrushColor = color;}
@@ -49,18 +49,14 @@ public slots:
 signals:
 
 protected:
-	// protected functions
 	void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
 	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 	QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) override;
 
 private:
-	// important culture data
 	QString skycultureId;
 	int startTime;
 	int endTime;
-
-	// utility for change of appearance at runtime
 	bool lastSelectedState;
 	bool isHovered;
 	QColor defaultBrushColor;
