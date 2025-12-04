@@ -136,6 +136,7 @@ private:
      */
 	void drawOptimized(StelPainter &sPainter, const SphericalRegion &region, const Vec3d &obsVelocity) const;
 
+	/**
 	 * @brief Gets values and connects to signals from Stellariums manager classes.
 	 */
 	void getValuesFromMgrs();
