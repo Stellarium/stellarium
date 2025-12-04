@@ -137,9 +137,9 @@ private:
 	void drawOptimized(StelPainter &sPainter, const SphericalRegion &region, const Vec3d &obsVelocity) const;
 
 	/**
-	 * @brief Gets values and connects to signals from Stellariums manager classes.
+	 * @brief Initializes the artwork values from the ConstellationMgr.
 	 */
-	void getValuesFromMgrs();
+	void initValues();
 
 	/// Holds the anchors of the artwork.
 	std::array<Anchor, 3> anchors;

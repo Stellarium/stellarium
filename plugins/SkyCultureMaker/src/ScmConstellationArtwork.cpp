@@ -37,16 +37,16 @@ scm::ScmConstellationArtwork::ScmConstellationArtwork(const std::array<Anchor, 3
 	, artwork(artwork)
 	, hasArt(true)
 {
-	getValuesFromMgrs();
+	initValues();
 }
 
 scm::ScmConstellationArtwork::ScmConstellationArtwork()
 	: hasArt(false)
 {
-	getValuesFromMgrs();
+	initValues();
 }
 
-void scm::ScmConstellationArtwork::getValuesFromMgrs()
+void scm::ScmConstellationArtwork::initValues()
 {
 	if (ConstellationMgr *constMgr = GETSTELMODULE(ConstellationMgr))
 	{
