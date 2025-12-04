@@ -747,12 +747,20 @@ The following list describes sources and a few details about the models for $\De
   %% TODO: ADD REFERENCE FOR C,C-T,F:1997!
   Valid range of usage: between years -400 and 2150. $\dot{n}=-25.7376''/\cy^2$.
 
-\item[JPL HORIZONS.] The JPL Solar System Dynamics Group of the NASA
-  Jet Propulsion Laboratory use this formula in their interactive
-  website JPL
-  HORIZONS\footnote{\url{https://ssd.jpl.nasa.gov/?horizons}}. Valid
-  range of usage: between years -2999 and 1620, with zero values
-  outside this range. $\dot{n}=-25.7376''/\cy^2$.
+\item[JPL Horizons.] The JPL Solar System Dynamics Group of the NASA\newFeature{26.1}
+  Jet Propulsion Laboratory has developed an interactive
+  application JPL HORIZONS\footnote{\url{https://ssd.jpl.nasa.gov/?horizons}} which provides
+  $\Delta T=TDB-UT$ between -9998 and 1962 and $\Delta T=TDB-UTC$ between 1962 to 9999
+  \footnote{\url{https://ssd.jpl.nasa.gov/horizons/manual.html}}. Stellarium
+  JPL Horizons algorithm emulates the JPL HORIZONS application with differences of less than +/- 0.1 second
+  for historical dates up to 1962, improving to less than +/- 10 microseconds from 1962 to Present time. 
+  It is important to note that $\Delta T$ from Present time to year 9999 uses the last EOP
+  (Earth Orientation Parameter) predicted. Therefore, although you can enter dates up to year 9999,
+  $\Delta T$ values beyond Present time are meaningless. The valid range of usage is therefore between years
+  -9998 and Present with invalid $\Delta T$ outside this range. Use of this algorithm ought to be 
+  done with the selection of DE44x/DE43x ephemerides files (see section~\ref{sec:ExtraData:ephemerides}) 
+  otherwise $\Delta T$ value computed by Stellarium will not reproduce results of the JPL HORIZONS application.
+  $\dot{n}=-25.936''/\cy^2$ for DE44x ephemerides and $\dot{n}=-25.82''/\cy^2$ for DE43x ephemerides.
 
 \item[Meeus \& Simons (2000).] This polynome was published in \citetp{2000JBAA..110..323M}. 
   Valid range of usage: between years 1620 and 2000, with zero values outside this
