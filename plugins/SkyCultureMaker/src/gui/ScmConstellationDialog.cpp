@@ -141,12 +141,7 @@ void ScmConstellationDialog::setIsDarkConstellation(bool isDark)
 		draw->setDrawingMode(isDark ? scm::DrawingMode::Coordinates : scm::DrawingMode::StarsAndDSO);
 	}
 
-	if (ui != nullptr)
-	{
-		ui->titleBar->setTitle(isDark ? q_("SCM: Dark Constellation Editor") : q_("SCM: Constellation Editor"));
-		ui->labelsTitle->setText(isDark ? q_("Please name your Dark Constellation")
-		                                : q_("Please name your Constellation"));
-	}
+	updateTranslatableStrings();
 }
 
 void ScmConstellationDialog::retranslate()
@@ -619,6 +614,12 @@ void ScmConstellationDialog::updateTranslatableStrings()
 	                    "5. The anchor is shown in a brighter color when bound to a star\n"
 	                    "   - The corresponding bound star is automatically selected when an anchor is selected\n"
 	                    "   - 'Bind Star' will overwrite the current binding if it already exists");
+
+	// Update title and labels depending on constellation type
+	ui->titleBar->setTitle(isDarkConstellation ? q_("SCM: Dark Constellation Editor")
+	                                           : q_("SCM: Constellation Editor"));
+	ui->labelsTitle->setText(isDarkConstellation ? q_("Please name your Dark Constellation")
+	                                             : q_("Please name your Constellation"));
 
 	// Update UI elements that use these strings if they're visible
 	if (ui->tooltipBtn != nullptr)
