@@ -245,10 +245,10 @@ private:
 	QFont constellationNameFont;
 
 	/// The default color used for drawing the constellation
-	Vec3f defaultConstellationLineColor = Vec3f(0.5f, 0.5f, 0.7f);
+	Vec3f defaultConstellationLineColor = Vec3f(0.0f, 0.0f, 0.0f);
 
 	/// The default color used for drawing the constellation names
-	Vec3f defaultConstellationNameColor = Vec3f(0.5f, 0.5f, 0.7f);
+	Vec3f defaultConstellationNameColor = Vec3f(0.0f, 0.0f, 0.0f);
 
 	/// Holds the artwork of this constellation.
 	ScmConstellationArtwork artwork;
