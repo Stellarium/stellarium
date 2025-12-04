@@ -13,6 +13,8 @@
 % License:
 % CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
 %
+%
+% GZ: Minimal changes: add iftex, reconfigure biblatex, make index optional.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %----------------------------------------------------------------------------------------
@@ -31,7 +33,16 @@
 %	 REQUIRED PACKAGES AND CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\usepackage{graphicx} % Required for including pictures
+% GZ: We want to create PDF and HTML. Some alternatives are required.
+\usepackage{iftex}
+
+%\usepackage{graphicx} % Required for including pictures
+\ifpdf
+  \usepackage{graphicx} % Required for including pictures
+\else % processed with htlatex?
+  \usepackage[dvipdfmx]{graphicx} % Required for including pictures POSSIBLY some other option?
+\fi
+
 \graphicspath{{Images/}} % Specifies the directory where pictures are stored
 
 \usepackage{float} % Allows more precisely positioning floats e.g. \begin{figure}[H]
@@ -434,8 +445,11 @@
 
 \usepackage[
 	backend=biber, % Use the biber engine for compiling the bibliography
-	bibstyle=numeric, % Main bibliography style
-	citestyle=numeric, % In-text citation style
+%	bibstyle=numeric, % Main bibliography style
+%	citestyle=numeric, % In-text citation style
+	natbib=true,              % GZ change.
+	bibstyle=authoryear-comp, % GZ change. 
+	citestyle=authoryear,     % GZ change
 	sorting=nyt, % Sort references in the bibliography by name, then year, then title
 	sortcites=true, % If multiple citekeys are passed to a citation command, sort them in the citation
 	abbreviate=false, % Suppress abbreviations such as "Ed." for Editor
@@ -449,8 +463,11 @@
 %	INDEX
 %----------------------------------------------------------------------------------------
 
+% GZ: Make index optional:
+\ifhtlatex
+% We don't have an index in HTML version. If anybody want to play with it, go for it...
+\else
 \usepackage{makeidx} % Required to make an index
-
 \makeindex % Tells LaTeX to create the files required for indexing
 
 % Modify the command to output the index to output the correctly styled Index name to the page headers
@@ -459,6 +476,7 @@
 	{\sffamily\normalsize\bfseries\indexname} % Replace
 	{}
 	{}
+\fi
 
 %----------------------------------------------------------------------------------------
 %	 TABLES
