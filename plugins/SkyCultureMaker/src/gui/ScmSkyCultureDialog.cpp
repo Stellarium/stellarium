@@ -411,6 +411,9 @@ void ScmSkyCultureDialog::resetDialog()
 		setIdFromName(name);
 		resetConstellations();
 		maker->setSkyCultureDescription(getDescriptionFromTextEdit());
+
+		updateAddConstellationButtons(true);
+		updateEditConstellationButton();
 		updateRemoveConstellationButton();
 	}
 }
