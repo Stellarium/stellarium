@@ -48,15 +48,9 @@ scm::ScmConstellationArtwork::ScmConstellationArtwork()
 
 void scm::ScmConstellationArtwork::initValues()
 {
-	if (ConstellationMgr *constMgr = GETSTELMODULE(ConstellationMgr))
-	{
-		artIntensity = constMgr->getArtIntensity();
-		QObject::connect(constMgr, &ConstellationMgr::artIntensityChanged, [this](float v) { artIntensity = v; });
-	}
-	else
-	{
-		qWarning() << "SkyCultureMaker: Failed to load artwork settings, because the ConstellationMgr is null";
-	}
+	ConstellationMgr *constMgr = GETSTELMODULE(ConstellationMgr);
+	artIntensity = constMgr->getArtIntensity();
+	QObject::connect(constMgr, &ConstellationMgr::artIntensityChanged, [this](float v) { artIntensity = v; });
 }
 
 void scm::ScmConstellationArtwork::setupArt()

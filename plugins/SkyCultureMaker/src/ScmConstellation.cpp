@@ -32,28 +32,23 @@ scm::ScmConstellation::ScmConstellation(const QString &id, const std::vector<Con
 	, lines(lines)
 	, isDarkConstellation(isDarkConstellation)
 {
-	if (ConstellationMgr *constMgr = GETSTELMODULE(ConstellationMgr))
-	{
-		// Initial values
-		constellationLineThickness = constMgr->getConstellationLineThickness();
-		constellationNameFont.setPixelSize(constMgr->getFontSize());
-		defaultConstellationLineColor = constMgr->getLinesColor();
-		defaultConstellationNameColor = constMgr->getLabelsColor();
+	ConstellationMgr *constMgr = GETSTELMODULE(ConstellationMgr);
 
-		// Connections
-		QObject::connect(constMgr, &ConstellationMgr::constellationLineThicknessChanged,
-		                 [this](int v) { constellationLineThickness = v; });
-		QObject::connect(constMgr, &ConstellationMgr::fontSizeChanged,
-		                 [this](int v) { constellationNameFont.setPixelSize(v); });
-		QObject::connect(constMgr, &ConstellationMgr::linesColorChanged,
-		                 [this](const Vec3f &c) { defaultConstellationLineColor = c; });
-		QObject::connect(constMgr, &ConstellationMgr::namesColorChanged,
-		                 [this](const Vec3f &c) { defaultConstellationNameColor = c; });
-	}
-	else
-	{
-		qWarning() << "SkyCultureMaker: Failed to load constellation settings, because the ConstellationMgr is null";
-	}
+	// Initial values
+	constellationLineThickness = constMgr->getConstellationLineThickness();
+	constellationNameFont.setPixelSize(constMgr->getFontSize());
+	defaultConstellationLineColor = constMgr->getLinesColor();
+	defaultConstellationNameColor = constMgr->getLabelsColor();
+
+	// Connections
+	QObject::connect(constMgr, &ConstellationMgr::constellationLineThicknessChanged,
+	                 [this](int v) { constellationLineThickness = v; });
+	QObject::connect(constMgr, &ConstellationMgr::fontSizeChanged,
+	                 [this](int v) { constellationNameFont.setPixelSize(v); });
+	QObject::connect(constMgr, &ConstellationMgr::linesColorChanged,
+	                 [this](const Vec3f &c) { defaultConstellationLineColor = c; });
+	QObject::connect(constMgr, &ConstellationMgr::namesColorChanged,
+	                 [this](const Vec3f &c) { defaultConstellationNameColor = c; });
 
 	updateTextPosition();
 }
