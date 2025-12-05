@@ -5,7 +5,7 @@
 <p>This unique sky culture reimagines the classical Greco-Roman constellations, replacing their figures with deities, monsters, and magical artifacts from Journey to the West, creating an entirely new constellation world imbued with the rich hues of Chinese mythology.</p>
 
 ### A Guide to the Constellations in Journey to the West 
-
+ 
 |<notr>#</notr>|</notr>Constellation</notr>|Journey to the West Figure|Description|
 |-----------------------------------------------------------------------------|-----------------|-------|--------|-------------|
 |<notr>1</notr>| </notr>Ursa Minor</notr>| Yellow Wind Monster|A golden-furred marten spirit who captured Tang Monk and wounded Sun Wukong's eyes with his Samadhi Wind. Lingji Bodhisattva later subdued him.|
