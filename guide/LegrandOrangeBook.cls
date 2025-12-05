@@ -511,19 +511,31 @@
 %----------------------------------------------------------------------------------------
 %	LINKS
 %----------------------------------------------------------------------------------------
+\AtBeginDocument{% %% GZ: Hyperref needs to be last...
 
+\ifpdf             %% GZ
+\usepackage{xurl}% will break long URLs also with pdflatex.
 \usepackage{hyperref}
 
 \hypersetup{
 	colorlinks=true, % Whether to color links (a thin box is output around links if this is false)
-	%hidelinks, % Hide the default boxes around links
+	hidelinks, % Hide the default boxes around links
 	urlcolor=ocre, % Color for \url and \href links
 	linkcolor=black, % Color for \ref/\nameref links
 	citecolor=ocre, % Color for reference citations like \cite{}
 	hyperindex=true, % Adds links from the page numbers in the index to the relevant page
 	linktoc=all, % Link from section names and page numbers in the table of contents
+	pdfpagemode=UseOutlines,bookmarksopen=true,%bookmarks=true,bookmarksopenlevel=1,bookmarksnumbered,
+	pdfview=Fit,pdfstartview=Fit,pdfpagelayout=TwoPageRight,
+	pdfduplex=DuplexFlipLongEdge,
+	pdfsubject={Stellarium is a multi-platform open-source desktop planetarium. This document describes version 0.15+ (2016)},
+	%pdfcreator={PDFLaTeX},
+	%pdfproducer={Stellarium team},%(should be application name!)
+	pdfkeywords={Stellarium Manual},
+	pdftitle={Stellarium User Guide},pdfdisplaydoctitle=true,
+	pdfauthor={Georg Zotti and Alexander Wolf (editors)}%
 }
-
+\fi
 %----------------------------------------------------------------------------------------
 %	BOOKMARKS
 %----------------------------------------------------------------------------------------
@@ -542,6 +554,7 @@
 		\fi
 	}
 }
+} %% GZ: end AtBeginDocument
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
